@@ -16,10 +16,10 @@
   <VV_LetterViviEggHatched>{PARENT_labelShort}가 낳은 알에서 새로운 비비가 태어났습니다. </VV_LetterViviEggHatched>
   <VV_LetterViviEggHatchedNoParent>새로운 비비가 태어났습니다.\n비비는 일반적인 인간보다 빠르게 성장하며 특별한 음식을 통해 더 빠르게 성장할 수도 있습니다.\n비비는 성장 단계에서 충분한 로얄 젤리를 섭취하면 로얄 비비로 성장하고, 그렇지 않으면 일반 비비로 성장합니다. 로얄 비비는 번식이 가능하지만 작업 능력이 매우 떨어지므로 필요에 따라 로얄 젤리 섭취를 조절하세요.</VV_LetterViviEggHatchedNoParent>
   <VV_LetterRoyalViviGrownLabel>새로운 로얄 비비: {PAWN_labelShort}</VV_LetterRoyalViviGrownLabel>
-  <VV_LetterRoyalViviGrown>{PAWN_labelShort}가 충분한 로얄 젤리를 섭취해 로얄 비비로 성장했습니다.\n로얄 비비는 작업 능력은 다소 떨어지지만 알을 낳아 번식이 가능하며 일반 비비와 정신 결속을 맺을 수 있습니다.</VV_LetterRoyalViviGrown>
+  <VV_LetterRoyalViviGrown>{PAWN_labelShort}가 충분한 로얄 젤리를 섭취해 로얄 비비로 성장했습니다.\n\n로얄 비비는 작업 능력은 다소 떨어지지만 알을 낳아 번식이 가능하며 일반 비비와 정신 결속을 맺을 수 있습니다.</VV_LetterRoyalViviGrown>
 
   <VV_CommandConnectMindLink>정신 결속 연결</VV_CommandConnectMindLink>
-  <VV_CommandConnectMindLinkDesc>현재 정신 결속이 가능한 비비와 정신 결속을 맺습니다.\n정신 결속이 맺어진 비비는 모든 작업 속도가 크게 증가하며 결속된 로얄 비비의 정신 상태에 영향을 받습니다.</VV_CommandConnectMindLinkDesc>
+  <VV_CommandConnectMindLinkDesc>현재 정신 결속이 가능한 비비와 정신 결속을 맺습니다.\n\n정신 결속이 맺어진 비비는 모든 작업 속도가 크게 증가하며 결속된 로얄 비비의 정신 상태에 영향을 받습니다.</VV_CommandConnectMindLinkDesc>
   <VV_CommandCancelConnectMindLink>정신 결속 연결 취소</VV_CommandCancelConnectMindLink>
   <VV_CommandDisconnectMindLink>정신 결속 해제</VV_CommandDisconnectMindLink>
   <VV_CommandDisconnectMindLinkDesc>현재 맺어진 정신 결속을 안전하게 해제합니다.</VV_CommandDisconnectMindLinkDesc>
