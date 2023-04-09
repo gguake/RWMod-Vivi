@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
 <ModMetaData>
-  <name>Vivi</name>
+  <name>Vivi Race</name>
   <author>gguake</author>
    	<packageId>gguake.vivi</packageId>
   <supportedVersions>
@@ -9,7 +9,7 @@
   </supportedVersions>
   <url></url>
   <description>
-
+웼잉잉
   </description>
 	<modDependencies>
 		<li>
@@ -27,6 +27,9 @@
 		<li>Ludeon.RimWorld</li>
     <li>Ludeon.RimWorld.Biotech</li>
 		<li>brrainz.harmony</li>
+
+		<!--
 		<li>erdelf.HumanoidAlienRaces</li>
+		-->
   </forceLoadAfter>
 </ModMetaData>
