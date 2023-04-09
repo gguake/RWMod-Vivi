@@ -39,7 +39,7 @@
         <li>CraftingSpot</li>
       </recipeUsers>
       <researchPrerequisites>
-        <li>VV_Tool</li>
+        <li>VV_Tools</li>
         <li>RecurveBow</li>
       </researchPrerequisites>
       <skillRequirements>
