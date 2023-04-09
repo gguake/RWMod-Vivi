@@ -125,19 +125,25 @@ namespace VVRace
                         {
                             if (hatcheeParent != null)
                             {
-                                Find.LetterStack.ReceiveLetter(
-                                    LocalizeTexts.LetterViviEggHatchedLabel.Translate(),
-                                    LocalizeTexts.LetterViviEggHatched.Translate(hatcheeParent.Named("PARENT")),
-                                    LetterDefOf.PositiveEvent,
-                                    pawn);
+                                if (pawn.IsColonist)
+                                {
+                                    Find.LetterStack.ReceiveLetter(
+                                        LocalizeTexts.LetterViviEggHatchedLabel.Translate(),
+                                        LocalizeTexts.LetterViviEggHatched.Translate(hatcheeParent.Named("PARENT")),
+                                        LetterDefOf.PositiveEvent,
+                                        pawn);
+                                }
                             }
                             else
                             {
-                                Find.LetterStack.ReceiveLetter(
-                                    LocalizeTexts.LetterViviEggHatchedLabel.Translate(),
-                                    LocalizeTexts.LetterViviEggHatchedNoParent.Translate(hatcheeParent.Named("PARENT")),
-                                    LetterDefOf.PositiveEvent,
-                                    pawn);
+                                if (pawn.IsColonist)
+                                {
+                                    Find.LetterStack.ReceiveLetter(
+                                        LocalizeTexts.LetterViviEggHatchedLabel.Translate(),
+                                        LocalizeTexts.LetterViviEggHatchedNoParent.Translate(hatcheeParent.Named("PARENT")),
+                                        LetterDefOf.PositiveEvent,
+                                        pawn);
+                                }
                             }
 
                             if (hatcheeParent != null)
@@ -153,7 +159,7 @@ namespace VVRace
 
                                     if (hatcheeParent.TryGetMindTransmitter(out var mindTransmitter) && mindTransmitter.CanAddMindLink)
                                     {
-                                        pawn.relations.AddDirectRelation(VVPawnRelationDefOf.VV_MindLink, hatcheeParent);
+                                        mindTransmitter.AssignPawnControl(pawn);
                                     }
                                 }
                             }

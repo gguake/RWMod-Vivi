@@ -38,16 +38,16 @@ namespace VVRace
         protected override void OnJobCompleted()
         {
             var targetPawn = MainTargetPawn;
-            if (CanProgressJob)
+            if (CanProgressJob && pawn.TryGetMindTransmitter(out var mindTransmitter))
             {
-                if (!pawn.relations.TryRemoveDirectRelation(VVPawnRelationDefOf.VV_MindLink, targetPawn))
-                {
-                    Log.Warning($"pawn {pawn} is tried to remove mind link with {targetPawn} but failed by some reasons.");
-                }
+                mindTransmitter.UnassignPawnControl(targetPawn);
 
-                Messages.Message(LocalizeTexts.MessageMindLinkDisconnected.Translate(pawn.Named("LINKER"), targetPawn.Named("LINKED")),
-                    new LookTargets(new Thing[] { pawn, targetPawn }),
-                    MessageTypeDefOf.NeutralEvent);
+                if (pawn.IsColonist)
+                {
+                    Messages.Message(LocalizeTexts.MessageMindLinkDisconnected.Translate(pawn.Named("LINKER"), targetPawn.Named("LINKED")),
+                        new LookTargets(new Thing[] { pawn, targetPawn }),
+                        MessageTypeDefOf.NeutralEvent);
+                }
             }
         }
     }

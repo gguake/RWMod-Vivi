@@ -54,10 +54,6 @@ namespace VVRace.HarmonyPatches
                 postfix: new HarmonyMethod(typeof(MindLinkPatch), nameof(Pawn_HealthTracker_MakeDowned_Postfix)));
 
             harmony.Patch(
-                original: AccessTools.Method(typeof(Pawn_HealthTracker), nameof(Pawn_HealthTracker.CheckForStateChange)),
-                postfix: new HarmonyMethod(typeof(MindLinkPatch), nameof(Pawn_HealthTracker_CheckForStateChange_Postfix)));
-
-            harmony.Patch(
                 original: AccessTools.Method(typeof(Pawn_ApparelTracker), nameof(Pawn_ApparelTracker.Notify_ApparelChanged)),
                 postfix: new HarmonyMethod(typeof(MindLinkPatch), nameof(Pawn_ApparelTracker_Notify_ApparelChanged_Postfix)));
 
@@ -166,16 +162,6 @@ namespace VVRace.HarmonyPatches
             if (___pawn.TryGetMindTransmitter(out var mindTransmitter))
             {
                 mindTransmitter?.Notify_Downed();
-            }
-        }
-
-        internal static void Pawn_HealthTracker_CheckForStateChange_Postfix(Pawn_HealthTracker __instance, Pawn ___pawn, Hediff hediff)
-        {
-            if (__instance.Dead) { return; }
-
-            if (___pawn.TryGetMindTransmitter(out var mindTransmitter))
-            {
-                mindTransmitter.Notify_HediffStateChange(hediff);
             }
         }
 

@@ -7,7 +7,7 @@ namespace VVRace
     {
         protected override Pawn GetDefendee(Pawn pawn)
         {
-            return pawn.GetMindLinkMasterWithoutCheck();
+            return pawn.GetMindLinkMaster();
         }
 
         protected override float GetFlagRadius(Pawn pawn)

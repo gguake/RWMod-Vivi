@@ -1,4 +1,5 @@
 ﻿using RimWorld;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -15,14 +16,11 @@ namespace VVRace
         public int UsedBandwidth => LinkedPawns.Count();
 
         public bool CanAddMindLink => UsedBandwidth < TotalBandWidth;
-            
 
-        public IEnumerable<Pawn> LinkedPawns => pawn.relations.DirectRelations
-            .Where(v => v.def == VVPawnRelationDefOf.VV_MindLink)
-            .Select(v => v.otherPawn);
+        public IEnumerable<Pawn> LinkedPawns => linkedPawns;
 
         public bool AnySelectedDraftedLinkedVivi => Find.Selector.SelectedPawns
-            .Where(v => v.TryGetViviGene(out var vivi) && v.GetMindLinkMasterWithoutCheck() == pawn && v.Drafted)
+            .Where(v => v.TryGetMindLink(out var mindLink) && mindLink.linker == pawn && v.Drafted)
             .Any();
 
         public AcceptanceReport CanControlLinkedPawnsNow
@@ -94,6 +92,8 @@ namespace VVRace
             }
         }
 
+        public List<Pawn> linkedPawns = new List<Pawn>();
+
         #region for cache
         private int _mindLinkNextCacheTick = 0;
         private float _mindLinkStrengthCached = 0f;
@@ -102,30 +102,34 @@ namespace VVRace
         #endregion
 
         #region overrides
-        public override void PostMake()
+        public override void ExposeData()
         {
-            base.PostMake();
+            base.ExposeData();
 
-            // 상호 참조는 구조상 불가능해야하지만 안전하게 여기서 제거해준다.
-            var mindLinkRelations = pawn.relations.DirectRelations.Where(v => v.def == VVPawnRelationDefOf.VV_MindLink).ToArray();
-            foreach (var relation in mindLinkRelations)
-            {
-                pawn.relations.RemoveDirectRelation(relation);
-            }
-
-            PawnComponentsUtility.AddAndRemoveDynamicComponents(pawn);
+            Scribe_Collections.Look(ref linkedPawns, "linkedPawns", LookMode.Reference);
         }
 
         public override void PostRemoved()
         {
             base.PostRemoved();
 
-            Notify_MindLinkRemoved();
+            UnassignPawnControlAll();
         }
 
         public override void Notify_PawnDied()
         {
             base.Notify_PawnDied();
+
+            var linkedPawns = LinkedPawns;
+            foreach (var linkedPawn in linkedPawns)
+            {
+                if (linkedPawn.TryGetViviGene(out var vivi))
+                {
+                    vivi.Notify_ForceBreakingMindLink();
+                }
+            }
+
+            UnassignPawnControlAll(directlyRemoveHediff: false);
         }
 
         public override IEnumerable<Gizmo> GetGizmos()
@@ -141,27 +145,69 @@ namespace VVRace
 
         public void AssignPawnControl(Pawn linked)
         {
-            if (linked.timetable != null && pawn.timetable != null)
+            if (linkedPawns.Contains(linked))
             {
-                for (int i = 0; i < 24; i++)
+                return;
+            }
+            linkedPawns.Add(linked);
+
+            if (linked.TryGetViviGene(out var vivi))
+            {
+                vivi.Notify_MakeNewMindLink(pawn);
+
+                if (linked.timetable != null && pawn.timetable?.times != null)
                 {
-                    linked.timetable.SetAssignment(i, pawn.timetable.times[i]);
+                    for (int i = 0; i < 24; i++)
+                    {
+                        linked.timetable.SetAssignment(i, pawn.timetable.times[i]);
+                    }
                 }
             }
 
             UpdateSeverity();
             Find.ColonistBar.MarkColonistsDirty();
+
+            pawn.relations?.AddDirectRelation(VVPawnRelationDefOf.VV_MindLink, linked);
         }
 
-        public void UnassignPawnControl(Pawn pawn)
+        public void UnassignPawnControlAll(bool directlyRemoveHediff = true)
         {
-            if (pawn.TryGetViviGene(out var vivi))
+            foreach (var linked in linkedPawns)
+            {
+                if (linked.TryGetViviGene(out var vivi))
+                {
+                    vivi.ViviControlSettings?.ResetWorkSettings();
+                    vivi.Notify_RemoveMindLink(directlyRemoveHediff);
+                }
+
+                pawn.relations?.TryRemoveDirectRelation(VVPawnRelationDefOf.VV_MindLink, linked);
+            }
+
+            linkedPawns.Clear();
+            UpdateSeverity();
+            Find.ColonistBar.MarkColonistsDirty();
+
+        }
+
+        public void UnassignPawnControl(Pawn linked, bool directlyRemoveHediff = true)
+        {
+            if (!linkedPawns.Contains(linked))
+            {
+                return;
+            }
+            linkedPawns.Remove(linked);
+
+            if (linked.TryGetViviGene(out var vivi))
             {
                 vivi.ViviControlSettings?.ResetWorkSettings();
+
+                vivi.Notify_RemoveMindLink(directlyRemoveHediff);
             }
 
             UpdateSeverity();
             Find.ColonistBar.MarkColonistsDirty();
+
+            pawn.relations?.TryRemoveDirectRelation(VVPawnRelationDefOf.VV_MindLink, linked);
         }
 
         public bool CanCommandTo(LocalTargetInfo target)
@@ -202,16 +248,6 @@ namespace VVRace
             {
                 GenDraw.DrawRadiusRing(pawn.Position, MindLinkCommandRadius, Color.white, (IntVec3 c) => CanCommandTo(c));
             }
-        }
-        public void Notify_MindLinkRemoved()
-        {
-            var linkedPawns = LinkedPawns;
-            foreach (var linkedPawn in linkedPawns)
-            {
-                pawn.relations.TryRemoveDirectRelation(VVPawnRelationDefOf.VV_MindLink, linkedPawn);
-            }
-
-            PawnComponentsUtility.AddAndRemoveDynamicComponents(pawn);
         }
         public void Notify_ChangedGuestStatus()
         {

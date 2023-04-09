@@ -207,19 +207,17 @@ namespace VVRace
 
             if (!preventChangeBodyType)
             {
+                // 로얄 비비가 된 경우는 마인드 링크를 해제한다.
+                if (pawn.TryGetMindLink(out var mindLink) && mindLink.linker != null && mindLink.linker.TryGetMindTransmitter(out var parentMindTransmitter))
+                {
+                    parentMindTransmitter.UnassignPawnControl(pawn);
+                }
+
                 pawn.genes.AddGene(VVGeneDefOf.Body_Standard, true);
                 pawn.story.bodyType = BodyTypeDefOf.Female;
 
-                var shouldRemoveApparels = new List<Apparel>();
-                foreach (var apparel in pawn.apparel.WornApparel)
-                {
-                    if (!apparel.def.apparel.PawnCanWear(pawn))
-                    {
-                        shouldRemoveApparels.Add(apparel);
-                    }
-                }
-
-                foreach (var apparel in  shouldRemoveApparels)
+                var shouldRemoveApparels = pawn.apparel.WornApparel.Where((Apparel apparel) => !apparel.def.apparel.PawnCanWear(pawn)).ToList();
+                foreach (var apparel in shouldRemoveApparels)
                 {
                     pawn.apparel.Remove(apparel);
                 }
@@ -230,7 +228,7 @@ namespace VVRace
         }
 
         #region Notificaitons
-        public void Notify_MakeNewMindLink()
+        public void Notify_MakeNewMindLink(Pawn linker)
         {
             mindLinkWishPawn = null;
 
@@ -239,16 +237,24 @@ namespace VVRace
 
             if (!pawn.health?.hediffSet?.HasHediff(VVHediffDefOf.VV_MindLink) ?? false)
             {
-                pawn.health.AddHediff(VVHediffDefOf.VV_MindLink);
+                var hediff = pawn.health.AddHediff(VVHediffDefOf.VV_MindLink) as Hediff_MindLink;
+                hediff.linker = linker;
             }
         }
 
-        public void Notify_RemoveMindLink()
+        public void Notify_RemoveMindLink(bool directlyRemoveHediff)
         {
-            var mindLinkHediff = pawn.health?.hediffSet?.GetFirstHediffOfDef(VVHediffDefOf.VV_MindLink);
+            var mindLinkHediff = pawn.health?.hediffSet?.GetFirstHediffOfDef(VVHediffDefOf.VV_MindLink) as Hediff_MindLink;
             if (mindLinkHediff != null)
             {
-                pawn.health.RemoveHediff(mindLinkHediff);
+                if (directlyRemoveHediff)
+                {
+                    pawn.health.RemoveHediff(mindLinkHediff);
+                }
+                else
+                {
+                    mindLinkHediff.linker = null;
+                }
             }
 
             controlSettings = null;
@@ -277,9 +283,12 @@ namespace VVRace
 
                 pawn.InterruptCurrentJob();
 
-                Messages.Message(LocalizeTexts.MessageMindLinkForceDisconnected.Translate(pawn.Named("LINKED")),
-                    new LookTargets(new Thing[] { pawn }),
-                    MessageTypeDefOf.NegativeEvent);
+                if (pawn.IsColonist)
+                {
+                    Messages.Message(LocalizeTexts.MessageMindLinkForceDisconnected.Translate(pawn.Named("LINKED")),
+                        new LookTargets(new Thing[] { pawn }),
+                        MessageTypeDefOf.NegativeEvent);
+                }
             }
         }
 
@@ -300,13 +309,6 @@ namespace VVRace
 
             if (ShouldBeRoyalIfMature())
             {
-                // 성장 후 로얄 비비가 된 경우는 마인드 링크를 해제한다.
-                var directRelations = pawn.relations?.DirectRelations?.Where(v => v.def == VVPawnRelationDefOf.VV_MindLink).ToList();
-                foreach (var relation in directRelations)
-                {
-                    pawn.relations.RemoveDirectRelation(relation);
-                }
-
                 IsRoyal = true;
 
                 if (!pawn.health.hediffSet.HasHediff(VVHediffDefOf.VV_MindTransmitter))
@@ -319,11 +321,15 @@ namespace VVRace
                 pawn.apparel?.DropAllOrMoveAllToInventory((Apparel apparel) => !apparel.def.apparel.PawnCanWear(pawn));
 
                 pawn.Drawer.renderer.graphics.SetAllGraphicsDirty();
-                Find.LetterStack.ReceiveLetter(
-                    LocalizeTexts.LetterRoyalViviGrownLabel.Translate(pawn.Named("PAWN")),
-                    LocalizeTexts.LetterRoyalViviGrown.Translate(pawn.Named("PAWN")),
-                    LetterDefOf.PositiveEvent,
-                    pawn);
+
+                if (pawn.IsColonist)
+                {
+                    Find.LetterStack.ReceiveLetter(
+                        LocalizeTexts.LetterRoyalViviGrownLabel.Translate(pawn.Named("PAWN")),
+                        LocalizeTexts.LetterRoyalViviGrown.Translate(pawn.Named("PAWN")),
+                        LetterDefOf.PositiveEvent,
+                        pawn);
+                }
             }
             else
             {

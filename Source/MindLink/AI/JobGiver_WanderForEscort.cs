@@ -14,7 +14,7 @@ namespace VVRace
 
         private GlobalTargetInfo Target(Pawn pawn)
         {
-            return pawn.GetMindLinkMasterWithoutCheck();
+            return pawn.GetMindLinkMaster();
         }
 
         protected override Job TryGiveJob(Pawn pawn)

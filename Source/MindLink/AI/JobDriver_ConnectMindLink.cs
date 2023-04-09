@@ -1,4 +1,6 @@
 ﻿using RimWorld;
+using System;
+using System.IO;
 using Verse;
 
 namespace VVRace
@@ -38,14 +40,17 @@ namespace VVRace
         protected override void OnJobCompleted()
         {
             var targetPawn = MainTargetPawn;
-            if (CanProgressJob)
+            if (CanProgressJob && pawn.TryGetMindTransmitter(out var mindTransmitter))
             {
-                pawn.relations.AddDirectRelation(VVPawnRelationDefOf.VV_MindLink, targetPawn);
+                mindTransmitter.AssignPawnControl(targetPawn);
             }
 
-            Messages.Message(LocalizeTexts.MessageMindLinkConnected.Translate(pawn.Named("LINKER"), targetPawn.Named("LINKED")),
-                new LookTargets(new Thing[] { pawn, targetPawn }),
-                MessageTypeDefOf.NeutralEvent);
+            if (pawn.IsColonist)
+            {
+                Messages.Message(LocalizeTexts.MessageMindLinkConnected.Translate(pawn.Named("LINKER"), targetPawn.Named("LINKED")),
+                    new LookTargets(new Thing[] { pawn, targetPawn }),
+                    MessageTypeDefOf.NeutralEvent);
+            }
         }
     }
 }

@@ -10,7 +10,7 @@ namespace VVRace
 
         protected override Pawn GetFollowee(Pawn pawn)
         {
-            return pawn.GetMindLinkMasterWithoutCheck();
+            return pawn.GetMindLinkMaster();
         }
 
         protected override float GetRadius(Pawn pawn)

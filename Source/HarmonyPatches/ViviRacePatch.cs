@@ -154,7 +154,7 @@ namespace VVRace.HarmonyPatches
                     var targetRoyalVivi = royalVivis[i];
                     if (targetRoyalVivi.TryGetMindTransmitter(out var mindTransmitter) && mindTransmitter.CanAddMindLink)
                     {
-                        pawn.relations.AddDirectRelation(VVPawnRelationDefOf.VV_MindLink, targetRoyalVivi);
+                        mindTransmitter.AssignPawnControl(pawn);
 
                         if (!mindTransmitter.CanAddMindLink)
                         {

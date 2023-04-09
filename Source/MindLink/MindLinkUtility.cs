@@ -15,9 +15,17 @@ namespace VVRace
 
         public static bool TryGetMindTransmitter(this Pawn pawn, out Hediff_MindTransmitter hediff)
         {
-            if (pawn == null) { hediff = null; return false; }
+            if (pawn?.health?.hediffSet == null) { hediff = null; return false; }
 
             hediff = pawn.health.hediffSet.GetFirstHediffOfDef(VVHediffDefOf.VV_MindTransmitter) as Hediff_MindTransmitter;
+            return hediff != null;
+        }
+
+        public static bool TryGetMindLink(this Pawn pawn, out Hediff_MindLink hediff)
+        {
+            if (pawn?.health?.hediffSet == null) { hediff = null; return false; }
+
+            hediff = pawn.health.hediffSet.GetFirstHediffOfDef(VVHediffDefOf.VV_MindLink) as Hediff_MindLink;
             return hediff != null;
         }
 
@@ -29,13 +37,8 @@ namespace VVRace
 
         public static Pawn GetMindLinkMaster(this Pawn pawn)
         {
-            return !pawn.HasMindTransmitter() ? 
-                pawn.relations?.GetFirstDirectRelationPawn(VVPawnRelationDefOf.VV_MindLink) : 
-                null;
+            return pawn.TryGetMindLink(out var mindLink) ? mindLink.linker : null;
         }
-
-        public static Pawn GetMindLinkMasterWithoutCheck(this Pawn pawn)
-            => pawn.relations?.GetFirstDirectRelationPawn(VVPawnRelationDefOf.VV_MindLink);
 
         public static bool IsMindLinkedVivi(this Pawn pawn)
         {
@@ -49,7 +52,7 @@ namespace VVRace
 
         public static bool CanMakeNewMindLink(this Pawn pawn)
         {
-            return pawn.HasViviGene();
+            return pawn.HasViviGene() && !pawn.health.hediffSet.HasHediff(VVHediffDefOf.VV_PsychicConfusion);
         }
 
         public static AcceptanceReport CanDraftVivi(this Pawn pawn)
