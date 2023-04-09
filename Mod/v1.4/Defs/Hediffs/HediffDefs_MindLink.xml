@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <HediffDef>
+    <defName>VV_MindTransmitter</defName>
+    <hediffClass>VVRace.Hediff_MindTransmitter</hediffClass>
+    <label>vivi mind transmitter</label>
+    <description>.</description>
+    <defaultLabelColor>(0.6, 0.6, 1.0)</defaultLabelColor>
+    
+    <isBad>false</isBad>
+    <priceImpact>false</priceImpact>
+    <scenarioCanAdd>false</scenarioCanAdd>
+
+    <initialSeverity>0.001</initialSeverity>
+    <minSeverity>0.001</minSeverity>
+    <stages>
+      <li>
+        <statOffsets>
+          <VV_MindLinkBandwidth>6</VV_MindLinkBandwidth>
+        </statOffsets>
+      </li>
+      <li>
+        <minSeverity>0.999</minSeverity>
+        <statOffsets>
+          <VV_MindLinkBandwidth>6</VV_MindLinkBandwidth>
+          
+          <ResearchSpeed>0.1</ResearchSpeed>
+          <MedicalOperationSpeed>0.1</MedicalOperationSpeed>
+          <MedicalTendSpeed>0.1</MedicalTendSpeed>
+          <MedicalTendQuality>0.1</MedicalTendQuality>
+        </statOffsets>
+      </li>
+      <li>
+        <minSeverity>1.999</minSeverity>
+        <statOffsets>
+          <VV_MindLinkBandwidth>6</VV_MindLinkBandwidth>
+          
+          <ResearchSpeed>0.2</ResearchSpeed>
+          <MedicalOperationSpeed>0.2</MedicalOperationSpeed>
+          <MedicalTendSpeed>0.2</MedicalTendSpeed>
+          <MedicalTendQuality>0.2</MedicalTendQuality>
+        </statOffsets>
+      </li>
+      <li>
+        <minSeverity>3.999</minSeverity>
+        <statOffsets>
+          <VV_MindLinkBandwidth>6</VV_MindLinkBandwidth>
+          
+          <ResearchSpeed>0.3</ResearchSpeed>
+          <MedicalOperationSpeed>0.3</MedicalOperationSpeed>
+          <MedicalTendSpeed>0.3</MedicalTendSpeed>
+          <MedicalTendQuality>0.3</MedicalTendQuality>
+        </statOffsets>
+      </li>
+      <li>
+        <minSeverity>7.999</minSeverity>
+        <statOffsets>
+          <VV_MindLinkBandwidth>6</VV_MindLinkBandwidth>
+          
+          <ResearchSpeed>0.4</ResearchSpeed>
+          <MedicalOperationSpeed>0.4</MedicalOperationSpeed>
+          <MedicalTendSpeed>0.4</MedicalTendSpeed>
+          <MedicalTendQuality>0.4</MedicalTendQuality>
+        </statOffsets>
+      </li>
+      <li>
+        <minSeverity>15.999</minSeverity>
+        <statOffsets>
+          <VV_MindLinkBandwidth>6</VV_MindLinkBandwidth>
+          
+          <ResearchSpeed>0.5</ResearchSpeed>
+          <MedicalOperationSpeed>0.5</MedicalOperationSpeed>
+          <MedicalTendSpeed>0.5</MedicalTendSpeed>
+          <MedicalTendQuality>0.5</MedicalTendQuality>
+        </statOffsets>
+      </li>
+    </stages>
+
+    <allowMothballIfLowPriorityWorldPawn>true</allowMothballIfLowPriorityWorldPawn>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>VV_MindLink</defName>
+    <hediffClass>VVRace.Hediff_MindLink</hediffClass>
+    <label>vivi mindlink connected</label>
+    <description>.</description>
+    <defaultLabelColor>(0.6, 0.6, 1.0)</defaultLabelColor>
+    
+    <isBad>false</isBad>
+    <priceImpact>false</priceImpact>
+    <scenarioCanAdd>false</scenarioCanAdd>
+
+    <initialSeverity>0.001</initialSeverity>
+    <minSeverity>0.001</minSeverity>
+    <stages>
+      <li>
+        <statOffsets>
+          <WorkSpeedGlobal>0.1</WorkSpeedGlobal>
+        </statOffsets>
+      </li>
+      <li>
+        <minSeverity>0.3</minSeverity>
+        <statOffsets>
+          <WorkSpeedGlobal>0.15</WorkSpeedGlobal>
+        </statOffsets>
+      </li>
+      <li>
+        <minSeverity>0.5</minSeverity>
+        <statOffsets>
+          <WorkSpeedGlobal>0.3</WorkSpeedGlobal>
+        </statOffsets>
+      </li>
+      <li>
+        <minSeverity>0.7</minSeverity>
+        <statOffsets>
+          <WorkSpeedGlobal>0.35</WorkSpeedGlobal>
+        </statOffsets>
+      </li>
+      <li>
+        <minSeverity>0.85</minSeverity>
+        <statOffsets>
+          <WorkSpeedGlobal>0.4</WorkSpeedGlobal>
+        </statOffsets>
+      </li>
+      <li>
+        <minSeverity>1.0</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Moving</capacity>
+            <offset>0.05</offset>
+          </li>
+          <li>
+            <capacity>Manipulation</capacity>
+            <offset>0.05</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <WorkSpeedGlobal>0.4</WorkSpeedGlobal>
+        </statOffsets>
+      </li>
+      <li>
+        <minSeverity>1.1</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Moving</capacity>
+            <offset>0.1</offset>
+          </li>
+          <li>
+            <capacity>Manipulation</capacity>
+            <offset>0.1</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <WorkSpeedGlobal>0.45</WorkSpeedGlobal>
+        </statOffsets>
+      </li>
+      <li>
+        <minSeverity>1.25</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Moving</capacity>
+            <offset>0.1</offset>
+          </li>
+          <li>
+            <capacity>Manipulation</capacity>
+            <offset>0.1</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <WorkSpeedGlobal>0.5</WorkSpeedGlobal>
+        </statOffsets>
+      </li>
+    </stages>
+
+    <allowMothballIfLowPriorityWorldPawn>true</allowMothballIfLowPriorityWorldPawn>
+  </HediffDef>
+
+  <HediffDef ParentName="DiseaseBase">
+    <defName>VV_PsychicConfusion</defName>
+    <label>psychic confusion</label>
+    <labelNoun>a psychic confusion</labelNoun>
+    <description>.</description>
+    
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <stages>
+      <li>
+        <capMods>
+          <li>
+            <capacity>Moving</capacity>
+            <offset>-0.4</offset>
+          </li>
+          <li>
+            <capacity>Manipulation</capacity>
+            <offset>-0.4</offset>
+          </li>
+        </capMods>
+      </li>
+    </stages>
+
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>60000~180000</disappearsAfterTicks>
+        <showRemainingTime>true</showRemainingTime>
+      </li>
+    </comps>
+
+    <allowMothballIfLowPriorityWorldPawn>true</allowMothballIfLowPriorityWorldPawn>
+  </HediffDef>
+</Defs>

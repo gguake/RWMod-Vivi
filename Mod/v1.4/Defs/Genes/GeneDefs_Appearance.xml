@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 헤드 -->
+  <GeneDef>
+    <defName>VV_HeadGene</defName>
+    <label>vivi head</label>
+    <description>.</description>
+    <iconPath>UI/Icons/Genes/Gene_GauntHead</iconPath>
+    <iconColor>(0.75, 0.75, 0.75)</iconColor>
+    <randomChosen>false</randomChosen>
+    
+    <exclusionTags>
+      <li>Jaw</li>
+    </exclusionTags>
+
+    <endogeneCategory>Jaw</endogeneCategory>
+    <displayCategory>VV_Race</displayCategory>
+    <displayOrderInCategory>100</displayOrderInCategory>
+    <biostatCpx>0</biostatCpx>
+    <canGenerateInGeneSet>false</canGenerateInGeneSet>
+
+    <forcedHeadTypes>
+      <li>VV_Vivi_A</li>
+      <li>VV_Vivi_B</li>
+    </forcedHeadTypes>
+    
+    <graphicData>
+      <tattoosVisible>false</tattoosVisible>
+    </graphicData>
+  </GeneDef>
+  
+  <!-- 헤어 -->
+  <GeneDef ParentName="GeneHairStyleBase">
+    <defName>VV_HairGene</defName>
+    <label>vivi hair</label>
+    <description>.</description>
+    <iconPath>UI/Icons/Genes/Gene_HairStyleLongOnly</iconPath>
+    <iconColor>(0.75, 0.75, 0.75)</iconColor>
+    <randomChosen>false</randomChosen>
+
+    <displayCategory>VV_Race</displayCategory>
+    <displayOrderInCategory>101</displayOrderInCategory>
+    <biostatCpx>0</biostatCpx>
+    <canGenerateInGeneSet>false</canGenerateInGeneSet>
+
+    <hairTagFilter>
+      <whitelist>true</whitelist>
+      <tags>
+        <li>VV_Vivi</li>
+      </tags>
+    </hairTagFilter>
+  </GeneDef>
+  
+  <!-- 고유 바디 -->
+  <GeneDef Class="VVRace.GeneDefExt">
+    <defName>VV_BodyGene</defName>
+    <label>vivi body</label>
+    <description>.</description>
+    <iconPath>UI/Icons/Genes/Gene_BodyThin</iconPath>
+    <iconColor>(0.75, 0.75, 0.75)</iconColor>
+    <randomChosen>false</randomChosen>
+    
+    <displayCategory>VV_Race</displayCategory>
+    <displayOrderInCategory>102</displayOrderInCategory>
+    <biostatCpx>0</biostatCpx>
+    <canGenerateInGeneSet>false</canGenerateInGeneSet>
+
+    <bodyTypeOverrides>
+      <Child>
+        <overrideGraphicPath>Things/Pawn/Vivi/Body/Naked_Thin</overrideGraphicPath>
+        <headOffset>(-0.09, 0.003)</headOffset>
+      </Child>
+      <Thin>
+        <overrideGraphicPath>Things/Pawn/Vivi/Body/Naked_Thin</overrideGraphicPath>
+        <headOffset>(-0.09, 0.003)</headOffset>
+      </Thin>
+      <Female>
+        <overrideGraphicPath>Things/Pawn/Vivi/Body/Naked_Female</overrideGraphicPath>
+        <headOffset>(-0.09, 0.04)</headOffset>
+      </Female>
+    </bodyTypeOverrides>
+    
+    <graphicData>
+      <tattoosVisible>false</tattoosVisible>
+    </graphicData>
+  </GeneDef>
+  
+  <!-- 피부색 -->
+  <GeneDef ParentName="GeneSkinColorOverride">
+    <defName>VV_SkinColorGene</defName>
+    <label>vivi skin</label>
+    <labelShortAdj>vivi</labelShortAdj>
+    <skinColorOverride>(255, 240, 236)</skinColorOverride>
+    <randomBrightnessFactor>0</randomBrightnessFactor>
+    
+    <displayCategory>VV_Race</displayCategory>
+    <displayOrderInCategory>103</displayOrderInCategory>
+    <biostatCpx>0</biostatCpx>
+    <canGenerateInGeneSet>false</canGenerateInGeneSet>
+  </GeneDef>
+
+</Defs>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <WorkGiverDef>
+    <defName>VV_HaulViviEggToHatchery</defName>
+    <label>haul vivi eggs to safe hatchery</label>
+    <giverClass>VVRace.WorkGiver_HaulViviEgg</giverClass>
+    <workType>Hauling</workType>
+    <verb>haul</verb>
+    <gerund>hauling</gerund>
+    <priorityInType>110</priorityInType>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+  </WorkGiverDef>
+
+  <WorkGiverDef>
+    <defName>VV_DoBillsHarvestWithBarrel</defName>
+    <label>gather</label>
+    <giverClass>VVRace.WorkGiver_HarvestBill</giverClass>
+    <workType>Growing</workType>
+    <priorityInType>90</priorityInType>
+    <fixedBillGiverDefs>
+      <li>VV_HarvestBarrel</li>
+    </fixedBillGiverDefs>
+    <verb>gather</verb>
+    <gerund>gathering</gerund>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <prioritizeSustains>true</prioritizeSustains>
+  </WorkGiverDef>
+  
+  <WorkGiverDef>
+    <defName>VV_DoBillsRefiningWorkbench</defName>
+    <label>work at workbench</label>
+    <giverClass>WorkGiver_DoBill</giverClass>
+    <workType>Crafting</workType>
+    <priorityInType>95</priorityInType>
+    <fixedBillGiverDefs>
+      <li>VV_RefiningWorkbench</li>
+    </fixedBillGiverDefs>
+    <verb>refine</verb>
+    <gerund>refining at</gerund>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <prioritizeSustains>true</prioritizeSustains>
+  </WorkGiverDef>
+</Defs>

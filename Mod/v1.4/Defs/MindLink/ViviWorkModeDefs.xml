@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <VVRace.ViviWorkModeDef Abstract="True" Name="ViviWorkModeBase">
+    <workPriorities>
+      <Art>0</Art>
+      <Research>0</Research>
+    </workPriorities>
+  </VVRace.ViviWorkModeDef>
+
+  <VVRace.ViviWorkModeDef ParentName="ViviWorkModeBase">
+    <defName>VV_Work</defName>
+    <label>work</label>
+    <description>.</description>
+    <uiOrder>100</uiOrder>
+    <iconPath>UI/Icons/WorkMode/Work</iconPath>
+
+    <workPriorities>
+      <Patient>2</Patient>
+      <Firefighter>2</Firefighter>
+    </workPriorities>
+  </VVRace.ViviWorkModeDef>
+  
+  <VVRace.ViviWorkModeDef ParentName="ViviWorkModeBase">
+    <defName>VV_Escort</defName>
+    <label>escort</label>
+    <description>.</description>
+    <uiOrder>200</uiOrder>
+    <iconPath>UI/Icons/WorkMode/Escort</iconPath>
+  </VVRace.ViviWorkModeDef>
+</Defs>

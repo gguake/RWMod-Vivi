@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  
+  <PawnRelationDef>
+    <defName>VV_MindLink</defName>
+    <label>mind link</label>
+    <workerClass>VVRace.PawnRelationWorker_MindLink</workerClass>
+    <importance>100</importance>
+    <implied>false</implied>
+    <reflexive>true</reflexive>
+    <removeOnDeath>true</removeOnDeath>
+  </PawnRelationDef>
+
+</Defs>

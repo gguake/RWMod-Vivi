@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1796B47E-FAF2-4FDE-BD74-7CDBC61D8217}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VVRace</RootNamespace>
+    <AssemblyName>VVRace</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Build|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\Mod\v1.4\Assemblies\</OutputPath>
+    <DefineConstants>
+    </DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>CS0649</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Build_Dev|AnyCPU'">
+    <OutputPath>..\Mod\v1.4\Assemblies\</OutputPath>
+    <Optimize>true</Optimize>
+    <NoWarn>CS0649</NoWarn>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <DefineConstants>DEBUG</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>E:\Steam\steamapps\workshop\content\294100\2009463077\Current\Assemblies\0Harmony.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>E:\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>E:\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>E:\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>E:\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Egg\AI\JobDriver_HaulViviEgg.cs" />
+    <Compile Include="Egg\AI\WorkGiver_HaulViviEgg.cs" />
+    <Compile Include="Egg\CompViviHatcher.cs" />
+    <Compile Include="Egg\CompViviHatcheryEggDrawer.cs" />
+    <Compile Include="Egg\ViviEggHatchery.cs" />
+    <Compile Include="HarmonyPatches\Internals\InternalPatch.cs" />
+    <Compile Include="HarmonyPatches\MindLinkPatch.cs" />
+    <Compile Include="GeneDefExt.cs" />
+    <Compile Include="HarmonyPatch.cs" />
+    <Compile Include="ApparelPropertiesExt.cs" />
+    <Compile Include="HarmonyPatches\ApparelPropertiesExtPatch.cs" />
+    <Compile Include="HarmonyPatches\BodyGraphicPathOverridePatch.cs" />
+    <Compile Include="HarmonyPatches\ViviRacePatch.cs" />
+    <Compile Include="Harvest\HarvestWorker.cs" />
+    <Compile Include="Harvest\HarvestWorker_Honey.cs" />
+    <Compile Include="Harvest\HarvestWorker_Pollen.cs" />
+    <Compile Include="Harvest\HarvestWorker_Propolis.cs" />
+    <Compile Include="Harvest\JobDriver_HarvestHoney.cs" />
+    <Compile Include="Harvest\JobDriver_HarvestPollen.cs" />
+    <Compile Include="Harvest\JobDriver_HarvestPropolis.cs" />
+    <Compile Include="Honey\Filth_Pollen.cs" />
+    <Compile Include="Honey\HoneyUtility.cs" />
+    <Compile Include="PawnKindDefExt.cs" />
+    <Compile Include="Harvest\RecipeDef_Harvest.cs" />
+    <Compile Include="Utility\ToilUtility.cs" />
+    <Compile Include="Harvest\WorkGiver_HarvestBill.cs" />
+    <Compile Include="Utility\ILUtility.cs" />
+    <Compile Include="JobDriver_InteractTarget.cs" />
+    <Compile Include="LocalizeTexts.cs" />
+    <Compile Include="MindLink\AI\JobDriver_ConnectMindLink.cs" />
+    <Compile Include="MindLink\AI\JobDriver_DisconnectMindLink.cs" />
+    <Compile Include="MindLink\AI\JobGiver_AIDefendForEscort.cs" />
+    <Compile Include="MindLink\AI\JobGiver_AIFollowForEscort.cs" />
+    <Compile Include="MindLink\AI\JobGiver_AIWaitWithEscort.cs" />
+    <Compile Include="MindLink\AI\JobGiver_ExitMapFollowForEscort.cs" />
+    <Compile Include="MindLink\AI\JobGiver_WanderForEscort.cs" />
+    <Compile Include="MindLink\AI\ThinkNode_ConditionalViviWorkMode.cs" />
+    <Compile Include="MindLink\AI\JobGiver_ManagingMindLink.cs" />
+    <Compile Include="MindLink\Hediff_MindLink.cs" />
+    <Compile Include="MindLink\Hediff_MindTransmitter.cs" />
+    <Compile Include="MindLink\ThoughtDef_MindLink.cs" />
+    <Compile Include="MindLink\ThoughtWorker_MindLink.cs" />
+    <Compile Include="MindLink\UI\MainButtonWorker_ToggleViviTab.cs" />
+    <Compile Include="MindLink\UI\MainTabWindow_Vivis.cs" />
+    <Compile Include="MindLink\MindLinkUtility.cs" />
+    <Compile Include="MindLink\UI\MindTransmitterBandwidthGizmo.cs" />
+    <Compile Include="MindLink\UI\PawnColumnWorker_DraftVivi.cs" />
+    <Compile Include="MindLink\UI\PawnColumnWorker_MindLink.cs" />
+    <Compile Include="MindLink\UI\PawnColumnWorker_RestFirstVivi.cs" />
+    <Compile Include="MindLink\UI\PawnColumnWorker_ViviWorkMode.cs" />
+    <Compile Include="MindLink\PawnRelationWorker_MindLink.cs" />
+    <Compile Include="MindLink\StatWorker_MindTransmitter.cs" />
+    <Compile Include="MindLink\UI\PawnTable_Vivis.cs" />
+    <Compile Include="MindLink\AI\ViviWorkModeDef.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Egg\AI\JobDriver_LayViviEgg.cs" />
+    <Compile Include="Egg\AI\JobGiver_LayViviEgg.cs" />
+    <Compile Include="Vivi\AI\ThinkNode_ConditionalVivi.cs" />
+    <Compile Include="Egg\Graphic_ViviEgg.cs" />
+    <Compile Include="Vivi\CompFoodDrainWhenMake.cs" />
+    <Compile Include="Vivi\CompWallReplace.cs" />
+    <Compile Include="Vivi\HediffComp_ViviGrowthBoost.cs" />
+    <Compile Include="Vivi\Need_RoyalJelly.cs" />
+    <Compile Include="Vivi\Gene_Vivi.cs" />
+    <Compile Include="Egg\UI\EggProgressGizmo.cs" />
+    <Compile Include="Egg\ViviEggSettings.cs" />
+    <Compile Include="Vivi\ViviRaceUtility.cs" />
+    <Compile Include="MindLink\ViviControlSettings.cs" />
+    <Compile Include="VVDefOf.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

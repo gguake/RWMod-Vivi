@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <ThingCategoryDef>
+    <defName>VV_BuildingsVivi</defName>
+    <label>vivi buildings</label>
+    <parent>Buildings</parent>
+  </ThingCategoryDef>
+  
+  <ThingCategoryDef>
+    <defName>VV_ViviProduct</defName>
+    <label>vivi product</label>
+    <parent>AnimalProductRaw</parent>
+  </ThingCategoryDef>
+</Defs>

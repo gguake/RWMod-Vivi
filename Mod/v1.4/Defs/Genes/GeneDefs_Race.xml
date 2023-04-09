@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <GeneDef Class="VVRace.GeneDefExt">
+    <defName>VV_ViviGene</defName>
+    <label>vivi gene</label>
+    <description>Unique gene for vivi races.</description>
+    <customEffectDescriptions>
+      <li>Can gather honey from growing plants.</li>
+      <li>Can reproduce by laying eggs.</li>
+      <li>Can form a mindlink with each other to enhance their work efficiency.</li>
+    </customEffectDescriptions>
+
+    <geneClass>VVRace.Gene_Vivi</geneClass>
+    <iconPath>UI/Icons/Genes/Gene_Vivi</iconPath>
+    <iconColor>(0.75, 0.75, 0.75)</iconColor>
+    <randomChosen>false</randomChosen>
+
+    <displayCategory>VV_Race</displayCategory>
+    <displayOrderInCategory>0</displayOrderInCategory>
+    <biostatCpx>6</biostatCpx>
+    <biostatMet>-2</biostatMet>
+    <biostatArc>2</biostatArc>
+
+    <sterilize>true</sterilize>
+    <statOffsets>
+      <WorkSpeedGlobal>-0.4</WorkSpeedGlobal>
+    </statOffsets>
+    
+    <statFactors>
+      <ConstructionSpeed>1.2</ConstructionSpeed>
+      <PlantWorkSpeed>1.2</PlantWorkSpeed>
+
+      <ButcheryFleshEfficiency>0.7</ButcheryFleshEfficiency>
+      <MiningYield>0.7</MiningYield>
+      
+      <ToxicResistance>0.5</ToxicResistance>
+    </statFactors>
+
+    <biologicalAgeTickFactorFromAgeCurve>
+      <points>
+        <li>(3, 4)</li>
+        <li>(5, 3)</li>
+        <li>(9, 2.5)</li>
+        <li>(13, 2)</li>
+        <li>(16.5, 2)</li>
+        <li>(18, 1)</li>
+      </points>
+    </biologicalAgeTickFactorFromAgeCurve>
+
+    <eggLayIntervalDays>1</eggLayIntervalDays>
+  </GeneDef>
+
+  <GeneDef>
+    <defName>VV_ViviMindset</defName>
+    <label>vivi mindset</label>
+    <description>.</description>
+    <iconPath>UI/Icons/Genes/Gene_ViviMindset</iconPath>
+
+    <displayCategory>VV_Race</displayCategory>
+    <displayOrderInCategory>1</displayOrderInCategory>
+    <biostatCpx>1</biostatCpx>
+    <biostatMet>-2</biostatMet>
+    
+    <prerequisite>VV_ViviGene</prerequisite>
+    <suppressedTraits>
+      <li>
+        <def>Cannibal</def>
+      </li>
+      <li>
+        <def>Beauty</def>
+        <degree>-2</degree>
+      </li>
+      <li>
+        <def>DislikesWomen</def>
+      </li>
+    </suppressedTraits>
+  </GeneDef>
+</Defs>

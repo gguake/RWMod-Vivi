@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <HeadTypeDef ParentName="AverageBase">
+    <defName>VV_Vivi_A</defName>
+    <graphicPath>Things/Pawn/Vivi/Heads/HeadA</graphicPath>
+    <randomChosen>true</randomChosen>
+    <gender>None</gender>
+    <requiredGenes>
+      <li>VV_HeadGene</li>
+    </requiredGenes>
+  </HeadTypeDef>
+  
+  <HeadTypeDef ParentName="AverageBase">
+    <defName>VV_Vivi_B</defName>
+    <graphicPath>Things/Pawn/Vivi/Heads/HeadB</graphicPath>
+    <randomChosen>true</randomChosen>
+    <gender>None</gender>
+    <requiredGenes>
+      <li>VV_HeadGene</li>
+    </requiredGenes>
+  </HeadTypeDef>
+</Defs>

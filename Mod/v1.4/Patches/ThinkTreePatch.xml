@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+  <Operation Class="PatchOperationInsert">
+    <xpath>Defs/ThinkTreeDef[defName="MainColonistBehaviorCore"]/thinkRoot/subNodes/li[1]/subNodes/li[@Class="JobGiver_Work"]</xpath>
+    <order>Prepend</order>
+    <value>
+      <li Class="VVRace.ThinkNode_ConditionalVivi">
+        <subNodes>
+          <li Class="VVRace.JobGiver_ManagingMindLink" />
+          <li Class="VVRace.JobGiver_LayViviEgg" />
+        </subNodes>
+      </li>
+      <li Class="VVRace.ThinkNode_ConditionalViviWorkMode">
+        <workMode>VV_Escort</workMode>
+        <subNodes>
+          <li Class="VVRace.JobGiver_ExitMapFollowForEscort" />
+          <li Class="VVRace.JobGiver_AIDefendForEscort" />
+          <li Class="VVRace.JobGiver_AIFollowForEscort"/>
+          <li Class="VVRace.JobGiver_AIWaitWithEscort" />
+          <li Class="VVRace.JobGiver_WanderForEscort" />
+        </subNodes>
+      </li>
+    </value>
+  </Operation>
+</Patch>

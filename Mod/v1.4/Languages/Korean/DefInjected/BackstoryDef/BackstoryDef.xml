@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <VV_ViviHiveChild.title>비비 둥지 아이</VV_ViviHiveChild.title>
+  <VV_ViviHiveChild.titleShort>둥지 아이</VV_ViviHiveChild.titleShort>
+  <VV_ViviHiveChild.baseDesc>[PAWN_nameDef]는 둥지에서 평범한 어린 시절을 보냈습니다.</VV_ViviHiveChild.baseDesc>
+  
+  <VV_ViviSettler.title>비비 둥지 정착민</VV_ViviSettler.title>
+  <VV_ViviSettler.titleShort>둥지 정착민</VV_ViviSettler.titleShort>
+  <VV_ViviSettler.baseDesc>[PAWN_nameDef]는 둥지에 속한 정착민입니다.</VV_ViviSettler.baseDesc>
+
+  <VV_ViviExiled.title>비비 추방자</VV_ViviExiled.title>
+  <VV_ViviExiled.titleShort>추방자</VV_ViviExiled.titleShort>
+  <VV_ViviExiled.baseDesc>[PAWN_nameDef]는 남다른 외형탓에 둥지에서 쫓겨났습니다. 살아남기 위해서 [PAWN_pronoun]는 보통의 로얄 비비들에게는 필요 없는 여러 능력을 배웠습니다.</VV_ViviExiled.baseDesc>
+</LanguageData>

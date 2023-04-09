@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+	<ResearchTabDef>
+		<defName>VV_Vivi</defName>
+		<label>vivi tech</label>
+	</ResearchTabDef>
+
+  <ResearchProjectDef Abstract="True" Name="ViviResearchProjectBase">
+		<tab>VV_Vivi</tab>
+    <techLevel>Medieval</techLevel>
+  </ResearchProjectDef>
+  
+  <ResearchProjectDef ParentName="ViviResearchProjectBase">
+    <defName>VV_BasicInfra</defName>
+    <label>vivi basic infrastructures</label>
+    <description>.</description>
+    <baseCost>400</baseCost>
+    <researchViewX>0</researchViewX>
+    <researchViewY>1</researchViewY>
+  </ResearchProjectDef>
+	
+  <ResearchProjectDef ParentName="ViviResearchProjectBase">
+    <defName>VV_BasicGathering</defName>
+    <label>vivi basic gathering</label>
+    <description>.</description>
+    <baseCost>600</baseCost>
+    <researchViewX>0</researchViewX>
+    <researchViewY>0</researchViewY>
+    <prerequisites>
+      <li>VV_BasicInfra</li>
+    </prerequisites>
+  </ResearchProjectDef>
+  
+  <ResearchProjectDef ParentName="ViviResearchProjectBase">
+    <defName>VV_AdvancedGathering</defName>
+    <label>vivi advanced gathering</label>
+    <description>.</description>
+    <baseCost>1600</baseCost>
+    <researchViewX>1</researchViewX>
+    <researchViewY>0</researchViewY>
+    <prerequisites>
+      <li>VV_BasicGathering</li>
+    </prerequisites>
+  </ResearchProjectDef>
+</Defs>

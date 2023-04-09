@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <ThingDef ParentName="BaseFilth">
+    <defName>VV_FilthPollen</defName>
+    <thingClass>VVRace.Filth_Pollen</thingClass>
+    <label>pollen</label>
+    <description>.</description>
+    <statBases>
+      <Cleanliness>-4</Cleanliness>
+    </statBases>
+    <graphicData>
+      <texPath>Things/Filth/Grainy</texPath>
+      <color>(255, 220, 40, 90)</color>
+      <drawSize>1</drawSize>
+    </graphicData>
+    <filth>
+      <ignoreFilthMultiplierStat>true</ignoreFilthMultiplierStat>
+      <disappearsInDays>3~5</disappearsInDays>
+      <rainWashes>true</rainWashes>
+      <cleaningWorkToReduceThickness>50</cleaningWorkToReduceThickness>
+      <canFilthAttach>true</canFilthAttach>
+    </filth>
+  </ThingDef>
+
+</Defs>

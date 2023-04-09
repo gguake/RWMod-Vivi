@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <StyleItemCategoryDef>
+    <defName>VV_Vivi</defName>
+    <label>vivi</label>
+  </StyleItemCategoryDef>
+
+  <HairDef Abstract="True" Name="ViviHairBase">
+    <styleGender>Any</styleGender>
+    <category>VV_Vivi</category>
+    <styleTags>
+      <li>VV_Vivi</li>
+    </styleTags>
+
+    <requiredGene>VV_HairGene</requiredGene>
+  </HairDef>
+
+  <HairDef ParentName="ViviHairBase">
+    <defName>VV_HairA</defName>
+    <label>hairA</label>
+    <texPath>Things/Pawn/Vivi/Hairs/HairA</texPath>
+  </HairDef>
+
+  <HairDef ParentName="ViviHairBase">
+    <defName>VV_HairB</defName>
+    <label>hairB</label>
+    <texPath>Things/Pawn/Vivi/Hairs/HairB</texPath>
+  </HairDef>
+
+  <HairDef ParentName="ViviHairBase">
+    <defName>VV_RoyalHairA</defName>
+    <label>royal hairA</label>
+    <texPath>Things/Pawn/Vivi/Hairs/RoyalHairA</texPath>
+  </HairDef>
+
+
+</Defs>

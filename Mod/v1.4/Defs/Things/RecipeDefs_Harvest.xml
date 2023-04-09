@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <RecipeDef Class="VVRace.RecipeDef_Harvest">
+    <defName>VV_GatherHoney</defName>
+    <label>gather honey</label>
+    <description>.</description>
+    <jobString>Gathering honey.</jobString>
+    
+    <workAmount>600</workAmount>
+    <workSkill>Plants</workSkill>
+    <workSpeedStat>VV_HoneyHarvestSpeed</workSpeedStat>
+    <efficiencyStat>VV_HoneyHarvestYield</efficiencyStat>
+
+    <effectWorking>Harvest_Plant</effectWorking>
+    <soundWorking>Recipe_Brewing</soundWorking>
+    <uiIconThing>VV_RawHoney</uiIconThing>
+
+    <recipeUsers>
+      <li>VV_HarvestBarrel</li>
+    </recipeUsers>
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <targetCountAdjustment>10</targetCountAdjustment>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plant_Rose</li>
+            <li>Plant_Daylily</li>
+            <li>Plant_Dandelion</li>
+            <li>Plant_Astragalus</li>
+            <li>Plant_Clivia</li>
+            <li>Plant_Agave</li>
+            <li>Plant_Strawberry</li>
+            <li>Plant_Berry</li>
+            <li>Plant_PincushionCactus</li>
+            <li>Plant_SaguaroCactus</li>
+            <li>Plant_Ambrosia</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>Plant_Rose</li>
+        <li>Plant_Daylily</li>
+        <li>Plant_Dandelion</li>
+        <li>Plant_Astragalus</li>
+        <li>Plant_Clivia</li>
+        <li>Plant_Agave</li>
+        <li>Plant_Strawberry</li>
+        <li>Plant_Berry</li>
+        <li>Plant_PincushionCactus</li>
+        <li>Plant_SaguaroCactus</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+
+    <products>
+      <VV_RawHoney>15</VV_RawHoney>
+    </products>
+    <researchPrerequisite>VV_BasicGathering</researchPrerequisite>
+
+    <harvestWorkerType>VVRace.HarvestWorker_Honey</harvestWorkerType>
+    <maxPathDanger>Some</maxPathDanger>
+  </RecipeDef>
+  
+  <RecipeDef Class="VVRace.RecipeDef_Harvest">
+    <defName>VV_GatherPollen</defName>
+    <label>gather pollen</label>
+    <description>.</description>
+    <jobString>Gathering pollen.</jobString>
+    
+    <workAmount>200</workAmount>
+    <workSkill>Plants</workSkill>
+    <workSpeedStat>CleaningSpeed</workSpeedStat>
+    <efficiencyStat>PlantHarvestYield</efficiencyStat>
+
+    <effectWorking>Clean</effectWorking>
+    <soundWorking>Interact_CleanFilth</soundWorking>
+    <uiIconThing>VV_Pollen</uiIconThing>
+
+    <recipeUsers>
+      <li>VV_HarvestBarrel</li>
+    </recipeUsers>
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <targetCountAdjustment>10</targetCountAdjustment>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_FilthPollen</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>VV_FilthPollen</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+
+    <products>
+      <VV_Pollen>5</VV_Pollen>
+    </products>
+    <researchPrerequisite>VV_BasicGathering</researchPrerequisite>
+
+    <harvestWorkerType>VVRace.HarvestWorker_Pollen</harvestWorkerType>
+    <maxPathDanger>Some</maxPathDanger>
+  </RecipeDef>
+  
+  <RecipeDef Class="VVRace.RecipeDef_Harvest">
+    <defName>VV_GatherPropolis</defName>
+    <label>gather propolis</label>
+    <description>.</description>
+    <jobString>Gathering propolis.</jobString>
+    
+    <workAmount>1500</workAmount>
+    <workSkill>Plants</workSkill>
+    <workSpeedStat>PlantWorkSpeed</workSpeedStat>
+    <efficiencyStat>PlantHarvestYield</efficiencyStat>
+
+    <effectWorking>Clean</effectWorking>
+    <soundWorking>Interact_CleanFilth</soundWorking>
+    <uiIconThing>VV_Propolis</uiIconThing>
+
+    <recipeUsers>
+      <li>VV_HarvestBarrel</li>
+    </recipeUsers>
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <targetCountAdjustment>10</targetCountAdjustment>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plant_SaguaroCactus</li>
+            <li>Plant_TreeDrago</li>
+            <li>Plant_TreeWillow</li>
+            <li>Plant_TreeCypress</li>
+            <li>Plant_TreeMaple</li>
+            <li>Plant_Chokevine</li>
+            <li>Plant_TreeOak</li>
+            <li>Plant_TreePoplar</li>
+            <li>Plant_TreePine</li>
+            <li>Plant_TreeBirch</li>
+            <li>Plant_TreeTeak</li>
+            <li>Plant_TreeCecropia</li>
+            <li>Plant_TreePalm</li>
+            <li>Plant_TreeBamboo</li>
+            <li>Plant_TreeCocoa</li>
+            <li MayRequire="Ludeon.RimWorld.Ideology">Plant_TreeBonsai</li>
+            <li MayRequire="Ludeon.RimWorld.Royalty">Plant_TreeAnima</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>Plant_SaguaroCactus</li>
+        <li>Plant_TreeDrago</li>
+        <li>Plant_TreeWillow</li>
+        <li>Plant_TreeCypress</li>
+        <li>Plant_TreeMaple</li>
+        <li>Plant_Chokevine</li>
+        <li>Plant_TreeOak</li>
+        <li>Plant_TreePoplar</li>
+        <li>Plant_TreePine</li>
+        <li>Plant_TreeBirch</li>
+        <li>Plant_TreeTeak</li>
+        <li>Plant_TreeCecropia</li>
+        <li>Plant_TreePalm</li>
+        <li>Plant_TreeBamboo</li>
+        <li>Plant_TreeCocoa</li>
+        <li MayRequire="Ludeon.RimWorld.Ideology">Plant_TreeBonsai</li>
+        <li MayRequire="Ludeon.RimWorld.Royalty">Plant_TreeAnima</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+
+    <products>
+      <VV_Propolis>1</VV_Propolis>
+    </products>
+    <researchPrerequisite>VV_AdvancedGathering</researchPrerequisite>
+
+    <harvestWorkerType>VVRace.HarvestWorker_Propolis</harvestWorkerType>
+    <maxPathDanger>Some</maxPathDanger>
+  </RecipeDef>
+  
+</Defs>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <VV_BasicInfra.label>비비 기초 시설</VV_BasicInfra.label>
+  <VV_BasicInfra.description>비비들이 사용하는 기초적인 생산 시설과 구조물을 건설할 수 있습니다.</VV_BasicInfra.description>
+  
+  <VV_BasicGathering.label>비비 기초 채집학</VV_BasicGathering.label>
+  <VV_BasicGathering.description>비비들의 주식인 꿀과 꽃가루를 채집하는 시설을 건설하고 기초적인 가공품을 만들 수 있습니다.</VV_BasicGathering.description>
+  
+  <VV_AdvancedGathering.label>비비 고급 채집학</VV_AdvancedGathering.label>
+  <VV_AdvancedGathering.description>비비들이 자연에서 희귀한 물질들을 채집할 수 있습니다.</VV_AdvancedGathering.description>
+</LanguageData>

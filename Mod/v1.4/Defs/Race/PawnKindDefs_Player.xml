@@ -1,0 +1,54 @@
+<Defs>
+  <PawnKindDef ParentName="ViviBase" Name="PlayerVivi">
+    <defName>VV_PlayerVivi</defName>
+    <label>vivi</label>
+    <defaultFactionType>VV_PlayerVivi</defaultFactionType>
+
+    <isFighter>false</isFighter>
+    <apparelIgnoreSeasons>true</apparelIgnoreSeasons>
+    <apparelIgnorePollution MayRequire="Ludeon.RimWorld.Biotech">true</apparelIgnorePollution>
+    <forceNormalGearQuality>true</forceNormalGearQuality>
+    <combatPower>45</combatPower>
+    <gearHealthRange>1.0~1.0</gearHealthRange>
+    <apparelMoney>500~1000</apparelMoney>
+    <apparelAllowHeadgearChance>0</apparelAllowHeadgearChance>
+
+    <initialWillRange>0~0</initialWillRange>
+    <initialResistanceRange>13~21</initialResistanceRange>
+
+    <backstoryFiltersOverride>
+      <li>
+        <categories>
+          <li>VV_SettlerBackstory</li>
+        </categories>
+        <categoriesAdulthood>
+          <li>VV_SettlerBackstory</li>
+        </categoriesAdulthood>
+      </li>
+    </backstoryFiltersOverride>
+  </PawnKindDef>
+  
+  <PawnKindDef ParentName="PlayerVivi" Name="PlayerRoyalVivi" Class="VVRace.PawnKindDefExt">
+    <defName>VV_PlayerRoyalVivi</defName>
+    <label>royal vivi</label>
+    <isRoyal>true</isRoyal>
+  </PawnKindDef>
+  
+  <PawnKindDef ParentName="PlayerRoyalVivi" Class="VVRace.PawnKindDefExt">
+    <defName>VV_PlayerExiledRoyalVivi</defName>
+    <label>exiled royal vivi</label>
+    <defaultFactionType>VV_PlayerExiledVivi</defaultFactionType>
+    
+    <backstoryFiltersOverride Inherit="False">
+      <li>
+        <categoriesChildhood>
+          <li>VV_SettlerBackstory</li>
+        </categoriesChildhood>
+        <categoriesAdulthood>
+          <li>VV_PlayerExiledBackstory</li>
+        </categoriesAdulthood>
+      </li>
+    </backstoryFiltersOverride>
+    <preventRoyalBodyType>true</preventRoyalBodyType>
+  </PawnKindDef>
+</Defs>

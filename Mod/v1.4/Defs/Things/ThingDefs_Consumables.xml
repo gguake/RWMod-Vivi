@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 꽃가루 -->
+  <ThingDef ParentName="ResourceBase">
+    <defName>VV_Pollen</defName>
+    <label>vivi pollen</label>
+    <description>.</description>
+    <graphicData>
+      <texPath>Things/Item/VV_ViviDust</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <thingCategories>
+      <li>VV_ViviProduct</li>
+    </thingCategories>
+
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Grain_Drop</soundInteract>
+    <soundDrop>Grain_Drop</soundDrop>
+    
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <MarketValue>0.7</MarketValue>
+      <MaxHitPoints>60</MaxHitPoints>
+      <Mass>0.05</Mass>
+      <Flammability>1.0</Flammability>
+      <Nutrition>0.03</Nutrition>
+      <FoodPoisonChanceFixedHuman>0.3</FoodPoisonChanceFixedHuman>
+    </statBases>
+    <stackLimit>75</stackLimit>
+
+    <ingestible>
+      <preferability>NeverForNutrition</preferability>
+      <tasteThought>AteRawFood</tasteThought>
+      <foodType>VegetableOrFruit</foodType>
+    </ingestible>
+    <tradeability>None</tradeability>
+  </ThingDef>
+  
+  <!-- 정제되지 않은 꿀 -->
+  <ThingDef ParentName="OrganicProductBase">
+    <defName>VV_RawHoney</defName>
+    <label>vivi raw honey</label>
+    <description>.</description>
+    <graphicData>
+      <texPath>Things/Item/VV_CombHoney</texPath>
+    </graphicData>
+    <socialPropernessMatters>true</socialPropernessMatters>
+    <statBases>
+      <MarketValue>1.8</MarketValue>
+      <Mass>0.1</Mass>
+      <MaxHitPoints>60</MaxHitPoints>
+      <Flammability>0.5</Flammability>
+      <Nutrition>0.05</Nutrition>
+    </statBases>
+    <stackLimit>75</stackLimit>
+    <comps>
+    </comps>
+    <ingestible>
+      <preferability>RawTasty</preferability>
+      <foodType>AnimalProduct, Fluid</foodType>
+    </ingestible>
+    <thingCategories>
+      <li>VV_ViviProduct</li>
+    </thingCategories>
+  </ThingDef>
+  
+  <!-- 정제된 꿀 -->
+  <ThingDef ParentName="OrganicProductBase">
+    <defName>VV_FilteredHoney</defName>
+    <label>vivi filtered honey</label>
+    <description>.</description>
+    <graphicData>
+      <texPath>Things/Item/VV_FilteredHoney</texPath>
+    </graphicData>
+    <socialPropernessMatters>true</socialPropernessMatters>
+    <statBases>
+      <MarketValue>2.0</MarketValue>
+      <Mass>0.075</Mass>
+      <MaxHitPoints>60</MaxHitPoints>
+      <Flammability>0</Flammability>
+      <Nutrition>0.06</Nutrition>
+      <FoodPoisonChanceFixedHuman>0</FoodPoisonChanceFixedHuman>
+    </statBases>
+    <stackLimit>75</stackLimit>
+    <comps>
+    </comps>
+    <ingestible>
+      <preferability>MealSimple</preferability>
+      <foodType>AnimalProduct, Fluid</foodType>
+    </ingestible>
+    <thingCategories>
+      <li>VV_ViviProduct</li>
+    </thingCategories>
+  </ThingDef>
+
+	<!-- 꿀 경단 -->
+  <ThingDef ParentName="OrganicProductBase">
+    <defName>VV_HoneyPollenCake</defName>
+    <label>vivi honey pollen cake</label>
+    <description>test</description>
+    <graphicData>
+      <texPath>Things/Item/VV_HoneyCake</texPath>
+    </graphicData>
+    <socialPropernessMatters>true</socialPropernessMatters>
+    <thingCategories>
+      <li>VV_ViviProduct</li>
+    </thingCategories>
+
+    <statBases>
+      <MarketValue>12</MarketValue>
+      <Mass>0.5</Mass>
+      <MaxHitPoints>60</MaxHitPoints>
+      <Flammability>0</Flammability>
+      <Nutrition>0.9</Nutrition>
+      <WorkToMake>400</WorkToMake>
+      <DeteriorationRate>2</DeteriorationRate>
+    </statBases>
+
+    <ingestible>
+      <foodType>Meal</foodType>
+      <preferability>MealSimple</preferability>
+      <babiesCanIngest>true</babiesCanIngest>
+      <ingestSound>Ingest_Pill</ingestSound>
+      <optimalityOffsetHumanlikes>6</optimalityOffsetHumanlikes>
+      <optimalityOffsetFeedingAnimals>-15</optimalityOffsetFeedingAnimals>
+			
+      <outcomeDoers>
+        <li Class="IngestionOutcomeDoer_GiveHediff">
+          <hediffDef>VV_ViviGrowthBoost</hediffDef>
+        </li>
+      </outcomeDoers>
+    </ingestible>
+
+    <stackLimit>10</stackLimit>
+    <comps>
+			<li Class="CompProperties_Rottable">
+				<daysToRotStart>120</daysToRotStart>
+				<rotDestroys>true</rotDestroys>
+			</li>
+    </comps>
+    <allowedArchonexusCount>80</allowedArchonexusCount>
+  </ThingDef>
+
+	<!-- 로얄 젤리 -->
+	<ThingDef ParentName="OrganicProductBase">
+		<defName>VV_RoyalJelly</defName>
+		<label>royal jelly</label>
+		<description>.</description>
+		<graphicData>
+			<texPath>Things/Item/VV_RoyalJelly</texPath>
+		</graphicData>
+		<socialPropernessMatters>true</socialPropernessMatters>
+		<thingCategories>
+			<li>VV_ViviProduct</li>
+		</thingCategories>
+
+		<statBases>
+			<MarketValue>15</MarketValue>
+			<Mass>0.1</Mass>
+			<MaxHitPoints>60</MaxHitPoints>
+			<Nutrition>0.1</Nutrition>
+		</statBases>
+
+		<ingestible>
+      <foodType>Meal</foodType>
+			<preferability>MealTerrible</preferability>
+      <babiesCanIngest>true</babiesCanIngest>
+			<joy>0.2</joy>
+			<joyKind>Gluttonous</joyKind>
+      <outcomeDoers>
+        <li Class="IngestionOutcomeDoer_GiveHediff">
+          <hediffDef>VV_RoyalJelly</hediffDef>
+        </li>
+        <li Class="IngestionOutcomeDoer_GiveHediff">
+          <hediffDef>VV_ViviGrowthBoost</hediffDef>
+        </li>
+      </outcomeDoers>
+		</ingestible>
+
+    <stackLimit>10</stackLimit>
+		<comps>
+			<li Class="CompProperties_Rottable">
+				<daysToRotStart>120</daysToRotStart>
+				<rotDestroys>true</rotDestroys>
+			</li>
+		</comps>
+	</ThingDef>
+
+</Defs>

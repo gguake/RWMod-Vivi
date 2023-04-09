@@ -1,0 +1,25 @@
+﻿using UnityEngine;
+using Verse;
+
+namespace VVRace
+{
+    public class GeneBodyTypeOverride
+    {
+        public string overrideGraphicPath;
+        public Vector2 headOffset;
+    }
+
+    public class GeneBodyTypeOverrideSet
+    {
+        public GeneBodyTypeOverride Child;
+        public GeneBodyTypeOverride Thin;
+        public GeneBodyTypeOverride Female;
+    }
+
+    public class GeneDefExt : GeneDef
+    {
+        public GeneBodyTypeOverrideSet bodyTypeOverrides;
+
+        public float eggLayIntervalDays = -1f;
+    }
+}

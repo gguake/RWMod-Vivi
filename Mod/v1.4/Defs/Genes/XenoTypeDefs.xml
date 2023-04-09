@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <XenotypeDef>
+    <defName>VV_Vivi</defName>
+    <label>vivi</label>
+    <description>.</description>
+    <descriptionShort>.</descriptionShort>
+    <iconPath>UI/Icons/Xenotypes/Vivi</iconPath>
+    <inheritable>true</inheritable>
+    <nameMaker>NamerPersonPigskin</nameMaker>
+    <chanceToUseNameMaker>1</chanceToUseNameMaker>
+    <genes>
+      <li>VV_ViviGene</li>
+      <li>VV_HeadGene</li>
+      <li>VV_HairGene</li>
+      <li>VV_BodyGene</li>
+      <li>VV_SkinColorGene</li>
+      
+      <li>VV_WingGene</li>
+      <li>VV_AntennaeGene</li>
+
+      <li>VV_ViviMindset</li>
+      <li>Mood_Optimist</li>
+      <li>FireTerror</li>
+
+      <li>Learning_Fast</li>
+      <li>MinTemp_SmallIncrease</li>
+      <li>MaxTemp_SmallIncrease</li>
+      <li>PsychicAbility_Enhanced</li>
+      <li>AptitudeStrong_Construction</li>
+      <li>AptitudeStrong_Plants</li>
+      <li>AptitudePoor_Shooting</li>
+      <li>AptitudePoor_Animals</li>
+      <li>AptitudeTerrible_Mining</li>
+
+      <li>Body_Thin</li>
+      <li>Beard_NoBeardOnly</li>
+    </genes>
+  </XenotypeDef>
+
+</Defs>

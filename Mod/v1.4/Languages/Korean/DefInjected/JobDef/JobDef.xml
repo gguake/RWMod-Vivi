@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <VV_HarvestHoney.reportString>TargetA에서 꿀 채집 중.</VV_HarvestHoney.reportString>
+  <VV_HarvestPollen.reportString>꽃가루 채집 중.</VV_HarvestPollen.reportString>
+  <VV_HarvestPropolis.reportString>TargetA에서 프로폴리스 채집 중.</VV_HarvestPropolis.reportString>
+
+  <VV_LayViviEgg.reportString>알 낳는 중.</VV_LayViviEgg.reportString>
+  <VV_HaulViviEgg.reportString>부화기로 알 운반 중.</VV_HaulViviEgg.reportString>
+  
+  <VV_ConnectMindLink.reportString>TargetA와 정신 결속을 연결하는 중.</VV_ConnectMindLink.reportString>
+  <VV_DisconnectMindLink.reportString>TargetA와 정신 결속을 해제하는 중.</VV_DisconnectMindLink.reportString>
+</LanguageData>

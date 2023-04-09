@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 꽃가루 떡 -->
+  <RecipeDef>
+    <defName>VV_Make_HoneyPollenCake</defName>
+    <label>make honey pollen cake</label>
+    <description>Make honey pollen cake.</description>
+    <jobString>Making honey pollen cake.</jobString>
+    <workSpeedStat>CookSpeed</workSpeedStat>
+    <requiredGiverWorkType>Cooking</requiredGiverWorkType>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_CookMeal</soundWorking>
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <ingredientValueGetterClass>IngredientValueGetter_Nutrition</ingredientValueGetterClass>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_FilteredHoney</li>
+          </thingDefs>
+        </filter>
+        <count>0.4</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_Pollen</li>
+          </thingDefs>
+        </filter>
+        <count>0.4</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>VV_FilteredHoney</li>
+        <li>VV_Pollen</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <defaultIngredientFilter>
+      <thingDefs>
+        <li>VV_FilteredHoney</li>
+        <li>VV_Pollen</li>
+      </thingDefs>
+    </defaultIngredientFilter>
+    <products>
+      <VV_HoneyPollenCake>1</VV_HoneyPollenCake>
+    </products>
+    <workSkill>Cooking</workSkill>
+    <researchPrerequisite>VV_BasicGathering</researchPrerequisite>
+  </RecipeDef>
+  
+  <!-- 꽃가루 떡 벌크 -->
+  <RecipeDef>
+    <defName>VV_Make_HoneyPollenCake_Bulk</defName>
+    <label>make honey pollen cake x4</label>
+    <description>Make bulk honey pollen cake.</description>
+    <jobString>Making bulk honey pollen cake.</jobString>
+    <workAmount>1800</workAmount>
+    <workSpeedStat>CookSpeed</workSpeedStat>
+    <requiredGiverWorkType>Cooking</requiredGiverWorkType>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_CookMeal</soundWorking>
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <ingredientValueGetterClass>IngredientValueGetter_Nutrition</ingredientValueGetterClass>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_FilteredHoney</li>
+          </thingDefs>
+        </filter>
+        <count>1.6</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_Pollen</li>
+          </thingDefs>
+        </filter>
+        <count>1.6</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>VV_FilteredHoney</li>
+        <li>VV_Pollen</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <defaultIngredientFilter>
+      <thingDefs>
+        <li>VV_FilteredHoney</li>
+        <li>VV_Pollen</li>
+      </thingDefs>
+    </defaultIngredientFilter>
+    <products>
+      <VV_HoneyPollenCake>4</VV_HoneyPollenCake>
+    </products>
+    <workSkill>Cooking</workSkill>
+    <researchPrerequisite>VV_BasicGathering</researchPrerequisite>
+  </RecipeDef>
+</Defs>

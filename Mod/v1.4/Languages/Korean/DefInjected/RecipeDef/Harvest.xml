@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <VV_GatherHoney.label>꿀 채집</VV_GatherHoney.label>
+  <VV_GatherHoney.description>성장중인 작물이나 꽃 등의 식물에서 꿀을 채집합니다. 꿀을 채집할때 해당 식물이 조금 자랍니다.</VV_GatherHoney.description>
+
+  <VV_GatherPollen.label>꽃가루 채집</VV_GatherPollen.label>
+  <VV_GatherPollen.description>주변의 바닥에 흩어진 꽃가루를 모아 채집합니다.</VV_GatherPollen.description>
+
+  <VV_GatherPropolis.label>프로폴리스 채집</VV_GatherPropolis.label>
+  <VV_GatherPropolis.description>주변의 나무에서 희귀한 프로폴리스를 채집합니다. 채집에 많은 시간이 걸립니다.</VV_GatherPropolis.description>
+</LanguageData>

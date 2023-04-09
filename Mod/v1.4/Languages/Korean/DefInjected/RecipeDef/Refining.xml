@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <VV_MakeVivicream.label>비비 크림 만들기</VV_MakeVivicream.label>
+  <VV_MakeVivicream.description>비비가 몸에서 크림을 만들어내 모으게 합니다. 비비만 만들 수 있고 약간의 열량을 소모하며 배고프면 만들 수 없습니다.</VV_MakeVivicream.description>
+
+  <VV_MakeViviwax.label>비비 밀랍 만들기</VV_MakeViviwax.label>
+  <VV_MakeViviwax.description>비비 크림을 가공해 밀랍을 만들어냅니다.</VV_MakeViviwax.description>
+
+  <VV_FilteringHoney.label>비비 꿀 정제</VV_FilteringHoney.label>
+  <VV_FilteringHoney.description>비비 꿀에서 불순물을 제거한 순수한 꿀을 정제합니다.</VV_FilteringHoney.description>
+</LanguageData>

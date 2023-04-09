@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <ThingDef ParentName="Wall">
+    <defName>VV_ViviCreamWall</defName>
+    <label>vivicream wall</label>
+    <description>.</description>
+    <graphicData>
+      <texPath>Things/Building/Linked/Rock_Atlas</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <color>(1.0, 0.9, 0.7, 1.0)</color>
+    </graphicData>
+    <tickerType>Long</tickerType>
+    
+    <uiIconPath>Things/Building/Linked/WallPlanks_MenuIcon</uiIconPath>
+    <uiIconColor>(1.0, 0.9, 0.7, 1.0)</uiIconColor>
+    <statBases>
+      <MaxHitPoints>50</MaxHitPoints>
+      <WorkToBuild>30</WorkToBuild>
+      <Flammability>1.0</Flammability>
+    </statBases>
+    <costList>
+      <VV_Vivicream>1</VV_Vivicream>
+    </costList>
+    <useStuffTerrainAffordance>false</useStuffTerrainAffordance>
+    
+    <designationCategory>VV_Bulidings</designationCategory>
+    <comps Inherit="False">
+      <li Class="VVRace.CompProperties_CompWallReplace" />
+    </comps>
+    <researchPrerequisites>
+      <li>VV_BasicInfra</li>
+    </researchPrerequisites>
+    
+    <damageMultipliers Inherit="False">
+      <li>
+        <damageDef>Bomb</damageDef>
+        <multiplier>2</multiplier>
+      </li>
+      <li>
+        <damageDef>Thump</damageDef>
+        <multiplier>2</multiplier>
+      </li>
+      <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>4</multiplier>
+      </li>
+    </damageMultipliers>
+    
+    <costStuffCount>0</costStuffCount>
+    <stuffCategories Inherit="False"></stuffCategories>
+  </ThingDef>
+  
+  <!-- 비비 부화장 -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>VV_ViviHatchery</defName>
+    <label>vivi hatchery</label>
+    <description>.</description>
+    <thingClass>VVRace.ViviEggHatchery</thingClass>
+    <tickerType>Rare</tickerType>
+
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <graphicData>
+      <texPath>Things/Building/VV_Hatchery</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(1.5, 1.5)</drawSize>
+      <drawRotated>false</drawRotated>
+    </graphicData>
+    <castEdgeShadows>true</castEdgeShadows>
+
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.4</fillPercent>
+    <pathCost>50</pathCost>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <Mass>8</Mass>
+      <WorkToBuild>700</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Beauty>0.5</Beauty>
+    </statBases>
+    <size>(1,1)</size>
+
+    <costList>
+      <VV_Viviwax>100</VV_Viviwax>
+    </costList>
+
+    <defaultPlacingRot>South</defaultPlacingRot>
+    <building>
+      <preventDeteriorationOnTop>true</preventDeteriorationOnTop>
+      <ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
+    </building>
+    <designationCategory>VV_Bulidings</designationCategory>
+    <designationHotKey>Misc1</designationHotKey>
+    <staticSunShadowHeight>0.5</staticSunShadowHeight>
+
+    <surfaceType>Item</surfaceType>
+    <canOverlapZones>false</canOverlapZones>
+    <comps>
+      <li Class="CompProperties_Forbiddable"/>
+      <li Class="VVRace.CompProperties_ViviHatcheryEggDrawer">
+        <graphicData>
+          <texPath>Things/Building/VV_Hatchery_front</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <shaderType>CutoutComplex</shaderType>
+          <drawSize>(1.5, 1.5)</drawSize>
+          <drawRotated>false</drawRotated>
+        </graphicData>
+      </li>
+    </comps>
+    <researchPrerequisites>
+      <li>VV_BasicInfra</li>
+    </researchPrerequisites>
+  </ThingDef>
+  
+  <!-- 비비 채집통 -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>VV_HarvestBarrel</defName>
+    <label>vivi harvest barrel</label>
+    <description>test</description>
+    <thingClass>Building_WorkTable</thingClass>
+
+    <graphicData>
+      <texPath>Things/Building/VV_HoneyHarvestBarrel</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(2.0,2.0)</drawSize>
+      <drawRotated>false</drawRotated>
+      <damageData>
+        <rect>(0.05,0.1,0.9,0.9)</rect>
+      </damageData>
+      <shadowData>
+        <volume>(0.75, 0.35, 0.33)</volume>
+      </shadowData>
+    </graphicData>
+
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <useHitPoints>True</useHitPoints>
+    <fillPercent>0.5</fillPercent>
+    <pathCost>50</pathCost>
+    <statBases>
+      <Mass>20</Mass>
+      <WorkToBuild>2000</WorkToBuild>
+      <MaxHitPoints>100</MaxHitPoints>
+      <Flammability>1.0</Flammability>
+      <Cleanliness>-2</Cleanliness>
+    </statBases>
+    <size>(1,1)</size>
+    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+
+    <stuffCategories>
+      <li>Woody</li>
+      <li>Stony</li>
+    </stuffCategories>
+    <costStuffCount>50</costStuffCount>
+
+    <inspectorTabs>
+      <li>ITab_Bills</li>
+    </inspectorTabs>
+    <thingCategories>
+      <li>VV_BuildingsVivi</li>
+    </thingCategories>
+
+    <hasInteractionCell>True</hasInteractionCell>
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <building>
+      <buildingTags>
+        <li>Production</li>
+      </buildingTags>
+    </building>
+    <designationCategory>VV_Bulidings</designationCategory>
+    <designationHotKey>Misc2</designationHotKey>
+    <placeWorkers>
+      <li>PlaceWorker_PreventInteractionSpotOverlap</li>
+    </placeWorkers>
+    
+    <surfaceType>Item</surfaceType>
+    <canOverlapZones>false</canOverlapZones>
+    <comps>
+    </comps>
+    <researchPrerequisites>
+      <li>VV_BasicGathering</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  
+  <!-- 비비 작업대 -->
+  <ThingDef ParentName="BenchBase">
+    <defName>VV_RefiningWorkbench</defName>
+    <label>vivi refining workbench</label>
+    <description>TEST</description>
+    <thingClass>Building_WorkTable</thingClass>
+    <graphicData>
+      <texPath>Things/Building/VV_RefiningTable</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(4,4)</drawSize>
+      <shadowData>
+        <volume>(2.9, 0.3, 0.5)</volume>
+        <offset>(0, 0, 0)</offset>
+      </shadowData>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+    </graphicData>
+    <costList>
+      <Steel>20</Steel>
+    </costList>
+    <stuffCategories>
+      <li>Woody</li>
+      <li>Stony</li>
+    </stuffCategories>
+    <costStuffCount>80</costStuffCount>
+    <altitudeLayer>Building</altitudeLayer>
+    <fillPercent>0.5</fillPercent>
+    <useHitPoints>True</useHitPoints>
+    <statBases>
+      <WorkToBuild>2500</WorkToBuild>
+      <MaxHitPoints>180</MaxHitPoints>
+      <Flammability>1.0</Flammability>
+      <Cleanliness>-5</Cleanliness>
+    </statBases>
+    <size>(2,1)</size>
+    <designationCategory>VV_Bulidings</designationCategory>
+    <designationHotKey>Misc3</designationHotKey>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <hasInteractionCell>True</hasInteractionCell>
+    <interactionCellOffset>(1,0,-1)</interactionCellOffset>
+    <surfaceType>Item</surfaceType>
+    <recipes>
+      <li>VV_MakeVivicream</li>
+      <li>VV_MakeViviwax</li>
+      <li>VV_FilteringHoney</li>
+    </recipes>
+    <inspectorTabs>
+      <li>ITab_Bills</li>
+    </inspectorTabs>
+    <building>
+      <spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity>
+    </building>
+    <comps>
+      <li Class="CompProperties_AffectedByFacilities">
+        <linkableFacilities>
+          <li>ToolCabinet</li>
+        </linkableFacilities>
+      </li>
+    </comps>
+    <placeWorkers>
+      <li>PlaceWorker_ShowFacilitiesConnections</li>
+      <li>PlaceWorker_PreventInteractionSpotOverlap</li>
+    </placeWorkers>
+    <researchPrerequisites>
+      <li>VV_BasicInfra</li>
+    </researchPrerequisites>
+  </ThingDef>
+</Defs>

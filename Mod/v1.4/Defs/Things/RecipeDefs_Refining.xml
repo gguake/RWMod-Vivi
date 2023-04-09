@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 비비 크림 생산 -->
+  <RecipeDef>
+    <defName>VV_MakeVivicream</defName>
+    <label>make vivicream</label>
+    <description>test</description>
+    <jobString>making vivicream.</jobString>
+    <workAmount>400</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <workSkill>Crafting</workSkill>
+
+    <effectWorking>Clean</effectWorking>
+    <soundWorking>Recipe_Brewing</soundWorking>
+    <uiIconThing>VV_Vivicream</uiIconThing>
+
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <ingredients>
+    </ingredients>
+    <fixedIngredientFilter>
+    </fixedIngredientFilter>
+    <products>
+      <VV_Vivicream>15</VV_Vivicream>
+    </products>
+    <researchPrerequisite>VV_BasicInfra</researchPrerequisite>
+  </RecipeDef>
+
+  <!-- 밀랍 정제 -->
+  <RecipeDef>
+    <defName>VV_MakeViviwax</defName>
+    <label>make viviwax</label>
+    <description>test</description>
+    <jobString>making viviwax.</jobString>
+    <workAmount>500</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <workSkill>Crafting</workSkill>
+
+    <effectWorking>Clean</effectWorking>
+    <soundWorking>Recipe_Brewing</soundWorking>
+    <uiIconThing>VV_Viviwax</uiIconThing>
+
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_Vivicream</li>
+          </thingDefs>
+        </filter>
+        <count>10</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>VV_Vivicream</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <VV_Viviwax>25</VV_Viviwax>
+    </products>
+    <researchPrerequisite>VV_BasicInfra</researchPrerequisite>
+  </RecipeDef>
+
+  <!-- 꿀 정제 -->
+  <RecipeDef>
+    <defName>VV_FilteringHoney</defName>
+    <label>filter honey</label>
+    <description>test</description>
+    <jobString>filtering honey.</jobString>
+    <workAmount>600</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <workSkill>Crafting</workSkill>
+
+    <effectWorking>Clean</effectWorking>
+    <soundWorking>Recipe_Brewing</soundWorking>
+    <uiIconThing>VV_FilteredHoney</uiIconThing>
+
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_RawHoney</li>
+          </thingDefs>
+        </filter>
+        <count>10</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>VV_RawHoney</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <VV_FilteredHoney>10</VV_FilteredHoney>
+      <VV_Viviwax>2</VV_Viviwax>
+    </products>
+    <researchPrerequisite>VV_BasicGathering</researchPrerequisite>
+  </RecipeDef>
+</Defs>

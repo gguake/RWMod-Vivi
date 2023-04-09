@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <ThingDef ParentName="OrganicProductBase">
+    <defName>VV_ViviEgg</defName>
+    <label>vivi egg</label>
+    <description>.</description>
+    <graphicData>
+      <graphicClass>VVRace.Graphic_ViviEgg</graphicClass>
+      <texPath>Things/Item/VV_ViviEgg</texPath>
+      <color>(245,245,200)</color>
+    </graphicData>
+    <ingestible>
+      <preferability>NeverForNutrition</preferability>
+      <foodType>AnimalProduct</foodType>
+      <ingestEffect>EatMeat</ingestEffect>
+      <ingestSound>RawMeat_Eat</ingestSound>
+      <tasteThought>AteRawFood</tasteThought>
+    </ingestible>
+    <socialPropernessMatters>false</socialPropernessMatters>
+    <statBases>
+      <Mass>0.15</Mass>
+      <MaxHitPoints>50</MaxHitPoints>
+      <DeteriorationRate>0</DeteriorationRate>
+      <Flammability>1.0</Flammability>
+      <Nutrition>0.25</Nutrition>
+      <MarketValue>5.0</MarketValue>
+    </statBases>
+    <stackLimit>1</stackLimit>
+    <healthAffectsPrice>true</healthAffectsPrice>
+    <thingCategories>
+      <li>EggsFertilized</li>
+    </thingCategories>
+    <tickerType>Rare</tickerType>
+    <comps>
+      <li Class="CompProperties_TemperatureRuinable">
+        <minSafeTemperature>20</minSafeTemperature>
+        <maxSafeTemperature>36</maxSafeTemperature>
+        <progressPerDegreePerTick>0.00001</progressPerDegreePerTick>
+      </li>
+
+      <li Class="VVRace.CompProperties_ViviHatcher">
+        <hatcherDaystoHatch>0.5</hatcherDaystoHatch>
+      </li>
+    </comps>
+    <drawGUIOverlay>false</drawGUIOverlay>
+  </ThingDef>
+</Defs>

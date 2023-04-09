@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <VV_RoyalGeneLabelPrefix>Royal</VV_RoyalGeneLabelPrefix>
+  <VV_ApparelBodyTypeNotMatching>Body type not matching</VV_ApparelBodyTypeNotMatching>
+
+  <VV_GizmoViviBandwidthHeader>Mindlinks</VV_GizmoViviBandwidthHeader>
+  <VV_GizmoViviBandwidthTooltip>.</VV_GizmoViviBandwidthTooltip>
+  <VV_GizmoViviEggProgressHeader>Egg Progress</VV_GizmoViviEggProgressHeader>
+  <VV_GizmoViviEggProgressTooltip>Egg Progress</VV_GizmoViviEggProgressTooltip>
+
+  <VV_InspectorViviHatcheryDisabled>Hatchery disabled</VV_InspectorViviHatcheryDisabled>
+  <VV_InspectorViviHatcheryDisabledReasonNoRoof>No roof</VV_InspectorViviHatcheryDisabledReasonNoRoof>
+  <VV_InspectorViviHatcheryDisabledReasonOutdoor>Outdoor</VV_InspectorViviHatcheryDisabledReasonOutdoor>
+
+  <VV_LetterViviEggHatchedLabel>new vivi born</VV_LetterViviEggHatchedLabel>
+  <VV_LetterViviEggHatched>.</VV_LetterViviEggHatched>
+  <VV_LetterViviEggHatchedNoParent>.</VV_LetterViviEggHatchedNoParent>
+  <VV_LetterRoyalViviGrownLabel>new royal vivi: {PAWN}</VV_LetterRoyalViviGrownLabel>
+  <VV_LetterRoyalViviGrown>.</VV_LetterRoyalViviGrown>
+
+  <VV_CommandConnectMindLink>connect mindlink</VV_CommandConnectMindLink>
+  <VV_CommandConnectMindLinkDesc>.</VV_CommandConnectMindLinkDesc>
+  <VV_CommandCancelConnectMindLink>cancel connect mindlink</VV_CommandCancelConnectMindLink>
+  <VV_CommandDisconnectMindLink>Disconnect Mindlink</VV_CommandDisconnectMindLink>
+  <VV_CommandDisconnectMindLinkDesc>.</VV_CommandDisconnectMindLinkDesc>
+  <VV_CommandCancelDisconnectMindLink>cancel disconnect mindlink</VV_CommandCancelDisconnectMindLink>
+
+  <VV_MessageMindLinkConnected></VV_MessageMindLinkConnected>
+  <VV_MessageMindLinkDisconnected></VV_MessageMindLinkDisconnected>
+  <VV_MessageMindLinkForceDisconnected>Mindlink force disconnected</VV_MessageMindLinkForceDisconnected>
+
+  <VV_MindLinkerDowned>{PAWN_labelShort} is downed.</VV_MindLinkerDowned>
+  <VV_MindLinkerImprisoned>{PAWN_labelShort} is a prisoner.</VV_MindLinkerImprisoned>
+  <VV_MindLinkerInsideContainer>{PAWN_labelShort} is inside {CONTAINER}</VV_MindLinkerInsideContainer>
+  <VV_MindLinkerMentalState>{PAWN_labelShort} is in a '{MENTALSTATE_label}' mental state.</VV_MindLinkerMentalState>
+
+  <VV_JobFailReasonNoHarvestablePlants>No gatherable mature plants nearby.</VV_JobFailReasonNoHarvestablePlants>
+  <VV_JobFailReasonNoHarvestablePollenFilths>No gatherable pollen filths nearby.</VV_JobFailReasonNoHarvestablePollenFilths>
+</LanguageData>

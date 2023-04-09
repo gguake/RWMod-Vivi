@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 크림 -->
+  <ThingDef ParentName="ResourceBase">
+    <defName>VV_Vivicream</defName>
+    <label>vivi cream</label>
+    <description>.</description>
+    <graphicData>
+      <texPath>Things/Item/VV_Cream</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+    <thingCategories>
+      <li>VV_ViviProduct</li>
+    </thingCategories>
+
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Grain_Drop</soundInteract>
+    <soundDrop>Grain_Drop</soundDrop>
+    
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <MarketValue>4.5</MarketValue>
+      <MaxHitPoints>60</MaxHitPoints>
+      <Mass>0.05</Mass>
+      <Flammability>1.0</Flammability>
+      <DeteriorationRate>4</DeteriorationRate>
+    </statBases>
+    <tradeability>None</tradeability>
+
+    <comps>
+      <li Class="VVRace.CompProperties_FoodDrainWhenMake">
+        <drainPerStackCount>0.006</drainPerStackCount>
+      </li>
+    </comps>
+  </ThingDef>
+  
+  <!-- 밀랍 -->
+  <ThingDef ParentName="ResourceBase">
+    <defName>VV_Viviwax</defName>
+    <label>viviwax</label>
+    <description>.</description>
+    <graphicData>
+      <texPath>Things/Item/VV_Beeswax</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <color>(255,255,255)</color>
+    </graphicData>
+    <soundInteract>Wood_Drop</soundInteract>
+    <soundDrop>Wood_Drop</soundDrop>
+    <statBases>
+      <MarketValue>1.0</MarketValue>
+      <MaxHitPoints>100</MaxHitPoints>
+      <Mass>0.1</Mass>
+      <Flammability>0.5</Flammability>
+      <StuffPower_Armor_Sharp>0.54</StuffPower_Armor_Sharp>
+      <StuffPower_Armor_Blunt>0.54</StuffPower_Armor_Blunt>
+      <StuffPower_Armor_Heat>0.40</StuffPower_Armor_Heat>
+      <StuffPower_Insulation_Cold>8</StuffPower_Insulation_Cold>
+      <StuffPower_Insulation_Heat>4</StuffPower_Insulation_Heat>
+      <SharpDamageMultiplier>0.32</SharpDamageMultiplier>
+      <BluntDamageMultiplier>1.08</BluntDamageMultiplier>
+      <DeteriorationRate>4</DeteriorationRate>
+    </statBases>
+    <healthAffectsPrice>false</healthAffectsPrice>
+    <thingCategories>
+      <li>ResourcesRaw</li>
+    </thingCategories>
+    <burnableByRecipe>true</burnableByRecipe>
+    <smeltable>true</smeltable>
+    <stuffProps>
+      <commonality>0</commonality>
+      <categories>
+        <li>Stony</li>
+      </categories>
+      <appearance>Planks</appearance>
+      <color>(255,240,180)</color>
+      <constructEffect>ConstructWood</constructEffect>
+      <soundImpactStuff>BulletImpact_Wood</soundImpactStuff>
+      <soundMeleeHitSharp>MeleeHit_Wood</soundMeleeHitSharp>
+      <soundMeleeHitBlunt>MeleeHit_Wood</soundMeleeHitBlunt>
+      <statFactors>
+        <MaxHitPoints>0.65</MaxHitPoints>
+        <Beauty>1</Beauty>
+        <Flammability>0.5</Flammability>
+        <WorkToMake>0.7</WorkToMake>
+        <WorkToBuild>0.7</WorkToBuild>
+        <DoorOpenSpeed>1.2</DoorOpenSpeed>
+      </statFactors>
+      <canSuggestUseDefaultStuff>true</canSuggestUseDefaultStuff>
+    </stuffProps>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <allowedArchonexusCount>80</allowedArchonexusCount>
+  </ThingDef>
+
+  <!-- 프로폴리스 -->
+  <ThingDef ParentName="ResourceBase">
+    <defName>VV_Propolis</defName>
+    <label>vivi propolis</label>
+    <description>.</description>
+    <graphicData>
+      <texPath>Things/Item/VV_RawPropolis</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <thingCategories>
+      <li>VV_ViviProduct</li>
+    </thingCategories>
+
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Grain_Drop</soundInteract>
+    <soundDrop>Grain_Drop</soundDrop>
+    
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <MarketValue>4.5</MarketValue>
+      <MaxHitPoints>60</MaxHitPoints>
+      <Mass>0.05</Mass>
+      <Flammability>1.0</Flammability>
+      <DeteriorationRate>4</DeteriorationRate>
+    </statBases>
+    <stackLimit>25</stackLimit>
+    <tradeability>None</tradeability>
+  </ThingDef>
+  
+</Defs>

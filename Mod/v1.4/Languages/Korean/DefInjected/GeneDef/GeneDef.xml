@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <VV_ViviGene.label>비비</VV_ViviGene.label>
+  <VV_ViviGene.description>이 유전자는 벌과 유사한 행태를 갖는 비비 종족의 고유한 생체적 특성을 갖게 합니다.</VV_ViviGene.description>
+  <VV_ViviGene.customEffectDescriptions.0>성장중인 식물에서 꿀을 채집할 수 있습니다.</VV_ViviGene.customEffectDescriptions.0>
+  <VV_ViviGene.customEffectDescriptions.1>스스로 알을 낳아 번식합니다.</VV_ViviGene.customEffectDescriptions.1>
+  <VV_ViviGene.customEffectDescriptions.2>비비들끼리 서로 정신 결속을 형성해 작업 능력을 향상할 수 있습니다.</VV_ViviGene.customEffectDescriptions.2>
+
+  <VV_ViviMindset.label>비비식 사고</VV_ViviMindset.label>
+  <VV_ViviMindset.description>이 유전자는 비비 종족의 고유한 사고방식과 특징을 갖게 합니다.</VV_ViviMindset.description>
+
+  <VV_HeadGene.label>비비 머리</VV_HeadGene.label>
+  <VV_HeadGene.description>이 유전자는 비비 종족의 고유한 머리 모양을 갖게 합니다.</VV_HeadGene.description>
+  
+  <VV_HairGene.label>비비 헤어</VV_HairGene.label>
+  <VV_HairGene.description>이 유전자는 비비 종족의 고유한 헤어 스타일을 갖게 합니다.</VV_HairGene.description>
+  
+  <VV_BodyGene.label>비비 체형</VV_BodyGene.label>
+  <VV_BodyGene.description>이 유전자는 비비 종족의 고유한 체형 모양을 갖게 합니다. 마른 체형이나 표준 체형의 여성에게만 적용됩니다.</VV_BodyGene.description>
+
+  <VV_SkinColorGene.label>비비 피부</VV_SkinColorGene.label>
+  <VV_SkinColorGene.description>이 유전자는 비비 종족의 고유한 피부색을 갖게 합니다.</VV_SkinColorGene.description>
+
+  <VV_AntennaeGene.label>비비 더듬이</VV_AntennaeGene.label>
+  <VV_AntennaeGene.description>이 유전자는 머리에 한 쌍의 더듬이를 자라게 합니다. 더듬이는 공기 흐름이나 페로몬 등을 더 잘 파악할 수 있게 합니다.</VV_AntennaeGene.description>
+
+  <VV_WingGene.label>비비 날개</VV_WingGene.label>
+  <VV_WingGene.description>이 유전자는 등에 한 쌍의 작은 곤충 날개를 자라게 합니다. 이동을 조금 편하게 해주지만 날지는 못합니다.</VV_WingGene.description>
+</LanguageData>
