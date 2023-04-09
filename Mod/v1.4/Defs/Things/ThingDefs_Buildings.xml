@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
+  <!-- 비비 크림 벽 -->
   <ThingDef ParentName="Wall">
     <defName>VV_ViviCreamWall</defName>
     <label>vivicream wall</label>

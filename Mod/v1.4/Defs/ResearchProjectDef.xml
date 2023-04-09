@@ -42,4 +42,13 @@
       <li>VV_BasicGathering</li>
     </prerequisites>
   </ResearchProjectDef>
+  
+  <ResearchProjectDef ParentName="ViviResearchProjectBase">
+    <defName>VV_Tools</defName>
+    <label>vivi tools</label>
+    <description>.</description>
+    <baseCost>800</baseCost>
+    <researchViewX>0</researchViewX>
+    <researchViewY>2</researchViewY>
+  </ResearchProjectDef>
 </Defs>

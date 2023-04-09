@@ -58,7 +58,8 @@
         </li>
         <li Class="ScenPart_StartingThing_Defined">
           <def>StartingThing_Defined</def>
-          <thingDef>VV_ViviRitualLance</thingDef>
+          <thingDef>VV_RepeatingCrossbow</thingDef>
+          <quality>Good</quality>
         </li>
         <li Class="ScenPart_StartingThing_Defined">
           <def>StartingThing_Defined</def>

@@ -25,7 +25,7 @@
 
     <gearHealthRange>0.2~1.1</gearHealthRange>
     <apparelMoney>500~1000</apparelMoney>
-    <weaponMoney>150~250</weaponMoney>
+    <weaponMoney>1000~1500</weaponMoney>
     <weaponTags>
       <li>VV_ViviWeaponRange</li>
       <li>Spear</li>
@@ -52,7 +52,7 @@
     <apparelTags>
       <li>MedievalMilitary</li>
     </apparelTags>
-    <weaponMoney>300~800</weaponMoney>
+    <weaponMoney>1000~1500</weaponMoney>
     <weaponTags>
       <li>MedievalMeleeDecent</li>
       <li>MedievalMeleeAdvanced</li>
@@ -77,7 +77,7 @@
 
     <gearHealthRange>0.7~3.2</gearHealthRange>
     <apparelMoney>400~800</apparelMoney>
-    <weaponMoney>500~1600</weaponMoney>
+    <weaponMoney>1000~1500</weaponMoney>
     <weaponTags>
       <li>VV_ViviWeaponRange</li>
       <li>NeolithicRangedHeavy</li>

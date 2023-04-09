@@ -95,7 +95,7 @@
     <stages>
       <li>
         <statOffsets>
-          <WorkSpeedGlobal>0.1</WorkSpeedGlobal>
+          <WorkSpeedGlobal>0.05</WorkSpeedGlobal>
         </statOffsets>
       </li>
       <li>

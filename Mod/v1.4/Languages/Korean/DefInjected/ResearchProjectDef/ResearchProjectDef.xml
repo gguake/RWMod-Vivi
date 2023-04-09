@@ -8,4 +8,7 @@
   
   <VV_AdvancedGathering.label>비비 고급 채집학</VV_AdvancedGathering.label>
   <VV_AdvancedGathering.description>비비들이 자연에서 희귀한 물질들을 채집할 수 있습니다.</VV_AdvancedGathering.description>
+  
+  <VV_Tools.label>비비 도구</VV_Tools.label>
+  <VV_Tools.description>비비들이 사용하는 도구를 제작할 수 있습니다.</VV_Tools.description>
 </LanguageData>

@@ -78,7 +78,7 @@
       </bodyPartGroups>
       <wornGraphicPath>Things/Apparel/WorkerUniformDress</wornGraphicPath>
       <layers>
-        <li>Middle</li>
+        <li>OnSkin</li>
       </layers>
       <tags>
         <li>VV_ViviApparel</li>
