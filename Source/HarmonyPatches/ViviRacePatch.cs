@@ -61,13 +61,13 @@ namespace VVRace.HarmonyPatches
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(RecordsUtility_Notify_BillDone_Postfix)));
 
             #region 연구 관련
-            harmony.Patch(
-                original: AccessTools.Method(typeof(MainTabWindow_Architect), "CacheDesPanels"),
-                postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(MainTabWindow_Architect_CacheDesPanels_Postfix)));
+            //harmony.Patch(
+            //    original: AccessTools.Method(typeof(MainTabWindow_Architect), "CacheDesPanels"),
+            //    postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(MainTabWindow_Architect_CacheDesPanels_Postfix)));
 
-            harmony.Patch(
-                original: AccessTools.Method(typeof(ResearchManager), nameof(ResearchManager.FinishProject)),
-                postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(ResearchManager_FinishProject_Postfix)));
+            //harmony.Patch(
+            //    original: AccessTools.Method(typeof(ResearchManager), nameof(ResearchManager.FinishProject)),
+            //    postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(ResearchManager_FinishProject_Postfix)));
             #endregion
         }
 
