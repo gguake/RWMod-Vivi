@@ -7,7 +7,7 @@
     <descriptionShort>.</descriptionShort>
     <iconPath>UI/Icons/Xenotypes/Vivi</iconPath>
     <inheritable>true</inheritable>
-    <nameMaker>NamerPersonPigskin</nameMaker>
+    <nameMaker>VV_NamerPersonVivi</nameMaker>
     <chanceToUseNameMaker>1</chanceToUseNameMaker>
     <genes>
       <li>VV_ViviGene</li>

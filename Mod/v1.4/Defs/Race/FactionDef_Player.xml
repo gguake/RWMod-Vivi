@@ -2,8 +2,8 @@
 <Defs>
   <FactionDef Abstract="True" ParentName="PlayerFactionBase" Name="PlayerViviFactionBase">
     <factionIconPath>UI/Icons/ViviFaction</factionIconPath>
-    <factionNameMaker>NamerFactionOutlander</factionNameMaker>
-    <settlementNameMaker>NamerSettlementOutlander</settlementNameMaker>
+    <factionNameMaker>VV_NamerFactionVivi</factionNameMaker>
+    <settlementNameMaker>VV_NamerSettlementVivi</settlementNameMaker>
     <pawnSingular>vivi</pawnSingular>
     <pawnsPlural>vivis</pawnsPlural>
     <techLevel>Medieval</techLevel>

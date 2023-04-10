@@ -5,8 +5,8 @@
     <label>wild vivi</label>
     <description>.</description>
     <factionIconPath>UI/Icons/ViviFaction</factionIconPath>
-    <factionNameMaker>NamerFactionTribalNeanderthal</factionNameMaker>
-    <settlementNameMaker>NamerSettlementTribalNeaderthal</settlementNameMaker>
+    <factionNameMaker>VV_NamerFactionVivi</factionNameMaker>
+    <settlementNameMaker>VV_NamerSettlementVivi</settlementNameMaker>
     <pawnSingular>vivi</pawnSingular>
     <pawnsPlural>vivis</pawnsPlural>
     <techLevel>Medieval</techLevel>

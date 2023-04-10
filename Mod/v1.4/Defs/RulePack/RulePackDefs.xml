@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <RulePackDef>
+    <defName>VV_NamerPersonVivi</defName>
+    <rulePack>
+      <rulesStrings>
+        <li>r_name->[first_name] [last_name]</li>
+
+        <li>first_name->[vivi_name_prefix][vivi_name_base]</li>
+        <li>last_name(p=99)->[vivi_flower_nouns]</li>
+        <li>last_name->[colors]</li>
+      </rulesStrings>
+      <rulesFiles>
+        <li>vivi_flower_nouns->Words/VV_FlowerNouns</li>
+        <li>vivi_name_prefix->Words/VV_NamePrefix</li>
+        <li>vivi_name_base->Words/VV_NameBase</li>
+        <li>colors->Words/Nouns/Colors</li>
+      </rulesFiles>
+    </rulePack>
+  </RulePackDef>
+  
+  <RulePackDef>
+    <defName>VV_NamerFactionVivi</defName>
+    <rulePack>
+      <rulesStrings>
+        <li>r_name->wild vivi</li>
+      </rulesStrings>
+    </rulePack>
+  </RulePackDef>
+
+  <RulePackDef>
+    <defName>VV_NamerSettlementVivi</defName>
+    <rulePack>
+      <rulesStrings>
+        <li>r_name->[colors] hive</li>
+      </rulesStrings>
+      <rulesFiles>
+        <li>colors->Words/Nouns/Colors</li>
+      </rulesFiles>
+    </rulePack>
+  </RulePackDef>
+</Defs>
