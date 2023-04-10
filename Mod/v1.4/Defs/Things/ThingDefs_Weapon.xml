@@ -22,10 +22,10 @@
       <WorkToMake>20000</WorkToMake>
       <Mass>1.6</Mass>
       <AccuracyTouch>0.6</AccuracyTouch>
-      <AccuracyShort>0.4</AccuracyShort>
+      <AccuracyShort>0.35</AccuracyShort>
       <AccuracyMedium>0.1</AccuracyMedium>
-      <AccuracyLong>0.05</AccuracyLong>
-      <RangedWeapon_Cooldown>0.15</RangedWeapon_Cooldown>
+      <AccuracyLong>0.03</AccuracyLong>
+      <RangedWeapon_Cooldown>0.11</RangedWeapon_Cooldown>
     </statBases>
     <weaponTags>
       <li>VV_ViviWeaponRange</li>
@@ -53,7 +53,7 @@
         <hasStandardCommand>true</hasStandardCommand>
         <defaultProjectile>VV_Arrow_RepeatingCrossbow</defaultProjectile>
         <warmupTime>0.11</warmupTime>
-        <range>15.9</range>
+        <range>26.9</range>
         <soundCast>Bow_Small</soundCast>
       </li>
     </verbs>
@@ -80,7 +80,7 @@
     </graphicData>
     <projectile>
       <damageDef>Arrow</damageDef>
-      <damageAmountBase>4</damageAmountBase>
+      <damageAmountBase>5</damageAmountBase>
       <stoppingPower>1.0</stoppingPower>
       <speed>50</speed>
     </projectile>
