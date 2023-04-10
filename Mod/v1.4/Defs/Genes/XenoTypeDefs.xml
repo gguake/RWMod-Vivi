@@ -6,6 +6,7 @@
     <description>.</description>
     <descriptionShort>.</descriptionShort>
     <iconPath>UI/Icons/Xenotypes/Vivi</iconPath>
+    <displayPriority>-10000</displayPriority>
     <inheritable>true</inheritable>
     <nameMaker>VV_NamerPersonVivi</nameMaker>
     <chanceToUseNameMaker>1</chanceToUseNameMaker>
