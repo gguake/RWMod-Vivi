@@ -7,7 +7,7 @@
     <apparelTags>
       <li>VV_ViviApparel</li>
     </apparelTags>
-    <maxGenerationAge>40</maxGenerationAge>
+    <maxGenerationAge>30</maxGenerationAge>
 
     <techHediffsChance>0</techHediffsChance>
     <techHediffsMoney>0</techHediffsMoney>
