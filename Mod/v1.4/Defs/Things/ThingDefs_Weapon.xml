@@ -1,5 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
+  <!-- 비비 다용도 붓 -->
+  <ThingDef ParentName="BaseMeleeWeapon_Blunt">
+    <defName>VV_MultiuseBrush</defName>
+    <label>vivi multiuse brush</label>
+    <description>.</description>
+    <graphicData>
+      <texPath>Things/Item/Equipment/VV_MultiuseBrush</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <equippedAngleOffset>0</equippedAngleOffset>
+
+    <techLevel>Medieval</techLevel>
+    <statBases>
+      <WorkToMake>1200</WorkToMake>
+      <Mass>2</Mass>
+    </statBases>
+    <equippedStatOffsets>
+      <CleaningSpeed>0.5</CleaningSpeed>
+      <VV_PlantGatherSpeed>0.5</VV_PlantGatherSpeed>
+    </equippedStatOffsets>
+
+    <thingCategories Inherit="False">
+      <li>VV_ViviWeapon</li>
+    </thingCategories>
+    <weaponClasses>
+      <li>Melee</li>
+    </weaponClasses>
+    <weaponTags>
+      <li>MedievalMeleeDecent</li>
+    </weaponTags>
+
+    <tools>
+      <li>
+        <label>handle</label>
+        <capacities>
+          <li>Poke</li>
+        </capacities>
+        <power>9</power>
+        <cooldownTime>2.5</cooldownTime>
+      </li>
+      <li>
+        <label>head</label>
+        <labelUsedInLogging>false</labelUsedInLogging>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>11</power>
+        <cooldownTime>2</cooldownTime>
+      </li>
+    </tools>
+    
+    <costStuffCount>40</costStuffCount>
+    <stuffCategories>
+      <li>Metallic</li>
+      <li>Woody</li>
+    </stuffCategories>
+    <recipeMaker>
+      <recipeUsers>
+        <li>CraftingSpot</li>
+      </recipeUsers>
+      <displayPriority>100</displayPriority>
+    </recipeMaker>
+  </ThingDef>
+
   <!-- 비비 연노 -->
   <ThingDef ParentName="BaseWeaponNeolithic">
     <defName>VV_RepeatingCrossbow</defName>
@@ -11,13 +75,10 @@
       <drawSize>0.8</drawSize>
     </graphicData>
     <equippedAngleOffset>30</equippedAngleOffset>
+    <rotateInShelves>false</rotateInShelves>
     <soundInteract>Bow_Recurve</soundInteract>
-    <costList>
-      <WoodLog>80</WoodLog>
-      <ComponentIndustrial>2</ComponentIndustrial>
-      <VV_Vivicream>10</VV_Vivicream>
-    </costList>
-    <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
+
+    <techLevel>Medieval</techLevel>
     <statBases>
       <WorkToMake>20000</WorkToMake>
       <Mass>1.6</Mass>
@@ -27,26 +88,19 @@
       <AccuracyLong>0.03</AccuracyLong>
       <RangedWeapon_Cooldown>0.11</RangedWeapon_Cooldown>
     </statBases>
-    <weaponTags>
-      <li>VV_ViviWeaponRange</li>
-    </weaponTags>
+
+    <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
+    <thingCategories Inherit="False">
+      <li>VV_ViviWeapon</li>
+    </thingCategories>
     <weaponClasses>
       <li>Ranged</li>
       <li>RangedLight</li>
     </weaponClasses>
-    <recipeMaker>
-      <recipeUsers>
-        <li>CraftingSpot</li>
-      </recipeUsers>
-      <researchPrerequisites>
-        <li>VV_Tools</li>
-        <li>RecurveBow</li>
-      </researchPrerequisites>
-      <skillRequirements>
-        <Crafting>8</Crafting>
-      </skillRequirements>
-      <displayPriority>520</displayPriority>
-    </recipeMaker>
+    <weaponTags>
+      <li>VV_ViviWeaponRange</li>
+    </weaponTags>
+
     <verbs>
       <li>
         <verbClass>Verb_Shoot</verbClass>
@@ -68,7 +122,25 @@
         <cooldownTime>2</cooldownTime>
       </li>
     </tools>
-    <rotateInShelves>false</rotateInShelves>
+
+    <costList>
+      <WoodLog>80</WoodLog>
+      <ComponentIndustrial>2</ComponentIndustrial>
+      <VV_Vivicream>10</VV_Vivicream>
+    </costList>
+    <recipeMaker>
+      <recipeUsers>
+        <li>CraftingSpot</li>
+      </recipeUsers>
+      <researchPrerequisites>
+        <li>VV_Tools</li>
+        <li>RecurveBow</li>
+      </researchPrerequisites>
+      <skillRequirements>
+        <Crafting>8</Crafting>
+      </skillRequirements>
+      <displayPriority>300</displayPriority>
+    </recipeMaker>
   </ThingDef>
 
   <ThingDef ParentName="BaseProjectileNeolithic">
@@ -86,7 +158,6 @@
     </projectile>
   </ThingDef>
 
-
   <!-- 의식용 창 -->
   <ThingDef ParentName="BaseWeapon">
     <defName>VV_RitualLance</defName>
@@ -101,14 +172,18 @@
     <soundInteract>Interact_MonoSword</soundInteract>
     <meleeHitSound>MeleeHit_MonoSword</meleeHitSound>
     
-    <techLevel>Neolithic</techLevel>
+    <techLevel>Medieval</techLevel>
     <statBases>
       <MarketValue>800</MarketValue>
       <Mass>2</Mass>
     </statBases>
+    <equippedStatOffsets>
+      <CleaningSpeed>0.5</CleaningSpeed>
+      <MoveSpeed>-0.05</MoveSpeed>
+    </equippedStatOffsets>
 
-    <thingCategories>
-      <li>WeaponsMelee</li>
+    <thingCategories Inherit="False">
+      <li>VV_ViviWeapon</li>
     </thingCategories>
     <weaponClasses>
       <li>Melee</li>

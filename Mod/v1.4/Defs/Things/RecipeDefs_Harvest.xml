@@ -117,7 +117,7 @@
     
     <workAmount>1500</workAmount>
     <workSkill>Plants</workSkill>
-    <workSpeedStat>PlantWorkSpeed</workSpeedStat>
+    <workSpeedStat>VV_PlantGatherSpeed</workSpeedStat>
     <efficiencyStat>PlantHarvestYield</efficiencyStat>
 
     <effectWorking>Clean</effectWorking>

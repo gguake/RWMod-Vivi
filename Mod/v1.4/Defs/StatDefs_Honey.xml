@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
+  <!-- 꿀 채집 속도 -->
   <StatDef>
     <defName>VV_HoneyHarvestSpeed</defName>
     <label>honey harvest speed</label>
@@ -30,9 +31,10 @@
         <max>1</max>
       </li>
     </capacityFactors>
-    <displayPriorityInCategory>4552</displayPriorityInCategory>
+    <displayPriorityInCategory>4553</displayPriorityInCategory>
   </StatDef>
 
+  <!-- 꿀 채집량 -->
   <StatDef>
     <defName>VV_HoneyHarvestYield</defName>
     <label>honey harvest yield</label>
@@ -82,6 +84,40 @@
         <max>1</max>
       </li>
     </capacityFactors>
-    <displayPriorityInCategory>4553</displayPriorityInCategory>
+    <displayPriorityInCategory>4554</displayPriorityInCategory>
+  </StatDef>
+
+  <!-- 식물 채집 속도 -->
+  <StatDef>
+    <defName>VV_PlantGatherSpeed</defName>
+    <label>plant gather speed</label>
+    <description>.</description>
+    <category>PawnWork</category>
+    <defaultBaseValue>1</defaultBaseValue>
+    <minValue>0.1</minValue>
+    <toStringStyle>PercentZero</toStringStyle>
+    <neverDisabled>true</neverDisabled>
+    <statFactors>
+      <li>WorkSpeedGlobal</li>
+    </statFactors>
+    <skillNeedFactors>
+      <li Class="SkillNeed_BaseBonus">
+        <skill>Plants</skill>
+        <baseValue>0.08</baseValue>
+        <bonusPerLevel>0.115</bonusPerLevel>
+      </li>
+    </skillNeedFactors>
+    <capacityFactors>
+      <li>
+        <capacity>Manipulation</capacity>
+        <weight>1</weight>
+      </li>
+      <li>
+        <capacity>Sight</capacity>
+        <weight>0.3</weight>
+        <max>1</max>
+      </li>
+    </capacityFactors>
+    <displayPriorityInCategory>4555</displayPriorityInCategory>
   </StatDef>
 </Defs>

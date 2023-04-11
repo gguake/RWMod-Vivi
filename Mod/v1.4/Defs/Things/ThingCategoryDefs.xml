@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
   <ThingCategoryDef>
+    <defName>VV_ViviWeapon</defName>
+    <label>vivi weapon</label>
+    <parent>Weapons</parent>
+  </ThingCategoryDef>
+
+  <ThingCategoryDef>
+    <defName>VV_ViviApparel</defName>
+    <label>vivi apparel</label>
+    <parent>Apparel</parent>
+  </ThingCategoryDef>
+
+  <ThingCategoryDef>
     <defName>VV_BuildingsVivi</defName>
     <label>vivi buildings</label>
     <parent>Buildings</parent>
