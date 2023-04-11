@@ -19,7 +19,7 @@
       <Flammability>1.0</Flammability>
     </statBases>
     <building>
-      <smoothedThing>VV_SmoothedViviCreamSoftWall</smoothedThing>
+      <smoothedThing>VV_SmoothedViviCreamWall</smoothedThing>
     </building>
 
     <costList>
@@ -63,7 +63,7 @@
       </li>
       <li>
         <damageDef>Flame</damageDef>
-        <multiplier>4</multiplier>
+        <multiplier>2</multiplier>
       </li>
     </damageMultipliers>
     
@@ -73,7 +73,7 @@
 
   <!-- 매끄러운 비비 크림 벽 -->
   <ThingDef ParentName="Wall">
-    <defName>VV_SmoothedViviCreamSoftWall</defName>
+    <defName>VV_SmoothedViviCreamWall</defName>
     <label>smoothed vivicream wall</label>
     <description>.</description>
     <graphicData>
@@ -133,7 +133,7 @@
       </li>
       <li>
         <damageDef>Flame</damageDef>
-        <multiplier>4</multiplier>
+        <multiplier>2</multiplier>
       </li>
     </damageMultipliers>
     

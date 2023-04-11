@@ -30,10 +30,10 @@
   <VV_MessageMindLinkDisconnected>{LINKER_labelShort}가 {LINKED_labelShort}와 맺은 정신 결속을 해제했습니다.</VV_MessageMindLinkDisconnected>
   <VV_MessageMindLinkForceDisconnected>{LINKED_labelShort}가 맺고 있던 정신 결속이 갑작스럽게 끊어져 피해를 받았습니다.</VV_MessageMindLinkForceDisconnected>
 
-  <VV_MindLinkerDowned>{PAWN_labelShort} is downed.</VV_MindLinkerDowned>
-  <VV_MindLinkerImprisoned>{PAWN_labelShort} is a prisoner.</VV_MindLinkerImprisoned>
-  <VV_MindLinkerInsideContainer>{PAWN_labelShort} is inside {CONTAINER}</VV_MindLinkerInsideContainer>
-  <VV_MindLinkerMentalState>{PAWN_labelShort} is in a '{MENTALSTATE_label}' mental state.</VV_MindLinkerMentalState>
+  <VV_MindLinkerDowned>{PAWN_labelShort}이 쓰러짐.</VV_MindLinkerDowned>
+  <VV_MindLinkerImprisoned>{PAWN_labelShort}이 죄수임.</VV_MindLinkerImprisoned>
+  <VV_MindLinkerInsideContainer>{PAWN_labelShort}이 {CONTAINER} 안에 있음.</VV_MindLinkerInsideContainer>
+  <VV_MindLinkerMentalState>{PAWN_labelShort}이 '{MENTALSTATE_label}' 상태임.</VV_MindLinkerMentalState>
 
   <VV_JobFailReasonNoHarvestablePlants>주변에 채집 가능한 식물 없음</VV_JobFailReasonNoHarvestablePlants>
   <VV_JobFailReasonNoHarvestablePollenFilths>주변에 수집 가능한 꽃가루 없음</VV_JobFailReasonNoHarvestablePollenFilths>

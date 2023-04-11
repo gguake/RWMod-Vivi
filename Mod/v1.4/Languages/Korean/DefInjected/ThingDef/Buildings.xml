@@ -3,6 +3,12 @@
   <VV_ViviCreamWall.label>비비 크림 벽</VV_ViviCreamWall.label>
   <VV_ViviCreamWall.description>비비 크림으로 급조한 벽입니다. 지나갈수 없고 지붕을 지탱하지만 충격에 매우 취약합니다. 일정 시간이 지나면 크림이 굳어 밀랍 벽으로 변합니다.</VV_ViviCreamWall.description>
   
+  <VV_SmoothedViviCreamWall.label>매끄러운 비비 크림 벽</VV_SmoothedViviCreamWall.label>
+  <VV_SmoothedViviCreamWall.description>다듬어진 비비 크림 벽입니다. 지나갈수 없고 지붕을 지지하지만 충격에 매우 취약합니다. 시간이 지나서 크림이 마르면 견고한 벽이 됩니다.</VV_SmoothedViviCreamWall.description>
+
+  <VV_ViviHoneycombWall.label>비비 벌집 벽</VV_ViviHoneycombWall.label>
+  <VV_ViviHoneycombWall.description>육각 구조가 층층히 쌓여있는 벽입니다. 지나갈수 없고 지붕을 지지합니다. 각종 충격에는 매우 튼튼하지만 화재에는 매우 취약합니다.</VV_ViviHoneycombWall.description>
+
   <VV_ViviHatchery.label>비비 부화기</VV_ViviHatchery.label>
   <VV_ViviHatchery.description>비비 알을 부화시키기 위한 구조물입니다. 지붕이 있는 실내에 있어야 하며 적절한 온도가 필요합니다. 적절한 환경의 부화기가 있다면 로얄 비비들은 그곳에 가서 알을 낳습니다.</VV_ViviHatchery.description>
   
