@@ -9,7 +9,7 @@
       <texPath>Things/Item/Equipment/VV_MultiuseBrush</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
-    <equippedAngleOffset>-20</equippedAngleOffset>
+    <equippedAngleOffset>10</equippedAngleOffset>
 
     <techLevel>Medieval</techLevel>
     <statBases>
