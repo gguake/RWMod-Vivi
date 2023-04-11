@@ -10,7 +10,6 @@
       <graphicClass>Graphic_Single</graphicClass>
       <color>(1.0, 0.9, 0.7, 1.0)</color>
     </graphicData>
-    <tickerType>Long</tickerType>
     
     <uiIconPath>Things/Building/Linked/WallPlanks_MenuIcon</uiIconPath>
     <uiIconColor>(1.0, 0.9, 0.7, 1.0)</uiIconColor>
@@ -19,20 +18,41 @@
       <WorkToBuild>30</WorkToBuild>
       <Flammability>1.0</Flammability>
     </statBases>
+    <building>
+      <smoothedThing>VV_SmoothedViviCreamSoftWall</smoothedThing>
+    </building>
+
     <costList>
       <VV_Vivicream>1</VV_Vivicream>
     </costList>
     <useStuffTerrainAffordance>false</useStuffTerrainAffordance>
     
     <designationCategory>VV_Bulidings</designationCategory>
-    <comps Inherit="False">
-      <li Class="VVRace.CompProperties_CompWallReplace" />
-    </comps>
     <researchPrerequisites>
       <li>VV_BasicInfra</li>
     </researchPrerequisites>
     
     <damageMultipliers Inherit="False">
+      <li>
+        <damageDef>Bullet</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Arrow</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Blunt</damageDef>
+        <multiplier>2</multiplier>
+      </li>
+      <li>
+        <damageDef>Poke</damageDef>
+        <multiplier>2</multiplier>
+      </li>
+      <li>
+        <damageDef>Demolish</damageDef>
+        <multiplier>2</multiplier>
+      </li>
       <li>
         <damageDef>Bomb</damageDef>
         <multiplier>2</multiplier>
@@ -44,6 +64,135 @@
       <li>
         <damageDef>Flame</damageDef>
         <multiplier>4</multiplier>
+      </li>
+    </damageMultipliers>
+    
+    <costStuffCount>0</costStuffCount>
+    <stuffCategories Inherit="False"></stuffCategories>
+  </ThingDef>
+
+  <!-- 매끄러운 비비 크림 벽 -->
+  <ThingDef ParentName="Wall">
+    <defName>VV_SmoothedViviCreamSoftWall</defName>
+    <label>smoothed vivicream wall</label>
+    <description>.</description>
+    <graphicData>
+      <texPath>Things/Building/Linked/Wall/Wall_Atlas_Smooth</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <color>(1.0, 0.9, 0.7, 1.0)</color>
+    </graphicData>
+    <tickerType>Long</tickerType>
+    
+    <uiIconPath>Things/Building/Linked/WallPlanks_MenuIcon</uiIconPath>
+    <uiIconColor>(1.0, 0.9, 0.7, 1.0)</uiIconColor>
+    <statBases>
+      <MaxHitPoints>80</MaxHitPoints>
+      <Flammability>1.0</Flammability>
+    </statBases>
+    <costList>
+      <VV_Vivicream>1</VV_Vivicream>
+    </costList>
+    <useStuffTerrainAffordance>false</useStuffTerrainAffordance>
+    
+    <designationCategory Inherit="False" />
+    <comps Inherit="False">
+      <li Class="VVRace.CompProperties_CompWallReplace">
+        <replaceTicks>5000</replaceTicks>
+        <replaceThing>VV_ViviHoneycombWall</replaceThing>
+      </li>
+    </comps>
+    
+    <damageMultipliers Inherit="False">
+      <li>
+        <damageDef>Bullet</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Arrow</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Blunt</damageDef>
+        <multiplier>2</multiplier>
+      </li>
+      <li>
+        <damageDef>Poke</damageDef>
+        <multiplier>2</multiplier>
+      </li>
+      <li>
+        <damageDef>Demolish</damageDef>
+        <multiplier>2</multiplier>
+      </li>
+      <li>
+        <damageDef>Bomb</damageDef>
+        <multiplier>2</multiplier>
+      </li>
+      <li>
+        <damageDef>Thump</damageDef>
+        <multiplier>2</multiplier>
+      </li>
+      <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>4</multiplier>
+      </li>
+    </damageMultipliers>
+    
+    <costStuffCount>0</costStuffCount>
+    <stuffCategories Inherit="False"></stuffCategories>
+  </ThingDef>
+  
+  <!-- 비비 벌집 벽 -->
+  <ThingDef ParentName="Wall">
+    <defName>VV_ViviHoneycombWall</defName>
+    <label>vivi honeycomb wall</label>
+    <description>.</description>
+    <graphicData>
+      <texPath>Things/Building/Wall_Atlas_HoneycombWall</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <color>(1.0, 0.8, 0.6, 1.0)</color>
+    </graphicData>
+    <tickerType>Long</tickerType>
+    
+    <uiIconPath>Things/Building/Linked/WallPlanks_MenuIcon</uiIconPath>
+    <uiIconColor>(1.0, 0.8, 0.6, 1.0)</uiIconColor>
+    <statBases>
+      <MaxHitPoints>540</MaxHitPoints>
+      <Flammability>0.7</Flammability>
+    </statBases>
+    <costList>
+      <VV_Viviwax>1</VV_Viviwax>
+    </costList>
+    <useStuffTerrainAffordance>false</useStuffTerrainAffordance>
+    
+    <designationCategory Inherit="False" />
+    <damageMultipliers Inherit="False">
+      <li>
+        <damageDef>Bullet</damageDef>
+        <multiplier>0.25</multiplier>
+      </li>
+      <li>
+        <damageDef>Arrow</damageDef>
+        <multiplier>0.25</multiplier>
+      </li>
+      <li>
+        <damageDef>Demolish</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Bomb</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Thump</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Mining</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>8</multiplier>
       </li>
     </damageMultipliers>
     

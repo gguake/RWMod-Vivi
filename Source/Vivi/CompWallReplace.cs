@@ -1,10 +1,15 @@
 ﻿using RimWorld;
+using System.Text;
 using Verse;
 
 namespace VVRace
 {
     public class CompProperties_CompWallReplace : CompProperties
     {
+        public int replaceTicks;
+        public ThingDef replaceThing;
+        public ThingDef replaceThingStuff;
+
         public CompProperties_CompWallReplace()
         {
             compClass = typeof(CompWallReplace);
@@ -13,6 +18,8 @@ namespace VVRace
 
     public class CompWallReplace : ThingComp
     {
+        public CompProperties_CompWallReplace Props => (CompProperties_CompWallReplace)props;
+
         private int buildedTick = 0;
 
         public override void PostPostMake()
@@ -31,7 +38,7 @@ namespace VVRace
         {
             base.CompTickLong();
 
-            if (Find.TickManager.TicksGame > buildedTick + 5000)
+            if (Find.TickManager.TicksGame > buildedTick + Props.replaceTicks)
             {
                 var map = parent.Map;
                 var position = parent.Position;
@@ -39,10 +46,23 @@ namespace VVRace
                 var faction = parent.Faction;
 
                 parent.Destroy(DestroyMode.WillReplace);
-                var wall = ThingMaker.MakeThing(ThingDefOf.Wall, VVThingDefOf.VV_Viviwax);
+                var wall = ThingMaker.MakeThing(Props.replaceThing, Props.replaceThingStuff);
                 wall.SetFaction(faction);
                 GenSpawn.Spawn(wall, position, map, rotation);
             }
+        }
+
+        public override string CompInspectStringExtra()
+        {
+            var sb = new StringBuilder(base.CompInspectStringExtra());
+            if (sb.Length > 0)
+            {
+                sb.AppendLine();
+            }
+
+            var remainedTicks = buildedTick + Props.replaceTicks - GenTicks.TicksGame;
+            sb.Append("VV_InspectorViviWallReplace".Translate(remainedTicks.ToStringTicksToPeriod()));
+            return sb.ToString();
         }
     }
 }
