@@ -387,6 +387,7 @@
       <li>VV_MakeVivicream</li>
       <li>VV_MakeViviwax</li>
       <li>VV_FilteringHoney</li>
+      <li>VV_RefiningPropolis</li>
     </recipes>
     <inspectorTabs>
       <li>ITab_Bills</li>

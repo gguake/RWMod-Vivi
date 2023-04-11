@@ -35,7 +35,7 @@
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <workSkill>Crafting</workSkill>
 
-    <effectWorking>Clean</effectWorking>
+    <effectWorking>Smelt</effectWorking>
     <soundWorking>Recipe_Brewing</soundWorking>
     <uiIconThing>VV_Viviwax</uiIconThing>
 
@@ -71,7 +71,7 @@
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <workSkill>Crafting</workSkill>
 
-    <effectWorking>Clean</effectWorking>
+    <effectWorking>Cook</effectWorking>
     <soundWorking>Recipe_Brewing</soundWorking>
     <uiIconThing>VV_FilteredHoney</uiIconThing>
 
@@ -97,4 +97,42 @@
     </products>
     <researchPrerequisite>VV_BasicGathering</researchPrerequisite>
   </RecipeDef>
+  
+  <!-- 프로폴리스 정제 -->
+  <RecipeDef>
+    <defName>VV_RefiningPropolis</defName>
+    <label>refining propolis</label>
+    <description>.</description>
+    <jobString>refining propolis.</jobString>
+    <workAmount>500</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <workSkill>Crafting</workSkill>
+
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_Brewing</soundWorking>
+    <uiIconThing>VV_Propolis</uiIconThing>
+
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_Propolis</li>
+          </thingDefs>
+        </filter>
+        <count>5</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>VV_Propolis</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <MedicineHerbal>1</MedicineHerbal>
+      <Neutroamine>2</Neutroamine>
+    </products>
+    <researchPrerequisite>VV_AdvancedGathering</researchPrerequisite>
+  </RecipeDef>
+
 </Defs>
