@@ -18,7 +18,6 @@
     <displayCategory>VV_Race</displayCategory>
     <displayOrderInCategory>0</displayOrderInCategory>
     <biostatCpx>6</biostatCpx>
-    <biostatMet>-1</biostatMet>
     <biostatArc>2</biostatArc>
 
     <sterilize>true</sterilize>

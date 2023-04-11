@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!--
+  <TerrainDef ParentName="FloorBase">
+    <defName>VV_HoneycombFloor</defName>
+    <label>honeycomb floor</label>
+    <description>.</description>
+    <texturePath>Terrain/Surfaces/Vivi</texturePath>
+    <color>(255,255,255)</color>
+    <edgeType>Hard</edgeType>
+    <renderPrecedence>70</renderPrecedence>
+    <isPaintable>true</isPaintable>
+
+    <uiOrder>2020</uiOrder>
+    <statBases>
+      <Beauty>1</Beauty>
+      <WorkToBuild>400</WorkToBuild>
+      <CleaningTimeFactor>0.8</CleaningTimeFactor>
+    </statBases>
+
+    <costList>
+      <VV_Viviwax>2</VV_Viviwax>
+    </costList>
+
+    <designationCategory>VV_Bulidings</designationCategory>
+    <researchPrerequisites>
+      <li>VV_BasicInfra</li>
+    </researchPrerequisites>
+  </TerrainDef>
+-->
+</Defs>

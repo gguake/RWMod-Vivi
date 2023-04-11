@@ -16,10 +16,6 @@ namespace VVRace.HarmonyPatches
             MindLinkNotificationPatch(harmony);
             MindLinkCommandRangePatch(harmony);
 
-            harmony.Patch(
-                original: AccessTools.Method(typeof(PlayerPawnsDisplayOrderUtility), nameof(PlayerPawnsDisplayOrderUtility.Sort)),
-                postfix: new HarmonyMethod(typeof(MindLinkPatch), nameof(PlayerPawnsDisplayOrderUtility_Sort_Postfix)));
-
             MethodInfo methodInfo_Pawn_DraftController_GetGizmos_MoveNext;
             #region Finding Pawn_DraftController_GetGizmos_MoveNext
             {
@@ -35,16 +31,8 @@ namespace VVRace.HarmonyPatches
                 transpiler: new HarmonyMethod(typeof(MindLinkPatch), nameof(Pawn_DraftController_GetGizmos_MoveNext_Transpiler)));
 
             harmony.Patch(
-                original: AccessTools.PropertyGetter(typeof(MainTabWindow_Work), "Pawns"),
-                postfix: new HarmonyMethod(typeof(MindLinkPatch), nameof(MainTabWindow_Pawns_get_Postfix)));
-
-            harmony.Patch(
-                original: AccessTools.PropertyGetter(typeof(MainTabWindow_Schedule), "Pawns"),
-                postfix: new HarmonyMethod(typeof(MindLinkPatch), nameof(MainTabWindow_Pawns_get_Postfix)));
-
-            harmony.Patch(
-                original: AccessTools.Method(typeof(Pawn_TimetableTracker), nameof(Pawn_TimetableTracker.SetAssignment)),
-                postfix: new HarmonyMethod(typeof(MindLinkPatch), nameof(Pawn_TimetableTracker_SetAssignment_Postfix)));
+                original: AccessTools.Method(typeof(PawnNameColorUtility), nameof(PawnNameColorUtility.PawnNameColorOf)),
+                transpiler: new HarmonyMethod(typeof(MindLinkPatch), nameof(PawnNameColorUtility_PawnNameColorOf_Transpiler)));
         }
 
         private static void MindLinkNotificationPatch(Harmony harmony)
@@ -99,11 +87,6 @@ namespace VVRace.HarmonyPatches
                 postfix: new HarmonyMethod(typeof(MindLinkPatch), nameof(MultiPawnGotoController_RecomputeDestinations_CanGoTo_Postfix)));
         }
 
-        internal static void PlayerPawnsDisplayOrderUtility_Sort_Postfix(List<Pawn> pawns)
-        {
-            pawns.RemoveAll(p => p.IsMindLinked() && pawns.Contains(p.GetMindLinkMaster()));
-        }
-
         internal static IEnumerable<CodeInstruction> Pawn_DraftController_GetGizmos_MoveNext_Transpiler(IEnumerable<CodeInstruction> codeInstructions, ILGenerator ilGenerator)
         {
             var instructions = codeInstructions.ToList();
@@ -143,17 +126,24 @@ namespace VVRace.HarmonyPatches
             return instructions;
         }
 
-        internal static void MainTabWindow_Pawns_get_Postfix(ref IEnumerable<Pawn> __result)
+        internal static IEnumerable<CodeInstruction> PawnNameColorUtility_PawnNameColorOf_Transpiler(IEnumerable<CodeInstruction> codeInstructions, ILGenerator ilGenerator)
         {
-            __result = __result.Where(p => !p.IsMindLinkedVivi());
-        }
+            var instructions = codeInstructions.ToList();
+            var index = instructions.FirstIndexOfInstruction(OpCodes.Ldsfld, AccessTools.Field(typeof(PawnNameColorUtility), "ColorColony"));
 
-        internal static void Pawn_TimetableTracker_SetAssignment_Postfix(Pawn ___pawn, int hour, TimeAssignmentDef ta)
-        {
-            if (___pawn.HasMindTransmitter())
+            var conditionalSkipLabel = ilGenerator.DefineLabel();
+            var injection = new CodeInstruction[]
             {
-                ___pawn.ApplyTimeAssignmentToLinkedPawns(hour, ta);
-            }
+                new CodeInstruction(OpCodes.Ldarg_0),
+                new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(MindLinkUtility), nameof(MindLinkUtility.IsMindLinkedVivi))),
+                new CodeInstruction(OpCodes.Brfalse_S, conditionalSkipLabel),
+                new CodeInstruction(OpCodes.Ldsfld, AccessTools.Field(typeof(MindLinkUtility), nameof(MindLinkUtility.MindLinkedPawnColor))),
+                new CodeInstruction(OpCodes.Ret),
+            };
+
+            instructions[index].labels.Add(conditionalSkipLabel);
+            instructions.InsertRange(index, injection);
+            return instructions;
         }
 
         #region mind link notifications

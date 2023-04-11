@@ -17,16 +17,6 @@ namespace VVRace
             {
                 assignedWorkMode = value;
 
-                if (value != null)
-                {
-                    foreach (var item in value.AllWorkTypePriority.Where(v => !gene.pawn.WorkTypeIsDisabled(v.workTypeDef)))
-                    {
-                        gene.pawn.workSettings.SetPriority(item.workTypeDef, item.priority);
-                    }
-
-                    UpdateWorkSettingByRestFirstSetting();
-                }
-
                 gene.pawn.InterruptCurrentJob();
             }
         }

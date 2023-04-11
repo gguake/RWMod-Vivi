@@ -88,6 +88,7 @@
     <Compile Include="Harvest\JobDriver_HarvestPropolis.cs" />
     <Compile Include="Honey\Filth_Pollen.cs" />
     <Compile Include="Honey\HoneyUtility.cs" />
+    <Compile Include="MindLink\AI\ThinkNode_ConditionalViviWorkMode.cs" />
     <Compile Include="PawnKindDefExt.cs" />
     <Compile Include="Harvest\RecipeDef_Harvest.cs" />
     <Compile Include="Utility\ToilUtility.cs" />
@@ -102,7 +103,6 @@
     <Compile Include="MindLink\AI\JobGiver_AIWaitWithEscort.cs" />
     <Compile Include="MindLink\AI\JobGiver_ExitMapFollowForEscort.cs" />
     <Compile Include="MindLink\AI\JobGiver_WanderForEscort.cs" />
-    <Compile Include="MindLink\AI\ThinkNode_ConditionalViviWorkMode.cs" />
     <Compile Include="MindLink\AI\JobGiver_ManagingMindLink.cs" />
     <Compile Include="MindLink\Hediff_MindLink.cs" />
     <Compile Include="MindLink\Hediff_MindTransmitter.cs" />

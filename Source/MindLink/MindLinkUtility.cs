@@ -6,8 +6,10 @@ using Verse;
 
 namespace VVRace
 {
-    static public class MindLinkUtility
+    public static class MindLinkUtility
     {
+        public static Color MindLinkedPawnColor = new Color(0.8f, 0.95f, 0.95f);
+
         public static bool HasMindTransmitter(this Pawn pawn)
         {
             return pawn.health.hediffSet.HasHediff(VVHediffDefOf.VV_MindTransmitter);

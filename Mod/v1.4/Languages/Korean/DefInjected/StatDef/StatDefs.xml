@@ -6,6 +6,9 @@
   <VV_HoneyHarvestYield.label>꿀 채집량</VV_HoneyHarvestYield.label>
   <VV_HoneyHarvestYield.description>꿀을 채집할때 한번에 얼마나 많이 얻는지 나타냅니다.</VV_HoneyHarvestYield.description>
 
+  <VV_PlantGatherSpeed.label>식물 자재 채집 속도</VV_PlantGatherSpeed.label>
+  <VV_PlantGatherSpeed.description>야생 식물에서 각종 자원을 채집할때 얼마나 빠르게 작업하는지 나타냅니다.</VV_PlantGatherSpeed.description>
+
   <VV_MindLinkBandwidth.label>정신 결속 대역폭</VV_MindLinkBandwidth.label>
   <VV_MindLinkBandwidth.description>다른 비비와 얼마나 많은 정신 결속을 맺을 수 있는지 나타냅니다.</VV_MindLinkBandwidth.description>
 
