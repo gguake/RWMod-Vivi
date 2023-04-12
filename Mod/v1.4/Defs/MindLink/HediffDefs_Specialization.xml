@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <HediffDef Abstract="True" Name="VV_SpecializationBase">
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <priceImpact>false</priceImpact>
+    <scenarioCanAdd>false</scenarioCanAdd>
+
+    <initialSeverity>0.01</initialSeverity>
+    <allowMothballIfLowPriorityWorldPawn>true</allowMothballIfLowPriorityWorldPawn>
+  </HediffDef>
+
+  <HediffDef ParentName="VV_SpecializationBase">
+    <defName>VV_NoSpecialization</defName>
+    <label>no vivi specialization</label>
+    <description>.</description>
+    <defaultLabelColor>(0.6, 0.6, 0.6)</defaultLabelColor>
+    
+    <stages>
+      <li>
+        <becomeVisible>false</becomeVisible>
+        <statFactors>
+          <WorkSpeedGlobal>3.0</WorkSpeedGlobal>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef Abstract="True" Name="VV_SpecializationWithLevelBase" ParentName="VV_SpecializationBase">
+    <defaultLabelColor>(0, 0.9, 0.9)</defaultLabelColor>
+    <maxSeverity>4</maxSeverity>
+
+    <comps>
+      <li Class="VVRace.HediffCompProperties_SeverityCurvePerTicks">
+        <severityCurve>
+          <points>
+            <li>0,0</li>
+            <li>30000,1</li>
+            <li>60000,2</li>
+            <li>90000,3</li>
+            <li>120000,4</li>
+          </points>
+        </severityCurve>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <HediffDef ParentName="VV_SpecializationWithLevelBase">
+    <defName>VV_SpecializationGuard</defName>
+    <label>specialized - guard</label>
+    <description>.</description>
+
+    <stages>
+      <li>
+        <label>I</label>
+        <statFactors>
+          <WorkSpeedGlobal>0.05</WorkSpeedGlobal>
+        </statFactors>
+      </li>
+      <li>
+        <minSeverity>1</minSeverity>
+        <label>II</label>
+      </li>
+      <li>
+        <minSeverity>2</minSeverity>
+        <label>III</label>
+      </li>
+      <li>
+        <minSeverity>3</minSeverity>
+        <label>IV</label>
+      </li>
+      <li>
+        <minSeverity>4</minSeverity>
+        <label>V</label>
+      </li>
+    </stages>
+
+  </HediffDef>
+</Defs>

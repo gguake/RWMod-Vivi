@@ -26,6 +26,11 @@ namespace VVRace
                     {
                         eggSettings = new ViviEggSettings(this);
                     }
+
+                    if (mindLinkSettings != null)
+                    {
+                        mindLinkSettings = null;
+                    }
                 }
                 else
                 {
@@ -33,25 +38,25 @@ namespace VVRace
                     {
                         eggSettings = null;
                     }
+
+                    if (mindLinkSettings == null)
+                    {
+                        mindLinkSettings = new ViviMindLinkSettings(this);
+                    }
                 }
             }
         }
 
         public ViviEggSettings ViviEggSettings => eggSettings;
-
-        public ViviControlSettings ViviControlSettings => controlSettings;
-        public Pawn MindLinkWishPawn => controlSettings == null ? mindLinkWishPawn : null;
-        public bool MindLinkUnassignRequested => controlSettings == null ? false : controlSettings.UnassignRequested;
+        public ViviMindLinkSettings ViviMindLinkSettings => mindLinkSettings;
 
         private bool shouldCheckApparels;
 
         private bool isRoyal;
         private ViviEggSettings eggSettings;
-        private ViviControlSettings controlSettings;
-        private Pawn mindLinkWishPawn;
+        private ViviMindLinkSettings mindLinkSettings;
         private Color? originalHairColor;
 
-        #region overrides
         public override string Label => isRoyal ? 
             string.Concat(LocalizeTexts.RoyalGeneLabelPrefix.Translate(), " ", base.Label) :
             base.Label;
@@ -62,14 +67,13 @@ namespace VVRace
 
             Scribe_Values.Look(ref isRoyal, "isRoyal");
             Scribe_Deep.Look(ref eggSettings, "eggSettings", this);
-            Scribe_Deep.Look(ref controlSettings, "controlSettings", this);
-            Scribe_References.Look(ref mindLinkWishPawn, "mindLinkWishPawn");
+            Scribe_Deep.Look(ref mindLinkSettings, "mindLinkSettings", this);
             Scribe_Values.Look(ref originalHairColor, "originalHairColor");
 
             if (Scribe.mode == LoadSaveMode.ResolvingCrossRefs)
             {
-                if (eggSettings != null) { eggSettings.gene = this; }
-                if (controlSettings != null) { controlSettings.gene = this; }
+                eggSettings?.ResolveReferences(this);
+                mindLinkSettings?.ResolveReferences(this);
             }
         }
 
@@ -99,79 +103,28 @@ namespace VVRace
 
         public override IEnumerable<Gizmo> GetGizmos()
         {
-            if (pawn.IsColonistPlayerControlled)
+            if (!pawn.IsColonistPlayerControlled)
             {
-                if (!IsRoyal && pawn.CanMakeNewMindLink())
+                yield break;
+            }
+
+            if (!IsRoyal)
+            {
+                if (mindLinkSettings != null)
                 {
-                    if (controlSettings == null)
+                    foreach (var gizmo in mindLinkSettings.GetGizmos())
                     {
-                        var command_mindLink = new Command_Toggle();
-                        command_mindLink.isActive = () => mindLinkWishPawn != null;
-
-                        if (mindLinkWishPawn != null)
-                        {
-                            command_mindLink.toggleAction = delegate
-                            {
-                                mindLinkWishPawn = null;
-                            };
-                        }
-                        else
-                        {
-                            var candidates = pawn.Map.mapPawns.FreeColonistsSpawned.Where(p => p != pawn && p.HasMindTransmitter() && !p.Dead && p.Spawned).ToList();
-                            command_mindLink.disabled = !candidates.Any();
-                            command_mindLink.toggleAction = delegate
-                            {
-                                Find.WindowStack.Add(new FloatMenu(candidates.Select(pawn =>
-                                {
-                                    pawn.TryGetMindTransmitter(out var mindTransmitter);
-                                    return new FloatMenuOption($"{pawn.Name.ToStringShort} ({mindTransmitter?.UsedBandwidth} / {mindTransmitter?.TotalBandWidth})", delegate
-                                    {
-                                        mindLinkWishPawn = pawn;
-                                    });
-
-                                }).ToList()));
-                            };
-                        }
-
-                        command_mindLink.icon = TexCommand.HoldOpen;
-                        command_mindLink.turnOnSound = SoundDefOf.Checkbox_TurnedOn;
-                        command_mindLink.turnOffSound = SoundDefOf.Checkbox_TurnedOff;
-                        command_mindLink.defaultLabel = (mindLinkWishPawn != null ? LocalizeTexts.CommandCancelConnectMindLink : LocalizeTexts.CommandConnectMindLink).Translate();
-                        command_mindLink.defaultDesc = LocalizeTexts.CommandConnectMindLinkDesc.Translate();
-                        yield return command_mindLink;
-                    }
-                    else
-                    {
-                        var command_mindLink = new Command_Toggle();
-                        command_mindLink.isActive = () => controlSettings.UnassignRequested;
-                        command_mindLink.toggleAction = delegate
-                        {
-                            controlSettings.UnassignRequested = !controlSettings.UnassignRequested;
-                        };
-                        command_mindLink.icon = TexCommand.SelectCarriedPawn;
-                        command_mindLink.turnOnSound = SoundDefOf.Checkbox_TurnedOn;
-                        command_mindLink.turnOffSound = SoundDefOf.Checkbox_TurnedOff;
-                        command_mindLink.defaultLabel = (controlSettings.UnassignRequested ? LocalizeTexts.CommandCancelDisconnectMindLink : LocalizeTexts.CommandDisconnectMindLink).Translate();
-                        command_mindLink.defaultDesc = LocalizeTexts.CommandDisconnectMindLinkDesc.Translate();
-                        yield return command_mindLink;
+                        yield return gizmo;
                     }
                 }
-                else
+            }
+            else
+            {
+                if (eggSettings != null)
                 {
-                    if (eggSettings != null)
+                    foreach (var gizmo in eggSettings.GetGizmos())
                     {
-                        yield return new EggProgressGizmo(eggSettings);
-
-                        if (DebugSettings.godMode)
-                        {
-                            Command_Action command_addEggProgress = new Command_Action();
-                            command_addEggProgress.defaultLabel = "DEV: Add Egg Progress";
-                            command_addEggProgress.action = () =>
-                            {
-                                eggSettings.AddEggProgressDirectlyForDebug(0.1f);
-                            };
-                            yield return command_addEggProgress;
-                        }
+                        yield return gizmo;
                     }
                 }
             }
@@ -181,12 +134,39 @@ namespace VVRace
         {
             base.PostAdd();
 
-            if (pawn.kindDef is PawnKindDefExt kindDefExt && kindDefExt.isRoyal)
+            var kindDefExt = pawn.kindDef as PawnKindDefExt;
+            IsRoyal = kindDefExt != null && kindDefExt.isRoyal;
+
+            if (IsRoyal)
             {
-                MakeRoyal(kindDefExt.preventRoyalBodyType);
+                IsRoyal = true;
+
+                if (!pawn.health.hediffSet.HasHediff(VVHediffDefOf.VV_MindTransmitter))
+                {
+                    pawn.health.AddHediff(VVHediffDefOf.VV_MindTransmitter);
+                }
+
+                // 로얄 비비인 경우는 마인드 링크를 제거한다.
+                if (pawn.TryGetMindLink(out var mindLink) && mindLink.linker != null && mindLink.linker.TryGetMindTransmitter(out var parentMindTransmitter))
+                {
+                    parentMindTransmitter.UnassignPawnControl(pawn);
+                }
+
+                if (!kindDefExt.preventRoyalBodyType)
+                {
+                    pawn.genes.AddGene(VVGeneDefOf.Body_Standard, true);
+                    pawn.story.bodyType = BodyTypeDefOf.Female;
+
+                    var shouldRemoveApparels = pawn.apparel.WornApparel.Where((Apparel apparel) => !apparel.def.apparel.PawnCanWear(pawn)).ToList();
+                    foreach (var apparel in shouldRemoveApparels)
+                    {
+                        pawn.apparel.Remove(apparel);
+                    }
+
+                    pawn.Drawer.renderer.graphics.SetAllGraphicsDirty();
+                }
             }
         }
-        #endregion
 
         public bool ShouldBeRoyalIfMature()
         {
@@ -196,75 +176,39 @@ namespace VVRace
             return need.ShouldBeRoyalIfMature;
         }
 
-        public void MakeRoyal(bool preventChangeBodyType = false)
-        {
-            IsRoyal = true;
-
-            if (!pawn.health.hediffSet.HasHediff(VVHediffDefOf.VV_MindTransmitter))
-            {
-                pawn.health.AddHediff(VVHediffDefOf.VV_MindTransmitter);
-            }
-
-            if (!preventChangeBodyType)
-            {
-                // 로얄 비비가 된 경우는 마인드 링크를 해제한다.
-                if (pawn.TryGetMindLink(out var mindLink) && mindLink.linker != null && mindLink.linker.TryGetMindTransmitter(out var parentMindTransmitter))
-                {
-                    parentMindTransmitter.UnassignPawnControl(pawn);
-                }
-
-                pawn.genes.AddGene(VVGeneDefOf.Body_Standard, true);
-                pawn.story.bodyType = BodyTypeDefOf.Female;
-
-                var shouldRemoveApparels = pawn.apparel.WornApparel.Where((Apparel apparel) => !apparel.def.apparel.PawnCanWear(pawn)).ToList();
-                foreach (var apparel in shouldRemoveApparels)
-                {
-                    pawn.apparel.Remove(apparel);
-                }
-
-
-                pawn.Drawer.renderer.graphics.SetAllGraphicsDirty();
-            }
-        }
-
         #region Notificaitons
         public void Notify_MakeNewMindLink(Pawn linker)
         {
-            mindLinkWishPawn = null;
-
-            controlSettings = new ViviControlSettings(this);
-            controlSettings.Notify_NewMindLink();
-
             if (!pawn.health?.hediffSet?.HasHediff(VVHediffDefOf.VV_MindLink) ?? false)
             {
                 var hediff = pawn.health.AddHediff(VVHediffDefOf.VV_MindLink) as Hediff_MindLink;
                 hediff.linker = linker;
             }
+
+            mindLinkSettings?.Notify_MindLinkConnected();
         }
 
         public void Notify_RemoveMindLink(bool directlyRemoveHediff)
         {
-            var mindLinkHediff = pawn.health?.hediffSet?.GetFirstHediffOfDef(VVHediffDefOf.VV_MindLink) as Hediff_MindLink;
-            if (mindLinkHediff != null)
+            var hediff = pawn.health?.hediffSet?.GetFirstHediffOfDef(VVHediffDefOf.VV_MindLink) as Hediff_MindLink;
+            if (hediff != null)
             {
                 if (directlyRemoveHediff)
                 {
-                    pawn.health.RemoveHediff(mindLinkHediff);
+                    pawn.health.RemoveHediff(hediff);
                 }
                 else
                 {
-                    mindLinkHediff.linker = null;
+                    hediff.linker = null;
                 }
             }
-
-            controlSettings = null;
         }
 
         public void Notify_ForceBreakingMindLink()
         {
-            if (controlSettings == null) { return; }
+            if (mindLinkSettings?.TryGetHediffMindLink(out var hediffMindLink) != true) { return; }
 
-            var linkElapsedTicks = controlSettings.MindLinkElapsedTicks;
+            var linkElapsedTicks = hediffMindLink.ConnectedTicks;
             if (linkElapsedTicks > 0)
             {
                 var penaltyStage = Mathf.Clamp(linkElapsedTicks / (12 * 60000), 0, 5) - 1;
@@ -355,11 +299,6 @@ namespace VVRace
                     eggSettings.StoreGene(list[i]);
                 }
             }
-        }
-
-        public void Notify_MindLinkWishPawnDead()
-        {
-            mindLinkWishPawn = null;
         }
         #endregion
 

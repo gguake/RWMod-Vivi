@@ -36,13 +36,6 @@ namespace VVRace
     }
 
     [DefOf]
-    public static class VVWorkModeDefOf
-    {
-        public static ViviWorkModeDef VV_Work;
-        public static ViviWorkModeDef VV_Escort;
-    }
-
-    [DefOf]
     public static class VVThoughtDefOf
     {
         public static ThoughtDef VV_MindLinkForceBreaked;
@@ -119,5 +112,11 @@ namespace VVRace
     public static class VVDesignationCategoryDefOf
     {
         public static DesignationCategoryDef VV_Bulidings;
+    }
+
+    [DefOf]
+    public static class VVViviSpecializationDefOf
+    {
+        public static ViviSpecializationDef VV_NoSpecialization;
     }
 }

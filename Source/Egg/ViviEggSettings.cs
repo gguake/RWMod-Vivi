@@ -1,5 +1,6 @@
 ﻿using RimWorld;
 using System.Collections.Generic;
+using System.Runtime;
 using UnityEngine;
 using Verse;
 
@@ -47,6 +48,11 @@ namespace VVRace
             Scribe_Collections.Look(ref storedGenes, "storedGenes", LookMode.Def);
         }
 
+        public void ResolveReferences(Gene_Vivi gene)
+        {
+            this.gene = gene;
+        }
+
         public void StoreGene(GeneDef geneDef)
         {
             storedGenes.Add(geneDef);
@@ -80,6 +86,23 @@ namespace VVRace
         public void AddEggProgressDirectlyForDebug(float progress)
         {
             eggProgress = Mathf.Clamp01(eggProgress + progress);
+        }
+
+        public IEnumerable<Gizmo> GetGizmos()
+        {
+            yield return new EggProgressGizmo(this);
+
+            if (DebugSettings.godMode)
+            {
+                Command_Action command_addEggProgress = new Command_Action();
+                command_addEggProgress.defaultLabel = "DEV: Add Egg Progress";
+                command_addEggProgress.action = () =>
+                {
+                    AddEggProgressDirectlyForDebug(0.1f);
+                };
+
+                yield return command_addEggProgress;
+            }
         }
     }
 }

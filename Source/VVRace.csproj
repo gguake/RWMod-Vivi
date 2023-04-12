@@ -89,6 +89,8 @@
     <Compile Include="Honey\Filth_Pollen.cs" />
     <Compile Include="Honey\HoneyUtility.cs" />
     <Compile Include="MindLink\AI\ThinkNode_ConditionalViviWorkMode.cs" />
+    <Compile Include="MindLink\HediffComp_SeverityCurvePerTicks.cs" />
+    <Compile Include="MindLink\ViviSpecializationDef.cs" />
     <Compile Include="PawnKindDefExt.cs" />
     <Compile Include="Harvest\RecipeDef_Harvest.cs" />
     <Compile Include="Utility\ToilUtility.cs" />
@@ -114,12 +116,10 @@
     <Compile Include="MindLink\UI\MindTransmitterBandwidthGizmo.cs" />
     <Compile Include="MindLink\UI\PawnColumnWorker_DraftVivi.cs" />
     <Compile Include="MindLink\UI\PawnColumnWorker_MindLink.cs" />
-    <Compile Include="MindLink\UI\PawnColumnWorker_RestFirstVivi.cs" />
-    <Compile Include="MindLink\UI\PawnColumnWorker_ViviWorkMode.cs" />
+    <Compile Include="MindLink\UI\PawnColumnWorker_ViviSpecialization.cs" />
     <Compile Include="MindLink\PawnRelationWorker_MindLink.cs" />
     <Compile Include="MindLink\StatWorker_MindTransmitter.cs" />
     <Compile Include="MindLink\UI\PawnTable_Vivis.cs" />
-    <Compile Include="MindLink\AI\ViviWorkModeDef.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Egg\AI\JobDriver_LayViviEgg.cs" />
     <Compile Include="Egg\AI\JobGiver_LayViviEgg.cs" />
@@ -133,7 +133,7 @@
     <Compile Include="Egg\UI\EggProgressGizmo.cs" />
     <Compile Include="Egg\ViviEggSettings.cs" />
     <Compile Include="Vivi\ViviRaceUtility.cs" />
-    <Compile Include="MindLink\ViviControlSettings.cs" />
+    <Compile Include="MindLink\ViviMindLinkSettings.cs" />
     <Compile Include="VVDefOf.cs" />
   </ItemGroup>
   <ItemGroup />

@@ -111,15 +111,15 @@ namespace VVRace
             return true;
         }
 
-        public static IEnumerable<FloatMenuOption> GetViviWorkModeFloatMenuOptions(Pawn pawn)
+        public static IEnumerable<FloatMenuOption> GetViviSpecializeFloatMenuOptions(Pawn pawn)
         {
-            foreach (var def in DefDatabase<ViviWorkModeDef>.AllDefsListForReading.OrderBy(def => def.uiOrder))
+            foreach (var def in DefDatabase<ViviSpecializationDef>.AllDefsListForReading.OrderBy(def => def.uiOrder))
             {
                 FloatMenuOption floatMenuOption = new FloatMenuOption(def.LabelCap, delegate
                 {
-                    if (pawn.TryGetViviGene(out var vivi) && vivi.ViviControlSettings != null)
+                    if (pawn.TryGetViviGene(out var vivi) && vivi.ViviMindLinkSettings != null)
                     {
-                        vivi.ViviControlSettings.AssignedWorkMode = def;
+                        vivi.ViviMindLinkSettings.AssignedSpecialization = def;
                     }
 
                 }, def.uiIcon, Color.white);

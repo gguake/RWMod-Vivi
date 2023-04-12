@@ -5,9 +5,9 @@ using Verse.AI;
 
 namespace VVRace
 {
-    public class ThinkNode_ConditionalViviWorkMode : ThinkNode_Conditional
+    public class ThinkNode_ConditionalViviSpecializeWork : ThinkNode_Conditional
     {
-        public ViviWorkModeDef workMode;
+        public ViviSpecializationDef specializationDef;
 
         public override float GetPriority(Pawn pawn)
         {
@@ -48,8 +48,8 @@ namespace VVRace
 
         public override ThinkNode DeepCopy(bool resolve = true)
         {
-            ThinkNode_ConditionalViviWorkMode obj = (ThinkNode_ConditionalViviWorkMode)base.DeepCopy(resolve);
-            obj.workMode = workMode;
+            ThinkNode_ConditionalViviSpecializeWork obj = (ThinkNode_ConditionalViviSpecializeWork)base.DeepCopy(resolve);
+            obj.specializationDef = specializationDef;
             return obj;
         }
 
@@ -60,8 +60,8 @@ namespace VVRace
                 return false;
             }
 
-            var assignedWorkMode = vivi.ViviControlSettings?.AssignedWorkMode;
-            return workMode != null && workMode == assignedWorkMode;
+            var assignedSpecializeDef = vivi.ViviMindLinkSettings?.AssignedSpecialization;
+            return specializationDef != null && specializationDef == assignedSpecializeDef;
         }
     }
 }

@@ -26,17 +26,9 @@
   </PawnColumnDef>
 
   <PawnColumnDef>
-    <defName>VV_RestFirstVivi</defName>
-    <headerTip>rest first</headerTip>
-    <headerIcon>UI/Icons/ColonistBar/MedicalRest</headerIcon>
-    <workerClass>VVRace.PawnColumnWorker_RestFirstVivi</workerClass>
-    <paintable>true</paintable>
-  </PawnColumnDef>
-
-  <PawnColumnDef>
-    <defName>VV_WorkMode</defName>
+    <defName>VV_Specialization</defName>
     <label>work mode</label>
-    <workerClass>VVRace.PawnColumnWorker_ViviWorkMode</workerClass>
+    <workerClass>VVRace.PawnColumnWorker_ViviSpecialization</workerClass>
     <paintable>true</paintable>
   </PawnColumnDef>
 
@@ -48,11 +40,9 @@
       <li MayRequire="Ludeon.RimWorld.Ideology">Ideo</li>
       <li MayRequire="Ludeon.RimWorld.Biotech">Xenotype</li>
       <li>VV_DraftVivi</li>
-      <li>VV_RestFirstVivi</li>
       <li>VV_MindLink</li>
-      <li>VV_WorkMode</li>
       <li>GapTiny</li>
-      <li>AllowedArea</li>
+      <li>VV_Specialization</li>
       <li>RemainingSpace</li>
     </columns>
     <minWidth>0</minWidth>

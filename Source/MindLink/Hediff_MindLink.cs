@@ -6,6 +6,11 @@ namespace VVRace
     public class Hediff_MindLink : HediffWithComps
     {
         public Pawn linker;
+        public int connectStartTicks;
+        public bool wantToDisconnect;
+
+        /// <summary> MindLink가 유지된 총 틱 </summary>
+        public int ConnectedTicks => GenTicks.TicksGame - connectStartTicks;
 
         public override bool ShouldRemove => pawn.GetMindLinkMaster() == null;
 
@@ -14,11 +19,15 @@ namespace VVRace
             base.ExposeData();
 
             Scribe_References.Look(ref linker, "linker");
+            Scribe_Values.Look(ref connectStartTicks, "connectStartTicks");
+            Scribe_Values.Look(ref wantToDisconnect, "wantToDisconnect");
         }
 
         public override void PostMake()
         {
             base.PostMake();
+
+            connectStartTicks = GenTicks.TicksGame;
             UpdateSeverity();
         }
 

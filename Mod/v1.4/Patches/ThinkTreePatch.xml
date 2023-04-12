@@ -10,8 +10,8 @@
           <li Class="VVRace.JobGiver_LayViviEgg" />
         </subNodes>
       </li>
-      <li Class="VVRace.ThinkNode_ConditionalViviWorkMode">
-        <workMode>VV_Escort</workMode>
+      <li Class="VVRace.ThinkNode_ConditionalViviSpecializeWork">
+        <specializationDef>VV_SpecializationGuard</specializationDef>
         <subNodes>
           <li Class="VVRace.JobGiver_ExitMapFollowForEscort" />
           <li Class="VVRace.JobGiver_AIDefendForEscort" />

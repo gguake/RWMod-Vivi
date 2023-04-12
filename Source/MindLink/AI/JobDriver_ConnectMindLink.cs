@@ -24,7 +24,7 @@ namespace VVRace
                     return false;
                 }
 
-                if (!targetPawn.TryGetViviGene(out var vivi) || vivi.MindLinkWishPawn != pawn || vivi.ViviControlSettings != null)
+                if (!targetPawn.TryGetViviGene(out var targetVivi) || targetVivi.ViviMindLinkSettings?.ReservedToConnectPawn != pawn || targetVivi.ViviMindLinkSettings == null || targetVivi.ViviMindLinkSettings.HediffMindLink != null)
                 {
                     return false;
                 }

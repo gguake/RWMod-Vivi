@@ -5,20 +5,20 @@ using Verse;
 
 namespace VVRace
 {
-    public class PawnColumnWorker_ViviWorkMode : PawnColumnWorker
+    public class PawnColumnWorker_ViviSpecialization : PawnColumnWorker
     {
         public override void DoCell(Rect rect, Pawn pawn, PawnTable table)
         {
             if (!pawn.TryGetViviGene(out var vivi)) { return; }
 
-            var workMode = vivi.ViviControlSettings?.AssignedWorkMode;
-            if (workMode == null) { return; }
+            var specializeDef = vivi.ViviMindLinkSettings?.AssignedSpecialization;
+            if (specializeDef == null) { return; }
 
             Text.Font = GameFont.Small;
             Text.Anchor = TextAnchor.MiddleCenter;
             Rect rect2 = rect;
             rect2.xMin += 3f;
-            Widgets.Label(rect2, workMode.LabelCap);
+            Widgets.Label(rect2, specializeDef.LabelCap);
             Text.Anchor = TextAnchor.UpperLeft;
 
             if (Mouse.IsOver(rect))
@@ -38,7 +38,7 @@ namespace VVRace
                 TooltipHandler.TipRegion(rect, tooltip);
                 if (canControlLinked == true && Widgets.ButtonInvisible(rect))
                 {
-                    Find.WindowStack.Add(new FloatMenu(MindLinkUtility.GetViviWorkModeFloatMenuOptions(pawn).ToList()));
+                    Find.WindowStack.Add(new FloatMenu(MindLinkUtility.GetViviSpecializeFloatMenuOptions(pawn).ToList()));
                 }
 
                 Widgets.DrawHighlight(rect);

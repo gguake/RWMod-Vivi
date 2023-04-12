@@ -139,7 +139,7 @@
         </statOffsets>
       </li>
       <li>
-        <minSeverity>1.1</minSeverity>
+        <minSeverity>1.15</minSeverity>
         <capMods>
           <li>
             <capacity>Moving</capacity>
@@ -155,7 +155,7 @@
         </statOffsets>
       </li>
       <li>
-        <minSeverity>1.25</minSeverity>
+        <minSeverity>1.3</minSeverity>
         <capMods>
           <li>
             <capacity>Moving</capacity>

@@ -176,7 +176,6 @@ namespace VVRace
             {
                 if (linked.TryGetViviGene(out var vivi))
                 {
-                    vivi.ViviControlSettings?.ResetWorkSettings();
                     vivi.Notify_RemoveMindLink(directlyRemoveHediff);
                 }
 
@@ -199,8 +198,6 @@ namespace VVRace
 
             if (linked.TryGetViviGene(out var vivi))
             {
-                vivi.ViviControlSettings?.ResetWorkSettings();
-
                 vivi.Notify_RemoveMindLink(directlyRemoveHediff);
             }
 

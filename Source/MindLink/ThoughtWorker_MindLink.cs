@@ -30,9 +30,10 @@ namespace VVRace
             var def = (ThoughtDef_MindLink)this.def;
             if (pawn.TryGetViviGene(out var vivi) && pawn.TryGetMindLinkMaster(out var master) && !master.Dead && master.needs?.mood?.thoughts != null)
             {
+                var mindLinkConnectedTicks = vivi.ViviMindLinkSettings?.HediffMindLink?.ConnectedTicks ?? 0;
                 foreach (var stage in def.mindLinkStages)
                 {
-                    if (vivi.ViviControlSettings?.MindLinkElapsedTicks >= stage.mindLinkElapsedTicks)
+                    if (mindLinkConnectedTicks >= stage.mindLinkElapsedTicks)
                     {
                         return stage.moodMultiplier;
                     }

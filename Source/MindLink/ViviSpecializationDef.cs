@@ -1,14 +1,15 @@
-﻿using System.Collections.Generic;
-using System.Xml;
-using UnityEngine;
+﻿using UnityEngine;
 using Verse;
 
 namespace VVRace
 {
-    public class ViviWorkModeDef : Def
+    public class ViviSpecializationDef : Def
     {
+        public HediffDef hediff;
+
         [NoTranslate]
         public string iconPath;
+
         public Texture2D uiIcon;
         public int uiOrder;
 
@@ -22,6 +23,5 @@ namespace VVRace
                 });
             }
         }
-
     }
 }

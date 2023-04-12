@@ -18,13 +18,13 @@ namespace VVRace
 
             foreach (var candidate in pawn.Map.mapPawns.SpawnedPawnsInFaction(pawn.Faction))
             {
-                if (candidate.Dead || !candidate.Spawned || !candidate.TryGetViviGene(out var vivi)) { continue; }
+                if (candidate.Dead || !candidate.Spawned || !candidate.TryGetViviGene(out var vivi) || vivi.ViviMindLinkSettings == null) { continue; }
 
-                if (vivi.ViviControlSettings == null && vivi.MindLinkWishPawn == pawn)
+                if (vivi.ViviMindLinkSettings.HediffMindLink == null && vivi.ViviMindLinkSettings?.ReservedToConnectPawn == pawn)
                 {
                     return JobMaker.MakeJob(VVJobDefOf.VV_ConnectMindLink, candidate);
                 }
-                else if (vivi.ViviControlSettings != null && candidate.TryGetMindLinkMaster(out var master) && master == pawn && vivi.MindLinkUnassignRequested)
+                else if (vivi.ViviMindLinkSettings.HediffMindLink?.wantToDisconnect == true && candidate.TryGetMindLinkMaster(out var master) && master == pawn)
                 {
                     return JobMaker.MakeJob(VVJobDefOf.VV_DisconnectMindLink, candidate);
                 }
