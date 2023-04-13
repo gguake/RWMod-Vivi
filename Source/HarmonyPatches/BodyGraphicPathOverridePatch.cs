@@ -29,79 +29,98 @@ namespace VVRace.HarmonyPatches
         private static GeneDefExt FindBodyTypeReplacerGeneDef(Pawn pawn)
             => (GeneDefExt)pawn?.genes?.GenesListForReading.FirstOrDefault(gene => gene.def is GeneDefExt ext && ext.bodyTypeOverrides != null)?.def;
 
-        private static Vector2 ApplyGeneBodyHeadOffset(Vector2 baseHeadOffset, Pawn pawn)
+        private static Vector2 ApplyGeneBodyHeadOffset(GeneDefExt geneDef, Pawn pawn)
         {
-            var geneDef = FindBodyTypeReplacerGeneDef(pawn);
-            if (geneDef != null && pawn.story != null)
+            GeneBodyTypeOverride bodyTypeOverride = null;
+
+            var bodyType = pawn.story.bodyType;
+            if (bodyType == BodyTypeDefOf.Thin)
             {
-                if (pawn.story.bodyType == BodyTypeDefOf.Thin)
-                {
-                    return baseHeadOffset + geneDef.bodyTypeOverrides.Thin.headOffset;
-                }
-                else if (pawn.story.bodyType == BodyTypeDefOf.Female)
-                {
-                    return baseHeadOffset + geneDef.bodyTypeOverrides.Female.headOffset;
-                }
-                else if (pawn.story.bodyType == BodyTypeDefOf.Child)
-                {
-                    return baseHeadOffset + geneDef.bodyTypeOverrides.Child.headOffset;
-                }
+                bodyTypeOverride = geneDef.bodyTypeOverrides.Thin;
+            }
+            else if (bodyType == BodyTypeDefOf.Female)
+            {
+                bodyTypeOverride = geneDef.bodyTypeOverrides.Female;
+            }
+            else if (bodyType == BodyTypeDefOf.Child)
+            {
+                bodyTypeOverride = geneDef.bodyTypeOverrides.Child;
             }
 
-            return baseHeadOffset;
+            var baseHeadOffset = bodyTypeOverride != null && bodyTypeOverride.useUniqueHeadOffset ?
+                bodyTypeOverride.headOffset : 
+                pawn.story.bodyType.headOffset;
+
+            return baseHeadOffset * (bodyTypeOverride != null && !bodyTypeOverride.applyLifeStageHeadOffset ? 1f : Mathf.Sqrt(pawn.ageTracker.CurLifeStage.bodySizeFactor));
         }
 
         private static void PawnGraphicSet_ResolveGeneGraphics_Postfix(PawnGraphicSet __instance, Pawn ___pawn)
         {
-            var pawn = ___pawn;
-            var geneDef = FindBodyTypeReplacerGeneDef(pawn);
-            if (geneDef == null || pawn.story == null) { return; }
+            var geneDef = FindBodyTypeReplacerGeneDef(___pawn);
+            if (geneDef == null || ___pawn.story == null) { return; }
 
-            var shouldChangeGraphic = false;
-            Color color = default;
-            string path = default;
-
-            if (pawn.story.bodyType == BodyTypeDefOf.Thin)
+            GeneBodyTypeOverride bodyTypeOverride = null;
+            if (___pawn.story.bodyType == BodyTypeDefOf.Thin)
             {
-                shouldChangeGraphic = true;
-                color = (pawn.story.SkinColorOverriden ? (PawnGraphicSet.RottingColorDefault * pawn.story.SkinColor) : PawnGraphicSet.RottingColorDefault);
-                path = geneDef.bodyTypeOverrides.Thin.overrideGraphicPath;
+                bodyTypeOverride = geneDef.bodyTypeOverrides.Thin;
             }
-            else if (pawn.story.bodyType == BodyTypeDefOf.Female)
+            else if (___pawn.story.bodyType == BodyTypeDefOf.Female)
             {
-                shouldChangeGraphic = true;
-                color = (pawn.story.SkinColorOverriden ? (PawnGraphicSet.RottingColorDefault * pawn.story.SkinColor) : PawnGraphicSet.RottingColorDefault);
-                path = geneDef.bodyTypeOverrides.Female.overrideGraphicPath;
+                bodyTypeOverride = geneDef.bodyTypeOverrides.Female;
             }
-            else if (pawn.story.bodyType == BodyTypeDefOf.Child)
+            else if (___pawn.story.bodyType == BodyTypeDefOf.Child)
             {
-                shouldChangeGraphic = true;
-                color = (pawn.story.SkinColorOverriden ? (PawnGraphicSet.RottingColorDefault * pawn.story.SkinColor) : PawnGraphicSet.RottingColorDefault);
-                path = geneDef.bodyTypeOverrides.Child.overrideGraphicPath;
+                bodyTypeOverride = geneDef.bodyTypeOverrides.Child;
             }
 
-            if (shouldChangeGraphic)
+            if (bodyTypeOverride?.overrideGraphicPath != null)
             {
-                __instance.nakedGraphic = GraphicDatabase.Get<Graphic_Multi>(path, ShaderUtility.GetSkinShader(pawn.story.SkinColorOverriden), Vector2.one, pawn.story.SkinColor);
-                __instance.rottingGraphic = GraphicDatabase.Get<Graphic_Multi>(path, ShaderUtility.GetSkinShader(pawn.story.SkinColorOverriden), Vector2.one, color);
+                var color = (___pawn.story.SkinColorOverriden ? (PawnGraphicSet.RottingColorDefault * ___pawn.story.SkinColor) : PawnGraphicSet.RottingColorDefault);
+                var path = bodyTypeOverride.overrideGraphicPath;
+
+                __instance.nakedGraphic = GraphicDatabase.Get<Graphic_Multi>(path, ShaderUtility.GetSkinShader(___pawn.story.SkinColorOverriden), Vector2.one, ___pawn.story.SkinColor);
+                __instance.rottingGraphic = GraphicDatabase.Get<Graphic_Multi>(path, ShaderUtility.GetSkinShader(___pawn.story.SkinColorOverriden), Vector2.one, color);
             }
         }
 
-        private static IEnumerable<CodeInstruction> PawnRenderer_BaseHeadOffsetAt_Transpiler(IEnumerable<CodeInstruction> codeInstructions)
+        private static IEnumerable<CodeInstruction> PawnRenderer_BaseHeadOffsetAt_Transpiler(IEnumerable<CodeInstruction> codeInstructions, ILGenerator ilGenerator)
         {
-            var fieldHeadOffset = AccessTools.Field(typeof(BodyTypeDef), nameof(BodyTypeDef.headOffset));
+            var instructions = codeInstructions.ToList();
 
-            foreach (var instruction in codeInstructions)
+            var injectionIndex = 0;
+            var stlocIndex = instructions.FirstIndexOfInstruction(OpCodes.Stloc_0, operand: null);
+
+            var elseLabel = ilGenerator.DefineLabel();
+            var skipLabel = ilGenerator.DefineLabel();
+
+            var localIndex = ilGenerator.DeclareLocal(typeof(GeneDefExt));
+            var injection = new List<CodeInstruction>()
             {
-                yield return instruction;
+                // var geneDef = FindBodyTypeReplacerGeneDef(pawn);
+                new CodeInstruction(OpCodes.Ldarg_0),
+                new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(PawnRenderer), "pawn")),
+                new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(GeneBodyGraphicPatch), nameof(GeneBodyGraphicPatch.FindBodyTypeReplacerGeneDef))),
+                new CodeInstruction(OpCodes.Dup),
+                new CodeInstruction(OpCodes.Stloc_S, localIndex),
 
-                if (instruction.operand is FieldInfo fieldInfo && fieldInfo == fieldHeadOffset)
-                {
-                    yield return new CodeInstruction(OpCodes.Ldarg_0);
-                    yield return new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(PawnRenderer), "pawn"));
-                    yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(GeneBodyGraphicPatch), nameof(ApplyGeneBodyHeadOffset)));
-                }
-            }
+                // if (geneDef == null) { goto elseLabel; }
+                new CodeInstruction(OpCodes.Brfalse_S, elseLabel),
+
+                new CodeInstruction(OpCodes.Ldloc_S, localIndex),
+                new CodeInstruction(OpCodes.Ldarg_0),
+                new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(PawnRenderer), "pawn")),
+                new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(GeneBodyGraphicPatch), nameof(ApplyGeneBodyHeadOffset))),
+                new CodeInstruction(OpCodes.Stloc_0),
+
+                new CodeInstruction(OpCodes.Br_S, skipLabel),
+            };
+
+            instructions[injectionIndex].labels.Add(elseLabel);
+            instructions[stlocIndex + 1].labels.Add(skipLabel);
+
+            instructions.InsertRange(injectionIndex, injection);
+
+            return instructions;
         }
 
         private static void Pawn_GeneTracker_Notify_GenesChanged_Postfix(Pawn ___pawn, GeneDef addedOrRemovedGene)

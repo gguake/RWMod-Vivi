@@ -6,6 +6,9 @@ namespace VVRace
     public class GeneBodyTypeOverride
     {
         public string overrideGraphicPath;
+
+        public bool useUniqueHeadOffset = false;
+        public bool applyLifeStageHeadOffset = true;
         public Vector2 headOffset;
     }
 

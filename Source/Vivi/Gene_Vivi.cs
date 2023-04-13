@@ -135,35 +135,47 @@ namespace VVRace
         {
             base.PostAdd();
 
-            var kindDefExt = pawn.kindDef as PawnKindDefExt;
-            IsRoyal = kindDefExt != null && kindDefExt.isRoyal;
-
-            if (IsRoyal)
+            if (pawn.DevelopmentalStage.Adult())
             {
-                IsRoyal = true;
+                var kindDefExt = pawn.kindDef as PawnKindDefExt;
+                IsRoyal = kindDefExt != null && kindDefExt.isRoyal;
 
-                if (!pawn.health.hediffSet.HasHediff(VVHediffDefOf.VV_MindTransmitter))
+                if (IsRoyal)
                 {
-                    pawn.health.AddHediff(VVHediffDefOf.VV_MindTransmitter);
-                }
+                    IsRoyal = true;
 
-                // 로얄 비비인 경우는 마인드 링크를 제거한다.
-                if (pawn.TryGetMindLink(out var mindLink) && mindLink.linker != null && mindLink.linker.TryGetMindTransmitter(out var parentMindTransmitter))
-                {
-                    parentMindTransmitter.UnassignPawnControl(pawn);
-                }
-
-                if (!kindDefExt.preventRoyalBodyType)
-                {
-                    pawn.genes.AddGene(VVGeneDefOf.Body_Standard, true);
-                    pawn.story.bodyType = BodyTypeDefOf.Female;
-
-                    var shouldRemoveApparels = pawn.apparel.WornApparel.Where((Apparel apparel) => !apparel.def.apparel.PawnCanWear(pawn)).ToList();
-                    foreach (var apparel in shouldRemoveApparels)
+                    if (!pawn.health.hediffSet.HasHediff(VVHediffDefOf.VV_MindTransmitter))
                     {
-                        pawn.apparel.Remove(apparel);
+                        pawn.health.AddHediff(VVHediffDefOf.VV_MindTransmitter);
                     }
 
+                    // 로얄 비비인 경우는 마인드 링크를 제거한다.
+                    if (pawn.TryGetMindLink(out var mindLink) && mindLink.linker != null && mindLink.linker.TryGetMindTransmitter(out var parentMindTransmitter))
+                    {
+                        parentMindTransmitter.UnassignPawnControl(pawn);
+                    }
+
+                    if (!kindDefExt.preventRoyalBodyType)
+                    {
+                        pawn.genes.AddGene(VVGeneDefOf.Body_Standard, true);
+                        pawn.story.bodyType = BodyTypeDefOf.Female;
+
+                        var shouldRemoveApparels = pawn.apparel.WornApparel.Where((Apparel apparel) => !apparel.def.apparel.PawnCanWear(pawn)).ToList();
+                        foreach (var apparel in shouldRemoveApparels)
+                        {
+                            pawn.apparel.Remove(apparel);
+                        }
+
+                        pawn.Drawer.renderer.graphics.SetAllGraphicsDirty();
+                    }
+                }
+            }
+            else if (pawn.DevelopmentalStage.Child())
+            {
+                if (originalHairColor == null)
+                {
+                    originalHairColor = pawn.story.HairColor;
+                    pawn.story.HairColor = Color.white;
                     pawn.Drawer.renderer.graphics.SetAllGraphicsDirty();
                 }
             }
@@ -252,9 +264,12 @@ namespace VVRace
 
         public void Notify_ChildLifeStageStart()
         {
-            originalHairColor = pawn.story.HairColor;
-            pawn.story.HairColor = Color.white;
-            pawn.Drawer.renderer.graphics.SetAllGraphicsDirty();
+            if (originalHairColor == null)
+            {
+                originalHairColor = pawn.story.HairColor;
+                pawn.story.HairColor = Color.white;
+                pawn.Drawer.renderer.graphics.SetAllGraphicsDirty();
+            }
         }
 
         public void Notify_AdultLifeStageStarted()
