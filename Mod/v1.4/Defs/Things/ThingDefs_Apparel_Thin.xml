@@ -46,7 +46,7 @@
     <colorGenerator Class="ColorGenerator_White" />
   </ThingDef>
 
-  <ThingDef ParentName="ApparelNoQualityBase">
+  <ThingDef ParentName="ApparelBase">
     <defName>VV_WorkerUniformDress</defName>
     <label>vivi worker uniform</label>
     <description>.</description>
@@ -88,6 +88,54 @@
       <bodyTypeWhitelist>
         <li>Child</li>
         <li>Thin</li>
+      </bodyTypeWhitelist>
+      <fixedBodyType>Thin</fixedBodyType>
+    </apparel>
+    <colorGenerator Class="ColorGenerator_White" />
+  </ThingDef>
+  
+  <ThingDef ParentName="ApparelBase">
+    <defName>VV_WinterCape</defName>
+    <label>vivi winter cape</label>
+    <description>.</description>
+    <graphicData>
+      <texPath>Things/Apparel/WinterCape</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <smeltable>false</smeltable>
+    <thingCategories>
+      <li>ApparelMisc</li>
+    </thingCategories>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <WorkToMake>2800</WorkToMake>
+      <Mass>0.25</Mass>
+      <ArmorRating_Sharp>0.44</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.56</ArmorRating_Blunt>
+      <Insulation_Cold>24</Insulation_Cold>
+      <Insulation_Heat>12</Insulation_Heat>
+      <EquipDelay>1.0</EquipDelay>
+    </statBases>
+    <apparel Class="VVRace.ApparelPropertiesExt">
+      <bodyPartGroups>
+        <li>Neck</li>
+        <li>Shoulders</li>
+        <li>Torso</li>
+        <li>Arms</li>
+      </bodyPartGroups>
+      <wornGraphicPath>Things/Apparel/WinterCape</wornGraphicPath>
+      <layers>
+        <li>Middle</li>
+      </layers>
+      <tags>
+        <li>VV_ViviApparel</li>
+      </tags>
+      <canBeDesiredForIdeo>false</canBeDesiredForIdeo>
+      <developmentalStageFilter>Child, Adult</developmentalStageFilter>
+      <bodyTypeWhitelist>
+        <li>Child</li>
+        <li>Thin</li>
+        <li>Female</li>
       </bodyTypeWhitelist>
       <fixedBodyType>Thin</fixedBodyType>
     </apparel>
