@@ -22,7 +22,7 @@ namespace VVRace
                     return false;
                 }
 
-                if (!targetPawn.TryGetViviGene(out var vivi) || vivi.ViviMindLinkSettings?.HediffMindLink?.wantToDisconnect != true)
+                if (!targetPawn.TryGetViviGene(out var vivi) || vivi.ViviMindLinkSettings?.ReservedToDisconnect != true)
                 {
                     return false;
                 }

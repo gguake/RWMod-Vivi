@@ -7,7 +7,19 @@ namespace VVRace
 {
     public class ViviMindLinkSettings : IExposable
     {
-        public Hediff_MindLink HediffMindLink => TryGetHediffMindLink(out var hediff) ? hediff : null;
+        public Hediff_MindLink HediffMindLink
+        {
+            get
+            {
+                if (cacheDirty)
+                {
+                    cacheDirty = false;
+                    cachedHediff = TryGetHediffMindLink(out var hediff) ? hediff : null;
+                }
+
+                return cachedHediff;
+            }
+        }
 
         public ViviSpecializationDef AssignedSpecialization
         {
@@ -17,27 +29,43 @@ namespace VVRace
             }
             set
             {
+                var beforeSpecialization = assignedSpecialization;
+                if (beforeSpecialization.hediff != null)
+                {
+                    gene.pawn.health?.hediffSet?.GetFirstHediffOfDef(beforeSpecialization.hediff);
+                }
+
                 assignedSpecialization = value;
+
+                
 
                 gene.pawn.InterruptCurrentJob();
             }
         }
 
-        public Pawn ReservedToConnectPawn => reservedToConnectPawn;
+        public Pawn ReservedToConnectTarget => reservedToConnectTarget;
+        public bool ReservedToDisconnect => HediffMindLink?.disconnectReserved ?? false;
 
         private Gene_Vivi gene;
         private ViviSpecializationDef assignedSpecialization;
-        private Pawn reservedToConnectPawn;
+        private Pawn reservedToConnectTarget;
+
+        private bool cacheDirty = true;
+        private Hediff_MindLink cachedHediff;
 
         public ViviMindLinkSettings(Gene_Vivi gene)
         {
             this.gene = gene;
         }
 
+        public void Tick(int ticks)
+        {
+        }
+
         public void ExposeData()
         {
             Scribe_Defs.Look(ref assignedSpecialization, "assignedSpecialization");
-            Scribe_References.Look(ref reservedToConnectPawn, "reservedToConnectPawn");
+            Scribe_References.Look(ref reservedToConnectTarget, "reservedToConnectTarget");
         }
 
         public void ResolveReferences(Gene_Vivi gene)
@@ -51,9 +79,16 @@ namespace VVRace
             return hediff != null;
         }
 
-        public void Notify_MindLinkConnected()
+        public void Notify_MindLinkCreated()
         {
-            reservedToConnectPawn = null;
+            reservedToConnectTarget = null;
+            cacheDirty = true;
+        }
+
+        public void Notify_MindLinkRemoved()
+        {
+            cachedHediff = null;
+            cacheDirty = true;
         }
 
         public IEnumerable<Gizmo> GetGizmos()
@@ -62,13 +97,13 @@ namespace VVRace
             if (hediff == null)
             {
                 var command_mindLink = new Command_Toggle();
-                command_mindLink.isActive = () => reservedToConnectPawn != null;
+                command_mindLink.isActive = () => reservedToConnectTarget != null;
 
-                if (reservedToConnectPawn != null)
+                if (reservedToConnectTarget != null)
                 {
                     command_mindLink.toggleAction = delegate
                     {
-                        reservedToConnectPawn = null;
+                        reservedToConnectTarget = null;
                     };
                 }
                 else
@@ -82,7 +117,7 @@ namespace VVRace
                             pawn.TryGetMindTransmitter(out var mindTransmitter);
                             return new FloatMenuOption($"{pawn.Name.ToStringShort} ({mindTransmitter?.UsedBandwidth} / {mindTransmitter?.TotalBandWidth})", delegate
                             {
-                                reservedToConnectPawn = pawn;
+                                reservedToConnectTarget = pawn;
                             });
 
                         }).ToList()));
@@ -92,22 +127,22 @@ namespace VVRace
                 command_mindLink.icon = TexCommand.HoldOpen;
                 command_mindLink.turnOnSound = SoundDefOf.Checkbox_TurnedOn;
                 command_mindLink.turnOffSound = SoundDefOf.Checkbox_TurnedOff;
-                command_mindLink.defaultLabel = (reservedToConnectPawn != null ? LocalizeTexts.CommandCancelConnectMindLink : LocalizeTexts.CommandConnectMindLink).Translate();
+                command_mindLink.defaultLabel = (reservedToConnectTarget != null ? LocalizeTexts.CommandCancelConnectMindLink : LocalizeTexts.CommandConnectMindLink).Translate();
                 command_mindLink.defaultDesc = LocalizeTexts.CommandConnectMindLinkDesc.Translate();
                 yield return command_mindLink;
             }
             else
             {
                 var command_mindLink = new Command_Toggle();
-                command_mindLink.isActive = () => hediff.wantToDisconnect;
+                command_mindLink.isActive = () => hediff.disconnectReserved;
                 command_mindLink.toggleAction = delegate
                 {
-                    hediff.wantToDisconnect = !hediff.wantToDisconnect;
+                    hediff.disconnectReserved = !hediff.disconnectReserved;
                 };
                 command_mindLink.icon = TexCommand.SelectCarriedPawn;
                 command_mindLink.turnOnSound = SoundDefOf.Checkbox_TurnedOn;
                 command_mindLink.turnOffSound = SoundDefOf.Checkbox_TurnedOff;
-                command_mindLink.defaultLabel = (hediff.wantToDisconnect ? LocalizeTexts.CommandCancelDisconnectMindLink : LocalizeTexts.CommandDisconnectMindLink).Translate();
+                command_mindLink.defaultLabel = (hediff.disconnectReserved ? LocalizeTexts.CommandCancelDisconnectMindLink : LocalizeTexts.CommandDisconnectMindLink).Translate();
                 command_mindLink.defaultDesc = LocalizeTexts.CommandDisconnectMindLinkDesc.Translate();
                 yield return command_mindLink;
             }

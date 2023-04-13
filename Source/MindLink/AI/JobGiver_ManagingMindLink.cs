@@ -20,11 +20,11 @@ namespace VVRace
             {
                 if (candidate.Dead || !candidate.Spawned || !candidate.TryGetViviGene(out var vivi) || vivi.ViviMindLinkSettings == null) { continue; }
 
-                if (vivi.ViviMindLinkSettings.HediffMindLink == null && vivi.ViviMindLinkSettings?.ReservedToConnectPawn == pawn)
+                if (vivi.ViviMindLinkSettings.HediffMindLink == null && vivi.ViviMindLinkSettings?.ReservedToConnectTarget == pawn)
                 {
                     return JobMaker.MakeJob(VVJobDefOf.VV_ConnectMindLink, candidate);
                 }
-                else if (vivi.ViviMindLinkSettings.HediffMindLink?.wantToDisconnect == true && candidate.TryGetMindLinkMaster(out var master) && master == pawn)
+                else if (vivi.ViviMindLinkSettings?.ReservedToDisconnect == true && candidate.TryGetMindLinkMaster(out var master) && master == pawn)
                 {
                     return JobMaker.MakeJob(VVJobDefOf.VV_DisconnectMindLink, candidate);
                 }

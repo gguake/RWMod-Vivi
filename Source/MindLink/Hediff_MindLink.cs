@@ -7,7 +7,7 @@ namespace VVRace
     {
         public Pawn linker;
         public int connectStartTicks;
-        public bool wantToDisconnect;
+        public bool disconnectReserved;
 
         /// <summary> MindLink가 유지된 총 틱 </summary>
         public int ConnectedTicks => GenTicks.TicksGame - connectStartTicks;
@@ -20,7 +20,7 @@ namespace VVRace
 
             Scribe_References.Look(ref linker, "linker");
             Scribe_Values.Look(ref connectStartTicks, "connectStartTicks");
-            Scribe_Values.Look(ref wantToDisconnect, "wantToDisconnect");
+            Scribe_Values.Look(ref disconnectReserved, "disconnectReserved");
         }
 
         public override void PostMake()
@@ -29,6 +29,21 @@ namespace VVRace
 
             connectStartTicks = GenTicks.TicksGame;
             UpdateSeverity();
+
+            if (pawn.TryGetViviGene(out var vivi))
+            {
+                vivi.ViviMindLinkSettings?.Notify_MindLinkCreated();
+            }
+        }
+
+        public override void PostRemoved()
+        {
+            base.PostRemoved();
+
+            if (pawn.TryGetViviGene(out var vivi))
+            {
+                vivi.ViviMindLinkSettings?.Notify_MindLinkRemoved();
+            }
         }
 
         public override void PostTick()

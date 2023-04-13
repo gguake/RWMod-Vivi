@@ -87,12 +87,13 @@ namespace VVRace
                 shouldCheckApparels = false;
             }
 
-            if (pawn.IsHashIntervalTick(2500))
+            if (pawn.IsHashIntervalTick(GenTicks.TickLongInterval))
             {
-                eggSettings?.Tick(2500);
+                eggSettings?.Tick(GenTicks.TickLongInterval);
+                mindLinkSettings?.Tick(GenTicks.TickLongInterval);
             }
 
-            if (pawn.IsHashIntervalTick(15000) && originalHairColor.HasValue && pawn.DevelopmentalStage.Child())
+            if (pawn.IsHashIntervalTick(60000) && originalHairColor.HasValue && pawn.DevelopmentalStage.Child())
             {
                 var ageOffset = pawn.ageTracker.AgeBiologicalYearsFloat / pawn.ageTracker.AdultMinAge;
                 var hairColorOffset = Mathf.Clamp(ageOffset * ageOffset, 0, 1);
@@ -168,6 +169,21 @@ namespace VVRace
             }
         }
 
+        public override void PostRemove()
+        {
+            base.PostRemove();
+
+            if (pawn.TryGetMindTransmitter(out var mindTransmitter))
+            {
+                pawn.health.RemoveHediff(mindTransmitter);
+            }
+
+            if (pawn.TryGetMindLink(out var mindLink))
+            {
+                pawn.health.RemoveHediff(mindLink);
+            }
+        }
+
         public bool ShouldBeRoyalIfMature()
         {
             var need = pawn.needs.TryGetNeed<Need_RoyalJelly>();
@@ -184,8 +200,6 @@ namespace VVRace
                 var hediff = pawn.health.AddHediff(VVHediffDefOf.VV_MindLink) as Hediff_MindLink;
                 hediff.linker = linker;
             }
-
-            mindLinkSettings?.Notify_MindLinkConnected();
         }
 
         public void Notify_RemoveMindLink(bool directlyRemoveHediff)
