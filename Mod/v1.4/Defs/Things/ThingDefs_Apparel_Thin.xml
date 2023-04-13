@@ -135,7 +135,6 @@
       <bodyTypeWhitelist>
         <li>Child</li>
         <li>Thin</li>
-        <li>Female</li>
       </bodyTypeWhitelist>
       <fixedBodyType>Thin</fixedBodyType>
     </apparel>
