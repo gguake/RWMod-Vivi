@@ -12,7 +12,7 @@
       <li>VV_Vivi</li>
     </styleTags>
 
-    <requiredGene>VV_HairGene</requiredGene>
+    <requiredGene>VV_HeadGene</requiredGene>
   </HairDef>
 
   <HairDef ParentName="ViviHairBase">
@@ -21,6 +21,7 @@
     <texPath>Things/Pawn/Vivi/Hairs/HairA</texPath>
   </HairDef>
 
+  <!--
   <HairDef ParentName="ViviHairBase">
     <defName>VV_HairB</defName>
     <label>hairB</label>
@@ -38,6 +39,6 @@
     <label>royal hairA</label>
     <texPath>Things/Pawn/Vivi/Hairs/RoyalHairA</texPath>
   </HairDef>
-
+-->
 
 </Defs>

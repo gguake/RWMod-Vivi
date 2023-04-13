@@ -13,9 +13,7 @@
     <genes>
       <li>VV_ViviGene</li>
       <li>VV_HeadGene</li>
-      <li>VV_HairGene</li>
       <li>VV_BodyGene</li>
-      <li>VV_SkinColorGene</li>
       
       <li>VV_WingGene</li>
       <li>VV_AntennaeGene</li>
