@@ -19,4 +19,14 @@
       <li>VV_HeadGene</li>
     </requiredGenes>
   </HeadTypeDef>
+
+  <HeadTypeDef ParentName="AverageBase">
+    <defName>VV_Vivi_C</defName>
+    <graphicPath>Things/Pawn/Vivi/Heads/HeadC</graphicPath>
+    <randomChosen>true</randomChosen>
+    <gender>None</gender>
+    <requiredGenes>
+      <li>VV_HeadGene</li>
+    </requiredGenes>
+  </HeadTypeDef>
 </Defs>

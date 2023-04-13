@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <!-- 헤드 -->
+  <!-- 헤드 및 헤어 -->
   <GeneDef>
     <defName>VV_HeadGene</defName>
     <label>vivi head</label>
     <description>.</description>
-    <iconPath>UI/Icons/Genes/Gene_GauntHead</iconPath>
+    <iconPath>UI/Icons/Xenotypes/Vivi</iconPath>
     <iconColor>(0.75, 0.75, 0.75)</iconColor>
     <randomChosen>false</randomChosen>
     
@@ -23,6 +23,7 @@
     <forcedHeadTypes>
       <li>VV_Vivi_A</li>
       <li>VV_Vivi_B</li>
+      <li>VV_Vivi_C</li>
     </forcedHeadTypes>
     
     <hairTagFilter>
@@ -37,28 +38,12 @@
     </graphicData>
   </GeneDef>
   
-  <!-- 헤어 -->
-  <GeneDef ParentName="GeneHairStyleBase">
-    <defName>VV_HairGene</defName>
-    <label>vivi hair</label>
-    <description>.</description>
-    <iconPath>UI/Icons/Genes/Gene_HairStyleLongOnly</iconPath>
-    <iconColor>(0.75, 0.75, 0.75)</iconColor>
-    <randomChosen>false</randomChosen>
-
-    <displayCategory>VV_Race</displayCategory>
-    <displayOrderInCategory>101</displayOrderInCategory>
-    <biostatCpx>0</biostatCpx>
-    <canGenerateInGeneSet>false</canGenerateInGeneSet>
-
-  </GeneDef>
-  
   <!-- 고유 바디 -->
   <GeneDef Class="VVRace.GeneDefExt">
     <defName>VV_BodyGene</defName>
     <label>vivi body</label>
     <description>.</description>
-    <iconPath>UI/Icons/Genes/Gene_BodyThin</iconPath>
+    <iconPath>UI/Icons/Xenotypes/Vivi</iconPath>
     <iconColor>(0.75, 0.75, 0.75)</iconColor>
     <randomChosen>false</randomChosen>
     
@@ -73,15 +58,22 @@
     <bodyTypeOverrides>
       <Child>
         <overrideGraphicPath>Things/Pawn/Vivi/Body/Naked_Thin</overrideGraphicPath>
-        <headOffset>(-0.09, -0.07)</headOffset>
+
+        <useUniqueHeadOffset>true</useUniqueHeadOffset>
+        <applyLifeStageHeadOffset>false</applyLifeStageHeadOffset>
+        <headOffset>(0, 0.2)</headOffset>
       </Child>
       <Thin>
         <overrideGraphicPath>Things/Pawn/Vivi/Body/Naked_Thin</overrideGraphicPath>
-        <headOffset>(-0.09, -0.07)</headOffset>
+        
+        <useUniqueHeadOffset>true</useUniqueHeadOffset>
+        <headOffset>(0, 0.27)</headOffset>
       </Thin>
       <Female>
         <overrideGraphicPath>Things/Pawn/Vivi/Body/Naked_Female</overrideGraphicPath>
-        <headOffset>(-0.09, -0.02)</headOffset>
+        
+        <useUniqueHeadOffset>true</useUniqueHeadOffset>
+        <headOffset>(0.01, 0.32)</headOffset>
       </Female>
     </bodyTypeOverrides>
     
