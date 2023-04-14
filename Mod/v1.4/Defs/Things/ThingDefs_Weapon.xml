@@ -1,5 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
+  <!-- 비비 빨대 -->
+  <ThingDef ParentName="BaseMeleeWeapon_Blunt">
+    <defName>VV_Straw</defName>
+    <label>vivi straw</label>
+    <description>.</description>
+    <graphicData>
+      <texPath>Things/Item/Equipment/VV_Straw</texPath>
+      <graphicClass>Graphic_Random</graphicClass>
+    </graphicData>
+    <equippedAngleOffset>10</equippedAngleOffset>
+
+    <techLevel>Medieval</techLevel>
+    <statBases>
+      <WorkToMake>1200</WorkToMake>
+      <Mass>2</Mass>
+    </statBases>
+    <equippedStatOffsets>
+      <CleaningSpeed>0.5</CleaningSpeed>
+      <VV_PlantGatherSpeed>0.5</VV_PlantGatherSpeed>
+    </equippedStatOffsets>
+
+    <thingCategories Inherit="False">
+      <li>VV_ViviWeapon</li>
+    </thingCategories>
+    <weaponClasses>
+      <li>Melee</li>
+    </weaponClasses>
+    <weaponTags>
+      <li>MedievalMeleeDecent</li>
+    </weaponTags>
+
+    <tools>
+      <li>
+        <label>handle</label>
+        <capacities>
+          <li>Poke</li>
+        </capacities>
+        <power>9</power>
+        <cooldownTime>2.5</cooldownTime>
+      </li>
+      <li>
+        <label>head</label>
+        <labelUsedInLogging>false</labelUsedInLogging>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>11</power>
+        <cooldownTime>2</cooldownTime>
+      </li>
+    </tools>
+    
+    <costStuffCount>40</costStuffCount>
+    <stuffCategories>
+      <li>VV_Wax</li>
+      <li>Woody</li>
+    </stuffCategories>
+    <recipeMaker>
+      <recipeUsers>
+        <li>CraftingSpot</li>
+      </recipeUsers>
+      <displayPriority>100</displayPriority>
+    </recipeMaker>
+  </ThingDef>
+
   <!-- 비비 다용도 붓 -->
   <ThingDef ParentName="BaseMeleeWeapon_Blunt">
     <defName>VV_MultiuseBrush</defName>
@@ -53,7 +117,7 @@
     
     <costStuffCount>40</costStuffCount>
     <stuffCategories>
-      <li>Stony</li>
+      <li>VV_Wax</li>
       <li>Woody</li>
     </stuffCategories>
     <recipeMaker>

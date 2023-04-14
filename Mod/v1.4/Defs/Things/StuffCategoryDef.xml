@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <StuffCategoryDef>
+    <defName>VV_Wax</defName>
+    <label>wax</label>
+    <noun>wax</noun>
+    <destroySoundSmall>BuildingDestroyed_Stone_Small</destroySoundSmall>
+    <destroySoundMedium>BuildingDestroyed_Stone_Medium</destroySoundMedium>
+    <destroySoundLarge>BuildingDestroyed_Stone_Big</destroySoundLarge>
+  </StuffCategoryDef>
+</Defs>

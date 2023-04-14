@@ -69,6 +69,7 @@
     <stuffProps>
       <commonality>0</commonality>
       <categories>
+        <li>VV_Wax</li>
         <li>Stony</li>
       </categories>
       <appearance>Planks</appearance>

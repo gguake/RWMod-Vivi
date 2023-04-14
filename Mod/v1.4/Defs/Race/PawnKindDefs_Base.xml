@@ -14,6 +14,9 @@
     <techHediffsTags>
     </techHediffsTags>
 
+    <allowOldAgeInjuries>false</allowOldAgeInjuries>
+    <canStrip>false</canStrip>
+
     <useFactionXenotypes>false</useFactionXenotypes>
     <xenotypeSet>
       <xenotypeChances>
