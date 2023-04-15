@@ -155,7 +155,7 @@ namespace VVRace
             var hatchingDisabledReason = HatchingDisabledReason;
             if (!hatchingDisabledReason.Accepted)
             {
-                sb.Append(LocalizeTexts.InspectorViviHatcheryDisabled);
+                sb.Append(LocalizeTexts.InspectorViviHatcheryDisabled.Translate());
 
                 if (hatchingDisabledReason.Reason != null)
                 {
