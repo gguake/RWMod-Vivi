@@ -32,6 +32,15 @@
     <priceImpact>false</priceImpact>
     <scenarioCanAdd>false</scenarioCanAdd>
 
+    
+    <stages>
+      <li>
+        <statFactors>
+          <GlobalLearningFactor>1.2</GlobalLearningFactor>
+        </statFactors>
+      </li>
+    </stages>
+
     <comps>
       <li Class="HediffCompProperties_Disappears">
         <disappearsAfterTicks>45000~45000</disappearsAfterTicks>
