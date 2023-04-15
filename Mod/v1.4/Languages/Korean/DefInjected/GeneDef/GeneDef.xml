@@ -3,11 +3,8 @@
   <VV_ViviGene.label>비비</VV_ViviGene.label>
   <VV_ViviGene.description>이 유전자는 벌과 유사한 행태를 갖는 비비 종족의 고유한 생체적 특성을 갖게 합니다.</VV_ViviGene.description>
   <VV_ViviGene.customEffectDescriptions.0>성장중인 식물에서 꿀을 채집할 수 있습니다.</VV_ViviGene.customEffectDescriptions.0>
-  <VV_ViviGene.customEffectDescriptions.1>스스로 알을 낳아 번식합니다.</VV_ViviGene.customEffectDescriptions.1>
+  <VV_ViviGene.customEffectDescriptions.1>스스로 알을 낳아 번식하며 변형인자를 유전할 수 있습니다.</VV_ViviGene.customEffectDescriptions.1>
   <VV_ViviGene.customEffectDescriptions.2>비비들끼리 서로 정신 결속을 형성해 작업 능력을 향상할 수 있습니다.</VV_ViviGene.customEffectDescriptions.2>
-
-  <VV_ViviMindset.label>비비식 사고</VV_ViviMindset.label>
-  <VV_ViviMindset.description>이 유전자는 비비 종족의 고유한 사고방식과 특징을 갖게 합니다.</VV_ViviMindset.description>
 
   <VV_HeadGene.label>비비 머리</VV_HeadGene.label>
   <VV_HeadGene.description>이 유전자는 비비 종족의 고유한 머리 모양을 갖게 합니다.</VV_HeadGene.description>

@@ -18,7 +18,7 @@
     <displayCategory>VV_Race</displayCategory>
     <displayOrderInCategory>0</displayOrderInCategory>
     <biostatCpx>6</biostatCpx>
-    <biostatMet>-2</biostatMet>
+    <biostatMet>-1</biostatMet>
     <biostatArc>2</biostatArc>
 
     <sterilize>true</sterilize>
@@ -36,6 +36,15 @@
       <ToxicResistance>0.5</ToxicResistance>
     </statFactors>
 
+    <suppressedTraits>
+      <li>
+        <def>Cannibal</def>
+      </li>
+      <li>
+        <def>DislikesWomen</def>
+      </li>
+    </suppressedTraits>
+
     <biologicalAgeTickFactorFromAgeCurve>
       <points>
         <li>(3, 4)</li>
@@ -47,32 +56,6 @@
       </points>
     </biologicalAgeTickFactorFromAgeCurve>
 
-    <eggLayIntervalDays>1</eggLayIntervalDays>
-  </GeneDef>
-
-  <GeneDef>
-    <defName>VV_ViviMindset</defName>
-    <label>vivi mindset</label>
-    <description>.</description>
-    <iconPath>UI/Icons/Genes/Gene_ViviMindset</iconPath>
-
-    <displayCategory>VV_Race</displayCategory>
-    <displayOrderInCategory>1</displayOrderInCategory>
-    <biostatCpx>1</biostatCpx>
-    <biostatMet>-1</biostatMet>
-    
-    <prerequisite>VV_ViviGene</prerequisite>
-    <suppressedTraits>
-      <li>
-        <def>Cannibal</def>
-      </li>
-      <li>
-        <def>Beauty</def>
-        <degree>-2</degree>
-      </li>
-      <li>
-        <def>DislikesWomen</def>
-      </li>
-    </suppressedTraits>
+    <eggLayIntervalDays>0.001</eggLayIntervalDays>
   </GeneDef>
 </Defs>

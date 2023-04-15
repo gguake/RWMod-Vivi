@@ -1,6 +1,9 @@
 ﻿using RimWorld;
 using RimWorld.Planet;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using UnityEngine;
 using Verse;
 
 namespace VVRace
@@ -8,6 +11,9 @@ namespace VVRace
     public class CompProperties_ViviHatcher : CompProperties
     {
         public float hatcherDaystoHatch = 10f;
+
+        public SimpleCurve geneCountCurve;
+        public List<GeneDef> randomSelectGenes = new List<GeneDef>();
 
         public CompProperties_ViviHatcher()
         {
@@ -46,6 +52,8 @@ namespace VVRace
 
         public float hatchProgress = 0f;
         public Pawn hatcheeParent;
+        public List<GeneDef> parentXenogenes;
+        public int randomSeed = Rand.Int;
 
         public override void PostExposeData()
         {
@@ -53,6 +61,8 @@ namespace VVRace
             
             Scribe_Values.Look(ref hatchProgress, "hatchProgress", 0f);
             Scribe_References.Look(ref hatcheeParent, "hatcheeParent");
+            Scribe_Collections.Look(ref parentXenogenes, "xenogenes", LookMode.Def);
+            Scribe_Values.Look(ref randomSeed, "randomSeed", 0);
         }
 
         public override string CompInspectStringExtra()
@@ -112,11 +122,25 @@ namespace VVRace
                 var pawnKindDef = (faction?.IsPlayer ?? false) ? VVPawnKindDefOf.VV_PlayerVivi : null;
                 if (pawnKindDef != null)
                 {
+                    var xenogeneDefs = parentXenogenes != null ? new List<GeneDef>(parentXenogenes) : new List<GeneDef>();
+                    var randomGeneCount = Mathf.FloorToInt(Props.geneCountCurve.Evaluate(Rand.RangeSeeded(0, 10000, randomSeed)));
+
+                    var allRandomGenes = new List<GeneDef>(Props.randomSelectGenes.Where(g => !xenogeneDefs.Contains(g))).ToList();
+
+                    for (int i = 0; i < randomGeneCount; ++i)
+                    {
+                        var randomGeneDef = allRandomGenes[Rand.RangeSeeded(0, allRandomGenes.Count, randomSeed)];
+                        xenogeneDefs.Add(randomGeneDef);
+                        allRandomGenes.Remove(randomGeneDef);
+                    }
+
                     var request = new PawnGenerationRequest(
                         pawnKindDef,
                         faction: faction,
                         allowDowned: true,
-                        developmentalStages: DevelopmentalStage.Newborn);
+                        developmentalStages: DevelopmentalStage.Newborn,
+                        forcedXenotype: VVXenotypeDefOf.VV_Vivi,
+                        forcedXenogenes: xenogeneDefs);
 
                     Pawn pawn = PawnGenerator.GeneratePawn(request);
                     if (GenSpawn.Spawn(pawn, hatchery.Position, hatchery.Map) != null)

@@ -207,6 +207,11 @@ namespace VVRace
         #region Notificaitons
         public void Notify_MakeNewMindLink(Pawn linker)
         {
+            if (mindLinkSettings == null)
+            {
+                mindLinkSettings = new ViviMindLinkSettings(this);
+            }
+
             if (!pawn.health?.hediffSet?.HasHediff(VVHediffDefOf.VV_MindLink) ?? false)
             {
                 var hediff = pawn.health.AddHediff(VVHediffDefOf.VV_MindLink) as Hediff_MindLink;
@@ -289,6 +294,12 @@ namespace VVRace
                     pawn.health.AddHediff(VVHediffDefOf.VV_MindTransmitter);
                 }
 
+                // 로열 비비인 경우는 마인드 링크를 제거한다.
+                if (pawn.TryGetMindLink(out var mindLink) && mindLink.linker != null && mindLink.linker.TryGetMindTransmitter(out var parentMindTransmitter))
+                {
+                    parentMindTransmitter.UnassignPawnControl(pawn);
+                }
+
                 pawn.genes.AddGene(VVGeneDefOf.Body_Standard, true);
                 pawn.story.bodyType = BodyTypeDefOf.Female;
                 pawn.apparel?.DropAllOrMoveAllToInventory((Apparel apparel) => !apparel.def.apparel.PawnCanWear(pawn));
@@ -313,22 +324,6 @@ namespace VVRace
             }
         }
 
-        public void Notify_PregnantHediffAdded(Hediff_Pregnant hediff)
-        {
-            var list = hediff.Father?.genes?.Endogenes?.Select(gene => gene.def).ToList();
-            if (list.NullOrEmpty()) { return; }
-
-            var count = Mathf.Clamp(Rand.RangeInclusive(1, 5), 1, list.Count());
-            list.Shuffle();
-
-            if (eggSettings != null)
-            {
-                for (int i = 0; i < count; ++i)
-                {
-                    eggSettings.StoreGene(list[i]);
-                }
-            }
-        }
         #endregion
 
 

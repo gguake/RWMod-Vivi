@@ -11,7 +11,7 @@ namespace VVRace
         {
             if (!pawn.TryGetViviGene(out var vivi)) { return; }
 
-            var specializeDef = vivi.ViviMindLinkSettings?.AssignedSpecialization;
+            var specializeDef = vivi.ViviMindLinkSettings.AssignedSpecialization;
 
             Widgets.DrawTextureFitted(rect, specializeDef.uiIcon, 0.75f);
             TooltipHandler.TipRegion(rect, specializeDef.description);
@@ -57,18 +57,26 @@ namespace VVRace
 
                 TipSignal tooltip = pawn.GetTooltip();
                 tooltip.text = "ClickToChangeWorkMode".Translate();
+
                 if (canControlLinked == false && !canControlLinked.Reason.NullOrEmpty())
                 {
                     ref string text = ref tooltip.text;
                     text = text + "\n\n" + ("DisabledCommand".Translate() + ": " + canControlLinked.Reason).Colorize(ColorLibrary.RedReadable);
                 }
-
-                TooltipHandler.TipRegion(rect, tooltip);
-                if (canControlLinked == true && Widgets.ButtonInvisible(rect))
+                else if (pawn.Downed)
                 {
-                    Find.WindowStack.Add(new FloatMenu(MindLinkUtility.GetViviSpecializeFloatMenuOptions(pawn).ToList()));
+                    ref string text = ref tooltip.text;
+                    text = text + "\n\n" + ("DisabledCommand".Translate() + ": " + LocalizeTexts.MindLinkerDowned.Translate(pawn.Named("PAWN"))).Colorize(ColorLibrary.RedReadable);
+                }
+                else
+                {
+                    if (canControlLinked == true && Widgets.ButtonInvisible(rect))
+                    {
+                        Find.WindowStack.Add(new FloatMenu(MindLinkUtility.GetViviSpecializeFloatMenuOptions(pawn).ToList()));
+                    }
                 }
 
+                TooltipHandler.TipRegion(rect, tooltip);
                 Widgets.DrawHighlight(rect);
             }
         }

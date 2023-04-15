@@ -1,5 +1,6 @@
 ﻿using RimWorld;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Verse;
 
@@ -34,7 +35,6 @@ namespace VVRace
 
         public Gene_Vivi gene;
         private float eggProgress;
-        private HashSet<GeneDef> storedGenes;
 
         public ViviEggSettings(Gene_Vivi gene)
         {
@@ -44,17 +44,11 @@ namespace VVRace
         public void ExposeData()
         {
             Scribe_Values.Look(ref eggProgress, "eggProgress");
-            Scribe_Collections.Look(ref storedGenes, "storedGenes", LookMode.Def);
         }
 
         public void ResolveReferences(Gene_Vivi gene)
         {
             this.gene = gene;
-        }
-
-        public void StoreGene(GeneDef geneDef)
-        {
-            storedGenes.Add(geneDef);
         }
 
         public void Tick(int tick)
@@ -73,6 +67,13 @@ namespace VVRace
                 var egg = ThingMaker.MakeThing(VVThingDefOf.VV_ViviEgg);
                 var hatcher = egg.TryGetComp<CompViviHatcher>();
                 hatcher.hatcheeParent = gene.pawn;
+                hatcher.parentXenogenes = gene.pawn.genes.Xenogenes.Select(v => v.def).ToList();
+                hatcher.parentXenogenes.RemoveAll(
+                    v => v.endogeneCategory == EndogeneCategory.BodyType ||
+                    v.endogeneCategory == EndogeneCategory.Melanin ||
+                    v.endogeneCategory == EndogeneCategory.HairColor ||
+                    v.endogeneCategory == EndogeneCategory.Head ||
+                    v.endogeneCategory == EndogeneCategory.Jaw);
 
                 return egg;
             }

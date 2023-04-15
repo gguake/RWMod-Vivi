@@ -40,6 +40,11 @@ namespace VVRace
         {
             base.PostRemoved();
 
+            if (linker.TryGetMindTransmitter(out var mindTransmitter))
+            {
+                mindTransmitter.UnassignPawnControl(pawn, false);
+            }
+
             if (pawn.TryGetViviGene(out var vivi))
             {
                 vivi.ViviMindLinkSettings?.Notify_MindLinkRemoved();

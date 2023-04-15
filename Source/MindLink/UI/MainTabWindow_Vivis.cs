@@ -11,6 +11,6 @@ namespace VVRace
 
         protected override IEnumerable<Pawn> Pawns => Find.CurrentMap.mapPawns
             .PawnsInFaction(Faction.OfPlayer)
-            .Where(p => p.IsMindLinkedVivi());
+            .Where(p => p.Spawned && p.IsMindLinkedVivi());
     }
 }

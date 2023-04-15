@@ -65,6 +65,12 @@ namespace VVRace
     }
 
     [DefOf]
+    public static class VVXenotypeDefOf
+    {
+        public static XenotypeDef VV_Vivi;
+    }
+
+    [DefOf]
     public static class VVJobDefOf
     {
         public static JobDef VV_ConnectMindLink;

@@ -29,10 +29,6 @@ namespace VVRace.HarmonyPatches
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(LifeStageWorker_HumanlikeAdult_Notify_LifeStageStarted_Postfix)));
 
             harmony.Patch(
-                original: AccessTools.Method(typeof(Pawn_HealthTracker), nameof(Pawn_HealthTracker.AddHediff), new System.Type[] { typeof(Hediff), typeof(BodyPartRecord), typeof(DamageInfo?), typeof(DamageWorker.DamageResult) }),
-                prefix: new HarmonyMethod(typeof(ViviRacePatch), nameof(Pawn_HealthTracker_AddHediff_Prefix)));
-
-            harmony.Patch(
                 original: AccessTools.Method(typeof(Pawn), nameof(Pawn.SetFaction)),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(Pawn_SetFaction_Postfix)));
 
@@ -100,17 +96,6 @@ namespace VVRace.HarmonyPatches
             {
                 gene.Notify_AdultLifeStageStarted();
             }
-        }
-
-        private static bool Pawn_HealthTracker_AddHediff_Prefix(Hediff hediff, Pawn ___pawn)
-        {
-            if (hediff is Hediff_Pregnant hediff_Pregnant && ___pawn.TryGetViviGene(out var gene))
-            {
-                gene.Notify_PregnantHediffAdded(hediff_Pregnant);
-                return false;
-            }
-
-            return true;
         }
 
         private static void Pawn_SetFaction_Postfix(Pawn __instance)

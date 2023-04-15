@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using Verse;
+using static HarmonyLib.Code;
 
 namespace VVRace
 {
@@ -41,6 +42,8 @@ namespace VVRace
                 {
                     return false;
                 }
+
+                if (Position.GetFirstPawn(Map) != null) { return false; }
 
                 return true;
             }
@@ -173,6 +176,27 @@ namespace VVRace
             }
 
             return sb.ToString();
+        }
+
+        public override IEnumerable<Gizmo> GetGizmos()
+        {
+            foreach (var gizmo in base.GetGizmos())
+            {
+                yield return gizmo;
+            }
+
+            if (ViviEgg != null && DebugSettings.godMode)
+            {
+                Command_Action command_replaceInstantly = new Command_Action();
+                command_replaceInstantly.defaultLabel = "DEV: Hatching +10%";
+                command_replaceInstantly.action = () =>
+                {
+                    var compHatcher = ViviEgg.TryGetComp<CompViviHatcher>();
+                    compHatcher.hatchProgress += 0.1f;
+                };
+
+                yield return command_replaceInstantly;
+            }
         }
 
         public bool TryAcceptEgg(Thing viviEgg)
