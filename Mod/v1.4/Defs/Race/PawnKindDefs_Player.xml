@@ -43,7 +43,7 @@
     <label>exiled royal vivi</label>
     <defaultFactionType>VV_PlayerExiledVivi</defaultFactionType>
     
-    <minTotalSkillLevels>40</minTotalSkillLevels>
+    <minTotalSkillLevels>30</minTotalSkillLevels>
 
     <backstoryFiltersOverride Inherit="False">
       <li>

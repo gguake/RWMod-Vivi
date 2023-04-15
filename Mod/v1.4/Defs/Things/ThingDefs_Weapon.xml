@@ -61,7 +61,6 @@
         <li>CraftingSpot</li>
       </recipeUsers>
       <researchPrerequisites>
-        <li>VV_BasicGathering</li>
         <li>VV_Tools</li>
       </researchPrerequisites>
       <skillRequirements>
@@ -132,7 +131,6 @@
         <li>CraftingSpot</li>
       </recipeUsers>
       <researchPrerequisites>
-        <li>VV_BasicGathering</li>
         <li>VV_Tools</li>
       </researchPrerequisites>
       <skillRequirements>

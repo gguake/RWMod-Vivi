@@ -17,31 +17,31 @@
 
   <HairDef ParentName="ViviHairBase">
     <defName>VV_HairA</defName>
-    <label>hairA</label>
+    <label>vivi hairA</label>
     <texPath>Things/Pawn/Vivi/Hairs/HairA</texPath>
   </HairDef>
 
   <HairDef ParentName="ViviHairBase">
     <defName>VV_HairB</defName>
-    <label>hairB</label>
+    <label>vivi hairB</label>
     <texPath>Things/Pawn/Vivi/Hairs/HairB</texPath>
   </HairDef>
 
   <HairDef ParentName="ViviHairBase">
     <defName>VV_HairC</defName>
-    <label>hairC</label>
+    <label>vivi hairC</label>
     <texPath>Things/Pawn/Vivi/Hairs/HairC</texPath>
   </HairDef>
 
   <HairDef ParentName="ViviHairBase">
     <defName>VV_HairD</defName>
-    <label>hairD</label>
+    <label>vivi hairD</label>
     <texPath>Things/Pawn/Vivi/Hairs/HairD</texPath>
   </HairDef>
 
   <HairDef ParentName="ViviHairBase">
-    <defName>VV_RoyalHairA</defName>
-    <label>royal hairA</label>
-    <texPath>Things/Pawn/Vivi/Hairs/RoyalHairA</texPath>
+    <defName>VV_HairE</defName>
+    <label>vivi hairE</label>
+    <texPath>Things/Pawn/Vivi/Hairs/HairE</texPath>
   </HairDef>
 </Defs>

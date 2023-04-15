@@ -13,16 +13,19 @@
   
   <HeadTypeDef ParentName="VV_HeadBase">
     <defName>VV_Vivi_A</defName>
+    <label>vivi headA</label>
     <graphicPath>Things/Pawn/Vivi/Heads/HeadA</graphicPath>
   </HeadTypeDef>
   
   <HeadTypeDef ParentName="VV_HeadBase">
     <defName>VV_Vivi_B</defName>
+    <label>vivi headB</label>
     <graphicPath>Things/Pawn/Vivi/Heads/HeadB</graphicPath>
   </HeadTypeDef>
 
   <HeadTypeDef ParentName="VV_HeadBase">
     <defName>VV_Vivi_C</defName>
+    <label>vivi headC</label>
     <graphicPath>Things/Pawn/Vivi/Heads/HeadC</graphicPath>
   </HeadTypeDef>
 </Defs>
