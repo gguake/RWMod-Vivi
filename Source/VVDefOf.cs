@@ -59,6 +59,7 @@ namespace VVRace
     public static class VVGeneDefOf
     {
         public static GeneDef VV_ViviGene;
+        public static GeneDef VV_BodyGene;
 
         public static GeneDef Body_Standard;
     }

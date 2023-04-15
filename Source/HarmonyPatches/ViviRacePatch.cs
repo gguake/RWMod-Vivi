@@ -52,13 +52,20 @@ namespace VVRace.HarmonyPatches
                 original: AccessTools.Method(typeof(PawnGroupMaker), nameof(PawnGroupMaker.GeneratePawns)),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(PawnGroupMaker_GeneratePawns_Postfix)));
 
+            // 생산시 열량 소모 패치
             harmony.Patch(
                 original: AccessTools.Method(typeof(WorkGiver_DoBill), "StartOrResumeBillJob"),
                 transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(WorkGiver_DoBill_StartOrResumeBillJob_Transpiler)));
 
+            // 생산시 열량 소모 패치
             harmony.Patch(
                 original: AccessTools.Method(typeof(RecordsUtility), nameof(RecordsUtility.Notify_BillDone)),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(RecordsUtility_Notify_BillDone_Postfix)));
+
+            // 게임 시작시 알 부모 설정 패치
+            harmony.Patch(
+                original: AccessTools.Method(typeof(ScenPart_PlayerPawnsArriveMethod), nameof(ScenPart_PlayerPawnsArriveMethod.GenerateIntoMap)),
+                postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(ScenPart_PlayerPawnsArriveMethod_GenerateIntoMap_Postfix)));
 
             #region 연구 관련
             //harmony.Patch(
@@ -236,6 +243,24 @@ namespace VVRace.HarmonyPatches
                 }
 
                 billDoer.needs.food.CurLevel -= foodDrains;
+            }
+        }
+
+        private static void ScenPart_PlayerPawnsArriveMethod_GenerateIntoMap_Postfix(Map map)
+        {
+            var startingRoyalVivis = Find.GameInitData.startingAndOptionalPawns.Where(v => v.Spawned && v.TryGetViviGene(out var vivi) && vivi.IsRoyal).ToList();
+
+            var allEggs = map.spawnedThings.Where(v => v.def == VVThingDefOf.VV_ViviEgg);
+            foreach (var egg in allEggs)
+            {
+                if (startingRoyalVivis.NullOrEmpty())
+                {
+                    Log.Error($"there is no royal vivi but vivi egg spawned");
+                    return;
+                }
+
+                var hatcher = egg.TryGetComp<CompViviHatcher>();
+                hatcher.hatcheeParent = startingRoyalVivis.RandomElement();
             }
         }
     }

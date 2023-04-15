@@ -6,16 +6,18 @@
     <label>vivicream wall</label>
     <description>.</description>
     <graphicData>
-      <texPath>Things/Building/Linked/Rock_Atlas</texPath>
+      <texPath>Things/Building/Linked/RockFlecked_Atlas</texPath>
       <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
       <color>(1.0, 0.9, 0.7, 1.0)</color>
+      <colorTwo>(1.0, 1.0, 1.0, 1.0)</colorTwo>
     </graphicData>
     
-    <uiIconPath>Things/Building/Linked/WallPlanks_MenuIcon</uiIconPath>
+    <uiIconPath>Things/Building/VV_ViviCreamWall_MenuIcon</uiIconPath>
     <uiIconColor>(1.0, 0.9, 0.7, 1.0)</uiIconColor>
     <statBases>
       <MaxHitPoints>50</MaxHitPoints>
-      <WorkToBuild>30</WorkToBuild>
+      <WorkToBuild>40</WorkToBuild>
       <Flammability>1.0</Flammability>
     </statBases>
     <building>
@@ -86,7 +88,7 @@
     <uiIconPath>Things/Building/Linked/WallPlanks_MenuIcon</uiIconPath>
     <uiIconColor>(1.0, 0.9, 0.7, 1.0)</uiIconColor>
     <statBases>
-      <MaxHitPoints>80</MaxHitPoints>
+      <MaxHitPoints>100</MaxHitPoints>
       <Flammability>1.0</Flammability>
     </statBases>
     <costList>
@@ -97,7 +99,7 @@
     <designationCategory Inherit="False" />
     <comps Inherit="False">
       <li Class="VVRace.CompProperties_CompWallReplace">
-        <replaceTicks>5000</replaceTicks>
+        <replaceTicks>300000</replaceTicks>
         <replaceThing>VV_ViviHoneycombWall</replaceThing>
       </li>
     </comps>
@@ -232,7 +234,8 @@
     <size>(1,1)</size>
 
     <costList>
-      <VV_Viviwax>100</VV_Viviwax>
+      <VV_Viviwax>80</VV_Viviwax>
+      <VV_Vivicream>40</VV_Vivicream>
     </costList>
 
     <defaultPlacingRot>South</defaultPlacingRot>
@@ -301,9 +304,8 @@
 
     <stuffCategories>
       <li>Woody</li>
-      <li>Stony</li>
     </stuffCategories>
-    <costStuffCount>50</costStuffCount>
+    <costStuffCount>80</costStuffCount>
 
     <inspectorTabs>
       <li>ITab_Bills</li>
@@ -335,7 +337,6 @@
     </researchPrerequisites>
   </ThingDef>
 
-  
   <!-- 비비 작업대 -->
   <ThingDef ParentName="BenchBase">
     <defName>VV_RefiningWorkbench</defName>

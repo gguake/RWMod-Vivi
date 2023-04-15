@@ -33,9 +33,9 @@
     <tickerType>Rare</tickerType>
     <comps>
       <li Class="CompProperties_TemperatureRuinable">
-        <minSafeTemperature>20</minSafeTemperature>
-        <maxSafeTemperature>36</maxSafeTemperature>
-        <progressPerDegreePerTick>0.00001</progressPerDegreePerTick>
+        <minSafeTemperature>17</minSafeTemperature>
+        <maxSafeTemperature>50</maxSafeTemperature>
+        <progressPerDegreePerTick>0.000001</progressPerDegreePerTick>
       </li>
 
       <li Class="VVRace.CompProperties_ViviHatcher">

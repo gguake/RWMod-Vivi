@@ -1,5 +1,7 @@
 ﻿using RimWorld;
+using System.Collections.Generic;
 using System.Text;
+using UnityEngine;
 using Verse;
 
 namespace VVRace
@@ -60,9 +62,24 @@ namespace VVRace
                 sb.AppendLine();
             }
 
-            var remainedTicks = buildedTick + Props.replaceTicks - GenTicks.TicksGame;
+            var remainedTicks = Mathf.Max(0, buildedTick + Props.replaceTicks - GenTicks.TicksGame);
             sb.Append("VV_InspectorViviWallReplace".Translate(remainedTicks.ToStringTicksToPeriod()));
             return sb.ToString();
+        }
+
+        public override IEnumerable<Gizmo> CompGetGizmosExtra()
+        {
+            if (DebugSettings.godMode)
+            {
+                Command_Action command_replaceInstantly = new Command_Action();
+                command_replaceInstantly.defaultLabel = "DEV: Replace instantly";
+                command_replaceInstantly.action = () =>
+                {
+                    buildedTick -= Props.replaceTicks;
+                };
+
+                yield return command_replaceInstantly;
+            }
         }
     }
 }

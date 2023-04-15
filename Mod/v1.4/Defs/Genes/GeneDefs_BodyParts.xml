@@ -63,9 +63,9 @@
 
       <drawLoc>Tailbone</drawLoc>
 
-      <drawOffsetNorth>(0, 0.0245, 0.04)</drawOffsetNorth>
-      <drawOffsetSouth>(0, 0, 0.04)</drawOffsetSouth>
-      <drawOffsetEast>(-0.05, 0, 0.04)</drawOffsetEast>
+      <drawOffsetNorth>(0, 0.0245, 0.036)</drawOffsetNorth>
+      <drawOffsetSouth>(0, 0, 0.036)</drawOffsetSouth>
+      <drawOffsetEast>(-0.05, 0, 0.036)</drawOffsetEast>
     </graphicData>
   </GeneDef>
 </Defs>

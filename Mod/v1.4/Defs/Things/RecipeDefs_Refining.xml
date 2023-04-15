@@ -58,7 +58,6 @@
     <products>
       <VV_Viviwax>25</VV_Viviwax>
     </products>
-    <researchPrerequisite>VV_BasicInfra</researchPrerequisite>
   </RecipeDef>
 
   <!-- 꿀 정제 -->

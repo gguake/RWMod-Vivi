@@ -68,6 +68,11 @@
           <stuff>VV_Viviwax</stuff>
           <count>3</count>
         </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>VV_ViviEgg</thingDef>
+          <count>2</count>
+        </li>
         
         <!-- 시작시 소유품 (분산) -->
         <li Class="ScenPart_ScatterThingsNearPlayerStart">
