@@ -28,6 +28,8 @@
     <disallowedPrecepts>
       <li>Cannibalism_Classic</li>
       <li>Slavery_Classic</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">ApparelDesired_Strong_Subordinate</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">ApparelDesired_Soft_Subordinate</li>
       <li MayRequire="Ludeon.RimWorld.Ideology">Cannibalism_Acceptable</li>
       <li MayRequire="Ludeon.RimWorld.Ideology">Cannibalism_Preferred</li>
       <li MayRequire="Ludeon.RimWorld.Ideology">Cannibalism_RequiredStrong</li>
