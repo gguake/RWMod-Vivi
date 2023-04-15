@@ -39,7 +39,7 @@
       </li>
 
       <li Class="VVRace.CompProperties_ViviHatcher">
-        <hatcherDaystoHatch>0.001</hatcherDaystoHatch>
+        <hatcherDaystoHatch>20</hatcherDaystoHatch>
 
         <geneCountCurve>
           <points>

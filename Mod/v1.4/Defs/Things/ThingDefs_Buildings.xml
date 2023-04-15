@@ -28,6 +28,7 @@
       <VV_Vivicream>1</VV_Vivicream>
     </costList>
     <useStuffTerrainAffordance>false</useStuffTerrainAffordance>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
     
     <designationCategory>VV_Bulidings</designationCategory>
     <researchPrerequisites>
@@ -95,6 +96,7 @@
       <VV_Vivicream>1</VV_Vivicream>
     </costList>
     <useStuffTerrainAffordance>false</useStuffTerrainAffordance>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
     
     <designationCategory Inherit="False" />
     <comps Inherit="False">
@@ -165,6 +167,7 @@
       <VV_Viviwax>1</VV_Viviwax>
     </costList>
     <useStuffTerrainAffordance>false</useStuffTerrainAffordance>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
     
     <designationCategory Inherit="False" />
     <damageMultipliers Inherit="False">

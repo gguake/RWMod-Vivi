@@ -56,6 +56,6 @@
       </points>
     </biologicalAgeTickFactorFromAgeCurve>
 
-    <eggLayIntervalDays>0.001</eggLayIntervalDays>
+    <eggLayIntervalDays>30</eggLayIntervalDays>
   </GeneDef>
 </Defs>
