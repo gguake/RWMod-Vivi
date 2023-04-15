@@ -34,7 +34,7 @@
     <smeltable>false</smeltable>
     <statBases>
       <MaxHitPoints>100</MaxHitPoints>
-      <WorkToMake>2000</WorkToMake>
+      <WorkToMake>3000</WorkToMake>
       <Mass>1.0</Mass>
       <StuffEffectMultiplierArmor>0.2</StuffEffectMultiplierArmor>
       <StuffEffectMultiplierInsulation_Cold>1.0</StuffEffectMultiplierInsulation_Cold>
