@@ -128,8 +128,8 @@
       </thingDefs>
     </fixedIngredientFilter>
     <products>
-      <MedicineHerbal>1</MedicineHerbal>
-      <Neutroamine>2</Neutroamine>
+      <MedicineHerbal>2</MedicineHerbal>
+      <Neutroamine>3</Neutroamine>
     </products>
     <researchPrerequisite>VV_AdvancedGathering</researchPrerequisite>
   </RecipeDef>

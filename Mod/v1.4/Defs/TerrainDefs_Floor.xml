@@ -44,16 +44,17 @@
 
   <uiOrder>2050</uiOrder>
   <statBases>
-    <WorkToBuild>3200</WorkToBuild>
+    <WorkToBuild>3000</WorkToBuild>
     <Beauty>1</Beauty>
-    <Cleanliness>0.7</Cleanliness>
+    <Cleanliness>0.75</Cleanliness>
     <CleaningTimeFactor>0.5</CleaningTimeFactor>
   </statBases>
 
   <constructEffect>ConstructWood</constructEffect>
   <costList>
-    <VV_Viviwax>12</VV_Viviwax>
-    <VV_Propolis>4</VV_Propolis>
+    <VV_Viviwax>10</VV_Viviwax>
+    <VV_Propolis>2</VV_Propolis>
+    <Neutroamine>4</Neutroamine>
   </costList>
   <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
 
