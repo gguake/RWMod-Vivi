@@ -22,13 +22,13 @@
     </equippedStatOffsets>
 
     <thingCategories Inherit="False">
-      <li>VV_ViviWeapon</li>
+      <li>VV_ViviEquipments</li>
     </thingCategories>
     <weaponClasses>
       <li>Melee</li>
     </weaponClasses>
     <weaponTags>
-      <li>MedievalMeleeDecent</li>
+      <li>VV_ViviTool</li>
     </weaponTags>
 
     <tools>
@@ -68,6 +68,10 @@
       </skillRequirements>
       <displayPriority>100</displayPriority>
     </recipeMaker>
+    
+    <tradeTags>
+      <li>VV_ViviTool</li>
+    </tradeTags>
   </ThingDef>
 
   <!-- 비비 다용도 붓 -->
@@ -92,13 +96,13 @@
     </equippedStatOffsets>
 
     <thingCategories Inherit="False">
-      <li>VV_ViviWeapon</li>
+      <li>VV_ViviEquipments</li>
     </thingCategories>
     <weaponClasses>
       <li>Melee</li>
     </weaponClasses>
     <weaponTags>
-      <li>MedievalMeleeDecent</li>
+      <li>VV_ViviTool</li>
     </weaponTags>
 
     <tools>
@@ -138,6 +142,10 @@
       </skillRequirements>
       <displayPriority>100</displayPriority>
     </recipeMaker>
+    
+    <tradeTags>
+      <li>VV_ViviTool</li>
+    </tradeTags>
   </ThingDef>
 
   <!-- 비비 연노 -->
@@ -217,6 +225,10 @@
       </skillRequirements>
       <displayPriority>300</displayPriority>
     </recipeMaker>
+    
+    <tradeTags>
+      <li>VV_ViviTool</li>
+    </tradeTags>
   </ThingDef>
 
   <ThingDef ParentName="BaseProjectileNeolithic">
@@ -245,8 +257,6 @@
       <drawSize>1.5</drawSize>
     </graphicData>
     <equippedAngleOffset>0</equippedAngleOffset>
-    <soundInteract>Interact_MonoSword</soundInteract>
-    <meleeHitSound>MeleeHit_MonoSword</meleeHitSound>
     
     <techLevel>Medieval</techLevel>
     <statBases>
@@ -254,9 +264,10 @@
       <Mass>2</Mass>
     </statBases>
     <equippedStatOffsets>
-      <CleaningSpeed>0.5</CleaningSpeed>
-      <MoveSpeed>-0.05</MoveSpeed>
+      <MoveSpeed>-0.3</MoveSpeed>
     </equippedStatOffsets>
+    <tradeNeverStack>true</tradeNeverStack>
+    <relicChance>3</relicChance>
 
     <thingCategories Inherit="False">
       <li>VV_ViviWeapon</li>
@@ -266,10 +277,25 @@
       <li>MeleePiercer</li>
     </weaponClasses>
     <weaponTags>
-      <li>VV_Weapons</li>
+      <li>VV_ViviExotic</li>
       <li>Spear</li>
     </weaponTags>
     
+    <comps>
+      <li>
+        <compClass>CompQuality</compClass>
+      </li>
+      <li Class="CompProperties_BladelinkWeapon">
+        <biocodeOnEquip>true</biocodeOnEquip>
+      </li>
+      <li Class="CompProperties_GeneratedName">
+        <nameMaker>NamerWeaponBladelink</nameMaker>
+      </li>
+    </comps>
+    <smeltable>false</smeltable>
+    <burnableByRecipe>true</burnableByRecipe>
+    <notifyMapRemoved>true</notifyMapRemoved>
+
     <tools>
       <li>
         <label>shaft</label>
@@ -277,19 +303,44 @@
           <li>Blunt</li>
           <li>Poke</li>
         </capacities>
-        <power>13</power>
-        <cooldownTime>2.6</cooldownTime>
+        <power>15</power>
+        <cooldownTime>1.6</cooldownTime>
       </li>
       <li>
         <label>point</label>
         <capacities>
           <li>Stab</li>
         </capacities>
-        <power>23</power>
+        <power>27</power>
         <armorPenetration>0.50</armorPenetration>
-        <cooldownTime>2.6</cooldownTime>
+        <cooldownTime>5.2</cooldownTime>
+      </li>
+      <li>
+        <label>point</label>
+        <capacities>
+          <li>Stab</li>
+        </capacities>
+        <power>54</power>
+        <armorPenetration>0.90</armorPenetration>
+        <cooldownTime>5.2</cooldownTime>
+        <chanceFactor>0.3</chanceFactor>
+        
+        <surpriseAttack>
+          <extraMeleeDamages>
+            <li>
+              <def>Stun</def>
+              <amount>14</amount>
+            </li>
+          </extraMeleeDamages>
+        </surpriseAttack>
+
+        <soundMeleeHit>Pawn_Melee_MechanoidSlash_HitPawn</soundMeleeHit>
       </li>
     </tools>
+    
+    <tradeTags>
+      <li>VV_ViviExotic</li>
+    </tradeTags>
   </ThingDef>
 
 </Defs>

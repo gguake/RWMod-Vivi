@@ -64,5 +64,9 @@
         <li>VV_ViviStartingApparel</li>
       </tags>
     </apparel>
+    
+    <tradeTags>
+      <li>VV_ViviApparel</li>
+    </tradeTags>
   </ThingDef>
 </Defs>

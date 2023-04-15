@@ -67,6 +67,10 @@
         <li>VV_ViviStartingApparel</li>
       </tags>
     </apparel>
+    
+    <tradeTags>
+      <li>VV_ViviApparel</li>
+    </tradeTags>
   </ThingDef>
 
   <ThingDef ParentName="VV_ThinApparelBase">
@@ -115,6 +119,10 @@
         <li>OnSkin</li>
       </layers>
     </apparel>
+    
+    <tradeTags>
+      <li>VV_ViviApparel</li>
+    </tradeTags>
   </ThingDef>
   
   <ThingDef ParentName="VV_ThinApparelBase">
@@ -158,5 +166,9 @@
         <li>Middle</li>
       </layers>
     </apparel>
+    
+    <tradeTags>
+      <li>VV_ViviApparel</li>
+    </tradeTags>
   </ThingDef>
 </Defs>

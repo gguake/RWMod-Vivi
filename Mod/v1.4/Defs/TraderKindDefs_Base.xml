@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <TraderKindDef>
+    <defName>VV_Base_Vivi_Standard</defName>
+    <stockGenerators>
+      
+      <!-- Resources -->
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Silver</thingDef>
+        <countRange>500~2000</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>ComponentIndustrial</thingDef>
+        <countRange>5~20</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Steel</thingDef>
+        <countRange>100~200</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>WoodLog</thingDef>
+        <countRange>300~400</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Cloth</thingDef>
+        <countRange>300~400</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Gold</thingDef>
+        <countRange>-40~120</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>MedicineHerbal</thingDef>
+        <countRange>20~50</countRange>
+      </li>
+      <li Class="StockGenerator_Category">
+        <categoryDef>Textiles</categoryDef>
+        <thingDefCountRange>1~2</thingDefCountRange>
+        <totalPriceRange>300~700</totalPriceRange>
+      </li>
+      <li Class="StockGenerator_Category">
+        <categoryDef>ResourcesRaw</categoryDef>
+        <thingDefCountRange>2~2</thingDefCountRange>
+        <totalPriceRange>100~400</totalPriceRange>
+      </li>
+      <li Class="StockGenerator_MultiDef">
+        <thingDefs>
+          <li>Chocolate</li>
+          <li>Kibble</li>
+        </thingDefs>
+      </li>
+      
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Neutroamine</thingDef>
+        <countRange>20~100</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>VV_RawHoney</thingDef>
+        <countRange>100~300</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>VV_FilteredHoney</thingDef>
+        <countRange>500~900</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>VV_RoyalJelly</thingDef>
+        <countRange>20~50</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>VV_HoneyPollenCake</thingDef>
+        <countRange>40~100</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>VV_Vivicream</thingDef>
+        <countRange>400~500</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>VV_Viviwax</thingDef>
+        <countRange>200~600</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>VV_Propolis</thingDef>
+        <countRange>20~100</countRange>
+      </li>
+      
+      <!-- Drugs -->
+      <li Class="StockGenerator_Category">
+        <categoryDef>Drugs</categoryDef>
+        <maxTechLevelGenerate>Medieval</maxTechLevelGenerate>
+        <thingDefCountRange>1~2</thingDefCountRange>
+        <totalPriceRange>300~800</totalPriceRange>
+      </li>
+      
+      <!-- Techprints -->
+      <li Class="StockGenerator_Techprints">
+        <countChances>
+          <li>
+            <count>1</count>
+            <chance>0.5</chance>
+          </li>
+          <li>
+            <count>2</count>
+            <chance>0.5</chance>
+          </li>
+        </countChances>
+      </li>
+      
+      <!-- Weapons-->
+      <li Class="StockGenerator_MarketValue">
+        <tradeTag>WeaponRanged</tradeTag>
+        <maxTechLevelGenerate>Medieval</maxTechLevelGenerate>
+        <countRange>1~2</countRange>
+      </li>
+      <li Class="StockGenerator_Category">
+        <categoryDef>WeaponsMelee</categoryDef>
+        <maxTechLevelGenerate>Medieval</maxTechLevelGenerate>
+        <thingDefCountRange>1~2</thingDefCountRange>
+        <countRange>1~2</countRange>
+      </li>
+      <li Class="StockGenerator_MarketValue">
+        <tradeTag>VV_ViviTool</tradeTag>
+        <maxTechLevelGenerate>Medieval</maxTechLevelGenerate>
+        <countRange>0~8</countRange>
+      </li>
+      <li Class="StockGenerator_MarketValue">
+        <tradeTag>VV_ViviExotic</tradeTag>
+        <maxTechLevelGenerate>Medieval</maxTechLevelGenerate>
+        <countRange>0~1</countRange>
+      </li>
+      
+      <!-- Apparel-->
+      <li Class="StockGenerator_MarketValue">
+        <tradeTag>VV_ViviApparel</tradeTag>
+        <maxTechLevelGenerate>Medieval</maxTechLevelGenerate>
+        <countRange>4~12</countRange>
+      </li>
+      
+      <!-- Implants -->
+      <!-- none -->
+      
+      <!-- Buildings -->
+      <!-- none -->
+
+      <!-- Exotic -->
+      <li Class="StockGenerator_Tag">
+        <tradeTag>Artifact</tradeTag>
+        <thingDefCountRange>0~3</thingDefCountRange>
+        <countRange>1~1</countRange>
+      </li>
+
+      <li MayRequire="Ludeon.RimWorld.Royalty" Class="StockGenerator_SingleDef">
+        <thingDef>AnimusStone</thingDef>
+        <countRange>-3~1</countRange> <!-- 25% chance of appearing -->
+      </li>
+
+      <!-- Slaves -->
+
+      <!-- Animals -->
+      <li Class="StockGenerator_Animals">
+        <maxWildness>0.70</maxWildness>
+        <tradeTagsSell>
+          <li>AnimalFarm</li>
+          <li>AnimalPet</li>
+        </tradeTagsSell>
+        <tradeTagsBuy>
+          <li>AnimalUncommon</li>
+          <li>AnimalExotic</li>
+        </tradeTagsBuy>
+        <kindCountRange>3~4</kindCountRange>
+        <countRange>2~4</countRange>
+        <createMatingPair>
+          <li>AnimalFarm</li>
+        </createMatingPair>
+      </li>
+
+      <!-- Archite capsules -->
+      <!-- none -->
+
+      <!-- Buying -->
+      <li Class="StockGenerator_BuyExpensiveSimple" />
+      <li Class="StockGenerator_BuyTradeTag"><tag>VV_ViviHoney</tag></li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>VV_ViviProduct</tag></li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>Art</tag></li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>MusicalInstrument</tag></li>
+      
+    </stockGenerators>
+  </TraderKindDef>
+</Defs>

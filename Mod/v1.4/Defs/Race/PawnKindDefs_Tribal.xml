@@ -27,8 +27,8 @@
     <apparelMoney>500~1000</apparelMoney>
     <weaponMoney>1000~1500</weaponMoney>
     <weaponTags>
-      <li>VV_ViviWeaponRange</li>
-      <li>Spear</li>
+      <li>NeolithicMeleeAdvanced</li>
+      <li>VV_ViviTool</li>
     </weaponTags>
 
     <initialWillRange>1~2</initialWillRange>
@@ -113,6 +113,7 @@
     </apparelTags>
     <weaponMoney>1000~1500</weaponMoney>
     <weaponTags>
+      <li>Gun</li>
       <li>VV_ViviWeaponRange</li>
     </weaponTags>
 
@@ -134,7 +135,7 @@
     <apparelMoney>600~1500</apparelMoney>
     <weaponMoney>1000~1500</weaponMoney>
     <weaponTags>
-      <li>VV_ViviWeaponRange</li>
+      <li>VV_ViviTool</li>
     </weaponTags>
 
     <initialWillRange>11~14</initialWillRange>

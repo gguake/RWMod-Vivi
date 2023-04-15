@@ -233,19 +233,22 @@ namespace VVRace.HarmonyPatches
 
         private static void ScenPart_PlayerPawnsArriveMethod_GenerateIntoMap_Postfix(Map map)
         {
-            var startingRoyalVivis = Find.GameInitData.startingAndOptionalPawns.Where(v => v.Spawned && v.TryGetViviGene(out var vivi) && vivi.IsRoyal).ToList();
-
-            var allEggs = map.spawnedThings.Where(v => v.def == VVThingDefOf.VV_ViviEgg);
-            foreach (var egg in allEggs)
+            if (map.IsPlayerHome)
             {
-                if (startingRoyalVivis.NullOrEmpty())
-                {
-                    Log.Error($"there is no royal vivi but vivi egg spawned");
-                    return;
-                }
+                var startingRoyalVivis = Find.GameInitData.startingAndOptionalPawns?.Where(v => v.Spawned && v.TryGetViviGene(out var vivi) && vivi.IsRoyal).ToList();
 
-                var hatcher = egg.TryGetComp<CompViviHatcher>();
-                hatcher.hatcheeParent = startingRoyalVivis.RandomElement();
+                var allEggs = map.spawnedThings.Where(v => v.def == VVThingDefOf.VV_ViviEgg);
+                foreach (var egg in allEggs)
+                {
+                    if (startingRoyalVivis.NullOrEmpty())
+                    {
+                        Log.Warning($"there is no royal vivi but vivi egg spawned");
+                        return;
+                    }
+
+                    var hatcher = egg.TryGetComp<CompViviHatcher>();
+                    hatcher.hatcheeParent = startingRoyalVivis.RandomElement();
+                }
             }
         }
     }

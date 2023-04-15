@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
+  <VV_ViviEquipments.label>비비 개인 장비</VV_ViviEquipments.label>
+  <VV_ViviEquipments.description>비비 개인 장비</VV_ViviEquipments.description>
+
+  <VV_ViviWeapon.label>비비 무기</VV_ViviWeapon.label>
+  <VV_ViviWeapon.description>비비 무기</VV_ViviWeapon.description>
+
   <VV_BuildingsVivi.label>비비 건물</VV_BuildingsVivi.label>
   <VV_BuildingsVivi.description>비비 건물</VV_BuildingsVivi.description>
 

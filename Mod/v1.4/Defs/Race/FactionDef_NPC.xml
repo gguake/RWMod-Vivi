@@ -16,6 +16,12 @@
       <li>(0.85, 0.75, 0.37)</li>
       <li>(0.94, 0.61, 0.06)</li>
     </colorSpectrum>
+    
+    <raidCommonalityFromPointsCurve>
+      <points>
+        <li>(0, 0)</li>
+      </points>
+    </raidCommonalityFromPointsCurve>
 
     <disallowedMemes>
       <li MayRequire="Ludeon.RimWorld.Ideology">Supremacist</li>
@@ -57,10 +63,10 @@
       </xenotypeChances>
     </xenotypeSet>
 
-    <dialogFactionGreetingHostile>NeanderthalFactionGreetingHostile</dialogFactionGreetingHostile>
-    <dialogFactionGreetingHostileAppreciative>NeanderthalFactionGreetingHostileAppreciative</dialogFactionGreetingHostileAppreciative>
-    <dialogFactionGreetingWary>NeanderthalFactionGreetingWary</dialogFactionGreetingWary>
-    <dialogFactionGreetingWarm>NeanderthalFactionGreetingWarm</dialogFactionGreetingWarm>
+    <dialogFactionGreetingHostile>ViviFactionGreetingHostile</dialogFactionGreetingHostile>
+    <dialogFactionGreetingHostileAppreciative>ViviFactionGreetingHostileAppreciative</dialogFactionGreetingHostileAppreciative>
+    <dialogFactionGreetingWary>ViviFactionGreetingWary</dialogFactionGreetingWary>
+    <dialogFactionGreetingWarm>ViviFactionGreetingWarm</dialogFactionGreetingWarm>
     <pawnGroupMakers Inherit="False">
       <li>
         <!-- Normal fights, ranged with melee mix-ins -->
@@ -113,5 +119,17 @@
         </options>
       </li>
     </pawnGroupMakers>
+    
+    <leaderTitle>queen</leaderTitle>
+    <caravanTraderKinds Inherit="False">
+      <li>VV_Caravan_Vivi_Honeys</li>
+      <li>VV_Caravan_Vivi_Exotics</li>
+    </caravanTraderKinds>
+    <visitorTraderKinds Inherit="False">
+      <li>VV_Visitor_Vivi_Standard</li>
+    </visitorTraderKinds>
+    <baseTraderKinds Inherit="False">
+      <li>VV_Base_Vivi_Standard</li>
+    </baseTraderKinds>
   </FactionDef>
 </Defs>

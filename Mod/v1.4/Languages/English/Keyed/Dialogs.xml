@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <ViviFactionGreetingHostile>{0} grunts angrily and disconnects.</ViviFactionGreetingHostile>
+  <ViviFactionGreetingHostileAppreciative>{0} grunts aggressively. Until you make a gesture of goodwill, {0_pronoun} will not do business with you. You can improve relations through a number of activities, like bringing gifts to one of {0_possessive} settlements or releasing {0_possessive} faction's prisoners unharmed.\n\n{0_pronoun} disconnects abruptly.</ViviFactionGreetingHostileAppreciative>
+  <ViviFactionGreetingWary>{0} grunts a greeting.</ViviFactionGreetingWary>
+  <ViviFactionGreetingWarm>{0} grunts a warm greeting to {NEGOTIATOR_labelShort}.</ViviFactionGreetingWarm>
+</LanguageData>

@@ -4,14 +4,17 @@
   <VV_PlayerVivi.description>.</VV_PlayerVivi.description>
   <VV_PlayerVivi.pawnSingular>비비</VV_PlayerVivi.pawnSingular>
   <VV_PlayerVivi.pawnsPlural>비비</VV_PlayerVivi.pawnsPlural>
+  <VV_PlayerVivi.leaderTitle>여왕</VV_PlayerVivi.leaderTitle>
 
   <VV_PlayerExiledVivi.label>추방된 비비</VV_PlayerExiledVivi.label>
   <VV_PlayerExiledVivi.description>.</VV_PlayerExiledVivi.description>
   <VV_PlayerExiledVivi.pawnSingular>비비</VV_PlayerExiledVivi.pawnSingular>
   <VV_PlayerExiledVivi.pawnsPlural>비비</VV_PlayerExiledVivi.pawnsPlural>
+  <VV_PlayerExiledVivi.leaderTitle>여왕</VV_PlayerExiledVivi.leaderTitle>
 
   <VV_WildVivi.label>야생 비비 둥지</VV_WildVivi.label>
   <VV_WildVivi.description>.</VV_WildVivi.description>
   <VV_WildVivi.pawnSingular>비비</VV_WildVivi.pawnSingular>
   <VV_WildVivi.pawnsPlural>비비</VV_WildVivi.pawnsPlural>
+  <VV_WildVivi.leaderTitle>여왕</VV_WildVivi.leaderTitle>
 </LanguageData>

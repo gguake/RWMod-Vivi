@@ -19,19 +19,22 @@
     
     <useHitPoints>true</useHitPoints>
     <statBases>
-      <MarketValue>4.5</MarketValue>
+      <MarketValue>0.7</MarketValue>
       <MaxHitPoints>60</MaxHitPoints>
       <Mass>0.05</Mass>
       <Flammability>1.0</Flammability>
       <DeteriorationRate>4</DeteriorationRate>
     </statBases>
-    <tradeability>None</tradeability>
 
     <comps>
       <li Class="VVRace.CompProperties_FoodDrainWhenMake">
         <drainPerStackCount>0.006</drainPerStackCount>
       </li>
     </comps>
+    
+    <tradeTags>
+      <li>VV_ViviResource</li>
+    </tradeTags>
   </ThingDef>
   
   <!-- 밀랍 -->
@@ -90,6 +93,10 @@
     </stuffProps>
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
     <allowedArchonexusCount>80</allowedArchonexusCount>
+    
+    <tradeTags>
+      <li>VV_ViviProduct</li>
+    </tradeTags>
   </ThingDef>
 
   <!-- 프로폴리스 -->
@@ -118,7 +125,10 @@
       <DeteriorationRate>4</DeteriorationRate>
     </statBases>
     <stackLimit>25</stackLimit>
-    <tradeability>None</tradeability>
+    
+    <tradeTags>
+      <li>VV_ViviProduct</li>
+    </tradeTags>
   </ThingDef>
   
 </Defs>

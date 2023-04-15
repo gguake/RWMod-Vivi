@@ -33,7 +33,11 @@
       <tasteThought>AteRawFood</tasteThought>
       <foodType>VegetableOrFruit</foodType>
     </ingestible>
+
     <tradeability>None</tradeability>
+    <tradeTags>
+      <li>VV_ViviResource</li>
+    </tradeTags>
   </ThingDef>
   
   <!-- 정제되지 않은 꿀 -->
@@ -53,8 +57,14 @@
       <Nutrition>0.05</Nutrition>
     </statBases>
     <stackLimit>75</stackLimit>
+
     <comps>
+			<li Class="CompProperties_Rottable">
+				<daysToRotStart>60</daysToRotStart>
+				<rotDestroys>true</rotDestroys>
+			</li>
     </comps>
+
     <ingestible>
       <preferability>RawTasty</preferability>
       <foodType>AnimalProduct, Fluid</foodType>
@@ -62,6 +72,11 @@
     <thingCategories>
       <li>VV_ViviProduct</li>
     </thingCategories>
+    
+    <tradeTags>
+      <li>VV_ViviResource</li>
+      <li>VV_ViviHoney</li>
+    </tradeTags>
   </ThingDef>
   
   <!-- 정제된 꿀 -->
@@ -91,6 +106,11 @@
     <thingCategories>
       <li>VV_ViviProduct</li>
     </thingCategories>
+    
+    <tradeTags>
+      <li>VV_ViviProduct</li>
+      <li>VV_ViviHoney</li>
+    </tradeTags>
   </ThingDef>
 
 	<!-- 꿀 경단 -->
@@ -134,11 +154,15 @@
     <stackLimit>10</stackLimit>
     <comps>
 			<li Class="CompProperties_Rottable">
-				<daysToRotStart>120</daysToRotStart>
+				<daysToRotStart>30</daysToRotStart>
 				<rotDestroys>true</rotDestroys>
 			</li>
     </comps>
     <allowedArchonexusCount>80</allowedArchonexusCount>
+    
+    <tradeTags>
+      <li>VV_ViviProduct</li>
+    </tradeTags>
   </ThingDef>
 
 	<!-- 로열 젤리 -->
@@ -180,10 +204,14 @@
     <stackLimit>10</stackLimit>
 		<comps>
 			<li Class="CompProperties_Rottable">
-				<daysToRotStart>120</daysToRotStart>
+				<daysToRotStart>60</daysToRotStart>
 				<rotDestroys>true</rotDestroys>
 			</li>
 		</comps>
+    
+    <tradeTags>
+      <li>VV_ViviProduct</li>
+    </tradeTags>
 	</ThingDef>
 
 </Defs>

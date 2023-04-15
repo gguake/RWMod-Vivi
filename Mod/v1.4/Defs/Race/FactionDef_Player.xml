@@ -65,6 +65,8 @@
     <label>vivi</label>
     <description>.</description>
     <basicMemberKind>VV_PlayerVivi</basicMemberKind>
+    
+    <leaderTitle>queen</leaderTitle>
   </FactionDef>
   
   <FactionDef ParentName="PlayerViviFactionBase">
@@ -72,5 +74,7 @@
     <label>exiled vivi</label>
     <description>.</description>
     <basicMemberKind>VV_PlayerExiledRoyalVivi</basicMemberKind>
+    
+    <leaderTitle>queen</leaderTitle>
   </FactionDef>
 </Defs>
