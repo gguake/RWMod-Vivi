@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <!-- Vivi -->
+  <VV_BasicWorkerCostume.label>비비 작업복</VV_BasicWorkerCostume.label>
+  <VV_BasicWorkerCostume.description>.</VV_BasicWorkerCostume.description>
+  
+  <VV_WorkerUniformDress.label>비비 제복</VV_WorkerUniformDress.label>
+  <VV_WorkerUniformDress.description>.</VV_WorkerUniformDress.description>
+
+  <VV_WinterCape.label>비비 겨울 망토</VV_WinterCape.label>
+  <VV_WinterCape.description>.</VV_WinterCape.description>
+
+  <!-- Royal Vivi -->
+  <VV_BasicRoyalCostume.label>로얄 비비 드레스</VV_BasicRoyalCostume.label>
+  <VV_BasicRoyalCostume.description>.</VV_BasicRoyalCostume.description>
+</LanguageData>

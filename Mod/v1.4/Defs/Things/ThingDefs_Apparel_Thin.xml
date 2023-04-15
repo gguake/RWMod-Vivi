@@ -64,8 +64,8 @@
       <Mass>0.25</Mass>
       <ArmorRating_Sharp>0.44</ArmorRating_Sharp>
       <ArmorRating_Blunt>0.56</ArmorRating_Blunt>
-      <Insulation_Cold>24</Insulation_Cold>
-      <Insulation_Heat>12</Insulation_Heat>
+      <Insulation_Cold>12</Insulation_Cold>
+      <Insulation_Heat>8</Insulation_Heat>
       <EquipDelay>1.0</EquipDelay>
     </statBases>
     <apparel Class="VVRace.ApparelPropertiesExt">
@@ -110,10 +110,10 @@
       <MaxHitPoints>100</MaxHitPoints>
       <WorkToMake>2800</WorkToMake>
       <Mass>0.25</Mass>
-      <ArmorRating_Sharp>0.44</ArmorRating_Sharp>
-      <ArmorRating_Blunt>0.56</ArmorRating_Blunt>
-      <Insulation_Cold>24</Insulation_Cold>
-      <Insulation_Heat>12</Insulation_Heat>
+      <ArmorRating_Sharp>0.2</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.2</ArmorRating_Blunt>
+      <Insulation_Cold>48</Insulation_Cold>
+      <Insulation_Heat>-8</Insulation_Heat>
       <EquipDelay>1.0</EquipDelay>
     </statBases>
     <apparel Class="VVRace.ApparelPropertiesExt">
