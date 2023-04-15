@@ -34,9 +34,14 @@
   </HairDef>
 
   <HairDef ParentName="ViviHairBase">
+    <defName>VV_HairD</defName>
+    <label>hairD</label>
+    <texPath>Things/Pawn/Vivi/Hairs/HairD</texPath>
+  </HairDef>
+
+  <HairDef ParentName="ViviHairBase">
     <defName>VV_RoyalHairA</defName>
     <label>royal hairA</label>
     <texPath>Things/Pawn/Vivi/Hairs/RoyalHairA</texPath>
   </HairDef>
-
 </Defs>

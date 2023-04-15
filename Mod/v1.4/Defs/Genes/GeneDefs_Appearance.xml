@@ -22,8 +22,6 @@
 
     <forcedHeadTypes>
       <li>VV_Vivi_A</li>
-      <li>VV_Vivi_B</li>
-      <li>VV_Vivi_C</li>
     </forcedHeadTypes>
     
     <hairTagFilter>
@@ -61,19 +59,19 @@
 
         <useUniqueHeadOffset>true</useUniqueHeadOffset>
         <applyLifeStageHeadOffset>false</applyLifeStageHeadOffset>
-        <headOffset>(0, 0.2)</headOffset>
+        <headOffset>(0, 0.21)</headOffset>
       </Child>
       <Thin>
         <overrideGraphicPath>Things/Pawn/Vivi/Body/Naked_Thin</overrideGraphicPath>
         
         <useUniqueHeadOffset>true</useUniqueHeadOffset>
-        <headOffset>(0, 0.27)</headOffset>
+        <headOffset>(0, 0.28)</headOffset>
       </Thin>
       <Female>
         <overrideGraphicPath>Things/Pawn/Vivi/Body/Naked_Female</overrideGraphicPath>
         
         <useUniqueHeadOffset>true</useUniqueHeadOffset>
-        <headOffset>(0.01, 0.32)</headOffset>
+        <headOffset>(0.01, 0.34)</headOffset>
       </Female>
     </bodyTypeOverrides>
     
