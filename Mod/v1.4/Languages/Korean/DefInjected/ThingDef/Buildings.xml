@@ -10,7 +10,7 @@
   <VV_ViviHoneycombWall.description>육각 구조가 층층히 쌓여있는 벽입니다. 지나갈수 없고 지붕을 지지합니다. 각종 충격에는 매우 튼튼하지만 화재에는 매우 취약합니다.</VV_ViviHoneycombWall.description>
 
   <VV_ViviHatchery.label>비비 부화기</VV_ViviHatchery.label>
-  <VV_ViviHatchery.description>비비 알을 부화시키기 위한 구조물입니다. 지붕이 있는 실내에 있어야 하며 적절한 온도가 필요합니다. 적절한 환경의 부화기가 있다면 로얄 비비들은 그곳에 가서 알을 낳습니다.</VV_ViviHatchery.description>
+  <VV_ViviHatchery.description>비비 알을 부화시키기 위한 구조물입니다. 지붕이 있는 실내에 있어야 하며 적절한 온도가 필요합니다. 적절한 환경의 부화기가 있다면 로열 비비들은 그곳에 가서 알을 낳습니다.</VV_ViviHatchery.description>
   
   <VV_HarvestBarrel.label>비비 채집 작업대</VV_HarvestBarrel.label>
   <VV_HarvestBarrel.description>비비들이 주변의 식물에서 채집 작업을 하기 위한 작업 도구입니다.</VV_HarvestBarrel.description>

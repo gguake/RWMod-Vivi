@@ -1,28 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <ThingDef ParentName="ApparelNoQualityBase">
+  <ThingDef Abstract="True" Name="VV_FemaleApparelBase" ParentName="ApparelBase">
+    <smeltable>false</smeltable>
+    <thingCategories>
+      <li>VV_ViviApparel</li>
+    </thingCategories>
+
+    <apparel Class="VVRace.ApparelPropertiesExt">
+      <tags>
+        <li>VV_ViviApparel</li>
+      </tags>
+      <canBeDesiredForIdeo>false</canBeDesiredForIdeo>
+      <developmentalStageFilter>Adult</developmentalStageFilter>
+      <bodyTypeWhitelist>
+        <li>Female</li>
+      </bodyTypeWhitelist>
+      <fixedBodyType>Female</fixedBodyType>
+    </apparel>
+
+    <colorGenerator Class="ColorGenerator_White" />
+  </ThingDef>
+
+  <ThingDef ParentName="VV_FemaleApparelBase">
     <defName>VV_BasicRoyalCostume</defName>
     <label>vivi basic royal costume</label>
     <description>.</description>
     <graphicData>
       <texPath>Things/Apparel/BasicRoyalCostume</texPath>
       <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
     </graphicData>
+
     <smeltable>false</smeltable>
-    <thingCategories>
-      <li>ApparelMisc</li>
-    </thingCategories>
     <statBases>
       <MaxHitPoints>100</MaxHitPoints>
-      <WorkToMake>1600</WorkToMake>
-      <Mass>0.25</Mass>
-      <ArmorRating_Sharp>0.16</ArmorRating_Sharp>
-      <ArmorRating_Blunt>0.16</ArmorRating_Blunt>
-      <Insulation_Cold>8</Insulation_Cold>
-      <Insulation_Heat>8</Insulation_Heat>
-      <EquipDelay>0.5</EquipDelay>
+      <WorkToMake>2000</WorkToMake>
+      <Mass>1.0</Mass>
+      <StuffEffectMultiplierArmor>0.2</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>1.0</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>1.0</StuffEffectMultiplierInsulation_Heat>
+      <EquipDelay>1.5</EquipDelay>
     </statBases>
+
+    <costStuffCount>60</costStuffCount>
+    <stuffCategories>
+      <li>Fabric</li>
+    </stuffCategories>
+
     <apparel Class="VVRace.ApparelPropertiesExt">
+      <useWornGraphicMask>true</useWornGraphicMask>
+      <wornGraphicPath>Things/Apparel/BasicRoyalCostume</wornGraphicPath>
       <bodyPartGroups>
         <li>Neck</li>
         <li>Shoulders</li>
@@ -30,19 +57,12 @@
         <li>Arms</li>
         <li>Legs</li>
       </bodyPartGroups>
-      <wornGraphicPath>Things/Apparel/BasicRoyalCostume</wornGraphicPath>
       <layers>
         <li>OnSkin</li>
       </layers>
       <tags>
-        <li>VV_ViviApparel</li>
+        <li>VV_ViviStartingApparel</li>
       </tags>
-      <canBeDesiredForIdeo>false</canBeDesiredForIdeo>
-      <bodyTypeWhitelist>
-        <li>Female</li>
-      </bodyTypeWhitelist>
     </apparel>
-    <colorGenerator Class="ColorGenerator_White" />
   </ThingDef>
-
 </Defs>

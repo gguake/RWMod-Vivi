@@ -141,7 +141,7 @@
     <allowedArchonexusCount>80</allowedArchonexusCount>
   </ThingDef>
 
-	<!-- 로얄 젤리 -->
+	<!-- 로열 젤리 -->
 	<ThingDef ParentName="OrganicProductBase">
 		<defName>VV_RoyalJelly</defName>
 		<label>royal jelly</label>

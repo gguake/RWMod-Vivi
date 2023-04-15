@@ -149,7 +149,7 @@ namespace VVRace
                         pawn.health.AddHediff(VVHediffDefOf.VV_MindTransmitter);
                     }
 
-                    // 로얄 비비인 경우는 마인드 링크를 제거한다.
+                    // 로열 비비인 경우는 마인드 링크를 제거한다.
                     if (pawn.TryGetMindLink(out var mindLink) && mindLink.linker != null && mindLink.linker.TryGetMindTransmitter(out var parentMindTransmitter))
                     {
                         parentMindTransmitter.UnassignPawnControl(pawn);

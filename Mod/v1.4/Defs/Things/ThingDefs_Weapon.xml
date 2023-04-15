@@ -144,11 +144,11 @@
 
     <techLevel>Medieval</techLevel>
     <statBases>
-      <WorkToMake>20000</WorkToMake>
+      <WorkToMake>15000</WorkToMake>
       <Mass>1.6</Mass>
       <AccuracyTouch>0.6</AccuracyTouch>
-      <AccuracyShort>0.35</AccuracyShort>
-      <AccuracyMedium>0.1</AccuracyMedium>
+      <AccuracyShort>0.25</AccuracyShort>
+      <AccuracyMedium>0.07</AccuracyMedium>
       <AccuracyLong>0.03</AccuracyLong>
       <RangedWeapon_Cooldown>0.11</RangedWeapon_Cooldown>
     </statBases>

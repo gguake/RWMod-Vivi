@@ -44,7 +44,7 @@
         <li Class="ScenPart_StartingThing_Defined">
           <def>StartingThing_Defined</def>
           <thingDef>VV_Vivicream</thingDef>
-          <count>150</count>
+          <count>225</count>
         </li>
         <li Class="ScenPart_StartingThing_Defined">
           <def>StartingThing_Defined</def>
@@ -73,7 +73,7 @@
         <li Class="ScenPart_ScatterThingsNearPlayerStart">
           <def>ScatterThingsNearPlayerStart</def>
           <thingDef>WoodLog</thingDef>
-          <count>800</count>
+          <count>400</count>
         </li>
         
         <li Class="ScenPart_ScatterThingsNearPlayerStart">

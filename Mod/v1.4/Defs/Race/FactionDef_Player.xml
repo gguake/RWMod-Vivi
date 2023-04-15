@@ -9,13 +9,14 @@
     <techLevel>Medieval</techLevel>
 
     <isPlayer>true</isPlayer>
+
+    <startingResearchTags>
+    </startingResearchTags>
+
     <allowedCultures>
       <li>VV_ViviCulture</li>
     </allowedCultures>
     
-    <startingResearchTags>
-    </startingResearchTags>
-
     <disallowedMemes>
       <li MayRequire="Ludeon.RimWorld.Ideology">Supremacist</li>
       <li MayRequire="Ludeon.RimWorld.Ideology">PainIsVirtue</li>
@@ -52,6 +53,13 @@
         </categories>
       </li>
     </backstoryFilters>
+    
+    <apparelStuffFilter>
+      <thingDefs>
+        <li>Cloth</li>
+      </thingDefs>
+    </apparelStuffFilter>
+
     <xenotypeSet Inherit="False">
       <xenotypeChances>
         <VV_Vivi>999</VV_Vivi>

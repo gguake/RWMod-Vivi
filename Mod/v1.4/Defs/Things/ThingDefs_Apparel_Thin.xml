@@ -1,74 +1,106 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <ThingDef ParentName="ApparelNoQualityBase">
+  <ThingDef Abstract="True" Name="VV_ThinApparelBase" ParentName="ApparelBase">
+    <smeltable>false</smeltable>
+    <thingCategories>
+      <li>VV_ViviApparel</li>
+    </thingCategories>
+
+    <apparel Class="VVRace.ApparelPropertiesExt">
+      <tags>
+        <li>VV_ViviApparel</li>
+      </tags>
+      <canBeDesiredForIdeo>false</canBeDesiredForIdeo>
+      <developmentalStageFilter>Child, Adult</developmentalStageFilter>
+      <bodyTypeWhitelist>
+        <li>Child</li>
+        <li>Thin</li>
+      </bodyTypeWhitelist>
+      <fixedBodyType>Thin</fixedBodyType>
+    </apparel>
+
+    <colorGenerator Class="ColorGenerator_White" />
+  </ThingDef>
+
+  <ThingDef ParentName="VV_ThinApparelBase">
     <defName>VV_BasicWorkerCostume</defName>
     <label>vivi basic worker costume</label>
     <description>.</description>
     <graphicData>
       <texPath>Things/Apparel/BasicWorkerCostume</texPath>
       <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
     </graphicData>
-    <smeltable>false</smeltable>
-    <thingCategories>
-      <li>ApparelMisc</li>
-    </thingCategories>
+
     <statBases>
       <MaxHitPoints>100</MaxHitPoints>
       <WorkToMake>1200</WorkToMake>
-      <Mass>0.25</Mass>
-      <ArmorRating_Sharp>0.16</ArmorRating_Sharp>
-      <ArmorRating_Blunt>0.2</ArmorRating_Blunt>
-      <Insulation_Cold>8</Insulation_Cold>
-      <Insulation_Heat>8</Insulation_Heat>
-      <EquipDelay>1.0</EquipDelay>
+      <Mass>0.5</Mass>
+      <StuffEffectMultiplierArmor>0.2</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>0.6</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>1.2</StuffEffectMultiplierInsulation_Heat>
+      <EquipDelay>1.5</EquipDelay>
+      
+      <ArmorRating_Blunt>0.06</ArmorRating_Blunt>
     </statBases>
+    <equippedStatOffsets>
+      <MoveSpeed>0.2</MoveSpeed>
+    </equippedStatOffsets>
+
+    <costStuffCount>40</costStuffCount>
+    <stuffCategories>
+      <li>Fabric</li>
+      <li>Leathery</li>
+    </stuffCategories>
+
     <apparel Class="VVRace.ApparelPropertiesExt">
+      <useWornGraphicMask>true</useWornGraphicMask>
+      <wornGraphicPath>Things/Apparel/BasicWorkerCostume</wornGraphicPath>
       <bodyPartGroups>
-        <li>Neck</li>
         <li>Torso</li>
         <li>Legs</li>
       </bodyPartGroups>
-      <wornGraphicPath>Things/Apparel/BasicWorkerCostume</wornGraphicPath>
       <layers>
         <li>OnSkin</li>
       </layers>
       <tags>
-        <li>VV_ViviApparel</li>
+        <li>VV_ViviStartingApparel</li>
       </tags>
-      <canBeDesiredForIdeo>false</canBeDesiredForIdeo>
-      <developmentalStageFilter>Child, Adult</developmentalStageFilter>
-      <bodyTypeWhitelist>
-        <li>Child</li>
-        <li>Thin</li>
-      </bodyTypeWhitelist>
-      <fixedBodyType>Thin</fixedBodyType>
     </apparel>
-    <colorGenerator Class="ColorGenerator_White" />
   </ThingDef>
 
-  <ThingDef ParentName="ApparelBase">
+  <ThingDef ParentName="VV_ThinApparelBase">
     <defName>VV_WorkerUniformDress</defName>
     <label>vivi worker uniform</label>
     <description>.</description>
     <graphicData>
       <texPath>Things/Apparel/WorkerUniformDress</texPath>
       <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
     </graphicData>
-    <smeltable>false</smeltable>
-    <thingCategories>
-      <li>ApparelMisc</li>
-    </thingCategories>
+
     <statBases>
       <MaxHitPoints>100</MaxHitPoints>
-      <WorkToMake>2800</WorkToMake>
-      <Mass>0.25</Mass>
-      <ArmorRating_Sharp>0.44</ArmorRating_Sharp>
-      <ArmorRating_Blunt>0.56</ArmorRating_Blunt>
-      <Insulation_Cold>12</Insulation_Cold>
-      <Insulation_Heat>8</Insulation_Heat>
-      <EquipDelay>1.0</EquipDelay>
+      <WorkToMake>4800</WorkToMake>
+      <Mass>1.0</Mass>
+      <StuffEffectMultiplierArmor>0.48</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>0.4</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.4</StuffEffectMultiplierInsulation_Heat>
+      <EquipDelay>2.0</EquipDelay>
     </statBases>
+    <equippedStatOffsets>
+      <MentalBreakThreshold>-0.1</MentalBreakThreshold>
+    </equippedStatOffsets>
+
+    <costStuffCount>85</costStuffCount>
+    <stuffCategories>
+      <li>Fabric</li>
+      <li>Leathery</li>
+    </stuffCategories>
+
     <apparel Class="VVRace.ApparelPropertiesExt">
+      <useWornGraphicMask>true</useWornGraphicMask>
+      <wornGraphicPath>Things/Apparel/WorkerUniformDress</wornGraphicPath>
       <bodyPartGroups>
         <li>Neck</li>
         <li>Shoulders</li>
@@ -76,68 +108,52 @@
         <li>Arms</li>
         <li>Legs</li>
       </bodyPartGroups>
-      <wornGraphicPath>Things/Apparel/WorkerUniformDress</wornGraphicPath>
       <layers>
         <li>OnSkin</li>
       </layers>
-      <tags>
-        <li>VV_ViviApparel</li>
-      </tags>
-      <canBeDesiredForIdeo>false</canBeDesiredForIdeo>
-      <developmentalStageFilter>Child, Adult</developmentalStageFilter>
-      <bodyTypeWhitelist>
-        <li>Child</li>
-        <li>Thin</li>
-      </bodyTypeWhitelist>
-      <fixedBodyType>Thin</fixedBodyType>
     </apparel>
-    <colorGenerator Class="ColorGenerator_White" />
   </ThingDef>
   
-  <ThingDef ParentName="ApparelBase">
+  <ThingDef ParentName="VV_ThinApparelBase">
     <defName>VV_WinterCape</defName>
     <label>vivi winter cape</label>
     <description>.</description>
     <graphicData>
       <texPath>Things/Apparel/WinterCape</texPath>
       <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
     </graphicData>
-    <smeltable>false</smeltable>
-    <thingCategories>
-      <li>ApparelMisc</li>
-    </thingCategories>
+
     <statBases>
       <MaxHitPoints>100</MaxHitPoints>
       <WorkToMake>2800</WorkToMake>
-      <Mass>0.25</Mass>
-      <ArmorRating_Sharp>0.2</ArmorRating_Sharp>
-      <ArmorRating_Blunt>0.2</ArmorRating_Blunt>
-      <Insulation_Cold>48</Insulation_Cold>
-      <Insulation_Heat>-8</Insulation_Heat>
+      <Mass>1.0</Mass>
+      <StuffEffectMultiplierArmor>0.2</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>2</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>-0.3</StuffEffectMultiplierInsulation_Heat>
       <EquipDelay>1.0</EquipDelay>
+      
+      <Insulation_Heat>-10</Insulation_Heat>
     </statBases>
+    
+    <costStuffCount>80</costStuffCount>
+    <stuffCategories>
+      <li>Fabric</li>
+      <li>Leathery</li>
+    </stuffCategories>
+
     <apparel Class="VVRace.ApparelPropertiesExt">
+      <useWornGraphicMask>true</useWornGraphicMask>
+      <wornGraphicPath>Things/Apparel/WinterCape</wornGraphicPath>
       <bodyPartGroups>
         <li>Neck</li>
         <li>Shoulders</li>
         <li>Torso</li>
         <li>Arms</li>
       </bodyPartGroups>
-      <wornGraphicPath>Things/Apparel/WinterCape</wornGraphicPath>
       <layers>
         <li>Middle</li>
       </layers>
-      <tags>
-        <li>VV_ViviApparel</li>
-      </tags>
-      <canBeDesiredForIdeo>false</canBeDesiredForIdeo>
-      <developmentalStageFilter>Child, Adult</developmentalStageFilter>
-      <bodyTypeWhitelist>
-        <li>Child</li>
-        <li>Thin</li>
-      </bodyTypeWhitelist>
-      <fixedBodyType>Thin</fixedBodyType>
     </apparel>
-    <colorGenerator Class="ColorGenerator_White" />
   </ThingDef>
 </Defs>

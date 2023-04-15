@@ -5,13 +5,16 @@
     <defaultFactionType>VV_PlayerVivi</defaultFactionType>
 
     <isFighter>false</isFighter>
-    <apparelIgnoreSeasons>true</apparelIgnoreSeasons>
-    <apparelIgnorePollution MayRequire="Ludeon.RimWorld.Biotech">true</apparelIgnorePollution>
     <forceNormalGearQuality>true</forceNormalGearQuality>
     <combatPower>45</combatPower>
     <gearHealthRange>1.0~1.0</gearHealthRange>
     <apparelMoney>500~1000</apparelMoney>
     <apparelAllowHeadgearChance>0</apparelAllowHeadgearChance>
+    <apparelIgnoreSeasons>true</apparelIgnoreSeasons>
+    <apparelIgnorePollution MayRequire="Ludeon.RimWorld.Biotech">true</apparelIgnorePollution>
+    <apparelTags Inherit="False">
+      <li>VV_ViviStartingApparel</li>
+    </apparelTags>
 
     <initialWillRange>0~0</initialWillRange>
     <initialResistanceRange>13~21</initialResistanceRange>
@@ -39,7 +42,7 @@
     <label>exiled royal vivi</label>
     <defaultFactionType>VV_PlayerExiledVivi</defaultFactionType>
     
-    <minTotalSkillLevels>2</minTotalSkillLevels>
+    <minTotalSkillLevels>40</minTotalSkillLevels>
 
     <backstoryFiltersOverride Inherit="False">
       <li>

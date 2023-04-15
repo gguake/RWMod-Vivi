@@ -87,7 +87,7 @@
     <initialResistanceRange>30~40</initialResistanceRange>
   </PawnKindDef>
   
-  <!-- 리더 로얄 비비 -->
+  <!-- 리더 로열 비비 -->
   <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDefExt">
     <defName>VV_RoyalViviLeader</defName>
     <label>royal vivi leader</label>
@@ -116,7 +116,7 @@
     <isRoyal>true</isRoyal>
   </PawnKindDef>
   
-  <!-- 일반 로얄 비비 -->
+  <!-- 일반 로열 비비 -->
   <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDefExt">
     <defName>VV_RoyalVivi</defName>
     <label>royal vivi</label>
@@ -137,7 +137,7 @@
     <isRoyal>true</isRoyal>
   </PawnKindDef>
   
-  <!-- 상인 로얄 비비 -->
+  <!-- 상인 로열 비비 -->
   <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDefExt">
     <defName>VV_RoyalViviTrader</defName>
     <label>royal vivi</label>
