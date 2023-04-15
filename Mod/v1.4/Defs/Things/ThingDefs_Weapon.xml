@@ -7,9 +7,9 @@
     <description>.</description>
     <graphicData>
       <texPath>Things/Item/Equipment/VV_Straw</texPath>
-      <graphicClass>Graphic_Random</graphicClass>
+      <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
-    <equippedAngleOffset>10</equippedAngleOffset>
+    <equippedAngleOffset>-20</equippedAngleOffset>
 
     <techLevel>Medieval</techLevel>
     <statBases>
@@ -17,8 +17,8 @@
       <Mass>2</Mass>
     </statBases>
     <equippedStatOffsets>
-      <CleaningSpeed>0.5</CleaningSpeed>
-      <VV_PlantGatherSpeed>0.5</VV_PlantGatherSpeed>
+      <VV_HoneyHarvestSpeed>0.5</VV_HoneyHarvestSpeed>
+      <VV_HoneyHarvestYield>0.5</VV_HoneyHarvestYield>
     </equippedStatOffsets>
 
     <thingCategories Inherit="False">
@@ -37,8 +37,8 @@
         <capacities>
           <li>Poke</li>
         </capacities>
-        <power>9</power>
-        <cooldownTime>2.5</cooldownTime>
+        <power>11</power>
+        <cooldownTime>3</cooldownTime>
       </li>
       <li>
         <label>head</label>
@@ -46,8 +46,8 @@
         <capacities>
           <li>Blunt</li>
         </capacities>
-        <power>11</power>
-        <cooldownTime>2</cooldownTime>
+        <power>5</power>
+        <cooldownTime>1</cooldownTime>
       </li>
     </tools>
     

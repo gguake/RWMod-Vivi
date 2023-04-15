@@ -43,11 +43,6 @@
         <!-- 시작시 소유품 -->
         <li Class="ScenPart_StartingThing_Defined">
           <def>StartingThing_Defined</def>
-          <thingDef>Silver</thingDef>
-          <count>100</count>
-        </li>
-        <li Class="ScenPart_StartingThing_Defined">
-          <def>StartingThing_Defined</def>
           <thingDef>VV_Vivicream</thingDef>
           <count>150</count>
         </li>
@@ -58,8 +53,14 @@
         </li>
         <li Class="ScenPart_StartingThing_Defined">
           <def>StartingThing_Defined</def>
-          <thingDef>VV_RepeatingCrossbow</thingDef>
+          <thingDef>VV_Straw</thingDef>
           <quality>Good</quality>
+          <stuff>VV_Viviwax</stuff>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>VV_RepeatingCrossbow</thingDef>
+          <quality>Normal</quality>
         </li>
         <li Class="ScenPart_StartingThing_Defined">
           <def>StartingThing_Defined</def>
