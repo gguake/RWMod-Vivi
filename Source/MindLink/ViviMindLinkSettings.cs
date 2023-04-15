@@ -29,15 +29,24 @@ namespace VVRace
             }
             set
             {
+                if (assignedSpecialization == value) { return; }
+
                 var beforeSpecialization = assignedSpecialization;
-                if (beforeSpecialization.hediff != null)
+                if (beforeSpecialization?.hediff != null)
                 {
-                    gene.pawn.health?.hediffSet?.GetFirstHediffOfDef(beforeSpecialization.hediff);
+                    var hediff = gene.pawn.health?.hediffSet?.GetFirstHediffOfDef(beforeSpecialization.hediff);
+                    if (hediff != null)
+                    {
+                        gene.pawn.health.RemoveHediff(hediff);
+                    }
                 }
 
                 assignedSpecialization = value;
-
-                
+                var newHediff = assignedSpecialization.hediff;
+                if (newHediff != null)
+                {
+                    gene.pawn.health.AddHediff(newHediff);
+                }
 
                 gene.pawn.InterruptCurrentJob();
             }
@@ -83,6 +92,24 @@ namespace VVRace
         {
             reservedToConnectTarget = null;
             cacheDirty = true;
+
+            if (assignedSpecialization == null)
+            {
+                if (gene.pawn.kindDef is PawnKindDef_Vivi pawnKindDefExt && pawnKindDefExt.initialSpecializationDef != null)
+                {
+                    AssignedSpecialization = pawnKindDefExt.initialSpecializationDef;
+
+                    var hediff = gene.pawn.health.hediffSet.GetFirstHediff<Hediff_Specialization>();
+                    if (hediff != null)
+                    {
+                        hediff.specializedTicks = pawnKindDefExt.initialSpecializationTicks.RandomInRange;
+                    }
+                }
+                else
+                {
+                    AssignedSpecialization = VVViviSpecializationDefOf.VV_NoSpecialization;
+                }
+            }
         }
 
         public void Notify_MindLinkRemoved()

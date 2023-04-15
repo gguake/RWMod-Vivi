@@ -119,7 +119,30 @@ namespace VVRace
                 {
                     if (pawn.TryGetViviGene(out var vivi) && vivi.ViviMindLinkSettings != null)
                     {
-                        vivi.ViviMindLinkSettings.AssignedSpecialization = def;
+                        if (vivi.ViviMindLinkSettings.AssignedSpecialization == VVViviSpecializationDefOf.VV_NoSpecialization)
+                        {
+                            vivi.ViviMindLinkSettings.AssignedSpecialization = def;
+                        }
+                        else
+                        {
+                            // 이미 설정된 특화 헤디프에 경험치가 일정이상 쌓여있다면 확인창을 띄운다
+                            var hediff = pawn.health.hediffSet.GetFirstHediffOfDef(vivi.ViviMindLinkSettings.AssignedSpecialization.hediff);
+                            if (hediff.Severity > 0.5f)
+                            {
+                                var dialog_MessageBox = Dialog_MessageBox.CreateConfirmation(LocalizeTexts.ConfirmPopupSpecializationChanged.Translate(vivi.ViviMindLinkSettings.AssignedSpecialization.Named("SPEC")), () =>
+                                {
+                                    vivi.ViviMindLinkSettings.AssignedSpecialization = def;
+                                });
+
+                                dialog_MessageBox.buttonBText = "CancelButton".Translate();
+                                Find.WindowStack.Add(dialog_MessageBox);
+                            }
+                            else
+                            {
+                                vivi.ViviMindLinkSettings.AssignedSpecialization = def;
+                            }
+
+                        }
                     }
 
                 }, def.uiIcon, Color.white);

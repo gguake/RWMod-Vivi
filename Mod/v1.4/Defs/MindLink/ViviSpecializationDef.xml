@@ -5,18 +5,39 @@
     <label>no specialization</label>
     <description>.</description>
     <uiOrder>100</uiOrder>
-    <iconPath>UI/Icons/WorkMode/Work</iconPath>
+    <iconPath>UI/Icons/ColonistBar/Idle</iconPath>
 
     <hediff>VV_NoSpecialization</hediff>
   </VVRace.ViviSpecializationDef>
   
   <VVRace.ViviSpecializationDef>
-    <defName>VV_SpecializationGuard</defName>
-    <label>escort</label>
+    <defName>VV_SpecializationGatherer</defName>
+    <label>gatherer</label>
     <description>.</description>
     <uiOrder>200</uiOrder>
+    <iconPath>UI/Icons/CanGraze</iconPath>
+    
+    <hediff>VV_SpecializationGatherer</hediff>
+  </VVRace.ViviSpecializationDef>
+
+  <VVRace.ViviSpecializationDef>
+    <defName>VV_SpecializationCrafter</defName>
+    <label>constructor</label>
+    <description>.</description>
+    <uiOrder>201</uiOrder>
+    <iconPath>UI/Icons/WorkMode/Work</iconPath>
+    
+    <hediff>VV_SpecializationCrafter</hediff>
+  </VVRace.ViviSpecializationDef>
+
+  <VVRace.ViviSpecializationDef>
+    <defName>VV_SpecializationGuard</defName>
+    <label>guard</label>
+    <description>.</description>
+    <uiOrder>202</uiOrder>
     <iconPath>UI/Icons/WorkMode/Escort</iconPath>
     
     <hediff>VV_SpecializationGuard</hediff>
   </VVRace.ViviSpecializationDef>
+  
 </Defs>

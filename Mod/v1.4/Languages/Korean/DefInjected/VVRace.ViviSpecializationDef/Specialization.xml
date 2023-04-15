@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <VV_NoSpecialization.label>특화 없음</VV_NoSpecialization.label>
+  <VV_NoSpecialization.description>작업에 아무 특화 효과를 받지 않지만 학습 능력이 다소 상승합니다.</VV_NoSpecialization.description>
+
+  <VV_SpecializationGatherer.label>채집꾼</VV_SpecializationGatherer.label>
+  <VV_SpecializationGatherer.description>자연에서 각종 자원을 채집하는데 특화합니다. 재배나 채집과 관련된 작업의 효율이 증가합니다.\n\n정신 결속된 비비는 특정 작업에 특화시켜 선택한 특화에 맞는능력을 향상할 수 있습니다.\n한 가지 특화를 오랫동안 유지할수록 능력이 단계적으로 더 향상되며 이는 특화를 변경하기 전까지 유지됩니다.\n\n주의: 특화를 변경하면 누적된 특화 레벨이 초기화됩니다.</VV_SpecializationGatherer.description>
+
+  <VV_SpecializationCrafter.label>공예가</VV_SpecializationCrafter.label>
+  <VV_SpecializationCrafter.description>정착지의 각종 시설을 건설하고 관리하며 여러 물건들을 만드는데 특화합니다.\n건설, 제작 및 시설 관리와 관련된 능력이 향상됩니다.\n\n정신 결속된 비비는 특정 작업에 특화시켜 선택한 특화에 맞는능력을 향상할 수 있습니다.\n한 가지 특화를 오랫동안 유지할수록 능력이 단계적으로 더 향상되며 이는 특화를 변경하기 전까지 유지됩니다.\n\n주의: 특화를 변경하면 누적된 특화 레벨이 초기화됩니다.</VV_SpecializationCrafter.description>
+
+  <VV_SpecializationGuard.label>경비병</VV_SpecializationGuard.label>
+  <VV_SpecializationGuard.description>전투에 관련된 능력에 특화하며 평소에 결속된 로얄 비비를 따라다니며 경호합니다.\n이 특화를 선택하면 전투와 관련없는 대부분의 작업을 하지 않습니다.\n정신 결속된 비비는 특정 작업에 특화시켜 선택한 특화에 맞는능력을 향상할 수 있습니다.\n한 가지 특화를 오랫동안 유지할수록 능력이 단계적으로 더 향상되며 이는 특화를 변경하기 전까지 유지됩니다.\n\n주의: 특화를 변경하면 누적된 특화 레벨이 초기화됩니다.</VV_SpecializationGuard.description>
+</LanguageData>

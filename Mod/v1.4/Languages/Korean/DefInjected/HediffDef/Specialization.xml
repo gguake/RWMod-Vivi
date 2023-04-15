@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <VV_NoSpecialization.label>특화 없음</VV_NoSpecialization.label>
+
+  <VV_SpecializationGatherer.label>특화 - 채집꾼</VV_SpecializationGatherer.label>
+  <VV_SpecializationGatherer.description>이 비비는 채집꾼으로서 일하고 있습니다.</VV_SpecializationGatherer.description>
+  
+  <VV_SpecializationCrafter.label>특화 - 공예가</VV_SpecializationCrafter.label>
+  <VV_SpecializationCrafter.description>이 비비는 공예가로서 일하고 있습니다.</VV_SpecializationCrafter.description>
+
+  <VV_SpecializationGuard.label>특화 - 경비병</VV_SpecializationGuard.label>
+  <VV_SpecializationGuard.description>이 비비는 경비병으로서 일하고 있습니다.</VV_SpecializationGuard.description>
+</LanguageData>

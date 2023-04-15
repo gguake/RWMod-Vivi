@@ -36,7 +36,7 @@
   </PawnKindDef>
 
   <!-- 비비 가드 -->
-  <PawnKindDef ParentName="ViviNPCBase">
+  <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
     <defName>VV_ViviGuard</defName>
     <label>vivi guard</label>
     <combatPower>100</combatPower>
@@ -61,10 +61,13 @@
 
     <initialWillRange>3~5</initialWillRange>
     <initialResistanceRange>30~40</initialResistanceRange>
+
+    <initialSpecializationDef>VV_SpecializationGuard</initialSpecializationDef>
+    <initialSpecializationTicks>200000~1000000</initialSpecializationTicks>
   </PawnKindDef>
 
   <!-- 비비 아처 -->
-  <PawnKindDef ParentName="ViviNPCBase">
+  <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
     <defName>VV_ViviArcher</defName>
     <label>vivi archer</label>
     <combatPower>90</combatPower>
@@ -85,10 +88,13 @@
 
     <initialWillRange>3~5</initialWillRange>
     <initialResistanceRange>30~40</initialResistanceRange>
+
+    <initialSpecializationDef>VV_SpecializationGuard</initialSpecializationDef>
+    <initialSpecializationTicks>200000~1000000</initialSpecializationTicks>
   </PawnKindDef>
   
   <!-- 리더 로열 비비 -->
-  <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDefExt">
+  <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
     <defName>VV_RoyalViviLeader</defName>
     <label>royal vivi leader</label>
     <combatPower>110</combatPower>
@@ -117,7 +123,7 @@
   </PawnKindDef>
   
   <!-- 일반 로열 비비 -->
-  <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDefExt">
+  <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
     <defName>VV_RoyalVivi</defName>
     <label>royal vivi</label>
     <combatPower>50</combatPower>
@@ -138,7 +144,7 @@
   </PawnKindDef>
   
   <!-- 상인 로열 비비 -->
-  <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDefExt">
+  <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
     <defName>VV_RoyalViviTrader</defName>
     <label>royal vivi</label>
     <trader>true</trader>

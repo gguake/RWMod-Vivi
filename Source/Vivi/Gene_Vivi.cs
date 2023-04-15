@@ -137,7 +137,7 @@ namespace VVRace
 
             if (pawn.DevelopmentalStage.Adult())
             {
-                var kindDefExt = pawn.kindDef as PawnKindDefExt;
+                var kindDefExt = pawn.kindDef as PawnKindDef_Vivi;
                 IsRoyal = kindDefExt != null && kindDefExt.isRoyal;
 
                 if (IsRoyal)

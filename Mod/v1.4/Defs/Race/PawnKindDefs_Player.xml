@@ -4,8 +4,8 @@
     <label>vivi</label>
     <defaultFactionType>VV_PlayerVivi</defaultFactionType>
     <combatPower>45</combatPower>
-
     <isFighter>false</isFighter>
+
     <forceNormalGearQuality>true</forceNormalGearQuality>
     <gearHealthRange>1.0~1.0</gearHealthRange>
     <apparelMoney>500~1000</apparelMoney>
@@ -32,13 +32,13 @@
     </backstoryFiltersOverride>
   </PawnKindDef>
   
-  <PawnKindDef ParentName="PlayerVivi" Name="PlayerRoyalVivi" Class="VVRace.PawnKindDefExt">
+  <PawnKindDef ParentName="PlayerVivi" Name="PlayerRoyalVivi" Class="VVRace.PawnKindDef_Vivi">
     <defName>VV_PlayerRoyalVivi</defName>
     <label>royal vivi</label>
     <isRoyal>true</isRoyal>
   </PawnKindDef>
   
-  <PawnKindDef ParentName="PlayerRoyalVivi" Class="VVRace.PawnKindDefExt">
+  <PawnKindDef ParentName="PlayerRoyalVivi" Class="VVRace.PawnKindDef_Vivi">
     <defName>VV_PlayerExiledRoyalVivi</defName>
     <label>exiled royal vivi</label>
     <defaultFactionType>VV_PlayerExiledVivi</defaultFactionType>

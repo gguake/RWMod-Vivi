@@ -42,5 +42,7 @@
         public const string JobFailReasonNoHarvestablePollenFilths = "VV_JobFailReasonNoHarvestablePollenFilths";
         public const string JobFailReasonNotVivi = "VV_JobFailReasonNotVivi";
         public const string JobFailReasonViviStarving = "VV_JobFailReasonViviStarving";
+
+        public const string ConfirmPopupSpecializationChanged = "VV_ConfirmPopupSpecializationChanged";
     }
 }

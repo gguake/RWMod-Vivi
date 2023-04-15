@@ -39,4 +39,6 @@
   <VV_JobFailReasonNoHarvestablePollenFilths>주변에 수집 가능한 꽃가루 없음</VV_JobFailReasonNoHarvestablePollenFilths>
   <VV_JobFailReasonNotVivi>비비가 아님</VV_JobFailReasonNotVivi>
   <VV_JobFailReasonViviStarving>비비가 굶주림</VV_JobFailReasonViviStarving>
+
+  <VV_ConfirmPopupSpecializationChanged>지금 특화를 변경하면 현재 설정된 '{SPEC_label}' 특화의 지금까지 누적된 특화 레벨이 모두 초기화됩니다.\n정말 변경하시겠습니까?</VV_ConfirmPopupSpecializationChanged>
 </LanguageData>

@@ -11,13 +11,6 @@
   </MainButtonDef>
 
   <PawnColumnDef>
-    <defName>VV_MindLink</defName>
-    <label>mindlink</label>
-    <workerClass>VVRace.PawnColumnWorker_MindLink</workerClass>
-    <groupable>true</groupable>
-  </PawnColumnDef>
-  
-  <PawnColumnDef>
     <defName>VV_DraftVivi</defName>
     <headerTip>draft</headerTip>
     <headerIcon>UI/Commands/Draft</headerIcon>
@@ -26,8 +19,21 @@
   </PawnColumnDef>
 
   <PawnColumnDef>
+    <defName>VV_MindLink</defName>
+    <label>mindlink</label>
+    <workerClass>VVRace.PawnColumnWorker_MindLink</workerClass>
+    <groupable>true</groupable>
+  </PawnColumnDef>
+  
+  <PawnColumnDef>
+    <defName>VV_SpecializationIcon</defName>
+    <workerClass>VVRace.PawnColumnWorker_ViviSpecializationIcon</workerClass>
+    <paintable>true</paintable>
+  </PawnColumnDef>
+
+  <PawnColumnDef>
     <defName>VV_Specialization</defName>
-    <label>work mode</label>
+    <label>specialization</label>
     <workerClass>VVRace.PawnColumnWorker_ViviSpecialization</workerClass>
     <paintable>true</paintable>
   </PawnColumnDef>
@@ -42,6 +48,7 @@
       <li>VV_DraftVivi</li>
       <li>VV_MindLink</li>
       <li>GapTiny</li>
+      <li>VV_SpecializationIcon</li>
       <li>VV_Specialization</li>
       <li>RemainingSpace</li>
     </columns>

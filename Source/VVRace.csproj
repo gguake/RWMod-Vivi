@@ -89,9 +89,9 @@
     <Compile Include="Honey\Filth_Pollen.cs" />
     <Compile Include="Honey\HoneyUtility.cs" />
     <Compile Include="MindLink\AI\ThinkNode_ConditionalViviWorkMode.cs" />
-    <Compile Include="MindLink\HediffComp_SeverityCurvePerTicks.cs" />
+    <Compile Include="MindLink\Hediff_Specialization.cs" />
     <Compile Include="MindLink\ViviSpecializationDef.cs" />
-    <Compile Include="PawnKindDefExt.cs" />
+    <Compile Include="PawnKindDef_Vivi.cs" />
     <Compile Include="Harvest\RecipeDef_Harvest.cs" />
     <Compile Include="Utility\ToilUtility.cs" />
     <Compile Include="Harvest\WorkGiver_HarvestBill.cs" />

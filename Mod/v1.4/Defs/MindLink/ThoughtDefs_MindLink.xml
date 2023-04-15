@@ -44,12 +44,12 @@
       <li>
         <label>positive emotional pulse</label>
         <description>.</description>
-        <baseMoodEffect>20</baseMoodEffect>
+        <baseMoodEffect>10</baseMoodEffect>
       </li>
       <li>
         <label>negative emotional pulse</label>
         <description>.</description>
-        <baseMoodEffect>-20</baseMoodEffect>
+        <baseMoodEffect>-10</baseMoodEffect>
       </li>
     </stages>
 
