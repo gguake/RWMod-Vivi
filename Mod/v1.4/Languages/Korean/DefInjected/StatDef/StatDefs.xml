@@ -14,4 +14,16 @@
 
   <VV_MindLinkRange.label>정신 결속 범위</VV_MindLinkRange.label>
   <VV_MindLinkRange.description>정신 결속된 비비에게 얼마나 멀리 명령을 내릴 수 있는지 나타냅니다.</VV_MindLinkRange.description>
+
+
+
+  <VV_MinGrowthPlantGatherable.label>채집 최소 성장도</VV_MinGrowthPlantGatherable.label>
+  <VV_MinGrowthPlantGatherable.description>식물을 채집할수 있는 최소 성장도를 나타냅니다.</VV_MinGrowthPlantGatherable.description>
+
+  <VV_PlantGatherCooldown.label>채집 재생시간</VV_PlantGatherCooldown.label>
+  <VV_PlantGatherCooldown.description>식물을 채집 후 다시 채집 가능할때까지 걸리는 시간을 나타냅니다.\n\n오염된 지형에서는 재생하는데 더 오랜 시간이 걸립니다.</VV_PlantGatherCooldown.description>
+  <VV_PlantGatherCooldown.formatString>{0} 일</VV_PlantGatherCooldown.formatString>
+
+  <VV_PlantHoneyGatherYield.label>꿀 생산량</VV_PlantHoneyGatherYield.label>
+  <VV_PlantHoneyGatherYield.description>식물이 평균 대비 얼마나 많은 꿀을 생산하는지 나타냅니다.\n\n꿀 생산량은 내구도, 성장도, 오염에 영향을 받습니다.</VV_PlantHoneyGatherYield.description>
 </LanguageData>

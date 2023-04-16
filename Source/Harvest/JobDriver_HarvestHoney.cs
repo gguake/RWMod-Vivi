@@ -19,7 +19,7 @@ namespace VVRace
         protected LocalTargetInfo PlantTargetInfo => job.GetTarget(PlantTargetIndex);
         protected LocalTargetInfo HarvesterBuildingTargetInfo => job.GetTarget(HarvesterBuildingTargetIndex);
 
-        protected Thing Plant => PlantTargetInfo.Thing;
+        protected Plant Plant => PlantTargetInfo.Thing as Plant;
         protected Thing HarvesterBuilding => HarvesterBuildingTargetInfo.Thing;
 
         private int TotalWorkAmount => (int)job.bill.recipe.workAmount;
@@ -73,18 +73,19 @@ namespace VVRace
                 {
                     job.bill.Notify_BillWorkStarted(pawn);
                 })
-                .WithFailCondition(() => !Plant.CanHarvestHoney())
+                .WithFailCondition(() => !Plant.CanGatherable(VVStatDefOf.VV_PlantHoneyGatherYield, VVStatDefOf.VV_PlantGatherCooldown) || Plant.Blighted)
                 .WithEffect(() => GetActor().CurJob.bill.recipe.effectWorking, TargetIndex.A)
                 .WithProgressBarToilDelay(PlantTargetIndex);
 
-            // 식물 성장 및 꽃가루 생성
+            // 꽃가루 생성 및 쿨타임 설정
             yield return new Toil()
                 .WithDefaultCompleteMode(ToilCompleteMode.Instant)
                 .WithInitAction(() =>
                 {
                     if (Plant is Plant plant)
                     {
-                        plant.Growth += 0.015f;
+                        var compGatherable = plant.GetComp<CompGatherable>();
+                        compGatherable.Gathered();
 
                         if (pawn.filth != null && Rand.Bool)
                         {

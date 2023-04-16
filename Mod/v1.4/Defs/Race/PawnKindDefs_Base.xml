@@ -9,6 +9,7 @@
     </apparelTags>
     <maxGenerationAge>30</maxGenerationAge>
 
+    <humanPregnancyChance>0</humanPregnancyChance>
     <techHediffsChance>0</techHediffsChance>
     <techHediffsMoney>0</techHediffsMoney>
     <techHediffsTags>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
   <VV_GatherHoney.label>꿀 채집</VV_GatherHoney.label>
-  <VV_GatherHoney.description>성장중인 작물이나 꽃 등의 식물에서 꿀을 채집합니다. 꿀을 채집할때 해당 식물이 조금 자랍니다.</VV_GatherHoney.description>
+  <VV_GatherHoney.description>어느정도 성장한 꽃이나 과일나무 등의 식물에서 꿀을 채집합니다.\n\n꿀을 채집할때 꽃가루를 흘리거나 몸에 뭍는 경우가 있으며, 바닥에 뿌려진 꽃가루가 방치되면 드물게 식물이 새로운 싹을 틔우기도 합니다.</VV_GatherHoney.description>
   <VV_GatherHoney.jobString>꿀 채집 중.</VV_GatherHoney.jobString>
 
   <VV_GatherPollen.label>꽃가루 채집</VV_GatherPollen.label>

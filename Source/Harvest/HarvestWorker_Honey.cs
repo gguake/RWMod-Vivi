@@ -21,7 +21,10 @@ namespace VVRace
             foreach (var thing in allPlants)
             {
                 // 꿀 채집이 불가능한 경우
-                if (!thing.CanHarvestHoney()) { continue; }
+                if (!thing.CanGatherable(VVStatDefOf.VV_PlantHoneyGatherYield, VVStatDefOf.VV_PlantGatherCooldown)) { continue; }
+
+                // 식물이 병에 걸린 경우
+                if (thing is Plant plant && plant.Blighted) { continue; }
 
                 // 상호작용이 불가능한 경우
                 if (!thing.Spawned || thing.IsForbidden(pawn) || thing.IsBurning()) { continue; }
@@ -58,6 +61,13 @@ namespace VVRace
 
             job = null;
             return false;
+        }
+
+        public override bool ShouldAddRecipeIngredient(ThingDef thingDef)
+        {
+            return thingDef.plant != null && 
+                thingDef.StatBaseDefined(VVStatDefOf.VV_PlantHoneyGatherYield) && 
+                thingDef.GetStatValueAbstract(VVStatDefOf.VV_PlantHoneyGatherYield) > 0f;
         }
     }
 }

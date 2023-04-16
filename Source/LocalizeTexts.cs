@@ -14,7 +14,8 @@
         public const string InspectorViviHatcheryDisabled = "VV_InspectorViviHatcheryDisabled";
         public const string InspectorViviHatcheryDisabledReasonNoRoof = "VV_InspectorViviHatcheryDisabledReasonNoRoof";
         public const string InspectorViviHatcheryDisabledReasonOutdoor = "VV_InspectorViviHatcheryDisabledReasonOutdoor";
-        public const string InspectorViviWallReplace = "VV_InspectorViviWallReplace";
+        public const string InspectorViviWallReplaceCooldown = "VV_InspectorViviWallReplaceCooldown";
+        public const string InspectorGatherCooldown = "VV_InspectorGatherCooldown";
 
         public const string LetterViviEggHatchedLabel = "VV_LetterViviEggHatchedLabel";
         public const string LetterViviEggHatched = "VV_LetterViviEggHatched";

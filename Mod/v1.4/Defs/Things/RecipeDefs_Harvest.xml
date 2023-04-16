@@ -20,6 +20,7 @@
     </recipeUsers>
     <allowMixingIngredients>true</allowMixingIngredients>
     <targetCountAdjustment>10</targetCountAdjustment>
+    <!--
     <ingredients>
       <li>
         <filter>
@@ -29,11 +30,10 @@
             <li>Plant_Dandelion</li>
             <li>Plant_Astragalus</li>
             <li>Plant_Clivia</li>
+
             <li>Plant_Agave</li>
             <li>Plant_Strawberry</li>
             <li>Plant_Berry</li>
-            <li>Plant_PincushionCactus</li>
-            <li>Plant_SaguaroCactus</li>
             <li>Plant_Ambrosia</li>
           </thingDefs>
         </filter>
@@ -47,13 +47,14 @@
         <li>Plant_Dandelion</li>
         <li>Plant_Astragalus</li>
         <li>Plant_Clivia</li>
+
         <li>Plant_Agave</li>
         <li>Plant_Strawberry</li>
         <li>Plant_Berry</li>
-        <li>Plant_PincushionCactus</li>
-        <li>Plant_SaguaroCactus</li>
+        <li>Plant_Ambrosia</li>
       </thingDefs>
     </fixedIngredientFilter>
+    -->
 
     <products>
       <VV_RawHoney>15</VV_RawHoney>

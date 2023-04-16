@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!--  채집 최소 성장도 -->
+  <StatDef>
+    <defName>VV_MinGrowthPlantGatherable</defName>
+    <label>gatherable minimum growth</label>
+    <description>.</description>
+    <category>BasicsNonPawn</category>
+    <defaultBaseValue>0</defaultBaseValue>
+    <hideAtValue>0</hideAtValue>
+    <toStringStyle>PercentZero</toStringStyle>
+    <roundToFiveOver>100</roundToFiveOver>
+    <applyFactorsIfNegative>false</applyFactorsIfNegative>
+    <displayPriorityInCategory>5199</displayPriorityInCategory>
+  </StatDef>
+  
+  <!--  채집 재생시간 -->
+  <StatDef>
+    <defName>VV_PlantGatherCooldown</defName>
+    <label>plant gather cooldown</label>
+    <description>.</description>
+    <category>BasicsNonPawn</category>
+    <defaultBaseValue>0</defaultBaseValue>
+    <hideAtValue>0</hideAtValue>
+    <toStringStyle>FloatTwoOrThree</toStringStyle>
+    <formatString>{0} day</formatString>
+    <applyFactorsIfNegative>false</applyFactorsIfNegative>
+    <displayPriorityInCategory>5198</displayPriorityInCategory>
+    <parts>
+      <li Class="StatPart_Pollution" MayRequire="Ludeon.RimWorld.Biotech">
+        <multiplier>1.5</multiplier>
+      </li>
+      <li Class="StatPart_NoxiousHaze" MayRequire="Ludeon.RimWorld.Biotech">
+        <multiplier>2</multiplier>
+      </li>
+      <li Class="StatPart_ToxicFallout">
+        <multiplier>2</multiplier>
+      </li>
+    </parts>
+  </StatDef>
+
+  <StatDef Abstract="True" Name="VV_StatPlantGatherYieldBase">
+    <category>BasicsNonPawn</category>
+    <defaultBaseValue>0</defaultBaseValue>
+    <hideAtValue>0</hideAtValue>
+    <toStringStyle>PercentZero</toStringStyle>
+    <applyFactorsIfNegative>false</applyFactorsIfNegative>
+    <parts>
+      <li Class="StatPart_Health">
+        <curve>
+          <points>
+            <li>(0.0, 0.0)</li>
+            <li>(0.5, 0.1)</li>
+            <li>(0.6, 0.5)</li>
+            <li>(0.9, 1.0)</li>
+          </points>
+        </curve>
+      </li>
+      <li Class="StatPart_BodySize" />
+      <li Class="StatPart_PlantGrowthNutritionFactor" />
+    </parts>
+  </StatDef>
+  
+  <!-- 꿀 생산량 -->
+  <StatDef ParentName="VV_StatPlantGatherYieldBase">
+    <defName>VV_PlantHoneyGatherYield</defName>
+    <label>honey gather yield multiplier</label>
+    <description>.</description>
+    <displayPriorityInCategory>5100</displayPriorityInCategory>
+    <parts>
+      <li Class="StatPart_Pollution" MayRequire="Ludeon.RimWorld.Biotech">
+        <multiplier>0.9</multiplier>
+      </li>
+      <li Class="StatPart_NoxiousHaze" MayRequire="Ludeon.RimWorld.Biotech">
+        <multiplier>0.75</multiplier>
+      </li>
+      <li Class="StatPart_ToxicFallout">
+        <multiplier>0.75</multiplier>
+      </li>
+    </parts>
+  </StatDef>
+</Defs>

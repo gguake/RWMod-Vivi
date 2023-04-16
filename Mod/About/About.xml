@@ -32,4 +32,8 @@
 		<li>erdelf.HumanoidAlienRaces</li>
 		-->
   </forceLoadAfter>
+
+	<incompatibleWith>
+		<li>solaris.sys</li>
+	</incompatibleWith>
 </ModMetaData>

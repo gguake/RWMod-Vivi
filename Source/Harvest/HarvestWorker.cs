@@ -14,5 +14,7 @@ namespace VVRace
         public abstract IEnumerable<Thing> FindAllHarvestTargetInRegion(Pawn pawn, Region region, Thing billGiver, Bill bill);
 
         public abstract bool TryMakeJob(Pawn pawn, Thing billGiver, IEnumerable<Thing> targets, Bill bill, out Job job);
+
+        public virtual bool ShouldAddRecipeIngredient(ThingDef thingDef) { return false; }
     }
 }

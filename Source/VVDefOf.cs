@@ -27,6 +27,10 @@ namespace VVRace
 
         public static StatDef VV_HoneyHarvestSpeed;
         public static StatDef VV_HoneyHarvestYield;
+
+        public static StatDef VV_MinGrowthPlantGatherable;
+        public static StatDef VV_PlantGatherCooldown;
+        public static StatDef VV_PlantHoneyGatherYield;
     }
 
     [DefOf]

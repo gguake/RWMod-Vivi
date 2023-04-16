@@ -8,10 +8,11 @@
   <VV_GizmoViviEggProgressHeader>산란 진행도</VV_GizmoViviEggProgressHeader>
   <VV_GizmoViviEggProgressTooltip>다음 알을 낳기까지 얼마나 남았는지를 나타냅니다.\n\n진행도가 100%가 되었으면서 산란에 적합한 비비 부화기가 존재하면 그곳에 가서 알을 낳습니다.</VV_GizmoViviEggProgressTooltip>
 
-  <VV_InspectorViviWallReplace>굳기까지 남은 시간: {0}</VV_InspectorViviWallReplace>
   <VV_InspectorViviHatcheryDisabled>부화기 비활성화됨</VV_InspectorViviHatcheryDisabled>
   <VV_InspectorViviHatcheryDisabledReasonNoRoof>지붕 없음</VV_InspectorViviHatcheryDisabledReasonNoRoof>
   <VV_InspectorViviHatcheryDisabledReasonOutdoor>실외</VV_InspectorViviHatcheryDisabledReasonOutdoor>
+  <VV_InspectorViviWallReplaceCooldown>굳기까지 남은 시간: {0}</VV_InspectorViviWallReplaceCooldown>
+  <VV_InspectorGatherCooldown>다음 채집이 가능하기까지 남은 시간: {0}</VV_InspectorGatherCooldown>
 
   <VV_LetterViviEggHatchedLabel>새로운 비비 태어남</VV_LetterViviEggHatchedLabel>
   <VV_LetterViviEggHatched>{PARENT_labelShort}가 낳은 알에서 새로운 비비가 태어났습니다. </VV_LetterViviEggHatched>
