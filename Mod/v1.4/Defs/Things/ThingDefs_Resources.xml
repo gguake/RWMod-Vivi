@@ -51,14 +51,14 @@
     <soundDrop>Wood_Drop</soundDrop>
     <statBases>
       <MarketValue>1.0</MarketValue>
-      <MaxHitPoints>100</MaxHitPoints>
+      <MaxHitPoints>150</MaxHitPoints>
       <Mass>0.1</Mass>
       <Flammability>0.5</Flammability>
-      <StuffPower_Armor_Sharp>0.54</StuffPower_Armor_Sharp>
-      <StuffPower_Armor_Blunt>0.54</StuffPower_Armor_Blunt>
+      <StuffPower_Armor_Sharp>0.48</StuffPower_Armor_Sharp>
+      <StuffPower_Armor_Blunt>0.6</StuffPower_Armor_Blunt>
       <StuffPower_Armor_Heat>0.40</StuffPower_Armor_Heat>
-      <StuffPower_Insulation_Cold>8</StuffPower_Insulation_Cold>
-      <StuffPower_Insulation_Heat>4</StuffPower_Insulation_Heat>
+      <StuffPower_Insulation_Cold>6</StuffPower_Insulation_Cold>
+      <StuffPower_Insulation_Heat>3</StuffPower_Insulation_Heat>
       <SharpDamageMultiplier>0.32</SharpDamageMultiplier>
       <BluntDamageMultiplier>1.08</BluntDamageMultiplier>
       <DeteriorationRate>4</DeteriorationRate>
@@ -82,12 +82,12 @@
       <soundMeleeHitSharp>MeleeHit_Wood</soundMeleeHitSharp>
       <soundMeleeHitBlunt>MeleeHit_Wood</soundMeleeHitBlunt>
       <statFactors>
-        <MaxHitPoints>0.65</MaxHitPoints>
+        <MaxHitPoints>0.8</MaxHitPoints>
         <Beauty>1</Beauty>
-        <Flammability>0.5</Flammability>
-        <WorkToMake>0.7</WorkToMake>
-        <WorkToBuild>0.7</WorkToBuild>
-        <DoorOpenSpeed>1.2</DoorOpenSpeed>
+        <Flammability>0.7</Flammability>
+        <WorkToMake>0.6</WorkToMake>
+        <WorkToBuild>0.6</WorkToBuild>
+        <DoorOpenSpeed>1.0</DoorOpenSpeed>
       </statFactors>
       <canSuggestUseDefaultStuff>true</canSuggestUseDefaultStuff>
     </stuffProps>
