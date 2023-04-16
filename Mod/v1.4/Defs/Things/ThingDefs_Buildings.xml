@@ -22,6 +22,7 @@
     </statBases>
     <building>
       <smoothedThing>VV_SmoothedViviCreamWall</smoothedThing>
+      <isPlaceOverableWall>true</isPlaceOverableWall>
     </building>
 
     <costList>

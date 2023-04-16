@@ -46,7 +46,7 @@ namespace VVRace
             foreach (var bill in billGiver.BillStack)
             {
                 if (!(bill.recipe is RecipeDef_Harvest recipeHarvest) || recipeHarvest.harvestWorker == null) { continue; }
-                if (!bill.ShouldDoNow() || !bill.PawnAllowedToStartAnew(pawn)) { continue; }
+                if (!bill.ShouldDoNow() || !bill.PawnAllowedToStartAnew(pawn) || !recipeHarvest.harvestWorker.CanDoBill(pawn, bill)) { continue; }
 
                 var skillRequirement = bill.recipe.FirstSkillRequirementPawnDoesntSatisfy(pawn);
                 if (skillRequirement != null)

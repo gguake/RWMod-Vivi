@@ -10,6 +10,7 @@
     <inheritable>true</inheritable>
     <nameMaker>VV_NamerPersonVivi</nameMaker>
     <chanceToUseNameMaker>1</chanceToUseNameMaker>
+    <factionlessGenerationWeight>0</factionlessGenerationWeight>
     <genes>
       <li>VV_ViviGene</li>
       <li>VV_HeadGene</li>

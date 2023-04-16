@@ -51,12 +51,22 @@
         <li Class="ScenPart_StartingThing_Defined">
           <def>StartingThing_Defined</def>
           <thingDef>VV_Vivicream</thingDef>
-          <count>300</count>
+          <count>225</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>VV_Viviwax</thingDef>
+          <count>150</count>
         </li>
         <li Class="ScenPart_StartingThing_Defined">
           <def>StartingThing_Defined</def>
           <thingDef>VV_FilteredHoney</thingDef>
-          <count>150</count>
+          <count>300</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>MedicineHerbal</thingDef>
+          <count>20</count>
         </li>
         <li Class="ScenPart_StartingThing_Defined">
           <def>StartingThing_Defined</def>
@@ -78,14 +88,19 @@
         <li Class="ScenPart_StartingThing_Defined">
           <def>StartingThing_Defined</def>
           <thingDef>VV_ViviEgg</thingDef>
-          <count>2</count>
+          <count>1</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>VV_ViviEgg</thingDef>
+          <count>1</count>
         </li>
         
         <!-- 시작시 소유품 (분산) -->
         <li Class="ScenPart_ScatterThingsNearPlayerStart">
           <def>ScatterThingsNearPlayerStart</def>
           <thingDef>WoodLog</thingDef>
-          <count>400</count>
+          <count>200</count>
         </li>
         
         <li Class="ScenPart_ScatterThingsNearPlayerStart">
