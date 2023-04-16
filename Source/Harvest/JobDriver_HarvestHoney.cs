@@ -157,6 +157,8 @@ namespace VVRace
                         }
                     }
 
+                    efficiency *= Plant.GetStatValue(VVStatDefOf.VV_PlantHoneyGatherYield);
+
                     var allProducts = new List<Thing>();
                     foreach (var productThingDefCount in curJob.RecipeDef.products)
                     {
