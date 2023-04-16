@@ -34,6 +34,6 @@
   </forceLoadAfter>
 
 	<incompatibleWith>
-		<li>solaris.sys</li>
+		<li>Solaris.FurnitureBase</li>
 	</incompatibleWith>
 </ModMetaData>
