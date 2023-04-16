@@ -15,7 +15,7 @@
     </graphicData>
     <filth>
       <ignoreFilthMultiplierStat>true</ignoreFilthMultiplierStat>
-      <disappearsInDays>3~5</disappearsInDays>
+      <disappearsInDays>1~3</disappearsInDays>
       <rainWashes>true</rainWashes>
       <cleaningWorkToReduceThickness>50</cleaningWorkToReduceThickness>
       <canFilthAttach>true</canFilthAttach>
