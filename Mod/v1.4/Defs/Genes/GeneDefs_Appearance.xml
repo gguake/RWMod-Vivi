@@ -74,7 +74,7 @@
         <overrideGraphicPath>Things/Pawn/Vivi/Body/Naked_Female</overrideGraphicPath>
         
         <useUniqueHeadOffset>true</useUniqueHeadOffset>
-        <headOffset>(0.01, 0.34)</headOffset>
+        <headOffset>(0.01, 0.355)</headOffset>
       </Female>
     </bodyTypeOverrides>
     
