@@ -242,7 +242,7 @@
       <damageDef>Arrow</damageDef>
       <damageAmountBase>5</damageAmountBase>
       <stoppingPower>1.0</stoppingPower>
-      <speed>50</speed>
+      <speed>60</speed>
     </projectile>
   </ThingDef>
 

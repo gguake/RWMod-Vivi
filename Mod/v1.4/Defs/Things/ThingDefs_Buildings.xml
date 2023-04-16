@@ -19,6 +19,7 @@
       <MaxHitPoints>50</MaxHitPoints>
       <WorkToBuild>40</WorkToBuild>
       <Flammability>1.0</Flammability>
+      <Beauty>-1</Beauty>
     </statBases>
     <building>
       <smoothedThing>VV_SmoothedViviCreamWall</smoothedThing>
