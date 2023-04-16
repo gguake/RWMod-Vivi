@@ -3,7 +3,7 @@
   <!-- 비비 빨대 -->
   <ThingDef ParentName="BaseMeleeWeapon_Blunt">
     <defName>VV_Straw</defName>
-    <label>vivi straw</label>
+    <label>straw</label>
     <description>.</description>
     <graphicData>
       <texPath>Things/Item/Equipment/VV_Straw</texPath>
@@ -77,7 +77,7 @@
   <!-- 비비 다용도 붓 -->
   <ThingDef ParentName="BaseMeleeWeapon_Blunt">
     <defName>VV_MultiuseBrush</defName>
-    <label>vivi multiuse brush</label>
+    <label>multiuse brush</label>
     <description>.</description>
     <graphicData>
       <texPath>Things/Item/Equipment/VV_MultiuseBrush</texPath>
@@ -151,7 +151,7 @@
   <!-- 비비 연노 -->
   <ThingDef ParentName="BaseWeaponNeolithic">
     <defName>VV_RepeatingCrossbow</defName>
-    <label>vivi repeating crossbow</label>
+    <label>repeating crossbow</label>
     <description>.</description>
     <graphicData>
       <texPath>Things/Item/Equipment/VV_RepeatingCrossbow</texPath>
@@ -249,7 +249,7 @@
   <!-- 의식용 창 -->
   <ThingDef ParentName="BaseWeapon">
     <defName>VV_RitualLance</defName>
-    <label>vivi ritual lance</label>
+    <label>ritual lance</label>
     <description>.</description>
     <graphicData>
       <texPath>Things/Item/Equipment/VV_RitualLance</texPath>
