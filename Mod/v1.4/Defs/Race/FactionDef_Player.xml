@@ -11,7 +11,12 @@
     <isPlayer>true</isPlayer>
 
     <startingResearchTags>
+      <li>VV_ViviStart</li>
     </startingResearchTags>
+    <startingTechprintsResearchTags>
+      <li>TribalStart</li>
+      <li>TribalStartTechprints</li>
+    </startingTechprintsResearchTags>
 
     <allowedCultures>
       <li>VV_ViviCulture</li>

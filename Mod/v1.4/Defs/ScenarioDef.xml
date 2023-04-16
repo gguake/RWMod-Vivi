@@ -108,16 +108,6 @@
           <thingDef>Steel</thingDef>
           <count>150</count>
         </li>
-        
-        <!-- 시작시 연구 -->
-        <li Class="ScenPart_StartingResearch">
-          <def>StartingResearch</def>
-          <project>VV_BasicInfra</project>
-        </li>
-        <li Class="ScenPart_StartingResearch">
-          <def>StartingResearch</def>
-          <project>VV_BasicGathering</project>
-        </li>
       </parts>
     </scenario>
   </ScenarioDef>
