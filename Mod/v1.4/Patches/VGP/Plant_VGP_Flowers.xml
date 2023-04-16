@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+  <Operation Class="PatchOperationSequence">
+    <operations>
+      <li Class="PatchOperationSequence" MayRequire="dismarzero.VGP.VGPVegetableGarden">
+        <operations>
+          <!-- VG_Rose -->
+          <li Class="PatchOperationConditional">
+            <xpath>Defs/ThingDef[defName="VG_Rose"]/comps</xpath>
+            <nomatch Class="PatchOperationAdd">
+              <xpath>Defs/ThingDef[defName="VG_Rose"]</xpath>
+              <value><comps /></value>
+            </nomatch>
+          </li>
+          <li Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="VG_Rose"]/comps</xpath>
+            <value>
+              <li Class="VVRace.CompProperties_Gatherable"><cooldownStat>VV_PlantGatherCooldown</cooldownStat></li>
+            </value>
+          </li>
+          <li Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="VG_Rose"]/statBases</xpath>
+            <value>
+              <VV_MinGrowthPlantGatherable>0.7</VV_MinGrowthPlantGatherable>
+              <VV_PlantGatherCooldown>0.9</VV_PlantGatherCooldown>
+              <VV_PlantHoneyGatherYield>1.5</VV_PlantHoneyGatherYield>
+            </value>
+          </li>
+
+          <!-- VG_Daylily -->
+          <li Class="PatchOperationConditional">
+            <xpath>Defs/ThingDef[defName="VG_Daylily"]/comps</xpath>
+            <nomatch Class="PatchOperationAdd">
+              <xpath>Defs/ThingDef[defName="VG_Daylily"]</xpath>
+              <value><comps /></value>
+            </nomatch>
+          </li>
+          <li Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="VG_Daylily"]/comps</xpath>
+            <value>
+              <li Class="VVRace.CompProperties_Gatherable"><cooldownStat>VV_PlantGatherCooldown</cooldownStat></li>
+            </value>
+          </li>
+          <li Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="VG_Daylily"]/statBases</xpath>
+            <value>
+              <VV_MinGrowthPlantGatherable>0.7</VV_MinGrowthPlantGatherable>
+              <VV_PlantGatherCooldown>0.9</VV_PlantGatherCooldown>
+              <VV_PlantHoneyGatherYield>1.75</VV_PlantHoneyGatherYield>
+            </value>
+          </li>
+
+          <!-- PlantPlumeria -->
+          <li Class="PatchOperationConditional">
+            <xpath>Defs/ThingDef[defName="PlantPlumeria"]/comps</xpath>
+            <nomatch Class="PatchOperationAdd">
+              <xpath>Defs/ThingDef[defName="PlantPlumeria"]</xpath>
+              <value><comps /></value>
+            </nomatch>
+          </li>
+          <li Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="PlantPlumeria"]/comps</xpath>
+            <value>
+              <li Class="VVRace.CompProperties_Gatherable"><cooldownStat>VV_PlantGatherCooldown</cooldownStat></li>
+            </value>
+          </li>
+          <li Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="PlantPlumeria"]/statBases</xpath>
+            <value>
+              <VV_MinGrowthPlantGatherable>0.7</VV_MinGrowthPlantGatherable>
+              <VV_PlantGatherCooldown>1.5</VV_PlantGatherCooldown>
+              <VV_PlantHoneyGatherYield>1.75</VV_PlantHoneyGatherYield>
+            </value>
+          </li>
+
+          <!-- Wild_PlantPlumeria -->
+          <li Class="PatchOperationConditional">
+            <xpath>Defs/ThingDef[defName="Wild_PlantPlumeria"]/comps</xpath>
+            <nomatch Class="PatchOperationAdd">
+              <xpath>Defs/ThingDef[defName="Wild_PlantPlumeria"]</xpath>
+              <value><comps /></value>
+            </nomatch>
+          </li>
+          <li Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Wild_PlantPlumeria"]/comps</xpath>
+            <value>
+              <li Class="VVRace.CompProperties_Gatherable"><cooldownStat>VV_PlantGatherCooldown</cooldownStat></li>
+            </value>
+          </li>
+          <li Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Wild_PlantPlumeria"]/statBases</xpath>
+            <value>
+              <VV_MinGrowthPlantGatherable>0.7</VV_MinGrowthPlantGatherable>
+              <VV_PlantGatherCooldown>1.5</VV_PlantGatherCooldown>
+              <VV_PlantHoneyGatherYield>1.75</VV_PlantHoneyGatherYield>
+            </value>
+          </li>
+        </operations>
+      </li>
+    </operations>
+  </Operation>
+</Patch>
