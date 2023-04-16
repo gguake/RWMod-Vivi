@@ -28,4 +28,10 @@
     <label>vivi headC</label>
     <graphicPath>Things/Pawn/Vivi/Heads/HeadC</graphicPath>
   </HeadTypeDef>
+
+  <HeadTypeDef ParentName="VV_HeadBase">
+    <defName>VV_Vivi_D</defName>
+    <label>vivi headD</label>
+    <graphicPath>Things/Pawn/Vivi/Heads/HeadD</graphicPath>
+  </HeadTypeDef>
 </Defs>
