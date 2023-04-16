@@ -98,6 +98,24 @@ namespace VVRace
             return false;
         }
 
+        public override void PostSplitOff(Thing piece)
+        {
+            var pieceComp = piece.TryGetComp<CompViviHatcher>();
+            if (pieceComp != null)
+            {
+                pieceComp.hatchProgress = hatchProgress;
+                pieceComp.hatcheeParent = hatcheeParent;
+                pieceComp.parentXenogenes = parentXenogenes;
+                pieceComp.randomSeed = randomSeed;
+            }
+
+        }
+
+        public override void PreAbsorbStack(Thing otherStack, int count)
+        {
+            base.PreAbsorbStack(otherStack, count);
+        }
+
         private void Tick(int ticks)
         {
             if (!CanHatch) { return; }

@@ -4,6 +4,8 @@
     <defName>VV_ViviEgg</defName>
     <label>vivi egg</label>
     <description>.</description>
+    <thingClass>VVRace.ViviEgg</thingClass>
+    
     <graphicData>
       <graphicClass>VVRace.Graphic_ViviEgg</graphicClass>
       <texPath>Things/Item/VV_ViviEgg</texPath>

@@ -70,6 +70,7 @@
     <Compile Include="Egg\AI\WorkGiver_HaulViviEgg.cs" />
     <Compile Include="Egg\CompViviHatcher.cs" />
     <Compile Include="Egg\CompViviHatcheryEggDrawer.cs" />
+    <Compile Include="Egg\ViviEgg.cs" />
     <Compile Include="Egg\ViviEggHatchery.cs" />
     <Compile Include="HarmonyPatches\Internals\InternalPatch.cs" />
     <Compile Include="HarmonyPatches\MindLinkPatch.cs" />
