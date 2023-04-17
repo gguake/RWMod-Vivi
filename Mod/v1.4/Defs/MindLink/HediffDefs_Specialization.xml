@@ -53,8 +53,8 @@
       <li>
         <label>I</label>
         <statFactors>
-          <VV_HoneyHarvestSpeed>1.2</VV_HoneyHarvestSpeed>
-          <VV_HoneyHarvestYield>1.1</VV_HoneyHarvestYield>
+          <VV_HoneyGatherSpeed>1.2</VV_HoneyGatherSpeed>
+          <VV_HoneyGatherYield>1.1</VV_HoneyGatherYield>
           <VV_PlantGatherSpeed>1.2</VV_PlantGatherSpeed>
           <PlantWorkSpeed>1.1</PlantWorkSpeed>
           <AnimalGatherSpeed>1.1</AnimalGatherSpeed>
@@ -66,8 +66,8 @@
         <statOffsets>
         </statOffsets>
         <statFactors>
-          <VV_HoneyHarvestSpeed>1.3</VV_HoneyHarvestSpeed>
-          <VV_HoneyHarvestYield>1.15</VV_HoneyHarvestYield>
+          <VV_HoneyGatherSpeed>1.3</VV_HoneyGatherSpeed>
+          <VV_HoneyGatherYield>1.15</VV_HoneyGatherYield>
           <VV_PlantGatherSpeed>1.3</VV_PlantGatherSpeed>
           <PlantWorkSpeed>1.15</PlantWorkSpeed>
           <AnimalGatherSpeed>1.15</AnimalGatherSpeed>
@@ -80,8 +80,8 @@
           <WorkSpeedGlobal>0.05</WorkSpeedGlobal>
         </statOffsets>
         <statFactors>
-          <VV_HoneyHarvestSpeed>1.45</VV_HoneyHarvestSpeed>
-          <VV_HoneyHarvestYield>1.225</VV_HoneyHarvestYield>
+          <VV_HoneyGatherSpeed>1.45</VV_HoneyGatherSpeed>
+          <VV_HoneyGatherYield>1.225</VV_HoneyGatherYield>
           <VV_PlantGatherSpeed>1.45</VV_PlantGatherSpeed>
           <PlantWorkSpeed>1.225</PlantWorkSpeed>
           <AnimalGatherSpeed>1.225</AnimalGatherSpeed>
@@ -96,8 +96,8 @@
           <WorkSpeedGlobal>0.05</WorkSpeedGlobal>
         </statOffsets>
         <statFactors>
-          <VV_HoneyHarvestSpeed>1.7</VV_HoneyHarvestSpeed>
-          <VV_HoneyHarvestYield>1.35</VV_HoneyHarvestYield>
+          <VV_HoneyGatherSpeed>1.7</VV_HoneyGatherSpeed>
+          <VV_HoneyGatherYield>1.35</VV_HoneyGatherYield>
           <VV_PlantGatherSpeed>1.7</VV_PlantGatherSpeed>
           <PlantWorkSpeed>1.35</PlantWorkSpeed>
           <AnimalGatherSpeed>1.35</AnimalGatherSpeed>
@@ -112,8 +112,8 @@
           <WorkSpeedGlobal>0.1</WorkSpeedGlobal>
         </statOffsets>
         <statFactors>
-          <VV_HoneyHarvestSpeed>2.0</VV_HoneyHarvestSpeed>
-          <VV_HoneyHarvestYield>1.5</VV_HoneyHarvestYield>
+          <VV_HoneyGatherSpeed>2.0</VV_HoneyGatherSpeed>
+          <VV_HoneyGatherYield>1.5</VV_HoneyGatherYield>
           <VV_PlantGatherSpeed>2.0</VV_PlantGatherSpeed>
           <PlantWorkSpeed>1.5</PlantWorkSpeed>
           <AnimalGatherSpeed>1.5</AnimalGatherSpeed>

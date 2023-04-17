@@ -7,14 +7,14 @@ using VVRace.Honey;
 
 namespace VVRace
 {
-    public class HarvestWorker_Honey : HarvestWorker
+    public class GatherWorker_Honey : GatherWorker
     {
         public override string JobFailReasonIfNoHarvestable => LocalizeTexts.JobFailReasonNoHarvestablePlants.Translate();
 
         public override bool CanDoBill(Pawn pawn, Bill bill)
             => pawn.HasViviGene();
 
-        public override IEnumerable<Thing> FindAllHarvestTargetInRegion(Pawn pawn, Region region, Thing billGiver, Bill bill)
+        public override IEnumerable<Thing> FindAllGatherableTargetInRegion(Pawn pawn, Region region, Thing billGiver, Bill bill)
         {
             var allPlants = region.ListerThings.ThingsInGroup(ThingRequestGroup.Plant);
 
@@ -47,12 +47,12 @@ namespace VVRace
 
         public override bool TryMakeJob(Pawn pawn, Thing billGiver, IEnumerable<Thing> targets, Bill bill, out Job job)
         {
-            var recipeHarvest = bill.recipe as RecipeDef_Harvest;
+            var recipeGathering = bill.recipe as RecipeDef_Gathering;
             foreach (var target in targets)
             {
-                if (!pawn.CanReserveAndReach(target, PathEndMode.Touch, recipeHarvest.maxPathDanger)) { continue; }
+                if (!pawn.CanReserveAndReach(target, PathEndMode.Touch, recipeGathering.maxPathDanger)) { continue; }
 
-                job = JobMaker.MakeJob(VVJobDefOf.VV_HarvestHoney, target, billGiver);
+                job = JobMaker.MakeJob(VVJobDefOf.VV_GatherHoney, target, billGiver);
                 job.bill = bill;
                 job.haulMode = HaulMode.ToCellNonStorage;
 

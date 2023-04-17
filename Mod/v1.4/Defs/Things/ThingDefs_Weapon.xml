@@ -17,8 +17,8 @@
       <Mass>2</Mass>
     </statBases>
     <equippedStatOffsets>
-      <VV_HoneyHarvestSpeed>0.5</VV_HoneyHarvestSpeed>
-      <VV_HoneyHarvestYield>0.5</VV_HoneyHarvestYield>
+      <VV_HoneyGatherSpeed>0.5</VV_HoneyGatherSpeed>
+      <VV_HoneyGatherYield>0.5</VV_HoneyGatherYield>
     </equippedStatOffsets>
 
     <thingCategories Inherit="False">

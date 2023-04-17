@@ -7,7 +7,7 @@ using Verse.AI;
 
 namespace VVRace
 {
-    public class WorkGiver_HarvestBill : WorkGiver_DoBill
+    public class WorkGiver_GatheringBill : WorkGiver_DoBill
     {
         public override PathEndMode PathEndMode => PathEndMode.InteractionCell;
 
@@ -45,8 +45,8 @@ namespace VVRace
             billGiver.BillStack.RemoveIncompletableBills();
             foreach (var bill in billGiver.BillStack)
             {
-                if (!(bill.recipe is RecipeDef_Harvest recipeHarvest) || recipeHarvest.harvestWorker == null) { continue; }
-                if (!bill.ShouldDoNow() || !bill.PawnAllowedToStartAnew(pawn) || !recipeHarvest.harvestWorker.CanDoBill(pawn, bill)) { continue; }
+                if (!(bill.recipe is RecipeDef_Gathering recipeGathering) || recipeGathering.gatherWorker == null) { continue; }
+                if (!bill.ShouldDoNow() || !bill.PawnAllowedToStartAnew(pawn) || !recipeGathering.gatherWorker.CanDoBill(pawn, bill)) { continue; }
 
                 var skillRequirement = bill.recipe.FirstSkillRequirementPawnDoesntSatisfy(pawn);
                 if (skillRequirement != null)
@@ -55,14 +55,14 @@ namespace VVRace
                     continue;
                 }
 
-                var targets = FindHarvestTargets(pawn, thing, bill);
+                var targets = FindGatherableTargets(pawn, thing, bill);
                 if (targets.EnumerableNullOrEmpty())
                 {
-                    JobFailReason.Is(recipeHarvest.harvestWorker.JobFailReasonIfNoHarvestable);
+                    JobFailReason.Is(recipeGathering.gatherWorker.JobFailReasonIfNoHarvestable);
                     continue;
                 }
 
-                if (recipeHarvest.harvestWorker.TryMakeJob(pawn, thing, targets, bill, out var job))
+                if (recipeGathering.gatherWorker.TryMakeJob(pawn, thing, targets, bill, out var job))
                 {
                     return job;
                 }
@@ -71,12 +71,12 @@ namespace VVRace
             return null;
         }
 
-        protected virtual IEnumerable<Thing> FindHarvestTargets(Pawn pawn, Thing billGiver, Bill bill)
+        protected virtual IEnumerable<Thing> FindGatherableTargets(Pawn pawn, Thing billGiver, Bill bill)
         {
-            var harvestWorker = (bill.recipe as RecipeDef_Harvest)?.harvestWorker;
-            if (harvestWorker == null) { yield break; }
+            var gatherWorker = (bill.recipe as RecipeDef_Gathering)?.gatherWorker;
+            if (gatherWorker == null) { yield break; }
 
-            HashSet<Thing> harvestTargets = new HashSet<Thing>();
+            HashSet<Thing> gatherTarget = new HashSet<Thing>();
             var billGiverRegion = (billGiver.def.hasInteractionCell ? billGiver.InteractionCell : billGiver.Position).GetRegion(billGiver.Map);
 
             RegionEntryPredicate regionEntryPredicate;
@@ -106,11 +106,11 @@ namespace VVRace
 
             RegionTraverser.BreadthFirstTraverse(billGiverRegion, regionEntryPredicate, (r) =>
             {
-                harvestTargets.AddRange(harvestWorker.FindAllHarvestTargetInRegion(pawn, r, billGiver, bill));
+                gatherTarget.AddRange(gatherWorker.FindAllGatherableTargetInRegion(pawn, r, billGiver, bill));
 
                 totalReachedRegionCount++;
 
-                if (totalReachedRegionCount > adjacentRegionsAvailable && harvestTargets.Any())
+                if (totalReachedRegionCount > adjacentRegionsAvailable && gatherTarget.Any())
                 {
                     return true;
                 }
@@ -119,7 +119,7 @@ namespace VVRace
 
             }, maxRegions: 99999);
 
-            foreach (var target in harvestTargets.OrderBy(thing => thing.Position.DistanceToSquared(pawn.Position)))
+            foreach (var target in gatherTarget.OrderBy(thing => thing.Position.DistanceToSquared(pawn.Position)))
             {
                 yield return target;
             }

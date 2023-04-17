@@ -1,28 +1,27 @@
 ﻿using RimWorld;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
-using Verse.AI;
 using Verse;
+using Verse.AI;
+using VVRace.Honey;
 
 namespace VVRace
 {
-    public class JobDriver_HarvestPollen : JobDriver
+    public class JobDriver_GatherHoney : JobDriver
     {
-        protected const TargetIndex FilthTargetIndex = TargetIndex.A;
-        protected const TargetIndex HarvesterBuildingTargetIndex = TargetIndex.B;
+        protected const TargetIndex PlantTargetIndex = TargetIndex.A;
+        protected const TargetIndex GathererBuildingTargetIndex = TargetIndex.B;
         protected const TargetIndex StorageCellTargetIndex = TargetIndex.C;
 
-        protected LocalTargetInfo FilthTargetInfo => job.GetTarget(FilthTargetIndex);
-        protected LocalTargetInfo HarvesterBuildingTargetInfo => job.GetTarget(HarvesterBuildingTargetIndex);
+        protected LocalTargetInfo PlantTargetInfo => job.GetTarget(PlantTargetIndex);
+        protected LocalTargetInfo GathererBuildingTargetInfo => job.GetTarget(GathererBuildingTargetIndex);
 
-        protected Thing Filth => FilthTargetInfo.Thing;
-        protected Thing HarvesterBuilding => HarvesterBuildingTargetInfo.Thing;
+        protected ThingWithComps Plant => PlantTargetInfo.Thing as ThingWithComps;
+        protected Thing GathererBuilding => GathererBuildingTargetInfo.Thing;
 
         private int TotalWorkAmount => (int)job.bill.recipe.workAmount;
+        private int GatherWorkAmount => Mathf.CeilToInt(TotalWorkAmount * 0.85f);
+        private int ProcessWorkAmount => Mathf.CeilToInt(TotalWorkAmount * 0.15f);
 
         private bool IsBillDisabled
         {
@@ -38,7 +37,7 @@ namespace VVRace
                     return true;
                 }
 
-                if (!(HarvesterBuilding is IBillGiver billGiver)) { return true; }
+                if (!(GathererBuilding is IBillGiver billGiver)) { return true; }
                 if (!billGiver.CurrentlyUsableForBills())
                 {
                     return true;
@@ -55,36 +54,86 @@ namespace VVRace
 
         protected override IEnumerable<Toil> MakeNewToils()
         {
-            // 대상으로 이동
-            yield return Toils_Goto.GotoThing(FilthTargetIndex, PathEndMode.Touch)
-                .FailOnDespawnedNullOrForbidden(FilthTargetIndex)
+            // 식물로 이동
+            yield return Toils_Goto.GotoThing(PlantTargetIndex, PathEndMode.Touch)
+                .FailOnDespawnedNullOrForbidden(PlantTargetIndex)
+                .FailOnBurningImmobile(PlantTargetIndex)
                 .FailOn(() => IsBillDisabled);
 
-            // 대상을 청소
-            var harvestWorkAmount = Mathf.CeilToInt(TotalWorkAmount / (job.RecipeDef.efficiencyStat != null ? pawn.GetStatValue(job.RecipeDef.efficiencyStat) : 1f));
-            yield return Toils_General.Wait(harvestWorkAmount, FilthTargetIndex)
-                .FailOnDespawnedNullOrForbidden(FilthTargetIndex)
+            // 식물에서 꿀을 수확
+            var gatherWorkAmount = Mathf.CeilToInt(GatherWorkAmount / (job.RecipeDef.efficiencyStat != null ? pawn.GetStatValue(job.RecipeDef.efficiencyStat) : 1f));
+            yield return Toils_General.Wait(gatherWorkAmount, PlantTargetIndex)
+                .FailOnDespawnedNullOrForbidden(PlantTargetIndex)
+                .FailOnBurningImmobile(PlantTargetIndex)
                 .FailOn(() => IsBillDisabled)
                 .WithInitAction(() =>
                 {
                     job.bill.Notify_BillWorkStarted(pawn);
                 })
+                .WithFailCondition(() => !Plant.CanGatherable(VVStatDefOf.VV_PlantHoneyGatherYield, VVStatDefOf.VV_PlantGatherCooldown) || (Plant is Plant p && p.Blighted))
                 .WithEffect(() => GetActor().CurJob.bill.recipe.effectWorking, TargetIndex.A)
-                .WithProgressBarToilDelay(FilthTargetIndex);
+                .WithProgressBarToilDelay(PlantTargetIndex);
 
-            // 꽃가루 생성 및 저장
+            // 꽃가루 생성 및 쿨타임 설정
             yield return new Toil()
+                .WithDefaultCompleteMode(ToilCompleteMode.Instant)
                 .WithInitAction(() =>
                 {
-                    var filth = Filth as Filth;
-                    if (filth != null)
+                    if (Plant is Plant plant)
                     {
-                        filth.ThinFilth();
-                    }
+                        var compGatherable = plant.GetComp<CompGatherable>();
+                        compGatherable.Gathered();
 
+                        if (pawn.filth != null && Rand.Bool)
+                        {
+                            pawn.filth.GainFilth(VVThingDefOf.VV_FilthPollen, Gen.YieldSingle(Plant.def.defName));
+                        }
+
+                        if (Rand.Bool)
+                        {
+                            FilthMaker.TryMakeFilth(pawn.Position, pawn.Map, VVThingDefOf.VV_FilthPollen, Plant.def.defName, 1);
+                        }
+                    }
+                });
+
+            // 작업대로 이동
+            yield return Toils_Goto.GotoThing(GathererBuildingTargetIndex, PathEndMode.InteractionCell)
+                .FailOnDespawnedNullOrForbidden(GathererBuildingTargetIndex)
+                .FailOnBurningImmobile(GathererBuildingTargetIndex)
+                .FailOn(() => IsBillDisabled);
+
+            // 작업대에서 꿀을 가공
+            var processWorkAmount = Mathf.CeilToInt(ProcessWorkAmount / pawn.GetStatValue(StatDefOf.WorkSpeedGlobal));
+            yield return Toils_General.Wait(processWorkAmount, GathererBuildingTargetIndex)
+                .FailOnDespawnedNullOrForbidden(GathererBuildingTargetIndex)
+                .FailOnBurningImmobile(GathererBuildingTargetIndex)
+                .FailOn(() => IsBillDisabled)
+                .WithInitAction(() =>
+                {
+                    pawn.rotationTracker.FaceTarget(GathererBuilding);
+                })
+                .WithTickAction(() =>
+                {
+                    job.bill.Notify_PawnDidWork(pawn);
+                    if (GathererBuilding is IBillGiverWithTickAction billGiverWithTickAction)
+                    {
+                        billGiverWithTickAction.UsedThisTick();
+                    }
+                })
+                .WithHandlingFacing()
+                .WithProgressBarToilDelay(GathererBuildingTargetIndex, interpolateBetweenActorAndTarget: true)
+                .WithActiveSkill(() => job.bill.recipe.workSkill)
+                .FailOnCannotTouch(GathererBuildingTargetIndex, PathEndMode.InteractionCell)
+                .PlaySustainerOrSound(() => GetActor().CurJob.bill.recipe.soundWorking);
+
+            // 작업대에서 꿀을 저장
+            yield return new Toil()
+                .WithDefaultCompleteMode(ToilCompleteMode.Instant)
+                .WithInitAction(() =>
+                {
                     var actor = GetActor();
                     var curJob = actor.jobs.curJob;
-                    var billGiver = HarvesterBuilding;
+                    var billGiver = GathererBuilding;
 
                     job.bill.Notify_BillWorkFinished(pawn);
 
@@ -99,11 +148,13 @@ namespace VVRace
                     var efficiency = curJob.RecipeDef.efficiencyStat != null ? actor.GetStatValue(curJob.RecipeDef.efficiencyStat) : 1f;
                     if (curJob.RecipeDef.workTableEfficiencyStat != null)
                     {
-                        if (HarvesterBuilding is Building_WorkTable building_WorkTable)
+                        if (GathererBuilding is Building_WorkTable building_WorkTable)
                         {
                             efficiency *= building_WorkTable.GetStatValue(curJob.RecipeDef.workTableEfficiencyStat);
                         }
                     }
+
+                    efficiency *= Plant.GetStatValue(VVStatDefOf.VV_PlantHoneyGatherYield);
 
                     var allProducts = new List<Thing>();
                     foreach (var productThingDefCount in curJob.RecipeDef.products)
@@ -180,8 +231,7 @@ namespace VVRace
                             }
                         }
                     }
-                })
-                .WithDefaultCompleteMode(ToilCompleteMode.Instant);
+                });
 
             yield return Toils_Reserve.Reserve(StorageCellTargetIndex);
             yield return Toils_Haul.CarryHauledThingToCell(StorageCellTargetIndex);

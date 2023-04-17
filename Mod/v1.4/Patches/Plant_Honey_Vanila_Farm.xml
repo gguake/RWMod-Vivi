@@ -18,7 +18,7 @@
     <xpath>Defs/ThingDef[defName="Plant_Cotton"]/statBases</xpath>
     <value>
       <VV_MinGrowthPlantGatherable>0.99</VV_MinGrowthPlantGatherable>
-      <VV_PlantGatherCooldown>3.2</VV_PlantGatherCooldown>
+      <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
       <VV_PlantHoneyGatherYield>0.9</VV_PlantHoneyGatherYield>
     </value>
   </Operation>
@@ -41,8 +41,8 @@
     <xpath>Defs/ThingDef[defName="Plant_Tinctoria"]/statBases</xpath>
     <value>
       <VV_MinGrowthPlantGatherable>0.99</VV_MinGrowthPlantGatherable>
-      <VV_PlantGatherCooldown>2.4</VV_PlantGatherCooldown>
-      <VV_PlantHoneyGatherYield>0.9</VV_PlantHoneyGatherYield>
+      <VV_PlantGatherCooldown>1.4</VV_PlantGatherCooldown>
+      <VV_PlantHoneyGatherYield>1.0</VV_PlantHoneyGatherYield>
     </value>
   </Operation>
 </Patch>

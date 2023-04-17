@@ -25,8 +25,8 @@ namespace VVRace
         public static StatDef VV_MindLinkStrength;
         public static StatDef VV_MindLinkRange;
 
-        public static StatDef VV_HoneyHarvestSpeed;
-        public static StatDef VV_HoneyHarvestYield;
+        public static StatDef VV_HoneyGatherSpeed;
+        public static StatDef VV_HoneyGatherYield;
 
         public static StatDef VV_MinGrowthPlantGatherable;
         public static StatDef VV_PlantGatherCooldown;
@@ -84,9 +84,9 @@ namespace VVRace
         public static JobDef VV_LayViviEgg;
         public static JobDef VV_HaulViviEgg;
 
-        public static JobDef VV_HarvestHoney;
-        public static JobDef VV_HarvestPollen;
-        public static JobDef VV_HarvestPropolis;
+        public static JobDef VV_GatherHoney;
+        public static JobDef VV_GatherPollen;
+        public static JobDef VV_GatherPropolis;
     }
 
     [DefOf]

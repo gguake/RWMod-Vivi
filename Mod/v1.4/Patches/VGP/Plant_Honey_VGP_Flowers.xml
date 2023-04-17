@@ -23,7 +23,7 @@
             <value>
               <VV_MinGrowthPlantGatherable>0.7</VV_MinGrowthPlantGatherable>
               <VV_PlantGatherCooldown>0.9</VV_PlantGatherCooldown>
-              <VV_PlantHoneyGatherYield>1.5</VV_PlantHoneyGatherYield>
+              <VV_PlantHoneyGatherYield>1.6</VV_PlantHoneyGatherYield>
             </value>
           </li>
 
@@ -46,7 +46,7 @@
             <value>
               <VV_MinGrowthPlantGatherable>0.7</VV_MinGrowthPlantGatherable>
               <VV_PlantGatherCooldown>0.9</VV_PlantGatherCooldown>
-              <VV_PlantHoneyGatherYield>1.75</VV_PlantHoneyGatherYield>
+              <VV_PlantHoneyGatherYield>1.8</VV_PlantHoneyGatherYield>
             </value>
           </li>
 
@@ -68,8 +68,8 @@
             <xpath>Defs/ThingDef[defName="PlantPlumeria"]/statBases</xpath>
             <value>
               <VV_MinGrowthPlantGatherable>0.7</VV_MinGrowthPlantGatherable>
-              <VV_PlantGatherCooldown>1.5</VV_PlantGatherCooldown>
-              <VV_PlantHoneyGatherYield>1.75</VV_PlantHoneyGatherYield>
+              <VV_PlantGatherCooldown>0.9</VV_PlantGatherCooldown>
+              <VV_PlantHoneyGatherYield>1.4</VV_PlantHoneyGatherYield>
             </value>
           </li>
 
@@ -91,8 +91,8 @@
             <xpath>Defs/ThingDef[defName="Wild_PlantPlumeria"]/statBases</xpath>
             <value>
               <VV_MinGrowthPlantGatherable>0.7</VV_MinGrowthPlantGatherable>
-              <VV_PlantGatherCooldown>1.5</VV_PlantGatherCooldown>
-              <VV_PlantHoneyGatherYield>1.75</VV_PlantHoneyGatherYield>
+              <VV_PlantGatherCooldown>0.9</VV_PlantGatherCooldown>
+              <VV_PlantHoneyGatherYield>1.4</VV_PlantHoneyGatherYield>
             </value>
           </li>
         </operations>

@@ -2,8 +2,8 @@
 <Defs>
   <!-- 꿀 채집 속도 -->
   <StatDef>
-    <defName>VV_HoneyHarvestSpeed</defName>
-    <label>honey harvest speed</label>
+    <defName>VV_HoneyGatherSpeed</defName>
+    <label>honey gather speed</label>
     <description>.</description>
     <category>PawnWork</category>
     <defaultBaseValue>1</defaultBaseValue>
@@ -36,8 +36,8 @@
 
   <!-- 꿀 채집량 -->
   <StatDef>
-    <defName>VV_HoneyHarvestYield</defName>
-    <label>honey harvest yield</label>
+    <defName>VV_HoneyGatherYield</defName>
+    <label>honey gather yield</label>
     <description>.</description>
     <category>PawnWork</category>
     <defaultBaseValue>1</defaultBaseValue>

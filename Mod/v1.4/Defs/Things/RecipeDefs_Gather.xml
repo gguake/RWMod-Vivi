@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <RecipeDef Class="VVRace.RecipeDef_Harvest">
+  <RecipeDef Class="VVRace.RecipeDef_Gathering">
     <defName>VV_GatherHoney</defName>
     <label>gather honey</label>
     <description>.</description>
@@ -8,8 +8,8 @@
     
     <workAmount>600</workAmount>
     <workSkill>Plants</workSkill>
-    <workSpeedStat>VV_HoneyHarvestSpeed</workSpeedStat>
-    <efficiencyStat>VV_HoneyHarvestYield</efficiencyStat>
+    <workSpeedStat>VV_HoneyGatherSpeed</workSpeedStat>
+    <efficiencyStat>VV_HoneyGatherYield</efficiencyStat>
 
     <effectWorking>Harvest_Plant</effectWorking>
     <soundWorking>Recipe_Brewing</soundWorking>
@@ -19,18 +19,18 @@
       <li>VV_HarvestBarrel</li>
     </recipeUsers>
     <allowMixingIngredients>true</allowMixingIngredients>
-    <targetCountAdjustment>25</targetCountAdjustment>
+    <targetCountAdjustment>15</targetCountAdjustment>
 
     <products>
-      <VV_RawHoney>25</VV_RawHoney>
+      <VV_RawHoney>15</VV_RawHoney>
     </products>
     <researchPrerequisite>VV_BasicGathering</researchPrerequisite>
 
-    <harvestWorkerType>VVRace.HarvestWorker_Honey</harvestWorkerType>
+    <gatherWorkerType>VVRace.GatherWorker_Honey</gatherWorkerType>
     <maxPathDanger>Some</maxPathDanger>
   </RecipeDef>
   
-  <RecipeDef Class="VVRace.RecipeDef_Harvest">
+  <RecipeDef Class="VVRace.RecipeDef_Gathering">
     <defName>VV_GatherPollen</defName>
     <label>gather pollen</label>
     <description>.</description>
@@ -49,7 +49,7 @@
       <li>VV_HarvestBarrel</li>
     </recipeUsers>
     <allowMixingIngredients>true</allowMixingIngredients>
-    <targetCountAdjustment>10</targetCountAdjustment>
+    <targetCountAdjustment>1</targetCountAdjustment>
     <ingredients>
       <li>
         <filter>
@@ -71,11 +71,11 @@
     </products>
     <researchPrerequisite>VV_BasicGathering</researchPrerequisite>
 
-    <harvestWorkerType>VVRace.HarvestWorker_Pollen</harvestWorkerType>
+    <gatherWorkerType>VVRace.GatherWorker_Pollen</gatherWorkerType>
     <maxPathDanger>Some</maxPathDanger>
   </RecipeDef>
   
-  <RecipeDef Class="VVRace.RecipeDef_Harvest">
+  <RecipeDef Class="VVRace.RecipeDef_Gathering">
     <defName>VV_GatherPropolis</defName>
     <label>gather propolis</label>
     <description>.</description>
@@ -94,13 +94,13 @@
       <li>VV_HarvestBarrel</li>
     </recipeUsers>
     <allowMixingIngredients>true</allowMixingIngredients>
-    <targetCountAdjustment>10</targetCountAdjustment>
+    <targetCountAdjustment>3</targetCountAdjustment>
     <products>
       <VV_Propolis>3</VV_Propolis>
     </products>
     <researchPrerequisite>VV_AdvancedGathering</researchPrerequisite>
 
-    <harvestWorkerType>VVRace.HarvestWorker_Propolis</harvestWorkerType>
+    <gatherWorkerType>VVRace.GatherWorker_Propolis</gatherWorkerType>
     <maxPathDanger>Some</maxPathDanger>
   </RecipeDef>
   

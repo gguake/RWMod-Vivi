@@ -19,7 +19,7 @@
     <value>
       <VV_MinGrowthPlantGatherable>0.7</VV_MinGrowthPlantGatherable>
       <VV_PlantGatherCooldown>0.9</VV_PlantGatherCooldown>
-      <VV_PlantHoneyGatherYield>1.5</VV_PlantHoneyGatherYield>
+      <VV_PlantHoneyGatherYield>1.6</VV_PlantHoneyGatherYield>
     </value>
   </Operation>
 
@@ -42,7 +42,7 @@
     <value>
       <VV_MinGrowthPlantGatherable>0.7</VV_MinGrowthPlantGatherable>
       <VV_PlantGatherCooldown>0.9</VV_PlantGatherCooldown>
-      <VV_PlantHoneyGatherYield>1.75</VV_PlantHoneyGatherYield>
+      <VV_PlantHoneyGatherYield>1.8</VV_PlantHoneyGatherYield>
     </value>
   </Operation>
 
@@ -64,8 +64,8 @@
     <xpath>Defs/ThingDef[defName="Plant_Dandelion"]/statBases</xpath>
     <value>
       <VV_MinGrowthPlantGatherable>0.7</VV_MinGrowthPlantGatherable>
-      <VV_PlantGatherCooldown>1.5</VV_PlantGatherCooldown>
-      <VV_PlantHoneyGatherYield>1.5</VV_PlantHoneyGatherYield>
+      <VV_PlantGatherCooldown>1.4</VV_PlantGatherCooldown>
+      <VV_PlantHoneyGatherYield>1.4</VV_PlantHoneyGatherYield>
     </value>
   </Operation>
 
@@ -87,8 +87,8 @@
     <xpath>Defs/ThingDef[defName="Plant_Astragalus"]/statBases</xpath>
     <value>
       <VV_MinGrowthPlantGatherable>0.7</VV_MinGrowthPlantGatherable>
-      <VV_PlantGatherCooldown>1.5</VV_PlantGatherCooldown>
-      <VV_PlantHoneyGatherYield>1.5</VV_PlantHoneyGatherYield>
+      <VV_PlantGatherCooldown>1.4</VV_PlantGatherCooldown>
+      <VV_PlantHoneyGatherYield>1.4</VV_PlantHoneyGatherYield>
     </value>
   </Operation>
 
@@ -111,7 +111,7 @@
     <value>
       <VV_MinGrowthPlantGatherable>0.7</VV_MinGrowthPlantGatherable>
       <VV_PlantGatherCooldown>0.9</VV_PlantGatherCooldown>
-      <VV_PlantHoneyGatherYield>1.2</VV_PlantHoneyGatherYield>
+      <VV_PlantHoneyGatherYield>1.4</VV_PlantHoneyGatherYield>
     </value>
   </Operation>
 </Patch>

@@ -7,12 +7,12 @@ using Verse;
 
 namespace VVRace
 {
-    public class RecipeDef_Harvest : RecipeDef
+    public class RecipeDef_Gathering : RecipeDef
     {
-        public Type harvestWorkerType;
+        public Type gatherWorkerType;
 
         [NonSerialized]
-        public HarvestWorker harvestWorker;
+        public GatherWorker gatherWorker;
 
         public Danger maxPathDanger;
 
@@ -30,11 +30,11 @@ namespace VVRace
 
         public override void ResolveReferences()
         {
-            if (harvestWorkerType != null)
+            if (gatherWorkerType != null)
             {
-                harvestWorker = (HarvestWorker)Activator.CreateInstance(harvestWorkerType);
+                gatherWorker = (GatherWorker)Activator.CreateInstance(gatherWorkerType);
 
-                var allIngredientDefs = DefDatabase<ThingDef>.AllDefsListForReading.Where(thingDef => harvestWorker.ShouldAddRecipeIngredient(thingDef));
+                var allIngredientDefs = DefDatabase<ThingDef>.AllDefsListForReading.Where(thingDef => gatherWorker.ShouldAddRecipeIngredient(thingDef));
                 if (allIngredientDefs.Any())
                 {
                     if (ingredients == null) { ingredients = new List<IngredientCount>(); }

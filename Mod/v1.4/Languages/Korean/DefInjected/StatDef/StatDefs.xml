@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-  <VV_HoneyHarvestSpeed.label>꿀 채집 속도</VV_HoneyHarvestSpeed.label>
-  <VV_HoneyHarvestSpeed.description>꿀을 채집하는데 얼마나 빠르게 작업하는지 나타냅니다.</VV_HoneyHarvestSpeed.description>
+  <VV_HoneyGatherSpeed.label>꿀 채집 속도</VV_HoneyGatherSpeed.label>
+  <VV_HoneyGatherSpeed.description>꿀을 채집하는데 얼마나 빠르게 작업하는지 나타냅니다.</VV_HoneyGatherSpeed.description>
   
-  <VV_HoneyHarvestYield.label>꿀 채집량</VV_HoneyHarvestYield.label>
-  <VV_HoneyHarvestYield.description>꿀을 채집할때 한번에 얼마나 많이 얻는지 나타냅니다.</VV_HoneyHarvestYield.description>
+  <VV_HoneyGatherYield.label>꿀 채집량</VV_HoneyGatherYield.label>
+  <VV_HoneyGatherYield.description>꿀을 채집할때 한번에 얼마나 많이 얻는지 나타냅니다.</VV_HoneyGatherYield.description>
 
   <VV_PlantGatherSpeed.label>식물 자재 채집 속도</VV_PlantGatherSpeed.label>
   <VV_PlantGatherSpeed.description>야생 식물에서 각종 자원을 채집할때 얼마나 빠르게 작업하는지 나타냅니다.</VV_PlantGatherSpeed.description>

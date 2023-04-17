@@ -14,9 +14,9 @@
   </WorkGiverDef>
 
   <WorkGiverDef>
-    <defName>VV_DoBillsHarvestWithBarrel</defName>
+    <defName>VV_DoBillsGatheringWithBarrel</defName>
     <label>gather</label>
-    <giverClass>VVRace.WorkGiver_HarvestBill</giverClass>
+    <giverClass>VVRace.WorkGiver_GatheringBill</giverClass>
     <workType>Growing</workType>
     <priorityInType>90</priorityInType>
     <fixedBillGiverDefs>

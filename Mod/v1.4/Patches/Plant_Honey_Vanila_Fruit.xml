@@ -17,8 +17,8 @@
   <Operation Class="PatchOperationAdd">
     <xpath>Defs/ThingDef[defName="Plant_Agave"]/statBases</xpath>
     <value>
-      <VV_MinGrowthPlantGatherable>0.99</VV_MinGrowthPlantGatherable>
-      <VV_PlantGatherCooldown>2.4</VV_PlantGatherCooldown>
+      <VV_MinGrowthPlantGatherable>0.9</VV_MinGrowthPlantGatherable>
+      <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
       <VV_PlantHoneyGatherYield>1.0</VV_PlantHoneyGatherYield>
     </value>
   </Operation>
@@ -40,8 +40,8 @@
   <Operation Class="PatchOperationAdd">
     <xpath>Defs/ThingDef[defName="Plant_Strawberry"]/statBases</xpath>
     <value>
-      <VV_MinGrowthPlantGatherable>0.99</VV_MinGrowthPlantGatherable>
-      <VV_PlantGatherCooldown>2.4</VV_PlantGatherCooldown>
+      <VV_MinGrowthPlantGatherable>0.9</VV_MinGrowthPlantGatherable>
+      <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
       <VV_PlantHoneyGatherYield>1.0</VV_PlantHoneyGatherYield>
     </value>
   </Operation>
@@ -63,8 +63,8 @@
   <Operation Class="PatchOperationAdd">
     <xpath>Defs/ThingDef[defName="Plant_Berry"]/statBases</xpath>
     <value>
-      <VV_MinGrowthPlantGatherable>0.99</VV_MinGrowthPlantGatherable>
-      <VV_PlantGatherCooldown>2.4</VV_PlantGatherCooldown>
+      <VV_MinGrowthPlantGatherable>0.9</VV_MinGrowthPlantGatherable>
+      <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
       <VV_PlantHoneyGatherYield>1.0</VV_PlantHoneyGatherYield>
     </value>
   </Operation>
@@ -86,8 +86,8 @@
   <Operation Class="PatchOperationAdd">
     <xpath>Defs/ThingDef[defName="Plant_Ambrosia"]/statBases</xpath>
     <value>
-      <VV_MinGrowthPlantGatherable>0.99</VV_MinGrowthPlantGatherable>
-      <VV_PlantGatherCooldown>0.9</VV_PlantGatherCooldown>
+      <VV_MinGrowthPlantGatherable>0.9</VV_MinGrowthPlantGatherable>
+      <VV_PlantGatherCooldown>1.4</VV_PlantGatherCooldown>
       <VV_PlantHoneyGatherYield>1.0</VV_PlantHoneyGatherYield>
     </value>
   </Operation>

@@ -274,7 +274,7 @@
   <!-- 비비 채집통 -->
   <ThingDef ParentName="BuildingBase">
     <defName>VV_HarvestBarrel</defName>
-    <label>vivi harvest barrel</label>
+    <label>vivi gather barrel</label>
     <description>test</description>
     <thingClass>Building_WorkTable</thingClass>
 
