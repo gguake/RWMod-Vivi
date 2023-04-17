@@ -19,45 +19,10 @@
       <li>VV_HarvestBarrel</li>
     </recipeUsers>
     <allowMixingIngredients>true</allowMixingIngredients>
-    <targetCountAdjustment>10</targetCountAdjustment>
-    <!--
-    <ingredients>
-      <li>
-        <filter>
-          <thingDefs>
-            <li>Plant_Rose</li>
-            <li>Plant_Daylily</li>
-            <li>Plant_Dandelion</li>
-            <li>Plant_Astragalus</li>
-            <li>Plant_Clivia</li>
-
-            <li>Plant_Agave</li>
-            <li>Plant_Strawberry</li>
-            <li>Plant_Berry</li>
-            <li>Plant_Ambrosia</li>
-          </thingDefs>
-        </filter>
-        <count>1</count>
-      </li>
-    </ingredients>
-    <fixedIngredientFilter>
-      <thingDefs>
-        <li>Plant_Rose</li>
-        <li>Plant_Daylily</li>
-        <li>Plant_Dandelion</li>
-        <li>Plant_Astragalus</li>
-        <li>Plant_Clivia</li>
-
-        <li>Plant_Agave</li>
-        <li>Plant_Strawberry</li>
-        <li>Plant_Berry</li>
-        <li>Plant_Ambrosia</li>
-      </thingDefs>
-    </fixedIngredientFilter>
-    -->
+    <targetCountAdjustment>25</targetCountAdjustment>
 
     <products>
-      <VV_RawHoney>15</VV_RawHoney>
+      <VV_RawHoney>25</VV_RawHoney>
     </products>
     <researchPrerequisite>VV_BasicGathering</researchPrerequisite>
 
@@ -71,7 +36,7 @@
     <description>.</description>
     <jobString>Gathering pollen.</jobString>
     
-    <workAmount>200</workAmount>
+    <workAmount>300</workAmount>
     <workSkill>Plants</workSkill>
     <workSpeedStat>CleaningSpeed</workSpeedStat>
     <efficiencyStat>PlantHarvestYield</efficiencyStat>
@@ -116,7 +81,7 @@
     <description>.</description>
     <jobString>Gathering propolis.</jobString>
     
-    <workAmount>1500</workAmount>
+    <workAmount>1800</workAmount>
     <workSkill>Plants</workSkill>
     <workSpeedStat>VV_PlantGatherSpeed</workSpeedStat>
     <efficiencyStat>PlantHarvestYield</efficiencyStat>

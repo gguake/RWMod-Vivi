@@ -6,7 +6,7 @@
     <label>make vivicream</label>
     <description>test</description>
     <jobString>making vivicream.</jobString>
-    <workAmount>400</workAmount>
+    <workAmount>750</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <workSkill>Crafting</workSkill>
 
@@ -14,7 +14,6 @@
     <soundWorking>Recipe_Brewing</soundWorking>
     <uiIconThing>VV_Vivicream</uiIconThing>
 
-    <allowMixingIngredients>true</allowMixingIngredients>
     <ingredients>
     </ingredients>
     <fixedIngredientFilter>
@@ -31,7 +30,7 @@
     <label>make viviwax</label>
     <description>test</description>
     <jobString>making viviwax.</jobString>
-    <workAmount>500</workAmount>
+    <workAmount>900</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <workSkill>Crafting</workSkill>
 
@@ -39,7 +38,6 @@
     <soundWorking>Recipe_Brewing</soundWorking>
     <uiIconThing>VV_Viviwax</uiIconThing>
 
-    <allowMixingIngredients>true</allowMixingIngredients>
     <ingredients>
       <li>
         <filter>
@@ -47,7 +45,7 @@
             <li>VV_Vivicream</li>
           </thingDefs>
         </filter>
-        <count>10</count>
+        <count>30</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
@@ -56,7 +54,7 @@
       </thingDefs>
     </fixedIngredientFilter>
     <products>
-      <VV_Viviwax>25</VV_Viviwax>
+      <VV_Viviwax>15</VV_Viviwax>
     </products>
   </RecipeDef>
 
@@ -66,7 +64,7 @@
     <label>filter honey</label>
     <description>test</description>
     <jobString>filtering honey.</jobString>
-    <workAmount>600</workAmount>
+    <workAmount>500</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <workSkill>Crafting</workSkill>
 
@@ -82,7 +80,7 @@
             <li>VV_RawHoney</li>
           </thingDefs>
         </filter>
-        <count>10</count>
+        <count>20</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
@@ -91,8 +89,8 @@
       </thingDefs>
     </fixedIngredientFilter>
     <products>
-      <VV_FilteredHoney>10</VV_FilteredHoney>
-      <VV_Viviwax>2</VV_Viviwax>
+      <VV_FilteredHoney>5</VV_FilteredHoney>
+      <VV_Viviwax>1</VV_Viviwax>
     </products>
     <researchPrerequisite>VV_BasicGathering</researchPrerequisite>
   </RecipeDef>
@@ -111,7 +109,6 @@
     <soundWorking>Recipe_Brewing</soundWorking>
     <uiIconThing>VV_Propolis</uiIconThing>
 
-    <allowMixingIngredients>true</allowMixingIngredients>
     <ingredients>
       <li>
         <filter>
@@ -119,7 +116,7 @@
             <li>VV_Propolis</li>
           </thingDefs>
         </filter>
-        <count>5</count>
+        <count>3</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
@@ -128,7 +125,7 @@
       </thingDefs>
     </fixedIngredientFilter>
     <products>
-      <MedicineHerbal>2</MedicineHerbal>
+      <MedicineHerbal>3</MedicineHerbal>
       <Neutroamine>3</Neutroamine>
     </products>
     <researchPrerequisite>VV_AdvancedGathering</researchPrerequisite>

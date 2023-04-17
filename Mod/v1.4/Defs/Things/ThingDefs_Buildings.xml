@@ -162,7 +162,7 @@
     <uiIconPath>Things/Building/Linked/WallPlanks_MenuIcon</uiIconPath>
     <uiIconColor>(1.0, 0.8, 0.6, 1.0)</uiIconColor>
     <statBases>
-      <MaxHitPoints>540</MaxHitPoints>
+      <MaxHitPoints>500</MaxHitPoints>
       <Flammability>0.7</Flammability>
     </statBases>
     <costList>
@@ -230,9 +230,9 @@
     <fillPercent>0.4</fillPercent>
     <pathCost>50</pathCost>
     <statBases>
-      <MaxHitPoints>100</MaxHitPoints>
+      <MaxHitPoints>150</MaxHitPoints>
       <Mass>8</Mass>
-      <WorkToBuild>700</WorkToBuild>
+      <WorkToBuild>1500</WorkToBuild>
       <Flammability>1.0</Flammability>
       <Beauty>0.5</Beauty>
     </statBases>
@@ -299,10 +299,10 @@
     <pathCost>50</pathCost>
     <statBases>
       <Mass>20</Mass>
-      <WorkToBuild>2000</WorkToBuild>
-      <MaxHitPoints>100</MaxHitPoints>
+      <WorkToBuild>1800</WorkToBuild>
+      <MaxHitPoints>150</MaxHitPoints>
       <Flammability>1.0</Flammability>
-      <Cleanliness>-2</Cleanliness>
+      <Cleanliness>-1</Cleanliness>
     </statBases>
     <size>(1,1)</size>
     <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
@@ -370,6 +370,7 @@
     <stuffCategories>
       <li>Woody</li>
       <li>Stony</li>
+      <li>Metallic</li>
     </stuffCategories>
     <costStuffCount>80</costStuffCount>
     <altitudeLayer>Building</altitudeLayer>
@@ -394,6 +395,10 @@
       <li>VV_MakeViviwax</li>
       <li>VV_FilteringHoney</li>
       <li>VV_RefiningPropolis</li>
+
+      <li>VV_Make_HoneyPollenCake</li>
+      <li>VV_Make_HoneyPollenCake_Bulk</li>
+      <li>VV_Make_RoyalJelly</li>
     </recipes>
     <inspectorTabs>
       <li>ITab_Bills</li>

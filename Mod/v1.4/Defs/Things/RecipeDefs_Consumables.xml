@@ -19,7 +19,7 @@
             <li>VV_FilteredHoney</li>
           </thingDefs>
         </filter>
-        <count>0.4</count>
+        <count>0.7</count>
       </li>
       <li>
         <filter>
@@ -27,7 +27,7 @@
             <li>VV_Pollen</li>
           </thingDefs>
         </filter>
-        <count>0.4</count>
+        <count>0.3</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
@@ -69,7 +69,7 @@
             <li>VV_FilteredHoney</li>
           </thingDefs>
         </filter>
-        <count>1.6</count>
+        <count>2.8</count>
       </li>
       <li>
         <filter>
@@ -77,7 +77,7 @@
             <li>VV_Pollen</li>
           </thingDefs>
         </filter>
-        <count>1.6</count>
+        <count>1.2</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
@@ -94,6 +94,65 @@
     </defaultIngredientFilter>
     <products>
       <VV_HoneyPollenCake>4</VV_HoneyPollenCake>
+    </products>
+    <workSkill>Cooking</workSkill>
+    <researchPrerequisite>VV_BasicGathering</researchPrerequisite>
+  </RecipeDef>
+  
+  <!-- 로열 젤리 -->
+  <RecipeDef>
+    <defName>VV_Make_RoyalJelly</defName>
+    <label>make royal jelly</label>
+    <description>Make royal jelly.</description>
+    <jobString>Making royal jelly.</jobString>
+    <workAmount>1350</workAmount>
+    <workSpeedStat>CookSpeed</workSpeedStat>
+    <requiredGiverWorkType>Cooking</requiredGiverWorkType>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_CookMeal</soundWorking>
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_Vivicream</li>
+          </thingDefs>
+        </filter>
+        <count>30</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_Pollen</li>
+          </thingDefs>
+        </filter>
+        <count>10</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_FilteredHoney</li>
+          </thingDefs>
+        </filter>
+        <count>3</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>VV_Vivicream</li>
+        <li>VV_FilteredHoney</li>
+        <li>VV_Pollen</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <defaultIngredientFilter>
+      <thingDefs>
+        <li>VV_Vivicream</li>
+        <li>VV_FilteredHoney</li>
+        <li>VV_Pollen</li>
+      </thingDefs>
+    </defaultIngredientFilter>
+    <products>
+      <VV_RoyalJelly>1</VV_RoyalJelly>
     </products>
     <workSkill>Cooking</workSkill>
     <researchPrerequisite>VV_BasicGathering</researchPrerequisite>

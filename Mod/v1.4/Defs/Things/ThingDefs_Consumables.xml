@@ -19,12 +19,12 @@
     
     <useHitPoints>true</useHitPoints>
     <statBases>
-      <MarketValue>0.7</MarketValue>
-      <MaxHitPoints>60</MaxHitPoints>
-      <Mass>0.05</Mass>
+      <Mass>0.01</Mass>
+      <MarketValue>0.4</MarketValue>
+      <MaxHitPoints>20</MaxHitPoints>
       <Flammability>1.0</Flammability>
-      <Nutrition>0.03</Nutrition>
-      <FoodPoisonChanceFixedHuman>0.3</FoodPoisonChanceFixedHuman>
+      <Nutrition>0.025</Nutrition>
+      <FoodPoisonChanceFixedHuman>0.5</FoodPoisonChanceFixedHuman>
     </statBases>
     <stackLimit>75</stackLimit>
 
@@ -50,11 +50,13 @@
     </graphicData>
     <socialPropernessMatters>true</socialPropernessMatters>
     <statBases>
-      <MarketValue>1.8</MarketValue>
-      <Mass>0.1</Mass>
-      <MaxHitPoints>60</MaxHitPoints>
-      <Flammability>0.5</Flammability>
+      <Mass>0.03</Mass>
+      <MaxHitPoints>20</MaxHitPoints>
+      <Flammability>0.7</Flammability>
+      <MarketValue>1.1</MarketValue>
       <Nutrition>0.05</Nutrition>
+      <DeteriorationRate>3</DeteriorationRate>
+      <Beauty>-2</Beauty>
     </statBases>
     <stackLimit>75</stackLimit>
 
@@ -89,12 +91,12 @@
     </graphicData>
     <socialPropernessMatters>true</socialPropernessMatters>
     <statBases>
-      <MarketValue>2.0</MarketValue>
-      <Mass>0.075</Mass>
-      <MaxHitPoints>60</MaxHitPoints>
-      <Flammability>0</Flammability>
-      <Nutrition>0.06</Nutrition>
-      <FoodPoisonChanceFixedHuman>0</FoodPoisonChanceFixedHuman>
+      <Mass>0.08</Mass>
+      <MaxHitPoints>30</MaxHitPoints>
+      <Flammability>0.7</Flammability>
+      <MarketValue>4.8</MarketValue>
+      <Nutrition>0.25</Nutrition>
+      <Beauty>-2</Beauty>
     </statBases>
     <stackLimit>75</stackLimit>
     <comps>
@@ -127,13 +129,11 @@
     </thingCategories>
 
     <statBases>
-      <MarketValue>12</MarketValue>
-      <Mass>0.5</Mass>
-      <MaxHitPoints>60</MaxHitPoints>
-      <Flammability>0</Flammability>
-      <Nutrition>0.9</Nutrition>
-      <WorkToMake>400</WorkToMake>
-      <DeteriorationRate>2</DeteriorationRate>
+      <Mass>0.3</Mass>
+      <MarketValue>20</MarketValue>
+      <Nutrition>1.0</Nutrition>
+      <WorkToMake>450</WorkToMake>
+      <Beauty>-2</Beauty>
     </statBases>
 
     <ingestible>
@@ -179,10 +179,9 @@
 		</thingCategories>
 
 		<statBases>
-			<MarketValue>15</MarketValue>
-			<Mass>0.1</Mass>
-			<MaxHitPoints>60</MaxHitPoints>
-			<Nutrition>0.1</Nutrition>
+			<Mass>0.5</Mass>
+			<MarketValue>40</MarketValue>
+			<Nutrition>1.0</Nutrition>
 		</statBases>
 
 		<ingestible>

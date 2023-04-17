@@ -25,7 +25,7 @@
       <DeteriorationRate>0</DeteriorationRate>
       <Flammability>1.0</Flammability>
       <Nutrition>0.25</Nutrition>
-      <MarketValue>5.0</MarketValue>
+      <MarketValue>50.0</MarketValue>
     </statBases>
     <stackLimit>1</stackLimit>
     <healthAffectsPrice>true</healthAffectsPrice>
@@ -35,9 +35,9 @@
     <tickerType>Rare</tickerType>
     <comps>
       <li Class="CompProperties_TemperatureRuinable">
-        <minSafeTemperature>17</minSafeTemperature>
-        <maxSafeTemperature>50</maxSafeTemperature>
-        <progressPerDegreePerTick>0.000001</progressPerDegreePerTick>
+        <minSafeTemperature>20</minSafeTemperature>
+        <maxSafeTemperature>40</maxSafeTemperature>
+        <progressPerDegreePerTick>0.000002</progressPerDegreePerTick>
       </li>
 
       <li Class="VVRace.CompProperties_ViviHatcher">
