@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Verse;
 using Verse.AI;
+using VVRace.Honey;
 
 namespace VVRace
 {
@@ -19,11 +20,8 @@ namespace VVRace
 
             foreach (var thing in allPlants)
             {
-                // 나무가 아닌 경우
-                if (thing.def.plant == null || !thing.def.plant.IsTree) { continue; }
-
-                // 완전히 성장한 식물이 아닌 경우
-                if (!(thing is Plant plant) || plant.Growth < 1f) { continue; }
+                // 수지 채집이 불가능한 경우
+                if (!thing.CanGatherable(VVStatDefOf.VV_TreeResinGatherYield, VVStatDefOf.VV_PlantGatherCooldown)) { continue; }
 
                 // 상호작용이 불가능한 경우
                 if (!thing.Spawned || thing.IsForbidden(pawn) || thing.IsBurning()) { continue; }
@@ -62,6 +60,12 @@ namespace VVRace
 
             job = null;
             return false;
+        }
+
+        public override bool ShouldAddRecipeIngredient(ThingDef thingDef)
+        {
+            return thingDef.StatBaseDefined(VVStatDefOf.VV_TreeResinGatherYield) &&
+                thingDef.GetStatValueAbstract(VVStatDefOf.VV_TreeResinGatherYield) > 0f;
         }
     }
 }

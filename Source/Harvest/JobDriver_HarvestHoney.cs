@@ -19,7 +19,7 @@ namespace VVRace
         protected LocalTargetInfo PlantTargetInfo => job.GetTarget(PlantTargetIndex);
         protected LocalTargetInfo HarvesterBuildingTargetInfo => job.GetTarget(HarvesterBuildingTargetIndex);
 
-        protected Plant Plant => PlantTargetInfo.Thing as Plant;
+        protected ThingWithComps Plant => PlantTargetInfo.Thing as ThingWithComps;
         protected Thing HarvesterBuilding => HarvesterBuildingTargetInfo.Thing;
 
         private int TotalWorkAmount => (int)job.bill.recipe.workAmount;
@@ -73,7 +73,7 @@ namespace VVRace
                 {
                     job.bill.Notify_BillWorkStarted(pawn);
                 })
-                .WithFailCondition(() => !Plant.CanGatherable(VVStatDefOf.VV_PlantHoneyGatherYield, VVStatDefOf.VV_PlantGatherCooldown) || Plant.Blighted)
+                .WithFailCondition(() => !Plant.CanGatherable(VVStatDefOf.VV_PlantHoneyGatherYield, VVStatDefOf.VV_PlantGatherCooldown) || (Plant is Plant p && p.Blighted))
                 .WithEffect(() => GetActor().CurJob.bill.recipe.effectWorking, TargetIndex.A)
                 .WithProgressBarToilDelay(PlantTargetIndex);
 

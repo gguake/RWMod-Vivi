@@ -57,7 +57,6 @@
         </curve>
       </li>
       <li Class="StatPart_BodySize" />
-      <li Class="StatPart_PlantGrowthNutritionFactor" />
     </parts>
   </StatDef>
   
@@ -65,6 +64,25 @@
   <StatDef ParentName="VV_StatPlantGatherYieldBase">
     <defName>VV_PlantHoneyGatherYield</defName>
     <label>honey gather yield multiplier</label>
+    <description>.</description>
+    <displayPriorityInCategory>5100</displayPriorityInCategory>
+    <parts>
+      <li Class="StatPart_Pollution" MayRequire="Ludeon.RimWorld.Biotech">
+        <multiplier>0.9</multiplier>
+      </li>
+      <li Class="StatPart_NoxiousHaze" MayRequire="Ludeon.RimWorld.Biotech">
+        <multiplier>0.75</multiplier>
+      </li>
+      <li Class="StatPart_ToxicFallout">
+        <multiplier>0.75</multiplier>
+      </li>
+    </parts>
+  </StatDef>
+  
+  <!-- 나무 수지 생산량 -->
+  <StatDef ParentName="VV_StatPlantGatherYieldBase">
+    <defName>VV_TreeResinGatherYield</defName>
+    <label>resin yield multiplier</label>
     <description>.</description>
     <displayPriorityInCategory>5100</displayPriorityInCategory>
     <parts>

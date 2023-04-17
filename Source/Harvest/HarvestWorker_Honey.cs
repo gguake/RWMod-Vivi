@@ -65,8 +65,7 @@ namespace VVRace
 
         public override bool ShouldAddRecipeIngredient(ThingDef thingDef)
         {
-            return thingDef.plant != null && 
-                thingDef.StatBaseDefined(VVStatDefOf.VV_PlantHoneyGatherYield) && 
+            return thingDef.StatBaseDefined(VVStatDefOf.VV_PlantHoneyGatherYield) &&
                 thingDef.GetStatValueAbstract(VVStatDefOf.VV_PlantHoneyGatherYield) > 0f;
         }
     }

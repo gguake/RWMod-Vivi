@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Verse;
 using Verse.AI;
+using VVRace.Honey;
 
 namespace VVRace
 {
@@ -15,7 +16,7 @@ namespace VVRace
         protected LocalTargetInfo PlantTargetInfo => job.GetTarget(PlantTargetIndex);
         protected LocalTargetInfo HarvesterBuildingTargetInfo => job.GetTarget(HarvesterBuildingTargetIndex);
 
-        protected Thing Plant => PlantTargetInfo.Thing;
+        protected ThingWithComps Plant => PlantTargetInfo.Thing as ThingWithComps;
         protected Thing HarvesterBuilding => HarvesterBuildingTargetInfo.Thing;
 
         private int TotalWorkAmount => (int)job.bill.recipe.workAmount;
@@ -67,10 +68,11 @@ namespace VVRace
                 {
                     job.bill.Notify_BillWorkStarted(pawn);
                 })
+                .WithFailCondition(() => !Plant.CanGatherable(VVStatDefOf.VV_TreeResinGatherYield, VVStatDefOf.VV_PlantGatherCooldown))
                 .WithEffect(() => GetActor().CurJob.bill.recipe.effectWorking, TargetIndex.A)
                 .WithProgressBarToilDelay(PlantTargetIndex);
 
-            // 작업대에서 꿀을 저장
+            // 결과 생성
             yield return new Toil()
                 .WithDefaultCompleteMode(ToilCompleteMode.Instant)
                 .WithInitAction(() =>
@@ -80,6 +82,9 @@ namespace VVRace
                     var billGiver = HarvesterBuilding;
 
                     job.bill.Notify_BillWorkFinished(pawn);
+
+                    var compGatherable = Plant.GetComp<CompGatherable>();
+                    compGatherable.Gathered();
 
                     // 스킬 레벨업 처리
                     if (curJob.RecipeDef.workSkill != null && !curJob.RecipeDef.UsesUnfinishedThing)
@@ -97,6 +102,8 @@ namespace VVRace
                             efficiency *= building_WorkTable.GetStatValue(curJob.RecipeDef.workTableEfficiencyStat);
                         }
                     }
+
+                    efficiency *= Plant.GetStatValue(VVStatDefOf.VV_TreeResinGatherYield);
 
                     var allProducts = new List<Thing>();
                     foreach (var productThingDefCount in curJob.RecipeDef.products)
