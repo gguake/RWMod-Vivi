@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <ThingDef Abstract="True" Name="VV_ThinApparelBase" ParentName="ApparelBase">
+  <ThingDef Abstract="True" Name="VV_ThinApparelBase" ParentName="ApparelMakeableBase">
     <smeltable>false</smeltable>
     <thingCategories>
       <li>VV_ViviApparel</li>
@@ -19,6 +19,10 @@
       <fixedBodyType>Thin</fixedBodyType>
     </apparel>
 
+    <tradeTags Inherit="False">
+      <li>VV_ViviApparel</li>
+    </tradeTags>
+    
     <colorGenerator Class="ColorGenerator_White" />
   </ThingDef>
 
@@ -68,9 +72,13 @@
       </tags>
     </apparel>
     
-    <tradeTags>
-      <li>VV_ViviApparel</li>
-    </tradeTags>
+    <recipeMaker>
+      <recipeUsers>
+        <li>CraftingSpot</li>
+      </recipeUsers>
+      <researchPrerequisite>VV_Apparels</researchPrerequisite>
+      <displayPriority>3101</displayPriority>
+    </recipeMaker>
   </ThingDef>
 
   <ThingDef ParentName="VV_ThinApparelBase">
@@ -120,9 +128,10 @@
       </layers>
     </apparel>
     
-    <tradeTags>
-      <li>VV_ViviApparel</li>
-    </tradeTags>
+    <recipeMaker>
+      <researchPrerequisite>VV_Apparels</researchPrerequisite>
+      <displayPriority>3102</displayPriority>
+    </recipeMaker>
   </ThingDef>
   
   <ThingDef ParentName="VV_ThinApparelBase">
@@ -167,8 +176,9 @@
       </layers>
     </apparel>
     
-    <tradeTags>
-      <li>VV_ViviApparel</li>
-    </tradeTags>
+    <recipeMaker>
+      <researchPrerequisite>VV_Apparels</researchPrerequisite>
+      <displayPriority>3103</displayPriority>
+    </recipeMaker>
   </ThingDef>
 </Defs>

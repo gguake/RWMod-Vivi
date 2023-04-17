@@ -26,6 +26,22 @@
       <li>VV_ViviStart</li>
     </tags>
   </ResearchProjectDef>
+	
+  <ResearchProjectDef ParentName="ViviResearchProjectBase">
+    <defName>VV_Apparels</defName>
+    <label>vivi apparels</label>
+    <description>.</description>
+    <baseCost>400</baseCost>
+    <researchViewX>1</researchViewX>
+    <researchViewY>0</researchViewY>
+    <prerequisites>
+      <li>VV_BasicInfra</li>
+    </prerequisites>
+    
+    <tags>
+      <li>VV_ViviStart</li>
+    </tags>
+  </ResearchProjectDef>
   
   <ResearchProjectDef ParentName="ViviResearchProjectBase">
     <defName>VV_Weaponry</defName>
@@ -38,7 +54,7 @@
       <li>VV_BasicInfra</li>
     </prerequisites>
   </ResearchProjectDef>
-	
+
   <ResearchProjectDef ParentName="ViviResearchProjectBase">
     <defName>VV_BasicGathering</defName>
     <label>vivi basic gathering</label>
