@@ -155,6 +155,7 @@
     <graphicData>
       <texPath>Things/Building/Wall_Atlas_HoneycombWall</texPath>
       <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutWithOverlay</shaderType>
       <color>(1.0, 0.8, 0.6, 1.0)</color>
     </graphicData>
     <tickerType>Long</tickerType>
