@@ -111,7 +111,7 @@ namespace VVRace
 
             if (!IsRoyal)
             {
-                if (mindLinkSettings != null)
+                if (mindLinkSettings != null && !pawn.DevelopmentalStage.Baby())
                 {
                     foreach (var gizmo in mindLinkSettings.GetGizmos())
                     {
@@ -170,8 +170,10 @@ namespace VVRace
                     }
                 }
             }
-            else if (pawn.DevelopmentalStage.Child())
+            else
             {
+                IsRoyal = false;
+
                 if (originalHairColor == null)
                 {
                     originalHairColor = pawn.story.HairColor;

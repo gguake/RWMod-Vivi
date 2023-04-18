@@ -18,7 +18,7 @@ namespace VVRace
 
             foreach (var candidate in pawn.Map.mapPawns.SpawnedPawnsInFaction(pawn.Faction))
             {
-                if (candidate.Dead || !candidate.Spawned || !candidate.TryGetViviGene(out var vivi) || vivi.ViviMindLinkSettings == null) { continue; }
+                if (candidate.Dead || candidate.Downed || !candidate.IsColonistPlayerControlled || !candidate.TryGetViviGene(out var vivi) || vivi.ViviMindLinkSettings == null) { continue; }
 
                 if (vivi.ViviMindLinkSettings.HediffMindLink == null && vivi.ViviMindLinkSettings?.ReservedToConnectTarget == pawn)
                 {
