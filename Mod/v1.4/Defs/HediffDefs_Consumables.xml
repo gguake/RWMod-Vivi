@@ -47,7 +47,7 @@
       </li>
       <li Class="VVRace.HediffCompProperties_ViviGrowthBoost">
         <tickInterval>2000</tickInterval>
-        <additionalAgeBoostMultiplier>2.0</additionalAgeBoostMultiplier>
+        <additionalAgeBoostMultiplier>3.6</additionalAgeBoostMultiplier>
       </li>
     </comps>
   </HediffDef>

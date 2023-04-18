@@ -47,11 +47,11 @@
 
     <biologicalAgeTickFactorFromAgeCurve>
       <points>
-        <li>(3, 4)</li>
-        <li>(5, 3)</li>
-        <li>(9, 2.5)</li>
-        <li>(13, 2)</li>
-        <li>(16.5, 2)</li>
+        <li>(2.9999, 2)</li>
+        <li>(3, 1.5)</li>
+        <li>(12.9999, 1.5)</li>
+        <li>(13, 3.5)</li>
+        <li>(17.9999, 3.5)</li>
         <li>(18, 1)</li>
       </points>
     </biologicalAgeTickFactorFromAgeCurve>
