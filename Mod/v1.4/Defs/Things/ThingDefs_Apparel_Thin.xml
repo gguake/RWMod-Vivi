@@ -225,6 +225,10 @@
         <li>Middle</li>
         <li>Shell</li>
       </layers>
+
+      <nullifyingThoughts>
+        <li>SoakingWet</li>
+      </nullifyingThoughts>
     </apparel>
     
     <recipeMaker>

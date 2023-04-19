@@ -8,5 +8,7 @@ namespace VVRace
         public List<BodyTypeDef> bodyTypeWhitelist;
 
         public BodyTypeDef fixedBodyType;
+
+        public List<ThoughtDef> nullifyingThoughts;
     }
 }
