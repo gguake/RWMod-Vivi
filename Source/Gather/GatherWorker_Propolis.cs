@@ -12,7 +12,7 @@ namespace VVRace
         public override string JobFailReasonIfNoHarvestable => LocalizeTexts.JobFailReasonNoHarvestablePlants.Translate();
 
         public override bool CanDoBill(Pawn pawn, Bill bill)
-            => pawn.HasViviGene();
+            => pawn.GetStatValue(bill.recipe.workSpeedStat) > 0f && pawn.GetStatValue(bill.recipe.efficiencyStat) > 0f;
 
         public override IEnumerable<Thing> FindAllGatherableTargetInRegion(Pawn pawn, Region region, Thing billGiver, Bill bill)
         {

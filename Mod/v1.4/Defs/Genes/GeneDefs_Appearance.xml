@@ -26,6 +26,8 @@
       <li>VV_Vivi_C</li>
       <li>VV_Vivi_D</li>
     </forcedHeadTypes>
+
+    <prerequisite>VV_BodyGene</prerequisite>
     
     <hairTagFilter>
       <whitelist>true</whitelist>

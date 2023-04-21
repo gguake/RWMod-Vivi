@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
   <VV_Straw.label>빨대</VV_Straw.label>
-  <VV_Straw.description>비비들이 꿀을 더 효율적으로 채집하기 위해 사용하는 커다란 빨대입니다. 비비가 아닌 인간들에게는 그저 장난감입니다.</VV_Straw.description>
+  <VV_Straw.description>비비들이 꿀을 더 효율적으로 채집하기 위해 사용하는 커다란 빨대입니다. 비비가 아닌 인간들이 꿀을 채집하기 위해 사용할수도 있습니다.</VV_Straw.description>
 
   <VV_MultiuseBrush.label>다용도 붓</VV_MultiuseBrush.label>
   <VV_MultiuseBrush.description>꽃가루를 수집하거나 청소할때 사용할수 있는 빗자루처럼 쓸수도 있는 커다란 붓입니다. 적을 때릴수도 있습니다.</VV_MultiuseBrush.description>

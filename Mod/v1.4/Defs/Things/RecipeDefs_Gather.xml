@@ -16,7 +16,8 @@
     <uiIconThing>VV_RawHoney</uiIconThing>
 
     <recipeUsers>
-      <li>VV_HarvestBarrel</li>
+      <li>VV_GatheringSpot</li>
+      <li>VV_GatheringBarrel</li>
     </recipeUsers>
     <allowMixingIngredients>true</allowMixingIngredients>
     <targetCountAdjustment>15</targetCountAdjustment>
@@ -46,7 +47,8 @@
     <uiIconThing>VV_Pollen</uiIconThing>
 
     <recipeUsers>
-      <li>VV_HarvestBarrel</li>
+      <li>VV_GatheringSpot</li>
+      <li>VV_GatheringBarrel</li>
     </recipeUsers>
     <allowMixingIngredients>true</allowMixingIngredients>
     <targetCountAdjustment>1</targetCountAdjustment>
@@ -84,14 +86,15 @@
     <workAmount>4000</workAmount>
     <workSkill>Plants</workSkill>
     <workSpeedStat>VV_PlantGatherSpeed</workSpeedStat>
-    <efficiencyStat>PlantHarvestYield</efficiencyStat>
+    <efficiencyStat>VV_PlantGatherYield</efficiencyStat>
 
     <effectWorking>Clean</effectWorking>
     <soundWorking>Interact_CleanFilth</soundWorking>
     <uiIconThing>VV_Propolis</uiIconThing>
 
     <recipeUsers>
-      <li>VV_HarvestBarrel</li>
+      <li>VV_GatheringSpot</li>
+      <li>VV_GatheringBarrel</li>
     </recipeUsers>
     <allowMixingIngredients>true</allowMixingIngredients>
     <targetCountAdjustment>3</targetCountAdjustment>

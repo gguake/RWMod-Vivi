@@ -14,13 +14,14 @@
   </WorkGiverDef>
 
   <WorkGiverDef>
-    <defName>VV_DoBillsGatheringWithBarrel</defName>
+    <defName>VV_DoBillsGathering</defName>
     <label>gather</label>
     <giverClass>VVRace.WorkGiver_GatheringBill</giverClass>
     <workType>Growing</workType>
     <priorityInType>90</priorityInType>
     <fixedBillGiverDefs>
-      <li>VV_HarvestBarrel</li>
+      <li>VV_GatheringSpot</li>
+      <li>VV_GatheringBarrel</li>
     </fixedBillGiverDefs>
     <verb>gather</verb>
     <gerund>gathering</gerund>

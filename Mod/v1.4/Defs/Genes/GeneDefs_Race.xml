@@ -5,7 +5,6 @@
     <label>vivi gene</label>
     <description>Unique gene for vivi races.</description>
     <customEffectDescriptions>
-      <li>Can gather honey from growing plants.</li>
       <li>Can reproduce by laying eggs.</li>
       <li>Can form a mindlink with each other to enhance their work efficiency.</li>
     </customEffectDescriptions>
@@ -29,6 +28,8 @@
     <statFactors>
       <ConstructionSpeed>1.2</ConstructionSpeed>
       <PlantWorkSpeed>1.2</PlantWorkSpeed>
+      <VV_HoneyGatherSpeed>1.1</VV_HoneyGatherSpeed>
+      <VV_HoneyGatherYield>1.1</VV_HoneyGatherYield>
 
       <ButcheryFleshEfficiency>0.7</ButcheryFleshEfficiency>
       <MiningYield>0.7</MiningYield>
@@ -57,5 +58,27 @@
     </biologicalAgeTickFactorFromAgeCurve>
 
     <eggLayIntervalDays>30</eggLayIntervalDays>
+  </GeneDef>
+
+  <GeneDef>
+    <defName>VV_BotanicalForaging</defName>
+    <label>botanical foraging</label>
+    <description>.</description>
+
+    <iconPath>UI/Icons/Genes/Gene_Vivi</iconPath>
+    <iconColor>(0.75, 0.75, 0.75)</iconColor>
+    <randomChosen>false</randomChosen>
+
+    <displayCategory>VV_Race</displayCategory>
+    <displayOrderInCategory>0</displayOrderInCategory>
+    <biostatCpx>2</biostatCpx>
+    <biostatMet>-2</biostatMet>
+
+    <statOffsets>
+      <VV_HoneyGatherSpeed>1.0</VV_HoneyGatherSpeed>
+      <VV_HoneyGatherYield>1.0</VV_HoneyGatherYield>
+      <VV_PlantGatherSpeed>1.0</VV_PlantGatherSpeed>
+      <VV_PlantGatherYield>1.0</VV_PlantGatherYield>
+    </statOffsets>
   </GeneDef>
 </Defs>
