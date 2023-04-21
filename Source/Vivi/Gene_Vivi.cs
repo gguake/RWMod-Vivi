@@ -176,7 +176,7 @@ namespace VVRace
 
                 if (originalHairColor == null)
                 {
-                    originalHairColor = pawn.story.HairColor;
+                    originalHairColor = new Color(pawn.story.HairColor.r, pawn.story.HairColor.g, pawn.story.HairColor.b, 1.0f);
                     pawn.story.HairColor = Color.white;
                     pawn.Drawer.renderer.graphics.SetAllGraphicsDirty();
                 }
@@ -273,7 +273,7 @@ namespace VVRace
         {
             if (originalHairColor == null)
             {
-                originalHairColor = pawn.story.HairColor;
+                originalHairColor = new Color(pawn.story.HairColor.r, pawn.story.HairColor.g, pawn.story.HairColor.b, 1.0f);
                 pawn.story.HairColor = Color.white;
                 pawn.Drawer.renderer.graphics.SetAllGraphicsDirty();
             }
