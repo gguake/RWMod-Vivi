@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <ThingDef Abstract="True" Name="VV_HatMakeableBase" ParentName="HatMakeableBase">
+    <smeltable>false</smeltable>
+    <thingCategories>
+      <li>VV_ViviApparel</li>
+    </thingCategories>
+
+    <apparel>
+      <countsAsClothingForNudity>false</countsAsClothingForNudity>
+      <tags>
+        <li>VV_ViviApparel</li>
+      </tags>
+      <canBeDesiredForIdeo>false</canBeDesiredForIdeo>
+      <developmentalStageFilter>Child, Adult</developmentalStageFilter>
+    </apparel>
+
+    <tradeTags Inherit="False">
+      <li>VV_ViviApparel</li>
+    </tradeTags>
+    
+    <colorGenerator Class="ColorGenerator_White" />
+  </ThingDef>
+
+  <ThingDef ParentName="VV_HatMakeableBase">
+    <defName>VV_UniformHat</defName>
+    <label>vivi uniform hat</label>
+    <description>.</description>
+    <graphicData>
+      <texPath>Things/Apparel/VV_Hat</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(0.9,0.9)</drawSize>
+    </graphicData>
+    
+    <statBases>
+      <MaxHitPoints>80</MaxHitPoints>
+      <WorkToMake>1800</WorkToMake>
+      <Mass>0.14</Mass>
+      <StuffEffectMultiplierArmor>0.2</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>0.10</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.50</StuffEffectMultiplierInsulation_Heat>
+      <EquipDelay>0.8</EquipDelay>
+    </statBases>
+    <equippedStatOffsets>
+      <SocialImpact>0.10</SocialImpact>
+      <SlaveSuppressionOffset MayRequire="Ludeon.RimWorld.Ideology">-0.05</SlaveSuppressionOffset>
+    </equippedStatOffsets>
+
+    <costStuffCount>25</costStuffCount>
+    <stuffCategories>
+      <li>Fabric</li>
+      <li>Leathery</li>
+    </stuffCategories>
+
+    <apparel>
+      <useWornGraphicMask>true</useWornGraphicMask>
+      <wornGraphicPath>Things/Apparel/VV_Hat</wornGraphicPath>
+      <bodyPartGroups>
+        <li>UpperHead</li>
+      </bodyPartGroups>
+      <layers>
+        <li>Overhead</li>
+      </layers>
+    </apparel>
+
+    <recipeMaker>
+      <researchPrerequisite>ComplexClothing</researchPrerequisite>
+      <displayPriority>100</displayPriority>
+    </recipeMaker>
+  </ThingDef>
+
+
+</Defs>
