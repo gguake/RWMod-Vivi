@@ -70,13 +70,13 @@
         <overrideGraphicPath>Things/Pawn/Vivi/Body/Naked_Thin</overrideGraphicPath>
         
         <useUniqueHeadOffset>true</useUniqueHeadOffset>
-        <headOffset>(0, 0.28)</headOffset>
+        <headOffset>(0, 0.285)</headOffset>
       </Thin>
       <Female>
         <overrideGraphicPath>Things/Pawn/Vivi/Body/Naked_Female</overrideGraphicPath>
         
         <useUniqueHeadOffset>true</useUniqueHeadOffset>
-        <headOffset>(0.01, 0.355)</headOffset>
+        <headOffset>(0.01, 0.35)</headOffset>
       </Female>
     </bodyTypeOverrides>
     
