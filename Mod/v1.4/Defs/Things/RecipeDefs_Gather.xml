@@ -20,10 +20,10 @@
       <li>VV_GatheringBarrel</li>
     </recipeUsers>
     <allowMixingIngredients>true</allowMixingIngredients>
-    <targetCountAdjustment>15</targetCountAdjustment>
+    <targetCountAdjustment>10</targetCountAdjustment>
 
     <products>
-      <VV_RawHoney>15</VV_RawHoney>
+      <VV_RawHoney>10</VV_RawHoney>
     </products>
     <researchPrerequisite>VV_BasicGathering</researchPrerequisite>
 

@@ -123,6 +123,7 @@
     <graphicData>
       <texPath>Things/Apparel/VV_Crown</texPath>
       <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
       <drawSize>(0.9,0.9)</drawSize>
     </graphicData>
     
@@ -147,6 +148,7 @@
     </stuffCategories>
 
     <apparel>
+      <useWornGraphicMask>true</useWornGraphicMask>
       <wornGraphicPath>Things/Apparel/VV_Crown</wornGraphicPath>
       <bodyPartGroups>
         <li>UpperHead</li>

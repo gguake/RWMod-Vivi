@@ -25,7 +25,6 @@
     </stages>
   </HediffDef>
 
-
   <VVRace.HediffDef_Specialization Abstract="True" Name="VV_SpecializationWithLevelBase" ParentName="VV_SpecializationBase">
     <defaultLabelColor>(0, 0.9, 0.9)</defaultLabelColor>
     <maxSeverity>4</maxSeverity>

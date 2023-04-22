@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
   <VV_ViviGene.label>비비</VV_ViviGene.label>
-  <VV_ViviGene.description>이 유전자는 벌과 유사한 행태를 갖는 비비 종족의 고유한 생체적 특성을 갖게 합니다.</VV_ViviGene.description>
-  <VV_ViviGene.customEffectDescriptions.0>성장중인 식물에서 꿀을 채집할 수 있습니다.</VV_ViviGene.customEffectDescriptions.0>
-  <VV_ViviGene.customEffectDescriptions.1>스스로 알을 낳아 번식하며 변형인자를 유전할 수 있습니다.</VV_ViviGene.customEffectDescriptions.1>
-  <VV_ViviGene.customEffectDescriptions.2>비비들끼리 서로 정신 결속을 형성해 작업 능력을 향상할 수 있습니다.</VV_ViviGene.customEffectDescriptions.2>
+  <VV_ViviGene.description>이 유전자는 비비 종족의 고유한 생체적 특성을 갖게 합니다.</VV_ViviGene.description>
+  <VV_ViviGene.customEffectDescriptions.0>스스로 알을 낳아 번식하며 자신이 보유한 변형인자를 유전할 수 있습니다.</VV_ViviGene.customEffectDescriptions.0>
+  <VV_ViviGene.customEffectDescriptions.1>서로 정신 결속을 형성해 작업 능력을 향상할 수 있습니다.</VV_ViviGene.customEffectDescriptions.1>
 
   <VV_BotanicalForaging.label>식물성 자원 채집</VV_BotanicalForaging.label>
   <VV_BotanicalForaging.description>이 유전자는 꽃이나 과일에서 꿀을 채집하거나 식물을 손상시키지 않고 얻을수 있는 각종 자원을 별다른 도구없이 채집할수 있게 합니다.</VV_BotanicalForaging.description>
