@@ -13,13 +13,18 @@
   <VV_WaterproofCoat.label>비비 방수 코트</VV_WaterproofCoat.label>
   <VV_WaterproofCoat.description>.</VV_WaterproofCoat.description>
 
+  <!-- Royal Vivi -->
+  <VV_BasicRoyalCostume.label>로열 비비 드레스</VV_BasicRoyalCostume.label>
+  <VV_BasicRoyalCostume.description>.</VV_BasicRoyalCostume.description>
+
+  <!-- Head -->
   <VV_UniformHat.label>비비 제복 모자</VV_UniformHat.label>
   <VV_UniformHat.description>.</VV_UniformHat.description>
 
   <VV_UniformHelmet.label>비비 제복 헬멧</VV_UniformHelmet.label>
   <VV_UniformHelmet.description>.</VV_UniformHelmet.description>
 
-  <!-- Royal Vivi -->
-  <VV_BasicRoyalCostume.label>로열 비비 드레스</VV_BasicRoyalCostume.label>
-  <VV_BasicRoyalCostume.description>.</VV_BasicRoyalCostume.description>
+  <VV_Crown.label>비비 왕관</VV_Crown.label>
+  <VV_Crown.description>.</VV_Crown.description>
+
 </LanguageData>
