@@ -16,13 +16,21 @@
     <stages>
       <li>
         <statOffsets>
-          <VV_MindLinkBandwidth>8</VV_MindLinkBandwidth>
+          <VV_MindLinkBandwidth>6</VV_MindLinkBandwidth>
+          
+          <SocialImpact>0.25</SocialImpact>
+          <NegotiationAbility>0.25</NegotiationAbility>
+          <TradePriceImprovement>0.25</TradePriceImprovement>
         </statOffsets>
       </li>
       <li>
         <minSeverity>0.999</minSeverity>
         <statOffsets>
-          <VV_MindLinkBandwidth>8</VV_MindLinkBandwidth>
+          <VV_MindLinkBandwidth>6</VV_MindLinkBandwidth>
+          
+          <SocialImpact>0.3</SocialImpact>
+          <NegotiationAbility>0.3</NegotiationAbility>
+          <TradePriceImprovement>0.3</TradePriceImprovement>
           
           <ResearchSpeed>0.1</ResearchSpeed>
           <MedicalOperationSpeed>0.1</MedicalOperationSpeed>
@@ -33,7 +41,11 @@
       <li>
         <minSeverity>1.999</minSeverity>
         <statOffsets>
-          <VV_MindLinkBandwidth>8</VV_MindLinkBandwidth>
+          <VV_MindLinkBandwidth>6</VV_MindLinkBandwidth>
+          
+          <SocialImpact>0.35</SocialImpact>
+          <NegotiationAbility>0.35</NegotiationAbility>
+          <TradePriceImprovement>0.35</TradePriceImprovement>
           
           <ResearchSpeed>0.2</ResearchSpeed>
           <MedicalOperationSpeed>0.2</MedicalOperationSpeed>
@@ -44,7 +56,11 @@
       <li>
         <minSeverity>3.999</minSeverity>
         <statOffsets>
-          <VV_MindLinkBandwidth>8</VV_MindLinkBandwidth>
+          <VV_MindLinkBandwidth>6</VV_MindLinkBandwidth>
+          
+          <SocialImpact>0.4</SocialImpact>
+          <NegotiationAbility>0.4</NegotiationAbility>
+          <TradePriceImprovement>0.4</TradePriceImprovement>
           
           <ResearchSpeed>0.3</ResearchSpeed>
           <MedicalOperationSpeed>0.3</MedicalOperationSpeed>
@@ -55,7 +71,11 @@
       <li>
         <minSeverity>7.999</minSeverity>
         <statOffsets>
-          <VV_MindLinkBandwidth>8</VV_MindLinkBandwidth>
+          <VV_MindLinkBandwidth>6</VV_MindLinkBandwidth>
+          
+          <SocialImpact>0.45</SocialImpact>
+          <NegotiationAbility>0.45</NegotiationAbility>
+          <TradePriceImprovement>0.45</TradePriceImprovement>
           
           <ResearchSpeed>0.4</ResearchSpeed>
           <MedicalOperationSpeed>0.4</MedicalOperationSpeed>
@@ -66,7 +86,11 @@
       <li>
         <minSeverity>15.999</minSeverity>
         <statOffsets>
-          <VV_MindLinkBandwidth>8</VV_MindLinkBandwidth>
+          <VV_MindLinkBandwidth>6</VV_MindLinkBandwidth>
+          
+          <SocialImpact>0.5</SocialImpact>
+          <NegotiationAbility>0.5</NegotiationAbility>
+          <TradePriceImprovement>0.5</TradePriceImprovement>
           
           <ResearchSpeed>0.5</ResearchSpeed>
           <MedicalOperationSpeed>0.5</MedicalOperationSpeed>
