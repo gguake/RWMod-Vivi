@@ -12,7 +12,6 @@
         <li>VV_ViviApparel</li>
       </tags>
       <canBeDesiredForIdeo>false</canBeDesiredForIdeo>
-      <developmentalStageFilter>Child, Adult</developmentalStageFilter>
     </apparel>
 
     <tradeTags Inherit="False">
@@ -43,9 +42,9 @@
       <EquipDelay>1.5</EquipDelay>
     </statBases>
     <equippedStatOffsets>
-      <PainShockThreshold>0.07</PainShockThreshold>
-      <MentalBreakThreshold>-0.06</MentalBreakThreshold>
-      <ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">0.25</ToxicEnvironmentResistance>
+      <PainShockThreshold>0.05</PainShockThreshold>
+      <MentalBreakThreshold>-0.05</MentalBreakThreshold>
+      <ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">0.2</ToxicEnvironmentResistance>
     </equippedStatOffsets>
 
     <costStuffCount>50</costStuffCount>
@@ -124,7 +123,6 @@
     <graphicData>
       <texPath>Things/Apparel/VV_Crown</texPath>
       <graphicClass>Graphic_Single</graphicClass>
-      <shaderType>CutoutComplex</shaderType>
       <drawSize>(0.9,0.9)</drawSize>
     </graphicData>
     
@@ -138,9 +136,9 @@
       <EquipDelay>1.5</EquipDelay>
     </statBases>
     <equippedStatOffsets>
-      <SocialImpact>0.2</SocialImpact>
-      <NegotiationAbility>0.2</NegotiationAbility>
-      <TradePriceImprovement>0.2</TradePriceImprovement>
+      <SocialImpact>0.25</SocialImpact>
+      <NegotiationAbility>0.25</NegotiationAbility>
+      <TradePriceImprovement>0.25</TradePriceImprovement>
     </equippedStatOffsets>
 
     <costStuffCount>40</costStuffCount>
@@ -149,7 +147,6 @@
     </stuffCategories>
 
     <apparel>
-      <useWornGraphicMask>true</useWornGraphicMask>
       <wornGraphicPath>Things/Apparel/VV_Crown</wornGraphicPath>
       <bodyPartGroups>
         <li>UpperHead</li>
@@ -164,5 +161,4 @@
       <displayPriority>3401</displayPriority>
     </recipeMaker>
   </ThingDef>
-
 </Defs>

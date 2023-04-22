@@ -43,7 +43,7 @@
       <StuffEffectMultiplierArmor>0.2</StuffEffectMultiplierArmor>
       <StuffEffectMultiplierInsulation_Cold>0.6</StuffEffectMultiplierInsulation_Cold>
       <StuffEffectMultiplierInsulation_Heat>1.2</StuffEffectMultiplierInsulation_Heat>
-      <EquipDelay>1.5</EquipDelay>
+      <EquipDelay>2.5</EquipDelay>
       
       <ArmorRating_Blunt>0.04</ArmorRating_Blunt>
     </statBases>
@@ -98,10 +98,12 @@
       <StuffEffectMultiplierArmor>0.3</StuffEffectMultiplierArmor>
       <StuffEffectMultiplierInsulation_Cold>0.3</StuffEffectMultiplierInsulation_Cold>
       <StuffEffectMultiplierInsulation_Heat>0.3</StuffEffectMultiplierInsulation_Heat>
-      <EquipDelay>2.0</EquipDelay>
+      <EquipDelay>2.5</EquipDelay>
     </statBases>
     <equippedStatOffsets>
-      <MentalBreakThreshold>-0.06</MentalBreakThreshold>
+      <PainShockThreshold>0.05</PainShockThreshold>
+      <MentalBreakThreshold>-0.05</MentalBreakThreshold>
+      <ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">0.1</ToxicEnvironmentResistance>
     </equippedStatOffsets>
 
     <costStuffCount>90</costStuffCount>
@@ -149,9 +151,9 @@
       <StuffEffectMultiplierArmor>0.2</StuffEffectMultiplierArmor>
       <StuffEffectMultiplierInsulation_Cold>2</StuffEffectMultiplierInsulation_Cold>
       <StuffEffectMultiplierInsulation_Heat>0</StuffEffectMultiplierInsulation_Heat>
-      <EquipDelay>1.0</EquipDelay>
+      <EquipDelay>1.5</EquipDelay>
       
-      <Insulation_Heat>-8</Insulation_Heat>
+      <Insulation_Heat>-6</Insulation_Heat>
     </statBases>
     
     <costStuffCount>80</costStuffCount>
@@ -183,7 +185,7 @@
   
   <ThingDef ParentName="VV_ThinApparelBase">
     <defName>VV_WaterproofCoat</defName>
-    <label>vivi coat</label>
+    <label>vivi waterproof coat</label>
     <description>.</description>
     <graphicData>
       <texPath>Things/Apparel/Coat</texPath>
@@ -198,12 +200,14 @@
       <StuffEffectMultiplierArmor>0.35</StuffEffectMultiplierArmor>
       <StuffEffectMultiplierInsulation_Cold>0.22</StuffEffectMultiplierInsulation_Cold>
       <StuffEffectMultiplierInsulation_Heat>0.5</StuffEffectMultiplierInsulation_Heat>
-      <EquipDelay>1.0</EquipDelay>
+      <EquipDelay>1.5</EquipDelay>
       
-
       <ArmorRating_Sharp>0.06</ArmorRating_Sharp>
       <ArmorRating_Blunt>0.06</ArmorRating_Blunt>
     </statBases>
+    <equippedStatOffsets>
+      <ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">0.1</ToxicEnvironmentResistance>
+    </equippedStatOffsets>
     
     <costStuffCount>80</costStuffCount>
     <stuffCategories>

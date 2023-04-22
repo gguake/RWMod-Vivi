@@ -16,21 +16,21 @@
     <stages>
       <li>
         <statOffsets>
-          <VV_MindLinkBandwidth>6</VV_MindLinkBandwidth>
+          <VV_MindLinkBandwidth>4</VV_MindLinkBandwidth>
           
-          <SocialImpact>0.25</SocialImpact>
-          <NegotiationAbility>0.25</NegotiationAbility>
-          <TradePriceImprovement>0.25</TradePriceImprovement>
+          <SocialImpact>0.1</SocialImpact>
+          <NegotiationAbility>0.1</NegotiationAbility>
+          <TradePriceImprovement>0.1</TradePriceImprovement>
         </statOffsets>
       </li>
       <li>
         <minSeverity>0.999</minSeverity>
         <statOffsets>
-          <VV_MindLinkBandwidth>6</VV_MindLinkBandwidth>
+          <VV_MindLinkBandwidth>4</VV_MindLinkBandwidth>
           
-          <SocialImpact>0.3</SocialImpact>
-          <NegotiationAbility>0.3</NegotiationAbility>
-          <TradePriceImprovement>0.3</TradePriceImprovement>
+          <SocialImpact>0.15</SocialImpact>
+          <NegotiationAbility>0.15</NegotiationAbility>
+          <TradePriceImprovement>0.15</TradePriceImprovement>
           
           <ResearchSpeed>0.1</ResearchSpeed>
           <MedicalOperationSpeed>0.1</MedicalOperationSpeed>
@@ -41,11 +41,11 @@
       <li>
         <minSeverity>1.999</minSeverity>
         <statOffsets>
-          <VV_MindLinkBandwidth>6</VV_MindLinkBandwidth>
+          <VV_MindLinkBandwidth>4</VV_MindLinkBandwidth>
           
-          <SocialImpact>0.35</SocialImpact>
-          <NegotiationAbility>0.35</NegotiationAbility>
-          <TradePriceImprovement>0.35</TradePriceImprovement>
+          <SocialImpact>0.2</SocialImpact>
+          <NegotiationAbility>0.2</NegotiationAbility>
+          <TradePriceImprovement>0.2</TradePriceImprovement>
           
           <ResearchSpeed>0.2</ResearchSpeed>
           <MedicalOperationSpeed>0.2</MedicalOperationSpeed>
@@ -56,11 +56,11 @@
       <li>
         <minSeverity>3.999</minSeverity>
         <statOffsets>
-          <VV_MindLinkBandwidth>6</VV_MindLinkBandwidth>
+          <VV_MindLinkBandwidth>4</VV_MindLinkBandwidth>
           
-          <SocialImpact>0.4</SocialImpact>
-          <NegotiationAbility>0.4</NegotiationAbility>
-          <TradePriceImprovement>0.4</TradePriceImprovement>
+          <SocialImpact>0.25</SocialImpact>
+          <NegotiationAbility>0.25</NegotiationAbility>
+          <TradePriceImprovement>0.25</TradePriceImprovement>
           
           <ResearchSpeed>0.3</ResearchSpeed>
           <MedicalOperationSpeed>0.3</MedicalOperationSpeed>
@@ -71,11 +71,11 @@
       <li>
         <minSeverity>7.999</minSeverity>
         <statOffsets>
-          <VV_MindLinkBandwidth>6</VV_MindLinkBandwidth>
+          <VV_MindLinkBandwidth>4</VV_MindLinkBandwidth>
           
-          <SocialImpact>0.45</SocialImpact>
-          <NegotiationAbility>0.45</NegotiationAbility>
-          <TradePriceImprovement>0.45</TradePriceImprovement>
+          <SocialImpact>0.3</SocialImpact>
+          <NegotiationAbility>0.3</NegotiationAbility>
+          <TradePriceImprovement>0.3</TradePriceImprovement>
           
           <ResearchSpeed>0.4</ResearchSpeed>
           <MedicalOperationSpeed>0.4</MedicalOperationSpeed>
@@ -84,13 +84,13 @@
         </statOffsets>
       </li>
       <li>
-        <minSeverity>15.999</minSeverity>
+        <minSeverity>11.999</minSeverity>
         <statOffsets>
-          <VV_MindLinkBandwidth>6</VV_MindLinkBandwidth>
+          <VV_MindLinkBandwidth>4</VV_MindLinkBandwidth>
           
-          <SocialImpact>0.5</SocialImpact>
-          <NegotiationAbility>0.5</NegotiationAbility>
-          <TradePriceImprovement>0.5</TradePriceImprovement>
+          <SocialImpact>0.35</SocialImpact>
+          <NegotiationAbility>0.35</NegotiationAbility>
+          <TradePriceImprovement>0.35</TradePriceImprovement>
           
           <ResearchSpeed>0.5</ResearchSpeed>
           <MedicalOperationSpeed>0.5</MedicalOperationSpeed>
@@ -125,25 +125,25 @@
       <li>
         <minSeverity>0.3</minSeverity>
         <statOffsets>
-          <WorkSpeedGlobal>0.1</WorkSpeedGlobal>
+          <WorkSpeedGlobal>0.15</WorkSpeedGlobal>
         </statOffsets>
       </li>
       <li>
         <minSeverity>0.5</minSeverity>
         <statOffsets>
-          <WorkSpeedGlobal>0.15</WorkSpeedGlobal>
+          <WorkSpeedGlobal>0.25</WorkSpeedGlobal>
         </statOffsets>
       </li>
       <li>
         <minSeverity>0.7</minSeverity>
         <statOffsets>
-          <WorkSpeedGlobal>0.2</WorkSpeedGlobal>
+          <WorkSpeedGlobal>0.35</WorkSpeedGlobal>
         </statOffsets>
       </li>
       <li>
         <minSeverity>0.85</minSeverity>
         <statOffsets>
-          <WorkSpeedGlobal>0.25</WorkSpeedGlobal>
+          <WorkSpeedGlobal>0.45</WorkSpeedGlobal>
         </statOffsets>
       </li>
       <li>
@@ -159,7 +159,7 @@
           </li>
         </capMods>
         <statOffsets>
-          <WorkSpeedGlobal>0.3</WorkSpeedGlobal>
+          <WorkSpeedGlobal>0.5</WorkSpeedGlobal>
         </statOffsets>
       </li>
       <li>
@@ -175,7 +175,7 @@
           </li>
         </capMods>
         <statOffsets>
-          <WorkSpeedGlobal>0.325</WorkSpeedGlobal>
+          <WorkSpeedGlobal>0.525</WorkSpeedGlobal>
         </statOffsets>
       </li>
       <li>
@@ -183,15 +183,15 @@
         <capMods>
           <li>
             <capacity>Moving</capacity>
-            <offset>0.1</offset>
+            <offset>0.15</offset>
           </li>
           <li>
             <capacity>Manipulation</capacity>
-            <offset>0.1</offset>
+            <offset>0.15</offset>
           </li>
         </capMods>
         <statOffsets>
-          <WorkSpeedGlobal>0.35</WorkSpeedGlobal>
+          <WorkSpeedGlobal>0.55</WorkSpeedGlobal>
         </statOffsets>
       </li>
     </stages>
@@ -211,11 +211,11 @@
         <capMods>
           <li>
             <capacity>Moving</capacity>
-            <offset>-0.4</offset>
+            <offset>-0.5</offset>
           </li>
           <li>
             <capacity>Manipulation</capacity>
-            <offset>-0.4</offset>
+            <offset>-0.5</offset>
           </li>
         </capMods>
       </li>

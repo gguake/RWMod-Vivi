@@ -18,9 +18,6 @@
     
     <stages>
       <li>
-        <!--
-        <becomeVisible>false</becomeVisible>
-        -->
         <statOffsets>
           <GlobalLearningFactor>0.5</GlobalLearningFactor>
         </statOffsets>

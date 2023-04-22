@@ -23,6 +23,7 @@
     <defName>VV_MindLinkBandwidth</defName>
     <label>mindlink bandwidth</label>
     <description>.</description>
+    <maxValue>12</maxValue>
   </StatDef>
   
   <StatDef ParentName="ViviMindLinkStatBase">
