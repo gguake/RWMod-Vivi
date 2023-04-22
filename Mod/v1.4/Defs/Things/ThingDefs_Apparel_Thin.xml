@@ -101,7 +101,7 @@
       <EquipDelay>2.0</EquipDelay>
     </statBases>
     <equippedStatOffsets>
-      <MentalBreakThreshold>-0.1</MentalBreakThreshold>
+      <MentalBreakThreshold>-0.06</MentalBreakThreshold>
     </equippedStatOffsets>
 
     <costStuffCount>90</costStuffCount>
@@ -177,7 +177,7 @@
     
     <recipeMaker>
       <researchPrerequisite>VV_Apparels</researchPrerequisite>
-      <displayPriority>3201</displayPriority>
+      <displayPriority>3300</displayPriority>
     </recipeMaker>
   </ThingDef>
   
@@ -233,7 +233,7 @@
     
     <recipeMaker>
       <researchPrerequisite>VV_Apparels</researchPrerequisite>
-      <displayPriority>3202</displayPriority>
+      <displayPriority>3301</displayPriority>
     </recipeMaker>
   </ThingDef>
 </Defs>
