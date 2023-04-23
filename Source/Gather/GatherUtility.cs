@@ -1,7 +1,7 @@
 ﻿using RimWorld;
 using Verse;
 
-namespace VVRace.Honey
+namespace VVRace
 {
     public static class GatherUtility
     {

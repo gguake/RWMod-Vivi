@@ -34,6 +34,7 @@ namespace VVRace
         public static StatDef VV_PlantGatherCooldown;
         public static StatDef VV_PlantHoneyGatherYield;
         public static StatDef VV_TreeResinGatherYield;
+        public static StatDef VV_GrassFiberGatherYield;
     }
 
     [DefOf]
@@ -89,6 +90,7 @@ namespace VVRace
         public static JobDef VV_GatherHoney;
         public static JobDef VV_GatherPollen;
         public static JobDef VV_GatherPropolis;
+        public static JobDef VV_GatherGrassFiber;
     }
 
     [DefOf]

@@ -72,10 +72,22 @@
   </ResearchProjectDef>
   
   <ResearchProjectDef ParentName="ViviResearchProjectBase">
+    <defName>VV_Tools</defName>
+    <label>vivi gathering tools</label>
+    <description>.</description>
+    <baseCost>300</baseCost>
+    <researchViewX>2</researchViewX>
+    <researchViewY>0</researchViewY>
+    <prerequisites>
+      <li>VV_BasicGathering</li>
+    </prerequisites>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef ParentName="ViviResearchProjectBase">
     <defName>VV_AdvancedGathering</defName>
     <label>vivi advanced gathering</label>
     <description>.</description>
-    <baseCost>1200</baseCost>
+    <baseCost>900</baseCost>
     <researchViewX>2</researchViewX>
     <researchViewY>0.7</researchViewY>
     <prerequisites>
@@ -84,14 +96,28 @@
   </ResearchProjectDef>
   
   <ResearchProjectDef ParentName="ViviResearchProjectBase">
-    <defName>VV_Tools</defName>
-    <label>vivi gathering tools</label>
+    <defName>VV_Botany</defName>
+    <label>vivi botany</label>
     <description>.</description>
-    <baseCost>300</baseCost>
+    <baseCost>1800</baseCost>
     <researchViewX>2</researchViewX>
     <researchViewY>1.4</researchViewY>
     <prerequisites>
       <li>VV_BasicGathering</li>
+    </prerequisites>
+  </ResearchProjectDef>
+  
+  <ResearchProjectDef ParentName="ViviResearchProjectBase">
+    <defName>VV_Lifestrand</defName>
+    <label>lifestrand</label>
+    <description>.</description>
+    <baseCost>1800</baseCost>
+    <researchViewX>3</researchViewX>
+    <researchViewY>1.05</researchViewY>
+    <prerequisites>
+      <li>Devilstrand</li>
+      <li>VV_AdvancedGathering</li>
+      <li>VV_Botany</li>
     </prerequisites>
   </ResearchProjectDef>
 </Defs>

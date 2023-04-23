@@ -26,6 +26,7 @@
     <colorGenerator Class="ColorGenerator_White" />
   </ThingDef>
 
+  <!-- 비비 작업복 -->
   <ThingDef ParentName="VV_ThinApparelBase">
     <defName>VV_BasicWorkerCostume</defName>
     <label>vivi basic worker costume</label>
@@ -81,6 +82,7 @@
     </recipeMaker>
   </ThingDef>
 
+  <!-- 비비 제복 -->
   <ThingDef ParentName="VV_ThinApparelBase">
     <defName>VV_WorkerUniformDress</defName>
     <label>vivi worker uniform</label>
@@ -134,6 +136,7 @@
     </recipeMaker>
   </ThingDef>
   
+  <!-- 비비 겨울 망토 -->
   <ThingDef ParentName="VV_ThinApparelBase">
     <defName>VV_WinterCape</defName>
     <label>vivi winter cape</label>
@@ -183,6 +186,7 @@
     </recipeMaker>
   </ThingDef>
   
+  <!-- 비비 방수 코트 -->
   <ThingDef ParentName="VV_ThinApparelBase">
     <defName>VV_WaterproofCoat</defName>
     <label>vivi waterproof coat</label>

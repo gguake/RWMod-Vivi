@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
+  <!-- 꿀 채집 -->
   <RecipeDef Class="VVRace.RecipeDef_Gathering">
     <defName>VV_GatherHoney</defName>
     <label>gather honey</label>
@@ -31,6 +32,7 @@
     <maxPathDanger>Some</maxPathDanger>
   </RecipeDef>
   
+  <!-- 꽃가루 채집 -->
   <RecipeDef Class="VVRace.RecipeDef_Gathering">
     <defName>VV_GatherPollen</defName>
     <label>gather pollen</label>
@@ -77,6 +79,7 @@
     <maxPathDanger>Some</maxPathDanger>
   </RecipeDef>
   
+  <!-- 프로폴리스 채집 -->
   <RecipeDef Class="VVRace.RecipeDef_Gathering">
     <defName>VV_GatherPropolis</defName>
     <label>gather propolis</label>
@@ -107,4 +110,34 @@
     <maxPathDanger>Some</maxPathDanger>
   </RecipeDef>
   
+  <!-- 잔디 섬유 채집 -->
+  <RecipeDef Class="VVRace.RecipeDef_Gathering">
+    <defName>VV_GatherGrassFiber</defName>
+    <label>gather grass fiber</label>
+    <description>.</description>
+    <jobString>Gathering grass fiber.</jobString>
+    
+    <workAmount>1200</workAmount>
+    <workSkill>Plants</workSkill>
+    <workSpeedStat>VV_PlantGatherSpeed</workSpeedStat>
+    <efficiencyStat>VV_PlantGatherYield</efficiencyStat>
+
+    <effectWorking>Harvest_Plant</effectWorking>
+    <soundWorking>Harvest_Standard</soundWorking>
+    <uiIconThing>VV_GrassFiber</uiIconThing>
+
+    <recipeUsers>
+      <li>VV_GatheringSpot</li>
+      <li>VV_GatheringBarrel</li>
+    </recipeUsers>
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <targetCountAdjustment>5</targetCountAdjustment>
+    <products>
+      <VV_GrassFiber>5</VV_GrassFiber>
+    </products>
+    <researchPrerequisite>VV_AdvancedGathering</researchPrerequisite>
+
+    <gatherWorkerType>VVRace.GatherWorker_GrassFiber</gatherWorkerType>
+    <maxPathDanger>Some</maxPathDanger>
+  </RecipeDef>
 </Defs>

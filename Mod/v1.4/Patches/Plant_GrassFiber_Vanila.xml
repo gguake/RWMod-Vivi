@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+  <!-- Plant_Grass -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Plant_Grass"]/comps</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Plant_Grass"]</xpath>
+      <value><comps /></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Plant_Grass"]/comps</xpath>
+    <value>
+      <li Class="VVRace.CompProperties_Gatherable"><cooldownStat>VV_PlantGatherCooldown</cooldownStat></li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Plant_Grass"]/statBases</xpath>
+    <value>
+      <VV_MinGrowthPlantGatherable>0.7</VV_MinGrowthPlantGatherable>
+      <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
+      <VV_GrassFiberGatherYield>1</VV_GrassFiberGatherYield>
+    </value>
+  </Operation>
+  
+  <!-- Plant_TallGrass -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Plant_TallGrass"]/comps</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Plant_TallGrass"]</xpath>
+      <value><comps /></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Plant_TallGrass"]/comps</xpath>
+    <value>
+      <li Class="VVRace.CompProperties_Gatherable"><cooldownStat>VV_PlantGatherCooldown</cooldownStat></li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Plant_TallGrass"]/statBases</xpath>
+    <value>
+      <VV_MinGrowthPlantGatherable>0.7</VV_MinGrowthPlantGatherable>
+      <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
+      <VV_GrassFiberGatherYield>1</VV_GrassFiberGatherYield>
+    </value>
+  </Operation>
+  
+  <!-- Plant_Haygrass -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Plant_Haygrass"]/comps</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Plant_Haygrass"]</xpath>
+      <value><comps /></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Plant_Haygrass"]/comps</xpath>
+    <value>
+      <li Class="VVRace.CompProperties_Gatherable"><cooldownStat>VV_PlantGatherCooldown</cooldownStat></li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Plant_Haygrass"]/statBases</xpath>
+    <value>
+      <VV_MinGrowthPlantGatherable>0.99</VV_MinGrowthPlantGatherable>
+      <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
+      <VV_GrassFiberGatherYield>1</VV_GrassFiberGatherYield>
+    </value>
+  </Operation>
+  
+  <Operation Class="PatchOperationSequence">
+    <operations>
+      <li Class="PatchOperationSequence" MayRequire="Ludeon.RimWorld.Royalty">
+        <operations>
+          <!-- Plant_GrassAnima -->
+          <li Class="PatchOperationConditional">
+            <xpath>Defs/ThingDef[defName="Plant_GrassAnima"]/comps</xpath>
+            <nomatch Class="PatchOperationAdd">
+              <xpath>Defs/ThingDef[defName="Plant_GrassAnima"]</xpath>
+              <value><comps /></value>
+            </nomatch>
+          </li>
+          <li Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Plant_GrassAnima"]/comps</xpath>
+            <value>
+              <li Class="VVRace.CompProperties_Gatherable"><cooldownStat>VV_PlantGatherCooldown</cooldownStat></li>
+            </value>
+          </li>
+          <li Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Plant_GrassAnima"]/statBases</xpath>
+            <value>
+              <VV_MinGrowthPlantGatherable>0.7</VV_MinGrowthPlantGatherable>
+              <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
+              <VV_GrassFiberGatherYield>1</VV_GrassFiberGatherYield>
+            </value>
+          </li>
+        </operations>
+      </li>
+    </operations>
+  </Operation>
+
+  <Operation Class="PatchOperationSequence">
+    <operations>
+      <li Class="PatchOperationSequence" MayRequire="Ludeon.RimWorld.Biotech">
+        <operations>
+          <!-- Plant_GrayGrass -->
+          <li Class="PatchOperationConditional">
+            <xpath>Defs/ThingDef[defName="Plant_GrayGrass"]/comps</xpath>
+            <nomatch Class="PatchOperationAdd">
+              <xpath>Defs/ThingDef[defName="Plant_GrayGrass"]</xpath>
+              <value><comps /></value>
+            </nomatch>
+          </li>
+          <li Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Plant_GrayGrass"]/comps</xpath>
+            <value>
+              <li Class="VVRace.CompProperties_Gatherable"><cooldownStat>VV_PlantGatherCooldown</cooldownStat></li>
+            </value>
+          </li>
+          <li Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Plant_GrayGrass"]/statBases</xpath>
+            <value>
+              <VV_MinGrowthPlantGatherable>0.7</VV_MinGrowthPlantGatherable>
+              <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
+              <VV_GrassFiberGatherYield>1</VV_GrassFiberGatherYield>
+            </value>
+          </li>
+        </operations>
+      </li>
+    </operations>
+  </Operation>
+
+</Patch>

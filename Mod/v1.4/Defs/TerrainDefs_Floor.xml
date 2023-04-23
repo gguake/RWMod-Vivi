@@ -15,6 +15,7 @@
       <WorkToBuild>1600</WorkToBuild>
       <Beauty>1</Beauty>
       <CleaningTimeFactor>0.7</CleaningTimeFactor>
+      <FilthMultiplier>0.9</FilthMultiplier>
     </statBases>
 
     <constructEffect>ConstructWood</constructEffect>
@@ -46,8 +47,9 @@
   <statBases>
     <WorkToBuild>3000</WorkToBuild>
     <Beauty>1</Beauty>
-    <Cleanliness>0.75</Cleanliness>
-    <CleaningTimeFactor>0.5</CleaningTimeFactor>
+    <Cleanliness>0.7</Cleanliness>
+    <CleaningTimeFactor>0.6</CleaningTimeFactor>
+    <FilthMultiplier>0.9</FilthMultiplier>
   </statBases>
 
   <constructEffect>ConstructWood</constructEffect>

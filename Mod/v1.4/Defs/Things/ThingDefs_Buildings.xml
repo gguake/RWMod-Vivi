@@ -83,7 +83,7 @@
     <label>smoothed vivicream wall</label>
     <description>.</description>
     <graphicData>
-      <texPath>Things/Building/Linked/Wall/Wall_Atlas_Smooth</texPath>
+      <texPath>Things/Building/Wall_Atlas_HoneycombWall</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <color>(1.0, 0.9, 0.7, 1.0)</color>
     </graphicData>

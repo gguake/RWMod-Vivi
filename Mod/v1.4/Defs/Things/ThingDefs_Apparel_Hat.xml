@@ -21,6 +21,7 @@
     <colorGenerator Class="ColorGenerator_White" />
   </ThingDef>
 
+  <!-- 비비 제복 모자 -->
   <ThingDef ParentName="VV_HatMakeableBase">
     <defName>VV_UniformHat</defName>
     <label>vivi uniform hat</label>
@@ -70,6 +71,7 @@
     </recipeMaker>
   </ThingDef>
 
+  <!-- 비비 제복 헬멧 -->
   <ThingDef ParentName="VV_HatMakeableBase">
     <defName>VV_UniformHelmet</defName>
     <label>vivi uniform helmet</label>
@@ -94,6 +96,7 @@
       <MoveSpeed>-0.2</MoveSpeed>
     </equippedStatOffsets>
 
+    <smeltable>true</smeltable>
     <costStuffCount>65</costStuffCount>
     <stuffCategories>
       <li>Metallic</li>
@@ -116,6 +119,7 @@
     </recipeMaker>
   </ThingDef>
 
+  <!-- 비비 왕관 -->
   <ThingDef ParentName="VV_HatMakeableBase">
     <defName>VV_Crown</defName>
     <label>vivi crown</label>
@@ -142,6 +146,7 @@
       <TradePriceImprovement>0.25</TradePriceImprovement>
     </equippedStatOffsets>
 
+    <smeltable>true</smeltable>
     <costStuffCount>40</costStuffCount>
     <stuffCategories>
       <li>Metallic</li>

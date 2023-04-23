@@ -6,7 +6,7 @@ using Verse.AI;
 
 namespace VVRace
 {
-    public class GatherWorker_Propolis : GatherWorker
+    public class GatherWorker_GrassFiber : GatherWorker
     {
         public override string JobFailReasonIfNoHarvestable => LocalizeTexts.JobFailReasonNoHarvestablePlants.Translate();
 
@@ -19,8 +19,8 @@ namespace VVRace
 
             foreach (var thing in allPlants)
             {
-                // 수지 채집이 불가능한 경우
-                if (!thing.CanGatherable(VVStatDefOf.VV_TreeResinGatherYield, VVStatDefOf.VV_PlantGatherCooldown)) { continue; }
+                // 채집이 불가능한 경우
+                if (!thing.CanGatherable(VVStatDefOf.VV_GrassFiberGatherYield, VVStatDefOf.VV_PlantGatherCooldown)) { continue; }
 
                 // 상호작용이 불가능한 경우
                 if (!thing.Spawned || thing.IsForbidden(pawn) || thing.IsBurning()) { continue; }
@@ -50,7 +50,7 @@ namespace VVRace
             {
                 if (!pawn.CanReserveAndReach(target, PathEndMode.Touch, recipeGathering.maxPathDanger)) { continue; }
 
-                job = JobMaker.MakeJob(VVJobDefOf.VV_GatherPropolis, target, billGiver);
+                job = JobMaker.MakeJob(VVJobDefOf.VV_GatherGrassFiber, target, billGiver);
                 job.bill = bill;
                 job.haulMode = HaulMode.ToCellNonStorage;
 
@@ -63,8 +63,8 @@ namespace VVRace
 
         public override bool ShouldAddRecipeIngredient(ThingDef thingDef)
         {
-            return thingDef.StatBaseDefined(VVStatDefOf.VV_TreeResinGatherYield) &&
-                thingDef.GetStatValueAbstract(VVStatDefOf.VV_TreeResinGatherYield) > 0f;
+            return thingDef.StatBaseDefined(VVStatDefOf.VV_GrassFiberGatherYield) &&
+                thingDef.GetStatValueAbstract(VVStatDefOf.VV_GrassFiberGatherYield) > 0f;
         }
     }
 }

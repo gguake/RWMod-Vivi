@@ -6,7 +6,7 @@ using Verse.AI;
 
 namespace VVRace
 {
-    public class JobDriver_GatherHoney : JobDriver
+    public class JobDriver_GatherGrassFiber : JobDriver
     {
         protected const TargetIndex PlantTargetIndex = TargetIndex.A;
         protected const TargetIndex GathererBuildingTargetIndex = TargetIndex.B;
@@ -19,8 +19,8 @@ namespace VVRace
         protected Thing GathererBuilding => GathererBuildingTargetInfo.Thing;
 
         private int TotalWorkAmount => (int)job.bill.recipe.workAmount;
-        private int GatherWorkAmount => Mathf.CeilToInt(TotalWorkAmount * 0.85f);
-        private int ProcessWorkAmount => Mathf.CeilToInt(TotalWorkAmount * 0.15f);
+        private int GatherWorkAmount => Mathf.CeilToInt(TotalWorkAmount * 0.5f);
+        private int ProcessWorkAmount => Mathf.CeilToInt(TotalWorkAmount * 0.5f);
 
         private bool IsBillDisabled
         {
@@ -59,8 +59,8 @@ namespace VVRace
                 .FailOnBurningImmobile(PlantTargetIndex)
                 .FailOn(() => IsBillDisabled);
 
-            // 식물에서 꿀을 수확
-            var gatherWorkAmount = Mathf.CeilToInt(GatherWorkAmount / (job.RecipeDef.efficiencyStat != null ? pawn.GetStatValue(job.RecipeDef.efficiencyStat) : 1f));
+            // 식물에서 섬유를 수확
+            var gatherWorkAmount = Mathf.CeilToInt(TotalWorkAmount / (job.RecipeDef.efficiencyStat != null ? pawn.GetStatValue(job.RecipeDef.efficiencyStat) : 1f));
             yield return Toils_General.Wait(gatherWorkAmount, PlantTargetIndex)
                 .FailOnDespawnedNullOrForbidden(PlantTargetIndex)
                 .FailOnBurningImmobile(PlantTargetIndex)
@@ -69,11 +69,11 @@ namespace VVRace
                 {
                     job.bill.Notify_BillWorkStarted(pawn);
                 })
-                .WithFailCondition(() => !Plant.CanGatherable(VVStatDefOf.VV_PlantHoneyGatherYield, VVStatDefOf.VV_PlantGatherCooldown) || (Plant is Plant p && p.Blighted))
+                .WithFailCondition(() => !Plant.CanGatherable(VVStatDefOf.VV_GrassFiberGatherYield, VVStatDefOf.VV_PlantGatherCooldown))
                 .WithEffect(() => GetActor().CurJob.bill.recipe.effectWorking, TargetIndex.A)
                 .WithProgressBarToilDelay(PlantTargetIndex);
 
-            // 꽃가루 생성 및 쿨타임 설정
+            // 쿨타임 설정
             yield return new Toil()
                 .WithDefaultCompleteMode(ToilCompleteMode.Instant)
                 .WithInitAction(() =>
@@ -83,16 +83,6 @@ namespace VVRace
                     {
                         compGatherable.Gathered();
                     }
-
-                    if (pawn.filth != null && Rand.Bool)
-                    {
-                        pawn.filth.GainFilth(VVThingDefOf.VV_FilthPollen, Gen.YieldSingle(Plant.def.defName));
-                    }
-
-                    if (Rand.Bool)
-                    {
-                        FilthMaker.TryMakeFilth(pawn.Position, pawn.Map, VVThingDefOf.VV_FilthPollen, Plant.def.defName, 1);
-                    }
                 });
 
             // 작업대로 이동
@@ -101,7 +91,7 @@ namespace VVRace
                 .FailOnBurningImmobile(GathererBuildingTargetIndex)
                 .FailOn(() => IsBillDisabled);
 
-            // 작업대에서 꿀을 가공
+            // 작업대에서 결과물을 가공
             var processWorkAmount = Mathf.CeilToInt(ProcessWorkAmount / pawn.GetStatValue(StatDefOf.WorkSpeedGlobal));
             yield return Toils_General.Wait(processWorkAmount, GathererBuildingTargetIndex)
                 .FailOnDespawnedNullOrForbidden(GathererBuildingTargetIndex)
@@ -125,7 +115,7 @@ namespace VVRace
                 .FailOnCannotTouch(GathererBuildingTargetIndex, PathEndMode.InteractionCell)
                 .PlaySustainerOrSound(() => GetActor().CurJob.bill.recipe.soundWorking);
 
-            // 작업대에서 꿀을 저장
+            // 작업대에서 결과물을 저장
             yield return new Toil()
                 .WithDefaultCompleteMode(ToilCompleteMode.Instant)
                 .WithInitAction(() =>
@@ -153,7 +143,7 @@ namespace VVRace
                         }
                     }
 
-                    efficiency *= Plant.GetStatValue(VVStatDefOf.VV_PlantHoneyGatherYield);
+                    efficiency *= Plant.GetStatValue(VVStatDefOf.VV_GrassFiberGatherYield);
 
                     var allProducts = new List<Thing>();
                     foreach (var productThingDefCount in curJob.RecipeDef.products)
@@ -250,5 +240,6 @@ namespace VVRace
                     }
                 });
         }
+
     }
 }

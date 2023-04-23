@@ -6,6 +6,9 @@
 
         public const string ApparelBodyTypeWhitelisted = "VV_ApparelBodyTypeNotMatching";
 
+        public const string AlertViviDangerousEggs = "VV_AlertViviDangerousEggs";
+        public const string AlertViviDangerousEggsDesc = "VV_AlertViviDangerousEggsDesc";
+
         public const string GizmoViviBandwidthHeader = "VV_GizmoViviBandwidthHeader";
         public const string GizmoViviBandwidthTooltip = "VV_GizmoViviBandwidthTooltip";
         public const string GizmoViviEggProgressHeader = "VV_GizmoViviEggProgressHeader";

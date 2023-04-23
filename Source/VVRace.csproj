@@ -68,10 +68,13 @@
   <ItemGroup>
     <Compile Include="Egg\AI\JobDriver_HaulViviEgg.cs" />
     <Compile Include="Egg\AI\WorkGiver_HaulViviEgg.cs" />
+    <Compile Include="Egg\Alert_DangerViviEgg.cs" />
     <Compile Include="Egg\CompViviHatcher.cs" />
     <Compile Include="Egg\CompViviHatcheryEggDrawer.cs" />
     <Compile Include="Egg\ViviEgg.cs" />
     <Compile Include="Egg\ViviEggHatchery.cs" />
+    <Compile Include="Gather\GatherWorker_GrassFiber.cs" />
+    <Compile Include="Gather\JobDriver_GatherGrassFiber.cs" />
     <Compile Include="HarmonyPatches\Internals\InternalPatch.cs" />
     <Compile Include="HarmonyPatches\MindLinkPatch.cs" />
     <Compile Include="GeneDefExt.cs" />
