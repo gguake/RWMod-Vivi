@@ -182,6 +182,10 @@
       <VV_Lifestrand>20</VV_Lifestrand>
     </products>
     <researchPrerequisite>VV_Lifestrand</researchPrerequisite>
+
+    <skillRequirements>
+      <Crafting>8</Crafting>
+    </skillRequirements>
   </RecipeDef>
 
 </Defs>

@@ -38,7 +38,7 @@
     </graphicData>
 
     <statBases>
-      <MaxHitPoints>100</MaxHitPoints>
+      <MaxHitPoints>160</MaxHitPoints>
       <WorkToMake>2400</WorkToMake>
       <Mass>0.5</Mass>
       <StuffEffectMultiplierArmor>0.2</StuffEffectMultiplierArmor>
@@ -50,6 +50,7 @@
     </statBases>
     <equippedStatOffsets>
       <MoveSpeed>0.2</MoveSpeed>
+      <ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">0.1</ToxicEnvironmentResistance>
     </equippedStatOffsets>
 
     <costStuffCount>70</costStuffCount>
@@ -57,6 +58,9 @@
       <li>Fabric</li>
       <li>Leathery</li>
     </stuffCategories>
+    <costList>
+      <VV_Vivicream>10</VV_Vivicream>
+    </costList>
 
     <apparel Class="VVRace.ApparelPropertiesExt">
       <useWornGraphicMask>true</useWornGraphicMask>
@@ -94,7 +98,7 @@
     </graphicData>
 
     <statBases>
-      <MaxHitPoints>100</MaxHitPoints>
+      <MaxHitPoints>200</MaxHitPoints>
       <WorkToMake>9000</WorkToMake>
       <Mass>1.0</Mass>
       <StuffEffectMultiplierArmor>0.3</StuffEffectMultiplierArmor>
@@ -108,11 +112,14 @@
       <ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">0.1</ToxicEnvironmentResistance>
     </equippedStatOffsets>
 
-    <costStuffCount>90</costStuffCount>
+    <costStuffCount>85</costStuffCount>
     <stuffCategories>
       <li>Fabric</li>
       <li>Leathery</li>
     </stuffCategories>
+    <costList>
+      <VV_Vivicream>10</VV_Vivicream>
+    </costList>
 
     <apparel Class="VVRace.ApparelPropertiesExt">
       <useWornGraphicMask>true</useWornGraphicMask>
@@ -131,6 +138,9 @@
     </apparel>
     
     <recipeMaker>
+      <skillRequirements>
+        <Crafting>3</Crafting>
+      </skillRequirements>
       <researchPrerequisite>VV_Apparels</researchPrerequisite>
       <displayPriority>3102</displayPriority>
     </recipeMaker>
@@ -148,7 +158,7 @@
     </graphicData>
 
     <statBases>
-      <MaxHitPoints>100</MaxHitPoints>
+      <MaxHitPoints>180</MaxHitPoints>
       <WorkToMake>7200</WorkToMake>
       <Mass>1.0</Mass>
       <StuffEffectMultiplierArmor>0.2</StuffEffectMultiplierArmor>
@@ -159,11 +169,14 @@
       <Insulation_Heat>-6</Insulation_Heat>
     </statBases>
     
-    <costStuffCount>80</costStuffCount>
+    <costStuffCount>75</costStuffCount>
     <stuffCategories>
       <li>Fabric</li>
       <li>Leathery</li>
     </stuffCategories>
+    <costList>
+      <VV_Vivicream>15</VV_Vivicream>
+    </costList>
 
     <apparel Class="VVRace.ApparelPropertiesExt">
       <useWornGraphicMask>true</useWornGraphicMask>
@@ -176,11 +189,13 @@
       </bodyPartGroups>
       <layers>
         <li>Middle</li>
-        <li>Shell</li>
       </layers>
     </apparel>
     
     <recipeMaker>
+      <skillRequirements>
+        <Crafting>5</Crafting>
+      </skillRequirements>
       <researchPrerequisite>VV_Apparels</researchPrerequisite>
       <displayPriority>3300</displayPriority>
     </recipeMaker>
@@ -198,10 +213,10 @@
     </graphicData>
 
     <statBases>
-      <MaxHitPoints>100</MaxHitPoints>
+      <MaxHitPoints>200</MaxHitPoints>
       <WorkToMake>7200</WorkToMake>
       <Mass>1.0</Mass>
-      <StuffEffectMultiplierArmor>0.35</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierArmor>0.3</StuffEffectMultiplierArmor>
       <StuffEffectMultiplierInsulation_Cold>0.22</StuffEffectMultiplierInsulation_Cold>
       <StuffEffectMultiplierInsulation_Heat>0.5</StuffEffectMultiplierInsulation_Heat>
       <EquipDelay>1.5</EquipDelay>
@@ -213,11 +228,14 @@
       <ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">0.1</ToxicEnvironmentResistance>
     </equippedStatOffsets>
     
-    <costStuffCount>80</costStuffCount>
+    <costStuffCount>70</costStuffCount>
     <stuffCategories>
       <li>Fabric</li>
       <li>Leathery</li>
     </stuffCategories>
+    <costList>
+      <VV_Vivicream>20</VV_Vivicream>
+    </costList>
 
     <apparel Class="VVRace.ApparelPropertiesExt">
       <useWornGraphicMask>true</useWornGraphicMask>
@@ -231,7 +249,6 @@
       </bodyPartGroups>
       <layers>
         <li>Middle</li>
-        <li>Shell</li>
       </layers>
 
       <nullifyingThoughts>
@@ -240,6 +257,9 @@
     </apparel>
     
     <recipeMaker>
+      <skillRequirements>
+        <Crafting>5</Crafting>
+      </skillRequirements>
       <researchPrerequisite>VV_Apparels</researchPrerequisite>
       <displayPriority>3301</displayPriority>
     </recipeMaker>

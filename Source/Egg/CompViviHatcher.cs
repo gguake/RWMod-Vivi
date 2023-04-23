@@ -10,8 +10,7 @@ namespace VVRace
 {
     public class CompProperties_ViviHatcher : CompProperties
     {
-        public float hatcherDaystoHatch = 10f;
-
+        public SimpleCurve hatcherDaystoHatch;
         public SimpleCurve geneCountCurve;
         public List<GeneDef> randomSelectGenes = new List<GeneDef>();
 
@@ -50,15 +49,22 @@ namespace VVRace
             }
         }
 
+        public float hatchDays = 0f;
         public float hatchProgress = 0f;
         public Pawn hatcheeParent;
         public List<GeneDef> parentXenogenes;
         public int randomSeed = Rand.Int;
 
+        public override void PostPostMake()
+        {
+            hatchDays = Props.hatcherDaystoHatch.Evaluate(Rand.Range(0, 10000));
+        }
+
         public override void PostExposeData()
         {
             base.PostExposeData();
-            
+
+            Scribe_Values.Look(ref hatchDays, "hatchDays", 0f);
             Scribe_Values.Look(ref hatchProgress, "hatchProgress", 0f);
             Scribe_References.Look(ref hatcheeParent, "hatcheeParent");
             Scribe_Collections.Look(ref parentXenogenes, "xenogenes", LookMode.Def);
@@ -103,6 +109,7 @@ namespace VVRace
             var pieceComp = piece.TryGetComp<CompViviHatcher>();
             if (pieceComp != null)
             {
+                pieceComp.hatchDays = hatchDays;
                 pieceComp.hatchProgress = hatchProgress;
                 pieceComp.hatcheeParent = hatcheeParent;
                 pieceComp.parentXenogenes = parentXenogenes;
@@ -120,7 +127,7 @@ namespace VVRace
         {
             if (!CanHatch) { return; }
 
-            hatchProgress += 1f / (Props.hatcherDaystoHatch * 60000f) * ticks;
+            hatchProgress += 1f / (hatchDays * 60000f) * ticks;
 
             if (hatchProgress > 1f)
             {

@@ -102,6 +102,7 @@ namespace VVRace
         #endregion
 
         #region overrides
+
         public override void ExposeData()
         {
             base.ExposeData();
@@ -235,6 +236,8 @@ namespace VVRace
 
         private void UpdateSeverity()
         {
+            if (pawn.health.ShouldBeDead()) { return; }
+
             Severity = UsedBandwidth;
         }
 

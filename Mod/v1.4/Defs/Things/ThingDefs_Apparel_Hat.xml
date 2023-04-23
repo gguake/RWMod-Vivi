@@ -34,7 +34,7 @@
     </graphicData>
     
     <statBases>
-      <MaxHitPoints>80</MaxHitPoints>
+      <MaxHitPoints>180</MaxHitPoints>
       <WorkToMake>5400</WorkToMake>
       <Mass>1.4</Mass>
       <StuffEffectMultiplierArmor>0.3</StuffEffectMultiplierArmor>
@@ -53,6 +53,9 @@
       <li>Fabric</li>
       <li>Leathery</li>
     </stuffCategories>
+    <costList>
+      <VV_Vivicream>10</VV_Vivicream>
+    </costList>
 
     <apparel>
       <useWornGraphicMask>true</useWornGraphicMask>
@@ -72,7 +75,7 @@
   </ThingDef>
 
   <!-- 비비 제복 헬멧 -->
-  <ThingDef ParentName="VV_HatMakeableBase">
+  <ThingDef ParentName="ArmorSmithableBase">
     <defName>VV_UniformHelmet</defName>
     <label>vivi uniform helmet</label>
     <description>.</description>
@@ -82,9 +85,13 @@
       <shaderType>CutoutComplex</shaderType>
       <drawSize>(0.9,0.9)</drawSize>
     </graphicData>
+    <thingCategories Inherit="False">
+      <li>ArmorHeadgear</li>
+      <li>VV_ViviApparel</li>
+    </thingCategories>
     
     <statBases>
-      <MaxHitPoints>120</MaxHitPoints>
+      <MaxHitPoints>240</MaxHitPoints>
       <WorkToMake>9000</WorkToMake>
       <Mass>1.2</Mass>
       <StuffEffectMultiplierArmor>0.8</StuffEffectMultiplierArmor>
@@ -101,8 +108,12 @@
     <stuffCategories>
       <li>Metallic</li>
     </stuffCategories>
+    <costList>
+      <VV_Vivicream>10</VV_Vivicream>
+    </costList>
 
     <apparel>
+      <canBeDesiredForIdeo>false</canBeDesiredForIdeo>
       <useWornGraphicMask>true</useWornGraphicMask>
       <wornGraphicPath>Things/Apparel/VV_UniformHelmet</wornGraphicPath>
       <bodyPartGroups>
@@ -111,16 +122,29 @@
       <layers>
         <li>Overhead</li>
       </layers>
+      <countsAsClothingForNudity>false</countsAsClothingForNudity>
+      <tags>
+        <li>VV_ViviApparel</li>
+      </tags>
     </apparel>
 
     <recipeMaker>
       <researchPrerequisite>VV_Apparels</researchPrerequisite>
       <displayPriority>3401</displayPriority>
+      <skillRequirements>
+        <Crafting>4</Crafting>
+      </skillRequirements>
     </recipeMaker>
+    
+    <tradeTags Inherit="False">
+      <li>VV_ViviApparel</li>
+    </tradeTags>
+    
+    <colorGenerator Class="ColorGenerator_White" />
   </ThingDef>
 
   <!-- 비비 왕관 -->
-  <ThingDef ParentName="VV_HatMakeableBase">
+  <ThingDef ParentName="ArmorSmithableBase">
     <defName>VV_Crown</defName>
     <label>vivi crown</label>
     <description>.</description>
@@ -130,9 +154,13 @@
       <shaderType>CutoutComplex</shaderType>
       <drawSize>(0.9,0.9)</drawSize>
     </graphicData>
+    <thingCategories Inherit="False">
+      <li>Headgear</li>
+      <li>VV_ViviApparel</li>
+    </thingCategories>
     
     <statBases>
-      <MaxHitPoints>120</MaxHitPoints>
+      <MaxHitPoints>90</MaxHitPoints>
       <WorkToMake>6400</WorkToMake>
       <Mass>1.2</Mass>
       <StuffEffectMultiplierArmor>0.2</StuffEffectMultiplierArmor>
@@ -151,8 +179,12 @@
     <stuffCategories>
       <li>Metallic</li>
     </stuffCategories>
+    <costList>
+      <VV_Vivicream>10</VV_Vivicream>
+    </costList>
 
     <apparel>
+      <canBeDesiredForIdeo>false</canBeDesiredForIdeo>
       <useWornGraphicMask>true</useWornGraphicMask>
       <wornGraphicPath>Things/Apparel/VV_Crown</wornGraphicPath>
       <bodyPartGroups>
@@ -161,11 +193,25 @@
       <layers>
         <li>Overhead</li>
       </layers>
+      <countsAsClothingForNudity>false</countsAsClothingForNudity>
+      <tags>
+        <li>VV_ViviApparel</li>
+      </tags>
     </apparel>
 
     <recipeMaker>
       <researchPrerequisite>VV_Apparels</researchPrerequisite>
       <displayPriority>3401</displayPriority>
+      <skillRequirements>
+        <Crafting>7</Crafting>
+        <Artistic>3</Artistic>
+      </skillRequirements>
     </recipeMaker>
+    
+    <tradeTags Inherit="False">
+      <li>VV_ViviApparel</li>
+    </tradeTags>
+    
+    <colorGenerator Class="ColorGenerator_White" />
   </ThingDef>
 </Defs>

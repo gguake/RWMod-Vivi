@@ -32,6 +32,7 @@
       </li>
     </comps>
     
+    <tradeability>None</tradeability>
     <tradeTags>
       <li>VV_ViviResource</li>
     </tradeTags>

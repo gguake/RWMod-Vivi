@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
+  <VV_GuardianCoat.label>비비 수호자 코트</VV_GuardianCoat.label>
+  <VV_GuardianCoat.description>.</VV_GuardianCoat.description>
+
+  <VV_Childrenswear.label>비비 아동복</VV_Childrenswear.label>
+  <VV_Childrenswear.description>.</VV_Childrenswear.description>
+
   <!-- Vivi -->
   <VV_BasicWorkerCostume.label>비비 작업복</VV_BasicWorkerCostume.label>
   <VV_BasicWorkerCostume.description>.</VV_BasicWorkerCostume.description>

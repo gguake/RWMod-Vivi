@@ -20,7 +20,7 @@
       <MaxHitPoints>50</MaxHitPoints>
       <WorkToBuild>40</WorkToBuild>
       <Flammability>1.0</Flammability>
-      <Beauty>-1</Beauty>
+      <Beauty>-2</Beauty>
     </statBases>
     <building>
       <smoothedThing>VV_SmoothedViviCreamWall</smoothedThing>
@@ -164,8 +164,8 @@
     <uiIconPath>Things/Building/Linked/WallPlanks_MenuIcon</uiIconPath>
     <uiIconColor>(1.0, 0.8, 0.6, 1.0)</uiIconColor>
     <statBases>
-      <MaxHitPoints>500</MaxHitPoints>
-      <Flammability>0.7</Flammability>
+      <MaxHitPoints>480</MaxHitPoints>
+      <Flammability>0.6</Flammability>
     </statBases>
     <costList>
       <VV_Viviwax>1</VV_Viviwax>
@@ -234,15 +234,15 @@
     <statBases>
       <MaxHitPoints>150</MaxHitPoints>
       <Mass>8</Mass>
-      <WorkToBuild>1500</WorkToBuild>
+      <WorkToBuild>3800</WorkToBuild>
       <Flammability>1.0</Flammability>
       <Beauty>0.5</Beauty>
     </statBases>
     <size>(1,1)</size>
 
     <costList>
-      <VV_Viviwax>80</VV_Viviwax>
-      <VV_Vivicream>40</VV_Vivicream>
+      <VV_Viviwax>100</VV_Viviwax>
+      <VV_Vivicream>50</VV_Vivicream>
     </costList>
 
     <defaultPlacingRot>South</defaultPlacingRot>
@@ -362,7 +362,7 @@
     <pathCost>50</pathCost>
     <statBases>
       <Mass>20</Mass>
-      <WorkToBuild>1800</WorkToBuild>
+      <WorkToBuild>1500</WorkToBuild>
       <MaxHitPoints>150</MaxHitPoints>
       <Flammability>1.0</Flammability>
       <Cleanliness>-1</Cleanliness>

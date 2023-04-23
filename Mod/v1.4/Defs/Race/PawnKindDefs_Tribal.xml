@@ -3,7 +3,7 @@
   <PawnKindDef ParentName="ViviBase" Name="ViviNPCBase" Abstract="True">
     <defaultFactionType>VV_WildVivi</defaultFactionType>
     <invNutrition>2.55</invNutrition>
-    <invFoodDef>Pemmican</invFoodDef>
+    <invFoodDef>VV_FilteredHoney</invFoodDef>
     
     <apparelIgnorePollution MayRequire="Ludeon.RimWorld.Biotech">true</apparelIgnorePollution>
     <backstoryFiltersOverride>
@@ -39,7 +39,7 @@
   <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
     <defName>VV_ViviGuard</defName>
     <label>vivi guard</label>
-    <combatPower>100</combatPower>
+    <combatPower>110</combatPower>
     <isFighter>true</isFighter>
     <itemQuality>Normal</itemQuality>
 
@@ -48,9 +48,9 @@
     </requiredWorkTags>
 
     <gearHealthRange>0.7~3.2</gearHealthRange>
-    <apparelMoney>600~1200</apparelMoney>
+    <apparelMoney>600~1500</apparelMoney>
     <apparelTags>
-      <li>MedievalMilitary</li>
+      <li>VV_ViviCombatApparel</li>
     </apparelTags>
     <weaponMoney>1000~1500</weaponMoney>
     <weaponTags>
@@ -70,7 +70,7 @@
   <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
     <defName>VV_ViviArcher</defName>
     <label>vivi archer</label>
-    <combatPower>90</combatPower>
+    <combatPower>100</combatPower>
     <isFighter>true</isFighter>
     <itemQuality>Normal</itemQuality>
 
@@ -79,7 +79,7 @@
     </requiredWorkTags>
 
     <gearHealthRange>0.7~3.2</gearHealthRange>
-    <apparelMoney>400~800</apparelMoney>
+    <apparelMoney>400~1000</apparelMoney>
     <weaponMoney>1000~1500</weaponMoney>
     <weaponTags>
       <li>VV_ViviWeaponRange</li>
@@ -107,9 +107,9 @@
     </requiredWorkTags>
 
     <gearHealthRange>0.7~3.2</gearHealthRange>
-    <apparelMoney>600~1500</apparelMoney>
+    <apparelMoney>1000~2000</apparelMoney>
     <apparelTags>
-      <li>MedievalMilitary</li>
+      <li>VV_ViviCombatApparel</li>
     </apparelTags>
     <weaponMoney>1000~1500</weaponMoney>
     <weaponTags>
@@ -132,7 +132,7 @@
     <itemQuality>Normal</itemQuality>
 
     <gearHealthRange>0.7~3.2</gearHealthRange>
-    <apparelMoney>600~1500</apparelMoney>
+    <apparelMoney>600~1000</apparelMoney>
     <weaponMoney>1000~1500</weaponMoney>
     <weaponTags>
       <li>VV_ViviTool</li>
@@ -154,7 +154,7 @@
     <itemQuality>Normal</itemQuality>
 
     <gearHealthRange>0.7~2</gearHealthRange>
-    <apparelMoney>600~1500</apparelMoney>
+    <apparelMoney>600~1000</apparelMoney>
     <apparelTags>
       <li>BeltDefensePop</li>
     </apparelTags>

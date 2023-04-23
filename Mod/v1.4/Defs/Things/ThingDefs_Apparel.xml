@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 비비 수호자 코트 -->
+  <ThingDef ParentName="ApparelMakeableBase">
+    <defName>VV_GuardianCoat</defName>
+    <label>vivi guardian coat</label>
+    <description>.</description>
+    <graphicData>
+      <texPath>Things/Apparel/VV_GuardianCoat</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+    <thingCategories>
+      <li>VV_ViviApparel</li>
+    </thingCategories>
+
+    <statBases>
+      <MaxHitPoints>320</MaxHitPoints>
+      <WorkToMake>2400</WorkToMake>
+      <Mass>0.5</Mass>
+      <StuffEffectMultiplierArmor>0.1</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>0.7</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.7</StuffEffectMultiplierInsulation_Heat>
+      <EquipDelay>2.5</EquipDelay>
+      
+      <ArmorRating_Sharp>0.7</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.7</ArmorRating_Blunt>
+      <ArmorRating_Heat>1.5</ArmorRating_Heat>
+      <Insulation_Cold>12</Insulation_Cold>
+      <Insulation_Heat>12</Insulation_Heat>
+    </statBases>
+    <equippedStatOffsets>
+      <PainShockThreshold>0.1</PainShockThreshold>
+      <ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">0.5</ToxicEnvironmentResistance>
+    </equippedStatOffsets>
+
+    <smeltable>false</smeltable>
+    <costStuffCount>40</costStuffCount>
+    <stuffCategories>
+      <li>Leathery</li>
+    </stuffCategories>
+    <costList>
+      <VV_Lifestrand>120</VV_Lifestrand>
+    </costList>
+
+    <apparel Class="VVRace.ApparelPropertiesExt">
+      <useWornGraphicMask>true</useWornGraphicMask>
+      <wornGraphicPath>Things/Apparel/VV_GuardianCoat</wornGraphicPath>
+      <bodyPartGroups>
+        <li>Neck</li>
+        <li>Shoulders</li>
+        <li>Torso</li>
+        <li>Arms</li>
+        <li>Hands</li>
+        <li>Legs</li>
+      </bodyPartGroups>
+      <layers>
+        <li>Middle</li>
+        <li>Shell</li>
+      </layers>
+      <tags>
+        <li>VV_ViviCombatApparel</li>
+      </tags>
+      <bodyTypeWhitelist>
+        <li>Thin</li>
+        <li>Female</li>
+      </bodyTypeWhitelist>
+      <developmentalStageFilter>Adult</developmentalStageFilter>
+      <canBeDesiredForIdeo>false</canBeDesiredForIdeo>
+    </apparel>
+    
+    <recipeMaker>
+      <skillRequirements>
+        <Crafting>9</Crafting>
+      </skillRequirements>
+      <researchPrerequisites>
+        <li>VV_Apparels</li>
+        <li>VV_Lifestrand</li>
+      </researchPrerequisites>
+      <displayPriority>3500</displayPriority>
+    </recipeMaker>
+
+    <tradeTags Inherit="False">
+      <li>VV_ViviApparel</li>
+    </tradeTags>
+    
+    <colorGenerator Class="ColorGenerator_White" />
+  </ThingDef>
+
+  <!-- 비비 어린이 옷 -->
+  <ThingDef ParentName="ApparelMakeableBase">
+    <defName>VV_Childrenswear</defName>
+    <label>vivi childrenswear</label>
+    <description>.</description>
+    <graphicData>
+      <texPath>Things/Apparel/VV_ChildApparel</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+    <thingCategories>
+      <li>VV_ViviApparel</li>
+    </thingCategories>
+
+    <statBases>
+      <MaxHitPoints>150</MaxHitPoints>
+      <WorkToMake>1800</WorkToMake>
+      <Mass>0.5</Mass>
+      <StuffEffectMultiplierArmor>0.12</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>1.0</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>1.0</StuffEffectMultiplierInsulation_Heat>
+      <EquipDelay>2.0</EquipDelay>
+
+      <ArmorRating_Sharp>0.04</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.04</ArmorRating_Blunt>
+    </statBases>
+    <equippedStatOffsets>
+      <MoveSpeed>0.2</MoveSpeed>
+      <RestRateMultiplier>0.1</RestRateMultiplier>
+      <ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">0.25</ToxicEnvironmentResistance>
+    </equippedStatOffsets>
+
+    <smeltable>false</smeltable>
+    <costStuffCount>10</costStuffCount>
+    <stuffCategories>
+      <li>Fabric</li>
+      <li>Leathery</li>
+    </stuffCategories>
+    <costList>
+      <VV_Vivicream>30</VV_Vivicream>
+    </costList>
+
+    <apparel Class="VVRace.ApparelPropertiesExt">
+      <useWornGraphicMask>true</useWornGraphicMask>
+      <wornGraphicPath>Things/Apparel/VV_ChildApparel</wornGraphicPath>
+      <bodyPartGroups>
+        <li>Torso</li>
+        <li>Legs</li>
+      </bodyPartGroups>
+      <layers>
+        <li>OnSkin</li>
+      </layers>
+      <tags>
+        <li>VV_ViviApparel</li>
+      </tags>
+      <developmentalStageFilter>Child</developmentalStageFilter>
+      <canBeDesiredForIdeo>false</canBeDesiredForIdeo>
+    </apparel>
+    
+    <recipeMaker>
+      <recipeUsers>
+        <li>CraftingSpot</li>
+      </recipeUsers>
+
+      <researchPrerequisite>VV_Apparels</researchPrerequisite>
+      <displayPriority>3100</displayPriority>
+    </recipeMaker>
+
+    <tradeTags Inherit="False">
+      <li>VV_ViviApparel</li>
+    </tradeTags>
+    
+    <colorGenerator Class="ColorGenerator_White" />
+  </ThingDef>
+</Defs>

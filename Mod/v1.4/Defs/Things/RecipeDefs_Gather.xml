@@ -108,6 +108,10 @@
 
     <gatherWorkerType>VVRace.GatherWorker_Propolis</gatherWorkerType>
     <maxPathDanger>Some</maxPathDanger>
+
+    <skillRequirements>
+      <Plants>8</Plants>
+    </skillRequirements>
   </RecipeDef>
   
   <!-- 잔디 섬유 채집 -->
@@ -139,5 +143,9 @@
 
     <gatherWorkerType>VVRace.GatherWorker_GrassFiber</gatherWorkerType>
     <maxPathDanger>Some</maxPathDanger>
+
+    <skillRequirements>
+      <Plants>3</Plants>
+    </skillRequirements>
   </RecipeDef>
 </Defs>

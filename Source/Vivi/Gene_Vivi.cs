@@ -93,7 +93,7 @@ namespace VVRace
                 mindLinkSettings?.Tick(GenTicks.TickLongInterval);
             }
 
-            if (pawn.IsHashIntervalTick(60000) && originalHairColor.HasValue && pawn.DevelopmentalStage.Child())
+            if (pawn.IsHashIntervalTick(2000) && originalHairColor.HasValue && pawn.DevelopmentalStage.Child())
             {
                 var ageOffset = pawn.ageTracker.AgeBiologicalYearsFloat / pawn.ageTracker.AdultMinAge;
                 var hairColorOffset = Mathf.Clamp(ageOffset * ageOffset, 0, 1);

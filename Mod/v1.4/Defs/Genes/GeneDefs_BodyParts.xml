@@ -55,6 +55,7 @@
     <biostatCpx>1</biostatCpx>
     <biostatMet>-1</biostatMet>
 
+    <minAgeActive>7</minAgeActive>
     <graphicData>
       <graphicPath>Things/Pawn/Vivi/Wings/Wings</graphicPath>
       <drawScale>2</drawScale>
