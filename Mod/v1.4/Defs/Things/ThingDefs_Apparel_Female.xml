@@ -19,7 +19,7 @@
     </apparel>
 
     <tradeTags Inherit="False">
-      <li>VV_ViviApparel</li>
+      <li>VV_RoyalViviApparel</li>
     </tradeTags>
     
     <colorGenerator Class="ColorGenerator_White" />

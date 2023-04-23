@@ -124,7 +124,7 @@
       </layers>
       <countsAsClothingForNudity>false</countsAsClothingForNudity>
       <tags>
-        <li>VV_ViviApparel</li>
+        <li>VV_ViviCombatApparel</li>
       </tags>
     </apparel>
 
@@ -195,7 +195,7 @@
       </layers>
       <countsAsClothingForNudity>false</countsAsClothingForNudity>
       <tags>
-        <li>VV_ViviApparel</li>
+        <li>VV_RoyalViviApparel</li>
       </tags>
     </apparel>
 

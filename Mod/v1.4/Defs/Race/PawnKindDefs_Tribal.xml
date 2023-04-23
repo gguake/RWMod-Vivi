@@ -19,7 +19,7 @@
   <PawnKindDef ParentName="ViviNPCBase">
     <defName>VV_ViviTribesman</defName>
     <label>vivi tribesman</label>
-    <combatPower>50</combatPower>
+    <combatPower>60</combatPower>
     <isFighter>false</isFighter>
     <itemQuality>Poor</itemQuality>
 
@@ -27,7 +27,7 @@
     <apparelMoney>500~1000</apparelMoney>
     <weaponMoney>1000~1500</weaponMoney>
     <weaponTags>
-      <li>NeolithicMeleeAdvanced</li>
+      <li>VV_ViviWeapon</li>
       <li>VV_ViviTool</li>
     </weaponTags>
 
@@ -39,7 +39,7 @@
   <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
     <defName>VV_ViviGuard</defName>
     <label>vivi guard</label>
-    <combatPower>110</combatPower>
+    <combatPower>140</combatPower>
     <isFighter>true</isFighter>
     <itemQuality>Normal</itemQuality>
 
@@ -48,14 +48,12 @@
     </requiredWorkTags>
 
     <gearHealthRange>0.7~3.2</gearHealthRange>
-    <apparelMoney>600~1500</apparelMoney>
+    <apparelMoney>1000~2000</apparelMoney>
     <apparelTags>
       <li>VV_ViviCombatApparel</li>
     </apparelTags>
     <weaponMoney>1000~1500</weaponMoney>
     <weaponTags>
-      <li>MedievalMeleeDecent</li>
-      <li>MedievalMeleeAdvanced</li>
       <li>VV_ViviWeapon</li>
     </weaponTags>
 
@@ -70,7 +68,7 @@
   <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
     <defName>VV_ViviArcher</defName>
     <label>vivi archer</label>
-    <combatPower>100</combatPower>
+    <combatPower>120</combatPower>
     <isFighter>true</isFighter>
     <itemQuality>Normal</itemQuality>
 
@@ -83,7 +81,6 @@
     <weaponMoney>1000~1500</weaponMoney>
     <weaponTags>
       <li>VV_ViviWeaponRange</li>
-      <li>NeolithicRangedHeavy</li>
     </weaponTags>
 
     <initialWillRange>3~5</initialWillRange>
@@ -97,7 +94,7 @@
   <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
     <defName>VV_RoyalViviLeader</defName>
     <label>royal vivi leader</label>
-    <combatPower>110</combatPower>
+    <combatPower>200</combatPower>
     <isFighter>false</isFighter>
     <itemQuality>Good</itemQuality>
     <factionLeader>true</factionLeader>
@@ -109,11 +106,13 @@
     <gearHealthRange>0.7~3.2</gearHealthRange>
     <apparelMoney>1000~2000</apparelMoney>
     <apparelTags>
+      <li>VV_RoyalViviApparel</li>
       <li>VV_ViviCombatApparel</li>
+      <li>BeltDefensePop</li>
     </apparelTags>
     <weaponMoney>1000~1500</weaponMoney>
     <weaponTags>
-      <li>Gun</li>
+      <li>GrenadeSmoke</li>
       <li>VV_ViviWeaponRange</li>
     </weaponTags>
 
@@ -127,15 +126,19 @@
   <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
     <defName>VV_RoyalVivi</defName>
     <label>royal vivi</label>
-    <combatPower>50</combatPower>
+    <combatPower>70</combatPower>
     <isFighter>false</isFighter>
     <itemQuality>Normal</itemQuality>
 
     <gearHealthRange>0.7~3.2</gearHealthRange>
     <apparelMoney>600~1000</apparelMoney>
+    <apparelTags>
+      <li>VV_RoyalViviApparel</li>
+      <li>BeltDefensePop</li>
+    </apparelTags>
     <weaponMoney>1000~1500</weaponMoney>
     <weaponTags>
-      <li>VV_ViviTool</li>
+      <li>GrenadeSmoke</li>
     </weaponTags>
 
     <initialWillRange>11~14</initialWillRange>
@@ -149,18 +152,18 @@
     <defName>VV_RoyalViviTrader</defName>
     <label>royal vivi</label>
     <trader>true</trader>
-    <combatPower>45</combatPower>
+    <combatPower>100</combatPower>
     <isFighter>false</isFighter>
     <itemQuality>Normal</itemQuality>
 
     <gearHealthRange>0.7~2</gearHealthRange>
     <apparelMoney>600~1000</apparelMoney>
     <apparelTags>
+      <li>VV_RoyalViviApparel</li>
       <li>BeltDefensePop</li>
     </apparelTags>
     <weaponMoney>1000~1500</weaponMoney>
     <weaponTags>
-      <li>Gun</li>
       <li>VV_ViviWeaponRange</li>
     </weaponTags>
 
