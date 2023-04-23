@@ -101,7 +101,7 @@
       <MaxHitPoints>200</MaxHitPoints>
       <WorkToMake>9000</WorkToMake>
       <Mass>1.0</Mass>
-      <StuffEffectMultiplierArmor>0.3</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierArmor>0.32</StuffEffectMultiplierArmor>
       <StuffEffectMultiplierInsulation_Cold>0.3</StuffEffectMultiplierInsulation_Cold>
       <StuffEffectMultiplierInsulation_Heat>0.3</StuffEffectMultiplierInsulation_Heat>
       <EquipDelay>2.5</EquipDelay>
@@ -162,14 +162,14 @@
       <WorkToMake>7200</WorkToMake>
       <Mass>1.0</Mass>
       <StuffEffectMultiplierArmor>0.2</StuffEffectMultiplierArmor>
-      <StuffEffectMultiplierInsulation_Cold>2</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Cold>2.2</StuffEffectMultiplierInsulation_Cold>
       <StuffEffectMultiplierInsulation_Heat>0</StuffEffectMultiplierInsulation_Heat>
       <EquipDelay>1.5</EquipDelay>
       
       <Insulation_Heat>-6</Insulation_Heat>
     </statBases>
     
-    <costStuffCount>75</costStuffCount>
+    <costStuffCount>80</costStuffCount>
     <stuffCategories>
       <li>Fabric</li>
       <li>Leathery</li>
@@ -234,7 +234,7 @@
       <li>Leathery</li>
     </stuffCategories>
     <costList>
-      <VV_Vivicream>20</VV_Vivicream>
+      <VV_Vivicream>30</VV_Vivicream>
     </costList>
 
     <apparel Class="VVRace.ApparelPropertiesExt">

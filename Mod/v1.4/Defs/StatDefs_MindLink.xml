@@ -33,6 +33,9 @@
     <defaultBaseValue>1</defaultBaseValue>
     <maxValue>2</maxValue>
     <toStringStyle>PercentZero</toStringStyle>
+    <statFactors>
+      <li>PsychicSensitivity</li>
+    </statFactors>
     <skillNeedFactors>
       <li Class="SkillNeed_Direct">
         <skill>Social</skill>

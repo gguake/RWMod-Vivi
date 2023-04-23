@@ -135,7 +135,8 @@ namespace VVRace
                 }
                 else
                 {
-                    var candidates = gene.pawn.Map.mapPawns.FreeColonistsSpawned.Where(p => p != gene.pawn && p.HasMindTransmitter() && !p.Dead && p.Spawned).ToList();
+                    var candidates = gene.pawn.Map.mapPawns.FreeColonistsSpawned.Where(
+                        p => p != gene.pawn && !p.Dead && p.Spawned && p.GetStatValue(VVStatDefOf.VV_MindLinkStrength) > 0f && p.TryGetMindTransmitter(out var mindTransmitter) && mindTransmitter.CanAddMindLink).ToList();
                     command_mindLink.disabled = !candidates.Any();
                     command_mindLink.toggleAction = delegate
                     {
