@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <RecipeDef ParentName="SurgeryFlesh">
+    <defName>VV_InjectPropolis</defName>
+    <label>inject propolis</label>
+    <description>.</description>
+    <workerClass>VVRace.Recipe_InjectPropolis</workerClass>
+    <jobString>injecting propolis.</jobString>
+    <workAmount>500</workAmount>
+    <hideBodyPartNames>true</hideBodyPartNames>
+    <targetsBodyPart>false</targetsBodyPart>
+    <surgerySuccessChanceFactor>5</surgerySuccessChanceFactor>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_Propolis</li>
+          </thingDefs>
+        </filter>
+        <count>15</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>VV_Propolis</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+
+    <researchPrerequisites>
+      <li>VV_AdvancedGathering</li>
+    </researchPrerequisites>
+  </RecipeDef>
+</Defs>

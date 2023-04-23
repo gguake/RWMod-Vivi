@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
   <VV_ViviEgg.label>비비 알</VV_ViviEgg.label>
-  <VV_ViviEgg>비비의 알입니다. 적절한 환경의 부화기에 들어있을때만 부화가 진행됩니다. 적절하지 않은 온도에 방치되면 알이 손상되니 주의하세요.</VV_ViviEgg>
+  <VV_ViviEgg.description>비비의 알입니다. 적절한 환경의 부화기에 들어있을때만 부화가 진행됩니다. 적절하지 않은 온도에 있으면 알이 손상되니 주의하세요.</VV_ViviEgg.description>
 
   <VV_FilthPollen.label>꽃가루</VV_FilthPollen.label>
   <VV_FilthPollen.description>비비가 꿀을 채집할때 종종 주변에 흩어지는 꽃가루입니다.</VV_FilthPollen.description>

@@ -95,6 +95,7 @@
     <Compile Include="MindLink\ViviSpecializationDef.cs" />
     <Compile Include="PawnKindDef_Vivi.cs" />
     <Compile Include="Gather\RecipeDef_Gathering.cs" />
+    <Compile Include="Recipe_InjectPropolis.cs" />
     <Compile Include="Utility\ToilUtility.cs" />
     <Compile Include="Gather\WorkGiver_GatheringBill.cs" />
     <Compile Include="Utility\ILUtility.cs" />

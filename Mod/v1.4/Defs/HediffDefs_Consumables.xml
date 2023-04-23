@@ -17,7 +17,7 @@
       </li>
       <li Class="HediffCompProperties_ChangeNeed">
         <needDef>VV_RoyalJelly</needDef>
-        <percentPerDay>0.015</percentPerDay>
+        <percentPerDay>0.016</percentPerDay>
       </li>
     </comps>
   </HediffDef>

@@ -51,7 +51,7 @@
       </li>
     </tools>
     
-    <costStuffCount>40</costStuffCount>
+    <costStuffCount>45</costStuffCount>
     <stuffCategories>
       <li>VV_Wax</li>
       <li>Woody</li>
@@ -82,6 +82,7 @@
     <graphicData>
       <texPath>Things/Item/Equipment/VV_MultiuseBrush</texPath>
       <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
     </graphicData>
     <equippedAngleOffset>10</equippedAngleOffset>
 
@@ -126,11 +127,16 @@
       </li>
     </tools>
     
-    <costStuffCount>40</costStuffCount>
+    <costStuffCount>30</costStuffCount>
     <stuffCategories>
       <li>VV_Wax</li>
       <li>Woody</li>
     </stuffCategories>
+    <costList>
+      <VV_Vivicream>10</VV_Vivicream>
+      <Steel>10</Steel>
+    </costList>
+
     <recipeMaker>
       <recipeUsers>
         <li>CraftingSpot</li>

@@ -118,14 +118,14 @@
 	<!-- 꿀 경단 -->
   <ThingDef ParentName="OrganicProductBase">
     <defName>VV_HoneyPollenCake</defName>
-    <label>vivi honey pollen cake</label>
+    <label>honey pollen cake</label>
     <description>test</description>
     <graphicData>
       <texPath>Things/Item/VV_HoneyCake</texPath>
     </graphicData>
     <socialPropernessMatters>true</socialPropernessMatters>
     <thingCategories>
-      <li>VV_ViviProduct</li>
+      <li>Foods</li>
     </thingCategories>
 
     <statBases>
@@ -175,7 +175,7 @@
 		</graphicData>
 		<socialPropernessMatters>true</socialPropernessMatters>
 		<thingCategories>
-			<li>VV_ViviProduct</li>
+			<li>Foods</li>
 		</thingCategories>
 
 		<statBases>

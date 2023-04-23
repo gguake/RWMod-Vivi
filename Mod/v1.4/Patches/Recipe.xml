@@ -8,4 +8,11 @@
       <li>VV_Make_RoyalJelly</li>
     </value>
   </Operation>
+  
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/ThingDef/recipes[li="AdministerMechSerumHealer"]</xpath>
+    <value>
+      <li>VV_InjectPropolis</li>
+    </value>
+  </Operation>
 </Patch>

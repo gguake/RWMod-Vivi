@@ -35,8 +35,8 @@
     <tickerType>Rare</tickerType>
     <comps>
       <li Class="CompProperties_TemperatureRuinable">
-        <minSafeTemperature>20</minSafeTemperature>
-        <maxSafeTemperature>40</maxSafeTemperature>
+        <minSafeTemperature>21</minSafeTemperature>
+        <maxSafeTemperature>37</maxSafeTemperature>
         <progressPerDegreePerTick>0.000001</progressPerDegreePerTick>
       </li>
 

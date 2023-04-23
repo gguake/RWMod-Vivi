@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <VV_InjectPropolis.label>프로폴리스 투여</VV_InjectPropolis.label>
+  <VV_InjectPropolis.description>대량의 프로폴리스를 항생제로 가공해 투여합니다. 이 항생제는 감염, 독감, 흑사병, 말라리아에 효과가 있으며 완전히 치료하지는 못하지만 진행도를 상당히 늦출 수 있습니다.</VV_InjectPropolis.description>
+  <VV_InjectPropolis.jobString>프로폴리스 투여중.</VV_InjectPropolis.jobString>
+</LanguageData>
