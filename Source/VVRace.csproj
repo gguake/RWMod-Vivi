@@ -73,8 +73,9 @@
     <Compile Include="Egg\CompViviHatcheryEggDrawer.cs" />
     <Compile Include="Egg\ViviEgg.cs" />
     <Compile Include="Egg\ViviEggHatchery.cs" />
-    <Compile Include="Gather\GatherWorker_GrassFiber.cs" />
-    <Compile Include="Gather\JobDriver_GatherGrassFiber.cs" />
+    <Compile Include="Gather\GatherWorker_Honey.cs" />
+    <Compile Include="Gather\GatherWorker_Plant.cs" />
+    <Compile Include="Gather\JobDriver_Gather.cs" />
     <Compile Include="HarmonyPatches\Internals\InternalPatch.cs" />
     <Compile Include="HarmonyPatches\MindLinkPatch.cs" />
     <Compile Include="GeneDefExt.cs" />
@@ -83,14 +84,10 @@
     <Compile Include="HarmonyPatches\ApparelPropertiesExtPatch.cs" />
     <Compile Include="HarmonyPatches\BodyGraphicPathOverridePatch.cs" />
     <Compile Include="HarmonyPatches\ViviRacePatch.cs" />
-    <Compile Include="Gather\CompGatherable.cs" />
+    <Compile Include="Gather\CompRepeatGatherable.cs" />
     <Compile Include="Gather\GatherWorker.cs" />
-    <Compile Include="Gather\GatherWorker_Honey.cs" />
     <Compile Include="Gather\GatherWorker_Pollen.cs" />
-    <Compile Include="Gather\GatherWorker_Propolis.cs" />
-    <Compile Include="Gather\JobDriver_GatherHoney.cs" />
     <Compile Include="Gather\JobDriver_GatherPollen.cs" />
-    <Compile Include="Gather\JobDriver_GatherPropolis.cs" />
     <Compile Include="Honey\Filth_Pollen.cs" />
     <Compile Include="Gather\GatherUtility.cs" />
     <Compile Include="MindLink\AI\ThinkNode_ConditionalViviWorkMode.cs" />

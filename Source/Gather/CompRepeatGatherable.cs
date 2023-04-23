@@ -3,19 +3,19 @@ using Verse;
 
 namespace VVRace
 {
-    public class CompProperties_Gatherable : CompProperties
+    public class CompProperties_RepeatGatherable : CompProperties
     {
         public StatDef cooldownStat;
 
-        public CompProperties_Gatherable()
+        public CompProperties_RepeatGatherable()
         {
-            compClass = typeof(CompGatherable);
+            compClass = typeof(CompRepeatGatherable);
         }
     }
 
-    public class CompGatherable : ThingComp
+    public class CompRepeatGatherable : ThingComp
     {
-        public CompProperties_Gatherable Props => (CompProperties_Gatherable)props;
+        public CompProperties_RepeatGatherable Props => (CompProperties_RepeatGatherable)props;
 
         public int lastGatheredTicks;
 

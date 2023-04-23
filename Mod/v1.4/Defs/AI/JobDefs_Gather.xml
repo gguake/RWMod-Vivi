@@ -2,28 +2,28 @@
 <Defs>
   <JobDef>
     <defName>VV_GatherHoney</defName>
-    <driverClass>VVRace.JobDriver_GatherHoney</driverClass>
+    <driverClass>VVRace.JobDriver_Gather</driverClass>
     <reportString>gather honey at TargetA.</reportString>
     <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
   </JobDef>
   
   <JobDef>
     <defName>VV_GatherPollen</defName>
-    <driverClass>VVRace.JobDriver_GatherPollen</driverClass>
+    <driverClass>VVRace.JobDriver_Gather</driverClass>
     <reportString>gather pollens.</reportString>
     <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
   </JobDef>
 
   <JobDef>
     <defName>VV_GatherPropolis</defName>
-    <driverClass>VVRace.JobDriver_GatherPropolis</driverClass>
+    <driverClass>VVRace.JobDriver_Gather</driverClass>
     <reportString>gather propolis at TargetA.</reportString>
     <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
   </JobDef>
 
   <JobDef>
     <defName>VV_GatherGrassFiber</defName>
-    <driverClass>VVRace.JobDriver_GatherGrassFiber</driverClass>
+    <driverClass>VVRace.JobDriver_Gather</driverClass>
     <reportString>gather grass fiber at TargetA.</reportString>
     <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
   </JobDef>

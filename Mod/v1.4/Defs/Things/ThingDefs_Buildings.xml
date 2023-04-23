@@ -333,7 +333,7 @@
     </comps>
   </ThingDef>
 
-  <!-- 비비 채집 작업대 -->
+  <!-- 채집 작업대 -->
   <ThingDef ParentName="BuildingBase">
     <defName>VV_GatheringBarrel</defName>
     <label>gathering workbench</label>
@@ -404,7 +404,7 @@
     </researchPrerequisites>
   </ThingDef>
 
-  <!-- 비비 작업대 -->
+  <!-- 비비 가공 작업대 -->
   <ThingDef ParentName="BenchBase">
     <defName>VV_RefiningWorkbench</defName>
     <label>vivi refining workbench</label>
@@ -484,6 +484,65 @@
     </placeWorkers>
     <researchPrerequisites>
       <li>VV_BasicInfra</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!-- 모종 배양기 -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>VV_SeedlingGerminator</defName>
+    <label>seedling germinator</label>
+    <description>.</description>
+    <tickerType>Rare</tickerType>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <graphicData>
+      <texPath>Things/Building/VV_SeedlingFarm</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(2.5, 2.5)</drawSize>
+      <drawRotated>false</drawRotated>
+    </graphicData>
+    <castEdgeShadows>true</castEdgeShadows>
+
+    <uiOrder>2400</uiOrder>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.4</fillPercent>
+    <pathCost>50</pathCost>
+    <statBases>
+      <MaxHitPoints>120</MaxHitPoints>
+      <Mass>8</Mass>
+      <WorkToBuild>2400</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Beauty>0.5</Beauty>
+    </statBases>
+    <size>(2,2)</size>
+
+    <stuffCategories>
+      <li>Woody</li>
+      <li>Stony</li>
+      <li>Metallic</li>
+    </stuffCategories>
+    <costStuffCount>80</costStuffCount>
+    <costList>
+      <VV_Vivicream>40</VV_Vivicream>
+    </costList>
+
+    <defaultPlacingRot>South</defaultPlacingRot>
+    <building>
+      <preventDeteriorationOnTop>true</preventDeteriorationOnTop>
+      <ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
+    </building>
+    <designationCategory>VV_Bulidings</designationCategory>
+    <designationHotKey>Misc1</designationHotKey>
+    <staticSunShadowHeight>0.5</staticSunShadowHeight>
+
+    <surfaceType>Item</surfaceType>
+    <canOverlapZones>false</canOverlapZones>
+    <comps>
+      <li Class="CompProperties_Forbiddable"/>
+    </comps>
+    <researchPrerequisites>
+      <li>VV_Botany</li>
     </researchPrerequisites>
   </ThingDef>
 </Defs>

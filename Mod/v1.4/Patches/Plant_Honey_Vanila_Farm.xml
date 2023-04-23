@@ -11,14 +11,14 @@
   <Operation Class="PatchOperationAdd">
     <xpath>Defs/ThingDef[defName="Plant_Cotton"]/comps</xpath>
     <value>
-      <li Class="VVRace.CompProperties_Gatherable"><cooldownStat>VV_PlantGatherCooldown</cooldownStat></li>
+      <li Class="VVRace.CompProperties_RepeatGatherable"><cooldownStat>VV_PlantGatherCooldown</cooldownStat></li>
     </value>
   </Operation>
   <Operation Class="PatchOperationAdd">
     <xpath>Defs/ThingDef[defName="Plant_Cotton"]/statBases</xpath>
     <value>
       <VV_MinGrowthPlantGatherable>0.99</VV_MinGrowthPlantGatherable>
-      <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
+      <VV_PlantGatherCooldown>4</VV_PlantGatherCooldown>
       <VV_PlantHoneyGatherYield>0.9</VV_PlantHoneyGatherYield>
     </value>
   </Operation>
@@ -34,14 +34,14 @@
   <Operation Class="PatchOperationAdd">
     <xpath>Defs/ThingDef[defName="Plant_Tinctoria"]/comps</xpath>
     <value>
-      <li Class="VVRace.CompProperties_Gatherable"><cooldownStat>VV_PlantGatherCooldown</cooldownStat></li>
+      <li Class="VVRace.CompProperties_RepeatGatherable"><cooldownStat>VV_PlantGatherCooldown</cooldownStat></li>
     </value>
   </Operation>
   <Operation Class="PatchOperationAdd">
     <xpath>Defs/ThingDef[defName="Plant_Tinctoria"]/statBases</xpath>
     <value>
       <VV_MinGrowthPlantGatherable>0.99</VV_MinGrowthPlantGatherable>
-      <VV_PlantGatherCooldown>1.4</VV_PlantGatherCooldown>
+      <VV_PlantGatherCooldown>2.6</VV_PlantGatherCooldown>
       <VV_PlantHoneyGatherYield>1.0</VV_PlantHoneyGatherYield>
     </value>
   </Operation>

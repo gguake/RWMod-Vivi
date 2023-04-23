@@ -6,21 +6,28 @@ using Verse.AI;
 
 namespace VVRace
 {
-    public class GatherWorker_GrassFiber : GatherWorker
+
+    public class GatherWorker_Plant : GatherWorker
     {
         public override string JobFailReasonIfNoHarvestable => LocalizeTexts.JobFailReasonNoHarvestablePlants.Translate();
-
-        public override bool CanDoBill(Pawn pawn, Bill bill)
-            => pawn.GetStatValue(bill.recipe.workSpeedStat) > 0f && pawn.GetStatValue(bill.recipe.efficiencyStat) > 0f;
 
         public override IEnumerable<Thing> FindAllGatherableTargetInRegion(Pawn pawn, Region region, Thing billGiver, Bill bill)
         {
             var allPlants = region.ListerThings.ThingsInGroup(ThingRequestGroup.Plant);
+            var recipeGathering = bill.recipe as RecipeDef_Gathering;
+            if (recipeGathering == null)
+            {
+                Log.Error($"RecipeDef is not RecipeDef_Gathering");
+                yield break;
+            }
 
             foreach (var thing in allPlants)
             {
-                // 채집이 불가능한 경우
-                if (!thing.CanGatherable(VVStatDefOf.VV_GrassFiberGatherYield, VVStatDefOf.VV_PlantGatherCooldown)) { continue; }
+                // 식물 채집이 불가능한 경우
+                if (!thing.CanGatherable(recipeGathering.targetYieldStat, recipeGathering.targetCooldownStat)) { continue; }
+
+                // 식물이 병에 걸린 경우
+                if (thing is Plant plant && plant.Blighted) { continue; }
 
                 // 상호작용이 불가능한 경우
                 if (!thing.Spawned || thing.IsForbidden(pawn) || thing.IsBurning()) { continue; }
@@ -39,32 +46,6 @@ namespace VVRace
 
                 yield return thing;
             }
-
-            yield break;
-        }
-
-        public override bool TryMakeJob(Pawn pawn, Thing billGiver, IEnumerable<Thing> targets, Bill bill, out Job job)
-        {
-            var recipeGathering = bill.recipe as RecipeDef_Gathering;
-            foreach (var target in targets)
-            {
-                if (!pawn.CanReserveAndReach(target, PathEndMode.Touch, recipeGathering.maxPathDanger)) { continue; }
-
-                job = JobMaker.MakeJob(VVJobDefOf.VV_GatherGrassFiber, target, billGiver);
-                job.bill = bill;
-                job.haulMode = HaulMode.ToCellNonStorage;
-
-                return true;
-            }
-
-            job = null;
-            return false;
-        }
-
-        public override bool ShouldAddRecipeIngredient(ThingDef thingDef)
-        {
-            return thingDef.StatBaseDefined(VVStatDefOf.VV_GrassFiberGatherYield) &&
-                thingDef.GetStatValueAbstract(VVStatDefOf.VV_GrassFiberGatherYield) > 0f;
         }
     }
 }

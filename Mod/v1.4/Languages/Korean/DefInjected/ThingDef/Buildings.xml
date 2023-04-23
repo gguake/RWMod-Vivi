@@ -20,4 +20,7 @@
   
   <VV_RefiningWorkbench.label>비비 가공 작업대</VV_RefiningWorkbench.label>
   <VV_RefiningWorkbench.description>비비들이 가공 작업을 하기 위한 작업대입니다.</VV_RefiningWorkbench.description>
+
+  <VV_SeedlingGerminator.label>모종 배양기</VV_SeedlingGerminator.label>
+  <VV_SeedlingGerminator.description>.</VV_SeedlingGerminator.description>
 </LanguageData>

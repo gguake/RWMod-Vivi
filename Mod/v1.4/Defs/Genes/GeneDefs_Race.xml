@@ -28,8 +28,8 @@
     <statFactors>
       <ConstructionSpeed>1.2</ConstructionSpeed>
       <PlantWorkSpeed>1.2</PlantWorkSpeed>
-      <VV_HoneyGatherSpeed>1.1</VV_HoneyGatherSpeed>
-      <VV_HoneyGatherYield>1.1</VV_HoneyGatherYield>
+      <VV_HoneyGatherSpeed>1.2</VV_HoneyGatherSpeed>
+      <VV_PlantGatherSpeed>1.2</VV_PlantGatherSpeed>
 
       <ButcheryFleshEfficiency>0.7</ButcheryFleshEfficiency>
       <MiningYield>0.7</MiningYield>

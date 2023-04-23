@@ -7,7 +7,7 @@
     <description>.</description>
     <jobString>Gathering honey.</jobString>
     
-    <workAmount>600</workAmount>
+    <workAmount>700</workAmount>
     <workSkill>Plants</workSkill>
     <workSpeedStat>VV_HoneyGatherSpeed</workSpeedStat>
     <efficiencyStat>VV_HoneyGatherYield</efficiencyStat>
@@ -29,6 +29,11 @@
     <researchPrerequisite>VV_BasicGathering</researchPrerequisite>
 
     <gatherWorkerType>VVRace.GatherWorker_Honey</gatherWorkerType>
+    <gatheringJob>VV_GatherHoney</gatheringJob>
+    <gatheringWorkWeight>8</gatheringWorkWeight>
+    <processingWorkWeight>1</processingWorkWeight>
+    <targetCooldownStat>VV_PlantGatherCooldown</targetCooldownStat>
+    <targetYieldStat>VV_PlantHoneyGatherYield</targetYieldStat>
     <maxPathDanger>Some</maxPathDanger>
   </RecipeDef>
   
@@ -76,6 +81,8 @@
     <researchPrerequisite>VV_BasicGathering</researchPrerequisite>
 
     <gatherWorkerType>VVRace.GatherWorker_Pollen</gatherWorkerType>
+    <gatheringJob>VV_GatherPollen</gatheringJob>
+    <gatheringWorkWeight>1</gatheringWorkWeight>
     <maxPathDanger>Some</maxPathDanger>
   </RecipeDef>
   
@@ -106,7 +113,11 @@
     </products>
     <researchPrerequisite>VV_AdvancedGathering</researchPrerequisite>
 
-    <gatherWorkerType>VVRace.GatherWorker_Propolis</gatherWorkerType>
+    <gatherWorkerType>VVRace.GatherWorker_Plant</gatherWorkerType>
+    <gatheringJob>VV_GatherPropolis</gatheringJob>
+    <gatheringWorkWeight>1</gatheringWorkWeight>
+    <targetCooldownStat>VV_PlantGatherCooldown</targetCooldownStat>
+    <targetYieldStat>VV_TreeResinGatherYield</targetYieldStat>
     <maxPathDanger>Some</maxPathDanger>
 
     <skillRequirements>
@@ -141,7 +152,12 @@
     </products>
     <researchPrerequisite>VV_AdvancedGathering</researchPrerequisite>
 
-    <gatherWorkerType>VVRace.GatherWorker_GrassFiber</gatherWorkerType>
+    <gatherWorkerType>VVRace.GatherWorker_Plant</gatherWorkerType>
+    <gatheringJob>VV_GatherGrassFiber</gatheringJob>
+    <gatheringWorkWeight>3</gatheringWorkWeight>
+    <processingWorkWeight>1</processingWorkWeight>
+    <targetCooldownStat>VV_PlantGatherCooldown</targetCooldownStat>
+    <targetYieldStat>VV_GrassFiberGatherYield</targetYieldStat>
     <maxPathDanger>Some</maxPathDanger>
 
     <skillRequirements>

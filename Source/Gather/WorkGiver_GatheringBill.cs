@@ -23,7 +23,11 @@ namespace VVRace
         {
             if (!pawn.Spawned) { return true; }
 
-            var buildings = pawn.Map.listerBuildings.AllBuildingsColonistOfDef(def.fixedBillGiverDefs[0]).ToList();
+            var buildings = def.fixedBillGiverDefs
+                .Select(billGiverDef => pawn.Map.listerBuildings.AllBuildingsColonistOfDef(billGiverDef))
+                .SelectMany(v => v)
+                .ToList();
+
             foreach (var building in buildings)
             {
                 if (building.IsForbidden(pawn) || !(building is IBillGiver billGiver)) { continue; }
@@ -46,7 +50,7 @@ namespace VVRace
             foreach (var bill in billGiver.BillStack)
             {
                 if (!(bill.recipe is RecipeDef_Gathering recipeGathering) || recipeGathering.gatherWorker == null) { continue; }
-                if (!bill.ShouldDoNow() || !bill.PawnAllowedToStartAnew(pawn) || !recipeGathering.gatherWorker.CanDoBill(pawn, bill)) { continue; }
+                if (!bill.ShouldDoNow() || !bill.PawnAllowedToStartAnew(pawn) || !recipeGathering.gatherWorker.PawnCanDoBill(pawn, bill)) { continue; }
 
                 var skillRequirement = bill.recipe.FirstSkillRequirementPawnDoesntSatisfy(pawn);
                 if (skillRequirement != null)

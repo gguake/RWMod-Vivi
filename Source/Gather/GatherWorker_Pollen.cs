@@ -10,8 +10,7 @@ namespace VVRace
     {
         public override string JobFailReasonIfNoHarvestable => LocalizeTexts.JobFailReasonNoHarvestablePollenFilths.Translate();
 
-        public override bool CanDoBill(Pawn pawn, Bill bill)
-            => pawn.HasViviGene();
+        public override bool PawnCanDoBill(Pawn pawn, Bill bill) => pawn.GetStatValue(bill.recipe.workSpeedStat) > 0f;
 
         public override IEnumerable<Thing> FindAllGatherableTargetInRegion(Pawn pawn, Region region, Thing billGiver, Bill bill)
         {
@@ -38,22 +37,12 @@ namespace VVRace
             yield break;
         }
 
-        public override bool TryMakeJob(Pawn pawn, Thing billGiver, IEnumerable<Thing> targets, Bill bill, out Job job)
+        public override void Notify_Gathered(Pawn pawn, Thing billGiver, Thing target)
         {
-            var recipeGathering = bill.recipe as RecipeDef_Gathering;
-            foreach (var target in targets)
+            if (target is Filth filth)
             {
-                if (!pawn.CanReserveAndReach(target, PathEndMode.Touch, recipeGathering.maxPathDanger)) { continue; }
-
-                job = JobMaker.MakeJob(VVJobDefOf.VV_GatherPollen, target, billGiver);
-                job.bill = bill;
-                job.haulMode = HaulMode.ToCellNonStorage;
-
-                return true;
+                filth.ThinFilth();
             }
-
-            job = null;
-            return false;
         }
     }
 }

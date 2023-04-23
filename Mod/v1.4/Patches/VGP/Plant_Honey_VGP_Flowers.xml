@@ -15,15 +15,15 @@
           <li Class="PatchOperationAdd">
             <xpath>Defs/ThingDef[defName="VG_Rose"]/comps</xpath>
             <value>
-              <li Class="VVRace.CompProperties_Gatherable"><cooldownStat>VV_PlantGatherCooldown</cooldownStat></li>
+              <li Class="VVRace.CompProperties_RepeatGatherable"><cooldownStat>VV_PlantGatherCooldown</cooldownStat></li>
             </value>
           </li>
           <li Class="PatchOperationAdd">
             <xpath>Defs/ThingDef[defName="VG_Rose"]/statBases</xpath>
             <value>
               <VV_MinGrowthPlantGatherable>0.7</VV_MinGrowthPlantGatherable>
-              <VV_PlantGatherCooldown>0.9</VV_PlantGatherCooldown>
-              <VV_PlantHoneyGatherYield>1.6</VV_PlantHoneyGatherYield>
+              <VV_PlantGatherCooldown>1.4</VV_PlantGatherCooldown>
+              <VV_PlantHoneyGatherYield>1.8</VV_PlantHoneyGatherYield>
             </value>
           </li>
 
@@ -38,15 +38,15 @@
           <li Class="PatchOperationAdd">
             <xpath>Defs/ThingDef[defName="VG_Daylily"]/comps</xpath>
             <value>
-              <li Class="VVRace.CompProperties_Gatherable"><cooldownStat>VV_PlantGatherCooldown</cooldownStat></li>
+              <li Class="VVRace.CompProperties_RepeatGatherable"><cooldownStat>VV_PlantGatherCooldown</cooldownStat></li>
             </value>
           </li>
           <li Class="PatchOperationAdd">
             <xpath>Defs/ThingDef[defName="VG_Daylily"]/statBases</xpath>
             <value>
               <VV_MinGrowthPlantGatherable>0.7</VV_MinGrowthPlantGatherable>
-              <VV_PlantGatherCooldown>0.9</VV_PlantGatherCooldown>
-              <VV_PlantHoneyGatherYield>1.8</VV_PlantHoneyGatherYield>
+              <VV_PlantGatherCooldown>1.4</VV_PlantGatherCooldown>
+              <VV_PlantHoneyGatherYield>2.4</VV_PlantHoneyGatherYield>
             </value>
           </li>
 
@@ -61,15 +61,15 @@
           <li Class="PatchOperationAdd">
             <xpath>Defs/ThingDef[defName="PlantPlumeria"]/comps</xpath>
             <value>
-              <li Class="VVRace.CompProperties_Gatherable"><cooldownStat>VV_PlantGatherCooldown</cooldownStat></li>
+              <li Class="VVRace.CompProperties_RepeatGatherable"><cooldownStat>VV_PlantGatherCooldown</cooldownStat></li>
             </value>
           </li>
           <li Class="PatchOperationAdd">
             <xpath>Defs/ThingDef[defName="PlantPlumeria"]/statBases</xpath>
             <value>
-              <VV_MinGrowthPlantGatherable>0.7</VV_MinGrowthPlantGatherable>
-              <VV_PlantGatherCooldown>0.9</VV_PlantGatherCooldown>
-              <VV_PlantHoneyGatherYield>1.4</VV_PlantHoneyGatherYield>
+              <VV_MinGrowthPlantGatherable>0.9</VV_MinGrowthPlantGatherable>
+              <VV_PlantGatherCooldown>2.6</VV_PlantGatherCooldown>
+              <VV_PlantHoneyGatherYield>1.6</VV_PlantHoneyGatherYield>
             </value>
           </li>
 
@@ -84,15 +84,15 @@
           <li Class="PatchOperationAdd">
             <xpath>Defs/ThingDef[defName="Wild_PlantPlumeria"]/comps</xpath>
             <value>
-              <li Class="VVRace.CompProperties_Gatherable"><cooldownStat>VV_PlantGatherCooldown</cooldownStat></li>
+              <li Class="VVRace.CompProperties_RepeatGatherable"><cooldownStat>VV_PlantGatherCooldown</cooldownStat></li>
             </value>
           </li>
           <li Class="PatchOperationAdd">
             <xpath>Defs/ThingDef[defName="Wild_PlantPlumeria"]/statBases</xpath>
             <value>
-              <VV_MinGrowthPlantGatherable>0.7</VV_MinGrowthPlantGatherable>
-              <VV_PlantGatherCooldown>0.9</VV_PlantGatherCooldown>
-              <VV_PlantHoneyGatherYield>1.4</VV_PlantHoneyGatherYield>
+              <VV_MinGrowthPlantGatherable>0.9</VV_MinGrowthPlantGatherable>
+              <VV_PlantGatherCooldown>2.6</VV_PlantGatherCooldown>
+              <VV_PlantHoneyGatherYield>1.6</VV_PlantHoneyGatherYield>
             </value>
           </li>
         </operations>

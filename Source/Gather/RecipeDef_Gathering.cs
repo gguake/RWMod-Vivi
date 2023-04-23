@@ -3,13 +3,24 @@ using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 using Verse;
 
 namespace VVRace
 {
     public class RecipeDef_Gathering : RecipeDef
     {
+        public int GatheringWorkAmount => Mathf.FloorToInt(workAmount * gatheringWorkWeight / (gatheringWorkWeight + processingWorkWeight) + 0.5f);
+        public int ProcessingWorkAmount => Mathf.FloorToInt(workAmount * processingWorkWeight / (gatheringWorkWeight + processingWorkWeight) + 0.5f);
+
         public Type gatherWorkerType;
+
+        public JobDef gatheringJob;
+        public int gatheringWorkWeight;
+        public int processingWorkWeight;
+
+        public StatDef targetCooldownStat;
+        public StatDef targetYieldStat;
 
         [NonSerialized]
         public GatherWorker gatherWorker;
@@ -34,7 +45,7 @@ namespace VVRace
             {
                 gatherWorker = (GatherWorker)Activator.CreateInstance(gatherWorkerType);
 
-                var allIngredientDefs = DefDatabase<ThingDef>.AllDefsListForReading.Where(thingDef => gatherWorker.ShouldAddRecipeIngredient(thingDef));
+                var allIngredientDefs = DefDatabase<ThingDef>.AllDefsListForReading.Where(thingDef => thingDef.StatBaseDefined(targetYieldStat) && thingDef.GetStatValueAbstract(targetYieldStat) > 0f);
                 if (allIngredientDefs.Any())
                 {
                     if (ingredients == null) { ingredients = new List<IngredientCount>(); }
