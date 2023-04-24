@@ -34,6 +34,6 @@
   </forceLoadAfter>
 
 	<incompatibleWith>
-		<li>Solaris.FurnitureBase</li>
+		<li>Nals.FacialAnimation</li>
 	</incompatibleWith>
 </ModMetaData>
