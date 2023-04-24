@@ -63,6 +63,10 @@ namespace VVRace.HarmonyPatches
                 original: AccessTools.Method(typeof(ScenPart_PlayerPawnsArriveMethod), nameof(ScenPart_PlayerPawnsArriveMethod.GenerateIntoMap)),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(ScenPart_PlayerPawnsArriveMethod_GenerateIntoMap_Postfix)));
 
+            harmony.Patch(
+                original: AccessTools.PropertySetter(typeof(Pawn_StoryTracker), nameof(Pawn_StoryTracker.HairColor)),
+                transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(Pawn_StoryTracker_set_HairColor_Transpiler)));
+
             #region 연구 관련
             //harmony.Patch(
             //    original: AccessTools.Method(typeof(MainTabWindow_Architect), "CacheDesPanels"),
@@ -250,6 +254,37 @@ namespace VVRace.HarmonyPatches
                     hatcher.hatcheeParent = startingRoyalVivis.RandomElement();
                 }
             }
+        }
+
+        private static IEnumerable<CodeInstruction> Pawn_StoryTracker_set_HairColor_Transpiler(IEnumerable<CodeInstruction> codeInstructions, ILGenerator ilGenerator)
+        {
+            var instructions = codeInstructions.ToList();
+
+            var geneLocal = ilGenerator.DeclareLocal(typeof(Gene_Vivi));
+            var conditionalSkipLabel = ilGenerator.DefineLabel();
+            var jumpLabel = ilGenerator.DefineLabel();
+            var injections = new CodeInstruction[]
+            {
+                // if (pawn.TryGetViviGene(out var gene) && gene.Notify_HairColorChanged(color))
+                new CodeInstruction(OpCodes.Ldarg_0),
+                new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(Pawn_StoryTracker), "pawn")),
+                new CodeInstruction(OpCodes.Ldloca_S, geneLocal.LocalIndex),
+                new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(ViviRaceUtility), nameof(ViviRaceUtility.TryGetViviGene))),
+                new CodeInstruction(OpCodes.Brfalse_S, conditionalSkipLabel),
+                new CodeInstruction(OpCodes.Ldloc_S, geneLocal.LocalIndex),
+                new CodeInstruction(OpCodes.Ldarg_1),
+                new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(Gene_Vivi), nameof(Gene_Vivi.Notify_HairColorChanged))),
+
+                // goto jumpLabel
+                new CodeInstruction(OpCodes.Brtrue_S, jumpLabel),
+            };
+
+            var injectIndex = instructions.FirstIndexOfInstruction(OpCodes.Stfld, AccessTools.Method(typeof(Pawn_StoryTracker), "hairColor")) - 2;
+            instructions[injectIndex].labels.Add(conditionalSkipLabel);
+            instructions[injectIndex + 3].labels.Add(jumpLabel);
+
+            instructions.InsertRange(injectIndex, injections);
+            return instructions;
         }
     }
 }

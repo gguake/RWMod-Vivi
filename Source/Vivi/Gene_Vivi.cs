@@ -1,6 +1,8 @@
-﻿using RimWorld;
+﻿using HarmonyLib;
+using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using UnityEngine;
 using Verse;
 
@@ -8,6 +10,10 @@ namespace VVRace
 {
     public class Gene_Vivi : Gene
     {
+        #region Reflection
+        private static FieldInfo fieldInfo_Pawn_StoryTracker_hairColor = AccessTools.Field(typeof(Pawn_StoryTracker), "hairColor");
+        #endregion
+
         public GeneDefExt Def => (GeneDefExt)def;
 
         public bool IsRoyal
@@ -50,11 +56,23 @@ namespace VVRace
         public ViviEggSettings ViviEggSettings => eggSettings;
         public ViviMindLinkSettings ViviMindLinkSettings => mindLinkSettings;
 
+        public Color OverrideHairColor
+        {
+            get
+            {
+                var ageOffset = pawn.ageTracker.AgeBiologicalYearsFloat / pawn.ageTracker.AdultMinAge;
+                var hairColorOffset = Mathf.Clamp(ageOffset * ageOffset, 0, 1);
+                return Color.Lerp(Color.white, originalHairColor.Value, hairColorOffset);
+            }
+        }
+
         private bool shouldCheckApparels;
 
         private bool isRoyal;
         private ViviEggSettings eggSettings;
         private ViviMindLinkSettings mindLinkSettings;
+
+        private Color? beforeUpdatedHairColor;
         private Color? originalHairColor;
 
         public override string Label => isRoyal ? 
@@ -68,6 +86,7 @@ namespace VVRace
             Scribe_Values.Look(ref isRoyal, "isRoyal");
             Scribe_Deep.Look(ref eggSettings, "eggSettings", this);
             Scribe_Deep.Look(ref mindLinkSettings, "mindLinkSettings", this);
+            Scribe_Values.Look(ref beforeUpdatedHairColor, "beforeUpdatedHairColor");
             Scribe_Values.Look(ref originalHairColor, "originalHairColor");
 
             if (Scribe.mode == LoadSaveMode.ResolvingCrossRefs)
@@ -93,12 +112,9 @@ namespace VVRace
                 mindLinkSettings?.Tick(GenTicks.TickLongInterval);
             }
 
-            if (pawn.IsHashIntervalTick(2000) && originalHairColor.HasValue && pawn.DevelopmentalStage.Child())
+            if (!pawn.DevelopmentalStage.Adult() && pawn.IsHashIntervalTick(GenTicks.TickLongInterval))
             {
-                var ageOffset = pawn.ageTracker.AgeBiologicalYearsFloat / pawn.ageTracker.AdultMinAge;
-                var hairColorOffset = Mathf.Clamp(ageOffset * ageOffset, 0, 1);
-                pawn.story.HairColor = Color.Lerp(Color.white, originalHairColor.Value, hairColorOffset);
-                pawn.Drawer.renderer.graphics.SetAllGraphicsDirty();
+                RefreshHairColor();
             }
         }
 
@@ -173,13 +189,6 @@ namespace VVRace
             else
             {
                 IsRoyal = false;
-
-                if (originalHairColor == null)
-                {
-                    originalHairColor = new Color(pawn.story.HairColor.r, pawn.story.HairColor.g, pawn.story.HairColor.b, 1.0f);
-                    pawn.story.HairColor = Color.white;
-                    pawn.Drawer.renderer.graphics.SetAllGraphicsDirty();
-                }
             }
         }
 
@@ -204,6 +213,23 @@ namespace VVRace
             if (need == null) { return false; }
 
             return need.ShouldBeRoyalIfMature;
+        }
+
+        public void RefreshHairColor()
+        {
+            // 만약 갱신 주기 사이에 머리색이 변경되었다면 재갱신한다.
+            if (pawn.story.HairColor != beforeUpdatedHairColor)
+            {
+                Notify_HairColorChanged(pawn.story.HairColor);
+            }
+            else
+            {
+                var color = OverrideHairColor;
+
+                beforeUpdatedHairColor = color;
+                fieldInfo_Pawn_StoryTracker_hairColor.SetValue(pawn.story, color);
+                pawn.Drawer.renderer.graphics.SetAllGraphicsDirty();
+            }
         }
 
         #region Notificaitons
@@ -269,24 +295,36 @@ namespace VVRace
             }
         }
 
+        /// <summary>
+        /// true 반환시 머리색 변경을 막는다.
+        /// </summary>
+        /// <param name="color"></param>
+        /// <returns></returns>
+        public bool Notify_HairColorChanged(Color color)
+        {
+            if (!pawn.DevelopmentalStage.Adult())
+            {
+                originalHairColor = color;
+
+                var currentHairColor = OverrideHairColor;
+                beforeUpdatedHairColor = currentHairColor;
+                fieldInfo_Pawn_StoryTracker_hairColor.SetValue(pawn.story, currentHairColor);
+
+                pawn.Drawer.renderer.graphics.SetAllGraphicsDirty();
+                return true;
+            }
+
+            return false;
+        }
+
         public void Notify_ChildLifeStageStart()
         {
-            if (originalHairColor == null)
-            {
-                originalHairColor = new Color(pawn.story.HairColor.r, pawn.story.HairColor.g, pawn.story.HairColor.b, 1.0f);
-                pawn.story.HairColor = Color.white;
-                pawn.Drawer.renderer.graphics.SetAllGraphicsDirty();
-            }
+            RefreshHairColor();
         }
 
         public void Notify_AdultLifeStageStarted()
         {
-            if (originalHairColor.HasValue)
-            {
-                pawn.story.HairColor = originalHairColor.Value;
-                originalHairColor = null;
-            }
-
+            RefreshHairColor();
             if (ShouldBeRoyalIfMature())
             {
                 IsRoyal = true;
