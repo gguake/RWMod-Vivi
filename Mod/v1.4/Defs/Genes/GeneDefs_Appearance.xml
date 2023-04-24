@@ -26,7 +26,7 @@
       <li>VV_Vivi_C</li>
       <li>VV_Vivi_D</li>
     </forcedHeadTypes>
-
+    
     <prerequisite>VV_BodyGene</prerequisite>
     
     <hairTagFilter>
@@ -70,13 +70,13 @@
         <overrideGraphicPath>Things/Pawn/Vivi/Body/Naked_Thin</overrideGraphicPath>
         
         <useUniqueHeadOffset>true</useUniqueHeadOffset>
-        <headOffset>(0, 0.285)</headOffset>
+        <headOffset>(0, 0.304)</headOffset>
       </Thin>
       <Female>
         <overrideGraphicPath>Things/Pawn/Vivi/Body/Naked_Female</overrideGraphicPath>
         
         <useUniqueHeadOffset>true</useUniqueHeadOffset>
-        <headOffset>(0.01, 0.35)</headOffset>
+        <headOffset>(0.01, 0.355)</headOffset>
       </Female>
     </bodyTypeOverrides>
     
