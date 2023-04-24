@@ -12,9 +12,9 @@
   <VV_PlayerExiledVivi.pawnsPlural>비비</VV_PlayerExiledVivi.pawnsPlural>
   <VV_PlayerExiledVivi.leaderTitle>여왕</VV_PlayerExiledVivi.leaderTitle>
 
-  <VV_WildVivi.label>야생 비비 둥지</VV_WildVivi.label>
-  <VV_WildVivi.description>.</VV_WildVivi.description>
-  <VV_WildVivi.pawnSingular>비비</VV_WildVivi.pawnSingular>
-  <VV_WildVivi.pawnsPlural>비비</VV_WildVivi.pawnsPlural>
-  <VV_WildVivi.leaderTitle>여왕</VV_WildVivi.leaderTitle>
+  <VV_ViviFederation.label>비비 연방</VV_ViviFederation.label>
+  <VV_ViviFederation.description>독립된 비비 둥지들이 공동의 이익을 위해 설립한 연방입니다.\n자신들의 일 이외에는 거의 관심이 없으며 대체로 싸움을 싫어하고 가능한 피하려고 하지만, 둥지에 직접적인 위험을 가하는 자들에게는 매우 호전적입니다.</VV_ViviFederation.description>
+  <VV_ViviFederation.pawnSingular>비비</VV_ViviFederation.pawnSingular>
+  <VV_ViviFederation.pawnsPlural>비비</VV_ViviFederation.pawnsPlural>
+  <VV_ViviFederation.leaderTitle>여제</VV_ViviFederation.leaderTitle>
 </LanguageData>

@@ -23,8 +23,27 @@
     <defName>VV_NamerFactionVivi</defName>
     <rulePack>
       <rulesStrings>
-        <li>r_name->wild vivi</li>
+        <li>r_name->[colors] independent vivi kingdom</li>
+        <li>r_name->[vivi_adjective] vivi kingdom</li>
       </rulesStrings>
+      <rulesFiles>
+        <li>vivi_adjective->Words/VV_Faction_Adjective</li>
+        <li>colors->Words/Nouns/Colors</li>
+      </rulesFiles>
+    </rulePack>
+  </RulePackDef>
+  
+  <RulePackDef>
+    <defName>VV_NamerNPCFactionVivi</defName>
+    <rulePack>
+      <rulesStrings>
+        <li>r_name->[vivi_flower_nouns] vivi federation</li>
+        <li>r_name->[colors] [vivi_flower_nouns] vivi federation</li>
+      </rulesStrings>
+      <rulesFiles>
+        <li>vivi_flower_nouns->Words/VV_FlowerNouns</li>
+        <li>colors->Words/Nouns/Colors</li>
+      </rulesFiles>
     </rulePack>
   </RulePackDef>
 
@@ -33,9 +52,12 @@
     <rulePack>
       <rulesStrings>
         <li>r_name->[colors] hive</li>
+        <li>r_name->hive [position] [nature]</li>
       </rulesStrings>
       <rulesFiles>
         <li>colors->Words/Nouns/Colors</li>
+        <li>nature->Words/VV_Faction_Nature</li>
+        <li>position->Words/VV_Faction_Position</li>
       </rulesFiles>
     </rulePack>
   </RulePackDef>

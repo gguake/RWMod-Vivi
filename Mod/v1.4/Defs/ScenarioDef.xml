@@ -2,10 +2,10 @@
 <Defs>
   <ScenarioDef>
     <defName>VV_ViviStart</defName>
-    <label>ViviStart</label>
+    <label>exiled vivi</label>
     <description>.</description>
     <scenario>
-      <summary>test summary</summary>
+      <summary>.</summary>
       <playerFaction>
         <def>PlayerFaction</def>
         <factionDef>VV_PlayerExiledVivi</factionDef>
@@ -30,7 +30,7 @@
             <li>
               <xenotype>VV_Vivi</xenotype>
               <count>1</count>
-              <description>adult vivi</description>
+              <description>adult royal vivi</description>
               <requiredAtStart>true</requiredAtStart>
               <allowedDevelopmentalStages>Adult</allowedDevelopmentalStages>
             </li>

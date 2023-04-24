@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
   <FactionDef ParentName="TribeBase">
-    <defName>VV_WildVivi</defName>
-    <label>wild vivi</label>
+    <defName>VV_ViviFederation</defName>
+    <label>Commonwealth of vivi</label>
     <description>.</description>
     <factionIconPath>UI/Icons/ViviFaction</factionIconPath>
-    <factionNameMaker>VV_NamerFactionVivi</factionNameMaker>
+    <factionNameMaker>VV_NamerNPCFactionVivi</factionNameMaker>
     <settlementNameMaker>VV_NamerSettlementVivi</settlementNameMaker>
     <pawnSingular>vivi</pawnSingular>
     <pawnsPlural>vivis</pawnsPlural>
+    <leaderTitle>empress</leaderTitle>
     <techLevel>Medieval</techLevel>
 
     <replacesFaction>TribeCivil</replacesFaction>
@@ -23,6 +24,10 @@
       </points>
     </raidCommonalityFromPointsCurve>
 
+    <allowedCultures>
+      <li>VV_ViviCulture</li>
+    </allowedCultures>
+    
     <disallowedMemes>
       <li MayRequire="Ludeon.RimWorld.Ideology">Supremacist</li>
       <li MayRequire="Ludeon.RimWorld.Ideology">PainIsVirtue</li>
@@ -120,7 +125,6 @@
       </li>
     </pawnGroupMakers>
     
-    <leaderTitle>queen</leaderTitle>
     <caravanTraderKinds Inherit="False">
       <li>VV_Caravan_Vivi_Honeys</li>
       <li>VV_Caravan_Vivi_Exotics</li>

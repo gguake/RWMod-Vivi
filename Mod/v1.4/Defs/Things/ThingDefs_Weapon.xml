@@ -192,16 +192,23 @@
           <li>Poke</li>
         </capacities>
         <power>13</power>
-        <cooldownTime>2.6</cooldownTime>
+        <cooldownTime>2.8</cooldownTime>
       </li>
       <li>
         <label>point</label>
         <capacities>
           <li>Stab</li>
         </capacities>
-        <power>23</power>
-        <armorPenetration>0.50</armorPenetration>
-        <cooldownTime>2.6</cooldownTime>
+        <power>29</power>
+        <armorPenetration>0.40</armorPenetration>
+        <cooldownTime>3.8</cooldownTime>
+        <extraMeleeDamages>
+          <li>
+            <def>VV_ToxicStab</def>
+            <amount>6</amount>
+            <chance>0.9</chance>
+          </li>
+        </extraMeleeDamages>
       </li>
     </tools>
     
@@ -286,9 +293,16 @@
         <capacities>
           <li>Stab</li>
         </capacities>
-        <power>20</power>
-        <armorPenetration>0.4</armorPenetration>
-        <cooldownTime>2.6</cooldownTime>
+        <power>21</power>
+        <armorPenetration>0.2</armorPenetration>
+        <cooldownTime>2.8</cooldownTime>
+        <extraMeleeDamages>
+          <li>
+            <def>VV_ToxicStab</def>
+            <amount>6</amount>
+            <chance>0.9</chance>
+          </li>
+        </extraMeleeDamages>
       </li>
     </tools>
     
@@ -325,7 +339,7 @@
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <projectile>
-      <damageDef>RangedStab</damageDef>
+      <damageDef>VV_RangedToxicStab</damageDef>
       <damageAmountBase>20</damageAmountBase>
       <stoppingPower>2.9</stoppingPower>
       <armorPenetrationBase>0.35</armorPenetrationBase>
@@ -424,7 +438,7 @@
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <projectile>
-      <damageDef>Arrow</damageDef>
+      <damageDef>VV_ToxicArrow</damageDef>
       <damageAmountBase>5</damageAmountBase>
       <stoppingPower>1.0</stoppingPower>
       <speed>60</speed>
