@@ -36,8 +36,8 @@
     <comps>
       <li Class="CompProperties_TemperatureRuinable">
         <minSafeTemperature>21</minSafeTemperature>
-        <maxSafeTemperature>37</maxSafeTemperature>
-        <progressPerDegreePerTick>0.000001</progressPerDegreePerTick>
+        <maxSafeTemperature>39</maxSafeTemperature>
+        <progressPerDegreePerTick>0.0000002</progressPerDegreePerTick>
       </li>
 
       <li Class="VVRace.CompProperties_ViviHatcher">

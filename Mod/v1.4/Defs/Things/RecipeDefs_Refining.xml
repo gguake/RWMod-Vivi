@@ -6,7 +6,7 @@
     <label>make vivicream</label>
     <description>test</description>
     <jobString>making vivicream.</jobString>
-    <workAmount>750</workAmount>
+    <workAmount>800</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <workSkill>Crafting</workSkill>
 
@@ -19,7 +19,7 @@
     <fixedIngredientFilter>
     </fixedIngredientFilter>
     <products>
-      <VV_Vivicream>15</VV_Vivicream>
+      <VV_Vivicream>25</VV_Vivicream>
     </products>
     <researchPrerequisite>VV_BasicInfra</researchPrerequisite>
   </RecipeDef>

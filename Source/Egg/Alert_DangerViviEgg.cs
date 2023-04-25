@@ -4,7 +4,7 @@ using Verse;
 
 namespace VVRace
 {
-    public class Alert_DangerViviEgg : Alert
+    public class Alert_DangerViviEgg : Alert_Critical
     {
         private List<Thing> dangerTargets = new List<Thing>();
 

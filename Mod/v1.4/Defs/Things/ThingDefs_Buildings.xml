@@ -461,8 +461,6 @@
       <li>VV_FilteringHoney</li>
       <li>VV_RefiningPropolis</li>
 
-      <li>VV_Make_HoneyPollenCake</li>
-      <li>VV_Make_HoneyPollenCake_Bulk</li>
       <li>VV_Make_RoyalJelly</li>
     </recipes>
     <inspectorTabs>
@@ -488,6 +486,7 @@
   </ThingDef>
 
   <!-- 모종 배양기 -->
+  <!--
   <ThingDef ParentName="BuildingBase">
     <defName>VV_SeedlingGerminator</defName>
     <label>seedling germinator</label>
@@ -545,4 +544,5 @@
       <li>VV_Botany</li>
     </researchPrerequisites>
   </ThingDef>
+  -->
 </Defs>

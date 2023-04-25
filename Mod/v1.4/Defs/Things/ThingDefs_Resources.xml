@@ -28,7 +28,7 @@
 
     <comps>
       <li Class="VVRace.CompProperties_FoodDrainWhenMake">
-        <drainPerStackCount>0.006</drainPerStackCount>
+        <drainPerStackCount>0.009</drainPerStackCount>
       </li>
     </comps>
     

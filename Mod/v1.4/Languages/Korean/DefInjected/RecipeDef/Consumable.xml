@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <VV_Make_HoneyPollenCake.label>꽃가루 경단 만들기</VV_Make_HoneyPollenCake.label>
+  <VV_Make_HoneyPollenCake.description>꽃가루와 꿀을 섞어 뭉쳐서 작은 경단을 만듭니다.</VV_Make_HoneyPollenCake.description>
+  <VV_Make_HoneyPollenCake.jobString>꽃가루 경단 만드는 중.</VV_Make_HoneyPollenCake.jobString>
+  
+  <VV_Make_HoneyPollenCake_Bulk.label>꽃가루 경단 4인분 만들기</VV_Make_HoneyPollenCake_Bulk.label>
+  <VV_Make_HoneyPollenCake_Bulk.description>꽃가루와 꿀을 섞어 뭉쳐서 작은 경단을 만듭니다.</VV_Make_HoneyPollenCake_Bulk.description>
+  <VV_Make_HoneyPollenCake_Bulk.jobString>꽃가루 경단 4인분 만드는 중.</VV_Make_HoneyPollenCake_Bulk.jobString>
+
+  <VV_Make_RoyalJelly.label>로얄 젤리 만들기</VV_Make_RoyalJelly.label>
+  <VV_Make_RoyalJelly.description>대량의 비비 크림에서 희소한 성분을 추출해 로얄 젤리를 만듭니다.</VV_Make_RoyalJelly.description>
+  <VV_Make_RoyalJelly.jobString>로얄 젤리 만드는 중.</VV_Make_RoyalJelly.jobString>
+</LanguageData>
