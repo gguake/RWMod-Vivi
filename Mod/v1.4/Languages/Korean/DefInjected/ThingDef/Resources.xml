@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
   <VV_Vivicream.label>비비 크림</VV_Vivicream.label>
-  <VV_Vivicream.description>비비가 몸에서 만들어내는 혼합물입니다. 비비만 생성할 수 있으며 만들때 약간의 열량을 소비하므로 배고플때는 만들 수 없습니다.\n접착제처럼 활용이 가능해 비비들의 다양한 공예 재료로 활용되며, 희소한 성분을 추출해 로열 젤리를 만들때도 사용됩니다.\n\n번화계의 어딘가에서는 일부 성분을 추출해 화장품으로 사용한다는 소문도 있습니다.</VV_Vivicream.description>
+  <VV_Vivicream.description>비비가 몸에서 만들어내는 혼합물입니다. 비비만 생성할 수 있으며 만들때 약간의 열량을 소비하므로 배고플때는 만들 수 없습니다.\n접착제처럼 활용이 가능해 비비들의 다양한 공예 재료로 활용되며 희소한 성분을 추출해 로열 젤리를 만들때도 사용됩니다.\n\n야외에 방치되면 쉽게 손상되므로 주의하세요.</VV_Vivicream.description>
 
   <VV_Viviwax.label>비비 밀랍</VV_Viviwax.label>
   <VV_Viviwax.description>비비 크림을 굳혀서 만든 밀랍입니다. 가볍고 적당히 튼튼하지만 불에는 약합니다. 석재가 필요한 대부분의 경우에 대체품으로 사용할 수 있습니다.</VV_Viviwax.description>

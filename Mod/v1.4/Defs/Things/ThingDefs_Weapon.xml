@@ -161,10 +161,11 @@
     <label>vivi spear</label>
     <description>.</description>
     <graphicData>
-      <texPath>Things/Item/Equipment/WeaponMelee/Spear</texPath>
+      <texPath>Things/Item/Equipment/VV_Spear</texPath>
       <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
     </graphicData>
-    <equippedAngleOffset>-25</equippedAngleOffset>
+    <equippedAngleOffset>-5</equippedAngleOffset>
 
     <techLevel>Medieval</techLevel>
     <statBases>
@@ -212,7 +213,10 @@
       </li>
     </tools>
     
-    <costStuffCount>75</costStuffCount>
+    <costList>
+      <VV_Viviwax>45</VV_Viviwax>
+    </costList>
+    <costStuffCount>30</costStuffCount>
     <stuffCategories>
       <li>Metallic</li>
       <li>Woody</li>
@@ -220,7 +224,6 @@
     <recipeMaker>
       <researchPrerequisites>
         <li>VV_Weaponry</li>
-        <li>LongBlades</li>
       </researchPrerequisites>
       <skillRequirements>
         <Crafting>4</Crafting>
