@@ -242,8 +242,9 @@
     <label>vivi long javelin</label>
     <description>.</description>
     <graphicData>
-      <texPath>Things/Item/Equipment/WeaponRanged/Pilum</texPath>
+      <texPath>Things/Item/Equipment/VV_ViviLongJavelin</texPath>
       <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
     </graphicData>
     <soundInteract>Interact_BeatFire</soundInteract>
 
@@ -252,10 +253,10 @@
       <WorkToMake>9000</WorkToMake>
       <Mass>4</Mass>
       <AccuracyTouch>0.76</AccuracyTouch>
-      <AccuracyShort>0.54</AccuracyShort>
-      <AccuracyMedium>0.36</AccuracyMedium>
-      <AccuracyLong>0.2</AccuracyLong>
-      <RangedWeapon_Cooldown>3</RangedWeapon_Cooldown>
+      <AccuracyShort>0.5</AccuracyShort>
+      <AccuracyMedium>0.32</AccuracyMedium>
+      <AccuracyLong>0.12</AccuracyLong>
+      <RangedWeapon_Cooldown>1.6</RangedWeapon_Cooldown>
     </statBases>
     
     <thingCategories Inherit="False">
@@ -275,7 +276,7 @@
         <verbClass>Verb_Shoot</verbClass>
         <hasStandardCommand>true</hasStandardCommand>
         <defaultProjectile>VV_Arrow_LongJavelin</defaultProjectile>
-        <warmupTime>4</warmupTime>
+        <warmupTime>3</warmupTime>
         <range>15.9</range>
         <soundCast>Interact_BeatFire</soundCast>
         <rangedFireRulepack>Combat_RangedFire_Thrown</rangedFireRulepack>
@@ -338,12 +339,13 @@
     <defName>VV_Arrow_LongJavelin</defName>
     <label>long javelin</label>
     <graphicData>
-      <texPath>Things/Projectile/Pilum</texPath>
+      <texPath>Things/Item/Equipment/VV_ViviLongJavelinProjectile</texPath>
       <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
     </graphicData>
     <projectile>
       <damageDef>VV_RangedToxicStab</damageDef>
-      <damageAmountBase>20</damageAmountBase>
+      <damageAmountBase>18</damageAmountBase>
       <stoppingPower>2.9</stoppingPower>
       <armorPenetrationBase>0.35</armorPenetrationBase>
       <speed>21</speed>

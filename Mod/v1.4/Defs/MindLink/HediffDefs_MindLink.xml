@@ -32,10 +32,10 @@
           <NegotiationAbility>0.15</NegotiationAbility>
           <TradePriceImprovement>0.15</TradePriceImprovement>
           
-          <ResearchSpeed>0.1</ResearchSpeed>
-          <MedicalOperationSpeed>0.1</MedicalOperationSpeed>
-          <MedicalTendSpeed>0.1</MedicalTendSpeed>
-          <MedicalTendQuality>0.1</MedicalTendQuality>
+          <ResearchSpeed>0.25</ResearchSpeed>
+          <MedicalOperationSpeed>0.25</MedicalOperationSpeed>
+          <MedicalTendSpeed>0.25</MedicalTendSpeed>
+          <MedicalTendQuality>0.25</MedicalTendQuality>
         </statOffsets>
       </li>
       <li>
@@ -47,10 +47,10 @@
           <NegotiationAbility>0.2</NegotiationAbility>
           <TradePriceImprovement>0.2</TradePriceImprovement>
           
-          <ResearchSpeed>0.2</ResearchSpeed>
-          <MedicalOperationSpeed>0.2</MedicalOperationSpeed>
-          <MedicalTendSpeed>0.2</MedicalTendSpeed>
-          <MedicalTendQuality>0.2</MedicalTendQuality>
+          <ResearchSpeed>0.3</ResearchSpeed>
+          <MedicalOperationSpeed>0.3</MedicalOperationSpeed>
+          <MedicalTendSpeed>0.3</MedicalTendSpeed>
+          <MedicalTendQuality>0.3</MedicalTendQuality>
         </statOffsets>
       </li>
       <li>
@@ -62,10 +62,10 @@
           <NegotiationAbility>0.25</NegotiationAbility>
           <TradePriceImprovement>0.25</TradePriceImprovement>
           
-          <ResearchSpeed>0.3</ResearchSpeed>
-          <MedicalOperationSpeed>0.3</MedicalOperationSpeed>
-          <MedicalTendSpeed>0.3</MedicalTendSpeed>
-          <MedicalTendQuality>0.3</MedicalTendQuality>
+          <ResearchSpeed>0.35</ResearchSpeed>
+          <MedicalOperationSpeed>0.35</MedicalOperationSpeed>
+          <MedicalTendSpeed>0.35</MedicalTendSpeed>
+          <MedicalTendQuality>0.35</MedicalTendQuality>
         </statOffsets>
       </li>
       <li>

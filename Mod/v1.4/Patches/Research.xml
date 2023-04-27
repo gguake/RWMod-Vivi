@@ -5,7 +5,8 @@
         defName="TreeSowing" or 
         defName="PassiveCooler" or 
         defName="Stonecutting" or 
-        defName="ComplexFurniture"
+        defName="ComplexFurniture" or
+        defName="ComplexClothing"
         ]/tags</xpath>
     <value>
       <li>VV_ViviStart</li>
@@ -30,7 +31,6 @@
     </match>
   </Operation>
   
-
   <Operation Class="PatchOperationConditional">
     <xpath>Defs/ResearchProjectDef[defName="Devilstrand"]/tags</xpath>
     <nomatch Class="PatchOperationAdd">
