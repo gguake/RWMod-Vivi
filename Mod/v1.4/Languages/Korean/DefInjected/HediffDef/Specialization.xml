@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
   <VV_NoSpecialization.label>특화 없음</VV_NoSpecialization.label>
+  <VV_NoSpecialization.description>이 비비는 선택된 특화가 없습니다. 아무 능력이 향상되지 않지만 학습 속도가 증가합니다.</VV_NoSpecialization.description>
 
   <VV_SpecializationGatherer.label>특화 - 채집꾼</VV_SpecializationGatherer.label>
-  <VV_SpecializationGatherer.description>이 비비는 채집꾼으로서 일하고 있습니다.</VV_SpecializationGatherer.description>
+  <VV_SpecializationGatherer.description>이 비비는 채집꾼으로서 일하고 있습니다. 채집 관련 능력이 향상됩니다.</VV_SpecializationGatherer.description>
   
   <VV_SpecializationCrafter.label>특화 - 공예가</VV_SpecializationCrafter.label>
-  <VV_SpecializationCrafter.description>이 비비는 공예가로서 일하고 있습니다.</VV_SpecializationCrafter.description>
+  <VV_SpecializationCrafter.description>이 비비는 공예가로서 일하고 있습니다. 건설 및 제작 관련 능력이 향상됩니다.</VV_SpecializationCrafter.description>
 
   <VV_SpecializationGuard.label>특화 - 경비병</VV_SpecializationGuard.label>
-  <VV_SpecializationGuard.description>이 비비는 경비병으로서 일하고 있습니다.</VV_SpecializationGuard.description>
+  <VV_SpecializationGuard.description>이 비비는 경비병으로서 일하고 있습니다. 전투 관련 능력이 향상됩니다.</VV_SpecializationGuard.description>
 </LanguageData>

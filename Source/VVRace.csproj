@@ -139,6 +139,5 @@
     <Compile Include="MindLink\ViviMindLinkSettings.cs" />
     <Compile Include="VVDefOf.cs" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

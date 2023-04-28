@@ -19,7 +19,7 @@
     <stages>
       <li>
         <statOffsets>
-          <GlobalLearningFactor>0.5</GlobalLearningFactor>
+          <GlobalLearningFactor>0.35</GlobalLearningFactor>
         </statOffsets>
       </li>
     </stages>

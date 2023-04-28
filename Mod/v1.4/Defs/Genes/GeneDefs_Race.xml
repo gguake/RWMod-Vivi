@@ -35,6 +35,8 @@
       <MiningYield>0.7</MiningYield>
       
       <ToxicResistance>0.5</ToxicResistance>
+
+      <VV_GrowthPointsFactor>1.5</VV_GrowthPointsFactor>
     </statFactors>
 
     <suppressedTraits>
@@ -48,8 +50,8 @@
 
     <biologicalAgeTickFactorFromAgeCurve>
       <points>
-        <li>(0, 1.5)</li>
-        <li>(12.9999, 1.5)</li>
+        <li>(0, 2)</li>
+        <li>(12.9999, 2)</li>
         <li>(13, 3)</li>
         <li>(17.9999, 3)</li>
         <li>(18, 1)</li>

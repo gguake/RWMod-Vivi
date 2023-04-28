@@ -76,6 +76,10 @@ namespace VVRace.HarmonyPatches
             //    original: AccessTools.Method(typeof(ResearchManager), nameof(ResearchManager.FinishProject)),
             //    postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(ResearchManager_FinishProject_Postfix)));
             #endregion
+
+            harmony.Patch(
+                original: AccessTools.PropertyGetter(typeof(Pawn_AgeTracker), "GrowthPointsFactor"),
+                transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(Pawn_AgeTracker_get_GrowthPointsFactor_Transpiler)));
         }
 
         private static void Pawn_NeedsTracker_ShouldHaveNeed_Postfix(ref bool __result, Pawn ___pawn, NeedDef nd)
@@ -285,6 +289,25 @@ namespace VVRace.HarmonyPatches
 
             instructions.InsertRange(injectIndex, injections);
             return instructions;
+        }
+
+        private static IEnumerable<CodeInstruction> Pawn_AgeTracker_get_GrowthPointsFactor_Transpiler(IEnumerable<CodeInstruction> codeInstructions)
+        {
+            foreach (var inst in codeInstructions)
+            {
+                if (inst.opcode == OpCodes.Ret)
+                {
+                    yield return new CodeInstruction(OpCodes.Ldarg_0);
+                    yield return new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(Pawn_AgeTracker), "pawn"));
+                    yield return new CodeInstruction(OpCodes.Ldsfld, AccessTools.Field(typeof(VVStatDefOf), nameof(VVStatDefOf.VV_GrowthPointsFactor)));
+                    yield return new CodeInstruction(OpCodes.Ldc_I4_1);
+                    yield return new CodeInstruction(OpCodes.Ldc_I4_S, -1);
+                    yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(StatExtension), nameof(StatExtension.GetStatValue)));
+                    yield return new CodeInstruction(OpCodes.Mul);
+                }
+
+                yield return inst;
+            }
         }
     }
 }

@@ -35,6 +35,8 @@ namespace VVRace
         public static StatDef VV_PlantHoneyGatherYield;
         public static StatDef VV_TreeResinGatherYield;
         public static StatDef VV_GrassFiberGatherYield;
+
+        public static StatDef VV_GrowthPointsFactor;
     }
 
     [DefOf]
