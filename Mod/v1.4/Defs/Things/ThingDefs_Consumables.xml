@@ -30,7 +30,7 @@
 
     <ingestible>
       <preferability>NeverForNutrition</preferability>
-      <tasteThought>AteRawFood</tasteThought>
+      <tasteThought>VV_AtePollen</tasteThought>
       <foodType>VegetableOrFruit</foodType>
     </ingestible>
 
@@ -102,7 +102,7 @@
     <comps>
     </comps>
     <ingestible>
-      <preferability>MealSimple</preferability>
+      <preferability>RawTasty</preferability>
       <foodType>AnimalProduct, Fluid</foodType>
     </ingestible>
     <thingCategories>
@@ -141,9 +141,11 @@
       <preferability>MealSimple</preferability>
       <babiesCanIngest>true</babiesCanIngest>
       <ingestSound>Ingest_Pill</ingestSound>
-      <optimalityOffsetHumanlikes>6</optimalityOffsetHumanlikes>
+      <maxNumToIngestAtOnce>1</maxNumToIngestAtOnce>
+      <optimalityOffsetHumanlikes>10</optimalityOffsetHumanlikes>
       <optimalityOffsetFeedingAnimals>-15</optimalityOffsetFeedingAnimals>
 			
+      <tasteThought>VV_AtePollen</tasteThought>
       <outcomeDoers>
         <li Class="IngestionOutcomeDoer_GiveHediff">
           <hediffDef>VV_ViviGrowthBoost</hediffDef>
@@ -154,11 +156,11 @@
     <stackLimit>10</stackLimit>
     <comps>
 			<li Class="CompProperties_Rottable">
-				<daysToRotStart>30</daysToRotStart>
+				<daysToRotStart>15</daysToRotStart>
 				<rotDestroys>true</rotDestroys>
 			</li>
     </comps>
-    <allowedArchonexusCount>80</allowedArchonexusCount>
+    <allowedArchonexusCount>150</allowedArchonexusCount>
     
     <tradeTags>
       <li>VV_ViviProduct</li>
@@ -198,6 +200,10 @@
           <hediffDef>VV_ViviGrowthBoost</hediffDef>
         </li>
       </outcomeDoers>
+
+      <maxNumToIngestAtOnce>1</maxNumToIngestAtOnce>
+      <optimalityOffsetHumanlikes>-5</optimalityOffsetHumanlikes>
+      <optimalityOffsetFeedingAnimals>-10</optimalityOffsetFeedingAnimals>
 		</ingestible>
 
     <stackLimit>10</stackLimit>
