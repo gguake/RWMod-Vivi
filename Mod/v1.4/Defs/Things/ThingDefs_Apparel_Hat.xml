@@ -66,6 +66,7 @@
       <layers>
         <li>Overhead</li>
       </layers>
+      <developmentalStageFilter>Adult,Child</developmentalStageFilter>
     </apparel>
 
     <recipeMaker>

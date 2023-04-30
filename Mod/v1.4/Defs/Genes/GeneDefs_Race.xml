@@ -36,7 +36,7 @@
       
       <ToxicResistance>0.5</ToxicResistance>
 
-      <VV_GrowthPointsFactor>1.5</VV_GrowthPointsFactor>
+      <VV_GrowthPointsFactor>1.35</VV_GrowthPointsFactor>
     </statFactors>
 
     <suppressedTraits>
