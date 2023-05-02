@@ -23,4 +23,7 @@
 
   <VV_SeedlingGerminator.label>모종 배양기</VV_SeedlingGerminator.label>
   <VV_SeedlingGerminator.description>.</VV_SeedlingGerminator.description>
+
+  <VV_AdaptivePlantPot.label>적응형 식물 화분</VV_AdaptivePlantPot.label>
+  <VV_AdaptivePlantPot.description>.</VV_AdaptivePlantPot.description>
 </LanguageData>

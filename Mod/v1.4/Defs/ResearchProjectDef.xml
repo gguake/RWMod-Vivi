@@ -18,7 +18,7 @@
     <defName>VV_BasicInfra</defName>
     <label>vivi basic infrastructures</label>
     <description>.</description>
-    <baseCost>800</baseCost>
+    <baseCost>1000</baseCost>
     <researchViewX>0</researchViewX>
     <researchViewY>0.7</researchViewY>
 
@@ -59,7 +59,7 @@
     <defName>VV_BasicGathering</defName>
     <label>vivi basic gathering</label>
     <description>.</description>
-    <baseCost>600</baseCost>
+    <baseCost>700</baseCost>
     <researchViewX>1</researchViewX>
     <researchViewY>0.7</researchViewY>
     <prerequisites>
@@ -87,7 +87,7 @@
     <defName>VV_AdvancedGathering</defName>
     <label>vivi advanced gathering</label>
     <description>.</description>
-    <baseCost>900</baseCost>
+    <baseCost>800</baseCost>
     <researchViewX>2</researchViewX>
     <researchViewY>0.7</researchViewY>
     <prerequisites>
@@ -111,7 +111,7 @@
     <defName>VV_Lifestrand</defName>
     <label>lifestrand</label>
     <description>.</description>
-    <baseCost>1800</baseCost>
+    <baseCost>1200</baseCost>
     <researchViewX>3</researchViewX>
     <researchViewY>1.05</researchViewY>
     <prerequisites>

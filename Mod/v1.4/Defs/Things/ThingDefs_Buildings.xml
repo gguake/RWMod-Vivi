@@ -34,6 +34,7 @@
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
     
     <designationCategory>VV_Bulidings</designationCategory>
+    <designationHotKey>Misc2</designationHotKey>
     <researchPrerequisites>
       <li>VV_BasicInfra</li>
     </researchPrerequisites>
@@ -251,7 +252,7 @@
       <ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
     </building>
     <designationCategory>VV_Bulidings</designationCategory>
-    <designationHotKey>Misc1</designationHotKey>
+    <designationHotKey>Misc3</designationHotKey>
     <staticSunShadowHeight>0.5</staticSunShadowHeight>
 
     <surfaceType>Item</surfaceType>
@@ -449,7 +450,7 @@
     </statBases>
     <size>(2,1)</size>
     <designationCategory>VV_Bulidings</designationCategory>
-    <designationHotKey>Misc3</designationHotKey>
+    <designationHotKey>Misc4</designationHotKey>
     <passability>PassThroughOnly</passability>
     <pathCost>50</pathCost>
     <hasInteractionCell>True</hasInteractionCell>
@@ -486,7 +487,6 @@
   </ThingDef>
 
   <!-- 모종 배양기 -->
-  <!--
   <ThingDef ParentName="BuildingBase">
     <defName>VV_SeedlingGerminator</defName>
     <label>seedling germinator</label>
@@ -532,7 +532,6 @@
       <ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
     </building>
     <designationCategory>VV_Bulidings</designationCategory>
-    <designationHotKey>Misc1</designationHotKey>
     <staticSunShadowHeight>0.5</staticSunShadowHeight>
 
     <surfaceType>Item</surfaceType>
@@ -544,5 +543,68 @@
       <li>VV_Botany</li>
     </researchPrerequisites>
   </ThingDef>
-  -->
+  
+  <!-- 적응형 식물 화분 -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>VV_AdaptivePlantPot</defName>
+    <label>adaptive plant pot</label>
+    <description>.</description>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <graphicData>
+      <texPath>Things/Building/VV_AdaptivePlantPot</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(3.5, 3.5)</drawSize>
+      <drawOffset>(0, 0, 0.15)</drawOffset>
+      <shadowData>
+        <volume>(0.55, 0.35, 0.3)</volume>
+        <offset>(0, 0, -0.28)</offset>
+      </shadowData>
+      <damageData>
+        <rect>(0.2,0.2,0.6,0.6)</rect>
+      </damageData>
+    </graphicData>
+
+    <uiOrder>2401</uiOrder>
+    <uiIconScale>1.5</uiIconScale>
+    <uiIconOffset>(0, -0.1)</uiIconOffset>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.3</fillPercent>
+    <pathCost>30</pathCost>
+
+    <statBases>
+      <MaxHitPoints>120</MaxHitPoints>
+      <WorkToBuild>700</WorkToBuild>
+      <Mass>7</Mass>
+      <Flammability>1.0</Flammability>
+    </statBases>
+    <size>(2,2)</size>
+
+    <stuffCategories>
+      <li>Metallic</li>
+      <li>Woody</li>
+      <li>Stony</li>
+    </stuffCategories>
+    <costStuffCount>60</costStuffCount>
+    <comps>
+      <li Class="CompProperties_Forbiddable"/>
+    </comps>
+    
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+    <building>
+      <defaultPlantToGrow>Plant_Daylily</defaultPlantToGrow>
+      <sowTag>Decorative</sowTag>
+      <paintable>true</paintable>
+    </building>
+
+    <designationCategory>VV_Bulidings</designationCategory>
+    <designationHotKey>Misc5</designationHotKey>
+
+    <canOverlapZones>false</canOverlapZones>
+    <researchPrerequisites>
+      <li>VV_BasicInfra</li>
+    </researchPrerequisites>
+  </ThingDef>
+
 </Defs>

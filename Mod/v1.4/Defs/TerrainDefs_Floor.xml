@@ -25,6 +25,7 @@
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
 
     <designationCategory>VV_Bulidings</designationCategory>
+    <designationHotKey>Misc1</designationHotKey>
     <constructionSkillPrerequisite>3</constructionSkillPrerequisite>
 
     <researchPrerequisites>
