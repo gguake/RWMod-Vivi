@@ -1,39 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
   <VV_RoyalGeneLabelPrefix>Royal</VV_RoyalGeneLabelPrefix>
-  <VV_ApparelBodyTypeNotMatching>Body type not matching</VV_ApparelBodyTypeNotMatching>
+  <VV_ApparelBodyTypeNotMatching>body type not matching</VV_ApparelBodyTypeNotMatching>
 
-  <VV_GizmoViviBandwidthHeader>Mindlinks</VV_GizmoViviBandwidthHeader>
+  <VV_AlertViviDangerousEggs>Vivi egg damaged</VV_AlertViviDangerousEggs>
+  <VV_AlertViviDangerousEggsDesc>.</VV_AlertViviDangerousEggsDesc>
+
+  <VV_GizmoViviBandwidthHeader>mind link</VV_GizmoViviBandwidthHeader>
   <VV_GizmoViviBandwidthTooltip>.</VV_GizmoViviBandwidthTooltip>
-  <VV_GizmoViviEggProgressHeader>Egg Progress</VV_GizmoViviEggProgressHeader>
-  <VV_GizmoViviEggProgressTooltip>Egg Progress</VV_GizmoViviEggProgressTooltip>
+  <VV_GizmoViviEggProgressHeader>egg progress</VV_GizmoViviEggProgressHeader>
+  <VV_GizmoViviEggProgressTooltip>.</VV_GizmoViviEggProgressTooltip>
 
-  <VV_InspectorViviHatcheryDisabled>Hatchery disabled</VV_InspectorViviHatcheryDisabled>
-  <VV_InspectorViviHatcheryDisabledReasonNoRoof>No roof</VV_InspectorViviHatcheryDisabledReasonNoRoof>
-  <VV_InspectorViviHatcheryDisabledReasonOutdoor>Outdoor</VV_InspectorViviHatcheryDisabledReasonOutdoor>
+  <VV_InspectorViviHatcheryDisabled>hatchery disabled</VV_InspectorViviHatcheryDisabled>
+  <VV_InspectorViviHatcheryDisabledReasonNoRoof>no roof</VV_InspectorViviHatcheryDisabledReasonNoRoof>
+  <VV_InspectorViviHatcheryDisabledReasonOutdoor>outdoor</VV_InspectorViviHatcheryDisabledReasonOutdoor>
+  <VV_InspectorViviWallReplaceCooldown>time remaining until it hardens: {0}</VV_InspectorViviWallReplaceCooldown>
+  <VV_InspectorGatherCooldown>time remaining until the next harvest is possible: {0}</VV_InspectorGatherCooldown>
 
   <VV_LetterViviEggHatchedLabel>new vivi born</VV_LetterViviEggHatchedLabel>
-  <VV_LetterViviEggHatched>.</VV_LetterViviEggHatched>
+  <VV_LetterViviEggHatched>. </VV_LetterViviEggHatched>
   <VV_LetterViviEggHatchedNoParent>.</VV_LetterViviEggHatchedNoParent>
-  <VV_LetterRoyalViviGrownLabel>new royal vivi: {PAWN}</VV_LetterRoyalViviGrownLabel>
+  <VV_LetterRoyalViviGrownLabel>new royal vivi: {PAWN_labelShort}</VV_LetterRoyalViviGrownLabel>
   <VV_LetterRoyalViviGrown>.</VV_LetterRoyalViviGrown>
 
-  <VV_CommandConnectMindLink>connect mindlink</VV_CommandConnectMindLink>
+  <VV_CommandConnectMindLink>connect mind link</VV_CommandConnectMindLink>
   <VV_CommandConnectMindLinkDesc>.</VV_CommandConnectMindLinkDesc>
-  <VV_CommandCancelConnectMindLink>cancel connect mindlink</VV_CommandCancelConnectMindLink>
-  <VV_CommandDisconnectMindLink>Disconnect Mindlink</VV_CommandDisconnectMindLink>
+  <VV_CommandCancelConnectMindLink>cancel to connect</VV_CommandCancelConnectMindLink>
+  <VV_CommandDisconnectMindLink>disconnect mind link</VV_CommandDisconnectMindLink>
   <VV_CommandDisconnectMindLinkDesc>.</VV_CommandDisconnectMindLinkDesc>
-  <VV_CommandCancelDisconnectMindLink>cancel disconnect mindlink</VV_CommandCancelDisconnectMindLink>
+  <VV_CommandCancelDisconnectMindLink>cancel to disconnect</VV_CommandCancelDisconnectMindLink>
 
-  <VV_MessageMindLinkConnected></VV_MessageMindLinkConnected>
-  <VV_MessageMindLinkDisconnected></VV_MessageMindLinkDisconnected>
-  <VV_MessageMindLinkForceDisconnected>Mindlink force disconnected</VV_MessageMindLinkForceDisconnected>
+  <VV_MessageMindLinkConnected>{LINKER_labelShort} has formed a mind link with {LINKED_labelShort}.</VV_MessageMindLinkConnected>
+  <VV_MessageMindLinkDisconnected>{LINKER_labelShort} has severed the mind link with {LINKED_labelShort}.</VV_MessageMindLinkDisconnected>
+  <VV_MessageMindLinkForceDisconnected>{LINKED_labelShort} suddenly suffered damage as the mental bond they were connected to was severed</VV_MessageMindLinkForceDisconnected>
 
   <VV_MindLinkerDowned>{PAWN_labelShort} is downed.</VV_MindLinkerDowned>
-  <VV_MindLinkerImprisoned>{PAWN_labelShort} is a prisoner.</VV_MindLinkerImprisoned>
-  <VV_MindLinkerInsideContainer>{PAWN_labelShort} is inside {CONTAINER}</VV_MindLinkerInsideContainer>
-  <VV_MindLinkerMentalState>{PAWN_labelShort} is in a '{MENTALSTATE_label}' mental state.</VV_MindLinkerMentalState>
+  <VV_MindLinkerImprisoned>{PAWN_labelShort} is imprisoned.</VV_MindLinkerImprisoned>
+  <VV_MindLinkerInsideContainer>{PAWN_labelShort}is inside of {CONTAINER}.</VV_MindLinkerInsideContainer>
+  <VV_MindLinkerMentalState>{PAWN_labelShort} is mental state in '{MENTALSTATE_label}'.</VV_MindLinkerMentalState>
 
-  <VV_JobFailReasonNoHarvestablePlants>No gatherable mature plants nearby.</VV_JobFailReasonNoHarvestablePlants>
-  <VV_JobFailReasonNoHarvestablePollenFilths>No gatherable pollen filths nearby.</VV_JobFailReasonNoHarvestablePollenFilths>
+  <VV_JobFailReasonNoHarvestablePlants>no gatherable plants nearby</VV_JobFailReasonNoHarvestablePlants>
+  <VV_JobFailReasonNoHarvestablePollenFilths>no gatherable pollen nearby</VV_JobFailReasonNoHarvestablePollenFilths>
+  <VV_JobFailReasonNotVivi>not vivi</VV_JobFailReasonNotVivi>
+  <VV_JobFailReasonViviStarving>vivi starving</VV_JobFailReasonViviStarving>
+
+  <VV_ConfirmPopupSpecializationChanged>If you change your specialization now, all accumulated specialization levels of the currently set '{SPEC_label}' specialization will be reset.\nAre you sure you want to change?</VV_ConfirmPopupSpecializationChanged>
 </LanguageData>
