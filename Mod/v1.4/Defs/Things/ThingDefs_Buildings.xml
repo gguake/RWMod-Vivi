@@ -17,8 +17,8 @@
     <uiIconPath>Things/Building/VV_ViviCreamWall_MenuIcon</uiIconPath>
     <uiIconColor>(1.0, 0.9, 0.7, 1.0)</uiIconColor>
     <statBases>
-      <MaxHitPoints>50</MaxHitPoints>
-      <WorkToBuild>40</WorkToBuild>
+      <MaxHitPoints>60</MaxHitPoints>
+      <WorkToBuild>80</WorkToBuild>
       <Flammability>1.0</Flammability>
       <Beauty>-2</Beauty>
     </statBases>
@@ -28,7 +28,7 @@
     </building>
 
     <costList>
-      <VV_Vivicream>1</VV_Vivicream>
+      <VV_Vivicream>3</VV_Vivicream>
     </costList>
     <useStuffTerrainAffordance>false</useStuffTerrainAffordance>
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
@@ -97,7 +97,7 @@
       <Flammability>1.0</Flammability>
     </statBases>
     <costList>
-      <VV_Vivicream>1</VV_Vivicream>
+      <VV_Vivicream>3</VV_Vivicream>
     </costList>
     <useStuffTerrainAffordance>false</useStuffTerrainAffordance>
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
@@ -202,7 +202,7 @@
       </li>
       <li>
         <damageDef>Flame</damageDef>
-        <multiplier>8</multiplier>
+        <multiplier>10</multiplier>
       </li>
     </damageMultipliers>
     
@@ -243,7 +243,7 @@
 
     <costList>
       <VV_Viviwax>100</VV_Viviwax>
-      <VV_Vivicream>50</VV_Vivicream>
+      <VV_Vivicream>40</VV_Vivicream>
     </costList>
 
     <defaultPlacingRot>South</defaultPlacingRot>
@@ -461,8 +461,7 @@
       <li>VV_MakeViviwax</li>
       <li>VV_FilteringHoney</li>
       <li>VV_RefiningPropolis</li>
-
-      <li>VV_Make_RoyalJelly</li>
+      <li>VV_MakeLifestrand</li>
     </recipes>
     <inspectorTabs>
       <li>ITab_Bills</li>
@@ -486,7 +485,9 @@
     </researchPrerequisites>
   </ThingDef>
 
+
   <!-- 모종 배양기 -->
+  <!--
   <ThingDef ParentName="BuildingBase">
     <defName>VV_SeedlingGerminator</defName>
     <label>seedling germinator</label>
@@ -543,8 +544,10 @@
       <li>VV_Botany</li>
     </researchPrerequisites>
   </ThingDef>
+  -->
   
   <!-- 적응형 식물 화분 -->
+  <!--
   <ThingDef ParentName="BuildingBase">
     <defName>VV_AdaptivePlantPot</defName>
     <label>adaptive plant pot</label>
@@ -606,5 +609,5 @@
       <li>VV_BasicInfra</li>
     </researchPrerequisites>
   </ThingDef>
-
+  -->
 </Defs>

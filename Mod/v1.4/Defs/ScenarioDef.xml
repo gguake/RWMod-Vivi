@@ -39,7 +39,7 @@
 
         <li Class="ScenPart_PawnFilter_Age">
           <def>PawnFilter_Age</def>
-          <allowedAgeRange>18~24</allowedAgeRange>
+          <allowedAgeRange>20~24</allowedAgeRange>
         </li>
         
         <li Class="ScenPart_PlayerPawnsArriveMethod">

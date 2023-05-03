@@ -37,7 +37,7 @@
       <li Class="CompProperties_TemperatureRuinable">
         <minSafeTemperature>21</minSafeTemperature>
         <maxSafeTemperature>39</maxSafeTemperature>
-        <progressPerDegreePerTick>0.0000002</progressPerDegreePerTick>
+        <progressPerDegreePerTick>0.0000005</progressPerDegreePerTick>
       </li>
 
       <li Class="VVRace.CompProperties_ViviHatcher">
@@ -177,10 +177,7 @@
           <li>UVSensitivity_Intense</li>
           <li>FireSpew</li>
           <li>FoamSpray</li>
-          <li>LongjumpLegs</li>
           <li>AnimalWarcall</li>
-          <li>Bloodfeeder</li>
-          <li>PiercingSpine</li>
           <li>AcidSpray</li>
           <li>FireWeakness</li>
           <li>PerfectImmunity</li>

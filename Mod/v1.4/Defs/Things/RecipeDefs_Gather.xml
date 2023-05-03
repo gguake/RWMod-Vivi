@@ -7,7 +7,7 @@
     <description>.</description>
     <jobString>Gathering honey.</jobString>
     
-    <workAmount>1000</workAmount>
+    <workAmount>800</workAmount>
     <workSkill>Plants</workSkill>
     <workSpeedStat>VV_HoneyGatherSpeed</workSpeedStat>
     <efficiencyStat>VV_HoneyGatherYield</efficiencyStat>
@@ -21,10 +21,10 @@
       <li>VV_GatheringBarrel</li>
     </recipeUsers>
     <allowMixingIngredients>true</allowMixingIngredients>
-    <targetCountAdjustment>10</targetCountAdjustment>
+    <targetCountAdjustment>5</targetCountAdjustment>
 
     <products>
-      <VV_RawHoney>7</VV_RawHoney>
+      <VV_RawHoney>5</VV_RawHoney>
     </products>
     <researchPrerequisite>VV_BasicGathering</researchPrerequisite>
 
