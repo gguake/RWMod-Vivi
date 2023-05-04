@@ -9,6 +9,7 @@
     
     <workAmount>800</workAmount>
     <workSkill>Plants</workSkill>
+    <workSkillLearnFactor>0.5</workSkillLearnFactor>
     <workSpeedStat>VV_HoneyGatherSpeed</workSpeedStat>
     <efficiencyStat>VV_HoneyGatherYield</efficiencyStat>
 
@@ -46,6 +47,7 @@
     
     <workAmount>300</workAmount>
     <workSkill>Plants</workSkill>
+    <workSkillLearnFactor>0.2</workSkillLearnFactor>
     <workSpeedStat>CleaningSpeed</workSpeedStat>
     <efficiencyStat>PlantHarvestYield</efficiencyStat>
 
