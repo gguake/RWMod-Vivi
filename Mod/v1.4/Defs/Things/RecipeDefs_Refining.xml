@@ -9,6 +9,7 @@
     <workAmount>800</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <workSkill>Crafting</workSkill>
+    <workSkillLearnFactor>0.1</workSkillLearnFactor>
 
     <effectWorking>Clean</effectWorking>
     <soundWorking>Recipe_Brewing</soundWorking>
@@ -33,6 +34,7 @@
     <workAmount>900</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <workSkill>Crafting</workSkill>
+    <workSkillLearnFactor>0.25</workSkillLearnFactor>
 
     <effectWorking>Smelt</effectWorking>
     <soundWorking>Recipe_Brewing</soundWorking>
@@ -67,6 +69,7 @@
     <workAmount>500</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <workSkill>Crafting</workSkill>
+    <workSkillLearnFactor>0.1</workSkillLearnFactor>
 
     <effectWorking>Cook</effectWorking>
     <soundWorking>Recipe_Brewing</soundWorking>

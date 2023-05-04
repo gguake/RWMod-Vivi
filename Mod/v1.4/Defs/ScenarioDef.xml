@@ -56,7 +56,7 @@
         <li Class="ScenPart_StartingThing_Defined">
           <def>StartingThing_Defined</def>
           <thingDef>VV_Viviwax</thingDef>
-          <count>150</count>
+          <count>400</count>
         </li>
         <li Class="ScenPart_StartingThing_Defined">
           <def>StartingThing_Defined</def>
@@ -83,7 +83,7 @@
           <def>StartingThing_Defined</def>
           <thingDef>TrapSpike</thingDef>
           <stuff>VV_Viviwax</stuff>
-          <count>3</count>
+          <count>1</count>
         </li>
         <li Class="ScenPart_StartingThing_Defined">
           <def>StartingThing_Defined</def>
@@ -97,12 +97,6 @@
         </li>
         
         <!-- 시작시 소유품 (분산) -->
-        <li Class="ScenPart_ScatterThingsNearPlayerStart">
-          <def>ScatterThingsNearPlayerStart</def>
-          <thingDef>WoodLog</thingDef>
-          <count>200</count>
-        </li>
-        
         <li Class="ScenPart_ScatterThingsNearPlayerStart">
           <def>ScatterThingsAnywhere</def>
           <thingDef>Steel</thingDef>

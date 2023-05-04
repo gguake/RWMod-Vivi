@@ -28,7 +28,7 @@
     </building>
 
     <costList>
-      <VV_Vivicream>3</VV_Vivicream>
+      <VV_Vivicream>2</VV_Vivicream>
     </costList>
     <useStuffTerrainAffordance>false</useStuffTerrainAffordance>
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
@@ -94,10 +94,10 @@
     <uiIconColor>(1.0, 0.9, 0.7, 1.0)</uiIconColor>
     <statBases>
       <MaxHitPoints>100</MaxHitPoints>
-      <Flammability>1.0</Flammability>
+      <Flammability>0.9</Flammability>
     </statBases>
     <costList>
-      <VV_Vivicream>3</VV_Vivicream>
+      <VV_Vivicream>2</VV_Vivicream>
     </costList>
     <useStuffTerrainAffordance>false</useStuffTerrainAffordance>
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
@@ -105,7 +105,7 @@
     <designationCategory Inherit="False" />
     <comps Inherit="False">
       <li Class="VVRace.CompProperties_CompWallReplace">
-        <replaceTicks>300000</replaceTicks>
+        <replaceTicks>600000</replaceTicks>
         <replaceThing>VV_ViviHoneycombWall</replaceThing>
       </li>
     </comps>
@@ -160,7 +160,6 @@
       <shaderType>CutoutWithOverlay</shaderType>
       <color>(1.0, 0.8, 0.6, 1.0)</color>
     </graphicData>
-    <tickerType>Long</tickerType>
     
     <uiIconPath>Things/Building/Linked/WallPlanks_MenuIcon</uiIconPath>
     <uiIconColor>(1.0, 0.8, 0.6, 1.0)</uiIconColor>
@@ -169,7 +168,7 @@
       <Flammability>0.6</Flammability>
     </statBases>
     <costList>
-      <VV_Viviwax>1</VV_Viviwax>
+      <VV_Viviwax>2</VV_Viviwax>
     </costList>
     <useStuffTerrainAffordance>false</useStuffTerrainAffordance>
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
