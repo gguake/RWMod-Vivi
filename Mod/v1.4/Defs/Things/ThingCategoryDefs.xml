@@ -4,29 +4,34 @@
     <defName>VV_ViviEquipments</defName>
     <label>vivi equipments</label>
     <parent>Weapons</parent>
+    <iconPath>UI/Icons/ThingCategories/VV_ViviEquipments</iconPath>
   </ThingCategoryDef>
 
   <ThingCategoryDef>
     <defName>VV_ViviWeapon</defName>
     <label>vivi weapon</label>
     <parent>VV_ViviEquipments</parent>
+    <iconPath>UI/Icons/ThingCategories/VV_ViviWeapon</iconPath>
   </ThingCategoryDef>
 
   <ThingCategoryDef>
     <defName>VV_ViviApparel</defName>
     <label>vivi apparel</label>
     <parent>Apparel</parent>
+    <iconPath>UI/Icons/ThingCategories/VV_ViviApparel</iconPath>
   </ThingCategoryDef>
 
   <ThingCategoryDef>
     <defName>VV_BuildingsVivi</defName>
     <label>vivi buildings</label>
     <parent>Buildings</parent>
+    <iconPath>UI/Icons/ThingCategories/VV_ViviBuildings</iconPath>
   </ThingCategoryDef>
   
   <ThingCategoryDef>
     <defName>VV_ViviProduct</defName>
     <label>vivi product</label>
     <parent>AnimalProductRaw</parent>
+    <iconPath>UI/Icons/ThingCategories/VV_ViviProduct</iconPath>
   </ThingCategoryDef>
 </Defs>
