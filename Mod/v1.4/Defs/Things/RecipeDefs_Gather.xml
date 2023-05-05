@@ -188,12 +188,27 @@
     </recipeUsers>
     <allowMixingIngredients>true</allowMixingIngredients>
     <targetCountAdjustment>5</targetCountAdjustment>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>Plants</li>
+          </categories>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>VV_FilthPollen</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+
     <products>
       <VV_PlantGeneticMaterial>5</VV_PlantGeneticMaterial>
     </products>
     <researchPrerequisite>VV_Botany</researchPrerequisite>
 
-    <targetAllPlant>true</targetAllPlant>
     <gatherWorkerType>VVRace.GatherWorker_Plant</gatherWorkerType>
     <gatheringJob>VV_GatherPlantGenes</gatheringJob>
     <gatheringWorkWeight>1</gatheringWorkWeight>

@@ -25,8 +25,6 @@ namespace VVRace
         [NonSerialized]
         public GatherWorker gatherWorker;
 
-        public bool targetAllPlant;
-
         public Danger maxPathDanger;
 
         private void AddThingDefToThingFilter(ThingFilter thingFilter, IEnumerable<ThingDef> thingDefs)
@@ -47,15 +45,9 @@ namespace VVRace
             {
                 gatherWorker = (GatherWorker)Activator.CreateInstance(gatherWorkerType);
 
-                List<ThingDef> allTargets;
-                if (targetAllPlant)
-                {
-                    allTargets = DefDatabase<ThingDef>.AllDefsListForReading.Where(thingDef => thingDef.IsPlant && thingDef.plant != null && !thingDef.plant.cavePlant && thingDef != ThingDefOf.BurnedTree).ToList();
-                }
-                else
-                {
-                    allTargets = DefDatabase<ThingDef>.AllDefsListForReading.Where(thingDef => thingDef.StatBaseDefined(targetYieldStat) && thingDef.GetStatValueAbstract(targetYieldStat) > 0f).ToList();
-                }
+                var allTargets = DefDatabase<ThingDef>.AllDefsListForReading
+                    .Where(thingDef => thingDef.StatBaseDefined(targetYieldStat) && thingDef.GetStatValueAbstract(targetYieldStat) > 0f)
+                    .ToList();
 
                 if (allTargets.Any())
                 {
