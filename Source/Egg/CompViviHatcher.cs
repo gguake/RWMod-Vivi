@@ -150,13 +150,20 @@ namespace VVRace
                     var xenogeneDefs = parentXenogenes != null ? new List<GeneDef>(parentXenogenes) : new List<GeneDef>();
                     var randomGeneCount = Mathf.FloorToInt(Props.geneCountCurve.Evaluate(Rand.RangeSeeded(0, 10000, randomSeed)));
 
-                    var allRandomGenes = new List<GeneDef>(Props.randomSelectGenes.Where(g => !xenogeneDefs.Contains(g))).ToList();
+                    var allRandomGenes = new List<GeneDef>(Props.randomSelectGenes.Where(g => !xenogeneDefs.Contains(g) && !VVXenotypeDefOf.VV_Vivi.genes.Any(endogene => endogene.ConflictsWith(g)))).ToList();
 
-                    for (int i = 0; i < randomGeneCount; ++i)
+                    while (randomGeneCount > 0 && allRandomGenes.Any())
                     {
                         var randomGeneDef = allRandomGenes[Rand.RangeSeeded(0, allRandomGenes.Count, randomSeed)];
-                        xenogeneDefs.Add(randomGeneDef);
                         allRandomGenes.Remove(randomGeneDef);
+
+                        if (xenogeneDefs.Any(g => g.ConflictsWith(randomGeneDef)))
+                        {
+                            continue;
+                        }
+
+                        xenogeneDefs.Add(randomGeneDef);
+                        randomGeneCount--;
                     }
 
                     var request = new PawnGenerationRequest(
