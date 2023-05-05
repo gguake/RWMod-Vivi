@@ -44,6 +44,7 @@ namespace VVRace
             if (gatherWorkerType != null)
             {
                 gatherWorker = (GatherWorker)Activator.CreateInstance(gatherWorkerType);
+                gatherWorker.recipeDef = this;
 
                 var allTargets = DefDatabase<ThingDef>.AllDefsListForReading
                     .Where(thingDef => thingDef.StatBaseDefined(targetYieldStat) && thingDef.GetStatValueAbstract(targetYieldStat) > 0f)

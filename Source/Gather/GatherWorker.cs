@@ -1,4 +1,5 @@
 ﻿using RimWorld;
+using System;
 using System.Collections.Generic;
 using Verse;
 using Verse.AI;
@@ -7,6 +8,8 @@ namespace VVRace
 {
     public abstract class GatherWorker
     {
+        public RecipeDef_Gathering recipeDef;
+
         public abstract string JobFailReasonIfNoHarvestable { get; }
 
         public virtual bool PawnCanDoBill(Pawn pawn, Bill bill)
@@ -14,24 +17,21 @@ namespace VVRace
             return pawn.GetStatValue(bill.recipe.workSpeedStat) > 0f && pawn.GetStatValue(bill.recipe.efficiencyStat) > 0f;
         }
 
+        public abstract IEnumerable<Thing> FindAllGatherableTargetInRegion(Region region);
+
+        public abstract Thing FilterGatherableTarget(Pawn pawn, Thing billGiver, Bill bill, IEnumerable<Thing> candidates);
+
+        [Obsolete]
         public abstract IEnumerable<Thing> FindAllGatherableTargetInRegion(Pawn pawn, Region region, Thing billGiver, Bill bill);
 
-        public virtual bool TryMakeJob(Pawn pawn, Thing billGiver, IEnumerable<Thing> targets, Bill bill, out Job job)
+        public virtual bool TryMakeJob(Pawn pawn, Thing billGiver, Thing target, Bill bill, out Job job)
         {
             var recipeGathering = bill.recipe as RecipeDef_Gathering;
-            foreach (var target in targets)
-            {
-                if (!pawn.CanReserveAndReach(target, PathEndMode.Touch, recipeGathering.maxPathDanger)) { continue; }
 
-                job = JobMaker.MakeJob(recipeGathering.gatheringJob, target, billGiver);
-                job.bill = bill;
-                job.haulMode = HaulMode.ToCellNonStorage;
-
-                return true;
-            }
-
-            job = null;
-            return false;
+            job = JobMaker.MakeJob(recipeGathering.gatheringJob, target, billGiver);
+            job.bill = bill;
+            job.haulMode = HaulMode.ToCellNonStorage;
+            return true;
         }
 
         public virtual void Notify_Gathered(Pawn pawn, Thing billGiver, Thing target, RecipeDef_Gathering recipe)
