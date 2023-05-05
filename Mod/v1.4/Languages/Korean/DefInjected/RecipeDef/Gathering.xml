@@ -15,4 +15,8 @@
   <VV_GatherGrassFiber.label>잔디 섬유 채집</VV_GatherGrassFiber.label>
   <VV_GatherGrassFiber.description>주변의 풀에서 잔디 섬유를 채집합니다. 식물 자재 채집 속도가 0보다 높아야 작업 가능합니다.</VV_GatherGrassFiber.description>
   <VV_GatherGrassFiber.jobString>잔디 섬유 채집 중.</VV_GatherGrassFiber.jobString>
+
+  <VV_GatherPlantGenes.label>식물 유전 물질 채집</VV_GatherPlantGenes.label>
+  <VV_GatherPlantGenes.description>주변의 야생 식물에서 유전 물질을 채집합니다. 야생에서 자란 식물에서만 채집 가능하며 식물 자재 채집 속도가 0보다 높아야 작업 가능합니다.\n대상 식물 이외의 작은 풀이나 이끼도 함께 채집하므로 채집하는 대상의 종류는 아무 영향을 주지 않습니다.</VV_GatherPlantGenes.description>
+  <VV_GatherPlantGenes.jobString>식물 유전 물질 채집 중.</VV_GatherPlantGenes.jobString>
 </LanguageData>

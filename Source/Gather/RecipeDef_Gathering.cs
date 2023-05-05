@@ -25,6 +25,8 @@ namespace VVRace
         [NonSerialized]
         public GatherWorker gatherWorker;
 
+        public bool targetAllPlant;
+
         public Danger maxPathDanger;
 
         private void AddThingDefToThingFilter(ThingFilter thingFilter, IEnumerable<ThingDef> thingDefs)
@@ -45,8 +47,17 @@ namespace VVRace
             {
                 gatherWorker = (GatherWorker)Activator.CreateInstance(gatherWorkerType);
 
-                var allIngredientDefs = DefDatabase<ThingDef>.AllDefsListForReading.Where(thingDef => thingDef.StatBaseDefined(targetYieldStat) && thingDef.GetStatValueAbstract(targetYieldStat) > 0f);
-                if (allIngredientDefs.Any())
+                List<ThingDef> allTargets;
+                if (targetAllPlant)
+                {
+                    allTargets = DefDatabase<ThingDef>.AllDefsListForReading.Where(thingDef => thingDef.IsPlant && thingDef.plant != null && !thingDef.plant.cavePlant && thingDef != ThingDefOf.BurnedTree).ToList();
+                }
+                else
+                {
+                    allTargets = DefDatabase<ThingDef>.AllDefsListForReading.Where(thingDef => thingDef.StatBaseDefined(targetYieldStat) && thingDef.GetStatValueAbstract(targetYieldStat) > 0f).ToList();
+                }
+
+                if (allTargets.Any())
                 {
                     if (ingredients == null) { ingredients = new List<IngredientCount>(); }
 
@@ -54,11 +65,11 @@ namespace VVRace
                     if (ingredientCount == null) { ingredientCount = new IngredientCount(); ingredients.Add(ingredientCount); }
 
                     ingredientCount.filter = new ThingFilter();
-                    AddThingDefToThingFilter(ingredientCount.filter, allIngredientDefs);
+                    AddThingDefToThingFilter(ingredientCount.filter, allTargets);
                     ingredientCount.SetBaseCount(1);
 
                     if (fixedIngredientFilter == null) { fixedIngredientFilter = new ThingFilter(); }
-                    AddThingDefToThingFilter(fixedIngredientFilter, allIngredientDefs);
+                    AddThingDefToThingFilter(fixedIngredientFilter, allTargets);
                 }
             }
 

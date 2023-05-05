@@ -10,12 +10,13 @@
   <VV_GizmoViviBandwidthTooltip>.</VV_GizmoViviBandwidthTooltip>
   <VV_GizmoViviEggProgressHeader>egg progress</VV_GizmoViviEggProgressHeader>
   <VV_GizmoViviEggProgressTooltip>.</VV_GizmoViviEggProgressTooltip>
+  
+  <VV_PlantGatherCooldownInspectorString>time remaining until the next harvest is possible: {0}</VV_PlantGatherCooldownInspectorString>
 
   <VV_InspectorViviHatcheryDisabled>hatchery disabled</VV_InspectorViviHatcheryDisabled>
   <VV_InspectorViviHatcheryDisabledReasonNoRoof>no roof</VV_InspectorViviHatcheryDisabledReasonNoRoof>
   <VV_InspectorViviHatcheryDisabledReasonOutdoor>outdoor</VV_InspectorViviHatcheryDisabledReasonOutdoor>
   <VV_InspectorViviWallReplaceCooldown>time remaining until it hardens: {0}</VV_InspectorViviWallReplaceCooldown>
-  <VV_InspectorGatherCooldown>time remaining until the next harvest is possible: {0}</VV_InspectorGatherCooldown>
 
   <VV_LetterViviEggHatchedLabel>new vivi born</VV_LetterViviEggHatchedLabel>
   <VV_LetterViviEggHatched>. </VV_LetterViviEggHatched>

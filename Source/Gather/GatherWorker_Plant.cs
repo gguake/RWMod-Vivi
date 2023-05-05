@@ -23,6 +23,12 @@ namespace VVRace
 
             foreach (var thing in allPlants)
             {
+                // 거리가 너무 멀 경우
+                if (!billGiver.InGatherableRange(thing)) { continue; }
+
+                // Bill에 허용되지 않는 경우
+                if (!bill.IsFixedOrAllowedIngredient(thing) || !bill.recipe.ingredients.Any(v => v.filter.Allows(thing))) { continue; }
+
                 // 식물 채집이 불가능한 경우
                 if (!thing.CanGatherable(recipeGathering.targetYieldStat, recipeGathering.targetCooldownStat)) { continue; }
 
@@ -32,14 +38,8 @@ namespace VVRace
                 // 상호작용이 불가능한 경우
                 if (!thing.Spawned || thing.IsForbidden(pawn) || thing.IsBurning()) { continue; }
 
-                // 거리가 너무 멀 경우
-                if (bill.ingredientSearchRadius <= 100f && !pawn.Position.InHorDistOf(billGiver.Position, bill.ingredientSearchRadius)) { continue; }
-
                 // 접근 불가능한 경우
                 if (!ReachabilityWithinRegion.ThingFromRegionListerReachable(thing, region, PathEndMode.Touch, pawn)) { continue; }
-
-                // Bill에 허용되지 않는 경우
-                if (!bill.IsFixedOrAllowedIngredient(thing) || !bill.recipe.ingredients.Any(v => v.filter.Allows(thing))) { continue; }
 
                 // 예약이 불가능한 경우
                 if (!pawn.CanReserve(thing)) { continue; }

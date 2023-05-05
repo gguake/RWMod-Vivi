@@ -5,9 +5,9 @@ namespace VVRace
 {
     public class GatherWorker_Honey : GatherWorker_Plant
     {
-        public override void Notify_Gathered(Pawn pawn, Thing billGiver, Thing target)
+        public override void Notify_Gathered(Pawn pawn, Thing billGiver, Thing target, RecipeDef_Gathering recipe)
         {
-            base.Notify_Gathered(pawn, billGiver, target);
+            base.Notify_Gathered(pawn, billGiver, target, recipe);
 
             if (pawn.filth != null && Rand.Bool)
             {

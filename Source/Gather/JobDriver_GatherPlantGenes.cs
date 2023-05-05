@@ -7,7 +7,7 @@ using Verse.AI;
 
 namespace VVRace
 {
-    public class JobDriver_Gather : JobDriver
+    public class JobDriver_GatherPlantGenes : JobDriver
     {
         protected const TargetIndex GatherTargetIndex = TargetIndex.A;
         protected const TargetIndex BillGiverTargetIndex = TargetIndex.B;
@@ -162,6 +162,7 @@ namespace VVRace
                             efficiency *= gatherEfficiencyList.Sum();
                         }
 
+                        var seed = Rand.Range(0, 10000);
                         var allProducts = new List<Thing>();
                         foreach (var productThingDefCount in curJob.RecipeDef.products)
                         {
@@ -174,6 +175,12 @@ namespace VVRace
 
                                 var product = ThingMaker.MakeThing(productThingDefCount.thingDef);
                                 product.stackCount = stackCount;
+
+                                var geneComp = product.TryGetComp<CompPlantGeneMaterial>();
+                                if (geneComp != null)
+                                {
+                                    geneComp.InitializeIngreident(Map, seed);
+                                }
 
                                 allProducts.Add(product);
                             }
@@ -291,6 +298,7 @@ namespace VVRace
                             efficiency *= GatherTargetInfo.Thing.GetStatValue(GatheringRecipeDef.targetYieldStat);
                         }
 
+                        var seed = Rand.Range(0, 10000);
                         var allProducts = new List<Thing>();
                         foreach (var productThingDefCount in curJob.RecipeDef.products)
                         {
@@ -303,6 +311,12 @@ namespace VVRace
 
                                 var product = ThingMaker.MakeThing(productThingDefCount.thingDef);
                                 product.stackCount = stackCount;
+
+                                var geneComp = product.TryGetComp<CompPlantGeneMaterial>();
+                                if (geneComp != null)
+                                {
+                                    geneComp.InitializeIngreident(Map, seed);
+                                }
 
                                 allProducts.Add(product);
                             }

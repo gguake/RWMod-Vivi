@@ -27,4 +27,11 @@
     <reportString>gather grass fiber at TargetA.</reportString>
     <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
   </JobDef>
+  
+  <JobDef>
+    <defName>VV_GatherPlantGenes</defName>
+    <driverClass>VVRace.JobDriver_GatherPlantGenes</driverClass>
+    <reportString>gather plant genes at TargetA.</reportString>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef>
 </Defs>

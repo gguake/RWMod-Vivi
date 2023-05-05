@@ -1,10 +1,25 @@
 ﻿using RimWorld;
+using UnityEngine;
 using Verse;
 
 namespace VVRace
 {
     public static class GatherUtility
     {
+        public static bool InGatherableRange(this Thing billGiver, Thing target)
+        {
+            if (billGiver.Spawned && billGiver is Building_GatherWorkTable workTable)
+            {
+                var radius = Building_GatherWorkTable.gatherRadius;
+                if (workTable.Position.InHorDistOf(target.Position, radius))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public static bool CanGatherable(this Thing thing, StatDef targetYieldStat, StatDef gatherableCooldownStat = null)
         {
             if (thing is Plant plant && plant.Growth < thing.GetStatValue(VVStatDefOf.VV_MinGrowthPlantGatherable))
@@ -24,7 +39,7 @@ namespace VVRace
             if (gatherableCooldownStat != null)
             {
                 var comp = thing.TryGetComp<CompRepeatGatherable>();
-                if (comp == null || comp.IsCooldown())
+                if (comp == null || comp.IsCooldown(gatherableCooldownStat))
                 {
                     return false;
                 }

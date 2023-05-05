@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+  <Operation Class="PatchOperationSequence">
+    <operations>
+      <li Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[thingClass="Building_ResearchBench" and count(comps)=0]</xpath>
+        <value><comps /></value>
+      </li>
+      <li Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[thingClass="Building_ResearchBench"]/comps[count(li[@Class="CompProperties_AffectedByFacilities"])=0]</xpath>
+        <value>
+          <li Class="CompProperties_AffectedByFacilities">
+            <linkableFacilities>
+            </linkableFacilities>
+          </li>
+        </value>
+      </li>
+      <li Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[thingClass="Building_ResearchBench"]/comps/li[@Class="CompProperties_AffectedByFacilities"]/linkableFacilities</xpath>
+        <value>
+          <li>VV_SeedlingGerminator</li>
+        </value>
+      </li>
+    </operations>
+  </Operation>
+</Patch>

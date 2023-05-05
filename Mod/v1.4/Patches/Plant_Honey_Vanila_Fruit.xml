@@ -11,7 +11,7 @@
   <Operation Class="PatchOperationAdd">
     <xpath>Defs/ThingDef[defName="Plant_Agave"]/comps</xpath>
     <value>
-      <li Class="VVRace.CompProperties_RepeatGatherable"><cooldownStat>VV_PlantGatherCooldown</cooldownStat></li>
+      <li Class="VVRace.CompProperties_RepeatGatherable" />
     </value>
   </Operation>
   <Operation Class="PatchOperationAdd">
@@ -34,7 +34,7 @@
   <Operation Class="PatchOperationAdd">
     <xpath>Defs/ThingDef[defName="Plant_Strawberry"]/comps</xpath>
     <value>
-      <li Class="VVRace.CompProperties_RepeatGatherable"><cooldownStat>VV_PlantGatherCooldown</cooldownStat></li>
+      <li Class="VVRace.CompProperties_RepeatGatherable" />
     </value>
   </Operation>
   <Operation Class="PatchOperationAdd">
@@ -57,7 +57,7 @@
   <Operation Class="PatchOperationAdd">
     <xpath>Defs/ThingDef[defName="Plant_Berry"]/comps</xpath>
     <value>
-      <li Class="VVRace.CompProperties_RepeatGatherable"><cooldownStat>VV_PlantGatherCooldown</cooldownStat></li>
+      <li Class="VVRace.CompProperties_RepeatGatherable" />
     </value>
   </Operation>
   <Operation Class="PatchOperationAdd">
@@ -80,7 +80,7 @@
   <Operation Class="PatchOperationAdd">
     <xpath>Defs/ThingDef[defName="Plant_Ambrosia"]/comps</xpath>
     <value>
-      <li Class="VVRace.CompProperties_RepeatGatherable"><cooldownStat>VV_PlantGatherCooldown</cooldownStat></li>
+      <li Class="VVRace.CompProperties_RepeatGatherable" />
     </value>
   </Operation>
   <Operation Class="PatchOperationAdd">

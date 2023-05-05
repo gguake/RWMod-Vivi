@@ -19,14 +19,14 @@ namespace VVRace
 
             foreach (var thing in allFilths.Where(filth => filth.def == VVThingDefOf.VV_FilthPollen))
             {
-                // 접근 불가능한 경우
-                if (!ReachabilityWithinRegion.ThingFromRegionListerReachable(thing, region, PathEndMode.Touch, pawn)) { continue; }
-
                 // 거리가 너무 멀 경우
-                if (bill.ingredientSearchRadius <= 100f && !pawn.Position.InHorDistOf(billGiver.Position, bill.ingredientSearchRadius)) { continue; }
+                if (!billGiver.InGatherableRange(thing)) { continue; }
 
                 // Bill에 허용되지 않는 경우
                 if (!bill.IsFixedOrAllowedIngredient(thing) || !bill.recipe.ingredients.Any(v => v.filter.Allows(thing))) { continue; }
+
+                // 접근 불가능한 경우
+                if (!ReachabilityWithinRegion.ThingFromRegionListerReachable(thing, region, PathEndMode.Touch, pawn)) { continue; }
 
                 // 예약이 불가능한 경우
                 if (!pawn.CanReserve(thing)) { continue; }
@@ -37,7 +37,7 @@ namespace VVRace
             yield break;
         }
 
-        public override void Notify_Gathered(Pawn pawn, Thing billGiver, Thing target)
+        public override void Notify_Gathered(Pawn pawn, Thing billGiver, Thing target, RecipeDef_Gathering recipe)
         {
             if (target is Filth filth)
             {

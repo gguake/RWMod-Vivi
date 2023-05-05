@@ -99,7 +99,7 @@
 
     <statBases>
       <MaxHitPoints>200</MaxHitPoints>
-      <WorkToMake>9000</WorkToMake>
+      <WorkToMake>10000</WorkToMake>
       <Mass>1.0</Mass>
       <StuffEffectMultiplierArmor>0.32</StuffEffectMultiplierArmor>
       <StuffEffectMultiplierInsulation_Cold>0.3</StuffEffectMultiplierInsulation_Cold>

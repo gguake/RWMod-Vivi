@@ -73,9 +73,12 @@
     <Compile Include="Egg\CompViviHatcheryEggDrawer.cs" />
     <Compile Include="Egg\ViviEgg.cs" />
     <Compile Include="Egg\ViviEggHatchery.cs" />
+    <Compile Include="Gather\Building_GatherWorkTable.cs" />
     <Compile Include="Gather\GatherWorker_Honey.cs" />
     <Compile Include="Gather\GatherWorker_Plant.cs" />
     <Compile Include="Gather\JobDriver_Gather.cs" />
+    <Compile Include="Gather\JobDriver_GatherPlantGenes.cs" />
+    <Compile Include="Gather\StatPart_WildPlantOffset.cs" />
     <Compile Include="HarmonyPatches\Internals\InternalPatch.cs" />
     <Compile Include="HarmonyPatches\MindLinkPatch.cs" />
     <Compile Include="GeneDefExt.cs" />
@@ -93,8 +96,11 @@
     <Compile Include="MindLink\AI\ThinkNode_ConditionalViviWorkMode.cs" />
     <Compile Include="MindLink\Hediff_Specialization.cs" />
     <Compile Include="MindLink\ViviSpecializationDef.cs" />
+    <Compile Include="ViviModsConfig.cs" />
+    <Compile Include="SpecialPlant\Building_SeedlingGerminator.cs" />
     <Compile Include="PawnKindDef_Vivi.cs" />
     <Compile Include="Gather\RecipeDef_Gathering.cs" />
+    <Compile Include="SpecialPlant\CompPlantGeneMaterial.cs" />
     <Compile Include="Recipe_InjectPropolis.cs" />
     <Compile Include="Utility\ToilUtility.cs" />
     <Compile Include="Gather\WorkGiver_GatheringBill.cs" />

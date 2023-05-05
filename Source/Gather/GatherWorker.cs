@@ -34,14 +34,17 @@ namespace VVRace
             return false;
         }
 
-        public virtual void Notify_Gathered(Pawn pawn, Thing billGiver, Thing target)
+        public virtual void Notify_Gathered(Pawn pawn, Thing billGiver, Thing target, RecipeDef_Gathering recipe)
         {
-            if (target is ThingWithComps thingWithComps)
+            if (recipe.targetCooldownStat != null)
             {
-                var compGatherable = thingWithComps.GetComp<CompRepeatGatherable>();
-                if (compGatherable != null)
+                if (target is ThingWithComps thingWithComps)
                 {
-                    compGatherable.Gathered();
+                    var compGatherable = thingWithComps.GetComp<CompRepeatGatherable>();
+                    if (compGatherable != null)
+                    {
+                        compGatherable.Gathered(recipe.targetCooldownStat);
+                    }
                 }
             }
         }

@@ -20,7 +20,7 @@
       <li Class="PatchOperationAdd">
         <xpath>Defs/ThingDef[@Name="TreeBase"]/comps</xpath>
         <value>
-          <li Class="VVRace.CompProperties_RepeatGatherable"><cooldownStat>VV_PlantGatherCooldown</cooldownStat></li>
+          <li Class="VVRace.CompProperties_RepeatGatherable" />
         </value>
       </li>
     </operations>

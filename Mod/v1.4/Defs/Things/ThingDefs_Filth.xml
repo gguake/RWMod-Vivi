@@ -17,7 +17,7 @@
       <ignoreFilthMultiplierStat>true</ignoreFilthMultiplierStat>
       <disappearsInDays>0.5~1.5</disappearsInDays>
       <rainWashes>true</rainWashes>
-      <cleaningWorkToReduceThickness>150</cleaningWorkToReduceThickness>
+      <cleaningWorkToReduceThickness>120</cleaningWorkToReduceThickness>
       <canFilthAttach>true</canFilthAttach>
     </filth>
   </ThingDef>

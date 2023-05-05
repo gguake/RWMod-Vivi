@@ -278,7 +278,7 @@
     <defName>VV_GatheringSpot</defName>
     <label>gathering spot</label>
     <description>.</description>
-    <thingClass>Building_WorkTable</thingClass>
+    <thingClass>VVRace.Building_GatherWorkTable</thingClass>
     <graphicData>
       <texPath>Things/Building/VV_GatheringSpot</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -322,14 +322,7 @@
 
     <surfaceType>Item</surfaceType>
     <comps>
-      <li Class="CompProperties_AffectedByFacilities">
-        <linkableFacilities>
-          <li>ToolCabinet</li>
-        </linkableFacilities>
-      </li>
-      <li>
-        <compClass>CompReportWorkSpeed</compClass>
-      </li>
+      <li><compClass>CompReportWorkSpeed</compClass></li>
     </comps>
   </ThingDef>
 
@@ -338,7 +331,7 @@
     <defName>VV_GatheringBarrel</defName>
     <label>gathering workbench</label>
     <description>test</description>
-    <thingClass>Building_WorkTable</thingClass>
+    <thingClass>VVRace.Building_GatherWorkTable</thingClass>
 
     <graphicData>
       <texPath>Things/Building/VV_HoneyHarvestBarrel</texPath>
@@ -402,6 +395,8 @@
     <researchPrerequisites>
       <li>VV_BasicGathering</li>
     </researchPrerequisites>
+
+    <specialDisplayRadius>11.9</specialDisplayRadius>
   </ThingDef>
 
   <!-- 비비 가공 작업대 -->
@@ -486,11 +481,11 @@
 
 
   <!-- 모종 배양기 -->
-  <!--
   <ThingDef ParentName="BuildingBase">
     <defName>VV_SeedlingGerminator</defName>
     <label>seedling germinator</label>
     <description>.</description>
+    <thingClass>VVRace.Building_SeedlingGerminator</thingClass>
     <tickerType>Rare</tickerType>
     <drawerType>MapMeshAndRealTime</drawerType>
     <graphicData>
@@ -515,6 +510,7 @@
       <Beauty>0.5</Beauty>
     </statBases>
     <size>(2,2)</size>
+    <rotatable>false</rotatable>
 
     <stuffCategories>
       <li>Woody</li>
@@ -538,12 +534,18 @@
     <canOverlapZones>false</canOverlapZones>
     <comps>
       <li Class="CompProperties_Forbiddable"/>
+      <li Class="CompProperties_Facility">
+        <maxSimultaneous>3</maxSimultaneous>
+      </li>
     </comps>
+    <placeWorkers>
+      <li>PlaceWorker_ShowFacilitiesConnections</li>
+    </placeWorkers>
+    
     <researchPrerequisites>
       <li>VV_Botany</li>
     </researchPrerequisites>
   </ThingDef>
-  -->
   
   <!-- 적응형 식물 화분 -->
   <!--

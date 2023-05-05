@@ -80,41 +80,29 @@ namespace VVRace
             var gatherWorker = (bill.recipe as RecipeDef_Gathering)?.gatherWorker;
             if (gatherWorker == null) { yield break; }
 
-            HashSet<Thing> gatherTarget = new HashSet<Thing>();
+            HashSet<Thing> gatherTargets = new HashSet<Thing>();
             var billGiverRegion = (billGiver.def.hasInteractionCell ? billGiver.InteractionCell : billGiver.Position).GetRegion(billGiver.Map);
 
-            RegionEntryPredicate regionEntryPredicate;
-            if (Mathf.Abs(Bill.MaxIngredientSearchRadius - bill.ingredientSearchRadius) >= 1f)
+            var searchRadius = Building_GatherWorkTable.gatherRadius;
+            RegionEntryPredicate regionEntryPredicate = (Region from, Region r) =>
             {
-                regionEntryPredicate = (Region from, Region r) =>
-                {
-                    if (!r.Allows(TraverseParms.For(pawn), isDestination: false)) { return false; }
+                if (!r.Allows(TraverseParms.For(pawn), isDestination: false)) { return false; }
 
-                    var extentsClose = r.extentsClose;
-                    int dx = Mathf.Abs(billGiver.Position.x - Mathf.Max(extentsClose.minX, Mathf.Min(billGiver.Position.x, extentsClose.maxX)));
-                    if (dx > bill.ingredientSearchRadius) { return false; }
+                var extentsClose = r.extentsClose;
+                int dx = Mathf.Abs(billGiver.Position.x - Mathf.Max(extentsClose.minX, Mathf.Min(billGiver.Position.x, extentsClose.maxX)));
+                if (dx > searchRadius) { return false; }
 
-                    int dz = Mathf.Abs(billGiver.Position.z - Mathf.Max(extentsClose.minZ, Mathf.Min(billGiver.Position.z, extentsClose.maxZ)));
-                    if (dz > bill.ingredientSearchRadius) { return false; }
+                int dz = Mathf.Abs(billGiver.Position.z - Mathf.Max(extentsClose.minZ, Mathf.Min(billGiver.Position.z, extentsClose.maxZ)));
+                if (dz > searchRadius) { return false; }
 
-                    return (dx * dx + dz * dz) <= bill.ingredientSearchRadius * bill.ingredientSearchRadius;
-                };
-            }
-            else
-            {
-                regionEntryPredicate = (Region from, Region r) => r.Allows(TraverseParms.For(pawn), isDestination: false);
-            }
-
-            int totalReachedRegionCount = 0;
-            int adjacentRegionsAvailable = billGiverRegion.Neighbors.Count((Region region) => regionEntryPredicate(billGiverRegion, region));
+                return (dx * dx + dz * dz) <= searchRadius * searchRadius;
+            };
 
             RegionTraverser.BreadthFirstTraverse(billGiverRegion, regionEntryPredicate, (r) =>
             {
-                gatherTarget.AddRange(gatherWorker.FindAllGatherableTargetInRegion(pawn, r, billGiver, bill));
+                gatherTargets.AddRange(gatherWorker.FindAllGatherableTargetInRegion(pawn, r, billGiver, bill));
 
-                totalReachedRegionCount++;
-
-                if (totalReachedRegionCount > adjacentRegionsAvailable && gatherTarget.Any())
+                if (gatherTargets.Any())
                 {
                     return true;
                 }
@@ -123,7 +111,7 @@ namespace VVRace
 
             }, maxRegions: 99999);
 
-            foreach (var target in gatherTarget.OrderBy(thing => thing.Position.DistanceToSquared(pawn.Position)))
+            foreach (var target in gatherTargets.OrderBy(thing => thing.Position.DistanceToSquared(pawn.Position)))
             {
                 yield return target;
             }

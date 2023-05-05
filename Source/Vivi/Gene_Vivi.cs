@@ -165,6 +165,13 @@ namespace VVRace
                         pawn.health.AddHediff(VVHediffDefOf.VV_MindTransmitter);
                     }
 
+                    // 로열 비비인 경우 특화 해제
+                    var specializationHediff = pawn.health.hediffSet.GetFirstHediff<Hediff_Specialization>();
+                    if (specializationHediff != null)
+                    {
+                        pawn.health.RemoveHediff(specializationHediff);
+                    }
+
                     // 로열 비비인 경우는 마인드 링크를 제거한다.
                     if (pawn.TryGetMindLink(out var mindLink) && mindLink.linker != null && mindLink.linker.TryGetMindTransmitter(out var parentMindTransmitter))
                     {
