@@ -11,36 +11,9 @@ namespace VVRace
     {
         public override PathEndMode PathEndMode => PathEndMode.InteractionCell;
 
-        public override Danger MaxPathDanger(Pawn pawn)
-            => Danger.Some;
-
-        public override ThingRequest PotentialWorkThingRequest
-            => def.fixedBillGiverDefs != null && def.fixedBillGiverDefs.Count == 1 ?
-            ThingRequest.ForDef(def.fixedBillGiverDefs[0]) :
-            ThingRequest.ForGroup(ThingRequestGroup.PotentialBillGiver);
-
-        public override bool ShouldSkip(Pawn pawn, bool forced = false)
-        {
-            if (!pawn.Spawned) { return true; }
-
-            var buildings = def.fixedBillGiverDefs
-                .Select(billGiverDef => pawn.Map.listerBuildings.AllBuildingsColonistOfDef(billGiverDef))
-                .SelectMany(v => v)
-                .ToList();
-
-            foreach (var building in buildings)
-            {
-                if (building.IsForbidden(pawn) || !(building is IBillGiver billGiver)) { continue; }
-                
-                if (billGiver.BillStack.AnyShouldDoNow) { return false; }
-            }
-
-            return true;
-        }
-
         public override Job JobOnThing(Pawn pawn, Thing thing, bool forced = false)
         {
-            if (!(thing is IBillGiver billGiver)) { return null; }
+            if (!(thing is IBillGiver billGiver) || !ThingIsUsableBillGiver(thing)) { return null; }
 
             if (!billGiver.BillStack.AnyShouldDoNow || !pawn.CanReserve(thing, ignoreOtherReservations: forced)) { return null; }
             if (thing.IsBurning() || thing.IsForbidden(pawn)) { return null; }
@@ -59,8 +32,8 @@ namespace VVRace
                     continue;
                 }
 
-                var targets = FindGatherableTargets(pawn, thing, bill);
-                var target = recipeGathering.gatherWorker.FilterGatherableTarget(pawn, thing, bill, targets);
+                var targetCandidates = FindGatherableTargets(pawn, thing, bill);
+                var target = recipeGathering.gatherWorker.FilterGatherableTarget(pawn, thing, bill, targetCandidates);
 
                 if (target == null)
                 {
@@ -68,10 +41,7 @@ namespace VVRace
                     continue;
                 }
 
-                if (recipeGathering.gatherWorker.TryMakeJob(pawn, thing, target, bill, out var job))
-                {
-                    return job;
-                }
+                return recipeGathering.gatherWorker.MakeJob(pawn, thing, target, bill);
             }
 
             return null;

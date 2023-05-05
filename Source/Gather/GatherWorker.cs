@@ -24,14 +24,15 @@ namespace VVRace
         [Obsolete]
         public abstract IEnumerable<Thing> FindAllGatherableTargetInRegion(Pawn pawn, Region region, Thing billGiver, Bill bill);
 
-        public virtual bool TryMakeJob(Pawn pawn, Thing billGiver, Thing target, Bill bill, out Job job)
+        public virtual Job MakeJob(Pawn pawn, Thing billGiver, Thing target, Bill bill)
         {
             var recipeGathering = bill.recipe as RecipeDef_Gathering;
 
-            job = JobMaker.MakeJob(recipeGathering.gatheringJob, target, billGiver);
+            var job = JobMaker.MakeJob(recipeGathering.gatheringJob, target, billGiver);
             job.bill = bill;
             job.haulMode = HaulMode.ToCellNonStorage;
-            return true;
+
+            return job;
         }
 
         public virtual void Notify_Gathered(Pawn pawn, Thing billGiver, Thing target, RecipeDef_Gathering recipe)
