@@ -95,6 +95,8 @@
     <Compile Include="Gather\GatherUtility.cs" />
     <Compile Include="MindLink\AI\ThinkNode_ConditionalViviWorkMode.cs" />
     <Compile Include="MindLink\Hediff_Specialization.cs" />
+    <Compile Include="MindLink\UI\Gizmo_MindLinkConnect.cs" />
+    <Compile Include="MindLink\UI\Gizmo_MindLinkDisconnect.cs" />
     <Compile Include="MindLink\ViviSpecializationDef.cs" />
     <Compile Include="ViviModsConfig.cs" />
     <Compile Include="SpecialPlant\Building_SeedlingGerminator.cs" />

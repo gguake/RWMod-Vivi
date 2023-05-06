@@ -1,6 +1,7 @@
 ﻿using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 using Verse;
 
 namespace VVRace
@@ -123,56 +124,71 @@ namespace VVRace
             var hediff = HediffMindLink;
             if (hediff == null)
             {
-                var command_mindLink = new Command_Toggle();
-                command_mindLink.isActive = () => reservedToConnectTarget != null;
-
-                if (reservedToConnectTarget != null)
+                var gizmoMindLinkConnect = new Gizmo_MindLinkConnect(this);
+                if (ReservedToConnectTarget != null)
                 {
-                    command_mindLink.toggleAction = delegate
+                    gizmoMindLinkConnect.toggleAction = delegate
                     {
-                        reservedToConnectTarget = null;
+                        foreach (var setting in gizmoMindLinkConnect.mindLinkSettings)
+                        {
+                            setting.reservedToConnectTarget = null;
+                        }
                     };
                 }
                 else
                 {
                     var candidates = gene.pawn.Map.mapPawns.FreeColonistsSpawned.Where(
                         p => p != gene.pawn && !p.Dead && p.Spawned && p.GetStatValue(VVStatDefOf.VV_MindLinkStrength) > 0f && p.TryGetMindTransmitter(out var mindTransmitter) && mindTransmitter.CanAddMindLink).ToList();
-                    command_mindLink.disabled = !candidates.Any();
-                    command_mindLink.toggleAction = delegate
+
+                    gizmoMindLinkConnect.disabled = !candidates.Any();
+                    gizmoMindLinkConnect.toggleAction = delegate
                     {
                         Find.WindowStack.Add(new FloatMenu(candidates.Select(pawn =>
                         {
-                            pawn.TryGetMindTransmitter(out var mindTransmitter);
-                            return new FloatMenuOption($"{pawn.Name.ToStringShort} ({mindTransmitter?.UsedBandwidth} / {mindTransmitter?.TotalBandWidth})", delegate
+                            if (pawn.TryGetMindTransmitter(out var mindTransmitter))
                             {
-                                reservedToConnectTarget = pawn;
-                            });
+                                return new FloatMenuOption($"{pawn.Name.ToStringShort} ({mindTransmitter.UsedBandwidth} / {mindTransmitter.TotalBandWidth})", delegate
+                                {
+                                    var remainBandwidth = mindTransmitter.TotalBandWidth - mindTransmitter.UsedBandwidth;
+
+                                    for (int i = 0; i < Mathf.Min(remainBandwidth, gizmoMindLinkConnect.mindLinkSettings.Count); ++i)
+                                    {
+                                        gizmoMindLinkConnect.mindLinkSettings[i].reservedToConnectTarget = pawn;
+                                    }
+                                });
+                            }
+
+                            return null;
 
                         }).ToList()));
                     };
                 }
 
-                command_mindLink.icon = TexCommand.HoldOpen;
-                command_mindLink.turnOnSound = SoundDefOf.Checkbox_TurnedOn;
-                command_mindLink.turnOffSound = SoundDefOf.Checkbox_TurnedOff;
-                command_mindLink.defaultLabel = (reservedToConnectTarget != null ? LocalizeTexts.CommandCancelConnectMindLink : LocalizeTexts.CommandConnectMindLink).Translate();
-                command_mindLink.defaultDesc = LocalizeTexts.CommandConnectMindLinkDesc.Translate();
-                yield return command_mindLink;
+                gizmoMindLinkConnect.icon = TexCommand.HoldOpen;
+                gizmoMindLinkConnect.turnOnSound = SoundDefOf.Checkbox_TurnedOn;
+                gizmoMindLinkConnect.turnOffSound = SoundDefOf.Checkbox_TurnedOff;
+                gizmoMindLinkConnect.defaultLabel = (ReservedToConnectTarget != null ? LocalizeTexts.CommandCancelConnectMindLink : LocalizeTexts.CommandConnectMindLink).Translate();
+                gizmoMindLinkConnect.defaultDesc = LocalizeTexts.CommandConnectMindLinkDesc.Translate();
+
+                yield return gizmoMindLinkConnect;
             }
             else
             {
-                var command_mindLink = new Command_Toggle();
-                command_mindLink.isActive = () => hediff.disconnectReserved;
-                command_mindLink.toggleAction = delegate
+                var gizmoMindLinkDisconnect = new Gizmo_MindLinkDisconnect(this);
+                gizmoMindLinkDisconnect.toggleAction = delegate
                 {
-                    hediff.disconnectReserved = !hediff.disconnectReserved;
+                    var active = !gizmoMindLinkDisconnect.currentlyIsActive;
+                    foreach (var setting in gizmoMindLinkDisconnect.mindLinkSettings)
+                    {
+                        setting.HediffMindLink.disconnectReserved = active;
+                    }
                 };
-                command_mindLink.icon = TexCommand.SelectCarriedPawn;
-                command_mindLink.turnOnSound = SoundDefOf.Checkbox_TurnedOn;
-                command_mindLink.turnOffSound = SoundDefOf.Checkbox_TurnedOff;
-                command_mindLink.defaultLabel = (hediff.disconnectReserved ? LocalizeTexts.CommandCancelDisconnectMindLink : LocalizeTexts.CommandDisconnectMindLink).Translate();
-                command_mindLink.defaultDesc = LocalizeTexts.CommandDisconnectMindLinkDesc.Translate();
-                yield return command_mindLink;
+                gizmoMindLinkDisconnect.icon = TexCommand.SelectCarriedPawn;
+                gizmoMindLinkDisconnect.turnOnSound = SoundDefOf.Checkbox_TurnedOn;
+                gizmoMindLinkDisconnect.turnOffSound = SoundDefOf.Checkbox_TurnedOff;
+                gizmoMindLinkDisconnect.defaultLabel = (hediff.disconnectReserved ? LocalizeTexts.CommandCancelDisconnectMindLink : LocalizeTexts.CommandDisconnectMindLink).Translate();
+                gizmoMindLinkDisconnect.defaultDesc = LocalizeTexts.CommandDisconnectMindLinkDesc.Translate();
+                yield return gizmoMindLinkDisconnect;
             }
         }
     }
