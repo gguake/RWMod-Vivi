@@ -1,4 +1,5 @@
-﻿using Verse;
+﻿using RimWorld;
+using Verse;
 using Verse.AI;
 
 namespace VVRace
@@ -14,13 +15,13 @@ namespace VVRace
 
         protected override Job TryGiveJob(Pawn pawn)
         {
-            if (!pawn.TryGetMindTransmitter(out var mindTransmitter) || !mindTransmitter.CanAddMindLink) { return null; }
+            if (!pawn.TryGetMindTransmitter(out var mindTransmitter)) { return null; }
 
             foreach (var candidate in pawn.Map.mapPawns.SpawnedPawnsInFaction(pawn.Faction))
             {
-                if (candidate.Dead || candidate.Downed || !candidate.IsColonistPlayerControlled || !candidate.TryGetViviGene(out var vivi) || vivi.ViviMindLinkSettings == null) { continue; }
+                if (candidate.Dead || candidate.Downed || !candidate.IsColonistPlayerControlled || !candidate.CanCasuallyInteractNow() || !candidate.TryGetViviGene(out var vivi) || vivi.ViviMindLinkSettings == null) { continue; }
 
-                if (vivi.ViviMindLinkSettings.HediffMindLink == null && vivi.ViviMindLinkSettings?.ReservedToConnectTarget == pawn)
+                if (vivi.ViviMindLinkSettings.HediffMindLink == null && vivi.ViviMindLinkSettings?.ReservedToConnectTarget == pawn && mindTransmitter.CanAddMindLink)
                 {
                     return JobMaker.MakeJob(VVJobDefOf.VV_ConnectMindLink, candidate);
                 }
