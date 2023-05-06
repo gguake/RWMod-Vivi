@@ -98,6 +98,7 @@
     <Compile Include="MindLink\UI\Gizmo_MindLinkConnect.cs" />
     <Compile Include="MindLink\UI\Gizmo_MindLinkDisconnect.cs" />
     <Compile Include="MindLink\ViviSpecializationDef.cs" />
+    <Compile Include="TextureCache.cs" />
     <Compile Include="ViviModsConfig.cs" />
     <Compile Include="SpecialPlant\Building_SeedlingGerminator.cs" />
     <Compile Include="PawnKindDef_Vivi.cs" />

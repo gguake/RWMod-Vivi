@@ -164,7 +164,6 @@ namespace VVRace
                     };
                 }
 
-                gizmoMindLinkConnect.icon = TexCommand.HoldOpen;
                 gizmoMindLinkConnect.turnOnSound = SoundDefOf.Checkbox_TurnedOn;
                 gizmoMindLinkConnect.turnOffSound = SoundDefOf.Checkbox_TurnedOff;
                 gizmoMindLinkConnect.defaultLabel = (ReservedToConnectTarget != null ? LocalizeTexts.CommandCancelConnectMindLink : LocalizeTexts.CommandConnectMindLink).Translate();
@@ -183,7 +182,6 @@ namespace VVRace
                         setting.HediffMindLink.disconnectReserved = active;
                     }
                 };
-                gizmoMindLinkDisconnect.icon = TexCommand.SelectCarriedPawn;
                 gizmoMindLinkDisconnect.turnOnSound = SoundDefOf.Checkbox_TurnedOn;
                 gizmoMindLinkDisconnect.turnOffSound = SoundDefOf.Checkbox_TurnedOff;
                 gizmoMindLinkDisconnect.defaultLabel = (hediff.disconnectReserved ? LocalizeTexts.CommandCancelDisconnectMindLink : LocalizeTexts.CommandDisconnectMindLink).Translate();

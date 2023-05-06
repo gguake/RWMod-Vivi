@@ -12,6 +12,7 @@ namespace VVRace
         {
             mindLinkSettings = new List<ViviMindLinkSettings>() { mindLinkSetting };
             currentlyIsActive = mindLinkSetting.ReservedToConnectTarget != null;
+            icon = TextureCache.MindLinkConnect;
 
             isActive = () => currentlyIsActive;
         }

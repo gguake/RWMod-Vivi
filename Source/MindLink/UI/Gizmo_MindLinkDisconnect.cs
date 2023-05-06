@@ -12,6 +12,8 @@ namespace VVRace
         {
             mindLinkSettings = new List<ViviMindLinkSettings>() { mindLinkSetting };
             currentlyIsActive = mindLinkSetting.ReservedToDisconnect;
+            icon = TextureCache.MindLinkDisconnect;
+            iconOffset = new UnityEngine.Vector2(0f, -0.07f);
 
             isActive = () => currentlyIsActive;
         }
