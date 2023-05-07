@@ -7,6 +7,7 @@
     <hediffClass>HediffWithComps</hediffClass>
     <defaultLabelColor>(1,0,0.5)</defaultLabelColor>
 
+    <isBad>false</isBad>
     <priceImpact>false</priceImpact>
     <scenarioCanAdd>false</scenarioCanAdd>
 
@@ -29,10 +30,10 @@
     <hediffClass>HediffWithComps</hediffClass>
     <defaultLabelColor>(1,0,0.5)</defaultLabelColor>
     
+    <isBad>false</isBad>
     <priceImpact>false</priceImpact>
     <scenarioCanAdd>false</scenarioCanAdd>
 
-    
     <stages>
       <li>
         <statFactors>
