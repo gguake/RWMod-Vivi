@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Defs>
-  <GeneCategoryDef>
-    <defName>VV_Race</defName>
-    <label>vivi race</label>
-    <displayPriorityInXenotype>-100</displayPriorityInXenotype>
-    <displayPriorityInGenepack>-1000</displayPriorityInGenepack>
-  </GeneCategoryDef>
-</Defs>

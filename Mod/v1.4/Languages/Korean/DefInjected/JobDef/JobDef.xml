@@ -8,7 +8,4 @@
 
   <VV_LayViviEgg.reportString>알 낳는 중.</VV_LayViviEgg.reportString>
   <VV_HaulViviEgg.reportString>부화기로 알 운반 중.</VV_HaulViviEgg.reportString>
-  
-  <VV_ConnectMindLink.reportString>TargetA와 정신 결속을 연결하는 중.</VV_ConnectMindLink.reportString>
-  <VV_DisconnectMindLink.reportString>TargetA와 정신 결속을 해제하는 중.</VV_DisconnectMindLink.reportString>
 </LanguageData>

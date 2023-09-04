@@ -47,4 +47,19 @@
     </requiredCapacities>
     <prioritizeSustains>true</prioritizeSustains>
   </WorkGiverDef>
+  
+  <WorkGiverDef>
+    <defName>VV_FertilizeArtificialPlant</defName>
+    <label>fertilize plant</label>
+    <giverClass>VVRace.WorkGiver_FertilizeArtificialPlant</giverClass>
+    <workType>Hauling</workType>
+    <verb>fertilize</verb>
+    <gerund>fertilizing</gerund>
+    <priorityInType>100</priorityInType>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <prioritizeSustains>true</prioritizeSustains>
+  </WorkGiverDef>
+
 </Defs>

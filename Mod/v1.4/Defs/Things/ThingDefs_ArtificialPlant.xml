@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <ThingDef ParentName="MinifiedThing">
+    <defName>MinifiedArtificialPlant</defName>
+    <label>minified artificial plant</label>
+    <thingClass>VVRace.MinifiedArtificialPlant</thingClass>
+    
+    <statBases>
+      <Mass>10</Mass>
+      <Flammability>1</Flammability>
+    </statBases>
+  </ThingDef>
+
+  <ThingDef Abstract="True" Name="VV_ArtificialPlantBase">
+    <category>Building</category>
+    <thingClass>VVRace.ArtificialPlant</thingClass>
+    <tickerType>Rare</tickerType>
+    <selectable>true</selectable>
+    <neverMultiSelect>true</neverMultiSelect>
+
+    <drawerType>MapMeshOnly</drawerType>
+    <graphicData>
+      <shaderType>CutoutPlant</shaderType>
+      <drawSize>(1.2, 1.2)</drawSize>
+    </graphicData>
+    <altitudeLayer>BuildingOnTop</altitudeLayer>
+    
+    <minifiedDef>MinifiedArtificialPlant</minifiedDef>
+    <pathCostIgnoreRepeat>false</pathCostIgnoreRepeat>
+
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <Mass>10</Mass>
+      <Flammability>1</Flammability>
+    </statBases>
+    <size>(1,1)</size>
+    <stackLimit>1</stackLimit>
+
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <thingCategories>
+      <li>VV_ArtificialPlant</li>
+    </thingCategories>
+
+    <placeWorkers>
+      <li>VVRace.PlaceWorker_AllowArtificialPlantPot</li>
+    </placeWorkers>
+
+    <building>
+      <deconstructible>false</deconstructible>
+      <alwaysDeconstructible>false</alwaysDeconstructible>
+      
+      <allowWireConnection>false</allowWireConnection>
+      <allowAutoroof>false</allowAutoroof>
+      <repairable>false</repairable>
+      <artificialForMeditationPurposes>false</artificialForMeditationPurposes>
+      <canPlaceOverWall>false</canPlaceOverWall>
+    </building>
+    
+    <tradeTags>
+      <li>VV_ArtificialPlant</li>
+    </tradeTags>
+  </ThingDef>
+
+  <!-- 불꽃 -->
+  <ThingDef ParentName="VV_ArtificialPlantBase">
+    <defName>VV_EmberFlower</defName>
+    <label>ember flower</label>
+    <description>.</description>
+
+    <graphicData>
+      <texPath>Things/Plants/VV_EmberFlower</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Metal_Drop</soundDrop>
+
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <MarketValue>150</MarketValue>
+      <MaxHitPoints>60</MaxHitPoints>
+    </statBases>
+
+    <tradeability>None</tradeability>
+
+    <comps>
+      <li Class="VVRace.CompProperties_GlowerFlora">
+        <glowRadius>10</glowRadius>
+        <glowColor>(255,247,138,0)</glowColor>
+      </li>
+
+      <li Class="CompProperties_HeatPusher">
+        <compClass>VVRace.CompHeatPusherFloraEnergy</compClass>
+        <heatPerSecond>21</heatPerSecond>
+        <heatPushMaxTemperature>29</heatPushMaxTemperature>
+      </li>
+    </comps>
+
+    <modExtensions>
+      <li Class="VVRace.ArtificialPlantModExtension">
+        <energyCapacity>100</energyCapacity>
+        <zeroEnergyDamageByChance>1~4</zeroEnergyDamageByChance>
+
+        <energyConsumeRule Class="VVRace.EnergyRule_Constant">
+          <energy>20</energy>
+        </energyConsumeRule>
+        <energyGenerateRule Class="VVRace.EnergyRule_Temperature">
+          <activeTemperatureRange>30~120</activeTemperatureRange>
+          <energyByTemperatureRange>20~120</energyByTemperatureRange>
+        </energyGenerateRule>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- 서리꽃 -->
+  <ThingDef ParentName="VV_ArtificialPlantBase">
+    <defName>VV_FrostFlower</defName>
+    <label>frost flower</label>
+    <description>.</description>
+
+    <graphicData>
+      <texPath>Things/Plants/VV_FrostFlower</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Metal_Drop</soundDrop>
+
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <MarketValue>150</MarketValue>
+      <MaxHitPoints>60</MaxHitPoints>
+    </statBases>
+
+    <tradeability>None</tradeability>
+
+    <comps>
+      <li Class="VVRace.CompProperties_GlowerFlora">
+        <glowRadius>3</glowRadius>
+        <glowColor>(157,217,246,0)</glowColor>
+      </li>
+
+      <li Class="CompProperties_HeatPusher">
+        <compClass>VVRace.CompHeatPusherFloraEnergy</compClass>
+        <heatPerSecond>-16</heatPerSecond>
+        <heatPushMaxTemperature>-9</heatPushMaxTemperature>
+      </li>
+    </comps>
+    
+    <modExtensions>
+      <li Class="VVRace.ArtificialPlantModExtension">
+        <energyCapacity>100</energyCapacity>
+        <zeroEnergyDamageByChance>1~4</zeroEnergyDamageByChance>
+
+        <energyConsumeRule Class="VVRace.EnergyRule_Constant">
+          <energy>20</energy>
+        </energyConsumeRule>
+        <energyGenerateRule Class="VVRace.EnergyRule_Temperature">
+          <activeTemperatureRange>-100~-10</activeTemperatureRange>
+          <energyByTemperatureRange>20~120</energyByTemperatureRange>
+        </energyGenerateRule>
+      </li>
+    </modExtensions>
+  </ThingDef>
+  
+  <!-- 축전꽃 -->
+  <ThingDef ParentName="VV_ArtificialPlantBase">
+    <defName>VV_BatteryFlower</defName>
+    <label>battery flower</label>
+    <description>.</description>
+    <tickerType>Normal</tickerType>
+    <thingClass>VVRace.BatteryFlower</thingClass>
+
+    <graphicData>
+      <texPath>Things/Plants/VV_BatteryFlower</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Metal_Drop</soundDrop>
+
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <MarketValue>150</MarketValue>
+      <MaxHitPoints>90</MaxHitPoints>
+    </statBases>
+
+    <tradeability>None</tradeability>
+
+    <comps>
+      <li Class="VVRace.CompProperties_GlowerFlora">
+        <glowRadius>5</glowRadius>
+        <glowColor>(213,110,248,0)</glowColor>
+      </li>
+      <li Class="CompProperties_Battery">
+        <storedEnergyMax>400</storedEnergyMax>
+        <efficiency>0.5</efficiency>
+        <shortCircuitInRain>false</shortCircuitInRain>
+        <transmitsPower>true</transmitsPower>
+      </li>
+    </comps>
+
+    <building>
+      <allowWireConnection>true</allowWireConnection>
+    </building>
+    
+    <modExtensions>
+      <li Class="VVRace.ArtificialPlantModExtension">
+        <energyCapacity>200</energyCapacity>
+        <zeroEnergyDamageByChance>1~10</zeroEnergyDamageByChance>
+
+        <energyConsumeRule Class="VVRace.EnergyRule_Constant">
+          <energy>20</energy>
+        </energyConsumeRule>
+        <energyGenerateRule Class="VVRace.EnergyRule_BatteryStored">
+          <energyByBatteryStored>0~40</energyByBatteryStored>
+        </energyGenerateRule>
+
+        <empExplosiveMinimumEnergy>150</empExplosiveMinimumEnergy>
+        <empExplosiveEnergy>120</empExplosiveEnergy>
+        <empExplosiveRadiusRange>2~7</empExplosiveRadiusRange>
+      </li>
+    </modExtensions>
+  </ThingDef>
+  
+  <!-- 충전꽃 -->
+  <ThingDef ParentName="VV_ArtificialPlantBase">
+    <defName>VV_ChargeFlower</defName>
+    <label>charge flower</label>
+    <description>.</description>
+    <tickerType>Normal</tickerType>
+
+    <graphicData>
+      <texPath>Things/Plants/VV_PowerFlower</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Metal_Drop</soundDrop>
+
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <MarketValue>150</MarketValue>
+      <MaxHitPoints>120</MaxHitPoints>
+    </statBases>
+
+    <tradeability>None</tradeability>
+
+    <comps>
+      <li Class="VVRace.CompProperties_GlowerFlora">
+        <glowRadius>5</glowRadius>
+        <glowColor>(213,110,248,0)</glowColor>
+      </li>
+      <li Class="CompProperties_Power">
+        <compClass>VVRace.CompPowerFloraEnergy</compClass>
+        <basePowerConsumption>-500</basePowerConsumption>
+        <transmitsPower>true</transmitsPower>
+      </li>
+    </comps>
+
+    <building>
+      <allowWireConnection>true</allowWireConnection>
+    </building>
+    
+    <modExtensions>
+      <li Class="VVRace.ArtificialPlantModExtension">
+        <energyCapacity>500</energyCapacity>
+        <zeroEnergyDamageByChance>1~10</zeroEnergyDamageByChance>
+
+        <energyConsumeRule Class="VVRace.EnergyRule_Constant">
+          <energy>100</energy>
+        </energyConsumeRule>
+      </li>
+    </modExtensions>
+  </ThingDef>
+  
+  <!-- 물꽃 -->
+  <ThingDef ParentName="VV_ArtificialPlantBase">
+    <defName>VV_HydroFlower</defName>
+    <label>hydroflower</label>
+    <description>.</description>
+    <thingClass>VVRace.WaterFlower</thingClass>
+
+    <graphicData>
+      <texPath>Things/Plants/VV_WaterFlower</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Metal_Drop</soundDrop>
+
+    <terrainAffordanceNeeded>VV_WaterOrLight</terrainAffordanceNeeded>
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <MarketValue>150</MarketValue>
+      <MaxHitPoints>50</MaxHitPoints>
+      <Flammability>0</Flammability>
+    </statBases>
+
+    <tradeability>None</tradeability>
+
+    <comps>
+    </comps>
+    
+    <modExtensions>
+      <li Class="VVRace.ArtificialPlantModExtension">
+        <energyCapacity>400</energyCapacity>
+        <initialEnergyPercent>1.0</initialEnergyPercent>
+        <zeroEnergyDamageByChance>1~5</zeroEnergyDamageByChance>
+
+        <energyConsumeRule Class="VVRace.EnergyRule_Constant">
+          <energy>10</energy>
+        </energyConsumeRule>
+        <energyGenerateRule Class="VVRace.EnergyRule_AdjacentWater">
+          <energyByOccupiedWaterCell>50</energyByOccupiedWaterCell>
+          <energyByAdjacentWaterCell>25</energyByAdjacentWaterCell>
+        </energyGenerateRule>
+
+        <fireExtinguishMinimumEnergy>150</fireExtinguishMinimumEnergy>
+        <fireExtinguishEnergy>100</fireExtinguishEnergy>
+        <fireExtinguishSensorRadius>5.9</fireExtinguishSensorRadius>
+        <fireExtinguishExplosiveRadius>10.9</fireExtinguishExplosiveRadius>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- 해꽃 -->
+  <ThingDef ParentName="VV_ArtificialPlantBase">
+    <defName>VV_SolarFlower</defName>
+    <label>solar flower</label>
+    <description>.</description>
+    <thingClass>VVRace.SolarFlower</thingClass>
+    <tickerType>Rare</tickerType>
+
+    <graphicData>
+      <texPath>Things/Plants/VV_Sunflower</texPath>
+      <graphicClass>VVRace.Graphic_Conditional</graphicClass>
+    </graphicData>
+
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Metal_Drop</soundDrop>
+
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <MarketValue>150</MarketValue>
+      <MaxHitPoints>120</MaxHitPoints>
+    </statBases>
+
+    <tradeability>None</tradeability>
+
+    <comps>
+      <li Class="VVRace.CompProperties_GlowerFlora">
+        <glowRadius>14</glowRadius>
+        <glowColor>(370,370,370,0)</glowColor>
+        <overlightRadius>7.0</overlightRadius>
+        <glowOnlyRoofed>true</glowOnlyRoofed>
+      </li>
+      <li Class="CompProperties_Schedule">
+        <!-- Match plant growing times -->
+        <startTime>0.25</startTime>
+        <endTime>0.8</endTime>
+        <offMessage>Off for plant resting period</offMessage>
+      </li>
+    </comps>
+    <specialDisplayRadius>5.8</specialDisplayRadius>
+
+    <modExtensions>
+      <li Class="VVRace.ArtificialPlantModExtension">
+        <energyCapacity>400</energyCapacity>
+        <zeroEnergyDamageByChance>1~10</zeroEnergyDamageByChance>
+
+        <energyConsumeRule Class="VVRace.EnergyRule_CompositeSum">
+          <rules>
+            <li Class="VVRace.EnergyRule_GlowerActive">
+              <energy>70</energy>
+            </li>
+            <li Class="VVRace.EnergyRule_Constant">
+              <energy>10</energy>
+            </li>
+          </rules>
+        </energyConsumeRule>
+        <energyGenerateRule Class="VVRace.EnergyRule_Sunlight">
+          <energyFromSunlightRange>0~150</energyFromSunlightRange>
+        </energyGenerateRule>
+      </li>
+    </modExtensions>
+  </ThingDef>
+</Defs>

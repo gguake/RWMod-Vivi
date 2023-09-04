@@ -212,11 +212,6 @@ namespace VVRace
                                 if (pawn.RaceProps.IsFlesh)
                                 {
                                     pawn.relations.AddDirectRelation(PawnRelationDefOf.Parent, hatcheeParent);
-
-                                    if (hatcheeParent.TryGetMindTransmitter(out var mindTransmitter) && mindTransmitter.CanAddMindLink)
-                                    {
-                                        mindTransmitter.AssignPawnControl(pawn);
-                                    }
                                 }
                             }
                         }

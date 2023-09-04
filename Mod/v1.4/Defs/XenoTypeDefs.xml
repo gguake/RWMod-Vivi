@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <XenotypeDef>
+    <defName>VV_Vivi</defName>
+    <label>vivi</label>
+    <description>.</description>
+    <descriptionShort>.</descriptionShort>
+    <iconPath>UI/Icons/Xenotypes/Vivi</iconPath>
+    <displayPriority>-10000</displayPriority>
+    <inheritable>true</inheritable>
+    <nameMaker>VV_NamerPersonVivi</nameMaker>
+    <chanceToUseNameMaker>1</chanceToUseNameMaker>
+    <factionlessGenerationWeight>0</factionlessGenerationWeight>
+    <combatPowerFactor>0.9</combatPowerFactor>
+    <genes>
+      <li>Mood_Optimist</li>
+      <li>FireTerror</li>
+
+      <li>MinTemp_SmallIncrease</li>
+      <li>MaxTemp_SmallIncrease</li>
+      <li>PsychicAbility_Enhanced</li>
+      <li>AptitudeStrong_Plants</li>
+      <li>AptitudeStrong_Construction</li>
+      <li>AptitudePoor_Melee</li>
+      <li>AptitudePoor_Shooting</li>
+      <li>AptitudeTerrible_Mining</li>
+
+      <li>Beard_NoBeardOnly</li>
+    </genes>
+  </XenotypeDef>
+
+</Defs>

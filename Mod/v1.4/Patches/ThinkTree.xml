@@ -6,18 +6,7 @@
     <value>
       <li Class="VVRace.ThinkNode_ConditionalVivi">
         <subNodes>
-          <li Class="VVRace.JobGiver_ManagingMindLink" />
           <li Class="VVRace.JobGiver_LayViviEgg" />
-        </subNodes>
-      </li>
-      <li Class="VVRace.ThinkNode_ConditionalViviSpecializeWork">
-        <specializationDef>VV_SpecializationGuard</specializationDef>
-        <subNodes>
-          <li Class="VVRace.JobGiver_ExitMapFollowForEscort" />
-          <li Class="VVRace.JobGiver_AIDefendForEscort" />
-          <li Class="VVRace.JobGiver_AIFollowForEscort"/>
-          <li Class="VVRace.JobGiver_AIWaitWithEscort" />
-          <li Class="VVRace.JobGiver_WanderForEscort" />
         </subNodes>
       </li>
     </value>

@@ -192,4 +192,110 @@
     </skillRequirements>
   </RecipeDef>
 
+  <!-- 비료 제작 (썩은 시체) -->
+  <RecipeDef>
+    <defName>VV_MakeFertilizerCorpse</defName>
+    <label>make fertilizer from rotten corpse</label>
+    <description>test</description>
+    <jobString>making fertilizer from rotten corpse.</jobString>
+    <workAmount>1200</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <workSkill>Plants</workSkill>
+    <workSkillLearnFactor>0.1</workSkillLearnFactor>
+
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_Brewing</soundWorking>
+    <uiIconThing>VV_Fertilizer</uiIconThing>
+
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_Propolis</li>
+          </thingDefs>
+        </filter>
+        <count>5</count>
+      </li>
+      <li>
+        <filter>
+          <categories>
+            <li>Corpses</li>
+          </categories>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <categories>
+        <li>Corpses</li>
+      </categories>
+      <disallowedCategories>
+        <li>CorpsesMechanoid</li>
+      </disallowedCategories>
+      <specialFiltersToAllow>
+        <li>AllowRotten</li>
+      </specialFiltersToAllow>
+      <specialFiltersToDisallow>
+        <li>AllowFresh</li>
+      </specialFiltersToDisallow>
+    </fixedIngredientFilter>
+    <defaultIngredientFilter>
+      <categories>
+        <li>Corpses</li>
+      </categories>
+      <specialFiltersToAllow>
+        <li>AllowCorpsesColonist</li>
+        <li MayRequire="Ludeon.RimWorld.Ideology">AllowCorpsesSlave</li>
+        <li>AllowCorpsesStranger</li>
+        <li>AllowRotten</li>
+      </specialFiltersToAllow>
+    </defaultIngredientFilter>
+    
+    <products>
+      <VV_Fertilizer>40</VV_Fertilizer>
+    </products>
+  </RecipeDef>
+  
+  <!-- 비료 제작 (자원) -->
+  <RecipeDef>
+    <defName>VV_MakeFertilizerResource</defName>
+    <label>make fertilizer</label>
+    <description>test</description>
+    <jobString>making fertilizer.</jobString>
+    <workAmount>900</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <workSkill>Plants</workSkill>
+    <workSkillLearnFactor>0.1</workSkillLearnFactor>
+
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_Brewing</soundWorking>
+    <uiIconThing>VV_Fertilizer</uiIconThing>
+
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_Propolis</li>
+          </thingDefs>
+        </filter>
+        <count>5</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Hay</li>
+          </thingDefs>
+        </filter>
+        <count>25</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+    </fixedIngredientFilter>
+    <defaultIngredientFilter>
+    </defaultIngredientFilter>
+    
+    <products>
+      <VV_Fertilizer>40</VV_Fertilizer>
+    </products>
+  </RecipeDef>
 </Defs>

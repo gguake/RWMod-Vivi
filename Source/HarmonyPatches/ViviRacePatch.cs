@@ -1,6 +1,7 @@
 ﻿using HarmonyLib;
 using MonoMod.Utils;
 using RimWorld;
+using RimWorld.BaseGen;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -29,24 +30,8 @@ namespace VVRace.HarmonyPatches
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(LifeStageWorker_HumanlikeAdult_Notify_LifeStageStarted_Postfix)));
 
             harmony.Patch(
-                original: AccessTools.Method(typeof(Pawn), nameof(Pawn.SetFaction)),
-                postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(Pawn_SetFaction_Postfix)));
-
-            harmony.Patch(
-                original: AccessTools.Method(typeof(Pawn), nameof(Pawn.SpawnSetup)),
-                postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(Pawn_SetFaction_Postfix)));
-
-            harmony.Patch(
-                original: AccessTools.Method(typeof(Pawn), nameof(Pawn.DeSpawn)),
-                postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(Pawn_Despawn_Postfix)));
-
-            harmony.Patch(
-                original: AccessTools.Method(typeof(Pawn), nameof(Pawn.DrawAt)),
-                postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(Pawn_DrawAt_Postfix)));
-
-            harmony.Patch(
-                original: AccessTools.Method(typeof(PawnGroupMaker), nameof(PawnGroupMaker.GeneratePawns)),
-                postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(PawnGroupMaker_GeneratePawns_Postfix)));
+                original: AccessTools.Method(typeof(PawnGenerator), "GenerateBodyType"),
+                prefix: new HarmonyMethod(typeof(ViviRacePatch), nameof(PawnGenerator_GenerateBodyType_Prefix)));
 
             // 생산시 열량 소모 패치
             harmony.Patch(
@@ -64,27 +49,21 @@ namespace VVRace.HarmonyPatches
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(ScenPart_PlayerPawnsArriveMethod_GenerateIntoMap_Postfix)));
 
             harmony.Patch(
-                original: AccessTools.PropertySetter(typeof(Pawn_StoryTracker), nameof(Pawn_StoryTracker.HairColor)),
-                transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(Pawn_StoryTracker_set_HairColor_Transpiler)));
-
-            #region 연구 관련
-            //harmony.Patch(
-            //    original: AccessTools.Method(typeof(MainTabWindow_Architect), "CacheDesPanels"),
-            //    postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(MainTabWindow_Architect_CacheDesPanels_Postfix)));
-
-            //harmony.Patch(
-            //    original: AccessTools.Method(typeof(ResearchManager), nameof(ResearchManager.FinishProject)),
-            //    postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(ResearchManager_FinishProject_Postfix)));
-            #endregion
-
-            harmony.Patch(
                 original: AccessTools.PropertyGetter(typeof(Pawn_AgeTracker), "GrowthPointsFactor"),
                 transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(Pawn_AgeTracker_get_GrowthPointsFactor_Transpiler)));
+
+            harmony.Patch(
+                original: AccessTools.Method(typeof(Pawn_InteractionsTracker), nameof(Pawn_InteractionsTracker.TryInteractWith)),
+                postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(Pawn_InteractionsTracker_TryInteractWith_Postfix)));
+
+            harmony.Patch(
+                original: AccessTools.Method(typeof(InteractionWorker_RomanceAttempt), nameof(InteractionWorker_RomanceAttempt.SuccessChance)),
+                prefix: new HarmonyMethod(typeof(ViviRacePatch), nameof(InteractionWorker_RomanceAttempt_SuccessChance_Prefix)));
         }
 
         private static void Pawn_NeedsTracker_ShouldHaveNeed_Postfix(ref bool __result, Pawn ___pawn, NeedDef nd)
         {
-            if (nd == VVNeedDefOf.VV_RoyalJelly && !___pawn.TryGetViviGene(out _))
+            if (nd == VVNeedDefOf.VV_RoyalJelly && !(___pawn is Vivi))
             {
                 __result = false;
             }
@@ -92,77 +71,43 @@ namespace VVRace.HarmonyPatches
 
         private static void LifeStageWorker_HumanlikeChild_Notify_LifeStageStarted_Postfix(Pawn pawn, LifeStageDef previousLifeStage)
         {
-            if (previousLifeStage != null && previousLifeStage.developmentalStage.Baby() && pawn.TryGetViviGene(out var gene))
+            if (previousLifeStage != null && previousLifeStage.developmentalStage.Baby() && pawn is Vivi vivi)
             {
-                gene.Notify_ChildLifeStageStart();
+                vivi.Notify_ChildLifeStageStart();
             }
         }
 
         private static void LifeStageWorker_HumanlikeAdult_Notify_LifeStageStarted_Postfix(Pawn pawn, LifeStageDef previousLifeStage)
         {
-            if (previousLifeStage != null && previousLifeStage.developmentalStage.Juvenile() && pawn.TryGetViviGene(out var gene))
+            if (previousLifeStage != null && previousLifeStage.developmentalStage.Juvenile() && pawn is Vivi vivi)
             {
-                gene.Notify_AdultLifeStageStarted();
+                vivi.Notify_AdultLifeStageStart();
             }
         }
 
-        private static void Pawn_SetFaction_Postfix(Pawn __instance)
+        private static bool PawnGenerator_GenerateBodyType_Prefix(Pawn pawn, PawnGenerationRequest request)
         {
-            if (__instance.TryGetMindTransmitter(out var mindTransmitter))
+            if (pawn is Vivi vivi)
             {
-                mindTransmitter.Notify_ChangedFaction();
-            }    
-        }
+                pawn.story.bodyType = BodyTypeDefOf.Thin;
 
-        private static void Pawn_SpawnSetup_Postfix(Pawn __instance, bool respawningAfterLoad)
-        {
-            if (__instance.TryGetMindTransmitter(out var mindTransmitter))
-            {
-                mindTransmitter.Notify_Spawned(respawningAfterLoad);
-            }
-        }
-
-        private static void Pawn_Despawn_Postfix(Pawn __instance, DestroyMode mode)
-        {
-            if (__instance.TryGetMindTransmitter(out var mindTransmitter))
-            {
-                mindTransmitter.Notify_DeSpawned(mode);
-            }
-        }
-
-        private static void Pawn_DrawAt_Postfix(Pawn __instance, Vector3 drawLoc, bool flip)
-        {
-            if (__instance.TryGetMindTransmitter(out var mindTransmitter))
-            {
-                mindTransmitter.Notify_DrawAt(drawLoc, flip);
-            }
-        }
-
-        private static void PawnGroupMaker_GeneratePawns_Postfix(IEnumerable<Pawn> __result, PawnGroupMaker __instance, PawnGroupMakerParms parms)
-        {
-            var result = __result.ToList();
-            var royalVivis = result.Where(v => v.TryGetViviGene(out var vivi) && vivi.IsRoyal && vivi.pawn.HasMindTransmitter()).ToList();
-
-            foreach (var pawn in result)
-            {
-                if (royalVivis.Count() == 0) { return; }
-
-                if (pawn.TryGetViviGene(out var vivi) && !vivi.IsRoyal)
+                if (vivi.kindDef is PawnKindDef_Vivi kindDefExt)
                 {
-                    var i = Rand.RangeInclusive(0, royalVivis.Count() - 1);
-
-                    var targetRoyalVivi = royalVivis[i];
-                    if (targetRoyalVivi.TryGetMindTransmitter(out var mindTransmitter) && mindTransmitter.CanAddMindLink)
+                    if (kindDefExt.isRoyal)
                     {
-                        mindTransmitter.AssignPawnControl(pawn);
+                        vivi.SetRoyal();
 
-                        if (!mindTransmitter.CanAddMindLink)
+                        if (!kindDefExt.preventRoyalBodyType)
                         {
-                            royalVivis.Remove(targetRoyalVivi);
+                            pawn.story.bodyType = BodyTypeDefOf.Female;
                         }
                     }
                 }
+
+                return false;
             }
+
+            return true;
         }
 
         private static Action<MainTabWindow_Architect> _MainTabWindow_Architect_CacheDesPanel = AccessTools.Method(typeof(MainTabWindow_Architect), "CacheDesPanels")
@@ -243,7 +188,7 @@ namespace VVRace.HarmonyPatches
         {
             if (map.IsPlayerHome)
             {
-                var startingRoyalVivis = Find.GameInitData.startingAndOptionalPawns?.Where(v => v.Spawned && v.TryGetViviGene(out var vivi) && vivi.IsRoyal).ToList();
+                var startingRoyalVivis = Find.GameInitData.startingAndOptionalPawns?.Where(pawn => pawn.Spawned && pawn is Vivi vivi && vivi.IsRoyal).ToList();
 
                 var allEggs = map.spawnedThings.Where(v => v.def == VVThingDefOf.VV_ViviEgg);
                 foreach (var egg in allEggs)
@@ -258,37 +203,6 @@ namespace VVRace.HarmonyPatches
                     hatcher.hatcheeParent = startingRoyalVivis.RandomElement();
                 }
             }
-        }
-
-        private static IEnumerable<CodeInstruction> Pawn_StoryTracker_set_HairColor_Transpiler(IEnumerable<CodeInstruction> codeInstructions, ILGenerator ilGenerator)
-        {
-            var instructions = codeInstructions.ToList();
-
-            var geneLocal = ilGenerator.DeclareLocal(typeof(Gene_Vivi));
-            var conditionalSkipLabel = ilGenerator.DefineLabel();
-            var jumpLabel = ilGenerator.DefineLabel();
-            var injections = new CodeInstruction[]
-            {
-                // if (pawn.TryGetViviGene(out var gene) && gene.Notify_HairColorChanged(color))
-                new CodeInstruction(OpCodes.Ldarg_0),
-                new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(Pawn_StoryTracker), "pawn")),
-                new CodeInstruction(OpCodes.Ldloca_S, geneLocal.LocalIndex),
-                new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(ViviRaceUtility), nameof(ViviRaceUtility.TryGetViviGene))),
-                new CodeInstruction(OpCodes.Brfalse_S, conditionalSkipLabel),
-                new CodeInstruction(OpCodes.Ldloc_S, geneLocal.LocalIndex),
-                new CodeInstruction(OpCodes.Ldarg_1),
-                new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(Gene_Vivi), nameof(Gene_Vivi.Notify_HairColorChanged))),
-
-                // goto jumpLabel
-                new CodeInstruction(OpCodes.Brtrue_S, jumpLabel),
-            };
-
-            var injectIndex = instructions.FirstIndexOfInstruction(OpCodes.Stfld, AccessTools.Method(typeof(Pawn_StoryTracker), "hairColor")) - 2;
-            instructions[injectIndex].labels.Add(conditionalSkipLabel);
-            instructions[injectIndex + 3].labels.Add(jumpLabel);
-
-            instructions.InsertRange(injectIndex, injections);
-            return instructions;
         }
 
         private static IEnumerable<CodeInstruction> Pawn_AgeTracker_get_GrowthPointsFactor_Transpiler(IEnumerable<CodeInstruction> codeInstructions)
@@ -308,6 +222,63 @@ namespace VVRace.HarmonyPatches
 
                 yield return inst;
             }
+        }
+
+        private static void Pawn_InteractionsTracker_TryInteractWith_Postfix(Pawn ___pawn, Pawn recipient, InteractionDef intDef, bool __result)
+        {
+            if (!__result) { return; }
+
+            if (___pawn is Vivi viviA && recipient is Vivi viviB && viviA.Faction == viviB.Faction)
+            {
+                Vivi giver, receiver;
+                if (viviA.IsRoyal)
+                {
+                    giver = viviA;
+                    receiver = viviB;
+                }
+                else if (viviB.IsRoyal)
+                {
+                    giver = viviB;
+                    receiver = viviA;
+                }
+                else
+                {
+                    return;
+                }
+
+                if (intDef.recipientThought == null || intDef.recipientThought.stages.NullOrEmpty()) { return; }
+
+                float baseOffset = intDef.recipientThought.stages[0].baseOpinionOffset;
+                float socialImpactMultiplier = giver.GetStatValue(StatDefOf.SocialImpact);
+
+                float beauty = giver.GetStatValue(StatDefOf.PawnBeauty);
+                float beautyMultiplier = Mathf.Pow(1.5f, Mathf.Abs(beauty));
+
+                float multiplier = socialImpactMultiplier;
+                if (baseOffset > 0f ^ beauty > 0f)
+                {
+                    multiplier /= beautyMultiplier;
+                }
+                else
+                {
+                    multiplier *= beautyMultiplier;
+                }
+
+                var value = baseOffset * multiplier;
+                var loyalty = receiver.needs.TryGetNeed<Need_Loyalty>();
+                loyalty.Notify_InteractWith(value);
+            }
+        }
+
+        private static bool InteractionWorker_RomanceAttempt_SuccessChance_Prefix(Pawn initiator, Pawn recipient, ref float __result)
+        {
+            if (recipient is Vivi)
+            {
+                __result = 0f;
+                return false;
+            }
+
+            return true;
         }
     }
 }

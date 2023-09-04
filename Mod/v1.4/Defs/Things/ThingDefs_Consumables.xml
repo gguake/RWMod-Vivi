@@ -120,6 +120,9 @@
     <defName>VV_HoneyPollenCake</defName>
     <label>honey pollen cake</label>
     <description>test</description>
+    <descriptionHyperlinks>
+      <HediffDef>VV_ViviGrowthBoost</HediffDef>
+    </descriptionHyperlinks>
     <graphicData>
       <texPath>Things/Item/VV_HoneyCake</texPath>
     </graphicData>
@@ -172,6 +175,10 @@
 		<defName>VV_RoyalJelly</defName>
 		<label>royal jelly</label>
 		<description>.</description>
+    <descriptionHyperlinks>
+      <HediffDef>VV_RoyalJelly</HediffDef>
+      <HediffDef>VV_ViviGrowthBoost</HediffDef>
+    </descriptionHyperlinks>
 		<graphicData>
 			<texPath>Things/Item/VV_RoyalJelly</texPath>
 		</graphicData>

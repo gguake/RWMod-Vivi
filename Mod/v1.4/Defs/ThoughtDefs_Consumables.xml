@@ -5,9 +5,6 @@
     <showBubble>true</showBubble>
     <icon>Things/Mote/ThoughtSymbol/Food</icon>
     <durationDays>1</durationDays>
-    <nullifyingGenes>
-      <li>VV_ViviGene</li>
-    </nullifyingGenes>
     <stages>
       <li>
         <label>ate pollen</label>

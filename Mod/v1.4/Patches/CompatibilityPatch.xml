@@ -1,8 +1,0 @@
-<Patch>
-  <Operation Class="PatchOperationReplace">
-    <xpath>Defs/HeadTypeDef[@Name="VV_HeadBase"]/hairMeshSize</xpath>
-    <value>
-      <hairMeshSize>(1.125,1.125)</hairMeshSize>
-    </value>
-  </Operation>
-</Patch>

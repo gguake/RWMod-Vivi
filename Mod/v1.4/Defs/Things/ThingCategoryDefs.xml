@@ -34,4 +34,11 @@
     <parent>AnimalProductRaw</parent>
     <iconPath>UI/Icons/ThingCategories/VV_ViviProduct</iconPath>
   </ThingCategoryDef>
+  
+  <ThingCategoryDef>
+    <defName>VV_ArtificialPlant</defName>
+    <label>artificial plant</label>
+    <parent>Plants</parent>
+    <iconPath>UI/Icons/ThingCategories/VV_ViviProduct</iconPath>
+  </ThingCategoryDef>
 </Defs>

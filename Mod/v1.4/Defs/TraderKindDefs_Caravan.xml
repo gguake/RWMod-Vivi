@@ -98,94 +98,46 @@
     </stockGenerators>
   </TraderKindDef>
 
-  <!-- 희귀품 상인 -->
+  <!-- 원예 상품 상인 -->
   <TraderKindDef>
-    <defName>VV_Caravan_Vivi_Exotics</defName>
-    <label>exotic goods trader</label>
+    <defName>VV_Caravan_Vivi_Gardening</defName>
+    <label>gardening trader</label>
     <stockGenerators>
       
       <!-- Resources -->
       <li Class="StockGenerator_SingleDef">
         <thingDef>Silver</thingDef>
-        <countRange>750~1500</countRange>
-      </li>
-      <li Class="StockGenerator_SingleDef">
-        <thingDef>ComponentIndustrial</thingDef>
-        <countRange>3~20</countRange>
-      </li>
-      <li Class="StockGenerator_SingleDef">
-        <thingDef>Gold</thingDef>
-        <countRange>30~100</countRange>
+        <countRange>600~1000</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>Neutroamine</thingDef>
         <countRange>40~100</countRange>
       </li>
-      <li Class="StockGenerator_Category">
-        <categoryDef>Medicine</categoryDef>
-        <maxTechLevelGenerate>Industrial</maxTechLevelGenerate>
-        <maxTechLevelBuy>Ultra</maxTechLevelBuy>
-        <countRange>1~2</countRange>
-      </li>
       
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_FilteredHoney</thingDef>
-        <countRange>100~200</countRange>
-      </li>
-      
-      <li Class="StockGenerator_SingleDef">
-        <thingDef>VV_RoyalJelly</thingDef>
-        <countRange>30~150</countRange>
-      </li>
-      
-      <li Class="StockGenerator_SingleDef">
-        <thingDef>VV_Propolis</thingDef>
-        <countRange>30~150</countRange>
-      </li>
-
-      <li Class="StockGenerator_SingleDef">
-        <thingDef>InsectJelly</thingDef>
         <countRange>50~100</countRange>
       </li>
       
-      <!-- Drugs -->
-      <li Class="StockGenerator_Category">
-        <categoryDef>Drugs</categoryDef>
-        <maxTechLevelGenerate>Neolithic</maxTechLevelGenerate>
-        <thingDefCountRange>1~1</thingDefCountRange>
-        <totalPriceRange>200~400</totalPriceRange>
-      </li>
-
-      <!-- Techprints -->
-      <li Class="StockGenerator_Techprints">
-        <countChances>
-          <li>
-            <count>1</count>
-            <chance>1</chance>
-          </li>
-        </countChances>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>VV_UnknownSeed</thingDef>
+        <countRange>50~150</countRange>
       </li>
       
+      <!-- Drugs -->
+
+      <!-- Techprints -->
+      
       <!-- Weapons -->
-      <li Class="StockGenerator_Category">
-        <maxTechLevelGenerate>Medieval</maxTechLevelGenerate>
-        <categoryDef>WeaponsMelee</categoryDef>
-        <thingDefCountRange>-1~3</thingDefCountRange>
-        <countRange>1~1</countRange>
-      </li>
       <li Class="StockGenerator_MarketValue">
         <tradeTag>VV_ViviTool</tradeTag>
-        <countRange>1~3</countRange>
-      </li>
-      <li Class="StockGenerator_MarketValue">
-        <tradeTag>VV_ViviExotic</tradeTag>
-        <countRange>0~1</countRange>
+        <countRange>1~4</countRange>
       </li>
       
       <!-- Apparel -->
       <li Class="StockGenerator_MarketValue">
         <tradeTag>VV_ViviApparel</tradeTag>
-        <countRange>2~4</countRange>
+        <countRange>1~3</countRange>
       </li>
 
       <!-- Implants -->
@@ -196,19 +148,14 @@
         <thingDef>Telescope</thingDef>
         <countRange>0~1</countRange>
       </li>
+      <li Class="StockGenerator_MarketValue">
+        <tradeTag>VV_ArtificialPlant</tradeTag>
+        <countRange>1~10</countRange>
+      </li>
 
       <!-- Exotic -->
-      <li Class="StockGenerator_Tag">
-        <tradeTag>Artifact</tradeTag>
-        <thingDefCountRange>3~3</thingDefCountRange>
-        <countRange>1~1</countRange>
-      </li>
 
       <!-- Genepacks -->
-      <li MayRequire="Ludeon.RimWorld.Biotech" Class="StockGenerator_SingleDef">
-        <thingDef>Genepack</thingDef>
-        <countRange>0~1</countRange>
-      </li>
       
       <!-- Slaves -->
       <!-- none -->
@@ -234,7 +181,6 @@
       <li Class="StockGenerator_BuyTradeTag"><tag>VV_ViviHoney</tag></li>
       <li Class="StockGenerator_BuyTradeTag"><tag>VV_ViviTool</tag></li>
       <li Class="StockGenerator_BuyTradeTag"><tag>VV_ViviApparel</tag></li>
-      <li Class="StockGenerator_BuyTradeTag"><tag>Art</tag></li>
       <li Class="StockGenerator_BuyTradeTag"><tag>MusicalInstrument</tag></li>
       
     </stockGenerators>

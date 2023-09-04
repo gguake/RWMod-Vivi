@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <HeadTypeDef Abstract="True" Name="VV_HeadBase">
-    <randomChosen>true</randomChosen>
+  <HeadTypeDef Abstract="True" Name="VV_HeadBase" ParentName="AverageBase">
     <gender>None</gender>
-
-    <requiredGenes>
-      <li>VV_HeadGene</li>
-    </requiredGenes>
-    
-    <hairMeshSize>(1.125,1.125)</hairMeshSize>
   </HeadTypeDef>
   
   <HeadTypeDef ParentName="VV_HeadBase">
@@ -33,5 +26,11 @@
     <defName>VV_Vivi_D</defName>
     <label>vivi headD</label>
     <graphicPath>Things/Pawn/Vivi/Heads/HeadD</graphicPath>
+  </HeadTypeDef>
+
+  <HeadTypeDef ParentName="VV_HeadBase">
+    <defName>VV_Vivi_E</defName>
+    <label>vivi headE</label>
+    <graphicPath>Things/Pawn/Vivi/Heads/HeadE</graphicPath>
   </HeadTypeDef>
 </Defs>

@@ -14,10 +14,15 @@
         public const string GizmoViviEggProgressHeader = "VV_GizmoViviEggProgressHeader";
         public const string GizmoViviEggProgressTooltip = "VV_GizmoViviEggProgressTooltip";
 
+        public const string GizmoSetFertilizeAutoThreshold = "VV_GizmoSetFertilizeAutoThreshold";
+
         public const string InspectorViviHatcheryDisabled = "VV_InspectorViviHatcheryDisabled";
         public const string InspectorViviHatcheryDisabledReasonNoRoof = "VV_InspectorViviHatcheryDisabledReasonNoRoof";
         public const string InspectorViviHatcheryDisabledReasonOutdoor = "VV_InspectorViviHatcheryDisabledReasonOutdoor";
         public const string InspectorViviWallReplaceCooldown = "VV_InspectorViviWallReplaceCooldown";
+        public const string InspectorPlantEnergy = "VV_InspectorPlantEnergy";
+        public const string InspectorPlantEnergyFlux = "VV_InspectorPlantEnergyFlux";
+        public const string InspectorFertilizerAuto = "VV_InspectorFertilizerAuto";
 
         public const string LetterViviEggHatchedLabel = "VV_LetterViviEggHatchedLabel";
         public const string LetterViviEggHatched = "VV_LetterViviEggHatched";
@@ -25,21 +30,10 @@
         public const string LetterRoyalViviGrownLabel = "VV_LetterRoyalViviGrownLabel";
         public const string LetterRoyalViviGrown = "VV_LetterRoyalViviGrown";
 
-        public const string CommandConnectMindLink = "VV_CommandConnectMindLink";
-        public const string CommandConnectMindLinkDesc = "VV_CommandConnectMindLinkDesc";
-        public const string CommandCancelConnectMindLink = "VV_CommandCancelConnectMindLink";
-        public const string CommandDisconnectMindLink = "VV_CommandDisconnectMindLink";
-        public const string CommandDisconnectMindLinkDesc = "VV_CommandDisconnectMindLinkDesc";
-        public const string CommandCancelDisconnectMindLink = "VV_CommandCancelDisconnectMindLink";
-
-        public const string MessageMindLinkConnected = "VV_MessageMindLinkConnected";
-        public const string MessageMindLinkDisconnected = "VV_MessageMindLinkDisconnected";
-        public const string MessageMindLinkForceDisconnected = "VV_MessageMindLinkForceDisconnected";
-
-        public const string MindLinkerDowned = "VV_MindLinkerDowned";
-        public const string MindLinkerImprisoned = "VV_MindLinkerImprisoned";
-        public const string MindLinkerInsideContainer = "VV_MindLinkerInsideContainer";
-        public const string MindLinkerMentalState = "VV_MindLinkerMentalState";
+        public const string CommandFertilizeAutoActivated = "VV_CommandFertilizeAutoActivated";
+        public const string CommandFertilizeAutoActivatedDesc = "VV_CommandFertilizeAutoActivatedDesc";
+        public const string CommandSetFertilizeAutoThreshold = "VV_CommandSetFertilizeAutoThreshold";
+        public const string CommandSetFertilizeAutoThresholdDesc = "VV_CommandSetFertilizeAutoThresholdDesc";
 
         public const string JobFailReasonNoHarvestablePlants = "VV_JobFailReasonNoHarvestablePlants";
         public const string JobFailReasonNoHarvestablePollenFilths = "VV_JobFailReasonNoHarvestablePollenFilths";
@@ -47,5 +41,10 @@
         public const string JobFailReasonViviStarving = "VV_JobFailReasonViviStarving";
 
         public const string ConfirmPopupSpecializationChanged = "VV_ConfirmPopupSpecializationChanged";
+
+        public const string MentalStateReason_Loyalty = "VV_MentalStateReason_Loyalty";
+
+        public const string StatsReport_Energy = "VV_StatsReport_Energy";
+        public const string StatsReport_Energy_Desc = "VV_StatsReport_Energy_Desc";
     }
 }

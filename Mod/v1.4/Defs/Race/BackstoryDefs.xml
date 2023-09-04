@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <BackstoryDef>
+  <AlienRace.AlienBackstoryDef Abstract="True" Name="VV_ViviBackstory">
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+  </AlienRace.AlienBackstoryDef>
+
+
+  <AlienRace.AlienBackstoryDef ParentName="VV_ViviBackstory">
     <defName>VV_ViviHiveChild</defName>
     <title>vivi hive child</title>
     <titleShort>hive child</titleShort>
@@ -14,9 +20,9 @@
       <li><key>Construction</key><value>1</value></li>
       <li><key>Animals</key><value>-2</value></li>
     </skillGains>
-  </BackstoryDef>
+  </AlienRace.AlienBackstoryDef>
 
-  <BackstoryDef>
+  <AlienRace.AlienBackstoryDef ParentName="VV_ViviBackstory">
     <defName>VV_ViviSettler</defName>
     <title>vivi settler</title>
     <titleShort>settler</titleShort>
@@ -30,9 +36,9 @@
       <li><key>Crafting</key><value>1</value></li>
       <li><key>Intellectual</key><value>-2</value></li>
     </skillGains>
-  </BackstoryDef>
+  </AlienRace.AlienBackstoryDef>
 
-  <BackstoryDef>
+  <AlienRace.AlienBackstoryDef ParentName="VV_ViviBackstory">
     <defName>VV_ViviExiled</defName>
     <title>vivi exiled</title>
     <titleShort>exiled</titleShort>
@@ -49,5 +55,5 @@
       <li><key>Intellectual</key><value>3</value></li>
       <li><key>Medicine</key><value>3</value></li>
     </skillGains>
-  </BackstoryDef>
+  </AlienRace.AlienBackstoryDef>
 </Defs>

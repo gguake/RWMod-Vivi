@@ -21,7 +21,7 @@ namespace VVRace
     
     public class HediffComp_ViviGrowthBoost : HediffComp
     {
-        public override bool CompShouldRemove => !(Pawn.HasViviGene() && !Pawn.DevelopmentalStage.Adult() && !Pawn.Dead);
+        public override bool CompShouldRemove => !(Pawn is Vivi && !Pawn.DevelopmentalStage.Adult() && !Pawn.Dead);
 
         public override string CompTipStringExtra => (string)("AgingSpeed".Translate() + ": x") + (((HediffCompProperties_ViviGrowthBoost)props).additionalAgeBoostMultiplier + 1f).ToString("F1");
 

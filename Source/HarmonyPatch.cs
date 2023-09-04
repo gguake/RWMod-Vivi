@@ -14,13 +14,11 @@ namespace VVRace
             var harmony = new Harmony("rimworld.gguake.vivi");
             try
             {
-                Harmony.DEBUG = true;
                 InternalPatch.Patch(harmony);
 
-                GeneBodyGraphicPatch.Patch(harmony);
                 ApparelPropertiesExtPatch.Patch(harmony);
-                MindLinkPatch.Patch(harmony);
                 ViviRacePatch.Patch(harmony);
+                ArtificialPlantPatch.Patch(harmony);
 
                 if (ModsConfig.IdeologyActive)
                 {
@@ -34,10 +32,7 @@ namespace VVRace
             }
             finally
             {
-                Harmony.DEBUG = false;
             }
-
-            Harmony.DEBUG = false;
         }
 
         static void PawnStyleItemChooser_GetFrequencyFromIdeo_Postfix(ref float __result)

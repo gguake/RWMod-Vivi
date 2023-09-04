@@ -10,6 +10,7 @@
   <VV_GizmoViviBandwidthTooltip>현재 활성화된 정신 결속의 숫자를 나타냅니다.\n\n클릭해서 현재 결속된 비비 목록을 확인할 수 있습니다.</VV_GizmoViviBandwidthTooltip>
   <VV_GizmoViviEggProgressHeader>산란 진행도</VV_GizmoViviEggProgressHeader>
   <VV_GizmoViviEggProgressTooltip>다음 알을 낳기까지 얼마나 남았는지를 나타냅니다.\n\n진행도가 100%인 상태에서 산란에 적합한 비비 부화기가 존재하면 그곳에 가서 알을 낳습니다.</VV_GizmoViviEggProgressTooltip>
+  <VV_GizmoSetFertilizeAutoThreshold>에너지 최소치 {0}(으)로 설정</VV_GizmoSetFertilizeAutoThreshold>
 
   <VV_PlantGatherCooldownInspectorString>다음 채집이 가능하기까지 남은 시간: {0}</VV_PlantGatherCooldownInspectorString>
   <VV_PlantGenesGatherCooldownInspectorString>다음 유전 물질 추출이 가능하기까지 남은 시간: {0}</VV_PlantGenesGatherCooldownInspectorString>
@@ -18,6 +19,9 @@
   <VV_InspectorViviHatcheryDisabledReasonNoRoof>지붕 없음</VV_InspectorViviHatcheryDisabledReasonNoRoof>
   <VV_InspectorViviHatcheryDisabledReasonOutdoor>실외</VV_InspectorViviHatcheryDisabledReasonOutdoor>
   <VV_InspectorViviWallReplaceCooldown>굳기까지 남은 시간: {0}</VV_InspectorViviWallReplaceCooldown>
+  <VV_InspectorPlantEnergy>에너지: {0}/{1}</VV_InspectorPlantEnergy>
+  <VV_InspectorPlantEnergyFlux>({0}/일)</VV_InspectorPlantEnergyFlux>
+  <VV_InspectorFertilizerAuto>비료 사용 기준 에너지: {0}</VV_InspectorFertilizerAuto>
 
   <VV_LetterViviEggHatchedLabel>새로운 비비 태어남</VV_LetterViviEggHatchedLabel>
   <VV_LetterViviEggHatched>{PARENT_labelShort}가 낳은 알에서 새로운 비비가 태어났습니다. </VV_LetterViviEggHatched>
@@ -25,22 +29,11 @@
   <VV_LetterRoyalViviGrownLabel>새로운 로열 비비: {PAWN_labelShort}</VV_LetterRoyalViviGrownLabel>
   <VV_LetterRoyalViviGrown>{PAWN_labelShort}가 충분한 로열 젤리를 섭취해 로열 비비로 성장했습니다.\n\n로열 비비는 작업 능력은 다소 떨어지지만 알을 낳아 번식이 가능하며 일반 비비와 정신 결속을 맺을 수 있습니다.</VV_LetterRoyalViviGrown>
 
-  <VV_CommandConnectMindLink>정신 결속 연결</VV_CommandConnectMindLink>
-  <VV_CommandConnectMindLinkDesc>현재 정신 결속이 가능한 비비와 정신 결속을 맺습니다.\n\n정신 결속이 맺어진 비비는 모든 작업 속도가 크게 증가하며 결속된 로열 비비의 정신 상태에 영향을 받습니다.</VV_CommandConnectMindLinkDesc>
-  <VV_CommandCancelConnectMindLink>정신 결속 연결 취소</VV_CommandCancelConnectMindLink>
-  <VV_CommandDisconnectMindLink>정신 결속 해제</VV_CommandDisconnectMindLink>
-  <VV_CommandDisconnectMindLinkDesc>현재 맺어진 정신 결속을 안전하게 해제합니다.</VV_CommandDisconnectMindLinkDesc>
-  <VV_CommandCancelDisconnectMindLink>정신 결속 해제 취소</VV_CommandCancelDisconnectMindLink>
-
-  <VV_MessageMindLinkConnected>{LINKER_labelShort}가 {LINKED_labelShort}와 정신 결속을 맺었습니다.</VV_MessageMindLinkConnected>
-  <VV_MessageMindLinkDisconnected>{LINKER_labelShort}가 {LINKED_labelShort}와 맺은 정신 결속을 해제했습니다.</VV_MessageMindLinkDisconnected>
-  <VV_MessageMindLinkForceDisconnected>{LINKED_labelShort}가 맺고 있던 정신 결속이 갑작스럽게 끊어져 피해를 받았습니다.</VV_MessageMindLinkForceDisconnected>
-
-  <VV_MindLinkerDowned>{PAWN_labelShort}이 쓰러짐.</VV_MindLinkerDowned>
-  <VV_MindLinkerImprisoned>{PAWN_labelShort}이 죄수임.</VV_MindLinkerImprisoned>
-  <VV_MindLinkerInsideContainer>{PAWN_labelShort}이 {CONTAINER} 안에 있음.</VV_MindLinkerInsideContainer>
-  <VV_MindLinkerMentalState>{PAWN_labelShort}이 '{MENTALSTATE_label}' 상태임.</VV_MindLinkerMentalState>
-
+  <VV_CommandFertilizeAutoActivated>비료 자동 사용</VV_CommandFertilizeAutoActivated>
+  <VV_CommandFertilizeAutoActivatedDesc>식물의 에너지가 일정 이하일때 정착민들이 비료를 자동으로 사용할지 설정합니다.</VV_CommandFertilizeAutoActivatedDesc>
+  <VV_CommandSetFertilizeAutoThreshold>비료 사용 기준 설정</VV_CommandSetFertilizeAutoThreshold>
+  <VV_CommandSetFertilizeAutoThresholdDesc>비료 사용 여부를 판단할 기준 에너지를 설정합니다. 에너지가 기준 이하이면 정착민들이 최대치까지 비료를 사용합니다.</VV_CommandSetFertilizeAutoThresholdDesc>
+  
   <VV_JobFailReasonNoHarvestablePlants>주변에 채집 가능한 식물 없음</VV_JobFailReasonNoHarvestablePlants>
   <VV_JobFailReasonNoHarvestablePollenFilths>주변에 수집 가능한 꽃가루 없음</VV_JobFailReasonNoHarvestablePollenFilths>
   <VV_JobFailReasonNotVivi>비비가 아님</VV_JobFailReasonNotVivi>
@@ -48,5 +41,8 @@
 
   <VV_ConfirmPopupSpecializationChanged>지금 특화를 변경하면 현재 설정된 '{SPEC_label}' 특화의 지금까지 누적된 특화 레벨이 모두 초기화됩니다.\n정말 변경하시겠습니까?</VV_ConfirmPopupSpecializationChanged>
 
-  <VV_StatsReport_WildPlant></VV_StatsReport_WildPlant>
+  <VV_MentalStateReason_Loyalty>충성도가 낮아 발생했습니다.</VV_MentalStateReason_Loyalty>
+
+  <VV_StatsReport_Energy>에너지 비축량</VV_StatsReport_Energy>
+  <VV_StatsReport_Energy_Desc>식물이 최대로 저장할수 있는 에너지의 양입니다.</VV_StatsReport_Energy_Desc>
 </LanguageData>

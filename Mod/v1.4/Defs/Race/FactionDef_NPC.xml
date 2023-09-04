@@ -127,7 +127,7 @@
     
     <caravanTraderKinds Inherit="False">
       <li>VV_Caravan_Vivi_Honeys</li>
-      <li>VV_Caravan_Vivi_Exotics</li>
+      <li>VV_Caravan_Vivi_Gardening</li>
     </caravanTraderKinds>
     <visitorTraderKinds Inherit="False">
       <li>VV_Visitor_Vivi_Standard</li>

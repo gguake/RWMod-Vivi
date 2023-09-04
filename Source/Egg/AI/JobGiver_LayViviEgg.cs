@@ -8,17 +8,17 @@ namespace VVRace
     {
         public override float GetPriority(Pawn pawn)
         {
-            return pawn.TryGetViviGene(out var vivi) && vivi.ViviEggSettings != null && vivi.ViviEggSettings.CanLayNow ? 10f : 0f;
+            return pawn is Vivi vivi && vivi.CanLayEgg ? 10f : 0f;
         }
 
         protected override Job TryGiveJob(Pawn pawn)
         {
-            if (!pawn.TryGetViviGene(out var vivi) || !vivi.IsRoyal)
+            if (!(pawn is Vivi vivi) || !vivi.IsRoyal)
             {
                 return null;
             }
 
-            if (vivi.ViviEggSettings == null || !vivi.ViviEggSettings.CanLayNow)
+            if (!vivi.CanLayEgg)
             {
                 return null;
             }

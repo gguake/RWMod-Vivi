@@ -1,17 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-  <VV_MindTransmitter.label>정신파 송신기</VV_MindTransmitter.label>
-  <VV_MindTransmitter.description>이 비비는 다른 일반 비비와 정신을 결속해 자신의 의사를 멀리서도 전달할 수 있습니다.\n\n결속된 비비의 수가 많을수록 치료와 연구 능력이 향상됩니다.</VV_MindTransmitter.description>
-
-  <VV_MindLink.label>정신 결속</VV_MindLink.label>
-  <VV_MindLink.description>이 비비는 로열 비비와 정신이 결속되어 있습니다. 작업 능력이 크게 향상되지만 결속된 로열 비비 이외의 통제를 잘 듣지 않습니다.\n\n결속된 로열 비비의 의식 상태에 따라 효과가 달라지며 결속된 로열 비비의 기분에도 영향을 받습니다.</VV_MindLink.description>
-
-  <VV_PsychicConfusion.label>정신 혼란</VV_PsychicConfusion.label>
-  <VV_PsychicConfusion.description>정신 결속이 갑작스럽게 끊어져 혼란에 빠진 상태입니다. 시간이 지나면 회복됩니다.</VV_PsychicConfusion.description>
-
   <VV_RoyalJelly.label>로열 젤리 섭취</VV_RoyalJelly.label>
-  <VV_RoyalJelly.description>로열 젤리를 섭취한 상태입니다. 추가로 로열 젤리를 섭취해도 추가적인 효과를 받지는 않습니다.</VV_RoyalJelly.description>
+  <VV_RoyalJelly.description>로열 젤리를 섭취해 비비의 몸이 로열 비비로 변화중인 상태입니다. 추가로 로열 젤리를 섭취해도 추가적인 효과를 받지는 않습니다.</VV_RoyalJelly.description>
 
   <VV_ViviGrowthBoost.label>성장 가속</VV_ViviGrowthBoost.label>
-  <VV_ViviGrowthBoost.description>성장이 가속중입니다.</VV_ViviGrowthBoost.description>
+  <VV_ViviGrowthBoost.description>성장이 가속중으로 평소보다 더 빠르게 자랍니다. 학습에 추가적인 보너스도 얻습니다.</VV_ViviGrowthBoost.description>
 </LanguageData>

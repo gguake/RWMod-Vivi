@@ -43,6 +43,8 @@
     <label>exiled royal vivi</label>
     <defaultFactionType>VV_PlayerExiledVivi</defaultFactionType>
     
+    <minGenerationAge>20</minGenerationAge>
+    <maxGenerationAge>25</maxGenerationAge>
     <minTotalSkillLevels>30</minTotalSkillLevels>
 
     <backstoryFiltersOverride Inherit="False">

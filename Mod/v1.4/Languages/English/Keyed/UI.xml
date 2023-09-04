@@ -24,21 +24,11 @@
   <VV_LetterRoyalViviGrownLabel>new royal vivi: {PAWN_labelShort}</VV_LetterRoyalViviGrownLabel>
   <VV_LetterRoyalViviGrown>.</VV_LetterRoyalViviGrown>
 
-  <VV_CommandConnectMindLink>connect mind link</VV_CommandConnectMindLink>
-  <VV_CommandConnectMindLinkDesc>.</VV_CommandConnectMindLinkDesc>
-  <VV_CommandCancelConnectMindLink>cancel to connect</VV_CommandCancelConnectMindLink>
-  <VV_CommandDisconnectMindLink>disconnect mind link</VV_CommandDisconnectMindLink>
-  <VV_CommandDisconnectMindLinkDesc>.</VV_CommandDisconnectMindLinkDesc>
-  <VV_CommandCancelDisconnectMindLink>cancel to disconnect</VV_CommandCancelDisconnectMindLink>
+  <VV_CommandImprintPheromone>imprint pheromone</VV_CommandImprintPheromone>
+  <VV_CommandImprintPheromoneDesc>.</VV_CommandImprintPheromoneDesc>
+  <VV_CommandCancelImprintPheromone>cancel to imprint</VV_CommandCancelImprintPheromone>
 
-  <VV_MessageMindLinkConnected>{LINKER_labelShort} has formed a mind link with {LINKED_labelShort}.</VV_MessageMindLinkConnected>
-  <VV_MessageMindLinkDisconnected>{LINKER_labelShort} has severed the mind link with {LINKED_labelShort}.</VV_MessageMindLinkDisconnected>
-  <VV_MessageMindLinkForceDisconnected>{LINKED_labelShort} suddenly suffered damage as the mental bond they were connected to was severed</VV_MessageMindLinkForceDisconnected>
-
-  <VV_MindLinkerDowned>{PAWN_labelShort} is downed.</VV_MindLinkerDowned>
-  <VV_MindLinkerImprisoned>{PAWN_labelShort} is imprisoned.</VV_MindLinkerImprisoned>
-  <VV_MindLinkerInsideContainer>{PAWN_labelShort}is inside of {CONTAINER}.</VV_MindLinkerInsideContainer>
-  <VV_MindLinkerMentalState>{PAWN_labelShort} is mental state in '{MENTALSTATE_label}'.</VV_MindLinkerMentalState>
+  <VV_MessagePheromoneImprinted>{LINKED_labelShort} has imprinted the pheromone of {LINKER_labelShort}.</VV_MessagePheromoneImprinted>
 
   <VV_JobFailReasonNoHarvestablePlants>no gatherable plants nearby</VV_JobFailReasonNoHarvestablePlants>
   <VV_JobFailReasonNoHarvestablePollenFilths>no gatherable pollen nearby</VV_JobFailReasonNoHarvestablePollenFilths>

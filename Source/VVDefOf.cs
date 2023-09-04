@@ -4,27 +4,8 @@ using Verse;
 namespace VVRace
 {
     [DefOf]
-    public static class VVHediffDefOf
-    {
-        public static HediffDef VV_MindTransmitter;
-        public static HediffDef VV_MindLink;
-
-        public static HediffDef VV_PsychicConfusion;
-    }
-
-    [DefOf]
-    public static class VVPawnRelationDefOf
-    {
-        public static PawnRelationDef VV_MindLink;
-    }
-
-    [DefOf]
     public static class VVStatDefOf
     {
-        public static StatDef VV_MindLinkBandwidth;
-        public static StatDef VV_MindLinkStrength;
-        public static StatDef VV_MindLinkRange;
-
         public static StatDef VV_HoneyGatherSpeed;
         public static StatDef VV_HoneyGatherYield;
         public static StatDef VV_PlantGatherSpeed;
@@ -37,19 +18,6 @@ namespace VVRace
         public static StatDef VV_GrassFiberGatherYield;
 
         public static StatDef VV_GrowthPointsFactor;
-    }
-
-    [DefOf]
-    public static class VVPawnTableDefOf
-    {
-        public static PawnTableDef VV_Vivis;
-    }
-
-    [DefOf]
-    public static class VVThoughtDefOf
-    {
-        public static ThoughtDef VV_MindLinkForceBreaked;
-        public static ThoughtDef VV_MindLink;
     }
 
     [DefOf]
@@ -66,15 +34,6 @@ namespace VVRace
     }
 
     [DefOf]
-    public static class VVGeneDefOf
-    {
-        public static GeneDef VV_ViviGene;
-        public static GeneDef VV_BodyGene;
-
-        public static GeneDef Body_Standard;
-    }
-
-    [DefOf]
     public static class VVXenotypeDefOf
     {
         public static XenotypeDef VV_Vivi;
@@ -83,9 +42,6 @@ namespace VVRace
     [DefOf]
     public static class VVJobDefOf
     {
-        public static JobDef VV_ConnectMindLink;
-        public static JobDef VV_DisconnectMindLink;
-
         public static JobDef VV_LayViviEgg;
         public static JobDef VV_HaulViviEgg;
 
@@ -93,6 +49,8 @@ namespace VVRace
         public static JobDef VV_GatherPollen;
         public static JobDef VV_GatherPropolis;
         public static JobDef VV_GatherGrassFiber;
+
+        public static JobDef VV_FertilizeArtificialPlant;
     }
 
     [DefOf]
@@ -108,6 +66,9 @@ namespace VVRace
 
         public static ThingDef VV_Vivicream;
         public static ThingDef VV_Viviwax;
+
+        public static ThingDef VV_UnknownSeed;
+        public static ThingDef VV_Fertilizer;
     }
 
     [DefOf]
@@ -133,8 +94,9 @@ namespace VVRace
     }
 
     [DefOf]
-    public static class VVViviSpecializationDefOf
+    public static class VVMentalBreakDefOf
     {
-        public static ViviSpecializationDef VV_NoSpecialization;
+        public static MentalBreakDef RunWild;
+        public static MentalBreakDef GiveUpExit;
     }
 }

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <TerrainAffordanceDef>
+    <defName>VV_WaterOrLight</defName>
+    <label>water or light</label>
+    <order>4000</order>
+  </TerrainAffordanceDef>
+</Defs>

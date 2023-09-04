@@ -7,7 +7,7 @@ namespace VVRace
     {
         public override float GetPriority(Pawn pawn)
         {
-            if (!pawn.HasViviGene())
+            if (!(pawn is Vivi vivi))
             {
                 return 0f;
             }
@@ -17,7 +17,7 @@ namespace VVRace
 
         protected override bool Satisfied(Pawn pawn)
         {
-            return pawn.HasViviGene();
+            return pawn is Vivi;
         }
     }
 }

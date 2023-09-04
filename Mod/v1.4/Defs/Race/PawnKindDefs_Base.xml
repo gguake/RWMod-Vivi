@@ -1,6 +1,6 @@
 <Defs>
   <PawnKindDef Abstract="True" Name="ViviBase">
-    <race>Human</race>
+    <race>VV_Vivi</race>
     <fixedGender>Female</fixedGender>
     <chemicalAddictionChance>0</chemicalAddictionChance>
     <backstoryCryptosleepCommonality>0</backstoryCryptosleepCommonality>
@@ -16,12 +16,5 @@
     </techHediffsTags>
 
     <canStrip>false</canStrip>
-
-    <useFactionXenotypes>false</useFactionXenotypes>
-    <xenotypeSet>
-      <xenotypeChances>
-        <VV_Vivi>999</VV_Vivi>
-      </xenotypeChances>
-    </xenotypeSet>
   </PawnKindDef>
 </Defs>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <VV_EmberFlower.label>잉걸불꽃</VV_EmberFlower.label>
+  <VV_EmberFlower.description>주변에 열과 빛을 발산하는 인공 꽃입니다. 빛이나 온도에 영향을 받지는 않지만 주기적으로 열량을 공급해줘야 합니다.</VV_EmberFlower.description>
+
+  <VV_FrostFlower.label>서리꽃</VV_FrostFlower.label>
+  <VV_FrostFlower.description>주변의 열을 흡수하는 인공 꽃입니다. 빛이나 온도에 영향을 받지는 않지만 주기적으로 열량을 공급해줘야 합니다.</VV_FrostFlower.description>
+</LanguageData>

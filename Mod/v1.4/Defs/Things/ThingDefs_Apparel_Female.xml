@@ -50,7 +50,6 @@
       <NegotiationAbility>0.1</NegotiationAbility>
       <TradePriceImprovement>0.1</TradePriceImprovement>
       <ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">0.1</ToxicEnvironmentResistance>
-      <VV_MindLinkStrength>0.25</VV_MindLinkStrength>
     </equippedStatOffsets>
 
     <costStuffCount>60</costStuffCount>

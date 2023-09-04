@@ -234,4 +234,69 @@
     </comps>
     <allowedArchonexusCount>80</allowedArchonexusCount>
   </ThingDef>
+  
+
+  <!-- 꽃씨 -->
+  <ThingDef ParentName="ResourceBase">
+    <defName>VV_UnknownSeed</defName>
+    <label>unknown seed</label>
+    <description>.</description>
+    <graphicData>
+      <texPath>Things/Item/VV_FlowerSeed</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+    <thingCategories>
+      <li>ResourcesRaw</li>
+    </thingCategories>
+
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Grain_Drop</soundInteract>
+    <soundDrop>Grain_Drop</soundDrop>
+    
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <Mass>0.05</Mass>
+      <MarketValue>10</MarketValue>
+      <MaxHitPoints>30</MaxHitPoints>
+      <Flammability>1.0</Flammability>
+      <DeteriorationRate>5</DeteriorationRate>
+    </statBases>
+    <stackLimit>10</stackLimit>
+    
+    <tradeTags>
+      <li>VV_ViviProduct</li>
+    </tradeTags>
+  </ThingDef>
+
+  <!-- 비비 비료 -->
+  <ThingDef ParentName="ResourceBase">
+    <defName>VV_Fertilizer</defName>
+    <label>vivi fertilizer</label>
+    <description>.</description>
+    <graphicData>
+      <texPath>Things/Item/VV_Fertilizer</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <thingCategories>
+      <li>ResourcesRaw</li>
+    </thingCategories>
+
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Grain_Drop</soundInteract>
+    <soundDrop>Grain_Drop</soundDrop>
+    
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <Mass>3</Mass>
+      <MarketValue>3</MarketValue>
+      <MaxHitPoints>50</MaxHitPoints>
+      <Flammability>0.5</Flammability>
+      <DeteriorationRate>5</DeteriorationRate>
+    </statBases>
+    <stackLimit>150</stackLimit>
+    
+    <tradeTags>
+      <li>VV_ViviProduct</li>
+    </tradeTags>
+  </ThingDef>
 </Defs>
