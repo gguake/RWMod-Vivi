@@ -74,7 +74,7 @@ namespace VVRace
                 yield return gizmo;
             }
 
-            if (_isRoyal)
+            if (Spawned && this.IsColonistPlayerControlled && _isRoyal)
             {
                 yield return new EggProgressGizmo(this);
 
@@ -89,9 +89,6 @@ namespace VVRace
 
                     yield return command_addEggProgress;
                 }
-            }
-            else
-            {
             }
         }
 

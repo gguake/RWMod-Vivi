@@ -280,9 +280,13 @@
       <VV_HoneyGatherYield>1.0</VV_HoneyGatherYield>
       <VV_PlantGatherSpeed>1.0</VV_PlantGatherSpeed>
       <VV_PlantGatherYield>1.0</VV_PlantGatherYield>
-      
+      <PlantWorkSpeed>1.2</PlantWorkSpeed>
+      <ConstructionSpeed>1.2</ConstructionSpeed>
+
       <ButcheryFleshEfficiency>0.7</ButcheryFleshEfficiency>
-      <MiningYield>0.7</MiningYield>
+      <MiningSpeed>0.6</MiningSpeed>
+      <MiningYield>0.6</MiningYield>
+      <ResearchSpeed>0.9</ResearchSpeed>
       
       <ToxicResistance>0.5</ToxicResistance>
 

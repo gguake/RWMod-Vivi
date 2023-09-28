@@ -21,5 +21,7 @@ namespace VVRace
         public int empExplosiveMinimumEnergy = -1;
         public int empExplosiveEnergy = 0;
         public FloatRange empExplosiveRadiusRange = new FloatRange(0f, 0f);
+
+        public int verbShootEnergy = 0;
     }
 }

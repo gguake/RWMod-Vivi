@@ -395,5 +395,14 @@ namespace VVRace
                 LocalizeTexts.StatsReport_Energy_Desc.Translate(),
                 10000);
         }
+
+        public void Notify_TurretVerbShot()
+        {
+            var energy = ArtificialPlantModExtension.verbShootEnergy;
+            if (energy > 0)
+            {
+                AddEnergy(-energy);
+            }
+        }
     }
 }

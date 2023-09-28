@@ -6,7 +6,7 @@
     <thingClass>VVRace.MinifiedArtificialPlant</thingClass>
     
     <statBases>
-      <Mass>10</Mass>
+      <Mass>3</Mass>
       <Flammability>1</Flammability>
     </statBases>
   </ThingDef>
@@ -30,7 +30,7 @@
 
     <useHitPoints>true</useHitPoints>
     <statBases>
-      <Mass>10</Mass>
+      <Mass>3</Mass>
       <Flammability>1</Flammability>
     </statBases>
     <size>(1,1)</size>
@@ -59,6 +59,7 @@
     <tradeTags>
       <li>VV_ArtificialPlant</li>
     </tradeTags>
+    <tradeability>Buyable</tradeability>
   </ThingDef>
 
   <!-- 불꽃 -->
@@ -81,8 +82,6 @@
       <MarketValue>150</MarketValue>
       <MaxHitPoints>60</MaxHitPoints>
     </statBases>
-
-    <tradeability>None</tradeability>
 
     <comps>
       <li Class="VVRace.CompProperties_GlowerFlora">
@@ -133,8 +132,6 @@
       <MarketValue>150</MarketValue>
       <MaxHitPoints>60</MaxHitPoints>
     </statBases>
-
-    <tradeability>None</tradeability>
 
     <comps>
       <li Class="VVRace.CompProperties_GlowerFlora">
@@ -187,8 +184,6 @@
       <MarketValue>150</MarketValue>
       <MaxHitPoints>90</MaxHitPoints>
     </statBases>
-
-    <tradeability>None</tradeability>
 
     <comps>
       <li Class="VVRace.CompProperties_GlowerFlora">
@@ -248,8 +243,6 @@
       <MaxHitPoints>120</MaxHitPoints>
     </statBases>
 
-    <tradeability>None</tradeability>
-
     <comps>
       <li Class="VVRace.CompProperties_GlowerFlora">
         <glowRadius>5</glowRadius>
@@ -302,8 +295,6 @@
       <Flammability>0</Flammability>
     </statBases>
 
-    <tradeability>None</tradeability>
-
     <comps>
     </comps>
     
@@ -352,8 +343,6 @@
       <MaxHitPoints>120</MaxHitPoints>
     </statBases>
 
-    <tradeability>None</tradeability>
-
     <comps>
       <li Class="VVRace.CompProperties_GlowerFlora">
         <glowRadius>14</glowRadius>
@@ -391,4 +380,113 @@
       </li>
     </modExtensions>
   </ThingDef>
+
+  
+  <!-- 완두콩 포탑 -->
+  <ThingDef ParentName="VV_ArtificialPlantBase">
+    <defName>VV_PeaTurret</defName>
+    <label>pea turret</label>
+    <description>.</description>
+    <thingClass>VVRace.TurretPlant</thingClass>
+    <tickerType>Normal</tickerType>
+
+    <graphicData>
+      <texPath>Things/Plants/VV_PeaTurret_Base</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <drawerType>MapMeshAndRealTime</drawerType>
+
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Metal_Drop</soundDrop>
+
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <Mass>5</Mass>
+      <MarketValue>150</MarketValue>
+      <MaxHitPoints>180</MaxHitPoints>
+    </statBases>
+
+    <comps>
+    </comps>
+
+    <building>
+      <combatPower>45</combatPower>
+      <ai_combatDangerous>true</ai_combatDangerous>
+      <turretGunDef>VV_Gun_PeaTurret</turretGunDef>
+      <turretBurstCooldownTime>2.9</turretBurstCooldownTime>
+      <turretBurstWarmupTime>0.6</turretBurstWarmupTime>
+      <turretTopOffset>(0, 0.05)</turretTopOffset>
+      <turretTopDrawSize>1</turretTopDrawSize>
+    </building>
+
+    <placeWorkers>
+      <li>PlaceWorker_TurretTop</li>
+      <li>PlaceWorker_ShowTurretRadius</li>
+    </placeWorkers>
+
+    <modExtensions>
+      <li Class="VVRace.ArtificialPlantModExtension">
+        <energyCapacity>300</energyCapacity>
+        <zeroEnergyDamageByChance>5~15</zeroEnergyDamageByChance>
+
+        <energyConsumeRule Class="VVRace.EnergyRule_Constant">
+          <energy>5</energy>
+        </energyConsumeRule>
+        <verbShootEnergy>3</verbShootEnergy>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>VV_Bullet_Pea</defName>
+    <label>pea bullet</label>
+    <graphicData>
+      <texPath>Things/Projectile/VV_Pea</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <damageDef>Poke</damageDef>
+      <damageAmountBase>8</damageAmountBase>
+      <speed>24</speed>
+    </projectile>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>VV_Gun_PeaTurret</defName>
+    <label>pea turret head</label>
+    <description>.</description>
+    <graphicData>
+      <texPath>Things/Plants/VV_PeaTurret_Top</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <drawerType>MapMeshAndRealTime</drawerType>
+
+    <statBases>
+      <AccuracyTouch>0.8</AccuracyTouch>
+      <AccuracyShort>0.57</AccuracyShort>
+      <AccuracyMedium>0.22</AccuracyMedium>
+      <AccuracyLong>0.1</AccuracyLong>
+      <RangedWeapon_Cooldown>2.9</RangedWeapon_Cooldown>
+      <DeteriorationRate>0</DeteriorationRate>
+      <Mass>10</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <defaultProjectile>VV_Bullet_Pea</defaultProjectile>
+        <warmupTime>0</warmupTime>
+        <range>26.9</range>
+        <ticksBetweenBurstShots>8</ticksBetweenBurstShots>
+        <burstShotCount>1</burstShotCount>
+        <soundCast>ThumpCannon_Fire</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>9</muzzleFlashScale>
+        <consumeFuelPerShot>1</consumeFuelPerShot>
+      </li>
+    </verbs>
+  </ThingDef>
+
 </Defs>

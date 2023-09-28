@@ -87,11 +87,15 @@
     <Compile Include="ArtificialPlant\Graphic_Conditional.cs" />
     <Compile Include="ArtificialPlant\CompHeatPusherFloraEnergy.cs" />
     <Compile Include="ArtificialPlant\Implements\BatteryFlower.cs" />
+    <Compile Include="ArtificialPlant\Implements\TurretPlant.cs" />
+    <Compile Include="ArtificialPlant\Implements\TurretPlantTop.cs" />
     <Compile Include="ArtificialPlant\Implements\WaterFlower.cs" />
     <Compile Include="ArtificialPlant\Implements\SolarFlower.cs" />
     <Compile Include="ArtificialPlant\MinifiedArtificialPlant.cs" />
     <Compile Include="ArtificialPlant\PlaceWorker_AllowArtificialPlantPot.cs" />
     <Compile Include="ArtificialPlant\AI\WorkGiver_FertilizeArtificialPlant.cs" />
+    <Compile Include="ArtificialPlant\PlaceWorker_TurretPlantTop.cs" />
+    <Compile Include="ArtificialPlant\Verb_ShotFloraEnergy.cs" />
     <Compile Include="Egg\AI\JobDriver_HaulViviEgg.cs" />
     <Compile Include="Egg\AI\WorkGiver_HaulViviEgg.cs" />
     <Compile Include="Egg\Alert_DangerViviEgg.cs" />
