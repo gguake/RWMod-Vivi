@@ -14,7 +14,7 @@ namespace VVRace
 
         public override IEnumerable<Thing> FindAllGatherableTargetInRegion(Region region)
         {   
-            foreach (var thing in region.ListerThings.ThingsInGroup(ThingRequestGroup.NonStumpPlant))
+            foreach (var thing in region.ListerThings.ThingsInGroup(ThingRequestGroup.NonStumpPlant).Concat(region.ListerThings.ThingsInGroup(ThingRequestGroup.BuildingArtificial)))
             {
                 if (!thing.Spawned) { continue; }
 

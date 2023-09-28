@@ -81,9 +81,14 @@
     <statBases>
       <MarketValue>150</MarketValue>
       <MaxHitPoints>60</MaxHitPoints>
+
+      <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
+      <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
     </statBases>
 
     <comps>
+      <li Class="VVRace.CompProperties_RepeatGatherable" />
+
       <li Class="VVRace.CompProperties_GlowerFlora">
         <glowRadius>10</glowRadius>
         <glowColor>(255,247,138,0)</glowColor>
@@ -131,9 +136,14 @@
     <statBases>
       <MarketValue>150</MarketValue>
       <MaxHitPoints>60</MaxHitPoints>
+      
+      <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
+      <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
     </statBases>
 
     <comps>
+      <li Class="VVRace.CompProperties_RepeatGatherable" />
+
       <li Class="VVRace.CompProperties_GlowerFlora">
         <glowRadius>3</glowRadius>
         <glowColor>(157,217,246,0)</glowColor>
@@ -183,9 +193,14 @@
     <statBases>
       <MarketValue>150</MarketValue>
       <MaxHitPoints>90</MaxHitPoints>
+
+      <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
+      <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
     </statBases>
 
     <comps>
+      <li Class="VVRace.CompProperties_RepeatGatherable" />
+
       <li Class="VVRace.CompProperties_GlowerFlora">
         <glowRadius>5</glowRadius>
         <glowColor>(213,110,248,0)</glowColor>
@@ -241,9 +256,14 @@
     <statBases>
       <MarketValue>150</MarketValue>
       <MaxHitPoints>120</MaxHitPoints>
+      
+      <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
+      <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
     </statBases>
 
     <comps>
+      <li Class="VVRace.CompProperties_RepeatGatherable" />
+
       <li Class="VVRace.CompProperties_GlowerFlora">
         <glowRadius>5</glowRadius>
         <glowColor>(213,110,248,0)</glowColor>
@@ -293,9 +313,14 @@
       <MarketValue>150</MarketValue>
       <MaxHitPoints>50</MaxHitPoints>
       <Flammability>0</Flammability>
+      
+      <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
+      <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
     </statBases>
 
     <comps>
+      <li Class="VVRace.CompProperties_RepeatGatherable" />
+
     </comps>
     
     <modExtensions>
@@ -341,9 +366,14 @@
     <statBases>
       <MarketValue>150</MarketValue>
       <MaxHitPoints>120</MaxHitPoints>
+      
+      <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
+      <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
     </statBases>
 
     <comps>
+      <li Class="VVRace.CompProperties_RepeatGatherable" />
+
       <li Class="VVRace.CompProperties_GlowerFlora">
         <glowRadius>14</glowRadius>
         <glowColor>(370,370,370,0)</glowColor>

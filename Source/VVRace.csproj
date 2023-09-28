@@ -119,7 +119,7 @@
     <Compile Include="Gather\GatherWorker.cs" />
     <Compile Include="Gather\GatherWorker_Pollen.cs" />
     <Compile Include="Gather\JobDriver_GatherPollen.cs" />
-    <Compile Include="Honey\Filth_Pollen.cs" />
+    <Compile Include="Filth_Pollen.cs" />
     <Compile Include="Gather\GatherUtility.cs" />
     <Compile Include="TextureCache.cs" />
     <Compile Include="Vivi\Need_Loyalty.cs" />
