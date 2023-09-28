@@ -16,7 +16,7 @@
   <VV_RefiningPropolis.description>프로폴리스를 정제해 생약 성분과 뉴트로아민을 추출합니다.</VV_RefiningPropolis.description>
   <VV_RefiningPropolis.jobString>프로폴리스 정제 중.</VV_RefiningPropolis.jobString>
   
-  <VV_MakeLifestrand.label>생명가닥 만들기</VV_MakeLifestrand.label>
-  <VV_MakeLifestrand.description>악마가닥을 다양한 재료로 가공해 생명가닥을 만듭니다.</VV_MakeLifestrand.description>
-  <VV_MakeLifestrand.jobString>생명가닥 만드는 중.</VV_MakeLifestrand.jobString>
+  <VV_MakeLifestrand.label>생체가닥 만들기</VV_MakeLifestrand.label>
+  <VV_MakeLifestrand.description>악마가닥을 다양한 재료로 가공해 생체가닥을 만듭니다.</VV_MakeLifestrand.description>
+  <VV_MakeLifestrand.jobString>생체가닥 만드는 중.</VV_MakeLifestrand.jobString>
 </LanguageData>

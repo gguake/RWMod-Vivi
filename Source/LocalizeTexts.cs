@@ -8,6 +8,8 @@
 
         public const string AlertViviDangerousEggs = "VV_AlertViviDangerousEggs";
         public const string AlertViviDangerousEggsDesc = "VV_AlertViviDangerousEggsDesc";
+        public const string AlertArtificialPlantLowEnergy = "VV_AlertArtificialPlantLowEnergy";
+        public const string AlertArtificialPlantLowEnergyDesc = "VV_AlertArtificialPlantLowEnergyDesc";
 
         public const string GizmoViviBandwidthHeader = "VV_GizmoViviBandwidthHeader";
         public const string GizmoViviBandwidthTooltip = "VV_GizmoViviBandwidthTooltip";
@@ -34,17 +36,28 @@
         public const string CommandFertilizeAutoActivatedDesc = "VV_CommandFertilizeAutoActivatedDesc";
         public const string CommandSetFertilizeAutoThreshold = "VV_CommandSetFertilizeAutoThreshold";
         public const string CommandSetFertilizeAutoThresholdDesc = "VV_CommandSetFertilizeAutoThresholdDesc";
+        public const string CommandRegisterGerminateSchedule = "VV_CommandRegisterGerminateSchedule";
+        public const string CommandRegisterGerminateScheduleDesc = "VV_CommandRegisterGerminateScheduleDesc";
+        public const string CommandCancelGerminateSchedule = "VV_CommandCancelGerminateSchedule";
+        public const string CommandCancelGerminateScheduleDesc = "VV_CommandCancelGerminateScheduleDesc";
 
         public const string JobFailReasonNoHarvestablePlants = "VV_JobFailReasonNoHarvestablePlants";
         public const string JobFailReasonNoHarvestablePollenFilths = "VV_JobFailReasonNoHarvestablePollenFilths";
         public const string JobFailReasonNotVivi = "VV_JobFailReasonNotVivi";
         public const string JobFailReasonViviStarving = "VV_JobFailReasonViviStarving";
 
-        public const string ConfirmPopupSpecializationChanged = "VV_ConfirmPopupSpecializationChanged";
+        public const string WarnCancelGerminateSchedule = "VV_WarnCancelGerminateSchedule";
 
         public const string MentalStateReason_Loyalty = "VV_MentalStateReason_Loyalty";
 
         public const string StatsReport_Energy = "VV_StatsReport_Energy";
         public const string StatsReport_Energy_Desc = "VV_StatsReport_Energy_Desc";
+
+        public const string StatsReport_EnergyFlux = "VV_StatsReport_EnergyFlux";
+        public const string StatsReport_EnergyFlux_Desc = "VV_StatsReport_EnergyFlux_Desc";
+
+        public const string ViviGerminateWindowJobTab = "ViviGerminateWindowJobTab";
+        public const string ViviGerminateWindowScheduleTab = "ViviGerminateWindowScheduleTab";
+        public const string ViviGerminateWindowScheduleTabTip = "ViviGerminateWindowScheduleTabTip";
     }
 }

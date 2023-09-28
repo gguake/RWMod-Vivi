@@ -59,17 +59,17 @@
     <tradeTags>
       <li>VV_ArtificialPlant</li>
     </tradeTags>
-    <tradeability>Buyable</tradeability>
+    <tradeability>All</tradeability>
   </ThingDef>
 
-  <!-- 불꽃 -->
+  <!-- 잔불꽃 -->
   <ThingDef ParentName="VV_ArtificialPlantBase">
-    <defName>VV_EmberFlower</defName>
-    <label>ember flower</label>
+    <defName>VV_EmberBloom</defName>
+    <label>emberbloom</label>
     <description>.</description>
 
     <graphicData>
-      <texPath>Things/Plants/VV_EmberFlower</texPath>
+      <texPath>Things/Plants/VV_EmberBloom</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
 
@@ -79,7 +79,7 @@
 
     <useHitPoints>true</useHitPoints>
     <statBases>
-      <MarketValue>150</MarketValue>
+      <MarketValue>120</MarketValue>
       <MaxHitPoints>60</MaxHitPoints>
 
       <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
@@ -90,7 +90,7 @@
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
       <li Class="VVRace.CompProperties_GlowerFlora">
-        <glowRadius>10</glowRadius>
+        <glowRadius>9</glowRadius>
         <glowColor>(255,247,138,0)</glowColor>
       </li>
 
@@ -119,12 +119,12 @@
 
   <!-- 서리꽃 -->
   <ThingDef ParentName="VV_ArtificialPlantBase">
-    <defName>VV_FrostFlower</defName>
-    <label>frost flower</label>
+    <defName>VV_FrostBloom</defName>
+    <label>frostbloom</label>
     <description>.</description>
 
     <graphicData>
-      <texPath>Things/Plants/VV_FrostFlower</texPath>
+      <texPath>Things/Plants/VV_FrostBloom</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
 
@@ -134,7 +134,7 @@
 
     <useHitPoints>true</useHitPoints>
     <statBases>
-      <MarketValue>150</MarketValue>
+      <MarketValue>120</MarketValue>
       <MaxHitPoints>60</MaxHitPoints>
       
       <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
@@ -172,16 +172,16 @@
     </modExtensions>
   </ThingDef>
   
-  <!-- 축전꽃 -->
+  <!-- 번개봉오리 -->
   <ThingDef ParentName="VV_ArtificialPlantBase">
-    <defName>VV_BatteryFlower</defName>
-    <label>battery flower</label>
+    <defName>VV_Thunderbud</defName>
+    <label>thunderbud</label>
     <description>.</description>
     <tickerType>Normal</tickerType>
     <thingClass>VVRace.BatteryFlower</thingClass>
 
     <graphicData>
-      <texPath>Things/Plants/VV_BatteryFlower</texPath>
+      <texPath>Things/Plants/VV_Thunderbud</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
 
@@ -191,7 +191,7 @@
 
     <useHitPoints>true</useHitPoints>
     <statBases>
-      <MarketValue>150</MarketValue>
+      <MarketValue>120</MarketValue>
       <MaxHitPoints>90</MaxHitPoints>
 
       <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
@@ -236,15 +236,15 @@
     </modExtensions>
   </ThingDef>
   
-  <!-- 충전꽃 -->
+  <!-- 감전꽃 -->
   <ThingDef ParentName="VV_ArtificialPlantBase">
-    <defName>VV_ChargeFlower</defName>
-    <label>charge flower</label>
+    <defName>VV_Voltpetals</defName>
+    <label>voltpetals</label>
     <description>.</description>
     <tickerType>Normal</tickerType>
 
     <graphicData>
-      <texPath>Things/Plants/VV_PowerFlower</texPath>
+      <texPath>Things/Plants/VV_Voltpetals</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
 
@@ -254,7 +254,7 @@
 
     <useHitPoints>true</useHitPoints>
     <statBases>
-      <MarketValue>150</MarketValue>
+      <MarketValue>120</MarketValue>
       <MaxHitPoints>120</MaxHitPoints>
       
       <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
@@ -291,15 +291,15 @@
     </modExtensions>
   </ThingDef>
   
-  <!-- 물꽃 -->
+  <!-- 물방울꽃 -->
   <ThingDef ParentName="VV_ArtificialPlantBase">
-    <defName>VV_HydroFlower</defName>
-    <label>hydroflower</label>
+    <defName>VV_Waterdrops</defName>
+    <label>waterdrops</label>
     <description>.</description>
     <thingClass>VVRace.WaterFlower</thingClass>
 
     <graphicData>
-      <texPath>Things/Plants/VV_WaterFlower</texPath>
+      <texPath>Things/Plants/VV_Waterdrops</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
 
@@ -310,17 +310,16 @@
     <terrainAffordanceNeeded>VV_WaterOrLight</terrainAffordanceNeeded>
     <useHitPoints>true</useHitPoints>
     <statBases>
-      <MarketValue>150</MarketValue>
+      <MarketValue>240</MarketValue>
       <MaxHitPoints>50</MaxHitPoints>
       <Flammability>0</Flammability>
       
       <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
-      <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
+      <VV_PlantHoneyGatherYield>0.5</VV_PlantHoneyGatherYield>
     </statBases>
 
     <comps>
       <li Class="VVRace.CompProperties_RepeatGatherable" />
-
     </comps>
     
     <modExtensions>
@@ -345,16 +344,16 @@
     </modExtensions>
   </ThingDef>
 
-  <!-- 해꽃 -->
+  <!-- 빛바라기 -->
   <ThingDef ParentName="VV_ArtificialPlantBase">
-    <defName>VV_SolarFlower</defName>
-    <label>solar flower</label>
+    <defName>VV_Radiantflower</defName>
+    <label>radiantflower</label>
     <description>.</description>
     <thingClass>VVRace.SolarFlower</thingClass>
     <tickerType>Rare</tickerType>
 
     <graphicData>
-      <texPath>Things/Plants/VV_Sunflower</texPath>
+      <texPath>Things/Plants/VV_Radiantflower</texPath>
       <graphicClass>VVRace.Graphic_Conditional</graphicClass>
     </graphicData>
 
@@ -364,7 +363,7 @@
 
     <useHitPoints>true</useHitPoints>
     <statBases>
-      <MarketValue>150</MarketValue>
+      <MarketValue>120</MarketValue>
       <MaxHitPoints>120</MaxHitPoints>
       
       <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
@@ -411,17 +410,70 @@
     </modExtensions>
   </ThingDef>
 
-  
-  <!-- 완두콩 포탑 -->
+  <!-- 풍년화 -->
   <ThingDef ParentName="VV_ArtificialPlantBase">
-    <defName>VV_PeaTurret</defName>
-    <label>pea turret</label>
+    <defName>VV_Richflower</defName>
+    <label>richflower</label>
+    <description>.</description>
+    <thingClass>VVRace.RichFlower</thingClass>
+    <tickerType>Rare</tickerType>
+
+    <graphicData>
+      <texPath>Things/Plants/VV_Richflower</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Metal_Drop</soundDrop>
+
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <MarketValue>240</MarketValue>
+      <MaxHitPoints>240</MaxHitPoints>
+      
+      <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
+      <VV_PlantHoneyGatherYield>1.5</VV_PlantHoneyGatherYield>
+    </statBases>
+
+    <comps>
+      <li Class="VVRace.CompProperties_RepeatGatherable" />
+
+      <li Class="VVRace.CompProperties_GlowerFlora">
+        <glowRadius>4</glowRadius>
+        <glowColor>(255,249,155,0)</glowColor>
+      </li>
+    </comps>
+
+    <modExtensions>
+      <li Class="VVRace.ArtificialPlantModExtension">
+        <energyCapacity>900</energyCapacity>
+        <zeroEnergyDamageByChance>1~5</zeroEnergyDamageByChance>
+
+        <energyConsumeRule Class="VVRace.EnergyRule_Constant">
+          <energy>20</energy>
+        </energyConsumeRule>
+        <energyGenerateRule Class="VVRace.EnergyRule_AdjacentPlant">
+          <energyByAdjacentPlant>20</energyByAdjacentPlant>
+        </energyGenerateRule>
+
+        <terraformingTick>180000</terraformingTick>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+
+  
+  <!-- 콩뿌리개 -->
+  <ThingDef ParentName="VV_ArtificialPlantBase">
+    <defName>VV_Peashooter</defName>
+    <label>peashooter</label>
     <description>.</description>
     <thingClass>VVRace.TurretPlant</thingClass>
     <tickerType>Normal</tickerType>
 
     <graphicData>
-      <texPath>Things/Plants/VV_PeaTurret_Base</texPath>
+      <texPath>Things/Plants/VV_Peashooter_Base</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <drawerType>MapMeshAndRealTime</drawerType>
@@ -443,9 +495,9 @@
     <building>
       <combatPower>45</combatPower>
       <ai_combatDangerous>true</ai_combatDangerous>
-      <turretGunDef>VV_Gun_PeaTurret</turretGunDef>
-      <turretBurstCooldownTime>2.9</turretBurstCooldownTime>
-      <turretBurstWarmupTime>0.6</turretBurstWarmupTime>
+      <turretGunDef>VV_Gun_Peashooter</turretGunDef>
+      <turretBurstCooldownTime>6.9</turretBurstCooldownTime>
+      <turretBurstWarmupTime>0.9</turretBurstWarmupTime>
       <turretTopOffset>(0, 0.05)</turretTopOffset>
       <turretTopDrawSize>1</turretTopDrawSize>
     </building>
@@ -463,7 +515,7 @@
         <energyConsumeRule Class="VVRace.EnergyRule_Constant">
           <energy>5</energy>
         </energyConsumeRule>
-        <verbShootEnergy>3</verbShootEnergy>
+        <verbShootEnergy>5</verbShootEnergy>
       </li>
     </modExtensions>
   </ThingDef>
@@ -477,17 +529,18 @@
     </graphicData>
     <projectile>
       <damageDef>Poke</damageDef>
-      <damageAmountBase>8</damageAmountBase>
+      <damageAmountBase>5</damageAmountBase>
+      <armorPenetrationBase>0</armorPenetrationBase>
       <speed>24</speed>
     </projectile>
   </ThingDef>
 
   <ThingDef ParentName="BaseWeaponTurret">
-    <defName>VV_Gun_PeaTurret</defName>
-    <label>pea turret head</label>
+    <defName>VV_Gun_Peashooter</defName>
+    <label>pea pod</label>
     <description>.</description>
     <graphicData>
-      <texPath>Things/Plants/VV_PeaTurret_Top</texPath>
+      <texPath>Things/Plants/VV_Peashooter_Top</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <drawerType>MapMeshAndRealTime</drawerType>
@@ -497,7 +550,7 @@
       <AccuracyShort>0.57</AccuracyShort>
       <AccuracyMedium>0.22</AccuracyMedium>
       <AccuracyLong>0.1</AccuracyLong>
-      <RangedWeapon_Cooldown>2.9</RangedWeapon_Cooldown>
+      <RangedWeapon_Cooldown>6.9</RangedWeapon_Cooldown>
       <DeteriorationRate>0</DeteriorationRate>
       <Mass>10</Mass>
       <Flammability>0</Flammability>
@@ -508,13 +561,124 @@
         <verbClass>Verb_Shoot</verbClass>
         <defaultProjectile>VV_Bullet_Pea</defaultProjectile>
         <warmupTime>0</warmupTime>
-        <range>26.9</range>
-        <ticksBetweenBurstShots>8</ticksBetweenBurstShots>
-        <burstShotCount>1</burstShotCount>
+        <range>27.9</range>
+        <ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+        <burstShotCount>8</burstShotCount>
         <soundCast>ThumpCannon_Fire</soundCast>
         <soundCastTail>GunTail_Heavy</soundCastTail>
-        <muzzleFlashScale>9</muzzleFlashScale>
-        <consumeFuelPerShot>1</consumeFuelPerShot>
+        <muzzleFlashScale>3</muzzleFlashScale>
+      </li>
+    </verbs>
+  </ThingDef>
+
+  
+  <!-- 화약뿌리개 -->
+  <ThingDef ParentName="VV_ArtificialPlantBase">
+    <defName>VV_Pealaucnher</defName>
+    <label>pealauncher</label>
+    <description>.</description>
+    <thingClass>VVRace.TurretPlant</thingClass>
+    <tickerType>Normal</tickerType>
+
+    <graphicData>
+      <texPath>Things/Plants/VV_Peashooter_Base</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <drawerType>MapMeshAndRealTime</drawerType>
+
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Metal_Drop</soundDrop>
+
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <Mass>5</Mass>
+      <MarketValue>360</MarketValue>
+      <MaxHitPoints>180</MaxHitPoints>
+    </statBases>
+
+    <comps>
+    </comps>
+
+    <building>
+      <combatPower>125</combatPower>
+      <ai_combatDangerous>true</ai_combatDangerous>
+      <turretGunDef>VV_Gun_Pealauncher</turretGunDef>
+      <turretBurstCooldownTime>7.9</turretBurstCooldownTime>
+      <turretBurstWarmupTime>2.9</turretBurstWarmupTime>
+      <turretTopOffset>(0, 0.05)</turretTopOffset>
+      <turretTopDrawSize>1</turretTopDrawSize>
+    </building>
+
+    <placeWorkers>
+      <li>PlaceWorker_TurretTop</li>
+      <li>PlaceWorker_ShowTurretRadius</li>
+    </placeWorkers>
+
+    <modExtensions>
+      <li Class="VVRace.ArtificialPlantModExtension">
+        <energyCapacity>300</energyCapacity>
+        <zeroEnergyDamageByChance>15~30</zeroEnergyDamageByChance>
+
+        <energyConsumeRule Class="VVRace.EnergyRule_Constant">
+          <energy>5</energy>
+        </energyConsumeRule>
+        <verbShootEnergy>30</verbShootEnergy>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>VV_Bullet_PeaFast</defName>
+    <label>pea bullet</label>
+    <thingClass>Projectile_Explosive</thingClass>
+
+    <graphicData>
+      <texPath>Things/Projectile/VV_PeaFast</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+
+    <projectile>
+      <damageDef>Bomb</damageDef>
+      <speed>50</speed>
+      <explosionRadius>1.9</explosionRadius>
+    </projectile>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>VV_Gun_Pealauncher</defName>
+    <label>pea pod</label>
+    <description>.</description>
+    <graphicData>
+      <texPath>Things/Plants/VV_Pealauncher_Top</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <drawerType>MapMeshAndRealTime</drawerType>
+
+    <statBases>
+      <AccuracyTouch>0.22</AccuracyTouch>
+      <AccuracyShort>0.57</AccuracyShort>
+      <AccuracyMedium>0.84</AccuracyMedium>
+      <AccuracyLong>0.67</AccuracyLong>
+      <RangedWeapon_Cooldown>7.9</RangedWeapon_Cooldown>
+      <DeteriorationRate>0</DeteriorationRate>
+      <Mass>10</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <defaultProjectile>VV_Bullet_PeaFast</defaultProjectile>
+        <warmupTime>0</warmupTime>
+        <range>41.9</range>
+        <ticksBetweenBurstShots>22</ticksBetweenBurstShots>
+        <burstShotCount>3</burstShotCount>
+        <forcedMissRadius>5.75</forcedMissRadius>
+        <forcedMissEvenDispersal>true</forcedMissEvenDispersal>
+        <soundCast>ThumpCannon_Fire</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>8</muzzleFlashScale>
       </li>
     </verbs>
   </ThingDef>

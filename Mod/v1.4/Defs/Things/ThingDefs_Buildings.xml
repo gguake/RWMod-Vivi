@@ -481,16 +481,16 @@
     </researchPrerequisites>
   </ThingDef>
 
-  <!-- 인공 식물 화분 -->
+  <!-- 고대 식물 화분 -->
   <ThingDef ParentName="BuildingBase">
-    <defName>VV_ArtificialPlantPot</defName>
-    <label>artificial plant pot</label>
+    <defName>VV_AncientPlantPot</defName>
+    <label>ancient plant pot</label>
     <description>.</description>
     <thingClass>VVRace.ArtificialPlantPot</thingClass>
     
     <drawerType>MapMeshAndRealTime</drawerType>
     <graphicData>
-      <texPath>Things/Building/VV_AdaptivePlantPot</texPath>
+      <texPath>Things/Building/VV_AncientPlantPot</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <shaderType>CutoutComplex</shaderType>
       <drawSize>(2.5, 2.5)</drawSize>
@@ -526,14 +526,13 @@
       <li>Woody</li>
       <li>Stony</li>
     </stuffCategories>
-    <costStuffCount>50</costStuffCount>
+    <costStuffCount>40</costStuffCount>
     <comps>
       <li Class="CompProperties_Forbiddable"/>
     </comps>
     <costList>
-      <VV_Vivicream>30</VV_Vivicream>
-      <VV_Pollen>30</VV_Pollen>
-      <Hay>30</Hay>
+      <VV_Vivicream>25</VV_Vivicream>
+      <VV_Fertilizer>25</VV_Fertilizer>
     </costList>
     
     <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
@@ -550,4 +549,67 @@
     </researchPrerequisites>
   </ThingDef>
 
+  <!-- 식물 배양기 -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>VV_SeedlingGerminator</defName>
+    <label>seedling germinator</label>
+    <description>.</description>
+    <thingClass>VVRace.Building_SeedlingGerminator</thingClass>
+    <tickerType>Rare</tickerType>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <graphicData>
+      <texPath>Things/Building/VV_SeedlingFarm</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(2.2, 2.2)</drawSize>
+      <drawRotated>false</drawRotated>
+    </graphicData>
+    <castEdgeShadows>true</castEdgeShadows>
+
+    <uiOrder>2402</uiOrder>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.4</fillPercent>
+    <pathCost>50</pathCost>
+    <statBases>
+      <MaxHitPoints>200</MaxHitPoints>
+      <Mass>15</Mass>
+      <WorkToBuild>3000</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Beauty>-1</Beauty>
+    </statBases>
+    <size>(2,2)</size>
+    <rotatable>false</rotatable>
+
+    <stuffCategories>
+      <li>Metallic</li>
+      <li>Woody</li>
+      <li>Stony</li>
+    </stuffCategories>
+    <costStuffCount>100</costStuffCount>
+
+    <costList>
+      <VV_Vivicream>40</VV_Vivicream>
+      <VV_Fertilizer>100</VV_Fertilizer>
+    </costList>
+
+    <defaultPlacingRot>South</defaultPlacingRot>
+    <building>
+      <preventDeteriorationOnTop>true</preventDeteriorationOnTop>
+      <ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
+    </building>
+    <designationCategory>VV_Bulidings</designationCategory>
+    <designationHotKey>Misc3</designationHotKey>
+    <staticSunShadowHeight>0.5</staticSunShadowHeight>
+
+    <surfaceType>Item</surfaceType>
+    <canOverlapZones>false</canOverlapZones>
+    <comps>
+      <li Class="CompProperties_Forbiddable"/>
+    </comps>
+    <researchPrerequisites>
+      <li>VV_AncientBotany</li>
+    </researchPrerequisites>
+  </ThingDef>
+  
 </Defs>

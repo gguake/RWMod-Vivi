@@ -18,11 +18,11 @@
   <VV_Apparels.label>비비 의류</VV_Apparels.label>
   <VV_Apparels.description>비비들이 입는 의류를 제작할 수 있습니다.</VV_Apparels.description>
 
-  <VV_Botany.label>비비 식물학</VV_Botany.label>
-  <VV_Botany.description>다양한 활용도를 가진 식물을 연구합니다.</VV_Botany.description>
+  <VV_AncientBotany.label>고대 식물학</VV_AncientBotany.label>
+  <VV_AncientBotany.description>다양한 활용도를 가진 고대 식물들을 복원하는 방법을 연구합니다.</VV_AncientBotany.description>
 
-  <VV_Lifestrand.label>생명가닥</VV_Lifestrand.label>
-  <VV_Lifestrand.description>악마가닥 천을 특수한 재료로 가공해 강화한 생명가닥 천을 직조할 수 있습니다.</VV_Lifestrand.description>
+  <VV_Lifestrand.label>생체가닥</VV_Lifestrand.label>
+  <VV_Lifestrand.description>악마가닥 천을 특수한 재료로 가공해 강화한 생체가닥 천을 직조할 수 있습니다.</VV_Lifestrand.description>
 
   
 </LanguageData>

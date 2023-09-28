@@ -96,10 +96,10 @@
   </ResearchProjectDef>
   
   <ResearchProjectDef ParentName="ViviResearchProjectBase">
-    <defName>VV_Botany</defName>
-    <label>vivi botany</label>
+    <defName>VV_AncientBotany</defName>
+    <label>ancient botany</label>
     <description>.</description>
-    <baseCost>1800</baseCost>
+    <baseCost>1200</baseCost>
     <researchViewX>2</researchViewX>
     <researchViewY>1.4</researchViewY>
     <prerequisites>
@@ -117,7 +117,7 @@
     <prerequisites>
       <li>Devilstrand</li>
       <li>VV_AdvancedGathering</li>
-      <li>VV_Botany</li>
+      <li>VV_AncientBotany</li>
     </prerequisites>
   </ResearchProjectDef>
 </Defs>

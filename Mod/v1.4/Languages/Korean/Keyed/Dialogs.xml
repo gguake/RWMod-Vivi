@@ -4,4 +4,8 @@
   <ViviFactionGreetingHostileAppreciative>{0}는 사납게 윙윙거리고 있습니다. 당신과 우호 관계가 되기 전까지 {0_pronoun}는 당신과 거래하지 않을것입니다. 당신은 {0_possessive} 정착지에 선물을 보내거나 {0_possessive} 소속의 포로를 안전하게 석방한다면 관계를 개선할 수 있습니다.\n\n{0_pronoun}는 갑작스럽게 연결을 끊었습니다.</ViviFactionGreetingHostileAppreciative>
   <ViviFactionGreetingWary>{0}는 윙윙거리며 당신을 기다리고 있습니다.</ViviFactionGreetingWary>
   <ViviFactionGreetingWarm>{0}는 반가운듯 윙윙거리며 {NEGOTIATOR_labelShort}에게 인사합니다.</ViviFactionGreetingWarm>
+
+  <ViviGerminateWindowJobTab>가능한 관리 작업</ViviGerminateWindowJobTab>
+  <ViviGerminateWindowScheduleTab>모종 관리 일정</ViviGerminateWindowScheduleTab>
+  <ViviGerminateWindowScheduleTabTip>모종 배양을 시작한 후 {0}일 뒤에 해당 작업을 진행합니다.\n\n{1}: {2}</ViviGerminateWindowScheduleTabTip>
 </LanguageData>

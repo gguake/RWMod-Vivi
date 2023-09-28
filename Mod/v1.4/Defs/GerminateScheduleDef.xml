@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <VVRace.GerminateScheduleDef>
+    <defName>VV_DoNothing</defName>
+    <label>do nothing</label>
+    <description>.</description>
+    <uiOrder>0</uiOrder>
+    <uiColor>(0.03, 0.03, 0.03)</uiColor>
+    <uiTextColor>(1.0, 1.0, 1.0)</uiTextColor>
+    <uiIconPath>UI/Icons/GerminateSchedule/Idle</uiIconPath>
+  </VVRace.GerminateScheduleDef>
+  
+  <VVRace.GerminateScheduleDef>
+    <defName>VV_Repotting</defName>
+    <label>repotting</label>
+    <description>.</description>
+    <uiOrder>1</uiOrder>
+    <uiColor>(0.64, 0.54, 0.45)</uiColor>
+    <uiIconPath>UI/Icons/GerminateSchedule/Fertilizer</uiIconPath>
+
+    <workAmount>700</workAmount>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_Fertilizer</li>
+          </thingDefs>
+        </filter>
+        <count>25</count>
+      </li>
+    </ingredients>
+  </VVRace.GerminateScheduleDef>
+  
+  <VVRace.GerminateScheduleDef>
+    <defName>VV_PestControl</defName>
+    <label>pest control</label>
+    <description>.</description>
+    <uiOrder>2</uiOrder>
+    <uiColor>(0.40, 0.57, 0.59)</uiColor>
+    <uiTextColor>(1.0, 1.0, 1.0)</uiTextColor>
+    <uiIconPath>UI/Icons/GerminateSchedule/Propolis</uiIconPath>
+    
+    <workAmount>500</workAmount>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_Propolis</li>
+          </thingDefs>
+        </filter>
+        <count>5</count>
+      </li>
+    </ingredients>
+  </VVRace.GerminateScheduleDef>
+  
+  <VVRace.GerminateScheduleDef>
+    <defName>VV_Weeding</defName>
+    <label>weeding</label>
+    <description>.</description>
+    <uiOrder>3</uiOrder>
+    <uiColor>(0.58, 0.74, 0.32)</uiColor>
+    <uiTextColor>(1.0, 1.0, 1.0)</uiTextColor>
+    <uiIconPath>UI/Icons/GerminateSchedule/Weeding</uiIconPath>
+
+    <workAmount>2800</workAmount>
+  </VVRace.GerminateScheduleDef>
+  
+  <VVRace.GerminateScheduleDef>
+    <defName>VV_InjectLuciferium</defName>
+    <label>inject luciferium</label>
+    <description>.</description>
+    <uiOrder>4</uiOrder>
+    <uiColor>(0.7, 0.125, 0.16)</uiColor>
+    <uiTextColor>(1.0, 1.0, 1.0)</uiTextColor>
+    <uiIconPath>UI/Icons/GerminateSchedule/Luciferium</uiIconPath>
+    
+    <workAmount>300</workAmount>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Luciferium</li>
+          </thingDefs>
+        </filter>
+        <count>5</count>
+      </li>
+    </ingredients>
+  </VVRace.GerminateScheduleDef>
+</Defs>

@@ -28,8 +28,8 @@
   <VV_Crown.description>로열 비비들을 위한 작은 왕관입니다.</VV_Crown.description>
 
   <!-- ETC -->
-  <VV_GuardianCoat.label>비비 수호자 코트</VV_GuardianCoat.label>
-  <VV_GuardianCoat.description>둥지의 적들을 제거하는 수호자들을 위한 코트입니다. 생명가닥으로 재단되어있어 겉보기에는 평범한 천옷같지만 매우 높은 방어력을 제공합니다.</VV_GuardianCoat.description>
+  <VV_GuardianCoat.label>비비 전투 코트</VV_GuardianCoat.label>
+  <VV_GuardianCoat.description>둥지의 적들을 제거하는 전투원들을 위한 코트입니다. 생체가닥으로 재단되어있어 겉보기에는 평범한 천옷같지만 매우 높은 방어력을 제공합니다.</VV_GuardianCoat.description>
 
   <VV_Childrenswear.label>비비 아동복</VV_Childrenswear.label>
   <VV_Childrenswear.description>어린 비비들을 위한 작은 옷입니다. 따뜻하고 아이들이 활동하기 편하게 만들어져있으며 만드는데 적은 재료를 소모하지만 성인이 되면 작아서 입지 못합니다.</VV_Childrenswear.description>

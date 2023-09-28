@@ -5,6 +5,8 @@
 
   <VV_AlertViviDangerousEggs>비비 알 손상중</VV_AlertViviDangerousEggs>
   <VV_AlertViviDangerousEggsDesc>방치되어 있거나 부화기 안에 있는 알이 적절하지 않은 온도에 의해 손상되고 있습니다.\n\n알이 완전히 손상되면 파괴되므로 알이 보관된 곳의 온도를 {MINTEMP}도 ~ {MAXTEMP}도 사이로 유지하도록 하세요.</VV_AlertViviDangerousEggsDesc>
+  <VV_AlertArtificialPlantLowEnergy>식물 에너지 낮음</VV_AlertArtificialPlantLowEnergy>
+  <VV_AlertArtificialPlantLowEnergyDesc>식물이 보유한 에너지가 매우 낮습니다. 에너지가 고갈된 상태에서 방치되면 점차 손상되어 파괴됩니다.\n\n식물이 에너지를 얻을수 있는 환경을 갖추거나 에너지가 초과 생산되는 식물 옆에 배치하세요.\n\n여건이 되지 않는다면 포장해두는것도 좋은 방법입니다.</VV_AlertArtificialPlantLowEnergyDesc>
 
   <VV_GizmoViviBandwidthHeader>정신 결속</VV_GizmoViviBandwidthHeader>
   <VV_GizmoViviBandwidthTooltip>현재 활성화된 정신 결속의 숫자를 나타냅니다.\n\n클릭해서 현재 결속된 비비 목록을 확인할 수 있습니다.</VV_GizmoViviBandwidthTooltip>
@@ -45,4 +47,8 @@
 
   <VV_StatsReport_Energy>에너지 비축량</VV_StatsReport_Energy>
   <VV_StatsReport_Energy_Desc>식물이 최대로 저장할수 있는 에너지의 양입니다.</VV_StatsReport_Energy_Desc>
+
+  <VV_StatsReport_EnergyFlux>에너지 변화량</VV_StatsReport_EnergyFlux>
+  <VV_StatsReport_EnergyFlux_Desc>하루동안의 이 식물의 에너지 변화량입니다.\n\n에너지는 비료를 투입하거나 조건에 맞는 환경이 갖춰지면 특정 고대 식물들이 생산할수 있으며 포장되어있을때는 소모되지 않습니다.\n\n에너지 생산량이 비축량을 초과한 고대 식물은 인접한 다른 고대 식물들에 초과된 에너지를 제공합니다.</VV_StatsReport_EnergyFlux_Desc>
+
 </LanguageData>

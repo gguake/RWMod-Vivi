@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArtificialPlant\AI\JobDriver_FertilizeArtificialPlant.cs" />
+    <Compile Include="ArtificialPlant\Alert_LowEnergyArtificialPlant.cs" />
     <Compile Include="ArtificialPlant\ArtificialPlantPot.cs" />
     <Compile Include="ArtificialPlant\ArtificialPlantModExtension.cs" />
     <Compile Include="ArtificialPlant\Command_SetFertilizeAutoThreshold.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="ArtificialPlant\CompPowerFloraEnergy.cs" />
     <Compile Include="ArtificialPlant\Designator_ReplantArtificialPlant.cs" />
     <Compile Include="ArtificialPlant\Energy\EnergyRule.cs" />
+    <Compile Include="ArtificialPlant\Energy\EnergyRule_AdjacentPlant.cs" />
     <Compile Include="ArtificialPlant\Energy\EnergyRule_AdjacentWater.cs" />
     <Compile Include="ArtificialPlant\Energy\EnergyRule_Composite.cs" />
     <Compile Include="ArtificialPlant\Energy\EnergyRule_Constant.cs" />
@@ -84,9 +86,15 @@
     <Compile Include="ArtificialPlant\Energy\EnergyRule_Weather.cs" />
     <Compile Include="ArtificialPlant\Energy\EnergyRule_Sunlight.cs" />
     <Compile Include="ArtificialPlant\Energy\EnergyRule_Temperature.cs" />
+    <Compile Include="ArtificialPlant\Germinator\Command_CancelGerminateSchedule.cs" />
+    <Compile Include="ArtificialPlant\Germinator\Command_RegisterGerminateSchedule.cs" />
+    <Compile Include="ArtificialPlant\Germinator\GerminateSchedule.cs" />
+    <Compile Include="ArtificialPlant\Germinator\GerminateScheduleDef.cs" />
+    <Compile Include="ArtificialPlant\Germinator\Dialog_GerminateSchedule.cs" />
     <Compile Include="ArtificialPlant\Graphic_Conditional.cs" />
     <Compile Include="ArtificialPlant\CompHeatPusherFloraEnergy.cs" />
     <Compile Include="ArtificialPlant\Implements\BatteryFlower.cs" />
+    <Compile Include="ArtificialPlant\Implements\RichFlower.cs" />
     <Compile Include="ArtificialPlant\Implements\TurretPlant.cs" />
     <Compile Include="ArtificialPlant\Implements\TurretPlantTop.cs" />
     <Compile Include="ArtificialPlant\Implements\WaterFlower.cs" />
@@ -125,7 +133,7 @@
     <Compile Include="Vivi\Need_Loyalty.cs" />
     <Compile Include="Vivi\Vivi.cs" />
     <Compile Include="ViviModsConfig.cs" />
-    <Compile Include="ArtificialPlant\Building_SeedlingGerminator.cs" />
+    <Compile Include="ArtificialPlant\Germinator\Building_SeedlingGerminator.cs" />
     <Compile Include="PawnKindDef_Vivi.cs" />
     <Compile Include="Gather\RecipeDef_Gathering.cs" />
     <Compile Include="Recipe_InjectPropolis.cs" />

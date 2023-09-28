@@ -33,6 +33,16 @@ namespace VVRace
         public float EnergyChargeRatio => _energyNode.energy / ArtificialPlantModExtension.energyCapacity;
         public float Energy => _energyNode.energy;
 
+        public int EnergyFlux
+        {
+            get
+            {
+                var generatedEnergy = ArtificialPlantModExtension.energyGenerateRule?.CalcEnergy(this, 60000) ?? 0;
+                var consumedEnergy = ArtificialPlantModExtension.energyConsumeRule?.CalcEnergy(this, 60000) ?? 0;
+                return (int)generatedEnergy - (int)consumedEnergy;
+            }
+        }
+
         private int _zeroEnergyTicks = 0;
 
         private bool _fertilizeAutoActivated = false;
@@ -216,9 +226,7 @@ namespace VVRace
 
             if (Spawned)
             {
-                var generatedEnergy = ArtificialPlantModExtension.energyGenerateRule?.CalcEnergy(this, 60000) ?? 0;
-                var consumedEnergy = ArtificialPlantModExtension.energyConsumeRule?.CalcEnergy(this, 60000) ?? 0;
-                var energyFlux = (int)generatedEnergy - (int)consumedEnergy;
+                var energyFlux = EnergyFlux;
                 if (energyFlux != 0)
                 {
                     sb.Append(" ");
@@ -380,12 +388,6 @@ namespace VVRace
             }
         }
 
-        public void AddEnergy(float energy)
-        {
-            _energyNode.energy = Mathf.Clamp(_energyNode.energy + energy, 0f, ArtificialPlantModExtension.energyCapacity);
-            _energyNode.nextRefreshTick = 0;
-        }
-
         public override IEnumerable<StatDrawEntry> SpecialDisplayStats()
         {
             yield return new StatDrawEntry(
@@ -393,7 +395,23 @@ namespace VVRace
                 LocalizeTexts.StatsReport_Energy.Translate(),
                 ArtificialPlantModExtension.energyCapacity.ToString(),
                 LocalizeTexts.StatsReport_Energy_Desc.Translate(),
-                10000);
+                -20000);
+
+            if (Spawned)
+            {
+                yield return new StatDrawEntry(
+                    StatCategoryDefOf.Basics,
+                    LocalizeTexts.StatsReport_EnergyFlux.Translate(),
+                    EnergyFlux.ToString("+0;-#"),
+                    LocalizeTexts.StatsReport_EnergyFlux_Desc.Translate(),
+                    -20001);
+            }
+        }
+
+        public void AddEnergy(float energy)
+        {
+            _energyNode.energy = Mathf.Clamp(_energyNode.energy + energy, 0f, ArtificialPlantModExtension.energyCapacity);
+            _energyNode.nextRefreshTick = 0;
         }
 
         public void Notify_TurretVerbShot()

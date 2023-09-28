@@ -99,4 +99,10 @@ namespace VVRace
         public static MentalBreakDef RunWild;
         public static MentalBreakDef GiveUpExit;
     }
+
+    [DefOf]
+    public static class VVGerminateScheduleDefOf
+    {
+        public static GerminateScheduleDef VV_DoNothing;
+    }
 }

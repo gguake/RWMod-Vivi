@@ -23,5 +23,7 @@ namespace VVRace
         public FloatRange empExplosiveRadiusRange = new FloatRange(0f, 0f);
 
         public int verbShootEnergy = 0;
+
+        public int terraformingTick;
     }
 }
