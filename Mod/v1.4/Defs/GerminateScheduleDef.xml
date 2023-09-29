@@ -35,12 +35,12 @@
     <uiTextColor>(1.0, 1.0, 1.0)</uiTextColor>
     <uiIconPath>UI/Icons/GerminateSchedule/Propolis</uiIconPath>
     
-    <workAmount>500</workAmount>
+    <workAmount>400</workAmount>
     <ingredients>
       <VV_Propolis>5</VV_Propolis>
     </ingredients>
 
-    <bonusMultiplierGerminateSuccessChance>1.2</bonusMultiplierGerminateSuccessChance>
+    <bonusMultiplierGerminateSuccessChance>1.35</bonusMultiplierGerminateSuccessChance>
   </VVRace.GerminateScheduleDef>
   
   <VVRace.GerminateScheduleDef>
@@ -54,7 +54,7 @@
 
     <workAmount>2400</workAmount>
     
-    <bonusMultiplierGerminateRareChance>1.2</bonusMultiplierGerminateRareChance>
+    <bonusMultiplierGerminateRareChance>1.15</bonusMultiplierGerminateRareChance>
   </VVRace.GerminateScheduleDef>
   
   <VVRace.GerminateScheduleDef>
@@ -66,12 +66,12 @@
     <uiTextColor>(1.0, 1.0, 1.0)</uiTextColor>
     <uiIconPath>UI/Icons/GerminateSchedule/Luciferium</uiIconPath>
     
-    <workAmount>300</workAmount>
+    <workAmount>400</workAmount>
     <ingredients>
       <Luciferium>3</Luciferium>
     </ingredients>
     
-    <bonusMultiplierGerminateSuccessChance>0.7</bonusMultiplierGerminateSuccessChance>
+    <bonusMultiplierGerminateSuccessChance>0.6</bonusMultiplierGerminateSuccessChance>
     <bonusMultiplierGerminateRareChance>1.5</bonusMultiplierGerminateRareChance>
   </VVRace.GerminateScheduleDef>
 </Defs>

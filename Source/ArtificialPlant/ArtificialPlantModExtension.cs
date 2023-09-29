@@ -4,6 +4,8 @@ namespace VVRace
 {
     public class ArtificialPlantModExtension : DefModExtension
     {
+        public int germinateWeight;
+
         public int energyCapacity = 100;
         public float initialEnergyPercent = 1f;
 
@@ -24,6 +26,6 @@ namespace VVRace
 
         public int verbShootEnergy = 0;
 
-        public int terraformingTick;
+        public int terraformingTick = 0;
     }
 }

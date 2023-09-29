@@ -619,6 +619,9 @@
           <VV_Fertilizer>100</VV_Fertilizer>
           <VV_Pollen>50</VV_Pollen>
         </germinateIngredients>
+
+        <germinateFailureCriticalWeight>3000</germinateFailureCriticalWeight>
+        <germinateFailureCropsWeight>2000</germinateFailureCropsWeight>
       </li>
     </modExtensions>
   </ThingDef>

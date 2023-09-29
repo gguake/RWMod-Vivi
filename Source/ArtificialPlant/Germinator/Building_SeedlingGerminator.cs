@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 using Verse;
 
 namespace VVRace
@@ -13,12 +14,7 @@ namespace VVRace
         Weeding,
     }
 
-    public class GerminatorModExtension : DefModExtension
-    {
-        public List<ThingDefCountClass> germinateIngredients;
-        public int scheduleCooldown;
-    }
-
+    [StaticConstructorOnStartup]
     public class Building_SeedlingGerminator : Building
     {
         public GerminateSchedule CurrentSchedule => _currentSchedule;
@@ -39,6 +35,8 @@ namespace VVRace
                 return _defModExtension;
             }
         }
+
+        private static readonly Texture2D CancelCommandTex = ContentFinder<Texture2D>.Get("UI/Designators/Cancel");
 
         public override void ExposeData()
         {
@@ -64,7 +62,7 @@ namespace VVRace
                 {
                     case GerminateStage.None:
                         {
-                            sb.AppendLine();
+                            if (sb.Length > 0) { sb.AppendLine(); }
                             sb.Append(LocalizeTexts.InspectorViviGerminatorReserved.Translate());
                         }
                         break;
@@ -102,6 +100,7 @@ namespace VVRace
                 {
                     var commandCancelSchedule = new Command_CancelGerminateSchedule();
                     commandCancelSchedule.building = this;
+                    commandCancelSchedule.icon = CancelCommandTex;
                     commandCancelSchedule.defaultLabel = LocalizeTexts.CommandCancelGerminateSchedule.Translate();
                     commandCancelSchedule.defaultDesc = LocalizeTexts.CommandCancelGerminateScheduleDesc.Translate();
                     yield return commandCancelSchedule;

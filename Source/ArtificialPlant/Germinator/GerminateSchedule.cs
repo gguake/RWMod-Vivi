@@ -83,6 +83,7 @@ namespace VVRace
         private GerminateStage _stage = GerminateStage.None;
         public GerminateStage Stage => _stage;
 
+        private int _seed;
         private List<GerminateScheduleDef> _schedules = Enumerable.Repeat(VVGerminateScheduleDefOf.VV_DoNothing, TotalScheduleCount).ToList();
         private List<float> _scheduleQuality = Enumerable.Repeat(0f, TotalScheduleCount).ToList();
         private int _currentScheduleIndex = 0;
@@ -139,6 +140,7 @@ namespace VVRace
         public void ExposeData()
         {
             Scribe_Values.Look(ref _stage, "germinateStage");
+            Scribe_Values.Look(ref _seed, "seed");
             Scribe_Collections.Look(ref _schedules, "schedules", LookMode.Def);
             Scribe_Collections.Look(ref _scheduleQuality, "scheduleQuality", LookMode.Value);
 
@@ -149,6 +151,7 @@ namespace VVRace
 
         public void StartGerminate()
         {
+            _seed = Rand.Int;
             _germinateStartTick = GenTicks.TicksGame;
         }
     }

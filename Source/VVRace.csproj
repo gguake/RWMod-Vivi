@@ -91,6 +91,7 @@
     <Compile Include="ArtificialPlant\Germinator\GerminateSchedule.cs" />
     <Compile Include="ArtificialPlant\Germinator\GerminateScheduleDef.cs" />
     <Compile Include="ArtificialPlant\Germinator\Dialog_GerminateSchedule.cs" />
+    <Compile Include="ArtificialPlant\Germinator\GerminatorModExtension.cs" />
     <Compile Include="ArtificialPlant\Graphic_Conditional.cs" />
     <Compile Include="ArtificialPlant\CompHeatPusherFloraEnergy.cs" />
     <Compile Include="ArtificialPlant\Implements\BatteryFlower.cs" />

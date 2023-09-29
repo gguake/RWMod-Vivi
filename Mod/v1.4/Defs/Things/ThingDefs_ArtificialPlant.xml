@@ -103,6 +103,8 @@
 
     <modExtensions>
       <li Class="VVRace.ArtificialPlantModExtension">
+        <germinateWeight>700</germinateWeight>
+        
         <energyCapacity>100</energyCapacity>
         <zeroEnergyDamageByChance>1~4</zeroEnergyDamageByChance>
 
@@ -158,6 +160,8 @@
     
     <modExtensions>
       <li Class="VVRace.ArtificialPlantModExtension">
+        <germinateWeight>700</germinateWeight>
+
         <energyCapacity>100</energyCapacity>
         <zeroEnergyDamageByChance>1~4</zeroEnergyDamageByChance>
 
@@ -219,6 +223,8 @@
     
     <modExtensions>
       <li Class="VVRace.ArtificialPlantModExtension">
+        <germinateWeight>400</germinateWeight>
+
         <energyCapacity>200</energyCapacity>
         <zeroEnergyDamageByChance>1~10</zeroEnergyDamageByChance>
 
@@ -281,6 +287,8 @@
     
     <modExtensions>
       <li Class="VVRace.ArtificialPlantModExtension">
+        <germinateWeight>700</germinateWeight>
+
         <energyCapacity>500</energyCapacity>
         <zeroEnergyDamageByChance>1~10</zeroEnergyDamageByChance>
 
@@ -324,6 +332,8 @@
     
     <modExtensions>
       <li Class="VVRace.ArtificialPlantModExtension">
+        <germinateWeight>400</germinateWeight>
+
         <energyCapacity>400</energyCapacity>
         <initialEnergyPercent>1.0</initialEnergyPercent>
         <zeroEnergyDamageByChance>1~5</zeroEnergyDamageByChance>
@@ -390,6 +400,8 @@
 
     <modExtensions>
       <li Class="VVRace.ArtificialPlantModExtension">
+        <germinateWeight>700</germinateWeight>
+
         <energyCapacity>400</energyCapacity>
         <zeroEnergyDamageByChance>1~10</zeroEnergyDamageByChance>
 
@@ -447,6 +459,8 @@
 
     <modExtensions>
       <li Class="VVRace.ArtificialPlantModExtension">
+        <germinateWeight>400</germinateWeight>
+
         <energyCapacity>900</energyCapacity>
         <zeroEnergyDamageByChance>1~5</zeroEnergyDamageByChance>
 
@@ -509,6 +523,8 @@
 
     <modExtensions>
       <li Class="VVRace.ArtificialPlantModExtension">
+        <germinateWeight>700</germinateWeight>
+
         <energyCapacity>300</energyCapacity>
         <zeroEnergyDamageByChance>5~15</zeroEnergyDamageByChance>
 
@@ -617,6 +633,8 @@
 
     <modExtensions>
       <li Class="VVRace.ArtificialPlantModExtension">
+        <germinateWeight>300</germinateWeight>
+
         <energyCapacity>300</energyCapacity>
         <zeroEnergyDamageByChance>15~30</zeroEnergyDamageByChance>
 
