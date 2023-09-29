@@ -1,6 +1,7 @@
 ﻿using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using UnityEngine;
 using Verse;
 using Verse.Sound;
@@ -9,7 +10,7 @@ namespace VVRace
 {
     public class Dialog_GerminateSchedule : Window
     {
-        public override Vector2 InitialSize => new Vector2(546f, 488f);
+        public override Vector2 InitialSize => new Vector2(546f, 510f);
 
         private List<Building_SeedlingGerminator> _germinators;
         private GerminateSchedule _schedule;
@@ -18,18 +19,20 @@ namespace VVRace
         public Dialog_GerminateSchedule(IEnumerable<Building_SeedlingGerminator> germinators)
         {
             _germinators = germinators.ToList();
-            _schedule = new GerminateSchedule();
+            _schedule = new GerminateSchedule(_germinators[0].def);
 
             forcePause = true;
+            doCloseX = true;
             absorbInputAroundWindow = true;
-
+            closeOnAccept = false;
+            closeOnClickedOutside = false;
         }
 
         public override void DoWindowContents(Rect inRect)
         {
             Text.Font = GameFont.Small;
             var divider = new RectDivider(inRect, 1138092823);
-            var dividerUpper = divider.NewRow(244f);
+            var dividerUpper = divider.NewRow(248f);
             var dividerLower = divider;
 
             var dividerSelectionScheduleDef = dividerUpper.NewCol(185f);
@@ -50,11 +53,14 @@ namespace VVRace
             var dividerScheduleInfo = dividerUpper;
             #region 스케줄 정보 영역
             {
+                var scheduleCount = GerminateSchedule.TotalScheduleCount;
+                var scheduleCooldown = _germinators[0].GerminatorModExtension.scheduleCooldown;
+
                 var headerRect = dividerScheduleInfo.NewRow(24f);
                 Widgets.Label(headerRect, LocalizeTexts.ViviGerminateWindowScheduleTab.Translate());
 
                 var scheduleRowRect = new RectDivider(dividerScheduleInfo.NewRow(76f), 43283471, new Vector2(4f, 4f));
-                for (int i = 0; i < GerminateSchedule.ScheduleDayCount; ++i)
+                for (int i = 0; i < scheduleCount; ++i)
                 {
                     var colRect = scheduleRowRect.NewCol(48);
                     DrawGernmiateScheduleColumn(colRect, i);
@@ -66,6 +72,7 @@ namespace VVRace
                     Widgets.SeparatorLineColor,
                     1f);
 
+                Widgets.Label(dividerScheduleInfo, LocalizeTexts.ViviGerminateWindowScheduleDesc.Translate(scheduleCount + 1, scheduleCooldown / 2500));
             }
             #endregion
 
@@ -79,7 +86,45 @@ namespace VVRace
                     Widgets.SeparatorLineColor,
                     1f);
 
-                Widgets.DrawBoxSolid(dividerLower.Rect, Color.white);
+                DrawGerminateScheduleSummary(dividerLower);
+            }
+            #endregion
+
+            #region 버튼 영역
+            {
+                var buttonRect = dividerLower.NewRow(48f, VerticalJustification.Bottom);
+                var lineRect = buttonRect.NewRow(4f).Rect;
+
+                Widgets.DrawLine(
+                    new Vector2(lineRect.xMin, lineRect.yMin),
+                    new Vector2(lineRect.xMax, lineRect.yMin),
+                    Widgets.SeparatorLineColor,
+                    1f);
+
+                var buttonRectLeft = buttonRect.NewCol(buttonRect.Rect.width / 2f).Rect;
+                var buttonRectRight = buttonRect.Rect;
+
+                bool okButton = false;
+                if (Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.Return)
+                {
+                    okButton = true;
+                    Event.current.Use();
+                }
+
+                var buttonOkRect = new Rect(0f, 0f, 100f, 40f);
+                buttonOkRect.center = buttonRectLeft.center;
+                if (Widgets.ButtonText(buttonOkRect, "OK".Translate()) || okButton)
+                {
+                    ConfirmDialog();
+                    Close();
+                }
+
+                var buttonCancelRect = new Rect(0f, 0f, 100f, 40f);
+                buttonCancelRect.center = buttonRectRight.center;
+                if (Widgets.ButtonText(buttonCancelRect, "Cancel".Translate()))
+                {
+                    Close();
+                }
             }
             #endregion
 
@@ -156,6 +201,126 @@ namespace VVRace
             }
 
             TooltipHandler.TipRegionByKey(fullRect, LocalizeTexts.ViviGerminateWindowScheduleTabTip.Translate(index + 1, _schedule[index].LabelCap, _schedule[index].description));
+        }
+
+        private void DrawGerminateScheduleSummary(RectDivider rect)
+        {
+            float totalWorkAmount = 0f;
+            var dictIngredients = new Dictionary<ThingDef, int>();
+
+            var data = _germinators[0].GerminatorModExtension;
+            foreach (var tdc in data.germinateIngredients)
+            {
+                if (dictIngredients.TryGetValue(tdc.thingDef, out var count))
+                {
+                    dictIngredients[tdc.thingDef] = count + tdc.count;
+                }
+                else
+                {
+                    dictIngredients.Add(tdc.thingDef, tdc.count);
+                }
+            }
+
+            foreach (var scheduleDef in _schedule)
+            {
+                if (scheduleDef.ingredients != null)
+                {
+                    foreach (var tdc in scheduleDef.ingredients)
+                    {
+                        if (dictIngredients.TryGetValue(tdc.thingDef, out var count))
+                        {
+                            dictIngredients[tdc.thingDef] = count + tdc.count;
+                        }
+                        else
+                        {
+                            dictIngredients.Add(tdc.thingDef, tdc.count);
+                        }
+                    }
+                }
+
+                totalWorkAmount += scheduleDef.workAmount;
+            }
+
+            var rectIngredientArea = new RectDivider(rect.NewCol(180f), 3459831, new Vector2(4f, 4f));
+            Widgets.Label(rectIngredientArea.NewRow(24f), LocalizeTexts.ViviGermianteWindowIngredientHeader.Translate());
+
+            foreach (var kv in dictIngredients)
+            {
+                var labelText = string.Format("{0} x{1}", kv.Key.LabelCap, kv.Value);
+                var rectThing = rectIngredientArea.NewRow(24);
+                DrawIngredientLabel(rectThing, kv.Key, labelText);
+            }
+
+            var rectBonusSummaryArea = new RectDivider(rect, 13468279, new Vector2(4f, 4f));
+            Widgets.Label(rectBonusSummaryArea.NewRow(26), LocalizeTexts.ViviGermianteWindowTotalWork.Translate(totalWorkAmount));
+
+            Widgets.Label(rectBonusSummaryArea.NewRow(24f), LocalizeTexts.ViviGermianteWindowBonusSummaryHeader.Translate());
+            var bonusCount = _schedule.ExpectedGerminateBonusCount;
+            if (bonusCount != 0)
+            {
+                var rectLabel = new RectDivider(rectBonusSummaryArea.NewRow(24f), 78484321, new Vector2(2f, 0f));
+                var rectLabelIcon = rectLabel.NewCol(24);
+                Widgets.DrawTextureFitted(rectLabelIcon, Widgets.PlaceholderIconTex, 0.75f);
+                Widgets.Label(rectLabel, LocalizeTexts.ViviGerminateWindowBonusCount.Translate(bonusCount.ToString("+0;-#")));
+            }
+
+            var bonusSuccessChance = _schedule.ExpectedGerminateBonusSuccessChance;
+            if (bonusSuccessChance != 1f)
+            {
+                var rectLabel = new RectDivider(rectBonusSummaryArea.NewRow(24f), 78484322, new Vector2(2f, 0f));
+                var rectLabelIcon = rectLabel.NewCol(24);
+                Widgets.DrawTextureFitted(rectLabelIcon, Widgets.PlaceholderIconTex, 0.75f);
+                Widgets.Label(rectLabel, LocalizeTexts.ViviGerminateWindowBonusSuccessChance.Translate(bonusSuccessChance.ToStringPercentEmptyZero()));
+            }
+
+            var bonusRareChance = _schedule.ExpectedGerminateBonusRareChance;
+            if (bonusRareChance != 1f)
+            {
+                var rectLabel = new RectDivider(rectBonusSummaryArea.NewRow(24f), 78484323, new Vector2(2f, 0f));
+                var rectLabelIcon = rectLabel.NewCol(24);
+                Widgets.DrawTextureFitted(rectLabelIcon, Widgets.PlaceholderIconTex, 0.75f);
+                Widgets.Label(rectLabel, LocalizeTexts.ViviGerminateWindowBonusRareChance.Translate(bonusRareChance.ToStringPercentEmptyZero()));
+            }
+        }
+
+        private void DrawIngredientLabel(Rect rect, Def def, string label, float iconMargin = 2f, float textOffsetX = 6f)
+        {
+            Widgets.DrawHighlightIfMouseover(rect);
+            TooltipHandler.TipRegion(rect, def.description);
+
+            Widgets.BeginGroup(rect);
+            try
+            {
+                Rect iconRect = new Rect(0f, 0f, rect.height, rect.height);
+                if (iconMargin != 0f)
+                {
+                    iconRect = iconRect.ContractedBy(iconMargin);
+                }
+
+                Widgets.DefIcon(iconRect, def, null, 1f, null, drawPlaceholder: true);
+
+                Rect rect3 = new Rect(iconRect.xMax + textOffsetX, 0f, rect.width, rect.height);
+                Text.Anchor = TextAnchor.MiddleLeft;
+                Text.WordWrap = false;
+
+                Widgets.Label(rect3, label);
+            }
+            finally
+            {
+                Text.Anchor = TextAnchor.UpperLeft;
+                Text.WordWrap = true;
+                Widgets.EndGroup();
+            }
+        }
+
+        private void ConfirmDialog()
+        {
+            Log.Message("asdf");
+            foreach (var germinator in _germinators)
+            {
+                germinator.ReserveSchedule(_schedule.Clone());
+            }
+
         }
     }
 }

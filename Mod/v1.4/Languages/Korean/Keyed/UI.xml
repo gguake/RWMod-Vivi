@@ -24,6 +24,7 @@
   <VV_InspectorPlantEnergy>에너지: {0}/{1}</VV_InspectorPlantEnergy>
   <VV_InspectorPlantEnergyFlux>({0}/일)</VV_InspectorPlantEnergyFlux>
   <VV_InspectorFertilizerAuto>비료 사용 기준 에너지: {0}</VV_InspectorFertilizerAuto>
+  <VV_InspectorViviGerminatorReserved>모종 배양 예약됨</VV_InspectorViviGerminatorReserved>
 
   <VV_LetterViviEggHatchedLabel>새로운 비비 태어남</VV_LetterViviEggHatchedLabel>
   <VV_LetterViviEggHatched>{PARENT_labelShort}가 낳은 알에서 새로운 비비가 태어났습니다. </VV_LetterViviEggHatched>
@@ -35,13 +36,17 @@
   <VV_CommandFertilizeAutoActivatedDesc>식물의 에너지가 일정 이하일때 정착민들이 비료를 자동으로 사용할지 설정합니다.</VV_CommandFertilizeAutoActivatedDesc>
   <VV_CommandSetFertilizeAutoThreshold>비료 사용 기준 설정</VV_CommandSetFertilizeAutoThreshold>
   <VV_CommandSetFertilizeAutoThresholdDesc>비료 사용 여부를 판단할 기준 에너지를 설정합니다. 에너지가 기준 이하이면 정착민들이 최대치까지 비료를 사용합니다.</VV_CommandSetFertilizeAutoThresholdDesc>
+  <VV_CommandRegisterGerminateSchedule>모종 배양 시작</VV_CommandRegisterGerminateSchedule>
+  <VV_CommandRegisterGerminateScheduleDesc>모종 배양을 위한 관리 일정을 입력하고 배양 작업을 시작합니다.</VV_CommandRegisterGerminateScheduleDesc>
+  <VV_CommandCancelGerminateSchedule>모종 배양 취소</VV_CommandCancelGerminateSchedule>
+  <VV_CommandCancelGerminateScheduleDesc>현재 예약되어있거나 진행중인 모종 배양 작업을 취소합니다.</VV_CommandCancelGerminateScheduleDesc>
   
   <VV_JobFailReasonNoHarvestablePlants>주변에 채집 가능한 식물 없음</VV_JobFailReasonNoHarvestablePlants>
   <VV_JobFailReasonNoHarvestablePollenFilths>주변에 수집 가능한 꽃가루 없음</VV_JobFailReasonNoHarvestablePollenFilths>
   <VV_JobFailReasonNotVivi>비비가 아님</VV_JobFailReasonNotVivi>
   <VV_JobFailReasonViviStarving>비비가 굶주림</VV_JobFailReasonViviStarving>
 
-  <VV_ConfirmPopupSpecializationChanged>지금 특화를 변경하면 현재 설정된 '{SPEC_label}' 특화의 지금까지 누적된 특화 레벨이 모두 초기화됩니다.\n정말 변경하시겠습니까?</VV_ConfirmPopupSpecializationChanged>
+  <VV_WarnCancelGerminateSchedule>현재 모종 배양기에 배양중인 모종이 있습니다. 작업을 취소하면 배양중인 모종과 투입된 자원이 사라집니다.</VV_WarnCancelGerminateSchedule>
 
   <VV_MentalStateReason_Loyalty>충성도가 낮아 발생했습니다.</VV_MentalStateReason_Loyalty>
 

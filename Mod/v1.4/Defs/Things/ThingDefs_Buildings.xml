@@ -610,6 +610,17 @@
     <researchPrerequisites>
       <li>VV_AncientBotany</li>
     </researchPrerequisites>
+    
+    <modExtensions>
+      <li Class="VVRace.GerminatorModExtension">
+        <scheduleCooldown>45000</scheduleCooldown>
+        <germinateIngredients>
+          <VV_UnknownSeed>3</VV_UnknownSeed>
+          <VV_Fertilizer>100</VV_Fertilizer>
+          <VV_Pollen>50</VV_Pollen>
+        </germinateIngredients>
+      </li>
+    </modExtensions>
   </ThingDef>
   
 </Defs>

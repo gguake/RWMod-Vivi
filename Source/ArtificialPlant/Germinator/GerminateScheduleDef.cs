@@ -16,9 +16,13 @@ namespace VVRace
         public Texture2D uiIcon = BaseContent.BadTex;
 
         public int workAmount;
-        public List<IngredientCount> ingredients;
+        public List<ThingDefCountClass> ingredients;
 
         public JobDef germinateJob;
+
+        public int bonusAddGerminateResult;
+        public float bonusMultiplierGerminateSuccessChance;
+        public float bonusMultiplierGerminateRareChance;
 
         public override void PostLoad()
         {

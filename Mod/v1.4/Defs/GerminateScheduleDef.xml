@@ -20,15 +20,10 @@
 
     <workAmount>700</workAmount>
     <ingredients>
-      <li>
-        <filter>
-          <thingDefs>
-            <li>VV_Fertilizer</li>
-          </thingDefs>
-        </filter>
-        <count>25</count>
-      </li>
+      <VV_Fertilizer>25</VV_Fertilizer>
     </ingredients>
+
+    <bonusAddGerminateResult>1</bonusAddGerminateResult>
   </VVRace.GerminateScheduleDef>
   
   <VVRace.GerminateScheduleDef>
@@ -42,15 +37,10 @@
     
     <workAmount>500</workAmount>
     <ingredients>
-      <li>
-        <filter>
-          <thingDefs>
-            <li>VV_Propolis</li>
-          </thingDefs>
-        </filter>
-        <count>5</count>
-      </li>
+      <VV_Propolis>5</VV_Propolis>
     </ingredients>
+
+    <bonusMultiplierGerminateSuccessChance>1.2</bonusMultiplierGerminateSuccessChance>
   </VVRace.GerminateScheduleDef>
   
   <VVRace.GerminateScheduleDef>
@@ -62,7 +52,9 @@
     <uiTextColor>(1.0, 1.0, 1.0)</uiTextColor>
     <uiIconPath>UI/Icons/GerminateSchedule/Weeding</uiIconPath>
 
-    <workAmount>2800</workAmount>
+    <workAmount>2400</workAmount>
+    
+    <bonusMultiplierGerminateRareChance>1.2</bonusMultiplierGerminateRareChance>
   </VVRace.GerminateScheduleDef>
   
   <VVRace.GerminateScheduleDef>
@@ -76,14 +68,10 @@
     
     <workAmount>300</workAmount>
     <ingredients>
-      <li>
-        <filter>
-          <thingDefs>
-            <li>Luciferium</li>
-          </thingDefs>
-        </filter>
-        <count>5</count>
-      </li>
+      <Luciferium>3</Luciferium>
     </ingredients>
+    
+    <bonusMultiplierGerminateSuccessChance>0.7</bonusMultiplierGerminateSuccessChance>
+    <bonusMultiplierGerminateRareChance>1.5</bonusMultiplierGerminateRareChance>
   </VVRace.GerminateScheduleDef>
 </Defs>

@@ -25,6 +25,7 @@
         public const string InspectorPlantEnergy = "VV_InspectorPlantEnergy";
         public const string InspectorPlantEnergyFlux = "VV_InspectorPlantEnergyFlux";
         public const string InspectorFertilizerAuto = "VV_InspectorFertilizerAuto";
+        public const string InspectorViviGerminatorReserved = "VV_InspectorViviGerminatorReserved";
 
         public const string LetterViviEggHatchedLabel = "VV_LetterViviEggHatchedLabel";
         public const string LetterViviEggHatched = "VV_LetterViviEggHatched";
@@ -59,5 +60,12 @@
         public const string ViviGerminateWindowJobTab = "ViviGerminateWindowJobTab";
         public const string ViviGerminateWindowScheduleTab = "ViviGerminateWindowScheduleTab";
         public const string ViviGerminateWindowScheduleTabTip = "ViviGerminateWindowScheduleTabTip";
+        public const string ViviGerminateWindowScheduleDesc = "ViviGerminateWindowScheduleDesc";
+        public const string ViviGermianteWindowIngredientHeader = "ViviGermianteWindowIngredientHeader";
+        public const string ViviGermianteWindowTotalWork = "ViviGermianteWindowTotalWork";
+        public const string ViviGermianteWindowBonusSummaryHeader = "ViviGermianteWindowBonusSummaryHeader";
+        public const string ViviGerminateWindowBonusCount = "ViviGerminateWindowBonusCount";
+        public const string ViviGerminateWindowBonusSuccessChance = "ViviGerminateWindowBonusSuccessChance";
+        public const string ViviGerminateWindowBonusRareChance = "ViviGerminateWindowBonusRareChance";
     }
 }

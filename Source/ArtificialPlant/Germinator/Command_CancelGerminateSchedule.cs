@@ -1,9 +1,6 @@
 ﻿using RimWorld;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 using Verse;
 
@@ -28,8 +25,8 @@ namespace VVRace
                 buildings.Add(building);
             }
 
-            var hasAnySchedule = buildings.Any(v => v.CurrentSchedule != null);
-            if (hasAnySchedule)
+            var hasAnyStartedSchedule = buildings.Any(v => v.CurrentSchedule != null && !v.CurrentSchedule.CanStopInstantly);
+            if (hasAnyStartedSchedule)
             {
                 Find.WindowStack.Add(new Dialog_MessageBox(
                     LocalizeTexts.WarnCancelGerminateSchedule.Translate(), 
