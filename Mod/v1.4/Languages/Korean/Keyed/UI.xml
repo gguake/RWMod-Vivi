@@ -25,6 +25,10 @@
   <VV_InspectorPlantEnergyFlux>({0}/일)</VV_InspectorPlantEnergyFlux>
   <VV_InspectorFertilizerAuto>비료 사용 기준 에너지: {0}</VV_InspectorFertilizerAuto>
   <VV_InspectorViviGerminatorReserved>모종 배양 예약됨</VV_InspectorViviGerminatorReserved>
+  <VV_InspectorViviGerminatorCompletePeriods>배양 완료까지 남은 시간: {0}</VV_InspectorViviGerminatorCompletePeriods>
+  <VV_InspectorViviGerminatorManageAvailable>{0}번째 모종 관리 작업 가능: {1}</VV_InspectorViviGerminatorManageAvailable>
+  <VV_InspectorViviGerminatorManageIngredient>필요 재료: {0}</VV_InspectorViviGerminatorManageIngredient>
+  <VV_InspectorViviGerminatorManageLastPeriods>다음 관리 작업까지 남은 시간: {0}</VV_InspectorViviGerminatorManageLastPeriods>
 
   <VV_LetterViviEggHatchedLabel>새로운 비비 태어남</VV_LetterViviEggHatchedLabel>
   <VV_LetterViviEggHatched>{PARENT_labelShort}가 낳은 알에서 새로운 비비가 태어났습니다. </VV_LetterViviEggHatched>

@@ -10,11 +10,21 @@ namespace VVRace
     {
         public override ThingRequest PotentialWorkThingRequest => ThingRequest.ForGroup(ThingRequestGroup.BuildingArtificial);
 
-        public override PathEndMode PathEndMode => PathEndMode.Touch;
+        public override PathEndMode PathEndMode => PathEndMode.ClosestTouch;
 
         public override bool HasJobOnThing(Pawn pawn, Thing t, bool forced = false)
         {
             if (!(t is ArtificialPlant plant && plant.FertilizeAutoActivated && plant.Energy <= plant.FertilizeAutoThreshold))
+            {
+                return false;
+            }
+
+            if (!t.Spawned)
+            {
+                return false;
+            }
+
+            if (!pawn.CanReserve(t, ignoreOtherReservations: forced))
             {
                 return false;
             }

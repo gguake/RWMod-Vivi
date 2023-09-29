@@ -26,6 +26,10 @@
         public const string InspectorPlantEnergyFlux = "VV_InspectorPlantEnergyFlux";
         public const string InspectorFertilizerAuto = "VV_InspectorFertilizerAuto";
         public const string InspectorViviGerminatorReserved = "VV_InspectorViviGerminatorReserved";
+        public const string InspectorViviGerminatorCompletePeriods = "VV_InspectorViviGerminatorCompletePeriods";
+        public const string InspectorViviGerminatorManageAvailable = "VV_InspectorViviGerminatorManageAvailable";
+        public const string InspectorViviGerminatorManageIngredient = "VV_InspectorViviGerminatorManageIngredient";
+        public const string InspectorViviGerminatorManageLastPeriods = "VV_InspectorViviGerminatorManageLastPeriods";
 
         public const string LetterViviEggHatchedLabel = "VV_LetterViviEggHatchedLabel";
         public const string LetterViviEggHatched = "VV_LetterViviEggHatched";

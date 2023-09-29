@@ -51,6 +51,8 @@ namespace VVRace
         public static JobDef VV_GatherGrassFiber;
 
         public static JobDef VV_FertilizeArtificialPlant;
+
+        public static JobDef VV_HaulGerminatingIngredient;
     }
 
     [DefOf]
@@ -69,6 +71,8 @@ namespace VVRace
 
         public static ThingDef VV_UnknownSeed;
         public static ThingDef VV_Fertilizer;
+
+        public static ThingDef VV_SeedlingGerminator;
     }
 
     [DefOf]

@@ -20,9 +20,9 @@ namespace VVRace
 
         public JobDef germinateJob;
 
-        public int bonusAddGerminateResult;
-        public float bonusMultiplierGerminateSuccessChance;
-        public float bonusMultiplierGerminateRareChance;
+        public FloatRange bonusAddGerminateResult = FloatRange.Zero;
+        public FloatRange bonusMultiplierGerminateSuccessChance = FloatRange.Zero;
+        public FloatRange bonusMultiplierGerminateRareChance = FloatRange.Zero;
 
         public override void PostLoad()
         {

@@ -51,8 +51,8 @@ namespace VVRace
         private int _fertilizeAutoThreshold = 0;
         public int FertilizeAutoThreshold
         {
-            get => _fertilizeAutoThreshold;
-            set => _fertilizeAutoThreshold = Mathf.Clamp(value, 0, ArtificialPlantModExtension.energyCapacity);
+            get => (int)Mathf.Clamp(_fertilizeAutoThreshold, 0, ArtificialPlantModExtension.energyCapacity - EnergyByFertilizer);
+            set => _fertilizeAutoThreshold = value;
         }
 
         public int RequiredFertilizerToFullyRecharge

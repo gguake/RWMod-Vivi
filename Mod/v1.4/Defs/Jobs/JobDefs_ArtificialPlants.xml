@@ -8,4 +8,43 @@
     <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
   </JobDef>
 
+  <JobDef>
+    <defName>VV_HaulGerminatingIngredient</defName>
+    <driverClass>VVRace.JobDriver_HaulGerminatingIngredient</driverClass>
+    <reportString>hauling TargetB to TargetA.</reportString>
+    <suspendable>false</suspendable>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef>
+  
+  <JobDef>
+    <defName>VV_ManageSeedlingRepotting</defName>
+    <driverClass>VVRace.JobDriver_HaulAndManageSeedling</driverClass>
+    <reportString>repotting seedling.</reportString>
+    <suspendable>false</suspendable>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef>
+  
+  <JobDef>
+    <defName>VV_ManageSeedlingPestControl</defName>
+    <driverClass>VVRace.JobDriver_HaulAndManageSeedling</driverClass>
+    <reportString>cleaning seedling germinator.</reportString>
+    <suspendable>false</suspendable>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef>
+  
+  <JobDef>
+    <defName>VV_ManageSeedlingWeeding</defName>
+    <driverClass>VVRace.JobDriver_ManageSeedling</driverClass>
+    <reportString>weeding around seedling.</reportString>
+    <suspendable>false</suspendable>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef>
+  
+  <JobDef>
+    <defName>VV_ManageSeedlingInjectLuciferium</defName>
+    <driverClass>VVRace.JobDriver_HaulAndManageSeedling</driverClass>
+    <reportString>injecting luciferium to seedling.</reportString>
+    <suspendable>false</suspendable>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef>
 </Defs>

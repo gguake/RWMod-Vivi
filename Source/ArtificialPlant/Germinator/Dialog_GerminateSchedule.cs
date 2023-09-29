@@ -53,14 +53,13 @@ namespace VVRace
             var dividerScheduleInfo = dividerUpper;
             #region 스케줄 정보 영역
             {
-                var scheduleCount = GerminateSchedule.TotalScheduleCount;
                 var scheduleCooldown = _germinators[0].GerminatorModExtension.scheduleCooldown;
 
                 var headerRect = dividerScheduleInfo.NewRow(24f);
                 Widgets.Label(headerRect, LocalizeTexts.ViviGerminateWindowScheduleTab.Translate());
 
                 var scheduleRowRect = new RectDivider(dividerScheduleInfo.NewRow(76f), 43283471, new Vector2(4f, 4f));
-                for (int i = 0; i < scheduleCount; ++i)
+                for (int i = 0; i < GerminateSchedule.TotalScheduleCount; ++i)
                 {
                     var colRect = scheduleRowRect.NewCol(48);
                     DrawGernmiateScheduleColumn(colRect, i);
@@ -72,7 +71,7 @@ namespace VVRace
                     Widgets.SeparatorLineColor,
                     1f);
 
-                Widgets.Label(dividerScheduleInfo, LocalizeTexts.ViviGerminateWindowScheduleDesc.Translate(scheduleCount + 1, scheduleCooldown / 2500));
+                Widgets.Label(dividerScheduleInfo, LocalizeTexts.ViviGerminateWindowScheduleDesc.Translate(GerminateSchedule.TotalScheduleCount + 1, scheduleCooldown / 2500));
             }
             #endregion
 
@@ -254,32 +253,36 @@ namespace VVRace
             var rectBonusSummaryArea = new RectDivider(rect, 13468279, new Vector2(4f, 4f));
             Widgets.Label(rectBonusSummaryArea.NewRow(26), LocalizeTexts.ViviGermianteWindowTotalWork.Translate(totalWorkAmount));
 
-            Widgets.Label(rectBonusSummaryArea.NewRow(24f), LocalizeTexts.ViviGermianteWindowBonusSummaryHeader.Translate());
             var bonusCount = _schedule.ExpectedGerminateBonusCount;
-            if (bonusCount != 0)
-            {
-                var rectLabel = new RectDivider(rectBonusSummaryArea.NewRow(24f), 78484321, new Vector2(2f, 0f));
-                var rectLabelIcon = rectLabel.NewCol(24);
-                Widgets.DrawTextureFitted(rectLabelIcon, Widgets.PlaceholderIconTex, 0.75f);
-                Widgets.Label(rectLabel, LocalizeTexts.ViviGerminateWindowBonusCount.Translate(bonusCount.ToString("+0;-#")));
-            }
-
             var bonusSuccessChance = _schedule.ExpectedGerminateBonusSuccessChance;
-            if (bonusSuccessChance != 1f)
-            {
-                var rectLabel = new RectDivider(rectBonusSummaryArea.NewRow(24f), 78484322, new Vector2(2f, 0f));
-                var rectLabelIcon = rectLabel.NewCol(24);
-                Widgets.DrawTextureFitted(rectLabelIcon, Widgets.PlaceholderIconTex, 0.75f);
-                Widgets.Label(rectLabel, LocalizeTexts.ViviGerminateWindowBonusSuccessChance.Translate(bonusSuccessChance.ToStringPercentEmptyZero()));
-            }
-
             var bonusRareChance = _schedule.ExpectedGerminateBonusRareChance;
-            if (bonusRareChance != 1f)
+            
+            if (bonusCount != 0 || bonusSuccessChance != 1f || bonusRareChance != 1f)
             {
-                var rectLabel = new RectDivider(rectBonusSummaryArea.NewRow(24f), 78484323, new Vector2(2f, 0f));
-                var rectLabelIcon = rectLabel.NewCol(24);
-                Widgets.DrawTextureFitted(rectLabelIcon, Widgets.PlaceholderIconTex, 0.75f);
-                Widgets.Label(rectLabel, LocalizeTexts.ViviGerminateWindowBonusRareChance.Translate(bonusRareChance.ToStringPercentEmptyZero()));
+                Widgets.Label(rectBonusSummaryArea.NewRow(24f), LocalizeTexts.ViviGermianteWindowBonusSummaryHeader.Translate());
+                if (bonusCount != 0)
+                {
+                    var rectLabel = new RectDivider(rectBonusSummaryArea.NewRow(24f), 78484321, new Vector2(2f, 0f));
+                    var rectLabelIcon = rectLabel.NewCol(24);
+                    Widgets.DrawTextureFitted(rectLabelIcon, Widgets.PlaceholderIconTex, 0.75f);
+                    Widgets.Label(rectLabel, LocalizeTexts.ViviGerminateWindowBonusCount.Translate(bonusCount.ToString("+0.0;-0.0")));
+                }
+
+                if (bonusSuccessChance != 1f)
+                {
+                    var rectLabel = new RectDivider(rectBonusSummaryArea.NewRow(24f), 78484322, new Vector2(2f, 0f));
+                    var rectLabelIcon = rectLabel.NewCol(24);
+                    Widgets.DrawTextureFitted(rectLabelIcon, Widgets.PlaceholderIconTex, 0.75f);
+                    Widgets.Label(rectLabel, LocalizeTexts.ViviGerminateWindowBonusSuccessChance.Translate(bonusSuccessChance.ToStringPercentEmptyZero()));
+                }
+
+                if (bonusRareChance != 1f)
+                {
+                    var rectLabel = new RectDivider(rectBonusSummaryArea.NewRow(24f), 78484323, new Vector2(2f, 0f));
+                    var rectLabelIcon = rectLabel.NewCol(24);
+                    Widgets.DrawTextureFitted(rectLabelIcon, Widgets.PlaceholderIconTex, 0.75f);
+                    Widgets.Label(rectLabel, LocalizeTexts.ViviGerminateWindowBonusRareChance.Translate(bonusRareChance.ToStringPercentEmptyZero()));
+                }
             }
         }
 
@@ -315,7 +318,6 @@ namespace VVRace
 
         private void ConfirmDialog()
         {
-            Log.Message("asdf");
             foreach (var germinator in _germinators)
             {
                 germinator.ReserveSchedule(_schedule.Clone());

@@ -67,6 +67,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArtificialPlant\AI\JobDriver_FertilizeArtificialPlant.cs" />
+    <Compile Include="ArtificialPlant\AI\JobDriver_ManageSeedling.cs" />
+    <Compile Include="ArtificialPlant\AI\JobDriver_HaulGerminatingIngredient.cs" />
+    <Compile Include="ArtificialPlant\AI\JobDriver_HaulAndManageSeedling.cs" />
     <Compile Include="ArtificialPlant\Alert_LowEnergyArtificialPlant.cs" />
     <Compile Include="ArtificialPlant\ArtificialPlantPot.cs" />
     <Compile Include="ArtificialPlant\ArtificialPlantModExtension.cs" />
@@ -92,6 +95,7 @@
     <Compile Include="ArtificialPlant\Germinator\GerminateScheduleDef.cs" />
     <Compile Include="ArtificialPlant\Germinator\Dialog_GerminateSchedule.cs" />
     <Compile Include="ArtificialPlant\Germinator\GerminatorModExtension.cs" />
+    <Compile Include="ArtificialPlant\AI\WorkGiver_ManageGerminator.cs" />
     <Compile Include="ArtificialPlant\Graphic_Conditional.cs" />
     <Compile Include="ArtificialPlant\CompHeatPusherFloraEnergy.cs" />
     <Compile Include="ArtificialPlant\Implements\BatteryFlower.cs" />

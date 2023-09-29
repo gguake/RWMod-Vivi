@@ -12,4 +12,11 @@
   <VV_DoBillsRefiningWorkbench.verb>정제</VV_DoBillsRefiningWorkbench.verb>
   <VV_DoBillsRefiningWorkbench.gerund>정제</VV_DoBillsRefiningWorkbench.gerund>
 
+  <VV_FertilizeArtificialPlant.label>비료 투여</VV_FertilizeArtificialPlant.label>
+  <VV_FertilizeArtificialPlant.verb>비료 투여</VV_FertilizeArtificialPlant.verb>
+  <VV_FertilizeArtificialPlant.gerund>비료 투여</VV_FertilizeArtificialPlant.gerund>
+
+  <VV_ManageGerminator.label>모종 관리</VV_ManageGerminator.label>
+  <VV_ManageGerminator.verb>모종 관리</VV_ManageGerminator.verb>
+  <VV_ManageGerminator.gerund>모종 관리</VV_ManageGerminator.gerund>
 </LanguageData>

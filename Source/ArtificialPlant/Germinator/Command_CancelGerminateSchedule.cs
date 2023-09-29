@@ -30,11 +30,10 @@ namespace VVRace
             {
                 Find.WindowStack.Add(new Dialog_MessageBox(
                     LocalizeTexts.WarnCancelGerminateSchedule.Translate(), 
-                    "Yes".Translate(),
-                    () =>
-                    {
-                        CancelGerminate();
-                    }));
+                    "Confirm".Translate(),
+                    CancelGerminate,
+                    "GoBack".Translate(),
+                    buttonADestructive: true));
             }
             else
             {

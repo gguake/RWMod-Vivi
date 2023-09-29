@@ -23,7 +23,9 @@
       <VV_Fertilizer>25</VV_Fertilizer>
     </ingredients>
 
-    <bonusAddGerminateResult>1</bonusAddGerminateResult>
+    <germinateJob>VV_ManageSeedlingRepotting</germinateJob>
+
+    <bonusAddGerminateResult>0.5~1.5</bonusAddGerminateResult>
   </VVRace.GerminateScheduleDef>
   
   <VVRace.GerminateScheduleDef>
@@ -39,8 +41,10 @@
     <ingredients>
       <VV_Propolis>5</VV_Propolis>
     </ingredients>
+    
+    <germinateJob>VV_ManageSeedlingPestControl</germinateJob>
 
-    <bonusMultiplierGerminateSuccessChance>1.35</bonusMultiplierGerminateSuccessChance>
+    <bonusMultiplierGerminateSuccessChance>1.25~1.45</bonusMultiplierGerminateSuccessChance>
   </VVRace.GerminateScheduleDef>
   
   <VVRace.GerminateScheduleDef>
@@ -52,9 +56,11 @@
     <uiTextColor>(1.0, 1.0, 1.0)</uiTextColor>
     <uiIconPath>UI/Icons/GerminateSchedule/Weeding</uiIconPath>
 
-    <workAmount>2400</workAmount>
+    <workAmount>2000</workAmount>
     
-    <bonusMultiplierGerminateRareChance>1.15</bonusMultiplierGerminateRareChance>
+    <germinateJob>VV_ManageSeedlingWeeding</germinateJob>
+
+    <bonusMultiplierGerminateRareChance>1.1~1.2</bonusMultiplierGerminateRareChance>
   </VVRace.GerminateScheduleDef>
   
   <VVRace.GerminateScheduleDef>
@@ -71,7 +77,9 @@
       <Luciferium>3</Luciferium>
     </ingredients>
     
-    <bonusMultiplierGerminateSuccessChance>0.6</bonusMultiplierGerminateSuccessChance>
-    <bonusMultiplierGerminateRareChance>1.5</bonusMultiplierGerminateRareChance>
+    <germinateJob>VV_ManageSeedlingInjectLuciferium</germinateJob>
+
+    <bonusMultiplierGerminateSuccessChance>0.5~0.5</bonusMultiplierGerminateSuccessChance>
+    <bonusMultiplierGerminateRareChance>1.7~1.7</bonusMultiplierGerminateRareChance>
   </VVRace.GerminateScheduleDef>
 </Defs>
