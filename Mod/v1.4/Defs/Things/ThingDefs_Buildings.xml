@@ -488,7 +488,6 @@
     <description>.</description>
     <thingClass>VVRace.ArtificialPlantPot</thingClass>
     
-    <drawerType>MapMeshAndRealTime</drawerType>
     <graphicData>
       <texPath>Things/Building/VV_AncientPlantPot</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -556,6 +555,7 @@
     <description>.</description>
     <thingClass>VVRace.Building_SeedlingGerminator</thingClass>
     <tickerType>Rare</tickerType>
+    
     <drawerType>MapMeshAndRealTime</drawerType>
     <graphicData>
       <texPath>Things/Building/VV_SeedlingFarm</texPath>
