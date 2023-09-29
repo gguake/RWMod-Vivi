@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <GeneDef>
+    <defName>VV_ViviMetabolism</defName>
+    <label>vivi metabolism</label>
+    <description>.</description>
+    <iconPath>UI/Icons/Genes/Gene_Vivi</iconPath>
+    <displayCategory>Miscellaneous</displayCategory>
+    <biologicalAgeTickFactorFromAgeCurve>
+      <points>
+        <li>(0, 2.5)</li>
+        <li>(13, 2)</li>
+        <li>(18.5, 1.5)</li>
+      </points>
+    </biologicalAgeTickFactorFromAgeCurve>
+    <biostatMet>-6</biostatMet>
+    <biostatCpx>4</biostatCpx>
+    <sterilize>true</sterilize>
+  </GeneDef>
+</Defs>

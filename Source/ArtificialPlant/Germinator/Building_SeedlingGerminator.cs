@@ -88,6 +88,8 @@ namespace VVRace
             return 0;
         }
 
+        private static readonly Texture2D GerminateCommandTex = ContentFinder<Texture2D>.Get("UI/Commands/VV_Germinate");
+
         private static readonly Texture2D CancelCommandTex = ContentFinder<Texture2D>.Get("UI/Designators/Cancel");
 
         public override void ExposeData()
@@ -186,6 +188,8 @@ namespace VVRace
                 {
                     var commandRegisterSchedule = new Command_RegisterGerminateSchedule();
                     commandRegisterSchedule.building = this;
+                    commandRegisterSchedule.icon = GerminateCommandTex;
+                    commandRegisterSchedule.iconOffset = new Vector2(0f, -0.08f);
                     commandRegisterSchedule.defaultLabel = LocalizeTexts.CommandRegisterGerminateSchedule.Translate();
                     commandRegisterSchedule.defaultDesc = LocalizeTexts.CommandRegisterGerminateScheduleDesc.Translate();
                     yield return commandRegisterSchedule;

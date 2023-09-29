@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Patch>
-  <Operation Class="PatchOperationAdd" MayRequire="Ludeon.RimWorld.Royalty">
-    <xpath>Defs/FactionDef[defName="Empire"]/permanentEnemyToEveryoneExcept</xpath>
-    <value>
-      <li>VV_ViviFederation</li>
-      <li>VV_PlayerVivi</li>
-      <li>VV_PlayerExiledVivi</li>
-    </value>
+  <Operation Class="PatchOperationSequence">
+    <operations>
+      <li Class="PatchOperationAdd" MayRequire="Ludeon.RimWorld.Royalty">
+        <xpath>Defs/FactionDef[defName="Empire"]/permanentEnemyToEveryoneExcept</xpath>
+        <value>
+          <li>VV_ViviFederation</li>
+          <li>VV_PlayerVivi</li>
+          <li>VV_PlayerExiledVivi</li>
+        </value>
+      </li>
+    </operations>
   </Operation>
+
 </Patch>

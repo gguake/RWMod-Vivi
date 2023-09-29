@@ -110,16 +110,24 @@ namespace VVRace
                     Event.current.Use();
                 }
 
-                var buttonOkRect = new Rect(0f, 0f, 100f, 40f);
-                buttonOkRect.center = buttonRectLeft.center;
-                if (Widgets.ButtonText(buttonOkRect, "OK".Translate()) || okButton)
+                try
                 {
-                    ConfirmDialog();
-                    Close();
+                    GUI.color = new Color(0.3f, 1f, 0.35f);
+                    var buttonOkRect = new Rect(0f, 0f, 120f, 40f);
+                    buttonOkRect.center = buttonRectRight.center;
+                    if (Widgets.ButtonText(buttonOkRect, "OK".Translate()) || okButton)
+                    {
+                        ConfirmDialog();
+                        Close();
+                    }
+                }
+                finally
+                {
+                    GUI.color = Color.white;
                 }
 
-                var buttonCancelRect = new Rect(0f, 0f, 100f, 40f);
-                buttonCancelRect.center = buttonRectRight.center;
+                var buttonCancelRect = new Rect(0f, 0f, 120f, 40f);
+                buttonCancelRect.center = buttonRectLeft.center;
                 if (Widgets.ButtonText(buttonCancelRect, "Cancel".Translate()))
                 {
                     Close();

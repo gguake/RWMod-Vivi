@@ -280,16 +280,20 @@
       <VV_HoneyGatherYield>1.0</VV_HoneyGatherYield>
       <VV_PlantGatherSpeed>1.0</VV_PlantGatherSpeed>
       <VV_PlantGatherYield>1.0</VV_PlantGatherYield>
-      <PlantWorkSpeed>1.2</PlantWorkSpeed>
-      <ConstructionSpeed>1.2</ConstructionSpeed>
+      <ConstructionSpeed>1.5</ConstructionSpeed>
+      <SmoothingSpeed>1.25</SmoothingSpeed>
+      <CleaningSpeed>1.25</CleaningSpeed>
 
+      <MoveSpeed>5.75</MoveSpeed>
       <ButcheryFleshEfficiency>0.7</ButcheryFleshEfficiency>
-      <MiningSpeed>0.6</MiningSpeed>
-      <MiningYield>0.6</MiningYield>
+      <MiningSpeed>0.5</MiningSpeed>
+      <MiningYield>0.5</MiningYield>
       
       <ToxicResistance>0.5</ToxicResistance>
 
       <VV_GrowthPointsFactor>1.35</VV_GrowthPointsFactor>
+
+      <Fertility>0</Fertility>
     </statBases>
 
     <race>
@@ -297,12 +301,12 @@
 			<thinkTreeConstant>HumanlikeConstant</thinkTreeConstant>
 			<intelligence>Humanlike</intelligence>
 			<makesFootprints>true</makesFootprints>
-      <lifeExpectancy>35</lifeExpectancy>
+      <lifeExpectancy>60</lifeExpectancy>
       <leatherDef>Leather_Light</leatherDef>
 			<nameCategory>HumanStandard</nameCategory>
       <body>VV_Vivi</body>
-      <baseBodySize>0.9</baseBodySize>
-      <baseHealthScale>0.9</baseHealthScale>
+      <baseBodySize>0.8</baseBodySize>
+      <baseHealthScale>0.8</baseHealthScale>
       <foodType>OmnivoreHuman</foodType>
 
       <manhunterOnTameFailChance>0.50</manhunterOnTameFailChance>
@@ -384,9 +388,9 @@
       <ageGenerationCurve>
         <points>
           <li MayRequire="Ludeon.RimWorld.Biotech">(0,0)</li>
-          <li MayRequire="Ludeon.RimWorld.Biotech">(0.001,43)</li>
-          <li MayRequire="Ludeon.RimWorld.Biotech">(8,86)</li>
-          <li MayRequire="Ludeon.RimWorld.Biotech">(12.5,118)</li>  <!-- Exclude 12.5-13 years to avoid spawning pawns who are very close to becoming adults -->  
+          <li MayRequire="Ludeon.RimWorld.Biotech">(0.001,23)</li>
+          <li MayRequire="Ludeon.RimWorld.Biotech">(8,30)</li>
+          <li MayRequire="Ludeon.RimWorld.Biotech">(12.5,98)</li>  <!-- Exclude 12.5-13 years to avoid spawning pawns who are very close to becoming adults -->  
           <li MayRequire="Ludeon.RimWorld.Biotech">(12.51,0)</li>  
           <li MayRequire="Ludeon.RimWorld.Biotech">(13,0)</li>      
           <li MayRequire="Ludeon.RimWorld.Biotech">(13.001,122)</li><!-- End exclude -->
@@ -394,12 +398,14 @@
           <li>(14,0)</li>
           <li MayRequire="Ludeon.RimWorld.Biotech">(14.001,130)</li>
           <li>(16,100)</li>
-          <li>(50,100)</li>
-          <li>(60,30)</li>
-          <li>(70,18)</li>
-          <li>(80,10)</li>
-          <li>(90,3)</li>
-          <li>(100,0)</li>
+          <li>(17.999,100)</li>
+          <li>(18,0)</li>
+          <li>(18.001,0)</li>
+          <li>(18.002,100)</li>
+          <li>(19,180)</li>
+          <li>(28,150)</li>
+          <li>(30,30)</li>
+          <li>(60,0)</li>
         </points>
       </ageGenerationCurve>
       
@@ -409,4 +415,59 @@
       </hediffGiverSets>
     </race>
   </AlienRace.ThingDef_AlienRace>
+
+  <AlienRace.RaceSettings>
+    <defName>Vivi_RaceSettings</defName>
+		<pawnKindSettings>
+      <alienwandererkinds>
+        <li>
+          <pawnKindEntries>
+            <li>
+              <kindDefs>
+                <li>VV_PlayerVivi</li>
+              </kindDefs>
+              <chance>96.0</chance>
+            </li>
+            <li>
+              <kindDefs>
+                <li>VV_PlayerRoyalVivi</li>
+              </kindDefs>
+              <chance>4.0</chance>
+            </li>
+          </pawnKindEntries>
+          <factionDefs>
+            <li>VV_PlayerVivi</li>
+            <li>VV_PlayerExiledVivi</li>
+          </factionDefs>
+        </li>
+      </alienwandererkinds>
+  
+      <alienslavekinds>
+        <li>
+          <kindDefs>
+            <li>VV_PlayerVivi</li>
+          </kindDefs>
+          <chance>50.0</chance>
+        </li>
+        <li>
+          <kindDefs>
+            <li>VV_PlayerRoyalVivi</li>
+          </kindDefs>
+          <chance>5.0</chance>
+        </li>
+      </alienslavekinds>
+  
+      <alienrefugeekinds>
+        <li>
+          <kindDefs>
+            <li>VV_PlayerVivi</li>
+            <li>VV_PlayerRoyalVivi</li>
+            <li>VV_PlayerExiledRoyalVivi</li>
+          </kindDefs>
+          <chance>0</chance>
+        </li>
+      </alienrefugeekinds>
+    </pawnKindSettings>
+
+  </AlienRace.RaceSettings>
 </Defs>

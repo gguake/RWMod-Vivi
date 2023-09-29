@@ -11,7 +11,7 @@
   <ViviGerminateWindowScheduleDesc>모종 배양에는 총 {0}일이 소요되며 배양 시작 이후 {1}시간마다 관리 작업을 할 수 있습니다.\n\n정착민은 일정대로 관리 작업을 진행하지만 재료가 부족하거나 바쁜 경우 진행되지 않습니다.\n\n관리 작업의 품질은 정착민의 원예 기술에 영향을 받으며 특정 자원을 소모합니다.</ViviGerminateWindowScheduleDesc>
   <ViviGermianteWindowIngredientHeader>총 작업 요구 재료</ViviGermianteWindowIngredientHeader>
   <ViviGermianteWindowTotalWork>총 작업량: {0}</ViviGermianteWindowTotalWork>
-  <ViviGermianteWindowBonusSummaryHeader>모든 작업 완료시 보너스 효과</ViviGermianteWindowBonusSummaryHeader>
+  <ViviGermianteWindowBonusSummaryHeader>모든 작업 완료시 예상 보너스 효과</ViviGermianteWindowBonusSummaryHeader>
   <ViviGerminateWindowBonusCount>결과 모종 개수 {0}</ViviGerminateWindowBonusCount>
   <ViviGerminateWindowBonusSuccessChance>모종 배양 성공률 x{0}</ViviGerminateWindowBonusSuccessChance>
   <ViviGerminateWindowBonusRareChance>희귀한 모종 배양 확률 x{0}</ViviGerminateWindowBonusRareChance>

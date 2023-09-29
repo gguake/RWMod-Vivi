@@ -493,7 +493,7 @@
         <biocodeOnEquip>true</biocodeOnEquip>
       </li>
       <li Class="CompProperties_GeneratedName">
-        <nameMaker>NamerWeaponBladelink</nameMaker>
+        <nameMaker>NamerArtWeaponMelee</nameMaker>
       </li>
     </comps>
     <smeltable>false</smeltable>

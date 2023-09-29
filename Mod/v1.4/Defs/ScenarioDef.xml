@@ -86,11 +86,6 @@
         </li>
         <li Class="ScenPart_StartingThing_Defined">
           <def>StartingThing_Defined</def>
-          <thingDef>VV_EmberBloom</thingDef>
-          <count>1</count>
-        </li>
-        <li Class="ScenPart_StartingThing_Defined">
-          <def>StartingThing_Defined</def>
           <thingDef>VV_Peashooter</thingDef>
           <count>2</count>
         </li>
@@ -122,6 +117,12 @@
           <def>ScatterThingsAnywhere</def>
           <thingDef>Steel</thingDef>
           <count>150</count>
+        </li>
+        
+        <!-- 사건 비활성화 -->
+        <li Class="ScenPart_DisableIncident">
+          <def>DisableIncident</def>
+          <incident>WandererJoin</incident>
         </li>
       </parts>
     </scenario>

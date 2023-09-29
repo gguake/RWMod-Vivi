@@ -13,6 +13,8 @@
     <factionlessGenerationWeight>0</factionlessGenerationWeight>
     <combatPowerFactor>0.9</combatPowerFactor>
     <genes>
+      <li>VV_ViviMetabolism</li>
+
       <li>Mood_Optimist</li>
       <li>FireTerror</li>
 
