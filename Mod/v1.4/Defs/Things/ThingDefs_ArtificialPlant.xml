@@ -224,6 +224,7 @@
     <modExtensions>
       <li Class="VVRace.ArtificialPlantModExtension">
         <germinateWeight>400</germinateWeight>
+        <germinateRare>true</germinateRare>
 
         <energyCapacity>200</energyCapacity>
         <zeroEnergyDamageByChance>1~10</zeroEnergyDamageByChance>
@@ -333,6 +334,7 @@
     <modExtensions>
       <li Class="VVRace.ArtificialPlantModExtension">
         <germinateWeight>400</germinateWeight>
+        <germinateRare>true</germinateRare>
 
         <energyCapacity>400</energyCapacity>
         <initialEnergyPercent>1.0</initialEnergyPercent>
@@ -460,6 +462,7 @@
     <modExtensions>
       <li Class="VVRace.ArtificialPlantModExtension">
         <germinateWeight>400</germinateWeight>
+        <germinateRare>true</germinateRare>
 
         <energyCapacity>900</energyCapacity>
         <zeroEnergyDamageByChance>1~5</zeroEnergyDamageByChance>
@@ -588,7 +591,7 @@
   </ThingDef>
 
   
-  <!-- 화약뿌리개 -->
+  <!-- 폭탄뿌리개 -->
   <ThingDef ParentName="VV_ArtificialPlantBase">
     <defName>VV_Pealaucnher</defName>
     <label>pealauncher</label>
@@ -634,6 +637,7 @@
     <modExtensions>
       <li Class="VVRace.ArtificialPlantModExtension">
         <germinateWeight>300</germinateWeight>
+        <germinateRare>true</germinateRare>
 
         <energyCapacity>300</energyCapacity>
         <zeroEnergyDamageByChance>15~30</zeroEnergyDamageByChance>

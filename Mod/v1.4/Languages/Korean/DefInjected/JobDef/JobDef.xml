@@ -9,5 +9,11 @@
   <VV_HaulViviEgg.reportString>부화기로 알 운반 중.</VV_HaulViviEgg.reportString>
 
   <VV_FertilizeArtificialPlant.reportString>TargetA에 비료를 주는 중.</VV_FertilizeArtificialPlant.reportString>
+
   <VV_HaulGerminatingIngredient.reportString>TargetA를 TargetB로 운반 중.</VV_HaulGerminatingIngredient.reportString>
+
+  <VV_ManageSeedlingRepotting.reportString>모종의 흙을 교체하는 중.</VV_ManageSeedlingRepotting.reportString>
+  <VV_ManageSeedlingPestControl.reportString>모종 배양대를 청소하는 중.</VV_ManageSeedlingPestControl.reportString>
+  <VV_ManageSeedlingWeeding.reportString>모종 주변의 잡초를 뽑는 중.</VV_ManageSeedlingWeeding.reportString>
+  <VV_ManageSeedlingInjectLuciferium.reportString>모종에 루시페륨 투여 중.</VV_ManageSeedlingInjectLuciferium.reportString>
 </LanguageData>

@@ -72,6 +72,9 @@ namespace VVRace
             }
         }
 
+        private ThingDef _productThingDef;
+        private int _productRemainedCount;
+
         public int GetGerminateRequiredCount(ThingDef def)
         {
             if (GerminateIngredients.TryGetValue(def, out var ingredientCount))
@@ -99,6 +102,9 @@ namespace VVRace
             Scribe_Deep.Look(ref _currentSchedule, "currentSchedule");
             Scribe_Deep.Look(ref _lastCompletedSchedule, "lastCompletedSchedule");
             Scribe_Collections.Look(ref _germinateReservedThings, "germinateReservedThings", LookMode.Def, LookMode.Value);
+
+            Scribe_Defs.Look(ref _productThingDef, "productThingDef");
+            Scribe_Values.Look(ref _productRemainedCount, "productRemainedCount");
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
@@ -162,6 +168,20 @@ namespace VVRace
                                 if (sb.Length > 0) { sb.AppendLine(); }
                                 sb.Append(LocalizeTexts.InspectorViviGerminatorManageLastPeriods.Translate(
                                     schedule.TicksToNextManageJob.ToStringTicksToPeriod()));
+                            }
+                        }
+                        break;
+
+                    case GerminateStage.GerminateCompleted:
+                        {
+                            if (sb.Length > 0) { sb.AppendLine(); }
+                            if (_productThingDef == null)
+                            {
+                                sb.Append(LocalizeTexts.InspectorViviGerminatorNoProduct.Translate());
+                            }
+                            else
+                            {
+                                sb.Append(LocalizeTexts.InspectorViviGerminatorProduct.Translate(_productThingDef.LabelCap, _productRemainedCount));
                             }
                         }
                         break;
@@ -234,7 +254,7 @@ namespace VVRace
 
             if (this.IsHashIntervalTick(60))
             {
-                CurrentSchedule?.Tick();
+                CurrentSchedule?.Tick(this);
             }
         }
 
@@ -242,14 +262,14 @@ namespace VVRace
         {
             base.TickRare();
 
-            CurrentSchedule?.Tick();
+            CurrentSchedule?.Tick(this);
         }
 
         public override void TickLong()
         {
             base.TickLong();
 
-            CurrentSchedule?.Tick();
+            CurrentSchedule?.Tick(this);
         }
 
         public void AddThings(Thing thing)
@@ -311,6 +331,34 @@ namespace VVRace
                 }
 
                 _germinateReservedThings = null;
+            }
+        }
+
+        public Thing WithdrawProduct()
+        {
+            if (_productThingDef == null || _productRemainedCount <= 0) { return null; }
+
+            var thing = ThingMaker.MakeThing(_productThingDef);
+            thing.stackCount = 1;
+
+            _productRemainedCount--;
+            if (_productRemainedCount == 0)
+            {
+                _productThingDef = null;
+
+                _lastCompletedSchedule = _currentSchedule;
+                _currentSchedule = null;
+            }
+
+            return thing;
+        }
+
+        public void Notify_ScheduleComplete(ThingDef resultThingDef, int resultCount)
+        {
+            if (resultThingDef != null)
+            {
+                _productThingDef = resultThingDef;
+                _productRemainedCount = resultThingDef.IsPlant ? Rand.Range(resultCount, resultCount * 3) : resultCount;
             }
         }
     }

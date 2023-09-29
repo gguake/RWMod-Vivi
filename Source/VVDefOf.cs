@@ -73,6 +73,13 @@ namespace VVRace
         public static ThingDef VV_Fertilizer;
 
         public static ThingDef VV_SeedlingGerminator;
+
+
+
+        public static ThingDef Plant_Strawberry;
+        public static ThingDef Plant_Corn;
+        public static ThingDef Plant_Cotton;
+        public static ThingDef Plant_Healroot;
     }
 
     [DefOf]

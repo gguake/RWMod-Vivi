@@ -5,6 +5,7 @@ namespace VVRace
     public class ArtificialPlantModExtension : DefModExtension
     {
         public int germinateWeight;
+        public bool germinateRare;
 
         public int energyCapacity = 100;
         public float initialEnergyPercent = 1f;

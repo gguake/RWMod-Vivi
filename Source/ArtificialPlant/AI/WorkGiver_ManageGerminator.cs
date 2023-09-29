@@ -1,6 +1,8 @@
 ﻿using RimWorld;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 using Verse;
 using Verse.AI;
 
@@ -87,8 +89,8 @@ namespace VVRace
                             if (TryFindManageIngredients(pawn, def, out var ingredients))
                             {
                                 var job = JobMaker.MakeJob(def.germinateJob, germinator);
-                                job.targetQueueB = ingredients.Select(v => new LocalTargetInfo(v.Item1)).ToList();
-                                job.countQueue = ingredients.Select(v => v.Item2).ToList();
+                                job.targetQueueB = ingredients.Select(v => new LocalTargetInfo(v.thing)).ToList();
+                                job.countQueue = ingredients.Select(v => v.count).ToList();
                                 job.haulMode = HaulMode.ToCellNonStorage;
                                 return job;
                             }
@@ -122,7 +124,7 @@ namespace VVRace
                     PathEndMode.ClosestTouch,
                     TraverseParms.For(pawn),
                     9999f,
-                    thing => !thing.IsForbidden(pawn) && pawn.CanReserve(thing) && thing.def == tuple.def);
+                    thing => !thing.IsForbidden(pawn) && pawn.CanReserve(thing));
 
                 if (target != null)
                 {
@@ -133,10 +135,42 @@ namespace VVRace
             return null;
         }
 
-        private bool TryFindManageIngredients(Pawn pawn, GerminateScheduleDef def, out List<(Thing, int)> ingredients)
+        private bool TryFindManageIngredients(Pawn pawn, GerminateScheduleDef def, out List<(Thing thing, int count)> ingredients)
         {
-            ingredients = null;
-            return false;
+            ingredients = new List<(Thing, int)>();
+            foreach (var tdc in def.ingredients)
+            {
+                var totalStackCounts = tdc.count;
+                var candidates = new List<(Thing, int)>();
+
+                do
+                {
+                    var target = GenClosest.ClosestThingReachable(
+                        pawn.Position,
+                        pawn.Map,
+                        ThingRequest.ForDef(tdc.thingDef),
+                        PathEndMode.ClosestTouch,
+                        TraverseParms.For(pawn),
+                        9999f,
+                        thing => !thing.IsForbidden(pawn) && pawn.CanReserve(thing));
+
+                    if (target != null)
+                    {
+                        var count = Mathf.Min(target.stackCount, totalStackCounts);
+                        candidates.Add((target, count));
+                        totalStackCounts -= count;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                while (totalStackCounts > 0);
+
+                ingredients.AddRange(candidates);
+            }
+
+            return true;
         }
     }
 }

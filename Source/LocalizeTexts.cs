@@ -30,6 +30,8 @@
         public const string InspectorViviGerminatorManageAvailable = "VV_InspectorViviGerminatorManageAvailable";
         public const string InspectorViviGerminatorManageIngredient = "VV_InspectorViviGerminatorManageIngredient";
         public const string InspectorViviGerminatorManageLastPeriods = "VV_InspectorViviGerminatorManageLastPeriods";
+        public const string InspectorViviGerminatorNoProduct = "VV_InspectorViviGerminatorNoProduct";
+        public const string InspectorViviGerminatorProduct = "VV_InspectorViviGerminatorProduct";
 
         public const string LetterViviEggHatchedLabel = "VV_LetterViviEggHatchedLabel";
         public const string LetterViviEggHatched = "VV_LetterViviEggHatched";

@@ -12,6 +12,20 @@ namespace VVRace
     {
         public const float EnergyByFertilizer = 10f;
 
+        private static List<ThingDef> _allArtificialPlantDefs;
+        public static IEnumerable<ThingDef> AllArtificialPlantDefs
+        {
+            get
+            {
+                if (_allArtificialPlantDefs == null)
+                {
+                    _allArtificialPlantDefs = DefDatabase<ThingDef>.AllDefsListForReading.Where(def => def.GetModExtension<ArtificialPlantModExtension>() != null).ToList();
+                }
+
+                return _allArtificialPlantDefs;
+            }
+        }
+
         private ArtificialPlantModExtension _defModExtension;
         public ArtificialPlantModExtension ArtificialPlantModExtension
         {

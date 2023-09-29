@@ -22,7 +22,6 @@ namespace VVRace
         protected override IEnumerable<Toil> MakeNewToils()
         {
             this.FailOnDespawnedNullOrForbidden(TargetIndex.B);
-            //AddEndCondition(() => Germinator.GetGerminateRequiredCount(IngredientThing.def) != 0 ? JobCondition.Ongoing : JobCondition.Succeeded);
             AddFailCondition(() => Germinator.CurrentSchedule == null);
 
             yield return Toils_General.DoAtomic(() => { job.count = Germinator.GetGerminateRequiredCount(IngredientThing.def); });

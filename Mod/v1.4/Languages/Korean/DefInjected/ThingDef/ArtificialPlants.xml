@@ -28,9 +28,9 @@
   <VV_Gun_Peashooter.label>콩뿌리개 꼬투리</VV_Gun_Peashooter.label>
   <VV_Gun_Peashooter.description>빠르게 콩을 생성해 적에게 발사하는 콩뿌리개의 꼬투리입니다.</VV_Gun_Peashooter.description>
 
-  <VV_Pealaucnher.label>화약뿌리개</VV_Pealaucnher.label>
+  <VV_Pealaucnher.label>폭탄뿌리개</VV_Pealaucnher.label>
   <VV_Pealaucnher.description>적을 감지하면 화약 성분이 포함된 콩을 발사해 쫓아내는 식물입니다. 발사할때마다 에너지를 소모합니다.\n\n콩뿌리개와 유사하지만 화약을 이용해 발사하기에 탄속이 매우 빠르고 사거리가 길며 발사된 콩이 착탄지에서 폭발합니다.</VV_Pealaucnher.description>
   <VV_Bullet_PeaFast.label>완두콩</VV_Bullet_PeaFast.label>
-  <VV_Gun_Pealauncher.label>화약뿌리개</VV_Gun_Pealauncher.label>
-  <VV_Pealaucnher.description>빠르게 콩을 생성해 적에게 발사하는 화약뿌리개의 꼬투리입니다.</VV_Pealaucnher.description>
+  <VV_Gun_Pealauncher.label>폭탄뿌리개</VV_Gun_Pealauncher.label>
+  <VV_Pealaucnher.description>빠르게 콩을 생성해 적에게 발사하는 폭탄뿌리개의 꼬투리입니다.</VV_Pealaucnher.description>
 </LanguageData>

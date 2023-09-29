@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using RimWorld;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -97,7 +99,7 @@ namespace VVRace
 
         private int _seed;
         private List<GerminateScheduleDef> _schedules = Enumerable.Repeat(VVGerminateScheduleDefOf.VV_DoNothing, TotalScheduleCount).ToList();
-        private List<float> _scheduleQuality = Enumerable.Repeat(0f, TotalScheduleCount).ToList();
+        private List<float> _scheduleQuality = Enumerable.Repeat(-1f, TotalScheduleCount).ToList();
         private int _currentScheduleIndex = 0;
         private int _germinateNextManageTick;
         private int _germinateCompleteTick;
@@ -164,7 +166,7 @@ namespace VVRace
             Scribe_Defs.Look(ref _buildingDef, "buildingDef");
         }
 
-        public void Tick()
+        public void Tick(Building_SeedlingGerminator building)
         {
             if (CanManageJob && CurrentManageScheduleDef == VVGerminateScheduleDefOf.VV_DoNothing)
             {
@@ -173,7 +175,7 @@ namespace VVRace
 
             if (Stage == GerminateStage.GerminateInProgress && GenTicks.TicksGame >= _germinateCompleteTick)
             {
-                _stage = GerminateStage.GerminateCompleted;
+                CompleteGerminate(building);
             }
         }
 
@@ -189,8 +191,15 @@ namespace VVRace
             _currentScheduleIndex = 0;
             for (int i = 0; i < _scheduleQuality.Count; ++i)
             {
-                _scheduleQuality[i] = 0f;
+                _scheduleQuality[i] = -1f;
             }
+        }
+
+        public void AdvanceGerminateSchedule(Pawn actor)
+        {
+            var plantSkillLevel = actor.skills.GetSkill(SkillDefOf.Plants).Level;
+            var range = new FloatRange(Mathf.Clamp01(plantSkillLevel * 0.05f), Mathf.Clamp01(0.5f + plantSkillLevel * 0.05f));
+            AdvanceGerminateSchedule(range.RandomInRange);
         }
 
         public void AdvanceGerminateSchedule(float quality = 1f)
@@ -199,6 +208,90 @@ namespace VVRace
 
             _currentScheduleIndex++;
             _germinateNextManageTick = GenTicks.TicksGame + GerminatorModExtension.scheduleCooldown;
+        }
+
+        public void CompleteGerminate(Building_SeedlingGerminator building)
+        {
+            if (Stage != GerminateStage.GerminateInProgress)
+            {
+                return;
+            }
+
+            _stage = GerminateStage.GerminateCompleted;
+
+            float bonusProductCount = 0f;
+            float bonusSuccessChanceMultiplier = 1f;
+            float bonusRareChanceMultiplier = 1f;
+            for (int i = 0; i < TotalScheduleCount; ++i)
+            {
+                var def = _schedules[i];
+                var quality = _scheduleQuality[i];
+                if (quality < 0f)
+                {
+                    continue;
+                }
+
+                if (def.bonusAddGerminateResult != FloatRange.Zero)
+                {
+                    bonusProductCount += def.bonusAddGerminateResult.LerpThroughRange(quality);
+                }
+
+                if (def.bonusMultiplierGerminateSuccessChance != FloatRange.Zero)
+                {
+                    bonusSuccessChanceMultiplier *= def.bonusMultiplierGerminateSuccessChance.LerpThroughRange(quality);
+                }
+
+                if (def.bonusMultiplierGerminateRareChance != FloatRange.Zero)
+                {
+                    bonusRareChanceMultiplier *= def.bonusMultiplierGerminateRareChance.LerpThroughRange(quality);
+                }
+            }
+
+            var modExtension = _buildingDef.GetModExtension<GerminatorModExtension>();
+            if (modExtension == null)
+            {
+                throw new System.Exception("modExtension is null");
+            }
+
+            var failureCriticalWeight = modExtension.germinateFailureCriticalWeight / bonusSuccessChanceMultiplier;
+            var failureCropsWeight = modExtension.germinateFailureCropsWeight / bonusSuccessChanceMultiplier;
+
+            Rand.PushState();
+            try
+            {
+                Rand.Seed = _seed;
+
+                var table = new List<(float weight, ThingDef thingDef)>
+                {
+                    (failureCriticalWeight, null),
+                    (failureCropsWeight, Rand.Element(
+                        ThingDefOf.Plant_Potato,
+                        ThingDefOf.Plant_Ambrosia,
+                        VVThingDefOf.Plant_Strawberry,
+                        VVThingDefOf.Plant_Corn,
+                        VVThingDefOf.Plant_Cotton,
+                        VVThingDefOf.Plant_Healroot))
+                };
+
+                foreach (var thingDef in ArtificialPlant.AllArtificialPlantDefs)
+                {
+                    var plantModExtension = thingDef.GetModExtension<ArtificialPlantModExtension>();
+
+                    var weight = plantModExtension.germinateWeight * (plantModExtension.germinateRare ? bonusRareChanceMultiplier : 1f);
+                    table.Add((weight, thingDef));
+                }
+
+                var actualBonusProductCount = (int)bonusProductCount + (Rand.Chance(bonusProductCount - (int)bonusProductCount) ? 1 : 0);
+                var result = table.RandomElementByWeight(v => v.weight).thingDef;
+
+                building.Notify_ScheduleComplete(result, result != null ? actualBonusProductCount : 0);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error in CompleteGerminate: " + ex);
+            }
+
+            Rand.PopState();
         }
 
         public void Debug_ReduceNextManageTick(int ticks)

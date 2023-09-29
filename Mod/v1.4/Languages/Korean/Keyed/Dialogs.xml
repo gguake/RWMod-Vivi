@@ -5,6 +5,8 @@
   <ViviFactionGreetingWary>{0}는 윙윙거리며 당신을 기다리고 있습니다.</ViviFactionGreetingWary>
   <ViviFactionGreetingWarm>{0}는 반가운듯 윙윙거리며 {NEGOTIATOR_labelShort}에게 인사합니다.</ViviFactionGreetingWarm>
 
+  <VV_WarnCancelGerminateSchedule>현재 모종 배양기에 배양중인 모종이 있습니다. 작업을 취소하면 배양중인 모종과 투입된 자원이 사라집니다.</VV_WarnCancelGerminateSchedule>
+
   <ViviGerminateWindowJobTab>가능한 관리 작업</ViviGerminateWindowJobTab>
   <ViviGerminateWindowScheduleTab>모종 관리 일정</ViviGerminateWindowScheduleTab>
   <ViviGerminateWindowScheduleTabTip>모종 배양을 시작한 후 {0}번째 관리 작업시 해당 작업을 진행합니다.\n\n{1}: {2}</ViviGerminateWindowScheduleTabTip>
