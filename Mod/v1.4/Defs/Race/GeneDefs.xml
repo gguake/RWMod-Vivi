@@ -8,13 +8,13 @@
     <displayCategory>Miscellaneous</displayCategory>
     <biologicalAgeTickFactorFromAgeCurve>
       <points>
-        <li>(0, 2.5)</li>
-        <li>(13, 2)</li>
+        <li>(0, 2)</li>
+        <li>(13, 1.75)</li>
         <li>(18.5, 1.5)</li>
       </points>
     </biologicalAgeTickFactorFromAgeCurve>
     <biostatMet>-6</biostatMet>
-    <biostatCpx>4</biostatCpx>
+    <biostatCpx>5</biostatCpx>
     <sterilize>true</sterilize>
   </GeneDef>
 </Defs>

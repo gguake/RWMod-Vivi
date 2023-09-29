@@ -38,14 +38,14 @@
       <li>
         <statFactors>
           <GlobalLearningFactor>1.25</GlobalLearningFactor>
-          <VV_GrowthPointsFactor>2</VV_GrowthPointsFactor>
+          <VV_GrowthPointsFactor>2.5</VV_GrowthPointsFactor>
         </statFactors>
       </li>
     </stages>
 
     <comps>
       <li Class="HediffCompProperties_Disappears">
-        <disappearsAfterTicks>45000~45000</disappearsAfterTicks>
+        <disappearsAfterTicks>54000~66000</disappearsAfterTicks>
       </li>
       <li Class="VVRace.HediffCompProperties_ViviGrowthBoost">
         <tickInterval>2000</tickInterval>
