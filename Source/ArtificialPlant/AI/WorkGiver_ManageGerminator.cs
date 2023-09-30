@@ -50,14 +50,24 @@ namespace VVRace
                     }
 
                     var def = germinator.CurrentSchedule.CurrentManageScheduleDef;
-                    if (def.ingredients?.Count > 0 && !TryFindManageIngredients(pawn, def, out _))
+                    if (def.germinateJob == null)
                     {
                         return false;
                     }
 
-                    return true;
+                    if (def.ingredients != null && def.ingredients.Count > 0)
+                    {
+                        ingredient = TryFindManageIngredients(pawn, def);
+                        return ingredient != null;
+                    }
+                    else
+                    {
+                        return true;
+                    }
 
-                case GerminateStage.GerminateCompleted:
+                case GerminateStage.GerminateComplete:
+                    return germinator.ProductThingDef == null || germinator.CanWithdrawProduct;
+
                 default:
                     return false;
             }
@@ -74,7 +84,7 @@ namespace VVRace
                         var ingredient = FindGerminateIngredient(pawn, germinator);
                         if (ingredient != null)
                         {
-                            var job = JobMaker.MakeJob(VVJobDefOf.VV_HaulGerminatingIngredient, ingredient, germinator);
+                            var job = JobMaker.MakeJob(VVJobDefOf.VV_HaulGerminatingIngredient, germinator, ingredient);
                             return job;
                         }
                         else
@@ -86,12 +96,10 @@ namespace VVRace
                         var def = germinator.CurrentSchedule.CurrentManageScheduleDef;
                         if (def.ingredients?.Count > 0)
                         {
-                            if (TryFindManageIngredients(pawn, def, out var ingredients))
+                            ingredient = TryFindManageIngredients(pawn, def);
+                            if (ingredient != null)
                             {
-                                var job = JobMaker.MakeJob(def.germinateJob, germinator);
-                                job.targetQueueB = ingredients.Select(v => new LocalTargetInfo(v.thing)).ToList();
-                                job.countQueue = ingredients.Select(v => v.count).ToList();
-                                job.haulMode = HaulMode.ToCellNonStorage;
+                                var job = JobMaker.MakeJob(def.germinateJob, germinator, ingredient);
                                 return job;
                             }
                             else
@@ -105,8 +113,17 @@ namespace VVRace
                             return job;
                         }
 
-                    case GerminateStage.GerminateCompleted:
-                        break;
+                    case GerminateStage.GerminateComplete:
+                        {
+                            if (germinator.ProductThingDef != null)
+                            {
+                                return germinator.CanWithdrawProduct ? JobMaker.MakeJob(VVJobDefOf.VV_PackingSeedling, germinator) : null;
+                            }
+                            else
+                            {
+                                return JobMaker.MakeJob(VVJobDefOf.VV_ClearGerminator, germinator);
+                            }
+                        }
                 }
             }
 
@@ -135,42 +152,25 @@ namespace VVRace
             return null;
         }
 
-        private bool TryFindManageIngredients(Pawn pawn, GerminateScheduleDef def, out List<(Thing thing, int count)> ingredients)
+        private Thing TryFindManageIngredients(Pawn pawn, GerminateScheduleDef def)
         {
-            ingredients = new List<(Thing, int)>();
-            foreach (var tdc in def.ingredients)
+            var ingredientThingDef = def.ingredients[0].thingDef;
+
+            var target = GenClosest.ClosestThingReachable(
+                pawn.Position,
+                pawn.Map,
+                ThingRequest.ForDef(ingredientThingDef),
+                PathEndMode.ClosestTouch,
+                TraverseParms.For(pawn),
+                9999f,
+                thing => !thing.IsForbidden(pawn) && pawn.CanReserve(thing));
+
+            if (target != null)
             {
-                var totalStackCounts = tdc.count;
-                var candidates = new List<(Thing, int)>();
-
-                do
-                {
-                    var target = GenClosest.ClosestThingReachable(
-                        pawn.Position,
-                        pawn.Map,
-                        ThingRequest.ForDef(tdc.thingDef),
-                        PathEndMode.ClosestTouch,
-                        TraverseParms.For(pawn),
-                        9999f,
-                        thing => !thing.IsForbidden(pawn) && pawn.CanReserve(thing));
-
-                    if (target != null)
-                    {
-                        var count = Mathf.Min(target.stackCount, totalStackCounts);
-                        candidates.Add((target, count));
-                        totalStackCounts -= count;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-                while (totalStackCounts > 0);
-
-                ingredients.AddRange(candidates);
+                return target;
             }
 
-            return true;
+            return null;
         }
     }
 }

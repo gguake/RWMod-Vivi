@@ -6,8 +6,8 @@ namespace VVRace
 {
     public class JobDriver_HaulGerminatingIngredient : JobDriver
     {
-        protected Thing IngredientThing => job.GetTarget(TargetIndex.A).Thing;
-        protected Building_SeedlingGerminator Germinator => job.GetTarget(TargetIndex.B).Thing as Building_SeedlingGerminator;
+        protected Building_SeedlingGerminator Germinator => job.GetTarget(TargetIndex.A).Thing as Building_SeedlingGerminator;
+        protected Thing IngredientThing => job.GetTarget(TargetIndex.B).Thing;
 
         public override bool TryMakePreToilReservations(bool errorOnFailed)
         {
@@ -21,31 +21,36 @@ namespace VVRace
 
         protected override IEnumerable<Toil> MakeNewToils()
         {
-            this.FailOnDespawnedNullOrForbidden(TargetIndex.B);
+            this.FailOnDespawnedNullOrForbidden(TargetIndex.A);
             AddFailCondition(() => Germinator.CurrentSchedule == null);
 
             yield return Toils_General.DoAtomic(() => { job.count = Germinator.GetGerminateRequiredCount(IngredientThing.def); });
 
+            var reserveToil = Toils_Reserve.Reserve(TargetIndex.B);
+            yield return reserveToil;
+            yield return Toils_Goto.GotoThing(TargetIndex.B, PathEndMode.ClosestTouch)
+                .FailOnDespawnedNullOrForbidden(TargetIndex.B)
+                .FailOnSomeonePhysicallyInteracting(TargetIndex.B);
+
+            yield return Toils_Haul.StartCarryThing(TargetIndex.B, subtractNumTakenFromJobCount: true);
+            yield return Toils_Haul.CheckForGetOpportunityDuplicate(reserveToil, TargetIndex.B, TargetIndex.None, takeFromValidStorage: true);
+
             yield return Toils_Reserve.Reserve(TargetIndex.A);
-            yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.ClosestTouch)
-                .FailOnDespawnedNullOrForbidden(TargetIndex.A)
-                .FailOnSomeonePhysicallyInteracting(TargetIndex.A);
-
-            yield return Toils_Haul.StartCarryThing(TargetIndex.A, subtractNumTakenFromJobCount: true);
-            yield return Toils_Haul.CheckForGetOpportunityDuplicate(Toils_Reserve.Reserve(TargetIndex.A), TargetIndex.A, TargetIndex.None, takeFromValidStorage: true);
-
-            yield return Toils_Reserve.Reserve(TargetIndex.B);
-            yield return Toils_Goto.GotoThing(TargetIndex.B, PathEndMode.Touch);
+            yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.Touch);
 
             yield return Toils_General.Wait(240)
-                .FailOnDestroyedNullOrForbidden(TargetIndex.B)
-                .FailOnCannotTouch(TargetIndex.A, PathEndMode.Touch)
-                .WithProgressBarToilDelay(TargetIndex.B);
+                .FailOnDestroyedNullOrForbidden(TargetIndex.A)
+                .FailOnCannotTouch(TargetIndex.B, PathEndMode.Touch)
+                .WithProgressBarToilDelay(TargetIndex.A);
 
-            yield return Toils_General.Do(() =>
+            var toilFinalizeHauling = ToilMaker.MakeToil("FinalizeHaulingredient");
+            toilFinalizeHauling.defaultCompleteMode = ToilCompleteMode.Instant;
+            toilFinalizeHauling.initAction = () =>
             {
                 Germinator.AddThings(IngredientThing);
-            });
+            };
+
+            yield return toilFinalizeHauling;
         }
     }
 }

@@ -187,6 +187,23 @@
               <drawnDesiccated>false</drawnDesiccated>
             </li>
           </bodyAddons>
+
+          <oldHairAgeCurve>
+            <points>
+              <li>(0, 0)</li>
+              <li>(45, 0)</li>
+              <li>(60, 0.7)</li>
+              <li>(70, 1)</li>
+            </points>
+          </oldHairAgeCurve>
+          <oldHairColorGen Class="ColorGenerator_Options">
+            <options>
+              <li>
+                <min>(0.65,0.65,0.65)</min>
+                <max>(0.85,0.85,0.85)</max>
+              </li>
+            </options>
+          </oldHairColorGen>
         </alienPartGenerator>
 
         <disallowedTraits>
@@ -272,6 +289,8 @@
           
           <li>VV_BasicRoyalCostume</li>
         </apparelList>
+
+        <canReproduce>true</canReproduce>
       </raceRestriction>
     </alienRace>
 

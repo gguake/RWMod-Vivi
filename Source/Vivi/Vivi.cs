@@ -170,13 +170,13 @@ namespace VVRace
 
         private void RefreshHairColor()
         {
+            if (_originalHairColor == null)
+            {
+                _originalHairColor = new Color(story.HairColor.r, story.HairColor.g, story.HairColor.b, 1f);
+            }
+
             if (!DevelopmentalStage.Adult())
             {
-                if (_originalHairColor == null)
-                {
-                    _originalHairColor = story.HairColor;
-                }
-
                 var appliedHairColor = Color.Lerp(Color.white, _originalHairColor.Value, (float)ageTracker.AgeBiologicalTicks / ageTracker.AdultMinAgeTicks);
                 story.HairColor = appliedHairColor;
 

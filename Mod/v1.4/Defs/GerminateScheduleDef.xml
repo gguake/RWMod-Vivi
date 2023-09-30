@@ -20,7 +20,7 @@
 
     <workAmount>700</workAmount>
     <ingredients>
-      <VV_Fertilizer>25</VV_Fertilizer>
+      <VV_Fertilizer>20</VV_Fertilizer>
     </ingredients>
 
     <germinateJob>VV_ManageSeedlingRepotting</germinateJob>
@@ -44,7 +44,7 @@
     
     <germinateJob>VV_ManageSeedlingPestControl</germinateJob>
 
-    <bonusMultiplierGerminateSuccessChance>1.25~1.45</bonusMultiplierGerminateSuccessChance>
+    <bonusMultiplierGerminateSuccessChance>1.0~1.35</bonusMultiplierGerminateSuccessChance>
   </VVRace.GerminateScheduleDef>
   
   <VVRace.GerminateScheduleDef>
@@ -60,7 +60,7 @@
     
     <germinateJob>VV_ManageSeedlingWeeding</germinateJob>
 
-    <bonusMultiplierGerminateRareChance>1.1~1.2</bonusMultiplierGerminateRareChance>
+    <bonusMultiplierGerminateRareChance>1.0~1.2</bonusMultiplierGerminateRareChance>
   </VVRace.GerminateScheduleDef>
   
   <VVRace.GerminateScheduleDef>
@@ -79,7 +79,7 @@
     
     <germinateJob>VV_ManageSeedlingInjectLuciferium</germinateJob>
 
-    <bonusMultiplierGerminateSuccessChance>0.5~0.5</bonusMultiplierGerminateSuccessChance>
+    <bonusMultiplierGerminateSuccessChance>0.6~0.6</bonusMultiplierGerminateSuccessChance>
     <bonusMultiplierGerminateRareChance>1.7~1.7</bonusMultiplierGerminateRareChance>
   </VVRace.GerminateScheduleDef>
 </Defs>

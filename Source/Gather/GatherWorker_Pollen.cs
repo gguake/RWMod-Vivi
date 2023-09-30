@@ -29,7 +29,7 @@ namespace VVRace
                 if (!bill.IsFixedOrAllowedIngredient(thing)) { continue; }
 
                 // 상호작용이 불가능한 경우
-                if (!thing.IsForbidden(pawn) || thing.IsBurning()) { continue; }
+                if (thing.IsForbidden(pawn) || thing.IsBurning()) { continue; }
 
                 // 접근 불가능한 경우
                 if (!pawn.CanReserveAndReach(thing, PathEndMode.Touch, recipeDef.maxPathDanger)) { continue; }

@@ -21,6 +21,15 @@ namespace VVRace
             _germinators = germinators.ToList();
             _schedule = new GerminateSchedule(_germinators[0].def);
 
+            var lastScheduleBuilding = _germinators.Where(v => v.LastProcessedSchedule != null).FirstOrDefault();
+            if (lastScheduleBuilding != null)
+            {
+                for (int i = 0; i < GerminateSchedule.TotalScheduleCount; ++i)
+                {
+                    _schedule[i] = lastScheduleBuilding.LastProcessedSchedule[i];
+                }
+            }
+
             forcePause = true;
             doCloseX = true;
             absorbInputAroundWindow = true;

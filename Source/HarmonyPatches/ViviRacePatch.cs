@@ -56,9 +56,18 @@ namespace VVRace.HarmonyPatches
                 original: AccessTools.Method(typeof(Pawn_InteractionsTracker), nameof(Pawn_InteractionsTracker.TryInteractWith)),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(Pawn_InteractionsTracker_TryInteractWith_Postfix)));
 
+
+            harmony.Patch(
+                original: AccessTools.Method(typeof(InteractionWorker_RomanceAttempt), nameof(InteractionWorker_RomanceAttempt.RandomSelectionWeight)),
+                prefix: new HarmonyMethod(typeof(ViviRacePatch), nameof(InteractionWorker_RomanceAttempt_RandomSelectionWeight_Prefix)));
+
             harmony.Patch(
                 original: AccessTools.Method(typeof(InteractionWorker_RomanceAttempt), nameof(InteractionWorker_RomanceAttempt.SuccessChance)),
                 prefix: new HarmonyMethod(typeof(ViviRacePatch), nameof(InteractionWorker_RomanceAttempt_SuccessChance_Prefix)));
+
+            harmony.Patch(
+                original: AccessTools.Method(typeof(FoodUtility), nameof(FoodUtility.ThoughtsFromIngesting)),
+                postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(FoodUtility_ThoughtsFromIngesting_Postfix)));
         }
 
         private static void Pawn_NeedsTracker_ShouldHaveNeed_Postfix(ref bool __result, Pawn ___pawn, NeedDef nd)
@@ -228,7 +237,7 @@ namespace VVRace.HarmonyPatches
         {
             if (!__result) { return; }
 
-            if (___pawn is Vivi viviA && recipient is Vivi viviB && viviA.Faction == viviB.Faction)
+            if (___pawn is Vivi viviA && recipient is Vivi viviB && viviA.Faction == viviB.Faction && !viviA.Dead && !viviB.Dead)
             {
                 Vivi giver, receiver;
                 if (viviA.IsRoyal)
@@ -248,26 +257,41 @@ namespace VVRace.HarmonyPatches
 
                 if (intDef.recipientThought == null || intDef.recipientThought.stages.NullOrEmpty()) { return; }
 
-                float baseOffset = intDef.recipientThought.stages[0].baseOpinionOffset;
-                float socialImpactMultiplier = giver.GetStatValue(StatDefOf.SocialImpact);
-
-                float beauty = giver.GetStatValue(StatDefOf.PawnBeauty);
-                float beautyMultiplier = Mathf.Pow(1.5f, Mathf.Abs(beauty));
-
-                float multiplier = socialImpactMultiplier;
-                if (baseOffset > 0f ^ beauty > 0f)
+                var loyalty = receiver.needs?.TryGetNeed<Need_Loyalty>();
+                if (loyalty != null)
                 {
-                    multiplier /= beautyMultiplier;
-                }
-                else
-                {
-                    multiplier *= beautyMultiplier;
-                }
+                    float baseOffset = intDef.recipientThought.stages[0].baseOpinionOffset;
+                    float socialImpactMultiplier = giver.GetStatValue(StatDefOf.SocialImpact);
 
-                var value = baseOffset * multiplier;
-                var loyalty = receiver.needs.TryGetNeed<Need_Loyalty>();
-                loyalty.Notify_InteractWith(value);
+                    float beauty = giver.GetStatValue(StatDefOf.PawnBeauty);
+                    float beautyMultiplier = Mathf.Pow(1.5f, Mathf.Abs(beauty));
+
+                    float multiplier = socialImpactMultiplier;
+                    if (baseOffset > 0f ^ beauty > 0f)
+                    {
+                        multiplier /= beautyMultiplier;
+                    }
+                    else
+                    {
+                        multiplier *= beautyMultiplier;
+                    }
+
+                    var value = baseOffset * multiplier;
+
+                    loyalty.Notify_InteractWith(value);
+                }
             }
+        }
+
+        private static bool InteractionWorker_RomanceAttempt_RandomSelectionWeight_Prefix(Pawn initiator, ref float __result)
+        {
+            if (initiator is Vivi)
+            {
+                __result = 0f;
+                return false;
+            }
+
+            return true;
         }
 
         private static bool InteractionWorker_RomanceAttempt_SuccessChance_Prefix(Pawn initiator, Pawn recipient, ref float __result)
@@ -279,6 +303,18 @@ namespace VVRace.HarmonyPatches
             }
 
             return true;
+        }
+
+        private static void FoodUtility_ThoughtsFromIngesting_Postfix(Pawn ingester, ref List<FoodUtility.ThoughtFromIngesting> __result)
+        {
+            for (int i = 0; i < __result.Count; ++i)
+            {
+                if (ingester is Vivi && __result[i].thought == VVThoughtDefOf.VV_AtePollen)
+                {
+                    __result.RemoveAt(i);
+                    i--;
+                }
+            }
         }
     }
 }

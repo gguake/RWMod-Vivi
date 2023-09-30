@@ -47,6 +47,8 @@
         public const string CommandRegisterGerminateScheduleDesc = "VV_CommandRegisterGerminateScheduleDesc";
         public const string CommandCancelGerminateSchedule = "VV_CommandCancelGerminateSchedule";
         public const string CommandCancelGerminateScheduleDesc = "VV_CommandCancelGerminateScheduleDesc";
+        public const string CommandCanWithdrawProduct = "VV_CommandCanWithdrawProduct";
+        public const string CommandCanWithdrawProductDesc = "VV_CommandCanWithdrawProductDesc";
 
         public const string JobFailReasonNoHarvestablePlants = "VV_JobFailReasonNoHarvestablePlants";
         public const string JobFailReasonNoHarvestablePollenFilths = "VV_JobFailReasonNoHarvestablePollenFilths";
@@ -59,9 +61,11 @@
 
         public const string StatsReport_Energy = "VV_StatsReport_Energy";
         public const string StatsReport_Energy_Desc = "VV_StatsReport_Energy_Desc";
-
         public const string StatsReport_EnergyFlux = "VV_StatsReport_EnergyFlux";
         public const string StatsReport_EnergyFlux_Desc = "VV_StatsReport_EnergyFlux_Desc";
+
+        public const string MessageGerminateSeedlingSuccess = "VV_MessageGerminateSeedlingSuccess";
+        public const string MessageGerminateSeedlingFailed = "VV_MessageGerminateSeedlingFailed";
 
         public const string ViviGerminateWindowJobTab = "ViviGerminateWindowJobTab";
         public const string ViviGerminateWindowScheduleTab = "ViviGerminateWindowScheduleTab";

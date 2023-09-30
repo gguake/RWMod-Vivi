@@ -11,11 +11,8 @@ namespace VVRace
     {
         private float workLeft;
 
-        private const TargetIndex GerminatorInd = TargetIndex.A;
-        private const TargetIndex IngredientsInd = TargetIndex.B;
-        private const TargetIndex IngredientsPlaceCellInd = TargetIndex.C;
-
-        private Building_SeedlingGerminator Germinator => (Building_SeedlingGerminator)job.GetTarget(GerminatorInd).Thing;
+        protected Building_SeedlingGerminator Germinator => job.GetTarget(TargetIndex.A).Thing as Building_SeedlingGerminator;
+        protected Thing IngredientThing => job.GetTarget(TargetIndex.B).Thing;
 
         public override void ExposeData()
         {
@@ -26,28 +23,32 @@ namespace VVRace
 
         public override bool TryMakePreToilReservations(bool errorOnFailed)
         {
-            if (!pawn.Reserve(job.GetTarget(GerminatorInd), job))
+            if (pawn.Reserve(IngredientThing, job, errorOnFailed: errorOnFailed))
             {
-                return false;
+                return pawn.Reserve(Germinator, job, errorOnFailed: errorOnFailed);
             }
 
-            pawn.ReserveAsManyAsPossible(job.GetTargetQueue(IngredientsInd), job);
-            return true;
+            return false;
         }
 
         protected override IEnumerable<Toil> MakeNewToils()
         {
-            this.FailOnDespawnedNullOrForbidden(GerminatorInd);
-            this.FailOnBurningImmobile(GerminatorInd);
+            this.FailOnDespawnedNullOrForbidden(TargetIndex.A);
             this.FailOn(() => Germinator.CurrentSchedule == null || !Germinator.CurrentSchedule.CanManageJob);
 
-            var gotoGerminatorToil = Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.Touch);
-            yield return Toils_Jump.JumpIf(gotoGerminatorToil, () => job.GetTargetQueue(IngredientsInd).NullOrEmpty());
+            yield return Toils_General.DoAtomic(() => { job.count = Germinator.CurrentSchedule.CurrentManageScheduleDef.ingredients[0].count; });
 
-            foreach (var toil in CollectIngredientsToils())
-            {
-                yield return toil;
-            }
+            var reserveToil = Toils_Reserve.Reserve(TargetIndex.B);
+            yield return reserveToil;
+            yield return Toils_Goto.GotoThing(TargetIndex.B, PathEndMode.ClosestTouch)
+                .FailOnDespawnedNullOrForbidden(TargetIndex.B)
+                .FailOnSomeonePhysicallyInteracting(TargetIndex.B);
+
+            yield return Toils_Haul.StartCarryThing(TargetIndex.B, subtractNumTakenFromJobCount: true);
+            yield return Toils_Haul.CheckForGetOpportunityDuplicate(reserveToil, TargetIndex.B, TargetIndex.None, takeFromValidStorage: true);
+
+            yield return Toils_Reserve.Reserve(TargetIndex.A);
+            yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.Touch);
 
             var toilManage = ToilMaker.MakeToil("MakeNewToils");
             toilManage.initAction = () =>
@@ -73,68 +74,18 @@ namespace VVRace
             });
 
             yield return toilManage
-                .FailOnDespawnedNullOrForbiddenPlacedThings(GerminatorInd)
-                .FailOnCannotTouch(GerminatorInd, PathEndMode.Touch);
+                .FailOnDespawnedNullOrForbiddenPlacedThings(TargetIndex.A)
+                .FailOnCannotTouch(TargetIndex.A, PathEndMode.Touch);
 
-            yield return Toils_General.Do(() =>
+            var toilFinalizeManage = ToilMaker.MakeToil("FinalizeManage");
+            toilFinalizeManage.defaultCompleteMode = ToilCompleteMode.Instant;
+            toilFinalizeManage.initAction = () =>
             {
-                var list = new List<Thing>();
-                if (job.placedThings != null)
-                {
-                    for (int i = 0; i < job.placedThings.Count; ++i)
-                    {
-                        var thing = (job.placedThings[i].Count >= job.placedThings[i].thing.stackCount) ? 
-                            job.placedThings[i].thing : 
-                            job.placedThings[i].thing.SplitOff(job.placedThings[i].Count);
-
-                        job.placedThings[i].Count = 0;
-
-                        list.Add(thing);
-                    }
-                }
-                job.placedThings = null;
-
-                foreach (var thing in list)
-                {
-                    thing.Destroy();
-                }
-
-                Germinator.CurrentSchedule.AdvanceGerminateSchedule(GetActor());
-            });
-        }
-
-        private IEnumerable<Toil> CollectIngredientsToils()
-        {
-            var extractToil = Toils_JobTransforms.ExtractNextTargetFromQueue(IngredientsInd);
-            var jumpIfHaveTargetInQueueToil = Toils_Jump.JumpIfHaveTargetInQueue(IngredientsInd, extractToil);
-
-            yield return extractToil;
-
-            var gotoToil = Toils_Goto.GotoThing(IngredientsInd, PathEndMode.ClosestTouch)
-                .FailOnDespawnedNullOrForbidden(IngredientsInd)
-                .FailOnSomeonePhysicallyInteracting(IngredientsInd);
-
-            yield return gotoToil;
-
-            yield return Toils_Haul.StartCarryThing(IngredientsInd, putRemainderInQueue: true, failIfStackCountLessThanJobCount: true);
-            yield return JobDriver_DoBill.JumpToCollectNextIntoHandsForBill(gotoToil, IngredientsInd);
-
-            yield return Toils_Goto.GotoThing(GerminatorInd, PathEndMode.Touch)
-                .FailOnDestroyedNullOrForbidden(IngredientsInd);
-
-            var findPlaceTargetToil = Toils_JobTransforms.SetTargetToIngredientPlaceCell(GerminatorInd, IngredientsInd, IngredientsPlaceCellInd);
-            yield return findPlaceTargetToil;
-
-            yield return Toils_Haul.PlaceHauledThingInCell(IngredientsPlaceCellInd, findPlaceTargetToil, storageMode: false);
-
-            var reserveToil = ToilMaker.MakeToil("CollectIngredientsToils");
-            reserveToil.initAction = () =>
-            {
-                GetActor().Map.physicalInteractionReservationManager.Reserve(GetActor(), job, job.GetTarget(IngredientsInd));
+                IngredientThing.SplitOff(Germinator.CurrentSchedule.CurrentManageScheduleDef.ingredients[0].count).Destroy();
+                Germinator.CurrentSchedule.AdvanceGerminateSchedule(GetActor(), Germinator);
             };
-            yield return reserveToil;
 
-            yield return jumpIfHaveTargetInQueueToil;
+            yield return toilFinalizeManage;
         }
     }
 }

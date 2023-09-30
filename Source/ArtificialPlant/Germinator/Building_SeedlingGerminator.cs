@@ -1,6 +1,7 @@
 ﻿using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using UnityEngine;
 using Verse;
@@ -19,6 +20,7 @@ namespace VVRace
     public class Building_SeedlingGerminator : Building
     {
         public GerminateSchedule CurrentSchedule => _currentSchedule;
+        public GerminateSchedule LastProcessedSchedule => _lastCompletedSchedule;
 
         private GerminateSchedule _currentSchedule;
         private GerminateSchedule _lastCompletedSchedule;
@@ -72,7 +74,30 @@ namespace VVRace
             }
         }
 
+        public bool CanWithdrawProduct => _canWithdrawProduct; 
+        private bool _canWithdrawProduct = true;
+
+        public ThingDef ProductThingDef => _productThingDef;
         private ThingDef _productThingDef;
+
+        public int ProductThingCount
+        {
+            get
+            {
+                if (_productThingDef == null)
+                {
+                    return 0;
+                }
+                else if (_productThingDef.IsPlant)
+                {
+                    return Mathf.CeilToInt(_productRemainedCount / (float)_productThingDef.stackLimit);
+                }
+                else
+                {
+                    return _productRemainedCount;
+                }
+            }
+        }
         private int _productRemainedCount;
 
         public int GetGerminateRequiredCount(ThingDef def)
@@ -101,8 +126,11 @@ namespace VVRace
 
             Scribe_Deep.Look(ref _currentSchedule, "currentSchedule");
             Scribe_Deep.Look(ref _lastCompletedSchedule, "lastCompletedSchedule");
-            Scribe_Collections.Look(ref _germinateReservedThings, "germinateReservedThings", LookMode.Def, LookMode.Value);
 
+            Scribe_Collections.Look(ref _germinateReservedThings, "germinateReservedThings", LookMode.Def, LookMode.Value);
+            Scribe_Collections.Look(ref _germinateIngredients, "germinateIngredients", LookMode.Def, LookMode.Value);
+
+            Scribe_Values.Look(ref _canWithdrawProduct, "canWithdrawProduct");
             Scribe_Defs.Look(ref _productThingDef, "productThingDef");
             Scribe_Values.Look(ref _productRemainedCount, "productRemainedCount");
 
@@ -172,7 +200,7 @@ namespace VVRace
                         }
                         break;
 
-                    case GerminateStage.GerminateCompleted:
+                    case GerminateStage.GerminateComplete:
                         {
                             if (sb.Length > 0) { sb.AppendLine(); }
                             if (_productThingDef == null)
@@ -214,7 +242,7 @@ namespace VVRace
                     commandRegisterSchedule.defaultDesc = LocalizeTexts.CommandRegisterGerminateScheduleDesc.Translate();
                     yield return commandRegisterSchedule;
                 }
-                else
+                else if (_currentSchedule != null && _currentSchedule.Stage != GerminateStage.GerminateComplete)
                 {
                     var commandCancelSchedule = new Command_CancelGerminateSchedule();
                     commandCancelSchedule.building = this;
@@ -222,6 +250,19 @@ namespace VVRace
                     commandCancelSchedule.defaultLabel = LocalizeTexts.CommandCancelGerminateSchedule.Translate();
                     commandCancelSchedule.defaultDesc = LocalizeTexts.CommandCancelGerminateScheduleDesc.Translate();
                     yield return commandCancelSchedule;
+                }
+
+                if (_productThingDef != null)
+                {
+                    var commandCanWithdrawProduct = new Command_Toggle();
+                    commandCanWithdrawProduct.defaultLabel = LocalizeTexts.CommandCanWithdrawProduct.Translate();
+                    commandCanWithdrawProduct.defaultDesc = LocalizeTexts.CommandCanWithdrawProductDesc.Translate();
+                    commandCanWithdrawProduct.isActive = () => _canWithdrawProduct;
+                    commandCanWithdrawProduct.icon = _productThingDef.uiIcon;
+                    commandCanWithdrawProduct.toggleAction = () =>
+                    {
+                        _canWithdrawProduct = !_canWithdrawProduct;
+                    };
                 }
 
                 if (DebugSettings.godMode)
@@ -272,6 +313,97 @@ namespace VVRace
             CurrentSchedule?.Tick(this);
         }
 
+        public override void Print(SectionLayer layer)
+        {
+            base.Print(layer);
+
+            if (CurrentSchedule == null || CurrentSchedule.Stage == GerminateStage.None)
+            {
+                return;
+            }
+
+            try
+            {
+                Rand.PushState();
+                Rand.Seed = base.thingIDNumber.GetHashCode();
+
+                if (CurrentSchedule.Stage == GerminateStage.GerminateInProgress)
+                {
+                    var vectors = this.OccupiedRect().Cells.Select(v => v.ToVector3ShiftedWithAltitude(def.Altitude)).ToList();
+                    vectors.Add(this.TrueCenter());
+
+                    var drawSize = 0.35f;
+                    foreach (var vector in vectors)
+                    {
+                        var zero = vector;
+                        if (zero.z - 0.5f < Position.z)
+                        {
+                            zero.z += (Position.z - zero.z) * 0.3f;
+                        }
+
+                        var isFlipUV = Rand.Bool;
+                        var material = ThingDefOf.Plant_Grass.graphic.MatSingle;
+                        Graphic.TryGetTextureAtlasReplacementInfo(material, def.category.ToAtlasGroup(), isFlipUV, vertexColors: false, out material, out var uvs, out var _);
+
+                        var colors = new Color32[4];
+                        colors[1].a = (colors[2].a = 25);
+                        colors[0].a = (colors[3].a = 0);
+
+                        Printer_Plane.PrintPlane(
+                            size: new Vector2(drawSize, drawSize),
+                            layer: layer,
+                            center: zero,
+                            mat: material,
+                            rot: 0f,
+                            flipUv: isFlipUV,
+                            uvs: uvs,
+                            colors: colors,
+                            topVerticesAltitudeBias: 0.1f,
+                            uvzPayload: this.HashOffset() % 1024);
+                    }
+                }
+                else if (CurrentSchedule.Stage == GerminateStage.GerminateComplete || CurrentSchedule.Stage == GerminateStage.GerminateComplete)
+                {
+                    var vectors = this.OccupiedRect().Cells.Select(v => v.ToVector3ShiftedWithAltitude(def.Altitude)).ToList();
+                    vectors.Add(this.TrueCenter());
+
+                    var drawSize = 0.6f;
+                    for (int i = 0; i < Mathf.Min(vectors.Count, _productRemainedCount); ++i)
+                    {
+                        var zero = vectors[i];
+                        if (zero.z - 0.5f < Position.z)
+                        {
+                            zero.z += (Position.z - zero.z) * 0.5f;
+                        }
+
+                        var isFlipUV = Rand.Bool;
+                        var material = _productThingDef != null ? _productThingDef.graphic.MatSingle : ThingDefOf.Plant_Grass.graphic.MatSingle;
+                        Graphic.TryGetTextureAtlasReplacementInfo(material, def.category.ToAtlasGroup(), isFlipUV, vertexColors: false, out material, out var uvs, out var _);
+
+                        var colors = new Color32[4];
+                        colors[1].a = (colors[2].a = 25);
+                        colors[0].a = (colors[3].a = 0);
+
+                        Printer_Plane.PrintPlane(
+                            size: new Vector2(drawSize, drawSize),
+                            layer: layer,
+                            center: zero,
+                            mat: material,
+                            rot: 0f,
+                            flipUv: isFlipUV,
+                            uvs: uvs,
+                            colors: colors,
+                            topVerticesAltitudeBias: 0.1f,
+                            uvzPayload: this.HashOffset() % 1024);
+                    }
+                }
+            }
+            finally
+            {
+                Rand.PopState();
+            }
+        }
+
         public void AddThings(Thing thing)
         {
             var requiredCount = GetGerminateRequiredCount(thing.def);
@@ -290,16 +422,12 @@ namespace VVRace
                 }
             }
 
-            foreach (var kv in RequiredGerminateIngredients)
-            {
-                Log.Message($"{kv.def} x{kv.count}");
-            }
-
             if (!RequiredGerminateIngredients.Any())
             {
                 _germinateReservedThings = null;
 
                 CurrentSchedule.StartGerminate();
+                Notify_RefreshDrawer();
             }
         }
 
@@ -334,23 +462,50 @@ namespace VVRace
             }
         }
 
+        public void Clear()
+        {
+            _canWithdrawProduct = true;
+
+            _productThingDef = null;
+            _productRemainedCount = 0;
+
+            _lastCompletedSchedule = _currentSchedule;
+            _currentSchedule = null;
+
+            Notify_RefreshDrawer();
+        }
+
         public Thing WithdrawProduct()
         {
             if (_productThingDef == null || _productRemainedCount <= 0) { return null; }
 
-            var thing = ThingMaker.MakeThing(_productThingDef);
-            thing.stackCount = 1;
+            Thing thing = null;
+            if (_productThingDef.IsPlant && _productThingDef.plant.harvestedThingDef != null)
+            {
+                thing = ThingMaker.MakeThing(_productThingDef.plant.harvestedThingDef);
+                thing.stackCount = Mathf.Clamp(_productRemainedCount, 0, _productThingDef.plant.harvestedThingDef.stackLimit);
 
-            _productRemainedCount--;
+                _productRemainedCount -= thing.stackCount;
+            }
+            else if (_productThingDef.Minifiable)
+            {
+                thing = ThingMaker.MakeThing(_productThingDef);
+                thing = thing.MakeMinified();
+
+                _productRemainedCount--;
+            }
+
             if (_productRemainedCount == 0)
             {
-                _productThingDef = null;
-
-                _lastCompletedSchedule = _currentSchedule;
-                _currentSchedule = null;
+                Clear();
             }
 
             return thing;
+        }
+
+        public void Notify_RefreshDrawer()
+        {
+            DirtyMapMesh(Map);
         }
 
         public void Notify_ScheduleComplete(ThingDef resultThingDef, int resultCount)
@@ -358,7 +513,19 @@ namespace VVRace
             if (resultThingDef != null)
             {
                 _productThingDef = resultThingDef;
-                _productRemainedCount = resultThingDef.IsPlant ? Rand.Range(resultCount, resultCount * 3) : resultCount;
+                _productRemainedCount = resultThingDef.IsPlant ? Rand.Range(resultCount * 2, resultCount * 3) : resultCount;
+
+                Messages.Message(
+                    LocalizeTexts.MessageGerminateSeedlingSuccess.Translate(resultThingDef.LabelCap, resultCount),
+                    this,
+                    MessageTypeDefOf.PositiveEvent);
+            }
+            else
+            {
+                Messages.Message(
+                    LocalizeTexts.MessageGerminateSeedlingFailed.Translate(),
+                    this,
+                    MessageTypeDefOf.NegativeEvent);
             }
         }
     }

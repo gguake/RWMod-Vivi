@@ -12,7 +12,7 @@ namespace VVRace
     {
         None,
         GerminateInProgress,
-        GerminateCompleted,
+        GerminateComplete,
     }
 
     public class GerminateSchedule : IExposable, IEnumerable<GerminateScheduleDef>
@@ -170,7 +170,7 @@ namespace VVRace
         {
             if (CanManageJob && CurrentManageScheduleDef == VVGerminateScheduleDefOf.VV_DoNothing)
             {
-                AdvanceGerminateSchedule();
+                AdvanceGerminateSchedule(building);
             }
 
             if (Stage == GerminateStage.GerminateInProgress && GenTicks.TicksGame >= _germinateCompleteTick)
@@ -195,29 +195,29 @@ namespace VVRace
             }
         }
 
-        public void AdvanceGerminateSchedule(Pawn actor)
+        public void AdvanceGerminateSchedule(Pawn actor, Building_SeedlingGerminator germinator)
         {
             var plantSkillLevel = actor.skills.GetSkill(SkillDefOf.Plants).Level;
             var range = new FloatRange(Mathf.Clamp01(plantSkillLevel * 0.05f), Mathf.Clamp01(0.5f + plantSkillLevel * 0.05f));
-            AdvanceGerminateSchedule(range.RandomInRange);
+            AdvanceGerminateSchedule(germinator, range.RandomInRange);
         }
 
-        public void AdvanceGerminateSchedule(float quality = 1f)
+        public void AdvanceGerminateSchedule(Building_SeedlingGerminator germinator, float quality = 1f)
         {
             _scheduleQuality[_currentScheduleIndex] = quality;
 
             _currentScheduleIndex++;
             _germinateNextManageTick = GenTicks.TicksGame + GerminatorModExtension.scheduleCooldown;
+
+            germinator.Notify_RefreshDrawer();
         }
 
-        public void CompleteGerminate(Building_SeedlingGerminator building)
+        public void CompleteGerminate(Building_SeedlingGerminator germinator)
         {
             if (Stage != GerminateStage.GerminateInProgress)
             {
                 return;
             }
-
-            _stage = GerminateStage.GerminateCompleted;
 
             float bonusProductCount = 0f;
             float bonusSuccessChanceMultiplier = 1f;
@@ -247,44 +247,49 @@ namespace VVRace
                 }
             }
 
-            var modExtension = _buildingDef.GetModExtension<GerminatorModExtension>();
-            if (modExtension == null)
+            var germinatorData = _buildingDef.GetModExtension<GerminatorModExtension>();
+            if (germinatorData == null)
             {
-                throw new System.Exception("modExtension is null");
+                throw new System.Exception("germinatorData is null");
             }
 
-            var failureCriticalWeight = modExtension.germinateFailureCriticalWeight / bonusSuccessChanceMultiplier;
-            var failureCropsWeight = modExtension.germinateFailureCropsWeight / bonusSuccessChanceMultiplier;
-
+            var table = new List<(float weight, ThingDef thingDef)>();
             Rand.PushState();
             try
             {
                 Rand.Seed = _seed;
 
-                var table = new List<(float weight, ThingDef thingDef)>
+                var successChance = Mathf.Clamp01(germinatorData.germinateSuccessChance * bonusSuccessChanceMultiplier);
+                if (Rand.Chance(successChance))
                 {
-                    (failureCriticalWeight, null),
-                    (failureCropsWeight, Rand.Element(
-                        ThingDefOf.Plant_Potato,
-                        ThingDefOf.Plant_Ambrosia,
-                        VVThingDefOf.Plant_Strawberry,
-                        VVThingDefOf.Plant_Corn,
-                        VVThingDefOf.Plant_Cotton,
-                        VVThingDefOf.Plant_Healroot))
-                };
-
-                foreach (var thingDef in ArtificialPlant.AllArtificialPlantDefs)
+                    var rare = Rand.Chance(Mathf.Clamp01(germinatorData.germinateRareChance * bonusRareChanceMultiplier));
+                    foreach (var plant in ArtificialPlant.AllArtificialPlantDefs)
+                    {
+                        var plantData = plant.GetModExtension<ArtificialPlantModExtension>();
+                        if (plantData.germinateRare == rare)
+                        {
+                            table.Add((plantData.germinateWeight, plant));
+                        }
+                    }
+                }
+                else
                 {
-                    var plantModExtension = thingDef.GetModExtension<ArtificialPlantModExtension>();
+                    table.Add((germinatorData.germinateFailureCriticalWeight, null));
 
-                    var weight = plantModExtension.germinateWeight * (plantModExtension.germinateRare ? bonusRareChanceMultiplier : 1f);
-                    table.Add((weight, thingDef));
+                    var failureCropsWeightSum = germinatorData.germinateFailureCropsTable.Sum(tdc => tdc.count);
+                    for (int i = 0; i < germinatorData.germinateFailureCropsTable.Count; ++i)
+                    {
+                        var tdc = germinatorData.germinateFailureCropsTable[i];
+                        table.Add((tdc.count / (float)failureCropsWeightSum * germinatorData.germinateFailureCropsWeight, tdc.thingDef));
+                    }
                 }
 
-                var actualBonusProductCount = (int)bonusProductCount + (Rand.Chance(bonusProductCount - (int)bonusProductCount) ? 1 : 0);
+                var actualBonusProductCount = Rand.Range(5, 7) + (int)bonusProductCount + (Rand.Chance(bonusProductCount - (int)bonusProductCount) ? 1 : 0);
                 var result = table.RandomElementByWeight(v => v.weight).thingDef;
 
-                building.Notify_ScheduleComplete(result, result != null ? actualBonusProductCount : 0);
+                _stage = GerminateStage.GerminateComplete;
+
+                germinator.Notify_ScheduleComplete(result, result != null ? actualBonusProductCount : 0);
             }
             catch (Exception ex)
             {
@@ -292,6 +297,8 @@ namespace VVRace
             }
 
             Rand.PopState();
+
+            germinator.Notify_RefreshDrawer();
         }
 
         public void Debug_ReduceNextManageTick(int ticks)

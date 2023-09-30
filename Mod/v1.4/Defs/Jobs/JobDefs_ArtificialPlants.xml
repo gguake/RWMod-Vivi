@@ -47,4 +47,20 @@
     <suspendable>false</suspendable>
     <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
   </JobDef>
+  
+  <JobDef>
+    <defName>VV_PackingSeedling</defName>
+    <driverClass>VVRace.JobDriver_PackingSeedling</driverClass>
+    <reportString>packing seedlings.</reportString>
+    <suspendable>false</suspendable>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef>
+  
+  <JobDef>
+    <defName>VV_ClearGerminator</defName>
+    <driverClass>VVRace.JobDriver_ClearGerminator</driverClass>
+    <reportString>clearing germinator.</reportString>
+    <suspendable>false</suspendable>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef>
 </Defs>

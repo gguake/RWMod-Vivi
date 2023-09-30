@@ -1,6 +1,7 @@
 ﻿using RimWorld;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 using Verse;
 using Verse.AI;
 
@@ -61,10 +62,14 @@ namespace VVRace
                 .FailOnDespawnedNullOrForbiddenPlacedThings(GerminatorInd)
                 .FailOnCannotTouch(GerminatorInd, PathEndMode.Touch);
 
-            yield return Toils_General.Do(() =>
+            var toilFinalizeManage = ToilMaker.MakeToil("FinalizeManage");
+            toilFinalizeManage.defaultCompleteMode = ToilCompleteMode.Instant;
+            toilFinalizeManage.initAction = () =>
             {
-                Germinator.CurrentSchedule.AdvanceGerminateSchedule(GetActor());
-            });
+                Germinator.CurrentSchedule.AdvanceGerminateSchedule(GetActor(), Germinator);
+            };
+
+            yield return toilFinalizeManage;
         }
     }
 }

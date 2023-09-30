@@ -91,6 +91,7 @@
         </li>
 
         <!-- 시작시 소유품 (테스트) -->
+        <!--
         <li Class="ScenPart_StartingThing_Defined">
           <def>StartingThing_Defined</def>
           <thingDef>VV_Fertilizer</thingDef>
@@ -111,6 +112,7 @@
           <thingDef>VV_Pollen</thingDef>
           <count>100</count>
         </li>
+        -->
         
         <!-- 시작시 소유품 (분산) -->
         <li Class="ScenPart_ScatterThingsNearPlayerStart">

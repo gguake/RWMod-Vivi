@@ -176,8 +176,8 @@ namespace VVRace
                 Rand.PushState();
                 Rand.Seed = base.thingIDNumber.GetHashCode();
 
-                Vector3 thingTrueCenter = this.TrueCenter();
-                float drawSize = def.graphicData.drawSize.x;
+                var thingTrueCenter = this.TrueCenter();
+                var drawSize = def.graphicData.drawSize.x;
 
                 bool isShift = false;
                 var zero = thingTrueCenter + new Vector3(0f, 0f, 0.11f);
@@ -188,7 +188,7 @@ namespace VVRace
                 }
 
                 bool isFlipUV = Rand.Bool;
-                Material material = Graphic.MatSingleFor(this);
+                var material = Graphic.MatSingleFor(this);
                 Graphic.TryGetTextureAtlasReplacementInfo(material, def.category.ToAtlasGroup(), isFlipUV, vertexColors: false, out material, out var uvs, out var _);
 
                 var colors = new Color32[4];

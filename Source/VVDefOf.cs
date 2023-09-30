@@ -53,6 +53,8 @@ namespace VVRace
         public static JobDef VV_FertilizeArtificialPlant;
 
         public static JobDef VV_HaulGerminatingIngredient;
+        public static JobDef VV_PackingSeedling;
+        public static JobDef VV_ClearGerminator;
     }
 
     [DefOf]
@@ -115,5 +117,11 @@ namespace VVRace
     public static class VVGerminateScheduleDefOf
     {
         public static GerminateScheduleDef VV_DoNothing;
+    }
+
+    [DefOf]
+    public static class VVThoughtDefOf
+    {
+        public static ThoughtDef VV_AtePollen;
     }
 }

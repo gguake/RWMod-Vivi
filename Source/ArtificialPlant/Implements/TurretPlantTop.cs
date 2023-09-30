@@ -119,8 +119,6 @@ namespace VVRace
 
             matrix.SetTRS(parentTurret.DrawPos + Altitudes.AltIncVect * 2f + v, (-90f + rot).ToQuat(), new Vector3(turretTopDrawSize, 1f, turretTopDrawSize));
             Graphics.DrawMesh(MeshPool.plane10, matrix, parentTurret.def.building.turretTopMat, 0);
-
-            Log.Message("DRaw");
         }
     }
 }

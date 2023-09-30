@@ -8,9 +8,11 @@ namespace VVRace
         public List<ThingDefCountClass> germinateIngredients;
         public int scheduleCooldown;
 
+        public float germinateSuccessChance;
+        public float germinateRareChance;
         public int germinateFailureCriticalWeight;
         public int germinateFailureCropsWeight;
-
+        public List<ThingDefCountClass> germinateFailureCropsTable;
     }
 
 }
