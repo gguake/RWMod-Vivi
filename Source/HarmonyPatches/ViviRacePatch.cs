@@ -6,6 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Reflection.Emit;
 using UnityEngine;
 using Verse;
@@ -48,9 +49,16 @@ namespace VVRace.HarmonyPatches
                 original: AccessTools.Method(typeof(ScenPart_PlayerPawnsArriveMethod), nameof(ScenPart_PlayerPawnsArriveMethod.GenerateIntoMap)),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(ScenPart_PlayerPawnsArriveMethod_GenerateIntoMap_Postfix)));
 
+
+            // 성장 스탯 관련 패치
             harmony.Patch(
                 original: AccessTools.PropertyGetter(typeof(Pawn_AgeTracker), "GrowthPointsFactor"),
                 transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(Pawn_AgeTracker_get_GrowthPointsFactor_Transpiler)));
+
+            harmony.Patch(
+                original: AccessTools.Method(typeof(Need_Learning), nameof(Need_Learning.NeedInterval)),
+                transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(Need_Learning_NeedInterval_Transpiler)));
+
 
             harmony.Patch(
                 original: AccessTools.Method(typeof(Pawn_InteractionsTracker), nameof(Pawn_InteractionsTracker.TryInteractWith)),
@@ -223,6 +231,25 @@ namespace VVRace.HarmonyPatches
                     yield return new CodeInstruction(OpCodes.Ldarg_0);
                     yield return new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(Pawn_AgeTracker), "pawn"));
                     yield return new CodeInstruction(OpCodes.Ldsfld, AccessTools.Field(typeof(VVStatDefOf), nameof(VVStatDefOf.VV_GrowthPointsFactor)));
+                    yield return new CodeInstruction(OpCodes.Ldc_I4_1);
+                    yield return new CodeInstruction(OpCodes.Ldc_I4_S, -1);
+                    yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(StatExtension), nameof(StatExtension.GetStatValue)));
+                    yield return new CodeInstruction(OpCodes.Mul);
+                }
+
+                yield return inst;
+            }
+        }
+
+        private static IEnumerable<CodeInstruction> Need_Learning_NeedInterval_Transpiler(IEnumerable<CodeInstruction> codeInstructions)
+        {
+            foreach (var inst in codeInstructions)
+            {
+                if (inst.opcode == OpCodes.Sub)
+                {
+                    yield return new CodeInstruction(OpCodes.Ldarg_0);
+                    yield return new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(Need), "pawn"));
+                    yield return new CodeInstruction(OpCodes.Ldsfld, AccessTools.Field(typeof(VVStatDefOf), nameof(VVStatDefOf.VV_LearningLossFactor)));
                     yield return new CodeInstruction(OpCodes.Ldc_I4_1);
                     yield return new CodeInstruction(OpCodes.Ldc_I4_S, -1);
                     yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(StatExtension), nameof(StatExtension.GetStatValue)));

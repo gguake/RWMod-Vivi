@@ -4,8 +4,6 @@ namespace VVRace
 {
     public class Verb_ShotFloraEnergy : Verb_Shoot
     {
-
-
         protected override bool TryCastShot()
         {
             var shot =  base.TryCastShot();

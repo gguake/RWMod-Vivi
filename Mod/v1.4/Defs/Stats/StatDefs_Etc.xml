@@ -1,16 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
+  <!-- 성장 등급 획득 속도 -->
   <StatDef>
     <defName>VV_GrowthPointsFactor</defName>
-    <label>growth points factor</label>
+    <label>growth points multiplier</label>
     <description>.</description>
     <category>BasicsPawn</category>
     <toStringStyle>PercentZero</toStringStyle>
     <showOnAnimals>false</showOnAnimals>
     <defaultBaseValue>1</defaultBaseValue>
     <hideAtValue>1</hideAtValue>
-    <minValue>0.0001</minValue>
+    <minValue>0</minValue>
     <displayPriorityInCategory>3501</displayPriorityInCategory>
+  </StatDef>
+
+  <!-- 학습 욕구 감소 속도 -->
+  <StatDef>
+    <defName>VV_LearningLossFactor</defName>
+    <label>learning loss multiplier</label>
+    <description>.</description>
+    <category>BasicsPawn</category>
+    <toStringStyle>PercentZero</toStringStyle>
+    <showOnAnimals>false</showOnAnimals>
+    <defaultBaseValue>1</defaultBaseValue>
+    <hideAtValue>1</hideAtValue>
+    <minValue>0</minValue>
+    <displayPriorityInCategory>3502</displayPriorityInCategory>
   </StatDef>
 
 </Defs>

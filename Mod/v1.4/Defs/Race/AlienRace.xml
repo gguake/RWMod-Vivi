@@ -303,15 +303,12 @@
       <SmoothingSpeed>1.25</SmoothingSpeed>
       <CleaningSpeed>1.25</CleaningSpeed>
 
-      <MoveSpeed>5.75</MoveSpeed>
-      <ButcheryFleshEfficiency>0.7</ButcheryFleshEfficiency>
+      <MoveSpeed>5.7</MoveSpeed>
+      <ButcheryFleshEfficiency>0.75</ButcheryFleshEfficiency>
       <MiningSpeed>0.5</MiningSpeed>
       <MiningYield>0.5</MiningYield>
       
       <ToxicResistance>0.5</ToxicResistance>
-
-      <VV_GrowthPointsFactor>1.35</VV_GrowthPointsFactor>
-
       <Fertility>0</Fertility>
     </statBases>
 

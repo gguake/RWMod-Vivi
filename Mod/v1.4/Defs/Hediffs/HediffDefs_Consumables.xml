@@ -38,7 +38,7 @@
       <li>
         <statFactors>
           <GlobalLearningFactor>1.25</GlobalLearningFactor>
-          <VV_GrowthPointsFactor>2.5</VV_GrowthPointsFactor>
+          <VV_GrowthPointsFactor>1.5</VV_GrowthPointsFactor>
         </statFactors>
       </li>
     </stages>

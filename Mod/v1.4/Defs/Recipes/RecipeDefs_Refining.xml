@@ -31,7 +31,7 @@
     <label>make viviwax</label>
     <description>test</description>
     <jobString>making viviwax.</jobString>
-    <workAmount>900</workAmount>
+    <workAmount>800</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <workSkill>Crafting</workSkill>
     <workSkillLearnFactor>0.25</workSkillLearnFactor>
@@ -47,7 +47,7 @@
             <li>VV_Vivicream</li>
           </thingDefs>
         </filter>
-        <count>30</count>
+        <count>40</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
@@ -56,7 +56,7 @@
       </thingDefs>
     </fixedIngredientFilter>
     <products>
-      <VV_Viviwax>15</VV_Viviwax>
+      <VV_Viviwax>30</VV_Viviwax>
     </products>
   </RecipeDef>
 

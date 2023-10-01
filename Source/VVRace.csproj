@@ -109,6 +109,7 @@
     <Compile Include="ArtificialPlant\MinifiedArtificialPlant.cs" />
     <Compile Include="ArtificialPlant\PlaceWorker_AllowArtificialPlantPot.cs" />
     <Compile Include="ArtificialPlant\AI\WorkGiver_FertilizeArtificialPlant.cs" />
+    <Compile Include="ArtificialPlant\PlaceWorker_ShowPlantTurretRadius.cs" />
     <Compile Include="ArtificialPlant\PlaceWorker_TurretPlantTop.cs" />
     <Compile Include="ArtificialPlant\Verb_ShotFloraEnergy.cs" />
     <Compile Include="Egg\AI\JobDriver_HaulViviEgg.cs" />

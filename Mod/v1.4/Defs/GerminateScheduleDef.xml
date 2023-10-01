@@ -20,7 +20,7 @@
 
     <workAmount>700</workAmount>
     <ingredients>
-      <VV_Fertilizer>20</VV_Fertilizer>
+      <VV_Fertilizer>25</VV_Fertilizer>
     </ingredients>
 
     <germinateJob>VV_ManageSeedlingRepotting</germinateJob>
@@ -56,7 +56,7 @@
     <uiTextColor>(1.0, 1.0, 1.0)</uiTextColor>
     <uiIconPath>UI/Icons/GerminateSchedule/Weeding</uiIconPath>
 
-    <workAmount>2000</workAmount>
+    <workAmount>2100</workAmount>
     
     <germinateJob>VV_ManageSeedlingWeeding</germinateJob>
 
@@ -72,7 +72,7 @@
     <uiTextColor>(1.0, 1.0, 1.0)</uiTextColor>
     <uiIconPath>UI/Icons/GerminateSchedule/Luciferium</uiIconPath>
     
-    <workAmount>400</workAmount>
+    <workAmount>300</workAmount>
     <ingredients>
       <Luciferium>3</Luciferium>
     </ingredients>

@@ -18,6 +18,7 @@ namespace VVRace
         public static StatDef VV_GrassFiberGatherYield;
 
         public static StatDef VV_GrowthPointsFactor;
+        public static StatDef VV_LearningLossFactor;
     }
 
     [DefOf]

@@ -18,7 +18,7 @@
     <defName>VV_BasicInfra</defName>
     <label>vivi basic infrastructures</label>
     <description>.</description>
-    <baseCost>1000</baseCost>
+    <baseCost>1200</baseCost>
     <researchViewX>0</researchViewX>
     <researchViewY>0.7</researchViewY>
 
@@ -87,7 +87,7 @@
     <defName>VV_AdvancedGathering</defName>
     <label>vivi advanced gathering</label>
     <description>.</description>
-    <baseCost>800</baseCost>
+    <baseCost>600</baseCost>
     <researchViewX>2</researchViewX>
     <researchViewY>0.7</researchViewY>
     <prerequisites>
@@ -99,7 +99,7 @@
     <defName>VV_AncientBotany</defName>
     <label>ancient botany</label>
     <description>.</description>
-    <baseCost>1200</baseCost>
+    <baseCost>1000</baseCost>
     <researchViewX>2</researchViewX>
     <researchViewY>1.4</researchViewY>
     <prerequisites>
@@ -111,13 +111,12 @@
     <defName>VV_Lifestrand</defName>
     <label>lifestrand</label>
     <description>.</description>
-    <baseCost>1200</baseCost>
+    <baseCost>1800</baseCost>
     <researchViewX>3</researchViewX>
     <researchViewY>1.05</researchViewY>
     <prerequisites>
       <li>Devilstrand</li>
       <li>VV_AdvancedGathering</li>
-      <li>VV_AncientBotany</li>
     </prerequisites>
   </ResearchProjectDef>
 </Defs>

@@ -32,6 +32,8 @@
     <statBases>
       <Mass>3</Mass>
       <Flammability>1</Flammability>
+
+      <ArmorRating_Blunt>0.5</ArmorRating_Blunt>
     </statBases>
     <size>(1,1)</size>
     <stackLimit>1</stackLimit>
@@ -80,7 +82,7 @@
     <useHitPoints>true</useHitPoints>
     <statBases>
       <MarketValue>120</MarketValue>
-      <MaxHitPoints>60</MaxHitPoints>
+      <MaxHitPoints>40</MaxHitPoints>
 
       <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
       <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
@@ -137,7 +139,7 @@
     <useHitPoints>true</useHitPoints>
     <statBases>
       <MarketValue>120</MarketValue>
-      <MaxHitPoints>60</MaxHitPoints>
+      <MaxHitPoints>40</MaxHitPoints>
       
       <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
       <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
@@ -196,7 +198,7 @@
     <useHitPoints>true</useHitPoints>
     <statBases>
       <MarketValue>120</MarketValue>
-      <MaxHitPoints>90</MaxHitPoints>
+      <MaxHitPoints>100</MaxHitPoints>
 
       <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
       <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
@@ -262,7 +264,7 @@
     <useHitPoints>true</useHitPoints>
     <statBases>
       <MarketValue>120</MarketValue>
-      <MaxHitPoints>120</MaxHitPoints>
+      <MaxHitPoints>70</MaxHitPoints>
       
       <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
       <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
@@ -320,7 +322,7 @@
     <useHitPoints>true</useHitPoints>
     <statBases>
       <MarketValue>240</MarketValue>
-      <MaxHitPoints>50</MaxHitPoints>
+      <MaxHitPoints>40</MaxHitPoints>
       <Flammability>0</Flammability>
       
       <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
@@ -376,7 +378,7 @@
     <useHitPoints>true</useHitPoints>
     <statBases>
       <MarketValue>120</MarketValue>
-      <MaxHitPoints>120</MaxHitPoints>
+      <MaxHitPoints>70</MaxHitPoints>
       
       <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
       <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
@@ -404,13 +406,13 @@
       <li Class="VVRace.ArtificialPlantModExtension">
         <germinateWeight>700</germinateWeight>
 
-        <energyCapacity>400</energyCapacity>
+        <energyCapacity>300</energyCapacity>
         <zeroEnergyDamageByChance>1~10</zeroEnergyDamageByChance>
 
         <energyConsumeRule Class="VVRace.EnergyRule_CompositeSum">
           <rules>
             <li Class="VVRace.EnergyRule_GlowerActive">
-              <energy>70</energy>
+              <energy>90</energy>
             </li>
             <li Class="VVRace.EnergyRule_Constant">
               <energy>10</energy>
@@ -444,7 +446,7 @@
     <useHitPoints>true</useHitPoints>
     <statBases>
       <MarketValue>240</MarketValue>
-      <MaxHitPoints>240</MaxHitPoints>
+      <MaxHitPoints>120</MaxHitPoints>
       
       <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
       <VV_PlantHoneyGatherYield>1.5</VV_PlantHoneyGatherYield>
@@ -503,7 +505,7 @@
     <statBases>
       <Mass>5</Mass>
       <MarketValue>150</MarketValue>
-      <MaxHitPoints>180</MaxHitPoints>
+      <MaxHitPoints>250</MaxHitPoints>
     </statBases>
 
     <comps>
@@ -513,7 +515,7 @@
       <combatPower>45</combatPower>
       <ai_combatDangerous>true</ai_combatDangerous>
       <turretGunDef>VV_Gun_Peashooter</turretGunDef>
-      <turretBurstCooldownTime>6.9</turretBurstCooldownTime>
+      <turretBurstCooldownTime>5.9</turretBurstCooldownTime>
       <turretBurstWarmupTime>0.9</turretBurstWarmupTime>
       <turretTopOffset>(0, 0.05)</turretTopOffset>
       <turretTopDrawSize>1</turretTopDrawSize>
@@ -521,20 +523,20 @@
 
     <placeWorkers>
       <li>PlaceWorker_TurretTop</li>
-      <li>PlaceWorker_ShowTurretRadius</li>
+      <li>VVRace.PlaceWorker_ShowPlantTurretRadius</li>
     </placeWorkers>
 
     <modExtensions>
       <li Class="VVRace.ArtificialPlantModExtension">
         <germinateWeight>700</germinateWeight>
 
-        <energyCapacity>300</energyCapacity>
+        <energyCapacity>400</energyCapacity>
         <zeroEnergyDamageByChance>5~15</zeroEnergyDamageByChance>
 
         <energyConsumeRule Class="VVRace.EnergyRule_Constant">
-          <energy>5</energy>
+          <energy>10</energy>
         </energyConsumeRule>
-        <verbShootEnergy>5</verbShootEnergy>
+        <verbShootEnergy>1</verbShootEnergy>
       </li>
     </modExtensions>
   </ThingDef>
@@ -565,11 +567,11 @@
     <drawerType>MapMeshAndRealTime</drawerType>
 
     <statBases>
-      <AccuracyTouch>0.8</AccuracyTouch>
-      <AccuracyShort>0.57</AccuracyShort>
+      <AccuracyTouch>0.88</AccuracyTouch>
+      <AccuracyShort>0.67</AccuracyShort>
       <AccuracyMedium>0.22</AccuracyMedium>
       <AccuracyLong>0.1</AccuracyLong>
-      <RangedWeapon_Cooldown>6.9</RangedWeapon_Cooldown>
+      <RangedWeapon_Cooldown>5.9</RangedWeapon_Cooldown>
       <DeteriorationRate>0</DeteriorationRate>
       <Mass>10</Mass>
       <Flammability>0</Flammability>
@@ -577,11 +579,11 @@
 
     <verbs>
       <li>
-        <verbClass>Verb_Shoot</verbClass>
+        <verbClass>VVRace.Verb_ShotFloraEnergy</verbClass>
         <defaultProjectile>VV_Bullet_Pea</defaultProjectile>
         <warmupTime>0</warmupTime>
-        <range>27.9</range>
-        <ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+        <range>25.9</range>
+        <ticksBetweenBurstShots>11</ticksBetweenBurstShots>
         <burstShotCount>8</burstShotCount>
         <soundCast>ThumpCannon_Fire</soundCast>
         <soundCastTail>GunTail_Heavy</soundCastTail>
@@ -613,7 +615,7 @@
     <statBases>
       <Mass>5</Mass>
       <MarketValue>360</MarketValue>
-      <MaxHitPoints>180</MaxHitPoints>
+      <MaxHitPoints>250</MaxHitPoints>
     </statBases>
 
     <comps>
@@ -631,7 +633,7 @@
 
     <placeWorkers>
       <li>PlaceWorker_TurretTop</li>
-      <li>PlaceWorker_ShowTurretRadius</li>
+      <li>VVRace.PlaceWorker_ShowPlantTurretRadius</li>
     </placeWorkers>
 
     <modExtensions>
@@ -639,13 +641,14 @@
         <germinateWeight>300</germinateWeight>
         <germinateRare>true</germinateRare>
 
-        <energyCapacity>300</energyCapacity>
+        <energyCapacity>400</energyCapacity>
         <zeroEnergyDamageByChance>15~30</zeroEnergyDamageByChance>
 
         <energyConsumeRule Class="VVRace.EnergyRule_Constant">
-          <energy>5</energy>
+          <energy>10</energy>
         </energyConsumeRule>
-        <verbShootEnergy>30</verbShootEnergy>
+
+        <verbShootEnergy>10</verbShootEnergy>
       </li>
     </modExtensions>
   </ThingDef>
@@ -690,7 +693,7 @@
 
     <verbs>
       <li>
-        <verbClass>Verb_Shoot</verbClass>
+        <verbClass>VVRace.Verb_ShotFloraEnergy</verbClass>
         <defaultProjectile>VV_Bullet_PeaFast</defaultProjectile>
         <warmupTime>0</warmupTime>
         <range>41.9</range>

@@ -1,5 +1,6 @@
 ﻿using RimWorld;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using UnityEngine;
@@ -274,7 +275,19 @@ namespace VVRace
         {
             foreach (var gizmo in base.GetGizmos())
             {
-                if (gizmo is Designator_Install) { continue; }
+                if (gizmo is Designator_Install)
+                {
+                    yield return new Designator_ReplantArtificialPlant();
+                    continue;
+                }
+                else if (gizmo is Designator_Uninstall uninstallDesignator)
+                {
+                    uninstallDesignator.defaultLabel = "DesignatorExtractTree".Translate();
+                    uninstallDesignator.defaultDesc = "DesignatorExtractTreeDesc".Translate();
+                    uninstallDesignator.icon = ContentFinder<Texture2D>.Get("UI/Designators/ExtractTree");
+                    uninstallDesignator.soundSucceeded = SoundDefOf.Designate_ExtractTree;
+                    uninstallDesignator.hotKey = KeyBindingDefOf.Misc12;
+                }
 
                 yield return gizmo;
             }

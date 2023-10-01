@@ -16,8 +16,8 @@
   <VV_Lifestrand.description>악마가닥을 특수한 섬유와 소재로 가공한 옷감입니다.\n물리적 손상을 입었을때 일부를 스스로 수복하는 성질을 띄고있어 보통의 악마가닥 천보다 매우 튼튼하지만 그만큼 가공하기도 어렵습니다.\n\n섬유가 마치 살아있는것 같다고 해서 생체가닥으로 불립니다.</VV_Lifestrand.description>
 
   <VV_UnknownSeed.label>미확인 씨앗</VV_UnknownSeed.label>
-  <VV_UnknownSeed.description>종류를 알 수 없는 식물의 씨앗입니다. 모종 배양기에서 배양할 수 있습니다.</VV_UnknownSeed.description>
+  <VV_UnknownSeed.description>종류를 알 수 없는 식물의 씨앗입니다. 모종 배양기에서 비료, 꽃가루로 배양할 수 있습니다.</VV_UnknownSeed.description>
 
   <VV_Fertilizer.label>비비 비료</VV_Fertilizer.label>
-  <VV_Fertilizer.description>분해된 유기물을 활용한 비료입니다. 각종 원예 작업에 사용됩니다.</VV_Fertilizer.description>
+  <VV_Fertilizer.description>분해된 유기물을 활용한 비료입니다. 각종 원예 작업에 사용되며 고대 식물의 에너지를 채우는 용도로도 사용할 수 있습니다. 비료 1개당 10의 에너지를 채워줍니다.</VV_Fertilizer.description>
 </LanguageData>

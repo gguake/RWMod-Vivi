@@ -1,10 +1,8 @@
 ﻿using RimWorld;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Verse;
-using Verse.AI;
 
 namespace VVRace
 {
@@ -14,7 +12,7 @@ namespace VVRace
 
         public bool CanLayEgg => _isRoyal && _eggProgress >= 1f;
         public float EggProgress => _eggProgress;
-        public float EggProgressPerDays => Mathf.Clamp01(PawnUtility.BodyResourceGrowthSpeed(this) / 30f);
+        public float EggProgressPerDays => Mathf.Clamp01(PawnUtility.BodyResourceGrowthSpeed(this) / 25f);
 
         public bool ShouldBeRoyalIfMature
         {
@@ -54,7 +52,7 @@ namespace VVRace
                 }
             }
 
-            if (this.IsHashIntervalTick(2000 * 6))
+            if (this.IsHashIntervalTick(60000))
             {
                 RefreshHairColor();
             }

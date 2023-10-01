@@ -106,7 +106,7 @@
       <WorkToMake>1800</WorkToMake>
       <Mass>0.5</Mass>
       <StuffEffectMultiplierArmor>0.12</StuffEffectMultiplierArmor>
-      <StuffEffectMultiplierInsulation_Cold>1.0</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Cold>1.3</StuffEffectMultiplierInsulation_Cold>
       <StuffEffectMultiplierInsulation_Heat>1.0</StuffEffectMultiplierInsulation_Heat>
       <EquipDelay>2.0</EquipDelay>
 
@@ -126,7 +126,7 @@
       <li>Leathery</li>
     </stuffCategories>
     <costList>
-      <VV_Vivicream>30</VV_Vivicream>
+      <VV_Vivicream>40</VV_Vivicream>
     </costList>
 
     <apparel Class="VVRace.ApparelPropertiesExt">
