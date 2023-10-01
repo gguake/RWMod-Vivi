@@ -171,7 +171,7 @@ namespace VVRace
                             if (sb.Length > 0) { sb.AppendLine(); }
                             sb.Append(LocalizeTexts.InspectorViviGerminatorCompletePeriods.Translate(schedule.TicksToCompleteGerminate.ToStringTicksToPeriod(allowSeconds: false)));
 
-                            if (schedule.CanManageJob)
+                            if (schedule.CanManageJob && schedule.CurrentScheduleNumber <= GerminateSchedule.TotalScheduleCount)
                             {
                                 var currentScheduleDef = schedule.CurrentManageScheduleDef;
 

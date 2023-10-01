@@ -168,14 +168,16 @@ namespace VVRace
 
         public void Tick(Building_SeedlingGerminator building)
         {
-            if (CanManageJob && CurrentManageScheduleDef == VVGerminateScheduleDefOf.VV_DoNothing)
+            if (Stage == GerminateStage.GerminateInProgress)
             {
-                AdvanceGerminateSchedule(building);
-            }
-
-            if (Stage == GerminateStage.GerminateInProgress && GenTicks.TicksGame >= _germinateCompleteTick)
-            {
-                CompleteGerminate(building);
+                if (GenTicks.TicksGame >= _germinateCompleteTick)
+                {
+                    CompleteGerminate(building);
+                }
+                else if (CanManageJob && CurrentManageScheduleDef == VVGerminateScheduleDefOf.VV_DoNothing)
+                {
+                    AdvanceGerminateSchedule(building);
+                }
             }
         }
 

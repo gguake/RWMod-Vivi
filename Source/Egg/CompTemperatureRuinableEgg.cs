@@ -24,7 +24,7 @@ namespace VVRace
             float ambientTemperature = parent.AmbientTemperature;
             if (ruinedPercent > 0f && ambientTemperature <= Props.maxSafeTemperature && ambientTemperature >= Props.minSafeTemperature)
             {
-                ruinedPercent = Mathf.Clamp01(ruinedPercent + ticks / 300000f);
+                ruinedPercent = Mathf.Clamp01(ruinedPercent - ticks / 300000f);
             }
         }
     }

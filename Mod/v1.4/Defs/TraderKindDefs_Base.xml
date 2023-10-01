@@ -10,10 +10,6 @@
         <countRange>500~2000</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
-        <thingDef>ComponentIndustrial</thingDef>
-        <countRange>5~20</countRange>
-      </li>
-      <li Class="StockGenerator_SingleDef">
         <thingDef>Steel</thingDef>
         <countRange>100~200</countRange>
       </li>
@@ -78,6 +74,14 @@
         <thingDef>VV_Propolis</thingDef>
         <countRange>20~100</countRange>
       </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>VV_UnknownSeed</thingDef>
+        <countRange>100~200</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>VV_Fertilizer</thingDef>
+        <countRange>500~1000</countRange>
+      </li>
       
       <!-- Drugs -->
       <li Class="StockGenerator_Category">
@@ -135,7 +139,11 @@
       <!-- none -->
       
       <!-- Buildings -->
-      <!-- none -->
+      <li Class="StockGenerator_Tag">
+        <tradeTag>VV_ArtificialPlant</tradeTag>
+        <thingDefCountRange>4~7</thingDefCountRange>
+        <countRange>7~25</countRange>
+      </li>
 
       <!-- Exotic -->
       <li Class="StockGenerator_Tag">
@@ -177,6 +185,7 @@
       <li Class="StockGenerator_BuyTradeTag"><tag>VV_ViviHoney</tag></li>
       <li Class="StockGenerator_BuyTradeTag"><tag>VV_ViviProduct</tag></li>
       <li Class="StockGenerator_BuyTradeTag"><tag>Art</tag></li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>VV_ArtificialPlant</tag></li>
       <li Class="StockGenerator_BuyTradeTag"><tag>MusicalInstrument</tag></li>
       
     </stockGenerators>
