@@ -27,7 +27,7 @@
   <VV_TreeResinGatherYield.description>식물에서 평균 대비 얼마나 많은 수지를 채집 가능한지 나타냅니다.\n\n생산량은 내구도, 성장도, 오염에 영향을 받습니다.</VV_TreeResinGatherYield.description>
 
   <VV_GrassFiberGatherYield.label>잔디 섬유 생산량</VV_GrassFiberGatherYield.label>
-  <VV_GrassFiberGatherYield.label>식물에서 평균 대비 얼마나 많은 잔디 섬유를 채집 가능한지 나타냅니다.\n\n생산량은 내구도, 성장도, 오염에 영향을 받습니다.</VV_GrassFiberGatherYield.label>
+  <VV_GrassFiberGatherYield.description>식물에서 평균 대비 얼마나 많은 잔디 섬유를 채집 가능한지 나타냅니다.\n\n생산량은 내구도, 성장도, 오염에 영향을 받습니다.</VV_GrassFiberGatherYield.description>
 
   <VV_PlantGenesGatherCooldown.label>식물 유전 물질 재생시간</VV_PlantGenesGatherCooldown.label>
   <VV_PlantGenesGatherCooldown.description>식물에서 유전 물질을 채집 후 다시 복구되기까지 걸리는 시간을 나타냅니다.\n\n오염된 지형에서는 재생하는데 더 오랜 시간이 걸립니다.</VV_PlantGenesGatherCooldown.description>

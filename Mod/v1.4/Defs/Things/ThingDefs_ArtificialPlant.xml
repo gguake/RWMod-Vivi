@@ -81,7 +81,7 @@
 
     <useHitPoints>true</useHitPoints>
     <statBases>
-      <MarketValue>120</MarketValue>
+      <MarketValue>140</MarketValue>
       <MaxHitPoints>40</MaxHitPoints>
 
       <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
@@ -138,7 +138,7 @@
 
     <useHitPoints>true</useHitPoints>
     <statBases>
-      <MarketValue>120</MarketValue>
+      <MarketValue>140</MarketValue>
       <MaxHitPoints>40</MaxHitPoints>
       
       <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
@@ -197,7 +197,7 @@
 
     <useHitPoints>true</useHitPoints>
     <statBases>
-      <MarketValue>120</MarketValue>
+      <MarketValue>240</MarketValue>
       <MaxHitPoints>100</MaxHitPoints>
 
       <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
@@ -263,7 +263,7 @@
 
     <useHitPoints>true</useHitPoints>
     <statBases>
-      <MarketValue>120</MarketValue>
+      <MarketValue>180</MarketValue>
       <MaxHitPoints>70</MaxHitPoints>
       
       <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
@@ -321,7 +321,7 @@
     <terrainAffordanceNeeded>VV_WaterOrLight</terrainAffordanceNeeded>
     <useHitPoints>true</useHitPoints>
     <statBases>
-      <MarketValue>240</MarketValue>
+      <MarketValue>400</MarketValue>
       <MaxHitPoints>40</MaxHitPoints>
       <Flammability>0</Flammability>
       
@@ -377,7 +377,7 @@
 
     <useHitPoints>true</useHitPoints>
     <statBases>
-      <MarketValue>120</MarketValue>
+      <MarketValue>180</MarketValue>
       <MaxHitPoints>70</MaxHitPoints>
       
       <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
@@ -445,7 +445,7 @@
 
     <useHitPoints>true</useHitPoints>
     <statBases>
-      <MarketValue>240</MarketValue>
+      <MarketValue>400</MarketValue>
       <MaxHitPoints>120</MaxHitPoints>
       
       <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
@@ -504,7 +504,7 @@
     <useHitPoints>true</useHitPoints>
     <statBases>
       <Mass>5</Mass>
-      <MarketValue>150</MarketValue>
+      <MarketValue>180</MarketValue>
       <MaxHitPoints>250</MaxHitPoints>
     </statBases>
 
@@ -614,7 +614,7 @@
     <useHitPoints>true</useHitPoints>
     <statBases>
       <Mass>5</Mass>
-      <MarketValue>360</MarketValue>
+      <MarketValue>540</MarketValue>
       <MaxHitPoints>250</MaxHitPoints>
     </statBases>
 
