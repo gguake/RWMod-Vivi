@@ -35,6 +35,7 @@
     <tickerType>Rare</tickerType>
     <comps>
       <li Class="CompProperties_TemperatureRuinable">
+        <compClass>VVRace.CompTemperatureRuinableEgg</compClass>
         <minSafeTemperature>21</minSafeTemperature>
         <maxSafeTemperature>39</maxSafeTemperature>
         <progressPerDegreePerTick>0.0000005</progressPerDegreePerTick>
@@ -43,10 +44,10 @@
       <li Class="VVRace.CompProperties_ViviHatcher">
         <hatcherDaystoHatch>
           <points>
-            <li>(0, 15)</li>
-            <li>(2500, 20)</li>
-            <li>(7500, 25)</li>
-            <li>(10000, 30)</li>
+            <li>(0, 12)</li>
+            <li>(2500, 15)</li>
+            <li>(7500, 20)</li>
+            <li>(10000, 25)</li>
           </points>
         </hatcherDaystoHatch>
 

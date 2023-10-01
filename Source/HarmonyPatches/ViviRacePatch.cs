@@ -59,6 +59,11 @@ namespace VVRace.HarmonyPatches
                 original: AccessTools.Method(typeof(Need_Learning), nameof(Need_Learning.NeedInterval)),
                 transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(Need_Learning_NeedInterval_Transpiler)));
 
+            harmony.Patch(
+                original: AccessTools.Method(typeof(Need_Learning), nameof(Need_Learning.Learn)),
+                transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(Need_Learning_Learn_Transpiler)));
+
+
 
             harmony.Patch(
                 original: AccessTools.Method(typeof(Pawn_InteractionsTracker), nameof(Pawn_InteractionsTracker.TryInteractWith)),
@@ -249,13 +254,31 @@ namespace VVRace.HarmonyPatches
                 {
                     yield return new CodeInstruction(OpCodes.Ldarg_0);
                     yield return new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(Need), "pawn"));
-                    yield return new CodeInstruction(OpCodes.Ldsfld, AccessTools.Field(typeof(VVStatDefOf), nameof(VVStatDefOf.VV_LearningLossFactor)));
+                    yield return new CodeInstruction(OpCodes.Ldsfld, AccessTools.Field(typeof(VVStatDefOf), nameof(VVStatDefOf.VV_LearningRateFactor)));
                     yield return new CodeInstruction(OpCodes.Ldc_I4_1);
                     yield return new CodeInstruction(OpCodes.Ldc_I4_S, -1);
                     yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(StatExtension), nameof(StatExtension.GetStatValue)));
                     yield return new CodeInstruction(OpCodes.Mul);
                 }
 
+                yield return inst;
+            }
+        }
+
+        private static IEnumerable<CodeInstruction> Need_Learning_Learn_Transpiler(IEnumerable<CodeInstruction> codeInstructions)
+        {
+            yield return new CodeInstruction(OpCodes.Ldarg_1);
+            yield return new CodeInstruction(OpCodes.Ldarg_0);
+            yield return new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(Need), "pawn"));
+            yield return new CodeInstruction(OpCodes.Ldsfld, AccessTools.Field(typeof(VVStatDefOf), nameof(VVStatDefOf.VV_LearningRateFactor)));
+            yield return new CodeInstruction(OpCodes.Ldc_I4_1);
+            yield return new CodeInstruction(OpCodes.Ldc_I4_S, -1);
+            yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(StatExtension), nameof(StatExtension.GetStatValue)));
+            yield return new CodeInstruction(OpCodes.Mul);
+            yield return new CodeInstruction(OpCodes.Starg_S, 1);
+
+            foreach (var inst in codeInstructions)
+            {
                 yield return inst;
             }
         }

@@ -20,8 +20,8 @@
     <sterilize>true</sterilize>
     <statFactors>
       <GlobalLearningFactor>1.1</GlobalLearningFactor>
-      <VV_GrowthPointsFactor>3.0</VV_GrowthPointsFactor>
-      <VV_LearningLossFactor>2.0</VV_LearningLossFactor>
+      <VV_GrowthPointsFactor>4.0</VV_GrowthPointsFactor>
+      <VV_LearningRateFactor>1.5</VV_LearningRateFactor>
     </statFactors>
   </GeneDef>
 </Defs>

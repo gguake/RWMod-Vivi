@@ -12,7 +12,7 @@ namespace VVRace
 
         public bool CanLayEgg => _isRoyal && _eggProgress >= 1f;
         public float EggProgress => _eggProgress;
-        public float EggProgressPerDays => Mathf.Clamp01(PawnUtility.BodyResourceGrowthSpeed(this) / 25f);
+        public float EggProgressPerDays => Mathf.Clamp01(PawnUtility.BodyResourceGrowthSpeed(this) / 15f);
 
         public bool ShouldBeRoyalIfMature
         {

@@ -74,7 +74,7 @@
         <Crafting>9</Crafting>
       </skillRequirements>
       <researchPrerequisites>
-        <li>VV_Apparels</li>
+        <li>VV_AdvancedApparels</li>
         <li>VV_Lifestrand</li>
       </researchPrerequisites>
       <displayPriority>3500</displayPriority>

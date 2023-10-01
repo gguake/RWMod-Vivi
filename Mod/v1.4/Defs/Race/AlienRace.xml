@@ -290,7 +290,7 @@
           <li>VV_BasicRoyalCostume</li>
         </apparelList>
 
-        <canReproduce>true</canReproduce>
+        <canReproduce>false</canReproduce>
       </raceRestriction>
     </alienRace>
 

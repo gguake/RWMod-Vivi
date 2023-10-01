@@ -33,7 +33,7 @@ namespace VVRace
         public Alert_LowEnergyArtificialPlant()
         {
             defaultLabel = LocalizeTexts.AlertArtificialPlantLowEnergy.Translate();
-            defaultPriority = AlertPriority.High;
+            defaultPriority = AlertPriority.Critical;
         }
 
         public override AlertReport GetReport()

@@ -115,6 +115,7 @@
     <Compile Include="Egg\AI\JobDriver_HaulViviEgg.cs" />
     <Compile Include="Egg\AI\WorkGiver_HaulViviEgg.cs" />
     <Compile Include="Egg\Alert_DangerViviEgg.cs" />
+    <Compile Include="Egg\CompTemperatureRuinableEgg.cs" />
     <Compile Include="Egg\CompViviHatcher.cs" />
     <Compile Include="Egg\CompViviHatcheryEggDrawer.cs" />
     <Compile Include="Egg\ViviEgg.cs" />

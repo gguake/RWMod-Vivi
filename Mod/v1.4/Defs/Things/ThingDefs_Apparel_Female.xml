@@ -46,7 +46,7 @@
       <EquipDelay>1.5</EquipDelay>
     </statBases>
     <equippedStatOffsets>
-      <SocialImpact>0.1</SocialImpact>
+      <SocialImpact>0.15</SocialImpact>
       <NegotiationAbility>0.1</NegotiationAbility>
       <TradePriceImprovement>0.1</TradePriceImprovement>
       <ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">0.1</ToxicEnvironmentResistance>

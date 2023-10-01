@@ -16,7 +16,7 @@
 
   <!-- 학습 욕구 감소 속도 -->
   <StatDef>
-    <defName>VV_LearningLossFactor</defName>
+    <defName>VV_LearningRateFactor</defName>
     <label>learning loss multiplier</label>
     <description>.</description>
     <category>BasicsPawn</category>

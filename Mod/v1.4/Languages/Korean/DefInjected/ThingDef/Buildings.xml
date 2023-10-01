@@ -13,7 +13,7 @@
   <VV_ViviHatchery.description>비비 알을 부화시키기 위한 구조물입니다. 지붕이 있는 실내에 있어야 하며 적절한 온도가 필요합니다. 적절한 환경의 부화기가 있다면 로열 비비들은 그곳에 가서 알을 낳습니다.</VV_ViviHatchery.description>
   
   <VV_GatheringSpot.label>간이 채집 장소</VV_GatheringSpot.label>
-  <VV_GatheringSpot.description>주변의 식물에서 각종 채집 작업을 하기 위한 장소입니다. 적당한 장비가 없기 때문에 채집량의 50%만이 생산됩니다.\n\n최대 채집 가능 거리는 모드 옵션에 의해 제어됩니다.</VV_GatheringSpot.description>
+  <VV_GatheringSpot.description>주변의 식물에서 각종 채집 작업을 하기 위한 장소입니다. 적당한 장비가 없기 때문에 원래 채집량의 절반만 얻을 수 있습니다.</VV_GatheringSpot.description>
   
   <VV_GatheringBarrel.label>채집 작업대</VV_GatheringBarrel.label>
   <VV_GatheringBarrel.description>주변의 식물에서 각종 채집 작업을 하기 위한 작업대입니다.\n채집 작업은 작업대 근처에서만 할 수 있습니다.</VV_GatheringBarrel.description>

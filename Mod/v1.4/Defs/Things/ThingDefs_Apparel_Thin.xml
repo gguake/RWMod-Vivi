@@ -139,9 +139,9 @@
     
     <recipeMaker>
       <skillRequirements>
-        <Crafting>3</Crafting>
+        <Crafting>5</Crafting>
       </skillRequirements>
-      <researchPrerequisite>VV_Apparels</researchPrerequisite>
+      <researchPrerequisite>VV_AdvancedApparels</researchPrerequisite>
       <displayPriority>3102</displayPriority>
     </recipeMaker>
   </ThingDef>
@@ -194,9 +194,6 @@
     </apparel>
     
     <recipeMaker>
-      <skillRequirements>
-        <Crafting>5</Crafting>
-      </skillRequirements>
       <researchPrerequisite>VV_Apparels</researchPrerequisite>
       <displayPriority>3300</displayPriority>
     </recipeMaker>
@@ -260,9 +257,9 @@
     
     <recipeMaker>
       <skillRequirements>
-        <Crafting>5</Crafting>
+        <Crafting>4</Crafting>
       </skillRequirements>
-      <researchPrerequisite>VV_Apparels</researchPrerequisite>
+      <researchPrerequisite>VV_AdvancedApparels</researchPrerequisite>
       <displayPriority>3301</displayPriority>
     </recipeMaker>
   </ThingDef>

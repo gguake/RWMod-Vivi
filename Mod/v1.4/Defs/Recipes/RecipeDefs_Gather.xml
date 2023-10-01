@@ -95,7 +95,7 @@
     <description>.</description>
     <jobString>Gathering propolis.</jobString>
     
-    <workAmount>4000</workAmount>
+    <workAmount>2700</workAmount>
     <workSkill>Plants</workSkill>
     <workSpeedStat>VV_PlantGatherSpeed</workSpeedStat>
     <efficiencyStat>VV_PlantGatherYield</efficiencyStat>
