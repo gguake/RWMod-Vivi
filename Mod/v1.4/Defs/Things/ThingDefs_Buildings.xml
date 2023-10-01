@@ -553,7 +553,7 @@
   <!-- 식물 배양기 -->
   <ThingDef ParentName="BuildingBase">
     <defName>VV_SeedlingGerminator</defName>
-    <label>seedling germinator</label>
+    <label>ancient seedling germinator</label>
     <description>.</description>
     <thingClass>VVRace.Building_SeedlingGerminator</thingClass>
     <tickerType>Rare</tickerType>

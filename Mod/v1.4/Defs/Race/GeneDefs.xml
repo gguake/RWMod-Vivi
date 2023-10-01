@@ -21,7 +21,7 @@
     <statFactors>
       <GlobalLearningFactor>1.1</GlobalLearningFactor>
       <VV_GrowthPointsFactor>4.0</VV_GrowthPointsFactor>
-      <VV_LearningRateFactor>1.5</VV_LearningRateFactor>
+      <VV_LearningRateFactor>1.75</VV_LearningRateFactor>
     </statFactors>
   </GeneDef>
 </Defs>

@@ -110,7 +110,7 @@
         <germinateWeight>700</germinateWeight>
         
         <energyCapacity>100</energyCapacity>
-        <zeroEnergyDamageByChance>1~4</zeroEnergyDamageByChance>
+        <zeroEnergyDamageByChance>1~3</zeroEnergyDamageByChance>
 
         <energyConsumeRule Class="VVRace.EnergyRule_Constant">
           <energy>20</energy>
@@ -167,7 +167,7 @@
         <germinateWeight>700</germinateWeight>
 
         <energyCapacity>100</energyCapacity>
-        <zeroEnergyDamageByChance>1~4</zeroEnergyDamageByChance>
+        <zeroEnergyDamageByChance>1~3</zeroEnergyDamageByChance>
 
         <energyConsumeRule Class="VVRace.EnergyRule_Constant">
           <energy>20</energy>
@@ -231,7 +231,7 @@
         <germinateRare>true</germinateRare>
 
         <energyCapacity>200</energyCapacity>
-        <zeroEnergyDamageByChance>1~10</zeroEnergyDamageByChance>
+        <zeroEnergyDamageByChance>1~3</zeroEnergyDamageByChance>
 
         <energyConsumeRule Class="VVRace.EnergyRule_Constant">
           <energy>20</energy>
@@ -295,7 +295,7 @@
         <germinateWeight>700</germinateWeight>
 
         <energyCapacity>500</energyCapacity>
-        <zeroEnergyDamageByChance>1~10</zeroEnergyDamageByChance>
+        <zeroEnergyDamageByChance>1~3</zeroEnergyDamageByChance>
 
         <energyConsumeRule Class="VVRace.EnergyRule_Constant">
           <energy>100</energy>
@@ -342,7 +342,7 @@
 
         <energyCapacity>400</energyCapacity>
         <initialEnergyPercent>1.0</initialEnergyPercent>
-        <zeroEnergyDamageByChance>1~5</zeroEnergyDamageByChance>
+        <zeroEnergyDamageByChance>1~3</zeroEnergyDamageByChance>
 
         <energyConsumeRule Class="VVRace.EnergyRule_Constant">
           <energy>10</energy>
@@ -409,7 +409,7 @@
         <germinateWeight>700</germinateWeight>
 
         <energyCapacity>300</energyCapacity>
-        <zeroEnergyDamageByChance>1~10</zeroEnergyDamageByChance>
+        <zeroEnergyDamageByChance>1~3</zeroEnergyDamageByChance>
 
         <energyConsumeRule Class="VVRace.EnergyRule_CompositeSum">
           <rules>
@@ -469,7 +469,7 @@
         <germinateRare>true</germinateRare>
 
         <energyCapacity>900</energyCapacity>
-        <zeroEnergyDamageByChance>1~5</zeroEnergyDamageByChance>
+        <zeroEnergyDamageByChance>1~3</zeroEnergyDamageByChance>
 
         <energyConsumeRule Class="VVRace.EnergyRule_Constant">
           <energy>20</energy>
@@ -533,7 +533,7 @@
         <germinateWeight>700</germinateWeight>
 
         <energyCapacity>400</energyCapacity>
-        <zeroEnergyDamageByChance>5~15</zeroEnergyDamageByChance>
+        <zeroEnergyDamageByChance>1~10</zeroEnergyDamageByChance>
 
         <energyConsumeRule Class="VVRace.EnergyRule_Constant">
           <energy>10</energy>
@@ -573,7 +573,7 @@
       <AccuracyShort>0.67</AccuracyShort>
       <AccuracyMedium>0.22</AccuracyMedium>
       <AccuracyLong>0.1</AccuracyLong>
-      <RangedWeapon_Cooldown>5.9</RangedWeapon_Cooldown>
+      <RangedWeapon_Cooldown>4.9</RangedWeapon_Cooldown>
       <DeteriorationRate>0</DeteriorationRate>
       <Mass>10</Mass>
       <Flammability>0</Flammability>
@@ -584,7 +584,7 @@
         <verbClass>VVRace.Verb_ShotFloraEnergy</verbClass>
         <defaultProjectile>VV_Bullet_Pea</defaultProjectile>
         <warmupTime>0</warmupTime>
-        <range>25.9</range>
+        <range>24.9</range>
         <ticksBetweenBurstShots>11</ticksBetweenBurstShots>
         <burstShotCount>8</burstShotCount>
         <soundCast>ThumpCannon_Fire</soundCast>
@@ -644,7 +644,7 @@
         <germinateRare>true</germinateRare>
 
         <energyCapacity>400</energyCapacity>
-        <zeroEnergyDamageByChance>15~30</zeroEnergyDamageByChance>
+        <zeroEnergyDamageByChance>1~10</zeroEnergyDamageByChance>
 
         <energyConsumeRule Class="VVRace.EnergyRule_Constant">
           <energy>10</energy>
