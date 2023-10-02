@@ -17,7 +17,7 @@
     <defName>VV_DoBillsGathering</defName>
     <label>gather</label>
     <giverClass>VVRace.WorkGiver_GatheringBill</giverClass>
-    <workType>Growing</workType>
+    <workType>VV_Gathering</workType>
     <priorityInType>85</priorityInType>
     <fixedBillGiverDefs>
       <li>VV_GatheringSpot</li>

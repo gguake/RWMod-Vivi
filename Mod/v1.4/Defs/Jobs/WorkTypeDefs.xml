@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  
+  <WorkTypeDef>
+    <defName>VV_Gathering</defName>
+    <labelShort>gather</labelShort>
+    <pawnLabel>Gather</pawnLabel>
+    <gerundLabel>gathering</gerundLabel>
+    <description>.</description>
+    <verb>Gather</verb>
+    <naturalPriority>690</naturalPriority>
+    <requireCapableColonist>true</requireCapableColonist>
+    <relevantSkills>
+      <li>Plants</li>
+    </relevantSkills>
+    <workTags>
+      <li>ManualSkilled</li>
+      <li>PlantWork</li>
+      <li>Commoner</li>
+      <li>AllWork</li>
+    </workTags>
+  </WorkTypeDef>
+</Defs>

@@ -34,5 +34,7 @@
     <li>Ludeon.RimWorld.Biotech</li>
 		<li>brrainz.harmony</li>
 		<li>erdelf.HumanoidAlienRaces</li>
+
+		<li>Solaris.FurnitureBase</li>
   </forceLoadAfter>
 </ModMetaData>

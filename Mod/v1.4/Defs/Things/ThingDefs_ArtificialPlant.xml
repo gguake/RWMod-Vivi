@@ -113,11 +113,11 @@
         <zeroEnergyDamageByChance>1~3</zeroEnergyDamageByChance>
 
         <energyConsumeRule Class="VVRace.EnergyRule_Constant">
-          <energy>20</energy>
+          <energy>10</energy>
         </energyConsumeRule>
         <energyGenerateRule Class="VVRace.EnergyRule_Temperature">
           <activeTemperatureRange>30~120</activeTemperatureRange>
-          <energyByTemperatureRange>20~120</energyByTemperatureRange>
+          <energyByTemperatureRange>10~120</energyByTemperatureRange>
         </energyGenerateRule>
       </li>
     </modExtensions>
@@ -158,7 +158,7 @@
       <li Class="CompProperties_HeatPusher">
         <compClass>VVRace.CompHeatPusherFloraEnergy</compClass>
         <heatPerSecond>-16</heatPerSecond>
-        <heatPushMaxTemperature>-9</heatPushMaxTemperature>
+        <heatPushMinTemperature>-9</heatPushMinTemperature>
       </li>
     </comps>
     
@@ -170,11 +170,11 @@
         <zeroEnergyDamageByChance>1~3</zeroEnergyDamageByChance>
 
         <energyConsumeRule Class="VVRace.EnergyRule_Constant">
-          <energy>20</energy>
+          <energy>10</energy>
         </energyConsumeRule>
         <energyGenerateRule Class="VVRace.EnergyRule_Temperature">
           <activeTemperatureRange>-100~-10</activeTemperatureRange>
-          <energyByTemperatureRange>20~120</energyByTemperatureRange>
+          <energyByTemperatureRange>10~120</energyByTemperatureRange>
         </energyGenerateRule>
       </li>
     </modExtensions>
@@ -294,7 +294,7 @@
       <li Class="VVRace.ArtificialPlantModExtension">
         <germinateWeight>700</germinateWeight>
 
-        <energyCapacity>500</energyCapacity>
+        <energyCapacity>400</energyCapacity>
         <zeroEnergyDamageByChance>1~3</zeroEnergyDamageByChance>
 
         <energyConsumeRule Class="VVRace.EnergyRule_Constant">
@@ -340,7 +340,7 @@
         <germinateWeight>500</germinateWeight>
         <germinateRare>true</germinateRare>
 
-        <energyCapacity>400</energyCapacity>
+        <energyCapacity>300</energyCapacity>
         <initialEnergyPercent>1.0</initialEnergyPercent>
         <zeroEnergyDamageByChance>1~3</zeroEnergyDamageByChance>
 
@@ -348,7 +348,7 @@
           <energy>10</energy>
         </energyConsumeRule>
         <energyGenerateRule Class="VVRace.EnergyRule_AdjacentWater">
-          <energyByOccupiedWaterCell>50</energyByOccupiedWaterCell>
+          <energyByOccupiedWaterCell>60</energyByOccupiedWaterCell>
           <energyByAdjacentWaterCell>25</energyByAdjacentWaterCell>
         </energyGenerateRule>
 
@@ -422,7 +422,7 @@
           </rules>
         </energyConsumeRule>
         <energyGenerateRule Class="VVRace.EnergyRule_Sunlight">
-          <energyFromSunlightRange>0~150</energyFromSunlightRange>
+          <energyFromSunlightRange>0~160</energyFromSunlightRange>
         </energyGenerateRule>
       </li>
     </modExtensions>
@@ -468,14 +468,14 @@
         <germinateWeight>400</germinateWeight>
         <germinateRare>true</germinateRare>
 
-        <energyCapacity>900</energyCapacity>
+        <energyCapacity>600</energyCapacity>
         <zeroEnergyDamageByChance>1~3</zeroEnergyDamageByChance>
 
         <energyConsumeRule Class="VVRace.EnergyRule_Constant">
-          <energy>20</energy>
+          <energy>40</energy>
         </energyConsumeRule>
         <energyGenerateRule Class="VVRace.EnergyRule_AdjacentPlant">
-          <energyByAdjacentPlant>20</energyByAdjacentPlant>
+          <energyByAdjacentPlant>40</energyByAdjacentPlant>
         </energyGenerateRule>
 
         <terraformingTick>180000</terraformingTick>
@@ -532,7 +532,7 @@
       <li Class="VVRace.ArtificialPlantModExtension">
         <germinateWeight>600</germinateWeight>
 
-        <energyCapacity>400</energyCapacity>
+        <energyCapacity>300</energyCapacity>
         <zeroEnergyDamageByChance>1~10</zeroEnergyDamageByChance>
 
         <energyConsumeRule Class="VVRace.EnergyRule_Constant">
