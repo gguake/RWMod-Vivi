@@ -20,13 +20,12 @@ namespace VVRace
                 ViviRacePatch.Patch(harmony);
                 ArtificialPlantPatch.Patch(harmony);
 
-                if (ModsConfig.IdeologyActive)
+                if (ModLister.GetActiveModWithIdentifier("Solaris.FurnitureBase")?.Active ?? false)
                 {
-                    // 이데올로기 사용시 이데올로기에 따라 가중치가 0이 되는 현상 수정
-                    harmony.Patch(
-                        original: AccessTools.Method(typeof(PawnStyleItemChooser), "GetFrequencyFromIdeo"),
-                        postfix: new HarmonyMethod(typeof(ViviHarmonyPatcher), nameof(PawnStyleItemChooser_GetFrequencyFromIdeo_Postfix)));
+                    Log.Message("!! [ViViRace] gloomyfurniture compatiblity - CanPlaceBlueprintOver unpatched");
+                    harmony.Unpatch(typeof(GenConstruct).GetMethod("CanPlaceBlueprintOver"), HarmonyPatchType.Prefix, "com.Gloomylynx.rimworld.mod");
                 }
+
 
                 harmony.PatchAll();
             }

@@ -14,7 +14,7 @@ namespace VVRace
         public static string GetJobFailReasonForMakeViviCream(this Pawn pawn)
         {
             if (!(pawn is Vivi)) { return LocalizeTexts.JobFailReasonNotVivi.Translate(); }
-            if (pawn.needs?.food?.Starving ?? true) { return LocalizeTexts.JobFailReasonNotVivi.Translate(); }
+            if (pawn.needs?.food?.Starving ?? true) { return LocalizeTexts.JobFailReasonViviStarving.Translate(); }
 
             return null;
         }

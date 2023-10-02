@@ -24,6 +24,8 @@ namespace VVRace.HarmonyPatches
             harmony.Patch(
                 original: AccessTools.Method(typeof(ThoughtUtility), nameof(ThoughtUtility.ThoughtNullified)),
                 postfix: new HarmonyMethod(typeof(ApparelPropertiesExtPatch), nameof(ThoughtUtility_ThoughtNullified_Postfix)));
+
+            Log.Message("!! [ViViRace] apparel patch complete");
         }
 
         private static void ApparelProperties_PawnCanWear_Postfix(ref bool __result, ApparelProperties __instance, Pawn pawn)

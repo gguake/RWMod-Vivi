@@ -20,6 +20,12 @@ namespace VVRace
             harmony.Patch(
                 original: AccessTools.Method(typeof(InstallationDesignatorDatabase), "NewDesignatorFor"),
                 prefix: new HarmonyMethod(typeof(ArtificialPlantPatch), nameof(InstallationDesignatorDatabase_NewDesignatorFor_Prefix)));
+
+            //harmony.Patch(
+            //    original: AccessTools.Method(typeof(GenConstruct), nameof(GenConstruct.CanPlaceBlueprintOver)),
+            //    prefix: new HarmonyMethod(typeof(ArtificialPlantPatch), nameof(GenConstruct_CanPlaceBlueprintOver_Postfix)));
+
+            Log.Message("!! [ViViRace] plant patch complete");
         }
 
         private static void GenSpawn_SpawningWipes_Postfix(ref bool __result, BuildableDef newEntDef, BuildableDef oldEntDef)
@@ -56,6 +62,17 @@ namespace VVRace
             }
 
             return true;
+        }
+
+        private static void GenConstruct_CanPlaceBlueprintOver_Postfix(ref bool __result, BuildableDef newDef, ThingDef oldDef)
+        {
+            if (!__result)
+            {
+                if (newDef is ThingDef newThingDef && typeof(ArtificialPlant).IsAssignableFrom(newThingDef.thingClass) && typeof(ArtificialPlantPot).IsAssignableFrom(oldDef.thingClass))
+                {
+                    __result = true;
+                }
+            }
         }
     }
 }
