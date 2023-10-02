@@ -53,14 +53,11 @@
       <ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">0.1</ToxicEnvironmentResistance>
     </equippedStatOffsets>
 
-    <costStuffCount>70</costStuffCount>
+    <costStuffCount>60</costStuffCount>
     <stuffCategories>
       <li>Fabric</li>
       <li>Leathery</li>
     </stuffCategories>
-    <costList>
-      <VV_Vivicream>10</VV_Vivicream>
-    </costList>
 
     <apparel Class="VVRace.ApparelPropertiesExt">
       <useWornGraphicMask>true</useWornGraphicMask>
@@ -112,14 +109,11 @@
       <ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">0.1</ToxicEnvironmentResistance>
     </equippedStatOffsets>
 
-    <costStuffCount>85</costStuffCount>
+    <costStuffCount>90</costStuffCount>
     <stuffCategories>
       <li>Fabric</li>
       <li>Leathery</li>
     </stuffCategories>
-    <costList>
-      <VV_Vivicream>10</VV_Vivicream>
-    </costList>
 
     <apparel Class="VVRace.ApparelPropertiesExt">
       <useWornGraphicMask>true</useWornGraphicMask>
@@ -174,9 +168,6 @@
       <li>Fabric</li>
       <li>Leathery</li>
     </stuffCategories>
-    <costList>
-      <VV_Vivicream>15</VV_Vivicream>
-    </costList>
 
     <apparel Class="VVRace.ApparelPropertiesExt">
       <useWornGraphicMask>true</useWornGraphicMask>
@@ -231,9 +222,6 @@
       <li>Fabric</li>
       <li>Leathery</li>
     </stuffCategories>
-    <costList>
-      <VV_Vivicream>30</VV_Vivicream>
-    </costList>
 
     <apparel Class="VVRace.ApparelPropertiesExt">
       <useWornGraphicMask>true</useWornGraphicMask>
@@ -257,7 +245,7 @@
     
     <recipeMaker>
       <skillRequirements>
-        <Crafting>4</Crafting>
+        <Crafting>5</Crafting>
       </skillRequirements>
       <researchPrerequisite>VV_AdvancedApparels</researchPrerequisite>
       <displayPriority>3301</displayPriority>

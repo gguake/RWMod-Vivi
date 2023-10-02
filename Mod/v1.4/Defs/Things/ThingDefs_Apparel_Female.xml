@@ -52,13 +52,10 @@
       <ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">0.1</ToxicEnvironmentResistance>
     </equippedStatOffsets>
 
-    <costStuffCount>60</costStuffCount>
+    <costStuffCount>65</costStuffCount>
     <stuffCategories>
       <li>Fabric</li>
     </stuffCategories>
-    <costList>
-      <VV_Vivicream>10</VV_Vivicream>
-    </costList>
 
     <apparel Class="VVRace.ApparelPropertiesExt">
       <useWornGraphicMask>true</useWornGraphicMask>

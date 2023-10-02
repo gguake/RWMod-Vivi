@@ -116,7 +116,7 @@
           <energy>10</energy>
         </energyConsumeRule>
         <energyGenerateRule Class="VVRace.EnergyRule_Temperature">
-          <activeTemperatureRange>30~120</activeTemperatureRange>
+          <activeTemperatureRange>32~120</activeTemperatureRange>
           <energyByTemperatureRange>10~120</energyByTemperatureRange>
         </energyGenerateRule>
       </li>
@@ -173,8 +173,9 @@
           <energy>10</energy>
         </energyConsumeRule>
         <energyGenerateRule Class="VVRace.EnergyRule_Temperature">
-          <activeTemperatureRange>-100~-10</activeTemperatureRange>
+          <activeTemperatureRange>-100~-12</activeTemperatureRange>
           <energyByTemperatureRange>10~120</energyByTemperatureRange>
+          <energyLerpReversed>true</energyLerpReversed>
         </energyGenerateRule>
       </li>
     </modExtensions>

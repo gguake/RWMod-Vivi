@@ -146,7 +146,7 @@ namespace VVRace
                 if (Disabled || IsFrozen || !pawn.DevelopmentalStage.Adult() || !(pawn is Vivi) || !pawn.IsColonistPlayerControlled || !pawn.Spawned || pawn.Downed || pawn.IsQuestLodger()) { return 0f; }
 
                 var mood = pawn.needs.mood.CurLevelPercentage;
-                float offset = -5f + (Vivi.IsRoyal ? Mathf.Lerp(-20f, 10f, mood) : Mathf.Lerp(-10f, 5f, mood));
+                float offset = (Vivi.IsRoyal ? Mathf.Lerp(-30f, 10f, mood) : Mathf.Lerp(-10f, 5f, mood));
                 if (offset < 0)
                 {
                     offset *= pawn.GetStatValue(StatDefOf.MentalBreakThreshold);

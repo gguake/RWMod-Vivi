@@ -139,6 +139,7 @@
     <Compile Include="Filth_Pollen.cs" />
     <Compile Include="Gather\GatherUtility.cs" />
     <Compile Include="TextureCache.cs" />
+    <Compile Include="Vivi\HediffComp_RoyalJelly.cs" />
     <Compile Include="Vivi\Need_Loyalty.cs" />
     <Compile Include="Vivi\Vivi.cs" />
     <Compile Include="ViviModsConfig.cs" />
