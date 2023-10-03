@@ -278,7 +278,7 @@
             <li>Hay</li>
           </thingDefs>
         </filter>
-        <count>35</count>
+        <count>75</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
@@ -287,7 +287,7 @@
     </defaultIngredientFilter>
     
     <products>
-      <VV_Fertilizer>50</VV_Fertilizer>
+      <VV_Fertilizer>40</VV_Fertilizer>
     </products>
   </RecipeDef>
 </Defs>

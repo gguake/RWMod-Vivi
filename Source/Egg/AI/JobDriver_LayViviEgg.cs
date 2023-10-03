@@ -12,7 +12,7 @@ namespace VVRace
 
         public override bool TryMakePreToilReservations(bool errorOnFailed)
         {
-            return pawn.CanReserveAndReach(Hatchery, PathEndMode.OnCell, Danger.Some);
+            return pawn.Reserve(Hatchery, job, errorOnFailed: errorOnFailed);
         }
 
         protected override IEnumerable<Toil> MakeNewToils()

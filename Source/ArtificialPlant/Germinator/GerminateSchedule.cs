@@ -28,7 +28,7 @@ namespace VVRace
         public int TicksToNextManageJob => Mathf.Max(_germinateNextManageTick - GenTicks.TicksGame, 0);
 
 
-        public GerminateScheduleDef CurrentManageScheduleDef => Stage == GerminateStage.GerminateInProgress ? _schedules[_currentScheduleIndex] : null;
+        public GerminateScheduleDef CurrentManageScheduleDef => Stage == GerminateStage.GerminateInProgress && _currentScheduleIndex < TotalScheduleCount ? _schedules[_currentScheduleIndex] : null;
 
         private GerminatorModExtension _defModExtension;
         public GerminatorModExtension GerminatorModExtension

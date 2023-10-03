@@ -223,6 +223,9 @@
             <defName>Asexual</defName>
           </li>
         </disallowedTraits>
+
+        <humanRecipeImport>true</humanRecipeImport>
+
       </generalSettings>
       
       <graphicPaths>
@@ -430,6 +433,9 @@
         <li>Human</li>
       </hediffGiverSets>
     </race>
+    
+		<recipes Inherit="False">
+		</recipes>
   </AlienRace.ThingDef_AlienRace>
 
   <AlienRace.RaceSettings>

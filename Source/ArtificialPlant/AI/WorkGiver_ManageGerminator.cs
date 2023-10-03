@@ -50,7 +50,7 @@ namespace VVRace
                     }
 
                     var def = germinator.CurrentSchedule.CurrentManageScheduleDef;
-                    if (def.germinateJob == null)
+                    if (def?.germinateJob == null)
                     {
                         return false;
                     }
@@ -94,7 +94,7 @@ namespace VVRace
 
                     case GerminateStage.GerminateInProgress:
                         var def = germinator.CurrentSchedule.CurrentManageScheduleDef;
-                        if (def.ingredients?.Count > 0)
+                        if (def?.ingredients?.Count > 0)
                         {
                             ingredient = TryFindManageIngredients(pawn, def);
                             if (ingredient != null)

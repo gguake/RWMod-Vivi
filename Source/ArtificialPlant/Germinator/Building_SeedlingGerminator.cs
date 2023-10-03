@@ -178,7 +178,7 @@ namespace VVRace
                                 if (sb.Length > 0) { sb.AppendLine(); }
                                 sb.Append(LocalizeTexts.InspectorViviGerminatorManageAvailable.Translate(schedule.CurrentScheduleNumber, currentScheduleDef.LabelCap));
 
-                                if (currentScheduleDef.ingredients?.Count > 0)
+                                if (currentScheduleDef?.ingredients?.Count > 0)
                                 {
                                     var sbIngredients = new StringBuilder();
                                     foreach (var tdc in currentScheduleDef.ingredients)
