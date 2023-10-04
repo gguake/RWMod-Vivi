@@ -19,7 +19,7 @@
     <value>
       <VV_MinGrowthPlantGatherable>0.7</VV_MinGrowthPlantGatherable>
       <VV_PlantGatherCooldown>1.4</VV_PlantGatherCooldown>
-      <VV_PlantHoneyGatherYield>1.8</VV_PlantHoneyGatherYield>
+      <VV_PlantHoneyGatherYield>1.15</VV_PlantHoneyGatherYield>
     </value>
   </Operation>
 
@@ -42,7 +42,7 @@
     <value>
       <VV_MinGrowthPlantGatherable>0.7</VV_MinGrowthPlantGatherable>
       <VV_PlantGatherCooldown>1.4</VV_PlantGatherCooldown>
-      <VV_PlantHoneyGatherYield>2.4</VV_PlantHoneyGatherYield>
+      <VV_PlantHoneyGatherYield>1.55</VV_PlantHoneyGatherYield>
     </value>
   </Operation>
 
@@ -65,7 +65,7 @@
     <value>
       <VV_MinGrowthPlantGatherable>0.9</VV_MinGrowthPlantGatherable>
       <VV_PlantGatherCooldown>2.6</VV_PlantGatherCooldown>
-      <VV_PlantHoneyGatherYield>1.4</VV_PlantHoneyGatherYield>
+      <VV_PlantHoneyGatherYield>0.9</VV_PlantHoneyGatherYield>
     </value>
   </Operation>
 
@@ -88,7 +88,7 @@
     <value>
       <VV_MinGrowthPlantGatherable>0.9</VV_MinGrowthPlantGatherable>
       <VV_PlantGatherCooldown>2.6</VV_PlantGatherCooldown>
-      <VV_PlantHoneyGatherYield>1.4</VV_PlantHoneyGatherYield>
+      <VV_PlantHoneyGatherYield>0.9</VV_PlantHoneyGatherYield>
     </value>
   </Operation>
 
@@ -111,7 +111,7 @@
     <value>
       <VV_MinGrowthPlantGatherable>0.9</VV_MinGrowthPlantGatherable>
       <VV_PlantGatherCooldown>1.4</VV_PlantGatherCooldown>
-      <VV_PlantHoneyGatherYield>1.2</VV_PlantHoneyGatherYield>
+      <VV_PlantHoneyGatherYield>0.8</VV_PlantHoneyGatherYield>
     </value>
   </Operation>
 </Patch>

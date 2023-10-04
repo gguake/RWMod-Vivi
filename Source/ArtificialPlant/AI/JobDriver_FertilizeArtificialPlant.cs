@@ -29,7 +29,7 @@ namespace VVRace
             this.FailOnDespawnedNullOrForbidden(TargetIndex.A);
             AddEndCondition(() => (!ArtificialPlant.IsFullEnergy) ? JobCondition.Ongoing : JobCondition.Succeeded);
             AddFailCondition(() => !job.playerForced && !ArtificialPlant.ShouldAutoFertilizeNowIgnoringEnergyPct);
-            AddFailCondition(() => !ArtificialPlant.FertilizeAutoActivated && !job.playerForced);
+            AddFailCondition(() => !ArtificialPlant.FertilizeAutoActivated);
 
             yield return Toils_General.DoAtomic(delegate
             {

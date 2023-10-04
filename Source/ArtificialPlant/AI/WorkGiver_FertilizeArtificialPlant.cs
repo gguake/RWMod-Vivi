@@ -14,12 +14,23 @@ namespace VVRace
 
         public override bool HasJobOnThing(Pawn pawn, Thing t, bool forced = false)
         {
-            if (!(t is ArtificialPlant plant && plant.FertilizeAutoActivated && plant.Energy <= plant.FertilizeAutoThreshold))
+            var plant = t as ArtificialPlant;
+            if (plant == null)
             {
                 return false;
             }
 
-            if (!t.Spawned)
+            if (!forced && !plant.ShouldAutoFertilizeNowIgnoringEnergyPct)
+            {
+                return false;
+            }
+
+            if (!plant.FertilizeAutoActivated || plant.Energy > plant.FertilizeAutoThreshold)
+            {
+                return false;
+            }
+
+            if (!t.Spawned || t.IsForbidden(pawn))
             {
                 return false;
             }
