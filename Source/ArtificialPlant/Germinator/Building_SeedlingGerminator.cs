@@ -516,7 +516,7 @@ namespace VVRace
                 _productRemainedCount = resultThingDef.IsPlant ? Rand.Range(resultCount * 2, resultCount * 3) : resultCount;
 
                 Messages.Message(
-                    LocalizeTexts.MessageGerminateSeedlingSuccess.Translate(resultThingDef.LabelCap, resultCount),
+                    LocalizeTexts.MessageGerminateSeedlingSuccess.Translate(resultThingDef.LabelCap, _productRemainedCount),
                     this,
                     MessageTypeDefOf.PositiveEvent);
             }

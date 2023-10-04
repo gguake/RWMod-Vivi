@@ -163,7 +163,7 @@ namespace VVRace
                 PathEndMode.ClosestTouch,
                 TraverseParms.For(pawn),
                 9999f,
-                thing => !thing.IsForbidden(pawn) && pawn.CanReserve(thing));
+                thing => !thing.IsForbidden(pawn) && pawn.CanReserve(thing) && thing.stackCount >= def.ingredients[0].count);
 
             if (target != null)
             {

@@ -122,7 +122,7 @@
         <capacities>
           <li>Blunt</li>
         </capacities>
-        <power>11</power>
+        <power>16</power>
         <cooldownTime>2</cooldownTime>
       </li>
     </tools>
@@ -297,8 +297,8 @@
         <capacities>
           <li>Stab</li>
         </capacities>
-        <power>15</power>
-        <armorPenetration>0.12</armorPenetration>
+        <power>17</power>
+        <armorPenetration>0.15</armorPenetration>
         <cooldownTime>1.8</cooldownTime>
         <extraMeleeDamages>
           <li>
@@ -346,7 +346,7 @@
     <projectile>
       <damageDef>VV_RangedToxicStab</damageDef>
       <damageAmountBase>22</damageAmountBase>
-      <stoppingPower>2.9</stoppingPower>
+      <stoppingPower>3.9</stoppingPower>
       <armorPenetrationBase>0.24</armorPenetrationBase>
       <speed>21</speed>
     </projectile>
