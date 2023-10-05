@@ -12,6 +12,11 @@ namespace VVRace
         {
             if (operand != null)
             {
+                if (opCode == OpCodes.Ldloc_S)
+                {
+                    return instructions.FirstIndexOf(v => v.opcode == opCode && v.operand is LocalBuilder local && local.LocalIndex == (int)operand);
+                }
+
                 return instructions.FirstIndexOf(v => v.opcode == opCode && v.OperandIs(operand));
             }
             else

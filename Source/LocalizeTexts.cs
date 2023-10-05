@@ -49,6 +49,8 @@
         public const string CommandCancelGerminateScheduleDesc = "VV_CommandCancelGerminateScheduleDesc";
         public const string CommandCanWithdrawProduct = "VV_CommandCanWithdrawProduct";
         public const string CommandCanWithdrawProductDesc = "VV_CommandCanWithdrawProductDesc";
+        public const string CommandChangeGatherRadius = "VV_CommandChangeGatherRadius";
+        public const string CommandChangeGatherRadiusDesc = "VV_CommandChangeGatherRadiusDesc";
 
         public const string JobFailReasonNoHarvestablePlants = "VV_JobFailReasonNoHarvestablePlants";
         public const string JobFailReasonNoHarvestablePollenFilths = "VV_JobFailReasonNoHarvestablePollenFilths";
@@ -67,13 +69,16 @@
         public const string MessageGerminateSeedlingSuccess = "VV_MessageGerminateSeedlingSuccess";
         public const string MessageGerminateSeedlingFailed = "VV_MessageGerminateSeedlingFailed";
 
+        public const string ITab_GatherWorkerTable_TabLabel = "VV_ITab_GatherWorkerTable_TabLabel";
+        public const string ITab_GatherWorkerTable_GatherRadiusSlider = "VV_ITab_GatherWorkerTable_GatherRadiusSlider";
+
         public const string ViviGerminateWindowJobTab = "ViviGerminateWindowJobTab";
         public const string ViviGerminateWindowScheduleTab = "ViviGerminateWindowScheduleTab";
         public const string ViviGerminateWindowScheduleTabTip = "ViviGerminateWindowScheduleTabTip";
         public const string ViviGerminateWindowScheduleDesc = "ViviGerminateWindowScheduleDesc";
-        public const string ViviGermianteWindowIngredientHeader = "ViviGermianteWindowIngredientHeader";
-        public const string ViviGermianteWindowTotalWork = "ViviGermianteWindowTotalWork";
-        public const string ViviGermianteWindowBonusSummaryHeader = "ViviGermianteWindowBonusSummaryHeader";
+        public const string ViviGerminateWindowIngredientHeader = "ViviGerminateWindowIngredientHeader";
+        public const string ViviGerminateWindowTotalWork = "ViviGerminateWindowTotalWork";
+        public const string ViviGerminateWindowBonusSummaryHeader = "ViviGerminateWindowBonusSummaryHeader";
         public const string ViviGerminateWindowBonusCount = "ViviGerminateWindowBonusCount";
         public const string ViviGerminateWindowBonusSuccessChance = "ViviGerminateWindowBonusSuccessChance";
         public const string ViviGerminateWindowBonusRareChance = "ViviGerminateWindowBonusRareChance";

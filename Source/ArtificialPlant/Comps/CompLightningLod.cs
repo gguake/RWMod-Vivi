@@ -23,7 +23,7 @@ namespace VVRace
             plant.Energy >= Props.energyConditionRange.min && 
             plant.Energy < Props.energyConditionRange.max;
 
-        public void OnThunderStrike()
+        public void OnLightningStrike()
         {
             if (parent is ArtificialPlant plant)
             {

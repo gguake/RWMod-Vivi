@@ -302,6 +302,7 @@
 
     <inspectorTabs>
       <li>ITab_Bills</li>
+      <li>VVRace.ITab_GatherWorkTable</li>
     </inspectorTabs>
 
     <building>
@@ -371,6 +372,7 @@
 
     <inspectorTabs>
       <li>ITab_Bills</li>
+      <li>VVRace.ITab_GatherWorkTable</li>
     </inspectorTabs>
     <thingCategories>
       <li>VV_BuildingsVivi</li>
@@ -396,8 +398,6 @@
     <researchPrerequisites>
       <li>VV_BasicGathering</li>
     </researchPrerequisites>
-
-    <specialDisplayRadius>11.9</specialDisplayRadius>
   </ThingDef>
 
   <!-- 비비 가공 작업대 -->
@@ -536,6 +536,10 @@
       <VV_Fertilizer>40</VV_Fertilizer>
     </costList>
     
+    <thingCategories>
+      <li>VV_BuildingsVivi</li>
+    </thingCategories>
+    <minifiedDef>MinifiedThing</minifiedDef>
     <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
     <building>
       <paintable>true</paintable>

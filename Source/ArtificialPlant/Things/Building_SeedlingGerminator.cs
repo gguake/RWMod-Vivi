@@ -75,7 +75,7 @@ namespace VVRace
         }
 
         public bool CanWithdrawProduct => _canWithdrawProduct; 
-        private bool _canWithdrawProduct = true;
+        private bool _canWithdrawProduct = false;
 
         public ThingDef ProductThingDef => _productThingDef;
         private ThingDef _productThingDef;
@@ -464,7 +464,7 @@ namespace VVRace
 
         public void Clear()
         {
-            _canWithdrawProduct = true;
+            _canWithdrawProduct = false;
 
             _productThingDef = null;
             _productRemainedCount = 0;

@@ -4,7 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
+using UnityEngine;
 using Verse;
+using Verse.Noise;
 
 namespace VVRace
 {
@@ -31,6 +33,10 @@ namespace VVRace
             harmony.Patch(
                 original: AccessTools.Method(typeof(Alert_NeedBatteries), "NeedBatteries"),
                 postfix: new HarmonyMethod(typeof(ArtificialPlantPatch), nameof(Alert_NeedBatteries_NeedBatteries_Postfix)));
+
+            harmony.Patch(
+                original: AccessTools.Method(typeof(WeatherEvent_LightningStrike), nameof(WeatherEvent_LightningStrike.FireEvent)),
+                transpiler: new HarmonyMethod(typeof(ArtificialPlantPatch), nameof(WeatherEvent_LightningStrike_FireEvent_Transpiler)));
 
             harmony.Patch(
                 original: AccessTools.Method(typeof(WeatherEvent_LightningStrike), nameof(WeatherEvent_LightningStrike.DoStrike)),
@@ -94,67 +100,72 @@ namespace VVRace
             }
         }
 
-        private static Thing RelocateLightningStrikeLocation(ref IntVec3 loc, Map map)
+        private static IntVec3 RelocateLightningStrike(IntVec3 strikeLoc, Map map)
         {
-            if (loc.IsValid)
+            if (!strikeLoc.IsValid)
             {
-                return null;
+                var candidates = map.listerBuildings.allBuildingsColonist.Where(v => v.TryGetComp<CompLightningLod>()?.Active ?? false).ToList();
+                if (candidates.Count > 0)
+                {
+                    return candidates.RandomElement().Position;
+                }
             }
 
-            var candidates = map.listerBuildings.allBuildingsColonist.Where(v => v.TryGetComp<CompLightningLod>()?.Active ?? false).ToList();
-            if (candidates.Count > 0)
-            {
-                return candidates.RandomElement();
-            }
+            return strikeLoc;
+        }
 
-            return null;
+        private static IEnumerable<CodeInstruction> WeatherEvent_LightningStrike_FireEvent_Transpiler(IEnumerable<CodeInstruction> codeInstructions)
+        {
+            var instructions = codeInstructions.ToList();
+
+            var injections = new List<CodeInstruction>()
+            {
+                new CodeInstruction(OpCodes.Ldarg_0),
+                new CodeInstruction(OpCodes.Ldarg_0),
+                new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(WeatherEvent_LightningStrike), "strikeLoc")),
+                new CodeInstruction(OpCodes.Ldarg_0),
+                new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(WeatherEvent), "map")),
+                new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(ArtificialPlantPatch), nameof(RelocateLightningStrike))),
+                new CodeInstruction(OpCodes.Stfld, AccessTools.Field(typeof(WeatherEvent_LightningStrike), "strikeLoc")),
+            };
+
+            instructions.InsertRange(0, injections);
+            return instructions;
+        }
+
+        private static CompLightningLod FindLightningBolt(Map map, IntVec3 loc)
+        {
+            if (!loc.IsValid) { return null; }
+
+            var thing = loc.GetFirstThingWithComp<CompLightningLod>(map);
+            return thing.TryGetComp<CompLightningLod>();
         }
 
         private static IEnumerable<CodeInstruction> WeatherEvent_LightningStrike_DoStrike_Transpiler(IEnumerable<CodeInstruction> codeInstructions, ILGenerator ilGenerator)
         {
             var instructions = codeInstructions.ToList();
 
-            var localRelocatedThingIndex = ilGenerator.DeclareLocal(typeof(Thing)).LocalIndex;
-            var injectPart1Index = instructions.FirstIndexOfInstruction(
-                OpCodes.Call, 
-                AccessTools.Method(typeof(Verse.Sound.SoundStarter), nameof(Verse.Sound.SoundStarter.PlayOneShotOnCamera)));
+            var localLightningBolt = ilGenerator.DeclareLocal(typeof(CompLightningLod));
 
-            var injectionPart1 = new List<CodeInstruction>()
+            var doExplosionLabel = ilGenerator.DefineLabel();
+            var skipExplosionLabel = ilGenerator.DefineLabel();
+
+            var injectionIndex = instructions.FirstIndexOfInstruction(OpCodes.Call, operand: AccessTools.Method(typeof(GridsUtility), nameof(GridsUtility.Fogged), new Type[] { typeof(IntVec3), typeof(Map) })) + 2;
+            var injection = new List<CodeInstruction>()
             {
-                new CodeInstruction(OpCodes.Ldarga_S, 0),
                 new CodeInstruction(OpCodes.Ldarg_1),
-                new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(ArtificialPlantPatch), nameof(RelocateLightningStrikeLocation))),
-                new CodeInstruction(OpCodes.Stloc_S, localRelocatedThingIndex),
+                new CodeInstruction(OpCodes.Ldarg_0),
+                new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(ArtificialPlantPatch), nameof(FindLightningBolt))),
+                new CodeInstruction(OpCodes.Dup),
+                new CodeInstruction(OpCodes.Brfalse_S, doExplosionLabel),
+                new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(CompLightningLod), nameof(CompLightningLod.OnLightningStrike))),
+                new CodeInstruction(OpCodes.Br_S, skipExplosionLabel),
+                new CodeInstruction(OpCodes.Pop).WithLabels(doExplosionLabel),
             };
+            instructions.InsertRange(injectionIndex, injection);
 
-            if (injectPart1Index < 0) { throw new InvalidOperationException($"failed to find injection point for WeatherEvent_LightningStrike_DoStrike_Transpiler.injectPart1Index"); }
-            instructions.InsertRange(injectPart1Index + 1, injectionPart1);
-
-            var conditionalSkipLabel = ilGenerator.DefineLabel();
-            var explosionSkipLabel = ilGenerator.DefineLabel();
-            var injectPart2Index = instructions.FirstIndexOfInstruction(
-                OpCodes.Call, 
-                AccessTools.Method(typeof(GridsUtility), nameof(GridsUtility.Fogged), new Type[] { typeof(IntVec3), typeof(Map) }));
-
-            var explosionIndex = instructions.FirstIndexOfInstruction(OpCodes.Call, AccessTools.Method(typeof(GenExplosion), nameof(GenExplosion.DoExplosion)));
-
-            var injectionPart2 = new List<CodeInstruction>()
-            {
-                new CodeInstruction(OpCodes.Ldloc_S, localRelocatedThingIndex),
-                new CodeInstruction(OpCodes.Brfalse_S, conditionalSkipLabel),
-                new CodeInstruction(OpCodes.Ldloc_S, localRelocatedThingIndex),
-                new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(ThingCompUtility), nameof(ThingCompUtility.TryGetComp)).MakeGenericMethod(new Type[] { typeof(CompLightningLod) })),
-                new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(CompLightningLod), nameof(CompLightningLod.OnThunderStrike))),
-                new CodeInstruction(OpCodes.Br_S, explosionSkipLabel),
-            };
-
-            if (injectPart2Index < 0) { throw new InvalidOperationException($"failed to find injection point for WeatherEvent_LightningStrike_DoStrike_Transpiler.injectPart2Index"); }
-            if (explosionIndex < 0) { throw new InvalidOperationException($"failed to find injection point for WeatherEvent_LightningStrike_DoStrike_Transpiler.explosionIndex"); }
-
-            instructions[injectPart2Index + 2].labels.Add(conditionalSkipLabel);
-            instructions[explosionIndex + 1].labels.Add(explosionSkipLabel);
-
-            instructions.InsertRange(injectPart2Index + 2, injectionPart2);
+            var skipExplosionIndex = instructions.FirstIndexOfInstruction(OpCodes.Call, operand: AccessTools.Method(typeof(GenExplosion), nameof(GenExplosion.DoExplosion))) + 1;
+            instructions[skipExplosionIndex].labels.Add(skipExplosionLabel);
 
             return instructions;
         }

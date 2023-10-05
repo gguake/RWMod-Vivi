@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Verse;
+using static HarmonyLib.Code;
 
 namespace VVRace
 {
@@ -62,11 +63,34 @@ namespace VVRace
         }
     }
 
+    [StaticConstructorOnStartup]
     public class Building_GatherWorkTable : Building_WorkTable
     {
-        public const float gatherRadius = 11.9f;
+        public const float GatherMaxRadius = 14.9f;
+        public const float GatherMinRadius = 1.9f;
+        public const float GatherDefaultRadius = 11.9f;
 
+        public float GatherRadius
+        {
+            get
+            {
+                return _gatherRadius;
+            }
+            set
+            {
+                _gatherRadius = Mathf.Clamp(value, GatherMinRadius, GatherMaxRadius);
+            }
+        }
+
+        private float _gatherRadius = GatherDefaultRadius;
         private GatherableCache _gatherableCache;
+
+        public override void ExposeData()
+        {
+            base.ExposeData();
+
+            Scribe_Values.Look(ref _gatherRadius, "gatherRadius", GatherDefaultRadius);
+        }
 
         // 맵별로 모든 채집 건물은 캐시를 공유한다
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
@@ -87,6 +111,12 @@ namespace VVRace
             }
         }
 
+        public override void DrawExtraSelectionOverlays()
+        {
+            GenDraw.DrawRadiusRing(Position, _gatherRadius);
+
+        }
+
         public IEnumerable<Thing> GetGatherableCandidates(RecipeDef_Gathering gatheringRecipeDef)
         {
             var buildingRegion = (def.hasInteractionCell ? InteractionCell : Position).GetRegion(Map);
@@ -95,12 +125,12 @@ namespace VVRace
             {
                 var extentsClose = r.extentsClose;
                 int dx = Mathf.Abs(Position.x - Mathf.Max(extentsClose.minX, Mathf.Min(Position.x, extentsClose.maxX)));
-                if (dx > gatherRadius) { return false; }
+                if (dx > _gatherRadius) { return false; }
 
                 int dz = Mathf.Abs(Position.z - Mathf.Max(extentsClose.minZ, Mathf.Min(Position.z, extentsClose.maxZ)));
-                if (dz > gatherRadius) { return false; }
+                if (dz > _gatherRadius) { return false; }
 
-                return (dx * dx + dz * dz) <= gatherRadius * gatherRadius;
+                return (dx * dx + dz * dz) <= _gatherRadius * _gatherRadius;
             };
 
             var gatherTargets = new HashSet<Thing>();

@@ -282,6 +282,11 @@
           <li>BodyType</li>
         </blackEndoCategories>
 
+        <weaponList>
+          <li>VV_RepeatingCrossbow</li>
+          <li>VV_RitualLance</li>
+        </weaponList>
+
         <apparelList>
           <li>VV_BasicWorkerCostume</li>
           <li>VV_WorkerUniformDress</li>
@@ -436,6 +441,8 @@
     
 		<recipes Inherit="False">
 		</recipes>
+
+    <comps Inherit="False" />
   </AlienRace.ThingDef_AlienRace>
 
   <AlienRace.RaceSettings>

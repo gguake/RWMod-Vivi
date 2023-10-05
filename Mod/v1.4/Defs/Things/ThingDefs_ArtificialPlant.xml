@@ -108,6 +108,8 @@
     <statBases>
       <MarketValue>140</MarketValue>
       <MaxHitPoints>40</MaxHitPoints>
+      <Beauty>10</Beauty>
+      <BeautyOutdoors>10</BeautyOutdoors>
 
       <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
       <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
@@ -160,6 +162,8 @@
     <statBases>
       <MarketValue>140</MarketValue>
       <MaxHitPoints>40</MaxHitPoints>
+      <Beauty>10</Beauty>
+      <BeautyOutdoors>10</BeautyOutdoors>
       
       <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
       <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
@@ -215,6 +219,8 @@
     <statBases>
       <MarketValue>240</MarketValue>
       <MaxHitPoints>100</MaxHitPoints>
+      <Beauty>10</Beauty>
+      <BeautyOutdoors>10</BeautyOutdoors>
 
       <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
       <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
@@ -290,6 +296,8 @@
     <statBases>
       <MarketValue>180</MarketValue>
       <MaxHitPoints>70</MaxHitPoints>
+      <Beauty>10</Beauty>
+      <BeautyOutdoors>10</BeautyOutdoors>
       
       <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
       <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
@@ -308,8 +316,8 @@
         <transmitsPower>true</transmitsPower>
       </li>
       <li Class="VVRace.CompProperties_LightningLod">
-        <energyConditionRange>0~100</energyConditionRange>
-        <energyGain>400</energyGain>
+        <energyConditionRange>250~500</energyConditionRange>
+        <energyGain>500</energyGain>
       </li>
     </comps>
 
@@ -321,8 +329,8 @@
       <li Class="VVRace.ArtificialPlantModExtension">
         <germinateWeight>700</germinateWeight>
 
-        <energyCapacity>400</energyCapacity>
-        <zeroEnergyDamageByChance>1~3</zeroEnergyDamageByChance>
+        <energyCapacity>500</energyCapacity>
+        <zeroEnergyDamageByChance>1~1</zeroEnergyDamageByChance>
 
         <energyConsumeRule Class="VVRace.EnergyRule_Constant">
           <energy>100</energy>
@@ -346,6 +354,8 @@
     <statBases>
       <MarketValue>400</MarketValue>
       <MaxHitPoints>40</MaxHitPoints>
+      <Beauty>10</Beauty>
+      <BeautyOutdoors>10</BeautyOutdoors>
       <Flammability>0</Flammability>
       
       <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
@@ -405,6 +415,8 @@
     <statBases>
       <MarketValue>180</MarketValue>
       <MaxHitPoints>70</MaxHitPoints>
+      <Beauty>10</Beauty>
+      <BeautyOutdoors>10</BeautyOutdoors>
       
       <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
       <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
@@ -467,6 +479,8 @@
     <statBases>
       <MarketValue>400</MarketValue>
       <MaxHitPoints>120</MaxHitPoints>
+      <Beauty>12</Beauty>
+      <BeautyOutdoors>12</BeautyOutdoors>
       
       <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
       <VV_PlantHoneyGatherYield>3.2</VV_PlantHoneyGatherYield>

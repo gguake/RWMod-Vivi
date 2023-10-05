@@ -98,7 +98,7 @@ namespace VVRace
                 return false;
             }
 
-            if (Props.explosiveDamageDef != null)
+            if (Props.explosiveEffecterDef != null)
             {
                 var effecter = Props.explosiveEffecterDef.Spawn();
                 effecter.Trigger(new TargetInfo(parent.Position, parent.Map), new TargetInfo(parent.Position, parent.Map));

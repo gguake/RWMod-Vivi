@@ -258,7 +258,7 @@ namespace VVRace
             }
 
             var rectIngredientArea = new RectDivider(rect.NewCol(180f), 3459831, new Vector2(4f, 4f));
-            Widgets.Label(rectIngredientArea.NewRow(24f), LocalizeTexts.ViviGermianteWindowIngredientHeader.Translate());
+            Widgets.Label(rectIngredientArea.NewRow(24f), LocalizeTexts.ViviGerminateWindowIngredientHeader.Translate());
 
             foreach (var kv in dictIngredients)
             {
@@ -268,7 +268,7 @@ namespace VVRace
             }
 
             var rectBonusSummaryArea = new RectDivider(rect, 13468279, new Vector2(4f, 4f));
-            Widgets.Label(rectBonusSummaryArea.NewRow(26), LocalizeTexts.ViviGermianteWindowTotalWork.Translate(totalWorkAmount));
+            Widgets.Label(rectBonusSummaryArea.NewRow(26), LocalizeTexts.ViviGerminateWindowTotalWork.Translate(totalWorkAmount));
 
             var bonusCount = _schedule.ExpectedGerminateBonusCount;
             var bonusSuccessChance = _schedule.ExpectedGerminateBonusSuccessChance;
@@ -276,7 +276,7 @@ namespace VVRace
             
             if (bonusCount != 0 || bonusSuccessChance != 1f || bonusRareChance != 1f)
             {
-                Widgets.Label(rectBonusSummaryArea.NewRow(24f), LocalizeTexts.ViviGermianteWindowBonusSummaryHeader.Translate());
+                Widgets.Label(rectBonusSummaryArea.NewRow(24f), LocalizeTexts.ViviGerminateWindowBonusSummaryHeader.Translate());
                 if (bonusCount != 0)
                 {
                     var rectLabel = new RectDivider(rectBonusSummaryArea.NewRow(24f), 78484321, new Vector2(2f, 0f));

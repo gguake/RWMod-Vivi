@@ -19,7 +19,7 @@ namespace VVRace
                 {
                     foreach (var building in map.listerThings.ThingsInGroup(ThingRequestGroup.BuildingArtificial))
                     {
-                        if (building is ArtificialPlant plant && plant.EnergyChargeRatio <= 0.01f)
+                        if (building is ArtificialPlant plant && plant.EnergyChargeRatio <= 0.05f)
                         {
                             dangerTargets.Add(building);
                         }

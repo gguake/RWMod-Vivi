@@ -10,13 +10,12 @@
 
   <VV_Thunderbud.label>벼락봉오리</VV_Thunderbud.label>
   <VV_Thunderbud.description>내부에 전력을 저장할수 있는 고대의 꽃입니다. 전선을 연결할 수 있으며 충전된 정도에 비례해 에너지를 생산합니다.
-
-\n\n외부의 충격을 받거나 메카노이드가 접근하면 내부의 전압이 불안정해져 주변에 막대한 전자기 펄스를 발생시키고 에너지가 방전됩니다.
+\n외부의 충격을 받거나 메카노이드가 접근하면 내부의 전압이 불안정해져 주변에 막대한 전자기 펄스를 발생시키고 에너지가 방전됩니다.
 \n(주의: 아군 메카노이드에도 반응할 수 있음)</VV_Thunderbud.description>
 
   <VV_Voltpetals.label>벼락꽃</VV_Voltpetals.label>
   <VV_Voltpetals.description>보유한 에너지에 비례해 전력을 생산하는 고대의 꽃입니다.
-\n번개가 치는날에 에너지가 적은 상태라면 번개를 대신 맞고 에너지가 완전히 충전됩니다.</VV_Voltpetals.description>
+\n번개가 치는 날씨에 에너지가 충분한 경우 번개를 유도하는 피뢰침 역할을 할 수 있으며 번개를 흡수해 에너지로 전환합니다.</VV_Voltpetals.description>
 
   <VV_Waterdrops.label>물방울꽃</VV_Waterdrops.label>
   <VV_Waterdrops.description>주변의 물에서 에너지를 생산하는 고대의 꽃입니다. 물 위에도 재배가 가능하며 인접한 물 타일이 많을수록 더 많은 에너지를 생산합니다.

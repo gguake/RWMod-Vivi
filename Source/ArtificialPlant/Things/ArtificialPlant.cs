@@ -241,7 +241,7 @@ namespace VVRace
 
             if (Spawned)
             {
-                var energyFlux = EnergyFlux + EnergyFluxNetwork.LastDistributedEnergy;
+                var energyFlux = EnergyFlux + EnergyFluxNetwork.LastDistributedEnergy * 60000f;
                 if (energyFlux != 0)
                 {
                     sb.Append(" ");

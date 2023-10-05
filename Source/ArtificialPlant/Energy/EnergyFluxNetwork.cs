@@ -92,7 +92,7 @@ namespace VVRace
                             node.energy = Mathf.Clamp(node.energy + divided, 0f, plant.ArtificialPlantModExtension.energyCapacity);
                         }
 
-                        LastDistributedEnergy = divided;
+                        LastDistributedEnergy = divided / (tick - _lastRefreshTick);
                     }
                 }
 

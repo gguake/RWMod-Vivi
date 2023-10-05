@@ -40,7 +40,9 @@
   <VV_CommandCancelGerminateScheduleDesc>현재 예약되어있거나 진행중인 모종 배양 작업을 취소합니다.</VV_CommandCancelGerminateScheduleDesc>
   <VV_CommandCanWithdrawProduct>모종 포장 허용</VV_CommandCanWithdrawProduct>
   <VV_CommandCanWithdrawProductDesc>배양이 완료된 모종을 포장하는 작업을 진행할지 설정합니다.</VV_CommandCanWithdrawProductDesc>
-  
+  <VV_CommandChangeGatherRadius>채집 범위 변경</VV_CommandChangeGatherRadius>
+  <VV_CommandChangeGatherRadiusDesc>채집 작업을 진행할 범위를 변경합니다.</VV_CommandChangeGatherRadiusDesc>
+
   <VV_JobFailReasonNoHarvestablePlants>주변에 채집 가능한 식물 없음</VV_JobFailReasonNoHarvestablePlants>
   <VV_JobFailReasonNoHarvestablePollenFilths>주변에 수집 가능한 꽃가루 없음</VV_JobFailReasonNoHarvestablePollenFilths>
   <VV_JobFailReasonNotVivi>비비가 아님</VV_JobFailReasonNotVivi>

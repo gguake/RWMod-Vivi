@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
+  <VV_ViviCreamFloor.label>비비 크림 바닥</VV_ViviCreamFloor.label>
+  <VV_ViviCreamFloor.description>비비 크림을 바닥에 발라 만든 바닥입니다. 흙길보다 걷기 불편하지만 빠르게 만들수 있고 흙먼지가 생기지는 않습니다.
+\n다듬어서 벌집 타일로 만들 수 있지만 처음부터 밀랍을 사용하는것보다 효율이 좋지 않습니다.</VV_ViviCreamFloor.description>
+
   <VV_HoneycombTile.label>비비 벌집 타일</VV_HoneycombTile.label>
   <VV_HoneycombTile.description>밀랍으로 만든 육각 타일로 채워진 바닥입니다. 걷기 편하면서 깔끔하고 보기 좋지만 밀랍을 작은 타일로 가공해서 채워넣어야 하기에 만드는데 많은 시간이 걸립니다. 특유의 구조로 인해 불안정한 지반에도 건설할 수 있습니다.</VV_HoneycombTile.description>
 

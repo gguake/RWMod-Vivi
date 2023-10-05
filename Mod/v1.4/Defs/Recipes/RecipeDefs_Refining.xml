@@ -225,7 +225,7 @@
         <li>CorpsesMechanoid</li>
       </disallowedCategories>
       <specialFiltersToAllow>
-        <li>VV_AllowDessicated</li>
+        <li>AllowRotten</li>
       </specialFiltersToAllow>
       <specialFiltersToDisallow>
         <li>AllowFresh</li>
@@ -239,12 +239,12 @@
         <li>AllowCorpsesColonist</li>
         <li MayRequire="Ludeon.RimWorld.Ideology">AllowCorpsesSlave</li>
         <li>AllowCorpsesStranger</li>
-        <li>VV_AllowDessicated</li>
+        <li>AllowRotten</li>
       </specialFiltersToAllow>
     </defaultIngredientFilter>
     
     <products>
-      <VV_Fertilizer>40</VV_Fertilizer>
+      <VV_Fertilizer>25</VV_Fertilizer>
     </products>
   </RecipeDef>
   

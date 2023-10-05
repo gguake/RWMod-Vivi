@@ -10,7 +10,7 @@ namespace VVRace
         {
             if (billGiver.Spawned && billGiver is Building_GatherWorkTable workTable)
             {
-                var radius = Building_GatherWorkTable.gatherRadius;
+                var radius = workTable.GatherRadius;
                 if (workTable.Position.InHorDistOf(target.Position, radius))
                 {
                     return true;

@@ -1,6 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
   <TerrainDef ParentName="FloorBase">
+    <defName>VV_ViviCreamFloor</defName>
+    <label>vivi cream</label>
+    <description>.</description>
+    <texturePath>Terrain/Surfaces/VV_Cream</texturePath>
+    <color>(1.0, 0.898, 0.8)</color>
+    <edgeType>Hard</edgeType>
+    <renderPrecedence>70</renderPrecedence>
+    <isPaintable>true</isPaintable>
+    <takeSplashes>true</takeSplashes>
+
+    <pathCost>4</pathCost>
+    <uiOrder>2020</uiOrder>
+    <statBases>
+      <WorkToBuild>100</WorkToBuild>
+      <Cleanliness>-0.5</Cleanliness>
+      <Flammability>0.9</Flammability>
+    </statBases>
+
+    <constructEffect>ConstructDirt</constructEffect>
+    <costList>
+      <VV_Vivicream>5</VV_Vivicream>
+    </costList>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <smoothedTerrain>VV_HoneycombTile</smoothedTerrain>
+
+    <affordances>
+      <li>SmoothableStone</li>
+    </affordances>
+
+    <designationCategory>VV_Bulidings</designationCategory>
+    <designationHotKey>Misc1</designationHotKey>
+
+    <researchPrerequisites>
+      <li>VV_BasicInfra</li>
+    </researchPrerequisites>
+  </TerrainDef>
+
+  <TerrainDef ParentName="FloorBase">
     <defName>VV_HoneycombTile</defName>
     <label>vivi honeycomb tile</label>
     <description>.</description>
@@ -10,12 +48,13 @@
     <renderPrecedence>70</renderPrecedence>
     <isPaintable>true</isPaintable>
 
-    <uiOrder>2020</uiOrder>
+    <uiOrder>2021</uiOrder>
     <statBases>
-      <WorkToBuild>1600</WorkToBuild>
+      <WorkToBuild>300</WorkToBuild>
       <Beauty>1</Beauty>
       <CleaningTimeFactor>0.7</CleaningTimeFactor>
       <FilthMultiplier>0.9</FilthMultiplier>
+      <Flammability>0.9</Flammability>
     </statBases>
 
     <constructEffect>ConstructWood</constructEffect>
@@ -25,7 +64,7 @@
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
 
     <designationCategory>VV_Bulidings</designationCategory>
-    <designationHotKey>Misc1</designationHotKey>
+    <designationHotKey>Misc2</designationHotKey>
     <constructionSkillPrerequisite>3</constructionSkillPrerequisite>
 
     <researchPrerequisites>
@@ -50,7 +89,8 @@
     <Beauty>1</Beauty>
     <Cleanliness>0.7</Cleanliness>
     <CleaningTimeFactor>0.6</CleaningTimeFactor>
-    <FilthMultiplier>0.9</FilthMultiplier>
+    <FilthMultiplier>0.8</FilthMultiplier>
+    <Flammability>1.2</Flammability>
   </statBases>
 
   <constructEffect>ConstructWood</constructEffect>

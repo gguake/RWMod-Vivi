@@ -67,7 +67,7 @@ namespace VVRace
             instructions.InsertRange(targetValueIndex, new List<CodeInstruction>()
             {
                 new CodeInstruction(OpCodes.Br_S, label2),
-                new CodeInstruction(OpCodes.Ldc_R4, 250f).WithLabels(label1),
+                new CodeInstruction(OpCodes.Ldc_R4, 2.5f).WithLabels(label1),
             });
 
             return instructions;
