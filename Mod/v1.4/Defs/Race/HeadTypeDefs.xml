@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <HeadTypeDef Abstract="True" Name="VV_HeadBase" ParentName="AverageBase">
+  <HeadTypeDef Abstract="True" Name="VV_HeadBase">
+    <hairMeshSize>(1.5, 1.5)</hairMeshSize>
+    <beardMeshSize>(1.5, 1.5)</beardMeshSize>
     <gender>None</gender>
   </HeadTypeDef>
   
