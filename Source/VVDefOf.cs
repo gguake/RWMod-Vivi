@@ -89,6 +89,7 @@ namespace VVRace
     public static class VVPawnKindDefOf
     {
         public static PawnKindDef VV_PlayerVivi;
+        public static PawnKindDef VV_PlayerExiledRoyalVivi;
     }
 
     [DefOf]

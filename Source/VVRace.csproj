@@ -73,10 +73,13 @@
     <Compile Include="ArtificialPlant\AI\JobDriver_HaulAndManageSeedling.cs" />
     <Compile Include="ArtificialPlant\AI\JobDriver_PackingSeedling.cs" />
     <Compile Include="ArtificialPlant\Alert_LowEnergyArtificialPlant.cs" />
+    <Compile Include="ArtificialPlant\Comps\CompLightningLod.cs" />
+    <Compile Include="ArtificialPlant\Comps\CompSensorExplosive.cs" />
     <Compile Include="ArtificialPlant\Comps\CompTerraformer.cs" />
+    <Compile Include="ArtificialPlant\SensorWorker.cs" />
     <Compile Include="ArtificialPlant\Things\ArtificialPlantPot.cs" />
     <Compile Include="ArtificialPlant\ArtificialPlantModExtension.cs" />
-    <Compile Include="ArtificialPlant\Command_SetFertilizeAutoThreshold.cs" />
+    <Compile Include="ArtificialPlant\UI\Command_SetFertilizeAutoThreshold.cs" />
     <Compile Include="ArtificialPlant\Comps\CompGlowerFloraEnergy.cs" />
     <Compile Include="ArtificialPlant\Comps\CompPowerFloraEnergy.cs" />
     <Compile Include="ArtificialPlant\Designator_ReplantArtificialPlant.cs" />
@@ -92,11 +95,11 @@
     <Compile Include="ArtificialPlant\Energy\EnergyRule_Weather.cs" />
     <Compile Include="ArtificialPlant\Energy\EnergyRule_Sunlight.cs" />
     <Compile Include="ArtificialPlant\Energy\EnergyRule_Temperature.cs" />
-    <Compile Include="ArtificialPlant\Command_CancelGerminateSchedule.cs" />
-    <Compile Include="ArtificialPlant\Command_RegisterGerminateSchedule.cs" />
+    <Compile Include="ArtificialPlant\UI\Command_CancelGerminateSchedule.cs" />
+    <Compile Include="ArtificialPlant\UI\Command_RegisterGerminateSchedule.cs" />
     <Compile Include="ArtificialPlant\GerminateSchedule.cs" />
     <Compile Include="ArtificialPlant\GerminateScheduleDef.cs" />
-    <Compile Include="ArtificialPlant\Dialog_GerminateSchedule.cs" />
+    <Compile Include="ArtificialPlant\UI\Dialog_GerminateSchedule.cs" />
     <Compile Include="ArtificialPlant\GerminatorModExtension.cs" />
     <Compile Include="ArtificialPlant\AI\WorkGiver_ManageGerminator.cs" />
     <Compile Include="Graphic_Conditional.cs" />
@@ -104,13 +107,12 @@
     <Compile Include="ArtificialPlant\Things\Plants\BatteryFlower.cs" />
     <Compile Include="ArtificialPlant\Things\Plants\TurretPlant.cs" />
     <Compile Include="ArtificialPlant\Things\Plants\TurretPlantTop.cs" />
-    <Compile Include="ArtificialPlant\Things\Plants\WaterFlower.cs" />
     <Compile Include="ArtificialPlant\Things\Plants\SolarFlower.cs" />
     <Compile Include="ArtificialPlant\Things\MinifiedArtificialPlant.cs" />
-    <Compile Include="ArtificialPlant\PlaceWorker_AllowArtificialPlantPot.cs" />
+    <Compile Include="ArtificialPlant\UI\PlaceWorker_AllowArtificialPlantPot.cs" />
     <Compile Include="ArtificialPlant\AI\WorkGiver_FertilizeArtificialPlant.cs" />
-    <Compile Include="ArtificialPlant\PlaceWorker_ShowPlantTurretRadius.cs" />
-    <Compile Include="ArtificialPlant\PlaceWorker_TurretPlantTop.cs" />
+    <Compile Include="ArtificialPlant\UI\PlaceWorker_ShowPlantTurretRadius.cs" />
+    <Compile Include="ArtificialPlant\UI\PlaceWorker_TurretPlantTop.cs" />
     <Compile Include="ArtificialPlant\Verb_ShotFloraEnergy.cs" />
     <Compile Include="Egg\AI\JobDriver_HaulViviEgg.cs" />
     <Compile Include="Egg\AI\WorkGiver_HaulViviEgg.cs" />
@@ -123,7 +125,7 @@
     <Compile Include="Gather\Things\Building_GatherWorkTable.cs" />
     <Compile Include="Gather\GatherWorker_Honey.cs" />
     <Compile Include="Gather\GatherWorker_Plant.cs" />
-    <Compile Include="Gather\JobDriver_Gather.cs" />
+    <Compile Include="Gather\AI\JobDriver_Gather.cs" />
     <Compile Include="Gather\StatPart_WildPlantOffset.cs" />
     <Compile Include="ArtificialPlant\Things\ArtificialPlant.cs" />
     <Compile Include="HarmonyPatches\Internals\ArtificialPlantPatch.cs" />
@@ -131,24 +133,26 @@
     <Compile Include="HarmonyPatches\HarmonyPatch.cs" />
     <Compile Include="ApparelPropertiesExt.cs" />
     <Compile Include="HarmonyPatches\Internals\ApparelPropertiesExtPatch.cs" />
+    <Compile Include="HarmonyPatches\Internals\RoyaltyPatch.cs" />
     <Compile Include="HarmonyPatches\Internals\ViviRacePatch.cs" />
     <Compile Include="Gather\Comps\CompRepeatGatherable.cs" />
     <Compile Include="Gather\GatherWorker.cs" />
     <Compile Include="Gather\GatherWorker_Pollen.cs" />
-    <Compile Include="Gather\JobDriver_GatherPollen.cs" />
+    <Compile Include="Gather\AI\JobDriver_GatherPollen.cs" />
     <Compile Include="Gather\Things\Filth_Pollen.cs" />
     <Compile Include="Gather\GatherUtility.cs" />
+    <Compile Include="SpecialThingFilterWorker_Dessicated.cs" />
     <Compile Include="TextureCache.cs" />
     <Compile Include="Vivi\HediffComp_RoyalJelly.cs" />
     <Compile Include="Vivi\Need_Loyalty.cs" />
     <Compile Include="Vivi\Things\Vivi.cs" />
     <Compile Include="ViviModsConfig.cs" />
-    <Compile Include="ArtificialPlant\Comps\Building_SeedlingGerminator.cs" />
+    <Compile Include="ArtificialPlant\Things\Building_SeedlingGerminator.cs" />
     <Compile Include="Vivi\PawnKindDef_Vivi.cs" />
     <Compile Include="Gather\RecipeDef_Gathering.cs" />
     <Compile Include="Vivi\Recipe_InjectPropolis.cs" />
     <Compile Include="Utility\ToilUtility.cs" />
-    <Compile Include="Gather\WorkGiver_GatheringBill.cs" />
+    <Compile Include="Gather\AI\WorkGiver_GatheringBill.cs" />
     <Compile Include="Utility\ILUtility.cs" />
     <Compile Include="JobDriver_InteractTarget.cs" />
     <Compile Include="LocalizeTexts.cs" />
@@ -164,8 +168,6 @@
     <Compile Include="Vivi\ViviRaceUtility.cs" />
     <Compile Include="VVDefOf.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ArtificialPlant\Germinator\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
