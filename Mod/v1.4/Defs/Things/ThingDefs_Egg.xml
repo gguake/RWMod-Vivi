@@ -7,7 +7,7 @@
     <thingClass>VVRace.ViviEgg</thingClass>
     
     <graphicData>
-      <graphicClass>VVRace.Graphic_ViviEgg</graphicClass>
+      <graphicClass>VVRace.Graphic_Conditional</graphicClass>
       <texPath>Things/Item/VV_ViviEgg</texPath>
       <color>(245,245,200)</color>
     </graphicData>
