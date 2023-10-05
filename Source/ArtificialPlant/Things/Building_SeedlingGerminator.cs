@@ -499,6 +499,10 @@ namespace VVRace
             {
                 Clear();
             }
+            else if (thing != null)
+            {
+                Notify_RefreshDrawer();
+            }
 
             return thing;
         }
