@@ -25,6 +25,10 @@
     </graphicData>
     <altitudeLayer>BuildingOnTop</altitudeLayer>
     
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Metal_Drop</soundDrop>
+
     <minifiedDef>MinifiedArtificialPlant</minifiedDef>
     <pathCostIgnoreRepeat>false</pathCostIgnoreRepeat>
 
@@ -66,8 +70,32 @@
     <tradeability>All</tradeability>
   </ThingDef>
 
+  <ThingDef Abstract="True" Name="VV_ArtificialPlantProductive" ParentName="VV_ArtificialPlantBase">
+    <building>
+      <uninstallWork>250</uninstallWork>
+    </building>
+    
+    <tradeTags>
+      <li>VV_ArtificialPlantProductive</li>
+    </tradeTags>
+  </ThingDef>
+
+  <ThingDef Abstract="True" Name="VV_ArtificialPlantCombat" ParentName="VV_ArtificialPlantBase">
+    <statBases>
+      <Mass>9</Mass>
+    </statBases>
+
+    <building>
+      <uninstallWork>1000</uninstallWork>
+    </building>
+    
+    <tradeTags>
+      <li>VV_ArtificialPlantCombat</li>
+    </tradeTags>
+  </ThingDef>
+
   <!-- 잔불꽃 -->
-  <ThingDef ParentName="VV_ArtificialPlantBase">
+  <ThingDef ParentName="VV_ArtificialPlantProductive">
     <defName>VV_EmberBloom</defName>
     <label>emberbloom</label>
     <description>.</description>
@@ -77,11 +105,6 @@
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
 
-    <resourceReadoutPriority>Middle</resourceReadoutPriority>
-    <soundInteract>Metal_Drop</soundInteract>
-    <soundDrop>Metal_Drop</soundDrop>
-
-    <useHitPoints>true</useHitPoints>
     <statBases>
       <MarketValue>140</MarketValue>
       <MaxHitPoints>40</MaxHitPoints>
@@ -100,7 +123,7 @@
 
       <li Class="CompProperties_HeatPusher">
         <compClass>VVRace.CompHeatPusherFloraEnergy</compClass>
-        <heatPerSecond>21</heatPerSecond>
+        <heatPerSecond>24</heatPerSecond>
         <heatPushMaxTemperature>29</heatPushMaxTemperature>
       </li>
     </comps>
@@ -117,14 +140,14 @@
         </energyConsumeRule>
         <energyGenerateRule Class="VVRace.EnergyRule_Temperature">
           <activeTemperatureRange>32~120</activeTemperatureRange>
-          <energyByTemperatureRange>10~120</energyByTemperatureRange>
+          <energyByTemperatureRange>30~100</energyByTemperatureRange>
         </energyGenerateRule>
       </li>
     </modExtensions>
   </ThingDef>
 
   <!-- 서리꽃 -->
-  <ThingDef ParentName="VV_ArtificialPlantBase">
+  <ThingDef ParentName="VV_ArtificialPlantProductive">
     <defName>VV_FrostBloom</defName>
     <label>frostbloom</label>
     <description>.</description>
@@ -134,11 +157,6 @@
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
 
-    <resourceReadoutPriority>Middle</resourceReadoutPriority>
-    <soundInteract>Metal_Drop</soundInteract>
-    <soundDrop>Metal_Drop</soundDrop>
-
-    <useHitPoints>true</useHitPoints>
     <statBases>
       <MarketValue>140</MarketValue>
       <MaxHitPoints>40</MaxHitPoints>
@@ -157,7 +175,7 @@
 
       <li Class="CompProperties_HeatPusher">
         <compClass>VVRace.CompHeatPusherFloraEnergy</compClass>
-        <heatPerSecond>-16</heatPerSecond>
+        <heatPerSecond>-18</heatPerSecond>
         <heatPushMinTemperature>-9</heatPushMinTemperature>
       </li>
     </comps>
@@ -174,7 +192,7 @@
         </energyConsumeRule>
         <energyGenerateRule Class="VVRace.EnergyRule_Temperature">
           <activeTemperatureRange>-100~-12</activeTemperatureRange>
-          <energyByTemperatureRange>10~120</energyByTemperatureRange>
+          <energyByTemperatureRange>30~100</energyByTemperatureRange>
           <energyLerpReversed>true</energyLerpReversed>
         </energyGenerateRule>
       </li>
@@ -182,7 +200,7 @@
   </ThingDef>
   
   <!-- 번개봉오리 -->
-  <ThingDef ParentName="VV_ArtificialPlantBase">
+  <ThingDef ParentName="VV_ArtificialPlantProductive">
     <defName>VV_Thunderbud</defName>
     <label>thunderbud</label>
     <description>.</description>
@@ -194,11 +212,6 @@
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
 
-    <resourceReadoutPriority>Middle</resourceReadoutPriority>
-    <soundInteract>Metal_Drop</soundInteract>
-    <soundDrop>Metal_Drop</soundDrop>
-
-    <useHitPoints>true</useHitPoints>
     <statBases>
       <MarketValue>240</MarketValue>
       <MaxHitPoints>100</MaxHitPoints>
@@ -219,6 +232,18 @@
         <efficiency>0.5</efficiency>
         <shortCircuitInRain>false</shortCircuitInRain>
         <transmitsPower>true</transmitsPower>
+      </li>
+
+      <li Class="VVRace.CompProperties_SensorExplosive">
+        <requiredEnergyAmount>100</requiredEnergyAmount>
+        <useEnergyAmount>50</useEnergyAmount>
+        
+        <sensorRadius>5.9</sensorRadius>
+        <sensorWorkerClass>VVRace.SensorWorker_Mechanoid</sensorWorkerClass>
+
+        <explosiveRadius>14.9~15.9</explosiveRadius>
+        <explosiveCooldownTicks>45000~75000</explosiveCooldownTicks>
+        <explosiveDamageDef>EMP</explosiveDamageDef>
       </li>
     </comps>
 
@@ -241,6 +266,8 @@
           <energyByBatteryStored>0~40</energyByBatteryStored>
         </energyGenerateRule>
 
+        
+
         <empExplosiveMinimumEnergy>150</empExplosiveMinimumEnergy>
         <empExplosiveEnergy>120</empExplosiveEnergy>
         <empExplosiveRadiusRange>2~7</empExplosiveRadiusRange>
@@ -249,7 +276,7 @@
   </ThingDef>
   
   <!-- 감전꽃 -->
-  <ThingDef ParentName="VV_ArtificialPlantBase">
+  <ThingDef ParentName="VV_ArtificialPlantProductive">
     <defName>VV_Voltpetals</defName>
     <label>voltpetals</label>
     <description>.</description>
@@ -260,11 +287,6 @@
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
 
-    <resourceReadoutPriority>Middle</resourceReadoutPriority>
-    <soundInteract>Metal_Drop</soundInteract>
-    <soundDrop>Metal_Drop</soundDrop>
-
-    <useHitPoints>true</useHitPoints>
     <statBases>
       <MarketValue>180</MarketValue>
       <MaxHitPoints>70</MaxHitPoints>
@@ -284,6 +306,10 @@
         <compClass>VVRace.CompPowerFloraEnergy</compClass>
         <basePowerConsumption>-500</basePowerConsumption>
         <transmitsPower>true</transmitsPower>
+      </li>
+      <li Class="VVRace.CompProperties_LightningLod">
+        <energyConditionRange>0~100</energyConditionRange>
+        <energyGain>400</energyGain>
       </li>
     </comps>
 
@@ -306,23 +332,17 @@
   </ThingDef>
   
   <!-- 물방울꽃 -->
-  <ThingDef ParentName="VV_ArtificialPlantBase">
+  <ThingDef ParentName="VV_ArtificialPlantProductive">
     <defName>VV_Waterdrops</defName>
     <label>waterdrops</label>
     <description>.</description>
-    <thingClass>VVRace.WaterFlower</thingClass>
 
     <graphicData>
       <texPath>Things/Plants/VV_Waterdrops</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
 
-    <resourceReadoutPriority>Middle</resourceReadoutPriority>
-    <soundInteract>Metal_Drop</soundInteract>
-    <soundDrop>Metal_Drop</soundDrop>
-
     <terrainAffordanceNeeded>VV_WaterOrLight</terrainAffordanceNeeded>
-    <useHitPoints>true</useHitPoints>
     <statBases>
       <MarketValue>400</MarketValue>
       <MaxHitPoints>40</MaxHitPoints>
@@ -334,6 +354,19 @@
 
     <comps>
       <li Class="VVRace.CompProperties_RepeatGatherable" />
+
+      <li Class="VVRace.CompProperties_SensorExplosive">
+        <requiredEnergyAmount>100</requiredEnergyAmount>
+        <useEnergyAmount>50</useEnergyAmount>
+        
+        <sensorRadius>6.9</sensorRadius>
+        <sensorWorkerClass>VVRace.SensorWorker_Fire</sensorWorkerClass>
+
+        <explosiveRadius>10.9~12.9</explosiveRadius>
+        <explosiveCooldownTicks>2500~7500</explosiveCooldownTicks>
+        <explosiveEffecterDef>ExtinguisherExplosion</explosiveEffecterDef>
+        <explosiveDamageDef>Extinguish</explosiveDamageDef>
+      </li>
     </comps>
     
     <modExtensions>
@@ -352,17 +385,12 @@
           <energyByOccupiedWaterCell>60</energyByOccupiedWaterCell>
           <energyByAdjacentWaterCell>25</energyByAdjacentWaterCell>
         </energyGenerateRule>
-
-        <fireExtinguishMinimumEnergy>150</fireExtinguishMinimumEnergy>
-        <fireExtinguishEnergy>100</fireExtinguishEnergy>
-        <fireExtinguishSensorRadius>5.9</fireExtinguishSensorRadius>
-        <fireExtinguishExplosiveRadius>10.9</fireExtinguishExplosiveRadius>
       </li>
     </modExtensions>
   </ThingDef>
 
   <!-- 빛바라기 -->
-  <ThingDef ParentName="VV_ArtificialPlantBase">
+  <ThingDef ParentName="VV_ArtificialPlantProductive">
     <defName>VV_Radiantflower</defName>
     <label>radiantflower</label>
     <description>.</description>
@@ -374,11 +402,6 @@
       <graphicClass>VVRace.Graphic_Conditional</graphicClass>
     </graphicData>
 
-    <resourceReadoutPriority>Middle</resourceReadoutPriority>
-    <soundInteract>Metal_Drop</soundInteract>
-    <soundDrop>Metal_Drop</soundDrop>
-
-    <useHitPoints>true</useHitPoints>
     <statBases>
       <MarketValue>180</MarketValue>
       <MaxHitPoints>70</MaxHitPoints>
@@ -396,8 +419,8 @@
         <overlightRadius>7.0</overlightRadius>
         <glowOnlyRoofed>true</glowOnlyRoofed>
       </li>
+      
       <li Class="CompProperties_Schedule">
-        <!-- Match plant growing times -->
         <startTime>0.25</startTime>
         <endTime>0.8</endTime>
         <offMessage>Off for plant resting period</offMessage>
@@ -430,11 +453,10 @@
   </ThingDef>
 
   <!-- 풍년화 -->
-  <ThingDef ParentName="VV_ArtificialPlantBase">
+  <ThingDef ParentName="VV_ArtificialPlantProductive">
     <defName>VV_Richflower</defName>
     <label>richflower</label>
     <description>.</description>
-    <thingClass>VVRace.RichFlower</thingClass>
     <tickerType>Rare</tickerType>
 
     <graphicData>
@@ -442,17 +464,12 @@
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
 
-    <resourceReadoutPriority>Middle</resourceReadoutPriority>
-    <soundInteract>Metal_Drop</soundInteract>
-    <soundDrop>Metal_Drop</soundDrop>
-
-    <useHitPoints>true</useHitPoints>
     <statBases>
       <MarketValue>400</MarketValue>
       <MaxHitPoints>120</MaxHitPoints>
       
       <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
-      <VV_PlantHoneyGatherYield>1.5</VV_PlantHoneyGatherYield>
+      <VV_PlantHoneyGatherYield>3.2</VV_PlantHoneyGatherYield>
     </statBases>
 
     <comps>
@@ -462,6 +479,21 @@
         <glowRadius>4</glowRadius>
         <glowColor>(255,249,155,0)</glowColor>
       </li>
+      
+      <li Class="VVRace.CompProperties_Terraformer">
+        <cooldownTicks>120000~240000</cooldownTicks>
+        <radius>1.7</radius>
+        <removePollution>true</removePollution>
+        <terraforms>
+          <li><from>SoftSand</from><to>Sand</to></li>
+          <li><from>Sand</from><to>Gravel</to></li>
+          <li><from>Gravel</from><to>Soil</to></li>
+          <li><from>Soil</from><to>SoilRich</to></li>
+          <li><from>MossyTerrain</from><to>SoilRich</to></li>
+          <li><from>MarshyTerrain</from><to>SoilRich</to></li>
+        </terraforms>
+      </li>
+
     </comps>
 
     <modExtensions>
@@ -478,8 +510,6 @@
         <energyGenerateRule Class="VVRace.EnergyRule_AdjacentPlant">
           <energyByAdjacentPlant>40</energyByAdjacentPlant>
         </energyGenerateRule>
-
-        <terraformingTick>180000</terraformingTick>
       </li>
     </modExtensions>
   </ThingDef>
@@ -487,7 +517,7 @@
 
   
   <!-- 콩뿌리개 -->
-  <ThingDef ParentName="VV_ArtificialPlantBase">
+  <ThingDef ParentName="VV_ArtificialPlantCombat">
     <defName>VV_Peashooter</defName>
     <label>peashooter</label>
     <description>.</description>
@@ -500,15 +530,12 @@
     </graphicData>
     <drawerType>MapMeshAndRealTime</drawerType>
 
-    <resourceReadoutPriority>Middle</resourceReadoutPriority>
-    <soundInteract>Metal_Drop</soundInteract>
-    <soundDrop>Metal_Drop</soundDrop>
-
-    <useHitPoints>true</useHitPoints>
     <statBases>
-      <Mass>5</Mass>
       <MarketValue>180</MarketValue>
       <MaxHitPoints>250</MaxHitPoints>
+      
+      <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
+      <VV_GrassFiberGatherYield>2</VV_GrassFiberGatherYield>
     </statBases>
 
     <comps>
@@ -597,7 +624,7 @@
 
   
   <!-- 폭탄뿌리개 -->
-  <ThingDef ParentName="VV_ArtificialPlantBase">
+  <ThingDef ParentName="VV_ArtificialPlantCombat">
     <defName>VV_Pealaucnher</defName>
     <label>pealauncher</label>
     <description>.</description>
@@ -610,15 +637,12 @@
     </graphicData>
     <drawerType>MapMeshAndRealTime</drawerType>
 
-    <resourceReadoutPriority>Middle</resourceReadoutPriority>
-    <soundInteract>Metal_Drop</soundInteract>
-    <soundDrop>Metal_Drop</soundDrop>
-
-    <useHitPoints>true</useHitPoints>
     <statBases>
-      <Mass>5</Mass>
       <MarketValue>540</MarketValue>
       <MaxHitPoints>250</MaxHitPoints>
+      
+      <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
+      <VV_GrassFiberGatherYield>2</VV_GrassFiberGatherYield>
     </statBases>
 
     <comps>

@@ -86,7 +86,12 @@
         </li>
         <li Class="ScenPart_StartingThing_Defined">
           <def>StartingThing_Defined</def>
-          <thingDef>VV_Radiantflower</thingDef>
+          <thingDef>VV_Fertilizer</thingDef>
+          <count>50</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>VV_Richflower</thingDef>
           <count>1</count>
         </li>
         <li Class="ScenPart_StartingThing_Defined">
@@ -124,12 +129,6 @@
           <def>ScatterThingsAnywhere</def>
           <thingDef>Steel</thingDef>
           <count>150</count>
-        </li>
-        
-        <!-- 사건 비활성화 -->
-        <li Class="ScenPart_DisableIncident">
-          <def>DisableIncident</def>
-          <incident>WandererJoin</incident>
         </li>
       </parts>
     </scenario>

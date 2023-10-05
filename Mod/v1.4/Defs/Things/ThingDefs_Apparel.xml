@@ -18,13 +18,13 @@
       <MaxHitPoints>320</MaxHitPoints>
       <WorkToMake>48000</WorkToMake>
       <Mass>0.5</Mass>
-      <StuffEffectMultiplierArmor>0.1</StuffEffectMultiplierArmor>
-      <StuffEffectMultiplierInsulation_Cold>0.7</StuffEffectMultiplierInsulation_Cold>
-      <StuffEffectMultiplierInsulation_Heat>0.7</StuffEffectMultiplierInsulation_Heat>
+      <StuffEffectMultiplierArmor>0.15</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>0.75</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.75</StuffEffectMultiplierInsulation_Heat>
       <EquipDelay>2.5</EquipDelay>
       
-      <ArmorRating_Sharp>0.85</ArmorRating_Sharp>
-      <ArmorRating_Blunt>0.85</ArmorRating_Blunt>
+      <ArmorRating_Sharp>0.6</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.6</ArmorRating_Blunt>
       <ArmorRating_Heat>1.5</ArmorRating_Heat>
       <Insulation_Cold>12</Insulation_Cold>
       <Insulation_Heat>12</Insulation_Heat>
@@ -35,9 +35,13 @@
     </equippedStatOffsets>
 
     <smeltable>false</smeltable>
+    <costStuffCount>80</costStuffCount>
+    <stuffCategories>
+      <li>Fabric</li>
+      <li>Leathery</li>
+    </stuffCategories>
     <costList>
-      <VV_Lifestrand>120</VV_Lifestrand>
-      <DevilstrandCloth>40</DevilstrandCloth>
+      <VV_Lifestrand>150</VV_Lifestrand>
     </costList>
 
     <apparel Class="VVRace.ApparelPropertiesExt">
@@ -68,7 +72,7 @@
     
     <recipeMaker>
       <skillRequirements>
-        <Crafting>10</Crafting>
+        <Crafting>11</Crafting>
       </skillRequirements>
       <researchPrerequisites>
         <li>VV_AdvancedApparels</li>
@@ -102,7 +106,7 @@
       <MaxHitPoints>150</MaxHitPoints>
       <WorkToMake>1800</WorkToMake>
       <Mass>0.5</Mass>
-      <StuffEffectMultiplierArmor>0.12</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierArmor>0.15</StuffEffectMultiplierArmor>
       <StuffEffectMultiplierInsulation_Cold>1.3</StuffEffectMultiplierInsulation_Cold>
       <StuffEffectMultiplierInsulation_Heat>1.0</StuffEffectMultiplierInsulation_Heat>
       <EquipDelay>2.0</EquipDelay>
@@ -111,7 +115,7 @@
       <ArmorRating_Blunt>0.04</ArmorRating_Blunt>
     </statBases>
     <equippedStatOffsets>
-      <MoveSpeed>0.2</MoveSpeed>
+      <MoveSpeed>0.3</MoveSpeed>
       <RestRateMultiplier>0.1</RestRateMultiplier>
       <ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">0.25</ToxicEnvironmentResistance>
     </equippedStatOffsets>

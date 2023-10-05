@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <SpecialThingFilterDef>
+    <defName>VV_AllowDessicated</defName>
+    <label>allow dessicated</label>
+    <description>Allow organic things which have started to dessicated.</description>
+    <parentCategory>Root</parentCategory>
+    <allowedByDefault>true</allowedByDefault>
+    <saveKey>allowDessicated</saveKey>
+    <workerClass>VVRace.SpecialThingFilterWorker_Dessicated</workerClass>
+  </SpecialThingFilterDef>
+</Defs>

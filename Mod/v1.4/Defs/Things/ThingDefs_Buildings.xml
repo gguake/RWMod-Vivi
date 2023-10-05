@@ -532,8 +532,8 @@
       <li Class="CompProperties_Forbiddable"/>
     </comps>
     <costList>
-      <VV_Vivicream>25</VV_Vivicream>
-      <VV_Fertilizer>25</VV_Fertilizer>
+      <VV_Vivicream>20</VV_Vivicream>
+      <VV_Fertilizer>40</VV_Fertilizer>
     </costList>
     
     <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>

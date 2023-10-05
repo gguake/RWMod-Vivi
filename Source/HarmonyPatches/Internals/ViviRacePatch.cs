@@ -167,7 +167,7 @@ namespace VVRace.HarmonyPatches
             var conditionalSkipLabel = ilGenerator.DefineLabel();
             var injections = new CodeInstruction[]
             {
-                // if (bill.recipe == VVRecipeDefOf.VV_MakeVivicream && pawn.HasViviGene())
+                // if (bill.recipe == VVRecipeDefOf.VV_MakeVivicream && pawn.CanMakeViviCream())
                 new CodeInstruction(OpCodes.Ldloc_2),
                 new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(Bill), nameof(Bill.recipe))),
                 new CodeInstruction(OpCodes.Ldsfld, AccessTools.Field(typeof(VVRecipeDefOf), nameof(VVRecipeDefOf.VV_MakeVivicream))),

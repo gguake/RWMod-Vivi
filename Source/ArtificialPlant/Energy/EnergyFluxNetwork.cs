@@ -23,7 +23,8 @@ namespace VVRace
 
     public class EnergyFluxNetwork
     {
-        public int NetworkHash { get; set; }
+        public int NetworkHash { get; private set; }
+        public float LastDistributedEnergy { get; private set; }
         public int ShouldRegenerateNetworkTick { get; set; } = -1;
 
         private Dictionary<ArtificialPlant, EnergyFluxNetworkNode> _nodes { get; }
@@ -90,6 +91,8 @@ namespace VVRace
                             var node = _nodes[plant];
                             node.energy = Mathf.Clamp(node.energy + divided, 0f, plant.ArtificialPlantModExtension.energyCapacity);
                         }
+
+                        LastDistributedEnergy = divided;
                     }
                 }
 

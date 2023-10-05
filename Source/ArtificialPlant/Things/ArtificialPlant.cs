@@ -60,7 +60,7 @@ namespace VVRace
 
         private int _zeroEnergyTicks = 0;
 
-        private bool _fertilizeAutoActivated = false;
+        private bool _fertilizeAutoActivated = true;
         public bool FertilizeAutoActivated => _fertilizeAutoActivated;
 
         private int _fertilizeAutoThreshold = 0;
@@ -100,8 +100,8 @@ namespace VVRace
 
             Scribe_Deep.Look(ref _energyNode, "energyNode");
             Scribe_Values.Look(ref _zeroEnergyTicks, "zeroEnergyTicks");
-            Scribe_Values.Look(ref _fertilizeAutoActivated, "fertilizeAutoActivated");
-            Scribe_Values.Look(ref _fertilizeAutoThreshold, "fertilizeAutoThreshold");
+            Scribe_Values.Look(ref _fertilizeAutoActivated, "fertilizeAutoActivated", defaultValue: true);
+            Scribe_Values.Look(ref _fertilizeAutoThreshold, "fertilizeAutoThreshold", defaultValue: 0);
 
             if (Scribe.mode == LoadSaveMode.LoadingVars)
             {
@@ -241,7 +241,7 @@ namespace VVRace
 
             if (Spawned)
             {
-                var energyFlux = EnergyFlux;
+                var energyFlux = EnergyFlux + EnergyFluxNetwork.LastDistributedEnergy;
                 if (energyFlux != 0)
                 {
                     sb.Append(" ");

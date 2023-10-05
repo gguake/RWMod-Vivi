@@ -20,6 +20,8 @@ namespace VVRace
                 ViviRacePatch.Patch(harmony);
                 ArtificialPlantPatch.Patch(harmony);
 
+                RoyaltyPatch.Patch(harmony);
+
                 if (ModLister.GetActiveModWithIdentifier("Solaris.FurnitureBase")?.Active ?? false)
                 {
                     Log.Message("!! [ViViRace] gloomyfurniture compatiblity - CanPlaceBlueprintOver unpatched");

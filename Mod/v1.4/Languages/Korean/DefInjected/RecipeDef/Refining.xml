@@ -20,11 +20,11 @@
   <VV_MakeLifestrand.description>악마가닥을 다양한 재료로 가공해 생체가닥을 만듭니다.</VV_MakeLifestrand.description>
   <VV_MakeLifestrand.jobString>생체가닥 만드는 중.</VV_MakeLifestrand.jobString>
 
-  <VV_MakeFertilizerCorpse.label>썩은 시체로 비료 만들기</VV_MakeFertilizerCorpse.label>
-  <VV_MakeFertilizerCorpse.description>썩은 시체를 흙과 배합해 비료를 만듭니다. 지나친 부패를 방지하기 위해 뉴트로아민이 필요합니다.</VV_MakeFertilizerCorpse.description>
-  <VV_MakeFertilizerCorpse.jobString>비료를 배합하는 중.</VV_MakeFertilizerCorpse.jobString>
+  <VV_MakeFertilizerCorpse.label>뼈로 비료 만들기</VV_MakeFertilizerCorpse.label>
+  <VV_MakeFertilizerCorpse.description>뼈를 흙과 배합해 비료를 만듭니다.</VV_MakeFertilizerCorpse.description>
+  <VV_MakeFertilizerCorpse.jobString>뼈로 비료를 배합하는 중.</VV_MakeFertilizerCorpse.jobString>
 
-  <VV_MakeFertilizerResource.label>건초로 비료 만들기</VV_MakeFertilizerResource.label>
-  <VV_MakeFertilizerResource.description>건초를 숙성시켜 흙과 배합해 비료를 만듭니다.</VV_MakeFertilizerResource.description>
-  <VV_MakeFertilizerResource.jobString>비료를 배합하는 중.</VV_MakeFertilizerResource.jobString>
+  <VV_MakeFertilizerResource.label>유기물로 비료 만들기</VV_MakeFertilizerResource.label>
+  <VV_MakeFertilizerResource.description>유기물을 숙성시켜 흙과 배합해 비료를 만듭니다.</VV_MakeFertilizerResource.description>
+  <VV_MakeFertilizerResource.jobString>유기물로 비료를 배합하는 중.</VV_MakeFertilizerResource.jobString>
 </LanguageData>

@@ -195,10 +195,10 @@
   <!-- 비료 제작 (썩은 시체) -->
   <RecipeDef>
     <defName>VV_MakeFertilizerCorpse</defName>
-    <label>make fertilizer from rotten corpse</label>
+    <label>make fertilizer from bones</label>
     <description>.</description>
-    <jobString>making fertilizer from rotten corpse.</jobString>
-    <workAmount>1200</workAmount>
+    <jobString>making fertilizer from bones.</jobString>
+    <workAmount>500</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <workSkill>Plants</workSkill>
     <workSkillLearnFactor>0.1</workSkillLearnFactor>
@@ -208,14 +208,6 @@
     <uiIconThing>VV_Fertilizer</uiIconThing>
 
     <ingredients>
-      <li>
-        <filter>
-          <thingDefs>
-            <li>Neutroamine</li>
-          </thingDefs>
-        </filter>
-        <count>5</count>
-      </li>
       <li>
         <filter>
           <categories>
@@ -233,7 +225,7 @@
         <li>CorpsesMechanoid</li>
       </disallowedCategories>
       <specialFiltersToAllow>
-        <li>AllowRotten</li>
+        <li>VV_AllowDessicated</li>
       </specialFiltersToAllow>
       <specialFiltersToDisallow>
         <li>AllowFresh</li>
@@ -247,22 +239,22 @@
         <li>AllowCorpsesColonist</li>
         <li MayRequire="Ludeon.RimWorld.Ideology">AllowCorpsesSlave</li>
         <li>AllowCorpsesStranger</li>
-        <li>AllowRotten</li>
+        <li>VV_AllowDessicated</li>
       </specialFiltersToAllow>
     </defaultIngredientFilter>
     
     <products>
-      <VV_Fertilizer>50</VV_Fertilizer>
+      <VV_Fertilizer>40</VV_Fertilizer>
     </products>
   </RecipeDef>
   
   <!-- 비료 제작 (자원) -->
   <RecipeDef>
     <defName>VV_MakeFertilizerResource</defName>
-    <label>make fertilizer</label>
+    <label>make fertilizer from organics</label>
     <description>.</description>
-    <jobString>making fertilizer.</jobString>
-    <workAmount>900</workAmount>
+    <jobString>making fertilizer from organics.</jobString>
+    <workAmount>2000</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <workSkill>Plants</workSkill>
     <workSkillLearnFactor>0.1</workSkillLearnFactor>
@@ -271,19 +263,41 @@
     <soundWorking>Recipe_Brewing</soundWorking>
     <uiIconThing>VV_Fertilizer</uiIconThing>
 
+    <ingredientValueGetterClass>IngredientValueGetter_Nutrition</ingredientValueGetterClass>
     <ingredients>
       <li>
         <filter>
-          <thingDefs>
-            <li>Hay</li>
-          </thingDefs>
+          <categories>
+            <li>Foods</li>
+            <li>PlantMatter</li>
+          </categories>
+          <disallowedCategories>
+            <li>FoodMeals</li>
+          </disallowedCategories>
         </filter>
-        <count>75</count>
+        <count>3.75</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
+      <categories>
+        <li>Foods</li>
+        <li>PlantMatter</li>
+      </categories>
+      <disallowedCategories>
+        <li>FoodMeals</li>
+      </disallowedCategories>
     </fixedIngredientFilter>
     <defaultIngredientFilter>
+      <thingDefs>
+        <li>Hay</li>
+      </thingDefs>
+      <categories>
+        <li>FoodRaw</li>
+      </categories>
+      <disallowedCategories>
+        <li>MeatRaw</li>
+        <li>AnimalProductRaw</li>
+      </disallowedCategories>
     </defaultIngredientFilter>
     
     <products>

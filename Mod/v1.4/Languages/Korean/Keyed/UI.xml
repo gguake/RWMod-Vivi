@@ -3,11 +3,6 @@
   <VV_RoyalGeneLabelPrefix>로열</VV_RoyalGeneLabelPrefix>
   <VV_ApparelBodyTypeNotMatching>체형이 맞지 않음</VV_ApparelBodyTypeNotMatching>
 
-  <VV_AlertViviDangerousEggs>비비 알 손상중</VV_AlertViviDangerousEggs>
-  <VV_AlertViviDangerousEggsDesc>방치되어 있거나 부화기 안에 있는 알이 적절하지 않은 온도에 의해 손상되고 있습니다.\n\n알이 완전히 손상되면 파괴되므로 알이 보관된 곳의 온도를 {MINTEMP}도 ~ {MAXTEMP}도 사이로 유지하도록 하세요.</VV_AlertViviDangerousEggsDesc>
-  <VV_AlertArtificialPlantLowEnergy>식물 에너지 낮음</VV_AlertArtificialPlantLowEnergy>
-  <VV_AlertArtificialPlantLowEnergyDesc>식물이 보유한 에너지가 매우 낮습니다. 에너지가 고갈된 상태에서 방치되면 점차 손상되어 파괴됩니다.\n\n식물이 에너지를 얻을수 있는 환경을 갖추거나 에너지가 초과 생산되는 식물 옆에 배치하세요.\n\n여건이 되지 않는다면 포장해두는것도 좋은 방법입니다.</VV_AlertArtificialPlantLowEnergyDesc>
-
   <VV_GizmoViviEggProgressHeader>산란 진행도</VV_GizmoViviEggProgressHeader>
   <VV_GizmoViviEggProgressTooltip>다음 알을 낳기까지 얼마나 남았는지를 나타냅니다.\n\n진행도가 100%인 상태에서 산란에 적합한 비비 부화기가 존재하면 그곳에 가서 알을 낳습니다.</VV_GizmoViviEggProgressTooltip>
   <VV_GizmoSetFertilizeAutoThreshold>에너지 최소치 {0}(으)로 설정</VV_GizmoSetFertilizeAutoThreshold>

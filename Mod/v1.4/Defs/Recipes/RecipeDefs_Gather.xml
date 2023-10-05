@@ -134,7 +134,7 @@
     <description>.</description>
     <jobString>Gathering grass fiber.</jobString>
     
-    <workAmount>1600</workAmount>
+    <workAmount>1000</workAmount>
     <workSkill>Plants</workSkill>
     <workSpeedStat>VV_PlantGatherSpeed</workSpeedStat>
     <efficiencyStat>VV_PlantGatherYield</efficiencyStat>
@@ -150,7 +150,7 @@
     <allowMixingIngredients>true</allowMixingIngredients>
     <targetCountAdjustment>5</targetCountAdjustment>
     <products>
-      <VV_GrassFiber>5</VV_GrassFiber>
+      <VV_GrassFiber>10</VV_GrassFiber>
     </products>
     <researchPrerequisite>VV_AdvancedGathering</researchPrerequisite>
 

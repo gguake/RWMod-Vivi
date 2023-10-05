@@ -77,7 +77,7 @@ namespace VVRace
 
         public static ThingDef VV_SeedlingGerminator;
 
-
+        public static ThingDef VV_Thunderbud;
 
         public static ThingDef Plant_Strawberry;
         public static ThingDef Plant_Corn;

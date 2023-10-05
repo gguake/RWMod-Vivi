@@ -5,25 +5,27 @@ namespace VVRace
 {
     public class BatteryFlower : ArtificialPlant
     {
+        public CompSensorExplosive CompSensorExplosive
+        {
+            get
+            {
+                if (_compSensorExplosive == null)
+                {
+                    _compSensorExplosive = this.TryGetComp<CompSensorExplosive>();
+                }
+
+                return _compSensorExplosive;
+            }
+        }
+        private CompSensorExplosive _compSensorExplosive;
+
         public override void PreApplyDamage(ref DamageInfo dinfo, out bool absorbed)
         {
             base.PreApplyDamage(ref dinfo, out absorbed);
 
-            if (Spawned && !Destroyed && dinfo.Amount > 0f && !absorbed)
+            if (Spawned && !Destroyed && dinfo.Amount > 0f && !absorbed && !CompSensorExplosive.IsCooldown)
             {
-                var data = ArtificialPlantModExtension;
-                if (data.empExplosiveMinimumEnergy >= 0 && Energy <= data.empExplosiveMinimumEnergy) { return; }
-
-                var radius = data.empExplosiveRadiusRange.LerpThroughRange(EnergyChargeRatio);
-
-                GenExplosion.DoExplosion(
-                    instigator: this,
-                    center: Position,
-                    map: Map,
-                    radius: radius,
-                    damType: DamageDefOf.EMP);
-
-                AddEnergy(-data.empExplosiveEnergy);
+                CompSensorExplosive.TryExplosive();
             }
         }
     }
