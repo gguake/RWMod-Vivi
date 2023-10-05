@@ -4,7 +4,7 @@ using Verse;
 
 namespace VVRace
 {
-    public class Alert_LowEnergyArtificialPlant : Alert
+    public class Alert_LowEnergyArtificialPlant : Alert_Critical
     {
         private List<Thing> dangerTargets = new List<Thing>();
 
