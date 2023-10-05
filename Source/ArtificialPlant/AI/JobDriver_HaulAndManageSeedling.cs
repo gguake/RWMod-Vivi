@@ -11,7 +11,10 @@ namespace VVRace
     {
         private float workLeft;
 
-        protected Building_SeedlingGerminator Germinator => job.GetTarget(TargetIndex.A).Thing as Building_SeedlingGerminator;
+        private const TargetIndex GerminatorInd = TargetIndex.A;
+        private const TargetIndex IngredientInd = TargetIndex.B;
+
+        protected Building_SeedlingGerminator Germinator => job.GetTarget(GerminatorInd).Thing as Building_SeedlingGerminator;
         protected Thing IngredientThing => job.GetTarget(TargetIndex.B).Thing;
 
         public override void ExposeData()
@@ -33,22 +36,23 @@ namespace VVRace
 
         protected override IEnumerable<Toil> MakeNewToils()
         {
-            this.FailOnDespawnedNullOrForbidden(TargetIndex.A);
+            this.FailOnDespawnedNullOrForbidden(GerminatorInd);
+            this.FailOnBurningImmobile(GerminatorInd);
             this.FailOn(() => Germinator.CurrentSchedule == null || !Germinator.CurrentSchedule.CanManageJob);
 
             yield return Toils_General.DoAtomic(() => { job.count = Germinator.CurrentSchedule.CurrentManageScheduleDef.ingredients[0].count; });
 
-            var reserveToil = Toils_Reserve.Reserve(TargetIndex.B);
+            var reserveToil = Toils_Reserve.Reserve(IngredientInd);
             yield return reserveToil;
-            yield return Toils_Goto.GotoThing(TargetIndex.B, PathEndMode.ClosestTouch)
-                .FailOnDespawnedNullOrForbidden(TargetIndex.B)
-                .FailOnSomeonePhysicallyInteracting(TargetIndex.B);
+            yield return Toils_Goto.GotoThing(IngredientInd, PathEndMode.ClosestTouch)
+                .FailOnDespawnedNullOrForbidden(IngredientInd)
+                .FailOnSomeonePhysicallyInteracting(IngredientInd);
 
-            yield return Toils_Haul.StartCarryThing(TargetIndex.B, subtractNumTakenFromJobCount: true);
-            yield return Toils_Haul.CheckForGetOpportunityDuplicate(reserveToil, TargetIndex.B, TargetIndex.None, takeFromValidStorage: true);
+            yield return Toils_Haul.StartCarryThing(IngredientInd, subtractNumTakenFromJobCount: true);
+            yield return Toils_Haul.CheckForGetOpportunityDuplicate(reserveToil, IngredientInd, TargetIndex.None, takeFromValidStorage: true);
 
-            yield return Toils_Reserve.Reserve(TargetIndex.A);
-            yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.Touch);
+            yield return Toils_Reserve.Reserve(GerminatorInd);
+            yield return Toils_Goto.GotoThing(GerminatorInd, PathEndMode.Touch);
 
             var toilManage = ToilMaker.MakeToil("MakeNewToils");
             toilManage.initAction = () =>
@@ -68,14 +72,14 @@ namespace VVRace
                 }
             };
             toilManage.defaultCompleteMode = ToilCompleteMode.Never;
-            toilManage.WithProgressBar(TargetIndex.A, delegate
+            toilManage.WithProgressBar(GerminatorInd, delegate
             {
                 return 1f - workLeft / Germinator.CurrentSchedule.CurrentManageScheduleDef.workAmount;
             });
 
             yield return toilManage
-                .FailOnDespawnedNullOrForbiddenPlacedThings(TargetIndex.A)
-                .FailOnCannotTouch(TargetIndex.A, PathEndMode.Touch);
+                .FailOnDespawnedNullOrForbiddenPlacedThings(GerminatorInd)
+                .FailOnCannotTouch(GerminatorInd, PathEndMode.Touch);
 
             var toilFinalizeManage = ToilMaker.MakeToil("FinalizeManage");
             toilFinalizeManage.defaultCompleteMode = ToilCompleteMode.Instant;

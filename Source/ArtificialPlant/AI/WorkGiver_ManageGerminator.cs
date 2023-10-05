@@ -1,8 +1,4 @@
 ﻿using RimWorld;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
 using Verse;
 using Verse.AI;
 
@@ -23,11 +19,6 @@ namespace VVRace
             }
 
             if (germinator.CurrentSchedule == null)
-            {
-                return false;
-            }
-
-            if (germinator.IsForbidden(pawn))
             {
                 return false;
             }

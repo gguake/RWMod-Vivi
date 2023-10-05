@@ -1,6 +1,4 @@
 ﻿using RimWorld;
-using System.Linq;
-using UnityEngine;
 using Verse;
 using Verse.AI;
 
@@ -30,7 +28,7 @@ namespace VVRace
                 return false;
             }
 
-            if (!t.Spawned || t.IsForbidden(pawn))
+            if (!t.Spawned)
             {
                 return false;
             }
