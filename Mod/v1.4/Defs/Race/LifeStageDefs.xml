@@ -6,7 +6,7 @@
     <label>child</label>
     <workerClass>LifeStageWorker_HumanlikeChild</workerClass>
     <bodySizeFactor>0.35</bodySizeFactor>
-    <bodyWidth>1</bodyWidth>
+    <bodyWidth>0.975</bodyWidth>
     <voxPitch>1.2</voxPitch>
     <headSizeFactor>0.65</headSizeFactor>
     <eyeSizeFactor>0.85</eyeSizeFactor>
