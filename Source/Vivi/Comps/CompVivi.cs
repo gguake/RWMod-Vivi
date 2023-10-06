@@ -95,8 +95,8 @@ namespace VVRace
                 if (pawn.IsColonist)
                 {
                     Find.LetterStack.ReceiveLetter(
-                        LocalizeTexts.LetterRoyalViviGrownLabel.Translate(this.Named("PAWN")),
-                        LocalizeTexts.LetterRoyalViviGrown.Translate(this.Named("PAWN")),
+                        LocalizeTexts.LetterRoyalViviGrownLabel.Translate(pawn.Named("PAWN")),
+                        LocalizeTexts.LetterRoyalViviGrown.Translate(pawn.Named("PAWN")),
                         LetterDefOf.PositiveEvent,
                         pawn);
                 }
