@@ -61,6 +61,7 @@ namespace VVRace
     [DefOf]
     public static class VVThingDefOf
     {
+        public static ThingDef VV_Vivi;
         public static ThingDef VV_ViviEgg;
 
         public static ThingDef VV_ViviHatchery;

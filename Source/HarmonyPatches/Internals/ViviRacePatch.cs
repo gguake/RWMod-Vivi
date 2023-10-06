@@ -91,7 +91,7 @@ namespace VVRace.HarmonyPatches
 
         private static void Pawn_NeedsTracker_ShouldHaveNeed_Postfix(ref bool __result, Pawn ___pawn, NeedDef nd)
         {
-            if (nd == VVNeedDefOf.VV_RoyalJelly && !(___pawn is Vivi))
+            if (nd == VVNeedDefOf.VV_RoyalJelly && !___pawn.IsVivi())
             {
                 __result = false;
             }
@@ -99,31 +99,40 @@ namespace VVRace.HarmonyPatches
 
         private static void LifeStageWorker_HumanlikeChild_Notify_LifeStageStarted_Postfix(Pawn pawn, LifeStageDef previousLifeStage)
         {
-            if (previousLifeStage != null && previousLifeStage.developmentalStage.Baby() && pawn is Vivi vivi)
+            if (previousLifeStage != null && previousLifeStage.developmentalStage.Baby())
             {
-                vivi.Notify_ChildLifeStageStart();
+                var compVivi = pawn.GetCompVivi();
+                if (compVivi != null)
+                {
+                    compVivi.Notify_ChildLifeStageStart();
+                }
             }
         }
 
         private static void LifeStageWorker_HumanlikeAdult_Notify_LifeStageStarted_Postfix(Pawn pawn, LifeStageDef previousLifeStage)
         {
-            if (previousLifeStage != null && previousLifeStage.developmentalStage.Juvenile() && pawn is Vivi vivi)
+            if (previousLifeStage != null && previousLifeStage.developmentalStage.Juvenile())
             {
-                vivi.Notify_AdultLifeStageStart();
+                var compVivi = pawn.GetCompVivi();
+                if (compVivi != null)
+                {
+                    compVivi.Notify_AdultLifeStageStart();
+                }
             }
         }
 
         private static bool PawnGenerator_GenerateBodyType_Prefix(Pawn pawn, PawnGenerationRequest request)
         {
-            if (pawn is Vivi vivi)
+            var compVivi = pawn.GetCompVivi();
+            if (pawn.IsVivi())
             {
                 pawn.story.bodyType = BodyTypeDefOf.Thin;
 
-                if (vivi.kindDef is PawnKindDef_Vivi kindDefExt)
+                if (pawn.kindDef is PawnKindDef_Vivi kindDefExt)
                 {
                     if (kindDefExt.isRoyal)
                     {
-                        vivi.SetRoyal();
+                        compVivi.SetRoyal();
 
                         if (!kindDefExt.preventRoyalBodyType)
                         {
@@ -216,7 +225,7 @@ namespace VVRace.HarmonyPatches
         {
             if (map.IsPlayerHome)
             {
-                var startingRoyalVivis = Find.GameInitData.startingAndOptionalPawns?.Where(pawn => pawn.Spawned && pawn is Vivi vivi && vivi.IsRoyal).ToList();
+                var startingRoyalVivis = Find.GameInitData.startingAndOptionalPawns?.Where(pawn => pawn.Spawned && pawn.IsRoyalVivi()).ToList();
 
                 var allEggs = map.spawnedThings.Where(v => v.def == VVThingDefOf.VV_ViviEgg);
                 foreach (var egg in allEggs)
@@ -291,9 +300,9 @@ namespace VVRace.HarmonyPatches
 
         private static void PawnRelationWorker_Sibling_InRelation_Postfix(ref bool __result, Pawn me, Pawn other)
         {
-            if (!__result && me is Vivi vivi1 && other is Vivi vivi2)
+            if (!__result && me.IsVivi() && other.IsVivi())
             {
-                __result = vivi1.GetMother() != null && vivi2.GetMother() != null && vivi1.GetMother() == vivi2.GetMother();
+                __result = me.GetMother() != null && other.GetMother() != null && me.GetMother() == other.GetMother();
             }
         }
 
@@ -301,18 +310,18 @@ namespace VVRace.HarmonyPatches
         {
             if (!__result) { return; }
 
-            if (___pawn is Vivi viviA && recipient is Vivi viviB && viviA.Faction == viviB.Faction && !viviA.Dead && !viviB.Dead)
+            if (___pawn.IsVivi() && recipient.IsVivi() && ___pawn.Faction == recipient.Faction && !___pawn.Dead && !recipient.Dead)
             {
-                Vivi giver, receiver;
-                if (viviA.IsRoyal)
+                Pawn giver, receiver;
+                if (___pawn.IsRoyalVivi())
                 {
-                    giver = viviA;
-                    receiver = viviB;
+                    giver = ___pawn;
+                    receiver = recipient;
                 }
-                else if (viviB.IsRoyal)
+                else if (recipient.IsRoyalVivi())
                 {
-                    giver = viviB;
-                    receiver = viviA;
+                    giver = recipient;
+                    receiver = ___pawn;
                 }
                 else
                 {
@@ -349,7 +358,7 @@ namespace VVRace.HarmonyPatches
 
         private static bool InteractionWorker_RomanceAttempt_RandomSelectionWeight_Prefix(Pawn initiator, ref float __result)
         {
-            if (initiator is Vivi)
+            if (initiator.IsVivi())
             {
                 __result = 0f;
                 return false;
@@ -360,7 +369,7 @@ namespace VVRace.HarmonyPatches
 
         private static bool InteractionWorker_RomanceAttempt_SuccessChance_Prefix(Pawn initiator, Pawn recipient, ref float __result)
         {
-            if (recipient is Vivi)
+            if (recipient.IsVivi())
             {
                 __result = 0f;
                 return false;
@@ -373,7 +382,7 @@ namespace VVRace.HarmonyPatches
         {
             for (int i = 0; i < __result.Count; ++i)
             {
-                if (ingester is Vivi && __result[i].thought == VVThoughtDefOf.VV_AtePollen)
+                if (ingester.IsVivi() && __result[i].thought == VVThoughtDefOf.VV_AtePollen)
                 {
                     __result.RemoveAt(i);
                     i--;

@@ -6,14 +6,14 @@ namespace VVRace
     {
         public static bool CanMakeViviCream(this Pawn pawn)
         {
-            if (!(pawn is Vivi) || (pawn.needs?.food?.Starving ?? true)) { return false; }
+            if (!pawn.IsVivi() || (pawn.needs?.food?.Starving ?? true)) { return false; }
 
             return true;
         }
 
         public static string GetJobFailReasonForMakeViviCream(this Pawn pawn)
         {
-            if (!(pawn is Vivi)) { return LocalizeTexts.JobFailReasonNotVivi.Translate(); }
+            if (!pawn.IsVivi()) { return LocalizeTexts.JobFailReasonNotVivi.Translate(); }
             if (pawn.needs?.food?.Starving ?? true) { return LocalizeTexts.JobFailReasonViviStarving.Translate(); }
 
             return null;

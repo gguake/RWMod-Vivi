@@ -11,20 +11,22 @@ namespace VVRace
         private static readonly Color EmptyBlockColor = new Color(0.3f, 0.3f, 0.3f, 1f);
         private static readonly Color FilledBlockColor = Color.grey;
 
-        private Vivi _vivi;
+        private Pawn _pawn;
 
         public override float GetWidth(float maxWidth)
             => Width;
 
-        public override bool Visible => _vivi != null && _vivi.IsRoyal && Find.Selector.SelectedPawns.Count == 1;
+        public override bool Visible => _pawn != null && _pawn.IsRoyalVivi() && Find.Selector.SelectedPawns.Count == 1;
 
-        public EggProgressGizmo(Vivi vivi)
+        public EggProgressGizmo(Pawn vivi)
         {
-            _vivi = vivi;
+            _pawn = vivi;
         }
 
         public override GizmoResult GizmoOnGUI(Vector2 topLeft, float maxWidth, GizmoRenderParms parms)
         {
+            var eggSpawnerComp = _pawn.TryGetComp<CompViviEggLayer>();
+
             var backPanelRect = new Rect(topLeft.x, topLeft.y, GetWidth(maxWidth), Height);
             Widgets.DrawWindowBackground(backPanelRect);
 
@@ -37,11 +39,11 @@ namespace VVRace
 
             Text.Font = GameFont.Tiny;
             var descriptionRect = new Rect(innerRect.x, headerRect.yMax + 2f, innerRect.width, HeaderHeight);
-            var description = _vivi.EggProgress.ToStringPercent("F1");
+            var description = eggSpawnerComp.eggProgress.ToStringPercent("F1");
             Widgets.Label(descriptionRect, description);
 
             Text.Anchor = TextAnchor.UpperRight;
-            var descriptionPerDay = $"(+{_vivi.EggProgressPerDays.ToStringPercent()}/day)";
+            var descriptionPerDay = $"(+{eggSpawnerComp.EggProgressPerDays.ToStringPercent()}/day)";
             Widgets.Label(descriptionRect, descriptionPerDay);
             Text.Anchor = TextAnchor.UpperLeft;
             Text.Font = GameFont.Small;
@@ -55,7 +57,7 @@ namespace VVRace
             Widgets.DrawBoxSolid(backRect, EmptyBlockColor);
 
             var frontRect = backRect.ContractedBy(3f);
-            frontRect.width = frontRect.width * _vivi.EggProgress;
+            frontRect.width = frontRect.width * eggSpawnerComp.eggProgress;
 
             Widgets.DrawBoxSolid(frontRect, FilledBlockColor);
 

@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <AlienRace.AlienBackstoryDef Abstract="True" Name="VV_ViviBackstory">
-		<bodyTypeMale>Thin</bodyTypeMale>
-		<bodyTypeFemale>Thin</bodyTypeFemale>
-  </AlienRace.AlienBackstoryDef>
-
   <AlienRace.AlienBackstoryDef ParentName="VV_ViviBackstory">
     <defName>VV_ViviExiled</defName>
     <title>vivi exiled</title>

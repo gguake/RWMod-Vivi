@@ -8,9 +8,9 @@
     <displayCategory>Miscellaneous</displayCategory>
     <biologicalAgeTickFactorFromAgeCurve>
       <points>
-        <li>(0, 2.25)</li>
+        <li>(0, 2)</li>
         <li>(3, 2)</li>
-        <li>(7, 2)</li>
+        <li>(7, 1.75)</li>
         <li>(13, 1.5)</li>
         <li>(18.5, 1.25)</li>
       </points>
@@ -20,7 +20,7 @@
     <sterilize>true</sterilize>
     <statFactors>
       <GlobalLearningFactor>1.1</GlobalLearningFactor>
-      <VV_GrowthPointsFactor>3.0</VV_GrowthPointsFactor>
+      <VV_GrowthPointsFactor>2.5</VV_GrowthPointsFactor>
       <VV_LearningRateFactor>1.75</VV_LearningRateFactor>
     </statFactors>
   </GeneDef>

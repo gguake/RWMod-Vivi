@@ -17,12 +17,10 @@ namespace VVRace
             get
             {
                 var pawn = Pawn;
-                if (pawn is Vivi vivi)
+                var compVivi = pawn.GetCompVivi();
+                if (compVivi != null && (compVivi.isRoyal || !pawn.DevelopmentalStage.Adult()))
                 {
-                    if (vivi.IsRoyal || !vivi.DevelopmentalStage.Adult())
-                    {
-                        return false;
-                    }
+                    return false;
                 }
 
                 return true;

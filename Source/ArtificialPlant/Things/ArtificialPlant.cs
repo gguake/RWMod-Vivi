@@ -242,12 +242,6 @@ namespace VVRace
                     sb.Append(LocalizeTexts.InspectorPlantEnergyFlux.Translate(energyFlux.ToString("+0;-#")));
                 }
 
-                if (FertilizeAutoActivated)
-                {
-                    sb.AppendLine();
-                    sb.Append(LocalizeTexts.InspectorFertilizerAuto.Translate(FertilizeAutoThreshold));
-                }
-
                 if (DebugSettings.godMode && EnergyFluxNetwork != null)
                 {
                     sb.AppendLine();

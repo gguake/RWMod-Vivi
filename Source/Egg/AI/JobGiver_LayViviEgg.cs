@@ -8,17 +8,14 @@ namespace VVRace
     {
         public override float GetPriority(Pawn pawn)
         {
-            return pawn is Vivi vivi && vivi.CanLayEgg ? 10f : 0f;
+            var compViviEggLayer = pawn.GetCompViviEggLayer();
+            return compViviEggLayer != null && compViviEggLayer.CanLayEgg ? 10f : 0f;
         }
 
         protected override Job TryGiveJob(Pawn pawn)
         {
-            if (!(pawn is Vivi vivi) || !vivi.IsRoyal)
-            {
-                return null;
-            }
-
-            if (!vivi.CanLayEgg)
+            var compViviEggLayer = pawn.GetCompViviEggLayer();
+            if (compViviEggLayer == null || !compViviEggLayer.CanLayEgg)
             {
                 return null;
             }

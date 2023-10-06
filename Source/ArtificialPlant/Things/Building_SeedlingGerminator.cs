@@ -263,6 +263,7 @@ namespace VVRace
                     {
                         _canWithdrawProduct = !_canWithdrawProduct;
                     };
+                    yield return commandCanWithdrawProduct;
                 }
 
                 if (DebugSettings.godMode)

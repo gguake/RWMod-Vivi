@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
     <ThingDef Abstract="True" Name="VV_PetalBase" ParentName="ResourceBase">
+        <tickerType>Rare</tickerType>
         <thingCategories>
             <li>VV_Petal</li>
         </thingCategories>

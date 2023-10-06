@@ -13,8 +13,8 @@ namespace VVRace
         public const float ThresholdRoyalViviLow = 0.4f;
         public const float ThresholdRoyalViviCritical = 0.25f;
 
-        public float ThresholdLow => (Vivi?.IsRoyal ?? false) ? ThresholdRoyalViviLow : ThresholdViviLow;
-        public float ThresholdCritical => (Vivi?.IsRoyal ?? false) ? ThresholdRoyalViviCritical : ThresholdViviCritical;
+        public float ThresholdLow => (CompVivi?.isRoyal ?? false) ? ThresholdRoyalViviLow : ThresholdViviLow;
+        public float ThresholdCritical => (CompVivi?.isRoyal ?? false) ? ThresholdRoyalViviCritical : ThresholdViviCritical;
 
         public bool IsLow => CurLevelPercentage <= ThresholdLow;
         public bool IsCritical => CurLevelPercentage <= ThresholdCritical;
@@ -34,13 +34,39 @@ namespace VVRace
             }
         }
 
-        private Vivi Vivi => pawn as Vivi;
+        public CompVivi CompVivi
+        {
+            get
+            {
+                if (_compVivi == null)
+                {
+                    _compVivi = pawn.GetCompVivi();
+                }
+
+                return _compVivi;
+            }
+        }
+        private CompVivi _compVivi;
+
+        public CompViviEggLayer CompViviEggLayer
+        {
+            get
+            {
+                if (_compViviEggLayer == null)
+                {
+                    _compViviEggLayer = pawn.GetCompViviEggLayer();
+                }
+
+                return _compViviEggLayer;
+            }
+        }
+        private CompViviEggLayer _compViviEggLayer;
 
         private bool Disabled
         {
             get
             {
-                return pawn.Dead || !(pawn is Vivi);
+                return pawn.Dead || !pawn.IsVivi();
             }
         }
 
@@ -66,15 +92,15 @@ namespace VVRace
             {
                 if (IsCritical && pawn.IsColonistPlayerControlled && !pawn.InMentalState && !pawn.Downed && pawn.Spawned)
                 {
-                    if (Vivi.IsRoyal)
+                    if (CompVivi.isRoyal)
                     {
                         if (VVMentalBreakDefOf.GiveUpExit.Worker.BreakCanOccur(pawn))
                         {
                             var allPlayerPawns = PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction_NoCryptosleep;
-                            var royalCount = PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction_NoCryptosleep.Count(v => v is Vivi vivi && vivi.IsRoyal);
+                            var royalCount = PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction_NoCryptosleep.Count(v => v.IsRoyalVivi());
                             if (royalCount > 1)
                             {
-                                foreach (var affected in pawn.Map.mapPawns.AllPawnsSpawned.Where(v => v is Vivi vivi && vivi.Faction == pawn.Faction && !vivi.IsRoyal))
+                                foreach (var affected in pawn.Map.mapPawns.AllPawnsSpawned.Where(v => v.IsVivi() && !v.IsRoyalVivi() && v.Faction == pawn.Faction))
                                 {
                                     if (affected.needs.TryGetNeed<Need_Loyalty>()?.IsLow ?? false)
                                     {
@@ -121,7 +147,7 @@ namespace VVRace
 
             if (!Disabled)
             {
-                if (Vivi.IsRoyal)
+                if (CompVivi.isRoyal)
                 {
                     threshPercents.Add(ThresholdRoyalViviCritical);
                     threshPercents.Add(ThresholdRoyalViviLow);
@@ -138,7 +164,7 @@ namespace VVRace
 
         public void Notify_InteractWith(float level)
         {
-            var value = level * (Vivi.IsRoyal ? 0.3f : 1f) * (level > 0f ? 700f : 300f);
+            var value = level * (CompVivi.isRoyal ? 0.3f : 1f) * (level > 0f ? 700f : 300f);
             CurLevel += value;
         }
 
@@ -146,10 +172,10 @@ namespace VVRace
         {
             get
             {
-                if (Disabled || IsFrozen || !pawn.DevelopmentalStage.Adult() || !(pawn is Vivi) || !pawn.IsColonistPlayerControlled || !pawn.Spawned || pawn.Downed || pawn.IsQuestLodger()) { return 0f; }
+                if (Disabled || IsFrozen || !pawn.DevelopmentalStage.Adult() || !pawn.IsVivi() || !pawn.IsColonistPlayerControlled || !pawn.Spawned || pawn.Downed || pawn.IsQuestLodger()) { return 0f; }
 
                 var mood = pawn.needs.mood.CurLevelPercentage;
-                float offset = (Vivi.IsRoyal ? Mathf.Lerp(-30f, 10f, mood) : Mathf.Lerp(-10f, 5f, mood));
+                float offset = (CompVivi.isRoyal ? Mathf.Lerp(-30f, 10f, mood) : Mathf.Lerp(-10f, 5f, mood));
                 if (offset < 0)
                 {
                     offset *= pawn.GetStatValue(StatDefOf.MentalBreakThreshold);

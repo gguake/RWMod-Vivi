@@ -102,6 +102,7 @@
     <Compile Include="ArtificialPlant\UI\Dialog_GerminateSchedule.cs" />
     <Compile Include="ArtificialPlant\GerminatorModExtension.cs" />
     <Compile Include="ArtificialPlant\AI\WorkGiver_ManageGerminator.cs" />
+    <Compile Include="Egg\Comps\CompViviEggLayer.cs" />
     <Compile Include="Gather\UI\ITab_GatherWorkTable.cs" />
     <Compile Include="Graphic_Conditional.cs" />
     <Compile Include="ArtificialPlant\Comps\CompHeatPusherFloraEnergy.cs" />
@@ -144,6 +145,8 @@
     <Compile Include="Gather\GatherUtility.cs" />
     <Compile Include="SpecialThingFilterWorker_Dessicated.cs" />
     <Compile Include="TextureCache.cs" />
+    <Compile Include="Utility\ViviUtility.cs" />
+    <Compile Include="Vivi\Comps\CompVivi.cs" />
     <Compile Include="Vivi\HediffComp_RoyalJelly.cs" />
     <Compile Include="Vivi\Need_Loyalty.cs" />
     <Compile Include="Vivi\Things\Vivi.cs" />

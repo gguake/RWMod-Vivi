@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <AlienRace.ThingDef_AlienRace ParentName="HumanRace">
+  <AlienRace.ThingDef_AlienRace ParentName="BasePawn">
     <defName>VV_Vivi</defName>
     <label>vivi</label>
     <description>.</description>
-    <thingClass>VVRace.Vivi</thingClass>
 
     <alienRace>
       <generalSettings>
@@ -206,6 +205,13 @@
           </oldHairColorGen>
         </alienPartGenerator>
 
+        <raceGenes>
+          <li>
+            <defName>VV_ViviMetabolism</defName>
+            <chance>100</chance>
+          </li>
+        </raceGenes>
+
         <disallowedTraits>
           <li>
             <defName>Cannibal</defName>
@@ -229,14 +235,16 @@
       </generalSettings>
       
       <graphicPaths>
-        <body>Things/Pawn/Vivi/Body/</body>
+        <body>
+          <bodytypeGraphics>
+            <Thin>Things/Pawn/Vivi/Body/Naked_Thin</Thin>
+            <Female>Things/Pawn/Vivi/Body/Naked_Female</Female>
+            <Baby>Things/Pawn/Vivi/Body/Naked_Baby</Baby>
+            <Child>Things/Pawn/Vivi/Body/Naked_Child</Child>
+          </bodytypeGraphics>
+        </body>
         <head>Things/Pawn/Vivi/Heads/</head>
         <skeleton>Things/Pawn/Humanlike/Bodies/Dessicated/Dessicated_Thin</skeleton>
-        
-        <apparel>
-          <bodyTypeFallback>Thin</bodyTypeFallback>
-          <femaleBodyTypeFallback>Thin</femaleBodyTypeFallback>
-        </apparel>
       </graphicPaths>
       
       <styleSettings>
@@ -288,13 +296,6 @@
         <relationChanceModifierChild>0</relationChanceModifierChild>
         <relationChanceModifierSibling>0</relationChanceModifierSibling>
       </relationSettings>
-      
-      <raceGenes>
-        <li>
-          <defName>VV_ViviMetabolism</defName>
-          <chance>100</chance>
-        </li>
-      </raceGenes>
 
       <raceRestriction>
         <onlyUseRaceRestrictedXenotypes>true</onlyUseRaceRestrictedXenotypes>
@@ -335,6 +336,15 @@
     </alienRace>
 
     <statBases>
+			<MarketValue>1200</MarketValue>
+			<Mass>50</Mass>
+			<CarryingCapacity>45</CarryingCapacity>
+			<PainShockThreshold>0.7</PainShockThreshold>
+			<ToxicEnvironmentResistance>0.9</ToxicEnvironmentResistance>
+			<EatingSpeed>1.2</EatingSpeed>
+			<MeatAmount>30</MeatAmount>
+			<LeatherAmount>30</LeatherAmount>
+
       <ComfyTemperatureMin>20</ComfyTemperatureMin>
       <ComfyTemperatureMax>35</ComfyTemperatureMax>
 
@@ -353,7 +363,69 @@
       
       <ToxicResistance>0.5</ToxicResistance>
       <Fertility>0</Fertility>
+      
+      <RoyalFavorValue>1</RoyalFavorValue>
     </statBases>
+
+    <tools>
+      <li>
+        <label>left fist</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>8.2</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>LeftHand</linkedBodyPartsGroup>
+        <surpriseAttack>
+          <extraMeleeDamages>
+            <li>
+              <def>Stun</def>
+              <amount>14</amount>
+            </li>
+          </extraMeleeDamages>
+        </surpriseAttack>
+      </li>
+      <li>
+        <label>right fist</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>8.2</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>RightHand</linkedBodyPartsGroup>
+        <surpriseAttack>
+          <extraMeleeDamages>
+            <li>
+              <def>Stun</def>
+              <amount>14</amount>
+            </li>
+          </extraMeleeDamages>
+        </surpriseAttack>
+      </li>
+      <li>
+        <label>teeth</label>
+        <capacities>
+          <li>Bite</li>
+        </capacities>
+        <power>8.2</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>Teeth</linkedBodyPartsGroup>
+        <chanceFactor>0.07</chanceFactor>
+        <soundMeleeHit>Pawn_Melee_HumanBite_Hit</soundMeleeHit>
+        <soundMeleeMiss>Pawn_Melee_HumanBite_Miss</soundMeleeMiss>
+      </li>
+      <li>
+        <label>head</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>5</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+        <chanceFactor>0.2</chanceFactor>
+      </li>
+    </tools>
 
     <race>
 			<thinkTreeMain>Humanlike</thinkTreeMain>
@@ -367,10 +439,19 @@
       <baseBodySize>0.8</baseBodySize>
       <baseHealthScale>0.8</baseHealthScale>
       <foodType>OmnivoreHuman</foodType>
-
+      <meatMarketValue>0.8</meatMarketValue>
       <manhunterOnTameFailChance>0.50</manhunterOnTameFailChance>
       <manhunterOnDamageChance>0.90</manhunterOnDamageChance>
+      <soundCallIntervalRange>2000~5000</soundCallIntervalRange>
 
+      <litterSizeCurve>
+        <points>
+          <li>(0.5, 0)</li>
+          <li>(1, 1)</li>
+          <li>(1.01, 0.02)</li>
+          <li>(3.5, 0)</li>
+        </points>
+      </litterSizeCurve>
 			<lifeStageAges Inherit="False">
 				<li>
 					<def>HumanlikeBaby</def>
@@ -409,22 +490,21 @@
 					<minAge>18.000001</minAge>
 				</li>
 			</lifeStageAges>
-      
       <lifeStageWorkSettings>
-        <Firefighter>7</Firefighter>
+        <Firefighter>13</Firefighter>
         <Patient>0</Patient>
-        <Doctor>10</Doctor>
+        <Doctor>13</Doctor>
         <PatientBedRest>0</PatientBedRest>
         <Childcare>0</Childcare>
         <BasicWorker>3</BasicWorker>
         <Warden>10</Warden>
-        <Handling>7</Handling>
-        <Cooking>7</Cooking>
-        <Hunting>7</Hunting>
-        <Construction>10</Construction>
-        <Growing>7</Growing>
-        <Mining>7</Mining>
-        <PlantCutting>7</PlantCutting>
+        <Handling>10</Handling>
+        <Cooking>3</Cooking>
+        <Hunting>10</Hunting>
+        <Construction>7</Construction>
+        <Growing>3</Growing>
+        <Mining>10</Mining>
+        <PlantCutting>3</PlantCutting>
         <Smithing>13</Smithing>
         <Tailoring>7</Tailoring>
         <Art>10</Art>
@@ -473,11 +553,20 @@
         <li>Human</li>
       </hediffGiverSets>
     </race>
-    
-		<recipes Inherit="False">
-		</recipes>
 
-    <comps Inherit="False" />
+    <comps>
+      <li Class="VVRace.CompProperties_EggLayer">
+        <eggProgressDays>15</eggProgressDays>
+      </li>
+      
+      <li Class="VVRace.CompProperties_Vivi" />
+    </comps>
+    
+    <ingredient>
+      <mergeCompatibilityTags>
+        <li>HumanMeat</li>
+      </mergeCompatibilityTags>
+    </ingredient>
   </AlienRace.ThingDef_AlienRace>
 
   <AlienRace.RaceSettings>

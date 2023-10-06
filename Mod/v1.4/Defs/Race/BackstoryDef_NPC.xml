@@ -21,7 +21,7 @@
     </skillGains>
   </AlienRace.AlienBackstoryDef>
 
-  <AlienRace.AlienBackstoryDef Name="VV_AdultSettlerViviBackstory" ParentName="VV_ViviBackstory">
+  <AlienRace.AlienBackstoryDef Abstract="True" Name="VV_AdultSettlerViviBackstory" ParentName="VV_ViviBackstory">
     <slot>Adulthood</slot>
     <spawnCategories>
       <li>VV_SettlerBackstory</li>
@@ -52,7 +52,7 @@
       <li><key>Animals</key><value>5</value></li>
     </skillGains>
     <workDisables>
-      <li>Construction</li>
+      <li>Constructing</li>
       <li>Mining</li>
     </workDisables>
   </AlienRace.AlienBackstoryDef>

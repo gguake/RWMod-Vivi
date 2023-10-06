@@ -23,9 +23,10 @@ namespace VVRace
             yield return Toils_General.Wait(LayingEggTicks);
             yield return Toils_General.Do(delegate
             {
-                if (pawn is Vivi vivi && vivi.CanLayEgg)
+                var eggSpawner = pawn.GetCompViviEggLayer();
+                if (eggSpawner != null && eggSpawner.CanLayEgg)
                 {
-                    var egg = vivi.ProduceEgg();
+                    var egg = eggSpawner.ProduceEgg();
                     if (egg != null)
                     {
                         var hatchery = Hatchery.Thing as ViviEggHatchery;
