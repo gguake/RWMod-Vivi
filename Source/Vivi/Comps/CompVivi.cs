@@ -16,6 +16,7 @@ namespace VVRace
     {
         public bool isRoyal = false;
         private Color? _originalHairColor = null;
+        private bool _isStartingPawn = false;
 
         public bool ShouldBeRoyalIfMature
         {
@@ -32,6 +33,7 @@ namespace VVRace
         {
             Scribe_Values.Look(ref isRoyal, "isRoyal");
             Scribe_Values.Look(ref _originalHairColor, "originalHairColor");
+            Scribe_Values.Look(ref _isStartingPawn, "isStartingPawn");
         }
 
         public override void PostSpawnSetup(bool respawningAfterLoad)
@@ -50,7 +52,11 @@ namespace VVRace
         public void SetRoyal()
         {
             isRoyal = true;
+        }
 
+        public void SetStartingPawn()
+        {
+            _isStartingPawn = true;
         }
 
         public void RefreshHairColor()

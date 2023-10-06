@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <AlienRace.AlienBackstoryDef ParentName="VV_ViviBackstory">
+  <AlienRace.AlienBackstoryDef ParentName="VV_ViviAdultBackstory">
     <defName>VV_ViviExiled</defName>
     <title>vivi exiled</title>
     <titleShort>exiled</titleShort>
     <baseDesc>[PAWN_nameDef] was banished from the nest where he lived due to his different appearance. To survive, [PAWN_pronoun] learned various skills that are not necessary for ordinary royal vivi.</baseDesc>
-    <slot>Adulthood</slot>
     <spawnCategories>
       <li>VV_PlayerExiledBackstory</li>
     </spawnCategories>

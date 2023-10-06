@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
   <VV_RoyalJelly.label>로열 젤리 섭취</VV_RoyalJelly.label>
-  <VV_RoyalJelly.description>비비의 누적 섭취 로열 젤리의 양은 비비의 성장에 영향을 미칩니다. 비비가 성체로 성장했을때 완전히 채웠다면 로열 비비가 되며 그렇지 않으면 일반 비비가 됩니다.\n로열 비비는 번식이 가능하지만 작업 능력이 떨어지며, 일반 비비는 번식이 불가능하지만 로열 비비와 정신 결속을 맺을 경우 작업 능력이 크게 증가합니다.</VV_RoyalJelly.description>
+  <VV_RoyalJelly.description>비비의 누적 섭취 로열 젤리의 양은 비비의 성장에 영향을 미칩니다. 비비가 성체로 성장했을때 완전히 채웠다면 로열 비비가 되며 그렇지 않으면 일반 비비가 됩니다.
+\n로열 비비는 번식이 가능하지만 작업 능력이 떨어지며 좋은 환경을 요구합니다.</VV_RoyalJelly.description>
 
   <VV_Loyalty.label>충성도</VV_Loyalty.label>
-  <VV_Loyalty.description>비비가 현재 집단에 얼마나 충성하는지 나타내며 시간에 따라 천천히 감소하고 기분이 나쁘면 더 빠르게 감소합니다. 충성도는 소속된 로열 비비와 대화를 나누거나 기분이 좋을때 회복됩니다. 충성도가 낮은 비비들은 야생화되거나 정착지를 떠날수도 있습니다.</VV_Loyalty.description>
+  <VV_Loyalty.description>비비가 현재 집단에 얼마나 충성하는지 나타내며 시간에 따라 천천히 감소하고 기분이 나쁘면 더 빠르게 감소합니다. 충성도는 소속된 로열 비비와 대화를 나누거나 기분이 좋을때 회복됩니다.
+\n충성도가 낮은 비비들은 야생화될수 있으며, 정착지에 둘 이상의 로열 비비가 있다면 불만을 가진 로열 비비가 이들을 데리고 정착지를 나갈수도 있습니다.</VV_Loyalty.description>
 </LanguageData>

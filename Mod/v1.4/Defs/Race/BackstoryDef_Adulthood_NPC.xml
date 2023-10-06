@@ -1,28 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <AlienRace.AlienBackstoryDef Abstract="True" Name="VV_ViviBackstory">
-		<bodyTypeMale>Thin</bodyTypeMale>
-		<bodyTypeFemale>Thin</bodyTypeFemale>
-  </AlienRace.AlienBackstoryDef>
-
-  <AlienRace.AlienBackstoryDef ParentName="VV_ViviBackstory">
-    <defName>VV_ViviHiveChild</defName>
-    <title>vivi hive child</title>
-    <titleShort>hive child</titleShort>
-    <baseDesc>[PAWN_nameDef] had an ordinary childhood in the nest.</baseDesc>
-    <slot>Childhood</slot>
-    <spawnCategories>
-      <li>VV_SettlerBackstory</li>
-    </spawnCategories>
-    <skillGains>
-      <li><key>Plants</key><value>2</value></li>
-      <li><key>Construction</key><value>1</value></li>
-      <li><key>Animals</key><value>-2</value></li>
-    </skillGains>
-  </AlienRace.AlienBackstoryDef>
-
-  <AlienRace.AlienBackstoryDef Abstract="True" Name="VV_AdultSettlerViviBackstory" ParentName="VV_ViviBackstory">
-    <slot>Adulthood</slot>
+  <AlienRace.AlienBackstoryDef Abstract="True" Name="VV_AdultSettlerViviBackstory" ParentName="VV_ViviAdultBackstory">
     <spawnCategories>
       <li>VV_SettlerBackstory</li>
     </spawnCategories>
@@ -65,7 +43,7 @@
     <baseDesc>[PAWN_nameDef] is a gatherer in vivi hive.</baseDesc>
     <skillGains>
       <li><key>Plants</key><value>5</value></li>
-      <li><key>Cooking</key><value>5</value></li>
+      <li><key>Mining</key><value>5</value></li>
     </skillGains>
     <workDisables>
       <li>Intellectual</li>

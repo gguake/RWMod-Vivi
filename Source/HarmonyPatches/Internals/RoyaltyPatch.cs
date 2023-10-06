@@ -4,8 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
 using Verse;
 
 namespace VVRace
@@ -32,17 +30,13 @@ namespace VVRace
 
         /// <summary>
         /// 	IL_05e8: ldloc.s 25
-        ///                             call
-        ///                             brtrue_s #1
+        ///     call
+        ///     brtrue_s #1
         ///     IL_05ea: ldc.r4 0.25
-        ///                             br #2
-        ///                             ldc.r4 250.0            #1
-	    ///     IL_05ef: ldloc.s 12                             #2
+        ///     br #2
+        /// #1  ldc.r4 250.0
+	    /// #2  IL_05ef: ldloc.s 12
         /// </summary>
-        /// <param name="codeInstructions"></param>
-        /// <param name="ilGenerator"></param>
-        /// <returns></returns>
-        /// <exception cref="InvalidOperationException"></exception>
         private static IEnumerable<CodeInstruction> QuestNode_Root_Hospitality_Refugee_RunInt_Transpiler(IEnumerable<CodeInstruction> codeInstructions, ILGenerator ilGenerator)
         {
             var instructions = codeInstructions.ToList();

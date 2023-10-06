@@ -16,7 +16,7 @@
     <statBases>
       <WorkToBuild>100</WorkToBuild>
       <Cleanliness>-0.5</Cleanliness>
-      <Flammability>0.9</Flammability>
+      <Flammability>0.22</Flammability>
     </statBases>
 
     <constructEffect>ConstructDirt</constructEffect>
@@ -54,7 +54,6 @@
       <Beauty>1</Beauty>
       <CleaningTimeFactor>0.7</CleaningTimeFactor>
       <FilthMultiplier>0.9</FilthMultiplier>
-      <Flammability>0.9</Flammability>
     </statBases>
 
     <constructEffect>ConstructWood</constructEffect>
@@ -82,6 +81,7 @@
   <edgeType>Hard</edgeType>
   <pollutionTintColor>(0.95, 0.95, 0.93, 1)</pollutionTintColor>
   <isPaintable>true</isPaintable>
+  <burnedDef>BurnedWoodPlankFloor</burnedDef>
 
   <uiOrder>2050</uiOrder>
   <statBases>
@@ -90,7 +90,7 @@
     <Cleanliness>0.7</Cleanliness>
     <CleaningTimeFactor>0.6</CleaningTimeFactor>
     <FilthMultiplier>0.8</FilthMultiplier>
-    <Flammability>1.2</Flammability>
+    <Flammability>1.0</Flammability>
   </statBases>
 
   <constructEffect>ConstructWood</constructEffect>

@@ -79,7 +79,7 @@
     
     <germinateJob>VV_ManageSeedlingInjectLuciferium</germinateJob>
 
-    <bonusMultiplierGerminateSuccessChance>0.6~0.6</bonusMultiplierGerminateSuccessChance>
+    <bonusMultiplierGerminateSuccessChance>0.7~0.7</bonusMultiplierGerminateSuccessChance>
     <bonusMultiplierGerminateRareChance>1.7~1.7</bonusMultiplierGerminateRareChance>
   </VVRace.GerminateScheduleDef>
 </Defs>

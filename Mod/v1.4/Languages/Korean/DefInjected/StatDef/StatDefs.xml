@@ -17,29 +17,25 @@
   <VV_MinGrowthPlantGatherable.description>식물을 채집할수 있는 최소 성장도를 나타냅니다.</VV_MinGrowthPlantGatherable.description>
 
   <VV_PlantGatherCooldown.label>채집 재생시간</VV_PlantGatherCooldown.label>
-  <VV_PlantGatherCooldown.description>식물을 채집 후 다시 채집 가능할때까지 걸리는 시간을 나타냅니다.\n\n오염된 지형에서는 재생하는데 더 오랜 시간이 걸립니다.</VV_PlantGatherCooldown.description>
+  <VV_PlantGatherCooldown.description>식물을 채집 후 다시 채집 가능할때까지 걸리는 시간을 나타냅니다.
+\n오염된 지형에서는 재생하는데 더 오랜 시간이 걸립니다.</VV_PlantGatherCooldown.description>
   <VV_PlantGatherCooldown.formatString>{0} 일</VV_PlantGatherCooldown.formatString>
 
   <VV_PlantHoneyGatherYield.label>꿀 생산량</VV_PlantHoneyGatherYield.label>
-  <VV_PlantHoneyGatherYield.description>식물에서 평균 대비 얼마나 많은 꿀을 채집 가능한지 나타냅니다.\n\n생산량은 내구도, 성장도, 오염에 영향을 받습니다.</VV_PlantHoneyGatherYield.description>
+  <VV_PlantHoneyGatherYield.description>식물에서 평균 대비 얼마나 많은 꿀을 채집 가능한지 나타냅니다.
+\n생산량은 내구도, 성장도, 오염에 영향을 받습니다.</VV_PlantHoneyGatherYield.description>
 
   <VV_TreeResinGatherYield.label>수지 생산량</VV_TreeResinGatherYield.label>
-  <VV_TreeResinGatherYield.description>식물에서 평균 대비 얼마나 많은 수지를 채집 가능한지 나타냅니다.\n\n생산량은 내구도, 성장도, 오염에 영향을 받습니다.</VV_TreeResinGatherYield.description>
+  <VV_TreeResinGatherYield.description>식물에서 평균 대비 얼마나 많은 수지를 채집 가능한지 나타냅니다.
+\n생산량은 내구도, 성장도, 오염에 영향을 받습니다.</VV_TreeResinGatherYield.description>
 
   <VV_GrassFiberGatherYield.label>잔디 섬유 생산량</VV_GrassFiberGatherYield.label>
-  <VV_GrassFiberGatherYield.description>식물에서 평균 대비 얼마나 많은 잔디 섬유를 채집 가능한지 나타냅니다.\n\n생산량은 내구도, 성장도, 오염에 영향을 받습니다.</VV_GrassFiberGatherYield.description>
-
-  <VV_PlantGenesGatherCooldown.label>식물 유전 물질 재생시간</VV_PlantGenesGatherCooldown.label>
-  <VV_PlantGenesGatherCooldown.description>식물에서 유전 물질을 채집 후 다시 복구되기까지 걸리는 시간을 나타냅니다.\n\n오염된 지형에서는 재생하는데 더 오랜 시간이 걸립니다.</VV_PlantGenesGatherCooldown.description>
-
-  <VV_PlantGenesGatherYield.label>식물 유전 물질 채집량</VV_PlantGenesGatherYield.label>
-  <VV_PlantGenesGatherYield.description>식물에서 유전 물질을 얼마나 채집가능한지 나타냅니다.\n\n채집량은 성장도, 오염에 영향을 받습니다.</VV_PlantGenesGatherYield.description>
-
-
+  <VV_GrassFiberGatherYield.description>식물에서 평균 대비 얼마나 많은 잔디 섬유를 채집 가능한지 나타냅니다.
+\n생산량은 내구도, 성장도, 오염에 영향을 받습니다.</VV_GrassFiberGatherYield.description>
 
   <VV_GrowthPointsFactor.label>성장 등급 획득 속도</VV_GrowthPointsFactor.label>
   <VV_GrowthPointsFactor.description>어린이가 성장 등급을 얼마나 많이 획득하는지 나타냅니다.</VV_GrowthPointsFactor.description>
   
   <VV_LearningRateFactor.label>학습 욕구 변화 속도</VV_LearningRateFactor.label>
-  <VV_LearningRateFactor.description>어린이의 학습 욕구가 얼마나 빠르게 변화하는지 나타냅니다.</VV_LearningRateFactor.description>
+  <VV_LearningRateFactor.description>어린이의 학습 욕구가 얼마나 빠르게 변화하는지 나타냅니다. 증가와 손실 모두 영향을 받습니다.</VV_LearningRateFactor.description>
 </LanguageData>

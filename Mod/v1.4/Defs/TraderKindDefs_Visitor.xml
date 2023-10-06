@@ -23,7 +23,7 @@
       
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_FilteredHoney</thingDef>
-        <countRange>40~80</countRange>
+        <countRange>30~60</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_Viviwax</thingDef>
@@ -35,7 +35,7 @@
         <categoryDef>Drugs</categoryDef>
         <maxTechLevelGenerate>Neolithic</maxTechLevelGenerate>
         <thingDefCountRange>-2~1</thingDefCountRange>
-        <totalPriceRange>100~200</totalPriceRange>
+        <totalPriceRange>50~150</totalPriceRange>
       </li>
       
       <!-- Techprints -->

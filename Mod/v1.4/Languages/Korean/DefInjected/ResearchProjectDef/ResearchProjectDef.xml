@@ -16,13 +16,13 @@
   <VV_Weaponry.description>비비들이 사용하는 무기를 제작할 수 있습니다.</VV_Weaponry.description>
   
   <VV_Apparels.label>비비 의류</VV_Apparels.label>
-  <VV_Apparels.description>비비들이 입는 의류를 제작할 수 있습니다.</VV_Apparels.description>
+  <VV_Apparels.description>비비들이 입는 기초적인 의류를 제작할 수 있습니다.</VV_Apparels.description>
 
   <VV_AdvancedApparels.label>비비 고급 의류</VV_AdvancedApparels.label>
   <VV_AdvancedApparels.description>비비들이 입는 고급 의류를 제작할 수 있습니다.</VV_AdvancedApparels.description>
 
   <VV_AncientBotany.label>고대 식물학</VV_AncientBotany.label>
-  <VV_AncientBotany.description>다양한 활용도를 가진 고대 식물들을 복원하는 방법을 연구합니다.</VV_AncientBotany.description>
+  <VV_AncientBotany.description>다양한 활용도를 가진 고대 식물들을 복원하고 배양하는 방법을 연구합니다.</VV_AncientBotany.description>
 
   <VV_Lifestrand.label>생체가닥</VV_Lifestrand.label>
   <VV_Lifestrand.description>악마가닥 천을 특수한 재료로 가공해 강화한 생체가닥 천을 직조할 수 있습니다.</VV_Lifestrand.description>

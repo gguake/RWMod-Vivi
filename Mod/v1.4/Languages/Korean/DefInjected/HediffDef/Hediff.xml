@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
   <VV_RoyalJelly.label>로열 젤리 섭취</VV_RoyalJelly.label>
-  <VV_RoyalJelly.description>로열 젤리를 섭취했습니다. 추가로 로열 젤리를 섭취해도 추가적인 효과를 받지는 않습니다.</VV_RoyalJelly.description>
+  <VV_RoyalJelly.description>로열 젤리를 섭취해 신체가 로열 비비로 변화하고 있습니다. 추가로 로열 젤리를 섭취해도 효과가 중첩되지는 않습니다.</VV_RoyalJelly.description>
 
   <VV_ViviGrowthBoost.label>성장 가속</VV_ViviGrowthBoost.label>
-  <VV_ViviGrowthBoost.description>성장이 가속되어 평소보다 더 빠르게 자랍니다. 학습에 추가적인 보너스도 얻습니다.</VV_ViviGrowthBoost.description>
+  <VV_ViviGrowthBoost.description>성장이 가속되어 평소보다 더 빠르게 자라며 학습 속도에 추가적인 보너스도 얻습니다.</VV_ViviGrowthBoost.description>
 </LanguageData>

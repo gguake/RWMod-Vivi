@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
   <VV_ViviStart.label>추방된 비비</VV_ViviStart.label>
-  <VV_ViviStart.description>당신은 둥지에서 값비싼 로열 젤리를 먹으며 둥지의 어엿한 로열 비비가 되기를 꿈꿨습니다. 그리고 성인이 되었을때 그 꿈이 이뤄지기는 했습니다. 신체가 전혀 성장하지 않았다는 점을 제외하고요.\n일반 비비들은 당신의 왜소한 신체때문에 로열 비비로 대접해주지 않았습니다. 핍박과 차별을 견디던 어느날 당신은 마침내 둥지를 떠나기로 결심했습니다.\n\n그 후 행성을 떠돌며 많은 일을 겪었고 당신은 최초의 꿈을 다시 이뤄내기로 결심했습니다. 당신만의 새로운 둥지를 건설할 시간입니다.</VV_ViviStart.description>
+  <VV_ViviStart.description>당신은 둥지에서 값비싼 로열 젤리를 먹으며 둥지의 어엿한 로열 비비가 되기를 꿈꿨습니다. 그리고 성인이 되었을때 그 꿈이 이뤄지기는 했습니다. 신체가 전혀 성장하지 않았다는 점을 제외하고요.
+\n일반 비비들은 당신의 왜소한 신체때문에 로열 비비로 대접해주지 않았습니다. 핍박과 차별을 견디던 어느날 당신은 마침내 둥지를 떠나기로 결심했습니다.
+\n그 후 행성을 떠돌며 많은 일을 겪었고 당신은 최초의 꿈을 다시 이뤄내기로 결심했습니다. 당신만의 새로운 둥지를 건설할 시간입니다.</VV_ViviStart.description>
+
   <VV_ViviStart.scenario.name>추방된 비비</VV_ViviStart.scenario.name>
   <VV_ViviStart.scenario.summary>새로운 여왕을 꿈꾸는 추방된 로열 비비입니다.</VV_ViviStart.scenario.summary>
-  <VV_ViviStart.scenario.description>당신은 둥지에서 값비싼 로열 젤리를 먹으며 둥지의 어엿한 로열 비비가 되기를 꿈꿨습니다. 그리고 성인이 되었을때 그 꿈이 이뤄지기는 했습니다. 신체가 전혀 성장하지 않았다는 점을 제외하고요.\n일반 비비들은 당신의 왜소한 신체때문에 로열 비비로 대접해주지 않았습니다. 핍박과 차별을 견디던 어느날 당신은 마침내 둥지를 떠나기로 결심했습니다.\n\n그 후 행성을 떠돌며 많은 일을 겪었고 당신은 최초의 꿈을 다시 이뤄내기로 결심했습니다. 당신만의 새로운 둥지를 건설할 시간입니다.</VV_ViviStart.scenario.description>
-  
+  <VV_ViviStart.scenario.description>당신은 둥지에서 값비싼 로열 젤리를 먹으며 둥지의 어엿한 로열 비비가 되기를 꿈꿨습니다. 그리고 성인이 되었을때 그 꿈이 이뤄지기는 했습니다. 신체가 전혀 성장하지 않았다는 점을 제외하고요.
+일반 비비들은 당신의 왜소한 신체때문에 로열 비비로 대접해주지 않았습니다. 핍박과 차별을 견디던 어느날 당신은 마침내 둥지를 떠나기로 결심했습니다.
+그 후 행성을 떠돌며 많은 일을 겪었고 당신은 최초의 꿈을 다시 이뤄내기로 결심했습니다. 당신만의 새로운 둥지를 건설할 시간입니다.</VV_ViviStart.scenario.description>
+
   <VV_ViviStart.scenario.parts.ConfigurePawnsXenotypes.xenotypeCounts.0.description>성인 로열 비비</VV_ViviStart.scenario.parts.ConfigurePawnsXenotypes.xenotypeCounts.0.description>
-  <VV_ViviStart.scenario.parts.GameStartDialog.text>당신은 이곳에 새로운 둥지를 건설하기로 했습니다. 어엿한 여왕 비비가 되어 커다란 둥지를 건설해 겉모습은 아무런 문제가 되지 않는다는것을 과거의 동료들에게 증명할것입니다.\n\n여기에 모든 짐을 풀었고 그중에는 당신이 행성을 떠도는동안 낳았던 소중한 알도 있습니다. 할 일이 매우 많지만 가장 우선되는것은 간단하게라도 집과 부화기를 건설해 당신을 도울 비비를 늘리는것입니다.\n\n\n팁: 비비 크림으로 매우 빠르게 벽을 가설할 수 있으며, 이 벽은 나중에 다듬어 강화할수도 있습니다. 알은 추위에 취약하므로 파손되지 않도록 주의하세요.</VV_ViviStart.scenario.parts.GameStartDialog.text>
+  <VV_ViviStart.scenario.parts.GameStartDialog.text>당신은 이곳에 새로운 둥지를 건설하기로 했습니다. 어엿한 여왕 비비가 되어 커다란 둥지를 건설해 겉모습은 아무런 문제가 되지 않는다는것을 과거의 동료들에게 증명할것입니다.
+\n여기에 모든 짐을 풀었고 그중에는 당신이 행성을 떠도는동안 낳았던 소중한 알도 있습니다. 할 일이 매우 많지만 가장 우선되는것은 간단하게라도 집과 부화기를 건설해 당신을 도울 비비를 늘리는것입니다.
+\n\n팁: 비비 크림으로 매우 빠르게 벽을 가설할 수 있으며, 이 벽은 나중에 다듬어 강화할수도 있습니다. 알은 추위에 취약하므로 파손되지 않도록 주의하세요.</VV_ViviStart.scenario.parts.GameStartDialog.text>
 </LanguageData>

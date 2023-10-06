@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <AlienRace.AlienBackstoryDef ParentName="VV_ViviChildBackstory">
+    <defName>VV_ViviHiveChild</defName>
+    <title>vivi hive child</title>
+    <titleShort>hive child</titleShort>
+    <baseDesc>[PAWN_nameDef] had an ordinary childhood in the nest.</baseDesc>
+    <spawnCategories>
+      <li>VV_SettlerBackstory</li>
+    </spawnCategories>
+    <skillGains>
+      <li><key>Plants</key><value>2</value></li>
+      <li><key>Construction</key><value>1</value></li>
+      <li><key>Animals</key><value>-2</value></li>
+    </skillGains>
+  </AlienRace.AlienBackstoryDef>
+</Defs>

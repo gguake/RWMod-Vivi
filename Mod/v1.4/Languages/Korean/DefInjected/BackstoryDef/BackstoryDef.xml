@@ -1,13 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
+  <!-- Childhoods -->
   <VV_ViviHiveChild.title>비비 둥지 아이</VV_ViviHiveChild.title>
   <VV_ViviHiveChild.titleShort>둥지 아이</VV_ViviHiveChild.titleShort>
-  <VV_ViviHiveChild.baseDesc>[PAWN_nameDef]는 둥지에서 평범한 어린 시절을 보냈습니다.</VV_ViviHiveChild.baseDesc>
+  <VV_ViviHiveChild.baseDesc>[PAWN_nameDef]는 비비 둥지에서 평범한 어린 시절을 보냈습니다.</VV_ViviHiveChild.baseDesc>
   
+  <!-- Adulthoods - NPC -->
   <VV_ViviSettler.title>비비 둥지 정착민</VV_ViviSettler.title>
   <VV_ViviSettler.titleShort>둥지 정착민</VV_ViviSettler.titleShort>
-  <VV_ViviSettler.baseDesc>[PAWN_nameDef]는 둥지에 속한 정착민입니다.</VV_ViviSettler.baseDesc>
+  <VV_ViviSettler.baseDesc>[PAWN_nameDef]는 비비 둥지의 평범한 정착민입니다.</VV_ViviSettler.baseDesc>
 
+  <VV_ViviCook.title>비비 요리사</VV_ViviCook.title>
+  <VV_ViviCook.titleShort>요리사</VV_ViviCook.titleShort>
+  <VV_ViviCook.baseDesc>[PAWN_nameDef]는 비비 둥지의 식량을 담당하는 요리사입니다.</VV_ViviCook.baseDesc>
+
+  <VV_ViviGatherer.title>비비 채집가</VV_ViviGatherer.title>
+  <VV_ViviGatherer.titleShort>채집가</VV_ViviGatherer.titleShort>
+  <VV_ViviGatherer.baseDesc>[PAWN_nameDef]는 비비 둥지의 자원 채집을 담당하는 채집가입니다.</VV_ViviGatherer.baseDesc>
+
+  <VV_ViviArchitect.title>비비 건축가</VV_ViviArchitect.title>
+  <VV_ViviArchitect.titleShort>건축가</VV_ViviArchitect.titleShort>
+  <VV_ViviArchitect.baseDesc>[PAWN_nameDef]는 비비 둥지를 확장하고 보수하는 작업을 담당하는 건축가입니다.</VV_ViviArchitect.baseDesc>
+
+  <VV_ViviResearcher.title>비비 연구원</VV_ViviResearcher.title>
+  <VV_ViviResearcher.titleShort>연구원</VV_ViviResearcher.titleShort>
+  <VV_ViviResearcher.baseDesc>[PAWN_nameDef]는 비비 둥지에서 새로운 기술을 연구하거나 외부의 현대적인 기술을 공부하고 적용하는 연구원입니다.</VV_ViviResearcher.baseDesc>
+
+  <VV_ViviHerbalist.title>비비 약초꾼</VV_ViviHerbalist.title>
+  <VV_ViviHerbalist.titleShort>약초꾼</VV_ViviHerbalist.titleShort>
+  <VV_ViviHerbalist.baseDesc>[PAWN_nameDef]는 비비 둥지 주변을 돌아다니면서 약초를 찾거나 새로운 식물을 연구하는 약초꾼입니다.</VV_ViviHerbalist.baseDesc>
+
+  <VV_ViviGuard.title>비비 경비원</VV_ViviGuard.title>
+  <VV_ViviGuard.titleShort>경비원</VV_ViviGuard.titleShort>
+  <VV_ViviGuard.baseDesc>[PAWN_nameDef]는 비비 둥지 외부의 적에 대항하거나 내부의 질서를 유지하는 경비원입니다.</VV_ViviGuard.baseDesc>
+
+  <VV_ViviScout.title>비비 정탐꾼</VV_ViviScout.title>
+  <VV_ViviScout.titleShort>정탐꾼</VV_ViviScout.titleShort>
+  <VV_ViviScout.baseDesc>[PAWN_nameDef]는 비비 둥지 주변을 순찰하며 외부의 적을 감지하거나 주변 정착지의 사건을 정찰해 보고하는 정탐꾼입니다.</VV_ViviScout.baseDesc>
+
+  <!-- Adulthoods - Player -->
   <VV_ViviExiled.title>비비 추방자</VV_ViviExiled.title>
   <VV_ViviExiled.titleShort>추방자</VV_ViviExiled.titleShort>
   <VV_ViviExiled.baseDesc>[PAWN_nameDef]는 남다른 외형탓에 둥지에서 쫓겨났습니다. 살아남기 위해서 [PAWN_pronoun]는 보통의 로열 비비들에게는 필요 없는 여러 능력을 배웠습니다.</VV_ViviExiled.baseDesc>
