@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -14,6 +15,17 @@ namespace VVRace
         public int nextRefreshTick;
         public float energy;
 
+        public int LocalEnergyFluxForInspector
+        {
+            get
+            {
+                var extension = plant.ArtificialPlantModExtension;
+                var generatedEnergy = extension.energyGenerateRule?.CalcEnergy(plant, 60000) ?? 0;
+                var consumedEnergy = extension.energyConsumeRule?.CalcEnergy(plant, 60000) ?? 0;
+                return (int)generatedEnergy - (int)consumedEnergy;
+            }
+        }
+
         public void ExposeData()
         {
             Scribe_Values.Look(ref nextRefreshTick, "nextRefreshTick");
@@ -21,10 +33,9 @@ namespace VVRace
         }
     }
 
-    public class EnergyFluxNetwork
+    public class EnergyFluxNetwork : IEnumerable<ArtificialPlant>
     {
         public int NetworkHash { get; private set; }
-        public float LastDistributedEnergy { get; private set; }
         public int ShouldRegenerateNetworkTick { get; set; } = -1;
 
         private Dictionary<ArtificialPlant, EnergyFluxNetworkNode> _nodes { get; }
@@ -37,6 +48,24 @@ namespace VVRace
             _nodes = new Dictionary<ArtificialPlant, EnergyFluxNetworkNode>();
 
             NetworkHash = Rand.Int;
+        }
+
+        public IEnumerator<ArtificialPlant> GetEnumerator()
+        {
+            return _nodes.Keys.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return _nodes.Keys.GetEnumerator();
+        }
+
+        public EnergyFluxNetworkNode this[ArtificialPlant plant]
+        {
+            get
+            {
+                return _nodes.TryGetValue(plant, out var node) ? node : null;
+            }
         }
 
         public void AddPlant(ArtificialPlant plant, EnergyFluxNetworkNode node)
@@ -91,15 +120,12 @@ namespace VVRace
                             var node = _nodes[plant];
                             node.energy = Mathf.Clamp(node.energy + divided, 0f, plant.ArtificialPlantModExtension.energyCapacity);
                         }
-
-                        LastDistributedEnergy = divided / (tick - _lastRefreshTick);
                     }
                 }
 
                 _lastRefreshTick = tick;
             }
         }
-
 
         private int CalcTickInterval(ArtificialPlant plant)
         {

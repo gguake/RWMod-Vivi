@@ -62,47 +62,50 @@ namespace VVRace
         {
             CurLevel += NeedOffsetByInterval;
 
-            if (IsCritical && pawn.IsColonistPlayerControlled && !pawn.InMentalState && !pawn.Downed && pawn.Spawned)
+            if (pawn.IsHashIntervalTick(2000))
             {
-                if (Vivi.IsRoyal)
+                if (IsCritical && pawn.IsColonistPlayerControlled && !pawn.InMentalState && !pawn.Downed && pawn.Spawned)
                 {
-                    if (VVMentalBreakDefOf.GiveUpExit.Worker.BreakCanOccur(pawn))
+                    if (Vivi.IsRoyal)
                     {
-                        var allPlayerPawns = PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction_NoCryptosleep;
-                        var royalCount = PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction_NoCryptosleep.Count(v => v is Vivi vivi && vivi.IsRoyal);
-                        if (royalCount > 1)
+                        if (VVMentalBreakDefOf.GiveUpExit.Worker.BreakCanOccur(pawn))
                         {
-                            foreach (var affected in pawn.Map.mapPawns.AllPawnsSpawned.Where(v => v is Vivi vivi && vivi.Faction == pawn.Faction && !vivi.IsRoyal))
+                            var allPlayerPawns = PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction_NoCryptosleep;
+                            var royalCount = PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction_NoCryptosleep.Count(v => v is Vivi vivi && vivi.IsRoyal);
+                            if (royalCount > 1)
                             {
-                                if (affected.needs.TryGetNeed<Need_Loyalty>()?.IsLow ?? false)
+                                foreach (var affected in pawn.Map.mapPawns.AllPawnsSpawned.Where(v => v is Vivi vivi && vivi.Faction == pawn.Faction && !vivi.IsRoyal))
                                 {
-                                    if (VVMentalBreakDefOf.GiveUpExit.Worker.BreakCanOccur(affected))
+                                    if (affected.needs.TryGetNeed<Need_Loyalty>()?.IsLow ?? false)
                                     {
-                                        _exitMapCandidatesList.Add(affected);
+                                        if (VVMentalBreakDefOf.GiveUpExit.Worker.BreakCanOccur(affected))
+                                        {
+                                            _exitMapCandidatesList.Add(affected);
+                                        }
                                     }
                                 }
-                            }
 
-                            // TODO: 나중에 여왕 비비 따라가도록 수정
-                            if (_exitMapCandidatesList.Count >= 2)
-                            {
-                                VVMentalBreakDefOf.GiveUpExit.Worker.TryStart(pawn, LocalizeTexts.MentalStateReason_Loyalty.Translate(), false);
-
-                                foreach (var candidate in _exitMapCandidatesList)
+                                // TODO: 나중에 여왕 비비 따라가도록 수정
+                                if (_exitMapCandidatesList.Count >= 2)
                                 {
-                                    VVMentalBreakDefOf.GiveUpExit.Worker.TryStart(candidate, LocalizeTexts.MentalStateReason_Loyalty.Translate(), false);
-                                }
-                            }
+                                    VVMentalBreakDefOf.GiveUpExit.Worker.TryStart(pawn, LocalizeTexts.MentalStateReason_Loyalty.Translate(), false);
 
-                            _exitMapCandidatesList.Clear();
+                                    foreach (var candidate in _exitMapCandidatesList)
+                                    {
+                                        VVMentalBreakDefOf.GiveUpExit.Worker.TryStart(candidate, LocalizeTexts.MentalStateReason_Loyalty.Translate(), false);
+                                    }
+                                }
+
+                                _exitMapCandidatesList.Clear();
+                            }
                         }
                     }
-                }
-                else
-                {
-                    if (VVMentalBreakDefOf.RunWild.Worker.BreakCanOccur(pawn))
+                    else
                     {
-                        VVMentalBreakDefOf.RunWild.Worker.TryStart(pawn, LocalizeTexts.MentalStateReason_Loyalty.Translate(), false);
+                        if (VVMentalBreakDefOf.RunWild.Worker.BreakCanOccur(pawn))
+                        {
+                            VVMentalBreakDefOf.RunWild.Worker.TryStart(pawn, LocalizeTexts.MentalStateReason_Loyalty.Translate(), false);
+                        }
                     }
                 }
             }

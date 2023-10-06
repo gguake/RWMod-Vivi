@@ -52,7 +52,8 @@
     </placeWorkers>
 
     <building>
-      <deconstructible>false</deconstructible>
+      <deconstructible>true</deconstructible>
+      <claimable>false</claimable>
       <alwaysDeconstructible>false</alwaysDeconstructible>
       
       <allowWireConnection>false</allowWireConnection>
@@ -115,6 +116,10 @@
       <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
     </statBases>
 
+    <costList>
+      <VV_HeatingPetal>10</VV_HeatingPetal>
+    </costList>
+
     <comps>
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
@@ -168,6 +173,10 @@
       <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
       <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
     </statBases>
+
+    <costList>
+      <VV_CoolingPetal>10</VV_CoolingPetal>
+    </costList>
 
     <comps>
       <li Class="VVRace.CompProperties_RepeatGatherable" />
@@ -225,6 +234,10 @@
       <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
       <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
     </statBases>
+
+    <costList>
+      <VV_SparklingPetal>10</VV_SparklingPetal>
+    </costList>
 
     <comps>
       <li Class="VVRace.CompProperties_RepeatGatherable" />
@@ -303,6 +316,10 @@
       <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
     </statBases>
 
+    <costList>
+      <VV_SparklingPetal>10</VV_SparklingPetal>
+    </costList>
+
     <comps>
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
@@ -361,6 +378,10 @@
       <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
       <VV_PlantHoneyGatherYield>0.5</VV_PlantHoneyGatherYield>
     </statBases>
+
+    <costList>
+      <VV_CoolingPetal>10</VV_CoolingPetal>
+    </costList>
 
     <comps>
       <li Class="VVRace.CompProperties_RepeatGatherable" />
@@ -421,6 +442,10 @@
       <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
       <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
     </statBases>
+
+    <costList>
+      <VV_HeatingPetal>10</VV_HeatingPetal>
+    </costList>
 
     <comps>
       <li Class="VVRace.CompProperties_RepeatGatherable" />
@@ -485,6 +510,10 @@
       <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
       <VV_PlantHoneyGatherYield>3.2</VV_PlantHoneyGatherYield>
     </statBases>
+
+    <costList>
+      <VV_PerfumingPetal>10</VV_PerfumingPetal>
+    </costList>
 
     <comps>
       <li Class="VVRace.CompProperties_RepeatGatherable" />
@@ -551,6 +580,10 @@
       <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
       <VV_GrassFiberGatherYield>2</VV_GrassFiberGatherYield>
     </statBases>
+
+    <costList>
+      <VV_LivingLeaf>10</VV_LivingLeaf>
+    </costList>
 
     <comps>
     </comps>
@@ -658,6 +691,10 @@
       <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
       <VV_GrassFiberGatherYield>2</VV_GrassFiberGatherYield>
     </statBases>
+
+    <costList>
+      <VV_LivingLeaf>10</VV_LivingLeaf>
+    </costList>
 
     <comps>
     </comps>

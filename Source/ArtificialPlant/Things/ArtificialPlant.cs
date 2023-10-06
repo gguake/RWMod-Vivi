@@ -48,16 +48,6 @@ namespace VVRace
         public float EnergyChargeRatio => _energyNode.energy / ArtificialPlantModExtension.energyCapacity;
         public float Energy => _energyNode.energy;
 
-        public int EnergyFlux
-        {
-            get
-            {
-                var generatedEnergy = ArtificialPlantModExtension.energyGenerateRule?.CalcEnergy(this, 60000) ?? 0;
-                var consumedEnergy = ArtificialPlantModExtension.energyConsumeRule?.CalcEnergy(this, 60000) ?? 0;
-                return (int)generatedEnergy - (int)consumedEnergy;
-            }
-        }
-
         private int _zeroEnergyTicks = 0;
 
         private bool _fertilizeAutoActivated = true;
@@ -241,7 +231,11 @@ namespace VVRace
 
             if (Spawned)
             {
-                var energyFlux = EnergyFlux + EnergyFluxNetwork.LastDistributedEnergy * 60000f;
+                foreach (var plant in EnergyFluxNetwork)
+                {
+
+                }
+                var energyFlux = _energyNode.LocalEnergyFluxForInspector;
                 if (energyFlux != 0)
                 {
                     sb.Append(" ");
@@ -429,7 +423,7 @@ namespace VVRace
                 yield return new StatDrawEntry(
                     StatCategoryDefOf.Basics,
                     LocalizeTexts.StatsReport_EnergyFlux.Translate(),
-                    EnergyFlux.ToString("+0;-#"),
+                    _energyNode.LocalEnergyFluxForInspector.ToString("+0;-#"),
                     LocalizeTexts.StatsReport_EnergyFlux_Desc.Translate(),
                     -20001);
             }

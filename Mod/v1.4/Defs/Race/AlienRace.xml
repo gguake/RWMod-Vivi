@@ -232,6 +232,11 @@
         <body>Things/Pawn/Vivi/Body/</body>
         <head>Things/Pawn/Vivi/Heads/</head>
         <skeleton>Things/Pawn/Humanlike/Bodies/Dessicated/Dessicated_Thin</skeleton>
+        
+        <apparel>
+          <bodyTypeFallback>Thin</bodyTypeFallback>
+          <femaleBodyTypeFallback>Thin</femaleBodyTypeFallback>
+        </apparel>
       </graphicPaths>
       
       <styleSettings>
@@ -259,11 +264,38 @@
       </styleSettings>
       
       <thoughtSettings>
+        <replacerList>
+          <li>
+            <original>SleptInBarracks</original>
+            <replacer>VV_SleptInBarracks</replacer> 
+          </li>
+        </replacerList>
+
         <cannotReceiveThoughts>
           <li>VV_AtePollen</li>
         </cannotReceiveThoughts>
       </thoughtSettings>
       
+      <relationSettings>
+        <relationChanceModifierLover>0</relationChanceModifierLover>
+        <relationChanceModifierExLover>0</relationChanceModifierExLover>
+
+        <relationChanceModifierFiance>0</relationChanceModifierFiance>
+        <relationChanceModifierSpouse>0</relationChanceModifierSpouse>
+        <relationChanceModifierExSpouse>0</relationChanceModifierExSpouse>
+
+        <relationChanceModifierParent>0</relationChanceModifierParent>
+        <relationChanceModifierChild>0</relationChanceModifierChild>
+        <relationChanceModifierSibling>0</relationChanceModifierSibling>
+      </relationSettings>
+      
+      <raceGenes>
+        <li>
+          <defName>VV_ViviMetabolism</defName>
+          <chance>100</chance>
+        </li>
+      </raceGenes>
+
       <raceRestriction>
         <onlyUseRaceRestrictedXenotypes>true</onlyUseRaceRestrictedXenotypes>
 
@@ -303,6 +335,9 @@
     </alienRace>
 
     <statBases>
+      <ComfyTemperatureMin>20</ComfyTemperatureMin>
+      <ComfyTemperatureMax>35</ComfyTemperatureMax>
+
       <VV_HoneyGatherSpeed>1.0</VV_HoneyGatherSpeed>
       <VV_HoneyGatherYield>1.0</VV_HoneyGatherYield>
       <VV_PlantGatherSpeed>1.0</VV_PlantGatherSpeed>

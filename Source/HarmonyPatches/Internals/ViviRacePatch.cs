@@ -64,6 +64,10 @@ namespace VVRace.HarmonyPatches
                 transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(Need_Learning_Learn_Transpiler)));
 
 
+            harmony.Patch(
+                original: AccessTools.Method(typeof(PawnRelationWorker_Sibling), nameof(PawnRelationWorker_Sibling.InRelation)),
+                postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(PawnRelationWorker_Sibling_InRelation_Postfix)));
+
 
             harmony.Patch(
                 original: AccessTools.Method(typeof(Pawn_InteractionsTracker), nameof(Pawn_InteractionsTracker.TryInteractWith)),
@@ -282,6 +286,14 @@ namespace VVRace.HarmonyPatches
             foreach (var inst in codeInstructions)
             {
                 yield return inst;
+            }
+        }
+
+        private static void PawnRelationWorker_Sibling_InRelation_Postfix(ref bool __result, Pawn me, Pawn other)
+        {
+            if (!__result && me is Vivi vivi1 && other is Vivi vivi2)
+            {
+                __result = vivi1.GetMother() != null && vivi2.GetMother() != null && vivi1.GetMother() == vivi2.GetMother();
             }
         }
 

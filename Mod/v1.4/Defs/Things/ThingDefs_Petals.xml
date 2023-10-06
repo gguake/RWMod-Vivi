@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+    <ThingDef Abstract="True" Name="VV_PetalBase" ParentName="ResourceBase">
+        <thingCategories>
+            <li>VV_Petal</li>
+        </thingCategories>
+    
+        <resourceReadoutPriority>Middle</resourceReadoutPriority>
+        <soundInteract>Standard_Drop</soundInteract>
+        <soundDrop>Standard_Drop</soundDrop>
+        
+        <useHitPoints>true</useHitPoints>
+        <statBases>
+            <Mass>0.5</Mass>
+            <MaxHitPoints>60</MaxHitPoints>
+            <Flammability>1.0</Flammability>
+            <DeteriorationRate>4</DeteriorationRate>
+        </statBases>
+        <stackLimit>25</stackLimit>
+        
+        <tradeTags>
+            <li>VV_Petal</li>
+        </tradeTags>
+        
+        <comps>
+            <li Class="CompProperties_TemperatureRuinable">
+                <minSafeTemperature>0</minSafeTemperature>
+                <maxSafeTemperature>90</maxSafeTemperature>
+                <progressPerDegreePerTick>0.00001</progressPerDegreePerTick>
+            </li>
+            <li Class="CompProperties_Rottable">
+                <daysToRotStart>60</daysToRotStart>
+                <rotDestroys>true</rotDestroys>
+            </li>
+        </comps>
+    </ThingDef>
+
+    <ThingDef ParentName="VV_PetalBase">
+        <defName>VV_HeatingPetal</defName>
+        <label>heating petal</label>
+        <description>.</description>
+        
+        <graphicData>
+            <texPath>Things/Item/VV_Beeswax</texPath>
+            <graphicClass>Graphic_StackCount</graphicClass>
+            <color>(255,255,255)</color>
+        </graphicData>
+  
+        <statBases>
+            <MarketValue>10</MarketValue>
+            <Beauty>1</Beauty>
+        </statBases>
+    </ThingDef>
+
+    <ThingDef ParentName="VV_PetalBase">
+        <defName>VV_CoolingPetal</defName>
+        <label>cooling petal</label>
+        <description>.</description>
+        
+        <graphicData>
+            <texPath>Things/Item/VV_Beeswax</texPath>
+            <graphicClass>Graphic_StackCount</graphicClass>
+            <color>(255,255,255)</color>
+        </graphicData>
+  
+        <statBases>
+            <MarketValue>10</MarketValue>
+            <Beauty>1</Beauty>
+        </statBases>
+    </ThingDef>
+
+    <ThingDef ParentName="VV_PetalBase">
+        <defName>VV_SparklingPetal</defName>
+        <label>sparkling petal</label>
+        <description>.</description>
+        
+        <graphicData>
+            <texPath>Things/Item/VV_Beeswax</texPath>
+            <graphicClass>Graphic_StackCount</graphicClass>
+            <color>(255,255,255)</color>
+        </graphicData>
+  
+        <statBases>
+            <MarketValue>10</MarketValue>
+            <Beauty>1</Beauty>
+        </statBases>
+    </ThingDef>
+
+    <ThingDef ParentName="VV_PetalBase">
+        <defName>VV_PerfumingPetal</defName>
+        <label>perfuming petal</label>
+        <description>.</description>
+        
+        <graphicData>
+            <texPath>Things/Item/VV_Beeswax</texPath>
+            <graphicClass>Graphic_StackCount</graphicClass>
+            <color>(255,255,255)</color>
+        </graphicData>
+  
+        <statBases>
+            <MarketValue>10</MarketValue>
+            <Beauty>1</Beauty>
+        </statBases>
+    </ThingDef>
+
+    <ThingDef ParentName="VV_PetalBase">
+        <defName>VV_LivingLeaf</defName>
+        <label>perfuming petal</label>
+        <description>.</description>
+        
+        <graphicData>
+            <texPath>Things/Item/VV_Beeswax</texPath>
+            <graphicClass>Graphic_StackCount</graphicClass>
+            <color>(255,255,255)</color>
+        </graphicData>
+  
+        <statBases>
+            <MarketValue>10</MarketValue>
+            <Beauty>1</Beauty>
+        </statBases>
+    </ThingDef>
+</Defs>

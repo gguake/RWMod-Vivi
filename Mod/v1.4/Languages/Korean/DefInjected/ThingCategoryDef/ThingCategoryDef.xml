@@ -12,6 +12,15 @@
   <VV_BuildingsVivi.label>비비 건물</VV_BuildingsVivi.label>
   <VV_BuildingsVivi.description>비비 건물</VV_BuildingsVivi.description>
 
-  <VV_ViviProduct.label>비비 생산품</VV_ViviProduct.label>
-  <VV_ViviProduct.description>비비 생산품</VV_ViviProduct.description>
+  <VV_ViviProduct.label>비비 꿀 생산품</VV_ViviProduct.label>
+  <VV_ViviProduct.description>비비 꿀 생산품</VV_ViviProduct.description>
+
+  <VV_ViviResource.label>비비 자원</VV_ViviResource.label>
+  <VV_ViviResource.description>비비 자원</VV_ViviResource.description>
+
+  <VV_Petal.label>꽃잎</VV_Petal.label>
+  <VV_Petal.description>꽃잎</VV_Petal.description>
+
+  <VV_ArtificialPlant.label>고대 식물</VV_ArtificialPlant.label>
+  <VV_ArtificialPlant.description>고대 식물</VV_ArtificialPlant.description>
 </LanguageData>

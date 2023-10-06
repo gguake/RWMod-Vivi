@@ -29,9 +29,9 @@
     <stackLimit>75</stackLimit>
 
     <ingestible>
-      <preferability>DesperateOnly</preferability>
+      <preferability>NeverForNutrition</preferability>
       <tasteThought>VV_AtePollen</tasteThought>
-      <foodType>VegetableOrFruit</foodType>
+      <foodType>Plant</foodType>
     </ingestible>
 
     <tradeability>None</tradeability>
@@ -185,6 +185,7 @@
 		<socialPropernessMatters>true</socialPropernessMatters>
 		<thingCategories>
 			<li>Foods</li>
+			<li>Drugs</li>
 		</thingCategories>
 
 		<statBases>

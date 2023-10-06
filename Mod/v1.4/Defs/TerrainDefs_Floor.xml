@@ -96,7 +96,7 @@
   <constructEffect>ConstructWood</constructEffect>
   <costList>
     <VV_Viviwax>10</VV_Viviwax>
-    <VV_Propolis>2</VV_Propolis>
+    <VV_Propolis>10</VV_Propolis>
     <Neutroamine>4</Neutroamine>
   </costList>
   <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>

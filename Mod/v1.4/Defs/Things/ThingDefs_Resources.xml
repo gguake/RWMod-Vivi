@@ -10,7 +10,7 @@
       <graphicClass>Graphic_StackCount</graphicClass>
     </graphicData>
     <thingCategories>
-      <li>ResourcesRaw</li>
+      <li>VV_ViviResource</li>
     </thingCategories>
 
     <resourceReadoutPriority>Middle</resourceReadoutPriority>
@@ -66,7 +66,7 @@
     </statBases>
     <healthAffectsPrice>false</healthAffectsPrice>
     <thingCategories>
-      <li>ResourcesRaw</li>
+      <li>VV_ViviResource</li>
     </thingCategories>
     <burnableByRecipe>true</burnableByRecipe>
     <smeltable>true</smeltable>
@@ -111,6 +111,7 @@
     </graphicData>
     <thingCategories>
       <li>PlantMatter</li>
+      <li>VV_ViviResource</li>
     </thingCategories>
 
     <resourceReadoutPriority>Middle</resourceReadoutPriority>
@@ -184,7 +185,7 @@
     <allowedArchonexusCount>80</allowedArchonexusCount>
   </ThingDef>
   
-  <!-- 생명 가닥 -->
+  <!-- 생체 가닥 -->
   <ThingDef ParentName="ResourceBase">
     <defName>VV_Lifestrand</defName>
     <label>lifestrand</label>
@@ -246,7 +247,7 @@
       <graphicClass>Graphic_StackCount</graphicClass>
     </graphicData>
     <thingCategories>
-      <li>ResourcesRaw</li>
+      <li>VV_ViviResource</li>
     </thingCategories>
 
     <resourceReadoutPriority>Middle</resourceReadoutPriority>
@@ -278,7 +279,7 @@
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <thingCategories>
-      <li>ResourcesRaw</li>
+      <li>VV_ViviResource</li>
     </thingCategories>
 
     <resourceReadoutPriority>Middle</resourceReadoutPriority>

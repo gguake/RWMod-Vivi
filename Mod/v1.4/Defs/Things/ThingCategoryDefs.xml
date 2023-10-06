@@ -9,7 +9,7 @@
 
   <ThingCategoryDef>
     <defName>VV_ViviWeapon</defName>
-    <label>vivi weapon</label>
+    <label>vivi weapons</label>
     <parent>VV_ViviEquipments</parent>
     <iconPath>UI/Icons/ThingCategories/VV_ViviWeapon</iconPath>
   </ThingCategoryDef>
@@ -30,15 +30,29 @@
   
   <ThingCategoryDef>
     <defName>VV_ViviProduct</defName>
-    <label>vivi product</label>
+    <label>vivi honey products</label>
     <parent>AnimalProductRaw</parent>
     <iconPath>UI/Icons/ThingCategories/VV_ViviProduct</iconPath>
   </ThingCategoryDef>
   
   <ThingCategoryDef>
+    <defName>VV_ViviResource</defName>
+    <label>vivi resources</label>
+    <parent>ResourcesRaw</parent>
+    <iconPath>UI/Icons/ThingCategories/VV_ViviProduct</iconPath>
+  </ThingCategoryDef>
+
+  <ThingCategoryDef>
+    <defName>VV_Petal</defName>
+    <label>petals</label>
+    <parent>VV_ViviResource</parent>
+    <iconPath>UI/Icons/ThingCategories/VV_ViviProduct</iconPath>
+  </ThingCategoryDef>
+  
+  <ThingCategoryDef>
     <defName>VV_ArtificialPlant</defName>
-    <label>artificial plant</label>
-    <parent>Plants</parent>
+    <label>ancient plant</label>
+    <parent>Root</parent>
     <iconPath>UI/Icons/ThingCategories/VV_ViviProduct</iconPath>
   </ThingCategoryDef>
 </Defs>
