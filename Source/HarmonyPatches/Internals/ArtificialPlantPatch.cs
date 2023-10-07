@@ -14,26 +14,21 @@ namespace VVRace
     {
         internal static void Patch(Harmony harmony)
         {
+            // Designator 관련
             harmony.Patch(
                 original: AccessTools.Method(typeof(GenSpawn), nameof(GenSpawn.SpawningWipes)),
                 postfix: new HarmonyMethod(typeof(ArtificialPlantPatch), nameof(GenSpawn_SpawningWipes_Postfix)));
 
             harmony.Patch(
-                original: AccessTools.Method(typeof(Designator_Deconstruct), nameof(Designator_Deconstruct.CanDesignateThing)),
-                prefix: new HarmonyMethod(typeof(ArtificialPlantPatch), nameof(Designator_Deconstruct_CanDesignateThing_Prefix)));
-
-            harmony.Patch(
                 original: AccessTools.Method(typeof(InstallationDesignatorDatabase), "NewDesignatorFor"),
                 prefix: new HarmonyMethod(typeof(ArtificialPlantPatch), nameof(InstallationDesignatorDatabase_NewDesignatorFor_Prefix)));
 
-            //harmony.Patch(
-            //    original: AccessTools.Method(typeof(GenConstruct), nameof(GenConstruct.CanPlaceBlueprintOver)),
-            //    prefix: new HarmonyMethod(typeof(ArtificialPlantPatch), nameof(GenConstruct_CanPlaceBlueprintOver_Postfix)));
-
+            // 축전지 알람 끄기
             harmony.Patch(
                 original: AccessTools.Method(typeof(Alert_NeedBatteries), "NeedBatteries"),
                 postfix: new HarmonyMethod(typeof(ArtificialPlantPatch), nameof(Alert_NeedBatteries_NeedBatteries_Postfix)));
 
+            // 번개 위치 재조정
             harmony.Patch(
                 original: AccessTools.Method(typeof(WeatherEvent_LightningStrike), nameof(WeatherEvent_LightningStrike.FireEvent)),
                 transpiler: new HarmonyMethod(typeof(ArtificialPlantPatch), nameof(WeatherEvent_LightningStrike_FireEvent_Transpiler)));
@@ -57,17 +52,6 @@ namespace VVRace
             }
         }
 
-        private static bool Designator_Deconstruct_CanDesignateThing_Prefix(ref AcceptanceReport __result, Thing t)
-        {
-            if (t is ArtificialPlant || (t is MinifiedThing minified && minified.InnerThing is ArtificialPlant))
-            {
-                __result = false;
-                return false;
-            }
-
-            return true;
-        }
-
         private static bool InstallationDesignatorDatabase_NewDesignatorFor_Prefix(ref Designator_Install __result, ThingDef artDef)
         {
             if (artDef.thingClass == typeof(MinifiedArtificialPlant))
@@ -79,17 +63,6 @@ namespace VVRace
             }
 
             return true;
-        }
-
-        private static void GenConstruct_CanPlaceBlueprintOver_Postfix(ref bool __result, BuildableDef newDef, ThingDef oldDef)
-        {
-            if (!__result)
-            {
-                if (newDef is ThingDef newThingDef && typeof(ArtificialPlant).IsAssignableFrom(newThingDef.thingClass) && typeof(ArtificialPlantPot).IsAssignableFrom(oldDef.thingClass))
-                {
-                    __result = true;
-                }
-            }
         }
 
         private static void Alert_NeedBatteries_NeedBatteries_Postfix(ref bool __result, Map map)

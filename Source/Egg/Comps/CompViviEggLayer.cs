@@ -32,7 +32,15 @@ namespace VVRace
         }
         private CompVivi _compVivi;
 
-        public float EggProgressPerDays => Mathf.Clamp01(PawnUtility.BodyResourceGrowthSpeed((Pawn)parent) / ((CompProperties_EggLayer)props).eggProgressDays);
+        public float EggProgressPerDays
+        {
+            get
+            {
+                var pawn = (Pawn)parent;
+                var speed = PawnUtility.BodyResourceGrowthSpeed(pawn) * pawn.health.capacities.GetLevel(PawnCapacityDefOf.Metabolism);
+                return Mathf.Clamp01(speed / ((CompProperties_EggLayer)props).eggProgressDays);
+            }
+        }
         public float eggProgress;
 
         public bool CanLayEgg => eggProgress >= 1f;

@@ -5,6 +5,7 @@
     <defName>VV_GatherHoney</defName>
     <label>gather honey</label>
     <description>.</description>
+
     <jobString>Gathering honey.</jobString>
     
     <workAmount>800</workAmount>
@@ -43,6 +44,10 @@
     <defName>VV_GatherPollen</defName>
     <label>gather pollen</label>
     <description>.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_FilthPollen</ThingDef>
+    </descriptionHyperlinks>
+
     <jobString>Gathering pollen.</jobString>
     
     <workAmount>300</workAmount>
@@ -93,6 +98,7 @@
     <defName>VV_GatherPropolis</defName>
     <label>gather propolis</label>
     <description>.</description>
+
     <jobString>Gathering propolis.</jobString>
     
     <workAmount>2700</workAmount>
@@ -132,6 +138,7 @@
     <defName>VV_GatherGrassFiber</defName>
     <label>gather grass fiber</label>
     <description>.</description>
+
     <jobString>Gathering grass fiber.</jobString>
     
     <workAmount>1000</workAmount>

@@ -37,6 +37,7 @@
       <Mass>3</Mass>
       <Flammability>1</Flammability>
 
+      <WorkToBuild>1800</WorkToBuild>
       <ArmorRating_Blunt>0.5</ArmorRating_Blunt>
     </statBases>
     <size>(1,1)</size>
@@ -54,7 +55,6 @@
     <building>
       <deconstructible>true</deconstructible>
       <claimable>false</claimable>
-      <alwaysDeconstructible>false</alwaysDeconstructible>
       
       <allowWireConnection>false</allowWireConnection>
       <allowAutoroof>false</allowAutoroof>
@@ -100,6 +100,9 @@
     <defName>VV_EmberBloom</defName>
     <label>emberbloom</label>
     <description>.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_HeatingPetal</ThingDef>
+    </descriptionHyperlinks>
 
     <graphicData>
       <texPath>Things/Plants/VV_EmberBloom</texPath>
@@ -117,7 +120,7 @@
     </statBases>
 
     <costList>
-      <VV_HeatingPetal>10</VV_HeatingPetal>
+      <VV_HeatingPetal>20</VV_HeatingPetal>
     </costList>
 
     <comps>
@@ -158,6 +161,9 @@
     <defName>VV_FrostBloom</defName>
     <label>frostbloom</label>
     <description>.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_CoolingPetal</ThingDef>
+    </descriptionHyperlinks>
 
     <graphicData>
       <texPath>Things/Plants/VV_FrostBloom</texPath>
@@ -175,7 +181,7 @@
     </statBases>
 
     <costList>
-      <VV_CoolingPetal>10</VV_CoolingPetal>
+      <VV_CoolingPetal>20</VV_CoolingPetal>
     </costList>
 
     <comps>
@@ -217,6 +223,9 @@
     <defName>VV_Thunderbud</defName>
     <label>thunderbud</label>
     <description>.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_SparklingPetal</ThingDef>
+    </descriptionHyperlinks>
     <tickerType>Normal</tickerType>
     <thingClass>VVRace.BatteryFlower</thingClass>
 
@@ -236,7 +245,7 @@
     </statBases>
 
     <costList>
-      <VV_SparklingPetal>10</VV_SparklingPetal>
+      <VV_SparklingPetal>20</VV_SparklingPetal>
     </costList>
 
     <comps>
@@ -299,6 +308,9 @@
     <defName>VV_Voltpetals</defName>
     <label>voltpetals</label>
     <description>.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_SparklingPetal</ThingDef>
+    </descriptionHyperlinks>
     <tickerType>Normal</tickerType>
 
     <graphicData>
@@ -317,7 +329,7 @@
     </statBases>
 
     <costList>
-      <VV_SparklingPetal>10</VV_SparklingPetal>
+      <VV_SparklingPetal>20</VV_SparklingPetal>
     </costList>
 
     <comps>
@@ -361,6 +373,9 @@
     <defName>VV_Waterdrops</defName>
     <label>waterdrops</label>
     <description>.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_CoolingPetal</ThingDef>
+    </descriptionHyperlinks>
 
     <graphicData>
       <texPath>Things/Plants/VV_Waterdrops</texPath>
@@ -380,7 +395,7 @@
     </statBases>
 
     <costList>
-      <VV_CoolingPetal>10</VV_CoolingPetal>
+      <VV_CoolingPetal>20</VV_CoolingPetal>
     </costList>
 
     <comps>
@@ -425,6 +440,10 @@
     <defName>VV_Radiantflower</defName>
     <label>radiantflower</label>
     <description>.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_HeatingPetal</ThingDef>
+    </descriptionHyperlinks>
+
     <thingClass>VVRace.SolarFlower</thingClass>
     <tickerType>Rare</tickerType>
 
@@ -444,7 +463,7 @@
     </statBases>
 
     <costList>
-      <VV_HeatingPetal>10</VV_HeatingPetal>
+      <VV_HeatingPetal>20</VV_HeatingPetal>
     </costList>
 
     <comps>
@@ -494,6 +513,9 @@
     <defName>VV_Richflower</defName>
     <label>richflower</label>
     <description>.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_PerfumingPetal</ThingDef>
+    </descriptionHyperlinks>
     <tickerType>Rare</tickerType>
 
     <graphicData>
@@ -512,20 +534,20 @@
     </statBases>
 
     <costList>
-      <VV_PerfumingPetal>10</VV_PerfumingPetal>
+      <VV_PerfumingPetal>30</VV_PerfumingPetal>
     </costList>
 
     <comps>
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
       <li Class="VVRace.CompProperties_GlowerFlora">
-        <glowRadius>4</glowRadius>
+        <glowRadius>3</glowRadius>
         <glowColor>(255,249,155,0)</glowColor>
       </li>
       
       <li Class="VVRace.CompProperties_Terraformer">
         <cooldownTicks>120000~240000</cooldownTicks>
-        <radius>1.7</radius>
+        <radius>2.7</radius>
         <removePollution>true</removePollution>
         <terraforms>
           <li><from>SoftSand</from><to>Sand</to></li>
@@ -564,6 +586,9 @@
     <defName>VV_Peashooter</defName>
     <label>peashooter</label>
     <description>.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_LivingLeaf</ThingDef>
+    </descriptionHyperlinks>
     <thingClass>VVRace.TurretPlant</thingClass>
     <tickerType>Normal</tickerType>
 
@@ -582,7 +607,7 @@
     </statBases>
 
     <costList>
-      <VV_LivingLeaf>10</VV_LivingLeaf>
+      <VV_LivingLeaf>20</VV_LivingLeaf>
     </costList>
 
     <comps>
@@ -675,6 +700,9 @@
     <defName>VV_Pealaucnher</defName>
     <label>pealauncher</label>
     <description>.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_LivingLeaf</ThingDef>
+    </descriptionHyperlinks>
     <thingClass>VVRace.TurretPlant</thingClass>
     <tickerType>Normal</tickerType>
 
@@ -693,7 +721,7 @@
     </statBases>
 
     <costList>
-      <VV_LivingLeaf>10</VV_LivingLeaf>
+      <VV_LivingLeaf>20</VV_LivingLeaf>
     </costList>
 
     <comps>

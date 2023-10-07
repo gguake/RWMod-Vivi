@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 고대 식물 화분 -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>VV_AncientPlantPot</defName>
+    <label>ancient plant pot</label>
+    <description>.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_SeedlingGerminator</ThingDef>
+    </descriptionHyperlinks>
+    <thingClass>VVRace.ArtificialPlantPot</thingClass>
+    
+    <graphicData>
+      <texPath>Things/Building/VV_AncientPlantPot</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(2.5, 2.5)</drawSize>
+      <drawOffset>(0, 0, 0.15)</drawOffset>
+      <shadowData>
+        <volume>(0.55, 0.35, 0.3)</volume>
+        <offset>(0, 0, -0.28)</offset>
+      </shadowData>
+      <damageData>
+        <rect>(0.2,0.2,0.6,0.6)</rect>
+      </damageData>
+    </graphicData>
+
+    <uiOrder>2401</uiOrder>
+    <uiIconScale>1</uiIconScale>
+    <uiIconOffset>(0, -0.1)</uiIconOffset>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.3</fillPercent>
+    <pathCost>30</pathCost>
+
+    <statBases>
+      <MaxHitPoints>200</MaxHitPoints>
+      <WorkToBuild>900</WorkToBuild>
+      <Mass>5</Mass>
+      <Flammability>1.0</Flammability>
+      <Beauty>1</Beauty>
+    </statBases>
+    <size>(1,1)</size>
+    <rotatable>false</rotatable>
+
+    <stuffCategories>
+      <li>Metallic</li>
+      <li>Woody</li>
+      <li>Stony</li>
+    </stuffCategories>
+    <costStuffCount>40</costStuffCount>
+    <comps>
+      <li Class="CompProperties_Forbiddable"/>
+    </comps>
+    <costList>
+      <VV_Vivicream>20</VV_Vivicream>
+      <VV_Fertilizer>40</VV_Fertilizer>
+    </costList>
+    
+    <thingCategories>
+      <li>VV_BuildingsVivi</li>
+    </thingCategories>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+    <building>
+      <paintable>true</paintable>
+    </building>
+
+    <designationCategory>VV_Bulidings</designationCategory>
+    <designationHotKey>Misc5</designationHotKey>
+
+    <canOverlapZones>false</canOverlapZones>
+    <researchPrerequisites>
+      <li>VV_AncientBotany</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!-- 식물 배양기 -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>VV_SeedlingGerminator</defName>
+    <label>ancient seedling germinator</label>
+    <description>.</description>
+    
+    <thingClass>VVRace.Building_SeedlingGerminator</thingClass>
+    <tickerType>Rare</tickerType>
+    
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <graphicData>
+      <texPath>Things/Building/VV_SeedlingFarm</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(2.2, 2.2)</drawSize>
+      <drawRotated>false</drawRotated>
+    </graphicData>
+    <castEdgeShadows>true</castEdgeShadows>
+
+    <uiOrder>2402</uiOrder>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.4</fillPercent>
+    <pathCost>50</pathCost>
+    <statBases>
+      <MaxHitPoints>200</MaxHitPoints>
+      <Mass>15</Mass>
+      <WorkToBuild>4000</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Beauty>-3</Beauty>
+      <Cleanliness>-3</Cleanliness>
+    </statBases>
+    <size>(2,2)</size>
+    <rotatable>false</rotatable>
+
+    <stuffCategories>
+      <li>Metallic</li>
+      <li>Woody</li>
+      <li>Stony</li>
+    </stuffCategories>
+    <costStuffCount>150</costStuffCount>
+
+    <costList>
+      <VV_Vivicream>80</VV_Vivicream>
+    </costList>
+
+    <defaultPlacingRot>South</defaultPlacingRot>
+    <building>
+      <preventDeteriorationOnTop>true</preventDeteriorationOnTop>
+      <ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
+    </building>
+    <designationCategory>VV_Bulidings</designationCategory>
+    <designationHotKey>Misc3</designationHotKey>
+    <staticSunShadowHeight>0.5</staticSunShadowHeight>
+
+    <surfaceType>Item</surfaceType>
+    <canOverlapZones>false</canOverlapZones>
+    <comps>
+      <li Class="CompProperties_Forbiddable"/>
+    </comps>
+    <researchPrerequisites>
+      <li>VV_AncientBotany</li>
+    </researchPrerequisites>
+    
+    <modExtensions>
+      <li Class="VVRace.GerminatorModExtension">
+        <scheduleCooldown>45000</scheduleCooldown>
+        <germinateIngredients>
+          <VV_UnknownSeed>5</VV_UnknownSeed>
+          <VV_Fertilizer>120</VV_Fertilizer>
+          <VV_Pollen>70</VV_Pollen>
+        </germinateIngredients>
+
+        <germinateSuccessChance>0.25</germinateSuccessChance>
+        <germinateRareChance>0.35</germinateRareChance>
+        <germinateFailureCriticalWeight>3000</germinateFailureCriticalWeight>
+        <germinateFailureCropsWeight>2000</germinateFailureCropsWeight>
+        <germinateFailureCropsTable>
+          <Plant_Strawberry>300</Plant_Strawberry>
+          <Plant_Potato>150</Plant_Potato>
+          <Plant_Cotton>150</Plant_Cotton>
+          <Plant_Psychoid>150</Plant_Psychoid>
+          <Plant_Healroot>150</Plant_Healroot>
+          <Plant_Ambrosia>30</Plant_Ambrosia>
+        </germinateFailureCropsTable>
+      </li>
+    </modExtensions>
+  </ThingDef>
+  
+</Defs>

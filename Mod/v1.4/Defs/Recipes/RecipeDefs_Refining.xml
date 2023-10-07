@@ -5,6 +5,10 @@
     <defName>VV_MakeVivicream</defName>
     <label>make vivicream</label>
     <description>test</description>
+    <descriptionHyperlinks>
+      <XenotypeDef>VV_Vivi</XenotypeDef>
+    </descriptionHyperlinks>
+
     <jobString>making vivicream.</jobString>
     <workAmount>600</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
@@ -30,6 +34,7 @@
     <defName>VV_MakeViviwax</defName>
     <label>make viviwax</label>
     <description>test</description>
+
     <jobString>making viviwax.</jobString>
     <workAmount>1200</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
@@ -58,6 +63,7 @@
     <products>
       <VV_Viviwax>40</VV_Viviwax>
     </products>
+    <researchPrerequisite>VV_BasicInfra</researchPrerequisite>
   </RecipeDef>
 
   <!-- 꿀 정제 -->
@@ -65,6 +71,10 @@
     <defName>VV_FilteringHoney</defName>
     <label>filter honey</label>
     <description>test</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_Viviwax</ThingDef>
+    </descriptionHyperlinks>
+
     <jobString>filtering honey.</jobString>
     <workAmount>500</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
@@ -95,7 +105,7 @@
       <VV_FilteredHoney>5</VV_FilteredHoney>
       <VV_Viviwax>1</VV_Viviwax>
     </products>
-    <researchPrerequisite>VV_BasicGathering</researchPrerequisite>
+    <researchPrerequisite>VV_BasicInfra</researchPrerequisite>
   </RecipeDef>
   
   <!-- 프로폴리스 정제 -->
@@ -103,6 +113,7 @@
     <defName>VV_RefiningPropolis</defName>
     <label>refining propolis</label>
     <description>.</description>
+
     <jobString>refining propolis.</jobString>
     <workAmount>2000</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
@@ -140,6 +151,10 @@
     <defName>VV_MakeLifestrand</defName>
     <label>making lifestrand</label>
     <description>.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_LivingLeaf</ThingDef>
+    </descriptionHyperlinks>
+
     <jobString>making lifestrand.</jobString>
     <workAmount>2000</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
@@ -161,7 +176,7 @@
       <li>
         <filter>
           <thingDefs>
-            <li>VV_GrassFiber</li>
+            <li>VV_Pollen</li>
           </thingDefs>
         </filter>
         <count>20</count>
@@ -169,10 +184,10 @@
       <li>
         <filter>
           <thingDefs>
-            <li>VV_Pollen</li>
+            <li>VV_LivingLeaf</li>
           </thingDefs>
         </filter>
-        <count>40</count>
+        <count>20</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>

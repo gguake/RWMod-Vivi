@@ -5,16 +5,6 @@ namespace VVRace
 {
     public class Designator_ReplantArtificialPlant : Designator_Install
     {
-        public override string Label => "CommandReplant".Translate();
-
-        public override string Desc => "CommandReplantDesc".Translate();
-
-        public Designator_ReplantArtificialPlant()
-        {
-            icon = TexCommand.Replant;
-            soundSucceeded = SoundDefOf.Designate_ExtractTree;
-        }
-
         public override AcceptanceReport CanDesignateCell(IntVec3 c)
         {
             if (!c.InBounds(Map))

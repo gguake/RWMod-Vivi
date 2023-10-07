@@ -10,6 +10,8 @@
         public const string AlertViviDangerousEggsDesc = "VV_AlertViviDangerousEggsDesc";
         public const string AlertArtificialPlantLowEnergy = "VV_AlertArtificialPlantLowEnergy";
         public const string AlertArtificialPlantLowEnergyDesc = "VV_AlertArtificialPlantLowEnergyDesc";
+        public const string AlertViviLowLoyalty = "VV_AlertViviLowLoyalty";
+        public const string AlertViviLowLoyaltyDesc = "VV_AlertViviLowLoyaltyDesc";
 
         public const string GizmoViviBandwidthHeader = "VV_GizmoViviBandwidthHeader";
         public const string GizmoViviBandwidthTooltip = "VV_GizmoViviBandwidthTooltip";
@@ -24,7 +26,6 @@
         public const string InspectorViviWallReplaceCooldown = "VV_InspectorViviWallReplaceCooldown";
         public const string InspectorPlantEnergy = "VV_InspectorPlantEnergy";
         public const string InspectorPlantEnergyFlux = "VV_InspectorPlantEnergyFlux";
-        public const string InspectorFertilizerAuto = "VV_InspectorFertilizerAuto";
         public const string InspectorViviGerminatorReserved = "VV_InspectorViviGerminatorReserved";
         public const string InspectorViviGerminatorCompletePeriods = "VV_InspectorViviGerminatorCompletePeriods";
         public const string InspectorViviGerminatorManageAvailable = "VV_InspectorViviGerminatorManageAvailable";

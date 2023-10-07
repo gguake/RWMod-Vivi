@@ -24,8 +24,7 @@
 \n채집 작업은 작업대 근처에서만 할 수 있습니다.</VV_GatheringBarrel.description>
   
   <VV_RefiningWorkbench.label>비비 가공 작업대</VV_RefiningWorkbench.label>
-  <VV_RefiningWorkbench.description>비비들이 가공 작업을 하기 위한 작업대입니다.
-\n채집 작업은 작업대 근처에서만 할 수 있습니다</VV_RefiningWorkbench.description>
+  <VV_RefiningWorkbench.description>비비들이 가공 작업을 하기 위한 작업대입니다.</VV_RefiningWorkbench.description>
 
   <VV_AncientPlantPot.label>고대 식물 화분</VV_AncientPlantPot.label>
   <VV_AncientPlantPot.description>고대 식물을 심을수 있는 화분입니다.

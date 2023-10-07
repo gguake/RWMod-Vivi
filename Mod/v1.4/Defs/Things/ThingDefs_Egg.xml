@@ -4,6 +4,9 @@
     <defName>VV_ViviEgg</defName>
     <label>vivi egg</label>
     <description>.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_ViviHatchery</ThingDef>
+    </descriptionHyperlinks>
     <thingClass>VVRace.ViviEgg</thingClass>
     
     <graphicData>

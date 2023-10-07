@@ -127,4 +127,10 @@ namespace VVRace
     {
         public static ThoughtDef VV_AtePollen;
     }
+
+    [DefOf]
+    public static class VVHediffDefOf
+    {
+        public static HediffDef VV_RoyalVivi;
+    }
 }

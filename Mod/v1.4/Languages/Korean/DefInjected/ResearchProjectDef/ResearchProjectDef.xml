@@ -10,10 +10,10 @@
   <VV_AdvancedGathering.description>비비들이 자연에서 희귀한 물질들을 채집하고 기초적인 가공품을 만들 수 있습니다.</VV_AdvancedGathering.description>
   
   <VV_Tools.label>채집 도구 제조</VV_Tools.label>
-  <VV_Tools.description>비비들이 사용하는 도구를 제작할 수 있습니다.</VV_Tools.description>
+  <VV_Tools.description>비비들이 채집에 사용하는 도구를 제작할 수 있습니다.</VV_Tools.description>
   
-  <VV_Weaponry.label>비비 무기 제조</VV_Weaponry.label>
-  <VV_Weaponry.description>비비들이 사용하는 무기를 제작할 수 있습니다.</VV_Weaponry.description>
+  <VV_Weaponry.label>비비 전통 무기</VV_Weaponry.label>
+  <VV_Weaponry.description>비비들이 전통적으로 사용하는 무기를 제작할 수 있습니다.</VV_Weaponry.description>
   
   <VV_Apparels.label>비비 의류</VV_Apparels.label>
   <VV_Apparels.description>비비들이 입는 기초적인 의류를 제작할 수 있습니다.</VV_Apparels.description>

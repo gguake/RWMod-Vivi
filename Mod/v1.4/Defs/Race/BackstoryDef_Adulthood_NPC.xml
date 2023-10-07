@@ -141,6 +141,9 @@
     <forcedTraits>
       <Brawler>0</Brawler>
     </forcedTraits>
+    <spawnCategories>
+      <li>VV_CombatSettlerBackstory</li>
+    </spawnCategories>
   </AlienRace.AlienBackstoryDef>
 
   <!-- VV_ViviScout -->
@@ -167,5 +170,8 @@
     <forcedTraits>
       <SpeedOffset>2</SpeedOffset>
     </forcedTraits>
+    <spawnCategories>
+      <li>VV_CombatSettlerBackstory</li>
+    </spawnCategories>
   </AlienRace.AlienBackstoryDef>
 </Defs>

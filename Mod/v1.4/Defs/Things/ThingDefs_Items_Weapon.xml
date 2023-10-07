@@ -489,11 +489,10 @@
       <li>
         <compClass>CompQuality</compClass>
       </li>
-      <li Class="CompProperties_BladelinkWeapon">
-        <biocodeOnEquip>true</biocodeOnEquip>
-      </li>
-      <li Class="CompProperties_GeneratedName">
+      <li Class="CompProperties_Art">
         <nameMaker>NamerArtWeaponMelee</nameMaker>
+        <descriptionMaker>ArtDescription_WeaponMelee</descriptionMaker>
+        <minQualityForArtistic>Excellent</minQualityForArtistic>
       </li>
     </comps>
     <smeltable>false</smeltable>

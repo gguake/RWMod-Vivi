@@ -5,6 +5,11 @@
     <defName>VV_Pollen</defName>
     <label>vivi pollen</label>
     <description>.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_HoneyPollenCake</ThingDef>
+      <ThingDef>VV_RoyalJelly</ThingDef>
+    </descriptionHyperlinks>
+
     <graphicData>
       <texPath>Things/Item/VV_ViviDust</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -20,7 +25,7 @@
     <useHitPoints>true</useHitPoints>
     <statBases>
       <Mass>0.01</Mass>
-      <MarketValue>0.4</MarketValue>
+      <MarketValue>0.2</MarketValue>
       <MaxHitPoints>20</MaxHitPoints>
       <Flammability>1.0</Flammability>
       <Nutrition>0.025</Nutrition>
@@ -45,6 +50,10 @@
     <defName>VV_RawHoney</defName>
     <label>vivi raw honey</label>
     <description>.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_FilteredHoney</ThingDef>
+    </descriptionHyperlinks>
+
     <graphicData>
       <texPath>Things/Item/VV_CombHoney</texPath>
     </graphicData>
@@ -86,6 +95,11 @@
     <defName>VV_FilteredHoney</defName>
     <label>vivi filtered honey</label>
     <description>.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_HoneyPollenCake</ThingDef>
+      <ThingDef>VV_RoyalJelly</ThingDef>
+    </descriptionHyperlinks>
+
     <graphicData>
       <texPath>Things/Item/VV_FilteredHoney</texPath>
     </graphicData>
@@ -236,4 +250,121 @@
       <li>VV_ViviProduct</li>
     </tradeTags>
 	</ThingDef>
+
+  <ThingDef Abstract="True" Name="VV_FloweringTeaBase" ParentName="DrugBase">
+    <graphicData>
+      <texPath>Things/Item/Drug/Tea</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <drawSize>0.88</drawSize>
+    </graphicData>
+    <rotatable>false</rotatable>
+
+    <statBases>
+      <WorkToMake>400</WorkToMake>
+      <MarketValue>13</MarketValue>
+      <Mass>0.05</Mass>
+      <DeteriorationRate>6</DeteriorationRate>
+    </statBases>
+
+    <techLevel>Neolithic</techLevel>
+    
+    <ingestible>
+      <foodType>Fluid, Processed</foodType>
+      <joyKind>Chemical</joyKind>
+      <joy>0.50</joy>
+      <baseIngestTicks>210</baseIngestTicks>
+      <nurseable>true</nurseable>
+      <drugCategory>Social</drugCategory>
+      <ingestSound>Ingest_Drink</ingestSound>
+      <ingestHoldOffsetStanding>
+        <northDefault>
+          <offset>(0.18,0,0)</offset>
+        </northDefault>
+      </ingestHoldOffsetStanding>
+      <ingestHoldUsesTable>false</ingestHoldUsesTable>
+      <ingestCommandString>Drink {0}</ingestCommandString>
+      <ingestReportString>Drinking {0}.</ingestReportString>
+      <outcomeDoers>
+        <li Class="IngestionOutcomeDoer_GiveHediff">
+          <hediffDef>VV_FloralTea</hediffDef>
+        </li>
+      </outcomeDoers>
+    </ingestible>
+
+    <comps>
+      <li Class="CompProperties_Drug">
+        <listOrder>2100</listOrder>
+        <overdoseSeverityOffset>0.08~0.14</overdoseSeverityOffset>
+      </li>
+    </comps>
+  </ThingDef>
+  
+  <ThingDef ParentName="VV_FloweringTeaBase">
+    <defName>VV_FloralHotTea</defName>
+    <label>floral hot tea</label>
+    <description>.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_HeatingPetal</ThingDef>
+      <HediffDef>VV_FloralTea</HediffDef>
+      <HediffDef>VV_WarmingFloralTea</HediffDef>
+    </descriptionHyperlinks>
+
+    <graphicData>
+      <color>(150,30,20)</color>
+    </graphicData>
+
+    <ingestible>
+      <outcomeDoers>
+        <li Class="IngestionOutcomeDoer_GiveHediff">
+          <hediffDef>VV_WarmingFloralTea</hediffDef>
+        </li>
+      </outcomeDoers>
+    </ingestible>
+  </ThingDef>
+  
+  <ThingDef ParentName="VV_FloweringTeaBase">
+    <defName>VV_FloralIceTea</defName>
+    <label>floral ice tea</label>
+    <description>.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_CoolingPetal</ThingDef>
+      <HediffDef>VV_FloralTea</HediffDef>
+      <HediffDef>VV_CoolingFloralTea</HediffDef>
+    </descriptionHyperlinks>
+
+    <graphicData>
+      <color>(108,220,255)</color>
+    </graphicData>
+
+    <ingestible>
+      <outcomeDoers>
+        <li Class="IngestionOutcomeDoer_GiveHediff">
+          <hediffDef>VV_CoolingFloralTea</hediffDef>
+        </li>
+      </outcomeDoers>
+    </ingestible>
+  </ThingDef>
+  
+  <ThingDef ParentName="VV_FloweringTeaBase">
+    <defName>VV_FloralMilkTea</defName>
+    <label>floral milk tea</label>
+    <description>.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_PerfumingPetal</ThingDef>
+      <HediffDef>VV_FloralTea</HediffDef>
+      <HediffDef>VV_FlowerScent</HediffDef>
+    </descriptionHyperlinks>
+
+    <graphicData>
+      <color>(250,255,150)</color>
+    </graphicData>
+
+    <ingestible>
+      <outcomeDoers>
+        <li Class="IngestionOutcomeDoer_GiveHediff">
+          <hediffDef>VV_FlowerScent</hediffDef>
+        </li>
+      </outcomeDoers>
+    </ingestible>
+  </ThingDef>
 </Defs>

@@ -59,6 +59,14 @@
 
     <initialWillRange>3~5</initialWillRange>
     <initialResistanceRange>30~40</initialResistanceRange>
+
+    <backstoryFiltersOverride Inherit="False">
+      <li>
+        <categories>
+          <li>VV_CombatSettlerBackstory</li>
+        </categories>
+      </li>
+    </backstoryFiltersOverride>
   </PawnKindDef>
 
   <!-- 비비 아처 -->
@@ -82,6 +90,14 @@
 
     <initialWillRange>3~5</initialWillRange>
     <initialResistanceRange>30~40</initialResistanceRange>
+
+    <backstoryFiltersOverride Inherit="False">
+      <li>
+        <categories>
+          <li>VV_CombatSettlerBackstory</li>
+        </categories>
+      </li>
+    </backstoryFiltersOverride>
   </PawnKindDef>
   
   <!-- 리더 로열 비비 -->
@@ -98,7 +114,7 @@
     </requiredWorkTags>
 
     <gearHealthRange>1.2~3.2</gearHealthRange>
-    <apparelMoney>1000~2000</apparelMoney>
+    <apparelMoney>1000~4000</apparelMoney>
     <apparelTags>
       <li>VV_RoyalViviApparel</li>
       <li>VV_ViviCombatApparel</li>
@@ -151,7 +167,7 @@
     <itemQuality>Normal</itemQuality>
 
     <gearHealthRange>1~2</gearHealthRange>
-    <apparelMoney>600~1000</apparelMoney>
+    <apparelMoney>600~3000</apparelMoney>
     <apparelTags>
       <li>VV_RoyalViviApparel</li>
       <li>BeltDefensePop</li>

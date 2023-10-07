@@ -11,4 +11,16 @@
   <VV_Make_RoyalJelly.label>로얄 젤리 만들기</VV_Make_RoyalJelly.label>
   <VV_Make_RoyalJelly.description>대량의 비비 크림에서 희소한 성분을 추출해 로얄 젤리를 만듭니다.</VV_Make_RoyalJelly.description>
   <VV_Make_RoyalJelly.jobString>로얄 젤리 만드는 중.</VV_Make_RoyalJelly.jobString>
+
+  <VV_Make_FloralHotTea.label>따뜻한 꽃차 만들기</VV_Make_FloralHotTea.label>
+  <VV_Make_FloralHotTea.description>따뜻한 꽃잎과 약간의 꿀로 꽃차를 끓입니다.</VV_Make_FloralHotTea.description>
+  <VV_Make_FloralHotTea.jobString>따뜻한 꽃차 만드는 중.</VV_Make_FloralHotTea.jobString>
+
+  <VV_Make_FloralIceTea.label>얼음 꽃차 만들기</VV_Make_FloralIceTea.label>
+  <VV_Make_FloralIceTea.description>차가운 꽃잎과 약간의 꿀로 꽃차를 끓입니다.</VV_Make_FloralIceTea.description>
+  <VV_Make_FloralIceTea.jobString>얼음 꽃차 만드는 중.</VV_Make_FloralIceTea.jobString>
+
+  <VV_Make_FloralMilkTea.label>꽃 밀크티 만들기</VV_Make_FloralMilkTea.label>
+  <VV_Make_FloralMilkTea.description>향기나는 꽃잎과 우유를 섞어 밀크티를 만듭니다.</VV_Make_FloralMilkTea.description>
+  <VV_Make_FloralMilkTea.jobString>꽃 밀크티 만드는 중.</VV_Make_FloralMilkTea.jobString>
 </LanguageData>

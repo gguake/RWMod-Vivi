@@ -5,6 +5,7 @@
     <defName>VV_Make_HoneyPollenCake</defName>
     <label>make honey pollen cake</label>
     <description>Make honey pollen cake.</description>
+
     <jobString>Making honey pollen cake.</jobString>
     <workSpeedStat>CookSpeed</workSpeedStat>
     <requiredGiverWorkType>Cooking</requiredGiverWorkType>
@@ -54,6 +55,7 @@
     <defName>VV_Make_HoneyPollenCake_Bulk</defName>
     <label>make honey pollen cake x4</label>
     <description>Make bulk honey pollen cake.</description>
+
     <jobString>Making bulk honey pollen cake.</jobString>
     <workAmount>1800</workAmount>
     <workSpeedStat>CookSpeed</workSpeedStat>
@@ -104,6 +106,7 @@
     <defName>VV_Make_RoyalJelly</defName>
     <label>make royal jelly</label>
     <description>Make royal jelly.</description>
+
     <jobString>Making royal jelly.</jobString>
     <workAmount>1350</workAmount>
     <workSpeedStat>CookSpeed</workSpeedStat>
@@ -156,5 +159,164 @@
     </products>
     <workSkill>Cooking</workSkill>
     <researchPrerequisite>VV_BasicGathering</researchPrerequisite>
+  </RecipeDef>
+  
+  <!-- 따뜻한 꽃차 -->
+  <RecipeDef>
+    <defName>VV_Make_FloralHotTea</defName>
+    <label>make floral hot tea</label>
+    <description>Make floral hot tea.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_HeatingPetal</ThingDef>
+    </descriptionHyperlinks>
+
+    <jobString>Making floral hot tea.</jobString>
+    <workAmount>400</workAmount>
+    <workSpeedStat>DrugCookingSpeed</workSpeedStat>
+    <requiredGiverWorkType>Cooking</requiredGiverWorkType>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_CookMeal</soundWorking>
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_HeatingPetal</li>
+          </thingDefs>
+        </filter>
+        <count>3</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_FilteredHoney</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>VV_HeatingPetal</li>
+        <li>VV_FilteredHoney</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <defaultIngredientFilter>
+      <thingDefs>
+        <li>VV_HeatingPetal</li>
+        <li>VV_FilteredHoney</li>
+      </thingDefs>
+    </defaultIngredientFilter>
+    <products>
+      <VV_FloralHotTea>1</VV_FloralHotTea>
+    </products>
+    <workSkill>Cooking</workSkill>
+    <researchPrerequisite>VV_AncientBotany</researchPrerequisite>
+  </RecipeDef>
+  
+  <!-- 얼음 꽃차 -->
+  <RecipeDef>
+    <defName>VV_Make_FloralIceTea</defName>
+    <label>make floral ice tea</label>
+    <description>Make floral ice tea.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_CoolingPetal</ThingDef>
+    </descriptionHyperlinks>
+
+    <jobString>Making floral ice tea.</jobString>
+    <workAmount>400</workAmount>
+    <workSpeedStat>DrugCookingSpeed</workSpeedStat>
+    <requiredGiverWorkType>Cooking</requiredGiverWorkType>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_CookMeal</soundWorking>
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_CoolingPetal</li>
+          </thingDefs>
+        </filter>
+        <count>3</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_FilteredHoney</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>VV_CoolingPetal</li>
+        <li>VV_FilteredHoney</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <defaultIngredientFilter>
+      <thingDefs>
+        <li>VV_CoolingPetal</li>
+        <li>VV_FilteredHoney</li>
+      </thingDefs>
+    </defaultIngredientFilter>
+    <products>
+      <VV_FloralIceTea>1</VV_FloralIceTea>
+    </products>
+    <workSkill>Cooking</workSkill>
+    <researchPrerequisite>VV_AncientBotany</researchPrerequisite>
+  </RecipeDef>
+  
+  <!-- 꽃 밀크티 -->
+  <RecipeDef>
+    <defName>VV_Make_FloralMilkTea</defName>
+    <label>make floral milk tea</label>
+    <description>Make floral milk tea.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_PerfumingPetal</ThingDef>
+    </descriptionHyperlinks>
+
+    <jobString>Making floral milk tea.</jobString>
+    <workAmount>400</workAmount>
+    <workSpeedStat>DrugCookingSpeed</workSpeedStat>
+    <requiredGiverWorkType>Cooking</requiredGiverWorkType>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_CookMeal</soundWorking>
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_PerfumingPetal</li>
+          </thingDefs>
+        </filter>
+        <count>3</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Milk</li>
+          </thingDefs>
+        </filter>
+        <count>3</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>VV_PerfumingPetal</li>
+        <li>Milk</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <defaultIngredientFilter>
+      <thingDefs>
+        <li>VV_PerfumingPetal</li>
+        <li>Milk</li>
+      </thingDefs>
+    </defaultIngredientFilter>
+    <products>
+      <VV_FloralMilkTea>1</VV_FloralMilkTea>
+    </products>
+    <workSkill>Cooking</workSkill>
+    <researchPrerequisite>VV_AncientBotany</researchPrerequisite>
   </RecipeDef>
 </Defs>

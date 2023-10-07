@@ -25,7 +25,7 @@ namespace VVRace
 
             foreach (var hediff in targetHediffs)
             {
-                hediff.Severity = Mathf.Max(0.01f, hediff.Severity - 0.15f);
+                hediff.Severity = Mathf.Max(0.01f, hediff.Severity - 0.18f);
             }
         }
     }

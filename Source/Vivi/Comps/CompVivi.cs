@@ -38,6 +38,15 @@ namespace VVRace
 
         public override void PostSpawnSetup(bool respawningAfterLoad)
         {
+            if (respawningAfterLoad)
+            {
+                var pawn = (Pawn)parent;
+                if (!pawn.health.hediffSet.HasHediff(VVHediffDefOf.VV_RoyalVivi))
+                {
+                    pawn.health.AddHediff(VVHediffDefOf.VV_RoyalVivi);
+                }
+            }
+
             RefreshHairColor();
         }
 
@@ -52,6 +61,12 @@ namespace VVRace
         public void SetRoyal()
         {
             isRoyal = true;
+
+            var pawn = (Pawn)parent;
+            if (!pawn.health.hediffSet.HasHediff(VVHediffDefOf.VV_RoyalVivi))
+            {
+                pawn.health.AddHediff(VVHediffDefOf.VV_RoyalVivi);
+            }
         }
 
         public void SetStartingPawn()

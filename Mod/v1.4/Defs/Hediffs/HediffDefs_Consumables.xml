@@ -11,15 +11,6 @@
     <priceImpact>false</priceImpact>
     <scenarioCanAdd>false</scenarioCanAdd>
     
-    <stages>
-      <li>
-        <statFactors>
-          <GlobalLearningFactor>1.1</GlobalLearningFactor>
-          <VV_GrowthPointsFactor>1.5</VV_GrowthPointsFactor>
-        </statFactors>
-      </li>
-    </stages>
-
     <comps>
       <li Class="VVRace.HediffCompProperties_RoyalJelly" />
       <li Class="HediffCompProperties_Disappears">
@@ -60,6 +51,112 @@
       <li Class="VVRace.HediffCompProperties_ViviGrowthBoost">
         <tickInterval>2000</tickInterval>
         <additionalAgeBoostMultiplier>4.0</additionalAgeBoostMultiplier>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>VV_FloralTea</defName>
+    <label>relaxed on floral tea</label>
+    <description>.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(1,0,0.5)</defaultLabelColor>
+    
+    <isBad>false</isBad>
+    <priceImpact>false</priceImpact>
+    <scenarioCanAdd>false</scenarioCanAdd>
+
+    <stages>
+      <li>
+        <socialFightChanceFactor>0.7</socialFightChanceFactor>
+        <statOffsets>
+          <MentalBreakThreshold>-0.06</MentalBreakThreshold>
+        </statOffsets>
+      </li>
+    </stages>
+
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>10000~15000</disappearsAfterTicks>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>VV_WarmingFloralTea</defName>
+    <label>high on hot tea</label>
+    <description>.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(1,0,0.5)</defaultLabelColor>
+    
+    <isBad>false</isBad>
+    <priceImpact>false</priceImpact>
+    <scenarioCanAdd>false</scenarioCanAdd>
+
+    <stages>
+      <li>
+        <statOffsets>
+          <ComfyTemperatureMin>-22</ComfyTemperatureMin>
+        </statOffsets>
+      </li>
+    </stages>
+
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>15000~40000</disappearsAfterTicks>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>VV_CoolingFloralTea</defName>
+    <label>high on ice tea</label>
+    <description>.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(1,0,0.5)</defaultLabelColor>
+    
+    <isBad>false</isBad>
+    <priceImpact>false</priceImpact>
+    <scenarioCanAdd>false</scenarioCanAdd>
+
+    <stages>
+      <li>
+        <statOffsets>
+          <ComfyTemperatureMax>22</ComfyTemperatureMax>
+        </statOffsets>
+      </li>
+    </stages>
+
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>15000~40000</disappearsAfterTicks>
+      </li>
+    </comps>
+  </HediffDef>
+  
+  <HediffDef>
+    <defName>VV_FlowerScent</defName>
+    <label>flower scent</label>
+    <description>.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(1,0,0.5)</defaultLabelColor>
+    
+    <isBad>false</isBad>
+    <priceImpact>false</priceImpact>
+    <scenarioCanAdd>false</scenarioCanAdd>
+
+    <stages>
+      <li>
+        <statOffsets>
+          <SocialImpact>0.15</SocialImpact>
+          <RestRateMultiplier>0.15</RestRateMultiplier>
+        </statOffsets>
+      </li>
+    </stages>
+
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>15000~40000</disappearsAfterTicks>
       </li>
     </comps>
   </HediffDef>

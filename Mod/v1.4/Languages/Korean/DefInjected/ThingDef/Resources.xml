@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
   <VV_Vivicream.label>비비 크림</VV_Vivicream.label>
-  <VV_Vivicream.description>비비가 몸에서 만들어내는 혼합물입니다. 비비만 생성할 수 있으며 만들때 약간의 열량을 소비하므로 배고플때는 만들 수 없습니다.
+  <VV_Vivicream.description>비비가 몸에서 만들어내는 혼합물입니다. 비비만 만들 수 있으며 만들때 약간의 열량을 소비하므로 배고플때는 만들 수 없습니다.
 \n접착제처럼 활용이 가능해 비비들의 다양한 공예 재료로 활용되며 희소한 성분을 추출해 로열 젤리를 만들때도 사용됩니다.
 \n야외에 방치되면 빠르게 손상되므로 주의하세요.</VV_Vivicream.description>
 
@@ -16,8 +16,8 @@
   <VV_GrassFiber.description>다양한 식물의 길다란 잎을 가공해 만든 섬유입니다. 주변의 흔한 풀에서 얻을 수 있지만 그다지 튼튼하지 않으면서 가공이 어렵습니다.</VV_GrassFiber.description>
 
   <VV_Lifestrand.label>생체가닥</VV_Lifestrand.label>
-  <VV_Lifestrand.description>악마가닥을 특수한 섬유와 소재로 가공한 옷감입니다.
-\n물리적 손상을 입었을때 일부를 스스로 수복하는 성질을 띄고있어 보통의 악마가닥 천보다 매우 튼튼하지만 그만큼 가공하기도 어렵습니다.
+  <VV_Lifestrand.description>악마가닥을 살아있는 잎과 꽃가루로 튼튼하게 가공한 옷감입니다.
+\n보통의 악마가닥 천보다 매우 튼튼하지만 그만큼 가공하기도 어렵습니다.
 \n섬유가 마치 살아있는것 같다고 해서 생체가닥으로 불립니다.</VV_Lifestrand.description>
 
   <VV_UnknownSeed.label>미확인 씨앗</VV_UnknownSeed.label>
@@ -26,4 +26,5 @@
   <VV_Fertilizer.label>비비 비료</VV_Fertilizer.label>
   <VV_Fertilizer.description>분해된 유기물을 흙과 배합해 만든 비비 특제 비료입니다. 각종 원예 작업에 사용되며 고대 식물의 에너지를 채우는 용도로도 사용할 수 있습니다.
 \n비료 1개당 10의 에너지를 채워줍니다.</VV_Fertilizer.description>
+
 </LanguageData>

@@ -265,16 +265,8 @@ namespace VVRace
             {
                 if (gizmo is Designator_Install)
                 {
-                    yield return new Designator_ReplantArtificialPlant();
+                    yield return ArtificialPlantDesignatorCache.GetReplantDesignator(def);
                     continue;
-                }
-                else if (gizmo is Designator_Uninstall uninstallDesignator)
-                {
-                    uninstallDesignator.defaultLabel = "DesignatorExtractTree".Translate();
-                    uninstallDesignator.defaultDesc = "DesignatorExtractTreeDesc".Translate();
-                    uninstallDesignator.icon = ContentFinder<Texture2D>.Get("UI/Designators/ExtractTree");
-                    uninstallDesignator.soundSucceeded = SoundDefOf.Designate_ExtractTree;
-                    uninstallDesignator.hotKey = KeyBindingDefOf.Misc12;
                 }
 
                 yield return gizmo;
@@ -421,6 +413,17 @@ namespace VVRace
                     LocalizeTexts.StatsReport_EnergyFlux_Desc.Translate(),
                     -20001);
             }
+        }
+
+        public override bool DeconstructibleBy(Faction faction)
+        {
+            if (DebugSettings.godMode)
+            {
+                return true;
+            }
+
+            Log.Message($"deconstructible: {Faction} == {faction}");
+            return Faction == faction;
         }
 
         public void AddEnergy(float energy)

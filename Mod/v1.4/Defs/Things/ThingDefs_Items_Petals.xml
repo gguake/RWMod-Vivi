@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <ThingDef Abstract="True" Name="VV_PetalBase" ParentName="ResourceBase">
+    <tickerType>Rare</tickerType>
+    <thingCategories>
+      <li>VV_Petal</li>
+    </thingCategories>
+
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Standard_Drop</soundInteract>
+    <soundDrop>Standard_Drop</soundDrop>
+
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <Mass>0.5</Mass>
+      <MaxHitPoints>60</MaxHitPoints>
+      <Flammability>1.0</Flammability>
+      <DeteriorationRate>4</DeteriorationRate>
+    </statBases>
+    <stackLimit>75</stackLimit>
+
+    <tradeTags>
+      <li>VV_Petal</li>
+    </tradeTags>
+
+    <comps>
+      <li Class="CompProperties_Rottable">
+        <daysToRotStart>15</daysToRotStart>
+        <rotDestroys>true</rotDestroys>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="VV_PetalBase">
+    <defName>VV_HeatingPetal</defName>
+    <label>heating petal</label>
+    <description>.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_EmberBloom</ThingDef>
+      <ThingDef>VV_Radiantflower</ThingDef>
+    </descriptionHyperlinks>
+
+    <graphicData>
+      <texPath>Things/Item/VV_HormoneJelly</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <color>(150,30,20)</color>
+    </graphicData>
+
+    <statBases>
+      <MarketValue>2.7</MarketValue>
+    </statBases>
+  </ThingDef>
+
+  <ThingDef ParentName="VV_PetalBase">
+    <defName>VV_CoolingPetal</defName>
+    <label>cooling petal</label>
+    <description>.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_FrostBloom</ThingDef>
+      <ThingDef>VV_Waterdrops</ThingDef>
+    </descriptionHyperlinks>
+
+    <graphicData>
+      <texPath>Things/Item/VV_HormoneJelly</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <color>(108,220,255)</color>
+    </graphicData>
+
+    <statBases>
+      <MarketValue>2.7</MarketValue>
+    </statBases>
+  </ThingDef>
+
+  <ThingDef ParentName="VV_PetalBase">
+    <defName>VV_SparklingPetal</defName>
+    <label>sparkling petal</label>
+    <description>.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_Voltpetals</ThingDef>
+      <ThingDef>VV_Thunderbud</ThingDef>
+    </descriptionHyperlinks>
+
+    <graphicData>
+      <texPath>Things/Item/VV_HormoneJelly</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <color>(180,120,250)</color>
+    </graphicData>
+
+    <statBases>
+      <MarketValue>2.7</MarketValue>
+    </statBases>
+  </ThingDef>
+
+  <ThingDef ParentName="VV_PetalBase">
+    <defName>VV_PerfumingPetal</defName>
+    <label>perfuming petal</label>
+    <description>.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_Richflower</ThingDef>
+    </descriptionHyperlinks>
+
+    <graphicData>
+      <texPath>Things/Item/VV_HormoneJelly</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <color>(250,255,150)</color>
+    </graphicData>
+
+    <statBases>
+      <MarketValue>2.7</MarketValue>
+    </statBases>
+  </ThingDef>
+
+  <ThingDef ParentName="VV_PetalBase">
+    <defName>VV_LivingLeaf</defName>
+    <label>living leaf</label>
+    <description>.</description>
+    <descriptionHyperlinks>
+      <RecipeDef>VV_MakeLifestrand</RecipeDef>
+      <ThingDef>VV_Peashooter</ThingDef>
+      <ThingDef>VV_Pealaucnher</ThingDef>
+    </descriptionHyperlinks>
+
+    <graphicData>
+      <texPath>Things/Item/VV_HormoneJelly</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <color>(200,255,145)</color>
+    </graphicData>
+
+    <statBases>
+      <MarketValue>2.7</MarketValue>
+    </statBases>
+  </ThingDef>
+</Defs>

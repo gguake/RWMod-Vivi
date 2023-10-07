@@ -3,19 +3,21 @@
   <VV_RoyalGeneLabelPrefix>로열</VV_RoyalGeneLabelPrefix>
   <VV_ApparelBodyTypeNotMatching>체형이 맞지 않음</VV_ApparelBodyTypeNotMatching>
 
+  <VV_PlantGatherCooldownInspectorString>다음 채집이 가능하기까지 남은 시간: {0}</VV_PlantGatherCooldownInspectorString>
+
   <VV_GizmoViviEggProgressHeader>산란 진행도</VV_GizmoViviEggProgressHeader>
   <VV_GizmoViviEggProgressTooltip>다음 알을 낳기까지 얼마나 남았는지를 나타냅니다.\n\n진행도가 100%인 상태에서 산란에 적합한 비비 부화기가 존재하면 그곳에 가서 알을 낳습니다.</VV_GizmoViviEggProgressTooltip>
   <VV_GizmoSetFertilizeAutoThreshold>에너지 최소치 {0}(으)로 설정</VV_GizmoSetFertilizeAutoThreshold>
 
-  <VV_PlantGatherCooldownInspectorString>다음 채집이 가능하기까지 남은 시간: {0}</VV_PlantGatherCooldownInspectorString>
-
   <VV_InspectorViviHatcheryDisabled>부화기 비활성화됨</VV_InspectorViviHatcheryDisabled>
   <VV_InspectorViviHatcheryDisabledReasonNoRoof>지붕 없음</VV_InspectorViviHatcheryDisabledReasonNoRoof>
   <VV_InspectorViviHatcheryDisabledReasonOutdoor>실외</VV_InspectorViviHatcheryDisabledReasonOutdoor>
+
   <VV_InspectorViviWallReplaceCooldown>굳기까지 남은 시간: {0}</VV_InspectorViviWallReplaceCooldown>
+
   <VV_InspectorPlantEnergy>에너지: {0}/{1}</VV_InspectorPlantEnergy>
   <VV_InspectorPlantEnergyFlux>({0}/일)</VV_InspectorPlantEnergyFlux>
-  <VV_InspectorFertilizerAuto>비료 사용 기준 에너지: {0}</VV_InspectorFertilizerAuto>
+
   <VV_InspectorViviGerminatorReserved>모종 배양 예약됨</VV_InspectorViviGerminatorReserved>
   <VV_InspectorViviGerminatorCompletePeriods>배양 완료까지 남은 시간: {0}</VV_InspectorViviGerminatorCompletePeriods>
   <VV_InspectorViviGerminatorManageAvailable>{0}번째 모종 관리 작업 가능: {1}</VV_InspectorViviGerminatorManageAvailable>
@@ -23,12 +25,6 @@
   <VV_InspectorViviGerminatorManageLastPeriods>다음 관리 작업까지 남은 시간: {0}</VV_InspectorViviGerminatorManageLastPeriods>
   <VV_InspectorViviGerminatorNoProduct>배양 실패</VV_InspectorViviGerminatorNoProduct>
   <VV_InspectorViviGerminatorProduct>배양 결과: {0} x{1}</VV_InspectorViviGerminatorProduct>
-
-  <VV_LetterViviEggHatchedLabel>새로운 비비 태어남</VV_LetterViviEggHatchedLabel>
-  <VV_LetterViviEggHatched>{PARENT_labelShort}가 낳은 알에서 새로운 비비가 태어났습니다. </VV_LetterViviEggHatched>
-  <VV_LetterViviEggHatchedNoParent>새로운 비비가 태어났습니다.\n비비는 일반적인 인간보다 빠르게 성장하며 특별한 음식을 통해 더 빠르게 성장할 수도 있습니다.\n비비는 성장 단계에서 충분한 로열 젤리를 섭취하면 로열 비비로 성장하고, 그렇지 않으면 일반 비비로 성장합니다. 로열 비비는 번식이 가능하지만 충분한 조건을 갖추지 않았다면 오히려 위협이 될수도 있으니 주의하세요.</VV_LetterViviEggHatchedNoParent>
-  <VV_LetterRoyalViviGrownLabel>새로운 로열 비비: {PAWN_labelShort}</VV_LetterRoyalViviGrownLabel>
-  <VV_LetterRoyalViviGrown>{PAWN_labelShort}가 충분한 로열 젤리를 섭취해 로열 비비로 성장했습니다.\n\n로열 비비는 작업 능력은 다소 떨어지지만 알을 낳아 번식이 가능하며 일반 비비와 정신 결속을 맺을 수 있습니다.</VV_LetterRoyalViviGrown>
 
   <VV_CommandFertilizeAutoActivated>비료 자동 사용</VV_CommandFertilizeAutoActivated>
   <VV_CommandFertilizeAutoActivatedDesc>식물의 에너지가 일정 이하일때 정착민들이 비료를 자동으로 사용할지 설정합니다.</VV_CommandFertilizeAutoActivatedDesc>

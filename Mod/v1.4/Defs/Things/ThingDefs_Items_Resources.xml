@@ -5,6 +5,13 @@
     <defName>VV_Vivicream</defName>
     <label>vivi cream</label>
     <description>.</description>
+    <descriptionHyperlinks>
+      <TerrainDef>VV_ViviCreamFloor</TerrainDef>
+      <ThingDef>VV_ViviCreamWall</ThingDef>
+      <ThingDef>VV_Viviwax</ThingDef>
+      <ThingDef>VV_RoyalJelly</ThingDef>
+    </descriptionHyperlinks>
+
     <graphicData>
       <texPath>Things/Item/VV_Cream</texPath>
       <graphicClass>Graphic_StackCount</graphicClass>
@@ -105,6 +112,10 @@
     <defName>VV_Propolis</defName>
     <label>vivi propolis</label>
     <description>.</description>
+    <descriptionHyperlinks>
+      <RecipeDef>VV_InjectPropolis</RecipeDef>
+    </descriptionHyperlinks>
+    
     <graphicData>
       <texPath>Things/Item/VV_RawPropolis</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -200,14 +211,14 @@
     </thingCategories>
 
     <statBases>
-      <StuffPower_Armor_Sharp>1.48</StuffPower_Armor_Sharp>
-      <StuffPower_Armor_Blunt>0.54</StuffPower_Armor_Blunt>
-      <StuffPower_Armor_Heat>3</StuffPower_Armor_Heat>
-      <StuffPower_Insulation_Cold>24</StuffPower_Insulation_Cold>
-      <StuffPower_Insulation_Heat>24</StuffPower_Insulation_Heat>
+      <StuffPower_Armor_Sharp>1.68</StuffPower_Armor_Sharp>
+      <StuffPower_Armor_Blunt>0.72</StuffPower_Armor_Blunt>
+      <StuffPower_Armor_Heat>3.00</StuffPower_Armor_Heat>
+      <StuffPower_Insulation_Cold>22</StuffPower_Insulation_Cold>
+      <StuffPower_Insulation_Heat>26</StuffPower_Insulation_Heat>
 
       <MaxHitPoints>200</MaxHitPoints>
-      <MarketValue>8.4</MarketValue>
+      <MarketValue>9</MarketValue>
       <Mass>0.034</Mass>
       <Flammability>0.3</Flammability>
       <DeteriorationRate>1</DeteriorationRate>
@@ -221,14 +232,14 @@
         <MaxHitPoints>2.1</MaxHitPoints>
         <Flammability>0.3</Flammability>
         <Beauty>4.5</Beauty>
-        <WorkToMake>2.4</WorkToMake>
-        <WorkToBuild>2.4</WorkToBuild>
+        <WorkToMake>2.0</WorkToMake>
+        <WorkToBuild>2.0</WorkToBuild>
       </statFactors>
       <categories>
         <li>Fabric</li>
       </categories>
-      <color>(24,24,24)</color>
-      <commonality>0.005</commonality>
+      <color>(19,17,17)</color>
+      <commonality>0.0025</commonality>
     </stuffProps>
 
     <comps>
@@ -236,12 +247,15 @@
     <allowedArchonexusCount>80</allowedArchonexusCount>
   </ThingDef>
   
-
   <!-- 꽃씨 -->
   <ThingDef ParentName="ResourceBase">
     <defName>VV_UnknownSeed</defName>
     <label>unknown seed</label>
     <description>.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_SeedlingGerminator</ThingDef>
+    </descriptionHyperlinks>
+
     <graphicData>
       <texPath>Things/Item/VV_FlowerSeed</texPath>
       <graphicClass>Graphic_StackCount</graphicClass>
@@ -274,6 +288,7 @@
     <defName>VV_Fertilizer</defName>
     <label>vivi fertilizer</label>
     <description>.</description>
+
     <graphicData>
       <texPath>Things/Item/VV_Fertilizer</texPath>
       <graphicClass>Graphic_Single</graphicClass>

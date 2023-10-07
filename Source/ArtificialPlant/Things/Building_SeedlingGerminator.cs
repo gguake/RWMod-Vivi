@@ -1,7 +1,6 @@
 ﻿using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
 using UnityEngine;
 using Verse;
@@ -491,6 +490,8 @@ namespace VVRace
             else if (_productThingDef.Minifiable)
             {
                 thing = ThingMaker.MakeThing(_productThingDef);
+                thing.SetFactionDirect(Faction);
+
                 thing = thing.MakeMinified();
 
                 _productRemainedCount--;

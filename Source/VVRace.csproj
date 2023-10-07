@@ -77,6 +77,7 @@
     <Compile Include="ArtificialPlant\Comps\CompSensorExplosive.cs" />
     <Compile Include="ArtificialPlant\Comps\CompTerraformer.cs" />
     <Compile Include="ArtificialPlant\SensorWorker.cs" />
+    <Compile Include="ArtificialPlant\Things\ArtificialPlantDesignatorCache.cs" />
     <Compile Include="ArtificialPlant\Things\ArtificialPlantPot.cs" />
     <Compile Include="ArtificialPlant\ArtificialPlantModExtension.cs" />
     <Compile Include="ArtificialPlant\UI\Command_SetFertilizeAutoThreshold.cs" />
@@ -146,6 +147,7 @@
     <Compile Include="SpecialThingFilterWorker_Dessicated.cs" />
     <Compile Include="TextureCache.cs" />
     <Compile Include="Utility\ViviUtility.cs" />
+    <Compile Include="Vivi\Alert_LowLoyalty.cs" />
     <Compile Include="Vivi\Comps\CompVivi.cs" />
     <Compile Include="Vivi\HediffComp_RoyalJelly.cs" />
     <Compile Include="Vivi\Need_Loyalty.cs" />

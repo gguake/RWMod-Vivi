@@ -13,4 +13,34 @@
       </li>
     </stages>
   </ThoughtDef>
+  
+  <ThoughtDef>
+    <defName>VV_FloralTea</defName>
+    <workerClass>ThoughtWorker_Hediff</workerClass>
+    <hediff>VV_FloralTea</hediff>
+    <validWhileDespawned>true</validWhileDespawned>
+    <developmentalStageFilter>Baby, Child, Adult</developmentalStageFilter>
+    <stages>
+      <li>
+        <label>drink floral tea</label>
+        <description>Drinking that flowering tea made me feel relaxed.</description>
+        <baseMoodEffect>5</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>VV_FlowerScent</defName>
+    <workerClass>ThoughtWorker_Hediff</workerClass>
+    <hediff>VV_FlowerScent</hediff>
+    <validWhileDespawned>true</validWhileDespawned>
+    <developmentalStageFilter>Baby, Child, Adult</developmentalStageFilter>
+    <stages>
+      <li>
+        <label>flower scent</label>
+        <description>Feel like I'm radiating a scent of flowers.</description>
+        <baseMoodEffect>5</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
 </Defs>
