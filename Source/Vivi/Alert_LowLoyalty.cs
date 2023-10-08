@@ -51,7 +51,7 @@ namespace VVRace
 
         public override TaggedString GetExplanation()
         {
-            return LocalizeTexts.AlertArtificialPlantLowEnergyDesc.Translate();
+            return LocalizeTexts.AlertViviLowLoyaltyDesc.Translate();
         }
     }
 }

@@ -146,67 +146,6 @@
     <researchPrerequisite>VV_AdvancedGathering</researchPrerequisite>
   </RecipeDef>
 
-  <!-- 생체 가닥 정제 -->
-  <RecipeDef>
-    <defName>VV_MakeLifestrand</defName>
-    <label>making lifestrand</label>
-    <description>.</description>
-    <descriptionHyperlinks>
-      <ThingDef>VV_LivingLeaf</ThingDef>
-    </descriptionHyperlinks>
-
-    <jobString>making lifestrand.</jobString>
-    <workAmount>2000</workAmount>
-    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
-    <workSkill>Crafting</workSkill>
-
-    <effectWorking>Tailor</effectWorking>
-    <soundWorking>Recipe_Tailor</soundWorking>
-    <uiIconThing>VV_Lifestrand</uiIconThing>
-
-    <ingredients>
-      <li>
-        <filter>
-          <thingDefs>
-            <li>DevilstrandCloth</li>
-          </thingDefs>
-        </filter>
-        <count>20</count>
-      </li>
-      <li>
-        <filter>
-          <thingDefs>
-            <li>VV_Pollen</li>
-          </thingDefs>
-        </filter>
-        <count>20</count>
-      </li>
-      <li>
-        <filter>
-          <thingDefs>
-            <li>VV_LivingLeaf</li>
-          </thingDefs>
-        </filter>
-        <count>20</count>
-      </li>
-    </ingredients>
-    <fixedIngredientFilter>
-      <thingDefs>
-        <li>DevilstrandCloth</li>
-        <li>VV_GrassFiber</li>
-        <li>VV_Pollen</li>
-      </thingDefs>
-    </fixedIngredientFilter>
-    <products>
-      <VV_Lifestrand>20</VV_Lifestrand>
-    </products>
-    <researchPrerequisite>VV_Lifestrand</researchPrerequisite>
-
-    <skillRequirements>
-      <Crafting>8</Crafting>
-    </skillRequirements>
-  </RecipeDef>
-
   <!-- 비료 제작 (썩은 시체) -->
   <RecipeDef>
     <defName>VV_MakeFertilizerCorpse</defName>

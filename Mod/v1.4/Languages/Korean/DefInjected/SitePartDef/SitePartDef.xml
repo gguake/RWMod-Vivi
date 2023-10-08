@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <VV_MechanoidScoutingBase.label>메카노이드 정찰 기지</VV_MechanoidScoutingBase.label>
+  <VV_MechanoidScoutingBase.description>메카노이드가 고대에 건설한 정찰 기지입니다.</VV_MechanoidScoutingBase.description>
+  
+  <VV_MechanoidScoutingBase.approachOrderString>{0} 진입</VV_MechanoidScoutingBase.approachOrderString>
+  <VV_MechanoidScoutingBase.approachingReportString>{0} 진입중</VV_MechanoidScoutingBase.approachingReportString>
+</LanguageData>

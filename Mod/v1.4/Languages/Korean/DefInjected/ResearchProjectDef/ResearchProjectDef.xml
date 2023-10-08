@@ -1,31 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-  <VV_BasicInfra.label>비비 기초 시설</VV_BasicInfra.label>
-  <VV_BasicInfra.description>비비들이 사용하는 기초적인 생산 시설과 구조물을 건설할 수 있습니다.</VV_BasicInfra.description>
-  
-  <VV_BasicGathering.label>비비 기초 채집학</VV_BasicGathering.label>
-  <VV_BasicGathering.description>비비들의 주식인 꿀과 꽃가루를 채집하는 시설을 건설하고 기초적인 가공품을 만들 수 있습니다.</VV_BasicGathering.description>
-  
-  <VV_AdvancedGathering.label>비비 고급 채집학</VV_AdvancedGathering.label>
-  <VV_AdvancedGathering.description>비비들이 자연에서 희귀한 물질들을 채집하고 기초적인 가공품을 만들 수 있습니다.</VV_AdvancedGathering.description>
-  
-  <VV_Tools.label>채집 도구 제조</VV_Tools.label>
-  <VV_Tools.description>비비들이 채집에 사용하는 도구를 제작할 수 있습니다.</VV_Tools.description>
-  
-  <VV_Weaponry.label>비비 전통 무기</VV_Weaponry.label>
-  <VV_Weaponry.description>비비들이 전통적으로 사용하는 무기를 제작할 수 있습니다.</VV_Weaponry.description>
-  
-  <VV_Apparels.label>비비 의류</VV_Apparels.label>
-  <VV_Apparels.description>비비들이 입는 기초적인 의류를 제작할 수 있습니다.</VV_Apparels.description>
 
-  <VV_AdvancedApparels.label>비비 고급 의류</VV_AdvancedApparels.label>
-  <VV_AdvancedApparels.description>비비들이 입는 고급 의류를 제작할 수 있습니다.</VV_AdvancedApparels.description>
+<VV_BasicInfra.label>기초 비비 시설</VV_BasicInfra.label>
+<VV_BasicInfra.description>비비들이 사용하는 기초적인 생산 시설과 구조물을 건설할 수 있습니다.</VV_BasicInfra.description>
 
-  <VV_AncientBotany.label>고대 식물학</VV_AncientBotany.label>
-  <VV_AncientBotany.description>다양한 활용도를 가진 고대 식물들을 복원하고 배양하는 방법을 연구합니다.</VV_AncientBotany.description>
+<VV_BasicGathering.label>기초 채집학</VV_BasicGathering.label>
+<VV_BasicGathering.description>비비들의 주식인 꿀과 꽃가루를 채집하는 시설을 건설하고 기초적인 가공품을 만들 수 있습니다.</VV_BasicGathering.description>
 
-  <VV_Lifestrand.label>생체가닥</VV_Lifestrand.label>
-  <VV_Lifestrand.description>악마가닥 천을 특수한 재료로 가공해 강화한 생체가닥 천을 직조할 수 있습니다.</VV_Lifestrand.description>
+<VV_AdvancedGathering.label>고급 채집학</VV_AdvancedGathering.label>
+<VV_AdvancedGathering.description>비비들이 자연에서 희귀한 물질들을 채집하고 기초적인 가공품을 만들 수 있습니다.</VV_AdvancedGathering.description>
 
-  
+<VV_Tools.label>채집 도구 제조</VV_Tools.label>
+<VV_Tools.description>비비들이 채집에 사용하는 도구를 제작할 수 있습니다.</VV_Tools.description>
+
+<VV_Weaponry.label>비비 전통 무기</VV_Weaponry.label>
+<VV_Weaponry.description>비비들이 전통적으로 사용해온 무기를 제작할 수 있습니다.</VV_Weaponry.description>
+
+<VV_Apparels.label>비비 의류</VV_Apparels.label>
+<VV_Apparels.description>비비들이 입는 기초적인 의류를 제작할 수 있습니다.</VV_Apparels.description>
+
+<VV_AdvancedApparels.label>고급 비비 의류</VV_AdvancedApparels.label>
+<VV_AdvancedApparels.description>비비들이 입는 고급 의류를 제작할 수 있습니다.</VV_AdvancedApparels.description>
+
+<VV_AncientBotany.label>고대 식물학</VV_AncientBotany.label>
+<VV_AncientBotany.description>다양한 활용도를 가진 고대 식물들을 미확인 씨앗을 활용해 복원하고 배양할수 있게 됩니다.</VV_AncientBotany.description>
+<VV_AncientBotany.discoveredLetterTitle>고대 식물</VV_AncientBotany.discoveredLetterTitle>
+<VV_AncientBotany.discoveredLetterText>고대 식물을 배양하려면 미확인 씨앗, 비료, 꽃가루가 대량으로 필요하며 주기적으로 관리해줘야 좋은 결과를 얻을 수 있습니다. 배양 작업은 실패하거나 혹은 고대 식물이 아닌 흔한 작물이 자랄수도 있습니다.
+\n고대 식물은 에너지라는 자원을 생산하고 소모하며 식물마다 특수한 조건이 만족되어야 에너지를 생산합니다. 생산된 에너지가 최대 저장량을 초과하면 인접한 다른 고대 식물들에게 전송해주는 특징이 있으므로 잘 활용하세요.</VV_AncientBotany.discoveredLetterText>
+
+<VV_Lifestrand.label>생체가닥</VV_Lifestrand.label>
+<VV_Lifestrand.description>악마가닥 천을 특수한 재료로 가공해 강화한 생체가닥 천을 직조할 수 있습니다.</VV_Lifestrand.description>
+
+<VV_AdvancedWeaponry.label>비비 응용 무기</VV_AdvancedWeaponry.label>
+<VV_AdvancedWeaponry.description>고대 식물의 특수한 성질을 가진 재료와 현대 기술을 결합해 특수한 장비를 제작합니다.</VV_AdvancedWeaponry.description>
+
+<VV_AutomatedInfra.label>자동화 비비 시설</VV_AutomatedInfra.label>
+<VV_AutomatedInfra.description>전기를 이용해 기존의 비비들이 하던 일부 수작업들을 자동화하고 효율을 증대시킵니다.</VV_AutomatedInfra.description>
+
+<VV_EnergyTransmitter.label>에너지 전송기</VV_EnergyTransmitter.label>
+<VV_EnergyTransmitter.description>고대 식물의 에너지 전달 원리를 규명해 인위적으로 식물의 에너지를 전송하는 장치를 제작합니다.</VV_EnergyTransmitter.description>
+
+<VV_AncientFloraRestoration.label>고대 식물 유전자 분석</VV_AncientFloraRestoration.label>
+<VV_AncientFloraRestoration.description>원하는 고대 식물을 선택해서 복원할수 있도록 합니다.</VV_AncientFloraRestoration.description>
+
 </LanguageData>

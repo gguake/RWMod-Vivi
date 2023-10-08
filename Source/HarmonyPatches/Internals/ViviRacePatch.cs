@@ -2,6 +2,7 @@
 using MonoMod.Utils;
 using RimWorld;
 using RimWorld.BaseGen;
+using RimWorld.QuestGen;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -159,29 +160,6 @@ namespace VVRace.HarmonyPatches
             return true;
         }
 
-        private static Action<MainTabWindow_Architect> _MainTabWindow_Architect_CacheDesPanel = AccessTools.Method(typeof(MainTabWindow_Architect), "CacheDesPanels")
-            .CreateDelegate<Action<MainTabWindow_Architect>>();
-
-        private static void MainTabWindow_Architect_CacheDesPanels_Postfix(List<ArchitectCategoryTab> ___desPanelsCached)
-        {
-            var tab = ___desPanelsCached.FirstOrDefault(v => v.def == VVDesignationCategoryDefOf.VV_Bulidings);
-            if (tab != null)
-            {
-                if (!tab.Visible)
-                {
-                    ___desPanelsCached.Remove(tab);
-                }
-            }
-        }
-
-        private static void ResearchManager_FinishProject_Postfix(ResearchProjectDef proj)
-        {
-            if (proj.UnlockedDefs.Any(v => v is ThingDef thingDef && thingDef.designationCategory == VVDesignationCategoryDefOf.VV_Bulidings))
-            {
-                _MainTabWindow_Architect_CacheDesPanel((MainTabWindow_Architect)MainButtonDefOf.Architect.TabWindow);
-            }
-        }
-
         private static IEnumerable<CodeInstruction> WorkGiver_DoBill_StartOrResumeBillJob_Transpiler(IEnumerable<CodeInstruction> codeInstructions, ILGenerator ilGenerator)
         {
             var instructions = codeInstructions.ToList();
@@ -235,7 +213,7 @@ namespace VVRace.HarmonyPatches
 
         private static void ScenPart_PlayerPawnsArriveMethod_GenerateIntoMap_Postfix(Map map)
         {
-            if (map.IsPlayerHome)
+            if (map.IsPlayerHome && Find.GameInitData.startingTile == map.Tile)
             {
                 var startingRoyalVivis = Find.GameInitData.startingAndOptionalPawns?.Where(pawn => pawn.Spawned && pawn.IsRoyalVivi()).ToList();
                 foreach (var vivi in startingRoyalVivis)

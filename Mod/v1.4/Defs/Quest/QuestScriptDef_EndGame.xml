@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <QuestScriptDef>
+    <defName>VV_EndGame_Worldtree</defName>
+    <isRootSpecial>true</isRootSpecial>
+    <autoAccept>true</autoAccept>
+    <endOnColonyMove>false</endOnColonyMove>
+    <defaultChallengeRating>4</defaultChallengeRating>
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->legend of worldtree</li>
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <rulesStrings>
+        <li>questDescription->.</li>
+      </rulesStrings>
+    </questDescriptionRules>
+    
+    <root Class="QuestNode_Sequence">
+      <nodes>
+        <li Class="QuestNode_QuestUnique">
+          <tag>VV_EndGame_Worldtree</tag>
+        </li>
+        <li Class="VVRace.QuestNode_Root_Worldtree" />
+      </nodes>
+    </root>
+  </QuestScriptDef>
+
+  <!-- step 1-->
+  <QuestScriptDef>
+    <defName>VV_EndGame_Worldtree_Step_Archaeologist</defName>
+    <isRootSpecial>true</isRootSpecial>
+    <autoAccept>false</autoAccept>
+    <epicParent>VV_EndGame_Worldtree</epicParent>
+    <defaultChallengeRating>4</defaultChallengeRating>
+    <endOnColonyMove>false</endOnColonyMove>
+
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->[menace] cluster</li>
+        <li>questName->[menace] pods</li>
+        <li>questName->[nameBased]</li>
+
+        <li>nameBased->[asker_nameDef]'s mechs</li>
+        <li>nameBased->[asker_nameDef]'s mechanoids</li>
+        <li>nameBased->[asker_nameDef]'s mech cluster</li>
+        <li>nameBased->[asker_nameDef]'s mech [menace]</li>
+
+        <li>menace->threat</li>
+        <li>menace->menace</li>
+        <li>menace->scourge</li>
+        <li>menace->danger</li>
+        <li>menace->terror</li>
+        <li>menace->fear</li>
+      </rulesStrings>
+    </questNameRules>
+
+    <questDescriptionRules>
+      <rulesStrings>
+        <li>dangersDescription(priority=1)->\n\nThe pods contain these dangers:
+\n[allThreats]</li>
+        <li>dangersDescription->.</li>
+        <li>questDescription->[asker_nameDef], archaeologist of [asker_faction_name], is making a request. [commonMainPart]</li>
+        <li>commonMainPart->A mechanoid swarm has been attacking [asker_possessive] settlements. [asker_pronoun] wants you to signal the mechs to distract them while [asker_pronoun] clears the hive. If you do, (*Threat)a mechanoid cluster(/Threat) will land at [map_definite].[dangersDescription]
+\nThe mechanoid cluster will be initially dormant. It may have a countdown activator, or it may stay dormant forever until disturbed.</li>
+      </rulesStrings>
+    </questDescriptionRules>
+
+    <root Class="QuestNode_Sequence">
+      <nodes>
+        <li Class="QuestNode_Set">
+          <name>pointsFactor</name>
+          <value>5.0</value>
+        </li>
+        <li Class="QuestNode_Multiply">
+          <value1>$points</value1>
+          <value2>$pointsFactor</value2>
+          <storeAs>points</storeAs>
+        </li>
+
+        <li Class="QuestNode_GetMap" />
+        <li Class="QuestNode_GetPawn">
+          <storeAs>asker</storeAs>
+          <canGeneratePawn>true</canGeneratePawn>
+          <minTechLevel>Industrial</minTechLevel>
+          <mustHaveNoFaction>false</mustHaveNoFaction>
+          <allowPermanentEnemyFaction>false</allowPermanentEnemyFaction>
+          <mustHaveRoyalTitleInCurrentFaction>true</mustHaveRoyalTitleInCurrentFaction>
+          <hostileWeight>0.15</hostileWeight>
+          <maxUsablePawnsToGenerate>100</maxUsablePawnsToGenerate>
+        </li>
+
+        <li Class="QuestNode_Delay">
+          <delayTicks>2500</delayTicks>
+          <node Class="QuestNode_SpawnMechCluster">
+            <tag>cluster</tag>
+            <points>$points</points>
+          </node>
+        </li>
+
+        <li Class="QuestNode_AllSignals">
+          <inSignals>
+            <li>cluster.AllEnemiesDefeated</li>
+          </inSignals>
+          <node Class="QuestNode_Delay">
+            <delayTicks>300</delayTicks>
+            <node Class="QuestNode_Sequence">
+              <nodes>
+                <li Class="VVRace.QuestNode_GiveRewardWorldtreeLocation" />
+                <li Class="QuestNode_End">
+                  <outcome>Success</outcome>
+                </li>
+              </nodes>
+            </node>
+          </node>
+        </li>
+      </nodes>
+    </root>
+  </QuestScriptDef>
+
+  <!-- step 2-->
+  <QuestScriptDef>
+    <defName>VV_EndGame_Worldtree_Step_AssaultComplex</defName>
+    <isRootSpecial>true</isRootSpecial>
+    <autoAccept>true</autoAccept>
+    <epicParent>VV_EndGame_Worldtree</epicParent>
+    <defaultChallengeRating>4</defaultChallengeRating>
+    <endOnColonyMove>false</endOnColonyMove>
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->ancient worldtree location</li>
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <rulesStrings>
+        <li>questDescription->.</li>
+      </rulesStrings>
+    </questDescriptionRules>
+    <questContentRules>
+      <rulesStrings>
+        <!-- Misc -->
+        <li>terminalHackedMessage->Terminal hacked. {COUNT} / [terminalCount] complete.</li>
+        <li>allTerminalsHackedMessage->You've hacked all of the terminals and discovered secret information about worldtree! You can now leave.</li>
+      </rulesStrings>
+    </questContentRules>
+    <root Class="VVRace.QuestNode_Root_Worldtree_MechanoidScoutingBase" />
+  </QuestScriptDef>
+  
+  <!-- step 3-->
+  <QuestScriptDef>
+    <defName>VV_EndGame_Worldtree_Step_RestoreWorldtree</defName>
+    <isRootSpecial>true</isRootSpecial>
+    <autoAccept>true</autoAccept>
+    <epicParent>VV_EndGame_Worldtree</epicParent>
+    <defaultChallengeRating>4</defaultChallengeRating>
+    <endOnColonyMove>false</endOnColonyMove>
+
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->.</li>
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <rulesStrings>
+        <li>questDescription->.</li>
+      </rulesStrings>
+    </questDescriptionRules>
+
+    <root Class="QuestNode_Sequence">
+      <nodes>
+        <!-- Add reward info -->
+        <li Class="QuestNode_AddPassageOffworldReward">
+          <inSignalChoiceUsed>escapeShip.LaunchedShip</inSignalChoiceUsed>
+        </li>
+        
+        <li Class="QuestNode_EndGame_ShipEscape_FindShipTile">
+          <storeAs>tile</storeAs>
+        </li>
+        <li Class="QuestNode_GenerateWorldObject">
+          <def>EscapeShip</def>
+          <storeAs>escapeShip</storeAs>
+        </li>
+        <li Class="QuestNode_SpawnWorldObjects">
+          <worldObjects>$escapeShip</worldObjects>
+          <tile>$tile</tile>
+        </li>
+
+        <!-- Ending -->
+        
+        <!-- World object destroyed -->
+        <li Class="QuestNode_NoWorldObject">
+          <worldObject>$escapeShip</worldObject>
+          <node Class="QuestNode_End">
+            <outcome>Fail</outcome>
+          </node>
+        </li>
+        
+        <!-- Reactor destroyed -->
+        <li Class="QuestNode_Signal">
+          <inSignal>escapeShip.ReactorDestroyed</inSignal>
+          <node Class="QuestNode_End">
+            <outcome>Fail</outcome>
+          </node>
+        </li>
+        
+        <!-- Launched ship -->
+        <li Class="QuestNode_End">
+          <inSignal>escapeShip.LaunchedShip</inSignal>
+          <outcome>Success</outcome>
+        </li>
+      </nodes>
+    </root>
+  </QuestScriptDef>
+</Defs>

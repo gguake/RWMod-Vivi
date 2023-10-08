@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 테크 2 -->
+  <ResearchProjectDef Abstract="True" Name="ViviResearchProjectTier2Base">
+		<tab>VV_Vivi</tab>
+    <techLevel>Industrial</techLevel>
+  </ResearchProjectDef>
+  
+  <ResearchProjectDef ParentName="ViviResearchProjectTier2Base">
+    <defName>VV_Lifestrand</defName>
+    <label>lifestrand</label>
+    <description>.</description>
+    <baseCost>1200</baseCost>
+    <researchViewX>3</researchViewX>
+    <researchViewY>2.1</researchViewY>
+    <prerequisites>
+      <li>Devilstrand</li>
+      <li>VV_AncientBotany</li>
+    </prerequisites>
+  </ResearchProjectDef>
+  
+  <ResearchProjectDef ParentName="ViviResearchProjectTier2Base">
+    <defName>VV_AutomatedInfra</defName>
+    <label>vivi automated infrastructures</label>
+    <description>.</description>
+    <baseCost>1200</baseCost>
+    <researchViewX>3</researchViewX>
+    <researchViewY>0.7</researchViewY>
+    <prerequisites>
+      <li>Electricity</li>
+      <li>VV_AdvancedGathering</li>
+      <li>VV_AncientBotany</li>
+    </prerequisites>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef ParentName="ViviResearchProjectTier2Base">
+    <defName>VV_AdvancedWeaponry</defName>
+    <label>vivi advanced weaponry</label>
+    <description>.</description>
+    <baseCost>800</baseCost>
+    <researchViewX>3</researchViewX>
+    <researchViewY>2.8</researchViewY>
+    <prerequisites>
+      <li>Machining</li>
+      <li>VV_AncientBotany</li>
+      <li>VV_Weaponry</li>
+    </prerequisites>
+  </ResearchProjectDef>
+</Defs>

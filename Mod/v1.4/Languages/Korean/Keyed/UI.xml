@@ -53,4 +53,5 @@
 
   <VV_MessageGerminateSeedlingSuccess>모종 배양에 성공했습니다. ({0} x{1})</VV_MessageGerminateSeedlingSuccess>
   <VV_MessageGerminateSeedlingFailed>모종 배양에 실패했습니다.</VV_MessageGerminateSeedlingFailed>
+  <VV_MessageAncientTerminalWorldtreeDiscovered>고대 세계수의 정보가 담긴 고대 단말기를 찾았습니다!</VV_MessageAncientTerminalWorldtreeDiscovered>
 </LanguageData>

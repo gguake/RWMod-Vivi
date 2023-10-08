@@ -133,4 +133,36 @@ namespace VVRace
     {
         public static HediffDef VV_RoyalVivi;
     }
+
+    [DefOf]
+    public static class VVResearchProjectDef
+    {
+        public static ResearchProjectDef VV_AncientFloraRestoration;
+    }
+
+    [DefOf]
+    public static class VVQuestScriptDefOf
+    {
+        public static QuestScriptDef VV_EndGame_Worldtree_Step_Archaeologist;
+        public static QuestScriptDef VV_EndGame_Worldtree_Step_AssaultComplex;
+        public static QuestScriptDef VV_EndGame_Worldtree_Step_RestoreWorldtree;
+    }
+
+    [DefOf]
+    public static class VVThingSetMakerDefOf
+    {
+        public static ThingSetMakerDef VV_MapGen_EndGame_AncientComplexRoomLoot;
+    }
+
+    [DefOf]
+    public static class VVComplexDefOf
+    {
+        public static ComplexDef VV_MechanoidScoutingBase;
+    }
+
+    [DefOf]
+    public static class VVSitePartDefOf
+    {
+        public static SitePartDef VV_MechanoidScoutingBase;
+    }
 }

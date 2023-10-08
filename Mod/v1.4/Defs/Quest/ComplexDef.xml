@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <ComplexRoomDef>
+    <defName>VV_ScoutingBaseStorageRoom</defName>
+    <selectionWeight>1</selectionWeight>
+    <sketchResolverDef>VV_ScoutingBaseStorageRoom</sketchResolverDef>
+
+    <floorTypes>
+      <li>Concrete</li>
+      <li>PavedTile</li>
+    </floorTypes>
+  </ComplexRoomDef>
+  
+  <ComplexRoomDef>
+    <defName>VV_ScoutingBasePowerRoom</defName>
+    <selectionWeight>1</selectionWeight>
+    <sketchResolverDef>VV_ScoutingBasePowerRoom</sketchResolverDef>
+    <maxCount>1</maxCount>
+    
+    <floorTypes>
+      <li>PavedTile</li>
+    </floorTypes>
+  </ComplexRoomDef>
+  
+  <ComplexRoomDef>
+    <defName>VV_ScoutingBaseArmoryRoom</defName>
+    <selectionWeight>1</selectionWeight>
+    <sketchResolverDef>VV_ScoutingBaseArmoryRoom</sketchResolverDef>
+    <maxArea>26</maxArea>
+    
+    <floorTypes>
+      <li>Concrete</li>
+      <li>PavedTile</li>
+    </floorTypes>
+  </ComplexRoomDef>
+
+  <ComplexDef>
+    <defName>VV_MechanoidScoutingBase</defName>
+    <workerClass>VVRace.ComplexWorker_MechanoidScoutingBase</workerClass>
+    <roomDefs>
+      <li>VV_ScoutingBaseStorageRoom</li>
+      <li>VV_ScoutingBasePowerRoom</li>
+      <li>VV_ScoutingBaseArmoryRoom</li>
+    </roomDefs>
+    <threats>
+      <li>
+        <def>SleepingMechanoids</def>
+      </li>
+    </threats>
+    <rewardThingSetMakerDef>MapGen_AncientComplexRoomLoot_Default</rewardThingSetMakerDef>
+  </ComplexDef>
+</Defs>

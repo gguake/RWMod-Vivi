@@ -41,7 +41,7 @@ namespace VVRace
             if (respawningAfterLoad)
             {
                 var pawn = (Pawn)parent;
-                if (!pawn.health.hediffSet.HasHediff(VVHediffDefOf.VV_RoyalVivi))
+                if (isRoyal && !pawn.health.hediffSet.HasHediff(VVHediffDefOf.VV_RoyalVivi))
                 {
                     pawn.health.AddHediff(VVHediffDefOf.VV_RoyalVivi);
                 }
