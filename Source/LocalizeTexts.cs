@@ -2,8 +2,6 @@
 {
     public static class LocalizeTexts
     {
-        public const string RoyalGeneLabelPrefix = "VV_RoyalGeneLabelPrefix";
-
         public const string ApparelBodyTypeWhitelisted = "VV_ApparelBodyTypeNotMatching";
 
         public const string AlertViviDangerousEggs = "VV_AlertViviDangerousEggs";
@@ -50,8 +48,6 @@
         public const string CommandCancelGerminateScheduleDesc = "VV_CommandCancelGerminateScheduleDesc";
         public const string CommandCanWithdrawProduct = "VV_CommandCanWithdrawProduct";
         public const string CommandCanWithdrawProductDesc = "VV_CommandCanWithdrawProductDesc";
-        public const string CommandChangeGatherRadius = "VV_CommandChangeGatherRadius";
-        public const string CommandChangeGatherRadiusDesc = "VV_CommandChangeGatherRadiusDesc";
 
         public const string JobFailReasonNoHarvestablePlants = "VV_JobFailReasonNoHarvestablePlants";
         public const string JobFailReasonNoHarvestablePollenFilths = "VV_JobFailReasonNoHarvestablePollenFilths";

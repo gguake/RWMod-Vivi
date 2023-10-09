@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+<VV_LetterViviEggHatchedLabel>New vivi born</VV_LetterViviEggHatchedLabel>
+<VV_LetterViviEggHatched>A new Vivi has hatched from the egg laid by {PARENT_labelShort}.</VV_LetterViviEggHatched>
+<VV_LetterViviEggHatchedNoParent>A new Vivi has been born. Vivi grows faster than typical humans and can grow even more quickly through special food.
+\nIf Vivi consumes enough royal jelly during its growth stages, it will mature into a Royal Vivi; otherwise, it will grow into a regular Vivi.
+\nRoyal Vivi can reproduce, but be cautious as it could potentially become a threat if the settlement does not meet sufficient conditions.</VV_LetterViviEggHatchedNoParent>
+
+<VV_LetterRoyalViviGrownLabel>New royal vivi: {PAWN_labelShort}</VV_LetterRoyalViviGrownLabel>
+<VV_LetterRoyalViviGrown>{PAWN_labelShort} has consumed enough royal jelly and has grown into a Royal Vivi.
+\nWhile Royal Vivi has somewhat diminished work capabilities, it can lay eggs for reproduction and has higher mental sensitivity.
+\nHowever, managing loyalty can be more challenging, and it can potentially pose a threat to the settlement's cohesion. Always be cautious.</VV_LetterRoyalViviGrown>
+
+
+</LanguageData>

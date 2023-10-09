@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-  <VV_RoyalGeneLabelPrefix>로열</VV_RoyalGeneLabelPrefix>
   <VV_ApparelBodyTypeNotMatching>체형이 맞지 않음</VV_ApparelBodyTypeNotMatching>
 
   <VV_PlantGatherCooldownInspectorString>다음 채집이 가능하기까지 남은 시간: {0}</VV_PlantGatherCooldownInspectorString>
@@ -36,8 +35,6 @@
   <VV_CommandCancelGerminateScheduleDesc>현재 예약되어있거나 진행중인 모종 배양 작업을 취소합니다.</VV_CommandCancelGerminateScheduleDesc>
   <VV_CommandCanWithdrawProduct>모종 포장 허용</VV_CommandCanWithdrawProduct>
   <VV_CommandCanWithdrawProductDesc>배양이 완료된 모종을 포장하는 작업을 진행할지 설정합니다.</VV_CommandCanWithdrawProductDesc>
-  <VV_CommandChangeGatherRadius>채집 범위 변경</VV_CommandChangeGatherRadius>
-  <VV_CommandChangeGatherRadiusDesc>채집 작업을 진행할 범위를 변경합니다.</VV_CommandChangeGatherRadiusDesc>
 
   <VV_JobFailReasonNoHarvestablePlants>주변에 채집 가능한 식물 없음</VV_JobFailReasonNoHarvestablePlants>
   <VV_JobFailReasonNoHarvestablePollenFilths>주변에 수집 가능한 꽃가루 없음</VV_JobFailReasonNoHarvestablePollenFilths>
@@ -49,7 +46,9 @@
   <VV_StatsReport_Energy>에너지 비축량</VV_StatsReport_Energy>
   <VV_StatsReport_Energy_Desc>식물이 최대로 저장할수 있는 에너지의 양입니다.</VV_StatsReport_Energy_Desc>
   <VV_StatsReport_EnergyFlux>에너지 변화량</VV_StatsReport_EnergyFlux>
-  <VV_StatsReport_EnergyFlux_Desc>하루동안의 이 식물의 에너지 변화량입니다.\n\n에너지는 비료를 투입하거나 조건에 맞는 환경이 갖춰지면 특정 고대 식물들이 생산할수 있으며 포장되어있을때는 소모되지 않습니다.\n\n에너지 생산량이 비축량을 초과한 고대 식물은 인접한 다른 고대 식물들에 초과된 에너지를 제공합니다.</VV_StatsReport_EnergyFlux_Desc>
+  <VV_StatsReport_EnergyFlux_Desc>하루동안의 이 식물의 에너지 변화량입니다.
+  \n에너지는 비료를 투입하거나 조건에 맞는 환경이 갖춰지면 특정 고대 식물들이 생산할수 있으며 포장되어있을때는 소모되지 않습니다.
+  \n에너지 생산량이 비축량을 초과한 고대 식물은 인접한 다른 고대 식물들에 초과된 에너지를 제공합니다.</VV_StatsReport_EnergyFlux_Desc>
 
   <VV_MessageGerminateSeedlingSuccess>모종 배양에 성공했습니다. ({0} x{1})</VV_MessageGerminateSeedlingSuccess>
   <VV_MessageGerminateSeedlingFailed>모종 배양에 실패했습니다.</VV_MessageGerminateSeedlingFailed>

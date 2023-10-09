@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-  <ViviFactionGreetingHostile>{0}는 사납게 윙윙거리며 연결을 끊었습니다.</ViviFactionGreetingHostile>
-  <ViviFactionGreetingHostileAppreciative>{0}는 사납게 윙윙거리고 있습니다. 당신과 우호 관계가 되기 전까지 {0_pronoun}는 당신과 거래하지 않을것입니다. 당신은 {0_possessive} 정착지에 선물을 보내거나 {0_possessive} 소속의 포로를 안전하게 석방한다면 관계를 개선할 수 있습니다.\n\n{0_pronoun}는 갑작스럽게 연결을 끊었습니다.</ViviFactionGreetingHostileAppreciative>
-  <ViviFactionGreetingWary>{0}는 윙윙거리며 당신을 기다리고 있습니다.</ViviFactionGreetingWary>
-  <ViviFactionGreetingWarm>{0}는 반가운듯 윙윙거리며 {NEGOTIATOR_labelShort}에게 인사합니다.</ViviFactionGreetingWarm>
+<ViviFactionGreetingHostile>{0}는 사납게 윙윙거리며 연결을 끊었습니다.</ViviFactionGreetingHostile>
+<ViviFactionGreetingHostileAppreciative>{0}는 사납게 윙윙거리고 있습니다. 당신과 우호 관계가 되기 전까지 {0_pronoun}는 당신과 거래하지 않을것입니다. 당신은 {0_possessive} 정착지에 선물을 보내거나 {0_possessive} 소속의 포로를 안전하게 석방한다면 관계를 개선할 수 있습니다.
+\n{0_pronoun}는 갑작스럽게 연결을 끊었습니다.</ViviFactionGreetingHostileAppreciative>
+<ViviFactionGreetingWary>{0}는 윙윙거리며 당신을 기다리고 있습니다.</ViviFactionGreetingWary>
+<ViviFactionGreetingWarm>{0}는 반가운듯 윙윙거리며 {NEGOTIATOR_labelShort}에게 인사합니다.</ViviFactionGreetingWarm>
 
-  <VV_WarnCancelGerminateSchedule>현재 모종 배양기에 배양중인 모종이 있습니다. 작업을 취소하면 배양중인 모종과 투입된 자원이 사라집니다.</VV_WarnCancelGerminateSchedule>
+<VV_WarnCancelGerminateSchedule>현재 모종 배양기에 배양중인 모종이 있습니다. 작업을 취소하면 배양중인 모종과 투입된 자원이 사라집니다.</VV_WarnCancelGerminateSchedule>
 
-  <ViviGerminateWindowJobTab>가능한 관리 작업</ViviGerminateWindowJobTab>
-  <ViviGerminateWindowScheduleTab>모종 관리 일정</ViviGerminateWindowScheduleTab>
-  <ViviGerminateWindowScheduleTabTip>모종 배양을 시작한 후 {0}번째 관리 작업시 해당 작업을 진행합니다.\n\n{1}: {2}</ViviGerminateWindowScheduleTabTip>
-  <ViviGerminateWindowScheduleDesc>모종 배양에는 총 {0}일이 소요되며 배양 시작 이후 {1}시간마다 관리 작업을 할 수 있습니다.\n\n정착민은 일정대로 관리 작업을 진행하지만 재료가 부족하거나 바쁜 경우 진행되지 않습니다.\n\n관리 작업의 품질은 정착민의 원예 기술에 영향을 받으며 특정 자원을 소모합니다.</ViviGerminateWindowScheduleDesc>
-  <ViviGerminateWindowIngredientHeader>총 작업 요구 재료</ViviGerminateWindowIngredientHeader>
-  <ViviGerminateWindowTotalWork>총 작업량: {0}</ViviGerminateWindowTotalWork>
-  <ViviGerminateWindowBonusSummaryHeader>모든 작업 완료시 예상 보너스 효과</ViviGerminateWindowBonusSummaryHeader>
-  <ViviGerminateWindowBonusCount>결과 모종 개수 {0}</ViviGerminateWindowBonusCount>
-  <ViviGerminateWindowBonusSuccessChance>모종 배양 성공률 x{0}</ViviGerminateWindowBonusSuccessChance>
-  <ViviGerminateWindowBonusRareChance>희귀한 모종 배양 확률 x{0}</ViviGerminateWindowBonusRareChance>
+<ViviGerminateWindowJobTab>가능한 관리 작업</ViviGerminateWindowJobTab>
+<ViviGerminateWindowScheduleTab>모종 관리 일정</ViviGerminateWindowScheduleTab>
+<ViviGerminateWindowScheduleTabTip>모종 배양을 시작한 후 {0}번째 관리 작업시 해당 작업을 진행합니다.
+\n{1}: {2}</ViviGerminateWindowScheduleTabTip>
+<ViviGerminateWindowScheduleDesc>모종 배양에는 총 {0}일이 소요되며 배양 시작 이후 {1}시간마다 관리 작업을 할 수 있습니다.
+\n정착민은 일정대로 관리 작업을 진행하지만 재료가 부족하거나 바쁜 경우 진행되지 않습니다.
+\n관리 작업의 품질은 정착민의 원예 기술에 영향을 받으며 특정 자원을 소모합니다.</ViviGerminateWindowScheduleDesc>
+<ViviGerminateWindowIngredientHeader>총 작업 요구 재료</ViviGerminateWindowIngredientHeader>
+<ViviGerminateWindowTotalWork>총 작업량: {0}</ViviGerminateWindowTotalWork>
+<ViviGerminateWindowBonusSummaryHeader>모든 작업 완료시 예상 보너스 효과</ViviGerminateWindowBonusSummaryHeader>
+<ViviGerminateWindowBonusCount>결과 모종 개수 {0}</ViviGerminateWindowBonusCount>
+<ViviGerminateWindowBonusSuccessChance>모종 배양 성공률 x{0}</ViviGerminateWindowBonusSuccessChance>
+<ViviGerminateWindowBonusRareChance>희귀한 모종 배양 확률 x{0}</ViviGerminateWindowBonusRareChance>
 </LanguageData>

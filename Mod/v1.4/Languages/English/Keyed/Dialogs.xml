@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-  <ViviFactionGreetingHostile>{0} grunts angrily and disconnects.</ViviFactionGreetingHostile>
-  <ViviFactionGreetingHostileAppreciative>{0} grunts aggressively. Until you make a gesture of goodwill, {0_pronoun} will not do business with you. You can improve relations through a number of activities, like bringing gifts to one of {0_possessive} settlements or releasing {0_possessive} faction's prisoners unharmed.\n\n{0_pronoun} disconnects abruptly.</ViviFactionGreetingHostileAppreciative>
-  <ViviFactionGreetingWary>{0} grunts a greeting.</ViviFactionGreetingWary>
-  <ViviFactionGreetingWarm>{0} grunts a warm greeting to {NEGOTIATOR_labelShort}.</ViviFactionGreetingWarm>
+<ViviFactionGreetingHostile>{0} has disconnected with an ominous buzzing.</ViviFactionGreetingHostile>
+<ViviFactionGreetingHostileAppreciative>{0} is buzzing ominously. {0_pronoun} will not trade with you until you establish a friendly relationship. You can improve relations by sending gifts to {0_possessive} settlement or safely releasing prisoners of {0_possessive} affiliation.
+\n{0_pronoun} has suddenly disconnected.</ViviFactionGreetingHostileAppreciative>
+<ViviFactionGreetingWary>{0} is buzzing, waiting for you.</ViviFactionGreetingWary>
+<ViviFactionGreetingWarm>{0} buzzes warmly, greeting {NEGOTIATOR_labelShort}.</ViviFactionGreetingWarm>
+
+<VV_WarnCancelGerminateSchedule>There is a strain currently being cultured in the seedling germinator. Cancelling the operation will result in the loss of the strain being cultured and the resources invested.</VV_WarnCancelGerminateSchedule>
+
+<ViviGerminateWindowJobTab>Managements</ViviGerminateWindowJobTab>
+<ViviGerminateWindowScheduleTab>Schedule</ViviGerminateWindowScheduleTab>
+<ViviGerminateWindowScheduleTabTip>Initiate the corresponding operation during the {0}th management task after starting the seedling cultivation.
+\n{1}: {2}</ViviGerminateWindowScheduleTabTip>
+<ViviGerminateWindowScheduleDesc>The seedling cultivation takes a total of {0} days, and maintenance work can be done every {1} hours after the start of the cultivation.
+\Colonists proceed with the management tasks as scheduled, but not if materials are lacking or if they are too busy.
+\nThe quality of the management task is influenced by the settler's gardening skills and consumes specific resources.</ViviGerminateWindowScheduleDesc>
+<ViviGerminateWindowIngredientHeader>Total ingredients총 작업 요구 재료</ViviGerminateWindowIngredientHeader>
+<ViviGerminateWindowTotalWork>Total work: {0}</ViviGerminateWindowTotalWork>
+<ViviGerminateWindowBonusSummaryHeader>Expected bonus effects</ViviGerminateWindowBonusSummaryHeader>
+<ViviGerminateWindowBonusCount>Yield changes by {0}</ViviGerminateWindowBonusCount>
+<ViviGerminateWindowBonusSuccessChance>Success chance x{0}</ViviGerminateWindowBonusSuccessChance>
+<ViviGerminateWindowBonusRareChance>Rare plants chance x{0}</ViviGerminateWindowBonusRareChance>
 </LanguageData>
