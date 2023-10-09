@@ -103,7 +103,7 @@
     </fixedIngredientFilter>
     <products>
       <VV_FilteredHoney>5</VV_FilteredHoney>
-      <VV_Viviwax>1</VV_Viviwax>
+      <VV_Viviwax>2</VV_Viviwax>
     </products>
     <researchPrerequisite>VV_BasicInfra</researchPrerequisite>
   </RecipeDef>
@@ -115,14 +115,14 @@
     <description>.</description>
 
     <jobString>refining propolis.</jobString>
-    <workAmount>2000</workAmount>
+    <workAmount>1800</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <workSkill>Crafting</workSkill>
     <workSkillLearnFactor>0.5</workSkillLearnFactor>
 
     <effectWorking>Cook</effectWorking>
     <soundWorking>Recipe_Brewing</soundWorking>
-    <uiIconThing>VV_Propolis</uiIconThing>
+    <uiIconThing>Neutroamine</uiIconThing>
 
     <ingredients>
       <li>
@@ -140,8 +140,8 @@
       </thingDefs>
     </fixedIngredientFilter>
     <products>
-      <MedicineHerbal>3</MedicineHerbal>
-      <Neutroamine>3</Neutroamine>
+      <MedicineHerbal>1</MedicineHerbal>
+      <Neutroamine>2</Neutroamine>
     </products>
     <researchPrerequisite>VV_AdvancedGathering</researchPrerequisite>
   </RecipeDef>

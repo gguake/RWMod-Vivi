@@ -32,4 +32,7 @@
   
   <VV_SeedlingGerminator.label>고대 모종 배양기</VV_SeedlingGerminator.label>
   <VV_SeedlingGerminator.description>모종을 배양하기 위한 대형 화분입니다. 모종 복원에는 많은 재료가 소모되지만 성공하면 특이한 성질을 가진 고대의 식물을 복원할 수 있습니다.</VV_SeedlingGerminator.description>
+
+  <VV_AutoExtractor.label>자동 꿀 추출기</VV_AutoExtractor.label>
+  <VV_AutoExtractor.description>원심력을 이용해 정제되지 않은 비비 꿀이나 프로폴리스에서 필요한 성분을 대량으로 추출하는 기계입니다. 손으로 작업하는것보다 훨씬 빠르고 대량으로 작업 가능하지만 전기가 필요합니다.</VV_AutoExtractor.description>
 </LanguageData>

@@ -61,4 +61,74 @@
     </skillRequirements>
   </RecipeDef>
 
+  <!-- 대량 꿀 정제 -->
+  <RecipeDef>
+    <defName>VV_ExtractBulkHoney</defName>
+    <label>extract bulk honey</label>
+    <description>test</description>
+
+    <jobString>extrating honey.</jobString>
+    <workAmount>700</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+
+    <effectWorking>Cremate</effectWorking>
+    <soundWorking>Recipe_Cremate</soundWorking>
+    <uiIconThing>VV_FilteredHoney</uiIconThing>
+
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_RawHoney</li>
+          </thingDefs>
+        </filter>
+        <count>70</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>VV_RawHoney</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <VV_FilteredHoney>21</VV_FilteredHoney>
+    </products>
+  </RecipeDef>
+
+  <!-- 대량 프로폴리스 정제 -->
+  <RecipeDef>
+    <defName>VV_ExtractBulkPropolis</defName>
+    <label>refining bulk propolis</label>
+    <description>test</description>
+
+    <jobString>refining propolis.</jobString>
+    <workAmount>2000</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+
+    <effectWorking>Cremate</effectWorking>
+    <soundWorking>Recipe_Cremate</soundWorking>
+    <uiIconThing>Neutroamine</uiIconThing>
+
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_Propolis</li>
+          </thingDefs>
+        </filter>
+        <count>15</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>VV_RawHoney</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <MedicineHerbal>5</MedicineHerbal>
+      <Neutroamine>12</Neutroamine>
+    </products>
+  </RecipeDef>
 </Defs>

@@ -297,6 +297,10 @@
         <overdoseSeverityOffset>0.08~0.14</overdoseSeverityOffset>
       </li>
     </comps>
+
+    <tradeTags>
+      <li>VV_FloweringTea</li>
+    </tradeTags>
   </ThingDef>
   
   <ThingDef ParentName="VV_FloweringTeaBase">
