@@ -23,30 +23,17 @@
       
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_FilteredHoney</thingDef>
-        <countRange>30~60</countRange>
-      </li>
-      <li Class="StockGenerator_SingleDef">
-        <thingDef>VV_Viviwax</thingDef>
-        <countRange>50~100</countRange>
+        <countRange>20~40</countRange>
       </li>
       
       <!-- Drugs -->
-      <li Class="StockGenerator_Category">
-        <categoryDef>Drugs</categoryDef>
-        <maxTechLevelGenerate>Neolithic</maxTechLevelGenerate>
-        <thingDefCountRange>-2~1</thingDefCountRange>
-        <totalPriceRange>50~150</totalPriceRange>
+      <li Class="StockGenerator_Tag">
+        <tradeTag>VV_FloweringTea</tradeTag>
+        <thingDefCountRange>0~2</thingDefCountRange>
+        <countRange>5~10</countRange>
       </li>
-      
+
       <!-- Techprints -->
-      <li Class="StockGenerator_Techprints">
-        <countChances>
-          <li>
-            <count>1</count>
-            <chance>0.2</chance>
-          </li>
-        </countChances>
-      </li>
       
       <!-- Weapons -->
       <li Class="StockGenerator_MarketValue">
@@ -83,6 +70,8 @@
       
       <!-- Buying -->
       <li Class="StockGenerator_BuyExpensiveSimple" />
+      <li Class="StockGenerator_BuyTradeTag"><tag>VV_ViviHoney</tag></li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>VV_FloweringTea</tag></li>
       <li Class="StockGenerator_BuyTradeTag"><tag>Art</tag></li>
       <li Class="StockGenerator_BuyTradeTag"><tag>MusicalInstrument</tag></li>
       

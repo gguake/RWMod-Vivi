@@ -96,6 +96,7 @@
       <li Class="StockGenerator_BuyTradeTag"><tag>VV_ViviTool</tag></li>
       <li Class="StockGenerator_BuyTradeTag"><tag>VV_ViviApparel</tag></li>
       <li Class="StockGenerator_BuyTradeTag"><tag>VV_ArtificialPlant</tag></li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>VV_FloweringTea</tag></li>
       <li Class="StockGenerator_BuyTradeTag"><tag>Art</tag></li>
       <li Class="StockGenerator_BuyTradeTag"><tag>MusicalInstrument</tag></li>
     </stockGenerators>
@@ -113,10 +114,6 @@
         <countRange>500~900</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
-        <thingDef>Neutroamine</thingDef>
-        <countRange>10~40</countRange>
-      </li>
-      <li Class="StockGenerator_SingleDef">
         <thingDef>VV_FilteredHoney</thingDef>
         <countRange>50~100</countRange>
       </li>
@@ -132,8 +129,18 @@
         <thingDef>VV_Fertilizer</thingDef>
         <countRange>300~800</countRange>
       </li>
+      <li Class="StockGenerator_Tag">
+        <tradeTag>VV_Petal</tradeTag>
+        <thingDefCountRange>2~4</thingDefCountRange>
+        <countRange>100~200</countRange>
+      </li>
       
       <!-- Drugs -->
+      <li Class="StockGenerator_Tag">
+        <tradeTag>VV_FloweringTea</tradeTag>
+        <thingDefCountRange>1~2</thingDefCountRange>
+        <countRange>15~20</countRange>
+      </li>
 
       <!-- Techprints -->
       
@@ -166,6 +173,7 @@
       <li Class="StockGenerator_BuyTradeTag"><tag>VV_ViviResource</tag></li>
       <li Class="StockGenerator_BuyTradeTag"><tag>VV_ViviTool</tag></li>
       <li Class="StockGenerator_BuyTradeTag"><tag>VV_ArtificialPlant</tag></li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>VV_FloweringTea</tag></li>
       <li Class="StockGenerator_BuyTradeTag"><tag>MusicalInstrument</tag></li>
       
     </stockGenerators>
