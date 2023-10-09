@@ -39,7 +39,7 @@ namespace VVRace
                 // 내부에 아포크리톤 1기 배치
                 {
                     var p = resolveParam;
-                    p.rect = new CellRect(innerRoomInnerRect.minX, innerRoomInnerRect.minZ, 1, 1);
+                    p.rect = new CellRect(innerRoomInnerRect.minX + 1, innerRoomInnerRect.minZ, 1, 1);
                     p.faction = resolveParam.faction;
                     p.singlePawnKindDef = PawnKindDefOf.Mech_Apocriton;
                     p.singlePawnLord = lord;

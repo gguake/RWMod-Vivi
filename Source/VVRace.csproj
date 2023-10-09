@@ -112,6 +112,7 @@
     <Compile Include="EndGame\QuestNode\QuestNode_GiveRewardWorldtreeLocation.cs" />
     <Compile Include="EndGame\QuestNode\QuestNode_Root_Worldtree_MechanoidScoutingBase.cs" />
     <Compile Include="EndGame\QuestNode\QuestNode_Root_Worldtree.cs" />
+    <Compile Include="EndGame\QuestNode\QuestNode_Worldtree_FindWorldtreeTile.cs" />
     <Compile Include="EndGame\QuestPart_SubquestGenerator_Worldtree.cs" />
     <Compile Include="EndGame\Reward_Coronation.cs" />
     <Compile Include="EndGame\Reward_AncientWorldtreeLocation.cs" />
