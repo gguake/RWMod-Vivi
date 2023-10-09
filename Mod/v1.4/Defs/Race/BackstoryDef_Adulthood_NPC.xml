@@ -15,7 +15,8 @@
     <skillGains>
       <li><key>Construction</key><value>1</value></li>
       <li><key>Crafting</key><value>1</value></li>
-      <li><key>Intellectual</key><value>-2</value></li>
+      <li><key>Plants</key><value>1</value></li>
+      <li><key>Intellectual</key><value>-1</value></li>
     </skillGains>
   </AlienRace.AlienBackstoryDef>
 

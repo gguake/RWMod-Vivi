@@ -12,7 +12,7 @@
     <skillGains>
       <li><key>Plants</key><value>2</value></li>
       <li><key>Construction</key><value>1</value></li>
-      <li><key>Animals</key><value>-2</value></li>
+      <li><key>Intellectual</key><value>-1</value></li>
     </skillGains>
   </AlienRace.AlienBackstoryDef>
 </Defs>

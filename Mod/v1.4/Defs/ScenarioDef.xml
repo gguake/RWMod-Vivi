@@ -126,7 +126,7 @@
         
         <!-- 시작시 소유품 (분산) -->
         <li Class="ScenPart_ScatterThingsNearPlayerStart">
-          <def>ScatterThingsAnywhere</def>
+          <def>ScatterThingsNearPlayerStart</def>
           <thingDef>Steel</thingDef>
           <count>150</count>
         </li>
