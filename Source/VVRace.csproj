@@ -104,12 +104,9 @@
     <Compile Include="ArtificialPlant\GerminatorModExtension.cs" />
     <Compile Include="ArtificialPlant\AI\WorkGiver_ManageGerminator.cs" />
     <Compile Include="Egg\Comps\CompViviEggLayer.cs" />
-    <Compile Include="EndGame\MapGeneration\ComplexWorker_MechanoidScoutingBase.cs" />
     <Compile Include="EndGame\MapGeneration\GenStep_MechanoidScoutingBase.cs" />
-    <Compile Include="EndGame\MapGeneration\SketchResolver_ScoutingBasePowerRoom.cs" />
-    <Compile Include="EndGame\MapGeneration\SketchResolver_ScoutingBaseArmoryRoom.cs" />
-    <Compile Include="EndGame\MapGeneration\SketchResolver_ScoutingBaseStorageRoom.cs" />
-    <Compile Include="EndGame\MapGeneration\SymbolResolver_MechanoidScoutingBase_Sketch.cs" />
+    <Compile Include="EndGame\MapGeneration\SymbolResolver_EdgeBarricade.cs" />
+    <Compile Include="EndGame\MapGeneration\SymbolResolver_MechanoidScoutingBase.cs" />
     <Compile Include="EndGame\QuestNode\QuestNode_AddCoronationReward.cs" />
     <Compile Include="EndGame\QuestNode\QuestNode_FixedFaction.cs" />
     <Compile Include="EndGame\QuestNode\QuestNode_GiveRewardWorldtreeLocation.cs" />
@@ -118,6 +115,7 @@
     <Compile Include="EndGame\QuestPart_SubquestGenerator_Worldtree.cs" />
     <Compile Include="EndGame\Reward_Coronation.cs" />
     <Compile Include="EndGame\Reward_AncientWorldtreeLocation.cs" />
+    <Compile Include="EndGame\SitePartParams_MechanoidScoutingBase.cs" />
     <Compile Include="EndGame\SitePartWorker_ScoutingBase.cs" />
     <Compile Include="EndGame\StorytellerComp_WorldtreeQuest.cs" />
     <Compile Include="Gather\UI\ITab_GatherWorkTable.cs" />
@@ -189,6 +187,8 @@
     <Compile Include="Vivi\ViviRaceUtility.cs" />
     <Compile Include="VVDefOf.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="EndGame\Comps\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

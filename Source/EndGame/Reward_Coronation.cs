@@ -7,6 +7,7 @@ using Verse.Grammar;
 
 namespace VVRace
 {
+    [StaticConstructorOnStartup]
     public class Reward_Coronation : Reward
     {
         private static readonly Texture2D Icon = ContentFinder<Texture2D>.Get("UI/Icons/Stars");

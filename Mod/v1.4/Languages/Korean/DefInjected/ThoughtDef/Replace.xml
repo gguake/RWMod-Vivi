@@ -1,20 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-    <VV_SleptInBarracks.stages.awful_barracks.label>끔찍한 막사</VV_SleptInBarracks.stages.awful_barracks.label>
-    <VV_SleptInBarracks.stages.awful_barracks.description>사는 것 같지도 않은 곳이야.</VV_SleptInBarracks.stages.awful_barracks.description>
-    <VV_SleptInBarracks.stages.decent_barracks.label>괜찮은 막사</VV_SleptInBarracks.stages.decent_barracks.label>
-    <VV_SleptInBarracks.stages.decent_barracks.description>우리 막사는 괜찮은 편이야.</VV_SleptInBarracks.stages.decent_barracks.description>
-    <VV_SleptInBarracks.stages.slightly_impressive_barracks.label>약간 인상적인 막사</VV_SleptInBarracks.stages.slightly_impressive_barracks.label>
-    <VV_SleptInBarracks.stages.slightly_impressive_barracks.description>우리 막사는 꽤 괜찮지.</VV_SleptInBarracks.stages.slightly_impressive_barracks.description>
-    <VV_SleptInBarracks.stages.impressive_barracks.label>인상적인 막사</VV_SleptInBarracks.stages.impressive_barracks.label>
-    <VV_SleptInBarracks.stages.impressive_barracks.description>우리 막사는 인상적이야.</VV_SleptInBarracks.stages.impressive_barracks.description>
-    <VV_SleptInBarracks.stages.very_impressive_barracks.label>상당히 인상적인 막사</VV_SleptInBarracks.stages.very_impressive_barracks.label>
-    <VV_SleptInBarracks.stages.very_impressive_barracks.description>우리 막사는 상당히 인상적이야. 끝내줘!</VV_SleptInBarracks.stages.very_impressive_barracks.description>
-    <VV_SleptInBarracks.stages.extremely_impressive_barracks.label>매우 인상적인 막사</VV_SleptInBarracks.stages.extremely_impressive_barracks.label>
-    <VV_SleptInBarracks.stages.extremely_impressive_barracks.description>우리 막사는 매우 인상적이야. 최고의 장소지!</VV_SleptInBarracks.stages.extremely_impressive_barracks.description>
-    <VV_SleptInBarracks.stages.unbelievably_impressive_barracks.label>굉장히 인상적인 막사</VV_SleptInBarracks.stages.unbelievably_impressive_barracks.label>
-    <VV_SleptInBarracks.stages.unbelievably_impressive_barracks.description>우리 막사는 굉장히 인상적이야. 최고의 장소지!</VV_SleptInBarracks.stages.unbelievably_impressive_barracks.description>
-    <VV_SleptInBarracks.stages.wondrously_impressive_barracks.label>극도로 인상적인 막사</VV_SleptInBarracks.stages.wondrously_impressive_barracks.label>
-    <VV_SleptInBarracks.stages.wondrously_impressive_barracks.description>우리 막사는 상상할 수 있는 최고의 장소야. 정말 끝내줘.</VV_SleptInBarracks.stages.wondrously_impressive_barracks.description>
-    
+
+<!-- SAME AS VANILA VERSION -->
+
+<VV_SleptInBarracks.stages.awful_barracks.label>끔찍한 막사</VV_SleptInBarracks.stages.awful_barracks.label>
+<VV_SleptInBarracks.stages.awful_barracks.description>사는 것 같지도 않은 곳이야.</VV_SleptInBarracks.stages.awful_barracks.description>
+<VV_SleptInBarracks.stages.decent_barracks.label>괜찮은 막사</VV_SleptInBarracks.stages.decent_barracks.label>
+<VV_SleptInBarracks.stages.decent_barracks.description>우리 막사는 괜찮은 편이야.</VV_SleptInBarracks.stages.decent_barracks.description>
+<VV_SleptInBarracks.stages.slightly_impressive_barracks.label>약간 인상적인 막사</VV_SleptInBarracks.stages.slightly_impressive_barracks.label>
+<VV_SleptInBarracks.stages.slightly_impressive_barracks.description>우리 막사는 꽤 괜찮지.</VV_SleptInBarracks.stages.slightly_impressive_barracks.description>
+<VV_SleptInBarracks.stages.impressive_barracks.label>인상적인 막사</VV_SleptInBarracks.stages.impressive_barracks.label>
+<VV_SleptInBarracks.stages.impressive_barracks.description>우리 막사는 인상적이야.</VV_SleptInBarracks.stages.impressive_barracks.description>
+<VV_SleptInBarracks.stages.very_impressive_barracks.label>상당히 인상적인 막사</VV_SleptInBarracks.stages.very_impressive_barracks.label>
+<VV_SleptInBarracks.stages.very_impressive_barracks.description>우리 막사는 상당히 인상적이야. 끝내줘!</VV_SleptInBarracks.stages.very_impressive_barracks.description>
+<VV_SleptInBarracks.stages.extremely_impressive_barracks.label>매우 인상적인 막사</VV_SleptInBarracks.stages.extremely_impressive_barracks.label>
+<VV_SleptInBarracks.stages.extremely_impressive_barracks.description>우리 막사는 매우 인상적이야. 최고의 장소지!</VV_SleptInBarracks.stages.extremely_impressive_barracks.description>
+<VV_SleptInBarracks.stages.unbelievably_impressive_barracks.label>굉장히 인상적인 막사</VV_SleptInBarracks.stages.unbelievably_impressive_barracks.label>
+<VV_SleptInBarracks.stages.unbelievably_impressive_barracks.description>우리 막사는 굉장히 인상적이야. 최고의 장소지!</VV_SleptInBarracks.stages.unbelievably_impressive_barracks.description>
+<VV_SleptInBarracks.stages.wondrously_impressive_barracks.label>극도로 인상적인 막사</VV_SleptInBarracks.stages.wondrously_impressive_barracks.label>
+<VV_SleptInBarracks.stages.wondrously_impressive_barracks.description>우리 막사는 상상할 수 있는 최고의 장소야. 정말 끝내줘.</VV_SleptInBarracks.stages.wondrously_impressive_barracks.description>
+
+<VV_MyDaughterDied.stages.my_daughter_died.label>딸 {0} 사망</VV_MyDaughterDied.stages.my_daughter_died.label>
+<VV_MyDaughterDied.stages.my_daughter_died.description>내 딸이 죽었어. 내 혈육이...</VV_MyDaughterDied.stages.my_daughter_died.description>
+
 </LanguageData>

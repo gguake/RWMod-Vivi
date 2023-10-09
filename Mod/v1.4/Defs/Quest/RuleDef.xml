@@ -4,9 +4,18 @@
     <defName>VV_MechanoidScoutingBase</defName>
     <symbol>vv_mechanoid_scouting_base</symbol>
     <resolvers>
-      <li Class="VVRace.SymbolResolver_MechanoidScoutingBase_Sketch">
+      <li Class="VVRace.SymbolResolver_MechanoidScoutingBase">
         <minRectSize>(5, 5)</minRectSize>
       </li>
     </resolvers>
   </RuleDef>
+
+  <RuleDef>
+    <defName>VV_EdgeBarricade</defName>
+    <symbol>vv_edgebarricade</symbol>
+    <resolvers>
+      <li Class="VVRace.SymbolResolver_EdgeBarricade" />
+    </resolvers>
+  </RuleDef>
+  
 </Defs>

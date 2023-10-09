@@ -20,7 +20,7 @@
   <GenStepDef>
     <defName>VV_MechanoidScoutingBase</defName>
     <linkWithSite>VV_MechanoidScoutingBase</linkWithSite>
-    <order>310</order>
+    <order>600</order>
     <genStep Class="VVRace.GenStep_MechanoidScoutingBase" />
   </GenStepDef>
 </Defs>

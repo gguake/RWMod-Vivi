@@ -277,10 +277,15 @@
             <original>SleptInBarracks</original>
             <replacer>VV_SleptInBarracks</replacer> 
           </li>
+          <li>
+            <original>MyDaughterDied</original>
+            <replacer>VV_MyDaughterDied</replacer> 
+          </li>
         </replacerList>
 
         <cannotReceiveThoughts>
           <li>VV_AtePollen</li>
+          <li>MySisterDied</li>
         </cannotReceiveThoughts>
       </thoughtSettings>
       

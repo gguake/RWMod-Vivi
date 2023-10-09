@@ -140,8 +140,7 @@
     <questContentRules>
       <rulesStrings>
         <!-- Misc -->
-        <li>terminalHackedMessage->Terminal hacked. {COUNT} / [terminalCount] complete.</li>
-        <li>allTerminalsHackedMessage->You've hacked all of the terminals and discovered secret information about worldtree! You can now leave.</li>
+        <li>terminalHackedMessage->You've hacked terminal and discovered secret information about worldtree! You can now leave.</li>
       </rulesStrings>
     </questContentRules>
     <root Class="VVRace.QuestNode_Root_Worldtree_MechanoidScoutingBase" />
