@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <VV_InstallFakeAntennae.label>가짜 더듬이 이식</VV_InstallFakeAntennae.label>
+  <VV_InstallFakeAntennae.description>가짜 더듬이를 이식합니다.</VV_InstallFakeAntennae.description>
+  <VV_InstallFakeAntennae.jobString>가짜 더듬이 이식 중.</VV_InstallFakeAntennae.jobString>
+  
+  <VV_InstallFakeWing.label>가짜 날개 이식</VV_InstallFakeWing.label>
+  <VV_InstallFakeWing.description>가짜 날개를 이식합니다.</VV_InstallFakeWing.description>
+  <VV_InstallFakeWing.jobString>가짜 날개 이식 중.</VV_InstallFakeWing.jobString>
+  
+  <VV_InstallBionicAntennae.label>생체공학 더듬이 이식</VV_InstallBionicAntennae.label>
+  <VV_InstallBionicAntennae.description>생체공학 더듬이를 이식합니다.</VV_InstallBionicAntennae.description>
+  <VV_InstallBionicAntennae.jobString>생체공학 더듬이 이식 중.</VV_InstallBionicAntennae.jobString>
+  
+  <VV_InstallBionicWing.label>생체공학 날개 이식</VV_InstallBionicWing.label>
+  <VV_InstallBionicWing.description>생체공학 날개를 이식합니다.</VV_InstallBionicWing.description>
+  <VV_InstallBionicWing.jobString>생체공학 날개 이식 중.</VV_InstallBionicWing.jobString>
+</LanguageData>

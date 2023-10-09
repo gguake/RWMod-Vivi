@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  
+	<HediffDef ParentName="AddedBodyPartBase">
+		<defName>VV_FakeAntennae</defName>
+		<label>fake antennae</label>
+		<labelNoun>a fake antennae</labelNoun>
+		<description>.</description>
+    <descriptionHyperlinks><ThingDef>VV_FakeAntennae</ThingDef></descriptionHyperlinks>
+		<spawnThingOnRemoved>VV_FakeAntennae</spawnThingOnRemoved>
+		<addedPartProps>
+			<solid>true</solid>
+			<partEfficiency>0.3</partEfficiency>
+			<betterThanNatural>false</betterThanNatural>
+		</addedPartProps>
+	</HediffDef>
+  
+	<HediffDef ParentName="AddedBodyPartBase">
+		<defName>VV_FakeWing</defName>
+		<label>fake wing</label>
+		<labelNoun>a fake wing</labelNoun>
+		<description>.</description>
+    <descriptionHyperlinks><ThingDef>VV_FakeWing</ThingDef></descriptionHyperlinks>
+		<spawnThingOnRemoved>VV_FakeWing</spawnThingOnRemoved>
+		<addedPartProps>
+			<solid>true</solid>
+			<partEfficiency>0.3</partEfficiency>
+			<betterThanNatural>false</betterThanNatural>
+		</addedPartProps>
+	</HediffDef>
+
+	<HediffDef ParentName="AddedBodyPartBase">
+		<defName>VV_BionicAntennae</defName>
+		<label>bionic antennae</label>
+		<labelNoun>a bionic antennae</labelNoun>
+		<description>.</description>
+    <descriptionHyperlinks><ThingDef>VV_BionicAntennae</ThingDef></descriptionHyperlinks>
+		<spawnThingOnRemoved>VV_BionicAntennae</spawnThingOnRemoved>
+		<addedPartProps>
+			<solid>true</solid>
+			<partEfficiency>1.25</partEfficiency>
+		</addedPartProps>
+	</HediffDef>
+  
+	<HediffDef ParentName="AddedBodyPartBase">
+		<defName>VV_BionicWing</defName>
+		<label>bionic wing</label>
+		<labelNoun>a bionic wing</labelNoun>
+		<description>.</description>
+    <descriptionHyperlinks><ThingDef>VV_BionicWing</ThingDef></descriptionHyperlinks>
+		<spawnThingOnRemoved>VV_BionicWing</spawnThingOnRemoved>
+		<addedPartProps>
+			<solid>true</solid>
+			<partEfficiency>1.25</partEfficiency>
+		</addedPartProps>
+	</HediffDef>
+
+</Defs>

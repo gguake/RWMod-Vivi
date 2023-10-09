@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <VV_FakeAntennae.label>가짜 더듬이</VV_FakeAntennae.label>
+  <VV_FakeAntennae.labelNoun>가짜 더듬이</VV_FakeAntennae.labelNoun>
+  <VV_FakeAntennae.description>이식된 가짜 더듬이입니다.</VV_FakeAntennae.description>
+  
+  <VV_FakeWing.label>가짜 날개</VV_FakeWing.label>
+  <VV_FakeWing.labelNoun>가짜 날개</VV_FakeWing.labelNoun>
+  <VV_FakeWing.description>이식된 가짜 날개입니다.</VV_FakeWing.description>
+  
+  <VV_BionicAntennae.label>생체공학 더듬이</VV_BionicAntennae.label>
+  <VV_BionicAntennae.labelNoun>생체공학 더듬이</VV_BionicAntennae.labelNoun>
+  <VV_BionicAntennae.description>장착된 생체공학 더듬이입니다.</VV_BionicAntennae.description>
+  
+  <VV_BionicWing.label>생체공학 날개</VV_BionicWing.label>
+  <VV_BionicWing.labelNoun>생체공학 날개</VV_BionicWing.labelNoun>
+  <VV_BionicWing.description>장착된 생체공학 날개입니다.</VV_BionicWing.description>
+</LanguageData>

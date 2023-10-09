@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+<VV_FakeAntennae.label>가짜 비비 더듬이</VV_FakeAntennae.label>
+<VV_FakeAntennae.description>섬유와 비비 크림을 섞어 뭉쳐 만든 가짜 더듬이입니다. 큰 도움은 안되지만 없는것보단 보기 좋습니다.</VV_FakeAntennae.description>
+
+<VV_FakeWing.label>가짜 비비 날개</VV_FakeWing.label>
+<VV_FakeWing.description>섬유와 비비 크림을 섞어 뭉쳐 만든 가짜 날개입니다. 큰 도움은 안되지만 없는것보단 보기 좋습니다.</VV_FakeWing.description>
+
+<VV_BionicAntennae.label>생체공학 비비 더듬이</VV_BionicAntennae.label>
+<VV_BionicAntennae.description>외지인들의 기술로 만들어진 정교한 비비 더듬이입니다. 진짜 더듬이처럼 움직일 수 있을 뿐 아니라 내장된 고급 센서에 의해 더 멀리 감지할 수 있습니다.</VV_BionicAntennae.description>
+
+<VV_BionicWing.label>생체공학 비비 날개</VV_BionicWing.label>
+<VV_BionicWing.description>외지인들의 기술로 만들어진 정교한 비비 날개입니다. 진짜 날개처럼 움직일 수 있을 뿐 아니라 더 적은 힘으로 움직일 수 있고 훨씬 가볍습니다.</VV_BionicWing.description>
+</LanguageData>

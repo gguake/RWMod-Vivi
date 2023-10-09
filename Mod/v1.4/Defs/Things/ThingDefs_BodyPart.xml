@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+	<ThingDef ParentName="BodyPartProstheticBase">
+		<defName>VV_FakeAntennae</defName>
+		<label>fake vivi antennae</label>
+		<description>.</description>
+		<techLevel>Medieval</techLevel>
+		<costList>
+			<VV_Viviwax>25</VV_Viviwax>
+			<VV_GrassFiber>25</VV_GrassFiber>
+		</costList>
+		<statBases>
+			<WorkToMake>3000</WorkToMake>
+			<Mass>0.5</Mass>
+		</statBases>
+		<techHediffsTags>
+			<li>Simple</li>
+		</techHediffsTags>
+	</ThingDef>	
+	
+	<ThingDef ParentName="BodyPartProstheticMakeableBase">
+		<defName>VV_FakeWing</defName>
+		<label>fake vivi wing</label>
+		<description>.</description>
+		<techLevel>Medieval</techLevel>
+		<costList>
+			<VV_Vivicream>80</VV_Vivicream>
+			<VV_GrassFiber>40</VV_GrassFiber>
+		</costList>
+		<statBases>
+			<WorkToMake>4000</WorkToMake>
+			<Mass>0.5</Mass>
+		</statBases>
+		<techHediffsTags>
+			<li>Simple</li>
+		</techHediffsTags>
+	</ThingDef>
+  
+	<ThingDef ParentName="BodyPartProstheticMakeableBase">
+		<defName>VV_BionicAntennae</defName>
+		<label>bionic vivi antennae</label>
+		<description>.</description>
+		<techLevel>Spacer</techLevel>
+		<costList> 
+			<Plasteel>10</Plasteel>
+			<ComponentSpacer>2</ComponentSpacer>
+		</costList>
+		<statBases>
+			<WorkToMake>18000</WorkToMake>
+			<Mass>3</Mass>
+		</statBases>
+		<techHediffsTags>
+			<li>Advanced</li>
+		</techHediffsTags>
+	</ThingDef>
+  
+	<ThingDef ParentName="BodyPartBionicBase">
+		<defName>VV_BionicWing</defName>
+		<label>bionic vivi wing</label>
+		<description>.</description>
+		<techLevel>Spacer</techLevel>
+		<costList> 
+			<Plasteel>15</Plasteel>
+			<VV_Vivicream>60</VV_Vivicream>
+			<ComponentSpacer>3</ComponentSpacer>
+		</costList>
+		<statBases>
+			<WorkToMake>24000</WorkToMake>
+			<Mass>3</Mass>
+		</statBases>
+		<techHediffsTags>
+			<li>Advanced</li>
+		</techHediffsTags>
+	</ThingDef>
+</Defs>

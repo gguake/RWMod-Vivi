@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+	<RecipeDef ParentName="SurgeryInstallBodyPartProstheticBase">
+		<defName>VV_InstallFakeAntennae</defName>
+		<label>install fake antennae</label>
+		<description>Install a fake antennae.</description>
+		<workerClass>Recipe_InstallArtificialBodyPart</workerClass>
+		<jobString>Installing fake antennae.</jobString>
+		<workAmount>2000</workAmount>
+    <recipeUsers Inherit="False">
+      <li>VV_Vivi</li>
+    </recipeUsers>
+		<ingredients Inherit="False">
+			<li>
+				<filter>
+					<thingDefs>
+						<li>VV_FakeAntennae</li>
+					</thingDefs>
+				</filter>
+				<count>1</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>VV_FakeAntennae</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<appliedOnFixedBodyParts>
+			<li>VV_Antennae</li>
+		</appliedOnFixedBodyParts>
+		<addsHediff>VV_FakeAntennae</addsHediff>
+	</RecipeDef>
+
+	<RecipeDef ParentName="SurgeryInstallBodyPartProstheticBase">
+		<defName>VV_InstallFakeWing</defName>
+		<label>install fake wing</label>
+		<description>Install a fake wing.</description>
+		<workerClass>Recipe_InstallArtificialBodyPart</workerClass>
+		<jobString>Installing fake wing.</jobString>
+		<workAmount>2000</workAmount>
+    <recipeUsers Inherit="False">
+      <li>VV_Vivi</li>
+    </recipeUsers>
+		<ingredients Inherit="False">
+			<li>
+				<filter>
+					<thingDefs>
+						<li>VV_FakeWing</li>
+					</thingDefs>
+				</filter>
+				<count>1</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>VV_FakeWing</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<appliedOnFixedBodyParts>
+			<li>VV_Wing</li>
+		</appliedOnFixedBodyParts>
+		<addsHediff>VV_FakeWing</addsHediff>
+	</RecipeDef>
+  
+	<RecipeDef ParentName="SurgeryInstallBodyPartArtificialBase">
+		<defName>VV_InstallBionicAntennae</defName>
+		<label>install bionic antennae</label>
+		<description>Install a bionic antennae.</description>
+		<workerClass>Recipe_InstallArtificialBodyPart</workerClass>
+		<jobString>Installing bionic antennae.</jobString>
+		<workAmount>2000</workAmount>
+    <recipeUsers Inherit="False">
+      <li>VV_Vivi</li>
+    </recipeUsers>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>VV_BionicAntennae</li>
+					</thingDefs>
+				</filter>
+				<count>1</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>VV_BionicAntennae</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<appliedOnFixedBodyParts>
+			<li>VV_Antennae</li>
+		</appliedOnFixedBodyParts>
+		<addsHediff>VV_BionicAntennae</addsHediff>
+	</RecipeDef>
+  
+	<RecipeDef ParentName="SurgeryInstallBodyPartArtificialBase">
+		<defName>VV_InstallBionicWing</defName>
+		<label>install bionic wing</label>
+		<description>Install a bionic wing.</description>
+		<workerClass>Recipe_InstallArtificialBodyPart</workerClass>
+		<jobString>Installing bionic wing.</jobString>
+		<workAmount>2000</workAmount>
+    <recipeUsers Inherit="False">
+      <li>VV_Vivi</li>
+    </recipeUsers>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>VV_BionicWing</li>
+					</thingDefs>
+				</filter>
+				<count>1</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>VV_BionicWing</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<appliedOnFixedBodyParts>
+			<li>VV_Wing</li>
+		</appliedOnFixedBodyParts>
+		<addsHediff>VV_BionicWing</addsHediff>
+	</RecipeDef>
+
+</Defs>
