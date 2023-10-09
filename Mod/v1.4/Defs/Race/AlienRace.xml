@@ -343,7 +343,7 @@
     <statBases>
 			<MarketValue>1200</MarketValue>
 			<Mass>50</Mass>
-			<CarryingCapacity>45</CarryingCapacity>
+			<CarryingCapacity>70</CarryingCapacity>
 			<PainShockThreshold>0.7</PainShockThreshold>
 			<ToxicEnvironmentResistance>0.9</ToxicEnvironmentResistance>
 			<EatingSpeed>1.2</EatingSpeed>
