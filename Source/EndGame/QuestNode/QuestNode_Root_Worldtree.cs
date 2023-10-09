@@ -21,7 +21,6 @@ namespace VVRace
 
             var map = QuestGen_Get.GetMap();
             var points = slate.Get("points", 0f);
-            Log.Message($"QuestNode_Root_Worldtree: {points}");
 
             quest.AddPart(new QuestPart_SubquestGenerator_Worldtree
             {

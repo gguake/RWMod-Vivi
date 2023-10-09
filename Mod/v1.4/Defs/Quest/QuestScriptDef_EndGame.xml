@@ -33,7 +33,7 @@
     <isRootSpecial>true</isRootSpecial>
     <autoAccept>false</autoAccept>
     <epicParent>VV_EndGame_Worldtree</epicParent>
-    <defaultChallengeRating>4</defaultChallengeRating>
+    <defaultChallengeRating>3</defaultChallengeRating>
     <endOnColonyMove>false</endOnColonyMove>
 
     <questNameRules>
@@ -55,7 +55,7 @@
       <nodes>
         <li Class="QuestNode_Set">
           <name>pointsFactor</name>
-          <value>4.0</value>
+          <value>5.0</value>
         </li>
         <li Class="QuestNode_Multiply">
           <value1>$points</value1>
@@ -138,7 +138,7 @@
     <isRootSpecial>true</isRootSpecial>
     <autoAccept>true</autoAccept>
     <epicParent>VV_EndGame_Worldtree</epicParent>
-    <defaultChallengeRating>4</defaultChallengeRating>
+    <defaultChallengeRating>3</defaultChallengeRating>
     <endOnColonyMove>false</endOnColonyMove>
     <questNameRules>
       <rulesStrings>

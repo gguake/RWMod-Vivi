@@ -128,7 +128,6 @@ namespace VVRace
                     }
                     else
                     {
-                        Log.Message($"rebel?");
                         if (VVMentalBreakDefOf.RunWild.Worker.BreakCanOccur(pawn))
                         {
                             VVMentalBreakDefOf.RunWild.Worker.TryStart(pawn, LocalizeTexts.MentalStateReason_Loyalty.Translate(), false);

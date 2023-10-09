@@ -50,7 +50,6 @@ namespace VVRace
 
             if (!Current.Game.AnyPlayerHomeMap.PlayerPawnsForStoryteller.Any(pawn => pawn.IsColonist && pawn.IsRoyalVivi()))
             {
-                Log.Message($"5");
                 yield break;
             }
 
