@@ -11,7 +11,9 @@
     <skillGains>
       <li><key>Mining</key><value>-3</value></li>
       <li><key>Artistic</key><value>-3</value></li>
-      <li><key>Social</key><value>-1</value></li>
+      <li><key>Construction</key><value>5</value></li>
+      <li><key>Melee</key><value>5</value></li>
+      <li><key>Animals</key><value>5</value></li>
       <li><key>Intellectual</key><value>5</value></li>
       <li><key>Medicine</key><value>5</value></li>
     </skillGains>

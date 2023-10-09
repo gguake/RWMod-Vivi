@@ -365,6 +365,7 @@
       <ButcheryFleshEfficiency>0.75</ButcheryFleshEfficiency>
       <MiningSpeed>0.5</MiningSpeed>
       <MiningYield>0.5</MiningYield>
+      <PsychicSensitivity>0.5</PsychicSensitivity>
       
       <ToxicResistance>0.5</ToxicResistance>
       <Fertility>0</Fertility>

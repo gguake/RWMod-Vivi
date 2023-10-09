@@ -18,13 +18,13 @@
     <stages>
       <li>
         <statOffsets>
-          <MoveSpeed>-1.0</MoveSpeed>
-          <PsychicSensitivity>0.2</PsychicSensitivity>
-          <NegotiationAbility>0.2</NegotiationAbility>
-          <SocialImpact>0.2</SocialImpact>
+          <MoveSpeed>-1.2</MoveSpeed>
+          <PsychicSensitivity>1.5</PsychicSensitivity>
+          <NegotiationAbility>0.25</NegotiationAbility>
+          <SocialImpact>0.25</SocialImpact>
         </statOffsets>
         <statFactors>
-          <WorkSpeedGlobal>0.8</WorkSpeedGlobal>
+          <WorkSpeedGlobal>0.75</WorkSpeedGlobal>
         </statFactors>
       </li>
     </stages>
