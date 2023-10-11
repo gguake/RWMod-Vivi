@@ -6,23 +6,6 @@ using Verse;
 
 namespace VVRace
 {
-    public enum HexagonalRoomDirection
-    {
-        Up,
-        UpRight,
-        DownRight,
-        Down,
-        DownLeft,
-        UpLeft,
-    }
-
-    public enum HexagonalRoomEdgeType
-    {
-        Blocked,
-        Door,
-        Open,
-    }
-
     public class HexagonalRoom
     {
         public IntVec2 hexaCoord;
@@ -57,8 +40,8 @@ namespace VVRace
         }
 
         private HashSet<(IntVec2, IntVec2)> _connectedEdges = new HashSet<(IntVec2, IntVec2)>();
-        private List<(CellRect, HexagonalRoomEdgeType)> _connectorRects = new List<(CellRect, HexagonalRoomEdgeType)>();
-        public IEnumerable<(CellRect cellRect, HexagonalRoomEdgeType edgeType)> ConnectorRects => _connectorRects;
+        private List<CellRect> _connectorRects = new List<CellRect>();
+        public IEnumerable<CellRect> ConnectorRects => _connectorRects;
 
         public HexagonalRoomSystem(Map map, CellRect mainRect)
         {
@@ -104,7 +87,7 @@ namespace VVRace
                 return false;
             }
 
-            var connectorRect = HexagonalRoomUtility.CalcConnectorRect(roomA, roomB, out var edgeType);
+            var connectorRect = HexagonalRoomUtility.CalcConnectorRect(roomA, roomB.hexaCoord);
             if (connectorRect.IsEmpty)
             {
                 return false;
@@ -112,7 +95,7 @@ namespace VVRace
 
             _connectedEdges.Add((a, b));
             _connectedEdges.Add((b, a));
-            _connectorRects.Add((connectorRect, edgeType));
+            _connectorRects.Add(connectorRect);
             return true;
         }
 
@@ -120,19 +103,6 @@ namespace VVRace
 
     public static class HexagonalRoomUtility
     {
-        public static IEnumerable<HexagonalRoomDirection> HexagonalRoomDirections
-        {
-            get
-            {
-                yield return HexagonalRoomDirection.Up;
-                yield return HexagonalRoomDirection.UpRight;
-                yield return HexagonalRoomDirection.DownRight;
-                yield return HexagonalRoomDirection.Down;
-                yield return HexagonalRoomDirection.DownLeft;
-                yield return HexagonalRoomDirection.UpLeft;
-            }
-        }
-
         public static IEnumerable<IntVec2> HexagonalCoordinatesOperation
         {
             get
@@ -154,15 +124,15 @@ namespace VVRace
             }
         }
 
-        public static IEnumerable<IntVec2> HexagonalVerticalNeighbors(this IntVec2 coord)
+        public static IEnumerable<IntVec2> HexagonalHorizontalNeighbors(this IntVec2 coord)
         {
-            yield return coord + new IntVec2(0, -1);
-            yield return coord + new IntVec2(0, 1);
+            yield return coord + new IntVec2(1, 0);
+            yield return coord + new IntVec2(-1, 0);
         }
 
-        public static readonly IntVec2 RoomCellSize = new IntVec2(17, 11);
-        public static readonly IntVec3 XBasis = new IntVec3(13, 0, -5);         // = (1, 0)
-        public static readonly IntVec3 ZBasis = new IntVec3(0, 0, -10);         // = (0, 1)
+        public static readonly IntVec2 RoomCellSize = new IntVec2(9, 11);
+        public static readonly IntVec3 XBasis = new IntVec3(8, 0, 0);         // = (1, 0)
+        public static readonly IntVec3 ZBasis = new IntVec3(4, 0, -8);         // = (0, 1)
 
         #region Ring Coordinates
         private static readonly IntVec2[] _hexagonalRingWithRadius1 = new IntVec2[]
@@ -232,63 +202,6 @@ namespace VVRace
             throw new NotImplementedException();
         }
 
-        public static HexagonalRoomDirection Inverse(this HexagonalRoomDirection direction)
-        {
-            switch (direction)
-            {
-                case HexagonalRoomDirection.Up:
-                    return HexagonalRoomDirection.Down;
-
-                case HexagonalRoomDirection.UpRight:
-                    return HexagonalRoomDirection.DownLeft;
-
-                case HexagonalRoomDirection.DownRight:
-                    return HexagonalRoomDirection.UpLeft;
-
-                case HexagonalRoomDirection.Down:
-                    return HexagonalRoomDirection.Up;
-
-                case HexagonalRoomDirection.DownLeft:
-                    return HexagonalRoomDirection.UpRight;
-
-                case HexagonalRoomDirection.UpLeft:
-                    return HexagonalRoomDirection.DownRight;
-            }
-
-            throw new NotImplementedException();
-        }
-
-        public static IntVec2 DirectionToHexCoordinateVector(this HexagonalRoomDirection direction)
-        {
-            switch (direction)
-            {
-                case HexagonalRoomDirection.Up:
-                    return new IntVec2(0, -1);          // (0, 10)
-
-                case HexagonalRoomDirection.UpRight:
-                    return new IntVec2(1, -1);          // (13, -5) + (0, 10) = (13, 5)
-
-                case HexagonalRoomDirection.DownRight:
-                    return new IntVec2(1, 0);           // (13, -5)
-
-                case HexagonalRoomDirection.Down:
-                    return new IntVec2(0, 1);           // (0, -10)
-
-                case HexagonalRoomDirection.DownLeft:
-                    return new IntVec2(-1, 1);          // (-13, 5) + (0, -10) = (-13, -5)
-
-                case HexagonalRoomDirection.UpLeft:
-                    return new IntVec2(-1, 0);          // (-13, 5)
-            }
-
-            throw new NotImplementedException();
-        }
-
-        public static CellRect GetHexagonalRoomRect(this IntVec2 center)
-        {
-            return new CellRect(center.x - RoomCellSize.x / 2, center.z - RoomCellSize.z / 2, RoomCellSize.x, RoomCellSize.z);
-        }
-
         public static IEnumerable<IntVec2> GetHexagonalEdges(this CellRect cellRect)
         {
             if (cellRect.Width < RoomCellSize.x || cellRect.Height < RoomCellSize.z)
@@ -309,34 +222,20 @@ namespace VVRace
 
             foreach (var v in data)
             {
-                for (int x = 3; x < 8; ++x)
+                yield return new IntVec2(v.centerX + 3 * v.signX, v.centerZ);
+
+                for (int x = 1; x <= 3; ++x)
                 {
-                    yield return new IntVec2(v.centerX + x * v.signX, v.centerZ);
+                    yield return new IntVec2(v.centerX + x * v.signX, v.centerZ + 1 * v.signZ);
                 }
 
-                yield return new IntVec2(v.centerX + 3 * v.signX, v.centerZ + 1 * v.signZ);
-                yield return new IntVec2(v.centerX + 2 * v.signX, v.centerZ + 1 * v.signZ);
+                for (int x = 0; x <= 1; ++x)
+                {
+                    yield return new IntVec2(v.centerX + x * v.signX, v.centerZ + 2 * v.signZ);
+                }
 
-                yield return new IntVec2(v.centerX + 2 * v.signX, v.centerZ + 2 * v.signZ);
-
-                yield return new IntVec2(v.centerX + 2 * v.signX, v.centerZ + 3 * v.signZ);
-                yield return new IntVec2(v.centerX + 1 * v.signX, v.centerZ + 3 * v.signZ);
-
-                yield return new IntVec2(v.centerX + 1 * v.signX, v.centerZ + 4 * v.signZ);
-                yield return new IntVec2(v.centerX + 0 * v.signX, v.centerZ + 4 * v.signZ);
-            }
-            
-            foreach (var doorCell in GetHexagonalOrthogonalCell(cellRect))
-            {
-                yield return doorCell;
-            }
-        }
-
-        public static IEnumerable<IntVec2> GetHexagonalOrthogonalCell(this CellRect cellRect)
-        {
-            if (cellRect.Width < RoomCellSize.x || cellRect.Height < RoomCellSize.z)
-            {
-                yield break;
+                yield return new IntVec2(v.centerX, v.centerZ + 3 * v.signZ);
+                yield return new IntVec2(v.centerX, v.centerZ + 4 * v.signZ);
             }
 
             yield return new IntVec2(cellRect.minX, cellRect.minZ + cellRect.Height / 2);
@@ -362,60 +261,54 @@ namespace VVRace
             }
 
 
-            for (int x = cellRect.minX + 2; x <= cellRect.maxX - 2; ++x)
-            {
-                yield return new IntVec2(x, cellRect.minZ + 1);
-                yield return new IntVec2(x, cellRect.minZ + 2);
-                yield return new IntVec2(x, cellRect.maxZ - 1);
-                yield return new IntVec2(x, cellRect.maxZ - 2);
-            }
-
             for (int x = cellRect.minX + 1; x <= cellRect.maxX - 1; ++x)
             {
-                yield return new IntVec2(x, cellRect.minZ + 3);
-                yield return new IntVec2(x, cellRect.maxZ - 3);
+                yield return new IntVec2(x, cellRect.minZ + 1);
+                yield return new IntVec2(x, cellRect.maxZ - 1);
             }
 
             for (int x = cellRect.minX; x <= cellRect.maxX; ++x)
             {
-                yield return new IntVec2(x, cellRect.minZ + 4);
-                yield return new IntVec2(x, cellRect.maxZ - 4);
-                yield return new IntVec2(x, cellRect.minZ + 5);
+                for (int z = cellRect.minZ + 2; z <= cellRect.maxZ - 2; ++z)
+                {
+                    yield return new IntVec2(x, z);
+                }
             }
         }
 
-        public static CellRect CalcConnectorRect(HexagonalRoom root, HexagonalRoom connected, out HexagonalRoomEdgeType edgeType)
+        public static CellRect CalcConnectorRect(HexagonalRoom root, IntVec2 connected)
         {
-            var directionByRootVector = connected.hexaCoord - root.hexaCoord;
+            var d = connected - root.hexaCoord;
 
-            if (directionByRootVector.x == 0)
+            if (d.z == 0)
             {
-                var x = root.cellRect.CenterCell.x;
-                var z = directionByRootVector.z < 0 ? root.cellRect.maxZ : root.cellRect.minZ;
+                var x = d.x < 0 ? root.cellRect.minX : root.cellRect.maxX;
+                var z = root.cellRect.CenterCell.z;
 
-                edgeType = HexagonalRoomEdgeType.Door;
                 return new CellRect(x, z, 1, 1);
             }
-            else if (Mathf.Abs(directionByRootVector.x + directionByRootVector.z) <= 1)
+            else
             {
-                IntVec3 v1, v2;
-                if (directionByRootVector.x > 0)
+                var center = root.cellRect.CenterCell;
+                if (d.x == 0 && d.z == 1)
                 {
-                    v1 = new IntVec3(root.cellRect.maxX, 0, directionByRootVector.z == 0 ? root.cellRect.minZ : root.cellRect.maxZ);
-                    v2 = new IntVec3(connected.cellRect.minX, 0, directionByRootVector.z == 0 ? connected.cellRect.maxZ : connected.cellRect.minZ);
+                    return new CellRect(center.x + 2, center.z - 4, 1, 1);
                 }
-                else
+                if (d.x == -1 && d.z == 1)
                 {
-                    v1 = new IntVec3(root.cellRect.minX, 0, directionByRootVector.z == 0 ? root.cellRect.maxZ : root.cellRect.minZ);
-                    v2 = new IntVec3(connected.cellRect.maxX, 0, directionByRootVector.z == 0 ? connected.cellRect.minZ : connected.cellRect.maxZ);
+                    return new CellRect(center.x - 2, center.z - 4, 1, 1);
+                }
+                if (d.x == 0 && d.z == -1)
+                {
+                    return new CellRect(center.x - 2, center.z + 4, 1, 1);
+                }
+                if (d.x == 1 && d.z == -1)
+                {
+                    return new CellRect(center.x + 2, center.z + 4, 1, 1);
                 }
 
-                edgeType = HexagonalRoomEdgeType.Open;
-                return CellRect.FromLimits(v1, v2).ContractedBy(1);
+                return CellRect.Empty;
             }
-
-            edgeType = HexagonalRoomEdgeType.Blocked;
-            return CellRect.Empty;
         }
 
     }

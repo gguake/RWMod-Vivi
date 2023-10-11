@@ -7,8 +7,8 @@ namespace VVRace
 {
     public class GenStep_ViviSettlement : GenStep_Scatterer
     {
-        private static readonly IntRange SettlementSizeX = new IntRange(80, 100);
-        private const float SettlementSizeRatio = 11f / 17f;
+        private static readonly IntRange SettlementSizeX = new IntRange(50, 60);
+        private const float SettlementSizeRatio = 11f / 9f;
 
         public override int SeedPart => 2023100908;
 

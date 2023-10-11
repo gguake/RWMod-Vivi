@@ -1,14 +1,10 @@
 ﻿using HarmonyLib;
 using MonoMod.Utils;
 using RimWorld;
-using RimWorld.BaseGen;
 using RimWorld.Planet;
-using RimWorld.QuestGen;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Reflection.Emit;
 using UnityEngine;
 using Verse;
@@ -34,7 +30,7 @@ namespace VVRace.HarmonyPatches
 
             harmony.Patch(
                 original: AccessTools.Method(typeof(PawnGenerator), "GenerateBodyType"),
-                prefix: new HarmonyMethod(typeof(ViviRacePatch), nameof(PawnGenerator_GenerateBodyType_Prefix)));
+                postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(PawnGenerator_GenerateBodyType_Postfix)));
 
             // 생산시 열량 소모 패치
             harmony.Patch(
@@ -139,30 +135,21 @@ namespace VVRace.HarmonyPatches
             }
         }
 
-        private static bool PawnGenerator_GenerateBodyType_Prefix(Pawn pawn, PawnGenerationRequest request)
+        private static void PawnGenerator_GenerateBodyType_Postfix(Pawn pawn, PawnGenerationRequest request)
         {
-            var compVivi = pawn.GetCompVivi();
-            if (pawn.IsVivi())
+            if (pawn.kindDef is PawnKindDef_Vivi kindDefExt && kindDefExt.isRoyal)
             {
-                pawn.story.bodyType = BodyTypeDefOf.Thin;
-
-                if (pawn.kindDef is PawnKindDef_Vivi kindDefExt)
+                var compVivi = pawn.GetCompVivi();
+                if (compVivi != null)
                 {
-                    if (kindDefExt.isRoyal)
-                    {
-                        compVivi.SetRoyal();
-
-                        if (!kindDefExt.preventRoyalBodyType)
-                        {
-                            pawn.story.bodyType = BodyTypeDefOf.Female;
-                        }
-                    }
+                    compVivi.SetRoyal();
                 }
 
-                return false;
+                if (!kindDefExt.preventRoyalBodyType && pawn.DevelopmentalStage.Adult())
+                {
+                    pawn.story.bodyType = BodyTypeDefOf.Female;
+                }
             }
-
-            return true;
         }
 
         private static IEnumerable<CodeInstruction> WorkGiver_DoBill_StartOrResumeBillJob_Transpiler(IEnumerable<CodeInstruction> codeInstructions, ILGenerator ilGenerator)

@@ -388,7 +388,7 @@
       <MaxHitPoints>40</MaxHitPoints>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
-      <Flammability>0</Flammability>
+      <Flammability>0.1</Flammability>
       
       <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
       <VV_PlantHoneyGatherYield>0.5</VV_PlantHoneyGatherYield>

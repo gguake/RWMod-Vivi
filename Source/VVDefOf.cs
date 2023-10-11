@@ -76,9 +76,20 @@ namespace VVRace
         public static ThingDef VV_UnknownSeed;
         public static ThingDef VV_Fertilizer;
 
+        public static ThingDef VV_GatheringBarrel;
+        public static ThingDef VV_RefiningWorkbench;
+        public static ThingDef VV_AncientPlantPot;
         public static ThingDef VV_SeedlingGerminator;
 
+        public static ThingDef VV_EmberBloom;
+        public static ThingDef VV_FrostBloom;
         public static ThingDef VV_Thunderbud;
+        public static ThingDef VV_Voltpetals;
+        public static ThingDef VV_Waterdrops;
+        public static ThingDef VV_Radiantflower;
+        public static ThingDef VV_Richflower;
+        public static ThingDef VV_Peashooter;
+        public static ThingDef VV_Pealaucnher;
 
         public static ThingDef VV_MechScanner;
 
@@ -88,7 +99,11 @@ namespace VVRace
         public static ThingDef Plant_Corn;
         public static ThingDef Plant_Cotton;
         public static ThingDef Plant_Healroot;
+        public static ThingDef Plant_Daylily;
 
+        public static ThingDef Shelf;
+        public static ThingDef ShelfSmall;
+        public static ThingDef Crib;
     }
 
     [DefOf]
