@@ -272,7 +272,7 @@ namespace VVRace
                 yield return gizmo;
             }
 
-            if (Spawned)
+            if (Spawned && Faction.IsPlayer)
             {
                 var CommandFertilizeAutoActivated = new Command_Toggle();
                 CommandFertilizeAutoActivated.defaultLabel = LocalizeTexts.CommandFertilizeAutoActivated.Translate();
