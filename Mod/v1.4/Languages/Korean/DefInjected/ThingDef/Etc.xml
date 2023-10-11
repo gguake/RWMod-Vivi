@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
   <VV_ViviEgg.label>비비 알</VV_ViviEgg.label>
-  <VV_ViviEgg.description>비비의 알입니다. 적절한 환경의 부화기에 들어있을때만 부화가 진행됩니다.
+  <VV_ViviEgg.description>비비의 알입니다. 22도에서 40도 사이의 따뜻한 환경의 부화기에 들어있을때만 부화가 진행됩니다.
 \n적절하지 않은 온도에 있으면 알이 손상되지만 환경이 다시 갖추어진다면 손상은 자동으로 회복됩니다.
 \n지나가는 동물이 먹지 않도록 취급에 유의하세요.</VV_ViviEgg.description>
 
