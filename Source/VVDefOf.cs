@@ -82,6 +82,8 @@ namespace VVRace
 
         public static ThingDef VV_MechScanner;
 
+        public static ThingDef VV_ViviHoneycombWall;
+
         public static ThingDef Plant_Strawberry;
         public static ThingDef Plant_Corn;
         public static ThingDef Plant_Cotton;
@@ -155,5 +157,25 @@ namespace VVRace
     public static class VVSitePartDefOf
     {
         public static SitePartDef VV_MechanoidScoutingBase;
+    }
+
+    [DefOf]
+    public static class VVMapGeneratorDefOf
+    {
+        public static MapGeneratorDef VV_Base_ViviFaction;
+    }
+
+    [DefOf]
+    public static class VVCultureDefOf
+    {
+        public static CultureDef VV_ViviCulture;
+    }
+
+    [DefOf]
+    public static class VVTerrainDefOf
+    {
+        public static TerrainDef VV_ViviCreamFloor;
+        public static TerrainDef VV_HoneycombTile;
+        public static TerrainDef VV_SterileHoneycombTile;
     }
 }

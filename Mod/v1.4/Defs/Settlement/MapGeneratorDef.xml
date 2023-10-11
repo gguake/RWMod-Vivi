@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  
+  <MapGeneratorDef ParentName="MapCommonBase">
+    <defName>VV_Base_ViviFaction</defName>
+    <genSteps>
+      <li>RocksFromGrid</li>
+      <li>VV_ViviSettlement</li>
+    </genSteps>
+  </MapGeneratorDef>
+  
+  <GenStepDef>
+    <defName>VV_ViviSettlement</defName>
+    <order>400</order>
+    <genStep Class="VVRace.GenStep_ViviSettlement">
+      <count>1</count>
+      <nearMapCenter>true</nearMapCenter>
+    </genStep>
+  </GenStepDef>
+
+</Defs>

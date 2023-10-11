@@ -2,6 +2,7 @@
 using MonoMod.Utils;
 using RimWorld;
 using RimWorld.BaseGen;
+using RimWorld.Planet;
 using RimWorld.QuestGen;
 using System;
 using System.Collections;
@@ -98,6 +99,10 @@ namespace VVRace.HarmonyPatches
             harmony.Patch(
                 original: AccessTools.Method(typeof(HumanlikeMeshPoolUtility), nameof(HumanlikeMeshPoolUtility.GetHumanlikeHairSetForPawn)),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(HumanlikeMeshPoolUtility_GetHumanlikeHairSetForPawn_Postfix)));
+
+            harmony.Patch(
+                original: AccessTools.PropertyGetter(typeof(Settlement), nameof(Settlement.MapGeneratorDef)),
+                postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(Settlement_MapGeneratorDef_getter_Postfix)));
 
             Log.Message("!! [ViViRace] race patch complete");
         }
@@ -428,6 +433,14 @@ namespace VVRace.HarmonyPatches
             if (pawn.IsVivi() && pawn.DevelopmentalStage.Baby())
             {
                 __result = MeshPool.GetMeshSetForWidth(0.75f);
+            }
+        }
+
+        private static void Settlement_MapGeneratorDef_getter_Postfix(ref MapGeneratorDef __result, Settlement __instance)
+        {
+            if (!__instance.Faction.IsPlayer && __instance.Faction.def.allowedCultures.Contains(VVCultureDefOf.VV_ViviCulture))
+            {
+                __result = VVMapGeneratorDefOf.VV_Base_ViviFaction;
             }
         }
     }

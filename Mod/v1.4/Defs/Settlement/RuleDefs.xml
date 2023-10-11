@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <RuleDef>
+    <defName>VV_HexaClear</defName>
+    <symbol>vv_hexa_clear</symbol>
+    <resolvers>
+      <li Class="VVRace.SymbolResolver_HexaClear" />
+    </resolvers>
+  </RuleDef>
+
+  <RuleDef>
+    <defName>VV_HexaRoof</defName>
+    <symbol>vv_hexa_roof</symbol>
+    <resolvers>
+      <li Class="VVRace.SymbolResolver_HexaRoof" />
+    </resolvers>
+  </RuleDef>
+  
+  <RuleDef>
+    <defName>VV_HexaFloor</defName>
+    <symbol>vv_hexa_floor</symbol>
+    <resolvers>
+      <li Class="VVRace.SymbolResolver_HexaFloor" />
+    </resolvers>
+  </RuleDef>
+  
+  <RuleDef>
+    <defName>VV_HexaEdgeHoneycombWall</defName>
+    <symbol>vv_hexa_edge_honeycomb_wall</symbol>
+    <resolvers>
+      <li Class="VVRace.SymbolResolver_HexaEdgeHoneycombWall" />
+    </resolvers>
+  </RuleDef>
+  
+  <RuleDef>
+    <defName>VV_HexaEmptyRoom</defName>
+    <symbol>vv_hexa_empty_room</symbol>
+    <resolvers>
+      <li Class="VVRace.SymbolResolver_HexaEmptyRoom" />
+    </resolvers>
+  </RuleDef>
+
+  <RuleDef>
+    <defName>VV_HexaConnector</defName>
+    <symbol>vv_hexa_connector</symbol>
+    <resolvers>
+      <li Class="VVRace.SymbolResolver_HexaConnector" />
+    </resolvers>
+  </RuleDef>
+
+  <RuleDef>
+    <defName>VV_ViviBasePart</defName>
+    <symbol>vv_vivi_basePart</symbol>
+    <resolvers>
+      <li Class="VVRace.SymbolResolver_ViviBasePart">
+        <minRectSize>(17, 11)</minRectSize>
+      </li>
+    </resolvers>
+  </RuleDef>
+
+  <RuleDef>
+    <defName>VV_ViviSettlement</defName>
+    <symbol>vv_vivi_settlement</symbol>
+    <resolvers>
+      <li Class="VVRace.SymbolResolver_ViviSettlement">
+        <minRectSize>(25, 19)</minRectSize>
+      </li>
+    </resolvers>
+  </RuleDef>
+</Defs>

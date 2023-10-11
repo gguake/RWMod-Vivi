@@ -104,9 +104,9 @@
     <Compile Include="ArtificialPlant\GerminatorModExtension.cs" />
     <Compile Include="ArtificialPlant\AI\WorkGiver_ManageGerminator.cs" />
     <Compile Include="Egg\Comps\CompViviEggLayer.cs" />
-    <Compile Include="EndGame\MapGeneration\GenStep_MechanoidScoutingBase.cs" />
-    <Compile Include="EndGame\MapGeneration\SymbolResolver_EdgeBarricade.cs" />
-    <Compile Include="EndGame\MapGeneration\SymbolResolver_MechanoidScoutingBase.cs" />
+    <Compile Include="MapGeneration\GenStep_MechanoidScoutingBase.cs" />
+    <Compile Include="MapGeneration\SymbolResolver_EdgeBarricade.cs" />
+    <Compile Include="MapGeneration\SymbolResolver_MechanoidScoutingBase.cs" />
     <Compile Include="EndGame\QuestNode\QuestNode_AddCoronationReward.cs" />
     <Compile Include="EndGame\QuestNode\QuestNode_FixedFaction.cs" />
     <Compile Include="EndGame\QuestNode\QuestNode_GiveRewardWorldtreeLocation.cs" />
@@ -159,6 +159,16 @@
     <Compile Include="Gather\AI\JobDriver_GatherPollen.cs" />
     <Compile Include="Gather\Things\Filth_Pollen.cs" />
     <Compile Include="Gather\GatherUtility.cs" />
+    <Compile Include="MapGeneration\GenStep_ViviSettlement.cs" />
+    <Compile Include="MapGeneration\HexagonalRoomUtility.cs" />
+    <Compile Include="MapGeneration\SymbolResolver_HexaClear.cs" />
+    <Compile Include="MapGeneration\SymbolResolver_HexaFloor.cs" />
+    <Compile Include="MapGeneration\SymbolResolver_HexaEdgeHoneycombWall.cs" />
+    <Compile Include="MapGeneration\SymbolResolver_HexaEmptyRoom.cs" />
+    <Compile Include="MapGeneration\SymbolResolver_HexaRoof.cs" />
+    <Compile Include="MapGeneration\SymbolResolver_ViviBasePart.cs" />
+    <Compile Include="MapGeneration\SymbolResolver_HexaConnector.cs" />
+    <Compile Include="MapGeneration\SymbolResolver_ViviSettlement.cs" />
     <Compile Include="SpecialThingFilterWorker_Dessicated.cs" />
     <Compile Include="TextureCache.cs" />
     <Compile Include="Utility\ViviUtility.cs" />
@@ -188,8 +198,6 @@
     <Compile Include="Vivi\ViviRaceUtility.cs" />
     <Compile Include="VVDefOf.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="EndGame\Comps\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
