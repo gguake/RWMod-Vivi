@@ -1,4 +1,5 @@
-﻿using RimWorld.BaseGen;
+﻿using RimWorld;
+using RimWorld.BaseGen;
 using Verse;
 
 namespace VVRace
@@ -22,23 +23,25 @@ namespace VVRace
 
         public override void Resolve(ResolveParams resolveParams)
         {
+            var map = BaseGen.globalSettings.map;
             var thing = ThingMaker.MakeThing(resolveParams.singleThingDef);
             thing.stackCount = 1;
+            
             if (thing.def.CanHaveFaction && thing.Faction != resolveParams.faction)
             {
                 thing.SetFaction(resolveParams.faction);
             }
 
-            thing = GenSpawn.Spawn(
+            if (thing is ArtificialPlant plant)
+            {
+                plant.AddEnergy(plant.ArtificialPlantModExtension.energyCapacity);
+            }
+
+            GenSpawn.Spawn(
                 thing, 
                 resolveParams.rect.CenterCell, 
                 BaseGen.globalSettings.map, 
                 resolveParams.singleThingDef.defaultPlacingRot);
-
-            if (thing != null && thing is ArtificialPlant plant)
-            {
-                plant.AddEnergy(plant.ArtificialPlantModExtension.energyCapacity);
-            }
         }
     }
 }

@@ -5,12 +5,9 @@ using Verse;
 
 namespace VVRace
 {
-    public class GenStep_ViviSettlement : GenStep_Scatterer
+    public class GenStep_ViviSettlementTurretGarden : GenStep_Scatterer
     {
-        private static readonly IntRange SettlementSizeX = new IntRange(50, 60);
-        private const float SettlementSizeRatio = 11f / 9f;
-
-        public override int SeedPart => 2023100908;
+        public override int SeedPart => 2023101223;
 
         protected override bool CanScatterAt(IntVec3 c, Map map)
         {
@@ -31,11 +28,18 @@ namespace VVRace
                 return false;
             }
 
-            int minX = SettlementSizeX.min;
-            int minZ = Mathf.CeilToInt(SettlementSizeX.min * SettlementSizeRatio);
-            if (!new CellRect(c.x - minX / 2, c.z - minZ / 2, minX, minZ).FullyContainedWithin(new CellRect(0, 0, map.Size.x, map.Size.z)))
+            var cellRect = CellRect.CenteredOn(c, 7, 7);
+            if (!cellRect.FullyContainedWithin(new CellRect(0, 0, map.Size.x, map.Size.z)))
             {
                 return false;
+            }
+
+            foreach (var cell in cellRect)
+            {
+                if (!c.Standable(map) || cell.Roofed(map))
+                {
+                    return false;
+                }
             }
 
             return true;
@@ -43,10 +47,7 @@ namespace VVRace
 
         protected override void ScatterAt(IntVec3 c, Map map, GenStepParams parms, int stackCount = 1)
         {
-            int sizeX = SettlementSizeX.RandomInRange;
-            int sizeZ = Mathf.CeilToInt(sizeX * SettlementSizeRatio);
-
-            var rect = new CellRect(c.x - sizeX / 2, c.z - sizeZ / 2, sizeX, sizeZ);
+            var rect = CellRect.CenteredOn(c, 7, 7);
             var faction = ((map.ParentFaction != null && map.ParentFaction != Faction.OfPlayer) ? map.ParentFaction : Find.FactionManager.RandomEnemyFaction());
             rect.ClipInsideMap(map);
 
@@ -54,9 +55,7 @@ namespace VVRace
             resolveParams.rect = rect;
             resolveParams.faction = faction;
             BaseGen.globalSettings.map = map;
-            BaseGen.globalSettings.minBuildings = 1;
-            BaseGen.globalSettings.minBarracks = 1;
-            BaseGen.symbolStack.Push("vv_vivi_settlement", resolveParams);
+            BaseGen.symbolStack.Push("vv_turret_garden", resolveParams);
 
             BaseGen.Generate();
         }

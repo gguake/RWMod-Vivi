@@ -6,6 +6,7 @@
     <genSteps>
       <li>RocksFromGrid</li>
       <li>VV_ViviSettlement</li>
+      <li>VV_ViviSettlementTurretGarden</li>
     </genSteps>
   </MapGeneratorDef>
   
@@ -14,6 +15,15 @@
     <order>400</order>
     <genStep Class="VVRace.GenStep_ViviSettlement">
       <count>1</count>
+      <nearMapCenter>true</nearMapCenter>
+    </genStep>
+  </GenStepDef>
+
+  <GenStepDef>
+    <defName>VV_ViviSettlementTurretGarden</defName>
+    <order>400</order>
+    <genStep Class="VVRace.GenStep_ViviSettlementTurretGarden">
+      <count>8</count>
       <nearMapCenter>true</nearMapCenter>
     </genStep>
   </GenStepDef>

@@ -81,9 +81,9 @@ namespace VVRace
             }
         }
 
-        public Thing ProduceEgg()
+        public Thing ProduceEgg(bool force = false)
         {
-            if (!CanLayEgg) { return null; }
+            if (!CanLayEgg && !force) { return null; }
 
             try
             {

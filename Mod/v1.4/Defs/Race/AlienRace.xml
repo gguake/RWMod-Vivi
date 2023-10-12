@@ -441,6 +441,8 @@
       <lifeExpectancy>60</lifeExpectancy>
       <leatherDef>Leather_Light</leatherDef>
 			<nameCategory>HumanStandard</nameCategory>
+      <nameGenerator>VV_NamerPersonVivi</nameGenerator>
+      <nameGeneratorFemale>VV_NamerPersonVivi</nameGeneratorFemale>
       <body>VV_Vivi</body>
       <baseBodySize>0.8</baseBodySize>
       <baseHealthScale>0.8</baseHealthScale>

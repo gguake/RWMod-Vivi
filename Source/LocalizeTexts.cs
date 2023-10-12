@@ -18,6 +18,7 @@
 
         public const string GizmoSetFertilizeAutoThreshold = "VV_GizmoSetFertilizeAutoThreshold";
 
+        public const string InspectorViviEggProperTemperature = "VV_InspectorViviEggProperTemperature";
         public const string InspectorViviHatcheryDisabled = "VV_InspectorViviHatcheryDisabled";
         public const string InspectorViviHatcheryDisabledReasonNoRoof = "VV_InspectorViviHatcheryDisabledReasonNoRoof";
         public const string InspectorViviHatcheryDisabledReasonOutdoor = "VV_InspectorViviHatcheryDisabledReasonOutdoor";

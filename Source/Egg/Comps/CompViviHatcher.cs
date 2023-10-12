@@ -74,8 +74,14 @@ namespace VVRace
         public override string CompInspectStringExtra()
         {
             var sb = new StringBuilder();
+            if (FreezerComp != null)
+            {
+                sb.Append(LocalizeTexts.InspectorViviEggProperTemperature.Translate(FreezerComp.Props.minSafeTemperature.ToStringTemperature(), FreezerComp.Props.maxSafeTemperature.ToStringTemperature()));
+            }
+
             if (!TemperatureDamaged)
             {
+                sb.AppendLine();
                 sb.Append("EggProgress".Translate())
                     .Append(": ")
                     .Append(hatchProgress.ToStringPercent("F1"));

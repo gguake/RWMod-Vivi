@@ -13,7 +13,6 @@ namespace VVRace
         Empty,
         Barrack,
         Dining,
-        Resting,
         GatheringHoney,
         GreenHouse,
         Crafting,
@@ -165,7 +164,7 @@ namespace VVRace
             }
             #endregion
 
-            #region 방 생성
+            #region 실제 방 생성
             {
                 var dictRoomCounter = new Dictionary<ViviBaseRoomType, int>()
                 {
@@ -257,9 +256,6 @@ namespace VVRace
 
                 case ViviBaseRoomType.Dining:
                     return "vv_hexa_room_dining";
-
-                case ViviBaseRoomType.Resting:
-                    return "vv_hexa_room_resting";
 
                 case ViviBaseRoomType.GatheringHoney:
                     return "vv_hexa_room_gathering_honey";

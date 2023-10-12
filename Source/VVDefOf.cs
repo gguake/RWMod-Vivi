@@ -104,6 +104,9 @@ namespace VVRace
         public static ThingDef Shelf;
         public static ThingDef ShelfSmall;
         public static ThingDef Crib;
+
+        public static ThingDef HandTailoringBench;
+        public static ThingDef FueledSmithy;
     }
 
     [DefOf]
@@ -192,5 +195,14 @@ namespace VVRace
         public static TerrainDef VV_ViviCreamFloor;
         public static TerrainDef VV_HoneycombTile;
         public static TerrainDef VV_SterileHoneycombTile;
+    }
+
+    [DefOf]
+    public static class VVThingSetMakerDefOf
+    {
+        public static ThingSetMakerDef VV_SettlementGreenHouseThingSet;
+        public static ThingSetMakerDef VV_SettlementGatheringRoomThingSet;
+        public static ThingSetMakerDef VV_SettlementRefiningRoomThingSet;
+        public static ThingSetMakerDef VV_SettlementCraftingRoomThingSet;
     }
 }

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  
+  <ThingSetMakerDef>
+    <defName>VV_SettlementGreenHouseThingSet</defName>
+    <root Class="ThingSetMaker_RandomOption">
+      <options>
+        <li>
+          <weight>50</weight>
+          <thingSetMaker Class="ThingSetMaker_MarketValue">
+            <fixedParams>
+              <maxThingMarketValue>100</maxThingMarketValue>
+              <filter>
+                <thingDefs>
+                  <li>VV_Fertilizer</li>
+                  <li>VV_UnknownSeed</li>
+                </thingDefs>
+              </filter>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+        <li>
+          <weight>50</weight>
+          <thingSetMaker Class="ThingSetMaker_MarketValue">
+            <fixedParams>
+              <filter>
+                <categories>
+                  <li>VV_ArtificialPlant</li>
+                </categories>
+              </filter>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+      </options>
+    </root>
+  </ThingSetMakerDef>
+  
+  <ThingSetMakerDef>
+    <defName>VV_SettlementGatheringRoomThingSet</defName>
+    <root Class="ThingSetMaker_RandomOption">
+      <options>
+        <li>
+          <weight>55</weight>
+          <thingSetMaker Class="ThingSetMaker_MarketValue">
+            <fixedParams>
+              <filter>
+                <thingDefs>
+                  <li>VV_RawHoney</li>
+                </thingDefs>
+              </filter>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+        <li>
+          <weight>35</weight>
+          <thingSetMaker Class="ThingSetMaker_MarketValue">
+            <fixedParams>
+              <maxThingMarketValue>100</maxThingMarketValue>
+              <filter>
+                <thingDefs>
+                  <li>VV_Pollen</li>
+                </thingDefs>
+              </filter>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+        <li>
+          <weight>10</weight>
+          <thingSetMaker Class="ThingSetMaker_MarketValue">
+            <fixedParams>
+              <maxThingMarketValue>100</maxThingMarketValue>
+              <filter>
+                <thingDefs>
+                  <li>VV_GrassFiber</li>
+                  <li>VV_Propolis</li>
+                </thingDefs>
+              </filter>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+      </options>
+    </root>
+  </ThingSetMakerDef>
+  
+  <ThingSetMakerDef>
+    <defName>VV_SettlementRefiningRoomThingSet</defName>
+    <root Class="ThingSetMaker_RandomOption">
+      <options>
+        <li>
+          <weight>50</weight>
+          <thingSetMaker Class="ThingSetMaker_MarketValue">
+            <fixedParams>
+              <maxThingMarketValue>100</maxThingMarketValue>
+              <filter>
+                <thingDefs>
+                  <li>VV_FilteredHoney</li>
+                </thingDefs>
+              </filter>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+        <li>
+          <weight>35</weight>
+          <thingSetMaker Class="ThingSetMaker_MarketValue">
+            <fixedParams>
+              <maxThingMarketValue>100</maxThingMarketValue>
+              <filter>
+                <thingDefs>
+                  <li>VV_Vivicream</li>
+                  <li>VV_Viviwax</li>
+                </thingDefs>
+              </filter>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+        <li>
+          <weight>15</weight>
+          <thingSetMaker Class="ThingSetMaker_MarketValue">
+            <fixedParams>
+              <maxThingMarketValue>100</maxThingMarketValue>
+              <filter>
+                <categories>
+                  <li>VV_Petal</li>
+                </categories>
+              </filter>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+      </options>
+    </root>
+  </ThingSetMakerDef>
+  
+  
+  <ThingSetMakerDef>
+    <defName>VV_SettlementCraftingRoomThingSet</defName>
+    <root Class="ThingSetMaker_RandomOption">
+      <options>
+        <li>
+          <weight>45</weight>
+          <thingSetMaker Class="ThingSetMaker_MarketValue">
+            <fixedParams>
+              <maxThingMarketValue>150</maxThingMarketValue>
+              <filter>
+                <thingDefs>
+                  <li>VV_Viviwax</li>
+                  <li>WoodLog</li>
+                  <li>Steel</li>
+                </thingDefs>
+              </filter>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+        <li>
+          <weight>20</weight>
+          <thingSetMaker Class="ThingSetMaker_MarketValue">
+            <fixedParams>
+              <maxThingMarketValue>100</maxThingMarketValue>
+              <filter>
+                <thingDefs>
+                  <li>VV_GrassFiber</li>
+                  <li>VV_Lifestrand</li>
+                </thingDefs>
+              </filter>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+        <li>
+          <weight>30</weight>
+          <thingSetMaker Class="ThingSetMaker_RandomGeneralGoods" />
+        </li>
+        <li>
+          <weight>5</weight>
+          <thingSetMaker Class="ThingSetMaker_MarketValue">
+            <fixedParams>
+              <maxThingMarketValue>1000</maxThingMarketValue>
+              <filter>
+                <categories>
+                  <li>VV_ViviEquipments</li>
+                </categories>
+              </filter>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+      </options>
+    </root>
+  </ThingSetMakerDef>
+</Defs>

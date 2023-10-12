@@ -20,6 +20,14 @@ namespace VVRace
 
                 var faction = resolveParams.faction ?? Find.FactionManager.RandomEnemyFaction();
 
+                #region 알 생성
+                {
+                    var p = resolveParams;
+                    p.rect = resolveParams.rect;
+                    BaseGen.symbolStack.Push("vv_vivi_egg_spawn", p);
+                }
+                #endregion
+
                 #region 폰 생성
                 if ((!resolveParams.settlementDontGeneratePawns) ?? true)
                 {
@@ -48,22 +56,12 @@ namespace VVRace
                 }
                 #endregion
 
-                //#region 방어벽
-                //{
-                //    var p = resolveParams;
-                //    p.faction = faction;
-                //    p.edgeDefenseWidth = 4;
-                //    p.edgeThingMustReachMapEdge = resolveParams.edgeThingMustReachMapEdge ?? true;
-                //    BaseGen.symbolStack.Push("edgeDefense", p);
-                //}
-                //#endregion
-
                 #region 오염 지역이면 주변 정화
                 if (ModsConfig.BiotechActive)
                 {
                     var p = resolveParams;
-                    p.rect = resolveParams.rect.ExpandedBy(7);
-                    p.edgeUnpolluteChance = 0.5f;
+                    p.rect = resolveParams.rect;
+                    p.edgeUnpolluteChance = 1f;
                     BaseGen.symbolStack.Push("unpollute", p);
                 }
                 #endregion

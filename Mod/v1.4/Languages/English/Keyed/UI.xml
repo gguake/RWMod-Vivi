@@ -17,6 +17,7 @@
   <VV_InspectorPlantEnergy>Energy: {0}/{1}</VV_InspectorPlantEnergy>
   <VV_InspectorPlantEnergyFlux>({0}/day)</VV_InspectorPlantEnergyFlux>
 
+  <VV_InspectorViviEggProperTemperature>Proper temperature: {0} ~ {1}</VV_InspectorViviEggProperTemperature>
   <VV_InspectorViviGerminatorReserved>Seed germinating reserved</VV_InspectorViviGerminatorReserved>
   <VV_InspectorViviGerminatorCompletePeriods>Time remaining until complete: {0}</VV_InspectorViviGerminatorCompletePeriods>
   <VV_InspectorViviGerminatorManageAvailable>{0} seedling manage job is possible: {1}</VV_InspectorViviGerminatorManageAvailable>

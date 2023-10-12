@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
   <RuleDef>
+    <defName>VV_ThingSetStorage</defName>
+    <symbol>vv_thingSet_storage</symbol>
+    <resolvers>
+      <li Class="VVRace.SymbolResolver_ThingSetStorage" />
+    </resolvers>
+  </RuleDef>
+
+  <RuleDef>
     <defName>VV_HexaClear</defName>
     <symbol>vv_hexa_clear</symbol>
     <resolvers>
@@ -41,6 +49,16 @@
   </RuleDef>
   
   <RuleDef>
+    <defName>VV_TurretGarden</defName>
+    <symbol>vv_turret_garden</symbol>
+    <resolvers>
+      <li Class="VVRace.SymbolResolver_TurretGarden">
+        <minRectSize>(7,7)</minRectSize>
+      </li>
+    </resolvers>
+  </RuleDef>
+  
+  <RuleDef>
     <defName>VV_HexaEmptyRoom</defName>
     <symbol>vv_hexa_empty_room</symbol>
     <resolvers>
@@ -65,14 +83,6 @@
   </RuleDef>
 
   <RuleDef>
-    <defName>VV_HexaRoomResting</defName>
-    <symbol>vv_hexa_room_resting</symbol>
-    <resolvers>
-      <li Class="VVRace.SymbolResolver_HexaEmptyRoom" />
-    </resolvers>
-  </RuleDef>
-
-  <RuleDef>
     <defName>VV_HexaRoomGatheringHoney</defName>
     <symbol>vv_hexa_room_gathering_honey</symbol>
     <resolvers>
@@ -84,7 +94,7 @@
     <defName>VV_HexaRoomGreenhouse</defName>
     <symbol>vv_hexa_room_greenhouse</symbol>
     <resolvers>
-      <li Class="VVRace.SymbolResolver_HexaEmptyRoom" />
+      <li Class="VVRace.SymbolResolver_HexaRoomGreenhouse" />
     </resolvers>
   </RuleDef>
 
@@ -92,7 +102,7 @@
     <defName>VV_HexaRoomCrafting</defName>
     <symbol>vv_hexa_room_crafting</symbol>
     <resolvers>
-      <li Class="VVRace.SymbolResolver_HexaEmptyRoom" />
+      <li Class="VVRace.SymbolResolver_HexaRoomCrafting" />
     </resolvers>
   </RuleDef>
 
@@ -108,7 +118,7 @@
     <defName>VV_HexaRoomTrap</defName>
     <symbol>vv_hexa_room_trap</symbol>
     <resolvers>
-      <li Class="VVRace.SymbolResolver_HexaEmptyRoom" />
+      <li Class="VVRace.SymbolResolver_HexaRoomTrap" />
     </resolvers>
   </RuleDef>
 
@@ -117,6 +127,14 @@
     <symbol>vv_hexa_room_hatchery</symbol>
     <resolvers>
       <li Class="VVRace.SymbolResolver_HexaRoomHatchery" />
+    </resolvers>
+  </RuleDef>
+
+  <RuleDef>
+    <defName>VV_ViviEggSpawn</defName>
+    <symbol>vv_vivi_egg_spawn</symbol>
+    <resolvers>
+      <li Class="VVRace.SymbolResolver_ViviEggSpawn" />
     </resolvers>
   </RuleDef>
 

@@ -12,8 +12,8 @@
   <VV_InspectorViviHatcheryDisabledReasonNoRoof>지붕 없음</VV_InspectorViviHatcheryDisabledReasonNoRoof>
   <VV_InspectorViviHatcheryDisabledReasonOutdoor>실외</VV_InspectorViviHatcheryDisabledReasonOutdoor>
 
+  <VV_InspectorViviEggProperTemperature>적정 온도: {0} ~ {1}</VV_InspectorViviEggProperTemperature>
   <VV_InspectorViviWallReplaceCooldown>굳기까지 남은 시간: {0}</VV_InspectorViviWallReplaceCooldown>
-
   <VV_InspectorPlantEnergy>에너지: {0}/{1}</VV_InspectorPlantEnergy>
   <VV_InspectorPlantEnergyFlux>({0}/일)</VV_InspectorPlantEnergyFlux>
 
