@@ -16,7 +16,7 @@
   </PawnKindDef>
 
   <!-- 일반 비비 -->
-  <PawnKindDef ParentName="ViviNPCBase">
+  <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
     <defName>VV_ViviTribesman</defName>
     <label>vivi tribesman</label>
     <combatPower>50</combatPower>
@@ -33,6 +33,7 @@
 
     <initialWillRange>1~2</initialWillRange>
     <initialResistanceRange>10~17</initialResistanceRange>
+    <forcedBodyType>Thin</forcedBodyType>
   </PawnKindDef>
 
   <!-- 비비 가드 -->
@@ -67,6 +68,7 @@
         </categories>
       </li>
     </backstoryFiltersOverride>
+    <forcedBodyType>Thin</forcedBodyType>
   </PawnKindDef>
 
   <!-- 비비 아처 -->
@@ -98,6 +100,7 @@
         </categories>
       </li>
     </backstoryFiltersOverride>
+    <forcedBodyType>Thin</forcedBodyType>
   </PawnKindDef>
   
   <!-- 리더 로열 비비 -->
@@ -122,7 +125,6 @@
     </apparelTags>
     <weaponMoney>1000~1500</weaponMoney>
     <weaponTags>
-      <li>GrenadeSmoke</li>
       <li>VV_ViviWeaponRange</li>
     </weaponTags>
 
@@ -130,6 +132,7 @@
     <initialResistanceRange>38~58</initialResistanceRange>
 
     <isRoyal>true</isRoyal>
+    <forcedBodyType>Female</forcedBodyType>
   </PawnKindDef>
   
   <!-- 일반 로열 비비 -->
@@ -148,13 +151,14 @@
     </apparelTags>
     <weaponMoney>1000~1500</weaponMoney>
     <weaponTags>
-      <li>GrenadeSmoke</li>
+      <li>VV_ViviWeaponRange</li>
     </weaponTags>
 
     <initialWillRange>11~14</initialWillRange>
     <initialResistanceRange>38~58</initialResistanceRange>
 
     <isRoyal>true</isRoyal>
+    <forcedBodyType>Female</forcedBodyType>
   </PawnKindDef>
   
   <!-- 상인 로열 비비 -->
@@ -181,5 +185,6 @@
     <initialResistanceRange>38~58</initialResistanceRange>
 
     <isRoyal>true</isRoyal>
+    <forcedBodyType>Female</forcedBodyType>
   </PawnKindDef>
 </Defs>

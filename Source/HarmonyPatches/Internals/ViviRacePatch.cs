@@ -137,17 +137,20 @@ namespace VVRace.HarmonyPatches
 
         private static void PawnGenerator_GenerateBodyType_Postfix(Pawn pawn, PawnGenerationRequest request)
         {
-            if (pawn.kindDef is PawnKindDef_Vivi kindDefExt && kindDefExt.isRoyal)
+            if (pawn.kindDef is PawnKindDef_Vivi kindDefExt)
             {
-                var compVivi = pawn.GetCompVivi();
-                if (compVivi != null)
+                if (kindDefExt.isRoyal)
                 {
-                    compVivi.SetRoyal();
+                    var compVivi = pawn.GetCompVivi();
+                    if (compVivi != null)
+                    {
+                        compVivi.SetRoyal();
+                    }
                 }
 
-                if (!kindDefExt.preventRoyalBodyType && pawn.DevelopmentalStage.Adult())
+                if (kindDefExt.forcedBodyType != null && !pawn.DevelopmentalStage.Juvenile())
                 {
-                    pawn.story.bodyType = BodyTypeDefOf.Female;
+                    pawn.story.bodyType = kindDefExt.forcedBodyType;
                 }
             }
         }

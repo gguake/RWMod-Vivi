@@ -422,7 +422,6 @@ namespace VVRace
                 return true;
             }
 
-            Log.Message($"deconstructible: {Faction} == {faction}");
             return Faction == faction;
         }
 

@@ -21,6 +21,7 @@
           </headTypes>
           <bodyTypes>
             <li>Thin</li>
+            <li>Female</li>
           </bodyTypes>
 
 					<headOffset>(-0.04, -0.05)</headOffset>
@@ -587,13 +588,7 @@
               <kindDefs>
                 <li>VV_PlayerVivi</li>
               </kindDefs>
-              <chance>96.0</chance>
-            </li>
-            <li>
-              <kindDefs>
-                <li>VV_PlayerRoyalVivi</li>
-              </kindDefs>
-              <chance>4.0</chance>
+              <chance>100.0</chance>
             </li>
           </pawnKindEntries>
           <factionDefs>
@@ -608,13 +603,13 @@
           <kindDefs>
             <li>VV_PlayerVivi</li>
           </kindDefs>
-          <chance>50.0</chance>
+          <chance>90.0</chance>
         </li>
         <li>
           <kindDefs>
             <li>VV_PlayerRoyalVivi</li>
           </kindDefs>
-          <chance>5.0</chance>
+          <chance>10.0</chance>
         </li>
       </alienslavekinds>
   

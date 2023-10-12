@@ -30,4 +30,12 @@
     </genStep>
   </GenStepDef>
 
+  <MapGeneratorDef ParentName="MapCommonBase">
+    <defName>VV_Worldtree</defName>
+    <genSteps>
+      <li>RocksFromGrid</li>
+      <li>EscapeShip</li>
+    </genSteps>
+  </MapGeneratorDef>
+  
 </Defs>

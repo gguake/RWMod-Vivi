@@ -9,13 +9,4 @@
       </li>
     </resolvers>
   </RuleDef>
-
-  <RuleDef>
-    <defName>VV_EdgeBarricade</defName>
-    <symbol>vv_edgebarricade</symbol>
-    <resolvers>
-      <li Class="VVRace.SymbolResolver_EdgeBarricade" />
-    </resolvers>
-  </RuleDef>
-  
 </Defs>
