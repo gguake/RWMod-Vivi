@@ -8,6 +8,7 @@
       <li>VV_ViviApparel</li>
     </apparelTags>
     <maxGenerationAge>30</maxGenerationAge>
+    <nameMaker>VV_NamerPersonVivi</nameMaker>
 
     <humanPregnancyChance>0</humanPregnancyChance>
     <techHediffsChance>0</techHediffsChance>
