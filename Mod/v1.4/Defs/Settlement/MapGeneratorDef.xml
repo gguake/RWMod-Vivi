@@ -24,7 +24,9 @@
     <order>400</order>
     <genStep Class="VVRace.GenStep_ViviSettlementTurretGarden">
       <count>8</count>
-      <nearMapCenter>true</nearMapCenter>
+      <spotMustBeStandable>true</spotMustBeStandable>
+      <minEdgeDist>50</minEdgeDist>
+      <minDistToPlayerStart>60</minDistToPlayerStart>
     </genStep>
   </GenStepDef>
 

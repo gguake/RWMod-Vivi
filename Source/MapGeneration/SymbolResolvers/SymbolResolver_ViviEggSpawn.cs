@@ -12,14 +12,12 @@ namespace VVRace
             var hatcheries = map.listerBuildings.AllBuildingsNonColonistOfDef(VVThingDefOf.VV_ViviHatchery).Cast<ViviEggHatchery>().ToList();
             if (hatcheries.Count() == 0)
             {
-                Log.Message($"there is no hatchery");
                 return;
             }
 
             var royalVivis = map.mapPawns.AllPawns.Where(pawn => pawn.Faction == resolveParams.faction && pawn.IsRoyalVivi()).ToList();
             if (royalVivis.Count() == 0)
             {
-                Log.Message($"there is no royal vivi");
                 return;
             }
 
