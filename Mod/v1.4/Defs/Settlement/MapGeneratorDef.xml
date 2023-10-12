@@ -23,10 +23,10 @@
     <defName>VV_ViviSettlementTurretGarden</defName>
     <order>400</order>
     <genStep Class="VVRace.GenStep_ViviSettlementTurretGarden">
-      <count>8</count>
+      <count>10</count>
+      <nearMapCenter>true</nearMapCenter>
       <spotMustBeStandable>true</spotMustBeStandable>
-      <minEdgeDist>50</minEdgeDist>
-      <minDistToPlayerStart>60</minDistToPlayerStart>
+      <minSpacing>20</minSpacing>
     </genStep>
   </GenStepDef>
 
