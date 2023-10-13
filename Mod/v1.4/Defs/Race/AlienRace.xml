@@ -469,15 +469,15 @@
 			<thinkTreeConstant>HumanlikeConstant</thinkTreeConstant>
 			<intelligence>Humanlike</intelligence>
 			<makesFootprints>true</makesFootprints>
-      <lifeExpectancy>50</lifeExpectancy>
+      <lifeExpectancy>45</lifeExpectancy>
       <leatherDef>Leather_Light</leatherDef>
 			<nameCategory>HumanStandard</nameCategory>
       <nameGenerator>VV_NamerPersonVivi</nameGenerator>
       <nameGeneratorFemale>VV_NamerPersonVivi</nameGeneratorFemale>
       <body>VV_Vivi</body>
-      <baseBodySize>0.75</baseBodySize>
-      <baseHealthScale>0.75</baseHealthScale>
-      <baseHungerRate>1.1</baseHungerRate>
+      <baseBodySize>0.8</baseBodySize>
+      <baseHealthScale>0.8</baseHealthScale>
+      <baseHungerRate>0.75</baseHungerRate>
       <foodType>OmnivoreHuman</foodType>
       <meatMarketValue>0.8</meatMarketValue>
       <manhunterOnTameFailChance>0.50</manhunterOnTameFailChance>
