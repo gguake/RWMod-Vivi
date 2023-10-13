@@ -23,11 +23,12 @@
 
     <uiOrder>2101</uiOrder>
     <altitudeLayer>Building</altitudeLayer>
+    <minifiedDef>MinifiedThing</minifiedDef>
     <passability>PassThroughOnly</passability>
     <fillPercent>0.4</fillPercent>
     <pathCost>50</pathCost>
     <statBases>
-      <MaxHitPoints>150</MaxHitPoints>
+      <MaxHitPoints>200</MaxHitPoints>
       <Mass>8</Mass>
       <WorkToBuild>3800</WorkToBuild>
       <Flammability>1.0</Flammability>

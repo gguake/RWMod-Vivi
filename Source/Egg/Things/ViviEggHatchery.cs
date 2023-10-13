@@ -96,6 +96,14 @@ namespace VVRace
             Scribe_Deep.Look(ref _innerContainer, "innerContainer", this);
         }
 
+        public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
+        {
+            base.DeSpawn(mode);
+
+            _innerContainer.TryDropAll(Position, Map, ThingPlaceMode.Near);
+            _innerContainer.ClearAndDestroyContents();
+        }
+
         public override void Destroy(DestroyMode mode = DestroyMode.Vanish)
         {
             _innerContainer.TryDropAll(Position, Map, ThingPlaceMode.Near);

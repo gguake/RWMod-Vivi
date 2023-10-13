@@ -8,6 +8,7 @@
     <spawnCategories>
       <li>VV_SettlerBackstory</li>
       <li>VV_CombatSettlerBackstory</li>
+      <li>VV_SettlerGrown</li>
     </spawnCategories>
     <skillGains>
       <li><key>Plants</key><value>2</value></li>

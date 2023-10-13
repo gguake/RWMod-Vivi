@@ -18,6 +18,9 @@
       <li><key>Plants</key><value>1</value></li>
       <li><key>Intellectual</key><value>-1</value></li>
     </skillGains>
+    <spawnCategories>
+      <li>VV_SettlerGrown</li>
+    </spawnCategories>
   </AlienRace.AlienBackstoryDef>
 
   <!-- VV_ViviCook -->

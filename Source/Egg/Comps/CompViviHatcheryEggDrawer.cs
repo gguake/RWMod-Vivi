@@ -23,25 +23,28 @@ namespace VVRace
 
         public override void PostDraw()
         {
-            var hatchery = Hatchery;
-            if (hatchery == null) { return; }
+            if (parent.Spawned)
+            {
+                var hatchery = Hatchery;
+                if (hatchery == null) { return; }
 
-            var egg = hatchery.ViviEgg;
-            if (egg == null) { return; }
+                var egg = hatchery.ViviEgg;
+                if (egg == null) { return; }
 
-            var drawPos = hatchery.DrawPos;
+                var drawPos = hatchery.DrawPos;
 
-            drawPos += Altitudes.AltIncVect;
-            egg.DrawAt(drawPos);
+                drawPos += Altitudes.AltIncVect;
+                egg.DrawAt(drawPos);
 
-            drawPos += Altitudes.AltIncVect;
-            var mesh = Props.graphicData.Graphic.MeshAt(parent.Rotation);
-            Graphics.DrawMesh(
-                mesh, 
-                drawPos + Props.graphicData.drawOffset.RotatedBy(parent.Rotation), 
-                Quaternion.identity, 
-                Props.graphicData.Graphic.MatAt(parent.Rotation), 
-                0);
+                drawPos += Altitudes.AltIncVect;
+                var mesh = Props.graphicData.Graphic.MeshAt(parent.Rotation);
+                Graphics.DrawMesh(
+                    mesh,
+                    drawPos + Props.graphicData.drawOffset.RotatedBy(parent.Rotation),
+                    Quaternion.identity,
+                    Props.graphicData.Graphic.MatAt(parent.Rotation),
+                    0);
+            }
         }
     }
 }

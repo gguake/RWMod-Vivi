@@ -241,7 +241,7 @@ namespace VVRace
             }
         }
 
-        public virtual LocalTargetInfo TryFindNewTarget()
+        public LocalTargetInfo TryFindNewTarget()
         {
             var attackTargetSearcher = this;
             var faction = attackTargetSearcher.Thing.Faction;

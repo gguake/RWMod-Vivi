@@ -52,13 +52,13 @@
   
     <ThoughtDef ParentName="DeathMemoryFamily">
       <defName>VV_MyDaughterDied</defName>
-      <durationDays>15.0</durationDays>
-      <stackLimit>3</stackLimit>
+      <durationDays>10.0</durationDays>
+      <stackLimit>5</stackLimit>
       <stages>
         <li>
           <label>my daughter {0} died</label>
           <description>My daughter is dead. My own flesh and blood...</description>
-          <baseMoodEffect>-20</baseMoodEffect>
+          <baseMoodEffect>-12</baseMoodEffect>
         </li>
       </stages>
     </ThoughtDef>

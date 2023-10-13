@@ -72,10 +72,11 @@
     <Compile Include="ArtificialPlant\AI\JobDriver_HaulGerminatingIngredient.cs" />
     <Compile Include="ArtificialPlant\AI\JobDriver_HaulAndManageSeedling.cs" />
     <Compile Include="ArtificialPlant\AI\JobDriver_PackingSeedling.cs" />
-    <Compile Include="ArtificialPlant\Alert_LowEnergyArtificialPlant.cs" />
+    <Compile Include="ArtificialPlant\UI\Alert_LowEnergyArtificialPlant.cs" />
     <Compile Include="ArtificialPlant\Comps\CompLightningLod.cs" />
     <Compile Include="ArtificialPlant\Comps\CompSensorExplosive.cs" />
     <Compile Include="ArtificialPlant\Comps\CompTerraformer.cs" />
+    <Compile Include="ArtificialPlant\Energy\EnergyFluxNetworkNode.cs" />
     <Compile Include="ArtificialPlant\SensorWorker.cs" />
     <Compile Include="ArtificialPlant\Things\ArtificialPlantDesignatorCache.cs" />
     <Compile Include="ArtificialPlant\Things\ArtificialPlantPot.cs" />
@@ -146,7 +147,7 @@
     <Compile Include="ArtificialPlant\Verb_ShotFloraEnergy.cs" />
     <Compile Include="Egg\AI\JobDriver_HaulViviEgg.cs" />
     <Compile Include="Egg\AI\WorkGiver_HaulViviEgg.cs" />
-    <Compile Include="Egg\Alert_DangerViviEgg.cs" />
+    <Compile Include="Egg\UI\Alert_DangerViviEgg.cs" />
     <Compile Include="Egg\Comps\CompTemperatureRuinableEgg.cs" />
     <Compile Include="Egg\Comps\CompViviHatcher.cs" />
     <Compile Include="Egg\Comps\CompViviHatcheryEggDrawer.cs" />
@@ -182,10 +183,12 @@
     <Compile Include="MapGeneration\SymbolResolvers\SymbolResolver_ViviEggSpawn.cs" />
     <Compile Include="MapGeneration\SymbolResolvers\SymbolResolver_ViviSettlement.cs" />
     <Compile Include="MapGeneration\SymbolResolverUtility.cs" />
+    <Compile Include="RecipeModExtension.cs" />
     <Compile Include="SpecialThingFilterWorker_Dessicated.cs" />
     <Compile Include="TextureCache.cs" />
     <Compile Include="Utility\ViviUtility.cs" />
-    <Compile Include="Vivi\Alert_LowLoyalty.cs" />
+    <Compile Include="Vivi\Bill_ProductionWithFoodDrain.cs" />
+    <Compile Include="Vivi\UI\Alert_LowLoyalty.cs" />
     <Compile Include="Vivi\Comps\CompVivi.cs" />
     <Compile Include="Vivi\HediffComp_RoyalJelly.cs" />
     <Compile Include="Vivi\Need_Loyalty.cs" />

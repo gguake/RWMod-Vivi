@@ -43,6 +43,7 @@
 		<techLevel>Spacer</techLevel>
 		<costList> 
 			<Plasteel>10</Plasteel>
+			<VV_Vivicream>30</VV_Vivicream>
 			<ComponentSpacer>2</ComponentSpacer>
 		</costList>
 		<statBases>
