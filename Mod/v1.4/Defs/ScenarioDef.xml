@@ -100,30 +100,6 @@
           <count>2</count>
         </li>
 
-        <!-- 시작시 소유품 (테스트) -->
-        <!--
-        <li Class="ScenPart_StartingThing_Defined">
-          <def>StartingThing_Defined</def>
-          <thingDef>VV_Fertilizer</thingDef>
-          <count>300</count>
-        </li>
-        <li Class="ScenPart_StartingThing_Defined">
-          <def>StartingThing_Defined</def>
-          <thingDef>VV_UnknownSeed</thingDef>
-          <count>30</count>
-        </li>
-        <li Class="ScenPart_StartingThing_Defined">
-          <def>StartingThing_Defined</def>
-          <thingDef>VV_Propolis</thingDef>
-          <count>100</count>
-        </li>
-        <li Class="ScenPart_StartingThing_Defined">
-          <def>StartingThing_Defined</def>
-          <thingDef>VV_Pollen</thingDef>
-          <count>100</count>
-        </li>
-        -->
-        
         <!-- 시작시 소유품 (분산) -->
         <li Class="ScenPart_ScatterThingsNearPlayerStart">
           <def>ScatterThingsNearPlayerStart</def>
