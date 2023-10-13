@@ -41,9 +41,8 @@
     </descriptionHyperlinks>
 
     <graphicData>
-      <texPath>Things/Item/VV_HormoneJelly</texPath>
+      <texPath>Things/Item/Resource/PlantFoodRaw/PsychoidLeaves</texPath>
       <graphicClass>Graphic_Single</graphicClass>
-      <shaderType>CutoutComplex</shaderType>
       <color>(150,30,20)</color>
     </graphicData>
 
@@ -62,9 +61,8 @@
     </descriptionHyperlinks>
 
     <graphicData>
-      <texPath>Things/Item/VV_HormoneJelly</texPath>
+      <texPath>Things/Item/Resource/PlantFoodRaw/PsychoidLeaves</texPath>
       <graphicClass>Graphic_Single</graphicClass>
-      <shaderType>CutoutComplex</shaderType>
       <color>(108,220,255)</color>
     </graphicData>
 
@@ -83,9 +81,8 @@
     </descriptionHyperlinks>
 
     <graphicData>
-      <texPath>Things/Item/VV_HormoneJelly</texPath>
+      <texPath>Things/Item/Resource/PlantFoodRaw/PsychoidLeaves</texPath>
       <graphicClass>Graphic_Single</graphicClass>
-      <shaderType>CutoutComplex</shaderType>
       <color>(180,120,250)</color>
     </graphicData>
 
@@ -103,9 +100,8 @@
     </descriptionHyperlinks>
 
     <graphicData>
-      <texPath>Things/Item/VV_HormoneJelly</texPath>
+      <texPath>Things/Item/Resource/PlantFoodRaw/PsychoidLeaves</texPath>
       <graphicClass>Graphic_Single</graphicClass>
-      <shaderType>CutoutComplex</shaderType>
       <color>(250,255,150)</color>
     </graphicData>
 
@@ -125,9 +121,8 @@
     </descriptionHyperlinks>
 
     <graphicData>
-      <texPath>Things/Item/VV_HormoneJelly</texPath>
+      <texPath>Things/Item/Resource/PlantFoodRaw/PsychoidLeaves</texPath>
       <graphicClass>Graphic_Single</graphicClass>
-      <shaderType>CutoutComplex</shaderType>
       <color>(200,255,145)</color>
     </graphicData>
 
