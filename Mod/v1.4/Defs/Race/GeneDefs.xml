@@ -19,7 +19,6 @@
     <biostatCpx>5</biostatCpx>
     <sterilize>true</sterilize>
     <statFactors>
-      <GlobalLearningFactor>1.1</GlobalLearningFactor>
       <VV_GrowthPointsFactor>2.5</VV_GrowthPointsFactor>
       <VV_LearningRateFactor>1.75</VV_LearningRateFactor>
     </statFactors>
