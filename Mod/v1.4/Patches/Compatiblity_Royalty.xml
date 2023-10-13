@@ -39,6 +39,17 @@
           </li>  
         </value>
       </li>
+      
+      <!-- Meditation -->
+      <li Class="PatchOperationAdd">
+        <xpath>/Defs/MeditationFocusDef[defName="Natural"]/requiredBackstoriesAny</xpath>
+        <value>
+          <li>
+            <categoryName>VV_SettlerBackstory</categoryName>
+            <slot>Childhood</slot>
+          </li>
+        </value>
+      </li>
     </operations>
   </Operation>
 

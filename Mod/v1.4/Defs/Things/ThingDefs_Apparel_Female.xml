@@ -38,23 +38,24 @@
     <smeltable>false</smeltable>
     <statBases>
       <MaxHitPoints>180</MaxHitPoints>
-      <WorkToMake>3000</WorkToMake>
+      <WorkToMake>4800</WorkToMake>
       <Mass>1.0</Mass>
-      <StuffEffectMultiplierArmor>0.2</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierArmor>0.24</StuffEffectMultiplierArmor>
       <StuffEffectMultiplierInsulation_Cold>1.0</StuffEffectMultiplierInsulation_Cold>
       <StuffEffectMultiplierInsulation_Heat>1.0</StuffEffectMultiplierInsulation_Heat>
       <EquipDelay>1.5</EquipDelay>
     </statBases>
     <equippedStatOffsets>
-      <SocialImpact>0.15</SocialImpact>
-      <NegotiationAbility>0.1</NegotiationAbility>
-      <TradePriceImprovement>0.1</TradePriceImprovement>
+      <SocialImpact>0.2</SocialImpact>
+      <TradePriceImprovement>0.2</TradePriceImprovement>
+      <PsychicSensitivity>0.2</PsychicSensitivity>
       <ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">0.1</ToxicEnvironmentResistance>
     </equippedStatOffsets>
 
-    <costStuffCount>65</costStuffCount>
+    <costStuffCount>85</costStuffCount>
     <stuffCategories>
       <li>Fabric</li>
+      <li>Leathery</li>
     </stuffCategories>
 
     <apparel Class="VVRace.ApparelPropertiesExt">

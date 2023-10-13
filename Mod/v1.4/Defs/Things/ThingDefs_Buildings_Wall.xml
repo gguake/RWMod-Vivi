@@ -174,7 +174,7 @@
     <uiIconColor>(1.0, 0.8, 0.6, 1.0)</uiIconColor>
     <statBases>
       <MaxHitPoints>480</MaxHitPoints>
-      <Flammability>0.6</Flammability>
+      <Flammability>0.7</Flammability>
     </statBases>
     <costList>
       <VV_Viviwax>2</VV_Viviwax>
@@ -194,11 +194,11 @@
       </li>
       <li>
         <damageDef>Demolish</damageDef>
-        <multiplier>0.5</multiplier>
+        <multiplier>0.25</multiplier>
       </li>
       <li>
         <damageDef>Bomb</damageDef>
-        <multiplier>0.5</multiplier>
+        <multiplier>0.25</multiplier>
       </li>
       <li>
         <damageDef>Thump</damageDef>
@@ -206,11 +206,11 @@
       </li>
       <li>
         <damageDef>Mining</damageDef>
-        <multiplier>0.5</multiplier>
+        <multiplier>0.25</multiplier>
       </li>
       <li>
         <damageDef>Flame</damageDef>
-        <multiplier>10</multiplier>
+        <multiplier>8</multiplier>
       </li>
     </damageMultipliers>
     

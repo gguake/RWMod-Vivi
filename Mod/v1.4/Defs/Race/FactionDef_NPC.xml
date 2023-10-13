@@ -82,7 +82,7 @@
           <VV_ViviArcher>20</VV_ViviArcher>
           <VV_ViviTribesman>40</VV_ViviTribesman>
           <VV_RoyalViviLeader>1</VV_RoyalViviLeader>
-          <VV_RoyalVivi>9</VV_RoyalVivi>
+          <VV_RoyalVivi>4</VV_RoyalVivi>
         </options>
       </li>
       <li>
@@ -92,7 +92,7 @@
           <VV_ViviGuard>10</VV_ViviGuard>
           <VV_ViviArcher>10</VV_ViviArcher>
           <VV_ViviTribesman>70</VV_ViviTribesman>
-          <VV_RoyalVivi>10</VV_RoyalVivi>
+          <VV_RoyalVivi>5</VV_RoyalVivi>
         </options>
       </li>
       <li>
@@ -112,9 +112,9 @@
         <kindDef>Settlement</kindDef>
         <options>
           <VV_ViviTribesman>40</VV_ViviTribesman>
-          <VV_ViviGuard>25</VV_ViviGuard>
+          <VV_ViviGuard>30</VV_ViviGuard>
           <VV_ViviArcher>20</VV_ViviArcher>
-          <VV_RoyalVivi>15</VV_RoyalVivi>
+          <VV_RoyalVivi>10</VV_RoyalVivi>
         </options>
       </li>
       <li>

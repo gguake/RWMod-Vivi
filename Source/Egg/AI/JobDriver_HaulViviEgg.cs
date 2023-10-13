@@ -26,8 +26,8 @@ namespace VVRace
 
         protected override IEnumerable<Toil> MakeNewToils()
         {
-            this.FailOnDestroyedNullOrForbidden(TargetIndex.A);
-            this.FailOnDestroyedNullOrForbidden(TargetIndex.B);
+            this.FailOnDestroyedNullOrForbidden(EggIndex);
+            this.FailOnDespawnedNullOrForbidden(HatcheryIndex);
             this.FailOn(() =>
             {
                 var hatchery = Hatchery.Thing as ViviEggHatchery;
@@ -43,7 +43,7 @@ namespace VVRace
             yield return Toils_Goto.GotoThing(HatcheryIndex, HatcheryPathEndMode);
             yield return Toils_Haul.PlaceHauledThingInCell(HatcheryIndex, null, storageMode: false);
             yield return Toils_General.Wait(100)
-                .WithProgressBarToilDelay(TargetIndex.A)
+                .WithProgressBarToilDelay(EggIndex)
                 .FailOnCannotTouch(HatcheryIndex, PathEndMode.OnCell);
 
             var toil = new Toil();

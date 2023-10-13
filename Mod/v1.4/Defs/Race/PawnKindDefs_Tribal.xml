@@ -39,7 +39,7 @@
   <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
     <defName>VV_ViviGuard</defName>
     <label>vivi guard</label>
-    <combatPower>120</combatPower>
+    <combatPower>100</combatPower>
     <isFighter>true</isFighter>
     <itemQuality>Normal</itemQuality>
 
@@ -73,7 +73,7 @@
   <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
     <defName>VV_ViviArcher</defName>
     <label>vivi archer</label>
-    <combatPower>110</combatPower>
+    <combatPower>90</combatPower>
     <isFighter>true</isFighter>
     <itemQuality>Normal</itemQuality>
 
@@ -104,7 +104,7 @@
   <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
     <defName>VV_RoyalViviLeader</defName>
     <label>royal vivi leader</label>
-    <combatPower>200</combatPower>
+    <combatPower>100</combatPower>
     <isFighter>false</isFighter>
     <itemQuality>Good</itemQuality>
     <factionLeader>true</factionLeader>
@@ -136,7 +136,7 @@
   <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
     <defName>VV_RoyalVivi</defName>
     <label>royal vivi</label>
-    <combatPower>55</combatPower>
+    <combatPower>90</combatPower>
     <isFighter>false</isFighter>
     <itemQuality>Normal</itemQuality>
 
@@ -162,7 +162,7 @@
     <defName>VV_RoyalViviTrader</defName>
     <label>royal vivi</label>
     <trader>true</trader>
-    <combatPower>100</combatPower>
+    <combatPower>90</combatPower>
     <isFighter>false</isFighter>
     <itemQuality>Normal</itemQuality>
 

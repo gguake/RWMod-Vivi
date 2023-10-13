@@ -232,6 +232,37 @@
 
         <humanRecipeImport>true</humanRecipeImport>
 
+        <growthAges>
+          <li>7</li>
+          <li>10</li>
+          <li>13</li>
+        </growthAges>
+        <childBackstoryFilter>
+          <li>
+            <categories>
+              <li>VV_SettlerGrown</li>
+            </categories>
+            <commonality>1</commonality>
+          </li>
+        </childBackstoryFilter>
+        <adultBackstoryFilter>
+          <li>
+            <categories>
+              <li>VV_SettlerGrown</li>
+            </categories>
+            <commonality>1</commonality>
+          </li>
+        </adultBackstoryFilter>
+        <adultVatBackstoryFilter>
+          <li>
+            <categories>
+              <li>VV_SettlerGrown</li>
+            </categories>
+            <commonality>1</commonality>
+          </li>
+        </adultVatBackstoryFilter>
+        <childKindDef>VV_PlayerVivi</childKindDef>
+
       </generalSettings>
       
       <graphicPaths>
@@ -460,6 +491,7 @@
           <li>(3.5, 0)</li>
         </points>
       </litterSizeCurve>
+
 			<lifeStageAges Inherit="False">
 				<li>
 					<def>HumanlikeBaby</def>
@@ -498,6 +530,7 @@
 					<minAge>18.000001</minAge>
 				</li>
 			</lifeStageAges>
+
       <lifeStageWorkSettings>
         <Firefighter>13</Firefighter>
         <Patient>0</Patient>
@@ -513,7 +546,7 @@
         <Growing>3</Growing>
         <Mining>10</Mining>
         <PlantCutting>3</PlantCutting>
-        <Smithing>13</Smithing>
+        <Smithing>7</Smithing>
         <Tailoring>7</Tailoring>
         <Art>10</Art>
         <Crafting>7</Crafting>
