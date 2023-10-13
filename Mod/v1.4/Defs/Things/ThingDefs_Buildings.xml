@@ -36,6 +36,9 @@
     </statBases>
     <size>(1,1)</size>
     <rotatable>false</rotatable>
+    <thingCategories>
+      <li>VV_BuildingsVivi</li>
+    </thingCategories>
 
     <costList>
       <VV_Viviwax>80</VV_Viviwax>
