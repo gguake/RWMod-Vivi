@@ -110,7 +110,7 @@
     </graphicData>
 
     <statBases>
-      <MarketValue>140</MarketValue>
+      <MarketValue>180</MarketValue>
       <MaxHitPoints>40</MaxHitPoints>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
@@ -171,7 +171,7 @@
     </graphicData>
 
     <statBases>
-      <MarketValue>140</MarketValue>
+      <MarketValue>180</MarketValue>
       <MaxHitPoints>40</MaxHitPoints>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
@@ -235,7 +235,7 @@
     </graphicData>
 
     <statBases>
-      <MarketValue>240</MarketValue>
+      <MarketValue>450</MarketValue>
       <MaxHitPoints>100</MaxHitPoints>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
@@ -293,8 +293,6 @@
         <energyGenerateRule Class="VVRace.EnergyRule_BatteryStored">
           <energyByBatteryStored>0~40</energyByBatteryStored>
         </energyGenerateRule>
-
-        
 
         <empExplosiveMinimumEnergy>150</empExplosiveMinimumEnergy>
         <empExplosiveEnergy>120</empExplosiveEnergy>
@@ -384,7 +382,7 @@
 
     <terrainAffordanceNeeded>VV_WaterOrLight</terrainAffordanceNeeded>
     <statBases>
-      <MarketValue>400</MarketValue>
+      <MarketValue>450</MarketValue>
       <MaxHitPoints>40</MaxHitPoints>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
@@ -524,7 +522,7 @@
     </graphicData>
 
     <statBases>
-      <MarketValue>400</MarketValue>
+      <MarketValue>450</MarketValue>
       <MaxHitPoints>120</MaxHitPoints>
       <Beauty>12</Beauty>
       <BeautyOutdoors>12</BeautyOutdoors>
@@ -713,7 +711,7 @@
     <drawerType>MapMeshAndRealTime</drawerType>
 
     <statBases>
-      <MarketValue>540</MarketValue>
+      <MarketValue>450</MarketValue>
       <MaxHitPoints>250</MaxHitPoints>
       
       <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>

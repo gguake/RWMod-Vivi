@@ -98,7 +98,7 @@
     <defName>VV_AdvancedGathering</defName>
     <label>vivi advanced gathering</label>
     <description>.</description>
-    <baseCost>600</baseCost>
+    <baseCost>900</baseCost>
     <researchViewX>2</researchViewX>
     <researchViewY>0.7</researchViewY>
     <prerequisites>
@@ -120,8 +120,5 @@
     <tags>
       <li>VV_ViviStart</li>
     </tags>
-    
-    <discoveredLetterTitle>About: Ancient plant</discoveredLetterTitle>
-    <discoveredLetterText>.</discoveredLetterText>
   </ResearchProjectDef>
 </Defs>

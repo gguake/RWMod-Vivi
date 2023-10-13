@@ -2,7 +2,6 @@
 <Defs>
   <ThingDef ParentName="BaseFilth">
     <defName>VV_FilthPollen</defName>
-    <thingClass>VVRace.Filth_Pollen</thingClass>
     <label>pollen</label>
     <description>.</description>
     <statBases>

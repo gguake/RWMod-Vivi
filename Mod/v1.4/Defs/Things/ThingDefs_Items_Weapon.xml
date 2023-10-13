@@ -93,8 +93,7 @@
     </statBases>
     <equippedStatOffsets>
       <CleaningSpeed>0.5</CleaningSpeed>
-      <VV_PlantGatherSpeed>0.25</VV_PlantGatherSpeed>
-      <VV_PlantGatherYield>0.25</VV_PlantGatherYield>
+      <VV_PlantGatherYield>0.5</VV_PlantGatherYield>
     </equippedStatOffsets>
 
     <thingCategories Inherit="False">

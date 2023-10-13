@@ -6,6 +6,8 @@
     <label>making lifestrand</label>
     <description>.</description>
     <descriptionHyperlinks>
+      <ThingDef>VV_HeatingPetal</ThingDef>
+      <ThingDef>VV_CoolingPetal</ThingDef>
       <ThingDef>VV_LivingLeaf</ThingDef>
     </descriptionHyperlinks>
 
@@ -38,10 +40,26 @@
       <li>
         <filter>
           <thingDefs>
+            <li>VV_HeatingPetal</li>
+          </thingDefs>
+        </filter>
+        <count>5</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_CoolingPetal</li>
+          </thingDefs>
+        </filter>
+        <count>5</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
             <li>VV_LivingLeaf</li>
           </thingDefs>
         </filter>
-        <count>20</count>
+        <count>10</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
@@ -52,12 +70,12 @@
       </thingDefs>
     </fixedIngredientFilter>
     <products>
-      <VV_Lifestrand>20</VV_Lifestrand>
+      <VV_Lifestrand>30</VV_Lifestrand>
     </products>
     <researchPrerequisite>VV_Lifestrand</researchPrerequisite>
 
     <skillRequirements>
-      <Crafting>8</Crafting>
+      <Crafting>9</Crafting>
     </skillRequirements>
   </RecipeDef>
 
@@ -68,7 +86,7 @@
     <description>test</description>
 
     <jobString>extrating honey.</jobString>
-    <workAmount>700</workAmount>
+    <workAmount>500</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
 
     <effectWorking>Cremate</effectWorking>
@@ -83,7 +101,7 @@
             <li>VV_RawHoney</li>
           </thingDefs>
         </filter>
-        <count>70</count>
+        <count>60</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
@@ -92,7 +110,7 @@
       </thingDefs>
     </fixedIngredientFilter>
     <products>
-      <VV_FilteredHoney>21</VV_FilteredHoney>
+      <VV_FilteredHoney>33</VV_FilteredHoney>
     </products>
   </RecipeDef>
 
@@ -103,7 +121,7 @@
     <description>test</description>
 
     <jobString>refining propolis.</jobString>
-    <workAmount>2000</workAmount>
+    <workAmount>1800</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
 
     <effectWorking>Cremate</effectWorking>
@@ -128,7 +146,7 @@
     </fixedIngredientFilter>
     <products>
       <MedicineHerbal>5</MedicineHerbal>
-      <Neutroamine>12</Neutroamine>
+      <Neutroamine>10</Neutroamine>
     </products>
   </RecipeDef>
 </Defs>

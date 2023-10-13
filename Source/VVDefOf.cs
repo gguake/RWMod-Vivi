@@ -158,12 +158,6 @@ namespace VVRace
     }
 
     [DefOf]
-    public static class VVResearchProjectDef
-    {
-        public static ResearchProjectDef VV_AncientFloraRestoration;
-    }
-
-    [DefOf]
     public static class VVQuestScriptDefOf
     {
         public static QuestScriptDef VV_EndGame_Worldtree_Step_Archaeologist;

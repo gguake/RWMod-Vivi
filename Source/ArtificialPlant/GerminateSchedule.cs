@@ -286,7 +286,7 @@ namespace VVRace
                     }
                 }
 
-                var actualBonusProductCount = Rand.Range(5, 7) + (int)bonusProductCount + (Rand.Chance(bonusProductCount - (int)bonusProductCount) ? 1 : 0);
+                var actualBonusProductCount = Rand.Range(3, 5) + (int)bonusProductCount + (Rand.Chance(bonusProductCount - (int)bonusProductCount) ? 1 : 0);
                 var result = table.RandomElementByWeight(v => v.weight).thingDef;
 
                 _stage = GerminateStage.GerminateComplete;

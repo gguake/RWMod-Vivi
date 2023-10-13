@@ -8,9 +8,9 @@
 
     <jobString>Gathering honey.</jobString>
     
-    <workAmount>800</workAmount>
+    <workAmount>1150</workAmount>
     <workSkill>Plants</workSkill>
-    <workSkillLearnFactor>0.5</workSkillLearnFactor>
+    <workSkillLearnFactor>0.1</workSkillLearnFactor>
     <workSpeedStat>VV_HoneyGatherSpeed</workSpeedStat>
     <efficiencyStat>VV_HoneyGatherYield</efficiencyStat>
 
@@ -50,9 +50,9 @@
 
     <jobString>Gathering pollen.</jobString>
     
-    <workAmount>300</workAmount>
+    <workAmount>400</workAmount>
     <workSkill>Plants</workSkill>
-    <workSkillLearnFactor>0.2</workSkillLearnFactor>
+    <workSkillLearnFactor>0.1</workSkillLearnFactor>
     <workSpeedStat>CleaningSpeed</workSpeedStat>
     <efficiencyStat>PlantHarvestYield</efficiencyStat>
 
@@ -101,10 +101,11 @@
 
     <jobString>Gathering propolis.</jobString>
     
-    <workAmount>2700</workAmount>
+    <workAmount>2400</workAmount>
     <workSkill>Plants</workSkill>
     <workSpeedStat>VV_PlantGatherSpeed</workSpeedStat>
     <efficiencyStat>VV_PlantGatherYield</efficiencyStat>
+    <workSkillLearnFactor>0.25</workSkillLearnFactor>
 
     <effectWorking>Clean</effectWorking>
     <soundWorking>Interact_CleanFilth</soundWorking>
@@ -115,9 +116,9 @@
       <li>VV_GatheringBarrel</li>
     </recipeUsers>
     <allowMixingIngredients>true</allowMixingIngredients>
-    <targetCountAdjustment>3</targetCountAdjustment>
+    <targetCountAdjustment>2</targetCountAdjustment>
     <products>
-      <VV_Propolis>3</VV_Propolis>
+      <VV_Propolis>2</VV_Propolis>
     </products>
     <researchPrerequisite>VV_AdvancedGathering</researchPrerequisite>
 
@@ -145,6 +146,7 @@
     <workSkill>Plants</workSkill>
     <workSpeedStat>VV_PlantGatherSpeed</workSpeedStat>
     <efficiencyStat>VV_PlantGatherYield</efficiencyStat>
+    <workSkillLearnFactor>0.1</workSkillLearnFactor>
 
     <effectWorking>Harvest_Plant</effectWorking>
     <soundWorking>Harvest_Standard</soundWorking>

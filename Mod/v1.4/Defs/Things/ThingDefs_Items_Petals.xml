@@ -48,7 +48,7 @@
     </graphicData>
 
     <statBases>
-      <MarketValue>2.7</MarketValue>
+      <MarketValue>8</MarketValue>
     </statBases>
   </ThingDef>
 
@@ -69,7 +69,7 @@
     </graphicData>
 
     <statBases>
-      <MarketValue>2.7</MarketValue>
+      <MarketValue>8</MarketValue>
     </statBases>
   </ThingDef>
 
@@ -90,7 +90,7 @@
     </graphicData>
 
     <statBases>
-      <MarketValue>2.7</MarketValue>
+      <MarketValue>8</MarketValue>
     </statBases>
   </ThingDef>
 
@@ -110,7 +110,7 @@
     </graphicData>
 
     <statBases>
-      <MarketValue>2.7</MarketValue>
+      <MarketValue>8</MarketValue>
     </statBases>
   </ThingDef>
 
@@ -132,7 +132,7 @@
     </graphicData>
 
     <statBases>
-      <MarketValue>2.7</MarketValue>
+      <MarketValue>8</MarketValue>
     </statBases>
   </ThingDef>
 </Defs>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Patch>
+  <!--
   <Operation Class="PatchOperationAdd">
     <xpath>Defs/StorytellerDef[@Name="BaseStoryteller"]/comps</xpath>
     <value>
@@ -14,5 +15,5 @@
       </li>
     </value>
   </Operation>
-
+  -->
 </Patch>

@@ -165,7 +165,8 @@ namespace VVRace
                         var allProducts = new List<Thing>();
                         foreach (var productThingDefCount in curJob.RecipeDef.products)
                         {
-                            var productCount = productThingDefCount.count * efficiency;
+                            var minProductCount = (int)(productThingDefCount.count * efficiency);
+                            var productCount = minProductCount + (Rand.Chance(productThingDefCount.count * efficiency - minProductCount) ? 1 : 0);
 
                             while (productCount > 0)
                             {

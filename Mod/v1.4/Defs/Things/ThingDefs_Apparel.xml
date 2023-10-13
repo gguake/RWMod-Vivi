@@ -15,10 +15,10 @@
     </thingCategories>
 
     <statBases>
-      <MaxHitPoints>320</MaxHitPoints>
+      <MaxHitPoints>400</MaxHitPoints>
       <WorkToMake>48000</WorkToMake>
-      <Mass>0.5</Mass>
-      <StuffEffectMultiplierArmor>0.5</StuffEffectMultiplierArmor>
+      <Mass>2</Mass>
+      <StuffEffectMultiplierArmor>0.54</StuffEffectMultiplierArmor>
       <StuffEffectMultiplierInsulation_Cold>0.75</StuffEffectMultiplierInsulation_Cold>
       <StuffEffectMultiplierInsulation_Heat>0.75</StuffEffectMultiplierInsulation_Heat>
       <EquipDelay>2.5</EquipDelay>

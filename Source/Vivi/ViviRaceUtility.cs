@@ -4,21 +4,6 @@ namespace VVRace
 {
     public static class ViviRaceUtility
     {
-        public static bool CanMakeViviCream(this Pawn pawn)
-        {
-            if (!pawn.IsVivi() || (pawn.needs?.food?.Starving ?? true)) { return false; }
-
-            return true;
-        }
-
-        public static string GetJobFailReasonForMakeViviCream(this Pawn pawn)
-        {
-            if (!pawn.IsVivi()) { return LocalizeTexts.JobFailReasonNotVivi.Translate(); }
-            if (pawn.needs?.food?.Starving ?? true) { return LocalizeTexts.JobFailReasonViviStarving.Translate(); }
-
-            return null;
-        }
-
         public static void InterruptCurrentJob(this Pawn pawn)
         {
             if (pawn.carryTracker?.CarriedThing != null)

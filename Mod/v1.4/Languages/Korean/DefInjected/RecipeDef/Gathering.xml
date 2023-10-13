@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
   <VV_GatherHoney.label>꿀 채집</VV_GatherHoney.label>
-  <VV_GatherHoney.description>어느정도 성장한 꽃이나 과일나무 등의 식물에서 꿀을 채집합니다. 꿀 채집 속도와 채집량이 0보다 높아야 작업 가능합니다.\n\n꿀을 채집할때 꽃가루를 흘리거나 몸에 뭍는 경우가 있으며, 바닥에 뿌려진 꽃가루가 방치되면 드물게 식물이 새로운 싹을 틔우기도 합니다.</VV_GatherHoney.description>
+  <VV_GatherHoney.description>어느정도 성장한 꽃이나 과일나무 등의 식물에서 꿀을 채집합니다. 꿀 채집 속도와 채집량이 0보다 높아야 작업 가능합니다.</VV_GatherHoney.description>
   <VV_GatherHoney.jobString>꿀 채집 중.</VV_GatherHoney.jobString>
 
   <VV_GatherPollen.label>꽃가루 채집</VV_GatherPollen.label>
-  <VV_GatherPollen.description>주변의 바닥에 흩어진 꽃가루를 모아 채집합니다.</VV_GatherPollen.description>
+  <VV_GatherPollen.description>주변의 바닥에 흩어진 꽃가루를 모아 채집합니다.
+\n꿀을 채집할때 꽃가루를 흘리거나 몸에 뭍어 주변에 흘리는 경우가 있습니다.</VV_GatherPollen.description>
   <VV_GatherPollen.jobString>꽃가루 채집 중.</VV_GatherPollen.jobString>
 
   <VV_GatherPropolis.label>프로폴리스 채집</VV_GatherPropolis.label>

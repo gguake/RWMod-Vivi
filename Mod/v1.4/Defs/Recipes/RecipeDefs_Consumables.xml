@@ -5,14 +5,13 @@
     <defName>VV_Make_HoneyPollenCake</defName>
     <label>make honey pollen cake</label>
     <description>Make honey pollen cake.</description>
-
     <jobString>Making honey pollen cake.</jobString>
+    <workAmount>450</workAmount>
     <workSpeedStat>CookSpeed</workSpeedStat>
     <requiredGiverWorkType>Cooking</requiredGiverWorkType>
     <effectWorking>Cook</effectWorking>
     <soundWorking>Recipe_CookMeal</soundWorking>
     <allowMixingIngredients>true</allowMixingIngredients>
-    <ingredientValueGetterClass>IngredientValueGetter_Nutrition</ingredientValueGetterClass>
     <ingredients>
       <li>
         <filter>
@@ -20,7 +19,7 @@
             <li>VV_FilteredHoney</li>
           </thingDefs>
         </filter>
-        <count>0.5</count>
+        <count>4</count>
       </li>
       <li>
         <filter>
@@ -28,7 +27,7 @@
             <li>VV_Pollen</li>
           </thingDefs>
         </filter>
-        <count>0.15</count>
+        <count>10</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
@@ -44,7 +43,7 @@
       </thingDefs>
     </defaultIngredientFilter>
     <products>
-      <VV_HoneyPollenCake>1</VV_HoneyPollenCake>
+      <VV_HoneyPollenCake>8</VV_HoneyPollenCake>
     </products>
     <workSkill>Cooking</workSkill>
     <researchPrerequisite>VV_BasicGathering</researchPrerequisite>
@@ -55,7 +54,6 @@
     <defName>VV_Make_HoneyPollenCake_Bulk</defName>
     <label>make honey pollen cake x4</label>
     <description>Make bulk honey pollen cake.</description>
-
     <jobString>Making bulk honey pollen cake.</jobString>
     <workAmount>1800</workAmount>
     <workSpeedStat>CookSpeed</workSpeedStat>
@@ -63,7 +61,6 @@
     <effectWorking>Cook</effectWorking>
     <soundWorking>Recipe_CookMeal</soundWorking>
     <allowMixingIngredients>true</allowMixingIngredients>
-    <ingredientValueGetterClass>IngredientValueGetter_Nutrition</ingredientValueGetterClass>
     <ingredients>
       <li>
         <filter>
@@ -71,7 +68,7 @@
             <li>VV_FilteredHoney</li>
           </thingDefs>
         </filter>
-        <count>2.0</count>
+        <count>16</count>
       </li>
       <li>
         <filter>
@@ -79,7 +76,7 @@
             <li>VV_Pollen</li>
           </thingDefs>
         </filter>
-        <count>0.6</count>
+        <count>40</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
@@ -95,7 +92,7 @@
       </thingDefs>
     </defaultIngredientFilter>
     <products>
-      <VV_HoneyPollenCake>4</VV_HoneyPollenCake>
+      <VV_HoneyPollenCake>32</VV_HoneyPollenCake>
     </products>
     <workSkill>Cooking</workSkill>
     <researchPrerequisite>VV_BasicGathering</researchPrerequisite>
@@ -108,7 +105,7 @@
     <description>Make royal jelly.</description>
 
     <jobString>Making royal jelly.</jobString>
-    <workAmount>1350</workAmount>
+    <workAmount>1250</workAmount>
     <workSpeedStat>CookSpeed</workSpeedStat>
     <requiredGiverWorkType>Cooking</requiredGiverWorkType>
     <effectWorking>Cook</effectWorking>
@@ -137,7 +134,7 @@
             <li>VV_FilteredHoney</li>
           </thingDefs>
         </filter>
-        <count>3</count>
+        <count>2</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
@@ -208,7 +205,7 @@
       </thingDefs>
     </defaultIngredientFilter>
     <products>
-      <VV_FloralHotTea>1</VV_FloralHotTea>
+      <VV_FloralHotTea>2</VV_FloralHotTea>
     </products>
     <workSkill>Cooking</workSkill>
     <researchPrerequisite>VV_AncientBotany</researchPrerequisite>
@@ -261,7 +258,7 @@
       </thingDefs>
     </defaultIngredientFilter>
     <products>
-      <VV_FloralIceTea>1</VV_FloralIceTea>
+      <VV_FloralIceTea>2</VV_FloralIceTea>
     </products>
     <workSkill>Cooking</workSkill>
     <researchPrerequisite>VV_AncientBotany</researchPrerequisite>
@@ -314,7 +311,7 @@
       </thingDefs>
     </defaultIngredientFilter>
     <products>
-      <VV_FloralMilkTea>1</VV_FloralMilkTea>
+      <VV_FloralMilkTea>2</VV_FloralMilkTea>
     </products>
     <workSkill>Cooking</workSkill>
     <researchPrerequisite>VV_AncientBotany</researchPrerequisite>

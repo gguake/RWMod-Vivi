@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
   <!-- 테크 3 -->
+  <!--
   <ResearchProjectDef Abstract="True" Name="ViviResearchProjectTier3Base">
 		<tab>VV_Vivi</tab>
     <techLevel>Industrial</techLevel>
@@ -31,4 +32,5 @@
       <li>VV_AutomatedInfra</li>
     </prerequisites>
   </ResearchProjectDef>
+  -->
 </Defs>

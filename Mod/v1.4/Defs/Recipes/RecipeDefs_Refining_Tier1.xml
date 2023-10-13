@@ -10,10 +10,10 @@
     </descriptionHyperlinks>
 
     <jobString>making vivicream.</jobString>
-    <workAmount>600</workAmount>
+    <workAmount>450</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <workSkill>Crafting</workSkill>
-    <workSkillLearnFactor>0.1</workSkillLearnFactor>
+    <workSkillLearnFactor>0.05</workSkillLearnFactor>
 
     <effectWorking>Clean</effectWorking>
     <soundWorking>Recipe_Brewing</soundWorking>
@@ -31,7 +31,7 @@
     <modExtensions>
       <li Class="VVRace.RecipeModExtension">
         <billType>VVRace.Bill_ProductionWithFoodDrain</billType>
-        <foodDrainsPerWork>0.275</foodDrainsPerWork>
+        <foodDrains>0.275</foodDrains>
       </li>
     </modExtensions>
   </RecipeDef>
@@ -78,9 +78,6 @@
     <defName>VV_FilteringHoney</defName>
     <label>filter honey</label>
     <description>test</description>
-    <descriptionHyperlinks>
-      <ThingDef>VV_Viviwax</ThingDef>
-    </descriptionHyperlinks>
 
     <jobString>filtering honey.</jobString>
     <workAmount>500</workAmount>
@@ -109,8 +106,8 @@
       </thingDefs>
     </fixedIngredientFilter>
     <products>
-      <VV_FilteredHoney>5</VV_FilteredHoney>
-      <VV_Viviwax>2</VV_Viviwax>
+      <VV_FilteredHoney>10</VV_FilteredHoney>
+      <VV_Pollen>2</VV_Pollen>
     </products>
     <researchPrerequisite>VV_BasicInfra</researchPrerequisite>
   </RecipeDef>
@@ -262,7 +259,7 @@
     </defaultIngredientFilter>
     
     <products>
-      <VV_Fertilizer>40</VV_Fertilizer>
+      <VV_Fertilizer>50</VV_Fertilizer>
     </products>
   </RecipeDef>
 </Defs>

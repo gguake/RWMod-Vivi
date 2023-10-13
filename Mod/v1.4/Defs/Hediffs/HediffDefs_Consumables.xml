@@ -68,9 +68,9 @@
 
     <stages>
       <li>
-        <socialFightChanceFactor>0.7</socialFightChanceFactor>
+        <socialFightChanceFactor>0.75</socialFightChanceFactor>
         <statOffsets>
-          <MentalBreakThreshold>-0.06</MentalBreakThreshold>
+          <MentalBreakThreshold>-0.05</MentalBreakThreshold>
         </statOffsets>
       </li>
     </stages>
@@ -96,7 +96,7 @@
     <stages>
       <li>
         <statOffsets>
-          <ComfyTemperatureMin>-22</ComfyTemperatureMin>
+          <ComfyTemperatureMin>-27</ComfyTemperatureMin>
         </statOffsets>
       </li>
     </stages>
@@ -122,7 +122,7 @@
     <stages>
       <li>
         <statOffsets>
-          <ComfyTemperatureMax>22</ComfyTemperatureMax>
+          <ComfyTemperatureMax>27</ComfyTemperatureMax>
         </statOffsets>
       </li>
     </stages>
@@ -148,8 +148,9 @@
     <stages>
       <li>
         <statOffsets>
-          <SocialImpact>0.15</SocialImpact>
           <RestRateMultiplier>0.15</RestRateMultiplier>
+          <MeditationFocusGain>0.05</MeditationFocusGain>
+          <PsychicEntropyRecoveryRate>0.05</PsychicEntropyRecoveryRate>
         </statOffsets>
       </li>
     </stages>
