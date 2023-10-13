@@ -34,9 +34,6 @@
     </statBases>
 
     <comps>
-      <li Class="VVRace.CompProperties_FoodDrainWhenMake">
-        <drainPerStackCount>0.011</drainPerStackCount>
-      </li>
     </comps>
     
     <tradeability>None</tradeability>
@@ -63,13 +60,13 @@
       <Mass>0.2</Mass>
       <Flammability>0.7</Flammability>
       <StuffPower_Armor_Sharp>0.4</StuffPower_Armor_Sharp>
-      <StuffPower_Armor_Blunt>0.6</StuffPower_Armor_Blunt>
+      <StuffPower_Armor_Blunt>0.54</StuffPower_Armor_Blunt>
       <StuffPower_Armor_Heat>0.24</StuffPower_Armor_Heat>
       <StuffPower_Insulation_Cold>6</StuffPower_Insulation_Cold>
       <StuffPower_Insulation_Heat>3</StuffPower_Insulation_Heat>
       <SharpDamageMultiplier>0.3</SharpDamageMultiplier>
-      <BluntDamageMultiplier>1.08</BluntDamageMultiplier>
-      <DeteriorationRate>4</DeteriorationRate>
+      <BluntDamageMultiplier>1</BluntDamageMultiplier>
+      <DeteriorationRate>2</DeteriorationRate>
     </statBases>
     <healthAffectsPrice>false</healthAffectsPrice>
     <thingCategories>
@@ -82,6 +79,7 @@
       <categories>
         <li>VV_Wax</li>
         <li>Stony</li>
+        <li>Metallic</li>
       </categories>
       <appearance>Planks</appearance>
       <color>(255,240,180)</color>
@@ -90,12 +88,12 @@
       <soundMeleeHitSharp>MeleeHit_Wood</soundMeleeHitSharp>
       <soundMeleeHitBlunt>MeleeHit_Wood</soundMeleeHitBlunt>
       <statFactors>
-        <MaxHitPoints>0.8</MaxHitPoints>
-        <Beauty>1</Beauty>
-        <Flammability>0.7</Flammability>
-        <WorkToMake>0.5</WorkToMake>
-        <WorkToBuild>0.5</WorkToBuild>
-        <DoorOpenSpeed>1.0</DoorOpenSpeed>
+        <MaxHitPoints>0.75</MaxHitPoints>
+        <Flammability>1</Flammability>
+        <WorkToMake>0.8</WorkToMake>
+        <WorkToBuild>0.8</WorkToBuild>
+        <DoorOpenSpeed>1.1</DoorOpenSpeed>
+        <MeleeWeapon_CooldownMultiplier>0.95</MeleeWeapon_CooldownMultiplier>
       </statFactors>
       <canSuggestUseDefaultStuff>true</canSuggestUseDefaultStuff>
     </stuffProps>

@@ -34,13 +34,16 @@ namespace VVRace.HarmonyPatches
 
             // 생산시 열량 소모 패치
             harmony.Patch(
-                original: AccessTools.Method(typeof(WorkGiver_DoBill), "StartOrResumeBillJob"),
-                transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(WorkGiver_DoBill_StartOrResumeBillJob_Transpiler)));
+                original: AccessTools.Method(typeof(BillUtility), "MakeNewBill"),
+                prefix: new HarmonyMethod(typeof(ViviRacePatch), nameof(BillUtility_MakeNewBill_Prefix)));
 
-            // 생산시 열량 소모 패치
-            harmony.Patch(
-                original: AccessTools.Method(typeof(RecordsUtility), nameof(RecordsUtility.Notify_BillDone)),
-                postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(RecordsUtility_Notify_BillDone_Postfix)));
+            //harmony.Patch(
+            //    original: AccessTools.Method(typeof(WorkGiver_DoBill), "StartOrResumeBillJob"),
+            //    transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(WorkGiver_DoBill_StartOrResumeBillJob_Transpiler)));
+
+            //harmony.Patch(
+            //    original: AccessTools.Method(typeof(RecordsUtility), nameof(RecordsUtility.Notify_BillDone)),
+            //    postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(RecordsUtility_Notify_BillDone_Postfix)));
 
             // 게임 시작시 알 부모 설정 패치
             harmony.Patch(
@@ -152,56 +155,80 @@ namespace VVRace.HarmonyPatches
             }
         }
 
-        private static IEnumerable<CodeInstruction> WorkGiver_DoBill_StartOrResumeBillJob_Transpiler(IEnumerable<CodeInstruction> codeInstructions, ILGenerator ilGenerator)
+        private static bool BillUtility_MakeNewBill_Prefix(ref Bill __result, RecipeDef recipe, Precept_ThingStyle precept)
         {
-            var instructions = codeInstructions.ToList();
+            var extension = recipe.GetModExtension<RecipeModExtension>();
+            if (extension == null) { return true; }
 
-            var jumpLabel = instructions[instructions.FirstIndexOfInstruction(OpCodes.Callvirt, AccessTools.Method(typeof(Bill), nameof(Bill.ShouldDoNow))) + 1].operand;
-            var injectIndex = instructions.FirstIndexOfInstruction(OpCodes.Callvirt, AccessTools.Method(typeof(Bill), nameof(Bill.ShouldDoNow))) + 2;
-
-            var conditionalSkipLabel = ilGenerator.DefineLabel();
-            var injections = new CodeInstruction[]
+            if (extension.billType != null)
             {
-                // if (bill.recipe == VVRecipeDefOf.VV_MakeVivicream && pawn.CanMakeViviCream())
-                new CodeInstruction(OpCodes.Ldloc_2),
-                new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(Bill), nameof(Bill.recipe))),
-                new CodeInstruction(OpCodes.Ldsfld, AccessTools.Field(typeof(VVRecipeDefOf), nameof(VVRecipeDefOf.VV_MakeVivicream))),
-                new CodeInstruction(OpCodes.Bne_Un_S, conditionalSkipLabel),
-                new CodeInstruction(OpCodes.Ldarg_1),
-                new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(ViviRaceUtility), nameof(ViviRaceUtility.CanMakeViviCream))),
-                new CodeInstruction(OpCodes.Brtrue_S, conditionalSkipLabel),
-
-                new CodeInstruction(OpCodes.Ldarg_1),
-                new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(ViviRaceUtility), nameof(ViviRaceUtility.GetJobFailReasonForMakeViviCream))),
-                new CodeInstruction(OpCodes.Ldnull),
-                new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(JobFailReason), nameof(JobFailReason.Is))),
-
-                new CodeInstruction(OpCodes.Br, jumpLabel),
-            };
-
-            instructions[injectIndex].labels.Add(conditionalSkipLabel);
-            instructions.InsertRange(injectIndex, injections);
-            return instructions;
-        }
-
-        private static void RecordsUtility_Notify_BillDone_Postfix(Pawn billDoer, List<Thing> products)
-        {
-            var bill = billDoer?.CurJob?.bill;
-            if (bill != null && billDoer?.needs?.food != null)
-            {
-                float foodDrains = 0f;
-                foreach (var product in products.Where(v => v is ThingWithComps).Cast<ThingWithComps>())
+                if (!typeof(Bill).IsAssignableFrom(extension.billType))
                 {
-                    var comp = product.TryGetComp<CompFoodDrainWhenMake>();
-                    if (comp != null)
-                    {
-                        foodDrains += comp.Props.drainPerStackCount * product.stackCount;
-                    }
+                    Log.Error($"invalid billtype for recipe mod extension");
+                    return true;
                 }
 
-                billDoer.needs.food.CurLevel -= foodDrains;
+                var bill = Activator.CreateInstance(extension.billType, new object[] { recipe, precept }) as Bill;
+                if (bill != null)
+                {
+                    __result = bill;
+                    return false;
+                }
             }
+
+            return true;
         }
+
+        //private static IEnumerable<CodeInstruction> WorkGiver_DoBill_StartOrResumeBillJob_Transpiler(IEnumerable<CodeInstruction> codeInstructions, ILGenerator ilGenerator)
+        //{
+        //    var instructions = codeInstructions.ToList();
+
+        //    var jumpLabel = instructions[instructions.FirstIndexOfInstruction(OpCodes.Callvirt, AccessTools.Method(typeof(Bill), nameof(Bill.ShouldDoNow))) + 1].operand;
+        //    var injectIndex = instructions.FirstIndexOfInstruction(OpCodes.Callvirt, AccessTools.Method(typeof(Bill), nameof(Bill.ShouldDoNow))) + 2;
+
+        //    var conditionalSkipLabel = ilGenerator.DefineLabel();
+        //    var injections = new CodeInstruction[]
+        //    {
+        //        // if (bill.recipe == VVRecipeDefOf.VV_MakeVivicream && pawn.CanMakeViviCream())
+        //        new CodeInstruction(OpCodes.Ldloc_2),
+        //        new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(Bill), nameof(Bill.recipe))),
+        //        new CodeInstruction(OpCodes.Ldsfld, AccessTools.Field(typeof(VVRecipeDefOf), nameof(VVRecipeDefOf.VV_MakeVivicream))),
+        //        new CodeInstruction(OpCodes.Bne_Un_S, conditionalSkipLabel),
+        //        new CodeInstruction(OpCodes.Ldarg_1),
+        //        new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(ViviRaceUtility), nameof(ViviRaceUtility.CanMakeViviCream))),
+        //        new CodeInstruction(OpCodes.Brtrue_S, conditionalSkipLabel),
+
+        //        new CodeInstruction(OpCodes.Ldarg_1),
+        //        new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(ViviRaceUtility), nameof(ViviRaceUtility.GetJobFailReasonForMakeViviCream))),
+        //        new CodeInstruction(OpCodes.Ldnull),
+        //        new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(JobFailReason), nameof(JobFailReason.Is))),
+
+        //        new CodeInstruction(OpCodes.Br, jumpLabel),
+        //    };
+
+        //    instructions[injectIndex].labels.Add(conditionalSkipLabel);
+        //    instructions.InsertRange(injectIndex, injections);
+        //    return instructions;
+        //}
+
+        //private static void RecordsUtility_Notify_BillDone_Postfix(Pawn billDoer, List<Thing> products)
+        //{
+        //    var bill = billDoer?.CurJob?.bill;
+        //    if (bill != null && billDoer?.needs?.food != null)
+        //    {
+        //        float foodDrains = 0f;
+        //        foreach (var product in products.Where(v => v is ThingWithComps).Cast<ThingWithComps>())
+        //        {
+        //            var comp = product.TryGetComp<CompFoodDrainWhenMake>();
+        //            if (comp != null)
+        //            {
+        //                foodDrains += comp.Props.drainPerStackCount * product.stackCount;
+        //            }
+        //        }
+
+        //        billDoer.needs.food.CurLevel -= foodDrains;
+        //    }
+        //}
 
         private static void ScenPart_PlayerPawnsArriveMethod_GenerateIntoMap_Postfix(Map map)
         {

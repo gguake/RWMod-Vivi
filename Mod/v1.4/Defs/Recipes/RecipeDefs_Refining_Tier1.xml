@@ -27,6 +27,13 @@
       <VV_Vivicream>25</VV_Vivicream>
     </products>
     <researchPrerequisite>VV_BasicInfra</researchPrerequisite>
+
+    <modExtensions>
+      <li Class="VVRace.RecipeModExtension">
+        <billType>VVRace.Bill_ProductionWithFoodDrain</billType>
+        <foodDrainsPerWork>0.275</foodDrainsPerWork>
+      </li>
+    </modExtensions>
   </RecipeDef>
 
   <!-- 밀랍 정제 -->
