@@ -1,5 +1,4 @@
 ﻿using Verse;
-using static RimWorld.ColonistBar;
 
 namespace VVRace
 {
