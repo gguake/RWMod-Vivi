@@ -65,9 +65,9 @@ namespace VVRace
     [StaticConstructorOnStartup]
     public class Building_GatherWorkTable : Building_WorkTable
     {
-        public const float GatherMaxRadius = 14.9f;
+        public const float GatherMaxRadius = 15.9f;
         public const float GatherMinRadius = 1.9f;
-        public const float GatherDefaultRadius = 11.9f;
+        public const float GatherDefaultRadius = 10.9f;
 
         public float GatherRadius
         {

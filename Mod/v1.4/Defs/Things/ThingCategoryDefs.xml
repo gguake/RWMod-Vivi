@@ -39,7 +39,7 @@
     <defName>VV_ViviResource</defName>
     <label>vivi resources</label>
     <parent>ResourcesRaw</parent>
-    <iconPath>UI/Icons/ThingCategories/VV_ViviProduct</iconPath>
+    <iconPath>UI/Icons/ThingCategories/VV_ViviResource</iconPath>
   </ThingCategoryDef>
 
   <ThingCategoryDef>
@@ -53,6 +53,6 @@
     <defName>VV_ArtificialPlant</defName>
     <label>ancient plant</label>
     <parent>Root</parent>
-    <iconPath>UI/Icons/ThingCategories/VV_ViviProduct</iconPath>
+    <iconPath>UI/Icons/ThingCategories/VV_ArtificialPlant</iconPath>
   </ThingCategoryDef>
 </Defs>

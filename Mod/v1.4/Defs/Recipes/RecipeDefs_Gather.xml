@@ -8,7 +8,7 @@
 
     <jobString>Gathering honey.</jobString>
     
-    <workAmount>1150</workAmount>
+    <workAmount>1400</workAmount>
     <workSkill>Plants</workSkill>
     <workSkillLearnFactor>0.1</workSkillLearnFactor>
     <workSpeedStat>VV_HoneyGatherSpeed</workSpeedStat>
@@ -32,8 +32,8 @@
 
     <gatherWorkerType>VVRace.GatherWorker_Honey</gatherWorkerType>
     <gatheringJob>VV_GatherHoney</gatheringJob>
-    <gatheringWorkWeight>8</gatheringWorkWeight>
-    <processingWorkWeight>1</processingWorkWeight>
+    <gatheringWorkWeight>7</gatheringWorkWeight>
+    <processingWorkWeight>3</processingWorkWeight>
     <targetCooldownStat>VV_PlantGatherCooldown</targetCooldownStat>
     <targetYieldStat>VV_PlantHoneyGatherYield</targetYieldStat>
     <maxPathDanger>Some</maxPathDanger>
@@ -157,7 +157,7 @@
       <li>VV_GatheringBarrel</li>
     </recipeUsers>
     <allowMixingIngredients>true</allowMixingIngredients>
-    <targetCountAdjustment>5</targetCountAdjustment>
+    <targetCountAdjustment>10</targetCountAdjustment>
     <products>
       <VV_GrassFiber>10</VV_GrassFiber>
     </products>

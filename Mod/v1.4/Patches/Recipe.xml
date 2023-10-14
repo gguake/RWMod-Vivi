@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Patch>
   <Operation Class="PatchOperationAdd">
-    <xpath>/Defs/ThingDef/recipes[li="Make_Pemmican"]</xpath>
+    <xpath>/Defs/ThingDef/recipes[li="Make_Pemmican" or li="CookMealSimple"]</xpath>
     <value>
       <li>VV_Make_HoneyPollenCake</li>
       <li>VV_Make_HoneyPollenCake_Bulk</li>

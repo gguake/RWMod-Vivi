@@ -104,6 +104,7 @@
     <Compile Include="ArtificialPlant\UI\Dialog_GerminateSchedule.cs" />
     <Compile Include="ArtificialPlant\GerminatorModExtension.cs" />
     <Compile Include="ArtificialPlant\AI\WorkGiver_ManageGerminator.cs" />
+    <Compile Include="ArtificialPlant\UI\ITab_GerminateSchedule.cs" />
     <Compile Include="Egg\Comps\CompViviEggLayer.cs" />
     <Compile Include="MapGeneration\GenSteps\GenStep_MechanoidScoutingBase.cs" />
     <Compile Include="MapGeneration\GenSteps\GenStep_ViviSettlementTurretGarden.cs" />

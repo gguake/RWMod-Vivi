@@ -477,7 +477,7 @@
       <body>VV_Vivi</body>
       <baseBodySize>0.8</baseBodySize>
       <baseHealthScale>0.8</baseHealthScale>
-      <baseHungerRate>0.9</baseHungerRate>
+      <baseHungerRate>0.7</baseHungerRate>
       <foodType>OmnivoreHuman</foodType>
       <meatMarketValue>0.8</meatMarketValue>
       <manhunterOnTameFailChance>0.50</manhunterOnTameFailChance>

@@ -157,19 +157,19 @@ namespace VVRace
         public static HediffDef VV_RoyalVivi;
     }
 
-    [DefOf]
-    public static class VVQuestScriptDefOf
-    {
-        public static QuestScriptDef VV_EndGame_Worldtree_Step_Archaeologist;
-        public static QuestScriptDef VV_EndGame_Worldtree_Step_AssaultComplex;
-        public static QuestScriptDef VV_EndGame_Worldtree_Step_RestoreWorldtree;
-    }
+    //[DefOf]
+    //public static class VVQuestScriptDefOf
+    //{
+    //    public static QuestScriptDef VV_EndGame_Worldtree_Step_Archaeologist;
+    //    public static QuestScriptDef VV_EndGame_Worldtree_Step_AssaultComplex;
+    //    public static QuestScriptDef VV_EndGame_Worldtree_Step_RestoreWorldtree;
+    //}
 
-    [DefOf]
-    public static class VVSitePartDefOf
-    {
-        public static SitePartDef VV_MechanoidScoutingBase;
-    }
+    //[DefOf]
+    //public static class VVSitePartDefOf
+    //{
+    //    public static SitePartDef VV_MechanoidScoutingBase;
+    //}
 
     [DefOf]
     public static class VVMapGeneratorDefOf

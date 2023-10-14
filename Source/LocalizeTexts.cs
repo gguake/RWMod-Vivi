@@ -70,6 +70,9 @@
 
         public const string ITab_GatherWorkerTable_TabLabel = "VV_ITab_GatherWorkerTable_TabLabel";
         public const string ITab_GatherWorkerTable_GatherRadiusSlider = "VV_ITab_GatherWorkerTable_GatherRadiusSlider";
+        public const string ITab_SeedlingGerminator_TabLabel = "VV_ITab_SeedlingGerminator_TabLabel";
+        public const string ITab_SeedlingGerminator_MessageNoSchedule = "VV_ITab_SeedlingGerminator_MessageNoSchedule";
+        public const string ITab_SeedlingGerminator_CurrentScheduleLabel = "VV_ITab_SeedlingGerminator_CurrentScheduleLabel";
 
         public const string RewardAncientWorldtreeLocationLabel = "VV_RewardAncientWorldtreeLocationLabel";
         public const string RewardAncientWorldtreeLocation = "VV_RewardAncientWorldtreeLocation";

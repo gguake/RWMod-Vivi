@@ -121,6 +121,10 @@
       <VV_Vivicream>80</VV_Vivicream>
     </costList>
 
+    <inspectorTabs>
+      <li>VVRace.ITab_GerminateSchedule</li>
+    </inspectorTabs>
+
     <defaultPlacingRot>South</defaultPlacingRot>
     <building>
       <preventDeteriorationOnTop>true</preventDeteriorationOnTop>

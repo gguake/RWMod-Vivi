@@ -181,6 +181,11 @@ namespace VVRace
             }
         }
 
+        public float GetGerminateQuality(int index)
+        {
+            return _scheduleQuality[index];
+        }
+
         public void StartGerminate()
         {
             if (Stage != GerminateStage.None) { return; }
@@ -206,7 +211,7 @@ namespace VVRace
 
         public void AdvanceGerminateSchedule(Building_SeedlingGerminator germinator, float quality = 1f)
         {
-            _scheduleQuality[_currentScheduleIndex] = quality;
+            _scheduleQuality[_currentScheduleIndex] = Math.Max(0.05f, quality);
 
             _currentScheduleIndex++;
             _germinateNextManageTick = GenTicks.TicksGame + GerminatorModExtension.scheduleCooldown;

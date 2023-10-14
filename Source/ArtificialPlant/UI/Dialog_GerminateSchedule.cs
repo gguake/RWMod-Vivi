@@ -1,7 +1,7 @@
 ﻿using RimWorld;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Emit;
 using UnityEngine;
 using Verse;
 using Verse.Sound;
@@ -71,7 +71,11 @@ namespace VVRace
                 for (int i = 0; i < GerminateSchedule.TotalScheduleCount; ++i)
                 {
                     var colRect = scheduleRowRect.NewCol(48);
-                    DrawGernmiateScheduleColumn(colRect, i);
+                    DrawGernmiateScheduleColumn(colRect, _schedule, i, () =>
+                    {
+                        _schedule[i] = _selectedGerminateScheduleDef;
+                        SoundDefOf.Designate_DragStandard_Changed_NoCam.PlayOneShotOnCamera();
+                    });
                 }
                 var lineRect = dividerScheduleInfo.NewRow(1f).Rect;
                 Widgets.DrawLine(
@@ -185,11 +189,11 @@ namespace VVRace
             }
         }
 
-        private void DrawGernmiateScheduleColumn(RectDivider rect, int index)
+        public static void DrawGernmiateScheduleColumn(RectDivider rect, GerminateSchedule schedule, int index, Action action)
         {
             var fullRect = rect.Rect;
 
-            var schedule = _schedule[index];
+            var scheduleDef = schedule[index];
             var headerRect = rect.NewRow(24);
             try
             {
@@ -202,8 +206,8 @@ namespace VVRace
             }
 
             var blockRect = rect.NewRow(48);
-            Widgets.DrawBoxSolid(blockRect, schedule.uiColor);
-            Widgets.DrawTextureFitted(blockRect, schedule.uiIcon, 1.0f);
+            Widgets.DrawBoxSolid(blockRect, scheduleDef.uiColor);
+            Widgets.DrawTextureFitted(blockRect, scheduleDef.uiIcon, 1.0f);
 
             if (Mouse.IsOver(blockRect))
             {
@@ -211,12 +215,11 @@ namespace VVRace
 
                 if (Widgets.ButtonInvisible(blockRect))
                 {
-                    _schedule[index] = _selectedGerminateScheduleDef;
-                    SoundDefOf.Designate_DragStandard_Changed_NoCam.PlayOneShotOnCamera();
+                    action();
                 }
             }
 
-            TooltipHandler.TipRegionByKey(fullRect, LocalizeTexts.ViviGerminateWindowScheduleTabTip.Translate(index + 1, _schedule[index].LabelCap, _schedule[index].description));
+            TooltipHandler.TipRegionByKey(fullRect, LocalizeTexts.ViviGerminateWindowScheduleTabTip.Translate(index + 1, schedule[index].LabelCap, schedule[index].description));
         }
 
         private void DrawGerminateScheduleSummary(RectDivider rect)

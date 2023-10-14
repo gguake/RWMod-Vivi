@@ -14,6 +14,8 @@ namespace VVRace
         public SimpleCurve geneCountCurve;
         public List<GeneDef> randomSelectGenes = new List<GeneDef>();
 
+        public float adaptTemperatureBonus;
+
         public CompProperties_ViviHatcher()
         {
             compClass = typeof(CompViviHatcher);
@@ -133,7 +135,10 @@ namespace VVRace
         {
             if (!CanHatch) { return; }
 
-            hatchProgress += 1f / (hatchDays * 60000f) * ticks;
+            var t = Mathf.InverseLerp(FreezerComp.Props.minSafeTemperature, FreezerComp.Props.maxSafeTemperature, parent.AmbientTemperature);
+            var bonusMultiplier = Mathf.Lerp(1f, 1f + Props.adaptTemperatureBonus, Mathf.Clamp01(1f - (t - 0.5f) * (t - 0.5f) * 4f));
+
+            hatchProgress += 1f / (hatchDays * 60000f) * ticks * bonusMultiplier;
 
             if (hatchProgress > 1f)
             {

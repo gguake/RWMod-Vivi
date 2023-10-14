@@ -6,10 +6,9 @@ using VVRace.HarmonyPatches.Internals;
 
 namespace VVRace
 {
-    [StaticConstructorOnStartup]
     public static class ViviHarmonyPatcher
     {
-        static ViviHarmonyPatcher()
+        public static void PatchAll()
         {
             var harmony = new Harmony("rimworld.gguake.vivi");
             try
@@ -34,11 +33,6 @@ namespace VVRace
             finally
             {
             }
-        }
-
-        static void PawnStyleItemChooser_GetFrequencyFromIdeo_Postfix(ref float __result)
-        {
-            __result += float.Epsilon;
         }
     }
 }

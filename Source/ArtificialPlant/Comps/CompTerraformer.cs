@@ -116,7 +116,7 @@ namespace VVRace
         private void TerraformNear()
         {
             var map = parent.Map;
-            var cells = GenRadial.RadialCellsAround(parent.Position, Props.radius, true)
+            var cells = GenRadial.RadialPatternInRadius(Props.radius).Select(v => parent.Position + v)
                 .OrderBy(v => v.IsPolluted(map) ? -1f : v.GetFertility(map));
 
             foreach (var cell in cells)

@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using RimWorld;
+using RimWorld.Planet;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Reflection.Emit;
 using UnityEngine;
 using Verse;
 using Verse.Noise;
+using VVRace.HarmonyPatches;
 
 namespace VVRace
 {
@@ -36,6 +38,10 @@ namespace VVRace
             harmony.Patch(
                 original: AccessTools.Method(typeof(WeatherEvent_LightningStrike), nameof(WeatherEvent_LightningStrike.DoStrike)),
                 transpiler: new HarmonyMethod(typeof(ArtificialPlantPatch), nameof(WeatherEvent_LightningStrike_DoStrike_Transpiler)));
+
+            harmony.Patch(
+                original: AccessTools.Method(typeof(ThoughtWorker_Precept_HasAutomatedTurrets), nameof(ThoughtWorker_Precept_HasAutomatedTurrets.ResetStaticData)),
+                postfix: new HarmonyMethod(typeof(ArtificialPlantPatch), nameof(ThoughtWorker_Precept_HasAutomatedTurrets_ResetStaticData_Postfix)));
 
             Log.Message("!! [ViViRace] plant patch complete");
         }
@@ -141,6 +147,16 @@ namespace VVRace
             instructions[skipExplosionIndex].labels.Add(skipExplosionLabel);
 
             return instructions;
+        }
+
+        private static void ThoughtWorker_Precept_HasAutomatedTurrets_ResetStaticData_Postfix()
+        {
+            var field = AccessTools.Field(typeof(ThoughtWorker_Precept_HasAutomatedTurrets), "automatedTurretDefs");
+            var list = field.GetValue(null) as List<ThingDef>;
+            var artificialPlants = list.Where(v => typeof(ArtificialPlant).IsAssignableFrom(v.thingClass)).ToList();
+            artificialPlants.ForEach(v => Log.Message($"{v}"));
+
+            list.RemoveAll(v => artificialPlants.Contains(v));
         }
     }
 }

@@ -140,9 +140,9 @@
 
     <modExtensions>
       <li Class="VVRace.ArtificialPlantModExtension">
-        <germinateWeight>800</germinateWeight>
+        <germinateWeight>100</germinateWeight>
         
-        <energyCapacity>100</energyCapacity>
+        <energyCapacity>150</energyCapacity>
         <zeroEnergyDamageByChance>1~3</zeroEnergyDamageByChance>
 
         <energyConsumeRule Class="VVRace.EnergyRule_Constant">
@@ -201,9 +201,9 @@
     
     <modExtensions>
       <li Class="VVRace.ArtificialPlantModExtension">
-        <germinateWeight>800</germinateWeight>
+        <germinateWeight>100</germinateWeight>
 
-        <energyCapacity>100</energyCapacity>
+        <energyCapacity>150</energyCapacity>
         <zeroEnergyDamageByChance>1~3</zeroEnergyDamageByChance>
 
         <energyConsumeRule Class="VVRace.EnergyRule_Constant">
@@ -281,7 +281,7 @@
     
     <modExtensions>
       <li Class="VVRace.ArtificialPlantModExtension">
-        <germinateWeight>500</germinateWeight>
+        <germinateWeight>100</germinateWeight>
         <germinateRare>true</germinateRare>
 
         <energyCapacity>200</energyCapacity>
@@ -354,9 +354,9 @@
     
     <modExtensions>
       <li Class="VVRace.ArtificialPlantModExtension">
-        <germinateWeight>700</germinateWeight>
+        <germinateWeight>100</germinateWeight>
 
-        <energyCapacity>500</energyCapacity>
+        <energyCapacity>400</energyCapacity>
         <zeroEnergyDamageByChance>1~1</zeroEnergyDamageByChance>
 
         <energyConsumeRule Class="VVRace.EnergyRule_Constant">
@@ -415,7 +415,7 @@
     
     <modExtensions>
       <li Class="VVRace.ArtificialPlantModExtension">
-        <germinateWeight>500</germinateWeight>
+        <germinateWeight>100</germinateWeight>
         <germinateRare>true</germinateRare>
 
         <energyCapacity>300</energyCapacity>
@@ -484,9 +484,9 @@
 
     <modExtensions>
       <li Class="VVRace.ArtificialPlantModExtension">
-        <germinateWeight>700</germinateWeight>
+        <germinateWeight>100</germinateWeight>
 
-        <energyCapacity>300</energyCapacity>
+        <energyCapacity>400</energyCapacity>
         <zeroEnergyDamageByChance>1~3</zeroEnergyDamageByChance>
 
         <energyConsumeRule Class="VVRace.EnergyRule_CompositeSum">
@@ -500,7 +500,7 @@
           </rules>
         </energyConsumeRule>
         <energyGenerateRule Class="VVRace.EnergyRule_Sunlight">
-          <energyFromSunlightRange>0~160</energyFromSunlightRange>
+          <energyFromSunlightRange>0~190</energyFromSunlightRange>
         </energyGenerateRule>
       </li>
     </modExtensions>
@@ -561,17 +561,17 @@
 
     <modExtensions>
       <li Class="VVRace.ArtificialPlantModExtension">
-        <germinateWeight>400</germinateWeight>
+        <germinateWeight>100</germinateWeight>
         <germinateRare>true</germinateRare>
 
         <energyCapacity>600</energyCapacity>
         <zeroEnergyDamageByChance>1~3</zeroEnergyDamageByChance>
 
         <energyConsumeRule Class="VVRace.EnergyRule_Constant">
-          <energy>40</energy>
+          <energy>50</energy>
         </energyConsumeRule>
         <energyGenerateRule Class="VVRace.EnergyRule_AdjacentPlant">
-          <energyByAdjacentPlant>40</energyByAdjacentPlant>
+          <energyByAdjacentPlant>45</energyByAdjacentPlant>
         </energyGenerateRule>
       </li>
     </modExtensions>
@@ -628,15 +628,15 @@
 
     <modExtensions>
       <li Class="VVRace.ArtificialPlantModExtension">
-        <germinateWeight>600</germinateWeight>
+        <germinateWeight>125</germinateWeight>
 
-        <energyCapacity>300</energyCapacity>
+        <energyCapacity>450</energyCapacity>
         <zeroEnergyDamageByChance>1~10</zeroEnergyDamageByChance>
 
         <energyConsumeRule Class="VVRace.EnergyRule_Constant">
-          <energy>10</energy>
+          <energy>5</energy>
         </energyConsumeRule>
-        <verbShootEnergy>1</verbShootEnergy>
+        <verbShootEnergy>3</verbShootEnergy>
       </li>
     </modExtensions>
   </ThingDef>
@@ -652,6 +652,7 @@
       <damageDef>Poke</damageDef>
       <damageAmountBase>5</damageAmountBase>
       <armorPenetrationBase>0</armorPenetrationBase>
+      <stoppingPower>1</stoppingPower>
       <speed>24</speed>
     </projectile>
   </ThingDef>
@@ -742,17 +743,17 @@
 
     <modExtensions>
       <li Class="VVRace.ArtificialPlantModExtension">
-        <germinateWeight>200</germinateWeight>
+        <germinateWeight>125</germinateWeight>
         <germinateRare>true</germinateRare>
 
-        <energyCapacity>400</energyCapacity>
+        <energyCapacity>500</energyCapacity>
         <zeroEnergyDamageByChance>1~10</zeroEnergyDamageByChance>
 
         <energyConsumeRule Class="VVRace.EnergyRule_Constant">
-          <energy>10</energy>
+          <energy>5</energy>
         </energyConsumeRule>
 
-        <verbShootEnergy>10</verbShootEnergy>
+        <verbShootEnergy>15</verbShootEnergy>
       </li>
     </modExtensions>
   </ThingDef>

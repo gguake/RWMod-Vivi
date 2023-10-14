@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Verse;
+﻿using Verse;
 
 namespace VVRace
 {
+    public class VVRaceMod : Mod
+    {
+        public VVRaceMod(ModContentPack content) : base(content)
+        {
+            ViviHarmonyPatcher.PatchAll();
+        }
+    }
 }

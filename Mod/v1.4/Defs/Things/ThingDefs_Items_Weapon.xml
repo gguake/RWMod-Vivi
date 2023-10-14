@@ -13,7 +13,7 @@
 
     <techLevel>Medieval</techLevel>
     <statBases>
-      <WorkToMake>1200</WorkToMake>
+      <WorkToMake>1400</WorkToMake>
       <Mass>2</Mass>
     </statBases>
     <equippedStatOffsets>
@@ -64,7 +64,7 @@
         <li>VV_Tools</li>
       </researchPrerequisites>
       <skillRequirements>
-        <Crafting>4</Crafting>
+        <Crafting>2</Crafting>
       </skillRequirements>
       <displayPriority>-500</displayPriority>
     </recipeMaker>
@@ -92,8 +92,9 @@
       <Mass>2</Mass>
     </statBases>
     <equippedStatOffsets>
-      <CleaningSpeed>0.5</CleaningSpeed>
-      <VV_PlantGatherYield>0.5</VV_PlantGatherYield>
+      <CleaningSpeed>1.0</CleaningSpeed>
+      <VV_PlantGatherSpeed>0.25</VV_PlantGatherSpeed>
+      <VV_PlantGatherYield>0.25</VV_PlantGatherYield>
     </equippedStatOffsets>
 
     <thingCategories Inherit="False">
@@ -144,7 +145,7 @@
         <li>VV_Tools</li>
       </researchPrerequisites>
       <skillRequirements>
-        <Crafting>4</Crafting>
+        <Crafting>3</Crafting>
       </skillRequirements>
       <displayPriority>-501</displayPriority>
     </recipeMaker>
