@@ -109,6 +109,11 @@ namespace VVRace
         {
             base.SpawnSetup(map, respawningAfterLoad);
 
+            if (!respawningAfterLoad)
+            {
+                _energyNode.nextRefreshTick = GenTicks.TicksGame + 1;
+            }
+
             var candidates = new HashSet<EnergyFluxNetwork>();
             foreach (var c in GenAdjFast.AdjacentCellsCardinal(this).Where(c => c.InBounds(map)))
             {
@@ -427,7 +432,7 @@ namespace VVRace
         public void AddEnergy(float energy)
         {
             _energyNode.energy = Mathf.Clamp(_energyNode.energy + energy, 0f, ArtificialPlantModExtension.energyCapacity);
-            _energyNode.nextRefreshTick = 0;
+            _energyNode.nextRefreshTick = GenTicks.TicksGame + 1;
         }
 
         public void Notify_TurretVerbShot()
