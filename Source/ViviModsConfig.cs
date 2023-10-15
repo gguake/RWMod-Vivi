@@ -6,7 +6,7 @@ namespace VVRace
     {
         public VVRaceMod(ModContentPack content) : base(content)
         {
-            ViviHarmonyPatcher.PatchAll();
+            ViviHarmonyPatcher.PrePatchAll();
         }
     }
 }

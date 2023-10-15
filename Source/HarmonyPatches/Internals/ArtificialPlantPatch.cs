@@ -154,8 +154,6 @@ namespace VVRace
             var field = AccessTools.Field(typeof(ThoughtWorker_Precept_HasAutomatedTurrets), "automatedTurretDefs");
             var list = field.GetValue(null) as List<ThingDef>;
             var artificialPlants = list.Where(v => typeof(ArtificialPlant).IsAssignableFrom(v.thingClass)).ToList();
-            artificialPlants.ForEach(v => Log.Message($"{v}"));
-
             list.RemoveAll(v => artificialPlants.Contains(v));
         }
     }

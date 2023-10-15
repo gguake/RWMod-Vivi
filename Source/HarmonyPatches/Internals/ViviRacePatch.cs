@@ -132,6 +132,11 @@ namespace VVRace.HarmonyPatches
 
         private static void PawnGenerator_GenerateBodyType_Postfix(Pawn pawn, PawnGenerationRequest request)
         {
+            if (pawn.story.bodyType == BodyTypeDefOf.Baby && pawn.story.bodyType == BodyTypeDefOf.Child)
+            {
+                return;
+            }
+
             if (pawn.kindDef is PawnKindDef_Vivi kindDefExt)
             {
                 if (kindDefExt.isRoyal)
@@ -143,7 +148,7 @@ namespace VVRace.HarmonyPatches
                     }
                 }
 
-                if (kindDefExt.forcedBodyType != null && !pawn.DevelopmentalStage.Juvenile())
+                if (kindDefExt.forcedBodyType != null)
                 {
                     pawn.story.bodyType = kindDefExt.forcedBodyType;
                 }

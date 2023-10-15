@@ -22,6 +22,8 @@
           <bodyTypes>
             <li>Thin</li>
             <li>Female</li>
+						<li>Baby</li>
+						<li>Child</li>
           </bodyTypes>
 
 					<headOffset>(-0.04, -0.05)</headOffset>

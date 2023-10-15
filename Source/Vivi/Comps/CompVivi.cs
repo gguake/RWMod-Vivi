@@ -45,6 +45,18 @@ namespace VVRace
                 {
                     pawn.health.AddHediff(VVHediffDefOf.VV_RoyalVivi);
                 }
+
+                if (pawn.story.bodyType == BodyTypeDefOf.Thin && pawn.DevelopmentalStage.Juvenile())
+                {
+                    if (pawn.DevelopmentalStage.Child())
+                    {
+                        pawn.story.bodyType = BodyTypeDefOf.Child;
+                    }
+                    else if (pawn.DevelopmentalStage.Baby())
+                    {
+                        pawn.story.bodyType = BodyTypeDefOf.Baby;
+                    }
+                }
             }
 
             RefreshHairColor();
