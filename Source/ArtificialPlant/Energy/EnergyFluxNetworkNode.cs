@@ -8,7 +8,6 @@ namespace VVRace
         public ArtificialPlant plant;
         public List<EnergyFluxNetworkNode> connectedNodes = new List<EnergyFluxNetworkNode>();
 
-        public int nextRefreshTick;
         public float energy;
 
         public int LocalEnergyFluxForInspector
@@ -24,7 +23,6 @@ namespace VVRace
 
         public void ExposeData()
         {
-            Scribe_Values.Look(ref nextRefreshTick, "nextRefreshTick");
             Scribe_Values.Look(ref energy, "energy");
         }
     }

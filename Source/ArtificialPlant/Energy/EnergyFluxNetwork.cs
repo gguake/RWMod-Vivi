@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,19 +10,24 @@ namespace VVRace
 {
     public class EnergyFluxNetwork : IEnumerable<ArtificialPlant>
     {
+        private static int HashCounter = 1;
+
         public int NetworkHash { get; private set; }
         public int ShouldRegenerateNetworkTick { get; set; } = -1;
 
         private Dictionary<ArtificialPlant, EnergyFluxNetworkNode> _nodes { get; }
+        private List<EnergyFluxNetworkNode> _nodesList { get; }
         private int _lastRefreshTick;
 
-        private List<ArtificialPlant> _tempNodes = new List<ArtificialPlant>();
+        private List<int> _tempDistributeEnergyNodeCandidateIndices = new List<int>();
+        private List<int> _tempDistributeEnergyNodeIndices = new List<int>();
 
         public EnergyFluxNetwork()
         {
             _nodes = new Dictionary<ArtificialPlant, EnergyFluxNetworkNode>();
+            _nodesList = new List<EnergyFluxNetworkNode>();
 
-            NetworkHash = Rand.Int;
+            NetworkHash = HashCounter++.HashOffset();
         }
 
         public IEnumerator<ArtificialPlant> GetEnumerator()
@@ -45,14 +51,19 @@ namespace VVRace
         public void AddPlant(ArtificialPlant plant, EnergyFluxNetworkNode node)
         {
             _nodes.Add(plant, node);
-            _lastRefreshTick = 0;
+            _nodesList.Add(node);
+            _lastRefreshTick = GenTicks.TicksGame;
         }
 
         public void RemovePlant(ArtificialPlant plant)
         {
-            _nodes.Remove(plant);
+            if (_nodes.TryGetValue(plant, out var node))
+            {
+                _nodesList.Remove(node);
+                _nodes.Remove(plant);
 
-            ShouldRegenerateNetworkTick = GenTicks.TicksGame + 1;
+                ShouldRegenerateNetworkTick = GenTicks.TicksGame + 1;
+            }
         }
 
         public void Tick()
@@ -60,62 +71,60 @@ namespace VVRace
             var tick = GenTicks.TicksGame;
             if (tick > _lastRefreshTick)
             {
+                _tempDistributeEnergyNodeCandidateIndices.Clear();
+
                 float totalOvergeneratedEnergy = 0f;
-                foreach (var kv in _nodes.Where(kv => kv.Value.nextRefreshTick <= tick))
+                for (int i = 0; i < _nodesList.Count; ++i)
                 {
-                    var plant = kv.Key;
-                    var node = kv.Value;
+                    var node = _nodesList[i];
+                    var plant = node.plant;
+                    var extension = plant.ArtificialPlantModExtension;
 
-                    var tickInterval = CalcTickInterval(plant);
-                    var consumed = plant.ArtificialPlantModExtension.energyConsumeRule?.CalcEnergy(plant, tickInterval) ?? 0f;
-                    var generated = plant.ArtificialPlantModExtension.energyGenerateRule?.CalcEnergy(plant, tickInterval) ?? 0f;
+                    var tickInterval = tick - _lastRefreshTick;
+                    var consumed = extension.energyConsumeRule?.CalcEnergy(plant, tickInterval) ?? 0f;
+                    var generated = extension.energyGenerateRule?.CalcEnergy(plant, tickInterval) ?? 0f;
 
-                    node.nextRefreshTick = tick + tickInterval;
-                    node.energy = Mathf.Max(node.energy - consumed + generated, 0f);
+                    var energyCapacity = extension.energyCapacity;
+                    var afterEnergy = node.energy - consumed + generated;
 
-                    var energyCapacity = plant.ArtificialPlantModExtension.energyCapacity;
-                    if (node.energy > energyCapacity)
+                    node.energy = Mathf.Clamp(afterEnergy, 0f, energyCapacity);
+
+                    var overgenerated = afterEnergy - energyCapacity;
+                    if (overgenerated > 0f)
                     {
-                        totalOvergeneratedEnergy += node.energy - energyCapacity;
-                        node.energy = energyCapacity;
+                        totalOvergeneratedEnergy += overgenerated;
+                    }
+                    else
+                    {
+                        _tempDistributeEnergyNodeCandidateIndices.Add(i);
                     }
                 }
 
-                if (totalOvergeneratedEnergy > 0f)
+                if (totalOvergeneratedEnergy > 0f && _tempDistributeEnergyNodeCandidateIndices.Count > 0)
                 {
-                    _tempNodes.Clear();
-                    _tempNodes.AddRange(_nodes.Keys.Where(v => !v.IsFullEnergy));
-
-                    if (_tempNodes.Count > 0)
+                    _tempDistributeEnergyNodeIndices.Clear();
+                    var maxDividedEnergy = totalOvergeneratedEnergy / _tempDistributeEnergyNodeCandidateIndices.Count;
+                    for (int i = 0; i < _tempDistributeEnergyNodeCandidateIndices.Count; ++i)
                     {
-                        var divided = totalOvergeneratedEnergy / _tempNodes.Count;
-                        foreach (var plant in _tempNodes)
+                        var node = _nodesList[_tempDistributeEnergyNodeCandidateIndices[i]];
+                        if (node.plant.ArtificialPlantModExtension.energyCapacity - node.energy >= maxDividedEnergy)
                         {
-                            var node = _nodes[plant];
-                            node.energy = Mathf.Clamp(node.energy + divided, 0f, plant.ArtificialPlantModExtension.energyCapacity);
+                            _tempDistributeEnergyNodeIndices.Add(_tempDistributeEnergyNodeCandidateIndices[i]);
+                        }
+                    }
+
+                    if (_tempDistributeEnergyNodeIndices.Count > 0)
+                    {
+                        var realDividedEnergy = totalOvergeneratedEnergy / _tempDistributeEnergyNodeIndices.Count;
+                        for (int i = 0; i < _tempDistributeEnergyNodeIndices.Count; ++i)
+                        {
+                            var node = _nodesList[_tempDistributeEnergyNodeIndices[i]];
+                            node.energy = Mathf.Clamp(node.energy + realDividedEnergy, 0f, node.plant.ArtificialPlantModExtension.energyCapacity);
                         }
                     }
                 }
 
                 _lastRefreshTick = tick;
-            }
-        }
-
-        private int CalcTickInterval(ArtificialPlant plant)
-        {
-            switch (plant.def.tickerType)
-            {
-                case TickerType.Normal:
-                    return 60;
-
-                case TickerType.Rare:
-                    return GenTicks.TickRareInterval;
-
-                case TickerType.Long:
-                    return GenTicks.TickLongInterval;
-
-                default:
-                    throw new ArgumentException($"invalid ticker type {plant.def.tickerType}");
             }
         }
 
@@ -126,13 +135,14 @@ namespace VVRace
             foreach (var network in networks)
             {
                 _nodes.AddRange(network._nodes);
+                _nodesList.AddRange(network._nodesList);
                 foreach (var node in network._nodes.Values)
                 {
                     node.plant.EnergyFluxNetwork = this;
                 }
             }
 
-            _lastRefreshTick = 0;
+            _lastRefreshTick = GenTicks.TicksGame;
         }
 
         public void SplitNetworks()
