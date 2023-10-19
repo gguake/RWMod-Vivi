@@ -6,7 +6,8 @@ namespace VVRace
 {
     public class WorkGiver_FertilizeArtificialPlant : WorkGiver_Scanner
     {
-        public override ThingRequest PotentialWorkThingRequest => ThingRequest.ForGroup(ThingRequestGroup.BuildingArtificial);
+        // for performance trick
+        public override ThingRequest PotentialWorkThingRequest => ThingRequest.ForGroup(ThingRequestGroup.WithCustomRectForSelector);
 
         public override PathEndMode PathEndMode => PathEndMode.ClosestTouch;
 

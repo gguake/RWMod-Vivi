@@ -43,6 +43,7 @@
     <size>(1,1)</size>
     <stackLimit>1</stackLimit>
 
+    <hasCustomRectForSelector>true</hasCustomRectForSelector>
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
     <thingCategories>
       <li>VV_ArtificialPlant</li>
