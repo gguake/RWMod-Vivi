@@ -331,6 +331,11 @@ namespace VVRace
 
             base.Tick();
 
+            if (Destroyed)
+            {
+                return;
+            }
+
             if (Spawned && EnergyFluxNetwork != null && (Find.TickManager.TicksGame + EnergyFluxNetwork.NetworkHash) % 60 == 0)
             {
                 EnergyFluxNetwork.Tick();
@@ -352,12 +357,23 @@ namespace VVRace
                 {
                     HitPoints = Mathf.Clamp(HitPoints + 1, 0, MaxHitPoints);
                 }
+
+                if (!CanPlaceCell(Position))
+                {
+                    var minified = this.MakeMinified();
+                    GenPlace.TryPlaceThing(minified, Position, Map, ThingPlaceMode.Direct);
+                }
             }
         }
 
         public override void TickRare()
         {
             base.TickRare();
+
+            if (Destroyed)
+            {
+                return;
+            }
 
             if (Spawned && EnergyFluxNetwork != null)
             {
@@ -380,6 +396,12 @@ namespace VVRace
                 {
                     HitPoints = Mathf.Clamp(HitPoints + 1, 0, MaxHitPoints);
                 }
+
+                if (!CanPlaceCell(Position))
+                {
+                    var minified = this.MakeMinified();
+                    GenPlace.TryPlaceThing(minified, Position, Map, ThingPlaceMode.Direct);
+                }
             }
         }
 
@@ -387,9 +409,23 @@ namespace VVRace
         {
             base.TickLong();
 
+            if (Destroyed)
+            {
+                return;
+            }
+
             if (Spawned && EnergyFluxNetwork != null)
             {
                 EnergyFluxNetwork.Tick();
+            }
+
+            if (Spawned)
+            {
+                if (!CanPlaceCell(Position))
+                {
+                    var minified = this.MakeMinified();
+                    GenPlace.TryPlaceThing(minified, Position, Map, ThingPlaceMode.Direct);
+                }
             }
         }
 
@@ -426,6 +462,21 @@ namespace VVRace
         public void AddEnergy(float energy)
         {
             _energyNode.energy = Mathf.Clamp(_energyNode.energy + energy, 0f, ArtificialPlantModExtension.energyCapacity);
+        }
+
+        public bool CanPlaceCell(IntVec3 cell)
+        {
+            var blockingThings = Map.thingGrid.ThingsListAtFast(cell);
+            var onArtificialPlantPot = blockingThings.Any(v => v is ArtificialPlantPot);
+
+            var terrain = cell.GetTerrain(Map);
+            var isWaterPlant = terrain.IsWater && def.terrainAffordanceNeeded != null && terrain.affordances.Contains(def.terrainAffordanceNeeded);
+            if (!onArtificialPlantPot && !isWaterPlant && Map.fertilityGrid.FertilityAt(cell) <= 0f)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public void Notify_TurretVerbShot()

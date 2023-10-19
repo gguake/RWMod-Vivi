@@ -119,7 +119,7 @@
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_UnknownSeed</thingDef>
-        <countRange>30~50</countRange>
+        <countRange>20~30</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_Propolis</thingDef>
@@ -132,7 +132,7 @@
       <li Class="StockGenerator_Tag">
         <tradeTag>VV_Petal</tradeTag>
         <thingDefCountRange>2~4</thingDefCountRange>
-        <countRange>100~200</countRange>
+        <countRange>50~150</countRange>
       </li>
       
       <!-- Drugs -->
@@ -154,7 +154,7 @@
       <!-- Buildings -->
       <li Class="StockGenerator_Tag">
         <tradeTag>VV_ArtificialPlant</tradeTag>
-        <thingDefCountRange>2~6</thingDefCountRange>
+        <thingDefCountRange>2~4</thingDefCountRange>
         <countRange>1~9</countRange>
       </li>
 

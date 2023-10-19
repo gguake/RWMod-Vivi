@@ -1,27 +1,21 @@
-﻿using RimWorld;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 using Verse;
 
 namespace VVRace
 {
     public class TurretPlantTop
     {
-        private const float IdleTurnDegreesPerTick = 0.26f;
-        private const int IdleTurnDuration = 140;
-        private const int IdleTurnIntervalMin = 150;
-        private const int IdleTurnIntervalMax = 350;
+        private const float IdleTurnDegreesPerTick = 0.1f;
+        private const int IdleTurnDuration = 40;
+        private const int IdleTurnIntervalMin = 200;
+        private const int IdleTurnIntervalMax = 400;
 
         private TurretPlant parentTurret;
 
-        private float curRotationInt;
+        private float curRotationInt = Rand.Range(0f, 360f);
         private int ticksUntilIdleTurn;
         private int idleTurnTicksLeft;
-        private bool idleTurnClockwise;
+        private bool idleTurnClockwise = Rand.Bool;
 
         public float CurRotation
         {

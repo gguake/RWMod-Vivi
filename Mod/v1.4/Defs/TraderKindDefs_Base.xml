@@ -76,11 +76,11 @@
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_UnknownSeed</thingDef>
-        <countRange>100~200</countRange>
+        <countRange>20~60</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_Fertilizer</thingDef>
-        <countRange>500~1000</countRange>
+        <countRange>300~1000</countRange>
       </li>
       <li Class="StockGenerator_Tag">
         <tradeTag>VV_Petal</tradeTag>
@@ -136,7 +136,7 @@
       <li Class="StockGenerator_MarketValue">
         <tradeTag>VV_ViviApparel</tradeTag>
         <maxTechLevelGenerate>Medieval</maxTechLevelGenerate>
-        <countRange>4~12</countRange>
+        <countRange>4~10</countRange>
       </li>
       
       <!-- Implants -->
@@ -145,8 +145,8 @@
       <!-- Buildings -->
       <li Class="StockGenerator_Tag">
         <tradeTag>VV_ArtificialPlant</tradeTag>
-        <thingDefCountRange>2~6</thingDefCountRange>
-        <countRange>4~15</countRange>
+        <thingDefCountRange>1~4</thingDefCountRange>
+        <countRange>1~6</countRange>
       </li>
 
       <!-- Exotic -->

@@ -11,21 +11,24 @@ namespace VVRace
             {
                 return false;
             }
+            if (c.InNoBuildEdgeArea(Map))
+            {
+                return new AcceptanceReport("TooCloseToMapEdge".Translate());
+            }
+            if (c.Fogged(Map))
+            {
+                return new AcceptanceReport("CannotPlaceInUndiscovered".Translate());
+            }
 
-            var blockingThings = Map.thingGrid.ThingsListAt(c);
-            bool onArtificialPlantPot = blockingThings.Any(v => v is ArtificialPlantPot);
+            var blockingThings = Map.thingGrid.ThingsListAtFast(c);
+            var onArtificialPlantPot = blockingThings.Any(v => v is ArtificialPlantPot);
 
             foreach (var thing in blockingThings)
             {
-                if (thing.def.category == ThingCategory.Pawn || (thing.def.category == ThingCategory.Building && !(thing is ArtificialPlantPot)))
+                if (thing.def.category == ThingCategory.Building && !(thing is ArtificialPlantPot) && thing.def.IsEdifice())
                 {
                     return new AcceptanceReport("CannotBePlantedHere".Translate() + ": " + "BlockedBy".Translate(thing));
                 }
-                else if (thing.def.category == ThingCategory.Item && thing != ThingToInstall)
-                {
-                    return new AcceptanceReport("CannotBePlantedHere".Translate() + ": " + "BlockedBy".Translate(thing));
-                }
-                
             }
 
             var terrain = c.GetTerrain(Map);
@@ -54,7 +57,7 @@ namespace VVRace
 
                 if (thing is Blueprint_Install blueprint_Install && blueprint_Install.ThingToInstall is ArtificialPlant)
                 {
-                    return "IdenticalThingExists".Translate();
+                    return new AcceptanceReport("IdenticalThingExists".Translate());
                 }
             }
 

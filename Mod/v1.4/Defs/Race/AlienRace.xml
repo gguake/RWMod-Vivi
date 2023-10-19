@@ -319,6 +319,7 @@
         <cannotReceiveThoughts>
           <li>VV_AtePollen</li>
           <li>MySisterDied</li>
+          <li>SleepDisturbed</li>
         </cannotReceiveThoughts>
       </thoughtSettings>
       
