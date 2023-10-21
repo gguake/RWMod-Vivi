@@ -53,4 +53,7 @@
   <VV_MessageGerminateSeedlingSuccess>모종 배양에 성공했습니다. ({0} x{1})</VV_MessageGerminateSeedlingSuccess>
   <VV_MessageGerminateSeedlingFailed>모종 배양에 실패했습니다.</VV_MessageGerminateSeedlingFailed>
   <VV_MessageAncientTerminalWorldtreeDiscovered>고대 세계수의 정보가 담긴 고대 단말기를 찾았습니다!</VV_MessageAncientTerminalWorldtreeDiscovered>
+
+  <VV_AbilityDisabledNoFood>{0_labelShort}는 배고파서 사용할 수 없음</VV_AbilityDisabledNoFood>
+  <VV_AbilityDisabledNoBodyPart>{0_labelShort}의 신체 부위 {1}가 {2}개 부족함</VV_AbilityDisabledNoBodyPart>
 </LanguageData>

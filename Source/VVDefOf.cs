@@ -199,4 +199,10 @@ namespace VVRace
         public static ThingSetMakerDef VV_SettlementRefiningRoomThingSet;
         public static ThingSetMakerDef VV_SettlementCraftingRoomThingSet;
     }
+
+    [DefOf]
+    public static class VVMentalStateDefOf
+    {
+        public static MentalStateDef VV_HornetBerserk;
+    }
 }

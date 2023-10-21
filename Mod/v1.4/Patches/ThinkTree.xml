@@ -11,4 +11,24 @@
       </li>
     </value>
   </Operation>
+  
+  <Operation Class="PatchOperationInsert">
+    <xpath>Defs/ThinkTreeDef[defName="MentalStateCritical"]/thinkRoot/subNodes/li[state="BerserkTrance"]</xpath>
+    <order>Prepend</order>
+    <value>
+      <li Class="ThinkNode_ConditionalMentalState">
+        <state>VV_HornetBerserk</state>
+        <subNodes>
+          <li Class="ThinkNode_Priority">
+            <subNodes>
+              <li Class="JobGiver_Berserk" />
+              <li Class="JobGiver_WanderAnywhere">
+                <maxDanger>Deadly</maxDanger>
+              </li>
+            </subNodes>
+          </li>
+        </subNodes>
+      </li>
+    </value>
+  </Operation>
 </Patch>

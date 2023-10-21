@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <AbilityDef>
+    <defName>VV_Glide</defName>
+    <label>glide</label>
+    <description>.</description>
+    <iconPath>UI/Abilities/Longjump</iconPath>
+    <cooldownTicksRange>10000</cooldownTicksRange>
+    <hostile>false</hostile>
+    <aiCanUse>true</aiCanUse>
+    
+    <verbProperties>
+      <verbClass>Verb_CastAbilityJump</verbClass>
+      <label>jump</label>
+      <violent>false</violent>
+      <forceNormalTimeSpeed>false</forceNormalTimeSpeed>
+      <warmupTime>3.0</warmupTime>
+      <range>20.9</range>
+      <requireLineOfSight>true</requireLineOfSight>
+      <soundCast>Longjump_Jump</soundCast>
+      <soundLanding>Longjump_Land</soundLanding>
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+        <canTargetPawns>false</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+      </targetParams>
+    </verbProperties>
+    <jobDef>CastJump</jobDef>
+
+    <comps>
+      <li Class="VVRace.CompProperties_AbilityFoodCost">
+        <requiredFoods>0.1</requiredFoods>
+      </li>
+      <li Class="VVRace.CompProperties_AbilityRequiresBodyPart">
+        <bodyPartDef>VV_Wing</bodyPartDef>
+        <requiredCount>2</requiredCount>
+      </li>
+    </comps>
+  </AbilityDef>
+</Defs>

@@ -669,10 +669,10 @@
     <drawerType>MapMeshAndRealTime</drawerType>
 
     <statBases>
-      <AccuracyTouch>0.88</AccuracyTouch>
-      <AccuracyShort>0.67</AccuracyShort>
-      <AccuracyMedium>0.22</AccuracyMedium>
-      <AccuracyLong>0.1</AccuracyLong>
+      <AccuracyTouch>0.92</AccuracyTouch>
+      <AccuracyShort>0.77</AccuracyShort>
+      <AccuracyMedium>0.32</AccuracyMedium>
+      <AccuracyLong>0.16</AccuracyLong>
       <RangedWeapon_Cooldown>4.9</RangedWeapon_Cooldown>
       <DeteriorationRate>0</DeteriorationRate>
       <Mass>10</Mass>
@@ -787,10 +787,10 @@
     <drawerType>MapMeshAndRealTime</drawerType>
 
     <statBases>
-      <AccuracyTouch>0.22</AccuracyTouch>
-      <AccuracyShort>0.57</AccuracyShort>
+      <AccuracyTouch>0.52</AccuracyTouch>
+      <AccuracyShort>0.67</AccuracyShort>
       <AccuracyMedium>0.84</AccuracyMedium>
-      <AccuracyLong>0.67</AccuracyLong>
+      <AccuracyLong>0.84</AccuracyLong>
       <RangedWeapon_Cooldown>7.9</RangedWeapon_Cooldown>
       <DeteriorationRate>0</DeteriorationRate>
       <Mass>10</Mass>

@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-  <VV_Vivi.label>비비</VV_Vivi.label>
-  <VV_Vivi.description>.</VV_Vivi.description>
+<VV_Vivi.label>비비</VV_Vivi.label>
+<VV_Vivi.description>.</VV_Vivi.description>
+
+<VV_Vivi.tools.left_fist.label>왼쪽 주먹</VV_Vivi.tools.left_fist.label>
+<VV_Vivi.tools.right_fist.label>오른쪽 주먹</VV_Vivi.tools.right_fist.label>
+<VV_Vivi.tools.teeth.label>이빨</VV_Vivi.tools.teeth.label>
+<VV_Vivi.tools.head.label>머리</VV_Vivi.tools.head.label>
+
 </LanguageData>

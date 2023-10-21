@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
   <VV_ViviTribesman.label>비비 둥지민</VV_ViviTribesman.label>
-  
   <VV_ViviGuard.label>비비 경비원</VV_ViviGuard.label>
-  
   <VV_ViviArcher.label>비비 궁수</VV_ViviArcher.label>
-  
   <VV_RoyalViviLeader.label>로열 비비 지도자</VV_RoyalViviLeader.label>
-  
   <VV_RoyalVivi.label>로열 비비 둥지민</VV_RoyalVivi.label>
-  
   <VV_RoyalViviTrader.label>로열 비비 상인</VV_RoyalViviTrader.label>
 </LanguageData>

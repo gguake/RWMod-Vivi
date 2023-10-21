@@ -188,6 +188,75 @@
               <scaleWithPawnDrawsize>true</scaleWithPawnDrawsize>
               <drawnDesiccated>false</drawnDesiccated>
             </li>
+            
+            <li>
+              <path>Common/Empty</path>
+              <drawSize>1</drawSize>
+              <shaderType>CutoutComplex</shaderType>
+							<inFrontOfBody>false</inFrontOfBody>
+              <offsets>
+								<north>
+									<layerOffset>-0.26</layerOffset>
+								</north>
+                <south>
+									<layerOffset>0.1</layerOffset>
+                </south>
+								<east>
+									<layerOffset>0.2</layerOffset>
+								</east>
+								<west>
+									<layerOffset>-0.2</layerOffset>
+								</west>
+              </offsets>
+              <bodyPart>Torso</bodyPart>
+              <drawWithoutPart>true</drawWithoutPart>
+              <scaleWithPawnDrawsize>true</scaleWithPawnDrawsize>
+              <drawnDesiccated>false</drawnDesiccated>
+              <drawnInBed>false</drawnInBed>
+              
+              <hediffGraphics>
+                <VV_GliderWing>
+                  <path>Things/Pawn/Vivi/BodyParts/UpperWingL</path>
+                  <ageGraphics>
+                    <HumanlikeBaby>Common/Empty</HumanlikeBaby>
+                    <HumanlikeChild>Common/Empty</HumanlikeChild>
+                    <HumanlikeChild_Vivi>Common/Empty</HumanlikeChild_Vivi>
+                  </ageGraphics>
+                </VV_GliderWing>
+              </hediffGraphics>
+            </li>
+            
+            <li>
+              <path>Common/Empty</path>
+              <drawSize>1</drawSize>
+              <shaderType>CutoutComplex</shaderType>
+							<inFrontOfBody>false</inFrontOfBody>
+              <offsets>
+								<north>
+									<layerOffset>-0.26</layerOffset>
+								</north>
+                <south>
+									<layerOffset>0.1</layerOffset>
+                </south>
+              </offsets>
+              <bodyPart>Torso</bodyPart>
+              <drawWithoutPart>true</drawWithoutPart>
+              <scaleWithPawnDrawsize>true</scaleWithPawnDrawsize>
+              <drawnDesiccated>false</drawnDesiccated>
+              <drawnInBed>false</drawnInBed>
+              
+              <hediffGraphics>
+                <VV_GliderWing>
+                  <path>Things/Pawn/Vivi/BodyParts/UpperWingR</path>
+                  <ageGraphics>
+                    <HumanlikeBaby>Common/Empty</HumanlikeBaby>
+                    <HumanlikeChild>Common/Empty</HumanlikeChild>
+                    <HumanlikeChild_Vivi>Common/Empty</HumanlikeChild_Vivi>
+                  </ageGraphics>
+                </VV_GliderWing>
+              </hediffGraphics>
+            </li>
+            
           </bodyAddons>
 
           <oldHairAgeCurve>

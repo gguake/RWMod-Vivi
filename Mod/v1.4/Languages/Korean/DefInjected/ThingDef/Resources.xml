@@ -16,8 +16,7 @@
   <VV_GrassFiber.description>다양한 식물의 길다란 잎을 가공해 만든 섬유입니다. 주변의 흔한 풀에서 얻을 수 있지만 그다지 튼튼하지 않으면서 가공이 어렵습니다.</VV_GrassFiber.description>
 
   <VV_Lifestrand.label>생체가닥</VV_Lifestrand.label>
-  <VV_Lifestrand.description>악마가닥을 살아있는 잎과 꽃가루로 튼튼하게 가공한 옷감입니다.
-\n보통의 악마가닥 천보다 매우 튼튼하지만 그만큼 가공하기도 어렵습니다.
+  <VV_Lifestrand.description>악마가닥을 살아있는 잎과 꽃가루로 튼튼하게 가공한 옷감입니다. 보통의 악마가닥 천보다 매우 튼튼하지만 그만큼 가공하기도 어렵습니다.
 \n섬유가 마치 살아있는것 같다고 해서 생체가닥으로 불립니다.</VV_Lifestrand.description>
 
   <VV_UnknownSeed.label>미확인 씨앗</VV_UnknownSeed.label>
@@ -27,4 +26,7 @@
   <VV_Fertilizer.description>분해된 유기물을 흙과 배합해 만든 비비 특제 비료입니다. 각종 원예 작업에 사용되며 고대 식물의 에너지를 채우는 용도로도 사용할 수 있습니다.
 \n비료 1개당 10의 에너지를 채워줍니다.</VV_Fertilizer.description>
 
+  <VV_TitanicHornetWing.label>거대 말벌 날개 조각</VV_TitanicHornetWing.label>
+  <VV_TitanicHornetWing.description>거대 말벌의 날개 조각입니다. 얻기 힘들지만 특수한 성분으로 가볍고 튼튼해 고급 장비 재료로 사용됩니다.
+\n상온에서는 부패하므로 냉동 보관을 권장합니다.</VV_TitanicHornetWing.description>
 </LanguageData>

@@ -79,6 +79,9 @@
         public const string RewardCoronationLabel = "VV_RewardCoronationLabel";
         public const string RewardCoronation = "VV_RewardCoronation";
 
+        public const string AbilityDisabledNoFood = "VV_AbilityDisabledNoFood";
+        public const string AbilityDisabledNoBodyPart = "VV_AbilityDisabledNoBodyPart";
+
         public const string ViviGerminateWindowJobTab = "ViviGerminateWindowJobTab";
         public const string ViviGerminateWindowScheduleTab = "ViviGerminateWindowScheduleTab";
         public const string ViviGerminateWindowScheduleTabTip = "ViviGerminateWindowScheduleTabTip";

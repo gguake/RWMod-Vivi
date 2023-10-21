@@ -12,6 +12,12 @@
       <li>HearingSource</li>
       <li>TalkingSource</li>
     </tags>
+    <hitChanceFactors>
+      <li>
+        <key>Blunt</key>
+        <value>0</value>
+      </li>
+    </hitChanceFactors>
   </BodyPartDef>
 
   <BodyPartDef>
@@ -19,11 +25,11 @@
     <label>wing</label>
     <hitPoints>15</hitPoints>
     <frostbiteVulnerability>3</frostbiteVulnerability>
-    <skinCovered>true</skinCovered>
+    <skinCovered>false</skinCovered>
     <canScarify>true</canScarify>
     <beautyRelated>true</beautyRelated>
     <tags>
-      <li>MovingLimbSegment</li>
+      <li>MovingLimbCore</li>
     </tags>
   </BodyPartDef>
 

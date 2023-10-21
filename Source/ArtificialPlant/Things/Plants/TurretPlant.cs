@@ -221,7 +221,7 @@ namespace VVRace
             _currentTarget = TryFindNewTarget();
             if (_currentTarget.IsValid)
             {
-                float randomInRange = def.building.turretBurstWarmupTime.RandomInRange;
+                var randomInRange = def.building.turretBurstWarmupTime.RandomInRange;
                 if (randomInRange > 0f)
                 {
                     _burstWarmupTicksLeft = randomInRange.SecondsToTicks();
@@ -245,13 +245,14 @@ namespace VVRace
         {
             var attackTargetSearcher = this;
             var faction = attackTargetSearcher.Thing.Faction;
-            float range = AttackVerb.verbProps.range;
+            var range = AttackVerb.verbProps.range;
 
-            if (Rand.Value < 0.5f && AttackVerb.ProjectileFliesOverhead() && faction.HostileTo(Faction.OfPlayer) && base.Map.listerBuildings.allBuildingsColonist.Where(delegate (Building x)
+            if (Rand.Value < 0.5f && AttackVerb.ProjectileFliesOverhead() && faction.HostileTo(Faction.OfPlayer) && Map.listerBuildings.allBuildingsColonist.Where(building =>
             {
-                float num = AttackVerb.verbProps.EffectiveMinRange(x, this);
-                float num2 = x.Position.DistanceToSquared(base.Position);
-                return num2 > num * num && num2 < range * range;
+                var verbRange = AttackVerb.verbProps.EffectiveMinRange(building, this);
+                var distance = building.Position.DistanceToSquared(Position);
+                return verbRange * verbRange < distance && distance < range * range;
+
             }).TryRandomElement(out var result))
             {
                 return result;
@@ -280,9 +281,10 @@ namespace VVRace
                 {
                     return false;
                 }
+
                 if (AttackVerb.ProjectileFliesOverhead())
                 {
-                    RoofDef roofDef = Map.roofGrid.RoofAt(thing.Position);
+                    var roofDef = Map.roofGrid.RoofAt(thing.Position);
                     if (roofDef != null && roofDef.isThickRoof)
                     {
                         return false;
@@ -313,6 +315,7 @@ namespace VVRace
             {
                 return def.building.turretBurstCooldownTime;
             }
+
             return AttackVerb.verbProps.defaultCooldownTime;
         }
 
@@ -324,7 +327,7 @@ namespace VVRace
 
         private void UpdateGunVerbs()
         {
-            List<Verb> allVerbs = _gun.TryGetComp<CompEquippable>().AllVerbs;
+            var allVerbs = _gun.TryGetComp<CompEquippable>().AllVerbs;
             for (int i = 0; i < allVerbs.Count; i++)
             {
                 Verb verb = allVerbs[i];

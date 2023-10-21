@@ -55,4 +55,23 @@
 		</addedPartProps>
 	</HediffDef>
 
+	<HediffDef ParentName="ImplantHediffBase">
+		<defName>VV_GliderWing</defName>
+		<label>glider wing</label>
+		<labelNoun>glider wing</labelNoun>
+		<description>.</description>
+    <descriptionHyperlinks><RecipeDef>VV_InstallGliderWing</RecipeDef></descriptionHyperlinks>
+		<spawnThingOnRemoved>VV_TitanicHornetWing</spawnThingOnRemoved>
+		<addedPartProps>
+			<solid>true</solid>
+		</addedPartProps>
+    <comps>
+      <li Class="HediffCompProperties_GiveAbility">
+        <abilityDefs>
+          <li>VV_Glide</li>
+        </abilityDefs>
+      </li>
+    </comps>
+	</HediffDef>
+
 </Defs>

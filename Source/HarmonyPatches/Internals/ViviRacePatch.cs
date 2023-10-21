@@ -95,6 +95,10 @@ namespace VVRace.HarmonyPatches
                 original: AccessTools.PropertyGetter(typeof(Settlement), nameof(Settlement.MapGeneratorDef)),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(Settlement_MapGeneratorDef_getter_Postfix)));
 
+            harmony.Patch(
+                original: AccessTools.Method(typeof(MentalStateWorker), nameof(MentalStateWorker.StateCanOccur)),
+                postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(MentalStateWorker_StateCanOccur_Postfix)));
+
             Log.Message("!! [ViViRace] race patch complete");
         }
 
@@ -404,6 +408,20 @@ namespace VVRace.HarmonyPatches
             if (!__instance.Faction.IsPlayer && __instance.Faction.def.allowedCultures.Contains(VVCultureDefOf.VV_ViviCulture))
             {
                 __result = VVMapGeneratorDefOf.VV_Base_ViviFaction;
+            }
+        }
+
+        private static void MentalStateWorker_StateCanOccur_Postfix(ref bool __result, Pawn pawn, MentalStateDef ___def)
+        {
+            if (__result && pawn.InMentalState)
+            {
+                if (___def == MentalStateDefOf.Manhunter || ___def == MentalStateDefOf.ManhunterPermanent)
+                {
+                    if (pawn.MentalStateDef == VVMentalStateDefOf.VV_HornetBerserk)
+                    {
+                        __result = false;
+                    }
+                }
             }
         }
     }

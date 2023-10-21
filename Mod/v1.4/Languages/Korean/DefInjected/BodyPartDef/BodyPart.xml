@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
   <VV_Antennae.label>더듬이</VV_Antennae.label>
-  
   <VV_Wing.label>날개</VV_Wing.label>
+  
+  <VV_HornetWing.label>날개</VV_HornetWing.label>
+  <VV_HornetClaw.label>발톱</VV_HornetClaw.label>
 </Defs>

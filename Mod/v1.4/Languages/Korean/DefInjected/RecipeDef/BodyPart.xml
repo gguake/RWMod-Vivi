@@ -15,4 +15,8 @@
   <VV_InstallBionicWing.label>생체공학 날개 이식</VV_InstallBionicWing.label>
   <VV_InstallBionicWing.description>생체공학 날개를 이식합니다.</VV_InstallBionicWing.description>
   <VV_InstallBionicWing.jobString>생체공학 날개 이식 중.</VV_InstallBionicWing.jobString>
+  
+  <VV_InstallGliderWing.label>글라이더 날개 이식</VV_InstallGliderWing.label>
+  <VV_InstallGliderWing.description>글라이더 날개를 이식합니다.</VV_InstallGliderWing.description>
+  <VV_InstallGliderWing.jobString>글라이더 날개 이식 중.</VV_InstallGliderWing.jobString>
 </LanguageData>

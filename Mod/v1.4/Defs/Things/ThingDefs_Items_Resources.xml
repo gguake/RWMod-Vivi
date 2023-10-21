@@ -313,4 +313,49 @@
       <li>VV_ViviProduct</li>
     </tradeTags>
   </ThingDef>
+  
+  <!-- 거대 말벌 날개 -->
+  <ThingDef ParentName="ResourceBase">
+    <defName>VV_TitanicHornetWing</defName>
+    <label>titanic hornet wing</label>
+    <description>.</description>
+    <descriptionHyperlinks>
+      <RecipeDef>VV_InstallGliderWing</RecipeDef>
+      <HediffDef>VV_GliderWing</HediffDef>
+    </descriptionHyperlinks>
+    <tickerType>Rare</tickerType>
+
+    <graphicData>
+      <texPath>Things/Item/VV_HornetWing</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <thingCategories>
+      <li>VV_ViviResource</li>
+    </thingCategories>
+
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Grain_Drop</soundInteract>
+    <soundDrop>Grain_Drop</soundDrop>
+    
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <Mass>3</Mass>
+      <MarketValue>240</MarketValue>
+      <MaxHitPoints>100</MaxHitPoints>
+      <Flammability>1.0</Flammability>
+      <DeteriorationRate>1</DeteriorationRate>
+    </statBases>
+    <stackLimit>25</stackLimit>
+    
+    <comps>
+      <li Class="CompProperties_Rottable">
+        <daysToRotStart>5</daysToRotStart>
+        <rotDestroys>true</rotDestroys>
+      </li>
+    </comps>
+
+    <tradeTags>
+      <li>VV_ViviExotic</li>
+    </tradeTags>
+  </ThingDef>
 </Defs>

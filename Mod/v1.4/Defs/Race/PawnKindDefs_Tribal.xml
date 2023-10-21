@@ -19,7 +19,7 @@
   <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
     <defName>VV_ViviTribesman</defName>
     <label>vivi tribesman</label>
-    <combatPower>50</combatPower>
+    <combatPower>70</combatPower>
     <isFighter>false</isFighter>
     <itemQuality>Poor</itemQuality>
 
@@ -40,7 +40,7 @@
   <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
     <defName>VV_ViviGuard</defName>
     <label>vivi guard</label>
-    <combatPower>100</combatPower>
+    <combatPower>150</combatPower>
     <isFighter>true</isFighter>
     <itemQuality>Normal</itemQuality>
 
@@ -75,7 +75,7 @@
   <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
     <defName>VV_ViviArcher</defName>
     <label>vivi archer</label>
-    <combatPower>90</combatPower>
+    <combatPower>130</combatPower>
     <isFighter>true</isFighter>
     <itemQuality>Normal</itemQuality>
 

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+<VV_TitanicHornet.label>거대 말벌</VV_TitanicHornet.label>
+<VV_TitanicHornet.description>기이한 형태를 가진 거대한 말벌. 빠른 속도와 튼튼한 껍질을 가지고 있으며 강력한 턱과 두 발에 달린 거대한 크기의 발톱으로 적들을 찢어버립니다. 다만 오염과 열에는 취약하며 의외로 고통을 잘 견디지 못합니다.
+\n스카리아균과 공생하는 특성이 있어 스카리아를 항상 보균하고있지만 시간이 지나도 죽지 않는 특징이 있습니다. 스카리아를 치료하더라도 의식이 돌아오면 곧바로 다시 감염되어 폭주하기 시작합니다.
+\n거대 말벌의 날개는 굉장히 튼튼하면서 가벼워 유용한 소재이지만 일반적으로는 스카리아에 의해 사체가 급격히 썩어버리므로 온전히 얻기 어렵습니다.</VV_TitanicHornet.description>
+
+<VV_TitanicHornet.tools.jaw.label>턱</VV_TitanicHornet.tools.jaw.label>
+<VV_TitanicHornet.tools.head.label>머리</VV_TitanicHornet.tools.head.label>
+<VV_TitanicHornet.tools.left_claw.label>왼쪽 발톱</VV_TitanicHornet.tools.left_claw.label>
+<VV_TitanicHornet.tools.right_claw.label>오른쪽 발톱</VV_TitanicHornet.tools.right_claw.label>
+
+</LanguageData>

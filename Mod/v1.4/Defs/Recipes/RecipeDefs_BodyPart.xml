@@ -124,4 +124,39 @@
 		<addsHediff>VV_BionicWing</addsHediff>
 	</RecipeDef>
 
+	<RecipeDef ParentName="SurgeryInstallImplantBase">
+		<defName>VV_InstallGliderWing</defName>
+		<label>install glider wing</label>
+		<description>Install a glider wing.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_TitanicHornetWing</ThingDef>
+      <HediffDef>VV_GliderWing</HediffDef>
+    </descriptionHyperlinks>
+		<workerClass>Recipe_InstallArtificialBodyPart</workerClass>
+		<jobString>Installing glider wing.</jobString>
+		<workAmount>3000</workAmount>
+    <recipeUsers Inherit="False">
+      <li>VV_Vivi</li>
+    </recipeUsers>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>VV_TitanicHornetWing</li>
+					</thingDefs>
+				</filter>
+				<count>6</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>VV_TitanicHornetWing</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+    <appliedOnFixedBodyParts>
+      <li>Torso</li>
+    </appliedOnFixedBodyParts>
+		<addsHediff>VV_GliderWing</addsHediff>
+	</RecipeDef>
+
 </Defs>

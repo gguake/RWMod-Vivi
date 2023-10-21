@@ -61,4 +61,12 @@
 		<visible>false</visible>
 		<sittingOffset>0.18</sittingOffset>
 	</LifeStageDef>
+  
+  <LifeStageDef>
+    <defName>VV_TitanicHornetAdult</defName>
+    <label>adult</label>
+    <visible>false</visible>
+    <milkable>true</milkable>
+  </LifeStageDef>
+
 </Defs>
