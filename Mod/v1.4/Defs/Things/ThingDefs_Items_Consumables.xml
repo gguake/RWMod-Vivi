@@ -108,7 +108,7 @@
       <Mass>0.05</Mass>
       <MaxHitPoints>40</MaxHitPoints>
       <Flammability>0.8</Flammability>
-      <MarketValue>2.5</MarketValue>
+      <MarketValue>2.4</MarketValue>
       <Nutrition>0.12</Nutrition>
     </statBases>
     <stackLimit>75</stackLimit>

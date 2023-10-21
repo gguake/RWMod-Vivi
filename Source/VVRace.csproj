@@ -106,6 +106,7 @@
     <Compile Include="ArtificialPlant\AI\WorkGiver_ManageGerminator.cs" />
     <Compile Include="ArtificialPlant\UI\ITab_GerminateSchedule.cs" />
     <Compile Include="CompAbility_RequiresBodyPart.cs" />
+    <Compile Include="CompFerment.cs" />
     <Compile Include="Egg\Comps\CompViviEggLayer.cs" />
     <Compile Include="Hornet\HediffGiver_ConstantScaria.cs" />
     <Compile Include="Hornet\JobGiver_HornetBerserk.cs" />

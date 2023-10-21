@@ -78,7 +78,7 @@ namespace VVRace
             var sb = new StringBuilder();
             if (FreezerComp != null)
             {
-                sb.Append(LocalizeTexts.InspectorViviEggProperTemperature.Translate(FreezerComp.Props.minSafeTemperature.ToStringTemperature(), FreezerComp.Props.maxSafeTemperature.ToStringTemperature()));
+                sb.Append(LocalizeTexts.InspectorProperTemperature.Translate(FreezerComp.Props.minSafeTemperature.ToStringTemperature(), FreezerComp.Props.maxSafeTemperature.ToStringTemperature()));
             }
 
             if (!TemperatureDamaged)
