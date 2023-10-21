@@ -38,30 +38,31 @@ namespace VVRace
             }
         }
 
-        private Dictionary<ThingDef, int> _germinateReservedThings = null;
-        private Dictionary<ThingDef, int> _germinateIngredients = null;
         public IReadOnlyDictionary<ThingDef, int> GerminateIngredients
         {
             get
             {
-                if (_germinateIngredients == null)
+                if (_currentSchedule == null || !_currentSchedule.IsFixedGerminate)
                 {
-                    _germinateIngredients = new Dictionary<ThingDef, int>();
-                    foreach (var tdc in GerminatorModExtension.germinateIngredients)
-                    {
-                        _germinateIngredients.Add(tdc.thingDef, tdc.count);
-                    }
+                    return GerminatorModExtension.GerminateIngredients;
                 }
-
-                return _germinateIngredients;
+                else
+                {
+                    var dict = GerminatorModExtension.FixedGerminateIngredients.ToDictionary(v => v.Key, v => v.Value);
+                    dict.Add(_currentSchedule.FixedGerminateResult, 1);
+                    return dict;
+                }
             }
         }
+
+        private Dictionary<ThingDef, int> _germinateReservedThings = null;
 
         public IEnumerable<(ThingDef def, int count)> RequiredGerminateIngredients
         {
             get
             {
-                foreach (var ingredient in GerminateIngredients)
+                var germinateIngredients = GerminateIngredients;
+                foreach (var ingredient in germinateIngredients)
                 {
                     _germinateReservedThings.TryGetValue(ingredient.Key, out var reserved);
 
@@ -101,7 +102,8 @@ namespace VVRace
 
         public int GetGerminateRequiredCount(ThingDef def)
         {
-            if (GerminateIngredients.TryGetValue(def, out var ingredientCount))
+            var germinateIngredients = GerminateIngredients;
+            if (germinateIngredients.TryGetValue(def, out var ingredientCount))
             {
                 if (_germinateReservedThings != null && _germinateReservedThings.TryGetValue(def, out var reserved))
                 {
@@ -127,7 +129,6 @@ namespace VVRace
             Scribe_Deep.Look(ref _lastCompletedSchedule, "lastCompletedSchedule");
 
             Scribe_Collections.Look(ref _germinateReservedThings, "germinateReservedThings", LookMode.Def, LookMode.Value);
-            Scribe_Collections.Look(ref _germinateIngredients, "germinateIngredients", LookMode.Def, LookMode.Value);
 
             Scribe_Values.Look(ref _canWithdrawProduct, "canWithdrawProduct");
             Scribe_Defs.Look(ref _productThingDef, "productThingDef");

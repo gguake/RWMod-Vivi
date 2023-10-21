@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <ThingDef ParentName="MinifiedThing">
+    <defName>MinifiedArtificialPlant</defName>
+    <label>minified artificial plant</label>
+    <thingClass>VVRace.MinifiedArtificialPlant</thingClass>
+    
+    <statBases>
+      <Mass>3</Mass>
+      <Flammability>1</Flammability>
+    </statBases>
+  </ThingDef>
+
+  <ThingDef Abstract="True" Name="VV_ArtificialPlantBase">
+    <category>Building</category>
+    <thingClass>VVRace.ArtificialPlant</thingClass>
+    <tickerType>Rare</tickerType>
+    <selectable>true</selectable>
+    <neverMultiSelect>true</neverMultiSelect>
+
+    <drawerType>MapMeshOnly</drawerType>
+    <graphicData>
+      <shaderType>CutoutPlant</shaderType>
+      <drawSize>(1.2, 1.2)</drawSize>
+    </graphicData>
+    <altitudeLayer>BuildingOnTop</altitudeLayer>
+    
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Metal_Drop</soundDrop>
+
+    <minifiedDef>MinifiedArtificialPlant</minifiedDef>
+    <pathCostIgnoreRepeat>false</pathCostIgnoreRepeat>
+
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <Mass>3</Mass>
+      <Flammability>1</Flammability>
+
+      <WorkToBuild>1800</WorkToBuild>
+      <ArmorRating_Blunt>0.5</ArmorRating_Blunt>
+    </statBases>
+    <size>(1,1)</size>
+    <stackLimit>1</stackLimit>
+
+    <hasCustomRectForSelector>true</hasCustomRectForSelector>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <thingCategories>
+      <li>VV_ArtificialPlant</li>
+    </thingCategories>
+
+    <placeWorkers>
+      <li>VVRace.PlaceWorker_AllowArtificialPlantPot</li>
+    </placeWorkers>
+
+    <building>
+      <deconstructible>true</deconstructible>
+      <claimable>false</claimable>
+      
+      <allowWireConnection>false</allowWireConnection>
+      <allowAutoroof>false</allowAutoroof>
+      <repairable>false</repairable>
+      <artificialForMeditationPurposes>false</artificialForMeditationPurposes>
+      <canPlaceOverWall>false</canPlaceOverWall>
+
+      <uninstallWork>1200</uninstallWork>
+    </building>
+    
+    <tradeTags>
+      <li>VV_ArtificialPlant</li>
+    </tradeTags>
+    <tradeability>All</tradeability>
+  </ThingDef>
+
+  <ThingDef Abstract="True" Name="VV_ArtificialPlantProductive" ParentName="VV_ArtificialPlantBase">
+    <building>
+      <uninstallWork>250</uninstallWork>
+    </building>
+    
+    <tradeTags>
+      <li>VV_ArtificialPlantProductive</li>
+    </tradeTags>
+  </ThingDef>
+
+  <ThingDef Abstract="True" Name="VV_ArtificialPlantCombat" ParentName="VV_ArtificialPlantBase">
+    <statBases>
+      <Mass>9</Mass>
+    </statBases>
+
+    <building>
+      <uninstallWork>1000</uninstallWork>
+    </building>
+    
+    <tradeTags>
+      <li>VV_ArtificialPlantCombat</li>
+    </tradeTags>
+  </ThingDef>
+
+</Defs>

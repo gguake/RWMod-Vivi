@@ -23,6 +23,7 @@ namespace VVRace
         public FloatRange bonusAddGerminateResult = FloatRange.Zero;
         public FloatRange bonusMultiplierGerminateSuccessChance = FloatRange.Zero;
         public FloatRange bonusMultiplierGerminateRareChance = FloatRange.Zero;
+        public FloatRange bonusMutateAnotherArtificialPlantChance = FloatRange.Zero;
 
         public override void PostLoad()
         {

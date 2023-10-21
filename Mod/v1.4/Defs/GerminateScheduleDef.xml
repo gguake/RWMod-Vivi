@@ -18,14 +18,15 @@
     <uiColor>(0.64, 0.54, 0.45)</uiColor>
     <uiIconPath>UI/Icons/GerminateSchedule/Fertilizer</uiIconPath>
 
-    <workAmount>700</workAmount>
+    <workAmount>900</workAmount>
     <ingredients>
-      <VV_Fertilizer>25</VV_Fertilizer>
+      <VV_Fertilizer>30</VV_Fertilizer>
     </ingredients>
 
     <germinateJob>VV_ManageSeedlingRepotting</germinateJob>
 
-    <bonusAddGerminateResult>0.5~1.5</bonusAddGerminateResult>
+    <bonusAddGerminateResult>0.0~8.6</bonusAddGerminateResult>
+    <bonusMultiplierGerminateSuccessChance>0.0~0.5</bonusMultiplierGerminateSuccessChance>
   </VVRace.GerminateScheduleDef>
   
   <VVRace.GerminateScheduleDef>
@@ -37,14 +38,14 @@
     <uiTextColor>(1.0, 1.0, 1.0)</uiTextColor>
     <uiIconPath>UI/Icons/GerminateSchedule/Propolis</uiIconPath>
     
-    <workAmount>500</workAmount>
+    <workAmount>300</workAmount>
     <ingredients>
-      <VV_Propolis>8</VV_Propolis>
+      <VV_Propolis>7</VV_Propolis>
     </ingredients>
     
     <germinateJob>VV_ManageSeedlingPestControl</germinateJob>
 
-    <bonusMultiplierGerminateSuccessChance>1.0~1.4</bonusMultiplierGerminateSuccessChance>
+    <bonusMultiplierGerminateSuccessChance>0.0~1.75</bonusMultiplierGerminateSuccessChance>
   </VVRace.GerminateScheduleDef>
   
   <VVRace.GerminateScheduleDef>
@@ -56,11 +57,12 @@
     <uiTextColor>(1.0, 1.0, 1.0)</uiTextColor>
     <uiIconPath>UI/Icons/GerminateSchedule/Weeding</uiIconPath>
 
-    <workAmount>3000</workAmount>
+    <workAmount>4000</workAmount>
     
     <germinateJob>VV_ManageSeedlingWeeding</germinateJob>
 
-    <bonusMultiplierGerminateRareChance>1.0~1.2</bonusMultiplierGerminateRareChance>
+    <bonusMultiplierGerminateSuccessChance>0.0~0.8</bonusMultiplierGerminateSuccessChance>
+    <bonusMultiplierGerminateRareChance>0.0~0.5</bonusMultiplierGerminateRareChance>
   </VVRace.GerminateScheduleDef>
   
   <VVRace.GerminateScheduleDef>
@@ -79,7 +81,9 @@
     
     <germinateJob>VV_ManageSeedlingInjectLuciferium</germinateJob>
 
-    <bonusMultiplierGerminateSuccessChance>0.7~0.7</bonusMultiplierGerminateSuccessChance>
-    <bonusMultiplierGerminateRareChance>1.7~1.7</bonusMultiplierGerminateRareChance>
+    <bonusAddGerminateResult>0.0~11.2</bonusAddGerminateResult>
+    <bonusMultiplierGerminateSuccessChance>0~-0.98</bonusMultiplierGerminateSuccessChance>
+    <bonusMultiplierGerminateRareChance>0.0~2.2</bonusMultiplierGerminateRareChance>
+    <bonusMutateAnotherArtificialPlantChance>0.0~0.95</bonusMutateAnotherArtificialPlantChance>
   </VVRace.GerminateScheduleDef>
 </Defs>

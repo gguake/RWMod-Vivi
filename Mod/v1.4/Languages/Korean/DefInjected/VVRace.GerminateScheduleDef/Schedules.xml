@@ -4,18 +4,15 @@
   <VV_DoNothing.description>아무 작업도 하지 않습니다.</VV_DoNothing.description>
 
   <VV_Repotting.label>흙 교체</VV_Repotting.label>
-  <VV_Repotting.description>배양대의 흙과 투입된 비료를 교체합니다.
-\n배양에 성공했을때 얻을 수 있는 모종의 수량이 증가합니다.</VV_Repotting.description>
+  <VV_Repotting.description>배양대의 흙과 투입된 비료를 교체합니다.</VV_Repotting.description>
 
   <VV_PestControl.label>병충해 방지</VV_PestControl.label>
-  <VV_PestControl.description>병충해를 방지하기 위해 프로폴리스를 사용해 배양대의 청결을 유지합니다.
-\n배양에 실패할 확률이 감소합니다.</VV_PestControl.description>
+  <VV_PestControl.description>병충해를 방지하기 위해 프로폴리스를 사용해 배양대의 청결을 유지합니다.</VV_PestControl.description>
 
   <VV_Weeding.label>잡초 제거</VV_Weeding.label>
-  <VV_Weeding.description>불필요한 잡초를 제거합니다. 의도치 않게 흙에 포함된 야생 식물들의 싹도 잡초로 간주됩니다.
-\n배양에 성공했을때 희귀한 식물이 나타날 확률이 증가합니다.</VV_Weeding.description>
+  <VV_Weeding.description>불필요한 잡초를 제거합니다. 의도치 않게 흙에 포함된 야생 식물들의 싹도 잡초로 간주됩니다.</VV_Weeding.description>
 
   <VV_InjectLuciferium.label>루시페륨 투여</VV_InjectLuciferium.label>
-  <VV_InjectLuciferium.description>토양에 루시페륨을 투여합니다. 투입된 메카나이트의 의도치 않은 동작에 의해 씨앗이 예측 불가능하게 변형됩니다.
-\n배양에 실패할 확률이 증가하지만 배양에 성공했을때 희귀한 식물이 나타날 확률이 크게 증가합니다.</VV_InjectLuciferium.description>
+  <VV_InjectLuciferium.description>루시페륨을 투여해 불안정하지만 극적인 효과를 유도합니다.
+\n삽목으로 기존의 고대 식물을 배양하는 경우 전혀 다른 식물로 변이할 확률이 추가됩니다.</VV_InjectLuciferium.description>
 </LanguageData>
