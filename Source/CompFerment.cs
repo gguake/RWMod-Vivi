@@ -128,5 +128,29 @@ namespace VVRace
 
             return sb.ToString().TrimEndNewlines();
         }
+
+        public override IEnumerable<Gizmo> CompGetGizmosExtra()
+        {
+            if (DebugSettings.godMode)
+            {
+                var command_addTemperatureDamaged = new Command_Action();
+                command_addTemperatureDamaged.defaultLabel = "DEV: Temperature Damaged +10%";
+                command_addTemperatureDamaged.action = () =>
+                {
+                    _temperatureDamagedProgress += 0.1f;
+                };
+
+                yield return command_addTemperatureDamaged;
+
+                var command_addFermentProgress = new Command_Action();
+                command_addFermentProgress.defaultLabel = "DEV: Ferment Progress +10%";
+                command_addFermentProgress.action = () =>
+                {
+                    _fermentedProgress += 0.1f;
+                };
+
+                yield return command_addFermentProgress;
+            }
+        }
     }
 }
