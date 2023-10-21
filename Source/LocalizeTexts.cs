@@ -38,6 +38,8 @@
         public const string LetterViviEggHatchedNoParent = "VV_LetterViviEggHatchedNoParent";
         public const string LetterRoyalViviGrownLabel = "VV_LetterRoyalViviGrownLabel";
         public const string LetterRoyalViviGrown = "VV_LetterRoyalViviGrown";
+        public const string LetterIncidentHornetSwarmArrivedLabel = "VV_LetterIncidentHornetSwarmArrivedLabel";
+        public const string LetterIncidentHornetSwarmArrived = "VV_LetterIncidentHornetSwarmArrived";
 
         public const string CommandFertilizeAutoActivated = "VV_CommandFertilizeAutoActivated";
         public const string CommandFertilizeAutoActivatedDesc = "VV_CommandFertilizeAutoActivatedDesc";

@@ -107,9 +107,11 @@
     <Compile Include="ArtificialPlant\UI\ITab_GerminateSchedule.cs" />
     <Compile Include="CompAbility_RequiresBodyPart.cs" />
     <Compile Include="Egg\Comps\CompViviEggLayer.cs" />
-    <Compile Include="HediffGiver_ConstantScaria.cs" />
+    <Compile Include="Hornet\HediffGiver_ConstantScaria.cs" />
+    <Compile Include="Hornet\JobGiver_HornetBerserk.cs" />
     <Compile Include="MapGeneration\GenSteps\GenStep_MechanoidScoutingBase.cs" />
     <Compile Include="MapGeneration\GenSteps\GenStep_ViviSettlementTurretGarden.cs" />
+    <Compile Include="Hornet\IncidentWorker_HornetSwarm.cs" />
     <Compile Include="MapGeneration\SymbolResolvers\SymbolResolver_ArtificialPlant.cs" />
     <Compile Include="MapGeneration\SymbolResolvers\SymbolResolver_ThingSetStorage.cs" />
     <Compile Include="MapGeneration\SymbolResolvers\SymbolResolver_TurretGarden.cs" />
@@ -186,9 +188,8 @@
     <Compile Include="MapGeneration\SymbolResolvers\SymbolResolver_ViviEggSpawn.cs" />
     <Compile Include="MapGeneration\SymbolResolvers\SymbolResolver_ViviSettlement.cs" />
     <Compile Include="MapGeneration\SymbolResolverUtility.cs" />
-    <Compile Include="MentalState_HornetBerserk.cs" />
+    <Compile Include="Hornet\MentalState_HornetBerserk.cs" />
     <Compile Include="RecipeModExtension.cs" />
-    <Compile Include="SpecialThingFilterWorker_Dessicated.cs" />
     <Compile Include="TextureCache.cs" />
     <Compile Include="Utility\ViviUtility.cs" />
     <Compile Include="Vivi\Bill_ProductionWithFoodDrain.cs" />

@@ -36,7 +36,7 @@
         <capacities>
           <li>Bite</li>
         </capacities>
-        <power>22</power>
+        <power>21</power>
         <cooldownTime>1.8</cooldownTime>
         <linkedBodyPartsGroup>Mouth</linkedBodyPartsGroup>
       </li>
@@ -57,7 +57,7 @@
           <li>Scratch</li>
           <li>Stab</li>
         </capacities>
-        <power>29</power>
+        <power>30</power>
         <cooldownTime>2.4</cooldownTime>
         <linkedBodyPartsGroup>VV_LeftClaw</linkedBodyPartsGroup>
         <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
@@ -69,7 +69,7 @@
           <li>Scratch</li>
           <li>Stab</li>
         </capacities>
-        <power>29</power>
+        <power>30</power>
         <cooldownTime>2.4</cooldownTime>
         <linkedBodyPartsGroup>VV_RightClaw</linkedBodyPartsGroup>
         <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
@@ -88,13 +88,13 @@
 
       <body>VV_TitanicHornet</body>
       <baseBodySize>3.5</baseBodySize>
-      <baseHungerRate>4.0</baseHungerRate>
+      <baseHungerRate>8.0</baseHungerRate>
       <baseHealthScale>7.0</baseHealthScale>
       <useMeatFrom>Megaspider</useMeatFrom>
       <wildness>1.0</wildness>
       <petness>0.0</petness>
 
-      <lifeExpectancy>10</lifeExpectancy>
+      <lifeExpectancy>15</lifeExpectancy>
       <trainability>None</trainability>
       <showTrainables>false</showTrainables>
       <hideTrainingTab>true</hideTrainingTab>

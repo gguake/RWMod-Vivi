@@ -21,11 +21,38 @@
         <subNodes>
           <li Class="ThinkNode_Priority">
             <subNodes>
+              <li Class="ThinkNode_PrioritySorter">
+                <subNodes>
+                  <li Class="JobGiver_GetFood">
+                    <minCategory>Starving</minCategory>
+                  </li>
+                </subNodes>
+              </li>
+              <li Class="VVRace.JobGiver_HornetBerserk" />
+              <li Class="ThinkNode_ConditionalExitTimedOut">
+                <subNodes>
+                  <li Class="ThinkNode_Tagger">
+                    <tagToGive>Misc</tagToGive>
+                    <subNodes>
+                      <li Class="JobGiver_ExitMapBest">
+                        <defaultLocomotion>Walk</defaultLocomotion>     
+                      </li>
+                    </subNodes>
+                  </li>
+                </subNodes>
+              </li>
+              <li Class="JobGiver_WanderAnywhere">
+                <maxDanger>Deadly</maxDanger>
+              </li>
+            </subNodes>
+            <!--
+            <subNodes>
               <li Class="JobGiver_Berserk" />
               <li Class="JobGiver_WanderAnywhere">
                 <maxDanger>Deadly</maxDanger>
               </li>
             </subNodes>
+            -->
           </li>
         </subNodes>
       </li>

@@ -107,6 +107,8 @@ namespace VVRace
 
         public static ThingDef HandTailoringBench;
         public static ThingDef FueledSmithy;
+
+        public static ThingDef VV_TitanicHornet;
     }
 
     [DefOf]
@@ -114,6 +116,8 @@ namespace VVRace
     {
         public static PawnKindDef VV_PlayerVivi;
         public static PawnKindDef VV_PlayerExiledRoyalVivi;
+
+        public static PawnKindDef VV_TitanicHornet;
     }
 
     [DefOf]

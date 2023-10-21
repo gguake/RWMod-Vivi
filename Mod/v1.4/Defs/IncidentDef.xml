@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  
+  <IncidentDef>
+    <defName>VV_TitanicHornetSwarm</defName>
+    <label>hornet swarm</label>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <workerClass>VVRace.IncidentWorker_HornetSwarm</workerClass>
+    <baseChance>0.8</baseChance>
+    <category>ThreatBig</category>
+    <pointsScaleable>true</pointsScaleable>
+    <tale>ManhunterPack</tale>
+    <letterHyperlinkHediffDefs>
+      <li>Scaria</li>
+    </letterHyperlinkHediffDefs>
+  </IncidentDef>
+  
+  <IncidentDef>
+    <defName>VV_TitanicHornetSwarmVivi</defName>
+    <label>hornet swarm (vivi)</label>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <workerClass>VVRace.IncidentWorker_HornetSwarm_Vivi</workerClass>
+    <baseChance>2.8</baseChance>
+    <category>ThreatBig</category>
+    <pointsScaleable>true</pointsScaleable>
+    <tale>ManhunterPack</tale>
+    <letterHyperlinkHediffDefs>
+      <li>Scaria</li>
+    </letterHyperlinkHediffDefs>
+  </IncidentDef>
+</Defs>
