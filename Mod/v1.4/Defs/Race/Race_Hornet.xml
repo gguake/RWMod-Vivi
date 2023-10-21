@@ -14,7 +14,7 @@
     <label>titanic hornet</label>
     <description>.</description>
     <statBases>
-      <MoveSpeed>6.5</MoveSpeed>
+      <MoveSpeed>6.8</MoveSpeed>
       <PsychicSensitivity>0</PsychicSensitivity>
       <ComfyTemperatureMin>-20</ComfyTemperatureMin>
       <ComfyTemperatureMax>36</ComfyTemperatureMax>
@@ -37,7 +37,7 @@
           <li>Bite</li>
         </capacities>
         <power>21</power>
-        <cooldownTime>1.8</cooldownTime>
+        <cooldownTime>1.5</cooldownTime>
         <linkedBodyPartsGroup>Mouth</linkedBodyPartsGroup>
       </li>
       <li>
@@ -45,7 +45,7 @@
         <capacities>
           <li>Blunt</li>
         </capacities>
-        <power>9</power>
+        <power>12</power>
         <cooldownTime>2</cooldownTime>
         <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
         <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
@@ -58,10 +58,10 @@
           <li>Stab</li>
         </capacities>
         <power>30</power>
-        <cooldownTime>2.4</cooldownTime>
+        <cooldownTime>2</cooldownTime>
         <linkedBodyPartsGroup>VV_LeftClaw</linkedBodyPartsGroup>
         <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
-        <armorPenetration>0.32</armorPenetration>
+        <armorPenetration>0.36</armorPenetration>
       </li>
       <li>
         <label>right claw</label>
@@ -70,10 +70,10 @@
           <li>Stab</li>
         </capacities>
         <power>30</power>
-        <cooldownTime>2.4</cooldownTime>
+        <cooldownTime>2</cooldownTime>
         <linkedBodyPartsGroup>VV_RightClaw</linkedBodyPartsGroup>
         <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
-        <armorPenetration>0.32</armorPenetration>
+        <armorPenetration>0.36</armorPenetration>
       </li>
     </tools>
 
@@ -89,7 +89,7 @@
       <body>VV_TitanicHornet</body>
       <baseBodySize>3.5</baseBodySize>
       <baseHungerRate>8.0</baseHungerRate>
-      <baseHealthScale>7.0</baseHealthScale>
+      <baseHealthScale>6.7</baseHealthScale>
       <useMeatFrom>Megaspider</useMeatFrom>
       <wildness>1.0</wildness>
       <petness>0.0</petness>

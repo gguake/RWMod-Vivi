@@ -52,6 +52,7 @@ namespace VVRace
         {
             if (Ruined)
             {
+                parent.TakeDamage(new DamageInfo(DamageDefOf.Rotting, Rand.Range(1f, 3f)));
                 return;
             }
 

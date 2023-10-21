@@ -18,7 +18,7 @@
     <statBases>
       <MaxHitPoints>50</MaxHitPoints>
       <WorkToMake>2400</WorkToMake>
-      <MarketValue>30</MarketValue>
+      <MarketValue>10</MarketValue>
       <Mass>1.5</Mass>
       <Flammability>0</Flammability>
     </statBases>
@@ -56,6 +56,8 @@
         <li>Brewery</li>
       </recipeUsers>
     </recipeMaker>
+    
+    <tradeability>None</tradeability>
   </ThingDef>
 
   <ThingDef ParentName="DrugBase">
@@ -156,5 +158,9 @@
       </li>
     </tools>
     <allowedArchonexusCount>50</allowedArchonexusCount>
+    
+    <tradeTags>
+      <li>VV_ViviProduct</li>
+    </tradeTags>
   </ThingDef>
 </Defs>

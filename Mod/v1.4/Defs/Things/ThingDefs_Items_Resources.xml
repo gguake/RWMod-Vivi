@@ -340,7 +340,7 @@
     <useHitPoints>true</useHitPoints>
     <statBases>
       <Mass>3</Mass>
-      <MarketValue>240</MarketValue>
+      <MarketValue>200</MarketValue>
       <MaxHitPoints>100</MaxHitPoints>
       <Flammability>1.0</Flammability>
       <DeteriorationRate>1</DeteriorationRate>
