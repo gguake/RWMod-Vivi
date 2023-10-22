@@ -10,7 +10,7 @@
 
   <VV_FertilizeArtificialPlant.reportString>TargetA에 비료를 주는 중.</VV_FertilizeArtificialPlant.reportString>
 
-  <VV_HaulGerminatingIngredient.reportString>TargetA를 TargetB로 운반 중.</VV_HaulGerminatingIngredient.reportString>
+  <VV_HaulGerminatingIngredient.reportString>TargetB를 TargetA로 운반 중.</VV_HaulGerminatingIngredient.reportString>
 
   <VV_ManageSeedlingRepotting.reportString>모종의 흙을 교체하는 중.</VV_ManageSeedlingRepotting.reportString>
   <VV_ManageSeedlingPestControl.reportString>모종 배양대를 청소하는 중.</VV_ManageSeedlingPestControl.reportString>

@@ -7,16 +7,8 @@ using Verse;
 
 namespace VVRace
 {
-    public enum GerminateScheduleJob
-    {
-        None,
-        Repotting,
-        PestControl,
-        Weeding,
-    }
-
     [StaticConstructorOnStartup]
-    public class Building_SeedlingGerminator : Building
+    public class Building_SeedlingGerminator : Building, IThingHolder
     {
         public GerminateSchedule CurrentSchedule => _currentSchedule;
         public GerminateSchedule LastProcessedSchedule => _lastCompletedSchedule;
@@ -38,6 +30,11 @@ namespace VVRace
             }
         }
 
+        private ThingOwner _resourceContainer;
+
+        /// <summary>
+        /// 필요한 총 재료
+        /// </summary>
         public IReadOnlyDictionary<ThingDef, int> GerminateIngredients
         {
             get
@@ -55,8 +52,9 @@ namespace VVRace
             }
         }
 
-        private Dictionary<ThingDef, int> _germinateReservedThings = null;
-
+        /// <summary>
+        /// 현재 부족한 재료
+        /// </summary>
         public IEnumerable<(ThingDef def, int count)> RequiredGerminateIngredients
         {
             get
@@ -64,11 +62,10 @@ namespace VVRace
                 var germinateIngredients = GerminateIngredients;
                 foreach (var ingredient in germinateIngredients)
                 {
-                    _germinateReservedThings.TryGetValue(ingredient.Key, out var reserved);
-
-                    if (reserved < ingredient.Value)
+                    var reservedCount = GetGerminateReservedCount(ingredient.Key);
+                    if (reservedCount < ingredient.Value)
                     {
-                        yield return (ingredient.Key, ingredient.Value - reserved);
+                        yield return (ingredient.Key, ingredient.Value - reservedCount);
                     }
                 }
             }
@@ -100,21 +97,45 @@ namespace VVRace
         }
         private int _productRemainedCount;
 
+        public Building_SeedlingGerminator()
+        {
+            _resourceContainer = new ThingOwner<Thing>(this, oneStackOnly: false);
+        }
+
+        public ThingOwner GetDirectlyHeldThings()
+        {
+            return _resourceContainer;
+        }
+
+        public void GetChildHolders(List<IThingHolder> outChildren)
+        {
+            ThingOwnerUtility.AppendThingHoldersFromThings(outChildren, GetDirectlyHeldThings());
+        }
+
         public int GetGerminateRequiredCount(ThingDef def)
         {
             var germinateIngredients = GerminateIngredients;
             if (germinateIngredients.TryGetValue(def, out var ingredientCount))
             {
-                if (_germinateReservedThings != null && _germinateReservedThings.TryGetValue(def, out var reserved))
-                {
-                    if (ingredientCount - reserved < 0) { Log.Warning($"invalid germinate ingredients: {ingredientCount} {reserved}"); }
-                    return Mathf.Max(ingredientCount - reserved, 0);
-                }
+                var reservedCount = GetGerminateReservedCount(def);
 
-                return ingredientCount;
+                if (ingredientCount - reservedCount < 0) { Log.Warning($"invalid germinate ingredients: {ingredientCount} {reservedCount}"); }
+                return Mathf.Max(ingredientCount - reservedCount, 0);
             }
 
             return 0;
+        }
+
+        public int GetGerminateReservedCount(ThingDef def)
+        {
+            if (def.Minifiable)
+            {
+                return _resourceContainer.Where(v => v.GetInnerIfMinified().def == def).Sum(v => v.stackCount);
+            }
+            else
+            {
+                return _resourceContainer.Where(v => v.def == def).Sum(v => v.stackCount);
+            }
         }
 
         private static readonly Texture2D GerminateCommandTex = ContentFinder<Texture2D>.Get("UI/Commands/VV_Germinate");
@@ -128,7 +149,7 @@ namespace VVRace
             Scribe_Deep.Look(ref _currentSchedule, "currentSchedule");
             Scribe_Deep.Look(ref _lastCompletedSchedule, "lastCompletedSchedule");
 
-            Scribe_Collections.Look(ref _germinateReservedThings, "germinateReservedThings", LookMode.Def, LookMode.Value);
+            Scribe_Deep.Look(ref _resourceContainer, "resourceContainer");
 
             Scribe_Values.Look(ref _canWithdrawProduct, "canWithdrawProduct");
             Scribe_Defs.Look(ref _productThingDef, "productThingDef");
@@ -138,6 +159,11 @@ namespace VVRace
             {
                 _currentSchedule?.ResolveBuildingDef(def);
                 _lastCompletedSchedule?.ResolveBuildingDef(def);
+
+                if (_resourceContainer == null)
+                {
+                    _resourceContainer = new ThingOwner<Thing>(this, oneStackOnly: false);
+                }
             }
         }
 
@@ -155,12 +181,12 @@ namespace VVRace
                             if (sb.Length > 0) { sb.AppendLine(); }
                             sb.Append(LocalizeTexts.InspectorViviGerminatorReserved.Translate());
 
-                            if (GerminatorModExtension.germinateIngredients?.Count > 0)
+                            if (GerminateIngredients?.Count > 0)
                             {
-                                foreach (var tdc in GerminatorModExtension.germinateIngredients)
+                                foreach (var kv in GerminateIngredients)
                                 {
                                     if (sb.Length > 0) { sb.AppendLine(); }
-                                    sb.Append($"{tdc.thingDef.LabelCap}: {(_germinateReservedThings.TryGetValue(tdc.thingDef, out var count) ? count : 0)}/{tdc.count}");
+                                    sb.Append($"{kv.Key.LabelCap}: {GetGerminateReservedCount(kv.Key)}/{kv.Value}");
                                 }
                             }
                         }
@@ -330,20 +356,17 @@ namespace VVRace
 
                 if (CurrentSchedule.Stage == GerminateStage.GerminateInProgress)
                 {
-                    var vectors = this.OccupiedRect().Cells.Select(v => v.ToVector3ShiftedWithAltitude(def.Altitude)).ToList();
-                    vectors.Add(this.TrueCenter());
-
-                    var drawSize = 0.35f;
-                    foreach (var vector in vectors)
+                    if (CurrentSchedule.IsFixedGerminate)
                     {
-                        var zero = vector;
+                        var drawSize = 0.5f;
+                        var zero = this.TrueCenter();
                         if (zero.z - 0.5f < Position.z)
                         {
                             zero.z += (Position.z - zero.z) * 0.3f;
                         }
 
                         var isFlipUV = Rand.Bool;
-                        var material = ThingDefOf.Plant_Grass.graphic.MatSingle;
+                        var material = CurrentSchedule.FixedGerminateResult.graphic.MatSingle;
                         Graphic.TryGetTextureAtlasReplacementInfo(material, def.category.ToAtlasGroup(), isFlipUV, vertexColors: false, out material, out var uvs, out var _);
 
                         var colors = new Color32[4];
@@ -361,6 +384,41 @@ namespace VVRace
                             colors: colors,
                             topVerticesAltitudeBias: 0.1f,
                             uvzPayload: this.HashOffset() % 1024);
+                    }
+                    else
+                    {
+                        var vectors = this.OccupiedRect().Cells.Select(v => v.ToVector3ShiftedWithAltitude(def.Altitude)).ToList();
+                        vectors.Add(this.TrueCenter());
+
+                        var drawSize = 0.35f;
+                        foreach (var vector in vectors)
+                        {
+                            var zero = vector;
+                            if (zero.z - 0.5f < Position.z)
+                            {
+                                zero.z += (Position.z - zero.z) * 0.3f;
+                            }
+
+                            var isFlipUV = Rand.Bool;
+                            var material = ThingDefOf.Plant_Grass.graphic.MatSingle;
+                            Graphic.TryGetTextureAtlasReplacementInfo(material, def.category.ToAtlasGroup(), isFlipUV, vertexColors: false, out material, out var uvs, out var _);
+
+                            var colors = new Color32[4];
+                            colors[1].a = (colors[2].a = 25);
+                            colors[0].a = (colors[3].a = 0);
+
+                            Printer_Plane.PrintPlane(
+                                size: new Vector2(drawSize, drawSize),
+                                layer: layer,
+                                center: zero,
+                                mat: material,
+                                rot: 0f,
+                                flipUv: isFlipUV,
+                                uvs: uvs,
+                                colors: colors,
+                                topVerticesAltitudeBias: 0.1f,
+                                uvzPayload: this.HashOffset() % 1024);
+                        }
                     }
                 }
                 else if (CurrentSchedule.Stage == GerminateStage.GerminateComplete || CurrentSchedule.Stage == GerminateStage.GerminateComplete)
@@ -407,25 +465,15 @@ namespace VVRace
 
         public void AddThings(Thing thing)
         {
-            var requiredCount = GetGerminateRequiredCount(thing.def);
+            var requiredCount = GetGerminateRequiredCount(thing.GetInnerIfMinified().def);
             if (requiredCount > 0)
             {
-                int count = Mathf.Min(requiredCount, thing.stackCount);
-                thing.SplitOff(count).Destroy();
-
-                if (_germinateReservedThings.TryGetValue(thing.def, out var reservedCount))
-                {
-                    _germinateReservedThings[thing.def] = reservedCount + count;
-                }
-                else
-                {
-                    _germinateReservedThings.Add(thing.def, count);
-                }
+                _resourceContainer.TryAddOrTransfer(thing, requiredCount, canMergeWithExistingStacks: true);
             }
 
             if (!RequiredGerminateIngredients.Any())
             {
-                _germinateReservedThings = null;
+                _resourceContainer.ClearAndDestroyContents();
 
                 CurrentSchedule.StartGerminate();
                 Notify_RefreshDrawer();
@@ -435,32 +483,13 @@ namespace VVRace
         public void ReserveSchedule(GerminateSchedule schedule)
         {
             _currentSchedule = schedule;
-            _germinateReservedThings = new Dictionary<ThingDef, int>();
         }
 
         public void CancelSchedule()
         {
             _currentSchedule = null;
-
-            if (_germinateReservedThings != null)
-            {
-                foreach (var kv in _germinateReservedThings)
-                {
-                    var maxStackCount = kv.Key.stackLimit;
-                    int stackCount = kv.Value;
-                    while (stackCount > 0)
-                    {
-                        var count = Mathf.Min(maxStackCount, stackCount);
-                        var thing = ThingMaker.MakeThing(kv.Key);
-                        thing.stackCount = count;
-                        stackCount -= count;
-
-                        GenSpawn.Spawn(thing, Position, Map);
-                    }
-                }
-
-                _germinateReservedThings = null;
-            }
+            _resourceContainer.TryDropAll(Position, Map, ThingPlaceMode.Near);
+            _resourceContainer.ClearAndDestroyContents();
         }
 
         public void Clear()

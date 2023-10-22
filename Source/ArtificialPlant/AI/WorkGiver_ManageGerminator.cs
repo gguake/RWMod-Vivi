@@ -91,6 +91,7 @@ namespace VVRace
                             if (ingredient != null)
                             {
                                 var job = JobMaker.MakeJob(def.germinateJob, germinator, ingredient);
+                                job.count = ingredient.stackCount;
                                 return job;
                             }
                             else
@@ -125,18 +126,37 @@ namespace VVRace
         {
             foreach (var tuple in germinator.RequiredGerminateIngredients)
             {
-                var target = GenClosest.ClosestThingReachable(
-                    pawn.Position,
-                    pawn.Map,
-                    ThingRequest.ForDef(tuple.def),
-                    PathEndMode.ClosestTouch,
-                    TraverseParms.For(pawn),
-                    9999f,
-                    thing => !thing.IsForbidden(pawn) && pawn.CanReserve(thing));
-
-                if (target != null)
+                if (tuple.def.Minifiable)
                 {
-                    return target;
+                    var target = GenClosest.ClosestThingReachable(
+                        pawn.Position,
+                        pawn.Map,
+                        ThingRequest.ForGroup(ThingRequestGroup.MinifiedThing),
+                        PathEndMode.ClosestTouch,
+                        TraverseParms.For(pawn),
+                        9999f,
+                        thing => !thing.IsForbidden(pawn) && pawn.CanReserve(thing) && thing.GetInnerIfMinified().def == tuple.def);
+
+                    if (target != null)
+                    {
+                        return target;
+                    }
+                }
+                else
+                {
+                    var target = GenClosest.ClosestThingReachable(
+                        pawn.Position,
+                        pawn.Map,
+                        ThingRequest.ForDef(tuple.def),
+                        PathEndMode.ClosestTouch,
+                        TraverseParms.For(pawn),
+                        9999f,
+                        thing => !thing.IsForbidden(pawn) && pawn.CanReserve(thing));
+
+                    if (target != null)
+                    {
+                        return target;
+                    }
                 }
             }
 

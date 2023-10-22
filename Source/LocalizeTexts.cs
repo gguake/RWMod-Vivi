@@ -52,6 +52,9 @@
         public const string CommandCanWithdrawProduct = "VV_CommandCanWithdrawProduct";
         public const string CommandCanWithdrawProductDesc = "VV_CommandCanWithdrawProductDesc";
 
+        public const string FloatMenuOptionDefaultGerminate = "VV_FloatMenuOptionDefaultGerminate";
+        public const string FloatMenuOptionFixedGerminate = "VV_FloatMenuOptionFixedGerminate";
+
         public const string JobFailReasonNoHarvestablePlants = "VV_JobFailReasonNoHarvestablePlants";
         public const string JobFailReasonNoHarvestablePollenFilths = "VV_JobFailReasonNoHarvestablePollenFilths";
         public const string JobFailReasonNotVivi = "VV_JobFailReasonNotVivi";
@@ -94,5 +97,6 @@
         public const string ViviGerminateWindowBonusCount = "ViviGerminateWindowBonusCount";
         public const string ViviGerminateWindowBonusSuccessChance = "ViviGerminateWindowBonusSuccessChance";
         public const string ViviGerminateWindowBonusRareChance = "ViviGerminateWindowBonusRareChance";
+        public const string ViviGerminateWindowBonusMutateAnotherArtificialPlantChance = "ViviGerminateWindowBonusMutateAnotherArtificialPlantChance";
     }
 }

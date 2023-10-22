@@ -39,7 +39,10 @@ namespace VVRace
             }
         }
 
+        [Unsaved]
         private Dictionary<ThingDef, int> _germinateIngredients = null;
+
+        [Unsaved]
         private Dictionary<ThingDef, int> _fixedGerminateIngredients = null;
 
         public List<ThingDefCountClass> germinateIngredients;

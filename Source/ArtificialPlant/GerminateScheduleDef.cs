@@ -25,6 +25,9 @@ namespace VVRace
         public FloatRange bonusMultiplierGerminateRareChance = FloatRange.Zero;
         public FloatRange bonusMutateAnotherArtificialPlantChance = FloatRange.Zero;
 
+        public SimpleCurve curveQualityMinBySkillLevel;
+        public SimpleCurve curveQualityMaxBySkillLevel;
+
         public override void PostLoad()
         {
             base.PostLoad();

@@ -17,18 +17,6 @@ namespace VVRace
 
     public class GerminateSchedule : IExposable, IEnumerable<GerminateScheduleDef>
     {
-        public const int TotalScheduleCount = 6;
-
-        public bool CanStopInstantly => _germinateNextManageTick == 0;
-
-        public int TicksToCompleteGerminate => Mathf.Max(_germinateCompleteTick - GenTicks.TicksGame, 0);
-
-        public bool CanManageJob => Stage == GerminateStage.GerminateInProgress && GenTicks.TicksGame >= _germinateNextManageTick;
-        public bool HasNextManageJob => _currentScheduleIndex < TotalScheduleCount && _germinateNextManageTick < _germinateCompleteTick;
-        public int TicksToNextManageJob => Mathf.Max(_germinateNextManageTick - GenTicks.TicksGame, 0);
-
-        public GerminateScheduleDef CurrentManageScheduleDef => Stage == GerminateStage.GerminateInProgress && _currentScheduleIndex < TotalScheduleCount ? _schedules[_currentScheduleIndex] : null;
-
         private GerminatorModExtension _defModExtension;
         public GerminatorModExtension GerminatorModExtension
         {
@@ -42,6 +30,19 @@ namespace VVRace
                 return _defModExtension;
             }
         }
+
+        public const int TotalScheduleCount = 6;
+        public static int TotalGerminateDays = TotalScheduleCount;
+
+        public bool CanStopInstantly => _germinateNextManageTick == 0;
+
+        public int TicksToCompleteGerminate => Mathf.Max(_germinateCompleteTick - GenTicks.TicksGame, 0);
+
+        public bool CanManageJob => Stage == GerminateStage.GerminateInProgress && GenTicks.TicksGame >= _germinateNextManageTick;
+        public bool HasNextManageJob => _currentScheduleIndex < TotalScheduleCount && _germinateNextManageTick < _germinateCompleteTick;
+        public int TicksToNextManageJob => Mathf.Max(_germinateNextManageTick - GenTicks.TicksGame, 0);
+
+        public GerminateScheduleDef CurrentManageScheduleDef => Stage == GerminateStage.GerminateInProgress && _currentScheduleIndex < TotalScheduleCount ? _schedules[_currentScheduleIndex] : null;
 
         public float ExpectedGerminateBonusCount
         {
@@ -68,15 +69,16 @@ namespace VVRace
         {
             get
             {
-                return 1f + _schedules.Sum(v => v.bonusMutateAnotherArtificialPlantChance.LerpThroughRange(1f / TotalScheduleCount));
+                return _schedules.Sum(v => v.bonusMutateAnotherArtificialPlantChance.LerpThroughRange(1f / TotalScheduleCount));
             }
         }
 
         public bool IsFixedGerminate => _fixedGerminateResult != null;
         public ThingDef FixedGerminateResult => _fixedGerminateResult;
+        private ThingDef _fixedGerminateResult;
 
-        private GerminateStage _stage = GerminateStage.None;
         public GerminateStage Stage => _stage;
+        private GerminateStage _stage = GerminateStage.None;
 
         public int CurrentScheduleNumber => _currentScheduleIndex + 1;
 
@@ -86,18 +88,17 @@ namespace VVRace
         private int _currentScheduleIndex = 0;
         private int _germinateNextManageTick;
         private int _germinateCompleteTick;
-        private ThingDef _fixedGerminateResult = null;
 
         private ThingDef _buildingDef;
-
 
         public GerminateSchedule()
         {
         }
 
-        public GerminateSchedule(ThingDef buildingDef)
+        public GerminateSchedule(ThingDef buildingDef, ThingDef fixedGerminateResult = null)
         {
             _buildingDef = buildingDef;
+            _fixedGerminateResult = fixedGerminateResult;
         }
 
         public GerminateScheduleDef this[int index]
@@ -119,7 +120,7 @@ namespace VVRace
 
         public GerminateSchedule Clone()
         {
-            var schedule = new GerminateSchedule(_buildingDef);
+            var schedule = new GerminateSchedule(_buildingDef, _fixedGerminateResult);
             schedule._schedules = _schedules.ToList();
             schedule._scheduleQuality = _scheduleQuality.ToList();
             schedule._currentScheduleIndex = _currentScheduleIndex;
@@ -178,7 +179,7 @@ namespace VVRace
 
             _seed = Rand.Int;
             _germinateNextManageTick = GenTicks.TicksGame + GerminatorModExtension.scheduleCooldown;
-            _germinateCompleteTick = GenTicks.TicksGame + 24 * 2500 * (TotalScheduleCount + 1);
+            _germinateCompleteTick = GenTicks.TicksGame + 24 * 2500 * TotalGerminateDays;
             _stage = GerminateStage.GerminateInProgress;
 
             _currentScheduleIndex = 0;
@@ -191,13 +192,15 @@ namespace VVRace
         public void AdvanceGerminateSchedule(Pawn actor, Building_SeedlingGerminator germinator)
         {
             var plantSkillLevel = actor.skills.GetSkill(SkillDefOf.Plants).Level;
-            var range = new FloatRange(Mathf.Clamp01(plantSkillLevel * 0.05f), Mathf.Clamp01(0.5f + plantSkillLevel * 0.05f));
-            AdvanceGerminateSchedule(germinator, range.RandomInRange);
+
+            var min = _schedules[_currentScheduleIndex].curveQualityMinBySkillLevel.Evaluate(plantSkillLevel);
+            var max = _schedules[_currentScheduleIndex].curveQualityMaxBySkillLevel.Evaluate(plantSkillLevel);
+            AdvanceGerminateSchedule(germinator, Rand.Range(min, max));
         }
 
         public void AdvanceGerminateSchedule(Building_SeedlingGerminator germinator, float quality = 1f)
         {
-            _scheduleQuality[_currentScheduleIndex] = Mathf.Clamp(quality, 0.01f, 1f);
+            _scheduleQuality[_currentScheduleIndex] = Mathf.Clamp(quality, 0.001f, 1f);
 
             _currentScheduleIndex++;
             _germinateNextManageTick = GenTicks.TicksGame + GerminatorModExtension.scheduleCooldown;
@@ -221,7 +224,7 @@ namespace VVRace
                     continue;
                 }
 
-                var quality = _scheduleQuality[i] / TotalScheduleCount;
+                var quality = Mathf.Clamp01(_scheduleQuality[i] / TotalScheduleCount);
                 if (!qualityDict.ContainsKey(def))
                 {
                     qualityDict.Add(def, quality);
@@ -232,10 +235,11 @@ namespace VVRace
                 }
             }
 
-            float bonusProductCount = qualityDict.Sum(kv => kv.Key.bonusAddGerminateResult.LerpThroughRange(kv.Value));
-            float bonusSuccessChanceMultiplier = 1f + qualityDict.Sum(kv => kv.Key.bonusMultiplierGerminateSuccessChance.LerpThroughRange(kv.Value));
-            float bonusRareChanceMultiplier = 1f + qualityDict.Sum(kv => kv.Key.bonusMultiplierGerminateRareChance.LerpThroughRange(kv.Value));
-            float bonusMutateAnotherArtificialPlantChance = 1f + qualityDict.Sum(kv => kv.Key.bonusMutateAnotherArtificialPlantChance.LerpThroughRange(kv.Value));
+            // 결과가 음수라면 퀄리티 값을 반대로 적용
+            float bonusProductCount = qualityDict.Sum(kv => kv.Key.bonusAddGerminateResult.LerpThroughRange(kv.Key.bonusAddGerminateResult.max >= 0 ? kv.Value : 1f - kv.Value));
+            float bonusSuccessChanceMultiplier = 1f + qualityDict.Sum(kv => kv.Key.bonusMultiplierGerminateSuccessChance.LerpThroughRange(kv.Key.bonusAddGerminateResult.max >= 0 ? kv.Value : 1f - kv.Value));
+            float bonusRareChanceMultiplier = 1f + qualityDict.Sum(kv => kv.Key.bonusMultiplierGerminateRareChance.LerpThroughRange(kv.Key.bonusAddGerminateResult.max >= 0 ? kv.Value : 1f - kv.Value));
+            float bonusMutateAnotherArtificialPlantChance = qualityDict.Sum(kv => kv.Key.bonusMutateAnotherArtificialPlantChance.LerpThroughRange(kv.Key.bonusAddGerminateResult.max >= 0 ? kv.Value : 1f - kv.Value));
 
             var germinatorData = _buildingDef.GetModExtension<GerminatorModExtension>();
             if (germinatorData == null)
@@ -249,21 +253,52 @@ namespace VVRace
             {
                 Rand.Seed = _seed;
 
-                var successChance = Mathf.Clamp01(germinatorData.germinateSuccessChance * bonusSuccessChanceMultiplier);
-                if (Rand.Chance(successChance))
+                var successChance = Mathf.Clamp01((IsFixedGerminate ? germinatorData.fixedGerminateSuccessChance : germinatorData.germinateSuccessChance) * bonusSuccessChanceMultiplier);
+                
+                var expectProductCount = (IsFixedGerminate ? Rand.Range(2, 4) : Rand.Range(3, 5)) + bonusProductCount;
+                var actualProductCount = (int)expectProductCount;
+
+                if (expectProductCount > 0 && Rand.Chance(expectProductCount - actualProductCount))
                 {
-                    var rare = Rand.Chance(Mathf.Clamp01(germinatorData.germinateRareChance * bonusRareChanceMultiplier));
-                    foreach (var plant in ArtificialPlant.AllArtificialPlantDefs)
+                    actualProductCount++;
+                }
+
+                if (Rand.Chance(successChance) && actualProductCount > 0)
+                {
+                    if (IsFixedGerminate)
                     {
-                        var plantData = plant.GetModExtension<ArtificialPlantModExtension>();
-                        if (plantData.germinateRare == rare)
+                        if (Rand.Chance(bonusMutateAnotherArtificialPlantChance))
                         {
-                            table.Add((plantData.germinateWeight, plant));
+                            // 변이한 경우
+                            foreach (var plant in ArtificialPlant.AllArtificialPlantDefs)
+                            {
+                                var plantData = plant.GetModExtension<ArtificialPlantModExtension>();
+                                table.Add((plantData.germinateWeight, plant));
+                            }
+                        }
+                        else
+                        {
+                            // 고정 배양의 경우 결과 고정
+                            table.Add((99999f, FixedGerminateResult));
+                        }
+                    }
+                    else
+                    {
+                        // 희귀 판정에 따라 결과 테이블 설정
+                        var rare = Rand.Chance(Mathf.Clamp01(germinatorData.germinateRareChance * bonusRareChanceMultiplier));
+                        foreach (var plant in ArtificialPlant.AllArtificialPlantDefs)
+                        {
+                            var plantData = plant.GetModExtension<ArtificialPlantModExtension>();
+                            if (plantData.germinateRare == rare)
+                            {
+                                table.Add((plantData.germinateWeight, plant));
+                            }
                         }
                     }
                 }
                 else
                 {
+                    // 실패시 랜덤 결과
                     table.Add((germinatorData.germinateFailureCriticalWeight, null));
 
                     var failureCropsWeightSum = germinatorData.germinateFailureCropsTable.Sum(tdc => tdc.count);
@@ -274,12 +309,10 @@ namespace VVRace
                     }
                 }
 
-                var actualBonusProductCount = Rand.Range(2, 5) + (int)bonusProductCount + (Rand.Chance(bonusProductCount - (int)bonusProductCount) ? 1 : 0);
-                var result = table.RandomElementByWeight(v => v.weight).thingDef;
-
                 _stage = GerminateStage.GerminateComplete;
 
-                germinator.Notify_ScheduleComplete(result, result != null ? actualBonusProductCount : 0);
+                var result = table.RandomElementByWeight(v => v.weight).thingDef;
+                germinator.Notify_ScheduleComplete(result, result != null ? actualProductCount : 0);
             }
             catch (Exception ex)
             {

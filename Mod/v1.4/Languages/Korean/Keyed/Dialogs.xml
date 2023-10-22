@@ -17,8 +17,9 @@
 \n관리 작업의 품질은 정착민의 원예 기술에 영향을 받으며 특정 자원을 소모합니다.</ViviGerminateWindowScheduleDesc>
 <ViviGerminateWindowIngredientHeader>총 작업 요구 재료</ViviGerminateWindowIngredientHeader>
 <ViviGerminateWindowTotalWork>총 작업량: {0}</ViviGerminateWindowTotalWork>
-<ViviGerminateWindowBonusSummaryHeader>모든 작업 완료시 예상 보너스 효과</ViviGerminateWindowBonusSummaryHeader>
+<ViviGerminateWindowBonusSummaryHeader>모든 작업 완료시 최대 보너스 효과</ViviGerminateWindowBonusSummaryHeader>
 <ViviGerminateWindowBonusCount>결과 모종 개수 {0}</ViviGerminateWindowBonusCount>
 <ViviGerminateWindowBonusSuccessChance>모종 배양 성공률 x{0}</ViviGerminateWindowBonusSuccessChance>
 <ViviGerminateWindowBonusRareChance>희귀한 모종 배양 확률 x{0}</ViviGerminateWindowBonusRareChance>
+<ViviGerminateWindowBonusMutateAnotherArtificialPlantChance>다른 모종으로 변이할 확률 +{0}</ViviGerminateWindowBonusMutateAnotherArtificialPlantChance>
 </LanguageData>

@@ -36,6 +36,9 @@
   <VV_CommandCanWithdrawProduct>모종 포장 허용</VV_CommandCanWithdrawProduct>
   <VV_CommandCanWithdrawProductDesc>배양이 완료된 모종을 포장하는 작업을 진행할지 설정합니다.</VV_CommandCanWithdrawProductDesc>
 
+  <VV_FloatMenuOptionDefaultGerminate>씨앗으로 모종 배양</VV_FloatMenuOptionDefaultGerminate>
+  <VV_FloatMenuOptionFixedGerminate>꺾꽂이로 {0} 모종 배양</VV_FloatMenuOptionFixedGerminate>
+
   <VV_JobFailReasonNoHarvestablePlants>주변에 채집 가능한 식물 없음</VV_JobFailReasonNoHarvestablePlants>
   <VV_JobFailReasonNoHarvestablePollenFilths>주변에 수집 가능한 꽃가루 없음</VV_JobFailReasonNoHarvestablePollenFilths>
   <VV_JobFailReasonNotVivi>비비가 아님</VV_JobFailReasonNotVivi>

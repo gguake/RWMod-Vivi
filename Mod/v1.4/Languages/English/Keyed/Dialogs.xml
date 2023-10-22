@@ -15,10 +15,11 @@
 <ViviGerminateWindowScheduleDesc>The seedling cultivation takes a total of {0} days, and maintenance work can be done every {1} hours after the start of the cultivation.
 \Colonists proceed with the management tasks as scheduled, but not if materials are lacking or if they are too busy.
 \nThe quality of the management task is influenced by the settler's gardening skills and consumes specific resources.</ViviGerminateWindowScheduleDesc>
-<ViviGerminateWindowIngredientHeader>Total ingredients총 작업 요구 재료</ViviGerminateWindowIngredientHeader>
+<ViviGerminateWindowIngredientHeader>Total ingredients</ViviGerminateWindowIngredientHeader>
 <ViviGerminateWindowTotalWork>Total work: {0}</ViviGerminateWindowTotalWork>
-<ViviGerminateWindowBonusSummaryHeader>Expected bonus effects</ViviGerminateWindowBonusSummaryHeader>
+<ViviGerminateWindowBonusSummaryHeader>Expected maximum bonus effects</ViviGerminateWindowBonusSummaryHeader>
 <ViviGerminateWindowBonusCount>Yield changes by {0}</ViviGerminateWindowBonusCount>
-<ViviGerminateWindowBonusSuccessChance>Success chance x{0}</ViviGerminateWindowBonusSuccessChance>
-<ViviGerminateWindowBonusRareChance>Rare plants chance x{0}</ViviGerminateWindowBonusRareChance>
+<ViviGerminateWindowBonusSuccessChance>Chance to get ancient plants x{0}</ViviGerminateWindowBonusSuccessChance>
+<ViviGerminateWindowBonusRareChance>Chance to get rare ancient plants x{0}</ViviGerminateWindowBonusRareChance>
+<ViviGerminateWindowBonusMutateAnotherArtificialPlantChance>Chance to mutate another plants +{0}</ViviGerminateWindowBonusMutateAnotherArtificialPlantChance>
 </LanguageData>

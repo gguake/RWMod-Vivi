@@ -49,7 +49,7 @@ namespace VVRace
                     }
                     else if (quality >= 0f)
                     {
-                        scheduleStatusQualityColor = Color.Lerp(new Color(1f, 0f, 0f), new Color(1f, 1f, 0f), Mathf.Clamp01((quality + 0.5f) * 2f));
+                        scheduleStatusQualityColor = Color.Lerp(new Color(1f, 0f, 0f), new Color(1f, 1f, 0f), Mathf.Clamp01(quality * 2f));
                     }
 
                     Widgets.DrawBoxSolid(scheduleStatusRect, scheduleStatusQualityColor);

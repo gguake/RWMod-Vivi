@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using RimWorld;
+using System.Collections.Generic;
 using Verse;
 using Verse.AI;
 
@@ -24,7 +25,7 @@ namespace VVRace
             this.FailOnDespawnedNullOrForbidden(TargetIndex.A);
             AddFailCondition(() => Germinator.CurrentSchedule == null);
 
-            yield return Toils_General.DoAtomic(() => { job.count = Germinator.GetGerminateRequiredCount(IngredientThing.def); });
+            yield return Toils_General.DoAtomic(() => { job.count = Germinator.GetGerminateRequiredCount(IngredientThing.GetInnerIfMinified().def); });
 
             var reserveToil = Toils_Reserve.Reserve(TargetIndex.B);
             yield return reserveToil;

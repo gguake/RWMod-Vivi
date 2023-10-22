@@ -25,8 +25,26 @@
 
     <germinateJob>VV_ManageSeedlingRepotting</germinateJob>
 
-    <bonusAddGerminateResult>0.0~8.6</bonusAddGerminateResult>
+    <bonusAddGerminateResult>0.0~9.6</bonusAddGerminateResult>
     <bonusMultiplierGerminateSuccessChance>0.0~0.5</bonusMultiplierGerminateSuccessChance>
+    
+    <curveQualityMinBySkillLevel>
+      <points>
+        <li>(0,0.001)</li>
+        <li>(5,0.2)</li>
+        <li>(10,0.35)</li>
+        <li>(15,0.5)</li>
+        <li>(20,0.75)</li>
+      </points>
+    </curveQualityMinBySkillLevel>
+    <curveQualityMaxBySkillLevel>
+      <points>
+        <li>(0,0.2)</li>
+        <li>(5,0.5)</li>
+        <li>(10,1.0)</li>
+        <li>(20,1.0)</li>
+      </points>
+    </curveQualityMaxBySkillLevel>
   </VVRace.GerminateScheduleDef>
   
   <VVRace.GerminateScheduleDef>
@@ -40,12 +58,31 @@
     
     <workAmount>300</workAmount>
     <ingredients>
-      <VV_Propolis>7</VV_Propolis>
+      <VV_Propolis>5</VV_Propolis>
     </ingredients>
     
     <germinateJob>VV_ManageSeedlingPestControl</germinateJob>
 
-    <bonusMultiplierGerminateSuccessChance>0.0~1.75</bonusMultiplierGerminateSuccessChance>
+    <bonusAddGerminateResult>0.0~-3.3</bonusAddGerminateResult>
+    <bonusMultiplierGerminateSuccessChance>0.0~2.2</bonusMultiplierGerminateSuccessChance>
+    
+    <curveQualityMinBySkillLevel>
+      <points>
+        <li>(0,0.001)</li>
+        <li>(5,0.2)</li>
+        <li>(10,0.35)</li>
+        <li>(15,0.5)</li>
+        <li>(20,0.75)</li>
+      </points>
+    </curveQualityMinBySkillLevel>
+    <curveQualityMaxBySkillLevel>
+      <points>
+        <li>(0,0.2)</li>
+        <li>(5,0.5)</li>
+        <li>(10,1.0)</li>
+        <li>(20,1.0)</li>
+      </points>
+    </curveQualityMaxBySkillLevel>
   </VVRace.GerminateScheduleDef>
   
   <VVRace.GerminateScheduleDef>
@@ -57,12 +94,32 @@
     <uiTextColor>(1.0, 1.0, 1.0)</uiTextColor>
     <uiIconPath>UI/Icons/GerminateSchedule/Weeding</uiIconPath>
 
-    <workAmount>4000</workAmount>
+    <workAmount>4200</workAmount>
     
     <germinateJob>VV_ManageSeedlingWeeding</germinateJob>
 
-    <bonusMultiplierGerminateSuccessChance>0.0~0.8</bonusMultiplierGerminateSuccessChance>
-    <bonusMultiplierGerminateRareChance>0.0~0.5</bonusMultiplierGerminateRareChance>
+    <bonusAddGerminateResult>0.0~-1.4</bonusAddGerminateResult>
+    <bonusMultiplierGerminateSuccessChance>0.0~1.5</bonusMultiplierGerminateSuccessChance>
+    <bonusMultiplierGerminateRareChance>0.0~0.6</bonusMultiplierGerminateRareChance>
+    
+    <curveQualityMinBySkillLevel>
+      <points>
+        <li>(0,0.001)</li>
+        <li>(5,0.1)</li>
+        <li>(10,0.25)</li>
+        <li>(15,0.375)</li>
+        <li>(20,0.65)</li>
+      </points>
+    </curveQualityMinBySkillLevel>
+    <curveQualityMaxBySkillLevel>
+      <points>
+        <li>(0,0.1)</li>
+        <li>(5,0.35)</li>
+        <li>(10,0.75)</li>
+        <li>(15,1.0)</li>
+        <li>(20,1.0)</li>
+      </points>
+    </curveQualityMaxBySkillLevel>
   </VVRace.GerminateScheduleDef>
   
   <VVRace.GerminateScheduleDef>
@@ -81,9 +138,25 @@
     
     <germinateJob>VV_ManageSeedlingInjectLuciferium</germinateJob>
 
-    <bonusAddGerminateResult>0.0~11.2</bonusAddGerminateResult>
-    <bonusMultiplierGerminateSuccessChance>0~-0.98</bonusMultiplierGerminateSuccessChance>
-    <bonusMultiplierGerminateRareChance>0.0~2.2</bonusMultiplierGerminateRareChance>
+    <bonusAddGerminateResult>0.0~13.2</bonusAddGerminateResult>
+    <bonusMultiplierGerminateSuccessChance>0~-0.99</bonusMultiplierGerminateSuccessChance>
+    <bonusMultiplierGerminateRareChance>0.0~2.4</bonusMultiplierGerminateRareChance>
     <bonusMutateAnotherArtificialPlantChance>0.0~0.95</bonusMutateAnotherArtificialPlantChance>
+    
+    <curveQualityMinBySkillLevel>
+      <points>
+        <li>(0,0.7)</li>
+        <li>(10,0.9)</li>
+        <li>(15,0.95)</li>
+        <li>(20,1.0)</li>
+      </points>
+    </curveQualityMinBySkillLevel>
+    <curveQualityMaxBySkillLevel>
+      <points>
+        <li>(0,0.85)</li>
+        <li>(10,1.0)</li>
+        <li>(20,1.0)</li>
+      </points>
+    </curveQualityMaxBySkillLevel>
   </VVRace.GerminateScheduleDef>
 </Defs>
