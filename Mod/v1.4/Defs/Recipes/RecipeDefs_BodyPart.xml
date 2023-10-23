@@ -132,7 +132,6 @@
       <ThingDef>VV_TitanicHornetWing</ThingDef>
       <HediffDef>VV_GliderWing</HediffDef>
     </descriptionHyperlinks>
-		<workerClass>Recipe_InstallArtificialBodyPart</workerClass>
 		<jobString>Installing glider wing.</jobString>
 		<workAmount>3000</workAmount>
     <recipeUsers Inherit="False">
