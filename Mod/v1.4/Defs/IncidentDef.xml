@@ -24,7 +24,7 @@
       <li>Map_PlayerHome</li>
     </targetTags>
     <workerClass>VVRace.IncidentWorker_HornetSwarm_Vivi</workerClass>
-    <baseChance>2.5</baseChance>
+    <baseChance>2.7</baseChance>
     <category>ThreatBig</category>
     <pointsScaleable>true</pointsScaleable>
     <tale>ManhunterPack</tale>

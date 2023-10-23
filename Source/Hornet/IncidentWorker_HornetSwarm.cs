@@ -7,7 +7,7 @@ namespace VVRace
     {
         protected virtual float PointsFactor => 1f;
         private const int AnimalsStayDurationMin = 90000;
-        private const int AnimalsStayDurationMax = 300000;
+        private const int AnimalsStayDurationMax = 240000;
 
         protected override bool CanFireNowSub(IncidentParms parms)
         {
@@ -15,6 +15,9 @@ namespace VVRace
             {
                 return false;
             }
+
+            if (parms.points * PointsFactor < 1500) { return false; }
+
             var map = (Map)parms.target;
             return RCellFinder.TryFindRandomPawnEntryCell(out _, map, CellFinder.EdgeRoadChance_Animal);
         }

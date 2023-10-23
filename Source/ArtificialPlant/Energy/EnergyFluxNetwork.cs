@@ -1,6 +1,4 @@
-﻿using JetBrains.Annotations;
-using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -8,14 +6,14 @@ using Verse;
 
 namespace VVRace
 {
-    public class EnergyFluxNetwork : IEnumerable<ArtificialPlant>
+    public class EnergyFluxNetwork : IEnumerable<EnergyAcceptor>
     {
         private static int HashCounter = 1;
 
         public int NetworkHash { get; private set; }
         public int ShouldRegenerateNetworkTick { get; set; } = -1;
 
-        private Dictionary<ArtificialPlant, EnergyFluxNetworkNode> _nodes { get; }
+        private Dictionary<EnergyAcceptor, EnergyFluxNetworkNode> _nodes { get; }
         private List<EnergyFluxNetworkNode> _nodesList { get; }
         private int _lastRefreshTick;
 
@@ -24,13 +22,13 @@ namespace VVRace
 
         public EnergyFluxNetwork()
         {
-            _nodes = new Dictionary<ArtificialPlant, EnergyFluxNetworkNode>();
+            _nodes = new Dictionary<EnergyAcceptor, EnergyFluxNetworkNode>();
             _nodesList = new List<EnergyFluxNetworkNode>();
 
             NetworkHash = HashCounter++.HashOffset();
         }
 
-        public IEnumerator<ArtificialPlant> GetEnumerator()
+        public IEnumerator<EnergyAcceptor> GetEnumerator()
         {
             return _nodes.Keys.GetEnumerator();
         }
@@ -40,29 +38,36 @@ namespace VVRace
             return _nodes.Keys.GetEnumerator();
         }
 
-        public EnergyFluxNetworkNode this[ArtificialPlant plant]
+        public EnergyFluxNetworkNode this[EnergyAcceptor energyAcceptor]
         {
             get
             {
-                return _nodes.TryGetValue(plant, out var node) ? node : null;
+                return _nodes.TryGetValue(energyAcceptor, out var node) ? node : null;
             }
         }
 
-        public void AddPlant(ArtificialPlant plant, EnergyFluxNetworkNode node)
+        public void AddEnergyNode(EnergyAcceptor energyAcceptor, EnergyFluxNetworkNode node)
         {
-            _nodes.Add(plant, node);
+            _nodes.Add(energyAcceptor, node);
             _nodesList.Add(node);
             _lastRefreshTick = GenTicks.TicksGame;
         }
 
-        public void RemovePlant(ArtificialPlant plant)
+        public void RemoveEnergyNode(EnergyAcceptor energyAcceptor)
         {
-            if (_nodes.TryGetValue(plant, out var node))
+            if (_nodes.TryGetValue(energyAcceptor, out var node))
             {
                 _nodesList.Remove(node);
-                _nodes.Remove(plant);
+                _nodes.Remove(energyAcceptor);
 
-                ShouldRegenerateNetworkTick = GenTicks.TicksGame + 1;
+                if (!_nodesList.Any(v => v.Plant != null))
+                {
+                    SplitNetworks();
+                }
+                else
+                {
+                    ShouldRegenerateNetworkTick = GenTicks.TicksGame + 1;
+                }
             }
         }
 
@@ -77,7 +82,9 @@ namespace VVRace
                 for (int i = 0; i < _nodesList.Count; ++i)
                 {
                     var node = _nodesList[i];
-                    var plant = node.plant;
+                    var plant = node.Plant;
+                    if (plant == null) { continue; }
+
                     var extension = plant.ArtificialPlantModExtension;
 
                     var tickInterval = tick - _lastRefreshTick;
@@ -107,7 +114,10 @@ namespace VVRace
                     for (int i = 0; i < _tempDistributeEnergyNodeCandidateIndices.Count; ++i)
                     {
                         var node = _nodesList[_tempDistributeEnergyNodeCandidateIndices[i]];
-                        if (node.plant.ArtificialPlantModExtension.energyCapacity - node.energy >= maxDividedEnergy)
+                        var plant = node.Plant;
+                        if (plant == null) { continue; }
+
+                        if (plant.ArtificialPlantModExtension.energyCapacity - node.energy >= maxDividedEnergy)
                         {
                             _tempDistributeEnergyNodeIndices.Add(_tempDistributeEnergyNodeCandidateIndices[i]);
                         }
@@ -119,7 +129,10 @@ namespace VVRace
                         for (int i = 0; i < _tempDistributeEnergyNodeIndices.Count; ++i)
                         {
                             var node = _nodesList[_tempDistributeEnergyNodeIndices[i]];
-                            node.energy = Mathf.Clamp(node.energy + realDividedEnergy, 0f, node.plant.ArtificialPlantModExtension.energyCapacity);
+                            var plant = node.Plant;
+                            if (plant == null) { continue; }
+
+                            node.energy = Mathf.Clamp(node.energy + realDividedEnergy, 0f, plant.ArtificialPlantModExtension.energyCapacity);
                         }
                     }
                 }
@@ -138,7 +151,7 @@ namespace VVRace
                 _nodesList.AddRange(network._nodesList);
                 foreach (var node in network._nodes.Values)
                 {
-                    node.plant.EnergyFluxNetwork = this;
+                    node.energyAcceptor.EnergyFluxNetwork = this;
                 }
             }
 
@@ -179,8 +192,8 @@ namespace VVRace
                 var newNetwork = new EnergyFluxNetwork();
                 foreach (var node in newConnectedSet)
                 {
-                    newNetwork.AddPlant(node.plant, node);
-                    node.plant.EnergyFluxNetwork = newNetwork;
+                    newNetwork.AddEnergyNode(node.energyAcceptor, node);
+                    node.energyAcceptor.EnergyFluxNetwork = newNetwork;
                 }
             }
 

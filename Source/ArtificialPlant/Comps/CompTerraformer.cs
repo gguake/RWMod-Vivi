@@ -21,6 +21,7 @@ namespace VVRace
         public IntRange cooldownTicks;
         public float radius;
         public bool removePollution;
+        public bool showRadius = true;
 
         public CompProperties_Terraformer()
         {
@@ -87,7 +88,10 @@ namespace VVRace
 
         public override void PostDrawExtraSelectionOverlays()
         {
-            GenDraw.DrawRadiusRing(parent.Position, Props.radius);
+            if (Props.showRadius)
+            {
+                GenDraw.DrawRadiusRing(parent.Position, Props.radius);
+            }
         }
 
         public void Tick(int ticks = 1)
@@ -116,12 +120,10 @@ namespace VVRace
         private void TerraformNear()
         {
             var map = parent.Map;
-            var cells = GenRadial.RadialPatternInRadius(Props.radius).Select(v => parent.Position + v)
-                .OrderBy(v => v.IsPolluted(map) ? -1f : v.GetFertility(map));
 
-            foreach (var cell in cells)
+            foreach (var cell in GenRadial.RadialPatternInRadius(Props.radius))
             {
-                if (cell.InBounds(map) && TryTerraformCell(map, cell))
+                if (cell.InBounds(map) && !cell.Impassable(map) && TryTerraformCell(map, parent.Position + cell))
                 {
                     break;
                 }
@@ -133,14 +135,16 @@ namespace VVRace
             if (Props.removePollution && cell.IsPolluted(map))
             {
                 cell.Unpollute(map);
+                return true;
             }
-            else
+            else if (Props.terraforms?.Count > 0)
             {
                 var terrain = cell.GetTerrain(map);
                 var terraformed = Props.TryGetTerraformResult(terrain);
                 if (terraformed != null)
                 {
                     map.terrainGrid.SetTerrain(cell, terraformed);
+                    return true;
                 }
                 else
                 {
@@ -148,7 +152,7 @@ namespace VVRace
                 }
             }
 
-            return true;
+            return false;
         }
     }
 }

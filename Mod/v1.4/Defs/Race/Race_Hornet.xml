@@ -14,19 +14,20 @@
     <label>titanic hornet</label>
     <description>.</description>
     <statBases>
-      <MoveSpeed>7.4</MoveSpeed>
+      <MoveSpeed>7.7</MoveSpeed>
       <PsychicSensitivity>0</PsychicSensitivity>
       <ComfyTemperatureMin>-20</ComfyTemperatureMin>
       <ComfyTemperatureMax>37</ComfyTemperatureMax>
       <MarketValue>2000</MarketValue>
       <LeatherAmount>0</LeatherAmount>
-      <ArmorRating_Sharp>1.1</ArmorRating_Sharp>
+      <ArmorRating_Sharp>1.0</ArmorRating_Sharp>
       <ArmorRating_Blunt>0.3</ArmorRating_Blunt>
       <ArmorRating_Heat>0</ArmorRating_Heat>
       <PainShockThreshold>0.65</PainShockThreshold>
 
       <ToxicResistance>-1.00</ToxicResistance>
       <ToxicEnvironmentResistance>0</ToxicEnvironmentResistance>
+      <Flammability>1.3</Flammability>
     </statBases>
     <uiIconScale>1.35</uiIconScale>
     
@@ -89,7 +90,7 @@
       <body>VV_TitanicHornet</body>
       <baseBodySize>3.5</baseBodySize>
       <baseHungerRate>5.0</baseHungerRate>
-      <baseHealthScale>6.7</baseHealthScale>
+      <baseHealthScale>6.5</baseHealthScale>
       <useMeatFrom>Megaspider</useMeatFrom>
       <wildness>1.0</wildness>
       <petness>0.0</petness>

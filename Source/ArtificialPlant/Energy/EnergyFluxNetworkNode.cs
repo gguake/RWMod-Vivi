@@ -5,8 +5,10 @@ namespace VVRace
 {
     public class EnergyFluxNetworkNode : IExposable
     {
-        public ArtificialPlant plant;
+        public EnergyAcceptor energyAcceptor;
         public List<EnergyFluxNetworkNode> connectedNodes = new List<EnergyFluxNetworkNode>();
+
+        public ArtificialPlant Plant => energyAcceptor as ArtificialPlant;
 
         public float energy;
 
@@ -14,6 +16,9 @@ namespace VVRace
         {
             get
             {
+                var plant = Plant;
+                if (plant == null) { return 0; }
+
                 var extension = plant.ArtificialPlantModExtension;
                 var generatedEnergy = extension.energyGenerateRule?.CalcEnergy(plant, 60000) ?? 0;
                 var consumedEnergy = extension.energyConsumeRule?.CalcEnergy(plant, 60000) ?? 0;

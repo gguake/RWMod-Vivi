@@ -12,10 +12,32 @@ namespace VVRace
         public float sensorRadius;
         public Type sensorWorkerClass;
 
-        public FloatRange explosiveRadius;
+        public float explosiveRadius = 1.9f;
         public IntRange explosiveCooldownTicks;
         public EffecterDef explosiveEffecterDef;
         public DamageDef explosiveDamageDef;
+
+        public int damageAmountBase = -1;
+        public float armorPenetrationBase = -1f;
+
+        public SoundDef explosionSound;
+
+        public ThingDef preExplosionSpawnThingDef;
+        public float preExplosionSpawnChance;
+        public int preExplosionSpawnThingCount = 1;
+
+        public ThingDef postExplosionSpawnThingDef;
+        public float postExplosionSpawnChance;
+        public int postExplosionSpawnThingCount = 1;
+        public GasType? postExplosionGasType;
+
+        public float chanceToStartFire;
+        public bool damageFalloff;
+
+        public bool applyDamageToExplosionCellsNeighbors;
+
+        public bool doVisualEffects = true;
+        public float propagationSpeed = 1f;
 
         [Unsaved]
         private SensorWorker _sensorWorker;
@@ -52,9 +74,9 @@ namespace VVRace
 
         public override void CompTick()
         {
-            if (parent.IsHashIntervalTick(60))
+            if (parent.IsHashIntervalTick(GenTicks.TickRareInterval))
             {
-                Tick(60);
+                Tick(GenTicks.TickRareInterval);
             }
         }
 
@@ -71,7 +93,7 @@ namespace VVRace
         public override void PostDrawExtraSelectionOverlays()
         {
             GenDraw.DrawRadiusRing(parent.Position, Props.sensorRadius);
-            GenDraw.DrawRadiusRing(parent.Position, Props.explosiveRadius.Average);
+            GenDraw.DrawRadiusRing(parent.Position, Props.explosiveRadius);
         }
 
         public void Tick(int ticks = 1)
@@ -109,8 +131,23 @@ namespace VVRace
                 instigator: parent,
                 center: parent.Position,
                 map: parent.Map,
-                radius: Props.explosiveRadius.RandomInRange,
-                damType: Props.explosiveDamageDef);
+                radius: Props.explosiveRadius,
+                damType: Props.explosiveDamageDef,
+                damAmount: Props.damageAmountBase,
+                armorPenetration: Props.armorPenetrationBase,
+                explosionSound: Props.explosionSound,
+                preExplosionSpawnThingDef: Props.preExplosionSpawnThingDef,
+                preExplosionSpawnChance: Props.preExplosionSpawnChance,
+                preExplosionSpawnThingCount: Props.preExplosionSpawnThingCount,
+                postExplosionSpawnThingDef: Props.postExplosionSpawnThingDef,
+                postExplosionSpawnChance: Props.postExplosionSpawnChance,
+                postExplosionSpawnThingCount: Props.postExplosionSpawnThingCount,
+                postExplosionGasType: Props.postExplosionGasType,
+                chanceToStartFire: Props.chanceToStartFire,
+                damageFalloff: Props.damageFalloff,
+                applyDamageToExplosionCellsNeighbors: Props.applyDamageToExplosionCellsNeighbors,
+                doVisualEffects: Props.doVisualEffects,
+                propagationSpeed: Props.propagationSpeed);
 
             plant?.AddEnergy(-Props.useEnergyAmount);
 

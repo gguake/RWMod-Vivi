@@ -7,8 +7,70 @@ using Verse;
 
 namespace VVRace
 {
+    public abstract class EnergyAcceptor : Building
+    {
+        public abstract EnergyFluxNetwork EnergyFluxNetwork { get; set; }
+        public abstract EnergyFluxNetworkNode EnergyFluxNode { get; }
+
+        public override void SpawnSetup(Map map, bool respawningAfterLoad)
+        {
+            base.SpawnSetup(map, respawningAfterLoad);
+
+            var energyNode = EnergyFluxNode;
+            var candidates = new HashSet<EnergyFluxNetwork>();
+            foreach (var c in GenAdjFast.AdjacentCellsCardinal(this).Where(c => c.InBounds(map)))
+            {
+                var adjacentEnergyAcceptor = c.GetFirstThing<EnergyAcceptor>(map);
+                if (adjacentEnergyAcceptor != null)
+                {
+                    candidates.Add(adjacentEnergyAcceptor.EnergyFluxNetwork);
+
+                    EnergyFluxNode.connectedNodes.Add(adjacentEnergyAcceptor.EnergyFluxNode);
+                    adjacentEnergyAcceptor.EnergyFluxNode.connectedNodes.Add(EnergyFluxNode);
+                }
+            }
+
+            if (candidates.Count == 0)
+            {
+                EnergyFluxNetwork = new EnergyFluxNetwork();
+                EnergyFluxNetwork.AddEnergyNode(this, energyNode);
+            }
+            else if (candidates.Count == 1)
+            {
+                EnergyFluxNetwork = candidates.First();
+                EnergyFluxNetwork.AddEnergyNode(this, energyNode);
+            }
+            else
+            {
+                EnergyFluxNetwork = candidates.First();
+                EnergyFluxNetwork.AddEnergyNode(this, energyNode);
+
+                candidates.Remove(EnergyFluxNetwork);
+                EnergyFluxNetwork.MergeNetworks(candidates);
+            }
+        }
+
+        public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
+        {
+            base.DeSpawn(mode);
+
+            var energyNode = EnergyFluxNode;
+            foreach (var node in energyNode.connectedNodes)
+            {
+                node.connectedNodes.Remove(energyNode);
+            }
+            energyNode.connectedNodes.Clear();
+
+            if (EnergyFluxNetwork != null)
+            {
+                EnergyFluxNetwork.RemoveEnergyNode(this);
+                EnergyFluxNetwork = null;
+            }
+        }
+    }
+
     [StaticConstructorOnStartup]
-    public class ArtificialPlant : Building
+    public class ArtificialPlant : EnergyAcceptor
     {
         public const float EnergyByFertilizer = 10f;
 
@@ -40,7 +102,8 @@ namespace VVRace
             }
         }
 
-        public EnergyFluxNetwork EnergyFluxNetwork { get; set; }
+        public override EnergyFluxNetwork EnergyFluxNetwork { get; set; }
+        public override EnergyFluxNetworkNode EnergyFluxNode => _energyNode;
         private EnergyFluxNetworkNode _energyNode;
 
         public bool IsFullEnergy => _energyNode.energy >= ArtificialPlantModExtension.energyCapacity;
@@ -79,7 +142,7 @@ namespace VVRace
         {
             _energyNode = new EnergyFluxNetworkNode()
             {
-                plant = this
+                energyAcceptor = this
             };
         }
 
@@ -94,7 +157,7 @@ namespace VVRace
 
             if (Scribe.mode == LoadSaveMode.LoadingVars)
             {
-                _energyNode.plant = this;
+                _energyNode.energyAcceptor = this;
             }
         }
 
@@ -103,60 +166,6 @@ namespace VVRace
             base.PostMake();
 
             _energyNode.energy = ArtificialPlantModExtension.energyCapacity * ArtificialPlantModExtension.initialEnergyPercent;
-        }
-
-        public override void SpawnSetup(Map map, bool respawningAfterLoad)
-        {
-            base.SpawnSetup(map, respawningAfterLoad);
-
-            var candidates = new HashSet<EnergyFluxNetwork>();
-            foreach (var c in GenAdjFast.AdjacentCellsCardinal(this).Where(c => c.InBounds(map)))
-            {
-                var adjacentPlant = c.GetFirstThing<ArtificialPlant>(map);
-                if (adjacentPlant != null)
-                {
-                    candidates.Add(adjacentPlant.EnergyFluxNetwork);
-
-                _energyNode.connectedNodes.Add(adjacentPlant._energyNode);
-                adjacentPlant._energyNode.connectedNodes.Add(_energyNode);
-                }
-            }
-
-            if (candidates.Count == 0)
-            {
-                EnergyFluxNetwork = new EnergyFluxNetwork();
-                EnergyFluxNetwork.AddPlant(this, _energyNode);
-            }
-            else if (candidates.Count == 1)
-            {
-                EnergyFluxNetwork = candidates.First();
-                EnergyFluxNetwork.AddPlant(this, _energyNode);
-            }
-            else
-            {
-                EnergyFluxNetwork = candidates.First();
-                EnergyFluxNetwork.AddPlant(this, _energyNode);
-
-                candidates.Remove(EnergyFluxNetwork);
-                EnergyFluxNetwork.MergeNetworks(candidates);
-            }
-        }
-
-        public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
-        {
-            base.DeSpawn(mode);
-
-            foreach (var node in _energyNode.connectedNodes)
-            {
-                node.connectedNodes.Remove(_energyNode);
-            }
-            _energyNode.connectedNodes.Clear();
-
-            if (EnergyFluxNetwork != null)
-            {
-                EnergyFluxNetwork.RemovePlant(this);
-                EnergyFluxNetwork = null;
-            }
         }
 
         public override void Print(SectionLayer layer)
@@ -214,8 +223,6 @@ namespace VVRace
             {
                 Rand.PopState();
             }
-
-
         }
 
         public override string GetInspectString()
