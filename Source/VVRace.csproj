@@ -76,12 +76,16 @@
     <Compile Include="ArtificialPlant\AI\JobDriver_HaulGerminatingIngredient.cs" />
     <Compile Include="ArtificialPlant\AI\JobDriver_HaulAndManageSeedling.cs" />
     <Compile Include="ArtificialPlant\AI\JobDriver_PackingSeedling.cs" />
+    <Compile Include="ArtificialPlant\Energy\EnergyRule_AdjacentPollution.cs" />
+    <Compile Include="ArtificialPlant\PlaceWorker_EnergyTube.cs" />
+    <Compile Include="ArtificialPlant\Sensor\SensorWorker_Fire.cs" />
+    <Compile Include="ArtificialPlant\Sensor\SensorWorker_Mechanoid.cs" />
     <Compile Include="ArtificialPlant\UI\Alert_LowEnergyArtificialPlant.cs" />
     <Compile Include="ArtificialPlant\Comps\CompLightningLod.cs" />
     <Compile Include="ArtificialPlant\Comps\CompSensorExplosive.cs" />
     <Compile Include="ArtificialPlant\Comps\CompTerraformer.cs" />
     <Compile Include="ArtificialPlant\Energy\EnergyFluxNetworkNode.cs" />
-    <Compile Include="ArtificialPlant\SensorWorker.cs" />
+    <Compile Include="ArtificialPlant\Sensor\SensorWorker.cs" />
     <Compile Include="ArtificialPlant\Things\ArtificialPlantDesignatorCache.cs" />
     <Compile Include="ArtificialPlant\Things\ArtificialPlantPot.cs" />
     <Compile Include="ArtificialPlant\ArtificialPlantModExtension.cs" />
