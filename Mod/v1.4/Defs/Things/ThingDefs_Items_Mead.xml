@@ -33,7 +33,7 @@
     <comps>
       <li Class="VVRace.CompProperties_FermentItem">
         <minSafeTemperature>16</minSafeTemperature>
-        <maxSafeTemperature>28</maxSafeTemperature>
+        <maxSafeTemperature>24</maxSafeTemperature>
         <damageProgressPerDegreePerTick>0.00002</damageProgressPerDegreePerTick>
         <totalFermentDays>10</totalFermentDays>
         <fermentedThings>

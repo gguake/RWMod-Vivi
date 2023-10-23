@@ -11,7 +11,6 @@ namespace VVRace
         private static int HashCounter = 1;
 
         public int NetworkHash { get; private set; }
-        public int ShouldRegenerateNetworkTick { get; set; } = -1;
 
         private Dictionary<EnergyAcceptor, EnergyFluxNetworkNode> _nodes { get; }
         private List<EnergyFluxNetworkNode> _nodesList { get; }
@@ -48,6 +47,8 @@ namespace VVRace
 
         public void AddEnergyNode(EnergyAcceptor energyAcceptor, EnergyFluxNetworkNode node)
         {
+            if (node == null) { return; }
+
             _nodes.Add(energyAcceptor, node);
             _nodesList.Add(node);
             _lastRefreshTick = GenTicks.TicksGame;
@@ -59,15 +60,7 @@ namespace VVRace
             {
                 _nodesList.Remove(node);
                 _nodes.Remove(energyAcceptor);
-
-                if (!_nodesList.Any(v => v.Plant != null))
-                {
-                    SplitNetworks();
-                }
-                else
-                {
-                    ShouldRegenerateNetworkTick = GenTicks.TicksGame + 1;
-                }
+                _lastRefreshTick = GenTicks.TicksGame;
             }
         }
 
@@ -141,63 +134,11 @@ namespace VVRace
             }
         }
 
-        public void MergeNetworks(IEnumerable<EnergyFluxNetwork> networks)
+        public void Clear()
         {
-            if (networks.EnumerableNullOrEmpty()) { return; }
-
-            foreach (var network in networks)
-            {
-                _nodes.AddRange(network._nodes);
-                _nodesList.AddRange(network._nodesList);
-                foreach (var node in network._nodes.Values)
-                {
-                    node.energyAcceptor.EnergyFluxNetwork = this;
-                }
-            }
-
-            _lastRefreshTick = GenTicks.TicksGame;
-        }
-
-        public void SplitNetworks()
-        {
-            if (_nodes.Count <= 1) { return; }
-
-            var remainingNodes = new HashSet<EnergyFluxNetworkNode>(_nodes.Values);
-            while (remainingNodes.Any())
-            {
-                var element = remainingNodes.First();
-                remainingNodes.Remove(element);
-
-                var newConnectedSet = new HashSet<EnergyFluxNetworkNode>();
-                var queue = new Queue<EnergyFluxNetworkNode>();
-                queue.Enqueue(element);
-
-                while (true)
-                {
-                    if (queue.Count == 0) { break; }
-
-                    var current = queue.Dequeue();
-                    newConnectedSet.Add(current);
-
-                    foreach (var connected in current.connectedNodes)
-                    {
-                        if (remainingNodes.Contains(connected))
-                        {
-                            remainingNodes.Remove(connected);
-                            queue.Enqueue(connected);
-                        }
-                    }
-                }
-
-                var newNetwork = new EnergyFluxNetwork();
-                foreach (var node in newConnectedSet)
-                {
-                    newNetwork.AddEnergyNode(node.energyAcceptor, node);
-                    node.energyAcceptor.EnergyFluxNetwork = newNetwork;
-                }
-            }
-
-            ShouldRegenerateNetworkTick = -1;
+            _nodes.Clear();
+            _nodesList.Clear();
+            _lastRefreshTick = 0;
         }
     }
 }

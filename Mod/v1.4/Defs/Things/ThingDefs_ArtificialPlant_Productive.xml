@@ -189,7 +189,7 @@
         <germinateWeight>100</germinateWeight>
         <germinateRare>true</germinateRare>
 
-        <energyCapacity>200</energyCapacity>
+        <energyCapacity>350</energyCapacity>
         <zeroEnergyDamageByChance>1~3</zeroEnergyDamageByChance>
 
         <energyConsumeRule Class="VVRace.EnergyRule_Constant">
@@ -544,8 +544,8 @@
           <energy>25</energy>
         </energyConsumeRule>
         <energyGenerateRule Class="VVRace.EnergyRule_AdjacentPollution">
-          <energyByOccupiedWaterCell>75</energyByOccupiedWaterCell>
-          <energyByAdjacentWaterCell>25</energyByAdjacentWaterCell>
+          <energyByOccupiePolluted>75</energyByOccupiePolluted>
+          <energyByAdjacentPolluted>25</energyByAdjacentPolluted>
         </energyGenerateRule>
       </li>
     </modExtensions>

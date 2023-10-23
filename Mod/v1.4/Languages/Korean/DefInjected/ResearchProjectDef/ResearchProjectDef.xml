@@ -37,10 +37,7 @@
 <VV_AutomatedInfra.label>자동화 비비 시설</VV_AutomatedInfra.label>
 <VV_AutomatedInfra.description>전기를 이용해 기존의 비비들이 하던 일부 수작업들을 자동화하고 효율을 증대시킵니다.</VV_AutomatedInfra.description>
 
-<VV_EnergyTransmitter.label>에너지 전송기</VV_EnergyTransmitter.label>
-<VV_EnergyTransmitter.description>고대 식물의 에너지 전달 원리를 규명해 인위적으로 식물의 에너지를 전송하는 장치를 제작합니다.</VV_EnergyTransmitter.description>
-
-<VV_AncientFloraRestoration.label>고대 식물 유전자 분석</VV_AncientFloraRestoration.label>
-<VV_AncientFloraRestoration.description>원하는 고대 식물을 선택해서 복원할수 있도록 합니다.</VV_AncientFloraRestoration.description>
+<VV_EnergyTransfer.label>에너지 전송</VV_EnergyTransfer.label>
+<VV_EnergyTransfer.description>고대 식물의 에너지 전달 방식을 모방해 고대 식물의 에너지를 원거리로 전달할 수 있는 에너지 튜브를 건설할 수 있습니다.</VV_EnergyTransfer.description>
 
 </LanguageData>

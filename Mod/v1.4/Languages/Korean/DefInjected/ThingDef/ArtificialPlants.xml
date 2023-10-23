@@ -1,47 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-  <VV_EmberBloom.label>잔불꽃</VV_EmberBloom.label>
-  <VV_EmberBloom.description>주변 온도가 일정 온도에 도달할때까지 지속적으로 열을 발산하는 고대의 꽃입니다.
+<VV_EnergyTube.label>에너지 튜브</VV_EnergyTube.label>
+<VV_EnergyTube.description>에너지를 원거리 전송하는 튜브입니다. 벽이나 다른 건물 아래에 건설할 수 있습니다.
+\n에너지를 단순히 전송할 뿐 별도의 에너지를 생산하지는 않습니다.</VV_EnergyTube.description>
+
+<VV_EmberBloom.label>잔불꽃</VV_EmberBloom.label>
+<VV_EmberBloom.description>주변 온도가 일정 온도에 도달할때까지 지속적으로 열을 발산하는 고대의 꽃입니다.
 \n주변 온도가 충분히 뜨거운 환경에서는 열을 발산하는 대신 에너지를 생산합니다.</VV_EmberBloom.description>
 
-  <VV_FrostBloom.label>서리꽃</VV_FrostBloom.label>
-  <VV_FrostBloom.description>주변 온도가 일정 온도에 도달할때까지 지속적으로 열을 흡수하는 고대의 꽃입니다.
+<VV_FrostBloom.label>서리꽃</VV_FrostBloom.label>
+<VV_FrostBloom.description>주변 온도가 일정 온도에 도달할때까지 지속적으로 열을 흡수하는 고대의 꽃입니다.
 \n주변 온도가 충분히 차가운 환경에서는 열을 흡수하는 대신 에너지를 생산합니다.</VV_FrostBloom.description>
 
-  <VV_Thunderbud.label>벼락봉오리</VV_Thunderbud.label>
-  <VV_Thunderbud.description>내부에 전력을 저장할수 있는 고대의 꽃입니다. 전선을 연결할 수 있으며 충전된 정도에 비례해 에너지를 생산합니다.
+<VV_Thunderbud.label>벼락봉오리</VV_Thunderbud.label>
+<VV_Thunderbud.description>내부에 전력을 저장할수 있는 고대의 꽃입니다. 전선을 연결할 수 있으며 충전된 정도에 비례해 에너지를 생산합니다.
 \n외부의 충격을 받거나 메카노이드가 접근하면 내부의 전압이 불안정해져 주변에 막대한 전자기 펄스를 발생시키고 에너지가 방전됩니다.
 \n(주의: 아군 메카노이드에도 반응할 수 있음)</VV_Thunderbud.description>
 
-  <VV_Voltpetals.label>벼락꽃</VV_Voltpetals.label>
-  <VV_Voltpetals.description>보유한 에너지에 비례해 전력을 생산하는 고대의 꽃입니다.
+<VV_Voltpetals.label>벼락꽃</VV_Voltpetals.label>
+<VV_Voltpetals.description>보유한 에너지에 비례해 전력을 생산하는 고대의 꽃입니다.
 \n번개가 치는 날씨에 에너지가 충분한 경우 번개를 유도하는 피뢰침 역할을 할 수 있으며 번개를 흡수해 에너지로 전환합니다.</VV_Voltpetals.description>
 
-  <VV_Waterdrops.label>물방울꽃</VV_Waterdrops.label>
-  <VV_Waterdrops.description>주변의 물에서 에너지를 생산하는 고대의 꽃입니다. 물 위에도 재배가 가능하며 인접한 물 타일이 많을수록 더 많은 에너지를 생산합니다.
+<VV_Waterdrops.label>물방울꽃</VV_Waterdrops.label>
+<VV_Waterdrops.description>주변의 물에서 에너지를 생산하는 고대의 꽃입니다. 물 위에도 재배가 가능하며 인접한 물 타일이 많을수록 더 많은 에너지를 생산합니다.
 \n주변의 화재를 감지하면 저장된 에너지를 소모해 화재를 진압합니다.</VV_Waterdrops.description>
 
-  <VV_Radiantflower.label>빛바라기</VV_Radiantflower.label>
-  <VV_Radiantflower.description>태양광에서 에너지를 생산하는 고대의 꽃입니다.
+<VV_Radiantflower.label>빛바라기</VV_Radiantflower.label>
+<VV_Radiantflower.description>태양광에서 에너지를 생산하는 고대의 꽃입니다.
 \n지붕으로 막혀 태양광을 받을 수 없다면 에너지를 소모해 태양과 비슷한 수준의 광원을 발산합니다.</VV_Radiantflower.description>
-  <VV_Radiantflower.comps.CompSchedule.offMessage>식물 휴식기에 꺼짐</VV_Radiantflower.comps.CompSchedule.offMessage>
+<VV_Radiantflower.comps.CompSchedule.offMessage>식물 휴식기에 꺼짐</VV_Radiantflower.comps.CompSchedule.offMessage>
 
-  <VV_Richflower.label>풍년화</VV_Richflower.label>
-  <VV_Richflower.description>인접한 식물이 많을수록 많은 에너지를 생산하는 고대의 꽃입니다. 채집시 많은 꿀을 얻을 수 있습니다.
+<VV_Richflower.label>풍년화</VV_Richflower.label>
+<VV_Richflower.description>인접한 식물이 많을수록 많은 에너지를 생산하는 고대의 꽃입니다. 채집시 많은 꿀을 얻을 수 있습니다.
 \n에너지를 지속적으로 주변에 퍼뜨리면서 주변 토양의 생산성을 개선하거나 오염을 제거해 재배에 유리한 환경으로 변화시킵니다.</VV_Richflower.description>
 
-  <VV_Peashooter.label>콩뿌리개</VV_Peashooter.label>
-  <VV_Peashooter.description>적을 감지하면 콩을 발사해 쫓아내는 식물로 발사할때마다 에너지를 소모합니다.
+<VV_Peashooter.label>콩뿌리개</VV_Peashooter.label>
+<VV_Peashooter.description>적을 감지하면 콩을 발사해 쫓아내는 식물로 발사할때마다 에너지를 소모합니다.
 \n위력이 약하고 방어구를 관통하지는 못하지만 한번에 대량의 콩을 발사하므로 방어구를 갖추지 않은 적에게는 대단히 효과적입니다.</VV_Peashooter.description>
-  <VV_Bullet_Pea.label>완두콩</VV_Bullet_Pea.label>
-  <VV_Gun_Peashooter.label>콩뿌리개 꼬투리</VV_Gun_Peashooter.label>
-  <VV_Gun_Peashooter.description>빠르게 콩을 생성해 적에게 발사하는 콩뿌리개의 꼬투리입니다.</VV_Gun_Peashooter.description>
+<VV_Bullet_Pea.label>완두콩</VV_Bullet_Pea.label>
+<VV_Gun_Peashooter.label>콩뿌리개 꼬투리</VV_Gun_Peashooter.label>
+<VV_Gun_Peashooter.description>빠르게 콩을 생성해 적에게 발사하는 콩뿌리개의 꼬투리입니다.</VV_Gun_Peashooter.description>
 
-  <VV_Pealaucnher.label>폭탄뿌리개</VV_Pealaucnher.label>
-  <VV_Pealaucnher.description>적을 감지하면 화약 성분이 포함된 콩을 발사해 쫓아내는 식물로 발사할때마다 에너지를 소모합니다.
+<VV_Pealaucnher.label>폭탄뿌리개</VV_Pealaucnher.label>
+<VV_Pealaucnher.description>적을 감지하면 화약 성분이 포함된 콩을 발사해 쫓아내는 식물로 발사할때마다 에너지를 소모합니다.
 \n콩뿌리개와 유사하지만 화약을 이용해 발사하기에 탄속이 매우 빠르고 사거리가 길며 발사된 콩이 착탄지에서 폭발합니다.
 \n주의: 지근거리에서도 사격하므로 유폭에 주의하세요.</VV_Pealaucnher.description>
-  <VV_Bullet_PeaFast.label>폭발콩</VV_Bullet_PeaFast.label>
-  <VV_Gun_Pealauncher.label>폭탄뿌리개</VV_Gun_Pealauncher.label>
-  <VV_Gun_Pealauncher.description>빠르게 콩을 생성해 적에게 발사하는 폭탄뿌리개의 꼬투리입니다.</VV_Gun_Pealauncher.description>
+<VV_Bullet_PeaFast.label>폭발콩</VV_Bullet_PeaFast.label>
+<VV_Gun_Pealauncher.label>폭탄뿌리개</VV_Gun_Pealauncher.label>
+<VV_Gun_Pealauncher.description>빠르게 콩을 생성해 적에게 발사하는 폭탄뿌리개의 꼬투리입니다.</VV_Gun_Pealauncher.description>
 </LanguageData>

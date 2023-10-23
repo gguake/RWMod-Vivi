@@ -9,7 +9,7 @@
       <li>
         <label>ate pollen</label>
         <description>.</description>
-        <baseMoodEffect>-9</baseMoodEffect>
+        <baseMoodEffect>-4</baseMoodEffect>
       </li>
     </stages>
   </ThoughtDef>

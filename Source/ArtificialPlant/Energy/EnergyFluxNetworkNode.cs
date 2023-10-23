@@ -1,12 +1,10 @@
-﻿using System.Collections.Generic;
-using Verse;
+﻿using Verse;
 
 namespace VVRace
 {
     public class EnergyFluxNetworkNode : IExposable
     {
         public EnergyAcceptor energyAcceptor;
-        public List<EnergyFluxNetworkNode> connectedNodes = new List<EnergyFluxNetworkNode>();
 
         public ArtificialPlant Plant => energyAcceptor as ArtificialPlant;
 

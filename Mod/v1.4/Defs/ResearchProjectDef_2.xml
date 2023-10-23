@@ -7,19 +7,6 @@
   </ResearchProjectDef>
   
   <ResearchProjectDef ParentName="ViviResearchProjectTier2Base">
-    <defName>VV_Lifestrand</defName>
-    <label>lifestrand</label>
-    <description>.</description>
-    <baseCost>1200</baseCost>
-    <researchViewX>3</researchViewX>
-    <researchViewY>2.1</researchViewY>
-    <prerequisites>
-      <li>Devilstrand</li>
-      <li>VV_AncientBotany</li>
-    </prerequisites>
-  </ResearchProjectDef>
-  
-  <ResearchProjectDef ParentName="ViviResearchProjectTier2Base">
     <defName>VV_AutomatedInfra</defName>
     <label>vivi automated infrastructures</label>
     <description>.</description>
@@ -29,6 +16,31 @@
     <prerequisites>
       <li>Electricity</li>
       <li>VV_AdvancedGathering</li>
+      <li>VV_AncientBotany</li>
+    </prerequisites>
+  </ResearchProjectDef>
+  
+  <ResearchProjectDef ParentName="ViviResearchProjectTier2Base">
+    <defName>VV_EnergyTransfer</defName>
+    <label>energy transfer</label>
+    <description>.</description>
+    <baseCost>1000</baseCost>
+    <researchViewX>3</researchViewX>
+    <researchViewY>1.4</researchViewY>
+    <prerequisites>
+      <li>VV_AncientBotany</li>
+    </prerequisites>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef ParentName="ViviResearchProjectTier2Base">
+    <defName>VV_Lifestrand</defName>
+    <label>lifestrand</label>
+    <description>.</description>
+    <baseCost>1200</baseCost>
+    <researchViewX>3</researchViewX>
+    <researchViewY>2.1</researchViewY>
+    <prerequisites>
+      <li>Devilstrand</li>
       <li>VV_AncientBotany</li>
     </prerequisites>
   </ResearchProjectDef>

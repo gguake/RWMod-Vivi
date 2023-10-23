@@ -7,68 +7,6 @@ using Verse;
 
 namespace VVRace
 {
-    public abstract class EnergyAcceptor : Building
-    {
-        public abstract EnergyFluxNetwork EnergyFluxNetwork { get; set; }
-        public abstract EnergyFluxNetworkNode EnergyFluxNode { get; }
-
-        public override void SpawnSetup(Map map, bool respawningAfterLoad)
-        {
-            base.SpawnSetup(map, respawningAfterLoad);
-
-            var energyNode = EnergyFluxNode;
-            var candidates = new HashSet<EnergyFluxNetwork>();
-            foreach (var c in GenAdjFast.AdjacentCellsCardinal(this).Where(c => c.InBounds(map)))
-            {
-                var adjacentEnergyAcceptor = c.GetFirstThing<EnergyAcceptor>(map);
-                if (adjacentEnergyAcceptor != null)
-                {
-                    candidates.Add(adjacentEnergyAcceptor.EnergyFluxNetwork);
-
-                    EnergyFluxNode.connectedNodes.Add(adjacentEnergyAcceptor.EnergyFluxNode);
-                    adjacentEnergyAcceptor.EnergyFluxNode.connectedNodes.Add(EnergyFluxNode);
-                }
-            }
-
-            if (candidates.Count == 0)
-            {
-                EnergyFluxNetwork = new EnergyFluxNetwork();
-                EnergyFluxNetwork.AddEnergyNode(this, energyNode);
-            }
-            else if (candidates.Count == 1)
-            {
-                EnergyFluxNetwork = candidates.First();
-                EnergyFluxNetwork.AddEnergyNode(this, energyNode);
-            }
-            else
-            {
-                EnergyFluxNetwork = candidates.First();
-                EnergyFluxNetwork.AddEnergyNode(this, energyNode);
-
-                candidates.Remove(EnergyFluxNetwork);
-                EnergyFluxNetwork.MergeNetworks(candidates);
-            }
-        }
-
-        public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
-        {
-            base.DeSpawn(mode);
-
-            var energyNode = EnergyFluxNode;
-            foreach (var node in energyNode.connectedNodes)
-            {
-                node.connectedNodes.Remove(energyNode);
-            }
-            energyNode.connectedNodes.Clear();
-
-            if (EnergyFluxNetwork != null)
-            {
-                EnergyFluxNetwork.RemoveEnergyNode(this);
-                EnergyFluxNetwork = null;
-            }
-        }
-    }
-
     [StaticConstructorOnStartup]
     public class ArtificialPlant : EnergyAcceptor
     {
@@ -237,10 +175,6 @@ namespace VVRace
 
             if (Spawned)
             {
-                foreach (var plant in EnergyFluxNetwork)
-                {
-
-                }
                 var energyFlux = _energyNode.LocalEnergyFluxForInspector;
                 if (energyFlux != 0)
                 {
@@ -331,11 +265,6 @@ namespace VVRace
 
         public override void Tick()
         {
-            if (Spawned && EnergyFluxNetwork?.ShouldRegenerateNetworkTick >= 0 && GenTicks.TicksGame >= EnergyFluxNetwork.ShouldRegenerateNetworkTick)
-            {
-                EnergyFluxNetwork.SplitNetworks();
-            }
-
             base.Tick();
 
             if (Destroyed)

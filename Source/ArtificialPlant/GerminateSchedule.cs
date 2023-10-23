@@ -255,7 +255,7 @@ namespace VVRace
 
                 var successChance = Mathf.Clamp01((IsFixedGerminate ? germinatorData.fixedGerminateSuccessChance : germinatorData.germinateSuccessChance) * bonusSuccessChanceMultiplier);
                 
-                var expectProductCount = (IsFixedGerminate ? Rand.Range(2, 4) : Rand.Range(3, 5)) + bonusProductCount;
+                var expectProductCount = (IsFixedGerminate ? Rand.Range(2, 4) : Rand.Range(4, 6)) + bonusProductCount;
                 var actualProductCount = (int)expectProductCount;
 
                 if (expectProductCount > 0 && Rand.Chance(expectProductCount - actualProductCount))
@@ -301,11 +301,15 @@ namespace VVRace
                     // 실패시 랜덤 결과
                     table.Add((germinatorData.germinateFailureCriticalWeight, null));
 
-                    var failureCropsWeightSum = germinatorData.germinateFailureCropsTable.Sum(tdc => tdc.count);
-                    for (int i = 0; i < germinatorData.germinateFailureCropsTable.Count; ++i)
+                    // 결과물이 하나 이상이고 고정 배양이 아닐때만 작물이 등장
+                    if (actualProductCount > 0 && !IsFixedGerminate)
                     {
-                        var tdc = germinatorData.germinateFailureCropsTable[i];
-                        table.Add((tdc.count / (float)failureCropsWeightSum * germinatorData.germinateFailureCropsWeight, tdc.thingDef));
+                        var failureCropsWeightSum = germinatorData.germinateFailureCropsTable.Sum(tdc => tdc.count);
+                        for (int i = 0; i < germinatorData.germinateFailureCropsTable.Count; ++i)
+                        {
+                            var tdc = germinatorData.germinateFailureCropsTable[i];
+                            table.Add((tdc.count / (float)failureCropsWeightSum * germinatorData.germinateFailureCropsWeight, tdc.thingDef));
+                        }
                     }
                 }
 
