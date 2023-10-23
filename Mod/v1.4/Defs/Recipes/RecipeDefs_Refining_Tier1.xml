@@ -232,8 +232,19 @@
           <disallowedCategories>
             <li>FoodMeals</li>
           </disallowedCategories>
+          <disallowedThingDefs>
+            <li>VV_Pollen</li>
+          </disallowedThingDefs>
         </filter>
-        <count>3.75</count>
+        <count>3.0</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_Pollen</li>
+          </thingDefs>
+        </filter>
+        <count>0.5</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
@@ -244,6 +255,9 @@
       <disallowedCategories>
         <li>FoodMeals</li>
       </disallowedCategories>
+      <disallowedThingDefs>
+        <li>VV_Pollen</li>
+      </disallowedThingDefs>
     </fixedIngredientFilter>
     <defaultIngredientFilter>
       <thingDefs>

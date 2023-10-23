@@ -22,6 +22,18 @@
         <percentPerDay>0.025</percentPerDay>
       </li>
     </comps>
+
+    <stages>
+      <li>
+        <makeImmuneTo>
+          <li>BadBack</li>
+          <li>Frail</li>
+          <li>Dementia</li>
+          <li>Alzheimers</li>
+          <li>Asthma</li>
+        </makeImmuneTo>
+      </li>
+    </stages>
   </HediffDef>
 
   <HediffDef>
