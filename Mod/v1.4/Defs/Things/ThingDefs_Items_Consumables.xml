@@ -249,11 +249,6 @@
 	</ThingDef>
 
   <ThingDef Abstract="True" Name="VV_FloweringTeaBase" ParentName="DrugBase">
-    <graphicData>
-      <texPath>Things/Item/Drug/Tea</texPath>
-      <graphicClass>Graphic_StackCount</graphicClass>
-      <drawSize>0.88</drawSize>
-    </graphicData>
     <rotatable>false</rotatable>
 
     <statBases>
@@ -311,7 +306,10 @@
     </descriptionHyperlinks>
 
     <graphicData>
-      <color>(150,30,20)</color>
+      <texPath>Things/Item/VV_FloralHotTea</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <drawSize>0.88</drawSize>
+      <color>(255,255,255)</color>
     </graphicData>
     
     <statBases>
@@ -338,7 +336,10 @@
     </descriptionHyperlinks>
 
     <graphicData>
-      <color>(108,220,255)</color>
+      <texPath>Things/Item/VV_FloralIceTea</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <drawSize>0.88</drawSize>
+      <color>(255,255,255)</color>
     </graphicData>
 
     <statBases>
@@ -365,7 +366,10 @@
     </descriptionHyperlinks>
 
     <graphicData>
-      <color>(250,255,150)</color>
+      <texPath>Things/Item/VV_FloralMilkTea</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <drawSize>0.88</drawSize>
+      <color>(255,255,255)</color>
     </graphicData>
 
     <statBases>

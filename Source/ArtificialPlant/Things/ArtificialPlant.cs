@@ -318,6 +318,13 @@ namespace VVRace
 
             if (Spawned)
             {
+                if (!CanPlaceCell(Position))
+                {
+                    var minified = this.MakeMinified();
+                    GenPlace.TryPlaceThing(minified, Position, Map, ThingPlaceMode.Direct);
+                    return;
+                }
+
                 if ((int)Energy == 0)
                 {
                     _zeroEnergyTicks += GenTicks.TickRareInterval;
@@ -331,12 +338,6 @@ namespace VVRace
                 else if (EnergyChargeRatio > 0.1f && HitPoints < MaxHitPoints)
                 {
                     HitPoints = Mathf.Clamp(HitPoints + 1, 0, MaxHitPoints);
-                }
-
-                if (!CanPlaceCell(Position))
-                {
-                    var minified = this.MakeMinified();
-                    GenPlace.TryPlaceThing(minified, Position, Map, ThingPlaceMode.Direct);
                 }
             }
         }

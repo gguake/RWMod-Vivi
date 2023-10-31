@@ -478,7 +478,8 @@
     </modExtensions>
   </ThingDef>
   
-  <!-- 독안개연꽃 -->
+  <!-- 연꽃 -->
+  <!--
   <ThingDef ParentName="VV_ArtificialPlantProductive">
     <defName>VV_Toxiclotus</defName>
     <label>toxiclotus</label>
@@ -550,4 +551,5 @@
       </li>
     </modExtensions>
   </ThingDef>
+  -->
 </Defs>

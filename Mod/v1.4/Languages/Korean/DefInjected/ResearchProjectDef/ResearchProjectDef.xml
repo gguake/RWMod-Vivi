@@ -37,7 +37,7 @@
 <VV_AutomatedInfra.label>자동화 비비 시설</VV_AutomatedInfra.label>
 <VV_AutomatedInfra.description>전기를 이용해 기존의 비비들이 하던 일부 수작업들을 자동화하고 효율을 증대시킵니다.</VV_AutomatedInfra.description>
 
-<VV_EnergyTransfer.label>에너지 전송</VV_EnergyTransfer.label>
-<VV_EnergyTransfer.description>고대 식물의 에너지 전달 방식을 모방해 고대 식물의 에너지를 원거리로 전달할 수 있는 에너지 튜브를 건설할 수 있습니다.</VV_EnergyTransfer.description>
+<VV_EnergyTransferTube.label>에너지 전송 튜브</VV_EnergyTransferTube.label>
+<VV_EnergyTransferTube.description>고대 식물의 에너지 전달 방식을 모방해 고대 식물의 에너지를 벽을 넘어 원거리로 전송할 수 있는 에너지 튜브를 건설할 수 있습니다.</VV_EnergyTransferTube.description>
 
 </LanguageData>

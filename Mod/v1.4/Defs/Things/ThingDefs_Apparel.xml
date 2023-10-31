@@ -15,7 +15,7 @@
     </thingCategories>
 
     <statBases>
-      <MaxHitPoints>400</MaxHitPoints>
+      <MaxHitPoints>300</MaxHitPoints>
       <WorkToMake>48000</WorkToMake>
       <Mass>2</Mass>
       <StuffEffectMultiplierArmor>0.54</StuffEffectMultiplierArmor>
@@ -76,7 +76,6 @@
       </skillRequirements>
       <researchPrerequisites>
         <li>VV_AdvancedApparels</li>
-        <li>VV_Lifestrand</li>
       </researchPrerequisites>
       <displayPriority>3500</displayPriority>
     </recipeMaker>

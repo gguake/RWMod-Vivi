@@ -44,7 +44,7 @@ namespace VVRace
         private IEnumerable<FloatMenuOption> GetFloatMenuOptionForGerminate()
         {
             var fixedGerminateCandidate = new List<ThingDef>() { null };
-            fixedGerminateCandidate.AddRange(building.Map.listerThings.AllThings
+            fixedGerminateCandidate.AddRange(building.Map.listerThings.ThingsInGroup(ThingRequestGroup.MinifiedThing)
                 .Where(v => v.GetInnerIfMinified() is ArtificialPlant)
                 .Select(v => v.GetInnerIfMinified().def)
                 .Distinct());

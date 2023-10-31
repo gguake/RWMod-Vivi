@@ -100,7 +100,7 @@
     <description>.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_Richflower</ThingDef>
-      <ThingDef>VV_Toxiclotus</ThingDef>
+      <!--<ThingDef>VV_Toxiclotus</ThingDef>-->
     </descriptionHyperlinks>
 
     <graphicData>
