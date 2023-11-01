@@ -3,7 +3,7 @@
   <ThingDef ParentName="ResourceBase">
     <defName>VV_UnfermentedMead</defName>
     <label>unfermented vivi mead</label>
-    <description>It is unfermented vivi mead. For fermentation, the temperature should be maintained between 16-24℃(60-75℉).</description>
+    <description>It is unfermented vivi mead. For fermentation, the temperature should be maintained between 20-28℃(68-82℉).</description>
     <descriptionHyperlinks>
       <ThingDef>VV_Mead</ThingDef>
     </descriptionHyperlinks>
@@ -32,8 +32,8 @@
 
     <comps>
       <li Class="VVRace.CompProperties_FermentItem">
-        <minSafeTemperature>16</minSafeTemperature>
-        <maxSafeTemperature>24</maxSafeTemperature>
+        <minSafeTemperature>20</minSafeTemperature>
+        <maxSafeTemperature>28</maxSafeTemperature>
         <damageProgressPerDegreePerTick>0.00002</damageProgressPerDegreePerTick>
         <totalFermentDays>10</totalFermentDays>
         <fermentedThings>

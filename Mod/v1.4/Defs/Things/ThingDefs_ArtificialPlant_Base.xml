@@ -160,7 +160,7 @@
     <clearBuildingArea>false</clearBuildingArea>
     <designationHotKey>Misc1</designationHotKey>
     <researchPrerequisites>
-      <li>VV_EnergyTransfer</li>
+      <li>VV_EnergyTransferTube</li>
     </researchPrerequisites>
   </ThingDef>
 </Defs>

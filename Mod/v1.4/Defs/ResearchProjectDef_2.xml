@@ -21,10 +21,10 @@
   </ResearchProjectDef>
   
   <ResearchProjectDef ParentName="ViviResearchProjectTier2Base">
-    <defName>VV_EnergyTransfer</defName>
-    <label>energy transfer</label>
+    <defName>VV_EnergyTransferTube</defName>
+    <label>energy transfer tube</label>
     <description>.</description>
-    <baseCost>1000</baseCost>
+    <baseCost>900</baseCost>
     <researchViewX>3</researchViewX>
     <researchViewY>1.4</researchViewY>
     <prerequisites>

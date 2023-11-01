@@ -13,7 +13,7 @@ namespace VVRace
         public override bool HasJobOnThing(Pawn pawn, Thing t, bool forced = false)
         {
             var germinator = t as Building_SeedlingGerminator;
-            if (germinator == null || t.def != VVThingDefOf.VV_SeedlingGerminator)
+            if (germinator == null || t.def != VVThingDefOf.VV_SeedlingGerminator || germinator.IsForbidden(pawn))
             {
                 return false;
             }

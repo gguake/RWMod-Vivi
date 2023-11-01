@@ -67,7 +67,7 @@ namespace VVRace
             }
             else
             {
-                _fermentedProgress = Mathf.Clamp01(_fermentedProgress + ticks / Props.TotalFermentTicks);
+                _fermentedProgress = Mathf.Clamp01(_fermentedProgress + (float)ticks / Props.TotalFermentTicks);
             }
 
             if (_fermentedProgress >= 1f)

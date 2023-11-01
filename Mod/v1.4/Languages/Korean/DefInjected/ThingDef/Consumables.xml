@@ -38,10 +38,10 @@
 <VV_FloralMilkTea.ingestible.ingestReportString>{0} 마시는 중.</VV_FloralMilkTea.ingestible.ingestReportString>
 
 <VV_UnfermentedMead.label>숙성중인 비비 꿀술</VV_UnfermentedMead.label>
-<VV_UnfermentedMead.description>꿀에 물과 효모를 섞어 숙성중인 비비 꿀술입니다. 제대로 숙성하려면 16~24℃를 10일간 유지해야 합니다.</VV_UnfermentedMead.description>
+<VV_UnfermentedMead.description>꿀에 물과 효모를 섞어 숙성중인 비비 꿀술입니다. 제대로 숙성하려면 20~28℃에서 10일간 숙성해야 합니다.</VV_UnfermentedMead.description>
 
 <VV_Mead.label>비비 꿀술</VV_Mead.label>
-<VV_Mead.description>꿀을 발효시켜 만든 비비들의 전통주입니다. 일반적으로 생각하는 꿀에 대한 이미지와 다르게 굉장히 독합니다.
+<VV_Mead.description>꿀을 발효시켜 만든 비비들의 전통주입니다. 의외로 단맛은 거의 나지 않고 꿀 특유의 향이 납니다.
 \n비비들은 정작 술을 선호하지 않지만 외지인들의 수요가 많아 남는 꿀을 비싸게 팔기 위해 만듭니다.</VV_Mead.description>
 <VV_Mead.ingestible.ingestCommandString>{0} 마시기</VV_Mead.ingestible.ingestCommandString>
 <VV_Mead.ingestible.ingestReportString>{0} 마시는 중.</VV_Mead.ingestible.ingestReportString>
