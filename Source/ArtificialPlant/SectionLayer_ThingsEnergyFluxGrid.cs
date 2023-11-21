@@ -17,6 +17,7 @@ namespace VVRace
 
         public static void DrawEnergyFluxGridOverlayThisFrame()
         {
+
             lastPowerGridDrawFrame = Time.frameCount;
         }
 

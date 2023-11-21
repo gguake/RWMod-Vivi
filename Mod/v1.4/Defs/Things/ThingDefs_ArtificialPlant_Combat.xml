@@ -134,7 +134,7 @@
 
     <statBases>
       <MarketValue>450</MarketValue>
-      <MaxHitPoints>250</MaxHitPoints>
+      <MaxHitPoints>300</MaxHitPoints>
       
       <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
       <VV_GrassFiberGatherYield>2</VV_GrassFiberGatherYield>
@@ -233,5 +233,65 @@
       </li>
     </verbs>
   </ThingDef>
+
+
+  <!-- 건인장 -->
+  <ThingDef ParentName="VV_ArtificialPlantCombat">
+    <defName>VV_Shootus</defName>
+    <label>Shootus</label>
+    <description>.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_LivingLeaf</ThingDef>
+    </descriptionHyperlinks>
+    <thingClass>VVRace.Shootus</thingClass>
+    <tickerType>Normal</tickerType>
+
+    <graphicData>
+      <texPath>Things/Plants/VV_Cactus</texPath>
+      <graphicClass>VVRace.Graphic_Conditional</graphicClass>
+    </graphicData>
+    <drawerType>MapMeshAndRealTime</drawerType>
+
+    <statBases>
+      <MarketValue>450</MarketValue>
+      <MaxHitPoints>240</MaxHitPoints>
+      
+      <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
+      <VV_GrassFiberGatherYield>2</VV_GrassFiberGatherYield>
+    </statBases>
+
+    <costList>
+      <VV_LivingLeaf>20</VV_LivingLeaf>
+    </costList>
+
+    <comps>
+    </comps>
+
+    <building>
+      <combatPower>75</combatPower>
+      <ai_combatDangerous>true</ai_combatDangerous>
+      <turretTopOffset>(0, 0.05)</turretTopOffset>
+      <turretTopDrawSize>0.5</turretTopDrawSize>
+    </building>
+
+    <placeWorkers>
+    </placeWorkers>
+
+    <modExtensions>
+      <li Class="VVRace.ArtificialPlantModExtension">
+        <germinateWeight>125</germinateWeight>
+        <germinateRare>true</germinateRare>
+
+        <energyCapacity>800</energyCapacity>
+        <zeroEnergyDamageByChance>1~10</zeroEnergyDamageByChance>
+
+        <energyConsumeRule Class="VVRace.EnergyRule_Constant">
+          <energy>10</energy>
+        </energyConsumeRule>
+        <verbShootEnergy>3</verbShootEnergy>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
 
 </Defs>

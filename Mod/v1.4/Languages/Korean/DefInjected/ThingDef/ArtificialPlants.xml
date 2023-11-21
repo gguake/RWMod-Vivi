@@ -50,4 +50,7 @@
 <VV_Bullet_PeaFast.label>폭발콩</VV_Bullet_PeaFast.label>
 <VV_Gun_Pealauncher.label>폭탄뿌리개</VV_Gun_Pealauncher.label>
 <VV_Gun_Pealauncher.description>빠르게 콩을 생성해 적에게 발사하는 폭탄뿌리개의 꼬투리입니다.</VV_Gun_Pealauncher.description>
+
+<VV_Shootus.label>건인장</VV_Shootus.label>
+<VV_Shootus.description>기묘한 표정의 얼굴을 가진 선인장입니다. 한쪽 손에 원거리 무기를 장착할 수 있으며 적을 감지하면 장착된 무기를 사용해 적을 공격합니다.</VV_Shootus.description>
 </LanguageData>

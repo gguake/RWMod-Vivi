@@ -162,18 +162,24 @@ namespace VVRace
         {
             var field = AccessTools.Field(typeof(ThoughtWorker_Precept_HasAutomatedTurrets), "automatedTurretDefs");
             var list = field.GetValue(null) as List<ThingDef>;
-            var artificialPlants = list.Where(v => typeof(ArtificialPlant).IsAssignableFrom(v.thingClass)).ToList();
+            var artificialPlants = list.Where(v => typeof(ArtificialPlant).IsAssignableFrom(v.thingClass)).ToHashSet();
             list.RemoveAll(v => artificialPlants.Contains(v));
         }
 
-        private static void Designator_Build_SelectedUpdate_Postfix()
+        private static void Designator_Build_SelectedUpdate_Postfix(BuildableDef ___entDef)
         {
-            SectionLayer_ThingsEnergyFluxGrid.DrawEnergyFluxGridOverlayThisFrame();
+            if (___entDef is ThingDef thingDef && (typeof(EnergyAcceptor).IsAssignableFrom(thingDef.thingClass) || typeof(ArtificialPlantPot).IsAssignableFrom(thingDef.thingClass)))
+            {
+                SectionLayer_ThingsEnergyFluxGrid.DrawEnergyFluxGridOverlayThisFrame();
+            }
         }
 
-        private static void Designator_Install_SelectedUpdate_Postfix()
+        private static void Designator_Install_SelectedUpdate_Postfix(BuildableDef ___entDef)
         {
-            SectionLayer_ThingsEnergyFluxGrid.DrawEnergyFluxGridOverlayThisFrame();
+            if (___entDef is ThingDef thingDef && (typeof(EnergyAcceptor).IsAssignableFrom(thingDef.thingClass) || typeof(ArtificialPlantPot).IsAssignableFrom(thingDef.thingClass)))
+            {
+                SectionLayer_ThingsEnergyFluxGrid.DrawEnergyFluxGridOverlayThisFrame();
+            }
         }
     }
 }

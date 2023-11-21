@@ -76,6 +76,8 @@ namespace VVRace
             }
         }
 
+        protected virtual bool CanFlip => true;
+
         public ArtificialPlant()
         {
             _energyNode = new EnergyFluxNetworkNode()
@@ -124,7 +126,7 @@ namespace VVRace
                     isShift = true;
                 }
 
-                bool isFlipUV = Rand.Bool;
+                bool isFlipUV = CanFlip ? Rand.Bool : false;
                 var material = Graphic.MatSingleFor(this);
                 Graphic.TryGetTextureAtlasReplacementInfo(material, def.category.ToAtlasGroup(), isFlipUV, vertexColors: false, out material, out var uvs, out var _);
 
@@ -171,18 +173,18 @@ namespace VVRace
 
             foreach (var thing in AdjacentEnergyTransmitter)
             {
-                PrintEnergyWirePieceConnecting(layer, this, thing, false);
+                PrintEnergyWirePieceConnecting(layer, thing, false);
                 return;
             }
         }
 
         public override void PrintForEnergyGrid(SectionLayer layer)
         {
-            PowerNetGraphics.PrintOverlayConnectorBaseFor(layer, this);
+            PrintOverlayConnectorBaseFor(layer);
 
             foreach (var thing in AdjacentEnergyAcceptor)
             {
-                PrintEnergyWirePieceConnecting(layer, this, thing, true);
+                PrintEnergyWirePieceConnecting(layer, thing, true);
             }
         }
 

@@ -1,4 +1,5 @@
 ﻿using RimWorld;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ using Verse.AI;
 
 namespace VVRace
 {
-    public class TurretPlant : ArtificialPlant, IAttackTarget, IAttackTargetSearcher, ILoadReferenceable
+    public class Shootus : ArtificialPlant, IAttackTarget, IAttackTargetSearcher, ILoadReferenceable, IThingHolder, IConditionalGraphicProvider
     {
         public Thing Thing => this;
 
@@ -26,31 +27,89 @@ namespace VVRace
         protected int _lastAttackTargetTick;
         public int LastAttackTargetTick => _lastAttackTargetTick;
 
-        protected Thing _gun;
-        public CompEquippable GunCompEq => _gun.TryGetComp<CompEquippable>();
-        public Verb AttackVerb => GunCompEq.PrimaryVerb;
+        private ThingOwner _innerContainer;
+        public CompEquippable GunCompEq => Gun?.TryGetComp<CompEquippable>();
+        public Verb AttackVerb => GunCompEq?.PrimaryVerb;
 
-
-        protected TurretPlantTop _turretTop;
-        public TurretPlantTop TurretTop => _turretTop;
+        protected ShootusTop _shootusTop;
+        public ShootusTop ShootusTop => _shootusTop;
 
         private bool _burstActivated;
         private int _burstCooldownTicksLeft;
         private int _burstWarmupTicksLeft;
 
+        protected override bool CanFlip => false;
+
         public bool Active
         {
             get
             {
-                return EnergyChargeRatio > 0f;
+                return Gun != null && EnergyChargeRatio > 0f;
             }
         }
 
         public bool WarmingUp => _burstWarmupTicksLeft > 0;
 
-        public TurretPlant()
+        public Thing Gun
         {
-            _turretTop = new TurretPlantTop(this);
+            get
+            {
+                if (_innerContainer.Count > 0)
+                {
+                    return _innerContainer[0];
+                }
+
+                return null;
+            }
+            protected set
+            {
+                if (value == null)
+                {
+                    _innerContainer.TryDropAll(PositionHeld, MapHeld, ThingPlaceMode.Near);
+                    _innerContainer.Clear();
+                }
+                else
+                {
+                    var comp = value.TryGetComp<CompEquippable>();
+                    if (comp == null || comp.PrimaryVerb == null || comp.PrimaryVerb.IsMeleeAttack)
+                    {
+                        return;
+                    }
+
+                    if (_innerContainer.Count > 0)
+                    {
+                        _innerContainer.TryDropAll(PositionHeld, MapHeld, ThingPlaceMode.Near);
+                        _innerContainer.Clear();
+                    }
+
+                    if (!_innerContainer.TryAdd(value))
+                    {
+                        Log.Message($"Treid to add gun to shootus but failed");
+                    }
+
+                    UpdateGunVerbs();
+                }
+
+                DirtyMapMesh(Map);
+            }
+        }
+
+        public int GraphicIndex => Gun != null ? 1 : 0;
+
+        public Shootus()
+        {
+            _innerContainer = new ThingOwner<Thing>(this, oneStackOnly: true);
+            _shootusTop = new ShootusTop(this);
+        }
+
+        public ThingOwner GetDirectlyHeldThings()
+        {
+            return _innerContainer;
+        }
+
+        public void GetChildHolders(List<IThingHolder> outChildren)
+        {
+            ThingOwnerUtility.AppendThingHoldersFromThings(outChildren, GetDirectlyHeldThings());
         }
 
         public override void ExposeData()
@@ -60,7 +119,8 @@ namespace VVRace
             Scribe_Values.Look(ref _lastAttackTargetTick, "lastAttackTargetTick", 0);
 
             Scribe_TargetInfo.Look(ref _currentTarget, "currentTarget");
-            Scribe_Deep.Look(ref _gun, "gun");
+
+            Scribe_Deep.Look(ref _innerContainer, "innerContainer", this);
 
             Scribe_Values.Look(ref _burstActivated, "burstActivated");
             Scribe_Values.Look(ref _burstCooldownTicksLeft, "burstCooldownTicksLeft", 0);
@@ -68,24 +128,11 @@ namespace VVRace
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
-                if (_gun == null)
-                {
-                    Log.Error("Turret had null gun after loading. Recreating.");
-                    MakeGun();
-                }
-                else
+                if (Gun != null)
                 {
                     UpdateGunVerbs();
                 }
             }
-        }
-
-        public override void PostMake()
-        {
-            base.PostMake();
-
-            _burstCooldownTicksLeft = def.building.turretInitialCooldownTime.SecondsToTicks();
-            MakeGun();
         }
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
@@ -94,7 +141,7 @@ namespace VVRace
 
             if (!respawningAfterLoad)
             {
-                _turretTop.SetRotationFromOrientation();
+                _shootusTop.SetRotationFromOrientation();
             }
         }
 
@@ -108,7 +155,7 @@ namespace VVRace
         {
             base.Tick();
 
-            if (Active && Spawned)
+            if (Active && Spawned && Gun != null)
             {
                 GunCompEq.verbTracker.VerbsTick();
                 if (AttackVerb.state == VerbState.Bursting)
@@ -138,7 +185,7 @@ namespace VVRace
                     }
                 }
 
-                _turretTop.TurretTopTick();
+                _shootusTop.TurretTopTick();
             }
             else
             {
@@ -151,7 +198,11 @@ namespace VVRace
             var drawOffset = Vector3.zero;
             float angleOffset = 0f;
 
-            _turretTop.DrawTurret(drawOffset, angleOffset);
+            if (Gun != null)
+            {
+                _shootusTop.DrawTurret(drawOffset, angleOffset);
+            }
+
             base.Draw();
 
         }
@@ -159,6 +210,8 @@ namespace VVRace
         public override void DrawExtraSelectionOverlays()
         {
             base.DrawExtraSelectionOverlays();
+
+            if (Gun == null) { return; }
 
             float range = AttackVerb.verbProps.range;
             if (range < 90f)
@@ -175,7 +228,7 @@ namespace VVRace
             if (WarmingUp)
             {
                 int degreesWide = (int)((float)_burstWarmupTicksLeft * 0.5f);
-                GenDraw.DrawAimPie(this, _currentTarget, degreesWide, (float)def.size.x * 0.5f);
+                GenDraw.DrawAimPie(this, _currentTarget, degreesWide, 0f);
             }
         }
 
@@ -194,6 +247,38 @@ namespace VVRace
             return true;
         }
 
+        public override IEnumerable<Gizmo> GetGizmos()
+        {
+            foreach (var gizmo in base.GetGizmos())
+            {
+                yield return gizmo;
+            }
+
+            if (DebugSettings.godMode)
+            {
+                Command_Action command_addRandomGun = new Command_Action();
+                command_addRandomGun.defaultLabel = "DEV: Add random gun";
+                command_addRandomGun.action = () =>
+                {
+                    if (Gun == null)
+                    {
+                        Find.WindowStack.Add(new FloatMenu(DefDatabase<ThingDef>.AllDefsListForReading.Where(v => v.IsRangedWeapon).Select(def => new FloatMenuOption(def.LabelCap, () =>
+                        {
+                            var gun = ThingMaker.MakeThing(def);
+                            if (gun != null)
+                            {
+                                Log.Message($"gun: {gun}");
+                                Gun = gun;
+                            }
+
+                        })).ToList()));
+                    }
+                };
+
+                yield return command_addRandomGun;
+            }
+        }
+
         public bool ThreatDisabled(IAttackTargetSearcher disabledFor)
         {
             if (!Active)
@@ -204,15 +289,9 @@ namespace VVRace
             return false;
         }
 
-        public void MakeGun()
-        {
-            _gun = ThingMaker.MakeThing(def.building.turretGunDef);
-            UpdateGunVerbs();
-        }
-
         public void TryStartShootSomething(bool canBeginBurstImmediately)
         {
-            if (!Spawned || (AttackVerb.ProjectileFliesOverhead() && base.Map.roofGrid.Roofed(base.Position)) || !AttackVerb.Available())
+            if (!Spawned || !Active || (AttackVerb.ProjectileFliesOverhead() && base.Map.roofGrid.Roofed(base.Position)) || !AttackVerb.Available())
             {
                 ResetCurrentTarget();
                 return;
@@ -221,7 +300,7 @@ namespace VVRace
             _currentTarget = TryFindNewTarget();
             if (_currentTarget.IsValid)
             {
-                var randomInRange = def.building.turretBurstWarmupTime.RandomInRange;
+                var randomInRange = AttackVerb.verbProps.warmupTime;
                 if (randomInRange > 0f)
                 {
                     _burstWarmupTicksLeft = randomInRange.SecondsToTicks();
@@ -243,6 +322,8 @@ namespace VVRace
 
         public LocalTargetInfo TryFindNewTarget()
         {
+            if (!Active) { return LocalTargetInfo.Invalid; }
+
             var attackTargetSearcher = this;
             var faction = attackTargetSearcher.Thing.Faction;
             var range = AttackVerb.verbProps.range;
@@ -298,6 +379,8 @@ namespace VVRace
 
         protected virtual void BeginBurst()
         {
+            if (!Active) { return; }
+
             AttackVerb.TryStartCastOn(_currentTarget);
 
             _lastAttackTargetTick = Find.TickManager.TicksGame;
@@ -311,12 +394,7 @@ namespace VVRace
 
         protected float BurstCooldownTime()
         {
-            if (def.building.turretBurstCooldownTime >= 0f)
-            {
-                return def.building.turretBurstCooldownTime;
-            }
-
-            return AttackVerb.verbProps.defaultCooldownTime;
+            return Gun.GetStatValue(StatDefOf.RangedWeapon_Cooldown);
         }
 
         private void ResetCurrentTarget()
@@ -327,14 +405,22 @@ namespace VVRace
 
         private void UpdateGunVerbs()
         {
-            var allVerbs = _gun.TryGetComp<CompEquippable>().AllVerbs;
+            if (Gun == null)
+            {
+                return;
+            }
+
+            var allVerbs = Gun.TryGetComp<CompEquippable>().AllVerbs;
             for (int i = 0; i < allVerbs.Count; i++)
             {
                 Verb verb = allVerbs[i];
                 verb.caster = this;
                 verb.castCompleteCallback = () =>
                 {
-                    _burstCooldownTicksLeft = BurstCooldownTime().SecondsToTicks();
+                    if (Spawned && Gun != null)
+                    {
+                        _burstCooldownTicksLeft = BurstCooldownTime().SecondsToTicks();
+                    }
                 };
             }
         }

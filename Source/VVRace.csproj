@@ -84,6 +84,8 @@
     <Compile Include="ArtificialPlant\Sensor\SensorWorker_Fire.cs" />
     <Compile Include="ArtificialPlant\Sensor\SensorWorker_Mechanoid.cs" />
     <Compile Include="ArtificialPlant\Things\EnergyTransmitter.cs" />
+    <Compile Include="ArtificialPlant\Things\Plants\Shootus.cs" />
+    <Compile Include="ArtificialPlant\Things\Plants\ShootusTop.cs" />
     <Compile Include="ArtificialPlant\UI\Alert_LowEnergyArtificialPlant.cs" />
     <Compile Include="ArtificialPlant\Comps\CompLightningLod.cs" />
     <Compile Include="ArtificialPlant\Comps\CompSensorExplosive.cs" />

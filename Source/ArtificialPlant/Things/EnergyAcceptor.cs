@@ -4,18 +4,27 @@ using Verse;
 
 namespace VVRace
 {
+    [StaticConstructorOnStartup]
     public static class EnergyAcceptorOverlayMats
     {
         public static readonly Graphic LinkedOverlayGraphic;
 
+        public static readonly Material MatWire;
+        public static readonly Material MatConnectorBase;
+        public static readonly Material MatConnectorLine;
+
+
         static EnergyAcceptorOverlayMats()
         {
-            Graphic graphic = GraphicDatabase.Get<Graphic_Single>("Things/Building/VV_EnergyTube_OverlayAtlas", ShaderDatabase.MetaOverlay);
+            Graphic graphic = GraphicDatabase.Get<Graphic_Single>("Things/Special/VV_EnergyTube_OverlayAtlas", ShaderDatabase.MetaOverlay);
             LinkedOverlayGraphic = GraphicUtility.WrapLinked(graphic, LinkDrawerType.Basic);
+
+            MatWire = MaterialPool.MatFrom("Things/Special/VV_EnergyTubeWire");
+            MatConnectorBase = MaterialPool.MatFrom("Things/Special/VV_EnergyOverlayBase", ShaderDatabase.MetaOverlay);
+            MatConnectorLine = MaterialPool.MatFrom("Things/Special/VV_EnergyOverlayLine", ShaderDatabase.MetaOverlay);
         }
     }
 
-    [StaticConstructorOnStartup]
     public abstract class EnergyAcceptor : Building
     {
         public abstract EnergyFluxNetwork EnergyFluxNetwork { get; set; }
@@ -77,21 +86,28 @@ namespace VVRace
         {
         }
 
-        private static readonly Material WireMat = MaterialPool.MatFrom("Things/Special/Power/Wire");
-        public static void PrintEnergyWirePieceConnecting(SectionLayer layer, Thing A, Thing B, bool forOverlay)
+        protected void PrintOverlayConnectorBaseFor(SectionLayer layer)
         {
-            var mat = WireMat;
+            var center = this.TrueCenter();
+            center.y = AltitudeLayer.MapDataOverlay.AltitudeFor();
+
+            Printer_Plane.PrintPlane(layer, center, new Vector2(1f, 1f), EnergyAcceptorOverlayMats.MatConnectorBase);
+        }
+
+        protected void PrintEnergyWirePieceConnecting(SectionLayer layer, Thing A, bool forOverlay)
+        {
+            var mat = EnergyAcceptorOverlayMats.MatWire;
             var y = AltitudeLayer.SmallWire.AltitudeFor();
             if (forOverlay)
             {
-                mat = PowerOverlayMats.MatConnectorLine;
+                mat = EnergyAcceptorOverlayMats.MatConnectorLine;
                 y = AltitudeLayer.MapDataOverlay.AltitudeFor();
             }
 
-            var center = (A.TrueCenter() + B.TrueCenter()) / 2f;
+            var center = (this.TrueCenter() + A.TrueCenter()) / 2f;
             center.y = y;
 
-            var v = B.TrueCenter() - A.TrueCenter();
+            var v = A.TrueCenter() - this.TrueCenter();
             Printer_Plane.PrintPlane(layer, center, new Vector2(1f, v.MagnitudeHorizontal()), mat, v.AngleFlat());
         }
     }

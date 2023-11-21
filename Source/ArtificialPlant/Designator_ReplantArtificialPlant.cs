@@ -63,5 +63,11 @@ namespace VVRace
 
             return base.CanDesignateCell(c);
         }
+
+        public override void SelectedUpdate()
+        {
+            base.SelectedUpdate();
+            SectionLayer_ThingsEnergyFluxGrid.DrawEnergyFluxGridOverlayThisFrame();
+        }
     }
 }
