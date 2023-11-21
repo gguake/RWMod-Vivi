@@ -36,7 +36,7 @@
 		</techHediffsTags>
 	</ThingDef>
   
-	<ThingDef ParentName="BodyPartProstheticMakeableBase">
+	<ThingDef ParentName="BodyPartBionicBase">
 		<defName>VV_BionicAntennae</defName>
 		<label>bionic vivi antennae</label>
 		<description>.</description>

@@ -177,6 +177,9 @@ namespace VVRace
                         randomGeneCount--;
                     }
 
+                    // 바디 변경 유전자 허용 x
+                    xenogeneDefs.RemoveAll(def => def.bodyType != null);
+
                     var request = new PawnGenerationRequest(
                         pawnKindDef,
                         faction: faction,
