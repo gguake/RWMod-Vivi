@@ -10,7 +10,7 @@ namespace VVRace
 
         static EnergyAcceptorOverlayMats()
         {
-            Graphic graphic = GraphicDatabase.Get<Graphic_Single>("Things/Special/Power/TransmitterAtlas", ShaderDatabase.MetaOverlay);
+            Graphic graphic = GraphicDatabase.Get<Graphic_Single>("Things/Building/VV_EnergyTube_OverlayAtlas", ShaderDatabase.MetaOverlay);
             LinkedOverlayGraphic = GraphicUtility.WrapLinked(graphic, LinkDrawerType.Basic);
         }
     }
@@ -29,10 +29,14 @@ namespace VVRace
 
             EnergyFluxGrid.Notify_SpawnEnergyAcceptor(this);
             EnergyFluxGrid = EnergyFluxGrid.GetFluxGrid(map);
+
+            Map.mapDrawer.MapMeshDirty(Position, MapMeshFlag.PowerGrid, true, false);
         }
 
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
         {
+            Map.mapDrawer.MapMeshDirty(Position, MapMeshFlag.PowerGrid, true, false);
+
             EnergyFluxGrid.Notify_DespawnEnergyAcceptor(this);
             EnergyFluxGrid = null;
 
@@ -44,7 +48,6 @@ namespace VVRace
             if (Spawned && EnergyFluxGrid != null && EnergyFluxGrid.ShouldRefreshNetwork)
             {
                 EnergyFluxGrid.RefreshNetworks();
-                Map.mapDrawer.MapMeshDirty(Position, (MapMeshFlag)0x100000);
             }
 
             base.Tick();
@@ -55,7 +58,6 @@ namespace VVRace
             if (Spawned && EnergyFluxGrid != null && EnergyFluxGrid.ShouldRefreshNetwork)
             {
                 EnergyFluxGrid.RefreshNetworks();
-                Map.mapDrawer.MapMeshDirty(Position, (MapMeshFlag)0x100000);
             }
 
             base.TickRare();

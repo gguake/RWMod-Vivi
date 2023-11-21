@@ -12,10 +12,8 @@ namespace VVRace
             : base(section)
         {
             requireAddToMapMesh = false;
-            relevantChangeTypes = (MapMeshFlag)0x2000;
+            relevantChangeTypes = MapMeshFlag.PowerGrid;
         }
-
-        public static bool ShouldDrawGrid => lastPowerGridDrawFrame + 1 >= Time.frameCount;
 
         public static void DrawEnergyFluxGridOverlayThisFrame()
         {
@@ -24,7 +22,7 @@ namespace VVRace
 
         public override void DrawLayer()
         {
-            if (ShouldDrawGrid)
+            if (lastPowerGridDrawFrame + 1 >= Time.frameCount)
             {
                 base.DrawLayer();
             }
