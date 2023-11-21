@@ -6,7 +6,7 @@ namespace VVRace
     public class ShootusTop
     {
         [TweakValue("ShootusTop_PositionOffsetX", -1f, 1f)]
-        public static float PositionOffsetX = 0.17f;
+        public static float PositionOffsetX = 0.2f;
         [TweakValue("ShootusTop_PositionOffsetZ", -1f, 1f)]
         public static float PositionOffsetZ = 0.45f;
 
