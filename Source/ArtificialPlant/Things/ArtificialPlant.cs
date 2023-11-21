@@ -161,6 +161,29 @@ namespace VVRace
             {
                 Rand.PopState();
             }
+
+            PostPrint(layer);
+        }
+
+        public override void PostPrint(SectionLayer layer)
+        {
+            if (!Spawned) { return; }
+
+            foreach (var thing in AdjacentEnergyTransmitter)
+            {
+                PrintEnergyWirePieceConnecting(layer, this, thing, false);
+                return;
+            }
+        }
+
+        public override void PrintForEnergyGrid(SectionLayer layer)
+        {
+            PowerNetGraphics.PrintOverlayConnectorBaseFor(layer, this);
+
+            foreach (var thing in AdjacentEnergyAcceptor)
+            {
+                PrintEnergyWirePieceConnecting(layer, this, thing, true);
+            }
         }
 
         public override string GetInspectString()
@@ -424,5 +447,47 @@ namespace VVRace
                 AddEnergy(-energy);
             }
         }
+
+        private IEnumerable<EnergyAcceptor> AdjacentEnergyAcceptor
+        {
+            get
+            {
+                foreach (var adjacent in GenAdjFast.AdjacentCellsCardinal(Position))
+                {
+
+                    var gridCell = EnergyFluxGrid[adjacent];
+                    if (gridCell.artificialPlant != null)
+                    {
+                        yield return gridCell.artificialPlant;
+                    }
+                    else if (gridCell.transmitter != null)
+                    {
+                        yield return gridCell.transmitter;
+                    }
+                }
+            }
+        }
+
+        private IEnumerable<EnergyAcceptor> AdjacentEnergyTransmitter
+        {
+            get
+            {
+                var gridCell = EnergyFluxGrid[Position];
+                if (gridCell.transmitter != null)
+                {
+                    yield return gridCell.transmitter;
+                }
+
+                foreach (var adjacent in GenAdjFast.AdjacentCellsCardinal(Position))
+                {
+                    gridCell = EnergyFluxGrid[adjacent];
+                    if (gridCell.transmitter != null)
+                    {
+                        yield return gridCell.transmitter;
+                    }
+                }
+            }
+        }
+
     }
 }

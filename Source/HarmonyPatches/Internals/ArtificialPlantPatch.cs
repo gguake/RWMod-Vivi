@@ -43,6 +43,15 @@ namespace VVRace
                 original: AccessTools.Method(typeof(ThoughtWorker_Precept_HasAutomatedTurrets), nameof(ThoughtWorker_Precept_HasAutomatedTurrets.ResetStaticData)),
                 postfix: new HarmonyMethod(typeof(ArtificialPlantPatch), nameof(ThoughtWorker_Precept_HasAutomatedTurrets_ResetStaticData_Postfix)));
 
+            harmony.Patch(
+                original: AccessTools.Method(typeof(Designator_Build), nameof(Designator_Build.SelectedUpdate)),
+                postfix: new HarmonyMethod(typeof(ArtificialPlantPatch), nameof(Designator_Build_SelectedUpdate_Postfix)));
+
+            harmony.Patch(
+                original: AccessTools.Method(typeof(Designator_Install), nameof(Designator_Install.SelectedUpdate)),
+                postfix: new HarmonyMethod(typeof(ArtificialPlantPatch), nameof(Designator_Install_SelectedUpdate_Postfix)));
+
+
             Log.Message("!! [ViViRace] plant patch complete");
         }
 
@@ -155,6 +164,16 @@ namespace VVRace
             var list = field.GetValue(null) as List<ThingDef>;
             var artificialPlants = list.Where(v => typeof(ArtificialPlant).IsAssignableFrom(v.thingClass)).ToList();
             list.RemoveAll(v => artificialPlants.Contains(v));
+        }
+
+        private static void Designator_Build_SelectedUpdate_Postfix()
+        {
+            SectionLayer_ThingsEnergyFluxGrid.DrawEnergyFluxGridOverlayThisFrame();
+        }
+
+        private static void Designator_Install_SelectedUpdate_Postfix()
+        {
+            SectionLayer_ThingsEnergyFluxGrid.DrawEnergyFluxGridOverlayThisFrame();
         }
     }
 }

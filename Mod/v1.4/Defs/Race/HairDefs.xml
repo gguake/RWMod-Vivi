@@ -48,4 +48,10 @@
     <label>vivi hairF</label>
     <texPath>Things/Pawn/Vivi/Hairs/HairF</texPath>
   </HairDef>
+
+  <HairDef ParentName="ViviHairBase">
+    <defName>VV_HairG</defName>
+    <label>vivi hairG</label>
+    <texPath>Things/Pawn/Vivi/Hairs/HairG</texPath>
+  </HairDef>
 </Defs>

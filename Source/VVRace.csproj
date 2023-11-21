@@ -37,11 +37,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="0Harmony">
-      <HintPath>C:\Program Files (x86)\Steam\steamapps\workshop\content\294100\2009463077\Current\Assemblies\0Harmony.dll</HintPath>
+      <HintPath>E:\Steam\steamapps\workshop\content\294100\2009463077\Current\Assemblies\0Harmony.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Assembly-CSharp">
-      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <HintPath>E:\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -77,6 +77,7 @@
     <Compile Include="ArtificialPlant\AI\JobDriver_HaulAndManageSeedling.cs" />
     <Compile Include="ArtificialPlant\AI\JobDriver_PackingSeedling.cs" />
     <Compile Include="ArtificialPlant\Energy\EnergyFluxGrid.cs" />
+    <Compile Include="ArtificialPlant\SectionLayer_ThingsEnergyFluxGrid.cs" />
     <Compile Include="ArtificialPlant\Things\EnergyAcceptor.cs" />
     <Compile Include="ArtificialPlant\Energy\EnergyRule_AdjacentPollution.cs" />
     <Compile Include="ArtificialPlant\PlaceWorker_EnergyTube.cs" />

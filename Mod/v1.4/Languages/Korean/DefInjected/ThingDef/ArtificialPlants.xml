@@ -26,13 +26,15 @@
 \n주변의 화재를 감지하면 저장된 에너지를 소모해 화재를 진압합니다.</VV_Waterdrops.description>
 
 <VV_Radiantflower.label>빛바라기</VV_Radiantflower.label>
-<VV_Radiantflower.description>태양광에서 에너지를 생산하는 고대의 꽃입니다.
-\n지붕으로 막혀 태양광을 받을 수 없다면 에너지를 소모해 태양과 비슷한 수준의 광원을 발산합니다.</VV_Radiantflower.description>
+<VV_Radiantflower.description>태양광에서 에너지를 생산하는 고대의 꽃입니다. 지붕으로 막혀 태양광을 받을 수 없다면 에너지를 소모해 태양과 비슷한 수준의 광원을 발산합니다.</VV_Radiantflower.description>
 <VV_Radiantflower.comps.CompSchedule.offMessage>식물 휴식기에 꺼짐</VV_Radiantflower.comps.CompSchedule.offMessage>
 
 <VV_Richflower.label>풍년화</VV_Richflower.label>
-<VV_Richflower.description>인접한 식물이 많을수록 많은 에너지를 생산하는 고대의 꽃입니다. 채집시 많은 꿀을 얻을 수 있습니다.
-\n에너지를 지속적으로 주변에 퍼뜨리면서 주변 토양의 생산성을 개선하거나 오염을 제거해 재배에 유리한 환경으로 변화시킵니다.</VV_Richflower.description>
+<VV_Richflower.description>인접한 식물이 많을수록 많은 에너지를 생산하는 고대의 꽃입니다. 주변에 오염된 토양이 많을수록 많은 에너지를 생산합니다. 채집시 많은 꿀을 얻을 수 있습니다.
+\n에너지를 지속적으로 주변에 퍼뜨리면서 주변 토양의 생산성을 개선해 재배에 유리한 환경으로 변화시킵니다.</VV_Richflower.description>
+
+<VV_Purifimint.label>정화민트</VV_Purifimint.label>
+<VV_Purifimint.description>토양의 오염을 흡수해 에너지로 변환하는 고대의 꽃입니다.  인접한 식물이 많을수록 많은 에너지를 생산하는 고대의 꽃입니다. 주기적으로 주변 토양의 오염을 제거합니다.</VV_Purifimint.description>
 
 <VV_Peashooter.label>콩뿌리개</VV_Peashooter.label>
 <VV_Peashooter.description>적을 감지하면 콩을 발사해 쫓아내는 식물로 발사할때마다 에너지를 소모합니다.

@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using RimWorld;
+using System.Text;
 using Verse;
 
 namespace VVRace
@@ -16,12 +17,16 @@ namespace VVRace
             {
                 if (DebugSettings.godMode && EnergyFluxNetwork != null)
                 {
-                    sb.AppendLine();
-                    sb.Append($"flux network: {EnergyFluxNetwork.NetworkHash}");
+                    sb.AppendInNewLine($"flux network: {EnergyFluxNetwork.NetworkHash}");
                 }
             }
 
-            return sb.ToString();
+            return sb.ToString().TrimEndNewlines();
+        }
+
+        public override void PrintForEnergyGrid(SectionLayer layer)
+        {
+            EnergyAcceptorOverlayMats.LinkedOverlayGraphic.Print(layer, this, 0f);
         }
     }
 }

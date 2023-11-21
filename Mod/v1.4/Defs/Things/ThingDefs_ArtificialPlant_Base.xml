@@ -108,24 +108,24 @@
     <thingClass>VVRace.EnergyTransmitter</thingClass>
     <category>Building</category>
     <graphicData>
-      <texPath>Things/Building/Linked/PowerConduit_Atlas</texPath>
+      <texPath>Things/Building/VV_EnergyTube_Atlas</texPath>
       <graphicClass>Graphic_Single</graphicClass>
-      <linkType>Transmitter</linkType>
+      <linkType>Basic</linkType>
       <linkFlags>
-        <li>Custom5</li>
+        <li>Custom4</li>
       </linkFlags>
       <damageData>
         <rect>(0,0.35,1,0.3)</rect>
       </damageData>
     </graphicData>
-    <uiIconPath>Things/Building/Linked/PowerConduit_MenuIcon</uiIconPath>
+    <uiIconPath>Things/Building/VV_EnergyTube_MenuIcon</uiIconPath>
     <uiIconScale>0.7</uiIconScale>
     <building>
       <ai_chillDestination>false</ai_chillDestination>
       <isInert>true</isInert>
       <isEdifice>false</isEdifice>
       <blueprintGraphicData>
-        <texPath>Things/Building/Linked/PowerConduit_Blueprint_Atlas</texPath>
+        <texPath>Things/Building/VV_EnergyTube_Blueprint_Atlas</texPath>
       </blueprintGraphicData>
     </building>
     <drawerType>MapMeshOnly</drawerType>

@@ -293,10 +293,9 @@
 
     <thingClass>Building_WorkTable</thingClass>
     <graphicData>
-      <texPath>Things/Building/Production/Refinery</texPath>
+      <texPath>Things/Building/VV_AutoExtractor</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
-      <shaderType>CutoutComplex</shaderType>
-      <drawSize>(3,2)</drawSize>
+      <drawSize>(2.5,2.5)</drawSize>
       <shadowData>
         <volume>(2.22, 0.8, 0.62)</volume>
         <offset>(0, 0, -0.13)</offset>
@@ -311,7 +310,6 @@
       <VV_SparklingPetal>15</VV_SparklingPetal>
     </costList>
     <stuffCategories>
-      <li>Woody</li>
       <li>VV_Wax</li>
       <li>Metallic</li>
     </stuffCategories>
@@ -327,7 +325,7 @@
       <Flammability>1.0</Flammability>
       <Cleanliness>-3</Cleanliness>
     </statBases>
-    <size>(3,2)</size>
+    <size>(2,2)</size>
     <designationCategory>VV_Bulidings</designationCategory>
     <designationHotKey>Misc5</designationHotKey>
     <passability>PassThroughOnly</passability>

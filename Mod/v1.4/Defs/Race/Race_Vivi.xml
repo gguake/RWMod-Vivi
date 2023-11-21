@@ -18,6 +18,7 @@
             <li>VV_Vivi_C</li>
             <li>VV_Vivi_D</li>
             <li>VV_Vivi_E</li>
+            <li>VV_Vivi_F</li>
           </headTypes>
           <bodyTypes>
             <li>Thin</li>
@@ -86,7 +87,7 @@
 							<inFrontOfBody>false</inFrontOfBody>
               <offsets>
 								<north>
-									<layerOffset>-0.28</layerOffset>
+									<layerOffset>-0.274</layerOffset>
 								</north>
                 <south>
 									<layerOffset>0.1</layerOffset>
@@ -118,7 +119,7 @@
 							<inFrontOfBody>false</inFrontOfBody>
               <offsets>
 								<north>
-									<layerOffset>-0.28</layerOffset>
+									<layerOffset>-0.274</layerOffset>
 								</north>
                 <south>
 									<layerOffset>0.1</layerOffset>

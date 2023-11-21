@@ -213,6 +213,8 @@ namespace VVRace
             _shouldRefreshNetworkTicks = int.MaxValue;
         }
 
+        public EnergyFluxGridCell this[IntVec3 pos] => _energyFluxGridCells.TryGetValue(pos, out var gridCell) ? gridCell : default;
+
         private int GetEmptyNetworkIndex()
         {
             for (int i = 0; i < _energyFluxNetworks.Count; ++i)
