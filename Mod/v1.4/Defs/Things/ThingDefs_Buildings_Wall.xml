@@ -206,11 +206,11 @@
       </li>
       <li>
         <damageDef>Mining</damageDef>
-        <multiplier>0.25</multiplier>
+        <multiplier>0.5</multiplier>
       </li>
       <li>
         <damageDef>Flame</damageDef>
-        <multiplier>8</multiplier>
+        <multiplier>6</multiplier>
       </li>
     </damageMultipliers>
     

@@ -52,6 +52,7 @@
 <VV_Gun_Pealauncher.description>빠르게 콩을 생성해 적에게 발사하는 폭탄뿌리개의 꼬투리입니다.</VV_Gun_Pealauncher.description>
 
 <VV_Shootus.label>건인장</VV_Shootus.label>
-<VV_Shootus.description>기묘한 표정의 얼굴을 가진 선인장입니다. 한쪽 손에 원거리 무기를 장착할 수 있으며 적을 감지하면 장착된 무기를 사용해 적을 공격합니다.
-\n무기를 장착시키려면 건인장을 선택한 후 장착하길 원하는 무기를 우클릭해서 선택하세요.</VV_Shootus.description>
+<VV_Shootus.description>기묘한 표정의 얼굴을 가진 고대의 선인장입니다. 약간의 내화성을 가지고 있으며 식물이라고 생각되지 않을 정도로 유연하게 움직입니다.
+\n한쪽 손에 원거리 무기를 장착할 수 있으며 적을 감지하면 장착된 무기를 사용해 스스로 적을 공격합니다. 무기를 장착시키려면 건인장을 선택한 후 장착하길 원하는 무기를 우클릭해서 선택하세요.
+\n곡사 무기나 생체인증 무기는 착용할 수 없습니다.</VV_Shootus.description>
 </LanguageData>

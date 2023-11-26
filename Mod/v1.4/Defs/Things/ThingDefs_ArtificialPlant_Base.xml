@@ -40,6 +40,53 @@
       <WorkToBuild>1800</WorkToBuild>
       <ArmorRating_Blunt>0.5</ArmorRating_Blunt>
     </statBases>
+    <damageMultipliers>
+      <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>1.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Burn</damageDef>
+        <multiplier>1.5</multiplier>
+      </li>
+      <li>
+        <damageDef>TornadoScratch</damageDef>
+        <multiplier>1.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Bullet</damageDef>
+        <multiplier>0.75</multiplier>
+      </li>
+      <li>
+        <damageDef>Arrow</damageDef>
+        <multiplier>0.75</multiplier>
+      </li>
+      <li>
+        <damageDef>ArrowHighVelocity</damageDef>
+        <multiplier>0.75</multiplier>
+      </li>
+      <li>
+        <damageDef>Crush</damageDef>
+        <multiplier>0.75</multiplier>
+      </li>
+      <li>
+        <damageDef>Blunt</damageDef>
+        <multiplier>0.75</multiplier>
+      </li>
+      <li>
+        <damageDef>Poke</damageDef>
+        <multiplier>0.75</multiplier>
+      </li>
+      <li>
+        <damageDef>Stab</damageDef>
+        <multiplier>0.75</multiplier>
+      </li>
+      <li>
+        <damageDef>Bite</damageDef>
+        <multiplier>0.75</multiplier>
+      </li>
+    </damageMultipliers>
+
     <size>(1,1)</size>
     <stackLimit>1</stackLimit>
     <fillPercent>0.25</fillPercent>
@@ -135,9 +182,9 @@
     <resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
     <statBases>
       <MaxHitPoints>50</MaxHitPoints>
-      <WorkToBuild>35</WorkToBuild>
+      <WorkToBuild>40</WorkToBuild>
       <Flammability>0.7</Flammability>
-      <Beauty>-2</Beauty>
+      <Beauty>-1</Beauty>
     </statBases>
     <placingDraggableDimensions>1</placingDraggableDimensions>
     <costList>

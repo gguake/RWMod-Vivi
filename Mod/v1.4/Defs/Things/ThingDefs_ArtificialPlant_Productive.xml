@@ -352,7 +352,7 @@
     </graphicData>
 
     <statBases>
-      <MarketValue>180</MarketValue>
+      <MarketValue>450</MarketValue>
       <MaxHitPoints>70</MaxHitPoints>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
@@ -535,5 +535,4 @@
       </li>
     </modExtensions>
   </ThingDef>
-  -->
 </Defs>

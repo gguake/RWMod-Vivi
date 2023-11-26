@@ -134,7 +134,7 @@
 
     <statBases>
       <MarketValue>450</MarketValue>
-      <MaxHitPoints>300</MaxHitPoints>
+      <MaxHitPoints>350</MaxHitPoints>
       
       <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
       <VV_GrassFiberGatherYield>2</VV_GrassFiberGatherYield>
@@ -254,11 +254,22 @@
 
     <statBases>
       <MarketValue>450</MarketValue>
-      <MaxHitPoints>240</MaxHitPoints>
+      <MaxHitPoints>200</MaxHitPoints>
       
       <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
       <VV_GrassFiberGatherYield>2</VV_GrassFiberGatherYield>
     </statBases>
+
+    <damageMultipliers>
+      <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Burn</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+    </damageMultipliers>
 
     <costList>
       <VV_LivingLeaf>20</VV_LivingLeaf>
@@ -282,13 +293,13 @@
         <germinateWeight>125</germinateWeight>
         <germinateRare>true</germinateRare>
 
-        <energyCapacity>800</energyCapacity>
+        <energyCapacity>600</energyCapacity>
         <zeroEnergyDamageByChance>1~10</zeroEnergyDamageByChance>
 
         <energyConsumeRule Class="VVRace.EnergyRule_Constant">
-          <energy>10</energy>
+          <energy>30</energy>
         </energyConsumeRule>
-        <verbShootEnergy>5</verbShootEnergy>
+        <verbShootEnergy>10</verbShootEnergy>
       </li>
     </modExtensions>
   </ThingDef>
