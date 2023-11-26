@@ -115,10 +115,10 @@
       <li>Woody</li>
       <li>Stony</li>
     </stuffCategories>
-    <costStuffCount>150</costStuffCount>
+    <costStuffCount>70</costStuffCount>
 
     <costList>
-      <VV_Vivicream>80</VV_Vivicream>
+      <VV_Vivicream>50</VV_Vivicream>
     </costList>
 
     <inspectorTabs>

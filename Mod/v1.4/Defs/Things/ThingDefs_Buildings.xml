@@ -336,6 +336,7 @@
     <recipes>
       <li>VV_ExtractBulkHoney</li>
       <li>VV_ExtractBulkPropolis</li>
+      <li>VV_MakeFertilizerSeeds</li>
     </recipes>
     <inspectorTabs>
       <li>ITab_Bills</li>

@@ -255,7 +255,7 @@ namespace VVRace
 
                 var successChance = Mathf.Clamp01((IsFixedGerminate ? germinatorData.fixedGerminateSuccessChance : germinatorData.germinateSuccessChance) * bonusSuccessChanceMultiplier);
                 
-                var expectProductCount = (IsFixedGerminate ? Rand.Range(2, 4) : Rand.Range(4, 6)) + bonusProductCount;
+                var expectProductCount = (IsFixedGerminate ? Rand.Range(2, 3) : Rand.Range(3, 4)) + bonusProductCount;
                 var actualProductCount = (int)expectProductCount;
 
                 if (expectProductCount > 0 && Rand.Chance(expectProductCount - actualProductCount))

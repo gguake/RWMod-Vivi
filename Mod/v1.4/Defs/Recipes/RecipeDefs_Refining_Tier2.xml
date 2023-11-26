@@ -145,8 +145,42 @@
       </thingDefs>
     </fixedIngredientFilter>
     <products>
-      <MedicineHerbal>5</MedicineHerbal>
+      <MedicineHerbal>3</MedicineHerbal>
       <Neutroamine>10</Neutroamine>
+    </products>
+  </RecipeDef>
+
+  <!-- 대량 비료 정제 -->
+  <RecipeDef>
+    <defName>VV_MakeFertilizerSeeds</defName>
+    <label>make fertilizer from seeds</label>
+    <description>.</description>
+    <jobString>making fertilizer from seeds.</jobString>
+    <workAmount>2000</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+
+    <effectWorking>Cremate</effectWorking>
+    <soundWorking>Recipe_Cremate</soundWorking>
+    <uiIconThing>VV_Fertilizer</uiIconThing>
+
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_UnknownSeed</li>
+          </thingDefs>
+        </filter>
+        <count>30</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>VV_RawHoney</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <VV_Fertilizer>25</VV_Fertilizer>
     </products>
   </RecipeDef>
 </Defs>

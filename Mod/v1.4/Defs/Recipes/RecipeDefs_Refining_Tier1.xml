@@ -135,7 +135,7 @@
             <li>VV_Propolis</li>
           </thingDefs>
         </filter>
-        <count>3</count>
+        <count>5</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
@@ -145,7 +145,7 @@
     </fixedIngredientFilter>
     <products>
       <MedicineHerbal>1</MedicineHerbal>
-      <Neutroamine>2</Neutroamine>
+      <Neutroamine>3</Neutroamine>
     </products>
     <researchPrerequisite>VV_AdvancedGathering</researchPrerequisite>
   </RecipeDef>
