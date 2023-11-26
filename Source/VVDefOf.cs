@@ -52,6 +52,7 @@ namespace VVRace
         public static JobDef VV_GatherGrassFiber;
 
         public static JobDef VV_FertilizeArtificialPlant;
+        public static JobDef VV_EquipWeaponToShootus;
 
         public static JobDef VV_HaulGerminatingIngredient;
         public static JobDef VV_PackingSeedling;
@@ -90,6 +91,7 @@ namespace VVRace
         public static ThingDef VV_Richflower;
         public static ThingDef VV_Peashooter;
         public static ThingDef VV_Pealaucnher;
+        public static ThingDef VV_Shootus;
 
         public static ThingDef VV_MechScanner;
 

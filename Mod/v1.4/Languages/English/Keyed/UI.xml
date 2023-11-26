@@ -24,6 +24,8 @@
   <VV_InspectorViviGerminatorManageLastPeriods>Time remaining until next manage job: {0}</VV_InspectorViviGerminatorManageLastPeriods>
   <VV_InspectorViviGerminatorNoProduct>Germinating failed</VV_InspectorViviGerminatorNoProduct>
   <VV_InspectorViviGerminatorProduct>Germinating result: {0} x{1}</VV_InspectorViviGerminatorProduct>
+  <VV_InspectorViviShootusWeaponReserved>Reserved: {0}</VV_InspectorViviShootusWeaponReserved>
+  <VV_InspectorViviShootusWeaponEquipped>Equipped: {0}</VV_InspectorViviShootusWeaponEquipped>
 
   <VV_CommandFertilizeAutoActivated>Auto-use fertilizer</VV_CommandFertilizeAutoActivated>
   <VV_CommandFertilizeAutoActivatedDesc>When the plant's energy is below a certain level, the colonists set whether to automatically use fertilizer.</VV_CommandFertilizeAutoActivatedDesc>
@@ -35,6 +37,9 @@
   <VV_CommandCancelGerminateScheduleDesc>Cancel the currently scheduled or ongoing seed germinating operation.</VV_CommandCancelGerminateScheduleDesc>
   <VV_CommandCanWithdrawProduct>Packaging allowed</VV_CommandCanWithdrawProduct>
   <VV_CommandCanWithdrawProductDesc>Decide whether to proceed with the packaging of the seedlings that have been germinated.</VV_CommandCanWithdrawProductDesc>
+  <VV_CommandCancelReserveWeapon>Cancel arming</VV_CommandCancelReserveWeapon>
+  <VV_CommandCancelReserveWeaponDesc>Cancel the currently scheduled or ongoing arming operation.</VV_CommandCancelReserveWeaponDesc>
+  <VV_CommandUnequipWeapon>Disarm equipped weapon</VV_CommandUnequipWeapon>
 
   <VV_FloatMenuOptionDefaultGerminate>Germinate seedling with seeds</VV_FloatMenuOptionDefaultGerminate>
   <VV_FloatMenuOptionFixedGerminate>Grafting {0} seedling</VV_FloatMenuOptionFixedGerminate>

@@ -63,6 +63,20 @@
   </WorkGiverDef>
 
   <WorkGiverDef>
+    <defName>VV_EquipShootus</defName>
+    <label>equip weapon to shootus</label>
+    <giverClass>VVRace.WorkGiver_EquipShootus</giverClass>
+    <workType>Hauling</workType>
+    <priorityInType>85</priorityInType>
+    <verb>equipping weapon to shootus</verb>
+    <gerund>equipping weapon to shootus</gerund>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <prioritizeSustains>true</prioritizeSustains>
+  </WorkGiverDef>
+
+  <WorkGiverDef>
     <defName>VV_ManageGerminator</defName>
     <label>managing seedling at germinator</label>
     <giverClass>VVRace.WorkGiver_ManageGerminator</giverClass>

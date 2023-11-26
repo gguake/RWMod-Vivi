@@ -51,6 +51,10 @@ namespace VVRace
                 original: AccessTools.Method(typeof(Designator_Install), nameof(Designator_Install.SelectedUpdate)),
                 postfix: new HarmonyMethod(typeof(ArtificialPlantPatch), nameof(Designator_Install_SelectedUpdate_Postfix)));
 
+            harmony.Patch(
+                original: AccessTools.Method(typeof(FloatMenuMakerMap), nameof(FloatMenuMakerMap.TryMakeFloatMenu_NonPawn)),
+                transpiler: new HarmonyMethod(typeof(ArtificialPlantPatch), nameof(FloatMenuMakerMap_TryMakeFloatMenu_NonPawn_Transpiler)));
+
 
             Log.Message("!! [ViViRace] plant patch complete");
         }
@@ -174,12 +178,41 @@ namespace VVRace
             }
         }
 
-        private static void Designator_Install_SelectedUpdate_Postfix(BuildableDef ___entDef)
+        private static void Designator_Install_SelectedUpdate_Postfix(Designator_Install __instance)
         {
-            if (___entDef is ThingDef thingDef && (typeof(EnergyAcceptor).IsAssignableFrom(thingDef.thingClass) || typeof(ArtificialPlantPot).IsAssignableFrom(thingDef.thingClass)))
+            if (__instance.PlacingDef is ThingDef thingDef && (typeof(EnergyAcceptor).IsAssignableFrom(thingDef.thingClass) || typeof(ArtificialPlantPot).IsAssignableFrom(thingDef.thingClass)))
             {
                 SectionLayer_ThingsEnergyFluxGrid.DrawEnergyFluxGridOverlayThisFrame();
             }
+        }
+
+        public static void FloatMenuMakerMap_TryMakeFloatMenu_NonPawn_Injection(List<FloatMenuOption> list, Thing selectedThing, Thing cursorThing)
+        {
+            if (selectedThing is Shootus shootus && shootus.Faction == Faction.OfPlayer && Find.Selector.SelectedObjects.Count == 1)
+            {
+                if (shootus.CanAcceptWeaponNow(cursorThing))
+                {
+                    list.Add(new FloatMenuOption(
+                        "Equip".Translate(cursorThing.LabelShort),
+                        () => { shootus.ReserveWeapon(cursorThing); }));
+                }
+            }
+        }
+
+        private static IEnumerable<CodeInstruction> FloatMenuMakerMap_TryMakeFloatMenu_NonPawn_Transpiler(IEnumerable<CodeInstruction> codeInstructions)
+        {
+            var instructions = codeInstructions.ToList();
+
+            var i = instructions.FirstIndexOfInstruction(OpCodes.Stloc_3, operand: null) + 4;
+            instructions.InsertRange(i, new List<CodeInstruction>()
+            {
+                new CodeInstruction(OpCodes.Ldloc_0),
+                new CodeInstruction(OpCodes.Ldarg_0),
+                new CodeInstruction(OpCodes.Ldloc_3),
+                new CodeInstruction(OpCodes.Call, operand: AccessTools.Method(typeof(ArtificialPlantPatch), nameof(FloatMenuMakerMap_TryMakeFloatMenu_NonPawn_Injection)))
+            });
+
+            return instructions;
         }
     }
 }

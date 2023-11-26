@@ -9,6 +9,7 @@ using Verse.AI;
 
 namespace VVRace
 {
+    [StaticConstructorOnStartup]
     public class Shootus : ArtificialPlant, IAttackTarget, IAttackTargetSearcher, ILoadReferenceable, IThingHolder, IConditionalGraphicProvider
     {
         public Thing Thing => this;
@@ -27,12 +28,15 @@ namespace VVRace
         protected int _lastAttackTargetTick;
         public int LastAttackTargetTick => _lastAttackTargetTick;
 
+        protected ShootusTop _shootusTop;
+        public ShootusTop ShootusTop => _shootusTop;
+
         private ThingOwner _innerContainer;
         public CompEquippable GunCompEq => Gun?.TryGetComp<CompEquippable>();
         public Verb AttackVerb => GunCompEq?.PrimaryVerb;
 
-        protected ShootusTop _shootusTop;
-        public ShootusTop ShootusTop => _shootusTop;
+        private Thing _reservedWeapon;
+        public Thing ReservedWeapon => _reservedWeapon;
 
         private bool _burstActivated;
         private int _burstCooldownTicksLeft;
@@ -82,7 +86,7 @@ namespace VVRace
                         _innerContainer.Clear();
                     }
 
-                    if (!_innerContainer.TryAdd(value))
+                    if (!_innerContainer.TryAddOrTransfer(value))
                     {
                         Log.Message($"Treid to add gun to shootus but failed");
                     }
@@ -121,6 +125,7 @@ namespace VVRace
             Scribe_TargetInfo.Look(ref _currentTarget, "currentTarget");
 
             Scribe_Deep.Look(ref _innerContainer, "innerContainer", this);
+            Scribe_References.Look(ref _reservedWeapon, "reservedWeapon");
 
             Scribe_Values.Look(ref _burstActivated, "burstActivated");
             Scribe_Values.Look(ref _burstCooldownTicksLeft, "burstCooldownTicksLeft", 0);
@@ -147,6 +152,14 @@ namespace VVRace
 
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
         {
+            _reservedWeapon = null;
+
+            if (Gun != null)
+            {
+                _innerContainer.TryDrop(Gun, ThingPlaceMode.Near, out _);
+                Gun = null;
+            }
+
             base.DeSpawn(mode);
             ResetCurrentTarget();
         }
@@ -247,11 +260,48 @@ namespace VVRace
             return true;
         }
 
+        private static readonly Texture2D CancelCommandTex = ContentFinder<Texture2D>.Get("UI/Designators/Cancel");
         public override IEnumerable<Gizmo> GetGizmos()
         {
             foreach (var gizmo in base.GetGizmos())
             {
                 yield return gizmo;
+            }
+
+            if (Gun != null)
+            {
+                var gunDef = Gun.def;
+                var command_unequipWeapon = new Command_Action();
+                command_unequipWeapon.defaultLabel = LocalizeTexts.CommandUnequipWeapon.Translate();
+                command_unequipWeapon.defaultDesc = new StringBuilder().Append(Gun.LabelCap).Append(": ").Append(gunDef.description.CapitalizeFirst()).ToString();
+                command_unequipWeapon.icon = gunDef.uiIcon;
+                command_unequipWeapon.iconAngle = gunDef.uiIconAngle;
+                command_unequipWeapon.iconOffset = gunDef.uiIconOffset;
+                command_unequipWeapon.action = () =>
+                {
+                    EquipWeapon(null);
+                };
+
+                if (Faction != Faction.OfPlayer)
+                {
+                    command_unequipWeapon.Disable("CannotOrderNonControlled".Translate());
+                }
+
+                yield return command_unequipWeapon;
+            }
+
+            if (ReservedWeapon != null)
+            {
+                Command_Action command_cancelReserve = new Command_Action();
+                command_cancelReserve.icon = CancelCommandTex;
+                command_cancelReserve.defaultLabel = LocalizeTexts.CommandCancelReserveWeapon.Translate();
+                command_cancelReserve.defaultDesc = LocalizeTexts.CommandCancelReserveWeaponDesc.Translate();
+                command_cancelReserve.action = () =>
+                {
+                    _reservedWeapon = null;
+                };
+
+                yield return command_cancelReserve;
             }
 
             if (DebugSettings.godMode)
@@ -279,6 +329,23 @@ namespace VVRace
             }
         }
 
+        public override string GetInspectString()
+        {
+            var sb = new StringBuilder(base.GetInspectString());
+
+            if (_reservedWeapon != null)
+            {
+                sb.AppendInNewLine(LocalizeTexts.InspectorViviShootusWeaponReserved.Translate(_reservedWeapon.LabelShort));
+            }
+
+            if (Gun != null)
+            {
+                sb.AppendInNewLine(LocalizeTexts.InspectorViviShootusWeaponEquipped.Translate(Gun.LabelShort));
+            }
+
+            return sb.ToString();
+        }
+
         public bool ThreatDisabled(IAttackTargetSearcher disabledFor)
         {
             if (!Active)
@@ -289,9 +356,42 @@ namespace VVRace
             return false;
         }
 
+        public bool CanAcceptWeaponNow(Thing thing)
+        {
+            if (Gun != null || _reservedWeapon != null) { return false; }
+
+            var def = thing.def;
+            if (!def.IsRangedWeapon) { return false; }
+
+            var compEquippable = thing.TryGetComp<CompEquippable>();
+            if (compEquippable == null || compEquippable.PrimaryVerb == null || compEquippable.PrimaryVerb.IsMeleeAttack || compEquippable.PrimaryVerb.ProjectileFliesOverhead())
+            {
+                return false;
+            }
+            
+            var compBiocodable = thing.TryGetComp<CompBiocodable>();
+            if (compBiocodable == null || compBiocodable.Biocoded)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public void ReserveWeapon(Thing thing)
+        {
+            _reservedWeapon = thing;
+        }
+
+        public void EquipWeapon(Thing thing)
+        {
+            _reservedWeapon = null;
+            Gun = thing;
+        }
+
         public void TryStartShootSomething(bool canBeginBurstImmediately)
         {
-            if (!Spawned || !Active || (AttackVerb.ProjectileFliesOverhead() && base.Map.roofGrid.Roofed(base.Position)) || !AttackVerb.Available())
+            if (!Spawned || !Active || !AttackVerb.Available())
             {
                 ResetCurrentTarget();
                 return;
@@ -380,6 +480,12 @@ namespace VVRace
         protected virtual void BeginBurst()
         {
             if (!Active) { return; }
+
+            var energy = ArtificialPlantModExtension.verbShootEnergy;
+            if (energy > 0)
+            {
+                AddEnergy(-energy);
+            }
 
             AttackVerb.TryStartCastOn(_currentTarget);
 

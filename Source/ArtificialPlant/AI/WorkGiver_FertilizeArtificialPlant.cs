@@ -55,7 +55,12 @@ namespace VVRace
             var fertilizer = FindFertilizer(pawn);
             if (fertilizer == null) { return null; }
 
-            return JobMaker.MakeJob(VVJobDefOf.VV_FertilizeArtificialPlant, t, fertilizer);
+            if (!pawn.CanReach(plant, PathEndMode.Touch, MaxPathDanger(pawn)))
+            {
+                return null;
+            }
+
+            return JobMaker.MakeJob(VVJobDefOf.VV_FertilizeArtificialPlant, plant, fertilizer);
         }
 
         private Thing FindFertilizer(Pawn pawn)

@@ -9,6 +9,14 @@
   </JobDef>
 
   <JobDef>
+    <defName>VV_EquipWeaponToShootus</defName>
+    <driverClass>VVRace.JobDriver_EquipWeaponToShootus</driverClass>
+    <reportString>equip TargetB to TargetA.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef>
+
+  <JobDef>
     <defName>VV_HaulGerminatingIngredient</defName>
     <driverClass>VVRace.JobDriver_HaulGerminatingIngredient</driverClass>
     <reportString>hauling TargetB to TargetA.</reportString>

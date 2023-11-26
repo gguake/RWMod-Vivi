@@ -24,6 +24,8 @@
   <VV_InspectorViviGerminatorManageLastPeriods>다음 관리 작업까지 남은 시간: {0}</VV_InspectorViviGerminatorManageLastPeriods>
   <VV_InspectorViviGerminatorNoProduct>배양 실패</VV_InspectorViviGerminatorNoProduct>
   <VV_InspectorViviGerminatorProduct>배양 결과: {0} x{1}</VV_InspectorViviGerminatorProduct>
+  <VV_InspectorViviShootusWeaponReserved>예약됨: {0}</VV_InspectorViviShootusWeaponReserved>
+  <VV_InspectorViviShootusWeaponEquipped>장착됨: {0}</VV_InspectorViviShootusWeaponEquipped>
 
   <VV_CommandFertilizeAutoActivated>비료 자동 사용</VV_CommandFertilizeAutoActivated>
   <VV_CommandFertilizeAutoActivatedDesc>식물의 에너지가 일정 이하일때 정착민들이 비료를 자동으로 사용할지 설정합니다.</VV_CommandFertilizeAutoActivatedDesc>
@@ -35,6 +37,9 @@
   <VV_CommandCancelGerminateScheduleDesc>현재 예약되어있거나 진행중인 모종 배양 작업을 취소합니다.</VV_CommandCancelGerminateScheduleDesc>
   <VV_CommandCanWithdrawProduct>모종 포장 허용</VV_CommandCanWithdrawProduct>
   <VV_CommandCanWithdrawProductDesc>배양이 완료된 모종을 포장하는 작업을 진행할지 설정합니다.</VV_CommandCanWithdrawProductDesc>
+  <VV_CommandCancelReserveWeapon>무기 장착 취소</VV_CommandCancelReserveWeapon>
+  <VV_CommandCancelReserveWeaponDesc>현재 예약된 무기 장착을 취소합니다.</VV_CommandCancelReserveWeaponDesc>
+  <VV_CommandUnequipWeapon>장착된 무기 해제</VV_CommandUnequipWeapon>
 
   <VV_FloatMenuOptionDefaultGerminate>씨앗으로 모종 배양</VV_FloatMenuOptionDefaultGerminate>
   <VV_FloatMenuOptionFixedGerminate>꺾꽂이로 {0} 모종 배양</VV_FloatMenuOptionFixedGerminate>

@@ -288,7 +288,7 @@
         <energyConsumeRule Class="VVRace.EnergyRule_Constant">
           <energy>10</energy>
         </energyConsumeRule>
-        <verbShootEnergy>3</verbShootEnergy>
+        <verbShootEnergy>5</verbShootEnergy>
       </li>
     </modExtensions>
   </ThingDef>

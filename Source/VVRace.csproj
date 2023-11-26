@@ -71,11 +71,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArtificialPlant\AI\JobDriver_ClearGerminator.cs" />
+    <Compile Include="ArtificialPlant\AI\JobDriver_EquipWeaponToShootus.cs" />
     <Compile Include="ArtificialPlant\AI\JobDriver_FertilizeArtificialPlant.cs" />
     <Compile Include="ArtificialPlant\AI\JobDriver_ManageSeedling.cs" />
     <Compile Include="ArtificialPlant\AI\JobDriver_HaulGerminatingIngredient.cs" />
     <Compile Include="ArtificialPlant\AI\JobDriver_HaulAndManageSeedling.cs" />
     <Compile Include="ArtificialPlant\AI\JobDriver_PackingSeedling.cs" />
+    <Compile Include="ArtificialPlant\AI\WorkGiver_EquipShootus.cs" />
     <Compile Include="ArtificialPlant\Energy\EnergyFluxGrid.cs" />
     <Compile Include="ArtificialPlant\SectionLayer_ThingsEnergyFluxGrid.cs" />
     <Compile Include="ArtificialPlant\Things\EnergyAcceptor.cs" />

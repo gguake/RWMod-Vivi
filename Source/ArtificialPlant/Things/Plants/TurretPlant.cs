@@ -302,6 +302,7 @@ namespace VVRace
 
             _lastAttackTargetTick = Find.TickManager.TicksGame;
             _lastAttackedTarget = _currentTarget;
+
         }
 
         protected void BurstComplete()

@@ -16,6 +16,10 @@
   <VV_FertilizeArtificialPlant.verb>비료 투여</VV_FertilizeArtificialPlant.verb>
   <VV_FertilizeArtificialPlant.gerund>비료 투여</VV_FertilizeArtificialPlant.gerund>
 
+  <VV_EquipShootus.label>건인장에 무기 장착</VV_EquipShootus.label>
+  <VV_EquipShootus.verb>건인장에 무기 장착</VV_EquipShootus.verb>
+  <VV_EquipShootus.gerund>건인장에 무기 장착</VV_EquipShootus.gerund>
+
   <VV_ManageGerminator.label>모종 배양대 관리</VV_ManageGerminator.label>
   <VV_ManageGerminator.verb>모종 관리</VV_ManageGerminator.verb>
   <VV_ManageGerminator.gerund>모종 관리</VV_ManageGerminator.gerund>
