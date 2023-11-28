@@ -16,14 +16,7 @@ namespace VVRace
         {
             get
             {
-                var pawn = Pawn;
-                var compVivi = pawn.GetCompVivi();
-                if (compVivi != null && (compVivi.isRoyal || !pawn.DevelopmentalStage.Adult()))
-                {
-                    return false;
-                }
-
-                return true;
+                return Pawn.GetCompVivi() == null;
             }
         }
     }

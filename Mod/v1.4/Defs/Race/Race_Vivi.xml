@@ -608,12 +608,12 @@
       <lifeStageWorkSettings>
         <Firefighter>13</Firefighter>
         <Patient>0</Patient>
-        <Doctor>13</Doctor>
+        <Doctor>10</Doctor>
         <PatientBedRest>0</PatientBedRest>
         <Childcare>0</Childcare>
         <BasicWorker>3</BasicWorker>
         <Warden>10</Warden>
-        <Handling>10</Handling>
+        <Handling>7</Handling>
         <Cooking>3</Cooking>
         <Hunting>10</Hunting>
         <Construction>7</Construction>
@@ -655,11 +655,11 @@
           <li>(17.999,100)</li>
           <li>(18,0)</li>
           <li>(18.001,0)</li>
-          <li>(18.002,100)</li>
-          <li>(19,180)</li>
-          <li>(28,150)</li>
-          <li>(30,30)</li>
-          <li>(60,0)</li>
+          <li>(18.002,150)</li>
+          <li>(19,200)</li>
+          <li>(25,100)</li>
+          <li>(30,20)</li>
+          <li>(40,0)</li>
         </points>
       </ageGenerationCurve>
       
@@ -671,7 +671,7 @@
 
     <comps>
       <li Class="VVRace.CompProperties_EggLayer">
-        <eggProgressDays>18</eggProgressDays>
+        <eggProgressDays>12</eggProgressDays>
       </li>
       
       <li Class="VVRace.CompProperties_Vivi" />

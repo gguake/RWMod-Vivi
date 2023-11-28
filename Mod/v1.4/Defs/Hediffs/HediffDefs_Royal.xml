@@ -27,6 +27,7 @@
         </statOffsets>
         <statFactors>
           <WorkSpeedGlobal>0.75</WorkSpeedGlobal>
+          <LifespanFactor>10</LifespanFactor>
         </statFactors>
       </li>
     </stages>

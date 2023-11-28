@@ -91,7 +91,7 @@ namespace VVRace
                 var egg = ThingMaker.MakeThing(VVThingDefOf.VV_ViviEgg);
                 var hatcher = egg.TryGetComp<CompViviHatcher>();
                 hatcher.hatcheeParent = pawn;
-                hatcher.parentXenogenes = pawn.genes.Xenogenes.Select(v => v.def).ToList();
+                hatcher.parentXenogenes = pawn.genes.Xenogenes.Where(v => v.def.biostatArc == 0).Select(v => v.def).ToList();
                 hatcher.parentXenogenes.RemoveAll(
                     v => v.endogeneCategory == EndogeneCategory.BodyType ||
                     v.endogeneCategory == EndogeneCategory.Melanin ||

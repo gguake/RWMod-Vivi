@@ -32,13 +32,17 @@
           <li>Alzheimers</li>
           <li>Asthma</li>
         </makeImmuneTo>
+
+        <statFactors>
+          <LifespanFactor>2.0</LifespanFactor>
+        </statFactors>
       </li>
     </stages>
   </HediffDef>
 
   <HediffDef>
     <defName>VV_ViviGrowthBoost</defName>
-    <label>growth boost</label>
+    <label>learning boost</label>
     <description>.</description>
     <hediffClass>HediffWithComps</hediffClass>
     <defaultLabelColor>(1,0,0.5)</defaultLabelColor>
@@ -49,20 +53,17 @@
 
     <stages>
       <li>
-        <statFactors>
-          <GlobalLearningFactor>1.25</GlobalLearningFactor>
-          <VV_GrowthPointsFactor>1.5</VV_GrowthPointsFactor>
-        </statFactors>
+        <statOffsets>
+          <VV_GrowthPointsFactor>1.0</VV_GrowthPointsFactor>
+          <GlobalLearningFactor>1.0</GlobalLearningFactor>
+        </statOffsets>
       </li>
     </stages>
 
     <comps>
+      <li Class="VVRace.HediffCompProperties_GrowthBoost" />
       <li Class="HediffCompProperties_Disappears">
         <disappearsAfterTicks>54000~66000</disappearsAfterTicks>
-      </li>
-      <li Class="VVRace.HediffCompProperties_ViviGrowthBoost">
-        <tickInterval>2000</tickInterval>
-        <additionalAgeBoostMultiplier>4.0</additionalAgeBoostMultiplier>
       </li>
     </comps>
   </HediffDef>

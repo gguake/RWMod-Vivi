@@ -8,19 +8,23 @@
     <displayCategory>Miscellaneous</displayCategory>
     <biologicalAgeTickFactorFromAgeCurve>
       <points>
-        <li>(0, 2)</li>
-        <li>(3, 2)</li>
-        <li>(7, 1.75)</li>
-        <li>(13, 1.5)</li>
-        <li>(18.5, 1.25)</li>
+        <li>(0, 3)</li>
+        <li>(3, 3)</li>
+        <li>(7, 4)</li>
+        <li>(11, 8)</li>
+        <li>(20, 8)</li>
+        <li>(45, 9)</li>
       </points>
     </biologicalAgeTickFactorFromAgeCurve>
     <biostatMet>-5</biostatMet>
     <biostatCpx>5</biostatCpx>
     <sterilize>true</sterilize>
+    <statOffsets>
+      <VV_GrowthPointsFactor>3.0</VV_GrowthPointsFactor>
+      <GlobalLearningFactor>1.0</GlobalLearningFactor>
+    </statOffsets>
     <statFactors>
-      <VV_GrowthPointsFactor>2.5</VV_GrowthPointsFactor>
-      <VV_LearningRateFactor>1.75</VV_LearningRateFactor>
+      <VV_LearningRateFactor>3.0</VV_LearningRateFactor>
     </statFactors>
   </GeneDef>
 </Defs>
