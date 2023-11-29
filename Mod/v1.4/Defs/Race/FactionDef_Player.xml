@@ -71,7 +71,7 @@
     <description>.</description>
     <basicMemberKind>VV_PlayerVivi</basicMemberKind>
     
-    <leaderTitle>queen</leaderTitle>
+    <leaderTitle>representative</leaderTitle>
   </FactionDef>
   
   <FactionDef ParentName="PlayerViviFactionBase">
@@ -80,6 +80,6 @@
     <description>.</description>
     <basicMemberKind>VV_PlayerExiledRoyalVivi</basicMemberKind>
     
-    <leaderTitle>queen</leaderTitle>
+    <leaderTitle>representative</leaderTitle>
   </FactionDef>
 </Defs>
