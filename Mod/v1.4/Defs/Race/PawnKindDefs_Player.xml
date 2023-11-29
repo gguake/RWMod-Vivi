@@ -61,4 +61,13 @@
     </backstoryFiltersOverride>
     <forcedBodyType>Thin</forcedBodyType>
   </PawnKindDef>
+
+  <PawnKindDef ParentName="PlayerVivi">
+    <defName>VV_PlayerRefugeeVivi</defName>
+    
+    <apparelRequired>
+      <li>VV_UniformHat</li>
+      <li>VV_WorkerUniformDress</li>
+    </apparelRequired>
+  </PawnKindDef>
 </Defs>

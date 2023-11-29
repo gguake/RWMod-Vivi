@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <ScenarioDef>
+    <defName>VV_ViviRefugeeStart</defName>
+    <label>vivi refugees</label>
+    <description>.</description>
+    <scenario>
+      <summary>.</summary>
+      <playerFaction>
+        <def>PlayerFaction</def>
+        <factionDef>VV_PlayerVivi</factionDef>
+      </playerFaction>
+      <parts>
+        <li Class="ScenPart_GameStartDialog">
+          <def>GameStartDialog</def>
+          <text>.</text>
+          <closeSound>GameStartSting</closeSound>
+        </li>
+
+        <li Class="ScenPart_ConfigPage_ConfigureStartingPawns_Xenotypes">
+          <def>ConfigurePawnsXenotypes</def>
+          <pawnChoiceCount>4</pawnChoiceCount>
+          <overrideKinds>
+            <li>
+              <xenotype>VV_Vivi</xenotype>
+              <pawnKind>VV_PlayerRefugeeVivi</pawnKind>
+            </li>
+          </overrideKinds>
+          <xenotypeCounts>
+            <li>
+              <xenotype>VV_Vivi</xenotype>
+              <count>4</count>
+              <description>adult vivi</description>
+              <requiredAtStart>true</requiredAtStart>
+              <allowedDevelopmentalStages>Adult</allowedDevelopmentalStages>
+            </li>
+          </xenotypeCounts>
+        </li>
+
+        <li Class="ScenPart_PawnFilter_Age">
+          <def>PawnFilter_Age</def>
+          <allowedAgeRange>19~22</allowedAgeRange>
+        </li>
+        
+        <li Class="ScenPart_PlayerPawnsArriveMethod">
+          <def>PlayerPawnsArriveMethod</def>
+          <method>Standing</method>
+        </li>
+
+        <!-- 시작시 소유품 -->
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>Silver</thingDef>
+          <count>500</count>
+        </li>
+        <li Class="ScenPart_ScatterThingsNearPlayerStart">
+          <def>StartingThing_Defined</def>
+          <thingDef>WoodLog</thingDef>
+          <count>400</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>MealSurvivalPack</thingDef>
+          <count>60</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>MedicineHerbal</thingDef>
+          <count>40</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>VV_ViviSpear</thingDef>
+          <quality>Normal</quality>
+          <stuff>Plasteel</stuff>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>VV_ViviLongJavelin</thingDef>
+          <quality>Normal</quality>
+          <stuff>Steel</stuff>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>VV_ViviLongJavelin</thingDef>
+          <quality>Normal</quality>
+          <stuff>Steel</stuff>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>VV_RepeatingCrossbow</thingDef>
+          <quality>Normal</quality>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>VV_EmberBloom</thingDef>
+          <count>1</count>
+        </li>
+
+        <!-- 시작시 소유품 (분산) -->
+        <li Class="ScenPart_ScatterThingsNearPlayerStart">
+          <def>ScatterThingsNearPlayerStart</def>
+          <thingDef>Steel</thingDef>
+          <count>600</count>
+        </li>
+      </parts>
+    </scenario>
+  </ScenarioDef>
+</Defs>
