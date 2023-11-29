@@ -23,3 +23,12 @@ ash
 cherry
 snow
 mild
+blue
+photo
+aero
+ice
+cream
+aqua
+purple
+brown
+solar

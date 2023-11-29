@@ -23,3 +23,10 @@ flora
 root
 light
 wind
+seed
+herb
+grain
+apple
+berry
+bell
+cup
