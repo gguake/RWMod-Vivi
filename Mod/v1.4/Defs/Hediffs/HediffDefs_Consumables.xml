@@ -53,8 +53,10 @@
 
     <stages>
       <li>
+        <statFactors>
+          <VV_GrowthPointsFactor>1.75</VV_GrowthPointsFactor>
+        </statFactors>
         <statOffsets>
-          <VV_GrowthPointsFactor>1.0</VV_GrowthPointsFactor>
           <GlobalLearningFactor>1.0</GlobalLearningFactor>
         </statOffsets>
       </li>

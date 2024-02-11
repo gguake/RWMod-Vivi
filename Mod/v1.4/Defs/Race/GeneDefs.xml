@@ -11,9 +11,10 @@
         <li>(0, 3)</li>
         <li>(3, 3)</li>
         <li>(7, 4)</li>
-        <li>(11, 8)</li>
+        <li>(10, 4)</li>
+        <li>(12.999, 6)</li>
+        <li>(13, 8)</li>
         <li>(20, 8)</li>
-        <li>(45, 9)</li>
       </points>
     </biologicalAgeTickFactorFromAgeCurve>
     <biostatMet>-5</biostatMet>

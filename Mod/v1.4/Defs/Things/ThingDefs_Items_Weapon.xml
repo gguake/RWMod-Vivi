@@ -17,7 +17,7 @@
       <Mass>2</Mass>
     </statBases>
     <equippedStatOffsets>
-      <VV_HoneyGatherSpeed>0.5</VV_HoneyGatherSpeed>
+      <VV_HoneyGatherSpeed>0.8</VV_HoneyGatherSpeed>
       <VV_HoneyGatherYield>0.5</VV_HoneyGatherYield>
     </equippedStatOffsets>
 
@@ -92,9 +92,11 @@
       <Mass>2</Mass>
     </statBases>
     <equippedStatOffsets>
-      <CleaningSpeed>1.0</CleaningSpeed>
+      <SmoothingSpeed>0.5</SmoothingSpeed>
+      <CleaningSpeed>0.5</CleaningSpeed>
       <VV_PlantGatherSpeed>0.25</VV_PlantGatherSpeed>
-      <VV_PlantGatherYield>0.25</VV_PlantGatherYield>
+      <VV_HoneyGatherSpeed>0.25</VV_HoneyGatherSpeed>
+      <VV_HoneyGatherYield>0.25</VV_HoneyGatherYield>
     </equippedStatOffsets>
 
     <thingCategories Inherit="False">
@@ -127,15 +129,11 @@
       </li>
     </tools>
     
-    <costStuffCount>30</costStuffCount>
+    <costStuffCount>55</costStuffCount>
     <stuffCategories>
       <li>VV_Wax</li>
       <li>Woody</li>
     </stuffCategories>
-    <costList>
-      <VV_Vivicream>10</VV_Vivicream>
-      <Steel>10</Steel>
-    </costList>
 
     <recipeMaker>
       <recipeUsers>

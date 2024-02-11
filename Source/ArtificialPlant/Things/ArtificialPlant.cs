@@ -321,8 +321,8 @@ namespace VVRace
 
                 if (!CanPlaceCell(Position))
                 {
-                    var minified = this.MakeMinified();
-                    GenPlace.TryPlaceThing(minified, Position, Map, ThingPlaceMode.Direct);
+                    ForceMinifyAndDropDirect();
+                    return;
                 }
             }
         }
@@ -345,8 +345,7 @@ namespace VVRace
             {
                 if (!CanPlaceCell(Position))
                 {
-                    var minified = this.MakeMinified();
-                    GenPlace.TryPlaceThing(minified, Position, Map, ThingPlaceMode.Direct);
+                    ForceMinifyAndDropDirect();
                     return;
                 }
 
@@ -385,8 +384,8 @@ namespace VVRace
             {
                 if (!CanPlaceCell(Position))
                 {
-                    var minified = this.MakeMinified();
-                    GenPlace.TryPlaceThing(minified, Position, Map, ThingPlaceMode.Direct);
+                    ForceMinifyAndDropDirect();
+                    return;
                 }
             }
         }
@@ -448,6 +447,14 @@ namespace VVRace
             {
                 AddEnergy(-energy);
             }
+        }
+
+        private void ForceMinifyAndDropDirect()
+        {
+            var position = Position;
+            var map = Map;
+            var minified = this.MakeMinified();
+            GenPlace.TryPlaceThing(minified, position, map, ThingPlaceMode.Direct);
         }
 
         private IEnumerable<EnergyAcceptor> AdjacentEnergyAcceptor
