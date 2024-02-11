@@ -62,7 +62,7 @@
     <forcedBodyType>Thin</forcedBodyType>
   </PawnKindDef>
 
-  <PawnKindDef ParentName="PlayerVivi">
+  <PawnKindDef ParentName="PlayerVivi" Class="VVRace.PawnKindDef_Vivi">
     <defName>VV_PlayerRefugeeVivi</defName>
     
     <apparelRequired>
