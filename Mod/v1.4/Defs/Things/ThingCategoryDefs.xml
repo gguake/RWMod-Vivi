@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
   <ThingCategoryDef>
-    <defName>VV_ViviEquipments</defName>
-    <label>vivi equipments</label>
-    <parent>Weapons</parent>
-    <iconPath>UI/Icons/ThingCategories/VV_ViviEquipments</iconPath>
-  </ThingCategoryDef>
-
-  <ThingCategoryDef>
     <defName>VV_ViviWeapon</defName>
     <label>vivi weapons</label>
-    <parent>VV_ViviEquipments</parent>
+    <parent>Weapons</parent>
     <iconPath>UI/Icons/ThingCategories/VV_ViviWeapon</iconPath>
   </ThingCategoryDef>
 
@@ -19,6 +12,13 @@
     <label>vivi apparel</label>
     <parent>Apparel</parent>
     <iconPath>UI/Icons/ThingCategories/VV_ViviApparel</iconPath>
+  </ThingCategoryDef>
+
+  <ThingCategoryDef>
+    <defName>VV_ViviTool</defName>
+    <label>vivi tool</label>
+    <parent>VV_ViviApparel</parent>
+    <iconPath>UI/Icons/ThingCategories/VV_ViviEquipments</iconPath>
   </ThingCategoryDef>
 
   <ThingCategoryDef>

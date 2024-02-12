@@ -175,7 +175,7 @@
               <maxThingMarketValue>1000</maxThingMarketValue>
               <filter>
                 <categories>
-                  <li>VV_ViviEquipments</li>
+                  <li>VV_ViviWeapon</li>
                 </categories>
               </filter>
             </fixedParams>

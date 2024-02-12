@@ -75,8 +75,7 @@
         </li>
         <li Class="ScenPart_StartingThing_Defined">
           <def>StartingThing_Defined</def>
-          <thingDef>VV_Straw</thingDef>
-          <quality>Good</quality>
+          <thingDef>VV_StrawTool</thingDef>
           <stuff>VV_Viviwax</stuff>
         </li>
         <li Class="ScenPart_StartingThing_Defined">

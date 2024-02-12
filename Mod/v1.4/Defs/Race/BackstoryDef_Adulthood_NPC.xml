@@ -53,12 +53,6 @@
       <li>Intellectual</li>
       <li>Caring</li>
     </workDisables>
-    <possessions>
-      <li>
-        <key>VV_Straw</key>
-        <value>1</value>
-      </li>
-    </possessions>
   </AlienRace.AlienBackstoryDef>
 
   <!-- VV_ViviArchitect -->

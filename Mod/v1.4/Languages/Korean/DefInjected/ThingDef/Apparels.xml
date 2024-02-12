@@ -34,4 +34,11 @@
   <VV_Childrenswear.label>비비 아동복</VV_Childrenswear.label>
   <VV_Childrenswear.description>어린 비비들을 위한 작은 옷입니다. 따뜻하고 아이들이 활동하기 편하게 만들어져있으며 만드는데 적은 재료를 소모하지만 성인이 되면 작아서 입지 못합니다.</VV_Childrenswear.description>
 
+  <!-- Tools --> 
+  <VV_StrawTool.label>비비 빨대</VV_StrawTool.label>
+  <VV_StrawTool.description>비비들이 꿀을 더 효율적으로 채집하기 위해 사용하는 커다란 빨대입니다. 비비가 아닌 인간들이 꿀을 채집하기 위해 사용할수도 있습니다.</VV_StrawTool.description>
+
+  <VV_MultiuseBrushTool.label>비비 다용도 붓</VV_MultiuseBrushTool.label>
+  <VV_MultiuseBrushTool.description>식물에서 희소한 재료를 채집하거나 꽃가루를 청소할때 빗자루로 쓸수도 있는 커다란 붓입니다.</VV_MultiuseBrushTool.description>
+
 </LanguageData>

@@ -86,7 +86,7 @@
     <defName>VV_Tools</defName>
     <label>vivi gathering tools</label>
     <description>.</description>
-    <baseCost>300</baseCost>
+    <baseCost>250</baseCost>
     <researchViewX>2</researchViewX>
     <researchViewY>0</researchViewY>
     <prerequisites>

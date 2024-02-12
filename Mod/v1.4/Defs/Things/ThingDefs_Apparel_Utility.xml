@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <ThingDef Abstract="True" Name="VV_UtilityApparelBase" ParentName="ApparelNoQualityBase">
+    <thingCategories>
+      <li>VV_ViviTool</li>
+    </thingCategories>
+
+    <statBases>
+      <ArmorRating_Sharp>0</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0</ArmorRating_Blunt>
+      <ArmorRating_Heat>0</ArmorRating_Heat>
+      <Insulation_Cold>0</Insulation_Cold>
+      <Insulation_Heat>0</Insulation_Heat>
+    </statBases>
+    <apparel>
+      <wornGraphicData>
+        <renderUtilityAsPack>true</renderUtilityAsPack>
+        <north>
+          <offset>(0,-0.15)</offset>
+        </north>
+        <south>
+          <offset>(0,-0.15)</offset>
+        </south>
+        <east>
+          <offset>(-0.25,-0.1)</offset>
+          <thin><offset>(0.05,0)</offset></thin>
+          <hulk><offset>(-0.15,0)</offset></hulk>
+          <fat> <offset>(-0.20,0)</offset></fat>
+        </east>
+        <west>
+          <offset>(0.25,-0.1)</offset>
+          <thin><offset>(-0.05,0)</offset></thin>
+          <hulk><offset>(0.15,0)</offset></hulk>
+          <fat> <offset>(0.20,0)</offset></fat>
+        </west>
+        <male>  <scale>(0.5625,0.5625)</scale></male>
+        <female><scale>(0.5625,0.5625)</scale></female>
+        <thin>  <scale>(0.525,0.525)</scale></thin>
+        <hulk>  <scale>(0.675,0.675)</scale></hulk>
+        <fat>   <scale>(0.675,0.675)</scale></fat>
+      </wornGraphicData>
+
+      <countsAsClothingForNudity>false</countsAsClothingForNudity>
+      <careIfWornByCorpse>false</careIfWornByCorpse>
+      <careIfDamaged>false</careIfDamaged>
+      <wearPerDay>0</wearPerDay>
+
+      <bodyPartGroups>
+        <li>Waist</li>
+      </bodyPartGroups>
+      <layers>
+        <li>Belt</li>
+      </layers>
+      <tags>
+        <li>VV_ViviApparel</li>
+      </tags>
+      <developmentalStageFilter>Child, Adult</developmentalStageFilter>
+      <canBeDesiredForIdeo>false</canBeDesiredForIdeo>
+    </apparel>
+
+    <tradeTags Inherit="False">
+      <li>VV_ViviApparel</li>
+    </tradeTags>
+  </ThingDef>
+
+  <ThingDef ParentName="VV_UtilityApparelBase">
+    <defName>VV_StrawTool</defName>
+    <label>vivi straw</label>
+    <description>.</description>
+    <graphicData>
+      <texPath>Things/Apparel/Straw/VV_Straw</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+
+    <statBases>
+      <MaxHitPoints>150</MaxHitPoints>
+      <WorkToMake>1500</WorkToMake>
+      <Mass>1</Mass>
+      <Flammability>0.4</Flammability>
+      <EquipDelay>1.0</EquipDelay>
+    </statBases>
+
+    <equippedStatOffsets>
+      <VV_HoneyGatherSpeed>1.0</VV_HoneyGatherSpeed>
+      <VV_HoneyGatherYield>0.5</VV_HoneyGatherYield>
+    </equippedStatOffsets>
+    
+    <apparel>
+      <wornGraphicPath>Things/Apparel/Straw/VV_Straw</wornGraphicPath>
+    </apparel>
+
+    <costStuffCount>50</costStuffCount>
+    <stuffCategories>
+      <li>VV_Wax</li>
+      <li>Woody</li>
+    </stuffCategories>
+    <recipeMaker>
+      <recipeUsers>
+        <li>CraftingSpot</li>
+      </recipeUsers>
+      <researchPrerequisites>
+        <li>VV_Tools</li>
+      </researchPrerequisites>
+      <skillRequirements>
+        <Crafting>3</Crafting>
+      </skillRequirements>
+      <displayPriority>-500</displayPriority>
+    </recipeMaker>
+  </ThingDef>
+
+  <ThingDef ParentName="VV_UtilityApparelBase">
+    <defName>VV_MultiuseBrushTool</defName>
+    <label>vivi multiuse brush</label>
+    <description>.</description>
+    <graphicData>
+      <texPath>Things/Apparel/MultiuseBrush/VV_MultiuseBrush</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+
+    <statBases>
+      <MaxHitPoints>150</MaxHitPoints>
+      <WorkToMake>1800</WorkToMake>
+      <Mass>1</Mass>
+      <Flammability>0.4</Flammability>
+      <EquipDelay>1.0</EquipDelay>
+    </statBases>
+
+    <equippedStatOffsets>
+      <CleaningSpeed>1.0</CleaningSpeed>
+      <SmoothingSpeed>0.5</SmoothingSpeed>
+      <VV_PlantGatherSpeed>0.25</VV_PlantGatherSpeed>
+      <VV_PlantGatherYield>0.25</VV_PlantGatherYield>
+    </equippedStatOffsets>
+    
+    <apparel>
+      <wornGraphicPath>Things/Apparel/MultiuseBrush/VV_MultiuseBrush</wornGraphicPath>
+    </apparel>
+
+    <costStuffCount>60</costStuffCount>
+    <stuffCategories>
+      <li>VV_Wax</li>
+      <li>Woody</li>
+    </stuffCategories>
+    <recipeMaker>
+      <recipeUsers>
+        <li>CraftingSpot</li>
+      </recipeUsers>
+      <researchPrerequisites>
+        <li>VV_Tools</li>
+      </researchPrerequisites>
+      <skillRequirements>
+        <Crafting>4</Crafting>
+      </skillRequirements>
+      <displayPriority>-501</displayPriority>
+    </recipeMaker>
+  </ThingDef>
+</Defs>
