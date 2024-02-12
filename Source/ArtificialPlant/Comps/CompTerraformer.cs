@@ -123,7 +123,8 @@ namespace VVRace
 
             foreach (var cell in GenRadial.RadialPatternInRadius(Props.radius))
             {
-                if (cell.InBounds(map) && !cell.Impassable(map) && TryTerraformCell(map, parent.Position + cell))
+                var position = parent.Position + cell;
+                if (position.InBounds(map) && !position.Impassable(map) && TryTerraformCell(map, position))
                 {
                     break;
                 }
