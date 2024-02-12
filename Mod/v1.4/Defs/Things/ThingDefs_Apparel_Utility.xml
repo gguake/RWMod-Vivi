@@ -33,11 +33,11 @@
           <hulk><offset>(0.15,0)</offset></hulk>
           <fat> <offset>(0.20,0)</offset></fat>
         </west>
-        <male>  <scale>(0.5625,0.5625)</scale></male>
-        <female><scale>(0.5625,0.5625)</scale></female>
-        <thin>  <scale>(0.525,0.525)</scale></thin>
-        <hulk>  <scale>(0.675,0.675)</scale></hulk>
-        <fat>   <scale>(0.675,0.675)</scale></fat>
+        <male>  <scale>(1.0,1.0)</scale></male>
+        <female><scale>(1.0,1.0)</scale></female>
+        <thin>  <scale>(1.0,1.0)</scale></thin>
+        <hulk>  <scale>(1.2,1.2)</scale></hulk>
+        <fat>   <scale>(1.2,1.2)</scale></fat>
       </wornGraphicData>
 
       <countsAsClothingForNudity>false</countsAsClothingForNudity>
@@ -73,7 +73,7 @@
     </graphicData>
 
     <statBases>
-      <MaxHitPoints>150</MaxHitPoints>
+      <MaxHitPoints>100</MaxHitPoints>
       <WorkToMake>1500</WorkToMake>
       <Mass>1</Mass>
       <Flammability>0.4</Flammability>
@@ -89,7 +89,7 @@
       <wornGraphicPath>Things/Apparel/Straw/VV_Straw</wornGraphicPath>
     </apparel>
 
-    <costStuffCount>50</costStuffCount>
+    <costStuffCount>35</costStuffCount>
     <stuffCategories>
       <li>VV_Wax</li>
       <li>Woody</li>
@@ -97,6 +97,8 @@
     <recipeMaker>
       <recipeUsers>
         <li>CraftingSpot</li>
+        <li>ElectricSmithy</li>
+        <li>FueledSmithy</li>
       </recipeUsers>
       <researchPrerequisites>
         <li>VV_Tools</li>
@@ -119,7 +121,7 @@
     </graphicData>
 
     <statBases>
-      <MaxHitPoints>150</MaxHitPoints>
+      <MaxHitPoints>100</MaxHitPoints>
       <WorkToMake>1800</WorkToMake>
       <Mass>1</Mass>
       <Flammability>0.4</Flammability>
@@ -137,7 +139,7 @@
       <wornGraphicPath>Things/Apparel/MultiuseBrush/VV_MultiuseBrush</wornGraphicPath>
     </apparel>
 
-    <costStuffCount>60</costStuffCount>
+    <costStuffCount>50</costStuffCount>
     <stuffCategories>
       <li>VV_Wax</li>
       <li>Woody</li>
@@ -145,6 +147,8 @@
     <recipeMaker>
       <recipeUsers>
         <li>CraftingSpot</li>
+        <li>ElectricSmithy</li>
+        <li>FueledSmithy</li>
       </recipeUsers>
       <researchPrerequisites>
         <li>VV_Tools</li>
