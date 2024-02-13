@@ -6,7 +6,7 @@
   </StyleItemCategoryDef>
 
   <HairDef Abstract="True" Name="ViviHairBase">
-    <styleGender>Any</styleGender>
+    <styleGender>Female</styleGender>
     <category>VV_Vivi</category>
     <styleTags>
       <li>VV_Vivi</li>
