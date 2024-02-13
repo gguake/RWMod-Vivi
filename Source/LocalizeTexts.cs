@@ -34,6 +34,7 @@
         public const string InspectorViviGerminatorProduct = "VV_InspectorViviGerminatorProduct";
         public const string InspectorViviShootusWeaponReserved = "VV_InspectorViviShootusWeaponReserved";
         public const string InspectorViviShootusWeaponEquipped = "VV_InspectorViviShootusWeaponEquipped";
+        public const string InspectorViviBroadShield = "VV_InspectorViviBroadShield";
 
         public const string LetterViviEggHatchedLabel = "VV_LetterViviEggHatchedLabel";
         public const string LetterViviEggHatched = "VV_LetterViviEggHatched";
@@ -56,6 +57,10 @@
         public const string CommandCancelReserveWeapon = "VV_CommandCancelReserveWeapon";
         public const string CommandCancelReserveWeaponDesc = "VV_CommandCancelReserveWeaponDesc";
         public const string CommandUnequipWeapon = "VV_CommandUnequipWeapon";
+        public const string CommandActivateShield = "VV_CommandActivateShield";
+        public const string CommandActivateShieldDesc = "VV_CommandActivateShieldDesc";
+        public const string CommandActivateShieldAlreadyActivated = "VV_CommandActivateShieldAlreadyActivated";
+        public const string CommandActivateShieldNotEnoughenrgy = "VV_CommandActivateShieldNotEnoughenrgy";
 
         public const string FloatMenuOptionDefaultGerminate = "VV_FloatMenuOptionDefaultGerminate";
         public const string FloatMenuOptionFixedGerminate = "VV_FloatMenuOptionFixedGerminate";

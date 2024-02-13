@@ -78,6 +78,7 @@
     <Compile Include="ArtificialPlant\AI\JobDriver_HaulAndManageSeedling.cs" />
     <Compile Include="ArtificialPlant\AI\JobDriver_PackingSeedling.cs" />
     <Compile Include="ArtificialPlant\AI\WorkGiver_EquipShootus.cs" />
+    <Compile Include="ArtificialPlant\Comps\CompBroadshieldProjector.cs" />
     <Compile Include="ArtificialPlant\Energy\EnergyFluxGrid.cs" />
     <Compile Include="ArtificialPlant\SectionLayer_ThingsEnergyFluxGrid.cs" />
     <Compile Include="ArtificialPlant\Things\EnergyAcceptor.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="ArtificialPlant\Things\EnergyTransmitter.cs" />
     <Compile Include="ArtificialPlant\Things\Plants\Shootus.cs" />
     <Compile Include="ArtificialPlant\Things\Plants\ShootusTop.cs" />
+    <Compile Include="ArtificialPlant\Things\PurifimintShield.cs" />
     <Compile Include="ArtificialPlant\UI\Alert_LowEnergyArtificialPlant.cs" />
     <Compile Include="ArtificialPlant\Comps\CompLightningLod.cs" />
     <Compile Include="ArtificialPlant\Comps\CompSensorExplosive.cs" />

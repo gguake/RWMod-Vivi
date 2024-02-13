@@ -26,6 +26,7 @@
   <VV_InspectorViviGerminatorProduct>배양 결과: {0} x{1}</VV_InspectorViviGerminatorProduct>
   <VV_InspectorViviShootusWeaponReserved>예약됨: {0}</VV_InspectorViviShootusWeaponReserved>
   <VV_InspectorViviShootusWeaponEquipped>장착됨: {0}</VV_InspectorViviShootusWeaponEquipped>
+  <VV_InspectorViviBroadShield>남은 보호막량: {0}/{1}</VV_InspectorViviBroadShield>
 
   <VV_CommandFertilizeAutoActivated>비료 자동 사용</VV_CommandFertilizeAutoActivated>
   <VV_CommandFertilizeAutoActivatedDesc>식물의 에너지가 일정 이하일때 정착민들이 비료를 자동으로 사용할지 설정합니다.</VV_CommandFertilizeAutoActivatedDesc>
@@ -40,6 +41,10 @@
   <VV_CommandCancelReserveWeapon>무기 장착 취소</VV_CommandCancelReserveWeapon>
   <VV_CommandCancelReserveWeaponDesc>현재 예약된 무기 장착을 취소합니다.</VV_CommandCancelReserveWeaponDesc>
   <VV_CommandUnequipWeapon>장착된 무기 해제</VV_CommandUnequipWeapon>
+  <VV_CommandActivateShield>보호막 활성화</VV_CommandActivateShield>
+  <VV_CommandActivateShieldDesc>보호막을 활성화해 외부에서 들어오는 투사체를 차단합니다. 보유한 모든 에너지를 소모하며 보호막의 내구도는 소모된 에너지에 비례합니다.</VV_CommandActivateShieldDesc>
+  <VV_CommandActivateShieldAlreadyActivated>보호막이 이미 활성화 되어있음.</VV_CommandActivateShieldAlreadyActivated>
+  <VV_CommandActivateShieldNotEnoughenrgy>에너지가 최소 {0}이상 필요합니다.</VV_CommandActivateShieldNotEnoughenrgy>
 
   <VV_FloatMenuOptionDefaultGerminate>씨앗으로 모종 배양</VV_FloatMenuOptionDefaultGerminate>
   <VV_FloatMenuOptionFixedGerminate>꺾꽂이로 {0} 모종 배양</VV_FloatMenuOptionFixedGerminate>

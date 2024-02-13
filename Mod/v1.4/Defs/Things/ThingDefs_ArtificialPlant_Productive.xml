@@ -515,6 +515,12 @@
         <removePollution>true</removePollution>
         <showRadius>false</showRadius>
       </li>
+
+      <li Class="VVRace.CompProperties_BroadshieldProjector">
+        <shieldDef>VV_PurifimintShield</shieldDef>
+        <minEnergyForActivate>30</minEnergyForActivate>
+        <energyEfficiency>1.5</energyEfficiency>
+      </li>
     </comps>
     
     <modExtensions>
@@ -523,16 +529,44 @@
 
         <energyCapacity>300</energyCapacity>
         <initialEnergyPercent>1.0</initialEnergyPercent>
-        <zeroEnergyDamageByChance>1~3</zeroEnergyDamageByChance>
+        <zeroEnergyDamageByChance>1~1</zeroEnergyDamageByChance>
 
         <energyConsumeRule Class="VVRace.EnergyRule_Constant">
-          <energy>50</energy>
+          <energy>10</energy>
         </energyConsumeRule>
         <energyGenerateRule Class="VVRace.EnergyRule_AdjacentPollution">
-          <energyByOccupiePolluted>60</energyByOccupiePolluted>
+          <energyByOccupiePolluted>80</energyByOccupiePolluted>
           <energyByAdjacentPolluted>20</energyByAdjacentPolluted>
         </energyGenerateRule>
       </li>
     </modExtensions>
   </ThingDef>
+  
+  <ThingDef>
+    <defName>VV_PurifimintShield</defName>
+    <label>purifimint shield</label>
+    <thingClass>VVRace.PurifimintShield</thingClass>
+    <tickerType>Normal</tickerType>
+    <drawerType>RealtimeOnly</drawerType>
+    <drawOffscreen>true</drawOffscreen>
+    <useHitPoints>false</useHitPoints>
+
+    <comps>
+      <li Class="CompProperties_ProjectileInterceptor">
+        <radius>2.9</radius>
+        <interceptGroundProjectiles>true</interceptGroundProjectiles>
+        <interceptNonHostileProjectiles>true</interceptNonHostileProjectiles>
+        <interceptOutgoingProjectiles>false</interceptOutgoingProjectiles>
+        <color>(0.6, 0.6, 0.8)</color>
+        <drawWithNoSelection>True</drawWithNoSelection>
+        <activeSound>BulletShield_Ambience</activeSound>
+        <rechargeHitPointsIntervalTicks>60000</rechargeHitPointsIntervalTicks>
+      </li>
+      <li Class="CompProperties_DestroyAfterDelay">
+        <delayTicks>15000</delayTicks>
+        <destroyMode>KillFinalize</destroyMode>
+      </li>
+    </comps>
+  </ThingDef>
+  
 </Defs>
