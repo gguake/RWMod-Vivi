@@ -9,6 +9,14 @@
     <defName>VV_ViviStart</defName>
   </ResearchProjectTagDef>
 
+  <ResearchProjectTagDef>
+    <defName>VV_ExiledVivi</defName>
+  </ResearchProjectTagDef>
+
+  <ResearchProjectTagDef>
+    <defName>VV_ViviRefugee</defName>
+  </ResearchProjectTagDef>
+
   <!-- 테크 1 -->
   <ResearchProjectDef Abstract="True" Name="ViviResearchProjectTier1Base">
 		<tab>VV_Vivi</tab>
@@ -37,7 +45,7 @@
     <researchViewY>0</researchViewY>
     
     <tags>
-      <li>VV_ViviStart</li>
+      <li>VV_ExiledVivi</li>
     </tags>
   </ResearchProjectDef>
 
@@ -64,6 +72,10 @@
     <prerequisites>
       <li>Smithing</li>
     </prerequisites>
+
+    <tags>
+      <li>VV_ViviRefugee</li>
+    </tags>
   </ResearchProjectDef>
 
   <ResearchProjectDef ParentName="ViviResearchProjectTier1Base">
@@ -92,6 +104,10 @@
     <prerequisites>
       <li>VV_BasicGathering</li>
     </prerequisites>
+    
+    <tags>
+      <li>VV_ViviStart</li>
+    </tags>
   </ResearchProjectDef>
 
   <ResearchProjectDef ParentName="ViviResearchProjectTier1Base">
@@ -118,7 +134,7 @@
     </prerequisites>
     
     <tags>
-      <li>VV_ViviStart</li>
+      <li>VV_ExiledVivi</li>
     </tags>
   </ResearchProjectDef>
 </Defs>

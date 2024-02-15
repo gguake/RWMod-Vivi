@@ -8,7 +8,7 @@
       <summary>.</summary>
       <playerFaction>
         <def>PlayerFaction</def>
-        <factionDef>VV_PlayerVivi</factionDef>
+        <factionDef>VV_PlayerViviRefugee</factionDef>
       </playerFaction>
       <parts>
         <li Class="ScenPart_GameStartDialog">
@@ -45,6 +45,32 @@
         <li Class="ScenPart_PlayerPawnsArriveMethod">
           <def>PlayerPawnsArriveMethod</def>
           <method>Standing</method>
+        </li>
+
+        <!-- 시작시 헤디프 -->
+        <li Class="ScenPart_ForcedHediff">
+          <def>ForcedHediff</def>
+          <visible>false</visible>
+          <context>PlayerStarter</context>
+          <chance>1.0</chance>
+          <hediff>Malnutrition</hediff>
+          <severityRange>0.1~0.2</severityRange>
+        </li>
+        <li Class="ScenPart_SetNeedLevel">
+          <def>SetNeedLevel</def>
+          <visible>false</visible>
+          <context>PlayerStarter</context>
+          <chance>1.0</chance>
+          <need>Food</need>
+          <levelRange>0.2~0.3</levelRange>
+        </li>
+        <li Class="ScenPart_SetNeedLevel">
+          <def>SetNeedLevel</def>
+          <visible>false</visible>
+          <context>PlayerStarter</context>
+          <chance>1.0</chance>
+          <need>Rest</need>
+          <levelRange>0.5~0.6</levelRange>
         </li>
 
         <!-- 시작시 소유품 -->

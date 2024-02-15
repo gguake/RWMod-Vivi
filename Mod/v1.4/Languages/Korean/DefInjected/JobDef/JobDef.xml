@@ -3,7 +3,6 @@
   <VV_GatherHoney.reportString>TargetA에서 꿀 채집 중.</VV_GatherHoney.reportString>
   <VV_GatherPollen.reportString>꽃가루 채집 중.</VV_GatherPollen.reportString>
   <VV_GatherPropolis.reportString>TargetA에서 프로폴리스 채집 중.</VV_GatherPropolis.reportString>
-  <VV_GatherGrassFiber.reportString>TargetA에서 식물 섬유 채집 중.</VV_GatherGrassFiber.reportString>
 
   <VV_LayViviEgg.reportString>알 낳는 중.</VV_LayViviEgg.reportString>
   <VV_HaulViviEgg.reportString>부화기로 알 운반 중.</VV_HaulViviEgg.reportString>

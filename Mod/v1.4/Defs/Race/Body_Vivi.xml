@@ -3,7 +3,7 @@
   <BodyPartDef>
     <defName>VV_Antennae</defName>
     <label>antennae</label>
-    <hitPoints>10</hitPoints>
+    <hitPoints>12</hitPoints>
     <frostbiteVulnerability>3</frostbiteVulnerability>
     <skinCovered>true</skinCovered>
     <beautyRelated>true</beautyRelated>
@@ -23,7 +23,7 @@
   <BodyPartDef>
     <defName>VV_Wing</defName>
     <label>wing</label>
-    <hitPoints>15</hitPoints>
+    <hitPoints>18</hitPoints>
     <frostbiteVulnerability>3</frostbiteVulnerability>
     <skinCovered>false</skinCovered>
     <canScarify>true</canScarify>

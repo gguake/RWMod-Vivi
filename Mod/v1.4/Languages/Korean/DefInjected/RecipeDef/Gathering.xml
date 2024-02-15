@@ -12,8 +12,4 @@
   <VV_GatherPropolis.label>프로폴리스 채집</VV_GatherPropolis.label>
   <VV_GatherPropolis.description>주변의 나무에서 희귀한 프로폴리스를 채집합니다. 식물 자재 채집 속도가 0보다 높아야 작업 가능하며 채집에 많은 시간이 걸립니다.</VV_GatherPropolis.description>
   <VV_GatherPropolis.jobString>프로폴리스 채집 중.</VV_GatherPropolis.jobString>
-
-  <VV_GatherGrassFiber.label>잔디 섬유 채집</VV_GatherGrassFiber.label>
-  <VV_GatherGrassFiber.description>주변의 풀에서 잔디 섬유를 채집합니다. 식물 자재 채집 속도가 0보다 높아야 작업 가능합니다.</VV_GatherGrassFiber.description>
-  <VV_GatherGrassFiber.jobString>잔디 섬유 채집 중.</VV_GatherGrassFiber.jobString>
 </LanguageData>

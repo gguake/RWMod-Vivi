@@ -7,7 +7,7 @@
 		<techLevel>Medieval</techLevel>
 		<costList>
 			<VV_Viviwax>25</VV_Viviwax>
-			<VV_GrassFiber>25</VV_GrassFiber>
+			<Cloth>25</Cloth>
 		</costList>
 		<statBases>
 			<WorkToMake>3000</WorkToMake>
@@ -24,8 +24,8 @@
 		<description>.</description>
 		<techLevel>Medieval</techLevel>
 		<costList>
-			<VV_Vivicream>80</VV_Vivicream>
-			<VV_GrassFiber>40</VV_GrassFiber>
+			<VV_Viviwax>80</VV_Viviwax>
+			<Cloth>40</Cloth>
 		</costList>
 		<statBases>
 			<WorkToMake>4000</WorkToMake>
@@ -43,7 +43,7 @@
 		<techLevel>Spacer</techLevel>
 		<costList> 
 			<Plasteel>10</Plasteel>
-			<VV_Vivicream>30</VV_Vivicream>
+			<VV_Viviwax>30</VV_Viviwax>
 			<ComponentSpacer>2</ComponentSpacer>
 		</costList>
 		<statBases>
@@ -62,7 +62,7 @@
 		<techLevel>Spacer</techLevel>
 		<costList> 
 			<Plasteel>15</Plasteel>
-			<VV_Vivicream>60</VV_Vivicream>
+			<VV_Viviwax>60</VV_Viviwax>
 			<ComponentSpacer>3</ComponentSpacer>
 		</costList>
 		<statBases>

@@ -97,23 +97,4 @@
       </li>
     </parts>
   </StatDef>
-  
-  <!-- 잔디 섬유 생산량 -->
-  <StatDef ParentName="VV_StatPlantGatherYieldBase">
-    <defName>VV_GrassFiberGatherYield</defName>
-    <label>grass fiber yield multiplier</label>
-    <description>.</description>
-    <displayPriorityInCategory>5102</displayPriorityInCategory>
-    <parts>
-      <li Class="StatPart_Pollution" MayRequire="Ludeon.RimWorld.Biotech">
-        <multiplier>0.9</multiplier>
-      </li>
-      <li Class="StatPart_NoxiousHaze" MayRequire="Ludeon.RimWorld.Biotech">
-        <multiplier>0.75</multiplier>
-      </li>
-      <li Class="StatPart_ToxicFallout">
-        <multiplier>0.75</multiplier>
-      </li>
-    </parts>
-  </StatDef>
 </Defs>

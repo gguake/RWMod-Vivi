@@ -142,63 +142,16 @@
     </tradeTags>
   </ThingDef>
   
-  <!-- 잔디 섬유 -->
-  <ThingDef ParentName="ResourceBase">
-    <defName>VV_GrassFiber</defName>
-    <label>grass fiber</label>
-    <description>.</description>
-    <graphicData>
-      <texPath>Things/Item/VV_GrassFiber</texPath>
-      <graphicClass>Graphic_StackCount</graphicClass>
-      <color>(200,220,170)</color>
-    </graphicData>
-    <thingCategories>
-      <li>Textiles</li>
-    </thingCategories>
-
-    <statBases>
-      <StuffPower_Armor_Sharp>0.24</StuffPower_Armor_Sharp>
-      <StuffPower_Armor_Blunt>0.12</StuffPower_Armor_Blunt>
-      <StuffPower_Armor_Heat>0.12</StuffPower_Armor_Heat>
-      <StuffPower_Insulation_Cold>12</StuffPower_Insulation_Cold>
-      <StuffPower_Insulation_Heat>18</StuffPower_Insulation_Heat>
-      <MaxHitPoints>50</MaxHitPoints>
-      <MarketValue>0.4</MarketValue>
-      <Mass>0.02</Mass>
-      <Flammability>1.4</Flammability>
-      <DeteriorationRate>6</DeteriorationRate>
-    </statBases>
-
-    <burnableByRecipe>true</burnableByRecipe>
-    <healthAffectsPrice>false</healthAffectsPrice>
-    <minRewardCount>30</minRewardCount>
-    <stuffProps>
-      <statFactors>
-        <MaxHitPoints>0.75</MaxHitPoints>
-        <Flammability>1.4</Flammability>
-        <WorkToMake>2</WorkToMake>
-        <WorkToBuild>2</WorkToBuild>
-      </statFactors>
-      <categories>
-        <li>Fabric</li>
-      </categories>
-      <color>(200,220,170)</color>
-      <commonality>0.15</commonality>
-    </stuffProps>
-
-    <comps>
-      <li>
-        <compClass>CompColorable</compClass>
-      </li>
-    </comps>
-    <allowedArchonexusCount>80</allowedArchonexusCount>
-  </ThingDef>
-  
   <!-- 생체 가닥 -->
   <ThingDef ParentName="ResourceBase">
     <defName>VV_Lifestrand</defName>
     <label>lifestrand</label>
     <description>.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_LivingLeaf</ThingDef>
+      <ThingDef>VV_TitanicHornetWing</ThingDef>
+    </descriptionHyperlinks>
+
     <graphicData>
       <texPath>Things/Item/VV_Lifestrand</texPath>
       <graphicClass>Graphic_StackCount</graphicClass>
@@ -209,17 +162,17 @@
     </thingCategories>
 
     <statBases>
-      <StuffPower_Armor_Sharp>1.68</StuffPower_Armor_Sharp>
+      <StuffPower_Armor_Sharp>1.75</StuffPower_Armor_Sharp>
       <StuffPower_Armor_Blunt>0.72</StuffPower_Armor_Blunt>
       <StuffPower_Armor_Heat>3.00</StuffPower_Armor_Heat>
-      <StuffPower_Insulation_Cold>22</StuffPower_Insulation_Cold>
-      <StuffPower_Insulation_Heat>26</StuffPower_Insulation_Heat>
+      <StuffPower_Insulation_Cold>30</StuffPower_Insulation_Cold>
+      <StuffPower_Insulation_Heat>36</StuffPower_Insulation_Heat>
 
-      <MaxHitPoints>200</MaxHitPoints>
-      <MarketValue>9.6</MarketValue>
-      <Mass>0.034</Mass>
+      <MaxHitPoints>150</MaxHitPoints>
+      <MarketValue>9</MarketValue>
+      <Mass>0.04</Mass>
       <Flammability>0.3</Flammability>
-      <DeteriorationRate>1</DeteriorationRate>
+      <DeteriorationRate>2</DeteriorationRate>
     </statBases>
 
     <burnableByRecipe>true</burnableByRecipe>
@@ -229,9 +182,9 @@
       <statFactors>
         <MaxHitPoints>2.1</MaxHitPoints>
         <Flammability>0.3</Flammability>
-        <Beauty>4.5</Beauty>
-        <WorkToMake>2.0</WorkToMake>
-        <WorkToBuild>2.0</WorkToBuild>
+        <Beauty>4.0</Beauty>
+        <WorkToMake>2.4</WorkToMake>
+        <WorkToBuild>2.4</WorkToBuild>
       </statFactors>
       <categories>
         <li>Fabric</li>
@@ -340,8 +293,8 @@
     <useHitPoints>true</useHitPoints>
     <statBases>
       <Mass>3</Mass>
-      <MarketValue>200</MarketValue>
-      <MaxHitPoints>100</MaxHitPoints>
+      <MarketValue>180</MarketValue>
+      <MaxHitPoints>70</MaxHitPoints>
       <Flammability>1.0</Flammability>
       <DeteriorationRate>1</DeteriorationRate>
     </statBases>

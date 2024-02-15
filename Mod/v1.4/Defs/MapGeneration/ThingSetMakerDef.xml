@@ -71,7 +71,6 @@
               <maxThingMarketValue>100</maxThingMarketValue>
               <filter>
                 <thingDefs>
-                  <li>VV_GrassFiber</li>
                   <li>VV_Propolis</li>
                 </thingDefs>
               </filter>
@@ -157,7 +156,6 @@
               <maxThingMarketValue>100</maxThingMarketValue>
               <filter>
                 <thingDefs>
-                  <li>VV_GrassFiber</li>
                   <li>VV_Lifestrand</li>
                 </thingDefs>
               </filter>

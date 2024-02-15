@@ -19,14 +19,14 @@
       <xpath>Defs/ResearchProjectDef[defName="DrugProduction"]</xpath>
       <value>
         <tags>
-          <li>VV_ViviStart</li>
+          <li>VV_ExiledVivi</li>
         </tags>
       </value>
     </nomatch>
     <match Class="PatchOperationAdd">
       <xpath>Defs/ResearchProjectDef[defName="DrugProduction"]/tags</xpath>
       <value>
-        <li>VV_ViviStart</li>
+        <li>VV_ExiledVivi</li>
       </value>
     </match>
   </Operation>
@@ -37,14 +37,14 @@
       <xpath>Defs/ResearchProjectDef[defName="Devilstrand"]</xpath>
       <value>
         <tags>
-          <li>VV_ViviStart</li>
+          <li>VV_ExiledVivi</li>
         </tags>
       </value>
     </nomatch>
     <match Class="PatchOperationAdd">
       <xpath>Defs/ResearchProjectDef[defName="Devilstrand"]/tags</xpath>
       <value>
-        <li>VV_ViviStart</li>
+        <li>VV_ExiledVivi</li>
       </value>
     </match>
   </Operation>

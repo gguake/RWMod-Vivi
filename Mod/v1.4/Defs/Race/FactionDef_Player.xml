@@ -80,6 +80,24 @@
     <description>.</description>
     <basicMemberKind>VV_PlayerExiledRoyalVivi</basicMemberKind>
     
+    <startingResearchTags>
+      <li>VV_ExiledVivi</li>
+    </startingResearchTags>
+    
     <leaderTitle>representative</leaderTitle>
   </FactionDef>
+
+  <FactionDef ParentName="PlayerViviFactionBase">
+    <defName>VV_PlayerViviRefugee</defName>
+    <label>vivi refugee</label>
+    <description>.</description>
+    <basicMemberKind>VV_PlayerVivi</basicMemberKind>
+    
+    <startingResearchTags>
+      <li>VV_ViviRefugee</li>
+    </startingResearchTags>
+    
+    <leaderTitle>representative</leaderTitle>
+  </FactionDef>
+  
 </Defs>

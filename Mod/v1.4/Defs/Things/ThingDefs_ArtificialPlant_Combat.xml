@@ -20,9 +20,6 @@
     <statBases>
       <MarketValue>180</MarketValue>
       <MaxHitPoints>250</MaxHitPoints>
-      
-      <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
-      <VV_GrassFiberGatherYield>2</VV_GrassFiberGatherYield>
     </statBases>
 
     <costList>
@@ -135,9 +132,6 @@
     <statBases>
       <MarketValue>450</MarketValue>
       <MaxHitPoints>350</MaxHitPoints>
-      
-      <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
-      <VV_GrassFiberGatherYield>2</VV_GrassFiberGatherYield>
     </statBases>
 
     <costList>
@@ -255,9 +249,6 @@
     <statBases>
       <MarketValue>450</MarketValue>
       <MaxHitPoints>200</MaxHitPoints>
-      
-      <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
-      <VV_GrassFiberGatherYield>2</VV_GrassFiberGatherYield>
     </statBases>
 
     <damageMultipliers Inherit="False">

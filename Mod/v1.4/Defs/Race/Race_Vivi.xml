@@ -454,24 +454,22 @@
 			<MeatAmount>30</MeatAmount>
 			<LeatherAmount>30</LeatherAmount>
 
-      <ComfyTemperatureMin>20</ComfyTemperatureMin>
-      <ComfyTemperatureMax>35</ComfyTemperatureMax>
+      <ComfyTemperatureMin>18</ComfyTemperatureMin>
+      <ComfyTemperatureMax>36</ComfyTemperatureMax>
 
       <VV_HoneyGatherSpeed>1.0</VV_HoneyGatherSpeed>
       <VV_HoneyGatherYield>1.0</VV_HoneyGatherYield>
       <VV_PlantGatherSpeed>1.0</VV_PlantGatherSpeed>
       <VV_PlantGatherYield>1.0</VV_PlantGatherYield>
-      <ConstructionSpeed>1.5</ConstructionSpeed>
-      <SmoothingSpeed>1.25</SmoothingSpeed>
-      <CleaningSpeed>1.25</CleaningSpeed>
+      <ConstructionSpeed>1.2</ConstructionSpeed>
+      <SmoothingSpeed>1.5</SmoothingSpeed>
+      <CleaningSpeed>1.2</CleaningSpeed>
 
       <MoveSpeed>5.7</MoveSpeed>
-      <ButcheryFleshEfficiency>0.75</ButcheryFleshEfficiency>
       <MiningSpeed>0.5</MiningSpeed>
       <MiningYield>0.5</MiningYield>
       <PsychicSensitivity>0.5</PsychicSensitivity>
-      
-      <ToxicResistance>0.5</ToxicResistance>
+
       <Fertility>0</Fertility>
       
       <RoyalFavorValue>1</RoyalFavorValue>

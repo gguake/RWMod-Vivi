@@ -14,7 +14,6 @@
         <li>(10, 4)</li>
         <li>(12.999, 6)</li>
         <li>(13, 8)</li>
-        <li>(20, 8)</li>
       </points>
     </biologicalAgeTickFactorFromAgeCurve>
     <biostatMet>-5</biostatMet>
@@ -22,7 +21,7 @@
     <sterilize>true</sterilize>
     <statOffsets>
       <VV_GrowthPointsFactor>3.0</VV_GrowthPointsFactor>
-      <GlobalLearningFactor>1.0</GlobalLearningFactor>
+      <GlobalLearningFactor>0.5</GlobalLearningFactor>
     </statOffsets>
     <statFactors>
       <VV_LearningRateFactor>3.0</VV_LearningRateFactor>

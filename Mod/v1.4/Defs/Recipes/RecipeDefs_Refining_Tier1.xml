@@ -10,10 +10,10 @@
     </descriptionHyperlinks>
 
     <jobString>making vivicream.</jobString>
-    <workAmount>450</workAmount>
+    <workAmount>500</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <workSkill>Crafting</workSkill>
-    <workSkillLearnFactor>0.05</workSkillLearnFactor>
+    <workSkillLearnFactor>0.1</workSkillLearnFactor>
 
     <effectWorking>Clean</effectWorking>
     <soundWorking>Recipe_Brewing</soundWorking>
@@ -24,7 +24,7 @@
     <fixedIngredientFilter>
     </fixedIngredientFilter>
     <products>
-      <VV_Vivicream>25</VV_Vivicream>
+      <VV_Vivicream>30</VV_Vivicream>
     </products>
     <researchPrerequisite>VV_BasicInfra</researchPrerequisite>
 
@@ -43,10 +43,10 @@
     <description>test</description>
 
     <jobString>making viviwax.</jobString>
-    <workAmount>1200</workAmount>
+    <workAmount>900</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <workSkill>Crafting</workSkill>
-    <workSkillLearnFactor>0.1</workSkillLearnFactor>
+    <workSkillLearnFactor>0.05</workSkillLearnFactor>
 
     <effectWorking>Smelt</effectWorking>
     <soundWorking>Recipe_Brewing</soundWorking>
@@ -59,7 +59,7 @@
             <li>VV_Vivicream</li>
           </thingDefs>
         </filter>
-        <count>40</count>
+        <count>30</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
@@ -68,7 +68,7 @@
       </thingDefs>
     </fixedIngredientFilter>
     <products>
-      <VV_Viviwax>40</VV_Viviwax>
+      <VV_Viviwax>30</VV_Viviwax>
     </products>
     <researchPrerequisite>VV_BasicInfra</researchPrerequisite>
   </RecipeDef>
@@ -83,7 +83,7 @@
     <workAmount>500</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <workSkill>Crafting</workSkill>
-    <workSkillLearnFactor>0.1</workSkillLearnFactor>
+    <workSkillLearnFactor>0.05</workSkillLearnFactor>
 
     <effectWorking>Cook</effectWorking>
     <soundWorking>Recipe_Brewing</soundWorking>

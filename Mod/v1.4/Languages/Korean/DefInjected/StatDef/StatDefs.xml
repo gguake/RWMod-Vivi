@@ -29,10 +29,6 @@
   <VV_TreeResinGatherYield.description>식물에서 평균 대비 얼마나 많은 수지를 채집 가능한지 나타냅니다.
 \n생산량은 내구도, 성장도, 오염에 영향을 받습니다.</VV_TreeResinGatherYield.description>
 
-  <VV_GrassFiberGatherYield.label>잔디 섬유 생산량</VV_GrassFiberGatherYield.label>
-  <VV_GrassFiberGatherYield.description>식물에서 평균 대비 얼마나 많은 잔디 섬유를 채집 가능한지 나타냅니다.
-\n생산량은 내구도, 성장도, 오염에 영향을 받습니다.</VV_GrassFiberGatherYield.description>
-
   <VV_GrowthPointsFactor.label>성장 등급 획득 속도</VV_GrowthPointsFactor.label>
   <VV_GrowthPointsFactor.description>어린이가 성장 등급을 얼마나 많이 획득하는지 나타냅니다.</VV_GrowthPointsFactor.description>
   

@@ -12,11 +12,8 @@
   <VV_Propolis.description>비비들이 나무에서 채집하는 수지질의 희귀한 혼합물입니다. 강한 향균 효과가 있어 청결이 요구되는곳에 재료로 사용됩니다.
 \n천연 항생제로 활용해 감염이나 일부 질병의 진행도를 늦추기 위해 사용할 수도 있습니다.</VV_Propolis.description>
 
-  <VV_GrassFiber.label>잔디 섬유</VV_GrassFiber.label>
-  <VV_GrassFiber.description>다양한 식물의 길다란 잎을 가공해 만든 섬유입니다. 주변의 흔한 풀에서 얻을 수 있지만 그다지 튼튼하지 않으면서 가공이 어렵습니다.</VV_GrassFiber.description>
-
   <VV_Lifestrand.label>생체가닥</VV_Lifestrand.label>
-  <VV_Lifestrand.description>악마가닥을 살아있는 잎과 꽃가루로 튼튼하게 가공한 옷감입니다. 보통의 악마가닥 천보다 매우 튼튼하지만 그만큼 가공하기도 어렵습니다.
+  <VV_Lifestrand.description>악마가닥을 살아있는 잎과 말벌의 날개 조직으로 튼튼하게 가공한 옷감입니다. 보통의 악마가닥 천보다 매우 튼튼하지만 그만큼 가공하기도 어렵습니다.
 \n섬유가 마치 살아있는것 같다고 해서 생체가닥으로 불립니다.</VV_Lifestrand.description>
 
   <VV_UnknownSeed.label>미확인 씨앗</VV_UnknownSeed.label>

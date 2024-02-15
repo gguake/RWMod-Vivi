@@ -83,7 +83,7 @@
     </fixedIngredientFilter>
 
     <products>
-      <VV_Pollen>8</VV_Pollen>
+      <VV_Pollen>7</VV_Pollen>
     </products>
     <researchPrerequisite>VV_BasicGathering</researchPrerequisite>
 
@@ -101,7 +101,7 @@
 
     <jobString>Gathering propolis.</jobString>
     
-    <workAmount>2400</workAmount>
+    <workAmount>2100</workAmount>
     <workSkill>Plants</workSkill>
     <workSpeedStat>VV_PlantGatherSpeed</workSpeedStat>
     <efficiencyStat>VV_PlantGatherYield</efficiencyStat>
@@ -133,47 +133,4 @@
       <Plants>8</Plants>
     </skillRequirements>
   </RecipeDef>
-  
-  <!-- 잔디 섬유 채집 -->
-  <RecipeDef Class="VVRace.RecipeDef_Gathering">
-    <defName>VV_GatherGrassFiber</defName>
-    <label>gather grass fiber</label>
-    <description>.</description>
-
-    <jobString>Gathering grass fiber.</jobString>
-    
-    <workAmount>1000</workAmount>
-    <workSkill>Plants</workSkill>
-    <workSpeedStat>VV_PlantGatherSpeed</workSpeedStat>
-    <efficiencyStat>VV_PlantGatherYield</efficiencyStat>
-    <workSkillLearnFactor>0.1</workSkillLearnFactor>
-
-    <effectWorking>Harvest_Plant</effectWorking>
-    <soundWorking>Harvest_Standard</soundWorking>
-    <uiIconThing>VV_GrassFiber</uiIconThing>
-
-    <recipeUsers>
-      <li>VV_GatheringSpot</li>
-      <li>VV_GatheringBarrel</li>
-    </recipeUsers>
-    <allowMixingIngredients>true</allowMixingIngredients>
-    <targetCountAdjustment>10</targetCountAdjustment>
-    <products>
-      <VV_GrassFiber>10</VV_GrassFiber>
-    </products>
-    <researchPrerequisite>VV_AdvancedGathering</researchPrerequisite>
-
-    <gatherWorkerType>VVRace.GatherWorker_Plant</gatherWorkerType>
-    <gatheringJob>VV_GatherGrassFiber</gatheringJob>
-    <gatheringWorkWeight>3</gatheringWorkWeight>
-    <processingWorkWeight>1</processingWorkWeight>
-    <targetCooldownStat>VV_PlantGatherCooldown</targetCooldownStat>
-    <targetYieldStat>VV_GrassFiberGatherYield</targetYieldStat>
-    <maxPathDanger>Some</maxPathDanger>
-
-    <skillRequirements>
-      <Plants>3</Plants>
-    </skillRequirements>
-  </RecipeDef>
-
 </Defs>

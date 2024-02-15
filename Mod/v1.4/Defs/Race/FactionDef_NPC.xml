@@ -112,11 +112,12 @@
           <VV_RoyalViviTrader>1</VV_RoyalViviTrader>
         </traders>
         <carriers>
-          <Muffalo>6</Muffalo>
+          <Muffalo>5</Muffalo>
         </carriers>
         <guards>
-          <VV_ViviGuard>50</VV_ViviGuard>
-          <VV_ViviArcher>50</VV_ViviArcher>
+          <VV_ViviTribesman>5</VV_ViviTribesman>
+          <VV_ViviGuard>10</VV_ViviGuard>
+          <VV_ViviArcher>10</VV_ViviArcher>
         </guards>
       </li>
       <li>

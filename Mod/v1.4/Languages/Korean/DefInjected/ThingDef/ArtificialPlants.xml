@@ -30,11 +30,12 @@
 <VV_Radiantflower.comps.CompSchedule.offMessage>식물 휴식기에 꺼짐</VV_Radiantflower.comps.CompSchedule.offMessage>
 
 <VV_Richflower.label>풍년화</VV_Richflower.label>
-<VV_Richflower.description>인접한 식물이 많을수록 많은 에너지를 생산하는 고대의 꽃입니다. 주변에 오염된 토양이 많을수록 많은 에너지를 생산합니다. 채집시 많은 꿀을 얻을 수 있습니다.
+<VV_Richflower.description>인접한 식물이 많을수록 많은 에너지를 생산하는 고대의 꽃입니다. 인접한 식물이 많을수록 에너지를 생산하며 꿀을 채집할때 많은 꿀을 얻을 수 있습니다.
 \n에너지를 지속적으로 주변에 퍼뜨리면서 주변 토양의 생산성을 개선해 재배에 유리한 환경으로 변화시킵니다.</VV_Richflower.description>
 
 <VV_Purifimint.label>정화민트</VV_Purifimint.label>
-<VV_Purifimint.description>인접한 토양의 오염을 흡수해 에너지로 변환하는 고대의 꽃입니다. 주기적으로 주변 토양의 오염을 제거합니다.</VV_Purifimint.description>
+<VV_Purifimint.description>인접한 토양의 오염을 흡수해 에너지로 변환하는 고대의 꽃입니다. 주변에 오염된 토양이 많을수록 많은 에너지를 생산하며 주변의 오염을 주기적으로 흡수합니다.
+\n꽃에 저장된 에너지를 일시적으로 모두 방출해 외부의 투사체를 차단하는 보호막을 잠시동안 생성할 수 있습니다.</VV_Purifimint.description>
 
 <VV_Peashooter.label>콩뿌리개</VV_Peashooter.label>
 <VV_Peashooter.description>적을 감지하면 콩을 발사해 쫓아내는 식물로 발사할때마다 에너지를 소모합니다.

@@ -6,13 +6,12 @@
     <label>making lifestrand</label>
     <description>.</description>
     <descriptionHyperlinks>
-      <ThingDef>VV_HeatingPetal</ThingDef>
-      <ThingDef>VV_CoolingPetal</ThingDef>
       <ThingDef>VV_LivingLeaf</ThingDef>
+      <ThingDef>VV_TitanicHornetWing</ThingDef>
     </descriptionHyperlinks>
 
     <jobString>making lifestrand.</jobString>
-    <workAmount>2000</workAmount>
+    <workAmount>1800</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <workSkill>Crafting</workSkill>
 
@@ -32,50 +31,34 @@
       <li>
         <filter>
           <thingDefs>
-            <li>VV_Pollen</li>
-          </thingDefs>
-        </filter>
-        <count>20</count>
-      </li>
-      <li>
-        <filter>
-          <thingDefs>
-            <li>VV_HeatingPetal</li>
-          </thingDefs>
-        </filter>
-        <count>5</count>
-      </li>
-      <li>
-        <filter>
-          <thingDefs>
-            <li>VV_CoolingPetal</li>
-          </thingDefs>
-        </filter>
-        <count>5</count>
-      </li>
-      <li>
-        <filter>
-          <thingDefs>
             <li>VV_LivingLeaf</li>
           </thingDefs>
         </filter>
         <count>10</count>
       </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_TitanicHornetWing</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
     </ingredients>
     <fixedIngredientFilter>
       <thingDefs>
         <li>DevilstrandCloth</li>
-        <li>VV_GrassFiber</li>
-        <li>VV_Pollen</li>
+        <li>VV_LivingLeaf</li>
+        <li>VV_TitanicHornetWing</li>
       </thingDefs>
     </fixedIngredientFilter>
     <products>
-      <VV_Lifestrand>30</VV_Lifestrand>
+      <VV_Lifestrand>60</VV_Lifestrand>
     </products>
     <researchPrerequisite>VV_Lifestrand</researchPrerequisite>
 
     <skillRequirements>
-      <Crafting>9</Crafting>
+      <Crafting>8</Crafting>
     </skillRequirements>
   </RecipeDef>
 

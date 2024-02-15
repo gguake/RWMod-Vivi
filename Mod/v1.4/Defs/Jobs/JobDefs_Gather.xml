@@ -20,12 +20,4 @@
     <reportString>gather propolis at TargetA.</reportString>
     <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
   </JobDef>
-
-  <JobDef>
-    <defName>VV_GatherGrassFiber</defName>
-    <driverClass>VVRace.JobDriver_Gather</driverClass>
-    <reportString>gather grass fiber at TargetA.</reportString>
-    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
-  </JobDef>
-  
 </Defs>

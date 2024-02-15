@@ -54,7 +54,7 @@ namespace VVRace
 
     public class IncidentWorker_HornetSwarm_Vivi : IncidentWorker_HornetSwarm
     {
-        protected override float PointsFactor => 1.3f;
+        protected override float PointsFactor => 1.35f;
 
         protected override bool CanFireNowSub(IncidentParms parms)
         {

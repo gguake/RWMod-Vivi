@@ -1,84 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <!-- 비비 창 -->
-  <ThingDef ParentName="BaseMeleeWeapon_Sharp_Quality">
-    <defName>VV_ViviSpear</defName>
-    <label>vivi spear</label>
+  <!-- 비비 새총 -->
+  <ThingDef ParentName="BaseWeaponNeolithic">
+    <defName>VV_Slingshot</defName>
+    <label>vivi slingshot</label>
     <description>.</description>
     <graphicData>
-      <texPath>Things/Item/Equipment/VV_Spear</texPath>
+      <texPath>Things/Item/Equipment/VV_ViviLongJavelin</texPath>
       <graphicClass>Graphic_Single</graphicClass>
-      <shaderType>CutoutComplex</shaderType>
+      <drawSize>0.8</drawSize>
     </graphicData>
-    <equippedAngleOffset>-5</equippedAngleOffset>
+    <equippedAngleOffset>30</equippedAngleOffset>
+    <rotateInShelves>false</rotateInShelves>
+    <soundInteract>Bow_Recurve</soundInteract>
 
     <techLevel>Medieval</techLevel>
     <statBases>
-      <WorkToMake>13000</WorkToMake>
-      <Mass>2</Mass>
+      <WorkToMake>2000</WorkToMake>
+      <Mass>0.5</Mass>
+      <AccuracyTouch>0.65</AccuracyTouch>
+      <AccuracyShort>0.5</AccuracyShort>
+      <AccuracyMedium>0.3</AccuracyMedium>
+      <AccuracyLong>0.1</AccuracyLong>
+      <RangedWeapon_Cooldown>0.8</RangedWeapon_Cooldown>
     </statBases>
 
-    <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
     <thingCategories Inherit="False">
       <li>VV_ViviWeapon</li>
     </thingCategories>
-    <weaponClasses>
-      <li>MeleePiercer</li>
+    <weaponClasses Inherit="False">
+      <li>Ranged</li>
+      <li>RangedLight</li>
     </weaponClasses>
-    <weaponTags>
-      <li>VV_ViviWeapon</li>
-      <li>Spear</li>
+    <weaponTags Inherit="False">
+      <li>VV_ViviWeaponRange</li>
+      <li>NoRelic</li>
     </weaponTags>
 
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>VV_Arrow_SlingshotStone</defaultProjectile>
+        <warmupTime>1.0</warmupTime>
+        <range>16.9</range>
+        <soundCast>Bow_Small</soundCast>
+      </li>
+    </verbs>
     <tools>
       <li>
-        <label>shaft</label>
+        <label>handle</label>
         <capacities>
           <li>Blunt</li>
-          <li>Poke</li>
         </capacities>
-        <power>13</power>
-        <cooldownTime>2.8</cooldownTime>
-      </li>
-      <li>
-        <label>point</label>
-        <capacities>
-          <li>Stab</li>
-        </capacities>
-        <power>29</power>
-        <armorPenetration>0.36</armorPenetration>
-        <cooldownTime>3.8</cooldownTime>
-        <extraMeleeDamages>
-          <li>
-            <def>VV_ToxicStab</def>
-            <amount>6</amount>
-            <chance>0.9</chance>
-          </li>
-        </extraMeleeDamages>
+        <power>9</power>
+        <cooldownTime>2</cooldownTime>
       </li>
     </tools>
-    
-    <costList>
-      <VV_Viviwax>45</VV_Viviwax>
-    </costList>
+
     <costStuffCount>30</costStuffCount>
     <stuffCategories>
       <li>Metallic</li>
       <li>Woody</li>
     </stuffCategories>
     <recipeMaker>
-      <researchPrerequisites>
-        <li>VV_Weaponry</li>
-      </researchPrerequisites>
-      <skillRequirements>
-        <Crafting>4</Crafting>
-      </skillRequirements>
-      <displayPriority>-510</displayPriority>
+      <recipeUsers>
+        <li>CraftingSpot</li>
+      </recipeUsers>
+      <displayPriority>-520</displayPriority>
     </recipeMaker>
+    
+    <relicChance>0</relicChance>
     
     <tradeTags>
       <li>VV_ViviTool</li>
     </tradeTags>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseProjectileNeolithic">
+    <defName>VV_Arrow_SlingshotStone</defName>
+    <label>stone</label>
+    <graphicData>
+      <texPath>Things/Mote/Stone</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <damageDef>Blunt</damageDef>
+      <damageAmountBase>11</damageAmountBase>
+      <stoppingPower>1.0</stoppingPower>
+      <speed>33</speed>
+    </projectile>
   </ThingDef>
 
   <!-- 비비 롱 재블린 -->
@@ -97,13 +108,14 @@
     <statBases>
       <WorkToMake>9000</WorkToMake>
       <Mass>4</Mass>
-      <AccuracyTouch>0.76</AccuracyTouch>
-      <AccuracyShort>0.45</AccuracyShort>
-      <AccuracyMedium>0.3</AccuracyMedium>
-      <AccuracyLong>0.12</AccuracyLong>
+      <AccuracyTouch>0.72</AccuracyTouch>
+      <AccuracyShort>0.4</AccuracyShort>
+      <AccuracyMedium>0.35</AccuracyMedium>
+      <AccuracyLong>0.1</AccuracyLong>
       <RangedWeapon_Cooldown>1.6</RangedWeapon_Cooldown>
     </statBases>
     
+    <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
     <thingCategories Inherit="False">
       <li>VV_ViviWeapon</li>
     </thingCategories>
@@ -122,7 +134,7 @@
         <hasStandardCommand>true</hasStandardCommand>
         <defaultProjectile>VV_Arrow_LongJavelin</defaultProjectile>
         <warmupTime>4</warmupTime>
-        <range>17.9</range>
+        <range>19.9</range>
         <soundCast>Interact_BeatFire</soundCast>
         <rangedFireRulepack>Combat_RangedFire_Thrown</rangedFireRulepack>
       </li>
@@ -142,7 +154,7 @@
         <capacities>
           <li>Stab</li>
         </capacities>
-        <power>17</power>
+        <power>18</power>
         <armorPenetration>0.15</armorPenetration>
         <cooldownTime>1.8</cooldownTime>
         <extraMeleeDamages>
@@ -170,7 +182,7 @@
       <skillRequirements>
         <Crafting>4</Crafting>
       </skillRequirements>
-      <displayPriority>-520</displayPriority>
+      <displayPriority>-521</displayPriority>
     </recipeMaker>
 
     <relicChance>0</relicChance>
@@ -190,17 +202,17 @@
     </graphicData>
     <projectile>
       <damageDef>VV_RangedToxicStab</damageDef>
-      <damageAmountBase>22</damageAmountBase>
-      <stoppingPower>3.9</stoppingPower>
-      <armorPenetrationBase>0.24</armorPenetrationBase>
-      <speed>21</speed>
+      <damageAmountBase>27</damageAmountBase>
+      <stoppingPower>3.4</stoppingPower>
+      <armorPenetrationBase>0.21</armorPenetrationBase>
+      <speed>25</speed>
     </projectile>
   </ThingDef>
 
-  <!-- 비비 연노 -->
+  <!-- 비비 연발 석궁 -->
   <ThingDef ParentName="BaseWeaponNeolithic">
     <defName>VV_RepeatingCrossbow</defName>
-    <label>repeating crossbow</label>
+    <label>vivi repeating crossbow</label>
     <description>.</description>
     <graphicData>
       <texPath>Things/Item/Equipment/VV_RepeatingCrossbow</texPath>
@@ -216,7 +228,7 @@
       <WorkToMake>15000</WorkToMake>
       <Mass>1.6</Mass>
       <AccuracyTouch>0.8</AccuracyTouch>
-      <AccuracyShort>0.2</AccuracyShort>
+      <AccuracyShort>0.22</AccuracyShort>
       <AccuracyMedium>0.07</AccuracyMedium>
       <AccuracyLong>0.03</AccuracyLong>
       <RangedWeapon_Cooldown>0.11</RangedWeapon_Cooldown>
@@ -272,7 +284,7 @@
       <skillRequirements>
         <Crafting>8</Crafting>
       </skillRequirements>
-      <displayPriority>-521</displayPriority>
+      <displayPriority>-522</displayPriority>
     </recipeMaker>
     
     <tradeTags>
@@ -293,102 +305,6 @@
       <stoppingPower>1.0</stoppingPower>
       <speed>60</speed>
     </projectile>
-  </ThingDef>
-
-  <!-- 예식용 창 -->
-  <ThingDef ParentName="BaseWeapon">
-    <defName>VV_RitualLance</defName>
-    <label>ritual lance</label>
-    <description>.</description>
-    <graphicData>
-      <texPath>Things/Item/Equipment/VV_RitualLance</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
-      <drawSize>1.5</drawSize>
-    </graphicData>
-    <equippedAngleOffset>0</equippedAngleOffset>
-    
-    <techLevel>Medieval</techLevel>
-    <statBases>
-      <MarketValue>800</MarketValue>
-      <Mass>2</Mass>
-    </statBases>
-    <equippedStatOffsets>
-      <MoveSpeed>-0.3</MoveSpeed>
-    </equippedStatOffsets>
-    <tradeNeverStack>true</tradeNeverStack>
-    <relicChance>3</relicChance>
-
-    <thingCategories Inherit="False">
-      <li>VV_ViviWeapon</li>
-    </thingCategories>
-    <weaponClasses>
-      <li>Melee</li>
-      <li>MeleePiercer</li>
-    </weaponClasses>
-    <weaponTags>
-      <li>VV_ViviExotic</li>
-      <li>Spear</li>
-    </weaponTags>
-    
-    <comps>
-      <li>
-        <compClass>CompQuality</compClass>
-      </li>
-      <li Class="CompProperties_Art">
-        <nameMaker>NamerArtWeaponMelee</nameMaker>
-        <descriptionMaker>ArtDescription_WeaponMelee</descriptionMaker>
-        <minQualityForArtistic>Excellent</minQualityForArtistic>
-      </li>
-    </comps>
-    <smeltable>false</smeltable>
-    <burnableByRecipe>true</burnableByRecipe>
-    <notifyMapRemoved>true</notifyMapRemoved>
-
-    <tools>
-      <li>
-        <label>shaft</label>
-        <capacities>
-          <li>Blunt</li>
-          <li>Poke</li>
-        </capacities>
-        <power>15</power>
-        <cooldownTime>1.6</cooldownTime>
-      </li>
-      <li>
-        <label>point</label>
-        <capacities>
-          <li>Stab</li>
-        </capacities>
-        <power>27</power>
-        <armorPenetration>0.50</armorPenetration>
-        <cooldownTime>5.2</cooldownTime>
-      </li>
-      <li>
-        <label>point</label>
-        <capacities>
-          <li>Stab</li>
-        </capacities>
-        <power>67</power>
-        <armorPenetration>1.00</armorPenetration>
-        <cooldownTime>5.2</cooldownTime>
-        <chanceFactor>0.3</chanceFactor>
-        
-        <surpriseAttack>
-          <extraMeleeDamages>
-            <li>
-              <def>Stun</def>
-              <amount>14</amount>
-            </li>
-          </extraMeleeDamages>
-        </surpriseAttack>
-
-        <soundMeleeHit>Pawn_Melee_MechanoidSlash_HitPawn</soundMeleeHit>
-      </li>
-    </tools>
-    
-    <tradeTags>
-      <li>VV_ViviExotic</li>
-    </tradeTags>
   </ThingDef>
 
 </Defs>
