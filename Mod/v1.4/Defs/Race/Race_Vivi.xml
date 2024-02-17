@@ -613,18 +613,18 @@
         <Warden>10</Warden>
         <Handling>7</Handling>
         <Cooking>3</Cooking>
-        <Hunting>10</Hunting>
+        <Hunting>13</Hunting>
         <Construction>7</Construction>
         <Growing>3</Growing>
         <Mining>10</Mining>
         <PlantCutting>3</PlantCutting>
         <Smithing>7</Smithing>
         <Tailoring>7</Tailoring>
-        <Art>10</Art>
+        <Art>13</Art>
         <Crafting>7</Crafting>
         <Hauling>3</Hauling>
         <Cleaning>3</Cleaning>
-        <Research>13</Research>
+        <Research>10</Research>
       </lifeStageWorkSettings>
       
 			<soundMeleeHitPawn>Pawn_Melee_Punch_HitPawn</soundMeleeHitPawn>
