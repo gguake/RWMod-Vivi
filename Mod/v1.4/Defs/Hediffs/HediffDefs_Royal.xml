@@ -18,16 +18,16 @@
     <stages>
       <li>
         <statOffsets>
-          <MoveSpeed>-1.4</MoveSpeed>
+          <MoveSpeed>-1.5</MoveSpeed>
           <PsychicSensitivity>1.0</PsychicSensitivity>
           <NegotiationAbility>0.2</NegotiationAbility>
           <SocialImpact>0.2</SocialImpact>
-          <MeditationFocusGain>0.2</MeditationFocusGain>
+          <MeditationFocusGain MayRequire="Ludeon.RimWorld.Royalty">0.2</MeditationFocusGain>
           <PsychicEntropyRecoveryRate>0.2</PsychicEntropyRecoveryRate>
         </statOffsets>
         <statFactors>
-          <WorkSpeedGlobal>0.75</WorkSpeedGlobal>
-          <LifespanFactor>10</LifespanFactor>
+          <WorkSpeedGlobal>0.7</WorkSpeedGlobal>
+          <LifespanFactor>11</LifespanFactor>
         </statFactors>
       </li>
     </stages>

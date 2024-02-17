@@ -2,7 +2,7 @@
 <Defs>
   <GeneDef>
     <defName>VV_ViviMetabolism</defName>
-    <label>vivi metabolism</label>
+    <label>excessive metabolism</label>
     <description>.</description>
     <iconPath>UI/Icons/Genes/Gene_Vivi</iconPath>
     <displayCategory>Miscellaneous</displayCategory>
@@ -16,8 +16,8 @@
         <li>(13, 8)</li>
       </points>
     </biologicalAgeTickFactorFromAgeCurve>
-    <biostatMet>-5</biostatMet>
-    <biostatCpx>5</biostatCpx>
+    <biostatMet>-6</biostatMet>
+    <biostatCpx>4</biostatCpx>
     <sterilize>true</sterilize>
     <statOffsets>
       <VV_GrowthPointsFactor>3.0</VV_GrowthPointsFactor>
