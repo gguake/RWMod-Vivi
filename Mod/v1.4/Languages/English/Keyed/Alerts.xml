@@ -10,9 +10,4 @@
 \nEnsure the plant has an environment where it can gain energy, or place it next to a plant that produces more energy than its maximum capacity. You can also recharge its energy by applying fertilizer.
 \nIf conditions do not allow for recharging energy, you can package it to prevent damage.</VV_AlertArtificialPlantLowEnergyDesc>
 
-<VV_AlertViviLowLoyalty>very low loyalty</VV_AlertViviLowLoyalty>
-<VV_AlertViviLowLoyaltyDesc>Vivi's loyalty is very low.
-\n"When vivi's loyalty is depleted, she will become wild and lead a nomadic life. To restore loyalty, encourage interactions with the affiliated royal vivi or do something to lift her moods.
-\nConsuming royal jelly can immediately restore a certain amount of loyalty, making it good for quick responses.</VV_AlertViviLowLoyaltyDesc>
-
 </LanguageData>

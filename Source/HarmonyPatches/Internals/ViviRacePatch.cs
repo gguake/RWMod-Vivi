@@ -62,10 +62,6 @@ namespace VVRace.HarmonyPatches
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(PawnRelationWorker_Sibling_InRelation_Postfix)));
 
 
-            harmony.Patch(
-                original: AccessTools.Method(typeof(Pawn_InteractionsTracker), nameof(Pawn_InteractionsTracker.TryInteractWith)),
-                postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(Pawn_InteractionsTracker_TryInteractWith_Postfix)));
-
 
             harmony.Patch(
                 original: AccessTools.Method(typeof(InteractionWorker_RomanceAttempt), nameof(InteractionWorker_RomanceAttempt.RandomSelectionWeight)),
@@ -269,56 +265,6 @@ namespace VVRace.HarmonyPatches
             if (!__result && me.IsVivi() && other.IsVivi())
             {
                 __result = me.GetMother() != null && other.GetMother() != null && me.GetMother() == other.GetMother();
-            }
-        }
-
-        private static void Pawn_InteractionsTracker_TryInteractWith_Postfix(Pawn ___pawn, Pawn recipient, InteractionDef intDef, bool __result)
-        {
-            if (!__result) { return; }
-
-            if (___pawn.IsVivi() && recipient.IsVivi() && ___pawn.Faction == recipient.Faction && !___pawn.Dead && !recipient.Dead)
-            {
-                Pawn giver, receiver;
-                if (___pawn.IsRoyalVivi())
-                {
-                    giver = ___pawn;
-                    receiver = recipient;
-                }
-                else if (recipient.IsRoyalVivi())
-                {
-                    giver = recipient;
-                    receiver = ___pawn;
-                }
-                else
-                {
-                    return;
-                }
-
-                if (intDef.recipientThought == null || intDef.recipientThought.stages.NullOrEmpty()) { return; }
-
-                var loyalty = receiver.needs?.TryGetNeed<Need_Loyalty>();
-                if (loyalty != null)
-                {
-                    float baseOffset = intDef.recipientThought.stages[0].baseOpinionOffset;
-                    float socialImpactMultiplier = giver.GetStatValue(StatDefOf.SocialImpact);
-
-                    float beauty = giver.GetStatValue(StatDefOf.PawnBeauty);
-                    float beautyMultiplier = Mathf.Pow(1.5f, Mathf.Abs(beauty));
-
-                    float multiplier = socialImpactMultiplier;
-                    if (baseOffset > 0f ^ beauty > 0f)
-                    {
-                        multiplier /= beautyMultiplier;
-                    }
-                    else
-                    {
-                        multiplier *= beautyMultiplier;
-                    }
-
-                    var value = baseOffset * multiplier;
-
-                    loyalty.Notify_InteractWith(value);
-                }
             }
         }
 

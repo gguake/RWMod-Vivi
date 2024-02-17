@@ -214,10 +214,8 @@
     <Compile Include="Vivi\Bill_ProductionWithFoodDrain.cs" />
     <Compile Include="CompAbilityEffect_FoodCost.cs" />
     <Compile Include="Vivi\HediffComp_GrowthBoost.cs" />
-    <Compile Include="Vivi\UI\Alert_LowLoyalty.cs" />
     <Compile Include="Vivi\Comps\CompVivi.cs" />
     <Compile Include="Vivi\HediffComp_RoyalJelly.cs" />
-    <Compile Include="Vivi\Need_Loyalty.cs" />
     <Compile Include="ViviModsConfig.cs" />
     <Compile Include="ArtificialPlant\Things\Building_SeedlingGerminator.cs" />
     <Compile Include="Vivi\PawnKindDef_Vivi.cs" />

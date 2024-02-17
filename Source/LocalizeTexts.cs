@@ -8,8 +8,6 @@
         public const string AlertViviDangerousEggsDesc = "VV_AlertViviDangerousEggsDesc";
         public const string AlertArtificialPlantLowEnergy = "VV_AlertArtificialPlantLowEnergy";
         public const string AlertArtificialPlantLowEnergyDesc = "VV_AlertArtificialPlantLowEnergyDesc";
-        public const string AlertViviLowLoyalty = "VV_AlertViviLowLoyalty";
-        public const string AlertViviLowLoyaltyDesc = "VV_AlertViviLowLoyaltyDesc";
 
         public const string GizmoViviBandwidthHeader = "VV_GizmoViviBandwidthHeader";
         public const string GizmoViviBandwidthTooltip = "VV_GizmoViviBandwidthTooltip";
@@ -71,8 +69,6 @@
         public const string JobFailReasonViviStarving = "VV_JobFailReasonViviStarving";
 
         public const string WarnCancelGerminateSchedule = "VV_WarnCancelGerminateSchedule";
-
-        public const string MentalStateReason_Loyalty = "VV_MentalStateReason_Loyalty";
 
         public const string StatsReport_Energy = "VV_StatsReport_Energy";
         public const string StatsReport_Energy_Desc = "VV_StatsReport_Energy_Desc";

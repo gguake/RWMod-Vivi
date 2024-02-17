@@ -11,17 +11,4 @@
     <fallPerDay>0</fallPerDay>
     <developmentalStageFilter>Baby, Child</developmentalStageFilter>
   </NeedDef>
-  
-  <NeedDef>
-    <defName>VV_Loyalty</defName>
-    <needClass>VVRace.Need_Loyalty</needClass>
-    <label>loyalty</label>
-    <description>.</description>
-
-    <baseLevel>0</baseLevel>
-    <listPriority>45</listPriority>
-    <fallPerDay>0</fallPerDay>
-    <developmentalStageFilter>Adult</developmentalStageFilter>
-    <colonistsOnly>true</colonistsOnly>
-  </NeedDef>
 </Defs>

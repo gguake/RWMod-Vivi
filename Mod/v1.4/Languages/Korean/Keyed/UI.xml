@@ -54,8 +54,6 @@
   <VV_JobFailReasonNotVivi>비비가 아님</VV_JobFailReasonNotVivi>
   <VV_JobFailReasonViviStarving>비비가 굶주림</VV_JobFailReasonViviStarving>
 
-  <VV_MentalStateReason_Loyalty>충성도가 낮아 발생했습니다.</VV_MentalStateReason_Loyalty>
-
   <VV_StatsReport_Energy>에너지 비축량</VV_StatsReport_Energy>
   <VV_StatsReport_Energy_Desc>식물이 최대로 저장할수 있는 에너지의 양입니다.</VV_StatsReport_Energy_Desc>
   <VV_StatsReport_EnergyFlux>에너지 변화량</VV_StatsReport_EnergyFlux>

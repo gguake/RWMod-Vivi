@@ -10,9 +10,4 @@
 \n식물이 에너지를 얻을수 있는 환경을 갖추거나 에너지를 최대치보다 초과해서 생산하는 식물과 붙여서 배치하세요. 비료를 투입해 에너지를 충전할 수도 있습니다.
 \n에너지를 충전할 여건이 되지 않는다면 포장해서 파손을 방지할 수 있습니다.</VV_AlertArtificialPlantLowEnergyDesc>
 
-<VV_AlertViviLowLoyalty>비비 충성도 낮음</VV_AlertViviLowLoyalty>
-<VV_AlertViviLowLoyaltyDesc>비비의 충성도가 매우 낮습니다.
-\n충성도가 고갈된 비비는 야생화되어 떠돌이 생활을 하게 됩니다. 충성도를 회복시키려면 소속된 로열 비비와 상호작용을 하도록 유도하거나 기분을 좋게 하세요.
-\n로열 젤리를 섭취하면 즉시 일정량의 충성도를 회복시킬 수 있어 대응하기에 좋습니다.</VV_AlertViviLowLoyaltyDesc>
-
 </LanguageData>

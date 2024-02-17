@@ -220,10 +220,6 @@
         <li Class="IngestionOutcomeDoer_GiveHediff">
           <hediffDef>VV_ViviGrowthBoost</hediffDef>
         </li>
-        <li Class="IngestionOutcomeDoer_OffsetNeed">
-          <need>VV_Loyalty</need>
-          <offset>1000</offset>
-        </li>
       </outcomeDoers>
 
       <maxNumToIngestAtOnce>1</maxNumToIngestAtOnce>
