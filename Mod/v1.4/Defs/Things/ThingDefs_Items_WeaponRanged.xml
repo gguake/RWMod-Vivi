@@ -6,7 +6,7 @@
     <label>vivi slingshot</label>
     <description>.</description>
     <graphicData>
-      <texPath>Things/Item/Equipment/VV_ViviLongJavelin</texPath>
+      <texPath>Things/Item/Equipment/VV_Slingshot</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <drawSize>0.8</drawSize>
     </graphicData>
@@ -58,11 +58,11 @@
       </li>
     </tools>
 
-    <costStuffCount>30</costStuffCount>
-    <stuffCategories>
-      <li>Metallic</li>
-      <li>Woody</li>
-    </stuffCategories>
+    <costList>
+      <WoodLog>20</WoodLog>
+      <VV_Viviwax>10</VV_Viviwax>
+    </costList>
+
     <recipeMaker>
       <recipeUsers>
         <li>CraftingSpot</li>
@@ -89,6 +89,7 @@
       <damageAmountBase>11</damageAmountBase>
       <stoppingPower>1.0</stoppingPower>
       <speed>33</speed>
+      <armorPenetrationBase>0</armorPenetrationBase>
     </projectile>
   </ThingDef>
 
@@ -108,11 +109,11 @@
     <statBases>
       <WorkToMake>9000</WorkToMake>
       <Mass>4</Mass>
-      <AccuracyTouch>0.72</AccuracyTouch>
-      <AccuracyShort>0.4</AccuracyShort>
-      <AccuracyMedium>0.35</AccuracyMedium>
+      <AccuracyTouch>0.85</AccuracyTouch>
+      <AccuracyShort>0.55</AccuracyShort>
+      <AccuracyMedium>0.45</AccuracyMedium>
       <AccuracyLong>0.1</AccuracyLong>
-      <RangedWeapon_Cooldown>1.6</RangedWeapon_Cooldown>
+      <RangedWeapon_Cooldown>1.3</RangedWeapon_Cooldown>
     </statBases>
     
     <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
@@ -133,7 +134,7 @@
         <verbClass>Verb_Shoot</verbClass>
         <hasStandardCommand>true</hasStandardCommand>
         <defaultProjectile>VV_Arrow_LongJavelin</defaultProjectile>
-        <warmupTime>4</warmupTime>
+        <warmupTime>2.2</warmupTime>
         <range>19.9</range>
         <soundCast>Interact_BeatFire</soundCast>
         <rangedFireRulepack>Combat_RangedFire_Thrown</rangedFireRulepack>
@@ -147,7 +148,7 @@
           <li>Poke</li>
         </capacities>
         <power>11</power>
-         <cooldownTime>1.8</cooldownTime>
+         <cooldownTime>1.7</cooldownTime>
       </li>
       <li>
         <label>point</label>
@@ -155,8 +156,8 @@
           <li>Stab</li>
         </capacities>
         <power>18</power>
-        <armorPenetration>0.15</armorPenetration>
-        <cooldownTime>1.8</cooldownTime>
+        <armorPenetration>0.1</armorPenetration>
+        <cooldownTime>2.0</cooldownTime>
         <extraMeleeDamages>
           <li>
             <def>VV_ToxicStab</def>
@@ -167,14 +168,11 @@
       </li>
     </tools>
     
-    <costStuffCount>45</costStuffCount>
+    <costStuffCount>60</costStuffCount>
     <stuffCategories>
       <li>Metallic</li>
       <li>Woody</li>
     </stuffCategories>
-    <costList>
-      <WoodLog>45</WoodLog>
-    </costList>
     <recipeMaker>
       <researchPrerequisites>
         <li>VV_Weaponry</li>
@@ -203,8 +201,8 @@
     <projectile>
       <damageDef>VV_RangedToxicStab</damageDef>
       <damageAmountBase>27</damageAmountBase>
-      <stoppingPower>3.4</stoppingPower>
-      <armorPenetrationBase>0.21</armorPenetrationBase>
+      <stoppingPower>4</stoppingPower>
+      <armorPenetrationBase>0.25</armorPenetrationBase>
       <speed>25</speed>
     </projectile>
   </ThingDef>
@@ -227,8 +225,8 @@
     <statBases>
       <WorkToMake>15000</WorkToMake>
       <Mass>1.6</Mass>
-      <AccuracyTouch>0.8</AccuracyTouch>
-      <AccuracyShort>0.22</AccuracyShort>
+      <AccuracyTouch>0.84</AccuracyTouch>
+      <AccuracyShort>0.25</AccuracyShort>
       <AccuracyMedium>0.07</AccuracyMedium>
       <AccuracyLong>0.03</AccuracyLong>
       <RangedWeapon_Cooldown>0.11</RangedWeapon_Cooldown>
@@ -269,9 +267,9 @@
     </tools>
 
     <costList>
-      <WoodLog>80</WoodLog>
-      <ComponentIndustrial>2</ComponentIndustrial>
-      <VV_Vivicream>10</VV_Vivicream>
+      <WoodLog>60</WoodLog>
+      <ComponentIndustrial>1</ComponentIndustrial>
+      <VV_Viviwax>40</VV_Viviwax>
     </costList>
     <recipeMaker>
       <recipeUsers>
@@ -304,6 +302,7 @@
       <damageAmountBase>5</damageAmountBase>
       <stoppingPower>1.0</stoppingPower>
       <speed>60</speed>
+      <armorPenetrationBase>0</armorPenetrationBase>
     </projectile>
   </ThingDef>
 

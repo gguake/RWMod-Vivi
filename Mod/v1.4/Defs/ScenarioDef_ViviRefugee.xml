@@ -39,7 +39,7 @@
 
         <li Class="ScenPart_PawnFilter_Age">
           <def>PawnFilter_Age</def>
-          <allowedAgeRange>19~22</allowedAgeRange>
+          <allowedAgeRange>7~30</allowedAgeRange>
         </li>
         
         <li Class="ScenPart_PlayerPawnsArriveMethod">
@@ -62,27 +62,24 @@
           <context>PlayerStarter</context>
           <chance>1.0</chance>
           <need>Food</need>
-          <levelRange>0.2~0.3</levelRange>
-        </li>
-        <li Class="ScenPart_SetNeedLevel">
-          <def>SetNeedLevel</def>
-          <visible>false</visible>
-          <context>PlayerStarter</context>
-          <chance>1.0</chance>
-          <need>Rest</need>
-          <levelRange>0.5~0.6</levelRange>
+          <levelRange>0.3~0.4</levelRange>
         </li>
 
         <!-- 시작시 소유품 -->
         <li Class="ScenPart_StartingThing_Defined">
           <def>StartingThing_Defined</def>
           <thingDef>Silver</thingDef>
-          <count>500</count>
+          <count>400</count>
         </li>
         <li Class="ScenPart_ScatterThingsNearPlayerStart">
           <def>StartingThing_Defined</def>
           <thingDef>WoodLog</thingDef>
-          <count>400</count>
+          <count>300</count>
+        </li>
+        <li Class="ScenPart_ScatterThingsNearPlayerStart">
+          <def>StartingThing_Defined</def>
+          <thingDef>Steel</thingDef>
+          <count>300</count>
         </li>
         <li Class="ScenPart_StartingThing_Defined">
           <def>StartingThing_Defined</def>
@@ -91,18 +88,17 @@
         </li>
         <li Class="ScenPart_StartingThing_Defined">
           <def>StartingThing_Defined</def>
-          <thingDef>MedicineHerbal</thingDef>
-          <count>40</count>
+          <thingDef>MedicineIndustrial</thingDef>
+          <count>15</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>VV_Vivicream</thingDef>
+          <count>120</count>
         </li>
         <li Class="ScenPart_StartingThing_Defined">
           <def>StartingThing_Defined</def>
           <thingDef>VV_ViviSpear</thingDef>
-          <quality>Normal</quality>
-          <stuff>Plasteel</stuff>
-        </li>
-        <li Class="ScenPart_StartingThing_Defined">
-          <def>StartingThing_Defined</def>
-          <thingDef>VV_ViviLongJavelin</thingDef>
           <quality>Normal</quality>
           <stuff>Steel</stuff>
         </li>
@@ -116,18 +112,6 @@
           <def>StartingThing_Defined</def>
           <thingDef>VV_RepeatingCrossbow</thingDef>
           <quality>Normal</quality>
-        </li>
-        <li Class="ScenPart_StartingThing_Defined">
-          <def>StartingThing_Defined</def>
-          <thingDef>VV_EmberBloom</thingDef>
-          <count>1</count>
-        </li>
-
-        <!-- 시작시 소유품 (분산) -->
-        <li Class="ScenPart_ScatterThingsNearPlayerStart">
-          <def>ScatterThingsNearPlayerStart</def>
-          <thingDef>Steel</thingDef>
-          <count>600</count>
         </li>
       </parts>
     </scenario>

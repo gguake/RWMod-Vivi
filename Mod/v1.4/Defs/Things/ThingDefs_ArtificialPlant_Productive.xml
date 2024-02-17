@@ -519,7 +519,7 @@
       <li Class="VVRace.CompProperties_BroadshieldProjector">
         <shieldDef>VV_PurifimintShield</shieldDef>
         <minEnergyForActivate>30</minEnergyForActivate>
-        <energyEfficiency>1.5</energyEfficiency>
+        <energyEfficiency>2.0</energyEfficiency>
       </li>
     </comps>
     
@@ -553,7 +553,7 @@
 
     <comps>
       <li Class="CompProperties_ProjectileInterceptor">
-        <radius>2.9</radius>
+        <radius>3.9</radius>
         <interceptGroundProjectiles>true</interceptGroundProjectiles>
         <interceptNonHostileProjectiles>true</interceptNonHostileProjectiles>
         <interceptOutgoingProjectiles>false</interceptOutgoingProjectiles>

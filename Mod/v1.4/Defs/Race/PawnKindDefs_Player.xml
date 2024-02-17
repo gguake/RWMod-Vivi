@@ -65,7 +65,7 @@
   <PawnKindDef ParentName="PlayerVivi" Class="VVRace.PawnKindDef_Vivi">
     <defName>VV_PlayerRefugeeVivi</defName>
     
-    <minGenerationAge>20</minGenerationAge>
+    <minGenerationAge>7</minGenerationAge>
     <maxGenerationAge>30</maxGenerationAge>
     <apparelRequired>
       <li>VV_UniformHat</li>

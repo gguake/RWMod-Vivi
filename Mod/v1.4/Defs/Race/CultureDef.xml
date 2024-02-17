@@ -2,7 +2,7 @@
 <Defs>
   <CultureDef>
     <defName>VV_ViviCulture</defName>
-    <label>vivi</label>
+    <label>vivi culture</label>
     <description>.</description>
     <ideoNameMaker MayRequire="Ludeon.RimWorld.Ideology">NamerIdeoAstropolitan</ideoNameMaker>
     <deityNameMaker MayRequire="Ludeon.RimWorld.Ideology">NamerDeityAstropolitan</deityNameMaker>

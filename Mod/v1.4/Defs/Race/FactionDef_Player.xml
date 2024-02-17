@@ -91,7 +91,7 @@
     <defName>VV_PlayerViviRefugee</defName>
     <label>vivi refugee</label>
     <description>.</description>
-    <basicMemberKind>VV_PlayerVivi</basicMemberKind>
+    <basicMemberKind>VV_PlayerRefugeeVivi</basicMemberKind>
     
     <startingResearchTags>
       <li>VV_ViviRefugee</li>
