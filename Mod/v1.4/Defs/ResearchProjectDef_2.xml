@@ -21,12 +21,24 @@
   </ResearchProjectDef>
   
   <ResearchProjectDef ParentName="ViviResearchProjectTier2Base">
+    <defName>VV_AncientPlantCuttings</defName>
+    <label>ancient plant cuttings</label>
+    <description>.</description>
+    <baseCost>600</baseCost>
+    <researchViewX>3</researchViewX>
+    <researchViewY>1.4</researchViewY>
+    <prerequisites>
+      <li>VV_AncientBotany</li>
+    </prerequisites>
+  </ResearchProjectDef>
+  
+  <ResearchProjectDef ParentName="ViviResearchProjectTier2Base">
     <defName>VV_EnergyTransferTube</defName>
     <label>energy transfer tube</label>
     <description>.</description>
     <baseCost>900</baseCost>
     <researchViewX>3</researchViewX>
-    <researchViewY>1.4</researchViewY>
+    <researchViewY>2.1</researchViewY>
     <prerequisites>
       <li>VV_AncientBotany</li>
     </prerequisites>
@@ -38,7 +50,7 @@
     <description>.</description>
     <baseCost>1200</baseCost>
     <researchViewX>3</researchViewX>
-    <researchViewY>2.1</researchViewY>
+    <researchViewY>2.8</researchViewY>
     <prerequisites>
       <li>Devilstrand</li>
       <li>VV_AncientBotany</li>
@@ -51,7 +63,7 @@
     <description>.</description>
     <baseCost>800</baseCost>
     <researchViewX>3</researchViewX>
-    <researchViewY>2.8</researchViewY>
+    <researchViewY>3.5</researchViewY>
     <prerequisites>
       <li>Machining</li>
       <li>VV_AncientBotany</li>

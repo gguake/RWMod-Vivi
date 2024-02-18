@@ -1,36 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
   <!-- 테크 3 -->
-  <!--
   <ResearchProjectDef Abstract="True" Name="ViviResearchProjectTier3Base">
 		<tab>VV_Vivi</tab>
     <techLevel>Industrial</techLevel>
   </ResearchProjectDef>
   
-  <ResearchProjectDef ParentName="ViviResearchProjectTier3Base">
-    <defName>VV_EnergyTransmitter</defName>
-    <label>energy transmitter</label>
-    <description>.</description>
-    <baseCost>1000</baseCost>
-    <researchViewX>4</researchViewX>
-    <researchViewY>0</researchViewY>
-    <prerequisites>
-      <li>MicroelectronicsBasics</li>
-      <li>VV_AutomatedInfra</li>
-    </prerequisites>
-  </ResearchProjectDef>
-  
-  <ResearchProjectDef ParentName="ViviResearchProjectTier3Base">
-    <defName>VV_AncientFloraRestoration</defName>
-    <label>ancient flora restoration</label>
-    <description>.</description>
-    <baseCost>2000</baseCost>
-    <researchViewX>4</researchViewX>
-    <researchViewY>0.7</researchViewY>
-    <prerequisites>
-      <li>MicroelectronicsBasics</li>
-      <li>VV_AutomatedInfra</li>
-    </prerequisites>
-  </ResearchProjectDef>
-  -->
 </Defs>

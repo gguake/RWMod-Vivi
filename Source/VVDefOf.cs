@@ -209,4 +209,10 @@ namespace VVRace
     {
         public static MentalStateDef VV_HornetBerserk;
     }
+
+    [DefOf]
+    public static class VVResearchProjectDefOf
+    {
+        public static ResearchProjectDef VV_AncientPlantCuttings;
+    }
 }

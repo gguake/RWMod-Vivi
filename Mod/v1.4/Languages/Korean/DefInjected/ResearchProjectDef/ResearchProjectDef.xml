@@ -28,6 +28,9 @@
 <VV_AncientBotany.discoveredLetterText>고대 식물을 배양하려면 미확인 씨앗, 비료, 꽃가루가 대량으로 필요하며 주기적으로 관리해줘야 좋은 결과를 얻을 수 있습니다. 배양 작업은 실패하거나 혹은 고대 식물이 아닌 흔한 작물이 자랄수도 있습니다.
 \n고대 식물은 에너지라는 자원을 생산하고 소모하며 식물마다 특수한 조건이 만족되어야 에너지를 생산합니다. 생산된 에너지가 최대 저장량을 초과하면 인접한 다른 고대 식물들에게 전송해주는 특징이 있으므로 잘 활용하세요.</VV_AncientBotany.discoveredLetterText>
 
+<VV_AncientPlantCuttings.label>고대 식물 삽목</VV_AncientPlantCuttings.label>
+<VV_AncientPlantCuttings.description>삽목을 통해 이미 보유중인 고대 식물을 추가로 배양해 대량으로 운용할 수 있게 됩니다.</VV_AncientPlantCuttings.description>
+
 <VV_Lifestrand.label>생체가닥</VV_Lifestrand.label>
 <VV_Lifestrand.description>악마가닥 천을 특수한 재료로 가공해 강화한 생체가닥 천을 직조할 수 있습니다.</VV_Lifestrand.description>
 
@@ -39,5 +42,4 @@
 
 <VV_EnergyTransferTube.label>에너지 전송 튜브</VV_EnergyTransferTube.label>
 <VV_EnergyTransferTube.description>고대 식물의 에너지 전달 방식을 모방해 고대 식물의 에너지를 벽을 넘어 원거리로 전송할 수 있는 에너지 튜브를 건설할 수 있습니다.</VV_EnergyTransferTube.description>
-
 </LanguageData>
