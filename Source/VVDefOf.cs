@@ -159,6 +159,8 @@ namespace VVRace
     public static class VVHediffDefOf
     {
         public static HediffDef VV_RoyalVivi;
+
+        public static HediffDef VV_HoneyNeed;
     }
 
     //[DefOf]

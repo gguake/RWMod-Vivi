@@ -104,5 +104,8 @@
         public const string ViviGerminateWindowBonusSuccessChance = "ViviGerminateWindowBonusSuccessChance";
         public const string ViviGerminateWindowBonusRareChance = "ViviGerminateWindowBonusRareChance";
         public const string ViviGerminateWindowBonusMutateAnotherArtificialPlantChance = "ViviGerminateWindowBonusMutateAnotherArtificialPlantChance";
+
+        public const string GeneDefHoneyNeedDurationDesc = "VV_GeneDefHoneyNeedDurationDesc";
+        public const string LastHoneyIngestedDurationAgo = "VV_LastHoneyIngestedDurationAgo";
     }
 }

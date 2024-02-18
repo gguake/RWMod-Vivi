@@ -14,6 +14,7 @@
     <combatPowerFactor>0.9</combatPowerFactor>
     <genes>
       <li>VV_ViviMetabolism</li>
+      <li>VV_HoneyDepedency</li>
 
       <li>Mood_Optimist</li>
       <li>FireTerror</li>

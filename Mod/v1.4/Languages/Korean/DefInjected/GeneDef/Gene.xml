@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-  <VV_ViviMetabolism.label>과도한 신진대사</VV_ViviMetabolism.label>
-  <VV_ViviMetabolism.description>비비 고유의 유전자로 학습속도에 보너스를 받지만 성장과 노화가 매우 빠르게 진행되고 성기능이 불구가 됩니다.</VV_ViviMetabolism.description>
+  <VV_ViviMetabolism.label>과다한 신진대사</VV_ViviMetabolism.label>
+  <VV_ViviMetabolism.description>비비 고유의 유전자로 기술 습득 속도가 대폭 증가하며 성장 단계에서 학습 관련 보너스를 받습니다.
+\n성장과 노화가 매우 빠르게 진행되고 일반적인 방법으로 생식할 수 없습니다.</VV_ViviMetabolism.description>
+
+  <VV_HoneyDepedency.label>꿀 의존증</VV_HoneyDepedency.label>
+  <VV_HoneyDepedency.description>이 유전자를 보유하면 꿀을 주기적으로 섭취해야 건강을 유지할 수 있습니다. 꿀 섭취 없이 5일이 지나면 결핍에 시달립니다.</VV_HoneyDepedency.description>
 </LanguageData>

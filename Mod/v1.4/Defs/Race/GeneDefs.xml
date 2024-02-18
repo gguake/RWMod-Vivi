@@ -27,4 +27,15 @@
       <VV_LearningRateFactor>3.0</VV_LearningRateFactor>
     </statFactors>
   </GeneDef>
+  
+  <GeneDef>
+    <defName>VV_HoneyDepedency</defName>
+    <label>honey dependency</label>
+    <description>.</description>
+    <geneClass>VVRace.Gene_HoneyDependency</geneClass>
+    <iconPath>UI/Icons/Genes/Gene_Vivi2</iconPath>
+    <displayCategory>Miscellaneous</displayCategory>
+    <biostatMet>4</biostatMet>
+    <biostatCpx>1</biostatCpx>
+  </GeneDef>
 </Defs>

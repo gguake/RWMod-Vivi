@@ -74,6 +74,7 @@
 				<daysToRotStart>60</daysToRotStart>
 				<rotDestroys>true</rotDestroys>
 			</li>
+      <li Class="VVRace.CompProperties_Honey" />
     </comps>
 
     <ingestible>
@@ -113,6 +114,7 @@
     </statBases>
     <stackLimit>75</stackLimit>
     <comps>
+      <li Class="VVRace.CompProperties_Honey" />
     </comps>
     <ingestible>
       <preferability>RawTasty</preferability>
@@ -173,6 +175,7 @@
 				<daysToRotStart>30</daysToRotStart>
 				<rotDestroys>true</rotDestroys>
 			</li>
+      <li Class="VVRace.CompProperties_Honey" />
     </comps>
     <allowedArchonexusCount>150</allowedArchonexusCount>
     
@@ -237,6 +240,7 @@
         <listOrder>2000</listOrder>
 				<overdoseSeverityOffset>0.08~0.14</overdoseSeverityOffset>
       </li>
+      <li Class="VVRace.CompProperties_Honey" />
 		</comps>
     
     <tradeTags>
@@ -319,6 +323,10 @@
         </li>
       </outcomeDoers>
     </ingestible>
+
+    <comps>
+      <li Class="VVRace.CompProperties_Honey" />
+    </comps>
   </ThingDef>
   
   <ThingDef ParentName="VV_FloweringTeaBase">
@@ -349,6 +357,10 @@
         </li>
       </outcomeDoers>
     </ingestible>
+
+    <comps>
+      <li Class="VVRace.CompProperties_Honey" />
+    </comps>
   </ThingDef>
   
   <ThingDef ParentName="VV_FloweringTeaBase">

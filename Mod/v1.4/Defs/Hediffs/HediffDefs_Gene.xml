@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <HediffDef>
+    <defName>VV_HoneyNeed</defName>
+    <label>honey dependency</label>
+    <description>This person has a genetically-induced biochemical dependency on a honey. Without regular ingestion of the honey, their body cannot maintain itself in a healthy state and they will suffer degrading health and mood.\n\nTakes effect after age: 3.</description>
+    <hediffClass>VVRace.Hediff_HoneyDependency</hediffClass>
+    <defaultLabelColor>(255,230,20)</defaultLabelColor>
+
+    <everCurableByItem>false</everCurableByItem>
+    <initialSeverity>0.001</initialSeverity>
+    <stages>
+      <li>
+      </li>
+      <li>
+        <label>deficiency</label>
+        <minSeverity>1</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Moving</capacity>
+            <setMax>0.8</setMax>
+          </li>
+          <li>
+            <capacity>Manipulation</capacity>
+            <setMax>0.8</setMax>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <overrideLabel>critical deficiency</overrideLabel>
+        <minSeverity>6</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <setMax>0.9</setMax>
+          </li>
+          <li>
+            <capacity>Moving</capacity>
+            <setMax>0.7</setMax>
+          </li>
+          <li>
+            <capacity>Manipulation</capacity>
+            <setMax>0.7</setMax>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <minSeverity>12</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <setMax>0.7</setMax>
+          </li>
+          <li>
+            <capacity>Moving</capacity>
+            <setMax>0.5</setMax>
+          </li>
+          <li>
+            <capacity>Manipulation</capacity>
+            <setMax>0.5</setMax>
+          </li>
+        </capMods>
+      </li>
+    </stages>
+    <comps>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>0.2</severityPerDay>
+      </li>
+    </comps>
+  </HediffDef>
+
+</Defs>

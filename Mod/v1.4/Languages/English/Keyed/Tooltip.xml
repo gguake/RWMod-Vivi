@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <VV_GeneDefHoneyNeedDurationDesc>{PAWN_nameDef} needs to ingest honey on a regular basis to survive. After {DEFICIENCYDURATION} without honey, {PAWN_pronoun} will suffer from honey deficiency.</VV_GeneDefHoneyNeedDurationDesc>
+  <VV_LastHoneyIngestedDurationAgo>Last ingested honey {DURATION} ago.</VV_LastHoneyIngestedDurationAgo>
+</LanguageData>
