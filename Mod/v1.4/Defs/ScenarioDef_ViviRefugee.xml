@@ -113,6 +113,16 @@
           <thingDef>VV_RepeatingCrossbow</thingDef>
           <quality>Normal</quality>
         </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>VV_ViviEgg</thingDef>
+          <count>1</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>VV_RoyalJelly</thingDef>
+          <count>20</count>
+        </li>
       </parts>
     </scenario>
   </ScenarioDef>

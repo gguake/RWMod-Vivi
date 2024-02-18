@@ -194,7 +194,6 @@ namespace VVRace.HarmonyPatches
                 {
                     if (startingRoyalVivis.NullOrEmpty())
                     {
-                        Log.Warning($"there is no royal vivi but vivi egg spawned");
                         return;
                     }
 

@@ -4,6 +4,9 @@
     <defName>VV_RoyalJelly</defName>
     <label>royal jelly effect</label>
     <description>.</description>
+    <descriptionHyperlinks>
+      <HediffDef>VV_RoyalVivi</HediffDef>
+    </descriptionHyperlinks>
     <hediffClass>HediffWithComps</hediffClass>
     <defaultLabelColor>(1,0,0.5)</defaultLabelColor>
 

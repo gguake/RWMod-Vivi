@@ -192,6 +192,7 @@
     <descriptionHyperlinks>
       <HediffDef>VV_RoyalJelly</HediffDef>
       <HediffDef>VV_ViviGrowthBoost</HediffDef>
+      <HediffDef>VV_RoyalVivi</HediffDef>
     </descriptionHyperlinks>
 		<graphicData>
 			<texPath>Things/Item/VV_RoyalJelly</texPath>
