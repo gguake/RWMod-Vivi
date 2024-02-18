@@ -49,5 +49,9 @@ namespace VVRace
                 }
             }
         }
+
+        public virtual void Notify_ProcessStarted(Pawn pawn)
+        {
+        }
     }
 }

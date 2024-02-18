@@ -114,6 +114,8 @@ namespace VVRace
                     .WithInitAction(() =>
                     {
                         pawn.rotationTracker.FaceTarget(BillGiver);
+
+                        GatheringRecipeDef.gatherWorker.Notify_ProcessStarted(pawn);
                     })
                     .WithTickAction(() =>
                     {
