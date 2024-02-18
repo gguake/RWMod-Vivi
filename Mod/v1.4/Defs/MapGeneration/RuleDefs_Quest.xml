@@ -1,12 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <RuleDef>
-    <defName>VV_MechanoidScoutingBase</defName>
-    <symbol>vv_mechanoid_scouting_base</symbol>
-    <resolvers>
-      <li Class="VVRace.SymbolResolver_MechanoidScoutingBase">
-        <minRectSize>(5, 5)</minRectSize>
-      </li>
-    </resolvers>
-  </RuleDef>
+
 </Defs>

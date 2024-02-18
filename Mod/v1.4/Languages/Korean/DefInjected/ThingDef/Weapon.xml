@@ -4,13 +4,13 @@
   <VV_ViviSpear.label>비비 창</VV_ViviSpear.label>
   <VV_ViviSpear.description>비비들이 보편적으로 사용하는 창입니다. 창 끝에 독이 묻어있어 맞은 적을 중독시키며 일격 후 이탈에 용이한 모양으로 되어있습니다.</VV_ViviSpear.description>
   <VV_ViviSpear.tools.shaft.label>장대</VV_ViviSpear.tools.shaft.label>
-  <VV_ViviSpear.tools.shaft.label>창끝</VV_ViviSpear.tools.shaft.label>
+  <VV_ViviSpear.tools.point.label>창끝</VV_ViviSpear.tools.point.label>
   
   <VV_RitualLance.label>예식용 랜스</VV_RitualLance.label>
   <VV_RitualLance.description>섬세한 장식이 달린 커다란 창입니다. 이론상 큰 피해를 입힐수는 있지만 실전에서는 다루기가 매우 어려워 보통 행사의 장식품으로서 사용됩니다. 이 무기는 비비의 체형에 맞게 만들어져 있어 비비만 사용할 수 있습니다.
 \n비비들은 금속을 잘 다루지 않기 때문에 섬세한 금속 공예가 필요한 이 창은 과거 인간들의 선물로 받은것으로 알려져 있습니다.</VV_RitualLance.description>
   <VV_RitualLance.tools.shaft.label>장대</VV_RitualLance.tools.shaft.label>
-  <VV_RitualLance.tools.shaft.label>창끝</VV_RitualLance.tools.shaft.label>
+  <VV_RitualLance.tools.point.label>창끝</VV_RitualLance.tools.point.label>
   
   <!-- Ranged -->
   <VV_Slingshot.label>비비 새총</VV_Slingshot.label>

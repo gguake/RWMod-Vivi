@@ -91,8 +91,6 @@ namespace VVRace
         public static ThingDef VV_Pealaucnher;
         public static ThingDef VV_Shootus;
 
-        public static ThingDef VV_MechScanner;
-
         public static ThingDef VV_ViviHoneycombWall;
 
         public static ThingDef Plant_Strawberry;
