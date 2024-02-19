@@ -32,4 +32,33 @@
       <li>Scaria</li>
     </letterHyperlinkHediffDefs>
   </IncidentDef>
+
+  <IncidentDef>
+    <defName>VV_PeacebloomSpawn</defName>
+    <label>peacebloom sprout</label>
+    <category>Special</category>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <workerClass>VVRace.IncidentWorker_PeacebloomSpawn</workerClass>
+    <letterLabel>Peacebloom sprout</letterLabel>
+    <letterText>.</letterText>
+    <letterDef>VV_EndGameEvent</letterDef>
+    <minPopulation>10</minPopulation>
+    <minRefireDays>60</minRefireDays>
+    <disallowedBiomes>
+      <li>SeaIce</li>
+      <li>IceSheet</li>
+    </disallowedBiomes>
+
+    <modExtensions>
+      <li Class="VVRace.IncidentDefPeacebloomSpawnExtension">
+        <requiredPlayerWealth>1000</requiredPlayerWealth>
+        <requiredViviColonistRatio>0.5</requiredViviColonistRatio>
+        <requiredRoyalViviCount>1</requiredRoyalViviCount>
+        <requiredArtificialPlantCount>1</requiredArtificialPlantCount>
+        <targetThingDef>VV_Peacebloom</targetThingDef>
+      </li>
+    </modExtensions>
+  </IncidentDef>
 </Defs>

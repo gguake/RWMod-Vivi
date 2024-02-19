@@ -13,7 +13,7 @@ namespace VVRace
         public const float EnergyByFertilizer = 10f;
 
         private static List<ThingDef> _allArtificialPlantDefs;
-        public static IEnumerable<ThingDef> AllArtificialPlantDefs
+        public static List<ThingDef> AllArtificialPlantDefs
         {
             get
             {
@@ -226,18 +226,22 @@ namespace VVRace
         private static readonly Texture2D SetFertilizeAutoActivated = ContentFinder<Texture2D>.Get("UI/Commands/VV_SetFertilizeAutoActivated");
         public override IEnumerable<Gizmo> GetGizmos()
         {
-            foreach (var gizmo in base.GetGizmos())
+            var gizmos = base.GetGizmos();
+            if (gizmos != null)
             {
-                if (gizmo is Designator_Install)
+                foreach (var gizmo in gizmos)
                 {
-                    yield return ArtificialPlantDesignatorCache.GetReplantDesignator(def);
-                    continue;
-                }
+                    if (gizmo is Designator_Install)
+                    {
+                        yield return ArtificialPlantDesignatorCache.GetReplantDesignator(def);
+                        continue;
+                    }
 
-                yield return gizmo;
+                    yield return gizmo;
+                }
             }
 
-            if (Spawned && Faction.IsPlayer)
+            if (Spawned && Faction != null && Faction.IsPlayer)
             {
                 var CommandFertilizeAutoActivated = new Command_Toggle();
                 CommandFertilizeAutoActivated.defaultLabel = LocalizeTexts.CommandFertilizeAutoActivated.Translate();
@@ -319,7 +323,7 @@ namespace VVRace
                     HitPoints = Mathf.Clamp(HitPoints + 1, 0, MaxHitPoints);
                 }
 
-                if (!CanPlaceCell(Position))
+                if (!ArtificialPlantUtility.CanPlaceArtificialPlantToCell(Map, Position, def))
                 {
                     ForceMinifyAndDropDirect();
                     return;
@@ -343,7 +347,7 @@ namespace VVRace
 
             if (Spawned)
             {
-                if (!CanPlaceCell(Position))
+                if (!ArtificialPlantUtility.CanPlaceArtificialPlantToCell(Map, Position, def))
                 {
                     ForceMinifyAndDropDirect();
                     return;
@@ -382,7 +386,7 @@ namespace VVRace
 
             if (Spawned)
             {
-                if (!CanPlaceCell(Position))
+                if (!ArtificialPlantUtility.CanPlaceArtificialPlantToCell(Map, Position, def))
                 {
                     ForceMinifyAndDropDirect();
                     return;
@@ -423,21 +427,6 @@ namespace VVRace
         public void AddEnergy(float energy)
         {
             _energyNode.energy = Mathf.Clamp(_energyNode.energy + energy, 0f, ArtificialPlantModExtension.energyCapacity);
-        }
-
-        public bool CanPlaceCell(IntVec3 cell)
-        {
-            var blockingThings = Map.thingGrid.ThingsListAtFast(cell);
-            var onArtificialPlantPot = blockingThings.Any(v => v is ArtificialPlantPot);
-
-            var terrain = cell.GetTerrain(Map);
-            var isWaterPlant = terrain.IsWater && def.terrainAffordanceNeeded != null && terrain.affordances.Contains(def.terrainAffordanceNeeded);
-            if (!onArtificialPlantPot && !isWaterPlant && Map.fertilityGrid.FertilityAt(cell) <= 0f)
-            {
-                return false;
-            }
-
-            return true;
         }
 
         public void Notify_TurretVerbShot()

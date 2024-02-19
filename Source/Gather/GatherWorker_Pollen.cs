@@ -40,32 +40,6 @@ namespace VVRace
             return null;
         }
 
-        [Obsolete]
-        public override IEnumerable<Thing> FindAllGatherableTargetInRegion(Pawn pawn, Region region, Thing billGiver, Bill bill)
-        {
-            var allFilths = region.ListerThings.ThingsInGroup(ThingRequestGroup.Filth);
-            if (allFilths.NullOrEmpty()) { yield break; }
-
-            foreach (var thing in allFilths.Where(filth => filth.def == VVThingDefOf.VV_FilthPollen))
-            {
-                // 거리가 너무 멀 경우
-                if (!billGiver.InGatherableRange(thing)) { continue; }
-
-                // Bill에 허용되지 않는 경우
-                if (!bill.IsFixedOrAllowedIngredient(thing) || !bill.recipe.ingredients.Any(v => v.filter.Allows(thing))) { continue; }
-
-                // 접근 불가능한 경우
-                if (!ReachabilityWithinRegion.ThingFromRegionListerReachable(thing, region, PathEndMode.Touch, pawn)) { continue; }
-
-                // 예약이 불가능한 경우
-                if (!pawn.CanReserve(thing)) { continue; }
-
-                yield return thing;
-            }
-
-            yield break;
-        }
-
         public override void Notify_Gathered(Pawn pawn, Thing billGiver, Thing target, RecipeDef_Gathering recipe)
         {
             if (target is Filth filth)

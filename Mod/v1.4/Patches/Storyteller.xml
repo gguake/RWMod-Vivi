@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/StorytellerDef[@Name="BaseStoryteller"]/comps</xpath>
+    <value>
+      <li Class="StorytellerCompProperties_OnOffCycle">
+        <incident>VV_PeacebloomSpawn</incident>
+        <onDays>60</onDays>
+        <offDays>0</offDays>
+        <minSpacingDays>30</minSpacingDays>
+        <numIncidentsRange>1</numIncidentsRange>
+        <allowedTargetTags>
+          <li>Map_PlayerHome</li>
+        </allowedTargetTags>
+      </li>
+    </value>
+  </Operation>
+</Patch>

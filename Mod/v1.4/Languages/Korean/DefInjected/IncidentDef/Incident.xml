@@ -2,4 +2,9 @@
 <LanguageData>
   <VV_TitanicHornetSwarm.label>거대 말벌 무리</VV_TitanicHornetSwarm.label>
   <VV_TitanicHornetSwarmVivi.label>거대 말벌 무리 (비비)</VV_TitanicHornetSwarmVivi.label>
+
+  <VV_PeacebloomSpawn.label>평화꽃 개화</VV_PeacebloomSpawn.label>
+  <VV_PeacebloomSpawn.letterLabel>평화꽃 개화</VV_PeacebloomSpawn.letterLabel>
+  <VV_PeacebloomSpawn.letterText>기지 주변에 평화꽃이 자라났습니다. 이 꽃은 비비들에게는 신성한 것으로 여겨지는데 대개 번영한 비비 둥지 주변에서만 발견되고 그외의 지역에서는 거의 보이지 않습니다.
+\n이 꽃의 꽃가루는 비비 이외의 다른 생물들에게는 행복하고 나른한 기분을 느끼게 하며 무기력하게 만들고 결국에는 의식을 잃게 합니다. 아마 고대 식물과도 관련이 있을수 있으며 보다 정밀한 분석을 위해 연구가 필요합니다.</VV_PeacebloomSpawn.letterText>
 </LanguageData>

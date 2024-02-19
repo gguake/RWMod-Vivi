@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <ThingDef ParentName="VV_ArtificialPlantProductive">
+    <defName>VV_Peacebloom</defName>
+    <label>peacebloom</label>
+    <description>.</description>
+
+    <graphicData>
+      <texPath>Things/Plants/VV_Purifier</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+
+    <statBases>
+      <MarketValue>800</MarketValue>
+      <MaxHitPoints>150</MaxHitPoints>
+      <Beauty>18</Beauty>
+      <BeautyOutdoors>18</BeautyOutdoors>
+    </statBases>
+
+    <comps>
+    </comps>
+    
+    <building>
+      <deconstructible>false</deconstructible>
+      <claimable>true</claimable>
+    </building>
+    
+    <modExtensions>
+      <li Class="VVRace.ArtificialPlantModExtension">
+        <germinateWeight>0</germinateWeight>
+
+        <energyCapacity>777</energyCapacity>
+        <initialEnergyPercent>1.0</initialEnergyPercent>
+        <zeroEnergyDamageByChance>1~1</zeroEnergyDamageByChance>
+
+        <energyConsumeRule Class="VVRace.EnergyRule_Constant">
+          <energy>7</energy>
+        </energyConsumeRule>
+        <energyGenerateRule Class="VVRace.EnergyRule_AdjacentPlant">
+          <energyByAdjacentPlant>21</energyByAdjacentPlant>
+        </energyGenerateRule>
+      </li>
+    </modExtensions>
+
+    <tradeTags Inherit="False">
+      <li>VV_Peacebloom</li>
+    </tradeTags>
+  </ThingDef>
+
+</Defs>

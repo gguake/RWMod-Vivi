@@ -17,9 +17,9 @@ namespace VVRace
                 var map = Find.CurrentMap;
                 if (map != null)
                 {
-                    foreach (var building in map.listerThings.ThingsInGroup(ThingRequestGroup.BuildingArtificial))
+                    foreach (var building in map.listerThings.ThingsInGroup(ThingRequestGroup.WithCustomRectForSelector))
                     {
-                        if (building is ArtificialPlant plant && plant.EnergyChargeRatio <= 0.05f)
+                        if (building is ArtificialPlant plant && plant.Faction == Faction.OfPlayer && plant.EnergyChargeRatio <= 0.05f)
                         {
                             dangerTargets.Add(building);
                         }

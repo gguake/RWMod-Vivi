@@ -270,10 +270,14 @@ namespace VVRace
                         if (Rand.Chance(bonusMutateAnotherArtificialPlantChance))
                         {
                             // 변이한 경우
-                            foreach (var plant in ArtificialPlant.AllArtificialPlantDefs)
+                            for (int i = 0; i < ArtificialPlant.AllArtificialPlantDefs.Count; ++i)
                             {
+                                var plant = ArtificialPlant.AllArtificialPlantDefs[i];
                                 var plantData = plant.GetModExtension<ArtificialPlantModExtension>();
-                                table.Add((plantData.germinateWeight, plant));
+                                if (plantData.germinateWeight > 0)
+                                {
+                                    table.Add((plantData.germinateWeight, plant));
+                                }
                             }
                         }
                         else
@@ -286,10 +290,11 @@ namespace VVRace
                     {
                         // 희귀 판정에 따라 결과 테이블 설정
                         var rare = Rand.Chance(Mathf.Clamp01(germinatorData.germinateRareChance * bonusRareChanceMultiplier));
-                        foreach (var plant in ArtificialPlant.AllArtificialPlantDefs)
+                        for (int i = 0; i < ArtificialPlant.AllArtificialPlantDefs.Count; ++i)
                         {
+                            var plant = ArtificialPlant.AllArtificialPlantDefs[i];
                             var plantData = plant.GetModExtension<ArtificialPlantModExtension>();
-                            if (plantData.germinateRare == rare)
+                            if (plantData.germinateRare == rare && plantData.germinateWeight > 0)
                             {
                                 table.Add((plantData.germinateWeight, plant));
                             }

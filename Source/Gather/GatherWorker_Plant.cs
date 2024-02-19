@@ -13,22 +13,41 @@ namespace VVRace
         public override string JobFailReasonIfNoHarvestable => LocalizeTexts.JobFailReasonNoHarvestablePlants.Translate();
 
         public override IEnumerable<Thing> FindAllGatherableTargetInRegion(Region region)
-        {   
-            foreach (var thing in region.ListerThings.ThingsInGroup(ThingRequestGroup.NonStumpPlant).Concat(region.ListerThings.ThingsInGroup(ThingRequestGroup.BuildingArtificial)))
+        {
+            var gatherables = region.ListerThings.ThingsInGroup(ThingRequestGroup.NonStumpPlant);
+            var artificialPlants = region.ListerThings.ThingsInGroup(ThingRequestGroup.WithCustomRectForSelector);
+
+            for (int i = 0; i < gatherables.Count; ++i)
             {
-                if (!thing.Spawned) { continue; }
-
-                // 레시피가 허용되지 않는 경우
-                if (!IsFixedOrAllowedIngredient(thing) || !recipeDef.ingredients.Any(v => v.filter.Allows(thing))) { continue; }
-
-                // 식물 채집이 불가능한 경우
-                if (!thing.CanGatherable(recipeDef.targetYieldStat, recipeDef.targetCooldownStat)) { continue; }
-
-                // 식물이 병에 걸린 경우
-                if (thing is Plant plant && plant.Blighted) { continue; }
-
-                yield return thing;
+                if (IsGatherableTargetInRegion(region, gatherables[i]))
+                {
+                    yield return gatherables[i];
+                }
             }
+
+            for (int i = 0; i < artificialPlants.Count; ++i)
+            {
+                if (artificialPlants[i] is ArtificialPlant && IsGatherableTargetInRegion(region, artificialPlants[i]))
+                {
+                    yield return artificialPlants[i];
+                }
+            }
+        }
+
+        private bool IsGatherableTargetInRegion(Region region, Thing thing)
+        {
+            if (!thing.Spawned) { return false; }
+
+            // 레시피가 허용되지 않는 경우
+            if (!IsFixedOrAllowedIngredient(thing) || !recipeDef.ingredients.Any(v => v.filter.Allows(thing))) { return false; }
+
+            // 식물 채집이 불가능한 경우
+            if (!thing.CanGatherable(recipeDef.targetYieldStat, recipeDef.targetCooldownStat)) { return false; }
+
+            // 식물이 병에 걸린 경우
+            if (thing is Plant plant && plant.Blighted) { return false; }
+
+            return true;
         }
 
         public override Thing FilterGatherableTarget(Pawn pawn, Thing billGiver, Bill bill, IEnumerable<Thing> candidates)
@@ -54,38 +73,6 @@ namespace VVRace
             }
 
             return null;
-        }
-
-        [Obsolete]
-        public override IEnumerable<Thing> FindAllGatherableTargetInRegion(Pawn pawn, Region region, Thing billGiver, Bill bill)
-        {
-            var allPlants = region.ListerThings.ThingsInGroup(ThingRequestGroup.Plant);
-
-            foreach (var thing in allPlants)
-            {
-                // 거리가 너무 멀 경우
-                if (!billGiver.InGatherableRange(thing)) { continue; }
-
-                // Bill에 허용되지 않는 경우
-                if (!bill.IsFixedOrAllowedIngredient(thing) || !bill.recipe.ingredients.Any(v => v.filter.Allows(thing))) { continue; }
-
-                // 식물 채집이 불가능한 경우
-                if (!thing.CanGatherable(recipeDef.targetYieldStat, recipeDef.targetCooldownStat)) { continue; }
-
-                // 식물이 병에 걸린 경우
-                if (thing is Plant plant && plant.Blighted) { continue; }
-
-                // 상호작용이 불가능한 경우
-                if (!thing.Spawned || thing.IsForbidden(pawn) || thing.IsBurning()) { continue; }
-
-                // 접근 불가능한 경우
-                if (!ReachabilityWithinRegion.ThingFromRegionListerReachable(thing, region, PathEndMode.Touch, pawn)) { continue; }
-
-                // 예약이 불가능한 경우
-                if (!pawn.CanReserve(thing)) { continue; }
-
-                yield return thing;
-            }
         }
 
         private bool IsFixedOrAllowedIngredient(Thing thing)

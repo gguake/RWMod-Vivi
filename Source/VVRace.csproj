@@ -78,6 +78,7 @@
     <Compile Include="ArtificialPlant\AI\JobDriver_HaulAndManageSeedling.cs" />
     <Compile Include="ArtificialPlant\AI\JobDriver_PackingSeedling.cs" />
     <Compile Include="ArtificialPlant\AI\WorkGiver_EquipShootus.cs" />
+    <Compile Include="ArtificialPlant\ArtificialPlantUtility.cs" />
     <Compile Include="ArtificialPlant\Comps\CompBroadshieldProjector.cs" />
     <Compile Include="ArtificialPlant\Energy\EnergyFluxGrid.cs" />
     <Compile Include="ArtificialPlant\SectionLayer_ThingsEnergyFluxGrid.cs" />
@@ -126,6 +127,8 @@
     <Compile Include="CompAbility_RequiresBodyPart.cs" />
     <Compile Include="CompFerment.cs" />
     <Compile Include="Egg\Comps\CompViviEggLayer.cs" />
+    <Compile Include="EndGame\Incident\IncidentDefPeacebloomSpawnExtension.cs" />
+    <Compile Include="EndGame\Incident\IncidentWorker_PeacebloomSpawn.cs" />
     <Compile Include="Hornet\HediffGiver_ConstantScaria.cs" />
     <Compile Include="Hornet\JobGiver_HornetBerserk.cs" />
     <Compile Include="MapGeneration\GenSteps\GenStep_MechanoidScoutingBase.cs" />

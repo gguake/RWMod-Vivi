@@ -21,9 +21,6 @@ namespace VVRace
 
         public abstract Thing FilterGatherableTarget(Pawn pawn, Thing billGiver, Bill bill, IEnumerable<Thing> candidates);
 
-        [Obsolete]
-        public abstract IEnumerable<Thing> FindAllGatherableTargetInRegion(Pawn pawn, Region region, Thing billGiver, Bill bill);
-
         public virtual Job MakeJob(Pawn pawn, Thing billGiver, Thing target, Bill bill)
         {
             var recipeGathering = bill.recipe as RecipeDef_Gathering;
