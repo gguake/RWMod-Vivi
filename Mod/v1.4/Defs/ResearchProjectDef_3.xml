@@ -3,7 +3,25 @@
   <!-- 테크 3 -->
   <ResearchProjectDef Abstract="True" Name="ViviResearchProjectTier3Base">
 		<tab>VV_Vivi</tab>
-    <techLevel>Industrial</techLevel>
+    <techLevel>Spacer</techLevel>
+  </ResearchProjectDef>
+  
+  <ResearchProjectDef ParentName="ViviResearchProjectTier3Base">
+    <defName>VV_PlantGigantism</defName>
+    <label>plant gigantism</label>
+    <description>.</description>
+    <baseCost>2000</baseCost>
+    <researchViewX>5</researchViewX>
+    <researchViewY>1.4</researchViewY>
+    <prerequisites>
+      <li>VV_AutomatedInfra</li>
+      <li>VV_AncientPlantCuttings</li>
+      <li>VV_EnergyTransferTube</li>
+      <li>VV_Lifestrand</li>
+    </prerequisites>
+    <requiredStudied>
+      <li>VV_Peacebloom</li>
+    </requiredStudied>
   </ResearchProjectDef>
   
 </Defs>

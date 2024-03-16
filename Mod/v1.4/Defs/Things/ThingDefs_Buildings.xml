@@ -315,7 +315,7 @@
     </stuffCategories>
     <costStuffCount>100</costStuffCount>
     
-    <uiOrder>2300</uiOrder>
+    <uiOrder>2301</uiOrder>
     <altitudeLayer>Building</altitudeLayer>
     <fillPercent>0.5</fillPercent>
     <useHitPoints>True</useHitPoints>

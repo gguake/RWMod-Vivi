@@ -42,4 +42,11 @@
 
 <VV_EnergyTransferTube.label>에너지 전송 튜브</VV_EnergyTransferTube.label>
 <VV_EnergyTransferTube.description>고대 식물의 에너지 전달 방식을 모방해 고대 식물의 에너지를 벽을 넘어 원거리로 전송할 수 있는 에너지 튜브를 건설할 수 있습니다.</VV_EnergyTransferTube.description>
+
+
+
+<VV_PlantGigantism.label>식물 거대화 이론</VV_PlantGigantism.label>
+<VV_PlantGigantism.description>거대한 고대 식물, 특히 거대한 평화바라기를 자라나게 하기 위해 필요한 기술적 문제들의 해결책에 대해 연구합니다.
+\n거대한 평화바라기가 본격적으로 자라나기 시작하면 비비가 아닌 모든 세력은 당신을 적대하게 됩니다. 하지만 그 끝에는 비비 이외의 모두가 평화롭게 잠들게 될것입니다.</VV_PlantGigantism.description>
+
 </LanguageData>

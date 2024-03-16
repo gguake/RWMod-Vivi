@@ -202,10 +202,10 @@
     <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
     <designationCategory>VV_Bulidings</designationCategory>
-    <uiOrder>2000</uiOrder>
+    <uiOrder>2400</uiOrder>
     <constructEffect>ConstructMetal</constructEffect>
     <clearBuildingArea>false</clearBuildingArea>
-    <designationHotKey>Misc1</designationHotKey>
+    <designationHotKey>Misc8</designationHotKey>
     <researchPrerequisites>
       <li>VV_EnergyTransferTube</li>
     </researchPrerequisites>

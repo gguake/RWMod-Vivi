@@ -56,4 +56,15 @@
 <VV_Shootus.description>기묘한 표정의 얼굴을 가진 고대의 선인장입니다. 약간의 내화성을 가지고 있으며 식물이라고 생각되지 않을 정도로 유연하게 움직입니다.
 \n한쪽 손에 원거리 무기를 장착할 수 있으며 적을 감지하면 장착된 무기를 사용해 스스로 적을 공격합니다. 무기를 장착시키려면 건인장을 선택한 후 장착하길 원하는 무기를 우클릭해서 선택하세요.
 \n곡사 무기나 생체인증 무기는 착용할 수 없습니다.</VV_Shootus.description>
+
+<VV_Peacebloom.label>평화바라기</VV_Peacebloom.label>
+<VV_Peacebloom.description>번영한 비비 둥지 근처에 종종 자연적으로 자라나는 꽃으로 비비들에게는 신성하게 여겨집니다. 인접한 고대 식물이 많을수록 더 많은 에너지를 생산하며 많은 에너지를 저장할 수 있습니다.
+\n비비가 아닌 다른 생물들에게 이 꽃의 꽃가루는 강력한 수면 효과를 가지며 메카노이드들의 센서에도 장애를 일으키는것으로 알려져있지만 양이 매우 적어 큰 효용은 없습니다.</VV_Peacebloom.description>
+
+<VV_Peacebloom.comps.CompStudiable.completedLetterTitle>{PARENT_label} 분석 완료: {RESEARCH} 잠금 해제</VV_Peacebloom.comps.CompStudiable.completedLetterTitle>
+<VV_Peacebloom.comps.CompStudiable.completedLetterText>{STUDIER_labelShort}의 분석 결과 이 꽃은 고대 식물들과 같은 시대부터 존재했으면서도 유전적 형질이 거의 변하지 않은 살아있는 화석과 같습니다.
+\n이 꽃은 주변의 고대 식물군과 공생하며 주변에서 많은 에너지가 공급될수록 우리가 발견한 꽃의 크기보다도 훨씬 더 크게 자라날 수 있는것으로 밝혀졌습니다.
+\n만약 이 꽃에 많은 에너지를 공급해 거대화하고 그 꽃가루를 멀리 퍼트릴수 있다면 비비 이외의 다른 모든 세력들을 평화로운 방식으로 잠재울 수 있을것입니다.
+\n거대한 평화바라기를 만들어내기 위해서는 대량의 에너지를 원활하게 전송하기 위한 전용 화분이 필요하므로 추가적인 연구를 진행해야 합니다.</VV_Peacebloom.comps.CompStudiable.completedLetterText>
+
 </LanguageData>

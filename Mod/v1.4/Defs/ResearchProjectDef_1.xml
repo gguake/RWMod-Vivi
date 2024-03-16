@@ -67,7 +67,7 @@
     <description>.</description>
     <baseCost>600</baseCost>
     <researchViewX>0</researchViewX>
-    <researchViewY>2.8</researchViewY>
+    <researchViewY>3.5</researchViewY>
 
     <prerequisites>
       <li>Smithing</li>
