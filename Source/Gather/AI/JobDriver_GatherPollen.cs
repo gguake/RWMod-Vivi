@@ -156,7 +156,7 @@ namespace VVRace
                             }
                             else if (curJob.bill.GetStoreMode() == BillStoreModeDefOf.SpecificStockpile)
                             {
-                                StoreUtility.TryFindBestBetterStoreCellForIn(allProducts[0], actor, actor.Map, StoragePriority.Unstored, actor.Faction, curJob.bill.GetStoreZone().slotGroup, out foundCell);
+                                StoreUtility.TryFindBestBetterStoreCellForIn(allProducts[0], actor, actor.Map, StoragePriority.Unstored, actor.Faction, curJob.bill.GetSlotGroup(), out foundCell);
                             }
 
                             if (foundCell.IsValid)

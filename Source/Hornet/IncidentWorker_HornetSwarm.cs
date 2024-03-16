@@ -33,7 +33,7 @@ namespace VVRace
                 return false;
             }
 
-            var pawns = ManhunterPackIncidentUtility.GenerateAnimals(kindDef, map.Tile, parms.points * PointsFactor, parms.pawnCount);
+            var pawns = AggressiveAnimalIncidentUtility.GenerateAnimals(kindDef, map.Tile, parms.points * PointsFactor, parms.pawnCount);
             var rot = Rot4.FromAngleFlat((map.Center - spawnPosition).AngleFlat);
 
             for (int i = 0; i < pawns.Count; i++)

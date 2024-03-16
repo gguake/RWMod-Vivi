@@ -49,6 +49,11 @@
     <meleeDamageFactor>0.75</meleeDamageFactor>
     <equipmentDrawDistanceFactor>0.65</equipmentDrawDistanceFactor>
     <sittingOffset>0.23</sittingOffset>
+    <silhouetteGraphicData>
+      <texPath>Things/Pawn/Humanlike/Silhouettes/Silhouette_HumanChild</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1</drawSize>
+    </silhouetteGraphicData>
     <statFactors>
       <MoveSpeed>0.95</MoveSpeed>
     </statFactors>
@@ -60,6 +65,11 @@
 		<workerClass>LifeStageWorker_HumanlikeAdult</workerClass>
 		<visible>false</visible>
 		<sittingOffset>0.18</sittingOffset>
+    <silhouetteGraphicData>
+      <texPath>Things/Pawn/Humanlike/Silhouettes/Silhouette_HumanAdult</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1</drawSize>
+    </silhouetteGraphicData>
 	</LifeStageDef>
   
   <LifeStageDef>

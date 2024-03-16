@@ -18,12 +18,13 @@
     </statBases>
 
     <comps>
+      <!--
       <li Class="CompProperties_Studiable">
-        <cost>10</cost>
-        <completedLetterTitle>{PARENT_label} studied: {RESEARCH} unlocked</completedLetterTitle>
-        <completedLetterText>By studying the {PARENT_label}, {STUDIER_labelShort} has acquired the insight needed for the research project(s) {RESEARCH}.\n\nYour researchers can now use research benches to begin researching how to actually use the technology.</completedLetterText>
-        <completedLetterDef>PositiveEvent</completedLetterDef>
+        <studyAmountToComplete>4000</studyAmountToComplete>
+        <studyEnabledByDefault>false</studyEnabledByDefault>
+        <showToggleGizmo>true</showToggleGizmo>
       </li>
+      -->
     </comps>
     
     <building>

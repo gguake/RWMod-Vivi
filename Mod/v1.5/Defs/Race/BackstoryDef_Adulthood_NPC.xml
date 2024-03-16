@@ -1,175 +1,154 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <AlienRace.AlienBackstoryDef Abstract="True" Name="VV_AdultSettlerViviBackstory" ParentName="VV_ViviAdultBackstory">
+  <BackstoryDef Abstract="True" Name="VV_AdultSettlerViviBackstory" ParentName="VV_ViviAdultBackstory">
     <spawnCategories>
       <li>VV_SettlerBackstory</li>
     </spawnCategories>
-  </AlienRace.AlienBackstoryDef>
+  </BackstoryDef>
 
   <!-- VV_ViviSettler -->
-  <AlienRace.AlienBackstoryDef ParentName="VV_AdultSettlerViviBackstory">
+  <BackstoryDef ParentName="VV_AdultSettlerViviBackstory">
     <defName>VV_ViviSettler</defName>
     <title>vivi settler</title>
     <titleShort>settler</titleShort>
     <baseDesc>[PAWN_nameDef] is a Vivi belonging to the settlement.</baseDesc>
     <skillGains>
-      <li><key>Construction</key><value>1</value></li>
-      <li><key>Crafting</key><value>1</value></li>
-      <li><key>Plants</key><value>1</value></li>
-      <li><key>Intellectual</key><value>-1</value></li>
+      <Construction>1</Construction>
+      <Crafting>1</Crafting>
+      <Plants>1</Plants>
+      <Intellectual>-1</Intellectual>
     </skillGains>
     <spawnCategories>
       <li>VV_SettlerGrown</li>
     </spawnCategories>
-  </AlienRace.AlienBackstoryDef>
+  </BackstoryDef>
 
   <!-- VV_ViviCook -->
-  <AlienRace.AlienBackstoryDef ParentName="VV_AdultSettlerViviBackstory">
+  <BackstoryDef ParentName="VV_AdultSettlerViviBackstory">
     <defName>VV_ViviCook</defName>
     <title>vivi cook</title>
     <titleShort>cook</titleShort>
     <baseDesc>[PAWN_nameDef] is a cook in vivi hive.</baseDesc>
     <skillGains>
-      <li><key>Cooking</key><value>5</value></li>
-      <li><key>Animals</key><value>5</value></li>
+      <Cooking>5</Cooking>
+      <Animals>5</Animals>
     </skillGains>
     <workDisables>
       <li>Constructing</li>
       <li>Mining</li>
     </workDisables>
-  </AlienRace.AlienBackstoryDef>
+  </BackstoryDef>
 
   <!-- VV_ViviGatherer -->
-  <AlienRace.AlienBackstoryDef ParentName="VV_AdultSettlerViviBackstory">
+  <BackstoryDef ParentName="VV_AdultSettlerViviBackstory">
     <defName>VV_ViviGatherer</defName>
     <title>vivi gatherer</title>
     <titleShort>gatherer</titleShort>
     <baseDesc>[PAWN_nameDef] is a gatherer in vivi hive.</baseDesc>
     <skillGains>
-      <li><key>Plants</key><value>5</value></li>
-      <li><key>Mining</key><value>5</value></li>
+      <Plants>5</Plants>
+      <Mining>5</Mining>
     </skillGains>
     <workDisables>
       <li>Intellectual</li>
       <li>Caring</li>
     </workDisables>
-  </AlienRace.AlienBackstoryDef>
+  </BackstoryDef>
 
   <!-- VV_ViviArchitect -->
-  <AlienRace.AlienBackstoryDef ParentName="VV_AdultSettlerViviBackstory">
+  <BackstoryDef ParentName="VV_AdultSettlerViviBackstory">
     <defName>VV_ViviArchitect</defName>
     <title>vivi architect</title>
     <titleShort>architect</titleShort>
     <baseDesc>[PAWN_nameDef] is a architect in vivi hive.</baseDesc>
     <skillGains>
-      <li><key>Construction</key><value>5</value></li>
-      <li><key>Artistic</key><value>5</value></li>
+      <Construction>5</Construction>
+      <Artistic>5</Artistic>
     </skillGains>
     <workDisables>
       <li>Animals</li>
       <li>Cooking</li>
     </workDisables>
-  </AlienRace.AlienBackstoryDef>
+  </BackstoryDef>
 
   <!-- VV_ViviResearcher -->
-  <AlienRace.AlienBackstoryDef ParentName="VV_AdultSettlerViviBackstory">
+  <BackstoryDef ParentName="VV_AdultSettlerViviBackstory">
     <defName>VV_ViviResearcher</defName>
     <title>vivi researcher</title>
     <titleShort>researcher</titleShort>
     <baseDesc>[PAWN_nameDef] is a researcher in vivi hive.</baseDesc>
     <skillGains>
-      <li><key>Intellectual</key><value>5</value></li>
-      <li><key>Crafting</key><value>5</value></li>
+      <Intellectual>5</Intellectual>
+      <Crafting>5</Crafting>
     </skillGains>
     <workDisables>
       <li>Hauling</li>
       <li>Violent</li>
     </workDisables>
-    <possessions>
-      <li>
-        <key>MedicineHerbal</key>
-        <value>5</value>
-      </li>
-    </possessions>
-  </AlienRace.AlienBackstoryDef>
+  </BackstoryDef>
 
   <!-- VV_ViviHerbalist -->
-  <AlienRace.AlienBackstoryDef ParentName="VV_AdultSettlerViviBackstory">
+  <BackstoryDef ParentName="VV_AdultSettlerViviBackstory">
     <defName>VV_ViviHerbalist</defName>
     <title>vivi herbalist</title>
     <titleShort>herbalist</titleShort>
     <baseDesc>[PAWN_nameDef] is a herbalist in vivi hive.</baseDesc>
     <skillGains>
-      <li><key>Plants</key><value>5</value></li>
-      <li><key>Medicine</key><value>5</value></li>
+      <Plants>5</Plants>
+      <Medicine>5</Medicine>
     </skillGains>
     <workDisables>
       <li>Mining</li>
       <li>Violent</li>
     </workDisables>
     <possessions>
-      <li>
-        <key>MedicineHerbal</key>
-        <value>5</value>
-      </li>
+      <MedicineHerbal>5</MedicineHerbal>
     </possessions>
-  </AlienRace.AlienBackstoryDef>
+  </BackstoryDef>
 
   <!-- VV_ViviGuard -->
-  <AlienRace.AlienBackstoryDef ParentName="VV_AdultSettlerViviBackstory">
+  <BackstoryDef ParentName="VV_AdultSettlerViviBackstory">
     <defName>VV_ViviGuard</defName>
     <title>vivi guard</title>
     <titleShort>guard</titleShort>
     <baseDesc>[PAWN_nameDef] is a guard in vivi hive.</baseDesc>
     <skillGains>
-      <li><key>Melee</key><value>5</value></li>
-      <li><key>Shooting</key><value>5</value></li>
+      <Melee>5</Melee>
+      <Shooting>5</Shooting>
     </skillGains>
     <workDisables>
       <li>Crafting</li>
       <li>Intellectual</li>
       <li>Social</li>
     </workDisables>
-    <possessions>
-      <li>
-        <key>VV_ViviSpear</key>
-        <value>1</value>
-      </li>
-    </possessions>
     <forcedTraits>
       <Brawler>0</Brawler>
     </forcedTraits>
     <spawnCategories>
       <li>VV_CombatSettlerBackstory</li>
     </spawnCategories>
-  </AlienRace.AlienBackstoryDef>
+  </BackstoryDef>
 
   <!-- VV_ViviScout -->
-  <AlienRace.AlienBackstoryDef ParentName="VV_AdultSettlerViviBackstory">
+  <BackstoryDef ParentName="VV_AdultSettlerViviBackstory">
     <defName>VV_ViviScout</defName>
     <title>vivi scout</title>
     <titleShort>scout</titleShort>
     <baseDesc>[PAWN_nameDef] is a scout in vivi hive.</baseDesc>
     <skillGains>
-      <li><key>Shooting</key><value>5</value></li>
-      <li><key>Animals</key><value>5</value></li>
+      <Shooting>5</Shooting>
+      <Animals>5</Animals>
     </skillGains>
     <workDisables>
       <li>Caring</li>
       <li>Intellectual</li>
       <li>Mining</li>
     </workDisables>
-    <possessions>
-      <li>
-        <key>VV_ViviLongJavelin</key>
-        <value>1</value>
-      </li>
-    </possessions>
     <forcedTraits>
       <SpeedOffset>2</SpeedOffset>
     </forcedTraits>
     <spawnCategories>
       <li>VV_CombatSettlerBackstory</li>
     </spawnCategories>
-  </AlienRace.AlienBackstoryDef>
+  </BackstoryDef>
 </Defs>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <AlienRace.AlienBackstoryDef ParentName="VV_ViviAdultBackstory">
+  <BackstoryDef ParentName="VV_ViviAdultBackstory">
     <defName>VV_ViviExiled</defName>
     <title>vivi exiled</title>
     <titleShort>exiled</titleShort>
@@ -9,21 +9,15 @@
       <li>VV_PlayerExiledBackstory</li>
     </spawnCategories>
     <skillGains>
-      <li><key>Shooting</key><value>-4</value></li>
-      <li><key>Melee</key><value>-4</value></li>
-      <li><key>Mining</key><value>-4</value></li>
-      <li><key>Artistic</key><value>-4</value></li>
-      <li><key>Social</key><value>-2</value></li>
-      <li><key>Cooking</key><value>4</value></li>
-      <li><key>Animals</key><value>4</value></li>
-      <li><key>Medicine</key><value>4</value></li>
-      <li><key>Crafting</key><value>4</value></li>
+      <Shooting>-4</Shooting>
+      <Melee>-4</Melee>
+      <Mining>-4</Mining>
+      <Artistic>-4</Artistic>
+      <Social>-2</Social>
+      <Cooking>4</Cooking>
+      <Animals>4</Animals>
+      <Medicine>4</Medicine>
+      <Crafting>4</Crafting>
     </skillGains>
-    <possessions>
-    </possessions>
-    <passions>
-      <Social>2</Social>
-      <Intellectual>2</Intellectual>
-    </passions>
-  </AlienRace.AlienBackstoryDef>
+  </BackstoryDef>
 </Defs>

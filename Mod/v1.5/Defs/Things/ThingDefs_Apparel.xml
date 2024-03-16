@@ -85,6 +85,14 @@
     </tradeTags>
     
     <colorGenerator Class="ColorGenerator_White" />
+    
+    <modExtensions>
+      <li Class="RPEF.RaceConstraint">
+        <whitelist>
+          <li>VV_Vivi</li>
+        </whitelist>
+      </li>
+    </modExtensions>
   </ThingDef>
 
   <!-- 비비 어린이 옷 -->
@@ -157,5 +165,13 @@
     </tradeTags>
     
     <colorGenerator Class="ColorGenerator_White" />
+    
+    <modExtensions>
+      <li Class="RPEF.RaceConstraint">
+        <whitelist>
+          <li>VV_Vivi</li>
+        </whitelist>
+      </li>
+    </modExtensions>
   </ThingDef>
 </Defs>

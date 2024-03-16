@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <AlienRace.AlienBackstoryDef ParentName="VV_ViviChildBackstory">
+  <BackstoryDef ParentName="VV_ViviChildBackstory">
     <defName>VV_ViviHiveChild</defName>
     <title>vivi hive child</title>
     <titleShort>hive child</titleShort>
@@ -11,9 +11,9 @@
       <li>VV_SettlerGrown</li>
     </spawnCategories>
     <skillGains>
-      <li><key>Plants</key><value>2</value></li>
-      <li><key>Construction</key><value>1</value></li>
-      <li><key>Intellectual</key><value>-1</value></li>
+      <Plants>2</Plants>
+      <Construction>1</Construction>
+      <Intellectual>-1</Intellectual>
     </skillGains>
-  </AlienRace.AlienBackstoryDef>
+  </BackstoryDef>
 </Defs>

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <AlienRace.ThingDef_AlienRace ParentName="BasePawn">
+  <ThingDef ParentName="Human">
     <defName>VV_Vivi</defName>
     <label>vivi</label>
     <description>.</description>
 
+    <!-- AlienRace
     <alienRace>
       <generalSettings>
         <maleGenderProbability>0</maleGenderProbability>
@@ -443,6 +444,7 @@
         <canReproduce>false</canReproduce>
       </raceRestriction>
     </alienRace>
+    -->
 
     <statBases>
 			<MarketValue>1200</MarketValue>
@@ -536,33 +538,19 @@
     </tools>
 
     <race>
-			<thinkTreeMain>Humanlike</thinkTreeMain>
-			<thinkTreeConstant>HumanlikeConstant</thinkTreeConstant>
-			<intelligence>Humanlike</intelligence>
-			<makesFootprints>true</makesFootprints>
       <lifeExpectancy>45</lifeExpectancy>
       <leatherDef>Leather_Light</leatherDef>
 			<nameCategory>HumanStandard</nameCategory>
       <nameGenerator>VV_NamerPersonVivi</nameGenerator>
       <nameGeneratorFemale>VV_NamerPersonVivi</nameGeneratorFemale>
       <body>VV_Vivi</body>
+      <renderTree>VV_Vivi</renderTree>
       <baseBodySize>0.8</baseBodySize>
       <baseHealthScale>0.8</baseHealthScale>
       <baseHungerRate>0.7</baseHungerRate>
-      <foodType>OmnivoreHuman</foodType>
       <meatMarketValue>0.8</meatMarketValue>
       <manhunterOnTameFailChance>0.50</manhunterOnTameFailChance>
       <manhunterOnDamageChance>0.90</manhunterOnDamageChance>
-      <soundCallIntervalRange>2000~5000</soundCallIntervalRange>
-
-      <litterSizeCurve>
-        <points>
-          <li>(0.5, 0)</li>
-          <li>(1, 1)</li>
-          <li>(1.01, 0.02)</li>
-          <li>(3.5, 0)</li>
-        </points>
-      </litterSizeCurve>
 
 			<lifeStageAges Inherit="False">
 				<li>
@@ -603,7 +591,7 @@
 				</li>
 			</lifeStageAges>
 
-      <lifeStageWorkSettings>
+      <lifeStageWorkSettings Inherit="False">
         <Firefighter>13</Firefighter>
         <Patient>0</Patient>
         <Doctor>10</Doctor>
@@ -628,16 +616,10 @@
       </lifeStageWorkSettings>
       
 			<soundMeleeHitPawn>Pawn_Melee_Punch_HitPawn</soundMeleeHitPawn>
-			<soundMeleeHitBuilding>Pawn_Melee_Punch_HitBuilding</soundMeleeHitBuilding>
 			<soundMeleeMiss>Pawn_Melee_Punch_Miss</soundMeleeMiss>
 			<soundMeleeDodge>Pawn_MeleeDodge</soundMeleeDodge>
       
-      <specialShadowData>
-        <volume>(0.3, 0.8, 0.4)</volume>
-        <offset>(0,0,-0.3)</offset>
-      </specialShadowData>
-      
-      <ageGenerationCurve>
+      <ageGenerationCurve Inherit="False">
         <points>
           <li MayRequire="Ludeon.RimWorld.Biotech">(0,0)</li>
           <li MayRequire="Ludeon.RimWorld.Biotech">(0.001,23)</li>
@@ -660,11 +642,6 @@
           <li>(40,0)</li>
         </points>
       </ageGenerationCurve>
-      
-      <hediffGiverSets>
-        <li>OrganicStandard</li>
-        <li>Human</li>
-      </hediffGiverSets>
     </race>
 
     <comps>
@@ -674,60 +651,30 @@
       
       <li Class="VVRace.CompProperties_Vivi" />
     </comps>
-    
-    <ingredient>
-      <mergeCompatibilityTags>
-        <li>HumanMeat</li>
-      </mergeCompatibilityTags>
-    </ingredient>
-  </AlienRace.ThingDef_AlienRace>
 
-  <AlienRace.RaceSettings>
-    <defName>Vivi_RaceSettings</defName>
-		<pawnKindSettings>
-      <alienwandererkinds>
-        <li>
-          <pawnKindEntries>
-            <li>
-              <kindDefs>
-                <li>VV_PlayerVivi</li>
-              </kindDefs>
-              <chance>100.0</chance>
-            </li>
-          </pawnKindEntries>
-          <factionDefs>
-            <li>VV_PlayerVivi</li>
-            <li>VV_PlayerExiledVivi</li>
-          </factionDefs>
-        </li>
-      </alienwandererkinds>
-  
-      <alienslavekinds>
-        <li>
-          <kindDefs>
-            <li>VV_PlayerVivi</li>
-          </kindDefs>
-          <chance>90.0</chance>
-        </li>
-        <li>
-          <kindDefs>
-            <li>VV_PlayerRoyalVivi</li>
-          </kindDefs>
-          <chance>10.0</chance>
-        </li>
-      </alienslavekinds>
-  
-      <alienrefugeekinds>
-        <li>
-          <kindDefs>
-            <li>VV_PlayerVivi</li>
-            <li>VV_PlayerRoyalVivi</li>
-            <li>VV_PlayerExiledRoyalVivi</li>
-          </kindDefs>
-          <chance>0</chance>
-        </li>
-      </alienrefugeekinds>
-    </pawnKindSettings>
+    <modExtensions>
+      <li Class="RPEF.HeadTypeConstraint">
+        <whitelist>
+          <li>VV_Vivi_A</li>
+          <li>VV_Vivi_B</li>
+          <li>VV_Vivi_C</li>
+          <li>VV_Vivi_D</li>
+          <li>VV_Vivi_E</li>
+          <li>VV_Vivi_F</li>
+        </whitelist>
+      </li>
 
-  </AlienRace.RaceSettings>
+      <li Class="RPEF.HairConstraint">
+        <whitelist>
+          <li>VV_HairA</li>
+          <li>VV_HairB</li>
+          <li>VV_HairC</li>
+          <li>VV_HairD</li>
+          <li>VV_HairE</li>
+          <li>VV_HairF</li>
+          <li>VV_HairG</li>
+        </whitelist>
+      </li>
+    </modExtensions>
+  </ThingDef>
 </Defs>

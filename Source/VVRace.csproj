@@ -24,7 +24,7 @@
     <NoWarn>CS0649</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Build_Dev|AnyCPU'">
-    <OutputPath>..\Mod\v1.4\Assemblies\</OutputPath>
+    <OutputPath>..\Mod\v1.5\Assemblies\</OutputPath>
     <Optimize>true</Optimize>
     <NoWarn>CS0649</NoWarn>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -128,8 +128,8 @@
     <Compile Include="CompAbility_RequiresBodyPart.cs" />
     <Compile Include="CompFerment.cs" />
     <Compile Include="Egg\Comps\CompViviEggLayer.cs" />
-    <Compile Include="EndGame\Legacy\Incident\IncidentDefPeacebloomSpawnExtension.cs" />
-    <Compile Include="EndGame\Legacy\Incident\IncidentWorker_PeacebloomSpawn.cs" />
+    <Compile Include="EndGame\IncidentDefPeacebloomSpawnExtension.cs" />
+    <Compile Include="EndGame\IncidentWorker_PeacebloomSpawn.cs" />
     <Compile Include="EndGame\PeacebloomAltar.cs" />
     <Compile Include="Hornet\HediffGiver_ConstantScaria.cs" />
     <Compile Include="Hornet\JobGiver_HornetBerserk.cs" />
@@ -193,7 +193,6 @@
     <Compile Include="HarmonyPatches\HarmonyPatch.cs" />
     <Compile Include="ApparelPropertiesExt.cs" />
     <Compile Include="HarmonyPatches\Internals\ApparelPropertiesExtPatch.cs" />
-    <Compile Include="HarmonyPatches\Internals\RoyaltyPatch.cs" />
     <Compile Include="HarmonyPatches\Internals\ViviRacePatch.cs" />
     <Compile Include="Gather\Comps\CompRepeatGatherable.cs" />
     <Compile Include="Gather\GatherWorker.cs" />
@@ -243,6 +242,7 @@
     <Compile Include="Vivi\HediffComp_ViviGrowthBoost.cs" />
     <Compile Include="Vivi\Need_RoyalJelly.cs" />
     <Compile Include="Egg\UI\EggProgressGizmo.cs" />
+    <Compile Include="Vivi\PawnRenderNode_SwaddleVivi.cs" />
     <Compile Include="Vivi\ViviRaceUtility.cs" />
     <Compile Include="VVDefOf.cs" />
   </ItemGroup>

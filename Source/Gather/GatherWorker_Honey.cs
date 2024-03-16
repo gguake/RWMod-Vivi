@@ -7,12 +7,19 @@ using Verse;
 
 namespace VVRace
 {
+    [HarmonyPatch]
+    public static class Pawn_FilthTracker_ReversePatch
+    {
+        [HarmonyReversePatch]
+        [HarmonyPatch(typeof(Pawn_FilthTracker), "DropCarriedFilth")]
+        public static void DropCarriedFilth(Pawn_FilthTracker __instance, Filth f)
+        {
+            throw new NotImplementedException("stub");
+        }
+    }
+
     public class GatherWorker_Honey : GatherWorker_Plant
     {
-        private delegate void Pawn_FilthTracker_DropCarriedFilth_Delegate(Pawn_FilthTracker self, Filth f);
-        private static Pawn_FilthTracker_DropCarriedFilth_Delegate Pawn_FilthTracker_DropCarriedFilth =
-            AccessTools.Method(typeof(Pawn_FilthTracker), "DropCarriedFilth").CreateDelegate<Pawn_FilthTracker_DropCarriedFilth_Delegate>();
-
         public override void Notify_Gathered(Pawn pawn, Thing billGiver, Thing target, RecipeDef_Gathering recipe)
         {
             base.Notify_Gathered(pawn, billGiver, target, recipe);
@@ -48,7 +55,7 @@ namespace VVRace
                 var filth = filths[i];
                 if (filth.def == VVThingDefOf.VV_FilthPollen && filth.CanDropAt(pawn.Position, pawn.Map))
                 {
-                    Pawn_FilthTracker_DropCarriedFilth(pawn.filth, filth);
+                    Pawn_FilthTracker_ReversePatch.DropCarriedFilth(pawn.filth, filth);
                 }
             }
         }

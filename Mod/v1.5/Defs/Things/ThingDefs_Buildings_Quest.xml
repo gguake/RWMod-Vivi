@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
   <!-- 평화꽃 제단 -->
+  <!--
   <ThingDef ParentName="BuildingBase">
     <defName>VV_AltarOfPeacebloom</defName>
     <thingClass>VVRace.PeacebloomAltar</thingClass>
@@ -75,5 +76,5 @@
       <li>VV_PlantGigantism</li>
     </researchPrerequisites>
   </ThingDef>
-  
+  -->
 </Defs>

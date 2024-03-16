@@ -176,6 +176,14 @@
     <tradeTags>
       <li>VV_ViviExotic</li>
     </tradeTags>
+
+    <modExtensions>
+      <li Class="RPEF.RaceConstraint">
+        <whitelist>
+          <li>VV_Vivi</li>
+        </whitelist>
+      </li>
+    </modExtensions>
   </ThingDef>
 
 </Defs>

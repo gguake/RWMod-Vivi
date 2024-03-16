@@ -289,6 +289,14 @@
     <tradeTags>
       <li>VV_ViviTool</li>
     </tradeTags>
+
+    <modExtensions>
+      <li Class="RPEF.RaceConstraint">
+        <whitelist>
+          <li>VV_Vivi</li>
+        </whitelist>
+      </li>
+    </modExtensions>
   </ThingDef>
 
   <ThingDef ParentName="BaseProjectileNeolithic">

@@ -13,9 +13,9 @@ namespace VVRace
             pawn.health.hediffSet.GetHediffs(ref targetHediffs, hediff =>
             {
                 if (hediff.def == HediffDefOf.WoundInfection ||
-                    hediff.def == HediffDefOf.Flu ||
+                    hediff.def == VVHediffDefOf.Flu ||
                     hediff.def == HediffDefOf.Plague ||
-                    hediff.def == HediffDefOf.Malaria)
+                    hediff.def == VVHediffDefOf.Malaria)
                 {
                     return true;
                 }

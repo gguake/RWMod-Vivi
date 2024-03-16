@@ -25,7 +25,7 @@ namespace VVRace
             Widgets.Label(labelRect, LocalizeTexts.ITab_GatherWorkerTable_GatherRadiusSlider.Translate());
 
             var sliderRect = divider.NewRow(20f);
-            var value = Widgets.HorizontalSlider_NewTemp(
+            var value = Widgets.HorizontalSlider(
                 sliderRect,
                 (int)SelTable.GatherRadius,
                 (int)Building_GatherWorkTable.GatherMinRadius,

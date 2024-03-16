@@ -59,7 +59,7 @@ namespace VVRace
             {
                 var p = resolveParams;
                 p.rect = CellRect.CenteredOn(center, 3, 3);
-                p.singleThingDef = ThingDefOf.Table3x3c;
+                p.singleThingDef = VVThingDefOf.Table3x3c;
                 p.singleThingStuff = VVThingDefOf.VV_Viviwax;
                 p.faction = resolveParams.faction;
                 BaseGen.symbolStack.Push("thing", p);

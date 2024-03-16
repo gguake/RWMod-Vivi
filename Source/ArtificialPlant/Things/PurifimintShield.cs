@@ -1,4 +1,5 @@
 ﻿using RimWorld;
+using UnityEngine;
 using Verse;
 
 namespace VVRace
@@ -14,7 +15,7 @@ namespace VVRace
             _compProjectileInterceptor = GetComp<CompProjectileInterceptor>();
         }
 
-        public override void Draw()
+        protected override void DrawAt(Vector3 drawLoc, bool flip = false)
         {
             Comps_PostDraw();
         }

@@ -19,8 +19,6 @@ namespace VVRace
                 ViviRacePatch.Patch(harmony);
                 ArtificialPlantPatch.Patch(harmony);
 
-                RoyaltyPatch.Patch(harmony);
-
                 harmony.PatchAll();
             }
             finally

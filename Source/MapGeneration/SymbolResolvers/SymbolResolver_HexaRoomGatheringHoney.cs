@@ -82,7 +82,7 @@ namespace VVRace
                 {
                     var p = resolveParams;
                     p.rect = new CellRect(center.x + flowerPot.xOffset, center.z + flowerPot.zOffset, 1, 1);
-                    p.singleThingDef = ThingDefOf.PlantPot;
+                    p.singleThingDef = VVThingDefOf.PlantPot;
                     p.singleThingStuff = ThingDefOf.WoodLog;
                     p.faction = resolveParams.faction;
                     p.postThingSpawn = (thing) =>

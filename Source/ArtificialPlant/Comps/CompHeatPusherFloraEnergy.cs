@@ -18,7 +18,7 @@ namespace VVRace
             }
         }
 
-        protected override bool ShouldPushHeatNow
+        public override bool ShouldPushHeatNow
         {
             get
             {

@@ -84,7 +84,7 @@
       <appearance>Planks</appearance>
       <color>(255,240,180)</color>
       <constructEffect>ConstructWood</constructEffect>
-      <soundImpactStuff>BulletImpact_Wood</soundImpactStuff>
+      <soundImpactBullet>BulletImpact_Wood</soundImpactBullet>
       <soundMeleeHitSharp>MeleeHit_Wood</soundMeleeHitSharp>
       <soundMeleeHitBlunt>MeleeHit_Wood</soundMeleeHitBlunt>
       <statFactors>

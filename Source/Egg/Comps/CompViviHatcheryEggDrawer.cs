@@ -34,7 +34,7 @@ namespace VVRace
                 var drawPos = hatchery.DrawPos;
 
                 drawPos += Altitudes.AltIncVect;
-                egg.DrawAt(drawPos);
+                egg.DrawNowAt(drawPos);
 
                 drawPos += Altitudes.AltIncVect;
                 var mesh = Props.graphicData.Graphic.MeshAt(parent.Rotation);

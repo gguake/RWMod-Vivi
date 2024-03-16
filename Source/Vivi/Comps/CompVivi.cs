@@ -99,7 +99,7 @@ namespace VVRace
                 var appliedHairColor = Color.Lerp(Color.white, _originalHairColor.Value, (float)pawn.ageTracker.AgeBiologicalTicks / pawn.ageTracker.AdultMinAgeTicks);
                 pawn.story.HairColor = appliedHairColor;
 
-                pawn.Drawer.renderer.graphics.SetAllGraphicsDirty();
+                pawn.Drawer.renderer.SetAllGraphicsDirty();
             }
         }
 
@@ -140,7 +140,7 @@ namespace VVRace
                 pawn.apparel?.DropAllOrMoveAllToInventory((Apparel apparel) => !apparel.def.apparel.PawnCanWear(pawn));
             }
 
-            pawn.Drawer.renderer.graphics.SetAllGraphicsDirty();
+            pawn.Drawer.renderer.SetAllGraphicsDirty();
         }
     }
 }

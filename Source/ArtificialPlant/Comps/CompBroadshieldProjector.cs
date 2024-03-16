@@ -53,14 +53,14 @@ namespace VVRace
 
             if (Shield != null)
             {
-                commandActivateShield.disabled = true;
+                commandActivateShield.Disabled = true;
                 commandActivateShield.disabledReason = LocalizeTexts.CommandActivateShieldAlreadyActivated.Translate();
             }
 
             var plant = parent as ArtificialPlant;
             if (plant == null || plant.Energy < Props.minEnergyForActivate)
             {
-                commandActivateShield.disabled = true;
+                commandActivateShield.Disabled = true;
                 commandActivateShield.disabledReason = LocalizeTexts.CommandActivateShieldNotEnoughenrgy.Translate(Props.minEnergyForActivate);
             }
 

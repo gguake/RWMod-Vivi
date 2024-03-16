@@ -23,6 +23,14 @@
     </tradeTags>
     
     <colorGenerator Class="ColorGenerator_White" />
+    
+    <modExtensions>
+      <li Class="RPEF.RaceConstraint">
+        <whitelist>
+          <li>VV_Vivi</li>
+        </whitelist>
+      </li>
+    </modExtensions>
   </ThingDef>
 
   <ThingDef ParentName="VV_FemaleApparelBase">

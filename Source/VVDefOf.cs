@@ -102,11 +102,14 @@ namespace VVRace
         public static ThingDef Shelf;
         public static ThingDef ShelfSmall;
         public static ThingDef Crib;
+        public static ThingDef Table3x3c;
+        public static ThingDef PlantPot;
 
         public static ThingDef HandTailoringBench;
         public static ThingDef FueledSmithy;
 
         public static ThingDef VV_TitanicHornet;
+
     }
 
     [DefOf]
@@ -159,6 +162,9 @@ namespace VVRace
         public static HediffDef VV_RoyalVivi;
 
         public static HediffDef VV_HoneyNeed;
+
+        public static HediffDef Flu;
+        public static HediffDef Malaria;
     }
 
     //[DefOf]
@@ -214,5 +220,17 @@ namespace VVRace
     public static class VVResearchProjectDefOf
     {
         public static ResearchProjectDef VV_AncientPlantCuttings;
+    }
+
+    [DefOf]
+    public static class VVMapMeshFlagDefOf
+    {
+        public static MapMeshFlagDef VV_EnergyFluxGrid;
+    }
+
+    [DefOf]
+    public static class VVPawnCapacityDefOf
+    {
+        public static PawnCapacityDef Metabolism;
     }
 }

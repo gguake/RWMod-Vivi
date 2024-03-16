@@ -206,7 +206,7 @@ namespace VVRace
             }
         }
 
-        public override void Draw()
+        protected override void DrawAt(Vector3 drawLoc, bool flip = false)
         {
             var drawOffset = Vector3.zero;
             float angleOffset = 0f;
@@ -216,7 +216,7 @@ namespace VVRace
                 _shootusTop.DrawTurret(drawOffset, angleOffset);
             }
 
-            base.Draw();
+            base.DrawAt(drawLoc, flip);
 
         }
 

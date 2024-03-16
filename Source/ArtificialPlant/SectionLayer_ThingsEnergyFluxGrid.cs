@@ -12,7 +12,7 @@ namespace VVRace
             : base(section)
         {
             requireAddToMapMesh = false;
-            relevantChangeTypes = MapMeshFlag.PowerGrid;
+            relevantChangeTypes = VVMapMeshFlagDefOf.VV_EnergyFluxGrid;
         }
 
         public static void DrawEnergyFluxGridOverlayThisFrame()

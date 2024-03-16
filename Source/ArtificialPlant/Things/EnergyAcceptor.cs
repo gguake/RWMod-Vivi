@@ -39,12 +39,12 @@ namespace VVRace
             EnergyFluxGrid.Notify_SpawnEnergyAcceptor(this);
             EnergyFluxGrid = EnergyFluxGrid.GetFluxGrid(map);
 
-            Map.mapDrawer.MapMeshDirty(Position, MapMeshFlag.PowerGrid, true, false);
+            Map.mapDrawer.MapMeshDirty(Position, VVMapMeshFlagDefOf.VV_EnergyFluxGrid, true, false);
         }
 
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
         {
-            Map.mapDrawer.MapMeshDirty(Position, MapMeshFlag.PowerGrid, true, false);
+            Map.mapDrawer.MapMeshDirty(Position, VVMapMeshFlagDefOf.VV_EnergyFluxGrid, true, false);
 
             EnergyFluxGrid.Notify_DespawnEnergyAcceptor(this);
             EnergyFluxGrid = null;

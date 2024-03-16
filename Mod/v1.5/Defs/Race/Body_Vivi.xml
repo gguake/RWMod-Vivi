@@ -1,5 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
+  <BodyPartGroupDef>
+    <defName>VV_LeftAntennae</defName>
+    <label>left antennae</label>
+    <labelShort>antennae</labelShort>
+  </BodyPartGroupDef>
+
+  <BodyPartGroupDef>
+    <defName>VV_RightAntennae</defName>
+    <label>right antennae</label>
+    <labelShort>antennae</labelShort>
+  </BodyPartGroupDef>
+  
+  <BodyPartGroupDef>
+    <defName>VV_LeftWing</defName>
+    <label>left wing</label>
+    <labelShort>wing</labelShort>
+  </BodyPartGroupDef>
+
+  <BodyPartGroupDef>
+    <defName>VV_RightWing</defName>
+    <label>right wing</label>
+    <labelShort>wing</labelShort>
+  </BodyPartGroupDef>
+
   <BodyPartDef>
     <defName>VV_Antennae</defName>
     <label>antennae</label>
@@ -246,6 +270,7 @@
                   <groups>
                     <li>UpperHead</li>
                     <li>FullHead</li>
+                    <li>VV_LeftAntennae</li>
                   </groups>
                 </li>
                 <li>
@@ -255,6 +280,7 @@
                   <groups>
                     <li>UpperHead</li>
                     <li>FullHead</li>
+                    <li>VV_RightAntennae</li>
                   </groups>
                 </li>
               </parts>
@@ -646,14 +672,20 @@
           <customLabel>left wing</customLabel>
           <coverage>0.035</coverage>
           <height>Middle</height>
-          <woundAnchorTag>LeftWing</woundAnchorTag>
+          <woundAnchorTag>LeftShoulder</woundAnchorTag>
+          <groups>
+            <li>VV_LeftWing</li>
+          </groups>
         </li>
-        <li>
+        <li Class="RPEF.BodyPartRecordWithRenderNode">
           <def>VV_Wing</def>
           <customLabel>right wing</customLabel>
           <coverage>0.035</coverage>
           <height>Middle</height>
-          <woundAnchorTag>LeftWing</woundAnchorTag>
+          <woundAnchorTag>RightShoulder</woundAnchorTag>
+          <groups>
+            <li>VV_RightWing</li>
+          </groups>
         </li>
       </parts>
     </corePart>

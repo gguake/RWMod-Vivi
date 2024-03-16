@@ -53,7 +53,7 @@ namespace VVRace
                     if (plant != null)
                     {
                         plant.Growth = 0.0001f;
-                        base.Map.mapDrawer.MapMeshDirty(Position, MapMeshFlag.Things);
+                        base.Map.mapDrawer.MapMeshDirty(Position, MapMeshFlagDefOf.Things);
                     }
                     else
                     {

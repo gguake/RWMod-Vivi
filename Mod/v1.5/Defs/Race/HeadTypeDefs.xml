@@ -2,6 +2,14 @@
 <Defs>
   <HeadTypeDef Abstract="True" Name="VV_HeadBase" ParentName="AverageBase">
     <gender>None</gender>
+
+    <modExtensions>
+      <li Class="RPEF.RaceConstraint">
+        <whitelist>
+          <li>VV_Vivi</li>
+        </whitelist>
+      </li>
+    </modExtensions>
   </HeadTypeDef>
   
   <HeadTypeDef ParentName="VV_HeadBase">

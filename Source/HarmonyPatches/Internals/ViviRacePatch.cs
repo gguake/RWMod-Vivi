@@ -76,14 +76,6 @@ namespace VVRace.HarmonyPatches
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(FoodUtility_ThoughtsFromIngesting_Postfix)));
 
             harmony.Patch(
-                original: AccessTools.Method(typeof(PawnGraphicSet), nameof(PawnGraphicSet.ResolveAllGraphics)),
-                postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(PawnGraphicSet_ResolveAllGraphics_Postfix)));
-
-            harmony.Patch(
-                original: AccessTools.Method(typeof(PawnRenderer), "DrawHeadHair"),
-                transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(PawnRenderer_DrawHeadHair_Transpiler)));
-
-            harmony.Patch(
                 original: AccessTools.Method(typeof(HumanlikeMeshPoolUtility), nameof(HumanlikeMeshPoolUtility.GetHumanlikeHairSetForPawn)),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(HumanlikeMeshPoolUtility_GetHumanlikeHairSetForPawn_Postfix)));
 
@@ -299,45 +291,6 @@ namespace VVRace.HarmonyPatches
                     i--;
                 }
             }
-        }
-
-        private delegate Color SwaddleColorDelegate(PawnGraphicSet pawnGraphicSet);
-        private static SwaddleColorDelegate SwaddleColor
-        {
-            get
-            {
-                if (_swaddleColorDelegate == null)
-                {
-                    _swaddleColorDelegate = AccessTools.Method(typeof(PawnGraphicSet), "SwaddleColor").CreateDelegate<SwaddleColorDelegate>();
-                }
-                return _swaddleColorDelegate;
-            }
-        }
-        private static SwaddleColorDelegate _swaddleColorDelegate;
-        private static void PawnGraphicSet_ResolveAllGraphics_Postfix(PawnGraphicSet __instance, Pawn ___pawn, ref Graphic ___swaddledBabyGraphic)
-        {
-            if (___pawn.IsVivi())
-            {
-                ___swaddledBabyGraphic = GraphicDatabase.Get<Graphic_Multi>("Things/Pawn/Vivi/Swaddle/Swaddle", ShaderDatabase.Cutout, Vector2.one, SwaddleColor(__instance));
-            }
-        }
-
-        private static IEnumerable<CodeInstruction> PawnRenderer_DrawHeadHair_Transpiler(IEnumerable<CodeInstruction> codeInstructions)
-        {
-            var instructions = codeInstructions.ToList();
-
-            var injectionIndex = instructions.FirstIndexOfInstruction(OpCodes.Call, AccessTools.Method(typeof(DevelopmentalStageExtensions), nameof(DevelopmentalStageExtensions.Baby))) + 1;
-            var injections = new List<CodeInstruction>()
-            {
-                new CodeInstruction(OpCodes.Ldarg_0),
-                new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(PawnRenderer), "pawn")),
-                new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(ViviUtility), nameof(ViviUtility.IsVivi))),
-                new CodeInstruction(OpCodes.Not),
-                new CodeInstruction(OpCodes.And),
-            };
-
-            instructions.InsertRange(injectionIndex, injections);
-            return instructions;
         }
 
         private static void HumanlikeMeshPoolUtility_GetHumanlikeHairSetForPawn_Postfix(ref GraphicMeshSet __result, Pawn pawn)

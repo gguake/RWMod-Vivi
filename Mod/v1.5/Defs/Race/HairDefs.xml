@@ -8,9 +8,18 @@
   <HairDef Abstract="True" Name="ViviHairBase">
     <styleGender>Female</styleGender>
     <category>VV_Vivi</category>
+    <hairGender>Female</hairGender>
     <styleTags>
       <li>VV_Vivi</li>
     </styleTags>
+
+    <modExtensions>
+      <li Class="RPEF.RaceConstraint">
+        <whitelist>
+          <li>VV_Vivi</li>
+        </whitelist>
+      </li>
+    </modExtensions>
   </HairDef>
 
   <HairDef ParentName="ViviHairBase">

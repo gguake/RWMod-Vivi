@@ -70,7 +70,7 @@ namespace VVRace
             return (Pawn)AttackTargetFinder.BestAttackTarget(
                 pawn, 
                 TargetScanFlags.NeedReachable,
-                validator: thing => thing is Pawn pawn2 && pawn2.Spawned && !pawn2.Downed && !pawn2.IsInvisible(), 
+                validator: thing => thing is Pawn targetPawn && targetPawn.Spawned && !targetPawn.Downed && !targetPawn.IsPsychologicallyInvisible(),
                 maxDist: maxAttackDistance, 
                 canBashDoors: true,
                 canBashFences: canBashFences);

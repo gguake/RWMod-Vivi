@@ -1,16 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <AlienRace.AlienBackstoryDef Abstract="True" Name="VV_ViviBackstory">
+  <BackstoryDef Abstract="True" Name="VV_ViviBackstory">
 		<bodyTypeMale>Thin</bodyTypeMale>
 		<bodyTypeFemale>Thin</bodyTypeFemale>
-  </AlienRace.AlienBackstoryDef>
 
-  <AlienRace.AlienBackstoryDef Abstract="True" Name="VV_ViviChildBackstory" ParentName="VV_ViviBackstory">
+    <disallowedTraits>
+      <Cannibal>0</Cannibal>
+      <DislikesWomen>0</DislikesWomen>
+      <Gay>0</Gay>
+      <Bisexual>0</Bisexual>
+      <Asexual>0</Asexual>
+    </disallowedTraits>
+
+    <modExtensions>
+      <li Class="RPEF.RaceConstraint">
+        <whitelist>
+          <li>VV_Vivi</li>
+        </whitelist>
+      </li>
+    </modExtensions>
+  </BackstoryDef>
+
+  <BackstoryDef Abstract="True" Name="VV_ViviChildBackstory" ParentName="VV_ViviBackstory">
     <slot>Childhood</slot>
-  </AlienRace.AlienBackstoryDef>
+  </BackstoryDef>
 
-  <AlienRace.AlienBackstoryDef Abstract="True" Name="VV_ViviAdultBackstory" ParentName="VV_ViviBackstory">
+  <BackstoryDef Abstract="True" Name="VV_ViviAdultBackstory" ParentName="VV_ViviBackstory">
     <slot>Adulthood</slot>
-  </AlienRace.AlienBackstoryDef>
+  </BackstoryDef>
 
 </Defs>
