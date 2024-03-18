@@ -34,6 +34,15 @@
     <initialWillRange>1~2</initialWillRange>
     <initialResistanceRange>10~17</initialResistanceRange>
     <forcedBodyType>Thin</forcedBodyType>
+    
+    <modExtensions>
+      <li Class="RPEF.PawnKindExtension">
+        <pawnKindReplacer>
+          <Refugee>0.15</Refugee>
+          <Slave>0.15</Slave>
+        </pawnKindReplacer>
+      </li>
+    </modExtensions>
   </PawnKindDef>
 
   <!-- 비비 가드 -->
@@ -159,6 +168,15 @@
 
     <isRoyal>true</isRoyal>
     <forcedBodyType>Female</forcedBodyType>
+
+    <modExtensions>
+      <li Class="RPEF.PawnKindExtension">
+        <pawnKindReplacer>
+          <Refugee>0.05</Refugee>
+          <Slave>0.05</Slave>
+        </pawnKindReplacer>
+      </li>
+    </modExtensions>
   </PawnKindDef>
   
   <!-- 상인 로열 비비 -->

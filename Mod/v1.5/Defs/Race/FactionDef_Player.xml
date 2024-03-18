@@ -18,7 +18,7 @@
       <li>TribalStartTechprints</li>
     </startingTechprintsResearchTags>
 
-    <allowedCultures>
+    <allowedCultures Inherit="False">
       <li>VV_ViviCulture</li>
     </allowedCultures>
     

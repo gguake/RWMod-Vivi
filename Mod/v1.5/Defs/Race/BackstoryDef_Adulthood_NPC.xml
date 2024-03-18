@@ -19,7 +19,9 @@
       <Intellectual>-1</Intellectual>
     </skillGains>
     <spawnCategories>
-      <li>VV_SettlerGrown</li>
+      <li>AdultColonist</li>
+      <li>AdultTribal</li>
+      <li>VatGrown</li>
     </spawnCategories>
   </BackstoryDef>
 

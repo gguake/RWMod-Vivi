@@ -8,17 +8,17 @@
         <li>
           <label>awful barracks</label>
           <description>I had to sleep in an awful barracks. Not only was it a horrible room, but I also had to share it!</description>
-          <baseMoodEffect>-5</baseMoodEffect>
+          <baseMoodEffect>-4</baseMoodEffect>
         </li>
         <li>
           <label>dull barracks</label>
           <description>I slept in a dull barracks.</description>
-          <baseMoodEffect>-3</baseMoodEffect>
+          <baseMoodEffect>-2</baseMoodEffect>
         </li>
         <li>
           <label>mediocre barracks</label>
           <description>I slept in a mediocre barracks.</description>
-          <baseMoodEffect>-1</baseMoodEffect>
+          <baseMoodEffect>0</baseMoodEffect>
         </li>
         <li>
           <label>decent barracks</label>

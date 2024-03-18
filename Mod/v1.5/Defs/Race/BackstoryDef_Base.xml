@@ -12,6 +12,10 @@
       <Asexual>0</Asexual>
     </disallowedTraits>
 
+    <spawnCategories>
+      <li>VV_Backstory</li>
+    </spawnCategories>
+    
     <modExtensions>
       <li Class="RPEF.RaceConstraint">
         <whitelist>
@@ -23,6 +27,12 @@
 
   <BackstoryDef Abstract="True" Name="VV_ViviChildBackstory" ParentName="VV_ViviBackstory">
     <slot>Childhood</slot>
+
+    <spawnCategories>
+      <li>AdultColonist</li>
+      <li>AdultTribal</li>
+      <li>VatGrown</li>
+    </spawnCategories>
   </BackstoryDef>
 
   <BackstoryDef Abstract="True" Name="VV_ViviAdultBackstory" ParentName="VV_ViviBackstory">

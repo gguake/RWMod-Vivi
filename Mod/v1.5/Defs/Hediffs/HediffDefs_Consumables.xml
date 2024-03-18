@@ -41,6 +41,14 @@
         </statFactors>
       </li>
     </stages>
+
+    <modExtensions>
+      <li Class="RPEF.RaceConstraint">
+        <whitelist>
+          <li>VV_Vivi</li>
+        </whitelist>
+      </li>
+    </modExtensions>
   </HediffDef>
 
   <HediffDef>
@@ -71,6 +79,14 @@
         <disappearsAfterTicks>54000~66000</disappearsAfterTicks>
       </li>
     </comps>
+
+    <modExtensions>
+      <li Class="RPEF.RaceConstraint">
+        <whitelist>
+          <li>VV_Vivi</li>
+        </whitelist>
+      </li>
+    </modExtensions>
   </HediffDef>
 
   <HediffDef>

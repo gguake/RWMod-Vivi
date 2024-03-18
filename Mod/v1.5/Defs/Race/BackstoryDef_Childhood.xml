@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Defs>
-  <BackstoryDef ParentName="VV_ViviChildBackstory">
+<Defs>  <BackstoryDef ParentName="VV_ViviChildBackstory">
     <defName>VV_ViviHiveChild</defName>
     <title>vivi hive child</title>
     <titleShort>hive child</titleShort>

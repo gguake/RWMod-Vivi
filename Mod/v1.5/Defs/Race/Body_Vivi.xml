@@ -677,7 +677,7 @@
             <li>VV_LeftWing</li>
           </groups>
         </li>
-        <li Class="RPEF.BodyPartRecordWithRenderNode">
+        <li>
           <def>VV_Wing</def>
           <customLabel>right wing</customLabel>
           <coverage>0.035</coverage>

@@ -22,5 +22,7 @@
       </xenotypeChances>
     </xenotypeSet>
 
+    <skinColorOverride>(1,1,1)</skinColorOverride>
+
   </PawnKindDef>
 </Defs>

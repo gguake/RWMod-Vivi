@@ -43,7 +43,7 @@
     <workerClass>LifeStageWorker_HumanlikeAdult</workerClass>
     <adjective>teenage</adjective>
     <reproductive>true</reproductive>
-    <bodySizeFactor>0.8</bodySizeFactor>
+    <bodySizeFactor>0.9</bodySizeFactor>
     <healthScaleFactor>0.90</healthScaleFactor>
     <foodMaxFactor>1.25</foodMaxFactor> <!-- bodySizeFactor * foodMaxFactor = maxFood = 1.0 -->
     <meleeDamageFactor>0.75</meleeDamageFactor>

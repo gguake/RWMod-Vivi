@@ -242,6 +242,7 @@
     <Compile Include="Vivi\HediffComp_ViviGrowthBoost.cs" />
     <Compile Include="Vivi\Need_RoyalJelly.cs" />
     <Compile Include="Egg\UI\EggProgressGizmo.cs" />
+    <Compile Include="Vivi\PawnRenderNodeWorker_ViviCustomDrawSize.cs" />
     <Compile Include="Vivi\PawnRenderNode_SwaddleVivi.cs" />
     <Compile Include="Vivi\ViviRaceUtility.cs" />
     <Compile Include="VVDefOf.cs" />

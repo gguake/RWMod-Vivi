@@ -28,8 +28,17 @@
       <li>AptitudePoor_Shooting</li>
       <li>AptitudeTerrible_Mining</li>
 
+      <li>Skin_SheerWhite</li>
       <li>Beard_NoBeardOnly</li>
     </genes>
+
+    <modExtensions>
+      <li Class="RPEF.RaceConstraint">
+        <whitelist>
+          <li>VV_Vivi</li>
+        </whitelist>
+      </li>
+    </modExtensions>
   </XenotypeDef>
 
 </Defs>

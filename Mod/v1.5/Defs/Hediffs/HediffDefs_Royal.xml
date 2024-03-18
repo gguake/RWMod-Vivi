@@ -34,5 +34,13 @@
 
     <comps>
     </comps>
+
+    <modExtensions>
+      <li Class="RPEF.RaceConstraint">
+        <whitelist>
+          <li>VV_Vivi</li>
+        </whitelist>
+      </li>
+    </modExtensions>
   </HediffDef>
 </Defs>

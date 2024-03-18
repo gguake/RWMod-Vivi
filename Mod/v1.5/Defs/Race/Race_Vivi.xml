@@ -653,6 +653,27 @@
     </comps>
 
     <modExtensions>
+      <li Class="RPEF.RaceExtension">
+        <fixedFemaleBodyType>Thin</fixedFemaleBodyType>
+
+        <thoughtReplacer>
+          <SleptInBarracks>VV_SleptInBarracks</SleptInBarracks>
+          <MyDaughterDied>VV_MyDaughterDied</MyDaughterDied>
+        </thoughtReplacer>
+
+        <relationChanceMultiplier>
+          <Spouse>0</Spouse>
+          <Fiance>0</Fiance>
+          <ExSpouse>0</ExSpouse>
+          <Lover>0</Lover>
+          <ExLover>0</ExLover>
+          <Parent>0</Parent>
+          <Child>0</Child>
+          <Sibling>0</Sibling>
+          <HalfSibling>0</HalfSibling>
+        </relationChanceMultiplier>
+      </li>
+
       <li Class="RPEF.HeadTypeConstraint">
         <whitelist>
           <li>VV_Vivi_A</li>
@@ -674,6 +695,29 @@
           <li>VV_HairF</li>
           <li>VV_HairG</li>
         </whitelist>
+      </li>
+
+      <li Class="RPEF.XenotypeConstraint">
+        <whitelist>
+          <li>VV_Vivi</li>
+        </whitelist>
+      </li>
+
+      <li Class="RPEF.BackstoryConstraint">
+        <categoryWhitelist>
+          <li>Newborn</li>
+          <li>Child</li>
+          <li>ChildTribal</li>
+          <li>VV_Backstory</li>
+        </categoryWhitelist>
+      </li>
+
+      <li Class="RPEF.ThoughtConstraint">
+        <blacklist>
+          <li>VV_AtePollen</li>
+          <li>MySisterDied</li>
+          <li>SleepDisturbed</li>
+        </blacklist>
       </li>
     </modExtensions>
   </ThingDef>

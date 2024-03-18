@@ -24,7 +24,7 @@
       </points>
     </raidCommonalityFromPointsCurve>
 
-    <allowedCultures>
+    <allowedCultures Inherit="False">
       <li>VV_ViviCulture</li>
     </allowedCultures>
     

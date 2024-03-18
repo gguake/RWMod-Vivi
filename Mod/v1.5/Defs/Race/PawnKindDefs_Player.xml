@@ -60,15 +60,6 @@
       </li>
     </backstoryFiltersOverride>
     <forcedBodyType>Thin</forcedBodyType>
-    
-    <modExtensions>
-      <li Class="RPEF.PawnKindExtension">
-        <overrides>
-          <Refugee>0.1</Refugee>
-          <Slave>0.05</Slave>
-        </overrides>
-      </li>
-    </modExtensions>
   </PawnKindDef>
 
   <PawnKindDef ParentName="PlayerVivi" Class="VVRace.PawnKindDef_Vivi">
@@ -80,14 +71,5 @@
       <li>VV_UniformHat</li>
       <li>VV_WorkerUniformDress</li>
     </apparelRequired>
-
-    <modExtensions>
-      <li Class="RPEF.PawnKindExtension">
-        <overrides>
-          <Refugee>0.15</Refugee>
-          <Slave>0.1</Slave>
-        </overrides>
-      </li>
-    </modExtensions>
   </PawnKindDef>
 </Defs>
