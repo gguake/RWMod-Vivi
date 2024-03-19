@@ -78,6 +78,8 @@
         <VV_Vivi>999</VV_Vivi>
       </xenotypeChances>
     </xenotypeSet>
+    
+    <melaninRange>0~0</melaninRange>
 
     <dialogFactionGreetingHostile>ViviFactionGreetingHostile</dialogFactionGreetingHostile>
     <dialogFactionGreetingHostileAppreciative>ViviFactionGreetingHostileAppreciative</dialogFactionGreetingHostileAppreciative>

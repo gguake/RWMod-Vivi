@@ -63,6 +63,8 @@
         <VV_Vivi>999</VV_Vivi>
       </xenotypeChances>
     </xenotypeSet>
+
+    <melaninRange>0~0</melaninRange>
   </FactionDef>
 
   <FactionDef ParentName="PlayerViviFactionBase">

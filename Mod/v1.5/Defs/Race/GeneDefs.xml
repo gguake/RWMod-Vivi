@@ -26,6 +26,7 @@
     <statFactors>
       <VV_LearningRateFactor>3.0</VV_LearningRateFactor>
     </statFactors>
+    <canGenerateInGeneSet>false</canGenerateInGeneSet>
   </GeneDef>
   
   <GeneDef>
@@ -37,5 +38,13 @@
     <displayCategory>Miscellaneous</displayCategory>
     <biostatMet>4</biostatMet>
     <biostatCpx>1</biostatCpx>
+    <canGenerateInGeneSet>false</canGenerateInGeneSet>
+  </GeneDef>
+  
+  <GeneDef ParentName="GeneSkinColorMelanin">
+    <defName>VV_Skin_Melanin</defName>
+    <skinColorBase>(255, 255, 255)</skinColorBase>
+    <minMelanin>0</minMelanin>
+    <selectionWeight>1</selectionWeight>
   </GeneDef>
 </Defs>

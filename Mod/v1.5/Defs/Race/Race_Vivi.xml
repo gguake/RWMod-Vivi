@@ -656,6 +656,22 @@
       <li Class="RPEF.RaceExtension">
         <fixedFemaleBodyType>Thin</fixedFemaleBodyType>
 
+        <melaninGeneOverrides>
+          <VV_Skin_Melanin>100</VV_Skin_Melanin>
+        </melaninGeneOverrides>
+
+        <hairColorGeneOverrides>
+          <Hair_InkBlack>5</Hair_InkBlack>
+          <Hair_Gray>5</Hair_Gray>
+          <Hair_DarkBlack>5</Hair_DarkBlack>
+          <Hair_DarkReddish>10</Hair_DarkReddish>
+          <Hair_DarkSaturatedReddish>10</Hair_DarkSaturatedReddish>
+          <Hair_DarkBrown>10</Hair_DarkBrown>
+          <Hair_ReddishBrown>10</Hair_ReddishBrown>
+          <Hair_SandyBlonde>5</Hair_SandyBlonde>
+          <Hair_Blonde>5</Hair_Blonde>
+        </hairColorGeneOverrides>
+
         <thoughtReplacer>
           <SleptInBarracks>VV_SleptInBarracks</SleptInBarracks>
           <MyDaughterDied>VV_MyDaughterDied</MyDaughterDied>
