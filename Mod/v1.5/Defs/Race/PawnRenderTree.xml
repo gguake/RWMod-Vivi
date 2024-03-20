@@ -29,62 +29,69 @@
           </nakedGraphicPathOverrides>
 
           <children>
-            <li>
-              <debugLabel>LeftWing</debugLabel>
-              <workerClass>PawnRenderNodeWorker_AttachmentBody</workerClass>
-              <texPath>Things/Pawn/Vivi/BodyParts/WingL</texPath>
-              <rotDrawMode>Fresh</rotDrawMode>
-              <linkedBodyPartsGroup>VV_LeftWing</linkedBodyPartsGroup>
-              <drawData>
-                <scaleOffsetByBodySize>true</scaleOffsetByBodySize>
-                <defaultData>
-                </defaultData>
-                <dataNorth>
-                  <offset>(-0.01, 0, 0.0)</offset>
-                  <layer>80</layer>
-                </dataNorth>
-                <dataSouth>
-                  <offset>(0.01, 0, 0.0)</offset>
-                  <layer>-2</layer>
-                </dataSouth>
-                <dataEast>
-                  <offset>(-0.025, 0, 0)</offset>
-                  <layer>25</layer>
-                </dataEast>
-                <dataWest>
-                  <offset>(0.025, 0, 0)</offset>
-                  <layer>26</layer>
-                </dataWest>
-              </drawData>
-            </li>
-            <li>
-              <debugLabel>RightWing</debugLabel>
-              <workerClass>PawnRenderNodeWorker_AttachmentBody</workerClass>
-              <texPath>Things/Pawn/Vivi/BodyParts/WingR</texPath>
-              <rotDrawMode>Fresh</rotDrawMode>
-              <linkedBodyPartsGroup>VV_RightWing</linkedBodyPartsGroup>
-              <drawData>
-                <scaleOffsetByBodySize>true</scaleOffsetByBodySize>
-                <defaultData>
-                  <layer>30</layer>
-                </defaultData>
-                <dataNorth>
-                  <offset>(0.01, 0, 0)</offset>
-                  <layer>80</layer>
-                </dataNorth>
-                <dataSouth>
-                  <offset>(-0.01, 0, 0)</offset>
-                  <layer>-2</layer>
-                </dataSouth>
-                <dataEast>
-                  <offset>(-0.025, 0, 0)</offset>
-                  <layer>26</layer>
-                </dataEast>
-                <dataWest>
-                  <offset>(0.025, 0, 0)</offset>
-                  <layer>25</layer>
-                </dataWest>
-              </drawData>
+            <li Class="RPEF.PawnRenderNodeProperties_BodyTypeDrawData">
+              <workerClass>RPEF.PawnRenderNodeWorker_BodyTypeDrawData</workerClass>
+              <bodyTypeDrawData>
+                <Baby>
+                  <scale>0</scale>
+                </Baby>
+              </bodyTypeDrawData>
+              <useGraphic>false</useGraphic>
+
+              <children>
+                <li>
+                  <debugLabel>LeftWing</debugLabel>
+                  <workerClass>PawnRenderNodeWorker_AttachmentBody</workerClass>
+                  <texPath>Things/Pawn/Vivi/BodyParts/WingL</texPath>
+                  <rotDrawMode>Fresh</rotDrawMode>
+                  <linkedBodyPartsGroup>VV_LeftWing</linkedBodyPartsGroup>
+                  <drawData>
+                    <scaleOffsetByBodySize>true</scaleOffsetByBodySize>
+                    <dataNorth>
+                      <offset>(-0.01, 0, 0.0)</offset>
+                      <layer>80</layer>
+                    </dataNorth>
+                    <dataSouth>
+                      <offset>(0.01, 0, 0.0)</offset>
+                      <layer>-2</layer>
+                    </dataSouth>
+                    <dataEast>
+                      <offset>(-0.025, 0, 0)</offset>
+                      <layer>40</layer>
+                    </dataEast>
+                    <dataWest>
+                      <offset>(0.025, 0, 0)</offset>
+                      <layer>41</layer>
+                    </dataWest>
+                  </drawData>
+                </li>
+                <li>
+                  <debugLabel>RightWing</debugLabel>
+                  <workerClass>PawnRenderNodeWorker_AttachmentBody</workerClass>
+                  <texPath>Things/Pawn/Vivi/BodyParts/WingR</texPath>
+                  <rotDrawMode>Fresh</rotDrawMode>
+                  <linkedBodyPartsGroup>VV_RightWing</linkedBodyPartsGroup>
+                  <drawData>
+                    <scaleOffsetByBodySize>true</scaleOffsetByBodySize>
+                    <dataNorth>
+                      <offset>(0.01, 0, 0)</offset>
+                      <layer>80</layer>
+                    </dataNorth>
+                    <dataSouth>
+                      <offset>(-0.01, 0, 0)</offset>
+                      <layer>-2</layer>
+                    </dataSouth>
+                    <dataEast>
+                      <offset>(-0.025, 0, 0)</offset>
+                      <layer>41</layer>
+                    </dataEast>
+                    <dataWest>
+                      <offset>(0.025, 0, 0)</offset>
+                      <layer>40</layer>
+                    </dataWest>
+                  </drawData>
+                </li>    
+              </children>
             </li>
 
             <li Class="PawnRenderNodeProperties_Tattoo" MayRequire="Ludeon.RimWorld.Ideology">
@@ -149,26 +156,56 @@
           <rotDrawMode>Fresh, Rotting</rotDrawMode>
         </li>
 
-        <li Class="RPEF.PawnRenderNodeProperties_LifeStageBodySizeOffset">
+        <li Class="RPEF.PawnRenderNodeProperties_BodyTypeDrawData">
           <debugLabel>HeadBase</debugLabel>
-          <workerClass>RPEF.PawnRenderNodeWorker_LifeStageBodySizeOffset</workerClass>
-          <offsets>
-            <Baby>(0, 0, 0.04)</Baby>
-            <Child>(0, 0, 0.04)</Child>
-            <Thin>(0, 0, 0.04)</Thin>
-            <Female>(0, 0, 0.1)</Female>
-          </offsets>
-
-          <drawData>
-            <scaleOffsetByBodySize>true</scaleOffsetByBodySize>
-            <dataEast>
-              <offset>(-0.05,0,0)</offset>
-            </dataEast>
-            <scale>0.75</scale>
-          </drawData>
-
+          <workerClass>RPEF.PawnRenderNodeWorker_BodyTypeDrawData</workerClass>
+          <subworkerClasses>
+            <li>RPEF.PawnRenderSubWorker_LifeStageBodySizeFactor</li>
+          </subworkerClasses>
+          <bodyTypeDrawData>
+            <Baby>
+              <scaleOffsetByBodySize>true</scaleOffsetByBodySize>
+              <defaultData>
+                <offset>(0,0,0.04)</offset>
+              </defaultData>
+              <dataEast>
+                <offset>(-0.05,0,0.04)</offset>
+              </dataEast>
+              <scale>0.75</scale>
+            </Baby>
+            <Child>
+              <scaleOffsetByBodySize>true</scaleOffsetByBodySize>
+              <defaultData>
+                <offset>(0,0,0.04)</offset>
+              </defaultData>
+              <dataEast>
+                <offset>(-0.05,0,0.04)</offset>
+              </dataEast>
+              <scale>0.75</scale>
+            </Child>
+            <Thin>
+              <scaleOffsetByBodySize>true</scaleOffsetByBodySize>
+              <defaultData>
+                <offset>(0,0,0.04)</offset>
+              </defaultData>
+              <dataEast>
+                <offset>(-0.05,0,0.04)</offset>
+              </dataEast>
+              <scale>0.75</scale>
+            </Thin>
+            <Female>
+              <scaleOffsetByBodySize>true</scaleOffsetByBodySize>
+              <defaultData>
+                <offset>(0,0,0.1)</offset>
+              </defaultData>
+              <dataEast>
+                <offset>(-0.05,0,0.1)</offset>
+              </dataEast>
+              <scale>0.75</scale>
+            </Female>
+          </bodyTypeDrawData>
           <useGraphic>false</useGraphic>
- 
+
           <children>
             <li>
               <debugLabel>Head</debugLabel>
@@ -201,7 +238,7 @@
                 </li>
                 <li>
                   <debugLabel>Hair</debugLabel>
-                  <nodeClass>PawnRenderNode_Hair</nodeClass>
+                  <nodeClass>RPEF.PawnRenderNode_HairConstant</nodeClass>
                   <workerClass>PawnRenderNodeWorker_FlipWhenCrawling</workerClass>
                   <rotDrawMode>Fresh, Rotting</rotDrawMode>
                   <colorType>Hair</colorType>
@@ -236,10 +273,10 @@
                       <offset>(0, 0, 0)</offset>
                     </dataNorth>
                     <dataSouth>
-                      <offset>(0, 0, 0.1)</offset>
+                      <offset>(0, 0, 0.04)</offset>
                     </dataSouth>
                     <dataEast>
-                      <offset>(0, 0, 0.12)</offset>
+                      <offset>(0.04, 0, 0.03)</offset>
                     </dataEast>
                   </drawData>
                 </li>
@@ -259,10 +296,10 @@
                       <offset>(0, 0, 0)</offset>
                     </dataNorth>
                     <dataSouth>
-                      <offset>(0, 0, 0.1)</offset>
+                      <offset>(0, 0, 0.04)</offset>
                     </dataSouth>
                     <dataEast>
-                      <offset>(0, 0, 0.12)</offset>
+                      <offset>(0.04, 0, 0.03)</offset>
                     </dataEast>
                   </drawData>
                 </li>

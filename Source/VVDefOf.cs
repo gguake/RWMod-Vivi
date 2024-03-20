@@ -227,10 +227,4 @@ namespace VVRace
     {
         public static MapMeshFlagDef VV_EnergyFluxGrid;
     }
-
-    [DefOf]
-    public static class VVPawnCapacityDefOf
-    {
-        public static PawnCapacityDef Metabolism;
-    }
 }
