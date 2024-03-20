@@ -124,10 +124,7 @@ namespace VVRace.HarmonyPatches
 
         private static void PawnGenerator_GenerateBodyType_Postfix(Pawn pawn, PawnGenerationRequest request)
         {
-            if (pawn.story.bodyType == BodyTypeDefOf.Baby && pawn.story.bodyType == BodyTypeDefOf.Child)
-            {
-                return;
-            }
+            if (!pawn.DevelopmentalStage.Adult()) { return; }
 
             if (pawn.kindDef is PawnKindDef_Vivi kindDefExt)
             {
