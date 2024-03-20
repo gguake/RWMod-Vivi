@@ -37,7 +37,7 @@ namespace VVRace
             get
             {
                 var pawn = (Pawn)parent;
-                var speed = PawnUtility.BodyResourceGrowthSpeed(pawn) * pawn.health.capacities.GetLevel(VVPawnCapacityDefOf.Metabolism);
+                var speed = PawnUtility.BodyResourceGrowthSpeed(pawn) * pawn.health.capacities.GetLevel(PawnCapacityDefOf.BloodPumping);
                 return Mathf.Clamp01(speed / ((CompProperties_EggLayer)props).eggProgressDays);
             }
         }
