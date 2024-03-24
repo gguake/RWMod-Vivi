@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
   <!-- 잔불꽃 -->
-  <ThingDef ParentName="VV_ArtificialPlantProductive">
+  <ThingDef ParentName="VV_ArcanePlantProductive">
     <defName>VV_EmberBloom</defName>
     <label>emberbloom</label>
     <description>.</description>
@@ -44,7 +44,7 @@
     </comps>
 
     <modExtensions>
-      <li Class="VVRace.ArtificialPlantModExtension">
+      <li Class="VVRace.ArcanePlantExtension">
         <germinateWeight>100</germinateWeight>
         
         <energyCapacity>150</energyCapacity>
@@ -62,7 +62,7 @@
   </ThingDef>
 
   <!-- 서리꽃 -->
-  <ThingDef ParentName="VV_ArtificialPlantProductive">
+  <ThingDef ParentName="VV_ArcanePlantProductive">
     <defName>VV_FrostBloom</defName>
     <label>frostbloom</label>
     <description>.</description>
@@ -105,7 +105,7 @@
     </comps>
     
     <modExtensions>
-      <li Class="VVRace.ArtificialPlantModExtension">
+      <li Class="VVRace.ArcanePlantExtension">
         <germinateWeight>100</germinateWeight>
 
         <energyCapacity>150</energyCapacity>
@@ -124,7 +124,7 @@
   </ThingDef>
   
   <!-- 번개봉오리 -->
-  <ThingDef ParentName="VV_ArtificialPlantProductive">
+  <ThingDef ParentName="VV_ArcanePlantProductive">
     <defName>VV_Thunderbud</defName>
     <label>thunderbud</label>
     <description>.</description>
@@ -185,7 +185,7 @@
     </building>
     
     <modExtensions>
-      <li Class="VVRace.ArtificialPlantModExtension">
+      <li Class="VVRace.ArcanePlantExtension">
         <germinateWeight>100</germinateWeight>
         <germinateRare>true</germinateRare>
 
@@ -203,7 +203,7 @@
   </ThingDef>
   
   <!-- 감전꽃 -->
-  <ThingDef ParentName="VV_ArtificialPlantProductive">
+  <ThingDef ParentName="VV_ArcanePlantProductive">
     <defName>VV_Voltpetals</defName>
     <label>voltpetals</label>
     <description>.</description>
@@ -254,7 +254,7 @@
     </building>
     
     <modExtensions>
-      <li Class="VVRace.ArtificialPlantModExtension">
+      <li Class="VVRace.ArcanePlantExtension">
         <germinateWeight>100</germinateWeight>
 
         <energyCapacity>400</energyCapacity>
@@ -268,7 +268,7 @@
   </ThingDef>
   
   <!-- 물방울꽃 -->
-  <ThingDef ParentName="VV_ArtificialPlantProductive">
+  <ThingDef ParentName="VV_ArcanePlantProductive">
     <defName>VV_Waterdrops</defName>
     <label>waterdrops</label>
     <description>.</description>
@@ -315,7 +315,7 @@
     </comps>
     
     <modExtensions>
-      <li Class="VVRace.ArtificialPlantModExtension">
+      <li Class="VVRace.ArcanePlantExtension">
         <germinateWeight>100</germinateWeight>
         <germinateRare>true</germinateRare>
 
@@ -335,7 +335,7 @@
   </ThingDef>
 
   <!-- 빛바라기 -->
-  <ThingDef ParentName="VV_ArtificialPlantProductive">
+  <ThingDef ParentName="VV_ArcanePlantProductive">
     <defName>VV_Radiantflower</defName>
     <label>radiantflower</label>
     <description>.</description>
@@ -384,7 +384,7 @@
     <specialDisplayRadius>5.8</specialDisplayRadius>
 
     <modExtensions>
-      <li Class="VVRace.ArtificialPlantModExtension">
+      <li Class="VVRace.ArcanePlantExtension">
         <germinateWeight>100</germinateWeight>
         <germinateRare>true</germinateRare>
 
@@ -409,7 +409,7 @@
   </ThingDef>
 
   <!-- 풍년화 -->
-  <ThingDef ParentName="VV_ArtificialPlantProductive">
+  <ThingDef ParentName="VV_ArcanePlantProductive">
     <defName>VV_Richflower</defName>
     <label>richflower</label>
     <description>.</description>
@@ -461,7 +461,7 @@
     </comps>
 
     <modExtensions>
-      <li Class="VVRace.ArtificialPlantModExtension">
+      <li Class="VVRace.ArcanePlantExtension">
         <germinateWeight>100</germinateWeight>
         <germinateRare>true</germinateRare>
 
@@ -479,7 +479,7 @@
   </ThingDef>
   
   <!-- 정화민트 -->
-  <ThingDef ParentName="VV_ArtificialPlantProductive">
+  <ThingDef ParentName="VV_ArcanePlantProductive">
     <defName>VV_Purifimint</defName>
     <label>purifimint</label>
     <description>.</description>
@@ -524,7 +524,7 @@
     </comps>
     
     <modExtensions>
-      <li Class="VVRace.ArtificialPlantModExtension">
+      <li Class="VVRace.ArcanePlantExtension">
         <germinateWeight>100</germinateWeight>
 
         <energyCapacity>300</energyCapacity>
@@ -570,7 +570,7 @@
   </ThingDef>
   
   <!-- 하늘초 -->
-  <ThingDef ParentName="VV_ArtificialPlantProductive">
+  <ThingDef ParentName="VV_ArcanePlantProductive">
     <defName>VV_Skyweed</defName>
     <label>skyweed</label>
     <description>.</description>
@@ -605,7 +605,7 @@
     </comps>
 
     <modExtensions>
-      <li Class="VVRace.ArtificialPlantModExtension">
+      <li Class="VVRace.ArcanePlantExtension">
         <germinateWeight>100</germinateWeight>
         <germinateRare>true</germinateRare>
         

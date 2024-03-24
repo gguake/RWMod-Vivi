@@ -49,7 +49,7 @@ namespace VVRace
         public static JobDef VV_GatherPollen;
         public static JobDef VV_GatherPropolis;
 
-        public static JobDef VV_FertilizeArtificialPlant;
+        public static JobDef VV_FertilizeArcanePlant;
         public static JobDef VV_EquipWeaponToShootus;
 
         public static JobDef VV_HaulGerminatingIngredient;

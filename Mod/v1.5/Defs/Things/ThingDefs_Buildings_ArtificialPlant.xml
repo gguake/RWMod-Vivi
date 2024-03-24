@@ -8,7 +8,7 @@
     <descriptionHyperlinks>
       <ThingDef>VV_SeedlingGerminator</ThingDef>
     </descriptionHyperlinks>
-    <thingClass>VVRace.ArtificialPlantPot</thingClass>
+    <thingClass>VVRace.ArcanePlantPot</thingClass>
     
     <graphicData>
       <texPath>Things/Building/VV_AncientPlantPot</texPath>

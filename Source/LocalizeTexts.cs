@@ -6,8 +6,8 @@
 
         public const string AlertViviDangerousEggs = "VV_AlertViviDangerousEggs";
         public const string AlertViviDangerousEggsDesc = "VV_AlertViviDangerousEggsDesc";
-        public const string AlertArtificialPlantLowEnergy = "VV_AlertArtificialPlantLowEnergy";
-        public const string AlertArtificialPlantLowEnergyDesc = "VV_AlertArtificialPlantLowEnergyDesc";
+        public const string AlertArcanePlantLowEnergy = "VV_AlertArcanePlantLowEnergy";
+        public const string AlertArcanePlantLowEnergyDesc = "VV_AlertArcanePlantLowEnergyDesc";
 
         public const string GizmoViviBandwidthHeader = "VV_GizmoViviBandwidthHeader";
         public const string GizmoViviBandwidthTooltip = "VV_GizmoViviBandwidthTooltip";
@@ -103,7 +103,7 @@
         public const string ViviGerminateWindowBonusCount = "ViviGerminateWindowBonusCount";
         public const string ViviGerminateWindowBonusSuccessChance = "ViviGerminateWindowBonusSuccessChance";
         public const string ViviGerminateWindowBonusRareChance = "ViviGerminateWindowBonusRareChance";
-        public const string ViviGerminateWindowBonusMutateAnotherArtificialPlantChance = "ViviGerminateWindowBonusMutateAnotherArtificialPlantChance";
+        public const string ViviGerminateWindowBonusMutateAnotherArcanePlantChance = "ViviGerminateWindowBonusMutateAnotherArcanePlantChance";
 
         public const string GeneDefHoneyNeedDurationDesc = "VV_GeneDefHoneyNeedDurationDesc";
         public const string LastHoneyIngestedDurationAgo = "VV_LastHoneyIngestedDurationAgo";

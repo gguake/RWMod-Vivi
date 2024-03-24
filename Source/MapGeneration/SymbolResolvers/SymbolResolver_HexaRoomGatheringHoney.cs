@@ -40,7 +40,7 @@ namespace VVRace
         {
             var center = resolveParams.rect.CenterCell;
 
-            var artificialPlantPot = new List<(int xOffset, int zOffset, ThingDef plantDef)>()
+            var pots = new List<(int xOffset, int zOffset, ThingDef plantDef)>()
             {
                 (0, 0, VVThingDefOf.VV_Radiantflower),
                 (0, 1, VVThingDefOf.VV_Richflower),
@@ -51,7 +51,7 @@ namespace VVRace
 
             #region 고대 꽃 생성
             {
-                foreach (var pot in artificialPlantPot)
+                foreach (var pot in pots)
                 {
                     var p = resolveParams;
                     p.rect = new CellRect(center.x + pot.xOffset, center.z + pot.zOffset, 1, 1);
@@ -64,7 +64,7 @@ namespace VVRace
 
             #region 고대 화분 생성
             {
-                foreach (var pot in artificialPlantPot)
+                foreach (var pot in pots)
                 {
                     var p = resolveParams;
                     p.rect = new CellRect(center.x + pot.xOffset, center.z + pot.zOffset, 1, 1);

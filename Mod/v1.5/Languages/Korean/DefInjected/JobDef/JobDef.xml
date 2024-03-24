@@ -7,7 +7,7 @@
   <VV_LayViviEgg.reportString>알 낳는 중.</VV_LayViviEgg.reportString>
   <VV_HaulViviEgg.reportString>부화기로 알 운반 중.</VV_HaulViviEgg.reportString>
 
-  <VV_FertilizeArtificialPlant.reportString>TargetA에 비료를 주는 중.</VV_FertilizeArtificialPlant.reportString>
+  <VV_FertilizeArcanePlant.reportString>TargetA에 비료를 주는 중.</VV_FertilizeArcanePlant.reportString>
   <VV_EquipWeaponToShootus.reportString>TargetA에 TargetB 장비 중.</VV_EquipWeaponToShootus.reportString>
 
   <VV_HaulGerminatingIngredient.reportString>TargetB를 TargetA로 운반 중.</VV_HaulGerminatingIngredient.reportString>

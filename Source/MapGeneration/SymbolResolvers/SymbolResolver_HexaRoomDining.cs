@@ -12,7 +12,7 @@ namespace VVRace
             var center = resolveParams.rect.CenterCell;
 
             var b = Rand.Bool;
-            var artificialPlantPot = new List<(int xOffset, int zOffset, ThingDef plantDef)>()
+            var pots = new List<(int xOffset, int zOffset, ThingDef plantDef)>()
             {
                 (0, 4, b ? VVThingDefOf.VV_Peashooter : VVThingDefOf.VV_EmberBloom),
                 (0, -4, !b ? VVThingDefOf.VV_Peashooter : VVThingDefOf.VV_EmberBloom),
@@ -20,7 +20,7 @@ namespace VVRace
 
             #region 꽃 생성
             {
-                foreach (var pot in artificialPlantPot)
+                foreach (var pot in pots)
                 {
                     var p = resolveParams;
                     p.rect = new CellRect(center.x + pot.xOffset, center.z + pot.zOffset, 1, 1);
@@ -33,7 +33,7 @@ namespace VVRace
 
             #region 화분 생성
             {
-                foreach (var pot in artificialPlantPot)
+                foreach (var pot in pots)
                 {
                     var p = resolveParams;
                     p.rect = new CellRect(center.x + pot.xOffset, center.z + pot.zOffset, 1, 1);

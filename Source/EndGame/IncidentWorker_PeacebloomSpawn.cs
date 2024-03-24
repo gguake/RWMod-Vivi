@@ -32,18 +32,18 @@ namespace VVRace
             // 기지가치 체크
             if (extension.requiredPlayerWealth > 0f && WealthUtility.PlayerWealth < extension.requiredPlayerWealth) { return false; }
 
-            var artificialPlantCount = 0;
-            var artificialPlants = map.listerThings.ThingsInGroup(ThingRequestGroup.WithCustomRectForSelector);
-            for (int i = 0; i < artificialPlants.Count; ++i)
+            var arcanePlantCount = 0;
+            var arcanePlants = map.listerThings.ThingsInGroup(ThingRequestGroup.WithCustomRectForSelector);
+            for (int i = 0; i < arcanePlants.Count; ++i)
             {
-                if (artificialPlants[i] is ArtificialPlant)
+                if (arcanePlants[i] is ArcanePlant)
                 {
-                    artificialPlantCount++;
+                    arcanePlantCount++;
                 }
             }
 
             // 고대 식물 숫자 체크
-            if (extension.requiredArtificialPlantCount > 0 && artificialPlantCount < extension.requiredArtificialPlantCount)
+            if (extension.requiredArcanePlantCount > 0 && arcanePlantCount < extension.requiredArcanePlantCount)
             {
                 return false;
             }
@@ -120,7 +120,7 @@ namespace VVRace
 
             if (c.GetTerrain(map).avoidWander) { return false; }
 
-            if (!ArtificialPlantUtility.CanPlaceArtificialPlantToCell(map, c, extension.targetThingDef)) { return false; }
+            if (!ArcanePlantUtility.CanPlaceArcanePlantToCell(map, c, extension.targetThingDef)) { return false; }
 
             return true;
         }

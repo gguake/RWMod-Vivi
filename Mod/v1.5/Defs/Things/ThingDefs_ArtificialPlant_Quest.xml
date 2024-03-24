@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <ThingDef ParentName="VV_ArtificialPlantProductive">
+  <ThingDef ParentName="VV_ArcanePlantProductive">
     <defName>VV_Peacebloom</defName>
     <label>peacebloom</label>
     <description>.</description>
@@ -33,7 +33,7 @@
     </building>
     
     <modExtensions>
-      <li Class="VVRace.ArtificialPlantModExtension">
+      <li Class="VVRace.ArcanePlantExtension">
         <germinateWeight>0</germinateWeight>
 
         <energyCapacity>777</energyCapacity>
@@ -43,8 +43,8 @@
         <energyConsumeRule Class="VVRace.EnergyRule_Constant">
           <energy>7</energy>
         </energyConsumeRule>
-        <energyGenerateRule Class="VVRace.EnergyRule_AdjacentArtificialPlant">
-          <energyByAdjacentArtificialPlant>21</energyByAdjacentArtificialPlant>
+        <energyGenerateRule Class="VVRace.EnergyRule_AdjacentArcanePlant">
+          <energyByAdjacentArcanePlant>21</energyByAdjacentArcanePlant>
         </energyGenerateRule>
       </li>
     </modExtensions>

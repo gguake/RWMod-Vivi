@@ -56,7 +56,7 @@
         <requiredPlayerWealth>1000</requiredPlayerWealth>
         <requiredViviColonistRatio>0.5</requiredViviColonistRatio>
         <requiredRoyalViviCount>1</requiredRoyalViviCount>
-        <requiredArtificialPlantCount>1</requiredArtificialPlantCount>
+        <requiredArcanePlantCount>1</requiredArcanePlantCount>
         <targetThingDef>VV_Peacebloom</targetThingDef>
       </li>
     </modExtensions>

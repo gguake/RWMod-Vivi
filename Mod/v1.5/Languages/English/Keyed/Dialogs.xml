@@ -21,5 +21,5 @@
 <ViviGerminateWindowBonusCount>Yield changes by {0}</ViviGerminateWindowBonusCount>
 <ViviGerminateWindowBonusSuccessChance>Chance to get ancient plants x{0}</ViviGerminateWindowBonusSuccessChance>
 <ViviGerminateWindowBonusRareChance>Chance to get rare ancient plants x{0}</ViviGerminateWindowBonusRareChance>
-<ViviGerminateWindowBonusMutateAnotherArtificialPlantChance>Chance to mutate another plants +{0}</ViviGerminateWindowBonusMutateAnotherArtificialPlantChance>
+<ViviGerminateWindowBonusMutateAnotherArcanePlantChance>Chance to mutate another plants +{0}</ViviGerminateWindowBonusMutateAnotherArcanePlantChance>
 </LanguageData>

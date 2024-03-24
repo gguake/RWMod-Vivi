@@ -21,5 +21,5 @@
 <ViviGerminateWindowBonusCount>결과 모종 개수 {0}</ViviGerminateWindowBonusCount>
 <ViviGerminateWindowBonusSuccessChance>모종 배양 성공률 x{0}</ViviGerminateWindowBonusSuccessChance>
 <ViviGerminateWindowBonusRareChance>희귀한 모종 배양 확률 x{0}</ViviGerminateWindowBonusRareChance>
-<ViviGerminateWindowBonusMutateAnotherArtificialPlantChance>다른 모종으로 변이할 확률 +{0}</ViviGerminateWindowBonusMutateAnotherArtificialPlantChance>
+<ViviGerminateWindowBonusMutateAnotherArcanePlantChance>다른 모종으로 변이할 확률 +{0}</ViviGerminateWindowBonusMutateAnotherArcanePlantChance>
 </LanguageData>

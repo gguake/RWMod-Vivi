@@ -41,10 +41,10 @@
   </RuleDef>
   
   <RuleDef>
-    <defName>VV_ArtificialPlant</defName>
+    <defName>VV_ArcanePlant</defName>
     <symbol>vv_artificial_plant</symbol>
     <resolvers>
-      <li Class="VVRace.SymbolResolver_ArtificialPlant" />
+      <li Class="VVRace.SymbolResolver_ArcanePlant" />
     </resolvers>
   </RuleDef>
 </Defs>

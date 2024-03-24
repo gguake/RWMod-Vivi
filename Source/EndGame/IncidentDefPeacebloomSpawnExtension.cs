@@ -7,7 +7,7 @@ namespace VVRace
         public float requiredPlayerWealth = 0f;
         public float requiredViviColonistRatio = 0f;
         public int requiredRoyalViviCount = 0;
-        public int requiredArtificialPlantCount = 0;
+        public int requiredArcanePlantCount = 0;
 
         public ThingDef targetThingDef;
     }

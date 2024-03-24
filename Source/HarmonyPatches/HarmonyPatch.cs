@@ -17,7 +17,7 @@ namespace VVRace
 
                 ApparelPropertiesExtPatch.Patch(harmony);
                 ViviRacePatch.Patch(harmony);
-                ArtificialPlantPatch.Patch(harmony);
+                ArcanePlantPatch.Patch(harmony);
 
                 harmony.PatchAll();
             }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
   <JobDef>
-    <defName>VV_FertilizeArtificialPlant</defName>
-    <driverClass>VVRace.JobDriver_FertilizeArtificialPlant</driverClass>
+    <defName>VV_FertilizeArcanePlant</defName>
+    <driverClass>VVRace.JobDriver_FertilizeArcanePlant</driverClass>
     <reportString>fertilize TargetA.</reportString>
     <suspendable>false</suspendable>
     <allowOpportunisticPrefix>true</allowOpportunisticPrefix>

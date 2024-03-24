@@ -15,7 +15,7 @@ namespace VVRace
         public override IEnumerable<Thing> FindAllGatherableTargetInRegion(Region region)
         {
             var gatherables = region.ListerThings.ThingsInGroup(ThingRequestGroup.NonStumpPlant);
-            var artificialPlants = region.ListerThings.ThingsInGroup(ThingRequestGroup.WithCustomRectForSelector);
+            var arcanePlants = region.ListerThings.ThingsInGroup(ThingRequestGroup.WithCustomRectForSelector);
 
             for (int i = 0; i < gatherables.Count; ++i)
             {
@@ -25,11 +25,11 @@ namespace VVRace
                 }
             }
 
-            for (int i = 0; i < artificialPlants.Count; ++i)
+            for (int i = 0; i < arcanePlants.Count; ++i)
             {
-                if (artificialPlants[i] is ArtificialPlant && IsGatherableTargetInRegion(region, artificialPlants[i]))
+                if (arcanePlants[i] is ArcanePlant && IsGatherableTargetInRegion(region, arcanePlants[i]))
                 {
-                    yield return artificialPlants[i];
+                    yield return arcanePlants[i];
                 }
             }
         }

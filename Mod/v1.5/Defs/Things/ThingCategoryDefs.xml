@@ -50,9 +50,9 @@
   </ThingCategoryDef>
   
   <ThingCategoryDef>
-    <defName>VV_ArtificialPlant</defName>
+    <defName>VV_ArcanePlant</defName>
     <label>ancient plant</label>
     <parent>Root</parent>
-    <iconPath>UI/Icons/ThingCategories/VV_ArtificialPlant</iconPath>
+    <iconPath>UI/Icons/ThingCategories/VV_ArcanePlant</iconPath>
   </ThingCategoryDef>
 </Defs>

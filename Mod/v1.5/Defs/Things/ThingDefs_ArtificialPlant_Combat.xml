@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
   <!-- 콩뿌리개 -->
-  <ThingDef ParentName="VV_ArtificialPlantCombat">
+  <ThingDef ParentName="VV_ArcanePlantCombat">
     <defName>VV_Peashooter</defName>
     <label>peashooter</label>
     <description>.</description>
@@ -45,7 +45,7 @@
     </placeWorkers>
 
     <modExtensions>
-      <li Class="VVRace.ArtificialPlantModExtension">
+      <li Class="VVRace.ArcanePlantExtension">
         <germinateWeight>125</germinateWeight>
 
         <energyCapacity>450</energyCapacity>
@@ -113,7 +113,7 @@
 
   
   <!-- 폭탄뿌리개 -->
-  <ThingDef ParentName="VV_ArtificialPlantCombat">
+  <ThingDef ParentName="VV_ArcanePlantCombat">
     <defName>VV_Pealaucnher</defName>
     <label>pealauncher</label>
     <description>.</description>
@@ -157,7 +157,7 @@
     </placeWorkers>
 
     <modExtensions>
-      <li Class="VVRace.ArtificialPlantModExtension">
+      <li Class="VVRace.ArcanePlantExtension">
         <germinateWeight>125</germinateWeight>
         <germinateRare>true</germinateRare>
 
@@ -230,7 +230,7 @@
 
 
   <!-- 건인장 -->
-  <ThingDef ParentName="VV_ArtificialPlantCombat">
+  <ThingDef ParentName="VV_ArcanePlantCombat">
     <defName>VV_Shootus</defName>
     <label>Shootus</label>
     <description>.</description>
@@ -316,7 +316,7 @@
     </placeWorkers>
 
     <modExtensions>
-      <li Class="VVRace.ArtificialPlantModExtension">
+      <li Class="VVRace.ArcanePlantExtension">
         <germinateWeight>125</germinateWeight>
         <germinateRare>true</germinateRare>
 

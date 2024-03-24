@@ -4,7 +4,7 @@ using Verse;
 
 namespace VVRace
 {
-    public class SymbolResolver_ArtificialPlant : SymbolResolver
+    public class SymbolResolver_ArcanePlant : SymbolResolver
     {
         public override bool CanResolve(ResolveParams resolveParams)
         {
@@ -32,9 +32,9 @@ namespace VVRace
                 thing.SetFaction(resolveParams.faction);
             }
 
-            if (thing is ArtificialPlant plant)
+            if (thing is ArcanePlant plant)
             {
-                plant.AddEnergy(plant.ArtificialPlantModExtension.energyCapacity);
+                plant.AddEnergy(plant.ArcanePlantModExtension.energyCapacity);
             }
 
             GenSpawn.Spawn(

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
   <ThingDef ParentName="MinifiedThing">
-    <defName>MinifiedArtificialPlant</defName>
+    <defName>MinifiedArcanePlant</defName>
     <label>minified artificial plant</label>
-    <thingClass>VVRace.MinifiedArtificialPlant</thingClass>
+    <thingClass>VVRace.MinifiedArcanePlant</thingClass>
     
     <statBases>
       <Mass>3</Mass>
@@ -11,9 +11,9 @@
     </statBases>
   </ThingDef>
 
-  <ThingDef Abstract="True" Name="VV_ArtificialPlantBase">
+  <ThingDef Abstract="True" Name="VV_ArcanePlantBase">
     <category>Building</category>
-    <thingClass>VVRace.ArtificialPlant</thingClass>
+    <thingClass>VVRace.ArcanePlant</thingClass>
     <tickerType>Rare</tickerType>
     <selectable>true</selectable>
     <neverMultiSelect>true</neverMultiSelect>
@@ -29,7 +29,7 @@
     <soundInteract>Metal_Drop</soundInteract>
     <soundDrop>Metal_Drop</soundDrop>
 
-    <minifiedDef>MinifiedArtificialPlant</minifiedDef>
+    <minifiedDef>MinifiedArcanePlant</minifiedDef>
     <pathCostIgnoreRepeat>false</pathCostIgnoreRepeat>
 
     <useHitPoints>true</useHitPoints>
@@ -94,11 +94,11 @@
     <hasCustomRectForSelector>true</hasCustomRectForSelector>
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
     <thingCategories>
-      <li>VV_ArtificialPlant</li>
+      <li>VV_ArcanePlant</li>
     </thingCategories>
 
     <placeWorkers>
-      <li>VVRace.PlaceWorker_AllowArtificialPlantPot</li>
+      <li>VVRace.PlaceWorker_AllowArcanePlantPot</li>
     </placeWorkers>
 
     <building>
@@ -118,22 +118,22 @@
     </building>
     
     <tradeTags>
-      <li>VV_ArtificialPlant</li>
+      <li>VV_ArcanePlant</li>
     </tradeTags>
     <tradeability>All</tradeability>
   </ThingDef>
 
-  <ThingDef Abstract="True" Name="VV_ArtificialPlantProductive" ParentName="VV_ArtificialPlantBase">
+  <ThingDef Abstract="True" Name="VV_ArcanePlantProductive" ParentName="VV_ArcanePlantBase">
     <building>
       <uninstallWork>250</uninstallWork>
     </building>
     
     <tradeTags>
-      <li>VV_ArtificialPlantProductive</li>
+      <li>VV_ArcanePlantProductive</li>
     </tradeTags>
   </ThingDef>
 
-  <ThingDef Abstract="True" Name="VV_ArtificialPlantCombat" ParentName="VV_ArtificialPlantBase">
+  <ThingDef Abstract="True" Name="VV_ArcanePlantCombat" ParentName="VV_ArcanePlantBase">
     <statBases>
       <Mass>9</Mass>
     </statBases>
@@ -143,7 +143,7 @@
     </building>
     
     <tradeTags>
-      <li>VV_ArtificialPlantCombat</li>
+      <li>VV_ArcanePlantCombat</li>
     </tradeTags>
   </ThingDef>
 

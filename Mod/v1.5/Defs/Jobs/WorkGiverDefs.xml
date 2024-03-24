@@ -49,9 +49,9 @@
   </WorkGiverDef>
   
   <WorkGiverDef>
-    <defName>VV_FertilizeArtificialPlant</defName>
+    <defName>VV_FertilizeArcanePlant</defName>
     <label>fertilize ancient plant</label>
-    <giverClass>VVRace.WorkGiver_FertilizeArtificialPlant</giverClass>
+    <giverClass>VVRace.WorkGiver_FertilizeArcanePlant</giverClass>
     <workType>Hauling</workType>
     <verb>fertilize</verb>
     <gerund>fertilizing</gerund>
