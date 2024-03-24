@@ -225,6 +225,6 @@ namespace VVRace
     [DefOf]
     public static class VVMapMeshFlagDefOf
     {
-        public static MapMeshFlagDef VV_EnergyFluxGrid;
+        public static MapMeshFlagDef VV_ManaFluxGrid;
     }
 }

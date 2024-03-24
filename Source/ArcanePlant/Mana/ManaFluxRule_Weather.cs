@@ -3,18 +3,18 @@ using Verse;
 
 namespace VVRace
 {
-    public class EnergyRule_Weather : EnergyRule
+    public class ManaFluxRule_Weather : ManaFluxRule
     {
         public HashSet<WeatherDef> weatherDefs;
-        public float energy;
+        public float mana;
 
-        public override IntRange ApproximateEnergy => new IntRange(0, (int)energy);
+        public override IntRange ApproximateManaFlux => new IntRange(0, (int)mana);
 
-        public override float CalcEnergy(ArcanePlant plant, int ticks)
+        public override float CalcManaFlux(ArcanePlant plant, int ticks)
         {
             if (weatherDefs != null && weatherDefs.Contains(plant.Map.weatherManager.curWeather))
             {
-                return energy / 60000f * ticks;
+                return mana / 60000f * ticks;
             }
 
             return 0f;

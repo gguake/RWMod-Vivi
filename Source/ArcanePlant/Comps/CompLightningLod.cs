@@ -4,8 +4,8 @@ namespace VVRace
 {
     public class CompProperties_LightningLod : CompProperties
     {
-        public IntRange energyConditionRange;
-        public int energyGain;
+        public IntRange manaConditionRange;
+        public int manaGain;
 
         public CompProperties_LightningLod()
         {
@@ -20,14 +20,14 @@ namespace VVRace
         public bool Active => parent is ArcanePlant plant &&
             plant.Spawned &&
             !plant.Position.Roofed(plant.Map) &&
-            plant.Energy >= Props.energyConditionRange.min && 
-            plant.Energy < Props.energyConditionRange.max;
+            plant.Mana >= Props.manaConditionRange.min && 
+            plant.Mana < Props.manaConditionRange.max;
 
         public void OnLightningStrike()
         {
             if (parent is ArcanePlant plant)
             {
-                plant.AddEnergy(Props.energyGain);
+                plant.AddMana(Props.manaGain);
             }
         }
     }

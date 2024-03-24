@@ -8,9 +8,9 @@ using Verse;
 namespace VVRace
 {
     [StaticConstructorOnStartup]
-    public class ArcanePlant : EnergyAcceptor
+    public class ArcanePlant : ManaAcceptor
     {
-        public const float EnergyByFertilizer = 10f;
+        public const float ManaByFertilizer = 20f;
 
         private static List<ThingDef> _allArcanePlantDefs;
         public static List<ThingDef> AllArcanePlantDefs
@@ -40,15 +40,15 @@ namespace VVRace
             }
         }
 
-        public override EnergyFluxNetwork EnergyFluxNetwork { get; set; }
-        public override EnergyFluxNetworkNode EnergyFluxNode => _energyNode;
-        private EnergyFluxNetworkNode _energyNode;
+        public override ManaFluxNetwork ManaFluxNetwork { get; set; }
+        public override ManaFluxNetworkNode ManaFluxNode => _manaFluxNode;
+        private ManaFluxNetworkNode _manaFluxNode;
 
-        public bool IsFullEnergy => _energyNode.energy >= ArcanePlantModExtension.energyCapacity;
-        public float EnergyChargeRatio => _energyNode.energy / ArcanePlantModExtension.energyCapacity;
-        public float Energy => _energyNode.energy;
+        public bool IsFullMana => _manaFluxNode.mana >= ArcanePlantModExtension.manaCapacity;
+        public float ManaChargeRatio => _manaFluxNode.mana / ArcanePlantModExtension.manaCapacity;
+        public float Mana => _manaFluxNode.mana;
 
-        private int _zeroEnergyTicks = 0;
+        private int _zeroManaTicks = 0;
 
         private bool _fertilizeAutoActivated = true;
         public bool FertilizeAutoActivated => _fertilizeAutoActivated;
@@ -56,7 +56,7 @@ namespace VVRace
         private int _fertilizeAutoThreshold = 0;
         public int FertilizeAutoThreshold
         {
-            get => (int)Mathf.Clamp(_fertilizeAutoThreshold, 0, ArcanePlantModExtension.energyCapacity - EnergyByFertilizer);
+            get => (int)Mathf.Clamp(_fertilizeAutoThreshold, 0, ArcanePlantModExtension.manaCapacity - ManaByFertilizer);
             set => _fertilizeAutoThreshold = value;
         }
 
@@ -64,11 +64,11 @@ namespace VVRace
         {
             get
             {
-                return Mathf.CeilToInt((ArcanePlantModExtension.energyCapacity - _energyNode.energy) / EnergyByFertilizer);
+                return Mathf.CeilToInt((ArcanePlantModExtension.manaCapacity - _manaFluxNode.mana) / ManaByFertilizer);
             }
         }
 
-        public bool ShouldAutoFertilizeNowIgnoringEnergyPct
+        public bool ShouldAutoFertilizeNowIgnoringManaPct
         {
             get
             {
@@ -80,9 +80,9 @@ namespace VVRace
 
         public ArcanePlant()
         {
-            _energyNode = new EnergyFluxNetworkNode()
+            _manaFluxNode = new ManaFluxNetworkNode()
             {
-                energyAcceptor = this
+                manaAcceptor = this
             };
         }
 
@@ -90,14 +90,14 @@ namespace VVRace
         {
             base.ExposeData();
 
-            Scribe_Deep.Look(ref _energyNode, "energyNode");
-            Scribe_Values.Look(ref _zeroEnergyTicks, "zeroEnergyTicks");
+            Scribe_Deep.Look(ref _manaFluxNode, "manaFluxNode");
+            Scribe_Values.Look(ref _zeroManaTicks, "zeroManaTicks");
             Scribe_Values.Look(ref _fertilizeAutoActivated, "fertilizeAutoActivated", defaultValue: true);
             Scribe_Values.Look(ref _fertilizeAutoThreshold, "fertilizeAutoThreshold", defaultValue: 0);
 
             if (Scribe.mode == LoadSaveMode.LoadingVars)
             {
-                _energyNode.energyAcceptor = this;
+                _manaFluxNode.manaAcceptor = this;
             }
         }
 
@@ -105,7 +105,8 @@ namespace VVRace
         {
             base.PostMake();
 
-            _energyNode.energy = ArcanePlantModExtension.energyCapacity * ArcanePlantModExtension.initialEnergyPercent;
+            _manaFluxNode.mana = ArcanePlantModExtension.manaCapacity * ArcanePlantModExtension.initialManaPercent;
+            FertilizeAutoThreshold = Mathf.FloorToInt(ArcanePlantModExtension.manaCapacity * 0.1f);
         }
 
         public override void Print(SectionLayer layer)
@@ -171,20 +172,20 @@ namespace VVRace
         {
             if (!Spawned) { return; }
 
-            foreach (var thing in AdjacentEnergyTransmitter)
+            foreach (var thing in AdjacentManaTransmitter)
             {
-                PrintEnergyWirePieceConnecting(layer, thing, false);
+                PrintManaFluxWirePieceConnecting(layer, thing, false);
                 return;
             }
         }
 
-        public override void PrintForEnergyGrid(SectionLayer layer)
+        public override void PrintForManaFluxGrid(SectionLayer layer)
         {
             PrintOverlayConnectorBaseFor(layer);
 
-            foreach (var thing in AdjacentEnergyAcceptor)
+            foreach (var thing in AdjacentManaAcceptor)
             {
-                PrintEnergyWirePieceConnecting(layer, thing, true);
+                PrintManaFluxWirePieceConnecting(layer, thing, true);
             }
         }
 
@@ -196,21 +197,21 @@ namespace VVRace
                 sb.Append("\n");
             }
 
-            sb.Append(LocalizeTexts.InspectorPlantEnergy.Translate((int)_energyNode.energy, ArcanePlantModExtension.energyCapacity));
+            sb.Append(LocalizeTexts.InspectorPlantMana.Translate((int)_manaFluxNode.mana, ArcanePlantModExtension.manaCapacity));
 
             if (Spawned)
             {
-                var energyFlux = _energyNode.LocalEnergyFluxForInspector;
-                if (energyFlux != 0)
+                var manaFlux = _manaFluxNode.LocalManaFluxForInspector;
+                if (manaFlux != 0)
                 {
                     sb.Append(" ");
-                    sb.Append(LocalizeTexts.InspectorPlantEnergyFlux.Translate(energyFlux.ToString("+0;-#")));
+                    sb.Append(LocalizeTexts.InspectorPlantManaFlux.Translate(manaFlux.ToString("+0;-#")));
                 }
 
-                if (DebugSettings.godMode && EnergyFluxNetwork != null)
+                if (DebugSettings.godMode && ManaFluxNetwork != null)
                 {
                     sb.AppendLine();
-                    sb.Append($"flux network: {EnergyFluxNetwork.NetworkHash}");
+                    sb.Append($"flux network: {ManaFluxNetwork.NetworkHash}");
                 }
             }
 
@@ -269,26 +270,26 @@ namespace VVRace
 
             if (DebugSettings.godMode)
             {
-                Command_Action command_replaceInstantly = new Command_Action();
-                command_replaceInstantly.defaultLabel = "DEV: Add energy +10";
-                command_replaceInstantly.action = () =>
+                Command_Action commandAddMana = new Command_Action();
+                commandAddMana.defaultLabel = "DEV: Add mana +10";
+                commandAddMana.action = () =>
                 {
-                    _energyNode.energy = Mathf.Clamp(_energyNode.energy + 10, 0f, ArcanePlantModExtension.energyCapacity);
+                    _manaFluxNode.mana = Mathf.Clamp(_manaFluxNode.mana + 10, 0f, ArcanePlantModExtension.manaCapacity);
                 };
 
-                yield return command_replaceInstantly;
+                yield return commandAddMana;
             }
 
             if (DebugSettings.godMode)
             {
-                Command_Action command_replaceInstantly = new Command_Action();
-                command_replaceInstantly.defaultLabel = "DEV: Add energy -10";
-                command_replaceInstantly.action = () =>
+                Command_Action commandSubtractMana = new Command_Action();
+                commandSubtractMana.defaultLabel = "DEV: Add mana -10";
+                commandSubtractMana.action = () =>
                 {
-                    _energyNode.energy = Mathf.Clamp(_energyNode.energy - 10, 0f, ArcanePlantModExtension.energyCapacity);
+                    _manaFluxNode.mana = Mathf.Clamp(_manaFluxNode.mana - 10, 0f, ArcanePlantModExtension.manaCapacity);
                 };
 
-                yield return command_replaceInstantly;
+                yield return commandSubtractMana;
             }
         }
 
@@ -301,24 +302,24 @@ namespace VVRace
                 return;
             }
 
-            if (Spawned && EnergyFluxNetwork != null && (Find.TickManager.TicksGame + EnergyFluxNetwork.NetworkHash) % 60 == 0)
+            if (Spawned && ManaFluxNetwork != null && (Find.TickManager.TicksGame + ManaFluxNetwork.NetworkHash) % 60 == 0)
             {
-                EnergyFluxNetwork.Tick();
+                ManaFluxNetwork.Tick();
             }
 
             if (Spawned && this.IsHashIntervalTick(GenTicks.TickRareInterval))
             {
-                if ((int)Energy == 0)
+                if ((int)Mana == 0)
                 {
-                    _zeroEnergyTicks += GenTicks.TickRareInterval;
+                    _zeroManaTicks += GenTicks.TickRareInterval;
 
-                    if (_zeroEnergyTicks >= ArcanePlantModExtension.zeroEnergyDurableTicks)
+                    if (_zeroManaTicks >= ArcanePlantModExtension.zeroManaDurableTicks)
                     {
-                        _zeroEnergyTicks = 0;
-                        TakeDamage(new DamageInfo(DamageDefOf.Rotting, ArcanePlantModExtension.zeroEnergyDamageByChance.RandomInRange));
+                        _zeroManaTicks = 0;
+                        TakeDamage(new DamageInfo(DamageDefOf.Rotting, ArcanePlantModExtension.zeroManaDamageByChance.RandomInRange));
                     }
                 }
-                else if (EnergyChargeRatio > 0.1f)
+                else if (ManaChargeRatio > 0.1f)
                 {
                     HitPoints = Mathf.Clamp(HitPoints + 1, 0, MaxHitPoints);
                 }
@@ -340,9 +341,9 @@ namespace VVRace
                 return;
             }
 
-            if (Spawned && EnergyFluxNetwork != null)
+            if (Spawned && ManaFluxNetwork != null)
             {
-                EnergyFluxNetwork.Tick();
+                ManaFluxNetwork.Tick();
             }
 
             if (Spawned)
@@ -353,17 +354,17 @@ namespace VVRace
                     return;
                 }
 
-                if ((int)Energy == 0)
+                if ((int)Mana == 0)
                 {
-                    _zeroEnergyTicks += GenTicks.TickRareInterval;
+                    _zeroManaTicks += GenTicks.TickRareInterval;
 
-                    if (_zeroEnergyTicks >= ArcanePlantModExtension.zeroEnergyDurableTicks)
+                    if (_zeroManaTicks >= ArcanePlantModExtension.zeroManaDurableTicks)
                     {
-                        _zeroEnergyTicks = 0;
-                        TakeDamage(new DamageInfo(DamageDefOf.Rotting, ArcanePlantModExtension.zeroEnergyDamageByChance.RandomInRange));
+                        _zeroManaTicks = 0;
+                        TakeDamage(new DamageInfo(DamageDefOf.Rotting, ArcanePlantModExtension.zeroManaDamageByChance.RandomInRange));
                     }
                 }
-                else if (EnergyChargeRatio > 0.1f && HitPoints < MaxHitPoints)
+                else if (ManaChargeRatio > 0.1f && HitPoints < MaxHitPoints)
                 {
                     HitPoints = Mathf.Clamp(HitPoints + 1, 0, MaxHitPoints);
                 }
@@ -379,9 +380,9 @@ namespace VVRace
                 return;
             }
 
-            if (Spawned && EnergyFluxNetwork != null)
+            if (Spawned && ManaFluxNetwork != null)
             {
-                EnergyFluxNetwork.Tick();
+                ManaFluxNetwork.Tick();
             }
 
             if (Spawned)
@@ -398,18 +399,18 @@ namespace VVRace
         {
             yield return new StatDrawEntry(
                 StatCategoryDefOf.Basics,
-                LocalizeTexts.StatsReport_Energy.Translate(),
-                ArcanePlantModExtension.energyCapacity.ToString(),
-                LocalizeTexts.StatsReport_Energy_Desc.Translate(),
+                LocalizeTexts.StatsReport_Mana.Translate(),
+                ArcanePlantModExtension.manaCapacity.ToString(),
+                LocalizeTexts.StatsReport_Mana_Desc.Translate(),
                 -20000);
 
             if (Spawned)
             {
                 yield return new StatDrawEntry(
                     StatCategoryDefOf.Basics,
-                    LocalizeTexts.StatsReport_EnergyFlux.Translate(),
-                    _energyNode.LocalEnergyFluxForInspector.ToString("+0;-#"),
-                    LocalizeTexts.StatsReport_EnergyFlux_Desc.Translate(),
+                    LocalizeTexts.StatsReport_ManaFlux.Translate(),
+                    _manaFluxNode.LocalManaFluxForInspector.ToString("+0;-#"),
+                    LocalizeTexts.StatsReport_ManaFlux_Desc.Translate(),
                     -20001);
             }
         }
@@ -424,17 +425,17 @@ namespace VVRace
             return Faction == faction;
         }
 
-        public void AddEnergy(float energy)
+        public void AddMana(float mana)
         {
-            _energyNode.energy = Mathf.Clamp(_energyNode.energy + energy, 0f, ArcanePlantModExtension.energyCapacity);
+            _manaFluxNode.mana = Mathf.Clamp(_manaFluxNode.mana + mana, 0f, ArcanePlantModExtension.manaCapacity);
         }
 
         public void Notify_TurretVerbShot()
         {
-            var energy = ArcanePlantModExtension.verbShootEnergy;
-            if (energy > 0)
+            var manaPerShoot = ArcanePlantModExtension.consumeManaPerVerbShoot;
+            if (manaPerShoot > 0)
             {
-                AddEnergy(-energy);
+                AddMana(-manaPerShoot);
             }
         }
 
@@ -446,14 +447,14 @@ namespace VVRace
             GenPlace.TryPlaceThing(minified, position, map, ThingPlaceMode.Direct);
         }
 
-        private IEnumerable<EnergyAcceptor> AdjacentEnergyAcceptor
+        private IEnumerable<ManaAcceptor> AdjacentManaAcceptor
         {
             get
             {
                 foreach (var adjacent in GenAdjFast.AdjacentCellsCardinal(Position))
                 {
 
-                    var gridCell = EnergyFluxGrid[adjacent];
+                    var gridCell = ManaFluxGrid[adjacent];
                     if (gridCell.arcanePlant != null)
                     {
                         yield return gridCell.arcanePlant;
@@ -466,11 +467,11 @@ namespace VVRace
             }
         }
 
-        private IEnumerable<EnergyAcceptor> AdjacentEnergyTransmitter
+        private IEnumerable<ManaAcceptor> AdjacentManaTransmitter
         {
             get
             {
-                var gridCell = EnergyFluxGrid[Position];
+                var gridCell = ManaFluxGrid[Position];
                 if (gridCell.transmitter != null)
                 {
                     yield return gridCell.transmitter;
@@ -478,7 +479,7 @@ namespace VVRace
 
                 foreach (var adjacent in GenAdjFast.AdjacentCellsCardinal(Position))
                 {
-                    gridCell = EnergyFluxGrid[adjacent];
+                    gridCell = ManaFluxGrid[adjacent];
                     if (gridCell.transmitter != null)
                     {
                         yield return gridCell.transmitter;

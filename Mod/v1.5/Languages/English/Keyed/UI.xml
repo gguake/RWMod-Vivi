@@ -6,7 +6,7 @@
 
   <VV_GizmoViviEggProgressHeader>Egg progress</VV_GizmoViviEggProgressHeader>
   <VV_GizmoViviEggProgressTooltip>Indicates how much time is left until the next egg is laid.\n\nIf the progress is at 100% and there is a suitable Vivi hatchery for laying, it will go there to lay an egg.</VV_GizmoViviEggProgressTooltip>
-  <VV_GizmoSetFertilizeAutoThreshold>Set minimum energy level to {0}</VV_GizmoSetFertilizeAutoThreshold>
+  <VV_GizmoSetFertilizeAutoThreshold>Set minimum mana level to {0}</VV_GizmoSetFertilizeAutoThreshold>
 
   <VV_InspectorViviHatcheryDisabled>Hatchery disabled</VV_InspectorViviHatcheryDisabled>
   <VV_InspectorViviHatcheryDisabledReasonNoRoof>No roof</VV_InspectorViviHatcheryDisabledReasonNoRoof>
@@ -14,8 +14,8 @@
 
   <VV_InspectorProperTemperature>Proper temperature: {0} ~ {1}</VV_InspectorProperTemperature>
   <VV_InspectorViviWallReplaceCooldown>Time remaining until hardening: {0}</VV_InspectorViviWallReplaceCooldown>
-  <VV_InspectorPlantEnergy>Energy: {0}/{1}</VV_InspectorPlantEnergy>
-  <VV_InspectorPlantEnergyFlux>({0}/day)</VV_InspectorPlantEnergyFlux>
+  <VV_InspectorPlantMana>Mana: {0}/{1}</VV_InspectorPlantMana>
+  <VV_InspectorPlantManaFlux>({0}/day)</VV_InspectorPlantManaFlux>
 
   <VV_InspectorViviGerminatorReserved>Seed germinating reserved</VV_InspectorViviGerminatorReserved>
   <VV_InspectorViviGerminatorCompletePeriods>Time remaining until complete: {0}</VV_InspectorViviGerminatorCompletePeriods>
@@ -28,9 +28,9 @@
   <VV_InspectorViviShootusWeaponEquipped>Equipped: {0}</VV_InspectorViviShootusWeaponEquipped>
 
   <VV_CommandFertilizeAutoActivated>Auto-use fertilizer</VV_CommandFertilizeAutoActivated>
-  <VV_CommandFertilizeAutoActivatedDesc>When the plant's energy is below a certain level, the colonists set whether to automatically use fertilizer.</VV_CommandFertilizeAutoActivatedDesc>
-  <VV_CommandSetFertilizeAutoThreshold>Set energy threshold</VV_CommandSetFertilizeAutoThreshold>
-  <VV_CommandSetFertilizeAutoThresholdDesc>Set the threshold energy to determine whether to use fertilizer. If the energy is below the threshold, the colonists use fertilizer to the maximum.</VV_CommandSetFertilizeAutoThresholdDesc>
+  <VV_CommandFertilizeAutoActivatedDesc>When the plant's mana is below a certain level, the colonists set whether to automatically use fertilizer.</VV_CommandFertilizeAutoActivatedDesc>
+  <VV_CommandSetFertilizeAutoThreshold>Set mana threshold</VV_CommandSetFertilizeAutoThreshold>
+  <VV_CommandSetFertilizeAutoThresholdDesc>Set the threshold mana to determine whether to use fertilizer. If the mana is below the threshold, the colonists use fertilizer to the maximum.</VV_CommandSetFertilizeAutoThresholdDesc>
   <VV_CommandRegisterGerminateSchedule>Germinate seeds</VV_CommandRegisterGerminateSchedule>
   <VV_CommandRegisterGerminateScheduleDesc>Enter the manage schedule for germinating seeds and start germinating.</VV_CommandRegisterGerminateScheduleDesc>
   <VV_CommandCancelGerminateSchedule>Cancel germinating</VV_CommandCancelGerminateSchedule>
@@ -49,12 +49,12 @@
   <VV_JobFailReasonNotVivi>not vivi</VV_JobFailReasonNotVivi>
   <VV_JobFailReasonViviStarving>vivi starving</VV_JobFailReasonViviStarving>
 
-  <VV_StatsReport_Energy>storable energy</VV_StatsReport_Energy>
-  <VV_StatsReport_Energy_Desc>This is the maximum amount of energy that plants can store.</VV_StatsReport_Energy_Desc>
-  <VV_StatsReport_EnergyFlux>energy changes</VV_StatsReport_EnergyFlux>
-  <VV_StatsReport_EnergyFlux_Desc>This is the amount of energy change of this plant over the course of a day.
-  \nEnergy can be produced by certain ancient plants when fertilizer is applied or the right environment is in place, and is not consumed when packaged.
-  \nAncient plants whose energy production exceeds their reserves provide excess energy to other ancient plants in the immediate vicinity.</VV_StatsReport_EnergyFlux_Desc>
+  <VV_StatsReport_Mana>storable mana</VV_StatsReport_Mana>
+  <VV_StatsReport_Mana_Desc>This is the maximum amount of mana that plants can store.</VV_StatsReport_Mana_Desc>
+  <VV_StatsReport_ManaFlux>mana changes</VV_StatsReport_ManaFlux>
+  <VV_StatsReport_ManaFlux_Desc>This is the amount of mana change of this plant over the course of a day.
+  \Mana can be produced by certain ancient plants when fertilizer is applied or the right environment is in place, and is not consumed when packaged.
+  \nAncient plants whose mana production exceeds their reserves provide excess mana to other ancient plants in the immediate vicinity.</VV_StatsReport_ManaFlux_Desc>
 
   <VV_MessageGerminateSeedlingSuccess>seed germinating succeeded. ({0} x{1})</VV_MessageGerminateSeedlingSuccess>
   <VV_MessageGerminateSeedlingFailed>seed germinating failed.</VV_MessageGerminateSeedlingFailed>

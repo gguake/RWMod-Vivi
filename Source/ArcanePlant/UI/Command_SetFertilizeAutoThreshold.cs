@@ -28,7 +28,7 @@ namespace VVRace
             var dialog_Slider = new Dialog_Slider(
                 (x) => LocalizeTexts.GizmoSetFertilizeAutoThreshold.Translate(x), 
                 0, 
-                plants.Min(v => v.ArcanePlantModExtension.energyCapacity), 
+                plants.Min(v => v.ArcanePlantModExtension.manaCapacity), 
                 (value) => {
                     for (int i = 0; i < plants.Count; ++i)
                     {

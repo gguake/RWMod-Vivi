@@ -96,14 +96,14 @@ namespace VVRace
 
         public void Tick(int ticks = 1)
         {
-            bool hasEnergy = false;
+            bool hasMana = false;
             var plant = parent as ArcanePlant;
             if (plant != null)
             {
-                hasEnergy = plant.EnergyChargeRatio > 0f;
+                hasMana = plant.ManaChargeRatio > 0f;
             }
 
-            if (hasEnergy)
+            if (hasMana)
             {
                 if (_remainedCooldown > 0)
                 {

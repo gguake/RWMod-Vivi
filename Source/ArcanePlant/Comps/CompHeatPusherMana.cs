@@ -2,7 +2,7 @@
 
 namespace VVRace
 {
-    public class CompHeatPusherFloraEnergy : CompHeatPusher
+    public class CompHeatPusherMana : CompHeatPusher
     {
         private ArcanePlant _cached;
         public ArcanePlant ArcanePlant
@@ -24,7 +24,7 @@ namespace VVRace
             {
                 if (!base.ShouldPushHeatNow) { return false; }
 
-                return ArcanePlant != null && ArcanePlant.EnergyChargeRatio > 0f;
+                return ArcanePlant != null && ArcanePlant.ManaChargeRatio > 0f;
             }
         }
     }

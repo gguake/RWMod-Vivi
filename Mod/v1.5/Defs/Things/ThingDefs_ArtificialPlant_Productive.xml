@@ -37,7 +37,7 @@
       </li>
 
       <li Class="CompProperties_HeatPusher">
-        <compClass>VVRace.CompHeatPusherFloraEnergy</compClass>
+        <compClass>VVRace.CompHeatPusherMana</compClass>
         <heatPerSecond>24</heatPerSecond>
         <heatPushMaxTemperature>29</heatPushMaxTemperature>
       </li>
@@ -47,16 +47,16 @@
       <li Class="VVRace.ArcanePlantExtension">
         <germinateWeight>100</germinateWeight>
         
-        <energyCapacity>150</energyCapacity>
-        <zeroEnergyDamageByChance>1~3</zeroEnergyDamageByChance>
+        <manaCapacity>150</manaCapacity>
+        <zeroManaDamageByChance>1~3</zeroManaDamageByChance>
 
-        <energyConsumeRule Class="VVRace.EnergyRule_Constant">
-          <energy>10</energy>
-        </energyConsumeRule>
-        <energyGenerateRule Class="VVRace.EnergyRule_Temperature">
+        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
+          <mana>10</mana>
+        </manaConsumeRule>
+        <manaGenerateRule Class="VVRace.ManaFluxRule_Temperature">
           <activeTemperatureRange>32~120</activeTemperatureRange>
-          <energyByTemperatureRange>30~100</energyByTemperatureRange>
-        </energyGenerateRule>
+          <manaFromTemperatureRange>30~100</manaFromTemperatureRange>
+        </manaGenerateRule>
       </li>
     </modExtensions>
   </ThingDef>
@@ -98,7 +98,7 @@
       </li>
 
       <li Class="CompProperties_HeatPusher">
-        <compClass>VVRace.CompHeatPusherFloraEnergy</compClass>
+        <compClass>VVRace.CompHeatPusherMana</compClass>
         <heatPerSecond>-18</heatPerSecond>
         <heatPushMinTemperature>-9</heatPushMinTemperature>
       </li>
@@ -108,17 +108,17 @@
       <li Class="VVRace.ArcanePlantExtension">
         <germinateWeight>100</germinateWeight>
 
-        <energyCapacity>150</energyCapacity>
-        <zeroEnergyDamageByChance>1~3</zeroEnergyDamageByChance>
+        <manaCapacity>150</manaCapacity>
+        <zeroManaDamageByChance>1~3</zeroManaDamageByChance>
 
-        <energyConsumeRule Class="VVRace.EnergyRule_Constant">
-          <energy>10</energy>
-        </energyConsumeRule>
-        <energyGenerateRule Class="VVRace.EnergyRule_Temperature">
+        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
+          <mana>10</mana>
+        </manaConsumeRule>
+        <manaGenerateRule Class="VVRace.ManaFluxRule_Temperature">
           <activeTemperatureRange>-100~-12</activeTemperatureRange>
-          <energyByTemperatureRange>30~100</energyByTemperatureRange>
-          <energyLerpReversed>true</energyLerpReversed>
-        </energyGenerateRule>
+          <manaFromTemperatureRange>30~100</manaFromTemperatureRange>
+          <manaLerpReversed>true</manaLerpReversed>
+        </manaGenerateRule>
       </li>
     </modExtensions>
   </ThingDef>
@@ -161,15 +161,15 @@
         <glowColor>(213,110,248,0)</glowColor>
       </li>
       <li Class="CompProperties_Battery">
-        <storedEnergyMax>400</storedEnergyMax>
+        <storedEnergyMax>500</storedEnergyMax>
         <efficiency>0.5</efficiency>
         <shortCircuitInRain>false</shortCircuitInRain>
         <transmitsPower>true</transmitsPower>
       </li>
 
       <li Class="VVRace.CompProperties_SensorExplosive">
-        <requiredEnergyAmount>125</requiredEnergyAmount>
-        <useEnergyAmount>100</useEnergyAmount>
+        <requiredManaAmount>125</requiredManaAmount>
+        <useManaAmount>100</useManaAmount>
         
         <sensorRadius>6.9</sensorRadius>
         <sensorWorkerClass>VVRace.SensorWorker_Mechanoid</sensorWorkerClass>
@@ -189,15 +189,15 @@
         <germinateWeight>100</germinateWeight>
         <germinateRare>true</germinateRare>
 
-        <energyCapacity>350</energyCapacity>
-        <zeroEnergyDamageByChance>1~3</zeroEnergyDamageByChance>
+        <manaCapacity>350</manaCapacity>
+        <zeroManaDamageByChance>1~3</zeroManaDamageByChance>
 
-        <energyConsumeRule Class="VVRace.EnergyRule_Constant">
-          <energy>20</energy>
-        </energyConsumeRule>
-        <energyGenerateRule Class="VVRace.EnergyRule_BatteryStored">
-          <energyByBatteryStored>0~40</energyByBatteryStored>
-        </energyGenerateRule>
+        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
+          <mana>20</mana>
+        </manaConsumeRule>
+        <manaGenerateRule Class="VVRace.ManaFluxRule_BatteryStored">
+          <manaFromStoredEnergy>0~40</manaFromStoredEnergy>
+        </manaGenerateRule>
       </li>
     </modExtensions>
   </ThingDef>
@@ -239,13 +239,13 @@
         <glowColor>(213,110,248,0)</glowColor>
       </li>
       <li Class="CompProperties_Power">
-        <compClass>VVRace.CompPowerFloraEnergy</compClass>
+        <compClass>VVRace.CompPowerMana</compClass>
         <basePowerConsumption>-500</basePowerConsumption>
         <transmitsPower>true</transmitsPower>
       </li>
       <li Class="VVRace.CompProperties_LightningLod">
-        <energyConditionRange>250~500</energyConditionRange>
-        <energyGain>500</energyGain>
+        <manaConditionRange>250~500</manaConditionRange>
+        <manaGain>500</manaGain>
       </li>
     </comps>
 
@@ -257,12 +257,12 @@
       <li Class="VVRace.ArcanePlantExtension">
         <germinateWeight>100</germinateWeight>
 
-        <energyCapacity>400</energyCapacity>
-        <zeroEnergyDamageByChance>1~1</zeroEnergyDamageByChance>
+        <manaCapacity>400</manaCapacity>
+        <zeroManaDamageByChance>1~1</zeroManaDamageByChance>
 
-        <energyConsumeRule Class="VVRace.EnergyRule_Constant">
-          <energy>100</energy>
-        </energyConsumeRule>
+        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
+          <mana>100</mana>
+        </manaConsumeRule>
       </li>
     </modExtensions>
   </ThingDef>
@@ -301,8 +301,8 @@
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
       <li Class="VVRace.CompProperties_SensorExplosive">
-        <requiredEnergyAmount>50</requiredEnergyAmount>
-        <useEnergyAmount>30</useEnergyAmount>
+        <requiredManaAmount>50</requiredManaAmount>
+        <useManaAmount>30</useManaAmount>
         
         <sensorRadius>6.9</sensorRadius>
         <sensorWorkerClass>VVRace.SensorWorker_Fire</sensorWorkerClass>
@@ -319,17 +319,16 @@
         <germinateWeight>100</germinateWeight>
         <germinateRare>true</germinateRare>
 
-        <energyCapacity>300</energyCapacity>
-        <initialEnergyPercent>1.0</initialEnergyPercent>
-        <zeroEnergyDamageByChance>1~3</zeroEnergyDamageByChance>
+        <manaCapacity>300</manaCapacity>
+        <zeroManaDamageByChance>1~3</zeroManaDamageByChance>
 
-        <energyConsumeRule Class="VVRace.EnergyRule_Constant">
-          <energy>10</energy>
-        </energyConsumeRule>
-        <energyGenerateRule Class="VVRace.EnergyRule_AdjacentWater">
-          <energyByOccupiedWaterCell>60</energyByOccupiedWaterCell>
-          <energyByAdjacentWaterCell>25</energyByAdjacentWaterCell>
-        </energyGenerateRule>
+        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
+          <mana>10</mana>
+        </manaConsumeRule>
+        <manaGenerateRule Class="VVRace.ManaFluxRule_AdjacentWater">
+          <manaFromOccupiedWater>60</manaFromOccupiedWater>
+          <manaPerAdjacentWater>25</manaPerAdjacentWater>
+        </manaGenerateRule>
       </li>
     </modExtensions>
   </ThingDef>
@@ -388,22 +387,22 @@
         <germinateWeight>100</germinateWeight>
         <germinateRare>true</germinateRare>
 
-        <energyCapacity>400</energyCapacity>
-        <zeroEnergyDamageByChance>1~3</zeroEnergyDamageByChance>
+        <manaCapacity>400</manaCapacity>
+        <zeroManaDamageByChance>1~3</zeroManaDamageByChance>
 
-        <energyConsumeRule Class="VVRace.EnergyRule_CompositeSum">
+        <manaConsumeRule Class="VVRace.ManaFluxRule_CompositeSum">
           <rules>
-            <li Class="VVRace.EnergyRule_GlowerActive">
-              <energy>90</energy>
+            <li Class="VVRace.ManaFluxRule_GlowerActive">
+              <mana>90</mana>
             </li>
-            <li Class="VVRace.EnergyRule_Constant">
-              <energy>10</energy>
+            <li Class="VVRace.ManaFluxRule_Constant">
+              <mana>10</mana>
             </li>
           </rules>
-        </energyConsumeRule>
-        <energyGenerateRule Class="VVRace.EnergyRule_Sunlight">
-          <energyFromSunlightRange>0~190</energyFromSunlightRange>
-        </energyGenerateRule>
+        </manaConsumeRule>
+        <manaGenerateRule Class="VVRace.ManaFluxRule_Sunlight">
+          <manaFromSunlightRange>0~190</manaFromSunlightRange>
+        </manaGenerateRule>
       </li>
     </modExtensions>
   </ThingDef>
@@ -465,15 +464,15 @@
         <germinateWeight>100</germinateWeight>
         <germinateRare>true</germinateRare>
 
-        <energyCapacity>600</energyCapacity>
-        <zeroEnergyDamageByChance>1~3</zeroEnergyDamageByChance>
+        <manaCapacity>600</manaCapacity>
+        <zeroManaDamageByChance>1~3</zeroManaDamageByChance>
 
-        <energyConsumeRule Class="VVRace.EnergyRule_Constant">
-          <energy>50</energy>
-        </energyConsumeRule>
-        <energyGenerateRule Class="VVRace.EnergyRule_AdjacentPlant">
-          <energyByAdjacentPlant>45</energyByAdjacentPlant>
-        </energyGenerateRule>
+        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
+          <mana>50</mana>
+        </manaConsumeRule>
+        <manaGenerateRule Class="VVRace.ManaFluxRule_AdjacentPlant">
+          <manaPerAdjacentPlant>45</manaPerAdjacentPlant>
+        </manaGenerateRule>
       </li>
     </modExtensions>
   </ThingDef>
@@ -518,8 +517,8 @@
 
       <li Class="VVRace.CompProperties_BroadshieldProjector">
         <shieldDef>VV_PurifimintShield</shieldDef>
-        <minEnergyForActivate>30</minEnergyForActivate>
-        <energyEfficiency>2.0</energyEfficiency>
+        <requiredMinimumManaForActivate>30</requiredMinimumManaForActivate>
+        <manaEfficiency>2.0</manaEfficiency>
       </li>
     </comps>
     
@@ -527,17 +526,16 @@
       <li Class="VVRace.ArcanePlantExtension">
         <germinateWeight>100</germinateWeight>
 
-        <energyCapacity>300</energyCapacity>
-        <initialEnergyPercent>1.0</initialEnergyPercent>
-        <zeroEnergyDamageByChance>1~1</zeroEnergyDamageByChance>
+        <manaCapacity>300</manaCapacity>
+        <zeroManaDamageByChance>1~1</zeroManaDamageByChance>
 
-        <energyConsumeRule Class="VVRace.EnergyRule_Constant">
-          <energy>10</energy>
-        </energyConsumeRule>
-        <energyGenerateRule Class="VVRace.EnergyRule_AdjacentPollution">
-          <energyByOccupiePolluted>80</energyByOccupiePolluted>
-          <energyByAdjacentPolluted>20</energyByAdjacentPolluted>
-        </energyGenerateRule>
+        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
+          <mana>10</mana>
+        </manaConsumeRule>
+        <manaGenerateRule Class="VVRace.ManaFluxRule_AdjacentPollution">
+          <manaFromOccupiedPollution>80</manaFromOccupiedPollution>
+          <manaPerAdjacentPollution>20</manaPerAdjacentPollution>
+        </manaGenerateRule>
       </li>
     </modExtensions>
   </ThingDef>
@@ -575,7 +573,7 @@
     <label>skyweed</label>
     <description>.</description>
     <descriptionHyperlinks>
-      <ThingDef>VV_PerfumingPetal</ThingDef>
+      <ThingDef>VV_LivingLeaf</ThingDef>
     </descriptionHyperlinks>
 
     <graphicData>
@@ -591,8 +589,10 @@
       <BeautyOutdoors>10</BeautyOutdoors>
     </statBases>
 
+    <resourcesFractionWhenDeconstructed>1</resourcesFractionWhenDeconstructed>
+
     <costList>
-      <VV_PerfumingPetal>20</VV_PerfumingPetal>
+      <VV_LivingLeaf>20</VV_LivingLeaf>
     </costList>
 
     <comps>
@@ -609,14 +609,15 @@
         <germinateWeight>100</germinateWeight>
         <germinateRare>true</germinateRare>
         
-        <energyCapacity>150</energyCapacity>
-        <zeroEnergyDamageByChance>1~3</zeroEnergyDamageByChance>
+        <initialManaPercent>0.5</initialManaPercent>
+        <manaCapacity>150</manaCapacity>
+        <zeroManaDamageByChance>1~3</zeroManaDamageByChance>
 
-        <energyConsumeRule Class="VVRace.EnergyRule_Constant">
-          <energy>20</energy>
-        </energyConsumeRule>
-        <energyGenerateRule Class="VVRace.EnergyRule_Wind">
-          <energyFromWindSpeed>
+        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
+          <mana>20</mana>
+        </manaConsumeRule>
+        <manaGenerateRule Class="VVRace.ManaFluxRule_Wind">
+          <manaFromWindSpeed>
             <points>
               <li>(0,0)</li>
               <li>(0.05,0)</li>
@@ -625,8 +626,8 @@
               <li>(1.5,70)</li>
               <li>(2.0,100)</li>
             </points>
-          </energyFromWindSpeed>
-        </energyGenerateRule>
+          </manaFromWindSpeed>
+        </manaGenerateRule>
       </li>
     </modExtensions>
   </ThingDef>

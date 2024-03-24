@@ -100,7 +100,7 @@
     <description>.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_Richflower</ThingDef>
-      <!--<ThingDef>VV_Toxiclotus</ThingDef>-->
+      <ThingDef>VV_Purifimint</ThingDef>
     </descriptionHyperlinks>
 
     <graphicData>
@@ -120,7 +120,7 @@
     <label>living leaf</label>
     <description>.</description>
     <descriptionHyperlinks>
-      <RecipeDef>VV_MakeLifestrand</RecipeDef>
+      <ThingDef>VV_Skyweed</ThingDef>
       <ThingDef>VV_Peashooter</ThingDef>
       <ThingDef>VV_Pealaucnher</ThingDef>
     </descriptionHyperlinks>

@@ -4,26 +4,26 @@ using Verse;
 
 namespace VVRace
 {
-    public class EnergyRule_AdjacentPlant : EnergyRule
+    public class ManaFluxRule_AdjacentPlant : ManaFluxRule
     {
-        public float energyByAdjacentPlant;
+        public float manaPerAdjacentPlant;
+        
+        public override IntRange ApproximateManaFlux => new IntRange(0, (int)manaPerAdjacentPlant * 4);
 
-        public override IntRange ApproximateEnergy => new IntRange(0, (int)energyByAdjacentPlant * 4);
-
-        public override float CalcEnergy(ArcanePlant plant, int ticks)
+        public override float CalcManaFlux(ArcanePlant plant, int ticks)
         {
-            if (energyByAdjacentPlant != 0f)
+            if (manaPerAdjacentPlant != 0f)
             {
-                float energy = 0f;
+                var mana = 0f;
                 foreach (var cell in GenAdj.CellsAdjacentCardinal(plant).Where(v => v.InBounds(plant.Map)))
                 {
                     if (cell.GetFirstThing<Plant>(plant.Map) != null || cell.GetFirstThing<ArcanePlant>(plant.Map) != null)
                     {
-                        energy += energyByAdjacentPlant;
+                        mana += manaPerAdjacentPlant;
                     }
                 }
 
-                return energy / 60000f * ticks;
+                return mana / 60000f * ticks;
             }
 
             return 0f;

@@ -6,8 +6,8 @@ namespace VVRace
 {
     public class CompProperties_SensorExplosive : CompProperties
     {
-        public int requiredEnergyAmount;
-        public int useEnergyAmount;
+        public int requiredManaAmount;
+        public int useManaAmount;
 
         public float sensorRadius;
         public Type sensorWorkerClass;
@@ -99,7 +99,7 @@ namespace VVRace
         public void Tick(int ticks = 1)
         {
             var plant = parent as ArcanePlant;
-            if (plant == null || plant.EnergyChargeRatio > 0f)
+            if (plant == null || plant.ManaChargeRatio > 0f)
             {
                 if (_remainedCooldown > 0)
                 {
@@ -115,7 +115,7 @@ namespace VVRace
         public bool TryExplosive()
         {
             var plant = parent as ArcanePlant;
-            if (plant != null && plant.Energy < Props.requiredEnergyAmount)
+            if (plant != null && plant.Mana < Props.requiredManaAmount)
             {
                 return false;
             }
@@ -149,7 +149,7 @@ namespace VVRace
                 doVisualEffects: Props.doVisualEffects,
                 propagationSpeed: Props.propagationSpeed);
 
-            plant?.AddEnergy(-Props.useEnergyAmount);
+            plant?.AddMana(-Props.useManaAmount);
 
             _remainedCooldown = Props.explosiveCooldownTicks.RandomInRange;
             return true;

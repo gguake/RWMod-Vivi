@@ -7,8 +7,9 @@ namespace VVRace
     public class CompProperties_BroadshieldProjector : CompProperties
     {
         public ThingDef shieldDef;
-        public int minEnergyForActivate;
-        public float energyEfficiency;
+
+        public int requiredMinimumManaForActivate;
+        public float manaEfficiency;
 
         public CompProperties_BroadshieldProjector()
         {
@@ -58,10 +59,10 @@ namespace VVRace
             }
 
             var plant = parent as ArcanePlant;
-            if (plant == null || plant.Energy < Props.minEnergyForActivate)
+            if (plant == null || plant.Mana < Props.requiredMinimumManaForActivate)
             {
                 commandActivateShield.Disabled = true;
-                commandActivateShield.disabledReason = LocalizeTexts.CommandActivateShieldNotEnoughenrgy.Translate(Props.minEnergyForActivate);
+                commandActivateShield.disabledReason = LocalizeTexts.CommandActivateShieldNotEnoughenrgy.Translate(Props.requiredMinimumManaForActivate);
             }
 
             yield return commandActivateShield;
@@ -101,9 +102,9 @@ namespace VVRace
             if (Shield != null) { return; }
 
             var plant = parent as ArcanePlant;
-            if (plant == null || plant.Energy < Props.minEnergyForActivate) { return; }
+            if (plant == null || plant.Mana < Props.requiredMinimumManaForActivate) { return; }
 
-            var hitPoints = (int)(Props.energyEfficiency * plant.Energy);
+            var hitPoints = (int)(Props.manaEfficiency * plant.Mana);
             if (hitPoints <= 0) { return; }
 
             _shield = GenSpawn.Spawn(Props.shieldDef, parent.Position, parent.Map);
@@ -112,7 +113,7 @@ namespace VVRace
             interceptor.maxHitPointsOverride = hitPoints;
             interceptor.currentHitPoints = hitPoints;
 
-            plant.AddEnergy(-plant.Energy);
+            plant.AddMana(-plant.Mana);
         }
     }
 }

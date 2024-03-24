@@ -67,7 +67,7 @@ namespace VVRace
         public override void SelectedUpdate()
         {
             base.SelectedUpdate();
-            SectionLayer_ThingsEnergyFluxGrid.DrawEnergyFluxGridOverlayThisFrame();
+            SectionLayer_ThingsManaFluxGrid.DrawManaFluxGridOverlayThisFrame();
         }
     }
 }

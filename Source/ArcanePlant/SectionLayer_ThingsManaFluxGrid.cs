@@ -4,18 +4,18 @@ using Verse;
 
 namespace VVRace
 {
-    public class SectionLayer_ThingsEnergyFluxGrid : SectionLayer_Things
+    public class SectionLayer_ThingsManaFluxGrid : SectionLayer_Things
     {
         private static int lastPowerGridDrawFrame;
 
-        public SectionLayer_ThingsEnergyFluxGrid(Section section) 
+        public SectionLayer_ThingsManaFluxGrid(Section section) 
             : base(section)
         {
             requireAddToMapMesh = false;
-            relevantChangeTypes = VVMapMeshFlagDefOf.VV_EnergyFluxGrid;
+            relevantChangeTypes = VVMapMeshFlagDefOf.VV_ManaFluxGrid;
         }
 
-        public static void DrawEnergyFluxGridOverlayThisFrame()
+        public static void DrawManaFluxGridOverlayThisFrame()
         {
 
             lastPowerGridDrawFrame = Time.frameCount;
@@ -31,9 +31,9 @@ namespace VVRace
 
         protected override void TakePrintFrom(Thing thing)
         {
-            if ((thing.Faction == null || thing.Faction == Faction.OfPlayer) && thing is EnergyAcceptor energyAcceptor)
+            if ((thing.Faction == null || thing.Faction == Faction.OfPlayer) && thing is ManaAcceptor acceptor)
             {
-                energyAcceptor.PrintForEnergyGrid(this);
+                acceptor.PrintForManaFluxGrid(this);
             }
         }
     }

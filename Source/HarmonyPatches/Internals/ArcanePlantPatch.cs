@@ -173,17 +173,17 @@ namespace VVRace
 
         private static void Designator_Build_SelectedUpdate_Postfix(BuildableDef ___entDef)
         {
-            if (___entDef is ThingDef thingDef && (typeof(EnergyAcceptor).IsAssignableFrom(thingDef.thingClass) || typeof(ArcanePlantPot).IsAssignableFrom(thingDef.thingClass)))
+            if (___entDef is ThingDef thingDef && (typeof(ManaAcceptor).IsAssignableFrom(thingDef.thingClass) || typeof(ArcanePlantPot).IsAssignableFrom(thingDef.thingClass)))
             {
-                SectionLayer_ThingsEnergyFluxGrid.DrawEnergyFluxGridOverlayThisFrame();
+                SectionLayer_ThingsManaFluxGrid.DrawManaFluxGridOverlayThisFrame();
             }
         }
 
         private static void Designator_Install_SelectedUpdate_Postfix(Designator_Install __instance)
         {
-            if (__instance.PlacingDef is ThingDef thingDef && (typeof(EnergyAcceptor).IsAssignableFrom(thingDef.thingClass) || typeof(ArcanePlantPot).IsAssignableFrom(thingDef.thingClass)))
+            if (__instance.PlacingDef is ThingDef thingDef && (typeof(ManaAcceptor).IsAssignableFrom(thingDef.thingClass) || typeof(ArcanePlantPot).IsAssignableFrom(thingDef.thingClass)))
             {
-                SectionLayer_ThingsEnergyFluxGrid.DrawEnergyFluxGridOverlayThisFrame();
+                SectionLayer_ThingsManaFluxGrid.DrawManaFluxGridOverlayThisFrame();
             }
         }
 

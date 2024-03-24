@@ -2,7 +2,7 @@
 
 namespace VVRace
 {
-    public class Verb_ShotFloraEnergy : Verb_Shoot
+    public class Verb_ShootWithMana : Verb_Shoot
     {
         protected override bool TryCastShot()
         {

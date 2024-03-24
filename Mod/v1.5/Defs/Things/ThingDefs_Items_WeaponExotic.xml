@@ -1,5 +1,116 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
+  <!-- 예식용 창 -->
+  <ThingDef ParentName="BaseWeapon">
+    <defName>VV_RitualLance</defName>
+    <label>vivi ritual lance</label>
+    <description>.</description>
+    <graphicData>
+      <texPath>Things/Item/Equipment/VV_RitualLance</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.3</drawSize>
+    </graphicData>
+    <equippedAngleOffset>0</equippedAngleOffset>
+    
+    <techLevel>Medieval</techLevel>
+    <statBases>
+      <WorkToMake>45000</WorkToMake>
+      <Mass>4</Mass>
+    </statBases>
+    <equippedStatOffsets>
+      <MoveSpeed>-1.0</MoveSpeed>
+    </equippedStatOffsets>
+    <tradeNeverStack>true</tradeNeverStack>
+    <relicChance>2</relicChance>
+
+    <thingSetMakerTags><li>RewardStandardMidFreq</li></thingSetMakerTags>
+    <thingCategories Inherit="False">
+      <li>VV_ViviWeapon</li>
+    </thingCategories>
+    <weaponClasses>
+      <li>Melee</li>
+      <li>MeleePiercer</li>
+    </weaponClasses>
+    <weaponTags>
+      <li>VV_ViviExotic</li>
+      <li>Spear</li>
+    </weaponTags>
+    
+    <comps>
+      <li>
+        <compClass>CompQuality</compClass>
+      </li>
+      <li Class="CompProperties_Art">
+        <nameMaker>NamerArtWeaponMelee</nameMaker>
+        <descriptionMaker>ArtDescription_WeaponMelee</descriptionMaker>
+        <minQualityForArtistic>Excellent</minQualityForArtistic>
+      </li>
+    </comps>
+    <smeltable>false</smeltable>
+    <burnableByRecipe>true</burnableByRecipe>
+    <notifyMapRemoved>true</notifyMapRemoved>
+
+    <tools>
+      <li>
+        <label>shaft</label>
+        <capacities>
+          <li>Blunt</li>
+          <li>Poke</li>
+        </capacities>
+        <power>15</power>
+        <cooldownTime>1.6</cooldownTime>
+      </li>
+      <li>
+        <label>point</label>
+        <capacities>
+          <li>Stab</li>
+        </capacities>
+        <power>32</power>
+        <armorPenetration>0.5</armorPenetration>
+        <cooldownTime>4.2</cooldownTime>
+
+        <extraMeleeDamages>
+          <li>
+            <def>Stab</def>
+            <amount>32</amount>
+            <armorPenetration>1.0</armorPenetration>
+            <chance>0.5</chance>
+          </li>
+        </extraMeleeDamages>
+      </li>
+    </tools>
+    
+    <costList>
+      <Plasteel>150</Plasteel>
+      <Steel>60</Steel>
+      <Silver>100</Silver>
+      <VV_TitanicHornetWing>4</VV_TitanicHornetWing>
+    </costList>
+    
+    <recipeMaker>
+      <researchPrerequisites>
+        <li>VV_Weaponry</li>
+      </researchPrerequisites>
+      <skillRequirements>
+        <Crafting>10</Crafting>
+        <Artistic>10</Artistic>
+      </skillRequirements>
+      <displayPriority>-530</displayPriority>
+    </recipeMaker>
+
+    <tradeTags>
+      <li>VV_ViviExotic</li>
+    </tradeTags>
+
+    <modExtensions>
+      <li Class="RPEF.RaceConstraint">
+        <whitelist>
+          <li>VV_Vivi</li>
+        </whitelist>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
   <!-- 비비 엘텍스 바늘 -->
   <ThingDef ParentName="BaseWeapon">
     <defName>VV_EltexNeedle</defName>
@@ -14,14 +125,19 @@
 
     <techLevel>Medieval</techLevel>
     <statBases>
-      <WorkToMake>28000</WorkToMake>
+      <WorkToMake>64000</WorkToMake>
       <Mass>1</Mass>
       <AccuracyTouch>1</AccuracyTouch>
       <AccuracyShort>1</AccuracyShort>
       <AccuracyMedium>1</AccuracyMedium>
       <AccuracyLong>1</AccuracyLong>
-      <RangedWeapon_Cooldown>12.0</RangedWeapon_Cooldown>
+      <RangedWeapon_Cooldown>15.0</RangedWeapon_Cooldown>
     </statBases>
+    <equippedStatOffsets>
+      <MoveSpeed>-1.0</MoveSpeed>
+    </equippedStatOffsets>
+    <tradeNeverStack>true</tradeNeverStack>
+    <relicChance>3</relicChance>
 
     <thingSetMakerTags><li>RewardStandardMidFreq</li></thingSetMakerTags>
     <thingCategories Inherit="False">
@@ -72,6 +188,23 @@
         <cooldownTime>0.5</cooldownTime>
       </li>
     </tools>
+    
+    <costList>
+      <Plasteel>40</Plasteel>
+      <VV_Viviwax>40</VV_Viviwax>
+      <VV_TitanicHornetWing>20</VV_TitanicHornetWing>
+      <VV_LivingLeaf>100</VV_LivingLeaf>
+    </costList>
+    
+    <recipeMaker>
+      <researchPrerequisites>
+        <li>VV_Weaponry</li>
+      </researchPrerequisites>
+      <skillRequirements>
+        <Crafting>17</Crafting>
+      </skillRequirements>
+      <displayPriority>-531</displayPriority>
+    </recipeMaker>
 
     <tradeTags>
       <li>VV_ViviExotic</li>

@@ -14,16 +14,16 @@ namespace VVRace
         Completed,
     }
 
-    public class PeacebloomAltar : EnergyAcceptor
+    public class PeacebloomAltar : ManaAcceptor
     {
         private bool _projectStarted;
         private float _projectProgress;
 
-        public bool EnergySupplied => true;
+        public bool ManaSupplied => true;
 
-        public override EnergyFluxNetwork EnergyFluxNetwork { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override ManaFluxNetwork ManaFluxNetwork { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        public override EnergyFluxNetworkNode EnergyFluxNode => throw new NotImplementedException();
+        public override ManaFluxNetworkNode ManaFluxNode => throw new NotImplementedException();
 
         public override void ExposeData()
         {
@@ -37,7 +37,7 @@ namespace VVRace
         {
             base.Tick();
 
-            if (EnergySupplied)
+            if (ManaSupplied)
             {
             }
         }

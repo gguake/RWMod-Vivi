@@ -36,16 +36,15 @@
       <li Class="VVRace.ArcanePlantExtension">
         <germinateWeight>0</germinateWeight>
 
-        <energyCapacity>777</energyCapacity>
-        <initialEnergyPercent>1.0</initialEnergyPercent>
-        <zeroEnergyDamageByChance>1~1</zeroEnergyDamageByChance>
+        <manaCapacity>777</manaCapacity>
+        <zeroManaDamageByChance>1~1</zeroManaDamageByChance>
 
-        <energyConsumeRule Class="VVRace.EnergyRule_Constant">
-          <energy>7</energy>
-        </energyConsumeRule>
-        <energyGenerateRule Class="VVRace.EnergyRule_AdjacentArcanePlant">
-          <energyByAdjacentArcanePlant>21</energyByAdjacentArcanePlant>
-        </energyGenerateRule>
+        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
+          <mana>7</mana>
+        </manaConsumeRule>
+        <manaGenerateRule Class="VVRace.ManaFluxRule_AdjacentArcanePlant">
+          <manaPerAdjacentArcanePlant>21</manaPerAdjacentArcanePlant>
+        </manaGenerateRule>
       </li>
     </modExtensions>
 

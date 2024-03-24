@@ -19,12 +19,12 @@ namespace VVRace
                 return false;
             }
 
-            if (!forced && !plant.ShouldAutoFertilizeNowIgnoringEnergyPct)
+            if (!forced && !plant.ShouldAutoFertilizeNowIgnoringManaPct)
             {
                 return false;
             }
 
-            if (!plant.FertilizeAutoActivated || plant.Energy > plant.FertilizeAutoThreshold)
+            if (!plant.FertilizeAutoActivated || plant.Mana > plant.FertilizeAutoThreshold)
             {
                 return false;
             }

@@ -34,7 +34,7 @@ namespace VVRace
 
             if (thing is ArcanePlant plant)
             {
-                plant.AddEnergy(plant.ArcanePlantModExtension.energyCapacity);
+                plant.AddMana(plant.ArcanePlantModExtension.manaCapacity);
             }
 
             GenSpawn.Spawn(

@@ -42,7 +42,7 @@ namespace VVRace
         {
             get
             {
-                return EnergyChargeRatio > 0f;
+                return ManaChargeRatio > 0f;
             }
         }
 

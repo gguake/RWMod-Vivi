@@ -9,11 +9,11 @@ namespace VVRace
 
         public CompProperties_GlowerFlora() : base()
         {
-            compClass = typeof(CompGlowerFloraEnergy);
+            compClass = typeof(CompGlowerFlora);
         }
     }
 
-    public class CompGlowerFloraEnergy : CompGlower
+    public class CompGlowerFlora : CompGlower
     {
         private new CompProperties_GlowerFlora Props => (CompProperties_GlowerFlora)props;
 
@@ -41,7 +41,7 @@ namespace VVRace
 
                 if (Props.glowOnlyRoofed && !parent.Position.Roofed(parent.Map)) { return false; }
 
-                return ArcanePlant.EnergyChargeRatio > 0f;
+                return ArcanePlant.ManaChargeRatio > 0f;
             }
         }
     }

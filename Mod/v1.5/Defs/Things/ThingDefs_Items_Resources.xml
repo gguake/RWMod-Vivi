@@ -57,7 +57,7 @@
     <statBases>
       <MarketValue>0.42</MarketValue>
       <MaxHitPoints>150</MaxHitPoints>
-      <Mass>0.2</Mass>
+      <Mass>0.1</Mass>
       <Flammability>0.7</Flammability>
       <StuffPower_Armor_Sharp>0.4</StuffPower_Armor_Sharp>
       <StuffPower_Armor_Blunt>0.54</StuffPower_Armor_Blunt>
@@ -129,7 +129,7 @@
     
     <useHitPoints>true</useHitPoints>
     <statBases>
-      <Mass>0.5</Mass>
+      <Mass>0.05</Mass>
       <MarketValue>5</MarketValue>
       <MaxHitPoints>60</MaxHitPoints>
       <Flammability>1.3</Flammability>
@@ -221,7 +221,7 @@
     
     <useHitPoints>true</useHitPoints>
     <statBases>
-      <Mass>0.05</Mass>
+      <Mass>0.01</Mass>
       <MarketValue>1.6</MarketValue>
       <MaxHitPoints>30</MaxHitPoints>
       <Flammability>1.0</Flammability>
@@ -254,7 +254,7 @@
     
     <useHitPoints>true</useHitPoints>
     <statBases>
-      <Mass>3</Mass>
+      <Mass>1</Mass>
       <MarketValue>1.5</MarketValue>
       <MaxHitPoints>50</MaxHitPoints>
       <Flammability>0.5</Flammability>
@@ -292,8 +292,8 @@
     
     <useHitPoints>true</useHitPoints>
     <statBases>
-      <Mass>3</Mass>
-      <MarketValue>180</MarketValue>
+      <Mass>2</Mass>
+      <MarketValue>150</MarketValue>
       <MaxHitPoints>70</MaxHitPoints>
       <Flammability>1.0</Flammability>
       <DeteriorationRate>1</DeteriorationRate>

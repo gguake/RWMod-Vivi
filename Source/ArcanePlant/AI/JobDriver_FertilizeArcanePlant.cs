@@ -27,8 +27,8 @@ namespace VVRace
         protected override IEnumerable<Toil> MakeNewToils()
         {
             this.FailOnDespawnedNullOrForbidden(TargetIndex.A);
-            AddEndCondition(() => (!ArcanePlant.IsFullEnergy) ? JobCondition.Ongoing : JobCondition.Succeeded);
-            AddFailCondition(() => !job.playerForced && !ArcanePlant.ShouldAutoFertilizeNowIgnoringEnergyPct);
+            AddEndCondition(() => (!ArcanePlant.IsFullMana) ? JobCondition.Ongoing : JobCondition.Succeeded);
+            AddFailCondition(() => !job.playerForced && !ArcanePlant.ShouldAutoFertilizeNowIgnoringManaPct);
             AddFailCondition(() => !ArcanePlant.FertilizeAutoActivated);
 
             yield return Toils_General.DoAtomic(delegate
@@ -61,7 +61,7 @@ namespace VVRace
             {
                 var usedCount = Mathf.Min(ArcanePlant.RequiredFertilizerToFullyRecharge, Fertilizer.stackCount);
 
-                ArcanePlant.AddEnergy(usedCount * ArcanePlant.EnergyByFertilizer);
+                ArcanePlant.AddMana(usedCount * ArcanePlant.ManaByFertilizer);
                 Fertilizer.SplitOff(usedCount).Destroy();
             };
 

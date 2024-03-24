@@ -2,7 +2,7 @@
 
 namespace VVRace
 {
-    public class CompPowerFloraEnergy : CompPowerTrader
+    public class CompPowerMana : CompPowerTrader
     {
         private ArcanePlant _cached;
         public ArcanePlant ArcanePlant
@@ -22,7 +22,7 @@ namespace VVRace
         {
             base.CompTick();
 
-            PowerOutput = ArcanePlant.EnergyChargeRatio * (-Props.PowerConsumption);
+            PowerOutput = ArcanePlant.ManaChargeRatio * (-Props.PowerConsumption);
         }
     }
 }

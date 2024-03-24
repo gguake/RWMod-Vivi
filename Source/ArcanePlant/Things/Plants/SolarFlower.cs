@@ -6,14 +6,14 @@ namespace VVRace
     {
         public int GraphicIndex => CompGlower.Glows ? 1 : 0;
 
-        private CompGlowerFloraEnergy _compGlower;
-        public CompGlowerFloraEnergy CompGlower
+        private CompGlowerFlora _compGlower;
+        public CompGlowerFlora CompGlower
         {
             get
             {
                 if (_compGlower == null)
                 {
-                    _compGlower = this.TryGetComp<CompGlowerFloraEnergy>();
+                    _compGlower = this.TryGetComp<CompGlowerFlora>();
                 }
 
                 return _compGlower;

@@ -4,7 +4,7 @@ using Verse;
 
 namespace VVRace
 {
-    public class Alert_LowEnergyArcanePlant : Alert_Critical
+    public class Alert_ArcanePlantLowMana : Alert_Critical
     {
         private List<Thing> dangerTargets = new List<Thing>();
 
@@ -19,7 +19,7 @@ namespace VVRace
                 {
                     foreach (var building in map.listerThings.ThingsInGroup(ThingRequestGroup.WithCustomRectForSelector))
                     {
-                        if (building is ArcanePlant plant && plant.Faction == Faction.OfPlayer && plant.EnergyChargeRatio <= 0.05f)
+                        if (building is ArcanePlant plant && plant.Faction == Faction.OfPlayer && plant.ManaChargeRatio <= 0.05f)
                         {
                             dangerTargets.Add(building);
                         }
@@ -30,9 +30,9 @@ namespace VVRace
             }
         }
 
-        public Alert_LowEnergyArcanePlant()
+        public Alert_ArcanePlantLowMana()
         {
-            defaultLabel = LocalizeTexts.AlertArcanePlantLowEnergy.Translate();
+            defaultLabel = LocalizeTexts.AlertArcanePlantLowMana.Translate();
             defaultPriority = AlertPriority.Critical;
         }
 
@@ -49,7 +49,7 @@ namespace VVRace
 
         public override TaggedString GetExplanation()
         {
-            return LocalizeTexts.AlertArcanePlantLowEnergyDesc.Translate();
+            return LocalizeTexts.AlertArcanePlantLowManaDesc.Translate();
         }
     }
 }

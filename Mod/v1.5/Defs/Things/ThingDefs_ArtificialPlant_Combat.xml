@@ -48,13 +48,13 @@
       <li Class="VVRace.ArcanePlantExtension">
         <germinateWeight>125</germinateWeight>
 
-        <energyCapacity>450</energyCapacity>
-        <zeroEnergyDamageByChance>1~10</zeroEnergyDamageByChance>
+        <manaCapacity>450</manaCapacity>
+        <zeroManaDamageByChance>1~10</zeroManaDamageByChance>
 
-        <energyConsumeRule Class="VVRace.EnergyRule_Constant">
-          <energy>5</energy>
-        </energyConsumeRule>
-        <verbShootEnergy>3</verbShootEnergy>
+        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
+          <mana>5</mana>
+        </manaConsumeRule>
+        <consumeManaPerVerbShoot>3</consumeManaPerVerbShoot>
       </li>
     </modExtensions>
   </ThingDef>
@@ -98,7 +98,7 @@
 
     <verbs>
       <li>
-        <verbClass>VVRace.Verb_ShotFloraEnergy</verbClass>
+        <verbClass>VVRace.Verb_ShootWithMana</verbClass>
         <defaultProjectile>VV_Bullet_Pea</defaultProjectile>
         <warmupTime>0</warmupTime>
         <range>24.9</range>
@@ -161,14 +161,14 @@
         <germinateWeight>125</germinateWeight>
         <germinateRare>true</germinateRare>
 
-        <energyCapacity>500</energyCapacity>
-        <zeroEnergyDamageByChance>1~10</zeroEnergyDamageByChance>
+        <manaCapacity>500</manaCapacity>
+        <zeroManaDamageByChance>1~10</zeroManaDamageByChance>
 
-        <energyConsumeRule Class="VVRace.EnergyRule_Constant">
-          <energy>5</energy>
-        </energyConsumeRule>
+        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
+          <mana>5</mana>
+        </manaConsumeRule>
 
-        <verbShootEnergy>15</verbShootEnergy>
+        <consumeManaPerVerbShoot>15</consumeManaPerVerbShoot>
       </li>
     </modExtensions>
   </ThingDef>
@@ -213,7 +213,7 @@
 
     <verbs>
       <li>
-        <verbClass>VVRace.Verb_ShotFloraEnergy</verbClass>
+        <verbClass>VVRace.Verb_ShootWithMana</verbClass>
         <defaultProjectile>VV_Bullet_PeaFast</defaultProjectile>
         <warmupTime>0</warmupTime>
         <range>41.9</range>
@@ -320,13 +320,13 @@
         <germinateWeight>125</germinateWeight>
         <germinateRare>true</germinateRare>
 
-        <energyCapacity>600</energyCapacity>
-        <zeroEnergyDamageByChance>1~10</zeroEnergyDamageByChance>
+        <manaCapacity>600</manaCapacity>
+        <zeroManaDamageByChance>1~10</zeroManaDamageByChance>
 
-        <energyConsumeRule Class="VVRace.EnergyRule_Constant">
-          <energy>30</energy>
-        </energyConsumeRule>
-        <verbShootEnergy>10</verbShootEnergy>
+        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
+          <mana>30</mana>
+        </manaConsumeRule>
+        <consumeManaPerVerbShoot>10</consumeManaPerVerbShoot>
       </li>
     </modExtensions>
   </ThingDef>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-<VV_EnergyTube.label>에너지 튜브</VV_EnergyTube.label>
-<VV_EnergyTube.description>에너지를 원거리 전송하는 튜브입니다. 벽이나 다른 건물 아래에 건설할 수 있습니다.
-\n에너지를 단순히 전송할 뿐 별도의 에너지를 생산하지는 않습니다.</VV_EnergyTube.description>
+<VV_ManaTransferTube.label>에너지 튜브</VV_ManaTransferTube.label>
+<VV_ManaTransferTube.description>에너지를 원거리 전송하는 튜브입니다. 벽이나 다른 건물 아래에 건설할 수 있습니다.
+\n에너지를 단순히 전송할 뿐 별도의 에너지를 생산하지는 않습니다.</VV_ManaTransferTube.description>
 
 <VV_EmberBloom.label>잔불꽃</VV_EmberBloom.label>
 <VV_EmberBloom.description>주변 온도가 일정 온도에 도달할때까지 지속적으로 열을 발산하는 고대의 꽃입니다.

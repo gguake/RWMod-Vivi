@@ -6,8 +6,8 @@
 
         public const string AlertViviDangerousEggs = "VV_AlertViviDangerousEggs";
         public const string AlertViviDangerousEggsDesc = "VV_AlertViviDangerousEggsDesc";
-        public const string AlertArcanePlantLowEnergy = "VV_AlertArcanePlantLowEnergy";
-        public const string AlertArcanePlantLowEnergyDesc = "VV_AlertArcanePlantLowEnergyDesc";
+        public const string AlertArcanePlantLowMana = "VV_AlertArcanePlantLowMana";
+        public const string AlertArcanePlantLowManaDesc = "VV_AlertArcanePlantLowManaDesc";
 
         public const string GizmoViviBandwidthHeader = "VV_GizmoViviBandwidthHeader";
         public const string GizmoViviBandwidthTooltip = "VV_GizmoViviBandwidthTooltip";
@@ -21,8 +21,8 @@
         public const string InspectorViviHatcheryDisabledReasonNoRoof = "VV_InspectorViviHatcheryDisabledReasonNoRoof";
         public const string InspectorViviHatcheryDisabledReasonOutdoor = "VV_InspectorViviHatcheryDisabledReasonOutdoor";
         public const string InspectorViviWallReplaceCooldown = "VV_InspectorViviWallReplaceCooldown";
-        public const string InspectorPlantEnergy = "VV_InspectorPlantEnergy";
-        public const string InspectorPlantEnergyFlux = "VV_InspectorPlantEnergyFlux";
+        public const string InspectorPlantMana = "VV_InspectorPlantMana";
+        public const string InspectorPlantManaFlux = "VV_InspectorPlantManaFlux";
         public const string InspectorViviGerminatorReserved = "VV_InspectorViviGerminatorReserved";
         public const string InspectorViviGerminatorCompletePeriods = "VV_InspectorViviGerminatorCompletePeriods";
         public const string InspectorViviGerminatorManageAvailable = "VV_InspectorViviGerminatorManageAvailable";
@@ -70,10 +70,10 @@
 
         public const string WarnCancelGerminateSchedule = "VV_WarnCancelGerminateSchedule";
 
-        public const string StatsReport_Energy = "VV_StatsReport_Energy";
-        public const string StatsReport_Energy_Desc = "VV_StatsReport_Energy_Desc";
-        public const string StatsReport_EnergyFlux = "VV_StatsReport_EnergyFlux";
-        public const string StatsReport_EnergyFlux_Desc = "VV_StatsReport_EnergyFlux_Desc";
+        public const string StatsReport_Mana = "VV_StatsReport_Mana";
+        public const string StatsReport_Mana_Desc = "VV_StatsReport_Mana_Desc";
+        public const string StatsReport_ManaFlux = "VV_StatsReport_ManaFlux";
+        public const string StatsReport_ManaFlux_Desc = "VV_StatsReport_ManaFlux_Desc";
 
         public const string MessageGerminateSeedlingSuccess = "VV_MessageGerminateSeedlingSuccess";
         public const string MessageGerminateSeedlingFailed = "VV_MessageGerminateSeedlingFailed";

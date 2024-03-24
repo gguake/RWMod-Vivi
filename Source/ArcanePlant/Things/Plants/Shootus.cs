@@ -48,7 +48,7 @@ namespace VVRace
         {
             get
             {
-                return Gun != null && EnergyChargeRatio > 0f;
+                return Gun != null && ManaChargeRatio > 0f;
             }
         }
 
@@ -480,10 +480,10 @@ namespace VVRace
         {
             if (!Active) { return; }
 
-            var energy = ArcanePlantModExtension.verbShootEnergy;
-            if (energy > 0)
+            var manaPerShoot = ArcanePlantModExtension.consumeManaPerVerbShoot;
+            if (manaPerShoot > 0)
             {
-                AddEnergy(-energy);
+                AddMana(-manaPerShoot);
             }
 
             AttackVerb.TryStartCastOn(_currentTarget);
