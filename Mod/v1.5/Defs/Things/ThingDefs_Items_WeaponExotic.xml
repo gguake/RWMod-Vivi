@@ -98,12 +98,12 @@
 
     <projectile Class="VVRace.NeedleProperties">
       <damageDef>Stab</damageDef>
-      <damageAmountBase>15</damageAmountBase>
+      <damageAmountBase>10</damageAmountBase>
       <stoppingPower>1.5</stoppingPower>
       <armorPenetrationBase>0.7</armorPenetrationBase>
       <speed>50</speed>
 
-      <maxAttackCount>8</maxAttackCount>
+      <maxAttackCount>6</maxAttackCount>
       <targettingRadius>3</targettingRadius>
       <overrunTicks>4~8</overrunTicks>
 
@@ -113,7 +113,7 @@
 
     <comps>
       <li Class="VVRace.CompProperties_LineTrail">
-        <maxTrailPoint>10</maxTrailPoint>
+        <maxTrailPoint>15</maxTrailPoint>
         <refreshInterval>1</refreshInterval>
         <texPath>VFX/VV_NeedleTrail</texPath>
         <shader>MotePawnBodyGlow</shader>
@@ -121,7 +121,7 @@
         <widthCurve>
           <points>
             <li>(0, 0)</li>
-            <li>(1, 0.3)</li>
+            <li>(1, 1)</li>
           </points>
         </widthCurve>
         <lineTextureMode>DistributePerSegment</lineTextureMode>

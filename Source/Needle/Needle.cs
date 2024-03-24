@@ -58,64 +58,69 @@ namespace VVRace
 
         public override void Tick()
         {
-            base.Tick();
-
-            if (!Spawned) { return; }
-            if ((caster is Pawn casterPawn && casterPawn.DeadOrDowned) || caster.DestroyedOrNull())
+            try
             {
-                Destroy();
-                return;
-            }
-
-            var props = def.projectile as NeedleProperties;
-            if (props == null)
-            {
-                return;
-            }
-
-            if (!curTarget.IsValid)
-            {
-                if (targetLossTicks <= 0)
+                if (!Spawned) { return; }
+                if ((caster is Pawn casterPawn && casterPawn.DeadOrDowned) || caster.DestroyedOrNull())
                 {
-                    RefreshTarget(props);
+                    Destroy();
+                    return;
+                }
+
+                var props = def.projectile as NeedleProperties;
+                if (props == null)
+                {
+                    return;
+                }
+
+                if (!curTarget.IsValid)
+                {
+                    if (targetLossTicks <= 0)
+                    {
+                        RefreshTarget(props);
+                    }
+                    else
+                    {
+                        targetLossTicks--;
+                    }
                 }
                 else
                 {
-                    targetLossTicks--;
-                }
-            }
-            else
-            {
-                targetHoldTicks++;
+                    targetHoldTicks++;
 
-                if (targetHoldTicks > props.maxTargettingTicks)
-                {
-                    RefreshTarget(props);
-                    targetHoldTicks = 0;
-                }
-            }
-
-            if (!TryMoveForward(props))
-            {
-                Destroy();
-                return;
-            }
-
-            if (curTarget.IsValid && (Position == curTarget.Cell || (curTarget.CenterVector3 - curPos).sqrMagnitude < 1))
-            {
-                ImpactToTarget(props);
-            }
-
-            if (Spawned && !Destroyed)
-            {
-                var curCellTargets = new List<Thing>(Position.GetThingList(Map));
-                foreach (var target in curCellTargets)
-                {
-                    if (target is IAttackTarget && target.HostileTo(caster))
+                    if (targetHoldTicks > props.maxTargettingTicks)
                     {
-                        DamageTo(props, target);
+                        RefreshTarget(props);
+                        targetHoldTicks = 0;
                     }
                 }
+
+                if (!TryMoveForward(props))
+                {
+                    Destroy();
+                    return;
+                }
+
+                if (curTarget.IsValid && (Position == curTarget.Cell || (curTarget.CenterVector3 - curPos).sqrMagnitude < 1))
+                {
+                    ImpactToTarget(props);
+                }
+
+                if (Spawned && !Destroyed)
+                {
+                    var curCellTargets = new List<Thing>(Position.GetThingList(Map));
+                    foreach (var target in curCellTargets)
+                    {
+                        if (target is IAttackTarget && target.HostileTo(caster))
+                        {
+                            DamageTo(props, target);
+                        }
+                    }
+                }
+            }
+            finally
+            {
+                base.Tick();
             }
         }
 
@@ -134,7 +139,7 @@ namespace VVRace
 
         public override Vector3 DrawPos => curPos;
 
-        public int MaxAttackCount => Mathf.Max(1, Mathf.RoundToInt(((NeedleProperties)def.projectile).maxAttackCount * psychicMultiplier));
+        public int MaxAttackCount => Mathf.Max(1, Mathf.RoundToInt(((NeedleProperties)def.projectile).maxAttackCount * psychicMultiplier * psychicMultiplier));
 
         protected override void DrawAt(Vector3 drawLoc, bool flip = false)
         {
