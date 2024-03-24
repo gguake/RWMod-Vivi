@@ -82,9 +82,13 @@ namespace VVRace
                 }
             }
 
-            MoveForward(props);
+            if (!TryMoveForward(props))
+            {
+                Destroy();
+                return;
+            }
 
-            if (curTarget.IsValid && Position == curTarget.Cell)
+            if (curTarget.IsValid && (Position == curTarget.Cell || (curTarget.CenterVector3 - curPos).sqrMagnitude < 1))
             {
                 ImpactToTarget(props);
             }
@@ -141,7 +145,7 @@ namespace VVRace
             Comps_PostDraw();
         }
 
-        private void MoveForward(NeedleProperties props)
+        private bool TryMoveForward(NeedleProperties props)
         {
             float deltaAngle = 0f;
 
@@ -171,9 +175,18 @@ namespace VVRace
 
             curPos += curDirection * speed;
             var curPosCell = curPos.ToIntVec3();
-            if (Position != curPosCell)
+            if (curPosCell.InBounds(Map))
             {
-                Position = curPosCell;
+                if (Position != curPosCell)
+                {
+                    Position = curPosCell;
+                }
+
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 

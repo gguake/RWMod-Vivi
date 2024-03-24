@@ -126,15 +126,19 @@
     </requiredWorkTags>
 
     <gearHealthRange>1.2~3.2</gearHealthRange>
-    <apparelMoney>1000~4000</apparelMoney>
+    <apparelMoney>5000~10000</apparelMoney>
     <apparelTags>
       <li>VV_RoyalViviApparel</li>
       <li>VV_ViviCombatApparel</li>
       <li>BeltDefensePop</li>
     </apparelTags>
-    <weaponMoney>1000~1500</weaponMoney>
+    <apparelRequired>
+      <li>VV_GuardianCoat</li>
+    </apparelRequired>
+
+    <weaponMoney>5000~10000</weaponMoney>
     <weaponTags>
-      <li>VV_ViviWeaponRange</li>
+      <li>VV_ViviGuardian</li>
     </weaponTags>
 
     <initialWillRange>11~14</initialWillRange>

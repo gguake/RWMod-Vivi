@@ -29,6 +29,7 @@
     </thingCategories>
     <weaponTags>
       <li>VV_ViviExotic</li>
+      <li>VV_ViviGuardian</li>
     </weaponTags>
 
     <comps>
@@ -40,7 +41,9 @@
         <descriptionMaker>ArtDescription_WeaponMelee</descriptionMaker>
         <minQualityForArtistic>Excellent</minQualityForArtistic>
       </li>
-      <li Class="CompProperties_Biocodable"/>
+      <li Class="CompProperties_Biocodable">
+        <biocodeOnEquip>true</biocodeOnEquip>
+      </li>
     </comps>
     <smeltable>false</smeltable>
     <burnableByRecipe>true</burnableByRecipe>
@@ -51,7 +54,7 @@
         <verbClass>VVRace.Verb_SpawnNeedle</verbClass>
         <hasStandardCommand>true</hasStandardCommand>
         <defaultProjectile>VV_Projectile_EltexNeedle</defaultProjectile>
-        <warmupTime>5.0</warmupTime>
+        <warmupTime>2.5</warmupTime>
         <range>49.9</range>
         <soundCast>Interact_BeatFire</soundCast>
         <rangedFireRulepack>Combat_RangedFire_Thrown</rangedFireRulepack>
@@ -95,30 +98,30 @@
 
     <projectile Class="VVRace.NeedleProperties">
       <damageDef>Stab</damageDef>
-      <damageAmountBase>12</damageAmountBase>
-      <stoppingPower>1</stoppingPower>
+      <damageAmountBase>15</damageAmountBase>
+      <stoppingPower>1.5</stoppingPower>
       <armorPenetrationBase>0.7</armorPenetrationBase>
-      <speed>50</speed>
+      <speed>60</speed>
 
-      <maxAttackCount>6</maxAttackCount>
+      <maxAttackCount>8</maxAttackCount>
       <targettingRadius>3</targettingRadius>
       <overrunTicks>4~8</overrunTicks>
 
-      <maxAngleVelocity>11.1</maxAngleVelocity>
-      <forceDirectingRadiusSqr>6.25</forceDirectingRadiusSqr>
+      <maxAngleVelocity>10.1</maxAngleVelocity>
+      <forceDirectingRadiusSqr>11</forceDirectingRadiusSqr>
     </projectile>
 
     <comps>
       <li Class="VVRace.CompProperties_LineTrail">
-        <maxTrailPoint>20</maxTrailPoint>
+        <maxTrailPoint>10</maxTrailPoint>
         <refreshInterval>1</refreshInterval>
         <texPath>VFX/test</texPath>
-        <shader>Cutout</shader>
+        <shader>MotePawnBodyGlow</shader>
         <color>(1.0, 0.8, 0.6)</color>
         <widthCurve>
           <points>
             <li>(0, 0)</li>
-            <li>(1, 1)</li>
+            <li>(1, 0.3)</li>
           </points>
         </widthCurve>
         <lineTextureMode>DistributePerSegment</lineTextureMode>
