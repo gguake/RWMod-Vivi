@@ -49,7 +49,7 @@ namespace VVRace
                     p.rect = new CellRect(center.x + pot.xOffset, center.z + pot.zOffset, 1, 1);
                     p.singleThingDef = pot.plantDef;
                     p.faction = resolveParams.faction;
-                    BaseGen.symbolStack.Push("vv_artificial_plant", p);
+                    BaseGen.symbolStack.Push("vv_arcane_plant", p);
                 }
             }
             #endregion

@@ -58,7 +58,6 @@
 
   <VV_MessageGerminateSeedlingSuccess>seed germinating succeeded. ({0} x{1})</VV_MessageGerminateSeedlingSuccess>
   <VV_MessageGerminateSeedlingFailed>seed germinating failed.</VV_MessageGerminateSeedlingFailed>
-  <VV_MessageAncientTerminalWorldtreeDiscovered>Found an ancient terminal with information about the ancient worldtree!</VV_MessageAncientTerminalWorldtreeDiscovered>
 
   <VV_AbilityDisabledNoFood>{0_labelShort} can't use caused by starving</VV_AbilityDisabledNoFood>
   <VV_AbilityDisabledNoBodyPart>{0_labelShort} must have more {2} of {1}</VV_AbilityDisabledNoBodyPart>

@@ -57,8 +57,8 @@
           <li>Blunt</li>
           <li>Poke</li>
         </capacities>
-        <power>15</power>
-        <cooldownTime>1.6</cooldownTime>
+        <power>12</power>
+        <cooldownTime>1.1</cooldownTime>
       </li>
       <li>
         <label>point</label>
@@ -74,7 +74,7 @@
             <def>Stab</def>
             <amount>32</amount>
             <armorPenetration>1.0</armorPenetration>
-            <chance>0.5</chance>
+            <chance>0.7</chance>
           </li>
         </extraMeleeDamages>
       </li>
@@ -131,7 +131,7 @@
       <AccuracyShort>1</AccuracyShort>
       <AccuracyMedium>1</AccuracyMedium>
       <AccuracyLong>1</AccuracyLong>
-      <RangedWeapon_Cooldown>15.0</RangedWeapon_Cooldown>
+      <RangedWeapon_Cooldown>20.0</RangedWeapon_Cooldown>
     </statBases>
     <equippedStatOffsets>
       <MoveSpeed>-1.0</MoveSpeed>
@@ -170,8 +170,8 @@
         <verbClass>VVRace.Verb_SpawnNeedle</verbClass>
         <hasStandardCommand>true</hasStandardCommand>
         <defaultProjectile>VV_Projectile_EltexNeedle</defaultProjectile>
-        <warmupTime>2.5</warmupTime>
-        <range>49.9</range>
+        <warmupTime>5.0</warmupTime>
+        <range>44.9</range>
         <soundCast>Interact_BeatFire</soundCast>
         <rangedFireRulepack>Combat_RangedFire_Thrown</rangedFireRulepack>
       </li>

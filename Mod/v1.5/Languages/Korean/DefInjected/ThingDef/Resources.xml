@@ -20,10 +20,9 @@
   <VV_UnknownSeed.description>종류를 알 수 없는 식물의 씨앗입니다. 일반적인 방법으로는 재배가 불가능하며 모종 배양기에서 비료, 꽃가루로 배양할 수 있습니다.</VV_UnknownSeed.description>
 
   <VV_Fertilizer.label>비비 비료</VV_Fertilizer.label>
-  <VV_Fertilizer.description>분해된 유기물을 흙과 배합해 만든 비비 특제 비료입니다. 각종 원예 작업에 사용되며 고대 식물의 에너지를 채우는 용도로도 사용할 수 있습니다.
+  <VV_Fertilizer.description>유기물을 흙과 배합해 만든 비비 특제 비료입니다. 각종 원예 작업에 사용되며 약간의 마나를 함유하고 있어 고대 식물들의 마나를 충전하는 용도로 사용할 수도 있습니다.
 \n비료 1개당 20의 마나를 채워줍니다.</VV_Fertilizer.description>
 
   <VV_TitanicHornetWing.label>거대 말벌 날개 조각</VV_TitanicHornetWing.label>
-  <VV_TitanicHornetWing.description>거대 말벌의 날개 조각입니다. 얻기 힘들지만 특수한 성분으로 가볍고 튼튼해 고급 장비 재료로 사용됩니다.
-\n상온에서는 부패하므로 냉동 보관을 권장합니다.</VV_TitanicHornetWing.description>
+  <VV_TitanicHornetWing.description>거대 말벌의 날개 조각입니다. 얻기 힘들지만 특수한 성분으로 가볍고 튼튼해 고급 장비 재료로 사용됩니다. 상온에서는 부패하므로 냉동 보관이 권장됩니다.</VV_TitanicHornetWing.description>
 </LanguageData>

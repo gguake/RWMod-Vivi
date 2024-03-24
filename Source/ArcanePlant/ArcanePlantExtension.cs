@@ -13,7 +13,7 @@ namespace VVRace
         public ManaFluxRule manaConsumeRule;
         public ManaFluxRule manaGenerateRule;
 
-        public int zeroManaDurableTicks = 2000;
+        public int zeroManaDurableTicks = 15000;
         public IntRange zeroManaDamageByChance = new IntRange(0, 0);
         public int consumeManaPerVerbShoot = 0;
 

@@ -4,7 +4,7 @@
     <defName>VV_TitanicHornet</defName>
     <label>titanic hornet</label>
     <race>VV_TitanicHornet</race>
-    <combatPower>320</combatPower>
+    <combatPower>300</combatPower>
     <canArriveManhunter>false</canArriveManhunter>
     <ecoSystemWeight>0</ecoSystemWeight>
     

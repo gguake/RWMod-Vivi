@@ -42,7 +42,7 @@
   
   <RuleDef>
     <defName>VV_ArcanePlant</defName>
-    <symbol>vv_artificial_plant</symbol>
+    <symbol>vv_arcane_plant</symbol>
     <resolvers>
       <li Class="VVRace.SymbolResolver_ArcanePlant" />
     </resolvers>

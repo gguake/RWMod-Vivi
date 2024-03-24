@@ -77,7 +77,6 @@
 
         public const string MessageGerminateSeedlingSuccess = "VV_MessageGerminateSeedlingSuccess";
         public const string MessageGerminateSeedlingFailed = "VV_MessageGerminateSeedlingFailed";
-        public const string MessageAncientTerminalWorldtreeDiscovered = "VV_MessageAncientTerminalWorldtreeDiscovered";
 
         public const string ITab_GatherWorkerTable_TabLabel = "VV_ITab_GatherWorkerTable_TabLabel";
         public const string ITab_GatherWorkerTable_GatherRadiusSlider = "VV_ITab_GatherWorkerTable_GatherRadiusSlider";

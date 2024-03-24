@@ -2,7 +2,7 @@
 <Defs>
   <ThingDef ParentName="MinifiedThing">
     <defName>MinifiedArcanePlant</defName>
-    <label>minified artificial plant</label>
+    <label>minified arcane plant</label>
     <thingClass>VVRace.MinifiedArcanePlant</thingClass>
     
     <statBases>
@@ -147,7 +147,7 @@
     </tradeTags>
   </ThingDef>
 
-  <!-- 에너지 튜브-->
+  <!-- 마나 전송 튜브-->
   <ThingDef ParentName="BuildingBase">
     <defName>VV_ManaTransferTube</defName>
     <label>mana transfer tube</label>

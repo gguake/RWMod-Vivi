@@ -55,6 +55,7 @@
           <mana>5</mana>
         </manaConsumeRule>
         <consumeManaPerVerbShoot>3</consumeManaPerVerbShoot>
+        <zeroManaDurableTicks>30000</zeroManaDurableTicks>
       </li>
     </modExtensions>
   </ThingDef>
@@ -167,8 +168,8 @@
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
           <mana>5</mana>
         </manaConsumeRule>
-
         <consumeManaPerVerbShoot>15</consumeManaPerVerbShoot>
+        <zeroManaDurableTicks>30000</zeroManaDurableTicks>
       </li>
     </modExtensions>
   </ThingDef>
@@ -327,6 +328,7 @@
           <mana>30</mana>
         </manaConsumeRule>
         <consumeManaPerVerbShoot>10</consumeManaPerVerbShoot>
+        <zeroManaDurableTicks>60000</zeroManaDurableTicks>
       </li>
     </modExtensions>
   </ThingDef>
