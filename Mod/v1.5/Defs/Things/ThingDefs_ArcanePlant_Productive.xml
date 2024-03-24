@@ -610,7 +610,7 @@
         <germinateRare>true</germinateRare>
         
         <initialManaPercent>0.5</initialManaPercent>
-        <manaCapacity>150</manaCapacity>
+        <manaCapacity>100</manaCapacity>
         <zeroManaDamageByChance>1~3</zeroManaDamageByChance>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
