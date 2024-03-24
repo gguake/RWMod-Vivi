@@ -16,6 +16,8 @@ namespace VVRace
 
         public float maxAngleVelocity;
         public float forceDirectingRadiusSqr;
+
+        public int maxTargettingTicks = 1000;
     }
 
     public class Needle : ThingWithComps
@@ -26,6 +28,7 @@ namespace VVRace
         public LocalTargetInfo curTarget;
         public List<Thing> targetHistory = new List<Thing>();
         public int targetLossTicks;
+        public int targetHoldTicks;
 
         public Vector3 curPos;
         public Vector3 curDirection;
@@ -79,6 +82,16 @@ namespace VVRace
                 else
                 {
                     targetLossTicks--;
+                }
+            }
+            else
+            {
+                targetHoldTicks++;
+
+                if (targetHoldTicks > props.maxTargettingTicks)
+                {
+                    RefreshTarget(props);
+                    targetHoldTicks = 0;
                 }
             }
 
@@ -208,6 +221,7 @@ namespace VVRace
             DamageTo(props, curTarget.Thing);
             lastAttackedTargetCell = curTarget.Cell;
 
+            targetHoldTicks = 0;
             curTarget = LocalTargetInfo.Invalid;
             targetLossTicks = props.overrunTicks.RandomInRange;
             attackedCount++;

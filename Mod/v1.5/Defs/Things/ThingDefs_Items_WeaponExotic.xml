@@ -93,7 +93,7 @@
     <graphicData>
       <texPath>Things/Item/Equipment/VV_ViviLongJavelinProjectile</texPath>
       <graphicClass>Graphic_Single</graphicClass>
-      <shaderType>CutoutComplex</shaderType>
+      <shaderType>MotePawnBodyGlow</shaderType>
     </graphicData>
 
     <projectile Class="VVRace.NeedleProperties">
@@ -101,7 +101,7 @@
       <damageAmountBase>15</damageAmountBase>
       <stoppingPower>1.5</stoppingPower>
       <armorPenetrationBase>0.7</armorPenetrationBase>
-      <speed>60</speed>
+      <speed>50</speed>
 
       <maxAttackCount>8</maxAttackCount>
       <targettingRadius>3</targettingRadius>
@@ -115,7 +115,7 @@
       <li Class="VVRace.CompProperties_LineTrail">
         <maxTrailPoint>10</maxTrailPoint>
         <refreshInterval>1</refreshInterval>
-        <texPath>VFX/test</texPath>
+        <texPath>VFX/VV_NeedleTrail</texPath>
         <shader>MotePawnBodyGlow</shader>
         <color>(1.0, 0.8, 0.6)</color>
         <widthCurve>
