@@ -569,4 +569,196 @@
     </comps>
   </ThingDef>
   
+  <!-- 하늘초 -->
+  <ThingDef ParentName="VV_ArtificialPlantProductive">
+    <defName>VV_Skyweed</defName>
+    <label>skyweed</label>
+    <description>.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_PerfumingPetal</ThingDef>
+    </descriptionHyperlinks>
+
+    <graphicData>
+      <texPath>Things/Plants/VV_Skyweed</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1.8, 1.8)</drawSize>
+    </graphicData>
+
+    <statBases>
+      <MarketValue>450</MarketValue>
+      <MaxHitPoints>100</MaxHitPoints>
+      <Beauty>10</Beauty>
+      <BeautyOutdoors>10</BeautyOutdoors>
+    </statBases>
+
+    <costList>
+      <VV_PerfumingPetal>20</VV_PerfumingPetal>
+    </costList>
+
+    <comps>
+      <li Class="VVRace.CompProperties_RepeatGatherable" />
+
+      <li Class="VVRace.CompProperties_GlowerFlora">
+        <glowRadius>3</glowRadius>
+        <glowColor>(255,255,255,0)</glowColor>
+      </li>
+    </comps>
+
+    <modExtensions>
+      <li Class="VVRace.ArtificialPlantModExtension">
+        <germinateWeight>100</germinateWeight>
+        <germinateRare>true</germinateRare>
+        
+        <energyCapacity>150</energyCapacity>
+        <zeroEnergyDamageByChance>1~3</zeroEnergyDamageByChance>
+
+        <energyConsumeRule Class="VVRace.EnergyRule_Constant">
+          <energy>20</energy>
+        </energyConsumeRule>
+        <energyGenerateRule Class="VVRace.EnergyRule_Wind">
+          <energyFromWindSpeed>
+            <points>
+              <li>(0,0)</li>
+              <li>(0.05,0)</li>
+              <li>(0.5,20)</li>
+              <li>(1.0,50)</li>
+              <li>(1.5,70)</li>
+              <li>(2.0,100)</li>
+            </points>
+          </energyFromWindSpeed>
+        </energyGenerateRule>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>VV_SkyweedBox</defName>
+    <label>skyweed box</label>
+    <description>.</description>
+    <graphicData>
+      <texPath>Things/Building/VV_SkyweedPod</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2.5,2.5)</drawSize>
+    </graphicData>
+
+    <size>(1,1)</size>
+    <rotatable>false</rotatable>
+    <tickerType>Normal</tickerType>
+    <altitudeLayer>BuildingOnTop</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <castEdgeShadows>false</castEdgeShadows>
+    <fillPercent>0.5</fillPercent>
+    <designationCategory>VV_Bulidings</designationCategory>
+    <designationHotKey>Misc12</designationHotKey>
+    <uiOrder>2500</uiOrder>
+    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+
+    <statBases>
+      <MaxHitPoints>150</MaxHitPoints>
+      <MarketValue>200</MarketValue>
+      <WorkToBuild>1000</WorkToBuild>
+      <Flammability>1.0</Flammability>
+    </statBases>
+    
+    <costList>
+      <VV_Skyweed>1</VV_Skyweed>
+      <VV_Viviwax>10</VV_Viviwax>
+      <Cloth>10</Cloth>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Transporter">
+        <massCapacity>75</massCapacity>
+        <restEffectiveness>0.5</restEffectiveness>
+        <canChangeAssignedThingsAfterStarting>true</canChangeAssignedThingsAfterStarting>
+      </li>
+      <li Class="VVRace.CompProperties_LaunchableCustom">
+        <requireFuel>false</requireFuel>
+        <fixedLaunchDistanceMax>18</fixedLaunchDistanceMax>
+        <skyfallerLeaving>VV_SkyweedBoxLeaving</skyfallerLeaving>
+        <activeDropPod>VV_ActiveSkyweedBox</activeDropPod>
+        <incomingDropPod>VV_SkyweedBoxIncoming</incomingDropPod>
+      </li>
+    </comps>
+    <inspectorTabs>
+      <li>ITab_ContentsTransporter</li>
+    </inspectorTabs>
+    <placeWorkers>
+      <li>PlaceWorker_NotUnderRoof</li>
+    </placeWorkers>
+    <researchPrerequisites>
+      <li>VV_AncientBotany</li>
+    </researchPrerequisites>
+    <uiIconScale>0.65</uiIconScale>
+  </ThingDef>
+  
+  <ThingDef Name="ActiveDropPod">
+    <defName>VV_ActiveSkyweedBox</defName>
+    <label>skyweed box</label>
+    <category>Item</category>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <thingClass>ActiveDropPod</thingClass>
+    <scatterableOnMapGen>false</scatterableOnMapGen>
+    <tickerType>Normal</tickerType>
+    <soundOpen>DropPod_Open</soundOpen>
+    <graphicData>
+      <texPath>Things/Building/VV_SkyweedPod</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>2.4</drawSize>
+      <shadowData>
+        <volume>(0.8, 0.6, 0.8)</volume>
+      </shadowData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <blockWind>true</blockWind>
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <MaxHitPoints>500</MaxHitPoints>
+      <Flammability>0</Flammability>
+    </statBases>
+    <selectable>true</selectable>
+  </ThingDef>
+
+  <ThingDef Name="DropPodIncoming" ParentName="SkyfallerBase">
+    <defName>VV_SkyweedBoxIncoming</defName>
+    <label>skyweed box (incoming)</label>
+    <thingClass>DropPodIncoming</thingClass>
+    <graphicData>
+      <texPath>Things/Building/VV_SkyweedPod</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutFlying</shaderType>
+      <drawSize>2.4</drawSize>
+    </graphicData>
+    <skyfaller>
+      <speed>0.1</speed>
+      <movementType>Decelerate</movementType>
+      <shadow>Things/Skyfaller/SkyfallerShadowDropPod</shadow>
+      <shadowSize>(2, 2)</shadowSize>
+      <anticipationSound>DropPod_Fall</anticipationSound>
+      <anticipationSoundTicks>100</anticipationSoundTicks>
+      <impactSound>DropPod_Impact</impactSound>
+      <motesPerCell>0</motesPerCell>
+    </skyfaller>
+  </ThingDef>
+
+  <ThingDef ParentName="SkyfallerBase">
+    <defName>VV_SkyweedBoxLeaving</defName>
+    <label>skyweed box (leaving)</label>
+    <thingClass>FlyShipLeaving</thingClass>
+    <graphicData>
+      <texPath>Things/Building/VV_SkyweedPod</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutFlying</shaderType>
+      <drawSize>2.4</drawSize>
+    </graphicData>
+    <skyfaller>
+      <speed>0.1</speed>
+      <movementType>Decelerate</movementType>
+      <reversed>true</reversed>
+      <shadow>Things/Skyfaller/SkyfallerShadowDropPod</shadow>
+      <shadowSize>(2, 2)</shadowSize>
+      <anticipationSound>DropPod_Leaving</anticipationSound>
+      <anticipationSoundTicks>-10</anticipationSoundTicks>
+      <ticksToImpactRange><min>-40</min><max>-15</max></ticksToImpactRange>
+    </skyfaller>
+  </ThingDef>
 </Defs>

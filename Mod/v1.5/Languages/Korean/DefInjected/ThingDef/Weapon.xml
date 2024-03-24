@@ -31,4 +31,10 @@
   <VV_RepeatingCrossbow.tools.limb.label>활대</VV_RepeatingCrossbow.tools.limb.label>
   <VV_Arrow_RepeatingCrossbow.label>연발 쇠뇌 바늘</VV_Arrow_RepeatingCrossbow.label>
 
+  <!-- Exotics -->
+  <VV_EltexNeedle.label>비비 엘텍스 바늘</VV_EltexNeedle.label>
+  <VV_EltexNeedle.description>특수처리된 날카로운 바늘입니다. 정신 감응력이 높아야 효과적으로 사용할 수 있으며 비비만 사용할 수 있습니다.
+\n장착하면 바늘을 매개체로 물리 법칙을 무시하고 자유자재로 움직이는 유령 바늘을 소환해 적들을 공격할 수 있습니다.
+\n유령 바늘은 반드시 명중하며 지나는 경로의 모든 적을 관통하고 주변의 공격가능한 대상을 연속해서 공격합니다. 정신 감응력이 높을수록 더 많이 공격할 수 있습니다.
+\n이 무기는 장착시 착용자의 정신과 공명하므로 다른 이들은 사용할 수 없습니다.</VV_EltexNeedle.description>
 </LanguageData>

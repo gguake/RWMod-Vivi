@@ -87,6 +87,15 @@ namespace VVRace.HarmonyPatches
                 original: AccessTools.Method(typeof(MentalStateWorker), nameof(MentalStateWorker.StateCanOccur)),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(MentalStateWorker_StateCanOccur_Postfix)));
 
+
+            harmony.Patch(
+                original: AccessTools.Method(typeof(CompLaunchable), nameof(CompLaunchable.TryLaunch)),
+                transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(CompLaunchable_TryLaunch_Transpiler)));
+
+            harmony.Patch(
+                original: AccessTools.Method(typeof(DropPodUtility), nameof(DropPodUtility.MakeDropPodAt)),
+                transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(DropPodUtility_MakeDropPodAt_Transpiler)));
+
             Log.Message("!! [ViViRace] race patch complete");
         }
 
@@ -318,6 +327,106 @@ namespace VVRace.HarmonyPatches
                     }
                 }
             }
+        }
+
+        private static IEnumerable<CodeInstruction> CompLaunchable_TryLaunch_Transpiler(IEnumerable<CodeInstruction> codeInstructions, ILGenerator il)
+        {
+            var instructions = codeInstructions.ToList();
+
+            var index = instructions.FindIndex(v => v.opcode == OpCodes.Newobj && v.OperandIs(AccessTools.Constructor(typeof(ActiveDropPodInfo))));
+            if (index < 0) { throw new NotImplementedException("failed to find index for patch CompLaunchable_TryLaunch"); }
+
+            var skipLabel = il.DefineLabel();
+            var jumpLabel = il.DefineLabel();
+            instructions[index + 1].labels.Add(jumpLabel);
+
+            var injections = new List<CodeInstruction>()
+            {
+                new CodeInstruction(OpCodes.Ldarg_0),
+                new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(ThingComp), nameof(ThingComp.props))),
+                new CodeInstruction(OpCodes.Dup),
+                new CodeInstruction(OpCodes.Isinst, typeof(CompProperties_LaunchableCustom)),
+                new CodeInstruction(OpCodes.Brfalse_S, skipLabel),
+
+                new CodeInstruction(OpCodes.Newobj, AccessTools.Constructor(typeof(ActiveDropPodInfoCustom), new Type[] { typeof(CompProperties_LaunchableCustom) })),
+                new CodeInstruction(OpCodes.Br_S, jumpLabel),
+                new CodeInstruction(OpCodes.Pop).WithLabels(skipLabel),
+            };
+            instructions.InsertRange(index, injections);
+
+            return instructions;
+        }
+
+        private static IEnumerable<CodeInstruction> DropPodUtility_MakeDropPodAt_Transpiler(IEnumerable<CodeInstruction> codeInstructions, ILGenerator il)
+        {
+            var instructions = codeInstructions.ToList();
+
+            // ActiveDropPod Patch
+            {
+                var index = instructions.FindIndex(
+                    v => 
+                    v.opcode == OpCodes.Call && 
+                    v.OperandIs(AccessTools.Method(typeof(ThingMaker), nameof(ThingMaker.MakeThing))));
+
+                if (index < 0) { throw new NotImplementedException("failed to find index for patch DropPodUtility_MakeDropPodAt #1"); }
+
+                var skipLabel = il.DefineLabel();
+                var jumpLabel = il.DefineLabel();
+                instructions[0].labels.Add(skipLabel);
+                instructions[index - 1].labels.Add(jumpLabel);
+
+                var injections = new List<CodeInstruction>()
+                {
+                    new CodeInstruction(OpCodes.Ldarg_2),
+                    new CodeInstruction(OpCodes.Isinst, typeof(ActiveDropPodInfoCustom)),
+                    new CodeInstruction(OpCodes.Brfalse_S, skipLabel),
+
+                    new CodeInstruction(OpCodes.Ldarg_2),
+                    new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(ActiveDropPodInfoCustom), nameof(ActiveDropPodInfoCustom.activeDropPod))),
+                    new CodeInstruction(OpCodes.Dup),
+                    new CodeInstruction(OpCodes.Brtrue_S, jumpLabel),
+                    new CodeInstruction(OpCodes.Pop),
+                };
+                instructions.InsertRange(0, injections);
+            }
+
+            // IncomingDropPod Patch
+            {
+                var injectionIndex = instructions.FindIndex(
+                    v =>
+                    v.opcode == OpCodes.Callvirt &&
+                    v.OperandIs(AccessTools.PropertySetter(typeof(ActiveDropPod), nameof(ActiveDropPod.Contents))));
+
+                var jumpIndex = instructions.FindIndex(
+                    v => 
+                    v.opcode == OpCodes.Call && 
+                    v.OperandIs(AccessTools.Method(typeof(SkyfallerMaker), nameof(SkyfallerMaker.SpawnSkyfaller), new Type[] { typeof(ThingDef), typeof(Thing), typeof(IntVec3), typeof(Map) })));
+
+                if (injectionIndex < 0 || jumpIndex < 0) { throw new NotImplementedException("failed to find index for patch DropPodUtility_MakeDropPodAt #2"); }
+
+                var skipLabel = il.DefineLabel();
+                var jumpLabel = il.DefineLabel();
+
+                instructions[injectionIndex + 1].labels.Add(skipLabel);
+                instructions[jumpIndex - 3].labels.Add(jumpLabel);
+
+                var injections = new List<CodeInstruction>()
+                {
+                    new CodeInstruction(OpCodes.Ldarg_2),
+                    new CodeInstruction(OpCodes.Isinst, typeof(ActiveDropPodInfoCustom)),
+                    new CodeInstruction(OpCodes.Brfalse_S, skipLabel),
+
+                    new CodeInstruction(OpCodes.Ldarg_2),
+                    new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(ActiveDropPodInfoCustom), nameof(ActiveDropPodInfoCustom.incomingDropPod))),
+                    new CodeInstruction(OpCodes.Dup),
+                    new CodeInstruction(OpCodes.Brtrue_S, jumpLabel),
+                    new CodeInstruction(OpCodes.Pop),
+                };
+
+                instructions.InsertRange(injectionIndex + 1, injections);
+            }
+
+            return instructions;
         }
     }
 }

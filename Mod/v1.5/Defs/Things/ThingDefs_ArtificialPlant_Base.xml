@@ -102,6 +102,9 @@
     </placeWorkers>
 
     <building>
+      <ai_neverTrashThis>true</ai_neverTrashThis>
+      <ai_chillDestination>false</ai_chillDestination>
+
       <deconstructible>true</deconstructible>
       <claimable>false</claimable>
       

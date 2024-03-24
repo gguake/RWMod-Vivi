@@ -149,5 +149,8 @@
     <baseTraderKinds Inherit="False">
       <li>VV_Base_Vivi_Standard</li>
     </baseTraderKinds>
+    
+    <dropPodActive>VV_ActiveSkyweedBox</dropPodActive>
+    <dropPodIncoming>VV_SkyweedBoxIncoming</dropPodIncoming>
   </FactionDef>
 </Defs>

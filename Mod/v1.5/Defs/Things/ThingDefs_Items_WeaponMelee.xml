@@ -84,7 +84,7 @@
   <!-- 예식용 창 -->
   <ThingDef ParentName="BaseWeapon">
     <defName>VV_RitualLance</defName>
-    <label>ritual lance</label>
+    <label>vivi ritual lance</label>
     <description>.</description>
     <graphicData>
       <texPath>Things/Item/Equipment/VV_RitualLance</texPath>

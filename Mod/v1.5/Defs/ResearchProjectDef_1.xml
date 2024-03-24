@@ -126,7 +126,7 @@
     <defName>VV_AncientBotany</defName>
     <label>ancient botany</label>
     <description>.</description>
-    <baseCost>1000</baseCost>
+    <baseCost>700</baseCost>
     <researchViewX>2</researchViewX>
     <researchViewY>1.4</researchViewY>
     <prerequisites>

@@ -39,6 +39,7 @@
 		<addedPartProps>
 			<solid>true</solid>
 			<partEfficiency>1.25</partEfficiency>
+			<betterThanNatural>true</betterThanNatural>
 		</addedPartProps>
 	</HediffDef>
   
@@ -52,6 +53,7 @@
 		<addedPartProps>
 			<solid>true</solid>
 			<partEfficiency>1.25</partEfficiency>
+			<betterThanNatural>true</betterThanNatural>
 		</addedPartProps>
 	</HediffDef>
 
@@ -72,6 +74,59 @@
         </abilityDefs>
       </li>
     </comps>
+
+		<renderNodeProperties>
+			<li>
+				<debugLabel>LeftUpperWing</debugLabel>
+				<workerClass>PawnRenderNodeWorker_AttachmentBody</workerClass>
+        <texPath>Things/Pawn/Vivi/BodyParts/UpperWingL</texPath>
+				<rotDrawMode>Fresh</rotDrawMode>
+				<drawData>
+					<scaleOffsetByBodySize>true</scaleOffsetByBodySize>
+					<dataNorth>
+						<offset>(-0.01, 0, 0.0)</offset>
+						<layer>80</layer>
+					</dataNorth>
+					<dataSouth>
+						<offset>(0.01, 0, 0.0)</offset>
+						<layer>-2</layer>
+					</dataSouth>
+					<dataEast>
+						<offset>(-0.025, 0, 0)</offset>
+						<layer>39</layer>
+					</dataEast>
+					<dataWest>
+						<offset>(0.025, 0, 0)</offset>
+						<layer>42</layer>
+					</dataWest>
+				</drawData>
+			</li>
+			<li>
+				<debugLabel>RightUpperWing</debugLabel>
+				<workerClass>PawnRenderNodeWorker_AttachmentBody</workerClass>
+        <texPath>Things/Pawn/Vivi/BodyParts/UpperWingR</texPath>
+				<rotDrawMode>Fresh</rotDrawMode>
+				<drawData>
+					<scaleOffsetByBodySize>true</scaleOffsetByBodySize>
+					<dataNorth>
+						<offset>(0.01, 0, 0)</offset>
+						<layer>80</layer>
+					</dataNorth>
+					<dataSouth>
+						<offset>(-0.01, 0, 0)</offset>
+						<layer>-2</layer>
+					</dataSouth>
+					<dataEast>
+						<offset>(-0.025, 0, 0)</offset>
+						<layer>42</layer>
+					</dataEast>
+					<dataWest>
+						<offset>(0.025, 0, 0)</offset>
+						<layer>39</layer>
+					</dataWest>
+				</drawData>
+			</li>
+		</renderNodeProperties>
 	</HediffDef>
 
 </Defs>

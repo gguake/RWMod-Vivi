@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 비비 엘텍스 바늘 -->
+  <ThingDef ParentName="BaseWeapon">
+    <defName>VV_EltexNeedle</defName>
+    <label>vivi eltex needle</label>
+    <description>.</description>
+    <graphicData>
+      <texPath>Things/Item/Equipment/VV_ViviLongJavelin</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+    <soundInteract>Interact_BeatFire</soundInteract>
+
+    <techLevel>Medieval</techLevel>
+    <statBases>
+      <WorkToMake>28000</WorkToMake>
+      <Mass>1</Mass>
+      <AccuracyTouch>1</AccuracyTouch>
+      <AccuracyShort>1</AccuracyShort>
+      <AccuracyMedium>1</AccuracyMedium>
+      <AccuracyLong>1</AccuracyLong>
+      <RangedWeapon_Cooldown>12.0</RangedWeapon_Cooldown>
+    </statBases>
+
+    <thingSetMakerTags><li>RewardStandardMidFreq</li></thingSetMakerTags>
+    <thingCategories Inherit="False">
+      <li>VV_ViviWeapon</li>
+    </thingCategories>
+    <weaponTags>
+      <li>VV_ViviExotic</li>
+    </weaponTags>
+
+    <comps>
+      <li>
+        <compClass>CompQuality</compClass>
+      </li>
+      <li Class="CompProperties_Art">
+        <nameMaker>NamerArtWeaponMelee</nameMaker>
+        <descriptionMaker>ArtDescription_WeaponMelee</descriptionMaker>
+        <minQualityForArtistic>Excellent</minQualityForArtistic>
+      </li>
+      <li Class="CompProperties_Biocodable"/>
+    </comps>
+    <smeltable>false</smeltable>
+    <burnableByRecipe>true</burnableByRecipe>
+    <notifyMapRemoved>true</notifyMapRemoved>
+
+    <verbs>
+      <li>
+        <verbClass>VVRace.Verb_SpawnNeedle</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>VV_Projectile_EltexNeedle</defaultProjectile>
+        <warmupTime>5.0</warmupTime>
+        <range>49.9</range>
+        <soundCast>Interact_BeatFire</soundCast>
+        <rangedFireRulepack>Combat_RangedFire_Thrown</rangedFireRulepack>
+      </li>
+    </verbs>
+
+    <tools>
+      <li>
+        <label>point</label>
+        <capacities>
+          <li>Stab</li>
+        </capacities>
+        <power>7</power>
+        <armorPenetration>0.3</armorPenetration>
+        <cooldownTime>0.5</cooldownTime>
+      </li>
+    </tools>
+
+    <tradeTags>
+      <li>VV_ViviExotic</li>
+    </tradeTags>
+
+    <modExtensions>
+      <li Class="RPEF.RaceConstraint">
+        <whitelist>
+          <li>VV_Vivi</li>
+        </whitelist>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseProjectileNeolithic">
+    <defName>VV_Projectile_EltexNeedle</defName>
+    <label>eltex needle</label>
+    <thingClass>VVRace.Needle</thingClass>
+    <graphicData>
+      <texPath>Things/Item/Equipment/VV_ViviLongJavelinProjectile</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+
+    <projectile Class="VVRace.NeedleProperties">
+      <damageDef>Stab</damageDef>
+      <damageAmountBase>12</damageAmountBase>
+      <stoppingPower>1</stoppingPower>
+      <armorPenetrationBase>0.7</armorPenetrationBase>
+      <speed>50</speed>
+
+      <maxAttackCount>6</maxAttackCount>
+      <targettingRadius>3</targettingRadius>
+      <overrunTicks>4~8</overrunTicks>
+
+      <maxAngleVelocity>11.1</maxAngleVelocity>
+      <forceDirectingRadiusSqr>6.25</forceDirectingRadiusSqr>
+    </projectile>
+
+    <comps>
+      <li Class="VVRace.CompProperties_LineTrail">
+        <maxTrailPoint>20</maxTrailPoint>
+        <refreshInterval>1</refreshInterval>
+        <texPath>VFX/test</texPath>
+        <shader>Cutout</shader>
+        <color>(1.0, 0.8, 0.6)</color>
+        <widthCurve>
+          <points>
+            <li>(0, 0)</li>
+            <li>(1, 1)</li>
+          </points>
+        </widthCurve>
+        <lineTextureMode>DistributePerSegment</lineTextureMode>
+      </li>
+    </comps>
+  </ThingDef>
+</Defs>

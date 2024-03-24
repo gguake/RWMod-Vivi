@@ -317,7 +317,6 @@ namespace VVRace
                             var gun = ThingMaker.MakeThing(def);
                             if (gun != null)
                             {
-                                Log.Message($"gun: {gun}");
                                 Gun = gun;
                             }
 

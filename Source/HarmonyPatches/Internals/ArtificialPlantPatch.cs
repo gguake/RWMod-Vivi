@@ -69,6 +69,11 @@ namespace VVRace
             {
                 __result = false;
             }
+
+            if (typeof(ActiveDropPod).IsAssignableFrom(newThingDef.thingClass) && typeof(ActiveDropPod).IsAssignableFrom(oldThingDef.thingClass))
+            {
+                __result = false;
+            }
         }
 
         private static bool InstallationDesignatorDatabase_NewDesignatorFor_Prefix(ref Designator_Install __result, ThingDef artDef)
