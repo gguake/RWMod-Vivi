@@ -343,7 +343,7 @@
     </descriptionHyperlinks>
 
     <thingClass>VVRace.SolarFlower</thingClass>
-    <tickerType>Rare</tickerType>
+    <tickerType>Normal</tickerType>
 
     <graphicData>
       <texPath>Things/Plants/VV_Radiantflower</texPath>
@@ -415,7 +415,7 @@
     <descriptionHyperlinks>
       <ThingDef>VV_PerfumingPetal</ThingDef>
     </descriptionHyperlinks>
-    <tickerType>Rare</tickerType>
+    <tickerType>Normal</tickerType>
 
     <graphicData>
       <texPath>Things/Plants/VV_Richflower</texPath>

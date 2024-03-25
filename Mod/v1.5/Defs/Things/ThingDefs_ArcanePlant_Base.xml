@@ -14,7 +14,7 @@
   <ThingDef Abstract="True" Name="VV_ArcanePlantBase">
     <category>Building</category>
     <thingClass>VVRace.ArcanePlant</thingClass>
-    <tickerType>Rare</tickerType>
+    <tickerType>Normal</tickerType>
     <selectable>true</selectable>
     <neverMultiSelect>true</neverMultiSelect>
 

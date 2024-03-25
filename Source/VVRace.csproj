@@ -40,7 +40,7 @@
       <HintPath>C:\Program Files (x86)\Steam\steamapps\workshop\content\294100\2009463077\Current\Assemblies\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp">
-      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <HintPath>E:\SteamLibrary\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -52,19 +52,23 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="UnityEngine">
-      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.dll</HintPath>
+      <HintPath>E:\SteamLibrary\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>E:\SteamLibrary\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.IMGUIModule">
-      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
+      <HintPath>E:\SteamLibrary\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TextCoreModule">
+      <HintPath>E:\SteamLibrary\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.TextCoreModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.TextRenderingModule">
-      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
+      <HintPath>E:\SteamLibrary\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
@@ -79,6 +83,7 @@
     <Compile Include="ArcanePlant\AI\WorkGiver_EquipShootus.cs" />
     <Compile Include="ArcanePlant\ArcanePlantUtility.cs" />
     <Compile Include="ArcanePlant\Comps\CompBroadshieldProjector.cs" />
+    <Compile Include="ArcanePlant\Comps\CompProperties_LaunchableCustom.cs" />
     <Compile Include="ArcanePlant\Mana\ManaFluxGrid.cs" />
     <Compile Include="ArcanePlant\Mana\ManaFluxRule_AdjacentArcanePlant.cs" />
     <Compile Include="ArcanePlant\Mana\ManaFluxRule_Wind.cs" />
@@ -125,13 +130,12 @@
     <Compile Include="ArcanePlant\GerminatorModExtension.cs" />
     <Compile Include="ArcanePlant\AI\WorkGiver_ManageGerminator.cs" />
     <Compile Include="ArcanePlant\UI\ITab_GerminateSchedule.cs" />
-    <Compile Include="CompAbility_RequiresBodyPart.cs" />
-    <Compile Include="CompFermentItem.cs" />
-    <Compile Include="CompProperties_LaunchableCustom.cs" />
     <Compile Include="Egg\Comps\CompViviEggLayer.cs" />
     <Compile Include="EndGame\IncidentDefPeacebloomSpawnExtension.cs" />
     <Compile Include="EndGame\IncidentWorker_PeacebloomSpawn.cs" />
     <Compile Include="EndGame\PeacebloomAltar.cs" />
+    <Compile Include="GlideAbility\CompAbilityEffect_FoodCost.cs" />
+    <Compile Include="GlideAbility\CompAbility_RequiresBodyPart.cs" />
     <Compile Include="Hornet\HediffGiver_ConstantScaria.cs" />
     <Compile Include="Hornet\JobGiver_HornetBerserk.cs" />
     <Compile Include="Utility\Graphics\CompLineTrail.cs" />
@@ -209,7 +213,7 @@
     <Compile Include="Utility\Graphics\LineRendererManager.cs" />
     <Compile Include="Utility\ViviUtility.cs" />
     <Compile Include="FoodDrainRecipe\Bill_ProductionWithFoodDrain.cs" />
-    <Compile Include="CompAbilityEffect_FoodCost.cs" />
+    <Compile Include="Vivi\Comps\CompFermentItem.cs" />
     <Compile Include="Vivi\Comps\CompHoney.cs" />
     <Compile Include="Vivi\Gene_HoneyDependency.cs" />
     <Compile Include="Vivi\HediffComp_GrowthBoost.cs" />

@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using UnityEngine;
 using Verse;
 
@@ -8,9 +10,14 @@ namespace VVRace
     public struct ManaFluxNetworkHistory
     {
         public int tick;
-        public int generated;
-        public int consumed;
-        public int exceeded;
+        public float generated;
+        public float consumed;
+        public float exceeded;
+
+        public override string ToString()
+        {
+            return $"{tick}|{generated}|{consumed}|{exceeded}";
+        }
     }
 
     public class ManaFluxNetwork : IEnumerable<ManaAcceptor>
@@ -116,9 +123,12 @@ namespace VVRace
 
                 if (_nodesList.Count > 1)
                 {
-                    while (totalOvergeneratedMana > 0f && _tempDistributeManaFluxNodeCandidateIndices.Count > 0)
+                    int loopCount = 0;
+                    while (totalOvergeneratedMana > 0f && _tempDistributeManaFluxNodeCandidateIndices.Count > 0 && loopCount < 100)
                     {
+                        loopCount++;
                         var dividedMana = totalOvergeneratedMana / _tempDistributeManaFluxNodeCandidateIndices.Count;
+                        if (dividedMana < 1f / 60000f) { break; }
 
                         for (int i = 0; i < _tempDistributeManaFluxNodeCandidateIndices.Count; ++i)
                         {
@@ -142,6 +152,11 @@ namespace VVRace
                             }
                         }
                     }
+
+                    if (loopCount >= 100)
+                    {
+                        Log.Warning($"manaflux network calculation loopCount over 100; {totalOvergeneratedMana} {string.Join(",", _tempDistributeManaFluxNodeCandidateIndices.Select(v => $"{_nodesList[v.index].Plant}_{v.lackedMana}"))}");
+                    }
                 }
 
                 if (tick > _lastRefreshHistoryTick + 2000)
@@ -149,9 +164,9 @@ namespace VVRace
                     var history = new ManaFluxNetworkHistory()
                     {
                         tick = tick,
-                        generated = (int)totalGeneratedAtTick,
-                        consumed = (int)totalConsumedAtTick,
-                        exceeded = (int)totalOvergeneratedMana,
+                        generated = totalGeneratedAtTick,
+                        consumed = totalConsumedAtTick,
+                        exceeded = totalOvergeneratedMana,
                     };
 
                     if (FluxHistory.Count > 30) { FluxHistory.Dequeue(); }

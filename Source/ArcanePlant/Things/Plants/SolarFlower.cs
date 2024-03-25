@@ -49,7 +49,10 @@ namespace VVRace
             {
                 _lastCompGlowerState = CompGlower.Glows;
 
-                DirtyMapMesh(Map);
+                if (Spawned)
+                {
+                    DirtyMapMesh(Map);
+                }
             }
         }
     }
