@@ -9,12 +9,12 @@ namespace VVRace
 {
     public class JobDriver_Gather : JobDriver
     {
-        protected const TargetIndex GatherTargetIndex = TargetIndex.A;
-        protected const TargetIndex BillGiverTargetIndex = TargetIndex.B;
-        protected const TargetIndex StorageCellTargetIndex = TargetIndex.C;
+        protected const TargetIndex GatherTargetIdx = TargetIndex.A;
+        protected const TargetIndex BillGiverTargetIdx = TargetIndex.B;
+        protected const TargetIndex StorageCellTargetIdx = TargetIndex.C;
 
-        protected LocalTargetInfo GatherTargetInfo => job.GetTarget(GatherTargetIndex);
-        protected LocalTargetInfo BillGiverTargetInfo => job.GetTarget(BillGiverTargetIndex);
+        protected LocalTargetInfo GatherTargetInfo => job.GetTarget(GatherTargetIdx);
+        protected LocalTargetInfo BillGiverTargetInfo => job.GetTarget(BillGiverTargetIdx);
 
         protected Thing BillGiver => BillGiverTargetInfo.Thing;
 
@@ -61,16 +61,16 @@ namespace VVRace
         protected override IEnumerable<Toil> MakeNewToils()
         {
             // 이동
-            yield return Toils_Goto.GotoThing(GatherTargetIndex, PathEndMode.Touch)
-                .FailOnDespawnedNullOrForbidden(GatherTargetIndex)
-                .FailOnBurningImmobile(GatherTargetIndex)
+            yield return Toils_Goto.GotoThing(GatherTargetIdx, PathEndMode.Touch)
+                .FailOnDespawnedNullOrForbidden(GatherTargetIdx)
+                .FailOnBurningImmobile(GatherTargetIdx)
                 .FailOn(() => IsBillDisabled);
 
             // 자원 채집
             var gatherWorkAmount = Mathf.CeilToInt(GatheringRecipeDef.GatheringWorkAmount / (job.RecipeDef.efficiencyStat != null ? pawn.GetStatValue(job.RecipeDef.efficiencyStat) : 1f));
-            yield return Toils_General.Wait(gatherWorkAmount, GatherTargetIndex)
-                .FailOnDespawnedNullOrForbidden(GatherTargetIndex)
-                .FailOnBurningImmobile(GatherTargetIndex)
+            yield return Toils_General.Wait(gatherWorkAmount, GatherTargetIdx)
+                .FailOnDespawnedNullOrForbidden(GatherTargetIdx)
+                .FailOnBurningImmobile(GatherTargetIdx)
                 .FailOn(() => IsBillDisabled)
                 .WithInitAction(() =>
                 {
@@ -78,7 +78,7 @@ namespace VVRace
                 })
                 .WithFailCondition(() => !GatherTargetInfo.Thing.CanGatherable(GatheringRecipeDef.targetYieldStat, GatheringRecipeDef.targetCooldownStat))
                 .WithEffect(() => GetActor().CurJob.bill.recipe.effectWorking, TargetIndex.A)
-                .WithProgressBarToilDelay(GatherTargetIndex);
+                .WithProgressBarToilDelay(GatherTargetIdx);
 
             // 채집 체크
             yield return new Toil()
@@ -100,16 +100,16 @@ namespace VVRace
             if (GatheringRecipeDef.ProcessingWorkAmount > 0)
             {
                 // 가공이 필요한 경우 작업대로 이동
-                yield return Toils_Goto.GotoThing(BillGiverTargetIndex, PathEndMode.InteractionCell)
-                    .FailOnDespawnedNullOrForbidden(BillGiverTargetIndex)
-                    .FailOnBurningImmobile(BillGiverTargetIndex)
+                yield return Toils_Goto.GotoThing(BillGiverTargetIdx, PathEndMode.InteractionCell)
+                    .FailOnDespawnedNullOrForbidden(BillGiverTargetIdx)
+                    .FailOnBurningImmobile(BillGiverTargetIdx)
                     .FailOn(() => IsBillDisabled);
 
                 // 작업대에서 결과물을 가공
                 var processWorkAmount = Mathf.CeilToInt(GatheringRecipeDef.ProcessingWorkAmount / pawn.GetStatValue(StatDefOf.WorkSpeedGlobal));
-                yield return Toils_General.Wait(processWorkAmount, BillGiverTargetIndex)
-                    .FailOnDespawnedNullOrForbidden(BillGiverTargetIndex)
-                    .FailOnBurningImmobile(BillGiverTargetIndex)
+                yield return Toils_General.Wait(processWorkAmount, BillGiverTargetIdx)
+                    .FailOnDespawnedNullOrForbidden(BillGiverTargetIdx)
+                    .FailOnBurningImmobile(BillGiverTargetIdx)
                     .FailOn(() => IsBillDisabled)
                     .WithInitAction(() =>
                     {
@@ -126,9 +126,9 @@ namespace VVRace
                         }
                     })
                     .WithHandlingFacing()
-                    .WithProgressBarToilDelay(BillGiverTargetIndex, interpolateBetweenActorAndTarget: true)
+                    .WithProgressBarToilDelay(BillGiverTargetIdx, interpolateBetweenActorAndTarget: true)
                     .WithActiveSkill(() => job.bill.recipe.workSkill)
-                    .FailOnCannotTouch(BillGiverTargetIndex, PathEndMode.InteractionCell)
+                    .FailOnCannotTouch(BillGiverTargetIdx, PathEndMode.InteractionCell)
                     .PlaySustainerOrSound(() => GetActor().CurJob.bill.recipe.soundWorking);
 
                 // 작업대에서 결과물을 저장
@@ -242,11 +242,11 @@ namespace VVRace
                         }
                     });
 
-                yield return Toils_Reserve.Reserve(StorageCellTargetIndex);
-                yield return Toils_Haul.CarryHauledThingToCell(StorageCellTargetIndex);
+                yield return Toils_Reserve.Reserve(StorageCellTargetIdx);
+                yield return Toils_Haul.CarryHauledThingToCell(StorageCellTargetIdx);
                 yield return Toils_Haul.PlaceHauledThingInCell(
-                    StorageCellTargetIndex,
-                    Toils_Haul.CarryHauledThingToCell(StorageCellTargetIndex),
+                    StorageCellTargetIdx,
+                    Toils_Haul.CarryHauledThingToCell(StorageCellTargetIdx),
                     storageMode: true,
                     tryStoreInSameStorageIfSpotCantHoldWholeStack: true);
 
@@ -371,11 +371,11 @@ namespace VVRace
                         }
                     });
 
-                yield return Toils_Reserve.Reserve(StorageCellTargetIndex);
-                yield return Toils_Haul.CarryHauledThingToCell(StorageCellTargetIndex);
+                yield return Toils_Reserve.Reserve(StorageCellTargetIdx);
+                yield return Toils_Haul.CarryHauledThingToCell(StorageCellTargetIdx);
                 yield return Toils_Haul.PlaceHauledThingInCell(
-                    StorageCellTargetIndex,
-                    Toils_Haul.CarryHauledThingToCell(StorageCellTargetIndex),
+                    StorageCellTargetIdx,
+                    Toils_Haul.CarryHauledThingToCell(StorageCellTargetIdx),
                     storageMode: true,
                     tryStoreInSameStorageIfSpotCantHoldWholeStack: true);
 

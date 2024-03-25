@@ -46,16 +46,14 @@ namespace VVRace
                 .WithProgressBarToilDelay(EggIndex)
                 .FailOnCannotTouch(HatcheryIndex, PathEndMode.OnCell);
 
-            var toil = new Toil();
-            toil.defaultCompleteMode = ToilCompleteMode.Instant;
-            toil.initAction = () =>
-            {
-                var egg = Egg.Thing;
-                var hatchery = Hatchery.Thing as ViviEggHatchery;
-                hatchery.TryAcceptEgg(egg);
-            };
-
-            yield return toil;
+            yield return ToilMaker.MakeToil()
+                .WithDefaultCompleteMode(ToilCompleteMode.Instant)
+                .WithInitAction(() =>
+                {
+                    var egg = Egg.Thing;
+                    var hatchery = Hatchery.Thing as ViviEggHatchery;
+                    hatchery.TryAcceptEgg(egg);
+                });
         }
     }
 }

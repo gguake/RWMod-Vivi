@@ -1,7 +1,5 @@
 ﻿using RimWorld;
-using System;
 using System.Collections.Generic;
-using UnityEngine;
 using Verse;
 using Verse.AI;
 
@@ -11,9 +9,9 @@ namespace VVRace
     {
         private float workLeft;
 
-        private const TargetIndex GerminatorInd = TargetIndex.A;
+        private const TargetIndex GerminatorIdx = TargetIndex.A;
 
-        private Building_SeedlingGerminator Germinator => (Building_SeedlingGerminator)job.GetTarget(GerminatorInd).Thing;
+        private Building_SeedlingGerminator Germinator => (Building_SeedlingGerminator)job.GetTarget(GerminatorIdx).Thing;
 
         public override void ExposeData()
         {
@@ -24,52 +22,48 @@ namespace VVRace
 
         public override bool TryMakePreToilReservations(bool errorOnFailed)
         {
-            return pawn.Reserve(job.GetTarget(TargetIndex.A), job, errorOnFailed: errorOnFailed);
+            return pawn.Reserve(job.GetTarget(GerminatorIdx), job, errorOnFailed: errorOnFailed);
         }
 
         protected override IEnumerable<Toil> MakeNewToils()
         {
-            this.FailOnDespawnedNullOrForbidden(GerminatorInd);
-            this.FailOnBurningImmobile(GerminatorInd);
+            this.FailOnDespawnedNullOrForbidden(GerminatorIdx);
+            this.FailOnBurningImmobile(GerminatorIdx);
             this.FailOn(() => Germinator.CurrentSchedule == null || !Germinator.CurrentSchedule.CanManageJob);
 
-            yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.Touch);
+            yield return Toils_Goto.GotoThing(GerminatorIdx, PathEndMode.Touch);
 
-            var toilManage = ToilMaker.MakeToil("MakeNewToils");
-            toilManage.initAction = () =>
-            {
-                workLeft = Germinator.CurrentSchedule.CurrentManageScheduleDef.workAmount;
-            };
-            toilManage.tickAction = () =>
-            {
-                var actor = GetActor();
-                var curDriver = actor.jobs.curDriver;
-
-                actor.skills.Learn(SkillDefOf.Plants, 0.01f);
-                workLeft -= actor.GetStatValue(StatDefOf.PlantWorkSpeed);
-                if (workLeft <= 0)
+            yield return ToilMaker.MakeToil()
+                .WithDefaultCompleteMode(ToilCompleteMode.Never)
+                .WithInitAction(() =>
                 {
-                    curDriver.ReadyForNextToil();
-                }
-            };
-            toilManage.defaultCompleteMode = ToilCompleteMode.Never;
-            toilManage.WithProgressBar(TargetIndex.A, delegate
-            {
-                return 1f - workLeft / Germinator.CurrentSchedule.CurrentManageScheduleDef.workAmount;
-            });
+                    workLeft = Germinator.CurrentSchedule.CurrentManageScheduleDef.workAmount;
+                })
+                .WithTickAction(() =>
+                {
+                    var actor = GetActor();
+                    var curDriver = actor.jobs.curDriver;
 
-            yield return toilManage
-                .FailOnDespawnedNullOrForbiddenPlacedThings(GerminatorInd)
-                .FailOnCannotTouch(GerminatorInd, PathEndMode.Touch);
+                    actor.skills.Learn(SkillDefOf.Plants, 0.01f);
+                    workLeft -= actor.GetStatValue(StatDefOf.PlantWorkSpeed);
+                    if (workLeft <= 0)
+                    {
+                        curDriver.ReadyForNextToil();
+                    }
+                })
+                .WithProgressBar(GerminatorIdx, () =>
+                {
+                    return 1f - workLeft / Germinator.CurrentSchedule.CurrentManageScheduleDef.workAmount;
+                })
+                .FailOnDespawnedNullOrForbiddenPlacedThings(GerminatorIdx)
+                .FailOnCannotTouch(GerminatorIdx, PathEndMode.Touch);
 
-            var toilFinalizeManage = ToilMaker.MakeToil("FinalizeManage");
-            toilFinalizeManage.defaultCompleteMode = ToilCompleteMode.Instant;
-            toilFinalizeManage.initAction = () =>
-            {
-                Germinator.CurrentSchedule.AdvanceGerminateSchedule(GetActor(), Germinator);
-            };
-
-            yield return toilFinalizeManage;
+            yield return ToilMaker.MakeToil()
+                .WithDefaultCompleteMode(ToilCompleteMode.Instant)
+                .WithInitAction(() =>
+                {
+                    Germinator.CurrentSchedule.AdvanceGerminateSchedule(GetActor(), Germinator);
+                });
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using RimWorld;
-using Verse.AI;
-using Verse;
 using System.Collections.Generic;
 using System.Linq;
+using Verse;
+using Verse.AI;
 
 namespace VVRace
 {
@@ -44,34 +44,25 @@ namespace VVRace
 
             if (!pawn.CanReserveAndReach(egg, PathEndMode.ClosestTouch, Danger.Deadly)) { return null; }
 
-            var allAcceptibleHatchery = pawn.Map.listerBuildings
-                .AllBuildingsColonistOfDef(VVThingDefOf.VV_ViviHatchery)
-                .Cast<ViviEggHatchery>()
-                .Where(v => v.CanLayHere)
+            var allAcceptibleHatchery = pawn.Map.listerBuildings.AllBuildingsColonistOfDef(VVThingDefOf.VV_ViviHatchery)
+                .Where(v => v is ViviEggHatchery hatchery && hatchery.CanLayHere)
                 .OrderBy(v => pawn.Position.DistanceToSquared(v.Position))
                 .ToList();
 
             if (!allAcceptibleHatchery.Any()) { return null; }
 
-            ViviEggHatchery targetHatchery = null;
             foreach (var candidate in allAcceptibleHatchery)
             {
                 if (pawn.CanReach(candidate, PathEndMode.OnCell, Danger.Deadly))
                 {
-                    targetHatchery = candidate;
-                    break;
+                    var job = JobMaker.MakeJob(VVJobDefOf.VV_HaulViviEgg, egg, candidate);
+                    job.count = 1;
+
+                    return job;
                 }
             }
 
-            if (targetHatchery == null)
-            {
-                return null;
-            }
-
-            var job = JobMaker.MakeJob(VVJobDefOf.VV_HaulViviEgg, egg, targetHatchery);
-            job.count = 1;
-
-            return job;
+            return null;
         }
     }
 }

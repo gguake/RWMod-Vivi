@@ -6,11 +6,11 @@ namespace VVRace
 {
     public class JobDriver_ClearGerminator : JobDriver
     {
-        public const int ClearTicks = 500;
+        public const int ClearTicks = 700;
 
-        private const TargetIndex GerminatorInd = TargetIndex.A;
+        private const TargetIndex GerminatorIdx = TargetIndex.A;
 
-        private Building_SeedlingGerminator Germinator => (Building_SeedlingGerminator)job.GetTarget(GerminatorInd).Thing;
+        private Building_SeedlingGerminator Germinator => (Building_SeedlingGerminator)job.GetTarget(GerminatorIdx).Thing;
 
         public override bool TryMakePreToilReservations(bool errorOnFailed)
         {
@@ -19,23 +19,22 @@ namespace VVRace
 
         protected override IEnumerable<Toil> MakeNewToils()
         {
-            this.FailOnDespawnedNullOrForbidden(GerminatorInd);
-            this.FailOnBurningImmobile(GerminatorInd);
+            this.FailOnDespawnedNullOrForbidden(GerminatorIdx);
+            this.FailOnBurningImmobile(GerminatorIdx);
             this.FailOn(() => Germinator.CurrentSchedule == null || Germinator.ProductThingDef != null);
 
-            yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.Touch);
+            yield return Toils_Goto.GotoThing(GerminatorIdx, PathEndMode.Touch);
             yield return Toils_General.Wait(ClearTicks)
-                .FailOnDestroyedNullOrForbidden(TargetIndex.A)
-                .FailOnCannotTouch(TargetIndex.A, PathEndMode.Touch)
-                .WithProgressBarToilDelay(TargetIndex.A);
+                .FailOnDestroyedNullOrForbidden(GerminatorIdx)
+                .FailOnCannotTouch(GerminatorIdx, PathEndMode.Touch)
+                .WithProgressBarToilDelay(GerminatorIdx);
 
-            var toilFinalizeClear = ToilMaker.MakeToil("FinalizeClear");
-            toilFinalizeClear.defaultCompleteMode = ToilCompleteMode.Instant;
-            toilFinalizeClear.initAction = () =>
-            {
-                Germinator.Clear();
-            };
-            yield return toilFinalizeClear;
+            yield return ToilMaker.MakeToil()
+                .WithDefaultCompleteMode(ToilCompleteMode.Instant)
+                .WithInitAction(() =>
+                {
+                    Germinator.Clear();
+                });
         }
     }
 }

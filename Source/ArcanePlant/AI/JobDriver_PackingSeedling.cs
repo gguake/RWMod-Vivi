@@ -8,36 +8,33 @@ namespace VVRace
     {
         public const int PackingTicks = 200;
 
-        private const TargetIndex GerminatorInd = TargetIndex.A;
+        private const TargetIndex GerminatorIdx = TargetIndex.A;
 
-        private Building_SeedlingGerminator Germinator => (Building_SeedlingGerminator)job.GetTarget(GerminatorInd).Thing;
+        private Building_SeedlingGerminator Germinator => (Building_SeedlingGerminator)job.GetTarget(GerminatorIdx).Thing;
 
         public override bool TryMakePreToilReservations(bool errorOnFailed)
         {
-            return pawn.Reserve(job.GetTarget(TargetIndex.A), job, errorOnFailed: errorOnFailed);
+            return pawn.Reserve(job.GetTarget(GerminatorIdx), job, errorOnFailed: errorOnFailed);
         }
 
         protected override IEnumerable<Toil> MakeNewToils()
         {
-            this.FailOnDespawnedNullOrForbidden(GerminatorInd);
-            this.FailOnBurningImmobile(GerminatorInd);
+            this.FailOnDespawnedNullOrForbidden(GerminatorIdx);
+            this.FailOnBurningImmobile(GerminatorIdx);
             this.FailOn(() => Germinator.CurrentSchedule == null || Germinator.ProductThingCount == 0 || !Germinator.CanWithdrawProduct);
 
-            yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.Touch);
+            yield return Toils_Goto.GotoThing(GerminatorIdx, PathEndMode.Touch);
             yield return Toils_General.Wait(PackingTicks)
-                .FailOnDestroyedNullOrForbidden(TargetIndex.A)
-                .FailOnCannotTouch(TargetIndex.A, PathEndMode.Touch)
-                .WithProgressBarToilDelay(TargetIndex.A);
+                .FailOnDestroyedNullOrForbidden(GerminatorIdx)
+                .FailOnCannotTouch(GerminatorIdx, PathEndMode.Touch)
+                .WithProgressBarToilDelay(GerminatorIdx);
 
-            var toilFinalizePacking = ToilMaker.MakeToil("FinalizePacking");
-            toilFinalizePacking.defaultCompleteMode = ToilCompleteMode.Instant;
-            toilFinalizePacking.initAction = () =>
-            {
-                var thing = Germinator.WithdrawProduct();
-
-                GenSpawn.Spawn(thing, GetActor().Position, Map);
-            };
-            yield return toilFinalizePacking;
+            yield return ToilMaker.MakeToil()
+                .WithDefaultCompleteMode(ToilCompleteMode.Instant)
+                .WithInitAction(() =>
+                {
+                    GenSpawn.Spawn(Germinator.WithdrawProduct(), GetActor().Position, Map);
+                });
         }
     }
 }

@@ -589,8 +589,6 @@
       <BeautyOutdoors>10</BeautyOutdoors>
     </statBases>
 
-    <resourcesFractionWhenDeconstructed>1</resourcesFractionWhenDeconstructed>
-
     <costList>
       <VV_LivingLeaf>20</VV_LivingLeaf>
     </costList>
@@ -655,12 +653,13 @@
     <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
 
     <statBases>
-      <MaxHitPoints>150</MaxHitPoints>
-      <MarketValue>200</MarketValue>
-      <WorkToBuild>1000</WorkToBuild>
+      <MaxHitPoints>120</MaxHitPoints>
+      <WorkToBuild>500</WorkToBuild>
       <Flammability>1.0</Flammability>
     </statBases>
-    
+
+    <resourcesFractionWhenDeconstructed>1</resourcesFractionWhenDeconstructed>
+
     <costList>
       <VV_Skyweed>1</VV_Skyweed>
       <VV_Viviwax>10</VV_Viviwax>

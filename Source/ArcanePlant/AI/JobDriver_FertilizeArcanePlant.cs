@@ -7,18 +7,19 @@ namespace VVRace
 {
     public class JobDriver_FertilizeArcanePlant : JobDriver
     {
-        public const int FertilizeTick = 400;
+        public const int FertilizeTick = 300;
 
-        protected ArcanePlant ArcanePlant => (ArcanePlant)FertilizeTarget;
+        private const TargetIndex ArcanePlantIdx = TargetIndex.A;
+        private const TargetIndex FertilizerIdx = TargetIndex.B;
 
-        protected Thing FertilizeTarget => job.GetTarget(TargetIndex.A).Thing;
-        protected Thing Fertilizer => job.GetTarget(TargetIndex.B).Thing;
+        protected ArcanePlant ArcanePlant => job.GetTarget(ArcanePlantIdx).Thing as ArcanePlant;
+        protected Thing Fertilizer => job.GetTarget(FertilizerIdx).Thing;
 
         public override bool TryMakePreToilReservations(bool errorOnFailed)
         {
-            if (pawn.Reserve(FertilizeTarget, job, errorOnFailed: errorOnFailed))
+            if (pawn.Reserve(TargetA, job, errorOnFailed: errorOnFailed))
             {
-                return pawn.Reserve(Fertilizer, job, errorOnFailed: errorOnFailed);
+                return pawn.Reserve(TargetB, job, errorOnFailed: errorOnFailed);
             }
 
             return false;
@@ -26,46 +27,43 @@ namespace VVRace
 
         protected override IEnumerable<Toil> MakeNewToils()
         {
-            this.FailOnDespawnedNullOrForbidden(TargetIndex.A);
+            this.FailOnDespawnedNullOrForbidden(ArcanePlantIdx);
             AddEndCondition(() => (!ArcanePlant.IsFullMana) ? JobCondition.Ongoing : JobCondition.Succeeded);
-            AddFailCondition(() => !job.playerForced && !ArcanePlant.ShouldAutoFertilizeNowIgnoringManaPct);
-            AddFailCondition(() => !ArcanePlant.FertilizeAutoActivated);
+            AddFailCondition(() => !ArcanePlant.FertilizeAutoActivated || (!job.playerForced && !ArcanePlant.ShouldAutoFertilizeNowIgnoringManaPct));
 
             yield return Toils_General.DoAtomic(delegate
             {
                 job.count = ArcanePlant.RequiredFertilizerToFullyRecharge;
             });
 
-            Toil toilReserveFertilizer = Toils_Reserve.Reserve(TargetIndex.B);
+            Toil toilReserveFertilizer = Toils_Reserve.Reserve(FertilizerIdx);
             yield return toilReserveFertilizer;
 
-            yield return Toils_Goto.GotoThing(TargetIndex.B, PathEndMode.ClosestTouch)
-                .FailOnDespawnedNullOrForbidden(TargetIndex.B)
-                .FailOnSomeonePhysicallyInteracting(TargetIndex.B);
+            yield return Toils_Goto.GotoThing(FertilizerIdx, PathEndMode.ClosestTouch)
+                .FailOnDespawnedNullOrForbidden(FertilizerIdx)
+                .FailOnSomeonePhysicallyInteracting(FertilizerIdx);
 
-            yield return Toils_Haul.StartCarryThing(TargetIndex.B, putRemainderInQueue: false, subtractNumTakenFromJobCount: true)
-                .FailOnDestroyedNullOrForbidden(TargetIndex.B);
+            yield return Toils_Haul.StartCarryThing(FertilizerIdx, putRemainderInQueue: false, subtractNumTakenFromJobCount: true)
+                .FailOnDestroyedNullOrForbidden(FertilizerIdx);
 
-            yield return Toils_Haul.CheckForGetOpportunityDuplicate(toilReserveFertilizer, TargetIndex.B, TargetIndex.None, takeFromValidStorage: true);
+            yield return Toils_Haul.CheckForGetOpportunityDuplicate(toilReserveFertilizer, FertilizerIdx, TargetIndex.None, takeFromValidStorage: true);
 
-            yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.Touch);
+            yield return Toils_Goto.GotoThing(ArcanePlantIdx, PathEndMode.Touch);
             yield return Toils_General.Wait(FertilizeTick)
-                .FailOnDestroyedNullOrForbidden(TargetIndex.B)
-                .FailOnDestroyedNullOrForbidden(TargetIndex.A)
-                .FailOnCannotTouch(TargetIndex.A, PathEndMode.Touch)
-                .WithProgressBarToilDelay(TargetIndex.A);
+                .FailOnDestroyedNullOrForbidden(FertilizerIdx)
+                .FailOnDestroyedNullOrForbidden(ArcanePlantIdx)
+                .FailOnCannotTouch(ArcanePlantIdx, PathEndMode.Touch)
+                .WithProgressBarToilDelay(ArcanePlantIdx);
 
-            var toilFinalizeFertilize = ToilMaker.MakeToil("FinalizeFertilize");
-            toilFinalizeFertilize.defaultCompleteMode = ToilCompleteMode.Instant;
-            toilFinalizeFertilize.initAction = () =>
-            {
-                var usedCount = Mathf.Min(ArcanePlant.RequiredFertilizerToFullyRecharge, Fertilizer.stackCount);
+            yield return ToilMaker.MakeToil()
+                .WithDefaultCompleteMode(ToilCompleteMode.Instant)
+                .WithInitAction(() =>
+                {
+                    var usedCount = Mathf.Min(ArcanePlant.RequiredFertilizerToFullyRecharge, Fertilizer.stackCount);
 
-                ArcanePlant.AddMana(usedCount * ArcanePlant.ManaByFertilizer);
-                Fertilizer.SplitOff(usedCount).Destroy();
-            };
-
-            yield return toilFinalizeFertilize;
+                    ArcanePlant.AddMana(usedCount * ArcanePlant.ManaByFertilizer);
+                    Fertilizer.SplitOff(usedCount).Destroy();
+                });
         }
     }
 }

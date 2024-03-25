@@ -1,7 +1,5 @@
 ﻿using RimWorld;
-using System;
 using System.Collections.Generic;
-using UnityEngine;
 using Verse;
 using Verse.AI;
 
@@ -11,11 +9,11 @@ namespace VVRace
     {
         private float workLeft;
 
-        private const TargetIndex GerminatorInd = TargetIndex.A;
-        private const TargetIndex IngredientInd = TargetIndex.B;
+        private const TargetIndex GerminatorIdx = TargetIndex.A;
+        private const TargetIndex IngredientIdx = TargetIndex.B;
 
-        protected Building_SeedlingGerminator Germinator => job.GetTarget(GerminatorInd).Thing as Building_SeedlingGerminator;
-        protected Thing IngredientThing => job.GetTarget(TargetIndex.B).Thing;
+        protected Building_SeedlingGerminator Germinator => job.GetTarget(GerminatorIdx).Thing as Building_SeedlingGerminator;
+        protected Thing Ingredient => job.GetTarget(TargetIndex.B).Thing;
 
         public override void ExposeData()
         {
@@ -26,7 +24,7 @@ namespace VVRace
 
         public override bool TryMakePreToilReservations(bool errorOnFailed)
         {
-            if (pawn.Reserve(IngredientThing, job, errorOnFailed: errorOnFailed))
+            if (pawn.Reserve(Ingredient, job, errorOnFailed: errorOnFailed))
             {
                 return pawn.Reserve(Germinator, job, errorOnFailed: errorOnFailed);
             }
@@ -36,60 +34,56 @@ namespace VVRace
 
         protected override IEnumerable<Toil> MakeNewToils()
         {
-            this.FailOnDespawnedNullOrForbidden(GerminatorInd);
-            this.FailOnBurningImmobile(GerminatorInd);
+            this.FailOnDespawnedNullOrForbidden(GerminatorIdx);
+            this.FailOnBurningImmobile(GerminatorIdx);
             this.FailOn(() => Germinator.CurrentSchedule == null || !Germinator.CurrentSchedule.CanManageJob);
 
             yield return Toils_General.DoAtomic(() => { job.count = Germinator.CurrentSchedule.CurrentManageScheduleDef.ingredients[0].count; });
 
-            var reserveToil = Toils_Reserve.Reserve(IngredientInd);
+            var reserveToil = Toils_Reserve.Reserve(IngredientIdx);
             yield return reserveToil;
-            yield return Toils_Goto.GotoThing(IngredientInd, PathEndMode.ClosestTouch)
-                .FailOnDespawnedNullOrForbidden(IngredientInd)
-                .FailOnSomeonePhysicallyInteracting(IngredientInd);
+            yield return Toils_Goto.GotoThing(IngredientIdx, PathEndMode.ClosestTouch)
+                .FailOnDespawnedNullOrForbidden(IngredientIdx)
+                .FailOnSomeonePhysicallyInteracting(IngredientIdx);
 
-            yield return Toils_Haul.StartCarryThing(IngredientInd, subtractNumTakenFromJobCount: true);
-            yield return Toils_Haul.CheckForGetOpportunityDuplicate(reserveToil, IngredientInd, TargetIndex.None, takeFromValidStorage: true);
+            yield return Toils_Haul.StartCarryThing(IngredientIdx, subtractNumTakenFromJobCount: true);
+            yield return Toils_Haul.CheckForGetOpportunityDuplicate(reserveToil, IngredientIdx, TargetIndex.None, takeFromValidStorage: true);
 
-            yield return Toils_Reserve.Reserve(GerminatorInd);
-            yield return Toils_Goto.GotoThing(GerminatorInd, PathEndMode.Touch);
+            yield return Toils_Reserve.Reserve(GerminatorIdx);
+            yield return Toils_Goto.GotoThing(GerminatorIdx, PathEndMode.Touch);
 
-            var toilManage = ToilMaker.MakeToil("MakeNewToils");
-            toilManage.initAction = () =>
-            {
-                workLeft = Germinator.CurrentSchedule.CurrentManageScheduleDef.workAmount;
-            };
-            toilManage.tickAction = () =>
-            {
-                var actor = GetActor();
-                var curDriver = actor.jobs.curDriver;
-
-                actor.skills.Learn(SkillDefOf.Plants, 0.01f);
-                workLeft -= actor.GetStatValue(StatDefOf.PlantWorkSpeed);
-                if (workLeft <= 0)
+            yield return ToilMaker.MakeToil()
+                .WithDefaultCompleteMode(ToilCompleteMode.Never)
+                .WithInitAction(() =>
                 {
-                    curDriver.ReadyForNextToil();
-                }
-            };
-            toilManage.defaultCompleteMode = ToilCompleteMode.Never;
-            toilManage.WithProgressBar(GerminatorInd, delegate
-            {
-                return 1f - workLeft / Germinator.CurrentSchedule.CurrentManageScheduleDef.workAmount;
-            });
+                    workLeft = Germinator.CurrentSchedule.CurrentManageScheduleDef.workAmount;
+                })
+                .WithTickAction(() =>
+                {
+                    var actor = GetActor();
+                    var curDriver = actor.jobs.curDriver;
 
-            yield return toilManage
-                .FailOnDespawnedNullOrForbiddenPlacedThings(GerminatorInd)
-                .FailOnCannotTouch(GerminatorInd, PathEndMode.Touch);
+                    actor.skills.Learn(SkillDefOf.Plants, 0.01f);
+                    workLeft -= actor.GetStatValue(StatDefOf.PlantWorkSpeed);
+                    if (workLeft <= 0)
+                    {
+                        curDriver.ReadyForNextToil();
+                    }
+                })
+                .WithProgressBar(GerminatorIdx, () =>
+                {
+                    return 1f - workLeft / Germinator.CurrentSchedule.CurrentManageScheduleDef.workAmount;
+                })
+                .FailOnDespawnedNullOrForbiddenPlacedThings(GerminatorIdx)
+                .FailOnCannotTouch(GerminatorIdx, PathEndMode.Touch);
 
-            var toilFinalizeManage = ToilMaker.MakeToil("FinalizeManage");
-            toilFinalizeManage.defaultCompleteMode = ToilCompleteMode.Instant;
-            toilFinalizeManage.initAction = () =>
-            {
-                IngredientThing.SplitOff(Germinator.CurrentSchedule.CurrentManageScheduleDef.ingredients[0].count).Destroy();
-                Germinator.CurrentSchedule.AdvanceGerminateSchedule(GetActor(), Germinator);
-            };
-
-            yield return toilFinalizeManage;
+            yield return ToilMaker.MakeToil()
+                .WithDefaultCompleteMode(ToilCompleteMode.Instant)
+                .WithInitAction(() =>
+                {
+                    Ingredient.SplitOff(Germinator.CurrentSchedule.CurrentManageScheduleDef.ingredients[0].count).Destroy();
+                    Germinator.CurrentSchedule.AdvanceGerminateSchedule(GetActor(), Germinator);
+                });
         }
     }
 }

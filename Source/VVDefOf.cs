@@ -109,7 +109,6 @@ namespace VVRace
         public static ThingDef FueledSmithy;
 
         public static ThingDef VV_TitanicHornet;
-
     }
 
     [DefOf]

@@ -5,18 +5,27 @@ using Verse;
 
 namespace VVRace
 {
+    public struct ManaFluxNetworkHistory
+    {
+        public int tick;
+        public int generated;
+        public int consumed;
+        public int exceeded;
+    }
+
     public class ManaFluxNetwork : IEnumerable<ManaAcceptor>
     {
         private static int HashCounter = 1;
 
         public int NetworkHash { get; private set; }
+        public Queue<ManaFluxNetworkHistory> FluxHistory { get; private set; } = new Queue<ManaFluxNetworkHistory>();
 
         private Dictionary<ManaAcceptor, ManaFluxNetworkNode> _nodes { get; }
         private List<ManaFluxNetworkNode> _nodesList { get; }
         private int _lastRefreshTick;
+        private int _lastRefreshHistoryTick;
 
-        private List<int> _tempDistributeManaFluxNodeCandidateIndices = new List<int>();
-        private List<int> _tempDistributeManaFluxNodeIndices = new List<int>();
+        private List<(int index, float lackedMana)> _tempDistributeManaFluxNodeCandidateIndices = new List<(int index, float lackedMana)>();
 
         public ManaFluxNetwork()
         {
@@ -70,6 +79,9 @@ namespace VVRace
             {
                 _tempDistributeManaFluxNodeCandidateIndices.Clear();
 
+                var totalGeneratedAtTick = 0f;
+                var totalConsumedAtTick = 0f;
+
                 float totalOvergeneratedMana = 0f;
                 for (int i = 0; i < _nodesList.Count; ++i)
                 {
@@ -83,6 +95,9 @@ namespace VVRace
                     var consumed = extension.manaConsumeRule?.CalcManaFlux(plant, tickInterval) ?? 0f;
                     var generated = extension.manaGenerateRule?.CalcManaFlux(plant, tickInterval) ?? 0f;
 
+                    totalGeneratedAtTick += generated;
+                    totalConsumedAtTick += consumed;
+
                     var manaCapacity = extension.manaCapacity;
                     var afterMana = node.mana - consumed + generated;
 
@@ -93,40 +108,56 @@ namespace VVRace
                     {
                         totalOvergeneratedMana += overgenerated;
                     }
-                    else
+                    else if (overgenerated < 0f)
                     {
-                        _tempDistributeManaFluxNodeCandidateIndices.Add(i);
+                        _tempDistributeManaFluxNodeCandidateIndices.Add((i, -overgenerated));
                     }
                 }
 
-                if (totalOvergeneratedMana > 0f && _tempDistributeManaFluxNodeCandidateIndices.Count > 0)
+                if (_nodesList.Count > 1)
                 {
-                    _tempDistributeManaFluxNodeIndices.Clear();
-                    var maxDividedMana = totalOvergeneratedMana / _tempDistributeManaFluxNodeCandidateIndices.Count;
-                    for (int i = 0; i < _tempDistributeManaFluxNodeCandidateIndices.Count; ++i)
+                    while (totalOvergeneratedMana > 0f && _tempDistributeManaFluxNodeCandidateIndices.Count > 0)
                     {
-                        var node = _nodesList[_tempDistributeManaFluxNodeCandidateIndices[i]];
-                        var plant = node.Plant;
-                        if (plant == null) { continue; }
+                        var dividedMana = totalOvergeneratedMana / _tempDistributeManaFluxNodeCandidateIndices.Count;
 
-                        if (plant.ArcanePlantModExtension.manaCapacity - node.mana >= maxDividedMana)
+                        for (int i = 0; i < _tempDistributeManaFluxNodeCandidateIndices.Count; ++i)
                         {
-                            _tempDistributeManaFluxNodeIndices.Add(_tempDistributeManaFluxNodeCandidateIndices[i]);
+                            var t = _tempDistributeManaFluxNodeCandidateIndices[i];
+                            var node = _nodesList[t.index];
+                            if (dividedMana >= t.lackedMana)
+                            {
+                                // 균등 분배된 마나가 부족량보다 많은경우 최대치로 채우고 리스트에서 제거
+                                totalOvergeneratedMana -= t.lackedMana;
+                                node.mana += t.lackedMana;
+
+                                _tempDistributeManaFluxNodeCandidateIndices.RemoveAt(i--);
+                            }
+                            else
+                            {
+                                // 균등 분배된 마나가 부족량보다 적은경우 분배된 양만큼만 채우고 다음 루프로
+                                totalOvergeneratedMana -= dividedMana;
+                                node.mana += dividedMana;
+
+                                _tempDistributeManaFluxNodeCandidateIndices[i] = (t.index, t.lackedMana - dividedMana);
+                            }
                         }
                     }
+                }
 
-                    if (_tempDistributeManaFluxNodeIndices.Count > 0)
+                if (tick > _lastRefreshHistoryTick + 2000)
+                {
+                    var history = new ManaFluxNetworkHistory()
                     {
-                        var realDividedMana = totalOvergeneratedMana / _tempDistributeManaFluxNodeIndices.Count;
-                        for (int i = 0; i < _tempDistributeManaFluxNodeIndices.Count; ++i)
-                        {
-                            var node = _nodesList[_tempDistributeManaFluxNodeIndices[i]];
-                            var plant = node.Plant;
-                            if (plant == null) { continue; }
+                        tick = tick,
+                        generated = (int)totalGeneratedAtTick,
+                        consumed = (int)totalConsumedAtTick,
+                        exceeded = (int)totalOvergeneratedMana,
+                    };
 
-                            node.mana = Mathf.Clamp(node.mana + realDividedMana, 0f, plant.ArcanePlantModExtension.manaCapacity);
-                        }
-                    }
+                    if (FluxHistory.Count > 30) { FluxHistory.Dequeue(); }
+
+                    FluxHistory.Enqueue(history);
+                    _lastRefreshHistoryTick = tick;
                 }
 
                 _lastRefreshTick = tick;

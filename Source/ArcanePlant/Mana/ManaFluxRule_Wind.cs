@@ -12,7 +12,7 @@ namespace VVRace
         {
             if (!plant.IsOutside()) { return 0f; }
 
-            return manaFromWindSpeed.Evaluate(plant.Map.windManager.WindSpeed);
+            return manaFromWindSpeed.Evaluate(plant.Map.windManager.WindSpeed) / 60000f * ticks;
         }
     }
 }

@@ -8,12 +8,12 @@ namespace VVRace
 {
     public class JobDriver_GatherPollen : JobDriver
     {
-        protected const TargetIndex FilthTargetIndex = TargetIndex.A;
-        protected const TargetIndex GathererBuildingTargetIndex = TargetIndex.B;
-        protected const TargetIndex StorageCellTargetIndex = TargetIndex.C;
+        protected const TargetIndex FilthTargetIdx = TargetIndex.A;
+        protected const TargetIndex GathererBuildingTargetIdx = TargetIndex.B;
+        protected const TargetIndex StorageCellTargetIdx = TargetIndex.C;
 
-        protected LocalTargetInfo FilthTargetInfo => job.GetTarget(FilthTargetIndex);
-        protected LocalTargetInfo GathererBuildingTargetInfo => job.GetTarget(GathererBuildingTargetIndex);
+        protected LocalTargetInfo FilthTargetInfo => job.GetTarget(FilthTargetIdx);
+        protected LocalTargetInfo GathererBuildingTargetInfo => job.GetTarget(GathererBuildingTargetIdx);
 
         protected Thing Filth => FilthTargetInfo.Thing;
         protected Thing GathererBuilding => GathererBuildingTargetInfo.Thing;
@@ -52,21 +52,21 @@ namespace VVRace
         protected override IEnumerable<Toil> MakeNewToils()
         {
             // 대상으로 이동
-            yield return Toils_Goto.GotoThing(FilthTargetIndex, PathEndMode.Touch)
-                .FailOnDespawnedNullOrForbidden(FilthTargetIndex)
+            yield return Toils_Goto.GotoThing(FilthTargetIdx, PathEndMode.Touch)
+                .FailOnDespawnedNullOrForbidden(FilthTargetIdx)
                 .FailOn(() => IsBillDisabled);
 
             // 대상을 청소
             var gatherWorkAmount = Mathf.CeilToInt(TotalWorkAmount / (job.RecipeDef.efficiencyStat != null ? pawn.GetStatValue(job.RecipeDef.efficiencyStat) : 1f));
-            yield return Toils_General.Wait(gatherWorkAmount, FilthTargetIndex)
-                .FailOnDespawnedNullOrForbidden(FilthTargetIndex)
+            yield return Toils_General.Wait(gatherWorkAmount, FilthTargetIdx)
+                .FailOnDespawnedNullOrForbidden(FilthTargetIdx)
                 .FailOn(() => IsBillDisabled)
                 .WithInitAction(() =>
                 {
                     job.bill.Notify_BillWorkStarted(pawn);
                 })
                 .WithEffect(() => GetActor().CurJob.bill.recipe.effectWorking, TargetIndex.A)
-                .WithProgressBarToilDelay(FilthTargetIndex);
+                .WithProgressBarToilDelay(FilthTargetIdx);
 
             // 꽃가루 생성 및 저장
             yield return new Toil()
@@ -179,11 +179,11 @@ namespace VVRace
                 })
                 .WithDefaultCompleteMode(ToilCompleteMode.Instant);
 
-            yield return Toils_Reserve.Reserve(StorageCellTargetIndex);
-            yield return Toils_Haul.CarryHauledThingToCell(StorageCellTargetIndex);
+            yield return Toils_Reserve.Reserve(StorageCellTargetIdx);
+            yield return Toils_Haul.CarryHauledThingToCell(StorageCellTargetIdx);
             yield return Toils_Haul.PlaceHauledThingInCell(
-                StorageCellTargetIndex,
-                Toils_Haul.CarryHauledThingToCell(StorageCellTargetIndex),
+                StorageCellTargetIdx,
+                Toils_Haul.CarryHauledThingToCell(StorageCellTargetIdx),
                 storageMode: true,
                 tryStoreInSameStorageIfSpotCantHoldWholeStack: true);
 
