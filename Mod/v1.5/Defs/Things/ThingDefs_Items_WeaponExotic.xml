@@ -131,7 +131,7 @@
       <AccuracyShort>1</AccuracyShort>
       <AccuracyMedium>1</AccuracyMedium>
       <AccuracyLong>1</AccuracyLong>
-      <RangedWeapon_Cooldown>20.0</RangedWeapon_Cooldown>
+      <RangedWeapon_Cooldown>30.0</RangedWeapon_Cooldown>
     </statBases>
     <equippedStatOffsets>
       <MoveSpeed>-1.0</MoveSpeed>
@@ -233,12 +233,12 @@
       <damageDef>Stab</damageDef>
       <damageAmountBase>10</damageAmountBase>
       <stoppingPower>1.5</stoppingPower>
-      <armorPenetrationBase>0.7</armorPenetrationBase>
+      <armorPenetrationBase>0.5</armorPenetrationBase>
       <speed>50</speed>
 
       <maxAttackCount>6</maxAttackCount>
       <targettingRadius>3</targettingRadius>
-      <overrunTicks>4~8</overrunTicks>
+      <overrunTicks>3~7</overrunTicks>
 
       <maxAngleVelocity>10.1</maxAngleVelocity>
       <forceDirectingRadiusSqr>11</forceDirectingRadiusSqr>

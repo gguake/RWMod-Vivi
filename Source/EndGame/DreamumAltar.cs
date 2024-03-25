@@ -1,20 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Verse;
 
 namespace VVRace
 {
-    public enum PeacebloomProjectStage
+    public enum DreamumProjectStage
     {
         NotStarted,
         InProgress,
         Completed,
     }
 
-    public class PeacebloomAltar : ManaAcceptor
+    public class DreamumAltar : ManaAcceptor
     {
         private bool _projectStarted;
         private float _projectProgress;

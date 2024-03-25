@@ -43,10 +43,10 @@
 <VV_Gun_Peashooter.label>콩뿌리개 꼬투리</VV_Gun_Peashooter.label>
 <VV_Gun_Peashooter.description>빠르게 콩을 생성해 적에게 발사하는 콩뿌리개의 꼬투리입니다.</VV_Gun_Peashooter.description>
 
-<VV_Pealaucnher.label>폭탄뿌리개</VV_Pealaucnher.label>
-<VV_Pealaucnher.description>적을 감지하면 화약 성분이 포함된 콩을 발사해 쫓아내는 식물로 발사할때마다 마나를 소모합니다.
+<VV_Pealauncher.label>폭탄뿌리개</VV_Pealauncher.label>
+<VV_Pealauncher.description>적을 감지하면 화약 성분이 포함된 콩을 발사해 쫓아내는 식물로 발사할때마다 마나를 소모합니다.
 \n콩뿌리개와 유사하지만 화약을 이용해 발사하기에 탄속이 매우 빠르고 사거리가 길며 발사된 콩이 착탄지에서 폭발합니다.
-\n주의: 지근거리에서도 사격하므로 유폭에 주의하세요.</VV_Pealaucnher.description>
+\n주의: 지근거리에서도 사격하므로 유폭에 주의하세요.</VV_Pealauncher.description>
 <VV_Bullet_PeaFast.label>폭발콩</VV_Bullet_PeaFast.label>
 <VV_Gun_Pealauncher.label>폭탄뿌리개</VV_Gun_Pealauncher.label>
 <VV_Gun_Pealauncher.description>빠르게 콩을 생성해 적에게 발사하는 폭탄뿌리개의 꼬투리입니다.</VV_Gun_Pealauncher.description>
@@ -67,8 +67,9 @@
 <VV_SkyweedBoxIncoming.label>하늘초 상자 (접근 중)</VV_SkyweedBoxIncoming.label>
 <VV_SkyweedBoxLeaving.label>하늘초 상자 (떠나는 중)</VV_SkyweedBoxLeaving.label>
 
-<VV_Peacebloom.label>평화바라기</VV_Peacebloom.label>
-<VV_Peacebloom.description>번영한 비비 둥지 근처에 종종 자연적으로 자라나는 꽃으로 비비들에게는 신성하게 여겨집니다. 인접한 고대 식물이 많을수록 더 많은 마나를 생산하며 많은 마나를 저장할 수 있습니다.
-\n비비가 아닌 다른 생물들에게 이 꽃의 꽃가루는 강력한 수면 효과를 가지며 메카노이드들의 센서에도 장애를 일으키는것으로 알려져있지만 양이 매우 적어 큰 효용은 없습니다.</VV_Peacebloom.description>
+<VV_Dreamum.label>꿈송이</VV_Dreamum.label>
+<VV_Dreamum.description>비비 둥지 근처에서만 발견되는 희귀한 마법 꽃입니다. 많은 마나를 저장할 수 있으며 꿈송이끼리는 거리가 떨어져있어도 알려지지 않은 원리로 마나를 주고받을 수 있으며 약간의 마나를 생산합니다.
+\n꽃 향기를 맡으면 곧 잠에 빠지게 되어 꿈송이라는 이름으로 불립니다. 비비들에게는 아무 영향을 주지 않으며 많은 마나가 흐르는 둥지 주변에서 발견되어 번영을 상징하는 신성한 꽃으로 취급됩니다.
+\n꿈송이가 초월계와 연결되어 초월계를 통해 마나를 전송하고 가져온다는 가설이 있지만 검증된 사실은 없습니다.</VV_Dreamum.description>
 
 </LanguageData>

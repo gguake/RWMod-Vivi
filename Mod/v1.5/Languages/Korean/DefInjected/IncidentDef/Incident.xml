@@ -3,8 +3,10 @@
   <VV_TitanicHornetSwarm.label>거대 말벌 무리</VV_TitanicHornetSwarm.label>
   <VV_TitanicHornetSwarmVivi.label>거대 말벌 무리 (비비)</VV_TitanicHornetSwarmVivi.label>
 
-  <VV_PeacebloomSpawn.label>평화바라기 개화</VV_PeacebloomSpawn.label>
-  <VV_PeacebloomSpawn.letterLabel>평화바라기 개화</VV_PeacebloomSpawn.letterLabel>
-  <VV_PeacebloomSpawn.letterText>기지 주변에 평화바라기가 자라났습니다. 이 꽃은 비비들에게는 신성한 것으로 여겨지며 대개 번영한 비비 둥지 주변에서만 발견되고 그외의 지역에서는 거의 보이지 않습니다.
-\n이 꽃의 꽃가루는 비비 이외의 다른 생물들에게는 행복하고 나른한 기분을 느끼게 하며 무기력하게 만들고 결국에는 의식을 잃게 합니다. 고대 식물과도 관련이 있을수 있으며 보다 정밀한 분석을 위해 연구가 필요합니다.</VV_PeacebloomSpawn.letterText>
+  <VV_DreamumSpawn.label>꿈송이 개화</VV_DreamumSpawn.label>
+  <VV_DreamumSpawn.letterLabel>꿈송이 개화</VV_DreamumSpawn.letterLabel>
+  <VV_DreamumSpawn.letterText>기지 주변에 꿈송이가 자라났습니다. 이 꽃은 비비들에게는 번영의 상징으로 여겨지며 신성한 꽃으로 취급됩니다.
+\n이 꽃의 꽃가루는 비비 이외의 다른 생물들에게는 행복하고 나른한 기분을 느끼게 하며 잠에 들게 만듭니다. 또한 꿈송이끼리는 알려지지 않은 원리로 인해 멀리있는 꿈송이끼리 마나를 공유하는 성질이 있습니다.
+\n이론상으로 꿈송이를 인위적으로 퍼뜨려 멀리 떨어진 비비 둥지끼리 마나를 공유할수도 있습니다. 하지만 이를 위해서는 강력한 마나 공급원과 먼 지역까지 꿈송이의 영향력을 닿게할 수단이 필요합니다.
+\n만약 우리가 꿈송이를 거대화하고 대량의 마나를 공급할수 있다면 행성 전역의 비비들은 모두 무한에 가까운 마나를 다룰수 있을것입니다.</VV_DreamumSpawn.letterText>
 </LanguageData>

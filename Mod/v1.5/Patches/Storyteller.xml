@@ -4,7 +4,7 @@
     <xpath>Defs/StorytellerDef[@Name="BaseStoryteller"]/comps</xpath>
     <value>
       <li Class="StorytellerCompProperties_OnOffCycle">
-        <incident>VV_PeacebloomSpawn</incident>
+        <incident>VV_DreamumSpawn</incident>
         <onDays>60</onDays>
         <offDays>0</offDays>
         <minSpacingDays>30</minSpacingDays>

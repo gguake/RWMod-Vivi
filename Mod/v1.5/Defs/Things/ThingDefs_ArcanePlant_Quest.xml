@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
   <ThingDef ParentName="VV_ArcanePlantProductive">
-    <defName>VV_Peacebloom</defName>
-    <label>peacebloom</label>
+    <defName>VV_Dreamum</defName>
+    <label>dreamum</label>
     <description>.</description>
 
     <graphicData>
-      <texPath>Things/Plants/VV_Purifier</texPath>
+      <texPath>Things/Plants/VV_Dreamum</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
 
     <statBases>
-      <MarketValue>800</MarketValue>
-      <MaxHitPoints>150</MaxHitPoints>
+      <MarketValue>500</MarketValue>
+      <MaxHitPoints>200</MaxHitPoints>
       <Beauty>18</Beauty>
       <BeautyOutdoors>18</BeautyOutdoors>
     </statBases>
@@ -36,20 +36,22 @@
       <li Class="VVRace.ArcanePlantExtension">
         <germinateWeight>0</germinateWeight>
 
-        <manaCapacity>777</manaCapacity>
-        <zeroManaDamageByChance>1~1</zeroManaDamageByChance>
+        <manaCapacity>700</manaCapacity>
+        <zeroManaDamageByChance>3~9</zeroManaDamageByChance>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>7</mana>
+          <mana>70</mana>
         </manaConsumeRule>
-        <manaGenerateRule Class="VVRace.ManaFluxRule_AdjacentArcanePlant">
-          <manaPerAdjacentArcanePlant>21</manaPerAdjacentArcanePlant>
+        <manaGenerateRule Class="VVRace.ManaFluxRule_Constant">
+          <mana>0</mana>
         </manaGenerateRule>
+        
+        <zeroManaDurableTicks>180000</zeroManaDurableTicks>
       </li>
     </modExtensions>
 
     <tradeTags Inherit="False">
-      <li>VV_Peacebloom</li>
+      <li>VV_Dreamum</li>
     </tradeTags>
   </ThingDef>
 

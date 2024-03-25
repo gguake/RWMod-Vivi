@@ -88,7 +88,7 @@ namespace VVRace
         public static ThingDef VV_Radiantflower;
         public static ThingDef VV_Richflower;
         public static ThingDef VV_Peashooter;
-        public static ThingDef VV_Pealaucnher;
+        public static ThingDef VV_Pealauncher;
         public static ThingDef VV_Shootus;
 
         public static ThingDef VV_ViviHoneycombWall;

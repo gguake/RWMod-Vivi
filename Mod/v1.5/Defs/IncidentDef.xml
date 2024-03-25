@@ -34,14 +34,14 @@
   </IncidentDef>
 
   <IncidentDef>
-    <defName>VV_PeacebloomSpawn</defName>
-    <label>peacebloom sprout</label>
+    <defName>VV_DreamumSpawn</defName>
+    <label>dreamum sprout</label>
     <category>Special</category>
     <targetTags>
       <li>Map_PlayerHome</li>
     </targetTags>
-    <workerClass>VVRace.IncidentWorker_PeacebloomSpawn</workerClass>
-    <letterLabel>Peacebloom sprout</letterLabel>
+    <workerClass>VVRace.IncidentWorker_DreamumSpawn</workerClass>
+    <letterLabel>Dreamum sprout</letterLabel>
     <letterText>.</letterText>
     <letterDef>VV_EndGameEvent</letterDef>
     <minPopulation>10</minPopulation>
@@ -52,12 +52,12 @@
     </disallowedBiomes>
 
     <modExtensions>
-      <li Class="VVRace.IncidentDefPeacebloomSpawnExtension">
+      <li Class="VVRace.IncidentDefDreamumSpawnExtension">
         <requiredPlayerWealth>1000</requiredPlayerWealth>
         <requiredViviColonistRatio>0.5</requiredViviColonistRatio>
         <requiredRoyalViviCount>1</requiredRoyalViviCount>
         <requiredArcanePlantCount>1</requiredArcanePlantCount>
-        <targetThingDef>VV_Peacebloom</targetThingDef>
+        <targetThingDef>VV_Dreamum</targetThingDef>
       </li>
     </modExtensions>
   </IncidentDef>

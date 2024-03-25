@@ -3,21 +3,21 @@ using Verse;
 
 namespace VVRace
 {
-    public class IncidentWorker_PeacebloomSpawn : IncidentWorker
+    public class IncidentWorker_DreamumSpawn : IncidentWorker
     {
-        private IncidentDefPeacebloomSpawnExtension Extension
+        private IncidentDefDreamumSpawnExtension Extension
         {
             get
             {
                 if (_extension == null)
                 {
-                    _extension = def.GetModExtension<IncidentDefPeacebloomSpawnExtension>();
+                    _extension = def.GetModExtension<IncidentDefDreamumSpawnExtension>();
                 }
 
                 return _extension;
             }
         }
-        private IncidentDefPeacebloomSpawnExtension _extension = null;
+        private IncidentDefDreamumSpawnExtension _extension = null;
 
         protected override bool CanFireNowSub(IncidentParms parms)
         {
@@ -42,7 +42,7 @@ namespace VVRace
                 }
             }
 
-            // 고대 식물 숫자 체크
+            // 식물 숫자 체크
             if (extension.requiredArcanePlantCount > 0 && arcanePlantCount < extension.requiredArcanePlantCount)
             {
                 return false;
@@ -100,7 +100,7 @@ namespace VVRace
             return true;
         }
 
-        private bool CanSpawnAt(IncidentDefPeacebloomSpawnExtension extension, Map map, IntVec3 c)
+        private bool CanSpawnAt(IncidentDefDreamumSpawnExtension extension, Map map, IntVec3 c)
         {
             if (!c.Standable(map) || c.Fogged(map) || !c.GetRoom(map).PsychologicallyOutdoors || c.Roofed(map)) { return false; }
 

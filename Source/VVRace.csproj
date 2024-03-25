@@ -131,9 +131,9 @@
     <Compile Include="ArcanePlant\AI\WorkGiver_ManageGerminator.cs" />
     <Compile Include="ArcanePlant\UI\ITab_GerminateSchedule.cs" />
     <Compile Include="Egg\Comps\CompViviEggLayer.cs" />
-    <Compile Include="EndGame\IncidentDefPeacebloomSpawnExtension.cs" />
-    <Compile Include="EndGame\IncidentWorker_PeacebloomSpawn.cs" />
-    <Compile Include="EndGame\PeacebloomAltar.cs" />
+    <Compile Include="EndGame\IncidentDefDreamumSpawnExtension.cs" />
+    <Compile Include="EndGame\IncidentWorker_DreamumSpawn.cs" />
+    <Compile Include="EndGame\DreamumAltar.cs" />
     <Compile Include="GlideAbility\CompAbilityEffect_FoodCost.cs" />
     <Compile Include="GlideAbility\CompAbility_RequiresBodyPart.cs" />
     <Compile Include="Hornet\HediffGiver_ConstantScaria.cs" />

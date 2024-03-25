@@ -15,10 +15,10 @@ namespace VVRace
             var pots = new List<(int xOffset, int zOffset, ThingDef plantDef)>()
             {
                 (0, 0, VVThingDefOf.VV_Richflower),
-                (1, 0, VVThingDefOf.VV_Pealaucnher),
-                (-1, 0, VVThingDefOf.VV_Pealaucnher),
-                (0, 1, VVThingDefOf.VV_Pealaucnher),
-                (0, -1, VVThingDefOf.VV_Pealaucnher),
+                (1, 0, VVThingDefOf.VV_Pealauncher),
+                (-1, 0, VVThingDefOf.VV_Pealauncher),
+                (0, 1, VVThingDefOf.VV_Pealauncher),
+                (0, -1, VVThingDefOf.VV_Pealauncher),
 
                 (1, -1, VVThingDefOf.VV_Peashooter),
                 (1, 1, VVThingDefOf.VV_Peashooter),

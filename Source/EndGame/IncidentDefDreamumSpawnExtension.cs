@@ -2,7 +2,7 @@
 
 namespace VVRace
 {
-    public class IncidentDefPeacebloomSpawnExtension : DefModExtension
+    public class IncidentDefDreamumSpawnExtension : DefModExtension
     {
         public float requiredPlayerWealth = 0f;
         public float requiredViviColonistRatio = 0f;

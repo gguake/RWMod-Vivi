@@ -115,7 +115,7 @@
   
   <!-- 폭탄뿌리개 -->
   <ThingDef ParentName="VV_ArcanePlantCombat">
-    <defName>VV_Pealaucnher</defName>
+    <defName>VV_Pealauncher</defName>
     <label>pealauncher</label>
     <description>.</description>
     <descriptionHyperlinks>

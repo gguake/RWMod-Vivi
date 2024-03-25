@@ -8,7 +8,7 @@
     <label>altar of peacebloom</label>
     <description>.</description>
     <descriptionHyperlinks>
-      <ThingDef>VV_Peacebloom</ThingDef>
+      <ThingDef>VV_Dreamum</ThingDef>
     </descriptionHyperlinks>
 
     <drawerType>MapMeshAndRealTime</drawerType>
