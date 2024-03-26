@@ -4,22 +4,22 @@ using Verse;
 
 namespace VVRace
 {
-    public class CompProperties_BroadshieldProjector : CompProperties
+    public class CompProperties_ManaShieldProjector : CompProperties
     {
         public ThingDef shieldDef;
 
         public int requiredMinimumManaForActivate;
         public float manaEfficiency;
 
-        public CompProperties_BroadshieldProjector()
+        public CompProperties_ManaShieldProjector()
         {
-            compClass = typeof(CompBroadshieldProjector);
+            compClass = typeof(CompManaShieldProjector);
         }
     }
 
-    public class CompBroadshieldProjector : ThingComp
+    public class CompManaShieldProjector : ThingComp
     {
-        public CompProperties_BroadshieldProjector Props => (CompProperties_BroadshieldProjector)props;
+        public CompProperties_ManaShieldProjector Props => (CompProperties_ManaShieldProjector)props;
 
         public Thing Shield
         {

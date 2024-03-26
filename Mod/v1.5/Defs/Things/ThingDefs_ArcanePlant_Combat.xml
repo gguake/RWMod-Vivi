@@ -8,7 +8,7 @@
     <descriptionHyperlinks>
       <ThingDef>VV_LivingLeaf</ThingDef>
     </descriptionHyperlinks>
-    <thingClass>VVRace.TurretPlant</thingClass>
+    <thingClass>VVRace.ArcanePlant_TurretFixedGun</thingClass>
     <tickerType>Normal</tickerType>
 
     <graphicData>
@@ -121,7 +121,7 @@
     <descriptionHyperlinks>
       <ThingDef>VV_LivingLeaf</ThingDef>
     </descriptionHyperlinks>
-    <thingClass>VVRace.TurretPlant</thingClass>
+    <thingClass>VVRace.ArcanePlant_TurretFixedGun</thingClass>
     <tickerType>Normal</tickerType>
 
     <graphicData>
@@ -238,7 +238,7 @@
     <descriptionHyperlinks>
       <ThingDef>VV_LivingLeaf</ThingDef>
     </descriptionHyperlinks>
-    <thingClass>VVRace.Shootus</thingClass>
+    <thingClass>VVRace.ArcanePlant_Shootus</thingClass>
     <tickerType>Normal</tickerType>
 
     <graphicData>
@@ -321,13 +321,13 @@
         <germinateWeight>125</germinateWeight>
         <germinateRare>true</germinateRare>
 
-        <manaCapacity>600</manaCapacity>
+        <manaCapacity>500</manaCapacity>
         <zeroManaDamageByChance>1~10</zeroManaDamageByChance>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
           <mana>30</mana>
         </manaConsumeRule>
-        <consumeManaPerVerbShoot>10</consumeManaPerVerbShoot>
+        <consumeManaPerVerbShoot>15</consumeManaPerVerbShoot>
         <zeroManaDurableTicks>60000</zeroManaDurableTicks>
       </li>
     </modExtensions>

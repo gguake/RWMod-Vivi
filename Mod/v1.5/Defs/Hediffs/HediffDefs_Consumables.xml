@@ -15,7 +15,6 @@
     <scenarioCanAdd>false</scenarioCanAdd>
     
     <comps>
-      <li Class="VVRace.HediffCompProperties_RoyalJelly" />
       <li Class="HediffCompProperties_Disappears">
         <disappearsAfterTicks>45000~45000</disappearsAfterTicks>
         <showRemainingTime>true</showRemainingTime>

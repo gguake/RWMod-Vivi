@@ -7,8 +7,8 @@ namespace VVRace
     public class JobDriver_LayViviEgg : JobDriver
     {
         private const int LayingEggTicks = 500;
-        private const TargetIndex HatcheryIndex = TargetIndex.A;
-        private LocalTargetInfo Hatchery => job.GetTarget(HatcheryIndex);
+        private const TargetIndex HatcheryIdx = TargetIndex.A;
+        private LocalTargetInfo Hatchery => job.GetTarget(HatcheryIdx);
 
         public override bool TryMakePreToilReservations(bool errorOnFailed)
         {
@@ -17,9 +17,9 @@ namespace VVRace
 
         protected override IEnumerable<Toil> MakeNewToils()
         {
-            this.FailOnDespawnedNullOrForbidden(HatcheryIndex);
+            this.FailOnDespawnedNullOrForbidden(HatcheryIdx);
 
-            yield return Toils_Goto.GotoCell(HatcheryIndex, PathEndMode.OnCell);
+            yield return Toils_Goto.GotoCell(HatcheryIdx, PathEndMode.OnCell);
             yield return Toils_General.Wait(LayingEggTicks);
             yield return Toils_General.Do(delegate
             {

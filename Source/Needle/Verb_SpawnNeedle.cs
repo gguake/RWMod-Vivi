@@ -1,6 +1,4 @@
-﻿using System;
-using UnityEngine;
-using Verse;
+﻿using Verse;
 
 namespace VVRace
 {

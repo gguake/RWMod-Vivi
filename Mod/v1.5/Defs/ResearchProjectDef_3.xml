@@ -6,7 +6,6 @@
     <techLevel>Spacer</techLevel>
   </ResearchProjectDef>
   
-  <!--
   <ResearchProjectDef ParentName="ViviResearchProjectTier3Base">
     <defName>VV_PlantGigantism</defName>
     <label>plant gigantism</label>
@@ -20,9 +19,5 @@
       <li>VV_ManaTransferTube</li>
       <li>VV_Lifestrand</li>
     </prerequisites>
-    <requiredAnalyzed>
-      <li>VV_Dreamum</li>
-    </requiredAnalyzed>
   </ResearchProjectDef>
-  -->
 </Defs>

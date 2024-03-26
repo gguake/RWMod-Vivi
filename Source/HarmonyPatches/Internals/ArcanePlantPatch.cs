@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
 using Verse;
+using VVRace.HarmonyPatches;
 
 namespace VVRace
 {
@@ -21,6 +22,14 @@ namespace VVRace
                 original: AccessTools.Method(typeof(InstallationDesignatorDatabase), "NewDesignatorFor"),
                 prefix: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(InstallationDesignatorDatabase_NewDesignatorFor_Prefix)));
 
+            harmony.Patch(
+                original: AccessTools.Method(typeof(Designator_Build), nameof(Designator_Build.SelectedUpdate)),
+                postfix: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(Designator_Build_SelectedUpdate_Postfix)));
+
+            harmony.Patch(
+                original: AccessTools.Method(typeof(Designator_Install), nameof(Designator_Install.SelectedUpdate)),
+                postfix: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(Designator_Install_SelectedUpdate_Postfix)));
+
             // 축전지 알람 끄기
             harmony.Patch(
                 original: AccessTools.Method(typeof(Alert_NeedBatteries), "NeedBatteries"),
@@ -35,24 +44,21 @@ namespace VVRace
                 original: AccessTools.Method(typeof(WeatherEvent_LightningStrike), nameof(WeatherEvent_LightningStrike.DoStrike)),
                 transpiler: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(WeatherEvent_LightningStrike_DoStrike_Transpiler)));
 
+            // 터렛 식물 관련
             harmony.Patch(
                 original: AccessTools.Method(typeof(ThoughtWorker_Precept_HasAutomatedTurrets), nameof(ThoughtWorker_Precept_HasAutomatedTurrets.ResetStaticData)),
                 postfix: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(ThoughtWorker_Precept_HasAutomatedTurrets_ResetStaticData_Postfix)));
 
+            // 드랍포드 식물 관련
             harmony.Patch(
-                original: AccessTools.Method(typeof(Designator_Build), nameof(Designator_Build.SelectedUpdate)),
-                postfix: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(Designator_Build_SelectedUpdate_Postfix)));
-
-            harmony.Patch(
-                original: AccessTools.Method(typeof(Designator_Install), nameof(Designator_Install.SelectedUpdate)),
-                postfix: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(Designator_Install_SelectedUpdate_Postfix)));
+                original: AccessTools.Method(typeof(CompLaunchable), nameof(CompLaunchable.TryLaunch)),
+                transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(CompLaunchable_TryLaunch_Transpiler)));
 
             harmony.Patch(
-                original: AccessTools.Method(typeof(FloatMenuMakerMap), nameof(FloatMenuMakerMap.TryMakeFloatMenu_NonPawn)),
-                transpiler: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(FloatMenuMakerMap_TryMakeFloatMenu_NonPawn_Transpiler)));
+                original: AccessTools.Method(typeof(DropPodUtility), nameof(DropPodUtility.MakeDropPodAt)),
+                transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(DropPodUtility_MakeDropPodAt_Transpiler)));
 
-
-            Log.Message("!! [ViViRace] plant patch complete");
+            Log.Message("!! [ViViRace] arcane plant patch complete");
         }
 
         private static void GenSpawn_SpawningWipes_Postfix(ref bool __result, BuildableDef newEntDef, BuildableDef oldEntDef)
@@ -83,6 +89,22 @@ namespace VVRace
             }
 
             return true;
+        }
+
+        private static void Designator_Build_SelectedUpdate_Postfix(BuildableDef ___entDef)
+        {
+            if (___entDef is ThingDef thingDef && (typeof(ManaAcceptor).IsAssignableFrom(thingDef.thingClass) || typeof(ArcanePlantPot).IsAssignableFrom(thingDef.thingClass)))
+            {
+                SectionLayer_ThingsManaFluxGrid.DrawManaFluxGridOverlayThisFrame();
+            }
+        }
+
+        private static void Designator_Install_SelectedUpdate_Postfix(Designator_Install __instance)
+        {
+            if (__instance.PlacingDef is ThingDef thingDef && (typeof(ManaAcceptor).IsAssignableFrom(thingDef.thingClass) || typeof(ArcanePlantPot).IsAssignableFrom(thingDef.thingClass)))
+            {
+                SectionLayer_ThingsManaFluxGrid.DrawManaFluxGridOverlayThisFrame();
+            }
         }
 
         private static void Alert_NeedBatteries_NeedBatteries_Postfix(ref bool __result, Map map)
@@ -167,51 +189,107 @@ namespace VVRace
         {
             var field = AccessTools.Field(typeof(ThoughtWorker_Precept_HasAutomatedTurrets), "automatedTurretDefs");
             var list = field.GetValue(null) as List<ThingDef>;
-            var arcanePlants = list.Where(v => typeof(ArcanePlant).IsAssignableFrom(v.thingClass)).ToHashSet();
-            list.RemoveAll(v => arcanePlants.Contains(v));
+
+            list.RemoveAll(v => typeof(ArcanePlant).IsAssignableFrom(v.thingClass));
         }
 
-        private static void Designator_Build_SelectedUpdate_Postfix(BuildableDef ___entDef)
-        {
-            if (___entDef is ThingDef thingDef && (typeof(ManaAcceptor).IsAssignableFrom(thingDef.thingClass) || typeof(ArcanePlantPot).IsAssignableFrom(thingDef.thingClass)))
-            {
-                SectionLayer_ThingsManaFluxGrid.DrawManaFluxGridOverlayThisFrame();
-            }
-        }
 
-        private static void Designator_Install_SelectedUpdate_Postfix(Designator_Install __instance)
-        {
-            if (__instance.PlacingDef is ThingDef thingDef && (typeof(ManaAcceptor).IsAssignableFrom(thingDef.thingClass) || typeof(ArcanePlantPot).IsAssignableFrom(thingDef.thingClass)))
-            {
-                SectionLayer_ThingsManaFluxGrid.DrawManaFluxGridOverlayThisFrame();
-            }
-        }
-
-        public static void FloatMenuMakerMap_TryMakeFloatMenu_NonPawn_Injection(List<FloatMenuOption> list, Thing selectedThing, Thing cursorThing)
-        {
-            if (selectedThing is Shootus shootus && shootus.Faction == Faction.OfPlayer && Find.Selector.SelectedObjects.Count == 1)
-            {
-                if (shootus.CanAcceptWeaponNow(cursorThing))
-                {
-                    list.Add(new FloatMenuOption(
-                        "Equip".Translate(cursorThing.LabelShort),
-                        () => { shootus.ReserveWeapon(cursorThing); }));
-                }
-            }
-        }
-
-        private static IEnumerable<CodeInstruction> FloatMenuMakerMap_TryMakeFloatMenu_NonPawn_Transpiler(IEnumerable<CodeInstruction> codeInstructions)
+        private static IEnumerable<CodeInstruction> CompLaunchable_TryLaunch_Transpiler(IEnumerable<CodeInstruction> codeInstructions, ILGenerator il)
         {
             var instructions = codeInstructions.ToList();
 
-            var i = instructions.FirstIndexOfInstruction(OpCodes.Stloc_3, operand: null) + 4;
-            instructions.InsertRange(i, new List<CodeInstruction>()
+            var index = instructions.FindIndex(v => v.opcode == OpCodes.Newobj && v.OperandIs(AccessTools.Constructor(typeof(ActiveDropPodInfo))));
+            if (index < 0) { throw new NotImplementedException("failed to find index for patch CompLaunchable_TryLaunch"); }
+
+            var skipLabel = il.DefineLabel();
+            var jumpLabel = il.DefineLabel();
+            instructions[index + 1].labels.Add(jumpLabel);
+
+            var injections = new List<CodeInstruction>()
             {
-                new CodeInstruction(OpCodes.Ldloc_0),
                 new CodeInstruction(OpCodes.Ldarg_0),
-                new CodeInstruction(OpCodes.Ldloc_3),
-                new CodeInstruction(OpCodes.Call, operand: AccessTools.Method(typeof(ArcanePlantPatch), nameof(FloatMenuMakerMap_TryMakeFloatMenu_NonPawn_Injection)))
-            });
+                new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(ThingComp), nameof(ThingComp.props))),
+                new CodeInstruction(OpCodes.Dup),
+                new CodeInstruction(OpCodes.Isinst, typeof(CompProperties_LaunchableCustom)),
+                new CodeInstruction(OpCodes.Brfalse_S, skipLabel),
+
+                new CodeInstruction(OpCodes.Newobj, AccessTools.Constructor(typeof(ActiveDropPodInfoCustom), new Type[] { typeof(CompProperties_LaunchableCustom) })),
+                new CodeInstruction(OpCodes.Br_S, jumpLabel),
+                new CodeInstruction(OpCodes.Pop).WithLabels(skipLabel),
+            };
+            instructions.InsertRange(index, injections);
+
+            return instructions;
+        }
+
+        private static IEnumerable<CodeInstruction> DropPodUtility_MakeDropPodAt_Transpiler(IEnumerable<CodeInstruction> codeInstructions, ILGenerator il)
+        {
+            var instructions = codeInstructions.ToList();
+
+            // ActiveDropPod Patch
+            {
+                var index = instructions.FindIndex(
+                    v =>
+                    v.opcode == OpCodes.Call &&
+                    v.OperandIs(AccessTools.Method(typeof(ThingMaker), nameof(ThingMaker.MakeThing))));
+
+                if (index < 0) { throw new NotImplementedException("failed to find index for patch DropPodUtility_MakeDropPodAt #1"); }
+
+                var skipLabel = il.DefineLabel();
+                var jumpLabel = il.DefineLabel();
+                instructions[0].labels.Add(skipLabel);
+                instructions[index - 1].labels.Add(jumpLabel);
+
+                var injections = new List<CodeInstruction>()
+                {
+                    new CodeInstruction(OpCodes.Ldarg_2),
+                    new CodeInstruction(OpCodes.Isinst, typeof(ActiveDropPodInfoCustom)),
+                    new CodeInstruction(OpCodes.Brfalse_S, skipLabel),
+
+                    new CodeInstruction(OpCodes.Ldarg_2),
+                    new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(ActiveDropPodInfoCustom), nameof(ActiveDropPodInfoCustom.activeDropPod))),
+                    new CodeInstruction(OpCodes.Dup),
+                    new CodeInstruction(OpCodes.Brtrue_S, jumpLabel),
+                    new CodeInstruction(OpCodes.Pop),
+                };
+                instructions.InsertRange(0, injections);
+            }
+
+            // IncomingDropPod Patch
+            {
+                var injectionIndex = instructions.FindIndex(
+                    v =>
+                    v.opcode == OpCodes.Callvirt &&
+                    v.OperandIs(AccessTools.PropertySetter(typeof(ActiveDropPod), nameof(ActiveDropPod.Contents))));
+
+                var jumpIndex = instructions.FindIndex(
+                    v =>
+                    v.opcode == OpCodes.Call &&
+                    v.OperandIs(AccessTools.Method(typeof(SkyfallerMaker), nameof(SkyfallerMaker.SpawnSkyfaller), new Type[] { typeof(ThingDef), typeof(Thing), typeof(IntVec3), typeof(Map) })));
+
+                if (injectionIndex < 0 || jumpIndex < 0) { throw new NotImplementedException("failed to find index for patch DropPodUtility_MakeDropPodAt #2"); }
+
+                var skipLabel = il.DefineLabel();
+                var jumpLabel = il.DefineLabel();
+
+                instructions[injectionIndex + 1].labels.Add(skipLabel);
+                instructions[jumpIndex - 3].labels.Add(jumpLabel);
+
+                var injections = new List<CodeInstruction>()
+                {
+                    new CodeInstruction(OpCodes.Ldarg_2),
+                    new CodeInstruction(OpCodes.Isinst, typeof(ActiveDropPodInfoCustom)),
+                    new CodeInstruction(OpCodes.Brfalse_S, skipLabel),
+
+                    new CodeInstruction(OpCodes.Ldarg_2),
+                    new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(ActiveDropPodInfoCustom), nameof(ActiveDropPodInfoCustom.incomingDropPod))),
+                    new CodeInstruction(OpCodes.Dup),
+                    new CodeInstruction(OpCodes.Brtrue_S, jumpLabel),
+                    new CodeInstruction(OpCodes.Pop),
+                };
+
+                instructions.InsertRange(injectionIndex + 1, injections);
+            }
 
             return instructions;
         }

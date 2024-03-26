@@ -61,7 +61,6 @@
     <uiIconThing>VV_Pollen</uiIconThing>
 
     <recipeUsers>
-      <li>VV_GatheringSpot</li>
       <li>VV_GatheringBarrel</li>
     </recipeUsers>
     <allowMixingIngredients>true</allowMixingIngredients>

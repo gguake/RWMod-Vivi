@@ -6,12 +6,12 @@ namespace VVRace
 {
     public class JobDriver_HaulViviEgg : JobDriver
     {
-        private const TargetIndex EggIndex = TargetIndex.A;
-        private const TargetIndex HatcheryIndex = TargetIndex.B;
+        private const TargetIndex EggIdx = TargetIndex.A;
+        private const TargetIndex HatcheryIdx = TargetIndex.B;
         private const PathEndMode HatcheryPathEndMode = PathEndMode.OnCell;
 
-        private LocalTargetInfo Egg => job.GetTarget(EggIndex);
-        private LocalTargetInfo Hatchery => job.GetTarget(HatcheryIndex);
+        private LocalTargetInfo Egg => job.GetTarget(EggIdx);
+        private LocalTargetInfo Hatchery => job.GetTarget(HatcheryIdx);
 
 
         public override bool TryMakePreToilReservations(bool errorOnFailed)
@@ -26,25 +26,25 @@ namespace VVRace
 
         protected override IEnumerable<Toil> MakeNewToils()
         {
-            this.FailOnDestroyedNullOrForbidden(EggIndex);
-            this.FailOnDespawnedNullOrForbidden(HatcheryIndex);
+            this.FailOnDestroyedNullOrForbidden(EggIdx);
+            this.FailOnDespawnedNullOrForbidden(HatcheryIdx);
             this.FailOn(() =>
             {
                 var hatchery = Hatchery.Thing as ViviEggHatchery;
                 return hatchery.ViviEgg != null;
             });
 
-            yield return Toils_Reserve.Reserve(EggIndex);
-            yield return Toils_Goto.GotoThing(EggIndex, PathEndMode.ClosestTouch);
-            yield return Toils_Haul.StartCarryThing(EggIndex)
-                .FailOnCannotTouch(EggIndex, PathEndMode.ClosestTouch);
+            yield return Toils_Reserve.Reserve(EggIdx);
+            yield return Toils_Goto.GotoThing(EggIdx, PathEndMode.ClosestTouch);
+            yield return Toils_Haul.StartCarryThing(EggIdx)
+                .FailOnCannotTouch(EggIdx, PathEndMode.ClosestTouch);
 
-            yield return Toils_Reserve.Reserve(HatcheryIndex);
-            yield return Toils_Goto.GotoThing(HatcheryIndex, HatcheryPathEndMode);
-            yield return Toils_Haul.PlaceHauledThingInCell(HatcheryIndex, null, storageMode: false);
+            yield return Toils_Reserve.Reserve(HatcheryIdx);
+            yield return Toils_Goto.GotoThing(HatcheryIdx, HatcheryPathEndMode);
+            yield return Toils_Haul.PlaceHauledThingInCell(HatcheryIdx, null, storageMode: false);
             yield return Toils_General.Wait(100)
-                .WithProgressBarToilDelay(EggIndex)
-                .FailOnCannotTouch(HatcheryIndex, PathEndMode.OnCell);
+                .WithProgressBarToilDelay(EggIdx)
+                .FailOnCannotTouch(HatcheryIdx, PathEndMode.OnCell);
 
             yield return ToilMaker.MakeToil()
                 .WithDefaultCompleteMode(ToilCompleteMode.Instant)

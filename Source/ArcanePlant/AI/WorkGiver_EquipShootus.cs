@@ -12,7 +12,7 @@ namespace VVRace
 
         public override bool HasJobOnThing(Pawn pawn, Thing t, bool forced = false)
         {
-            var shootus = t as Shootus;
+            var shootus = t as ArcanePlant_Shootus;
             if (shootus == null || !shootus.Spawned || shootus.ReservedWeapon == null || !shootus.ReservedWeapon.Spawned)
             {
                 return false;
@@ -38,7 +38,7 @@ namespace VVRace
 
         public override Job JobOnThing(Pawn pawn, Thing t, bool forced = false)
         {
-            var shootus = t as Shootus;
+            var shootus = t as ArcanePlant_Shootus;
             if (shootus == null || !shootus.Spawned || shootus.ReservedWeapon == null || !shootus.ReservedWeapon.Spawned) { return null; }
 
             if (pawn.Faction != shootus.Faction)

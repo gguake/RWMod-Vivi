@@ -56,47 +56,5 @@ namespace VVRace
 
             return workTable.GetGatherableCandidates(gatheringRecipe);
         }
-
-        //protected virtual IEnumerable<Thing> FindGatherableTargets(Pawn pawn, Thing billGiver, Bill bill)
-        //{
-        //    var gatherWorker = (bill.recipe as RecipeDef_Gathering)?.gatherWorker;
-        //    if (gatherWorker == null) { yield break; }
-
-        //    HashSet<Thing> gatherTargets = new HashSet<Thing>();
-        //    var billGiverRegion = (billGiver.def.hasInteractionCell ? billGiver.InteractionCell : billGiver.Position).GetRegion(billGiver.Map);
-
-        //    var searchRadius = Building_GatherWorkTable.gatherRadius;
-        //    RegionEntryPredicate regionEntryPredicate = (Region from, Region r) =>
-        //    {
-        //        if (!r.Allows(TraverseParms.For(pawn), isDestination: false)) { return false; }
-
-        //        var extentsClose = r.extentsClose;
-        //        int dx = Mathf.Abs(billGiver.Position.x - Mathf.Max(extentsClose.minX, Mathf.Min(billGiver.Position.x, extentsClose.maxX)));
-        //        if (dx > searchRadius) { return false; }
-
-        //        int dz = Mathf.Abs(billGiver.Position.z - Mathf.Max(extentsClose.minZ, Mathf.Min(billGiver.Position.z, extentsClose.maxZ)));
-        //        if (dz > searchRadius) { return false; }
-
-        //        return (dx * dx + dz * dz) <= searchRadius * searchRadius;
-        //    };
-
-        //    RegionTraverser.BreadthFirstTraverse(billGiverRegion, regionEntryPredicate, (r) =>
-        //    {
-        //        gatherTargets.AddRange(gatherWorker.FindAllGatherableTargetInRegion(pawn, r, billGiver, bill));
-
-        //        if (gatherTargets.Any())
-        //        {
-        //            return true;
-        //        }
-
-        //        return false;
-
-        //    }, maxRegions: 99999);
-
-        //    foreach (var target in gatherTargets.OrderBy(thing => thing.Position.DistanceToSquared(pawn.Position)))
-        //    {
-        //        yield return target;
-        //    }
-        //}
     }
 }

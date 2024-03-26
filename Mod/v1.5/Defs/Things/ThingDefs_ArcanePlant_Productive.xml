@@ -132,7 +132,7 @@
       <ThingDef>VV_SparklingPetal</ThingDef>
     </descriptionHyperlinks>
     <tickerType>Normal</tickerType>
-    <thingClass>VVRace.BatteryFlower</thingClass>
+    <thingClass>VVRace.ArcanePlant_Thunderbud</thingClass>
 
     <graphicData>
       <texPath>Things/Plants/VV_Thunderbud</texPath>
@@ -342,7 +342,7 @@
       <ThingDef>VV_HeatingPetal</ThingDef>
     </descriptionHyperlinks>
 
-    <thingClass>VVRace.SolarFlower</thingClass>
+    <thingClass>VVRace.ArcanePlant_RadiantFlower</thingClass>
     <tickerType>Normal</tickerType>
 
     <graphicData>
@@ -471,7 +471,7 @@
           <mana>50</mana>
         </manaConsumeRule>
         <manaGenerateRule Class="VVRace.ManaFluxRule_AdjacentPlant">
-          <manaPerAdjacentPlant>45</manaPerAdjacentPlant>
+          <manaPerAdjacentPlant>35</manaPerAdjacentPlant>
         </manaGenerateRule>
       </li>
     </modExtensions>
@@ -515,7 +515,7 @@
         <showRadius>false</showRadius>
       </li>
 
-      <li Class="VVRace.CompProperties_BroadshieldProjector">
+      <li Class="VVRace.CompProperties_ManaShieldProjector">
         <shieldDef>VV_PurifimintShield</shieldDef>
         <requiredMinimumManaForActivate>30</requiredMinimumManaForActivate>
         <manaEfficiency>2.0</manaEfficiency>

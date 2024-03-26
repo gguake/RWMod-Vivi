@@ -16,7 +16,5 @@ namespace VVRace
         public int zeroManaDurableTicks = 15000;
         public IntRange zeroManaDamageByChance = new IntRange(0, 0);
         public int consumeManaPerVerbShoot = 0;
-
-        public int terraformingTick = 0;
     }
 }

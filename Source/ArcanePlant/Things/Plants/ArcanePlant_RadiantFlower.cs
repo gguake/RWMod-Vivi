@@ -2,7 +2,7 @@
 
 namespace VVRace
 {
-    public class SolarFlower : ArcanePlant, IConditionalGraphicProvider
+    public class ArcanePlant_RadiantFlower : ArcanePlant, IConditionalGraphicProvider
     {
         public int GraphicIndex => CompGlower.Glows ? 1 : 0;
 

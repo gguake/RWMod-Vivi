@@ -2,7 +2,6 @@
 using RimWorld;
 using Verse;
 using VVRace.HarmonyPatches;
-using VVRace.HarmonyPatches.Internals;
 
 namespace VVRace
 {
@@ -13,8 +12,6 @@ namespace VVRace
             var harmony = new Harmony("rimworld.gguake.vivi");
             try
             {
-                InternalPatch.Patch(harmony);
-
                 ApparelPropertiesExtPatch.Patch(harmony);
                 ViviRacePatch.Patch(harmony);
                 ArcanePlantPatch.Patch(harmony);

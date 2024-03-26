@@ -11,7 +11,7 @@ namespace VVRace
         private const TargetIndex ShootusIdx = TargetIndex.A;
         private const TargetIndex EquipmentIdx = TargetIndex.B;
 
-        protected Shootus Shootus => job.GetTarget(ShootusIdx).Thing as Shootus;
+        protected ArcanePlant_Shootus Shootus => job.GetTarget(ShootusIdx).Thing as ArcanePlant_Shootus;
         protected Thing Weapon => job.GetTarget(EquipmentIdx).Thing;
 
         public override bool TryMakePreToilReservations(bool errorOnFailed)
@@ -50,7 +50,7 @@ namespace VVRace
                 .WithDefaultCompleteMode(ToilCompleteMode.Instant)
                 .WithInitAction(() =>
                 {
-                    Shootus.EquipWeapon(Weapon);
+                    Shootus.EquipGun(Weapon);
                 });
         }
     }

@@ -18,15 +18,15 @@
         <capMods>
           <li>
             <capacity>Moving</capacity>
-            <setMax>0.8</setMax>
+            <setMax>0.75</setMax>
           </li>
           <li>
             <capacity>Manipulation</capacity>
-            <setMax>0.8</setMax>
+            <setMax>0.75</setMax>
           </li>
           <li>
             <capacity>Metabolism</capacity>
-            <setMax>0.8</setMax>
+            <setMax>0.75</setMax>
           </li>
         </capMods>
       </li>
@@ -35,20 +35,24 @@
         <minSeverity>6</minSeverity>
         <capMods>
           <li>
-            <capacity>Consciousness</capacity>
-            <setMax>0.9</setMax>
-          </li>
-          <li>
             <capacity>Moving</capacity>
-            <setMax>0.7</setMax>
+            <setMax>0.6</setMax>
           </li>
           <li>
             <capacity>Manipulation</capacity>
-            <setMax>0.7</setMax>
+            <setMax>0.6</setMax>
           </li>
           <li>
             <capacity>Metabolism</capacity>
-            <setMax>0.7</setMax>
+            <setMax>0.6</setMax>
+          </li>
+          <li>
+            <capacity>BloodFiltration</capacity>
+            <setMax>0.8</setMax>
+          </li>
+          <li>
+            <capacity>BloodPumping</capacity>
+            <setMax>0.8</setMax>
           </li>
         </capMods>
       </li>
@@ -56,19 +60,23 @@
         <minSeverity>12</minSeverity>
         <capMods>
           <li>
-            <capacity>Consciousness</capacity>
-            <setMax>0.7</setMax>
-          </li>
-          <li>
             <capacity>Moving</capacity>
-            <setMax>0.5</setMax>
+            <setMax>0.45</setMax>
           </li>
           <li>
             <capacity>Manipulation</capacity>
-            <setMax>0.5</setMax>
+            <setMax>0.45</setMax>
           </li>
           <li>
             <capacity>Metabolism</capacity>
+            <setMax>0.45</setMax>
+          </li>
+          <li>
+            <capacity>BloodFiltration</capacity>
+            <setMax>0.5</setMax>
+          </li>
+          <li>
+            <capacity>BloodPumping</capacity>
             <setMax>0.5</setMax>
           </li>
         </capMods>

@@ -1,22 +1,16 @@
-﻿using LudeonTK;
-using UnityEngine;
+﻿using UnityEngine;
 using Verse;
 
 namespace VVRace
 {
-    public class ShootusTop
+    public class ArcanePlantTurretTop
     {
-        [TweakValue("ShootusTop_PositionOffsetX", -1f, 1f)]
-        public static float PositionOffsetX = 0.2f;
-        [TweakValue("ShootusTop_PositionOffsetZ", -1f, 1f)]
-        public static float PositionOffsetZ = 0.45f;
+        private const float IdleTurnDegreesPerTick = 0.1f;
+        private const int IdleTurnDuration = 40;
+        private const int IdleTurnIntervalMin = 200;
+        private const int IdleTurnIntervalMax = 400;
 
-        private const float IdleTurnDegreesPerTick = 0.3f;
-        private const int IdleTurnDuration = 140;
-        private const int IdleTurnIntervalMin = 150;
-        private const int IdleTurnIntervalMax = 350;
-
-        private Shootus parent;
+        private ArcanePlant_Turret parent;
 
         private float curRotationInt = Rand.Range(0f, 360f);
         private int ticksUntilIdleTurn;
@@ -48,7 +42,7 @@ namespace VVRace
             CurRotation = parent.Rotation.AsAngle;
         }
 
-        public ShootusTop(Shootus parent)
+        public ArcanePlantTurretTop(ArcanePlant_Turret parent)
         {
             this.parent = parent;
         }
@@ -112,20 +106,21 @@ namespace VVRace
 
         public void DrawTurret(Vector3 recoilDrawOffset, float recoilAngleOffset)
         {
-            if (parent.Gun == null) { return; }
+            var gun = parent.Gun;
+            if (gun == null) { return; }
 
             var v = new Vector3(parent.def.building.turretTopOffset.x, 0f, parent.def.building.turretTopOffset.y).RotatedBy(CurRotation);
             float turretTopDrawSize = parent.def.building.turretTopDrawSize;
 
             v = v.RotatedBy(recoilAngleOffset);
             v += recoilDrawOffset;
-            v += new Vector3(PositionOffsetX, 0f, PositionOffsetZ);
 
-            float rot = parent.CurrentEffectiveVerb?.AimAngleOverride ?? CurRotation;
+            float rot = parent.AttackVerb?.AimAngleOverride ?? CurRotation;
             var matrix = default(Matrix4x4);
 
-            matrix.SetTRS(parent.DrawPos + Altitudes.AltIncVect * 5f + v, (-90f + rot).ToQuat(), new Vector3(turretTopDrawSize, 1f, turretTopDrawSize));
-            Graphics.DrawMesh(MeshPool.plane10, matrix, parent.Gun.Graphic.MatSingleFor(parent.Gun), 0);
+            matrix.SetTRS(parent.DrawPos + Altitudes.AltIncVect * 2f + v, (-90f + rot).ToQuat(), new Vector3(turretTopDrawSize, 1f, turretTopDrawSize));
+
+            Graphics.DrawMesh(MeshPool.plane10, matrix, gun.Graphic.MatSingleFor(gun), 0);
         }
     }
 }

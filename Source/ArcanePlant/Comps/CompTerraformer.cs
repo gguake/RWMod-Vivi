@@ -107,7 +107,7 @@ namespace VVRace
             {
                 if (_remainedCooldown > 0)
                 {
-                    _remainedCooldown = Mathf.Max(0, _remainedCooldown - ticks);
+                    _remainedCooldown -= ticks;
                 }
                 else
                 {

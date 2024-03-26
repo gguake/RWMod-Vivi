@@ -1,44 +1,42 @@
 ﻿using RimWorld;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using UnityEngine;
 using Verse;
 using Verse.AI;
 
 namespace VVRace
 {
-    public class TurretPlant : ArcanePlant, IAttackTarget, IAttackTargetSearcher, ILoadReferenceable
+    public abstract class ArcanePlant_Turret : ArcanePlant, IAttackTarget, IAttackTargetSearcher, ILoadReferenceable
     {
-        public Thing Thing => this;
+        public ArcanePlantTurretTop TurretTop => _turretTop;
+        protected ArcanePlantTurretTop _turretTop;
 
-        public float TargetPriorityFactor => 1f;
+        Thing IAttackTarget.Thing => this;
+        Thing IAttackTargetSearcher.Thing => this;
+        float IAttackTarget.TargetPriorityFactor => 1f;
 
-        private LocalTargetInfo _currentTarget;
         public LocalTargetInfo CurrentTarget => _currentTarget;
         public LocalTargetInfo TargetCurrentlyAimingAt => _currentTarget;
+        protected LocalTargetInfo _currentTarget;
 
-        public Verb CurrentEffectiveVerb => AttackVerb;
-
+        LocalTargetInfo IAttackTargetSearcher.LastAttackedTarget => _lastAttackedTarget;
         protected LocalTargetInfo _lastAttackedTarget;
-        public LocalTargetInfo LastAttackedTarget => _lastAttackedTarget;
 
+        int IAttackTargetSearcher.LastAttackTargetTick => _lastAttackTargetTick;
         protected int _lastAttackTargetTick;
-        public int LastAttackTargetTick => _lastAttackTargetTick;
 
-        protected Thing _gun;
-        public CompEquippable GunCompEq => _gun.TryGetComp<CompEquippable>();
+        public abstract Thing Gun { get; }
+
+        Verb IAttackTargetSearcher.CurrentEffectiveVerb => AttackVerb;
         public Verb AttackVerb => GunCompEq.PrimaryVerb;
+        protected CompEquippable GunCompEq => Gun.TryGetComp<CompEquippable>();
 
+        public bool WarmingUp => _burstWarmupTicksLeft > 0;
+        protected bool _burstActivated;
+        protected int _burstCooldownTicksLeft;
+        protected int _burstWarmupTicksLeft;
 
-        protected TurretPlantTop _turretTop;
-        public TurretPlantTop TurretTop => _turretTop;
-
-        private bool _burstActivated;
-        private int _burstCooldownTicksLeft;
-        private int _burstWarmupTicksLeft;
-
-        public bool Active
+        public virtual bool Active
         {
             get
             {
@@ -46,38 +44,25 @@ namespace VVRace
             }
         }
 
-        public bool WarmingUp => _burstWarmupTicksLeft > 0;
-
-        public TurretPlant()
+        public ArcanePlant_Turret()
         {
-            _turretTop = new TurretPlantTop(this);
+            _turretTop = new ArcanePlantTurretTop(this);
         }
+
+        public virtual bool ThreatDisabled(IAttackTargetSearcher disabledFor) => !Active;
 
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_TargetInfo.Look(ref _lastAttackedTarget, "lastAttackedTarget");
-            Scribe_Values.Look(ref _lastAttackTargetTick, "lastAttackTargetTick", 0);
 
             Scribe_TargetInfo.Look(ref _currentTarget, "currentTarget");
-            Scribe_Deep.Look(ref _gun, "gun");
+
+            Scribe_TargetInfo.Look(ref _lastAttackedTarget, "lastAttackedTarget"); ;
+            Scribe_Values.Look(ref _lastAttackTargetTick, "lastAttackTargetTick", 0);
 
             Scribe_Values.Look(ref _burstActivated, "burstActivated");
             Scribe_Values.Look(ref _burstCooldownTicksLeft, "burstCooldownTicksLeft", 0);
             Scribe_Values.Look(ref _burstWarmupTicksLeft, "burstWarmupTicksLeft", 0);
-
-            if (Scribe.mode == LoadSaveMode.PostLoadInit)
-            {
-                if (_gun == null)
-                {
-                    Log.Error("Turret had null gun after loading. Recreating.");
-                    MakeGun();
-                }
-                else
-                {
-                    UpdateGunVerbs();
-                }
-            }
         }
 
         public override void PostMake()
@@ -85,7 +70,6 @@ namespace VVRace
             base.PostMake();
 
             _burstCooldownTicksLeft = def.building.turretInitialCooldownTime.SecondsToTicks();
-            MakeGun();
         }
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
@@ -117,7 +101,6 @@ namespace VVRace
                 }
 
                 _burstActivated = false;
-
                 if (WarmingUp)
                 {
                     _burstWarmupTicksLeft--;
@@ -146,16 +129,6 @@ namespace VVRace
             }
         }
 
-        protected override void DrawAt(Vector3 drawLoc, bool flip = false)
-        {
-            var drawOffset = Vector3.zero;
-            float angleOffset = 0f;
-
-            _turretTop.DrawTurret(drawOffset, angleOffset);
-            base.DrawAt(drawLoc, flip);
-
-        }
-
         public override void DrawExtraSelectionOverlays()
         {
             base.DrawExtraSelectionOverlays();
@@ -180,37 +153,15 @@ namespace VVRace
         }
 
         public override bool ClaimableBy(Faction by, StringBuilder reason = null)
+            => base.ClaimableBy(by, reason) && !Active;
+
+        protected void TryActivateBurst()
         {
-            if (!base.ClaimableBy(by, reason))
-            {
-                return false;
-            }
-
-            if (Active)
-            {
-                return false;
-            }
-
-            return true;
+            _burstActivated = true;
+            TryStartShootSomething(canBeginBurstImmediately: true);
         }
 
-        public bool ThreatDisabled(IAttackTargetSearcher disabledFor)
-        {
-            if (!Active)
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        public void MakeGun()
-        {
-            _gun = ThingMaker.MakeThing(def.building.turretGunDef);
-            UpdateGunVerbs();
-        }
-
-        public void TryStartShootSomething(bool canBeginBurstImmediately)
+        protected void TryStartShootSomething(bool canBeginBurstImmediately)
         {
             if (!Spawned || (AttackVerb.ProjectileFliesOverhead() && base.Map.roofGrid.Roofed(base.Position)) || !AttackVerb.Available())
             {
@@ -241,10 +192,9 @@ namespace VVRace
             }
         }
 
-        public LocalTargetInfo TryFindNewTarget()
+        protected LocalTargetInfo TryFindNewTarget()
         {
-            var attackTargetSearcher = this;
-            var faction = attackTargetSearcher.Thing.Faction;
+            var faction = Faction;
             var range = AttackVerb.verbProps.range;
 
             if (Rand.Value < 0.5f && AttackVerb.ProjectileFliesOverhead() && faction.HostileTo(Faction.OfPlayer) && Map.listerBuildings.allBuildingsColonist.Where(building =>
@@ -270,10 +220,10 @@ namespace VVRace
                 targetScanFlags |= TargetScanFlags.NeedNonBurning;
             }
 
-            return (Thing)AttackTargetFinder.BestShootTargetFromCurrentPosition(attackTargetSearcher, targetScanFlags, IsValidTarget);
+            return (Thing)AttackTargetFinder.BestShootTargetFromCurrentPosition(this, targetScanFlags, IsValidTarget);
         }
 
-        private bool IsValidTarget(Thing thing)
+        protected virtual bool IsValidTarget(Thing thing)
         {
             if (thing is Pawn pawn)
             {
@@ -293,50 +243,46 @@ namespace VVRace
 
                 return !GenAI.MachinesLike(Faction, pawn);
             }
+
             return true;
         }
 
         protected virtual void BeginBurst()
         {
+            if (!Active) { return; }
+
             AttackVerb.TryStartCastOn(_currentTarget);
 
             _lastAttackTargetTick = Find.TickManager.TicksGame;
             _lastAttackedTarget = _currentTarget;
-
         }
 
-        protected void BurstComplete()
-        {
-            _burstCooldownTicksLeft = BurstCooldownTime().SecondsToTicks();
-        }
-
-        protected float BurstCooldownTime()
+        protected virtual void BurstComplete()
         {
             if (def.building.turretBurstCooldownTime >= 0f)
             {
-                return def.building.turretBurstCooldownTime;
+                _burstCooldownTicksLeft = def.building.turretBurstCooldownTime.SecondsToTicks();
             }
-
-            return AttackVerb.verbProps.defaultCooldownTime;
+            else
+            {
+                _burstCooldownTicksLeft = AttackVerb.verbProps.defaultCooldownTime.SecondsToTicks();
+            }
         }
 
-        private void ResetCurrentTarget()
+        protected virtual void ResetCurrentTarget()
         {
             _currentTarget = LocalTargetInfo.Invalid;
             _burstWarmupTicksLeft = 0;
         }
 
-        private void UpdateGunVerbs()
+        protected void UpdateGunVerbs()
         {
-            var allVerbs = _gun.TryGetComp<CompEquippable>().AllVerbs;
+            var allVerbs = Gun.TryGetComp<CompEquippable>().AllVerbs;
             for (int i = 0; i < allVerbs.Count; i++)
             {
                 Verb verb = allVerbs[i];
                 verb.caster = this;
-                verb.castCompleteCallback = () =>
-                {
-                    _burstCooldownTicksLeft = BurstCooldownTime().SecondsToTicks();
-                };
+                verb.castCompleteCallback = BurstComplete;
             }
         }
     }

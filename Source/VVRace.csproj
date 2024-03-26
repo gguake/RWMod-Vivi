@@ -82,7 +82,7 @@
     <Compile Include="ArcanePlant\AI\JobDriver_PackingSeedling.cs" />
     <Compile Include="ArcanePlant\AI\WorkGiver_EquipShootus.cs" />
     <Compile Include="ArcanePlant\ArcanePlantUtility.cs" />
-    <Compile Include="ArcanePlant\Comps\CompBroadshieldProjector.cs" />
+    <Compile Include="ArcanePlant\Comps\CompManaShieldProjector.cs" />
     <Compile Include="ArcanePlant\Comps\CompProperties_LaunchableCustom.cs" />
     <Compile Include="ArcanePlant\Mana\ManaFluxGrid.cs" />
     <Compile Include="ArcanePlant\Mana\ManaFluxRule_AdjacentArcanePlant.cs" />
@@ -94,8 +94,8 @@
     <Compile Include="ArcanePlant\Sensor\SensorWorker_Fire.cs" />
     <Compile Include="ArcanePlant\Sensor\SensorWorker_Mechanoid.cs" />
     <Compile Include="ArcanePlant\Things\ManaTransmitter.cs" />
-    <Compile Include="ArcanePlant\Things\Plants\Shootus.cs" />
-    <Compile Include="ArcanePlant\Things\Plants\ShootusTop.cs" />
+    <Compile Include="ArcanePlant\Things\Plants\ArcanePlant_Shootus.cs" />
+    <Compile Include="ArcanePlant\Things\Plants\ArcanePlant_Turret.cs" />
     <Compile Include="ArcanePlant\Things\PurifimintShield.cs" />
     <Compile Include="ArcanePlant\UI\Alert_ArcanePlantLowMana.cs" />
     <Compile Include="ArcanePlant\Comps\CompLightningLod.cs" />
@@ -140,7 +140,6 @@
     <Compile Include="Hornet\JobGiver_HornetBerserk.cs" />
     <Compile Include="Utility\Graphics\CompLineTrail.cs" />
     <Compile Include="Utility\Graphics\LineRenderProperties.cs" />
-    <Compile Include="MapGeneration\GenSteps\GenStep_MechanoidScoutingBase.cs" />
     <Compile Include="MapGeneration\GenSteps\GenStep_ViviSettlementTurretGarden.cs" />
     <Compile Include="Hornet\IncidentWorker_HornetSwarm.cs" />
     <Compile Include="MapGeneration\SymbolResolvers\SymbolResolver_ArtificialPlant.cs" />
@@ -159,10 +158,10 @@
     <Compile Include="Gather\UI\ITab_GatherWorkTable.cs" />
     <Compile Include="Utility\Graphics\Graphic_Conditional.cs" />
     <Compile Include="ArcanePlant\Comps\CompHeatPusherMana.cs" />
-    <Compile Include="ArcanePlant\Things\Plants\BatteryFlower.cs" />
-    <Compile Include="ArcanePlant\Things\Plants\TurretPlant.cs" />
-    <Compile Include="ArcanePlant\Things\Plants\TurretPlantTop.cs" />
-    <Compile Include="ArcanePlant\Things\Plants\SolarFlower.cs" />
+    <Compile Include="ArcanePlant\Things\Plants\ArcanePlant_Thunderbud.cs" />
+    <Compile Include="ArcanePlant\Things\Plants\ArcanePlant_TurretFixedGun.cs" />
+    <Compile Include="ArcanePlant\Things\Plants\ArcanePlantTurretTop.cs" />
+    <Compile Include="ArcanePlant\Things\Plants\ArcanePlant_RadiantFlower.cs" />
     <Compile Include="ArcanePlant\Things\MinifiedArcanePlant.cs" />
     <Compile Include="ArcanePlant\UI\PlaceWorker_AllowArtificialPlantPot.cs" />
     <Compile Include="ArcanePlant\AI\WorkGiver_FertilizeArcanePlant.cs" />
@@ -184,7 +183,6 @@
     <Compile Include="Gather\StatPart_WildPlantOffset.cs" />
     <Compile Include="ArcanePlant\Things\ArcanePlant.cs" />
     <Compile Include="HarmonyPatches\Internals\ArcanePlantPatch.cs" />
-    <Compile Include="HarmonyPatches\Internals\InternalPatch.cs" />
     <Compile Include="HarmonyPatches\HarmonyPatch.cs" />
     <Compile Include="ApparelPropertiesExt.cs" />
     <Compile Include="HarmonyPatches\Internals\ApparelPropertiesExtPatch.cs" />
@@ -218,7 +216,6 @@
     <Compile Include="Vivi\Gene_HoneyDependency.cs" />
     <Compile Include="Vivi\HediffComp_GrowthBoost.cs" />
     <Compile Include="Vivi\Comps\CompVivi.cs" />
-    <Compile Include="Vivi\HediffComp_RoyalJelly.cs" />
     <Compile Include="ViviModsConfig.cs" />
     <Compile Include="ArcanePlant\Things\Building_SeedlingGerminator.cs" />
     <Compile Include="Vivi\Hediff_HoneyDependency.cs" />
@@ -234,7 +231,6 @@
     <Compile Include="Egg\AI\JobGiver_LayViviEgg.cs" />
     <Compile Include="Vivi\AI\ThinkNode_ConditionalVivi.cs" />
     <Compile Include="Vivi\Comps\CompWallReplace.cs" />
-    <Compile Include="Vivi\HediffComp_ViviGrowthBoost.cs" />
     <Compile Include="Vivi\Need_RoyalJelly.cs" />
     <Compile Include="Egg\UI\EggProgressGizmo.cs" />
     <Compile Include="Vivi\RenderTree\PawnRenderNodeWorker_ViviCustomDrawSize.cs" />
