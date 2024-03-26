@@ -111,9 +111,9 @@
             </li>
             <li Class="PawnRenderNodeProperties_Swaddle" MayRequire="Ludeon.RimWorld.Biotech">
               <debugLabel>Baby swaddle</debugLabel>
-              <nodeClass>VVRace.PawnRenderNode_SwaddleVivi</nodeClass>
+              <nodeClass>PawnRenderNode_Swaddle</nodeClass>
               <workerClass>PawnRenderNodeWorker_Swaddle</workerClass>
-              <texPath>Things/Pawn/Humanlike/Apparel/SwaddledBaby/Swaddled_Child</texPath>
+              <texPath>Things/Pawn/Vivi/Swaddle/Swaddle</texPath>
               <swaddleColorOffset>0.1</swaddleColorOffset>
               <brightnessRange>0.6~0.89</brightnessRange>
               <baseLayer>10</baseLayer>

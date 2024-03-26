@@ -97,16 +97,16 @@
     </tools>
 
     <race>
-      <lifeExpectancy>45</lifeExpectancy>
+      <lifeExpectancy>40</lifeExpectancy>
       <leatherDef>Leather_Light</leatherDef>
 			<nameCategory>HumanStandard</nameCategory>
       <nameGenerator>VV_NamerPersonVivi</nameGenerator>
       <nameGeneratorFemale>VV_NamerPersonVivi</nameGeneratorFemale>
       <body>VV_Vivi</body>
       <renderTree>VV_Vivi</renderTree>
-      <baseBodySize>0.8</baseBodySize>
-      <baseHealthScale>0.8</baseHealthScale>
-      <baseHungerRate>0.7</baseHungerRate>
+      <baseBodySize>0.85</baseBodySize>
+      <baseHealthScale>0.85</baseHealthScale>
+      <baseHungerRate>0.8</baseHungerRate>
       <meatMarketValue>0.8</meatMarketValue>
       <manhunterOnTameFailChance>0.50</manhunterOnTameFailChance>
       <manhunterOnDamageChance>0.90</manhunterOnDamageChance>
@@ -197,8 +197,8 @@
           <li>(18.002,150)</li>
           <li>(19,200)</li>
           <li>(25,100)</li>
-          <li>(30,20)</li>
-          <li>(40,0)</li>
+          <li>(30,10)</li>
+          <li>(50,0)</li>
         </points>
       </ageGenerationCurve>
     </race>
