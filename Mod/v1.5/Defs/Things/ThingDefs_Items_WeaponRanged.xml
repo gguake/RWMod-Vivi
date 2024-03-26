@@ -10,7 +10,7 @@
       <graphicClass>Graphic_Single</graphicClass>
       <drawSize>0.8</drawSize>
     </graphicData>
-    <equippedAngleOffset>30</equippedAngleOffset>
+    <equippedAngleOffset>0</equippedAngleOffset>
     <rotateInShelves>false</rotateInShelves>
     <soundInteract>Bow_Recurve</soundInteract>
 
@@ -218,7 +218,7 @@
       <graphicClass>Graphic_Single</graphicClass>
       <drawSize>0.8</drawSize>
     </graphicData>
-    <equippedAngleOffset>30</equippedAngleOffset>
+    <equippedAngleOffset>0</equippedAngleOffset>
     <rotateInShelves>false</rotateInShelves>
     <soundInteract>Bow_Recurve</soundInteract>
 

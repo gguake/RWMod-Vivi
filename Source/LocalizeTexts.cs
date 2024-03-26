@@ -54,6 +54,8 @@
         public const string CommandCanWithdrawProductDesc = "VV_CommandCanWithdrawProductDesc";
         public const string CommandCancelReserveWeapon = "VV_CommandCancelReserveWeapon";
         public const string CommandCancelReserveWeaponDesc = "VV_CommandCancelReserveWeaponDesc";
+        public const string CommandEquipWeapon = "VV_CommandEquipWeapon";
+        public const string CommandEquipWeaponDesc = "VV_CommandEquipWeaponDesc";
         public const string CommandUnequipWeapon = "VV_CommandUnequipWeapon";
         public const string CommandActivateShield = "VV_CommandActivateShield";
         public const string CommandActivateShieldDesc = "VV_CommandActivateShieldDesc";

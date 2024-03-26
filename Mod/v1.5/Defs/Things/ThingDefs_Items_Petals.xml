@@ -123,6 +123,7 @@
       <ThingDef>VV_Skyweed</ThingDef>
       <ThingDef>VV_Peashooter</ThingDef>
       <ThingDef>VV_Pealauncher</ThingDef>
+      <ThingDef>VV_Shootus</ThingDef>
     </descriptionHyperlinks>
 
     <graphicData>

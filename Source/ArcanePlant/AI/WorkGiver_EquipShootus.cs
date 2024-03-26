@@ -23,6 +23,11 @@ namespace VVRace
                 return false;
             }
 
+            if (shootus.ReservedWeapon.IsForbidden(pawn))
+            {
+                return false;
+            }
+
             if (!pawn.CanReserve(shootus, ignoreOtherReservations: forced))
             {
                 return false;

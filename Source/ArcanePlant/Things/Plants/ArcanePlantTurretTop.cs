@@ -5,7 +5,6 @@ namespace VVRace
 {
     public class ArcanePlantTurretTop
     {
-        private const float IdleTurnDegreesPerTick = 0.1f;
         private const int IdleTurnDuration = 40;
         private const int IdleTurnIntervalMin = 200;
         private const int IdleTurnIntervalMax = 400;
@@ -89,11 +88,11 @@ namespace VVRace
             {
                 if (idleTurnClockwise)
                 {
-                    CurRotation += IdleTurnDegreesPerTick;
+                    CurRotation += parent.ArcanePlantModExtension.idleTurnAnglePerTick;
                 }
                 else
                 {
-                    CurRotation -= IdleTurnDegreesPerTick;
+                    CurRotation -= parent.ArcanePlantModExtension.idleTurnAnglePerTick;
                 }
 
                 idleTurnTicksLeft--;
@@ -109,18 +108,23 @@ namespace VVRace
             var gun = parent.Gun;
             if (gun == null) { return; }
 
-            var v = new Vector3(parent.def.building.turretTopOffset.x, 0f, parent.def.building.turretTopOffset.y).RotatedBy(CurRotation);
+            var angle = (parent.AttackVerb?.AimAngleOverride ?? CurRotation) + recoilAngleOffset;
+            var offset = new Vector3(parent.def.building.turretTopOffset.x, 0f, parent.def.building.turretTopOffset.y).RotatedBy(angle);
             float turretTopDrawSize = parent.def.building.turretTopDrawSize;
 
-            v = v.RotatedBy(recoilAngleOffset);
-            v += recoilDrawOffset;
+            offset += recoilDrawOffset;
 
-            float rot = parent.AttackVerb?.AimAngleOverride ?? CurRotation;
             var matrix = default(Matrix4x4);
-
-            matrix.SetTRS(parent.DrawPos + Altitudes.AltIncVect * 2f + v, (-90f + rot).ToQuat(), new Vector3(turretTopDrawSize, 1f, turretTopDrawSize));
-
-            Graphics.DrawMesh(MeshPool.plane10, matrix, gun.Graphic.MatSingleFor(gun), 0);
+            if (angle < 180f)
+            {
+                matrix.SetTRS(parent.DrawPos + Altitudes.AltIncVect * 2f + offset, (angle - 90f).ToQuat(), new Vector3(turretTopDrawSize, 1f, turretTopDrawSize));
+                Graphics.DrawMesh(MeshPool.plane10, matrix, gun.Graphic.MatSingleFor(gun), 0);
+            }
+            else
+            {
+                matrix.SetTRS(parent.DrawPos + Altitudes.AltIncVect * 2f + offset, (angle + 90f).ToQuat(), new Vector3(turretTopDrawSize, 1f, turretTopDrawSize));
+                Graphics.DrawMesh(MeshPool.GridPlaneFlip(new Vector2(1f, 1f)), matrix, gun.Graphic.MatSingleFor(gun), 0);
+            }
         }
     }
 }

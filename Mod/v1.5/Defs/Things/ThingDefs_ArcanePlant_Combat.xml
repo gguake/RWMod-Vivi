@@ -54,8 +54,9 @@
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
           <mana>5</mana>
         </manaConsumeRule>
-        <consumeManaPerVerbShoot>3</consumeManaPerVerbShoot>
         <zeroManaDurableTicks>30000</zeroManaDurableTicks>
+        
+        <consumeManaPerVerbShoot>3</consumeManaPerVerbShoot>
       </li>
     </modExtensions>
   </ThingDef>
@@ -168,8 +169,9 @@
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
           <mana>5</mana>
         </manaConsumeRule>
-        <consumeManaPerVerbShoot>15</consumeManaPerVerbShoot>
         <zeroManaDurableTicks>30000</zeroManaDurableTicks>
+        
+        <consumeManaPerVerbShoot>15</consumeManaPerVerbShoot>
       </li>
     </modExtensions>
   </ThingDef>
@@ -309,7 +311,7 @@
     <building>
       <combatPower>75</combatPower>
       <ai_combatDangerous>true</ai_combatDangerous>
-      <turretTopOffset>(0, 0.05)</turretTopOffset>
+      <turretTopOffset>(0, 0.11)</turretTopOffset>
       <turretTopDrawSize>0.5</turretTopDrawSize>
     </building>
 
@@ -327,8 +329,12 @@
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
           <mana>30</mana>
         </manaConsumeRule>
-        <consumeManaPerVerbShoot>15</consumeManaPerVerbShoot>
         <zeroManaDurableTicks>60000</zeroManaDurableTicks>
+        
+        <consumeManaPerVerbShoot>15</consumeManaPerVerbShoot>
+        <idleTurnAnglePerTick>1</idleTurnAnglePerTick>
+        <turretTopBaseOffset>(0.18,0.2,0.45)</turretTopBaseOffset>
+        <turretTopBaseAngle>0</turretTopBaseAngle>
       </li>
     </modExtensions>
   </ThingDef>

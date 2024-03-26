@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 using Verse;
+using Verse.Sound;
 
 namespace VVRace
 {
@@ -63,11 +64,11 @@ namespace VVRace
                 if (AttackVerb is Verb_LaunchProjectile verbLaunchProjectile)
                 {
                     EquipmentUtility.Recoil(Gun.def, verbLaunchProjectile, out var drawOffset, out var angleOffset, _turretTop.CurRotation);
-                    _turretTop.DrawTurret(drawOffset, angleOffset);
+                    _turretTop.DrawTurret(ArcanePlantModExtension.turretTopBaseOffset + drawOffset, ArcanePlantModExtension.turretTopBaseAngle + angleOffset);
                 }
                 else
                 {
-                    _turretTop.DrawTurret(Vector3.zero, 0f);
+                    _turretTop.DrawTurret(ArcanePlantModExtension.turretTopBaseOffset, ArcanePlantModExtension.turretTopBaseAngle);
                 }
             }
 
@@ -88,6 +89,7 @@ namespace VVRace
             }
         }
 
+        private static readonly Texture2D EquipCommandTex = ContentFinder<Texture2D>.Get("UI/Commands/VV_EquipShootus");
         private static readonly Texture2D CancelCommandTex = ContentFinder<Texture2D>.Get("UI/Designators/Cancel");
         public override IEnumerable<Gizmo> GetGizmos()
         {
@@ -96,6 +98,7 @@ namespace VVRace
                 yield return gizmo;
             }
 
+            
             if (Gun != null)
             {
                 var gunDef = Gun.def;
@@ -117,8 +120,7 @@ namespace VVRace
 
                 yield return command_unequipWeapon;
             }
-
-            if (ReservedWeapon != null)
+            else if (ReservedWeapon != null)
             {
                 Command_Action command_cancelReserve = new Command_Action();
                 command_cancelReserve.icon = CancelCommandTex;
@@ -131,6 +133,49 @@ namespace VVRace
 
                 yield return command_cancelReserve;
             }
+            else
+            {
+                var command_equipWeapon = new Command_Action();
+                command_equipWeapon.icon = EquipCommandTex;
+                command_equipWeapon.iconDrawScale = 1.5f;
+                command_equipWeapon.defaultLabel = LocalizeTexts.CommandEquipWeapon.Translate();
+                command_equipWeapon.defaultDesc = LocalizeTexts.CommandEquipWeaponDesc.Translate();
+                command_equipWeapon.action = () =>
+                {
+                    Find.Targeter.BeginTargeting(new TargetingParameters()
+                    {
+                        canTargetPawns = false,
+                        canTargetBuildings = false,
+                        canTargetItems = true,
+                        canTargetAnimals = false,
+                        canTargetHumans = false,
+                        canTargetMechs = false,
+                        canTargetMutants = false,
+                        canTargetBloodfeeders = false,
+                        mapObjectTargetsMustBeAutoAttackable = false,
+                        validator = (target) =>
+                        {
+                            return target.HasThing && CanEquipWeapon(target.Thing);
+                        },
+
+                    }, (target) =>
+                    {
+                        if (target.HasThing)
+                        {
+                            _reservedWeapon = target.Thing;
+                        }
+
+                    }, (target) =>
+                    {
+                        if (target.HasThing)
+                        {
+                            Widgets.MouseAttachedLabel(target.Label);
+                        }
+                    });
+                };
+
+                yield return command_equipWeapon;
+            }
 
             if (DebugSettings.godMode)
             {
@@ -140,6 +185,7 @@ namespace VVRace
                 {
                     if (Gun == null)
                     {
+                        SoundDefOf.Click.PlayOneShotOnCamera();
                         Find.WindowStack.Add(new FloatMenu(DefDatabase<ThingDef>.AllDefsListForReading.Where(v => v.IsRangedWeapon).Select(def => new FloatMenuOption(def.LabelCap, () =>
                         {
                             var gun = ThingMaker.MakeThing(def);
@@ -181,14 +227,8 @@ namespace VVRace
                 _innerContainer.Clear();
             }
 
-            if (gun != null)
+            if (gun != null && CanEquipWeapon(gun))
             {
-                var comp = gun.TryGetComp<CompEquippable>();
-                if (comp == null || comp.PrimaryVerb == null || comp.PrimaryVerb.IsMeleeAttack)
-                {
-                    return;
-                }
-
                 if (!_innerContainer.TryAddOrTransfer(gun))
                 {
                     Log.Message($"Treid to add gun to shootus but failed");
@@ -198,6 +238,25 @@ namespace VVRace
             }
 
             DirtyMapMesh(Map);
+        }
+
+        protected bool CanEquipWeapon(Thing gun)
+        {
+            if (gun == null) { return false; }
+
+            var compEquippable = gun.TryGetComp<CompEquippable>();
+            if (compEquippable == null || compEquippable.PrimaryVerb == null || compEquippable.PrimaryVerb.IsMeleeAttack)
+            {
+                return false;
+            }
+
+            var compBiocodable = gun.TryGetComp<CompBiocodable>();
+            if (compBiocodable != null && compBiocodable.Props.biocodeOnEquip)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

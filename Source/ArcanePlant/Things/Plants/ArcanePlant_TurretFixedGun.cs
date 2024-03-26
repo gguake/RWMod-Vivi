@@ -40,11 +40,11 @@ namespace VVRace
             if (AttackVerb is Verb_LaunchProjectile verbLaunchProjectile)
             {
                 EquipmentUtility.Recoil(Gun.def, verbLaunchProjectile, out var drawOffset, out var angleOffset, _turretTop.CurRotation);
-                _turretTop.DrawTurret(drawOffset, angleOffset);
+                _turretTop.DrawTurret(ArcanePlantModExtension.turretTopBaseOffset + drawOffset, ArcanePlantModExtension.turretTopBaseAngle + angleOffset);
             }
             else
             {
-                _turretTop.DrawTurret(Vector3.zero, 0f);
+                _turretTop.DrawTurret(ArcanePlantModExtension.turretTopBaseOffset, ArcanePlantModExtension.turretTopBaseAngle);
             }
 
             base.DrawAt(drawLoc, flip);

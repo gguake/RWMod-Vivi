@@ -52,11 +52,11 @@ namespace VVRace
             // 드랍포드 식물 관련
             harmony.Patch(
                 original: AccessTools.Method(typeof(CompLaunchable), nameof(CompLaunchable.TryLaunch)),
-                transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(CompLaunchable_TryLaunch_Transpiler)));
+                transpiler: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(CompLaunchable_TryLaunch_Transpiler)));
 
             harmony.Patch(
                 original: AccessTools.Method(typeof(DropPodUtility), nameof(DropPodUtility.MakeDropPodAt)),
-                transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(DropPodUtility_MakeDropPodAt_Transpiler)));
+                transpiler: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(DropPodUtility_MakeDropPodAt_Transpiler)));
 
             Log.Message("!! [ViViRace] arcane plant patch complete");
         }

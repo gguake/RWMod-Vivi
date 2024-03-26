@@ -123,7 +123,6 @@
       <Shooting>3</Shooting>
     </skillGains>
     <workDisables>
-      <li>Caring</li>
       <li>Intellectual</li>
     </workDisables>
     <forcedTraits>
@@ -145,8 +144,7 @@
       <Medicine>3</Medicine>
     </skillGains>
     <workDisables>
-      <li>Caring</li>
-      <li>Intellectual</li>
+      <li>PlantWork</li>
     </workDisables>
     <forcedTraits>
       <SpeedOffset>2</SpeedOffset>

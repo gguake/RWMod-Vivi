@@ -154,7 +154,6 @@
     <Compile Include="MapGeneration\SymbolResolvers\SymbolResolver_HexaRoomGatheringHoney.cs" />
     <Compile Include="MapGeneration\SymbolResolvers\SymbolResolver_HexaRoomDining.cs" />
     <Compile Include="MapGeneration\SymbolResolvers\SymbolResolver_HexaRoomBarracks.cs" />
-    <Compile Include="MapGeneration\SymbolResolvers\SymbolResolver_MechanoidScoutingBase.cs" />
     <Compile Include="Gather\UI\ITab_GatherWorkTable.cs" />
     <Compile Include="Utility\Graphics\Graphic_Conditional.cs" />
     <Compile Include="ArcanePlant\Comps\CompHeatPusherMana.cs" />
@@ -234,7 +233,6 @@
     <Compile Include="Vivi\Need_RoyalJelly.cs" />
     <Compile Include="Egg\UI\EggProgressGizmo.cs" />
     <Compile Include="Vivi\RenderTree\PawnRenderNodeWorker_ViviCustomDrawSize.cs" />
-    <Compile Include="Vivi\RenderTree\PawnRenderNode_SwaddleVivi.cs" />
     <Compile Include="VVDefOf.cs" />
   </ItemGroup>
   <ItemGroup />

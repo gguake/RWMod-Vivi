@@ -133,22 +133,25 @@ namespace VVRace
         {
             base.DrawExtraSelectionOverlays();
 
-            float range = AttackVerb.verbProps.range;
-            if (range < 90f)
+            if (Spawned && Active)
             {
-                GenDraw.DrawRadiusRing(base.Position, range);
-            }
+                float range = AttackVerb.verbProps.range;
+                if (range < 90f)
+                {
+                    GenDraw.DrawRadiusRing(base.Position, range);
+                }
 
-            float num = AttackVerb.verbProps.EffectiveMinRange(allowAdjacentShot: true);
-            if (num < 90f && num > 0.1f)
-            {
-                GenDraw.DrawRadiusRing(base.Position, num);
-            }
+                float num = AttackVerb.verbProps.EffectiveMinRange(allowAdjacentShot: true);
+                if (num < 90f && num > 0.1f)
+                {
+                    GenDraw.DrawRadiusRing(base.Position, num);
+                }
 
-            if (WarmingUp)
-            {
-                int degreesWide = (int)((float)_burstWarmupTicksLeft * 0.5f);
-                GenDraw.DrawAimPie(this, _currentTarget, degreesWide, (float)def.size.x * 0.5f);
+                if (WarmingUp)
+                {
+                    int degreesWide = (int)((float)_burstWarmupTicksLeft * 0.5f);
+                    GenDraw.DrawAimPie(this, _currentTarget, degreesWide, (float)def.size.x * 0.5f);
+                }
             }
         }
 

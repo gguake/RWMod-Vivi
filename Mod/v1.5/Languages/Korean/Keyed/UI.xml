@@ -40,6 +40,8 @@
   <VV_CommandCanWithdrawProductDesc>배양이 완료된 모종을 포장하는 작업을 진행할지 설정합니다.</VV_CommandCanWithdrawProductDesc>
   <VV_CommandCancelReserveWeapon>무기 장착 취소</VV_CommandCancelReserveWeapon>
   <VV_CommandCancelReserveWeaponDesc>현재 예약된 무기 장착을 취소합니다.</VV_CommandCancelReserveWeaponDesc>
+  <VV_CommandEquipWeapon>무기 장착</VV_CommandEquipWeapon>
+  <VV_CommandEquipWeaponDesc>건인장에게 선택된 무기를 장착합니다. 근접 무기나 생체인증 무기는 장착할 수 없습니다.</VV_CommandEquipWeaponDesc>
   <VV_CommandUnequipWeapon>장착된 무기 해제</VV_CommandUnequipWeapon>
   <VV_CommandActivateShield>보호막 활성화</VV_CommandActivateShield>
   <VV_CommandActivateShieldDesc>보호막을 활성화해 외부에서 들어오는 투사체를 차단합니다. 보유한 모든 마나를 소모하며 보호막의 내구도는 소모된 마나에 비례합니다.</VV_CommandActivateShieldDesc>
