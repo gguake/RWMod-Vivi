@@ -21,10 +21,6 @@ namespace VVRace.HarmonyPatches
                 original: AccessTools.Method(typeof(ApparelGraphicRecordGetter), nameof(ApparelGraphicRecordGetter.TryGetGraphicApparel)),
                 prefix: new HarmonyMethod(typeof(ApparelPropertiesExtPatch), nameof(ApparelGraphicRecordGetter_TryGetGraphicApparel_Prefix)));
 
-            harmony.Patch(
-                original: AccessTools.Method(typeof(ThoughtUtility), nameof(ThoughtUtility.ThoughtNullified)),
-                postfix: new HarmonyMethod(typeof(ApparelPropertiesExtPatch), nameof(ThoughtUtility_ThoughtNullified_Postfix)));
-
             Log.Message("!! [ViViRace] apparel patch complete");
         }
 
@@ -73,20 +69,5 @@ namespace VVRace.HarmonyPatches
         }
 
         // TODO
-        private static void ThoughtUtility_ThoughtNullified_Postfix(ref bool __result, Pawn pawn, ThoughtDef def)
-        {
-            if (__result || pawn.apparel?.WornApparel == null) { return; }
-
-            foreach (var apparel in pawn.apparel.WornApparel)
-            {
-                if (apparel.def.apparel is ApparelPropertiesExt apparelPropertiesExt && 
-                    apparelPropertiesExt.nullifyingThoughts != null && 
-                    apparelPropertiesExt.nullifyingThoughts.Contains(def))
-                {
-                    __result = true;
-                    return;
-                }
-            }
-        }
     }
 }

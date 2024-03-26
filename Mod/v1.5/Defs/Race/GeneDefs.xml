@@ -24,7 +24,7 @@
       <GlobalLearningFactor>0.5</GlobalLearningFactor>
     </statOffsets>
     <statFactors>
-      <VV_LearningRateFactor>3.0</VV_LearningRateFactor>
+      <LearningRateFactor>2.0</LearningRateFactor>
     </statFactors>
     <canGenerateInGeneSet>false</canGenerateInGeneSet>
   </GeneDef>

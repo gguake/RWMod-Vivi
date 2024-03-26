@@ -48,10 +48,6 @@ namespace VVRace.HarmonyPatches
                 original: AccessTools.PropertyGetter(typeof(Pawn_AgeTracker), "GrowthPointsFactor"),
                 transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(Pawn_AgeTracker_get_GrowthPointsFactor_Transpiler)));
 
-            harmony.Patch(
-                original: AccessTools.Method(typeof(Need_Learning), nameof(Need_Learning.Learn)),
-                transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(Need_Learning_Learn_Transpiler)));
-
             // 이복형제 방지
             harmony.Patch(
                 original: AccessTools.Method(typeof(PawnRelationWorker_Sibling), nameof(PawnRelationWorker_Sibling.InRelation)),
@@ -67,11 +63,6 @@ namespace VVRace.HarmonyPatches
             harmony.Patch(
                 original: AccessTools.Method(typeof(InteractionWorker_RomanceAttempt), nameof(InteractionWorker_RomanceAttempt.SuccessChance)),
                 prefix: new HarmonyMethod(typeof(ViviRacePatch), nameof(InteractionWorker_RomanceAttempt_SuccessChance_Prefix)));
-
-            // TODO: CHECK
-            harmony.Patch(
-                original: AccessTools.Method(typeof(HumanlikeMeshPoolUtility), nameof(HumanlikeMeshPoolUtility.GetHumanlikeHairSetForPawn)),
-                postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(HumanlikeMeshPoolUtility_GetHumanlikeHairSetForPawn_Postfix)));
 
             // 정착지 변경
             harmony.Patch(
@@ -207,24 +198,6 @@ namespace VVRace.HarmonyPatches
             }
         }
 
-        private static IEnumerable<CodeInstruction> Need_Learning_Learn_Transpiler(IEnumerable<CodeInstruction> codeInstructions)
-        {
-            yield return new CodeInstruction(OpCodes.Ldarg_1);
-            yield return new CodeInstruction(OpCodes.Ldarg_0);
-            yield return new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(Need), "pawn"));
-            yield return new CodeInstruction(OpCodes.Ldsfld, AccessTools.Field(typeof(VVStatDefOf), nameof(VVStatDefOf.VV_LearningRateFactor)));
-            yield return new CodeInstruction(OpCodes.Ldc_I4_1);
-            yield return new CodeInstruction(OpCodes.Ldc_I4_S, -1);
-            yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(StatExtension), nameof(StatExtension.GetStatValue)));
-            yield return new CodeInstruction(OpCodes.Mul);
-            yield return new CodeInstruction(OpCodes.Starg_S, 1);
-
-            foreach (var inst in codeInstructions)
-            {
-                yield return inst;
-            }
-        }
-
         private static void PawnRelationWorker_Sibling_InRelation_Postfix(ref bool __result, Pawn me, Pawn other)
         {
             if (!__result && me.IsVivi() && other.IsVivi())
@@ -253,14 +226,6 @@ namespace VVRace.HarmonyPatches
             }
 
             return true;
-        }
-
-        private static void HumanlikeMeshPoolUtility_GetHumanlikeHairSetForPawn_Postfix(ref GraphicMeshSet __result, Pawn pawn)
-        {
-            if (pawn.IsVivi() && pawn.DevelopmentalStage.Baby())
-            {
-                __result = MeshPool.GetMeshSetForWidth(0.75f);
-            }
         }
 
         private static void Settlement_MapGeneratorDef_getter_Postfix(ref MapGeneratorDef __result, Settlement __instance)

@@ -13,19 +13,4 @@
     <minValue>0</minValue>
     <displayPriorityInCategory>3501</displayPriorityInCategory>
   </StatDef>
-
-  <!-- 학습 욕구 감소 속도 -->
-  <StatDef>
-    <defName>VV_LearningRateFactor</defName>
-    <label>learning loss multiplier</label>
-    <description>.</description>
-    <category>BasicsPawn</category>
-    <toStringStyle>PercentZero</toStringStyle>
-    <showOnAnimals>false</showOnAnimals>
-    <defaultBaseValue>1</defaultBaseValue>
-    <hideAtValue>1</hideAtValue>
-    <minValue>0</minValue>
-    <displayPriorityInCategory>3502</displayPriorityInCategory>
-  </StatDef>
-
 </Defs>

@@ -31,7 +31,4 @@
 
   <VV_GrowthPointsFactor.label>성장 등급 획득 속도</VV_GrowthPointsFactor.label>
   <VV_GrowthPointsFactor.description>어린이가 성장 등급을 얼마나 많이 획득하는지 나타냅니다.</VV_GrowthPointsFactor.description>
-  
-  <VV_LearningRateFactor.label>학습 욕구 충족 속도</VV_LearningRateFactor.label>
-  <VV_LearningRateFactor.description>어린이의 학습 욕구가 얼마나 빠르게 증가하는지 나타냅니다.</VV_LearningRateFactor.description>
 </LanguageData>

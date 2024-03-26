@@ -245,10 +245,6 @@
         <li>Middle</li>
         <li>Shell</li>
       </layers>
-
-      <nullifyingThoughts>
-        <li>SoakingWet</li>
-      </nullifyingThoughts>
     </apparel>
     
     <recipeMaker>
@@ -258,5 +254,13 @@
       <researchPrerequisite>VV_AdvancedApparels</researchPrerequisite>
       <displayPriority>3301</displayPriority>
     </recipeMaker>
+    
+    <modExtensions>
+      <li Class="RPEF.ThoughtConstraint">
+        <blacklist>
+          <li>SoakingWet</li>
+        </blacklist>
+      </li>
+    </modExtensions>
   </ThingDef>
 </Defs>

@@ -17,7 +17,6 @@ namespace VVRace
         public static StatDef VV_TreeResinGatherYield;
 
         public static StatDef VV_GrowthPointsFactor;
-        public static StatDef VV_LearningRateFactor;
     }
 
     [DefOf]
@@ -165,20 +164,6 @@ namespace VVRace
         public static HediffDef Flu;
         public static HediffDef Malaria;
     }
-
-    //[DefOf]
-    //public static class VVQuestScriptDefOf
-    //{
-    //    public static QuestScriptDef VV_EndGame_Worldtree_Step_Archaeologist;
-    //    public static QuestScriptDef VV_EndGame_Worldtree_Step_AssaultComplex;
-    //    public static QuestScriptDef VV_EndGame_Worldtree_Step_RestoreWorldtree;
-    //}
-
-    //[DefOf]
-    //public static class VVSitePartDefOf
-    //{
-    //    public static SitePartDef VV_MechanoidScoutingBase;
-    //}
 
     [DefOf]
     public static class VVMapGeneratorDefOf
