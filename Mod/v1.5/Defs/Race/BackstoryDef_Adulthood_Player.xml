@@ -13,11 +13,12 @@
       <Melee>-4</Melee>
       <Mining>-4</Mining>
       <Artistic>-4</Artistic>
-      <Social>-2</Social>
+      <Social>-4</Social>
       <Cooking>4</Cooking>
       <Animals>4</Animals>
       <Medicine>4</Medicine>
       <Crafting>4</Crafting>
+      <Intellectual>4</Intellectual>
     </skillGains>
   </BackstoryDef>
 </Defs>

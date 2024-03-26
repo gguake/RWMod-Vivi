@@ -26,7 +26,7 @@
       <SmoothingSpeed>1.5</SmoothingSpeed>
       <CleaningSpeed>1.2</CleaningSpeed>
 
-      <MoveSpeed>5.7</MoveSpeed>
+      <MoveSpeed>5.75</MoveSpeed>
       <MiningSpeed>0.5</MiningSpeed>
       <MiningYield>0.5</MiningYield>
       <PsychicSensitivity>0.5</PsychicSensitivity>
@@ -97,7 +97,7 @@
     </tools>
 
     <race>
-      <lifeExpectancy>40</lifeExpectancy>
+      <lifeExpectancy>35</lifeExpectancy>
       <leatherDef>Leather_Light</leatherDef>
 			<nameCategory>HumanStandard</nameCategory>
       <nameGenerator>VV_NamerPersonVivi</nameGenerator>
@@ -157,18 +157,18 @@
         <PatientBedRest>0</PatientBedRest>
         <Childcare>0</Childcare>
         <BasicWorker>3</BasicWorker>
-        <Warden>10</Warden>
+        <Warden>13</Warden>
         <Handling>7</Handling>
-        <Cooking>7</Cooking>
-        <Hunting>13</Hunting>
+        <Cooking>3</Cooking>
+        <Hunting>10</Hunting>
         <Construction>7</Construction>
         <Growing>3</Growing>
-        <Mining>10</Mining>
+        <Mining>13</Mining>
         <PlantCutting>3</PlantCutting>
         <Smithing>7</Smithing>
         <Tailoring>7</Tailoring>
-        <Art>13</Art>
-        <Crafting>7</Crafting>
+        <Art>7</Art>
+        <Crafting>3</Crafting>
         <Hauling>3</Hauling>
         <Cleaning>3</Cleaning>
         <Research>10</Research>

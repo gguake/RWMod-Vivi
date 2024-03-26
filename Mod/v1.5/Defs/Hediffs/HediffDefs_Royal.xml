@@ -18,7 +18,7 @@
     <stages>
       <li>
         <statOffsets>
-          <MoveSpeed>-1.5</MoveSpeed>
+          <MoveSpeed>-2.1</MoveSpeed>
           <PsychicSensitivity>1.0</PsychicSensitivity>
           <NegotiationAbility>0.2</NegotiationAbility>
           <SocialImpact>0.2</SocialImpact>

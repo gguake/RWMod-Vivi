@@ -16,7 +16,7 @@
         <li>(13, 8)</li>
       </points>
     </biologicalAgeTickFactorFromAgeCurve>
-    <biostatMet>-6</biostatMet>
+    <biostatMet>-5</biostatMet>
     <biostatCpx>4</biostatCpx>
     <sterilize>true</sterilize>
     <statOffsets>
@@ -36,7 +36,7 @@
     <geneClass>VVRace.Gene_HoneyDependency</geneClass>
     <iconPath>UI/Icons/Genes/Gene_Vivi2</iconPath>
     <displayCategory>Miscellaneous</displayCategory>
-    <biostatMet>4</biostatMet>
+    <biostatMet>3</biostatMet>
     <biostatCpx>1</biostatCpx>
     <canGenerateInGeneSet>false</canGenerateInGeneSet>
   </GeneDef>

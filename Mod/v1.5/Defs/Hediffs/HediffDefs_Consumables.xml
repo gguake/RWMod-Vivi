@@ -36,7 +36,9 @@
         </makeImmuneTo>
 
         <statFactors>
-          <LifespanFactor>2.0</LifespanFactor>
+          <LifespanFactor>2.5</LifespanFactor>
+          <PsychicSensitivity>1.25</PsychicSensitivity>
+          <PsychicEntropyRecoveryRate>1.25</PsychicEntropyRecoveryRate>
         </statFactors>
       </li>
     </stages>
