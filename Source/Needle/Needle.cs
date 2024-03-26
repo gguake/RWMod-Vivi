@@ -112,6 +112,8 @@ namespace VVRace
                     {
                         if (target is IAttackTarget && target.HostileTo(caster))
                         {
+                            if (target is Pawn pawn && pawn.DeadOrDowned) { continue; }
+
                             DamageTo(props, target);
                         }
                     }
