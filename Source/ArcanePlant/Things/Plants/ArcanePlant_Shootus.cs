@@ -81,12 +81,17 @@ namespace VVRace
 
             if (Active)
             {
-                var manaPerShoot = ArcanePlantModExtension.consumeManaPerVerbShoot;
+                var manaPerShoot = ArcanePlantModExtension.consumeManaPerVerbShoot * AttackVerb.verbProps.burstShotCount;
                 if (manaPerShoot > 0)
                 {
                     AddMana(-manaPerShoot);
                 }
             }
+        }
+
+        protected override void BurstComplete()
+        {
+            _burstCooldownTicksLeft = (Gun.GetStatValue(StatDefOf.RangedWeapon_Cooldown) * 2f).SecondsToTicks();
         }
 
         private static readonly Texture2D EquipCommandTex = ContentFinder<Texture2D>.Get("UI/Commands/VV_EquipShootus");

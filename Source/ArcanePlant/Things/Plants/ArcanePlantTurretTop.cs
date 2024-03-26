@@ -110,7 +110,7 @@ namespace VVRace
 
             var angle = (parent.AttackVerb?.AimAngleOverride ?? CurRotation) + recoilAngleOffset;
             var offset = new Vector3(parent.def.building.turretTopOffset.x, 0f, parent.def.building.turretTopOffset.y).RotatedBy(angle);
-            float turretTopDrawSize = parent.def.building.turretTopDrawSize;
+            float turretTopDrawSize = gun.DrawSize.x;
 
             offset += recoilDrawOffset;
 

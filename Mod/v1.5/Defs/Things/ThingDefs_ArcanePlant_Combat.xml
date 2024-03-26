@@ -331,7 +331,7 @@
         </manaConsumeRule>
         <zeroManaDurableTicks>60000</zeroManaDurableTicks>
         
-        <consumeManaPerVerbShoot>15</consumeManaPerVerbShoot>
+        <consumeManaPerVerbShoot>1</consumeManaPerVerbShoot>
         <idleTurnAnglePerTick>1</idleTurnAnglePerTick>
         <turretTopBaseOffset>(0.18,0.2,0.45)</turretTopBaseOffset>
         <turretTopBaseAngle>0</turretTopBaseAngle>
