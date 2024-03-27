@@ -12,7 +12,6 @@ namespace VVRace
             var harmony = new Harmony("rimworld.gguake.vivi");
             try
             {
-                ApparelPropertiesExtPatch.Patch(harmony);
                 ViviRacePatch.Patch(harmony);
                 ArcanePlantPatch.Patch(harmony);
 

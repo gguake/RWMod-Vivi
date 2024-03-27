@@ -44,7 +44,7 @@
       <VV_Lifestrand>150</VV_Lifestrand>
     </costList>
 
-    <apparel Class="VVRace.ApparelPropertiesExt">
+    <apparel>
       <useWornGraphicMask>true</useWornGraphicMask>
       <wornGraphicPath>Things/Apparel/VV_GuardianCoat</wornGraphicPath>
       <bodyPartGroups>
@@ -62,12 +62,13 @@
       <tags>
         <li>VV_ViviCombatApparel</li>
       </tags>
-      <bodyTypeWhitelist>
-        <li>Thin</li>
-        <li>Female</li>
-      </bodyTypeWhitelist>
       <developmentalStageFilter>Adult</developmentalStageFilter>
       <canBeDesiredForIdeo>false</canBeDesiredForIdeo>
+      <drawData>
+        <dataNorth>
+          <layer>40</layer>
+        </dataNorth>
+      </drawData>
     </apparel>
     
     <recipeMaker>
@@ -88,9 +89,17 @@
     
     <modExtensions>
       <li Class="RPEF.RaceConstraint">
-        <whitelist>
+        <type>Required</type>
+        <things>
           <li>VV_Vivi</li>
-        </whitelist>
+        </things>
+      </li>
+      <li Class="RPEF.BodyTypeConstraint">
+        <type>Required</type>
+        <bodyTypes>
+          <li>Thin</li>
+          <li>Female</li>
+        </bodyTypes>
       </li>
     </modExtensions>
   </ThingDef>
@@ -134,7 +143,7 @@
       <li>Leathery</li>
     </stuffCategories>
 
-    <apparel Class="VVRace.ApparelPropertiesExt">
+    <apparel>
       <useWornGraphicMask>true</useWornGraphicMask>
       <wornGraphicPath>Things/Apparel/VV_ChildApparel</wornGraphicPath>
       <bodyPartGroups>
@@ -168,9 +177,10 @@
     
     <modExtensions>
       <li Class="RPEF.RaceConstraint">
-        <whitelist>
+        <type>Required</type>
+        <things>
           <li>VV_Vivi</li>
-        </whitelist>
+        </things>
       </li>
     </modExtensions>
   </ThingDef>

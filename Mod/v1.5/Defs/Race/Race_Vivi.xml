@@ -213,6 +213,25 @@
 
     <modExtensions>
       <li Class="RPEF.RaceExtension">
+        <thoughtReplacer>
+          <SleptInBarracks>VV_SleptInBarracks</SleptInBarracks>
+          <MyDaughterDied>VV_MyDaughterDied</MyDaughterDied>
+        </thoughtReplacer>
+      </li>
+
+      <li Class="RPEF.PawnGeneratorRaceHook">
+        <relationChanceMultiplier>
+          <Spouse>0</Spouse>
+          <Fiance>0</Fiance>
+          <ExSpouse>0</ExSpouse>
+          <Lover>0</Lover>
+          <ExLover>0</ExLover>
+          <Parent>0</Parent>
+          <Child>0</Child>
+          <Sibling>0</Sibling>
+          <HalfSibling>0</HalfSibling>
+        </relationChanceMultiplier>
+
         <fixedFemaleBodyType>Thin</fixedFemaleBodyType>
 
         <melaninGeneOverrides>
@@ -230,69 +249,51 @@
           <Hair_SandyBlonde>5</Hair_SandyBlonde>
           <Hair_Blonde>5</Hair_Blonde>
         </hairColorGeneOverrides>
-
-        <thoughtReplacer>
-          <SleptInBarracks>VV_SleptInBarracks</SleptInBarracks>
-          <MyDaughterDied>VV_MyDaughterDied</MyDaughterDied>
-        </thoughtReplacer>
-
-        <relationChanceMultiplier>
-          <Spouse>0</Spouse>
-          <Fiance>0</Fiance>
-          <ExSpouse>0</ExSpouse>
-          <Lover>0</Lover>
-          <ExLover>0</ExLover>
-          <Parent>0</Parent>
-          <Child>0</Child>
-          <Sibling>0</Sibling>
-          <HalfSibling>0</HalfSibling>
-        </relationChanceMultiplier>
       </li>
 
       <li Class="RPEF.HeadTypeConstraint">
-        <whitelist>
+        <type>Whitelist</type>
+        <headTypes>
           <li>VV_Vivi_A</li>
           <li>VV_Vivi_B</li>
           <li>VV_Vivi_C</li>
           <li>VV_Vivi_D</li>
           <li>VV_Vivi_E</li>
           <li>VV_Vivi_F</li>
-        </whitelist>
+        </headTypes>
       </li>
 
-      <li Class="RPEF.HairConstraint">
-        <whitelist>
-          <li>VV_HairA</li>
-          <li>VV_HairB</li>
-          <li>VV_HairC</li>
-          <li>VV_HairD</li>
-          <li>VV_HairE</li>
-          <li>VV_HairF</li>
-          <li>VV_HairG</li>
-        </whitelist>
+      <li Class="RPEF.StyleItemConstraint">
+        <type>Whitelist</type>
+        <hairTags><li>VV_Vivi</li></hairTags>
+        <beards></beards>
+        <tattoos></tattoos>
       </li>
 
       <li Class="RPEF.XenotypeConstraint">
-        <whitelist>
+        <type>Whitelist</type>
+        <xenotypes>
           <li>VV_Vivi</li>
-        </whitelist>
+        </xenotypes>
       </li>
 
       <li Class="RPEF.BackstoryConstraint">
-        <categoryWhitelist>
+        <type>Whitelist</type>
+        <backstoryCategories>
           <li>Newborn</li>
           <li>Child</li>
           <li>ChildTribal</li>
           <li>VV_Backstory</li>
-        </categoryWhitelist>
+        </backstoryCategories>
       </li>
 
       <li Class="RPEF.ThoughtConstraint">
-        <blacklist>
+        <type>Blacklist</type>
+        <thoughts>
           <li>VV_AtePollen</li>
           <li>MySisterDied</li>
           <li>SleepDisturbed</li>
-        </blacklist>
+        </thoughts>
       </li>
     </modExtensions>
   </ThingDef>

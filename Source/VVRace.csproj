@@ -183,8 +183,6 @@
     <Compile Include="ArcanePlant\Things\ArcanePlant.cs" />
     <Compile Include="HarmonyPatches\Internals\ArcanePlantPatch.cs" />
     <Compile Include="HarmonyPatches\HarmonyPatch.cs" />
-    <Compile Include="ApparelPropertiesExt.cs" />
-    <Compile Include="HarmonyPatches\Internals\ApparelPropertiesExtPatch.cs" />
     <Compile Include="HarmonyPatches\Internals\ViviRacePatch.cs" />
     <Compile Include="Gather\Comps\CompRepeatGatherable.cs" />
     <Compile Include="Gather\GatherWorker.cs" />

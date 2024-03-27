@@ -6,17 +6,12 @@
       <li>VV_ViviApparel</li>
     </thingCategories>
 
-    <apparel Class="VVRace.ApparelPropertiesExt">
+    <apparel>
       <tags>
         <li>VV_ViviApparel</li>
       </tags>
       <canBeDesiredForIdeo>false</canBeDesiredForIdeo>
       <developmentalStageFilter>Child, Adult</developmentalStageFilter>
-      <bodyTypeWhitelist>
-        <li>Child</li>
-        <li>Thin</li>
-      </bodyTypeWhitelist>
-      <fixedBodyType>Thin</fixedBodyType>
     </apparel>
 
     <tradeTags Inherit="False">
@@ -27,9 +22,20 @@
     
     <modExtensions>
       <li Class="RPEF.RaceConstraint">
-        <whitelist>
+        <type>Required</type>
+        <things>
           <li>VV_Vivi</li>
-        </whitelist>
+        </things>
+      </li>
+      <li Class="RPEF.BodyTypeConstraint">
+        <type>Required</type>
+        <bodyTypes>
+          <li>Child</li>
+          <li>Thin</li>
+        </bodyTypes>
+      </li>
+      <li Class="RPEF.ApparelGraphicHook">
+        <defaultBodyTypeGraphicOverride>Thin</defaultBodyTypeGraphicOverride>
       </li>
     </modExtensions>
   </ThingDef>
@@ -67,7 +73,7 @@
       <li>Leathery</li>
     </stuffCategories>
 
-    <apparel Class="VVRace.ApparelPropertiesExt">
+    <apparel>
       <useWornGraphicMask>true</useWornGraphicMask>
       <wornGraphicPath>Things/Apparel/BasicWorkerCostume</wornGraphicPath>
       <bodyPartGroups>
@@ -123,7 +129,7 @@
       <li>Leathery</li>
     </stuffCategories>
 
-    <apparel Class="VVRace.ApparelPropertiesExt">
+    <apparel>
       <useWornGraphicMask>true</useWornGraphicMask>
       <wornGraphicPath>Things/Apparel/WorkerUniformDress</wornGraphicPath>
       <bodyPartGroups>
@@ -177,7 +183,7 @@
       <li>Leathery</li>
     </stuffCategories>
 
-    <apparel Class="VVRace.ApparelPropertiesExt">
+    <apparel>
       <useWornGraphicMask>true</useWornGraphicMask>
       <wornGraphicPath>Things/Apparel/WinterCape</wornGraphicPath>
       <bodyPartGroups>
@@ -190,6 +196,11 @@
         <li>Middle</li>
         <li>Shell</li>
       </layers>
+      <drawData>
+        <dataNorth>
+          <layer>40</layer>
+        </dataNorth>
+      </drawData>
     </apparel>
     
     <recipeMaker>
@@ -204,7 +215,7 @@
     <label>vivi waterproof coat</label>
     <description>.</description>
     <graphicData>
-      <texPath>Things/Apparel/Coat</texPath>
+      <texPath>Things/Apparel/WaterproofCoat</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <shaderType>CutoutComplex</shaderType>
     </graphicData>
@@ -231,9 +242,9 @@
       <li>Leathery</li>
     </stuffCategories>
 
-    <apparel Class="VVRace.ApparelPropertiesExt">
+    <apparel>
       <useWornGraphicMask>true</useWornGraphicMask>
-      <wornGraphicPath>Things/Apparel/Coat</wornGraphicPath>
+      <wornGraphicPath>Things/Apparel/WaterproofCoat</wornGraphicPath>
       <bodyPartGroups>
         <li>Neck</li>
         <li>Shoulders</li>
@@ -245,6 +256,11 @@
         <li>Middle</li>
         <li>Shell</li>
       </layers>
+      <drawData>
+        <dataNorth>
+          <layer>40</layer>
+        </dataNorth>
+      </drawData>
     </apparel>
     
     <recipeMaker>
@@ -254,13 +270,5 @@
       <researchPrerequisite>VV_AdvancedApparels</researchPrerequisite>
       <displayPriority>3301</displayPriority>
     </recipeMaker>
-    
-    <modExtensions>
-      <li Class="RPEF.ThoughtConstraint">
-        <blacklist>
-          <li>SoakingWet</li>
-        </blacklist>
-      </li>
-    </modExtensions>
   </ThingDef>
 </Defs>

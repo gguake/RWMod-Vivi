@@ -18,9 +18,10 @@
     
     <modExtensions>
       <li Class="RPEF.RaceConstraint">
-        <whitelist>
+        <type>Required</type>
+        <things>
           <li>VV_Vivi</li>
-        </whitelist>
+        </things>
       </li>
     </modExtensions>
   </BackstoryDef>

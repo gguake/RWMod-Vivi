@@ -104,9 +104,10 @@
 
     <modExtensions>
       <li Class="RPEF.RaceConstraint">
-        <whitelist>
+        <type>Required</type>
+        <things>
           <li>VV_Vivi</li>
-        </whitelist>
+        </things>
       </li>
     </modExtensions>
   </ThingDef>
@@ -122,6 +123,7 @@
       <shaderType>CutoutComplex</shaderType>
       <drawSize>1.3</drawSize>
     </graphicData>
+    <equippedAngleOffset>-30</equippedAngleOffset>
     <soundInteract>Interact_BeatFire</soundInteract>
 
     <techLevel>Medieval</techLevel>
@@ -213,9 +215,10 @@
 
     <modExtensions>
       <li Class="RPEF.RaceConstraint">
-        <whitelist>
+        <type>Required</type>
+        <things>
           <li>VV_Vivi</li>
-        </whitelist>
+        </things>
       </li>
     </modExtensions>
   </ThingDef>
@@ -233,14 +236,14 @@
 
     <projectile Class="VVRace.NeedleProperties">
       <damageDef>Stab</damageDef>
-      <damageAmountBase>10</damageAmountBase>
-      <stoppingPower>1.3</stoppingPower>
-      <armorPenetrationBase>0.5</armorPenetrationBase>
-      <speed>50</speed>
+      <damageAmountBase>11</damageAmountBase>
+      <stoppingPower>1.1</stoppingPower>
+      <armorPenetrationBase>0.3</armorPenetrationBase>
+      <speed>49</speed>
 
-      <maxAttackCount>6</maxAttackCount>
+      <maxAttackCount>7</maxAttackCount>
       <targettingRadius>3</targettingRadius>
-      <overrunTicks>3~7</overrunTicks>
+      <overrunTicks>3~8</overrunTicks>
 
       <maxAngleVelocity>10.1</maxAngleVelocity>
       <forceDirectingRadiusSqr>11</forceDirectingRadiusSqr>
