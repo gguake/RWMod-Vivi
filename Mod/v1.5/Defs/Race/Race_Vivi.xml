@@ -253,6 +253,7 @@
       </li>
 
       <li Class="RPEF.HeadTypeConstraint">
+        <rule>OnAppliedPawn</rule>
         <type>Whitelist</type>
         <headTypes>
           <li>VV_Vivi_A</li>
@@ -265,6 +266,7 @@
       </li>
 
       <li Class="RPEF.StyleItemConstraint">
+        <rule>OnAppliedPawn</rule>
         <type>Whitelist</type>
         <hairTags><li>VV_Vivi</li></hairTags>
         <beards></beards>
@@ -272,6 +274,7 @@
       </li>
 
       <li Class="RPEF.XenotypeConstraint">
+        <rule>OnAppliedPawn</rule>
         <type>Whitelist</type>
         <xenotypes>
           <li>VV_Vivi</li>
@@ -279,6 +282,7 @@
       </li>
 
       <li Class="RPEF.BackstoryConstraint">
+        <rule>OnAppliedPawn</rule>
         <type>Whitelist</type>
         <backstoryCategories>
           <li>Newborn</li>
@@ -289,6 +293,7 @@
       </li>
 
       <li Class="RPEF.ThoughtConstraint">
+        <rule>OnAppliedPawn</rule>
         <type>Blacklist</type>
         <thoughts>
           <li>VV_AtePollen</li>
