@@ -34,11 +34,6 @@ namespace VVRace
                 return false;
             }
 
-            if (!p.IsVivi())
-            {
-                return false;
-            }
-
             var extension = RecipeModExtension;
             if (extension != null)
             {

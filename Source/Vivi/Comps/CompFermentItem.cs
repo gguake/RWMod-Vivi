@@ -56,40 +56,43 @@ namespace VVRace
                 return;
             }
 
-            float ambientTemperature = parent.AmbientTemperature;
-            if (ambientTemperature > Props.maxSafeTemperature)
+            if (parent.Spawned)
             {
-                _temperatureDamagedProgress = Mathf.Clamp01(_temperatureDamagedProgress + (ambientTemperature - Props.maxSafeTemperature) * Props.damageProgressPerDegreePerTick * ticks);
-            }
-            else if (ambientTemperature < Props.minSafeTemperature)
-            {
-                _temperatureDamagedProgress = Mathf.Clamp01(_temperatureDamagedProgress - (ambientTemperature - Props.minSafeTemperature) * Props.damageProgressPerDegreePerTick * ticks);
-            }
-            else
-            {
-                _fermentedProgress = Mathf.Clamp01(_fermentedProgress + (float)ticks / Props.TotalFermentTicks);
-            }
-
-            if (_fermentedProgress >= 1f)
-            {
-                var map = parent.Map;
-                var position = parent.Position;
-                parent.Destroy();
-
-                foreach (var tdc in Props.fermentedThings)
+                float ambientTemperature = parent.AmbientTemperature;
+                if (ambientTemperature > Props.maxSafeTemperature)
                 {
-                    var thingDef = tdc.thingDef;
-                    var count = tdc.count;
+                    _temperatureDamagedProgress = Mathf.Clamp01(_temperatureDamagedProgress + (ambientTemperature - Props.maxSafeTemperature) * Props.damageProgressPerDegreePerTick * ticks);
+                }
+                else if (ambientTemperature < Props.minSafeTemperature)
+                {
+                    _temperatureDamagedProgress = Mathf.Clamp01(_temperatureDamagedProgress - (ambientTemperature - Props.minSafeTemperature) * Props.damageProgressPerDegreePerTick * ticks);
+                }
+                else
+                {
+                    _fermentedProgress = Mathf.Clamp01(_fermentedProgress + (float)ticks / Props.TotalFermentTicks);
+                }
 
-                    var stackLimit = thingDef.stackLimit;
-                    while (count > 0)
+                if (_fermentedProgress >= 1f)
+                {
+                    var map = parent.Map;
+                    var position = parent.Position;
+                    parent.Destroy();
+
+                    foreach (var tdc in Props.fermentedThings)
                     {
-                        var stackCount = Mathf.Clamp(count, 1, stackLimit);
-                        var thing = ThingMaker.MakeThing(thingDef);
-                        thing.stackCount = stackCount;
+                        var thingDef = tdc.thingDef;
+                        var count = tdc.count;
 
-                        GenPlace.TryPlaceThing(thing, position, map, ThingPlaceMode.Direct);
-                        count -= stackCount;
+                        var stackLimit = thingDef.stackLimit;
+                        while (count > 0)
+                        {
+                            var stackCount = Mathf.Clamp(count, 1, stackLimit);
+                            var thing = ThingMaker.MakeThing(thingDef);
+                            thing.stackCount = stackCount;
+
+                            GenPlace.TryPlaceThing(thing, position, map, ThingPlaceMode.Direct);
+                            count -= stackCount;
+                        }
                     }
                 }
             }

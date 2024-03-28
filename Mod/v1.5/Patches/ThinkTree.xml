@@ -4,7 +4,10 @@
     <xpath>Defs/ThinkTreeDef[defName="MainColonistBehaviorCore"]/thinkRoot/subNodes/li[1]/subNodes/li[@Class="JobGiver_Work"]</xpath>
     <order>Prepend</order>
     <value>
-      <li Class="VVRace.ThinkNode_ConditionalVivi">
+      <li Class="RPEF.ThinkNode_ConditionalRace">
+        <races>
+          <li>VV_Vivi</li>
+        </races>
         <subNodes>
           <li Class="VVRace.JobGiver_LayViviEgg" />
         </subNodes>

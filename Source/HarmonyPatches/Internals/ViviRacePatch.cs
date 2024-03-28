@@ -32,11 +32,6 @@ namespace VVRace.HarmonyPatches
                 original: AccessTools.Method(typeof(PawnGenerator), "GenerateBodyType"),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(PawnGenerator_GenerateBodyType_Postfix)));
 
-            // 생산시 열량 소모 패치
-            harmony.Patch(
-                original: AccessTools.Method(typeof(BillUtility), "MakeNewBill"),
-                prefix: new HarmonyMethod(typeof(ViviRacePatch), nameof(BillUtility_MakeNewBill_Prefix)));
-
             // 게임 시작시 알 부모 설정 패치
             harmony.Patch(
                 original: AccessTools.Method(typeof(ScenPart_PlayerPawnsArriveMethod), nameof(ScenPart_PlayerPawnsArriveMethod.GenerateIntoMap)),
@@ -129,30 +124,6 @@ namespace VVRace.HarmonyPatches
                     pawn.story.bodyType = kindDefExt.forcedBodyType;
                 }
             }
-        }
-
-        private static bool BillUtility_MakeNewBill_Prefix(ref Bill __result, RecipeDef recipe, Precept_ThingStyle precept)
-        {
-            var extension = recipe.GetModExtension<RecipeModExtension>();
-            if (extension == null) { return true; }
-
-            if (extension.billType != null)
-            {
-                if (!typeof(Bill).IsAssignableFrom(extension.billType))
-                {
-                    Log.Error($"invalid billtype for recipe mod extension");
-                    return true;
-                }
-
-                var bill = Activator.CreateInstance(extension.billType, new object[] { recipe, precept }) as Bill;
-                if (bill != null)
-                {
-                    __result = bill;
-                    return false;
-                }
-            }
-
-            return true;
         }
 
         private static void ScenPart_PlayerPawnsArriveMethod_GenerateIntoMap_Postfix(Map map)

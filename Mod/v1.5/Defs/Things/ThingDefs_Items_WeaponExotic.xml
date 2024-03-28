@@ -250,9 +250,7 @@
     </projectile>
 
     <comps>
-      <li Class="VVRace.CompProperties_LineTrail">
-        <maxTrailPoint>15</maxTrailPoint>
-        <refreshInterval>1</refreshInterval>
+      <li Class="RPEF.CompProperties_TrailRenderer">
         <texPath>VFX/VV_NeedleTrail</texPath>
         <shader>MotePawnBodyGlow</shader>
         <color>(1.0, 0.8, 0.6)</color>
@@ -263,6 +261,9 @@
           </points>
         </widthCurve>
         <lineTextureMode>DistributePerSegment</lineTextureMode>
+        
+        <maxTrailPoint>15</maxTrailPoint>
+        <refreshInterval>1</refreshInterval>
       </li>
     </comps>
   </ThingDef>

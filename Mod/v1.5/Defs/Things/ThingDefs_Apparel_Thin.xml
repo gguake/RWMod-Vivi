@@ -270,5 +270,15 @@
       <researchPrerequisite>VV_AdvancedApparels</researchPrerequisite>
       <displayPriority>3301</displayPriority>
     </recipeMaker>
+
+    <modExtensions>
+      <li Class="RPEF.ThoughtConstraint">
+        <rule>OnAppliedPawn</rule>
+        <type>Blacklist</type>
+        <thoguhts>
+          <li>SoakingWet</li>
+        </thoguhts>
+      </li>
+    </modExtensions>
   </ThingDef>
 </Defs>
