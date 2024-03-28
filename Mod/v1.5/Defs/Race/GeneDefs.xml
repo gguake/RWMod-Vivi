@@ -8,19 +8,18 @@
     <displayCategory>Miscellaneous</displayCategory>
     <biologicalAgeTickFactorFromAgeCurve>
       <points>
-        <li>(0, 3)</li>
+        <li>(0, 2)</li>
         <li>(3, 3)</li>
+        <li>(6.999, 3)</li>
         <li>(7, 4)</li>
-        <li>(10, 4)</li>
-        <li>(12.999, 6)</li>
+        <li>(12.999, 4)</li>
         <li>(13, 8)</li>
       </points>
     </biologicalAgeTickFactorFromAgeCurve>
-    <biostatMet>-5</biostatMet>
+    <biostatMet>-4</biostatMet>
     <biostatCpx>4</biostatCpx>
     <sterilize>true</sterilize>
     <statOffsets>
-      <VV_GrowthPointsFactor>3.0</VV_GrowthPointsFactor>
       <GlobalLearningFactor>0.5</GlobalLearningFactor>
     </statOffsets>
     <statFactors>
@@ -36,7 +35,7 @@
     <geneClass>VVRace.Gene_HoneyDependency</geneClass>
     <iconPath>UI/Icons/Genes/Gene_Vivi2</iconPath>
     <displayCategory>Miscellaneous</displayCategory>
-    <biostatMet>3</biostatMet>
+    <biostatMet>2</biostatMet>
     <biostatCpx>1</biostatCpx>
     <canGenerateInGeneSet>false</canGenerateInGeneSet>
   </GeneDef>

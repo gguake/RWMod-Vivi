@@ -217,6 +217,19 @@
           <SleptInBarracks>VV_SleptInBarracks</SleptInBarracks>
           <MyDaughterDied>VV_MyDaughterDied</MyDaughterDied>
         </thoughtReplacer>
+
+        <growthMomentAgeOverride>
+          <li>5</li>
+          <li>7</li>
+          <li>10</li>
+          <li>13</li>
+        </growthMomentAgeOverride>
+        <growthPointFactorCurve>
+          <points>
+            <li>(6.9999,3.0)</li>
+            <li>(7,2.5)</li>
+          </points>
+        </growthPointFactorCurve>
       </li>
 
       <li Class="RPEF.PawnGeneratorRaceHook">

@@ -41,7 +41,7 @@ namespace VVRace.HarmonyPatches
             // 성장 스탯 관련 패치
             harmony.Patch(
                 original: AccessTools.PropertyGetter(typeof(Pawn_AgeTracker), "GrowthPointsFactor"),
-                transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(Pawn_AgeTracker_get_GrowthPointsFactor_Transpiler)));
+                postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(Pawn_AgeTracker_get_GrowthPointsFactor_Postfix)));
 
             // 이복형제 방지
             harmony.Patch(
@@ -150,23 +150,9 @@ namespace VVRace.HarmonyPatches
             }
         }
 
-        private static IEnumerable<CodeInstruction> Pawn_AgeTracker_get_GrowthPointsFactor_Transpiler(IEnumerable<CodeInstruction> codeInstructions)
+        private static void Pawn_AgeTracker_get_GrowthPointsFactor_Postfix(ref float __result, Pawn ___pawn)
         {
-            foreach (var inst in codeInstructions)
-            {
-                if (inst.opcode == OpCodes.Ret)
-                {
-                    yield return new CodeInstruction(OpCodes.Ldarg_0);
-                    yield return new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(Pawn_AgeTracker), "pawn"));
-                    yield return new CodeInstruction(OpCodes.Ldsfld, AccessTools.Field(typeof(VVStatDefOf), nameof(VVStatDefOf.VV_GrowthPointsFactor)));
-                    yield return new CodeInstruction(OpCodes.Ldc_I4_1);
-                    yield return new CodeInstruction(OpCodes.Ldc_I4_S, -1);
-                    yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(StatExtension), nameof(StatExtension.GetStatValue)));
-                    yield return new CodeInstruction(OpCodes.Mul);
-                }
-
-                yield return inst;
-            }
+            __result *= ___pawn.GetStatValue(VVStatDefOf.VV_GrowthPointsFactor);
         }
 
         private static void PawnRelationWorker_Sibling_InRelation_Postfix(ref bool __result, Pawn me, Pawn other)
