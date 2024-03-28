@@ -52,11 +52,14 @@ namespace VVRace
 
         public override void CompTick()
         {
-            if (CompVivi.isRoyal)
+            if (parent.IsHashIntervalTick(2000))
             {
-                if (eggProgress < 1f)
+                if (CompVivi.isRoyal)
                 {
-                    eggProgress = Mathf.Clamp01(eggProgress + EggProgressPerDays / 60000f);
+                    if (eggProgress < 1f)
+                    {
+                        eggProgress = Mathf.Clamp01(eggProgress + (EggProgressPerDays / 60000f * 2000));
+                    }
                 }
             }
         }
