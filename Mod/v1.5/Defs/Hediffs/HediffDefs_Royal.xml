@@ -17,6 +17,7 @@
 
     <stages>
       <li>
+        <hungerRateFactorOffset>0.2</hungerRateFactorOffset>
         <statOffsets>
           <MoveSpeed>-2.1</MoveSpeed>
           <PsychicSensitivity>1.0</PsychicSensitivity>
