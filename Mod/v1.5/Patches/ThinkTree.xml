@@ -5,6 +5,7 @@
     <order>Prepend</order>
     <value>
       <li Class="RPEF.ThinkNode_ConditionalRace">
+        <priority>10</priority>
         <races>
           <li>VV_Vivi</li>
         </races>
