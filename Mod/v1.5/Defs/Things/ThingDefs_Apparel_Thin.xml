@@ -275,9 +275,9 @@
       <li Class="RPEF.ThoughtConstraint">
         <rule>OnAppliedPawn</rule>
         <type>Blacklist</type>
-        <thoguhts>
+        <thoughts>
           <li>SoakingWet</li>
-        </thoguhts>
+        </thoughts>
       </li>
     </modExtensions>
   </ThingDef>
