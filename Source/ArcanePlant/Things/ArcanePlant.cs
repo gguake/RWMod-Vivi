@@ -297,17 +297,17 @@ namespace VVRace
         {
             base.Tick();
 
-            if (Destroyed)
+            if (!Spawned || Destroyed)
             {
                 return;
             }
 
-            if (Spawned && ManaFluxNetwork != null && (Find.TickManager.TicksGame + ManaFluxNetwork.NetworkHash) % 60 == 0)
+            if (ManaFluxNetwork != null && (Find.TickManager.TicksGame + ManaFluxNetwork.NetworkHash) % GenTicks.TickRareInterval == 0)
             {
                 ManaFluxNetwork.Tick();
             }
 
-            if (Spawned && this.IsHashIntervalTick(GenTicks.TickRareInterval))
+            if (this.IsHashIntervalTick(GenTicks.TickRareInterval))
             {
                 if ((int)Mana == 0)
                 {
@@ -324,69 +324,6 @@ namespace VVRace
                     HitPoints = Mathf.Clamp(HitPoints + 1, 0, MaxHitPoints);
                 }
 
-                if (!ArcanePlantUtility.CanPlaceArcanePlantToCell(Map, Position, def))
-                {
-                    ForceMinifyAndDropDirect();
-                    return;
-                }
-            }
-        }
-
-        public override void TickRare()
-        {
-            base.TickRare();
-
-            if (Destroyed)
-            {
-                return;
-            }
-
-            if (Spawned && ManaFluxNetwork != null)
-            {
-                ManaFluxNetwork.Tick();
-            }
-
-            if (Spawned)
-            {
-                if (!ArcanePlantUtility.CanPlaceArcanePlantToCell(Map, Position, def))
-                {
-                    ForceMinifyAndDropDirect();
-                    return;
-                }
-
-                if ((int)Mana == 0)
-                {
-                    _zeroManaTicks += GenTicks.TickRareInterval;
-
-                    if (_zeroManaTicks >= ArcanePlantModExtension.zeroManaDurableTicks)
-                    {
-                        _zeroManaTicks = 0;
-                        TakeDamage(new DamageInfo(DamageDefOf.Rotting, ArcanePlantModExtension.zeroManaDamageByChance.RandomInRange));
-                    }
-                }
-                else if (ManaChargeRatio > 0.1f && HitPoints < MaxHitPoints)
-                {
-                    HitPoints = Mathf.Clamp(HitPoints + 1, 0, MaxHitPoints);
-                }
-            }
-        }
-
-        public override void TickLong()
-        {
-            base.TickLong();
-
-            if (Destroyed)
-            {
-                return;
-            }
-
-            if (Spawned && ManaFluxNetwork != null)
-            {
-                ManaFluxNetwork.Tick();
-            }
-
-            if (Spawned)
-            {
                 if (!ArcanePlantUtility.CanPlaceArcanePlantToCell(Map, Position, def))
                 {
                     ForceMinifyAndDropDirect();

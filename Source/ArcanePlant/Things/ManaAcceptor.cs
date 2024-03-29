@@ -62,16 +62,6 @@ namespace VVRace
             base.Tick();
         }
 
-        public override void TickRare()
-        {
-            if (Spawned && ManaFluxGrid != null && ManaFluxGrid.ShouldRefreshNetwork)
-            {
-                ManaFluxGrid.RefreshNetworks();
-            }
-
-            base.TickRare();
-        }
-
         public override void Print(SectionLayer layer)
         {
             base.Print(layer);

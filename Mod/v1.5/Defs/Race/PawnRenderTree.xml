@@ -75,69 +75,64 @@
               <debugLabel>Weapon/carried thing</debugLabel>
               <workerClass>PawnRenderNodeWorker_Carried</workerClass>
             </li>
-            <li Class="RPEF.PawnRenderNodeProperties_BodyTypeDrawData">
-              <workerClass>RPEF.PawnRenderNodeWorker_BodyTypeDrawData</workerClass>
-              <bodyTypeDrawData>
-                <Baby>
-                  <scale>0</scale>
-                </Baby>
-              </bodyTypeDrawData>
-              <useGraphic>false</useGraphic>
 
-              <children>
-                <li>
-                  <debugLabel>LeftWing</debugLabel>
-                  <workerClass>PawnRenderNodeWorker_AttachmentBody</workerClass>
-                  <texPath>Things/Pawn/Vivi/BodyParts/WingL</texPath>
-                  <rotDrawMode>Fresh</rotDrawMode>
-                  <linkedBodyPartsGroup>VV_LeftWing</linkedBodyPartsGroup>
-                  <drawData>
-                    <scaleOffsetByBodySize>true</scaleOffsetByBodySize>
-                    <dataNorth>
-                      <offset>(-0.01, 0, 0.0)</offset>
-                      <layer>54</layer>
-                    </dataNorth>
-                    <dataSouth>
-                      <offset>(0.01, 0, 0.0)</offset>
-                      <layer>-2</layer>
-                    </dataSouth>
-                    <dataEast>
-                      <offset>(-0.025, 0, 0)</offset>
-                      <layer>40</layer>
-                    </dataEast>
-                    <dataWest>
-                      <offset>(0.025, 0, 0)</offset>
-                      <layer>41</layer>
-                    </dataWest>
-                  </drawData>
-                </li>
-                <li>
-                  <debugLabel>RightWing</debugLabel>
-                  <workerClass>PawnRenderNodeWorker_AttachmentBody</workerClass>
-                  <texPath>Things/Pawn/Vivi/BodyParts/WingR</texPath>
-                  <rotDrawMode>Fresh</rotDrawMode>
-                  <linkedBodyPartsGroup>VV_RightWing</linkedBodyPartsGroup>
-                  <drawData>
-                    <scaleOffsetByBodySize>true</scaleOffsetByBodySize>
-                    <dataNorth>
-                      <offset>(0.01, 0, 0)</offset>
-                      <layer>54</layer>
-                    </dataNorth>
-                    <dataSouth>
-                      <offset>(-0.01, 0, 0)</offset>
-                      <layer>-2</layer>
-                    </dataSouth>
-                    <dataEast>
-                      <offset>(-0.025, 0, 0)</offset>
-                      <layer>41</layer>
-                    </dataEast>
-                    <dataWest>
-                      <offset>(0.025, 0, 0)</offset>
-                      <layer>40</layer>
-                    </dataWest>
-                  </drawData>
-                </li>    
-              </children>
+            <li>
+              <debugLabel>LeftWing</debugLabel>
+              <workerClass>PawnRenderNodeWorker_AttachmentBody</workerClass>
+              <subworkerClasses>
+                <li>VVRace.PawnRenderSubWorker_WingCondition</li>
+              </subworkerClasses>
+              <texPath>Things/Pawn/Vivi/BodyParts/WingL</texPath>
+              <rotDrawMode>Fresh</rotDrawMode>
+              <linkedBodyPartsGroup>VV_LeftWing</linkedBodyPartsGroup>
+              <drawData>
+                <scaleOffsetByBodySize>true</scaleOffsetByBodySize>
+                <dataNorth>
+                  <offset>(-0.01, 0, 0.0)</offset>
+                  <layer>54</layer>
+                </dataNorth>
+                <dataSouth>
+                  <offset>(0.01, 0, 0.0)</offset>
+                  <layer>-2</layer>
+                </dataSouth>
+                <dataEast>
+                  <offset>(-0.025, 0, 0)</offset>
+                  <layer>40</layer>
+                </dataEast>
+                <dataWest>
+                  <offset>(0.025, 0, 0)</offset>
+                  <layer>41</layer>
+                </dataWest>
+              </drawData>
+            </li>
+            <li>
+              <debugLabel>RightWing</debugLabel>
+              <workerClass>PawnRenderNodeWorker_AttachmentBody</workerClass>
+              <subworkerClasses>
+                <li>VVRace.PawnRenderSubWorker_WingCondition</li>
+              </subworkerClasses>
+              <texPath>Things/Pawn/Vivi/BodyParts/WingR</texPath>
+              <rotDrawMode>Fresh</rotDrawMode>
+              <linkedBodyPartsGroup>VV_RightWing</linkedBodyPartsGroup>
+              <drawData>
+                <scaleOffsetByBodySize>true</scaleOffsetByBodySize>
+                <dataNorth>
+                  <offset>(0.01, 0, 0)</offset>
+                  <layer>54</layer>
+                </dataNorth>
+                <dataSouth>
+                  <offset>(-0.01, 0, 0)</offset>
+                  <layer>-2</layer>
+                </dataSouth>
+                <dataEast>
+                  <offset>(-0.025, 0, 0)</offset>
+                  <layer>41</layer>
+                </dataEast>
+                <dataWest>
+                  <offset>(0.025, 0, 0)</offset>
+                  <layer>40</layer>
+                </dataWest>
+              </drawData>
             </li>
 
           </children>

@@ -131,11 +131,6 @@ namespace VVRace.HarmonyPatches
             if (map.IsPlayerHome && Find.GameInitData.startingTile == map.Tile)
             {
                 var startingRoyalVivis = Find.GameInitData.startingAndOptionalPawns?.Where(pawn => pawn.Spawned && pawn.IsRoyalVivi()).ToList();
-                foreach (var vivi in startingRoyalVivis)
-                {
-                    vivi.GetCompVivi().SetStartingPawn();
-                }
-
                 var allEggs = map.spawnedThings.Where(v => v.def == VVThingDefOf.VV_ViviEgg);
                 foreach (var egg in allEggs)
                 {

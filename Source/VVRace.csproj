@@ -43,6 +43,9 @@
       <HintPath>C:\Program Files (x86)\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="RPEF">
+      <HintPath>..\..\RWMod-RPEF\Mod\v1.5\Assemblies\RPEF.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -61,10 +64,6 @@
     </Reference>
     <Reference Include="UnityEngine.IMGUIModule">
       <HintPath>C:\Program Files (x86)\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.TextCoreModule">
-      <HintPath>E:\SteamLibrary\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.TextCoreModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.TextRenderingModule">
@@ -153,6 +152,7 @@
     <Compile Include="MapGeneration\SymbolResolvers\SymbolResolver_HexaRoomDining.cs" />
     <Compile Include="MapGeneration\SymbolResolvers\SymbolResolver_HexaRoomBarracks.cs" />
     <Compile Include="Gather\UI\ITab_GatherWorkTable.cs" />
+    <Compile Include="RPEF\PawnRenderSubWorker_WingCondition.cs" />
     <Compile Include="Utility\Graphics\Graphic_Conditional.cs" />
     <Compile Include="ArcanePlant\Comps\CompHeatPusherMana.cs" />
     <Compile Include="ArcanePlant\Things\Plants\ArcanePlant_Thunderbud.cs" />
