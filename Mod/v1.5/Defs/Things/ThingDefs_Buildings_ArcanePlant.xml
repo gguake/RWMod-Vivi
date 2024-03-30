@@ -128,7 +128,7 @@
     </building>
     <designationCategory>VV_Bulidings</designationCategory>
     <designationHotKey>Misc7</designationHotKey>
-    <staticSunShadowHeight>0.5</staticSunShadowHeight>
+    <staticSunShadowHeight>0.1</staticSunShadowHeight>
 
     <surfaceType>Item</surfaceType>
     <canOverlapZones>false</canOverlapZones>
