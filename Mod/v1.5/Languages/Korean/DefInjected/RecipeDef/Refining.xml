@@ -20,16 +20,16 @@
 <VV_MakeLifestrand.description>악마가닥을 다양한 재료로 가공해 생체가닥을 만듭니다.</VV_MakeLifestrand.description>
 <VV_MakeLifestrand.jobString>생체가닥 만드는 중.</VV_MakeLifestrand.jobString>
 
-<VV_MakeFertilizerCorpse.label>뼈로 비료 만들기</VV_MakeFertilizerCorpse.label>
-<VV_MakeFertilizerCorpse.description>뼈를 흙과 배합해 비료를 만듭니다.</VV_MakeFertilizerCorpse.description>
+<VV_MakeFertilizerCorpse.label>뼈로 마나 비료 만들기</VV_MakeFertilizerCorpse.label>
+<VV_MakeFertilizerCorpse.description>뼈를 흙, 꽃가루와 배합해 마나 비료를 만듭니다.</VV_MakeFertilizerCorpse.description>
 <VV_MakeFertilizerCorpse.jobString>뼈로 비료를 배합하는 중.</VV_MakeFertilizerCorpse.jobString>
 
-<VV_MakeFertilizerResource.label>유기물로 비료 만들기</VV_MakeFertilizerResource.label>
-<VV_MakeFertilizerResource.description>유기물을 숙성시켜 흙과 배합해 비료를 만듭니다.</VV_MakeFertilizerResource.description>
+<VV_MakeFertilizerResource.label>유기물로 마나 비료 만들기</VV_MakeFertilizerResource.label>
+<VV_MakeFertilizerResource.description>유기물을 숙성시켜 흙, 꽃가루와 배합해 마나 비료를 만듭니다.</VV_MakeFertilizerResource.description>
 <VV_MakeFertilizerResource.jobString>유기물로 비료를 배합하는 중.</VV_MakeFertilizerResource.jobString>
 
 <VV_ExtractBulkHoney.label>비비 꿀 대량 추출</VV_ExtractBulkHoney.label>
-<VV_ExtractBulkHoney.description>대량의 비비 꿀에서 순수한 꿀을 추출합니다. 수작업보다 훨씬 빠르고 효율이 좋지만 꽃가루는 얻을 수 없습니다.</VV_ExtractBulkHoney.description>
+<VV_ExtractBulkHoney.description>대량의 비비 꿀에서 순수한 꿀을 추출합니다. 수작업보다 빠르고 높은 효율로 꿀과 꽃가루를 분리해 추출할 수 있습니다.</VV_ExtractBulkHoney.description>
 <VV_ExtractBulkHoney.jobString>비비 꿀 대량 추출 중.</VV_ExtractBulkHoney.jobString>
 
 <VV_ExtractBulkPropolis.label>프로폴리스 대량 정제</VV_ExtractBulkPropolis.label>
@@ -37,6 +37,6 @@
 <VV_ExtractBulkPropolis.jobString>프로폴리스 대량 정제 중.</VV_ExtractBulkPropolis.jobString>
 
 <VV_MakeFertilizerSeeds.label>씨앗으로 비료 만들기</VV_MakeFertilizerSeeds.label>
-<VV_MakeFertilizerSeeds.description>대량의 씨앗에서 유기 영양분을 추출해 비료를 만듭니다.</VV_MakeFertilizerSeeds.description>
+<VV_MakeFertilizerSeeds.description>대량의 씨앗에서 마나 성분을 추출해 비료를 만듭니다.</VV_MakeFertilizerSeeds.description>
 <VV_MakeFertilizerSeeds.jobString>씨앗으로 비료를 배합하는 중.</VV_MakeFertilizerSeeds.jobString>
 </LanguageData>

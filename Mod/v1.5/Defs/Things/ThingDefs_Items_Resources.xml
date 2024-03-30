@@ -234,10 +234,10 @@
     </tradeTags>
   </ThingDef>
 
-  <!-- 비비 비료 -->
+  <!-- 마나 비료 -->
   <ThingDef ParentName="ResourceBase">
     <defName>VV_Fertilizer</defName>
-    <label>vivi fertilizer</label>
+    <label>mana fertilizer</label>
     <description>.</description>
 
     <graphicData>

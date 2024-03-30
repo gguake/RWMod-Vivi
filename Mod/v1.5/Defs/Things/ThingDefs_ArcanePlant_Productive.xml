@@ -151,7 +151,7 @@
       <ThingDef>VV_SparklingPetal</ThingDef>
     </descriptionHyperlinks>
     <tickerType>Normal</tickerType>
-    <thingClass>VVRace.ArcanePlant_Thunderbud</thingClass>
+    <thingClass>VVRace.ArcanePlant_Shockerbud</thingClass>
 
     <graphicData>
       <texPath>Things/Plants/VV_Shockerbud</texPath>
@@ -359,14 +359,14 @@
         <germinateRare>true</germinateRare>
 
         <manaCapacity>300</manaCapacity>
-        <zeroManaDamageByChance>1~3</zeroManaDamageByChance>
+        <zeroManaDamageByChance>2~4</zeroManaDamageByChance>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
           <mana>10</mana>
         </manaConsumeRule>
         <manaGenerateRule Class="VVRace.ManaFluxRule_AdjacentWater">
-          <manaFromOccupiedWater>60</manaFromOccupiedWater>
-          <manaPerAdjacentWater>25</manaPerAdjacentWater>
+          <manaFromOccupiedWater>50</manaFromOccupiedWater>
+          <manaPerAdjacentWater>15</manaPerAdjacentWater>
         </manaGenerateRule>
       </li>
     </modExtensions>
@@ -440,7 +440,7 @@
           </rules>
         </manaConsumeRule>
         <manaGenerateRule Class="VVRace.ManaFluxRule_Sunlight">
-          <manaFromSunlightRange>0~190</manaFromSunlightRange>
+          <manaFromSunlightRange>0~210</manaFromSunlightRange>
         </manaGenerateRule>
       </li>
     </modExtensions>
@@ -535,9 +535,6 @@
       <MaxHitPoints>100</MaxHitPoints>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
-      
-      <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
-      <VV_PlantHoneyGatherYield>0.5</VV_PlantHoneyGatherYield>
     </statBases>
 
     <costList>
@@ -606,7 +603,7 @@
     </comps>
   </ThingDef>
   
-  <!-- 하늘초 -->
+  <!-- 하늘풀 -->
   <ThingDef ParentName="VV_ArcanePlantProductive">
     <defName>VV_Skyweed</defName>
     <label>skyweed</label>

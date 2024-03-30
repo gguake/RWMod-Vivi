@@ -56,18 +56,4 @@
       <li>VV_ArcaneBotany</li>
     </prerequisites>
   </ResearchProjectDef>
-
-  <ResearchProjectDef ParentName="ViviResearchProjectTier2Base">
-    <defName>VV_AdvancedWeaponry</defName>
-    <label>vivi advanced weaponry</label>
-    <description>.</description>
-    <baseCost>800</baseCost>
-    <researchViewX>3</researchViewX>
-    <researchViewY>3.5</researchViewY>
-    <prerequisites>
-      <li>Machining</li>
-      <li>VV_ArcaneBotany</li>
-      <li>VV_Weaponry</li>
-    </prerequisites>
-  </ResearchProjectDef>
 </Defs>

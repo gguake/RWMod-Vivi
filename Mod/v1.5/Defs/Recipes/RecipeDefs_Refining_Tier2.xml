@@ -84,7 +84,7 @@
             <li>VV_RawHoney</li>
           </thingDefs>
         </filter>
-        <count>60</count>
+        <count>30</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
@@ -93,7 +93,8 @@
       </thingDefs>
     </fixedIngredientFilter>
     <products>
-      <VV_FilteredHoney>33</VV_FilteredHoney>
+      <VV_FilteredHoney>20</VV_FilteredHoney>
+      <VV_Pollen>10</VV_Pollen>
     </products>
   </RecipeDef>
 
@@ -119,7 +120,7 @@
             <li>VV_Propolis</li>
           </thingDefs>
         </filter>
-        <count>15</count>
+        <count>20</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
@@ -128,8 +129,8 @@
       </thingDefs>
     </fixedIngredientFilter>
     <products>
-      <MedicineHerbal>3</MedicineHerbal>
-      <Neutroamine>10</Neutroamine>
+      <MedicineHerbal>5</MedicineHerbal>
+      <Neutroamine>12</Neutroamine>
     </products>
   </RecipeDef>
 
@@ -154,7 +155,7 @@
             <li>VV_UnknownSeed</li>
           </thingDefs>
         </filter>
-        <count>30</count>
+        <count>25</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>

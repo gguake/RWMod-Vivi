@@ -141,7 +141,7 @@
             <li>VV_Propolis</li>
           </thingDefs>
         </filter>
-        <count>5</count>
+        <count>4</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
@@ -151,7 +151,7 @@
     </fixedIngredientFilter>
     <products>
       <MedicineHerbal>1</MedicineHerbal>
-      <Neutroamine>3</Neutroamine>
+      <Neutroamine>2</Neutroamine>
     </products>
     <researchPrerequisite>VV_AdvancedGathering</researchPrerequisite>
   </RecipeDef>
@@ -179,6 +179,14 @@
           </categories>
         </filter>
         <count>1</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_Pollen</li>
+          </thingDefs>
+        </filter>
+        <count>10</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
@@ -242,7 +250,7 @@
             <li>VV_Pollen</li>
           </disallowedThingDefs>
         </filter>
-        <count>3.0</count>
+        <count>2.0</count>
       </li>
       <li>
         <filter>
@@ -279,7 +287,7 @@
     </defaultIngredientFilter>
     
     <products>
-      <VV_Fertilizer>50</VV_Fertilizer>
+      <VV_Fertilizer>25</VV_Fertilizer>
     </products>
   </RecipeDef>
 </Defs>

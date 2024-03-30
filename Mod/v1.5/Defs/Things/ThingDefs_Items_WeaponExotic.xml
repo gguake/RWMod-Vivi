@@ -84,7 +84,7 @@
       <Plasteel>120</Plasteel>
       <Steel>60</Steel>
       <Silver>20</Silver>
-      <VV_TitanicHornetWing>4</VV_TitanicHornetWing>
+      <VV_TitanicHornetWing>2</VV_TitanicHornetWing>
     </costList>
     
     <recipeMaker>
@@ -195,8 +195,8 @@
     <costList>
       <Plasteel>50</Plasteel>
       <VV_Viviwax>40</VV_Viviwax>
-      <VV_TitanicHornetWing>20</VV_TitanicHornetWing>
-      <VV_LivingLeaf>100</VV_LivingLeaf>
+      <VV_TitanicHornetWing>10</VV_TitanicHornetWing>
+      <VV_LivingLeaf>200</VV_LivingLeaf>
     </costList>
     
     <recipeMaker>
