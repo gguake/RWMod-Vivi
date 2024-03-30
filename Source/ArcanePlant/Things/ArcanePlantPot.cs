@@ -15,11 +15,7 @@ namespace VVRace
                 var plants = thingList.OfType<ArcanePlant>().ToList();
                 foreach (var plant in plants)
                 {
-                    var minified = plant.MakeMinified();
-                    if (!GenPlace.TryPlaceThing(minified, Position, Map, ThingPlaceMode.Near))
-                    {
-                        Log.Warning($"try place minified artifical plant {plant} but failed");
-                    }
+                    plant.ReserveMinify();
                 }
 
                 var blueprints = thingList.OfType<Blueprint>().ToList();

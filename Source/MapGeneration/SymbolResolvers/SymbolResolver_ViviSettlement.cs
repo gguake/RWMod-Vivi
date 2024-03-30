@@ -46,7 +46,7 @@ namespace VVRace
                         p.pawnGroupMakerParams = new PawnGroupMakerParms();
                         p.pawnGroupMakerParams.tile = map.Tile;
                         p.pawnGroupMakerParams.faction = faction;
-                        p.pawnGroupMakerParams.points = (resolveParams.settlementPawnGroupPoints ?? SymbolResolver_Settlement.DefaultPawnsPoints.RandomInRange) * 1.5f;
+                        p.pawnGroupMakerParams.points = (resolveParams.settlementPawnGroupPoints ?? SymbolResolver_Settlement.DefaultPawnsPoints.RandomInRange) * 2.5f;
                         p.pawnGroupMakerParams.inhabitants = true;
                         p.pawnGroupMakerParams.seed = resolveParams.settlementPawnGroupSeed;
                     }

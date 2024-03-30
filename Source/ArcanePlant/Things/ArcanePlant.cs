@@ -78,6 +78,8 @@ namespace VVRace
 
         protected virtual bool CanFlip => true;
 
+        private bool _forceMinify = false;
+
         public ArcanePlant()
         {
             _manaFluxNode = new ManaFluxNetworkNode(this);
@@ -91,6 +93,7 @@ namespace VVRace
             Scribe_Values.Look(ref _zeroManaTicks, "zeroManaTicks");
             Scribe_Values.Look(ref _fertilizeAutoActivated, "fertilizeAutoActivated", defaultValue: true);
             Scribe_Values.Look(ref _fertilizeAutoThreshold, "fertilizeAutoThreshold", defaultValue: 0);
+            Scribe_Values.Look(ref _forceMinify, "forceMinify");
 
             if (Scribe.mode == LoadSaveMode.LoadingVars)
             {
@@ -299,6 +302,13 @@ namespace VVRace
                 return;
             }
 
+            if (_forceMinify || !ArcanePlantUtility.CanPlaceArcanePlantToCell(Map, Position, def))
+            {
+                _forceMinify = false;
+                ForceMinifyAndDropDirect();
+                return;
+            }
+
             if (ManaFluxNetwork != null && (Find.TickManager.TicksGame + ManaFluxNetwork.NetworkHash) % GenTicks.TickRareInterval == 0)
             {
                 ManaFluxNetwork.Tick();
@@ -319,12 +329,6 @@ namespace VVRace
                 else if (ManaChargeRatio > 0.1f)
                 {
                     HitPoints = Mathf.Clamp(HitPoints + 1, 0, MaxHitPoints);
-                }
-
-                if (!ArcanePlantUtility.CanPlaceArcanePlantToCell(Map, Position, def))
-                {
-                    ForceMinifyAndDropDirect();
-                    return;
                 }
             }
         }
@@ -371,6 +375,11 @@ namespace VVRace
             {
                 AddMana(-manaPerShoot);
             }
+        }
+
+        public void ReserveMinify()
+        {
+            _forceMinify = true;
         }
 
         private void ForceMinifyAndDropDirect()

@@ -185,7 +185,7 @@
     <projectile>
       <damageDef>Bomb</damageDef>
       <speed>48</speed>
-      <explosionRadius>1.1</explosionRadius>
+      <explosionRadius>0.5</explosionRadius>
     </projectile>
   </ThingDef>
 
@@ -216,8 +216,8 @@
         <defaultProjectile>VV_Bullet_PeaFast</defaultProjectile>
         <warmupTime>0</warmupTime>
         <range>44.9</range>
-        <ticksBetweenBurstShots>14</ticksBetweenBurstShots>
-        <burstShotCount>6</burstShotCount>
+        <ticksBetweenBurstShots>15</ticksBetweenBurstShots>
+        <burstShotCount>7</burstShotCount>
         <forcedMissRadius>2.75</forcedMissRadius>
         <forcedMissEvenDispersal>true</forcedMissEvenDispersal>
         <soundCast>ThumpCannon_Fire</soundCast>

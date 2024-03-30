@@ -26,6 +26,11 @@ namespace VVRace
                 var items = thingSetMakerDef.root.Generate(thingSetMakerParams);
                 foreach (var item in items)
                 {
+                    if (item.HasComp<CompForbiddable>())
+                    {
+                        item.SetForbidden(true);
+                    }
+
                     GenSpawn.Spawn(item, cell, map);
                 }
             }
