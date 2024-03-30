@@ -46,6 +46,7 @@
     
     <tags>
       <li>VV_ExiledVivi</li>
+      <li>VV_ViviRefugee</li>
     </tags>
   </ResearchProjectDef>
 
@@ -138,18 +139,5 @@
     <tags>
       <li>VV_ExiledVivi</li>
     </tags>
-  </ResearchProjectDef>
-
-  <ResearchProjectDef ParentName="ViviResearchProjectTier1Base">
-    <defName>VV_RitualWeaponry</defName>
-    <label>vivi ritual weaponry</label>
-    <description>.</description>
-    <baseCost>1800</baseCost>
-    <researchViewX>2</researchViewX>
-    <researchViewY>3.5</researchViewY>
-    <prerequisites>
-      <li>VV_Weaponry</li>
-      <li>VV_ArcaneBotany</li>
-    </prerequisites>
   </ResearchProjectDef>
 </Defs>

@@ -159,22 +159,16 @@ namespace VVRace
                 if (pawnKindDef != null)
                 {
                     var xenogeneDefs = parentXenogenes != null ? new List<GeneDef>(parentXenogenes) : new List<GeneDef>();
+
                     var randomGeneCount = Mathf.FloorToInt(Props.geneCountCurve.Evaluate(Rand.RangeSeeded(0, 10000, randomSeed)));
+                    var randomGenes = Props.randomSelectGenes
+                        .Where(g => !xenogeneDefs.Contains(g) && !xenogeneDefs.Any(xenogene => xenogene.ConflictsWith(g)))
+                        .ToList()
+                        .TakeRandomDistinct(randomGeneCount);
 
-                    var allRandomGenes = new List<GeneDef>(Props.randomSelectGenes.Where(g => !xenogeneDefs.Contains(g) && !VVXenotypeDefOf.VV_Vivi.genes.Any(endogene => endogene.ConflictsWith(g)))).ToList();
-
-                    while (randomGeneCount > 0 && allRandomGenes.Any())
+                    foreach (var geneDef in randomGenes)
                     {
-                        var randomGeneDef = allRandomGenes[Rand.RangeSeeded(0, allRandomGenes.Count, randomSeed)];
-                        allRandomGenes.Remove(randomGeneDef);
-
-                        if (xenogeneDefs.Any(g => g.ConflictsWith(randomGeneDef)))
-                        {
-                            continue;
-                        }
-
-                        xenogeneDefs.Add(randomGeneDef);
-                        randomGeneCount--;
+                        xenogeneDefs.Add(geneDef);
                     }
 
                     // 바디 변경 유전자 허용 x
