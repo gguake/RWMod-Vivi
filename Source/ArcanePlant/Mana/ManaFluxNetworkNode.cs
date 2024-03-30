@@ -10,6 +10,15 @@ namespace VVRace
 
         public float mana;
 
+        public ManaFluxNetworkNode()
+        {
+        }
+
+        public ManaFluxNetworkNode(ManaAcceptor manaAcceptor)
+        {
+            this.manaAcceptor = manaAcceptor;
+        }
+
         public int LocalManaFluxForInspector
         {
             get

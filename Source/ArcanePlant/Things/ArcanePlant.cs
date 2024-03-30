@@ -80,10 +80,7 @@ namespace VVRace
 
         public ArcanePlant()
         {
-            _manaFluxNode = new ManaFluxNetworkNode()
-            {
-                manaAcceptor = this
-            };
+            _manaFluxNode = new ManaFluxNetworkNode(this);
         }
 
         public override void ExposeData()
