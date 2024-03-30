@@ -1,16 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
 <ModMetaData>
-  <name>Vivi Race BETA</name>
+  <name>Vivi Race</name>
   <author>gguake</author>
-   	<packageId>gguake.vivi.beta</packageId>
+   	<packageId>gguake.race.vivi</packageId>
   <supportedVersions>
     <li>1.5</li>
   </supportedVersions>
   <url></url>
   <description>
-꿀벌은
-웼잉잉
+add bee-like fairy race
   </description>
 	<modDependencies>
 		<li>
@@ -28,6 +27,6 @@
 		<li>Ludeon.RimWorld</li>
 		<li>Ludeon.RimWorld.Biotech</li>
 		<li>brrainz.harmony</li>
-		<li>Solaris.FurnitureBase</li>
   </forceLoadAfter>
+	<modIconPath>UI/Icons/ViviFaction</modIconPath>
 </ModMetaData>
