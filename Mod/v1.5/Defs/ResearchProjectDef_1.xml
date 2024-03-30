@@ -20,7 +20,7 @@
   <!-- 테크 1 -->
   <ResearchProjectDef Abstract="True" Name="ViviResearchProjectTier1Base">
 		<tab>VV_Vivi</tab>
-    <techLevel>Medieval</techLevel>
+    <techLevel>Neolithic</techLevel>
   </ResearchProjectDef>
   
   <ResearchProjectDef ParentName="ViviResearchProjectTier1Base">
@@ -80,7 +80,7 @@
 
   <ResearchProjectDef ParentName="ViviResearchProjectTier1Base">
     <defName>VV_BasicGathering</defName>
-    <label>vivi basic gathering</label>
+    <label>basic gathering</label>
     <description>.</description>
     <baseCost>700</baseCost>
     <researchViewX>1</researchViewX>
@@ -96,7 +96,7 @@
   
   <ResearchProjectDef ParentName="ViviResearchProjectTier1Base">
     <defName>VV_Tools</defName>
-    <label>vivi gathering tools</label>
+    <label>gathering tools</label>
     <description>.</description>
     <baseCost>250</baseCost>
     <researchViewX>2</researchViewX>
@@ -112,7 +112,7 @@
 
   <ResearchProjectDef ParentName="ViviResearchProjectTier1Base">
     <defName>VV_AdvancedGathering</defName>
-    <label>vivi advanced gathering</label>
+    <label>advanced gathering</label>
     <description>.</description>
     <baseCost>900</baseCost>
     <researchViewX>2</researchViewX>
@@ -120,11 +120,12 @@
     <prerequisites>
       <li>VV_BasicGathering</li>
     </prerequisites>
+    <techLevel>Medieval</techLevel>
   </ResearchProjectDef>
   
   <ResearchProjectDef ParentName="ViviResearchProjectTier1Base">
     <defName>VV_ArcaneBotany</defName>
-    <label>ancient botany</label>
+    <label>arcane botany</label>
     <description>.</description>
     <baseCost>700</baseCost>
     <researchViewX>2</researchViewX>
@@ -132,9 +133,23 @@
     <prerequisites>
       <li>VV_BasicGathering</li>
     </prerequisites>
+    <techLevel>Medieval</techLevel>
     
     <tags>
       <li>VV_ExiledVivi</li>
     </tags>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef ParentName="ViviResearchProjectTier1Base">
+    <defName>VV_RitualWeaponry</defName>
+    <label>vivi ritual weaponry</label>
+    <description>.</description>
+    <baseCost>1800</baseCost>
+    <researchViewX>2</researchViewX>
+    <researchViewY>3.5</researchViewY>
+    <prerequisites>
+      <li>VV_Weaponry</li>
+      <li>VV_ArcaneBotany</li>
+    </prerequisites>
   </ResearchProjectDef>
 </Defs>

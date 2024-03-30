@@ -28,6 +28,9 @@
 <VV_ArcaneBotany.discoveredLetterText>마법 식물을 배양하려면 미확인 씨앗, 비료, 꽃가루가 대량으로 필요하며 주기적으로 관리해줘야 좋은 결과를 얻을 수 있습니다. 배양 작업은 실패하거나 혹은 마법 식물이 아닌 흔한 작물이 자랄수도 있습니다.
 \n마법 식물은 마나라는 자원을 생산하고 소모하며 식물마다 특수한 조건이 만족되어야 마나를 생산합니다. 생산된 마나가 최대 저장량을 초과하면 인접한 다른 마법 식물들에게 전송해주는 특징이 있으므로 잘 활용하세요.</VV_ArcaneBotany.discoveredLetterText>
 
+<VV_RitualWeaponry.label>비비 예식 무기</VV_RitualWeaponry.label>
+<VV_RitualWeaponry.description>인정받은 비비 전사들에게만 주어지는 특수한 무기를 제작할 수 있습니다.</VV_RitualWeaponry.description>
+
 <VV_AncientPlantCuttings.label>마법 식물 삽목</VV_AncientPlantCuttings.label>
 <VV_AncientPlantCuttings.description>삽목을 통해 이미 보유중인 마법 식물을 추가로 배양해 대량으로 운용할 수 있게 됩니다.</VV_AncientPlantCuttings.description>
 

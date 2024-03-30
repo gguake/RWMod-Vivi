@@ -89,7 +89,7 @@
     
     <recipeMaker>
       <researchPrerequisites>
-        <li>VV_Weaponry</li>
+        <li>VV_RitualWeaponry</li>
       </researchPrerequisites>
       <skillRequirements>
         <Crafting>10</Crafting>
@@ -201,7 +201,7 @@
     
     <recipeMaker>
       <researchPrerequisites>
-        <li>VV_Weaponry</li>
+        <li>VV_RitualWeaponry</li>
       </researchPrerequisites>
       <skillRequirements>
         <Crafting>17</Crafting>
