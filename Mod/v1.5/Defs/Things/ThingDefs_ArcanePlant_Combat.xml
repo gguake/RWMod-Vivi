@@ -142,6 +142,7 @@
     <comps>
     </comps>
 
+    <recoilPower>2</recoilPower>
     <building>
       <combatPower>125</combatPower>
       <ai_combatDangerous>true</ai_combatDangerous>
@@ -167,7 +168,7 @@
         </manaConsumeRule>
         <zeroManaDurableTicks>30000</zeroManaDurableTicks>
         
-        <consumeManaPerVerbShoot>11</consumeManaPerVerbShoot>
+        <consumeManaPerVerbShoot>8</consumeManaPerVerbShoot>
       </li>
     </modExtensions>
   </ThingDef>
@@ -184,8 +185,10 @@
 
     <projectile>
       <damageDef>Bomb</damageDef>
-      <speed>48</speed>
-      <explosionRadius>0.5</explosionRadius>
+      <speed>50</speed>
+      <explosionRadius>1.9</explosionRadius>
+      <damageAmountBase>15</damageAmountBase>
+      <screenShakeFactor>0</screenShakeFactor>
     </projectile>
   </ThingDef>
 
@@ -200,8 +203,8 @@
     <drawerType>MapMeshAndRealTime</drawerType>
 
     <statBases>
-      <AccuracyTouch>0.22</AccuracyTouch>
-      <AccuracyShort>0.57</AccuracyShort>
+      <AccuracyTouch>0.32</AccuracyTouch>
+      <AccuracyShort>0.47</AccuracyShort>
       <AccuracyMedium>0.72</AccuracyMedium>
       <AccuracyLong>0.63</AccuracyLong>
       <RangedWeapon_Cooldown>6.9</RangedWeapon_Cooldown>
@@ -216,13 +219,13 @@
         <defaultProjectile>VV_Bullet_PeaFast</defaultProjectile>
         <warmupTime>0</warmupTime>
         <range>44.9</range>
-        <ticksBetweenBurstShots>15</ticksBetweenBurstShots>
-        <burstShotCount>7</burstShotCount>
-        <forcedMissRadius>2.75</forcedMissRadius>
+        <ticksBetweenBurstShots>14</ticksBetweenBurstShots>
+        <burstShotCount>6</burstShotCount>
+        <forcedMissRadius>2.4</forcedMissRadius>
         <forcedMissEvenDispersal>true</forcedMissEvenDispersal>
         <soundCast>ThumpCannon_Fire</soundCast>
         <soundCastTail>GunTail_Heavy</soundCastTail>
-        <muzzleFlashScale>5</muzzleFlashScale>
+        <muzzleFlashScale>3</muzzleFlashScale>
       </li>
     </verbs>
   </ThingDef>

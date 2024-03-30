@@ -51,8 +51,8 @@
 <VV_Gun_Peashooter.description>빠르게 콩을 생성해 적에게 발사하는 콩뿌리개의 꼬투리입니다.</VV_Gun_Peashooter.description>
 
 <VV_Pealauncher.label>폭탄뿌리개</VV_Pealauncher.label>
-<VV_Pealauncher.description>주변의 적을 감지하면 폭발하는 콩을 발사해 쫓아내는 마법 식물입니다. 콩을 발사할때마다 마나를 소모하며 발사된 콩은 탄속이 매우 빠르고 사거리가 길며 착탄지에서 폭발합니다.
-\n콩뿌리개의 변종으로 강력하지만 아군 주변에도 피해를 줄 수 있으므로 주의가 필요합니다. 비비들은 방어 포탑으로 사용하기보다는 적을 요격하기 위한 수단으로 사용합니다.</VV_Pealauncher.description>
+<VV_Pealauncher.description>주변의 적을 감지하면 폭발하는 콩을 발사해 쫓아내는 마법 식물입니다. 폭탄콩을 발사할때마다 마나를 소모하며 발사된 콩은 탄속이 매우 빠르고 착탄지에서 작게 폭발합니다.
+\n대규모의 적을 토벌하는데 적합하지만 폭발은 아군에게도 큰 피해를 주므로 신중한 배치가 필요합니다.</VV_Pealauncher.description>
 <VV_Bullet_PeaFast.label>폭발콩</VV_Bullet_PeaFast.label>
 <VV_Gun_Pealauncher.label>폭탄뿌리개</VV_Gun_Pealauncher.label>
 <VV_Gun_Pealauncher.description>빠르게 콩을 생성해 적에게 발사하는 폭탄뿌리개의 꼬투리입니다.</VV_Gun_Pealauncher.description>
