@@ -50,10 +50,6 @@ namespace VVRace
 
         public static JobDef VV_FertilizeArcanePlant;
         public static JobDef VV_EquipWeaponToShootus;
-
-        public static JobDef VV_HaulGerminatingIngredient;
-        public static JobDef VV_PackingSeedling;
-        public static JobDef VV_ClearGerminator;
     }
 
     [DefOf]
@@ -143,12 +139,6 @@ namespace VVRace
     }
 
     [DefOf]
-    public static class VVGerminateScheduleDefOf
-    {
-        public static GerminateScheduleDef VV_DoNothing;
-    }
-
-    [DefOf]
     public static class VVThoughtDefOf
     {
         public static ThoughtDef VV_AtePollen;
@@ -198,12 +188,6 @@ namespace VVRace
     public static class VVMentalStateDefOf
     {
         public static MentalStateDef VV_HornetBerserk;
-    }
-
-    [DefOf]
-    public static class VVResearchProjectDefOf
-    {
-        public static ResearchProjectDef VV_AncientPlantCuttings;
     }
 
     [DefOf]

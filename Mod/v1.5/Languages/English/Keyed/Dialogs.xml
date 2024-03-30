@@ -6,20 +6,4 @@
 <ViviFactionGreetingWary>{0} is buzzing, waiting for you.</ViviFactionGreetingWary>
 <ViviFactionGreetingWarm>{0} buzzes warmly, greeting {NEGOTIATOR_labelShort}.</ViviFactionGreetingWarm>
 
-<VV_WarnCancelGerminateSchedule>There is a strain currently being cultured in the seedling germinator. Cancelling the operation will result in the loss of the strain being cultured and the resources invested.</VV_WarnCancelGerminateSchedule>
-
-<ViviGerminateWindowJobTab>Managements</ViviGerminateWindowJobTab>
-<ViviGerminateWindowScheduleTab>Schedule</ViviGerminateWindowScheduleTab>
-<ViviGerminateWindowScheduleTabTip>Initiate the corresponding operation during the {0}th management task after starting the seedling cultivation.
-\n{1}: {2}</ViviGerminateWindowScheduleTabTip>
-<ViviGerminateWindowScheduleDesc>The seedling cultivation takes a total of {0} days, and maintenance work can be done every {1} hours after the start of the cultivation.
-\Colonists proceed with the management tasks as scheduled, but not if materials are lacking or if they are too busy.
-\nThe quality of the management task is influenced by the settler's gardening skills and consumes specific resources.</ViviGerminateWindowScheduleDesc>
-<ViviGerminateWindowIngredientHeader>Total ingredients</ViviGerminateWindowIngredientHeader>
-<ViviGerminateWindowTotalWork>Total work: {0}</ViviGerminateWindowTotalWork>
-<ViviGerminateWindowBonusSummaryHeader>Expected maximum bonus effects</ViviGerminateWindowBonusSummaryHeader>
-<ViviGerminateWindowBonusCount>Yield changes by {0}</ViviGerminateWindowBonusCount>
-<ViviGerminateWindowBonusSuccessChance>Chance to get ancient plants x{0}</ViviGerminateWindowBonusSuccessChance>
-<ViviGerminateWindowBonusRareChance>Chance to get rare ancient plants x{0}</ViviGerminateWindowBonusRareChance>
-<ViviGerminateWindowBonusMutateAnotherArcanePlantChance>Chance to mutate another plants +{0}</ViviGerminateWindowBonusMutateAnotherArcanePlantChance>
 </LanguageData>

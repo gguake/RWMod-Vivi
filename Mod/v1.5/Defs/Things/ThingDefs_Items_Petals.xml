@@ -12,7 +12,7 @@
 
     <useHitPoints>true</useHitPoints>
     <statBases>
-      <Mass>0.5</Mass>
+      <Mass>0.1</Mass>
       <MaxHitPoints>60</MaxHitPoints>
       <Flammability>1.0</Flammability>
       <DeteriorationRate>4</DeteriorationRate>
@@ -133,6 +133,7 @@
     </graphicData>
 
     <statBases>
+      <Mass>0.5</Mass>
       <MarketValue>8</MarketValue>
     </statBases>
   </ThingDef>

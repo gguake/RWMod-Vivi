@@ -39,8 +39,6 @@
     
     <modExtensions>
       <li Class="VVRace.ArcanePlantExtension">
-        <germinateWeight>0</germinateWeight>
-
         <manaCapacity>700</manaCapacity>
         <zeroManaDamageByChance>3~9</zeroManaDamageByChance>
 

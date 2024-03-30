@@ -77,20 +77,6 @@
   </WorkGiverDef>
 
   <WorkGiverDef>
-    <defName>VV_ManageGerminator</defName>
-    <label>managing seedling at germinator</label>
-    <giverClass>VVRace.WorkGiver_ManageGerminator</giverClass>
-    <workType>Growing</workType>
-    <verb>manage seedling</verb>
-    <gerund>managing seedling</gerund>
-    <priorityInType>100</priorityInType>
-    <requiredCapacities>
-      <li>Manipulation</li>
-    </requiredCapacities>
-    <prioritizeSustains>true</prioritizeSustains>
-  </WorkGiverDef>
-  
-  <WorkGiverDef>
     <defName>VV_DoBillsExtractor</defName>
     <label>work at auto extractor</label>
     <giverClass>WorkGiver_DoBill</giverClass>

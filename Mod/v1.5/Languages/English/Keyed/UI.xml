@@ -17,13 +17,6 @@
   <VV_InspectorPlantMana>Mana: {0}/{1}</VV_InspectorPlantMana>
   <VV_InspectorPlantManaFlux>({0}/day)</VV_InspectorPlantManaFlux>
 
-  <VV_InspectorViviGerminatorReserved>Seed germinating reserved</VV_InspectorViviGerminatorReserved>
-  <VV_InspectorViviGerminatorCompletePeriods>Time remaining until complete: {0}</VV_InspectorViviGerminatorCompletePeriods>
-  <VV_InspectorViviGerminatorManageAvailable>{0} seedling manage job is possible: {1}</VV_InspectorViviGerminatorManageAvailable>
-  <VV_InspectorViviGerminatorManageIngredient>Ingredients: {0}</VV_InspectorViviGerminatorManageIngredient>
-  <VV_InspectorViviGerminatorManageLastPeriods>Time remaining until next manage job: {0}</VV_InspectorViviGerminatorManageLastPeriods>
-  <VV_InspectorViviGerminatorNoProduct>Germinating failed</VV_InspectorViviGerminatorNoProduct>
-  <VV_InspectorViviGerminatorProduct>Germinating result: {0} x{1}</VV_InspectorViviGerminatorProduct>
   <VV_InspectorViviShootusWeaponReserved>Reserved: {0}</VV_InspectorViviShootusWeaponReserved>
   <VV_InspectorViviShootusWeaponEquipped>Equipped: {0}</VV_InspectorViviShootusWeaponEquipped>
 
@@ -31,18 +24,9 @@
   <VV_CommandFertilizeAutoActivatedDesc>When the plant's mana is below a certain level, the colonists set whether to automatically use fertilizer.</VV_CommandFertilizeAutoActivatedDesc>
   <VV_CommandSetFertilizeAutoThreshold>Set mana threshold</VV_CommandSetFertilizeAutoThreshold>
   <VV_CommandSetFertilizeAutoThresholdDesc>Set the threshold mana to determine whether to use fertilizer. If the mana is below the threshold, the colonists use fertilizer to the maximum.</VV_CommandSetFertilizeAutoThresholdDesc>
-  <VV_CommandRegisterGerminateSchedule>Germinate seeds</VV_CommandRegisterGerminateSchedule>
-  <VV_CommandRegisterGerminateScheduleDesc>Enter the manage schedule for germinating seeds and start germinating.</VV_CommandRegisterGerminateScheduleDesc>
-  <VV_CommandCancelGerminateSchedule>Cancel germinating</VV_CommandCancelGerminateSchedule>
-  <VV_CommandCancelGerminateScheduleDesc>Cancel the currently scheduled or ongoing seed germinating operation.</VV_CommandCancelGerminateScheduleDesc>
-  <VV_CommandCanWithdrawProduct>Packaging allowed</VV_CommandCanWithdrawProduct>
-  <VV_CommandCanWithdrawProductDesc>Decide whether to proceed with the packaging of the seedlings that have been germinated.</VV_CommandCanWithdrawProductDesc>
   <VV_CommandCancelReserveWeapon>Cancel arming</VV_CommandCancelReserveWeapon>
   <VV_CommandCancelReserveWeaponDesc>Cancel the currently scheduled or ongoing arming operation.</VV_CommandCancelReserveWeaponDesc>
   <VV_CommandUnequipWeapon>Disarm equipped weapon</VV_CommandUnequipWeapon>
-
-  <VV_FloatMenuOptionDefaultGerminate>Germinate seedling with seeds</VV_FloatMenuOptionDefaultGerminate>
-  <VV_FloatMenuOptionFixedGerminate>Grafting {0} seedling</VV_FloatMenuOptionFixedGerminate>
 
   <VV_JobFailReasonNoHarvestablePlants>no gatherable plants</VV_JobFailReasonNoHarvestablePlants>
   <VV_JobFailReasonNoHarvestablePollenFilths>no gatherable pollens</VV_JobFailReasonNoHarvestablePollenFilths>
@@ -55,9 +39,6 @@
   <VV_StatsReport_ManaFlux_Desc>This is the amount of mana change of this plant over the course of a day.
   \Mana can be produced by certain arcane plants when fertilizer is applied or the right environment is in place, and is not consumed when packaged.
   \nArcane plants whose mana production exceeds their reserves provide excess mana to other arcane plants in the immediate vicinity.</VV_StatsReport_ManaFlux_Desc>
-
-  <VV_MessageGerminateSeedlingSuccess>seed germinating succeeded. ({0} x{1})</VV_MessageGerminateSeedlingSuccess>
-  <VV_MessageGerminateSeedlingFailed>seed germinating failed.</VV_MessageGerminateSeedlingFailed>
 
   <VV_AbilityDisabledNoFood>{0_labelShort} can't use caused by starving</VV_AbilityDisabledNoFood>
   <VV_AbilityDisabledNoBodyPart>{0_labelShort} must have more {2} of {1}</VV_AbilityDisabledNoBodyPart>

@@ -24,7 +24,7 @@
     
     <useHitPoints>true</useHitPoints>
     <statBases>
-      <Mass>0.01</Mass>
+      <Mass>0.005</Mass>
       <MarketValue>0.4</MarketValue>
       <MaxHitPoints>30</MaxHitPoints>
       <Flammability>1.0</Flammability>
@@ -106,7 +106,7 @@
     </graphicData>
     <socialPropernessMatters>true</socialPropernessMatters>
     <statBases>
-      <Mass>0.05</Mass>
+      <Mass>0.1</Mass>
       <MaxHitPoints>40</MaxHitPoints>
       <Flammability>0.8</Flammability>
       <MarketValue>2.4</MarketValue>
@@ -204,7 +204,7 @@
 		</thingCategories>
 
 		<statBases>
-			<Mass>0.5</Mass>
+			<Mass>0.1</Mass>
 			<MarketValue>28</MarketValue>
 			<Nutrition>0.8</Nutrition>
 		</statBases>
@@ -255,7 +255,7 @@
     <statBases>
       <WorkToMake>400</WorkToMake>
       <MarketValue>13</MarketValue>
-      <Mass>0.05</Mass>
+      <Mass>0.1</Mass>
       <DeteriorationRate>6</DeteriorationRate>
     </statBases>
 

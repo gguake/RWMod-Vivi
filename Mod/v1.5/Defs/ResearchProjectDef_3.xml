@@ -15,7 +15,6 @@
     <researchViewY>1.4</researchViewY>
     <prerequisites>
       <li>VV_AutomatedInfra</li>
-      <li>VV_AncientPlantCuttings</li>
       <li>VV_ManaTransferTube</li>
       <li>VV_Lifestrand</li>
     </prerequisites>

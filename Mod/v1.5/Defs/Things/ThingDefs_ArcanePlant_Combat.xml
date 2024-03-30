@@ -46,8 +46,6 @@
 
     <modExtensions>
       <li Class="VVRace.ArcanePlantExtension">
-        <germinateWeight>125</germinateWeight>
-
         <manaCapacity>400</manaCapacity>
         <zeroManaDamageByChance>1~10</zeroManaDamageByChance>
 
@@ -161,9 +159,6 @@
 
     <modExtensions>
       <li Class="VVRace.ArcanePlantExtension">
-        <germinateWeight>125</germinateWeight>
-        <germinateRare>true</germinateRare>
-
         <manaCapacity>400</manaCapacity>
         <zeroManaDamageByChance>1~10</zeroManaDamageByChance>
 
@@ -322,9 +317,6 @@
 
     <modExtensions>
       <li Class="VVRace.ArcanePlantExtension">
-        <germinateWeight>125</germinateWeight>
-        <germinateRare>true</germinateRare>
-
         <manaCapacity>500</manaCapacity>
         <zeroManaDamageByChance>1~10</zeroManaDamageByChance>
 

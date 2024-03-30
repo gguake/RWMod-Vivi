@@ -23,7 +23,7 @@
     </ingestible>
     <socialPropernessMatters>false</socialPropernessMatters>
     <statBases>
-      <Mass>0.15</Mass>
+      <Mass>1.0</Mass>
       <MaxHitPoints>50</MaxHitPoints>
       <DeteriorationRate>0</DeteriorationRate>
       <Flammability>1.0</Flammability>

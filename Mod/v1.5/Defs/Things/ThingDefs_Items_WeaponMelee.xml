@@ -38,16 +38,16 @@
           <li>Poke</li>
         </capacities>
         <power>13</power>
-        <cooldownTime>2.8</cooldownTime>
+        <cooldownTime>1.9</cooldownTime>
       </li>
       <li>
         <label>point</label>
         <capacities>
           <li>Stab</li>
         </capacities>
-        <power>25</power>
+        <power>20</power>
         <armorPenetration>0.36</armorPenetration>
-        <cooldownTime>3.8</cooldownTime>
+        <cooldownTime>3.6</cooldownTime>
         <extraMeleeDamages>
           <li>
             <def>VV_ToxicStab</def>

@@ -2,8 +2,4 @@
 <LanguageData>
   <VV_ITab_GatherWorkerTable_TabLabel>채집</VV_ITab_GatherWorkerTable_TabLabel>
   <VV_ITab_GatherWorkerTable_GatherRadiusSlider>채집 작업 범위 변경</VV_ITab_GatherWorkerTable_GatherRadiusSlider>
-
-  <VV_ITab_SeedlingGerminator_TabLabel>관리 일정</VV_ITab_SeedlingGerminator_TabLabel>
-  <VV_ITab_SeedlingGerminator_MessageNoSchedule>현재 배양중인 모종이 없습니다.</VV_ITab_SeedlingGerminator_MessageNoSchedule>
-  <VV_ITab_SeedlingGerminator_CurrentScheduleLabel>예약된 관리 일정</VV_ITab_SeedlingGerminator_CurrentScheduleLabel>
 </LanguageData>

@@ -15,9 +15,6 @@ namespace VVRace
 
     public class ArcanePlantExtension : DefModExtension
     {
-        public int germinateWeight;
-        public bool germinateRare;
-
         public int manaCapacity = 100;
         public float initialManaPercent = 1f;
 

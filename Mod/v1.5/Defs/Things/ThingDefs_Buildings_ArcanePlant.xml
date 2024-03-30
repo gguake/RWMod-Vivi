@@ -6,7 +6,6 @@
     <label>arcane plant pot</label>
     <description>.</description>
     <descriptionHyperlinks>
-      <ThingDef>VV_SeedlingGerminator</ThingDef>
     </descriptionHyperlinks>
     <thingClass>VVRace.ArcanePlantPot</thingClass>
     
@@ -78,10 +77,8 @@
   <!-- 식물 배양기 -->
   <ThingDef ParentName="BuildingBase">
     <defName>VV_SeedlingGerminator</defName>
-    <label>ancient seedling germinator</label>
+    <label>arcane seedling germinator</label>
     <description>.</description>
-    
-    <thingClass>VVRace.Building_SeedlingGerminator</thingClass>
     <tickerType>Rare</tickerType>
     
     <drawerType>MapMeshAndRealTime</drawerType>
@@ -101,7 +98,7 @@
     <pathCost>50</pathCost>
     <statBases>
       <MaxHitPoints>200</MaxHitPoints>
-      <Mass>15</Mass>
+      <Mass>20</Mass>
       <WorkToBuild>4000</WorkToBuild>
       <Flammability>1.0</Flammability>
       <Beauty>-3</Beauty>
@@ -122,7 +119,6 @@
     </costList>
 
     <inspectorTabs>
-      <li>VVRace.ITab_GerminateSchedule</li>
     </inspectorTabs>
 
     <defaultPlacingRot>South</defaultPlacingRot>
@@ -142,37 +138,6 @@
     <researchPrerequisites>
       <li>VV_ArcaneBotany</li>
     </researchPrerequisites>
-    
-    <modExtensions>
-      <li Class="VVRace.GerminatorModExtension">
-        <scheduleCooldown>45000</scheduleCooldown>
-        <germinateIngredients>
-          <VV_UnknownSeed>5</VV_UnknownSeed>
-          <VV_Fertilizer>100</VV_Fertilizer>
-          <VV_Pollen>50</VV_Pollen>
-        </germinateIngredients>
-
-        <fixedGerminateIngredients>
-          <VV_Fertilizer>100</VV_Fertilizer>
-          <VV_Pollen>200</VV_Pollen>
-          <VV_Propolis>25</VV_Propolis>
-        </fixedGerminateIngredients>
-
-        <fixedGerminateSuccessChance>0.5</fixedGerminateSuccessChance>
-        <germinateSuccessChance>0.36</germinateSuccessChance>
-        <germinateRareChance>0.3</germinateRareChance>
-        <germinateFailureCriticalWeight>3000</germinateFailureCriticalWeight>
-        <germinateFailureCropsWeight>2000</germinateFailureCropsWeight>
-        <germinateFailureCropsTable>
-          <Plant_Strawberry>300</Plant_Strawberry>
-          <Plant_Potato>150</Plant_Potato>
-          <Plant_Cotton>150</Plant_Cotton>
-          <Plant_Psychoid>150</Plant_Psychoid>
-          <Plant_Healroot>150</Plant_Healroot>
-          <Plant_Ambrosia>30</Plant_Ambrosia>
-        </germinateFailureCropsTable>
-      </li>
-    </modExtensions>
   </ThingDef>
   
 </Defs>

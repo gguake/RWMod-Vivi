@@ -9,14 +9,4 @@
 
   <VV_FertilizeArcanePlant.reportString>TargetA에 비료를 주는 중.</VV_FertilizeArcanePlant.reportString>
   <VV_EquipWeaponToShootus.reportString>TargetA에 TargetB 장비 중.</VV_EquipWeaponToShootus.reportString>
-
-  <VV_HaulGerminatingIngredient.reportString>TargetB를 TargetA로 운반 중.</VV_HaulGerminatingIngredient.reportString>
-
-  <VV_ManageSeedlingRepotting.reportString>모종의 흙을 교체하는 중.</VV_ManageSeedlingRepotting.reportString>
-  <VV_ManageSeedlingPestControl.reportString>모종 배양대를 청소하는 중.</VV_ManageSeedlingPestControl.reportString>
-  <VV_ManageSeedlingWeeding.reportString>모종 주변의 잡초를 뽑는 중.</VV_ManageSeedlingWeeding.reportString>
-  <VV_ManageSeedlingInjectLuciferium.reportString>모종에 루시페륨 투여 중.</VV_ManageSeedlingInjectLuciferium.reportString>
-  
-  <VV_PackingSeedling.reportString>모종을 포장하는 중.</VV_PackingSeedling.reportString>
-  <VV_ClearGerminator.reportString>모종 배양기를 비우는 중.</VV_ClearGerminator.reportString>
 </LanguageData>

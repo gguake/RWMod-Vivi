@@ -21,18 +21,6 @@
   </ResearchProjectDef>
   
   <ResearchProjectDef ParentName="ViviResearchProjectTier2Base">
-    <defName>VV_AncientPlantCuttings</defName>
-    <label>arcane plant cuttings</label>
-    <description>.</description>
-    <baseCost>600</baseCost>
-    <researchViewX>3</researchViewX>
-    <researchViewY>1.4</researchViewY>
-    <prerequisites>
-      <li>VV_ArcaneBotany</li>
-    </prerequisites>
-  </ResearchProjectDef>
-  
-  <ResearchProjectDef ParentName="ViviResearchProjectTier2Base">
     <defName>VV_ManaTransferTube</defName>
     <label>mana transfer tube</label>
     <description>.</description>

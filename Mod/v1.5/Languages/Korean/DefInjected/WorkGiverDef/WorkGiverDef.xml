@@ -20,10 +20,6 @@
   <VV_EquipShootus.verb>건인장에 무기 장착</VV_EquipShootus.verb>
   <VV_EquipShootus.gerund>건인장에 무기 장착</VV_EquipShootus.gerund>
 
-  <VV_ManageGerminator.label>모종 배양대 관리</VV_ManageGerminator.label>
-  <VV_ManageGerminator.verb>모종 관리</VV_ManageGerminator.verb>
-  <VV_ManageGerminator.gerund>모종 관리</VV_ManageGerminator.gerund>
-
   <VV_DoBillsExtractor.label>추출기에서 작업</VV_DoBillsExtractor.label>
   <VV_DoBillsExtractor.verb>추출</VV_DoBillsExtractor.verb>
   <VV_DoBillsExtractor.gerund>추출</VV_DoBillsExtractor.gerund>
