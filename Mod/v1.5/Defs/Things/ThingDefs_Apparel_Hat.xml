@@ -43,18 +43,18 @@
     </graphicData>
     
     <statBases>
-      <MaxHitPoints>180</MaxHitPoints>
+      <MaxHitPoints>120</MaxHitPoints>
       <WorkToMake>6000</WorkToMake>
-      <Mass>1.4</Mass>
+      <Mass>0.5</Mass>
       <StuffEffectMultiplierArmor>0.3</StuffEffectMultiplierArmor>
-      <StuffEffectMultiplierInsulation_Cold>0.4</StuffEffectMultiplierInsulation_Cold>
-      <StuffEffectMultiplierInsulation_Heat>0.4</StuffEffectMultiplierInsulation_Heat>
+      <StuffEffectMultiplierInsulation_Cold>0.3</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.3</StuffEffectMultiplierInsulation_Heat>
       <EquipDelay>1.5</EquipDelay>
     </statBases>
     <equippedStatOffsets>
-      <PainShockThreshold>0.05</PainShockThreshold>
-      <MentalBreakThreshold>-0.05</MentalBreakThreshold>
-      <ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">0.2</ToxicEnvironmentResistance>
+      <PainShockThreshold>0.08</PainShockThreshold>
+      <MentalBreakThreshold>-0.06</MentalBreakThreshold>
+      <ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">0.15</ToxicEnvironmentResistance>
     </equippedStatOffsets>
 
     <costStuffCount>50</costStuffCount>
@@ -98,9 +98,9 @@
     </thingCategories>
     
     <statBases>
-      <MaxHitPoints>240</MaxHitPoints>
+      <MaxHitPoints>250</MaxHitPoints>
       <WorkToMake>9000</WorkToMake>
-      <Mass>1.2</Mass>
+      <Mass>1.5</Mass>
       <StuffEffectMultiplierArmor>0.8</StuffEffectMultiplierArmor>
       <StuffEffectMultiplierInsulation_Cold>0.07</StuffEffectMultiplierInsulation_Cold>
       <StuffEffectMultiplierInsulation_Heat>0.07</StuffEffectMultiplierInsulation_Heat>
@@ -166,20 +166,21 @@
     <statBases>
       <MaxHitPoints>90</MaxHitPoints>
       <WorkToMake>7000</WorkToMake>
-      <Mass>1.2</Mass>
-      <StuffEffectMultiplierArmor>0.2</StuffEffectMultiplierArmor>
+      <Mass>0.8</Mass>
+      <StuffEffectMultiplierArmor>0.1</StuffEffectMultiplierArmor>
       <StuffEffectMultiplierInsulation_Cold>0.07</StuffEffectMultiplierInsulation_Cold>
       <StuffEffectMultiplierInsulation_Heat>0.07</StuffEffectMultiplierInsulation_Heat>
       <EquipDelay>1.5</EquipDelay>
     </statBases>
     <equippedStatOffsets>
-      <SocialImpact>0.25</SocialImpact>
-      <NegotiationAbility>0.25</NegotiationAbility>
-      <TradePriceImprovement>0.25</TradePriceImprovement>
+      <SocialImpact>0.3</SocialImpact>
+      <NegotiationAbility>0.3</NegotiationAbility>
+      <TradePriceImprovement>0.15</TradePriceImprovement>
+      <PsychicSensitivity>0.15</PsychicSensitivity>
     </equippedStatOffsets>
 
     <smeltable>true</smeltable>
-    <costStuffCount>45</costStuffCount>
+    <costStuffCount>50</costStuffCount>
     <stuffCategories>
       <li>Metallic</li>
     </stuffCategories>
@@ -204,7 +205,7 @@
       <researchPrerequisite>VV_AdvancedApparels</researchPrerequisite>
       <displayPriority>3401</displayPriority>
       <skillRequirements>
-        <Crafting>7</Crafting>
+        <Crafting>9</Crafting>
         <Artistic>1</Artistic>
       </skillRequirements>
     </recipeMaker>

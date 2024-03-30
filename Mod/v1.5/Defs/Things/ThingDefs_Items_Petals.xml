@@ -78,8 +78,8 @@
     <label>sparkling petal</label>
     <description>.</description>
     <descriptionHyperlinks>
-      <ThingDef>VV_Voltpetals</ThingDef>
-      <ThingDef>VV_Thunderbud</ThingDef>
+      <ThingDef>VV_Thunderpetals</ThingDef>
+      <ThingDef>VV_Shockerbud</ThingDef>
     </descriptionHyperlinks>
 
     <graphicData>

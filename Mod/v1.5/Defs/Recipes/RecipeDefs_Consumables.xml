@@ -208,7 +208,7 @@
       <VV_FloralHotTea>2</VV_FloralHotTea>
     </products>
     <workSkill>Cooking</workSkill>
-    <researchPrerequisite>VV_AncientBotany</researchPrerequisite>
+    <researchPrerequisite>VV_ArcaneBotany</researchPrerequisite>
   </RecipeDef>
   
   <!-- 얼음 꽃차 -->
@@ -261,7 +261,7 @@
       <VV_FloralIceTea>2</VV_FloralIceTea>
     </products>
     <workSkill>Cooking</workSkill>
-    <researchPrerequisite>VV_AncientBotany</researchPrerequisite>
+    <researchPrerequisite>VV_ArcaneBotany</researchPrerequisite>
   </RecipeDef>
   
   <!-- 꽃 밀크티 -->
@@ -314,6 +314,6 @@
       <VV_FloralMilkTea>2</VV_FloralMilkTea>
     </products>
     <workSkill>Cooking</workSkill>
-    <researchPrerequisite>VV_AncientBotany</researchPrerequisite>
+    <researchPrerequisite>VV_ArcaneBotany</researchPrerequisite>
   </RecipeDef>
 </Defs>

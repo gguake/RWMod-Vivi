@@ -109,7 +109,7 @@ namespace VVRace
 
         private static void Alert_NeedBatteries_NeedBatteries_Postfix(ref bool __result, Map map)
         {
-            if (__result && map.listerBuildings.ColonistsHaveBuilding(VVThingDefOf.VV_Thunderbud))
+            if (__result && map.listerBuildings.ColonistsHaveBuilding(VVThingDefOf.VV_Shockerbud))
             {
                 __result = false;
             }

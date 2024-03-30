@@ -53,8 +53,8 @@
   <VV_StatsReport_Mana_Desc>This is the maximum amount of mana that plants can store.</VV_StatsReport_Mana_Desc>
   <VV_StatsReport_ManaFlux>mana changes</VV_StatsReport_ManaFlux>
   <VV_StatsReport_ManaFlux_Desc>This is the amount of mana change of this plant over the course of a day.
-  \Mana can be produced by certain ancient plants when fertilizer is applied or the right environment is in place, and is not consumed when packaged.
-  \nAncient plants whose mana production exceeds their reserves provide excess mana to other ancient plants in the immediate vicinity.</VV_StatsReport_ManaFlux_Desc>
+  \Mana can be produced by certain arcane plants when fertilizer is applied or the right environment is in place, and is not consumed when packaged.
+  \nArcane plants whose mana production exceeds their reserves provide excess mana to other arcane plants in the immediate vicinity.</VV_StatsReport_ManaFlux_Desc>
 
   <VV_MessageGerminateSeedlingSuccess>seed germinating succeeded. ({0} x{1})</VV_MessageGerminateSeedlingSuccess>
   <VV_MessageGerminateSeedlingFailed>seed germinating failed.</VV_MessageGerminateSeedlingFailed>

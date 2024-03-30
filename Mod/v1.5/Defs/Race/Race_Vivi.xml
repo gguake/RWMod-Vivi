@@ -126,11 +126,11 @@
 				</li>
 				<li>
 					<def>HumanlikePreTeenager</def>
-					<minAge>9.999999</minAge>
+					<minAge>11.999999</minAge>
 				</li>
 				<li>
 					<def>HumanlikePreTeenager_Vivi</def>
-					<minAge>10</minAge>
+					<minAge>12</minAge>
 				</li>
 				<li>
 					<def>HumanlikeTeenager</def>
@@ -142,11 +142,11 @@
 				</li>
 				<li>
 					<def>HumanlikeAdult</def>
-					<minAge>15</minAge>
+					<minAge>16</minAge>
 				</li>
 				<li>
 					<def>HumanlikeAdult_Vivi</def>
-					<minAge>15.000001</minAge>
+					<minAge>16.000001</minAge>
 				</li>
 			</lifeStageAges>
 
@@ -246,7 +246,7 @@
         </relationChanceMultiplier>
 
         <fixedFemaleBodyType>Thin</fixedFemaleBodyType>
-        <minAgeForAdulthood>15</minAgeForAdulthood>
+        <minAgeForAdulthood>16</minAgeForAdulthood>
 
         <melaninGeneOverrides>
           <VV_Skin_Melanin>100</VV_Skin_Melanin>

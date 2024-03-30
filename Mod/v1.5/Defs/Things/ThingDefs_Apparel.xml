@@ -15,7 +15,7 @@
     </thingCategories>
 
     <statBases>
-      <MaxHitPoints>300</MaxHitPoints>
+      <MaxHitPoints>320</MaxHitPoints>
       <WorkToMake>48000</WorkToMake>
       <Mass>2</Mass>
       <StuffEffectMultiplierArmor>0.54</StuffEffectMultiplierArmor>
@@ -119,7 +119,7 @@
     </thingCategories>
 
     <statBases>
-      <MaxHitPoints>150</MaxHitPoints>
+      <MaxHitPoints>120</MaxHitPoints>
       <WorkToMake>1800</WorkToMake>
       <Mass>0.5</Mass>
       <StuffEffectMultiplierArmor>0.15</StuffEffectMultiplierArmor>

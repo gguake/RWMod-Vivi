@@ -59,9 +59,8 @@
   <VV_StatsReport_Mana>최대 마나 비축량</VV_StatsReport_Mana>
   <VV_StatsReport_Mana_Desc>식물이 최대로 저장할수 있는 마나의 양입니다.</VV_StatsReport_Mana_Desc>
   <VV_StatsReport_ManaFlux>평균 마나 변화량</VV_StatsReport_ManaFlux>
-  <VV_StatsReport_ManaFlux_Desc>하루동안의 이 식물의 마나 변화량입니다.
-  \n마나는 비료를 투입하거나 조건에 맞는 환경이 갖춰지면 특정 고대 식물들이 생산할수 있으며 포장되어있을때는 소모되지 않습니다.
-  \n비축량이 최대치인 경우 남은 생산량은 인접한 다른 고대 식물들에 전달됩니다.</VV_StatsReport_ManaFlux_Desc>
+  <VV_StatsReport_ManaFlux_Desc>하루동안의 이 식물의 마나 변화량입니다. 마나는 비료를 투입하거나 조건에 맞는 환경이 갖춰지면 특정 마법 식물들이 생산할수 있으며 포장되어있을때는 소모되지 않습니다.
+  \n비축량이 최대치인 경우 남은 마나 생산량은 인접해서 연결된 다른 마법 식물들에 전달됩니다.</VV_StatsReport_ManaFlux_Desc>
 
   <VV_MessageGerminateSeedlingSuccess>모종 배양에 성공했습니다. ({0} x{1})</VV_MessageGerminateSeedlingSuccess>
   <VV_MessageGerminateSeedlingFailed>모종 배양에 실패했습니다.</VV_MessageGerminateSeedlingFailed>

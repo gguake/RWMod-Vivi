@@ -16,7 +16,7 @@
 
     <statBases>
       <MarketValue>180</MarketValue>
-      <MaxHitPoints>40</MaxHitPoints>
+      <MaxHitPoints>50</MaxHitPoints>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
 
@@ -57,6 +57,16 @@
           <activeTemperatureRange>32~120</activeTemperatureRange>
           <manaFromTemperatureRange>30~100</manaFromTemperatureRange>
         </manaGenerateRule>
+
+        <passedBulletOverrides>
+          <li>
+            <thingDef>VV_Bullet_Pea</thingDef>
+            <damageDef>Flame</damageDef>
+            <amount>3</amount>
+            <armorPenetration>0</armorPenetration>
+            <chance>0.35</chance>
+          </li>
+        </passedBulletOverrides>
       </li>
     </modExtensions>
   </ThingDef>
@@ -77,7 +87,7 @@
 
     <statBases>
       <MarketValue>180</MarketValue>
-      <MaxHitPoints>40</MaxHitPoints>
+      <MaxHitPoints>50</MaxHitPoints>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
       
@@ -119,14 +129,23 @@
           <manaFromTemperatureRange>30~100</manaFromTemperatureRange>
           <manaLerpReversed>true</manaLerpReversed>
         </manaGenerateRule>
+
+        <passedBulletOverrides>
+          <li>
+            <thingDef>VV_Bullet_Pea</thingDef>
+            <damageDef>Burn</damageDef>
+            <amount>5</amount>
+            <armorPenetration>0</armorPenetration>
+          </li>
+        </passedBulletOverrides>
       </li>
     </modExtensions>
   </ThingDef>
   
   <!-- 번개봉오리 -->
   <ThingDef ParentName="VV_ArcanePlantProductive">
-    <defName>VV_Thunderbud</defName>
-    <label>thunderbud</label>
+    <defName>VV_Shockerbud</defName>
+    <label>shockerbud</label>
     <description>.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_SparklingPetal</ThingDef>
@@ -135,13 +154,13 @@
     <thingClass>VVRace.ArcanePlant_Thunderbud</thingClass>
 
     <graphicData>
-      <texPath>Things/Plants/VV_Thunderbud</texPath>
+      <texPath>Things/Plants/VV_Shockerbud</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
 
     <statBases>
       <MarketValue>450</MarketValue>
-      <MaxHitPoints>100</MaxHitPoints>
+      <MaxHitPoints>80</MaxHitPoints>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
 
@@ -198,14 +217,24 @@
         <manaGenerateRule Class="VVRace.ManaFluxRule_BatteryStored">
           <manaFromStoredEnergy>0~40</manaFromStoredEnergy>
         </manaGenerateRule>
+
+        <passedBulletOverrides>
+          <li>
+            <thingDef>VV_Bullet_Pea</thingDef>
+            <damageDef>Stun</damageDef>
+            <amount>10</amount>
+            <armorPenetration>0</armorPenetration>
+            <chance>0.04</chance>
+          </li>
+        </passedBulletOverrides>
       </li>
     </modExtensions>
   </ThingDef>
   
-  <!-- 감전꽃 -->
+  <!-- 번개꽃 -->
   <ThingDef ParentName="VV_ArcanePlantProductive">
-    <defName>VV_Voltpetals</defName>
-    <label>voltpetals</label>
+    <defName>VV_Thunderpetals</defName>
+    <label>thunderpetals</label>
     <description>.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_SparklingPetal</ThingDef>
@@ -213,7 +242,7 @@
     <tickerType>Normal</tickerType>
 
     <graphicData>
-      <texPath>Things/Plants/VV_Voltpetals</texPath>
+      <texPath>Things/Plants/VV_Thunderpetals</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
 
@@ -263,6 +292,16 @@
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
           <mana>100</mana>
         </manaConsumeRule>
+
+        <passedBulletOverrides>
+          <li>
+            <thingDef>VV_Bullet_Pea</thingDef>
+            <damageDef>Stun</damageDef>
+            <amount>10</amount>
+            <armorPenetration>0</armorPenetration>
+            <chance>0.04</chance>
+          </li>
+        </passedBulletOverrides>
       </li>
     </modExtensions>
   </ThingDef>
@@ -493,7 +532,7 @@
 
     <statBases>
       <MarketValue>180</MarketValue>
-      <MaxHitPoints>150</MaxHitPoints>
+      <MaxHitPoints>100</MaxHitPoints>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
       
@@ -584,7 +623,7 @@
 
     <statBases>
       <MarketValue>450</MarketValue>
-      <MaxHitPoints>100</MaxHitPoints>
+      <MaxHitPoints>60</MaxHitPoints>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
     </statBases>
@@ -686,7 +725,7 @@
       <li>PlaceWorker_NotUnderRoof</li>
     </placeWorkers>
     <researchPrerequisites>
-      <li>VV_AncientBotany</li>
+      <li>VV_ArcaneBotany</li>
     </researchPrerequisites>
     <uiIconScale>0.65</uiIconScale>
   </ThingDef>

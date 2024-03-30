@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <!-- 고대 식물 화분 -->
+  <!-- 마법 식물 화분 -->
   <ThingDef ParentName="BuildingBase">
-    <defName>VV_AncientPlantPot</defName>
-    <label>ancient plant pot</label>
+    <defName>VV_ArcanePlantPot</defName>
+    <label>arcane plant pot</label>
     <description>.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_SeedlingGerminator</ThingDef>
@@ -11,7 +11,7 @@
     <thingClass>VVRace.ArcanePlantPot</thingClass>
     
     <graphicData>
-      <texPath>Things/Building/VV_AncientPlantPot</texPath>
+      <texPath>Things/Building/VV_ArcanePlantPot</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <shaderType>CutoutComplex</shaderType>
       <drawSize>(2.5, 2.5)</drawSize>
@@ -71,7 +71,7 @@
 
     <canOverlapZones>false</canOverlapZones>
     <researchPrerequisites>
-      <li>VV_AncientBotany</li>
+      <li>VV_ArcaneBotany</li>
     </researchPrerequisites>
   </ThingDef>
 
@@ -140,7 +140,7 @@
       <li Class="CompProperties_Forbiddable"/>
     </comps>
     <researchPrerequisites>
-      <li>VV_AncientBotany</li>
+      <li>VV_ArcaneBotany</li>
     </researchPrerequisites>
     
     <modExtensions>

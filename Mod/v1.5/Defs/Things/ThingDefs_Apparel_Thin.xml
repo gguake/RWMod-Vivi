@@ -52,7 +52,7 @@
     </graphicData>
 
     <statBases>
-      <MaxHitPoints>160</MaxHitPoints>
+      <MaxHitPoints>180</MaxHitPoints>
       <WorkToMake>2400</WorkToMake>
       <Mass>1</Mass>
       <StuffEffectMultiplierArmor>0.2</StuffEffectMultiplierArmor>
@@ -109,7 +109,7 @@
     </graphicData>
 
     <statBases>
-      <MaxHitPoints>200</MaxHitPoints>
+      <MaxHitPoints>210</MaxHitPoints>
       <WorkToMake>10000</WorkToMake>
       <Mass>1.0</Mass>
       <StuffEffectMultiplierArmor>0.32</StuffEffectMultiplierArmor>
@@ -221,7 +221,7 @@
     </graphicData>
 
     <statBases>
-      <MaxHitPoints>200</MaxHitPoints>
+      <MaxHitPoints>240</MaxHitPoints>
       <WorkToMake>7200</WorkToMake>
       <Mass>1.0</Mass>
       <StuffEffectMultiplierArmor>0.35</StuffEffectMultiplierArmor>

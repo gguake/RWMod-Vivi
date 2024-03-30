@@ -3,7 +3,7 @@ using Verse;
 
 namespace VVRace
 {
-    public class ArcanePlant_Thunderbud : ArcanePlant
+    public class ArcanePlant_Shockerbud : ArcanePlant
     {
         public CompSensorExplosive CompSensorExplosive
         {

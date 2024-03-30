@@ -50,7 +50,7 @@
   
   <WorkGiverDef>
     <defName>VV_FertilizeArcanePlant</defName>
-    <label>fertilize ancient plant</label>
+    <label>fertilize arcane plant</label>
     <giverClass>VVRace.WorkGiver_FertilizeArcanePlant</giverClass>
     <workType>Hauling</workType>
     <verb>fertilize</verb>

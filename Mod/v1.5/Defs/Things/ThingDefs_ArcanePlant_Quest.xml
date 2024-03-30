@@ -18,6 +18,11 @@
     </statBases>
 
     <comps>
+      <li Class="VVRace.CompProperties_GlowerFlora">
+        <glowRadius>3</glowRadius>
+        <glowColor>(255,227,156,0)</glowColor>
+      </li>
+      
       <!--
       <li Class="CompProperties_Studiable">
         <studyAmountToComplete>4000</studyAmountToComplete>

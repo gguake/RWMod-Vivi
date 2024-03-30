@@ -4,21 +4,21 @@
 <VV_ManaTransferTube.description>마나를 원거리 전송하는 튜브입니다. 벽이나 다른 건물 아래에 건설할 수 있습니다. 마나를 단순히 전송할 뿐 별도의 마나를 생산하지는 않습니다.</VV_ManaTransferTube.description>
 
 <VV_EmberBloom.label>잔불꽃</VV_EmberBloom.label>
-<VV_EmberBloom.description>주변 온도가 일정 온도에 도달할때까지 지속적으로 열을 발산하는 고대의 꽃입니다.
-\n주변 온도가 충분히 뜨거운 환경에서는 열을 발산하는 대신 마나를 생산하고 축적합니다.</VV_EmberBloom.description>
+<VV_EmberBloom.description>주변 온도가 일정 온도에 도달할때까지 마나를 열로 변환해 발산하는 마법 꽃입니다. 주변 온도가 충분히 뜨거운 환경에서는 열을 발산하는 대신 마나를 생산하고 축적합니다.
+\n콩이 잔불꽃 위로 지나가는 경우 일정 확률로 대상에게 화상 피해를 추가로 입히고 불을 붙입니다.</VV_EmberBloom.description>
 
 <VV_FrostBloom.label>서리꽃</VV_FrostBloom.label>
-<VV_FrostBloom.description>주변 온도가 일정 온도에 도달할때까지 지속적으로 열을 흡수하는 고대의 꽃입니다.
-\n주변 온도가 충분히 차가운 환경에서는 열을 흡수하는 대신 마나를 생산하고 축적합니다.</VV_FrostBloom.description>
+<VV_FrostBloom.description>주변 온도가 일정 온도에 도달할때까지 마나를 소모해 열을 흡수하는 마법 꽃입니다. 주변 온도가 충분히 차가운 환경에서는 열을 흡수하는 대신 마나를 생산하고 축적합니다.
+\n콩이 서리꽃 위로 지나가는 경우 대상에게 화상 피해를 추가로 입힙니다.</VV_FrostBloom.description>
 
-<VV_Thunderbud.label>벼락봉오리</VV_Thunderbud.label>
-<VV_Thunderbud.description>내부에 전력을 저장할수 있는 고대의 꽃입니다. 전선을 연결할 수 있으며 충전된 정도에 비례해 마나를 생산합니다.
-\n외부의 충격을 받거나 메카노이드가 접근하면 내부의 전압이 불안정해져 주변에 막대한 전자기 펄스를 발생시키고 마나가 방전됩니다.
-\n(주의: 아군 메카노이드에도 반응할 수 있음)</VV_Thunderbud.description>
+<VV_Shockerbud.label>따끔봉오리</VV_Shockerbud.label>
+<VV_Shockerbud.description>항상 전기가 흐르는 마법 꽃입니다. 전선을 연결해 전력을 저장할 수 있으며 충전된 정도에 비례해 마나를 생산합니다.
+\n외부의 충격을 받거나 주변에 메카노이드가 접근하면 내부의 전압이 불안정해져 주변에 막대한 전자기 펄스를 발생시키고 마나가 방전됩니다.
+\n콩이 전기봉오리 위로 지나가는 경우 낮은 확률로 콩이 적을 감전시켜 잠시 기절시킵니다.</VV_Shockerbud.description>
 
-<VV_Voltpetals.label>벼락꽃</VV_Voltpetals.label>
-<VV_Voltpetals.description>보유한 마나에 비례해 전력을 생산하는 고대의 꽃입니다.
-\n번개가 치는 날씨에 마나가 충분한 경우 번개를 유도하는 피뢰침 역할을 할 수 있으며 번개를 흡수해 마나로 전환합니다.</VV_Voltpetals.description>
+<VV_Thunderpetals.label>벼락꽃</VV_Thunderpetals.label>
+<VV_Thunderpetals.description>마나를 전기로 변환하는 마법 꽃입니다. 전선을 연결할수 있으며 번개가 치는 날씨에 마나가 충분한 경우 번개를 유도해 마나로 전환합니다.
+\n콩이 벼락꽃 위로 지나가는 경우 낮은 확률로 콩이 적을 감전시켜 잠시 기절시킵니다.</VV_Thunderpetals.description>
 
 <VV_Waterdrops.label>물방울꽃</VV_Waterdrops.label>
 <VV_Waterdrops.description>주변의 물에서 마나를 생산하는 고대의 꽃입니다. 물 위에도 재배가 가능하며 인접한 물 타일이 많을수록 더 많은 마나를 생산합니다.
@@ -37,8 +37,8 @@
 \n꽃에 저장된 마나를 일시적으로 모두 방출해 외부의 투사체를 차단하는 보호막을 잠시동안 생성할 수 있습니다.</VV_Purifimint.description>
 
 <VV_Peashooter.label>콩뿌리개</VV_Peashooter.label>
-<VV_Peashooter.description>적을 감지하면 콩을 발사해 쫓아내는 식물로 발사할때마다 마나를 소모합니다.
-\n위력이 약하고 방어구를 관통하지는 못하지만 한번에 대량의 콩을 발사하므로 방어구를 갖추지 않은 적에게는 대단히 효과적입니다.</VV_Peashooter.description>
+<VV_Peashooter.description>적을 감지하면 콩을 발사해 쫓아내는 식물로 발사할때마다 마나를 소모합니다. 위력이 약하고 방어구를 관통하지는 못하지만 한번에 대량의 콩을 발사하므로 경장갑의 적에게 대단히 효과적입니다.
+\n콩이 일부 마법 식물 위를 통과하는 경우 식물에 따라 마법 효과를 적용받기도 합니다.</VV_Peashooter.description>
 <VV_Bullet_Pea.label>완두콩</VV_Bullet_Pea.label>
 <VV_Gun_Peashooter.label>콩뿌리개 꼬투리</VV_Gun_Peashooter.label>
 <VV_Gun_Peashooter.description>빠르게 콩을 생성해 적에게 발사하는 콩뿌리개의 꼬투리입니다.</VV_Gun_Peashooter.description>

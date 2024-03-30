@@ -76,13 +76,13 @@ namespace VVRace
 
         public static ThingDef VV_GatheringBarrel;
         public static ThingDef VV_RefiningWorkbench;
-        public static ThingDef VV_AncientPlantPot;
+        public static ThingDef VV_ArcanePlantPot;
         public static ThingDef VV_SeedlingGerminator;
 
         public static ThingDef VV_EmberBloom;
         public static ThingDef VV_FrostBloom;
-        public static ThingDef VV_Thunderbud;
-        public static ThingDef VV_Voltpetals;
+        public static ThingDef VV_Shockerbud;
+        public static ThingDef VV_Thunderpetals;
         public static ThingDef VV_Waterdrops;
         public static ThingDef VV_Radiantflower;
         public static ThingDef VV_Richflower;

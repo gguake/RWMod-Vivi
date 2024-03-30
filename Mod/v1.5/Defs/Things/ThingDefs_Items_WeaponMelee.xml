@@ -79,6 +79,15 @@
     <tradeTags>
       <li>VV_ViviTool</li>
     </tradeTags>
+    
+    <modExtensions>
+      <li Class="RPEF.RaceConstraint">
+        <type>Required</type>
+        <things>
+          <li>VV_Vivi</li>
+        </things>
+      </li>
+    </modExtensions>
   </ThingDef>
 
 </Defs>

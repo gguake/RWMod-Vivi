@@ -1,8 +1,18 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using Verse;
 
 namespace VVRace
 {
+    public class PassedBulletOverride
+    {
+        public ThingDef thingDef;
+        public DamageDef damageDef;
+        public float amount;
+        public float armorPenetration;
+        public float chance = 1f;
+    }
+
     public class ArcanePlantExtension : DefModExtension
     {
         public int germinateWeight;
@@ -21,5 +31,7 @@ namespace VVRace
         public float idleTurnAnglePerTick = 0.1f;
         public Vector3 turretTopBaseOffset = Vector3.zero;
         public float turretTopBaseAngle = 0f;
+
+        public List<PassedBulletOverride> passedBulletOverrides;
     }
 }

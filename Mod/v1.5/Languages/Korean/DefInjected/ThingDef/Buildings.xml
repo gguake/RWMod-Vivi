@@ -26,9 +26,8 @@
   <VV_RefiningWorkbench.label>비비 가공 작업대</VV_RefiningWorkbench.label>
   <VV_RefiningWorkbench.description>비비들이 가공 작업을 하기 위한 작업대입니다.</VV_RefiningWorkbench.description>
 
-  <VV_AncientPlantPot.label>고대 식물 화분</VV_AncientPlantPot.label>
-  <VV_AncientPlantPot.description>고대 식물을 심을수 있는 화분입니다.
-\n보통 실내나 식물이 자라지 못하는곳에 고대 식물을 배치하기 위해 사용됩니다.</VV_AncientPlantPot.description>
+  <VV_ArcanePlantPot.label>마법 식물 화분</VV_ArcanePlantPot.label>
+  <VV_ArcanePlantPot.description>마법 식물을 심을수 있는 화분입니다. 보통 실내나 식물이 자라지 못하는곳에 마법 식물을 배치하기 위해 사용됩니다.</VV_ArcanePlantPot.description>
   
   <VV_SeedlingGerminator.label>고대 모종 배양기</VV_SeedlingGerminator.label>
   <VV_SeedlingGerminator.description>모종을 배양하기 위한 대형 화분입니다. 모종 복원에는 많은 재료가 소모되지만 성공하면 특이한 성질을 가진 고대의 식물을 복원할 수 있습니다.</VV_SeedlingGerminator.description>

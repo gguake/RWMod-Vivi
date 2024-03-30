@@ -93,6 +93,7 @@
     <Compile Include="ArcanePlant\Sensor\SensorWorker_Fire.cs" />
     <Compile Include="ArcanePlant\Sensor\SensorWorker_Mechanoid.cs" />
     <Compile Include="ArcanePlant\Things\ManaTransmitter.cs" />
+    <Compile Include="ArcanePlant\Things\PeaBullet.cs" />
     <Compile Include="ArcanePlant\Things\Plants\ArcanePlant_Shootus.cs" />
     <Compile Include="ArcanePlant\Things\Plants\ArcanePlant_Turret.cs" />
     <Compile Include="ArcanePlant\Things\PurifimintShield.cs" />
@@ -155,7 +156,7 @@
     <Compile Include="RPEF\PawnRenderSubWorker_WingCondition.cs" />
     <Compile Include="Utility\Graphics\Graphic_Conditional.cs" />
     <Compile Include="ArcanePlant\Comps\CompHeatPusherMana.cs" />
-    <Compile Include="ArcanePlant\Things\Plants\ArcanePlant_Thunderbud.cs" />
+    <Compile Include="ArcanePlant\Things\Plants\ArcanePlant_Shockerbud.cs" />
     <Compile Include="ArcanePlant\Things\Plants\ArcanePlant_TurretFixedGun.cs" />
     <Compile Include="ArcanePlant\Things\Plants\ArcanePlantTurretTop.cs" />
     <Compile Include="ArcanePlant\Things\Plants\ArcanePlant_RadiantFlower.cs" />

@@ -19,7 +19,7 @@
 
     <statBases>
       <MarketValue>180</MarketValue>
-      <MaxHitPoints>250</MaxHitPoints>
+      <MaxHitPoints>180</MaxHitPoints>
     </statBases>
 
     <costList>
@@ -64,6 +64,7 @@
   <ThingDef ParentName="BaseBullet">
     <defName>VV_Bullet_Pea</defName>
     <label>pea bullet</label>
+    <thingClass>VVRace.PeaBullet</thingClass>
     <graphicData>
       <texPath>Things/Projectile/VV_Pea</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -73,7 +74,7 @@
       <damageAmountBase>5</damageAmountBase>
       <armorPenetrationBase>0</armorPenetrationBase>
       <stoppingPower>1</stoppingPower>
-      <speed>24</speed>
+      <speed>22</speed>
     </projectile>
   </ThingDef>
 
@@ -133,7 +134,7 @@
 
     <statBases>
       <MarketValue>450</MarketValue>
-      <MaxHitPoints>350</MaxHitPoints>
+      <MaxHitPoints>220</MaxHitPoints>
     </statBases>
 
     <costList>
@@ -188,8 +189,8 @@
 
     <projectile>
       <damageDef>Bomb</damageDef>
-      <speed>50</speed>
-      <explosionRadius>1.9</explosionRadius>
+      <speed>48</speed>
+      <explosionRadius>1.1</explosionRadius>
     </projectile>
   </ThingDef>
 
@@ -204,11 +205,11 @@
     <drawerType>MapMeshAndRealTime</drawerType>
 
     <statBases>
-      <AccuracyTouch>0.52</AccuracyTouch>
-      <AccuracyShort>0.67</AccuracyShort>
+      <AccuracyTouch>0.22</AccuracyTouch>
+      <AccuracyShort>0.57</AccuracyShort>
       <AccuracyMedium>0.84</AccuracyMedium>
-      <AccuracyLong>0.84</AccuracyLong>
-      <RangedWeapon_Cooldown>7.9</RangedWeapon_Cooldown>
+      <AccuracyLong>0.74</AccuracyLong>
+      <RangedWeapon_Cooldown>6.9</RangedWeapon_Cooldown>
       <DeteriorationRate>0</DeteriorationRate>
       <Mass>10</Mass>
       <Flammability>0</Flammability>
@@ -219,14 +220,14 @@
         <verbClass>VVRace.Verb_ShootWithMana</verbClass>
         <defaultProjectile>VV_Bullet_PeaFast</defaultProjectile>
         <warmupTime>0</warmupTime>
-        <range>41.9</range>
-        <ticksBetweenBurstShots>22</ticksBetweenBurstShots>
-        <burstShotCount>3</burstShotCount>
-        <forcedMissRadius>5.75</forcedMissRadius>
+        <range>44.9</range>
+        <ticksBetweenBurstShots>8</ticksBetweenBurstShots>
+        <burstShotCount>8</burstShotCount>
+        <forcedMissRadius>3.75</forcedMissRadius>
         <forcedMissEvenDispersal>true</forcedMissEvenDispersal>
         <soundCast>ThumpCannon_Fire</soundCast>
         <soundCastTail>GunTail_Heavy</soundCastTail>
-        <muzzleFlashScale>8</muzzleFlashScale>
+        <muzzleFlashScale>5</muzzleFlashScale>
       </li>
     </verbs>
   </ThingDef>
@@ -246,12 +247,13 @@
     <graphicData>
       <texPath>Things/Plants/VV_Cactus</texPath>
       <graphicClass>VVRace.Graphic_Conditional</graphicClass>
+      <drawSize>(1.5,1.5)</drawSize>
     </graphicData>
     <drawerType>MapMeshAndRealTime</drawerType>
 
     <statBases>
       <MarketValue>450</MarketValue>
-      <MaxHitPoints>200</MaxHitPoints>
+      <MaxHitPoints>160</MaxHitPoints>
     </statBases>
 
     <damageMultipliers Inherit="False">
@@ -333,7 +335,7 @@
         
         <consumeManaPerVerbShoot>1</consumeManaPerVerbShoot>
         <idleTurnAnglePerTick>1</idleTurnAnglePerTick>
-        <turretTopBaseOffset>(0.18,0.2,0.45)</turretTopBaseOffset>
+        <turretTopBaseOffset>(0.24,0.2,0.6)</turretTopBaseOffset>
         <turretTopBaseAngle>0</turretTopBaseAngle>
       </li>
     </modExtensions>

@@ -68,7 +68,7 @@ namespace VVRace
                 {
                     var p = resolveParams;
                     p.rect = new CellRect(center.x + pot.xOffset, center.z + pot.zOffset, 1, 1);
-                    p.singleThingDef = VVThingDefOf.VV_AncientPlantPot;
+                    p.singleThingDef = VVThingDefOf.VV_ArcanePlantPot;
                     p.singleThingStuff = VVThingDefOf.VV_Viviwax;
                     p.faction = resolveParams.faction;
                     BaseGen.symbolStack.Push("thing", p);

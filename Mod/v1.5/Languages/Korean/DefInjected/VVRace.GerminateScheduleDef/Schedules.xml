@@ -13,6 +13,5 @@
   <VV_Weeding.description>불필요한 잡초를 제거합니다. 의도치 않게 흙에 포함된 야생 식물들의 싹도 잡초로 간주됩니다.</VV_Weeding.description>
 
   <VV_InjectLuciferium.label>루시페륨 투여</VV_InjectLuciferium.label>
-  <VV_InjectLuciferium.description>루시페륨을 투여해 불안정하지만 극적인 효과를 유도합니다.
-\n삽목으로 기존의 고대 식물을 배양하는 경우 전혀 다른 식물로 변이할 확률이 추가됩니다.</VV_InjectLuciferium.description>
+  <VV_InjectLuciferium.description>루시페륨을 투여해 불안정하지만 극적인 효과를 유도합니다.\n삽목으로 기존의 마법 식물을 배양하는 경우 전혀 다른 식물로 변이할 확률이 추가됩니다.</VV_InjectLuciferium.description>
 </LanguageData>

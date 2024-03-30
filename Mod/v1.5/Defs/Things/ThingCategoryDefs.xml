@@ -51,7 +51,7 @@
   
   <ThingCategoryDef>
     <defName>VV_ArcanePlant</defName>
-    <label>ancient plant</label>
+    <label>arcane plant</label>
     <parent>Root</parent>
     <iconPath>UI/Icons/ThingCategories/VV_ArcanePlant</iconPath>
   </ThingCategoryDef>
