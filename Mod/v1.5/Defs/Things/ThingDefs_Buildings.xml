@@ -18,8 +18,11 @@
       <shaderType>CutoutComplex</shaderType>
       <drawSize>(1.5, 1.5)</drawSize>
       <drawRotated>false</drawRotated>
+      <shadowData>
+        <volume>(0.6, 0.3, 0.6)</volume>
+        <offset>(0, 0, 0.05)</offset>
+      </shadowData>
     </graphicData>
-    <castEdgeShadows>true</castEdgeShadows>
 
     <uiOrder>2101</uiOrder>
     <altitudeLayer>Building</altitudeLayer>
@@ -52,7 +55,6 @@
     </building>
     <designationCategory>VV_Bulidings</designationCategory>
     <designationHotKey>Misc3</designationHotKey>
-    <staticSunShadowHeight>0.5</staticSunShadowHeight>
 
     <surfaceType>Item</surfaceType>
     <canOverlapZones>false</canOverlapZones>

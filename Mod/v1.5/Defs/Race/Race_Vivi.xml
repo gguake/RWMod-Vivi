@@ -178,6 +178,11 @@
 			<soundMeleeMiss>Pawn_Melee_Punch_Miss</soundMeleeMiss>
 			<soundMeleeDodge>Pawn_MeleeDodge</soundMeleeDodge>
       
+      <specialShadowData Inherit="False">
+        <volume>(0.24, 0.45, 0.32)</volume>
+        <offset>(0,0,-0.27)</offset>
+      </specialShadowData>
+      
       <ageGenerationCurve Inherit="False">
         <points>
           <li MayRequire="Ludeon.RimWorld.Biotech">(0,0)</li>
