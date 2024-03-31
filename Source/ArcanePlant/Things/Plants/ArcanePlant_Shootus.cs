@@ -9,7 +9,7 @@ using Verse.Sound;
 namespace VVRace
 {
     [StaticConstructorOnStartup]
-    public class ArcanePlant_Shootus : ArcanePlant_Turret, IThingHolder, IConditionalGraphicProvider
+    public class ArcanePlant_Shootus : ArcanePlant_Turret, IThingHolder, INotifyHauledTo, IConditionalGraphicProvider
     {
         public override Thing Gun => _innerContainer.Count > 0 ? _innerContainer[0] : null;
         private ThingOwner _innerContainer;
@@ -217,6 +217,11 @@ namespace VVRace
             return _innerContainer;
         }
 
+        public void Notify_HauledTo(Pawn hauler, Thing thing, int count)
+        {
+            EquipGun(thing);
+        }
+
         public void ReserveGun(Thing gun)
         {
             _reservedWeapon = gun;
@@ -226,19 +231,18 @@ namespace VVRace
         {
             _reservedWeapon = null;
 
-            if (_innerContainer.Count > 0)
+            if (gun == null)
             {
-                _innerContainer.TryDropAll(PositionHeld, MapHeld, ThingPlaceMode.Near);
-                _innerContainer.Clear();
-            }
-
-            if (gun != null && CanEquipWeapon(gun))
-            {
-                if (!_innerContainer.TryAddOrTransfer(gun))
+                if (_innerContainer.Count > 0)
                 {
-                    Log.Message($"Treid to add gun to shootus but failed");
+                    _innerContainer.TryDropAll(PositionHeld, MapHeld, ThingPlaceMode.Near);
+                    _innerContainer.Clear();
                 }
 
+                return;
+            }
+            else if (CanEquipWeapon(gun))
+            {
                 UpdateGunVerbs();
             }
 
@@ -263,5 +267,6 @@ namespace VVRace
 
             return true;
         }
+
     }
 }

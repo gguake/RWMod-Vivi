@@ -54,11 +54,12 @@
       <Beauty>1</Beauty>
       <CleaningTimeFactor>0.7</CleaningTimeFactor>
       <FilthMultiplier>0.9</FilthMultiplier>
+      <Flammability>0.1</Flammability>
     </statBases>
 
     <constructEffect>ConstructWood</constructEffect>
     <costList>
-      <VV_Viviwax>4</VV_Viviwax>
+      <VV_Viviwax>3</VV_Viviwax>
     </costList>
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
 
@@ -85,19 +86,17 @@
 
   <uiOrder>2050</uiOrder>
   <statBases>
-    <WorkToBuild>3000</WorkToBuild>
+    <WorkToBuild>2400</WorkToBuild>
     <Beauty>1</Beauty>
     <Cleanliness>0.7</Cleanliness>
-    <CleaningTimeFactor>0.6</CleaningTimeFactor>
-    <FilthMultiplier>0.8</FilthMultiplier>
+    <CleaningTimeFactor>0.5</CleaningTimeFactor>
     <Flammability>1.0</Flammability>
   </statBases>
 
   <constructEffect>ConstructWood</constructEffect>
   <costList>
-    <VV_Viviwax>10</VV_Viviwax>
-    <VV_Propolis>4</VV_Propolis>
-    <Neutroamine>4</Neutroamine>
+    <VV_Viviwax>9</VV_Viviwax>
+    <VV_Propolis>5</VV_Propolis>
   </costList>
   <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
 

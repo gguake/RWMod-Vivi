@@ -204,7 +204,7 @@
     <label>unknown seed</label>
     <description>.</description>
     <descriptionHyperlinks>
-      <ThingDef>VV_SeedlingGerminator</ThingDef>
+      <ThingDef>VV_ArcanePlantFarm</ThingDef>
     </descriptionHyperlinks>
 
     <graphicData>

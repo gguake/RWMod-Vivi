@@ -49,10 +49,16 @@
         public const string CommandActivateShieldAlreadyActivated = "VV_CommandActivateShieldAlreadyActivated";
         public const string CommandActivateShieldNotEnoughenrgy = "VV_CommandActivateShieldNotEnoughenrgy";
 
+        public const string CommandNewGrowArcanePlantBill = "VV_CommandNewGrowArcanePlantBill";
+        public const string CommandNewGrowArcanePlantBillDesc = "VV_CommandNewGrowArcanePlantBillDesc";
+        public const string CommandCancelGrowArcanePlantBill = "VV_CommandCancelGrowArcanePlantBill";
+        public const string CommandCancelGrowArcanePlantBillDesc = "VV_CommandCancelGrowArcanePlantBillDesc";
+
         public const string JobFailReasonNoHarvestablePlants = "VV_JobFailReasonNoHarvestablePlants";
         public const string JobFailReasonNoHarvestablePollenFilths = "VV_JobFailReasonNoHarvestablePollenFilths";
         public const string JobFailReasonNotVivi = "VV_JobFailReasonNotVivi";
         public const string JobFailReasonViviStarving = "VV_JobFailReasonViviStarving";
+        public const string JobFailReasonNoIngredients = "VV_JobFailReasonNoIngredients";
 
         public const string StatsReport_Mana = "VV_StatsReport_Mana";
         public const string StatsReport_Mana_Desc = "VV_StatsReport_Mana_Desc";

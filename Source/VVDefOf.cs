@@ -49,7 +49,6 @@ namespace VVRace
         public static JobDef VV_GatherPropolis;
 
         public static JobDef VV_FertilizeArcanePlant;
-        public static JobDef VV_EquipWeaponToShootus;
     }
 
     [DefOf]
@@ -73,7 +72,7 @@ namespace VVRace
         public static ThingDef VV_GatheringBarrel;
         public static ThingDef VV_RefiningWorkbench;
         public static ThingDef VV_ArcanePlantPot;
-        public static ThingDef VV_SeedlingGerminator;
+        public static ThingDef VV_ArcanePlantFarm;
 
         public static ThingDef VV_EmberBloom;
         public static ThingDef VV_FrostBloom;

@@ -70,7 +70,7 @@ namespace VVRace
                     var p = resolveParams;
                     p.rect = new CellRect(center.x + germinator.xOffset, center.z + germinator.zOffset, 1, 1);
                     p.thingRot = Rot4.South;
-                    p.singleThingDef = VVThingDefOf.VV_SeedlingGerminator;
+                    p.singleThingDef = VVThingDefOf.VV_ArcanePlantFarm;
                     p.singleThingStuff = VVThingDefOf.VV_Viviwax;
                     p.faction = resolveParams.faction;
                     BaseGen.symbolStack.Push("thing", p);

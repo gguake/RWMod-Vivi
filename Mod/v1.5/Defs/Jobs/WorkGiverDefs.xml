@@ -76,6 +76,12 @@
     <prioritizeSustains>true</prioritizeSustains>
   </WorkGiverDef>
 
+  <WorkGiverDef ParentName="HaulToBase">
+    <defName>VV_HaulToArcanePlantFarm</defName>
+    <label>haul resources to arcane plant farm</label>
+    <giverClass>VVRace.WorkGiver_HaulToArcanePlantFarm</giverClass>
+  </WorkGiverDef>
+
   <WorkGiverDef>
     <defName>VV_DoBillsExtractor</defName>
     <label>work at auto extractor</label>

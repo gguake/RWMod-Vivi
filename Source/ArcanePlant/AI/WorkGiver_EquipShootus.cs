@@ -1,4 +1,5 @@
 ﻿using RimWorld;
+using UnityEngine;
 using Verse;
 using Verse.AI;
 
@@ -23,17 +24,12 @@ namespace VVRace
                 return false;
             }
 
-            if (shootus.ReservedWeapon.IsForbidden(pawn))
+            if (shootus.IsForbidden(pawn) || shootus.ReservedWeapon.IsForbidden(pawn))
             {
                 return false;
             }
 
-            if (!pawn.CanReserve(shootus, ignoreOtherReservations: forced))
-            {
-                return false;
-            }
-
-            if (!pawn.CanReserve(shootus.ReservedWeapon, ignoreOtherReservations: forced))
+            if (!pawn.CanReserve(shootus, ignoreOtherReservations: forced) || !pawn.CanReserve(shootus.ReservedWeapon, ignoreOtherReservations: forced))
             {
                 return false;
             }
@@ -44,27 +40,17 @@ namespace VVRace
         public override Job JobOnThing(Pawn pawn, Thing t, bool forced = false)
         {
             var shootus = t as ArcanePlant_Shootus;
-            if (shootus == null || !shootus.Spawned || shootus.ReservedWeapon == null || !shootus.ReservedWeapon.Spawned) { return null; }
-
-            if (pawn.Faction != shootus.Faction)
-            {
-                return null;
-            }
+            if (shootus == null) { return null; }
 
             var weapon = shootus.ReservedWeapon;
             if (weapon == null) { return null; }
 
-            if (!pawn.CanReach(shootus, PathEndMode.Touch, MaxPathDanger(pawn)))
+            if (!pawn.CanReach(shootus, PathEndMode.Touch, MaxPathDanger(pawn)) || !pawn.CanReach(weapon, PathEndMode.ClosestTouch, MaxPathDanger(pawn)))
             {
                 return null;
             }
 
-            if (!pawn.CanReach(weapon, PathEndMode.ClosestTouch, MaxPathDanger(pawn)))
-            {
-                return null;
-            }
-
-            var job = JobMaker.MakeJob(VVJobDefOf.VV_EquipWeaponToShootus, shootus, weapon);
+            var job = HaulAIUtility.HaulToContainerJob(pawn, weapon, t);
             job.count = 1;
 
             return job;

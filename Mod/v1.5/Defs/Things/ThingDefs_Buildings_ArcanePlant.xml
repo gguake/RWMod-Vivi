@@ -35,7 +35,7 @@
     <statBases>
       <MaxHitPoints>200</MaxHitPoints>
       <WorkToBuild>900</WorkToBuild>
-      <Mass>5</Mass>
+      <Mass>4</Mass>
       <Flammability>1.0</Flammability>
       <Beauty>1</Beauty>
     </statBases>
@@ -47,13 +47,13 @@
       <li>Woody</li>
       <li>Stony</li>
     </stuffCategories>
-    <costStuffCount>40</costStuffCount>
+    <costStuffCount>30</costStuffCount>
     <comps>
       <li Class="CompProperties_Forbiddable"/>
     </comps>
     <costList>
-      <VV_Vivicream>20</VV_Vivicream>
-      <VV_Fertilizer>40</VV_Fertilizer>
+      <VV_Vivicream>30</VV_Vivicream>
+      <VV_Fertilizer>10</VV_Fertilizer>
     </costList>
     
     <thingCategories>
@@ -74,11 +74,12 @@
     </researchPrerequisites>
   </ThingDef>
 
-  <!-- 식물 배양기 -->
+  <!-- 마법 식물 농장 -->
   <ThingDef ParentName="BuildingBase">
-    <defName>VV_SeedlingGerminator</defName>
-    <label>arcane seedling germinator</label>
+    <defName>VV_ArcanePlantFarm</defName>
+    <label>arcane plant farm</label>
     <description>.</description>
+    <thingClass>VVRace.Building_ArcanePlantFarm</thingClass>
     <tickerType>Rare</tickerType>
     
     <drawerType>MapMeshAndRealTime</drawerType>
@@ -95,14 +96,13 @@
     <altitudeLayer>Building</altitudeLayer>
     <passability>PassThroughOnly</passability>
     <fillPercent>0.2</fillPercent>
-    <pathCost>50</pathCost>
+    <pathCost>30</pathCost>
     <statBases>
-      <MaxHitPoints>200</MaxHitPoints>
-      <Mass>20</Mass>
-      <WorkToBuild>4000</WorkToBuild>
+      <MaxHitPoints>150</MaxHitPoints>
+      <Mass>25</Mass>
+      <WorkToBuild>2000</WorkToBuild>
       <Flammability>1.0</Flammability>
-      <Beauty>-3</Beauty>
-      <Cleanliness>-3</Cleanliness>
+      <Cleanliness>-2</Cleanliness>
     </statBases>
     <size>(2,2)</size>
     <rotatable>false</rotatable>
@@ -112,10 +112,11 @@
       <li>Woody</li>
       <li>Stony</li>
     </stuffCategories>
-    <costStuffCount>70</costStuffCount>
+    <costStuffCount>60</costStuffCount>
 
     <costList>
-      <VV_Vivicream>50</VV_Vivicream>
+      <VV_Vivicream>40</VV_Vivicream>
+      <VV_Fertilizer>30</VV_Fertilizer>
     </costList>
 
     <inspectorTabs>

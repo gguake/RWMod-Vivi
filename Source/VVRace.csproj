@@ -72,17 +72,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArcanePlant\AI\JobDriver_EquipWeaponToShootus.cs" />
     <Compile Include="ArcanePlant\AI\JobDriver_FertilizeArcanePlant.cs" />
     <Compile Include="ArcanePlant\AI\WorkGiver_EquipShootus.cs" />
+    <Compile Include="ArcanePlant\AI\WorkGiver_HaulToArcanePlantFarm.cs" />
     <Compile Include="ArcanePlant\ArcanePlantUtility.cs" />
     <Compile Include="ArcanePlant\Comps\CompManaShieldProjector.cs" />
     <Compile Include="ArcanePlant\Comps\CompProperties_LaunchableCustom.cs" />
-    <Compile Include="ArcanePlant\GrowArcanePlantData.cs" />
+    <Compile Include="ArcanePlant\Growing\GrowArcanePlantBill.cs" />
+    <Compile Include="ArcanePlant\Growing\GrowArcanePlantData.cs" />
     <Compile Include="ArcanePlant\Mana\ManaFluxGrid.cs" />
     <Compile Include="ArcanePlant\Mana\ManaFluxRule_AdjacentArcanePlant.cs" />
     <Compile Include="ArcanePlant\Mana\ManaFluxRule_Wind.cs" />
     <Compile Include="ArcanePlant\SectionLayer_ThingsManaFluxGrid.cs" />
+    <Compile Include="ArcanePlant\Things\Building_ArcanePlantFarm.cs" />
     <Compile Include="ArcanePlant\Things\ManaAcceptor.cs" />
     <Compile Include="ArcanePlant\Mana\ManaFluxRule_AdjacentPollution.cs" />
     <Compile Include="ArcanePlant\PlaceWorker_ManaFluxTube.cs" />
@@ -118,6 +120,7 @@
     <Compile Include="ArcanePlant\Mana\ManaFluxRule_Weather.cs" />
     <Compile Include="ArcanePlant\Mana\ManaFluxRule_Sunlight.cs" />
     <Compile Include="ArcanePlant\Mana\ManaFluxRule_Temperature.cs" />
+    <Compile Include="ArcanePlant\UI\Dialog_StartGrowingArcanePlant.cs" />
     <Compile Include="Egg\Comps\CompViviEggLayer.cs" />
     <Compile Include="EndGame\IncidentDefDreamumSpawnExtension.cs" />
     <Compile Include="EndGame\IncidentWorker_DreamumSpawn.cs" />

@@ -29,8 +29,8 @@
   <VV_ArcanePlantPot.label>마법 식물 화분</VV_ArcanePlantPot.label>
   <VV_ArcanePlantPot.description>마법 식물을 심을수 있는 화분입니다. 보통 실내나 식물이 자라지 못하는곳에 마법 식물을 배치하기 위해 사용됩니다.</VV_ArcanePlantPot.description>
   
-  <VV_SeedlingGerminator.label>마법 식물 배양기</VV_SeedlingGerminator.label>
-  <VV_SeedlingGerminator.description>마법 식물을 배양하기 위한 대형 화분입니다. 많은 재료와 수고가 필요하지만 개성있고 특이한 성질을 가진 마법 식물들을 배양할 수 있습니다.</VV_SeedlingGerminator.description>
+  <VV_ArcanePlantFarm.label>마법 식물 배양기</VV_ArcanePlantFarm.label>
+  <VV_ArcanePlantFarm.description>마법 식물을 배양하기 위한 대형 화분입니다. 많은 재료와 수고가 필요하지만 개성있고 특이한 성질을 가진 마법 식물들을 배양할 수 있습니다.</VV_ArcanePlantFarm.description>
 
   <VV_AutoExtractor.label>자동 꿀 추출기</VV_AutoExtractor.label>
   <VV_AutoExtractor.description>원심력을 이용해 정제되지 않은 비비 꿀이나 프로폴리스에서 필요한 성분을 대량으로 추출하는 기계입니다. 손으로 작업하는것보다 훨씬 빠르고 대량으로 작업 가능하지만 전기가 필요합니다.</VV_AutoExtractor.description>
