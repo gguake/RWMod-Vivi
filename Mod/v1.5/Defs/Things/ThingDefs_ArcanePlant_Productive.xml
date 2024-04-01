@@ -31,8 +31,8 @@
     <comps>
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
-      <li Class="VVRace.CompProperties_GlowerFlora">
-        <glowRadius>9</glowRadius>
+      <li Class="VVRace.CompProperties_GlowerArcanePlantFlora">
+        <glowRadius>10</glowRadius>
         <glowColor>(255,247,138,0)</glowColor>
       </li>
 
@@ -42,6 +42,10 @@
         <heatPushMaxTemperature>29</heatPushMaxTemperature>
       </li>
     </comps>
+    
+    <researchPrerequisites>
+      <li>VV_ArcaneBotany</li>
+    </researchPrerequisites>
 
     <modExtensions>
       <li Class="VVRace.ArcanePlantExtension">
@@ -173,11 +177,6 @@
     <comps>
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
-      <li Class="VVRace.CompProperties_GlowerFlora">
-        <glowRadius>3</glowRadius>
-        <glowColor>(157,217,246,0)</glowColor>
-      </li>
-
       <li Class="CompProperties_HeatPusher">
         <compClass>VVRace.CompHeatPusherMana</compClass>
         <heatPerSecond>-18</heatPerSecond>
@@ -185,6 +184,10 @@
       </li>
     </comps>
     
+    <researchPrerequisites>
+      <li>VV_ArcaneBotany</li>
+    </researchPrerequisites>
+
     <modExtensions>
       <li Class="VVRace.ArcanePlantExtension">
         <manaCapacity>150</manaCapacity>
@@ -244,8 +247,8 @@
     <comps>
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
-      <li Class="VVRace.CompProperties_GlowerFlora">
-        <glowRadius>5</glowRadius>
+      <li Class="VVRace.CompProperties_GlowerArcanePlantFlora">
+        <glowRadius>3</glowRadius>
         <glowColor>(213,110,248,0)</glowColor>
       </li>
       <li Class="CompProperties_Battery">
@@ -272,16 +275,20 @@
       <allowWireConnection>true</allowWireConnection>
     </building>
     
+    <researchPrerequisites>
+      <li>VV_ElectricArcaneBotany</li>
+    </researchPrerequisites>
+
     <modExtensions>
       <li Class="VVRace.ArcanePlantExtension">
         <manaCapacity>200</manaCapacity>
         <zeroManaDamageByChance>1~3</zeroManaDamageByChance>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>20</mana>
+          <mana>50</mana>
         </manaConsumeRule>
         <manaGenerateRule Class="VVRace.ManaFluxRule_BatteryStored">
-          <manaFromStoredEnergy>0~40</manaFromStoredEnergy>
+          <manaFromStoredEnergy>0~80</manaFromStoredEnergy>
         </manaGenerateRule>
 
         <passedBulletOverrides>
@@ -329,10 +336,6 @@
     <comps>
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
-      <li Class="VVRace.CompProperties_GlowerFlora">
-        <glowRadius>5</glowRadius>
-        <glowColor>(213,110,248,0)</glowColor>
-      </li>
       <li Class="CompProperties_Power">
         <compClass>VVRace.CompPowerMana</compClass>
         <basePowerConsumption>-500</basePowerConsumption>
@@ -348,6 +351,10 @@
       <allowWireConnection>true</allowWireConnection>
     </building>
     
+    <researchPrerequisites>
+      <li>VV_ElectricArcaneBotany</li>
+    </researchPrerequisites>
+
     <modExtensions>
       <li Class="VVRace.ArcanePlantExtension">
         <manaCapacity>400</manaCapacity>
@@ -417,6 +424,10 @@
       </li>
     </comps>
     
+    <researchPrerequisites>
+      <li>VV_AdvancedArcaneBotany</li>
+    </researchPrerequisites>
+
     <modExtensions>
       <li Class="VVRace.ArcanePlantExtension">
         <manaCapacity>300</manaCapacity>
@@ -467,10 +478,10 @@
     <comps>
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
-      <li Class="VVRace.CompProperties_GlowerFlora">
-        <glowRadius>14</glowRadius>
+      <li Class="VVRace.CompProperties_GlowerArcanePlantFlora">
+        <glowRadius>16</glowRadius>
         <glowColor>(370,370,370,0)</glowColor>
-        <overlightRadius>7.0</overlightRadius>
+        <overlightRadius>7.7</overlightRadius>
         <glowOnlyRoofed>true</glowOnlyRoofed>
       </li>
       
@@ -480,7 +491,11 @@
         <offMessage>Off for plant resting period</offMessage>
       </li>
     </comps>
-    <specialDisplayRadius>5.8</specialDisplayRadius>
+    <specialDisplayRadius>6.38</specialDisplayRadius>
+
+    <researchPrerequisites>
+      <li>VV_AdvancedArcaneBotany</li>
+    </researchPrerequisites>
 
     <modExtensions>
       <li Class="VVRace.ArcanePlantExtension">
@@ -522,8 +537,8 @@
     <statBases>
       <MarketValue>450</MarketValue>
       <MaxHitPoints>120</MaxHitPoints>
-      <Beauty>12</Beauty>
-      <BeautyOutdoors>12</BeautyOutdoors>
+      <Beauty>10</Beauty>
+      <BeautyOutdoors>10</BeautyOutdoors>
       
       <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
       <VV_PlantHoneyGatherYield>3.2</VV_PlantHoneyGatherYield>
@@ -536,13 +551,8 @@
     <comps>
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
-      <li Class="VVRace.CompProperties_GlowerFlora">
-        <glowRadius>3</glowRadius>
-        <glowColor>(255,249,155,0)</glowColor>
-      </li>
-      
       <li Class="VVRace.CompProperties_Terraformer">
-        <cooldownTicks>120000~240000</cooldownTicks>
+        <cooldownTicks>60000~180000</cooldownTicks>
         <radius>2.7</radius>
         <terraforms>
           <li><from>SoftSand</from><to>Sand</to></li>
@@ -554,7 +564,17 @@
         </terraforms>
       </li>
 
+      <li Class="VVRace.CompProperties_FilthMakerArcanePlant">
+        <filthDef>VV_FilthPollen</filthDef>
+        <makeAmountPerDays>5~15</makeAmountPerDays>
+        <radius>1.9</radius>
+        <exceptCenter>true</exceptCenter>
+      </li>
     </comps>
+
+    <researchPrerequisites>
+      <li>VV_ArcaneBotany</li>
+    </researchPrerequisites>
 
     <modExtensions>
       <li Class="VVRace.ArcanePlantExtension">
@@ -562,10 +582,10 @@
         <zeroManaDamageByChance>1~3</zeroManaDamageByChance>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>50</mana>
+          <mana>60</mana>
         </manaConsumeRule>
         <manaGenerateRule Class="VVRace.ManaFluxRule_AdjacentPlant">
-          <manaPerAdjacentPlant>35</manaPerAdjacentPlant>
+          <manaPerAdjacentPlant>30</manaPerAdjacentPlant>
         </manaGenerateRule>
       </li>
     </modExtensions>
@@ -587,9 +607,9 @@
 
     <statBases>
       <MarketValue>180</MarketValue>
-      <MaxHitPoints>100</MaxHitPoints>
-      <Beauty>10</Beauty>
-      <BeautyOutdoors>10</BeautyOutdoors>
+      <MaxHitPoints>90</MaxHitPoints>
+      <Beauty>15</Beauty>
+      <BeautyOutdoors>15</BeautyOutdoors>
     </statBases>
 
     <costList>
@@ -598,6 +618,11 @@
 
     <comps>
       <li Class="VVRace.CompProperties_RepeatGatherable" />
+      
+      <li Class="VVRace.CompProperties_GlowerArcanePlantFlora">
+        <glowRadius>10</glowRadius>
+        <glowColor>(255,255,255,0)</glowColor>
+      </li>
       
       <li Class="VVRace.CompProperties_Terraformer">
         <cooldownTicks>90000~120000</cooldownTicks>
@@ -613,10 +638,14 @@
       </li>
     </comps>
     
+    <researchPrerequisites>
+      <li>VV_AdvancedArcaneBotany</li>
+    </researchPrerequisites>
+
     <modExtensions>
       <li Class="VVRace.ArcanePlantExtension">
         <manaCapacity>300</manaCapacity>
-        <zeroManaDamageByChance>1~1</zeroManaDamageByChance>
+        <zeroManaDamageByChance>1~5</zeroManaDamageByChance>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
           <mana>10</mana>
@@ -685,11 +714,15 @@
     <comps>
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
-      <li Class="VVRace.CompProperties_GlowerFlora">
+      <li Class="VVRace.CompProperties_GlowerArcanePlantFlora">
         <glowRadius>3</glowRadius>
         <glowColor>(255,255,255,0)</glowColor>
       </li>
     </comps>
+
+    <researchPrerequisites>
+      <li>VV_ArcaneBotany</li>
+    </researchPrerequisites>
 
     <modExtensions>
       <li Class="VVRace.ArcanePlantExtension">
@@ -765,15 +798,17 @@
         <incomingDropPod>VV_SkyweedBoxIncoming</incomingDropPod>
       </li>
     </comps>
+    
+    <researchPrerequisites>
+      <li>VV_ArcaneBotany</li>
+    </researchPrerequisites>
+
     <inspectorTabs>
       <li>ITab_ContentsTransporter</li>
     </inspectorTabs>
     <placeWorkers>
       <li>PlaceWorker_NotUnderRoof</li>
     </placeWorkers>
-    <researchPrerequisites>
-      <li>VV_ArcaneBotany</li>
-    </researchPrerequisites>
     <uiIconScale>0.65</uiIconScale>
   </ThingDef>
   

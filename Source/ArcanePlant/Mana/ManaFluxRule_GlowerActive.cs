@@ -10,7 +10,7 @@ namespace VVRace
 
         public override float CalcManaFlux(ArcanePlant plant, int ticks)
         {
-            var compGlower = plant.TryGetComp<CompGlowerFlora>();
+            var compGlower = plant.TryGetComp<CompGlowerArcanePlant>();
             if (compGlower.Glows)
             {
                 return mana / 60000f * ticks;

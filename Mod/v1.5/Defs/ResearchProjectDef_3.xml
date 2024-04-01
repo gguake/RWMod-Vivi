@@ -3,20 +3,59 @@
   <!-- 테크 3 -->
   <ResearchProjectDef Abstract="True" Name="ViviResearchProjectTier3Base">
 		<tab>VV_Vivi</tab>
-    <techLevel>Spacer</techLevel>
+    <techLevel>Industrial</techLevel>
   </ResearchProjectDef>
-  
+
+  <ResearchProjectDef ParentName="ViviResearchProjectTier3Base">
+    <defName>VV_AutomatedInfra</defName>
+    <label>vivi automated infrastructures</label>
+    <description>.</description>
+    <baseCost>1500</baseCost>
+    <researchViewX>4</researchViewX>
+    <researchViewY>1.4</researchViewY>
+    <prerequisites>
+      <li>MicroelectronicsBasics</li>
+      <li>VV_AdvancedArcaneBotany</li>
+      <li>VV_ElectricArcaneBotany</li>
+    </prerequisites>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef ParentName="ViviResearchProjectTier3Base">
+    <defName>VV_ManaTransferTube</defName>
+    <label>mana transfer tube</label>
+    <description>.</description>
+    <baseCost>1000</baseCost>
+    <researchViewX>4</researchViewX>
+    <researchViewY>2.1</researchViewY>
+    <prerequisites>
+      <li>MicroelectronicsBasics</li>
+      <li>VV_ElectricArcaneBotany</li>
+    </prerequisites>
+  </ResearchProjectDef>
+
   <ResearchProjectDef ParentName="ViviResearchProjectTier3Base">
     <defName>VV_PlantGigantism</defName>
     <label>plant gigantism</label>
     <description>.</description>
-    <baseCost>2000</baseCost>
-    <researchViewX>5</researchViewX>
+    <baseCost>3600</baseCost>
+    <researchViewX>6</researchViewX>
     <researchViewY>1.4</researchViewY>
     <prerequisites>
       <li>VV_AutomatedInfra</li>
       <li>VV_ManaTransferTube</li>
-      <li>VV_Lifestrand</li>
+    </prerequisites>
+    <techLevel>Spacer</techLevel>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef ParentName="ViviResearchProjectTier4Base">
+    <defName>VV_RitualWeaponry</defName>
+    <label>vivi ritual weaponry</label>
+    <description>.</description>
+    <baseCost>1600</baseCost>
+    <researchViewX>4</researchViewX>
+    <researchViewY>3.5</researchViewY>
+    <prerequisites>
+      <li>VV_Weaponry</li>
     </prerequisites>
   </ResearchProjectDef>
 </Defs>

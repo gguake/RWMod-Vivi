@@ -18,11 +18,18 @@
     </statBases>
 
     <comps>
-      <li Class="VVRace.CompProperties_GlowerFlora">
-        <glowRadius>3</glowRadius>
+      <li Class="VVRace.CompProperties_GlowerArcanePlantFlora">
+        <glowRadius>6</glowRadius>
         <glowColor>(255,227,156,0)</glowColor>
       </li>
       
+
+      <li Class="VVRace.CompProperties_FilthMakerArcanePlant">
+        <filthDef>VV_FilthPollen</filthDef>
+        <makeAmountPerDays>10~30</makeAmountPerDays>
+        <radius>2.6</radius>
+        <exceptCenter>true</exceptCenter>
+      </li>
       <!--
       <li Class="CompProperties_Studiable">
         <studyAmountToComplete>4000</studyAmountToComplete>

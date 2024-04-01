@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-  <VV_HaulViviEggToHatchery.label>안전한 부화기로 비비 알 운반</VV_HaulViviEggToHatchery.label>
-  <VV_HaulViviEggToHatchery.verb>운반</VV_HaulViviEggToHatchery.verb>
-  <VV_HaulViviEggToHatchery.gerund>운반</VV_HaulViviEggToHatchery.gerund>
-  
   <VV_DoBillsGathering.label>작업대 주변에서 채집</VV_DoBillsGathering.label>
   <VV_DoBillsGathering.verb>채집</VV_DoBillsGathering.verb>
   <VV_DoBillsGathering.gerund>채집</VV_DoBillsGathering.gerund>

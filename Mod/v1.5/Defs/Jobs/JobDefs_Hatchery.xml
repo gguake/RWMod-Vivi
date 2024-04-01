@@ -7,12 +7,4 @@
     <casualInterruptible>false</casualInterruptible>
     <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
   </JobDef>
-
-  <JobDef>
-    <defName>VV_HaulViviEgg</defName>
-    <driverClass>VVRace.JobDriver_HaulViviEgg</driverClass>
-    <reportString>haul egg to hatchery.</reportString>
-    <casualInterruptible>false</casualInterruptible>
-    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
-  </JobDef>
 </Defs>

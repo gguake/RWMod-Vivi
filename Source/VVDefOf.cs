@@ -42,7 +42,6 @@ namespace VVRace
     public static class VVJobDefOf
     {
         public static JobDef VV_LayViviEgg;
-        public static JobDef VV_HaulViviEgg;
 
         public static JobDef VV_GatherHoney;
         public static JobDef VV_GatherPollen;

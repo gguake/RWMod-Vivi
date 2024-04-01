@@ -131,6 +131,21 @@ namespace VVRace
             base.PreAbsorbStack(otherStack, count);
         }
 
+        public override IEnumerable<Gizmo> CompGetGizmosExtra()
+        {
+            if (DebugSettings.godMode)
+            {
+                Command_Action commandDebugHatching = new Command_Action();
+                commandDebugHatching.defaultLabel = "DEV: Hatching +10%";
+                commandDebugHatching.action = () =>
+                {
+                    hatchProgress += 0.1f;
+                };
+
+                yield return commandDebugHatching;
+            }
+        }
+
         private void Tick(int ticks)
         {
             if (!CanHatch) { return; }

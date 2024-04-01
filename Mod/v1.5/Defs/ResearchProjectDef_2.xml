@@ -6,29 +6,41 @@
     <techLevel>Industrial</techLevel>
   </ResearchProjectDef>
   
-  <ResearchProjectDef ParentName="ViviResearchProjectTier2Base">
-    <defName>VV_AutomatedInfra</defName>
-    <label>vivi automated infrastructures</label>
-    <description>.</description>
-    <baseCost>1200</baseCost>
-    <researchViewX>3</researchViewX>
-    <researchViewY>0.7</researchViewY>
-    <prerequisites>
-      <li>MicroelectronicsBasics</li>
-      <li>VV_AdvancedGathering</li>
-      <li>VV_ArcaneBotany</li>
-    </prerequisites>
-  </ResearchProjectDef>
-  
-  <ResearchProjectDef ParentName="ViviResearchProjectTier2Base">
-    <defName>VV_ManaTransferTube</defName>
-    <label>mana transfer tube</label>
+  <ResearchProjectDef ParentName="ViviResearchProjectTier1Base">
+    <defName>VV_CombatArcaneBotany</defName>
+    <label>combat arcane botany</label>
     <description>.</description>
     <baseCost>600</baseCost>
     <researchViewX>3</researchViewX>
+    <researchViewY>0.7</researchViewY>
+    <prerequisites>
+      <li>VV_ArcaneBotany</li>
+    </prerequisites>
+    <techLevel>Medieval</techLevel>
+  </ResearchProjectDef>
+  
+  <ResearchProjectDef ParentName="ViviResearchProjectTier1Base">
+    <defName>VV_AdvancedArcaneBotany</defName>
+    <label>advanced arcane botany</label>
+    <description>.</description>
+    <baseCost>1200</baseCost>
+    <researchViewX>3</researchViewX>
     <researchViewY>1.4</researchViewY>
     <prerequisites>
-      <li>MicroelectronicsBasics</li>
+      <li>VV_ArcaneBotany</li>
+    </prerequisites>
+    <techLevel>Medieval</techLevel>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef ParentName="ViviResearchProjectTier1Base">
+    <defName>VV_ElectricArcaneBotany</defName>
+    <label>electric arcane botany</label>
+    <description>.</description>
+    <baseCost>400</baseCost>
+    <researchViewX>3</researchViewX>
+    <researchViewY>2.1</researchViewY>
+    <prerequisites>
+      <li>Electricity</li>
       <li>VV_ArcaneBotany</li>
     </prerequisites>
   </ResearchProjectDef>
@@ -37,24 +49,11 @@
     <defName>VV_Lifestrand</defName>
     <label>lifestrand</label>
     <description>.</description>
-    <baseCost>1500</baseCost>
+    <baseCost>1800</baseCost>
     <researchViewX>3</researchViewX>
-    <researchViewY>2.1</researchViewY>
+    <researchViewY>2.8</researchViewY>
     <prerequisites>
       <li>Devilstrand</li>
-      <li>VV_ArcaneBotany</li>
-    </prerequisites>
-  </ResearchProjectDef>
-
-  <ResearchProjectDef ParentName="ViviResearchProjectTier2Base">
-    <defName>VV_RitualWeaponry</defName>
-    <label>vivi ritual weaponry</label>
-    <description>.</description>
-    <baseCost>1500</baseCost>
-    <researchViewX>3</researchViewX>
-    <researchViewY>3.5</researchViewY>
-    <prerequisites>
-      <li>VV_Weaponry</li>
       <li>VV_ArcaneBotany</li>
     </prerequisites>
   </ResearchProjectDef>

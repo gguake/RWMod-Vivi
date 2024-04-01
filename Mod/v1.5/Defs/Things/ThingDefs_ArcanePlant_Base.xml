@@ -209,6 +209,7 @@
     <constructEffect>ConstructMetal</constructEffect>
     <clearBuildingArea>false</clearBuildingArea>
     <designationHotKey>Misc8</designationHotKey>
+    
     <researchPrerequisites>
       <li>VV_ManaTransferTube</li>
     </researchPrerequisites>

@@ -3,19 +3,19 @@ using Verse;
 
 namespace VVRace
 {
-    public class CompProperties_GlowerFlora : CompProperties_Glower
+    public class CompProperties_GlowerArcanePlant : CompProperties_Glower
     {
         public bool glowOnlyRoofed;
 
-        public CompProperties_GlowerFlora() : base()
+        public CompProperties_GlowerArcanePlant() : base()
         {
-            compClass = typeof(CompGlowerFlora);
+            compClass = typeof(CompGlowerArcanePlant);
         }
     }
 
-    public class CompGlowerFlora : CompGlower
+    public class CompGlowerArcanePlant : CompGlower
     {
-        private new CompProperties_GlowerFlora Props => (CompProperties_GlowerFlora)props;
+        private new CompProperties_GlowerArcanePlant Props => (CompProperties_GlowerArcanePlant)props;
 
         private ArcanePlant _cached;
         public ArcanePlant ArcanePlant

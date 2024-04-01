@@ -5,7 +5,7 @@ using Verse;
 
 namespace VVRace
 {
-    public class ViviEggHatchery : Building, IThingHolder
+    public class ViviEggHatchery : Building, IThingHolder, INotifyHauledTo
     {
         public bool CanHatchNow => HatchingDisabledReason.Accepted;
         public AcceptanceReport HatchingDisabledReason
@@ -56,29 +56,15 @@ namespace VVRace
 
                 return null;
             }
-            protected set
+            set
             {
-                if (value.TryGetComp<CompViviHatcher>() == null)
-                {
-                    return;
-                }
-
-                if (value == null)
-                {
-                    _innerContainer.Clear();
-                    return;
-                }
-
                 if (_innerContainer.Count > 0)
                 {
-                    _innerContainer.TryDropAll(PositionHeld, MapHeld, ThingPlaceMode.Near);
-                    _innerContainer.Clear();
+                    _innerContainer.TryDropAll(Position, Map, ThingPlaceMode.Near);
                 }
 
-                if (!_innerContainer.TryAdd(value))
-                {
-                    Log.Message($"Treid to add egg to hatchery but failed");
-                }
+                if (value.Spawned) { value.DeSpawn(); }
+                _innerContainer.TryAddOrTransfer(value, canMergeWithExistingStacks: false);
             }
         }
 
@@ -190,31 +176,13 @@ namespace VVRace
                 yield return gizmo;
             }
 
-            if (ViviEgg != null && DebugSettings.godMode)
+            if (ViviEgg != null)
             {
-                Command_Action command_replaceInstantly = new Command_Action();
-                command_replaceInstantly.defaultLabel = "DEV: Hatching +10%";
-                command_replaceInstantly.action = () =>
+                foreach (var gizmo in ViviEgg.GetGizmos())
                 {
-                    var compHatcher = ViviEgg.TryGetComp<CompViviHatcher>();
-                    compHatcher.hatchProgress += 0.1f;
-                };
-
-                yield return command_replaceInstantly;
+                    yield return gizmo;
+                }
             }
-        }
-
-        public bool TryAcceptEgg(Thing viviEgg)
-        {
-            if (viviEgg == null) { return false; }
-
-            if (viviEgg.Spawned)
-            {
-                viviEgg.DeSpawn();
-            }
-
-            ViviEgg = viviEgg;
-            return ViviEgg == viviEgg;
         }
 
         public ThingOwner GetDirectlyHeldThings()
@@ -227,5 +195,9 @@ namespace VVRace
             ThingOwnerUtility.AppendThingHoldersFromThings(outChildren, GetDirectlyHeldThings());
         }
 
+        public void Notify_HauledTo(Pawn hauler, Thing thing, int count)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

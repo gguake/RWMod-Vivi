@@ -1,6 +1,7 @@
 ﻿using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 using Verse;
 using Verse.AI;
 
@@ -8,57 +9,53 @@ namespace VVRace
 {
     public class WorkGiver_HaulViviEgg : WorkGiver_Scanner
     {
-        public override IEnumerable<Thing> PotentialWorkThingsGlobal(Pawn pawn)
+        public override ThingRequest PotentialWorkThingRequest => ThingRequest.ForDef(VVThingDefOf.VV_ViviHatchery);
+
+        public override PathEndMode PathEndMode => PathEndMode.Touch;
+
+        public override bool HasJobOnThing(Pawn pawn, Thing t, bool forced = false)
         {
-            return pawn.Map.listerThings
-                .ThingsMatching(ThingRequest.ForDef(VVThingDefOf.VV_ViviEgg))
-                .Where(t =>
-                {
-                    if (!t.Spawned || t.IsForbidden(pawn)) { return false; }
+            if (!(t is ViviEggHatchery hatchery)) { return false; }
 
-                    var comp = t.TryGetComp<CompViviHatcher>();
-                    if (comp == null || comp.TemperatureDamaged)
-                    {
-                        return false;
-                    }
-
-                    return true;
-                });
-        }
-
-        public override bool ShouldSkip(Pawn pawn, bool forced = false)
-        {
-            var eggs = pawn.Map.listerThings
-                .ThingsMatching(ThingRequest.ForDef(VVThingDefOf.VV_ViviEgg))
-                .Where(t => t.Spawned && !t.IsForbidden(pawn));
-
-            return !eggs.Any();
-        }
-
-        public override Job JobOnThing(Pawn pawn, Thing egg, bool forced = false)
-        {
-            if (egg.def != VVThingDefOf.VV_ViviEgg) { return null; }
-
-            var comp = egg.TryGetComp<CompViviHatcher>();
-            if (comp == null || comp.TemperatureDamaged) { return null; }
-
-            if (!pawn.CanReserveAndReach(egg, PathEndMode.ClosestTouch, Danger.Deadly)) { return null; }
-
-            var allAcceptibleHatchery = pawn.Map.listerBuildings.AllBuildingsColonistOfDef(VVThingDefOf.VV_ViviHatchery)
-                .Where(v => v is ViviEggHatchery hatchery && hatchery.CanLayHere)
-                .OrderBy(v => pawn.Position.DistanceToSquared(v.Position))
-                .ToList();
-
-            if (!allAcceptibleHatchery.Any()) { return null; }
-
-            foreach (var candidate in allAcceptibleHatchery)
+            if (t.IsForbidden(pawn) || !pawn.CanReserve(t, ignoreOtherReservations: forced) || t.IsBurning())
             {
-                if (pawn.CanReach(candidate, PathEndMode.OnCell, Danger.Deadly))
-                {
-                    var job = JobMaker.MakeJob(VVJobDefOf.VV_HaulViviEgg, egg, candidate);
-                    job.count = 1;
+                return false;
+            }
 
-                    return job;
+            if (pawn.Map.designationManager.DesignationOn(t, DesignationDefOf.Deconstruct) != null)
+            {
+                return false;
+            }
+
+            if (hatchery.ViviEgg != null) { return false; }
+
+            var comp = t.TryGetComp<CompViviHatcher>();
+            if (comp == null || comp.TemperatureDamaged) { return false; }
+
+            var egg = FindEgg(pawn, forced);
+            return egg != null;
+        }
+
+        public override Job JobOnThing(Pawn pawn, Thing t, bool forced = false)
+        {
+            if (!(t is ViviEggHatchery hatchery)) { return null; }
+
+            var egg = FindEgg(pawn, forced);
+            if (egg == null) { return null; }
+
+            var job = HaulAIUtility.HaulToContainerJob(pawn, egg, t);
+            job.count = 1;
+            return job;
+        }
+
+        private ViviEgg FindEgg(Pawn pawn, bool forced)
+        {
+            var eggsInMap = pawn.Map.listerThings.ThingsOfDef(VVThingDefOf.VV_ViviEgg);
+            foreach (var thing in eggsInMap)
+            {
+                if (thing is ViviEgg egg && egg.Spawned && !egg.IsForbidden(pawn) && pawn.CanReserveAndReach(egg, PathEndMode.ClosestTouch, MaxPathDanger(pawn), ignoreOtherReservations: forced))
+                {
+                    return egg;
                 }
             }
 

@@ -30,7 +30,7 @@ namespace VVRace
                     if (egg != null)
                     {
                         egg.CompViviHatcher.hatchProgress = Rand.Range(0.2f, 0.7f);
-                        hatchery.TryAcceptEgg(egg);
+                        hatchery.ViviEgg = egg;
                     }
                 }
             }

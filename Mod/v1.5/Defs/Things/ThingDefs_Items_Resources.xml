@@ -96,6 +96,7 @@
         <MeleeWeapon_CooldownMultiplier>0.95</MeleeWeapon_CooldownMultiplier>
       </statFactors>
       <canSuggestUseDefaultStuff>true</canSuggestUseDefaultStuff>
+      <allowedInStuffGeneration>false</allowedInStuffGeneration>
     </stuffProps>
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
     <allowedArchonexusCount>80</allowedArchonexusCount>

@@ -29,6 +29,10 @@
     <comps>
     </comps>
 
+    <researchPrerequisites>
+      <li>VV_CombatArcaneBotany</li>
+    </researchPrerequisites>
+
     <building>
       <combatPower>45</combatPower>
       <ai_combatDangerous>true</ai_combatDangerous>
@@ -141,6 +145,10 @@
 
     <comps>
     </comps>
+
+    <researchPrerequisites>
+      <li>VV_CombatArcaneBotany</li>
+    </researchPrerequisites>
 
     <recoilPower>2</recoilPower>
     <building>
@@ -307,6 +315,11 @@
 
     <comps>
     </comps>
+
+    <researchPrerequisites>
+      <li>VV_CombatArcaneBotany</li>
+      <li>VV_AdvancedArcaneBotany</li>
+    </researchPrerequisites>
 
     <building>
       <combatPower>75</combatPower>

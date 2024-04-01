@@ -16,23 +16,32 @@
 <VV_Weaponry.label>비비 전통 무기</VV_Weaponry.label>
 <VV_Weaponry.description>비비들이 전통적으로 사용해온 무기를 제작할 수 있습니다.</VV_Weaponry.description>
 
+<VV_RitualWeaponry.label>비비 예식 무기</VV_RitualWeaponry.label>
+<VV_RitualWeaponry.description>인정받은 비비 전사들에게만 주어지는 특수한 무기를 제작할 수 있습니다.</VV_RitualWeaponry.description>
+
 <VV_Apparels.label>비비 의류</VV_Apparels.label>
 <VV_Apparels.description>비비들이 입는 기초적인 의류를 제작할 수 있습니다.</VV_Apparels.description>
 
 <VV_AdvancedApparels.label>고급 비비 의류</VV_AdvancedApparels.label>
 <VV_AdvancedApparels.description>비비들이 입는 고급 의류를 제작할 수 있습니다.</VV_AdvancedApparels.description>
 
+<VV_Lifestrand.label>생체가닥</VV_Lifestrand.label>
+<VV_Lifestrand.description>악마가닥 천을 마법 재료로 가공해 강화한 생체가닥 천을 직조할 수 있습니다.</VV_Lifestrand.description>
+
 <VV_ArcaneBotany.label>마법 식물학</VV_ArcaneBotany.label>
-<VV_ArcaneBotany.description>다양한 활용도를 가진 마법 식물들을 미확인 씨앗을 활용해 복원하고 배양할수 있게 됩니다.</VV_ArcaneBotany.description>
+<VV_ArcaneBotany.description>다양한 활용도를 가진 마법 식물들을 미확인 씨앗을 활용해 재배할수 있습니다.</VV_ArcaneBotany.description>
 <VV_ArcaneBotany.discoveredLetterTitle>마법 식물</VV_ArcaneBotany.discoveredLetterTitle>
 <VV_ArcaneBotany.discoveredLetterText>마법 식물을 배양하려면 미확인 씨앗, 비료, 꽃가루가 대량으로 필요하며 주기적으로 관리해줘야 좋은 결과를 얻을 수 있습니다. 배양 작업은 실패하거나 혹은 마법 식물이 아닌 흔한 작물이 자랄수도 있습니다.
 \n마법 식물은 마나라는 자원을 생산하고 소모하며 식물마다 특수한 조건이 만족되어야 마나를 생산합니다. 생산된 마나가 최대 저장량을 초과하면 인접한 다른 마법 식물들에게 전송해주는 특징이 있으므로 잘 활용하세요.</VV_ArcaneBotany.discoveredLetterText>
 
-<VV_RitualWeaponry.label>비비 예식 무기</VV_RitualWeaponry.label>
-<VV_RitualWeaponry.description>인정받은 비비 전사들에게만 주어지는 특수한 무기를 제작할 수 있습니다.</VV_RitualWeaponry.description>
+<VV_CombatArcaneBotany.label>전투 식물학</VV_CombatArcaneBotany.label>
+<VV_CombatArcaneBotany.description>전투에 특화된 마법 식물들을 재배할 수 있습니다.</VV_CombatArcaneBotany.description>
 
-<VV_Lifestrand.label>생체가닥</VV_Lifestrand.label>
-<VV_Lifestrand.description>악마가닥 천을 특수한 재료로 가공해 강화한 생체가닥 천을 직조할 수 있습니다.</VV_Lifestrand.description>
+<VV_AdvancedArcaneBotany.label>고급 마법 식물학</VV_AdvancedArcaneBotany.label>
+<VV_AdvancedArcaneBotany.description>특수한 기능의 마법 식물들을 재배할수 있습니다.</VV_AdvancedArcaneBotany.description>
+
+<VV_ElectricArcaneBotany.label>전기 식물학</VV_ElectricArcaneBotany.label>
+<VV_ElectricArcaneBotany.description>전기를 제어하는 마법 식물들을 재배할 수 있습니다.</VV_ElectricArcaneBotany.description>
 
 <VV_AutomatedInfra.label>자동화 비비 시설</VV_AutomatedInfra.label>
 <VV_AutomatedInfra.description>전기를 이용해 기존의 비비들이 하던 일부 수작업들을 자동화하고 효율을 증대시킵니다.</VV_AutomatedInfra.description>

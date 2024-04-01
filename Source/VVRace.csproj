@@ -76,6 +76,7 @@
     <Compile Include="ArcanePlant\AI\WorkGiver_EquipShootus.cs" />
     <Compile Include="ArcanePlant\AI\WorkGiver_HaulToArcanePlantFarm.cs" />
     <Compile Include="ArcanePlant\ArcanePlantUtility.cs" />
+    <Compile Include="ArcanePlant\Comps\CompFilthMaker.cs" />
     <Compile Include="ArcanePlant\Comps\CompManaShieldProjector.cs" />
     <Compile Include="ArcanePlant\Comps\CompProperties_LaunchableCustom.cs" />
     <Compile Include="ArcanePlant\Growing\GrowArcanePlantBill.cs" />
@@ -105,7 +106,7 @@
     <Compile Include="ArcanePlant\Things\ArcanePlantPot.cs" />
     <Compile Include="ArcanePlant\ArcanePlantExtension.cs" />
     <Compile Include="ArcanePlant\UI\Command_SetFertilizeAutoThreshold.cs" />
-    <Compile Include="ArcanePlant\Comps\CompGlowerFlora.cs" />
+    <Compile Include="ArcanePlant\Comps\CompGlowerArcanePlant.cs" />
     <Compile Include="ArcanePlant\Comps\CompPowerMana.cs" />
     <Compile Include="ArcanePlant\Designator_ReplantArcanePlant.cs" />
     <Compile Include="ArcanePlant\Mana\ManaFluxRule.cs" />
@@ -157,7 +158,6 @@
     <Compile Include="ArcanePlant\UI\PlaceWorker_ShowPlantTurretRadius.cs" />
     <Compile Include="ArcanePlant\UI\PlaceWorker_TurretPlantTop.cs" />
     <Compile Include="ArcanePlant\Verb_ShootWithMana.cs" />
-    <Compile Include="Egg\AI\JobDriver_HaulViviEgg.cs" />
     <Compile Include="Egg\AI\WorkGiver_HaulViviEgg.cs" />
     <Compile Include="Egg\UI\Alert_DangerViviEgg.cs" />
     <Compile Include="Egg\Comps\CompTemperatureRuinableEgg.cs" />

@@ -35,33 +35,17 @@ namespace VVRace
                 pawn.Map, 
                 ThingRequest.ForDef(VVThingDefOf.VV_ViviHatchery),
                 PathEndMode.OnCell,
-                TraverseParms.For(pawn, Danger.Some), 
-                maxDistance: 30f, 
+                TraverseParms.For(pawn, Danger.Some),
                 validator: (thing) =>
                 {
-                    if (!thing.Spawned || thing.IsForbidden(pawn) || !pawn.CanReserve(thing) || !pawn.Position.InHorDistOf(thing.Position, 30f) || thing.Faction != pawn.Faction)
+                    if (!thing.Spawned || thing.IsForbidden(pawn) || !pawn.CanReserve(thing) || thing.Faction != pawn.Faction)
                     {
                         return false;
                     }
 
-                    var hatchery = thing as ViviEggHatchery;
-                    if (hatchery != null && hatchery.CanLayHere)
-                    {
-                        return true;
-                    }
-
-                    return false;
+                    return thing is ViviEggHatchery hatchery && hatchery.CanLayHere;
                 }, 
-                priorityGetter: (thing) =>
-                {
-                    var hatchery = thing as ViviEggHatchery;
-                    if (hatchery != null && hatchery.CanLayHere)
-                    {
-                        return 0f;
-                    }
-
-                    return 1f;
-                }, 
+                priorityGetter: (thing) => -pawn.Position.DistanceToSquared(thing.Position),
                 minRegions: 10);
 
             return eggBox != null;

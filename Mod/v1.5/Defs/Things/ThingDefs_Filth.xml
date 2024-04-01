@@ -5,7 +5,8 @@
     <label>pollen</label>
     <description>.</description>
     <statBases>
-      <Cleanliness>-4</Cleanliness>
+      <Beauty>-5</Beauty>
+      <Cleanliness>-5</Cleanliness>
     </statBases>
     <graphicData>
       <texPath>Things/Filth/Grainy</texPath>
@@ -18,6 +19,7 @@
       <rainWashes>true</rainWashes>
       <cleaningWorkToReduceThickness>200</cleaningWorkToReduceThickness>
       <canFilthAttach>true</canFilthAttach>
+      <cleaningSound>Interact_CleanFilth_Dirt</cleaningSound>
     </filth>
   </ThingDef>
 

@@ -30,9 +30,13 @@ namespace VVRace
                     if (egg != null)
                     {
                         var hatchery = Hatchery.Thing as ViviEggHatchery;
-                        if (hatchery == null || !hatchery.TryAcceptEgg(egg))
+                        if (hatchery == null || !hatchery.CanLayHere)
                         {
                             GenPlace.TryPlaceThing(egg, hatchery.PositionHeld, hatchery.MapHeld, ThingPlaceMode.Near);
+                        }
+                        else
+                        {
+                            hatchery.ViviEgg = egg;
                         }
 
                         return;
