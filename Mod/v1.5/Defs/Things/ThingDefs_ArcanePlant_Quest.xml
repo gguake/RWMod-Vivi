@@ -18,7 +18,7 @@
     </statBases>
 
     <comps>
-      <li Class="VVRace.CompProperties_GlowerArcanePlantFlora">
+      <li Class="VVRace.CompProperties_GlowerArcanePlant">
         <glowRadius>6</glowRadius>
         <glowColor>(255,227,156,0)</glowColor>
       </li>

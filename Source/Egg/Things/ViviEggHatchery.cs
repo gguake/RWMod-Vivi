@@ -5,7 +5,7 @@ using Verse;
 
 namespace VVRace
 {
-    public class ViviEggHatchery : Building, IThingHolder, INotifyHauledTo
+    public class ViviEggHatchery : Building, IThingHolder
     {
         public bool CanHatchNow => HatchingDisabledReason.Accepted;
         public AcceptanceReport HatchingDisabledReason
@@ -64,7 +64,10 @@ namespace VVRace
                 }
 
                 if (value.Spawned) { value.DeSpawn(); }
-                _innerContainer.TryAddOrTransfer(value, canMergeWithExistingStacks: false);
+                if (!_innerContainer.TryAddOrTransfer(value, canMergeWithExistingStacks: false))
+                {
+                    Log.Error($"failed to set egg");
+                }
             }
         }
 
@@ -193,11 +196,6 @@ namespace VVRace
         public void GetChildHolders(List<IThingHolder> outChildren)
         {
             ThingOwnerUtility.AppendThingHoldersFromThings(outChildren, GetDirectlyHeldThings());
-        }
-
-        public void Notify_HauledTo(Pawn hauler, Thing thing, int count)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

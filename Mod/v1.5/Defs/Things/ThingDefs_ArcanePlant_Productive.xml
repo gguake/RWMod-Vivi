@@ -31,7 +31,7 @@
     <comps>
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
-      <li Class="VVRace.CompProperties_GlowerArcanePlantFlora">
+      <li Class="VVRace.CompProperties_GlowerArcanePlant">
         <glowRadius>10</glowRadius>
         <glowColor>(255,247,138,0)</glowColor>
       </li>
@@ -247,7 +247,7 @@
     <comps>
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
-      <li Class="VVRace.CompProperties_GlowerArcanePlantFlora">
+      <li Class="VVRace.CompProperties_GlowerArcanePlant">
         <glowRadius>3</glowRadius>
         <glowColor>(213,110,248,0)</glowColor>
       </li>
@@ -478,7 +478,7 @@
     <comps>
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
-      <li Class="VVRace.CompProperties_GlowerArcanePlantFlora">
+      <li Class="VVRace.CompProperties_GlowerArcanePlant">
         <glowRadius>16</glowRadius>
         <glowColor>(370,370,370,0)</glowColor>
         <overlightRadius>7.7</overlightRadius>
@@ -619,7 +619,7 @@
     <comps>
       <li Class="VVRace.CompProperties_RepeatGatherable" />
       
-      <li Class="VVRace.CompProperties_GlowerArcanePlantFlora">
+      <li Class="VVRace.CompProperties_GlowerArcanePlant">
         <glowRadius>10</glowRadius>
         <glowColor>(255,255,255,0)</glowColor>
       </li>
@@ -714,7 +714,7 @@
     <comps>
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
-      <li Class="VVRace.CompProperties_GlowerArcanePlantFlora">
+      <li Class="VVRace.CompProperties_GlowerArcanePlant">
         <glowRadius>3</glowRadius>
         <glowColor>(255,255,255,0)</glowColor>
       </li>

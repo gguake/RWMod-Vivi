@@ -47,7 +47,7 @@
     <techLevel>Spacer</techLevel>
   </ResearchProjectDef>
 
-  <ResearchProjectDef ParentName="ViviResearchProjectTier4Base">
+  <ResearchProjectDef ParentName="ViviResearchProjectTier3Base">
     <defName>VV_RitualWeaponry</defName>
     <label>vivi ritual weaponry</label>
     <description>.</description>
