@@ -147,8 +147,13 @@ namespace VVRace
 
         public void Tick(int ticks)
         {
-            if (!IsStarted || IsCompleted)
+            if (!IsStarted)
             {
+                return;
+            }
+            else if (IsCompleted)
+            {
+                _billOwner.Notify_BillCompleted();
                 return;
             }
 
@@ -270,6 +275,11 @@ namespace VVRace
             if (!damaged)
             {
                 Health += data.healthRegenNoDamagedByDays * ticks / 60000f;
+            }
+
+            if (Health <= 0f)
+            {
+                _billOwner.Notify_BillFailed();
             }
         }
 

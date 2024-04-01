@@ -99,7 +99,7 @@
     <defName>VV_Tools</defName>
     <label>gathering tools</label>
     <description>.</description>
-    <baseCost>250</baseCost>
+    <baseCost>300</baseCost>
     <researchViewX>2</researchViewX>
     <researchViewY>0</researchViewY>
     <prerequisites>

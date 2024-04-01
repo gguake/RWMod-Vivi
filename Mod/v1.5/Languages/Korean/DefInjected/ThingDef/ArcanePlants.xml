@@ -12,7 +12,7 @@
 \n콩뿌리개의 콩이 서리꽃 위로 지나가는 경우 대상에게 화상 피해를 추가로 입힙니다.</VV_FrostBloom.description>
 
 <VV_Shockerbud.label>따끔봉오리</VV_Shockerbud.label>
-<VV_Shockerbud.description>전기가 투명한 꽃잎 내부에서 끝없이 방전되는 마법 꽃으로 전선을 연결해 전력을 저장할 수 있습니다. 전력이 충전된 정도에 비례해 마나를 생산합니다.
+<VV_Shockerbud.description>투명한 꽃잎 내부에서 전기가 방전되는 마법 꽃으로 전선을 연결해 전력을 저장할 수 있습니다. 전력이 충전된 정도에 비례해 마나를 생산합니다.
 \n외부의 충격을 받거나 주변에 메카노이드가 접근하면 내부의 전압이 불안정해져 주변에 막대한 전자기 펄스를 발생시키고 마나가 방전됩니다.
 \n콩뿌리개의 콩이 따끔봉오리 위로 지나가는 경우 낮은 확률로 콩이 적을 감전시켜 잠시 기절시킵니다.</VV_Shockerbud.description>
 
@@ -36,7 +36,8 @@
 \n저장된 마나를 일시적으로 방출해 외부의 투사체를 잠시동안 차단하는 보호막을 잠시동안 생성할 수도 있습니다.</VV_Purifimint.description>
 
 <VV_Skyweed.label>하늘풀</VV_Skyweed.label>
-<VV_Skyweed.description>민들레 씨앗과 비슷한 모양의 마법 식물입니다. 바람의 힘을 마나로 변환하며 실내에 있을때는 마나를 생산하지 못합니다. 이 풀의 홀씨는 매우 가볍고 잘 날아가는 성질이 있어 소량의 물건을 실어보내는 용도로도 사용할 수 있습니다.</VV_Skyweed.description>
+<VV_Skyweed.description>민들레 씨앗과 비슷한 모양의 마법 식물로 실외에 있을때 바람의 힘을 마나로 변환합니다.
+\n이 풀의 홀씨는 매우 가볍고 잘 날아가는 성질이 있어 소량의 물건을 실어보내는 용도로도 사용할 수 있습니다.</VV_Skyweed.description>
 
 <VV_SkyweedBox.label>하늘풀 상자</VV_SkyweedBox.label>
 <VV_SkyweedBox.description>하늘풀의 홀씨를 묶어 멀리 날려보낼 수 있는 상자입니다. 파손을 방지하기 위해 밀랍과 천으로 묶었습니다. 별다른 연료는 필요없지만 외지인들이 사용하는 수송 포드보다 용량이 적고 운송가능한 거리가 짧습니다.</VV_SkyweedBox.description>
@@ -46,7 +47,7 @@
 
 <VV_Peashooter.label>콩뿌리개</VV_Peashooter.label>
 <VV_Peashooter.description>주변의 적을 감지하면 콩을 발사해 쫓아내는 마법 식물입니다. 콩을 발사할때마다 마나를 소모하며 위력은 약하지만 한번에 대량의 콩을 발사하므로 경장갑의 적에게 효과적입니다.
-\n콩이 일부 마법 식물 위를 통과하는 경우 식물에 따라 특수한 효과를 적용받기도 하며 대부분의 비비 둥지에서 사용되는 방어 포탑입니다.</VV_Peashooter.description>
+\n발사된 콩이 마법 식물 위를 지나가는 경우 식물에 따라 특수한 효과를 적용받기도 합니다.</VV_Peashooter.description>
 <VV_Bullet_Pea.label>완두콩</VV_Bullet_Pea.label>
 <VV_Gun_Peashooter.label>콩뿌리개 꼬투리</VV_Gun_Peashooter.label>
 <VV_Gun_Peashooter.description>빠르게 콩을 생성해 적에게 발사하는 콩뿌리개의 꼬투리입니다.</VV_Gun_Peashooter.description>
@@ -59,7 +60,9 @@
 <VV_Gun_Pealauncher.description>빠르게 콩을 생성해 적에게 발사하는 폭탄뿌리개의 꼬투리입니다.</VV_Gun_Pealauncher.description>
 
 <VV_Shootus.label>건인장</VV_Shootus.label>
-<VV_Shootus.description>기묘한 표정의 얼굴을 가진 마법 선인장입니다. 약간의 내화성을 가지고 있으며 식물이라고 생각되지 않을 정도로 유연하게 움직입니다. 한쪽 손에 원거리 무기를 장착할 수 있으며 적을 감지하면 장착된 무기를 사용해 자동으로 적을 공격합니다. 근접 무기나 생체인증 무기는 착용할 수 없으며 사람이 다루는것보다는 다소 느립니다.</VV_Shootus.description>
+<VV_Shootus.description>기묘한 표정의 얼굴을 가진 마법 선인장입니다. 비교적 불에 잘 버티고 식물이라고 생각되지 않을 정도로 유연하게 움직입니다.
+\n한쪽 손에 원거리 무기를 장착할 수 있으며 적을 감지하면 장착된 무기를 사용해 자동으로 적을 공격합니다.
+\n근접 무기나 생체인증 무기는 착용할 수 없으며 사람이 다루는것보다는 다소 느립니다.</VV_Shootus.description>
 
 <VV_Dreamum.label>꿈송이</VV_Dreamum.label>
 <VV_Dreamum.description>비비 둥지 근처에서만 발견되는 희귀한 마법 꽃입니다. 꽃 향기나 꽃가루를 맡으면 곧 잠에 빠지게 되어 꿈송이라는 이름으로 불리는데 많은 꽃가루를 지속적으로 주변에 퍼뜨리므로 꿈송이가 군집한 지역은 위험 지역으로 알려져 있습니다.

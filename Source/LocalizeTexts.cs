@@ -78,5 +78,27 @@
 
         public const string GeneDefHoneyNeedDurationDesc = "VV_GeneDefHoneyNeedDurationDesc";
         public const string LastHoneyIngestedDurationAgo = "VV_LastHoneyIngestedDurationAgo";
+
+        public const string DialogGrowArcanePlantTitleChooseOption = "VV_DialogGrowArcanePlantTitleChooseOption";
+        public const string DialogGrowArcanePlantTitleSelected = "VV_DialogGrowArcanePlantTitleSelected";
+        public const string DialogGrowArcanePlantTotalGrowDays = "VV_DialogGrowArcanePlantTotalGrowDays";
+        public const string DialogGrowArcanePlantExpectedAmount = "VV_DialogGrowArcanePlantExpectedAmount";
+        public const string DialogGrowArcanePlantExpectedAmountDesc = "VV_DialogGrowArcanePlantExpectedAmountDesc";
+        public const string DialogGrowArcanePlantTotalHealth = "VV_DialogGrowArcanePlantTotalHealth";
+        public const string DialogGrowArcanePlantTotalHealthDesc = "VV_DialogGrowArcanePlantTotalHealthDesc";
+        public const string DialogGrowArcanePlantTotalMana = "VV_DialogGrowArcanePlantTotalMana";
+        public const string DialogGrowArcanePlantTotalManaDesc = "VV_DialogGrowArcanePlantTotalManaDesc";
+        public const string DialogGrowArcanePlantManaSensitivity = "VV_DialogGrowArcanePlantManaSensitivity";
+        public const string DialogGrowArcanePlantManaSensitivityDesc = "VV_DialogGrowArcanePlantManaSensitivityDesc";
+        public const string DialogGrowArcanePlantOptimalTemperature = "VV_DialogGrowArcanePlantOptimalTemperature";
+        public const string DialogGrowArcanePlantTemperatureSensitivity = "VV_DialogGrowArcanePlantTemperatureSensitivity";
+        public const string DialogGrowArcanePlantTemperatureSensitivityDesc = "VV_DialogGrowArcanePlantTemperatureSensitivityDesc";
+        public const string DialogGrowArcanePlantOptimalGlow = "VV_DialogGrowArcanePlantOptimalGlow";
+        public const string DialogGrowArcanePlantGlowSensitivity = "VV_DialogGrowArcanePlantGlowSensitivity";
+        public const string DialogGrowArcanePlantGlowSensitivityDesc = "VV_DialogGrowArcanePlantGlowSensitivityDesc";
+        public const string DialogGrowArcanePlantManageInterval = "VV_DialogGrowArcanePlantManageInterval";
+        public const string DialogGrowArcanePlantManageIntervalDesc = "VV_DialogGrowArcanePlantManageIntervalDesc";
+        public const string DialogGrowArcanePlantManageSensitivity = "VV_DialogGrowArcanePlantManageSensitivity";
+        public const string DialogGrowArcanePlantManageSensitivityDesc = "VV_DialogGrowArcanePlantManageSensitivityDesc";
     }
 }

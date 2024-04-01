@@ -170,10 +170,19 @@ namespace VVRace
             }
         }
 
+        public void Notify_BillCompleted()
+        {
+            _bill = null;
+        }
+
+        public void Notify_BillFailed()
+        {
+            _bill = null;
+        }
+
         private void EjectContents()
         {
             _innerContainer.TryDropAll(Position, Map, ThingPlaceMode.Near);
         }
-
     }
 }

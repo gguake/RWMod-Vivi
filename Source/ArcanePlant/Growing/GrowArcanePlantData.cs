@@ -3,8 +3,52 @@ using Verse;
 
 namespace VVRace
 {
+    public enum GrowArcanePlantSensitivity
+    {
+        None,
+        Low,
+        Medium, 
+        High
+    }
+
     public class GrowArcanePlantData : DefModExtension
     {
+        public GrowArcanePlantSensitivity ManaSensitivity
+        {
+            get
+            {
+                if (badManaDamageByDayCurve == null) { return GrowArcanePlantSensitivity.None; }
+                return GrowArcanePlantSensitivity.High;
+            }
+        }
+
+        public GrowArcanePlantSensitivity TemperatureSensitivity
+        {
+            get
+            {
+                if (badTemperatureDamageByDayCurve == null) { return GrowArcanePlantSensitivity.None; }
+                return GrowArcanePlantSensitivity.High;
+            }
+        }
+
+        public GrowArcanePlantSensitivity GlowSensitivity
+        {
+            get
+            {
+                if (badGlowDamageByDayCurve == null) { return GrowArcanePlantSensitivity.None; }
+                return GrowArcanePlantSensitivity.High;
+            }
+        }
+
+        public GrowArcanePlantSensitivity ManageSensitivity
+        {
+            get
+            {
+                if (badManageDamageByDayCurve == null) { return GrowArcanePlantSensitivity.None; }
+                return GrowArcanePlantSensitivity.High;
+            }
+        }
+
         public List<ThingDefCountClass> ingredients;
 
         public float totalGrowDays = 5;

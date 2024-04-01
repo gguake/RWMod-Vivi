@@ -6,7 +6,7 @@
     <settlementNameMaker>VV_NamerSettlementVivi</settlementNameMaker>
     <pawnSingular>vivi</pawnSingular>
     <pawnsPlural>vivis</pawnsPlural>
-    <techLevel>Neolithic</techLevel>
+    <techLevel>Medieval</techLevel>
 
     <isPlayer>true</isPlayer>
 
@@ -94,7 +94,6 @@
     <label>vivi refugee</label>
     <description>.</description>
     <basicMemberKind>VV_PlayerRefugeeVivi</basicMemberKind>
-    <techLevel>Medieval</techLevel>
     
     <startingResearchTags>
       <li>VV_ViviRefugee</li>
