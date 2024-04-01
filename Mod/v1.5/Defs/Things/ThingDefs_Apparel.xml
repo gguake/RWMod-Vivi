@@ -18,7 +18,7 @@
       <MaxHitPoints>320</MaxHitPoints>
       <WorkToMake>48000</WorkToMake>
       <Mass>2</Mass>
-      <StuffEffectMultiplierArmor>0.54</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierArmor>0.5</StuffEffectMultiplierArmor>
       <StuffEffectMultiplierInsulation_Cold>0.75</StuffEffectMultiplierInsulation_Cold>
       <StuffEffectMultiplierInsulation_Heat>0.75</StuffEffectMultiplierInsulation_Heat>
       <EquipDelay>2.5</EquipDelay>
@@ -35,13 +35,13 @@
     </equippedStatOffsets>
 
     <smeltable>false</smeltable>
-    <costStuffCount>80</costStuffCount>
+    <costStuffCount>120</costStuffCount>
     <stuffCategories>
       <li>Fabric</li>
       <li>Leathery</li>
     </stuffCategories>
     <costList>
-      <VV_Lifestrand>150</VV_Lifestrand>
+      <VV_Lifestrand>80</VV_Lifestrand>
     </costList>
 
     <apparel>

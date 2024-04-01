@@ -223,6 +223,7 @@
           <MyDaughterDied>VV_MyDaughterDied</MyDaughterDied>
         </thoughtReplacer>
 
+        <sterile>true</sterile>
         <growthMomentAgeOverride>
           <li>5</li>
           <li>7</li>
@@ -235,6 +236,10 @@
             <li>(7,2.5)</li>
           </points>
         </growthPointFactorCurve>
+
+        <romanceFrequencyWeight>0</romanceFrequencyWeight>
+        <romanceSuccessChanceMultiplierAsInitiator>0</romanceSuccessChanceMultiplierAsInitiator>
+        <romanceSuccessChanceMultiplierAsRecipient>0</romanceSuccessChanceMultiplierAsRecipient>
       </li>
 
       <li Class="RPEF.PawnGeneratorRaceHook">

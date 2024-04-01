@@ -170,7 +170,7 @@
       <StuffPower_Insulation_Heat>36</StuffPower_Insulation_Heat>
 
       <MaxHitPoints>150</MaxHitPoints>
-      <MarketValue>9</MarketValue>
+      <MarketValue>12</MarketValue>
       <Mass>0.05</Mass>
       <Flammability>0.3</Flammability>
       <DeteriorationRate>2</DeteriorationRate>
@@ -293,8 +293,8 @@
     
     <useHitPoints>true</useHitPoints>
     <statBases>
-      <Mass>1.5</Mass>
-      <MarketValue>150</MarketValue>
+      <Mass>1.0</Mass>
+      <MarketValue>120</MarketValue>
       <MaxHitPoints>70</MaxHitPoints>
       <Flammability>1.0</Flammability>
       <DeteriorationRate>1</DeteriorationRate>

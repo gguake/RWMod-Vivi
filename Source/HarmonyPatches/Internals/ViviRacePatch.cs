@@ -1,12 +1,6 @@
 ﻿using HarmonyLib;
-using MonoMod.Utils;
 using RimWorld;
-using RimWorld.Planet;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Emit;
-using UnityEngine;
 using Verse;
 using Verse.AI;
 
@@ -47,22 +41,6 @@ namespace VVRace.HarmonyPatches
             harmony.Patch(
                 original: AccessTools.Method(typeof(PawnRelationWorker_Sibling), nameof(PawnRelationWorker_Sibling.InRelation)),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(PawnRelationWorker_Sibling_InRelation_Postfix)));
-
-
-            // 로맨스 불가 - 가중치 0
-            harmony.Patch(
-                original: AccessTools.Method(typeof(InteractionWorker_RomanceAttempt), nameof(InteractionWorker_RomanceAttempt.RandomSelectionWeight)),
-                prefix: new HarmonyMethod(typeof(ViviRacePatch), nameof(InteractionWorker_RomanceAttempt_RandomSelectionWeight_Prefix)));
-
-            // 로맨스 불가 - 성공률 0
-            harmony.Patch(
-                original: AccessTools.Method(typeof(InteractionWorker_RomanceAttempt), nameof(InteractionWorker_RomanceAttempt.SuccessChance)),
-                prefix: new HarmonyMethod(typeof(ViviRacePatch), nameof(InteractionWorker_RomanceAttempt_SuccessChance_Prefix)));
-
-            // 정착지 변경
-            harmony.Patch(
-                original: AccessTools.PropertyGetter(typeof(Settlement), nameof(Settlement.MapGeneratorDef)),
-                postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(Settlement_MapGeneratorDef_getter_Postfix)));
 
             // 말벌 MentalState 고정
             harmony.Patch(
@@ -155,36 +133,6 @@ namespace VVRace.HarmonyPatches
             if (!__result && me.IsVivi() && other.IsVivi())
             {
                 __result = me.GetMother() != null && other.GetMother() != null && me.GetMother() == other.GetMother();
-            }
-        }
-
-        private static bool InteractionWorker_RomanceAttempt_RandomSelectionWeight_Prefix(Pawn initiator, ref float __result)
-        {
-            if (initiator.IsVivi())
-            {
-                __result = 0f;
-                return false;
-            }
-
-            return true;
-        }
-
-        private static bool InteractionWorker_RomanceAttempt_SuccessChance_Prefix(Pawn initiator, Pawn recipient, ref float __result)
-        {
-            if (recipient.IsVivi())
-            {
-                __result = 0f;
-                return false;
-            }
-
-            return true;
-        }
-
-        private static void Settlement_MapGeneratorDef_getter_Postfix(ref MapGeneratorDef __result, Settlement __instance)
-        {
-            if (!__instance.Faction.IsPlayer && __instance.Faction.def.allowedCultures.Contains(VVCultureDefOf.VV_ViviCulture))
-            {
-                __result = VVMapGeneratorDefOf.VV_Base_ViviFaction;
             }
         }
 

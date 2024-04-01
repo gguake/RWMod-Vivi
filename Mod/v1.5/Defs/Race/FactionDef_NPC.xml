@@ -152,5 +152,11 @@
     
     <dropPodActive>VV_ActiveSkyweedBox</dropPodActive>
     <dropPodIncoming>VV_SkyweedBoxIncoming</dropPodIncoming>
+
+    <modExtensions>
+      <li Class="RPEF.FactionSettlementHook">
+        <mapGeneratorDef>VV_Base_ViviFaction</mapGeneratorDef>
+      </li>
+    </modExtensions>
   </FactionDef>
 </Defs>
