@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 using Verse;
 
 namespace VVRace
 {
+    [StaticConstructorOnStartup]
     public class Building_ArcanePlantFarm : Building, IThingHolder, INotifyHauledTo
     {
         public GrowArcanePlantBill Bill => _bill;
@@ -60,6 +62,8 @@ namespace VVRace
             base.DeSpawn(mode);
         }
 
+        private static readonly Texture2D StartCommandTex = ContentFinder<Texture2D>.Get("UI/Commands/VV_Germinate");
+        private static readonly Texture2D CancelCommandTex = ContentFinder<Texture2D>.Get("UI/Designators/Cancel");
         public override IEnumerable<Gizmo> GetGizmos()
         {
             foreach (var gizmo in base.GetGizmos())
@@ -70,8 +74,9 @@ namespace VVRace
             if (_bill == null)
             {
                 var commandNewBill = new Command_Action();
-                commandNewBill.defaultLabel = LocalizeTexts.CommandNewGrowArcanePlantBill;
-                commandNewBill.defaultDesc = LocalizeTexts.CommandNewGrowArcanePlantBillDesc;
+                commandNewBill.defaultLabel = LocalizeTexts.CommandNewGrowArcanePlantBill.Translate();
+                commandNewBill.defaultDesc = LocalizeTexts.CommandNewGrowArcanePlantBillDesc.Translate();
+                commandNewBill.icon = StartCommandTex;
                 commandNewBill.action = () =>
                 {
                     Find.WindowStack.Add(new Dialog_StartGrowingArcanePlant(
@@ -87,13 +92,14 @@ namespace VVRace
             else
             {
                 var commandCancelBill = new Command_Action();
-                commandCancelBill.defaultLabel = LocalizeTexts.CommandCancelGrowArcanePlantBill;
-                commandCancelBill.defaultDesc = LocalizeTexts.CommandCancelGrowArcanePlantBillDesc;
+                commandCancelBill.defaultLabel = LocalizeTexts.CommandCancelGrowArcanePlantBill.Translate();
+                commandCancelBill.defaultDesc = LocalizeTexts.CommandCancelGrowArcanePlantBillDesc.Translate();
+                commandCancelBill.icon = CancelCommandTex;
                 commandCancelBill.action = () =>
                 {
                     if (_bill.IsStarted)
                     {
-
+                        _bill = null;
                     }
                     else
                     {
@@ -166,6 +172,7 @@ namespace VVRace
         {
             if (_bill != null && !_bill.IsStarted && !RequiredIngredients.Any())
             {
+                _innerContainer.ClearAndDestroyContents();
                 _bill.Start();
             }
         }

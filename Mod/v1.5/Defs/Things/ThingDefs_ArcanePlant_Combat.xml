@@ -18,7 +18,7 @@
     <drawerType>MapMeshAndRealTime</drawerType>
 
     <statBases>
-      <MarketValue>180</MarketValue>
+      <MarketValue>240</MarketValue>
       <MaxHitPoints>180</MaxHitPoints>
     </statBases>
 
@@ -208,7 +208,7 @@
     <drawerType>MapMeshAndRealTime</drawerType>
 
     <statBases>
-      <MarketValue>450</MarketValue>
+      <MarketValue>240</MarketValue>
       <MaxHitPoints>220</MaxHitPoints>
     </statBases>
 
@@ -403,8 +403,10 @@
     </graphicData>
     <drawerType>MapMeshAndRealTime</drawerType>
 
+    <uiIconOffset>(0,0.16)</uiIconOffset>
+
     <statBases>
-      <MarketValue>450</MarketValue>
+      <MarketValue>320</MarketValue>
       <MaxHitPoints>160</MaxHitPoints>
     </statBases>
 

@@ -6,7 +6,7 @@
 <ViviFactionGreetingWary>{0}는 윙윙거리며 당신을 기다리고 있습니다.</ViviFactionGreetingWary>
 <ViviFactionGreetingWarm>{0}는 반가운듯 윙윙거리며 {NEGOTIATOR_labelShort}에게 인사합니다.</ViviFactionGreetingWarm>
 
-<VV_DialogGrowArcanePlantTitleChooseOption>재배할 식물 선택</VV_DialogGrowArcanePlantTitleChooseOption>
+<VV_DialogGrowArcanePlantTitleChooseOption>재배할 마법 식물 선택</VV_DialogGrowArcanePlantTitleChooseOption>
 <VV_DialogGrowArcanePlantTitleSelected>{0} 재배</VV_DialogGrowArcanePlantTitleSelected>
 
 <VV_DialogGrowArcanePlantTotalGrowDays>총 성장 기간: {0}일</VV_DialogGrowArcanePlantTotalGrowDays>
@@ -19,24 +19,30 @@
 \n생명력이 낮으면 재배에 실패할 확률이 높아지며 생명력이 0이되면 재배가 남은 재배 기간과 상관없이 실패하고 작업이 취소됩니다.</VV_DialogGrowArcanePlantTotalHealthDesc>
 
 <VV_DialogGrowArcanePlantTotalMana>마나: {0}</VV_DialogGrowArcanePlantTotalMana>
-<VV_DialogGrowArcanePlantTotalManaDesc>마법 식물은 마나를 성장을 위한 양분으로 삼으며 정기적인 비료 공급이 필요합니다. 마나는 시간에 따라 감소하며 마나 보유량이 높은 식물은 비료 공급없이 더 오랫동안 버틸 수 있습니다.
+<VV_DialogGrowArcanePlantTotalManaDesc>마법 식물은 마나를 성장을 위한 양분으로 삼으며 정기적인 마나 비료 공급이 필요합니다.
+\n마나는 시간에 따라 감소하며 마나 보유량이 높은 식물은 비료 공급없이 더 오랫동안 버틸 수 있습니다.
 \n마나가 너무 부족할 경우 생명력이 나빠지고 비료를 공급해주지 않으면 결국 죽습니다.</VV_DialogGrowArcanePlantTotalManaDesc>
 
 <VV_DialogGrowArcanePlantManaSensitivity>마나 민감도: {0}</VV_DialogGrowArcanePlantManaSensitivity>
-<VV_DialogGrowArcanePlantManaSensitivityDesc>마나가 낮은 상태일때 마법 식물의 생명력이 얼마나 빠르게 줄어드는지 나타냅니다. 민감도가 높을수록 생명력에 더 치명적인 영향을 줍니다.</VV_DialogGrowArcanePlantManaSensitivityDesc>
+<VV_DialogGrowArcanePlantManaSensitivityDesc>마나가 낮은 상태일때 마법 식물의 생명력이 얼마나 빠르게 줄어드는지 나타냅니다.
+\n민감도가 높을수록 생명력에 더 치명적인 영향을 줍니다.</VV_DialogGrowArcanePlantManaSensitivityDesc>
 
 <VV_DialogGrowArcanePlantOptimalTemperature>요구 온도: {0}</VV_DialogGrowArcanePlantOptimalTemperature>
 <VV_DialogGrowArcanePlantTemperatureSensitivity>온도 민감도: {0}</VV_DialogGrowArcanePlantTemperatureSensitivity>
-<VV_DialogGrowArcanePlantTemperatureSensitivityDesc>일부 식물은 적절한 온도가 필요하며 요구 온도가 만족되지 않은 상태로 시간이 지날경우 생명력이 나빠집니다. 민감도가 높을수록 생명력에 더 치명적인 영향을 줍니다.</VV_DialogGrowArcanePlantTemperatureSensitivityDesc>
+<VV_DialogGrowArcanePlantTemperatureSensitivityDesc>일부 식물은 적절한 온도가 필요하며 요구 온도가 만족되지 않은 상태로 시간이 지날경우 생명력이 나빠집니다.
+\n민감도가 높을수록 생명력에 더 치명적인 영향을 줍니다.</VV_DialogGrowArcanePlantTemperatureSensitivityDesc>
 
 <VV_DialogGrowArcanePlantOptimalGlow>요구 광원: {0}</VV_DialogGrowArcanePlantOptimalGlow>
 <VV_DialogGrowArcanePlantGlowSensitivity>광원 민감도: {0}</VV_DialogGrowArcanePlantGlowSensitivity>
-<VV_DialogGrowArcanePlantGlowSensitivityDesc>일부 식물은 적절한 광원이 필요하며 요구 광원이 만족되지 않은 상태로 시간이 지날경우 생명력이 나빠집니다. 민감도가 높을수록 생명력에 더 치명적인 영향을 줍니다.</VV_DialogGrowArcanePlantGlowSensitivityDesc>
+<VV_DialogGrowArcanePlantGlowSensitivityDesc>일부 식물은 적절한 광원이 필요하며 요구 광원이 만족되지 않은 상태로 시간이 지날경우 생명력이 나빠집니다.
+\n민감도가 높을수록 생명력에 더 치명적인 영향을 줍니다.</VV_DialogGrowArcanePlantGlowSensitivityDesc>
 
 <VV_DialogGrowArcanePlantManageInterval>관리 작업 주기: {0}</VV_DialogGrowArcanePlantManageInterval>
-<VV_DialogGrowArcanePlantManageIntervalDesc>일부 마법 식물은 재배 시작 이후 일정 주기마다 관리 작업이 필요합니다. 원예 작업이 가능한 정착민이 필요하며 원예 기술이 높을수록 빠르게 작업합니다. 관리 작업이 늦어지면 마법 식물의 생명력이 감소합니다.</VV_DialogGrowArcanePlantManageIntervalDesc>
+<VV_DialogGrowArcanePlantManageIntervalDesc>일부 마법 식물은 재배 시작 이후 일정 주기마다 관리 작업이 필요하며 작업을 하지 않으면 생명력이 악화됩니다.
+\n원예 작업이 가능한 정착민이 필요하며 원예 기술이 높을수록 빠르게 작업합니다.</VV_DialogGrowArcanePlantManageIntervalDesc>
 <VV_DialogGrowArcanePlantManageSensitivity>관리 민감도: {0}</VV_DialogGrowArcanePlantManageSensitivity>
-<VV_DialogGrowArcanePlantManageSensitivityDesc>관리 작업을 하지 않고 시간이 지날경우 마법 식물의 생명력에 얼마나 빠르게 악영향을 주는지 나타냅니다. 민감도가 높을수록 생명력에 더 치명적인 영향을 줍니다.</VV_DialogGrowArcanePlantManageSensitivityDesc>
+<VV_DialogGrowArcanePlantManageSensitivityDesc>관리 작업을 하지 않고 시간이 지날경우 마법 식물의 생명력에 얼마나 빠르게 악영향을 주는지 나타냅니다.
+\n민감도가 높을수록 생명력에 더 치명적인 영향을 줍니다.</VV_DialogGrowArcanePlantManageSensitivityDesc>
 
 <VV_PlantSensitivity_None>무감각</VV_PlantSensitivity_None>
 <VV_PlantSensitivity_Low>낮음</VV_PlantSensitivity_Low>

@@ -52,6 +52,7 @@ namespace VVRace
                     hatchery.Spawned &&
                     hatchery.ViviEgg == null &&
                     hatchery.CanHatchNow &&
+                    hatchery.Faction == pawn.Faction &&
                     !hatchery.IsForbidden(pawn) &&
                     !hatchery.IsBurning() &&
                     pawn.Map.designationManager.DesignationOn(hatchery, DesignationDefOf.Deconstruct) == null &&

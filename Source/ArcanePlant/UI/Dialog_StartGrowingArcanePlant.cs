@@ -1,5 +1,4 @@
-﻿using LudeonTK;
-using RimWorld;
+﻿using RimWorld;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -77,27 +76,40 @@ namespace VVRace
                 }
             }
 
-            var leftAreaRect = baseRect.NewCol(Mathf.Max(4f, InitialSize.x - OptionWidth - 10f), HorizontalJustification.Left);
+            var leftAreaRect = new RectDivider(baseRect.NewCol(Mathf.Max(4f, InitialSize.x - OptionWidth - 10f), HorizontalJustification.Left), 874987234, new Vector2(10f, 5f));
             {
                 try
                 {
-                    Text.Font = GameFont.Medium;
-                    Text.Anchor = TextAnchor.UpperLeft;
                     var titleRect = leftAreaRect.NewRow(40f);
-                    if (_currentSelected == null)
+                    try
                     {
-                        Widgets.Label(titleRect, LocalizeTexts.DialogGrowArcanePlantTitleChooseOption.Translate());
+                        Text.Font = GameFont.Medium;
+                        Text.Anchor = TextAnchor.MiddleLeft;
+                        if (_currentSelected == null)
+                        {
+                            Widgets.Label(titleRect, LocalizeTexts.DialogGrowArcanePlantTitleChooseOption.Translate());
+                        }
+                        else
+                        {
+                            var thingIconSectionRect = titleRect.NewCol(40f, HorizontalJustification.Left);
+                            var thingIconRect = new Rect(0f, 0f, 40f, 40f);
+                            thingIconRect.center = thingIconSectionRect.Rect.center;
+                            Widgets.DefIcon(thingIconRect, _currentSelected);
+    
+                            var infoIconSectionRect = titleRect.NewCol(30f, HorizontalJustification.Right);
+                            var infoIconRect = new Rect(0f, 0f, 24f, 24f);
+                            infoIconRect.center = infoIconSectionRect.Rect.center;
+                            Widgets.InfoCardButton(infoIconRect, _currentSelected);
+
+                            Widgets.Label(titleRect, LocalizeTexts.DialogGrowArcanePlantTitleSelected.Translate(_currentSelected.LabelCap));
+                        }
                     }
-                    else
+                    finally
                     {
-                        var iconSectionRect = titleRect.NewCol(40f, HorizontalJustification.Right);
-                        var iconRect = new Rect(0f, 0f, 24f, 24f);
-                        iconRect.center = iconSectionRect.Rect.center;
-                        Widgets.InfoCardButton(iconRect, _currentSelected);
-                        Widgets.Label(titleRect, LocalizeTexts.DialogGrowArcanePlantTitleSelected.Translate(_currentSelected.LabelCap));
+                        Text.Anchor = TextAnchor.UpperLeft;
+                        Text.Font = GameFont.Small;
                     }
 
-                    Text.Font = GameFont.Small;
                     if (_currentSelected != null)
                     {
                         var descRect = new RectDivider(leftAreaRect, 86837113, new Vector2(0f, 4f));

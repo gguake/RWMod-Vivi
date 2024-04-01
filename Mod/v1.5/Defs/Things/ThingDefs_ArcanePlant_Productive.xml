@@ -304,7 +304,7 @@
     </graphicData>
 
     <statBases>
-      <MarketValue>450</MarketValue>
+      <MarketValue>240</MarketValue>
       <MaxHitPoints>80</MaxHitPoints>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
@@ -466,7 +466,7 @@
     </graphicData>
 
     <statBases>
-      <MarketValue>180</MarketValue>
+      <MarketValue>240</MarketValue>
       <MaxHitPoints>70</MaxHitPoints>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
@@ -609,10 +609,11 @@
       <texPath>Things/Plants/VV_Waterdrops</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
+    <uiIconOffset>(0,0.12)</uiIconOffset>
 
     <terrainAffordanceNeeded>VV_WaterOrLight</terrainAffordanceNeeded>
     <statBases>
-      <MarketValue>450</MarketValue>
+      <MarketValue>320</MarketValue>
       <MaxHitPoints>40</MaxHitPoints>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
@@ -754,7 +755,7 @@
     </graphicData>
 
     <statBases>
-      <MarketValue>450</MarketValue>
+      <MarketValue>320</MarketValue>
       <MaxHitPoints>70</MaxHitPoints>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
@@ -900,7 +901,7 @@
     </graphicData>
 
     <statBases>
-      <MarketValue>450</MarketValue>
+      <MarketValue>180</MarketValue>
       <MaxHitPoints>120</MaxHitPoints>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
@@ -1044,7 +1045,7 @@
     </graphicData>
 
     <statBases>
-      <MarketValue>180</MarketValue>
+      <MarketValue>320</MarketValue>
       <MaxHitPoints>90</MaxHitPoints>
       <Beauty>15</Beauty>
       <BeautyOutdoors>15</BeautyOutdoors>
@@ -1212,7 +1213,7 @@
     </graphicData>
 
     <statBases>
-      <MarketValue>450</MarketValue>
+      <MarketValue>180</MarketValue>
       <MaxHitPoints>60</MaxHitPoints>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>

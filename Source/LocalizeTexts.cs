@@ -47,7 +47,7 @@
         public const string CommandActivateShield = "VV_CommandActivateShield";
         public const string CommandActivateShieldDesc = "VV_CommandActivateShieldDesc";
         public const string CommandActivateShieldAlreadyActivated = "VV_CommandActivateShieldAlreadyActivated";
-        public const string CommandActivateShieldNotEnoughenrgy = "VV_CommandActivateShieldNotEnoughenrgy";
+        public const string CommandActivateShieldNotEnoughEnergy = "VV_CommandActivateShieldNotEnoughEnergy";
 
         public const string CommandNewGrowArcanePlantBill = "VV_CommandNewGrowArcanePlantBill";
         public const string CommandNewGrowArcanePlantBillDesc = "VV_CommandNewGrowArcanePlantBillDesc";

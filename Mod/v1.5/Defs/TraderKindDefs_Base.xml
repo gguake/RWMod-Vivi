@@ -48,7 +48,7 @@
       
       <li Class="StockGenerator_SingleDef">
         <thingDef>Neutroamine</thingDef>
-        <countRange>20~100</countRange>
+        <countRange>20~50</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_RawHoney</thingDef>
@@ -56,15 +56,15 @@
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_FilteredHoney</thingDef>
-        <countRange>500~900</countRange>
+        <countRange>400~800</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_RoyalJelly</thingDef>
-        <countRange>20~50</countRange>
+        <countRange>30~80</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_HoneyPollenCake</thingDef>
-        <countRange>40~100</countRange>
+        <countRange>100~200</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_Viviwax</thingDef>
@@ -76,19 +76,23 @@
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_UnknownSeed</thingDef>
-        <countRange>20~60</countRange>
+        <countRange>50~100</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_Fertilizer</thingDef>
-        <countRange>300~1000</countRange>
+        <countRange>200~600</countRange>
       </li>
       <li Class="StockGenerator_Tag">
         <tradeTag>VV_Petal</tradeTag>
         <thingDefCountRange>0~3</thingDefCountRange>
-        <countRange>10~100</countRange>
+        <countRange>50~150</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_ViviEgg</thingDef>
+        <countRange>0~2</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>VV_TitanicHornetWing</thingDef>
         <countRange>0~2</countRange>
       </li>
       
@@ -96,7 +100,7 @@
       <li Class="StockGenerator_Tag">
         <tradeTag>VV_FloweringTea</tradeTag>
         <thingDefCountRange>1~3</thingDefCountRange>
-        <countRange>30~100</countRange>
+        <countRange>50~100</countRange>
       </li>
       
       <!-- Techprints -->
@@ -117,18 +121,18 @@
       <li Class="StockGenerator_MarketValue">
         <tradeTag>WeaponRanged</tradeTag>
         <maxTechLevelGenerate>Medieval</maxTechLevelGenerate>
-        <countRange>1~2</countRange>
+        <countRange>0~4</countRange>
       </li>
       <li Class="StockGenerator_Category">
         <categoryDef>WeaponsMelee</categoryDef>
         <maxTechLevelGenerate>Medieval</maxTechLevelGenerate>
-        <thingDefCountRange>1~2</thingDefCountRange>
-        <countRange>1~2</countRange>
+        <thingDefCountRange>1~3</thingDefCountRange>
+        <countRange>0~2</countRange>
       </li>
       <li Class="StockGenerator_MarketValue">
         <tradeTag>VV_ViviTool</tradeTag>
         <maxTechLevelGenerate>Medieval</maxTechLevelGenerate>
-        <countRange>0~8</countRange>
+        <countRange>0~2</countRange>
       </li>
       <li Class="StockGenerator_MarketValue">
         <tradeTag>VV_ViviExotic</tradeTag>
@@ -140,7 +144,7 @@
       <li Class="StockGenerator_MarketValue">
         <tradeTag>VV_ViviApparel</tradeTag>
         <maxTechLevelGenerate>Medieval</maxTechLevelGenerate>
-        <countRange>4~10</countRange>
+        <countRange>2~6</countRange>
       </li>
       
       <!-- Implants -->
@@ -149,8 +153,8 @@
       <!-- Buildings -->
       <li Class="StockGenerator_Tag">
         <tradeTag>VV_ArcanePlant</tradeTag>
-        <thingDefCountRange>1~4</thingDefCountRange>
-        <countRange>1~6</countRange>
+        <thingDefCountRange>1~9</thingDefCountRange>
+        <countRange>1~10</countRange>
       </li>
 
       <!-- Exotic -->

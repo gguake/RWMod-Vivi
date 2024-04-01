@@ -62,7 +62,7 @@ namespace VVRace
             if (plant == null || plant.Mana < Props.requiredMinimumManaForActivate)
             {
                 commandActivateShield.Disabled = true;
-                commandActivateShield.disabledReason = LocalizeTexts.CommandActivateShieldNotEnoughenrgy.Translate(Props.requiredMinimumManaForActivate);
+                commandActivateShield.disabledReason = LocalizeTexts.CommandActivateShieldNotEnoughEnergy.Translate(Props.requiredMinimumManaForActivate);
             }
 
             yield return commandActivateShield;

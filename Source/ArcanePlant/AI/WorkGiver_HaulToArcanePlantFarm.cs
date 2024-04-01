@@ -17,7 +17,7 @@ namespace VVRace
         {
             if (!(t is Building_ArcanePlantFarm arcanePlantFarm)) { return false; }
 
-            if (t.IsForbidden(pawn) || !pawn.CanReserve(t, ignoreOtherReservations: forced) || t.IsBurning())
+            if (t.IsForbidden(pawn) || !pawn.CanReserve(t, ignoreOtherReservations: forced) || t.IsBurning() || pawn.Faction != t.Faction)
             {
                 return false;
             }
