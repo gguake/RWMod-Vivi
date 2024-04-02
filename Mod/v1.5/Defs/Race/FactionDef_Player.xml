@@ -87,6 +87,12 @@
     </startingResearchTags>
     
     <leaderTitle>representative</leaderTitle>
+
+    <modExtensions>
+      <li Class="RPEF.FactionContinuePawnKindHook">
+        <continueMemberKindOverride>VV_PlayerRefugeeVivi</continueMemberKindOverride>
+      </li>
+    </modExtensions>
   </FactionDef>
 
   <FactionDef ParentName="PlayerViviFactionBase">
