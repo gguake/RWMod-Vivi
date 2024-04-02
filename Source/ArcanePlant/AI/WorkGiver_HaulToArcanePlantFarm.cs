@@ -27,14 +27,15 @@ namespace VVRace
                 return false;
             }
 
-            if (arcanePlantFarm.Bill == null || arcanePlantFarm.Bill.IsStarted) { return false; }
+            if (arcanePlantFarm.Bill == null || arcanePlantFarm.Bill.Stage == GrowingArcanePlantBillStage.Complete) { return false; }
 
             try
             {
-                foreach (var tdc in arcanePlantFarm.RequiredIngredients)
+                foreach (var tdc in arcanePlantFarm.RequiredThings)
                 {
                     _tmpRequiredIngredients.Add(tdc.ThingDef, tdc.Count);
                 }
+                if (_tmpRequiredIngredients.Count == 0) { return false; }
 
                 var tc = FindIngredients(pawn, arcanePlantFarm);
                 if (tc.Thing == null)
@@ -53,16 +54,15 @@ namespace VVRace
 
         public override Job JobOnThing(Pawn pawn, Thing t, bool forced = false)
         {
-            if (!(t is Building_ArcanePlantFarm arcanePlantFarm)) { return null; }
+            if (!(t is Building_ArcanePlantFarm arcanePlantFarm) || arcanePlantFarm.Bill == null || arcanePlantFarm.Bill.Stage == GrowingArcanePlantBillStage.Complete) { return null; }
 
-            if (arcanePlantFarm.Bill == null || arcanePlantFarm.Bill.IsStarted) { return null; }
-            
             try
             {
-                foreach (var tdc in arcanePlantFarm.RequiredIngredients)
+                foreach (var tdc in arcanePlantFarm.RequiredThings)
                 {
                     _tmpRequiredIngredients.Add(tdc.ThingDef, tdc.Count);
                 }
+                if (_tmpRequiredIngredients.Count == 0) { return null; }
 
                 var tc = FindIngredients(pawn, arcanePlantFarm);
                 if (tc.Thing != null)

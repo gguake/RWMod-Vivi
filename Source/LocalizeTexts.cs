@@ -67,6 +67,7 @@
 
         public const string ITab_GatherWorkerTable_TabLabel = "VV_ITab_GatherWorkerTable_TabLabel";
         public const string ITab_GatherWorkerTable_GatherRadiusSlider = "VV_ITab_GatherWorkerTable_GatherRadiusSlider";
+        public const string ITab_ArcanePlantFarmBill_TabLabel = "VV_ITab_ArcanePlantFarmBill_TabLabel";
 
         public const string RewardAncientWorldtreeLocationLabel = "VV_RewardAncientWorldtreeLocationLabel";
         public const string RewardAncientWorldtreeLocation = "VV_RewardAncientWorldtreeLocation";

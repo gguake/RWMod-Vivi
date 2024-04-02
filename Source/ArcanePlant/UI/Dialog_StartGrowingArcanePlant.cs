@@ -12,7 +12,7 @@ namespace VVRace
         public override Vector2 InitialSize => new Vector2(Mathf.Min(650f, UI.screenWidth), 700f);
 
         private Building_ArcanePlantFarm _billGiver;
-        private Action<GrowArcanePlantBill> _callback;
+        private Action<GrowingArcanePlantBill> _callback;
 
         private List<ThingDef> _plantCandidates;
         private Vector2 _scrollPosition;
@@ -24,7 +24,7 @@ namespace VVRace
 
         public Dialog_StartGrowingArcanePlant(
             Building_ArcanePlantFarm billGiver, 
-            Action<GrowArcanePlantBill> callback)
+            Action<GrowingArcanePlantBill> callback)
         {
             forcePause = true;
             closeOnAccept = false;
@@ -62,7 +62,7 @@ namespace VVRace
 
                     if (Widgets.ButtonText(acceptButtonRect, "Accept".Translate()))
                     {
-                        _callback(new GrowArcanePlantBill(_billGiver, _currentSelected));
+                        _callback(new GrowingArcanePlantBill(_billGiver, _currentSelected));
                         Close();
                     }
                 }

@@ -6,7 +6,14 @@ using Verse;
 
 namespace VVRace
 {
-    public class GrowArcanePlantBill : IExposable
+    public enum GrowingArcanePlantBillStage
+    {
+        Gathering,
+        Growing,
+        Complete,
+    }
+
+    public class GrowingArcanePlantBill : IExposable
     {
         public GrowArcanePlantData Data
         {
@@ -14,13 +21,25 @@ namespace VVRace
             {
                 if (_data == null)
                 {
-                    _data = _targetDef.GetModExtension<GrowArcanePlantData>();
+                    _data = _recipeTargetDef.GetModExtension<GrowArcanePlantData>();
                 }
                 return _data;
             }
         }
         [Unsaved]
         private GrowArcanePlantData _data;
+
+        public ThingDef RecipeTarget => _recipeTargetDef;
+        public GrowingArcanePlantBillStage Stage
+        {
+            get
+            {
+                if (_billStartTicks < 0) { return GrowingArcanePlantBillStage.Gathering; }
+                else if (GenTicks.TicksGame - _billStartTicks > TotalGrowTicks) { return GrowingArcanePlantBillStage.Complete; }
+
+                return GrowingArcanePlantBillStage.Growing;
+            }
+        }
 
         public int TotalGrowTicks => (int)(Data.totalGrowDays * 60000) + 1;
 
@@ -41,6 +60,10 @@ namespace VVRace
             set
             {
                 _mana = Mathf.Clamp(value, 0f, Data.maxMana);
+                if (_badManaStartTicks >= 0)
+                {
+                    _badManaStartTicks = -1;
+                }
             }
         }
 
@@ -58,32 +81,22 @@ namespace VVRace
         }
         private Dictionary<ThingDef, int> _ingredients;
 
-        public bool IsStarted => _billStartTicks >= 0;
-
-        public bool IsCompleted
-        {
-            get
-            {
-                if (_billStartTicks < 0) { return false; }
-                return GenTicks.TicksGame - _billStartTicks > TotalGrowTicks;
-            }
-        }
-
         public IntRange ExpectedAmount
         {
             get
             {
                 var data = Data;
-                var expected = data.baseAmount + (data.healthBonusAmountCurve?.Evaluate(HealthPct) ?? 0f) + _cleanlinessBonus;
-                var expectedInt = (int)expected;
 
-                return new IntRange(expectedInt, expectedInt + (expected - expectedInt) > 0.0001f ? 1 : 0);
+                var cleanliness = Cleanliness;
+                var minimum = data.baseAmount + (data.healthBonusAmountCurve?.Evaluate(0f) ?? 0f) + (data.cleanlinessBonusAmountCurve?.MinY ?? 0f);
+                var maximum = data.baseAmount + (data.healthBonusAmountCurve?.Evaluate(Health) ?? 0f) + (cleanliness != null ? (data.cleanlinessBonusAmountCurve?.Evaluate(cleanliness.Value) ?? 0f) : 0f);
+
+                return new IntRange((int)minimum, (int)maximum);
             }
         }
-        public float Amount => IsCompleted ? ExpectedAmount.RandomInRange : 0;
 
         private Building_ArcanePlantFarm _billOwner;
-        private ThingDef _targetDef;
+        private ThingDef _recipeTargetDef;
 
         private float _health;
         private float _mana;
@@ -103,17 +116,30 @@ namespace VVRace
 
         public bool ManagementRequired => GenTicks.TicksGame - _lastManagementTicks >= Data.manageIntervalTicks;
 
-        public bool IsLowMana => Mana < Data.requiredMinMana;
+        public float? Cleanliness
+        {
+            get
+            {
+                var room = _billOwner.GetRoom();
+                if (room != null && room.Role != null && room.Role != RoomRoleDefOf.None && !room.PsychologicallyOutdoors)
+                {
+                    var cleanliness = room.GetStat(RoomStatDefOf.Cleanliness);
+                    return cleanliness;
+                }
 
-        public GrowArcanePlantBill(Building_ArcanePlantFarm billOwner)
+                return null;
+            }
+        }
+
+        public GrowingArcanePlantBill(Building_ArcanePlantFarm billOwner)
         {
             _billOwner = billOwner;
         }
 
-        public GrowArcanePlantBill(Building_ArcanePlantFarm billOwner, ThingDef target)
+        public GrowingArcanePlantBill(Building_ArcanePlantFarm billOwner, ThingDef target)
         {
             _billOwner = billOwner;
-            _targetDef = target;
+            _recipeTargetDef = target;
 
             _health = Data.maxHealth;
             _mana = 0f;
@@ -122,7 +148,7 @@ namespace VVRace
 
         public void ExposeData()
         {
-            Scribe_Defs.Look(ref _targetDef, "targetDef");
+            Scribe_Defs.Look(ref _recipeTargetDef, "recipeTargetDef");
 
             Scribe_Values.Look(ref _health, "health");
             Scribe_Values.Look(ref _mana, "mana");
@@ -139,7 +165,7 @@ namespace VVRace
 
         public void Start()
         {
-            if (IsStarted) { return; }
+            if (Stage != GrowingArcanePlantBillStage.Gathering) { return; }
 
             _billStartTicks = GenTicks.TicksGame;
             _lastManagementTicks = GenTicks.TicksGame;
@@ -147,16 +173,6 @@ namespace VVRace
 
         public void Tick(int ticks)
         {
-            if (!IsStarted)
-            {
-                return;
-            }
-            else if (IsCompleted)
-            {
-                _billOwner.Notify_BillCompleted();
-                return;
-            }
-
             var data = Data;
             var room = _billOwner.GetRoom();
             if (room != null && room.Role != null && room.Role != RoomRoleDefOf.None && !room.PsychologicallyOutdoors)
@@ -174,6 +190,8 @@ namespace VVRace
                     _cleanlinessBonus += data.cleanlinessBonusAmountCurve.MinY * ticks / TotalGrowTicks;
                 }
             }
+
+            Mana -= data.consumedManaByDay * ticks / 60000f;
 
             var damaged = false;
             if (IsGoodTemperature)
@@ -248,7 +266,7 @@ namespace VVRace
                 }
             }
 
-            if (!IsLowMana)
+            if (Mana < Data.requiredMinMana)
             {
                 if (_badManaStartTicks >= 0)
                 {

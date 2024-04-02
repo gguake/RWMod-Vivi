@@ -10,7 +10,7 @@ namespace VVRace
     [StaticConstructorOnStartup]
     public class Building_ArcanePlantFarm : Building, IThingHolder, INotifyHauledTo
     {
-        public GrowArcanePlantBill Bill => _bill;
+        public GrowingArcanePlantBill Bill => _bill;
 
         public float FarmTemperature => AmbientTemperature;
 
@@ -23,25 +23,41 @@ namespace VVRace
             }
         }
 
-        public IEnumerable<ThingDefCount> RequiredIngredients
+        public IEnumerable<ThingDefCount> RequiredThings
         {
             get
             {
-                if (_bill == null || _bill.IsStarted) { yield break; }
+                if (_bill == null) { yield break; }
 
-                foreach (var kv in _bill.Ingredients)
+                switch (_bill.Stage)
                 {
-                    var requiredCount = kv.Value - _innerContainer.TotalStackCountOfDef(kv.Key);
-                    if (requiredCount > 0)
-                    {
-                        yield return new ThingDefCount(kv.Key, requiredCount);
-                    }
+                    case GrowingArcanePlantBillStage.Gathering:
+                        foreach (var kv in _bill.Ingredients)
+                        {
+                            var requiredCount = kv.Value - _innerContainer.TotalStackCountOfDef(kv.Key);
+                            if (requiredCount > 0)
+                            {
+                                yield return new ThingDefCount(kv.Key, requiredCount);
+                            }
+                        }
+                        yield break;
+
+                    case GrowingArcanePlantBillStage.Growing:
+                        if (_bill.ManaPct <= _manaRefillPct)
+                        {
+                            var requiredFertilizerCount = Mathf.FloorToInt((_bill.Data.maxMana - _bill.Mana) / ArcanePlant.ManaByFertilizer);
+                            if (requiredFertilizerCount <= 0) { yield break; }
+
+                            yield return new ThingDefCount(VVThingDefOf.VV_Fertilizer, requiredFertilizerCount);
+                        }
+                        yield break;
                 }
             }
         }
 
-        private GrowArcanePlantBill _bill;
-        public ThingOwner _innerContainer;
+        private GrowingArcanePlantBill _bill;
+        private ThingOwner _innerContainer;
+        private float _manaRefillPct;
 
         public Building_ArcanePlantFarm()
         {
@@ -54,6 +70,7 @@ namespace VVRace
 
             Scribe_Deep.Look(ref _bill, "bill", this);
             Scribe_Deep.Look(ref _innerContainer, "innerContainer", this);
+            Scribe_Values.Look(ref _manaRefillPct, "manaRefillPct");
         }
 
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
@@ -79,12 +96,7 @@ namespace VVRace
                 commandNewBill.icon = StartCommandTex;
                 commandNewBill.action = () =>
                 {
-                    Find.WindowStack.Add(new Dialog_StartGrowingArcanePlant(
-                        this, 
-                        (bill) =>
-                        {
-                            _bill = bill;
-                        }));
+                    Find.WindowStack.Add(new Dialog_StartGrowingArcanePlant(this, (bill) => _bill = bill));
                 };
 
                 yield return commandNewBill;
@@ -97,14 +109,16 @@ namespace VVRace
                 commandCancelBill.icon = CancelCommandTex;
                 commandCancelBill.action = () =>
                 {
-                    if (_bill.IsStarted)
+                    switch (_bill.Stage)
                     {
-                        _bill = null;
-                    }
-                    else
-                    {
-                        EjectContents();
-                        _bill = null;
+                        case GrowingArcanePlantBillStage.Gathering:
+                            EjectContents();
+                            _bill = null;
+                            break;
+
+                        case GrowingArcanePlantBillStage.Growing:
+                            _bill = null;
+                            break;
                     }
                 };
 
@@ -121,9 +135,9 @@ namespace VVRace
         {
             var sb = new StringBuilder(base.GetInspectString());
 
-            if (_bill != null && !_bill.IsStarted)
+            if (_bill?.Stage == GrowingArcanePlantBillStage.Gathering)
             {
-                var requiredIngredients = RequiredIngredients.ToDictionary(tdc => tdc.ThingDef, tdc => tdc.Count);
+                var requiredIngredients = RequiredThings.ToDictionary(tdc => tdc.ThingDef, tdc => tdc.Count);
                 foreach (var kv in _bill.Ingredients)
                 {
                     var holdings = kv.Value - (requiredIngredients.ContainsKey(kv.Key) ? requiredIngredients[kv.Key] : 0);
@@ -137,25 +151,68 @@ namespace VVRace
         public override void Tick()
         {
             base.Tick();
-
-            if (Spawned)
-                _bill?.Tick(1);
+            Tick(1);
         }
 
         public override void TickRare()
         {
             base.TickRare();
-
-            if (Spawned)
-                _bill?.Tick(GenTicks.TickRareInterval);
+            Tick(GenTicks.TickRareInterval);
         }
 
         public override void TickLong()
         {
             base.TickLong();
+            Tick(GenTicks.TickLongInterval);
+        }
 
-            if (Spawned)
-                _bill?.Tick(GenTicks.TickLongInterval);
+        private void Tick(int ticks)
+        {
+            if (Spawned && _bill != null)
+            {
+                switch (_bill.Stage)
+                {
+                    case GrowingArcanePlantBillStage.Growing:
+                        _bill.Tick(ticks);
+                        break;
+
+                    case GrowingArcanePlantBillStage.Complete:
+                        var successChance = _bill.Data.successChanceCurve.Evaluate(_bill.Health);
+                        if (Rand.ChanceSeeded(successChance, GenTicks.TicksGame))
+                        {
+                            var resultAmount = _bill.Data.baseAmount;
+                            if (_bill.Data.healthBonusAmountCurve != null)
+                            {
+                                resultAmount += _bill.Data.healthBonusAmountCurve.Evaluate(_bill.Health);
+                            }
+
+                            var cleanliness = _bill.Cleanliness;
+                            if (_bill.Data.cleanlinessBonusAmountCurve != null && cleanliness != null)
+                            {
+                                resultAmount += _bill.Data.cleanlinessBonusAmountCurve.Evaluate(cleanliness.Value);
+                            }
+
+                            var amount = (int)resultAmount + (Rand.ChanceSeeded(resultAmount - (int)resultAmount, GenTicks.TicksGame) ? 1 : 0);
+                            var thing = ThingMaker.MakeThing(_bill.RecipeTarget);
+                            thing.stackCount = amount;
+
+                            if (!GenPlace.TryPlaceThing(thing, Position, Map, ThingPlaceMode.Direct))
+                            {
+                                if (!GenPlace.TryPlaceThing(thing, Position, Map, ThingPlaceMode.Near))
+                                {
+                                    Log.Error($"failed to place arcane plant from farm");
+                                }
+                            }
+
+                            _bill = null;
+                        }
+                        else
+                        {
+                            // TODO: FAIL
+                        }
+                        break;
+                }
+            }
         }
 
         public void GetChildHolders(List<IThingHolder> outChildren)
@@ -170,10 +227,43 @@ namespace VVRace
 
         public void Notify_HauledTo(Pawn hauler, Thing thing, int count)
         {
-            if (_bill != null && !_bill.IsStarted && !RequiredIngredients.Any())
+            if (_bill == null)
             {
-                _innerContainer.ClearAndDestroyContents();
-                _bill.Start();
+                DropAll();
+                return;
+            }
+
+            switch (_bill.Stage)
+            {
+                case GrowingArcanePlantBillStage.Gathering:
+                    if (!RequiredThings.Any())
+                    {
+                        _innerContainer.ClearAndDestroyContents();
+                        _bill.Start();
+                    }
+                    break;
+
+                case GrowingArcanePlantBillStage.Growing:
+                    if (thing.def == VVThingDefOf.VV_Fertilizer)
+                    {
+                        _innerContainer.ClearAndDestroyContents();
+                        _bill.Mana += ArcanePlant.ManaByFertilizer * count;
+                        break;
+                    }
+                    else
+                    {
+                        DropAll();
+                    }
+                    break;
+
+                case GrowingArcanePlantBillStage.Complete:
+                    DropAll();
+                    break;
+            }
+
+            void DropAll()
+            {
+                _innerContainer.TryDropAll(Position, Map, ThingPlaceMode.Near);
             }
         }
 
