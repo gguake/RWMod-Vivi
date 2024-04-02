@@ -3,7 +3,7 @@ using Verse;
 
 namespace VVRace
 {
-    public enum GrowArcanePlantSensitivity
+    public enum GrowingArcanePlantSensitivity
     {
         None,
         Low,
@@ -11,41 +11,41 @@ namespace VVRace
         High
     }
 
-    public class GrowArcanePlantData : DefModExtension
+    public class GrowingArcanePlantData : DefModExtension
     {
-        public GrowArcanePlantSensitivity ManaSensitivity
+        public GrowingArcanePlantSensitivity ManaSensitivity
         {
             get
             {
-                if (badManaDamageByDayCurve == null) { return GrowArcanePlantSensitivity.None; }
-                return GrowArcanePlantSensitivity.High;
+                if (badManaDamageByDayCurve == null) { return GrowingArcanePlantSensitivity.None; }
+                return GrowingArcanePlantSensitivity.High;
             }
         }
 
-        public GrowArcanePlantSensitivity TemperatureSensitivity
+        public GrowingArcanePlantSensitivity TemperatureSensitivity
         {
             get
             {
-                if (badTemperatureDamageByDayCurve == null) { return GrowArcanePlantSensitivity.None; }
-                return GrowArcanePlantSensitivity.High;
+                if (badTemperatureDamageByDayCurve == null) { return GrowingArcanePlantSensitivity.None; }
+                return GrowingArcanePlantSensitivity.High;
             }
         }
 
-        public GrowArcanePlantSensitivity GlowSensitivity
+        public GrowingArcanePlantSensitivity GlowSensitivity
         {
             get
             {
-                if (badGlowDamageByDayCurve == null) { return GrowArcanePlantSensitivity.None; }
-                return GrowArcanePlantSensitivity.High;
+                if (badGlowDamageByDayCurve == null) { return GrowingArcanePlantSensitivity.None; }
+                return GrowingArcanePlantSensitivity.High;
             }
         }
 
-        public GrowArcanePlantSensitivity ManageSensitivity
+        public GrowingArcanePlantSensitivity ManageSensitivity
         {
             get
             {
-                if (badManageDamageByDayCurve == null) { return GrowArcanePlantSensitivity.None; }
-                return GrowArcanePlantSensitivity.High;
+                if (badManageDamageByDayCurve == null) { return GrowingArcanePlantSensitivity.None; }
+                return GrowingArcanePlantSensitivity.High;
             }
         }
 

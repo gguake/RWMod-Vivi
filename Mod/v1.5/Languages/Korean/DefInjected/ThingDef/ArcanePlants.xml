@@ -22,14 +22,15 @@
 
 <VV_Waterdrops.label>물방울꽃</VV_Waterdrops.label>
 <VV_Waterdrops.description>물방울같은 모양을 가진 마법 꽃으로 주변의 물을 흡수해 마나로 변환합니다. 물 위에도 심을 수 있으며 인접한 물 타일이 많을수록 더 많은 마나를 생산합니다.
-\n주변의 화재를 감지하면 저장된 마나를 소모해 화재를 진압합니다.</VV_Waterdrops.description>
+\n주변의 화재를 감지하면 저장된 마나를 소모해 화재를 진압하며 마법 식물 재배 작업대와 같은 방에 배치하면 재배중인 마법 식물의 마나 소모량을 줄입니다.</VV_Waterdrops.description>
 
 <VV_Radiantflower.label>빛바라기</VV_Radiantflower.label>
 <VV_Radiantflower.description>해바라기를 닮은 마법 꽃으로 태양광을 마나로 변환합니다. 지붕으로 막혀 태양광을 받을 수 없는 환경에서는 마나를 소모해 작물이 자랄수 있는 강한 빛을 주변에 발산합니다.</VV_Radiantflower.description>
 <VV_Radiantflower.comps.CompSchedule.offMessage>식물 휴식기에 꺼짐</VV_Radiantflower.comps.CompSchedule.offMessage>
 
 <VV_Richflower.label>풍년화</VV_Richflower.label>
-<VV_Richflower.description>커다란 꽃잎을 가진 마법꽃으로 꽃가루를 주변에 지속적으로 퍼뜨리고 인접 토양이 경작에 유리하도록 개간하며 인접한 식물의 숫자에 따라 마나를 생산합니다. 꿀을 채집할때 많은 꿀을 얻을 수 있습니다.</VV_Richflower.description>
+<VV_Richflower.description>커다란 꽃잎을 가진 마법꽃으로 꽃가루를 주변에 지속적으로 퍼뜨리며 꿀을 채집할때 많은 꿀을 얻을 수 있습니다.
+\n인접 토양이 경작에 유리하도록 지속적으로 개간하며 인접한 식물의 숫자에 따라 마나를 생산합니다.</VV_Richflower.description>
 
 <VV_Purifimint.label>정화민트</VV_Purifimint.label>
 <VV_Purifimint.description>주변에 빛을 내는 작은 마법 식물로 인접한 토양의 오염을 흡수해 마나로 변환하며 주변에 오염된 토양이 많을수록 많은 마나를 생산합니다. 미관상 아름다워 장식에 쓰이기도 합니다.
@@ -60,9 +61,8 @@
 <VV_Gun_Pealauncher.description>빠르게 콩을 생성해 적에게 발사하는 폭탄뿌리개의 꼬투리입니다.</VV_Gun_Pealauncher.description>
 
 <VV_Shootus.label>건인장</VV_Shootus.label>
-<VV_Shootus.description>기묘한 표정의 얼굴을 가진 마법 선인장입니다. 비교적 불에 잘 버티고 식물이라고 생각되지 않을 정도로 유연하게 움직입니다.
-\n한쪽 손에 원거리 무기를 장착할 수 있으며 적을 감지하면 장착된 무기를 사용해 자동으로 적을 공격합니다.
-\n근접 무기나 생체인증 무기는 착용할 수 없으며 사람이 다루는것보다는 다소 느립니다.</VV_Shootus.description>
+<VV_Shootus.description>기묘한 표정의 얼굴을 가진 마법 선인장입니다. 식물이라고 생각되지 않을 정도로 유연하게 움직이며 화재에도 비교적 잘 버팁니다.
+\n한쪽 손에 원거리 무기를 장착할 수 있으며 적을 감지하면 장착된 무기를 사용해 자동으로 적을 공격합니다. 근접 무기나 생체인증 무기는 착용할 수 없으며 사람이 다루는것보다는 재장전이 다소 느립니다.</VV_Shootus.description>
 
 <VV_Dreamum.label>꿈송이</VV_Dreamum.label>
 <VV_Dreamum.description>비비 둥지 근처에서만 발견되는 희귀한 마법 꽃입니다. 꽃 향기나 꽃가루를 맡으면 곧 잠에 빠지게 되어 꿈송이라는 이름으로 불리는데 많은 꽃가루를 지속적으로 주변에 퍼뜨리므로 꿈송이가 군집한 지역은 위험 지역으로 알려져 있습니다.

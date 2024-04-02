@@ -15,19 +15,19 @@ namespace VVRace
 
     public class GrowingArcanePlantBill : IExposable
     {
-        public GrowArcanePlantData Data
+        public GrowingArcanePlantData Data
         {
             get
             {
                 if (_data == null)
                 {
-                    _data = _recipeTargetDef.GetModExtension<GrowArcanePlantData>();
+                    _data = _recipeTargetDef.GetModExtension<GrowingArcanePlantData>();
                 }
                 return _data;
             }
         }
         [Unsaved]
-        private GrowArcanePlantData _data;
+        private GrowingArcanePlantData _data;
 
         public ThingDef RecipeTarget => _recipeTargetDef;
         public GrowingArcanePlantBillStage Stage
@@ -191,7 +191,14 @@ namespace VVRace
                 }
             }
 
-            Mana -= data.consumedManaByDay * ticks / 60000f;
+            var consumed = data.consumedManaByDay * ticks / 60000f;
+            var waterdropCount = room.ContainedThings(VVThingDefOf.VV_Waterdrops).Count(v => v.Spawned);
+            if (waterdropCount > 0)
+            {
+                consumed /= Mathf.Log10(10 + waterdropCount * 5);
+            }
+
+            Mana -= consumed;
 
             var damaged = false;
             if (IsGoodTemperature)

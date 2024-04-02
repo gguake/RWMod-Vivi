@@ -119,6 +119,7 @@
     </costList>
 
     <inspectorTabs>
+      <li>VVRace.ITab_ArcanePlantFarmBill</li>
     </inspectorTabs>
 
     <defaultPlacingRot>South</defaultPlacingRot>

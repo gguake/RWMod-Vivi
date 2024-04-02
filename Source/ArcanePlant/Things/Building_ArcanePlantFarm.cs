@@ -180,21 +180,21 @@ namespace VVRace
                         var successChance = _bill.Data.successChanceCurve.Evaluate(_bill.Health);
                         if (Rand.ChanceSeeded(successChance, GenTicks.TicksGame))
                         {
-                            var resultAmount = _bill.Data.baseAmount;
+                            var amount = _bill.Data.baseAmount;
                             if (_bill.Data.healthBonusAmountCurve != null)
                             {
-                                resultAmount += _bill.Data.healthBonusAmountCurve.Evaluate(_bill.Health);
+                                amount += _bill.Data.healthBonusAmountCurve.Evaluate(_bill.Health);
                             }
 
                             var cleanliness = _bill.Cleanliness;
                             if (_bill.Data.cleanlinessBonusAmountCurve != null && cleanliness != null)
                             {
-                                resultAmount += _bill.Data.cleanlinessBonusAmountCurve.Evaluate(cleanliness.Value);
+                                amount += _bill.Data.cleanlinessBonusAmountCurve.Evaluate(cleanliness.Value);
                             }
 
-                            var amount = (int)resultAmount + (Rand.ChanceSeeded(resultAmount - (int)resultAmount, GenTicks.TicksGame) ? 1 : 0);
+                            var amountInt = (int)amount + (Rand.ChanceSeeded(amount - (int)amount, GenTicks.TicksGame) ? 1 : 0);
                             var thing = ThingMaker.MakeThing(_bill.RecipeTarget);
-                            thing.stackCount = amount;
+                            thing.stackCount = amountInt;
 
                             if (!GenPlace.TryPlaceThing(thing, Position, Map, ThingPlaceMode.Direct))
                             {
@@ -204,11 +204,12 @@ namespace VVRace
                                 }
                             }
 
+                            Messages.Message(LocalizeString_Message.VV_MessageCompleteGrowingArcanePlant.Translate(_bill.RecipeTarget.LabelCap, amountInt), this, MessageTypeDefOf.PositiveEvent);
                             _bill = null;
                         }
                         else
                         {
-                            // TODO: FAIL
+                            Notify_BillFailed();
                         }
                         break;
                 }
@@ -267,13 +268,9 @@ namespace VVRace
             }
         }
 
-        public void Notify_BillCompleted()
-        {
-            _bill = null;
-        }
-
         public void Notify_BillFailed()
         {
+            Messages.Message(LocalizeString_Message.VV_MessageFailedGrowingArcanePlant.Translate(_bill.RecipeTarget.LabelCap), this, MessageTypeDefOf.NegativeEvent);
             _bill = null;
         }
 

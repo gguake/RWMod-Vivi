@@ -1,6 +1,7 @@
 ﻿using RimWorld;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Verse;
 using Verse.Sound;
@@ -26,10 +27,11 @@ namespace VVRace
             Building_ArcanePlantFarm billGiver, 
             Action<GrowingArcanePlantBill> callback)
         {
+            absorbInputAroundWindow = true;
+            preventSave = true;
             forcePause = true;
             closeOnAccept = false;
             doCloseX = true;
-            doCloseButton = false;
 
             _billGiver = billGiver;
             _callback = callback;
@@ -39,7 +41,7 @@ namespace VVRace
             {
                 if (!typeof(ArcanePlant).IsAssignableFrom(thingDef.thingClass)) { continue; }
 
-                var extension = thingDef.GetModExtension<GrowArcanePlantData>();
+                var extension = thingDef.GetModExtension<GrowingArcanePlantData>();
                 if (extension != null && thingDef.IsResearchFinished)
                 {
                     _plantCandidates.Add(thingDef);
@@ -51,11 +53,12 @@ namespace VVRace
         public override void DoWindowContents(Rect inRect)
         {
             var baseRect = new RectDivider(inRect.ContractedBy(10f), 57348572, new Vector2(10f, 0f));
-            var bottomAreaRect = baseRect.NewRow(60f, VerticalJustification.Bottom);
+
+            var buttonAreaRect = baseRect.NewRow(40f, VerticalJustification.Bottom);
             {
                 if (_currentSelected != null)
                 {
-                    var half = bottomAreaRect.NewCol(bottomAreaRect.Rect.width / 2f, HorizontalJustification.Left, marginOverride: 0f);
+                    var half = buttonAreaRect.NewCol(buttonAreaRect.Rect.width / 2f, HorizontalJustification.Left, marginOverride: 0f);
                     var acceptButtonRect = new Rect(0f, 0f, 120f, 40f);
                     acceptButtonRect.center = half.Rect.center;
                     acceptButtonRect.y += 10f;
@@ -68,13 +71,80 @@ namespace VVRace
                 }
 
                 var closeButtonRect = new Rect(0f, 0f, 120f, 40f);
-                closeButtonRect.center = bottomAreaRect.Rect.center;
+                closeButtonRect.center = buttonAreaRect.Rect.center;
                 closeButtonRect.y += 10f;
                 if (Widgets.ButtonText(closeButtonRect, CloseButtonText))
                 {
                     Close();
                 }
             }
+
+            var ingredientAreaRect = baseRect.NewRow(40f, VerticalJustification.Bottom);
+            {
+                var lineRect = ingredientAreaRect.NewRow(4f);
+                {
+                    GUI.BeginGroup(lineRect);
+                    GUI.color = Widgets.SeparatorLineColor;
+                    Widgets.DrawLineHorizontal(0f, 0f, lineRect.Rect.width);
+                    GUI.EndGroup();
+                }
+
+                var ingredientSectionRect = new RectDivider(ingredientAreaRect, 1244848, new Vector2(4f, 0f));
+                if (_currentSelected != null)
+                {
+                    var growData = _currentSelected.GetModExtension<GrowingArcanePlantData>();
+                    if (growData != null && growData.ingredients != null)
+                    {
+                        var ingredients = growData.ingredients.ToList();
+                        foreach (var ingredient in ingredients)
+                        {
+                            var label = ingredient.LabelCap;
+
+                            var width = 44f + Text.CalcSize(label).x;
+                            var rect = ingredientSectionRect.NewCol(width);
+                            if (Mouse.IsOver(rect))
+                            {
+                                Widgets.DrawHighlight(rect);
+                                TooltipHandler.TipRegion(rect, ingredient.thingDef.DescriptionDetailed + "\n\n" + "ClickForMoreInfo".Translate().Colorize(ColoredText.SubtleGrayColor));
+                            }
+
+                            try
+                            {
+                                Text.Anchor = TextAnchor.MiddleLeft;
+                                Widgets.DefIcon(rect.NewCol(rect.Rect.height), ingredient.thingDef);
+                                Widgets.Label(rect, label);
+                            }
+                            finally
+                            {
+                                Text.Anchor = TextAnchor.UpperLeft;
+                            }
+
+                            if (Widgets.ButtonInvisible(rect))
+                            {
+                                Find.WindowStack.Add(new Dialog_InfoCard(ingredient.thingDef));
+                            }
+                        }
+                    }
+                }
+            }
+
+            var ingredientLabelRect = baseRect.NewRow(20f, VerticalJustification.Bottom);
+            {
+                try
+                {
+                    GUI.color = Widgets.SeparatorLabelColor;
+                    var rect = ingredientLabelRect.Rect;
+                    Text.Anchor = TextAnchor.MiddleLeft;
+                    Widgets.Label(rect, LocalizeString_Dialog.VV_DialogStartGrowingArcanePlantIngredientLabel.Translate());
+                }
+                finally
+                {
+                    GUI.color = Color.white;
+                    Text.Anchor = TextAnchor.UpperLeft;
+                }
+            }
+
+            baseRect.NewRow(8f, VerticalJustification.Bottom);
 
             var leftAreaRect = new RectDivider(baseRect.NewCol(Mathf.Max(4f, InitialSize.x - OptionWidth - 10f), HorizontalJustification.Left), 874987234, new Vector2(10f, 5f));
             {
@@ -112,8 +182,8 @@ namespace VVRace
 
                     if (_currentSelected != null)
                     {
-                        var descRect = new RectDivider(leftAreaRect, 86837113, new Vector2(0f, 4f));
-                        var growData = _currentSelected.GetModExtension<GrowArcanePlantData>();
+                        var descRect = new RectDivider(leftAreaRect, 86837113, new Vector2(0f, 2f));
+                        var growData = _currentSelected.GetModExtension<GrowingArcanePlantData>();
                         if (growData != null)
                         {
                             var width = descRect.Rect.width;
@@ -138,10 +208,10 @@ namespace VVRace
 
                             LabelText(
                                 ref descRect,
-                                LocalizeTexts.DialogGrowArcanePlantTotalMana.Translate(growData.maxMana),
+                                LocalizeTexts.DialogGrowArcanePlantTotalMana.Translate(growData.maxMana, growData.consumedManaByDay.ToString("0.#")),
                                 LocalizeTexts.DialogGrowArcanePlantTotalManaDesc.Translate());
 
-                            if (growData.ManaSensitivity > GrowArcanePlantSensitivity.None)
+                            if (growData.ManaSensitivity > GrowingArcanePlantSensitivity.None)
                             {
                                 LabelText(
                                     ref descRect,
@@ -149,7 +219,7 @@ namespace VVRace
                                     LocalizeTexts.DialogGrowArcanePlantManaSensitivityDesc.Translate());
                             }
 
-                            if (growData.ManageSensitivity > GrowArcanePlantSensitivity.None)
+                            if (growData.ManageSensitivity > GrowingArcanePlantSensitivity.None)
                             {
                                 DrawLine(ref descRect);
 
@@ -165,7 +235,7 @@ namespace VVRace
                             }
 
 
-                            if (growData.TemperatureSensitivity > GrowArcanePlantSensitivity.None)
+                            if (growData.TemperatureSensitivity > GrowingArcanePlantSensitivity.None)
                             {
                                 DrawLine(ref descRect);
 
@@ -179,7 +249,7 @@ namespace VVRace
                                     LocalizeTexts.DialogGrowArcanePlantTemperatureSensitivityDesc.Translate());
                             }
 
-                            if (growData.GlowSensitivity > GrowArcanePlantSensitivity.None)
+                            if (growData.GlowSensitivity > GrowingArcanePlantSensitivity.None)
                             {
                                 DrawLine(ref descRect);
 
@@ -214,6 +284,12 @@ namespace VVRace
                             {
                                 var height = Text.CalcHeight(text, width);
                                 var rect = divider.NewRow(height);
+
+                                if (tooltip != null && Mouse.IsOver(rect))
+                                {
+                                    Widgets.DrawHighlight(rect);
+                                }
+
                                 Widgets.Label(rect, text);
 
                                 if (tooltip != null)

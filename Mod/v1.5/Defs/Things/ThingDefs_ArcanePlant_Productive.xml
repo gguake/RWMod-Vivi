@@ -53,7 +53,7 @@
         <zeroManaDamageByChance>1~3</zeroManaDamageByChance>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>10</mana>
+          <mana>15</mana>
         </manaConsumeRule>
         <manaGenerateRule Class="VVRace.ManaFluxRule_Temperature">
           <activeTemperatureRange>32~120</activeTemperatureRange>
@@ -71,19 +71,26 @@
         </passedBulletOverrides>
       </li>
 
-      <li Class="VVRace.GrowArcanePlantData">
+      <li Class="VVRace.GrowingArcanePlantData">
         <ingredients>
           <VV_UnknownSeed>1</VV_UnknownSeed>
           <VV_Fertilizer>20</VV_Fertilizer>
-          <VV_Pollen>80</VV_Pollen>
-          <VV_Vivicream>30</VV_Vivicream>
+          <VV_Pollen>50</VV_Pollen>
         </ingredients>
 
-        <totalGrowDays>5</totalGrowDays>
-        <maxHealth>150</maxHealth>
+        <totalGrowDays>7.5</totalGrowDays>
+        <maxHealth>200</maxHealth>
+        <healthRegenNoDamagedByDays>50</healthRegenNoDamagedByDays>
+
         <maxMana>150</maxMana>
-        <healthRegenNoDamagedByDays>15</healthRegenNoDamagedByDays>
         <consumedManaByDay>50</consumedManaByDay>
+        <requiredMinMana>50</requiredMinMana>
+        <badManaThresholdDay>0.5</badManaThresholdDay>
+        <badManaDamageByDayCurve>
+          <points>
+            <li>(0,50)</li>
+          </points>
+        </badManaDamageByDayCurve>
 
         <successChanceCurve>
           <points>
@@ -113,8 +120,8 @@
           </points>
         </cleanlinessBonusAmountCurve>
 
-        <optimalTemperatureRange>-8~72</optimalTemperatureRange>
-        <badTemperatureThresholdDay>0.3</badTemperatureThresholdDay>
+        <optimalTemperatureRange>12~120</optimalTemperatureRange>
+        <badTemperatureThresholdDay>0.5</badTemperatureThresholdDay>
         <badTemperatureDamageByDayCurve>
           <points>
             <li>(0,10)</li>
@@ -125,8 +132,8 @@
           </points>
         </badTemperatureDamageByDayCurve>
 
-        <manageIntervalTicks>45000</manageIntervalTicks>
-        <badManageThresholdDay>1.5</badManageThresholdDay>
+        <manageIntervalTicks>90000</manageIntervalTicks>
+        <badManageThresholdDay>1.0</badManageThresholdDay>
         <badManageDamageByDayCurve>
           <points>
             <li>(0,5)</li>
@@ -134,14 +141,6 @@
             <li>(2,25)</li>
           </points>
         </badManageDamageByDayCurve>
-
-        <requiredMinMana>25</requiredMinMana>
-        <badManaThresholdDay>0.5</badManaThresholdDay>
-        <badManaDamageByDayCurve>
-          <points>
-            <li>(0,30)</li>
-          </points>
-        </badManaDamageByDayCurve>
       </li>
     </modExtensions>
   </ThingDef>
@@ -194,7 +193,7 @@
         <zeroManaDamageByChance>1~3</zeroManaDamageByChance>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>10</mana>
+          <mana>15</mana>
         </manaConsumeRule>
         <manaGenerateRule Class="VVRace.ManaFluxRule_Temperature">
           <activeTemperatureRange>-100~-12</activeTemperatureRange>
@@ -212,19 +211,26 @@
         </passedBulletOverrides>
       </li>
 
-      <li Class="VVRace.GrowArcanePlantData">
+      <li Class="VVRace.GrowingArcanePlantData">
         <ingredients>
           <VV_UnknownSeed>1</VV_UnknownSeed>
           <VV_Fertilizer>20</VV_Fertilizer>
-          <VV_Pollen>80</VV_Pollen>
-          <VV_Vivicream>30</VV_Vivicream>
+          <VV_Pollen>50</VV_Pollen>
         </ingredients>
 
-        <totalGrowDays>5</totalGrowDays>
-        <maxHealth>150</maxHealth>
+        <totalGrowDays>7.5</totalGrowDays>
+        <maxHealth>200</maxHealth>
+        <healthRegenNoDamagedByDays>50</healthRegenNoDamagedByDays>
+
         <maxMana>150</maxMana>
-        <healthRegenNoDamagedByDays>15</healthRegenNoDamagedByDays>
         <consumedManaByDay>50</consumedManaByDay>
+        <requiredMinMana>50</requiredMinMana>
+        <badManaThresholdDay>0.5</badManaThresholdDay>
+        <badManaDamageByDayCurve>
+          <points>
+            <li>(0,30)</li>
+          </points>
+        </badManaDamageByDayCurve>
 
         <successChanceCurve>
           <points>
@@ -254,8 +260,8 @@
           </points>
         </cleanlinessBonusAmountCurve>
 
-        <optimalTemperatureRange>-8~72</optimalTemperatureRange>
-        <badTemperatureThresholdDay>0.3</badTemperatureThresholdDay>
+        <optimalTemperatureRange>-100~12</optimalTemperatureRange>
+        <badTemperatureThresholdDay>0.5</badTemperatureThresholdDay>
         <badTemperatureDamageByDayCurve>
           <points>
             <li>(0,10)</li>
@@ -266,7 +272,7 @@
           </points>
         </badTemperatureDamageByDayCurve>
 
-        <manageIntervalTicks>45000</manageIntervalTicks>
+        <manageIntervalTicks>90000</manageIntervalTicks>
         <badManageThresholdDay>1.5</badManageThresholdDay>
         <badManageDamageByDayCurve>
           <points>
@@ -275,14 +281,6 @@
             <li>(2,25)</li>
           </points>
         </badManageDamageByDayCurve>
-
-        <requiredMinMana>25</requiredMinMana>
-        <badManaThresholdDay>0.5</badManaThresholdDay>
-        <badManaDamageByDayCurve>
-          <points>
-            <li>(0,30)</li>
-          </points>
-        </badManaDamageByDayCurve>
       </li>
     </modExtensions>
   </ThingDef>
@@ -375,19 +373,26 @@
         </passedBulletOverrides>
       </li>
 
-      <li Class="VVRace.GrowArcanePlantData">
+      <li Class="VVRace.GrowingArcanePlantData">
         <ingredients>
           <VV_UnknownSeed>1</VV_UnknownSeed>
-          <VV_Fertilizer>20</VV_Fertilizer>
-          <VV_Pollen>80</VV_Pollen>
-          <VV_Vivicream>30</VV_Vivicream>
+          <Silver>120</Silver>
+          <VV_Pollen>50</VV_Pollen>
         </ingredients>
 
-        <totalGrowDays>5</totalGrowDays>
-        <maxHealth>150</maxHealth>
-        <maxMana>150</maxMana>
-        <healthRegenNoDamagedByDays>15</healthRegenNoDamagedByDays>
-        <consumedManaByDay>50</consumedManaByDay>
+        <totalGrowDays>10</totalGrowDays>
+        <maxHealth>120</maxHealth>
+        <healthRegenNoDamagedByDays>40</healthRegenNoDamagedByDays>
+
+        <maxMana>200</maxMana>
+        <consumedManaByDay>150</consumedManaByDay>
+        <requiredMinMana>50</requiredMinMana>
+        <badManaThresholdDay>0.5</badManaThresholdDay>
+        <badManaDamageByDayCurve>
+          <points>
+            <li>(0,30)</li>
+          </points>
+        </badManaDamageByDayCurve>
 
         <successChanceCurve>
           <points>
@@ -417,9 +422,9 @@
           </points>
         </cleanlinessBonusAmountCurve>
 
-        <optimalTemperatureRange>-8~72</optimalTemperatureRange>
-        <badTemperatureThresholdDay>0.3</badTemperatureThresholdDay>
-        <badTemperatureDamageByDayCurve>
+        <optimalGlowRange>0.51~1.0</optimalGlowRange>
+        <badGlowThresholdDay>0.3</badGlowThresholdDay>
+        <badGlowDamageByDayCurve>
           <points>
             <li>(0,10)</li>
             <li>(0.5,20)</li>
@@ -427,9 +432,9 @@
             <li>(2,80)</li>
             <li>(3,160)</li>
           </points>
-        </badTemperatureDamageByDayCurve>
+        </badGlowDamageByDayCurve>
 
-        <manageIntervalTicks>45000</manageIntervalTicks>
+        <manageIntervalTicks>150000</manageIntervalTicks>
         <badManageThresholdDay>1.5</badManageThresholdDay>
         <badManageDamageByDayCurve>
           <points>
@@ -438,14 +443,6 @@
             <li>(2,25)</li>
           </points>
         </badManageDamageByDayCurve>
-
-        <requiredMinMana>25</requiredMinMana>
-        <badManaThresholdDay>0.5</badManaThresholdDay>
-        <badManaDamageByDayCurve>
-          <points>
-            <li>(0,30)</li>
-          </points>
-        </badManaDamageByDayCurve>
       </li>
     </modExtensions>
   </ThingDef>
@@ -521,19 +518,26 @@
         </passedBulletOverrides>
       </li>
 
-      <li Class="VVRace.GrowArcanePlantData">
+      <li Class="VVRace.GrowingArcanePlantData">
         <ingredients>
           <VV_UnknownSeed>1</VV_UnknownSeed>
-          <VV_Fertilizer>20</VV_Fertilizer>
-          <VV_Pollen>80</VV_Pollen>
-          <VV_Vivicream>30</VV_Vivicream>
+          <Gold>10</Gold>
+          <VV_Pollen>50</VV_Pollen>
         </ingredients>
 
-        <totalGrowDays>5</totalGrowDays>
-        <maxHealth>150</maxHealth>
-        <maxMana>150</maxMana>
-        <healthRegenNoDamagedByDays>15</healthRegenNoDamagedByDays>
-        <consumedManaByDay>50</consumedManaByDay>
+        <totalGrowDays>10</totalGrowDays>
+        <maxHealth>120</maxHealth>
+        <healthRegenNoDamagedByDays>40</healthRegenNoDamagedByDays>
+
+        <maxMana>400</maxMana>
+        <consumedManaByDay>80</consumedManaByDay>
+        <requiredMinMana>40</requiredMinMana>
+        <badManaThresholdDay>0.5</badManaThresholdDay>
+        <badManaDamageByDayCurve>
+          <points>
+            <li>(0,30)</li>
+          </points>
+        </badManaDamageByDayCurve>
 
         <successChanceCurve>
           <points>
@@ -563,9 +567,9 @@
           </points>
         </cleanlinessBonusAmountCurve>
 
-        <optimalTemperatureRange>-8~72</optimalTemperatureRange>
-        <badTemperatureThresholdDay>0.3</badTemperatureThresholdDay>
-        <badTemperatureDamageByDayCurve>
+        <optimalGlowRange>0.51~1.0</optimalGlowRange>
+        <badGlowThresholdDay>0.3</badGlowThresholdDay>
+        <badGlowDamageByDayCurve>
           <points>
             <li>(0,10)</li>
             <li>(0.5,20)</li>
@@ -573,7 +577,7 @@
             <li>(2,80)</li>
             <li>(3,160)</li>
           </points>
-        </badTemperatureDamageByDayCurve>
+        </badGlowDamageByDayCurve>
 
         <manageIntervalTicks>45000</manageIntervalTicks>
         <badManageThresholdDay>1.5</badManageThresholdDay>
@@ -584,14 +588,6 @@
             <li>(2,25)</li>
           </points>
         </badManageDamageByDayCurve>
-
-        <requiredMinMana>25</requiredMinMana>
-        <badManaThresholdDay>0.5</badManaThresholdDay>
-        <badManaDamageByDayCurve>
-          <points>
-            <li>(0,30)</li>
-          </points>
-        </badManaDamageByDayCurve>
       </li>
     </modExtensions>
   </ThingDef>
@@ -662,19 +658,26 @@
         </manaGenerateRule>
       </li>
 
-      <li Class="VVRace.GrowArcanePlantData">
+      <li Class="VVRace.GrowingArcanePlantData">
         <ingredients>
           <VV_UnknownSeed>1</VV_UnknownSeed>
-          <VV_Fertilizer>20</VV_Fertilizer>
-          <VV_Pollen>80</VV_Pollen>
-          <VV_Vivicream>30</VV_Vivicream>
+          <VV_Vivicream>100</VV_Vivicream>
+          <VV_Pollen>50</VV_Pollen>
         </ingredients>
 
-        <totalGrowDays>5</totalGrowDays>
-        <maxHealth>150</maxHealth>
-        <maxMana>150</maxMana>
-        <healthRegenNoDamagedByDays>15</healthRegenNoDamagedByDays>
-        <consumedManaByDay>50</consumedManaByDay>
+        <totalGrowDays>15</totalGrowDays>
+        <maxHealth>300</maxHealth>
+        <healthRegenNoDamagedByDays>30</healthRegenNoDamagedByDays>
+
+        <maxMana>300</maxMana>
+        <consumedManaByDay>60</consumedManaByDay>
+        <requiredMinMana>60</requiredMinMana>
+        <badManaThresholdDay>0.5</badManaThresholdDay>
+        <badManaDamageByDayCurve>
+          <points>
+            <li>(0,30)</li>
+          </points>
+        </badManaDamageByDayCurve>
 
         <successChanceCurve>
           <points>
@@ -704,8 +707,8 @@
           </points>
         </cleanlinessBonusAmountCurve>
 
-        <optimalTemperatureRange>-8~72</optimalTemperatureRange>
-        <badTemperatureThresholdDay>0.3</badTemperatureThresholdDay>
+        <optimalTemperatureRange>16~21</optimalTemperatureRange>
+        <badTemperatureThresholdDay>0.5</badTemperatureThresholdDay>
         <badTemperatureDamageByDayCurve>
           <points>
             <li>(0,10)</li>
@@ -716,7 +719,7 @@
           </points>
         </badTemperatureDamageByDayCurve>
 
-        <manageIntervalTicks>45000</manageIntervalTicks>
+        <manageIntervalTicks>210000</manageIntervalTicks>
         <badManageThresholdDay>1.5</badManageThresholdDay>
         <badManageDamageByDayCurve>
           <points>
@@ -725,14 +728,6 @@
             <li>(2,25)</li>
           </points>
         </badManageDamageByDayCurve>
-
-        <requiredMinMana>25</requiredMinMana>
-        <badManaThresholdDay>0.5</badManaThresholdDay>
-        <badManaDamageByDayCurve>
-          <points>
-            <li>(0,30)</li>
-          </points>
-        </badManaDamageByDayCurve>
       </li>
     </modExtensions>
   </ThingDef>
@@ -792,13 +787,13 @@
 
     <modExtensions>
       <li Class="VVRace.ArcanePlantExtension">
-        <manaCapacity>400</manaCapacity>
-        <zeroManaDamageByChance>1~3</zeroManaDamageByChance>
+        <manaCapacity>240</manaCapacity>
+        <zeroManaDamageByChance>2~5</zeroManaDamageByChance>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_CompositeSum">
           <rules>
             <li Class="VVRace.ManaFluxRule_GlowerActive">
-              <mana>90</mana>
+              <mana>70</mana>
             </li>
             <li Class="VVRace.ManaFluxRule_Constant">
               <mana>10</mana>
@@ -810,19 +805,26 @@
         </manaGenerateRule>
       </li>
 
-      <li Class="VVRace.GrowArcanePlantData">
+      <li Class="VVRace.GrowingArcanePlantData">
         <ingredients>
           <VV_UnknownSeed>1</VV_UnknownSeed>
-          <VV_Fertilizer>20</VV_Fertilizer>
-          <VV_Pollen>80</VV_Pollen>
-          <VV_Vivicream>30</VV_Vivicream>
+          <Hay>120</Hay>
+          <VV_Pollen>50</VV_Pollen>
         </ingredients>
 
-        <totalGrowDays>5</totalGrowDays>
-        <maxHealth>150</maxHealth>
-        <maxMana>150</maxMana>
-        <healthRegenNoDamagedByDays>15</healthRegenNoDamagedByDays>
-        <consumedManaByDay>50</consumedManaByDay>
+        <totalGrowDays>15</totalGrowDays>
+        <maxHealth>300</maxHealth>
+        <healthRegenNoDamagedByDays>30</healthRegenNoDamagedByDays>
+
+        <maxMana>240</maxMana>
+        <consumedManaByDay>60</consumedManaByDay>
+        <requiredMinMana>30</requiredMinMana>
+        <badManaThresholdDay>0.5</badManaThresholdDay>
+        <badManaDamageByDayCurve>
+          <points>
+            <li>(0,30)</li>
+          </points>
+        </badManaDamageByDayCurve>
 
         <successChanceCurve>
           <points>
@@ -852,9 +854,9 @@
           </points>
         </cleanlinessBonusAmountCurve>
 
-        <optimalTemperatureRange>-8~72</optimalTemperatureRange>
-        <badTemperatureThresholdDay>0.3</badTemperatureThresholdDay>
-        <badTemperatureDamageByDayCurve>
+        <optimalGlowRange>0.7~1.0</optimalGlowRange>
+        <badGlowThresholdDay>0.3</badGlowThresholdDay>
+        <badGlowDamageByDayCurve>
           <points>
             <li>(0,10)</li>
             <li>(0.5,20)</li>
@@ -862,9 +864,9 @@
             <li>(2,80)</li>
             <li>(3,160)</li>
           </points>
-        </badTemperatureDamageByDayCurve>
+        </badGlowDamageByDayCurve>
 
-        <manageIntervalTicks>45000</manageIntervalTicks>
+        <manageIntervalTicks>210000</manageIntervalTicks>
         <badManageThresholdDay>1.5</badManageThresholdDay>
         <badManageDamageByDayCurve>
           <points>
@@ -873,14 +875,6 @@
             <li>(2,25)</li>
           </points>
         </badManageDamageByDayCurve>
-
-        <requiredMinMana>25</requiredMinMana>
-        <badManaThresholdDay>0.5</badManaThresholdDay>
-        <badManaDamageByDayCurve>
-          <points>
-            <li>(0,30)</li>
-          </points>
-        </badManaDamageByDayCurve>
       </li>
     </modExtensions>
   </ThingDef>
@@ -955,19 +949,26 @@
         </manaGenerateRule>
       </li>
 
-      <li Class="VVRace.GrowArcanePlantData">
+      <li Class="VVRace.GrowingArcanePlantData">
         <ingredients>
           <VV_UnknownSeed>1</VV_UnknownSeed>
           <VV_Fertilizer>20</VV_Fertilizer>
-          <VV_Pollen>80</VV_Pollen>
-          <VV_Vivicream>30</VV_Vivicream>
+          <VV_Pollen>50</VV_Pollen>
         </ingredients>
 
-        <totalGrowDays>5</totalGrowDays>
+        <totalGrowDays>10</totalGrowDays>
         <maxHealth>150</maxHealth>
-        <maxMana>150</maxMana>
-        <healthRegenNoDamagedByDays>15</healthRegenNoDamagedByDays>
+        <healthRegenNoDamagedByDays>30</healthRegenNoDamagedByDays>
+
+        <maxMana>400</maxMana>
         <consumedManaByDay>50</consumedManaByDay>
+        <requiredMinMana>50</requiredMinMana>
+        <badManaThresholdDay>0.5</badManaThresholdDay>
+        <badManaDamageByDayCurve>
+          <points>
+            <li>(0,30)</li>
+          </points>
+        </badManaDamageByDayCurve>
 
         <successChanceCurve>
           <points>
@@ -997,9 +998,9 @@
           </points>
         </cleanlinessBonusAmountCurve>
 
-        <optimalTemperatureRange>-8~72</optimalTemperatureRange>
-        <badTemperatureThresholdDay>0.3</badTemperatureThresholdDay>
-        <badTemperatureDamageByDayCurve>
+        <optimalGlowRange>0.5~1.0</optimalGlowRange>
+        <badGlowThresholdDay>0.3</badGlowThresholdDay>
+        <badGlowDamageByDayCurve>
           <points>
             <li>(0,10)</li>
             <li>(0.5,20)</li>
@@ -1007,9 +1008,9 @@
             <li>(2,80)</li>
             <li>(3,160)</li>
           </points>
-        </badTemperatureDamageByDayCurve>
+        </badGlowDamageByDayCurve>
 
-        <manageIntervalTicks>45000</manageIntervalTicks>
+        <manageIntervalTicks>150000</manageIntervalTicks>
         <badManageThresholdDay>1.5</badManageThresholdDay>
         <badManageDamageByDayCurve>
           <points>
@@ -1018,14 +1019,6 @@
             <li>(2,25)</li>
           </points>
         </badManageDamageByDayCurve>
-
-        <requiredMinMana>25</requiredMinMana>
-        <badManaThresholdDay>0.5</badManaThresholdDay>
-        <badManaDamageByDayCurve>
-          <points>
-            <li>(0,30)</li>
-          </points>
-        </badManaDamageByDayCurve>
       </li>
     </modExtensions>
   </ThingDef>
@@ -1083,11 +1076,11 @@
 
     <modExtensions>
       <li Class="VVRace.ArcanePlantExtension">
-        <manaCapacity>300</manaCapacity>
+        <manaCapacity>270</manaCapacity>
         <zeroManaDamageByChance>1~5</zeroManaDamageByChance>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>10</mana>
+          <mana>25</mana>
         </manaConsumeRule>
         <manaGenerateRule Class="VVRace.ManaFluxRule_AdjacentPollution">
           <manaFromOccupiedPollution>80</manaFromOccupiedPollution>
@@ -1095,19 +1088,26 @@
         </manaGenerateRule>
       </li>
 
-      <li Class="VVRace.GrowArcanePlantData">
+      <li Class="VVRace.GrowingArcanePlantData">
         <ingredients>
           <VV_UnknownSeed>1</VV_UnknownSeed>
-          <VV_Fertilizer>20</VV_Fertilizer>
-          <VV_Pollen>80</VV_Pollen>
-          <VV_Vivicream>30</VV_Vivicream>
+          <Neutroamine>15</Neutroamine>
+          <VV_Pollen>50</VV_Pollen>
         </ingredients>
 
-        <totalGrowDays>5</totalGrowDays>
-        <maxHealth>150</maxHealth>
-        <maxMana>150</maxMana>
-        <healthRegenNoDamagedByDays>15</healthRegenNoDamagedByDays>
-        <consumedManaByDay>50</consumedManaByDay>
+        <totalGrowDays>20</totalGrowDays>
+        <maxHealth>250</maxHealth>
+        <healthRegenNoDamagedByDays>25</healthRegenNoDamagedByDays>
+
+        <maxMana>270</maxMana>
+        <consumedManaByDay>40</consumedManaByDay>
+        <requiredMinMana>45</requiredMinMana>
+        <badManaThresholdDay>0.5</badManaThresholdDay>
+        <badManaDamageByDayCurve>
+          <points>
+            <li>(0,30)</li>
+          </points>
+        </badManaDamageByDayCurve>
 
         <successChanceCurve>
           <points>
@@ -1137,7 +1137,7 @@
           </points>
         </cleanlinessBonusAmountCurve>
 
-        <optimalTemperatureRange>-8~72</optimalTemperatureRange>
+        <optimalTemperatureRange>5~35</optimalTemperatureRange>
         <badTemperatureThresholdDay>0.3</badTemperatureThresholdDay>
         <badTemperatureDamageByDayCurve>
           <points>
@@ -1148,24 +1148,6 @@
             <li>(3,160)</li>
           </points>
         </badTemperatureDamageByDayCurve>
-
-        <manageIntervalTicks>45000</manageIntervalTicks>
-        <badManageThresholdDay>1.5</badManageThresholdDay>
-        <badManageDamageByDayCurve>
-          <points>
-            <li>(0,5)</li>
-            <li>(1,15)</li>
-            <li>(2,25)</li>
-          </points>
-        </badManageDamageByDayCurve>
-
-        <requiredMinMana>25</requiredMinMana>
-        <badManaThresholdDay>0.5</badManaThresholdDay>
-        <badManaDamageByDayCurve>
-          <points>
-            <li>(0,30)</li>
-          </points>
-        </badManaDamageByDayCurve>
       </li>
     </modExtensions>
   </ThingDef>
@@ -1239,39 +1221,46 @@
     <modExtensions>
       <li Class="VVRace.ArcanePlantExtension">
         <initialManaPercent>0.5</initialManaPercent>
-        <manaCapacity>120</manaCapacity>
+        <manaCapacity>100</manaCapacity>
         <zeroManaDamageByChance>1~3</zeroManaDamageByChance>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>20</mana>
+          <mana>5</mana>
         </manaConsumeRule>
         <manaGenerateRule Class="VVRace.ManaFluxRule_Wind">
           <manaFromWindSpeed>
             <points>
               <li>(0,0)</li>
               <li>(0.05,0)</li>
-              <li>(0.5,20)</li>
-              <li>(1.0,50)</li>
-              <li>(1.5,70)</li>
-              <li>(2.0,100)</li>
+              <li>(0.5,15)</li>
+              <li>(1.0,40)</li>
+              <li>(1.5,60)</li>
+              <li>(2.0,70)</li>
             </points>
           </manaFromWindSpeed>
         </manaGenerateRule>
       </li>
 
-      <li Class="VVRace.GrowArcanePlantData">
+      <li Class="VVRace.GrowingArcanePlantData">
         <ingredients>
           <VV_UnknownSeed>1</VV_UnknownSeed>
           <VV_Fertilizer>20</VV_Fertilizer>
-          <VV_Pollen>80</VV_Pollen>
-          <VV_Vivicream>30</VV_Vivicream>
+          <VV_Pollen>50</VV_Pollen>
         </ingredients>
 
         <totalGrowDays>5</totalGrowDays>
-        <maxHealth>150</maxHealth>
-        <maxMana>150</maxMana>
-        <healthRegenNoDamagedByDays>15</healthRegenNoDamagedByDays>
-        <consumedManaByDay>50</consumedManaByDay>
+        <maxHealth>50</maxHealth>
+        <healthRegenNoDamagedByDays>10</healthRegenNoDamagedByDays>
+
+        <maxMana>100</maxMana>
+        <consumedManaByDay>35</consumedManaByDay>
+        <requiredMinMana>30</requiredMinMana>
+        <badManaThresholdDay>0.5</badManaThresholdDay>
+        <badManaDamageByDayCurve>
+          <points>
+            <li>(0,30)</li>
+          </points>
+        </badManaDamageByDayCurve>
 
         <successChanceCurve>
           <points>
@@ -1301,20 +1290,8 @@
           </points>
         </cleanlinessBonusAmountCurve>
 
-        <optimalTemperatureRange>-8~72</optimalTemperatureRange>
-        <badTemperatureThresholdDay>0.3</badTemperatureThresholdDay>
-        <badTemperatureDamageByDayCurve>
-          <points>
-            <li>(0,10)</li>
-            <li>(0.5,20)</li>
-            <li>(1,40)</li>
-            <li>(2,80)</li>
-            <li>(3,160)</li>
-          </points>
-        </badTemperatureDamageByDayCurve>
-
         <manageIntervalTicks>45000</manageIntervalTicks>
-        <badManageThresholdDay>1.5</badManageThresholdDay>
+        <badManageThresholdDay>1.0</badManageThresholdDay>
         <badManageDamageByDayCurve>
           <points>
             <li>(0,5)</li>
@@ -1322,14 +1299,6 @@
             <li>(2,25)</li>
           </points>
         </badManageDamageByDayCurve>
-
-        <requiredMinMana>25</requiredMinMana>
-        <badManaThresholdDay>0.5</badManaThresholdDay>
-        <badManaDamageByDayCurve>
-          <points>
-            <li>(0,30)</li>
-          </points>
-        </badManaDamageByDayCurve>
       </li>
     </modExtensions>
   </ThingDef>

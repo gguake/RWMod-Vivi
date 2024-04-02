@@ -18,7 +18,7 @@
 <VV_DialogGrowArcanePlantTotalHealthDesc>마법 식물의 건강함을 나타냅니다. 생명력이 높은 식물은 악조건에 놓여도 쉽게 죽지않고 잘 버틸 수 있으며 모든 요구 조건이 만족되어있을때 천천히 회복됩니다.
 \n생명력이 낮으면 재배에 실패할 확률이 높아지며 생명력이 0이되면 재배가 남은 재배 기간과 상관없이 실패하고 작업이 취소됩니다.</VV_DialogGrowArcanePlantTotalHealthDesc>
 
-<VV_DialogGrowArcanePlantTotalMana>마나: {0}</VV_DialogGrowArcanePlantTotalMana>
+<VV_DialogGrowArcanePlantTotalMana>마나: {0} (-{1}/일)</VV_DialogGrowArcanePlantTotalMana>
 <VV_DialogGrowArcanePlantTotalManaDesc>마법 식물은 마나를 성장을 위한 양분으로 삼으며 정기적인 마나 비료 공급이 필요합니다.
 \n마나는 시간에 따라 감소하며 마나 보유량이 높은 식물은 비료 공급없이 더 오랫동안 버틸 수 있습니다.
 \n마나가 너무 부족할 경우 생명력이 나빠지고 비료를 공급해주지 않으면 결국 죽습니다.</VV_DialogGrowArcanePlantTotalManaDesc>
@@ -48,4 +48,6 @@
 <VV_PlantSensitivity_Low>낮음</VV_PlantSensitivity_Low>
 <VV_PlantSensitivity_Medium>보통</VV_PlantSensitivity_Medium>
 <VV_PlantSensitivity_High>높음</VV_PlantSensitivity_High>
+
+<VV_DialogStartGrowingArcanePlantIngredientLabel>재배 시작시 필요 재료</VV_DialogStartGrowingArcanePlantIngredientLabel>
 </LanguageData>

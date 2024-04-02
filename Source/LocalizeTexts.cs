@@ -101,5 +101,17 @@
         public const string DialogGrowArcanePlantManageIntervalDesc = "VV_DialogGrowArcanePlantManageIntervalDesc";
         public const string DialogGrowArcanePlantManageSensitivity = "VV_DialogGrowArcanePlantManageSensitivity";
         public const string DialogGrowArcanePlantManageSensitivityDesc = "VV_DialogGrowArcanePlantManageSensitivityDesc";
+
+    }
+
+    public static class LocalizeString_Message
+    {
+        public const string VV_MessageCompleteGrowingArcanePlant = nameof(VV_MessageCompleteGrowingArcanePlant);
+        public const string VV_MessageFailedGrowingArcanePlant = nameof(VV_MessageFailedGrowingArcanePlant);
+    }
+
+    public static class LocalizeString_Dialog
+    {
+        public const string VV_DialogStartGrowingArcanePlantIngredientLabel = nameof(VV_DialogStartGrowingArcanePlantIngredientLabel);
     }
 }
