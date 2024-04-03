@@ -126,6 +126,33 @@ namespace VVRace
                 };
 
                 yield return commandCancelBill;
+
+                if (_bill.Stage == GrowingArcanePlantBillStage.Growing && DebugSettings.godMode)
+                {
+                    var commandDecreaseLife = new Command_Action();
+                    commandDecreaseLife.defaultLabel = "Decrease Life -10%";
+                    commandDecreaseLife.action = () =>
+                    {
+                        _bill.Health -= _bill.Data.maxHealth * 0.1f;
+                    };
+                    yield return commandDecreaseLife;
+
+                    var commandDecreaseMana = new Command_Action();
+                    commandDecreaseMana.defaultLabel = "Decrease Mana -10%";
+                    commandDecreaseMana.action = () =>
+                    {
+                        _bill.Mana -= _bill.Data.maxMana * 0.1f;
+                    };
+                    yield return commandDecreaseMana;
+
+                    var commandMakeManageZero = new Command_Action();
+                    commandMakeManageZero.defaultLabel = "Make Management 0%";
+                    commandMakeManageZero.action = () =>
+                    {
+                        _bill.Manage(1);
+                    };
+                    yield return commandMakeManageZero;
+                }
             }
         }
 
@@ -177,6 +204,14 @@ namespace VVRace
             {
                 switch (_bill.Stage)
                 {
+                    case GrowingArcanePlantBillStage.Gathering:
+                        if (!RequiredThings.Any())
+                        {
+                            _innerContainer.ClearAndDestroyContents();
+                            _bill.Start();
+                        }
+                        break;
+
                     case GrowingArcanePlantBillStage.Growing:
                         _bill.Tick(ticks);
                         break;

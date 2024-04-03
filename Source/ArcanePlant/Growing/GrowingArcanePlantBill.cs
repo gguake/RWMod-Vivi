@@ -209,9 +209,9 @@ namespace VVRace
             }
         }
 
-        public void Manage()
+        public void Manage(int? forceTick = null)
         {
-            _lastManagementTicks = GenTicks.TicksGame;
+            _lastManagementTicks = forceTick == null ? GenTicks.TicksGame : forceTick.Value;
         }
 
         private void RefreshPlantNeeds(GrowingArcanePlantData data, int ticks)
