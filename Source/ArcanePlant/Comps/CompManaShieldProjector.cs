@@ -45,8 +45,8 @@ namespace VVRace
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
         {
             var commandActivateShield = new Command_Action();
-            commandActivateShield.defaultLabel = LocalizeTexts.CommandActivateShield.Translate();
-            commandActivateShield.defaultDesc = LocalizeTexts.CommandActivateShieldDesc.Translate();
+            commandActivateShield.defaultLabel = LocalizeString_Command.CommandActivateShield.Translate();
+            commandActivateShield.defaultDesc = LocalizeString_Command.CommandActivateShieldDesc.Translate();
             commandActivateShield.action = () =>
             {
                 DeployShield();
@@ -55,14 +55,14 @@ namespace VVRace
             if (Shield != null)
             {
                 commandActivateShield.Disabled = true;
-                commandActivateShield.disabledReason = LocalizeTexts.CommandActivateShieldAlreadyActivated.Translate();
+                commandActivateShield.disabledReason = LocalizeString_Command.CommandActivateShieldAlreadyActivated.Translate();
             }
 
             var plant = parent as ArcanePlant;
             if (plant == null || plant.Mana < Props.requiredMinimumManaForActivate)
             {
                 commandActivateShield.Disabled = true;
-                commandActivateShield.disabledReason = LocalizeTexts.CommandActivateShieldNotEnoughEnergy.Translate(Props.requiredMinimumManaForActivate);
+                commandActivateShield.disabledReason = LocalizeString_Command.CommandActivateShieldNotEnoughEnergy.Translate(Props.requiredMinimumManaForActivate);
             }
 
             yield return commandActivateShield;

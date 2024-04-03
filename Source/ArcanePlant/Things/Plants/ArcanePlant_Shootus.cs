@@ -108,7 +108,7 @@ namespace VVRace
             {
                 var gunDef = Gun.def;
                 var command_unequipWeapon = new Command_Action();
-                command_unequipWeapon.defaultLabel = LocalizeTexts.CommandUnequipWeapon.Translate();
+                command_unequipWeapon.defaultLabel = LocalizeString_Command.CommandUnequipWeapon.Translate();
                 command_unequipWeapon.defaultDesc = new StringBuilder().Append(Gun.LabelCap).Append(": ").Append(gunDef.description.CapitalizeFirst()).ToString();
                 command_unequipWeapon.icon = gunDef.uiIcon;
                 command_unequipWeapon.iconAngle = gunDef.uiIconAngle;
@@ -129,8 +129,8 @@ namespace VVRace
             {
                 Command_Action command_cancelReserve = new Command_Action();
                 command_cancelReserve.icon = CancelCommandTex;
-                command_cancelReserve.defaultLabel = LocalizeTexts.CommandCancelReserveWeapon.Translate();
-                command_cancelReserve.defaultDesc = LocalizeTexts.CommandCancelReserveWeaponDesc.Translate();
+                command_cancelReserve.defaultLabel = LocalizeString_Command.CommandCancelReserveWeapon.Translate();
+                command_cancelReserve.defaultDesc = LocalizeString_Command.CommandCancelReserveWeaponDesc.Translate();
                 command_cancelReserve.action = () =>
                 {
                     _reservedWeapon = null;
@@ -143,8 +143,8 @@ namespace VVRace
                 var command_equipWeapon = new Command_Action();
                 command_equipWeapon.icon = EquipCommandTex;
                 command_equipWeapon.iconDrawScale = 1.5f;
-                command_equipWeapon.defaultLabel = LocalizeTexts.CommandEquipWeapon.Translate();
-                command_equipWeapon.defaultDesc = LocalizeTexts.CommandEquipWeaponDesc.Translate();
+                command_equipWeapon.defaultLabel = LocalizeString_Command.CommandEquipWeapon.Translate();
+                command_equipWeapon.defaultDesc = LocalizeString_Command.CommandEquipWeaponDesc.Translate();
                 command_equipWeapon.action = () =>
                 {
                     Find.Targeter.BeginTargeting(new TargetingParameters()

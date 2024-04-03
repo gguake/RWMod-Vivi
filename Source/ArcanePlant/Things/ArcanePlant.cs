@@ -245,8 +245,8 @@ namespace VVRace
             if (Spawned && Faction != null && Faction.IsPlayer)
             {
                 var CommandFertilizeAutoActivated = new Command_Toggle();
-                CommandFertilizeAutoActivated.defaultLabel = LocalizeTexts.CommandFertilizeAutoActivated.Translate();
-                CommandFertilizeAutoActivated.defaultDesc = LocalizeTexts.CommandFertilizeAutoActivatedDesc.Translate();
+                CommandFertilizeAutoActivated.defaultLabel = LocalizeString_Command.CommandFertilizeAutoActivated.Translate();
+                CommandFertilizeAutoActivated.defaultDesc = LocalizeString_Command.CommandFertilizeAutoActivatedDesc.Translate();
                 CommandFertilizeAutoActivated.icon = SetFertilizeAutoActivated;
                 CommandFertilizeAutoActivated.iconOffset = new Vector2(0f, -0.08f);
 
@@ -261,8 +261,8 @@ namespace VVRace
                 {
                     var commandSetFertilizeAutoThreshold = new Command_SetFertilizeAutoThreshold();
                     commandSetFertilizeAutoThreshold.plant = this;
-                    commandSetFertilizeAutoThreshold.defaultLabel = LocalizeTexts.CommandSetFertilizeAutoThreshold.Translate();
-                    commandSetFertilizeAutoThreshold.defaultDesc = LocalizeTexts.CommandSetFertilizeAutoThresholdDesc.Translate();
+                    commandSetFertilizeAutoThreshold.defaultLabel = LocalizeString_Command.CommandSetFertilizeAutoThreshold.Translate();
+                    commandSetFertilizeAutoThreshold.defaultDesc = LocalizeString_Command.CommandSetFertilizeAutoThresholdDesc.Translate();
                     commandSetFertilizeAutoThreshold.icon = SetTargetFuelLevelCommand;
                     yield return commandSetFertilizeAutoThreshold;
                 }

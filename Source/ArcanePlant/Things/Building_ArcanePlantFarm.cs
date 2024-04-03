@@ -91,8 +91,8 @@ namespace VVRace
             if (_bill == null)
             {
                 var commandNewBill = new Command_Action();
-                commandNewBill.defaultLabel = LocalizeTexts.CommandNewGrowArcanePlantBill.Translate();
-                commandNewBill.defaultDesc = LocalizeTexts.CommandNewGrowArcanePlantBillDesc.Translate();
+                commandNewBill.defaultLabel = LocalizeString_Command.CommandNewGrowArcanePlantBill.Translate();
+                commandNewBill.defaultDesc = LocalizeString_Command.CommandNewGrowArcanePlantBillDesc.Translate();
                 commandNewBill.icon = StartCommandTex;
                 commandNewBill.action = () =>
                 {
@@ -104,8 +104,8 @@ namespace VVRace
             else
             {
                 var commandCancelBill = new Command_Action();
-                commandCancelBill.defaultLabel = LocalizeTexts.CommandCancelGrowArcanePlantBill.Translate();
-                commandCancelBill.defaultDesc = LocalizeTexts.CommandCancelGrowArcanePlantBillDesc.Translate();
+                commandCancelBill.defaultLabel = LocalizeString_Command.CommandCancelGrowArcanePlantBill.Translate();
+                commandCancelBill.defaultDesc = LocalizeString_Command.CommandCancelGrowArcanePlantBillDesc.Translate();
                 commandCancelBill.icon = CancelCommandTex;
                 commandCancelBill.action = () =>
                 {
