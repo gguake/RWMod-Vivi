@@ -20,6 +20,7 @@
   <VV_InspectorViviShootusWeaponReserved>예약됨: {0}</VV_InspectorViviShootusWeaponReserved>
   <VV_InspectorViviShootusWeaponEquipped>장착됨: {0}</VV_InspectorViviShootusWeaponEquipped>
   <VV_InspectorViviBroadShield>남은 보호막량: {0}/{1}</VV_InspectorViviBroadShield>
+  <VV_Inspector_GrowingArcanePlantReady>{0} 재배 준비중</VV_Inspector_GrowingArcanePlantReady>
 
   <VV_CommandFertilizeAutoActivated>비료 자동 사용</VV_CommandFertilizeAutoActivated>
   <VV_CommandFertilizeAutoActivatedDesc>식물의 마나가 일정 이하일때 정착민들이 비료를 자동으로 사용할지 설정합니다.</VV_CommandFertilizeAutoActivatedDesc>

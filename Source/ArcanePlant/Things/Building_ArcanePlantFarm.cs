@@ -140,6 +140,8 @@ namespace VVRace
 
             if (_bill?.Stage == GrowingArcanePlantBillStage.Gathering)
             {
+                sb.AppendInNewLine(LocalizeString_Inspector.VV_Inspector_GrowingArcanePlantReady.Translate(_bill.RecipeTarget.LabelCap));
+
                 var requiredIngredients = RequiredThings.ToDictionary(tdc => tdc.ThingDef, tdc => tdc.Count);
                 foreach (var kv in _bill.Ingredients)
                 {

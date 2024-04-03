@@ -63,7 +63,7 @@ namespace VVRace
             }
 
             var remainedTicks = Mathf.Max(0, buildedTick + Props.replaceTicks - GenTicks.TicksGame);
-            sb.Append(LocalizeTexts.InspectorViviWallReplaceCooldown.Translate(remainedTicks.ToStringTicksToPeriod()));
+            sb.Append(LocalizeString_Inspector.VV_Inspector_ViviWallReplaceCooldown.Translate(remainedTicks.ToStringTicksToPeriod()));
             return sb.ToString();
         }
 

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <VV_Inspector_ProperTemperature>적정 온도: {0} ~ {1}</VV_Inspector_ProperTemperature>
+  <VV_Inspector_HatcheryDisabled>부화기 비활성화됨</VV_Inspector_HatcheryDisabled>
+  <VV_Inspector_HatcheryDisabledReasonNoRoof>지붕 없음</VV_Inspector_HatcheryDisabledReasonNoRoof>
+  <VV_Inspector_HatcheryDisabledReasonOutdoor>실외</VV_Inspector_HatcheryDisabledReasonOutdoor>
+  <VV_Inspector_ViviWallReplaceCooldown>굳기까지 남은 시간: {0}</VV_Inspector_ViviWallReplaceCooldown>
+  <VV_Inspector_PlantMana>마나: {0}/{1}</VV_Inspector_PlantMana>
+  <VV_Inspector_PlantManaFlux>({0}/일)</VV_Inspector_PlantManaFlux>
+  <VV_Inspector_ShootusWeaponReserved>예약됨: {0}</VV_Inspector_ShootusWeaponReserved>
+  <VV_Inspector_ShootusWeaponEquipped>장착됨: {0}</VV_Inspector_ShootusWeaponEquipped>
+  <VV_Inspector_ViviBroadShield>남은 보호막량: {0}/{1}</VV_Inspector_ViviBroadShield>
+  <VV_Inspector_GrowingArcanePlantReady>{0} 재배 준비중</VV_Inspector_GrowingArcanePlantReady>
+</LanguageData>

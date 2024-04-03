@@ -157,7 +157,7 @@ namespace VVRace
                         Text.Anchor = TextAnchor.MiddleLeft;
                         if (_currentSelected == null)
                         {
-                            Widgets.Label(titleRect, LocalizeTexts.DialogGrowArcanePlantTitleChooseOption.Translate());
+                            Widgets.Label(titleRect, LocalizeString_Dialog.VV_DialogGrowArcanePlantTitleChooseOption.Translate());
                         }
                         else
                         {
@@ -171,7 +171,7 @@ namespace VVRace
                             infoIconRect.center = infoIconSectionRect.Rect.center;
                             Widgets.InfoCardButton(infoIconRect, _currentSelected);
 
-                            Widgets.Label(titleRect, LocalizeTexts.DialogGrowArcanePlantTitleSelected.Translate(_currentSelected.LabelCap));
+                            Widgets.Label(titleRect, LocalizeString_Dialog.VV_DialogGrowArcanePlantTitleSelected.Translate(_currentSelected.LabelCap));
                         }
                     }
                     finally
@@ -194,29 +194,29 @@ namespace VVRace
 
                             LabelText(
                                 ref descRect,
-                                LocalizeTexts.DialogGrowArcanePlantTotalGrowDays.Translate(growData.totalGrowDays.ToString("0.#")));
+                                LocalizeString_Dialog.VV_DialogGrowArcanePlantTotalGrowDays.Translate(growData.totalGrowDays.ToString("0.#")));
 
                             LabelText(
                                 ref descRect,
-                                LocalizeTexts.DialogGrowArcanePlantExpectedAmount.Translate(growData.baseAmount),
-                                LocalizeTexts.DialogGrowArcanePlantExpectedAmountDesc.Translate());
+                                LocalizeString_Dialog.VV_DialogGrowArcanePlantExpectedAmount.Translate(growData.baseAmount),
+                                LocalizeString_Dialog.VV_DialogGrowArcanePlantExpectedAmountDesc.Translate());
 
                             LabelText(
                                 ref descRect,
-                                LocalizeTexts.DialogGrowArcanePlantTotalHealth.Translate(growData.maxHealth),
-                                LocalizeTexts.DialogGrowArcanePlantTotalHealthDesc.Translate());
+                                LocalizeString_Dialog.VV_DialogGrowArcanePlantTotalHealth.Translate(growData.maxHealth),
+                                LocalizeString_Dialog.VV_DialogGrowArcanePlantTotalHealthDesc.Translate());
 
                             LabelText(
                                 ref descRect,
-                                LocalizeTexts.DialogGrowArcanePlantTotalMana.Translate(growData.maxMana, growData.consumedManaByDay.ToString("0.#")),
-                                LocalizeTexts.DialogGrowArcanePlantTotalManaDesc.Translate());
+                                LocalizeString_Dialog.VV_DialogGrowArcanePlantTotalMana.Translate(growData.maxMana, growData.consumedManaByDay.ToString("0.#")),
+                                LocalizeString_Dialog.VV_DialogGrowArcanePlantTotalManaDesc.Translate());
 
                             if (growData.manaSensitivity > GrowingArcanePlantSensitivity.None)
                             {
                                 LabelText(
                                     ref descRect,
-                                    LocalizeTexts.DialogGrowArcanePlantManaSensitivity.Translate($"VV_PlantSensitivity_{growData.manaSensitivity}".Translate()),
-                                    LocalizeTexts.DialogGrowArcanePlantManaSensitivityDesc.Translate());
+                                    LocalizeString_Dialog.VV_DialogGrowArcanePlantManaSensitivity.Translate($"VV_PlantSensitivity_{growData.manaSensitivity}".Translate()),
+                                    LocalizeString_Dialog.VV_DialogGrowArcanePlantManaSensitivityDesc.Translate());
                             }
 
                             if (growData.manageSensitivity > GrowingArcanePlantSensitivity.None)
@@ -225,13 +225,13 @@ namespace VVRace
 
                                 LabelText(
                                     ref descRect,
-                                    LocalizeTexts.DialogGrowArcanePlantManageInterval.Translate(growData.manageIntervalTicks.ToStringTicksToPeriod()),
-                                    LocalizeTexts.DialogGrowArcanePlantManageIntervalDesc.Translate());
+                                    LocalizeString_Dialog.VV_DialogGrowArcanePlantManageInterval.Translate(growData.manageIntervalTicks.ToStringTicksToPeriod()),
+                                    LocalizeString_Dialog.VV_DialogGrowArcanePlantManageIntervalDesc.Translate());
 
                                 LabelText(
                                     ref descRect,
-                                    LocalizeTexts.DialogGrowArcanePlantManageSensitivity.Translate($"VV_PlantSensitivity_{growData.manageSensitivity}".Translate()),
-                                    LocalizeTexts.DialogGrowArcanePlantManageSensitivityDesc.Translate());
+                                    LocalizeString_Dialog.VV_DialogGrowArcanePlantManageSensitivity.Translate($"VV_PlantSensitivity_{growData.manageSensitivity}".Translate()),
+                                    LocalizeString_Dialog.VV_DialogGrowArcanePlantManageSensitivityDesc.Translate());
                             }
 
 
@@ -241,12 +241,12 @@ namespace VVRace
 
                                 LabelText(
                                     ref descRect,
-                                    LocalizeTexts.DialogGrowArcanePlantOptimalTemperature.Translate($"{growData.optimalTemperatureRange.TrueMin.ToStringTemperature()} ~ {growData.optimalTemperatureRange.TrueMax.ToStringTemperature()}"));
+                                    LocalizeString_Dialog.VV_DialogGrowArcanePlantOptimalTemperature.Translate($"{growData.optimalTemperatureRange.TrueMin.ToStringTemperature()} ~ {growData.optimalTemperatureRange.TrueMax.ToStringTemperature()}"));
 
                                 LabelText(
                                     ref descRect,
-                                    LocalizeTexts.DialogGrowArcanePlantTemperatureSensitivity.Translate($"VV_PlantSensitivity_{growData.temperatureSensitivity}".Translate()),
-                                    LocalizeTexts.DialogGrowArcanePlantTemperatureSensitivityDesc.Translate());
+                                    LocalizeString_Dialog.VV_DialogGrowArcanePlantTemperatureSensitivity.Translate($"VV_PlantSensitivity_{growData.temperatureSensitivity}".Translate()),
+                                    LocalizeString_Dialog.VV_DialogGrowArcanePlantTemperatureSensitivityDesc.Translate());
                             }
 
                             if (growData.glowSensitivity > GrowingArcanePlantSensitivity.None)
@@ -255,12 +255,12 @@ namespace VVRace
 
                                 LabelText(
                                     ref descRect,
-                                    LocalizeTexts.DialogGrowArcanePlantOptimalGlow.Translate($"{growData.optimalGlowRange.TrueMin.ToStringPercent()} ~ {growData.optimalGlowRange.TrueMax.ToStringPercent()}"));
+                                    LocalizeString_Dialog.VV_DialogGrowArcanePlantOptimalGlow.Translate($"{growData.optimalGlowRange.TrueMin.ToStringPercent()} ~ {growData.optimalGlowRange.TrueMax.ToStringPercent()}"));
 
                                 LabelText(
                                     ref descRect,
-                                    LocalizeTexts.DialogGrowArcanePlantGlowSensitivity.Translate($"VV_PlantSensitivity_{growData.glowSensitivity}".Translate()),
-                                    LocalizeTexts.DialogGrowArcanePlantGlowSensitivityDesc.Translate());
+                                    LocalizeString_Dialog.VV_DialogGrowArcanePlantGlowSensitivity.Translate($"VV_PlantSensitivity_{growData.glowSensitivity}".Translate()),
+                                    LocalizeString_Dialog.VV_DialogGrowArcanePlantGlowSensitivityDesc.Translate());
                             }
 
                             void DrawLine(ref RectDivider divider)

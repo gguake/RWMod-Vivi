@@ -91,7 +91,7 @@ namespace VVRace
             if (Shield != null)
             {
                 var interceptor = _shield.TryGetComp<CompProjectileInterceptor>();
-                return LocalizeTexts.InspectorViviBroadShield.Translate(interceptor.currentHitPoints, interceptor.HitPointsMax);
+                return LocalizeString_Inspector.VV_Inspector_ViviBroadShield.Translate(interceptor.currentHitPoints, interceptor.HitPointsMax);
             }
 
             return base.CompInspectStringExtra();

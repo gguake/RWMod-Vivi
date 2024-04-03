@@ -108,7 +108,7 @@ namespace VVRace
             }
             else
             {
-                sb.AppendLine(LocalizeTexts.InspectorProperTemperature.Translate(
+                sb.AppendLine(LocalizeString_Inspector.VV_Inspector_ProperTemperature.Translate(
                     Props.minSafeTemperature.ToStringTemperature(),
                     Props.maxSafeTemperature.ToStringTemperature()));
 

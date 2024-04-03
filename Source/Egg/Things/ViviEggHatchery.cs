@@ -16,12 +16,12 @@ namespace VVRace
 
                 if (Position.GetRoof(Map) == null)
                 {
-                    return LocalizeTexts.InspectorViviHatcheryDisabledReasonNoRoof.Translate();
+                    return LocalizeString_Inspector.VV_Inspector_HatcheryDisabledReasonNoRoof.Translate();
                 }
 
                 if (Position.UsesOutdoorTemperature(Map))
                 {
-                    return LocalizeTexts.InspectorViviHatcheryDisabledReasonOutdoor.Translate();
+                    return LocalizeString_Inspector.VV_Inspector_HatcheryDisabledReasonOutdoor.Translate();
                 }
 
                 return true;
@@ -152,7 +152,7 @@ namespace VVRace
             var hatchingDisabledReason = HatchingDisabledReason;
             if (!hatchingDisabledReason.Accepted)
             {
-                sb.Append(LocalizeTexts.InspectorViviHatcheryDisabled.Translate());
+                sb.Append(LocalizeString_Inspector.VV_Inspector_HatcheryDisabled.Translate());
 
                 if (hatchingDisabledReason.Reason != null)
                 {

@@ -13,7 +13,7 @@ namespace VVRace
         public ITab_GatherWorkTable()
         {
             size = Size;
-            labelKey = LocalizeString_ITab.ITab_GatherWorkerTable_TabLabel.Translate();
+            labelKey = LocalizeString_ITab.VV_ITab_GatherWorkerTable_TabLabel.Translate();
         }
 
         protected override void FillTab()
@@ -22,7 +22,7 @@ namespace VVRace
             var labelRect = divider.NewRow(20f);
 
             Text.Font = GameFont.Tiny;
-            Widgets.Label(labelRect, LocalizeString_ITab.ITab_GatherWorkerTable_GatherRadiusSlider.Translate());
+            Widgets.Label(labelRect, LocalizeString_ITab.VV_ITab_GatherWorkerTable_GatherRadiusSlider.Translate());
 
             var sliderRect = divider.NewRow(20f);
             var value = Widgets.HorizontalSlider(

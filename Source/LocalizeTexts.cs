@@ -16,17 +16,6 @@
 
         public const string GizmoSetFertilizeAutoThreshold = "VV_GizmoSetFertilizeAutoThreshold";
 
-        public const string InspectorProperTemperature = "VV_InspectorProperTemperature";
-        public const string InspectorViviHatcheryDisabled = "VV_InspectorViviHatcheryDisabled";
-        public const string InspectorViviHatcheryDisabledReasonNoRoof = "VV_InspectorViviHatcheryDisabledReasonNoRoof";
-        public const string InspectorViviHatcheryDisabledReasonOutdoor = "VV_InspectorViviHatcheryDisabledReasonOutdoor";
-        public const string InspectorViviWallReplaceCooldown = "VV_InspectorViviWallReplaceCooldown";
-        public const string InspectorPlantMana = "VV_InspectorPlantMana";
-        public const string InspectorPlantManaFlux = "VV_InspectorPlantManaFlux";
-        public const string InspectorViviShootusWeaponReserved = "VV_InspectorViviShootusWeaponReserved";
-        public const string InspectorViviShootusWeaponEquipped = "VV_InspectorViviShootusWeaponEquipped";
-        public const string InspectorViviBroadShield = "VV_InspectorViviBroadShield";
-
         public const string LetterViviEggHatchedLabel = "VV_LetterViviEggHatchedLabel";
         public const string LetterViviEggHatched = "VV_LetterViviEggHatched";
         public const string LetterViviEggHatchedNoParent = "VV_LetterViviEggHatchedNoParent";
@@ -75,50 +64,42 @@
 
         public const string GeneDefHoneyNeedDurationDesc = "VV_GeneDefHoneyNeedDurationDesc";
         public const string LastHoneyIngestedDurationAgo = "VV_LastHoneyIngestedDurationAgo";
+    }
 
-        public const string DialogGrowArcanePlantTitleChooseOption = "VV_DialogGrowArcanePlantTitleChooseOption";
-        public const string DialogGrowArcanePlantTitleSelected = "VV_DialogGrowArcanePlantTitleSelected";
-        public const string DialogGrowArcanePlantTotalGrowDays = "VV_DialogGrowArcanePlantTotalGrowDays";
-        public const string DialogGrowArcanePlantExpectedAmount = "VV_DialogGrowArcanePlantExpectedAmount";
-        public const string DialogGrowArcanePlantExpectedAmountDesc = "VV_DialogGrowArcanePlantExpectedAmountDesc";
-        public const string DialogGrowArcanePlantTotalHealth = "VV_DialogGrowArcanePlantTotalHealth";
-        public const string DialogGrowArcanePlantTotalHealthDesc = "VV_DialogGrowArcanePlantTotalHealthDesc";
-        public const string DialogGrowArcanePlantTotalMana = "VV_DialogGrowArcanePlantTotalMana";
-        public const string DialogGrowArcanePlantTotalManaDesc = "VV_DialogGrowArcanePlantTotalManaDesc";
-        public const string DialogGrowArcanePlantManaSensitivity = "VV_DialogGrowArcanePlantManaSensitivity";
-        public const string DialogGrowArcanePlantManaSensitivityDesc = "VV_DialogGrowArcanePlantManaSensitivityDesc";
-        public const string DialogGrowArcanePlantOptimalTemperature = "VV_DialogGrowArcanePlantOptimalTemperature";
-        public const string DialogGrowArcanePlantTemperatureSensitivity = "VV_DialogGrowArcanePlantTemperatureSensitivity";
-        public const string DialogGrowArcanePlantTemperatureSensitivityDesc = "VV_DialogGrowArcanePlantTemperatureSensitivityDesc";
-        public const string DialogGrowArcanePlantOptimalGlow = "VV_DialogGrowArcanePlantOptimalGlow";
-        public const string DialogGrowArcanePlantGlowSensitivity = "VV_DialogGrowArcanePlantGlowSensitivity";
-        public const string DialogGrowArcanePlantGlowSensitivityDesc = "VV_DialogGrowArcanePlantGlowSensitivityDesc";
-        public const string DialogGrowArcanePlantManageInterval = "VV_DialogGrowArcanePlantManageInterval";
-        public const string DialogGrowArcanePlantManageIntervalDesc = "VV_DialogGrowArcanePlantManageIntervalDesc";
-        public const string DialogGrowArcanePlantManageSensitivity = "VV_DialogGrowArcanePlantManageSensitivity";
-        public const string DialogGrowArcanePlantManageSensitivityDesc = "VV_DialogGrowArcanePlantManageSensitivityDesc";
-
+    public static class LocalizeString_Inspector
+    {
+        public const string VV_Inspector_ProperTemperature = nameof(VV_Inspector_ProperTemperature);
+        public const string VV_Inspector_HatcheryDisabled = nameof(VV_Inspector_HatcheryDisabled);
+        public const string VV_Inspector_HatcheryDisabledReasonNoRoof = nameof(VV_Inspector_HatcheryDisabledReasonNoRoof);
+        public const string VV_Inspector_HatcheryDisabledReasonOutdoor = nameof(VV_Inspector_HatcheryDisabledReasonOutdoor);
+        public const string VV_Inspector_ViviWallReplaceCooldown = nameof(VV_Inspector_ViviWallReplaceCooldown);
+        public const string VV_Inspector_PlantMana = nameof(VV_Inspector_PlantMana);
+        public const string VV_Inspector_PlantManaFlux = nameof(VV_Inspector_PlantManaFlux);
+        public const string VV_Inspector_ShootusWeaponReserved = nameof(VV_Inspector_ShootusWeaponReserved);
+        public const string VV_Inspector_ShootusWeaponEquipped = nameof(VV_Inspector_ShootusWeaponEquipped);
+        public const string VV_Inspector_ViviBroadShield = nameof(VV_Inspector_ViviBroadShield);
+        public const string VV_Inspector_GrowingArcanePlantReady = nameof(VV_Inspector_GrowingArcanePlantReady);
     }
 
     public static class LocalizeString_ITab
     {
-        public const string ITab_GatherWorkerTable_TabLabel = "VV_ITab_GatherWorkerTable_TabLabel";
-        public const string ITab_GatherWorkerTable_GatherRadiusSlider = "VV_ITab_GatherWorkerTable_GatherRadiusSlider";
+        public const string VV_ITab_GatherWorkerTable_TabLabel = "VV_ITab_GatherWorkerTable_TabLabel";
+        public const string VV_ITab_GatherWorkerTable_GatherRadiusSlider = "VV_ITab_GatherWorkerTable_GatherRadiusSlider";
 
-        public const string ITab_ArcanePlantFarmBill_TabLabel = "VV_ITab_ArcanePlantFarmBill_TabLabel";
-        public const string ITab_ArcanePlantFarmBill_Title = "VV_ITab_ArcanePlantFarmBill_Title";
-        public const string ITab_ArcanePlantFarmBill_GrowthPct = "VV_ITab_ArcanePlantFarmBill_GrowthPct";
-        public const string ITab_ArcanePlantFarmBill_GrowthPctDesc = "VV_ITab_ArcanePlantFarmBill_GrowthPctDesc";
-        public const string ITab_ArcanePlantFarmBill_HealthPct = "VV_ITab_ArcanePlantFarmBill_HealthPct";
-        public const string ITab_ArcanePlantFarmBill_HealthPctDesc = "VV_ITab_ArcanePlantFarmBill_HealthPctDesc";
-        public const string ITab_ArcanePlantFarmBill_ManaPct = "VV_ITab_ArcanePlantFarmBill_ManaPct";
-        public const string ITab_ArcanePlantFarmBill_ManaPctDesc = "VV_ITab_ArcanePlantFarmBill_ManaPctDesc";
-        public const string ITab_ArcanePlantFarmBill_Management = "VV_ITab_ArcanePlantFarmBill_Management";
-        public const string ITab_ArcanePlantFarmBill_ManagementDesc = "VV_ITab_ArcanePlantFarmBill_ManagementDesc";
-        public const string ITab_ArcanePlantFarmBill_Temperature = "VV_ITab_ArcanePlantFarmBill_Temperature";
-        public const string ITab_ArcanePlantFarmBill_TemperatureDesc = "VV_ITab_ArcanePlantFarmBill_TemperatureDesc";
-        public const string ITab_ArcanePlantFarmBill_Glow = "VV_ITab_ArcanePlantFarmBill_Glow";
-        public const string ITab_ArcanePlantFarmBill_GlowDesc = "VV_ITab_ArcanePlantFarmBill_GlowDesc";
+        public const string VV_ITab_ArcanePlantFarmBill_TabLabel = "VV_ITab_ArcanePlantFarmBill_TabLabel";
+        public const string VV_ITab_ArcanePlantFarmBill_Title = "VV_ITab_ArcanePlantFarmBill_Title";
+        public const string VV_ITab_ArcanePlantFarmBill_GrowthPct = "VV_ITab_ArcanePlantFarmBill_GrowthPct";
+        public const string VV_ITab_ArcanePlantFarmBill_GrowthPctDesc = "VV_ITab_ArcanePlantFarmBill_GrowthPctDesc";
+        public const string VV_ITab_ArcanePlantFarmBill_HealthPct = "VV_ITab_ArcanePlantFarmBill_HealthPct";
+        public const string VV_ITab_ArcanePlantFarmBill_HealthPctDesc = "VV_ITab_ArcanePlantFarmBill_HealthPctDesc";
+        public const string VV_ITab_ArcanePlantFarmBill_ManaPct = "VV_ITab_ArcanePlantFarmBill_ManaPct";
+        public const string VV_ITab_ArcanePlantFarmBill_ManaPctDesc = "VV_ITab_ArcanePlantFarmBill_ManaPctDesc";
+        public const string VV_ITab_ArcanePlantFarmBill_Management = "VV_ITab_ArcanePlantFarmBill_Management";
+        public const string VV_ITab_ArcanePlantFarmBill_ManagementDesc = "VV_ITab_ArcanePlantFarmBill_ManagementDesc";
+        public const string VV_ITab_ArcanePlantFarmBill_Temperature = "VV_ITab_ArcanePlantFarmBill_Temperature";
+        public const string VV_ITab_ArcanePlantFarmBill_TemperatureDesc = "VV_ITab_ArcanePlantFarmBill_TemperatureDesc";
+        public const string VV_ITab_ArcanePlantFarmBill_Glow = "VV_ITab_ArcanePlantFarmBill_Glow";
+        public const string VV_ITab_ArcanePlantFarmBill_GlowDesc = "VV_ITab_ArcanePlantFarmBill_GlowDesc";
 
     }
 
@@ -130,6 +111,28 @@
 
     public static class LocalizeString_Dialog
     {
+        public const string VV_DialogGrowArcanePlantTitleChooseOption = "VV_DialogGrowArcanePlantTitleChooseOption";
+        public const string VV_DialogGrowArcanePlantTitleSelected = "VV_DialogGrowArcanePlantTitleSelected";
+        public const string VV_DialogGrowArcanePlantTotalGrowDays = "VV_DialogGrowArcanePlantTotalGrowDays";
+        public const string VV_DialogGrowArcanePlantExpectedAmount = "VV_DialogGrowArcanePlantExpectedAmount";
+        public const string VV_DialogGrowArcanePlantExpectedAmountDesc = "VV_DialogGrowArcanePlantExpectedAmountDesc";
+        public const string VV_DialogGrowArcanePlantTotalHealth = "VV_DialogGrowArcanePlantTotalHealth";
+        public const string VV_DialogGrowArcanePlantTotalHealthDesc = "VV_DialogGrowArcanePlantTotalHealthDesc";
+        public const string VV_DialogGrowArcanePlantTotalMana = "VV_DialogGrowArcanePlantTotalMana";
+        public const string VV_DialogGrowArcanePlantTotalManaDesc = "VV_DialogGrowArcanePlantTotalManaDesc";
+        public const string VV_DialogGrowArcanePlantManaSensitivity = "VV_DialogGrowArcanePlantManaSensitivity";
+        public const string VV_DialogGrowArcanePlantManaSensitivityDesc = "VV_DialogGrowArcanePlantManaSensitivityDesc";
+        public const string VV_DialogGrowArcanePlantOptimalTemperature = "VV_DialogGrowArcanePlantOptimalTemperature";
+        public const string VV_DialogGrowArcanePlantTemperatureSensitivity = "VV_DialogGrowArcanePlantTemperatureSensitivity";
+        public const string VV_DialogGrowArcanePlantTemperatureSensitivityDesc = "VV_DialogGrowArcanePlantTemperatureSensitivityDesc";
+        public const string VV_DialogGrowArcanePlantOptimalGlow = "VV_DialogGrowArcanePlantOptimalGlow";
+        public const string VV_DialogGrowArcanePlantGlowSensitivity = "VV_DialogGrowArcanePlantGlowSensitivity";
+        public const string VV_DialogGrowArcanePlantGlowSensitivityDesc = "VV_DialogGrowArcanePlantGlowSensitivityDesc";
+        public const string VV_DialogGrowArcanePlantManageInterval = "VV_DialogGrowArcanePlantManageInterval";
+        public const string VV_DialogGrowArcanePlantManageIntervalDesc = "VV_DialogGrowArcanePlantManageIntervalDesc";
+        public const string VV_DialogGrowArcanePlantManageSensitivity = "VV_DialogGrowArcanePlantManageSensitivity";
+        public const string VV_DialogGrowArcanePlantManageSensitivityDesc = "VV_DialogGrowArcanePlantManageSensitivityDesc";
+
         public const string VV_DialogStartGrowingArcanePlantIngredientLabel = nameof(VV_DialogStartGrowingArcanePlantIngredientLabel);
         public const string VV_DialogCancelGrowingArcanePlantBillInGrowing = nameof(VV_DialogCancelGrowingArcanePlantBillInGrowing);
     }

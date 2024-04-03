@@ -3,7 +3,7 @@
   <VV_ITab_GatherWorkerTable_TabLabel>채집</VV_ITab_GatherWorkerTable_TabLabel>
   <VV_ITab_GatherWorkerTable_GatherRadiusSlider>채집 작업 범위 변경</VV_ITab_GatherWorkerTable_GatherRadiusSlider>
 
-  <VV_ITab_ArcanePlantFarmBill_TabLabel>재배 정보</VV_ITab_ArcanePlantFarmBill_TabLabel>
+  <VV_ITab_ArcanePlantFarmBill_TabLabel>재배</VV_ITab_ArcanePlantFarmBill_TabLabel>
   <VV_ITab_ArcanePlantFarmBill_Title>{0} 재배</VV_ITab_ArcanePlantFarmBill_Title>
 
   <VV_ITab_ArcanePlantFarmBill_GrowthPct>진행율</VV_ITab_ArcanePlantFarmBill_GrowthPct>

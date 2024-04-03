@@ -197,7 +197,7 @@ namespace VVRace
                 sb.Append("\n");
             }
 
-            sb.Append(LocalizeTexts.InspectorPlantMana.Translate((int)_manaFluxNode.mana, ArcanePlantModExtension.manaCapacity));
+            sb.Append(LocalizeString_Inspector.VV_Inspector_PlantMana.Translate((int)_manaFluxNode.mana, ArcanePlantModExtension.manaCapacity));
 
             if (Spawned)
             {
@@ -205,7 +205,7 @@ namespace VVRace
                 if (manaFlux != 0)
                 {
                     sb.Append(" ");
-                    sb.Append(LocalizeTexts.InspectorPlantManaFlux.Translate(manaFlux.ToString("+0;-#")));
+                    sb.Append(LocalizeString_Inspector.VV_Inspector_PlantManaFlux.Translate(manaFlux.ToString("+0;-#")));
                 }
 
                 if (DebugSettings.godMode && ManaFluxNetwork != null)

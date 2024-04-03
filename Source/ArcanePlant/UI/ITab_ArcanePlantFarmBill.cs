@@ -15,7 +15,7 @@ namespace VVRace
         public ITab_ArcanePlantFarmBill()
         {
             size = new Vector2(500f, TabHeight);
-            labelKey = LocalizeString_ITab.ITab_ArcanePlantFarmBill_TabLabel;
+            labelKey = LocalizeString_ITab.VV_ITab_ArcanePlantFarmBill_TabLabel;
         }
 
         public static float TabHeight = 300f;
@@ -36,7 +36,7 @@ namespace VVRace
                 {
                     Text.Font = GameFont.Medium;
                     Text.Anchor = TextAnchor.MiddleLeft;
-                    Widgets.Label(labelRect, LocalizeString_ITab.ITab_ArcanePlantFarmBill_Title.Translate(bill.RecipeTarget.LabelCap));
+                    Widgets.Label(labelRect, LocalizeString_ITab.VV_ITab_ArcanePlantFarmBill_Title.Translate(bill.RecipeTarget.LabelCap));
                 }
                 finally
                 {
@@ -52,7 +52,7 @@ namespace VVRace
                     Widgets.DrawHighlight(growthRect);
                 }
 
-                var label = LocalizeString_ITab.ITab_ArcanePlantFarmBill_GrowthPct.Translate();
+                var label = LocalizeString_ITab.VV_ITab_ArcanePlantFarmBill_GrowthPct.Translate();
                 var boxRect = growthRect.Rect.ContractedBy(5f);
                 try
                 {
@@ -64,7 +64,7 @@ namespace VVRace
                     Text.Anchor = TextAnchor.UpperLeft;
                 }
 
-                var desc = LocalizeString_ITab.ITab_ArcanePlantFarmBill_GrowthPctDesc.Translate();
+                var desc = LocalizeString_ITab.VV_ITab_ArcanePlantFarmBill_GrowthPctDesc.Translate();
                 TooltipHandler.TipRegion(growthRect, $"{label}: {bill.TotalGrowthPct.ToStringPercent()}".Colorize(Color.yellow) + $"\n{desc}");
             }
 
@@ -76,16 +76,16 @@ namespace VVRace
             DrawNeedRect(
                 ref index, 
                 GrowingArcanePlantSensitivity.None, 
-                LocalizeString_ITab.ITab_ArcanePlantFarmBill_HealthPct.Translate(), 
-                LocalizeString_ITab.ITab_ArcanePlantFarmBill_HealthPctDesc.Translate(),
+                LocalizeString_ITab.VV_ITab_ArcanePlantFarmBill_HealthPct.Translate(), 
+                LocalizeString_ITab.VV_ITab_ArcanePlantFarmBill_HealthPctDesc.Translate(),
                 bill.HealthPct, 
                 bill.LastHealthChangeOffset / bill.Data.maxHealth);
 
             DrawNeedRect(
                 ref index, 
                 bill.Data.manaSensitivity, 
-                LocalizeString_ITab.ITab_ArcanePlantFarmBill_ManaPct.Translate(), 
-                LocalizeString_ITab.ITab_ArcanePlantFarmBill_ManaPctDesc.Translate(),
+                LocalizeString_ITab.VV_ITab_ArcanePlantFarmBill_ManaPct.Translate(), 
+                LocalizeString_ITab.VV_ITab_ArcanePlantFarmBill_ManaPctDesc.Translate(),
                 bill.ManaPct);
 
             if (bill.Data.manageSensitivity != GrowingArcanePlantSensitivity.None)
@@ -93,8 +93,8 @@ namespace VVRace
                 DrawNeedRect(
                     ref index, 
                     bill.Data.manageSensitivity, 
-                    LocalizeString_ITab.ITab_ArcanePlantFarmBill_Management.Translate(), 
-                    LocalizeString_ITab.ITab_ArcanePlantFarmBill_ManagementDesc.Translate(bill.Data.manageIntervalTicks.ToStringTicksToPeriod()),
+                    LocalizeString_ITab.VV_ITab_ArcanePlantFarmBill_Management.Translate(), 
+                    LocalizeString_ITab.VV_ITab_ArcanePlantFarmBill_ManagementDesc.Translate(bill.Data.manageIntervalTicks.ToStringTicksToPeriod()),
                     bill.ManagePct);
             }
 
@@ -107,8 +107,8 @@ namespace VVRace
                 DrawNeedRect(
                     ref index, 
                     bill.Data.temperatureSensitivity, 
-                    LocalizeString_ITab.ITab_ArcanePlantFarmBill_Temperature.Translate(), 
-                    LocalizeString_ITab.ITab_ArcanePlantFarmBill_TemperatureDesc.Translate(
+                    LocalizeString_ITab.VV_ITab_ArcanePlantFarmBill_Temperature.Translate(), 
+                    LocalizeString_ITab.VV_ITab_ArcanePlantFarmBill_TemperatureDesc.Translate(
                         bill.Data.optimalTemperatureRange.TrueMin, 
                         bill.Data.optimalTemperatureRange.TrueMax),
                     bill.TemperatureSeverity,
@@ -124,8 +124,8 @@ namespace VVRace
                 DrawNeedRect(
                     ref index, 
                     bill.Data.glowSensitivity, 
-                    LocalizeString_ITab.ITab_ArcanePlantFarmBill_Glow.Translate(), 
-                    LocalizeString_ITab.ITab_ArcanePlantFarmBill_GlowDesc.Translate(
+                    LocalizeString_ITab.VV_ITab_ArcanePlantFarmBill_Glow.Translate(), 
+                    LocalizeString_ITab.VV_ITab_ArcanePlantFarmBill_GlowDesc.Translate(
                         bill.Data.optimalGlowRange.TrueMin.ToStringPercent(), 
                         bill.Data.optimalGlowRange.TrueMax.ToStringPercent()),
                     bill.GlowSeverity,
