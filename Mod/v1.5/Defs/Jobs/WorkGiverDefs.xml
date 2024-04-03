@@ -62,24 +62,30 @@
     <prioritizeSustains>true</prioritizeSustains>
   </WorkGiverDef>
 
-  <WorkGiverDef>
+  <WorkGiverDef ParentName="HaulToBase">
     <defName>VV_EquipShootus</defName>
     <label>equip weapon to shootus</label>
     <giverClass>VVRace.WorkGiver_EquipShootus</giverClass>
-    <workType>Hauling</workType>
-    <priorityInType>85</priorityInType>
-    <verb>equipping weapon to shootus</verb>
-    <gerund>equipping weapon to shootus</gerund>
-    <requiredCapacities>
-      <li>Manipulation</li>
-    </requiredCapacities>
-    <prioritizeSustains>true</prioritizeSustains>
   </WorkGiverDef>
 
   <WorkGiverDef ParentName="HaulToBase">
     <defName>VV_HaulToArcanePlantFarm</defName>
     <label>haul resources to arcane plant farm</label>
     <giverClass>VVRace.WorkGiver_HaulToArcanePlantFarm</giverClass>
+  </WorkGiverDef>
+
+  <WorkGiverDef>
+    <defName>VV_ManageArcanePlantFarm</defName>
+    <label>manage arcane plant farm</label>
+    <giverClass>VVRace.WorkGiver_ManageArcanePlantFarm</giverClass>
+    <workType>Growing</workType>
+    <verb>manage arcane plant farm</verb>
+    <gerund>managing arcane plant farm</gerund>
+    <priorityInType>100</priorityInType>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <prioritizeSustains>true</prioritizeSustains>
   </WorkGiverDef>
 
   <WorkGiverDef>

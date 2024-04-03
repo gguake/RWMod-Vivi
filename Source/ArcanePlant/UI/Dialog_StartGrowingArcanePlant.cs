@@ -211,15 +211,15 @@ namespace VVRace
                                 LocalizeTexts.DialogGrowArcanePlantTotalMana.Translate(growData.maxMana, growData.consumedManaByDay.ToString("0.#")),
                                 LocalizeTexts.DialogGrowArcanePlantTotalManaDesc.Translate());
 
-                            if (growData.ManaSensitivity > GrowingArcanePlantSensitivity.None)
+                            if (growData.manaSensitivity > GrowingArcanePlantSensitivity.None)
                             {
                                 LabelText(
                                     ref descRect,
-                                    LocalizeTexts.DialogGrowArcanePlantManaSensitivity.Translate($"VV_PlantSensitivity_{growData.ManaSensitivity}".Translate()),
+                                    LocalizeTexts.DialogGrowArcanePlantManaSensitivity.Translate($"VV_PlantSensitivity_{growData.manaSensitivity}".Translate()),
                                     LocalizeTexts.DialogGrowArcanePlantManaSensitivityDesc.Translate());
                             }
 
-                            if (growData.ManageSensitivity > GrowingArcanePlantSensitivity.None)
+                            if (growData.manageSensitivity > GrowingArcanePlantSensitivity.None)
                             {
                                 DrawLine(ref descRect);
 
@@ -230,12 +230,12 @@ namespace VVRace
 
                                 LabelText(
                                     ref descRect,
-                                    LocalizeTexts.DialogGrowArcanePlantManageSensitivity.Translate($"VV_PlantSensitivity_{growData.ManageSensitivity}".Translate()),
+                                    LocalizeTexts.DialogGrowArcanePlantManageSensitivity.Translate($"VV_PlantSensitivity_{growData.manageSensitivity}".Translate()),
                                     LocalizeTexts.DialogGrowArcanePlantManageSensitivityDesc.Translate());
                             }
 
 
-                            if (growData.TemperatureSensitivity > GrowingArcanePlantSensitivity.None)
+                            if (growData.temperatureSensitivity > GrowingArcanePlantSensitivity.None)
                             {
                                 DrawLine(ref descRect);
 
@@ -245,11 +245,11 @@ namespace VVRace
 
                                 LabelText(
                                     ref descRect,
-                                    LocalizeTexts.DialogGrowArcanePlantTemperatureSensitivity.Translate($"VV_PlantSensitivity_{growData.TemperatureSensitivity}".Translate()),
+                                    LocalizeTexts.DialogGrowArcanePlantTemperatureSensitivity.Translate($"VV_PlantSensitivity_{growData.temperatureSensitivity}".Translate()),
                                     LocalizeTexts.DialogGrowArcanePlantTemperatureSensitivityDesc.Translate());
                             }
 
-                            if (growData.GlowSensitivity > GrowingArcanePlantSensitivity.None)
+                            if (growData.glowSensitivity > GrowingArcanePlantSensitivity.None)
                             {
                                 DrawLine(ref descRect);
 
@@ -259,7 +259,7 @@ namespace VVRace
 
                                 LabelText(
                                     ref descRect,
-                                    LocalizeTexts.DialogGrowArcanePlantGlowSensitivity.Translate($"VV_PlantSensitivity_{growData.GlowSensitivity}".Translate()),
+                                    LocalizeTexts.DialogGrowArcanePlantGlowSensitivity.Translate($"VV_PlantSensitivity_{growData.glowSensitivity}".Translate()),
                                     LocalizeTexts.DialogGrowArcanePlantGlowSensitivityDesc.Translate());
                             }
 

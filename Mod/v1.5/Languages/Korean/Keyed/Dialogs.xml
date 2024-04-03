@@ -50,4 +50,5 @@
 <VV_PlantSensitivity_High>높음</VV_PlantSensitivity_High>
 
 <VV_DialogStartGrowingArcanePlantIngredientLabel>재배 시작시 필요 재료</VV_DialogStartGrowingArcanePlantIngredientLabel>
+<VV_DialogCancelGrowingArcanePlantBillInGrowing>재배 도중에 취소할 경우 투입된 자원이 모두 사라지며 되돌릴 수 없습니다.</VV_DialogCancelGrowingArcanePlantBillInGrowing>
 </LanguageData>

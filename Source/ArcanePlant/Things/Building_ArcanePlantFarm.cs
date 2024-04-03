@@ -19,7 +19,7 @@ namespace VVRace
             get
             {
                 var glowGrid = Map.glowGrid;
-                return this.OccupiedRect().Average(v => glowGrid.GroundGlowAt(v));
+                return this.OccupiedRect().Max(v => glowGrid.GroundGlowAt(v));
             }
         }
 
@@ -117,7 +117,10 @@ namespace VVRace
                             break;
 
                         case GrowingArcanePlantBillStage.Growing:
-                            _bill = null;
+                            Find.WindowStack.Add(new Dialog_Confirm(LocalizeString_Dialog.VV_DialogCancelGrowingArcanePlantBillInGrowing.Translate(), () =>
+                            {
+                                _bill = null;
+                            }));
                             break;
                     }
                 };

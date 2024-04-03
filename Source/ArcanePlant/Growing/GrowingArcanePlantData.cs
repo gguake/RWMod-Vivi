@@ -1,54 +1,11 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 using Verse;
 
 namespace VVRace
 {
-    public enum GrowingArcanePlantSensitivity
-    {
-        None,
-        Low,
-        Medium, 
-        High
-    }
-
     public class GrowingArcanePlantData : DefModExtension
     {
-        public GrowingArcanePlantSensitivity ManaSensitivity
-        {
-            get
-            {
-                if (badManaDamageByDayCurve == null) { return GrowingArcanePlantSensitivity.None; }
-                return GrowingArcanePlantSensitivity.High;
-            }
-        }
-
-        public GrowingArcanePlantSensitivity TemperatureSensitivity
-        {
-            get
-            {
-                if (badTemperatureDamageByDayCurve == null) { return GrowingArcanePlantSensitivity.None; }
-                return GrowingArcanePlantSensitivity.High;
-            }
-        }
-
-        public GrowingArcanePlantSensitivity GlowSensitivity
-        {
-            get
-            {
-                if (badGlowDamageByDayCurve == null) { return GrowingArcanePlantSensitivity.None; }
-                return GrowingArcanePlantSensitivity.High;
-            }
-        }
-
-        public GrowingArcanePlantSensitivity ManageSensitivity
-        {
-            get
-            {
-                if (badManageDamageByDayCurve == null) { return GrowingArcanePlantSensitivity.None; }
-                return GrowingArcanePlantSensitivity.High;
-            }
-        }
-
         public List<ThingDefCountClass> ingredients;
 
         public float totalGrowDays = 5;
@@ -64,19 +21,18 @@ namespace VVRace
         public SimpleCurve cleanlinessBonusAmountCurve;
 
         public FloatRange optimalTemperatureRange = new FloatRange(-9999f, 9999f);
-        public float badTemperatureThresholdDay = 0.5f;
-        public SimpleCurve badTemperatureDamageByDayCurve;
+        public GrowingArcanePlantSensitivity temperatureSensitivity;
 
         public FloatRange optimalGlowRange = new FloatRange(0f, 1f);
-        public float badGlowThresholdDay = 0.5f;
-        public SimpleCurve badGlowDamageByDayCurve;
+        public GrowingArcanePlantSensitivity glowSensitivity;
 
+        public int RealManageIntervalTicks => 
+            manageSensitivity > GrowingArcanePlantSensitivity.None ? 
+            Mathf.CeilToInt(manageIntervalTicks / manageSensitivity.CalcThreshold().danger) : 
+            0;
         public int manageIntervalTicks;
-        public float badManageThresholdDay = 1;
-        public SimpleCurve badManageDamageByDayCurve;
+        public GrowingArcanePlantSensitivity manageSensitivity;
 
-        public int requiredMinMana = 50;
-        public float badManaThresholdDay = 0.5f;
-        public SimpleCurve badManaDamageByDayCurve;
+        public GrowingArcanePlantSensitivity manaSensitivity;
     }
 }

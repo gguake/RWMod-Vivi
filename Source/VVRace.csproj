@@ -83,6 +83,7 @@
     <Compile Include="ArcanePlant\Comps\CompProperties_LaunchableCustom.cs" />
     <Compile Include="ArcanePlant\Growing\GrowingArcanePlantBill.cs" />
     <Compile Include="ArcanePlant\Growing\GrowingArcanePlantData.cs" />
+    <Compile Include="ArcanePlant\Growing\GrowingArcanePlantSensitivity.cs" />
     <Compile Include="ArcanePlant\Mana\ManaFluxGrid.cs" />
     <Compile Include="ArcanePlant\Mana\ManaFluxRule_AdjacentArcanePlant.cs" />
     <Compile Include="ArcanePlant\Mana\ManaFluxRule_Wind.cs" />

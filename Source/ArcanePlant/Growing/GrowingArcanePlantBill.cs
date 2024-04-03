@@ -35,13 +35,14 @@ namespace VVRace
             get
             {
                 if (_billStartTicks < 0) { return GrowingArcanePlantBillStage.Gathering; }
-                else if (GenTicks.TicksGame - _billStartTicks > TotalGrowTicks) { return GrowingArcanePlantBillStage.Complete; }
+                else if (GenTicks.TicksGame - _billStartTicks > TotalGrowthTicks) { return GrowingArcanePlantBillStage.Complete; }
 
                 return GrowingArcanePlantBillStage.Growing;
             }
         }
 
-        public int TotalGrowTicks => (int)(Data.totalGrowDays * 60000) + 1;
+        public int TotalGrowthTicks => (int)(Data.totalGrowDays * 60000) + 1;
+        public float TotalGrowthPct => (float)(GenTicks.TicksGame - _billStartTicks) / TotalGrowthTicks;
 
         public float HealthPct => _health / Data.maxHealth;
         public float Health
@@ -53,6 +54,8 @@ namespace VVRace
             }
         }
 
+        public float LastHealthChangeOffset { get; private set; }
+
         public float ManaPct => _mana / Data.maxMana;
         public float Mana
         {
@@ -60,12 +63,14 @@ namespace VVRace
             set
             {
                 _mana = Mathf.Clamp(value, 0f, Data.maxMana);
-                if (_badManaStartTicks >= 0)
-                {
-                    _badManaStartTicks = -1;
-                }
             }
         }
+
+        public float ManagePct => 1f - Mathf.Min(Data.RealManageIntervalTicks, GenTicks.TicksGame - _lastManagementTicks) / (float)Data.RealManageIntervalTicks;
+
+        public float TemperatureSeverity => _temperatureSeverity;
+
+        public float GlowSeverity => _glowSeverity;
 
         public Dictionary<ThingDef, int> Ingredients
         {
@@ -105,16 +110,14 @@ namespace VVRace
         private int _billStartTicks = -1;
         private int _lastManagementTicks = -1;
 
-        private int _badTemperatureStartTicks = -1;
-        private int _badGlowStartTicks = -1;
-        private int _badManageStartTicks = -1;
-        private int _badManaStartTicks = -1;
+        private float _temperatureSeverity;
+        private float _glowSeverity;
 
         public bool IsGoodTemperature => Data.optimalTemperatureRange.IncludesEpsilon(_billOwner.FarmTemperature);
 
         public bool IsGoodGlow => Data.optimalGlowRange.IncludesEpsilon(_billOwner.FarmGlow);
 
-        public bool ManagementRequired => GenTicks.TicksGame - _lastManagementTicks >= Data.manageIntervalTicks;
+        public bool ManagementRequired => GenTicks.TicksGame - _lastManagementTicks >= Data.RealManageIntervalTicks;
 
         public float? Cleanliness
         {
@@ -142,8 +145,11 @@ namespace VVRace
             _recipeTargetDef = target;
 
             _health = Data.maxHealth;
-            _mana = 0f;
+            _mana = Data.maxMana;
             _cleanlinessBonus = 0f;
+
+            _temperatureSeverity = 1f;
+            _glowSeverity = 1f;
         }
 
         public void ExposeData()
@@ -156,11 +162,8 @@ namespace VVRace
 
             Scribe_Values.Look(ref _billStartTicks, "billStartTicks");
             Scribe_Values.Look(ref _lastManagementTicks, "lastManagementTicks");
-
-            Scribe_Values.Look(ref _badTemperatureStartTicks, "badTemperatureStartTicks");
-            Scribe_Values.Look(ref _badGlowStartTicks, "badGlowStartTicks");
-            Scribe_Values.Look(ref _badManageStartTicks, "badManageStartTicks");
-            Scribe_Values.Look(ref _badManaStartTicks, "badManaStartTicks");
+            Scribe_Values.Look(ref _temperatureSeverity, "temperatureSeverity");
+            Scribe_Values.Look(ref _glowSeverity, "glowSeverity");
         }
 
         public void Start()
@@ -174,20 +177,59 @@ namespace VVRace
         public void Tick(int ticks)
         {
             var data = Data;
+
+            RefreshPlantNeeds(data, ticks);
+
+            var damage = CalcPlantDamageFromNeeds(data, ticks);
+            if (damage > 0f)
+            {
+                LastHealthChangeOffset = -damage;
+            }
+            else
+            {
+                if (HealthPct < 1f)
+                {
+                    var heal = data.healthRegenNoDamagedByDays * ticks / 60000f;
+                    LastHealthChangeOffset = heal;
+                }
+                else
+                {
+                    LastHealthChangeOffset = 0f;
+                }
+            }
+
+            if (LastHealthChangeOffset != 0f)
+            {
+                Health += LastHealthChangeOffset;
+            }
+
+            if (Health <= 0f)
+            {
+                _billOwner.Notify_BillFailed();
+            }
+        }
+
+        public void Manage()
+        {
+            _lastManagementTicks = GenTicks.TicksGame;
+        }
+
+        private void RefreshPlantNeeds(GrowingArcanePlantData data, int ticks)
+        {
             var room = _billOwner.GetRoom();
             if (room != null && room.Role != null && room.Role != RoomRoleDefOf.None && !room.PsychologicallyOutdoors)
             {
                 var cleanliness = room.GetStat(RoomStatDefOf.Cleanliness);
                 if (data.cleanlinessBonusAmountCurve != null)
                 {
-                    _cleanlinessBonus += data.cleanlinessBonusAmountCurve.Evaluate(cleanliness) * ticks / TotalGrowTicks;
+                    _cleanlinessBonus += data.cleanlinessBonusAmountCurve.Evaluate(cleanliness) * ticks / TotalGrowthTicks;
                 }
             }
             else
             {
                 if (data.cleanlinessBonusAmountCurve != null)
                 {
-                    _cleanlinessBonus += data.cleanlinessBonusAmountCurve.MinY * ticks / TotalGrowTicks;
+                    _cleanlinessBonus += data.cleanlinessBonusAmountCurve.MinY * ticks / TotalGrowthTicks;
                 }
             }
 
@@ -200,121 +242,56 @@ namespace VVRace
 
             Mana -= consumed;
 
-            var damaged = false;
             if (IsGoodTemperature)
             {
-                if (_badTemperatureStartTicks >= 0)
+                if (_temperatureSeverity < 1f)
                 {
-                    _badTemperatureStartTicks = -1;
+                    _temperatureSeverity = Mathf.Clamp01(_temperatureSeverity + ticks / 60000f);
                 }
             }
             else
             {
-                damaged = true;
-                if (_badTemperatureStartTicks >= 0 && data.badTemperatureDamageByDayCurve != null)
-                {
-                    var badDays = (GenTicks.TicksGame - _badTemperatureStartTicks) / 60000f - data.badTemperatureThresholdDay;
-                    if (badDays > 0f)
-                    {
-                        Health -= data.badTemperatureDamageByDayCurve.Evaluate(badDays) * ticks / 60000f;
-                    }
-                }
-                else
-                {
-                    _badTemperatureStartTicks = GenTicks.TicksGame;
-                }
+                _temperatureSeverity = Mathf.Clamp01(_temperatureSeverity - ticks / 45000f);
             }
 
             if (IsGoodGlow)
             {
-                if (_badGlowStartTicks >= 0)
+                if (_glowSeverity < 1f)
                 {
-                    _badGlowStartTicks = -1;
+                    _glowSeverity = Mathf.Clamp01(_glowSeverity + ticks / 60000f);
                 }
             }
             else
             {
-                damaged = true;
-                if (_badGlowStartTicks >= 0 && data.badGlowDamageByDayCurve != null)
-                {
-                    var badDays = (GenTicks.TicksGame - _badGlowStartTicks) / 60000f - data.badGlowThresholdDay;
-                    if (badDays > 0f)
-                    {
-                        Health -= data.badGlowDamageByDayCurve.Evaluate(badDays) * ticks / 60000f;
-                    }
-                }
-                else
-                {
-                    _badGlowStartTicks = GenTicks.TicksGame;
-                }
+                _glowSeverity = Mathf.Clamp01(_glowSeverity - ticks / 45000f);
             }
 
-            if (!ManagementRequired)
-            {
-                if (_badManageStartTicks >= 0)
-                {
-                    _badManageStartTicks = -1;
-                }
-            }
-            else
-            {
-                damaged = true;
-                if (_badManageStartTicks >= 0 && data.badManageDamageByDayCurve != null)
-                {
-                    var badDays = (GenTicks.TicksGame - _badManageStartTicks) / 60000f - data.badManageThresholdDay;
-                    if (badDays > 0f)
-                    {
-                        Health -= data.badManageDamageByDayCurve.Evaluate(badDays) * ticks / 60000f;
-                    }
-                }
-                else
-                {
-                    _badManageStartTicks = GenTicks.TicksGame;
-                }
-            }
-
-            if (Mana < Data.requiredMinMana)
-            {
-                if (_badManaStartTicks >= 0)
-                {
-                    _badManaStartTicks = -1;
-                }
-            }
-            else
-            {
-                damaged = true;
-                if (_badManaStartTicks >= 0 && data.badManaDamageByDayCurve != null)
-                {
-                    var badDays = (GenTicks.TicksGame - _badManaStartTicks) / 60000f - data.badManaThresholdDay;
-                    if (badDays > 0f)
-                    {
-                        Health -= data.badManaDamageByDayCurve.Evaluate(badDays) * ticks / 60000f;
-                    }
-                }
-                else
-                {
-                    _badManaStartTicks = GenTicks.TicksGame;
-                }
-            }
-
-            if (!damaged)
-            {
-                Health += data.healthRegenNoDamagedByDays * ticks / 60000f;
-            }
-
-            if (Health <= 0f)
-            {
-                _billOwner.Notify_BillFailed();
-            }
         }
 
-        public void Manage()
+        private float CalcPlantDamageFromNeeds(GrowingArcanePlantData data, int ticks)
         {
-            _lastManagementTicks = GenTicks.TicksGame;
-            if (_badManageStartTicks >= 0)
+            float damage = 0f;
+            if (data.manaSensitivity > GrowingArcanePlantSensitivity.None)
             {
-                _badManageStartTicks = -1;
+                damage += data.manaSensitivity.CalcTickDamage(ManaPct) * ticks;
             }
+
+            if (data.manageSensitivity > GrowingArcanePlantSensitivity.None)
+            {
+                damage += data.manageSensitivity.CalcTickDamage(ManagePct) * ticks;
+            }
+
+            if (data.temperatureSensitivity > GrowingArcanePlantSensitivity.None)
+            {
+                damage += data.temperatureSensitivity.CalcTickDamage(_temperatureSeverity) * ticks;
+            }
+
+            if (data.glowSensitivity > GrowingArcanePlantSensitivity.None)
+            {
+                damage += data.glowSensitivity.CalcTickDamage(_glowSeverity) * ticks;
+            }
+
+            return damage;
         }
     }
 }

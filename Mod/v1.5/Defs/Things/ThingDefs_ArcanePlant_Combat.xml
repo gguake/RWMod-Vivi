@@ -74,13 +74,15 @@
 
         <maxMana>400</maxMana>
         <consumedManaByDay>60</consumedManaByDay>
-        <requiredMinMana>50</requiredMinMana>
-        <badManaThresholdDay>0.5</badManaThresholdDay>
-        <badManaDamageByDayCurve>
-          <points>
-            <li>(0,30)</li>
-          </points>
-        </badManaDamageByDayCurve>
+
+        <manaSensitivity>Medium</manaSensitivity>
+        <manageSensitivity>Medium</manageSensitivity>
+        <temperatureSensitivity>Medium</temperatureSensitivity>
+        <glowSensitivity>Medium</glowSensitivity>
+        
+        <manageIntervalTicks>150000</manageIntervalTicks>
+        <optimalTemperatureRange>10~34</optimalTemperatureRange>
+        <optimalGlowRange>0.5~1.0</optimalGlowRange>
 
         <successChanceCurve>
           <points>
@@ -109,40 +111,6 @@
             <li>(0.6,5)</li>
           </points>
         </cleanlinessBonusAmountCurve>
-
-        <optimalTemperatureRange>10~34</optimalTemperatureRange>
-        <badTemperatureThresholdDay>0.3</badTemperatureThresholdDay>
-        <badTemperatureDamageByDayCurve>
-          <points>
-            <li>(0,10)</li>
-            <li>(0.5,20)</li>
-            <li>(1,40)</li>
-            <li>(2,80)</li>
-            <li>(3,160)</li>
-          </points>
-        </badTemperatureDamageByDayCurve>
-
-        <optimalGlowRange>0.5~1</optimalGlowRange>
-        <badGlowThresholdDay>0.3</badGlowThresholdDay>
-        <badGlowDamageByDayCurve>
-          <points>
-            <li>(0,10)</li>
-            <li>(0.5,20)</li>
-            <li>(1,40)</li>
-            <li>(2,80)</li>
-            <li>(3,160)</li>
-          </points>
-        </badGlowDamageByDayCurve>
-
-        <manageIntervalTicks>150000</manageIntervalTicks>
-        <badManageThresholdDay>1.5</badManageThresholdDay>
-        <badManageDamageByDayCurve>
-          <points>
-            <li>(0,5)</li>
-            <li>(1,15)</li>
-            <li>(2,25)</li>
-          </points>
-        </badManageDamageByDayCurve>
       </li>
     </modExtensions>
   </ThingDef>
@@ -277,13 +245,15 @@
 
         <maxMana>400</maxMana>
         <consumedManaByDay>60</consumedManaByDay>
-        <requiredMinMana>50</requiredMinMana>
-        <badManaThresholdDay>0.5</badManaThresholdDay>
-        <badManaDamageByDayCurve>
-          <points>
-            <li>(0,30)</li>
-          </points>
-        </badManaDamageByDayCurve>
+
+        <manaSensitivity>Medium</manaSensitivity>
+        <manageSensitivity>Medium</manageSensitivity>
+        <temperatureSensitivity>Medium</temperatureSensitivity>
+        <glowSensitivity>Medium</glowSensitivity>
+        
+        <manageIntervalTicks>150000</manageIntervalTicks>
+        <optimalTemperatureRange>10~34</optimalTemperatureRange>
+        <optimalGlowRange>0.5~1.0</optimalGlowRange>
 
         <successChanceCurve>
           <points>
@@ -312,40 +282,6 @@
             <li>(0.6,5)</li>
           </points>
         </cleanlinessBonusAmountCurve>
-
-        <optimalTemperatureRange>10~34</optimalTemperatureRange>
-        <badTemperatureThresholdDay>0.3</badTemperatureThresholdDay>
-        <badTemperatureDamageByDayCurve>
-          <points>
-            <li>(0,10)</li>
-            <li>(0.5,20)</li>
-            <li>(1,40)</li>
-            <li>(2,80)</li>
-            <li>(3,160)</li>
-          </points>
-        </badTemperatureDamageByDayCurve>
-
-        <optimalGlowRange>0.5~1</optimalGlowRange>
-        <badGlowThresholdDay>0.3</badGlowThresholdDay>
-        <badGlowDamageByDayCurve>
-          <points>
-            <li>(0,10)</li>
-            <li>(0.5,20)</li>
-            <li>(1,40)</li>
-            <li>(2,80)</li>
-            <li>(3,160)</li>
-          </points>
-        </badGlowDamageByDayCurve>
-
-        <manageIntervalTicks>150000</manageIntervalTicks>
-        <badManageThresholdDay>1.5</badManageThresholdDay>
-        <badManageDamageByDayCurve>
-          <points>
-            <li>(0,5)</li>
-            <li>(1,15)</li>
-            <li>(2,25)</li>
-          </points>
-        </badManageDamageByDayCurve>
       </li>
     </modExtensions>
   </ThingDef>
@@ -531,13 +467,13 @@
 
         <maxMana>500</maxMana>
         <consumedManaByDay>50</consumedManaByDay>
-        <requiredMinMana>30</requiredMinMana>
-        <badManaThresholdDay>0.5</badManaThresholdDay>
-        <badManaDamageByDayCurve>
-          <points>
-            <li>(0,30)</li>
-          </points>
-        </badManaDamageByDayCurve>
+
+        <manaSensitivity>High</manaSensitivity>
+        <temperatureSensitivity>High</temperatureSensitivity>
+        <glowSensitivity>Low</glowSensitivity>
+        
+        <optimalTemperatureRange>16~60</optimalTemperatureRange>
+        <optimalGlowRange>0.5~1.0</optimalGlowRange>
 
         <successChanceCurve>
           <points>
@@ -566,30 +502,6 @@
             <li>(0.6,5)</li>
           </points>
         </cleanlinessBonusAmountCurve>
-
-        <optimalTemperatureRange>16~60</optimalTemperatureRange>
-        <badTemperatureThresholdDay>0.3</badTemperatureThresholdDay>
-        <badTemperatureDamageByDayCurve>
-          <points>
-            <li>(0,10)</li>
-            <li>(0.5,20)</li>
-            <li>(1,40)</li>
-            <li>(2,80)</li>
-            <li>(3,160)</li>
-          </points>
-        </badTemperatureDamageByDayCurve>
-
-        <optimalGlowRange>0.5~1</optimalGlowRange>
-        <badGlowThresholdDay>0.3</badGlowThresholdDay>
-        <badGlowDamageByDayCurve>
-          <points>
-            <li>(0,10)</li>
-            <li>(0.5,20)</li>
-            <li>(1,40)</li>
-            <li>(2,80)</li>
-            <li>(3,160)</li>
-          </points>
-        </badGlowDamageByDayCurve>
       </li>
     </modExtensions>
   </ThingDef>

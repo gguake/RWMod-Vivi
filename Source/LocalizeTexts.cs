@@ -65,10 +65,6 @@
         public const string StatsReport_ManaFlux = "VV_StatsReport_ManaFlux";
         public const string StatsReport_ManaFlux_Desc = "VV_StatsReport_ManaFlux_Desc";
 
-        public const string ITab_GatherWorkerTable_TabLabel = "VV_ITab_GatherWorkerTable_TabLabel";
-        public const string ITab_GatherWorkerTable_GatherRadiusSlider = "VV_ITab_GatherWorkerTable_GatherRadiusSlider";
-        public const string ITab_ArcanePlantFarmBill_TabLabel = "VV_ITab_ArcanePlantFarmBill_TabLabel";
-
         public const string RewardAncientWorldtreeLocationLabel = "VV_RewardAncientWorldtreeLocationLabel";
         public const string RewardAncientWorldtreeLocation = "VV_RewardAncientWorldtreeLocation";
         public const string RewardCoronationLabel = "VV_RewardCoronationLabel";
@@ -104,6 +100,28 @@
 
     }
 
+    public static class LocalizeString_ITab
+    {
+        public const string ITab_GatherWorkerTable_TabLabel = "VV_ITab_GatherWorkerTable_TabLabel";
+        public const string ITab_GatherWorkerTable_GatherRadiusSlider = "VV_ITab_GatherWorkerTable_GatherRadiusSlider";
+
+        public const string ITab_ArcanePlantFarmBill_TabLabel = "VV_ITab_ArcanePlantFarmBill_TabLabel";
+        public const string ITab_ArcanePlantFarmBill_Title = "VV_ITab_ArcanePlantFarmBill_Title";
+        public const string ITab_ArcanePlantFarmBill_GrowthPct = "VV_ITab_ArcanePlantFarmBill_GrowthPct";
+        public const string ITab_ArcanePlantFarmBill_GrowthPctDesc = "VV_ITab_ArcanePlantFarmBill_GrowthPctDesc";
+        public const string ITab_ArcanePlantFarmBill_HealthPct = "VV_ITab_ArcanePlantFarmBill_HealthPct";
+        public const string ITab_ArcanePlantFarmBill_HealthPctDesc = "VV_ITab_ArcanePlantFarmBill_HealthPctDesc";
+        public const string ITab_ArcanePlantFarmBill_ManaPct = "VV_ITab_ArcanePlantFarmBill_ManaPct";
+        public const string ITab_ArcanePlantFarmBill_ManaPctDesc = "VV_ITab_ArcanePlantFarmBill_ManaPctDesc";
+        public const string ITab_ArcanePlantFarmBill_Management = "VV_ITab_ArcanePlantFarmBill_Management";
+        public const string ITab_ArcanePlantFarmBill_ManagementDesc = "VV_ITab_ArcanePlantFarmBill_ManagementDesc";
+        public const string ITab_ArcanePlantFarmBill_Temperature = "VV_ITab_ArcanePlantFarmBill_Temperature";
+        public const string ITab_ArcanePlantFarmBill_TemperatureDesc = "VV_ITab_ArcanePlantFarmBill_TemperatureDesc";
+        public const string ITab_ArcanePlantFarmBill_Glow = "VV_ITab_ArcanePlantFarmBill_Glow";
+        public const string ITab_ArcanePlantFarmBill_GlowDesc = "VV_ITab_ArcanePlantFarmBill_GlowDesc";
+
+    }
+
     public static class LocalizeString_Message
     {
         public const string VV_MessageCompleteGrowingArcanePlant = nameof(VV_MessageCompleteGrowingArcanePlant);
@@ -113,5 +131,6 @@
     public static class LocalizeString_Dialog
     {
         public const string VV_DialogStartGrowingArcanePlantIngredientLabel = nameof(VV_DialogStartGrowingArcanePlantIngredientLabel);
+        public const string VV_DialogCancelGrowingArcanePlantBillInGrowing = nameof(VV_DialogCancelGrowingArcanePlantBillInGrowing);
     }
 }

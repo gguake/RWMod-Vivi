@@ -2,4 +2,27 @@
 <LanguageData>
   <VV_ITab_GatherWorkerTable_TabLabel>채집</VV_ITab_GatherWorkerTable_TabLabel>
   <VV_ITab_GatherWorkerTable_GatherRadiusSlider>채집 작업 범위 변경</VV_ITab_GatherWorkerTable_GatherRadiusSlider>
+
+  <VV_ITab_ArcanePlantFarmBill_TabLabel>재배 정보</VV_ITab_ArcanePlantFarmBill_TabLabel>
+  <VV_ITab_ArcanePlantFarmBill_Title>{0} 재배</VV_ITab_ArcanePlantFarmBill_Title>
+
+  <VV_ITab_ArcanePlantFarmBill_GrowthPct>진행율</VV_ITab_ArcanePlantFarmBill_GrowthPct>
+  <VV_ITab_ArcanePlantFarmBill_GrowthPctDesc>현재까지 진행된 재배 작업의 진행도입니다. 100%가 되면 재배가 완료됩니다.</VV_ITab_ArcanePlantFarmBill_GrowthPctDesc>
+  
+  <VV_ITab_ArcanePlantFarmBill_HealthPct>생명력</VV_ITab_ArcanePlantFarmBill_HealthPct>
+  <VV_ITab_ArcanePlantFarmBill_HealthPctDesc>현재 마법 식물의 생명력입니다. 모든 재배 조건이 충족된 상태에서 천천히 회복되며 0%가 되면 재배가 중단되고 실패합니다.
+\n생명력이 낮은 상태에서 재배가 완료될 경우 재배에 실패할 수도 있습니다.</VV_ITab_ArcanePlantFarmBill_HealthPctDesc>
+
+  <VV_ITab_ArcanePlantFarmBill_ManaPct>보유 마나</VV_ITab_ArcanePlantFarmBill_ManaPct>
+  <VV_ITab_ArcanePlantFarmBill_ManaPctDesc>현재 마법 식물의 보유 마나입니다. 시간에 따라 소비되며 마나 비료를 투여해 회복할 수 있습니다.</VV_ITab_ArcanePlantFarmBill_ManaPctDesc>
+
+  <VV_ITab_ArcanePlantFarmBill_Management>관리 수준</VV_ITab_ArcanePlantFarmBill_Management>
+  <VV_ITab_ArcanePlantFarmBill_ManagementDesc>현재 마법 식물의 관리 상태입니다. {0}마다 관리 작업이 필요하며 관리 작업을 제때 수행하지 않을경우 시간에 따라 생명력이 감소합니다.</VV_ITab_ArcanePlantFarmBill_ManagementDesc>
+
+  <VV_ITab_ArcanePlantFarmBill_Temperature>온도 적합도</VV_ITab_ArcanePlantFarmBill_Temperature>
+  <VV_ITab_ArcanePlantFarmBill_TemperatureDesc>현재 마법 식물의 온도 적합도입니다. 재배 환경의 온도가 {0}~{1} 범위 내에 있을때 회복되고 그렇지 않을때 악화됩니다. 악화된 상태로 방치하면 생명력이 감소합니다.</VV_ITab_ArcanePlantFarmBill_TemperatureDesc>
+
+  <VV_ITab_ArcanePlantFarmBill_Glow>빛 적합도</VV_ITab_ArcanePlantFarmBill_Glow>
+  <VV_ITab_ArcanePlantFarmBill_GlowDesc>현재 마법 식물의 빛 적합도입니다. 재배 환경의 빛이 {0}~{1} 범위 내에 있을때 회복되고 그렇지 않을때 악화됩니다. 악화된 상태로 방치하면 생명력이 감소합니다.</VV_ITab_ArcanePlantFarmBill_GlowDesc>
+
 </LanguageData>
