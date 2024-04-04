@@ -11,6 +11,8 @@ namespace VVRace
         public int requiredMinimumManaForActivate;
         public float manaEfficiency;
 
+        public ThingDef mote;
+
         public CompProperties_ManaShieldProjector()
         {
             compClass = typeof(CompManaShieldProjector);
@@ -114,6 +116,11 @@ namespace VVRace
             interceptor.currentHitPoints = hitPoints;
 
             plant.AddMana(-plant.Mana);
+
+            if (Props.mote != null)
+            {
+                MoteMaker.MakeStaticMote(parent.DrawPos, parent.Map, Props.mote);
+            }
         }
     }
 }

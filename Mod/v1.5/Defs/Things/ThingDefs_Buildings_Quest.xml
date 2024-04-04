@@ -83,24 +83,4 @@
       </li>
     </modExtensions>
   </ThingDef>
-
-  <ThingDef Name="Mote_PsychicConditionCauserEffect" ParentName="MoteBase">
-    <defName>VV_Mote_PsychicConditionCauserEffect</defName>
-    <mote>
-      <fadeInTime>0.3</fadeInTime>
-      <solidTime>1.2</solidTime>
-      <fadeOutTime>2.0</fadeOutTime>
-    </mote>
-    <graphicData>
-      <graphicClass>Graphic_MoteWithAgeSecs</graphicClass>
-      <texPath>Things/Mote/PsychicConditionCauserMask</texPath>
-      <shaderType>MotePsychicConditionCauser</shaderType>
-      <shaderParameters>
-        <_distortionIntensity>0.05</_distortionIntensity>
-        <_brightnessMultiplier>1.4</_brightnessMultiplier>
-        <_distortionScale>35</_distortionScale>
-      </shaderParameters>
-      <drawSize>60</drawSize>
-    </graphicData>
-  </ThingDef>
 </Defs>

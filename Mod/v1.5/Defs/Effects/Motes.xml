@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <ThingDef ParentName="MoteBase">
+    <defName>VV_Mote_ShieldProjectorEffect</defName>
+    <mote>
+      <fadeInTime>0.05</fadeInTime>
+      <solidTime>0.5</solidTime>
+      <fadeOutTime>1.5</fadeOutTime>
+    </mote>
+    <graphicData>
+      <graphicClass>Graphic_MoteWithAgeSecs</graphicClass>
+      <texPath>Things/Mote/VV_PsychicEffect</texPath>
+      <shaderType>MotePsychicConditionCauser</shaderType>
+      <shaderParameters>
+        <_distortionIntensity>1.0</_distortionIntensity>
+        <_brightnessMultiplier>1.7</_brightnessMultiplier>
+        <_distortionScale>20</_distortionScale>
+      </shaderParameters>
+      <drawSize>10</drawSize>
+    </graphicData>
+  </ThingDef>
+
+
+  <ThingDef ParentName="MoteBase">
+    <defName>VV_Mote_PsychicConditionCauserEffect</defName>
+    <mote>
+      <fadeInTime>0.3</fadeInTime>
+      <solidTime>1.2</solidTime>
+      <fadeOutTime>2.0</fadeOutTime>
+    </mote>
+    <graphicData>
+      <graphicClass>Graphic_MoteWithAgeSecs</graphicClass>
+      <texPath>Things/Mote/VV_PsychicEffect</texPath>
+      <shaderType>MotePsychicConditionCauser</shaderType>
+      <shaderParameters>
+        <_distortionIntensity>0.1</_distortionIntensity>
+        <_brightnessMultiplier>1.4</_brightnessMultiplier>
+        <_distortionScale>35</_distortionScale>
+      </shaderParameters>
+      <drawSize>65</drawSize>
+    </graphicData>
+  </ThingDef>
+
+</Defs>

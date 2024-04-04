@@ -943,6 +943,8 @@
         <shieldDef>VV_PurifimintShield</shieldDef>
         <requiredMinimumManaForActivate>30</requiredMinimumManaForActivate>
         <manaEfficiency>2.0</manaEfficiency>
+
+        <mote>VV_Mote_ShieldProjectorEffect</mote>
       </li>
     </comps>
     
