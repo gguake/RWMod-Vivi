@@ -29,12 +29,13 @@
 <VV_Radiantflower.comps.CompSchedule.offMessage>식물 휴식기에 꺼짐</VV_Radiantflower.comps.CompSchedule.offMessage>
 
 <VV_Richflower.label>풍년화</VV_Richflower.label>
-<VV_Richflower.description>커다란 꽃잎을 가진 마법꽃으로 꽃가루를 주변에 지속적으로 퍼뜨리며 꿀을 채집할때 많은 꿀을 얻을 수 있습니다.
-\n인접 토양이 경작에 유리하도록 지속적으로 개간하며 인접한 식물의 숫자에 따라 마나를 생산합니다.</VV_Richflower.description>
+<VV_Richflower.description>커다란 꽃잎을 가진 마법꽃으로 주기적으로 꽃가루를 주변에 퍼뜨리며 꿀을 채집할때 많은 꿀을 얻을 수 있습니다.
+\n인접한 식물의 생명 활동에서 마나를 생산하며 주변의 토양을 재배에 유리한 환경으로 변화시킵니다.</VV_Richflower.description>
 
 <VV_Purifimint.label>정화민트</VV_Purifimint.label>
 <VV_Purifimint.description>주변에 빛을 내는 작은 마법 식물로 인접한 토양의 오염을 흡수해 마나로 변환하며 주변에 오염된 토양이 많을수록 많은 마나를 생산합니다. 미관상 아름다워 장식에 쓰이기도 합니다.
 \n저장된 마나를 일시적으로 방출해 외부의 투사체를 잠시동안 차단하는 보호막을 잠시동안 생성할 수도 있습니다.</VV_Purifimint.description>
+<VV_PurifimintShield.label>정화민트 보호막</VV_PurifimintShield.label>
 
 <VV_Skyweed.label>하늘풀</VV_Skyweed.label>
 <VV_Skyweed.description>민들레 씨앗과 비슷한 모양의 마법 식물로 실외에 있을때 바람의 힘을 마나로 변환합니다.

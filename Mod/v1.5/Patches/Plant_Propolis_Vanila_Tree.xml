@@ -8,13 +8,6 @@
       <VV_TreeResinGatherYield>1.0</VV_TreeResinGatherYield>
     </value>
   </Operation>
-  <Operation Class="PatchOperationAdd">
-    <xpath>Defs/ThingDef[plant/sowTags/li="DecorativeTree"]/statBases</xpath>
-    <value>
-      <VV_MinGrowthPlantGatherable>0.99</VV_MinGrowthPlantGatherable>
-      <VV_TreeResinGatherYield>0.5</VV_TreeResinGatherYield>
-    </value>
-  </Operation>
 
   <Operation Class="PatchOperationSequence">
     <operations>

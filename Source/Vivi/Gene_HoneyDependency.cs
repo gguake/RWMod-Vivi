@@ -58,7 +58,15 @@ namespace VVRace
             {
                 for (int i = 0; i < compIngredients.ingredients.Count; ++i)
                 {
-                    if (compIngredients.ingredients[i].GetCompProperties<CompProperties_Honey>() != null)
+                    var ingredientDef = compIngredients.ingredients[i];
+                    if (ingredientDef.GetCompProperties<CompProperties_Honey>() != null)
+                    {
+                        Reset();
+                        return;
+                    }
+
+                    var drugCompProps = ingredientDef.GetCompProperties<CompProperties_Drug>();
+                    if (drugCompProps != null && drugCompProps.chemical == VVChemicalDefOf.Ambrosia)
                     {
                         Reset();
                         return;
@@ -68,6 +76,12 @@ namespace VVRace
             else
             {
                 if (thing.TryGetComp<CompHoney>() != null)
+                {
+                    Reset();
+                }
+
+                var compDrug = thing.TryGetComp<CompDrug>();
+                if (compDrug != null && compDrug.Props.chemical == VVChemicalDefOf.Ambrosia)
                 {
                     Reset();
                 }

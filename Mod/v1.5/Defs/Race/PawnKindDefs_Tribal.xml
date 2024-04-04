@@ -38,7 +38,7 @@
     <modExtensions>
       <li Class="RPEF.PawnGeneratorKindHook">
         <replaceHooks>
-          <Refugee>1500</Refugee>
+          <Refugee MayRequire="Ludeon.RimWorld.Royalty">1500</Refugee>
           <Slave>1500</Slave>
         </replaceHooks>
       </li>
@@ -176,7 +176,7 @@
     <modExtensions>
       <li Class="RPEF.PawnGeneratorKindHook">
         <replaceHooks>
-          <Refugee>500</Refugee>
+          <Refugee MayRequire="Ludeon.RimWorld.Royalty">500</Refugee>
           <Slave>500</Slave>
         </replaceHooks>
       </li>

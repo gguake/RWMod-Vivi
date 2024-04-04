@@ -19,7 +19,7 @@
   <VV_CommandEquipWeaponDesc>건인장에게 선택된 무기를 장착합니다. 근접 무기나 생체인증 무기는 장착할 수 없습니다.</VV_CommandEquipWeaponDesc>
   <VV_CommandUnequipWeapon>장착된 무기 해제</VV_CommandUnequipWeapon>
   <VV_CommandActivateShield>보호막 활성화</VV_CommandActivateShield>
-  <VV_CommandActivateShieldDesc>보호막을 활성화해 외부에서 들어오는 투사체를 차단합니다. 보유한 모든 마나를 소모하며 보호막의 내구도는 소모된 마나에 비례합니다.</VV_CommandActivateShieldDesc>
+  <VV_CommandActivateShieldDesc>보유한 모든 마나를 소모하여 외부에서 들어오는 투사체를 차단하는 보호막을 활성화합니다. 보호막의 내구도는 소모된 마나에 비례하며 {0}동안 지속됩니다.</VV_CommandActivateShieldDesc>
   <VV_CommandActivateShieldAlreadyActivated>보호막이 이미 활성화 되어있음.</VV_CommandActivateShieldAlreadyActivated>
   <VV_CommandActivateShieldNotEnoughEnergy>마나가 최소 {0}이상 필요합니다.</VV_CommandActivateShieldNotEnoughEnergy>
   <VV_CommandNewGrowArcanePlantBill>재배 시작</VV_CommandNewGrowArcanePlantBill>

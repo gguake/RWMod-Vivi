@@ -26,8 +26,8 @@
 
       <li Class="VVRace.CompProperties_FilthMakerArcanePlant">
         <filthDef>VV_FilthPollen</filthDef>
-        <makeAmountPerDays>10~30</makeAmountPerDays>
-        <radius>2.6</radius>
+        <makeAmountPerDays>5~15</makeAmountPerDays>
+        <radius>1.9</radius>
         <exceptCenter>true</exceptCenter>
 
         <spawnEffecter>VV_PollenEmitting</spawnEffecter>

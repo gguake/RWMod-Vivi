@@ -9,6 +9,7 @@
   <VV_Inspector_PlantManaFlux>({0}/일)</VV_Inspector_PlantManaFlux>
   <VV_Inspector_ShootusWeaponReserved>예약됨: {0}</VV_Inspector_ShootusWeaponReserved>
   <VV_Inspector_ShootusWeaponEquipped>장착됨: {0}</VV_Inspector_ShootusWeaponEquipped>
-  <VV_Inspector_ViviBroadShield>남은 보호막량: {0}/{1}</VV_Inspector_ViviBroadShield>
+  <VV_Inspector_ViviBroadShieldHitPoint>보호막 내구도: {0}/{1}</VV_Inspector_ViviBroadShieldHitPoint>
+  <VV_Inspector_ViviBroadShieldDuration>남은 보호막 지속시간: {0}</VV_Inspector_ViviBroadShieldDuration>
   <VV_Inspector_GrowingArcanePlantReady>{0} 재배 준비중</VV_Inspector_GrowingArcanePlantReady>
 </LanguageData>

@@ -12,7 +12,7 @@
 
     <drawerType>MapMeshAndRealTime</drawerType>
     <graphicData>
-      <texPath>Things/Building/Special/ArchonexusCore</texPath>
+      <texPath>Things/Plants/VV_Dreamum</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <drawSize>(13, 13)</drawSize>
       <shadowData>

@@ -2,6 +2,16 @@
 <Patch>
   <Operation Class="PatchOperationSequence">
     <operations>
+
+      <li Class="PatchOperationAdd" MayRequire="Ludeon.RimWorld.Ideology">
+        <xpath>Defs/ThingDef[plant/sowTags/li="DecorativeTree"]/statBases</xpath>
+        <value>
+          <VV_MinGrowthPlantGatherable>0.99</VV_MinGrowthPlantGatherable>
+          <VV_TreeResinGatherYield>0.5</VV_TreeResinGatherYield>
+        </value>
+      </li>
+
+
       <li Class="PatchOperationAdd" MayRequire="Ludeon.RimWorld.Royalty">
         <xpath>Defs/FactionDef[defName="Empire"]/permanentEnemyToEveryoneExcept</xpath>
         <value>

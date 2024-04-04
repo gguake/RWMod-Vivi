@@ -1,5 +1,7 @@
 ﻿using RimWorld;
 using System.Collections.Generic;
+using System.Text;
+using UnityEngine;
 using Verse;
 
 namespace VVRace
@@ -19,6 +21,7 @@ namespace VVRace
         }
     }
 
+    [StaticConstructorOnStartup]
     public class CompManaShieldProjector : ThingComp
     {
         public CompProperties_ManaShieldProjector Props => (CompProperties_ManaShieldProjector)props;
@@ -44,11 +47,15 @@ namespace VVRace
             Scribe_References.Look(ref _shield, "shield");
         }
 
+        private static readonly Texture2D ShieldActivateTex = ContentFinder<Texture2D>.Get("UI/Commands/VV_PurifimintShield");
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
         {
+            var duration = Props.shieldDef.GetCompProperties<CompProperties_DestroyAfterDelay>().delayTicks;
+
             var commandActivateShield = new Command_Action();
+            commandActivateShield.icon = ShieldActivateTex;
             commandActivateShield.defaultLabel = LocalizeString_Command.CommandActivateShield.Translate();
-            commandActivateShield.defaultDesc = LocalizeString_Command.CommandActivateShieldDesc.Translate();
+            commandActivateShield.defaultDesc = LocalizeString_Command.CommandActivateShieldDesc.Translate(duration.ToStringTicksToPeriod().Colorize(ColoredText.DateTimeColor));
             commandActivateShield.action = () =>
             {
                 DeployShield();
@@ -93,7 +100,12 @@ namespace VVRace
             if (Shield != null)
             {
                 var interceptor = _shield.TryGetComp<CompProjectileInterceptor>();
-                return LocalizeString_Inspector.VV_Inspector_ViviBroadShield.Translate(interceptor.currentHitPoints, interceptor.HitPointsMax);
+                var destroyer = _shield.TryGetComp<CompDestroyAfterDelay>();
+
+                var sb = new StringBuilder();
+                sb.AppendInNewLine(LocalizeString_Inspector.VV_Inspector_ViviBroadShieldHitPoint.Translate(interceptor.currentHitPoints, interceptor.HitPointsMax));
+                sb.AppendInNewLine(LocalizeString_Inspector.VV_Inspector_ViviBroadShieldDuration.Translate(destroyer.TicksLeft.ToStringTicksToPeriod(allowSeconds: true)));
+                return sb.ToString();
             }
 
             return base.CompInspectStringExtra();

@@ -200,4 +200,10 @@ namespace VVRace
     {
         public static EffecterDef VV_PollenEmitting;
     }
+
+    [DefOf]
+    public static class VVChemicalDefOf
+    {
+        public static ChemicalDef Ambrosia;
+    }
 }
