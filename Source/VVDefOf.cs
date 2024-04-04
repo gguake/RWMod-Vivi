@@ -194,4 +194,10 @@ namespace VVRace
     {
         public static MapMeshFlagDef VV_ManaFluxGrid;
     }
+
+    [DefOf]
+    public static class VVEffecterDefOf
+    {
+        public static EffecterDef VV_PollenEmitting;
+    }
 }

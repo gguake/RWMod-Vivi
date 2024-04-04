@@ -8,7 +8,7 @@ namespace VVRace
 
         public override IntRange ApproximateManaFlux => new IntRange((int)mana, (int)mana);
 
-        public override float CalcManaFlux(ArcanePlant plant, int ticks)
+        public override float CalcManaFlux(ManaAcceptor plant, int ticks)
         {
             return mana / 60000f * ticks;
         }

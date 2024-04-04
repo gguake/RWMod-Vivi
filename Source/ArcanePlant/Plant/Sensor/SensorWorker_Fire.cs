@@ -1,22 +1,29 @@
 ﻿using RimWorld;
 using Verse;
-using Verse.AI;
 
 namespace VVRace
 {
     public class SensorWorker_Fire : SensorWorker
     {
-        public override bool Detected(Thing thing, float radius)
+        public override bool Detected(Thing parent, float radius)
         {
-            var closest = GenClosest.ClosestThingReachable(
-                thing.Position,
-                thing.Map,
-                ThingRequest.ForDef(ThingDefOf.Fire),
-                PathEndMode.OnCell,
-                TraverseParms.For(TraverseMode.NoPassClosedDoors),
-                radius);
+            var cells = GenRadial.NumCellsInRadius(radius);
+            for (int i = 0; i < cells; ++i)
+            {
+                var cell = parent.Position + GenRadial.RadialPattern[i];
+                if (!cell.InBounds(parent.Map)) { continue; }
 
-            return closest != null;
+                var things = cell.GetThingList(parent.Map);
+                foreach (var thing in things)
+                {
+                    if (thing is Fire || thing.HasAttachment(ThingDefOf.Fire))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
     }
 }

@@ -93,14 +93,13 @@ namespace VVRace
                 for (int i = 0; i < _nodesList.Count; ++i)
                 {
                     var node = _nodesList[i];
-                    var plant = node.Plant;
-                    if (plant == null) { continue; }
+                    if (node.manaAcceptor == null || !node.manaAcceptor.HasManaFlux) { continue; }
 
-                    var extension = plant.ArcanePlantModExtension;
+                    var extension = node.manaAcceptor.ManaExtension;
 
                     var tickInterval = tick - _lastRefreshTick;
-                    var consumed = extension.manaConsumeRule?.CalcManaFlux(plant, tickInterval) ?? 0f;
-                    var generated = extension.manaGenerateRule?.CalcManaFlux(plant, tickInterval) ?? 0f;
+                    var consumed = extension.manaConsumeRule?.CalcManaFlux(node.manaAcceptor, tickInterval) ?? 0f;
+                    var generated = extension.manaGenerateRule?.CalcManaFlux(node.manaAcceptor, tickInterval) ?? 0f;
 
                     totalGeneratedAtTick += generated;
                     totalConsumedAtTick += consumed;
@@ -155,7 +154,7 @@ namespace VVRace
 
                     if (loopCount >= 100)
                     {
-                        Log.Warning($"manaflux network calculation loopCount over 100; {totalOvergeneratedMana} {string.Join(",", _tempDistributeManaFluxNodeCandidateIndices.Select(v => $"{_nodesList[v.index].Plant}_{v.lackedMana}"))}");
+                        Log.Warning($"manaflux network calculation loopCount over 100; {totalOvergeneratedMana} {string.Join(",", _tempDistributeManaFluxNodeCandidateIndices.Select(v => $"{_nodesList[v.index].manaAcceptor}_{v.lackedMana}"))}");
                     }
                 }
 

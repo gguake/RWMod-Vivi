@@ -1,4 +1,5 @@
 ﻿using RimWorld;
+using System.Collections.Generic;
 using UnityEngine;
 using Verse;
 
@@ -27,6 +28,26 @@ namespace VVRace
 
     public abstract class ManaAcceptor : Building
     {
+        public ManaExtension _manaExtension;
+        public ManaExtension ManaExtension
+        {
+            get
+            {
+                if (_manaExtension == null)
+                {
+                    _manaExtension = def.GetModExtension<ManaExtension>();
+                }
+
+                return _manaExtension;
+            }
+        }
+
+        public bool IsFullMana => ManaFluxNode.mana >= ManaExtension.manaCapacity;
+        public float ManaChargeRatio => ManaFluxNode.mana / ManaExtension.manaCapacity;
+        public float Mana => ManaFluxNode.mana;
+
+        public abstract bool HasManaFlux { get; }
+
         public abstract ManaFluxNetwork ManaFluxNetwork { get; set; }
         public abstract ManaFluxNetworkNode ManaFluxNode { get; }
 
@@ -52,11 +73,29 @@ namespace VVRace
             base.DeSpawn(mode);
         }
 
+        public override void PostMake()
+        {
+            base.PostMake();
+
+            if (ManaFluxNode != null)
+            {
+                ManaFluxNode.mana = ManaExtension.manaCapacity * ManaExtension.initialManaPercent;
+            }
+        }
+
         public override void Tick()
         {
-            if (Spawned && ManaFluxGrid != null && ManaFluxGrid.ShouldRefreshNetwork)
+            if (Spawned)
             {
-                ManaFluxGrid.RefreshNetworks();
+                if (ManaFluxGrid != null && ManaFluxGrid.ShouldRefreshNetwork)
+                {
+                    ManaFluxGrid.RefreshNetworks();
+                }
+
+                if (ManaFluxNetwork != null && (Find.TickManager.TicksGame + ManaFluxNetwork.NetworkHash) % GenTicks.TickRareInterval == 0)
+                {
+                    ManaFluxNetwork.Tick();
+                }
             }
 
             base.Tick();
@@ -99,6 +138,50 @@ namespace VVRace
 
             var v = A.TrueCenter() - this.TrueCenter();
             Printer_Plane.PrintPlane(layer, center, new Vector2(1f, v.MagnitudeHorizontal()), mat, v.AngleFlat());
+        }
+
+        protected IEnumerable<ManaAcceptor> AdjacentManaAcceptor
+        {
+            get
+            {
+                foreach (var adjacent in this.OccupiedRect().AdjacentCellsCardinal)
+                {
+
+                    var gridCell = ManaFluxGrid[adjacent];
+                    if (gridCell.provider != null)
+                    {
+                        yield return gridCell.provider;
+                    }
+                    else if (gridCell.transmitter != null)
+                    {
+                        yield return gridCell.transmitter;
+                    }
+                }
+            }
+        }
+
+        protected IEnumerable<ManaAcceptor> AdjacentManaTransmitter
+        {
+            get
+            {
+                foreach (var cell in this.OccupiedRect())
+                {
+                    var gridCell = ManaFluxGrid[cell];
+                    if (gridCell.transmitter != null)
+                    {
+                        yield return gridCell.transmitter;
+                    }
+                }
+
+                foreach (var adjacent in this.OccupiedRect().AdjacentCellsCardinal)
+                {
+                    var gridCell = ManaFluxGrid[adjacent];
+                    if (gridCell.transmitter != null)
+                    {
+                        yield return gridCell.transmitter;
+                    }
+                }
+            }
         }
     }
 

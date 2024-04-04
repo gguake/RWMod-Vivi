@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <!-- 평화꽃 제단 -->
-  <!--
+  <!-- 꿈송이 제단 -->
   <ThingDef ParentName="BuildingBase">
-    <defName>VV_AltarOfPeacebloom</defName>
-    <thingClass>VVRace.PeacebloomAltar</thingClass>
+    <defName>VV_DreamumAltar</defName>
+    <thingClass>VVRace.DreamumAltar</thingClass>
     <label>altar of peacebloom</label>
     <description>.</description>
     <descriptionHyperlinks>
@@ -21,15 +20,17 @@
         <offset>(0,0,-0.66)</offset>
       </shadowData>
     </graphicData>
+    <tickerType>Normal</tickerType>
     
     <uiOrder>3000</uiOrder>
     <uiIconScale>0.8</uiIconScale>
     <altitudeLayer>Building</altitudeLayer>
     <passability>Impassable</passability>
+    <fillPercent>1.0</fillPercent>
 
     <statBases>
       <MaxHitPoints>10000</MaxHitPoints>
-      <WorkToBuild>20000</WorkToBuild>
+      <WorkToBuild>22220</WorkToBuild>
       <Mass>1000</Mass>
       <Flammability>0.0</Flammability>
     </statBases>
@@ -46,11 +47,12 @@
       <deconstructible>false</deconstructible>
       <claimable>false</claimable>
     </building>
+    <designationCategory>VV_Bulidings</designationCategory>
 
     <comps>
       <li Class="CompProperties_MoteEmitter">
-        <mote>Mote_PsychicConditionCauserEffect</mote>
-        <emissionInterval>150</emissionInterval>
+        <mote>VV_Mote_PsychicConditionCauserEffect</mote>
+        <emissionInterval>2500</emissionInterval>
         <soundOnEmission>Archonexus_Throb</soundOnEmission>
       </li>
     </comps>
@@ -60,21 +62,45 @@
     </placeWorkers>
     
     <costList>
-      <VV_Viviwax>2000</VV_Viviwax>
-      <VV_Vivicream>1000</VV_Vivicream>
-      <VV_Fertilizer>1000</VV_Fertilizer>
-      <VV_Lifestrand>200</VV_Lifestrand>
-      <VV_Propolis>200</VV_Propolis>
-      <Gold>200</Gold>
+      <VV_Viviwax>1000</VV_Viviwax>
+      <VV_Vivicream>700</VV_Vivicream>
+      <VV_Fertilizer>300</VV_Fertilizer>
+      <VV_Propolis>220</VV_Propolis>
     </costList>
-
-    <designationCategory>VV_Bulidings</designationCategory>
-    <designationHotKey>Misc9</designationHotKey>
 
     <canOverlapZones>false</canOverlapZones>
     <researchPrerequisites>
       <li>VV_PlantGigantism</li>
     </researchPrerequisites>
+
+    <modExtensions>
+      <li Class="VVRace.ManaExtension">
+        <manaCapacity>22220</manaCapacity>
+
+        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
+          <mana>2220</mana>
+        </manaConsumeRule>
+      </li>
+    </modExtensions>
   </ThingDef>
-  -->
+
+  <ThingDef Name="Mote_PsychicConditionCauserEffect" ParentName="MoteBase">
+    <defName>VV_Mote_PsychicConditionCauserEffect</defName>
+    <mote>
+      <fadeInTime>0.3</fadeInTime>
+      <solidTime>1.2</solidTime>
+      <fadeOutTime>2.0</fadeOutTime>
+    </mote>
+    <graphicData>
+      <graphicClass>Graphic_MoteWithAgeSecs</graphicClass>
+      <texPath>Things/Mote/PsychicConditionCauserMask</texPath>
+      <shaderType>MotePsychicConditionCauser</shaderType>
+      <shaderParameters>
+        <_distortionIntensity>0.05</_distortionIntensity>
+        <_brightnessMultiplier>1.4</_brightnessMultiplier>
+        <_distortionScale>35</_distortionScale>
+      </shaderParameters>
+      <drawSize>60</drawSize>
+    </graphicData>
+  </ThingDef>
 </Defs>

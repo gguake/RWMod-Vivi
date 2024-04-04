@@ -15,12 +15,6 @@ namespace VVRace
 
     public class ArcanePlantExtension : DefModExtension
     {
-        public int manaCapacity = 100;
-        public float initialManaPercent = 1f;
-
-        public ManaFluxRule manaConsumeRule;
-        public ManaFluxRule manaGenerateRule;
-
         public int zeroManaDurableTicks = 15000;
         public IntRange zeroManaDamageByChance = new IntRange(0, 0);
         

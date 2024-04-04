@@ -29,6 +29,8 @@
         <makeAmountPerDays>10~30</makeAmountPerDays>
         <radius>2.6</radius>
         <exceptCenter>true</exceptCenter>
+
+        <spawnEffecter>VV_PollenEmitting</spawnEffecter>
       </li>
       <!--
       <li Class="CompProperties_Studiable">
@@ -45,9 +47,8 @@
     </building>
     
     <modExtensions>
-      <li Class="VVRace.ArcanePlantExtension">
+      <li Class="VVRace.ManaExtension">
         <manaCapacity>700</manaCapacity>
-        <zeroManaDamageByChance>3~9</zeroManaDamageByChance>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
           <mana>70</mana>
@@ -55,7 +56,10 @@
         <manaGenerateRule Class="VVRace.ManaFluxRule_Constant">
           <mana>0</mana>
         </manaGenerateRule>
-        
+      </li>
+
+      <li Class="VVRace.ArcanePlantExtension">
+        <zeroManaDamageByChance>3~9</zeroManaDamageByChance>
         <zeroManaDurableTicks>180000</zeroManaDurableTicks>
       </li>
     </modExtensions>

@@ -60,4 +60,20 @@
       </li>
     </additionalHediffs>
   </DamageDef>
+  
+  <DamageDef>
+    <defName>VV_ExtinguishWithWater</defName>
+    <label>extinguish</label>
+    <workerClass>DamageWorker_Extinguish</workerClass>
+    <canInterruptJobs>false</canInterruptJobs>
+    <makesBlood>false</makesBlood>
+    <defaultDamage>999999</defaultDamage>
+    <hediff>CoveredInFirefoam</hediff>
+    <explosionCellFleck>BlastExtinguisher</explosionCellFleck>
+    <explosionColorEdge>(0.94, 1, 1, 0.1)</explosionColorEdge>
+    <soundExplosion>EmergeFromWater</soundExplosion>
+    <harmsHealth>false</harmsHealth>
+    <combatLogRules>Damage_Extinguish</combatLogRules>
+    <consideredHelpful>true</consideredHelpful>
+  </DamageDef>
 </Defs>

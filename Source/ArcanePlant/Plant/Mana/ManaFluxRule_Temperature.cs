@@ -10,7 +10,7 @@ namespace VVRace
 
         public override IntRange ApproximateManaFlux => new IntRange((int)manaFromTemperatureRange.min, (int)manaFromTemperatureRange.max);
 
-        public override float CalcManaFlux(ArcanePlant plant, int ticks)
+        public override float CalcManaFlux(ManaAcceptor plant, int ticks)
         {
             var temperature = plant.AmbientTemperature;
             if (activeTemperatureRange.IncludesEpsilon(temperature))

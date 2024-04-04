@@ -10,7 +10,7 @@ namespace VVRace
 
         public override IntRange ApproximateManaFlux => new IntRange(0, (int)manaFromOccupiedPollution + (int)manaPerAdjacentPollution * 4);
 
-        public override float CalcManaFlux(ArcanePlant plant, int ticks)
+        public override float CalcManaFlux(ManaAcceptor plant, int ticks)
         {
             if (manaPerAdjacentPollution != 0f)
             {

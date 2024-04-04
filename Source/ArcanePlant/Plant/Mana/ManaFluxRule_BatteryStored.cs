@@ -9,7 +9,7 @@ namespace VVRace
 
         public override IntRange ApproximateManaFlux => new IntRange((int)manaFromStoredEnergy.min, (int)manaFromStoredEnergy.max);
 
-        public override float CalcManaFlux(ArcanePlant plant, int ticks)
+        public override float CalcManaFlux(ManaAcceptor plant, int ticks)
         {
             var batteryComp = plant.TryGetComp<CompPowerBattery>();
             if (batteryComp != null)

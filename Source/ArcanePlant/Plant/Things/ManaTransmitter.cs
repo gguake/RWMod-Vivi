@@ -6,6 +6,8 @@ namespace VVRace
 {
     public class ManaTransmitter : ManaAcceptor
     {
+        public override bool HasManaFlux => false;
+
         public override ManaFluxNetwork ManaFluxNetwork { get; set; }
         public override ManaFluxNetworkNode ManaFluxNode => null;
 

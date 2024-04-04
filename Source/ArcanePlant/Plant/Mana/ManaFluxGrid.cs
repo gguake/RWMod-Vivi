@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 using Verse;
 
 namespace VVRace
@@ -8,27 +7,27 @@ namespace VVRace
     public struct ManaFluxGridCell
     {
         public ManaTransmitter transmitter;
-        public ArcanePlant arcanePlant;
+        public ManaAcceptor provider;
         public int networkIndex;
 
-        public bool IsEmpty => transmitter == null && arcanePlant == null;
+        public bool IsEmpty => transmitter == null && provider == null;
 
         public ManaFluxGridCell WithTransmitter(ManaTransmitter transmitter)
         {
             return new ManaFluxGridCell
             {
                 transmitter = transmitter,
-                arcanePlant = arcanePlant,
+                provider = provider,
                 networkIndex = networkIndex,
             };
         }
 
-        public ManaFluxGridCell WithArcanePlant(ArcanePlant arcanePlant)
+        public ManaFluxGridCell WithProvider(ManaAcceptor provider)
         {
             return new ManaFluxGridCell
             {
                 transmitter = transmitter,
-                arcanePlant = arcanePlant,
+                provider = provider,
                 networkIndex = networkIndex,
             };
         }
@@ -38,21 +37,21 @@ namespace VVRace
             return new ManaFluxGridCell
             {
                 transmitter = transmitter,
-                arcanePlant = arcanePlant,
+                provider = provider,
                 networkIndex = index,
             };
         }
 
         public void ChangeFluxNetwork(ManaFluxNetwork network)
         {
-            if (arcanePlant != null)
+            if (provider != null)
             {
-                if (arcanePlant.ManaFluxNetwork != null)
+                if (provider.ManaFluxNetwork != null)
                 {
-                    arcanePlant.ManaFluxNetwork.RemoveManaFluxNode(arcanePlant);
+                    provider.ManaFluxNetwork.RemoveManaFluxNode(provider);
                 }
 
-                network.AddManaFluxNode(arcanePlant, arcanePlant.ManaFluxNode);
+                network.AddManaFluxNode(provider, provider.ManaFluxNode);
             }
         }
     }
@@ -112,19 +111,21 @@ namespace VVRace
 
         public void AddManaAcceptor(ManaAcceptor acceptor)
         {
-            var pos = acceptor.Position;
-            if (!_manaFluxGridCells.TryGetValue(pos, out var gridCell))
+            foreach (var pos in acceptor.OccupiedRect().Cells)
             {
-                _manaFluxGridCells.Add(pos, gridCell);
-            }
+                if (!_manaFluxGridCells.TryGetValue(pos, out var gridCell))
+                {
+                    _manaFluxGridCells.Add(pos, gridCell);
+                }
 
-            if (acceptor is ArcanePlant arcanePlant)
-            {
-                _manaFluxGridCells[pos] = gridCell.WithArcanePlant(arcanePlant);
-            }
-            else if (acceptor is ManaTransmitter transmitter)
-            {
-                _manaFluxGridCells[pos] = gridCell.WithTransmitter(transmitter);
+                if (acceptor.HasManaFlux)
+                {
+                    _manaFluxGridCells[pos] = gridCell.WithProvider(acceptor);
+                }
+                else if (acceptor is ManaTransmitter transmitter)
+                {
+                    _manaFluxGridCells[pos] = gridCell.WithTransmitter(transmitter);
+                }
             }
 
             _shouldRefreshNetworkTicks = GenTicks.TicksGame + 1;
@@ -132,22 +133,23 @@ namespace VVRace
 
         public void RemoveManaAcceptor(ManaAcceptor acceptor)
         {
-            var pos = acceptor.Position;
-
-            if (_manaFluxGridCells.TryGetValue(pos, out var gridCell))
+            foreach (var pos in acceptor.OccupiedRect().Cells)
             {
-                if (acceptor is ArcanePlant)
+                if (_manaFluxGridCells.TryGetValue(pos, out var gridCell))
                 {
-                    _manaFluxGridCells[pos] = gridCell.WithArcanePlant(null);
-                }
-                else if (acceptor is ManaTransmitter)
-                {
-                    _manaFluxGridCells[pos] = gridCell.WithTransmitter(null);
-                }
+                    if (acceptor.HasManaFlux)
+                    {
+                        _manaFluxGridCells[pos] = gridCell.WithProvider(null);
+                    }
+                    else if (acceptor is ManaTransmitter)
+                    {
+                        _manaFluxGridCells[pos] = gridCell.WithTransmitter(null);
+                    }
 
-                if (_manaFluxGridCells[pos].IsEmpty)
-                {
-                    _manaFluxGridCells.Remove(pos);
+                    if (_manaFluxGridCells[pos].IsEmpty)
+                    {
+                        _manaFluxGridCells.Remove(pos);
+                    }
                 }
             }
 
@@ -191,10 +193,10 @@ namespace VVRace
                     _manaFluxGridCells[cell] = gridCell;
 
                     var network = _manaFluxNetworks[networkIndex];
-                    if (gridCell.arcanePlant != null)
+                    if (gridCell.provider != null && cell == gridCell.provider.Position)
                     {
-                        gridCell.arcanePlant.ManaFluxNetwork = network;
-                        network.AddManaFluxNode(gridCell.arcanePlant, gridCell.arcanePlant.ManaFluxNode);
+                        gridCell.provider.ManaFluxNetwork = network;
+                        network.AddManaFluxNode(gridCell.provider, gridCell.provider.ManaFluxNode);
                     }
                     if (gridCell.transmitter != null)
                     {

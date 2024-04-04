@@ -6,8 +6,6 @@ namespace VVRace
     {
         public ManaAcceptor manaAcceptor;
 
-        public ArcanePlant Plant => manaAcceptor as ArcanePlant;
-
         public float mana;
 
         public ManaFluxNetworkNode()
@@ -23,12 +21,13 @@ namespace VVRace
         {
             get
             {
-                var plant = Plant;
-                if (plant == null) { return 0; }
+                if (!manaAcceptor.HasManaFlux) { return 0; }
 
-                var extension = plant.ArcanePlantModExtension;
-                var generatedMana = extension.manaGenerateRule?.CalcManaFlux(plant, 60000) ?? 0;
-                var consumedMana = extension.manaConsumeRule?.CalcManaFlux(plant, 60000) ?? 0;
+                var extension = manaAcceptor.ManaExtension;
+                if (extension == null) { return 0; }
+
+                var generatedMana = extension.manaGenerateRule?.CalcManaFlux(manaAcceptor, 60000) ?? 0;
+                var consumedMana = extension.manaConsumeRule?.CalcManaFlux(manaAcceptor, 60000) ?? 0;
                 return (int)generatedMana - (int)consumedMana;
             }
         }

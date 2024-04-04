@@ -26,27 +26,25 @@ namespace VVRace
             }
         }
 
-        private ArcanePlantExtension _defModExtension;
+        private ArcanePlantExtension _arcanePlantExtension;
         public ArcanePlantExtension ArcanePlantModExtension
         {
             get
             {
-                if (_defModExtension == null)
+                if (_arcanePlantExtension == null)
                 {
-                    _defModExtension = def.GetModExtension<ArcanePlantExtension>();
+                    _arcanePlantExtension = def.GetModExtension<ArcanePlantExtension>();
                 }
 
-                return _defModExtension;
+                return _arcanePlantExtension;
             }
         }
+
+        public override bool HasManaFlux => true;
 
         public override ManaFluxNetwork ManaFluxNetwork { get; set; }
         public override ManaFluxNetworkNode ManaFluxNode => _manaFluxNode;
         private ManaFluxNetworkNode _manaFluxNode;
-
-        public bool IsFullMana => _manaFluxNode.mana >= ArcanePlantModExtension.manaCapacity;
-        public float ManaChargeRatio => _manaFluxNode.mana / ArcanePlantModExtension.manaCapacity;
-        public float Mana => _manaFluxNode.mana;
 
         private int _zeroManaTicks = 0;
 
@@ -56,7 +54,7 @@ namespace VVRace
         private int _fertilizeAutoThreshold = 0;
         public int FertilizeAutoThreshold
         {
-            get => (int)Mathf.Clamp(_fertilizeAutoThreshold, 0, ArcanePlantModExtension.manaCapacity - ManaByFertilizer);
+            get => (int)Mathf.Clamp(_fertilizeAutoThreshold, 0, ManaExtension.manaCapacity - ManaByFertilizer);
             set => _fertilizeAutoThreshold = value;
         }
 
@@ -64,7 +62,7 @@ namespace VVRace
         {
             get
             {
-                return Mathf.CeilToInt((ArcanePlantModExtension.manaCapacity - _manaFluxNode.mana) / ManaByFertilizer);
+                return Mathf.CeilToInt((ManaExtension.manaCapacity - _manaFluxNode.mana) / ManaByFertilizer);
             }
         }
 
@@ -105,8 +103,7 @@ namespace VVRace
         {
             base.PostMake();
 
-            _manaFluxNode.mana = ArcanePlantModExtension.manaCapacity * ArcanePlantModExtension.initialManaPercent;
-            FertilizeAutoThreshold = Mathf.FloorToInt(ArcanePlantModExtension.manaCapacity * 0.1f);
+            FertilizeAutoThreshold = Mathf.FloorToInt(ManaExtension.manaCapacity * 0.1f);
         }
 
         public override void Print(SectionLayer layer)
@@ -117,7 +114,8 @@ namespace VVRace
                 Rand.Seed = base.thingIDNumber.GetHashCode();
 
                 var thingTrueCenter = this.TrueCenter();
-                var drawSize = def.graphicData.drawSize.x;
+
+                var drawSize = def.graphicData.drawSize;
 
                 bool isShift = false;
                 var zero = thingTrueCenter + new Vector3(0f, 0f, 0.11f);
@@ -127,7 +125,10 @@ namespace VVRace
                     isShift = true;
                 }
 
-                bool isFlipUV = CanFlip ? Rand.Bool : false;
+                var scale = Rand.Range(0.85f, 1.15f);
+                drawSize.Scale(new Vector2(scale, scale));
+
+                var isFlipUV = CanFlip ? Rand.Bool : false;
                 var material = Graphic.MatSingleFor(this);
                 Graphic.TryGetTextureAtlasReplacementInfo(material, def.category.ToAtlasGroup(), isFlipUV, vertexColors: false, out material, out var uvs, out var _);
 
@@ -136,7 +137,7 @@ namespace VVRace
                 colors[0].a = (colors[3].a = 0);
 
                 Printer_Plane.PrintPlane(
-                    size: new Vector2(drawSize, drawSize),
+                    size: drawSize,
                     layer: layer,
                     center: zero,
                     mat: material,
@@ -197,7 +198,7 @@ namespace VVRace
                 sb.Append("\n");
             }
 
-            sb.Append(LocalizeString_Inspector.VV_Inspector_PlantMana.Translate((int)_manaFluxNode.mana, ArcanePlantModExtension.manaCapacity));
+            sb.Append(LocalizeString_Inspector.VV_Inspector_PlantMana.Translate((int)_manaFluxNode.mana, ManaExtension.manaCapacity));
 
             if (Spawned)
             {
@@ -274,7 +275,7 @@ namespace VVRace
                 commandAddMana.defaultLabel = "DEV: Add mana +10";
                 commandAddMana.action = () =>
                 {
-                    _manaFluxNode.mana = Mathf.Clamp(_manaFluxNode.mana + 10, 0f, ArcanePlantModExtension.manaCapacity);
+                    _manaFluxNode.mana = Mathf.Clamp(_manaFluxNode.mana + 10, 0f, ManaExtension.manaCapacity);
                 };
 
                 yield return commandAddMana;
@@ -286,7 +287,7 @@ namespace VVRace
                 commandSubtractMana.defaultLabel = "DEV: Add mana -10";
                 commandSubtractMana.action = () =>
                 {
-                    _manaFluxNode.mana = Mathf.Clamp(_manaFluxNode.mana - 10, 0f, ArcanePlantModExtension.manaCapacity);
+                    _manaFluxNode.mana = Mathf.Clamp(_manaFluxNode.mana - 10, 0f, ManaExtension.manaCapacity);
                 };
 
                 yield return commandSubtractMana;
@@ -307,11 +308,6 @@ namespace VVRace
                 _forceMinify = false;
                 ForceMinifyAndDropDirect();
                 return;
-            }
-
-            if (ManaFluxNetwork != null && (Find.TickManager.TicksGame + ManaFluxNetwork.NetworkHash) % GenTicks.TickRareInterval == 0)
-            {
-                ManaFluxNetwork.Tick();
             }
 
             if (this.IsHashIntervalTick(GenTicks.TickRareInterval))
@@ -338,7 +334,7 @@ namespace VVRace
             yield return new StatDrawEntry(
                 StatCategoryDefOf.Basics,
                 LocalizeTexts.StatsReport_Mana.Translate(),
-                ArcanePlantModExtension.manaCapacity.ToString(),
+                ManaExtension.manaCapacity.ToString(),
                 LocalizeTexts.StatsReport_Mana_Desc.Translate(),
                 -20000);
 
@@ -365,7 +361,7 @@ namespace VVRace
 
         public void AddMana(float mana)
         {
-            _manaFluxNode.mana = Mathf.Clamp(_manaFluxNode.mana + mana, 0f, ArcanePlantModExtension.manaCapacity);
+            _manaFluxNode.mana = Mathf.Clamp(_manaFluxNode.mana + mana, 0f, ManaExtension.manaCapacity);
         }
 
         public void Notify_TurretVerbShot()
@@ -388,47 +384,6 @@ namespace VVRace
             var map = Map;
             var minified = this.MakeMinified();
             GenPlace.TryPlaceThing(minified, position, map, ThingPlaceMode.Direct);
-        }
-
-        private IEnumerable<ManaAcceptor> AdjacentManaAcceptor
-        {
-            get
-            {
-                foreach (var adjacent in GenAdjFast.AdjacentCellsCardinal(Position))
-                {
-
-                    var gridCell = ManaFluxGrid[adjacent];
-                    if (gridCell.arcanePlant != null)
-                    {
-                        yield return gridCell.arcanePlant;
-                    }
-                    else if (gridCell.transmitter != null)
-                    {
-                        yield return gridCell.transmitter;
-                    }
-                }
-            }
-        }
-
-        private IEnumerable<ManaAcceptor> AdjacentManaTransmitter
-        {
-            get
-            {
-                var gridCell = ManaFluxGrid[Position];
-                if (gridCell.transmitter != null)
-                {
-                    yield return gridCell.transmitter;
-                }
-
-                foreach (var adjacent in GenAdjFast.AdjacentCellsCardinal(Position))
-                {
-                    gridCell = ManaFluxGrid[adjacent];
-                    if (gridCell.transmitter != null)
-                    {
-                        yield return gridCell.transmitter;
-                    }
-                }
-            }
         }
 
     }

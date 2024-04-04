@@ -49,13 +49,16 @@
     </placeWorkers>
 
     <modExtensions>
-      <li Class="VVRace.ArcanePlantExtension">
+      <li Class="VVRace.ManaExtension">
         <manaCapacity>400</manaCapacity>
-        <zeroManaDamageByChance>1~10</zeroManaDamageByChance>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
           <mana>10</mana>
         </manaConsumeRule>
+      </li>
+
+      <li Class="VVRace.ArcanePlantExtension">
+        <zeroManaDamageByChance>1~10</zeroManaDamageByChance>
         <zeroManaDurableTicks>30000</zeroManaDurableTicks>
         
         <consumeManaPerVerbShoot>2</consumeManaPerVerbShoot>
@@ -219,13 +222,16 @@
     </placeWorkers>
 
     <modExtensions>
-      <li Class="VVRace.ArcanePlantExtension">
+      <li Class="VVRace.ManaExtension">
         <manaCapacity>400</manaCapacity>
-        <zeroManaDamageByChance>1~10</zeroManaDamageByChance>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
           <mana>10</mana>
         </manaConsumeRule>
+      </li>
+
+      <li Class="VVRace.ArcanePlantExtension">
+        <zeroManaDamageByChance>1~10</zeroManaDamageByChance>
         <zeroManaDurableTicks>30000</zeroManaDurableTicks>
         
         <consumeManaPerVerbShoot>8</consumeManaPerVerbShoot>
@@ -439,13 +445,16 @@
     </placeWorkers>
 
     <modExtensions>
-      <li Class="VVRace.ArcanePlantExtension">
+      <li Class="VVRace.ManaExtension">
         <manaCapacity>500</manaCapacity>
-        <zeroManaDamageByChance>1~10</zeroManaDamageByChance>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
           <mana>20</mana>
         </manaConsumeRule>
+      </li>
+      
+      <li Class="VVRace.ArcanePlantExtension">
+        <zeroManaDamageByChance>1~10</zeroManaDamageByChance>
         <zeroManaDurableTicks>60000</zeroManaDurableTicks>
         
         <consumeManaPerVerbShoot>1</consumeManaPerVerbShoot>

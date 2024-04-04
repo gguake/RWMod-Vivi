@@ -8,20 +8,6 @@
   <VV_GizmoViviEggProgressTooltip>다음 알을 낳기까지 얼마나 남았는지를 나타냅니다.\n\n진행도가 100%인 상태에서 산란에 적합한 비비 부화기가 존재하면 그곳에 가서 알을 낳습니다.</VV_GizmoViviEggProgressTooltip>
   <VV_GizmoSetFertilizeAutoThreshold>마나가 {0} 이하로 줄어들면 비료 투입</VV_GizmoSetFertilizeAutoThreshold>
 
-  <VV_InspectorViviHatcheryDisabled>부화기 비활성화됨</VV_InspectorViviHatcheryDisabled>
-  <VV_InspectorViviHatcheryDisabledReasonNoRoof>지붕 없음</VV_InspectorViviHatcheryDisabledReasonNoRoof>
-  <VV_InspectorViviHatcheryDisabledReasonOutdoor>실외</VV_InspectorViviHatcheryDisabledReasonOutdoor>
-
-  <VV_InspectorProperTemperature>적정 온도: {0} ~ {1}</VV_InspectorProperTemperature>
-  <VV_InspectorViviWallReplaceCooldown>굳기까지 남은 시간: {0}</VV_InspectorViviWallReplaceCooldown>
-  <VV_InspectorPlantMana>마나: {0}/{1}</VV_InspectorPlantMana>
-  <VV_InspectorPlantManaFlux>({0}/일)</VV_InspectorPlantManaFlux>
-
-  <VV_InspectorViviShootusWeaponReserved>예약됨: {0}</VV_InspectorViviShootusWeaponReserved>
-  <VV_InspectorViviShootusWeaponEquipped>장착됨: {0}</VV_InspectorViviShootusWeaponEquipped>
-  <VV_InspectorViviBroadShield>남은 보호막량: {0}/{1}</VV_InspectorViviBroadShield>
-  <VV_Inspector_GrowingArcanePlantReady>{0} 재배 준비중</VV_Inspector_GrowingArcanePlantReady>
-
   <VV_CommandFertilizeAutoActivated>비료 자동 사용</VV_CommandFertilizeAutoActivated>
   <VV_CommandFertilizeAutoActivatedDesc>식물의 마나가 일정 이하일때 정착민들이 비료를 자동으로 사용할지 설정합니다.</VV_CommandFertilizeAutoActivatedDesc>
   <VV_CommandSetFertilizeAutoThreshold>비료 사용 기준 설정</VV_CommandSetFertilizeAutoThreshold>

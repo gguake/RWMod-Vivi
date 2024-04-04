@@ -6,7 +6,7 @@ namespace VVRace
     {
         public abstract IntRange ApproximateManaFlux { get; }
 
-        public abstract float CalcManaFlux(ArcanePlant plant, int ticks);
+        public abstract float CalcManaFlux(ManaAcceptor manaAcceptor, int ticks);
     }
 
 }

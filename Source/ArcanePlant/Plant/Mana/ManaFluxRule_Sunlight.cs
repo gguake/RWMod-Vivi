@@ -8,7 +8,7 @@ namespace VVRace
 
         public override IntRange ApproximateManaFlux => new IntRange((int)manaFromSunlightRange.min, (int)manaFromSunlightRange.max);
 
-        public override float CalcManaFlux(ArcanePlant plant, int ticks)
+        public override float CalcManaFlux(ManaAcceptor plant, int ticks)
         {
             if (plant.Map.roofGrid.Roofed(plant.Position))
             {

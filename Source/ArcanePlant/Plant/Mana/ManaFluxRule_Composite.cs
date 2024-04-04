@@ -22,7 +22,7 @@ namespace VVRace
             }
         }
 
-        public override float CalcManaFlux(ArcanePlant plant, int ticks)
+        public override float CalcManaFlux(ManaAcceptor plant, int ticks)
         {
             float sum = 0f;
             for (int i = 0; i < rules.Count; ++i)

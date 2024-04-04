@@ -6,4 +6,6 @@
   <VV_RangedToxicStab.label>찔림</VV_RangedToxicStab.label>
   <VV_RangedToxicStab.deathMessage>{0}(이)가 찔려 죽었습니다.</VV_RangedToxicStab.deathMessage>
 
+  <VV_ExtinguishWithWater.label>화재 진압</VV_ExtinguishWithWater.label>
+  <VV_ExtinguishWithWater.deathMessage>{0}(이)가 죽었습니다.</VV_ExtinguishWithWater.deathMessage>
 </LanguageData>

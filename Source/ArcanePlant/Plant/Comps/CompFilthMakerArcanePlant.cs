@@ -12,6 +12,8 @@ namespace VVRace
         public float radius = 1f;
         public bool exceptCenter = true;
 
+        public EffecterDef spawnEffecter;
+
         public CompProperties_FilthMakerArcanePlant()
         {
             compClass = typeof(CompFilthMakerArcanePlant);
@@ -58,6 +60,7 @@ namespace VVRace
                             var cell = _tmpCellCandidates.RandomElement();
                             if (cell.IsValid)
                             {
+                                SpawnEffect();
                                 FilthMaker.TryMakeFilth(cell, parent.Map, Props.filthDef, parent.LabelShort);
                             }
                         }
@@ -71,6 +74,13 @@ namespace VVRace
 
                 _nextRefreshTick = GenTicks.TicksGame + (int)(60000f / Props.makeAmountPerDays.RandomInRange);
             }
+        }
+
+        public void SpawnEffect()
+        {
+            if (Props.spawnEffecter == null) { return; }
+
+            Props.spawnEffecter.SpawnMaintained(parent, parent.Map);
         }
     }
 }

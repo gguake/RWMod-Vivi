@@ -23,7 +23,7 @@
       <shaderType>CutoutPlant</shaderType>
       <drawSize>(1.2, 1.2)</drawSize>
     </graphicData>
-    <altitudeLayer>BuildingOnTop</altitudeLayer>
+    <altitudeLayer>Building</altitudeLayer>
     
     <resourceReadoutPriority>Middle</resourceReadoutPriority>
     <soundInteract>Metal_Drop</soundInteract>

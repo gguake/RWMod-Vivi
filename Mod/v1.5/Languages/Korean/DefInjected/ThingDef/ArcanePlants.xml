@@ -21,8 +21,8 @@
 \n콩뿌리개의 콩이 벼락꽃 위로 지나가는 경우 낮은 확률로 콩이 적을 감전시켜 잠시 기절시킵니다.</VV_Thunderpetals.description>
 
 <VV_Waterdrops.label>물방울꽃</VV_Waterdrops.label>
-<VV_Waterdrops.description>물방울같은 모양을 가진 마법 꽃으로 주변의 물을 흡수해 마나로 변환합니다. 물 위에도 심을 수 있으며 인접한 물 타일이 많을수록 더 많은 마나를 생산합니다.
-\n주변의 화재를 감지하면 저장된 마나를 소모해 화재를 진압하며 마법 식물 재배 작업대와 같은 방에 배치하면 재배중인 마법 식물의 마나 소모량을 줄입니다.</VV_Waterdrops.description>
+<VV_Waterdrops.description>물방울같은 모양을 가진 마법 꽃으로 주변의 물을 흡수해 마나로 변환합니다. 물 위에도 심을 수 있으며 인접한 물 타일이 많을수록 더 많은 마나를 생산합니다. 가까운 화재를 감지하면 저장된 마나를 물로 변환하고 분출해 화재를 진압합니다.
+\n마법 식물 재배 작업대와 같은 방에 배치하면 재배중인 마법 식물의 마나 소모량을 줄여줍니다.</VV_Waterdrops.description>
 
 <VV_Radiantflower.label>빛바라기</VV_Radiantflower.label>
 <VV_Radiantflower.description>해바라기를 닮은 마법 꽃으로 태양광을 마나로 변환합니다. 지붕으로 막혀 태양광을 받을 수 없는 환경에서는 마나를 소모해 작물이 자랄수 있는 강한 빛을 주변에 발산합니다.</VV_Radiantflower.description>
@@ -65,7 +65,7 @@
 \n한쪽 손에 원거리 무기를 장착할 수 있으며 적을 감지하면 장착된 무기를 사용해 자동으로 적을 공격합니다. 근접 무기나 생체인증 무기는 착용할 수 없으며 사람이 다루는것보다는 재장전이 다소 느립니다.</VV_Shootus.description>
 
 <VV_Dreamum.label>꿈송이</VV_Dreamum.label>
-<VV_Dreamum.description>비비 둥지 근처에서만 발견되는 희귀한 마법 꽃입니다. 꽃 향기나 꽃가루를 맡으면 곧 잠에 빠지게 되어 꿈송이라는 이름으로 불리는데 많은 꽃가루를 지속적으로 주변에 퍼뜨리므로 꿈송이가 군집한 지역은 위험 지역으로 알려져 있습니다.
-\n비비들에게는 아무 영향을 주지 않으며 많은 마나가 흐르는 둥지 주변에서 흔히 발견되어 번영을 상징하는 신성한 꽃으로 취급됩니다.</VV_Dreamum.description>
+<VV_Dreamum.description>비비 둥지 근처에서만 발견되는 희귀한 마법 꽃입니다. 꿈송이의 향기나 꽃가루를 맡으면 곧 잠에 빠지게 됩니다. 많은 꽃가루를 지속적으로 주변에 퍼뜨리므로 위험한 꽃으로 알려져 있지만 비비들에게는 아무 영향을 주지 않습니다.
+많은 마나가 흐르는 둥지 주변에서 흔히 발견되어 번영을 상징하는 신성한 꽃으로 취급됩니다.</VV_Dreamum.description>
 
 </LanguageData>
