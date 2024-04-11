@@ -261,6 +261,30 @@
           <layer>40</layer>
         </dataNorth>
       </drawData>
+
+      <renderNodeProperties>
+        <li>
+          <parentTagDef>ApparelBody</parentTagDef>
+          <nodeClass>RPEF.PawnRenderNode_BodyApparelBase</nodeClass>
+          <workerClass>RPEF.PawnRenderNodeWorker_BodyApparelBase</workerClass>
+          <texPath>Things/Apparel/WaterproofCoat</texPath>
+
+          <children>
+            <li>
+              <parentTagDef>ApparelBody</parentTagDef>
+              <texPath>Things/Apparel/WaterproofCoatHood</texPath>
+              <drawData>
+                <defaultData>
+                  <layer>22</layer>
+                </defaultData>
+                <dataNorth>
+                  <layer>43</layer>
+                </dataNorth>
+              </drawData>
+            </li>
+          </children>
+        </li>
+      </renderNodeProperties>
     </apparel>
     
     <recipeMaker>
