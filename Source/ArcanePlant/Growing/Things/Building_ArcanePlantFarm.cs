@@ -57,7 +57,7 @@ namespace VVRace
 
         private GrowingArcanePlantBill _bill;
         private ThingOwner _innerContainer;
-        private float _manaRefillPct;
+        private float _manaRefillPct = 0.5f;
 
         public Building_ArcanePlantFarm()
         {
