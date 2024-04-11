@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <WorldObjectDef>
+    <defName>VV_AncientViviRuins</defName>
+    <label>ancient vivi ruins</label>
+    <description>.</description>
+    <worldObjectClass>EscapeShip</worldObjectClass>
+    <texture>World/WorldObjects/JourneyDestination</texture>
+    <expandingIcon>true</expandingIcon>
+    <expandingIconTexture>World/WorldObjects/Expanding/JourneyDestination</expandingIconTexture>
+    <expandingIconPriority>50</expandingIconPriority>
+    <expandMore>true</expandMore>
+    <IncidentTargetTags>
+      <li>Map_PlayerHome</li>
+    </IncidentTargetTags>
+    <mapGenerator>EscapeShip</mapGenerator>
+    <canBePlayerHome>true</canBePlayerHome>
+    <comps>
+      <li Class="WorldObjectCompProperties_Abandon" />
+      <li Class="WorldObjectCompProperties_EscapeShip" />
+      <li Class="WorldObjectCompProperties_FormCaravan" />
+      <li Class="WorldObjectCompProperties_EnterCooldown" />
+    </comps>
+  </WorldObjectDef>
+</Defs>

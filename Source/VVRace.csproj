@@ -131,7 +131,11 @@
     <Compile Include="Egg\Comps\CompViviEggLayer.cs" />
     <Compile Include="EndGame\IncidentDefDreamumSpawnExtension.cs" />
     <Compile Include="EndGame\IncidentWorker_DreamumSpawn.cs" />
-    <Compile Include="EndGame\DreamumAltar.cs" />
+    <Compile Include="EndGame\Building_DreamumAltar.cs" />
+    <Compile Include="EndGame\ManaFluxRule_DreamumAltar.cs" />
+    <Compile Include="EndGame\Quest\QuestNode_EndGame_DreamumVictory_FindRuinsTile.cs" />
+    <Compile Include="EndGame\Quest\StorytellerCompDreamumVictory.cs" />
+    <Compile Include="EndGame\ViviRuins.cs" />
     <Compile Include="GlideAbility\CompAbilityEffect_FoodCost.cs" />
     <Compile Include="GlideAbility\CompAbility_RequiresBodyPart.cs" />
     <Compile Include="Hornet\HediffGiver_ConstantScaria.cs" />

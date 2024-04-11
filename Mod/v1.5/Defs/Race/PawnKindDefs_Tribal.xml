@@ -112,14 +112,51 @@
     <forcedBodyType>Thin</forcedBodyType>
   </PawnKindDef>
   
+  <!-- 팩션 리더 로열 비비 -->
+  <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
+    <defName>VV_RoyalViviEmpress</defName>
+    <label>royal vivi empress</label>
+    <combatPower>100</combatPower>
+    <isFighter>false</isFighter>
+    <itemQuality>Masterwork</itemQuality>
+    <factionLeader>true</factionLeader>
+
+    <requiredWorkTags>
+      <li>Violent</li>
+    </requiredWorkTags>
+
+    <gearHealthRange>1.5~3.2</gearHealthRange>
+    <apparelMoney>5000~10000</apparelMoney>
+    <apparelTags>
+      <li>VV_RoyalViviApparel</li>
+      <li>VV_ViviCombatApparel</li>
+    </apparelTags>
+    <apparelRequired>
+      <li>VV_GuardianCoat</li>
+    </apparelRequired>
+
+    <nakedChance>0</nakedChance>
+
+    <weaponMoney>5000~10000</weaponMoney>
+    <weaponTags>
+      <li>VV_ViviGuardian</li>
+    </weaponTags>
+
+    <initialWillRange>11~14</initialWillRange>
+    <initialResistanceRange>38~58</initialResistanceRange>
+
+    <isRoyal>true</isRoyal>
+    <forcedBodyType>Female</forcedBodyType>
+  </PawnKindDef>
+  
+  
   <!-- 리더 로열 비비 -->
   <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
     <defName>VV_RoyalViviLeader</defName>
     <label>royal vivi leader</label>
     <combatPower>100</combatPower>
-    <isFighter>false</isFighter>
+    <isFighter>true</isFighter>
     <itemQuality>Good</itemQuality>
-    <factionLeader>true</factionLeader>
 
     <requiredWorkTags>
       <li>Violent</li>

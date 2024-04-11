@@ -3,7 +3,7 @@
   <!-- 꿈송이 제단 -->
   <ThingDef ParentName="BuildingBase">
     <defName>VV_DreamumAltar</defName>
-    <thingClass>VVRace.DreamumAltar</thingClass>
+    <thingClass>VVRace.Building_DreamumAltar</thingClass>
     <label>altar of peacebloom</label>
     <description>.</description>
     <descriptionHyperlinks>
@@ -47,7 +47,6 @@
       <deconstructible>false</deconstructible>
       <claimable>false</claimable>
     </building>
-    <designationCategory>VV_Bulidings</designationCategory>
 
     <comps>
       <li Class="CompProperties_MoteEmitter">
@@ -69,15 +68,13 @@
     </costList>
 
     <canOverlapZones>false</canOverlapZones>
-    <researchPrerequisites>
-      <li>VV_PlantGigantism</li>
-    </researchPrerequisites>
 
     <modExtensions>
       <li Class="VVRace.ManaExtension">
         <manaCapacity>22220</manaCapacity>
+        <initialManaPercent>0</initialManaPercent>
 
-        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
+        <manaConsumeRule Class="VVRace.ManaFluxRule_DreamumAltar">
           <mana>2220</mana>
         </manaConsumeRule>
       </li>

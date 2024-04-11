@@ -3,14 +3,19 @@
   <Operation Class="PatchOperationAdd">
     <xpath>Defs/StorytellerDef[@Name="BaseStoryteller"]/comps</xpath>
     <value>
-      <li Class="StorytellerCompProperties_OnOffCycle">
-        <incident>VV_DreamumSpawn</incident>
-        <onDays>60</onDays>
-        <offDays>0</offDays>
-        <minSpacingDays>30</minSpacingDays>
-        <numIncidentsRange>1</numIncidentsRange>
+      <li Class="VVRace.StorytellerCompProperties_DreamumVictory">
+        <incident>VV_GiveQuest_EndGame_DreamumVictory</incident>
+        <playerFactions>
+          <li>VV_PlayerVivi</li>
+          <li>VV_PlayerExiledVivi</li>
+          <li>VV_PlayerViviRefugee</li>
+        </playerFactions>
+        <factionRequirementInWorlds>VV_ViviFederation</factionRequirementInWorlds>
+        <minColonyWealth>1</minColonyWealth>
+        
+        <refireIntervalDays>0.1</refireIntervalDays>
         <allowedTargetTags>
-          <li>Map_PlayerHome</li>
+          <li>World</li>
         </allowedTargetTags>
       </li>
     </value>

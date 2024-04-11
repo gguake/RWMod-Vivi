@@ -20,5 +20,8 @@
         public const string CommandNewGrowArcanePlantBillDesc = "VV_CommandNewGrowArcanePlantBillDesc";
         public const string CommandCancelGrowArcanePlantBill = "VV_CommandCancelGrowArcanePlantBill";
         public const string CommandCancelGrowArcanePlantBillDesc = "VV_CommandCancelGrowArcanePlantBillDesc";
+
+        public const string CommandStartProgressDreamumVictory = "VV_CommandStartProgressDreamumVictory";
+        public const string CommandStartProgressDreamumVictoryDesc = "VV_CommandStartProgressDreamumVictoryDesc";
     }
 }

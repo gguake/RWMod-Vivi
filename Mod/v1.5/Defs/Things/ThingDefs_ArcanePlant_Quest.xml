@@ -4,6 +4,7 @@
     <defName>VV_Dreamum</defName>
     <label>dreamum</label>
     <description>.</description>
+    <thingClass>VVRace.ArcanePlant_Dreamum</thingClass>
 
     <graphicData>
       <texPath>Things/Plants/VV_Dreamum</texPath>

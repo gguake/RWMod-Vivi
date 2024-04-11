@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <QuestScriptDef>
+    <defName>VV_EndGame_DreamumVictory_Reconstruction</defName>
+    <autoAccept>true</autoAccept>
+    <defaultChallengeRating>4</defaultChallengeRating>
+    <isRootSpecial>true</isRootSpecial>
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->Reconstruction</li>
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <rulesStrings>
+        <li>questDescription->asdf. [asker_nameDef], [asker_faction_leaderTitle] of [asker_faction_name]</li>
+      </rulesStrings>
+    </questDescriptionRules>
+    <root Class="QuestNode_Sequence">
+      <nodes>
+        <li Class="QuestNode_QuestUnique">
+          <tag>EndGame_DreamumVictory</tag>
+        </li>
+        
+        <li Class="QuestNode_GetSameQuestsCount">
+          <storeAs>sameQuestsCount</storeAs>
+        </li>
+        
+        <li Class="QuestNode_GetPawn">
+          <storeAs>asker</storeAs>
+          <mustBeFactionLeader>true</mustBeFactionLeader>
+          <mustBeOfKind>VV_RoyalViviLeader</mustBeOfKind>
+          <ifWorldPawnThenMustBeFreeOrLeader>true</ifWorldPawnThenMustBeFreeOrLeader>
+          <mustBeWorldPawn>true</mustBeWorldPawn>
+        </li>
+
+        <!-- Add reward info -->
+        <li Class="QuestNode_AddPassageOffworldReward">
+          <inSignalChoiceUsed>viviruins.LaunchedShip</inSignalChoiceUsed>
+        </li>
+        
+        <li Class="VVRace.QuestNode_EndGame_DreamumVictory_FindRuinsTile">
+          <storeAs>tile</storeAs>
+        </li>
+        <li Class="QuestNode_GenerateWorldObject">
+          <def>VV_AncientViviRuins</def>
+          <storeAs>viviruins</storeAs>
+        </li>
+        <li Class="QuestNode_SpawnWorldObjects">
+          <worldObjects>$viviruins</worldObjects>
+          <tile>$tile</tile>
+        </li>
+
+        <!-- Ending -->
+        
+        <!-- World object destroyed -->
+        <li Class="QuestNode_NoWorldObject">
+          <worldObject>$viviruins</worldObject>
+          <node Class="QuestNode_End">
+            <outcome>Fail</outcome>
+          </node>
+        </li>
+        
+        <li Class="QuestNode_Signal">
+          <inSignal>viviruins.AltarDestroyed</inSignal>
+          <node Class="QuestNode_End">
+            <outcome>Fail</outcome>
+          </node>
+        </li>
+        
+        <!-- Launched ship -->
+        <li Class="QuestNode_End">
+          <inSignal>viviruins.LaunchedShip</inSignal>
+          <outcome>Success</outcome>
+        </li>
+      </nodes>
+    </root>
+  </QuestScriptDef>
+</Defs>

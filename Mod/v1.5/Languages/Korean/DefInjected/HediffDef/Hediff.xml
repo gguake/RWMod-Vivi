@@ -27,4 +27,7 @@
 
   <VV_FlowerScent.label>꽃 향기</VV_FlowerScent.label>
   <VV_FlowerScent.description>몸에서 꽃 향기가 나고 있습니다.</VV_FlowerScent.description>
+
+  <VV_DreamumTranquilize.label>꿈송이 마취</VV_DreamumTranquilize.label>
+  <VV_DreamumTranquilize.description>꿈송이 꽃가루에 중독되어 의식이 흐려지고 있습니다.</VV_DreamumTranquilize.description>
 </LanguageData>

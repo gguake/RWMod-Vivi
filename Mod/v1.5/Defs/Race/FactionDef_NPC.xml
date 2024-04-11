@@ -139,6 +139,9 @@
       </li>
     </pawnGroupMakers>
     
+    <fixedLeaderKinds>
+      <li>VV_RoyalViviLeader</li>
+    </fixedLeaderKinds>
     <caravanTraderKinds Inherit="False">
       <li>VV_Caravan_Vivi_Honeys</li>
       <li>VV_Caravan_Vivi_Gardening</li>

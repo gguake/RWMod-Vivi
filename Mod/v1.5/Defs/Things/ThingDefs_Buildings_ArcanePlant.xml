@@ -80,7 +80,7 @@
     <label>arcane plant farm</label>
     <description>.</description>
     <thingClass>VVRace.Building_ArcanePlantFarm</thingClass>
-    <tickerType>Long</tickerType>
+    <tickerType>Rare</tickerType>
     
     <drawerType>MapMeshAndRealTime</drawerType>
     <graphicData>

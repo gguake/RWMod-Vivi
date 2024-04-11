@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <IncidentDef ParentName="GiveQuestBase">
+    <defName>VV_GiveQuest_EndGame_DreamumVictory</defName>
+    <label>reconstruction</label>
+    <letterLabel>Reconstruction</letterLabel>
+    <questScriptDef>VV_EndGame_DreamumVictory_Reconstruction</questScriptDef>
+    <baseChance>0</baseChance>
+  </IncidentDef>
+</Defs>

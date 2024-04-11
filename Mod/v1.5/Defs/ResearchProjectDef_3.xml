@@ -34,20 +34,6 @@
   </ResearchProjectDef>
 
   <ResearchProjectDef ParentName="ViviResearchProjectTier3Base">
-    <defName>VV_PlantGigantism</defName>
-    <label>plant gigantism</label>
-    <description>.</description>
-    <baseCost>3600</baseCost>
-    <researchViewX>6</researchViewX>
-    <researchViewY>1.4</researchViewY>
-    <prerequisites>
-      <li>VV_AutomatedInfra</li>
-      <li>VV_ManaTransferTube</li>
-    </prerequisites>
-    <techLevel>Spacer</techLevel>
-  </ResearchProjectDef>
-
-  <ResearchProjectDef ParentName="ViviResearchProjectTier3Base">
     <defName>VV_RitualWeaponry</defName>
     <label>vivi ritual weaponry</label>
     <description>.</description>
