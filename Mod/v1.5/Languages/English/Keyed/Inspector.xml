@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+<VV_Inspector_ProperTemperature>Proper Temperature: {0} ~ {1}</VV_Inspector_ProperTemperature>
+<VV_Inspector_HatcheryDisabled>Incubator Disabled</VV_Inspector_HatcheryDisabled>
+<VV_Inspector_HatcheryDisabledReasonNoRoof>No Roof</VV_Inspector_HatcheryDisabledReasonNoRoof>
+<VV_Inspector_HatcheryDisabledReasonOutdoor>Outdoor</VV_Inspector_HatcheryDisabledReasonOutdoor>
+
+<VV_Inspector_ViviWallReplaceCooldown>Time Remaining Until Solidification: {0}</VV_Inspector_ViviWallReplaceCooldown>
+
+<VV_Inspector_PlantMana>Mana: {0}/{1}</VV_Inspector_PlantMana>
+<VV_Inspector_PlantManaFlux>({0}/day)</VV_Inspector_PlantManaFlux>
+
+<VV_Inspector_ShootusWeaponReserved>Reserved: {0}</VV_Inspector_ShootusWeaponReserved>
+<VV_Inspector_ShootusWeaponEquipped>Equipped: {0}</VV_Inspector_ShootusWeaponEquipped>
+
+<VV_Inspector_ViviBroadShieldHitPoint>Shield Durability: {0}/{1}</VV_Inspector_ViviBroadShieldHitPoint>
+<VV_Inspector_ViviBroadShieldDuration>Remaining Shield Duration: {0}</VV_Inspector_ViviBroadShieldDuration>
+
+<VV_Inspector_GrowingArcanePlantReady>{0} Cultivation Preparation</VV_Inspector_GrowingArcanePlantReady>
+</LanguageData>

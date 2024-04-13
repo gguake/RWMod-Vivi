@@ -2,17 +2,16 @@
 <LanguageData>
 
 <VV_LetterViviEggHatchedLabel>새로운 비비 태어남</VV_LetterViviEggHatchedLabel>
-<VV_LetterViviEggHatched>{PARENT_labelShort}가 낳은 알에서 새로운 비비가 태어났습니다. </VV_LetterViviEggHatched>
+<VV_LetterViviEggHatched>{PARENT_labelShort}가 낳은 알에서 새로운 비비가 태어났습니다. 비비는 일반적인 인간보다 빠르게 성장하고 학습하는 대신 수명이 짧습니다. 또한 태어날때 무작위의 변형인자를 획득하며 어머니의 변형인자를 그대로 상속받습니다.
+\n비비는 성장 단계에서 충분한 로열 젤리를 섭취하면 로열 비비로 성장하고, 그렇지 않으면 일반 비비로 성장합니다. 로열 비비는 수명이 길고 알을 낳을 수 있으며 정신 민감도와 사교 능력이 높지만 모든 작업 능력이 매우 떨어지고 이동이 느립니다.</VV_LetterViviEggHatched>
 <VV_LetterViviEggHatchedNoParent>새로운 비비가 태어났습니다. 비비는 일반적인 인간보다 빠르게 성장하고 학습하는 대신 수명이 짧습니다. 또한 태어날때 무작위의 변형인자를 획득하며 어머니의 변형인자를 그대로 상속받습니다.
-\n비비는 성장 단계에서 충분한 로열 젤리를 섭취하면 로열 비비로 성장하고, 그렇지 않으면 일반 비비로 성장합니다.
-\n로열 비비는 수명이 길고 정신 민감도가 높으며 알을 낳을수 있지만 작업 능력이 매우 떨어지고 느립니다.</VV_LetterViviEggHatchedNoParent>
+\n비비는 성장 단계에서 충분한 로열 젤리를 섭취하면 로열 비비로 성장하고, 그렇지 않으면 일반 비비로 성장합니다. 로열 비비는 수명이 길고 알을 낳을 수 있으며 정신 민감도와 사교 능력이 높지만 모든 작업 능력이 매우 떨어지고 이동이 느립니다.</VV_LetterViviEggHatchedNoParent>
 
 <VV_LetterRoyalViviGrownLabel>새로운 로열 비비: {PAWN_labelShort}</VV_LetterRoyalViviGrownLabel>
 <VV_LetterRoyalViviGrown>{PAWN_labelShort}가 충분한 로열 젤리를 섭취해 로열 비비로 성장했습니다.</VV_LetterRoyalViviGrown>
 
 <VV_LetterIncidentHornetSwarmArrivedLabel>거대 말벌 무리</VV_LetterIncidentHornetSwarmArrivedLabel>
-<VV_LetterIncidentHornetSwarmArrived>광폭한 거대 말벌 무리가 나타났습니다. 이들은 근처를 돌아다니면서 눈에 띄는 모든 생명체를 공격할 것입니다.
-\n거대 말벌은 매우 빠르고 튼튼하며 일반적인 무기로 쓰러뜨리려면 대단히 어렵지만 화염이나 독에는 매우 취약합니다.
-\n이들은 문을 통과할 수 없어 벽 뒤에 숨어있으면 안전합니다. 가까운 대상부터 사냥하기 시작하므로 대항할 수단이 없다면 얌전히 숨어있는것이 좋습니다. 무리는 이 지역의 모든 움직이는 것들을 사냥하다가 며칠 뒤에 스스로 떠날 것입니다.</VV_LetterIncidentHornetSwarmArrived>
+<VV_LetterIncidentHornetSwarmArrived>광폭한 거대 말벌 무리가 나타났습니다. 이들은 근처를 돌아다니면서 눈에 띄는 모든 생명체를 공격할 것입니다. 거대 말벌은 매우 빠르고 튼튼하며 일반적인 무기로 쓰러뜨리려면 대단히 어렵지만 화염이나 독에는 취약합니다.
+\n이들은 문을 통과할 수 없어 벽 뒤에 숨어있으면 안전합니다. 가까운 대상부터 무차별적으로 사냥하므로 적절한 방어수단이 없다면 숨어있는것이 좋습니다. 무리는 이 지역의 모든 움직이는 것들을 사냥하다가 며칠 뒤에 스스로 떠날 것입니다.</VV_LetterIncidentHornetSwarmArrived>
 
 </LanguageData>

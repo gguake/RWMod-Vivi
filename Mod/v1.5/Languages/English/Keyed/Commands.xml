@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+<VV_Command_FertilizeAutoActivated>Automatic Fertilizer Use</VV_Command_FertilizeAutoActivated>
+<VV_Command_FertilizeAutoActivatedDesc>Sets whether settlers automatically use fertilizer when the plant's mana is below a certain level.</VV_Command_FertilizeAutoActivatedDesc>
+<VV_Command_SetFertilizeAutoThreshold>Set Fertilizer Usage Threshold</VV_Command_SetFertilizeAutoThreshold>
+<VV_Command_SetFertilizeAutoThresholdDesc>Sets the mana threshold to decide whether to use fertilizer. If the mana is below this threshold, settlers will use fertilizer up to the maximum limit.</VV_Command_SetFertilizeAutoThresholdDesc>
+
+<VV_Command_CancelReserveWeapon>Cancel Weapon Equip</VV_Command_CancelReserveWeapon>
+<VV_Command_CancelReserveWeaponDesc>Cancels the currently reserved weapon equip.</VV_Command_CancelReserveWeaponDesc>
+<VV_Command_EquipWeapon>Equip Weapon</VV_Command_EquipWeapon>
+<VV_Command_EquipWeaponDesc>Equips the selected weapon to the gunholder. Melee weapons or biocoded weapons cannot be equipped.</VV_Command_EquipWeaponDesc>
+<VV_Command_UnequipWeapon>Unequip Weapon</VV_Command_UnequipWeapon>
+
+<VV_Command_ActivateShield>Activate Shield</VV_Command_ActivateShield>
+<VV_Command_ActivateShieldDesc>Activates a shield that blocks incoming projectiles by consuming all available mana. The durability of the shield is proportional to the mana consumed and lasts for {0}.</VV_Command_ActivateShieldDesc>
+<VV_Command_ActivateShieldAlreadyActivated>Shield already activated.</VV_Command_ActivateShieldAlreadyActivated>
+<VV_Command_ActivateShieldNotEnoughEnergy>At least {0} mana is required.</VV_Command_ActivateShieldNotEnoughEnergy>
+
+<VV_Command_NewGrowArcanePlantBill>Start Growing New Arcane Plant</VV_Command_NewGrowArcanePlantBill>
+<VV_Command_NewGrowArcanePlantBillDesc>Starts the cultivation of a new arcane plant.</VV_Command_NewGrowArcanePlantBillDesc>
+<VV_Command_CancelGrowArcanePlantBill>Cancel Arcane Plant Cultivation</VV_Command_CancelGrowArcanePlantBill>
+<VV_Command_CancelGrowArcanePlantBillDesc>Cancels the scheduled arcane plant cultivation. If cultivation has already begun, the spent resources are non-refundable.</VV_Command_CancelGrowArcanePlantBillDesc>
+
+<VV_Command_StartProgressDreamumVictory>Start Dreamum Ritual</VV_Command_StartProgressDreamumVictory>
+<VV_Command_StartProgressDreamumVictoryDesc>Plants a dreamum in the altar and starts the ritual for its magnification.</VV_Command_StartProgressDreamumVictoryDesc>
+</LanguageData>
