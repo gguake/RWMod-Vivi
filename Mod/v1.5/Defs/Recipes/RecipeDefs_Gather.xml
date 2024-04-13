@@ -4,8 +4,7 @@
   <RecipeDef Class="VVRace.RecipeDef_Gathering">
     <defName>VV_GatherHoney</defName>
     <label>gather honey</label>
-    <description>.</description>
-
+    <description>Gather honey from mature flowers or fruit trees. The speed and yield of honey gathering must be greater than 0 to perform the job.</description>
     <jobString>Gathering honey.</jobString>
     
     <workAmount>1400</workAmount>
@@ -43,7 +42,7 @@
   <RecipeDef Class="VVRace.RecipeDef_Gathering">
     <defName>VV_GatherPollen</defName>
     <label>gather pollen</label>
-    <description>.</description>
+    <description>Collect scattered pollen from the surrounding ground. Pollen is occasionally dropped around when collecting honey or when moving with it stuck to the body.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_FilthPollen</ThingDef>
     </descriptionHyperlinks>
@@ -96,7 +95,7 @@
   <RecipeDef Class="VVRace.RecipeDef_Gathering">
     <defName>VV_GatherPropolis</defName>
     <label>gather propolis</label>
-    <description>.</description>
+    <description>Collect rare propolis from surrounding trees. The speed and yield of propolis gathering must be greater than 0 to perform the job, and it takes a significant amount of time to gather.</description>
 
     <jobString>Gathering propolis.</jobString>
     

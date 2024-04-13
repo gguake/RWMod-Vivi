@@ -4,7 +4,7 @@
   <StatDef>
     <defName>VV_GrowthPointsFactor</defName>
     <label>growth points multiplier</label>
-    <description>.</description>
+    <description>It shows how many growth points a child acquires.</description>
     <category>BasicsPawn</category>
     <toStringStyle>PercentZero</toStringStyle>
     <showOnAnimals>false</showOnAnimals>

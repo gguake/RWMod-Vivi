@@ -12,7 +12,9 @@
   <ThingDef ParentName="AnimalThingBase">
     <defName>VV_TitanicHornet</defName>
     <label>titanic hornet</label>
-    <description>.</description>
+    <description>A titanic hornet with an odd shape. It boasts fast speed and a robust exterior, and shreds its enemies with its powerful jaw and large-sized claws on its two legs. However, it is surprisingly vulnerable to pollution and heat, and doesn't handle pain well.
+\nIt has a symbiotic relationship with the scaria fungus, carrying it at all times but not dying from it over time. Even if the scaria is treated, as soon as they regain consciousness, they get infected again immediately and start to rampage.
+\nThe wings of the titanic hornet are incredibly strong yet lightweight, making them a useful material. However, they are typically difficult to obtain intact, as the corpse rapidly decays due to the scaria.</description>
     <statBases>
       <MoveSpeed>8.6</MoveSpeed>
       <PsychicSensitivity>0</PsychicSensitivity>

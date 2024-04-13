@@ -3,7 +3,8 @@
   <GeneDef>
     <defName>VV_ViviMetabolism</defName>
     <label>excessive metabolism</label>
-    <description>.</description>
+    <description>Vivi's unique genes greatly increase their speed of technology acquisition, and they receive learning bonuses at developmental stages.
+\nThey age and grow very quickly and cannot reproduce via traditional methods.</description>
     <iconPath>UI/Icons/Genes/Gene_Vivi</iconPath>
     <displayCategory>Miscellaneous</displayCategory>
     <biologicalAgeTickFactorFromAgeCurve>
@@ -30,8 +31,8 @@
   
   <GeneDef>
     <defName>VV_HoneyDepedency</defName>
-    <label>honey dependency</label>
-    <description>.</description>
+    <label>fructose dependency</label>
+    <description>Carriers of this gene need to ingest vivi honey or ambrosia on a regular basis to survive. After 5 days without vivi honey or ambrosia, carriers will suffer from fructose deficiency.</description>
     <geneClass>VVRace.Gene_HoneyDependency</geneClass>
     <iconPath>UI/Icons/Genes/Gene_Vivi2</iconPath>
     <displayCategory>Miscellaneous</displayCategory>

@@ -9,7 +9,7 @@
   <ResearchProjectDef ParentName="ViviResearchProjectTier1Base">
     <defName>VV_CombatArcaneBotany</defName>
     <label>combat arcane botany</label>
-    <description>.</description>
+    <description>Cultivate arcane plants specialized for combat.</description>
     <baseCost>600</baseCost>
     <researchViewX>3</researchViewX>
     <researchViewY>0.7</researchViewY>
@@ -22,7 +22,7 @@
   <ResearchProjectDef ParentName="ViviResearchProjectTier1Base">
     <defName>VV_AdvancedArcaneBotany</defName>
     <label>advanced arcane botany</label>
-    <description>.</description>
+    <description>Cultivate arcane plants with special functions.</description>
     <baseCost>1200</baseCost>
     <researchViewX>3</researchViewX>
     <researchViewY>1.4</researchViewY>
@@ -35,7 +35,7 @@
   <ResearchProjectDef ParentName="ViviResearchProjectTier1Base">
     <defName>VV_ElectricArcaneBotany</defName>
     <label>electric arcane botany</label>
-    <description>.</description>
+    <description>Cultivate arcane plants that control electricity.</description>
     <baseCost>400</baseCost>
     <researchViewX>3</researchViewX>
     <researchViewY>2.1</researchViewY>
@@ -48,7 +48,7 @@
   <ResearchProjectDef ParentName="ViviResearchProjectTier2Base">
     <defName>VV_Lifestrand</defName>
     <label>lifestrand</label>
-    <description>.</description>
+    <description>Weave lifestrand cloth reinforced with magical materials processed from devilstrand fabric.</description>
     <baseCost>1800</baseCost>
     <researchViewX>3</researchViewX>
     <researchViewY>2.8</researchViewY>

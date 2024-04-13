@@ -4,7 +4,7 @@
   <RecipeDef>
     <defName>VV_MakeLifestrand</defName>
     <label>making lifestrand</label>
-    <description>.</description>
+    <description>Process devilstrand with various materials to create lifestrand.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_LivingLeaf</ThingDef>
       <ThingDef>VV_TitanicHornetWing</ThingDef>
@@ -66,7 +66,7 @@
   <RecipeDef>
     <defName>VV_ExtractBulkHoney</defName>
     <label>extract bulk honey</label>
-    <description>test</description>
+    <description>Extract pure honey from a large amount of Vivi honey. It is faster and more efficient than manual labor, allowing for the separation and extraction of honey and pollen.</description>
 
     <jobString>extrating honey.</jobString>
     <workAmount>500</workAmount>
@@ -102,7 +102,7 @@
   <RecipeDef>
     <defName>VV_ExtractBulkPropolis</defName>
     <label>refining bulk propolis</label>
-    <description>test</description>
+    <description>Refine a large amount of propolis at once. It is much faster and more efficient than manual labor.</description>
 
     <jobString>refining propolis.</jobString>
     <workAmount>1800</workAmount>
@@ -138,7 +138,7 @@
   <RecipeDef>
     <defName>VV_MakeFertilizerSeeds</defName>
     <label>make fertilizer from seeds</label>
-    <description>.</description>
+    <description>Extract mana components from a large amount of unknown seeds to make fertilizers.</description>
     <jobString>making fertilizer from seeds.</jobString>
     <workAmount>2000</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>

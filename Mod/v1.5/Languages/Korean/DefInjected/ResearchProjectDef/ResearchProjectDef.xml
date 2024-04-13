@@ -31,7 +31,7 @@
 <VV_ArcaneBotany.label>마법 식물학</VV_ArcaneBotany.label>
 <VV_ArcaneBotany.description>다양한 활용도를 가진 마법 식물들을 미확인 씨앗을 활용해 재배할수 있습니다.</VV_ArcaneBotany.description>
 <VV_ArcaneBotany.discoveredLetterTitle>마법 식물</VV_ArcaneBotany.discoveredLetterTitle>
-<VV_ArcaneBotany.discoveredLetterText>마법 식물을 배양하려면 미확인 씨앗, 비료, 꽃가루가 대량으로 필요하며 주기적으로 관리해줘야 좋은 결과를 얻을 수 있습니다. 배양 작업은 실패하거나 혹은 마법 식물이 아닌 흔한 작물이 자랄수도 있습니다.
+<VV_ArcaneBotany.discoveredLetterText>마법 식물을 배양하려면 미확인 씨앗이 필요하며 식물에 따라 필요한 재료가 다릅니다. 재배시 주기적으로 관리해줘야 좋은 결과를 얻을 수 있으며 마나 비료를 투여해 생명력을 유지해야 합니다.
 \n마법 식물은 마나라는 자원을 생산하고 소모하며 식물마다 특수한 조건이 만족되어야 마나를 생산합니다. 생산된 마나가 최대 저장량을 초과하면 인접한 다른 마법 식물들에게 전송해주는 특징이 있으므로 잘 활용하세요.</VV_ArcaneBotany.discoveredLetterText>
 
 <VV_CombatArcaneBotany.label>전투 식물학</VV_CombatArcaneBotany.label>

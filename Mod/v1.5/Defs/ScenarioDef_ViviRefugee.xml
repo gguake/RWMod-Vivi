@@ -3,9 +3,13 @@
   <ScenarioDef>
     <defName>VV_ViviRefugeeStart</defName>
     <label>vivi refugees</label>
-    <description>.</description>
+    <description>Your nest was destroyed by giant wasp swarms. The surviving Vivis scattered, and your small group of refugees escaped with minimal supplies.
+\nFortunately, you managed to evade pursuit, but the future looks grim for your group as it lacks a Royal Vivi. Can the Vivis rebuild their nest?</description>
     <scenario>
-      <summary>.</summary>
+      <name>vivi refugees</name>
+      <summary>A well-armed group of Vivi refugees.</summary>
+      <description>Your nest was destroyed by giant wasp swarms. The surviving Vivis scattered, and your small group of refugees escaped with minimal supplies.
+\nFortunately, you managed to evade pursuit, but the future looks grim for your group as it lacks a Royal Vivi. Can the Vivis rebuild their nest?</description>
       <playerFaction>
         <def>PlayerFaction</def>
         <factionDef>VV_PlayerViviRefugee</factionDef>
@@ -13,7 +17,8 @@
       <parts>
         <li Class="ScenPart_GameStartDialog">
           <def>GameStartDialog</def>
-          <text>.</text>
+          <text>Your group of Vivi refugees, led by you, has confirmed that the pursuers are no longer following and has decided to stay here.
+\nSince the lifespan of regular Vivis is short and they cannot reproduce, you must raise a new Royal Vivi. Hatch Vivi eggs and feed them royal jelly to grow a new Royal Vivi, or recruit another Royal Vivi from outside.</text>
           <closeSound>GameStartSting</closeSound>
         </li>
 

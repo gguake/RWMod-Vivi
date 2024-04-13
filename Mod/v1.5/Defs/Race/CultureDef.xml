@@ -3,7 +3,7 @@
   <CultureDef>
     <defName>VV_ViviCulture</defName>
     <label>vivi culture</label>
-    <description>.</description>
+    <description>It's the unique culture of the Vivis.</description>
     <ideoNameMaker MayRequire="Ludeon.RimWorld.Ideology">NamerIdeoAstropolitan</ideoNameMaker>
     <deityNameMaker MayRequire="Ludeon.RimWorld.Ideology">NamerDeityAstropolitan</deityNameMaker>
     <deityTypeMaker MayRequire="Ludeon.RimWorld.Ideology">DeityTypeMakerAstropolitan</deityTypeMaker>

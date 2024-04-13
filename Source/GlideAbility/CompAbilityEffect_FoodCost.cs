@@ -29,6 +29,17 @@ namespace VVRace
             }
         }
 
+        public override void Apply(LocalTargetInfo target, LocalTargetInfo dest)
+        {
+            base.Apply(target, dest);
+
+            var needFood = parent.pawn.needs?.food;
+            if (needFood != null)
+            {
+                needFood.CurLevelPercentage -= Props.requiredFoods;
+            }
+        }
+
         public override void Apply(GlobalTargetInfo target)
         {
             base.Apply(target);

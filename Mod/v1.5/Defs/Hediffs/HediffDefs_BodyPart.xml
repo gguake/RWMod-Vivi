@@ -5,7 +5,7 @@
 		<defName>VV_FakeAntennae</defName>
 		<label>fake antennae</label>
 		<labelNoun>a fake antennae</labelNoun>
-		<description>.</description>
+		<description>An installed fake antennae. It's not particularly helpful, but it's better than nothing.</description>
     <descriptionHyperlinks><ThingDef>VV_FakeAntennae</ThingDef></descriptionHyperlinks>
 		<spawnThingOnRemoved>VV_FakeAntennae</spawnThingOnRemoved>
 		<addedPartProps>
@@ -19,7 +19,7 @@
 		<defName>VV_FakeWing</defName>
 		<label>fake wing</label>
 		<labelNoun>a fake wing</labelNoun>
-		<description>.</description>
+		<description>An installed fake wing. It's not particularly helpful, but it's better than nothing.</description>
     <descriptionHyperlinks><ThingDef>VV_FakeWing</ThingDef></descriptionHyperlinks>
 		<spawnThingOnRemoved>VV_FakeWing</spawnThingOnRemoved>
 		<addedPartProps>
@@ -33,7 +33,7 @@
 		<defName>VV_BionicAntennae</defName>
 		<label>bionic antennae</label>
 		<labelNoun>a bionic antennae</labelNoun>
-		<description>.</description>
+		<description>An installed bionic antennae. Equipped with high-performance sensors, it can detect even the slightest flow of air.</description>
     <descriptionHyperlinks><ThingDef>VV_BionicAntennae</ThingDef></descriptionHyperlinks>
 		<spawnThingOnRemoved>VV_BionicAntennae</spawnThingOnRemoved>
 		<addedPartProps>
@@ -47,7 +47,7 @@
 		<defName>VV_BionicWing</defName>
 		<label>bionic wing</label>
 		<labelNoun>a bionic wing</labelNoun>
-		<description>.</description>
+		<description>An installed bionic wing. These wings are lighter and sturdier than the original ones, making movement easier.</description>
     <descriptionHyperlinks><ThingDef>VV_BionicWing</ThingDef></descriptionHyperlinks>
 		<spawnThingOnRemoved>VV_BionicWing</spawnThingOnRemoved>
 		<addedPartProps>
@@ -61,7 +61,8 @@
 		<defName>VV_GliderWing</defName>
 		<label>glider wing</label>
 		<labelNoun>glider wing</labelNoun>
-		<description>.</description>
+		<description>An installed glider wing. It can fly short distances, becoming slightly hungry during flight.
+\nThese wings are simply devices for receiving lift, so in order to fly, the Vivi's wings must be intact.</description>
     <descriptionHyperlinks><RecipeDef>VV_InstallGliderWing</RecipeDef></descriptionHyperlinks>
 		<spawnThingOnRemoved>VV_TitanicHornetWing</spawnThingOnRemoved>
 		<addedPartProps>

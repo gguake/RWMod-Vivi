@@ -3,7 +3,7 @@
   <AbilityDef>
     <defName>VV_Glide</defName>
     <label>glide</label>
-    <description>.</description>
+    <description>Moves quickly by flying short distances. Wings must be intact, and it gets a little hungry.</description>
     <iconPath>UI/Abilities/Longjump</iconPath>
     <cooldownTicksRange>10000</cooldownTicksRange>
     <hostile>false</hostile>
@@ -29,7 +29,7 @@
 
     <comps>
       <li Class="VVRace.CompProperties_AbilityFoodCost">
-        <requiredFoods>0.1</requiredFoods>
+        <requiredFoods>0.2</requiredFoods>
       </li>
       <li Class="VVRace.CompProperties_AbilityRequiresBodyPart">
         <bodyPartDef>VV_Wing</bodyPartDef>

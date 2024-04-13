@@ -7,27 +7,24 @@
   <VV_HoneyGatherYield.description>꿀을 채집할때 한번에 얼마나 많이 얻는지 나타냅니다.</VV_HoneyGatherYield.description>
 
   <VV_PlantGatherSpeed.label>식물 자원 채집 속도</VV_PlantGatherSpeed.label>
-  <VV_PlantGatherSpeed.description>식물을 손상시키지 않고 자원을 채집하는데 얼마나 빠르게 작업하는지 나타냅니다.</VV_PlantGatherSpeed.description>
+  <VV_PlantGatherSpeed.description>식물에서 자원을 채집하는데 얼마나 빠르게 작업하는지 나타냅니다.</VV_PlantGatherSpeed.description>
 
   <VV_PlantGatherYield.label>식물 자원 채집량</VV_PlantGatherYield.label>
-  <VV_PlantGatherYield.description>식물을 손상시키지 않고 자원을 채집할때 한번에 얼마나 많이 얻는지 나타냅니다.</VV_PlantGatherYield.description>
+  <VV_PlantGatherYield.description>식물에서 자원을 채집할때 한번에 얼마나 많이 얻는지 나타냅니다.</VV_PlantGatherYield.description>
 
 
   <VV_MinGrowthPlantGatherable.label>채집 최소 성장도</VV_MinGrowthPlantGatherable.label>
   <VV_MinGrowthPlantGatherable.description>식물을 채집할수 있는 최소 성장도를 나타냅니다.</VV_MinGrowthPlantGatherable.description>
 
   <VV_PlantGatherCooldown.label>채집 재생시간</VV_PlantGatherCooldown.label>
-  <VV_PlantGatherCooldown.description>식물을 채집 후 다시 채집 가능할때까지 걸리는 시간을 나타냅니다.
-\n오염된 지형에서는 재생하는데 더 오랜 시간이 걸립니다.</VV_PlantGatherCooldown.description>
+  <VV_PlantGatherCooldown.description>식물을 채집 후 다시 채집 가능할때까지 걸리는 시간을 나타냅니다. 오염된 지형에서는 재생하는데 더 오랜 시간이 걸립니다.</VV_PlantGatherCooldown.description>
   <VV_PlantGatherCooldown.formatString>{0} 일</VV_PlantGatherCooldown.formatString>
 
   <VV_PlantHoneyGatherYield.label>꿀 생산량</VV_PlantHoneyGatherYield.label>
-  <VV_PlantHoneyGatherYield.description>식물에서 평균 대비 얼마나 많은 꿀을 채집 가능한지 나타냅니다.
-\n생산량은 내구도, 성장도, 오염에 영향을 받습니다.</VV_PlantHoneyGatherYield.description>
+  <VV_PlantHoneyGatherYield.description>식물에서 평균 대비 얼마나 많은 꿀을 채집 가능한지 나타냅니다. 생산량은 내구도, 성장도, 오염에 영향을 받습니다.</VV_PlantHoneyGatherYield.description>
 
-  <VV_TreeResinGatherYield.label>수지 생산량</VV_TreeResinGatherYield.label>
-  <VV_TreeResinGatherYield.description>식물에서 평균 대비 얼마나 많은 수지를 채집 가능한지 나타냅니다.
-\n생산량은 내구도, 성장도, 오염에 영향을 받습니다.</VV_TreeResinGatherYield.description>
+  <VV_TreeResinGatherYield.label>프로폴리스 생산량</VV_TreeResinGatherYield.label>
+  <VV_TreeResinGatherYield.description>식물에서 평균 대비 얼마나 많은 프로폴리스를 채집 가능한지 나타냅니다. 생산량은 내구도, 성장도, 오염에 영향을 받습니다.</VV_TreeResinGatherYield.description>
 
   <VV_GrowthPointsFactor.label>성장 등급 획득 속도</VV_GrowthPointsFactor.label>
   <VV_GrowthPointsFactor.description>어린이가 성장 등급을 얼마나 많이 획득하는지 나타냅니다.</VV_GrowthPointsFactor.description>

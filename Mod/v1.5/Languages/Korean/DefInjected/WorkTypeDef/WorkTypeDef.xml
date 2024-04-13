@@ -3,6 +3,6 @@
   <VV_Gathering.labelShort>채집</VV_Gathering.labelShort>
   <VV_Gathering.pawnLabel>채집꾼</VV_Gathering.pawnLabel>
   <VV_Gathering.gerundLabel>채집</VV_Gathering.gerundLabel>
-  <VV_Gathering.description>자원을 자연 그대로 손상시키지 않으면서 자원을 채집합니다.</VV_Gathering.description>
+  <VV_Gathering.description>자원을 완전히 수확하지 않으면서 채집합니다.</VV_Gathering.description>
   <VV_Gathering.verb>채집</VV_Gathering.verb>
 </LanguageData>

@@ -6,7 +6,7 @@
     <labelShort>gather</labelShort>
     <pawnLabel>Gather</pawnLabel>
     <gerundLabel>gathering</gerundLabel>
-    <description>.</description>
+    <description>Harvest resources without completely depleting them.</description>
     <verb>Gather</verb>
     <naturalPriority>690</naturalPriority>
     <requireCapableColonist>true</requireCapableColonist>

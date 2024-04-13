@@ -3,7 +3,8 @@
   <HediffDef>
     <defName>VV_RoyalJelly</defName>
     <label>royal jelly effect</label>
-    <description>.</description>
+    <description>The effects of royal jelly slow down aging. In the case of child Vivi, their bodies are transforming into Royal Vivi.
+\nConsuming additional royal jelly will not stack the effects.</description>
     <descriptionHyperlinks>
       <HediffDef>VV_RoyalVivi</HediffDef>
     </descriptionHyperlinks>
@@ -53,7 +54,7 @@
   <HediffDef>
     <defName>VV_ViviGrowthBoost</defName>
     <label>learning boost</label>
-    <description>.</description>
+    <description>Gain additional bonuses to global learning speed and growth point.</description>
     <hediffClass>HediffWithComps</hediffClass>
     <defaultLabelColor>(1,0,0.5)</defaultLabelColor>
     
@@ -88,8 +89,8 @@
 
   <HediffDef>
     <defName>VV_FloralTea</defName>
-    <label>relaxed on floral tea</label>
-    <description>.</description>
+    <label>relaxed on flower tea</label>
+    <description>Drunk flower tea and are now in a serene state of mind.</description>
     <hediffClass>HediffWithComps</hediffClass>
     <defaultLabelColor>(1,0,0.5)</defaultLabelColor>
     
@@ -116,7 +117,7 @@
   <HediffDef>
     <defName>VV_WarmingFloralTea</defName>
     <label>high on hot tea</label>
-    <description>.</description>
+    <description>Drunk hot flower tea, making their body more resistant to the cold.</description>
     <hediffClass>HediffWithComps</hediffClass>
     <defaultLabelColor>(1,0,0.5)</defaultLabelColor>
     
@@ -142,7 +143,7 @@
   <HediffDef>
     <defName>VV_CoolingFloralTea</defName>
     <label>high on ice tea</label>
-    <description>.</description>
+    <description>Drunk ice flower tea, making their body more resistant to heat.</description>
     <hediffClass>HediffWithComps</hediffClass>
     <defaultLabelColor>(1,0,0.5)</defaultLabelColor>
     
@@ -168,7 +169,7 @@
   <HediffDef>
     <defName>VV_FlowerScent</defName>
     <label>flower scent</label>
-    <description>.</description>
+    <description>Emitting a floral scent from body.</description>
     <hediffClass>HediffWithComps</hediffClass>
     <defaultLabelColor>(1,0,0.5)</defaultLabelColor>
     

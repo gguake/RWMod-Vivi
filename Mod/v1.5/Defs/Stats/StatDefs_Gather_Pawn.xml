@@ -4,7 +4,7 @@
   <StatDef>
     <defName>VV_HoneyGatherSpeed</defName>
     <label>honey gather speed</label>
-    <description>.</description>
+    <description>It shows how quickly the work is done in collecting honey.</description>
     <category>PawnWork</category>
     <defaultBaseValue>0</defaultBaseValue>
     <minValue>0</minValue>
@@ -41,7 +41,7 @@
   <StatDef>
     <defName>VV_HoneyGatherYield</defName>
     <label>honey gather yield</label>
-    <description>.</description>
+    <description>It shows how much honey is obtained at once during honey collection.</description>
     <category>PawnWork</category>
     <defaultBaseValue>0</defaultBaseValue>
     <minValue>0</minValue>
@@ -96,7 +96,7 @@
   <StatDef>
     <defName>VV_PlantGatherSpeed</defName>
     <label>plant gather speed</label>
-    <description>.</description>
+    <description>It shows how quickly the work is done in gathering resources from plants.</description>
     <category>PawnWork</category>
     <defaultBaseValue>0</defaultBaseValue>
     <minValue>0</minValue>
@@ -133,7 +133,7 @@
   <StatDef>
     <defName>VV_PlantGatherYield</defName>
     <label>honey gather yield</label>
-    <description>.</description>
+    <description>It shows how much resources are obtained at once when harvesting from plants.</description>
     <category>PawnWork</category>
     <defaultBaseValue>0</defaultBaseValue>
     <minValue>0</minValue>

@@ -3,7 +3,8 @@
   <HediffDef>
     <defName>VV_RoyalVivi</defName>
     <label>royal vivi</label>
-    <description>.</description>
+    <description>This Vivi has transformed into a Royal Vivi.
+\nIt can reproduce by laying eggs and its lifespan is greatly increased. Mental strength and cognitive abilities are developed, but movement speed and work efficiency are reduced.</description>
     <hediffClass>HediffWithComps</hediffClass>
     <defaultLabelColor>(1,0.5,0)</defaultLabelColor>
     

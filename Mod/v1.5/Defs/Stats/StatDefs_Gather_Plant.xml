@@ -4,7 +4,7 @@
   <StatDef>
     <defName>VV_MinGrowthPlantGatherable</defName>
     <label>gatherable minimum growth</label>
-    <description>.</description>
+    <description>It indicates the minimum growth required to gather from plants.</description>
     <category>BasicsNonPawn</category>
     <defaultBaseValue>0</defaultBaseValue>
     <hideAtValue>0</hideAtValue>
@@ -18,7 +18,7 @@
   <StatDef>
     <defName>VV_PlantGatherCooldown</defName>
     <label>plant gather cooldown</label>
-    <description>.</description>
+    <description>It indicates the time it takes before the plant can be gathered again. In polluted terrain, it takes longer for regeneration to occur.</description>
     <category>BasicsNonPawn</category>
     <defaultBaseValue>0</defaultBaseValue>
     <hideAtValue>0</hideAtValue>
@@ -64,7 +64,7 @@
   <StatDef ParentName="VV_StatPlantGatherYieldBase">
     <defName>VV_PlantHoneyGatherYield</defName>
     <label>honey gather yield multiplier</label>
-    <description>.</description>
+    <description>It indicates how much more honey can be gathered from the plant compared to the average. Production is influenced by health, growth, and pollution.</description>
     <displayPriorityInCategory>5100</displayPriorityInCategory>
     <parts>
       <li Class="StatPart_Pollution" MayRequire="Ludeon.RimWorld.Biotech">
@@ -83,7 +83,7 @@
   <StatDef ParentName="VV_StatPlantGatherYieldBase">
     <defName>VV_TreeResinGatherYield</defName>
     <label>resin yield multiplier</label>
-    <description>.</description>
+    <description>It indicates how much more propolis can be gathered from the plant compared to the average. Production is influenced by health, growth, and pollution.</description>
     <displayPriorityInCategory>5101</displayPriorityInCategory>
     <parts>
       <li Class="StatPart_Pollution" MayRequire="Ludeon.RimWorld.Biotech">

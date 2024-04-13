@@ -3,7 +3,7 @@
   <RecipeDef ParentName="SurgeryFlesh">
     <defName>VV_InjectPropolis</defName>
     <label>inject propolis</label>
-    <description>.</description>
+    <description>Process propolis into antibiotics for administration. This antibiotic is effective against infections, flu, plague, and malaria, it won't completely cure the diseases but it can significantly delay their progression.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_Propolis</ThingDef>
       <HediffDef>WoundInfection</HediffDef>

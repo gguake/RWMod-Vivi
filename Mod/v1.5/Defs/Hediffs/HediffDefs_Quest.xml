@@ -4,7 +4,7 @@
     <defName>VV_DreamumTranquilize</defName>
     <hediffClass>HediffWithComps</hediffClass>
     <label>dreamum tranquilize</label>
-    <description>.</description>
+    <description>Intoxicated with dreamum pollen, and their consciousness is getting blurry.</description>
     <defaultLabelColor>(0.7, 1.0, 0.7)</defaultLabelColor>
     
     <maxSeverity>1</maxSeverity>

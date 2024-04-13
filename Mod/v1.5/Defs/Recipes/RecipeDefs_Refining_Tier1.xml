@@ -4,7 +4,7 @@
   <RecipeDef>
     <defName>VV_MakeVivicream</defName>
     <label>make vivicream</label>
-    <description>test</description>
+    <description>Produces cream from Vivi's body. Only Vivi can make it and it does not require materials, instead it consumes Vivi's calories and cannot be made when hungry.</description>
     <descriptionHyperlinks>
       <XenotypeDef>VV_Vivi</XenotypeDef>
     </descriptionHyperlinks>
@@ -43,7 +43,7 @@
   <RecipeDef>
     <defName>VV_MakeViviwax</defName>
     <label>make viviwax</label>
-    <description>test</description>
+    <description>Produce viviwax from vivi creams.</description>
 
     <jobString>making viviwax.</jobString>
     <workAmount>900</workAmount>
@@ -80,7 +80,7 @@
   <RecipeDef>
     <defName>VV_FilteringHoney</defName>
     <label>filter honey</label>
-    <description>test</description>
+    <description>Filter the Vivi honey by removing impurities to create pure honey.</description>
 
     <jobString>filtering honey.</jobString>
     <workAmount>500</workAmount>
@@ -119,7 +119,7 @@
   <RecipeDef>
     <defName>VV_RefiningPropolis</defName>
     <label>refining propolis</label>
-    <description>.</description>
+    <description>Refine propolis to extract medicines and neutroamines.</description>
 
     <jobString>refining propolis.</jobString>
     <workAmount>1800</workAmount>
@@ -156,7 +156,7 @@
   <RecipeDef>
     <defName>VV_MakeFertilizerCorpse</defName>
     <label>make fertilizer from bones</label>
-    <description>.</description>
+    <description>Combine bones with soil and pollen to produce mana fertilizers.</description>
     <jobString>making fertilizer from bones.</jobString>
     <workAmount>500</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
@@ -220,7 +220,7 @@
   <RecipeDef>
     <defName>VV_MakeFertilizerResource</defName>
     <label>make fertilizer from organics</label>
-    <description>.</description>
+    <description>Ferment organic matter and mix it with soil and pollen to produce mana fertilizers.</description>
     <jobString>making fertilizer from organics.</jobString>
     <workAmount>2000</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
