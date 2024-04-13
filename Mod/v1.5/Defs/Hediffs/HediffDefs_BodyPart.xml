@@ -80,12 +80,13 @@
 				<debugLabel>LeftUpperWing</debugLabel>
 				<workerClass>PawnRenderNodeWorker_AttachmentBody</workerClass>
         <texPath>Things/Pawn/Vivi/BodyParts/UpperWingL</texPath>
+				<parentTagDef>Body</parentTagDef>
 				<rotDrawMode>Fresh</rotDrawMode>
 				<drawData>
 					<scaleOffsetByBodySize>true</scaleOffsetByBodySize>
 					<dataNorth>
 						<offset>(-0.01, 0, 0.0)</offset>
-						<layer>80</layer>
+						<layer>54</layer>
 					</dataNorth>
 					<dataSouth>
 						<offset>(0.01, 0, 0.0)</offset>
@@ -105,12 +106,13 @@
 				<debugLabel>RightUpperWing</debugLabel>
 				<workerClass>PawnRenderNodeWorker_AttachmentBody</workerClass>
         <texPath>Things/Pawn/Vivi/BodyParts/UpperWingR</texPath>
+				<parentTagDef>Body</parentTagDef>
 				<rotDrawMode>Fresh</rotDrawMode>
 				<drawData>
 					<scaleOffsetByBodySize>true</scaleOffsetByBodySize>
 					<dataNorth>
 						<offset>(0.01, 0, 0)</offset>
-						<layer>80</layer>
+						<layer>54</layer>
 					</dataNorth>
 					<dataSouth>
 						<offset>(-0.01, 0, 0)</offset>
