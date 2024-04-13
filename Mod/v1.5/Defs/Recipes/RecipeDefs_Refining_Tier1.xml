@@ -27,11 +27,8 @@
     <researchPrerequisite>VV_BasicInfra</researchPrerequisite>
 
     <modExtensions>
-      <li Class="RPEF.RaceConstraint">
-        <type>Required</type>
-        <things>
-          <li>VV_Vivi</li>
-        </things>
+      <li Class="RPEF.ConstraintModExtension">
+        <def>VV_RaceConstraint</def>
       </li>
       <li Class="RPEF.RecipeBillHook">
         <billOverrideType>VVRace.Bill_ProductionWithFoodDrain</billOverrideType>

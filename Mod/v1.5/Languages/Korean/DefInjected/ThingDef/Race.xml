@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
+
+<VV_Vivi.label>비비</VV_Vivi.label>
+<VV_Vivi.description>.</VV_Vivi.description>
+
+<VV_Vivi.tools.left_fist.label>왼쪽 주먹</VV_Vivi.tools.left_fist.label>
+<VV_Vivi.tools.right_fist.label>오른쪽 주먹</VV_Vivi.tools.right_fist.label>
+<VV_Vivi.tools.teeth.label>이빨</VV_Vivi.tools.teeth.label>
+<VV_Vivi.tools.head.label>머리</VV_Vivi.tools.head.label>
+
 <VV_TitanicHornet.label>거대 말벌</VV_TitanicHornet.label>
 <VV_TitanicHornet.description>기이한 형태를 가진 거대한 말벌. 빠른 속도와 튼튼한 껍질을 가지고 있으며 강력한 턱과 두 발에 달린 거대한 크기의 발톱으로 적들을 찢어버립니다. 다만 오염과 열에는 취약하며 의외로 고통을 잘 견디지 못합니다.
 \n스카리아균과 공생하는 특성이 있어 스카리아를 항상 보균하고있지만 시간이 지나도 죽지 않는 특징이 있습니다. 스카리아를 치료하더라도 의식이 돌아오면 곧바로 다시 감염되어 폭주하기 시작합니다.

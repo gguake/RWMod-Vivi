@@ -88,18 +88,8 @@
     <colorGenerator Class="ColorGenerator_White" />
     
     <modExtensions>
-      <li Class="RPEF.RaceConstraint">
-        <type>Required</type>
-        <things>
-          <li>VV_Vivi</li>
-        </things>
-      </li>
-      <li Class="RPEF.BodyTypeConstraint">
-        <type>Required</type>
-        <bodyTypes>
-          <li>Thin</li>
-          <li>Female</li>
-        </bodyTypes>
+      <li Class="RPEF.ConstraintModExtension">
+        <def>VV_AdultApparelConstraint</def>
       </li>
     </modExtensions>
   </ThingDef>
@@ -176,11 +166,8 @@
     <colorGenerator Class="ColorGenerator_White" />
     
     <modExtensions>
-      <li Class="RPEF.RaceConstraint">
-        <type>Required</type>
-        <things>
-          <li>VV_Vivi</li>
-        </things>
+      <li Class="RPEF.ConstraintModExtension">
+        <def>VV_RaceConstraint</def>
       </li>
     </modExtensions>
   </ThingDef>

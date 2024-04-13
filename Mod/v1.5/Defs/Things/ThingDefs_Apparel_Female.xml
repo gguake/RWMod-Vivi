@@ -21,17 +21,8 @@
     <colorGenerator Class="ColorGenerator_White" />
     
     <modExtensions>
-      <li Class="RPEF.RaceConstraint">
-        <type>Required</type>
-        <things>
-          <li>VV_Vivi</li>
-        </things>
-      </li>
-      <li Class="RPEF.BodyTypeConstraint">
-        <type>Required</type>
-        <bodyTypes>
-          <li>Female</li>
-        </bodyTypes>
+      <li Class="RPEF.ConstraintModExtension">
+        <def>VV_FemaleApparelConstraint</def>
       </li>
       <li Class="RPEF.ApparelGraphicHook">
         <defaultBodyTypeGraphicOverride>Female</defaultBodyTypeGraphicOverride>

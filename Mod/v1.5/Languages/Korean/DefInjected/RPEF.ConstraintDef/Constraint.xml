@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <VV_RaceConstraint.constraints.0.failReason>비비가 아님</VV_RaceConstraint.constraints.0.failReason>
+  
+  <VV_FemaleApparelConstraint.constraints.0.failReason>비비가 아님</VV_FemaleApparelConstraint.constraints.0.failReason>
+  <VV_FemaleApparelConstraint.constraints.1.failReason>체형이 맞지 않음</VV_FemaleApparelConstraint.constraints.1.failReason>
+
+  <VV_ThinApparelConstraint.constraints.0.failReason>비비가 아님</VV_ThinApparelConstraint.constraints.0.failReason>
+  <VV_ThinApparelConstraint.constraints.1.failReason>체형이 맞지 않음</VV_ThinApparelConstraint.constraints.1.failReason>
+
+  <VV_AdultApparelConstraint.constraints.0.failReason>비비가 아님</VV_AdultApparelConstraint.constraints.0.failReason>
+  <VV_AdultApparelConstraint.constraints.1.failReason>체형이 맞지 않음</VV_AdultApparelConstraint.constraints.1.failReason>
+  
+  <VV_WaterproofCoatApparelConstraint.constraints.0.failReason>비비가 아님</VV_WaterproofCoatApparelConstraint.constraints.0.failReason>
+  <VV_WaterproofCoatApparelConstraint.constraints.1.failReason>체형이 맞지 않음</VV_WaterproofCoatApparelConstraint.constraints.1.failReason>
+
+
+</LanguageData>

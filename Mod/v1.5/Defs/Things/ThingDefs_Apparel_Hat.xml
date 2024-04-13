@@ -21,11 +21,8 @@
     <colorGenerator Class="ColorGenerator_White" />
     
     <modExtensions>
-      <li Class="RPEF.RaceConstraint">
-        <type>Required</type>
-        <things>
-          <li>VV_Vivi</li>
-        </things>
+      <li Class="RPEF.ConstraintModExtension">
+        <def>VV_RaceConstraint</def>
       </li>
     </modExtensions>
   </ThingDef>

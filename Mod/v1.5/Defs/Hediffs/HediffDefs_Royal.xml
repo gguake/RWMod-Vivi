@@ -21,13 +21,13 @@
         <statOffsets>
           <MoveSpeed>-2.1</MoveSpeed>
           <PsychicSensitivity>1.0</PsychicSensitivity>
-          <NegotiationAbility>0.2</NegotiationAbility>
-          <SocialImpact>0.2</SocialImpact>
+          <NegotiationAbility>0.35</NegotiationAbility>
+          <SocialImpact>0.35</SocialImpact>
           <MeditationFocusGain MayRequire="Ludeon.RimWorld.Royalty">0.2</MeditationFocusGain>
           <PsychicEntropyRecoveryRate>0.2</PsychicEntropyRecoveryRate>
         </statOffsets>
         <statFactors>
-          <WorkSpeedGlobal>0.7</WorkSpeedGlobal>
+          <WorkSpeedGlobal>0.5</WorkSpeedGlobal>
           <LifespanFactor>11</LifespanFactor>
         </statFactors>
       </li>
@@ -37,11 +37,8 @@
     </comps>
 
     <modExtensions>
-      <li Class="RPEF.RaceConstraint">
-        <type>Required</type>
-        <things>
-          <li>VV_Vivi</li>
-        </things>
+      <li Class="RPEF.ConstraintModExtension">
+        <def>VV_RaceConstraint</def>
       </li>
     </modExtensions>
   </HediffDef>

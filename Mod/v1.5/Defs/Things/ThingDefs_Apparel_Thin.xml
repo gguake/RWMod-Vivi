@@ -21,18 +21,8 @@
     <colorGenerator Class="ColorGenerator_White" />
     
     <modExtensions>
-      <li Class="RPEF.RaceConstraint">
-        <type>Required</type>
-        <things>
-          <li>VV_Vivi</li>
-        </things>
-      </li>
-      <li Class="RPEF.BodyTypeConstraint">
-        <type>Required</type>
-        <bodyTypes>
-          <li>Child</li>
-          <li>Thin</li>
-        </bodyTypes>
+      <li Class="RPEF.ConstraintModExtension">
+        <def>VV_ThinApparelConstraint</def>
       </li>
       <li Class="RPEF.ApparelGraphicHook">
         <defaultBodyTypeGraphicOverride>Thin</defaultBodyTypeGraphicOverride>
@@ -295,13 +285,12 @@
       <displayPriority>3301</displayPriority>
     </recipeMaker>
 
-    <modExtensions>
-      <li Class="RPEF.ThoughtConstraint">
-        <rule>OnAppliedPawn</rule>
-        <type>Blacklist</type>
-        <thoughts>
-          <li>SoakingWet</li>
-        </thoughts>
+    <modExtensions Inherit="False">
+      <li Class="RPEF.ConstraintModExtension">
+        <def>VV_WaterproofCoatApparelConstraint</def>
+      </li>
+      <li Class="RPEF.ApparelGraphicHook">
+        <defaultBodyTypeGraphicOverride>Thin</defaultBodyTypeGraphicOverride>
       </li>
     </modExtensions>
   </ThingDef>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <RPEF.ConstraintDef>
+    <defName>VV_PawnConstraint</defName>
+    <constraints>
+      <li Class="RPEF.HeadTypeConstraint">
+        <rule>OnAppliedPawn</rule>
+        <type>Whitelist</type>
+        <headTypes>
+          <li>VV_Vivi_A</li>
+          <li>VV_Vivi_B</li>
+          <li>VV_Vivi_C</li>
+          <li>VV_Vivi_D</li>
+          <li>VV_Vivi_E</li>
+          <li>VV_Vivi_F</li>
+        </headTypes>
+        <randomChosen>false</randomChosen>
+      </li>
+
+      <li Class="RPEF.StyleItemConstraint">
+        <rule>OnAppliedPawn</rule>
+        <type>Whitelist</type>
+        <hairTags><li>VV_Vivi</li></hairTags>
+        <beards></beards>
+        <tattoos></tattoos>
+      </li>
+
+      <li Class="RPEF.XenotypeConstraint">
+        <rule>OnAppliedPawn</rule>
+        <type>Whitelist</type>
+        <xenotypes>
+          <li>VV_Vivi</li>
+        </xenotypes>
+      </li>
+
+      <li Class="RPEF.BackstoryConstraint">
+        <rule>OnAppliedPawn</rule>
+        <type>Whitelist</type>
+        <backstoryCategories>
+          <li>Newborn</li>
+          <li>Child</li>
+          <li>ChildTribal</li>
+          <li>VV_Backstory</li>
+        </backstoryCategories>
+      </li>
+
+      <li Class="RPEF.ThoughtConstraint">
+        <rule>OnAppliedPawn</rule>
+        <type>Blacklist</type>
+        <thoughts>
+          <li>VV_AtePollen</li>
+          <li>MySisterDied</li>
+          <li>SleepDisturbed</li>
+        </thoughts>
+      </li>
+    </constraints>
+  </RPEF.ConstraintDef>
+
+  <RPEF.ConstraintDef>
+    <defName>VV_RaceConstraint</defName>
+    <constraints>
+      <li Class="RPEF.RaceConstraint">
+        <type>Required</type>
+        <things>
+          <li>VV_Vivi</li>
+        </things>
+        <failReason>not vivi</failReason>
+      </li>
+    </constraints>
+  </RPEF.ConstraintDef>
+
+  
+  <RPEF.ConstraintDef>
+    <defName>VV_FemaleApparelConstraint</defName>
+    <constraints>
+      <li Class="RPEF.RaceConstraint">
+        <type>Required</type>
+        <things>
+          <li>VV_Vivi</li>
+        </things>
+        <failReason>not vivi</failReason>
+      </li>
+      <li Class="RPEF.BodyTypeConstraint">
+        <type>Required</type>
+        <bodyTypes>
+          <li>Female</li>
+        </bodyTypes>
+        <failReason>Not adapt body</failReason>
+      </li>
+    </constraints>
+  </RPEF.ConstraintDef>
+  
+  <RPEF.ConstraintDef>
+    <defName>VV_ThinApparelConstraint</defName>
+    <constraints>
+      <li Class="RPEF.RaceConstraint">
+        <type>Required</type>
+        <things>
+          <li>VV_Vivi</li>
+        </things>
+        <failReason>not vivi</failReason>
+      </li>
+      <li Class="RPEF.BodyTypeConstraint">
+        <type>Required</type>
+        <bodyTypes>
+          <li>Child</li>
+          <li>Thin</li>
+        </bodyTypes>
+        <failReason>Not adapt body</failReason>
+      </li>
+    </constraints>
+  </RPEF.ConstraintDef>
+  
+  <RPEF.ConstraintDef>
+    <defName>VV_AdultApparelConstraint</defName>
+    <constraints>
+      <li Class="RPEF.RaceConstraint">
+        <type>Required</type>
+        <things>
+          <li>VV_Vivi</li>
+        </things>
+        <failReason>not vivi</failReason>
+      </li>
+      <li Class="RPEF.BodyTypeConstraint">
+        <type>Required</type>
+        <bodyTypes>
+          <li>Thin</li>
+          <li>Female</li>
+        </bodyTypes>
+        <failReason>Not adapt body</failReason>
+      </li>
+    </constraints>
+  </RPEF.ConstraintDef>
+  
+  <RPEF.ConstraintDef>
+    <defName>VV_WaterproofCoatApparelConstraint</defName>
+    <constraints>
+      <li Class="RPEF.RaceConstraint">
+        <type>Required</type>
+        <things>
+          <li>VV_Vivi</li>
+        </things>
+        <failReason>not vivi</failReason>
+      </li>
+      <li Class="RPEF.BodyTypeConstraint">
+        <type>Required</type>
+        <bodyTypes>
+          <li>Child</li>
+          <li>Thin</li>
+        </bodyTypes>
+        <failReason>Not adapt body</failReason>
+      </li>
+      <li Class="RPEF.ThoughtConstraint">
+        <rule>OnAppliedPawn</rule>
+        <type>Blacklist</type>
+        <thoughts>
+          <li>SoakingWet</li>
+        </thoughts>
+      </li>
+    </constraints>
+  </RPEF.ConstraintDef>
+</Defs>
