@@ -8,7 +8,7 @@
     <stages>
       <li>
         <label>ate pollen</label>
-        <description>.</description>
+        <description>It's bitter and dry. Do you usually eat this kind of food?</description>
         <baseMoodEffect>-4</baseMoodEffect>
       </li>
     </stages>

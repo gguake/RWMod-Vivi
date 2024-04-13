@@ -4,7 +4,8 @@
   <ThingDef ParentName="BaseWeapon">
     <defName>VV_RitualLance</defName>
     <label>vivi ritual lance</label>
-    <description>.</description>
+    <description>a large spear with various decorations and a large blade given in a form of ceremony to Vivi who saved the hive from danger. Due to the abnormal size of the blade and decorations compared to the length of the handle, only Vivi can use it as it is optimized for them.
+\nIt inflicts additional damage that completely penetrates the defense with a certain probability when attacking.</description>
     <graphicData>
       <texPath>Things/Item/Equipment/VV_RitualLance</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -112,7 +113,10 @@
   <ThingDef ParentName="BaseWeapon">
     <defName>VV_EltexNeedle</defName>
     <label>vivi eltex needle</label>
-    <description>.</description>
+    <description>a specially processed sharp needle. Only Vivi can handle it, and when equipped, it resonates with the wearer and becomes bound so others cannot use it.
+\nWhen equipped, you can summon a ghost needle that moves freely ignoring physical laws through the needle, and attack enemies.
+\nThe ghost needle penetrates all obstacles and is always accurate. It also penetrates all enemies and shields in its path and tracks and attacks any surrounding targets that can be attacked.
+\nThe higher the psychic sensitivity, the more attacks you can make at once, and you can only attack again when the needle is retrieved.</description>
     <graphicData>
       <texPath>Things/Item/Equipment/VV_Needle</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -169,7 +173,7 @@
         <verbClass>VVRace.Verb_SpawnNeedle</verbClass>
         <hasStandardCommand>true</hasStandardCommand>
         <defaultProjectile>VV_Projectile_EltexNeedle</defaultProjectile>
-        <warmupTime>5.0</warmupTime>
+        <warmupTime>5.5</warmupTime>
         <range>44.9</range>
         <soundCast>Interact_BeatFire</soundCast>
         <rangedFireRulepack>Combat_RangedFire_Thrown</rangedFireRulepack>

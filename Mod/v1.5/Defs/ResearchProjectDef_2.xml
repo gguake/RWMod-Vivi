@@ -48,7 +48,7 @@
   <ResearchProjectDef ParentName="ViviResearchProjectTier2Base">
     <defName>VV_Lifestrand</defName>
     <label>lifestrand</label>
-    <description>Weave lifestrand cloth reinforced with magical materials processed from devilstrand fabric.</description>
+    <description>Weave lifestrand cloth reinforced with arcane materials processed from devilstrand fabric.</description>
     <baseCost>1800</baseCost>
     <researchViewX>3</researchViewX>
     <researchViewY>2.8</researchViewY>

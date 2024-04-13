@@ -63,7 +63,8 @@
   <ThingDef ParentName="DrugBase">
     <defName>VV_Mead</defName>
     <label>vivi mead</label>
-    <description>It is a traditional liquor of vivi.</description>
+    <description>A traditional liquor made by fermenting honey of Vivis. Surprisingly, it's not very sweet and is strong but has the distinct fragrance of honey.
+\nVivis don't prefer alcohol, but they make it to sell leftover honey at a high price due to the demand of foreigners.</description>
     <descriptionHyperlinks>
       <HediffDef>AlcoholHigh</HediffDef>
       <HediffDef>AlcoholTolerance</HediffDef>

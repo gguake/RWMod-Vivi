@@ -66,7 +66,7 @@
   <ThingDef ParentName="VV_UtilityApparelBase">
     <defName>VV_StrawTool</defName>
     <label>vivi straw</label>
-    <description>.</description>
+    <description>A large straw that Vivis use to collect honey more efficiently. Humans can also use it to collect honey.</description>
     <graphicData>
       <texPath>Things/Apparel/Straw/VV_Straw</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -113,7 +113,7 @@
   <ThingDef ParentName="VV_UtilityApparelBase">
     <defName>VV_MultiuseBrushTool</defName>
     <label>vivi multiuse brush</label>
-    <description>.</description>
+    <description>A large brush that can be used for cleaning pollen or collecting material precisely from plants.</description>
     <graphicData>
       <texPath>Things/Apparel/MultiuseBrush/VV_MultiuseBrush</texPath>
       <graphicClass>Graphic_Single</graphicClass>

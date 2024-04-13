@@ -127,7 +127,7 @@
   <ResearchProjectDef ParentName="ViviResearchProjectTier1Base">
     <defName>VV_ArcaneBotany</defName>
     <label>arcane botany</label>
-    <description>Build facilities to cultivate magical plants with various uses.</description>
+    <description>Build facilities to cultivate arcane plants with various uses.</description>
     <discoveredLetterTitle>Arcane plant</discoveredLetterTitle>
     <discoveredLetterText>To cultivate arcane plants, you need unidentified seeds, and each plant requires different materials. Regular maintenance during cultivation is necessary for good results, and you must apply mana fertilizer to sustain their vitality.
 \nArcane plants produce and consume a resource called mana. Each plant must meet specific conditions to produce mana. If the produced mana exceeds its storage capacity, it transfers to adjacent arcane plants, so make sure to utilize this feature effectively.</discoveredLetterText>

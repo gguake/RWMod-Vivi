@@ -2,8 +2,7 @@
 <LanguageData>
   <VV_Vivicream.label>비비 크림</VV_Vivicream.label>
   <VV_Vivicream.description>비비가 몸에서 만들어내는 혼합물입니다. 비비만 만들 수 있으며 만들때 약간의 열량을 소비하므로 배고플때는 만들 수 없습니다.
-\n접착제처럼 활용이 가능해 비비들의 다양한 공예 재료로 활용되며 희소한 성분을 추출해 로열 젤리를 만들때도 사용됩니다.
-\n야외에 방치되면 빠르게 손상되므로 주의하세요.</VV_Vivicream.description>
+\n접착제처럼 활용이 가능해 비비들의 다양한 공예 재료로 활용되며 희소한 성분을 추출해 로열 젤리를 만들때도 사용됩니다. 야외에 방치되면 빠르게 손상되므로 취급에 주의가 필요합니다.</VV_Vivicream.description>
 
   <VV_Viviwax.label>비비 밀랍</VV_Viviwax.label>
   <VV_Viviwax.description>비비 크림을 굳혀서 만든 밀랍입니다. 가볍고 적당히 튼튼하지만 불에는 약합니다. 석재가 필요한 대부분의 경우에 대체품으로 사용할 수 있습니다.</VV_Viviwax.description>
@@ -17,7 +16,7 @@
 \n섬유가 마치 살아있는것 같다고 해서 생체가닥으로 불리지만 실제로 살아있을지도 모릅니다.</VV_Lifestrand.description>
 
   <VV_UnknownSeed.label>미확인 씨앗</VV_UnknownSeed.label>
-  <VV_UnknownSeed.description>종류를 알 수 없는 식물의 씨앗입니다. 일반적인 방법으로는 재배가 불가능하며 마법 모종 배양기에서 배양할 수 있습니다.</VV_UnknownSeed.description>
+  <VV_UnknownSeed.description>종류를 알 수 없는 식물의 씨앗입니다. 일반적인 방법으로는 재배가 불가능하며 마법 식물 재배 작업대에서 배양할 수 있습니다.</VV_UnknownSeed.description>
 
   <VV_Fertilizer.label>마나 비료</VV_Fertilizer.label>
   <VV_Fertilizer.description>유기물과 꽃가루를 배합해 만든 비비 특제 비료입니다. 약간의 마나를 함유하고 있어 마법 식물을 배양하거나 마법 식물들의 마나를 일시적으로 충전하는 용도로 사용할 수도 있습니다. 비료 1개당 20의 마나를 회복합니다.</VV_Fertilizer.description>

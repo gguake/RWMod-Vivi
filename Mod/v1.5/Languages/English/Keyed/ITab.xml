@@ -13,7 +13,7 @@
   <VV_ITab_ArcanePlantFarmBill_ManaPct>Held Mana</VV_ITab_ArcanePlantFarmBill_ManaPct>
   <VV_ITab_ArcanePlantFarmBill_ManaPctDesc>Current mana held by the arcane plant. It is consumed over time and can be replenished with mana fertilizer.</VV_ITab_ArcanePlantFarmBill_ManaPctDesc>
   <VV_ITab_ArcanePlantFarmBill_Management>Management Level</VV_ITab_ArcanePlantFarmBill_Management>
-  <VV_ITab_ArcanePlantFarmBill_ManagementDesc>Current management status of the arcane plant. Management tasks are required every {0} and failing to perform them on time will decrease vitality over time.</VV_ITab_ArcanePlantFarmBill_ManagementDesc>
+  <VV_ITab_ArcanePlantFarmBill_ManagementDesc>Current management status of the arcane plant. Management jobs are required every {0} and failing to perform them on time will decrease vitality over time.</VV_ITab_ArcanePlantFarmBill_ManagementDesc>
   <VV_ITab_ArcanePlantFarmBill_Temperature>Temperature Sensitivity</VV_ITab_ArcanePlantFarmBill_Temperature>
   <VV_ITab_ArcanePlantFarmBill_TemperatureDesc>Current temperature sensitivity of the arcane plant. Recovers when the cultivation environment's temperature is within the {0}~{1} range and deteriorates otherwise. Leaving it in a deteriorated state will decrease vitality.</VV_ITab_ArcanePlantFarmBill_TemperatureDesc>
   <VV_ITab_ArcanePlantFarmBill_Glow>Light Sensitivity</VV_ITab_ArcanePlantFarmBill_Glow>

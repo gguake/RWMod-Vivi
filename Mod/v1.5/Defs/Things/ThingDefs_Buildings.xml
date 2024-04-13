@@ -4,7 +4,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VV_ViviHatchery</defName>
     <label>vivi hatchery</label>
-    <description>.</description>
+    <description>a structure for hatching Vivi eggs. It must be indoors with a roof and requires the right temperature. If there is an incubator in a suitable environment, Royal Vivis will go there to lay their eggs.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_ViviEgg</ThingDef>
     </descriptionHyperlinks>
@@ -79,7 +79,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VV_GatheringSpot</defName>
     <label>gathering spot</label>
-    <description>.</description>
+    <description>a place to perform various gathering jobs from nearby plants. Because of insufficient equipment, only half of the original collection amount is obtained, and gathering is possible only near the gathering place.</description>
     <thingClass>VVRace.Building_GatherWorkTable</thingClass>
     <graphicData>
       <texPath>Things/Building/VV_GatheringSpot</texPath>
@@ -133,7 +133,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VV_GatheringBarrel</defName>
     <label>gathering workbench</label>
-    <description>test</description>
+    <description>a workbench for conducting various gathering jobs from nearby plants. Gathering jobs can only be done near the workstation.</description>
     <thingClass>VVRace.Building_GatherWorkTable</thingClass>
 
     <graphicData>
@@ -206,7 +206,7 @@
   <ThingDef ParentName="BenchBase">
     <defName>VV_RefiningWorkbench</defName>
     <label>vivi refining workbench</label>
-    <description>TEST</description>
+    <description>a workbench for Vivi to carry out processing jobs.</description>
     <thingClass>Building_WorkTable</thingClass>
     <graphicData>
       <texPath>Things/Building/VV_RefiningTable</texPath>
@@ -288,7 +288,7 @@
   <ThingDef ParentName="BenchBase">
     <defName>VV_AutoExtractor</defName>
     <label>automatic honey extractor</label>
-    <description>.</description>
+    <description>a machine that uses centrifugal force to extract necessary ingredients in large quantities from unrefined Vivi honey or propolis. It is much faster and capable of handling larger quantities than manual work, but requires electricity.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_SparklingPetal</ThingDef>
     </descriptionHyperlinks>

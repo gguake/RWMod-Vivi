@@ -5,10 +5,10 @@
   <VV_BasicWorkerCostume.description>편의성과 실용성에 초점을 맞춘 비비들의 작업복입니다. 활동하기 편하면서 체온을 잘 보존시켜주고 약간의 방어력도 가지고 있습니다.</VV_BasicWorkerCostume.description>
   
   <VV_WorkerUniformDress.label>비비 제복</VV_WorkerUniformDress.label>
-  <VV_WorkerUniformDress.description>보통 큰 둥지에 소속된 비비들이 입는 제복입니다. 정서적으로 안정감을 주고 괜찮은 방어력을 제공합니다.</VV_WorkerUniformDress.description>
+  <VV_WorkerUniformDress.description>큰 둥지에 소속된 비비들이 입는 제복입니다. 정서적으로 안정감을 주고 괜찮은 방어력을 제공합니다.</VV_WorkerUniformDress.description>
 
   <VV_WinterCape.label>비비 겨울 망토</VV_WinterCape.label>
-  <VV_WinterCape.description>비비들이 겨울을 지내기 위해 입는 망토입니다. 매우 뛰어난 방한 성능을 가지고 있지만 더운 곳에서는 입지 마세요.</VV_WinterCape.description>
+  <VV_WinterCape.description>비비들이 겨울을 지내기 위해 입는 망토입니다. 매우 뛰어난 방한 성능을 가지고 있지만 더운 곳에서는 적합하지 않습니다.</VV_WinterCape.description>
 
   <VV_WaterproofCoat.label>비비 방수 코트</VV_WaterproofCoat.label>
   <VV_WaterproofCoat.description>비비들이 장기간 외부 활동을 할때 주로 입는 코트입니다. 괜찮은 방어력을 가지고 있고 방수 코팅이 되어있어 비가 오거나 물을 건널때에도 축축해지지 않습니다.</VV_WaterproofCoat.description>
@@ -19,13 +19,13 @@
 
   <!-- Head -->
   <VV_UniformHat.label>비비 제복 모자</VV_UniformHat.label>
-  <VV_UniformHat.description>보통 큰 둥지에 소속된 비비들이 입는 제복 모자입니다. 방어력은 기대하기 어렵지만 정신에 안정감을 가져다 줍니다.</VV_UniformHat.description>
+  <VV_UniformHat.description>큰 둥지에 소속된 비비들이 입는 제복 모자입니다. 방어력은 기대하기 어렵지만 정신에 안정감을 가져다 줍니다.</VV_UniformHat.description>
 
   <VV_UniformHelmet.label>비비 제복 헬멧</VV_UniformHelmet.label>
-  <VV_UniformHelmet.description>보통 큰 둥지에 소속된 비비들이 입는 제복 헬멧입니다. 모자와 비슷한 디자인을 가지고 있지만 금속 재질로 만들어져 있어 튼튼합니다.</VV_UniformHelmet.description>
+  <VV_UniformHelmet.description>큰 둥지에 소속된 비비들이 입는 제복 헬멧입니다. 모자와 비슷한 디자인을 가지고 있지만 금속 재질로 만들어져 있어 튼튼합니다.</VV_UniformHelmet.description>
 
   <VV_Crown.label>비비 왕관</VV_Crown.label>
-  <VV_Crown.description>로열 비비들을 위한 작은 왕관입니다. 쓰면 조금 권위가 있어 보입니다.</VV_Crown.description>
+  <VV_Crown.description>로열 비비들을 위한 작은 왕관입니다. 쓰면 조금 권위가 있어 보입니다..</VV_Crown.description>
 
   <!-- ETC -->
   <VV_GuardianCoat.label>비비 전투 코트</VV_GuardianCoat.label>

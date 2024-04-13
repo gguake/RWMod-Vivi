@@ -34,7 +34,7 @@
   <ThingDef ParentName="VV_ThinApparelBase">
     <defName>VV_BasicWorkerCostume</defName>
     <label>vivi basic worker costume</label>
-    <description>.</description>
+    <description>A worker suit for Vivis, designed with a focus on convenience and practicality. It's comfortable for activity, good at retaining body temperature, and also provides some defense.</description>
     <graphicData>
       <texPath>Things/Apparel/BasicWorkerCostume</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -91,7 +91,7 @@
   <ThingDef ParentName="VV_ThinApparelBase">
     <defName>VV_WorkerUniformDress</defName>
     <label>vivi worker uniform</label>
-    <description>.</description>
+    <description>The uniform worn by Vivis affiliated with a large hive. It provides emotional stability and decent defense.</description>
     <graphicData>
       <texPath>Things/Apparel/WorkerUniformDress</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -148,7 +148,7 @@
   <ThingDef ParentName="VV_ThinApparelBase">
     <defName>VV_WinterCape</defName>
     <label>vivi winter cape</label>
-    <description>.</description>
+    <description>A cape worn by Vivis to get through the winter. It has excellent insulation but is not suitable for warm places.</description>
     <graphicData>
       <texPath>Things/Apparel/WinterCape</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -203,7 +203,7 @@
   <ThingDef ParentName="VV_ThinApparelBase">
     <defName>VV_WaterproofCoat</defName>
     <label>vivi waterproof coat</label>
-    <description>.</description>
+    <description>A coat Vivis usually wear for long-term outdoor activity. It has decent defense and waterproof coating, so it doesn't get damp when it rains or crossing water.</description>
     <graphicData>
       <texPath>Things/Apparel/WaterproofCoat</texPath>
       <graphicClass>Graphic_Single</graphicClass>

@@ -3,7 +3,10 @@
   <ThingDef ParentName="OrganicProductBase">
     <defName>VV_ViviEgg</defName>
     <label>vivi egg</label>
-    <description>.</description>
+    <description>This is an egg from which a Vivi can be born. It only hatches when placed in a warm incubator between 21-40℃, and the closer the temperature is maintained to 30℃, the faster it hatches.
+\nIf it's in an inadequate temperature, the egg gets damaged but it automatically recovers once the proper environment is restored.
+\nThe born Vivi inherits the mother's xenogenes and additionally, is born with random xenogenes. (Archites are not inherited.)
+\nCaution: Be careful not to accidentally eat it or let passing animals eat it.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_ViviHatchery</ThingDef>
     </descriptionHyperlinks>

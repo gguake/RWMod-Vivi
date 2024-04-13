@@ -37,11 +37,11 @@
 <VV_DialogGrowArcanePlantGlowSensitivityDesc>Some plants require a specific light source, and if the required light is not met over time, vitality deteriorates.
 \nThe higher the sensitivity, the more critical the impact on vitality.</VV_DialogGrowArcanePlantGlowSensitivityDesc>
 
-<VV_DialogGrowArcanePlantManageInterval>Management Task Interval: {0}</VV_DialogGrowArcanePlantManageInterval>
-<VV_DialogGrowArcanePlantManageIntervalDesc>Some arcane plants require management tasks at regular intervals after cultivation starts; failing to perform these tasks will deteriorate their vitality.
-\nGardening-capable settlers are needed, and those with higher gardening skills can perform these tasks more quickly.</VV_DialogGrowArcanePlantManageIntervalDesc>
+<VV_DialogGrowArcanePlantManageInterval>Management Job Interval: {0}</VV_DialogGrowArcanePlantManageInterval>
+<VV_DialogGrowArcanePlantManageIntervalDesc>Some arcane plants require management jobs at regular intervals after cultivation starts; failing to perform these jobs will deteriorate their vitality.
+\nGardening-capable settlers are needed, and those with higher gardening skills can perform these jobs more quickly.</VV_DialogGrowArcanePlantManageIntervalDesc>
 <VV_DialogGrowArcanePlantManageSensitivity>Management Sensitivity: {0}</VV_DialogGrowArcanePlantManageSensitivity>
-<VV_DialogGrowArcanePlantManageSensitivityDesc>Indicates how quickly the vitality of the arcane plant deteriorates if management tasks are not performed over time.
+<VV_DialogGrowArcanePlantManageSensitivityDesc>Indicates how quickly the vitality of the arcane plant deteriorates if management jobs are not performed over time.
 \nThe higher the sensitivity, the more critical the impact on vitality.</VV_DialogGrowArcanePlantManageSensitivityDesc>
 
 <VV_PlantSensitivity_None>None</VV_PlantSensitivity_None>

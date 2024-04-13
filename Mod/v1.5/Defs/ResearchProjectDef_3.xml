@@ -9,7 +9,7 @@
   <ResearchProjectDef ParentName="ViviResearchProjectTier3Base">
     <defName>VV_AutomatedInfra</defName>
     <label>vivi automated infrastructures</label>
-    <description>Automate some of the manual tasks previously done by the Vivis using electricity, increasing efficiency.</description>
+    <description>Automate some of the manual jobs previously done by the Vivis using electricity, increasing efficiency.</description>
     <baseCost>1500</baseCost>
     <researchViewX>4</researchViewX>
     <researchViewY>1.4</researchViewY>

@@ -27,9 +27,8 @@
   <VV_Dart_ShockDart.label>충격 다트</VV_Dart_ShockDart.label>
 
   <VV_ViviLongJavelin.label>비비 롱 재블린</VV_ViviLongJavelin.label>
-  <VV_ViviLongJavelin.description>비비들이 강한 적을 상대할때 보편적으로 사용하는 길다란 투창입니다. 창 끝에 독이 묻어있어 맞은 적을 중독시키지만 맞추기 어렵습니다.
-\n하지만 일단 맞추면 강력한 파괴력과 관통력을 가지고 있으며 근접전에서도 유효한 무기로서 무력화되지않고 적에게 대응할 수 있습니다.
-\n일반 사람이 던지기에는 너무 작고 불편해 비비만 다룰 수 있습니다.</VV_ViviLongJavelin.description>
+  <VV_ViviLongJavelin.description>비비들이 강한 적을 상대할때 보편적으로 사용하는 길다란 투창입니다. 창 끝에 독이 묻어있어 맞은 적을 중독시키고 높은 파괴력과 관통력을 가지고 있지만 맞추기 어렵습니다.
+\n근접전에서도 유효한 무기로서 무력화되지않고 적에게 대응할 수 있습니다. 일반 사람이 던지기에는 너무 작고 불편해 비비만 다룰 수 있습니다.</VV_ViviLongJavelin.description>
   <VV_ViviLongJavelin.tools.shaft.label>장대</VV_ViviLongJavelin.tools.shaft.label>
   <VV_ViviLongJavelin.tools.point.label>창끝</VV_ViviLongJavelin.tools.point.label>
   <VV_Arrow_LongJavelin.label>롱 재블린</VV_Arrow_LongJavelin.label>

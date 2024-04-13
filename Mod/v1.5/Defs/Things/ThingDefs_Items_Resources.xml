@@ -4,7 +4,8 @@
   <ThingDef ParentName="ResourceBase">
     <defName>VV_Vivicream</defName>
     <label>vivi cream</label>
-    <description>.</description>
+    <description>a mixture created by the Vivi's body. Only Vivis can produce it, and it uses a bit of calorie during the process, so it can't be made when the Vivi is hungry.
+\nIt can be used as an adhesive and applied to various crafts of the Vivis, and is also used when extracting rare components to make Royal Jelly. If left outdoors, it quickly deteriorates, so careful handling is necessary.</description>
     <descriptionHyperlinks>
       <TerrainDef>VV_ViviCreamFloor</TerrainDef>
       <ThingDef>VV_ViviCreamWall</ThingDef>
@@ -46,7 +47,7 @@
   <ThingDef ParentName="ResourceBase">
     <defName>VV_Viviwax</defName>
     <label>viviwax</label>
-    <description>.</description>
+    <description>a viviwax made by hardening Vivi cream. It is light and reasonably sturdy, but weak to fire. It can be used as a substitute in most cases where stone is needed.</description>
     <graphicData>
       <texPath>Things/Item/VV_Beeswax</texPath>
       <graphicClass>Graphic_StackCount</graphicClass>
@@ -110,7 +111,8 @@
   <ThingDef ParentName="ResourceBase">
     <defName>VV_Propolis</defName>
     <label>vivi propolis</label>
-    <description>.</description>
+    <description>a rare resinous mixture collected by Vivis from trees. It has a strong antibacterial effect, so it is used as an ingredient where cleanliness is required.
+\nIt can also be used as a natural antibiotic to slow the progress of infections or some diseases.</description>
     <descriptionHyperlinks>
       <RecipeDef>VV_InjectPropolis</RecipeDef>
     </descriptionHyperlinks>
@@ -147,7 +149,8 @@
   <ThingDef ParentName="ResourceBase">
     <defName>VV_Lifestrand</defName>
     <label>lifestrand</label>
-    <description>.</description>
+    <description>a fabric that has been toughened by processing devilstrand with living leaves and a hornet's wing tissue. It is much more durable than regular devilstrand fabric, but it is also more difficult to process.
+\nThe fibers are called lifestrand because they seem to be alive, but they might indeed be living.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_LivingLeaf</ThingDef>
       <ThingDef>VV_TitanicHornetWing</ThingDef>
@@ -203,7 +206,7 @@
   <ThingDef ParentName="ResourceBase">
     <defName>VV_UnknownSeed</defName>
     <label>unknown seed</label>
-    <description>.</description>
+    <description>a seed of an unidentified plant species. It cannot be grown by conventional means and can be cultured at a arcane plant farm.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_ArcanePlantFarm</ThingDef>
     </descriptionHyperlinks>
@@ -239,7 +242,7 @@
   <ThingDef ParentName="ResourceBase">
     <defName>VV_Fertilizer</defName>
     <label>mana fertilizer</label>
-    <description>.</description>
+    <description>a special fertilizer made by the Vivi, mixing organic matter and pollen. It contains a small amount of mana, so it can be used to cultivate arcane plants or temporarily recharge the mana of arcane plants. Each fertilizer recovers 20 mana.</description>
 
     <graphicData>
       <texPath>Things/Item/VV_Fertilizer</texPath>
@@ -272,7 +275,7 @@
   <ThingDef ParentName="ResourceBase">
     <defName>VV_TitanicHornetWing</defName>
     <label>titanic hornet wing</label>
-    <description>.</description>
+    <description>a piece of a titanic hornet's wing. It's difficult to obtain, but thanks to its special components, it's lightweight and durable, making it a high-quality equipment material. It will decompose at room temperature, so it is recommended to keep it in a freezer.</description>
     <descriptionHyperlinks>
       <RecipeDef>VV_InstallGliderWing</RecipeDef>
       <HediffDef>VV_GliderWing</HediffDef>

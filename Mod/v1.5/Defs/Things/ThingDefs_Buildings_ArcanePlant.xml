@@ -4,7 +4,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VV_ArcanePlantPot</defName>
     <label>arcane plant pot</label>
-    <description>.</description>
+    <description>a pot that you can plant arcane plants in. It is typically used to place arcane plants indoors or in places where plants cannot grow.</description>
     <descriptionHyperlinks>
     </descriptionHyperlinks>
     <thingClass>VVRace.ArcanePlantPot</thingClass>
@@ -78,7 +78,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VV_ArcanePlantFarm</defName>
     <label>arcane plant farm</label>
-    <description>.</description>
+    <description>a large pot for growing arcane plants.</description>
     <thingClass>VVRace.Building_ArcanePlantFarm</thingClass>
     <tickerType>Rare</tickerType>
     

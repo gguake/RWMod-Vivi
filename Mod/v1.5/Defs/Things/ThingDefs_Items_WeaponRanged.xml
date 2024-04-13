@@ -4,7 +4,8 @@
   <ThingDef ParentName="BaseWeaponNeolithic">
     <defName>VV_Slingshot</defName>
     <label>vivi slingshot</label>
-    <description>.</description>
+    <description>a simple slingshot used by the Vivis to chase away rats or small animals. It's easy to handle and quite effective.
+\nIt is too small for an average person to handle, so only Vivi can use it.</description>
     <graphicData>
       <texPath>Things/Item/Equipment/VV_Slingshot</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -105,7 +106,8 @@
   <ThingDef ParentName="BaseWeaponNeolithic">
     <defName>VV_ShockDart</defName>
     <label>vivi shock dart</label>
-    <description>.</description>
+    <description>a small dart for throwing. There is a slight current flowing through the tip, and if it hits a weak point, it can short-circuit and knock out machines or mechanoids.
+\nIt is too small and uncomfortable for an average person to throw, so only Vivi can use it.</description>
     <graphicData>
       <texPath>Things/Item/Equipment/VV_Dart</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -223,7 +225,8 @@
   <ThingDef ParentName="BaseWeaponNeolithic">
     <defName>VV_ViviLongJavelin</defName>
     <label>vivi long javelin</label>
-    <description>.</description>
+    <description>a long javelin commonly used by Vivis against strong enemies. The tip is coated with poison, causing those hit to become poisoned. It has high destructive and penetrative power, but it's difficult to hit the target.
+\nIt is also effective in close combat, allowing it to respond to enemies without being neutralized. It is too small and uncomfortable for an average person to throw, so only Vivi can use it.</description>
     <graphicData>
       <texPath>Things/Item/Equipment/VV_ViviLongJavelin</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -343,7 +346,9 @@
   <ThingDef ParentName="BaseWeaponNeolithic">
     <defName>VV_RepeatingCrossbow</defName>
     <label>vivi repeating crossbow</label>
-    <description>.</description>
+    <description>a repeating crossbow that requires almost no reloading or aiming time. The tip of the bolt is coated with poison, causing those hit to become poisoned.
+\nIt uses needle-like ammunition instead of traditional arrows, resulting in minimal range and power, but it offers overwhelming firepower and convenience, making it popular for self-defense.
+\nIt is too small and complex for a regular person to handle, so only Vivi can use it.</description>
     <graphicData>
       <texPath>Things/Item/Equipment/VV_RepeatingCrossbow</texPath>
       <graphicClass>Graphic_Single</graphicClass>

@@ -3,7 +3,7 @@
 	<ThingDef ParentName="BodyPartProstheticBase">
 		<defName>VV_FakeAntennae</defName>
 		<label>fake vivi antennae</label>
-		<description>.</description>
+		<description>A fake antenna made from fibers mixed with Vivi cream. It doesn't help much, but it looks better than not having one.</description>
 		<techLevel>Medieval</techLevel>
 		<costList>
 			<VV_Viviwax>25</VV_Viviwax>
@@ -21,7 +21,7 @@
 	<ThingDef ParentName="BodyPartProstheticMakeableBase">
 		<defName>VV_FakeWing</defName>
 		<label>fake vivi wing</label>
-		<description>.</description>
+		<description>A fake wing made from fibers mixed with Vivi cream. It doesn't help much, but it looks better than not having one.</description>
 		<techLevel>Medieval</techLevel>
 		<costList>
 			<VV_Viviwax>80</VV_Viviwax>
@@ -39,7 +39,7 @@
 	<ThingDef ParentName="BodyPartBionicBase">
 		<defName>VV_BionicAntennae</defName>
 		<label>bionic vivi antennae</label>
-		<description>.</description>
+		<description>a bionic vivi antennae made with foreign technology. Not only can it move like a real antenna, but it can also detect further distances due to its built-in advanced sensors.</description>
 		<techLevel>Spacer</techLevel>
 		<costList> 
 			<Plasteel>10</Plasteel>
@@ -58,7 +58,7 @@
 	<ThingDef ParentName="BodyPartBionicBase">
 		<defName>VV_BionicWing</defName>
 		<label>bionic vivi wing</label>
-		<description>.</description>
+		<description>a bionic vivi wing made with foreign technology. Not only can it flutter like a real wing, but it can also move with less effort and is much lighter.</description>
 		<techLevel>Spacer</techLevel>
 		<costList> 
 			<Plasteel>15</Plasteel>

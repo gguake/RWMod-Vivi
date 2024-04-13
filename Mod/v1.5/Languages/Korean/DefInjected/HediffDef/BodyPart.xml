@@ -10,14 +10,14 @@
   
   <VV_BionicAntennae.label>생체공학 더듬이</VV_BionicAntennae.label>
   <VV_BionicAntennae.labelNoun>생체공학 더듬이</VV_BionicAntennae.labelNoun>
-  <VV_BionicAntennae.description>장착된 생체공학 더듬이입니다.</VV_BionicAntennae.description>
+  <VV_BionicAntennae.description>장착된 생체공학 더듬이입니다. 고성능 센서가 장착되어 있어 미세한 공기의 흐름도 감지할 수 있습니다.</VV_BionicAntennae.description>
   
   <VV_BionicWing.label>생체공학 날개</VV_BionicWing.label>
   <VV_BionicWing.labelNoun>생체공학 날개</VV_BionicWing.labelNoun>
-  <VV_BionicWing.description>장착된 생체공학 날개입니다.</VV_BionicWing.description>
+  <VV_BionicWing.description>장착된 생체공학 날개입니다. 원래의 날개보다 가볍고 튼튼해 이동하기 쉽습니다.</VV_BionicWing.description>
   
   <VV_GliderWing.label>비비 글라이더 날개</VV_GliderWing.label>
   <VV_GliderWing.labelNoun>비비 글라이더 날개</VV_GliderWing.labelNoun>
-  <VV_GliderWing.description>장착된 글라이더 날개입니다. 짧은 거리지만 비행을 할 수 있으며 비행시 조금 피로해집니다.
+  <VV_GliderWing.description>장착된 글라이더 날개입니다. 짧은 거리지만 비행을 할 수 있으며 비행시 조금 배고파집니다.
 \n이 날개는 단순히 양력을 받기위한 장치이므로 비행을 하기 위해서는 비비의 날개가 온전해야 합니다.</VV_GliderWing.description>
 </LanguageData>

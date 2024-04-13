@@ -4,7 +4,7 @@
   <ThingDef ParentName="ResourceBase">
     <defName>VV_Pollen</defName>
     <label>vivi pollen</label>
-    <description>.</description>
+    <description>Collected pollen from flowers and various plants. Although it's not eaten by typical humans, it contains a bit of mana and nutrients necessary for Vivis.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_HoneyPollenCake</ThingDef>
       <ThingDef>VV_RoyalJelly</ThingDef>
@@ -49,7 +49,7 @@
   <ThingDef ParentName="OrganicProductBase">
     <defName>VV_RawHoney</defName>
     <label>vivi raw honey</label>
-    <description>.</description>
+    <description>Honey collected by Vivi from flowers or plants. The wax part is inedible and it is somewhat mixed with impurities, but it still tastes good.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_FilteredHoney</ThingDef>
     </descriptionHyperlinks>
@@ -95,7 +95,8 @@
   <ThingDef ParentName="OrganicProductBase">
     <defName>VV_FilteredHoney</defName>
     <label>vivi filtered honey</label>
-    <description>.</description>
+    <description>pure honey that has been refined to remove unnecessary moisture and impurities. It contains a large amount of nutrients and is used as a staple food for Vivis.
+\nIt contains similar ingredients to ambrosia and was also called nectar in ancient times.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_HoneyPollenCake</ThingDef>
       <ThingDef>VV_RoyalJelly</ThingDef>
@@ -134,7 +135,8 @@
   <ThingDef ParentName="OrganicProductBase">
     <defName>VV_HoneyPollenCake</defName>
     <label>honey pollen cake</label>
-    <description>test</description>
+    <description>a cake made from a large amount of pollen and honey, a staple food for Vivis. Since it is divided into small pieces, it's good for feeding to baby Vivis, and young Vivis receive beneficial effects for learning when they eat it.
+\nHumans can eat it too, but they usually don't prefer this type of food.</description>
     <descriptionHyperlinks>
       <HediffDef>VV_ViviGrowthBoost</HediffDef>
     </descriptionHyperlinks>
@@ -188,7 +190,8 @@
 	<ThingDef ParentName="OrganicProductBase">
 		<defName>VV_RoyalJelly</defName>
 		<label>royal jelly</label>
-		<description>.</description>
+		<description>jelly made from gathering rare ingredients from large amounts of Vivi cream. It's not very tasty on its own, so a bit of honey is added. When child Vivis consume it, they receive beneficial effects for learning, and child Vivis who continuously ingest it grow into Royal Vivis.
+\nAdult Vivis who eat it do not become Royal Vivis, but if consumed regularly, their lifespan can be slightly extended and aging diseases can be prevented.</description>
     <descriptionHyperlinks>
       <HediffDef>VV_RoyalJelly</HediffDef>
       <HediffDef>VV_ViviGrowthBoost</HediffDef>
@@ -299,7 +302,7 @@
   <ThingDef ParentName="VV_FloweringTeaBase">
     <defName>VV_FloralHotTea</defName>
     <label>floral hot tea</label>
-    <description>.</description>
+    <description>A tea made by steaming warm flower petals and a bit of honey. Drinking it makes the body feel warm, reducing the sensation of cold. Because of the unique properties of the petals, it maintains warmth regardless of stored temperature.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_HeatingPetal</ThingDef>
       <HediffDef>VV_FloralTea</HediffDef>
@@ -333,7 +336,7 @@
   <ThingDef ParentName="VV_FloweringTeaBase">
     <defName>VV_FloralIceTea</defName>
     <label>floral ice tea</label>
-    <description>.</description>
+    <description>A tea made by steaming cold flower petals and a bit of honey. Drinking it makes the body feel cool, reducing the sensation of heat. Because of the unique properties of the petals, it maintains its coolness regardless of stored temperature.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_CoolingPetal</ThingDef>
       <HediffDef>VV_FloralTea</HediffDef>
@@ -367,7 +370,7 @@
   <ThingDef ParentName="VV_FloweringTeaBase">
     <defName>VV_FloralMilkTea</defName>
     <label>floral milk tea</label>
-    <description>.</description>
+    <description>A tea made by steeping fragrant flower petals and adding milk. Drinking it makes the body emit a floral scent for a certain period of time, improving mood and aiding sleep.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_PerfumingPetal</ThingDef>
       <HediffDef>VV_FloralTea</HediffDef>

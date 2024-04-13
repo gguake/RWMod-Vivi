@@ -3,7 +3,7 @@
   <ThingDef ParentName="BaseFilth">
     <defName>VV_FilthPollen</defName>
     <label>pollen</label>
-    <description>.</description>
+    <description>The pollen that often scatters around when a Vivi collects honey.</description>
     <statBases>
       <Beauty>-5</Beauty>
       <Cleanliness>-5</Cleanliness>
