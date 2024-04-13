@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<LanguageData>
-  <VV_GeneDefHoneyNeedDurationDesc>{PAWN_nameDef}(은)는 꿀을 주기적으로 섭취해야 생존할 수 있습니다. 꿀을 섭취하지 않고 {DEFICIENCYDURATION}(이)가 지나면 결핍에 시달리며 시간이 지날수록 악화됩니다.</VV_GeneDefHoneyNeedDurationDesc>
-  <VV_LastHoneyIngestedDurationAgo>꿀을 {DURATION} 전에 마지막으로 섭취했습니다.</VV_LastHoneyIngestedDurationAgo>
-</LanguageData>

@@ -46,7 +46,7 @@ namespace VVRace
                 pawn.mindState.exitMapAfterTick = Find.TickManager.TicksGame + Rand.Range(AnimalsStayDurationMin, AnimalsStayDurationMax);
             }
 
-            SendStandardLetter(LocalizeTexts.LetterIncidentHornetSwarmArrivedLabel.Translate(), LocalizeTexts.LetterIncidentHornetSwarmArrived.Translate(), LetterDefOf.ThreatBig, parms, pawns[0]);
+            SendStandardLetter(LocalizeString_Letter.VV_Letter_IncidentHornetSwarmArrivedLabel.Translate(), LocalizeString_Letter.VV_Letter_IncidentHornetSwarmArrived.Translate(), LetterDefOf.ThreatBig, parms, pawns[0]);
             Find.TickManager.slower.SignalForceNormalSpeedShort();
             return true;
         }

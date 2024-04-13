@@ -44,7 +44,7 @@ namespace VVRace
         {
             if (!HasEnoughFood)
             {
-                reason = LocalizeTexts.AbilityDisabledNoFood.Translate(parent.pawn);
+                reason = LocalizeString_Etc.VV_AbilityDisabledNoFood.Translate(parent.pawn);
                 return true;
             }
 

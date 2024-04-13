@@ -246,8 +246,8 @@ namespace VVRace
             if (Spawned && Faction != null && Faction.IsPlayer)
             {
                 var CommandFertilizeAutoActivated = new Command_Toggle();
-                CommandFertilizeAutoActivated.defaultLabel = LocalizeString_Command.CommandFertilizeAutoActivated.Translate();
-                CommandFertilizeAutoActivated.defaultDesc = LocalizeString_Command.CommandFertilizeAutoActivatedDesc.Translate();
+                CommandFertilizeAutoActivated.defaultLabel = LocalizeString_Command.VV_Command_FertilizeAutoActivated.Translate();
+                CommandFertilizeAutoActivated.defaultDesc = LocalizeString_Command.VV_Command_FertilizeAutoActivatedDesc.Translate();
                 CommandFertilizeAutoActivated.icon = SetFertilizeAutoActivated;
                 CommandFertilizeAutoActivated.iconOffset = new Vector2(0f, -0.08f);
 
@@ -262,8 +262,8 @@ namespace VVRace
                 {
                     var commandSetFertilizeAutoThreshold = new Command_SetFertilizeAutoThreshold();
                     commandSetFertilizeAutoThreshold.plant = this;
-                    commandSetFertilizeAutoThreshold.defaultLabel = LocalizeString_Command.CommandSetFertilizeAutoThreshold.Translate();
-                    commandSetFertilizeAutoThreshold.defaultDesc = LocalizeString_Command.CommandSetFertilizeAutoThresholdDesc.Translate();
+                    commandSetFertilizeAutoThreshold.defaultLabel = LocalizeString_Command.VV_Command_SetFertilizeAutoThreshold.Translate();
+                    commandSetFertilizeAutoThreshold.defaultDesc = LocalizeString_Command.VV_Command_SetFertilizeAutoThresholdDesc.Translate();
                     commandSetFertilizeAutoThreshold.icon = SetTargetFuelLevelCommand;
                     yield return commandSetFertilizeAutoThreshold;
                 }
@@ -333,18 +333,18 @@ namespace VVRace
         {
             yield return new StatDrawEntry(
                 StatCategoryDefOf.Basics,
-                LocalizeTexts.StatsReport_Mana.Translate(),
+                LocalizeString_Stat.VV_StatsReport_Mana.Translate(),
                 ManaExtension.manaCapacity.ToString(),
-                LocalizeTexts.StatsReport_Mana_Desc.Translate(),
+                LocalizeString_Stat.VV_StatsReport_Mana_Desc.Translate(),
                 -20000);
 
             if (Spawned)
             {
                 yield return new StatDrawEntry(
                     StatCategoryDefOf.Basics,
-                    LocalizeTexts.StatsReport_ManaFlux.Translate(),
+                    LocalizeString_Stat.VV_StatsReport_ManaFlux.Translate(),
                     _manaFluxNode.LocalManaFluxForInspector.ToString("+0;-#"),
-                    LocalizeTexts.StatsReport_ManaFlux_Desc.Translate(),
+                    LocalizeString_Stat.VV_StatsReport_ManaFlux_Desc.Translate(),
                     -20001);
             }
         }

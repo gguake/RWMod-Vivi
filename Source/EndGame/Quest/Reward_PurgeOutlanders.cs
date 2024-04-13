@@ -16,14 +16,14 @@ namespace VVRace
             get
             {
                 yield return QuestPartUtility.GetStandardRewardStackElement(
-                    LocalizeTexts.VV_Reward_PurgeOutlanders.Translate(), 
+                    LocalizeString_Etc.VV_Reward_PurgeOutlanders.Translate(), 
                     Icon, 
                     () => GetDescription(default).CapitalizeFirst() + ".");
             }
         }
         public override string GetDescription(RewardsGeneratorParams parms)
         {
-            return LocalizeTexts.VV_Reward_PurgeOutlandersDesc.Translate().Resolve();
+            return LocalizeString_Etc.VV_Reward_PurgeOutlandersDesc.Translate().Resolve();
         }
 
         public override IEnumerable<QuestPart> GenerateQuestParts(int index, RewardsGeneratorParams parms, string customLetterLabel, string customLetterText, RulePack customLetterLabelRules, RulePack customLetterTextRules)

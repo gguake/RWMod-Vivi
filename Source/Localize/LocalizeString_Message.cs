@@ -2,7 +2,7 @@
 {
     public static class LocalizeString_Message
     {
-        public const string VV_MessageCompleteGrowingArcanePlant = nameof(VV_MessageCompleteGrowingArcanePlant);
-        public const string VV_MessageFailedGrowingArcanePlant = nameof(VV_MessageFailedGrowingArcanePlant);
+        public const string VV_Message_CompleteGrowingArcanePlant = nameof(VV_Message_CompleteGrowingArcanePlant);
+        public const string VV_Message_FailedGrowingArcanePlant = nameof(VV_Message_FailedGrowingArcanePlant);
     }
 }

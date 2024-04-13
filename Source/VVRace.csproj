@@ -142,11 +142,15 @@
     <Compile Include="GlideAbility\CompAbility_RequiresBodyPart.cs" />
     <Compile Include="Hornet\HediffGiver_ConstantScaria.cs" />
     <Compile Include="Hornet\JobGiver_HornetBerserk.cs" />
+    <Compile Include="Localize\LocalizeString_Alert.cs" />
     <Compile Include="Localize\LocalizeString_Command.cs" />
     <Compile Include="Localize\LocalizeString_Dialog.cs" />
+    <Compile Include="Localize\LocalizeString_Gizmo.cs" />
     <Compile Include="Localize\LocalizeString_Inspector.cs" />
     <Compile Include="Localize\LocalizeString_ITab.cs" />
+    <Compile Include="Localize\LocalizeString_Letter.cs" />
     <Compile Include="Localize\LocalizeString_Message.cs" />
+    <Compile Include="Localize\LocalizeString_Stat.cs" />
     <Compile Include="MapGeneration\GenSteps\GenStep_ViviRuins.cs" />
     <Compile Include="MapGeneration\GenSteps\GenStep_ScatterDreamums.cs" />
     <Compile Include="MapGeneration\GenSteps\GenStep_ViviSettlementTurretGarden.cs" />
@@ -231,7 +235,7 @@
     <Compile Include="Utility\ToilUtility.cs" />
     <Compile Include="Gather\AI\WorkGiver_GatheringBill.cs" />
     <Compile Include="Utility\ILUtility.cs" />
-    <Compile Include="Localize\LocalizeTexts.cs" />
+    <Compile Include="Localize\LocalizeString_Etc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Egg\AI\JobDriver_LayViviEgg.cs" />
     <Compile Include="Egg\AI\JobGiver_LayViviEgg.cs" />

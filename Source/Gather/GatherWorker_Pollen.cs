@@ -9,7 +9,7 @@ namespace VVRace
 {
     public class GatherWorker_Pollen : GatherWorker
     {
-        public override string JobFailReasonIfNoHarvestable => LocalizeTexts.JobFailReasonNoHarvestablePollenFilths.Translate();
+        public override string JobFailReasonIfNoHarvestable => LocalizeString_Etc.VV_JobFailReasonNoHarvestablePollenFilths.Translate();
 
         public override bool PawnCanDoBill(Pawn pawn, Bill bill) => pawn.GetStatValue(bill.recipe.workSpeedStat) > 0f;
 

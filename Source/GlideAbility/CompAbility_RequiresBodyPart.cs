@@ -24,7 +24,7 @@ namespace VVRace
             var bodyPartCount = parent.pawn.health.hediffSet.GetNotMissingParts().Count(v => v.def == Props.bodyPartDef);
             if (bodyPartCount < Props.requiredCount)
             {
-                reason = LocalizeTexts.AbilityDisabledNoBodyPart.Translate(parent.pawn, Props.bodyPartDef.LabelCap, Props.requiredCount - bodyPartCount);
+                reason = LocalizeString_Etc.VV_AbilityDisabledNoBodyPart.Translate(parent.pawn, Props.bodyPartDef.LabelCap, Props.requiredCount - bodyPartCount);
                 return true;
             }
 

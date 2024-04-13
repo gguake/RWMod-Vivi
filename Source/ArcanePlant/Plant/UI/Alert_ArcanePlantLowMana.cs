@@ -32,7 +32,7 @@ namespace VVRace
 
         public Alert_ArcanePlantLowMana()
         {
-            defaultLabel = LocalizeTexts.AlertArcanePlantLowMana.Translate();
+            defaultLabel = LocalizeString_Alert.VV_Alert_ArcanePlantLowMana.Translate();
             defaultPriority = AlertPriority.Critical;
         }
 
@@ -49,7 +49,7 @@ namespace VVRace
 
         public override TaggedString GetExplanation()
         {
-            return LocalizeTexts.AlertArcanePlantLowManaDesc.Translate();
+            return LocalizeString_Alert.VV_Alert_ArcanePlantLowManaDesc.Translate();
         }
     }
 }

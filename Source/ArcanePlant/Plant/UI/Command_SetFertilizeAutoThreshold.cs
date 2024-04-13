@@ -26,7 +26,7 @@ namespace VVRace
             }
 
             var dialog_Slider = new Dialog_Slider(
-                (x) => LocalizeTexts.GizmoSetFertilizeAutoThreshold.Translate(x), 
+                (x) => LocalizeString_Gizmo.VV_Gizmo_SetFertilizeAutoThreshold.Translate(x), 
                 0, 
                 plants.Min(v => v.ManaExtension.manaCapacity), 
                 (value) => {

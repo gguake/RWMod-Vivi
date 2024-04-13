@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-  <VV_MessageCompleteGrowingArcanePlant>{0} x{1} 재배에 성공했습니다!</VV_MessageCompleteGrowingArcanePlant>
-  <VV_MessageFailedGrowingArcanePlant>{0} 재배에 실패했습니다.</VV_MessageFailedGrowingArcanePlant>
+  <VV_Message_CompleteGrowingArcanePlant>{0} x{1} 재배에 성공했습니다!</VV_Message_CompleteGrowingArcanePlant>
+  <VV_Message_FailedGrowingArcanePlant>{0} 재배에 실패했습니다.</VV_Message_FailedGrowingArcanePlant>
 </LanguageData>

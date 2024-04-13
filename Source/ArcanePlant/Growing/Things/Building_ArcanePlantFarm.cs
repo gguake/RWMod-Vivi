@@ -91,8 +91,8 @@ namespace VVRace
             if (_bill == null)
             {
                 var commandNewBill = new Command_Action();
-                commandNewBill.defaultLabel = LocalizeString_Command.CommandNewGrowArcanePlantBill.Translate();
-                commandNewBill.defaultDesc = LocalizeString_Command.CommandNewGrowArcanePlantBillDesc.Translate();
+                commandNewBill.defaultLabel = LocalizeString_Command.VV_Command_NewGrowArcanePlantBill.Translate();
+                commandNewBill.defaultDesc = LocalizeString_Command.VV_Command_NewGrowArcanePlantBillDesc.Translate();
                 commandNewBill.icon = StartCommandTex;
                 commandNewBill.action = () =>
                 {
@@ -104,8 +104,8 @@ namespace VVRace
             else
             {
                 var commandCancelBill = new Command_Action();
-                commandCancelBill.defaultLabel = LocalizeString_Command.CommandCancelGrowArcanePlantBill.Translate();
-                commandCancelBill.defaultDesc = LocalizeString_Command.CommandCancelGrowArcanePlantBillDesc.Translate();
+                commandCancelBill.defaultLabel = LocalizeString_Command.VV_Command_CancelGrowArcanePlantBill.Translate();
+                commandCancelBill.defaultDesc = LocalizeString_Command.VV_Command_CancelGrowArcanePlantBillDesc.Translate();
                 commandCancelBill.icon = CancelCommandTex;
                 commandCancelBill.action = () =>
                 {
@@ -244,7 +244,7 @@ namespace VVRace
                                 }
                             }
 
-                            Messages.Message(LocalizeString_Message.VV_MessageCompleteGrowingArcanePlant.Translate(_bill.RecipeTarget.LabelCap, amountInt), this, MessageTypeDefOf.PositiveEvent);
+                            Messages.Message(LocalizeString_Message.VV_Message_CompleteGrowingArcanePlant.Translate(_bill.RecipeTarget.LabelCap, amountInt), this, MessageTypeDefOf.PositiveEvent);
                             _bill = null;
                         }
                         else
@@ -310,7 +310,7 @@ namespace VVRace
 
         public void Notify_BillFailed()
         {
-            Messages.Message(LocalizeString_Message.VV_MessageFailedGrowingArcanePlant.Translate(_bill.RecipeTarget.LabelCap), this, MessageTypeDefOf.NegativeEvent);
+            Messages.Message(LocalizeString_Message.VV_Message_FailedGrowingArcanePlant.Translate(_bill.RecipeTarget.LabelCap), this, MessageTypeDefOf.NegativeEvent);
             _bill = null;
         }
 

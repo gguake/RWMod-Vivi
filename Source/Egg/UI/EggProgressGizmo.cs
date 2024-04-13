@@ -35,7 +35,7 @@ namespace VVRace
             Text.Font = GameFont.Small;
             Text.Anchor = TextAnchor.UpperLeft;
             var headerRect = new Rect(innerRect.x, innerRect.y, innerRect.width, HeaderHeight);
-            Widgets.Label(headerRect, LocalizeTexts.GizmoViviEggProgressHeader.Translate());
+            Widgets.Label(headerRect, LocalizeString_Gizmo.VV_Gizmo_ViviEggProgressHeader.Translate());
 
             Text.Font = GameFont.Tiny;
             var descriptionRect = new Rect(innerRect.x, headerRect.yMax + 2f, innerRect.width, HeaderHeight);
@@ -61,7 +61,7 @@ namespace VVRace
 
             Widgets.DrawBoxSolid(frontRect, FilledBlockColor);
 
-            TooltipHandler.TipRegion(backPanelRect, LocalizeTexts.GizmoViviEggProgressTooltip.Translate());
+            TooltipHandler.TipRegion(backPanelRect, LocalizeString_Gizmo.VV_Gizmo_ViviEggProgressTooltip.Translate());
             return new GizmoResult(GizmoState.Clear);
         }
     }

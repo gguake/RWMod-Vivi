@@ -10,7 +10,7 @@ namespace VVRace
 
     public class GatherWorker_Plant : GatherWorker
     {
-        public override string JobFailReasonIfNoHarvestable => LocalizeTexts.JobFailReasonNoHarvestablePlants.Translate();
+        public override string JobFailReasonIfNoHarvestable => LocalizeString_Etc.VV_JobFailReasonNoHarvestablePlants.Translate();
 
         public override IEnumerable<Thing> FindAllGatherableTargetInRegion(Region region)
         {

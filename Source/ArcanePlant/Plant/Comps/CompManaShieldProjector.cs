@@ -54,8 +54,8 @@ namespace VVRace
 
             var commandActivateShield = new Command_Action();
             commandActivateShield.icon = ShieldActivateTex;
-            commandActivateShield.defaultLabel = LocalizeString_Command.CommandActivateShield.Translate();
-            commandActivateShield.defaultDesc = LocalizeString_Command.CommandActivateShieldDesc.Translate(duration.ToStringTicksToPeriod().Colorize(ColoredText.DateTimeColor));
+            commandActivateShield.defaultLabel = LocalizeString_Command.VV_Command_ActivateShield.Translate();
+            commandActivateShield.defaultDesc = LocalizeString_Command.VV_Command_ActivateShieldDesc.Translate(duration.ToStringTicksToPeriod().Colorize(ColoredText.DateTimeColor));
             commandActivateShield.action = () =>
             {
                 DeployShield();
@@ -64,14 +64,14 @@ namespace VVRace
             if (Shield != null)
             {
                 commandActivateShield.Disabled = true;
-                commandActivateShield.disabledReason = LocalizeString_Command.CommandActivateShieldAlreadyActivated.Translate();
+                commandActivateShield.disabledReason = LocalizeString_Command.VV_Command_ActivateShieldAlreadyActivated.Translate();
             }
 
             var plant = parent as ArcanePlant;
             if (plant == null || plant.Mana < Props.requiredMinimumManaForActivate)
             {
                 commandActivateShield.Disabled = true;
-                commandActivateShield.disabledReason = LocalizeString_Command.CommandActivateShieldNotEnoughEnergy.Translate(Props.requiredMinimumManaForActivate);
+                commandActivateShield.disabledReason = LocalizeString_Command.VV_Command_ActivateShieldNotEnoughEnergy.Translate(Props.requiredMinimumManaForActivate);
             }
 
             yield return commandActivateShield;

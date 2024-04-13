@@ -207,8 +207,8 @@ namespace VVRace
                                 if (pawn.IsColonist)
                                 {
                                     Find.LetterStack.ReceiveLetter(
-                                        LocalizeTexts.LetterViviEggHatchedLabel.Translate(),
-                                        LocalizeTexts.LetterViviEggHatched.Translate(hatcheeParent.Named("PARENT")),
+                                        LocalizeString_Letter.VV_Letter_ViviEggHatchedLabel.Translate(),
+                                        LocalizeString_Letter.VV_Letter_ViviEggHatched.Translate(hatcheeParent.Named("PARENT")),
                                         LetterDefOf.PositiveEvent,
                                         pawn);
                                 }
@@ -218,8 +218,8 @@ namespace VVRace
                                 if (pawn.IsColonist)
                                 {
                                     Find.LetterStack.ReceiveLetter(
-                                        LocalizeTexts.LetterViviEggHatchedLabel.Translate(),
-                                        LocalizeTexts.LetterViviEggHatchedNoParent.Translate(hatcheeParent.Named("PARENT")),
+                                        LocalizeString_Letter.VV_Letter_ViviEggHatchedLabel.Translate(),
+                                        LocalizeString_Letter.VV_Letter_ViviEggHatchedNoParent.Translate(hatcheeParent.Named("PARENT")),
                                         LetterDefOf.PositiveEvent,
                                         pawn);
                                 }

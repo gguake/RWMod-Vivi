@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <VV_Command_FertilizeAutoActivated>비료 자동 사용</VV_Command_FertilizeAutoActivated>
+  <VV_Command_FertilizeAutoActivatedDesc>식물의 마나가 일정 이하일때 정착민들이 비료를 자동으로 사용할지 설정합니다.</VV_Command_FertilizeAutoActivatedDesc>
+  <VV_Command_SetFertilizeAutoThreshold>비료 사용 기준 설정</VV_Command_SetFertilizeAutoThreshold>
+  <VV_Command_SetFertilizeAutoThresholdDesc>비료 사용 여부를 판단할 기준 마나를 설정합니다. 마나가 기준치 이하이면 정착민들이 최대치까지 비료를 사용합니다.</VV_Command_SetFertilizeAutoThresholdDesc>
+
+  <VV_Command_CancelReserveWeapon>무기 장착 취소</VV_Command_CancelReserveWeapon>
+  <VV_Command_CancelReserveWeaponDesc>현재 예약된 무기 장착을 취소합니다.</VV_Command_CancelReserveWeaponDesc>
+  <VV_Command_EquipWeapon>무기 장착</VV_Command_EquipWeapon>
+  <VV_Command_EquipWeaponDesc>건인장에게 선택된 무기를 장착합니다. 근접 무기나 생체인증 무기는 장착할 수 없습니다.</VV_Command_EquipWeaponDesc>
+  <VV_Command_UnequipWeapon>장착된 무기 해제</VV_Command_UnequipWeapon>
+
+  <VV_Command_ActivateShield>보호막 활성화</VV_Command_ActivateShield>
+  <VV_Command_ActivateShieldDesc>보유한 모든 마나를 소모하여 외부에서 들어오는 투사체를 차단하는 보호막을 활성화합니다. 보호막의 내구도는 소모된 마나에 비례하며 {0}동안 지속됩니다.</VV_Command_ActivateShieldDesc>
+  <VV_Command_ActivateShieldAlreadyActivated>보호막이 이미 활성화 되어있음.</VV_Command_ActivateShieldAlreadyActivated>
+  <VV_Command_ActivateShieldNotEnoughEnergy>마나가 최소 {0}이상 필요합니다.</VV_Command_ActivateShieldNotEnoughEnergy>
+
+  <VV_Command_NewGrowArcanePlantBill>재배 시작</VV_Command_NewGrowArcanePlantBill>
+  <VV_Command_NewGrowArcanePlantBillDesc>새로운 마법 식물을 재배합니다.</VV_Command_NewGrowArcanePlantBillDesc>
+  <VV_Command_CancelGrowArcanePlantBill>재배 취소</VV_Command_CancelGrowArcanePlantBill>
+  <VV_Command_CancelGrowArcanePlantBillDesc>현재 예약된 마법 식물 재배를 취소합니다. 이미 재배가 시작된 경우 소모된 자원은 돌려받을 수 없습니다.</VV_Command_CancelGrowArcanePlantBillDesc>
+
+  <VV_Command_StartProgressDreamumVictory>꿈송이 의식 시작</VV_Command_StartProgressDreamumVictory>
+  <VV_Command_StartProgressDreamumVictoryDesc>제단에 꿈송이를 심고 거대화를 위한 의식을 시작합니다.</VV_Command_StartProgressDreamumVictoryDesc>
+</LanguageData>

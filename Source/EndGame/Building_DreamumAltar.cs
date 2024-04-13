@@ -93,8 +93,8 @@ namespace VVRace
             if (_stage == DreamumProjectStage.None)
             {
                 var commandStart = new Command_Action();
-                commandStart.defaultLabel = LocalizeString_Command.CommandStartProgressDreamumVictory.Translate();
-                commandStart.defaultDesc = LocalizeString_Command.CommandStartProgressDreamumVictoryDesc.Translate();
+                commandStart.defaultLabel = LocalizeString_Command.VV_Command_StartProgressDreamumVictory.Translate();
+                commandStart.defaultDesc = LocalizeString_Command.VV_Command_StartProgressDreamumVictoryDesc.Translate();
                 commandStart.hotKey = KeyBindingDefOf.Misc1;
                 commandStart.icon = StartCommandTex;
                 commandStart.action = () =>

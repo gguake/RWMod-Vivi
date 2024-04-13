@@ -40,7 +40,7 @@ namespace VVRace
                 var tc = FindIngredients(pawn, arcanePlantFarm);
                 if (tc.Thing == null)
                 {
-                    JobFailReason.Is(LocalizeTexts.JobFailReasonNoIngredients.Translate());
+                    JobFailReason.Is(LocalizeString_Etc.VV_JobFailReasonNoIngredients.Translate());
                     return false;
                 }
 

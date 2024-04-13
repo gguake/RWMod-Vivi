@@ -54,7 +54,7 @@ namespace VVRace
 
         public Alert_DangerViviEgg()
         {
-            defaultLabel = LocalizeTexts.AlertViviDangerousEggs.Translate();
+            defaultLabel = LocalizeString_Alert.VV_Alert_ViviDangerousEggs.Translate();
             defaultPriority = AlertPriority.High;
         }
 
@@ -72,7 +72,7 @@ namespace VVRace
         public override TaggedString GetExplanation()
         {
             var props = VVThingDefOf.VV_ViviEgg.GetCompProperties<CompProperties_TemperatureRuinable>();
-            return LocalizeTexts.AlertViviDangerousEggsDesc.Translate(
+            return LocalizeString_Alert.VV_Alert_ViviDangerousEggsDesc.Translate(
                 props.minSafeTemperature.ToStringTemperature().Named("MINTEMP"), 
                 props.maxSafeTemperature.ToStringTemperature().Named("MAXTEMP"));
         }
