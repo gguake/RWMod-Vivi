@@ -819,7 +819,7 @@
 
       <li Class="VVRace.CompProperties_FilthMakerArcanePlant">
         <filthDef>VV_FilthPollen</filthDef>
-        <makeAmountPerDays>2~5</makeAmountPerDays>
+        <makeAmountPerDays>1~3</makeAmountPerDays>
         <radius>1.9</radius>
         <exceptCenter>true</exceptCenter>
 

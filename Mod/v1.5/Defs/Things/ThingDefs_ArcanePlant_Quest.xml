@@ -24,22 +24,14 @@
         <glowColor>(255,227,156,0)</glowColor>
       </li>
       
-
       <li Class="VVRace.CompProperties_FilthMakerArcanePlant">
         <filthDef>VV_FilthPollen</filthDef>
-        <makeAmountPerDays>5~15</makeAmountPerDays>
+        <makeAmountPerDays>3~12</makeAmountPerDays>
         <radius>1.9</radius>
         <exceptCenter>true</exceptCenter>
 
         <spawnEffecter>VV_PollenEmitting</spawnEffecter>
       </li>
-      <!--
-      <li Class="CompProperties_Studiable">
-        <studyAmountToComplete>4000</studyAmountToComplete>
-        <studyEnabledByDefault>false</studyEnabledByDefault>
-        <showToggleGizmo>true</showToggleGizmo>
-      </li>
-      -->
     </comps>
     
     <building>

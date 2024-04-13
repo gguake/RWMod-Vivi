@@ -145,7 +145,7 @@ namespace VVRace
                     flipUv: isFlipUV,
                     uvs: uvs,
                     colors: colors,
-                    topVerticesAltitudeBias: 0.1f,
+                    //topVerticesAltitudeBias: 0.1f,
                     uvzPayload: this.HashOffset() % 1024);
 
                 if (def.graphicData.shadowData != null)

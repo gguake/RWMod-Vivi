@@ -106,7 +106,7 @@ namespace VVRace.HarmonyPatches
 
         private static void ScenPart_PlayerPawnsArriveMethod_GenerateIntoMap_Postfix(Map map)
         {
-            if (map.IsPlayerHome && Find.GameInitData.startingTile == map.Tile)
+            if (map.IsPlayerHome && Find.GameInitData != null && Find.GameInitData.startingTile == map.Tile)
             {
                 var startingRoyalVivis = Find.GameInitData.startingAndOptionalPawns?.Where(pawn => pawn.Spawned && pawn.IsRoyalVivi()).ToList();
                 var allEggs = map.spawnedThings.Where(v => v.def == VVThingDefOf.VV_ViviEgg);

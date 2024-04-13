@@ -13,7 +13,7 @@
     <IncidentTargetTags>
       <li>Map_PlayerHome</li>
     </IncidentTargetTags>
-    <mapGenerator>EscapeShip</mapGenerator>
+    <mapGenerator>VV_Base_ViviRuins</mapGenerator>
     <canBePlayerHome>true</canBePlayerHome>
     <comps>
       <li Class="WorldObjectCompProperties_Abandon" />

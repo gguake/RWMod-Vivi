@@ -5,10 +5,10 @@
   </VV_EndGame_DreamumVictory_Reconstruction.questNameRules.rulesStrings>
 
   <VV_EndGame_DreamumVictory_Reconstruction.questDescriptionRules.rulesStrings>
-    <li>questDescription->[asker_faction_leaderTitle] of [asker_faction_name], [asker_nameDef](은)는 당신이 세운 번영하는 둥지를 보며 경의를 표하는 축하 메세지를 보내왔습니다.
+    <li>questDescription->[asker_faction_name]의 [asker_faction_leaderTitle], [asker_nameDef](은)는 당신이 세운 번영하는 둥지를 보며 경의를 표하는 축하 메세지를 보내왔습니다.
 [asker_faction_leaderTitle](은)는 당신의 둥지가 앞으로도 계속 번영하길 기원하며 동시에 외지인들의 습격에 대한 고민을 풀어주기 위해 한가지 정보를 공유했습니다.
 \n먼 과거 비비들이 흩어지기 이전에 모든 둥지의 중심에 꿈송이를 하나씩 심고 이를 거대화하여 외적으로부터 둥지를 보호했다고 전해집니다. 하지만 현대에는 모두 파괴되었고 구체적인 기술은 모두 잊혀졌습니다.
-[asker_faction_leaderTitle](은)는 자신이 알고있는 옛 비비 둥지의 위치를 알려주었으며, 과거의 흔적을 찾아 충분한 마나만 다시 공급한다면 거대한 꿈송이를 다시 자라나게 할 수 있을 것이라고 믿습니다. 이곳에서 새로운 둥지를 건설해 거대한 꿈송이를 자라나게 하면 외지인들을 행성에서 몰아낼수도 있습니다.
+\n[asker_faction_leaderTitle](은)는 자신이 알고있는 옛 비비 둥지의 위치를 알려주었으며, 과거의 흔적을 찾아 충분한 마나만 다시 공급한다면 거대한 꿈송이를 다시 자라나게 할 수 있을 것이라고 믿습니다. 이곳에서 새로운 둥지를 건설해 거대한 꿈송이를 자라나게 하면 외지인들을 행성에서 몰아낼수도 있습니다.
 \n이 임무를 진행하고 꿈송이를 키워내는 작업을 시작하면 [asker_faction_leaderTitle](은)는 물자 지원과 동맹을 약속했습니다. 하지만 꿈송이가 일정 이상 자라나면 비비가 아닌 다른 지성체들은 점차 의식불명에 빠지며 이상현상을 감지한 외지인들은 모두 적대관계가 되고 지속적으로 습격해 올 것입니다. 또한 꿈송이 거대화에는 많은 마나 공급이 필요합니다.</li>
   </VV_EndGame_DreamumVictory_Reconstruction.questDescriptionRules.rulesStrings>
 </LanguageData>

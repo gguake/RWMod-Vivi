@@ -34,5 +34,8 @@
 
         public const string GeneDefHoneyNeedDurationDesc = "VV_GeneDefHoneyNeedDurationDesc";
         public const string LastHoneyIngestedDurationAgo = "VV_LastHoneyIngestedDurationAgo";
+
+        public const string VV_Reward_PurgeOutlanders = "VV_Reward_PurgeOutlanders";
+        public const string VV_Reward_PurgeOutlandersDesc = "VV_Reward_PurgeOutlandersDesc";
     }
 }

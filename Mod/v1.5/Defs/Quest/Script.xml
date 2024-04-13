@@ -34,7 +34,7 @@
         </li>
 
         <!-- Add reward info -->
-        <li Class="QuestNode_AddPassageOffworldReward">
+        <li Class="VVRace.QuestNode_AddPurgeOutlandersReward">
           <inSignalChoiceUsed>viviruins.LaunchedShip</inSignalChoiceUsed>
         </li>
         

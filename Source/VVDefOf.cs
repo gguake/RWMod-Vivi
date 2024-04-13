@@ -84,6 +84,7 @@ namespace VVRace
         public static ThingDef VV_Peashooter;
         public static ThingDef VV_Pealauncher;
         public static ThingDef VV_Shootus;
+        public static ThingDef VV_Dreamum;
 
         public static ThingDef VV_ViviHoneycombWall;
 
@@ -103,6 +104,8 @@ namespace VVRace
         public static ThingDef FueledSmithy;
 
         public static ThingDef VV_TitanicHornet;
+
+        public static ThingDef VV_DreamumAltar;
     }
 
     [DefOf]
