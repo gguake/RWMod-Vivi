@@ -286,6 +286,7 @@
           <li>VV_Vivi_E</li>
           <li>VV_Vivi_F</li>
         </headTypes>
+        <randomChosen>false</randomChosen>
       </li>
 
       <li Class="RPEF.StyleItemConstraint">
