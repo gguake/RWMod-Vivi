@@ -3,6 +3,8 @@
 	<ResearchTabDef>
 		<defName>VV_Vivi</defName>
 		<label>vivi tech</label>
+    <generalTitle>vivi research projects</generalTitle>
+    <generalDescription>Unlock vivi's unique technologies.</generalDescription>
 	</ResearchTabDef>
 
   <ResearchProjectTagDef>

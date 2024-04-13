@@ -4,7 +4,8 @@
   <ThingDef ParentName="VV_ArcanePlantCombat">
     <defName>VV_Peashooter</defName>
     <label>peashooter</label>
-    <description>.</description>
+    <description>It is a arcane plant that fires beans to drive away nearby enemies when it detects them. Each bean firing consumes mana, and while the power is weak, it is effective against lightly armored enemies because it fires a large number of beans at once.
+\nWhen the fired beans pass over the arcane plant, they may receive special effects depending on the plant.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_LivingLeaf</ThingDef>
     </descriptionHyperlinks>
@@ -176,7 +177,8 @@
   <ThingDef ParentName="VV_ArcanePlantCombat">
     <defName>VV_Pealauncher</defName>
     <label>pealauncher</label>
-    <description>.</description>
+    <description>It is a arcane plant that fires explosive beans to drive away nearby enemies when it detects them. Each bean fired consumes mana, and the beans travel very fast and explode upon impact.
+\nWhile suitable for subduing large groups of enemies, the explosions can also cause significant damage to allies, so careful placement is necessary.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_LivingLeaf</ThingDef>
     </descriptionHyperlinks>
@@ -354,7 +356,8 @@
   <ThingDef ParentName="VV_ArcanePlantCombat">
     <defName>VV_Shootus</defName>
     <label>Shootus</label>
-    <description>.</description>
+    <description>It is a arcane cactus with a peculiar facial expression. It moves so flexibly that it doesn't seem like a plant and is relatively resistant to fire.
+\nIt can be equipped with a ranged weapon in one hand, and when it detects enemies, it automatically attacks them using the equipped weapon. It cannot wear melee or biocoded weapons, and its reloading is somewhat slower than when handled by a person.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_LivingLeaf</ThingDef>
     </descriptionHyperlinks>

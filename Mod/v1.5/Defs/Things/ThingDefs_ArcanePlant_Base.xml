@@ -151,7 +151,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VV_ManaTransferTube</defName>
     <label>mana transfer tube</label>
-    <description>.</description>
+    <description>a tube for long-distance mana transmission. It can be built under walls or other buildings. It merely transmits mana and does not produce any additional mana.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_SparklingPetal</ThingDef>
     </descriptionHyperlinks>

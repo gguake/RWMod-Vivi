@@ -4,7 +4,8 @@
   <ThingDef ParentName="VV_ArcanePlantProductive">
     <defName>VV_EmberBloom</defName>
     <label>emberbloom</label>
-    <description>.</description>
+    <description>a arcane flower shaped like flames that converts mana into heat until the surrounding temperature reaches a certain level. In environments that are sufficiently hot, it produces and accumulates mana instead of emitting heat.
+\nWhen the peas from a peashooter pass over the emberbloom, there is a chance to inflict additional burn damage and set the target on fire.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_HeatingPetal</ThingDef>
     </descriptionHyperlinks>
@@ -130,7 +131,8 @@
   <ThingDef ParentName="VV_ArcanePlantProductive">
     <defName>VV_FrostBloom</defName>
     <label>frostbloom</label>
-    <description>.</description>
+    <description>a arcane flower shaped like ice crystals that consumes mana to absorb heat until the surrounding temperature reaches a certain level. In environments that are sufficiently cold, it produces and accumulates mana instead of absorbing heat.
+\nWhen the peas from a peashooter pass over the frostbloom, they inflict additional burn damage on the target.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_CoolingPetal</ThingDef>
     </descriptionHyperlinks>
@@ -251,7 +253,9 @@
   <ThingDef ParentName="VV_ArcanePlantProductive">
     <defName>VV_Shockerbud</defName>
     <label>shockerbud</label>
-    <description>.</description>
+    <description>a arcane flower with transparent petals where electricity discharges, capable of connecting to power lines to store electricity. It produces mana in proportion to the amount of electricity charged.
+\nIf it receives external shocks or if mechanoids approach, the internal voltage becomes unstable, generating massive electromagnetic pulses in the vicinity and discharging mana.
+\nWhen the peas from a peashooter pass over the shockerbud, there is a low chance that the beans will electrify the target, temporarily stunning them.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_SparklingPetal</ThingDef>
     </descriptionHyperlinks>
@@ -394,7 +398,8 @@
   <ThingDef ParentName="VV_ArcanePlantProductive">
     <defName>VV_Thunderpetals</defName>
     <label>thunderpetals</label>
-    <description>.</description>
+    <description>a arcane flower with stamens that conduct electricity, capable of connecting to power lines to convert mana into electricity. When lightning strikes and the mana level is sufficient, it attracts the lightning to itself and converts it into mana.
+\nWhen the peas from a peashooter pass over the thunderpetals, there is a low chance that the beans will electrify the target, temporarily stunning them.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_SparklingPetal</ThingDef>
     </descriptionHyperlinks>
@@ -520,7 +525,8 @@
   <ThingDef ParentName="VV_ArcanePlantProductive">
     <defName>VV_Waterdrops</defName>
     <label>waterdrops</label>
-    <description>.</description>
+    <description>a arcane flower shaped like a water droplet that absorbs surrounding water and converts it into mana. It can also be planted on water, and the more adjacent water tiles there are, the more mana it produces. When it detects a nearby fire, it converts stored mana into water and ejects it to extinguish the fire.
+\nWhen placed in the same room as a arcane plant farm, it reduces the mana consumption of the magical plants being cultivated.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_CoolingPetal</ThingDef>
     </descriptionHyperlinks>
@@ -648,7 +654,7 @@
   <ThingDef ParentName="VV_ArcanePlantProductive">
     <defName>VV_Radiantflower</defName>
     <label>radiantflower</label>
-    <description>.</description>
+    <description>a arcane flower resembling a sunflower that converts sunlight into mana. In environments where sunlight is blocked by roofs and cannot be received, it consumes mana to emit strong light that allows crops to grow in the vicinity.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_HeatingPetal</ThingDef>
     </descriptionHyperlinks>
@@ -776,7 +782,8 @@
   <ThingDef ParentName="VV_ArcanePlantProductive">
     <defName>VV_Richflower</defName>
     <label>richflower</label>
-    <description>.</description>
+    <description>a arcane flower with large petals that periodically spreads pollen on the surrounding ground and yields a lot of honey when harvested.
+\nIt produces mana from the life activities of nearby plants and transforms the surrounding soil into an environment favorable for cultivation.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_PerfumingPetal</ThingDef>
     </descriptionHyperlinks>
@@ -903,7 +910,8 @@
   <ThingDef ParentName="VV_ArcanePlantProductive">
     <defName>VV_Purifimint</defName>
     <label>purifimint</label>
-    <description>.</description>
+    <description>a small arcane plant that emits light and converts soil contamination into mana by absorbing it from adjacent soil; the more contaminated the surrounding soil, the more mana it produces. It is also aesthetically pleasing and used for decoration.
+\nIt can also create a temporary shield that blocks incoming projectiles by briefly releasing stored mana.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_PerfumingPetal</ThingDef>
     </descriptionHyperlinks>
@@ -1050,7 +1058,8 @@
   <ThingDef ParentName="VV_ArcanePlantProductive">
     <defName>VV_Skyweed</defName>
     <label>skyweed</label>
-    <description>.</description>
+    <description>a arcane plant that resembles a dandelion seed and converts the power of the wind into mana when outdoors.
+\nThe fluff of this grass is very light and has the property of flying well, so it can also be used to send small items.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_LivingLeaf</ThingDef>
     </descriptionHyperlinks>
@@ -1164,7 +1173,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VV_SkyweedBox</defName>
     <label>skyweed box</label>
-    <description>.</description>
+    <description>a box that can send the fluff of skyweed far away by tying it together. It is bound with viviwax and cloth to prevent damage. No special fuel is required, but it has a smaller capacity and shorter transport distance than the transport pods used by outlanders.</description>
     <graphicData>
       <texPath>Things/Building/VV_SkyweedPod</texPath>
       <graphicClass>Graphic_Single</graphicClass>

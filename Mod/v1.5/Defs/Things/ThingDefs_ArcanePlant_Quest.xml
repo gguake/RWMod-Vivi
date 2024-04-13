@@ -3,7 +3,8 @@
   <ThingDef ParentName="VV_ArcanePlantProductive">
     <defName>VV_Dreamum</defName>
     <label>dreamum</label>
-    <description>.</description>
+    <description>a rare arcane flower found near ancient Vivi nest ruins. The scent or pollen of Dreamum can quickly put one to sleep, but Vivi are unaffected. Dreamum often spreads its pollen on the surrounding ground, and non-Vivi creatures nearby may become intoxicated by it.
+\nBecause it is only rarely found around Vivi ruins, it is considered a sacred flower by the Vivi and is known to have protected the city from invaders with a giant Dreamum at the center of the ancient Vivi empire’s capital.</description>
     <thingClass>VVRace.ArcanePlant_Dreamum</thingClass>
 
     <graphicData>
