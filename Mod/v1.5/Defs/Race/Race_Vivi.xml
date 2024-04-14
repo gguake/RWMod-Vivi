@@ -277,6 +277,8 @@
           <Hair_SandyBlonde>5</Hair_SandyBlonde>
           <Hair_Blonde>5</Hair_Blonde>
         </hairColorGeneOverrides>
+
+        <forcedXenotype>VV_Vivi</forcedXenotype>
       </li>
 
       <li Class="RPEF.ConstraintModExtension">

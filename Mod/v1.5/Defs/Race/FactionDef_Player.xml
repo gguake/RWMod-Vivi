@@ -80,7 +80,7 @@
     <defName>VV_PlayerExiledVivi</defName>
     <label>exiled vivi</label>
     <description>.</description>
-    <basicMemberKind>VV_PlayerExiledRoyalVivi</basicMemberKind>
+    <basicMemberKind>VV_PlayerVivi</basicMemberKind>
     
     <startingResearchTags>
       <li>VV_ExiledVivi</li>

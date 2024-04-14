@@ -27,24 +27,17 @@
           <closeSound>GameStartSting</closeSound>
         </li>
 
-        <li Class="ScenPart_ConfigPage_ConfigureStartingPawns_Xenotypes">
-          <def>ConfigurePawnsXenotypes</def>
+        <li Class="ScenPart_ConfigPage_ConfigureStartingPawns_KindDefs">
+          <def>ConfigurePawnsKindDefs</def>
           <pawnChoiceCount>1</pawnChoiceCount>
-          <overrideKinds>
+          <leftBehindPawnKind>VV_PlayerExiledRoyalVivi</leftBehindPawnKind>
+          <kindCounts>
             <li>
-              <xenotype>VV_Vivi</xenotype>
-              <pawnKind>VV_PlayerExiledRoyalVivi</pawnKind>
-            </li>
-          </overrideKinds>
-          <xenotypeCounts>
-            <li>
-              <xenotype>VV_Vivi</xenotype>
+              <kindDef>VV_PlayerExiledRoyalVivi</kindDef>
               <count>1</count>
-              <description>adult royal vivi</description>
               <requiredAtStart>true</requiredAtStart>
-              <allowedDevelopmentalStages>Adult</allowedDevelopmentalStages>
             </li>
-          </xenotypeCounts>
+          </kindCounts>
         </li>
 
         <li Class="ScenPart_PawnFilter_Age">
