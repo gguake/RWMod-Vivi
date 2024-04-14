@@ -81,7 +81,7 @@
         <li Class="ScenPart_StartingThing_Defined">
           <def>StartingThing_Defined</def>
           <thingDef>MedicineHerbal</thingDef>
-          <count>15</count>
+          <count>25</count>
         </li>
         <li Class="ScenPart_StartingThing_Defined">
           <def>StartingThing_Defined</def>
@@ -105,12 +105,7 @@
         <li Class="ScenPart_StartingThing_Defined">
           <def>StartingThing_Defined</def>
           <thingDef>VV_Fertilizer</thingDef>
-          <count>40</count>
-        </li>
-        <li Class="ScenPart_StartingThing_Defined">
-          <def>StartingThing_Defined</def>
-          <thingDef>VV_EmberBloom</thingDef>
-          <count>1</count>
+          <count>50</count>
         </li>
         <li Class="ScenPart_StartingThing_Defined">
           <def>StartingThing_Defined</def>
@@ -120,7 +115,7 @@
         <li Class="ScenPart_StartingThing_Defined">
           <def>StartingThing_Defined</def>
           <thingDef>VV_Peashooter</thingDef>
-          <count>2</count>
+          <count>3</count>
         </li>
 
         <!-- 시작시 소유품 (분산) -->
