@@ -17,7 +17,7 @@ namespace VVRace
                 var map = Find.CurrentMap;
                 if (map != null)
                 {
-                    foreach (var building in map.listerThings.ThingsInGroup(ThingRequestGroup.WithCustomRectForSelector))
+                    foreach (var building in map.listerThings.ThingsInGroup(ThingRequestGroup.BuildingArtificial))
                     {
                         if (building is ArcanePlant plant && plant.Faction == Faction.OfPlayer && plant.ManaChargeRatio <= 0.05f)
                         {
