@@ -20,9 +20,16 @@
       <li Class="RPEF.StyleItemConstraint">
         <rule>OnAppliedPawn</rule>
         <type>Whitelist</type>
-        <hairTags><li>VV_Vivi</li></hairTags>
-        <beards></beards>
-        <tattoos></tattoos>
+        <hairTags>
+          <li>VV_Vivi</li>
+        </hairTags>
+        <beards>
+          <li>NoBeard</li>
+        </beards>
+        <tattoos>
+          <li>NoTattoo_Face</li>
+          <li>NoTattoo_Body</li>
+        </tattoos>
       </li>
 
       <li Class="RPEF.XenotypeConstraint">

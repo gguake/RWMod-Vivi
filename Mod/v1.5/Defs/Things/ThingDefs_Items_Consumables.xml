@@ -15,7 +15,7 @@
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <thingCategories>
-      <li>VV_ViviProduct</li>
+      <li>VV_ViviResource</li>
     </thingCategories>
 
     <resourceReadoutPriority>Middle</resourceReadoutPriority>

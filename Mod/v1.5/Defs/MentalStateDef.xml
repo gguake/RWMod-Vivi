@@ -18,7 +18,7 @@
     <recoveryMessage>{0}'s berserk rage has come to an end.</recoveryMessage>
     <baseInspectLine>Maddened: Berserk</baseInspectLine>
 
-    <minTicksBeforeRecovery>99999999</minTicksBeforeRecovery>
+    <minTicksBeforeRecovery>999999999</minTicksBeforeRecovery>
     <stateEffecter>Berserk</stateEffecter>
     <inCaravanCanDo>true</inCaravanCanDo>
     <recoverFromSleep>false</recoverFromSleep>

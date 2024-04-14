@@ -18,9 +18,9 @@
 
     <stages>
       <li>
-        <hungerRateFactorOffset>0.2</hungerRateFactorOffset>
+        <hungerRateFactorOffset>0.25</hungerRateFactorOffset>
         <statOffsets>
-          <MoveSpeed>-2.1</MoveSpeed>
+          <MoveSpeed>-2.2</MoveSpeed>
           <PsychicSensitivity>1.0</PsychicSensitivity>
           <NegotiationAbility>0.35</NegotiationAbility>
           <SocialImpact>0.35</SocialImpact>
@@ -28,7 +28,7 @@
           <PsychicEntropyRecoveryRate>0.2</PsychicEntropyRecoveryRate>
         </statOffsets>
         <statFactors>
-          <WorkSpeedGlobal>0.5</WorkSpeedGlobal>
+          <WorkSpeedGlobal>0.6</WorkSpeedGlobal>
           <LifespanFactor>11</LifespanFactor>
         </statFactors>
       </li>

@@ -91,7 +91,6 @@
     <stackLimit>1</stackLimit>
     <fillPercent>0.25</fillPercent>
 
-    <hasCustomRectForSelector>true</hasCustomRectForSelector>
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
     <thingCategories>
       <li>VV_ArcanePlant</li>

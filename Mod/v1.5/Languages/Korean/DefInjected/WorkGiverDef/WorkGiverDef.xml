@@ -2,21 +2,21 @@
 <LanguageData>
   <VV_DoBillsGathering.label>작업대 주변에서 채집</VV_DoBillsGathering.label>
   <VV_DoBillsGathering.verb>채집</VV_DoBillsGathering.verb>
-  <VV_DoBillsGathering.gerund>채집</VV_DoBillsGathering.gerund>
+  <VV_DoBillsGathering.gerund> 채집</VV_DoBillsGathering.gerund>
   
   <VV_DoBillsRefiningWorkbench.label>작업대에서 정제</VV_DoBillsRefiningWorkbench.label>
   <VV_DoBillsRefiningWorkbench.verb>정제</VV_DoBillsRefiningWorkbench.verb>
-  <VV_DoBillsRefiningWorkbench.gerund>정제</VV_DoBillsRefiningWorkbench.gerund>
+  <VV_DoBillsRefiningWorkbench.gerund> 정제</VV_DoBillsRefiningWorkbench.gerund>
 
   <VV_FertilizeArcanePlant.label>마법 식물에 비료 투여</VV_FertilizeArcanePlant.label>
   <VV_FertilizeArcanePlant.verb>비료 투여</VV_FertilizeArcanePlant.verb>
-  <VV_FertilizeArcanePlant.gerund>비료 투여</VV_FertilizeArcanePlant.gerund>
+  <VV_FertilizeArcanePlant.gerund> 비료 투여</VV_FertilizeArcanePlant.gerund>
 
   <VV_EquipShootus.label>건인장에 무기 장착</VV_EquipShootus.label>
-  <VV_EquipShootus.verb>건인장에 무기 장착</VV_EquipShootus.verb>
-  <VV_EquipShootus.gerund>건인장에 무기 장착</VV_EquipShootus.gerund>
+  <VV_EquipShootus.verb>무기 장착</VV_EquipShootus.verb>
+  <VV_EquipShootus.gerund> 무기 장착</VV_EquipShootus.gerund>
 
   <VV_DoBillsExtractor.label>추출기에서 작업</VV_DoBillsExtractor.label>
   <VV_DoBillsExtractor.verb>추출</VV_DoBillsExtractor.verb>
-  <VV_DoBillsExtractor.gerund>추출</VV_DoBillsExtractor.gerund>
+  <VV_DoBillsExtractor.gerund> 추출</VV_DoBillsExtractor.gerund>
 </LanguageData>

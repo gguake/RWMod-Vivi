@@ -54,7 +54,7 @@ namespace VVRace
                 var extension = RecipeModExtension;
                 if (extension != null && extension.foodDrains > 0f)
                 {
-                    p.needs.food.CurLevel -= extension.foodDrains / recipe.workAmount;
+                    p.needs.food.CurLevel -= extension.foodDrains / recipe.workAmount * p.GetStatValue(recipe.workSpeedStat);
                 }
             }
         }

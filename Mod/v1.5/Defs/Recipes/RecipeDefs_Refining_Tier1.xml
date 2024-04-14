@@ -34,7 +34,7 @@
         <billOverrideType>VVRace.Bill_ProductionWithFoodDrain</billOverrideType>
       </li>
       <li Class="VVRace.RecipeModExtension">
-        <foodDrains>0.275</foodDrains>
+        <foodDrains>0.2</foodDrains>
       </li>
     </modExtensions>
   </RecipeDef>

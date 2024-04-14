@@ -44,7 +44,7 @@
     </thingCategories>
 
     <costList>
-      <VV_Viviwax>80</VV_Viviwax>
+      <VV_Viviwax>60</VV_Viviwax>
       <VV_Vivicream>40</VV_Vivicream>
     </costList>
 
@@ -170,7 +170,7 @@
       <li>Woody</li>
       <li>VV_Wax</li>
     </stuffCategories>
-    <costStuffCount>80</costStuffCount>
+    <costStuffCount>60</costStuffCount>
 
     <inspectorTabs>
       <li>ITab_Bills</li>
@@ -233,7 +233,7 @@
       <li>Stony</li>
       <li>Metallic</li>
     </stuffCategories>
-    <costStuffCount>80</costStuffCount>
+    <costStuffCount>60</costStuffCount>
     
     <uiOrder>2300</uiOrder>
     <altitudeLayer>Building</altitudeLayer>
