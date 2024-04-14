@@ -7,12 +7,15 @@
     <isRootSpecial>true</isRootSpecial>
     <questNameRules>
       <rulesStrings>
-        <li>questName->Reconstruction</li>
+        <li>questName->Reconstruction of peace</li>
       </rulesStrings>
     </questNameRules>
     <questDescriptionRules>
       <rulesStrings>
-        <li>questDescription->asdf. [asker_nameDef], [asker_faction_leaderTitle] of [asker_faction_name]</li>
+        <li>questDescription->[asker_faction_name]'s [asker_faction_leaderTitle], [asker_nameDef], has sent a congratulatory message expressing admiration for your thriving hive. The [asker_faction_leaderTitle] wishes for your hive's continued prosperity and has shared a piece of information to alleviate your concerns about attacks from outlanders.
+\nIt is said that before the Vivi scattered in the distant past, each hive had a Dreamum planted at its center, which was enlarged to protect the hive from enemies. However, all have been destroyed in modern times, and the specific techniques have been forgotten.
+\nThe [asker_faction_leaderTitle] has disclosed the location of an ancient Vivi hive, believing that if enough mana is supplied to the remnants of the past, a giant Dreamum can be regrown. Establishing a new hive at this site and growing a giant Dreamum could potentially drive outlanders from the planet.
+\nIf you proceed with this quest and begin the process of cultivating the Dreamum, the [asker_faction_leaderTitle] has promised material support and an alliance. However, once the Dreamum grows beyond a certain size, non-Vivi intelligences will gradually fall into unconsciousness, and outlanders who detect this anomaly will become hostile and continuously attack. Additionally, the enlargement of the Dreamum requires a substantial supply of mana.</li>
       </rulesStrings>
     </questDescriptionRules>
     <root Class="QuestNode_Sequence">

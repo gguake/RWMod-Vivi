@@ -3,4 +3,6 @@
 <VV_Gizmo_ViviEggProgressHeader>Egg Laying Progress</VV_Gizmo_ViviEggProgressHeader>
 <VV_Gizmo_ViviEggProgressTooltip>Shows how much time is left until the next egg is laid.\n\nWhen progress reaches 100% and a suitable Vivi incubator is available, Vivi will go there to lay the egg.</VV_Gizmo_ViviEggProgressTooltip>
 <VV_Gizmo_SetFertilizeAutoThreshold>Apply fertilizer when mana drops below {0}</VV_Gizmo_SetFertilizeAutoThreshold>
+
+<VV_Gizmo_VisitViviRuins>Visit {0}</VV_Gizmo_VisitViviRuins>
 </LanguageData>

@@ -10,5 +10,7 @@
         public const string VV_Letter_IncidentHornetSwarmArrivedLabel = nameof(VV_Letter_IncidentHornetSwarmArrivedLabel);
         public const string VV_Letter_IncidentHornetSwarmArrived = nameof(VV_Letter_IncidentHornetSwarmArrived);
 
+        public const string VV_Letter_ViviRuinsFoundLabel = nameof(VV_Letter_ViviRuinsFoundLabel);
+        public const string VV_Letter_ViviRuinsFound = nameof(VV_Letter_ViviRuinsFound);
     }
 }

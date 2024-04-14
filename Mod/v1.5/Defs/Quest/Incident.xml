@@ -2,8 +2,8 @@
 <Defs>
   <IncidentDef ParentName="GiveQuestBase">
     <defName>VV_GiveQuest_EndGame_DreamumVictory</defName>
-    <label>reconstruction</label>
-    <letterLabel>Reconstruction</letterLabel>
+    <label>reconstruction of peace</label>
+    <letterLabel>Reconstruction of peace</letterLabel>
     <questScriptDef>VV_EndGame_DreamumVictory_Reconstruction</questScriptDef>
     <baseChance>0</baseChance>
   </IncidentDef>

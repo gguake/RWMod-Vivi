@@ -11,7 +11,7 @@
           <li>VV_PlayerViviRefugee</li>
         </playerFactions>
         <factionRequirementInWorlds>VV_ViviFederation</factionRequirementInWorlds>
-        <minColonyWealth>99999999</minColonyWealth>
+        <minColonyWealth>1</minColonyWealth>
         
         <refireIntervalDays>60</refireIntervalDays>
         <allowedTargetTags>
