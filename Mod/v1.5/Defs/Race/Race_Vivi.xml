@@ -18,7 +18,7 @@
 			<MeatAmount>30</MeatAmount>
 			<LeatherAmount>30</LeatherAmount>
 
-      <ComfyTemperatureMin>18</ComfyTemperatureMin>
+      <ComfyTemperatureMin>16</ComfyTemperatureMin>
       <ComfyTemperatureMax>36</ComfyTemperatureMax>
 
       <VV_HoneyGatherSpeed>1.0</VV_HoneyGatherSpeed>
@@ -26,10 +26,11 @@
       <VV_PlantGatherSpeed>1.0</VV_PlantGatherSpeed>
       <VV_PlantGatherYield>1.0</VV_PlantGatherYield>
       <ConstructionSpeed>1.2</ConstructionSpeed>
-      <SmoothingSpeed>1.5</SmoothingSpeed>
+      <SmoothingSpeed>2.0</SmoothingSpeed>
       <CleaningSpeed>1.2</CleaningSpeed>
+      <PawnTrapSpringChance>0.1</PawnTrapSpringChance>
 
-      <MoveSpeed>5.75</MoveSpeed>
+      <MoveSpeed>5.8</MoveSpeed>
       <MiningSpeed>0.5</MiningSpeed>
       <MiningYield>0.5</MiningYield>
       <PsychicSensitivity>0.5</PsychicSensitivity>
