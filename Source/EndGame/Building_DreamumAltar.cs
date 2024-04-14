@@ -15,7 +15,7 @@ namespace VVRace
     }
 
     [StaticConstructorOnStartup]
-    public class Building_DreamumAltar : ManaAcceptor
+    public class Building_DreamumAltar : ManaAcceptor, IConditionalGraphicProvider
     {
         public DreamumProjectStage Stage => _stage;
         private DreamumProjectStage _stage;
@@ -24,6 +24,15 @@ namespace VVRace
 
         public override ManaFluxNetwork ManaFluxNetwork { get; set; }
         public override ManaFluxNetworkNode ManaFluxNode => _manaFluxNode;
+
+        public int GraphicIndex
+        {
+            get
+            {
+                return 5;
+            }
+        }
+
         private ManaFluxNetworkNode _manaFluxNode;
 
         public int _progressTicks;
@@ -39,8 +48,12 @@ namespace VVRace
 
             Scribe_Values.Look(ref _stage, "stage");
             Scribe_Deep.Look(ref _manaFluxNode, "manaFluxNode");
-
             Scribe_Values.Look(ref _progressTicks, "progressTicks");
+
+            if (Scribe.mode == LoadSaveMode.LoadingVars)
+            {
+                _manaFluxNode.manaAcceptor = this;
+            }
         }
 
         public override void Tick()
@@ -58,7 +71,7 @@ namespace VVRace
 
                 case DreamumProjectStage.InProgress:
                     {
-                        if (_manaFluxNode.mana >= 1f)
+                        if (_manaFluxNode.mana >= 0.999f)
                         {
                             _progressTicks++;
                         }

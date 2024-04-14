@@ -5,8 +5,8 @@ namespace VVRace
 {
     public class GenStep_ViviRuins : GenStep_Scatterer
     {
-        private static readonly int SettlementSizeX = 80;
-        private static readonly int SettlementSizeZ = 80;
+        private static readonly int SettlementSizeX = 45;
+        private static readonly int SettlementSizeZ = 45;
 
         public override int SeedPart => 2024041311;
 

@@ -129,6 +129,7 @@
     <Compile Include="ArcanePlant\Growing\UI\Dialog_StartGrowingArcanePlant.cs" />
     <Compile Include="ArcanePlant\Growing\UI\ITab_ArcanePlantFarmBill.cs" />
     <Compile Include="Egg\Comps\CompViviEggLayer.cs" />
+    <Compile Include="EndGame\Comps\CompDreamumTower.cs" />
     <Compile Include="EndGame\IncidentDefDreamumSpawnExtension.cs" />
     <Compile Include="EndGame\IncidentWorker_DreamumSpawn.cs" />
     <Compile Include="EndGame\Building_DreamumAltar.cs" />
@@ -171,6 +172,7 @@
     <Compile Include="MapGeneration\SymbolResolvers\Settlement\SymbolResolver_HexaRoomDining.cs" />
     <Compile Include="MapGeneration\SymbolResolvers\Settlement\SymbolResolver_HexaRoomBarracks.cs" />
     <Compile Include="Gather\UI\ITab_GatherWorkTable.cs" />
+    <Compile Include="MapGeneration\SymbolResolvers\SymbolResolver_EdgeHoneycombWall.cs" />
     <Compile Include="RPEF\PawnRenderSubWorker_WingCondition.cs" />
     <Compile Include="Utility\Graphics\Graphic_Conditional.cs" />
     <Compile Include="ArcanePlant\Plant\Comps\CompHeatPusherMana.cs" />

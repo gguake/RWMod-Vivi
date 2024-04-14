@@ -12,15 +12,16 @@
 
     <drawerType>MapMeshAndRealTime</drawerType>
     <graphicData>
-      <texPath>Things/Plants/VV_Dreamum</texPath>
+      <texPath>Things/Building/VV_DreamumAltar</texPath>
       <graphicClass>Graphic_Single</graphicClass>
-      <drawSize>(13, 13)</drawSize>
+      <drawSize>(26, 26)</drawSize>
       <shadowData>
         <volume>(9.8, 1, 8)</volume>
         <offset>(0,0,-0.66)</offset>
       </shadowData>
     </graphicData>
     <tickerType>Normal</tickerType>
+    <destroyable>false</destroyable>
     
     <uiOrder>3000</uiOrder>
     <uiIconScale>0.8</uiIconScale>
@@ -38,7 +39,7 @@
     <rotatable>false</rotatable>
 
     <hasInteractionCell>true</hasInteractionCell>
-    <interactionCellOffset>(0,0,-6)</interactionCellOffset>
+    <interactionCellOffset>(0,0,-7)</interactionCellOffset>
 
     <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
     <building>
@@ -47,14 +48,6 @@
       <deconstructible>false</deconstructible>
       <claimable>false</claimable>
     </building>
-
-    <comps>
-      <li Class="CompProperties_MoteEmitter">
-        <mote>VV_Mote_PsychicConditionCauserEffect</mote>
-        <emissionInterval>2500</emissionInterval>
-        <soundOnEmission>Archonexus_Throb</soundOnEmission>
-      </li>
-    </comps>
 
     <placeWorkers>
       <li>PlaceWorker_NotUnderRoof</li>
@@ -68,6 +61,17 @@
     </costList>
 
     <canOverlapZones>false</canOverlapZones>
+
+    <comps>
+      <li Class="VVRace.CompProperties_DreamumTower">
+        <graphicData>
+          <texPath>Things/Building/VV_DreamumAltarFlower</texPath>
+          <graphicClass>VVRace.Graphic_Conditional</graphicClass>
+          <shaderType>CutoutPlant</shaderType>
+          <drawSize>(26, 26)</drawSize>
+        </graphicData>
+      </li>
+    </comps>
 
     <modExtensions>
       <li Class="VVRace.ManaExtension">

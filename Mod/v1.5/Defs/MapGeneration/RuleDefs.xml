@@ -41,6 +41,14 @@
   </RuleDef>
   
   <RuleDef>
+    <defName>VV_EdgeHoneycombWall</defName>
+    <symbol>vv_edge_honeycomb_wall</symbol>
+    <resolvers>
+      <li Class="VVRace.SymbolResolver_EdgeHoneycombWall" />
+    </resolvers>
+  </RuleDef>
+  
+  <RuleDef>
     <defName>VV_ArcanePlant</defName>
     <symbol>vv_arcane_plant</symbol>
     <resolvers>

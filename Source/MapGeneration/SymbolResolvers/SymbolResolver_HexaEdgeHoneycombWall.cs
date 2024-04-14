@@ -25,13 +25,16 @@ namespace VVRace
 
         public override void Resolve(ResolveParams resolveParams)
         {
-            var thingDef = resolveParams.wallStuff ?? BaseGenUtility.RandomCheapWallStuff(resolveParams.faction);
-
             var rect = resolveParams.rect;
             foreach (var wallCell in rect.GetHexagonalEdges().Select(v => v.ToIntVec3))
             {
                 if (wallCell.InBounds(BaseGen.globalSettings.map))
                 {
+                    if (resolveParams.chanceToSkipWallBlock != null && Rand.Chance(resolveParams.chanceToSkipWallBlock.Value))
+                    {
+                        continue;
+                    }
+
                     TrySpawnWall(wallCell, resolveParams);
                 }
             }
@@ -61,6 +64,13 @@ namespace VVRace
 
             var wall = ThingMaker.MakeThing(VVThingDefOf.VV_ViviHoneycombWall);
             wall.SetFaction(resolveParams.faction);
+
+            if (resolveParams.hpPercentRange != null)
+            {
+                var percent = resolveParams.hpPercentRange.Value.RandomInRange;
+                wall.HitPoints = (int)(wall.MaxHitPoints * percent);
+            }
+
             return GenSpawn.Spawn(wall, c, map);
         }
     }

@@ -33,7 +33,7 @@ namespace VVRace
             if (extension.requiredPlayerWealth > 0f && WealthUtility.PlayerWealth < extension.requiredPlayerWealth) { return false; }
 
             var arcanePlantCount = 0;
-            var arcanePlants = map.listerThings.ThingsInGroup(ThingRequestGroup.WithCustomRectForSelector);
+            var arcanePlants = map.listerThings.ThingsInGroup(ThingRequestGroup.BuildingArtificial);
             for (int i = 0; i < arcanePlants.Count; ++i)
             {
                 if (arcanePlants[i] is ArcanePlant)
