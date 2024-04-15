@@ -117,7 +117,7 @@ namespace VVRace
 
         public bool IsGoodGlow => Data.optimalGlowRange.IncludesEpsilon(_billOwner.FarmGlow);
 
-        public bool ManagementRequired => GenTicks.TicksGame - _lastManagementTicks >= Data.RealManageIntervalTicks;
+        public bool ManagementRequired => GenTicks.TicksGame - _lastManagementTicks >= Data.manageIntervalTicks;
 
         public float? Cleanliness
         {

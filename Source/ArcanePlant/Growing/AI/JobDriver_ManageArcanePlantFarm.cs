@@ -22,7 +22,7 @@ namespace VVRace
         protected override IEnumerable<Toil> MakeNewToils()
         {
             this.FailOnDespawnedNullOrForbidden(FarmIdx);
-            AddFailCondition(() => Farm.Bill == null || Farm.Bill.Stage != GrowingArcanePlantBillStage.Growing || !Farm.Bill.ManagementRequired);
+            AddFailCondition(() => Farm.Bill == null || Farm.Bill.Stage != GrowingArcanePlantBillStage.Growing);
 
             yield return Toils_Goto.GotoThing(FarmIdx, PathEndMode.Touch);
 
