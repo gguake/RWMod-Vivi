@@ -6,6 +6,8 @@
 <VV_JobFailReasonNoHarvestablePollenFilths>No harvestable pollen filths nearby</VV_JobFailReasonNoHarvestablePollenFilths>
 <VV_JobFailReasonNotVivi>Not Vivi</VV_JobFailReasonNotVivi>
 <VV_JobFailReasonViviStarving>Vivi is starving</VV_JobFailReasonViviStarving>
+<VV_JobFailReasonNoIngredients>No ingredients</VV_JobFailReasonNoIngredients>
+<VV_JobFailReasonNoDreamum>No dreamums</VV_JobFailReasonNoDreamum>
 
 <VV_AbilityDisabledNoFood>{0_labelShort} cannot use this due to hunger</VV_AbilityDisabledNoFood>
 <VV_AbilityDisabledNoBodyPart>{0_labelShort} lacks {2} {1} body parts</VV_AbilityDisabledNoBodyPart>

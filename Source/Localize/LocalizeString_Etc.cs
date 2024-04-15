@@ -5,6 +5,7 @@
         public const string VV_JobFailReasonNoHarvestablePlants = nameof(VV_JobFailReasonNoHarvestablePlants);
         public const string VV_JobFailReasonNoHarvestablePollenFilths = nameof(VV_JobFailReasonNoHarvestablePollenFilths);
         public const string VV_JobFailReasonNoIngredients = nameof(VV_JobFailReasonNoIngredients);
+        public const string VV_JobFailReasonNoDreamum = nameof(VV_JobFailReasonNoDreamum);
 
         public const string VV_AbilityDisabledNoFood = nameof(VV_AbilityDisabledNoFood);
         public const string VV_AbilityDisabledNoBodyPart = nameof(VV_AbilityDisabledNoBodyPart);
