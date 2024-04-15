@@ -41,4 +41,21 @@
     </graphicData>
   </ThingDef>
 
+  <ThingDef ParentName="MoteBase">
+    <defName>VV_Mote_DreamumTowerGrowthGlow</defName>
+    <thingClass>VVRace.MoteDreamumTowerAttached</thingClass>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <mote>
+      <fadeInTime>0.2</fadeInTime>
+      <solidTime>0.5</solidTime>
+      <fadeOutTime>3</fadeOutTime>
+    </mote>
+    <graphicData>
+      <texPath>Things/Building/VV_DreamumAltarFlower</texPath>
+      <graphicClass>VVRace.Graphic_Conditional_MoteWithAgeSecs</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>(26, 26)</drawSize>
+      <color>(1, 0.9, 0.6, 1)</color>
+    </graphicData>
+  </ThingDef>
 </Defs>

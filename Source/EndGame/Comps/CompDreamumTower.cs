@@ -7,10 +7,12 @@ namespace VVRace
 {
     public class CompProperties_DreamumTower : CompProperties
     {
-        public GraphicData graphicData;
         public int completeProgressTicks;
 
+        public GraphicData graphicData;
+        public EffecterDef growthEffect;
         public List<float> graphicChangeProgressPct;
+
         public FloatRange bigThreatActivatePct;
 
         public GameConditionDef hazeConditionDef;
@@ -29,6 +31,7 @@ namespace VVRace
 
         public float ProgressPct => _progress / Props.completeProgressTicks;
         private float _progress;
+        private int _previousGraphicIndex;
 
         private bool _bigThreatActivateNotified;
         private bool _hazeActivateNotified;
@@ -45,6 +48,8 @@ namespace VVRace
         public override void PostExposeData()
         {
             Scribe_Values.Look(ref _progress, "dreamumProgress");
+            Scribe_Values.Look(ref _previousGraphicIndex, "previousGraphicIndex");
+
             Scribe_Values.Look(ref _bigThreatActivateNotified, "bigThreatActivateNotified");
             Scribe_Values.Look(ref _hazeActivateNotified, "hazeActivateNotified");
 
@@ -68,6 +73,15 @@ namespace VVRace
             if (altar.Stage == DreamumProjectStage.InProgress && manaCharged >= 0.5f)
             {
                 _progress += manaCharged;
+            }
+
+            if (_previousGraphicIndex != altar.GraphicIndex)
+            {
+                _previousGraphicIndex = altar.GraphicIndex;
+                if (Props.growthEffect != null)
+                {
+                    Props.growthEffect.SpawnAttached(parent, parent.Map);
+                }
             }
 
             if ((int)_progress >= Props.completeProgressTicks)
@@ -130,7 +144,7 @@ namespace VVRace
         {
             base.PostDraw();
 
-            if (parent is Building_DreamumAltar altar && altar.RequireDreamum)
+            if (!(parent is Building_DreamumAltar altar) || altar.Stage < DreamumProjectStage.Prepare || altar.RequireDreamum)
             {
                 return;
             }

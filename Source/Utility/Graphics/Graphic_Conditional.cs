@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Verse;
 
 namespace VVRace
@@ -45,7 +46,8 @@ namespace VVRace
 
         public override void DrawWorker(Vector3 loc, Rot4 rot, ThingDef thingDef, Thing thing, float extraRotation)
         {
-            Graphic graphic = ((thing == null) ? subGraphics[0] : SubGraphicFor(thing));
+            var graphic = ((thing == null) ? subGraphics[0] : SubGraphicFor(thing));
+
             graphic.DrawWorker(loc, rot, thingDef, thing, extraRotation);
             if (base.ShadowGraphic != null)
             {
@@ -78,5 +80,11 @@ namespace VVRace
         {
             return "Conditional(path=" + path + ", count=" + subGraphics.Length + ")";
         }
+    }
+
+    public class Graphic_Conditional_MoteWithAgeSecs : Graphic_Conditional
+    {
+        protected override Type SingleGraphicType => typeof(Graphic_MoteWithAgeSecs);
+        protected override Type MultiGraphicType => typeof(Graphic_Multi_AgeSecs);
     }
 }

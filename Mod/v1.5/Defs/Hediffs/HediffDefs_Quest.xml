@@ -12,9 +12,9 @@
     <initialSeverity>0.001</initialSeverity>
 
     <comps>
-      <li Class="HediffCompProperties_SelfHeal">
-        <healIntervalTicksStanding>2000</healIntervalTicksStanding>
-        <healAmount>0.0067</healAmount>
+      <li Class="HediffCompProperties_Immunizable">
+        <compClass>VVRace.HediffComp_ImmunizableDreamum</compClass>
+        <severityPerDayNotImmune>-0.08</severityPerDayNotImmune>
       </li>
     </comps>
 

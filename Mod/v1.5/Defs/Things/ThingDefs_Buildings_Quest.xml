@@ -64,14 +64,15 @@
 
     <comps>
       <li Class="VVRace.CompProperties_DreamumTower">
+        <completeProgressTicks>1800000</completeProgressTicks>
+
         <graphicData>
           <texPath>Things/Building/VV_DreamumAltarFlower</texPath>
           <graphicClass>VVRace.Graphic_Conditional</graphicClass>
           <shaderType>CutoutPlant</shaderType>
           <drawSize>(26, 26)</drawSize>
         </graphicData>
-
-        <completeProgressTicks>1800000</completeProgressTicks>
+        <growthEffect>VV_GrowthDreamumTower</growthEffect>
         <graphicChangeProgressPct>
           <li>0.1</li>
           <li>0.25</li>
@@ -81,8 +82,10 @@
         </graphicChangeProgressPct>
 
         <bigThreatActivatePct>0.4~0.9</bigThreatActivatePct>
+
+        <hazeConditionDef>VV_DreamumHaze</hazeConditionDef>
         <hazeActivatePct>0.55</hazeActivatePct>
-        <hazeWorldRadiusMax>30</hazeWorldRadiusMax>
+        <hazeWorldRadiusMax>300</hazeWorldRadiusMax>
       </li>
     </comps>
 
