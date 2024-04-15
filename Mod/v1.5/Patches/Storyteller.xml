@@ -13,7 +13,7 @@
         <factionRequirementInWorlds>VV_ViviFederation</factionRequirementInWorlds>
         <minColonyWealth>99999999</minColonyWealth>
         
-        <refireIntervalDays>60</refireIntervalDays>
+        <refireIntervalDays>600</refireIntervalDays>
         <allowedTargetTags>
           <li>World</li>
         </allowedTargetTags>

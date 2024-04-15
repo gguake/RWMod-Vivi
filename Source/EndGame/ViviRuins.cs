@@ -1,6 +1,7 @@
 ﻿using RimWorld;
 using RimWorld.Planet;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Verse;
 
@@ -58,10 +59,52 @@ namespace VVRace
             }
         }
 
+        public Building_DreamumAltar Altar
+        {
+            get
+            {
+                if (_altar == null)
+                {
+                    _altar = Map.listerThings.ThingsOfDef(VVThingDefOf.VV_DreamumAltar).FirstOrDefault() as Building_DreamumAltar;
+                }
+                return _altar;
+            }
+        }
+        private Building_DreamumAltar _altar;
+
         public override void PostMapGenerate()
         {
             base.PostMapGenerate();
             Find.World.renderer.SetDirty<WorldLayer_WorldObjects>();
+        }
+
+        public override IEnumerable<IncidentTargetTagDef> IncidentTargetTags()
+        {
+            foreach (var tag in base.IncidentTargetTags())
+            {
+                yield return tag;
+            }
+
+            var altar = Altar;
+            if (altar != null && altar.ShouldBigThreats)
+            {
+                yield return IncidentTargetTagDefOf.Map_RaidBeacon;
+            }
+        }
+
+        public override void DrawExtraSelectionOverlays()
+        {
+            base.DrawExtraSelectionOverlays();
+
+            var altar = Altar;
+            if (altar != null && altar.ShouldDreamumHaze)
+            {
+                var radius = (int)altar.CompDreamumTower.HazeWorldRadius;
+                if (radius > 0)
+                {
+                    GenDraw.DrawWorldRadiusRing(Tile, radius);
+                }
+            }
         }
     }
 }

@@ -13,7 +13,6 @@
 			<Mass>50</Mass>
 			<CarryingCapacity>70</CarryingCapacity>
 			<PainShockThreshold>0.7</PainShockThreshold>
-			<ToxicEnvironmentResistance>0.9</ToxicEnvironmentResistance>
 			<EatingSpeed>1.2</EatingSpeed>
 			<MeatAmount>30</MeatAmount>
 			<LeatherAmount>30</LeatherAmount>

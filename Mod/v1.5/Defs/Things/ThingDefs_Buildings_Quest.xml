@@ -70,6 +70,19 @@
           <shaderType>CutoutPlant</shaderType>
           <drawSize>(26, 26)</drawSize>
         </graphicData>
+
+        <completeProgressTicks>1800000</completeProgressTicks>
+        <graphicChangeProgressPct>
+          <li>0.1</li>
+          <li>0.25</li>
+          <li>0.4</li>
+          <li>0.75</li>
+          <li>0.9</li>
+        </graphicChangeProgressPct>
+
+        <bigThreatActivatePct>0.4~0.9</bigThreatActivatePct>
+        <hazeActivatePct>0.55</hazeActivatePct>
+        <hazeWorldRadiusMax>30</hazeWorldRadiusMax>
       </li>
     </comps>
 

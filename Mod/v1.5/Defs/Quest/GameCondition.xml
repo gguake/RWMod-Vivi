@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <GameConditionDef>
+    <defName>VV_DreamumHaze</defName>
+    <conditionClass>VVRace.GameCondition_DreamumHaze</conditionClass>
+    <label>dreamum haze</label>
+    <description>A nearby toxic spewer is blanketing this whole region with poison.</description>
+    <letterText>A toxic spewer machine has begun blanketing the whole region with poison.</letterText>
+    <canBePermanent>false</canBePermanent>
+    <natural>false</natural>
+  </GameConditionDef>
+</Defs>

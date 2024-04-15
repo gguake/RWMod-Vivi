@@ -15,7 +15,7 @@ namespace VVRace
     }
 
     [StaticConstructorOnStartup]
-    public class Building_DreamumAltar : ManaAcceptor, IConditionalGraphicProvider
+    public class Building_DreamumAltar : ManaAcceptor, IConditionalGraphicProvider, IThingHolder
     {
         public DreamumProjectStage Stage => _stage;
         private DreamumProjectStage _stage;
@@ -25,21 +25,60 @@ namespace VVRace
         public override ManaFluxNetwork ManaFluxNetwork { get; set; }
         public override ManaFluxNetworkNode ManaFluxNode => _manaFluxNode;
 
+        public bool RequireDreamum => Stage >= DreamumProjectStage.Prepare && _innerContainer.Count == 0;
+
+        public bool ShouldBigThreats => Stage >= DreamumProjectStage.InProgress && CompDreamumTower.Props.bigThreatActivatePct.IncludesEpsilon(CompDreamumTower.ProgressPct);
+        public bool ShouldDreamumHaze => Stage >= DreamumProjectStage.InProgress && CompDreamumTower.ProgressPct >= CompDreamumTower.Props.hazeActivatePct;
+
+
+        public CompDreamumTower CompDreamumTower
+        {
+            get
+            {
+                if (_compDreamumTower == null)
+                {
+                    _compDreamumTower = GetComp<CompDreamumTower>();
+                }
+                return _compDreamumTower;
+            }
+        }
+        private CompDreamumTower _compDreamumTower;
+
         public int GraphicIndex
         {
             get
             {
-                return 5;
+                if (_stage < DreamumProjectStage.InProgress)
+                {
+                    return 0;
+                }
+
+                var index = 0;
+                var comp = CompDreamumTower;
+                var pct = comp.ProgressPct;
+                for (int i = 0; i < comp.Props.graphicChangeProgressPct.Count; ++i)
+                {
+                    if (pct >= comp.Props.graphicChangeProgressPct[i])
+                    {
+                        break;
+                    }
+
+                    index++;
+                }
+
+                return index;
             }
         }
 
         private ManaFluxNetworkNode _manaFluxNode;
-
-        public int _progressTicks;
+        private int _progressTicks;
+        private ThingOwner _innerContainer;
+        private int _growthIndex;
 
         public Building_DreamumAltar()
         {
             _manaFluxNode = new ManaFluxNetworkNode(this);
+            _innerContainer = new ThingOwner<Thing>(this, oneStackOnly: true);
         }
 
         public override void ExposeData()
@@ -49,6 +88,8 @@ namespace VVRace
             Scribe_Values.Look(ref _stage, "stage");
             Scribe_Deep.Look(ref _manaFluxNode, "manaFluxNode");
             Scribe_Values.Look(ref _progressTicks, "progressTicks");
+            Scribe_Deep.Look(ref _innerContainer, "innerContainer", this);
+            Scribe_Values.Look(ref _growthIndex, "growthIndex");
 
             if (Scribe.mode == LoadSaveMode.LoadingVars)
             {
@@ -63,27 +104,15 @@ namespace VVRace
             switch (_stage)
             {
                 case DreamumProjectStage.Prepare:
-                    if (_manaFluxNode.mana >= ManaExtension.manaCapacity - 1)
+                    if (_innerContainer.Any && _manaFluxNode.mana >= ManaExtension.manaCapacity - 1)
                     {
                         _stage = DreamumProjectStage.InProgress;
-                    }
-                    break;
 
-                case DreamumProjectStage.InProgress:
-                    {
-                        if (_manaFluxNode.mana >= 0.999f)
-                        {
-                            _progressTicks++;
-                        }
-                    }
-                    break;
-
-                case DreamumProjectStage.Completed:
-                    {
-                        if (_manaFluxNode.mana >= 1f)
-                        {
-                            _progressTicks++;
-                        }
+                        Find.LetterStack.ReceiveLetter(
+                            LocalizeString_Letter.VV_Letter_DreamumAltarProgressStartLabel.Translate(),
+                            LocalizeString_Letter.VV_Letter_DreamumAltarProgressStart.Translate(),
+                            LetterDefOf.NeutralEvent,
+                            this);
                     }
                     break;
             }
@@ -183,5 +212,28 @@ namespace VVRace
             }
         }
 
+        public void GetChildHolders(List<IThingHolder> outChildren)
+        {
+            ThingOwnerUtility.AppendThingHoldersFromThings(outChildren, GetDirectlyHeldThings());
+        }
+
+        public ThingOwner GetDirectlyHeldThings()
+        {
+            return _innerContainer;
+        }
+
+        public void CompleteProgress()
+        {
+            if (Stage == DreamumProjectStage.InProgress)
+            {
+                _stage = DreamumProjectStage.Completed;
+
+                Find.LetterStack.ReceiveLetter(
+                    LocalizeString_Letter.VV_Letter_DreamumAltarProgressCompleteLabel.Translate(),
+                    LocalizeString_Letter.VV_Letter_DreamumAltarProgressComplete.Translate(),
+                    LetterDefOf.PositiveEvent,
+                    this);
+            }
+        }
     }
 }

@@ -129,12 +129,12 @@
     <Compile Include="ArcanePlant\Growing\UI\Dialog_StartGrowingArcanePlant.cs" />
     <Compile Include="ArcanePlant\Growing\UI\ITab_ArcanePlantFarmBill.cs" />
     <Compile Include="Egg\Comps\CompViviEggLayer.cs" />
+    <Compile Include="EndGame\AI\WorkGiver_HaulToDreamumAltar.cs" />
     <Compile Include="EndGame\CaravanArrivalAction_VisitViviRuins.cs" />
     <Compile Include="EndGame\Comps\CompDreamumTower.cs" />
     <Compile Include="EndGame\Comps\WorldObjectCompViviRuins.cs" />
-    <Compile Include="EndGame\IncidentDefDreamumSpawnExtension.cs" />
-    <Compile Include="EndGame\IncidentWorker_DreamumSpawn.cs" />
     <Compile Include="EndGame\Building_DreamumAltar.cs" />
+    <Compile Include="EndGame\GameCondition_DreamumHaze.cs" />
     <Compile Include="EndGame\ManaFluxRule_DreamumAltar.cs" />
     <Compile Include="EndGame\Quest\QuestNode_AddPurgeOutlandersReward.cs" />
     <Compile Include="EndGame\Quest\QuestNode_EndGame_DreamumVictory_FindRuinsTile.cs" />
