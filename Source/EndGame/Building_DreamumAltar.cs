@@ -177,12 +177,13 @@ namespace VVRace
         public override string GetInspectString()
         {
             var sb = new StringBuilder(base.GetInspectString());
-            if (sb.Length > 0)
+
+            if (Stage >= DreamumProjectStage.InProgress)
             {
-                sb.Append("\n");
+                sb.AppendInNewLine(LocalizeString_Inspector.VV_Inspector_AltarProgress.Translate(CompDreamumTower.ProgressPct.ToStringPercent()));
             }
 
-            sb.Append(LocalizeString_Inspector.VV_Inspector_PlantMana.Translate((int)_manaFluxNode.mana, ManaExtension.manaCapacity));
+            sb.AppendInNewLine(LocalizeString_Inspector.VV_Inspector_PlantMana.Translate((int)_manaFluxNode.mana, ManaExtension.manaCapacity));
 
             if (Spawned)
             {
@@ -195,8 +196,7 @@ namespace VVRace
 
                 if (DebugSettings.godMode && ManaFluxNetwork != null)
                 {
-                    sb.AppendLine();
-                    sb.Append($"flux network: {ManaFluxNetwork.NetworkHash}");
+                    sb.AppendInNewLine($"flux network: {ManaFluxNetwork.NetworkHash}");
                 }
             }
 

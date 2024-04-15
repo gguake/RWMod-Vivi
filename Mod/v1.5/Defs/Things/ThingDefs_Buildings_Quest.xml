@@ -64,7 +64,7 @@
 
     <comps>
       <li Class="VVRace.CompProperties_DreamumTower">
-        <completeProgressTicks>1800000</completeProgressTicks>
+        <completeProgressTicks>2400000</completeProgressTicks>
 
         <graphicData>
           <texPath>Things/Building/VV_DreamumAltarFlower</texPath>
@@ -76,16 +76,16 @@
         <graphicChangeProgressPct>
           <li>0.1</li>
           <li>0.25</li>
-          <li>0.4</li>
+          <li>0.35</li>
           <li>0.75</li>
           <li>0.9</li>
         </graphicChangeProgressPct>
 
-        <bigThreatActivatePct>0.4~0.9</bigThreatActivatePct>
+        <bigThreatActivatePct>0.35~0.9</bigThreatActivatePct>
 
         <hazeConditionDef>VV_DreamumHaze</hazeConditionDef>
-        <hazeActivatePct>0.55</hazeActivatePct>
-        <hazeWorldRadiusMax>300</hazeWorldRadiusMax>
+        <hazeActivatePct>0.7</hazeActivatePct>
+        <hazeWorldRadiusMax>200</hazeWorldRadiusMax>
       </li>
     </comps>
 
