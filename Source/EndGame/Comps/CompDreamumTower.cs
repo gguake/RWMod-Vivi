@@ -1,5 +1,8 @@
 ﻿using RimWorld;
+using RimWorld.Planet;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using UnityEngine;
 using Verse;
 
@@ -59,6 +62,7 @@ namespace VVRace
             }
         }
 
+        private static List<Settlement> tmpSettlements = new List<Settlement>();
         private static List<Map> tmpDeadConditionMaps = new List<Map>();
         public override void CompTick()
         {
@@ -123,6 +127,31 @@ namespace VVRace
                         _causedConditions.Remove(map);
                     }
                 }
+
+                if (parent.IsHashIntervalTick(15000))
+                {
+                    tmpSettlements.Clear();
+                    tmpSettlements.AddRange(Find.WorldObjects.Settlements.Where(v => !v.HasMap && !(v.Faction.def.allowedCultures?.Contains(VVCultureDefOf.VV_ViviCulture) ?? false)));
+
+                    var tile = parent.Tile;
+                    foreach (var settlement in tmpSettlements)
+                    {
+                        if (Find.WorldGrid.ApproxDistanceInTiles(tile, settlement.Tile) <= HazeWorldRadius)
+                        {
+                            var destroyedSettlement = (DestroyedSettlement)WorldObjectMaker.MakeWorldObject(WorldObjectDefOf.DestroyedSettlement);
+                            destroyedSettlement.Tile = settlement.Tile;
+                            destroyedSettlement.SetFaction(settlement.Faction);
+                            Find.WorldObjects.Add(destroyedSettlement);
+
+                            if (!HasAnyOtherBase(settlement))
+                            {
+                                settlement.Faction.defeated = true;
+                            }
+
+                            settlement.Destroy();
+                        }
+                    }
+                }
             }
         }
 
@@ -161,6 +190,14 @@ namespace VVRace
 
                 yield return command_addprogress1day;
             }
+        }
+
+        public override void PostDestroy(DestroyMode mode, Map previousMap)
+        {
+            Messages.Message(
+                "MessageConditionCauserDespawned".Translate(parent.def.LabelCap),
+                new TargetInfo(parent.Position, previousMap),
+                MessageTypeDefOf.NeutralEvent);
         }
 
         private bool InAoE(int tile)
@@ -202,12 +239,19 @@ namespace VVRace
             return value;
         }
 
-        public override void PostDestroy(DestroyMode mode, Map previousMap)
+        private bool HasAnyOtherBase(Settlement defeatedFactionBase)
         {
-            Messages.Message(
-                "MessageConditionCauserDespawned".Translate(parent.def.LabelCap), 
-                new TargetInfo(parent.Position, previousMap), 
-                MessageTypeDefOf.NeutralEvent);
+            var settlements = Find.WorldObjects.Settlements;
+            for (int i = 0; i < settlements.Count; i++)
+            {
+                var settlement = settlements[i];
+                if (settlement.Faction == defeatedFactionBase.Faction && settlement != defeatedFactionBase)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }
