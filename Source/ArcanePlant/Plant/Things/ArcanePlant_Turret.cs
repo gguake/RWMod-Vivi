@@ -115,7 +115,7 @@ namespace VVRace
                     {
                         _burstCooldownTicksLeft--;
                     }
-                    if (_burstCooldownTicksLeft <= 0 && this.IsHashIntervalTick(10))
+                    if (_burstCooldownTicksLeft <= 0 && this.IsHashIntervalTick(30))
                     {
                         TryStartShootSomething(canBeginBurstImmediately: true);
                     }
