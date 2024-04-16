@@ -103,6 +103,17 @@ namespace VVRace
                     LocalizeString_Letter.VV_Letter_DreamumAltarThreatActivated.Translate(),
                     LetterDefOf.NeutralEvent,
                     parent);
+
+                MakeViviFactionAlly();
+                MakeNonViviFactionEnemy();
+            }
+
+            if (ProgressPct >= Props.bigThreatActivatePct.TrueMin)
+            {
+                if (parent.IsHashIntervalTick(60000))
+                {
+                    MakeNonViviFactionEnemy();
+                }
             }
 
             if (ProgressPct >= Props.hazeActivatePct)
@@ -266,6 +277,24 @@ namespace VVRace
             }
 
             return false;
+        }
+
+        private void MakeViviFactionAlly()
+        {
+            foreach (var faction in Find.FactionManager.AllFactionsListForReading.Where(v => v.def.allowedCultures != null && v.def.allowedCultures.Contains(VVCultureDefOf.VV_ViviCulture)))
+            {
+                Find.FactionManager.OfPlayer.TryAffectGoodwillWith(faction, 100 - faction.GoodwillWith(Find.FactionManager.OfPlayer));
+            }
+        }
+
+        private void MakeNonViviFactionEnemy()
+        {
+            foreach (var faction in Find.FactionManager.AllFactionsListForReading.Where(v => !v.Hidden && !v.temporary && !v.def.permanentEnemy && !v.defeated))
+            {
+                if (faction.def.allowedCultures != null && faction.def.allowedCultures.Contains(VVCultureDefOf.VV_ViviCulture)) { continue; }
+
+                Find.FactionManager.OfPlayer.TryAffectGoodwillWith(faction, Find.FactionManager.OfPlayer.GoodwillToMakeHostile(faction));
+            }
         }
     }
 }

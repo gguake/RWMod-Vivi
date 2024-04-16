@@ -59,6 +59,11 @@ namespace VVRace
                 severity *= Mathf.Max(1f - p.GetStatValue(StatDefOf.ToxicResistance), 0f);
                 severity *= Mathf.Max(1f - p.GetStatValue(StatDefOf.ToxicEnvironmentResistance), 0f);
 
+                if (p.Position.Roofed(p.Map))
+                {
+                    severity *= 0.5f;
+                }
+
                 severity *= extraFactor;
 
                 if (severity != 0f)
