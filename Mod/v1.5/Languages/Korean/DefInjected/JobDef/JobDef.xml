@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-  <VV_GatherHoney.reportString>TargetA에서 꿀 채집 중.</VV_GatherHoney.reportString>
-  <VV_GatherPollen.reportString>꽃가루 채집 중.</VV_GatherPollen.reportString>
-  <VV_GatherPropolis.reportString>TargetA에서 프로폴리스 채집 중.</VV_GatherPropolis.reportString>
+<VV_GatherHoney.reportString>TargetA에서 꿀 채집 중.</VV_GatherHoney.reportString>
+<VV_GatherPollen.reportString>꽃가루 채집 중.</VV_GatherPollen.reportString>
+<VV_GatherPropolis.reportString>TargetA에서 프로폴리스 채집 중.</VV_GatherPropolis.reportString>
 
-  <VV_LayViviEgg.reportString>알 낳는 중.</VV_LayViviEgg.reportString>
+<VV_LayViviEgg.reportString>알 낳는 중.</VV_LayViviEgg.reportString>
 
-  <VV_FertilizeArcanePlant.reportString>TargetA에 비료를 주는 중.</VV_FertilizeArcanePlant.reportString>
+<VV_FertilizeArcanePlant.reportString>TargetA에 비료를 주는 중.</VV_FertilizeArcanePlant.reportString>
+
+<VV_ManageArcanePlantFarm.reportString>TargetA의 마법 식물을 돌보는 중.</VV_ManageArcanePlantFarm.reportString>
 </LanguageData>

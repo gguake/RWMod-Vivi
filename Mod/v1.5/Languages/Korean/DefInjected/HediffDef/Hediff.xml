@@ -30,4 +30,9 @@
 
   <VV_DreamumTranquilize.label>꿈송이 마취</VV_DreamumTranquilize.label>
   <VV_DreamumTranquilize.description>꿈송이 꽃가루에 중독되어 의식이 흐려지고 있습니다.</VV_DreamumTranquilize.description>
+  <VV_DreamumTranquilize.stages.initial.label>초기</VV_DreamumTranquilize.stages.initial.label>
+  <VV_DreamumTranquilize.stages.minor.label>가벼움</VV_DreamumTranquilize.stages.minor.label>
+  <VV_DreamumTranquilize.stages.moderate.label>진행됨</VV_DreamumTranquilize.stages.moderate.label>
+  <VV_DreamumTranquilize.stages.serious.label>심각함</VV_DreamumTranquilize.stages.serious.label>
+  <VV_DreamumTranquilize.stages.extreme.label>극심함</VV_DreamumTranquilize.stages.extreme.label>
 </LanguageData>

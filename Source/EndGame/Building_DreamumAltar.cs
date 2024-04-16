@@ -58,7 +58,7 @@ namespace VVRace
                 var pct = comp.ProgressPct;
                 for (int i = 0; i < comp.Props.graphicChangeProgressPct.Count; ++i)
                 {
-                    if (pct >= comp.Props.graphicChangeProgressPct[i])
+                    if (pct < comp.Props.graphicChangeProgressPct[i])
                     {
                         break;
                     }
@@ -134,12 +134,12 @@ namespace VVRace
 
             if (_stage == DreamumProjectStage.None)
             {
-                var commandStart = new Command_Action();
-                commandStart.defaultLabel = LocalizeString_Command.VV_Command_StartProgressDreamumVictory.Translate();
-                commandStart.defaultDesc = LocalizeString_Command.VV_Command_StartProgressDreamumVictoryDesc.Translate();
-                commandStart.hotKey = KeyBindingDefOf.Misc1;
-                commandStart.icon = StartCommandTex;
-                commandStart.action = () =>
+                var command_startProgress = new Command_Action();
+                command_startProgress.defaultLabel = LocalizeString_Command.VV_Command_StartProgressDreamumVictory.Translate();
+                command_startProgress.defaultDesc = LocalizeString_Command.VV_Command_StartProgressDreamumVictoryDesc.Translate();
+                command_startProgress.hotKey = KeyBindingDefOf.Misc1;
+                command_startProgress.icon = StartCommandTex;
+                command_startProgress.action = () =>
                 {
                     var diaNode = new DiaNode(LocalizeString_Dialog.VV_DialogStartProgressDreamumVictoryCaution.Translate());
                     diaNode.options.Add(new DiaOption("Confirm".Translate())
@@ -158,19 +158,32 @@ namespace VVRace
                     Find.WindowStack.Add(new Dialog_NodeTree(diaNode, delayInteractivity: true));
                 };
 
-                yield return commandStart;
+                yield return command_startProgress;
+            }
+
+            if (DebugSettings.godMode)
+            {
+                var command_fillMana = new Command_Action();
+                command_fillMana.defaultLabel = "DEV: Fill Mana 100%";
+                command_fillMana.action = () =>
+                {
+                    _manaFluxNode.mana = ManaExtension.manaCapacity;
+                };
+
+                yield return command_fillMana;
             }
         }
 
         public override string GetInspectString()
         {
             var sb = new StringBuilder(base.GetInspectString());
-            if (sb.Length > 0)
+
+            if (Stage >= DreamumProjectStage.InProgress)
             {
-                sb.Append("\n");
+                sb.AppendInNewLine(LocalizeString_Inspector.VV_Inspector_AltarProgress.Translate(CompDreamumTower.ProgressPct.ToStringPercent()));
             }
 
-            sb.Append(LocalizeString_Inspector.VV_Inspector_PlantMana.Translate((int)_manaFluxNode.mana, ManaExtension.manaCapacity));
+            sb.AppendInNewLine(LocalizeString_Inspector.VV_Inspector_PlantMana.Translate((int)_manaFluxNode.mana, ManaExtension.manaCapacity));
 
             if (Spawned)
             {
@@ -183,8 +196,7 @@ namespace VVRace
 
                 if (DebugSettings.godMode && ManaFluxNetwork != null)
                 {
-                    sb.AppendLine();
-                    sb.Append($"flux network: {ManaFluxNetwork.NetworkHash}");
+                    sb.AppendInNewLine($"flux network: {ManaFluxNetwork.NetworkHash}");
                 }
             }
 

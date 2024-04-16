@@ -27,7 +27,7 @@ namespace VVRace
         public override void GameConditionTick()
         {
             List<Map> affectedMaps = base.AffectedMaps;
-            if (Find.TickManager.TicksGame % 3451 == 0)
+            if (Find.TickManager.TicksGame % 4000 == 0)
             {
                 for (int i = 0; i < affectedMaps.Count; i++)
                 {
@@ -55,7 +55,7 @@ namespace VVRace
 
             if (p.Spawned)
             {
-                var severity = 0.023006668f;
+                var severity = 0.035f;
                 severity *= Mathf.Max(1f - p.GetStatValue(StatDefOf.ToxicResistance), 0f);
                 severity *= Mathf.Max(1f - p.GetStatValue(StatDefOf.ToxicEnvironmentResistance), 0f);
 

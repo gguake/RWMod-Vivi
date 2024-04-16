@@ -233,7 +233,7 @@ namespace VVRace
                             }
 
                             var amountInt = (int)amount + (Rand.ChanceSeeded(amount - (int)amount, GenTicks.TicksGame) ? 1 : 0);
-                            var thing = ThingMaker.MakeThing(_bill.RecipeTarget);
+                            var thing = ThingMaker.MakeThing(_bill.RecipeTarget).MakeMinified();
                             thing.stackCount = amountInt;
 
                             if (!GenPlace.TryPlaceThing(thing, Position, Map, ThingPlaceMode.Direct))

@@ -85,6 +85,8 @@ namespace VVRace
                 yield return tag;
             }
 
+            if (!HasMap) { yield break; }
+
             var altar = Altar;
             if (altar != null && altar.ShouldBigThreats)
             {
@@ -95,6 +97,8 @@ namespace VVRace
         public override void DrawExtraSelectionOverlays()
         {
             base.DrawExtraSelectionOverlays();
+
+            if (!HasMap) { return; }
 
             var altar = Altar;
             if (altar != null && altar.ShouldDreamumHaze)

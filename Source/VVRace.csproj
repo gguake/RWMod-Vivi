@@ -135,7 +135,9 @@
     <Compile Include="EndGame\Comps\WorldObjectCompViviRuins.cs" />
     <Compile Include="EndGame\Building_DreamumAltar.cs" />
     <Compile Include="EndGame\GameCondition_DreamumHaze.cs" />
+    <Compile Include="EndGame\HediffComp_ImmunizableDreamum.cs" />
     <Compile Include="EndGame\ManaFluxRule_DreamumAltar.cs" />
+    <Compile Include="EndGame\MoteDreamumTowerAttached.cs" />
     <Compile Include="EndGame\Quest\QuestNode_AddPurgeOutlandersReward.cs" />
     <Compile Include="EndGame\Quest\QuestNode_EndGame_DreamumVictory_FindRuinsTile.cs" />
     <Compile Include="EndGame\Quest\Reward_PurgeOutlanders.cs" />

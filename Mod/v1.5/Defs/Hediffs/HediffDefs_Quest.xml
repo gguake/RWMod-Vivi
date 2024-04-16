@@ -12,15 +12,14 @@
     <initialSeverity>0.001</initialSeverity>
 
     <comps>
-      <li Class="HediffCompProperties_SelfHeal">
-        <healIntervalTicksStanding>2000</healIntervalTicksStanding>
-        <healAmount>0.0067</healAmount>
+      <li Class="HediffCompProperties_Immunizable">
+        <compClass>VVRace.HediffComp_ImmunizableDreamum</compClass>
+        <severityPerDayNotImmune>-0.08</severityPerDayNotImmune>
       </li>
     </comps>
 
     <stages>
       <li>
-        <label>initial</label>
         <becomeVisible>false</becomeVisible>
       </li>
       <li>
@@ -39,7 +38,7 @@
         <capMods>
           <li>
             <capacity>Consciousness</capacity>
-            <offset>-0.2</offset>
+            <offset>-0.15</offset>
           </li>
         </capMods>
       </li>
@@ -49,11 +48,11 @@
         <capMods>
           <li>
             <capacity>Consciousness</capacity>
-            <setMax>0.75</setMax>
+            <setMax>0.7</setMax>
           </li>
           <li>
             <capacity>Consciousness</capacity>
-            <offset>-0.4</offset>
+            <offset>-0.3</offset>
           </li>
         </capMods>
       </li>
@@ -67,7 +66,7 @@
           </li>
           <li>
             <capacity>Consciousness</capacity>
-            <offset>-0.6</offset>
+            <offset>-0.5</offset>
           </li>
         </capMods>
       </li>
@@ -78,7 +77,7 @@
         <capMods>
           <li>
             <capacity>Consciousness</capacity>
-            <setMax>0.25</setMax>
+            <setMax>0.2</setMax>
           </li>
           <li>
             <capacity>Consciousness</capacity>
