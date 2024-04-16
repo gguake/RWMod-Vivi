@@ -20,7 +20,7 @@
 
     <statBases>
       <MarketValue>240</MarketValue>
-      <MaxHitPoints>180</MaxHitPoints>
+      <MaxHitPoints>110</MaxHitPoints>
     </statBases>
 
     <costList>
@@ -101,8 +101,8 @@
           <points>
             <li>(0,0)</li>
             <li>(0.5,0)</li>
-            <li>(0.75,1)</li>
-            <li>(1,2)</li>
+            <li>(0.75,0.75)</li>
+            <li>(1,1.5)</li>
           </points>
         </healthBonusAmountCurve>
         <cleanlinessBonusAmountCurve>
@@ -110,9 +110,10 @@
             <li>(-10,0)</li>
             <li>(-0.0001,0)</li>
             <li>(0,1)</li>
-            <li>(0.2,2)</li>
-            <li>(0.4,3)</li>
-            <li>(0.6,5)</li>
+            <li>(0.2,1.5)</li>
+            <li>(0.4,2.5)</li>
+            <li>(0.6,4.5)</li>
+            <li>(1.0,6)</li>
           </points>
         </cleanlinessBonusAmountCurve>
       </li>
@@ -193,7 +194,7 @@
 
     <statBases>
       <MarketValue>240</MarketValue>
-      <MaxHitPoints>220</MaxHitPoints>
+      <MaxHitPoints>110</MaxHitPoints>
     </statBases>
 
     <costList>
@@ -276,8 +277,8 @@
           <points>
             <li>(0,0)</li>
             <li>(0.5,0)</li>
-            <li>(0.75,1)</li>
-            <li>(1,2)</li>
+            <li>(0.75,0.75)</li>
+            <li>(1,1.5)</li>
           </points>
         </healthBonusAmountCurve>
         <cleanlinessBonusAmountCurve>
@@ -285,9 +286,10 @@
             <li>(-10,0)</li>
             <li>(-0.0001,0)</li>
             <li>(0,1)</li>
-            <li>(0.2,2)</li>
-            <li>(0.4,3)</li>
-            <li>(0.6,5)</li>
+            <li>(0.2,1.5)</li>
+            <li>(0.4,2.5)</li>
+            <li>(0.6,4.5)</li>
+            <li>(1.0,6)</li>
           </points>
         </cleanlinessBonusAmountCurve>
       </li>
@@ -375,7 +377,7 @@
 
     <statBases>
       <MarketValue>320</MarketValue>
-      <MaxHitPoints>160</MaxHitPoints>
+      <MaxHitPoints>180</MaxHitPoints>
     </statBases>
 
     <damageMultipliers Inherit="False">
@@ -500,8 +502,8 @@
           <points>
             <li>(0,0)</li>
             <li>(0.5,0)</li>
-            <li>(0.75,1)</li>
-            <li>(1,2)</li>
+            <li>(0.75,0.75)</li>
+            <li>(1,1.5)</li>
           </points>
         </healthBonusAmountCurve>
         <cleanlinessBonusAmountCurve>
@@ -509,9 +511,10 @@
             <li>(-10,0)</li>
             <li>(-0.0001,0)</li>
             <li>(0,1)</li>
-            <li>(0.2,2)</li>
-            <li>(0.4,3)</li>
-            <li>(0.6,5)</li>
+            <li>(0.2,1.5)</li>
+            <li>(0.4,2.5)</li>
+            <li>(0.6,4.5)</li>
+            <li>(1.0,6)</li>
           </points>
         </cleanlinessBonusAmountCurve>
       </li>

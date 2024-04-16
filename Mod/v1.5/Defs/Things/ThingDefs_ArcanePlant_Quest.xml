@@ -13,8 +13,8 @@
     </graphicData>
 
     <statBases>
-      <MarketValue>500</MarketValue>
-      <MaxHitPoints>200</MaxHitPoints>
+      <MarketValue>400</MarketValue>
+      <MaxHitPoints>80</MaxHitPoints>
       <Beauty>18</Beauty>
       <BeautyOutdoors>18</BeautyOutdoors>
     </statBases>

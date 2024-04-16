@@ -9,7 +9,7 @@ namespace VVRace
         public List<ThingDefCountClass> ingredients;
 
         public float totalGrowDays = 5;
-        public float baseAmount = 3;
+        public float baseAmount = 2.5f;
 
         public int maxHealth = 100;
         public int maxMana = 200;
