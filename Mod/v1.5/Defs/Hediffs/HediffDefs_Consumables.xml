@@ -29,6 +29,7 @@
     <stages>
       <li>
         <makeImmuneTo>
+          <li>HeartAttack</li>
           <li>BadBack</li>
           <li>Frail</li>
           <li>Dementia</li>

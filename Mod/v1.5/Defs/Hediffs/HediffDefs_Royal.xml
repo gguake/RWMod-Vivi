@@ -18,6 +18,10 @@
 
     <stages>
       <li>
+        <makeImmuneTo>
+          <li>HeartAttack</li>
+        </makeImmuneTo>
+
         <hungerRateFactorOffset>0.25</hungerRateFactorOffset>
         <statOffsets>
           <WorkSpeedGlobal>-0.6</WorkSpeedGlobal>
@@ -29,7 +33,7 @@
           <PsychicEntropyRecoveryRate>0.2</PsychicEntropyRecoveryRate>
         </statOffsets>
         <statFactors>
-          <LifespanFactor>11</LifespanFactor>
+          <LifespanFactor>20</LifespanFactor>
         </statFactors>
       </li>
     </stages>
