@@ -396,4 +396,87 @@
       </outcomeDoers>
     </ingestible>
   </ThingDef>
+
+  <!-- 전투 호르몬 젤리 -->
+  <ThingDef ParentName="MakeableDrugPillBase">
+    <defName>VV_CombatHormoneJelly</defName>
+    <label>vivi combat hormone jelly</label>
+    <description>.</description>
+    <descriptionHyperlinks>
+      <HediffDef>VV_CombatHormoneJelly</HediffDef>
+      <HediffDef>AlcoholHigh</HediffDef>
+      <HediffDef>AlcoholTolerance</HediffDef>
+      <HediffDef>Hangover</HediffDef>
+      <HediffDef>AlcoholAddiction</HediffDef>
+      <HediffDef>Cirrhosis</HediffDef>
+      <HediffDef>ChemicalDamageModerate</HediffDef>
+    </descriptionHyperlinks>
+
+    <graphicData>
+      <texPath>Things/Item/VV_HormoneJelly</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>1.0</drawSize>
+    </graphicData>
+    <rotatable>false</rotatable>
+    <stackLimit>25</stackLimit>
+    <statBases>
+      <Mass>0.1</Mass>
+      <DeteriorationRate>1.0</DeteriorationRate>
+      <Flammability>0.7</Flammability>
+    </statBases>
+
+    <techLevel>Medieval</techLevel>
+    <ingestible>
+      <foodType>Fluid, Processed, Liquor</foodType>
+      <joyKind>Chemical</joyKind>
+      <joy>0.1</joy>
+      <drugCategory>Hard</drugCategory>
+      <outcomeDoers>
+        <li Class="IngestionOutcomeDoer_GiveHediff">
+          <hediffDef>VV_CombatHormoneJelly</hediffDef>
+          <severity>0.5</severity>
+        </li>
+        <li Class="IngestionOutcomeDoer_GiveHediff">
+          <hediffDef>AlcoholHigh</hediffDef>
+          <severity>0.36</severity>
+          <toleranceChemical>Alcohol</toleranceChemical>
+        </li>
+        <li Class="IngestionOutcomeDoer_GiveHediff">
+          <hediffDef>AlcoholTolerance</hediffDef>
+          <severity>0.025</severity>
+          <divideByBodySize>true</divideByBodySize>
+          <multiplyByGeneToleranceFactors>true</multiplyByGeneToleranceFactors>
+        </li>
+      </outcomeDoers>
+    </ingestible>
+
+    <recipeMaker>
+      <researchPrerequisite>VV_AdvancedGathering</researchPrerequisite>
+      <recipeUsers>
+        <li>DrugLab</li>
+      </recipeUsers>
+      <displayPriority>3000</displayPriority>
+    </recipeMaker>
+    <costList>
+      <VV_Mead>1</VV_Mead>
+      <VV_Propolis>3</VV_Propolis>
+      <VV_Pollen>40</VV_Pollen>
+    </costList>
+    
+    <comps>
+      <li Class="CompProperties_Drug">
+        <chemical>Alcohol</chemical>
+        <addictiveness>0.1</addictiveness>
+        <minToleranceToAddict>0.25</minToleranceToAddict>
+        <existingAddictionSeverityOffset>0.20</existingAddictionSeverityOffset>
+        <needLevelOffset>0.9</needLevelOffset>
+        <listOrder>10</listOrder>
+      </li>
+    </comps>
+    <allowedArchonexusCount>50</allowedArchonexusCount>
+    
+    <tradeTags>
+      <li>VV_ViviProduct</li>
+    </tradeTags>
+  </ThingDef>
 </Defs>

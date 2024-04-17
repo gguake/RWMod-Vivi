@@ -153,6 +153,8 @@ namespace VVRace
         public static HediffDef VV_HoneyNeed;
         public static HediffDef VV_DreamumTranquilize;
 
+        public static HediffDef VV_CombatHormoneJelly;
+
         public static HediffDef Flu;
         public static HediffDef Malaria;
     }

@@ -47,6 +47,10 @@ namespace VVRace.HarmonyPatches
                 original: AccessTools.Method(typeof(MentalStateWorker), nameof(MentalStateWorker.StateCanOccur)),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(MentalStateWorker_StateCanOccur_Postfix)));
 
+            harmony.Patch(
+                original: AccessTools.Method(typeof(ThoughtWorker_Pyrophobia), nameof(ThoughtWorker_Pyrophobia.NearFire)),
+                prefix: new HarmonyMethod(typeof(ViviRacePatch), nameof(ThoughtWorker_Pyrophobia_NearFire_Prefix)));
+
             Log.Message("!! [ViViRace] race patch complete");
         }
 
@@ -148,6 +152,17 @@ namespace VVRace.HarmonyPatches
                     }
                 }
             }
+        }
+
+        private static bool ThoughtWorker_Pyrophobia_NearFire_Prefix(ref bool __result, Pawn p)
+        {
+            if (p.MapHeld != null && p.IsVivi() && p.health?.hediffSet != null && p.health.hediffSet.HasHediff(VVHediffDefOf.VV_CombatHormoneJelly))
+            {
+                __result = false;
+                return false;
+            }
+
+            return true;
         }
     }
 }
