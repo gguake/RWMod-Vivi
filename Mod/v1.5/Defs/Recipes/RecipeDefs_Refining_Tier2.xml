@@ -66,10 +66,10 @@
   <RecipeDef>
     <defName>VV_ExtractBulkHoney</defName>
     <label>extract bulk honey</label>
-    <description>Extract pure honey from a large amount of Vivi honey. It is faster and more efficient than manual labor, allowing for the separation and extraction of honey and pollen.</description>
+    <description>Extract pure honey from a large amount of Vivi honey.</description>
 
     <jobString>extrating honey.</jobString>
-    <workAmount>500</workAmount>
+    <workAmount>400</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
 
     <effectWorking>Cremate</effectWorking>
@@ -84,7 +84,7 @@
             <li>VV_RawHoney</li>
           </thingDefs>
         </filter>
-        <count>30</count>
+        <count>75</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
@@ -93,8 +93,7 @@
       </thingDefs>
     </fixedIngredientFilter>
     <products>
-      <VV_FilteredHoney>20</VV_FilteredHoney>
-      <VV_Pollen>10</VV_Pollen>
+      <VV_FilteredHoney>35</VV_FilteredHoney>
     </products>
   </RecipeDef>
 
@@ -125,12 +124,12 @@
     </ingredients>
     <fixedIngredientFilter>
       <thingDefs>
-        <li>VV_RawHoney</li>
+        <li>VV_Propolis</li>
       </thingDefs>
     </fixedIngredientFilter>
     <products>
-      <MedicineHerbal>5</MedicineHerbal>
-      <Neutroamine>12</Neutroamine>
+      <MedicineHerbal>6</MedicineHerbal>
+      <Neutroamine>6</Neutroamine>
     </products>
   </RecipeDef>
 
@@ -140,7 +139,7 @@
     <label>make fertilizer from seeds</label>
     <description>Extract mana components from a large amount of unknown seeds to make fertilizers.</description>
     <jobString>making fertilizer from seeds.</jobString>
-    <workAmount>2000</workAmount>
+    <workAmount>1600</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
 
     <effectWorking>Cremate</effectWorking>
@@ -155,16 +154,25 @@
             <li>VV_UnknownSeed</li>
           </thingDefs>
         </filter>
-        <count>25</count>
+        <count>10</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_Pollen</li>
+          </thingDefs>
+        </filter>
+        <count>150</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
       <thingDefs>
-        <li>VV_RawHoney</li>
+        <li>VV_UnknownSeed</li>
+        <li>VV_Pollen</li>
       </thingDefs>
     </fixedIngredientFilter>
     <products>
-      <VV_Fertilizer>25</VV_Fertilizer>
+      <VV_Fertilizer>50</VV_Fertilizer>
     </products>
   </RecipeDef>
 </Defs>

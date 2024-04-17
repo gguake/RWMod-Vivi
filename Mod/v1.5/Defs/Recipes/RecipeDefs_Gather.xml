@@ -9,7 +9,7 @@
     
     <workAmount>1400</workAmount>
     <workSkill>Plants</workSkill>
-    <workSkillLearnFactor>0.1</workSkillLearnFactor>
+    <workSkillLearnFactor>0.05</workSkillLearnFactor>
     <workSpeedStat>VV_HoneyGatherSpeed</workSpeedStat>
     <efficiencyStat>VV_HoneyGatherYield</efficiencyStat>
 
@@ -49,9 +49,9 @@
 
     <jobString>Gathering pollen.</jobString>
     
-    <workAmount>400</workAmount>
+    <workAmount>700</workAmount>
     <workSkill>Plants</workSkill>
-    <workSkillLearnFactor>0.1</workSkillLearnFactor>
+    <workSkillLearnFactor>0.01</workSkillLearnFactor>
     <workSpeedStat>CleaningSpeed</workSpeedStat>
     <efficiencyStat>PlantHarvestYield</efficiencyStat>
 
@@ -81,7 +81,7 @@
     </fixedIngredientFilter>
 
     <products>
-      <VV_Pollen>9</VV_Pollen>
+      <VV_Pollen>8</VV_Pollen>
     </products>
     <researchPrerequisite>VV_BasicGathering</researchPrerequisite>
 
@@ -103,7 +103,7 @@
     <workSkill>Plants</workSkill>
     <workSpeedStat>VV_PlantGatherSpeed</workSpeedStat>
     <efficiencyStat>VV_PlantGatherYield</efficiencyStat>
-    <workSkillLearnFactor>0.25</workSkillLearnFactor>
+    <workSkillLearnFactor>0.2</workSkillLearnFactor>
 
     <effectWorking>Clean</effectWorking>
     <soundWorking>Interact_CleanFilth</soundWorking>

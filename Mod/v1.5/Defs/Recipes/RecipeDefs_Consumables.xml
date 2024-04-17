@@ -6,7 +6,7 @@
     <label>make honey pollen cake</label>
     <description>Make honey pollen cake.</description>
     <jobString>Making honey pollen cake.</jobString>
-    <workAmount>450</workAmount>
+    <workAmount>400</workAmount>
     <workSpeedStat>CookSpeed</workSpeedStat>
     <requiredGiverWorkType>Cooking</requiredGiverWorkType>
     <effectWorking>Cook</effectWorking>
@@ -27,7 +27,7 @@
             <li>VV_Pollen</li>
           </thingDefs>
         </filter>
-        <count>10</count>
+        <count>15</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
@@ -55,7 +55,7 @@
     <label>make honey pollen cake x4</label>
     <description>Make bulk honey pollen cake.</description>
     <jobString>Making bulk honey pollen cake.</jobString>
-    <workAmount>1800</workAmount>
+    <workAmount>1600</workAmount>
     <workSpeedStat>CookSpeed</workSpeedStat>
     <requiredGiverWorkType>Cooking</requiredGiverWorkType>
     <effectWorking>Cook</effectWorking>
@@ -76,7 +76,7 @@
             <li>VV_Pollen</li>
           </thingDefs>
         </filter>
-        <count>40</count>
+        <count>60</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
@@ -118,7 +118,7 @@
             <li>VV_Vivicream</li>
           </thingDefs>
         </filter>
-        <count>30</count>
+        <count>20</count>
       </li>
       <li>
         <filter>
@@ -126,7 +126,7 @@
             <li>VV_Pollen</li>
           </thingDefs>
         </filter>
-        <count>20</count>
+        <count>50</count>
       </li>
       <li>
         <filter>
@@ -181,7 +181,15 @@
             <li>VV_HeatingPetal</li>
           </thingDefs>
         </filter>
-        <count>3</count>
+        <count>2</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_Pollen</li>
+          </thingDefs>
+        </filter>
+        <count>10</count>
       </li>
       <li>
         <filter>
@@ -196,12 +204,14 @@
       <thingDefs>
         <li>VV_HeatingPetal</li>
         <li>VV_FilteredHoney</li>
+        <li>VV_Pollen</li>
       </thingDefs>
     </fixedIngredientFilter>
     <defaultIngredientFilter>
       <thingDefs>
         <li>VV_HeatingPetal</li>
         <li>VV_FilteredHoney</li>
+        <li>VV_Pollen</li>
       </thingDefs>
     </defaultIngredientFilter>
     <products>
@@ -234,7 +244,15 @@
             <li>VV_CoolingPetal</li>
           </thingDefs>
         </filter>
-        <count>3</count>
+        <count>2</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_Pollen</li>
+          </thingDefs>
+        </filter>
+        <count>10</count>
       </li>
       <li>
         <filter>
@@ -249,12 +267,14 @@
       <thingDefs>
         <li>VV_CoolingPetal</li>
         <li>VV_FilteredHoney</li>
+        <li>VV_Pollen</li>
       </thingDefs>
     </fixedIngredientFilter>
     <defaultIngredientFilter>
       <thingDefs>
         <li>VV_CoolingPetal</li>
         <li>VV_FilteredHoney</li>
+        <li>VV_Pollen</li>
       </thingDefs>
     </defaultIngredientFilter>
     <products>
@@ -287,7 +307,15 @@
             <li>VV_PerfumingPetal</li>
           </thingDefs>
         </filter>
-        <count>3</count>
+        <count>2</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_Pollen</li>
+          </thingDefs>
+        </filter>
+        <count>10</count>
       </li>
       <li>
         <filter>
@@ -302,12 +330,14 @@
       <thingDefs>
         <li>VV_PerfumingPetal</li>
         <li>Milk</li>
+        <li>VV_Pollen</li>
       </thingDefs>
     </fixedIngredientFilter>
     <defaultIngredientFilter>
       <thingDefs>
         <li>VV_PerfumingPetal</li>
         <li>Milk</li>
+        <li>VV_Pollen</li>
       </thingDefs>
     </defaultIngredientFilter>
     <products>

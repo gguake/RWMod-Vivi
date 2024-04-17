@@ -79,7 +79,7 @@
         <ingredients>
           <VV_UnknownSeed>1</VV_UnknownSeed>
           <VV_Fertilizer>20</VV_Fertilizer>
-          <VV_Pollen>50</VV_Pollen>
+          <VV_Pollen>100</VV_Pollen>
         </ingredients>
 
         <totalGrowDays>7.5</totalGrowDays>
@@ -202,7 +202,7 @@
         <ingredients>
           <VV_UnknownSeed>1</VV_UnknownSeed>
           <VV_Fertilizer>20</VV_Fertilizer>
-          <VV_Pollen>50</VV_Pollen>
+          <VV_Pollen>100</VV_Pollen>
         </ingredients>
 
         <totalGrowDays>7.5</totalGrowDays>
@@ -348,7 +348,7 @@
         <ingredients>
           <VV_UnknownSeed>1</VV_UnknownSeed>
           <Silver>120</Silver>
-          <VV_Pollen>50</VV_Pollen>
+          <VV_Pollen>100</VV_Pollen>
         </ingredients>
 
         <totalGrowDays>10</totalGrowDays>
@@ -476,7 +476,7 @@
         <ingredients>
           <VV_UnknownSeed>1</VV_UnknownSeed>
           <Gold>10</Gold>
-          <VV_Pollen>50</VV_Pollen>
+          <VV_Pollen>100</VV_Pollen>
         </ingredients>
 
         <totalGrowDays>10</totalGrowDays>
@@ -606,7 +606,7 @@
         <ingredients>
           <VV_UnknownSeed>1</VV_UnknownSeed>
           <VV_Vivicream>100</VV_Vivicream>
-          <VV_Pollen>50</VV_Pollen>
+          <VV_Pollen>100</VV_Pollen>
         </ingredients>
 
         <totalGrowDays>15</totalGrowDays>
@@ -735,7 +735,7 @@
         <ingredients>
           <VV_UnknownSeed>1</VV_UnknownSeed>
           <Hay>120</Hay>
-          <VV_Pollen>50</VV_Pollen>
+          <VV_Pollen>100</VV_Pollen>
         </ingredients>
 
         <totalGrowDays>15</totalGrowDays>
@@ -864,7 +864,7 @@
         <ingredients>
           <VV_UnknownSeed>1</VV_UnknownSeed>
           <VV_Fertilizer>20</VV_Fertilizer>
-          <VV_Pollen>50</VV_Pollen>
+          <VV_Pollen>100</VV_Pollen>
         </ingredients>
 
         <totalGrowDays>10</totalGrowDays>
@@ -988,7 +988,7 @@
         <ingredients>
           <VV_UnknownSeed>1</VV_UnknownSeed>
           <Neutroamine>15</Neutroamine>
-          <VV_Pollen>50</VV_Pollen>
+          <VV_Pollen>100</VV_Pollen>
         </ingredients>
 
         <totalGrowDays>25</totalGrowDays>
@@ -1132,7 +1132,7 @@
         <ingredients>
           <VV_UnknownSeed>1</VV_UnknownSeed>
           <VV_Fertilizer>20</VV_Fertilizer>
-          <VV_Pollen>50</VV_Pollen>
+          <VV_Pollen>100</VV_Pollen>
         </ingredients>
 
         <totalGrowDays>5</totalGrowDays>

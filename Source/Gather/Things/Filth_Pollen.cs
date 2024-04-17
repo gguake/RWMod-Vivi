@@ -43,7 +43,7 @@ namespace VVRace
             if (!Spawned) { return; }
 
             // 만약 자연적으로 소멸했다면 낮은 확률로 식물을 복제한다.
-            if (sources != null && DisappearAfterTicks != 0 && TicksSinceThickened > DisappearAfterTicks && Rand.Chance(0.3f))
+            if (sources != null && DisappearAfterTicks != 0 && TicksSinceThickened > DisappearAfterTicks && Rand.Chance(0.01f))
             {
                 var plantDefs = DefDatabase<ThingDef>.AllDefsListForReading.Where(v => sources.Contains(v.defName) && v.CanEverPlantAt(Position, Map)).ToList();
                 if (plantDefs.Count > 0)

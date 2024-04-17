@@ -83,10 +83,10 @@
     <description>Filter the Vivi honey by removing impurities to create pure honey.</description>
 
     <jobString>filtering honey.</jobString>
-    <workAmount>500</workAmount>
+    <workAmount>600</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <workSkill>Crafting</workSkill>
-    <workSkillLearnFactor>0.05</workSkillLearnFactor>
+    <workSkillLearnFactor>0.01</workSkillLearnFactor>
 
     <effectWorking>Cook</effectWorking>
     <soundWorking>Recipe_Brewing</soundWorking>
@@ -110,7 +110,6 @@
     </fixedIngredientFilter>
     <products>
       <VV_FilteredHoney>10</VV_FilteredHoney>
-      <VV_Pollen>2</VV_Pollen>
     </products>
     <researchPrerequisite>VV_BasicInfra</researchPrerequisite>
   </RecipeDef>
@@ -125,7 +124,7 @@
     <workAmount>1800</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <workSkill>Crafting</workSkill>
-    <workSkillLearnFactor>0.5</workSkillLearnFactor>
+    <workSkillLearnFactor>0.1</workSkillLearnFactor>
 
     <effectWorking>Cook</effectWorking>
     <soundWorking>Recipe_Brewing</soundWorking>
@@ -148,7 +147,7 @@
     </fixedIngredientFilter>
     <products>
       <MedicineHerbal>1</MedicineHerbal>
-      <Neutroamine>2</Neutroamine>
+      <Neutroamine>1</Neutroamine>
     </products>
   </RecipeDef>
 
@@ -161,7 +160,7 @@
     <workAmount>500</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <workSkill>Plants</workSkill>
-    <workSkillLearnFactor>0.1</workSkillLearnFactor>
+    <workSkillLearnFactor>0.05</workSkillLearnFactor>
 
     <effectWorking>Cook</effectWorking>
     <soundWorking>Recipe_Brewing</soundWorking>
@@ -182,7 +181,7 @@
             <li>VV_Pollen</li>
           </thingDefs>
         </filter>
-        <count>10</count>
+        <count>75</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
@@ -212,7 +211,7 @@
     </defaultIngredientFilter>
     
     <products>
-      <VV_Fertilizer>25</VV_Fertilizer>
+      <VV_Fertilizer>20</VV_Fertilizer>
     </products>
   </RecipeDef>
   
@@ -225,7 +224,7 @@
     <workAmount>2000</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <workSkill>Plants</workSkill>
-    <workSkillLearnFactor>0.1</workSkillLearnFactor>
+    <workSkillLearnFactor>0.05</workSkillLearnFactor>
 
     <effectWorking>Cook</effectWorking>
     <soundWorking>Recipe_Brewing</soundWorking>
@@ -254,7 +253,7 @@
             <li>VV_Pollen</li>
           </thingDefs>
         </filter>
-        <count>0.5</count>
+        <count>1.5</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
@@ -283,7 +282,7 @@
     </defaultIngredientFilter>
     
     <products>
-      <VV_Fertilizer>25</VV_Fertilizer>
+      <VV_Fertilizer>20</VV_Fertilizer>
     </products>
   </RecipeDef>
 </Defs>

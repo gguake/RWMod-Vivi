@@ -24,11 +24,12 @@
     
     <useHitPoints>true</useHitPoints>
     <statBases>
-      <Mass>0.005</Mass>
-      <MarketValue>0.4</MarketValue>
+      <Mass>0.001</Mass>
+      <MarketValue>0.1</MarketValue>
       <MaxHitPoints>30</MaxHitPoints>
       <Flammability>1.0</Flammability>
       <Nutrition>0.02</Nutrition>
+      <DeteriorationRate>8</DeteriorationRate>
       <FoodPoisonChanceFixedHuman>0.5</FoodPoisonChanceFixedHuman>
     </statBases>
     <stackLimit>100</stackLimit>
@@ -459,8 +460,8 @@
     </recipeMaker>
     <costList>
       <VV_Mead>1</VV_Mead>
-      <VV_Propolis>3</VV_Propolis>
-      <VV_Pollen>40</VV_Pollen>
+      <VV_Propolis>5</VV_Propolis>
+      <VV_Pollen>100</VV_Pollen>
     </costList>
     
     <comps>

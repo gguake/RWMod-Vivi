@@ -69,7 +69,7 @@
         <ingredients>
           <VV_UnknownSeed>1</VV_UnknownSeed>
           <MedicineHerbal>10</MedicineHerbal>
-          <VV_Pollen>50</VV_Pollen>
+          <VV_Pollen>100</VV_Pollen>
         </ingredients>
 
         <totalGrowDays>15</totalGrowDays>
@@ -245,7 +245,7 @@
           <VV_UnknownSeed>1</VV_UnknownSeed>
           <MedicineHerbal>5</MedicineHerbal>
           <Chemfuel>30</Chemfuel>
-          <VV_Pollen>50</VV_Pollen>
+          <VV_Pollen>100</VV_Pollen>
         </ingredients>
 
         <totalGrowDays>15</totalGrowDays>
@@ -472,7 +472,7 @@
         <ingredients>
           <VV_UnknownSeed>1</VV_UnknownSeed>
           <VV_RoyalJelly>5</VV_RoyalJelly>
-          <VV_Pollen>50</VV_Pollen>
+          <VV_Pollen>100</VV_Pollen>
         </ingredients>
 
         <totalGrowDays>20</totalGrowDays>

@@ -228,7 +228,7 @@
       <texPath>Things/Item/Equipment/VV_NeedleProjectile</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <drawSize>1.5</drawSize>
-      <shaderType>MotePawnBodyGlow</shaderType>
+      <shaderType>MoteGlow</shaderType>
     </graphicData>
 
     <projectile Class="VVRace.NeedleProperties">

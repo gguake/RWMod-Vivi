@@ -16,9 +16,9 @@
     </graphicData>
     <filth>
       <ignoreFilthMultiplierStat>true</ignoreFilthMultiplierStat>
-      <disappearsInDays>0.5~1.5</disappearsInDays>
+      <disappearsInDays>0.1~0.3</disappearsInDays>
       <rainWashes>true</rainWashes>
-      <cleaningWorkToReduceThickness>200</cleaningWorkToReduceThickness>
+      <cleaningWorkToReduceThickness>350</cleaningWorkToReduceThickness>
       <canFilthAttach>true</canFilthAttach>
       <cleaningSound>Interact_CleanFilth_Dirt</cleaningSound>
     </filth>
