@@ -143,4 +143,27 @@
       <MarketValue>8</MarketValue>
     </statBases>
   </ThingDef>
+  
+  <ThingDef ParentName="VV_PetalBase">
+    <defName>VV_SkyweedFluff</defName>
+    <label>skyweed fluff</label>
+    <description>.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_Skyweed</ThingDef>
+    </descriptionHyperlinks>
+
+    <graphicData>
+      <texPath>Things/Item/VV_LivingLeaf</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <color>(255,255,255)</color>
+    </graphicData>
+
+    <statBases>
+      <Mass>0.001</Mass>
+      <MarketValue>8</MarketValue>
+    </statBases>
+    
+    <tradeTags Inherit="False">
+    </tradeTags>
+  </ThingDef>
 </Defs>

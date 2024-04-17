@@ -24,7 +24,7 @@
     </statBases>
 
     <costList>
-      <VV_LivingLeaf>20</VV_LivingLeaf>
+      <VV_LivingLeaf>15</VV_LivingLeaf>
     </costList>
 
     <comps>
@@ -198,7 +198,7 @@
     </statBases>
 
     <costList>
-      <VV_LivingLeaf>20</VV_LivingLeaf>
+      <VV_LivingLeaf>15</VV_LivingLeaf>
     </costList>
 
     <comps>

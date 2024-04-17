@@ -430,7 +430,7 @@
     <ingestible>
       <foodType>Fluid, Processed, Liquor</foodType>
       <joyKind>Chemical</joyKind>
-      <joy>0.1</joy>
+      <joy>0.3</joy>
       <drugCategory>Hard</drugCategory>
       <outcomeDoers>
         <li Class="IngestionOutcomeDoer_GiveHediff">
@@ -439,7 +439,7 @@
         </li>
         <li Class="IngestionOutcomeDoer_GiveHediff">
           <hediffDef>AlcoholHigh</hediffDef>
-          <severity>0.36</severity>
+          <severity>0.38</severity>
           <toleranceChemical>Alcohol</toleranceChemical>
         </li>
         <li Class="IngestionOutcomeDoer_GiveHediff">
@@ -461,7 +461,7 @@
     <costList>
       <VV_Mead>1</VV_Mead>
       <VV_Propolis>5</VV_Propolis>
-      <VV_Pollen>100</VV_Pollen>
+      <VV_Pollen>50</VV_Pollen>
     </costList>
     
     <comps>

@@ -19,4 +19,8 @@
 <VV_LivingLeaf.label>살아있는 잎</VV_LivingLeaf.label>
 <VV_LivingLeaf.description>마법 식물을 분해해 얻은 잎입니다. 마치 살아있는것처럼 주변의 자극과 마나에 활발하게 반응합니다.
 \n굉장히 튼튼하고 손상을 스스로 복구하는 성질이 있으며 주로 생체 가닥을 직조하는데 사용됩니다.</VV_LivingLeaf.description>
+
+<VV_SkyweedFluff.label>하늘풀 홀씨</VV_SkyweedFluff.label>
+<VV_SkyweedFluff.description>하늘풀을 분해해 얻은 홀씨입니다. 매우 가벼우며 남아있는 마나에 의해 공중에 뜨는 성질이 있어 홀씨를 묶어 물건을 하늘로 날려보낼수 있습니다.</VV_SkyweedFluff.description>
+
 </LanguageData>
