@@ -147,14 +147,14 @@
   <ThingDef ParentName="VV_PetalBase">
     <defName>VV_SkyweedFluff</defName>
     <label>skyweed fluff</label>
-    <description>.</description>
+    <description>These are fluff obtained from disassembling skyweed. They are very light and have properties that allow them to float in the air due to the remaining mana. By tying the fluff together, objects can be sent flying into the sky.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_Skyweed</ThingDef>
     </descriptionHyperlinks>
 
     <graphicData>
-      <texPath>Things/Item/VV_LivingLeaf</texPath>
-      <graphicClass>Graphic_StackCount</graphicClass>
+      <texPath>Things/Item/VV_SkyweedFluff</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
       <color>(255,255,255)</color>
     </graphicData>
 

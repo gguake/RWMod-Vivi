@@ -22,7 +22,7 @@
       </li>
       <li Class="HediffCompProperties_ChangeNeed">
         <needDef>VV_RoyalJelly</needDef>
-        <percentPerDay>0.025</percentPerDay>
+        <percentPerDay>0.033</percentPerDay>
       </li>
     </comps>
 
@@ -198,7 +198,7 @@
   <HediffDef>
     <defName>VV_CombatHormoneJelly</defName>
     <label>combat hormone</label>
-    <description>.</description>
+    <description>It is in a state where combat hormones that greatly enhance the Vivi's inherent aggressiveness have been injected. Combat-related abilities are enhanced, and sensitivity to pain is reduced; they do not panic at the sight of fire, but they tire very quickly and become hungry.</description>
     <hediffClass>HediffWithComps</hediffClass>
     <defaultLabelColor>(1,0,0.5)</defaultLabelColor>
     
@@ -209,28 +209,28 @@
 
     <stages>
       <li>
-        <painFactor>0.75</painFactor>
+        <painFactor>0.8</painFactor>
         <capMods>
           <li>
             <capacity>Sight</capacity>
-            <offset>0.5</offset>
+            <offset>0.35</offset>
           </li>
           <li>
             <capacity>Moving</capacity>
-            <offset>0.5</offset>
+            <offset>0.35</offset>
           </li>
         </capMods>
         <statOffsets>
-          <RestFallRateFactor>0.5</RestFallRateFactor>
+          <RestFallRateFactor>1.0</RestFallRateFactor>
         </statOffsets>
-        <hungerRateFactorOffset>0.5</hungerRateFactorOffset>
-        <socialFightChanceFactor>5</socialFightChanceFactor>
+        <hungerRateFactorOffset>1.0</hungerRateFactorOffset>
+        <socialFightChanceFactor>5.0</socialFightChanceFactor>
       </li>
     </stages>
 
     <aptitudes>
-      <Shooting>12</Shooting>
-      <Melee>12</Melee>
+      <Shooting>8</Shooting>
+      <Melee>8</Melee>
     </aptitudes>
 
     <comps>

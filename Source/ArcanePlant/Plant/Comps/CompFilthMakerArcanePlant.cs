@@ -46,8 +46,6 @@ namespace VVRace
         private List<IntVec3> _tmpCellCandidates = new List<IntVec3>();
         public override void CompTick()
         {
-            base.CompTick();
-
             if (GenTicks.TicksGame >= _nextRefreshTick)
             {
                 if (parent.Spawned && parent is ArcanePlant arcanePlant && arcanePlant.ManaChargeRatio > 0f)

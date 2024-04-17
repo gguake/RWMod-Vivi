@@ -181,7 +181,7 @@
             <li>VV_Pollen</li>
           </thingDefs>
         </filter>
-        <count>75</count>
+        <count>50</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
@@ -253,7 +253,7 @@
             <li>VV_Pollen</li>
           </thingDefs>
         </filter>
-        <count>1.5</count>
+        <count>1.0</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>

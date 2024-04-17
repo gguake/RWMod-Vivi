@@ -188,6 +188,50 @@
     <designationCategory Inherit="False" />
     <damageMultipliers Inherit="False">
       <li>
+        <damageDef>Cut</damageDef>
+        <multiplier>0.25</multiplier>
+      </li>
+      <li>
+        <damageDef>Crush</damageDef>
+        <multiplier>0.25</multiplier>
+      </li>
+      <li>
+        <damageDef>Blunt</damageDef>
+        <multiplier>0.25</multiplier>
+      </li>
+      <li>
+        <damageDef>Poke</damageDef>
+        <multiplier>0.25</multiplier>
+      </li>
+      <li>
+        <damageDef>Demolish</damageDef>
+        <multiplier>0.25</multiplier>
+      </li>
+      <li>
+        <damageDef>Stab</damageDef>
+        <multiplier>0.25</multiplier>
+      </li>
+      <li>
+        <damageDef>Scratch</damageDef>
+        <multiplier>0.25</multiplier>
+      </li>
+      <li>
+        <damageDef>ScratchToxic</damageDef>
+        <multiplier>0.25</multiplier>
+      </li>
+      <li>
+        <damageDef>Bite</damageDef>
+        <multiplier>0.25</multiplier>
+      </li>
+      <li>
+        <damageDef>ToxicBite</damageDef>
+        <multiplier>0.25</multiplier>
+      </li>
+      <li>
+        <damageDef>RangedStab</damageDef>
+        <multiplier>0.25</multiplier>
+      </li>
+      <li>
         <damageDef>Bullet</damageDef>
         <multiplier>0.25</multiplier>
       </li>
@@ -196,12 +240,16 @@
         <multiplier>0.25</multiplier>
       </li>
       <li>
-        <damageDef>Demolish</damageDef>
+        <damageDef>ArrowHighVelocity</damageDef>
         <multiplier>0.25</multiplier>
       </li>
       <li>
         <damageDef>Bomb</damageDef>
-        <multiplier>0.25</multiplier>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>BombSuper</damageDef>
+        <multiplier>0.5</multiplier>
       </li>
       <li>
         <damageDef>Thump</damageDef>
@@ -213,7 +261,11 @@
       </li>
       <li>
         <damageDef>Flame</damageDef>
-        <multiplier>6</multiplier>
+        <multiplier>8</multiplier>
+      </li>
+      <li>
+        <damageDef>Burn</damageDef>
+        <multiplier>8</multiplier>
       </li>
     </damageMultipliers>
     

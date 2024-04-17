@@ -34,4 +34,7 @@
 
   <VV_AutoExtractor.label>자동 꿀 추출기</VV_AutoExtractor.label>
   <VV_AutoExtractor.description>원심력을 이용해 정제되지 않은 비비 꿀이나 프로폴리스에서 필요한 성분을 대량으로 추출하는 기계입니다. 손으로 작업하는것보다 훨씬 빠르고 대량으로 작업 가능하지만 전기가 필요합니다.</VV_AutoExtractor.description>
+
+  <VV_DreamumAltar.label>꿈송이 제단</VV_DreamumAltar.label>
+  <VV_DreamumAltar.description>꿈송이에 대량의 마나를 주입해 거대화하는 고대의 제단입니다. 원리는 정확히 알 수 없지만 인접한 마법 식물에서 대량의 마나를 흡수해 중앙의 꿈송이에 전송하도록 되어있습니다.</VV_DreamumAltar.description>
 </LanguageData>

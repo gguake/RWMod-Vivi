@@ -20,6 +20,8 @@ namespace VVRace
 
         public override void CompTick()
         {
+            if (!parent.Spawned) { return; }
+
             base.CompTick();
 
             PowerOutput = ArcanePlant.ManaChargeRatio * (-Props.PowerConsumption);
