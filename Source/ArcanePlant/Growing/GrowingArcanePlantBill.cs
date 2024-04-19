@@ -113,11 +113,11 @@ namespace VVRace
         private float _temperatureSeverity;
         private float _glowSeverity;
 
-        public bool IsGoodTemperature => Data.optimalTemperatureRange.IncludesEpsilon(_billOwner.FarmTemperature);
+        public bool IsGoodTemperature => Data.temperatureSensitivity == GrowingArcanePlantSensitivity.None || Data.optimalTemperatureRange.IncludesEpsilon(_billOwner.FarmTemperature);
 
-        public bool IsGoodGlow => Data.optimalGlowRange.IncludesEpsilon(_billOwner.FarmGlow);
+        public bool IsGoodGlow => Data.glowSensitivity == GrowingArcanePlantSensitivity.None || Data.optimalGlowRange.IncludesEpsilon(_billOwner.FarmGlow);
 
-        public bool ManagementRequired => GenTicks.TicksGame - _lastManagementTicks >= Data.manageIntervalTicks;
+        public bool ManagementRequired => Data.manageSensitivity > GrowingArcanePlantSensitivity.None && GenTicks.TicksGame - _lastManagementTicks >= Data.manageIntervalTicks;
 
         public float? Cleanliness
         {
