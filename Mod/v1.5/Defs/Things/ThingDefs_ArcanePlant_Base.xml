@@ -16,11 +16,10 @@
     <thingClass>VVRace.ArcanePlant</thingClass>
     <tickerType>Normal</tickerType>
     <selectable>true</selectable>
-    <neverMultiSelect>true</neverMultiSelect>
 
     <drawerType>MapMeshOnly</drawerType>
     <graphicData>
-      <shaderType>CutoutPlant</shaderType>
+      <shaderType>TransparentPlant</shaderType>
       <drawSize>(1.2, 1.2)</drawSize>
     </graphicData>
     <altitudeLayer>BuildingBelowTop</altitudeLayer>

@@ -67,6 +67,8 @@
     <recipeMaker>
       <recipeUsers>
         <li>CraftingSpot</li>
+        <li>ElectricSmithy</li>
+        <li>FueledSmithy</li>
       </recipeUsers>
       <researchPrerequisites>
         <li>VV_Weaponry</li>
@@ -176,6 +178,8 @@
     <recipeMaker>
       <recipeUsers>
         <li>CraftingSpot</li>
+        <li>ElectricSmithy</li>
+        <li>FueledSmithy</li>
       </recipeUsers>
       <researchPrerequisites>
         <li>VV_Weaponry</li>
@@ -362,8 +366,8 @@
     <statBases>
       <WorkToMake>15000</WorkToMake>
       <Mass>1.6</Mass>
-      <AccuracyTouch>0.72</AccuracyTouch>
-      <AccuracyShort>0.25</AccuracyShort>
+      <AccuracyTouch>0.7</AccuracyTouch>
+      <AccuracyShort>0.18</AccuracyShort>
       <AccuracyMedium>0.07</AccuracyMedium>
       <AccuracyLong>0.03</AccuracyLong>
       <RangedWeapon_Cooldown>0.11</RangedWeapon_Cooldown>
@@ -387,7 +391,7 @@
         <hasStandardCommand>true</hasStandardCommand>
         <defaultProjectile>VV_Arrow_RepeatingCrossbow</defaultProjectile>
         <warmupTime>0.11</warmupTime>
-        <range>26.9</range>
+        <range>15.9</range>
         <soundCast>Bow_Small</soundCast>
       </li>
     </verbs>
@@ -444,7 +448,7 @@
       <damageDef>VV_ToxicArrow</damageDef>
       <damageAmountBase>5</damageAmountBase>
       <stoppingPower>1.0</stoppingPower>
-      <speed>60</speed>
+      <speed>50</speed>
       <armorPenetrationBase>0</armorPenetrationBase>
     </projectile>
   </ThingDef>

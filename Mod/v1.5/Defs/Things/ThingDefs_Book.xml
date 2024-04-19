@@ -32,13 +32,13 @@
         <doers>
           <li Class="VVRace.BookOutcomeProperties_GainResearchIncludeOnly">
             <include>
-                <li>VV_BasicGathering</li>
-                <li>VV_AdvancedGathering</li>
-                <li>VV_Tools</li>
-                <li>VV_ArcaneBotany</li>
-                <li>VV_CombatArcaneBotany</li>
-                <li>VV_AdvancedArcaneBotany</li>
-                <li>VV_ElectricArcaneBotany</li>
+                <VV_BasicGathering />
+                <VV_AdvancedGathering />
+                <VV_Tools />
+                <VV_ArcaneBotany />
+                <VV_CombatArcaneBotany />
+                <VV_AdvancedArcaneBotany />
+                <VV_ElectricArcaneBotany />
             </include>
           </li>
         </doers>

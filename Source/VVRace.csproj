@@ -16,7 +16,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Build|AnyCPU' ">
     <DebugType>none</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\Mod\v1.4\Assemblies\</OutputPath>
+    <OutputPath>..\Mod\v1.5\Assemblies\</OutputPath>
     <DefineConstants>
     </DefineConstants>
     <ErrorReport>prompt</ErrorReport>

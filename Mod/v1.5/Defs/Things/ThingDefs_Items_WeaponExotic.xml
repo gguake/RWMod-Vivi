@@ -88,6 +88,16 @@
     </costList>
     
     <recipeMaker>
+      <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+      <workSkill>Crafting</workSkill>
+      <effectWorking>Smith</effectWorking>
+      <soundWorking>Recipe_Smith</soundWorking>
+      <recipeUsers>
+        <li>ElectricSmithy</li>
+        <li>FueledSmithy</li>
+      </recipeUsers>
+      <unfinishedThingDef>UnfinishedWeapon</unfinishedThingDef>
+
       <researchPrerequisites>
         <li>VV_RitualWeaponry</li>
       </researchPrerequisites>
@@ -200,6 +210,16 @@
     </costList>
     
     <recipeMaker>
+      <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+      <workSkill>Crafting</workSkill>
+      <effectWorking>Smith</effectWorking>
+      <soundWorking>Recipe_Smith</soundWorking>
+      <recipeUsers>
+        <li>ElectricSmithy</li>
+        <li>FueledSmithy</li>
+      </recipeUsers>
+      <unfinishedThingDef>UnfinishedWeapon</unfinishedThingDef>
+
       <researchPrerequisites>
         <li>VV_RitualWeaponry</li>
       </researchPrerequisites>

@@ -740,7 +740,7 @@
 
         <totalGrowDays>15</totalGrowDays>
         <maxHealth>300</maxHealth>
-        <healthRegenNoDamagedByDays>30</healthRegenNoDamagedByDays>
+        <healthRegenNoDamagedByDays>200</healthRegenNoDamagedByDays>
 
         <maxMana>240</maxMana>
         <consumedManaByDay>60</consumedManaByDay>
@@ -1188,6 +1188,7 @@
     <graphicData>
       <texPath>Things/Building/VV_SkyweedPod</texPath>
       <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>Transparent</shaderType>
       <drawSize>(2.5,2.5)</drawSize>
     </graphicData>
 
@@ -1229,6 +1230,10 @@
         <activeDropPod>VV_ActiveSkyweedBox</activeDropPod>
         <incomingDropPod>VV_SkyweedBoxIncoming</incomingDropPod>
       </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>2</glowRadius>
+        <glowColor>(255,255,255,0)</glowColor>
+      </li>
     </comps>
     
     <researchPrerequisites>
@@ -1256,6 +1261,7 @@
     <graphicData>
       <texPath>Things/Building/VV_SkyweedPod</texPath>
       <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>Transparent</shaderType>
       <drawSize>2.4</drawSize>
       <shadowData>
         <volume>(0.8, 0.6, 0.8)</volume>
