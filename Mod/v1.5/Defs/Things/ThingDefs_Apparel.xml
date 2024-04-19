@@ -64,11 +64,6 @@
       </tags>
       <developmentalStageFilter>Adult</developmentalStageFilter>
       <canBeDesiredForIdeo>false</canBeDesiredForIdeo>
-      <drawData>
-        <dataNorth>
-          <layer>40</layer>
-        </dataNorth>
-      </drawData>
     </apparel>
     
     <recipeMaker>

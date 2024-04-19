@@ -186,11 +186,6 @@
         <li>Middle</li>
         <li>Shell</li>
       </layers>
-      <drawData>
-        <dataNorth>
-          <layer>40</layer>
-        </dataNorth>
-      </drawData>
     </apparel>
     
     <recipeMaker>
@@ -246,11 +241,6 @@
         <li>Middle</li>
         <li>Shell</li>
       </layers>
-      <drawData>
-        <dataNorth>
-          <layer>40</layer>
-        </dataNorth>
-      </drawData>
 
       <renderNodeProperties>
         <li>
@@ -268,7 +258,7 @@
                   <layer>22</layer>
                 </defaultData>
                 <dataNorth>
-                  <layer>43</layer>
+                  <layer>95</layer>
                 </dataNorth>
               </drawData>
             </li>

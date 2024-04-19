@@ -89,7 +89,7 @@
                 <scaleOffsetByBodySize>true</scaleOffsetByBodySize>
                 <dataNorth>
                   <offset>(-0.01, 0, 0.0)</offset>
-                  <layer>54</layer>
+                  <layer>94</layer>
                 </dataNorth>
                 <dataSouth>
                   <offset>(0.01, 0, 0.0)</offset>
@@ -118,7 +118,7 @@
                 <scaleOffsetByBodySize>true</scaleOffsetByBodySize>
                 <dataNorth>
                   <offset>(0.01, 0, 0)</offset>
-                  <layer>54</layer>
+                  <layer>94</layer>
                 </dataNorth>
                 <dataSouth>
                   <offset>(-0.01, 0, 0)</offset>
@@ -166,6 +166,9 @@
               <dataEast>
                 <offset>(-0.05,0,0.04)</offset>
               </dataEast>
+              <dataNorth>
+                <offset>(0,0.017308,0.04)</offset>
+              </dataNorth>
               <scale>0.75</scale>
             </Baby>
             <Child>
@@ -176,6 +179,9 @@
               <dataEast>
                 <offset>(-0.05,0,0.04)</offset>
               </dataEast>
+              <dataNorth>
+                <offset>(0,0.017308,0.04)</offset>
+              </dataNorth>
               <scale>0.75</scale>
             </Child>
             <Thin>
@@ -186,6 +192,9 @@
               <dataEast>
                 <offset>(-0.05,0,0.04)</offset>
               </dataEast>
+              <dataNorth>
+                <offset>(0,0.017308,0.04)</offset>
+              </dataNorth>
               <scale>0.75</scale>
             </Thin>
             <Female>
@@ -196,6 +205,9 @@
               <dataEast>
                 <offset>(-0.05,0,0.1)</offset>
               </dataEast>
+              <dataNorth>
+                <offset>(0,0.017308,0.1)</offset>
+              </dataNorth>
               <scale>0.75</scale>
             </Female>
           </bodyTypeDrawData>
