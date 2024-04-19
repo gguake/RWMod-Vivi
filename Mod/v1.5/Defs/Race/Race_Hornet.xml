@@ -116,6 +116,14 @@
       <soundMeleeHitBuilding>Pawn_Melee_BigBash_HitBuilding</soundMeleeHitBuilding>
       <soundMeleeMiss>Pawn_Melee_BigBash_Miss</soundMeleeMiss>
 
+      <detritusLeavings>
+        <li>
+          <def>VV_TitanicHornetWing</def>
+          <texOverrideIndex>0</texOverrideIndex>
+          <spawnChance>0.3334</spawnChance>
+        </li>
+      </detritusLeavings>
+
       <hediffGiverSets>
         <li>VV_TitanicHornet</li>
       </hediffGiverSets>
