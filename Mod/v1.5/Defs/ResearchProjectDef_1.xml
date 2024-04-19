@@ -88,9 +88,6 @@
     <baseCost>700</baseCost>
     <researchViewX>1</researchViewX>
     <researchViewY>0.7</researchViewY>
-    <prerequisites>
-      <li>VV_BasicInfra</li>
-    </prerequisites>
 
     <tags>
       <li>VV_ViviStart</li>

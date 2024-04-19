@@ -35,6 +35,12 @@
 
       <!-- Techprints -->
       
+      <!-- Books -->
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Novel</thingDef>
+        <countRange>0~1</countRange>
+      </li>
+
       <!-- Weapons -->
       <li Class="StockGenerator_MarketValue">
         <tradeTag>VV_ViviTool</tradeTag>

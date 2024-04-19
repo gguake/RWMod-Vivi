@@ -113,6 +113,7 @@ namespace VVRace
     {
         public static PawnKindDef VV_PlayerVivi;
         public static PawnKindDef VV_PlayerExiledRoyalVivi;
+        public static PawnKindDef VV_RoyalVivi;
 
         public static PawnKindDef VV_TitanicHornet;
     }

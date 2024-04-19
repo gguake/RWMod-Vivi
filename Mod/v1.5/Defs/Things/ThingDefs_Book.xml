@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <ThingDef ParentName="BookBase">
+    <defName>VV_Schematic</defName>
+    <thingClass>VVRace.Book_Vivi</thingClass>
+    <label>schematic</label>
+    <description>A book which describes technology and methods for using it. Reading schematics can help unlock new technologies.</description>
+    <graphicData>
+      <texPath>Things/Item/Book/Schematic/Schematic</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>0.8</drawSize>
+    </graphicData>
+    <uiIconPath>Things/Item/Book/Schematic/Schematic</uiIconPath>
+    <statBases>
+      <MarketValue>200</MarketValue>
+    </statBases>
+    <comps>
+      <li Class="CompProperties_Book">
+        <nameMaker>Namer_Schematic</nameMaker>
+        <descriptionMaker>Description_Schematic</descriptionMaker>
+        <ageYearsRange>100~300</ageYearsRange>
+        <openGraphic>
+          <texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>0.7</drawSize>
+        </openGraphic>
+        <verticalGraphic>
+          <texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <addTopAltitudeBias>true</addTopAltitudeBias>
+        </verticalGraphic>
+        <doers>
+          <li Class="VVRace.BookOutcomeProperties_GainResearchIncludeOnly">
+            <include>
+                <li>VV_BasicGathering</li>
+                <li>VV_AdvancedGathering</li>
+                <li>VV_Tools</li>
+                <li>VV_ArcaneBotany</li>
+                <li>VV_CombatArcaneBotany</li>
+                <li>VV_AdvancedArcaneBotany</li>
+                <li>VV_ElectricArcaneBotany</li>
+            </include>
+          </li>
+        </doers>
+      </li>
+    </comps>
+  </ThingDef>
+</Defs>
