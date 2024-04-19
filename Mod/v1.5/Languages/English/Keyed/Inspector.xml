@@ -17,6 +17,7 @@
 <VV_Inspector_ViviBroadShieldDuration>Remaining Shield Duration: {0}</VV_Inspector_ViviBroadShieldDuration>
 
 <VV_Inspector_GrowingArcanePlantReady>{0} Cultivation Preparation</VV_Inspector_GrowingArcanePlantReady>
+<VV_Inspector_GrowingArcanePlantProgress>Progress: {0}</VV_Inspector_GrowingArcanePlantProgress>
 
 <VV_Inspector_AltarProgress>Progress: {0}</VV_Inspector_AltarProgress>
 </LanguageData>

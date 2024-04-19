@@ -164,17 +164,24 @@ namespace VVRace
         public override string GetInspectString()
         {
             var sb = new StringBuilder(base.GetInspectString());
+            if (_bill == null) { return sb.ToString(); }
 
-            if (_bill?.Stage == GrowingArcanePlantBillStage.Gathering)
+            switch (_bill.Stage)
             {
-                sb.AppendInNewLine(LocalizeString_Inspector.VV_Inspector_GrowingArcanePlantReady.Translate(_bill.RecipeTarget.LabelCap));
+                case GrowingArcanePlantBillStage.Gathering:
+                    sb.AppendInNewLine(LocalizeString_Inspector.VV_Inspector_GrowingArcanePlantReady.Translate(_bill.RecipeTarget.LabelCap));
 
-                var requiredIngredients = RequiredThings.ToDictionary(tdc => tdc.ThingDef, tdc => tdc.Count);
-                foreach (var kv in _bill.Ingredients)
-                {
-                    var holdings = kv.Value - (requiredIngredients.ContainsKey(kv.Key) ? requiredIngredients[kv.Key] : 0);
-                    sb.AppendInNewLine($"{kv.Key.LabelCap}: {holdings}/{kv.Value}");
-                }
+                    var requiredIngredients = RequiredThings.ToDictionary(tdc => tdc.ThingDef, tdc => tdc.Count);
+                    foreach (var kv in _bill.Ingredients)
+                    {
+                        var holdings = kv.Value - (requiredIngredients.ContainsKey(kv.Key) ? requiredIngredients[kv.Key] : 0);
+                        sb.AppendInNewLine($"{kv.Key.LabelCap}: {holdings}/{kv.Value}");
+                    }
+                    break;
+
+                case GrowingArcanePlantBillStage.Growing:
+                    sb.AppendInNewLine(LocalizeString_Inspector.VV_Inspector_GrowingArcanePlantProgress.Translate(_bill.TotalGrowthPct.ToStringPercent()));
+                    break;
             }
 
             return sb.ToString();
