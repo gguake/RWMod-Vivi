@@ -356,7 +356,7 @@ namespace VVRace
                 return true;
             }
 
-            return Faction == faction;
+            return Spawned ? Faction == faction : true;
         }
 
         public void AddMana(float mana)
