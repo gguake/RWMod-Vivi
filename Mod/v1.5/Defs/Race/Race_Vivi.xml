@@ -100,7 +100,7 @@
     </tools>
 
     <race>
-      <lifeExpectancy>40</lifeExpectancy>
+      <lifeExpectancy>45</lifeExpectancy>
       <leatherDef>Leather_Light</leatherDef>
 			<nameCategory>HumanStandard</nameCategory>
       <nameGenerator>VV_NamerPersonVivi</nameGenerator>

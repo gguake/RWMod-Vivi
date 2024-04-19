@@ -18,15 +18,15 @@
         <capMods>
           <li>
             <capacity>Moving</capacity>
-            <setMax>0.8</setMax>
+            <setMax>0.75</setMax>
           </li>
           <li>
             <capacity>Manipulation</capacity>
-            <setMax>0.8</setMax>
+            <setMax>0.75</setMax>
           </li>
           <li>
             <capacity>Metabolism</capacity>
-            <setMax>0.8</setMax>
+            <setMax>0.75</setMax>
           </li>
         </capMods>
       </li>

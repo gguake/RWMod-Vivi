@@ -210,12 +210,13 @@
 		<statBases>
 			<Mass>0.1</Mass>
 			<MarketValue>28</MarketValue>
-			<Nutrition>0.8</Nutrition>
+			<Nutrition>0.5</Nutrition>
 		</statBases>
 
 		<ingestible>
-      <foodType>Meal</foodType>
-			<preferability>MealTerrible</preferability>
+      <foodType>Fluid, Processed</foodType>
+			<preferability>MealFine</preferability>
+      <babiesCanIngest>true</babiesCanIngest>
 			<joy>0.2</joy>
 			<joyKind>Gluttonous</joyKind>
       

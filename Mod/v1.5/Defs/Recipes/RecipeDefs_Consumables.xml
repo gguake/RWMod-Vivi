@@ -126,7 +126,7 @@
             <li>VV_Pollen</li>
           </thingDefs>
         </filter>
-        <count>50</count>
+        <count>40</count>
       </li>
       <li>
         <filter>
@@ -134,7 +134,7 @@
             <li>VV_FilteredHoney</li>
           </thingDefs>
         </filter>
-        <count>2</count>
+        <count>5</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
