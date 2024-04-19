@@ -128,6 +128,7 @@
     <Compile Include="ArcanePlant\Plant\Mana\ManaFluxRule_Temperature.cs" />
     <Compile Include="ArcanePlant\Growing\UI\Dialog_StartGrowingArcanePlant.cs" />
     <Compile Include="ArcanePlant\Growing\UI\ITab_ArcanePlantFarmBill.cs" />
+    <Compile Include="Book\Book_Vivi.cs" />
     <Compile Include="Egg\Comps\CompViviEggLayer.cs" />
     <Compile Include="EndGame\AI\WorkGiver_HaulToDreamumAltar.cs" />
     <Compile Include="EndGame\CaravanArrivalAction_VisitViviRuins.cs" />
@@ -177,6 +178,7 @@
     <Compile Include="MapGeneration\SymbolResolvers\Settlement\SymbolResolver_HexaRoomBarracks.cs" />
     <Compile Include="Gather\UI\ITab_GatherWorkTable.cs" />
     <Compile Include="MapGeneration\SymbolResolvers\SymbolResolver_EdgeHoneycombWall.cs" />
+    <Compile Include="Book\ReadingOutcomeDoerGainResearchIncludeOnly.cs" />
     <Compile Include="RPEF\PawnRenderSubWorker_WingCondition.cs" />
     <Compile Include="Utility\Graphics\Graphic_Conditional.cs" />
     <Compile Include="ArcanePlant\Plant\Comps\CompHeatPusherMana.cs" />

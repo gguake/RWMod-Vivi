@@ -148,16 +148,23 @@ namespace VVRace
 
         private void Tick(int ticks)
         {
-            if (!CanHatch) { return; }
-
-            var t = Mathf.InverseLerp(FreezerComp.Props.minSafeTemperature, FreezerComp.Props.maxSafeTemperature, parent.AmbientTemperature);
-            var bonusMultiplier = Mathf.Lerp(1f, 1f + Props.adaptTemperatureBonus, Mathf.Clamp01(1f - (t - 0.5f) * (t - 0.5f) * 4f));
-
-            hatchProgress += 1f / (hatchDays * 60000f) * ticks * bonusMultiplier;
-
-            if (hatchProgress > 1f)
+            if (TemperatureDamaged)
             {
-                Hatch();
+                parent.TakeDamage(new DamageInfo(DamageDefOf.Deterioration, Mathf.Max(1f, parent.MaxHitPoints * ticks / 10000f)));
+            }
+            else
+            {
+                if (!CanHatch) { return; }
+
+                var t = Mathf.InverseLerp(FreezerComp.Props.minSafeTemperature, FreezerComp.Props.maxSafeTemperature, parent.AmbientTemperature);
+                var bonusMultiplier = Mathf.Lerp(1f, 1f + Props.adaptTemperatureBonus, Mathf.Clamp01(1f - (t - 0.5f) * (t - 0.5f) * 4f));
+
+                hatchProgress += 1f / (hatchDays * 60000f) * ticks * bonusMultiplier;
+
+                if (hatchProgress > 1f)
+                {
+                    Hatch();
+                }
             }
         }
 
