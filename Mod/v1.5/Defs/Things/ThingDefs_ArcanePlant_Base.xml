@@ -42,27 +42,11 @@
     <damageMultipliers>
       <li>
         <damageDef>Flame</damageDef>
-        <multiplier>1.5</multiplier>
+        <multiplier>2.0</multiplier>
       </li>
       <li>
         <damageDef>Burn</damageDef>
         <multiplier>1.5</multiplier>
-      </li>
-      <li>
-        <damageDef>TornadoScratch</damageDef>
-        <multiplier>1.5</multiplier>
-      </li>
-      <li>
-        <damageDef>Bullet</damageDef>
-        <multiplier>0.75</multiplier>
-      </li>
-      <li>
-        <damageDef>Arrow</damageDef>
-        <multiplier>0.75</multiplier>
-      </li>
-      <li>
-        <damageDef>ArrowHighVelocity</damageDef>
-        <multiplier>0.75</multiplier>
       </li>
       <li>
         <damageDef>Crush</damageDef>
@@ -74,14 +58,6 @@
       </li>
       <li>
         <damageDef>Poke</damageDef>
-        <multiplier>0.75</multiplier>
-      </li>
-      <li>
-        <damageDef>Stab</damageDef>
-        <multiplier>0.75</multiplier>
-      </li>
-      <li>
-        <damageDef>Bite</damageDef>
         <multiplier>0.75</multiplier>
       </li>
     </damageMultipliers>
