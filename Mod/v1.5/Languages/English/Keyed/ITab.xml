@@ -18,4 +18,9 @@
   <VV_ITab_ArcanePlantFarmBill_TemperatureDesc>Current temperature sensitivity of the arcane plant. Recovers when the cultivation environment's temperature is within the {0}~{1} range and deteriorates otherwise. Leaving it in a deteriorated state will decrease vitality.</VV_ITab_ArcanePlantFarmBill_TemperatureDesc>
   <VV_ITab_ArcanePlantFarmBill_Glow>Light Sensitivity</VV_ITab_ArcanePlantFarmBill_Glow>
   <VV_ITab_ArcanePlantFarmBill_GlowDesc>Current light sensitivity of the arcane plant. Recovers when the cultivation environment's light is within the {0}~{1} range and deteriorates otherwise. Leaving it in a deteriorated state will decrease vitality.</VV_ITab_ArcanePlantFarmBill_GlowDesc>
+  
+  <VV_ITab_ManaAcceptor_StatsTabLabel>Stats</VV_ITab_ManaAcceptor_StatsTabLabel>
+  <VV_ITab_ManaAcceptor_ManaGenCurveLabel>Generated Mana</VV_ITab_ManaAcceptor_ManaGenCurveLabel>
+  <VV_ITab_ManaAcceptor_ManaConCurveLabel>Consumed Mana</VV_ITab_ManaAcceptor_ManaConCurveLabel>
+  <VV_ITab_ManaAcceptor_ManaExcCurveLabel>Overflowed Mana</VV_ITab_ManaAcceptor_ManaExcCurveLabel>
 </LanguageData>

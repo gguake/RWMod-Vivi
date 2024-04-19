@@ -20,5 +20,9 @@
         public const string VV_ITab_ArcanePlantFarmBill_Glow = nameof(VV_ITab_ArcanePlantFarmBill_Glow);
         public const string VV_ITab_ArcanePlantFarmBill_GlowDesc = nameof(VV_ITab_ArcanePlantFarmBill_GlowDesc);
 
+        public const string VV_ITab_ManaAcceptor_StatsTabLabel = nameof(VV_ITab_ManaAcceptor_StatsTabLabel);
+        public const string VV_ITab_ManaAcceptor_ManaGenCurveLabel = nameof(VV_ITab_ManaAcceptor_ManaGenCurveLabel);
+        public const string VV_ITab_ManaAcceptor_ManaConCurveLabel = nameof(VV_ITab_ManaAcceptor_ManaConCurveLabel);
+        public const string VV_ITab_ManaAcceptor_ManaExcCurveLabel = nameof(VV_ITab_ManaAcceptor_ManaExcCurveLabel);
     }
 }

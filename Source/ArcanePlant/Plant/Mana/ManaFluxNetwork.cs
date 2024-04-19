@@ -22,6 +22,8 @@ namespace VVRace
 
     public class ManaFluxNetwork : IEnumerable<ManaAcceptor>
     {
+        public const int MaxHistoryLength = 150;
+
         private static int HashCounter = 1;
 
         public int NetworkHash { get; private set; }
@@ -168,7 +170,7 @@ namespace VVRace
                         exceeded = totalOvergeneratedMana,
                     };
 
-                    if (FluxHistory.Count > 30) { FluxHistory.Dequeue(); }
+                    if (FluxHistory.Count > MaxHistoryLength) { FluxHistory.Dequeue(); }
 
                     FluxHistory.Enqueue(history);
                     _lastRefreshHistoryTick = tick;

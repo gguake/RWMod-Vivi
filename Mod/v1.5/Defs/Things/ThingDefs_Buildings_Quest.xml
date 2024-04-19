@@ -48,6 +48,9 @@
       <deconstructible>false</deconstructible>
       <claimable>false</claimable>
     </building>
+    <inspectorTabs>
+      <li>VVRace.ITab_ManaFluxStats</li>
+    </inspectorTabs>
 
     <placeWorkers>
       <li>PlaceWorker_NotUnderRoof</li>

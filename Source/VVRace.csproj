@@ -128,6 +128,7 @@
     <Compile Include="ArcanePlant\Plant\Mana\ManaFluxRule_Temperature.cs" />
     <Compile Include="ArcanePlant\Growing\UI\Dialog_StartGrowingArcanePlant.cs" />
     <Compile Include="ArcanePlant\Growing\UI\ITab_ArcanePlantFarmBill.cs" />
+    <Compile Include="ArcanePlant\Plant\UI\ITab_ManaFluxStats.cs" />
     <Compile Include="Book\Book_Vivi.cs" />
     <Compile Include="Egg\Comps\CompViviEggLayer.cs" />
     <Compile Include="EndGame\AI\WorkGiver_HaulToDreamumAltar.cs" />

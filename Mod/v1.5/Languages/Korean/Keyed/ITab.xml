@@ -18,4 +18,9 @@
   <VV_ITab_ArcanePlantFarmBill_TemperatureDesc>현재 마법 식물의 온도 적합도입니다. 재배 환경의 온도가 {0}~{1} 범위 내에 있을때 회복되고 그렇지 않을때 악화됩니다. 악화된 상태로 방치하면 생명력이 감소합니다.</VV_ITab_ArcanePlantFarmBill_TemperatureDesc>
   <VV_ITab_ArcanePlantFarmBill_Glow>빛 적합도</VV_ITab_ArcanePlantFarmBill_Glow>
   <VV_ITab_ArcanePlantFarmBill_GlowDesc>현재 마법 식물의 빛 적합도입니다. 재배 환경의 빛이 {0}~{1} 범위 내에 있을때 회복되고 그렇지 않을때 악화됩니다. 악화된 상태로 방치하면 생명력이 감소합니다.</VV_ITab_ArcanePlantFarmBill_GlowDesc>
+
+  <VV_ITab_ManaAcceptor_StatsTabLabel>통계</VV_ITab_ManaAcceptor_StatsTabLabel>
+  <VV_ITab_ManaAcceptor_ManaGenCurveLabel>마나 생성량</VV_ITab_ManaAcceptor_ManaGenCurveLabel>
+  <VV_ITab_ManaAcceptor_ManaConCurveLabel>마나 소모량</VV_ITab_ManaAcceptor_ManaConCurveLabel>
+  <VV_ITab_ManaAcceptor_ManaExcCurveLabel>마나 잉여량</VV_ITab_ManaAcceptor_ManaExcCurveLabel>
 </LanguageData>

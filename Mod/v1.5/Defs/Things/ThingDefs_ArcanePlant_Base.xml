@@ -99,7 +99,6 @@
     <placeWorkers>
       <li>VVRace.PlaceWorker_AllowArcanePlantPot</li>
     </placeWorkers>
-
     <building>
       <ai_neverTrashThis>true</ai_neverTrashThis>
       <ai_chillDestination>false</ai_chillDestination>
@@ -115,7 +114,10 @@
 
       <uninstallWork>1200</uninstallWork>
     </building>
-    
+    <inspectorTabs>
+      <li>VVRace.ITab_ManaFluxStats</li>
+    </inspectorTabs>
+
     <tradeTags>
       <li>VV_ArcanePlant</li>
     </tradeTags>
@@ -177,6 +179,10 @@
         <texPath>Things/Building/VV_ManaFluxTube_Blueprint_Atlas</texPath>
       </blueprintGraphicData>
     </building>
+    <inspectorTabs>
+      <li>VVRace.ITab_ManaFluxStats</li>
+    </inspectorTabs>
+    
     <drawerType>MapMeshOnly</drawerType>
     <altitudeLayer>Conduits</altitudeLayer>
     <passability>Standable</passability>
