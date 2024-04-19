@@ -740,7 +740,7 @@
 
         <totalGrowDays>15</totalGrowDays>
         <maxHealth>300</maxHealth>
-        <healthRegenNoDamagedByDays>200</healthRegenNoDamagedByDays>
+        <healthRegenNoDamagedByDays>300</healthRegenNoDamagedByDays>
 
         <maxMana>240</maxMana>
         <consumedManaByDay>60</consumedManaByDay>
@@ -750,7 +750,7 @@
         <glowSensitivity>High</glowSensitivity>
         
         <manageIntervalTicks>210000</manageIntervalTicks>
-        <optimalGlowRange>0.7~1.0</optimalGlowRange>
+        <optimalGlowRange>0.55~1.0</optimalGlowRange>
 
         <successChanceCurve>
           <points>
