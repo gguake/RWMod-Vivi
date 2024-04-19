@@ -105,7 +105,7 @@
     <description>Make royal jelly.</description>
 
     <jobString>Making royal jelly.</jobString>
-    <workAmount>1250</workAmount>
+    <workAmount>1000</workAmount>
     <workSpeedStat>CookSpeed</workSpeedStat>
     <requiredGiverWorkType>Cooking</requiredGiverWorkType>
     <effectWorking>Cook</effectWorking>
