@@ -204,10 +204,6 @@
         <multiplier>0.25</multiplier>
       </li>
       <li>
-        <damageDef>Demolish</damageDef>
-        <multiplier>0.25</multiplier>
-      </li>
-      <li>
         <damageDef>Stab</damageDef>
         <multiplier>0.25</multiplier>
       </li>
@@ -253,6 +249,10 @@
       </li>
       <li>
         <damageDef>Thump</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Demolish</damageDef>
         <multiplier>0.5</multiplier>
       </li>
       <li>

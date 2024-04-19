@@ -20,7 +20,7 @@
 
     <statBases>
       <MarketValue>240</MarketValue>
-      <MaxHitPoints>110</MaxHitPoints>
+      <MaxHitPoints>100</MaxHitPoints>
     </statBases>
 
     <costList>
@@ -194,7 +194,7 @@
 
     <statBases>
       <MarketValue>240</MarketValue>
-      <MaxHitPoints>110</MaxHitPoints>
+      <MaxHitPoints>100</MaxHitPoints>
     </statBases>
 
     <costList>
@@ -310,7 +310,7 @@
       <damageDef>Bomb</damageDef>
       <speed>50</speed>
       <explosionRadius>1.9</explosionRadius>
-      <damageAmountBase>20</damageAmountBase>
+      <damageAmountBase>16</damageAmountBase>
       <screenShakeFactor>0</screenShakeFactor>
     </projectile>
   </ThingDef>
@@ -377,34 +377,11 @@
 
     <statBases>
       <MarketValue>320</MarketValue>
-      <MaxHitPoints>180</MaxHitPoints>
+      <MaxHitPoints>220</MaxHitPoints>
+      <Flammability>0.5</Flammability>
     </statBases>
 
     <damageMultipliers Inherit="False">
-      <li>
-        <damageDef>Flame</damageDef>
-        <multiplier>0.5</multiplier>
-      </li>
-      <li>
-        <damageDef>Burn</damageDef>
-        <multiplier>0.5</multiplier>
-      </li>
-      <li>
-        <damageDef>TornadoScratch</damageDef>
-        <multiplier>1.5</multiplier>
-      </li>
-      <li>
-        <damageDef>Bullet</damageDef>
-        <multiplier>0.75</multiplier>
-      </li>
-      <li>
-        <damageDef>Arrow</damageDef>
-        <multiplier>0.75</multiplier>
-      </li>
-      <li>
-        <damageDef>ArrowHighVelocity</damageDef>
-        <multiplier>0.75</multiplier>
-      </li>
       <li>
         <damageDef>Crush</damageDef>
         <multiplier>0.75</multiplier>
@@ -417,15 +394,8 @@
         <damageDef>Poke</damageDef>
         <multiplier>0.75</multiplier>
       </li>
-      <li>
-        <damageDef>Stab</damageDef>
-        <multiplier>0.75</multiplier>
-      </li>
-      <li>
-        <damageDef>Bite</damageDef>
-        <multiplier>0.75</multiplier>
-      </li>
     </damageMultipliers>
+    <fillPercent>0.5</fillPercent>
 
     <costList>
       <VV_LivingLeaf>20</VV_LivingLeaf>

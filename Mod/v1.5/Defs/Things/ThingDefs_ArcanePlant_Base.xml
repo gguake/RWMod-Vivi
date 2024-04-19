@@ -46,7 +46,7 @@
       </li>
       <li>
         <damageDef>Burn</damageDef>
-        <multiplier>1.5</multiplier>
+        <multiplier>2.0</multiplier>
       </li>
       <li>
         <damageDef>Crush</damageDef>
