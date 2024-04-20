@@ -358,7 +358,7 @@
   <ThingDef ParentName="VV_ArcanePlantCombat">
     <defName>VV_Shootus</defName>
     <label>Shootus</label>
-    <description>It is a arcane cactus with a peculiar facial expression. It moves so flexibly that it doesn't seem like a plant and is relatively resistant to fire.
+    <description>It is a arcane cactus with a peculiar facial expression. It moves so flexibly that it doesn't seem like a plant, and it is extremely tough, resistant to most types of damage.
 \nIt can be equipped with a ranged weapon in one hand, and when it detects enemies, it automatically attacks them using the equipped weapon. It cannot wear melee or biocoded weapons, and its reloading is somewhat slower than when handled by a person.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_LivingLeaf</ThingDef>
@@ -377,22 +377,78 @@
 
     <statBases>
       <MarketValue>320</MarketValue>
-      <MaxHitPoints>220</MaxHitPoints>
+      <MaxHitPoints>200</MaxHitPoints>
       <Flammability>0.5</Flammability>
     </statBases>
 
     <damageMultipliers Inherit="False">
       <li>
+        <damageDef>Cut</damageDef>
+        <multiplier>0.7</multiplier>
+      </li>
+      <li>
         <damageDef>Crush</damageDef>
-        <multiplier>0.75</multiplier>
+        <multiplier>0.7</multiplier>
       </li>
       <li>
         <damageDef>Blunt</damageDef>
-        <multiplier>0.75</multiplier>
+        <multiplier>0.7</multiplier>
       </li>
       <li>
         <damageDef>Poke</damageDef>
-        <multiplier>0.75</multiplier>
+        <multiplier>0.7</multiplier>
+      </li>
+      <li>
+        <damageDef>Stab</damageDef>
+        <multiplier>0.7</multiplier>
+      </li>
+      <li>
+        <damageDef>Scratch</damageDef>
+        <multiplier>0.7</multiplier>
+      </li>
+      <li>
+        <damageDef>ScratchToxic</damageDef>
+        <multiplier>0.7</multiplier>
+      </li>
+      <li>
+        <damageDef>Bite</damageDef>
+        <multiplier>0.7</multiplier>
+      </li>
+      <li>
+        <damageDef>ToxicBite</damageDef>
+        <multiplier>0.7</multiplier>
+      </li>
+      <li>
+        <damageDef>RangedStab</damageDef>
+        <multiplier>0.7</multiplier>
+      </li>
+      <li>
+        <damageDef>Bullet</damageDef>
+        <multiplier>0.7</multiplier>
+      </li>
+      <li>
+        <damageDef>Arrow</damageDef>
+        <multiplier>0.7</multiplier>
+      </li>
+      <li>
+        <damageDef>ArrowHighVelocity</damageDef>
+        <multiplier>0.7</multiplier>
+      </li>
+      <li>
+        <damageDef>Bomb</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>BombSuper</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Thump</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Demolish</damageDef>
+        <multiplier>0.5</multiplier>
       </li>
     </damageMultipliers>
     <fillPercent>0.5</fillPercent>
