@@ -114,7 +114,7 @@
       <MarketValue>2.4</MarketValue>
       <Nutrition>0.12</Nutrition>
     </statBases>
-    <stackLimit>75</stackLimit>
+    <stackLimit>200</stackLimit>
     <comps>
       <li Class="VVRace.CompProperties_Honey" />
     </comps>
@@ -215,8 +215,7 @@
 
 		<ingestible>
       <foodType>Fluid, Processed</foodType>
-			<preferability>MealFine</preferability>
-      <babiesCanIngest>true</babiesCanIngest>
+			<preferability>NeverForNutrition</preferability>
 			<joy>0.2</joy>
 			<joyKind>Gluttonous</joyKind>
       
