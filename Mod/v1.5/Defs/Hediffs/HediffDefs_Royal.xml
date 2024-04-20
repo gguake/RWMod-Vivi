@@ -43,7 +43,7 @@
 
     <modExtensions>
       <li Class="RPEF.ConstraintModExtension">
-        <def>VV_RaceConstraint</def>
+        <def>VV_HeartAttackBlockRaceConstraint</def>
       </li>
     </modExtensions>
   </HediffDef>

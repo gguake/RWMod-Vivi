@@ -22,7 +22,7 @@
       </li>
       <li Class="HediffCompProperties_ChangeNeed">
         <needDef>VV_RoyalJelly</needDef>
-        <percentPerDay>0.033</percentPerDay>
+        <percentPerDay>0.036</percentPerDay>
       </li>
     </comps>
 
@@ -47,7 +47,7 @@
 
     <modExtensions>
       <li Class="RPEF.ConstraintModExtension">
-        <def>VV_RaceConstraint</def>
+        <def>VV_HeartAttackBlockRaceConstraint</def>
       </li>
     </modExtensions>
   </HediffDef>

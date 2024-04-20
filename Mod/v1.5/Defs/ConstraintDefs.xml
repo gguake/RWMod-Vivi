@@ -166,4 +166,24 @@
       </li>
     </constraints>
   </RPEF.ConstraintDef>
+  
+  <RPEF.ConstraintDef>
+    <defName>VV_HeartAttackBlockRaceConstraint</defName>
+    <constraints>
+      <li Class="RPEF.RaceConstraint">
+        <type>Required</type>
+        <things>
+          <li>VV_Vivi</li>
+        </things>
+        <failReason>not vivi</failReason>
+      </li>
+      <li Class="RPEF.HediffConstraint">
+        <rule>OnAppliedPawn</rule>
+        <type>Blacklist</type>
+        <hediffs>
+          <li>HeartAttack</li>
+        </hediffs>
+      </li>
+    </constraints>
+  </RPEF.ConstraintDef>
 </Defs>
