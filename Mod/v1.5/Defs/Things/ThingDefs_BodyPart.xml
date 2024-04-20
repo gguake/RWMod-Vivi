@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-	<ThingDef ParentName="BodyPartProstheticBase">
+	<ThingDef ParentName="BodyPartProstheticMakeableBase">
 		<defName>VV_FakeAntennae</defName>
 		<label>fake vivi antennae</label>
 		<description>A fake antenna made from fibers mixed with Vivi cream. It doesn't help much, but it looks better than not having one.</description>
