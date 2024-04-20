@@ -1,21 +1,25 @@
-﻿using Verse;
+﻿using UnityEngine;
+using Verse;
 
 namespace VVRace
 {
     public class PlaceWorker_ShowPlantTurretRadius : PlaceWorker
     {
-        public override AcceptanceReport AllowsPlacing(BuildableDef checkingDef, IntVec3 loc, Rot4 rot, Map map, Thing thingToIgnore = null, Thing thing = null)
+        public override void DrawGhost(ThingDef def, IntVec3 center, Rot4 rot, Color ghostCol, Thing thing = null)
         {
-            VerbProperties verbProperties = ((ThingDef)checkingDef).building.turretGunDef.Verbs.Find((VerbProperties v) => typeof(Verb_ShootWithMana).IsAssignableFrom(v.verbClass) || typeof(Verb_Spray).IsAssignableFrom(v.verbClass));
+            if (thing == null) { return; }
+
+            VerbProperties verbProperties = def.building.turretGunDef.Verbs
+                .Find((VerbProperties v) => typeof(Verb_ShootWithMana).IsAssignableFrom(v.verbClass) || typeof(Verb_Spray).IsAssignableFrom(v.verbClass));
+
             if (verbProperties.range > 0f)
             {
-                GenDraw.DrawRadiusRing(loc, verbProperties.range);
+                GenDraw.DrawRadiusRing(center, verbProperties.range);
             }
             if (verbProperties.minRange > 0f)
             {
-                GenDraw.DrawRadiusRing(loc, verbProperties.minRange);
+                GenDraw.DrawRadiusRing(center, verbProperties.minRange);
             }
-            return true;
         }
     }
 }
