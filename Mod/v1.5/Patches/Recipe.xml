@@ -18,4 +18,11 @@
       <li>VV_InjectPropolis</li>
     </value>
   </Operation>
+  
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/RecipeDef/recipeUsers[li="Human"]</xpath>
+    <value>
+      <li>VV_Vivi</li>
+    </value>
+  </Operation>
 </Patch>
