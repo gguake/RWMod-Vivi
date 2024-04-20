@@ -128,10 +128,12 @@
         <countRange>0~2</countRange>
       </li>
 
+      <!--
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_Schematic</thingDef>
         <countRange>0~1</countRange>
       </li>
+      -->
 
       <!-- Weapons-->
       <li Class="StockGenerator_MarketValue">

@@ -61,10 +61,12 @@
       <!-- none -->
       
       <!-- Books -->
+      <!--
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_Schematic</thingDef>
         <countRange>1~1</countRange>
       </li>
+      -->
 
       <!-- Weapons -->
       <!-- none -->
@@ -158,10 +160,12 @@
       <!-- Techprints -->
       
       <!-- Books -->
+      <!--
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_Schematic</thingDef>
         <countRange>1~1</countRange>
       </li>
+      -->
 
       <!-- Weapons -->
       

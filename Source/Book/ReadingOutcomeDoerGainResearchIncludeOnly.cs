@@ -22,7 +22,7 @@ namespace VVRace
                 for (int j = 0; j < Props.include.Count; j++)
                 {
                     var project = Props.include[j].project;
-                    if (!project.IsFinished)
+                    if (!project.IsFinished && project.PrerequisitesCompleted)
                     {
                         unifinishedProjects.Add(project);
                     }
