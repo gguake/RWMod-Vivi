@@ -18,6 +18,11 @@ namespace VVRace
         protected override IEnumerable<Toil> MakeNewToils()
         {
             this.FailOnDespawnedNullOrForbidden(HatcheryIdx);
+            this.FailOn(() =>
+            {
+                var eggSpawner = pawn.GetCompViviEggLayer();
+                return eggSpawner == null || !eggSpawner.CanLayEgg;
+            });
 
             yield return Toils_Goto.GotoCell(HatcheryIdx, PathEndMode.OnCell);
             yield return Toils_General.Wait(LayingEggTicks);

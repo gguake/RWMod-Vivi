@@ -16,6 +16,7 @@ namespace VVRace
         }
     }
 
+    [StaticConstructorOnStartup]
     public class CompViviEggLayer : ThingComp
     {
         public CompVivi CompVivi
@@ -42,12 +43,14 @@ namespace VVRace
             }
         }
         public float eggProgress;
+        public bool canLayEgg;
 
-        public bool CanLayEgg => eggProgress >= 1f;
+        public bool CanLayEgg => eggProgress >= 1f && canLayEgg;
 
         public override void PostExposeData()
         {
             Scribe_Values.Look(ref eggProgress, "eggProgress");
+            Scribe_Values.Look(ref canLayEgg, "canLayEgg", defaultValue: true, forceSave: true);
         }
 
         public override void CompTick()
@@ -64,11 +67,23 @@ namespace VVRace
             }
         }
 
+        private static readonly Texture2D ToggleLayEggTex = ContentFinder<Texture2D>.Get("UI/Commands/VV_LayEgg");
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
         {
             if (parent.Spawned && CompVivi.isRoyal)
             {
                 yield return new EggProgressGizmo((Pawn)parent);
+
+                var command_toggleLayEgg = new Command_Toggle();
+                command_toggleLayEgg.icon = ToggleLayEggTex;
+                command_toggleLayEgg.defaultLabel = LocalizeString_Command.VV_Command_ToggleLayEgg.Translate();
+                command_toggleLayEgg.defaultDesc = LocalizeString_Command.VV_Command_ToggleLayEggDesc.Translate();
+                command_toggleLayEgg.isActive = () => canLayEgg;
+                command_toggleLayEgg.toggleAction = () =>
+                {
+                    canLayEgg = !canLayEgg;
+                };
+                yield return command_toggleLayEgg;
 
                 if (DebugSettings.godMode)
                 {

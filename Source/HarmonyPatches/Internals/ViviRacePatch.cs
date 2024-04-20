@@ -47,9 +47,15 @@ namespace VVRace.HarmonyPatches
                 original: AccessTools.Method(typeof(MentalStateWorker), nameof(MentalStateWorker.StateCanOccur)),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(MentalStateWorker_StateCanOccur_Postfix)));
 
+            // 불 공포 면역
             harmony.Patch(
                 original: AccessTools.Method(typeof(ThoughtWorker_Pyrophobia), nameof(ThoughtWorker_Pyrophobia.NearFire)),
                 prefix: new HarmonyMethod(typeof(ViviRacePatch), nameof(ThoughtWorker_Pyrophobia_NearFire_Prefix)));
+
+            // NPC 비비 유전자 생성
+            harmony.Patch(
+                original: AccessTools.Method(typeof(PawnGenerator), "GenerateGenes"),
+                postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(PawnGenerator_GenerateGenes_Postfix)));
 
             Log.Message("!! [ViViRace] race patch complete");
         }
@@ -163,6 +169,24 @@ namespace VVRace.HarmonyPatches
             }
 
             return true;
+        }
+
+        private static void PawnGenerator_GenerateGenes_Postfix(Pawn pawn, XenotypeDef xenotype, ref PawnGenerationRequest request)
+        {
+            if (xenotype == VVXenotypeDefOf.VV_Vivi && 
+                request.KindDef != null && 
+                request.KindDef.race == VVThingDefOf.VV_Vivi &&
+                request.KindDef.defaultFactionType != null && 
+                request.KindDef.defaultFactionType.allowedCultures.Contains(VVCultureDefOf.VV_ViviCulture) &&
+                !request.KindDef.defaultFactionType.isPlayer &&
+                pawn.genes.Xenogenes.Count == 0)
+            {
+                var genes = ViviUtility.SelectRandomGeneForVivi(Rand.Range(1, 2));
+                foreach (var gene in genes)
+                {
+                    pawn.genes.AddGene(gene, true);
+                }
+            }
         }
     }
 }

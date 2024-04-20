@@ -23,4 +23,7 @@
 
 <VV_Command_StartProgressDreamumVictory>Start Dreamum Ritual</VV_Command_StartProgressDreamumVictory>
 <VV_Command_StartProgressDreamumVictoryDesc>Plants a dreamum in the altar and starts the ritual for its magnification.</VV_Command_StartProgressDreamumVictoryDesc>
+
+<VV_Command_ToggleLayEgg>Activate spawn egg</VV_Command_ToggleLayEgg>
+<VV_Command_ToggleLayEggDesc>Sets whether or not this royal vivi spawns eggs.</VV_Command_ToggleLayEggDesc>
 </LanguageData>

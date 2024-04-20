@@ -180,79 +180,75 @@ namespace VVRace
                 var pawnKindDef = (faction?.IsPlayer ?? false) ? VVPawnKindDefOf.VV_PlayerVivi : null;
                 if (pawnKindDef != null)
                 {
-                    var xenogeneDefs = parentXenogenes != null ? new List<GeneDef>(parentXenogenes) : new List<GeneDef>();
-
-                    var randomGeneCount = Mathf.FloorToInt(Props.geneCountCurve.Evaluate(Rand.RangeSeeded(0, 10000, randomSeed)));
-                    var randomGenes = Props.randomSelectGenes
-                        .Where(g => !xenogeneDefs.Contains(g) && !xenogeneDefs.Any(xenogene => xenogene.ConflictsWith(g)))
-                        .ToList()
-                        .TakeRandomDistinct(randomGeneCount);
-
-                    foreach (var geneDef in randomGenes)
+                    try
                     {
-                        xenogeneDefs.Add(geneDef);
-                    }
+                        Rand.PushState(randomSeed);
 
-                    // 바디 변경 유전자 허용 x
-                    xenogeneDefs.RemoveAll(def => def.bodyType != null);
+                        var randomGeneCount = Mathf.FloorToInt(Props.geneCountCurve.Evaluate(Rand.Range(0, 10000)));
+                        var xenogenes = ViviUtility.SelectRandomGeneForVivi(randomGeneCount, parentXenogenes);
 
-                    var request = new PawnGenerationRequest(
-                        pawnKindDef,
-                        faction: faction,
-                        allowDowned: true,
-                        developmentalStages: DevelopmentalStage.Newborn,
-                        forcedXenotype: VVXenotypeDefOf.VV_Vivi,
-                        forcedXenogenes: xenogeneDefs);
+                        var request = new PawnGenerationRequest(
+                            pawnKindDef,
+                            faction: faction,
+                            allowDowned: true,
+                            developmentalStages: DevelopmentalStage.Newborn,
+                            forcedXenotype: VVXenotypeDefOf.VV_Vivi,
+                            forcedXenogenes: xenogenes);
 
-                    Pawn pawn = PawnGenerator.GeneratePawn(request);
-                    if (GenSpawn.Spawn(pawn, hatchery.Position, hatchery.Map) != null)
-                    {
-                        if (pawn != null)
+                        var pawn = PawnGenerator.GeneratePawn(request);
+                        if (GenSpawn.Spawn(pawn, hatchery.Position, hatchery.Map) != null)
                         {
-                            if (hatcheeParent != null)
+                            if (pawn != null)
                             {
-                                if (pawn.IsColonist)
+                                if (hatcheeParent != null)
                                 {
-                                    Find.LetterStack.ReceiveLetter(
-                                        LocalizeString_Letter.VV_Letter_ViviEggHatchedLabel.Translate(),
-                                        LocalizeString_Letter.VV_Letter_ViviEggHatched.Translate(hatcheeParent.Named("PARENT")),
-                                        LetterDefOf.PositiveEvent,
-                                        pawn);
+                                    if (pawn.IsColonist)
+                                    {
+                                        Find.LetterStack.ReceiveLetter(
+                                            LocalizeString_Letter.VV_Letter_ViviEggHatchedLabel.Translate(),
+                                            LocalizeString_Letter.VV_Letter_ViviEggHatched.Translate(hatcheeParent.Named("PARENT")),
+                                            LetterDefOf.PositiveEvent,
+                                            pawn);
+                                    }
                                 }
-                            }
-                            else
-                            {
-                                if (pawn.IsColonist)
+                                else
                                 {
-                                    Find.LetterStack.ReceiveLetter(
-                                        LocalizeString_Letter.VV_Letter_ViviEggHatchedLabel.Translate(),
-                                        LocalizeString_Letter.VV_Letter_ViviEggHatchedNoParent.Translate(hatcheeParent.Named("PARENT")),
-                                        LetterDefOf.PositiveEvent,
-                                        pawn);
-                                }
-                            }
-
-                            if (hatcheeParent != null)
-                            {
-                                if (pawn.playerSettings != null && hatcheeParent.playerSettings != null && hatcheeParent.Faction == faction)
-                                {
-                                    pawn.playerSettings.AreaRestrictionInPawnCurrentMap = hatcheeParent.playerSettings.AreaRestrictionInPawnCurrentMap;
+                                    if (pawn.IsColonist)
+                                    {
+                                        Find.LetterStack.ReceiveLetter(
+                                            LocalizeString_Letter.VV_Letter_ViviEggHatchedLabel.Translate(),
+                                            LocalizeString_Letter.VV_Letter_ViviEggHatchedNoParent.Translate(hatcheeParent.Named("PARENT")),
+                                            LetterDefOf.PositiveEvent,
+                                            pawn);
+                                    }
                                 }
 
-                                if (pawn.RaceProps.IsFlesh)
+                                if (hatcheeParent != null)
                                 {
-                                    pawn.relations.AddDirectRelation(PawnRelationDefOf.Parent, hatcheeParent);
+                                    if (pawn.playerSettings != null && hatcheeParent.playerSettings != null && hatcheeParent.Faction == faction)
+                                    {
+                                        pawn.playerSettings.AreaRestrictionInPawnCurrentMap = hatcheeParent.playerSettings.AreaRestrictionInPawnCurrentMap;
+                                    }
+
+                                    if (pawn.RaceProps.IsFlesh)
+                                    {
+                                        pawn.relations.AddDirectRelation(PawnRelationDefOf.Parent, hatcheeParent);
+                                    }
                                 }
+                            }
+                            if (parent.Spawned)
+                            {
+                                FilthMaker.TryMakeFilth(hatchery.Position, hatchery.Map, ThingDefOf.Filth_AmnioticFluid, count: 3);
                             }
                         }
-                        if (parent.Spawned)
+                        else
                         {
-                            FilthMaker.TryMakeFilth(hatchery.Position, hatchery.Map, ThingDefOf.Filth_AmnioticFluid, count: 3);
+                            Find.WorldPawns.PassToWorld(pawn, PawnDiscardDecideMode.Discard);
                         }
                     }
-                    else
+                    finally
                     {
-                        Find.WorldPawns.PassToWorld(pawn, PawnDiscardDecideMode.Discard);
+                        Rand.PopState();
                     }
                 }
             }
