@@ -353,7 +353,7 @@
 
         <totalGrowDays>10</totalGrowDays>
         <maxHealth>120</maxHealth>
-        <healthRegenNoDamagedByDays>40</healthRegenNoDamagedByDays>
+        <healthRegenNoDamagedByDays>70</healthRegenNoDamagedByDays>
 
         <maxMana>200</maxMana>
         <consumedManaByDay>150</consumedManaByDay>
@@ -481,7 +481,7 @@
 
         <totalGrowDays>10</totalGrowDays>
         <maxHealth>120</maxHealth>
-        <healthRegenNoDamagedByDays>40</healthRegenNoDamagedByDays>
+        <healthRegenNoDamagedByDays>70</healthRegenNoDamagedByDays>
 
         <maxMana>400</maxMana>
         <consumedManaByDay>80</consumedManaByDay>
@@ -621,7 +621,7 @@
         <temperatureSensitivity>Medium</temperatureSensitivity>
         
         <manageIntervalTicks>210000</manageIntervalTicks>
-        <optimalTemperatureRange>16~21</optimalTemperatureRange>
+        <optimalTemperatureRange>18~21</optimalTemperatureRange>
 
         <successChanceCurve>
           <points>
@@ -745,12 +745,12 @@
         <maxMana>240</maxMana>
         <consumedManaByDay>60</consumedManaByDay>
 
-        <manaSensitivity>Low</manaSensitivity>
-        <manageSensitivity>Medium</manageSensitivity>
+        <manaSensitivity>Medium</manaSensitivity>
+        <manageSensitivity>Low</manageSensitivity>
         <glowSensitivity>High</glowSensitivity>
         
         <manageIntervalTicks>210000</manageIntervalTicks>
-        <optimalGlowRange>0.55~1.0</optimalGlowRange>
+        <optimalGlowRange>0.6~1.0</optimalGlowRange>
 
         <successChanceCurve>
           <points>
@@ -1116,11 +1116,11 @@
           <manaFromWindSpeed>
             <points>
               <li>(0,0)</li>
-              <li>(0.05,0)</li>
-              <li>(0.5,10)</li>
-              <li>(1.0,30)</li>
+              <li>(0.2,0)</li>
+              <li>(0.5,20)</li>
+              <li>(1.0,40)</li>
               <li>(1.5,50)</li>
-              <li>(2.0,60)</li>
+              <li>(2.0,65)</li>
             </points>
           </manaFromWindSpeed>
         </manaGenerateRule>
