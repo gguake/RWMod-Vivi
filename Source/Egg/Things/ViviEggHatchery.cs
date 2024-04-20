@@ -40,8 +40,6 @@ namespace VVRace
                     return false;
                 }
 
-                if (Position.GetFirstPawn(Map) != null) { return false; }
-
                 return true;
             }
         }
