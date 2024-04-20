@@ -43,7 +43,7 @@ namespace VVRace
             }
         }
         public float eggProgress;
-        public bool canLayEgg;
+        public bool canLayEgg = true;
 
         public bool CanLayEgg => eggProgress >= 1f && canLayEgg;
 

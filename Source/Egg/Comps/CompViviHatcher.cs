@@ -12,7 +12,6 @@ namespace VVRace
     {
         public SimpleCurve hatcherDaystoHatch;
         public SimpleCurve geneCountCurve;
-        public List<GeneDef> randomSelectGenes = new List<GeneDef>();
 
         public float adaptTemperatureBonus;
 
