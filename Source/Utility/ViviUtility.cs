@@ -19,7 +19,7 @@ namespace VVRace
             var genes = new List<GeneDef>();
             if (parentXenogenes != null)
             {
-                parentXenogenes.RemoveAll(def => CheckInvalidGenesForVivi(def));
+                parentXenogenes.RemoveAll(def => !CheckInvalidGenesForVivi(def));
 
                 if (parentXenogenes.Count > 0)
                 {
