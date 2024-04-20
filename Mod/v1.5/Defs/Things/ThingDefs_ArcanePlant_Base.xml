@@ -64,7 +64,7 @@
 
     <size>(1,1)</size>
     <stackLimit>1</stackLimit>
-    <fillPercent>0.25</fillPercent>
+    <fillPercent>0.3</fillPercent>
 
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
     <thingCategories>
