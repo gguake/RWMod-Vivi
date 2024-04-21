@@ -96,7 +96,7 @@ namespace VVRace
                 for (int i = 0; i < _nodesList.Count; ++i)
                 {
                     var node = _nodesList[i];
-                    if (node.manaAcceptor == null || !node.manaAcceptor.HasManaFlux) { continue; }
+                    if (node.manaAcceptor == null || !node.manaAcceptor.HasManaFlux || !node.manaAcceptor.Spawned) { continue; }
 
                     var extension = node.manaAcceptor.ManaExtension;
 
