@@ -2,7 +2,6 @@
 <Defs>
   <ThingDef ParentName="BookBase">
     <defName>VV_Schematic</defName>
-    <thingClass>VVRace.Book_Vivi</thingClass>
     <label>schematic</label>
     <description>A book which describes technology and methods for using it. Reading schematics can help unlock new technologies.</description>
     <graphicData>
@@ -12,13 +11,13 @@
     </graphicData>
     <uiIconPath>Things/Item/Book/Schematic/Schematic</uiIconPath>
     <statBases>
-      <MarketValue>200</MarketValue>
+      <MarketValue>150</MarketValue>
     </statBases>
     <comps>
       <li Class="CompProperties_Book">
         <nameMaker>Namer_Schematic</nameMaker>
         <descriptionMaker>Description_Schematic</descriptionMaker>
-        <ageYearsRange>100~300</ageYearsRange>
+        <ageYearsRange>100~200</ageYearsRange>
         <openGraphic>
           <texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
           <graphicClass>Graphic_Multi</graphicClass>
@@ -30,16 +29,15 @@
           <addTopAltitudeBias>true</addTopAltitudeBias>
         </verticalGraphic>
         <doers>
-          <li Class="VVRace.BookOutcomeProperties_GainResearchIncludeOnly">
-            <include>
-                <VV_BasicGathering />
-                <VV_AdvancedGathering />
-                <VV_Tools />
-                <VV_ArcaneBotany />
-                <VV_CombatArcaneBotany />
-                <VV_AdvancedArcaneBotany />
-                <VV_ElectricArcaneBotany />
-            </include>
+          <li Class="BookOutcomeProperties_GainResearch">
+            <tabs>
+              <Main />
+            </tabs>
+            <exclude>
+              <BasicMechtech MayRequire="Ludeon.RimWorld.Biotech"/>
+              <StandardMechtech MayRequire="Ludeon.RimWorld.Biotech"/>
+              <HighMechtech MayRequire="Ludeon.RimWorld.Biotech"/>
+            </exclude>
           </li>
         </doers>
       </li>
