@@ -42,6 +42,13 @@ namespace VVRace
             consumedCurve.curve = new SimpleCurve();
             _tmpDrawInfoList.Add(consumedCurve);
 
+            var transferedCurve = new SimpleCurveDrawInfo();
+            transferedCurve.color = Color.yellow;
+            transferedCurve.label = LocalizeString_ITab.VV_ITab_ManaAcceptor_ManaTrsCurveLabel.Translate();
+            transferedCurve.valueFormat = "{0}";
+            transferedCurve.curve = new SimpleCurve();
+            _tmpDrawInfoList.Add(transferedCurve);
+
             var exceededCurve = new SimpleCurveDrawInfo();
             exceededCurve.color = Color.blue;
             exceededCurve.label = LocalizeString_ITab.VV_ITab_ManaAcceptor_ManaExcCurveLabel.Translate();
@@ -57,16 +64,19 @@ namespace VVRace
 
                 generatedCurve.curve.Add(new CurvePoint(history.tick / 60000f, (int)(history.generated * GenTicks.TickRareInterval)), sort: false);
                 consumedCurve.curve.Add(new CurvePoint(history.tick / 60000f, (int)(history.consumed * GenTicks.TickRareInterval)), sort: false);
+                transferedCurve.curve.Add(new CurvePoint(history.tick / 60000f, (int)(history.transfered * GenTicks.TickRareInterval)), sort: false);
                 exceededCurve.curve.Add(new CurvePoint(history.tick / 60000f, (int)(history.exceeded * GenTicks.TickRareInterval)), sort: false);
             }
 
             generatedCurve.curve.SortPoints();
             consumedCurve.curve.SortPoints();
+            transferedCurve.curve.SortPoints();
             exceededCurve.curve.SortPoints();
             if (network.FluxHistory.Count == 1)
             {
                 generatedCurve.curve.Add(new CurvePoint(1.6666667E-05f, (int)(network.FluxHistory.Peek().generated * GenTicks.TickRareInterval)));
                 consumedCurve.curve.Add(new CurvePoint(1.6666667E-05f, (int)(network.FluxHistory.Peek().consumed * GenTicks.TickRareInterval)));
+                transferedCurve.curve.Add(new CurvePoint(1.6666667E-05f, (int)(network.FluxHistory.Peek().transfered * GenTicks.TickRareInterval)));
                 exceededCurve.curve.Add(new CurvePoint(1.6666667E-05f, (int)(network.FluxHistory.Peek().exceeded * GenTicks.TickRareInterval)));
             }
 

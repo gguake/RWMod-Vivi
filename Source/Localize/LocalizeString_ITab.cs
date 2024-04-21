@@ -23,6 +23,7 @@
         public const string VV_ITab_ManaAcceptor_StatsTabLabel = nameof(VV_ITab_ManaAcceptor_StatsTabLabel);
         public const string VV_ITab_ManaAcceptor_ManaGenCurveLabel = nameof(VV_ITab_ManaAcceptor_ManaGenCurveLabel);
         public const string VV_ITab_ManaAcceptor_ManaConCurveLabel = nameof(VV_ITab_ManaAcceptor_ManaConCurveLabel);
+        public const string VV_ITab_ManaAcceptor_ManaTrsCurveLabel = nameof(VV_ITab_ManaAcceptor_ManaTrsCurveLabel);
         public const string VV_ITab_ManaAcceptor_ManaExcCurveLabel = nameof(VV_ITab_ManaAcceptor_ManaExcCurveLabel);
     }
 }

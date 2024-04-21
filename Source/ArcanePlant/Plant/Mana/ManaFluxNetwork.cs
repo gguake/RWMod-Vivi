@@ -12,11 +12,12 @@ namespace VVRace
         public int tick;
         public float generated;
         public float consumed;
+        public float transfered;
         public float exceeded;
 
         public override string ToString()
         {
-            return $"{tick}|{generated}|{consumed}|{exceeded}";
+            return $"{tick}|{generated}|{consumed}|{transfered}|{exceeded}";
         }
     }
 
@@ -122,6 +123,8 @@ namespace VVRace
                     }
                 }
 
+                var totalOvergeneratedManaBeforeTransfer = totalOvergeneratedMana;
+
                 if (_nodesList.Count > 1)
                 {
                     int loopCount = 0;
@@ -167,6 +170,7 @@ namespace VVRace
                         tick = tick,
                         generated = totalGeneratedAtTick,
                         consumed = totalConsumedAtTick,
+                        transfered = Mathf.Max(0f, totalOvergeneratedManaBeforeTransfer - totalOvergeneratedMana),
                         exceeded = totalOvergeneratedMana,
                     };
 

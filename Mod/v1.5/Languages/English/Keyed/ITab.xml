@@ -22,5 +22,6 @@
   <VV_ITab_ManaAcceptor_StatsTabLabel>Stats</VV_ITab_ManaAcceptor_StatsTabLabel>
   <VV_ITab_ManaAcceptor_ManaGenCurveLabel>Generated Mana</VV_ITab_ManaAcceptor_ManaGenCurveLabel>
   <VV_ITab_ManaAcceptor_ManaConCurveLabel>Consumed Mana</VV_ITab_ManaAcceptor_ManaConCurveLabel>
+  <VV_ITab_ManaAcceptor_ManaTrsCurveLabel>Transferred Mana</VV_ITab_ManaAcceptor_ManaTrsCurveLabel>
   <VV_ITab_ManaAcceptor_ManaExcCurveLabel>Overflowed Mana</VV_ITab_ManaAcceptor_ManaExcCurveLabel>
 </LanguageData>

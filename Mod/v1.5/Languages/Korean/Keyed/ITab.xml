@@ -22,5 +22,6 @@
   <VV_ITab_ManaAcceptor_StatsTabLabel>통계</VV_ITab_ManaAcceptor_StatsTabLabel>
   <VV_ITab_ManaAcceptor_ManaGenCurveLabel>마나 생성량</VV_ITab_ManaAcceptor_ManaGenCurveLabel>
   <VV_ITab_ManaAcceptor_ManaConCurveLabel>마나 소모량</VV_ITab_ManaAcceptor_ManaConCurveLabel>
+  <VV_ITab_ManaAcceptor_ManaTrsCurveLabel>마나 전송량</VV_ITab_ManaAcceptor_ManaTrsCurveLabel>
   <VV_ITab_ManaAcceptor_ManaExcCurveLabel>마나 잉여량</VV_ITab_ManaAcceptor_ManaExcCurveLabel>
 </LanguageData>
