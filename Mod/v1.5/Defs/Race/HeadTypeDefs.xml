@@ -2,6 +2,7 @@
 <Defs>
   <HeadTypeDef Abstract="True" Name="VV_HeadBase" ParentName="AverageBase">
     <gender>None</gender>
+    <eyeOffsetEastWest>(0.1, 0, 0.17)</eyeOffsetEastWest>
 
     <modExtensions>
       <li Class="RPEF.ConstraintModExtension">

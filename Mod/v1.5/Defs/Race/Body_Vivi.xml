@@ -208,6 +208,11 @@
                     <li>Eyes</li>
                   </groups>
                   <woundAnchorTag>LeftEye</woundAnchorTag>
+                  <flipGraphic>true</flipGraphic>
+                  <visibleHediffRots>
+                    <li>South</li>
+                    <li>West</li>
+                  </visibleHediffRots>
                 </li>
                 <li>
                   <def>Eye</def>
@@ -218,11 +223,16 @@
                     <li>Eyes</li>
                   </groups>
                   <woundAnchorTag>RightEye</woundAnchorTag>
+                  <visibleHediffRots>
+                    <li>South</li>
+                    <li>East</li>
+                  </visibleHediffRots>
                 </li>
                 <li>
                   <def>Ear</def>
                   <customLabel>left ear</customLabel>
                   <coverage>0.07</coverage>
+                  <flipGraphic>true</flipGraphic>
                   <groups>
                     <li>UpperHead</li>
                     <li>FullHead</li>
@@ -292,6 +302,7 @@
           <customLabel>left shoulder</customLabel>
           <coverage>0.12</coverage>
           <woundAnchorTag>LeftShoulder</woundAnchorTag>
+          <flipGraphic>true</flipGraphic>
           <groups>
             <li>Shoulders</li>
           </groups>
@@ -302,6 +313,7 @@
               <coverage>0.09</coverage>
               <height>Top</height>
               <depth>Inside</depth>
+              <flipGraphic>true</flipGraphic>
               <groups>
                 <li>Torso</li>
               </groups>
@@ -310,6 +322,7 @@
               <def>Arm</def>
               <customLabel>left arm</customLabel>
               <coverage>0.77</coverage>
+              <flipGraphic>true</flipGraphic>
               <groups>
                 <li>Arms</li>
               </groups>
@@ -337,6 +350,7 @@
                   <customLabel>left hand</customLabel>
                   <coverage>0.14</coverage>
                   <height>Bottom</height>
+                  <flipGraphic>true</flipGraphic>
                   <groups>
                     <li>Hands</li>
                   </groups>
@@ -516,6 +530,7 @@
             <li>Legs</li>
           </groups>
           <woundAnchorTag>LeftLeg</woundAnchorTag>
+          <flipGraphic>true</flipGraphic>
           <parts>
             <li>
               <def>Femur</def>
@@ -539,6 +554,7 @@
               <def>Foot</def>
               <customLabel>left foot</customLabel>
               <coverage>0.1</coverage>
+              <flipGraphic>true</flipGraphic>
               <groups>
                 <li>Feet</li>
               </groups>
