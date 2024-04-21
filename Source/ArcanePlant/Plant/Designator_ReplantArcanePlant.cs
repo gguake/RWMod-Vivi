@@ -47,7 +47,7 @@ namespace VVRace
                             continue;
                         }
 
-                        return plant;
+                        return thing;
                     }
                 }
 
@@ -132,7 +132,9 @@ namespace VVRace
         public override void DesignateSingleCell(IntVec3 c)
         {
             var thingToInstall = MiniToInstallOrBuildingToReinstall;
-            GenSpawn.WipeExistingThings(c, placingRot, thingToInstall.def.installBlueprintDef, base.Map, DestroyMode.Deconstruct);
+            var placingDef = PlacingDef;
+
+            GenSpawn.WipeExistingThings(c, placingRot, placingDef.installBlueprintDef, base.Map, DestroyMode.Deconstruct);
             if (thingToInstall is MinifiedThing itemToInstall)
             {
                 GenConstruct.PlaceBlueprintForInstall(itemToInstall, c, base.Map, placingRot, Faction.OfPlayer);
@@ -141,7 +143,7 @@ namespace VVRace
             {
                 GenConstruct.PlaceBlueprintForReinstall((Building)thingToInstall, c, base.Map, placingRot, Faction.OfPlayer);
             }
-            FleckMaker.ThrowMetaPuffs(GenAdj.OccupiedRect(c, placingRot, thingToInstall.def.Size), base.Map);
+            FleckMaker.ThrowMetaPuffs(GenAdj.OccupiedRect(c, placingRot, placingDef.Size), base.Map);
 
             if (Find.Selector.NumSelected == 1 || MiniToInstallOrBuildingToReinstall == null)
             {
