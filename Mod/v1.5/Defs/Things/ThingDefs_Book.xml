@@ -42,5 +42,7 @@
         </doers>
       </li>
     </comps>
+    <thingSetMakerTags Inherit="False">
+    </thingSetMakerTags>
   </ThingDef>
 </Defs>
