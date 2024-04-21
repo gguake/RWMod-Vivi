@@ -750,7 +750,7 @@
         <glowSensitivity>High</glowSensitivity>
         
         <manageIntervalTicks>210000</manageIntervalTicks>
-        <optimalGlowRange>0.6~1.0</optimalGlowRange>
+        <optimalGlowRange>0.51~1.0</optimalGlowRange>
 
         <successChanceCurve>
           <points>

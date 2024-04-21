@@ -54,5 +54,22 @@
 
             return 0f;
         }
+
+        public static float CalcSeverity(this GrowingArcanePlantSensitivity sensitivity, int ticks)
+        {
+            switch (sensitivity)
+            {
+                case GrowingArcanePlantSensitivity.Low:
+                    return ticks / 80000f;
+
+                case GrowingArcanePlantSensitivity.Medium:
+                    return ticks / 60000f;
+
+                case GrowingArcanePlantSensitivity.High:
+                    return ticks / 45000f;
+            }
+
+            return 0f;
+        }
     }
 }

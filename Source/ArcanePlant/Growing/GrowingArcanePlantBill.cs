@@ -246,24 +246,24 @@ namespace VVRace
             {
                 if (_temperatureSeverity < 1f)
                 {
-                    _temperatureSeverity = Mathf.Clamp01(_temperatureSeverity + ticks / 60000f);
+                    _temperatureSeverity = Mathf.Clamp01(_temperatureSeverity + Data.temperatureSensitivity.CalcSeverity(ticks));
                 }
             }
             else
             {
-                _temperatureSeverity = Mathf.Clamp01(_temperatureSeverity - ticks / 45000f);
+                _temperatureSeverity = Mathf.Clamp01(_temperatureSeverity - Data.temperatureSensitivity.CalcSeverity(ticks));
             }
 
             if (IsGoodGlow)
             {
                 if (_glowSeverity < 1f)
                 {
-                    _glowSeverity = Mathf.Clamp01(_glowSeverity + ticks / 60000f);
+                    _glowSeverity = Mathf.Clamp01(_glowSeverity + Data.glowSensitivity.CalcSeverity(ticks));
                 }
             }
             else
             {
-                _glowSeverity = Mathf.Clamp01(_glowSeverity - ticks / 45000f);
+                _glowSeverity = Mathf.Clamp01(_glowSeverity - Data.glowSensitivity.CalcSeverity(ticks));
             }
 
         }
