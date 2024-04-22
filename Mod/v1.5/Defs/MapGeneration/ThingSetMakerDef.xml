@@ -9,7 +9,7 @@
           <weight>50</weight>
           <thingSetMaker Class="ThingSetMaker_MarketValue">
             <fixedParams>
-              <maxThingMarketValue>100</maxThingMarketValue>
+              <maxThingMarketValue>300</maxThingMarketValue>
               <filter>
                 <thingDefs>
                   <li>VV_Fertilizer</li>
@@ -55,7 +55,7 @@
           <weight>35</weight>
           <thingSetMaker Class="ThingSetMaker_MarketValue">
             <fixedParams>
-              <maxThingMarketValue>100</maxThingMarketValue>
+              <maxThingMarketValue>200</maxThingMarketValue>
               <filter>
                 <thingDefs>
                   <li>VV_Pollen</li>
@@ -68,7 +68,7 @@
           <weight>10</weight>
           <thingSetMaker Class="ThingSetMaker_MarketValue">
             <fixedParams>
-              <maxThingMarketValue>100</maxThingMarketValue>
+              <maxThingMarketValue>200</maxThingMarketValue>
               <filter>
                 <thingDefs>
                   <li>VV_Propolis</li>
@@ -89,7 +89,7 @@
           <weight>50</weight>
           <thingSetMaker Class="ThingSetMaker_MarketValue">
             <fixedParams>
-              <maxThingMarketValue>100</maxThingMarketValue>
+              <maxThingMarketValue>400</maxThingMarketValue>
               <filter>
                 <thingDefs>
                   <li>VV_FilteredHoney</li>
@@ -102,25 +102,39 @@
           <weight>35</weight>
           <thingSetMaker Class="ThingSetMaker_MarketValue">
             <fixedParams>
-              <maxThingMarketValue>100</maxThingMarketValue>
+              <maxThingMarketValue>200</maxThingMarketValue>
               <filter>
                 <thingDefs>
                   <li>VV_Vivicream</li>
                   <li>VV_Viviwax</li>
+                  <li>Neutroamine</li>
                 </thingDefs>
               </filter>
             </fixedParams>
           </thingSetMaker>
         </li>
         <li>
-          <weight>15</weight>
+          <weight>25</weight>
           <thingSetMaker Class="ThingSetMaker_MarketValue">
             <fixedParams>
-              <maxThingMarketValue>100</maxThingMarketValue>
+              <maxThingMarketValue>300</maxThingMarketValue>
               <filter>
                 <categories>
                   <li>VV_Petal</li>
                 </categories>
+              </filter>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+        <li>
+          <weight>25</weight>
+          <thingSetMaker Class="ThingSetMaker_MarketValue">
+            <fixedParams>
+              <maxThingMarketValue>300</maxThingMarketValue>
+              <filter>
+                <thingDefs>
+                  <li>MedicineHerbal</li>
+                </thingDefs>
               </filter>
             </fixedParams>
           </thingSetMaker>
@@ -135,10 +149,10 @@
     <root Class="ThingSetMaker_RandomOption">
       <options>
         <li>
-          <weight>45</weight>
+          <weight>50</weight>
           <thingSetMaker Class="ThingSetMaker_MarketValue">
             <fixedParams>
-              <maxThingMarketValue>150</maxThingMarketValue>
+              <maxThingMarketValue>400</maxThingMarketValue>
               <filter>
                 <thingDefs>
                   <li>VV_Viviwax</li>
@@ -150,10 +164,10 @@
           </thingSetMaker>
         </li>
         <li>
-          <weight>20</weight>
+          <weight>15</weight>
           <thingSetMaker Class="ThingSetMaker_MarketValue">
             <fixedParams>
-              <maxThingMarketValue>100</maxThingMarketValue>
+              <maxThingMarketValue>300</maxThingMarketValue>
               <filter>
                 <thingDefs>
                   <li>VV_Lifestrand</li>
