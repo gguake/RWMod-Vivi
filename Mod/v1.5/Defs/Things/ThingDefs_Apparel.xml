@@ -61,6 +61,9 @@
       </layers>
       <tags>
         <li>VV_ViviCombatApparel</li>
+        <li>Royal</li>
+        <li>RoyalTier2</li>
+        <li>RoyalTier6</li>
       </tags>
       <developmentalStageFilter>Adult</developmentalStageFilter>
       <canBeDesiredForIdeo>false</canBeDesiredForIdeo>
