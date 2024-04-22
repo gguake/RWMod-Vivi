@@ -65,6 +65,11 @@ namespace VVRace
 
         public override bool Visible => MiniToInstallOrBuildingToReinstall != null;
 
+        public Designator_ReplantArcanePlant()
+        {
+            icon = TexCommand.Replant;
+        }
+
         public override bool CanRemainSelected()
         {
             return MiniToInstallOrBuildingToReinstall != null;
@@ -96,8 +101,10 @@ namespace VVRace
                 }
             }
 
+            var thingOrMinified = MiniToInstallOrBuildingToReinstall;
+            var thingToInstall = ThingToInstall;
             var terrain = c.GetTerrain(Map);
-            var isWaterPlant = terrain.IsWater && ThingToInstall.def.terrainAffordanceNeeded != null && terrain.affordances.Contains(ThingToInstall.def.terrainAffordanceNeeded);
+            var isWaterPlant = terrain.IsWater && thingToInstall.def.terrainAffordanceNeeded != null && terrain.affordances.Contains(thingToInstall.def.terrainAffordanceNeeded);
             if (!onArcanePlantPot && !isWaterPlant && Map.fertilityGrid.FertilityAt(c) <= 0f)
             {
                 return new AcceptanceReport("CannotBePlantedHere".Translate() + ": " + "MessageWarningNotEnoughFertility".Translate().CapitalizeFirst());
@@ -124,9 +131,41 @@ namespace VVRace
                 {
                     return new AcceptanceReport("IdenticalThingExists".Translate());
                 }
+
+                if (thing != thingToInstall)
+                {
+                    if (thing is ArcanePlantPot) { continue; }
+                    if (thing.def.category == ThingCategory.Plant && thing.def.passability != Traversability.Impassable) { continue; }
+                    if (thing.def.category == ThingCategory.Building || thing.def.IsBlueprint || thing.def.IsFrame)
+                    {
+                        if ((thing.def.building == null || thing.def.building.canBuildNonEdificesUnder) ||
+                            (!thing.def.EverTransmitsPower || !thingToInstall.def.EverTransmitsPower))
+                        {
+                            continue;
+                        }
+                    }
+
+                    return new AcceptanceReport("SpaceAlreadyOccupied".Translate());
+                }
+
+                if (!thing.def.EverHaulable)
+                {
+                    return new AcceptanceReport("SpaceAlreadyOccupied".Translate());
+                }
+
+                if (thingToInstall.def.blocksAltitudes != null && thingToInstall.def.blocksAltitudes.Contains(thing.def.altitudeLayer))
+                {
+                    return new AcceptanceReport("SpaceAlreadyOccupied".Translate());
+                }
+
+                var thingBuiltDef = GenConstruct.BuiltDefOf(thing.def);
+                if (thingBuiltDef?.blocksAltitudes != null && thingBuiltDef.blocksAltitudes.Contains(thingToInstall.def.altitudeLayer))
+                {
+                    return new AcceptanceReport("SpaceAlreadyOccupied".Translate());
+                }
             }
 
-            return GenConstruct.CanPlaceBlueprintAt(PlacingDef, c, placingRot, base.Map, godMode: false, MiniToInstallOrBuildingToReinstall, ThingToInstall);
+            return true;
         }
 
         public override void DesignateSingleCell(IntVec3 c)
@@ -134,16 +173,16 @@ namespace VVRace
             var thingToInstall = MiniToInstallOrBuildingToReinstall;
             var placingDef = PlacingDef;
 
-            GenSpawn.WipeExistingThings(c, placingRot, placingDef.installBlueprintDef, base.Map, DestroyMode.Deconstruct);
-            if (thingToInstall is MinifiedThing itemToInstall)
+            GenSpawn.WipeExistingThings(c, placingRot, placingDef.installBlueprintDef, Map, DestroyMode.Deconstruct);
+            if (thingToInstall is MinifiedThing minified)
             {
-                GenConstruct.PlaceBlueprintForInstall(itemToInstall, c, base.Map, placingRot, Faction.OfPlayer);
+                GenConstruct.PlaceBlueprintForInstall(minified, c, Map, placingRot, Faction.OfPlayer);
             }
             else
             {
-                GenConstruct.PlaceBlueprintForReinstall((Building)thingToInstall, c, base.Map, placingRot, Faction.OfPlayer);
+                GenConstruct.PlaceBlueprintForReinstall((Building)thingToInstall, c, Map, placingRot, Faction.OfPlayer);
             }
-            FleckMaker.ThrowMetaPuffs(GenAdj.OccupiedRect(c, placingRot, placingDef.Size), base.Map);
+            FleckMaker.ThrowMetaPuffs(GenAdj.OccupiedRect(c, placingRot, placingDef.Size), Map);
 
             if (Find.Selector.NumSelected == 1 || MiniToInstallOrBuildingToReinstall == null)
             {

@@ -1,6 +1,4 @@
 ﻿using HarmonyLib;
-using RimWorld;
-using Verse;
 using VVRace.HarmonyPatches;
 
 namespace VVRace
@@ -20,26 +18,6 @@ namespace VVRace
             finally
             {
             }
-        }
-    }
-
-    [StaticConstructorOnStartup]
-    public static class ViviHarmonyPostPatcher
-    {
-        public static void PostPatchAll()
-        {
-            var harmony = new Harmony("rimworld.gguake.vivi");
-            if (ModLister.GetActiveModWithIdentifier("Solaris.FurnitureBase")?.Active ?? false)
-            {
-                Log.Message("!! [ViViRace] gloomyfurniture compatiblity - CanPlaceBlueprintOver unpatched");
-                harmony.Unpatch(typeof(GenConstruct).GetMethod("CanPlaceBlueprintOver"), HarmonyPatchType.Prefix, "com.Gloomylynx.rimworld.mod");
-            }
-
-        }
-
-        static ViviHarmonyPostPatcher()
-        {
-            PostPatchAll();
         }
     }
 }

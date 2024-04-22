@@ -51,6 +51,8 @@
     <placeWorkers>
       <li>VVRace.PlaceWorker_AllowArcanePlantPot</li>
     </placeWorkers>
+    <rotatable>false</rotatable>
+    
     <building>
       <ai_neverTrashThis>true</ai_neverTrashThis>
       <ai_chillDestination>false</ai_chillDestination>
