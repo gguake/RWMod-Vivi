@@ -12,20 +12,21 @@ namespace VVRace
             var map = BaseGen.globalSettings.map;
             var center = resolveParams.rect.CenterCell;
 
+            var turretDef = Rand.Bool ? VVThingDefOf.VV_Peashooter : VVThingDefOf.VV_Pealauncher;
+
             var pots = new List<(int xOffset, int zOffset, ThingDef plantDef)>()
             {
-                (0, 0, VVThingDefOf.VV_Richflower),
-                (1, 0, VVThingDefOf.VV_Pealauncher),
-                (-1, 0, VVThingDefOf.VV_Pealauncher),
-                (0, 1, VVThingDefOf.VV_Pealauncher),
-                (0, -1, VVThingDefOf.VV_Pealauncher),
+                (0, 0, VVThingDefOf.VV_Waterdrops),
+                (1, 0, VVThingDefOf.VV_Radiantflower),
+                (-1, 0, VVThingDefOf.VV_Radiantflower),
+                (0, 1, turretDef),
+                (0, -1, turretDef),
 
-                (1, -1, VVThingDefOf.VV_Peashooter),
-                (1, 1, VVThingDefOf.VV_Peashooter),
-                (-1, 1, VVThingDefOf.VV_Peashooter),
-                (-1, -1, VVThingDefOf.VV_Peashooter),
+                (1, -1, turretDef),
+                (1, 1, turretDef),
+                (-1, 1, turretDef),
+                (-1, -1, turretDef),
             };
-
 
             #region 방어벽
             {

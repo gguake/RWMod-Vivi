@@ -45,8 +45,8 @@ namespace VVRace
                 (0, 0, VVThingDefOf.VV_Radiantflower),
                 (0, 1, VVThingDefOf.VV_Richflower),
                 (0, -1, VVThingDefOf.VV_Richflower),
-                (1, 0, VVThingDefOf.VV_Peashooter),
-                (-1, 0, VVThingDefOf.VV_Peashooter),
+                (1, 0, VVThingDefOf.VV_Richflower),
+                (-1, 0, VVThingDefOf.VV_Richflower),
             };
 
             #region 고대 꽃 생성

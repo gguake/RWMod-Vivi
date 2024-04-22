@@ -34,11 +34,11 @@ namespace VVRace
 
             var pots = new List<(int xOffset, int zOffset, ThingDef plantDef)>()
             {
-                (0, 0, VVThingDefOf.VV_Richflower),
-                (0, 1, VVThingDefOf.VV_EmberBloom),
-                (1, 0, VVThingDefOf.VV_Peashooter),
-                (-1, 0, VVThingDefOf.VV_Peashooter),
-                (0, -1, VVThingDefOf.VV_Peashooter),
+                (0, 0, VVThingDefOf.VV_EmberBloom),
+                (0, 1, VVThingDefOf.VV_Skyweed),
+                (1, 0, VVThingDefOf.VV_Skyweed),
+                (-1, 0, VVThingDefOf.VV_Skyweed),
+                (0, -1, VVThingDefOf.VV_Skyweed),
             };
 
             #region 고대 꽃 생성

@@ -84,6 +84,7 @@ namespace VVRace
         public static ThingDef VV_Peashooter;
         public static ThingDef VV_Pealauncher;
         public static ThingDef VV_Shootus;
+        public static ThingDef VV_Skyweed;
         public static ThingDef VV_Dreamum;
 
         public static ThingDef VV_ViviHoneycombWall;
