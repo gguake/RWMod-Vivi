@@ -9,6 +9,7 @@
     </targetTags>
     <workerClass>VVRace.IncidentWorker_HornetSwarm</workerClass>
     <baseChance>0.6</baseChance>
+    <minRefireDays>15</minRefireDays>
     <category>ThreatBig</category>
     <pointsScaleable>true</pointsScaleable>
     <tale>ManhunterPack</tale>
@@ -17,14 +18,15 @@
     </letterHyperlinkHediffDefs>
   </IncidentDef>
   
+  <!-- TODO: Legacy -->
   <IncidentDef>
     <defName>VV_TitanicHornetSwarmVivi</defName>
-    <label>hornet swarm (vivi)</label>
+    <label>hornet swarm</label>
     <targetTags>
       <li>Map_PlayerHome</li>
     </targetTags>
     <workerClass>VVRace.IncidentWorker_HornetSwarm_Vivi</workerClass>
-    <baseChance>2.9</baseChance>
+    <baseChance>0</baseChance>
     <category>ThreatBig</category>
     <pointsScaleable>true</pointsScaleable>
     <tale>ManhunterPack</tale>
