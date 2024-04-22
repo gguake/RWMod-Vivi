@@ -70,7 +70,7 @@ namespace VVRace
         private static readonly Texture2D ToggleLayEggTex = ContentFinder<Texture2D>.Get("UI/Commands/VV_LayEgg");
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
         {
-            if (parent.Spawned && CompVivi.isRoyal)
+            if (parent.Spawned && parent is Pawn pawn && pawn.IsColonistPlayerControlled && CompVivi.isRoyal)
             {
                 yield return new EggProgressGizmo((Pawn)parent);
 
