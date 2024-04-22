@@ -55,6 +55,7 @@
         <li>VV_RefiningWorkbench</li>
         <li>Brewery</li>
       </recipeUsers>
+      <bulkRecipeCount>4</bulkRecipeCount>
     </recipeMaker>
     
     <tradeability>None</tradeability>

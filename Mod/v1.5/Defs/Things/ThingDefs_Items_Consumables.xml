@@ -32,7 +32,7 @@
       <DeteriorationRate>8</DeteriorationRate>
       <FoodPoisonChanceFixedHuman>0.5</FoodPoisonChanceFixedHuman>
     </statBases>
-    <stackLimit>100</stackLimit>
+    <stackLimit>200</stackLimit>
 
     <ingestible>
       <preferability>NeverForNutrition</preferability>
