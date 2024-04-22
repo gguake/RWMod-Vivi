@@ -78,6 +78,7 @@
       <li Class="VVRace.HediffCompProperties_GrowthBoost" />
       <li Class="HediffCompProperties_Disappears">
         <disappearsAfterTicks>54000~66000</disappearsAfterTicks>
+        <showRemainingTime>true</showRemainingTime>
       </li>
     </comps>
 
@@ -137,6 +138,7 @@
     <comps>
       <li Class="HediffCompProperties_Disappears">
         <disappearsAfterTicks>45000~60000</disappearsAfterTicks>
+        <showRemainingTime>true</showRemainingTime>
       </li>
     </comps>
   </HediffDef>
@@ -163,6 +165,7 @@
     <comps>
       <li Class="HediffCompProperties_Disappears">
         <disappearsAfterTicks>45000~60000</disappearsAfterTicks>
+        <showRemainingTime>true</showRemainingTime>
       </li>
     </comps>
   </HediffDef>
@@ -191,6 +194,7 @@
     <comps>
       <li Class="HediffCompProperties_Disappears">
         <disappearsAfterTicks>45000~60000</disappearsAfterTicks>
+        <showRemainingTime>true</showRemainingTime>
       </li>
     </comps>
   </HediffDef>

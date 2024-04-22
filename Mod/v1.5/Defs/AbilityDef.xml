@@ -2,20 +2,20 @@
 <Defs>
   <AbilityDef>
     <defName>VV_Glide</defName>
-    <label>glide</label>
+    <label>fly</label>
     <description>Moves quickly by flying short distances. Wings must be intact, and it gets a little hungry.</description>
     <iconPath>UI/Abilities/Longjump</iconPath>
-    <cooldownTicksRange>10000</cooldownTicksRange>
+    <cooldownTicksRange>2000</cooldownTicksRange>
     <hostile>false</hostile>
     <aiCanUse>true</aiCanUse>
     
     <verbProperties>
       <verbClass>Verb_CastAbilityJump</verbClass>
-      <label>jump</label>
+      <label>fly</label>
       <violent>false</violent>
       <forceNormalTimeSpeed>false</forceNormalTimeSpeed>
-      <warmupTime>3.0</warmupTime>
-      <range>20.9</range>
+      <warmupTime>0.5</warmupTime>
+      <range>15.9</range>
       <requireLineOfSight>true</requireLineOfSight>
       <soundCast>Longjump_Jump</soundCast>
       <soundLanding>Longjump_Land</soundLanding>
