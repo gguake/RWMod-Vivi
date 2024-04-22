@@ -48,7 +48,7 @@ namespace VVRace
         {
             if (GenTicks.TicksGame >= _nextRefreshTick)
             {
-                if (parent.Spawned && parent is ArcanePlant arcanePlant && arcanePlant.ManaChargeRatio > 0f)
+                if (parent.Spawned && !parent.Destroyed && parent is ArcanePlant arcanePlant && arcanePlant.ManaChargeRatio > 0f)
                 {
                     try
                     {

@@ -20,7 +20,7 @@ namespace VVRace
 
         public override void CompTick()
         {
-            if (!parent.Spawned) { return; }
+            if (!parent.Spawned || parent.Destroyed) { return; }
 
             base.CompTick();
 

@@ -93,7 +93,7 @@ namespace VVRace
 
         public void Tick(int ticks = 1)
         {
-            if (!parent.Spawned) { return; }
+            if (!parent.Spawned || parent.Destroyed) { return; }
 
             bool hasMana = false;
             var plant = parent as ArcanePlant;

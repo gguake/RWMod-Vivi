@@ -23,6 +23,7 @@
       <MaxHitPoints>100</MaxHitPoints>
     </statBases>
 
+    <fillPercent>0.25</fillPercent>
     <costList>
       <VV_LivingLeaf>15</VV_LivingLeaf>
     </costList>
@@ -197,6 +198,7 @@
       <MaxHitPoints>100</MaxHitPoints>
     </statBases>
 
+    <fillPercent>0.25</fillPercent>
     <costList>
       <VV_LivingLeaf>15</VV_LivingLeaf>
     </costList>
@@ -374,6 +376,9 @@
     <drawerType>MapMeshAndRealTime</drawerType>
 
     <uiIconOffset>(0,0.16)</uiIconOffset>
+    
+    <pathCost>30</pathCost>
+    <pathCostIgnoreRepeat>true</pathCostIgnoreRepeat>
 
     <statBases>
       <MarketValue>320</MarketValue>
@@ -451,10 +456,10 @@
         <multiplier>0.5</multiplier>
       </li>
     </damageMultipliers>
-    <fillPercent>0.5</fillPercent>
+    <fillPercent>0.6</fillPercent>
 
     <costList>
-      <VV_LivingLeaf>20</VV_LivingLeaf>
+      <VV_LivingLeaf>15</VV_LivingLeaf>
     </costList>
 
     <comps>

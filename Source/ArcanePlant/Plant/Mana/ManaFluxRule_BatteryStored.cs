@@ -11,6 +11,8 @@ namespace VVRace
 
         public override float CalcManaFlux(ManaAcceptor plant, int ticks)
         {
+            if (!plant.Spawned || plant.Destroyed) { return 0f; }
+
             var batteryComp = plant.TryGetComp<CompPowerBattery>();
             if (batteryComp != null)
             {

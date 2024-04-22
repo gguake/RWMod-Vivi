@@ -17,7 +17,8 @@ namespace VVRace
     {
         public CompProperties_LightningLod Props => (CompProperties_LightningLod)props;
 
-        public bool Active => parent is ArcanePlant plant &&
+        public bool Active => 
+            parent is ArcanePlant plant &&
             plant.Spawned &&
             !plant.Position.Roofed(plant.Map) &&
             plant.Mana >= Props.manaConditionRange.min && 

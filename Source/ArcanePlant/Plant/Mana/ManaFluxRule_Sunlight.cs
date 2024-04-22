@@ -10,6 +10,8 @@ namespace VVRace
 
         public override float CalcManaFlux(ManaAcceptor plant, int ticks)
         {
+            if (!plant.Spawned || plant.Destroyed) { return 0f; }
+
             if (plant.Map.roofGrid.Roofed(plant.Position))
             {
                 return 0f;

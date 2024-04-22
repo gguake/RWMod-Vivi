@@ -29,42 +29,19 @@
     <soundDrop>Metal_Drop</soundDrop>
 
     <minifiedDef>MinifiedArcanePlant</minifiedDef>
+    <pathCost>14</pathCost>
     <pathCostIgnoreRepeat>false</pathCostIgnoreRepeat>
 
     <useHitPoints>true</useHitPoints>
     <statBases>
       <Mass>3</Mass>
       <Flammability>1</Flammability>
-
       <WorkToBuild>1800</WorkToBuild>
-      <ArmorRating_Blunt>0.5</ArmorRating_Blunt>
     </statBases>
-    <damageMultipliers>
-      <li>
-        <damageDef>Flame</damageDef>
-        <multiplier>2.0</multiplier>
-      </li>
-      <li>
-        <damageDef>Burn</damageDef>
-        <multiplier>2.0</multiplier>
-      </li>
-      <li>
-        <damageDef>Crush</damageDef>
-        <multiplier>0.75</multiplier>
-      </li>
-      <li>
-        <damageDef>Blunt</damageDef>
-        <multiplier>0.75</multiplier>
-      </li>
-      <li>
-        <damageDef>Poke</damageDef>
-        <multiplier>0.75</multiplier>
-      </li>
-    </damageMultipliers>
 
     <size>(1,1)</size>
     <stackLimit>1</stackLimit>
-    <fillPercent>0.3</fillPercent>
+    <fillPercent>0.2</fillPercent>
 
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
     <thingCategories>
@@ -77,18 +54,17 @@
     <building>
       <ai_neverTrashThis>true</ai_neverTrashThis>
       <ai_chillDestination>false</ai_chillDestination>
-
       <deconstructible>true</deconstructible>
       <claimable>false</claimable>
-      
       <allowWireConnection>false</allowWireConnection>
       <allowAutoroof>false</allowAutoroof>
       <repairable>false</repairable>
       <artificialForMeditationPurposes>false</artificialForMeditationPurposes>
       <canPlaceOverWall>false</canPlaceOverWall>
-
-      <uninstallWork>1200</uninstallWork>
+      <uninstallWork>250</uninstallWork>
     </building>
+    <resourcesFractionWhenDeconstructed>1</resourcesFractionWhenDeconstructed>
+
     <inspectorTabs>
       <li>VVRace.ITab_ManaFluxStats</li>
     </inspectorTabs>
@@ -124,7 +100,7 @@
   </ThingDef>
 
   <!-- 마나 전송 튜브-->
-  <ThingDef ParentName="BuildingBase">
+  <ThingDef Name="VV_ManaTransferTube" ParentName="BuildingBase">
     <defName>VV_ManaTransferTube</defName>
     <label>mana transfer tube</label>
     <description>a tube for long-distance mana transmission. It can be built under walls or other buildings. It merely transmits mana and does not produce any additional mana.</description>
@@ -172,7 +148,7 @@
     <placingDraggableDimensions>1</placingDraggableDimensions>
     <costList>
       <VV_Viviwax>2</VV_Viviwax>
-      <VV_SparklingPetal>1</VV_SparklingPetal>
+      <VV_SparklingPetal>3</VV_SparklingPetal>
     </costList>
     <comps>
     </comps>
@@ -193,5 +169,35 @@
     <researchPrerequisites>
       <li>VV_ManaTransferTube</li>
     </researchPrerequisites>
+  </ThingDef>
+
+  <!-- 숨겨진 마나 전송 튜브 -->
+  <ThingDef ParentName="VV_ManaTransferTube">
+    <defName>VV_HiddenManaTransferTube</defName>
+    <label>hidden mana transfer tube</label>
+    <description>.</description>
+    <graphicData>
+      <color>(0,0,0,0)</color>
+      <shaderType>Transparent</shaderType>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>80</MaxHitPoints>
+      <WorkToBuild>300</WorkToBuild>
+      <Flammability>0</Flammability>
+      <Beauty>0</Beauty>
+    </statBases>
+    <uiIconPath>Things/Building/VV_ManaFluxTube_MenuIcon</uiIconPath>
+    <designationHotKey>Misc9</designationHotKey>
+    <costList>
+      <VV_Viviwax>10</VV_Viviwax>
+      <VV_SparklingPetal>3</VV_SparklingPetal>
+    </costList>
+    <constructEffect>ConstructDirt</constructEffect>
+    <building>
+      <ai_neverTrashThis>true</ai_neverTrashThis>
+      <isTargetable>false</isTargetable>
+      <expandHomeArea>false</expandHomeArea>
+      <canBeDamagedByAttacks>false</canBeDamagedByAttacks>
+    </building>
   </ThingDef>
 </Defs>

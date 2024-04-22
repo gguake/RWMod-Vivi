@@ -12,6 +12,8 @@ namespace VVRace
 
         public override float CalcManaFlux(ManaAcceptor plant, int ticks)
         {
+            if (!plant.Spawned || plant.Destroyed) { return 0f; }
+
             if (manaPerAdjacentWater != 0f)
             {
                 var mana = plant.Position.GetTerrain(plant.Map).IsWater ? manaFromOccupiedWater : 0f;

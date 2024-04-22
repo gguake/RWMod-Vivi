@@ -92,7 +92,7 @@ namespace VVRace
         {
             base.Tick();
 
-            if (Active && Spawned)
+            if (Active && Spawned && !Destroyed)
             {
                 GunCompEq.verbTracker.VerbsTick();
                 if (AttackVerb.state == VerbState.Bursting)

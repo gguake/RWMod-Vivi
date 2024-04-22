@@ -12,6 +12,8 @@ namespace VVRace
 
         public override float CalcManaFlux(ManaAcceptor plant, int ticks)
         {
+            if (!plant.Spawned || plant.Destroyed) { return 0f; }
+
             if (weatherDefs != null && weatherDefs.Contains(plant.Map.weatherManager.curWeather))
             {
                 return mana / 60000f * ticks;

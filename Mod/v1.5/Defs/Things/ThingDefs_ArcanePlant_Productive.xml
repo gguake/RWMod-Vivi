@@ -544,10 +544,10 @@
     <terrainAffordanceNeeded>VV_WaterOrLight</terrainAffordanceNeeded>
     <statBases>
       <MarketValue>320</MarketValue>
-      <MaxHitPoints>40</MaxHitPoints>
+      <MaxHitPoints>70</MaxHitPoints>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
-      <Flammability>0.1</Flammability>
+      <Flammability>0</Flammability>
       
       <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
       <VV_PlantHoneyGatherYield>0.5</VV_PlantHoneyGatherYield>
@@ -695,12 +695,6 @@
         <overlightRadius>7.7</overlightRadius>
         <glowOnlyRoofed>true</glowOnlyRoofed>
       </li>
-      
-      <li Class="CompProperties_Schedule">
-        <startTime>0.25</startTime>
-        <endTime>0.8</endTime>
-        <offMessage>Off for plant resting period</offMessage>
-      </li>
     </comps>
     <specialDisplayRadius>6.38</specialDisplayRadius>
 
@@ -710,12 +704,12 @@
 
     <modExtensions>
       <li Class="VVRace.ManaExtension">
-        <manaCapacity>240</manaCapacity>
+        <manaCapacity>300</manaCapacity>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_CompositeSum">
           <rules>
             <li Class="VVRace.ManaFluxRule_GlowerActive">
-              <mana>90</mana>
+              <mana>240</mana>
             </li>
             <li Class="VVRace.ManaFluxRule_Constant">
               <mana>10</mana>
@@ -811,7 +805,7 @@
     </statBases>
 
     <costList>
-      <VV_PerfumingPetal>20</VV_PerfumingPetal>
+      <VV_PerfumingPetal>15</VV_PerfumingPetal>
     </costList>
 
     <comps>
@@ -930,7 +924,7 @@
 
     <statBases>
       <MarketValue>320</MarketValue>
-      <MaxHitPoints>80</MaxHitPoints>
+      <MaxHitPoints>90</MaxHitPoints>
       <Beauty>15</Beauty>
       <BeautyOutdoors>15</BeautyOutdoors>
     </statBases>
@@ -1087,7 +1081,7 @@
     </statBases>
 
     <costList>
-      <VV_LivingLeaf>10</VV_LivingLeaf>
+      <VV_LivingLeaf>5</VV_LivingLeaf>
       <VV_SkyweedFluff>10</VV_SkyweedFluff>
     </costList>
 
@@ -1213,7 +1207,7 @@
     <resourcesFractionWhenDeconstructed>1</resourcesFractionWhenDeconstructed>
 
     <costList>
-      <VV_SkyweedFluff>5</VV_SkyweedFluff>
+      <VV_SkyweedFluff>10</VV_SkyweedFluff>
       <VV_Viviwax>10</VV_Viviwax>
       <Cloth>10</Cloth>
     </costList>

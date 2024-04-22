@@ -24,4 +24,6 @@
   <VV_ITab_ManaAcceptor_ManaConCurveLabel>마나 소모량</VV_ITab_ManaAcceptor_ManaConCurveLabel>
   <VV_ITab_ManaAcceptor_ManaTrsCurveLabel>마나 전송량</VV_ITab_ManaAcceptor_ManaTrsCurveLabel>
   <VV_ITab_ManaAcceptor_ManaExcCurveLabel>마나 잉여량</VV_ITab_ManaAcceptor_ManaExcCurveLabel>
+  <VV_ITab_ManaAcceptor_LegendTooltip>모든 마법 식물은 마나를 지속적으로 소비하며 일부 마법 식물은 마나를 생산합니다.
+\n모든 마법 식물은 생산된 마나를 자신의 최대 비축량까지 우선 비축하고 남은 생산량을 연결된 다른 마법 식물에 전송합니다.</VV_ITab_ManaAcceptor_LegendTooltip>
 </LanguageData>

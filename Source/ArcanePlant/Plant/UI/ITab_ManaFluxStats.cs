@@ -91,7 +91,9 @@ namespace VVRace
             curveDrawerStyle.YIntegersOnly = true;
 
             SimpleCurveDrawer.DrawCurves(graphRect, _tmpDrawInfoList, curveDrawerStyle, legendRect: legendRect);
+
             Text.Anchor = TextAnchor.UpperLeft;
+            TooltipHandler.TipRegion(legendRect, LocalizeString_ITab.VV_ITab_ManaAcceptor_LegendTooltip.Translate());
         }
     }
 }

@@ -10,6 +10,8 @@ namespace VVRace
 
         public override float CalcManaFlux(ManaAcceptor plant, int ticks)
         {
+            if (!plant.Spawned || plant.Destroyed) { return 0f; }
+
             if (plant.Position.Roofed(plant.Map))
             {
                 return mana / 60000f * ticks;

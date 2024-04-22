@@ -10,7 +10,7 @@ namespace VVRace
 
         public override float CalcManaFlux(ManaAcceptor plant, int ticks)
         {
-            if (!plant.IsOutside()) { return 0f; }
+            if (!plant.Spawned || plant.Destroyed || !plant.IsOutside()) { return 0f; }
 
             return manaFromWindSpeed.Evaluate(plant.Map.windManager.WindSpeed) / 60000f * ticks;
         }

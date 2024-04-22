@@ -26,6 +26,11 @@ namespace VVRace
         {
             base.Tick();
 
+            if (!Spawned || Destroyed)
+            {
+                return;
+            }
+
             UpdateGraphic();
         }
 
@@ -48,11 +53,7 @@ namespace VVRace
             if (_lastCompGlowerState != CompGlower.Glows)
             {
                 _lastCompGlowerState = CompGlower.Glows;
-
-                if (Spawned)
-                {
-                    DirtyMapMesh(Map);
-                }
+                DirtyMapMesh(Map);
             }
         }
     }

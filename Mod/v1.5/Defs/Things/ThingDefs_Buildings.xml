@@ -156,7 +156,7 @@
     <altitudeLayer>Building</altitudeLayer>
     <passability>PassThroughOnly</passability>
     <useHitPoints>True</useHitPoints>
-    <fillPercent>0.5</fillPercent>
+    <fillPercent>0.3</fillPercent>
     <pathCost>50</pathCost>
     <statBases>
       <Mass>20</Mass>
@@ -311,7 +311,7 @@
     
     <costList>
       <ComponentIndustrial>3</ComponentIndustrial>
-      <VV_SparklingPetal>15</VV_SparklingPetal>
+      <VV_SparklingPetal>40</VV_SparklingPetal>
     </costList>
     <stuffCategories>
       <li>VV_Wax</li>

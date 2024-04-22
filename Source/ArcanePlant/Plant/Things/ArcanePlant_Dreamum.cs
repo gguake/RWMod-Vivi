@@ -11,6 +11,11 @@ namespace VVRace
         {
             base.Tick();
 
+            if (!Spawned || Destroyed)
+            {
+                return;
+            }
+
             if (this.IsHashIntervalTick(HediffInterval))
             {
                 var cells = GenRadial.RadialPatternInRadius(2.9f);
