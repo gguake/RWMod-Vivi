@@ -209,16 +209,16 @@
       <MaxHitPoints>240</MaxHitPoints>
       <WorkToMake>7200</WorkToMake>
       <Mass>1.0</Mass>
-      <StuffEffectMultiplierArmor>0.35</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierArmor>0.4</StuffEffectMultiplierArmor>
       <StuffEffectMultiplierInsulation_Cold>0.5</StuffEffectMultiplierInsulation_Cold>
       <StuffEffectMultiplierInsulation_Heat>0.5</StuffEffectMultiplierInsulation_Heat>
       <EquipDelay>1.5</EquipDelay>
       
-      <ArmorRating_Sharp>0.06</ArmorRating_Sharp>
-      <ArmorRating_Blunt>0.06</ArmorRating_Blunt>
+      <ArmorRating_Sharp>0.1</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.1</ArmorRating_Blunt>
     </statBases>
     <equippedStatOffsets>
-      <ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">0.1</ToxicEnvironmentResistance>
+      <ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">0.5</ToxicEnvironmentResistance>
     </equippedStatOffsets>
     
     <costStuffCount>70</costStuffCount>

@@ -27,7 +27,7 @@
     <uiIconScale>0.8</uiIconScale>
     <altitudeLayer>Building</altitudeLayer>
     <passability>Impassable</passability>
-    <fillPercent>1.0</fillPercent>
+    <fillPercent>0.9</fillPercent>
 
     <statBases>
       <MaxHitPoints>10000</MaxHitPoints>

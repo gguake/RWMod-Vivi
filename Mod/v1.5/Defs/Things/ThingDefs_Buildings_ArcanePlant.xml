@@ -29,8 +29,8 @@
     <uiIconOffset>(0, -0.1)</uiIconOffset>
     <altitudeLayer>Building</altitudeLayer>
     <passability>PassThroughOnly</passability>
-    <fillPercent>0.4</fillPercent>
-    <pathCost>30</pathCost>
+    <fillPercent>0.3</fillPercent>
+    <pathCost>14</pathCost>
 
     <statBases>
       <MaxHitPoints>200</MaxHitPoints>
@@ -96,7 +96,7 @@
     <altitudeLayer>Building</altitudeLayer>
     <passability>PassThroughOnly</passability>
     <fillPercent>0.2</fillPercent>
-    <pathCost>30</pathCost>
+    <pathCost>14</pathCost>
     <statBases>
       <MaxHitPoints>150</MaxHitPoints>
       <Mass>25</Mass>
