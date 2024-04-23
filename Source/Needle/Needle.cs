@@ -213,13 +213,6 @@ namespace VVRace
         {
             if (curTarget == caster)
             {
-                var pawn = caster as Pawn;
-                var cooldownStance = pawn?.stances?.curStance as Stance_Cooldown;
-                if (cooldownStance != null && cooldownStance.verb is Verb_SpawnNeedle)
-                {
-                    pawn.stances.CancelBusyStanceHard();
-                }
-
                 Destroy();
                 return;
             }
@@ -329,6 +322,18 @@ namespace VVRace
                 _tmpTargetCandidates.Clear();
                 _tmpTargetDuplicatedCandidates.Clear();
             }
+        }
+
+        public override void Destroy(DestroyMode mode = DestroyMode.Vanish)
+        {
+            var pawn = caster as Pawn;
+            var cooldownStance = pawn?.stances?.curStance as Stance_Cooldown;
+            if (cooldownStance != null && cooldownStance.verb is Verb_SpawnNeedle)
+            {
+                pawn.stances.CancelBusyStanceHard();
+            }
+
+            base.Destroy(mode);
         }
     }
 }
