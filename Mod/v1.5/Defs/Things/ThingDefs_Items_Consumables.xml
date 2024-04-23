@@ -112,7 +112,7 @@
       <MaxHitPoints>40</MaxHitPoints>
       <Flammability>0.8</Flammability>
       <MarketValue>2.4</MarketValue>
-      <Nutrition>0.12</Nutrition>
+      <Nutrition>0.125</Nutrition>
     </statBases>
     <stackLimit>200</stackLimit>
     <comps>

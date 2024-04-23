@@ -133,7 +133,7 @@
     </products>
   </RecipeDef>
 
-  <!-- 대량 비료 정제 -->
+  <!-- 대량 비료 정제 (씨앗) -->
   <RecipeDef>
     <defName>VV_MakeFertilizerSeeds</defName>
     <label>make fertilizer from seeds</label>
@@ -150,29 +150,53 @@
     <ingredients>
       <li>
         <filter>
-          <thingDefs>
+          <categories>
+            <li>Foods</li>
+            <li>PlantMatter</li>
+          </categories>
+          <disallowedCategories>
+            <li>FoodMeals</li>
+          </disallowedCategories>
+          <disallowedThingDefs>
+            <li>VV_Pollen</li>
             <li>VV_UnknownSeed</li>
-          </thingDefs>
+          </disallowedThingDefs>
         </filter>
-        <count>10</count>
+        <count>3.5</count>
       </li>
       <li>
         <filter>
           <thingDefs>
             <li>VV_Pollen</li>
+            <li>VV_UnknownSeed</li>
           </thingDefs>
         </filter>
-        <count>150</count>
+        <count>1.0</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
-      <thingDefs>
-        <li>VV_UnknownSeed</li>
+      <categories>
+        <li>Foods</li>
+        <li>PlantMatter</li>
+      </categories>
+      <disallowedCategories>
+        <li>FoodMeals</li>
+      </disallowedCategories>
+      <disallowedThingDefs>
         <li>VV_Pollen</li>
-      </thingDefs>
+        <li>VV_UnknownSeed</li>
+      </disallowedThingDefs>
     </fixedIngredientFilter>
+    <defaultIngredientFilter>
+      <categories>
+        <li>FoodRaw</li>
+      </categories>
+      <disallowedCategories>
+        <li>AnimalProductRaw</li>
+      </disallowedCategories>
+    </defaultIngredientFilter>
     <products>
-      <VV_Fertilizer>50</VV_Fertilizer>
+      <VV_Fertilizer>45</VV_Fertilizer>
     </products>
   </RecipeDef>
 </Defs>

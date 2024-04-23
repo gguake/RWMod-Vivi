@@ -42,7 +42,7 @@
     
     <modExtensions>
       <li Class="VVRace.ManaExtension">
-        <manaCapacity>600</manaCapacity>
+        <manaCapacity>1000</manaCapacity>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
           <mana>0</mana>

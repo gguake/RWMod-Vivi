@@ -82,7 +82,7 @@
 
     <equippedStatOffsets>
       <VV_HoneyGatherSpeed>1.0</VV_HoneyGatherSpeed>
-      <VV_HoneyGatherYield>0.5</VV_HoneyGatherYield>
+      <VV_HoneyGatherYield>1.0</VV_HoneyGatherYield>
     </equippedStatOffsets>
     
     <apparel>
@@ -129,10 +129,10 @@
     </statBases>
 
     <equippedStatOffsets>
-      <CleaningSpeed>1.0</CleaningSpeed>
+      <CleaningSpeed>0.5</CleaningSpeed>
       <SmoothingSpeed>0.5</SmoothingSpeed>
-      <VV_PlantGatherSpeed>0.35</VV_PlantGatherSpeed>
-      <VV_PlantGatherYield>0.35</VV_PlantGatherYield>
+      <VV_PlantGatherSpeed>0.25</VV_PlantGatherSpeed>
+      <VV_PlantGatherYield>0.25</VV_PlantGatherYield>
     </equippedStatOffsets>
     
     <apparel>

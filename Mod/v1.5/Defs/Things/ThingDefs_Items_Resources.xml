@@ -229,10 +229,19 @@
       <MarketValue>10</MarketValue>
       <MaxHitPoints>30</MaxHitPoints>
       <Flammability>1.0</Flammability>
+      <Nutrition>0.1</Nutrition>
       <DeteriorationRate>5</DeteriorationRate>
     </statBases>
     <stackLimit>10</stackLimit>
     
+    <ingestible>
+      <preferability>NeverForNutrition</preferability>
+      <tasteThought>AteRawFood</tasteThought>
+      <ingestEffect>EatVegetarian</ingestEffect>
+      <ingestSound>RawVegetable_Eat</ingestSound>
+      <foodType>Seed</foodType>
+    </ingestible>
+
     <tradeTags>
       <li>VV_ViviProduct</li>
     </tradeTags>
