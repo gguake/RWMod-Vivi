@@ -3,12 +3,12 @@
   <ScenarioDef>
     <defName>VV_ViviRefugeeStart</defName>
     <label>vivi refugees</label>
-    <description>Your nest was destroyed by giant wasp swarms. The surviving Vivis scattered, and your small group of refugees escaped with minimal supplies.
+    <description>Your nest was destroyed by titanic hornet swarms. The surviving Vivis scattered, and your small group of refugees escaped with minimal supplies.
 \nFortunately, you managed to evade pursuit, but the future looks grim for your group as it lacks a Royal Vivi. Can the Vivis rebuild their nest?</description>
     <scenario>
       <name>vivi refugees</name>
       <summary>A well-armed group of Vivi refugees.</summary>
-      <description>Your nest was destroyed by giant wasp swarms. The surviving Vivis scattered, and your small group of refugees escaped with minimal supplies.
+      <description>Your nest was destroyed by titanic hornet swarms. The surviving Vivis scattered, and your small group of refugees escaped with minimal supplies.
 \nFortunately, you managed to evade pursuit, but the future looks grim for your group as it lacks a Royal Vivi. Can the Vivis rebuild their nest?</description>
       <playerFaction>
         <def>PlayerFaction</def>

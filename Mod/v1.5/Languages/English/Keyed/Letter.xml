@@ -10,8 +10,8 @@
 <VV_Letter_RoyalViviGrownLabel>New Royal Vivi: {PAWN_labelShort}</VV_Letter_RoyalViviGrownLabel>
 <VV_Letter_RoyalViviGrown>{PAWN_labelShort} has consumed enough royal jelly to grow into a Royal Vivi.</VV_Letter_RoyalViviGrown>
 
-<VV_Letter_IncidentHornetSwarmArrivedLabel>Giant Hornet Swarm</VV_Letter_IncidentHornetSwarmArrivedLabel>
-<VV_Letter_IncidentHornetSwarmArrived>A frenzied swarm of giant hornets has appeared. They will roam around and attack any life forms they encounter. Giant hornets are very fast and durable, difficult to take down with conventional weapons, but vulnerable to fire and poison.
+<VV_Letter_IncidentHornetSwarmArrivedLabel>Titanic Hornet Swarm</VV_Letter_IncidentHornetSwarmArrivedLabel>
+<VV_Letter_IncidentHornetSwarmArrived>A frenzied swarm of titanic hornets has appeared. They will roam around and attack any life forms they encounter. Titanic hornets are very fast and durable, difficult to take down with conventional weapons, but vulnerable to fire and poison.
 \nThey cannot pass through doors, so hiding behind walls is safe. They will indiscriminately hunt the nearest targets, so it is advisable to hide if you lack adequate defenses. The swarm will hunt everything moving in the area and will leave on its own after a few days.</VV_Letter_IncidentHornetSwarmArrived>
 
 <VV_Letter_ViviRuinsFoundLabel>.</VV_Letter_ViviRuinsFoundLabel>
