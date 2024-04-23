@@ -100,7 +100,28 @@ namespace VVRace
                     return;
                 }
 
-                if (curTarget.IsValid && (Position == curTarget.Cell || (curTarget.CenterVector3 - curPos).sqrMagnitude < 1))
+                var impact = false;
+                if (curTarget.IsValid)
+                {
+                    var targetThingDef = curTarget.Thing.def;
+                    if (targetThingDef.Size.x == 1 && targetThingDef.Size.z == 1)
+                    {
+                        if (Position == curTarget.Cell || (curTarget.CenterVector3 - curPos).sqrMagnitude < 1)
+                        {
+                            impact = true;
+                        }
+                    }
+                    else
+                    {
+                        var d = curTarget.Thing.TrueCenter() - curPos;
+                        if (Mathf.Abs(d.x) < targetThingDef.Size.x && Math.Abs(d.z) < targetThingDef.Size.z)
+                        {
+                            impact = true;
+                        }
+                    }
+                }
+
+                if (impact)
                 {
                     ImpactToTarget(props);
                 }

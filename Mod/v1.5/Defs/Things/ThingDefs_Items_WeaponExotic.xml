@@ -259,8 +259,8 @@
       <speed>49</speed>
 
       <maxAttackCount>7</maxAttackCount>
-      <targettingRadius>3</targettingRadius>
-      <overrunTicks>3~8</overrunTicks>
+      <targettingRadius>3.6</targettingRadius>
+      <overrunTicks>8~12</overrunTicks>
 
       <maxAngleVelocity>10.1</maxAngleVelocity>
       <forceDirectingRadiusSqr>11</forceDirectingRadiusSqr>
