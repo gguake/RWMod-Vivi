@@ -18,16 +18,16 @@ namespace VVRace
                 return LocalizeString_Stat.VV_StatsReport_ManaFluxRule_Temperature_Desc.Translate(
                     activeTemperatureRange.TrueMin.ToStringTemperature(),
                     activeTemperatureRange.TrueMax.ToStringTemperature(),
-                    inverse ? -manaFromTemperatureRange.TrueMax : manaFromTemperatureRange.TrueMax,
-                    inverse ? -manaFromTemperatureRange.TrueMin : manaFromTemperatureRange.TrueMin);
+                    (inverse ? -manaFromTemperatureRange.TrueMax : manaFromTemperatureRange.TrueMax).ToString("+0;-#"),
+                    (inverse ? -manaFromTemperatureRange.TrueMin : manaFromTemperatureRange.TrueMin).ToString("+0;-#"));
             }
             else
             {
                 return LocalizeString_Stat.VV_StatsReport_ManaFluxRule_Temperature_Desc.Translate(
                     activeTemperatureRange.TrueMin.ToStringTemperature(),
                     activeTemperatureRange.TrueMax.ToStringTemperature(),
-                    inverse ? -manaFromTemperatureRange.TrueMin : manaFromTemperatureRange.TrueMin,
-                    inverse ? -manaFromTemperatureRange.TrueMax : manaFromTemperatureRange.TrueMax);
+                    (inverse ? -manaFromTemperatureRange.TrueMin : manaFromTemperatureRange.TrueMin).ToString("+0;-#"),
+                    (inverse ? -manaFromTemperatureRange.TrueMax : manaFromTemperatureRange.TrueMax).ToString("+0;-#"));
             }
         }
 

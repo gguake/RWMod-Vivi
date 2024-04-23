@@ -12,8 +12,8 @@ namespace VVRace
 
         public override string GetRuleString(bool inverse) =>
             LocalizeString_Stat.VV_StatsReport_ManaFluxRule_AdjacentWater_Desc.Translate(
-                inverse ? -manaFromOccupiedWater : manaFromOccupiedWater,
-                inverse ? -manaPerAdjacentWater : manaPerAdjacentWater);
+                (inverse ? -manaFromOccupiedWater : manaFromOccupiedWater).ToString("+0;-#"),
+                (inverse ? -manaPerAdjacentWater : manaPerAdjacentWater).ToString("+0;-#"));
 
         public override int CalcManaFlux(ManaAcceptor plant)
         {

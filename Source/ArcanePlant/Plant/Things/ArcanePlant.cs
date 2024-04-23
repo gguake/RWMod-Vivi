@@ -343,17 +343,13 @@ namespace VVRace
                 var sbDesc = new StringBuilder(LocalizeString_Stat.VV_StatsReport_ManaFlux_Desc.Translate());
 
                 var approximateManaRange = new IntRange(0, 0);
-                if (ManaExtension.manaGenerateRule != null || ManaExtension.manaConsumeRule != null)
-                {
-                    sbDesc.AppendLine();
-                }
-
                 if (ManaExtension.manaGenerateRule != null)
                 {
                     var genRange = ManaExtension.manaGenerateRule.ApproximateManaFlux;
                     approximateManaRange.min += genRange.min;
                     approximateManaRange.max += genRange.max;
 
+                    sbDesc.AppendLine();
                     sbDesc.AppendInNewLine(ManaExtension.manaGenerateRule.GetRuleString(false));
                 }
 
@@ -363,6 +359,7 @@ namespace VVRace
                     approximateManaRange.min -= conRange.max;
                     approximateManaRange.max -= conRange.min;
 
+                    sbDesc.AppendLine();
                     sbDesc.AppendInNewLine(ManaExtension.manaConsumeRule.GetRuleString(true));
                 }
 

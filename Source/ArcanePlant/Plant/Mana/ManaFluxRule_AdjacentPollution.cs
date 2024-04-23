@@ -13,8 +13,8 @@ namespace VVRace
 
         public override string GetRuleString(bool inverse) => 
             LocalizeString_Stat.VV_StatsReport_ManaFluxRule_AdjacentPollution_Desc.Translate(
-                inverse ? -manaFromOccupiedPollution : manaFromOccupiedPollution,
-                inverse ? -manaPerAdjacentPollution : manaPerAdjacentPollution);
+                (inverse ? -manaFromOccupiedPollution : manaFromOccupiedPollution).ToString("+0;-#"),
+                (inverse ? -manaPerAdjacentPollution : manaPerAdjacentPollution).ToString("+0;-#"));
 
         public override int CalcManaFlux(ManaAcceptor plant)
         {

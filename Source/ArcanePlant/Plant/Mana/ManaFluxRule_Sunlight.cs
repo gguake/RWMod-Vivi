@@ -10,7 +10,7 @@ namespace VVRace
 
         public override string GetRuleString(bool inverse) =>
             LocalizeString_Stat.VV_StatsReport_ManaFluxRule_Sunlight_Desc.Translate(
-                inverse ? -manaFromSunlightRange.TrueMax : manaFromSunlightRange.TrueMax);
+                (inverse ? -manaFromSunlightRange.TrueMax : manaFromSunlightRange.TrueMax).ToString("+0;-#"));
 
         public override int CalcManaFlux(ManaAcceptor plant)
         {

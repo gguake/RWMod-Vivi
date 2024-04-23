@@ -11,7 +11,7 @@ namespace VVRace
 
         public override string GetRuleString(bool inverse) =>
             LocalizeString_Stat.VV_StatsReport_ManaFluxRule_BatteryStored_Desc.Translate(
-                inverse ? -manaFromStoredEnergy.TrueMax : manaFromStoredEnergy.TrueMax);
+                (inverse ? -manaFromStoredEnergy.TrueMax : manaFromStoredEnergy.TrueMax).ToString("+0;-#"));
 
         public override int CalcManaFlux(ManaAcceptor plant)
         {

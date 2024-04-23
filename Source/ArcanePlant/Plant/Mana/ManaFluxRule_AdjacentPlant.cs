@@ -13,7 +13,7 @@ namespace VVRace
 
         public override string GetRuleString(bool inverse) => 
             LocalizeString_Stat.VV_StatsReport_ManaFluxRule_AdjacentPlant_Desc.Translate(
-                inverse ? -manaPerAdjacentPlant : manaPerAdjacentPlant);
+                (inverse ? -manaPerAdjacentPlant : manaPerAdjacentPlant).ToString("+0;-#"));
 
         public override int CalcManaFlux(ManaAcceptor plant)
         {

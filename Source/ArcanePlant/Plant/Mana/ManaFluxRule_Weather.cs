@@ -33,8 +33,8 @@ namespace VVRace
     {
         public override string GetRuleString(bool inverse) =>
             disableIfRoofed ? 
-            LocalizeString_Stat.VV_StatsReport_ManaFluxRule_WeatherRainyNoRoof_Desc.Translate(inverse ? -mana : mana) :
-            LocalizeString_Stat.VV_StatsReport_ManaFluxRule_WeatherRainy_Desc.Translate(inverse ? -mana : mana);
+            LocalizeString_Stat.VV_StatsReport_ManaFluxRule_WeatherRainyNoRoof_Desc.Translate((inverse ? -mana : mana).ToString("+0;-#")) :
+            LocalizeString_Stat.VV_StatsReport_ManaFluxRule_WeatherRainy_Desc.Translate((inverse ? -mana : mana).ToString("+0;-#"));
 
         protected override bool CheckWeather(WeatherDef curWeatherDef)
         {
@@ -46,8 +46,8 @@ namespace VVRace
     {
         public override string GetRuleString(bool inverse) =>
             disableIfRoofed ?
-            LocalizeString_Stat.VV_StatsReport_ManaFluxRule_WeatherSnowyNoRoof_Desc.Translate(inverse ? -mana : mana) :
-            LocalizeString_Stat.VV_StatsReport_ManaFluxRule_WeatherSnowy_Desc.Translate(inverse ? -mana : mana);
+            LocalizeString_Stat.VV_StatsReport_ManaFluxRule_WeatherSnowyNoRoof_Desc.Translate((inverse ? -mana : mana).ToString("+0;-#")) :
+            LocalizeString_Stat.VV_StatsReport_ManaFluxRule_WeatherSnowy_Desc.Translate((inverse ? -mana : mana).ToString("+0;-#"));
 
         protected override bool CheckWeather(WeatherDef curWeatherDef)
         {

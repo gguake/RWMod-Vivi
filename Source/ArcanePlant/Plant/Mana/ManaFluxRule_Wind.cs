@@ -11,7 +11,7 @@ namespace VVRace
 
         public override string GetRuleString(bool inverse) =>
             LocalizeString_Stat.VV_StatsReport_ManaFluxRule_Wind_Desc.Translate(
-                inverse ? -(int)manaFromWindSpeed.MaxY : (int)manaFromWindSpeed.MaxY);
+                (inverse ? -(int)manaFromWindSpeed.MaxY : (int)manaFromWindSpeed.MaxY).ToString("+0;-#"));
 
         public override int CalcManaFlux(ManaAcceptor plant)
         {

@@ -10,7 +10,7 @@ namespace VVRace
 
         public override string GetRuleString(bool inverse) =>
             LocalizeString_Stat.VV_StatsReport_ManaFluxRule_GlowerActive_Desc.Translate(
-            inverse ? -mana : mana);
+            (inverse ? -mana : mana).ToString("+0;-#"));
 
         public override int CalcManaFlux(ManaAcceptor plant)
         {
