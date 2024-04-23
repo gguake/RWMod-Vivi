@@ -161,7 +161,6 @@
     <selectable>true</selectable>
     <neverMultiSelect>true</neverMultiSelect>
     <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
-    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
     <designationCategory>VV_Bulidings</designationCategory>
     <uiOrder>2400</uiOrder>
     <constructEffect>ConstructMetal</constructEffect>
