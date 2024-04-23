@@ -10,9 +10,9 @@ namespace VVRace
         {
             new CurvePoint(0f, 1f),
             new CurvePoint(2.999f, 1f),
-            new CurvePoint(3f, 3f),
-            new CurvePoint(10f, 3f),
-            new CurvePoint(20f, 5f),
+            new CurvePoint(3f, 2f),
+            new CurvePoint(10f, 3.5f),
+            new CurvePoint(20f, 4.5f),
             new CurvePoint(100f, 7f),
         });
 
