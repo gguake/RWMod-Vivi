@@ -69,7 +69,7 @@
       <li Class="VVRace.GrowingArcanePlantData">
         <ingredients>
           <VV_UnknownSeed>1</VV_UnknownSeed>
-          <MedicineHerbal>10</MedicineHerbal>
+          <MedicineHerbal>15</MedicineHerbal>
           <VV_Pollen>100</VV_Pollen>
         </ingredients>
 
@@ -245,8 +245,8 @@
       <li Class="VVRace.GrowingArcanePlantData">
         <ingredients>
           <VV_UnknownSeed>1</VV_UnknownSeed>
-          <MedicineHerbal>5</MedicineHerbal>
-          <Chemfuel>30</Chemfuel>
+          <MedicineHerbal>10</MedicineHerbal>
+          <Chemfuel>50</Chemfuel>
           <VV_Pollen>100</VV_Pollen>
         </ingredients>
 
@@ -502,8 +502,8 @@
       <li Class="VVRace.GrowingArcanePlantData">
         <ingredients>
           <VV_UnknownSeed>1</VV_UnknownSeed>
-          <VV_RoyalJelly>5</VV_RoyalJelly>
-          <VV_Pollen>100</VV_Pollen>
+          <VV_RoyalJelly>3</VV_RoyalJelly>
+          <VV_Pollen>150</VV_Pollen>
         </ingredients>
 
         <totalGrowDays>20</totalGrowDays>
