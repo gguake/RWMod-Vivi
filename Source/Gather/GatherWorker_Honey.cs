@@ -35,7 +35,7 @@ namespace VVRace
                     FilthMaker.TryMakeFilth(pawn.Position, pawn.Map, VVThingDefOf.VV_FilthPollen, target.def.defName, 1);
                 }
 
-                if (Rand.Chance(0.07f))
+                if (Rand.Chance(0.04f))
                 {
                     var seed = ThingMaker.MakeThing(VVThingDefOf.VV_UnknownSeed);
                     seed.stackCount = 1;
