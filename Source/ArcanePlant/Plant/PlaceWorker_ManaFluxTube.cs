@@ -14,7 +14,7 @@ namespace VVRace
                     return false;
                 }
 
-                if (thingList[i].def.entityDefToBuild != null && thingList[i].def.entityDefToBuild is ThingDef thingDef && typeof(ManaAcceptor).IsAssignableFrom(thingDef.thingClass))
+                if (thingList[i].def.entityDefToBuild != null && thingList[i].def.entityDefToBuild is ThingDef thingDef && checkingDef != thingDef && typeof(ManaAcceptor).IsAssignableFrom(thingDef.thingClass))
                 {
                     return false;
                 }

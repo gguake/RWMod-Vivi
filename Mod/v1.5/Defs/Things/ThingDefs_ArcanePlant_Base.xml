@@ -136,7 +136,6 @@
     <inspectorTabs>
       <li>VVRace.ITab_ManaFluxStats</li>
     </inspectorTabs>
-    
     <drawerType>MapMeshOnly</drawerType>
     <altitudeLayer>Conduits</altitudeLayer>
     <passability>Standable</passability>
@@ -162,12 +161,12 @@
     <selectable>true</selectable>
     <neverMultiSelect>true</neverMultiSelect>
     <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
     <designationCategory>VV_Bulidings</designationCategory>
     <uiOrder>2400</uiOrder>
     <constructEffect>ConstructMetal</constructEffect>
     <clearBuildingArea>false</clearBuildingArea>
     <designationHotKey>Misc8</designationHotKey>
-    
     <researchPrerequisites>
       <li>VV_ManaTransferTube</li>
     </researchPrerequisites>
