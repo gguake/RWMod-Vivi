@@ -176,7 +176,7 @@
   <ThingDef ParentName="VV_ManaTransferTube">
     <defName>VV_HiddenManaTransferTube</defName>
     <label>hidden mana transfer tube</label>
-    <description>.</description>
+    <description>a Mana transfer tube buried underground. It is not visible from the surface, so it does not become a target of attacks and does not interfere with aesthetics, but it is more expensive to construct.</description>
     <graphicData>
       <color>(0,0,0,0)</color>
       <shaderType>Transparent</shaderType>

@@ -67,9 +67,9 @@ namespace VVRace
 
         public override void CompTick()
         {
-            if (parent.IsHashIntervalTick(60))
+            if (parent.IsHashIntervalTick(GenTicks.TickRareInterval))
             {
-                Tick(60);
+                Tick(GenTicks.TickRareInterval);
             }
         }
 

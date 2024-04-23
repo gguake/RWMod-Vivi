@@ -366,7 +366,7 @@ namespace VVRace
                 yield return new StatDrawEntry(
                     StatCategoryDefOf.Basics,
                     LocalizeString_Stat.VV_StatsReport_ManaFlux.Translate(),
-                    approximateManaRange.ToString(),
+                    approximateManaRange.min == approximateManaRange.max ? approximateManaRange.min.ToString() : approximateManaRange.ToString(),
                     sbDesc.ToString(),
                     -22201);
             }
