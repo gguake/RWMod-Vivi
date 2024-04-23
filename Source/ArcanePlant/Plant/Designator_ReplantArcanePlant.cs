@@ -134,6 +134,7 @@ namespace VVRace
 
                 if (thing != thingToInstall)
                 {
+                    if (thing is Pawn pawn) { continue; }
                     if (thing is ArcanePlantPot) { continue; }
                     if (thing.def.category == ThingCategory.Plant && thing.def.passability != Traversability.Impassable) { continue; }
                     if (thing.def.category == ThingCategory.Building || thing.def.IsBlueprint || thing.def.IsFrame)
