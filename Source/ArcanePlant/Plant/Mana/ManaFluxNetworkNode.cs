@@ -26,9 +26,9 @@ namespace VVRace
                 var extension = manaAcceptor.ManaExtension;
                 if (extension == null) { return 0; }
 
-                var generatedMana = extension.manaGenerateRule?.CalcManaFlux(manaAcceptor, 60000) ?? 0;
-                var consumedMana = extension.manaConsumeRule?.CalcManaFlux(manaAcceptor, 60000) ?? 0;
-                return (int)generatedMana - (int)consumedMana;
+                var generatedMana = extension.manaGenerateRule?.CalcManaFlux(manaAcceptor) ?? 0;
+                var consumedMana = extension.manaConsumeRule?.CalcManaFlux(manaAcceptor) ?? 0;
+                return generatedMana - consumedMana;
             }
         }
 

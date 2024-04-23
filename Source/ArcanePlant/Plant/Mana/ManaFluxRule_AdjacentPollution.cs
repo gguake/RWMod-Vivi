@@ -1,38 +1,40 @@
 ﻿using System.Linq;
+using UnityEngine;
 using Verse;
 
 namespace VVRace
 {
     public class ManaFluxRule_AdjacentPollution : ManaFluxRule
     {
-        public float manaFromOccupiedPollution;
-        public float manaPerAdjacentPollution;
+        public int manaFromOccupiedPollution;
+        public int manaPerAdjacentPollution;
 
-        public override IntRange ApproximateManaFlux => new IntRange(0, (int)manaFromOccupiedPollution + (int)manaPerAdjacentPollution * 4);
+        public override IntRange ApproximateManaFlux => new IntRange(0, manaFromOccupiedPollution + manaPerAdjacentPollution * 4);
 
-        public override float CalcManaFlux(ManaAcceptor plant, int ticks)
+        public override string GetRuleString(bool inverse) => 
+            LocalizeString_Stat.VV_StatsReport_ManaFluxRule_AdjacentPollution_Desc.Translate(
+                inverse ? -manaFromOccupiedPollution : manaFromOccupiedPollution,
+                inverse ? -manaPerAdjacentPollution : manaPerAdjacentPollution);
+
+        public override int CalcManaFlux(ManaAcceptor plant)
         {
-            if (!plant.Spawned || plant.Destroyed) { return 0f; }
+            if (!plant.Spawned || plant.Destroyed) { return 0; }
 
-            if (manaPerAdjacentPollution != 0f)
+            var mana = manaFromOccupiedPollution != 0 && plant.Position.IsPolluted(plant.Map) ? Mathf.RoundToInt(manaFromOccupiedPollution) : 0;
+            if (manaPerAdjacentPollution != 0)
             {
-                var mana = plant.Position.IsPolluted(plant.Map) ? manaFromOccupiedPollution : 0f;
                 foreach (var cell in GenAdj.CellsAdjacentCardinal(plant).Where(v => v.InBounds(plant.Map)))
                 {
                     if (cell.IsPolluted(plant.Map))
                     {
-                        mana += manaPerAdjacentPollution;
+                        mana += Mathf.RoundToInt(manaPerAdjacentPollution);
                     }
                 }
 
-                return mana / 60000f * ticks;
-            }
-            else if (manaFromOccupiedPollution != 0f)
-            {
-                return plant.Position.IsPolluted(plant.Map) ? manaFromOccupiedPollution / 60000f * ticks : 0f;
+                return mana;
             }
 
-            return 0f;
+            return 0;
         }
     }
 }

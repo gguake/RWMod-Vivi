@@ -4,13 +4,17 @@ namespace VVRace
 {
     public class ManaFluxRule_Constant : ManaFluxRule
     {
-        public float mana;
+        public int mana;
 
-        public override IntRange ApproximateManaFlux => new IntRange((int)mana, (int)mana);
+        public override IntRange ApproximateManaFlux => new IntRange(mana, mana);
 
-        public override float CalcManaFlux(ManaAcceptor plant, int ticks)
+        public override string GetRuleString(bool inverse) =>
+            LocalizeString_Stat.VV_StatsReport_ManaFluxRule_Constant_Desc.Translate(
+            mana);
+
+        public override int CalcManaFlux(ManaAcceptor manaAcceptor)
         {
-            return mana / 60000f * ticks;
+            return mana;
         }
     }
 }

@@ -4,20 +4,24 @@ namespace VVRace
 {
     public class ManaFluxRule_Sunlight : ManaFluxRule
     {
-        public FloatRange manaFromSunlightRange;
+        public IntRange manaFromSunlightRange;
 
-        public override IntRange ApproximateManaFlux => new IntRange((int)manaFromSunlightRange.min, (int)manaFromSunlightRange.max);
+        public override IntRange ApproximateManaFlux => new IntRange(manaFromSunlightRange.min, manaFromSunlightRange.max);
 
-        public override float CalcManaFlux(ManaAcceptor plant, int ticks)
+        public override string GetRuleString(bool inverse) =>
+            LocalizeString_Stat.VV_StatsReport_ManaFluxRule_Sunlight_Desc.Translate(
+                inverse ? -manaFromSunlightRange.TrueMax : manaFromSunlightRange.TrueMax);
+
+        public override int CalcManaFlux(ManaAcceptor plant)
         {
-            if (!plant.Spawned || plant.Destroyed) { return 0f; }
+            if (!plant.Spawned || plant.Destroyed) { return 0; }
 
             if (plant.Map.roofGrid.Roofed(plant.Position))
             {
-                return 0f;
+                return 0;
             }
 
-            return manaFromSunlightRange.LerpThroughRange(plant.Map.skyManager.CurSkyGlow) / 60000f * ticks;
+            return manaFromSunlightRange.Lerped(plant.Map.skyManager.CurSkyGlow);
         }
     }
 }

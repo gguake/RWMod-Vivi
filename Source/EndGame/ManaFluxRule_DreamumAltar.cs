@@ -4,18 +4,20 @@ namespace VVRace
 {
     public class ManaFluxRule_DreamumAltar : ManaFluxRule
     {
-        public float mana;
+        public int mana;
 
-        public override IntRange ApproximateManaFlux => new IntRange((int)mana, (int)mana);
+        public override IntRange ApproximateManaFlux => new IntRange(mana, mana);
 
-        public override float CalcManaFlux(ManaAcceptor manaAcceptor, int ticks)
+        public override string GetRuleString(bool inverse) => "";
+
+        public override int CalcManaFlux(ManaAcceptor manaAcceptor)
         {
             if (manaAcceptor is Building_DreamumAltar altar && altar.Stage == DreamumProjectStage.InProgress)
             {
-                return mana / 60000f * ticks;
+                return mana;
             }
 
-            return 0f;
+            return 0;
         }
     }
 }

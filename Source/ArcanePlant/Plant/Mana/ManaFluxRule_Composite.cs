@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 using Verse;
 
 namespace VVRace
@@ -22,12 +23,23 @@ namespace VVRace
             }
         }
 
-        public override float CalcManaFlux(ManaAcceptor plant, int ticks)
+        public override string GetRuleString(bool inverse)
         {
-            float sum = 0f;
+            var sb = new StringBuilder(rules[0].GetRuleString(inverse));
+            for (int i = 1; i < rules.Count; ++i)
+            {
+                sb.AppendInNewLine(rules[i].GetRuleString(inverse));
+            }
+
+            return sb.ToString();
+        }
+
+        public override int CalcManaFlux(ManaAcceptor plant)
+        {
+            int sum = 0;
             for (int i = 0; i < rules.Count; ++i)
             {
-                sum += rules[i].CalcManaFlux(plant, ticks);
+                sum += rules[i].CalcManaFlux(plant);
             }
 
             return sum;

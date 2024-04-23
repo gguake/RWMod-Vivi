@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
 <VV_StatsReport_Mana>Maximum Mana</VV_StatsReport_Mana>
-<VV_StatsReport_Mana_Desc>The amount of mana a plant can store at maximum.</VV_StatsReport_Mana_Desc>
+<VV_StatsReport_Mana_Desc>The amount of mana a arcane plant can store at maximum.</VV_StatsReport_Mana_Desc>
 
-<VV_StatsReport_ManaFlux>Average Mana Change</VV_StatsReport_ManaFlux>
-<VV_StatsReport_ManaFlux_Desc>The daily mana fluctuation of this plant. Mana can be produced by certain arcane plants when fertilized or under suitable conditions, and is not consumed when stored.
-\nIf the reserve is at maximum, any additional produced mana is transferred to adjacent connected arcane plants.</VV_StatsReport_ManaFlux_Desc>
+<VV_StatsReport_ManaFlux>Mana Fluctuation</VV_StatsReport_ManaFlux>
+<VV_StatsReport_ManaFlux_Desc>The daily mana fluctuation of this arcane plant. Mana can be produced by certain arcane plants when fertilized or under suitable conditions, and is not consumed when packaged.\nIf reserved mana is at maximum, any overproduced mana is transferred to adjacent connected arcane plants.</VV_StatsReport_ManaFlux_Desc>
 </LanguageData>

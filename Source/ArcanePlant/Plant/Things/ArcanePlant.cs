@@ -336,16 +336,42 @@ namespace VVRace
                 LocalizeString_Stat.VV_StatsReport_Mana.Translate(),
                 ManaExtension.manaCapacity.ToString(),
                 LocalizeString_Stat.VV_StatsReport_Mana_Desc.Translate(),
-                -20000);
+                -22200);
 
             if (Spawned)
             {
+                var sbDesc = new StringBuilder(LocalizeString_Stat.VV_StatsReport_ManaFlux_Desc.Translate());
+
+                var approximateManaRange = new IntRange(0, 0);
+                if (ManaExtension.manaGenerateRule != null || ManaExtension.manaConsumeRule != null)
+                {
+                    sbDesc.AppendLine();
+                }
+
+                if (ManaExtension.manaGenerateRule != null)
+                {
+                    var genRange = ManaExtension.manaGenerateRule.ApproximateManaFlux;
+                    approximateManaRange.min += genRange.min;
+                    approximateManaRange.max += genRange.max;
+
+                    sbDesc.AppendInNewLine(ManaExtension.manaGenerateRule.GetRuleString(false));
+                }
+
+                if (ManaExtension.manaConsumeRule != null)
+                {
+                    var conRange = ManaExtension.manaConsumeRule.ApproximateManaFlux;
+                    approximateManaRange.min -= conRange.max;
+                    approximateManaRange.max -= conRange.min;
+
+                    sbDesc.AppendInNewLine(ManaExtension.manaConsumeRule.GetRuleString(true));
+                }
+
                 yield return new StatDrawEntry(
                     StatCategoryDefOf.Basics,
                     LocalizeString_Stat.VV_StatsReport_ManaFlux.Translate(),
-                    _manaFluxNode.LocalManaFluxForInspector.ToString("+0;-#"),
-                    LocalizeString_Stat.VV_StatsReport_ManaFlux_Desc.Translate(),
-                    -20001);
+                    approximateManaRange.ToString(),
+                    sbDesc.ToString(),
+                    -22201);
             }
         }
 

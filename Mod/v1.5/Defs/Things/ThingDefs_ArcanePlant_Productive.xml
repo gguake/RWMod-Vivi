@@ -178,10 +178,18 @@
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
           <mana>15</mana>
         </manaConsumeRule>
-        <manaGenerateRule Class="VVRace.ManaFluxRule_Temperature">
-          <activeTemperatureRange>-100~-12</activeTemperatureRange>
-          <manaFromTemperatureRange>30~100</manaFromTemperatureRange>
-          <manaLerpReversed>true</manaLerpReversed>
+        <manaGenerateRule Class="VVRace.ManaFluxRule_CompositeSum">
+          <rules>
+            <li Class="VVRace.ManaFluxRule_Temperature">
+              <activeTemperatureRange>-100~-12</activeTemperatureRange>
+              <manaFromTemperatureRange>30~100</manaFromTemperatureRange>
+              <manaLerpReversed>true</manaLerpReversed>
+            </li>
+            <li Class="VVRace.ManaFluxRule_WeatherSnowy">
+              <disableIfRoofed>true</disableIfRoofed>
+              <mana>85</mana>
+            </li>
+          </rules>
         </manaGenerateRule>
       </li>
 
@@ -592,9 +600,16 @@
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
           <mana>30</mana>
         </manaConsumeRule>
-        <manaGenerateRule Class="VVRace.ManaFluxRule_AdjacentWater">
-          <manaFromOccupiedWater>45</manaFromOccupiedWater>
-          <manaPerAdjacentWater>15</manaPerAdjacentWater>
+        <manaGenerateRule Class="VVRace.ManaFluxRule_CompositeSum">
+          <rules>
+            <li Class="VVRace.ManaFluxRule_AdjacentWater">
+              <manaFromOccupiedWater>40</manaFromOccupiedWater>
+              <manaPerAdjacentWater>15</manaPerAdjacentWater>
+            </li>
+            <li Class="VVRace.ManaFluxRule_WeatherRainy">
+              <mana>60</mana>
+            </li>
+          </rules>
         </manaGenerateRule>
       </li>
 

@@ -89,10 +89,11 @@ namespace VVRace
             {
                 _tempDistributeManaFluxNodeCandidateIndices.Clear();
 
-                var totalGeneratedAtTick = 0f;
-                var totalConsumedAtTick = 0f;
+                var tickInterval = tick - _lastRefreshTick;
+                int totalGenerated = 0;
+                int totalConsumed = 0;
+                int totalOvergenerated = 0;
 
-                float totalOvergeneratedMana = 0f;
                 for (int i = 0; i < _nodesList.Count; ++i)
                 {
                     var node = _nodesList[i];
@@ -100,22 +101,23 @@ namespace VVRace
 
                     var extension = node.manaAcceptor.ManaExtension;
 
-                    var tickInterval = tick - _lastRefreshTick;
-                    var consumed = extension.manaConsumeRule?.CalcManaFlux(node.manaAcceptor, tickInterval) ?? 0f;
-                    var generated = extension.manaGenerateRule?.CalcManaFlux(node.manaAcceptor, tickInterval) ?? 0f;
+                    var generatedDaily = extension.manaGenerateRule?.CalcManaFlux(node.manaAcceptor) ?? 0;
+                    var consumedDaily = extension.manaConsumeRule?.CalcManaFlux(node.manaAcceptor) ?? 0;
 
-                    totalGeneratedAtTick += generated;
-                    totalConsumedAtTick += consumed;
+                    totalGenerated += generatedDaily;
+                    totalConsumed += consumedDaily;
 
                     var manaCapacity = extension.manaCapacity;
-                    var afterMana = node.mana - consumed + generated;
+                    var manaChange = (generatedDaily - consumedDaily) * tickInterval / 60000f;
 
+                    var afterMana = node.mana + manaChange;
                     node.mana = Mathf.Clamp(afterMana, 0f, manaCapacity);
 
                     var overgenerated = afterMana - manaCapacity;
-                    if (overgenerated > 0f)
+                    var overgeneratedByDaily = overgenerated > 0 ? Mathf.RoundToInt(overgenerated * 60000 / tickInterval) : 0;
+                    if (overgeneratedByDaily > 0)
                     {
-                        totalOvergeneratedMana += overgenerated;
+                        totalOvergenerated += overgeneratedByDaily;
                     }
                     else if (overgenerated < 0f)
                     {
@@ -123,15 +125,14 @@ namespace VVRace
                     }
                 }
 
-                var totalOvergeneratedManaBeforeTransfer = totalOvergeneratedMana;
-
+                var transferable = (float)totalOvergenerated;
                 if (_nodesList.Count > 1)
                 {
                     int loopCount = 0;
-                    while (totalOvergeneratedMana > 0f && _tempDistributeManaFluxNodeCandidateIndices.Count > 0 && loopCount < 100)
+                    while (transferable > 0f && _tempDistributeManaFluxNodeCandidateIndices.Count > 0 && loopCount < 100)
                     {
                         loopCount++;
-                        var dividedMana = totalOvergeneratedMana / _tempDistributeManaFluxNodeCandidateIndices.Count;
+                        var dividedMana = transferable / _tempDistributeManaFluxNodeCandidateIndices.Count;
                         if (dividedMana < 1f / 60000f) { break; }
 
                         for (int i = 0; i < _tempDistributeManaFluxNodeCandidateIndices.Count; ++i)
@@ -141,7 +142,7 @@ namespace VVRace
                             if (dividedMana >= t.lackedMana)
                             {
                                 // 균등 분배된 마나가 부족량보다 많은경우 최대치로 채우고 리스트에서 제거
-                                totalOvergeneratedMana -= t.lackedMana;
+                                transferable -= t.lackedMana;
                                 node.mana += t.lackedMana;
 
                                 _tempDistributeManaFluxNodeCandidateIndices.RemoveAt(i--);
@@ -149,7 +150,7 @@ namespace VVRace
                             else
                             {
                                 // 균등 분배된 마나가 부족량보다 적은경우 분배된 양만큼만 채우고 다음 루프로
-                                totalOvergeneratedMana -= dividedMana;
+                                transferable -= dividedMana;
                                 node.mana += dividedMana;
 
                                 _tempDistributeManaFluxNodeCandidateIndices[i] = (t.index, t.lackedMana - dividedMana);
@@ -159,19 +160,20 @@ namespace VVRace
 
                     if (loopCount >= 100)
                     {
-                        Log.Warning($"manaflux network calculation loopCount over 100; {totalOvergeneratedMana} {string.Join(",", _tempDistributeManaFluxNodeCandidateIndices.Select(v => $"{_nodesList[v.index].manaAcceptor}_{v.lackedMana}"))}");
+                        Log.Warning($"manaflux network calculation loopCount over 100; {totalOvergenerated} {string.Join(",", _tempDistributeManaFluxNodeCandidateIndices.Select(v => $"{_nodesList[v.index].manaAcceptor}_{v.lackedMana}"))}");
                     }
                 }
 
-                if (tick > _lastRefreshHistoryTick + 2000)
+                var exceeded = Mathf.FloorToInt(transferable * 60000 / tickInterval);
+                if (tick % 2500 == 0)
                 {
                     var history = new ManaFluxNetworkHistory()
                     {
                         tick = tick,
-                        generated = totalGeneratedAtTick,
-                        consumed = totalConsumedAtTick,
-                        transfered = Mathf.Max(0f, totalOvergeneratedManaBeforeTransfer - totalOvergeneratedMana),
-                        exceeded = totalOvergeneratedMana,
+                        generated = totalGenerated,
+                        consumed = totalConsumed,
+                        transfered = totalOvergenerated - exceeded,
+                        exceeded = exceeded,
                     };
 
                     if (FluxHistory.Count > MaxHistoryLength) { FluxHistory.Dequeue(); }

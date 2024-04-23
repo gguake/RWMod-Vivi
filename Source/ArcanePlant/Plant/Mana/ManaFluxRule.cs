@@ -6,7 +6,9 @@ namespace VVRace
     {
         public abstract IntRange ApproximateManaFlux { get; }
 
-        public abstract float CalcManaFlux(ManaAcceptor manaAcceptor, int ticks);
+        public abstract int CalcManaFlux(ManaAcceptor manaAcceptor);
+
+        public abstract string GetRuleString(bool inverse);
     }
 
 }

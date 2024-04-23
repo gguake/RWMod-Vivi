@@ -1,22 +1,27 @@
 ﻿using RimWorld;
 using System.Linq;
+using UnityEngine;
 using Verse;
 
 namespace VVRace
 {
     public class ManaFluxRule_AdjacentPlant : ManaFluxRule
     {
-        public float manaPerAdjacentPlant;
+        public int manaPerAdjacentPlant;
         
         public override IntRange ApproximateManaFlux => new IntRange(0, (int)manaPerAdjacentPlant * 4);
 
-        public override float CalcManaFlux(ManaAcceptor plant, int ticks)
-        {
-            if (!plant.Spawned || plant.Destroyed) { return 0f; }
+        public override string GetRuleString(bool inverse) => 
+            LocalizeString_Stat.VV_StatsReport_ManaFluxRule_AdjacentPlant_Desc.Translate(
+                inverse ? -manaPerAdjacentPlant : manaPerAdjacentPlant);
 
-            if (manaPerAdjacentPlant != 0f)
+        public override int CalcManaFlux(ManaAcceptor plant)
+        {
+            if (!plant.Spawned || plant.Destroyed) { return 0; }
+
+            if (manaPerAdjacentPlant != 0)
             {
-                var mana = 0f;
+                var mana = 0;
                 foreach (var cell in GenAdj.CellsAdjacentCardinal(plant).Where(v => v.InBounds(plant.Map)))
                 {
                     foreach (var thing in cell.GetThingList(plant.Map))
@@ -28,16 +33,16 @@ namespace VVRace
                         }
                         else if (thing is Plant otherPlant)
                         {
-                            mana += otherPlant.Growth * manaPerAdjacentPlant;
+                            mana += Mathf.RoundToInt(otherPlant.Growth * manaPerAdjacentPlant);
                             break;
                         }
                     }
                 }
 
-                return mana / 60000f * ticks;
+                return Mathf.RoundToInt(mana);
             }
 
-            return 0f;
+            return 0;
         }
     }
 }

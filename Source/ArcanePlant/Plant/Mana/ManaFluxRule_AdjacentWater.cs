@@ -5,18 +5,23 @@ namespace VVRace
 {
     public class ManaFluxRule_AdjacentWater : ManaFluxRule
     {
-        public float manaFromOccupiedWater;
-        public float manaPerAdjacentWater;
+        public int manaFromOccupiedWater;
+        public int manaPerAdjacentWater;
 
-        public override IntRange ApproximateManaFlux => new IntRange(0, (int)manaFromOccupiedWater + (int)manaPerAdjacentWater * 4);
+        public override IntRange ApproximateManaFlux => new IntRange(0, manaFromOccupiedWater + manaPerAdjacentWater * 4);
 
-        public override float CalcManaFlux(ManaAcceptor plant, int ticks)
+        public override string GetRuleString(bool inverse) =>
+            LocalizeString_Stat.VV_StatsReport_ManaFluxRule_AdjacentWater_Desc.Translate(
+                inverse ? -manaFromOccupiedWater : manaFromOccupiedWater,
+                inverse ? -manaPerAdjacentWater : manaPerAdjacentWater);
+
+        public override int CalcManaFlux(ManaAcceptor plant)
         {
-            if (!plant.Spawned || plant.Destroyed) { return 0f; }
+            if (!plant.Spawned || plant.Destroyed) { return 0; }
 
-            if (manaPerAdjacentWater != 0f)
+            if (manaPerAdjacentWater != 0)
             {
-                var mana = plant.Position.GetTerrain(plant.Map).IsWater ? manaFromOccupiedWater : 0f;
+                var mana = plant.Position.GetTerrain(plant.Map).IsWater ? manaFromOccupiedWater : 0;
                 foreach (var cell in GenAdj.CellsAdjacentCardinal(plant).Where(v => v.InBounds(plant.Map)))
                 {
                     var terrain = cell.GetTerrain(plant.Map);
@@ -26,14 +31,14 @@ namespace VVRace
                     }
                 }
 
-                return mana / 60000f * ticks;
+                return mana;
             }
-            else if (manaFromOccupiedWater != 0f)
+            else if (manaFromOccupiedWater != 0)
             {
-                return plant.Position.GetTerrain(plant.Map).IsWater ? manaFromOccupiedWater / 60000f * ticks : 0f;
+                return plant.Position.GetTerrain(plant.Map).IsWater ? manaFromOccupiedWater : 0;
             }
 
-            return 0f;
+            return 0;
         }
     }
 }
