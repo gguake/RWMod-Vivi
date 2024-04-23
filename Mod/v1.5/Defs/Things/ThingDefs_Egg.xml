@@ -44,7 +44,7 @@
         <compClass>VVRace.CompTemperatureRuinableEgg</compClass>
         <minSafeTemperature>20</minSafeTemperature>
         <maxSafeTemperature>39</maxSafeTemperature>
-        <progressPerDegreePerTick>0.000001</progressPerDegreePerTick>
+        <progressPerDegreePerTick>0.0000006</progressPerDegreePerTick>
       </li>
 
       <li Class="VVRace.CompProperties_ViviHatcher">
@@ -56,7 +56,7 @@
             <li>(10000, 15)</li>
           </points>
         </hatcherDaystoHatch>
-        <adaptTemperatureBonus>0.3</adaptTemperatureBonus>
+        <adaptTemperatureBonus>0.35</adaptTemperatureBonus>
 
         <geneCountCurve>
           <points>

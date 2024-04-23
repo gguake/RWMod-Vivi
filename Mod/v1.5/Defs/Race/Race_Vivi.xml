@@ -213,7 +213,7 @@
 
     <comps>
       <li Class="VVRace.CompProperties_EggLayer">
-        <eggProgressDays>12</eggProgressDays>
+        <eggProgressDays>10</eggProgressDays>
       </li>
       
       <li Class="VVRace.CompProperties_Vivi" />

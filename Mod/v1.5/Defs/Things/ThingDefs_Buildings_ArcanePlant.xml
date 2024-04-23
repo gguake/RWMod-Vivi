@@ -127,6 +127,7 @@
     <building>
       <preventDeteriorationOnTop>true</preventDeteriorationOnTop>
       <ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
+      <haulToContainerDuration>250</haulToContainerDuration>
     </building>
     <designationCategory>VV_Bulidings</designationCategory>
     <designationHotKey>Misc7</designationHotKey>

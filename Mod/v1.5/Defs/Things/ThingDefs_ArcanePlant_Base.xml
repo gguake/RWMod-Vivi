@@ -64,6 +64,7 @@
       <artificialForMeditationPurposes>false</artificialForMeditationPurposes>
       <canPlaceOverWall>false</canPlaceOverWall>
       <uninstallWork>250</uninstallWork>
+      <haulToContainerDuration>250</haulToContainerDuration>
     </building>
     <resourcesFractionWhenDeconstructed>1</resourcesFractionWhenDeconstructed>
 

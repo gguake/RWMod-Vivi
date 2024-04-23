@@ -28,7 +28,7 @@
     <useHitPoints>true</useHitPoints>
     <statBases>
       <Mass>0.1</Mass>
-      <MarketValue>0.3</MarketValue>
+      <MarketValue>0.15</MarketValue>
       <MaxHitPoints>60</MaxHitPoints>
       <Flammability>1.0</Flammability>
       <DeteriorationRate>8</DeteriorationRate>
@@ -56,7 +56,7 @@
     <soundInteract>Wood_Drop</soundInteract>
     <soundDrop>Wood_Drop</soundDrop>
     <statBases>
-      <MarketValue>0.42</MarketValue>
+      <MarketValue>0.22</MarketValue>
       <MaxHitPoints>150</MaxHitPoints>
       <Mass>0.05</Mass>
       <Flammability>0.7</Flammability>
@@ -89,12 +89,11 @@
       <soundMeleeHitSharp>MeleeHit_Wood</soundMeleeHitSharp>
       <soundMeleeHitBlunt>MeleeHit_Wood</soundMeleeHitBlunt>
       <statFactors>
-        <MaxHitPoints>0.75</MaxHitPoints>
+        <MaxHitPoints>0.7</MaxHitPoints>
         <Flammability>1</Flammability>
-        <WorkToMake>0.8</WorkToMake>
-        <WorkToBuild>0.8</WorkToBuild>
+        <WorkToMake>0.85</WorkToMake>
+        <WorkToBuild>0.85</WorkToBuild>
         <DoorOpenSpeed>1.1</DoorOpenSpeed>
-        <MeleeWeapon_CooldownMultiplier>0.95</MeleeWeapon_CooldownMultiplier>
       </statFactors>
       <canSuggestUseDefaultStuff>true</canSuggestUseDefaultStuff>
       <allowedInStuffGeneration>false</allowedInStuffGeneration>
@@ -232,7 +231,7 @@
       <Nutrition>0.1</Nutrition>
       <DeteriorationRate>5</DeteriorationRate>
     </statBases>
-    <stackLimit>10</stackLimit>
+    <stackLimit>25</stackLimit>
     
     <ingestible>
       <preferability>NeverForNutrition</preferability>
@@ -267,8 +266,8 @@
     
     <useHitPoints>true</useHitPoints>
     <statBases>
-      <Mass>1.0</Mass>
-      <MarketValue>1.5</MarketValue>
+      <Mass>0.25</Mass>
+      <MarketValue>5</MarketValue>
       <MaxHitPoints>40</MaxHitPoints>
       <Flammability>0.5</Flammability>
       <DeteriorationRate>1</DeteriorationRate>
@@ -300,22 +299,22 @@
     </thingCategories>
 
     <resourceReadoutPriority>Middle</resourceReadoutPriority>
-    <soundInteract>Grain_Drop</soundInteract>
-    <soundDrop>Grain_Drop</soundDrop>
+    <soundInteract>Standard_Drop</soundInteract>
+    <soundDrop>Standard_Drop</soundDrop>
     
     <useHitPoints>true</useHitPoints>
     <statBases>
-      <Mass>1.0</Mass>
-      <MarketValue>120</MarketValue>
-      <MaxHitPoints>70</MaxHitPoints>
+      <Mass>0.1</Mass>
+      <MarketValue>100</MarketValue>
+      <MaxHitPoints>50</MaxHitPoints>
       <Flammability>1.0</Flammability>
-      <DeteriorationRate>1</DeteriorationRate>
+      <DeteriorationRate>10</DeteriorationRate>
     </statBases>
     <stackLimit>25</stackLimit>
     
     <comps>
       <li Class="CompProperties_Rottable">
-        <daysToRotStart>5</daysToRotStart>
+        <daysToRotStart>10</daysToRotStart>
         <rotDestroys>true</rotDestroys>
       </li>
     </comps>

@@ -151,7 +151,6 @@
 
     <statBases>
       <Mass>0.054</Mass>
-      <MarketValue>2</MarketValue>
       <Nutrition>0.1</Nutrition>
     </statBases>
 
@@ -209,7 +208,6 @@
 
 		<statBases>
 			<Mass>0.1</Mass>
-			<MarketValue>28</MarketValue>
 			<Nutrition>0.5</Nutrition>
 		</statBases>
 
@@ -253,12 +251,12 @@
     </tradeTags>
 	</ThingDef>
 
+  <!-- 꽃차 -->
   <ThingDef Abstract="True" Name="VV_FloweringTeaBase" ParentName="DrugBase">
     <rotatable>false</rotatable>
 
     <statBases>
-      <WorkToMake>400</WorkToMake>
-      <MarketValue>13</MarketValue>
+      <WorkToMake>500</WorkToMake>
       <Mass>0.1</Mass>
       <DeteriorationRate>6</DeteriorationRate>
     </statBases>
@@ -316,10 +314,6 @@
       <drawSize>0.88</drawSize>
       <color>(255,255,255)</color>
     </graphicData>
-    
-    <statBases>
-      <MarketValue>14</MarketValue>
-    </statBases>
 
     <ingestible>
       <outcomeDoers>
@@ -351,10 +345,6 @@
       <color>(255,255,255)</color>
     </graphicData>
 
-    <statBases>
-      <MarketValue>14</MarketValue>
-    </statBases>
-
     <ingestible>
       <outcomeDoers>
         <li Class="IngestionOutcomeDoer_GiveHediff">
@@ -384,10 +374,6 @@
       <drawSize>0.88</drawSize>
       <color>(255,255,255)</color>
     </graphicData>
-
-    <statBases>
-      <MarketValue>14</MarketValue>
-    </statBases>
 
     <ingestible>
       <outcomeDoers>
@@ -425,6 +411,7 @@
       <Mass>0.1</Mass>
       <DeteriorationRate>1.0</DeteriorationRate>
       <Flammability>0.7</Flammability>
+      <WorkToMake>1500</WorkToMake>
     </statBases>
 
     <techLevel>Medieval</techLevel>
@@ -459,6 +446,7 @@
       </recipeUsers>
       <displayPriority>3000</displayPriority>
     </recipeMaker>
+    
     <costList>
       <VV_Mead>1</VV_Mead>
       <VV_Propolis>5</VV_Propolis>

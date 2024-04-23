@@ -16,8 +16,8 @@
     </graphicData>
 
     <statBases>
-      <MarketValue>180</MarketValue>
       <MaxHitPoints>50</MaxHitPoints>
+      <WorkToBuild>22500</WorkToBuild>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
 
@@ -144,8 +144,8 @@
     </graphicData>
 
     <statBases>
-      <MarketValue>180</MarketValue>
       <MaxHitPoints>50</MaxHitPoints>
+      <WorkToBuild>22500</WorkToBuild>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
       
@@ -270,8 +270,8 @@
     </graphicData>
 
     <statBases>
-      <MarketValue>240</MarketValue>
       <MaxHitPoints>80</MaxHitPoints>
+      <WorkToBuild>40000</WorkToBuild>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
 
@@ -414,8 +414,8 @@
     </graphicData>
 
     <statBases>
-      <MarketValue>240</MarketValue>
       <MaxHitPoints>50</MaxHitPoints>
+      <WorkToBuild>40000</WorkToBuild>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
       
@@ -543,8 +543,8 @@
 
     <terrainAffordanceNeeded>VV_WaterOrLight</terrainAffordanceNeeded>
     <statBases>
-      <MarketValue>320</MarketValue>
       <MaxHitPoints>70</MaxHitPoints>
+      <WorkToBuild>45000</WorkToBuild>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
       <Flammability>0</Flammability>
@@ -673,8 +673,8 @@
     </graphicData>
 
     <statBases>
-      <MarketValue>320</MarketValue>
       <MaxHitPoints>50</MaxHitPoints>
+      <WorkToBuild>45000</WorkToBuild>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
       
@@ -795,8 +795,8 @@
     </graphicData>
 
     <statBases>
-      <MarketValue>180</MarketValue>
       <MaxHitPoints>60</MaxHitPoints>
+      <WorkToBuild>30000</WorkToBuild>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
       
@@ -923,8 +923,8 @@
     </graphicData>
 
     <statBases>
-      <MarketValue>320</MarketValue>
       <MaxHitPoints>90</MaxHitPoints>
+      <WorkToBuild>75000</WorkToBuild>
       <Beauty>15</Beauty>
       <BeautyOutdoors>15</BeautyOutdoors>
     </statBases>
@@ -1074,8 +1074,8 @@
     </graphicData>
 
     <statBases>
-      <MarketValue>180</MarketValue>
       <MaxHitPoints>50</MaxHitPoints>
+      <WorkToBuild>15000</WorkToBuild>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
     </statBases>

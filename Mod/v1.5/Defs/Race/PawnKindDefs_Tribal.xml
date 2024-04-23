@@ -49,7 +49,7 @@
   <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
     <defName>VV_ViviGuard</defName>
     <label>vivi guard</label>
-    <combatPower>150</combatPower>
+    <combatPower>140</combatPower>
     <isFighter>true</isFighter>
     <itemQuality>Normal</itemQuality>
 
@@ -84,7 +84,7 @@
   <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
     <defName>VV_ViviArcher</defName>
     <label>vivi archer</label>
-    <combatPower>130</combatPower>
+    <combatPower>140</combatPower>
     <isFighter>true</isFighter>
     <itemQuality>Normal</itemQuality>
 
@@ -116,8 +116,8 @@
   <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
     <defName>VV_RoyalViviEmpress</defName>
     <label>royal vivi empress</label>
-    <combatPower>100</combatPower>
-    <isFighter>false</isFighter>
+    <combatPower>300</combatPower>
+    <isFighter>true</isFighter>
     <itemQuality>Masterwork</itemQuality>
     <factionLeader>true</factionLeader>
 
@@ -125,7 +125,7 @@
       <li>Violent</li>
     </requiredWorkTags>
 
-    <gearHealthRange>1.5~3.2</gearHealthRange>
+    <gearHealthRange>1.5~4.2</gearHealthRange>
     <apparelMoney>5000~10000</apparelMoney>
     <apparelTags>
       <li>VV_RoyalViviApparel</li>
@@ -142,8 +142,10 @@
       <li>VV_ViviGuardian</li>
     </weaponTags>
 
-    <initialWillRange>11~14</initialWillRange>
-    <initialResistanceRange>38~58</initialResistanceRange>
+    <acceptArrestChanceFactor>0.5</acceptArrestChanceFactor>
+    <factionHostileOnDeath>true</factionHostileOnDeath>
+    <initialWillRange>80~90</initialWillRange>
+    <initialResistanceRange>48~70</initialResistanceRange>
 
     <isRoyal>true</isRoyal>
     <forcedBodyType>Female</forcedBodyType>
@@ -173,12 +175,16 @@
       <li>VV_GuardianCoat</li>
     </apparelRequired>
 
+    <nakedChance>0</nakedChance>
+
     <weaponMoney>5000~10000</weaponMoney>
     <weaponTags>
       <li>VV_ViviGuardian</li>
     </weaponTags>
 
-    <initialWillRange>11~14</initialWillRange>
+    <acceptArrestChanceFactor>0.1</acceptArrestChanceFactor>
+    <factionHostileOnDeath>true</factionHostileOnDeath>
+    <initialWillRange>16~19</initialWillRange>
     <initialResistanceRange>38~58</initialResistanceRange>
 
     <isRoyal>true</isRoyal>
@@ -199,12 +205,16 @@
       <li>VV_RoyalViviApparel</li>
       <li>BeltDefensePop</li>
     </apparelTags>
+
+    <nakedChance>0</nakedChance>
+
     <weaponMoney>1000~1500</weaponMoney>
     <weaponTags>
       <li>VV_ViviWeaponRange</li>
     </weaponTags>
 
-    <initialWillRange>11~14</initialWillRange>
+    <acceptArrestChanceFactor>0.5</acceptArrestChanceFactor>
+    <initialWillRange>16~19</initialWillRange>
     <initialResistanceRange>38~58</initialResistanceRange>
 
     <isRoyal>true</isRoyal>
@@ -235,12 +245,16 @@
       <li>VV_RoyalViviApparel</li>
       <li>BeltDefensePop</li>
     </apparelTags>
+
+    <nakedChance>0</nakedChance>
+
     <weaponMoney>1000~1500</weaponMoney>
     <weaponTags>
       <li>VV_ViviWeaponRange</li>
     </weaponTags>
 
-    <initialWillRange>11~14</initialWillRange>
+    <acceptArrestChanceFactor>0.5</acceptArrestChanceFactor>
+    <initialWillRange>16~19</initialWillRange>
     <initialResistanceRange>38~58</initialResistanceRange>
 
     <isRoyal>true</isRoyal>

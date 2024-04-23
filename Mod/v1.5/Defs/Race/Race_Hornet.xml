@@ -16,20 +16,20 @@
 \nIt has a symbiotic relationship with the scaria fungus, carrying it at all times but not dying from it over time. Even if the scaria is treated, as soon as they regain consciousness, they get infected again immediately and start to rampage.
 \nThe wings of the titanic hornet are incredibly strong yet lightweight, making them a useful material. However, they are typically difficult to obtain intact, as the corpse rapidly decays due to the scaria.</description>
     <statBases>
-      <MoveSpeed>8.6</MoveSpeed>
+      <MoveSpeed>7.6</MoveSpeed>
       <PsychicSensitivity>0</PsychicSensitivity>
-      <ComfyTemperatureMin>-10</ComfyTemperatureMin>
-      <ComfyTemperatureMax>37</ComfyTemperatureMax>
-      <MarketValue>1500</MarketValue>
+      <ComfyTemperatureMin>0</ComfyTemperatureMin>
+      <ComfyTemperatureMax>35</ComfyTemperatureMax>
+      <MarketValue>500</MarketValue>
       <LeatherAmount>0</LeatherAmount>
       <ArmorRating_Sharp>1.0</ArmorRating_Sharp>
-      <ArmorRating_Blunt>0.3</ArmorRating_Blunt>
+      <ArmorRating_Blunt>0.5</ArmorRating_Blunt>
       <ArmorRating_Heat>0</ArmorRating_Heat>
-      <PainShockThreshold>0.67</PainShockThreshold>
+      <PainShockThreshold>0.7</PainShockThreshold>
 
       <ToxicResistance>-1.00</ToxicResistance>
       <ToxicEnvironmentResistance>0</ToxicEnvironmentResistance>
-      <Flammability>1.3</Flammability>
+      <Flammability>1.1</Flammability>
     </statBases>
     <uiIconScale>1.35</uiIconScale>
     
@@ -39,7 +39,7 @@
         <capacities>
           <li>Bite</li>
         </capacities>
-        <power>23</power>
+        <power>19</power>
         <cooldownTime>1.3</cooldownTime>
         <linkedBodyPartsGroup>Mouth</linkedBodyPartsGroup>
       </li>
@@ -61,10 +61,10 @@
           <li>Stab</li>
         </capacities>
         <power>28</power>
-        <cooldownTime>2.2</cooldownTime>
+        <cooldownTime>2.5</cooldownTime>
         <linkedBodyPartsGroup>VV_LeftClaw</linkedBodyPartsGroup>
         <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
-        <armorPenetration>0.4</armorPenetration>
+        <armorPenetration>0.3</armorPenetration>
       </li>
       <li>
         <label>right claw</label>
@@ -73,10 +73,10 @@
           <li>Stab</li>
         </capacities>
         <power>28</power>
-        <cooldownTime>2.2</cooldownTime>
+        <cooldownTime>2.5</cooldownTime>
         <linkedBodyPartsGroup>VV_RightClaw</linkedBodyPartsGroup>
         <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
-        <armorPenetration>0.4</armorPenetration>
+        <armorPenetration>0.3</armorPenetration>
       </li>
     </tools>
 
@@ -90,9 +90,9 @@
       <herdMigrationAllowed>false</herdMigrationAllowed>
 
       <body>VV_TitanicHornet</body>
-      <baseBodySize>3.5</baseBodySize>
+      <baseBodySize>4.0</baseBodySize>
       <baseHungerRate>5.0</baseHungerRate>
-      <baseHealthScale>6.5</baseHealthScale>
+      <baseHealthScale>6.0</baseHealthScale>
       <useMeatFrom>Megaspider</useMeatFrom>
       <wildness>1.0</wildness>
       <petness>0.0</petness>
@@ -120,7 +120,7 @@
         <li>
           <def>VV_TitanicHornetWing</def>
           <texOverrideIndex>0</texOverrideIndex>
-          <spawnChance>0.3334</spawnChance>
+          <spawnChance>0.25</spawnChance>
         </li>
       </detritusLeavings>
 

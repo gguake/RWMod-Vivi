@@ -31,7 +31,7 @@
         <li Class="QuestNode_GetPawn">
           <storeAs>asker</storeAs>
           <mustBeFactionLeader>true</mustBeFactionLeader>
-          <mustBeOfKind>VV_RoyalViviLeader</mustBeOfKind>
+          <mustBeOfKind>VV_RoyalViviEmpress</mustBeOfKind>
           <ifWorldPawnThenMustBeFreeOrLeader>true</ifWorldPawnThenMustBeFreeOrLeader>
           <mustBeWorldPawn>true</mustBeWorldPawn>
         </li>

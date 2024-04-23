@@ -83,8 +83,8 @@
     
     <costList>
       <Plasteel>120</Plasteel>
-      <Silver>30</Silver>
-      <VV_TitanicHornetWing>2</VV_TitanicHornetWing>
+      <Silver>10</Silver>
+      <VV_TitanicHornetWing>4</VV_TitanicHornetWing>
     </costList>
     
     <recipeMaker>
@@ -102,8 +102,8 @@
         <li>VV_RitualWeaponry</li>
       </researchPrerequisites>
       <skillRequirements>
-        <Crafting>12</Crafting>
-        <Artistic>8</Artistic>
+        <Crafting>10</Crafting>
+        <Artistic>6</Artistic>
       </skillRequirements>
       <displayPriority>-530</displayPriority>
     </recipeMaker>
@@ -196,17 +196,17 @@
         <capacities>
           <li>Stab</li>
         </capacities>
-        <power>7</power>
+        <power>6</power>
         <armorPenetration>0.3</armorPenetration>
         <cooldownTime>0.5</cooldownTime>
       </li>
     </tools>
     
     <costList>
-      <Plasteel>70</Plasteel>
+      <Plasteel>100</Plasteel>
       <Gold>10</Gold>
-      <VV_TitanicHornetWing>10</VV_TitanicHornetWing>
-      <VV_LivingLeaf>80</VV_LivingLeaf>
+      <VV_TitanicHornetWing>20</VV_TitanicHornetWing>
+      <VV_LivingLeaf>100</VV_LivingLeaf>
     </costList>
     
     <recipeMaker>
@@ -224,7 +224,7 @@
         <li>VV_RitualWeaponry</li>
       </researchPrerequisites>
       <skillRequirements>
-        <Crafting>17</Crafting>
+        <Crafting>16</Crafting>
       </skillRequirements>
       <displayPriority>-531</displayPriority>
     </recipeMaker>

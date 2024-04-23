@@ -19,8 +19,8 @@
     <drawerType>MapMeshAndRealTime</drawerType>
 
     <statBases>
-      <MarketValue>240</MarketValue>
       <MaxHitPoints>100</MaxHitPoints>
+      <WorkToBuild>45000</WorkToBuild>
     </statBases>
 
     <fillPercent>0.25</fillPercent>
@@ -194,8 +194,8 @@
     <drawerType>MapMeshAndRealTime</drawerType>
 
     <statBases>
-      <MarketValue>240</MarketValue>
       <MaxHitPoints>100</MaxHitPoints>
+      <WorkToBuild>45000</WorkToBuild>
     </statBases>
 
     <fillPercent>0.25</fillPercent>
@@ -381,8 +381,8 @@
     <pathCostIgnoreRepeat>true</pathCostIgnoreRepeat>
 
     <statBases>
-      <MarketValue>320</MarketValue>
       <MaxHitPoints>200</MaxHitPoints>
+      <WorkToBuild>60000</WorkToBuild>
       <Flammability>0.5</Flammability>
     </statBases>
 
