@@ -134,9 +134,27 @@ namespace VVRace
 
                 if (thing != thingToInstall)
                 {
-                    if (thing is Pawn pawn) { continue; }
                     if (thing is ArcanePlantPot) { continue; }
-                    if (thing.def.category == ThingCategory.Plant && thing.def.passability != Traversability.Impassable) { continue; }
+                    if (thingToInstall.def.blocksAltitudes != null && thingToInstall.def.blocksAltitudes.Contains(thing.def.altitudeLayer))
+                    {
+                        return new AcceptanceReport("SpaceAlreadyOccupied".Translate());
+                    }
+
+                    var thingBuiltDef = GenConstruct.BuiltDefOf(thing.def);
+                    if (thingBuiltDef?.blocksAltitudes != null && thingBuiltDef.blocksAltitudes.Contains(thingToInstall.def.altitudeLayer))
+                    {
+                        return new AcceptanceReport("SpaceAlreadyOccupied".Translate());
+                    }
+
+                    if (thing.def.EverHaulable || thingToInstall.def.ForceAllowPlaceOver(thing.def))
+                    {
+                        continue;
+                    }
+
+                    if (thing.def.category == ThingCategory.Plant && thing.def.passability == Traversability.Impassable)
+                    {
+                        return new AcceptanceReport("SpaceAlreadyOccupied".Translate());
+                    }
                     if (thing.def.category == ThingCategory.Building || thing.def.IsBlueprint || thing.def.IsFrame)
                     {
                         if ((thing.def.building == null || thing.def.building.canBuildNonEdificesUnder) ||
@@ -144,25 +162,9 @@ namespace VVRace
                         {
                             continue;
                         }
+
+                        return new AcceptanceReport("SpaceAlreadyOccupied".Translate());
                     }
-
-                    return new AcceptanceReport("SpaceAlreadyOccupied".Translate());
-                }
-
-                if (!thing.def.EverHaulable)
-                {
-                    return new AcceptanceReport("SpaceAlreadyOccupied".Translate());
-                }
-
-                if (thingToInstall.def.blocksAltitudes != null && thingToInstall.def.blocksAltitudes.Contains(thing.def.altitudeLayer))
-                {
-                    return new AcceptanceReport("SpaceAlreadyOccupied".Translate());
-                }
-
-                var thingBuiltDef = GenConstruct.BuiltDefOf(thing.def);
-                if (thingBuiltDef?.blocksAltitudes != null && thingBuiltDef.blocksAltitudes.Contains(thingToInstall.def.altitudeLayer))
-                {
-                    return new AcceptanceReport("SpaceAlreadyOccupied".Translate());
                 }
             }
 
