@@ -62,10 +62,10 @@ namespace VVRace
                 if (history.tick < minTick) { minTick = history.tick; }
                 if (history.tick > maxTick) { maxTick = history.tick; }
 
-                generatedCurve.curve.Add(new CurvePoint(history.tick / 60000f, (int)(history.generated * GenTicks.TickRareInterval)), sort: false);
-                consumedCurve.curve.Add(new CurvePoint(history.tick / 60000f, (int)(history.consumed * GenTicks.TickRareInterval)), sort: false);
-                transferedCurve.curve.Add(new CurvePoint(history.tick / 60000f, (int)(history.transfered * GenTicks.TickRareInterval)), sort: false);
-                exceededCurve.curve.Add(new CurvePoint(history.tick / 60000f, (int)(history.exceeded * GenTicks.TickRareInterval)), sort: false);
+                generatedCurve.curve.Add(new CurvePoint(history.tick / 60000f, history.generated), sort: false);
+                consumedCurve.curve.Add(new CurvePoint(history.tick / 60000f, history.consumed), sort: false);
+                transferedCurve.curve.Add(new CurvePoint(history.tick / 60000f, history.transfered), sort: false);
+                exceededCurve.curve.Add(new CurvePoint(history.tick / 60000f, history.exceeded), sort: false);
             }
 
             generatedCurve.curve.SortPoints();
@@ -74,10 +74,10 @@ namespace VVRace
             exceededCurve.curve.SortPoints();
             if (network.FluxHistory.Count == 1)
             {
-                generatedCurve.curve.Add(new CurvePoint(1.6666667E-05f, (int)(network.FluxHistory.Peek().generated * GenTicks.TickRareInterval)));
-                consumedCurve.curve.Add(new CurvePoint(1.6666667E-05f, (int)(network.FluxHistory.Peek().consumed * GenTicks.TickRareInterval)));
-                transferedCurve.curve.Add(new CurvePoint(1.6666667E-05f, (int)(network.FluxHistory.Peek().transfered * GenTicks.TickRareInterval)));
-                exceededCurve.curve.Add(new CurvePoint(1.6666667E-05f, (int)(network.FluxHistory.Peek().exceeded * GenTicks.TickRareInterval)));
+                generatedCurve.curve.Add(new CurvePoint(1.6666667E-05f, network.FluxHistory.Peek().generated));
+                consumedCurve.curve.Add(new CurvePoint(1.6666667E-05f, network.FluxHistory.Peek().consumed));
+                transferedCurve.curve.Add(new CurvePoint(1.6666667E-05f, network.FluxHistory.Peek().transfered));
+                exceededCurve.curve.Add(new CurvePoint(1.6666667E-05f, network.FluxHistory.Peek().exceeded));
             }
 
             var section = new FloatRange(minTick / 60000f, maxTick / 60000f);
@@ -88,6 +88,7 @@ namespace VVRace
 
             var curveDrawerStyle = Find.History.curveDrawerStyle;
             curveDrawerStyle.FixedSection = section;
+            curveDrawerStyle.XIntegersOnly = true;
             curveDrawerStyle.YIntegersOnly = true;
 
             SimpleCurveDrawer.DrawCurves(graphRect, _tmpDrawInfoList, curveDrawerStyle, legendRect: legendRect);

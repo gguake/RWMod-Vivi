@@ -1,4 +1,5 @@
-﻿using Verse;
+﻿using UnityEngine;
+using Verse;
 
 namespace VVRace
 {
@@ -35,6 +36,11 @@ namespace VVRace
         public void ExposeData()
         {
             Scribe_Values.Look(ref mana, "mana");
+
+            if (Scribe.mode == LoadSaveMode.PostLoadInit)
+            {
+                mana = Mathf.Min(mana, manaAcceptor.def.GetModExtension<ManaExtension>().manaCapacity);
+            }
         }
     }
 }
