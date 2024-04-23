@@ -253,9 +253,9 @@
 
     <projectile Class="VVRace.NeedleProperties">
       <damageDef>Stab</damageDef>
-      <damageAmountBase>11</damageAmountBase>
+      <damageAmountBase>10</damageAmountBase>
       <stoppingPower>1.1</stoppingPower>
-      <armorPenetrationBase>0.3</armorPenetrationBase>
+      <armorPenetrationBase>0.25</armorPenetrationBase>
       <speed>49</speed>
 
       <maxAttackCount>7</maxAttackCount>
