@@ -19,9 +19,18 @@ namespace VVRace
                 var mana = 0f;
                 foreach (var cell in GenAdj.CellsAdjacentCardinal(plant).Where(v => v.InBounds(plant.Map)))
                 {
-                    if (cell.GetFirstThing<Plant>(plant.Map) != null || cell.GetFirstThing<ArcanePlant>(plant.Map) != null)
+                    foreach (var thing in cell.GetThingList(plant.Map))
                     {
-                        mana += manaPerAdjacentPlant;
+                        if (thing is ArcanePlant)
+                        {
+                            mana += manaPerAdjacentPlant;
+                            break;
+                        }
+                        else if (thing is Plant otherPlant)
+                        {
+                            mana += otherPlant.Growth * manaPerAdjacentPlant;
+                            break;
+                        }
                     }
                 }
 
