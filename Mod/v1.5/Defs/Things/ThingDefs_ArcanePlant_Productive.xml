@@ -347,7 +347,7 @@
             <damageDef>Stun</damageDef>
             <amount>10</amount>
             <armorPenetration>0</armorPenetration>
-            <chance>0.04</chance>
+            <chance>0.06</chance>
           </li>
         </passedBulletOverrides>
       </li>
@@ -475,7 +475,7 @@
             <damageDef>Stun</damageDef>
             <amount>10</amount>
             <armorPenetration>0</armorPenetration>
-            <chance>0.04</chance>
+            <chance>0.06</chance>
           </li>
         </passedBulletOverrides>
       </li>
