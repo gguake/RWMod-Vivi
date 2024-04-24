@@ -299,7 +299,7 @@
     <graphicData>
       <texPath>Things/Building/VV_AutoExtractor</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
-      <drawSize>(2.5,2.5)</drawSize>
+      <drawSize>(2.7,2.7)</drawSize>
       <shadowData>
         <volume>(2.22, 0.8, 0.62)</volume>
         <offset>(0, 0, -0.13)</offset>
