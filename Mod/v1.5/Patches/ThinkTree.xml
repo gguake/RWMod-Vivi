@@ -25,6 +25,7 @@
         <subNodes>
           <li Class="ThinkNode_Priority">
             <subNodes>
+              <li Class="VVRace.JobGiver_HornetBerserk" />
               <li Class="ThinkNode_PrioritySorter">
                 <subNodes>
                   <li Class="JobGiver_GetFood">
@@ -32,7 +33,6 @@
                   </li>
                 </subNodes>
               </li>
-              <li Class="VVRace.JobGiver_HornetBerserk" />
               <li Class="ThinkNode_ConditionalExitTimedOut">
                 <subNodes>
                   <li Class="ThinkNode_Tagger">
@@ -45,18 +45,10 @@
                   </li>
                 </subNodes>
               </li>
-              <li Class="JobGiver_WanderAnywhere">
+              <li Class="VVRace.JobGiver_WanderNearAllyHornets">
                 <maxDanger>Deadly</maxDanger>
               </li>
             </subNodes>
-            <!--
-            <subNodes>
-              <li Class="JobGiver_Berserk" />
-              <li Class="JobGiver_WanderAnywhere">
-                <maxDanger>Deadly</maxDanger>
-              </li>
-            </subNodes>
-            -->
           </li>
         </subNodes>
       </li>

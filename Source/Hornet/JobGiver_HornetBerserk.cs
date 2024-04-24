@@ -6,7 +6,7 @@ namespace VVRace
 {
     public class JobGiver_HornetBerserk : ThinkNode_JobGiver
     {
-        private float maxAttackDistance = 90f;
+        private float maxTargetSearchDistance = 70f;
 
         protected override Job TryGiveJob(Pawn pawn)
         {
@@ -28,30 +28,6 @@ namespace VVRace
                 return MeleeAttackJob(building, fenceBlocked);
             }
 
-            if (target != null)
-            {
-                using (var pawnPath = pawn.Map.pathFinder.FindPath(pawn.Position, target.Position, TraverseParms.For(pawn, Danger.Deadly, TraverseMode.PassDoors)))
-                {
-                    if (!pawnPath.Found)
-                    {
-                        return null;
-                    }
-
-                    if (!pawnPath.TryFindLastCellBeforeBlockingDoor(pawn, out var result))
-                    {
-                        Log.Error(string.Concat(pawn, " did TryFindLastCellBeforeDoor but found none when it should have been one. Target: ", target.LabelCap));
-                        return null;
-                    }
-
-                    var randomCell = CellFinder.RandomRegionNear(result.GetRegion(pawn.Map), 9, TraverseParms.For(pawn)).RandomCell;
-                    if (randomCell == pawn.Position)
-                    {
-                        return JobMaker.MakeJob(JobDefOf.Wait, 500);
-                    }
-
-                    return JobMaker.MakeJob(JobDefOf.Goto, randomCell);
-                }
-            }
             return null;
         }
 
@@ -71,7 +47,7 @@ namespace VVRace
                 pawn, 
                 TargetScanFlags.NeedReachable,
                 validator: thing => thing is Pawn targetPawn && targetPawn.Spawned && !targetPawn.Downed && !targetPawn.IsPsychologicallyInvisible(),
-                maxDist: maxAttackDistance, 
+                maxDist: maxTargetSearchDistance, 
                 canBashDoors: true,
                 canBashFences: canBashFences);
         }
@@ -82,7 +58,7 @@ namespace VVRace
                 pawn, 
                 TargetScanFlags.NeedLOSToAll | TargetScanFlags.NeedReachable | TargetScanFlags.NeedThreat | TargetScanFlags.NeedAutoTargetable, 
                 validator: thing => thing is Building, 
-                maxDist: maxAttackDistance,
+                maxDist: maxTargetSearchDistance,
                 canBashFences: canBashFences);
         }
     }
