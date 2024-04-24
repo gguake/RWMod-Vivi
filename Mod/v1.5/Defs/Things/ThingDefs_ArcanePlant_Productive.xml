@@ -483,7 +483,7 @@
       <li Class="VVRace.GrowingArcanePlantData">
         <ingredients>
           <VV_UnknownSeed>1</VV_UnknownSeed>
-          <Gold>2</Gold>
+          <Gold>20</Gold>
           <VV_Pollen>150</VV_Pollen>
         </ingredients>
 
