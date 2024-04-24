@@ -53,7 +53,6 @@
     <equippedStatOffsets>
       <SocialImpact>0.2</SocialImpact>
       <TradePriceImprovement>0.2</TradePriceImprovement>
-      <PsychicSensitivity>0.2</PsychicSensitivity>
       <ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">0.1</ToxicEnvironmentResistance>
     </equippedStatOffsets>
 

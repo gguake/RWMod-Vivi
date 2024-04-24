@@ -49,9 +49,9 @@
       <EquipDelay>1.5</EquipDelay>
     </statBases>
     <equippedStatOffsets>
-      <PainShockThreshold>0.08</PainShockThreshold>
-      <MentalBreakThreshold>-0.06</MentalBreakThreshold>
-      <ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">0.15</ToxicEnvironmentResistance>
+      <PainShockThreshold>0.05</PainShockThreshold>
+      <MentalBreakThreshold>-0.05</MentalBreakThreshold>
+      <ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">0.25</ToxicEnvironmentResistance>
     </equippedStatOffsets>
 
     <costStuffCount>50</costStuffCount>
@@ -104,7 +104,7 @@
       <EquipDelay>1.5</EquipDelay>
     </statBases>
     <equippedStatOffsets>
-      <MoveSpeed>-0.2</MoveSpeed>
+      <MoveSpeed>-0.1</MoveSpeed>
     </equippedStatOffsets>
 
     <smeltable>true</smeltable>
@@ -170,10 +170,10 @@
       <EquipDelay>1.5</EquipDelay>
     </statBases>
     <equippedStatOffsets>
-      <SocialImpact>0.3</SocialImpact>
-      <NegotiationAbility>0.3</NegotiationAbility>
+      <SocialImpact>0.25</SocialImpact>
+      <NegotiationAbility>0.25</NegotiationAbility>
       <TradePriceImprovement>0.15</TradePriceImprovement>
-      <PsychicSensitivity>0.15</PsychicSensitivity>
+      <PsychicSensitivity>0.25</PsychicSensitivity>
     </equippedStatOffsets>
 
     <smeltable>true</smeltable>

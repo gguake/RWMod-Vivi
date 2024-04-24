@@ -43,18 +43,18 @@
 
     <statBases>
       <MaxHitPoints>180</MaxHitPoints>
-      <WorkToMake>2400</WorkToMake>
+      <WorkToMake>3000</WorkToMake>
       <Mass>1</Mass>
       <StuffEffectMultiplierArmor>0.2</StuffEffectMultiplierArmor>
       <StuffEffectMultiplierInsulation_Cold>0.6</StuffEffectMultiplierInsulation_Cold>
       <StuffEffectMultiplierInsulation_Heat>1.2</StuffEffectMultiplierInsulation_Heat>
       <EquipDelay>2.5</EquipDelay>
       
-      <ArmorRating_Blunt>0.04</ArmorRating_Blunt>
+      <ArmorRating_Blunt>0.05</ArmorRating_Blunt>
     </statBases>
     <equippedStatOffsets>
       <MoveSpeed>0.2</MoveSpeed>
-      <ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">0.1</ToxicEnvironmentResistance>
+      <ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">0.25</ToxicEnvironmentResistance>
     </equippedStatOffsets>
 
     <costStuffCount>60</costStuffCount>
@@ -214,8 +214,8 @@
       <StuffEffectMultiplierInsulation_Heat>0.5</StuffEffectMultiplierInsulation_Heat>
       <EquipDelay>1.5</EquipDelay>
       
-      <ArmorRating_Sharp>0.1</ArmorRating_Sharp>
-      <ArmorRating_Blunt>0.1</ArmorRating_Blunt>
+      <ArmorRating_Sharp>0.15</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.15</ArmorRating_Blunt>
     </statBases>
     <equippedStatOffsets>
       <ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">0.5</ToxicEnvironmentResistance>
