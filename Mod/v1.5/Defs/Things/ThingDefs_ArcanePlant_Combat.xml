@@ -39,8 +39,8 @@
       <combatPower>45</combatPower>
       <ai_combatDangerous>true</ai_combatDangerous>
       <turretGunDef>VV_Gun_Peashooter</turretGunDef>
-      <turretBurstCooldownTime>5.9</turretBurstCooldownTime>
-      <turretBurstWarmupTime>0.9</turretBurstWarmupTime>
+      <turretBurstCooldownTime>3.2</turretBurstCooldownTime>
+      <turretBurstWarmupTime>1.4</turretBurstWarmupTime>
       <turretTopOffset>(0, 0.05)</turretTopOffset>
       <turretTopDrawSize>1</turretTopDrawSize>
     </building>
@@ -134,7 +134,7 @@
       <damageAmountBase>5</damageAmountBase>
       <armorPenetrationBase>0</armorPenetrationBase>
       <stoppingPower>1</stoppingPower>
-      <speed>22</speed>
+      <speed>27</speed>
     </projectile>
   </ThingDef>
 
@@ -153,7 +153,7 @@
       <AccuracyShort>0.77</AccuracyShort>
       <AccuracyMedium>0.32</AccuracyMedium>
       <AccuracyLong>0.16</AccuracyLong>
-      <RangedWeapon_Cooldown>4.9</RangedWeapon_Cooldown>
+      <RangedWeapon_Cooldown>3.8</RangedWeapon_Cooldown>
       <DeteriorationRate>0</DeteriorationRate>
       <Mass>10</Mass>
       <Flammability>0</Flammability>
@@ -165,8 +165,8 @@
         <defaultProjectile>VV_Bullet_Pea</defaultProjectile>
         <warmupTime>0</warmupTime>
         <range>24.9</range>
-        <ticksBetweenBurstShots>11</ticksBetweenBurstShots>
-        <burstShotCount>8</burstShotCount>
+        <ticksBetweenBurstShots>9</ticksBetweenBurstShots>
+        <burstShotCount>6</burstShotCount>
         <soundCast>ThumpCannon_Fire</soundCast>
         <soundCastTail>GunTail_Heavy</soundCastTail>
         <muzzleFlashScale>3</muzzleFlashScale>
@@ -215,8 +215,8 @@
       <combatPower>125</combatPower>
       <ai_combatDangerous>true</ai_combatDangerous>
       <turretGunDef>VV_Gun_Pealauncher</turretGunDef>
-      <turretBurstCooldownTime>7.9</turretBurstCooldownTime>
-      <turretBurstWarmupTime>2.9</turretBurstWarmupTime>
+      <turretBurstCooldownTime>5.4</turretBurstCooldownTime>
+      <turretBurstWarmupTime>2.4</turretBurstWarmupTime>
       <turretTopOffset>(0, 0.05)</turretTopOffset>
       <turretTopDrawSize>1</turretTopDrawSize>
     </building>
@@ -239,7 +239,7 @@
         <zeroManaDamageByChance>1~10</zeroManaDamageByChance>
         <zeroManaDurableTicks>30000</zeroManaDurableTicks>
         
-        <consumeManaPerVerbShoot>8</consumeManaPerVerbShoot>
+        <consumeManaPerVerbShoot>9</consumeManaPerVerbShoot>
       </li>
 
       <li Class="VVRace.GrowingArcanePlantData">
@@ -312,7 +312,7 @@
       <damageDef>Bomb</damageDef>
       <speed>50</speed>
       <explosionRadius>1.9</explosionRadius>
-      <damageAmountBase>16</damageAmountBase>
+      <damageAmountBase>20</damageAmountBase>
       <screenShakeFactor>0</screenShakeFactor>
     </projectile>
   </ThingDef>
@@ -329,9 +329,9 @@
 
     <statBases>
       <AccuracyTouch>0.32</AccuracyTouch>
-      <AccuracyShort>0.47</AccuracyShort>
-      <AccuracyMedium>0.72</AccuracyMedium>
-      <AccuracyLong>0.63</AccuracyLong>
+      <AccuracyShort>0.5</AccuracyShort>
+      <AccuracyMedium>0.75</AccuracyMedium>
+      <AccuracyLong>0.7</AccuracyLong>
       <RangedWeapon_Cooldown>6.9</RangedWeapon_Cooldown>
       <DeteriorationRate>0</DeteriorationRate>
       <Mass>10</Mass>
@@ -344,7 +344,7 @@
         <defaultProjectile>VV_Bullet_PeaFast</defaultProjectile>
         <warmupTime>0</warmupTime>
         <range>44.9</range>
-        <ticksBetweenBurstShots>14</ticksBetweenBurstShots>
+        <ticksBetweenBurstShots>9</ticksBetweenBurstShots>
         <burstShotCount>6</burstShotCount>
         <forcedMissRadius>2.4</forcedMissRadius>
         <forcedMissEvenDispersal>true</forcedMissEvenDispersal>
@@ -485,7 +485,7 @@
         <manaCapacity>500</manaCapacity>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>20</mana>
+          <mana>50</mana>
         </manaConsumeRule>
       </li>
       

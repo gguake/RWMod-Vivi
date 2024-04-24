@@ -68,9 +68,9 @@
           <li>
             <thingDef>VV_Bullet_Pea</thingDef>
             <damageDef>Flame</damageDef>
-            <amount>3</amount>
+            <amount>2</amount>
             <armorPenetration>0</armorPenetration>
-            <chance>0.35</chance>
+            <chance>0.3</chance>
           </li>
         </passedBulletOverrides>
       </li>
@@ -200,7 +200,7 @@
           <li>
             <thingDef>VV_Bullet_Pea</thingDef>
             <damageDef>Burn</damageDef>
-            <amount>5</amount>
+            <amount>4</amount>
             <armorPenetration>0</armorPenetration>
           </li>
         </passedBulletOverrides>
@@ -345,7 +345,7 @@
           <li>
             <thingDef>VV_Bullet_Pea</thingDef>
             <damageDef>Stun</damageDef>
-            <amount>10</amount>
+            <amount>12</amount>
             <armorPenetration>0</armorPenetration>
             <chance>0.06</chance>
           </li>
@@ -473,7 +473,7 @@
           <li>
             <thingDef>VV_Bullet_Pea</thingDef>
             <damageDef>Stun</damageDef>
-            <amount>10</amount>
+            <amount>12</amount>
             <armorPenetration>0</armorPenetration>
             <chance>0.06</chance>
           </li>
@@ -827,7 +827,7 @@
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
       <li Class="VVRace.CompProperties_Terraformer">
-        <cooldownTicks>60000~120000</cooldownTicks>
+        <cooldownTicks>90000~150000</cooldownTicks>
         <radius>2.7</radius>
         <terraforms>
           <li><from>SoftSand</from><to>Sand</to></li>
