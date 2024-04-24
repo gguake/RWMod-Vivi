@@ -8,7 +8,7 @@ using Verse;
 namespace VVRace
 {
     [StaticConstructorOnStartup]
-    public class Building_ArcanePlantFarm : Building, IThingHolder, INotifyHauledTo
+    public class Building_ArcanePlantFarm : Building, IThingHolder, INotifyHauledTo, IConditionalGraphicProvider
     {
         public GrowingArcanePlantBill Bill => _bill;
 
@@ -52,6 +52,19 @@ namespace VVRace
                         }
                         yield break;
                 }
+            }
+        }
+
+        public int GraphicIndex
+        {
+            get
+            {
+                if (_bill == null || _bill.Stage != GrowingArcanePlantBillStage.Growing) { return 0; }
+
+                var growthPct = _bill.TotalGrowthPct;
+                if (growthPct < 0.33f) { return 1; }
+                else if (growthPct < 0.67f) { return 2; }
+                else { return 3; }
             }
         }
 
@@ -212,11 +225,7 @@ namespace VVRace
                 switch (_bill.Stage)
                 {
                     case GrowingArcanePlantBillStage.Gathering:
-                        if (!RequiredThings.Any())
-                        {
-                            _innerContainer.ClearAndDestroyContents();
-                            _bill.Start();
-                        }
+                        StartBillIfGatherStageComplete();
                         break;
 
                     case GrowingArcanePlantBillStage.Growing:
@@ -284,11 +293,7 @@ namespace VVRace
             switch (_bill.Stage)
             {
                 case GrowingArcanePlantBillStage.Gathering:
-                    if (!RequiredThings.Any())
-                    {
-                        _innerContainer.ClearAndDestroyContents();
-                        _bill.Start();
-                    }
+                    StartBillIfGatherStageComplete();
                     break;
 
                 case GrowingArcanePlantBillStage.Growing:
@@ -319,6 +324,17 @@ namespace VVRace
         {
             Messages.Message(LocalizeString_Message.VV_Message_FailedGrowingArcanePlant.Translate(_bill.RecipeTarget.LabelCap), this, MessageTypeDefOf.NegativeEvent);
             _bill = null;
+        }
+
+        private void StartBillIfGatherStageComplete()
+        {
+            if (!RequiredThings.Any())
+            {
+                _innerContainer.ClearAndDestroyContents();
+                _bill.Start();
+
+                GetComp<CompFarmSeedlingDrawer>()?.RefreshSeedlingVisualCoordinates();
+            }
         }
 
         private void EjectContents()

@@ -182,8 +182,6 @@ namespace VVRace
 
         public override void PostDraw()
         {
-            base.PostDraw();
-
             if (!(parent is Building_DreamumAltar altar) || altar.Stage < DreamumProjectStage.Prepare || altar.RequireDreamum)
             {
                 return;

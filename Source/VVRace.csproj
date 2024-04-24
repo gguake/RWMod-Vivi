@@ -72,6 +72,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArcanePlant\Growing\Comps\CompFarmSeedlingDrawer.cs" />
     <Compile Include="ArcanePlant\Plant\AI\JobDriver_FertilizeArcanePlant.cs" />
     <Compile Include="ArcanePlant\Growing\AI\JobDriver_ManageArcanePlantFarm.cs" />
     <Compile Include="ArcanePlant\Plant\AI\WorkGiver_EquipShootus.cs" />
