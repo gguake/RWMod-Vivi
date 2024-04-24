@@ -366,8 +366,8 @@
     <statBases>
       <WorkToMake>15000</WorkToMake>
       <Mass>1.6</Mass>
-      <AccuracyTouch>0.7</AccuracyTouch>
-      <AccuracyShort>0.18</AccuracyShort>
+      <AccuracyTouch>0.63</AccuracyTouch>
+      <AccuracyShort>0.12</AccuracyShort>
       <AccuracyMedium>0.07</AccuracyMedium>
       <AccuracyLong>0.03</AccuracyLong>
       <RangedWeapon_Cooldown>0.11</RangedWeapon_Cooldown>
@@ -448,7 +448,7 @@
       <damageDef>VV_ToxicArrow</damageDef>
       <damageAmountBase>5</damageAmountBase>
       <stoppingPower>1.0</stoppingPower>
-      <speed>50</speed>
+      <speed>40</speed>
       <armorPenetrationBase>0</armorPenetrationBase>
     </projectile>
   </ThingDef>
