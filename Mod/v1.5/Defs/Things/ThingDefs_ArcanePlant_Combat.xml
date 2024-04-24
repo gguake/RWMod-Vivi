@@ -69,8 +69,8 @@
       <li Class="VVRace.GrowingArcanePlantData">
         <ingredients>
           <VV_UnknownSeed>1</VV_UnknownSeed>
-          <MedicineHerbal>15</MedicineHerbal>
-          <VV_Pollen>100</VV_Pollen>
+          <MedicineHerbal>20</MedicineHerbal>
+          <VV_Pollen>120</VV_Pollen>
         </ingredients>
 
         <totalGrowDays>15</totalGrowDays>
@@ -246,8 +246,8 @@
         <ingredients>
           <VV_UnknownSeed>1</VV_UnknownSeed>
           <MedicineHerbal>10</MedicineHerbal>
-          <Chemfuel>50</Chemfuel>
-          <VV_Pollen>100</VV_Pollen>
+          <Chemfuel>75</Chemfuel>
+          <VV_Pollen>120</VV_Pollen>
         </ingredients>
 
         <totalGrowDays>15</totalGrowDays>
@@ -329,9 +329,9 @@
 
     <statBases>
       <AccuracyTouch>0.24</AccuracyTouch>
-      <AccuracyShort>0.44</AccuracyShort>
-      <AccuracyMedium>0.7</AccuracyMedium>
-      <AccuracyLong>0.6</AccuracyLong>
+      <AccuracyShort>0.34</AccuracyShort>
+      <AccuracyMedium>0.6</AccuracyMedium>
+      <AccuracyLong>0.5</AccuracyLong>
       <RangedWeapon_Cooldown>6.9</RangedWeapon_Cooldown>
       <DeteriorationRate>0</DeteriorationRate>
       <Mass>10</Mass>
@@ -343,7 +343,7 @@
         <verbClass>VVRace.Verb_ShootWithMana</verbClass>
         <defaultProjectile>VV_Bullet_PeaFast</defaultProjectile>
         <warmupTime>0</warmupTime>
-        <range>44.9</range>
+        <range>40.9</range>
         <ticksBetweenBurstShots>9</ticksBetweenBurstShots>
         <burstShotCount>6</burstShotCount>
         <forcedMissRadius>2.4</forcedMissRadius>
@@ -502,8 +502,8 @@
       <li Class="VVRace.GrowingArcanePlantData">
         <ingredients>
           <VV_UnknownSeed>1</VV_UnknownSeed>
-          <VV_RoyalJelly>3</VV_RoyalJelly>
-          <VV_Pollen>150</VV_Pollen>
+          <SmokeleafJoint>25</SmokeleafJoint>
+          <VV_Pollen>120</VV_Pollen>
         </ingredients>
 
         <totalGrowDays>20</totalGrowDays>
