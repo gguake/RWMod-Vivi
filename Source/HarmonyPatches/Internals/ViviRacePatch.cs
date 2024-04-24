@@ -178,7 +178,7 @@ namespace VVRace.HarmonyPatches
                 {
                     var mapHeld = pawn.MapHeld;
                     var positionHeld = pawn.PositionHeld;
-                    var radiusCells = GenRadial.NumCellsInRadius(5.7f);
+                    var radiusCells = GenRadial.NumCellsInRadius(6.7f);
                     for (int i = 1; i < radiusCells; i++)
                     {
                         var cell = pawn.Position + GenRadial.RadialPattern[i];

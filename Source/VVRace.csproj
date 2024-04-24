@@ -148,6 +148,7 @@
     <Compile Include="GlideAbility\CompAbilityEffect_FoodCost.cs" />
     <Compile Include="GlideAbility\CompAbility_RequiresBodyPart.cs" />
     <Compile Include="Hornet\HediffGiver_ConstantScaria.cs" />
+    <Compile Include="Hornet\JobGiver_FollowAnotherHornet.cs" />
     <Compile Include="Hornet\JobGiver_HornetBerserk.cs" />
     <Compile Include="Localize\LocalizeString_Alert.cs" />
     <Compile Include="Localize\LocalizeString_Command.cs" />

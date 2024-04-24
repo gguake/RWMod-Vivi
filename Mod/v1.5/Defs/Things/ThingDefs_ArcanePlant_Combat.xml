@@ -312,7 +312,7 @@
       <damageDef>Bomb</damageDef>
       <speed>50</speed>
       <explosionRadius>1.9</explosionRadius>
-      <damageAmountBase>20</damageAmountBase>
+      <damageAmountBase>18</damageAmountBase>
       <screenShakeFactor>0</screenShakeFactor>
     </projectile>
   </ThingDef>
@@ -328,7 +328,7 @@
     <drawerType>MapMeshAndRealTime</drawerType>
 
     <statBases>
-      <AccuracyTouch>0.32</AccuracyTouch>
+      <AccuracyTouch>0.24</AccuracyTouch>
       <AccuracyShort>0.5</AccuracyShort>
       <AccuracyMedium>0.75</AccuracyMedium>
       <AccuracyLong>0.7</AccuracyLong>
