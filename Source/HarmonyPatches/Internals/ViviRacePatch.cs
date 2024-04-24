@@ -47,7 +47,7 @@ namespace VVRace.HarmonyPatches
                 original: AccessTools.Method(typeof(MentalStateWorker), nameof(MentalStateWorker.StateCanOccur)),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(MentalStateWorker_StateCanOccur_Postfix)));
 
-            // 불 공포 면역
+            // 불 공포 오버라이드
             harmony.Patch(
                 original: AccessTools.Method(typeof(ThoughtWorker_Pyrophobia), nameof(ThoughtWorker_Pyrophobia.NearFire)),
                 prefix: new HarmonyMethod(typeof(ViviRacePatch), nameof(ThoughtWorker_Pyrophobia_NearFire_Prefix)));
@@ -162,9 +162,37 @@ namespace VVRace.HarmonyPatches
 
         private static bool ThoughtWorker_Pyrophobia_NearFire_Prefix(ref bool __result, Pawn pawn)
         {
-            if (pawn.MapHeld != null && pawn.IsVivi() && pawn.health?.hediffSet != null && pawn.health.hediffSet.HasHediff(VVHediffDefOf.VV_CombatHormoneJelly))
+            if (pawn.MapHeld != null && pawn.IsVivi())
             {
                 __result = false;
+                if (pawn.health?.hediffSet != null && pawn.health.hediffSet.HasHediff(VVHediffDefOf.VV_CombatHormoneJelly))
+                {
+                    return false;
+                }
+
+                if (pawn.IsBurning())
+                {
+                    __result = true;
+                }
+                else
+                {
+                    var mapHeld = pawn.MapHeld;
+                    var positionHeld = pawn.PositionHeld;
+                    var radiusCells = GenRadial.NumCellsInRadius(5.7f);
+                    for (int i = 1; i < radiusCells; i++)
+                    {
+                        var cell = pawn.Position + GenRadial.RadialPattern[i];
+                        if (cell.InBounds(mapHeld) && 
+                            !cell.Fogged(mapHeld) && 
+                            GenSight.LineOfSight(positionHeld, cell, mapHeld, skipFirstCell: true) && 
+                            cell.ContainsStaticFire(mapHeld))
+                        {
+                            __result = true;
+                            break;
+                        }
+                    }
+                }
+
                 return false;
             }
 
