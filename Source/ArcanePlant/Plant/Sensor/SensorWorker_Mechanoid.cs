@@ -1,26 +1,26 @@
 ﻿using Verse;
-using Verse.AI;
 
 namespace VVRace
 {
 
     public class SensorWorker_Mechanoid : SensorWorker
     {
-        public override bool Detected(Thing thing, float radius)
+        public override bool Detected(Thing parent, float radius)
         {
-            var closest = GenClosest.ClosestThingReachable(
-                thing.Position,
-                thing.Map,
-                ThingRequest.ForGroup(ThingRequestGroup.Pawn),
-                PathEndMode.OnCell,
-                TraverseParms.For(TraverseMode.NoPassClosedDoors),
-                radius,
-                validator: (Thing t) =>
+            var cells = GenRadial.NumCellsInRadius(radius);
+            for (int i = 0; i < cells; ++i)
+            {
+                var map = parent.Map;
+                var cell = parent.Position + GenRadial.RadialPattern[i];
+                if (cell.InBounds(map) && 
+                    GenSight.LineOfSight(parent.Position, cell, map) &&
+                    cell.GetThingList(map).Any(thing => thing is Pawn pawn && pawn.RaceProps?.IsMechanoid == true))
                 {
-                    return t is Pawn pawn && pawn.RaceProps != null && pawn.RaceProps.IsMechanoid;
-                });
+                    return true;
+                }
+            }
 
-            return closest != null;
+            return false;
         }
     }
 }

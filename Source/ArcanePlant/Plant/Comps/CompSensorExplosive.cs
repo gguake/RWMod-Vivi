@@ -92,8 +92,8 @@ namespace VVRace
 
         public override void PostDrawExtraSelectionOverlays()
         {
-            GenDraw.DrawRadiusRing(parent.Position, Props.sensorRadius);
-            GenDraw.DrawRadiusRing(parent.Position, Props.explosiveRadius);
+            GenDraw.DrawRadiusRing(parent.Position, Props.sensorRadius, Color.yellow, c => GenSight.LineOfSight(parent.Position, c, parent.Map));
+            GenDraw.DrawRadiusRing(parent.Position, Props.explosiveRadius, Color.red);
         }
 
         public void Tick(int ticks = 1)
