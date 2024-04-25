@@ -46,23 +46,26 @@ namespace VVRace
                 gatherWorker = (GatherWorker)Activator.CreateInstance(gatherWorkerType);
                 gatherWorker.recipeDef = this;
 
-                var allTargets = DefDatabase<ThingDef>.AllDefsListForReading
-                    .Where(thingDef => thingDef.StatBaseDefined(targetYieldStat) && thingDef.GetStatValueAbstract(targetYieldStat) > 0f)
-                    .ToList();
-
-                if (allTargets.Any())
+                if (targetYieldStat != null && ingredients.NullOrEmpty())
                 {
-                    if (ingredients == null) { ingredients = new List<IngredientCount>(); }
+                    var allTargets = DefDatabase<ThingDef>.AllDefsListForReading
+                        .Where(thingDef => thingDef.StatBaseDefined(targetYieldStat) && thingDef.GetStatValueAbstract(targetYieldStat) > 0f)
+                        .ToList();
 
-                    var ingredientCount = ingredients.FirstOrDefault();
-                    if (ingredientCount == null) { ingredientCount = new IngredientCount(); ingredients.Add(ingredientCount); }
+                    if (allTargets.Any())
+                    {
+                        if (ingredients == null) { ingredients = new List<IngredientCount>(); }
 
-                    ingredientCount.filter = new ThingFilter();
-                    AddThingDefToThingFilter(ingredientCount.filter, allTargets);
-                    ingredientCount.SetBaseCount(1);
+                        var ingredientCount = ingredients.FirstOrDefault();
+                        if (ingredientCount == null) { ingredientCount = new IngredientCount(); ingredients.Add(ingredientCount); }
 
-                    if (fixedIngredientFilter == null) { fixedIngredientFilter = new ThingFilter(); }
-                    AddThingDefToThingFilter(fixedIngredientFilter, allTargets);
+                        ingredientCount.filter = new ThingFilter();
+                        AddThingDefToThingFilter(ingredientCount.filter, allTargets);
+                        ingredientCount.SetBaseCount(1);
+
+                        if (fixedIngredientFilter == null) { fixedIngredientFilter = new ThingFilter(); }
+                        AddThingDefToThingFilter(fixedIngredientFilter, allTargets);
+                    }
                 }
             }
 
