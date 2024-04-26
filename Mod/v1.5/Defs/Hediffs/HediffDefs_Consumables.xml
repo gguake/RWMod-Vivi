@@ -117,7 +117,7 @@
           </li>
           <li>
             <capacity>Metabolism</capacity>
-            <weight>0.1</weight>
+            <offset>0.1</offset>
           </li>
         </capMods>
       </li>
