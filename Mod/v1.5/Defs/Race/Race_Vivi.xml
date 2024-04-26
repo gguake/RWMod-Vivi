@@ -39,13 +39,13 @@
       <RoyalFavorValue>1</RoyalFavorValue>
     </statBases>
 
-    <tools>
+    <tools Inherit="False">
       <li>
         <label>left fist</label>
         <capacities>
           <li>Blunt</li>
         </capacities>
-        <power>8.2</power>
+        <power>6.2</power>
         <cooldownTime>2</cooldownTime>
         <linkedBodyPartsGroup>LeftHand</linkedBodyPartsGroup>
         <surpriseAttack>
@@ -62,7 +62,7 @@
         <capacities>
           <li>Blunt</li>
         </capacities>
-        <power>8.2</power>
+        <power>6.2</power>
         <cooldownTime>2</cooldownTime>
         <linkedBodyPartsGroup>RightHand</linkedBodyPartsGroup>
         <surpriseAttack>
@@ -79,7 +79,7 @@
         <capacities>
           <li>Bite</li>
         </capacities>
-        <power>8.2</power>
+        <power>6.2</power>
         <cooldownTime>2</cooldownTime>
         <linkedBodyPartsGroup>Teeth</linkedBodyPartsGroup>
         <chanceFactor>0.07</chanceFactor>
@@ -91,7 +91,7 @@
         <capacities>
           <li>Blunt</li>
         </capacities>
-        <power>5</power>
+        <power>4</power>
         <cooldownTime>2</cooldownTime>
         <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
         <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
@@ -211,7 +211,17 @@
       </ageGenerationCurve>
     </race>
 
-    <comps>
+    <comps Inherit="False">
+      <li MayRequire="Ludeon.RimWorld.Anomaly" Class="CompProperties_HoldingPlatformTarget">
+        <baseEscapeIntervalMtbDays>120</baseEscapeIntervalMtbDays>
+        <getsColdContainmentBonus>true</getsColdContainmentBonus>
+      </li>
+      <li MayRequire="Ludeon.RimWorld.Anomaly" Class="CompProperties_Studiable">
+        <frequencyTicks>120000</frequencyTicks>
+        <minMonolithLevelForStudy>1</minMonolithLevelForStudy>
+        <requiresImprisonment>true</requiresImprisonment>
+      </li>
+
       <li Class="VVRace.CompProperties_EggLayer">
         <eggProgressDays>10</eggProgressDays>
       </li>
@@ -224,6 +234,9 @@
         <thoughtReplacer>
           <SleptInBarracks>VV_SleptInBarracks</SleptInBarracks>
           <MyDaughterDied>VV_MyDaughterDied</MyDaughterDied>
+          <MyDaughterLost>VV_MyDaughterLost</MyDaughterLost>
+          <PawnWithGoodOpinionDied>VV_PawnWithGoodOpinionDied</PawnWithGoodOpinionDied>
+          <PawnWithGoodOpinionLost>VV_PawnWithGoodOpinionLost</PawnWithGoodOpinionLost>
         </thoughtReplacer>
 
         <sterile>true</sterile>

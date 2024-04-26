@@ -60,13 +60,60 @@
   
     <ThoughtDef ParentName="DeathMemoryFamily">
       <defName>VV_MyDaughterDied</defName>
-      <durationDays>10.0</durationDays>
-      <stackLimit>5</stackLimit>
+      <durationDays>15</durationDays>
+      <stackLimit>3</stackLimit>
       <stages>
         <li>
           <label>my daughter {0} died</label>
           <description>My daughter is dead. My own flesh and blood...</description>
-          <baseMoodEffect>-12</baseMoodEffect>
+          <baseMoodEffect>-10</baseMoodEffect>
+        </li>
+      </stages>
+    </ThoughtDef>
+
+    <ThoughtDef ParentName="LostMemoryFamily">
+      <defName>VV_MyDaughterLost</defName>
+      <durationDays>15</durationDays>
+      <stackLimit>3</stackLimit>
+      <stages>
+        <li>
+          <label>my daughter {0} lost</label>
+          <description>My daughter has gone lost. I hope she will get back to us someday.</description>
+          <baseMoodEffect>-10</baseMoodEffect>
+        </li>
+      </stages>
+    </ThoughtDef>
+
+    <ThoughtDef ParentName="DeathMemory">
+      <defName>VV_PawnWithGoodOpinionDied</defName>
+      <durationDays>10</durationDays>
+      <stackLimit>3</stackLimit>
+      <stackLimitForSameOtherPawn>1</stackLimitForSameOtherPawn>
+      <nullifyingTraits>
+        <li>Psychopath</li>
+      </nullifyingTraits>
+      <stages>
+        <li>
+          <label>my friend {0} died</label>
+          <description>Such a wonderful person, gone forever. The universe gets darker every day.</description>
+          <baseMoodEffect>-5</baseMoodEffect>
+        </li>
+      </stages>
+    </ThoughtDef>
+
+    <ThoughtDef ParentName="LostMemory">
+      <defName>VV_PawnWithGoodOpinionLost</defName>
+      <durationDays>10</durationDays>
+      <stackLimit>3</stackLimit>
+      <stackLimitForSameOtherPawn>1</stackLimitForSameOtherPawn>
+      <nullifyingTraits>
+        <li>Psychopath</li>
+      </nullifyingTraits>
+      <stages>
+        <li>
+          <label>my friend {0} lost</label>
+          <description>Such a wonderful person, lost. The universe gets darker every day.</description>
+          <baseMoodEffect>-5</baseMoodEffect>
         </li>
       </stages>
     </ThoughtDef>

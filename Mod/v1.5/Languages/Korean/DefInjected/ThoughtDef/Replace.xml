@@ -26,5 +26,11 @@
 
 <VV_MyDaughterDied.stages.my_daughter_died.label>딸 {0} 사망</VV_MyDaughterDied.stages.my_daughter_died.label>
 <VV_MyDaughterDied.stages.my_daughter_died.description>내 딸이 죽었어. 내 혈육이...</VV_MyDaughterDied.stages.my_daughter_died.description>
-
+<VV_MyDaughterLost.stages.my_daughter_lost.label>딸 {0} 잃음</VV_MyDaughterLost.stages.my_daughter_lost.label>
+<VV_MyDaughterLost.stages.my_daughter_lost.description>딸을 잃었어. 언젠가 다시 돌아올거라 믿어.</VV_MyDaughterLost.stages.my_daughter_lost.description>
+<VV_PawnWithGoodOpinionDied.stages.my_friend_died.label>친구 {0} 사망</VV_PawnWithGoodOpinionDied.stages.my_friend_died.label>
+<VV_PawnWithGoodOpinionDied.stages.my_friend_died.description>그런 좋은 사람을 앗아가다니, 이 우주는 잘못됐어.</VV_PawnWithGoodOpinionDied.stages.my_friend_died.description>
+<VV_PawnWithGoodOpinionLost.stages.my_friend_lost.label>친구 {0} 잃음</VV_PawnWithGoodOpinionLost.stages.my_friend_lost.label>
+<VV_PawnWithGoodOpinionLost.stages.my_friend_lost.description>그런 멋진 사람을 잃다니. 매일 어둠이 닥치는 것 같아.</VV_PawnWithGoodOpinionLost.stages.my_friend_lost.description>
+  
 </LanguageData>
