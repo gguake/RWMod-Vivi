@@ -37,6 +37,9 @@
           <li>Asthma</li>
         </makeImmuneTo>
 
+        <statOffsets>
+          <ImmunityGainSpeed>0.2</ImmunityGainSpeed>
+        </statOffsets>
         <statFactors>
           <LifespanFactor>2.5</LifespanFactor>
           <PsychicSensitivity>1.25</PsychicSensitivity>
