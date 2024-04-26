@@ -724,7 +724,7 @@
         <manaConsumeRule Class="VVRace.ManaFluxRule_CompositeSum">
           <rules>
             <li Class="VVRace.ManaFluxRule_GlowerActive">
-              <mana>240</mana>
+              <mana>190</mana>
             </li>
             <li Class="VVRace.ManaFluxRule_Constant">
               <mana>10</mana>
@@ -732,7 +732,7 @@
           </rules>
         </manaConsumeRule>
         <manaGenerateRule Class="VVRace.ManaFluxRule_Sunlight">
-          <manaFromSunlightRange>0~210</manaFromSunlightRange>
+          <manaFromSunlightRange>0~200</manaFromSunlightRange>
         </manaGenerateRule>
       </li>
 
@@ -957,16 +957,16 @@
       </li>
       
       <li Class="VVRace.CompProperties_Terraformer">
-        <cooldownTicks>90000~120000</cooldownTicks>
-        <radius>3.9</radius>
+        <cooldownTicks>60000~120000</cooldownTicks>
+        <radius>4.9</radius>
         <removePollution>true</removePollution>
-        <showRadius>false</showRadius>
+        <showRadius>true</showRadius>
       </li>
 
       <li Class="VVRace.CompProperties_ManaShieldProjector">
         <shieldDef>VV_PurifimintShield</shieldDef>
         <requiredMinimumManaForActivate>30</requiredMinimumManaForActivate>
-        <manaEfficiency>2.5</manaEfficiency>
+        <manaEfficiency>3.5</manaEfficiency>
 
         <mote>VV_Mote_ShieldProjectorEffect</mote>
       </li>
@@ -978,14 +978,14 @@
 
     <modExtensions>
       <li Class="VVRace.ManaExtension">
-        <manaCapacity>270</manaCapacity>
+        <manaCapacity>300</manaCapacity>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>40</mana>
+          <mana>50</mana>
         </manaConsumeRule>
         <manaGenerateRule Class="VVRace.ManaFluxRule_AdjacentPollution">
-          <manaFromOccupiedPollution>40</manaFromOccupiedPollution>
-          <manaPerAdjacentPollution>20</manaPerAdjacentPollution>
+          <manaFromOccupiedPollution>60</manaFromOccupiedPollution>
+          <manaPerAdjacentPollution>40</manaPerAdjacentPollution>
         </manaGenerateRule>
       </li>
 
@@ -1055,7 +1055,7 @@
 
     <comps>
       <li Class="CompProperties_ProjectileInterceptor">
-        <radius>3.9</radius>
+        <radius>4.9</radius>
         <interceptGroundProjectiles>true</interceptGroundProjectiles>
         <interceptNonHostileProjectiles>true</interceptNonHostileProjectiles>
         <interceptOutgoingProjectiles>false</interceptOutgoingProjectiles>
