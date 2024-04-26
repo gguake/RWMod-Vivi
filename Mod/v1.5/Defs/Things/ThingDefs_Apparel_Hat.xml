@@ -51,7 +51,7 @@
     <equippedStatOffsets>
       <PainShockThreshold>0.05</PainShockThreshold>
       <MentalBreakThreshold>-0.05</MentalBreakThreshold>
-      <ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">0.25</ToxicEnvironmentResistance>
+      <ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">0.2</ToxicEnvironmentResistance>
     </equippedStatOffsets>
 
     <costStuffCount>50</costStuffCount>
@@ -70,6 +70,7 @@
         <li>Overhead</li>
       </layers>
       <developmentalStageFilter>Adult,Child</developmentalStageFilter>
+      <canBeGeneratedToSatisfyToxicEnvironmentResistance>false</canBeGeneratedToSatisfyToxicEnvironmentResistance>
     </apparel>
 
     <recipeMaker>

@@ -69,6 +69,7 @@
       </tags>
       <developmentalStageFilter>Adult</developmentalStageFilter>
       <canBeDesiredForIdeo>false</canBeDesiredForIdeo>
+      <canBeGeneratedToSatisfyToxicEnvironmentResistance>false</canBeGeneratedToSatisfyToxicEnvironmentResistance>
     </apparel>
     
     <recipeMaker>
@@ -148,6 +149,7 @@
       </tags>
       <developmentalStageFilter>Child</developmentalStageFilter>
       <canBeDesiredForIdeo>false</canBeDesiredForIdeo>
+      <canBeGeneratedToSatisfyToxicEnvironmentResistance>false</canBeGeneratedToSatisfyToxicEnvironmentResistance>
     </apparel>
     
     <recipeMaker>

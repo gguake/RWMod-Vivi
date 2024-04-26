@@ -54,7 +54,7 @@
     </statBases>
     <equippedStatOffsets>
       <MoveSpeed>0.2</MoveSpeed>
-      <ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">0.25</ToxicEnvironmentResistance>
+      <ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">0.2</ToxicEnvironmentResistance>
     </equippedStatOffsets>
 
     <costStuffCount>60</costStuffCount>
@@ -76,6 +76,7 @@
       <tags>
         <li>VV_ViviStartingApparel</li>
       </tags>
+      <canBeGeneratedToSatisfyToxicEnvironmentResistance>false</canBeGeneratedToSatisfyToxicEnvironmentResistance>
     </apparel>
     
     <recipeMaker>
@@ -241,6 +242,7 @@
         <li>Middle</li>
         <li>Shell</li>
       </layers>
+      <canBeGeneratedToSatisfyToxicEnvironmentResistance>false</canBeGeneratedToSatisfyToxicEnvironmentResistance>
 
       <renderNodeProperties>
         <li>
