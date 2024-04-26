@@ -60,7 +60,9 @@ namespace VVRace
             try
             {
                 if (!Spawned) { return; }
-                if ((caster is Pawn casterPawn && casterPawn.DeadOrDowned) || caster.DestroyedOrNull())
+
+                var casterPawn = caster as Pawn;
+                if (casterPawn == null || casterPawn.DeadOrDowned || caster.DestroyedOrNull())
                 {
                     Destroy();
                     return;
@@ -128,14 +130,12 @@ namespace VVRace
 
                 if (Spawned && !Destroyed)
                 {
-                    var curCellTargets = new List<Thing>(Position.GetThingList(Map));
-                    foreach (var target in curCellTargets)
+                    var curCellThings = new List<Thing>(Position.GetThingList(Map));
+                    foreach (var thing in curCellThings)
                     {
-                        if (target is IAttackTarget && target.HostileTo(caster))
+                        if (thing is IAttackTarget target && GenHostility.IsActiveThreatTo(target, casterPawn.Faction) && !target.ThreatDisabled(casterPawn))
                         {
-                            if (target is Pawn pawn && pawn.DeadOrDowned) { continue; }
-
-                            DamageTo(props, target);
+                            DamageTo(props, thing);
                         }
                     }
                 }
@@ -273,7 +273,8 @@ namespace VVRace
 
         private void RefreshTarget(NeedleProperties props)
         {
-            if (attackedCount >= MaxAttackCount)
+            var casterPawn = caster as Pawn;
+            if (casterPawn == null || attackedCount >= MaxAttackCount)
             {
                 curTarget = caster;
                 return;
@@ -312,16 +313,16 @@ namespace VVRace
                         for (int i = 0; i < candidates.Count; ++i)
                         {
                             var thing = candidates[i];
-                            if (thing.HostileTo(caster) && thing.Position != Position)
+                            if (!(thing is IAttackTarget targetThing) || thing.Position.Fogged(Map) || thing.Position == Position) { continue; }
+                            if (!GenHostility.IsActiveThreatTo(targetThing, casterPawn.Faction) || targetThing.ThreatDisabled(casterPawn)) { continue; }
+
+                            if (targetHistory.Contains(thing))
                             {
-                                if (targetHistory.Contains(thing))
-                                {
-                                    _tmpTargetDuplicatedCandidates.Enqueue(thing, prioritySign * Position.DistanceToSquared(thing.Position));
-                                }
-                                else
-                                {
-                                    _tmpTargetCandidates.Enqueue(thing, prioritySign * Position.DistanceToSquared(thing.Position));
-                                }
+                                _tmpTargetDuplicatedCandidates.Enqueue(thing, prioritySign * Position.DistanceToSquared(thing.Position));
+                            }
+                            else
+                            {
+                                _tmpTargetCandidates.Enqueue(thing, prioritySign * Position.DistanceToSquared(thing.Position));
                             }
                         }
 
