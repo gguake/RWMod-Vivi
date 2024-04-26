@@ -7,6 +7,8 @@ namespace VVRace
 {
     public class Recipe_InjectPropolis : Recipe_Surgery
     {
+        public const float BaseOffset = 0.1f;
+
         public override void ApplyOnPawn(Pawn pawn, BodyPartRecord part, Pawn billDoer, List<Thing> ingredients, Bill bill)
         {
             List<Hediff> targetHediffs = new List<Hediff>();
@@ -25,7 +27,9 @@ namespace VVRace
 
             foreach (var hediff in targetHediffs)
             {
-                hediff.Severity = Mathf.Max(0.01f, hediff.Severity - 0.2f);
+                var offset = BaseOffset;
+                offset = Mathf.Clamp(offset * pawn.GetStatValue(StatDefOf.ImmunityGainSpeed), 0.01f, 1f);
+                hediff.Severity = Mathf.Max(0.01f, hediff.Severity - offset);
             }
         }
     }
