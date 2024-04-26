@@ -55,9 +55,42 @@
         <rule>OnAppliedPawn</rule>
         <type>Blacklist</type>
         <thoughts>
-          <li>VV_AtePollen</li>
-          <li>MySisterDied</li>
           <li>SleepDisturbed</li>
+          <li>VV_AtePollen</li>
+
+          <li>MySonDied</li>
+          <li>MySisterDied</li>
+          <li>MyHusbandDied</li>
+          <li>MyWifeDied</li>
+          <li>MyFianceDied</li>
+          <li>MyFianceeDied</li>
+          <li>MyLoverDied</li>
+          <li>MyBrotherDied</li>
+          <li>MyGrandchildDied</li>
+          <li>MyNieceDied</li>
+          <li>MyNephewDied</li>
+          <li>MyHalfSiblingDied</li>
+          <li>MyAuntDied</li>
+          <li>MyUncleDied</li>
+          <li>MyCousinDied</li>
+          <li>MyKinDied</li>
+          
+          <li>MySonLost</li>
+          <li>MySisterLost</li>
+          <li>MyHusbandLost</li>
+          <li>MyWifeLost</li>
+          <li>MyFianceLost</li>
+          <li>MyFianceeLost</li>
+          <li>MyLoverLost</li>
+          <li>MyBrotherLost</li>
+          <li>MyGrandchildLost</li>
+          <li>MyNieceLost</li>
+          <li>MyNephewLost</li>
+          <li>MyHalfSiblingLost</li>
+          <li>MyAuntLost</li>
+          <li>MyUncleLost</li>
+          <li>MyCousinLost</li>
+          <li>MyKinLost</li>
         </thoughts>
       </li>
     </constraints>
