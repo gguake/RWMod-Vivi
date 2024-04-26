@@ -74,7 +74,7 @@ namespace VVRace
             }
         }
 
-        protected virtual bool CanFlip => true;
+        protected virtual bool ShouldFlip => thingIDNumber % 2 == 0;
 
         private bool _forceMinify = false;
 
@@ -125,10 +125,10 @@ namespace VVRace
                     isShift = true;
                 }
 
-                var scale = Rand.Range(0.85f, 1.15f);
+                var scale = ArcanePlantModExtension.hasRandomDrawScale ? Rand.Range(0.9f, 1.1f) : 1f;
                 drawSize.Scale(new Vector2(scale, scale));
 
-                var isFlipUV = CanFlip ? Rand.Bool : false;
+                var isFlipUV = ShouldFlip;
                 var material = Graphic.MatSingleFor(this);
                 Graphic.TryGetTextureAtlasReplacementInfo(material, def.category.ToAtlasGroup(), isFlipUV, vertexColors: false, out material, out var uvs, out var _);
 

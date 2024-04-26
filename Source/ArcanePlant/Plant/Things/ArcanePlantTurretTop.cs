@@ -24,6 +24,7 @@ namespace VVRace
             }
             set
             {
+                var before = curRotationInt;
                 curRotationInt = value;
                 if (curRotationInt > 360f)
                 {
@@ -32,6 +33,11 @@ namespace VVRace
                 if (curRotationInt < 0f)
                 {
                     curRotationInt += 360f;
+                }
+
+                if ((before < 180 && curRotationInt >= 180) || (before >= 180 && curRotationInt < 180))
+                {
+                    parent.DirtyMapMesh(parent.Map);
                 }
             }
         }

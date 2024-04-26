@@ -1,10 +1,8 @@
 ﻿using RimWorld;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using UnityEngine;
 using Verse;
-using Verse.Sound;
 
 namespace VVRace
 {
@@ -19,7 +17,7 @@ namespace VVRace
 
         public int GraphicIndex => _innerContainer.Count > 0 ? 1 : 0;
 
-        protected override bool CanFlip => false;
+        protected override bool ShouldFlip => Gun != null && TurretTop.CurRotation >= 180;
         public override bool Active => base.Active && _innerContainer.Count > 0;
 
         public ArcanePlant_Shootus() : base()
@@ -61,14 +59,20 @@ namespace VVRace
         {
             if (Gun != null)
             {
+                var topBaseOffset = ArcanePlantModExtension.turretTopBaseOffset;
+                if (ArcanePlantModExtension.turretTopBaseFlippable && TurretTop.CurRotation >= 180)
+                {
+                    topBaseOffset.x = -topBaseOffset.x;
+                }
+
                 if (AttackVerb is Verb_LaunchProjectile verbLaunchProjectile)
                 {
                     EquipmentUtility.Recoil(Gun.def, verbLaunchProjectile, out var drawOffset, out var angleOffset, _turretTop.CurRotation);
-                    _turretTop.DrawTurret(ArcanePlantModExtension.turretTopBaseOffset + drawOffset, ArcanePlantModExtension.turretTopBaseAngle + angleOffset);
+                    _turretTop.DrawTurret(topBaseOffset + drawOffset, ArcanePlantModExtension.turretTopBaseAngle + angleOffset);
                 }
                 else
                 {
-                    _turretTop.DrawTurret(ArcanePlantModExtension.turretTopBaseOffset, ArcanePlantModExtension.turretTopBaseAngle);
+                    _turretTop.DrawTurret(topBaseOffset, ArcanePlantModExtension.turretTopBaseAngle);
                 }
             }
 
@@ -184,26 +188,21 @@ namespace VVRace
 
             if (DebugSettings.godMode)
             {
-                Command_Action command_addRandomGun = new Command_Action();
-                command_addRandomGun.defaultLabel = "DEV: Add random gun";
-                command_addRandomGun.action = () =>
+                Command_Action command_setRotationZero = new Command_Action();
+                command_setRotationZero.defaultLabel = "DEV: Set rotation zero";
+                command_setRotationZero.action = () =>
                 {
-                    if (Gun == null)
-                    {
-                        SoundDefOf.Click.PlayOneShotOnCamera();
-                        Find.WindowStack.Add(new FloatMenu(DefDatabase<ThingDef>.AllDefsListForReading.Where(v => v.IsRangedWeapon).Select(def => new FloatMenuOption(def.LabelCap, () =>
-                        {
-                            var gun = ThingMaker.MakeThing(def);
-                            if (gun != null)
-                            {
-                                EquipGun(gun);
-                            }
-
-                        })).ToList()));
-                    }
+                    TurretTop.CurRotation = 0;
                 };
+                yield return command_setRotationZero;
 
-                yield return command_addRandomGun;
+                Command_Action command_addRotation = new Command_Action();
+                command_addRotation.defaultLabel = "DEV: Add rotation";
+                command_addRotation.action = () =>
+                {
+                    TurretTop.CurRotation += 10;
+                };
+                yield return command_addRotation;
             }
         }
 

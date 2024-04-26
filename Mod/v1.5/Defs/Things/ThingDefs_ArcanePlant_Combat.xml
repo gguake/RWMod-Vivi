@@ -497,6 +497,9 @@
         <idleTurnAnglePerTick>1</idleTurnAnglePerTick>
         <turretTopBaseOffset>(0.24,0.2,0.6)</turretTopBaseOffset>
         <turretTopBaseAngle>0</turretTopBaseAngle>
+        <turretTopBaseFlippable>true</turretTopBaseFlippable>
+
+        <hasRandomDrawScale>false</hasRandomDrawScale>
       </li>
 
       <li Class="VVRace.GrowingArcanePlantData">
