@@ -202,7 +202,6 @@
 		</graphicData>
 		<socialPropernessMatters>true</socialPropernessMatters>
 		<thingCategories>
-			<li>Foods</li>
 			<li>Drugs</li>
 		</thingCategories>
 
@@ -212,12 +211,16 @@
 		</statBases>
 
 		<ingestible>
+      <baseIngestTicks>120</baseIngestTicks>
+      <chairSearchRadius>8</chairSearchRadius>
+
       <foodType>Fluid, Processed</foodType>
 			<preferability>NeverForNutrition</preferability>
 			<joy>0.2</joy>
 			<joyKind>Gluttonous</joyKind>
       
 			<drugCategory>Social</drugCategory>
+      <canAutoSelectAsFoodForCaravan>false</canAutoSelectAsFoodForCaravan>
       <outcomeDoers>
         <li Class="IngestionOutcomeDoer_GiveHediff">
           <hediffDef>VV_RoyalJelly</hediffDef>
@@ -229,7 +232,8 @@
       </outcomeDoers>
 
       <maxNumToIngestAtOnce>1</maxNumToIngestAtOnce>
-      <optimalityOffsetHumanlikes>-5</optimalityOffsetHumanlikes>
+      <defaultNumToIngestAtOnce>1</defaultNumToIngestAtOnce>
+      <ingestHoldUsesTable>false</ingestHoldUsesTable>
       <optimalityOffsetFeedingAnimals>-10</optimalityOffsetFeedingAnimals>
 		</ingestible>
 
@@ -256,7 +260,7 @@
     <rotatable>false</rotatable>
 
     <statBases>
-      <WorkToMake>500</WorkToMake>
+      <WorkToMake>300</WorkToMake>
       <Mass>0.1</Mass>
       <DeteriorationRate>6</DeteriorationRate>
     </statBases>
@@ -266,8 +270,8 @@
     <ingestible>
       <foodType>Fluid, Processed</foodType>
       <joyKind>Chemical</joyKind>
-      <joy>0.50</joy>
-      <baseIngestTicks>210</baseIngestTicks>
+      <joy>0.5</joy>
+      <baseIngestTicks>750</baseIngestTicks>
       <nurseable>true</nurseable>
       <drugCategory>Social</drugCategory>
       <ingestSound>Ingest_Drink</ingestSound>
@@ -279,12 +283,17 @@
       <ingestHoldUsesTable>false</ingestHoldUsesTable>
       <ingestCommandString>Drink {0}</ingestCommandString>
       <ingestReportString>Drinking {0}.</ingestReportString>
+
+      <maxNumToIngestAtOnce>1</maxNumToIngestAtOnce>
+      <defaultNumToIngestAtOnce>1</defaultNumToIngestAtOnce>
+      <chairSearchRadius>25</chairSearchRadius>
       <outcomeDoers>
         <li Class="IngestionOutcomeDoer_GiveHediff">
           <hediffDef>VV_FloralTea</hediffDef>
         </li>
       </outcomeDoers>
     </ingestible>
+    <socialPropernessMatters>true</socialPropernessMatters>
 
     <comps>
       <li Class="CompProperties_Drug">
@@ -382,6 +391,10 @@
         </li>
       </outcomeDoers>
     </ingestible>
+
+    <comps>
+      <li Class="VVRace.CompProperties_Honey" />
+    </comps>
   </ThingDef>
 
   <!-- 전투 호르몬 젤리 -->
@@ -411,15 +424,18 @@
       <Mass>0.1</Mass>
       <DeteriorationRate>1.0</DeteriorationRate>
       <Flammability>0.7</Flammability>
-      <WorkToMake>1500</WorkToMake>
+      <WorkToMake>1800</WorkToMake>
     </statBases>
 
     <techLevel>Medieval</techLevel>
     <ingestible>
       <foodType>Fluid, Processed, Liquor</foodType>
       <joyKind>Chemical</joyKind>
-      <joy>0.3</joy>
+      <joy>0.35</joy>
       <drugCategory>Hard</drugCategory>
+      
+      <baseIngestTicks>120</baseIngestTicks>
+      <chairSearchRadius>0</chairSearchRadius>
       <outcomeDoers>
         <li Class="IngestionOutcomeDoer_GiveHediff">
           <hediffDef>VV_CombatHormoneJelly</hediffDef>
@@ -427,12 +443,12 @@
         </li>
         <li Class="IngestionOutcomeDoer_GiveHediff">
           <hediffDef>AlcoholHigh</hediffDef>
-          <severity>0.38</severity>
+          <severity>0.45</severity>
           <toleranceChemical>Alcohol</toleranceChemical>
         </li>
         <li Class="IngestionOutcomeDoer_GiveHediff">
           <hediffDef>AlcoholTolerance</hediffDef>
-          <severity>0.025</severity>
+          <severity>0.04</severity>
           <divideByBodySize>true</divideByBodySize>
           <multiplyByGeneToleranceFactors>true</multiplyByGeneToleranceFactors>
         </li>
@@ -448,9 +464,9 @@
     </recipeMaker>
     
     <costList>
-      <VV_Mead>1</VV_Mead>
+      <VV_Mead>2</VV_Mead>
       <VV_Propolis>5</VV_Propolis>
-      <VV_Vivicream>30</VV_Vivicream>
+      <VV_Vivicream>20</VV_Vivicream>
     </costList>
     
     <comps>

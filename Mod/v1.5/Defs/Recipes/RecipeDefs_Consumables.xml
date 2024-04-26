@@ -168,12 +168,11 @@
     </descriptionHyperlinks>
 
     <jobString>Making floral hot tea.</jobString>
-    <workAmount>400</workAmount>
+    <workAmount>900</workAmount>
     <workSpeedStat>DrugCookingSpeed</workSpeedStat>
     <requiredGiverWorkType>Cooking</requiredGiverWorkType>
     <effectWorking>Cook</effectWorking>
     <soundWorking>Recipe_CookMeal</soundWorking>
-    <allowMixingIngredients>true</allowMixingIngredients>
     <ingredients>
       <li>
         <filter>
@@ -181,15 +180,7 @@
             <li>VV_HeatingPetal</li>
           </thingDefs>
         </filter>
-        <count>2</count>
-      </li>
-      <li>
-        <filter>
-          <thingDefs>
-            <li>VV_Pollen</li>
-          </thingDefs>
-        </filter>
-        <count>10</count>
+        <count>3</count>
       </li>
       <li>
         <filter>
@@ -197,7 +188,7 @@
             <li>VV_FilteredHoney</li>
           </thingDefs>
         </filter>
-        <count>1</count>
+        <count>20</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
@@ -215,7 +206,7 @@
       </thingDefs>
     </defaultIngredientFilter>
     <products>
-      <VV_FloralHotTea>2</VV_FloralHotTea>
+      <VV_FloralHotTea>9</VV_FloralHotTea>
     </products>
     <workSkill>Cooking</workSkill>
     <researchPrerequisite>VV_ArcaneBotany</researchPrerequisite>
@@ -231,12 +222,11 @@
     </descriptionHyperlinks>
 
     <jobString>Making floral ice tea.</jobString>
-    <workAmount>400</workAmount>
+    <workAmount>900</workAmount>
     <workSpeedStat>DrugCookingSpeed</workSpeedStat>
     <requiredGiverWorkType>Cooking</requiredGiverWorkType>
     <effectWorking>Cook</effectWorking>
     <soundWorking>Recipe_CookMeal</soundWorking>
-    <allowMixingIngredients>true</allowMixingIngredients>
     <ingredients>
       <li>
         <filter>
@@ -244,15 +234,7 @@
             <li>VV_CoolingPetal</li>
           </thingDefs>
         </filter>
-        <count>2</count>
-      </li>
-      <li>
-        <filter>
-          <thingDefs>
-            <li>VV_Pollen</li>
-          </thingDefs>
-        </filter>
-        <count>10</count>
+        <count>3</count>
       </li>
       <li>
         <filter>
@@ -260,7 +242,7 @@
             <li>VV_FilteredHoney</li>
           </thingDefs>
         </filter>
-        <count>1</count>
+        <count>20</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
@@ -278,7 +260,7 @@
       </thingDefs>
     </defaultIngredientFilter>
     <products>
-      <VV_FloralIceTea>2</VV_FloralIceTea>
+      <VV_FloralIceTea>9</VV_FloralIceTea>
     </products>
     <workSkill>Cooking</workSkill>
     <researchPrerequisite>VV_ArcaneBotany</researchPrerequisite>
@@ -294,12 +276,11 @@
     </descriptionHyperlinks>
 
     <jobString>Making floral milk tea.</jobString>
-    <workAmount>400</workAmount>
+    <workAmount>900</workAmount>
     <workSpeedStat>DrugCookingSpeed</workSpeedStat>
     <requiredGiverWorkType>Cooking</requiredGiverWorkType>
     <effectWorking>Cook</effectWorking>
     <soundWorking>Recipe_CookMeal</soundWorking>
-    <allowMixingIngredients>true</allowMixingIngredients>
     <ingredients>
       <li>
         <filter>
@@ -307,12 +288,12 @@
             <li>VV_PerfumingPetal</li>
           </thingDefs>
         </filter>
-        <count>2</count>
+        <count>3</count>
       </li>
       <li>
         <filter>
           <thingDefs>
-            <li>VV_Pollen</li>
+            <li>VV_FilteredHoney</li>
           </thingDefs>
         </filter>
         <count>10</count>
@@ -323,7 +304,7 @@
             <li>Milk</li>
           </thingDefs>
         </filter>
-        <count>3</count>
+        <count>10</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
@@ -341,7 +322,7 @@
       </thingDefs>
     </defaultIngredientFilter>
     <products>
-      <VV_FloralMilkTea>2</VV_FloralMilkTea>
+      <VV_FloralMilkTea>9</VV_FloralMilkTea>
     </products>
     <workSkill>Cooking</workSkill>
     <researchPrerequisite>VV_ArcaneBotany</researchPrerequisite>
