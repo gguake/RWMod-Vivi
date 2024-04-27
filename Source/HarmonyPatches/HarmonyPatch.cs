@@ -12,6 +12,7 @@ namespace VVRace
             {
                 ViviRacePatch.Patch(harmony);
                 ArcanePlantPatch.Patch(harmony);
+                VanilaBugFixPatch.Patch(harmony);
 
                 harmony.PatchAll();
             }
