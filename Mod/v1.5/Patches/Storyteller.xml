@@ -6,7 +6,6 @@
       <li Class="VVRace.StorytellerCompProperties_DreamumVictory">
         <incident>VV_GiveQuest_EndGame_DreamumVictory</incident>
         <playerFactions>
-          <li>VV_PlayerVivi</li>
           <li>VV_PlayerExiledVivi</li>
           <li>VV_PlayerViviRefugee</li>
         </playerFactions>
