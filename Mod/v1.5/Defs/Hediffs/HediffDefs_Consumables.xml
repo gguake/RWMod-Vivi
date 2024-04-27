@@ -240,11 +240,11 @@
         <capMods>
           <li>
             <capacity>Sight</capacity>
-            <offset>0.25</offset>
+            <offset>0.2</offset>
           </li>
           <li>
             <capacity>Moving</capacity>
-            <offset>0.25</offset>
+            <offset>0.2</offset>
           </li>
         </capMods>
         <statOffsets>
@@ -254,7 +254,7 @@
           <MeleeHitChance>4</MeleeHitChance>
         </statOffsets>
         <hungerRateFactorOffset>1.2</hungerRateFactorOffset>
-        <socialFightChanceFactor>5.0</socialFightChanceFactor>
+        <socialFightChanceFactor>8.0</socialFightChanceFactor>
       </li>
     </stages>
 
@@ -265,7 +265,7 @@
 
     <comps>
       <li Class="HediffCompProperties_SeverityPerDay">
-        <severityPerDay>-0.5</severityPerDay>
+        <severityPerDay>-0.333</severityPerDay>
         <showHoursToRecover>true</showHoursToRecover>
       </li>
     </comps>

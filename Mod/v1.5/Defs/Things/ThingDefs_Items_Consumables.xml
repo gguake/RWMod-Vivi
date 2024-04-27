@@ -439,11 +439,11 @@
       <outcomeDoers>
         <li Class="IngestionOutcomeDoer_GiveHediff">
           <hediffDef>VV_CombatHormoneJelly</hediffDef>
-          <severity>0.5</severity>
+          <severity>0.9</severity>
         </li>
         <li Class="IngestionOutcomeDoer_GiveHediff">
           <hediffDef>AlcoholHigh</hediffDef>
-          <severity>0.45</severity>
+          <severity>0.42</severity>
           <toleranceChemical>Alcohol</toleranceChemical>
         </li>
         <li Class="IngestionOutcomeDoer_GiveHediff">

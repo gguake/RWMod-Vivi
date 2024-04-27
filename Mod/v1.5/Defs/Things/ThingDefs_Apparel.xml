@@ -18,19 +18,19 @@
       <MaxHitPoints>320</MaxHitPoints>
       <WorkToMake>48000</WorkToMake>
       <Mass>2</Mass>
-      <StuffEffectMultiplierArmor>0.5</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierArmor>0.4</StuffEffectMultiplierArmor>
       <StuffEffectMultiplierInsulation_Cold>0.75</StuffEffectMultiplierInsulation_Cold>
       <StuffEffectMultiplierInsulation_Heat>0.75</StuffEffectMultiplierInsulation_Heat>
       <EquipDelay>2.5</EquipDelay>
       
-      <ArmorRating_Sharp>0.6</ArmorRating_Sharp>
-      <ArmorRating_Blunt>0.6</ArmorRating_Blunt>
+      <ArmorRating_Sharp>0.5</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.5</ArmorRating_Blunt>
       <ArmorRating_Heat>1.0</ArmorRating_Heat>
       <Insulation_Cold>12</Insulation_Cold>
       <Insulation_Heat>12</Insulation_Heat>
     </statBases>
     <equippedStatOffsets>
-      <PainShockThreshold>0.1</PainShockThreshold>
+      <PainShockThreshold>0.05</PainShockThreshold>
       <ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">0.5</ToxicEnvironmentResistance>
     </equippedStatOffsets>
 
@@ -52,7 +52,6 @@
         <li>Shoulders</li>
         <li>Torso</li>
         <li>Arms</li>
-        <li>Hands</li>
         <li>Legs</li>
       </bodyPartGroups>
       <layers>
