@@ -711,7 +711,7 @@
         <glowOnlyRoofed>true</glowOnlyRoofed>
       </li>
     </comps>
-    <specialDisplayRadius>6.38</specialDisplayRadius>
+    <specialDisplayRadius>6.2</specialDisplayRadius>
 
     <researchPrerequisites>
       <li>VV_AdvancedArcaneBotany</li>
