@@ -39,7 +39,7 @@
 
       <li Class="CompProperties_HeatPusher">
         <compClass>VVRace.CompHeatPusherMana</compClass>
-        <heatPerSecond>19</heatPerSecond>
+        <heatPerSecond>13</heatPerSecond>
         <heatPushMaxTemperature>29</heatPushMaxTemperature>
       </li>
     </comps>
@@ -53,11 +53,11 @@
         <manaCapacity>150</manaCapacity>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>15</mana>
+          <mana>20</mana>
         </manaConsumeRule>
         <manaGenerateRule Class="VVRace.ManaFluxRule_Temperature">
-          <activeTemperatureRange>32~120</activeTemperatureRange>
-          <manaFromTemperatureRange>30~100</manaFromTemperatureRange>
+          <activeTemperatureRange>25~125</activeTemperatureRange>
+          <manaFromTemperatureRange>0~100</manaFromTemperatureRange>
         </manaGenerateRule>
       </li>
 
@@ -162,8 +162,8 @@
 
       <li Class="CompProperties_HeatPusher">
         <compClass>VVRace.CompHeatPusherMana</compClass>
-        <heatPerSecond>-14</heatPerSecond>
-        <heatPushMinTemperature>-9</heatPushMinTemperature>
+        <heatPerSecond>-7</heatPerSecond>
+        <heatPushMinTemperature>-10</heatPushMinTemperature>
       </li>
     </comps>
     
@@ -176,13 +176,13 @@
         <manaCapacity>150</manaCapacity>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>15</mana>
+          <mana>20</mana>
         </manaConsumeRule>
         <manaGenerateRule Class="VVRace.ManaFluxRule_CompositeSum">
           <rules>
             <li Class="VVRace.ManaFluxRule_Temperature">
-              <activeTemperatureRange>-100~-12</activeTemperatureRange>
-              <manaFromTemperatureRange>30~100</manaFromTemperatureRange>
+              <activeTemperatureRange>-100~0</activeTemperatureRange>
+              <manaFromTemperatureRange>0~150</manaFromTemperatureRange>
               <manaLerpReversed>true</manaLerpReversed>
             </li>
             <li Class="VVRace.ManaFluxRule_WeatherSnowy">
@@ -309,7 +309,7 @@
         <requiredManaAmount>125</requiredManaAmount>
         <useManaAmount>100</useManaAmount>
         
-        <sensorRadius>4.9</sensorRadius>
+        <sensorRadius>3.9</sensorRadius>
         <sensorWorkerClass>VVRace.SensorWorker_Mechanoid</sensorWorkerClass>
         <explosiveRadius>10.9</explosiveRadius>
         <explosiveCooldownTicks>7500~20000</explosiveCooldownTicks>
@@ -462,7 +462,7 @@
         <manaCapacity>500</manaCapacity>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>125</mana>
+          <mana>120</mana>
         </manaConsumeRule>
       </li>
 
@@ -572,7 +572,7 @@
         <requiredManaAmount>50</requiredManaAmount>
         <useManaAmount>30</useManaAmount>
         
-        <sensorRadius>2.9</sensorRadius>
+        <sensorRadius>3.7</sensorRadius>
         <sensorWorkerClass>VVRace.SensorWorker_Fire</sensorWorkerClass>
 
         <explosiveRadius>10.9</explosiveRadius>
@@ -816,7 +816,7 @@
       <BeautyOutdoors>10</BeautyOutdoors>
       
       <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
-      <VV_PlantHoneyGatherYield>3.2</VV_PlantHoneyGatherYield>
+      <VV_PlantHoneyGatherYield>2.4</VV_PlantHoneyGatherYield>
     </statBases>
 
     <costList>
@@ -1215,7 +1215,7 @@
 
     <statBases>
       <MaxHitPoints>120</MaxHitPoints>
-      <WorkToBuild>500</WorkToBuild>
+      <WorkToBuild>1500</WorkToBuild>
       <Flammability>1.0</Flammability>
     </statBases>
 

@@ -14,9 +14,12 @@
 
     <statBases>
       <MarketValue>400</MarketValue>
-      <MaxHitPoints>80</MaxHitPoints>
-      <Beauty>18</Beauty>
-      <BeautyOutdoors>18</BeautyOutdoors>
+      <MaxHitPoints>90</MaxHitPoints>
+      <Beauty>15</Beauty>
+      <BeautyOutdoors>15</BeautyOutdoors>
+
+      <VV_PlantGatherCooldown>2.1</VV_PlantGatherCooldown>
+      <VV_PlantHoneyGatherYield>3.2</VV_PlantHoneyGatherYield>
     </statBases>
 
     <comps>
@@ -25,9 +28,24 @@
         <glowColor>(255,227,156,0)</glowColor>
       </li>
       
+      <li Class="VVRace.CompProperties_RepeatGatherable" />
+
+      <li Class="VVRace.CompProperties_Terraformer">
+        <cooldownTicks>60000~90000</cooldownTicks>
+        <radius>3.7</radius>
+        <terraforms>
+          <li><from>SoftSand</from><to>Sand</to></li>
+          <li><from>Sand</from><to>Gravel</to></li>
+          <li><from>Gravel</from><to>Soil</to></li>
+          <li><from>Soil</from><to>SoilRich</to></li>
+          <li><from>MossyTerrain</from><to>SoilRich</to></li>
+          <li><from>MarshyTerrain</from><to>SoilRich</to></li>
+        </terraforms>
+      </li>
+
       <li Class="VVRace.CompProperties_FilthMakerArcanePlant">
         <filthDef>VV_FilthPollen</filthDef>
-        <makeAmountPerDays>3~12</makeAmountPerDays>
+        <makeAmountPerDays>3~9</makeAmountPerDays>
         <radius>1.9</radius>
         <exceptCenter>true</exceptCenter>
 
@@ -42,18 +60,26 @@
     
     <modExtensions>
       <li Class="VVRace.ManaExtension">
-        <manaCapacity>1000</manaCapacity>
+        <manaCapacity>900</manaCapacity>
 
-        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>0</mana>
+        <manaConsumeRule Class="VVRace.ManaFluxRule_CompositeSum">
+          <rules>
+            <li Class="VVRace.ManaFluxRule_Constant">
+              <mana>20</mana>
+            </li>
+            <li Class="VVRace.ManaFluxRule_AdjacentPollution">
+              <manaFromOccupiedPollution>50</manaFromOccupiedPollution>
+              <manaPerAdjacentPollution>25</manaPerAdjacentPollution>
+            </li>
+          </rules>
         </manaConsumeRule>
-        <manaGenerateRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>0</mana>
+        <manaGenerateRule Class="VVRace.ManaFluxRule_AdjacentPlant">
+          <manaPerAdjacentPlant>30</manaPerAdjacentPlant>
         </manaGenerateRule>
       </li>
 
       <li Class="VVRace.ArcanePlantExtension">
-        <zeroManaDamageByChance>3~9</zeroManaDamageByChance>
+        <zeroManaDamageByChance>1~2</zeroManaDamageByChance>
         <zeroManaDurableTicks>180000</zeroManaDurableTicks>
       </li>
     </modExtensions>
