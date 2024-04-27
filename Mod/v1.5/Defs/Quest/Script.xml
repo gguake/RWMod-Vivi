@@ -36,6 +36,15 @@
           <mustBeWorldPawn>true</mustBeWorldPawn>
         </li>
 
+        <!-- End if faction became hostile -->
+        <li Class="QuestNode_GetFaction">
+          <storeAs>faction</storeAs>
+          <ofPawn>$asker</ofPawn>
+          <allowEnemy>false</allowEnemy>
+          <allowNeutral>true</allowNeutral>
+          <allowAlly>true</allowAlly>
+        </li>
+        
         <!-- Add reward info -->
         <li Class="VVRace.QuestNode_AddPurgeOutlandersReward">
           <inSignalChoiceUsed>viviruins.LaunchedShip</inSignalChoiceUsed>

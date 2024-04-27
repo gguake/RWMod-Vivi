@@ -141,7 +141,7 @@ Only a few traces of the former empire remain, in the form of certain traditions
     </pawnGroupMakers>
     
     <fixedLeaderKinds>
-      <li>VV_RoyalViviLeader</li>
+      <li>VV_RoyalViviEmpress</li>
     </fixedLeaderKinds>
     <caravanTraderKinds Inherit="False">
       <li>VV_Caravan_Vivi_Honeys</li>

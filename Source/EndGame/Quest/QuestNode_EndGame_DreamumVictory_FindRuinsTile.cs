@@ -6,9 +6,9 @@ namespace VVRace
 {
     public class QuestNode_EndGame_DreamumVictory_FindRuinsTile : QuestNode
     {
-        private const int MinTraversalDistance = 30;
+        private const int MinTraversalDistance = 100;
 
-        private const int MaxTraversalDistance = 180;
+        private const int MaxTraversalDistance = 300;
 
         [NoTranslate]
         public SlateRef<string> storeAs;
