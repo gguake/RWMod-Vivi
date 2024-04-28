@@ -6,6 +6,8 @@
         public const string VV_StatsReport_Mana_Desc = nameof(VV_StatsReport_Mana_Desc);
         public const string VV_StatsReport_ManaFlux = nameof(VV_StatsReport_ManaFlux);
         public const string VV_StatsReport_ManaFlux_Desc = nameof(VV_StatsReport_ManaFlux_Desc);
+        public const string VV_StatsReport_ManaPerShoot = nameof(VV_StatsReport_ManaPerShoot);
+        public const string VV_StatsReport_ManaPerShootDesc = nameof(VV_StatsReport_ManaPerShootDesc);
 
         public const string VV_StatsReport_ManaFluxRule_AdjacentPlant_Desc = nameof(VV_StatsReport_ManaFluxRule_AdjacentPlant_Desc);
         public const string VV_StatsReport_ManaFluxRule_AdjacentPollution_Desc = nameof(VV_StatsReport_ManaFluxRule_AdjacentPollution_Desc);

@@ -79,6 +79,7 @@
     <Compile Include="ArcanePlant\Growing\AI\WorkGiver_HaulToArcanePlantFarm.cs" />
     <Compile Include="ArcanePlant\Growing\AI\WorkGiver_ManageArcanePlantFarm.cs" />
     <Compile Include="ArcanePlant\Plant\ArcanePlantUtility.cs" />
+    <Compile Include="ArcanePlant\Plant\Comps\CompArcanePlantStatDisplay.cs" />
     <Compile Include="ArcanePlant\Plant\Comps\CompFilthMakerArcanePlant.cs" />
     <Compile Include="ArcanePlant\Plant\Comps\CompManaShieldProjector.cs" />
     <Compile Include="ArcanePlant\Plant\Comps\CompProperties_LaunchableCustom.cs" />

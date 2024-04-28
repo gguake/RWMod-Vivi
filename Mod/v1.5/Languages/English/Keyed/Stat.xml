@@ -6,6 +6,9 @@
 <VV_StatsReport_ManaFlux>Mana Fluctuation</VV_StatsReport_ManaFlux>
 <VV_StatsReport_ManaFlux_Desc>The daily mana fluctuation of this arcane plant. Mana can be produced by certain arcane plants when fertilized or under suitable conditions, and is not consumed when packaged.\nIf reserved mana is at maximum, any overproduced mana is transferred to adjacent connected arcane plants.</VV_StatsReport_ManaFlux_Desc>
 
+<VV_StatsReport_ManaPerShoot>Mana Consumption Per Shoot</VV_StatsReport_ManaPerShoot>
+<VV_StatsReport_ManaPerShootDesc>The amount of mana consumed each time the arcane plant fires</VV_StatsReport_ManaPerShootDesc>
+
 <VV_StatsReport_ManaFluxRule_AdjacentPlant_Desc>{0} mana from each adjacent arcane plants\{0} mana from each adjacent plant propotional to its growth</VV_StatsReport_ManaFluxRule_AdjacentPlant_Desc>
 <VV_StatsReport_ManaFluxRule_AdjacentPollution_Desc>{0} mana if placed on polluted soil\n{1} mana from each adjacent polluted soil</VV_StatsReport_ManaFluxRule_AdjacentPollution_Desc>
 <VV_StatsReport_ManaFluxRule_AdjacentWater_Desc>{0} mana if placed on water\n{1} mana from each adjacent water</VV_StatsReport_ManaFluxRule_AdjacentWater_Desc>
@@ -22,4 +25,5 @@
 <VV_StatsReport_ManaFluxRule_Wind_Desc>{0}~{1} mana propotional to the wind speed</VV_StatsReport_ManaFluxRule_Wind_Desc>
 
 <VV_StatsReport_ManaFluxRule_DreamumAltar_Desc>{0} mana if altar is activated</VV_StatsReport_ManaFluxRule_DreamumAltar_Desc>
+
 </LanguageData>

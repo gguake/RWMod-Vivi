@@ -329,49 +329,6 @@ namespace VVRace
             }
         }
 
-        public override IEnumerable<StatDrawEntry> SpecialDisplayStats()
-        {
-            yield return new StatDrawEntry(
-                StatCategoryDefOf.Basics,
-                LocalizeString_Stat.VV_StatsReport_Mana.Translate(),
-                ManaExtension.manaCapacity.ToString(),
-                LocalizeString_Stat.VV_StatsReport_Mana_Desc.Translate(),
-                -22200);
-
-            if (Spawned)
-            {
-                var sbDesc = new StringBuilder(LocalizeString_Stat.VV_StatsReport_ManaFlux_Desc.Translate());
-
-                var approximateManaRange = new IntRange(0, 0);
-                if (ManaExtension.manaGenerateRule != null)
-                {
-                    var genRange = ManaExtension.manaGenerateRule.ApproximateManaFlux;
-                    approximateManaRange.min += genRange.min;
-                    approximateManaRange.max += genRange.max;
-
-                    sbDesc.AppendLine();
-                    sbDesc.AppendInNewLine(ManaExtension.manaGenerateRule.GetRuleString(false));
-                }
-
-                if (ManaExtension.manaConsumeRule != null)
-                {
-                    var conRange = ManaExtension.manaConsumeRule.ApproximateManaFlux;
-                    approximateManaRange.min -= conRange.max;
-                    approximateManaRange.max -= conRange.min;
-
-                    sbDesc.AppendLine();
-                    sbDesc.AppendInNewLine(ManaExtension.manaConsumeRule.GetRuleString(true));
-                }
-
-                yield return new StatDrawEntry(
-                    StatCategoryDefOf.Basics,
-                    LocalizeString_Stat.VV_StatsReport_ManaFlux.Translate(),
-                    approximateManaRange.min == approximateManaRange.max ? approximateManaRange.min.ToString() : approximateManaRange.ToString(),
-                    sbDesc.ToString(),
-                    -22201);
-            }
-        }
-
         public override bool DeconstructibleBy(Faction faction)
         {
             if (DebugSettings.godMode)

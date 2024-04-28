@@ -239,7 +239,7 @@
         <zeroManaDamageByChance>1~10</zeroManaDamageByChance>
         <zeroManaDurableTicks>30000</zeroManaDurableTicks>
         
-        <consumeManaPerVerbShoot>9</consumeManaPerVerbShoot>
+        <consumeManaPerVerbShoot>10</consumeManaPerVerbShoot>
       </li>
 
       <li Class="VVRace.GrowingArcanePlantData">
@@ -312,7 +312,7 @@
       <damageDef>Bomb</damageDef>
       <speed>50</speed>
       <explosionRadius>1.9</explosionRadius>
-      <damageAmountBase>11</damageAmountBase>
+      <damageAmountBase>13</damageAmountBase>
       <screenShakeFactor>0</screenShakeFactor>
     </projectile>
   </ThingDef>
