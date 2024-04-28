@@ -48,4 +48,22 @@
       </value>
     </match>
   </Operation>
+  
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Smithing"]/tags</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ResearchProjectDef[defName="Smithing"]</xpath>
+      <value>
+        <tags>
+          <li>VV_ViviRefugee</li>
+        </tags>
+      </value>
+    </nomatch>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ResearchProjectDef[defName="Smithing"]/tags</xpath>
+      <value>
+        <li>VV_ViviRefugee</li>
+      </value>
+    </match>
+  </Operation>
 </Patch>

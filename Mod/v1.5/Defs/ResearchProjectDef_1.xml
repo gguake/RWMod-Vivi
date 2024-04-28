@@ -62,6 +62,10 @@
     <prerequisites>
       <li>VV_Apparels</li>
     </prerequisites>
+
+    <tags>
+      <li>VV_ViviRefugee</li>
+    </tags>
   </ResearchProjectDef>
   
   <ResearchProjectDef ParentName="ViviResearchProjectTier1Base">

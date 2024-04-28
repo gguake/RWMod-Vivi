@@ -44,7 +44,7 @@
 
         <li Class="ScenPart_PawnFilter_Age">
           <def>PawnFilter_Age</def>
-          <allowedAgeRange>7~30</allowedAgeRange>
+          <allowedAgeRange>10~25</allowedAgeRange>
         </li>
         
         <li Class="ScenPart_PlayerPawnsArriveMethod">
@@ -57,9 +57,9 @@
           <def>ForcedHediff</def>
           <visible>false</visible>
           <context>PlayerStarter</context>
-          <chance>1.0</chance>
+          <chance>0.5</chance>
           <hediff>Malnutrition</hediff>
-          <severityRange>0.1~0.2</severityRange>
+          <severityRange>0.05~0.15</severityRange>
         </li>
         <li Class="ScenPart_SetNeedLevel">
           <def>SetNeedLevel</def>
@@ -74,7 +74,7 @@
         <li Class="ScenPart_StartingThing_Defined">
           <def>StartingThing_Defined</def>
           <thingDef>Silver</thingDef>
-          <count>400</count>
+          <count>500</count>
         </li>
         <li Class="ScenPart_ScatterThingsNearPlayerStart">
           <def>StartingThing_Defined</def>
@@ -99,7 +99,7 @@
         <li Class="ScenPart_StartingThing_Defined">
           <def>StartingThing_Defined</def>
           <thingDef>VV_Vivicream</thingDef>
-          <count>120</count>
+          <count>200</count>
         </li>
         <li Class="ScenPart_StartingThing_Defined">
           <def>StartingThing_Defined</def>
@@ -115,8 +115,14 @@
         </li>
         <li Class="ScenPart_StartingThing_Defined">
           <def>StartingThing_Defined</def>
-          <thingDef>VV_RepeatingCrossbow</thingDef>
+          <thingDef>VV_ViviLongJavelin</thingDef>
           <quality>Normal</quality>
+          <stuff>Steel</stuff>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>VV_ViviEgg</thingDef>
+          <count>1</count>
         </li>
         <li Class="ScenPart_StartingThing_Defined">
           <def>StartingThing_Defined</def>
@@ -126,7 +132,7 @@
         <li Class="ScenPart_StartingThing_Defined">
           <def>StartingThing_Defined</def>
           <thingDef>VV_RoyalJelly</thingDef>
-          <count>20</count>
+          <count>25</count>
         </li>
       </parts>
     </scenario>
