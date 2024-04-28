@@ -9,6 +9,7 @@
     <descriptionHyperlinks>
       <ThingDef>VV_Dreamum</ThingDef>
     </descriptionHyperlinks>
+    <useHitPoints>false</useHitPoints>
 
     <drawerType>MapMeshAndRealTime</drawerType>
     <graphicData>
@@ -43,6 +44,7 @@
 
     <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
     <building>
+      <isTargetable>false</isTargetable>
       <allowAutoroof>false</allowAutoroof>
       <soundAmbient>ArchonexusCore_Ambience</soundAmbient>
       <deconstructible>false</deconstructible>
