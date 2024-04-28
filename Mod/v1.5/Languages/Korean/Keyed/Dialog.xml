@@ -51,4 +51,10 @@
 
 <VV_DialogStartGrowingArcanePlantIngredientLabel>재배 시작시 필요 재료</VV_DialogStartGrowingArcanePlantIngredientLabel>
 <VV_DialogCancelGrowingArcanePlantBillInGrowing>재배 도중에 취소할 경우 투입된 자원이 모두 사라지며 되돌릴 수 없습니다.</VV_DialogCancelGrowingArcanePlantBillInGrowing>
+
+
+<VV_DialogStartProgressDreamumVictoryCaution>의식을 시작하면 먼저 꿈송이를 배치하고 제단의 마나를 완전히 충전해야 합니다. 마나가 완전히 충전되면 제단은 가동하기 시작하며 많은 양의 마나를 소모할 것입니다.
+\n제단의 마나가 절반 이하로 떨어지면 제단은 멈추게 되지만 진행 과정이 실패하진 않습니다. 다시 마나를 충전하면 가동할 수 있습니다.
+\n이 의식은 비비가 아닌 모든 외지인들에게 적대감을 발생시키며 돌이킬 수 없습니다. 충분한 물자와 방어 시설을 준비한뒤에 시작하세요.</VV_DialogStartProgressDreamumVictoryCaution>
+
 </LanguageData>

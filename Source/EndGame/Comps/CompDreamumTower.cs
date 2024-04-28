@@ -32,6 +32,8 @@ namespace VVRace
     {
         public CompProperties_DreamumTower Props => (CompProperties_DreamumTower)props;
 
+        public bool BlockDiplomacy => _bigThreatActivateNotified;
+
         public float ProgressPct => _progress / Props.completeProgressTicks;
         private float _progress;
         private int _previousGraphicIndex;
@@ -101,19 +103,11 @@ namespace VVRace
                 Find.LetterStack.ReceiveLetter(
                     LocalizeString_Letter.VV_Letter_DreamumAltarThreatActivatedLabel.Translate(),
                     LocalizeString_Letter.VV_Letter_DreamumAltarThreatActivated.Translate(),
-                    LetterDefOf.NeutralEvent,
+                    LetterDefOf.ThreatBig,
                     parent);
 
                 MakeViviFactionAlly();
                 MakeNonViviFactionEnemy();
-            }
-
-            if (ProgressPct >= Props.bigThreatActivatePct.TrueMin)
-            {
-                if (parent.IsHashIntervalTick(60000))
-                {
-                    MakeNonViviFactionEnemy();
-                }
             }
 
             if (ProgressPct >= Props.hazeActivatePct)
@@ -218,9 +212,9 @@ namespace VVRace
         public override void PostDestroy(DestroyMode mode, Map previousMap)
         {
             Messages.Message(
-                "MessageConditionCauserDespawned".Translate(parent.def.LabelCap),
+                LocalizeString_Message.VV_Message_DreamumAltarDestroyed.Translate(parent.def.LabelCap),
                 new TargetInfo(parent.Position, previousMap),
-                MessageTypeDefOf.NeutralEvent);
+                MessageTypeDefOf.NegativeEvent);
         }
 
         private bool InAoE(int tile)
@@ -279,7 +273,7 @@ namespace VVRace
 
         private void MakeViviFactionAlly()
         {
-            foreach (var faction in Find.FactionManager.AllFactionsListForReading.Where(v => v.def.allowedCultures != null && v.def.allowedCultures.Contains(VVCultureDefOf.VV_ViviCulture)))
+            foreach (var faction in Find.FactionManager.AllFactionsListForReading.Where(v => !v.IsPlayer && v.def.allowedCultures != null && v.def.allowedCultures.Contains(VVCultureDefOf.VV_ViviCulture)))
             {
                 Find.FactionManager.OfPlayer.TryAffectGoodwillWith(faction, 100 - faction.GoodwillWith(Find.FactionManager.OfPlayer));
             }
@@ -287,7 +281,7 @@ namespace VVRace
 
         private void MakeNonViviFactionEnemy()
         {
-            foreach (var faction in Find.FactionManager.AllFactionsListForReading.Where(v => !v.Hidden && !v.temporary && !v.def.permanentEnemy && !v.defeated))
+            foreach (var faction in Find.FactionManager.AllFactionsListForReading.Where(v => !v.IsPlayer && !v.Hidden && !v.temporary && !v.def.permanentEnemy && !v.defeated))
             {
                 if (faction.def.allowedCultures != null && faction.def.allowedCultures.Contains(VVCultureDefOf.VV_ViviCulture)) { continue; }
 

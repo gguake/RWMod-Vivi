@@ -57,6 +57,11 @@ namespace VVRace.HarmonyPatches
                 original: AccessTools.Method(typeof(PawnGenerator), "GenerateGenes"),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(PawnGenerator_GenerateGenes_Postfix)));
 
+            // 엔딩 진행
+            harmony.Patch(
+                original: AccessTools.Method(typeof(Faction), nameof(Faction.CanChangeGoodwillFor)),
+                postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(Faction_CanChangeGoodwillFor_Postfix)));
+
             Log.Message("!! [ViViRace] race patch complete");
         }
 
@@ -213,6 +218,21 @@ namespace VVRace.HarmonyPatches
                 foreach (var gene in genes)
                 {
                     pawn.genes.AddGene(gene, true);
+                }
+            }
+        }
+
+        private static void Faction_CanChangeGoodwillFor_Postfix(ref bool __result, Faction other)
+        {
+            if (__result && !other.def.allowedCultures.Contains(VVCultureDefOf.VV_ViviCulture))
+            {
+                foreach (var map in Find.Maps)
+                {
+                    var altar = map.listerBuildings.AllBuildingsColonistOfDef(VVThingDefOf.VV_DreamumAltar).FirstOrDefault() as Building_DreamumAltar;
+                    if (altar != null && altar.CompDreamumTower.BlockDiplomacy)
+                    {
+                        __result = false;
+                    }
                 }
             }
         }

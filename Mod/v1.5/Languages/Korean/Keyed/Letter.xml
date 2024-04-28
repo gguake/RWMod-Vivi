@@ -14,4 +14,19 @@
 <VV_Letter_IncidentHornetSwarmArrived>광폭한 거대 말벌 무리가 나타났습니다. 이들은 근처를 돌아다니면서 눈에 띄는 모든 생명체를 공격할 것입니다. 거대 말벌은 매우 빠르고 튼튼하며 일반적인 무기로 쓰러뜨리려면 대단히 어렵지만 화염이나 독에는 취약합니다.
 \n이들은 문을 통과할 수 없어 벽 뒤에 숨어있으면 안전합니다. 가까운 대상부터 무차별적으로 사냥하므로 적절한 방어수단이 없다면 숨어있는것이 좋습니다. 무리는 이 지역의 모든 움직이는 것들을 사냥하다가 며칠 뒤에 스스로 떠날 것입니다.</VV_Letter_IncidentHornetSwarmArrived>
 
+<VV_Letter_DreamumAltarProgressStartLabel>의식 시작</VV_Letter_DreamumAltarProgressStartLabel>
+<VV_Letter_DreamumAltarProgressStart>꿈송이 거대화 의식이 시작되었습니다. 꿈송이 의식에는 막대한 마나가 지속적으로 소모되므로 마나 공급에 유의하세요.</VV_Letter_DreamumAltarProgressStart>
+
+<VV_Letter_DreamumAltarThreatActivatedLabel>적대 활동 감지</VV_Letter_DreamumAltarThreatActivatedLabel>
+<VV_Letter_DreamumAltarThreatActivated>꿈송이가 멀리서도 식별가능한 수준이 되고 그 영향력이 주변에 알려지면서 모든 외지인들이 당신을 적대하기 시작했습니다.
+\n그들은 본격적으로 당신을 막기 위해 공격해올 것이며 이 과정을 하늘 위에서 보고있는 우주 해적과 메카노이드 또한 마찬가지입니다. 전투를 준비하세요.</VV_Letter_DreamumAltarThreatActivated>
+
+<VV_Letter_DreamumHazeActivatedLabel>꿈송이 안개</VV_Letter_DreamumHazeActivatedLabel>
+<VV_Letter_DreamumHazeActivated>꿈송이가 충분히 성장하고 그 꽃가루를 주변에 퍼뜨리기 시작했습니다. 비비가 아닌 인간이 꿈송이 가루에 중독되면 점차 의식이 감소하다 영원히 잠들게 됩니다.
+\n이 꽃가루는 주변에 퍼지면서 외지인들의 기지를 천천히 파괴할것입니다.</VV_Letter_DreamumHazeActivated>
+
+<VV_Letter_DreamumAltarProgressCompleteLabel>만개</VV_Letter_DreamumAltarProgressCompleteLabel>
+<VV_Letter_DreamumAltarProgressComplete>의식이 완료되고 꿈송이는 충분히 거대하게 자라났습니다. 외지인들은 한동안 당신의 영역을 침범할 수 없을것이고 새로운 번영의 길이 열렸습니다.
+\n제단에서 승리를 축하하세요.</VV_Letter_DreamumAltarProgressComplete>
+
 </LanguageData>

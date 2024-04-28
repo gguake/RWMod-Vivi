@@ -21,4 +21,5 @@
 <VV_StatsReport_ManaFluxRule_WeatherSnowy_Desc>{0} mana if snowy</VV_StatsReport_ManaFluxRule_WeatherSnowy_Desc>
 <VV_StatsReport_ManaFluxRule_Wind_Desc>{0}~{1} mana propotional to the wind speed</VV_StatsReport_ManaFluxRule_Wind_Desc>
 
+<VV_StatsReport_ManaFluxRule_DreamumAltar_Desc>{0} mana if altar is activated</VV_StatsReport_ManaFluxRule_DreamumAltar_Desc>
 </LanguageData>
