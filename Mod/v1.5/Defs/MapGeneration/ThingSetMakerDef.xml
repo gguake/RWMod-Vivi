@@ -192,7 +192,7 @@
     <root Class="ThingSetMaker_RandomOption">
       <options>
         <li>
-          <weight>50</weight>
+          <weight>40</weight>
           <thingSetMaker Class="ThingSetMaker_MarketValue">
             <fixedParams>
               <filter>
@@ -206,12 +206,13 @@
           </thingSetMaker>
         </li>
         <li>
-          <weight>35</weight>
+          <weight>25</weight>
           <thingSetMaker Class="ThingSetMaker_MarketValue">
             <fixedParams>
               <filter>
                 <thingDefs>
-                  <li>ComponentIndustrial</li>
+                  <li>Cloth</li>
+                  <li>DevilstrandCloth</li>
                   <li>VV_Lifestrand</li>
                 </thingDefs>
               </filter>
@@ -220,10 +221,22 @@
         </li>
         <li>
           <weight>15</weight>
+          <thingSetMaker Class="ThingSetMaker_MarketValue">
+            <fixedParams>
+              <filter>
+                <thingDefs>
+                  <li>ComponentIndustrial</li>
+                </thingDefs>
+              </filter>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+        <li>
+          <weight>10</weight>
           <thingSetMaker Class="ThingSetMaker_RandomGeneralGoods" />
         </li>
         <li>
-          <weight>5</weight>
+          <weight>10</weight>
           <thingSetMaker Class="ThingSetMaker_MarketValue">
             <fixedParams>
               <maxThingMarketValue>2000</maxThingMarketValue>
