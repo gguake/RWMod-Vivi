@@ -164,7 +164,23 @@ namespace VVRace
                         mapObjectTargetsMustBeAutoAttackable = false,
                         validator = (target) =>
                         {
-                            return target.HasThing && CanEquipWeapon(target.Thing);
+                            if (!target.HasThing || !CanEquipWeapon(target.Thing) || target.Thing.Map.reservationManager.IsReserved(target.Thing))
+                            {
+                                return false;
+                            }
+
+                            foreach (var building in Map.listerBuildings.AllBuildingsColonistOfDef(VVThingDefOf.VV_Shootus))
+                            {
+                                var shootus = building as ArcanePlant_Shootus;
+                                if (shootus == null) { continue; }
+
+                                if (shootus.ReservedWeapon == target.Thing)
+                                {
+                                    return false;
+                                }
+                            }
+
+                            return true;
                         },
 
                     }, (target) =>
