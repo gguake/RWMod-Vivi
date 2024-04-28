@@ -7,6 +7,15 @@ namespace VVRace
 {
     public class SymbolResolver_HexaRoomDining : SymbolResolver
     {
+        private static IList<(int xOffset, int zOffset, Rot4 rot)> _smallShelfLayout
+            = new List<(int, int, Rot4)>()
+            {
+                (-1, 3, Rot4.South),
+                (1, 3, Rot4.South),
+                (-1, -3, Rot4.North),
+                (1, -3, Rot4.North),
+            };
+
         public override void Resolve(ResolveParams resolveParams)
         {
             var center = resolveParams.rect.CenterCell;
@@ -63,6 +72,34 @@ namespace VVRace
                 p.singleThingStuff = VVThingDefOf.VV_Viviwax;
                 p.faction = resolveParams.faction;
                 BaseGen.symbolStack.Push("thing", p);
+            }
+            #endregion
+
+            #region 저장된 아이템 생성
+            {
+                foreach (var smallShelf in _smallShelfLayout)
+                {
+                    var p = resolveParams;
+                    p.rect = new CellRect(center.x + smallShelf.xOffset, center.z + smallShelf.zOffset, 1, 1);
+                    p.thingSetMakerDef = VVThingSetMakerDefOf.VV_SettlementDiningRoomThingSet;
+                    p.faction = resolveParams.faction;
+                    BaseGen.symbolStack.Push("vv_thingSet_storage", p);
+                }
+            }
+            #endregion
+
+            #region 선반 생성
+            {
+                foreach (var smallShelf in _smallShelfLayout)
+                {
+                    var p = resolveParams;
+                    p.rect = new CellRect(center.x + smallShelf.xOffset, center.z + smallShelf.zOffset, 1, 1);
+                    p.thingRot = smallShelf.rot;
+                    p.singleThingDef = VVThingDefOf.ShelfSmall;
+                    p.singleThingStuff = VVThingDefOf.VV_Viviwax;
+                    p.faction = resolveParams.faction;
+                    BaseGen.symbolStack.Push("thing", p);
+                }
             }
             #endregion
 

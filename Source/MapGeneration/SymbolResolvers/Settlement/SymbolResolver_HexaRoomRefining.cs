@@ -26,6 +26,10 @@ namespace VVRace
             {
                 (0, 4, Rot4.South),
                 (0, -4, Rot4.North),
+                (0, -1, Rot4.North),
+                (0, 1, Rot4.South),
+                (1, 0, Rot4.East),
+                (-1, 0, Rot4.West),
             };
 
         public override void Resolve(ResolveParams resolveParams)
@@ -35,10 +39,6 @@ namespace VVRace
             var pots = new List<(int xOffset, int zOffset, ThingDef plantDef)>()
             {
                 (0, 0, VVThingDefOf.VV_EmberBloom),
-                (0, 1, VVThingDefOf.VV_Skyweed),
-                (1, 0, VVThingDefOf.VV_Skyweed),
-                (-1, 0, VVThingDefOf.VV_Skyweed),
-                (0, -1, VVThingDefOf.VV_Skyweed),
             };
 
             #region 고대 꽃 생성

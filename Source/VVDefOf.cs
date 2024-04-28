@@ -94,6 +94,7 @@ namespace VVRace
         public static ThingDef Plant_Cotton;
         public static ThingDef Plant_Healroot;
         public static ThingDef Plant_Daylily;
+        public static ThingDef Plant_Rose;
 
         public static ThingDef Shelf;
         public static ThingDef ShelfSmall;
@@ -184,6 +185,7 @@ namespace VVRace
     [DefOf]
     public static class VVThingSetMakerDefOf
     {
+        public static ThingSetMakerDef VV_SettlementDiningRoomThingSet;
         public static ThingSetMakerDef VV_SettlementGreenHouseThingSet;
         public static ThingSetMakerDef VV_SettlementGatheringRoomThingSet;
         public static ThingSetMakerDef VV_SettlementRefiningRoomThingSet;

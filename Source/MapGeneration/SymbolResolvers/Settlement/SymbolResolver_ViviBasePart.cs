@@ -172,7 +172,8 @@ namespace VVRace
                     { ViviBaseRoomType.Dining, 1 },
                     { ViviBaseRoomType.GatheringHoney, 2 },
                     { ViviBaseRoomType.Refining, 2 },
-                    { ViviBaseRoomType.GreenHouse, 2 },
+                    { ViviBaseRoomType.GreenHouse, 1 },
+                    { ViviBaseRoomType.Crafting, 1 },
                 };
 
                 var rooms = hexaRoomSystem.Rooms.ToList();

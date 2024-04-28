@@ -11,6 +11,8 @@ namespace VVRace
             = new List<(int, int, Rot4)>()
             {
                 (0, 4, Rot4.South),
+                (0, 2, Rot4.North),
+                (0, -2, Rot4.South),
                 (0, -4, Rot4.North),
             };
 
@@ -29,11 +31,9 @@ namespace VVRace
 
             var pots = new List<(int xOffset, int zOffset, ThingDef plantDef)>()
             {
-                (0, 0, VVThingDefOf.VV_Waterdrops),
-                (0, 1, VVThingDefOf.VV_EmberBloom),
+                (0, 0, VVThingDefOf.VV_EmberBloom),
+                (0, 1, VVThingDefOf.VV_Peashooter),
                 (0, -1, VVThingDefOf.VV_Peashooter),
-                (0, -2, VVThingDefOf.VV_Peashooter),
-                (0, 2, VVThingDefOf.VV_Peashooter),
             };
 
             #region 고대 꽃 생성

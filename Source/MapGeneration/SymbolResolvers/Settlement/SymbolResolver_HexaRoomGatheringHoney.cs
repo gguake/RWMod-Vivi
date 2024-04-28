@@ -18,8 +18,12 @@ namespace VVRace
             = new List<(int, int, Rot4)>()
             {
                 (-3, 2, Rot4.East),
+                (-3, 1, Rot4.East),
+                (-3, -1, Rot4.East),
                 (-3, -2, Rot4.East),
                 (3, 2, Rot4.West),
+                (3, 1, Rot4.West),
+                (3, -1, Rot4.West),
                 (3, -2, Rot4.West),
             };
 
@@ -28,12 +32,16 @@ namespace VVRace
             {
                 (0, 2),
                 (1, 1),
+                (1, 2),
                 (2, 0),
                 (1, -1),
+                (1, -2),
                 (0, -2),
                 (-1, -1),
+                (-1, -2),
                 (-2, 0),
                 (-1, 1),
+                (-1, 2),
             };
 
         public override void Resolve(ResolveParams resolveParams)
@@ -90,7 +98,8 @@ namespace VVRace
                         var plantGrower = thing as Building_PlantGrower;
                         if (plantGrower != null)
                         {
-                            var plant = ThingMaker.MakeThing(VVThingDefOf.Plant_Daylily) as Plant;
+                            var plantDef = Rand.Bool ? VVThingDefOf.Plant_Daylily : VVThingDefOf.Plant_Rose;
+                            var plant = ThingMaker.MakeThing(plantDef) as Plant;
                             if (plant != null)
                             {
                                 plant.Growth = 0.7f;
