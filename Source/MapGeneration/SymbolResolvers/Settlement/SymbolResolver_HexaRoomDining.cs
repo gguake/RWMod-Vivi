@@ -10,10 +10,10 @@ namespace VVRace
         private static IList<(int xOffset, int zOffset, Rot4 rot)> _smallShelfLayout
             = new List<(int, int, Rot4)>()
             {
-                (-1, 3, Rot4.South),
-                (1, 3, Rot4.South),
-                (-1, -3, Rot4.North),
-                (1, -3, Rot4.North),
+                (-3, 2, Rot4.East),
+                (-3, -2, Rot4.East),
+                (3, 2, Rot4.West),
+                (3, -2, Rot4.West),
             };
 
         public override void Resolve(ResolveParams resolveParams)

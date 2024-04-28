@@ -226,7 +226,7 @@
           <weight>5</weight>
           <thingSetMaker Class="ThingSetMaker_MarketValue">
             <fixedParams>
-              <maxThingMarketValue>1500</maxThingMarketValue>
+              <maxThingMarketValue>2000</maxThingMarketValue>
               <filter>
                 <categories>
                   <li>VV_ViviWeapon</li>
