@@ -194,7 +194,7 @@
     <uiIconPath>Things/Building/VV_ManaFluxTube_MenuIcon</uiIconPath>
     <designationHotKey>Misc9</designationHotKey>
     <costList>
-      <VV_Viviwax>10</VV_Viviwax>
+      <VV_Viviwax>20</VV_Viviwax>
       <VV_SparklingPetal>3</VV_SparklingPetal>
     </costList>
     <constructEffect>ConstructDirt</constructEffect>
