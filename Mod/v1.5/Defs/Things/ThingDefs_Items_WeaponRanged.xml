@@ -4,7 +4,7 @@
   <ThingDef ParentName="BaseWeaponNeolithic">
     <defName>VV_Slingshot</defName>
     <label>vivi slingshot</label>
-    <description>a simple slingshot used by the Vivis to chase away rats or small animals. It's easy to handle and quite effective.
+    <description>a simple slingshot used by the Vivis to chase away rats or small animals. It's easy to handle and quite effective and has a chance to stun the target briefly.
 \nIt is too small for an average person to handle, so only Vivi can use it.</description>
     <graphicData>
       <texPath>Things/Item/Equipment/VV_Slingshot</texPath>
@@ -44,7 +44,7 @@
         <hasStandardCommand>true</hasStandardCommand>
         <defaultProjectile>VV_Arrow_SlingshotStone</defaultProjectile>
         <warmupTime>2.0</warmupTime>
-        <range>16.9</range>
+        <range>11.9</range>
         <soundCast>Bow_Small</soundCast>
       </li>
     </verbs>
@@ -54,7 +54,7 @@
         <capacities>
           <li>Blunt</li>
         </capacities>
-        <power>8</power>
+        <power>10</power>
         <cooldownTime>2</cooldownTime>
       </li>
     </tools>
@@ -98,9 +98,16 @@
     </graphicData>
     <projectile>
       <damageDef>Blunt</damageDef>
-      <damageAmountBase>10</damageAmountBase>
+      <damageAmountBase>11</damageAmountBase>
       <stoppingPower>1.0</stoppingPower>
-      <speed>33</speed>
+      <speed>30</speed>
+      <extraDamages>
+        <li>
+          <def>Stun</def>
+          <amount>14</amount>
+          <chance>0.25</chance>
+        </li>
+      </extraDamages>
     </projectile>
   </ThingDef>
 
@@ -309,6 +316,7 @@
     <recipeMaker>
       <researchPrerequisites>
         <li>VV_Weaponry</li>
+        <li>Smithing</li>
       </researchPrerequisites>
       <skillRequirements>
         <Crafting>4</Crafting>
@@ -418,7 +426,7 @@
       </recipeUsers>
       <researchPrerequisites>
         <li>VV_Weaponry</li>
-        <li>RecurveBow</li>
+        <li>Greatbow</li>
       </researchPrerequisites>
       <skillRequirements>
         <Crafting>8</Crafting>
