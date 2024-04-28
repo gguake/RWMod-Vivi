@@ -136,7 +136,13 @@ namespace VVRace
             RegionTraverser.BreadthFirstTraverse(buildingRegion, regionEntryPredicate, (r) =>
             {
                 var gatherables = _gatherableCache.GetGatherablesCache(r, gatheringRecipeDef);
-                gatherTargets.AddRange(gatherables);
+                foreach (var gatherable in gatherables)
+                {
+                    if (!gatherable.Spawned || gatherable.DestroyedOrNull()) { continue; }
+                    if (gatherable.Map.designationManager.HasMapDesignationOn(gatherable)) { continue; }
+
+                    gatherTargets.Add(gatherable);
+                }
 
                 return false;
 
