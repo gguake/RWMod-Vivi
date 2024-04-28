@@ -15,7 +15,7 @@ namespace VVRace
             labelKey = LocalizeString_ITab.VV_ITab_ManaAcceptor_StatsTabLabel.Translate();
         }
 
-        public override bool IsVisible => FluxNetwork != null && FluxNetwork.FluxHistory.Count > 1;
+        public override bool IsVisible => SelThing.Faction.IsPlayer && FluxNetwork != null && FluxNetwork.FluxHistory.Count > 1;
 
         private static List<SimpleCurveDrawInfo> _tmpDrawInfoList = new List<SimpleCurveDrawInfo>();
         protected override void FillTab()
