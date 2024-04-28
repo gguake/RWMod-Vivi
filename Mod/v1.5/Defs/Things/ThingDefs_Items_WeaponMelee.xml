@@ -60,9 +60,9 @@
     </tools>
     
     <costList>
-      <VV_Viviwax>45</VV_Viviwax>
+      <VV_Viviwax>25</VV_Viviwax>
     </costList>
-    <costStuffCount>30</costStuffCount>
+    <costStuffCount>45</costStuffCount>
     <stuffCategories>
       <li>Metallic</li>
       <li>Woody</li>
