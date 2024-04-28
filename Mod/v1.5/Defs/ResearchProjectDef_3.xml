@@ -41,6 +41,7 @@
     <researchViewX>4</researchViewX>
     <researchViewY>3.5</researchViewY>
     <prerequisites>
+      <li>Smithing</li>
       <li>VV_Weaponry</li>
     </prerequisites>
   </ResearchProjectDef>

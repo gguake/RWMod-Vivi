@@ -70,6 +70,7 @@
     <recipeMaker>
       <researchPrerequisites>
         <li>VV_Weaponry</li>
+        <li>Smithing</li>
       </researchPrerequisites>
       <skillRequirements>
         <Crafting>4</Crafting>

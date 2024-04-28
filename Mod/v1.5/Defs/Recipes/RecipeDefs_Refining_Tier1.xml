@@ -111,7 +111,7 @@
     <products>
       <VV_FilteredHoney>10</VV_FilteredHoney>
     </products>
-    <researchPrerequisite>VV_BasicInfra</researchPrerequisite>
+    <researchPrerequisite>VV_BasicGathering</researchPrerequisite>
   </RecipeDef>
   
   <!-- 프로폴리스 정제 -->
@@ -149,6 +149,8 @@
       <MedicineHerbal>1</MedicineHerbal>
       <Neutroamine>1</Neutroamine>
     </products>
+    
+    <researchPrerequisite>VV_AdvancedGathering</researchPrerequisite>
   </RecipeDef>
 
   <!-- 비료 제작 (썩은 시체) -->
@@ -213,6 +215,8 @@
     <products>
       <VV_Fertilizer>20</VV_Fertilizer>
     </products>
+    
+    <researchPrerequisite>VV_ArcaneBotany</researchPrerequisite>
   </RecipeDef>
   
   <!-- 비료 제작 (자원) -->
@@ -286,5 +290,7 @@
     <products>
       <VV_Fertilizer>20</VV_Fertilizer>
     </products>
+    
+    <researchPrerequisite>VV_ArcaneBotany</researchPrerequisite>
   </RecipeDef>
 </Defs>
