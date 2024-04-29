@@ -126,7 +126,7 @@
     <description>a specially processed sharp needle. Only Vivi can handle it, and when equipped, it resonates with the wearer and becomes bound so others cannot use it.
 \nWhen equipped, you can summon a ghost needle that moves freely ignoring physical laws through the needle, and attack enemies.
 \nThe ghost needle penetrates all obstacles and is always accurate. It also penetrates all enemies and shields in its path and tracks and attacks any surrounding targets that can be attacked.
-\nThe higher the psychic sensitivity, the more attacks you can make at once, and you can only attack again when the needle is retrieved.</description>
+\nThe higher the psychic sensitivity, the more powerful and frequent the attacks can be, and the needles must be retrieved before they can attack again.</description>
     <graphicData>
       <texPath>Things/Item/Equipment/VV_Needle</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -146,9 +146,6 @@
       <AccuracyLong>1</AccuracyLong>
       <RangedWeapon_Cooldown>30.0</RangedWeapon_Cooldown>
     </statBases>
-    <equippedStatOffsets>
-      <MoveSpeed>-1.0</MoveSpeed>
-    </equippedStatOffsets>
     <tradeNeverStack>true</tradeNeverStack>
     <relicChance>3</relicChance>
 
@@ -183,8 +180,8 @@
         <verbClass>VVRace.Verb_SpawnNeedle</verbClass>
         <hasStandardCommand>true</hasStandardCommand>
         <defaultProjectile>VV_Projectile_EltexNeedle</defaultProjectile>
-        <warmupTime>5.5</warmupTime>
-        <range>44.9</range>
+        <warmupTime>1.7</warmupTime>
+        <range>38.9</range>
         <soundCast>Interact_BeatFire</soundCast>
         <rangedFireRulepack>Combat_RangedFire_Thrown</rangedFireRulepack>
       </li>
@@ -196,9 +193,9 @@
         <capacities>
           <li>Stab</li>
         </capacities>
-        <power>6</power>
-        <armorPenetration>0.3</armorPenetration>
-        <cooldownTime>0.5</cooldownTime>
+        <power>7</power>
+        <armorPenetration>0.5</armorPenetration>
+        <cooldownTime>0.9</cooldownTime>
       </li>
     </tools>
     
@@ -254,8 +251,8 @@
     <projectile Class="VVRace.NeedleProperties">
       <damageDef>Stab</damageDef>
       <damageAmountBase>12</damageAmountBase>
-      <stoppingPower>0.9</stoppingPower>
-      <armorPenetrationBase>0.3</armorPenetrationBase>
+      <stoppingPower>0.5</stoppingPower>
+      <armorPenetrationBase>0.33</armorPenetrationBase>
       <speed>49</speed>
 
       <maxAttackCount>7</maxAttackCount>

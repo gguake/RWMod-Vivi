@@ -255,8 +255,8 @@ namespace VVRace
             var instigatorGuilty = !(caster is Pawn casterPawn) || !casterPawn.Drafted;
             var dinfo = new DamageInfo(
                 def.projectile.damageDef,
-                def.projectile.GetDamageAmount(damageMultiplier),
-                def.projectile.GetArmorPenetration(damageMultiplier),
+                Mathf.Max(1f, def.projectile.GetDamageAmount(damageMultiplier * psychicMultiplier)),
+                Mathf.Clamp01(def.projectile.GetArmorPenetration(damageMultiplier * psychicMultiplier)),
                 Quaternion.LookRotation(curDirection.Yto0()).eulerAngles.y,
                 caster,
                 null,
@@ -284,7 +284,13 @@ namespace VVRace
             {
                 var rootRegion = lastAttackedTargetCell.GetRegion(Map);
                 var radiusSq = props.targettingRadius * props.targettingRadius;
-                var prioritySign = Rand.Chance(0.7f) ? -1 : 1;
+                var prioritySign = Rand.Chance(0.75f) ? -1 : 1;
+
+                if (rootRegion == null)
+                {
+                    curTarget = caster;
+                    return;
+                }
 
                 RegionTraverser.BreadthFirstTraverse(
                     rootRegion,
@@ -313,7 +319,7 @@ namespace VVRace
                         for (int i = 0; i < candidates.Count; ++i)
                         {
                             var thing = candidates[i];
-                            if (!(thing is IAttackTarget targetThing) || thing.Position.Fogged(Map) || thing.Position == Position) { continue; }
+                            if (!(thing is IAttackTarget targetThing) || thing.Position.Fogged(Map) || thing.Position == Position || !GenSight.LineOfSightToThing(casterPawn.PositionHeld, thing, Map, skipFirstCell: true)) { continue; }
                             if (!GenHostility.IsActiveThreatTo(targetThing, casterPawn.Faction) || targetThing.ThreatDisabled(casterPawn)) { continue; }
 
                             if (targetHistory.Contains(thing))
