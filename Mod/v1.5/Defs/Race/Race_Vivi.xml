@@ -306,8 +306,8 @@
   <HediffGiverSetDef>
     <defName>VV_Vivi</defName>
     <hediffGivers>
-      <li Class="VVRace.HediffGiver_GeneticInstablity">
-        <hediff>VV_GeneticInstability</hediff>
+      <li Class="VVRace.HediffGiver_GeneticUnstablity">
+        <hediff>VV_GeneticUnstability</hediff>
         <partsToAffect>
           <li>Torso</li>
         </partsToAffect>
@@ -317,10 +317,10 @@
           <li>XenogermLossShock</li>
           <li>XenogermReplicating</li>
         </causingHediffs>
-        <chance>0.99</chance>
+        <chance>1.0</chance>
 
-        <letterLabel>Genetic instable</letterLabel>
-        <letter>[PAWN_nameDef]'s brain injury has caused [PAWN_objective] to develop strange savant-like abilities.</letter>
+        <letterLabel>Genetic unstable</letterLabel>
+        <letter>[PAWN_nameDef]'s genes have become extremely unstable. In the worst case, something terrible might happen.</letter>
       </li>
     </hediffGivers>
   </HediffGiverSetDef>

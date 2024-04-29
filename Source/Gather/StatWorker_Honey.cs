@@ -47,10 +47,6 @@ namespace VVRace
                 {
                     value /= 1.15f;
                 }
-                else
-                {
-                    value *= 1.25f;
-                }
             }
 
             return value;

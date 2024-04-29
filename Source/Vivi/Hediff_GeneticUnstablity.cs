@@ -3,10 +3,10 @@ using Verse;
 
 namespace VVRace
 {
-    public class Hediff_GeneticInstablity : HediffWithComps
+    public class Hediff_GeneticUnstablity : HediffWithComps
     {
         private const int SeverityChangeInterval = 5000;
-        private const float TendSuccessChanceFactor = 0.65f;
+        private const float TendSuccessChanceFactor = 0.5f;
         private const float TendSeverityReduction = 0.3f;
 
         private float _intervalFactor;
@@ -28,7 +28,7 @@ namespace VVRace
             base.Tick();
             if (pawn.IsHashIntervalTick((int)(SeverityChangeInterval * _intervalFactor)))
             {
-                Severity += Rand.Range(-0.4f, 0.6f);
+                Severity += Rand.Range(-0.3f, 0.5f);
 
                 if (Severity >= 1f)
                 {

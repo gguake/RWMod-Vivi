@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
   <HediffDef>
-    <defName>VV_GeneticInstability</defName>
-    <label>genetic instable</label>
-    <labelNoun>genetic instability</labelNoun>
-    <description>A disruption in the heart's normal beating rhythm. Heart attacks can be debilitatingly painful. They can worsen and lead to death, or recover.</description>
-    <hediffClass>VVRace.Hediff_GeneticInstablity</hediffClass>
+    <defName>VV_GeneticUnstability</defName>
+    <label>genetic unstable</label>
+    <labelNoun>genetic unstability</labelNoun>
+    <description>Vibi's genes have become extremely unstable, leading to unpredictable cell division. Continuous treatment is necessary, and in the worst case, something terrible will happen..</description>
+    <hediffClass>VVRace.Hediff_GeneticUnstablity</hediffClass>
     <defaultLabelColor>(1, 0.2, 0.2)</defaultLabelColor>
     <initialSeverity>0.4</initialSeverity>
     <tendable>true</tendable>

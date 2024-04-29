@@ -4,7 +4,7 @@ using Verse;
 
 namespace VVRace
 {
-    public class HediffGiver_GeneticInstablity : HediffGiver
+    public class HediffGiver_GeneticUnstablity : HediffGiver
     {
         public const int CheckInterval = 6000;
 
@@ -31,7 +31,7 @@ namespace VVRace
             {
                 if (pawn.health.hediffSet.HasHediff(causingHediffs[i]))
                 {
-                    hasHediff = false;
+                    hasHediff = true;
                     break;
                 }
             }

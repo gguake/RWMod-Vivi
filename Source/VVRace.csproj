@@ -241,8 +241,8 @@
     <Compile Include="Vivi\HediffComp_GrowthBoost.cs" />
     <Compile Include="Vivi\Comps\CompVivi.cs" />
     <Compile Include="ViviModsConfig.cs" />
-    <Compile Include="Vivi\HediffGiver_GeneticInstablity.cs" />
-    <Compile Include="Vivi\Hediff_GeneticInstablity.cs" />
+    <Compile Include="Vivi\HediffGiver_GeneticUnstablity.cs" />
+    <Compile Include="Vivi\Hediff_GeneticUnstablity.cs" />
     <Compile Include="Vivi\Hediff_HoneyDependency.cs" />
     <Compile Include="Vivi\PawnKindDef_Vivi.cs" />
     <Compile Include="Gather\RecipeDef_Gathering.cs" />

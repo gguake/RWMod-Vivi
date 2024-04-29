@@ -85,7 +85,13 @@ namespace VVRace
 
             if (map != null && position.IsValid)
             {
-                var hornet = GenSpawn.Spawn(VVThingDefOf.VV_TitanicHornet, position, map);
+                var hornet = PawnGenerator.GeneratePawn(
+                    new PawnGenerationRequest(
+                        VVPawnKindDefOf.VV_TitanicHornet,
+                        forceGenerateNewPawn: true));
+                hornet.Name = pawn.Name;
+
+                GenSpawn.Spawn(hornet, position, map);
             }
         }
     }
