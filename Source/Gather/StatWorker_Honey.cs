@@ -64,8 +64,10 @@ namespace VVRace
             {
                 var minGlow = thingDef.plant.growMinGlow;
                 var sowWork = thingDef.plant.sowWork;
+                var nutrition = thingDef.GetStatValueAbstract(StatDefOf.Nutrition);
+                if (nutrition == 0f) { nutrition = 1f; }
 
-                value *= Mathf.Max(0.01f, (1f + (sowWork / 480f - 1f) / 5f) * (1f + minGlow) - 0.1f);
+                value *= Mathf.Max(0.01f, ((1f + (sowWork / 480f - 1f) / 5f) * (1f + minGlow) - 0.1f) * nutrition / 3f);
             }
 
             return value;
