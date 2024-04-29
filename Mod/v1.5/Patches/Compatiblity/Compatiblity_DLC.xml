@@ -6,8 +6,9 @@
       <li Class="PatchOperationAdd" MayRequire="Ludeon.RimWorld.Ideology">
         <xpath>Defs/ThingDef[plant/sowTags/li="DecorativeTree"]/statBases</xpath>
         <value>
-          <VV_MinGrowthPlantGatherable>0.99</VV_MinGrowthPlantGatherable>
-          <VV_TreeResinGatherYield>0.5</VV_TreeResinGatherYield>
+          <VV_MinGrowthPlantGatherable>0.7</VV_MinGrowthPlantGatherable>
+          <VV_PlantGatherCooldown>1</VV_PlantGatherCooldown>
+          <VV_TreeResinGatherYield>1</VV_TreeResinGatherYield>
         </value>
       </li>
 

@@ -3,9 +3,9 @@
   <Operation Class="PatchOperationAdd">
     <xpath>Defs/ThingDef[@Name="TreeBase"]/statBases</xpath>
     <value>
-      <VV_MinGrowthPlantGatherable>0.99</VV_MinGrowthPlantGatherable>
-      <VV_PlantGatherCooldown>5</VV_PlantGatherCooldown>
-      <VV_TreeResinGatherYield>1.0</VV_TreeResinGatherYield>
+      <VV_MinGrowthPlantGatherable>0.7</VV_MinGrowthPlantGatherable>
+      <VV_PlantGatherCooldown>1</VV_PlantGatherCooldown>
+      <VV_TreeResinGatherYield>1</VV_TreeResinGatherYield>
     </value>
   </Operation>
 
@@ -39,8 +39,8 @@
       <li Class="PatchOperationAdd">
         <xpath>Defs/ThingDef[@Name="DeciduousTreeBase"]/statBases</xpath>
         <value>
-          <VV_MinGrowthPlantGatherable>0.99</VV_MinGrowthPlantGatherable>
-          <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
+          <VV_MinGrowthPlantGatherable>0.7</VV_MinGrowthPlantGatherable>
+          <VV_PlantGatherCooldown>1</VV_PlantGatherCooldown>
           <VV_TreeResinGatherYield>1</VV_TreeResinGatherYield>
         </value>
       </li>

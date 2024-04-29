@@ -19,6 +19,7 @@
     <defName>VV_PlantGatherCooldown</defName>
     <label>plant gather cooldown</label>
     <description>It indicates the time it takes before the plant can be gathered again. In polluted terrain, it takes longer for regeneration to occur.</description>
+    <workerClass>VVRace.StatWorker_GatherCooldown</workerClass>
     <category>BasicsNonPawn</category>
     <defaultBaseValue>0</defaultBaseValue>
     <hideAtValue>0</hideAtValue>
@@ -65,6 +66,7 @@
     <defName>VV_PlantHoneyGatherYield</defName>
     <label>honey gather yield multiplier</label>
     <description>It indicates how much more honey can be gathered from the plant compared to the average. Production is influenced by health, growth, and pollution.</description>
+    <workerClass>VVRace.StatWorker_HoneyYield</workerClass>
     <displayPriorityInCategory>5100</displayPriorityInCategory>
     <parts>
       <li Class="StatPart_Pollution" MayRequire="Ludeon.RimWorld.Biotech">
@@ -84,6 +86,7 @@
     <defName>VV_TreeResinGatherYield</defName>
     <label>resin yield multiplier</label>
     <description>It indicates how much more propolis can be gathered from the plant compared to the average. Production is influenced by health, growth, and pollution.</description>
+    <workerClass>VVRace.StatWorker_TreeResinGatherYield</workerClass>
     <displayPriorityInCategory>5101</displayPriorityInCategory>
     <parts>
       <li Class="StatPart_Pollution" MayRequire="Ludeon.RimWorld.Biotech">

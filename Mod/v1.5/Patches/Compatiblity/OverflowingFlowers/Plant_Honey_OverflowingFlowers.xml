@@ -24,8 +24,8 @@
             <xpath>Defs/ThingDef[defName = "Rose_bush"]/statBases</xpath>
             <value>
               <VV_MinGrowthPlantGatherable>0.99</VV_MinGrowthPlantGatherable>
-              <VV_PlantGatherCooldown>1.4</VV_PlantGatherCooldown>
-              <VV_PlantHoneyGatherYield>1.15</VV_PlantHoneyGatherYield>
+              <VV_PlantGatherCooldown>1</VV_PlantGatherCooldown>
+              <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
             </value>
           </li>
 
@@ -49,8 +49,8 @@
             <xpath>Defs/ThingDef[defName = "OF_Rose_P_Red"]/statBases</xpath>
             <value>
               <VV_MinGrowthPlantGatherable>0.99</VV_MinGrowthPlantGatherable>
-              <VV_PlantGatherCooldown>1.4</VV_PlantGatherCooldown>
-              <VV_PlantHoneyGatherYield>1.05</VV_PlantHoneyGatherYield>
+              <VV_PlantGatherCooldown>1</VV_PlantGatherCooldown>
+              <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
             </value>
           </li>
         </operations>
