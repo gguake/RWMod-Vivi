@@ -177,6 +177,10 @@
         <Research>10</Research>
       </lifeStageWorkSettings>
       
+      <hediffGiverSets>
+        <li>VV_Vivi</li>
+      </hediffGiverSets>
+
 			<soundMeleeHitPawn>Pawn_Melee_Punch_HitPawn</soundMeleeHitPawn>
 			<soundMeleeMiss>Pawn_Melee_Punch_Miss</soundMeleeMiss>
 			<soundMeleeDodge>Pawn_MeleeDodge</soundMeleeDodge>
@@ -298,4 +302,27 @@
       </li>
     </modExtensions>
   </ThingDef>
+
+  <HediffGiverSetDef>
+    <defName>VV_Vivi</defName>
+    <hediffGivers>
+      <li Class="VVRace.HediffGiver_GeneticInstablity">
+        <hediff>VV_GeneticInstability</hediff>
+        <partsToAffect>
+          <li>Torso</li>
+        </partsToAffect>
+
+        <causingHediffs>
+          <li>XenogerminationComa</li>
+          <li>XenogermLossShock</li>
+          <li>XenogermReplicating</li>
+        </causingHediffs>
+        <chance>0.99</chance>
+
+        <letterLabel>Genetic instable</letterLabel>
+        <letter>[PAWN_nameDef]'s brain injury has caused [PAWN_objective] to develop strange savant-like abilities.</letter>
+      </li>
+    </hediffGivers>
+  </HediffGiverSetDef>
+
 </Defs>

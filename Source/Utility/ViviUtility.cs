@@ -76,5 +76,17 @@ namespace VVRace
 
             return true;
         }
+
+        public static void GenerateHornetFromGeneticDeath(this Pawn pawn)
+        {
+            var map = pawn.MapHeld;
+            var position = pawn.PositionHeld;
+            pawn.Corpse?.Destroy();
+
+            if (map != null && position.IsValid)
+            {
+                var hornet = GenSpawn.Spawn(VVThingDefOf.VV_TitanicHornet, position, map);
+            }
+        }
     }
 }

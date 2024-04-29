@@ -1,4 +1,5 @@
 ﻿using RimWorld;
+using System.Collections.Generic;
 using UnityEngine;
 using Verse;
 
@@ -58,6 +59,16 @@ namespace VVRace
             }
 
             RefreshHairColor();
+        }
+
+        public override void PostDeSpawn(Map map)
+        {
+            base.PostDeSpawn(map);
+        }
+
+        public override void Notify_KilledLeavingsLeft(List<Thing> leavings)
+        {
+            base.Notify_KilledLeavingsLeft(leavings);
         }
 
         public override void CompTick()
