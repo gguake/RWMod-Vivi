@@ -317,7 +317,7 @@
           <li>XenogermLossShock</li>
           <li>XenogermReplicating</li>
         </causingHediffs>
-        <chance>1.0</chance>
+        <chance>0.05</chance>
 
         <letterLabel>Genetic unstable</letterLabel>
         <letter>[PAWN_nameDef]'s genes have become extremely unstable. In the worst case, something terrible might happen.</letter>
