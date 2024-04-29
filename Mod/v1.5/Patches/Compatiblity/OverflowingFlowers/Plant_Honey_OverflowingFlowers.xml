@@ -2,9 +2,8 @@
 <Patch>
   <Operation Class="PatchOperationSequence">
     <operations>
-      <li Class="PatchOperationSequence" MayRequire="sumika.OverflowingFlowers">
+      <li Class="PatchOperationSequence" MayRequireAnyOf="sumika.OverflowingFlowers,sumika.OverflowingFlowers_steam">
         <operations>
-
           <!-- Rose_bush -->
           <li Class="PatchOperationConditional">
             <xpath>Defs/ThingDef[defName = "Rose_bush"]/comps</xpath>
@@ -26,7 +25,7 @@
             <value>
               <VV_MinGrowthPlantGatherable>0.99</VV_MinGrowthPlantGatherable>
               <VV_PlantGatherCooldown>1.4</VV_PlantGatherCooldown>
-              <VV_PlantHoneyGatherYield>1.05</VV_PlantHoneyGatherYield>
+              <VV_PlantHoneyGatherYield>1.15</VV_PlantHoneyGatherYield>
             </value>
           </li>
 

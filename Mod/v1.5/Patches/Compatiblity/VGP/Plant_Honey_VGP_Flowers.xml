@@ -2,7 +2,7 @@
 <Patch>
   <Operation Class="PatchOperationSequence">
     <operations>
-      <li Class="PatchOperationSequence" MayRequire="dismarzero.VGP.VGPVegetableGarden">
+      <li Class="PatchOperationSequence" MayRequireAnyOf="dismarzero.VGP.VGPVegetableGarden,dismarzero.VGP.VGPVegetableGarden_steam">
         <operations>
           <!-- VG_Rose -->
           <li Class="PatchOperationConditional">

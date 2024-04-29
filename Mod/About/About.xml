@@ -23,10 +23,13 @@ bee-like fairy race
 			<downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
 		</li>
 	</modDependencies>
-  <forceLoadAfter>
-		<li>Ludeon.RimWorld</li>
-		<li>Ludeon.RimWorld.Biotech</li>
+  <loadAfter>
 		<li>brrainz.harmony</li>
+		<li>Ludeon.RimWorld.Biotech</li>
+  </loadAfter>
+  <forceLoadAfter>
+		<li>brrainz.harmony</li>
+		<li>Ludeon.RimWorld.Biotech</li>
   </forceLoadAfter>
 	<modIconPath>UI/Icons/ViviFaction</modIconPath>
 </ModMetaData>
