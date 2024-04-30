@@ -27,6 +27,7 @@
 <VV_MakeFertilizerResource.label>유기물로 마나 비료 만들기</VV_MakeFertilizerResource.label>
 <VV_MakeFertilizerResource.description>유기물을 숙성시켜 흙, 꽃가루와 배합해 마나 비료를 만듭니다.</VV_MakeFertilizerResource.description>
 <VV_MakeFertilizerResource.jobString>유기물로 비료를 배합하는 중.</VV_MakeFertilizerResource.jobString>
+<VV_MakeFertilizerResource.ingredients.1.filter.customSummary>꽃가루나 미확인 씨앗</VV_MakeFertilizerResource.ingredients.1.filter.customSummary>
 
 <VV_ExtractBulkHoney.label>비비 꿀 대량 추출</VV_ExtractBulkHoney.label>
 <VV_ExtractBulkHoney.description>대량의 비비 꿀에서 순수한 꿀을 추출합니다.</VV_ExtractBulkHoney.description>
@@ -39,4 +40,5 @@
 <VV_MakeFertilizerSeeds.label>비료 대량 만들기</VV_MakeFertilizerSeeds.label>
 <VV_MakeFertilizerSeeds.description>대량의 유기물에서 마나 성분을 추출해 비료를 만듭니다.</VV_MakeFertilizerSeeds.description>
 <VV_MakeFertilizerSeeds.jobString>비료를 대량 배합하는 중.</VV_MakeFertilizerSeeds.jobString>
+<VV_MakeFertilizerSeeds.ingredients.1.filter.customSummary>꽃가루나 미확인 씨앗</VV_MakeFertilizerSeeds.ingredients.1.filter.customSummary>
 </LanguageData>

@@ -251,6 +251,7 @@
       </li>
       <li>
         <filter>
+          <customSummary>pollen or unknown seeds</customSummary>
           <thingDefs>
             <li>VV_Pollen</li>
             <li>VV_UnknownSeed</li>
