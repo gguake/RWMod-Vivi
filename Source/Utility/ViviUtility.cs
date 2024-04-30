@@ -56,6 +56,7 @@ namespace VVRace
             if (def.endogeneCategory != EndogeneCategory.None || def.biostatCpx == 0) { return false; }
             if (def.forcedHair != null || def.forcedHeadTypes?.Count > 0 || def.hairTagFilter != null || def.beardTagFilter != null || def.bodyType != null) { return false; }
             if (def.prerequisite != null) { return false; }
+            if (def == GeneDefOf.Inbred) { return false; }
 
             if (def.exclusionTags != null)
             {
