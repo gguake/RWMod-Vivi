@@ -44,7 +44,7 @@
     <statBases>
       <MaxHitPoints>180</MaxHitPoints>
       <WorkToMake>3000</WorkToMake>
-      <Mass>1</Mass>
+      <Mass>0.5</Mass>
       <StuffEffectMultiplierArmor>0.2</StuffEffectMultiplierArmor>
       <StuffEffectMultiplierInsulation_Cold>0.6</StuffEffectMultiplierInsulation_Cold>
       <StuffEffectMultiplierInsulation_Heat>1.2</StuffEffectMultiplierInsulation_Heat>
@@ -102,7 +102,7 @@
     <statBases>
       <MaxHitPoints>210</MaxHitPoints>
       <WorkToMake>10000</WorkToMake>
-      <Mass>1.0</Mass>
+      <Mass>0.5</Mass>
       <StuffEffectMultiplierArmor>0.32</StuffEffectMultiplierArmor>
       <StuffEffectMultiplierInsulation_Cold>0.45</StuffEffectMultiplierInsulation_Cold>
       <StuffEffectMultiplierInsulation_Heat>0.45</StuffEffectMultiplierInsulation_Heat>
@@ -159,8 +159,8 @@
     <statBases>
       <MaxHitPoints>180</MaxHitPoints>
       <WorkToMake>7200</WorkToMake>
-      <Mass>1.5</Mass>
-      <StuffEffectMultiplierArmor>0.2</StuffEffectMultiplierArmor>
+      <Mass>2.0</Mass>
+      <StuffEffectMultiplierArmor>0.16</StuffEffectMultiplierArmor>
       <StuffEffectMultiplierInsulation_Cold>2.2</StuffEffectMultiplierInsulation_Cold>
       <StuffEffectMultiplierInsulation_Heat>0</StuffEffectMultiplierInsulation_Heat>
       <EquipDelay>1.5</EquipDelay>
@@ -209,14 +209,15 @@
     <statBases>
       <MaxHitPoints>240</MaxHitPoints>
       <WorkToMake>7200</WorkToMake>
-      <Mass>1.0</Mass>
+      <Mass>1.2</Mass>
       <StuffEffectMultiplierArmor>0.4</StuffEffectMultiplierArmor>
       <StuffEffectMultiplierInsulation_Cold>0.5</StuffEffectMultiplierInsulation_Cold>
       <StuffEffectMultiplierInsulation_Heat>0.5</StuffEffectMultiplierInsulation_Heat>
       <EquipDelay>1.5</EquipDelay>
       
-      <ArmorRating_Sharp>0.15</ArmorRating_Sharp>
-      <ArmorRating_Blunt>0.15</ArmorRating_Blunt>
+      <ArmorRating_Sharp>0.18</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.18</ArmorRating_Blunt>
+      <ArmorRating_Heat>0.3</ArmorRating_Heat>
     </statBases>
     <equippedStatOffsets>
       <ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">0.5</ToxicEnvironmentResistance>

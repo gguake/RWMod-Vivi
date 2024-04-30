@@ -68,7 +68,7 @@
           <li>
             <thingDef>VV_Bullet_Pea</thingDef>
             <damageDef>Flame</damageDef>
-            <amount>2</amount>
+            <amount>3</amount>
             <armorPenetration>0</armorPenetration>
             <chance>0.3</chance>
           </li>
@@ -200,7 +200,7 @@
           <li>
             <thingDef>VV_Bullet_Pea</thingDef>
             <damageDef>Burn</damageDef>
-            <amount>4</amount>
+            <amount>3</amount>
             <armorPenetration>0</armorPenetration>
           </li>
         </passedBulletOverrides>

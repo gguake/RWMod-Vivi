@@ -44,7 +44,7 @@
     <statBases>
       <MaxHitPoints>180</MaxHitPoints>
       <WorkToMake>4800</WorkToMake>
-      <Mass>1.0</Mass>
+      <Mass>0.6</Mass>
       <StuffEffectMultiplierArmor>0.24</StuffEffectMultiplierArmor>
       <StuffEffectMultiplierInsulation_Cold>1.0</StuffEffectMultiplierInsulation_Cold>
       <StuffEffectMultiplierInsulation_Heat>1.0</StuffEffectMultiplierInsulation_Heat>
@@ -56,7 +56,7 @@
       <ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">0.1</ToxicEnvironmentResistance>
     </equippedStatOffsets>
 
-    <costStuffCount>85</costStuffCount>
+    <costStuffCount>80</costStuffCount>
     <stuffCategories>
       <li>Fabric</li>
       <li>Leathery</li>

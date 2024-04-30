@@ -16,7 +16,7 @@
     <techLevel>Medieval</techLevel>
     <statBases>
       <WorkToMake>13000</WorkToMake>
-      <Mass>2</Mass>
+      <Mass>2.5</Mass>
     </statBases>
 
     <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
@@ -38,31 +38,25 @@
           <li>Blunt</li>
           <li>Poke</li>
         </capacities>
-        <power>13</power>
-        <cooldownTime>1.9</cooldownTime>
+        <power>11</power>
+        <cooldownTime>2.0</cooldownTime>
+        <chanceFactor>0.2</chanceFactor>
       </li>
       <li>
         <label>point</label>
         <capacities>
-          <li>Stab</li>
+          <li>VV_ToxicStab</li>
         </capacities>
-        <power>20</power>
-        <armorPenetration>0.36</armorPenetration>
-        <cooldownTime>3.6</cooldownTime>
-        <extraMeleeDamages>
-          <li>
-            <def>VV_ToxicStab</def>
-            <amount>6</amount>
-            <chance>0.9</chance>
-          </li>
-        </extraMeleeDamages>
+        <power>22</power>
+        <armorPenetration>0.5</armorPenetration>
+        <cooldownTime>2.0</cooldownTime>
       </li>
     </tools>
     
     <costList>
       <VV_Viviwax>25</VV_Viviwax>
     </costList>
-    <costStuffCount>45</costStuffCount>
+    <costStuffCount>50</costStuffCount>
     <stuffCategories>
       <li>Metallic</li>
       <li>Woody</li>

@@ -41,7 +41,7 @@
           <li>Bite</li>
         </capacities>
         <power>19</power>
-        <cooldownTime>1.3</cooldownTime>
+        <cooldownTime>1.5</cooldownTime>
         <linkedBodyPartsGroup>Mouth</linkedBodyPartsGroup>
       </li>
       <li>

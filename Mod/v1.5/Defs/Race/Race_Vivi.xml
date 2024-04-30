@@ -9,31 +9,26 @@
 \nTypically, Vivis live only near their nests, so they are not commonly seen outside, but occasionally you can see Vivi who wander to create new nests.</description>
 
     <statBases>
-			<MarketValue>1200</MarketValue>
-			<Mass>50</Mass>
-			<CarryingCapacity>70</CarryingCapacity>
+			<MarketValue>1250</MarketValue>
+			<Mass>45</Mass>
+      <Flammability>0.9</Flammability>
+			<CarryingCapacity>85</CarryingCapacity>
 			<PainShockThreshold>0.7</PainShockThreshold>
-			<EatingSpeed>1.2</EatingSpeed>
-			<MeatAmount>30</MeatAmount>
-			<LeatherAmount>30</LeatherAmount>
+			<MeatAmount>35</MeatAmount>
+			<LeatherAmount>35</LeatherAmount>
 
       <ComfyTemperatureMin>16</ComfyTemperatureMin>
       <ComfyTemperatureMax>36</ComfyTemperatureMax>
 
-      <VV_HoneyGatherSpeed>1.0</VV_HoneyGatherSpeed>
-      <VV_HoneyGatherYield>1.0</VV_HoneyGatherYield>
-      <VV_PlantGatherSpeed>1.0</VV_PlantGatherSpeed>
-      <VV_PlantGatherYield>1.0</VV_PlantGatherYield>
-      <ConstructionSpeed>1.2</ConstructionSpeed>
-      <SmoothingSpeed>2.0</SmoothingSpeed>
-      <CleaningSpeed>1.2</CleaningSpeed>
-      <PawnTrapSpringChance>0.1</PawnTrapSpringChance>
+      <ConstructionSpeed>1.25</ConstructionSpeed>
+      <SmoothingSpeed>1.5</SmoothingSpeed>
+      <CleaningSpeed>1.25</CleaningSpeed>
+      <PawnTrapSpringChance>0.3</PawnTrapSpringChance>
 
       <MoveSpeed>5.8</MoveSpeed>
       <MiningSpeed>0.5</MiningSpeed>
       <MiningYield>0.5</MiningYield>
       <PsychicSensitivity>0.5</PsychicSensitivity>
-
       <Fertility>0</Fertility>
       
       <RoyalFavorValue>1</RoyalFavorValue>
@@ -107,10 +102,10 @@
       <nameGeneratorFemale>VV_NamerPersonVivi</nameGeneratorFemale>
       <body>VV_Vivi</body>
       <renderTree>VV_Vivi</renderTree>
-      <baseBodySize>0.85</baseBodySize>
+      <baseBodySize>0.8</baseBodySize>
       <baseHealthScale>0.85</baseHealthScale>
       <baseHungerRate>0.8</baseHungerRate>
-      <meatMarketValue>0.8</meatMarketValue>
+      <meatMarketValue>0.5</meatMarketValue>
       <manhunterOnTameFailChance>0.50</manhunterOnTameFailChance>
       <manhunterOnDamageChance>0.90</manhunterOnDamageChance>
 

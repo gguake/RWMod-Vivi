@@ -369,7 +369,7 @@
     <researchPrerequisites>
       <li>VV_AutomatedInfra</li>
     </researchPrerequisites>
-    <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
+    <constructionSkillPrerequisite>7</constructionSkillPrerequisite>
   </ThingDef>
 
 </Defs>

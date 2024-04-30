@@ -34,7 +34,7 @@
         <billOverrideType>VVRace.Bill_ProductionWithFoodDrain</billOverrideType>
       </li>
       <li Class="VVRace.RecipeModExtension">
-        <foodDrains>0.24</foodDrains>
+        <foodDrains>0.28</foodDrains>
       </li>
     </modExtensions>
   </RecipeDef>
@@ -46,10 +46,10 @@
     <description>Produce viviwax from vivi creams.</description>
 
     <jobString>making viviwax.</jobString>
-    <workAmount>900</workAmount>
+    <workAmount>1000</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <workSkill>Crafting</workSkill>
-    <workSkillLearnFactor>0.05</workSkillLearnFactor>
+    <workSkillLearnFactor>0.03</workSkillLearnFactor>
 
     <effectWorking>Smelt</effectWorking>
     <soundWorking>Recipe_Brewing</soundWorking>

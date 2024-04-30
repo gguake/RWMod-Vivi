@@ -58,26 +58,48 @@
           <li>Blunt</li>
           <li>Poke</li>
         </capacities>
-        <power>12</power>
-        <cooldownTime>1.1</cooldownTime>
+        <power>13</power>
+        <cooldownTime>1.8</cooldownTime>
+        <chanceFactor>0.2</chanceFactor>
       </li>
       <li>
         <label>point</label>
         <capacities>
           <li>Stab</li>
         </capacities>
-        <power>30</power>
-        <armorPenetration>0.5</armorPenetration>
-        <cooldownTime>4.5</cooldownTime>
+        <power>27</power>
+        <armorPenetration>0.33</armorPenetration>
+        <cooldownTime>3.2</cooldownTime>
 
-        <extraMeleeDamages>
-          <li>
-            <def>Stab</def>
-            <amount>30</amount>
-            <armorPenetration>1.0</armorPenetration>
-            <chance>0.5</chance>
-          </li>
-        </extraMeleeDamages>
+        <surpriseAttack>
+          <extraMeleeDamages>
+            <li>
+              <def>Stab</def>
+              <amount>27</amount>
+              <armorPenetration>0.99</armorPenetration>
+            </li>
+          </extraMeleeDamages>
+        </surpriseAttack>
+      </li>
+      <li>
+        <label>point</label>
+        <capacities>
+          <li>Stab</li>
+        </capacities>
+        <power>54</power>
+        <armorPenetration>0.99</armorPenetration>
+        <cooldownTime>3.2</cooldownTime>
+        <chanceFactor>0.6</chanceFactor>
+
+        <surpriseAttack>
+          <extraMeleeDamages>
+            <li>
+              <def>Stab</def>
+              <amount>54</amount>
+              <armorPenetration>0.99</armorPenetration>
+            </li>
+          </extraMeleeDamages>
+        </surpriseAttack>
       </li>
     </tools>
     
@@ -102,8 +124,7 @@
         <li>VV_RitualWeaponry</li>
       </researchPrerequisites>
       <skillRequirements>
-        <Crafting>10</Crafting>
-        <Artistic>6</Artistic>
+        <Crafting>12</Crafting>
       </skillRequirements>
       <displayPriority>-530</displayPriority>
     </recipeMaker>

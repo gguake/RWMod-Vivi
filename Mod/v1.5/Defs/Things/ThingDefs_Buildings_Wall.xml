@@ -261,11 +261,11 @@
       </li>
       <li>
         <damageDef>Flame</damageDef>
-        <multiplier>8</multiplier>
+        <multiplier>10</multiplier>
       </li>
       <li>
         <damageDef>Burn</damageDef>
-        <multiplier>8</multiplier>
+        <multiplier>10</multiplier>
       </li>
     </damageMultipliers>
     

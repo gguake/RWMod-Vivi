@@ -16,19 +16,18 @@
     <factionlessGenerationWeight>0</factionlessGenerationWeight>
     <combatPowerFactor>0.9</combatPowerFactor>
     <genes>
-      <li>VV_ViviMetabolism</li>
-      <li>VV_HoneyDepedency</li>
+      <li>VV_ViviMetabolism</li> <!-- -4 -->
+      <li>VV_HoneyDepedency</li> <!-- 2 -->
 
-      <li>Mood_Sanguine</li>
-      <li>FireTerror</li>
+      <li>Mood_Sanguine</li> <!-- -2 -->
+      <li>FireTerror</li> <!-- 4 -->
+      <li>FireWeakness</li> <!-- 2 -->
 
-      <li>MinTemp_SmallIncrease</li>
-      
-      <li>AptitudeRemarkable_Plants</li>
-      <li>AptitudeStrong_Construction</li>
-      <li>AptitudePoor_Melee</li>
-      <li>AptitudePoor_Shooting</li>
-      <li>AptitudeTerrible_Mining</li>
+      <li>AptitudeRemarkable_Plants</li> <!-- -3 -->
+      <li>AptitudeStrong_Construction</li> <!-- -1 -->
+      <li>AptitudePoor_Melee</li> <!-- 1 -->
+      <li>AptitudePoor_Shooting</li> <!-- 1 -->
+      <li>AptitudeTerrible_Mining</li> <!-- 2 -->
 
       <li>Beard_NoBeardOnly</li>
     </genes>

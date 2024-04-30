@@ -75,13 +75,13 @@
     <statBases>
       <MaxHitPoints>100</MaxHitPoints>
       <WorkToMake>1500</WorkToMake>
-      <Mass>1</Mass>
+      <Mass>0.4</Mass>
       <Flammability>0.4</Flammability>
-      <EquipDelay>1.0</EquipDelay>
+      <EquipDelay>0.5</EquipDelay>
     </statBases>
 
     <equippedStatOffsets>
-      <VV_HoneyGatherSpeed>1.0</VV_HoneyGatherSpeed>
+      <VV_HoneyGatherSpeed>0.5</VV_HoneyGatherSpeed>
       <VV_HoneyGatherYield>1.0</VV_HoneyGatherYield>
     </equippedStatOffsets>
     
@@ -103,9 +103,6 @@
       <researchPrerequisites>
         <li>VV_Tools</li>
       </researchPrerequisites>
-      <skillRequirements>
-        <Crafting>3</Crafting>
-      </skillRequirements>
       <displayPriority>-500</displayPriority>
     </recipeMaker>
   </ThingDef>
@@ -123,14 +120,14 @@
     <statBases>
       <MaxHitPoints>100</MaxHitPoints>
       <WorkToMake>1800</WorkToMake>
-      <Mass>1</Mass>
+      <Mass>0.4</Mass>
       <Flammability>0.4</Flammability>
-      <EquipDelay>1.0</EquipDelay>
+      <EquipDelay>0.5</EquipDelay>
     </statBases>
 
     <equippedStatOffsets>
-      <CleaningSpeed>0.5</CleaningSpeed>
-      <SmoothingSpeed>0.5</SmoothingSpeed>
+      <CleaningSpeed>0.25</CleaningSpeed>
+      <SmoothingSpeed>1.0</SmoothingSpeed>
       <VV_PlantGatherSpeed>0.25</VV_PlantGatherSpeed>
       <VV_PlantGatherYield>0.25</VV_PlantGatherYield>
     </equippedStatOffsets>
@@ -139,7 +136,7 @@
       <wornGraphicPath>Things/Apparel/MultiuseBrush/VV_MultiuseBrush</wornGraphicPath>
     </apparel>
 
-    <costStuffCount>50</costStuffCount>
+    <costStuffCount>45</costStuffCount>
     <stuffCategories>
       <li>VV_Wax</li>
       <li>Woody</li>
@@ -153,9 +150,6 @@
       <researchPrerequisites>
         <li>VV_Tools</li>
       </researchPrerequisites>
-      <skillRequirements>
-        <Crafting>4</Crafting>
-      </skillRequirements>
       <displayPriority>-501</displayPriority>
     </recipeMaker>
   </ThingDef>

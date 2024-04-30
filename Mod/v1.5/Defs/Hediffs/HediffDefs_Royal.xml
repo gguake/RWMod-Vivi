@@ -25,16 +25,16 @@
         <hungerRateFactorOffset>0.25</hungerRateFactorOffset>
         <statOffsets>
           <WorkSpeedGlobal>-0.6</WorkSpeedGlobal>
-          <MoveSpeed>-2.2</MoveSpeed>
+          <MoveSpeed>-2.0</MoveSpeed>
           <PsychicSensitivity>1.0</PsychicSensitivity>
           <NegotiationAbility>0.35</NegotiationAbility>
           <SocialImpact>0.35</SocialImpact>
           <MeditationFocusGain MayRequire="Ludeon.RimWorld.Royalty">0.2</MeditationFocusGain>
           <PsychicEntropyRecoveryRate>0.2</PsychicEntropyRecoveryRate>
-          <ImmunityGainSpeed>0.5</ImmunityGainSpeed>
         </statOffsets>
         <statFactors>
           <LifespanFactor>20</LifespanFactor>
+          <ImmunityGainSpeed>2</ImmunityGainSpeed>
         </statFactors>
       </li>
     </stages>

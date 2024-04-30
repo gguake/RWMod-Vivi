@@ -149,10 +149,10 @@
     <drawerType>MapMeshAndRealTime</drawerType>
 
     <statBases>
-      <AccuracyTouch>0.92</AccuracyTouch>
-      <AccuracyShort>0.77</AccuracyShort>
-      <AccuracyMedium>0.32</AccuracyMedium>
-      <AccuracyLong>0.16</AccuracyLong>
+      <AccuracyTouch>0.95</AccuracyTouch>
+      <AccuracyShort>0.75</AccuracyShort>
+      <AccuracyMedium>0.25</AccuracyMedium>
+      <AccuracyLong>0.15</AccuracyLong>
       <RangedWeapon_Cooldown>3.8</RangedWeapon_Cooldown>
       <DeteriorationRate>0</DeteriorationRate>
       <Mass>10</Mass>
@@ -383,7 +383,7 @@
     <statBases>
       <MaxHitPoints>200</MaxHitPoints>
       <WorkToBuild>60000</WorkToBuild>
-      <Flammability>0.5</Flammability>
+      <Flammability>0.7</Flammability>
     </statBases>
 
     <damageMultipliers Inherit="False">
@@ -511,7 +511,7 @@
 
         <totalGrowDays>20</totalGrowDays>
         <maxHealth>250</maxHealth>
-        <healthRegenNoDamagedByDays>20</healthRegenNoDamagedByDays>
+        <healthRegenNoDamagedByDays>25</healthRegenNoDamagedByDays>
 
         <maxMana>500</maxMana>
         <consumedManaByDay>50</consumedManaByDay>

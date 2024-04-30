@@ -17,7 +17,7 @@
     <statBases>
       <MaxHitPoints>320</MaxHitPoints>
       <WorkToMake>48000</WorkToMake>
-      <Mass>2</Mass>
+      <Mass>2.5</Mass>
       <StuffEffectMultiplierArmor>0.4</StuffEffectMultiplierArmor>
       <StuffEffectMultiplierInsulation_Cold>0.75</StuffEffectMultiplierInsulation_Cold>
       <StuffEffectMultiplierInsulation_Heat>0.75</StuffEffectMultiplierInsulation_Heat>
@@ -73,7 +73,7 @@
     
     <recipeMaker>
       <skillRequirements>
-        <Crafting>11</Crafting>
+        <Crafting>12</Crafting>
       </skillRequirements>
       <researchPrerequisites>
         <li>VV_AdvancedApparels</li>
@@ -113,9 +113,9 @@
       <WorkToMake>1800</WorkToMake>
       <Mass>0.5</Mass>
       <StuffEffectMultiplierArmor>0.15</StuffEffectMultiplierArmor>
-      <StuffEffectMultiplierInsulation_Cold>1.3</StuffEffectMultiplierInsulation_Cold>
-      <StuffEffectMultiplierInsulation_Heat>1.0</StuffEffectMultiplierInsulation_Heat>
-      <EquipDelay>2.0</EquipDelay>
+      <StuffEffectMultiplierInsulation_Cold>0.7</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.7</StuffEffectMultiplierInsulation_Heat>
+      <EquipDelay>2.5</EquipDelay>
 
       <ArmorRating_Sharp>0.04</ArmorRating_Sharp>
       <ArmorRating_Blunt>0.04</ArmorRating_Blunt>
