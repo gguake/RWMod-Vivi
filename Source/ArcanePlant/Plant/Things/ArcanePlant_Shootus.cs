@@ -222,6 +222,20 @@ namespace VVRace
             }
         }
 
+        public override string GetInspectString()
+        {
+            var sb = new StringBuilder(base.GetInspectString());
+
+            if (Spawned && ReservedWeapon != null && Gun == null)
+            {
+                sb.AppendInNewLine("Queued".Translate());
+                sb.Append(": ");
+                sb.Append(ReservedWeapon.LabelCap);
+            }
+
+            return sb.ToString();
+        }
+
         public void GetChildHolders(List<IThingHolder> outChildren)
         {
             ThingOwnerUtility.AppendThingHoldersFromThings(outChildren, GetDirectlyHeldThings());
