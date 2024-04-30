@@ -125,7 +125,7 @@
         <bodyTypes>
           <li>Female</li>
         </bodyTypes>
-        <failReason>Not adapt body</failReason>
+        <failReason>not adapt body</failReason>
       </li>
     </constraints>
   </RPEF.ConstraintDef>
@@ -146,7 +146,7 @@
           <li>Child</li>
           <li>Thin</li>
         </bodyTypes>
-        <failReason>Not adapt body</failReason>
+        <failReason>not adapt body</failReason>
       </li>
     </constraints>
   </RPEF.ConstraintDef>
@@ -167,7 +167,7 @@
           <li>Thin</li>
           <li>Female</li>
         </bodyTypes>
-        <failReason>Not adapt body</failReason>
+        <failReason>not adapt body</failReason>
       </li>
     </constraints>
   </RPEF.ConstraintDef>
@@ -188,7 +188,7 @@
           <li>Child</li>
           <li>Thin</li>
         </bodyTypes>
-        <failReason>Not adapt body</failReason>
+        <failReason>not adapt body</failReason>
       </li>
       <li Class="RPEF.ThoughtConstraint">
         <rule>OnAppliedPawn</rule>
