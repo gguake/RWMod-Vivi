@@ -58,9 +58,9 @@
           <li>Blunt</li>
           <li>Poke</li>
         </capacities>
-        <power>13</power>
-        <cooldownTime>1.8</cooldownTime>
-        <chanceFactor>0.2</chanceFactor>
+        <power>12</power>
+        <cooldownTime>1.7</cooldownTime>
+        <chanceFactor>0.33</chanceFactor>
       </li>
       <li>
         <label>point</label>
@@ -69,17 +69,7 @@
         </capacities>
         <power>27</power>
         <armorPenetration>0.33</armorPenetration>
-        <cooldownTime>3.2</cooldownTime>
-
-        <surpriseAttack>
-          <extraMeleeDamages>
-            <li>
-              <def>Stab</def>
-              <amount>27</amount>
-              <armorPenetration>0.99</armorPenetration>
-            </li>
-          </extraMeleeDamages>
-        </surpriseAttack>
+        <cooldownTime>3.3</cooldownTime>
       </li>
       <li>
         <label>point</label>
@@ -88,18 +78,8 @@
         </capacities>
         <power>54</power>
         <armorPenetration>0.99</armorPenetration>
-        <cooldownTime>3.2</cooldownTime>
-        <chanceFactor>0.6</chanceFactor>
-
-        <surpriseAttack>
-          <extraMeleeDamages>
-            <li>
-              <def>Stab</def>
-              <amount>54</amount>
-              <armorPenetration>0.99</armorPenetration>
-            </li>
-          </extraMeleeDamages>
-        </surpriseAttack>
+        <cooldownTime>3.3</cooldownTime>
+        <chanceFactor>0.33</chanceFactor>
       </li>
     </tools>
     

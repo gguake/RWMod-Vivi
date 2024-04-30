@@ -215,8 +215,8 @@
       <combatPower>125</combatPower>
       <ai_combatDangerous>true</ai_combatDangerous>
       <turretGunDef>VV_Gun_Pealauncher</turretGunDef>
-      <turretBurstCooldownTime>5.4</turretBurstCooldownTime>
-      <turretBurstWarmupTime>2.4</turretBurstWarmupTime>
+      <turretBurstCooldownTime>6.4</turretBurstCooldownTime>
+      <turretBurstWarmupTime>2.8</turretBurstWarmupTime>
       <turretTopOffset>(0, 0.05)</turretTopOffset>
       <turretTopDrawSize>1</turretTopDrawSize>
     </building>
@@ -312,7 +312,7 @@
       <damageDef>Bomb</damageDef>
       <speed>50</speed>
       <explosionRadius>1.9</explosionRadius>
-      <damageAmountBase>13</damageAmountBase>
+      <damageAmountBase>12</damageAmountBase>
       <screenShakeFactor>0</screenShakeFactor>
     </projectile>
   </ThingDef>
