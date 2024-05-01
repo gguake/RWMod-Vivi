@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
+<MinifiedArcanePlant.label>포장된 마법 식물</MinifiedArcanePlant.label>
+
 <VV_ManaTransferTube.label>마나 전송 튜브</VV_ManaTransferTube.label>
 <VV_ManaTransferTube.description>마나를 원거리 전송하는 튜브입니다. 벽이나 다른 건물 아래에 건설할 수 있습니다. 마나를 단순히 전송할 뿐 별도의 마나를 생산하지는 않습니다.</VV_ManaTransferTube.description>
 

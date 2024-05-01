@@ -249,14 +249,19 @@ namespace VVRace
                             }
 
                             var amountInt = (int)amount + (Rand.ChanceSeeded(amount - (int)amount, GenTicks.TicksGame) ? 1 : 0);
-                            var thing = ThingMaker.MakeThing(_bill.RecipeTarget).MakeMinified();
-                            thing.stackCount = amountInt;
-
-                            if (!GenPlace.TryPlaceThing(thing, Position, Map, ThingPlaceMode.Direct))
+                            
+                            for (int i = 0; i < amountInt; ++i)
                             {
-                                if (!GenPlace.TryPlaceThing(thing, Position, Map, ThingPlaceMode.Near))
+                                var thing = ThingMaker.MakeThing(_bill.RecipeTarget);
+                                thing.SetFactionDirect(Faction);
+
+                                var minified = thing.MakeMinified();
+                                if (!GenPlace.TryPlaceThing(minified, Position, Map, ThingPlaceMode.Direct))
                                 {
-                                    Log.Error($"failed to place arcane plant from farm");
+                                    if (!GenPlace.TryPlaceThing(minified, Position, Map, ThingPlaceMode.Near))
+                                    {
+                                        Log.Error($"failed to place arcane plant from farm");
+                                    }
                                 }
                             }
 
