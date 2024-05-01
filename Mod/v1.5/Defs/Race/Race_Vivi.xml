@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <ThingDef ParentName="Human">
+  <ThingDef ParentName="BasePawn" HasImport="True">
     <defName>VV_Vivi</defName>
     <label>vivi</label>
     <description>A race similar to a kind of fairy that lives a lifestyle similar to bees.
@@ -95,19 +95,36 @@
     </tools>
 
     <race>
+      <thinkTreeMain>Humanlike</thinkTreeMain>
+      <thinkTreeConstant>HumanlikeConstant</thinkTreeConstant>
+      <intelligence>Humanlike</intelligence>
+      <makesFootprints>true</makesFootprints>
       <lifeExpectancy>45</lifeExpectancy>
+
+      <bloodDef>Filth_Blood</bloodDef>
+      <bloodSmearDef>Filth_BloodSmear</bloodSmearDef>
       <leatherDef>Leather_Light</leatherDef>
-			<nameCategory>HumanStandard</nameCategory>
-      <nameGenerator>VV_NamerPersonVivi</nameGenerator>
-      <nameGeneratorFemale>VV_NamerPersonVivi</nameGeneratorFemale>
+
       <body>VV_Vivi</body>
       <renderTree>VV_Vivi</renderTree>
-      <baseBodySize>0.8</baseBodySize>
-      <baseHealthScale>0.85</baseHealthScale>
-      <baseHungerRate>0.8</baseHungerRate>
+      <foodType>OmnivoreHuman</foodType>
+      <gestationPeriodDays>300</gestationPeriodDays>
       <meatMarketValue>0.5</meatMarketValue>
       <manhunterOnTameFailChance>0.50</manhunterOnTameFailChance>
       <manhunterOnDamageChance>0.90</manhunterOnDamageChance>
+      <soundCallIntervalRange>2000~5000</soundCallIntervalRange>
+      <canBecomeShambler>true</canBecomeShambler>
+      <knowledgeCategory MayRequire="Ludeon.RimWorld.Anomaly">Basic</knowledgeCategory>
+      <anomalyKnowledge>1</anomalyKnowledge>
+
+      <litterSizeCurve>
+        <points>
+          <li>(0.5, 0)</li>
+          <li>(1, 1)</li>
+          <li>(1.01, 0.02)</li>
+          <li>(3.5, 0)</li>
+        </points>
+      </litterSizeCurve>
 
 			<lifeStageAges Inherit="False">
 				<li>
@@ -172,14 +189,10 @@
         <Research>10</Research>
       </lifeStageWorkSettings>
       
-      <hediffGiverSets>
-        <li>VV_Vivi</li>
-      </hediffGiverSets>
-
-			<soundMeleeHitPawn>Pawn_Melee_Punch_HitPawn</soundMeleeHitPawn>
+      <soundMeleeDodge>Pawn_MeleeDodge</soundMeleeDodge>
+      <soundMeleeHitPawn>Pawn_Melee_Punch_HitPawn</soundMeleeHitPawn>
 			<soundMeleeMiss>Pawn_Melee_Punch_Miss</soundMeleeMiss>
-			<soundMeleeDodge>Pawn_MeleeDodge</soundMeleeDodge>
-      
+
       <specialShadowData Inherit="False">
         <volume>(0.24, 0.45, 0.32)</volume>
         <offset>(0,0,-0.27)</offset>
@@ -208,13 +221,37 @@
           <li>(50,0)</li>
         </points>
       </ageGenerationCurve>
+      
+      <hediffGiverSets>
+        <li>OrganicStandard</li>
+        <li>Human</li>
+        <li>VV_Vivi</li>
+      </hediffGiverSets>
+
+			<nameCategory>HumanStandard</nameCategory>
+      <nameGenerator>VV_NamerPersonVivi</nameGenerator>
+      <nameGeneratorFemale>VV_NamerPersonVivi</nameGeneratorFemale>
+
+      <baseBodySize>0.8</baseBodySize>
+      <baseHealthScale>0.85</baseHealthScale>
+      <baseHungerRate>0.8</baseHungerRate>
     </race>
 
-    <comps Inherit="False">
+    <recipes ImportPath="Defs/ThingDef[@Name=&quot;Human&quot;]/recipes">
+    </recipes>
+
+    <ingredient>
+      <mergeCompatibilityTags>
+        <li>HumanMeat</li>
+      </mergeCompatibilityTags>
+    </ingredient>
+
+    <comps>
       <li MayRequire="Ludeon.RimWorld.Anomaly" Class="CompProperties_HoldingPlatformTarget">
         <baseEscapeIntervalMtbDays>120</baseEscapeIntervalMtbDays>
         <getsColdContainmentBonus>true</getsColdContainmentBonus>
       </li>
+
       <li MayRequire="Ludeon.RimWorld.Anomaly" Class="CompProperties_Studiable">
         <frequencyTicks>120000</frequencyTicks>
         <minMonolithLevelForStudy>1</minMonolithLevelForStudy>
