@@ -222,9 +222,7 @@
         </points>
       </ageGenerationCurve>
       
-      <hediffGiverSets>
-        <li>OrganicStandard</li>
-        <li>Human</li>
+      <hediffGiverSets ImportPath="Defs/ThingDef[@Name=&quot;Human&quot;]/race/hediffGiverSets">
         <li>VV_Vivi</li>
       </hediffGiverSets>
 
