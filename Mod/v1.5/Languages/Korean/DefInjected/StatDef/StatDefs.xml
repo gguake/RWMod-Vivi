@@ -1,31 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-  <VV_HoneyGatherSpeed.label>꿀 채집 속도</VV_HoneyGatherSpeed.label>
-  <VV_HoneyGatherSpeed.description>꿀을 채집하는데 얼마나 빠르게 작업하는지 나타냅니다.</VV_HoneyGatherSpeed.description>
-  
-  <VV_HoneyGatherYield.label>꿀 채집량</VV_HoneyGatherYield.label>
-  <VV_HoneyGatherYield.description>꿀을 채집할때 한번에 얼마나 많이 얻는지 나타냅니다.</VV_HoneyGatherYield.description>
+<VV_HoneyGatherSpeed.label>꿀 채집 속도</VV_HoneyGatherSpeed.label>
+<VV_HoneyGatherSpeed.description>꿀을 채집하는데 얼마나 빠르게 작업하는지 나타냅니다.</VV_HoneyGatherSpeed.description>
 
-  <VV_PlantGatherSpeed.label>식물 자원 채집 속도</VV_PlantGatherSpeed.label>
-  <VV_PlantGatherSpeed.description>식물에서 자원을 채집하는데 얼마나 빠르게 작업하는지 나타냅니다.</VV_PlantGatherSpeed.description>
+<VV_HoneyGatherYield.label>꿀 채집량</VV_HoneyGatherYield.label>
+<VV_HoneyGatherYield.description>꿀을 채집할때 한번에 얼마나 많이 얻는지 나타냅니다.</VV_HoneyGatherYield.description>
 
-  <VV_PlantGatherYield.label>식물 자원 채집량</VV_PlantGatherYield.label>
-  <VV_PlantGatherYield.description>식물에서 자원을 채집할때 한번에 얼마나 많이 얻는지 나타냅니다.</VV_PlantGatherYield.description>
+<VV_PlantGatherSpeed.label>식물 자원 채집 속도</VV_PlantGatherSpeed.label>
+<VV_PlantGatherSpeed.description>식물에서 자원을 채집하는데 얼마나 빠르게 작업하는지 나타냅니다.</VV_PlantGatherSpeed.description>
+
+<VV_PlantGatherYield.label>식물 자원 채집량</VV_PlantGatherYield.label>
+<VV_PlantGatherYield.description>식물에서 자원을 채집할때 한번에 얼마나 많이 얻는지 나타냅니다.</VV_PlantGatherYield.description>
 
 
-  <VV_MinGrowthPlantGatherable.label>채집 최소 성장도</VV_MinGrowthPlantGatherable.label>
-  <VV_MinGrowthPlantGatherable.description>식물을 채집할수 있는 최소 성장도를 나타냅니다.</VV_MinGrowthPlantGatherable.description>
+<VV_MinGrowthPlantGatherable.label>채집 최소 성장도</VV_MinGrowthPlantGatherable.label>
+<VV_MinGrowthPlantGatherable.description>식물을 채집할수 있는 최소 성장도를 나타냅니다.</VV_MinGrowthPlantGatherable.description>
 
-  <VV_PlantGatherCooldown.label>채집 재생시간</VV_PlantGatherCooldown.label>
-  <VV_PlantGatherCooldown.description>식물을 채집 후 다시 채집 가능할때까지 걸리는 시간을 나타냅니다. 오염된 지형에서는 재생하는데 더 오랜 시간이 걸립니다.</VV_PlantGatherCooldown.description>
-  <VV_PlantGatherCooldown.formatString>{0} 일</VV_PlantGatherCooldown.formatString>
+<VV_PlantGatherCooldown.label>채집 재생시간</VV_PlantGatherCooldown.label>
+<VV_PlantGatherCooldown.description>식물을 채집 후 다시 채집 가능할때까지 걸리는 시간을 나타냅니다. 오염된 지형에서는 재생하는데 더 오랜 시간이 걸립니다.</VV_PlantGatherCooldown.description>
+<VV_PlantGatherCooldown.formatString>{0} 일</VV_PlantGatherCooldown.formatString>
 
-  <VV_PlantHoneyGatherYield.label>꿀 생산량</VV_PlantHoneyGatherYield.label>
-  <VV_PlantHoneyGatherYield.description>식물에서 평균 대비 얼마나 많은 꿀을 채집 가능한지 나타냅니다. 생산량은 내구도, 성장도, 오염에 영향을 받습니다.</VV_PlantHoneyGatherYield.description>
+<VV_PlantHoneyGatherYield.label>꿀 생산량</VV_PlantHoneyGatherYield.label>
+<VV_PlantHoneyGatherYield.description>식물에서 평균 대비 얼마나 많은 꿀을 채집 가능한지 나타냅니다. 생산량은 내구도, 성장도, 오염에 영향을 받습니다.</VV_PlantHoneyGatherYield.description>
 
-  <VV_TreeResinGatherYield.label>프로폴리스 생산량</VV_TreeResinGatherYield.label>
-  <VV_TreeResinGatherYield.description>식물에서 평균 대비 얼마나 많은 프로폴리스를 채집 가능한지 나타냅니다. 생산량은 내구도, 성장도, 오염에 영향을 받습니다.</VV_TreeResinGatherYield.description>
+<VV_TreeResinGatherYield.label>프로폴리스 생산량</VV_TreeResinGatherYield.label>
+<VV_TreeResinGatherYield.description>식물에서 평균 대비 얼마나 많은 프로폴리스를 채집 가능한지 나타냅니다. 생산량은 내구도, 성장도, 오염에 영향을 받습니다.</VV_TreeResinGatherYield.description>
 
-  <VV_GrowthPointsFactor.label>성장 등급 획득 속도</VV_GrowthPointsFactor.label>
-  <VV_GrowthPointsFactor.description>어린이가 성장 등급을 얼마나 많이 획득하는지 나타냅니다.</VV_GrowthPointsFactor.description>
+<VV_GrowthPointsFactor.label>성장 등급 획득 속도</VV_GrowthPointsFactor.label>
+<VV_GrowthPointsFactor.description>어린이가 성장 등급을 얼마나 많이 획득하는지 나타냅니다.</VV_GrowthPointsFactor.description>
+
+
+<VV_FloralMagic_Cooldown.label>재사용 대기 시간</VV_FloralMagic_Cooldown.label>
+<VV_FloralMagic_Cooldown.description>마법을 발동한 이후 다시 발동할수 있을 때까지 필요한 시간입니다.</VV_FloralMagic_Cooldown.description>
+
+<VV_FloralMagic_ManaCost.label>마나 소모량</VV_FloralMagic_ManaCost.label>
+<VV_FloralMagic_ManaCost.description>마법을 발동하는 데 소모되는 마나입니다. 교감 연결된 꿈송이의 마나를 소모합니다.</VV_FloralMagic_ManaCost.description>
+
+<VV_FloralMagic_CastingTime.label>시전 시간</VV_FloralMagic_CastingTime.label>
+<VV_FloralMagic_CastingTime.description>마법을 발동하는 데 걸리는 시간입니다.</VV_FloralMagic_CastingTime.description>
+
+<VV_FloralMagic_Range.label>사거리</VV_FloralMagic_Range.label>
+<VV_FloralMagic_Range.description>이 마법의 목표 또는 목표 위치의 중심까지의 최대 거리입니다.</VV_FloralMagic_Range.description>
+
+<VV_FloralMagic_Duration.label>지속시간</VV_FloralMagic_Duration.label>
+<VV_FloralMagic_Duration.label>마법의 효과가 지속되는 시간입니다.</VV_FloralMagic_Duration.label>
+
+<VV_FloralMagic_EffectRadius.label>효과 범위</VV_FloralMagic_EffectRadius.label>
+<VV_FloralMagic_EffectRadius.label>마법의 효과가 미칠 수 있는 반경 범위입니다.</VV_FloralMagic_EffectRadius.label>
 </LanguageData>

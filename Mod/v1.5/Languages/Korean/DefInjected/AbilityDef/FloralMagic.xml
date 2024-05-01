@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+<VV_Ignite.label>점화</VV_Ignite.label>
+<VV_Ignite.description>대상에 작은 불씨를 붙힙니다. 불이 붙지 않는 대상에는 사용할 수 없습니다.</VV_Ignite.description>
+
+<VV_Incinerate.label>소각</VV_Incinerate.label>
+<VV_Incinerate.description>항성의 에너지를 빌린 엄청난 고온으로 대상 지점 주변의 물체를 기화시킵니다.</VV_Incinerate.description>
+
+<VV_ScorchingWinds.label>화염풍</VV_ScorchingWinds.label>
+<VV_ScorchingWinds.description>범위 내의 대기를 뜨겁게 가열해 온도를 높입니다. 범위 내에 있는 생명체는 지속적으로 화상을 입습니다.</VV_ScorchingWinds.description>
+
+<VV_StarlightRay.label>별빛 광선</VV_StarlightRay.label>
+<VV_StarlightRay.description>근처 항성의 표면과 연결된 작은 차원 관문을 잠시동안 생성해 강렬한 열과 빛으로 범위 내의 모든 것을 불태웁니다.</VV_StarlightRay.description>
+
+
+<VV_Watermist.label>물안개</VV_Watermist.label>
+<VV_Watermist.description>대기 중의 습기를 조절해 물안개를 만들어냅니다. 물안개는 범위내의 모든 대상을 젖게 만들어 일시적으로 불이 붙지 않게 하며 연막의 기능도 합니다.</VV_Watermist.description>
+
+<VV_InstantFreeze.label>급속 냉각</VV_InstantFreeze.label>
+<VV_InstantFreeze.description>대상의 온도를 급격히 낮춰 썩지 않게 보존합니다. 살아있는 대상에게 사용할 경우 동상을 입습니다.</VV_InstantFreeze.description>
+
+<VV_AquaVeil.label>물의 장막</VV_AquaVeil.label>
+<VV_AquaVeil.description>아군을 물의 장막으로 감싸 온도 저항을 높이고 불이 붙지 않도록 합니다.</VV_AquaVeil.description>
+
+<VV_GlacialUplift.label>빙하 융기</VV_GlacialUplift.label>
+<VV_GlacialUplift.description>거대한 빙하를 바닥에서 융기시켜 대상 위치에 있던 물체에 큰 피해를 입히고 장애물을 생성합니다.</VV_GlacialUplift.description>
+
+
+<VV_StaticShock.label>정전기 충격</VV_StaticShock.label>
+<VV_StaticShock.description>대상에게 작은 정전기를 발생시켜 기계나 메카노이드를 잠시 마비시키고 폭발할수 있는 물체의 경우 점화해 폭발시킵니다.</VV_StaticShock.description>
+
+<VV_ChargedBody.label>전도성 육체</VV_ChargedBody.label>
+<VV_ChargedBody.description>대상의 육체 주변에 전하를 둘러 근접전에서 피해를 받거나 입히는 경우 공격 대상을 잠시 기절시킵니다.</VV_ChargedBody.description>
+
+<VV_ThunderCalling.label>낙뢰 소환</VV_ThunderCalling.label>
+<VV_ThunderCalling.description>지정한 위치 주변에 국소적인 낙뢰를 지속적으로 발생시킵니다.</VV_ThunderCalling.description>
+
+<VV_OverloadPulse.label>과부하 파동</VV_OverloadPulse.label>
+<VV_OverloadPulse.description>가까운 거리의 대상에게 강력한 전압의 파동을 발사해 기절시킵니다.</VV_OverloadPulse.description>
+
+
+<VV_BloomingField.label>꽃피는 들판</VV_BloomingField.label>
+<VV_BloomingField.description>주변의 비어있는 땅에 꽃을 피웁니다. 어떤 꽃이 필지는 알 수 없습니다.</VV_BloomingField.description>
+
+<VV_Cleanse.label>정화</VV_Cleanse.label>
+<VV_Cleanse.description>주변의 각종 더러운 기체와 쓰레기, 오염을 깨끗하게 정화합니다.</VV_Cleanse.description>
+
+<VV_Erosion.label>바위 침식</VV_Erosion.label>
+<VV_Erosion.description>지정한 영역에 있는 바위 벽이나 돌바닥을 침식시켜 자갈로 바꿉니다.</VV_Erosion.description>
+
+<VV_Restoration.label>복원</VV_Restoration.label>
+<VV_Restoration.description>지정한 물건이나 구조물, 생명체의 손상을 어느정도 복구합니다.</VV_Restoration.description>
+
+
+<VV_Tailwind.label>순풍</VV_Tailwind.label>
+<VV_Tailwind.description>대상의 주변에 움직임을 편하게 하는 바람이 불도록 만들어 이동과 회피 효율을 높입니다.</VV_Tailwind.description>
+
+<VV_Windway.label>바람길</VV_Windway.label>
+<VV_Windway.description>지정한 대상을 바람의 힘으로 이동시킵니다. 적대적인 대상인 경우 낙하할때 충격 피해를 줍니다.</VV_Windway.description>
+
+<VV_Tornado.label>토네이도</VV_Tornado.label>
+<VV_Tornado.description>잠시동안 유지되는 토네이도를 소환합니다. 토네이도는 지속적으로 피해를 입히고 천천히 움직이며 피아를 가리지 않습니다.</VV_Tornado.description>
+
+<VV_ZephyrWhispers.label>서풍의 속삭임</VV_ZephyrWhispers.label>
+<VV_ZephyrWhispers.description>지역 전체에 기분좋은 바람을 불게해 실외에 있는 모든 정착민들의 정신 이상을 회복합니다.</VV_ZephyrWhispers.description>
+
+</LanguageData>
