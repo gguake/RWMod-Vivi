@@ -196,7 +196,7 @@
         </capacities>
         <power>7</power>
         <armorPenetration>0.5</armorPenetration>
-        <cooldownTime>0.9</cooldownTime>
+        <cooldownTime>1.4</cooldownTime>
       </li>
     </tools>
     
