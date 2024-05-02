@@ -239,7 +239,7 @@
         <zeroManaDamageByChance>1~10</zeroManaDamageByChance>
         <zeroManaDurableTicks>30000</zeroManaDurableTicks>
         
-        <consumeManaPerVerbShoot>10</consumeManaPerVerbShoot>
+        <consumeManaPerVerbShoot>11</consumeManaPerVerbShoot>
       </li>
 
       <li Class="VVRace.GrowingArcanePlantData">
@@ -306,6 +306,7 @@
     <graphicData>
       <texPath>Things/Projectile/VV_PeaFast</texPath>
       <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1.5,1.5)</drawSize>
     </graphicData>
 
     <projectile>
@@ -343,7 +344,7 @@
         <verbClass>VVRace.Verb_ShootWithMana</verbClass>
         <defaultProjectile>VV_Bullet_PeaFast</defaultProjectile>
         <warmupTime>0</warmupTime>
-        <range>40.9</range>
+        <range>35.9</range>
         <ticksBetweenBurstShots>9</ticksBetweenBurstShots>
         <burstShotCount>6</burstShotCount>
         <forcedMissRadius>2.4</forcedMissRadius>

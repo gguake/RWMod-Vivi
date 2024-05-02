@@ -62,9 +62,9 @@ namespace VVRace
                 if (_bill == null || _bill.Stage != GrowingArcanePlantBillStage.Growing) { return 0; }
 
                 var growthPct = _bill.TotalGrowthPct;
-                if (growthPct < 0.33f) { return 1; }
-                else if (growthPct < 0.67f) { return 2; }
-                else { return 3; }
+                if (growthPct < 0.33f) { return 0; }
+                else if (growthPct < 0.67f) { return 1; }
+                else { return 2; }
             }
         }
 
@@ -193,7 +193,7 @@ namespace VVRace
                     break;
 
                 case GrowingArcanePlantBillStage.Growing:
-                    sb.AppendInNewLine(LocalizeString_Inspector.VV_Inspector_GrowingArcanePlantProgress.Translate(_bill.TotalGrowthPct.ToStringPercent()));
+                    sb.AppendInNewLine(LocalizeString_Inspector.VV_Inspector_GrowingArcanePlantProgress.Translate(_bill.TotalGrowthPct.ToStringPercent(), _bill.RecipeTarget.Named("PLANT")));
                     break;
             }
 
@@ -337,8 +337,6 @@ namespace VVRace
             {
                 _innerContainer.ClearAndDestroyContents();
                 _bill.Start();
-
-                GetComp<CompFarmSeedlingDrawer>()?.RefreshSeedlingVisualCoordinates();
             }
         }
 

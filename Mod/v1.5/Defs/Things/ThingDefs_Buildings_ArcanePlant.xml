@@ -137,6 +137,14 @@
     <canOverlapZones>false</canOverlapZones>
     <comps>
       <li Class="CompProperties_Forbiddable"/>
+
+      <li Class="VVRace.CompProperties_FarmSeedlingDrawer">
+        <graphicData>
+          <texPath>Things/Building/VV_Seedling</texPath>
+          <graphicClass>VVRace.Graphic_Conditional</graphicClass>
+          <drawSize>(2.2, 2.2)</drawSize>
+        </graphicData>
+      </li>
     </comps>
 
     <researchPrerequisites>

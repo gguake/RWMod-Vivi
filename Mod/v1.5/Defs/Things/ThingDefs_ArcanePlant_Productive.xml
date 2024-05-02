@@ -959,7 +959,7 @@
       
       <li Class="VVRace.CompProperties_Terraformer">
         <cooldownTicks>120000~180000</cooldownTicks>
-        <radiusRange>0.4~2.9</radiusRange>
+        <radiusRange>0.6~2.9</radiusRange>
         <radiusGrowth>0.5</radiusGrowth>
         <removePollution>true</removePollution>
         <showRadius>true</showRadius>

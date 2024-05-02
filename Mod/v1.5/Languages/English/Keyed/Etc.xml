@@ -13,7 +13,4 @@
 
 <VV_GeneDefHoneyNeedDurationDesc>{PAWN_nameDef} must consume honey regularly to survive. Suffering from deficiency worsens over time if {PAWN_nameDef} does not consume honey within {DEFICIENCYDURATION}.</VV_GeneDefHoneyNeedDurationDesc>
 <VV_LastHoneyIngestedDurationAgo>Last consumed honey {DURATION} ago.</VV_LastHoneyIngestedDurationAgo>
-
-<VV_Reward_PurgeOutlanders>Peaceful Purge</VV_Reward_PurgeOutlanders>
-<VV_Reward_PurgeOutlandersDesc>Puts all outlanders except Vivi to sleep, bringing peace to the planet.</VV_Reward_PurgeOutlandersDesc>
 </LanguageData>
