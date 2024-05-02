@@ -68,7 +68,7 @@
           <li>
             <thingDef>VV_Bullet_Pea</thingDef>
             <damageDef>Flame</damageDef>
-            <amount>3</amount>
+            <amount>6</amount>
             <armorPenetration>0</armorPenetration>
             <chance>0.3</chance>
           </li>
