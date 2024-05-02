@@ -32,7 +32,8 @@
 
       <li Class="VVRace.CompProperties_Terraformer">
         <cooldownTicks>60000~90000</cooldownTicks>
-        <radius>3.7</radius>
+        <radiusRange>0.4~4.9</radiusRange>
+        <radiusGrowth>0.5</radiusGrowth>
         <terraforms>
           <li><from>SoftSand</from><to>Sand</to></li>
           <li><from>Sand</from><to>Gravel</to></li>

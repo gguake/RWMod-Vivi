@@ -24,5 +24,6 @@
         public const string VV_StatsReport_ManaFluxRule_WeatherSnowy_Desc = nameof(VV_StatsReport_ManaFluxRule_WeatherSnowy_Desc);
         public const string VV_StatsReport_ManaFluxRule_Wind_Desc = nameof(VV_StatsReport_ManaFluxRule_Wind_Desc);
         public const string VV_StatsReport_ManaFluxRule_DreamumAltar_Desc = nameof(VV_StatsReport_ManaFluxRule_DreamumAltar_Desc);
+        public const string VV_StatsReport_ManaFluxRule_RadialPollution_Desc = nameof(VV_StatsReport_ManaFluxRule_RadialPollution_Desc);
     }
 }

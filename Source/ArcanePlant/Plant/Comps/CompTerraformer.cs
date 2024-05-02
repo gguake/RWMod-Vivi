@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 using Verse;
+using Verse.Noise;
 
 namespace VVRace
 {
@@ -16,10 +18,12 @@ namespace VVRace
 
         public List<TerraformData> terraforms = new List<TerraformData>();
         public IntRange cooldownTicks;
-        public float radius;
+        public FloatRange radiusRange;
+        public float radiusGrowth;
+
         public bool removePollution;
         public bool showRadius = true;
-
+        
         public CompProperties_Terraformer()
         {
             compClass = typeof(CompTerraformer);
@@ -45,24 +49,22 @@ namespace VVRace
     {
         public CompProperties_Terraformer Props => (CompProperties_Terraformer)props;
 
+        private float _terraformRadius;
         private int _remainedCooldown = -1;
 
         public override void PostExposeData()
         {
+            Scribe_Values.Look(ref _terraformRadius, "terraformRadius", defaultValue: Props.radiusRange.min);
             Scribe_Values.Look(ref _remainedCooldown, "remainedCooldown", defaultValue: -1);
         }
 
         public override void PostSpawnSetup(bool respawningAfterLoad)
         {
-            if (!respawningAfterLoad && _remainedCooldown < 0)
+            if (!respawningAfterLoad)
             {
+                _terraformRadius = Props.radiusRange.min;
                 _remainedCooldown = Props.cooldownTicks.RandomInRange;
             }
-        }
-
-        public override void PostDeSpawn(Map map)
-        {
-            _remainedCooldown = -1;
         }
 
         public override void CompTick()
@@ -87,7 +89,7 @@ namespace VVRace
         {
             if (Props.showRadius)
             {
-                GenDraw.DrawRadiusRing(parent.Position, Props.radius);
+                GenDraw.DrawRadiusRing(parent.Position, Props.radiusRange.TrueMax);
             }
         }
 
@@ -110,22 +112,23 @@ namespace VVRace
                 }
                 else
                 {
-                    TerraformNear();
+                    TryTerraform();
                     _remainedCooldown = Props.cooldownTicks.RandomInRange;
                 }
             }
         }
 
-        private void TerraformNear()
+        private void TryTerraform()
         {
             var map = parent.Map;
 
-            foreach (var cell in GenRadial.RadialPatternInRadius(Props.radius))
+            _terraformRadius = Props.radiusRange.ClampToRange(_terraformRadius + Props.radiusGrowth);
+            foreach (var cell in GenRadial.RadialPatternInRadius(_terraformRadius))
             {
                 var position = parent.Position + cell;
-                if (position.InBounds(map) && !position.Impassable(map) && TryTerraformCell(map, position))
+                if (position.InBounds(map) && !position.Impassable(map))
                 {
-                    break;
+                    TryTerraformCell(map, position);
                 }
             }
         }
