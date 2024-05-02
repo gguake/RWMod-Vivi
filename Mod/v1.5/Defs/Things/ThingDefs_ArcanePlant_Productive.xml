@@ -990,8 +990,8 @@
           <manaCurveFromDistanceSqr>
             <points>
               <li>(0,40)</li>
-              <li>(1,15)</li>
-              <li>(4,7.5)</li>
+              <li>(1,10)</li>
+              <li>(4,5)</li>
               <li>(9,2.5)</li>
             </points>
           </manaCurveFromDistanceSqr>
