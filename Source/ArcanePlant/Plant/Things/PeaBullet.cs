@@ -1,5 +1,8 @@
-﻿using RimWorld;
+﻿using HarmonyLib;
+using RimWorld;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection.Emit;
 using UnityEngine;
 using Verse;
 
@@ -72,11 +75,6 @@ namespace VVRace
             _tmpBulletOverridePlants.Clear();
         }
 
-        public override void Tick()
-        {
-            base.Tick();
-        }
-
         protected override void ImpactSomething()
         {
             foreach (var data in _overrideData)
@@ -100,12 +98,18 @@ namespace VVRace
 
         protected override void Impact(Thing hitThing, bool blockedByShield = false)
         {
-            base.Impact(hitThing, blockedByShield);
+            PeaBulletReversePatch.Impact(this, hitThing, blockedByShield);
+        }
 
-            if (hitThing != null && _overrideData != null)
+        public static void ImpactPeaOverride(DamageWorker.DamageResult damageResult, BattleLogEntry_RangedImpact log, PeaBullet bullet)
+        {
+            var hitThing = damageResult.hitThing;
+            var overrideData = bullet._overrideData;
+            var lastHitPart = damageResult.LastHitPart;
+
+            if (hitThing != null && overrideData != null)
             {
-                bool instigatorGuilty = !(launcher is Pawn pawn) || !pawn.Drafted;
-                foreach (var data in _overrideData)
+                foreach (var data in overrideData)
                 {
                     if (data.chance >= 1f || Rand.Chance(data.chance))
                     {
@@ -113,16 +117,43 @@ namespace VVRace
                             data.damageDef,
                             data.amount,
                             data.armorPenetration,
-                            ExactRotation.eulerAngles.y,
-                            launcher,
-                            null,
-                            equipmentDef,
+                            bullet.ExactRotation.eulerAngles.y,
+                            bullet.launcher,
+                            lastHitPart,
+                            bullet.equipmentDef,
                             DamageInfo.SourceCategory.ThingOrUnknown,
-                            intendedTarget.Thing,
-                            instigatorGuilty));
+                            bullet.intendedTarget.Thing,
+                            instigatorGuilty: false)).AssociateWithLog(log);
                     }
                 }
             }
+        }
+    }
+
+    [HarmonyPatch]
+    public class PeaBulletReversePatch
+    {
+        [HarmonyReversePatch]
+        [HarmonyPatch(typeof(Bullet), "Impact")]
+        public static void Impact(Bullet __instance, Thing hitThing, bool blockedByShield)
+        {
+            IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> codeInstructions)
+            {
+                var instructions = codeInstructions.ToList();
+                var index = instructions.FirstIndexOf(v => v.opcode == OpCodes.Callvirt && v.OperandIs(AccessTools.Method(typeof(Thing), nameof(Thing.TakeDamage)))) + 1;
+
+                instructions.InsertRange(index, new CodeInstruction[]
+                {
+                    new CodeInstruction(OpCodes.Dup),
+                    new CodeInstruction(OpCodes.Ldloc_2),
+                    new CodeInstruction(OpCodes.Ldarg_0),
+                    new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(PeaBullet), nameof(PeaBullet.ImpactPeaOverride))),
+                });
+
+                return instructions;
+            }
+
+            _ = Transpiler(null);
         }
     }
 }
