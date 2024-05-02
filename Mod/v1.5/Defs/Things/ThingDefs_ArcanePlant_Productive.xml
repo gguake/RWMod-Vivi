@@ -987,15 +987,14 @@
         </manaConsumeRule>
         <manaGenerateRule Class="VVRace.ManaFluxRule_RadialPollution">
           <radius>2.9</radius>
-          <manaCurveFromDistance>
+          <manaCurveFromDistanceSqr>
             <points>
               <li>(0,40)</li>
               <li>(1,15)</li>
               <li>(4,7.5)</li>
               <li>(9,2.5)</li>
             </points>
-          </manaCurveFromDistance>
-          <manaPerAdjacentPollution>40</manaPerAdjacentPollution>
+          </manaCurveFromDistanceSqr>
         </manaGenerateRule>
       </li>
 

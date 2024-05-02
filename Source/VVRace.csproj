@@ -88,6 +88,7 @@
     <Compile Include="ArcanePlant\Growing\GrowingArcanePlantSensitivity.cs" />
     <Compile Include="ArcanePlant\Plant\Mana\ManaExtension.cs" />
     <Compile Include="ArcanePlant\Plant\Mana\ManaFluxGrid.cs" />
+    <Compile Include="ArcanePlant\Plant\Mana\ManaFluxRule_RadialPollution.cs" />
     <Compile Include="ArcanePlant\Plant\Mana\ManaFluxRule_Wind.cs" />
     <Compile Include="ArcanePlant\Plant\SectionLayer_ThingsManaFluxGrid.cs" />
     <Compile Include="ArcanePlant\Growing\Things\Building_ArcanePlantFarm.cs" />
