@@ -211,4 +211,12 @@ namespace VVRace
     {
         public static ChemicalDef Ambrosia;
     }
+
+    [DefOf]
+    public static class VVFleckDefOf
+    {
+        public static FleckDef HeatGlow_Intense;
+        public static FleckDef ElectricalSpark;
+        public static FleckDef Fleck_VaporizeCenterFlash;
+    }
 }

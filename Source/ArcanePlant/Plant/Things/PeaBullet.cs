@@ -83,15 +83,15 @@ namespace VVRace
             {
                 if (data.damageDef == DamageDefOf.Flame)
                 {
-                    FleckMaker.ThrowFireGlow(DrawPos, Map, 0.4f);
+                    FleckMaker.Static(DrawPos, Map, VVFleckDefOf.HeatGlow_Intense, 0.75f);
                 }
                 else if (data.damageDef == DamageDefOf.Stun)
                 {
-                    FleckMaker.ThrowLightningGlow(DrawPos, Map, 0.4f);
+                    FleckMaker.Static(DrawPos, Map, VVFleckDefOf.ElectricalSpark, 0.75f);
                 }
                 else if (data.damageDef == DamageDefOf.Burn)
                 {
-                    FleckMaker.Static(DrawPos, Map, FleckDefOf.ShotFlash, 0.4f);
+                    FleckMaker.Static(DrawPos, Map, VVFleckDefOf.Fleck_VaporizeCenterFlash, 0.25f);
                 }
             }
 
