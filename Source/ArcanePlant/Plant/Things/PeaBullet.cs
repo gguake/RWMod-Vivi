@@ -12,6 +12,7 @@ namespace VVRace
         public float amount;
         public float armorPenetration;
         public float chance;
+        public FleckDef fleckDef;
     }
 
     public class PeaBullet : Bullet
@@ -69,6 +70,32 @@ namespace VVRace
             }
 
             _tmpBulletOverridePlants.Clear();
+        }
+
+        public override void Tick()
+        {
+            base.Tick();
+        }
+
+        protected override void ImpactSomething()
+        {
+            foreach (var data in _overrideData)
+            {
+                if (data.damageDef == DamageDefOf.Flame)
+                {
+                    FleckMaker.ThrowFireGlow(DrawPos, Map, 0.4f);
+                }
+                else if (data.damageDef == DamageDefOf.Stun)
+                {
+                    FleckMaker.ThrowLightningGlow(DrawPos, Map, 0.4f);
+                }
+                else if (data.damageDef == DamageDefOf.Burn)
+                {
+                    FleckMaker.Static(DrawPos, Map, FleckDefOf.ShotFlash, 0.4f);
+                }
+            }
+
+            base.ImpactSomething();
         }
 
         protected override void Impact(Thing hitThing, bool blockedByShield = false)

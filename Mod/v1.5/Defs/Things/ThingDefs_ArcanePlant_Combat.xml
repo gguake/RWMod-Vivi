@@ -306,14 +306,15 @@
     <graphicData>
       <texPath>Things/Projectile/VV_PeaFast</texPath>
       <graphicClass>Graphic_Single</graphicClass>
-      <drawSize>(1.5,1.5)</drawSize>
+      <drawSize>(1.25,1.25)</drawSize>
+      <shaderType>Transparent</shaderType>
     </graphicData>
 
     <projectile>
       <damageDef>Bomb</damageDef>
       <speed>50</speed>
       <explosionRadius>1.9</explosionRadius>
-      <damageAmountBase>12</damageAmountBase>
+      <damageAmountBase>13</damageAmountBase>
       <screenShakeFactor>0</screenShakeFactor>
     </projectile>
   </ThingDef>
@@ -344,10 +345,10 @@
         <verbClass>VVRace.Verb_ShootWithMana</verbClass>
         <defaultProjectile>VV_Bullet_PeaFast</defaultProjectile>
         <warmupTime>0</warmupTime>
-        <range>35.9</range>
+        <range>36.9</range>
         <ticksBetweenBurstShots>9</ticksBetweenBurstShots>
         <burstShotCount>6</burstShotCount>
-        <forcedMissRadius>2.4</forcedMissRadius>
+        <forcedMissRadius>3.7</forcedMissRadius>
         <forcedMissEvenDispersal>true</forcedMissEvenDispersal>
         <soundCast>ThumpCannon_Fire</soundCast>
         <soundCastTail>GunTail_Heavy</soundCastTail>
