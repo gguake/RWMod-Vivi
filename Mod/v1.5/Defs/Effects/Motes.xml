@@ -19,4 +19,18 @@
       <drawSize>10</drawSize>
     </graphicData>
   </ThingDef>
+  
+  <ThingDef ParentName="MoteBase">
+    <defName>VV_Mote_GatherHoney</defName>
+    <thingClass>MoteDualAttached</thingClass>
+    <altitudeLayer>MetaOverlays</altitudeLayer>
+    <mote>
+      <solidTime>600</solidTime>
+      <rotateTowardsTarget>true</rotateTowardsTarget>
+    </mote>
+    <graphicData>
+      <texPath>Things/Mote/VV_GatherHoney</texPath>
+    </graphicData>
+  </ThingDef>
+
 </Defs>

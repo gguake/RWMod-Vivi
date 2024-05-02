@@ -13,7 +13,7 @@
     <workSpeedStat>VV_HoneyGatherSpeed</workSpeedStat>
     <efficiencyStat>VV_HoneyGatherYield</efficiencyStat>
 
-    <effectWorking>Harvest_Plant</effectWorking>
+    <effectWorking>VV_Gather_Honey</effectWorking>
     <soundWorking>Recipe_Brewing</soundWorking>
     <uiIconThing>VV_RawHoney</uiIconThing>
 

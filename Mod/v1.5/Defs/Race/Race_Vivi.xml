@@ -32,6 +32,11 @@
       <Fertility>0</Fertility>
       
       <RoyalFavorValue>1</RoyalFavorValue>
+
+      <VV_HoneyGatherSpeed>1</VV_HoneyGatherSpeed>
+      <VV_HoneyGatherYield>1</VV_HoneyGatherYield>
+      <VV_PlantGatherSpeed>1</VV_PlantGatherSpeed>
+      <VV_PlantGatherYield>1</VV_PlantGatherYield>
     </statBases>
 
     <tools Inherit="False">

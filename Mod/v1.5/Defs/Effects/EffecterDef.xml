@@ -28,4 +28,23 @@
     </children>
   </EffecterDef>
 
+  <EffecterDef>
+    <defName>VV_Gather_Honey</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_InteractSymbol</subEffecterClass>
+        <moteDef>VV_Mote_GatherHoney</moteDef>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <fleckDef>VV_PollenPuff</fleckDef>
+        <spawnLocType>BetweenPositions</spawnLocType>
+        <ticksBetweenMotes>59</ticksBetweenMotes>
+        <speed>0.1~0.3</speed>
+        <scale>0.7~1.2</scale>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+      </li>
+    </children>
+  </EffecterDef>
 </Defs>
