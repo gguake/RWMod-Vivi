@@ -28,14 +28,6 @@
   <VV_FlowerScent.label>꽃 향기</VV_FlowerScent.label>
   <VV_FlowerScent.description>몸에서 꽃 향기가 나고 있습니다.</VV_FlowerScent.description>
 
-  <VV_DreamumTranquilize.label>꿈송이 마취</VV_DreamumTranquilize.label>
-  <VV_DreamumTranquilize.description>꿈송이 꽃가루에 중독되어 의식이 흐려지고 있습니다.</VV_DreamumTranquilize.description>
-  <VV_DreamumTranquilize.stages.initial.label>초기</VV_DreamumTranquilize.stages.initial.label>
-  <VV_DreamumTranquilize.stages.minor.label>가벼움</VV_DreamumTranquilize.stages.minor.label>
-  <VV_DreamumTranquilize.stages.moderate.label>진행됨</VV_DreamumTranquilize.stages.moderate.label>
-  <VV_DreamumTranquilize.stages.serious.label>심각함</VV_DreamumTranquilize.stages.serious.label>
-  <VV_DreamumTranquilize.stages.extreme.label>극심함</VV_DreamumTranquilize.stages.extreme.label>
-
   <VV_CombatHormoneJelly.label>전투 호르몬</VV_CombatHormoneJelly.label>
   <VV_CombatHormoneJelly.description>비비들의 내재된 공격성을 극도로 강화하는 전투 호르몬이 주입된 상태입니다. 전투 관련 능력이 향상되고 고통에 둔감해지며 불꽃을 보아도 겁에 질리지 않지만 매우 빠르게 지치고 배가 고파집니다.</VV_CombatHormoneJelly.description>
 

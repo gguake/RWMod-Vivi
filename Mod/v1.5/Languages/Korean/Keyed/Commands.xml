@@ -21,9 +21,6 @@
 <VV_Command_CancelGrowArcanePlantBill>재배 취소</VV_Command_CancelGrowArcanePlantBill>
 <VV_Command_CancelGrowArcanePlantBillDesc>현재 예약된 마법 식물 재배를 취소합니다. 이미 재배가 시작된 경우 소모된 자원은 돌려받을 수 없습니다.</VV_Command_CancelGrowArcanePlantBillDesc>
 
-<VV_Command_StartProgressDreamumVictory>꿈송이 의식 시작</VV_Command_StartProgressDreamumVictory>
-<VV_Command_StartProgressDreamumVictoryDesc>제단에 꿈송이를 심고 거대화를 위한 의식을 시작합니다.</VV_Command_StartProgressDreamumVictoryDesc>
-
 <VV_Command_ToggleLayEgg>산란 활성화</VV_Command_ToggleLayEgg>
 <VV_Command_ToggleLayEggDesc>이 로열 비비가 비비 알을 산란할지 여부를 설정합니다.</VV_Command_ToggleLayEggDesc>
 </LanguageData>

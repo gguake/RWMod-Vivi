@@ -7,7 +7,6 @@
   <VV_JobFailReasonNotVivi>비비가 아님</VV_JobFailReasonNotVivi>
   <VV_JobFailReasonViviStarving>비비가 굶주림</VV_JobFailReasonViviStarving>
   <VV_JobFailReasonNoIngredients>재료가 부족함</VV_JobFailReasonNoIngredients>
-  <VV_JobFailReasonNoDreamum>꿈송이가 없음</VV_JobFailReasonNoDreamum>
 
   <VV_AbilityDisabledNoFood>{0_labelShort}는 배고파서 사용할 수 없음</VV_AbilityDisabledNoFood>
   <VV_AbilityDisabledNoBodyPart>{0_labelShort}의 신체 부위 {1}가 {2}개 부족함</VV_AbilityDisabledNoBodyPart>

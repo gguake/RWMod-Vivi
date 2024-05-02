@@ -21,9 +21,6 @@
         public const string VV_Command_CancelGrowArcanePlantBill = nameof(VV_Command_CancelGrowArcanePlantBill);
         public const string VV_Command_CancelGrowArcanePlantBillDesc = nameof(VV_Command_CancelGrowArcanePlantBillDesc);
 
-        public const string VV_Command_StartProgressDreamumVictory = nameof(VV_Command_StartProgressDreamumVictory);
-        public const string VV_Command_StartProgressDreamumVictoryDesc = nameof(VV_Command_StartProgressDreamumVictoryDesc);
-
         public const string VV_Command_ToggleLayEgg = nameof(VV_Command_ToggleLayEgg);
         public const string VV_Command_ToggleLayEggDesc = nameof(VV_Command_ToggleLayEggDesc);
     }

@@ -29,22 +29,4 @@
 <VV_GrowthPointsFactor.label>성장 등급 획득 속도</VV_GrowthPointsFactor.label>
 <VV_GrowthPointsFactor.description>어린이가 성장 등급을 얼마나 많이 획득하는지 나타냅니다.</VV_GrowthPointsFactor.description>
 
-
-<VV_FloralMagic_Cooldown.label>재사용 대기 시간</VV_FloralMagic_Cooldown.label>
-<VV_FloralMagic_Cooldown.description>마법을 발동한 이후 다시 발동할수 있을 때까지 필요한 시간입니다.</VV_FloralMagic_Cooldown.description>
-
-<VV_FloralMagic_ManaCost.label>마나 소모량</VV_FloralMagic_ManaCost.label>
-<VV_FloralMagic_ManaCost.description>마법을 발동하는 데 소모되는 마나입니다. 교감 연결된 꿈송이의 마나를 소모합니다.</VV_FloralMagic_ManaCost.description>
-
-<VV_FloralMagic_CastingTime.label>시전 시간</VV_FloralMagic_CastingTime.label>
-<VV_FloralMagic_CastingTime.description>마법을 발동하는 데 걸리는 시간입니다.</VV_FloralMagic_CastingTime.description>
-
-<VV_FloralMagic_Range.label>사거리</VV_FloralMagic_Range.label>
-<VV_FloralMagic_Range.description>이 마법의 목표 또는 목표 위치의 중심까지의 최대 거리입니다.</VV_FloralMagic_Range.description>
-
-<VV_FloralMagic_Duration.label>지속시간</VV_FloralMagic_Duration.label>
-<VV_FloralMagic_Duration.label>마법의 효과가 지속되는 시간입니다.</VV_FloralMagic_Duration.label>
-
-<VV_FloralMagic_EffectRadius.label>효과 범위</VV_FloralMagic_EffectRadius.label>
-<VV_FloralMagic_EffectRadius.label>마법의 효과가 미칠 수 있는 반경 범위입니다.</VV_FloralMagic_EffectRadius.label>
 </LanguageData>

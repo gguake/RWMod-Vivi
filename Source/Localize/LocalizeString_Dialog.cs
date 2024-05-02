@@ -26,7 +26,5 @@
 
         public const string VV_DialogStartGrowingArcanePlantIngredientLabel = nameof(VV_DialogStartGrowingArcanePlantIngredientLabel);
         public const string VV_DialogCancelGrowingArcanePlantBillInGrowing = nameof(VV_DialogCancelGrowingArcanePlantBillInGrowing);
-
-        public const string VV_DialogStartProgressDreamumVictoryCaution = nameof(VV_DialogStartProgressDreamumVictoryCaution);
     }
 }

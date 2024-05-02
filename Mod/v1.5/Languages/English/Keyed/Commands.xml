@@ -21,9 +21,6 @@
 <VV_Command_CancelGrowArcanePlantBill>Cancel Arcane Plant Cultivation</VV_Command_CancelGrowArcanePlantBill>
 <VV_Command_CancelGrowArcanePlantBillDesc>Cancels the scheduled arcane plant cultivation. If cultivation has already begun, the spent resources are non-refundable.</VV_Command_CancelGrowArcanePlantBillDesc>
 
-<VV_Command_StartProgressDreamumVictory>Start Dreamum Ritual</VV_Command_StartProgressDreamumVictory>
-<VV_Command_StartProgressDreamumVictoryDesc>Plants a dreamum in the altar and starts the ritual for its magnification.</VV_Command_StartProgressDreamumVictoryDesc>
-
 <VV_Command_ToggleLayEgg>Activate spawn egg</VV_Command_ToggleLayEgg>
 <VV_Command_ToggleLayEggDesc>Sets whether or not this royal vivi spawns eggs.</VV_Command_ToggleLayEggDesc>
 </LanguageData>

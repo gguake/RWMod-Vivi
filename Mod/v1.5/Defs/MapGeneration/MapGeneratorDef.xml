@@ -30,47 +30,4 @@
     </genStep>
   </GenStepDef>
 
-  <MapGeneratorDef>
-    <defName>VV_Base_ViviRuins</defName>
-    <genSteps>
-      <li>ElevationFertility</li>
-      <li>Caves</li>
-      <li>Terrain</li>
-      <li>CavesTerrain</li>
-      <li>Roads</li>
-      <li>RockChunks</li>
-      <li>SteamGeysers</li>
-      <li MayRequire="Ludeon.RimWorld.Ideology">MechanoidRemains</li>
-      <li>FindPlayerStartSpot</li>
-      <li>ScenParts</li>
-      <li MayRequire="Ludeon.RimWorld.Biotech">Pollution</li>
-      <li MayRequire="Ludeon.RimWorld.Biotech">AncientPollutionJunk</li>
-      <li>Plants</li>
-      <li>Snow</li>
-      <li>Animals</li>
-      <li>Fog</li>
-      <li>RocksFromGrid</li>
-      <li>VV_ViviRuins</li>
-      <li>VV_ScatterDreamums</li>
-    </genSteps>
-  </MapGeneratorDef>
-  
-  <GenStepDef>
-    <defName>VV_ViviRuins</defName>
-    <order>400</order>
-    <genStep Class="VVRace.GenStep_ViviRuins">
-      <count>1</count>
-      <nearMapCenter>true</nearMapCenter>
-    </genStep>
-  </GenStepDef>
-
-  <GenStepDef>
-    <defName>VV_ScatterDreamums</defName>
-    <order>401</order>
-    <genStep Class="VVRace.GenStep_ScatterDreamums">
-      <count>5</count>
-      <spotMustBeStandable>true</spotMustBeStandable>
-      <minSpacing>20</minSpacing>
-    </genStep>
-  </GenStepDef>
 </Defs>
