@@ -371,7 +371,7 @@
       <AccuracyShort>0.12</AccuracyShort>
       <AccuracyMedium>0.07</AccuracyMedium>
       <AccuracyLong>0.03</AccuracyLong>
-      <RangedWeapon_Cooldown>0.11</RangedWeapon_Cooldown>
+      <RangedWeapon_Cooldown>0.12</RangedWeapon_Cooldown>
     </statBases>
 
     <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>

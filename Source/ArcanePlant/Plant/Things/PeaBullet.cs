@@ -8,14 +8,22 @@ using Verse;
 
 namespace VVRace
 {
-    public struct BulletOverrideData
+    public struct BulletOverrideData : IExposable
     {
         public float shouldApplyTicks;
         public DamageDef damageDef;
         public float amount;
         public float armorPenetration;
         public float chance;
-        public FleckDef fleckDef;
+
+        public void ExposeData()
+        {
+            Scribe_Values.Look(ref shouldApplyTicks, "shouldApplyTicks");
+            Scribe_Defs.Look(ref damageDef, "damageDef");
+            Scribe_Values.Look(ref amount, "amount");
+            Scribe_Values.Look(ref armorPenetration, "armorPenetration");
+            Scribe_Values.Look(ref chance, "chance");
+        }
     }
 
     public class PeaBullet : Bullet
@@ -77,19 +85,22 @@ namespace VVRace
 
         protected override void ImpactSomething()
         {
-            foreach (var data in _overrideData)
+            if (_overrideData != null)
             {
-                if (data.damageDef == DamageDefOf.Flame)
+                foreach (var data in _overrideData)
                 {
-                    FleckMaker.Static(DrawPos, Map, VVFleckDefOf.HeatGlow_Intense, 0.75f);
-                }
-                else if (data.damageDef == DamageDefOf.Stun)
-                {
-                    FleckMaker.Static(DrawPos, Map, VVFleckDefOf.ElectricalSpark, 0.75f);
-                }
-                else if (data.damageDef == DamageDefOf.Burn)
-                {
-                    FleckMaker.Static(DrawPos, Map, VVFleckDefOf.Fleck_VaporizeCenterFlash, 0.25f);
+                    if (data.damageDef == DamageDefOf.Flame)
+                    {
+                        FleckMaker.Static(DrawPos, Map, VVFleckDefOf.HeatGlow_Intense, 0.75f);
+                    }
+                    else if (data.damageDef == DamageDefOf.Stun)
+                    {
+                        FleckMaker.Static(DrawPos, Map, VVFleckDefOf.ElectricalSpark, 0.75f);
+                    }
+                    else if (data.damageDef == DamageDefOf.Burn)
+                    {
+                        FleckMaker.Static(DrawPos, Map, VVFleckDefOf.Fleck_VaporizeCenterFlash, 0.25f);
+                    }
                 }
             }
 
@@ -103,9 +114,9 @@ namespace VVRace
 
         public static void ImpactPeaOverride(DamageWorker.DamageResult damageResult, BattleLogEntry_RangedImpact log, PeaBullet bullet)
         {
-            var hitThing = damageResult.hitThing;
+            var hitThing = damageResult?.hitThing;
+            var lastHitPart = damageResult?.LastHitPart;
             var overrideData = bullet._overrideData;
-            var lastHitPart = damageResult.LastHitPart;
 
             if (hitThing != null && overrideData != null)
             {
@@ -123,7 +134,7 @@ namespace VVRace
                             bullet.equipmentDef,
                             DamageInfo.SourceCategory.ThingOrUnknown,
                             bullet.intendedTarget.Thing,
-                            instigatorGuilty: false)).AssociateWithLog(log);
+                            instigatorGuilty: false))?.AssociateWithLog(log);
                     }
                 }
             }

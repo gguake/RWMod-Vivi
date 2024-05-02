@@ -133,7 +133,7 @@
     <defName>VV_FrostBloom</defName>
     <label>frostbloom</label>
     <description>a arcane flower shaped like ice crystals that consumes mana to absorb heat until the surrounding temperature reaches a certain level. In environments that are sufficiently cold, it produces and accumulates mana instead of absorbing heat.
-\nWhen the peas from a peashooter pass over the frostbloom, they inflict additional burn damage on the target.</description>
+\nWhen the peas from a peashooter pass over the frostbloom, the peas harden and inflict additional piercing damage to the target.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_CoolingPetal</ThingDef>
     </descriptionHyperlinks>
@@ -200,8 +200,9 @@
           <li>
             <thingDef>VV_Bullet_Pea</thingDef>
             <damageDef>Bullet</damageDef>
-            <amount>2</amount>
-            <armorPenetration>0.2</armorPenetration>
+            <amount>5</amount>
+            <armorPenetration>0.25</armorPenetration>
+            <chance>0.5</chance>
           </li>
         </passedBulletOverrides>
       </li>
