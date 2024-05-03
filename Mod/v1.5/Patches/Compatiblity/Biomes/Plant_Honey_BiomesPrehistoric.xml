@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+  <Operation Class="PatchOperationSequence">
+    <operations>
+      <li Class="PatchOperationSequence" MayRequireAnyOf="BiomesTeam.BiomesPrehistoric,BiomesTeam.BiomesPrehistoric_steam">
+        <operations>
+          <!-- BMT_Archaefructus -->
+          <li Class="PatchOperationConditional">
+            <xpath>Defs/ThingDef[defName="BMT_Archaefructus"]/comps</xpath>
+            <nomatch Class="PatchOperationAdd">
+              <xpath>Defs/ThingDef[defName="BMT_Archaefructus"]</xpath>
+              <value>
+                <comps />
+              </value>
+            </nomatch>
+          </li>
+          <li Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="BMT_Archaefructus"]/comps</xpath>
+            <value>
+              <li Class="VVRace.CompProperties_RepeatGatherable" />
+            </value>
+          </li>
+          <li Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="BMT_Archaefructus"]/statBases</xpath>
+            <value>
+              <VV_MinGrowthPlantGatherable>0.99</VV_MinGrowthPlantGatherable>
+              <VV_PlantGatherCooldown>1</VV_PlantGatherCooldown>
+              <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
+            </value>
+          </li>
+
+          <!-- BMT_Nymphaeaceae -->
+          <li Class="PatchOperationConditional">
+            <xpath>Defs/ThingDef[defName="BMT_Nymphaeaceae"]/comps</xpath>
+            <nomatch Class="PatchOperationAdd">
+              <xpath>Defs/ThingDef[defName="BMT_Nymphaeaceae"]</xpath>
+              <value>
+                <comps />
+              </value>
+            </nomatch>
+          </li>
+          <li Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="BMT_Nymphaeaceae"]/comps</xpath>
+            <value>
+              <li Class="VVRace.CompProperties_RepeatGatherable" />
+            </value>
+          </li>
+          <li Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="BMT_Nymphaeaceae"]/statBases</xpath>
+            <value>
+              <VV_MinGrowthPlantGatherable>0.99</VV_MinGrowthPlantGatherable>
+              <VV_PlantGatherCooldown>1</VV_PlantGatherCooldown>
+              <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
+            </value>
+          </li>
+
+          <!-- BMT_Potentilla -->
+          <li Class="PatchOperationConditional">
+            <xpath>Defs/ThingDef[defName="BMT_Potentilla"]/comps</xpath>
+            <nomatch Class="PatchOperationAdd">
+              <xpath>Defs/ThingDef[defName="BMT_Potentilla"]</xpath>
+              <value>
+                <comps />
+              </value>
+            </nomatch>
+          </li>
+          <li Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="BMT_Potentilla"]/comps</xpath>
+            <value>
+              <li Class="VVRace.CompProperties_RepeatGatherable" />
+            </value>
+          </li>
+          <li Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="BMT_Potentilla"]/statBases</xpath>
+            <value>
+              <VV_MinGrowthPlantGatherable>0.99</VV_MinGrowthPlantGatherable>
+              <VV_PlantGatherCooldown>1</VV_PlantGatherCooldown>
+              <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
+            </value>
+          </li>
+
+          <!-- BMT_Sagaria -->
+          <li Class="PatchOperationConditional">
+            <xpath>Defs/ThingDef[defName="BMT_Sagaria"]/comps</xpath>
+            <nomatch Class="PatchOperationAdd">
+              <xpath>Defs/ThingDef[defName="BMT_Sagaria"]</xpath>
+              <value>
+                <comps />
+              </value>
+            </nomatch>
+          </li>
+          <li Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="BMT_Sagaria"]/comps</xpath>
+            <value>
+              <li Class="VVRace.CompProperties_RepeatGatherable" />
+            </value>
+          </li>
+          <li Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="BMT_Sagaria"]/statBases</xpath>
+            <value>
+              <VV_MinGrowthPlantGatherable>0.99</VV_MinGrowthPlantGatherable>
+              <VV_PlantGatherCooldown>1</VV_PlantGatherCooldown>
+              <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
+            </value>
+          </li>
+        </operations>
+      </li>
+    </operations>
+  </Operation>
+
+</Patch>

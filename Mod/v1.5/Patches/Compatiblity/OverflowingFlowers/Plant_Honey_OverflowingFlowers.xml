@@ -6,7 +6,7 @@
         <operations>
           <!-- Rose_bush -->
           <li Class="PatchOperationConditional">
-            <xpath>Defs/ThingDef[defName = "Rose_bush"]/comps</xpath>
+            <xpath>Defs/ThingDef[defName="Rose_bush"]/comps</xpath>
             <nomatch Class="PatchOperationAdd">
               <xpath>Defs/ThingDef[defName="Rose_bush"]</xpath>
               <value>
@@ -15,13 +15,13 @@
             </nomatch>
           </li>
           <li Class="PatchOperationAdd">
-            <xpath>Defs/ThingDef[defName = "Rose_bush"]/comps</xpath>
+            <xpath>Defs/ThingDef[defName="Rose_bush"]/comps</xpath>
             <value>
               <li Class="VVRace.CompProperties_RepeatGatherable" />
             </value>
           </li>
           <li Class="PatchOperationAdd">
-            <xpath>Defs/ThingDef[defName = "Rose_bush"]/statBases</xpath>
+            <xpath>Defs/ThingDef[defName="Rose_bush"]/statBases</xpath>
             <value>
               <VV_MinGrowthPlantGatherable>0.99</VV_MinGrowthPlantGatherable>
               <VV_PlantGatherCooldown>1</VV_PlantGatherCooldown>
@@ -31,7 +31,7 @@
 
           <!-- OF_Rose_P_Red -->
           <li Class="PatchOperationConditional">
-            <xpath>Defs/ThingDef[defName = "OF_Rose_P_Red"]/comps</xpath>
+            <xpath>Defs/ThingDef[defName="OF_Rose_P_Red"]/comps</xpath>
             <nomatch Class="PatchOperationAdd">
               <xpath>Defs/ThingDef[defName="OF_Rose_P_Red"]</xpath>
               <value>
@@ -40,13 +40,13 @@
             </nomatch>
           </li>
           <li Class="PatchOperationAdd">
-            <xpath>Defs/ThingDef[defName = "OF_Rose_P_Red"]/comps</xpath>
+            <xpath>Defs/ThingDef[defName="OF_Rose_P_Red"]/comps</xpath>
             <value>
               <li Class="VVRace.CompProperties_RepeatGatherable" />
             </value>
           </li>
           <li Class="PatchOperationAdd">
-            <xpath>Defs/ThingDef[defName = "OF_Rose_P_Red"]/statBases</xpath>
+            <xpath>Defs/ThingDef[defName="OF_Rose_P_Red"]/statBases</xpath>
             <value>
               <VV_MinGrowthPlantGatherable>0.99</VV_MinGrowthPlantGatherable>
               <VV_PlantGatherCooldown>1</VV_PlantGatherCooldown>
