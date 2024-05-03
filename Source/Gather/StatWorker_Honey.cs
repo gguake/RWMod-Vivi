@@ -17,7 +17,7 @@ namespace VVRace
                 var totalLifeExpectancy = thingDef.plant.lifespanDaysPerGrowDays * totalGrowDays;
                 var minGlow = thingDef.plant.growMinGlow;
 
-                value *= Mathf.Max(0.01f, (totalLifeExpectancy - totalGrowDays) / minGlow / 13.5f);
+                value *= Mathf.Max(0.01f, (totalLifeExpectancy - totalGrowDays) / (1f + minGlow) / 13.5f) * 4.7f;
 
                 if (thingDef.plant.IsTree)
                 {
