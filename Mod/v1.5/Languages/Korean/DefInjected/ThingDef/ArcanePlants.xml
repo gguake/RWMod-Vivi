@@ -52,21 +52,29 @@
 <VV_SkyweedBoxLeaving.label>하늘풀 상자 (떠나는 중)</VV_SkyweedBoxLeaving.label>
 
 <VV_Peashooter.label>콩뿌리개</VV_Peashooter.label>
-<VV_Peashooter.description>주변의 적을 감지하면 콩을 발사해 쫓아내는 마법 식물입니다. 콩을 발사할때마다 마나를 소모하며 위력은 약하지만 한번에 대량의 콩을 발사하므로 경장갑의 적에게 효과적입니다.
+<VV_Peashooter.description>주변의 적을 감지하면 콩을 발사해 쫓아내는 마법 식물입니다. 콩을 발사할 때마다 마나를 소모하며 위력은 약하지만 한번에 대량의 콩을 발사하므로 경장갑의 적에게 효과적입니다.
 \n발사된 콩이 마법 식물 위를 지나가는 경우 식물에 따라 특수한 효과를 적용받기도 합니다.</VV_Peashooter.description>
 <VV_Bullet_Pea.label>완두콩</VV_Bullet_Pea.label>
 <VV_Gun_Peashooter.label>콩뿌리개 꼬투리</VV_Gun_Peashooter.label>
-<VV_Gun_Peashooter.description>빠르게 콩을 생성해 적에게 발사하는 콩뿌리개의 꼬투리입니다.</VV_Gun_Peashooter.description>
+<VV_Gun_Peashooter.description>.</VV_Gun_Peashooter.description>
 
 <VV_Pealauncher.label>폭탄뿌리개</VV_Pealauncher.label>
-<VV_Pealauncher.description>주변의 적을 감지하면 폭발하는 콩을 발사해 쫓아내는 마법 식물입니다. 폭탄콩을 발사할때마다 마나를 소모하며 발사된 콩은 탄속이 매우 빠르고 착탄지에서 작게 폭발합니다.
+<VV_Pealauncher.description>주변의 적을 감지하면 폭발하는 콩을 발사해 쫓아내는 마법 식물입니다. 폭탄콩을 발사할 때마다 마나를 소모하며 발사된 콩은 탄속이 매우 빠르고 착탄지에서 작게 폭발합니다.
 \n대규모의 적을 토벌하는데 적합하지만 폭발은 아군에게도 큰 피해를 주므로 신중한 배치가 필요합니다.</VV_Pealauncher.description>
 <VV_Bullet_PeaFast.label>폭발콩</VV_Bullet_PeaFast.label>
 <VV_Gun_Pealauncher.label>폭탄뿌리개</VV_Gun_Pealauncher.label>
-<VV_Gun_Pealauncher.description>빠르게 콩을 생성해 적에게 발사하는 폭탄뿌리개의 꼬투리입니다.</VV_Gun_Pealauncher.description>
+<VV_Gun_Pealauncher.description>.</VV_Gun_Pealauncher.description>
 
 <VV_Shootus.label>건인장</VV_Shootus.label>
 <VV_Shootus.description>기묘한 표정의 얼굴을 가진 마법 선인장입니다. 식물이라고 생각되지 않을 정도로 유연하게 움직이며 굉장히 터프해서 대부분의 피해에 내성이 있습니다.
 \n한쪽 손에 원거리 무기를 장착할 수 있으며 적을 감지하면 장착된 무기를 사용해 자동으로 적을 공격합니다. 근접 무기나 생체인증 무기는 착용할 수 없으며 사람이 다루는것보다는 재장전이 다소 느립니다.</VV_Shootus.description>
+
+<VV_Cornlauncher.label>콘뿌리개</VV_Cornlauncher.label>
+<VV_Cornlauncher.description>주변의 적을 감지하면 옥수수를 발사해 공격하는 식물입니다. 발사할 때마다 마나를 소모하며 발사된 옥수수는 착탄시 폭발해 옥수수 낱알을 주변에 퍼뜨리며 옥수수 낱알은 작게 폭발합니다.
+\n대규모의 적을 토벌하는데 적합하지만 폭발은 아군에게도 큰 피해를 주므로 신중한 배치가 필요합니다.</VV_Cornlauncher.description>
+<VV_Bullet_Corn.label>옥수수</VV_Bullet_Corn.label>
+<VV_Bullet_CornKernel.label>옥수수 낱알</VV_Bullet_CornKernel.label>
+<VV_Gun_Cornlauncher.label>콘뿌리개</VV_Gun_Cornlauncher.label>
+<VV_Gun_Cornlauncher.description>.</VV_Gun_Cornlauncher.description>
 
 </LanguageData>

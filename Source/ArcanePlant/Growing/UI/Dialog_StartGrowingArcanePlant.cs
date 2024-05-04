@@ -42,7 +42,7 @@ namespace VVRace
                 if (!typeof(ArcanePlant).IsAssignableFrom(thingDef.thingClass)) { continue; }
 
                 var extension = thingDef.GetModExtension<GrowingArcanePlantData>();
-                if (extension != null && thingDef.IsResearchFinished)
+                if (extension != null && thingDef.IsResearchFinished && extension.canGrow)
                 {
                     _plantCandidates.Add(thingDef);
                 }

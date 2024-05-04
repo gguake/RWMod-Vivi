@@ -26,6 +26,8 @@ namespace VVRace
         public FloatRange optimalGlowRange = new FloatRange(0f, 1f);
         public GrowingArcanePlantSensitivity glowSensitivity;
 
+        public bool canGrow = true;
+
         public int RealManageIntervalTicks => 
             manageSensitivity > GrowingArcanePlantSensitivity.None ? 
             Mathf.CeilToInt(manageIntervalTicks / manageSensitivity.CalcThreshold().danger) : 
