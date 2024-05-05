@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-  <VV_PlantGatherCooldownInspectorString>다음 채집이 가능하기까지 남은 시간: {0}</VV_PlantGatherCooldownInspectorString>
+<VV_PlantGatherCooldownInspectorString>다음 채집이 가능하기까지 남은 시간: {0}</VV_PlantGatherCooldownInspectorString>
 
-  <VV_JobFailReasonNoHarvestablePlants>주변에 채집 가능한 식물 없음</VV_JobFailReasonNoHarvestablePlants>
-  <VV_JobFailReasonNoHarvestablePollenFilths>주변에 수집 가능한 꽃가루 없음</VV_JobFailReasonNoHarvestablePollenFilths>
-  <VV_JobFailReasonNotVivi>비비가 아님</VV_JobFailReasonNotVivi>
-  <VV_JobFailReasonViviStarving>비비가 굶주림</VV_JobFailReasonViviStarving>
-  <VV_JobFailReasonNoIngredients>재료가 부족함</VV_JobFailReasonNoIngredients>
+<VV_JobFailReasonNoHarvestablePlants>주변에 채집 가능한 식물 없음</VV_JobFailReasonNoHarvestablePlants>
+<VV_JobFailReasonNoHarvestablePollenFilths>주변에 수집 가능한 꽃가루 없음</VV_JobFailReasonNoHarvestablePollenFilths>
+<VV_JobFailReasonNotVivi>비비가 아님</VV_JobFailReasonNotVivi>
+<VV_JobFailReasonViviStarving>비비가 굶주림</VV_JobFailReasonViviStarving>
+<VV_JobFailReasonNoIngredients>재료가 부족함</VV_JobFailReasonNoIngredients>
 
-  <VV_AbilityDisabledNoFood>{0_labelShort}는 배고파서 사용할 수 없음</VV_AbilityDisabledNoFood>
-  <VV_AbilityDisabledNoBodyPart>{0_labelShort}의 신체 부위 {1}가 {2}개 부족함</VV_AbilityDisabledNoBodyPart>
-  
-  <VV_GeneDefHoneyNeedDurationDesc>{PAWN_nameDef}(은)는 꿀을 주기적으로 섭취해야 생존할 수 있습니다. 꿀을 섭취하지 않고 {DEFICIENCYDURATION}(이)가 지나면 결핍에 시달리며 시간이 지날수록 악화됩니다.</VV_GeneDefHoneyNeedDurationDesc>
-  <VV_LastHoneyIngestedDurationAgo>꿀을 {DURATION} 전에 마지막으로 섭취했습니다.</VV_LastHoneyIngestedDurationAgo>
+<VV_AbilityDisabledNoFood>{0_labelShort}는 배고파서 사용할 수 없음</VV_AbilityDisabledNoFood>
+<VV_AbilityDisabledNoBodyPart>{0_labelShort}의 신체 부위 {1}가 {2}개 부족함</VV_AbilityDisabledNoBodyPart>
+
+<VV_GeneDefHoneyNeedDurationDesc>{PAWN_nameDef}(은)는 꿀을 주기적으로 섭취해야 생존할 수 있습니다. 꿀을 섭취하지 않고 {DEFICIENCYDURATION}(이)가 지나면 결핍에 시달리며 시간이 지날수록 악화됩니다.</VV_GeneDefHoneyNeedDurationDesc>
+<VV_LastHoneyIngestedDurationAgo>꿀을 {DURATION} 전에 마지막으로 섭취했습니다.</VV_LastHoneyIngestedDurationAgo>
+
+<VV_ModSettings_AllowSelectModGenes>모드에서 추가된 유전자 허용</VV_ModSettings_AllowSelectModGenes>
+<VV_ModSettings_AllowSelectModGenesDesc>비비에게 랜덤한 유전자가 주어질때 다른 모드에서 추가된 유전자를 사용가능한지 여부를 설정합니다.</VV_ModSettings_AllowSelectModGenesDesc>
 </LanguageData>

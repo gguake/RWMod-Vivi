@@ -7,11 +7,11 @@
       <!-- Resources -->
       <li Class="StockGenerator_SingleDef">
         <thingDef>Silver</thingDef>
-        <countRange>500~2000</countRange>
+        <countRange>500~1500</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>Steel</thingDef>
-        <countRange>100~200</countRange>
+        <countRange>100~300</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>WoodLog</thingDef>
@@ -22,8 +22,12 @@
         <countRange>300~400</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
+        <thingDef>DevilstrandCloth</thingDef>
+        <countRange>100~250</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
         <thingDef>Gold</thingDef>
-        <countRange>-40~120</countRange>
+        <countRange>0~100</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>MedicineHerbal</thingDef>
@@ -32,12 +36,12 @@
       <li Class="StockGenerator_Category">
         <categoryDef>Textiles</categoryDef>
         <thingDefCountRange>1~2</thingDefCountRange>
-        <totalPriceRange>300~700</totalPriceRange>
+        <totalPriceRange>200~500</totalPriceRange>
       </li>
       <li Class="StockGenerator_Category">
         <categoryDef>ResourcesRaw</categoryDef>
         <thingDefCountRange>2~2</thingDefCountRange>
-        <totalPriceRange>100~400</totalPriceRange>
+        <totalPriceRange>100~300</totalPriceRange>
       </li>
       <li Class="StockGenerator_MultiDef">
         <thingDefs>
@@ -64,11 +68,11 @@
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_HoneyPollenCake</thingDef>
-        <countRange>100~200</countRange>
+        <countRange>150~250</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_Viviwax</thingDef>
-        <countRange>200~600</countRange>
+        <countRange>200~500</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_Propolis</thingDef>
@@ -76,7 +80,7 @@
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_UnknownSeed</thingDef>
-        <countRange>50~100</countRange>
+        <countRange>30~80</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_Fertilizer</thingDef>
@@ -85,7 +89,7 @@
       <li Class="StockGenerator_Tag">
         <tradeTag>VV_Petal</tradeTag>
         <thingDefCountRange>0~3</thingDefCountRange>
-        <countRange>50~150</countRange>
+        <countRange>50~250</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_ViviEgg</thingDef>
@@ -93,14 +97,22 @@
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_TitanicHornetWing</thingDef>
-        <countRange>0~2</countRange>
+        <countRange>0~4</countRange>
       </li>
       
       <!-- Drugs -->
       <li Class="StockGenerator_Tag">
         <tradeTag>VV_FloweringTea</tradeTag>
         <thingDefCountRange>1~3</thingDefCountRange>
-        <countRange>50~100</countRange>
+        <countRange>100~150</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>VV_Mead</thingDef>
+        <countRange>70~150</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>VV_CombatHormoneJelly</thingDef>
+        <countRange>0~20</countRange>
       </li>
       
       <!-- Techprints -->
@@ -145,11 +157,6 @@
         <maxTechLevelGenerate>Medieval</maxTechLevelGenerate>
         <countRange>0~2</countRange>
       </li>
-      <li Class="StockGenerator_MarketValue">
-        <tradeTag>VV_ViviExotic</tradeTag>
-        <maxTechLevelGenerate>Medieval</maxTechLevelGenerate>
-        <countRange>0~1</countRange>
-      </li>
       
       <!-- Apparel-->
       <li Class="StockGenerator_MarketValue">
@@ -164,8 +171,8 @@
       <!-- Buildings -->
       <li Class="StockGenerator_Tag">
         <tradeTag>VV_ArcanePlant</tradeTag>
-        <thingDefCountRange>1~9</thingDefCountRange>
-        <countRange>1~10</countRange>
+        <thingDefCountRange>1~4</thingDefCountRange>
+        <countRange>4~10</countRange>
       </li>
 
       <!-- Exotic -->

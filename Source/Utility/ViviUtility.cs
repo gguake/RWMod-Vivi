@@ -58,6 +58,14 @@ namespace VVRace
             if (def.prerequisite != null) { return false; }
             if (def == GeneDefOf.Inbred) { return false; }
 
+            if (!LoadedModManager.GetMod<VVRaceMod>().GetSettings<VVRaceModSettings>().allowSelectModGenes)
+            {
+                if (def.modContentPack != null && !def.modContentPack.PackageId.StartsWith(ModContentPack.CoreModPackageId))
+                {
+                    return false;
+                }
+            }
+
             if (def.exclusionTags != null)
             {
                 foreach (var tag in def.exclusionTags)

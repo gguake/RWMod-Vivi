@@ -65,6 +65,7 @@
       <canPlaceOverWall>false</canPlaceOverWall>
       <uninstallWork>250</uninstallWork>
       <haulToContainerDuration>250</haulToContainerDuration>
+      
     </building>
     <resourcesFractionWhenDeconstructed>1</resourcesFractionWhenDeconstructed>
 
@@ -99,6 +100,7 @@
 
     <building>
       <uninstallWork>1000</uninstallWork>
+      <ai_combatDangerous>true</ai_combatDangerous>
     </building>
     
     <tradeTags>

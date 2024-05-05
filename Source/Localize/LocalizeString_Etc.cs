@@ -14,5 +14,8 @@
 
         public const string VV_Reward_PurgeOutlanders = nameof(VV_Reward_PurgeOutlanders);
         public const string VV_Reward_PurgeOutlandersDesc = nameof(VV_Reward_PurgeOutlandersDesc);
+
+        public const string VV_ModSettings_AllowSelectModGenes = nameof(VV_ModSettings_AllowSelectModGenes);
+        public const string VV_ModSettings_AllowSelectModGenesDesc = nameof(VV_ModSettings_AllowSelectModGenesDesc);
     }
 }

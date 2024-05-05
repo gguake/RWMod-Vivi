@@ -13,15 +13,15 @@
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>Cloth</thingDef>
-        <countRange>50~200</countRange>
+        <countRange>50~400</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>MedicineHerbal</thingDef>
-        <countRange>0~30</countRange>
+        <countRange>0~40</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>Neutroamine</thingDef>
-        <countRange>0~30</countRange>
+        <countRange>0~80</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>Dye</thingDef>
@@ -35,7 +35,7 @@
 
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_FilteredHoney</thingDef>
-        <countRange>400~800</countRange>
+        <countRange>600~1000</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_RoyalJelly</thingDef>
@@ -50,12 +50,11 @@
         <countRange>10~50</countRange>
       </li>
       
+      <!-- Drugs -->
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_Mead</thingDef>
-        <countRange>40~80</countRange>
+        <countRange>50~100</countRange>
       </li>
-      
-      <!-- Drugs -->
       
       <!-- Techprints -->
       <!-- none -->
@@ -119,6 +118,11 @@
         <thingDef>Silver</thingDef>
         <countRange>300~1000</countRange>
       </li>
+      <li Class="StockGenerator_Category">
+        <categoryDef>Textiles</categoryDef>
+        <thingDefCountRange>1~2</thingDefCountRange>
+        <totalPriceRange>100~400</totalPriceRange>
+      </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_FilteredHoney</thingDef>
         <countRange>50~100</countRange>
@@ -138,14 +142,14 @@
       <li Class="StockGenerator_Tag">
         <tradeTag>VV_Petal</tradeTag>
         <thingDefCountRange>1~3</thingDefCountRange>
-        <countRange>30~120</countRange>
+        <countRange>100~200</countRange>
       </li>
       
       <!-- Drugs -->
       <li Class="StockGenerator_Tag">
         <tradeTag>VV_FloweringTea</tradeTag>
         <thingDefCountRange>1~2</thingDefCountRange>
-        <countRange>30~60</countRange>
+        <countRange>50~120</countRange>
       </li>
 
       <!-- Techprints -->
@@ -160,13 +164,13 @@
       <!-- Buildings -->
       <li Class="StockGenerator_Tag">
         <tradeTag>VV_ArcanePlantProductive</tradeTag>
-        <thingDefCountRange>1~4</thingDefCountRange>
+        <thingDefCountRange>1~3</thingDefCountRange>
         <countRange>3~9</countRange>
       </li>
       <li Class="StockGenerator_Tag">
         <tradeTag>VV_ArcanePlantCombat</tradeTag>
         <thingDefCountRange>0~2</thingDefCountRange>
-        <countRange>1~4</countRange>
+        <countRange>3~9</countRange>
       </li>
 
       <!-- Exotic -->
