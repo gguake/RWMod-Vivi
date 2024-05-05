@@ -18,6 +18,9 @@
     </graphicData>
     <drawerType>MapMeshAndRealTime</drawerType>
 
+    <uiIconPath>Things/Plants/VV_Peashooter</uiIconPath>
+    <uiIconScale>2</uiIconScale>
+
     <statBases>
       <MaxHitPoints>100</MaxHitPoints>
       <WorkToBuild>45000</WorkToBuild>
@@ -298,6 +301,10 @@
         </cleanlinessBonusAmountCurve>
       </li>
     </modExtensions>
+
+    <tradeTags Inherit="False">
+    </tradeTags>
+    <tradeability>None</tradeability>
   </ThingDef>
 
   <ThingDef ParentName="BaseBullet">
@@ -565,7 +572,7 @@
     <defName>VV_Cornlauncher</defName>
     <label>cornlauncher</label>
     <description>It is a arcane plant that detects nearby enemies and attacks by launching corn. It consumes mana each time it fires, and the launched corn explodes upon impact, scattering corn kernels around, which then explode on a smaller scale.
-\nIt is suitable for subduing large groups of enemies, but the explosions can also cause significant damage to allies, so careful placement is necessary.</description>
+\nIt works well against many enemies, but the explosion can also hurt allies. If health is low, it might explode, so you need to be careful where you put it.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_LivingLeaf</ThingDef>
     </descriptionHyperlinks>
@@ -573,11 +580,14 @@
     <tickerType>Normal</tickerType>
 
     <graphicData>
-      <texPath>Things/Plants/VV_Peashooter_Base</texPath>
+      <texPath>Things/Plants/VV_Cornlauncher_Base</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <drawerType>MapMeshAndRealTime</drawerType>
 
+    <uiIconPath>Things/Plants/VV_Cornlauncher</uiIconPath>
+    <uiIconScale>2</uiIconScale>
+    
     <statBases>
       <MaxHitPoints>100</MaxHitPoints>
       <WorkToBuild>45000</WorkToBuild>
@@ -589,6 +599,12 @@
     </costList>
 
     <comps>
+      <li Class="CompProperties_Explosive">
+        <explosiveRadius>1.9</explosiveRadius>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+        <startWickHitPointsPercent>0.25</startWickHitPointsPercent>
+        <wickTicks>150~300</wickTicks>
+      </li>
     </comps>
 
     <researchPrerequisites>
@@ -600,8 +616,8 @@
       <combatPower>125</combatPower>
       <ai_combatDangerous>true</ai_combatDangerous>
       <turretGunDef>VV_Gun_Cornlauncher</turretGunDef>
-      <turretBurstCooldownTime>6.4</turretBurstCooldownTime>
-      <turretBurstWarmupTime>2.8</turretBurstWarmupTime>
+      <turretBurstCooldownTime>5.7</turretBurstCooldownTime>
+      <turretBurstWarmupTime>2.3</turretBurstWarmupTime>
       <turretTopOffset>(0, 0.05)</turretTopOffset>
       <turretTopDrawSize>1</turretTopDrawSize>
     </building>
@@ -613,7 +629,7 @@
 
     <modExtensions>
       <li Class="VVRace.ManaExtension">
-        <manaCapacity>400</manaCapacity>
+        <manaCapacity>450</manaCapacity>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
           <mana>10</mana>
@@ -624,14 +640,14 @@
         <zeroManaDamageByChance>1~10</zeroManaDamageByChance>
         <zeroManaDurableTicks>30000</zeroManaDurableTicks>
         
-        <consumeManaPerVerbShoot>24</consumeManaPerVerbShoot>
+        <consumeManaPerVerbShoot>18</consumeManaPerVerbShoot>
       </li>
 
       <li Class="VVRace.GrowingArcanePlantData">
         <ingredients>
           <VV_UnknownSeed>1</VV_UnknownSeed>
           <MedicineHerbal>10</MedicineHerbal>
-          <RawCorn>150</RawCorn>
+          <RawCorn>100</RawCorn>
           <VV_Pollen>120</VV_Pollen>
         </ingredients>
 
@@ -697,17 +713,17 @@
 
     <projectile>
       <damageDef>Bomb</damageDef>
-      <speed>50</speed>
+      <speed>40</speed>
       <explosionRadius>1.1</explosionRadius>
-      <damageAmountBase>15</damageAmountBase>
-      <screenShakeFactor>0</screenShakeFactor>
+      <damageAmountBase>20</damageAmountBase>
+      <screenShakeFactor>0.25</screenShakeFactor>
     </projectile>
 
     <modExtensions>
       <li Class="VVRace.CornBulletData">
         <scatterBulletDef>VV_Bullet_CornKernel</scatterBulletDef>
-        <scatterRadius>4.6</scatterRadius>
-        <scatterCount>13~19</scatterCount>
+        <scatterRadius>5.5</scatterRadius>
+        <scatterCount>15~23</scatterCount>
         <includeExplosionCells>false</includeExplosionCells>
       </li>
     </modExtensions>
@@ -719,7 +735,7 @@
     <thingClass>Projectile_Explosive</thingClass>
 
     <graphicData>
-      <texPath>Things/Projectile/VV_Pea</texPath>
+      <texPath>Things/Projectile/VV_CornKernel</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <drawSize>(1,1)</drawSize>
       <shaderType>Transparent</shaderType>
@@ -727,9 +743,9 @@
 
     <projectile>
       <damageDef>Bomb</damageDef>
-      <speed>27</speed>
+      <speed>15</speed>
       <explosionRadius>0.6</explosionRadius>
-      <damageAmountBase>8</damageAmountBase>
+      <damageAmountBase>10</damageAmountBase>
       <screenShakeFactor>0</screenShakeFactor>
     </projectile>
   </ThingDef>
@@ -739,16 +755,17 @@
     <label>corn pod</label>
     <description>.</description>
     <graphicData>
-      <texPath>Things/Plants/VV_Pealauncher_Top</texPath>
+      <texPath>Things/Plants/VV_Cornlauncher_Top</texPath>
       <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2,2)</drawSize>
     </graphicData>
     <drawerType>MapMeshAndRealTime</drawerType>
 
     <statBases>
       <AccuracyTouch>0.24</AccuracyTouch>
       <AccuracyShort>0.34</AccuracyShort>
-      <AccuracyMedium>0.6</AccuracyMedium>
-      <AccuracyLong>0.5</AccuracyLong>
+      <AccuracyMedium>0.55</AccuracyMedium>
+      <AccuracyLong>0.45</AccuracyLong>
       <RangedWeapon_Cooldown>6.9</RangedWeapon_Cooldown>
       <DeteriorationRate>0</DeteriorationRate>
       <Mass>10</Mass>
@@ -760,10 +777,10 @@
         <verbClass>VVRace.Verb_ShootWithMana</verbClass>
         <defaultProjectile>VV_Bullet_Corn</defaultProjectile>
         <warmupTime>0</warmupTime>
-        <range>35.9</range>
-        <ticksBetweenBurstShots>85</ticksBetweenBurstShots>
+        <range>36.9</range>
+        <ticksBetweenBurstShots>60</ticksBetweenBurstShots>
         <burstShotCount>3</burstShotCount>
-        <forcedMissRadius>2.7</forcedMissRadius>
+        <forcedMissRadius>3.6</forcedMissRadius>
         <forcedMissEvenDispersal>true</forcedMissEvenDispersal>
         <soundCast>InfernoCannon_Fire</soundCast>
         <soundCastTail>GunTail_Heavy</soundCastTail>

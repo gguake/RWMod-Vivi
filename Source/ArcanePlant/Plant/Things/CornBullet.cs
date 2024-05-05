@@ -43,7 +43,7 @@ namespace VVRace
             {
                 foreach (var cell in selected)
                 {
-                    var flag = ProjectileHitFlags.NonTargetWorld;
+                    var flag = ProjectileHitFlags.All;
                     var projectile = (Projectile)GenSpawn.Spawn(data.scatterBulletDef, impactCell, map);
                     projectile.Launch(parentLauncher, startDrawPos, cell, cell, flag);
                 }

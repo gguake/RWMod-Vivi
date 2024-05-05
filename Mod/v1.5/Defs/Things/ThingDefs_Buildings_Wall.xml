@@ -167,17 +167,17 @@
 \nWhile it's very sturdy against various impacts, it's very vulnerable to fire.</description>
     
     <graphicData>
-      <texPath>Things/Building/Wall_Atlas_HoneycombWall</texPath>
+      <texPath>Things/Building/Wall_Atlas_HoneycombWall2</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <shaderType>CutoutWithOverlay</shaderType>
-      <color>(1.0, 0.8, 0.6, 1.0)</color>
+      <color>(1, 1, 1, 1)</color>
     </graphicData>
     
     <uiIconPath>Things/Building/Linked/WallPlanks_MenuIcon</uiIconPath>
     <uiIconColor>(1.0, 0.8, 0.6, 1.0)</uiIconColor>
     <statBases>
       <MaxHitPoints>480</MaxHitPoints>
-      <Flammability>0.7</Flammability>
+      <Flammability>0.75</Flammability>
     </statBases>
     <costList>
       <VV_Viviwax>2</VV_Viviwax>
