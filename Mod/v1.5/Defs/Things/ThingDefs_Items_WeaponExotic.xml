@@ -32,9 +32,8 @@
       <li>Melee</li>
       <li>MeleePiercer</li>
     </weaponClasses>
-    <weaponTags>
+    <weaponTags Inherit="False">
       <li>VV_ViviExotic</li>
-      <li>Spear</li>
     </weaponTags>
     
     <comps>
@@ -154,7 +153,7 @@
     <thingCategories Inherit="False">
       <li>VV_ViviWeapon</li>
     </thingCategories>
-    <weaponTags>
+    <weaponTags Inherit="False">
       <li>VV_ViviExotic</li>
       <li>VV_ViviGuardian</li>
     </weaponTags>

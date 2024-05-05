@@ -26,9 +26,8 @@
     <weaponClasses>
       <li>MeleePiercer</li>
     </weaponClasses>
-    <weaponTags>
+    <weaponTags Inherit="False">
       <li>VV_ViviWeapon</li>
-      <li>Spear</li>
     </weaponTags>
 
     <tools>
