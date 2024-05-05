@@ -12,7 +12,7 @@ namespace VVRace
             var map = BaseGen.globalSettings.map;
             var center = resolveParams.rect.CenterCell;
 
-            var turretDef = Rand.Bool ? VVThingDefOf.VV_Peashooter : VVThingDefOf.VV_Pealauncher;
+            var turretDef = Rand.Bool ? VVThingDefOf.VV_Peashooter : VVThingDefOf.VV_Cornlauncher;
 
             var pots = new List<(int xOffset, int zOffset, ThingDef plantDef)>()
             {
