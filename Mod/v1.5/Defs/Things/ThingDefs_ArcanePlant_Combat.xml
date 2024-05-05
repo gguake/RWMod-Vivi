@@ -496,7 +496,7 @@
         <manaCapacity>500</manaCapacity>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>50</mana>
+          <mana>40</mana>
         </manaConsumeRule>
       </li>
       
@@ -632,7 +632,7 @@
         <manaCapacity>450</manaCapacity>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>10</mana>
+          <mana>20</mana>
         </manaConsumeRule>
       </li>
 
