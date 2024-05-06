@@ -208,10 +208,6 @@
     <comps>
     </comps>
 
-    <researchPrerequisites>
-      <li>VV_CombatArcaneBotany</li>
-    </researchPrerequisites>
-
     <recoilPower>2</recoilPower>
     <building>
       <combatPower>125</combatPower>
