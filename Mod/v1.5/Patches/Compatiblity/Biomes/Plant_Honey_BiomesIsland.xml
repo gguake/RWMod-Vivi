@@ -3,7 +3,7 @@
   <Operation Class="PatchOperationSequence">
     <operations>
       <li Class="PatchOperationSequence" MayRequireAnyOf="BiomesTeam.BiomesIslands,BiomesTeam.BiomesIslands_steam">
-        <oprations>
+        <operations>
           <!-- BiomesIslands_FloweringFern -->
           <li Class="PatchOperationConditional">
             <xpath>Defs/ThingDef[defName="BiomesIslands_FloweringFern"]/comps</xpath>
@@ -103,7 +103,7 @@
               <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
             </value>
           </li>
-        </oprations>
+        </operations>
       </li>
     </operations>
   </Operation>
