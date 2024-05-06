@@ -56,7 +56,8 @@ namespace VVRace
             if (def.endogeneCategory != EndogeneCategory.None || def.biostatCpx == 0) { return false; }
             if (def.forcedHair != null || def.forcedHeadTypes?.Count > 0 || def.hairTagFilter != null || def.beardTagFilter != null || def.bodyType != null) { return false; }
             if (def.prerequisite != null) { return false; }
-            if (def == GeneDefOf.Inbred) { return false; }
+            if (def.statFactors != null && def.statFactors.Count == 1 && def.statFactors.Any(v => v.stat == StatDefOf.Fertility)) { return false; }
+            if (def.statOffsets != null && def.statOffsets.Count == 1 && def.statOffsets.Any(v => v.stat == StatDefOf.Fertility)) { return false; }
 
             if (!LoadedModManager.GetMod<VVRaceMod>().GetSettings<VVRaceModSettings>().allowSelectModGenes)
             {
@@ -71,7 +72,7 @@ namespace VVRace
                 foreach (var tag in def.exclusionTags)
                 {
                     switch (tag)
-                    {
+                    { 
                         case "HairStyle":
                         case "BeardStyle":
                         case "SkinColorOverride":
