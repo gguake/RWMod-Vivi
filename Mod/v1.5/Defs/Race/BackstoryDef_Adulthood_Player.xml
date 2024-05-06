@@ -4,7 +4,7 @@
     <defName>VV_ViviExiled</defName>
     <title>vivi exiled</title>
     <titleShort>exiled</titleShort>
-    <baseDesc>[PAWN_nameDef] was banished from the nest where he lived due to his different appearance. To survive, [PAWN_pronoun] learned various skills that are not necessary for ordinary royal vivi.</baseDesc>
+    <description>[PAWN_nameDef] was banished from the nest where he lived due to his different appearance. To survive, [PAWN_pronoun] learned various skills that are not necessary for ordinary royal vivi.</description>
     <spawnCategories>
       <li>VV_PlayerExiledBackstory</li>
     </spawnCategories>

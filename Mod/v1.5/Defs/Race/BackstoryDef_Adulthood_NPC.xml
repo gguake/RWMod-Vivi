@@ -11,7 +11,7 @@
     <defName>VV_ViviSettler</defName>
     <title>vivi settler</title>
     <titleShort>settler</titleShort>
-    <baseDesc>[PAWN_nameDef] is a Vivi belonging to the settlement.</baseDesc>
+    <description>[PAWN_nameDef] is a Vivi belonging to the settlement.</description>
     <skillGains>
       <Construction>2</Construction>
       <Crafting>1</Crafting>
@@ -30,7 +30,7 @@
     <defName>VV_ViviCook</defName>
     <title>vivi cook</title>
     <titleShort>cook</titleShort>
-    <baseDesc>[PAWN_nameDef] is a cook in vivi hive.</baseDesc>
+    <description>[PAWN_nameDef] is a cook in vivi hive.</description>
     <skillGains>
       <Cooking>5</Cooking>
       <Animals>3</Animals>
@@ -47,7 +47,7 @@
     <defName>VV_ViviGatherer</defName>
     <title>vivi gatherer</title>
     <titleShort>gatherer</titleShort>
-    <baseDesc>[PAWN_nameDef] is a gatherer in vivi hive.</baseDesc>
+    <description>[PAWN_nameDef] is a gatherer in vivi hive.</description>
     <skillGains>
       <Plants>5</Plants>
       <Animals>3</Animals>
@@ -64,7 +64,7 @@
     <defName>VV_ViviArchitect</defName>
     <title>vivi architect</title>
     <titleShort>architect</titleShort>
-    <baseDesc>[PAWN_nameDef] is a architect in vivi hive.</baseDesc>
+    <description>[PAWN_nameDef] is a architect in vivi hive.</description>
     <skillGains>
       <Artistic>5</Artistic>
       <Construction>3</Construction>
@@ -81,7 +81,7 @@
     <defName>VV_ViviResearcher</defName>
     <title>vivi researcher</title>
     <titleShort>researcher</titleShort>
-    <baseDesc>[PAWN_nameDef] is a researcher in vivi hive.</baseDesc>
+    <description>[PAWN_nameDef] is a researcher in vivi hive.</description>
     <skillGains>
       <Intellectual>5</Intellectual>
       <Medicine>5</Medicine>
@@ -97,7 +97,7 @@
     <defName>VV_ViviHerbalist</defName>
     <title>vivi herbalist</title>
     <titleShort>herbalist</titleShort>
-    <baseDesc>[PAWN_nameDef] is a herbalist in vivi hive.</baseDesc>
+    <description>[PAWN_nameDef] is a herbalist in vivi hive.</description>
     <skillGains>
       <Plants>5</Plants>
       <Medicine>3</Medicine>
@@ -117,7 +117,7 @@
     <defName>VV_ViviGuard</defName>
     <title>vivi guard</title>
     <titleShort>guard</titleShort>
-    <baseDesc>[PAWN_nameDef] is a guard in vivi hive.</baseDesc>
+    <description>[PAWN_nameDef] is a guard in vivi hive.</description>
     <skillGains>
       <Melee>5</Melee>
       <Shooting>3</Shooting>
@@ -138,7 +138,7 @@
     <defName>VV_ViviScout</defName>
     <title>vivi scout</title>
     <titleShort>scout</titleShort>
-    <baseDesc>[PAWN_nameDef] is a scout in vivi hive.</baseDesc>
+    <description>[PAWN_nameDef] is a scout in vivi hive.</description>
     <skillGains>
       <Shooting>5</Shooting>
       <Medicine>3</Medicine>
