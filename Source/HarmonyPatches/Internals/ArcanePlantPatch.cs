@@ -3,6 +3,7 @@ using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Reflection.Emit;
 using Verse;
 using VVRace.HarmonyPatches;
@@ -62,6 +63,12 @@ namespace VVRace
                 original: AccessTools.Method("RimWorld.WorkGiver_CleanFilth:HasJobOnThing"),
                 postfix: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(WorkGiver_CleanFilth_HasJobOnThing_Postfix)));
 
+            {
+                var innerType = typeof(Map).GetNestedTypes(BindingFlags.NonPublic).FirstOrDefault(t => t.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance).Any(m => m.Name.Contains("FinalizeLoading")));
+                var innerMethod = innerType.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault(m => m.Name.Contains("FinalizeLoading"));
+                harmony.Patch(innerMethod, postfix: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(Map_FinalizeLoading_OrderBy_Postfix)));
+            }
+
             Log.Message("!! [ViViRace] arcane plant patch complete");
         }
 
@@ -72,6 +79,11 @@ namespace VVRace
 
             if (newThingDef == null || oldThingDef == null) { return; }
             if (typeof(ArcanePlant).IsAssignableFrom(newThingDef.thingClass) && typeof(ArcanePlantPot).IsAssignableFrom(oldThingDef.thingClass))
+            {
+                __result = false;
+            }
+
+            if (typeof(ArcanePlantPot).IsAssignableFrom(newThingDef.thingClass) && typeof(ArcanePlant).IsAssignableFrom(oldThingDef.thingClass))
             {
                 __result = false;
             }
@@ -306,6 +318,14 @@ namespace VVRace
             if (room != null && room.ContainsThing(VVThingDefOf.VV_GatheringBarrel))
             {
                 __result = false;
+            }
+        }
+
+        private static void Map_FinalizeLoading_OrderBy_Postfix(ref float __result, Building t)
+        {
+            if (t is ArcanePlant)
+            {
+                __result += 0.00001f;
             }
         }
     }

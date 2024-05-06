@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <DutyDef>
+    <defName>VV_DefendViviBase</defName>
+    <alwaysShowWeapon>false</alwaysShowWeapon>
+    <thinkNode Class="ThinkNode_Priority">
+      <subNodes>
+        <li Class="JobGiver_TakeCombatEnhancingDrug">
+          <onlyIfInDanger>true</onlyIfInDanger>
+        </li>
+        <li Class="JobGiver_AIDefendPoint">
+          <targetAcquireRadius>28</targetAcquireRadius>
+          <targetKeepRadius>35</targetKeepRadius>
+        </li>
+
+        <li Class="ThinkNode_ForbidOutsideFlagRadius">
+          <maxDistToSquadFlag>20</maxDistToSquadFlag>
+          <subNodes>
+            <li Class="ThinkNode_Subtree">
+              <treeDef>SatisfyBasicNeeds</treeDef>
+            </li>
+          </subNodes>
+        </li>
+
+        <li Class="JobGiver_SeekSafeTemperature" />
+
+        <li Class="ThinkNode_ConditionalCloseToDutyTarget">
+          <maxDistToDutyTarget>28</maxDistToDutyTarget>
+          <subNodes>
+            <li Class="JobGiver_FightFiresNearPoint">
+              <maxDistFromPoint>28</maxDistFromPoint>
+            </li>
+    
+            <li Class="VVRace.JobGiver_FixDamagedNearPoint">
+              <maxDistFromPoint>28</maxDistFromPoint>
+            </li>
+            
+            <li Class="JobGiver_WanderAnywhere">
+              <wanderRadius>28</wanderRadius>
+            </li>
+          </subNodes>
+        </li>
+
+        <li Class="JobGiver_WanderNearDutyLocation">
+          <locomotionUrgencyOutsideRadius>Sprint</locomotionUrgencyOutsideRadius>
+        </li>
+      </subNodes>
+    </thinkNode>
+  </DutyDef>
+</Defs>

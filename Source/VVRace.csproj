@@ -151,6 +151,9 @@
     <Compile Include="Localize\LocalizeString_Stat.cs" />
     <Compile Include="MapGeneration\GenSteps\GenStep_ViviSettlementTurretGarden.cs" />
     <Compile Include="Hornet\IncidentWorker_HornetSwarm.cs" />
+    <Compile Include="MapGeneration\Lord\JobGiver_FixDamagedNearPoint.cs" />
+    <Compile Include="MapGeneration\Lord\LordJob_DefendViviBase.cs" />
+    <Compile Include="MapGeneration\Lord\LordToil_DefendViviBase.cs" />
     <Compile Include="MapGeneration\SymbolResolvers\SymbolResolver_ArtificialPlant.cs" />
     <Compile Include="MapGeneration\SymbolResolvers\Settlement\SymbolResolver_ThingSetStorage.cs" />
     <Compile Include="MapGeneration\SymbolResolvers\Settlement\SymbolResolver_TurretGarden.cs" />

@@ -1,5 +1,6 @@
 ﻿using RimWorld;
 using Verse;
+using Verse.AI;
 
 namespace VVRace
 {
@@ -218,5 +219,11 @@ namespace VVRace
         public static FleckDef HeatGlow_Intense;
         public static FleckDef ElectricalSpark;
         public static FleckDef Fleck_VaporizeCenterFlash;
+    }
+
+    [DefOf]
+    public static class VVDutyDefOf
+    {
+        public static DutyDef VV_DefendViviBase;
     }
 }

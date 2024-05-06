@@ -31,8 +31,10 @@ namespace VVRace
                 #region 폰 생성
                 if ((!resolveParams.settlementDontGeneratePawns) ?? true)
                 {
+                    var lordJob = new LordJob_DefendViviBase(faction, resolveParams.rect.CenterCell, false);
+
                     var singlePawnLord = resolveParams.settlementLord = resolveParams.singlePawnLord ??
-                        LordMaker.MakeNewLord(faction, new LordJob_DefendBase(faction, resolveParams.rect.CenterCell, resolveParams.attackWhenPlayerBecameEnemy ?? false), map);
+                        LordMaker.MakeNewLord(faction, lordJob, map);
 
                     var traverseParms = TraverseParms.For(TraverseMode.PassDoors);
                     var p = resolveParams;
