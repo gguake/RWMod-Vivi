@@ -22,6 +22,11 @@ namespace VVRace
             {
                 return false;
             }
+            if (!c.SupportsStructureType(map, VVThingDefOf.VV_ArcanePlantPot.terrainAffordanceNeeded))
+            {
+                return false;
+            }
+
             if (!map.reachability.CanReachMapEdge(c, TraverseParms.For(TraverseMode.PassDoors)))
             {
                 return false;
