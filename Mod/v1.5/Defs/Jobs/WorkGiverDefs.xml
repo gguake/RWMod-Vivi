@@ -52,6 +52,7 @@
     <defName>VV_FertilizeArcanePlant</defName>
     <label>fertilize arcane plant</label>
     <giverClass>VVRace.WorkGiver_FertilizeArcanePlant</giverClass>
+    <emergency>true</emergency>
     <workType>Hauling</workType>
     <verb>fertilize</verb>
     <gerund>fertilizing</gerund>
