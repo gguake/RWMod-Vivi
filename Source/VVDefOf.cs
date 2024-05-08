@@ -226,4 +226,10 @@ namespace VVRace
     {
         public static DutyDef VV_DefendViviBase;
     }
+
+    [DefOf]
+    public static class VVWorkGiverDefOf
+    {
+        public static WorkGiverDef VV_FertilizeArcanePlant;
+    }
 }

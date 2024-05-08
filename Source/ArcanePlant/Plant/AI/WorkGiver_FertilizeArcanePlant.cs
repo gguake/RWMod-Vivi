@@ -1,68 +1,71 @@
 ﻿using RimWorld;
+using System.Collections.Generic;
 using Verse;
 using Verse.AI;
 
 namespace VVRace
 {
-    public class WorkGiver_FertilizeArcanePlant : WorkGiver_Scanner
+    public class WorkGiver_FertilizeArcanePlant : WorkGiver
     {
-        public override ThingRequest PotentialWorkThingRequest => ThingRequest.ForGroup(ThingRequestGroup.BuildingArtificial);
+        private Dictionary<Map, List<ArcanePlant>> _candidatesCache = new Dictionary<Map, List<ArcanePlant>>();
+        private int _lastCachedTick = 0;
 
-        public override PathEndMode PathEndMode => PathEndMode.ClosestTouch;
-
-        public override bool HasJobOnThing(Pawn pawn, Thing t, bool forced = false)
+        public void RefreshCandidatesCache(bool force = false)
         {
-            var plant = t as ArcanePlant;
-            if (plant == null)
+            if (!force && GenTicks.TicksGame < _lastCachedTick + GenTicks.TickRareInterval) { return; }
+
+            _candidatesCache.RemoveAll(v => v.Key.Disposed);
+
+            foreach (var map in Find.Maps)
             {
-                return false;
+                if (!_candidatesCache.TryGetValue(map, out var list))
+                {
+                    list = new List<ArcanePlant>();
+                    _candidatesCache.Add(map, list);
+                }
+
+                list.Clear();
+                list.AddRange(ManaFluxGrid.GetFertilizeRequiredArcanePlants(map));
             }
 
-            if (!forced && !plant.ShouldAutoFertilizeNowIgnoringManaPct)
-            {
-                return false;
-            }
-
-            if (!plant.FertilizeAutoActivated || plant.Mana > plant.FertilizeAutoThreshold)
-            {
-                return false;
-            }
-
-            if (!t.Spawned)
-            {
-                return false;
-            }
-
-            if (!pawn.CanReserve(t, ignoreOtherReservations: forced))
-            {
-                return false;
-            }
-
-            if (FindFertilizer(pawn) == null)
-            {
-                return false;
-            }
-
-            return true;
+            _lastCachedTick = GenTicks.TicksGame;
         }
 
-        public override Job JobOnThing(Pawn pawn, Thing t, bool forced = false)
+        public override Job NonScanJob(Pawn pawn)
         {
-            var plant = t as ArcanePlant;
-            if (plant == null) { return null; }
+            if (!pawn.Spawned || pawn.Map == null || !pawn.IsColonistPlayerControlled) { return null; }
 
-            var fertilizer = FindFertilizer(pawn);
-            if (fertilizer == null) { return null; }
+            RefreshCandidatesCache();
 
-            if (!pawn.CanReach(plant, PathEndMode.Touch, MaxPathDanger(pawn)))
+            if (!_candidatesCache.TryGetValue(pawn.Map, out var plants) || plants.NullOrEmpty())
             {
                 return null;
             }
 
-            return JobMaker.MakeJob(VVJobDefOf.VV_FertilizeArcanePlant, plant, fertilizer);
+            ArcanePlant target = null;
+            foreach (var plant in plants)
+            {
+                if (!plant.Spawned || plant.IsForbidden(pawn) || pawn.Faction != plant.Faction) { continue; }
+                if (!plant.ShouldAutoFertilizeNowIgnoringManaPct || !plant.FertilizeAutoActivated || plant.Mana > plant.FertilizeAutoThreshold) { continue; }
+                if (!pawn.CanReserveAndReach(plant, PathEndMode.Touch, Danger.Deadly)) { continue; }
+
+                target = plant;
+                break;
+            }
+
+            if (target != null)
+            {
+                var fertilizer = FindFertilizer(pawn);
+                if (fertilizer != null)
+                {
+                    return JobMaker.MakeJob(VVJobDefOf.VV_FertilizeArcanePlant, target, fertilizer);
+                }
+            }
+
+            return null;
         }
 
-        private Thing FindFertilizer(Pawn pawn)
+        public static Thing FindFertilizer(Pawn pawn)
         {
             return GenClosest.ClosestThingReachable(
                 pawn.Position,

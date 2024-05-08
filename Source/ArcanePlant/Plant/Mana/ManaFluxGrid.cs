@@ -61,6 +61,23 @@ namespace VVRace
         private static Dictionary<Map, ManaFluxGrid> _grids = new Dictionary<Map, ManaFluxGrid>();
         private static Dictionary<Map, int> _gridSpawnedCount = new Dictionary<Map, int>();
 
+        public static IEnumerable<ArcanePlant> GetFertilizeRequiredArcanePlants(Map map)
+        {
+            if (!_grids.ContainsKey(map)) { yield break; }
+
+            var grid = _grids[map];
+            foreach (var network in grid._manaFluxNetworks)
+            {
+                foreach (var plant in network.ManaAcceptors.Where(v => v is ArcanePlant).Cast<ArcanePlant>())
+                {
+                    if (plant.Spawned && plant != null && plant.FertilizeAutoActivated && plant.Mana <= plant.FertilizeAutoThreshold)
+                    {
+                        yield return plant;
+                    }
+                }
+            }
+        }
+
         public static void Notify_SpawnManaAcceptor(ManaAcceptor acceptor)
         {
             var map = acceptor.Map;

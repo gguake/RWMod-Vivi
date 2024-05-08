@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 using Verse;
+using Verse.AI;
 
 namespace VVRace
 {
@@ -55,7 +56,12 @@ namespace VVRace
         public int FertilizeAutoThreshold
         {
             get => (int)Mathf.Clamp(_fertilizeAutoThreshold, 0, ManaExtension.manaCapacity - ManaByFertilizer);
-            set => _fertilizeAutoThreshold = value;
+            set
+            {
+                ((WorkGiver_FertilizeArcanePlant)VVWorkGiverDefOf.VV_FertilizeArcanePlant.Worker).RefreshCandidatesCache(true);
+
+                _fertilizeAutoThreshold = value;
+            }
         }
 
         public int RequiredFertilizerToFullyRecharge
@@ -70,7 +76,9 @@ namespace VVRace
         {
             get
             {
-                return !this.IsBurning() && Map.designationManager.DesignationOn(this, DesignationDefOf.Uninstall) == null;
+                return !this.IsBurning() && 
+                    Map.designationManager.DesignationOn(this, DesignationDefOf.Uninstall) == null &&
+                    Map.designationManager.DesignationOn(this, DesignationDefOf.Deconstruct) == null;
             }
         }
 
@@ -103,7 +111,7 @@ namespace VVRace
         {
             base.PostMake();
 
-            FertilizeAutoThreshold = Mathf.FloorToInt(ManaExtension.manaCapacity * 0.1f);
+            FertilizeAutoThreshold = Mathf.FloorToInt(ManaExtension.manaCapacity * 0.25f);
         }
 
         public override void Print(SectionLayer layer)
@@ -255,6 +263,8 @@ namespace VVRace
                 CommandFertilizeAutoActivated.toggleAction = () =>
                 {
                     _fertilizeAutoActivated = !_fertilizeAutoActivated;
+
+                    ((WorkGiver_FertilizeArcanePlant)VVWorkGiverDefOf.VV_FertilizeArcanePlant.Worker).RefreshCandidatesCache(true);
                 };
                 yield return CommandFertilizeAutoActivated;
 
@@ -365,6 +375,5 @@ namespace VVRace
             var minified = this.MakeMinified();
             GenPlace.TryPlaceThing(minified, position, map, ThingPlaceMode.Direct);
         }
-
     }
 }

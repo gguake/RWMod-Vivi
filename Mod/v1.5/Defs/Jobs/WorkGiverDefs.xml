@@ -55,7 +55,7 @@
     <workType>Hauling</workType>
     <verb>fertilize</verb>
     <gerund>fertilizing</gerund>
-    <priorityInType>100</priorityInType>
+    <priorityInType>155</priorityInType>
     <requiredCapacities>
       <li>Manipulation</li>
     </requiredCapacities>

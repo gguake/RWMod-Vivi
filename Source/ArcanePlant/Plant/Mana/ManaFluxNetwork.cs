@@ -29,6 +29,8 @@ namespace VVRace
         public int NetworkHash { get; private set; }
         public Queue<ManaFluxNetworkHistory> FluxHistory { get; private set; } = new Queue<ManaFluxNetworkHistory>();
 
+        public IEnumerable<ManaAcceptor> ManaAcceptors => _nodes.Keys;
+
         private Dictionary<ManaAcceptor, ManaFluxNetworkNode> _nodes { get; }
         private List<ManaFluxNetworkNode> _nodesList { get; }
         private int _lastRefreshTick;
