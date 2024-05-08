@@ -1088,6 +1088,7 @@
     <description>a arcane plant that resembles a dandelion seed and converts the power of the wind into mana when outdoors.
 \nThe fluff of this grass is very light and has the property of flying well, so it can also be used to send small items.</description>
     <descriptionHyperlinks>
+      <ThingDef>VV_SkyweedFluff</ThingDef>
       <ThingDef>VV_LivingLeaf</ThingDef>
     </descriptionHyperlinks>
 
@@ -1204,6 +1205,11 @@
     <defName>VV_SkyweedBox</defName>
     <label>skyweed box</label>
     <description>a box that can send the fluff of skyweed far away by tying it together. It is bound with viviwax and cloth to prevent damage. No special fuel is required, but it has a smaller capacity and shorter transport distance than the transport pods used by outlanders.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_Skyweed</ThingDef>
+      <ThingDef>VV_SkyweedFluff</ThingDef>
+    </descriptionHyperlinks>
+
     <graphicData>
       <texPath>Things/Building/VV_SkyweedPod</texPath>
       <graphicClass>Graphic_Single</graphicClass>

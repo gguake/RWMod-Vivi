@@ -150,6 +150,7 @@
     <description>These are fluff obtained from disassembling skyweed. They are very light and have properties that allow them to float in the air due to the remaining mana. By tying the fluff together, objects can be sent flying into the sky.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_Skyweed</ThingDef>
+      <ThingDef>VV_SkyweedBox</ThingDef>
     </descriptionHyperlinks>
 
     <graphicData>
