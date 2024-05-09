@@ -21,10 +21,10 @@
       <WorkToMake>2000</WorkToMake>
       <Mass>0.5</Mass>
       <AccuracyTouch>0.85</AccuracyTouch>
-      <AccuracyShort>0.64</AccuracyShort>
+      <AccuracyShort>0.6</AccuracyShort>
       <AccuracyMedium>0.2</AccuracyMedium>
       <AccuracyLong>0.03</AccuracyLong>
-      <RangedWeapon_Cooldown>1.0</RangedWeapon_Cooldown>
+      <RangedWeapon_Cooldown>0.8</RangedWeapon_Cooldown>
     </statBases>
 
     <thingCategories Inherit="False">
@@ -44,7 +44,7 @@
         <hasStandardCommand>true</hasStandardCommand>
         <defaultProjectile>VV_Arrow_SlingshotStone</defaultProjectile>
         <warmupTime>2.0</warmupTime>
-        <range>11.9</range>
+        <range>13.9</range>
         <soundCast>Bow_Small</soundCast>
       </li>
     </verbs>
@@ -104,8 +104,8 @@
       <extraDamages>
         <li>
           <def>Stun</def>
-          <amount>14</amount>
-          <chance>0.33</chance>
+          <amount>10</amount>
+          <chance>0.25</chance>
         </li>
       </extraDamages>
     </projectile>
@@ -129,10 +129,10 @@
       <WorkToMake>4500</WorkToMake>
       <Mass>0.3</Mass>
       <AccuracyTouch>0.9</AccuracyTouch>
-      <AccuracyShort>0.7</AccuracyShort>
+      <AccuracyShort>0.75</AccuracyShort>
       <AccuracyMedium>0.2</AccuracyMedium>
       <AccuracyLong>0.1</AccuracyLong>
-      <RangedWeapon_Cooldown>1.0</RangedWeapon_Cooldown>
+      <RangedWeapon_Cooldown>1.8</RangedWeapon_Cooldown>
     </statBases>
     
     <thingCategories Inherit="False">
@@ -151,7 +151,7 @@
         <verbClass>Verb_Shoot</verbClass>
         <hasStandardCommand>true</hasStandardCommand>
         <defaultProjectile>VV_Dart_ShockDart</defaultProjectile>
-        <warmupTime>1.7</warmupTime>
+        <warmupTime>1.2</warmupTime>
         <range>15.9</range>
         <soundCast>Interact_BeatFire</soundCast>
         <rangedFireRulepack>Combat_RangedFire_Thrown</rangedFireRulepack>
@@ -179,7 +179,7 @@
     <costList>
       <VV_Viviwax>35</VV_Viviwax>
       <Steel>20</Steel>
-      <VV_SparklingPetal>15</VV_SparklingPetal>
+      <VV_SparklingPetal>5</VV_SparklingPetal>
     </costList>
 
     <recipeMaker>
@@ -220,7 +220,7 @@
     <projectile>
       <damageDef>Stab</damageDef>
       <damageAmountBase>8</damageAmountBase>
-      <speed>30</speed>
+      <speed>24</speed>
 
       <extraDamages>
         <li>
@@ -249,9 +249,9 @@
     <statBases>
       <WorkToMake>9000</WorkToMake>
       <Mass>2</Mass>
-      <AccuracyTouch>0.5</AccuracyTouch>
-      <AccuracyShort>0.7</AccuracyShort>
-      <AccuracyMedium>0.5</AccuracyMedium>
+      <AccuracyTouch>0.6</AccuracyTouch>
+      <AccuracyShort>0.72</AccuracyShort>
+      <AccuracyMedium>0.48</AccuracyMedium>
       <AccuracyLong>0.2</AccuracyLong>
       <RangedWeapon_Cooldown>1.5</RangedWeapon_Cooldown>
     </statBases>
@@ -275,7 +275,7 @@
         <hasStandardCommand>true</hasStandardCommand>
         <defaultProjectile>VV_Arrow_LongJavelin</defaultProjectile>
         <warmupTime>2.2</warmupTime>
-        <range>21.9</range>
+        <range>22.9</range>
         <soundCast>Interact_BeatFire</soundCast>
         <rangedFireRulepack>Combat_RangedFire_Thrown</rangedFireRulepack>
       </li>
@@ -343,7 +343,7 @@
       <damageAmountBase>21</damageAmountBase>
       <stoppingPower>2</stoppingPower>
       <armorPenetrationBase>0.2</armorPenetrationBase>
-      <speed>22</speed>
+      <speed>24</speed>
     </projectile>
   </ThingDef>
 

@@ -60,13 +60,13 @@
       <MaxHitPoints>150</MaxHitPoints>
       <Mass>0.05</Mass>
       <Flammability>0.7</Flammability>
-      <StuffPower_Armor_Sharp>0.4</StuffPower_Armor_Sharp>
-      <StuffPower_Armor_Blunt>0.54</StuffPower_Armor_Blunt>
+      <StuffPower_Armor_Sharp>0.36</StuffPower_Armor_Sharp>
+      <StuffPower_Armor_Blunt>0.5</StuffPower_Armor_Blunt>
       <StuffPower_Armor_Heat>0.24</StuffPower_Armor_Heat>
-      <StuffPower_Insulation_Cold>6</StuffPower_Insulation_Cold>
-      <StuffPower_Insulation_Heat>3</StuffPower_Insulation_Heat>
+      <StuffPower_Insulation_Cold>3</StuffPower_Insulation_Cold>
+      <StuffPower_Insulation_Heat>0</StuffPower_Insulation_Heat>
       <SharpDamageMultiplier>0.3</SharpDamageMultiplier>
-      <BluntDamageMultiplier>1</BluntDamageMultiplier>
+      <BluntDamageMultiplier>0.9</BluntDamageMultiplier>
       <DeteriorationRate>2</DeteriorationRate>
     </statBases>
     <healthAffectsPrice>false</healthAffectsPrice>
