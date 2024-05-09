@@ -10,6 +10,13 @@ namespace VVRace
         private Dictionary<Map, List<ArcanePlant>> _candidatesCache = new Dictionary<Map, List<ArcanePlant>>();
         private int _lastCachedTick = 0;
 
+        public List<ArcanePlant> GetCachedCandidates(Map map)
+        {
+            RefreshCandidatesCache();
+
+            return _candidatesCache.TryGetValue(map, out var list) ? list : null;
+        }
+
         public void RefreshCandidatesCache(bool force = false)
         {
             if (!force && GenTicks.TicksGame < _lastCachedTick + GenTicks.TickRareInterval) { return; }

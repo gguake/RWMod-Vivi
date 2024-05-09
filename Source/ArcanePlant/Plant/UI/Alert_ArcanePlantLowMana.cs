@@ -17,12 +17,10 @@ namespace VVRace
                 var map = Find.CurrentMap;
                 if (map != null)
                 {
-                    foreach (var building in map.listerThings.ThingsInGroup(ThingRequestGroup.BuildingArtificial))
+                    var candidates = ((WorkGiver_FertilizeArcanePlant)VVWorkGiverDefOf.VV_FertilizeArcanePlant.Worker).GetCachedCandidates(map);
+                    if (candidates != null)
                     {
-                        if (building is ArcanePlant plant && plant.Faction == Faction.OfPlayer && plant.ManaChargeRatio <= 0.05f)
-                        {
-                            dangerTargets.Add(building);
-                        }
+                        dangerTargets.AddRange(candidates);
                     }
                 }
 
