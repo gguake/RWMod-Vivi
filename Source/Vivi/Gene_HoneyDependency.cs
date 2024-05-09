@@ -53,38 +53,9 @@ namespace VVRace
 
         public override void Notify_IngestedThing(Thing thing, int numTaken)
         {
-            var compIngredients = thing.TryGetComp<CompIngredients>();
-            if (compIngredients != null)
+            if (IsFoodContainingHoney(thing))
             {
-                for (int i = 0; i < compIngredients.ingredients.Count; ++i)
-                {
-                    var ingredientDef = compIngredients.ingredients[i];
-                    if (ingredientDef.GetCompProperties<CompProperties_Honey>() != null)
-                    {
-                        Reset();
-                        return;
-                    }
-
-                    var drugCompProps = ingredientDef.GetCompProperties<CompProperties_Drug>();
-                    if (drugCompProps != null && drugCompProps.chemical == VVChemicalDefOf.Ambrosia)
-                    {
-                        Reset();
-                        return;
-                    }
-                }
-            }
-            else
-            {
-                if (thing.TryGetComp<CompHoney>() != null)
-                {
-                    Reset();
-                }
-
-                var compDrug = thing.TryGetComp<CompDrug>();
-                if (compDrug != null && compDrug.Props.chemical == VVChemicalDefOf.Ambrosia)
-                {
-                    Reset();
-                }
+                Reset();
             }
         }
 
@@ -103,6 +74,45 @@ namespace VVRace
         {
             base.ExposeData();
             Scribe_Values.Look(ref lastIngestedTick, "lastIngestedTick", 0);
+        }
+
+        public static bool IsFoodContainingHoney(Thing thing)
+        {
+            var compIngredients = thing.TryGetComp<CompIngredients>();
+            if (compIngredients != null)
+            {
+                for (int i = 0; i < compIngredients.ingredients.Count; ++i)
+                {
+                    var ingredientDef = compIngredients.ingredients[i];
+                    if (IsFoodContainingHoney(ingredientDef))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            if (IsFoodContainingHoney(thing.def))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public static bool IsFoodContainingHoney(ThingDef thingDef)
+        {
+            if (thingDef.GetCompProperties<CompProperties_Honey>() != null)
+            {
+                return true;
+            }
+
+            var drugCompProps = thingDef.GetCompProperties<CompProperties_Drug>();
+            if (drugCompProps != null && drugCompProps.chemical == VVChemicalDefOf.Ambrosia)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

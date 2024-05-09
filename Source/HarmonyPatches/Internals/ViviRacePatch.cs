@@ -57,6 +57,11 @@ namespace VVRace.HarmonyPatches
                 original: AccessTools.Method(typeof(PawnGenerator), "GenerateGenes"),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(PawnGenerator_GenerateGenes_Postfix)));
 
+            // 꿀 섭취 필요시 음식 우선도 재설정
+            harmony.Patch(
+                original: AccessTools.Method(typeof(FoodUtility), nameof(FoodUtility.FoodOptimality)),
+                postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(FoodUtility_FoodOptimality_Postfix)));
+
             Log.Message("!! [ViViRace] race patch complete");
         }
 
@@ -213,6 +218,27 @@ namespace VVRace.HarmonyPatches
                 foreach (var gene in genes)
                 {
                     pawn.genes.AddGene(gene, true);
+                }
+            }
+        }
+
+        private const float FoodOptimality_Honey_AdaptValue = 120f;
+        private static void FoodUtility_FoodOptimality_Postfix(ref float __result, Pawn eater, Thing foodSource, ThingDef foodDef)
+        {
+            var gene = eater.genes?.GetFirstGeneOfType<Gene_HoneyDependency>();
+            if (gene != null && gene.Active)
+            {
+                var hediff = gene.LinkedHediff;
+                if (hediff != null && hediff.CurStageIndex > 0)
+                {
+                    if (Gene_HoneyDependency.IsFoodContainingHoney(foodSource))
+                    {
+                        __result += FoodOptimality_Honey_AdaptValue;
+                    }
+                    else if (foodSource.def != foodDef && Gene_HoneyDependency.IsFoodContainingHoney(foodDef))
+                    {
+                        __result += FoodOptimality_Honey_AdaptValue;
+                    }
                 }
             }
         }
