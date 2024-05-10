@@ -52,7 +52,7 @@ namespace VVRace
             equipmentDef = equipment.def;
             damageMultiplier = equipment.GetStatValue(StatDefOf.RangedWeapon_DamageMultiplier);
             equipment.TryGetQuality(out equipmentQuality);
-            psychicMultiplier = caster.GetStatValue(StatDefOf.PsychicSensitivity);
+            psychicMultiplier = Mathf.Min(10f, Mathf.Pow(2.4f, caster.GetStatValue(StatDefOf.PsychicSensitivity) / 2.67f - 1f));
         }
 
         public override void Tick()

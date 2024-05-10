@@ -180,8 +180,8 @@
         <verbClass>VVRace.Verb_SpawnNeedle</verbClass>
         <hasStandardCommand>true</hasStandardCommand>
         <defaultProjectile>VV_Projectile_EltexNeedle</defaultProjectile>
-        <warmupTime>1.7</warmupTime>
-        <range>38.9</range>
+        <warmupTime>1.0</warmupTime>
+        <range>40.6</range>
         <soundCast>Interact_BeatFire</soundCast>
         <rangedFireRulepack>Combat_RangedFire_Thrown</rangedFireRulepack>
       </li>
