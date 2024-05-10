@@ -3,7 +3,7 @@
   <MentalBreakDef>
     <defName>VV_HornetBerserk</defName>
     <mentalState>VV_HornetBerserk</mentalState>
-    <baseCommonality>1</baseCommonality>
+    <baseCommonality>0</baseCommonality>
     <intensity>Extreme</intensity>
   </MentalBreakDef>
   
