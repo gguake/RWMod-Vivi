@@ -1,6 +1,8 @@
 ﻿using HarmonyLib;
 using RimWorld;
+using RimWorld.BaseGen;
 using System.Linq;
+using System.Reflection;
 using Verse;
 using Verse.AI;
 
@@ -56,6 +58,12 @@ namespace VVRace.HarmonyPatches
             harmony.Patch(
                 original: AccessTools.Method(typeof(PawnGenerator), "GenerateGenes"),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(PawnGenerator_GenerateGenes_Postfix)));
+
+            {
+                var innerType = typeof(BaseGenUtility).GetNestedTypes(BindingFlags.NonPublic).FirstOrDefault(t => t.GetField("costCalculator") != null);
+                var innerMehtod = innerType.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault();
+                harmony.Patch(innerMehtod, postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(BaseGenUtility_TryRandomInexpensiveFloor_Where_Postfix)));
+            }
 
             Log.Message("!! [ViViRace] race patch complete");
         }
@@ -214,6 +222,14 @@ namespace VVRace.HarmonyPatches
                 {
                     pawn.genes.AddGene(gene, true);
                 }
+            }
+        }
+
+        private static void BaseGenUtility_TryRandomInexpensiveFloor_Where_Postfix(ref bool __result, TerrainDef x)
+        {
+            if (__result && (x == VVTerrainDefOf.VV_ViviCreamFloor || x == VVTerrainDefOf.VV_HoneycombTile || x == VVTerrainDefOf.VV_SterileHoneycombTile))
+            {
+                __result = false;
             }
         }
     }
