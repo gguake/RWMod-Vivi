@@ -214,6 +214,11 @@ namespace VVRace
             _lastManagementTicks = forceTick == null ? GenTicks.TicksGame : forceTick.Value;
         }
 
+        public void ForceProgress(int ticks)
+        {
+            _billStartTicks -= ticks;
+        }
+
         private void RefreshPlantNeeds(GrowingArcanePlantData data, int ticks)
         {
             var room = _billOwner.GetRoom();

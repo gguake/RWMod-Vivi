@@ -145,7 +145,7 @@ namespace VVRace
                 if (_bill.Stage == GrowingArcanePlantBillStage.Growing && DebugSettings.godMode)
                 {
                     var commandDecreaseLife = new Command_Action();
-                    commandDecreaseLife.defaultLabel = "Decrease Life -10%";
+                    commandDecreaseLife.defaultLabel = "DEV: Decrease Life -10%";
                     commandDecreaseLife.action = () =>
                     {
                         _bill.Health -= _bill.Data.maxHealth * 0.1f;
@@ -153,7 +153,7 @@ namespace VVRace
                     yield return commandDecreaseLife;
 
                     var commandDecreaseMana = new Command_Action();
-                    commandDecreaseMana.defaultLabel = "Decrease Mana -10%";
+                    commandDecreaseMana.defaultLabel = "DEV: Decrease Mana -10%";
                     commandDecreaseMana.action = () =>
                     {
                         _bill.Mana -= _bill.Data.maxMana * 0.1f;
@@ -161,12 +161,20 @@ namespace VVRace
                     yield return commandDecreaseMana;
 
                     var commandMakeManageZero = new Command_Action();
-                    commandMakeManageZero.defaultLabel = "Make Management 0%";
+                    commandMakeManageZero.defaultLabel = "DEV: Make Management 0%";
                     commandMakeManageZero.action = () =>
                     {
                         _bill.Manage(1);
                     };
                     yield return commandMakeManageZero;
+
+                    var commandAddProgress = new Command_Action();
+                    commandAddProgress.defaultLabel = "DEV: Progress 1 day";
+                    commandAddProgress.action = () =>
+                    {
+                        _bill.ForceProgress(60000);
+                    };
+                    yield return commandAddProgress;
                 }
             }
         }
