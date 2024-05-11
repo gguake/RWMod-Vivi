@@ -10,17 +10,17 @@ namespace VVRace
         {
             new CurvePoint(0f, 1f),
             new CurvePoint(2.999f, 1f),
-            new CurvePoint(3f, 2f),
-            new CurvePoint(10f, 3.5f),
-            new CurvePoint(20f, 4.5f),
-            new CurvePoint(100f, 7f),
+            new CurvePoint(3f, 2.5f),
+            new CurvePoint(10f, 6f),
+            new CurvePoint(20f, 8.5f),
+            new CurvePoint(100f, 11f),
         });
 
         private static SimpleCurve _curvePointFactor = new SimpleCurve(new CurvePoint[]
         {
             new CurvePoint(0f, 1f),
-            new CurvePoint(5f, 1f),
-            new CurvePoint(15f, 1.5f),
+            new CurvePoint(7f, 1f),
+            new CurvePoint(15f, 1.25f),
             new CurvePoint(20f, 2.0f),
             new CurvePoint(100f, 2.5f),
         });
