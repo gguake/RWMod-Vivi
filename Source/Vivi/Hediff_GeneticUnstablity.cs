@@ -5,16 +5,16 @@ namespace VVRace
 {
     public class Hediff_GeneticUnstablity : HediffWithComps
     {
-        private const int SeverityChangeInterval = 5000;
+        private const int SeverityChangeInterval = 30000;
         private const float TendSuccessChanceFactor = 0.5f;
-        private const float TendSeverityReduction = 0.3f;
+        private const float TendSeverityReduction = 0.4f;
 
         private float _intervalFactor;
 
         public override void PostMake()
         {
             base.PostMake();
-            _intervalFactor = Rand.Range(0.1f, 2f);
+            _intervalFactor = Rand.Range(0.25f, 2f);
         }
 
         public override void ExposeData()
@@ -28,7 +28,7 @@ namespace VVRace
             base.Tick();
             if (pawn.IsHashIntervalTick((int)(SeverityChangeInterval * _intervalFactor)))
             {
-                Severity += Rand.Range(-0.3f, 0.5f);
+                Severity += Rand.Range(-0.25f, 0.25f);
 
                 if (Severity >= 1f)
                 {
