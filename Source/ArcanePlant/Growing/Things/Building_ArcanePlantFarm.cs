@@ -10,6 +10,8 @@ namespace VVRace
     [StaticConstructorOnStartup]
     public class Building_ArcanePlantFarm : Building, IThingHolder, INotifyHauledTo, IConditionalGraphicProvider
     {
+        public const float EverFlowerChance = 0.05f;
+
         public GrowingArcanePlantBill Bill => _bill;
 
         public float FarmTemperature => AmbientTemperature;
@@ -264,8 +266,24 @@ namespace VVRace
                                     }
                                 }
                             }
-
                             Messages.Message(LocalizeString_Message.VV_Message_CompleteGrowingArcanePlant.Translate(_bill.RecipeTarget.LabelCap, amountInt), this, MessageTypeDefOf.PositiveEvent);
+
+                            if (Rand.ChanceSeeded(EverFlowerChance, GenTicks.TicksGame))
+                            {
+                                var thing = ThingMaker.MakeThing(VVThingDefOf.VV_Everflower);
+                                thing.SetFactionDirect(Faction);
+                                var minified = thing.MakeMinified();
+
+                                if (!GenPlace.TryPlaceThing(minified, Position, Map, ThingPlaceMode.Direct))
+                                {
+                                    if (!GenPlace.TryPlaceThing(minified, Position, Map, ThingPlaceMode.Near))
+                                    {
+                                        Log.Error($"failed to place arcane plant from farm");
+                                    }
+                                }
+                                Messages.Message(LocalizeString_Message.VV_Message_CompleteGrowingArcanePlant.Translate(VVThingDefOf.VV_Everflower.LabelCap, 1), this, MessageTypeDefOf.PositiveEvent);
+                            }
+
                             _bill = null;
                         }
                         else

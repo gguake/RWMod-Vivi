@@ -69,6 +69,11 @@ namespace VVRace
                 // 접근 불가능한 경우
                 if (!pawn.CanReserveAndReach(thing, PathEndMode.Touch, recipeDef.maxPathDanger)) { continue; }
 
+                if (thing is IGatherableTarget gatherableTarget)
+                {
+                    if (!gatherableTarget.CanGatherByPawn(pawn, recipeDef)) { continue; }
+                }
+
                 return thing;
             }
 

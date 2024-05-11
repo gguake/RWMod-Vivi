@@ -6,6 +6,13 @@ using Verse.AI;
 
 namespace VVRace
 {
+    public interface IGatherableTarget
+    {
+        bool CanGatherByPawn(Pawn pawn, RecipeDef_Gathering recipe);
+
+        void Notify_Gathered(Pawn pawn, RecipeDef_Gathering recipe);
+    }
+
     public abstract class GatherWorker
     {
         public RecipeDef_Gathering recipeDef;
@@ -44,6 +51,12 @@ namespace VVRace
                         compGatherable.Gathered(recipe.targetCooldownStat);
                     }
                 }
+            }
+
+
+            if (target is IGatherableTarget notifyReceiver)
+            {
+                notifyReceiver.Notify_Gathered(pawn, recipe);
             }
         }
 

@@ -36,4 +36,7 @@
   <VV_GeneticUnstability.stages.painful.label>고통</VV_GeneticUnstability.stages.painful.label>
   <VV_GeneticUnstability.stages.debilitating.label>쇠약</VV_GeneticUnstability.stages.debilitating.label>
   <VV_GeneticUnstability.stages.fatal.label>치명적</VV_GeneticUnstability.stages.fatal.label>
+
+  <VV_EverflowerImpact.label>영원꽃 피로</VV_EverflowerImpact.label>
+  <VV_EverflowerImpact.description>영원꽃의 향에 영향을 받아 다소 피로해진 상태입니다.</VV_EverflowerImpact.description>
 </LanguageData>

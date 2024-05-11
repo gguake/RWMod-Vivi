@@ -86,6 +86,7 @@ namespace VVRace
         public static ThingDef VV_Cornlauncher;
         public static ThingDef VV_Shootus;
         public static ThingDef VV_Skyweed;
+        public static ThingDef VV_Everflower;
 
         public static ThingDef VV_ViviHoneycombWall;
 
@@ -152,8 +153,8 @@ namespace VVRace
     {
         public static HediffDef VV_RoyalVivi;
         public static HediffDef VV_HoneyNeed;
-
         public static HediffDef VV_CombatHormoneJelly;
+        public static HediffDef VV_EverflowerImpact;
 
         public static HediffDef Flu;
         public static HediffDef Malaria;

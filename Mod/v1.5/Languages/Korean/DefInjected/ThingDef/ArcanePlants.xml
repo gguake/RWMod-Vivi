@@ -77,4 +77,9 @@
 <VV_Gun_Cornlauncher.label>콘뿌리개</VV_Gun_Cornlauncher.label>
 <VV_Gun_Cornlauncher.description>.</VV_Gun_Cornlauncher.description>
 
+<VV_Everflower.label>영원꽃</VV_Everflower.label>
+<VV_Everflower.description>매우 희귀한 마법 꽃으로 비비들에게 신성한 꽃으로 취급되며 구체적인 재배 방식이 알려지지 않았지만 드물게 다른 마법 식물을 재배할때 함께 발견됩니다.
+\n주기적으로 많은 꽃가루를 내뿜으며 성체 비비가 이 꽃에서 꿀을 채집할때 신체 시간을 마나로 변환해 흡수하여 노화를 되돌리는 특성이 있습니다.
+\n영원꽃의 향기는 강력한 수면 효과가 있지만 비비들은 어느정도 내성을 가지고 있어 비비들만 꿀을 채집할 수 있으며 한 명의 비비가 반복해서 채집할 수는 없습니다.</VV_Everflower.description>
+
 </LanguageData>
