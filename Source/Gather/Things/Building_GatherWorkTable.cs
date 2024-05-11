@@ -138,8 +138,10 @@ namespace VVRace
                 var gatherables = _gatherableCache.GetGatherablesCache(r, gatheringRecipeDef);
                 foreach (var gatherable in gatherables)
                 {
-                    if (!gatherable.Spawned || gatherable.DestroyedOrNull()) { continue; }
-                    if (gatherable.Map.designationManager.HasMapDesignationOn(gatherable)) { continue; }
+                    if (!gatherable.Spawned || gatherable.DestroyedOrNull() || gatherable.IsBurning()) { continue; }
+
+                    if (gatherable.Map.designationManager.DesignationOn(gatherable, DesignationDefOf.CutPlant) != null ||
+                    gatherable.Map.designationManager.DesignationOn(gatherable, DesignationDefOf.ExtractTree) != null) { continue; }
 
                     gatherTargets.Add(gatherable);
                 }
