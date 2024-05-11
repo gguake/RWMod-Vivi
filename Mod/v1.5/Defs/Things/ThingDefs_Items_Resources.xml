@@ -189,6 +189,18 @@
         <WorkToMake>2.4</WorkToMake>
         <WorkToBuild>2.4</WorkToBuild>
       </statFactors>
+      <statOffsetsQuality>
+        <li MayRequireAnyOf="Ludeon.RimWorld.Royalty,Ludeon.RimWorld.Biotech">
+          <stat>PsychicSensitivityOffset</stat>
+          <awful>0</awful>
+          <poor>0</poor>
+          <normal>0.025</normal>
+          <good>0.05</good>
+          <excellent>0.075</excellent>
+          <masterwork>0.1</masterwork>
+          <legendary>0.125</legendary>
+        </li>
+      </statOffsetsQuality>
       <categories>
         <li>Fabric</li>
       </categories>
@@ -205,8 +217,9 @@
   <ThingDef ParentName="ResourceBase">
     <defName>VV_UnknownSeed</defName>
     <label>unknown seed</label>
-    <description>a seed of an unidentified plant species. It cannot be grown by conventional means and can be cultured at a arcane plant farm.</description>
+    <description>a seed from an unidentified plant. It is often found when collecting honey. It cannot be grown by conventional means and can be cultured at a arcane plant farm.</description>
     <descriptionHyperlinks>
+      <RecipeDef>VV_GatherHoney</RecipeDef>
       <ThingDef>VV_ArcanePlantFarm</ThingDef>
     </descriptionHyperlinks>
 
