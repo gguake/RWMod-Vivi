@@ -219,7 +219,7 @@
 			<joy>0.2</joy>
 			<joyKind>Gluttonous</joyKind>
       
-			<drugCategory>Social</drugCategory>
+			<drugCategory>Medical</drugCategory>
       <canAutoSelectAsFoodForCaravan>false</canAutoSelectAsFoodForCaravan>
       <outcomeDoers>
         <li Class="IngestionOutcomeDoer_GiveHediff">
