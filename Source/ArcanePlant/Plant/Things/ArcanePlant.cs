@@ -211,11 +211,8 @@ namespace VVRace
             if (Spawned)
             {
                 var manaFlux = _manaFluxNode.LocalManaFluxForInspector;
-                if (manaFlux != 0)
-                {
-                    sb.Append(" ");
-                    sb.Append(LocalizeString_Inspector.VV_Inspector_PlantManaFlux.Translate(manaFlux.ToString("+0;-#")));
-                }
+                sb.Append(" ");
+                sb.Append(LocalizeString_Inspector.VV_Inspector_PlantManaFlux.Translate(manaFlux.ToString("+0;-#")));
 
                 if (DebugSettings.godMode && ManaFluxNetwork != null)
                 {
