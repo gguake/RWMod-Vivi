@@ -59,6 +59,7 @@ namespace VVRace.HarmonyPatches
                 original: AccessTools.Method(typeof(PawnGenerator), "GenerateGenes"),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(PawnGenerator_GenerateGenes_Postfix)));
 
+            // 비비 바닥 폐허에 안나오게 수정
             {
                 var innerType = typeof(BaseGenUtility).GetNestedTypes(BindingFlags.NonPublic).FirstOrDefault(t => t.GetField("costCalculator") != null);
                 var innerMehtod = innerType.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault();
@@ -191,9 +192,9 @@ namespace VVRace.HarmonyPatches
                     {
                         var cell = pawn.Position + GenRadial.RadialPattern[i];
                         if (cell.InBounds(mapHeld) && 
-                            !cell.Fogged(mapHeld) && 
-                            GenSight.LineOfSight(positionHeld, cell, mapHeld, skipFirstCell: true) && 
-                            cell.ContainsStaticFire(mapHeld))
+                            !cell.Fogged(mapHeld) &&
+                            cell.ContainsStaticFire(mapHeld) &&
+                            GenSight.LineOfSight(positionHeld, cell, mapHeld, skipFirstCell: true))
                         {
                             __result = true;
                             break;
