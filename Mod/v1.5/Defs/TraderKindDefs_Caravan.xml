@@ -42,12 +42,16 @@
         <countRange>10~70</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
+        <thingDef>VV_Vivicream</thingDef>
+        <countRange>100~300</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
         <thingDef>VV_Viviwax</thingDef>
         <countRange>200~600</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_Propolis</thingDef>
-        <countRange>10~50</countRange>
+        <countRange>10~100</countRange>
       </li>
       
       <!-- Drugs -->
@@ -121,7 +125,11 @@
       <li Class="StockGenerator_Category">
         <categoryDef>Textiles</categoryDef>
         <thingDefCountRange>1~2</thingDefCountRange>
-        <totalPriceRange>100~400</totalPriceRange>
+        <totalPriceRange>100~300</totalPriceRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>DevilstrandCloth</thingDef>
+        <countRange>200~500</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_FilteredHoney</thingDef>
@@ -133,7 +141,7 @@
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_Propolis</thingDef>
-        <countRange>10~30</countRange>
+        <countRange>10~50</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_Fertilizer</thingDef>
