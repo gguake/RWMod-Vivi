@@ -52,6 +52,7 @@ namespace VVRace
         private static bool CheckInvalidGenesForVivi(GeneDef def)
         {
             if (VVXenotypeDefOf.VV_Vivi.genes.Contains(def)) { return false; }
+            if (def == GeneDefOf.Inbred) { return false; }
             if (def.biostatArc > 0 || def.displayCategory == GeneCategoryDefOf.Archite) { return false; }
             if (def.endogeneCategory != EndogeneCategory.None || def.biostatCpx == 0) { return false; }
             if (def.forcedHair != null || def.forcedHeadTypes?.Count > 0 || def.hairTagFilter != null || def.beardTagFilter != null || def.bodyType != null) { return false; }
