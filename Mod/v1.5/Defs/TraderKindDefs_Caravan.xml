@@ -42,10 +42,6 @@
         <countRange>10~70</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
-        <thingDef>VV_Vivicream</thingDef>
-        <countRange>100~300</countRange>
-      </li>
-      <li Class="StockGenerator_SingleDef">
         <thingDef>VV_Viviwax</thingDef>
         <countRange>200~600</countRange>
       </li>
