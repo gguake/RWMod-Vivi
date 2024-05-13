@@ -119,7 +119,7 @@
       <li Class="VVRace.CompProperties_Honey" />
     </comps>
     <ingestible>
-      <preferability>RawTasty</preferability>
+      <preferability>MealAwful</preferability>
       <foodType>AnimalProduct, Fluid</foodType>
     </ingestible>
     <thingCategories>
