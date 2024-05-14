@@ -289,7 +289,7 @@ namespace VVRace
             }
 
             var compBiocodable = gun.TryGetComp<CompBiocodable>();
-            if (compBiocodable != null && compBiocodable.Props.biocodeOnEquip)
+            if (compBiocodable != null && (compBiocodable.Biocoded || compBiocodable.Props.biocodeOnEquip))
             {
                 return false;
             }
