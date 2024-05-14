@@ -201,6 +201,7 @@
 			<texPath>Things/Item/VV_RoyalJelly</texPath>
 		</graphicData>
 		<socialPropernessMatters>true</socialPropernessMatters>
+    <orderedTakeGroup>Drug</orderedTakeGroup>
 		<thingCategories>
 			<li>Drugs</li>
 		</thingCategories>
