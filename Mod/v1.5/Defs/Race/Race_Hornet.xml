@@ -31,6 +31,8 @@
       <ToxicResistance>-1.00</ToxicResistance>
       <ToxicEnvironmentResistance>0</ToxicEnvironmentResistance>
       <Flammability>1.1</Flammability>
+
+      <MinimumHandlingSkill>99</MinimumHandlingSkill>
     </statBases>
     <uiIconScale>1.35</uiIconScale>
     
