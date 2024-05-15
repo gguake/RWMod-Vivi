@@ -576,14 +576,14 @@
         <sensorRadius>3.7</sensorRadius>
         <sensorWorkerClass>VVRace.SensorWorker_Fire</sensorWorkerClass>
 
-        <explosiveRadius>10.9</explosiveRadius>
-        <explosiveCooldownTicks>2000~2000</explosiveCooldownTicks>
+        <explosiveRadius>6.9</explosiveRadius>
+        <explosiveCooldownTicks>1000~1000</explosiveCooldownTicks>
         <explosiveEffecterDef>ExtinguisherExplosion</explosiveEffecterDef>
         <explosiveDamageDef>VV_ExtinguishWithWater</explosiveDamageDef>
         <propagationSpeed>0.5</propagationSpeed>
 
         <postExplosionSpawnThingDef>Filth_Water</postExplosionSpawnThingDef>
-        <postExplosionSpawnChance>0.1</postExplosionSpawnChance>
+        <postExplosionSpawnChance>0.15</postExplosionSpawnChance>
         <postExplosionSpawnThingCount>1</postExplosionSpawnThingCount>
 
         <applyDamageToExplosionCellsNeighbors>true</applyDamageToExplosionCellsNeighbors>
@@ -599,12 +599,12 @@
         <manaCapacity>300</manaCapacity>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>30</mana>
+          <mana>15</mana>
         </manaConsumeRule>
         <manaGenerateRule Class="VVRace.ManaFluxRule_CompositeSum">
           <rules>
             <li Class="VVRace.ManaFluxRule_AdjacentWater">
-              <manaFromOccupiedWater>40</manaFromOccupiedWater>
+              <manaFromOccupiedWater>30</manaFromOccupiedWater>
               <manaPerAdjacentWater>15</manaPerAdjacentWater>
             </li>
             <li Class="VVRace.ManaFluxRule_WeatherRainy">
@@ -621,23 +621,23 @@
       <li Class="VVRace.GrowingArcanePlantData">
         <ingredients>
           <VV_UnknownSeed>1</VV_UnknownSeed>
-          <VV_Vivicream>200</VV_Vivicream>
+          <VV_Vivicream>120</VV_Vivicream>
           <VV_Pollen>150</VV_Pollen>
         </ingredients>
 
-        <totalGrowDays>15</totalGrowDays>
+        <totalGrowDays>10</totalGrowDays>
         <maxHealth>300</maxHealth>
         <healthRegenNoDamagedByDays>30</healthRegenNoDamagedByDays>
 
         <maxMana>300</maxMana>
-        <consumedManaByDay>60</consumedManaByDay>
+        <consumedManaByDay>50</consumedManaByDay>
 
-        <manaSensitivity>Low</manaSensitivity>
+        <manaSensitivity>Medium</manaSensitivity>
         <manageSensitivity>High</manageSensitivity>
         <temperatureSensitivity>Medium</temperatureSensitivity>
         
         <manageIntervalTicks>210000</manageIntervalTicks>
-        <optimalTemperatureRange>18~23</optimalTemperatureRange>
+        <optimalTemperatureRange>16~27</optimalTemperatureRange>
 
         <successChanceCurve>
           <points>

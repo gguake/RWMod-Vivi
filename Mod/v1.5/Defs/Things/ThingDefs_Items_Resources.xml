@@ -279,10 +279,10 @@
     
     <useHitPoints>true</useHitPoints>
     <statBases>
-      <Mass>0.25</Mass>
-      <MarketValue>5</MarketValue>
+      <Mass>0.15</Mass>
+      <MarketValue>4.5</MarketValue>
       <MaxHitPoints>40</MaxHitPoints>
-      <Flammability>0.5</Flammability>
+      <Flammability>0.3</Flammability>
       <DeteriorationRate>1</DeteriorationRate>
     </statBases>
     <stackLimit>150</stackLimit>

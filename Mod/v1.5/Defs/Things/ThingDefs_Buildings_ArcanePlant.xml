@@ -52,8 +52,7 @@
       <li Class="CompProperties_Forbiddable"/>
     </comps>
     <costList>
-      <VV_Vivicream>20</VV_Vivicream>
-      <VV_Fertilizer>20</VV_Fertilizer>
+      <VV_Fertilizer>15</VV_Fertilizer>
     </costList>
     
     <thingCategories>
@@ -112,10 +111,9 @@
       <li>Woody</li>
       <li>Stony</li>
     </stuffCategories>
-    <costStuffCount>70</costStuffCount>
+    <costStuffCount>80</costStuffCount>
 
     <costList>
-      <VV_Vivicream>40</VV_Vivicream>
       <VV_Fertilizer>40</VV_Fertilizer>
     </costList>
 

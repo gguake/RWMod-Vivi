@@ -23,7 +23,7 @@
     <defName>VV_AdvancedArcaneBotany</defName>
     <label>advanced arcane botany</label>
     <description>Cultivate arcane plants with special functions.</description>
-    <baseCost>1200</baseCost>
+    <baseCost>900</baseCost>
     <researchViewX>3</researchViewX>
     <researchViewY>1.4</researchViewY>
     <prerequisites>
