@@ -25,4 +25,18 @@
       <li>VV_Vivi</li>
     </value>
   </Operation>
+  
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/RecipeDef/defaultIngredientFilter/disallowedThingDefs[li="Meat_Human"]</xpath>
+    <value>
+      <li>Meat_VV_Vivi</li>
+    </value>
+  </Operation>
+  
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/ThingDef/building/defaultStorageSettings/filter/disallowedThingDefs[li="Meat_Human"]</xpath>
+    <value>
+      <li>Meat_VV_Vivi</li>
+    </value>
+  </Operation>
 </Patch>
