@@ -32,21 +32,21 @@ namespace VVRace
 
             var innerRect = backPanelRect.ContractedBy(6f);
 
-            Text.Font = GameFont.Small;
-            Text.Anchor = TextAnchor.UpperLeft;
             var headerRect = new Rect(innerRect.x, innerRect.y, innerRect.width, HeaderHeight);
             Widgets.Label(headerRect, LocalizeString_Gizmo.VV_Gizmo_ViviEggProgressHeader.Translate());
 
-            Text.Font = GameFont.Tiny;
             var descriptionRect = new Rect(innerRect.x, headerRect.yMax + 2f, innerRect.width, HeaderHeight);
-            var description = eggSpawnerComp.eggProgress.ToStringPercent("F1");
-            Widgets.Label(descriptionRect, description);
+            using (new TextBlock(GameFont.Tiny))
+            {
+                var description = eggSpawnerComp.eggProgress.ToStringPercent("F1");
+                Widgets.Label(descriptionRect, description);
 
-            Text.Anchor = TextAnchor.UpperRight;
-            var descriptionPerDay = $"(+{eggSpawnerComp.EggProgressPerDays.ToStringPercent()}/day)";
-            Widgets.Label(descriptionRect, descriptionPerDay);
-            Text.Anchor = TextAnchor.UpperLeft;
-            Text.Font = GameFont.Small;
+                using (new TextBlock(TextAnchor.UpperRight))
+                {
+                    var descriptionPerDay = $"(+{eggSpawnerComp.EggProgressPerDays.ToStringPercent()}/day)";
+                    Widgets.Label(descriptionRect, descriptionPerDay);
+                }
+            }
 
             var backRect = new Rect(
                 innerRect.x,

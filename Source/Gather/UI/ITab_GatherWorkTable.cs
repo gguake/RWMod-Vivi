@@ -21,18 +21,20 @@ namespace VVRace
             var divider = new RectDivider(new Rect(0, 0, size.x, size.y).ContractedBy(10f), 477891134);
             var labelRect = divider.NewRow(20f);
 
-            Text.Font = GameFont.Tiny;
-            Widgets.Label(labelRect, LocalizeString_ITab.VV_ITab_GatherWorkerTable_GatherRadiusSlider.Translate());
+            using (new TextBlock(GameFont.Tiny))
+            {
+                Widgets.Label(labelRect, LocalizeString_ITab.VV_ITab_GatherWorkerTable_GatherRadiusSlider.Translate());
 
-            var sliderRect = divider.NewRow(20f);
-            var value = Widgets.HorizontalSlider(
-                sliderRect,
-                (int)SelTable.GatherRadius,
-                (int)Building_GatherWorkTable.GatherMinRadius,
-                (int)Building_GatherWorkTable.GatherMaxRadius,
-                roundTo: 1f) + 0.9f;
+                var sliderRect = divider.NewRow(20f);
+                var value = Widgets.HorizontalSlider(
+                    sliderRect,
+                    (int)SelTable.GatherRadius,
+                    (int)Building_GatherWorkTable.GatherMinRadius,
+                    (int)Building_GatherWorkTable.GatherMaxRadius,
+                    roundTo: 1f) + 0.9f;
 
-            SelTable.GatherRadius = value;
+                SelTable.GatherRadius = value;
+            }
         }
     }
 }

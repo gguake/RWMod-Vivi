@@ -32,16 +32,9 @@ namespace VVRace
                 var iconRect = labelRect.NewCol(40f);
                 Widgets.DefIcon(iconRect, bill.RecipeTarget);
 
-                try
+                using (new TextBlock(GameFont.Medium, TextAnchor.MiddleLeft))
                 {
-                    Text.Font = GameFont.Medium;
-                    Text.Anchor = TextAnchor.MiddleLeft;
                     Widgets.Label(labelRect, LocalizeString_ITab.VV_ITab_ArcanePlantFarmBill_Title.Translate(bill.RecipeTarget.LabelCap));
-                }
-                finally
-                {
-                    Text.Font = GameFont.Small;
-                    Text.Anchor = TextAnchor.UpperLeft;
                 }
             }
 
@@ -54,14 +47,10 @@ namespace VVRace
 
                 var label = LocalizeString_ITab.VV_ITab_ArcanePlantFarmBill_GrowthPct.Translate();
                 var boxRect = growthRect.Rect.ContractedBy(5f);
-                try
+
+                using (new TextBlock(TextAnchor.MiddleLeft))
                 {
-                    Text.Anchor = TextAnchor.MiddleLeft;
                     Widgets.FillableBarLabeled(boxRect, bill.TotalGrowthPct, Mathf.Max((int)Text.CalcSize(label).x + 5, 90), label);
-                }
-                finally
-                {
-                    Text.Anchor = TextAnchor.UpperLeft;
                 }
 
                 var desc = LocalizeString_ITab.VV_ITab_ArcanePlantFarmBill_GrowthPctDesc.Translate();
@@ -141,9 +130,8 @@ namespace VVRace
                     Widgets.DrawHighlight(fullRect);
                 }
                 
-                try
+                using (new TextBlock(TextAnchor.MiddleLeft))
                 {
-                    Text.Anchor = TextAnchor.MiddleLeft;
                     var needLabelRect = rect.NewRow(20f).Rect;
                     needLabelRect.x += 5f;
                     Widgets.Label(needLabelRect, label);
@@ -163,10 +151,6 @@ namespace VVRace
                     {
                         Widgets.FillableBarChangeArrows(barRect, offset.Value);
                     }
-                }
-                finally
-                {
-                    Text.Anchor = TextAnchor.UpperLeft;
                 }
 
                 TooltipHandler.TipRegion(fullRect, $"{label}: {pct.ToStringPercent()}".Colorize(Color.yellow) + $"\n{desc}");

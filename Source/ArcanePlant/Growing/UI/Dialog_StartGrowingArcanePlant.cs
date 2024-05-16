@@ -108,15 +108,10 @@ namespace VVRace
                                 TooltipHandler.TipRegion(rect, ingredient.thingDef.DescriptionDetailed + "\n\n" + "ClickForMoreInfo".Translate().Colorize(ColoredText.SubtleGrayColor));
                             }
 
-                            try
+                            using (new TextBlock(TextAnchor.MiddleLeft))
                             {
-                                Text.Anchor = TextAnchor.MiddleLeft;
                                 Widgets.DefIcon(rect.NewCol(rect.Rect.height), ingredient.thingDef);
                                 Widgets.Label(rect, label);
-                            }
-                            finally
-                            {
-                                Text.Anchor = TextAnchor.UpperLeft;
                             }
 
                             if (Widgets.ButtonInvisible(rect))
@@ -134,13 +129,15 @@ namespace VVRace
                 {
                     GUI.color = Widgets.SeparatorLabelColor;
                     var rect = ingredientLabelRect.Rect;
-                    Text.Anchor = TextAnchor.MiddleLeft;
-                    Widgets.Label(rect, LocalizeString_Dialog.VV_DialogStartGrowingArcanePlantIngredientLabel.Translate());
+
+                    using (new TextBlock(TextAnchor.MiddleLeft))
+                    {
+                        Widgets.Label(rect, LocalizeString_Dialog.VV_DialogStartGrowingArcanePlantIngredientLabel.Translate());
+                    }
                 }
                 finally
                 {
                     GUI.color = Color.white;
-                    Text.Anchor = TextAnchor.UpperLeft;
                 }
             }
 
@@ -148,162 +145,147 @@ namespace VVRace
 
             var leftAreaRect = new RectDivider(baseRect.NewCol(Mathf.Max(4f, InitialSize.x - OptionWidth - 10f), HorizontalJustification.Left), 874987234, new Vector2(10f, 5f));
             {
-                try
+                var titleRect = leftAreaRect.NewRow(40f);
+                using (new TextBlock(GameFont.Medium, TextAnchor.MiddleLeft))
                 {
-                    var titleRect = leftAreaRect.NewRow(40f);
-                    try
+                    if (_currentSelected == null)
                     {
-                        Text.Font = GameFont.Medium;
-                        Text.Anchor = TextAnchor.MiddleLeft;
-                        if (_currentSelected == null)
-                        {
-                            Widgets.Label(titleRect, LocalizeString_Dialog.VV_DialogGrowArcanePlantTitleChooseOption.Translate());
-                        }
-                        else
-                        {
-                            var thingIconSectionRect = titleRect.NewCol(40f, HorizontalJustification.Left);
-                            var thingIconRect = new Rect(0f, 0f, 40f, 40f);
-                            thingIconRect.center = thingIconSectionRect.Rect.center;
-                            Widgets.DefIcon(thingIconRect, _currentSelected);
-    
-                            var infoIconSectionRect = titleRect.NewCol(30f, HorizontalJustification.Right);
-                            var infoIconRect = new Rect(0f, 0f, 24f, 24f);
-                            infoIconRect.center = infoIconSectionRect.Rect.center;
-                            Widgets.InfoCardButton(infoIconRect, _currentSelected);
-
-                            Widgets.Label(titleRect, LocalizeString_Dialog.VV_DialogGrowArcanePlantTitleSelected.Translate(_currentSelected.LabelCap));
-                        }
+                        Widgets.Label(titleRect, LocalizeString_Dialog.VV_DialogGrowArcanePlantTitleChooseOption.Translate());
                     }
-                    finally
+                    else
                     {
-                        Text.Anchor = TextAnchor.UpperLeft;
-                        Text.Font = GameFont.Small;
+                        var thingIconSectionRect = titleRect.NewCol(40f, HorizontalJustification.Left);
+                        var thingIconRect = new Rect(0f, 0f, 40f, 40f);
+                        thingIconRect.center = thingIconSectionRect.Rect.center;
+                        Widgets.DefIcon(thingIconRect, _currentSelected);
+
+                        var infoIconSectionRect = titleRect.NewCol(30f, HorizontalJustification.Right);
+                        var infoIconRect = new Rect(0f, 0f, 24f, 24f);
+                        infoIconRect.center = infoIconSectionRect.Rect.center;
+                        Widgets.InfoCardButton(infoIconRect, _currentSelected);
+
+                        Widgets.Label(titleRect, LocalizeString_Dialog.VV_DialogGrowArcanePlantTitleSelected.Translate(_currentSelected.LabelCap));
                     }
+                }
 
-                    if (_currentSelected != null)
+                if (_currentSelected != null)
+                {
+                    var descRect = new RectDivider(leftAreaRect, 86837113, new Vector2(0f, 2f));
+                    var growData = _currentSelected.GetModExtension<GrowingArcanePlantData>();
+                    if (growData != null)
                     {
-                        var descRect = new RectDivider(leftAreaRect, 86837113, new Vector2(0f, 2f));
-                        var growData = _currentSelected.GetModExtension<GrowingArcanePlantData>();
-                        if (growData != null)
-                        {
-                            var width = descRect.Rect.width;
-                            var description = _currentSelected.description;
-                            LabelText(ref descRect, description);
+                        var width = descRect.Rect.width;
+                        var description = _currentSelected.description;
+                        LabelText(ref descRect, description);
 
+                        DrawLine(ref descRect);
+
+                        LabelText(
+                            ref descRect,
+                            LocalizeString_Dialog.VV_DialogGrowArcanePlantTotalGrowDays.Translate(growData.totalGrowDays.ToString("0.#")));
+
+                        LabelText(
+                            ref descRect,
+                            LocalizeString_Dialog.VV_DialogGrowArcanePlantExpectedAmount.Translate(growData.baseAmount),
+                            LocalizeString_Dialog.VV_DialogGrowArcanePlantExpectedAmountDesc.Translate());
+
+                        LabelText(
+                            ref descRect,
+                            LocalizeString_Dialog.VV_DialogGrowArcanePlantTotalHealth.Translate(growData.maxHealth),
+                            LocalizeString_Dialog.VV_DialogGrowArcanePlantTotalHealthDesc.Translate());
+
+                        LabelText(
+                            ref descRect,
+                            LocalizeString_Dialog.VV_DialogGrowArcanePlantTotalMana.Translate(growData.maxMana, growData.consumedManaByDay.ToString("0.#")),
+                            LocalizeString_Dialog.VV_DialogGrowArcanePlantTotalManaDesc.Translate());
+
+                        if (growData.manaSensitivity > GrowingArcanePlantSensitivity.None)
+                        {
+                            LabelText(
+                                ref descRect,
+                                LocalizeString_Dialog.VV_DialogGrowArcanePlantManaSensitivity.Translate($"VV_PlantSensitivity_{growData.manaSensitivity}".Translate()),
+                                LocalizeString_Dialog.VV_DialogGrowArcanePlantManaSensitivityDesc.Translate());
+                        }
+
+                        if (growData.manageSensitivity > GrowingArcanePlantSensitivity.None)
+                        {
                             DrawLine(ref descRect);
 
                             LabelText(
                                 ref descRect,
-                                LocalizeString_Dialog.VV_DialogGrowArcanePlantTotalGrowDays.Translate(growData.totalGrowDays.ToString("0.#")));
+                                LocalizeString_Dialog.VV_DialogGrowArcanePlantManageInterval.Translate(growData.manageIntervalTicks.ToStringTicksToPeriod()),
+                                LocalizeString_Dialog.VV_DialogGrowArcanePlantManageIntervalDesc.Translate());
 
                             LabelText(
                                 ref descRect,
-                                LocalizeString_Dialog.VV_DialogGrowArcanePlantExpectedAmount.Translate(growData.baseAmount),
-                                LocalizeString_Dialog.VV_DialogGrowArcanePlantExpectedAmountDesc.Translate());
+                                LocalizeString_Dialog.VV_DialogGrowArcanePlantManageSensitivity.Translate($"VV_PlantSensitivity_{growData.manageSensitivity}".Translate()),
+                                LocalizeString_Dialog.VV_DialogGrowArcanePlantManageSensitivityDesc.Translate());
+                        }
+
+
+                        if (growData.temperatureSensitivity > GrowingArcanePlantSensitivity.None)
+                        {
+                            DrawLine(ref descRect);
 
                             LabelText(
                                 ref descRect,
-                                LocalizeString_Dialog.VV_DialogGrowArcanePlantTotalHealth.Translate(growData.maxHealth),
-                                LocalizeString_Dialog.VV_DialogGrowArcanePlantTotalHealthDesc.Translate());
+                                LocalizeString_Dialog.VV_DialogGrowArcanePlantOptimalTemperature.Translate($"{growData.optimalTemperatureRange.TrueMin.ToStringTemperature()} ~ {growData.optimalTemperatureRange.TrueMax.ToStringTemperature()}"));
 
                             LabelText(
                                 ref descRect,
-                                LocalizeString_Dialog.VV_DialogGrowArcanePlantTotalMana.Translate(growData.maxMana, growData.consumedManaByDay.ToString("0.#")),
-                                LocalizeString_Dialog.VV_DialogGrowArcanePlantTotalManaDesc.Translate());
+                                LocalizeString_Dialog.VV_DialogGrowArcanePlantTemperatureSensitivity.Translate($"VV_PlantSensitivity_{growData.temperatureSensitivity}".Translate()),
+                                LocalizeString_Dialog.VV_DialogGrowArcanePlantTemperatureSensitivityDesc.Translate());
+                        }
 
-                            if (growData.manaSensitivity > GrowingArcanePlantSensitivity.None)
+                        if (growData.glowSensitivity > GrowingArcanePlantSensitivity.None)
+                        {
+                            DrawLine(ref descRect);
+
+                            LabelText(
+                                ref descRect,
+                                LocalizeString_Dialog.VV_DialogGrowArcanePlantOptimalGlow.Translate($"{growData.optimalGlowRange.TrueMin.ToStringPercent()} ~ {growData.optimalGlowRange.TrueMax.ToStringPercent()}"));
+
+                            LabelText(
+                                ref descRect,
+                                LocalizeString_Dialog.VV_DialogGrowArcanePlantGlowSensitivity.Translate($"VV_PlantSensitivity_{growData.glowSensitivity}".Translate()),
+                                LocalizeString_Dialog.VV_DialogGrowArcanePlantGlowSensitivityDesc.Translate());
+                        }
+
+                        void DrawLine(ref RectDivider divider)
+                        {
+                            Color color = GUI.color;
+                            try
                             {
-                                LabelText(
-                                    ref descRect,
-                                    LocalizeString_Dialog.VV_DialogGrowArcanePlantManaSensitivity.Translate($"VV_PlantSensitivity_{growData.manaSensitivity}".Translate()),
-                                    LocalizeString_Dialog.VV_DialogGrowArcanePlantManaSensitivityDesc.Translate());
+                                var lineRect = divider.NewRow(4f);
+                                GUI.BeginGroup(lineRect);
+                                GUI.color = Widgets.SeparatorLineColor;
+                                Widgets.DrawLineHorizontal(0f, 0f, lineRect.Rect.width);
+                                GUI.EndGroup();
+                            }
+                            finally
+                            {
+                                GUI.color = color;
+                            }
+                        }
+
+                        void LabelText(ref RectDivider divider, string text, string tooltip = null)
+                        {
+                            var height = Text.CalcHeight(text, width);
+                            var rect = divider.NewRow(height);
+
+                            if (tooltip != null && Mouse.IsOver(rect))
+                            {
+                                Widgets.DrawHighlight(rect);
                             }
 
-                            if (growData.manageSensitivity > GrowingArcanePlantSensitivity.None)
+                            Widgets.Label(rect, text);
+
+                            if (tooltip != null)
                             {
-                                DrawLine(ref descRect);
-
-                                LabelText(
-                                    ref descRect,
-                                    LocalizeString_Dialog.VV_DialogGrowArcanePlantManageInterval.Translate(growData.manageIntervalTicks.ToStringTicksToPeriod()),
-                                    LocalizeString_Dialog.VV_DialogGrowArcanePlantManageIntervalDesc.Translate());
-
-                                LabelText(
-                                    ref descRect,
-                                    LocalizeString_Dialog.VV_DialogGrowArcanePlantManageSensitivity.Translate($"VV_PlantSensitivity_{growData.manageSensitivity}".Translate()),
-                                    LocalizeString_Dialog.VV_DialogGrowArcanePlantManageSensitivityDesc.Translate());
-                            }
-
-
-                            if (growData.temperatureSensitivity > GrowingArcanePlantSensitivity.None)
-                            {
-                                DrawLine(ref descRect);
-
-                                LabelText(
-                                    ref descRect,
-                                    LocalizeString_Dialog.VV_DialogGrowArcanePlantOptimalTemperature.Translate($"{growData.optimalTemperatureRange.TrueMin.ToStringTemperature()} ~ {growData.optimalTemperatureRange.TrueMax.ToStringTemperature()}"));
-
-                                LabelText(
-                                    ref descRect,
-                                    LocalizeString_Dialog.VV_DialogGrowArcanePlantTemperatureSensitivity.Translate($"VV_PlantSensitivity_{growData.temperatureSensitivity}".Translate()),
-                                    LocalizeString_Dialog.VV_DialogGrowArcanePlantTemperatureSensitivityDesc.Translate());
-                            }
-
-                            if (growData.glowSensitivity > GrowingArcanePlantSensitivity.None)
-                            {
-                                DrawLine(ref descRect);
-
-                                LabelText(
-                                    ref descRect,
-                                    LocalizeString_Dialog.VV_DialogGrowArcanePlantOptimalGlow.Translate($"{growData.optimalGlowRange.TrueMin.ToStringPercent()} ~ {growData.optimalGlowRange.TrueMax.ToStringPercent()}"));
-
-                                LabelText(
-                                    ref descRect,
-                                    LocalizeString_Dialog.VV_DialogGrowArcanePlantGlowSensitivity.Translate($"VV_PlantSensitivity_{growData.glowSensitivity}".Translate()),
-                                    LocalizeString_Dialog.VV_DialogGrowArcanePlantGlowSensitivityDesc.Translate());
-                            }
-
-                            void DrawLine(ref RectDivider divider)
-                            {
-                                Color color = GUI.color;
-                                try
-                                {
-                                    var lineRect = divider.NewRow(4f);
-                                    GUI.BeginGroup(lineRect);
-                                    GUI.color = Widgets.SeparatorLineColor;
-                                    Widgets.DrawLineHorizontal(0f, 0f, lineRect.Rect.width);
-                                    GUI.EndGroup();
-                                }
-                                finally
-                                {
-                                    GUI.color = color;
-                                }
-                            }
-
-                            void LabelText(ref RectDivider divider, string text, string tooltip = null)
-                            {
-                                var height = Text.CalcHeight(text, width);
-                                var rect = divider.NewRow(height);
-
-                                if (tooltip != null && Mouse.IsOver(rect))
-                                {
-                                    Widgets.DrawHighlight(rect);
-                                }
-
-                                Widgets.Label(rect, text);
-
-                                if (tooltip != null)
-                                {
-                                    TooltipHandler.TipRegion(rect, tooltip);
-                                }
+                                TooltipHandler.TipRegion(rect, tooltip);
                             }
                         }
                     }
-                }
-                finally
-                {
-                    Text.Font = GameFont.Small;
-                    Text.Anchor = TextAnchor.UpperLeft;
                 }
             }
 
@@ -350,17 +332,9 @@ namespace VVRace
             var iconRect = divider.NewCol(optionRect.height);
             Widgets.DefIcon(iconRect, thingDef);
 
-            try
+            using (new TextBlock(TextAnchor.MiddleLeft))
             {
-                GUI.color = Color.white;
-                Text.Anchor = TextAnchor.MiddleLeft;
-
                 Widgets.Label(divider.Rect, thingDef.LabelCap);
-            }
-            finally
-            {
-                GUI.color = Color.white;
-                Text.Anchor = TextAnchor.UpperLeft;
             }
 
             if (Widgets.ButtonInvisible(optionRect))
