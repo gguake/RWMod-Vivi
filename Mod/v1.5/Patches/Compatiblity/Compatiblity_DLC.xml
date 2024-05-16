@@ -26,6 +26,7 @@
         <!-- Guests -->
       <li Class="PatchOperationAdd" MayRequire="Ludeon.RimWorld.Royalty">
         <xpath>Defs/QuestScriptDef/root[@Class="QuestNode_Sequence"]/nodes/li[@Class="QuestNode_IsSet"]/node[@Class="QuestNode_GetRandomPawnKindForFaction"]/choices</xpath>
+        <order>Prepend</order>
         <value>
           <li>
             <factionDef>VV_ViviFederation</factionDef>
@@ -33,18 +34,18 @@
               <li>VV_RoyalVivi</li>
               <li>VV_ViviTribesman</li>
             </pawnKinds>
-          </li>  
+          </li>
         </value>
       </li>
 
       <!-- Mercenaries -->
       <li Class="PatchOperationAdd" MayRequire="Ludeon.RimWorld.Royalty">
-        <xpath>/Defs/QuestScriptDef/root[@Class="QuestNode_Sequence"]/nodes/li[@Class="QuestNode_GetRandomPawnKindForFaction"]/choices</xpath>
+        <xpath>Defs/QuestScriptDef/root[@Class="QuestNode_Sequence"]/nodes/li[@Class="QuestNode_GetRandomPawnKindForFaction"]/choices</xpath>
+        <order>Prepend</order>
         <value>
           <li>
             <factionDef>VV_ViviFederation</factionDef>
             <pawnKinds>
-              <li>VV_ViviTribesman</li>
               <li>VV_ViviGuard</li>
               <li>VV_ViviArcher</li>
             </pawnKinds>
