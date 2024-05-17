@@ -62,7 +62,7 @@ namespace VVRace
                 if (!Spawned) { return; }
 
                 var casterPawn = caster as Pawn;
-                if (casterPawn == null || casterPawn.DeadOrDowned || caster.DestroyedOrNull())
+                if (casterPawn == null || casterPawn.DeadOrDowned || caster.DestroyedOrNull() || equipmentDef == null)
                 {
                     Destroy();
                     return;
@@ -151,12 +151,21 @@ namespace VVRace
             base.ExposeData();
 
             Scribe_References.Look(ref caster, "caster");
+            Scribe_Values.Look(ref attackedCount, "attackedCount");
+
             Scribe_TargetInfo.Look(ref curTarget, "curTarget");
             Scribe_Collections.Look(ref targetHistory, "targetHistory", LookMode.Reference);
+            Scribe_Values.Look(ref targetLossTicks, "targetLossTicks");
+            Scribe_Values.Look(ref targetHoldTicks, "targetHoldTicks");
 
             Scribe_Values.Look(ref curPos, "curPos");
             Scribe_Values.Look(ref curDirection, "curDirection");
             Scribe_Values.Look(ref lastAttackedTargetCell, "lastAttackedTargetCell");
+
+            Scribe_Defs.Look(ref equipmentDef, "equipmentDef");
+            Scribe_Values.Look(ref damageMultiplier, "damageMultiplier");
+            Scribe_Values.Look(ref equipmentQuality, "equipmentQuality");
+            Scribe_Values.Look(ref psychicMultiplier, "psychicMultiplier");
         }
 
         public override Vector3 DrawPos => curPos;
