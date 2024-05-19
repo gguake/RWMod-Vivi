@@ -34,7 +34,7 @@
   <ThingDef ParentName="VV_PetalBase">
     <defName>VV_HeatingPetal</defName>
     <label>heating petal</label>
-    <description>An petals obtained from decomposing a arcane flower. There's a slight but warm heat remaining.
+    <description>An petals obtained from deconstructing a arcane flower. There's a slight but warm heat remaining.
 \nIf boiled and drunk as tea, it warms up the body a bit and is also used in the production of some equipment.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_EmberBloom</ThingDef>
@@ -56,7 +56,7 @@
   <ThingDef ParentName="VV_PetalBase">
     <defName>VV_CoolingPetal</defName>
     <label>cooling petal</label>
-    <description>An petals obtained from decomposing a arcane flower. There's a slight but cold air remaining.
+    <description>An petals obtained from deconstructing a arcane flower. There's a slight but cold air remaining.
 \nIf brewed into a tea, it can slightly cool down the body and it's also used in crafting some equipment.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_FrostBloom</ThingDef>
@@ -78,7 +78,7 @@
   <ThingDef ParentName="VV_PetalBase">
     <defName>VV_SparklingPetal</defName>
     <label>sparkling petal</label>
-    <description>An petals obtained from decomposing a arcane flower. When touched, a slight static electricity is felt.
+    <description>An petals obtained from deconstructing a arcane flower. When touched, a slight static electricity is felt.
 
       \nEven in petal form, it has the property of good mana flow, making it useful in various materials.</description>
     <descriptionHyperlinks>
@@ -101,7 +101,7 @@
   <ThingDef ParentName="VV_PetalBase">
     <defName>VV_PerfumingPetal</defName>
     <label>perfuming petal</label>
-    <description>An petals obtained from decomposing a arcane flower. Even though some time has passed, it still gives off a pleasant scent.
+    <description>An petals obtained from deconstructing a arcane flower. Even though some time has passed, it still gives off a pleasant scent.
 \nWhen brewed into a tea with milk, it temporarily uplifts the mood and contains ingredients that are beneficial for fatigue recovery.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_Richflower</ThingDef>
@@ -123,7 +123,7 @@
   <ThingDef ParentName="VV_PetalBase">
     <defName>VV_LivingLeaf</defName>
     <label>living leaf</label>
-    <description>an Leaves obtained from decomposing a arcane plant. It reacts vigorously to the surrounding stimuli and mana, as if it's alive.
+    <description>an Leaves obtained from deconstructing a arcane plant. It reacts vigorously to the surrounding stimuli and mana, as if it's alive.
 \nIt's incredibly durable and has the ability to self-recover, primarily used for weaving lifestrand.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_Skyweed</ThingDef>
@@ -147,7 +147,7 @@
   <ThingDef ParentName="VV_PetalBase">
     <defName>VV_SkyweedFluff</defName>
     <label>skyweed fluff</label>
-    <description>These are fluff obtained from disassembling skyweed. They are very light and have properties that allow them to float in the air due to the remaining mana. By tying the fluff together, objects can be sent flying into the sky.</description>
+    <description>These are fluff obtained from deconstructing skyweed. They are very light and have properties that allow them to float in the air due to the remaining mana. By tying the fluff together, objects can be sent flying into the sky.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_Skyweed</ThingDef>
       <ThingDef>VV_SkyweedBox</ThingDef>
