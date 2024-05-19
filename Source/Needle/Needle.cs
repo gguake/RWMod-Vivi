@@ -19,7 +19,7 @@ namespace VVRace
         public int maxTargettingTicks = 1000;
     }
 
-    public class Needle : ThingWithComps
+    public class Needle : Projectile
     {
         public Thing caster;
         public int attackedCount;
@@ -33,9 +33,7 @@ namespace VVRace
         public Vector3 curDirection;
         public IntVec3 lastAttackedTargetCell;
 
-        public ThingDef equipmentDef;
         public float damageMultiplier = 1f;
-        public QualityCategory equipmentQuality;
         public float psychicMultiplier = 1f;
 
         private PriorityQueue<Thing, int> _tmpTargetCandidates = new PriorityQueue<Thing, int>();
@@ -105,8 +103,17 @@ namespace VVRace
                 var impact = false;
                 if (curTarget.IsValid)
                 {
-                    var targetThingDef = curTarget.Thing.def;
-                    if (targetThingDef.Size.x == 1 && targetThingDef.Size.z == 1)
+                    IntVec2 targetSize;
+                    if (curTarget.HasThing)
+                    {
+                        targetSize = curTarget.Thing.def.Size;
+                    }
+                    else
+                    {
+                        targetSize = new IntVec2(1, 1);
+                    }
+
+                    if (targetSize.x == 1 && targetSize.z == 1)
                     {
                         if (Position == curTarget.Cell || (curTarget.CenterVector3 - curPos).sqrMagnitude < 1)
                         {
@@ -116,7 +123,7 @@ namespace VVRace
                     else
                     {
                         var d = curTarget.Thing.TrueCenter() - curPos;
-                        if (Mathf.Abs(d.x) < targetThingDef.Size.x && Math.Abs(d.z) < targetThingDef.Size.z)
+                        if (Mathf.Abs(d.x) < targetSize.x && Math.Abs(d.z) < targetSize.z)
                         {
                             impact = true;
                         }
@@ -142,7 +149,10 @@ namespace VVRace
             }
             finally
             {
-                base.Tick();
+                foreach (var comp in AllComps)
+                {
+                    comp.CompTick();
+                }
             }
         }
 
