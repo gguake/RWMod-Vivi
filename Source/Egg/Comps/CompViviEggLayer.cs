@@ -99,6 +99,16 @@ namespace VVRace
             }
         }
 
+        public override void Notify_DuplicatedFrom(Pawn source)
+        {
+            var compEggLayer = source.GetComp<CompViviEggLayer>();
+            if (compEggLayer != null)
+            {
+                eggProgress = compEggLayer.eggProgress;
+                canLayEgg = compEggLayer.canLayEgg;
+            }
+        }
+
         public Thing ProduceEgg(bool force = false)
         {
             if (!CanLayEgg && !force) { return null; }

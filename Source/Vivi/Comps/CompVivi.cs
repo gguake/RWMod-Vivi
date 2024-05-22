@@ -66,16 +66,21 @@ namespace VVRace
             base.PostDeSpawn(map);
         }
 
-        public override void Notify_KilledLeavingsLeft(List<Thing> leavings)
-        {
-            base.Notify_KilledLeavingsLeft(leavings);
-        }
-
         public override void CompTick()
         {
             if (parent.IsHashIntervalTick(60000))
             {
                 RefreshHairColor();
+            }
+        }
+
+        public override void Notify_DuplicatedFrom(Pawn source)
+        {
+            var sourceComp = source.GetComp<CompVivi>();
+            if (sourceComp != null)
+            {
+                isRoyal = sourceComp.isRoyal;
+                _originalHairColor = sourceComp._originalHairColor;
             }
         }
 
