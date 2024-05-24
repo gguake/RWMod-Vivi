@@ -38,7 +38,7 @@ namespace VVRace
                 TraverseParms.For(pawn, Danger.Some),
                 validator: (thing) =>
                 {
-                    if (!thing.Spawned || thing.IsForbidden(pawn) || !pawn.CanReserve(thing) || thing.Faction != pawn.Faction)
+                    if (!thing.Spawned || thing.IsForbidden(pawn) || !pawn.CanReserve(thing))
                     {
                         return false;
                     }
