@@ -1,8 +1,10 @@
 ﻿using HarmonyLib;
 using RimWorld;
 using RimWorld.BaseGen;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Emit;
 using Verse;
 using Verse.AI;
 
@@ -65,6 +67,10 @@ namespace VVRace.HarmonyPatches
                 var innerMehtod = innerType.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault();
                 harmony.Patch(innerMehtod, postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(BaseGenUtility_TryRandomInexpensiveFloor_Where_Postfix)));
             }
+
+            harmony.Patch(
+                original: AccessTools.Method(typeof(Building), nameof(Building.DeSpawn)),
+                transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(Building_DeSpawn_Transpiler)));
 
             Log.Message("!! [ViViRace] race patch complete");
         }
@@ -232,6 +238,37 @@ namespace VVRace.HarmonyPatches
             {
                 __result = false;
             }
+        }
+
+        private static List<CodeInstruction> Building_DeSpawn_Transpiler(IEnumerable<CodeInstruction> codeInstructions, ILGenerator ilGenerator)
+        {
+            var instructions = codeInstructions.ToList();
+            var injectionIndex = instructions.FindIndex(v => v.opcode == OpCodes.Call && v.OperandIs(AccessTools.Method(typeof(ThingWithComps), nameof(ThingWithComps.DeSpawn)))) + 1;
+
+            var jumpLabel = ilGenerator.DefineLabel();
+            instructions[injectionIndex] = instructions[injectionIndex].WithLabels(jumpLabel);
+
+            var skipIndex = instructions.FindIndex(v => v.opcode == OpCodes.Call && v.OperandIs(AccessTools.Method(typeof(EdificeUtility), nameof(EdificeUtility.IsEdifice)))) - 2;
+            var skipLabel = ilGenerator.DefineLabel();
+            instructions[skipIndex] = instructions[skipIndex].WithLabels(skipLabel);
+
+            var injection = new CodeInstruction[]
+            {
+                new CodeInstruction(OpCodes.Ldarg_1),
+                new CodeInstruction(OpCodes.Ldc_I4_1),
+                new CodeInstruction(OpCodes.Bne_Un_S, jumpLabel),
+                new CodeInstruction(OpCodes.Ldarg_0),
+                new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(Thing), nameof(Thing.def))),
+                new CodeInstruction(OpCodes.Ldsfld, AccessTools.Field(typeof(VVThingDefOf), nameof(VVThingDefOf.VV_ViviCreamWall))),
+                new CodeInstruction(OpCodes.Beq, skipLabel),
+                new CodeInstruction(OpCodes.Ldarg_0),
+                new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(Thing), nameof(Thing.def))),
+                new CodeInstruction(OpCodes.Ldsfld, AccessTools.Field(typeof(VVThingDefOf), nameof(VVThingDefOf.VV_SmoothedViviCreamWall))),
+                new CodeInstruction(OpCodes.Beq_S, skipLabel),
+            };
+            instructions.InsertRange(injectionIndex, injection);
+            
+            return instructions;
         }
     }
 }

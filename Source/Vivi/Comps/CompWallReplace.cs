@@ -49,7 +49,7 @@ namespace VVRace
 
                 parent.Destroy(DestroyMode.WillReplace);
                 var wall = ThingMaker.MakeThing(Props.replaceThing, Props.replaceThingStuff);
-                wall.SetFaction(faction);
+                wall.SetFaction(faction ?? Faction.OfPlayer);
                 GenSpawn.Spawn(wall, position, map, rotation);
             }
         }
