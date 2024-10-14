@@ -17,7 +17,7 @@
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>MedicineHerbal</thingDef>
-        <countRange>0~40</countRange>
+        <countRange>15~50</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>Neutroamine</thingDef>
@@ -35,7 +35,7 @@
 
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_FilteredHoney</thingDef>
-        <countRange>600~1000</countRange>
+        <countRange>700~1500</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_RoyalJelly</thingDef>
@@ -43,7 +43,7 @@
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_Vivicream</thingDef>
-        <countRange>80~140</countRange>
+        <countRange>80~150</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_Viviwax</thingDef>
@@ -51,13 +51,28 @@
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_Propolis</thingDef>
-        <countRange>10~100</countRange>
+        <countRange>10~120</countRange>
+      </li>
+      <li Class="StockGenerator_Tag">
+        <tradeTag>VV_Petal</tradeTag>
+        <thingDefCountRange>0~2</thingDefCountRange>
+        <countRange>50~100</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>VV_ViviEgg</thingDef>
+        <countRange>-2~1</countRange>
       </li>
       
       <!-- Drugs -->
+      <li Class="StockGenerator_Tag">
+        <tradeTag>VV_FloweringTea</tradeTag>
+        <thingDefCountRange>1~1</thingDefCountRange>
+        <countRange>30~60</countRange>
+      </li>
+
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_Mead</thingDef>
-        <countRange>50~100</countRange>
+        <countRange>80~150</countRange>
       </li>
       
       <!-- Techprints -->
@@ -133,7 +148,7 @@
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_Viviwax</thingDef>
-        <countRange>50~100</countRange>
+        <countRange>100~200</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>DevilstrandCloth</thingDef>
