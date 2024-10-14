@@ -120,7 +120,7 @@
     <designationCategory Inherit="False" />
     <comps Inherit="False">
       <li Class="VVRace.CompProperties_CompWallReplace">
-        <replaceTicks>600000</replaceTicks>
+        <replaceTicks>540000</replaceTicks>
         <replaceThing>VV_ViviHoneycombWall</replaceThing>
       </li>
     </comps>
@@ -271,11 +271,11 @@
       </li>
       <li>
         <damageDef>Flame</damageDef>
-        <multiplier>10</multiplier>
+        <multiplier>8</multiplier>
       </li>
       <li>
         <damageDef>Burn</damageDef>
-        <multiplier>10</multiplier>
+        <multiplier>8</multiplier>
       </li>
     </damageMultipliers>
     

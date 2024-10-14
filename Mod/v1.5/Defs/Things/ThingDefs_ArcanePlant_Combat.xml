@@ -80,7 +80,7 @@
         <healthRegenNoDamagedByDays>40</healthRegenNoDamagedByDays>
 
         <maxMana>400</maxMana>
-        <consumedManaByDay>60</consumedManaByDay>
+        <consumedManaByDay>80</consumedManaByDay>
 
         <manaSensitivity>Medium</manaSensitivity>
         <manageSensitivity>Medium</manageSensitivity>
@@ -88,8 +88,8 @@
         <glowSensitivity>Medium</glowSensitivity>
         
         <manageIntervalTicks>150000</manageIntervalTicks>
-        <optimalTemperatureRange>10~34</optimalTemperatureRange>
-        <optimalGlowRange>0.5~1.0</optimalGlowRange>
+        <optimalTemperatureRange>6~38</optimalTemperatureRange>
+        <optimalGlowRange>0.4~1.0</optimalGlowRange>
 
         <successChanceCurve>
           <points>
@@ -255,7 +255,7 @@
         <healthRegenNoDamagedByDays>40</healthRegenNoDamagedByDays>
 
         <maxMana>400</maxMana>
-        <consumedManaByDay>60</consumedManaByDay>
+        <consumedManaByDay>80</consumedManaByDay>
 
         <manaSensitivity>Medium</manaSensitivity>
         <manageSensitivity>Medium</manageSensitivity>
@@ -263,8 +263,8 @@
         <glowSensitivity>Medium</glowSensitivity>
         
         <manageIntervalTicks>150000</manageIntervalTicks>
-        <optimalTemperatureRange>10~34</optimalTemperatureRange>
-        <optimalGlowRange>0.5~1.0</optimalGlowRange>
+        <optimalTemperatureRange>6~38</optimalTemperatureRange>
+        <optimalGlowRange>0.4~1.0</optimalGlowRange>
 
         <successChanceCurve>
           <points>
@@ -517,17 +517,17 @@
 
         <totalGrowDays>20</totalGrowDays>
         <maxHealth>250</maxHealth>
-        <healthRegenNoDamagedByDays>25</healthRegenNoDamagedByDays>
+        <healthRegenNoDamagedByDays>20</healthRegenNoDamagedByDays>
 
         <maxMana>500</maxMana>
-        <consumedManaByDay>50</consumedManaByDay>
+        <consumedManaByDay>60</consumedManaByDay>
 
         <manaSensitivity>High</manaSensitivity>
         <temperatureSensitivity>High</temperatureSensitivity>
         <glowSensitivity>Low</glowSensitivity>
         
-        <optimalTemperatureRange>16~60</optimalTemperatureRange>
-        <optimalGlowRange>0.5~1.0</optimalGlowRange>
+        <optimalTemperatureRange>12~70</optimalTemperatureRange>
+        <optimalGlowRange>0.4~1.0</optimalGlowRange>
 
         <successChanceCurve>
           <points>
@@ -650,7 +650,7 @@
         <healthRegenNoDamagedByDays>40</healthRegenNoDamagedByDays>
 
         <maxMana>400</maxMana>
-        <consumedManaByDay>60</consumedManaByDay>
+        <consumedManaByDay>80</consumedManaByDay>
 
         <manaSensitivity>Medium</manaSensitivity>
         <manageSensitivity>Medium</manageSensitivity>
@@ -658,8 +658,8 @@
         <glowSensitivity>Medium</glowSensitivity>
         
         <manageIntervalTicks>150000</manageIntervalTicks>
-        <optimalTemperatureRange>10~34</optimalTemperatureRange>
-        <optimalGlowRange>0.5~1.0</optimalGlowRange>
+        <optimalTemperatureRange>6~38</optimalTemperatureRange>
+        <optimalGlowRange>0.4~1.0</optimalGlowRange>
 
         <successChanceCurve>
           <points>

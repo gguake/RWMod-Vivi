@@ -66,8 +66,6 @@
         <zeroManaDamageByChance>1~5</zeroManaDamageByChance>
       </li>
     </modExtensions>
-    
-    <tradeability>Sellable</tradeability>
   </ThingDef>
 
 </Defs>

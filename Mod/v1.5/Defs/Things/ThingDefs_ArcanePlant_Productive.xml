@@ -56,8 +56,8 @@
           <mana>20</mana>
         </manaConsumeRule>
         <manaGenerateRule Class="VVRace.ManaFluxRule_Temperature">
-          <activeTemperatureRange>25~125</activeTemperatureRange>
-          <manaFromTemperatureRange>0~100</manaFromTemperatureRange>
+          <activeTemperatureRange>25~200</activeTemperatureRange>
+          <manaFromTemperatureRange>0~200</manaFromTemperatureRange>
         </manaGenerateRule>
       </li>
 
@@ -87,14 +87,14 @@
         <healthRegenNoDamagedByDays>50</healthRegenNoDamagedByDays>
 
         <maxMana>150</maxMana>
-        <consumedManaByDay>50</consumedManaByDay>
+        <consumedManaByDay>60</consumedManaByDay>
 
         <manaSensitivity>Medium</manaSensitivity>
         <manageSensitivity>Low</manageSensitivity>
         <temperatureSensitivity>High</temperatureSensitivity>
         
         <manageIntervalTicks>90000</manageIntervalTicks>
-        <optimalTemperatureRange>12~120</optimalTemperatureRange>
+        <optimalTemperatureRange>8~120</optimalTemperatureRange>
 
         <successChanceCurve>
           <points>
@@ -181,8 +181,8 @@
         <manaGenerateRule Class="VVRace.ManaFluxRule_CompositeSum">
           <rules>
             <li Class="VVRace.ManaFluxRule_Temperature">
-              <activeTemperatureRange>-100~0</activeTemperatureRange>
-              <manaFromTemperatureRange>0~150</manaFromTemperatureRange>
+              <activeTemperatureRange>-180~0</activeTemperatureRange>
+              <manaFromTemperatureRange>0~300</manaFromTemperatureRange>
               <manaLerpReversed>true</manaLerpReversed>
             </li>
             <li Class="VVRace.ManaFluxRule_WeatherSnowy">
@@ -219,14 +219,14 @@
         <healthRegenNoDamagedByDays>50</healthRegenNoDamagedByDays>
 
         <maxMana>150</maxMana>
-        <consumedManaByDay>50</consumedManaByDay>
+        <consumedManaByDay>60</consumedManaByDay>
 
         <manaSensitivity>Medium</manaSensitivity>
         <manageSensitivity>Low</manageSensitivity>
         <temperatureSensitivity>High</temperatureSensitivity>
         
         <manageIntervalTicks>90000</manageIntervalTicks>
-        <optimalTemperatureRange>-100~12</optimalTemperatureRange>
+        <optimalTemperatureRange>-100~17</optimalTemperatureRange>
 
         <successChanceCurve>
           <points>
@@ -362,17 +362,17 @@
 
         <totalGrowDays>10</totalGrowDays>
         <maxHealth>120</maxHealth>
-        <healthRegenNoDamagedByDays>70</healthRegenNoDamagedByDays>
+        <healthRegenNoDamagedByDays>50</healthRegenNoDamagedByDays>
 
-        <maxMana>200</maxMana>
-        <consumedManaByDay>150</consumedManaByDay>
+        <maxMana>240</maxMana>
+        <consumedManaByDay>180</consumedManaByDay>
 
         <manaSensitivity>High</manaSensitivity>
         <manageSensitivity>Low</manageSensitivity>
         <glowSensitivity>Low</glowSensitivity>
         
         <manageIntervalTicks>150000</manageIntervalTicks>
-        <optimalGlowRange>0.51~1.0</optimalGlowRange>
+        <optimalGlowRange>0.5~1.0</optimalGlowRange>
 
         <successChanceCurve>
           <points>
@@ -490,17 +490,17 @@
 
         <totalGrowDays>10</totalGrowDays>
         <maxHealth>120</maxHealth>
-        <healthRegenNoDamagedByDays>70</healthRegenNoDamagedByDays>
+        <healthRegenNoDamagedByDays>50</healthRegenNoDamagedByDays>
 
         <maxMana>400</maxMana>
-        <consumedManaByDay>80</consumedManaByDay>
+        <consumedManaByDay>100</consumedManaByDay>
 
         <manaSensitivity>Medium</manaSensitivity>
         <manageSensitivity>High</manageSensitivity>
         <glowSensitivity>Low</glowSensitivity>
         
         <manageIntervalTicks>45000</manageIntervalTicks>
-        <optimalGlowRange>0.51~1.0</optimalGlowRange>
+        <optimalGlowRange>0.5~1.0</optimalGlowRange>
 
         <successChanceCurve>
           <points>
@@ -630,14 +630,14 @@
         <healthRegenNoDamagedByDays>30</healthRegenNoDamagedByDays>
 
         <maxMana>300</maxMana>
-        <consumedManaByDay>50</consumedManaByDay>
+        <consumedManaByDay>80</consumedManaByDay>
 
         <manaSensitivity>Medium</manaSensitivity>
         <manageSensitivity>High</manageSensitivity>
         <temperatureSensitivity>Medium</temperatureSensitivity>
         
         <manageIntervalTicks>210000</manageIntervalTicks>
-        <optimalTemperatureRange>16~27</optimalTemperatureRange>
+        <optimalTemperatureRange>12~39</optimalTemperatureRange>
 
         <successChanceCurve>
           <points>
@@ -753,14 +753,14 @@
         <healthRegenNoDamagedByDays>300</healthRegenNoDamagedByDays>
 
         <maxMana>240</maxMana>
-        <consumedManaByDay>60</consumedManaByDay>
+        <consumedManaByDay>80</consumedManaByDay>
 
         <manaSensitivity>Medium</manaSensitivity>
         <manageSensitivity>Low</manageSensitivity>
         <glowSensitivity>High</glowSensitivity>
         
         <manageIntervalTicks>210000</manageIntervalTicks>
-        <optimalGlowRange>0.51~1.0</optimalGlowRange>
+        <optimalGlowRange>0.5~1.0</optimalGlowRange>
 
         <successChanceCurve>
           <points>
@@ -883,7 +883,7 @@
         <healthRegenNoDamagedByDays>30</healthRegenNoDamagedByDays>
 
         <maxMana>400</maxMana>
-        <consumedManaByDay>50</consumedManaByDay>
+        <consumedManaByDay>60</consumedManaByDay>
 
         <manaSensitivity>Low</manaSensitivity>
         <manageSensitivity>High</manageSensitivity>
@@ -1015,12 +1015,12 @@
         <healthRegenNoDamagedByDays>25</healthRegenNoDamagedByDays>
 
         <maxMana>270</maxMana>
-        <consumedManaByDay>40</consumedManaByDay>
+        <consumedManaByDay>50</consumedManaByDay>
 
         <manaSensitivity>Medium</manaSensitivity>
         <temperatureSensitivity>Low</temperatureSensitivity>
         
-        <optimalTemperatureRange>5~35</optimalTemperatureRange>
+        <optimalTemperatureRange>4~36</optimalTemperatureRange>
 
         <successChanceCurve>
           <points>
@@ -1162,7 +1162,7 @@
         <healthRegenNoDamagedByDays>10</healthRegenNoDamagedByDays>
 
         <maxMana>100</maxMana>
-        <consumedManaByDay>35</consumedManaByDay>
+        <consumedManaByDay>40</consumedManaByDay>
 
         <manaSensitivity>High</manaSensitivity>
         <manageSensitivity>Low</manageSensitivity>

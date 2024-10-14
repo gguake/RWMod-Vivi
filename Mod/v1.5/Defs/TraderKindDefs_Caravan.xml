@@ -42,8 +42,12 @@
         <countRange>10~70</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
+        <thingDef>VV_Vivicream</thingDef>
+        <countRange>80~140</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
         <thingDef>VV_Viviwax</thingDef>
-        <countRange>200~600</countRange>
+        <countRange>400~800</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_Propolis</thingDef>
@@ -124,6 +128,14 @@
         <totalPriceRange>100~300</totalPriceRange>
       </li>
       <li Class="StockGenerator_SingleDef">
+        <thingDef>VV_Vivicream</thingDef>
+        <countRange>100~200</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>VV_Viviwax</thingDef>
+        <countRange>50~100</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
         <thingDef>DevilstrandCloth</thingDef>
         <countRange>200~500</countRange>
       </li>
@@ -168,13 +180,17 @@
       <!-- Buildings -->
       <li Class="StockGenerator_Tag">
         <tradeTag>VV_ArcanePlantProductive</tradeTag>
-        <thingDefCountRange>1~3</thingDefCountRange>
+        <thingDefCountRange>2~4</thingDefCountRange>
         <countRange>3~9</countRange>
       </li>
       <li Class="StockGenerator_Tag">
         <tradeTag>VV_ArcanePlantCombat</tradeTag>
         <thingDefCountRange>0~2</thingDefCountRange>
         <countRange>3~9</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>VV_Everflower</thingDef>
+        <countRange>-2~1</countRange>
       </li>
 
       <!-- Exotic -->

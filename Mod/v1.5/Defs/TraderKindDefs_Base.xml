@@ -71,8 +71,12 @@
         <countRange>150~250</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
+        <thingDef>VV_Vivicream</thingDef>
+        <countRange>150~300</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
         <thingDef>VV_Viviwax</thingDef>
-        <countRange>200~500</countRange>
+        <countRange>400~1000</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_Propolis</thingDef>
@@ -97,7 +101,7 @@
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_TitanicHornetWing</thingDef>
-        <countRange>0~4</countRange>
+        <countRange>0~8</countRange>
       </li>
       
       <!-- Drugs -->
@@ -173,6 +177,11 @@
         <tradeTag>VV_ArcanePlant</tradeTag>
         <thingDefCountRange>1~4</thingDefCountRange>
         <countRange>4~10</countRange>
+      </li>
+
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>VV_Everflower</thingDef>
+        <countRange>-4~1</countRange>
       </li>
 
       <!-- Exotic -->
