@@ -226,6 +226,7 @@
     <Compile Include="Vivi\Comps\CompFermentItem.cs" />
     <Compile Include="Vivi\Comps\CompHoney.cs" />
     <Compile Include="Vivi\Gene_HoneyDependency.cs" />
+    <Compile Include="Vivi\HediffComp_ChangeRoyalJellyNeed.cs" />
     <Compile Include="Vivi\HediffComp_GrowthBoost.cs" />
     <Compile Include="Vivi\Comps\CompVivi.cs" />
     <Compile Include="ViviModsConfig.cs" />

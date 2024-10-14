@@ -20,9 +20,8 @@
         <disappearsAfterTicks>45000~45000</disappearsAfterTicks>
         <showRemainingTime>true</showRemainingTime>
       </li>
-      <li Class="HediffCompProperties_ChangeNeed">
-        <needDef>VV_RoyalJelly</needDef>
-        <percentPerDay>0.036</percentPerDay>
+      <li Class="VVRace.HediffCompProperties_ChangeRoyalJellyNeed">
+        <percentPerDay>0.0032</percentPerDay>
       </li>
     </comps>
 
