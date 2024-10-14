@@ -30,7 +30,7 @@
       <Insulation_Heat>12</Insulation_Heat>
     </statBases>
     <equippedStatOffsets>
-      <IncomingDamageFactor>-0.12</IncomingDamageFactor>
+      <IncomingDamageFactor>-0.2</IncomingDamageFactor>
       <PainShockThreshold>0.15</PainShockThreshold>
       <ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">0.75</ToxicEnvironmentResistance>
     </equippedStatOffsets>
