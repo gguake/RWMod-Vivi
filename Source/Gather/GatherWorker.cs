@@ -1,6 +1,7 @@
 ﻿using RimWorld;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 using Verse;
 using Verse.AI;
 
@@ -61,6 +62,10 @@ namespace VVRace
         }
 
         public virtual void Notify_ProcessStarted(Pawn pawn)
+        {
+        }
+
+        public virtual void Notify_RecipeComplete(Pawn pawn, ThingDef productDef, ref float productCount)
         {
         }
     }

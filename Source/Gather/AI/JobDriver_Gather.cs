@@ -298,6 +298,7 @@ namespace VVRace
                         foreach (var productThingDefCount in curJob.RecipeDef.products)
                         {
                             var productCount = productThingDefCount.count * efficiency;
+                            GatheringRecipeDef.gatherWorker.Notify_RecipeComplete(actor, productThingDefCount.thingDef, ref productCount);
 
                             while (productCount > 0)
                             {

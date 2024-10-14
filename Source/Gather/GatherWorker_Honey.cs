@@ -1,8 +1,8 @@
 ﻿using HarmonyLib;
-using MonoMod.Utils;
 using RimWorld;
 using System;
 using System.Linq;
+using UnityEngine;
 using Verse;
 
 namespace VVRace
@@ -57,6 +57,21 @@ namespace VVRace
                 {
                     Pawn_FilthTracker_ReversePatch.DropCarriedFilth(pawn.filth, filth);
                 }
+            }
+        }
+
+        public override void Notify_RecipeComplete(Pawn pawn, ThingDef productDef, ref float productCount)
+        {
+            var gene = pawn.genes.GenesListForReading.FirstOrDefault(v => v is Gene_HoneyDependency) as Gene_HoneyDependency;
+            if (gene == null) { return; }
+
+            var hediff = gene.LinkedHediff;
+            if (hediff == null) { return; }
+
+            if (hediff.Severity > 0.8f && productCount > 1f)
+            {
+                gene.Reset();
+                productCount = Mathf.Clamp(productCount - 1f, 1f, productDef.stackLimit);
             }
         }
     }
