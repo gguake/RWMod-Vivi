@@ -121,6 +121,7 @@
     <ingestible>
       <preferability>MealAwful</preferability>
       <foodType>AnimalProduct, Fluid</foodType>
+      <babiesCanIngest>true</babiesCanIngest>
     </ingestible>
     <thingCategories>
       <li>VV_ViviProduct</li>
