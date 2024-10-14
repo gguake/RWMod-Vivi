@@ -167,8 +167,11 @@ namespace VVRace
                         var allProducts = new List<Thing>();
                         foreach (var productThingDefCount in curJob.RecipeDef.products)
                         {
-                            var minProductCount = (int)(productThingDefCount.count * efficiency);
-                            var productCount = minProductCount + (Rand.Chance(productThingDefCount.count * efficiency - minProductCount) ? 1 : 0);
+                            var actualProductCount = productThingDefCount.count * efficiency;
+                            GatheringRecipeDef.gatherWorker.Notify_RecipeComplete(actor, productThingDefCount.thingDef, ref actualProductCount);
+
+                            var minProductCount = (int)actualProductCount;
+                            var productCount = minProductCount + (Rand.Chance(actualProductCount - minProductCount) ? 1 : 0);
 
                             while (productCount > 0)
                             {
