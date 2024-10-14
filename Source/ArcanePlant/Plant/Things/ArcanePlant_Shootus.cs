@@ -95,7 +95,7 @@ namespace VVRace
 
         protected override void BurstComplete()
         {
-            _burstCooldownTicksLeft = (Gun.GetStatValue(StatDefOf.RangedWeapon_Cooldown) * 3f).SecondsToTicks();
+            _burstCooldownTicksLeft = (Gun.GetStatValue(StatDefOf.RangedWeapon_Cooldown) * 2.5f).SecondsToTicks();
         }
 
         private static readonly Texture2D EquipCommandTex = ContentFinder<Texture2D>.Get("UI/Commands/VV_EquipShootus");

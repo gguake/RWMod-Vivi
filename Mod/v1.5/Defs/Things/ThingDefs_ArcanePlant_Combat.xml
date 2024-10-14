@@ -152,8 +152,8 @@
 
     <statBases>
       <AccuracyTouch>0.95</AccuracyTouch>
-      <AccuracyShort>0.75</AccuracyShort>
-      <AccuracyMedium>0.25</AccuracyMedium>
+      <AccuracyShort>0.78</AccuracyShort>
+      <AccuracyMedium>0.32</AccuracyMedium>
       <AccuracyLong>0.15</AccuracyLong>
       <RangedWeapon_Cooldown>3.8</RangedWeapon_Cooldown>
       <DeteriorationRate>0</DeteriorationRate>
