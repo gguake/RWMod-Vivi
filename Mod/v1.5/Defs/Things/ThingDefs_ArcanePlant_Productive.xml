@@ -26,7 +26,7 @@
     </statBases>
 
     <costList>
-      <VV_HeatingPetal>15</VV_HeatingPetal>
+      <VV_HeatingPetal>20</VV_HeatingPetal>
     </costList>
 
     <comps>
@@ -50,7 +50,7 @@
 
     <modExtensions>
       <li Class="VVRace.ManaExtension">
-        <manaCapacity>150</manaCapacity>
+        <manaCapacity>200</manaCapacity>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
           <mana>20</mana>
@@ -154,7 +154,7 @@
     </statBases>
 
     <costList>
-      <VV_CoolingPetal>15</VV_CoolingPetal>
+      <VV_CoolingPetal>20</VV_CoolingPetal>
     </costList>
 
     <comps>
@@ -173,7 +173,7 @@
 
     <modExtensions>
       <li Class="VVRace.ManaExtension">
-        <manaCapacity>150</manaCapacity>
+        <manaCapacity>200</manaCapacity>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
           <mana>20</mana>
@@ -289,7 +289,7 @@
     </statBases>
 
     <costList>
-      <VV_SparklingPetal>15</VV_SparklingPetal>
+      <VV_SparklingPetal>20</VV_SparklingPetal>
     </costList>
 
     <comps>
@@ -329,7 +329,7 @@
 
     <modExtensions>
       <li Class="VVRace.ManaExtension">
-        <manaCapacity>200</manaCapacity>
+        <manaCapacity>300</manaCapacity>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
           <mana>50</mana>
@@ -433,7 +433,7 @@
     </statBases>
 
     <costList>
-      <VV_SparklingPetal>15</VV_SparklingPetal>
+      <VV_SparklingPetal>20</VV_SparklingPetal>
     </costList>
 
     <comps>
@@ -460,7 +460,7 @@
 
     <modExtensions>
       <li Class="VVRace.ManaExtension">
-        <manaCapacity>500</manaCapacity>
+        <manaCapacity>600</manaCapacity>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
           <mana>120</mana>
@@ -563,7 +563,7 @@
     </statBases>
 
     <costList>
-      <VV_CoolingPetal>15</VV_CoolingPetal>
+      <VV_CoolingPetal>20</VV_CoolingPetal>
     </costList>
 
     <comps>
@@ -596,7 +596,7 @@
 
     <modExtensions>
       <li Class="VVRace.ManaExtension">
-        <manaCapacity>300</manaCapacity>
+        <manaCapacity>450</manaCapacity>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
           <mana>15</mana>
@@ -699,7 +699,7 @@
     </statBases>
 
     <costList>
-      <VV_HeatingPetal>15</VV_HeatingPetal>
+      <VV_HeatingPetal>20</VV_HeatingPetal>
     </costList>
 
     <comps>
@@ -720,7 +720,7 @@
 
     <modExtensions>
       <li Class="VVRace.ManaExtension">
-        <manaCapacity>300</manaCapacity>
+        <manaCapacity>500</manaCapacity>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_CompositeSum">
           <rules>
@@ -821,7 +821,7 @@
     </statBases>
 
     <costList>
-      <VV_PerfumingPetal>15</VV_PerfumingPetal>
+      <VV_PerfumingPetal>20</VV_PerfumingPetal>
     </costList>
 
     <comps>
@@ -947,7 +947,7 @@
     </statBases>
 
     <costList>
-      <VV_PerfumingPetal>15</VV_PerfumingPetal>
+      <VV_PerfumingPetal>20</VV_PerfumingPetal>
     </costList>
 
     <comps>
@@ -981,7 +981,7 @@
 
     <modExtensions>
       <li Class="VVRace.ManaExtension">
-        <manaCapacity>300</manaCapacity>
+        <manaCapacity>400</manaCapacity>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
           <mana>40</mana>

@@ -175,8 +175,8 @@
       <!-- Buildings -->
       <li Class="StockGenerator_Tag">
         <tradeTag>VV_ArcanePlant</tradeTag>
-        <thingDefCountRange>1~4</thingDefCountRange>
-        <countRange>4~10</countRange>
+        <thingDefCountRange>1~5</thingDefCountRange>
+        <countRange>5~15</countRange>
       </li>
 
       <li Class="StockGenerator_SingleDef">

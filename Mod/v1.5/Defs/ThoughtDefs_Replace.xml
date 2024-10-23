@@ -61,7 +61,7 @@
     <ThoughtDef ParentName="DeathMemoryFamily">
       <defName>VV_MyDaughterDied</defName>
       <durationDays>15</durationDays>
-      <stackLimit>3</stackLimit>
+      <stackLimit>1</stackLimit>
       <stages>
         <li>
           <label>my daughter {0} died</label>
@@ -74,7 +74,7 @@
     <ThoughtDef ParentName="LostMemoryFamily">
       <defName>VV_MyDaughterLost</defName>
       <durationDays>15</durationDays>
-      <stackLimit>3</stackLimit>
+      <stackLimit>1</stackLimit>
       <stages>
         <li>
           <label>my daughter {0} lost</label>
@@ -87,7 +87,7 @@
     <ThoughtDef ParentName="DeathMemory">
       <defName>VV_PawnWithGoodOpinionDied</defName>
       <durationDays>10</durationDays>
-      <stackLimit>3</stackLimit>
+      <stackLimit>1</stackLimit>
       <stackLimitForSameOtherPawn>1</stackLimitForSameOtherPawn>
       <nullifyingTraits>
         <li>Psychopath</li>
@@ -104,7 +104,7 @@
     <ThoughtDef ParentName="LostMemory">
       <defName>VV_PawnWithGoodOpinionLost</defName>
       <durationDays>10</durationDays>
-      <stackLimit>3</stackLimit>
+      <stackLimit>1</stackLimit>
       <stackLimitForSameOtherPawn>1</stackLimitForSameOtherPawn>
       <nullifyingTraits>
         <li>Psychopath</li>

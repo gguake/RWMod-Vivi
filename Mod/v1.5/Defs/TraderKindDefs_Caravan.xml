@@ -196,12 +196,12 @@
       <li Class="StockGenerator_Tag">
         <tradeTag>VV_ArcanePlantProductive</tradeTag>
         <thingDefCountRange>2~4</thingDefCountRange>
-        <countRange>3~9</countRange>
+        <countRange>8~20</countRange>
       </li>
       <li Class="StockGenerator_Tag">
         <tradeTag>VV_ArcanePlantCombat</tradeTag>
         <thingDefCountRange>0~2</thingDefCountRange>
-        <countRange>3~9</countRange>
+        <countRange>5~15</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_Everflower</thingDef>

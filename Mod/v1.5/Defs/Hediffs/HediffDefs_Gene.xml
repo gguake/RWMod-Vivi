@@ -18,15 +18,15 @@
         <capMods>
           <li>
             <capacity>Moving</capacity>
-            <setMax>0.8</setMax>
+            <setMax>0.85</setMax>
           </li>
           <li>
             <capacity>Manipulation</capacity>
-            <setMax>0.8</setMax>
+            <setMax>0.85</setMax>
           </li>
           <li>
             <capacity>Metabolism</capacity>
-            <setMax>0.8</setMax>
+            <setMax>0.85</setMax>
           </li>
         </capMods>
       </li>
@@ -36,23 +36,27 @@
         <capMods>
           <li>
             <capacity>Moving</capacity>
-            <setMax>0.6</setMax>
+            <setMax>0.7</setMax>
           </li>
           <li>
             <capacity>Manipulation</capacity>
-            <setMax>0.6</setMax>
+            <setMax>0.7</setMax>
           </li>
           <li>
             <capacity>Metabolism</capacity>
-            <setMax>0.6</setMax>
+            <setMax>0.7</setMax>
           </li>
           <li>
-            <capacity>BloodFiltration</capacity>
-            <setMax>0.8</setMax>
+            <capacity>Sight</capacity>
+            <setMax>0.85</setMax>
           </li>
           <li>
-            <capacity>BloodPumping</capacity>
-            <setMax>0.8</setMax>
+            <capacity>Hearing</capacity>
+            <setMax>0.85</setMax>
+          </li>
+          <li>
+            <capacity>Talking</capacity>
+            <setMax>0.85</setMax>
           </li>
         </capMods>
       </li>
@@ -61,23 +65,27 @@
         <capMods>
           <li>
             <capacity>Moving</capacity>
-            <setMax>0.45</setMax>
+            <setMax>0.5</setMax>
           </li>
           <li>
             <capacity>Manipulation</capacity>
-            <setMax>0.45</setMax>
+            <setMax>0.5</setMax>
           </li>
           <li>
             <capacity>Metabolism</capacity>
-            <setMax>0.45</setMax>
-          </li>
-          <li>
-            <capacity>BloodFiltration</capacity>
             <setMax>0.5</setMax>
           </li>
           <li>
-            <capacity>BloodPumping</capacity>
-            <setMax>0.5</setMax>
+            <capacity>Sight</capacity>
+            <setMax>0.7</setMax>
+          </li>
+          <li>
+            <capacity>Hearing</capacity>
+            <setMax>0.7</setMax>
+          </li>
+          <li>
+            <capacity>Talking</capacity>
+            <setMax>0.7</setMax>
           </li>
         </capMods>
       </li>
