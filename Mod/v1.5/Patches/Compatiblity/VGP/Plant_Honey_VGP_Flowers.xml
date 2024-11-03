@@ -21,7 +21,7 @@
           <li Class="PatchOperationAdd">
             <xpath>Defs/ThingDef[defName="VG_Rose"]/statBases</xpath>
             <value>
-              <VV_MinGrowthPlantGatherable>0.99</VV_MinGrowthPlantGatherable>
+              <VV_MinGrowthPlantGatherable>0.9</VV_MinGrowthPlantGatherable>
               <VV_PlantGatherCooldown>1</VV_PlantGatherCooldown>
               <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
             </value>
@@ -44,7 +44,7 @@
           <li Class="PatchOperationAdd">
             <xpath>Defs/ThingDef[defName="VG_Daylily"]/statBases</xpath>
             <value>
-              <VV_MinGrowthPlantGatherable>0.99</VV_MinGrowthPlantGatherable>
+              <VV_MinGrowthPlantGatherable>0.9</VV_MinGrowthPlantGatherable>
               <VV_PlantGatherCooldown>1</VV_PlantGatherCooldown>
               <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
             </value>
@@ -67,7 +67,7 @@
           <li Class="PatchOperationAdd">
             <xpath>Defs/ThingDef[defName="PlantPlumeria"]/statBases</xpath>
             <value>
-              <VV_MinGrowthPlantGatherable>0.99</VV_MinGrowthPlantGatherable>
+              <VV_MinGrowthPlantGatherable>0.9</VV_MinGrowthPlantGatherable>
               <VV_PlantGatherCooldown>1</VV_PlantGatherCooldown>
               <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
             </value>
@@ -90,7 +90,7 @@
           <li Class="PatchOperationAdd">
             <xpath>Defs/ThingDef[defName="Wild_PlantPlumeria"]/statBases</xpath>
             <value>
-              <VV_MinGrowthPlantGatherable>0.99</VV_MinGrowthPlantGatherable>
+              <VV_MinGrowthPlantGatherable>0.9</VV_MinGrowthPlantGatherable>
               <VV_PlantGatherCooldown>1</VV_PlantGatherCooldown>
               <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
             </value>

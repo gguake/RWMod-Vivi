@@ -73,6 +73,11 @@
             <chance>0.1</chance>
           </li>
         </passedBulletOverrides>
+
+        <growingAdjacentFlowerDef>VV_Plant_FireArcaneFlower</growingAdjacentFlowerDef>
+        <growingAdjacentFlowerIntervalTicks>45000~180000</growingAdjacentFlowerIntervalTicks>
+        <growingAdjacentFlowerChance>0.5</growingAdjacentFlowerChance>
+        <growingAdjacentFlowerRange>2.4</growingAdjacentFlowerRange>
       </li>
 
       <li Class="VVRace.GrowingArcanePlantData">
@@ -205,6 +210,11 @@
             <chance>0.5</chance>
           </li>
         </passedBulletOverrides>
+
+        <growingAdjacentFlowerDef>VV_Plant_IceArcaneFlower</growingAdjacentFlowerDef>
+        <growingAdjacentFlowerIntervalTicks>45000~180000</growingAdjacentFlowerIntervalTicks>
+        <growingAdjacentFlowerChance>0.5</growingAdjacentFlowerChance>
+        <growingAdjacentFlowerRange>2.4</growingAdjacentFlowerRange>
       </li>
 
       <li Class="VVRace.GrowingArcanePlantData">
@@ -351,6 +361,11 @@
             <chance>0.025</chance>
           </li>
         </passedBulletOverrides>
+
+        <growingAdjacentFlowerDef>VV_Plant_LightningArcaneFlower</growingAdjacentFlowerDef>
+        <growingAdjacentFlowerIntervalTicks>45000~180000</growingAdjacentFlowerIntervalTicks>
+        <growingAdjacentFlowerChance>0.5</growingAdjacentFlowerChance>
+        <growingAdjacentFlowerRange>2.4</growingAdjacentFlowerRange>
       </li>
 
       <li Class="VVRace.GrowingArcanePlantData">
@@ -479,6 +494,11 @@
             <chance>0.025</chance>
           </li>
         </passedBulletOverrides>
+
+        <growingAdjacentFlowerDef>VV_Plant_LightningArcaneFlower</growingAdjacentFlowerDef>
+        <growingAdjacentFlowerIntervalTicks>45000~180000</growingAdjacentFlowerIntervalTicks>
+        <growingAdjacentFlowerChance>0.5</growingAdjacentFlowerChance>
+        <growingAdjacentFlowerRange>2.4</growingAdjacentFlowerRange>
       </li>
 
       <li Class="VVRace.GrowingArcanePlantData">
@@ -616,6 +636,11 @@
 
       <li Class="VVRace.ArcanePlantExtension">
         <zeroManaDamageByChance>2~4</zeroManaDamageByChance>
+
+        <growingAdjacentFlowerDef>VV_Plant_IceArcaneFlower</growingAdjacentFlowerDef>
+        <growingAdjacentFlowerIntervalTicks>45000~180000</growingAdjacentFlowerIntervalTicks>
+        <growingAdjacentFlowerChance>0.5</growingAdjacentFlowerChance>
+        <growingAdjacentFlowerRange>2.4</growingAdjacentFlowerRange>
       </li>
 
       <li Class="VVRace.GrowingArcanePlantData">
@@ -739,6 +764,11 @@
 
       <li Class="VVRace.ArcanePlantExtension">
         <zeroManaDamageByChance>2~5</zeroManaDamageByChance>
+
+        <growingAdjacentFlowerDef>VV_Plant_FireArcaneFlower</growingAdjacentFlowerDef>
+        <growingAdjacentFlowerIntervalTicks>45000~180000</growingAdjacentFlowerIntervalTicks>
+        <growingAdjacentFlowerChance>0.5</growingAdjacentFlowerChance>
+        <growingAdjacentFlowerRange>2.4</growingAdjacentFlowerRange>
       </li>
 
       <li Class="VVRace.GrowingArcanePlantData">
@@ -869,6 +899,11 @@
 
       <li Class="VVRace.ArcanePlantExtension">
         <zeroManaDamageByChance>1~3</zeroManaDamageByChance>
+
+        <growingAdjacentFlowerDef>VV_Plant_LifeArcaneFlower</growingAdjacentFlowerDef>
+        <growingAdjacentFlowerIntervalTicks>45000~180000</growingAdjacentFlowerIntervalTicks>
+        <growingAdjacentFlowerChance>0.5</growingAdjacentFlowerChance>
+        <growingAdjacentFlowerRange>2.4</growingAdjacentFlowerRange>
       </li>
 
       <li Class="VVRace.GrowingArcanePlantData">
@@ -1001,6 +1036,11 @@
 
       <li Class="VVRace.ArcanePlantExtension">
         <zeroManaDamageByChance>1~5</zeroManaDamageByChance>
+
+        <growingAdjacentFlowerDef>VV_Plant_LifeArcaneFlower</growingAdjacentFlowerDef>
+        <growingAdjacentFlowerIntervalTicks>45000~180000</growingAdjacentFlowerIntervalTicks>
+        <growingAdjacentFlowerChance>0.5</growingAdjacentFlowerChance>
+        <growingAdjacentFlowerRange>2.4</growingAdjacentFlowerRange>
       </li>
 
       <li Class="VVRace.GrowingArcanePlantData">
@@ -1148,6 +1188,11 @@
 
       <li Class="VVRace.ArcanePlantExtension">
         <zeroManaDamageByChance>1~3</zeroManaDamageByChance>
+
+        <growingAdjacentFlowerDef>VV_Plant_LifeArcaneFlower</growingAdjacentFlowerDef>
+        <growingAdjacentFlowerIntervalTicks>90000~180000</growingAdjacentFlowerIntervalTicks>
+        <growingAdjacentFlowerChance>0.25</growingAdjacentFlowerChance>
+        <growingAdjacentFlowerRange>2.4</growingAdjacentFlowerRange>
       </li>
 
       <li Class="VVRace.GrowingArcanePlantData">

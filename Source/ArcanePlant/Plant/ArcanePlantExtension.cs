@@ -27,5 +27,10 @@ namespace VVRace
         public bool hasRandomDrawScale = true;
 
         public List<PassedBulletOverride> passedBulletOverrides;
+
+        public ThingDef growingAdjacentFlowerDef;
+        public IntRange growingAdjacentFlowerIntervalTicks;
+        public float growingAdjacentFlowerChance;
+        public float growingAdjacentFlowerRange;
     }
 }
