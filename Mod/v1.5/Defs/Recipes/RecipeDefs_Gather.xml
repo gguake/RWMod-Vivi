@@ -7,9 +7,9 @@
     <description>Gather honey from mature flowers or fruit trees. The speed and yield of honey gathering must be greater than 0 to perform the job.</description>
     <jobString>Gathering honey.</jobString>
     
-    <workAmount>850</workAmount>
+    <workAmount>920</workAmount>
     <workSkill>Plants</workSkill>
-    <workSkillLearnFactor>0.03</workSkillLearnFactor>
+    <workSkillLearnFactor>0.025</workSkillLearnFactor>
     <workSpeedStat>VV_HoneyGatherSpeed</workSpeedStat>
     <efficiencyStat>VV_HoneyGatherYield</efficiencyStat>
 
@@ -49,7 +49,7 @@
 
     <jobString>Gathering pollen.</jobString>
     
-    <workAmount>500</workAmount>
+    <workAmount>540</workAmount>
     <workSkill>Plants</workSkill>
     <workSkillLearnFactor>0.01</workSkillLearnFactor>
     <workSpeedStat>CleaningSpeed</workSpeedStat>
