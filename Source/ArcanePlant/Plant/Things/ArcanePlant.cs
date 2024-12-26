@@ -373,7 +373,7 @@ namespace VVRace
                         if (_tmpGrowingNearFlowerCells.Count > 0)
                         {
                             var cell = _tmpGrowingNearFlowerCells.RandomElement();
-                            var plant = (Plant)ThingMaker.MakeThing(flowerDef);
+                            var plant = (ViviFlower)ThingMaker.MakeThing(flowerDef);
                             plant.Growth = 0.1f;
                             GenSpawn.Spawn(plant, cell, Map);
                             _tmpGrowingNearFlowerCells.Clear();

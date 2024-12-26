@@ -182,7 +182,7 @@
     <uiIconColor>(1.0, 0.8, 0.6, 1.0)</uiIconColor>
     <statBases>
       <MaxHitPoints>480</MaxHitPoints>
-      <Flammability>0.75</Flammability>
+      <Flammability>0.55</Flammability>
     </statBases>
     <building>
       <relatedBuildCommands>

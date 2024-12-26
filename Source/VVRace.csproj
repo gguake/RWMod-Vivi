@@ -96,6 +96,7 @@
     <Compile Include="ArcanePlant\Growing\Things\Building_ArcanePlantFarm.cs" />
     <Compile Include="ArcanePlant\Plant\Things\ArcanePlant_Everflower.cs" />
     <Compile Include="ArcanePlant\Plant\Things\CornBullet.cs" />
+    <Compile Include="ArcanePlant\Plant\Things\ViviFlower.cs" />
     <Compile Include="Gather\StatWorker_Honey.cs" />
     <Compile Include="ArcanePlant\Plant\Things\ManaAcceptor.cs" />
     <Compile Include="ArcanePlant\Plant\Mana\ManaFluxRule_AdjacentPollution.cs" />

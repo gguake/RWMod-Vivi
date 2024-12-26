@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
   <ThingDef Abstract="True" Name="VV_ArcaneFlowerBase" ParentName="PlantBase">
+    <thingClass>VVRace.ViviFlower</thingClass>
+    <selectable>true</selectable>
     <statBases>
       <MaxHitPoints>70</MaxHitPoints>
       <Beauty>5</Beauty>
       <BeautyOutdoors>5</BeautyOutdoors>
       <Nutrition>0.1</Nutrition>
       <VV_MinGrowthPlantGatherable>0.9</VV_MinGrowthPlantGatherable>
-      <VV_PlantGatherCooldown>1.2</VV_PlantGatherCooldown>
-      <VV_PlantHoneyGatherYield>1.5</VV_PlantHoneyGatherYield>
+      <VV_PlantGatherCooldown>1</VV_PlantGatherCooldown>
+      <VV_PlantHoneyGatherYield>1.1</VV_PlantHoneyGatherYield>
     </statBases>
     <hideAtSnowDepth>0.6</hideAtSnowDepth>
     <ingestible />
     <plant>
+      <dieIfLeafless>true</dieIfLeafless>
+      <growMinGlow>0.05</growMinGlow>
       <fertilitySensitivity>0.0</fertilitySensitivity>
-      <growDays>5</growDays>
+      <growDays>2.5</growDays>
+      <lifespanDaysPerGrowDays>8</lifespanDaysPerGrowDays>
       <fertilityMin>0.05</fertilityMin>
       <maxMeshCount>25</maxMeshCount>
       <visualSizeRange>0.3~0.4</visualSizeRange>
@@ -30,6 +35,9 @@
     <defName>VV_Plant_FireArcaneFlower</defName>
     <label>red vivia</label>
     <description>A small, common arcane flower with red petals that grows in the area where Vivis live. It is known to grow around other arcane plants, drawn by their mana, and its petals take on different properties depending on the mana of the plants nearby. Fully grown flowers can have their petals harvested or their honey collected.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_HeatingPetal</ThingDef>
+    </descriptionHyperlinks>
     <graphicData>
       <texPath>Things/Plants/VV_ArcaneFlower_Red</texPath>
       <graphicClass>Graphic_Random</graphicClass>
@@ -39,12 +47,21 @@
       <harvestedThingDef>VV_HeatingPetal</harvestedThingDef>
       <harvestYield>2</harvestYield>
     </plant>
+    <comps>
+      <li Class="CompProperties_Glower">
+        <glowRadius>1.9</glowRadius>
+        <glowColor>(255,175,148,0)</glowColor>
+      </li>
+    </comps>
   </ThingDef>
 
   <ThingDef ParentName="VV_ArcaneFlowerBase">
     <defName>VV_Plant_IceArcaneFlower</defName>
     <label>blue vivia</label>
     <description>A small, common arcane flower with blue petals that grows in the area where Vivis live. It is known to grow around other arcane plants, drawn by their mana, and its petals take on different properties depending on the mana of the plants nearby. Fully grown flowers can have their petals harvested or their honey collected.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_CoolingPetal</ThingDef>
+    </descriptionHyperlinks>
     <graphicData>
       <texPath>Things/Plants/VV_ArcaneFlower_Blue</texPath>
       <graphicClass>Graphic_Random</graphicClass>
@@ -54,12 +71,21 @@
       <harvestedThingDef>VV_CoolingPetal</harvestedThingDef>
       <harvestYield>2</harvestYield>
     </plant>
+    <comps>
+      <li Class="CompProperties_Glower">
+        <glowRadius>1.9</glowRadius>
+        <glowColor>(194,250,255,0)</glowColor>
+      </li>
+    </comps>
   </ThingDef>
 
   <ThingDef ParentName="VV_ArcaneFlowerBase">
     <defName>VV_Plant_LightningArcaneFlower</defName>
     <label>purple vivia</label>
     <description>A small, common arcane flower with purple petals that grows in the area where Vivis live. It is known to grow around other arcane plants, drawn by their mana, and its petals take on different properties depending on the mana of the plants nearby. Fully grown flowers can have their petals harvested or their honey collected.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_SparklingPetal</ThingDef>
+    </descriptionHyperlinks>
     <graphicData>
       <texPath>Things/Plants/VV_ArcaneFlower_Purple</texPath>
       <graphicClass>Graphic_Random</graphicClass>
@@ -69,12 +95,21 @@
       <harvestedThingDef>VV_SparklingPetal</harvestedThingDef>
       <harvestYield>2</harvestYield>
     </plant>
+    <comps>
+      <li Class="CompProperties_Glower">
+        <glowRadius>1.9</glowRadius>
+        <glowColor>(225,201,255,0)</glowColor>
+      </li>
+    </comps>
   </ThingDef>
 
   <ThingDef ParentName="VV_ArcaneFlowerBase">
     <defName>VV_Plant_LifeArcaneFlower</defName>
     <label>yellow vivia</label>
     <description>A small, common arcane flower with yellow petals that grows in the area where Vivis live. It is known to grow around other arcane plants, drawn by their mana, and its petals take on different properties depending on the mana of the plants nearby. Fully grown flowers can have their petals harvested or their honey collected.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_PerfumingPetal</ThingDef>
+    </descriptionHyperlinks>
     <graphicData>
       <texPath>Things/Plants/VV_ArcaneFlower_Yellow</texPath>
       <graphicClass>Graphic_Random</graphicClass>
@@ -84,5 +119,11 @@
       <harvestedThingDef>VV_SparklingPetal</harvestedThingDef>
       <harvestYield>2</harvestYield>
     </plant>
+    <comps>
+      <li Class="CompProperties_Glower">
+        <glowRadius>1.9</glowRadius>
+        <glowColor>(255,230,168,0)</glowColor>
+      </li>
+    </comps>
   </ThingDef>
 </Defs>
