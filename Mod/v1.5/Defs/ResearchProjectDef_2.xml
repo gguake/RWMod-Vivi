@@ -32,7 +32,7 @@
     <techLevel>Medieval</techLevel>
   </ResearchProjectDef>
 
-  <ResearchProjectDef ParentName="ViviResearchProjectTier1Base">
+  <ResearchProjectDef ParentName="ViviResearchProjectTier2Base">
     <defName>VV_ElectricArcaneBotany</defName>
     <label>electric arcane botany</label>
     <description>Cultivate arcane plants that control electricity.</description>
@@ -55,6 +55,7 @@
     <prerequisites>
       <li>Devilstrand</li>
       <li>VV_ArcaneBotany</li>
+      <li>VV_Vivisteel</li>
     </prerequisites>
   </ResearchProjectDef>
 </Defs>

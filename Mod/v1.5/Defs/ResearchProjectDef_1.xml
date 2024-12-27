@@ -137,9 +137,22 @@
       <li>VV_BasicGathering</li>
     </prerequisites>
     <techLevel>Medieval</techLevel>
-    
     <tags>
       <li>VV_ExiledVivi</li>
     </tags>
+  </ResearchProjectDef>
+  
+  <ResearchProjectDef ParentName="ViviResearchProjectTier1Base">
+    <defName>VV_Vivisteel</defName>
+    <label>vivisteel</label>
+    <description>.</description>
+    <baseCost>1250</baseCost>
+    <researchViewX>2</researchViewX>
+    <researchViewY>2.8</researchViewY>
+    <prerequisites>
+      <li>VV_BasicInfra</li>
+      <li>Smithing</li>
+    </prerequisites>
+    <techLevel>Medieval</techLevel>
   </ResearchProjectDef>
 </Defs>

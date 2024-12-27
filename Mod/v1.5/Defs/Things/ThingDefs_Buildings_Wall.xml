@@ -283,4 +283,123 @@
     <stuffCategories Inherit="False"></stuffCategories>
   </ThingDef>
   
+  <!-- 비비스틸 벌집 벽 -->
+  <ThingDef ParentName="Wall">
+    <defName>VV_VivisteelHoneycombWall</defName>
+    <label>vivisteel honeycomb wall</label>
+    <description>a hexagonal structured steel wall with high resistance. It's impassable and supports roofs.</description>
+    
+    <graphicData>
+      <texPath>Things/Building/Wall_Atlas_HoneycombWall2</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutWithOverlay</shaderType>
+      <color>(1, 1, 1, 1)</color>
+    </graphicData>
+    
+    <uiIconPath>Things/Building/Linked/WallPlanks_MenuIcon</uiIconPath>
+    <uiIconColor>(1.0, 0.8, 0.6, 1.0)</uiIconColor>
+    <statBases>
+      <MaxHitPoints>540</MaxHitPoints>
+      <Flammability>0</Flammability>
+    </statBases>
+    <building>
+      <relatedBuildCommands>
+        <li>VV_ViviCreamWall</li>
+      </relatedBuildCommands>
+    </building>
+    <costList>
+      <VV_Viviwax>2</VV_Viviwax>
+      <VV_Vivisteel>3</VV_Vivisteel>
+    </costList>
+    <useStuffTerrainAffordance>false</useStuffTerrainAffordance>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    
+    <designationCategory Inherit="False" />
+    <damageMultipliers Inherit="False">
+      <li>
+        <damageDef>Cut</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Crush</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Blunt</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Poke</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Stab</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Scratch</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>ScratchToxic</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Bite</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>ToxicBite</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>RangedStab</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Bullet</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Arrow</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>ArrowHighVelocity</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Bomb</damageDef>
+        <multiplier>1</multiplier>
+      </li>
+      <li>
+        <damageDef>BombSuper</damageDef>
+        <multiplier>1</multiplier>
+      </li>
+      <li>
+        <damageDef>Thump</damageDef>
+        <multiplier>1</multiplier>
+      </li>
+      <li>
+        <damageDef>Demolish</damageDef>
+        <multiplier>1</multiplier>
+      </li>
+      <li>
+        <damageDef>Mining</damageDef>
+        <multiplier>1</multiplier>
+      </li>
+      <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>4</multiplier>
+      </li>
+      <li>
+        <damageDef>Burn</damageDef>
+        <multiplier>4</multiplier>
+      </li>
+    </damageMultipliers>
+    
+    <costStuffCount>0</costStuffCount>
+    <stuffCategories Inherit="False"></stuffCategories>
+  </ThingDef>
+  
 </Defs>

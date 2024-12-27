@@ -1,13 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
+  <!-- 비비스틸 정제 -->
+  <RecipeDef>
+    <defName>VV_MakeVivisteel</defName>
+    <label>make vivisteel</label>
+    <description>.</description>
+
+    <jobString>making vivisteel.</jobString>
+    <workAmount>2000</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <workSkill>Crafting</workSkill>
+
+    <effectWorking>Smelt</effectWorking>
+    <soundWorking>Recipe_Smelt</soundWorking>
+    <uiIconThing>VV_Vivisteel</uiIconThing>
+
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>5</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_Viviwax</li>
+          </thingDefs>
+        </filter>
+        <count>30</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_Propolis</li>
+          </thingDefs>
+        </filter>
+        <count>5</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>Plasteel</li>
+        <li>VV_Viviwax</li>
+        <li>VV_Propolis</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <VV_Vivisteel>25</VV_Vivisteel>
+    </products>
+    <researchPrerequisite>VV_Vivisteel</researchPrerequisite>
+    
+    <skillRequirements>
+      <Crafting>4</Crafting>
+    </skillRequirements>
+  </RecipeDef>
+
+  <!-- 비비스틸 정제 (말벌날개) -->
+  <RecipeDef>
+    <defName>VV_MakeVivisteelFromHornetWing</defName>
+    <label>make vivisteel from hornet wing</label>
+    <description>.</description>
+
+    <jobString>making vivisteel from hornet wing.</jobString>
+    <workAmount>1200</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <workSkill>Crafting</workSkill>
+
+    <effectWorking>Smelt</effectWorking>
+    <soundWorking>Recipe_Smelt</soundWorking>
+    <uiIconThing>VV_Vivisteel</uiIconThing>
+
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_TitanicHornetWing</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>VV_TitanicHornetWing</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <VV_Vivisteel>50</VV_Vivisteel>
+    </products>
+    <researchPrerequisite>VV_Vivisteel</researchPrerequisite>
+  </RecipeDef>
+
   <!-- 생체 가닥 정제 -->
   <RecipeDef>
     <defName>VV_MakeLifestrand</defName>
-    <label>making lifestrand</label>
+    <label>make lifestrand</label>
     <description>Process devilstrand with various materials to create lifestrand.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_LivingLeaf</ThingDef>
-      <ThingDef>VV_TitanicHornetWing</ThingDef>
+      <ThingDef>VV_Vivisteel</ThingDef>
     </descriptionHyperlinks>
 
     <jobString>making lifestrand.</jobString>
@@ -39,17 +133,17 @@
       <li>
         <filter>
           <thingDefs>
-            <li>VV_TitanicHornetWing</li>
+            <li>VV_Vivisteel</li>
           </thingDefs>
         </filter>
-        <count>1</count>
+        <count>25</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
       <thingDefs>
         <li>DevilstrandCloth</li>
         <li>VV_LivingLeaf</li>
-        <li>VV_TitanicHornetWing</li>
+        <li>VV_Vivisteel</li>
       </thingDefs>
     </fixedIngredientFilter>
     <products>
