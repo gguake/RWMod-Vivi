@@ -4,7 +4,7 @@
   <RecipeDef>
     <defName>VV_MakeViviPolymer</defName>
     <label>make vivi polymer</label>
-    <description>.</description>
+    <description>Make vivi polymer by process plasteel, viviwax and propolis.</description>
 
     <jobString>making vivi polymer.</jobString>
     <workAmount>2000</workAmount>
@@ -62,7 +62,7 @@
   <RecipeDef>
     <defName>VV_RefineViviPolymer</defName>
     <label>refine vivi polymer</label>
-    <description>.</description>
+    <description>Make vivi polymer by refine titanic hornet wings.</description>
 
     <jobString>refining vivi polymer.</jobString>
     <workAmount>1200</workAmount>

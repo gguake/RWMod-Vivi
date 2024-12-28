@@ -341,7 +341,7 @@
   <ThingDef ParentName="ResourceBase">
     <defName>VV_ViviPolymer</defName>
     <label>vivi polymer</label>
-    <description>.</description>
+    <description>a polymer manufactured from plasteel using Vivis proprietary processing method. It is lightweight, easy to process, and flame-resistant, but its strength is weaker than plasteel, roughly comparable to ordinary metals.</description>
     <graphicData>
       <texPath>Things/Item/Resource/Plasteel</texPath>
       <graphicClass>Graphic_StackCount</graphicClass>

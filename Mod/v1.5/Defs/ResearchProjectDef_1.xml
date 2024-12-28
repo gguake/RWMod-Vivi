@@ -145,8 +145,9 @@
   <ResearchProjectDef ParentName="ViviResearchProjectTier1Base">
     <defName>VV_ViviPolymer</defName>
     <label>vivisteel</label>
-    <description>.</description>
-    <baseCost>1250</baseCost>
+    <description>Can produce vivi polymer for varius uses.
+\nCan fortify honeycomb walls with a flame-resistant polymer also.</description>
+    <baseCost>1200</baseCost>
     <researchViewX>2</researchViewX>
     <researchViewY>2.8</researchViewY>
     <prerequisites>
