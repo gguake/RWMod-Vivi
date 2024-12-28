@@ -115,8 +115,8 @@
       <graphicClass>Graphic_Random</graphicClass>
     </graphicData>
     <plant>
-      <harvestTag>VV_PerfumingPetal</harvestTag>
-      <harvestedThingDef>VV_SparklingPetal</harvestedThingDef>
+      <harvestTag>Standard</harvestTag>
+      <harvestedThingDef>VV_PerfumingPetal</harvestedThingDef>
       <harvestYield>2</harvestYield>
     </plant>
     <comps>
