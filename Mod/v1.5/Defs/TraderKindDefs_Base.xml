@@ -101,7 +101,11 @@
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_TitanicHornetWing</thingDef>
-        <countRange>0~8</countRange>
+        <countRange>-2~3</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>VV_ViviPolymer</thingDef>
+        <countRange>150~400</countRange>
       </li>
       
       <!-- Drugs -->
