@@ -343,23 +343,23 @@
     <label>vivi polymer</label>
     <description>a polymer manufactured from plasteel using Vivis proprietary processing method. It is lightweight, easy to process, and flame-resistant, but its strength is weaker than plasteel, roughly comparable to ordinary metals.</description>
     <graphicData>
-      <texPath>Things/Item/Resource/Plasteel</texPath>
+      <texPath>Things/Item/VV_ViviPolymer</texPath>
       <graphicClass>Graphic_StackCount</graphicClass>
     </graphicData>
     <soundInteract>Metal_Drop</soundInteract>
     <soundDrop>Metal_Drop</soundDrop>
-    <useHitPoints>false</useHitPoints>
     <healthAffectsPrice>false</healthAffectsPrice>
     <statBases>
-      <MarketValue>3.3</MarketValue>
-      <Mass>0.1</Mass>
+      <MarketValue>3.4</MarketValue>
+      <MaxHitPoints>180</MaxHitPoints>
+      <Mass>0.08</Mass>
       <StuffPower_Armor_Sharp>0.9</StuffPower_Armor_Sharp>
       <StuffPower_Armor_Blunt>0.48</StuffPower_Armor_Blunt>
       <StuffPower_Armor_Heat>0.6</StuffPower_Armor_Heat>
       <StuffPower_Insulation_Cold>3</StuffPower_Insulation_Cold>
       <StuffPower_Insulation_Heat>0</StuffPower_Insulation_Heat>
-      <SharpDamageMultiplier>1</SharpDamageMultiplier>
-      <BluntDamageMultiplier>0.92</BluntDamageMultiplier>
+      <SharpDamageMultiplier>0.9</SharpDamageMultiplier>
+      <BluntDamageMultiplier>0.9</BluntDamageMultiplier>
     </statBases>
     <thingCategories>
       <li>ResourcesRaw</li>
@@ -373,18 +373,19 @@
       <appearance>Metal</appearance>
       <commonality>0</commonality>
       <constructEffect>ConstructMetal</constructEffect>
-      <color>(255,255,210)</color>
+      <color>(20,240,30)</color>
       <soundImpactBullet>BulletImpact_Metal</soundImpactBullet>
       <soundMeleeHitSharp>MeleeHit_Metal_Sharp</soundMeleeHitSharp>
       <soundMeleeHitBlunt>MeleeHit_Metal_Blunt</soundMeleeHitBlunt>
       <soundImpactMelee>Pawn_Melee_Punch_HitBuilding_Metal</soundImpactMelee>
       <statFactors>
         <MaxHitPoints>1</MaxHitPoints>
-        <Beauty>1</Beauty>
+        <Beauty>2</Beauty>
         <Flammability>0</Flammability>
         <WorkToMake>0.8</WorkToMake>
         <WorkToBuild>0.8</WorkToBuild>
-        <MeleeWeapon_CooldownMultiplier>0.8</MeleeWeapon_CooldownMultiplier>
+        <DoorOpenSpeed>1.5</DoorOpenSpeed>
+        <MeleeWeapon_CooldownMultiplier>0.7</MeleeWeapon_CooldownMultiplier>
       </statFactors>
     </stuffProps>
     <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
