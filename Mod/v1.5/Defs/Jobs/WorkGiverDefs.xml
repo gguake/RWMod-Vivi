@@ -106,4 +106,17 @@
     <prioritizeSustains>true</prioritizeSustains>
   </WorkGiverDef>
 
+  <WorkGiverDef>
+    <defName>VV_FortifyHoneycombWalls</defName>
+    <label>fortify honeycomb walls</label>
+    <giverClass>VVRace.WorkGiver_FortifyHoneycombWall</giverClass>
+    <workType>Construction</workType>
+    <priorityInType>10</priorityInType>
+    <verb>fortify</verb>
+    <gerund>fortifying</gerund>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+  </WorkGiverDef>
+  
 </Defs>

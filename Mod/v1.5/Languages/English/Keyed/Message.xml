@@ -2,4 +2,7 @@
 <LanguageData>
 <VV_Message_CompleteGrowingArcanePlant>Successfully cultivated {0} x{1}!</VV_Message_CompleteGrowingArcanePlant>
 <VV_Message_FailedGrowingArcanePlant>Failed to cultivate {0}.</VV_Message_FailedGrowingArcanePlant>
+
+<VV_Message_HoneycombWallBeingFortified>Honeycomb wall being fortified.</VV_Message_HoneycombWallBeingFortified>
+<VV_Message_MustDesignateHoneycombWall>Must target a honeycomb wall.</VV_Message_MustDesignateHoneycombWall>
 </LanguageData>

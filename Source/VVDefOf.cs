@@ -50,6 +50,8 @@ namespace VVRace
 
         public static JobDef VV_FertilizeArcanePlant;
         public static JobDef VV_ManageArcanePlantFarm;
+
+        public static JobDef VV_FortifyHoneycombWall;
     }
 
     [DefOf]
@@ -92,6 +94,7 @@ namespace VVRace
         public static ThingDef VV_ViviCreamWall;
         public static ThingDef VV_SmoothedViviCreamWall;
         public static ThingDef VV_ViviHoneycombWall;
+        public static ThingDef VV_ViviHardenHoneycombWall;
 
         public static ThingDef Plant_Strawberry;
         public static ThingDef Plant_Corn;
@@ -130,6 +133,12 @@ namespace VVRace
         public static RecipeDef VV_GatherPropolis;
 
         public static RecipeDef VV_MakeVivicream;
+    }
+
+    [DefOf]
+    public static class VVDesignationDefOf
+    {
+        public static DesignationDef VV_FortifyHoneycombWall;
     }
 
     [DefOf]

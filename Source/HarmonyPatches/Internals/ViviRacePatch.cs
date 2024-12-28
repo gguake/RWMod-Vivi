@@ -68,9 +68,15 @@ namespace VVRace.HarmonyPatches
                 harmony.Patch(innerMehtod, postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(BaseGenUtility_TryRandomInexpensiveFloor_Where_Postfix)));
             }
 
+            // 벽 교체시 부착된 구조물 철거 방지
             harmony.Patch(
                 original: AccessTools.Method(typeof(Building), nameof(Building.DeSpawn)),
                 transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(Building_DeSpawn_Transpiler)));
+
+            // 벽 강화 Designator 패치
+            harmony.Patch(
+                original: AccessTools.Method(typeof(Designator_Cancel), nameof(Designator_Cancel.DesignateThing)),
+                postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(Designator_Cancel_DesignateThing_Postfix)));
 
             Log.Message("!! [ViViRace] race patch complete");
         }
@@ -243,12 +249,17 @@ namespace VVRace.HarmonyPatches
         private static List<CodeInstruction> Building_DeSpawn_Transpiler(IEnumerable<CodeInstruction> codeInstructions, ILGenerator ilGenerator)
         {
             var instructions = codeInstructions.ToList();
-            var injectionIndex = instructions.FindIndex(v => v.opcode == OpCodes.Call && v.OperandIs(AccessTools.Method(typeof(ThingWithComps), nameof(ThingWithComps.DeSpawn)))) + 1;
+            var injectionIndex = instructions.FindIndex(
+                v => v.opcode == OpCodes.Call && 
+                v.OperandIs(AccessTools.Method(typeof(ThingWithComps), nameof(ThingWithComps.DeSpawn)))) + 1;
 
             var jumpLabel = ilGenerator.DefineLabel();
             instructions[injectionIndex] = instructions[injectionIndex].WithLabels(jumpLabel);
 
-            var skipIndex = instructions.FindIndex(v => v.opcode == OpCodes.Call && v.OperandIs(AccessTools.Method(typeof(EdificeUtility), nameof(EdificeUtility.IsEdifice)))) - 2;
+            var skipIndex = instructions.FindIndex(
+                v => v.opcode == OpCodes.Call && 
+                v.OperandIs(AccessTools.Method(typeof(EdificeUtility), nameof(EdificeUtility.IsEdifice)))) - 2;
+
             var skipLabel = ilGenerator.DefineLabel();
             instructions[skipIndex] = instructions[skipIndex].WithLabels(skipLabel);
 
@@ -260,15 +271,31 @@ namespace VVRace.HarmonyPatches
                 new CodeInstruction(OpCodes.Ldarg_0),
                 new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(Thing), nameof(Thing.def))),
                 new CodeInstruction(OpCodes.Ldsfld, AccessTools.Field(typeof(VVThingDefOf), nameof(VVThingDefOf.VV_ViviCreamWall))),
-                new CodeInstruction(OpCodes.Beq, skipLabel),
+                new CodeInstruction(OpCodes.Beq_S, skipLabel),
                 new CodeInstruction(OpCodes.Ldarg_0),
                 new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(Thing), nameof(Thing.def))),
                 new CodeInstruction(OpCodes.Ldsfld, AccessTools.Field(typeof(VVThingDefOf), nameof(VVThingDefOf.VV_SmoothedViviCreamWall))),
+                new CodeInstruction(OpCodes.Beq_S, skipLabel),
+                new CodeInstruction(OpCodes.Ldarg_0),
+                new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(Thing), nameof(Thing.def))),
+                new CodeInstruction(OpCodes.Ldsfld, AccessTools.Field(typeof(VVThingDefOf), nameof(VVThingDefOf.VV_ViviHoneycombWall))),
                 new CodeInstruction(OpCodes.Beq_S, skipLabel),
             };
             instructions.InsertRange(injectionIndex, injection);
             
             return instructions;
+        }
+
+        private static void Designator_Cancel_DesignateThing_Postfix(Designator_Cancel __instance, Thing t)
+        {
+            if (t.def == VVThingDefOf.VV_ViviHoneycombWall)
+            {
+                var designation = __instance.Map.designationManager.DesignationOn(t, VVDesignationDefOf.VV_FortifyHoneycombWall);
+                if (designation != null)
+                {
+                    __instance.Map.designationManager.RemoveDesignation(designation);
+                }
+            }
         }
     }
 }

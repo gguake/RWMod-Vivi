@@ -244,11 +244,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Egg\AI\JobDriver_LayViviEgg.cs" />
     <Compile Include="Egg\AI\JobGiver_LayViviEgg.cs" />
+    <Compile Include="Wall\AI\JobDriver_FortifyHoneycombWall.cs" />
+    <Compile Include="Wall\AI\WorkGiver_FortifyHoneycombWall.cs" />
+    <Compile Include="Wall\Comps\CompShowDesignator.cs" />
     <Compile Include="Wall\Comps\CompWallReplace.cs" />
     <Compile Include="Vivi\Need_RoyalJelly.cs" />
     <Compile Include="Egg\UI\EggProgressGizmo.cs" />
     <Compile Include="Vivi\RenderTree\PawnRenderNodeWorker_ViviCustomDrawSize.cs" />
     <Compile Include="VVDefOf.cs" />
+    <Compile Include="Wall\Designator_FortifyHoneycombWall.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -23,5 +23,8 @@
 
         public const string VV_Command_ToggleLayEgg = nameof(VV_Command_ToggleLayEgg);
         public const string VV_Command_ToggleLayEggDesc = nameof(VV_Command_ToggleLayEggDesc);
+
+        public const string VV_Designator_FortifyHoneycombWall = nameof(VV_Designator_FortifyHoneycombWall);
+        public const string VV_Designator_FortifyHoneycombWallDesc = nameof(VV_Designator_FortifyHoneycombWallDesc);
     }
 }

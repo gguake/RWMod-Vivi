@@ -23,4 +23,8 @@
 
 <VV_Command_ToggleLayEgg>산란 활성화</VV_Command_ToggleLayEgg>
 <VV_Command_ToggleLayEggDesc>이 로열 비비가 비비 알을 산란할지 여부를 설정합니다.</VV_Command_ToggleLayEggDesc>
+
+<VV_Designator_FortifyHoneycombWall>벌집 벽 강화</VV_Designator_FortifyHoneycombWall>
+<VV_Designator_FortifyHoneycombWallDesc>비비 벌집 벽을 불연성 재질의 폴리머로 강화합니다. 강화된 벽은 불이 붙지 않지만 충격에 대한 방호력은 조금 떨어집니다.
+\n벽 하나당 비비 폴리머 3개가 필요합니다.</VV_Designator_FortifyHoneycombWallDesc>
 </LanguageData>
