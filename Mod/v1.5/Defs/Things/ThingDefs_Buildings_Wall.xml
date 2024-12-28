@@ -94,13 +94,13 @@
     </descriptionHyperlinks>
 
     <graphicData>
-      <texPath>Things/Building/Wall_Atlas_HoneycombWall</texPath>
+      <texPath>Things/Building/Wall_Atlas_UnfinishedHoneycombWall</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <color>(1.0, 0.9, 0.7, 1.0)</color>
     </graphicData>
     <tickerType>Long</tickerType>
     
-    <uiIconPath>Things/Building/Linked/WallPlanks_MenuIcon</uiIconPath>
+    <uiIconPath>Things/Building/VV_UnfinishedHoneycombWall_Icon</uiIconPath>
     <uiIconColor>(1.0, 0.9, 0.7, 1.0)</uiIconColor>
     <statBases>
       <MaxHitPoints>100</MaxHitPoints>
@@ -172,13 +172,13 @@
 \nWhile it's very sturdy against various impacts, it's very vulnerable to fire.</description>
     
     <graphicData>
-      <texPath>Things/Building/Wall_Atlas_HoneycombWall2</texPath>
+      <texPath>Things/Building/Wall_Atlas_HoneycombWall</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <shaderType>CutoutWithOverlay</shaderType>
       <color>(1, 1, 1, 1)</color>
     </graphicData>
     
-    <uiIconPath>Things/Building/Linked/WallPlanks_MenuIcon</uiIconPath>
+    <uiIconPath>Things/Building/VV_HoneycombWall_Icon</uiIconPath>
     <uiIconColor>(1.0, 0.8, 0.6, 1.0)</uiIconColor>
     <statBases>
       <MaxHitPoints>480</MaxHitPoints>
@@ -299,13 +299,13 @@
 \nIt's slightly less durable than regular honeycomb walls, but it's fire-resistant, making it a good choice for exterior walls.</description>
     
     <graphicData>
-      <texPath>Things/Building/Wall_Atlas_HoneycombWall3</texPath>
+      <texPath>Things/Building/Wall_Atlas_HardenHoneycombWall</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <shaderType>CutoutWithOverlay</shaderType>
       <color>(1, 1, 1, 1)</color>
     </graphicData>
     
-    <uiIconPath>Things/Building/Linked/WallPlanks_MenuIcon</uiIconPath>
+    <uiIconPath>Things/Building/VV_HardenHoneycombWall_Icon</uiIconPath>
     <uiIconColor>(1.0, 0.8, 0.6, 1.0)</uiIconColor>
     <statBases>
       <MaxHitPoints>400</MaxHitPoints>
