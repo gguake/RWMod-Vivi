@@ -261,9 +261,10 @@
       <li>VV_FilteringHoney</li>
       <li>VV_RefiningPropolis</li>
       <li>VV_MakeLifestrand</li>
-      <li>VV_MakeVivisteel</li>
       <li>VV_MakeFertilizerCorpse</li>
       <li>VV_MakeFertilizerResource</li>
+      <li>VV_MakeViviPolymer</li>
+      <li>VV_RefineViviPolymer</li>
     </recipes>
     <inspectorTabs>
       <li>ITab_Bills</li>

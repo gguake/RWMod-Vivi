@@ -337,10 +337,10 @@
     </tradeTags>
   </ThingDef>
 
-  <!-- 비비스틸 -->
+  <!-- 비비 폴리머 -->
   <ThingDef ParentName="ResourceBase">
-    <defName>VV_Vivisteel</defName>
-    <label>vivisteel</label>
+    <defName>VV_ViviPolymer</defName>
+    <label>vivi polymer</label>
     <description>.</description>
     <graphicData>
       <texPath>Things/Item/Resource/Plasteel</texPath>
@@ -352,14 +352,14 @@
     <healthAffectsPrice>false</healthAffectsPrice>
     <statBases>
       <MarketValue>3.3</MarketValue>
-      <Mass>0.15</Mass>
+      <Mass>0.1</Mass>
       <StuffPower_Armor_Sharp>0.9</StuffPower_Armor_Sharp>
-      <StuffPower_Armor_Blunt>0.5</StuffPower_Armor_Blunt>
+      <StuffPower_Armor_Blunt>0.48</StuffPower_Armor_Blunt>
       <StuffPower_Armor_Heat>0.6</StuffPower_Armor_Heat>
       <StuffPower_Insulation_Cold>3</StuffPower_Insulation_Cold>
       <StuffPower_Insulation_Heat>0</StuffPower_Insulation_Heat>
       <SharpDamageMultiplier>1</SharpDamageMultiplier>
-      <BluntDamageMultiplier>0.9</BluntDamageMultiplier>
+      <BluntDamageMultiplier>0.92</BluntDamageMultiplier>
     </statBases>
     <thingCategories>
       <li>ResourcesRaw</li>
@@ -382,9 +382,9 @@
         <MaxHitPoints>1</MaxHitPoints>
         <Beauty>1</Beauty>
         <Flammability>0</Flammability>
-        <WorkToMake>1.7</WorkToMake>
-        <WorkToBuild>1.7</WorkToBuild>
-        <MeleeWeapon_CooldownMultiplier>0.75</MeleeWeapon_CooldownMultiplier>
+        <WorkToMake>0.8</WorkToMake>
+        <WorkToBuild>0.8</WorkToBuild>
+        <MeleeWeapon_CooldownMultiplier>0.8</MeleeWeapon_CooldownMultiplier>
       </statFactors>
     </stuffProps>
     <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>

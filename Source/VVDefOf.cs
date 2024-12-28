@@ -66,6 +66,7 @@ namespace VVRace
 
         public static ThingDef VV_Vivicream;
         public static ThingDef VV_Viviwax;
+        public static ThingDef VV_ViviPolymer;
 
         public static ThingDef VV_UnknownSeed;
         public static ThingDef VV_Fertilizer;
@@ -234,5 +235,11 @@ namespace VVRace
     public static class VVWorkGiverDefOf
     {
         public static WorkGiverDef VV_FertilizeArcanePlant;
+    }
+
+    [DefOf]
+    public static class VVResearchProjectDefOf
+    {
+        public static ResearchProjectDef VV_ViviPolymer;
     }
 }

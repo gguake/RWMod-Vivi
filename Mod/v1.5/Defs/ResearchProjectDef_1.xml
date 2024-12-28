@@ -143,7 +143,7 @@
   </ResearchProjectDef>
   
   <ResearchProjectDef ParentName="ViviResearchProjectTier1Base">
-    <defName>VV_Vivisteel</defName>
+    <defName>VV_ViviPolymer</defName>
     <label>vivisteel</label>
     <description>.</description>
     <baseCost>1250</baseCost>
