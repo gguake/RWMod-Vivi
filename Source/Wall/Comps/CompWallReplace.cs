@@ -47,9 +47,13 @@ namespace VVRace
                 var rotation = parent.Rotation;
                 var faction = parent.Faction;
 
+                var currentHealthPct = (float)parent.HitPoints / parent.MaxHitPoints;
+
                 parent.Destroy(DestroyMode.WillReplace);
                 var wall = ThingMaker.MakeThing(Props.replaceThing, Props.replaceThingStuff);
                 wall.SetFaction(faction ?? Faction.OfPlayer);
+                wall.HitPoints = Mathf.Clamp(Mathf.CeilToInt(currentHealthPct * wall.MaxHitPoints), 1, wall.MaxHitPoints);
+
                 GenSpawn.Spawn(wall, position, map, rotation);
             }
         }
