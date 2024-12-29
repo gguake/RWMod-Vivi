@@ -89,7 +89,7 @@
       </thingDefs>
     </fixedIngredientFilter>
     <products>
-      <VV_ViviPolymer>50</VV_ViviPolymer>
+      <VV_ViviPolymer>75</VV_ViviPolymer>
     </products>
     <researchPrerequisite>VV_ViviPolymer</researchPrerequisite>
   </RecipeDef>
