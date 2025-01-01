@@ -341,7 +341,8 @@
   <ThingDef ParentName="ResourceBase">
     <defName>VV_ViviPolymer</defName>
     <label>vivi polymer</label>
-    <description>a polymer manufactured from plasteel using Vivis proprietary processing method. It is lightweight, easy to process, and flame-resistant, but its strength is weaker than plasteel, roughly comparable to ordinary metals.</description>
+    <description>a polymer manufactured from plasteel using Vivis proprietary processing method. It is lightweight, easy to process, and flame-resistant, but its strength is weaker than plasteel, roughly comparable to ordinary metals.
+\nIt has a similar color and strength to bioferrite, but whether there is any relationship between them is unknown.</description>
     <graphicData>
       <texPath>Things/Item/VV_ViviPolymer</texPath>
       <graphicClass>Graphic_StackCount</graphicClass>
@@ -387,6 +388,40 @@
         <DoorOpenSpeed>1.5</DoorOpenSpeed>
         <MeleeWeapon_CooldownMultiplier>0.7</MeleeWeapon_CooldownMultiplier>
       </statFactors>
+      <statFactorsQuality>
+        <li>
+          <stat>PsychicSensitivityFactor</stat>
+          <awful>1</awful>
+          <poor>1</poor>
+          <normal>1</normal>
+          <good>1</good>
+          <excellent>1</excellent>
+          <masterwork>1.05</masterwork>
+          <legendary>1.1</legendary>
+        </li>
+        <li>
+          <stat>MeleeDodgeChance</stat>
+          <awful>1</awful>
+          <poor>1</poor>
+          <normal>1</normal>
+          <good>1</good>
+          <excellent>1</excellent>
+          <masterwork>1.05</masterwork>
+          <legendary>1.1</legendary>
+        </li>
+      </statFactorsQuality>
+      <statOffsetsQuality>
+        <li>
+          <stat>MoveSpeed</stat>
+          <awful>0</awful>
+          <poor>0</poor>
+          <normal>0</normal>
+          <good>0</good>
+          <excellent>0</excellent>
+          <masterwork>0.1</masterwork>
+          <legendary>0.3</legendary>
+        </li>
+      </statOffsetsQuality>
     </stuffProps>
     <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
     <allowedArchonexusCount>80</allowedArchonexusCount>
