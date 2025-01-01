@@ -216,7 +216,7 @@
   <HediffDef>
     <defName>VV_CombatHormoneJelly</defName>
     <label>combat hormone</label>
-    <description>It is in a state where combat hormones that greatly enhance the Vivi's inherent aggressiveness have been injected. Combat-related abilities are enhanced, and sensitivity to pain is reduced; they do not panic at the sight of fire, but they tire very quickly and become hungry.</description>
+    <description>It is in a state where combat hormones that greatly enhance the Vivi's inherent aggressiveness have been injected. Combat-related skills are enhanced, and sensitivity to pain is reduced; they do not panic at the sight of fire, but they tire very quickly and become hungry.</description>
     <hediffClass>HediffWithComps</hediffClass>
     <defaultLabelColor>(1,0,0.5)</defaultLabelColor>
     

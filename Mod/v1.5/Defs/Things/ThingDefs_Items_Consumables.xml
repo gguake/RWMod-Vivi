@@ -403,7 +403,7 @@
   <ThingDef ParentName="MakeableDrugPillBase">
     <defName>VV_CombatHormoneJelly</defName>
     <label>vivi combat hormone jelly</label>
-    <description>It is a jelly made by chemically concentrating and processing mead. It has a very high alcohol content, and when consumed by Vivi, it enhances their combat abilities and makes them fearless of fire, but it also increases their aggressiveness and makes them feel fatigue and hunger quickly.
+    <description>It is a jelly made by chemically concentrating and processing mead. It has a very high alcohol content, and when consumed by Vivi, it temporary enhances their combat abilities and makes them fearless of fire, but it also increases their aggressiveness and makes them feel fatigue and hunger quickly.
 \nFor non-Vivi humans, it is also marketed as a snack with a stimulating and unique taste.</description>
     <descriptionHyperlinks>
       <HediffDef>VV_CombatHormoneJelly</HediffDef>
@@ -468,7 +468,7 @@
     <costList>
       <VV_Mead>1</VV_Mead>
       <VV_Propolis>5</VV_Propolis>
-      <VV_Vivicream>20</VV_Vivicream>
+      <VV_Vivicream>10</VV_Vivicream>
     </costList>
     
     <comps>
