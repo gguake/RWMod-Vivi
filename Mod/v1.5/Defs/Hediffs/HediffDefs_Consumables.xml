@@ -242,6 +242,7 @@
         </statOffsets>
         <hungerRateFactorOffset>1.2</hungerRateFactorOffset>
         <socialFightChanceFactor>8.0</socialFightChanceFactor>
+        <extraTooltip>Temporarily prevents mental break caused by the 'Fire Terror' gene.</extraTooltip>
       </li>
     </stages>
 

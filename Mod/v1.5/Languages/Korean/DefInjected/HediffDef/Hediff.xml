@@ -30,6 +30,7 @@
 
   <VV_CombatHormoneJelly.label>전투 호르몬</VV_CombatHormoneJelly.label>
   <VV_CombatHormoneJelly.description>비비들의 내재된 공격성을 극도로 강화하는 전투 호르몬이 주입된 상태입니다. 전투 관련 능력이 향상되고 고통에 둔감해지며 불꽃을 보아도 겁에 질리지 않지만 매우 빠르게 지치고 배가 고파집니다.</VV_CombatHormoneJelly.description>
+  <VV_CombatHormoneJelly.stages.0.extraTooltip>'불 공포증' 유전자로 인한 정신이상을 일시적으로 방지합니다.</VV_CombatHormoneJelly.stages.0.extraTooltip>
 
   <VV_GeneticUnstability.label>유전자 불안정</VV_GeneticUnstability.label>
   <VV_GeneticUnstability.description>비비의 유전자가 극도로 불안정해져 예측할수 없는 세포 분열이 발생하고 있습니다. 지속적인 치료가 필요하며 최악의 경우 끔찍한 일이 일어날 것입니다..</VV_GeneticUnstability.description>
