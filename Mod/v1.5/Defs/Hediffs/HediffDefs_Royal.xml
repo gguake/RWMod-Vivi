@@ -25,7 +25,7 @@
         <hungerRateFactorOffset>0.25</hungerRateFactorOffset>
         <statOffsets>
           <WorkSpeedGlobal>-0.6</WorkSpeedGlobal>
-          <MoveSpeed>-2.0</MoveSpeed>
+          <MoveSpeed>-2.2</MoveSpeed>
           <PsychicSensitivity>1.0</PsychicSensitivity>
           <NegotiationAbility>0.35</NegotiationAbility>
           <SocialImpact>0.35</SocialImpact>

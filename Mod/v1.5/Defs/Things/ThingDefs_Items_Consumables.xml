@@ -445,7 +445,7 @@
         </li>
         <li Class="IngestionOutcomeDoer_GiveHediff">
           <hediffDef>AlcoholHigh</hediffDef>
-          <severity>0.42</severity>
+          <severity>0.4</severity>
           <toleranceChemical>Alcohol</toleranceChemical>
         </li>
         <li Class="IngestionOutcomeDoer_GiveHediff">

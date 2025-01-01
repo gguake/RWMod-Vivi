@@ -405,7 +405,7 @@
           <poor>1</poor>
           <normal>1</normal>
           <good>1</good>
-          <excellent>1</excellent>
+          <excellent>1.05</excellent>
           <masterwork>1.05</masterwork>
           <legendary>1.1</legendary>
         </li>
@@ -417,9 +417,9 @@
           <poor>0</poor>
           <normal>0</normal>
           <good>0</good>
-          <excellent>0</excellent>
-          <masterwork>0.1</masterwork>
-          <legendary>0.3</legendary>
+          <excellent>0.05</excellent>
+          <masterwork>0.05</masterwork>
+          <legendary>0.15</legendary>
         </li>
       </statOffsetsQuality>
     </stuffProps>
