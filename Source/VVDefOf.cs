@@ -251,4 +251,14 @@ namespace VVRace
     {
         public static ResearchProjectDef VV_ViviPolymer;
     }
+
+    [DefOf]
+    public static class VVLifeStageDefOf
+    {
+        public static LifeStageDef HumanlikePreTeenager_Vivi;
+        public static LifeStageDef HumanlikePreTeenager;
+        public static LifeStageDef HumanlikeTeenager_Vivi;
+        public static LifeStageDef HumanlikeTeenager;
+        public static LifeStageDef HumanlikeAdult_Vivi;
+    }
 }

@@ -103,12 +103,22 @@ namespace VVRace.HarmonyPatches
 
         private static void LifeStageWorker_HumanlikeAdult_Notify_LifeStageStarted_Postfix(Pawn pawn, LifeStageDef previousLifeStage)
         {
-            if (previousLifeStage != null && previousLifeStage.developmentalStage.Juvenile())
+            if (previousLifeStage != null)
             {
-                var compVivi = pawn.GetCompVivi();
-                if (compVivi != null)
+                if ((pawn.ageTracker.CurLifeStage == VVLifeStageDefOf.HumanlikeTeenager_Vivi || 
+                    pawn.ageTracker.CurLifeStage == VVLifeStageDefOf.HumanlikeTeenager || 
+                    pawn.ageTracker.CurLifeStage == VVLifeStageDefOf.HumanlikeAdult_Vivi || 
+                    pawn.ageTracker.CurLifeStage == LifeStageDefOf.HumanlikeAdult) && 
+
+                    (previousLifeStage == VVLifeStageDefOf.HumanlikePreTeenager || 
+                    previousLifeStage == VVLifeStageDefOf.HumanlikePreTeenager_Vivi || 
+                    previousLifeStage.developmentalStage.Juvenile()))
                 {
-                    compVivi.Notify_AdultLifeStageStart();
+                    var compVivi = pawn.GetCompVivi();
+                    if (compVivi != null)
+                    {
+                        compVivi.Notify_AdultLifeStageStart();
+                    }
                 }
             }
         }
