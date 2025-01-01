@@ -50,10 +50,10 @@
       <li Class="VVRace.CompProperties_ViviHatcher">
         <hatcherDaystoHatch>
           <points>
-            <li>(0, 5)</li>
-            <li>(2500, 7)</li>
-            <li>(7500, 13)</li>
-            <li>(10000, 15)</li>
+            <li>(0, 4)</li>
+            <li>(2500, 6)</li>
+            <li>(7500, 10)</li>
+            <li>(10000, 12)</li>
           </points>
         </hatcherDaystoHatch>
         <adaptTemperatureBonus>0.35</adaptTemperatureBonus>

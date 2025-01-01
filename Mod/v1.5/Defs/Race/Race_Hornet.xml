@@ -26,7 +26,7 @@
       <ArmorRating_Sharp>1.0</ArmorRating_Sharp>
       <ArmorRating_Blunt>0.5</ArmorRating_Blunt>
       <ArmorRating_Heat>0</ArmorRating_Heat>
-      <PainShockThreshold>0.7</PainShockThreshold>
+      <PainShockThreshold>0.55</PainShockThreshold>
 
       <ToxicResistance>-1.00</ToxicResistance>
       <ToxicEnvironmentResistance>0</ToxicEnvironmentResistance>
