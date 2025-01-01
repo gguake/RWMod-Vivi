@@ -72,7 +72,7 @@
           <VV_GrowthPointsFactor>2.0</VV_GrowthPointsFactor>
         </statFactors>
         <statOffsets>
-          <GlobalLearningFactor>0.5</GlobalLearningFactor>
+          <GlobalLearningFactor>1.0</GlobalLearningFactor>
         </statOffsets>
       </li>
     </stages>

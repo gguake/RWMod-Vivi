@@ -11,9 +11,9 @@
       <points>
         <li>(0, 2)</li>
         <li>(3, 3)</li>
-        <li>(6.999, 3)</li>
-        <li>(7, 4)</li>
-        <li>(12.999, 4)</li>
+        <li>(6.999999, 3)</li>
+        <li>(7, 3)</li>
+        <li>(12.999999, 3)</li>
         <li>(13, 11)</li>
       </points>
     </biologicalAgeTickFactorFromAgeCurve>

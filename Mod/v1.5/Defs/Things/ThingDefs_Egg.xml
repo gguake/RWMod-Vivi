@@ -31,7 +31,7 @@
       <DeteriorationRate>0</DeteriorationRate>
       <Flammability>1.0</Flammability>
       <Nutrition>0.25</Nutrition>
-      <MarketValue>50.0</MarketValue>
+      <MarketValue>40.0</MarketValue>
     </statBases>
     <stackLimit>1</stackLimit>
     <healthAffectsPrice>true</healthAffectsPrice>
@@ -42,7 +42,7 @@
     <comps>
       <li Class="CompProperties_TemperatureRuinable">
         <compClass>VVRace.CompTemperatureRuinableEgg</compClass>
-        <minSafeTemperature>20</minSafeTemperature>
+        <minSafeTemperature>19</minSafeTemperature>
         <maxSafeTemperature>39</maxSafeTemperature>
         <progressPerDegreePerTick>0.0000006</progressPerDegreePerTick>
       </li>
@@ -50,8 +50,8 @@
       <li Class="VVRace.CompProperties_ViviHatcher">
         <hatcherDaystoHatch>
           <points>
-            <li>(0, 10)</li>
-            <li>(2500, 12)</li>
+            <li>(0, 5)</li>
+            <li>(2500, 7)</li>
             <li>(7500, 13)</li>
             <li>(10000, 15)</li>
           </points>
@@ -61,8 +61,8 @@
         <geneCountCurve>
           <points>
             <li>(0, 1)</li>
-            <li>(4499, 1)</li>
-            <li>(4500, 2)</li>
+            <li>(3999, 1)</li>
+            <li>(4000, 2)</li>
             <li>(7999, 2)</li>
             <li>(8000, 3)</li>
           </points>
