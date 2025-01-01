@@ -352,7 +352,7 @@
     <healthAffectsPrice>false</healthAffectsPrice>
     <statBases>
       <MarketValue>3.4</MarketValue>
-      <MaxHitPoints>180</MaxHitPoints>
+      <MaxHitPoints>150</MaxHitPoints>
       <Mass>0.08</Mass>
       <StuffPower_Armor_Sharp>0.9</StuffPower_Armor_Sharp>
       <StuffPower_Armor_Blunt>0.48</StuffPower_Armor_Blunt>
@@ -363,7 +363,7 @@
       <BluntDamageMultiplier>0.9</BluntDamageMultiplier>
     </statBases>
     <thingCategories>
-      <li>ResourcesRaw</li>
+      <li>VV_ViviResource</li>
     </thingCategories>
     <burnableByRecipe>true</burnableByRecipe>
     <smeltable>true</smeltable>
@@ -425,6 +425,10 @@
     </stuffProps>
     <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
     <allowedArchonexusCount>80</allowedArchonexusCount>
+    
+    <tradeTags>
+      <li>VV_ViviProduct</li>
+    </tradeTags>
   </ThingDef>
 
 </Defs>
