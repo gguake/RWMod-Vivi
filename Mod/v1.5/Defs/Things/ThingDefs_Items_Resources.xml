@@ -307,7 +307,6 @@
     </graphicData>
     <soundInteract>Metal_Drop</soundInteract>
     <soundDrop>Metal_Drop</soundDrop>
-    <healthAffectsPrice>false</healthAffectsPrice>
     <statBases>
       <MarketValue>5</MarketValue>
       <Mass>0.2</Mass>

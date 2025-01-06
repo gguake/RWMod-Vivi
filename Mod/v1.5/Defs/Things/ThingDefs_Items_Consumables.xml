@@ -490,8 +490,8 @@
 
 	<!-- 꿀 젤리 -->
 	<ThingDef ParentName="OrganicProductBase">
-		<defName>VV_HoneyJelly</defName>
-		<label>honey jelly</label>
+		<defName>VV_ViviHoneyJelly</defName>
+		<label>vivi honey jelly</label>
 		<description>.</description>
 		<graphicData>
       <texPath>Things/Item/Resource/AnimalProductRaw/InsectJelly</texPath>

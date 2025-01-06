@@ -264,7 +264,6 @@
       <li>VV_MakeFertilizerCorpse</li>
       <li>VV_MakeFertilizerResource</li>
       <li>VV_MakeGeosteel</li>
-      <li>VV_RefineGeosteel</li>
     </recipes>
     <inspectorTabs>
       <li>ITab_Bills</li>

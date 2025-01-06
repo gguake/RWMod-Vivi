@@ -38,11 +38,10 @@
           <thingDefs>
             <li>VV_HeatingPetal</li>
             <li>VV_CoolingPetal</li>
-            <li>VV_SparklingPetal</li>
             <li>VV_PerfumingPetal</li>
           </thingDefs>
         </filter>
-        <count>5</count>
+        <count>20</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
@@ -52,7 +51,6 @@
         <li>VV_Vivicream</li>
         <li>VV_HeatingPetal</li>
         <li>VV_CoolingPetal</li>
-        <li>VV_SparklingPetal</li>
         <li>VV_PerfumingPetal</li>
       </thingDefs>
     </fixedIngredientFilter>
