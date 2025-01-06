@@ -31,6 +31,7 @@
           <SocialImpact>0.35</SocialImpact>
           <MeditationFocusGain MayRequire="Ludeon.RimWorld.Royalty">0.2</MeditationFocusGain>
           <PsychicEntropyRecoveryRate>0.2</PsychicEntropyRecoveryRate>
+          <MeleeDodgeChance>-10</MeleeDodgeChance>
         </statOffsets>
         <statFactors>
           <LifespanFactor>20</LifespanFactor>

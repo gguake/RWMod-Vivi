@@ -24,13 +24,14 @@
       <SmoothingSpeed>1.5</SmoothingSpeed>
       <CleaningSpeed>1.25</CleaningSpeed>
       <PawnTrapSpringChance>0.3</PawnTrapSpringChance>
+      <MeleeDodgeChance>10</MeleeDodgeChance>
 
       <MoveSpeed>5.8</MoveSpeed>
       <MiningSpeed>0.5</MiningSpeed>
       <MiningYield>0.5</MiningYield>
       <PsychicSensitivity>0.5</PsychicSensitivity>
       <Fertility>0</Fertility>
-      
+
       <RoyalFavorValue>1</RoyalFavorValue>
 
       <VV_HoneyGatherSpeed>1</VV_HoneyGatherSpeed>
