@@ -27,8 +27,8 @@
                           <li>VV_Vivi_F</li>
                         </headTypes>
                         <bodyTypes>
-                            <li MayRequire="Ludeon.RimWorld.Biotech">Baby</li>
-                            <li MayRequire="Ludeon.RimWorld.Biotech">Child</li>
+                            <li>Baby</li>
+                            <li>Child</li>
                             <li>Female</li>
                             <li>Thin</li>
                         </bodyTypes>

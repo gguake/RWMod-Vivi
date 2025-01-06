@@ -54,7 +54,7 @@
     </statBases>
     <equippedStatOffsets>
       <MoveSpeed>0.2</MoveSpeed>
-      <ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">0.2</ToxicEnvironmentResistance>
+      <ToxicEnvironmentResistance>0.2</ToxicEnvironmentResistance>
     </equippedStatOffsets>
 
     <costStuffCount>60</costStuffCount>
@@ -111,7 +111,7 @@
     <equippedStatOffsets>
       <PainShockThreshold>0.05</PainShockThreshold>
       <MentalBreakThreshold>-0.05</MentalBreakThreshold>
-      <ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">0.1</ToxicEnvironmentResistance>
+      <ToxicEnvironmentResistance>0.1</ToxicEnvironmentResistance>
     </equippedStatOffsets>
 
     <costStuffCount>90</costStuffCount>
@@ -222,7 +222,7 @@
     <equippedStatOffsets>
       <IncomingDamageFactor>-0.1</IncomingDamageFactor>
       <PainShockThreshold>0.08</PainShockThreshold>
-      <ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">0.75</ToxicEnvironmentResistance>
+      <ToxicEnvironmentResistance>0.75</ToxicEnvironmentResistance>
     </equippedStatOffsets>
     
     <costStuffCount>70</costStuffCount>

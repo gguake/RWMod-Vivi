@@ -205,16 +205,16 @@
       
       <ageGenerationCurve Inherit="False">
         <points>
-          <li MayRequire="Ludeon.RimWorld.Biotech">(0,0)</li>
-          <li MayRequire="Ludeon.RimWorld.Biotech">(0.001,23)</li>
-          <li MayRequire="Ludeon.RimWorld.Biotech">(8,30)</li>
-          <li MayRequire="Ludeon.RimWorld.Biotech">(12.5,98)</li>  <!-- Exclude 12.5-13 years to avoid spawning pawns who are very close to becoming adults -->  
-          <li MayRequire="Ludeon.RimWorld.Biotech">(12.51,0)</li>  
-          <li MayRequire="Ludeon.RimWorld.Biotech">(13,0)</li>      
-          <li MayRequire="Ludeon.RimWorld.Biotech">(13.001,122)</li><!-- End exclude -->
-          <li MayRequire="Ludeon.RimWorld.Biotech">(13.999,130)</li>
+          <li>(0,0)</li>
+          <li>(0.001,23)</li>
+          <li>(8,30)</li>
+          <li>(12.5,98)</li>  <!-- Exclude 12.5-13 years to avoid spawning pawns who are very close to becoming adults -->  
+          <li>(12.51,0)</li>  
+          <li>(13,0)</li>      
+          <li>(13.001,122)</li><!-- End exclude -->
+          <li>(13.999,130)</li>
           <li>(14,0)</li>
-          <li MayRequire="Ludeon.RimWorld.Biotech">(14.001,130)</li>
+          <li>(14.001,130)</li>
           <li>(16,100)</li>
           <li>(17.999,100)</li>
           <li>(18,0)</li>

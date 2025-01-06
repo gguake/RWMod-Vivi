@@ -5,7 +5,7 @@
     <invNutrition>2.55</invNutrition>
     <invFoodDef>VV_FilteredHoney</invFoodDef>
     
-    <apparelIgnorePollution MayRequire="Ludeon.RimWorld.Biotech">true</apparelIgnorePollution>
+    <apparelIgnorePollution>true</apparelIgnorePollution>
     <backstoryFiltersOverride>
       <li>
         <categories>

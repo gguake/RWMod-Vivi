@@ -44,7 +44,7 @@
               <overlayLayer>Body</overlayLayer>
               <baseLayer>8</baseLayer>
             </li>
-            <li Class="PawnRenderNodeProperties_Swaddle" MayRequire="Ludeon.RimWorld.Biotech">
+            <li Class="PawnRenderNodeProperties_Swaddle">
               <debugLabel>Baby swaddle</debugLabel>
               <nodeClass>PawnRenderNode_Swaddle</nodeClass>
               <workerClass>PawnRenderNodeWorker_Swaddle</workerClass>

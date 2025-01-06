@@ -11,7 +11,7 @@
     <apparelMoney>500~1000</apparelMoney>
     <apparelAllowHeadgearChance>0</apparelAllowHeadgearChance>
     <apparelIgnoreSeasons>true</apparelIgnoreSeasons>
-    <apparelIgnorePollution MayRequire="Ludeon.RimWorld.Biotech">true</apparelIgnorePollution>
+    <apparelIgnorePollution>true</apparelIgnorePollution>
     <apparelTags Inherit="False">
       <li>VV_ViviStartingApparel</li>
     </apparelTags>

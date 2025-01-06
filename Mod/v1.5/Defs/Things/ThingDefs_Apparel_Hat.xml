@@ -51,7 +51,7 @@
     <equippedStatOffsets>
       <PainShockThreshold>0.05</PainShockThreshold>
       <MentalBreakThreshold>-0.05</MentalBreakThreshold>
-      <ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">0.2</ToxicEnvironmentResistance>
+      <ToxicEnvironmentResistance>0.2</ToxicEnvironmentResistance>
     </equippedStatOffsets>
 
     <costStuffCount>50</costStuffCount>

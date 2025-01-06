@@ -28,10 +28,10 @@
     <applyFactorsIfNegative>false</applyFactorsIfNegative>
     <displayPriorityInCategory>5198</displayPriorityInCategory>
     <parts>
-      <li Class="StatPart_Pollution" MayRequire="Ludeon.RimWorld.Biotech">
+      <li Class="StatPart_Pollution">
         <multiplier>1.5</multiplier>
       </li>
-      <li Class="StatPart_NoxiousHaze" MayRequire="Ludeon.RimWorld.Biotech">
+      <li Class="StatPart_NoxiousHaze">
         <multiplier>2</multiplier>
       </li>
       <li Class="StatPart_ToxicFallout">
@@ -69,10 +69,10 @@
     <workerClass>VVRace.StatWorker_HoneyYield</workerClass>
     <displayPriorityInCategory>5100</displayPriorityInCategory>
     <parts>
-      <li Class="StatPart_Pollution" MayRequire="Ludeon.RimWorld.Biotech">
+      <li Class="StatPart_Pollution">
         <multiplier>0.9</multiplier>
       </li>
-      <li Class="StatPart_NoxiousHaze" MayRequire="Ludeon.RimWorld.Biotech">
+      <li Class="StatPart_NoxiousHaze">
         <multiplier>0.75</multiplier>
       </li>
       <li Class="StatPart_ToxicFallout">
@@ -89,10 +89,10 @@
     <workerClass>VVRace.StatWorker_TreeResinGatherYield</workerClass>
     <displayPriorityInCategory>5101</displayPriorityInCategory>
     <parts>
-      <li Class="StatPart_Pollution" MayRequire="Ludeon.RimWorld.Biotech">
+      <li Class="StatPart_Pollution">
         <multiplier>0.9</multiplier>
       </li>
-      <li Class="StatPart_NoxiousHaze" MayRequire="Ludeon.RimWorld.Biotech">
+      <li Class="StatPart_NoxiousHaze">
         <multiplier>0.75</multiplier>
       </li>
       <li Class="StatPart_ToxicFallout">

@@ -65,9 +65,9 @@ Only a few traces of the former empire remain, in the form of certain traditions
       <li MayRequire="Ludeon.RimWorld.Ideology">Skullspike_Desired</li>
       <li MayRequire="Ludeon.RimWorld.Ideology">Slavery_Acceptable</li>
       <li MayRequire="Ludeon.RimWorld.Ideology">Slavery_Honorable</li>
-      <li MayRequire="Ludeon.RimWorld.Biotech">Bloodfeeders_Revered</li>
-      <li MayRequire="Ludeon.RimWorld.Biotech">Bloodfeeders_Reviled</li>
-      <li MayRequire="Ludeon.RimWorld.Biotech">ChildBirth</li>
+      <li>Bloodfeeders_Revered</li>
+      <li>Bloodfeeders_Reviled</li>
+      <li>ChildBirth</li>
     </disallowedPrecepts>
 
     <maxConfigurableAtWorldCreation>9999</maxConfigurableAtWorldCreation>
