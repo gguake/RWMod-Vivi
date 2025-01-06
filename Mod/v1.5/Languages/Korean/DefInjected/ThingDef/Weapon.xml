@@ -31,6 +31,7 @@
 \n근접전에서도 유효한 무기로서 무력화되지않고 적에게 대응할 수 있습니다. 일반 사람이 던지기에는 너무 작고 불편해 비비만 다룰 수 있습니다.</VV_ViviLongJavelin.description>
   <VV_ViviLongJavelin.tools.shaft.label>장대</VV_ViviLongJavelin.tools.shaft.label>
   <VV_ViviLongJavelin.tools.point.label>창끝</VV_ViviLongJavelin.tools.point.label>
+  <VV_ViviLongJavelin.tools.2.label>창끝</VV_ViviLongJavelin.tools.2.label>
   <VV_Arrow_LongJavelin.label>롱 재블린</VV_Arrow_LongJavelin.label>
 
   <VV_RepeatingCrossbow.label>비비 연발 석궁</VV_RepeatingCrossbow.label>

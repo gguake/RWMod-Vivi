@@ -19,7 +19,7 @@
       <Mass>4</Mass>
     </statBases>
     <equippedStatOffsets>
-      <MoveSpeed>-1.2</MoveSpeed>
+      <MoveSpeed>-0.8</MoveSpeed>
     </equippedStatOffsets>
     <tradeNeverStack>true</tradeNeverStack>
     <relicChance>2</relicChance>
