@@ -68,7 +68,7 @@ namespace VVRace
                 (from, to) => to.Allows(TraverseParms.For(pawn), isDestination: false),
                 (region) =>
                 {
-                    foreach (var thing in region.ListerThings.ThingsOfDef(VVThingDefOf.VV_ViviPolymer))
+                    foreach (var thing in region.ListerThings.ThingsOfDef(VVThingDefOf.VV_Geosteel))
                     {
                         if (ingredients.Contains(thing) || 
                             thing.IsForbidden(pawn) || 

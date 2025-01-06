@@ -23,7 +23,7 @@ namespace VVRace
             hotKey = KeyBindingDefOf.Misc5;
         }
 
-        public override bool Visible => VVResearchProjectDefOf.VV_ViviPolymer.IsFinished;
+        public override bool Visible => VVResearchProjectDefOf.VV_Geosteel.IsFinished;
 
         protected override DesignationDef Designation => VVDesignationDefOf.VV_FortifyHoneycombWall;
 
@@ -91,8 +91,8 @@ namespace VVRace
 
         public override void DrawMouseAttachments()
         {
-            var polymerRequired = VVThingDefOf.VV_ViviHardenHoneycombWall.CostList.FirstOrDefault(tdc => tdc.thingDef == VVThingDefOf.VV_ViviPolymer).count;
-            if (polymerRequired <= 0)
+            var requiredAmount = VVThingDefOf.VV_ViviHardenHoneycombWall.CostList.FirstOrDefault(tdc => tdc.thingDef == VVThingDefOf.VV_Geosteel).count;
+            if (requiredAmount <= 0)
             {
                 return;
             }
@@ -101,12 +101,12 @@ namespace VVRace
             var dragger = Find.DesignatorManager.Dragger;
             int selectedCount = ((!dragger.Dragging) ? 1 : dragger.DragCells.Count());
 
-            Widgets.ThingIcon(new Rect(center.x, center.y, 27f, 27f), VVThingDefOf.VV_ViviPolymer);
+            Widgets.ThingIcon(new Rect(center.x, center.y, 27f, 27f), VVThingDefOf.VV_Geosteel);
             var labelRect = new Rect(center.x + 29f, center.y, 999f, 29f);
 
-            int requiredCount = selectedCount * polymerRequired;
+            int requiredCount = selectedCount * requiredAmount;
             var text = requiredCount.ToString();
-            if (base.Map.resourceCounter.GetCount(VVThingDefOf.VV_ViviPolymer) < requiredCount)
+            if (base.Map.resourceCounter.GetCount(VVThingDefOf.VV_Geosteel) < requiredCount)
             {
                 GUI.color = Color.red;
                 text += " (" + "NotEnoughStoredLower".Translate() + ")";

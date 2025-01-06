@@ -42,12 +42,8 @@
 <VV_MakeFertilizerSeeds.jobString>비료를 대량 배합하는 중.</VV_MakeFertilizerSeeds.jobString>
 <VV_MakeFertilizerSeeds.ingredients.1.filter.customSummary>꽃가루나 미확인 씨앗</VV_MakeFertilizerSeeds.ingredients.1.filter.customSummary>
 
-<VV_MakeViviPolymer.label>비비 폴리머 만들기</VV_MakeViviPolymer.label>
-<VV_MakeViviPolymer.description>플라스틸과 밀랍, 프로폴리스를 가공해 비비 폴리머를 만듭니다.</VV_MakeViviPolymer.description>
-<VV_MakeViviPolymer.jobString>비비 폴리머 제작 중.</VV_MakeViviPolymer.jobString>
-
-<VV_RefineViviPolymer.label>비비 폴리머 변환</VV_RefineViviPolymer.label>
-<VV_RefineViviPolymer.description>거대 말벌 날개를 비비 폴리머로 가공합니다.</VV_RefineViviPolymer.description>
-<VV_RefineViviPolymer.jobString>비비 폴리머 가공 중.</VV_RefineViviPolymer.jobString>
+<VV_MakeGeosteel.label>지오스틸 제련</VV_MakeGeosteel.label>
+<VV_MakeGeosteel.description>.</VV_MakeGeosteel.description>
+<VV_MakeGeosteel.jobString>지오스틸 제련 중.</VV_MakeGeosteel.jobString>
 
 </LanguageData>

@@ -34,9 +34,8 @@
 <VV_ArcaneBotany.discoveredLetterText>마법 식물을 배양하려면 미확인 씨앗이 필요하며 식물에 따라 필요한 재료가 다릅니다. 재배시 주기적으로 관리해줘야 좋은 결과를 얻을 수 있으며 마나 비료를 투여해 생명력을 유지해야 합니다.
 \n마법 식물은 마나라는 자원을 생산하고 소모하며 식물마다 특수한 조건이 만족되어야 마나를 생산합니다. 생산된 마나가 최대 저장량을 초과하면 인접한 다른 마법 식물들에게 전송해주는 특징이 있으므로 잘 활용하세요.</VV_ArcaneBotany.discoveredLetterText>
 
-<VV_ViviPolymer.label>비비 폴리머</VV_ViviPolymer.label>
-<VV_ViviPolymer.description>플라스틸을 가공해 다용도로 활용할 수 있는 비비 폴리머를 제작할 수 있습니다.
-\n비비 벌집벽을 불연성 폴리머로 보강해 불에 타지 않도록 강화할 수 있습니다.</VV_ViviPolymer.description>
+<VV_Geosteel.label>지오스틸</VV_Geosteel.label>
+<VV_Geosteel.description>.</VV_Geosteel.description>
 
 <VV_CombatArcaneBotany.label>전투 식물학</VV_CombatArcaneBotany.label>
 <VV_CombatArcaneBotany.description>전투에 특화된 마법 식물들을 재배할 수 있습니다.</VV_CombatArcaneBotany.description>

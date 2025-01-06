@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <!-- 비비 폴리머 정제 -->
+  <!-- 지오스틸 정제 -->
   <RecipeDef>
-    <defName>VV_MakeViviPolymer</defName>
-    <label>make vivi polymer</label>
-    <description>Make vivi polymer by process plasteel, viviwax and propolis.</description>
+    <defName>VV_MakeGeosteel</defName>
+    <label>make geosteel</label>
+    <description>.</description>
 
-    <jobString>making vivi polymer.</jobString>
-    <workAmount>2000</workAmount>
+    <jobString>making geosteel.</jobString>
+    <workAmount>2400</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <workSkill>Crafting</workSkill>
 
     <effectWorking>Smelt</effectWorking>
     <soundWorking>Recipe_Smelt</soundWorking>
-    <uiIconThing>VV_ViviPolymer</uiIconThing>
+    <uiIconThing>VV_Geosteel</uiIconThing>
 
     <ingredients>
       <li>
         <filter>
           <thingDefs>
-            <li>Plasteel</li>
+            <li>Uranium</li>
+            <li>Jade</li>
           </thingDefs>
         </filter>
-        <count>5</count>
+        <count>10</count>
       </li>
       <li>
         <filter>
@@ -35,7 +36,10 @@
       <li>
         <filter>
           <thingDefs>
-            <li>VV_Propolis</li>
+            <li>VV_HeatingPetal</li>
+            <li>VV_CoolingPetal</li>
+            <li>VV_SparklingPetal</li>
+            <li>VV_PerfumingPetal</li>
           </thingDefs>
         </filter>
         <count>5</count>
@@ -43,55 +47,23 @@
     </ingredients>
     <fixedIngredientFilter>
       <thingDefs>
-        <li>Plasteel</li>
-        <li>VV_Viviwax</li>
-        <li>VV_Propolis</li>
+        <li>Uranium</li>
+        <li>Jade</li>
+        <li>VV_Vivicream</li>
+        <li>VV_HeatingPetal</li>
+        <li>VV_CoolingPetal</li>
+        <li>VV_SparklingPetal</li>
+        <li>VV_PerfumingPetal</li>
       </thingDefs>
     </fixedIngredientFilter>
     <products>
-      <VV_ViviPolymer>20</VV_ViviPolymer>
+      <VV_Geosteel>25</VV_Geosteel>
     </products>
-    <researchPrerequisite>VV_ViviPolymer</researchPrerequisite>
+    <researchPrerequisite>VV_Geosteel</researchPrerequisite>
     
     <skillRequirements>
       <Crafting>4</Crafting>
     </skillRequirements>
-  </RecipeDef>
-
-  <!-- 비비 폴리머 정제 (말벌날개) -->
-  <RecipeDef>
-    <defName>VV_RefineViviPolymer</defName>
-    <label>refine vivi polymer</label>
-    <description>Make vivi polymer by refine titanic hornet wings.</description>
-
-    <jobString>refining vivi polymer.</jobString>
-    <workAmount>1200</workAmount>
-    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
-    <workSkill>Crafting</workSkill>
-
-    <effectWorking>Smelt</effectWorking>
-    <soundWorking>Recipe_Smelt</soundWorking>
-    <uiIconThing>VV_ViviPolymer</uiIconThing>
-
-    <ingredients>
-      <li>
-        <filter>
-          <thingDefs>
-            <li>VV_TitanicHornetWing</li>
-          </thingDefs>
-        </filter>
-        <count>1</count>
-      </li>
-    </ingredients>
-    <fixedIngredientFilter>
-      <thingDefs>
-        <li>VV_TitanicHornetWing</li>
-      </thingDefs>
-    </fixedIngredientFilter>
-    <products>
-      <VV_ViviPolymer>75</VV_ViviPolymer>
-    </products>
-    <researchPrerequisite>VV_ViviPolymer</researchPrerequisite>
   </RecipeDef>
 
   <!-- 생체 가닥 정제 -->
@@ -101,7 +73,7 @@
     <description>Process devilstrand with various materials to create lifestrand.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_LivingLeaf</ThingDef>
-      <ThingDef>VV_ViviPolymer</ThingDef>
+      <ThingDef>VV_Geosteel</ThingDef>
     </descriptionHyperlinks>
 
     <jobString>making lifestrand.</jobString>
@@ -133,7 +105,7 @@
       <li>
         <filter>
           <thingDefs>
-            <li>VV_ViviPolymer</li>
+            <li>VV_Geosteel</li>
           </thingDefs>
         </filter>
         <count>25</count>
@@ -143,7 +115,7 @@
       <thingDefs>
         <li>DevilstrandCloth</li>
         <li>VV_LivingLeaf</li>
-        <li>VV_ViviPolymer</li>
+        <li>VV_Geosteel</li>
       </thingDefs>
     </fixedIngredientFilter>
     <products>

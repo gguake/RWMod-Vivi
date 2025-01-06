@@ -84,7 +84,7 @@
     
     <costList>
       <Plasteel>75</Plasteel>
-      <VV_ViviPolymer>75</VV_ViviPolymer>
+      <VV_Geosteel>75</VV_Geosteel>
       <VV_TitanicHornetWing>2</VV_TitanicHornetWing>
     </costList>
     
@@ -201,8 +201,8 @@
     
     <costList>
       <Plasteel>100</Plasteel>
-      <VV_TitanicHornetWing>5</VV_TitanicHornetWing>
-      <VV_ViviPolymer>250</VV_ViviPolymer>
+      <VV_TitanicHornetWing>6</VV_TitanicHornetWing>
+      <VV_Geosteel>200</VV_Geosteel>
       <VV_LivingLeaf>100</VV_LivingLeaf>
     </costList>
     

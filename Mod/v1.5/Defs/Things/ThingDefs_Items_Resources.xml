@@ -148,11 +148,11 @@
   <ThingDef ParentName="ResourceBase">
     <defName>VV_Lifestrand</defName>
     <label>lifestrand</label>
-    <description>a fabric that has been toughened by processing devilstrand with living leaves and vivi polymers. It is much more durable than regular devilstrand fabric, but it is also more difficult to process.
+    <description>a fabric that has been toughened by processing devilstrand with living leaves and geosteels. It is much more durable than regular devilstrand fabric, but it is also more difficult to process.
 \nThe fibers are called lifestrand because they seem to be alive, but they might indeed be living.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_LivingLeaf</ThingDef>
-      <ThingDef>VV_ViviPolymer</ThingDef>
+      <ThingDef>VV_Geosteel</ThingDef>
     </descriptionHyperlinks>
 
     <graphicData>
@@ -174,7 +174,7 @@
       <MaxHitPoints>150</MaxHitPoints>
       <MarketValue>12</MarketValue>
       <Mass>0.05</Mass>
-      <Flammability>0.3</Flammability>
+      <Flammability>0.1</Flammability>
       <DeteriorationRate>2</DeteriorationRate>
     </statBases>
 
@@ -183,14 +183,14 @@
     <minRewardCount>30</minRewardCount>
     <stuffProps>
       <statFactors>
-        <MaxHitPoints>2.1</MaxHitPoints>
-        <Flammability>0.3</Flammability>
+        <MaxHitPoints>2.2</MaxHitPoints>
+        <Flammability>0.1</Flammability>
         <Beauty>4.0</Beauty>
-        <WorkToMake>2.4</WorkToMake>
-        <WorkToBuild>2.4</WorkToBuild>
+        <WorkToMake>2.7</WorkToMake>
+        <WorkToBuild>2.7</WorkToBuild>
       </statFactors>
       <statOffsetsQuality>
-        <li MayRequireAnyOf="Ludeon.RimWorld.Royalty,Ludeon.RimWorld.Biotech">
+        <li>
           <stat>PsychicSensitivityOffset</stat>
           <awful>0</awful>
           <poor>0</poor>
@@ -198,14 +198,14 @@
           <good>0.05</good>
           <excellent>0.075</excellent>
           <masterwork>0.1</masterwork>
-          <legendary>0.125</legendary>
+          <legendary>0.15</legendary>
         </li>
       </statOffsetsQuality>
       <categories>
         <li>Fabric</li>
       </categories>
       <color>(19,17,17)</color>
-      <commonality>0.0025</commonality>
+      <commonality>0.001</commonality>
     </stuffProps>
 
     <comps>
@@ -292,80 +292,39 @@
     </tradeTags>
   </ThingDef>
   
-  <!-- 거대 말벌 날개 -->
+  <!-- 지오스틸 -->
   <ThingDef ParentName="ResourceBase">
-    <defName>VV_TitanicHornetWing</defName>
-    <label>titanic hornet wing</label>
-    <description>a piece of a titanic hornet's wing. It's difficult to obtain, but thanks to its special components, it's lightweight and durable, making it a high-quality equipment material. It will decompose at room temperature, so it is recommended to keep it in a freezer.</description>
+    <defName>VV_Geosteel</defName>
+    <label>geosteel</label>
+    <description>.</description>
     <descriptionHyperlinks>
-      <RecipeDef>VV_InstallGliderWing</RecipeDef>
-      <HediffDef>VV_GliderWing</HediffDef>
+      <ThingDef>VV_ArcanePlantFarm</ThingDef>
     </descriptionHyperlinks>
-    <tickerType>Rare</tickerType>
 
     <graphicData>
-      <texPath>Things/Item/VV_HornetWing</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
-    </graphicData>
-    <thingCategories>
-      <li>VV_ViviResource</li>
-    </thingCategories>
-
-    <resourceReadoutPriority>Middle</resourceReadoutPriority>
-    <soundInteract>Standard_Drop</soundInteract>
-    <soundDrop>Standard_Drop</soundDrop>
-    
-    <useHitPoints>true</useHitPoints>
-    <statBases>
-      <Mass>0.1</Mass>
-      <MarketValue>100</MarketValue>
-      <MaxHitPoints>50</MaxHitPoints>
-      <Flammability>1.0</Flammability>
-      <DeteriorationRate>10</DeteriorationRate>
-    </statBases>
-    <stackLimit>25</stackLimit>
-    
-    <comps>
-      <li Class="CompProperties_Rottable">
-        <daysToRotStart>10</daysToRotStart>
-        <rotDestroys>true</rotDestroys>
-      </li>
-    </comps>
-
-    <tradeTags>
-      <li>VV_ViviExotic</li>
-    </tradeTags>
-  </ThingDef>
-
-  <!-- 비비 폴리머 -->
-  <ThingDef ParentName="ResourceBase">
-    <defName>VV_ViviPolymer</defName>
-    <label>vivi polymer</label>
-    <description>a polymer manufactured from plasteel using Vivis proprietary processing method. It is lightweight, easy to process, and flame-resistant, but its strength is weaker than plasteel, roughly comparable to ordinary metals.
-\nIt has a similar color and strength to bioferrite, but whether there is any relationship between them is unknown.</description>
-    <graphicData>
-      <texPath>Things/Item/VV_ViviPolymer</texPath>
+      <texPath>Things/Item/VV_Geosteel</texPath>
       <graphicClass>Graphic_StackCount</graphicClass>
     </graphicData>
     <soundInteract>Metal_Drop</soundInteract>
     <soundDrop>Metal_Drop</soundDrop>
     <healthAffectsPrice>false</healthAffectsPrice>
     <statBases>
-      <MarketValue>3.4</MarketValue>
-      <MaxHitPoints>150</MaxHitPoints>
-      <Mass>0.08</Mass>
-      <StuffPower_Armor_Sharp>0.9</StuffPower_Armor_Sharp>
-      <StuffPower_Armor_Blunt>0.48</StuffPower_Armor_Blunt>
-      <StuffPower_Armor_Heat>0.6</StuffPower_Armor_Heat>
-      <StuffPower_Insulation_Cold>3</StuffPower_Insulation_Cold>
-      <StuffPower_Insulation_Heat>0</StuffPower_Insulation_Heat>
-      <SharpDamageMultiplier>0.9</SharpDamageMultiplier>
-      <BluntDamageMultiplier>0.9</BluntDamageMultiplier>
+      <MarketValue>5</MarketValue>
+      <Mass>0.2</Mass>
+      <StuffPower_Armor_Sharp>0.99</StuffPower_Armor_Sharp>
+      <StuffPower_Armor_Blunt>0.4</StuffPower_Armor_Blunt>
+      <StuffPower_Armor_Heat>1.3</StuffPower_Armor_Heat>
+      <StuffPower_Insulation_Cold>20</StuffPower_Insulation_Cold>
+      <StuffPower_Insulation_Heat>20</StuffPower_Insulation_Heat>
+      <SharpDamageMultiplier>0.75</SharpDamageMultiplier>
+      <BluntDamageMultiplier>0.75</BluntDamageMultiplier>
     </statBases>
+    <useHitPoints>false</useHitPoints>
+    <healthAffectsPrice>false</healthAffectsPrice>
     <thingCategories>
       <li>VV_ViviResource</li>
     </thingCategories>
-    <burnableByRecipe>true</burnableByRecipe>
+    <burnableByRecipe>false</burnableByRecipe>
     <smeltable>true</smeltable>
     <stuffProps>
       <categories>
@@ -380,45 +339,23 @@
       <soundMeleeHitBlunt>MeleeHit_Metal_Blunt</soundMeleeHitBlunt>
       <soundImpactMelee>Pawn_Melee_Punch_HitBuilding_Metal</soundImpactMelee>
       <statFactors>
-        <MaxHitPoints>1</MaxHitPoints>
+        <MaxHitPoints>1.5</MaxHitPoints>
         <Beauty>2</Beauty>
         <Flammability>0</Flammability>
         <WorkToMake>0.8</WorkToMake>
-        <WorkToBuild>0.8</WorkToBuild>
-        <DoorOpenSpeed>1.5</DoorOpenSpeed>
+        <WorkToBuild>3.2</WorkToBuild>
+        <DoorOpenSpeed>1.2</DoorOpenSpeed>
         <MeleeWeapon_CooldownMultiplier>0.7</MeleeWeapon_CooldownMultiplier>
       </statFactors>
-      <statFactorsQuality>
-        <li>
-          <stat>PsychicSensitivityFactor</stat>
-          <awful>1</awful>
-          <poor>1</poor>
-          <normal>1</normal>
-          <good>1</good>
-          <excellent>1</excellent>
-          <masterwork>1.05</masterwork>
-          <legendary>1.1</legendary>
-        </li>
-        <li>
-          <stat>MeleeDodgeChance</stat>
-          <awful>1</awful>
-          <poor>1</poor>
-          <normal>1</normal>
-          <good>1</good>
-          <excellent>1.05</excellent>
-          <masterwork>1.05</masterwork>
-          <legendary>1.1</legendary>
-        </li>
-      </statFactorsQuality>
       <statOffsetsQuality>
         <li>
-          <stat>MoveSpeed</stat>
+          <stat>PsychicSensitivityOffset</stat>
           <awful>0</awful>
           <poor>0</poor>
-          <normal>0</normal>
-          <good>0</good>
-          <excellent>0.05</excellent>
-          <masterwork>0.05</masterwork>
+          <normal>0.025</normal>
+          <good>0.05</good>
+          <excellent>0.075</excellent>
+          <masterwork>0.1</masterwork>
           <legendary>0.15</legendary>
         </li>
       </statOffsetsQuality>

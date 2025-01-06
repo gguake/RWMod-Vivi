@@ -1,0 +1,46 @@
+<Defs>
+  <!-- 거대 말벌 날개 -->
+  <ThingDef ParentName="ResourceBase">
+    <defName>VV_TitanicHornetWing</defName>
+    <label>titanic hornet wing</label>
+    <description>a piece of a titanic hornet's wing. It's difficult to obtain, but thanks to its special components, it's lightweight and durable, making it a high-quality equipment material. It will decompose at room temperature, so it is recommended to keep it in a freezer.</description>
+    <descriptionHyperlinks>
+      <RecipeDef>VV_InstallGliderWing</RecipeDef>
+      <HediffDef>VV_GliderWing</HediffDef>
+    </descriptionHyperlinks>
+    <tickerType>Rare</tickerType>
+
+    <graphicData>
+      <texPath>Things/Item/VV_HornetWing</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <thingCategories>
+      <li>VV_ViviResource</li>
+    </thingCategories>
+
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Standard_Drop</soundInteract>
+    <soundDrop>Standard_Drop</soundDrop>
+    
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <Mass>0.1</Mass>
+      <MarketValue>100</MarketValue>
+      <MaxHitPoints>50</MaxHitPoints>
+      <Flammability>1.0</Flammability>
+      <DeteriorationRate>10</DeteriorationRate>
+    </statBases>
+    <stackLimit>25</stackLimit>
+    
+    <comps>
+      <li Class="CompProperties_Rottable">
+        <daysToRotStart>10</daysToRotStart>
+        <rotDestroys>true</rotDestroys>
+      </li>
+    </comps>
+
+    <tradeTags>
+      <li>VV_ViviExotic</li>
+    </tradeTags>
+  </ThingDef>
+</Defs>

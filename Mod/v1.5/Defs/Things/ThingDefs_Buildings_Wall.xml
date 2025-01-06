@@ -286,7 +286,7 @@
       <li Class="VVRace.CompProperties_ShowDesignator">
         <designatorType>VVRace.Designator_FortifyHoneycombWall</designatorType>
         <designationDef>VV_FortifyHoneycombWall</designationDef>
-        <researchProjectDef>VV_ViviPolymer</researchProjectDef>
+        <researchProjectDef>VV_Geosteel</researchProjectDef>
       </li>
     </comps>
   </ThingDef>
@@ -318,7 +318,7 @@
     </building>
     <costList>
       <VV_Viviwax>2</VV_Viviwax>
-      <VV_ViviPolymer>3</VV_ViviPolymer>
+      <VV_Geosteel>3</VV_Geosteel>
     </costList>
     <useStuffTerrainAffordance>false</useStuffTerrainAffordance>
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>

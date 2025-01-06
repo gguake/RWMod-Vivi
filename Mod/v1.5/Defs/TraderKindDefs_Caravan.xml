@@ -59,7 +59,7 @@
         <countRange>50~100</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
-        <thingDef>VV_ViviPolymer</thingDef>
+        <thingDef>VV_Geosteel</thingDef>
         <countRange>50~100</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
@@ -180,7 +180,7 @@
         <countRange>100~200</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
-        <thingDef>VV_ViviPolymer</thingDef>
+        <thingDef>VV_Geosteel</thingDef>
         <countRange>50~100</countRange>
       </li>
       
