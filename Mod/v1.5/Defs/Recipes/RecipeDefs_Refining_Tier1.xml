@@ -213,7 +213,7 @@
     </defaultIngredientFilter>
     
     <products>
-      <VV_Fertilizer>20</VV_Fertilizer>
+      <VV_Fertilizer>25</VV_Fertilizer>
     </products>
     
     <researchPrerequisite>VV_ArcaneBotany</researchPrerequisite>
@@ -271,6 +271,8 @@
       </categories>
       <disallowedThingDefs>
         <li>VV_Propolis</li>
+        <li>HemogenPack</li>
+        <li>BabyFood</li>
       </disallowedThingDefs>
       <disallowedCategories>
         <li>FoodMeals</li>
@@ -289,7 +291,7 @@
     </defaultIngredientFilter>
     
     <products>
-      <VV_Fertilizer>20</VV_Fertilizer>
+      <VV_Fertilizer>25</VV_Fertilizer>
     </products>
     
     <researchPrerequisite>VV_ArcaneBotany</researchPrerequisite>
