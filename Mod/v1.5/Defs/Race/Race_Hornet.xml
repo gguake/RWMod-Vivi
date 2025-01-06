@@ -17,10 +17,10 @@
 \nThe wings of the titanic hornet are incredibly strong yet lightweight, making them a useful material. However, they are typically difficult to obtain intact, as the corpse rapidly decays due to the scaria.
 \nThe exact origin of the titanic hornet is unknown, but according to various records, it is known to have appeared after outlanders arrived on this planet.</description>
     <statBases>
-      <MoveSpeed>7.6</MoveSpeed>
+      <MoveSpeed>8.1</MoveSpeed>
       <PsychicSensitivity>0</PsychicSensitivity>
       <ComfyTemperatureMin>0</ComfyTemperatureMin>
-      <ComfyTemperatureMax>35</ComfyTemperatureMax>
+      <ComfyTemperatureMax>36</ComfyTemperatureMax>
       <MarketValue>500</MarketValue>
       <LeatherAmount>0</LeatherAmount>
       <ArmorRating_Sharp>1.0</ArmorRating_Sharp>
@@ -30,7 +30,7 @@
 
       <ToxicResistance>-1.00</ToxicResistance>
       <ToxicEnvironmentResistance>0</ToxicEnvironmentResistance>
-      <Flammability>1.1</Flammability>
+      <Flammability>2.0</Flammability>
 
       <MinimumHandlingSkill>99</MinimumHandlingSkill>
     </statBases>
@@ -94,7 +94,7 @@
 
       <body>VV_TitanicHornet</body>
       <baseBodySize>4.0</baseBodySize>
-      <baseHungerRate>5.0</baseHungerRate>
+      <baseHungerRate>4.0</baseHungerRate>
       <baseHealthScale>6.0</baseHealthScale>
       <useMeatFrom>Megaspider</useMeatFrom>
       <wildness>1.0</wildness>
@@ -135,7 +135,7 @@
 
     <killedLeavingsChance>0.5</killedLeavingsChance>
     <killedLeavingsRanges>
-      <VV_TitanicHornetWing>1~3</VV_TitanicHornetWing>
+      <VV_TitanicHornetWing>1~4</VV_TitanicHornetWing>
     </killedLeavingsRanges>
   </ThingDef>
 </Defs>
