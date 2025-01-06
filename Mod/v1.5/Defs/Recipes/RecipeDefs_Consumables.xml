@@ -327,4 +327,84 @@
     <workSkill>Cooking</workSkill>
     <researchPrerequisite>VV_ArcaneBotany</researchPrerequisite>
   </RecipeDef>
+  
+  <!-- 꿀 젤리 -->
+  <RecipeDef>
+    <defName>VV_Make_HoneyJelly</defName>
+    <label>make honey jelly</label>
+    <description>Make honey jelly.</description>
+
+    <jobString>Making honey jelly.</jobString>
+    <workAmount>300</workAmount>
+    <workSpeedStat>CookSpeed</workSpeedStat>
+    <requiredGiverWorkType>Cooking</requiredGiverWorkType>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_CookMeal</soundWorking>
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_FilteredHoney</li>
+          </thingDefs>
+        </filter>
+        <count>5</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>VV_FilteredHoney</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <defaultIngredientFilter>
+      <thingDefs>
+        <li>VV_FilteredHoney</li>
+      </thingDefs>
+    </defaultIngredientFilter>
+    <products>
+      <VV_FilteredHoney>1</VV_FilteredHoney>
+    </products>
+    <workSkill>Cooking</workSkill>
+    <researchPrerequisite>VV_BasicGathering</researchPrerequisite>
+  </RecipeDef>
+  
+  <!-- 꿀 젤리 벌크 -->
+  <RecipeDef>
+    <defName>VV_Make_HoneyJelly_Bulk</defName>
+    <label>make honey jelly x4</label>
+    <description>Make bulk honey jelly.</description>
+
+    <jobString>Making bulk honey jelly.</jobString>
+    <workAmount>1200</workAmount>
+    <workSpeedStat>CookSpeed</workSpeedStat>
+    <requiredGiverWorkType>Cooking</requiredGiverWorkType>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_CookMeal</soundWorking>
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_FilteredHoney</li>
+          </thingDefs>
+        </filter>
+        <count>20</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>VV_FilteredHoney</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <defaultIngredientFilter>
+      <thingDefs>
+        <li>VV_FilteredHoney</li>
+      </thingDefs>
+    </defaultIngredientFilter>
+    <products>
+      <VV_FilteredHoney>4</VV_FilteredHoney>
+    </products>
+    <workSkill>Cooking</workSkill>
+    <researchPrerequisite>VV_BasicGathering</researchPrerequisite>
+  </RecipeDef>
 </Defs>

@@ -487,4 +487,57 @@
       <li>VV_ViviProduct</li>
     </tradeTags>
   </ThingDef>
+
+	<!-- 꿀 젤리 -->
+	<ThingDef ParentName="OrganicProductBase">
+		<defName>VV_HoneyJelly</defName>
+		<label>honey jelly</label>
+		<description>.</description>
+		<graphicData>
+      <texPath>Things/Item/Resource/AnimalProductRaw/InsectJelly</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<socialPropernessMatters>true</socialPropernessMatters>
+    <orderedTakeGroup>Drug</orderedTakeGroup>
+		<thingCategories>
+			<li>Drugs</li>
+		</thingCategories>
+
+		<statBases>
+      <MarketValue>9.6</MarketValue>
+			<Mass>0.025</Mass>
+			<Nutrition>0.6</Nutrition>
+		</statBases>
+
+		<ingestible>
+      <foodType>Fluid, Processed</foodType>
+			<preferability>NeverForNutrition</preferability>
+			<joy>0.3</joy>
+			<joyKind>Gluttonous</joyKind>
+      
+			<drugCategory>Medical</drugCategory>
+      <canAutoSelectAsFoodForCaravan>false</canAutoSelectAsFoodForCaravan>
+      <maxNumToIngestAtOnce>1</maxNumToIngestAtOnce>
+      <defaultNumToIngestAtOnce>1</defaultNumToIngestAtOnce>
+      <ingestHoldUsesTable>false</ingestHoldUsesTable>
+      <optimalityOffsetFeedingAnimals>-10</optimalityOffsetFeedingAnimals>
+		</ingestible>
+
+    <stackLimit>75</stackLimit>
+		<comps>
+      <li Class="CompProperties_Drug">
+        <listOrder>2000</listOrder>
+				<overdoseSeverityOffset>0.08~0.14</overdoseSeverityOffset>
+      </li>
+      <li Class="VVRace.CompProperties_Honey" />
+		</comps>
+    
+    <tradeTags>
+      <li>VV_ViviProduct</li>
+    </tradeTags>
+	</ThingDef>
+
+  
+  
+
 </Defs>
