@@ -78,6 +78,11 @@ namespace VVRace.HarmonyPatches
                 original: AccessTools.Method(typeof(Designator_Cancel), nameof(Designator_Cancel.DesignateThing)),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(Designator_Cancel_DesignateThing_Postfix)));
 
+            // 순수주의자 패치
+            harmony.Patch(
+                original: AccessTools.Method(typeof(GeneUtility), nameof(GeneUtility.AddedAndImplantedPartsWithXenogenesCount)),
+                transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(GeneUtility_AddedAndImplantedPartsWithXenogenesCount_Transpiler)));
+
             Log.Message("!! [ViViRace] race patch complete");
         }
 
@@ -306,6 +311,28 @@ namespace VVRace.HarmonyPatches
                     __instance.Map.designationManager.RemoveDesignation(designation);
                 }
             }
+        }
+
+        private static List<CodeInstruction> GeneUtility_AddedAndImplantedPartsWithXenogenesCount_Transpiler(IEnumerable<CodeInstruction> codeInstructions, ILGenerator ilGenerator)
+        {
+            var instructions = codeInstructions.ToList();
+
+            var injectionIndex = instructions.FindIndex(
+                v => v.opcode == OpCodes.Ldfld &&
+                v.OperandIs(AccessTools.Field(typeof(Pawn), nameof(Pawn.genes)))) + 2;
+
+            var labelIndex = instructions.FindIndex(v => v.opcode == OpCodes.Ret) - 1;
+            var label = ilGenerator.DefineLabel();
+            instructions[labelIndex] = instructions[labelIndex].WithLabels(label);
+
+            instructions.InsertRange(injectionIndex, new List<CodeInstruction>()
+            {
+                new CodeInstruction(OpCodes.Ldarg_0),
+                new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(ViviUtility), nameof(ViviUtility.IsVivi))),
+                new CodeInstruction(OpCodes.Brtrue_S, label),
+            });
+
+            return instructions;
         }
     }
 }
