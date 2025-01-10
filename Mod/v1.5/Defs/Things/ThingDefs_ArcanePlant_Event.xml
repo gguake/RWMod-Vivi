@@ -18,7 +18,7 @@
 
     <statBases>
       <MaxHitPoints>120</MaxHitPoints>
-      <WorkToBuild>100000</WorkToBuild>
+      <WorkToBuild>90000</WorkToBuild>
       <Beauty>15</Beauty>
       <BeautyOutdoors>15</BeautyOutdoors>
 

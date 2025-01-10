@@ -22,7 +22,7 @@
 
     <statBases>
       <MaxHitPoints>120</MaxHitPoints>
-      <WorkToBuild>36000</WorkToBuild>
+      <WorkToBuild>27000</WorkToBuild>
     </statBases>
 
     <fillPercent>0.25</fillPercent>
@@ -203,7 +203,7 @@
 
     <statBases>
       <MaxHitPoints>240</MaxHitPoints>
-      <WorkToBuild>48000</WorkToBuild>
+      <WorkToBuild>45000</WorkToBuild>
       <Flammability>0.7</Flammability>
     </statBases>
 
@@ -399,7 +399,7 @@
     
     <statBases>
       <MaxHitPoints>120</MaxHitPoints>
-      <WorkToBuild>36000</WorkToBuild>
+      <WorkToBuild>30000</WorkToBuild>
     </statBases>
 
     <fillPercent>0.25</fillPercent>
@@ -524,7 +524,7 @@
       <damageDef>Bomb</damageDef>
       <speed>40</speed>
       <explosionRadius>1.1</explosionRadius>
-      <damageAmountBase>20</damageAmountBase>
+      <damageAmountBase>25</damageAmountBase>
       <screenShakeFactor>0.25</screenShakeFactor>
     </projectile>
 
@@ -554,7 +554,7 @@
       <damageDef>Bomb</damageDef>
       <speed>15</speed>
       <explosionRadius>0.6</explosionRadius>
-      <damageAmountBase>10</damageAmountBase>
+      <damageAmountBase>13</damageAmountBase>
       <screenShakeFactor>0</screenShakeFactor>
     </projectile>
   </ThingDef>

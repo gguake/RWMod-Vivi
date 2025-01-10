@@ -17,7 +17,7 @@
 
     <statBases>
       <MaxHitPoints>50</MaxHitPoints>
-      <WorkToBuild>18000</WorkToBuild>
+      <WorkToBuild>15000</WorkToBuild>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
 
@@ -150,7 +150,7 @@
 
     <statBases>
       <MaxHitPoints>50</MaxHitPoints>
-      <WorkToBuild>18000</WorkToBuild>
+      <WorkToBuild>15000</WorkToBuild>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
       
@@ -290,7 +290,7 @@
 
     <statBases>
       <MaxHitPoints>80</MaxHitPoints>
-      <WorkToBuild>32000</WorkToBuild>
+      <WorkToBuild>28000</WorkToBuild>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
 
@@ -439,7 +439,7 @@
 
     <statBases>
       <MaxHitPoints>50</MaxHitPoints>
-      <WorkToBuild>32000</WorkToBuild>
+      <WorkToBuild>28000</WorkToBuild>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
       
@@ -573,7 +573,7 @@
     <terrainAffordanceNeeded>VV_WaterOrLight</terrainAffordanceNeeded>
     <statBases>
       <MaxHitPoints>70</MaxHitPoints>
-      <WorkToBuild>36000</WorkToBuild>
+      <WorkToBuild>33000</WorkToBuild>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
       <Flammability>0</Flammability>
@@ -715,7 +715,7 @@
 
     <statBases>
       <MaxHitPoints>50</MaxHitPoints>
-      <WorkToBuild>36000</WorkToBuild>
+      <WorkToBuild>33000</WorkToBuild>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
       
@@ -842,7 +842,7 @@
 
     <statBases>
       <MaxHitPoints>60</MaxHitPoints>
-      <WorkToBuild>24000</WorkToBuild>
+      <WorkToBuild>21000</WorkToBuild>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
       
@@ -976,7 +976,7 @@
 
     <statBases>
       <MaxHitPoints>90</MaxHitPoints>
-      <WorkToBuild>60000</WorkToBuild>
+      <WorkToBuild>55000</WorkToBuild>
       <Beauty>15</Beauty>
       <BeautyOutdoors>15</BeautyOutdoors>
     </statBases>
@@ -1141,7 +1141,7 @@
 
     <statBases>
       <MaxHitPoints>50</MaxHitPoints>
-      <WorkToBuild>12000</WorkToBuild>
+      <WorkToBuild>10000</WorkToBuild>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
     </statBases>
