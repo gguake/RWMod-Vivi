@@ -1,81 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <!-- 지오스틸 정제 -->
+  <!-- 말벌 날개 정제 -->
   <RecipeDef>
-    <defName>VV_MakeGeosteel</defName>
-    <label>make geosteel</label>
-    <description>.</description>
+    <defName>VV_RefineTitanicHornetWing</defName>
+    <label>refine titanic hornet wing</label>
+    <description>Refine lifestrand from titanic hornet wing.</description>
 
-    <jobString>making geosteel.</jobString>
-    <workAmount>2400</workAmount>
+    <jobString>refining hornet wing.</jobString>
+    <workAmount>800</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <workSkill>Crafting</workSkill>
+    <workSkillLearnFactor>0.03</workSkillLearnFactor>
 
     <effectWorking>Smelt</effectWorking>
-    <soundWorking>Recipe_Smelt</soundWorking>
-    <uiIconThing>VV_Geosteel</uiIconThing>
+    <soundWorking>Recipe_Brewing</soundWorking>
+    <uiIconThing>VV_Lifestrand</uiIconThing>
 
     <ingredients>
       <li>
         <filter>
           <thingDefs>
-            <li>Uranium</li>
-            <li>Jade</li>
+            <li>VV_TitanicHornetWing</li>
           </thingDefs>
         </filter>
-        <count>10</count>
-      </li>
-      <li>
-        <filter>
-          <thingDefs>
-            <li>VV_Vivicream</li>
-          </thingDefs>
-        </filter>
-        <count>30</count>
-      </li>
-      <li>
-        <filter>
-          <thingDefs>
-            <li>VV_HeatingPetal</li>
-            <li>VV_CoolingPetal</li>
-            <li>VV_PerfumingPetal</li>
-          </thingDefs>
-        </filter>
-        <count>20</count>
+        <count>1</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
       <thingDefs>
-        <li>Uranium</li>
-        <li>Jade</li>
-        <li>VV_Vivicream</li>
-        <li>VV_HeatingPetal</li>
-        <li>VV_CoolingPetal</li>
-        <li>VV_PerfumingPetal</li>
+        <li>VV_TitanicHornetWing</li>
       </thingDefs>
     </fixedIngredientFilter>
     <products>
-      <VV_Geosteel>25</VV_Geosteel>
+      <VV_Lifestrand>25</VV_Lifestrand>
     </products>
-    <researchPrerequisite>VV_Geosteel</researchPrerequisite>
-    
-    <skillRequirements>
-      <Crafting>4</Crafting>
-    </skillRequirements>
+    <researchPrerequisite>VV_Lifestrand</researchPrerequisite>
   </RecipeDef>
 
-  <!-- 생체 가닥 정제 -->
+  <!-- 생체 가닥 직조 -->
   <RecipeDef>
     <defName>VV_MakeLifestrand</defName>
-    <label>make lifestrand</label>
-    <description>Process devilstrand with various materials to create lifestrand.</description>
+    <label>weave lifestrand</label>
+    <description>Process devilstrand with mana-infused materials to weave lifestrand.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_LivingLeaf</ThingDef>
-      <ThingDef>VV_Geosteel</ThingDef>
     </descriptionHyperlinks>
 
-    <jobString>making lifestrand.</jobString>
-    <workAmount>2500</workAmount>
+    <jobString>weaving lifestrand.</jobString>
+    <workAmount>2800</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <workSkill>Crafting</workSkill>
 
@@ -103,17 +75,21 @@
       <li>
         <filter>
           <thingDefs>
-            <li>VV_Geosteel</li>
+            <li>VV_HeatingPetal</li>
+            <li>VV_CoolingPetal</li>
+            <li>VV_SparklingPetal</li>
+            <li>VV_PerfumingPetal</li>
           </thingDefs>
         </filter>
-        <count>25</count>
+        <count>20</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
       <thingDefs>
-        <li>DevilstrandCloth</li>
-        <li>VV_LivingLeaf</li>
-        <li>VV_Geosteel</li>
+        <li>VV_HeatingPetal</li>
+        <li>VV_CoolingPetal</li>
+        <li>VV_SparklingPetal</li>
+        <li>VV_PerfumingPetal</li>
       </thingDefs>
     </fixedIngredientFilter>
     <products>

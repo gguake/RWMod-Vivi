@@ -67,24 +67,24 @@
           <li>Stab</li>
         </capacities>
         <power>27</power>
-        <armorPenetration>0.33</armorPenetration>
-        <cooldownTime>3.3</cooldownTime>
+        <armorPenetration>0.3</armorPenetration>
+        <cooldownTime>3.9</cooldownTime>
       </li>
       <li>
         <label>point</label>
         <capacities>
           <li>Stab</li>
         </capacities>
-        <power>54</power>
-        <armorPenetration>0.99</armorPenetration>
-        <cooldownTime>3.3</cooldownTime>
+        <power>51</power>
+        <armorPenetration>0.9</armorPenetration>
+        <cooldownTime>3.9</cooldownTime>
         <chanceFactor>0.33</chanceFactor>
       </li>
     </tools>
     
     <costList>
       <Plasteel>75</Plasteel>
-      <VV_Geosteel>75</VV_Geosteel>
+      <VV_Lifestrand>45</VV_Lifestrand>
       <VV_TitanicHornetWing>2</VV_TitanicHornetWing>
     </costList>
     
@@ -201,9 +201,8 @@
     
     <costList>
       <Plasteel>100</Plasteel>
-      <VV_TitanicHornetWing>6</VV_TitanicHornetWing>
-      <VV_Geosteel>200</VV_Geosteel>
-      <VV_LivingLeaf>100</VV_LivingLeaf>
+      <VV_TitanicHornetWing>5</VV_TitanicHornetWing>
+      <VV_Lifestrand>200</VV_Lifestrand>
     </costList>
     
     <recipeMaker>

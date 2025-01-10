@@ -55,7 +55,6 @@
     <prerequisites>
       <li>Devilstrand</li>
       <li>VV_ArcaneBotany</li>
-      <li>VV_Geosteel</li>
     </prerequisites>
   </ResearchProjectDef>
 </Defs>

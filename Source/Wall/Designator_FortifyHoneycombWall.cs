@@ -23,7 +23,7 @@ namespace VVRace
             hotKey = KeyBindingDefOf.Misc5;
         }
 
-        public override bool Visible => VVResearchProjectDefOf.VV_Geosteel.IsFinished;
+        public override bool Visible => VVResearchProjectDefOf.VV_Lifestrand.IsFinished;
 
         protected override DesignationDef Designation => VVDesignationDefOf.VV_FortifyHoneycombWall;
 
@@ -91,7 +91,7 @@ namespace VVRace
 
         public override void DrawMouseAttachments()
         {
-            var requiredAmount = VVThingDefOf.VV_ViviHardenHoneycombWall.CostList.FirstOrDefault(tdc => tdc.thingDef == VVThingDefOf.VV_Geosteel).count;
+            var requiredAmount = VVThingDefOf.VV_ViviHardenHoneycombWall.CostList.FirstOrDefault(tdc => tdc.thingDef == VVThingDefOf.VV_Lifestrand).count;
             if (requiredAmount <= 0)
             {
                 return;
@@ -101,12 +101,12 @@ namespace VVRace
             var dragger = Find.DesignatorManager.Dragger;
             int selectedCount = ((!dragger.Dragging) ? 1 : dragger.DragCells.Count());
 
-            Widgets.ThingIcon(new Rect(center.x, center.y, 27f, 27f), VVThingDefOf.VV_Geosteel);
+            Widgets.ThingIcon(new Rect(center.x, center.y, 27f, 27f), VVThingDefOf.VV_Lifestrand);
             var labelRect = new Rect(center.x + 29f, center.y, 999f, 29f);
 
             int requiredCount = selectedCount * requiredAmount;
             var text = requiredCount.ToString();
-            if (base.Map.resourceCounter.GetCount(VVThingDefOf.VV_Geosteel) < requiredCount)
+            if (base.Map.resourceCounter.GetCount(VVThingDefOf.VV_Lifestrand) < requiredCount)
             {
                 GUI.color = Color.red;
                 text += " (" + "NotEnoughStoredLower".Translate() + ")";

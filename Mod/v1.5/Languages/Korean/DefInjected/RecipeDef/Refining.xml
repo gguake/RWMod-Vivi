@@ -16,9 +16,13 @@
 <VV_RefiningPropolis.description>프로폴리스를 정제해 생약 성분과 뉴트로아민을 추출합니다.</VV_RefiningPropolis.description>
 <VV_RefiningPropolis.jobString>프로폴리스 정제 중.</VV_RefiningPropolis.jobString>
 
-<VV_MakeLifestrand.label>생체가닥 만들기</VV_MakeLifestrand.label>
-<VV_MakeLifestrand.description>악마가닥을 다양한 재료로 가공해 생체가닥을 만듭니다.</VV_MakeLifestrand.description>
-<VV_MakeLifestrand.jobString>생체가닥 만드는 중.</VV_MakeLifestrand.jobString>
+<VV_RefineTitanicHornetWing.label>거대 말벌 날개 가공</VV_RefineTitanicHornetWing.label>
+<VV_RefineTitanicHornetWing.description>강력하고 튼튼한 섬유질로 이루어진 말벌 날개를 생체가닥으로 가공합니다.</VV_RefineTitanicHornetWing.description>
+<VV_RefineTitanicHornetWing.jobString>말벌 날개 가공 중.</VV_RefineTitanicHornetWing.jobString>
+
+<VV_MakeLifestrand.label>생체가닥 직조</VV_MakeLifestrand.label>
+<VV_MakeLifestrand.description>악마가닥을 마나가 깃든 재료로 가공해 생체가닥을 직조합니다.</VV_MakeLifestrand.description>
+<VV_MakeLifestrand.jobString>생체가닥 직조 중.</VV_MakeLifestrand.jobString>
 
 <VV_MakeFertilizerCorpse.label>뼈로 마나 비료 만들기</VV_MakeFertilizerCorpse.label>
 <VV_MakeFertilizerCorpse.description>뼈를 흙, 꽃가루와 배합해 마나 비료를 만듭니다.</VV_MakeFertilizerCorpse.description>
@@ -41,9 +45,5 @@
 <VV_MakeFertilizerSeeds.description>대량의 유기물에서 마나 성분을 추출해 비료를 만듭니다.</VV_MakeFertilizerSeeds.description>
 <VV_MakeFertilizerSeeds.jobString>비료를 대량 배합하는 중.</VV_MakeFertilizerSeeds.jobString>
 <VV_MakeFertilizerSeeds.ingredients.1.filter.customSummary>꽃가루나 미확인 씨앗</VV_MakeFertilizerSeeds.ingredients.1.filter.customSummary>
-
-<VV_MakeGeosteel.label>지오스틸 제련</VV_MakeGeosteel.label>
-<VV_MakeGeosteel.description>.</VV_MakeGeosteel.description>
-<VV_MakeGeosteel.jobString>지오스틸 제련 중.</VV_MakeGeosteel.jobString>
 
 </LanguageData>

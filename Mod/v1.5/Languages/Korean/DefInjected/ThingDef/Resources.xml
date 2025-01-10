@@ -12,7 +12,7 @@
 \n천연 항생제로 활용해 감염이나 일부 질병의 진행도를 늦추기 위해 사용할 수도 있습니다.</VV_Propolis.description>
 
   <VV_Lifestrand.label>생체가닥</VV_Lifestrand.label>
-  <VV_Lifestrand.description>악마가닥을 살아있는 잎과 비비 폴리머로 튼튼하게 가공한 옷감입니다. 보통의 악마가닥 천보다 매우 튼튼하지만 그만큼 가공하기도 어렵습니다.
+  <VV_Lifestrand.description>악마가닥을 마나가 깃든 재료로 가공한 옷감입니다. 보통의 악마가닥 천보다 매우 튼튼하지만 그만큼 가공하기도 어렵습니다.
 \n섬유가 마치 살아있는것 같다고 해서 생체가닥으로 불리지만 실제로 살아있을지도 모릅니다.</VV_Lifestrand.description>
 
   <VV_UnknownSeed.label>미확인 씨앗</VV_UnknownSeed.label>
@@ -23,7 +23,4 @@
 
   <VV_TitanicHornetWing.label>거대 말벌 날개 조각</VV_TitanicHornetWing.label>
   <VV_TitanicHornetWing.description>거대 말벌의 날개 조각입니다. 얻기 힘들지만 특수한 성분으로 가볍고 튼튼해 고급 장비 재료로 사용됩니다. 상온에서는 부패하므로 냉동 보관이 권장됩니다.</VV_TitanicHornetWing.description>
-
-  <VV_Geosteel.label>지오스틸</VV_Geosteel.label>
-  <VV_Geosteel.description>.</VV_Geosteel.description>
 </LanguageData>

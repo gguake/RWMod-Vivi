@@ -148,11 +148,15 @@
   <ThingDef ParentName="ResourceBase">
     <defName>VV_Lifestrand</defName>
     <label>lifestrand</label>
-    <description>a fabric that has been toughened by processing devilstrand with living leaves and geosteels. It is much more durable than regular devilstrand fabric, but it is also more difficult to process.
+    <description>a fabric that has been toughened by processing devilstrand with mana-infused materials. It is much more durable than regular devilstrand fabric, but it is also more difficult to process.
 \nThe fibers are called lifestrand because they seem to be alive, but they might indeed be living.</description>
     <descriptionHyperlinks>
+      <ThingDef>DevilstrandCloth</ThingDef>
       <ThingDef>VV_LivingLeaf</ThingDef>
-      <ThingDef>VV_Geosteel</ThingDef>
+      <ThingDef>VV_HeatingPetal</ThingDef>
+      <ThingDef>VV_CoolingPetal</ThingDef>
+      <ThingDef>VV_SparklingPetal</ThingDef>
+      <ThingDef>VV_PerfumingPetal</ThingDef>
     </descriptionHyperlinks>
 
     <graphicData>
@@ -172,7 +176,7 @@
       <StuffPower_Insulation_Heat>36</StuffPower_Insulation_Heat>
 
       <MaxHitPoints>150</MaxHitPoints>
-      <MarketValue>12</MarketValue>
+      <MarketValue>11</MarketValue>
       <Mass>0.05</Mass>
       <Flammability>0.1</Flammability>
       <DeteriorationRate>2</DeteriorationRate>
@@ -292,79 +296,4 @@
     </tradeTags>
   </ThingDef>
   
-  <!-- 지오스틸 -->
-  <ThingDef ParentName="ResourceBase">
-    <defName>VV_Geosteel</defName>
-    <label>geosteel</label>
-    <description>.</description>
-    <descriptionHyperlinks>
-      <ThingDef>VV_ArcanePlantFarm</ThingDef>
-    </descriptionHyperlinks>
-
-    <graphicData>
-      <texPath>Things/Item/VV_Geosteel</texPath>
-      <graphicClass>Graphic_StackCount</graphicClass>
-    </graphicData>
-    <soundInteract>Metal_Drop</soundInteract>
-    <soundDrop>Metal_Drop</soundDrop>
-    <statBases>
-      <MarketValue>5</MarketValue>
-      <Mass>0.2</Mass>
-      <StuffPower_Armor_Sharp>0.99</StuffPower_Armor_Sharp>
-      <StuffPower_Armor_Blunt>0.4</StuffPower_Armor_Blunt>
-      <StuffPower_Armor_Heat>1.3</StuffPower_Armor_Heat>
-      <StuffPower_Insulation_Cold>20</StuffPower_Insulation_Cold>
-      <StuffPower_Insulation_Heat>20</StuffPower_Insulation_Heat>
-      <SharpDamageMultiplier>0.75</SharpDamageMultiplier>
-      <BluntDamageMultiplier>0.75</BluntDamageMultiplier>
-    </statBases>
-    <useHitPoints>false</useHitPoints>
-    <healthAffectsPrice>false</healthAffectsPrice>
-    <thingCategories>
-      <li>VV_ViviResource</li>
-    </thingCategories>
-    <burnableByRecipe>false</burnableByRecipe>
-    <smeltable>true</smeltable>
-    <stuffProps>
-      <categories>
-        <li>Metallic</li>
-      </categories>
-      <appearance>Metal</appearance>
-      <commonality>0</commonality>
-      <constructEffect>ConstructMetal</constructEffect>
-      <color>(65,44,24)</color>
-      <soundImpactBullet>BulletImpact_Metal</soundImpactBullet>
-      <soundMeleeHitSharp>MeleeHit_Metal_Sharp</soundMeleeHitSharp>
-      <soundMeleeHitBlunt>MeleeHit_Metal_Blunt</soundMeleeHitBlunt>
-      <soundImpactMelee>Pawn_Melee_Punch_HitBuilding_Metal</soundImpactMelee>
-      <statFactors>
-        <MaxHitPoints>1.5</MaxHitPoints>
-        <Beauty>2</Beauty>
-        <Flammability>0</Flammability>
-        <WorkToMake>0.8</WorkToMake>
-        <WorkToBuild>3.2</WorkToBuild>
-        <DoorOpenSpeed>1.2</DoorOpenSpeed>
-        <MeleeWeapon_CooldownMultiplier>0.7</MeleeWeapon_CooldownMultiplier>
-      </statFactors>
-      <statOffsetsQuality>
-        <li>
-          <stat>PsychicSensitivityOffset</stat>
-          <awful>0</awful>
-          <poor>0</poor>
-          <normal>0.025</normal>
-          <good>0.05</good>
-          <excellent>0.075</excellent>
-          <masterwork>0.1</masterwork>
-          <legendary>0.15</legendary>
-        </li>
-      </statOffsetsQuality>
-    </stuffProps>
-    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
-    <allowedArchonexusCount>80</allowedArchonexusCount>
-    
-    <tradeTags>
-      <li>VV_ViviProduct</li>
-    </tradeTags>
-  </ThingDef>
-
 </Defs>

@@ -8,6 +8,8 @@ namespace VVRace
 {
     public class WorkGiver_FortifyHoneycombWall : WorkGiver_Scanner
     {
+        public const int IngredientLifestrandAmount = 1;
+
         public override PathEndMode PathEndMode => PathEndMode.Touch;
 
         public override IEnumerable<Thing> PotentialWorkThingsGlobal(Pawn pawn)
@@ -38,7 +40,7 @@ namespace VVRace
                 return false;
             }
 
-            var ingredients = FindBestIngredients(pawn, 3);
+            var ingredients = FindBestIngredients(pawn, IngredientLifestrandAmount);
             if (ingredients == null)
             {
                 return false;
@@ -49,7 +51,7 @@ namespace VVRace
 
         public override Job JobOnThing(Pawn pawn, Thing t, bool forced = false)
         {
-            var ingredients = FindBestIngredients(pawn, 3);
+            var ingredients = FindBestIngredients(pawn, IngredientLifestrandAmount);
             if (ingredients == null) { return null; }
 
             var job = JobMaker.MakeJob(VVJobDefOf.VV_FortifyHoneycombWall, t);
@@ -68,7 +70,7 @@ namespace VVRace
                 (from, to) => to.Allows(TraverseParms.For(pawn), isDestination: false),
                 (region) =>
                 {
-                    foreach (var thing in region.ListerThings.ThingsOfDef(VVThingDefOf.VV_Geosteel))
+                    foreach (var thing in region.ListerThings.ThingsOfDef(VVThingDefOf.VV_Lifestrand))
                     {
                         if (ingredients.Contains(thing) || 
                             thing.IsForbidden(pawn) || 

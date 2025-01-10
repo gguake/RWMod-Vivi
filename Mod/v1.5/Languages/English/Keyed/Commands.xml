@@ -25,6 +25,6 @@
 <VV_Command_ToggleLayEggDesc>Sets whether or not this royal vivi spawns eggs.</VV_Command_ToggleLayEggDesc>
 
 <VV_Designator_FortifyHoneycombWall>fortify honeycomb wall</VV_Designator_FortifyHoneycombWall>
-<VV_Designator_FortifyHoneycombWallDesc>Fortify the honeycomb walls with a fire-resistant geosteel material. The fortified walls are non-flammable but slightly less resistant to impacts.
-\nRequires three geosteel for each wall.</VV_Designator_FortifyHoneycombWallDesc>
+<VV_Designator_FortifyHoneycombWallDesc>Fortify the honeycomb walls with lifestrands. The fortified walls are non-flammable but slightly less resistant to impacts.
+\nRequires one lifestrand for each wall.</VV_Designator_FortifyHoneycombWallDesc>
 </LanguageData>

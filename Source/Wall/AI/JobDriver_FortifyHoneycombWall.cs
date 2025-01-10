@@ -32,7 +32,7 @@ namespace VVRace
 
             yield return Toils_General.DoAtomic(delegate
             {
-                job.count = 3;
+                job.count = WorkGiver_FortifyHoneycombWall.IngredientLifestrandAmount;
             });
             var getNextIngredient = Toils_General.Label();
             yield return getNextIngredient;

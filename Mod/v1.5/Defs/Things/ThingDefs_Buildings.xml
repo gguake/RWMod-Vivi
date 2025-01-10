@@ -260,10 +260,10 @@
       <li>VV_MakeViviwax</li>
       <li>VV_FilteringHoney</li>
       <li>VV_RefiningPropolis</li>
+      <li>VV_RefineTitanicHornetWing</li>
       <li>VV_MakeLifestrand</li>
       <li>VV_MakeFertilizerCorpse</li>
       <li>VV_MakeFertilizerResource</li>
-      <li>VV_MakeGeosteel</li>
     </recipes>
     <inspectorTabs>
       <li>ITab_Bills</li>

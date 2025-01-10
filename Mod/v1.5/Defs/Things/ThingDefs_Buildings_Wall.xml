@@ -286,7 +286,7 @@
       <li Class="VVRace.CompProperties_ShowDesignator">
         <designatorType>VVRace.Designator_FortifyHoneycombWall</designatorType>
         <designationDef>VV_FortifyHoneycombWall</designationDef>
-        <researchProjectDef>VV_Geosteel</researchProjectDef>
+        <researchProjectDef>VV_Lifestrand</researchProjectDef>
       </li>
     </comps>
   </ThingDef>
@@ -308,7 +308,7 @@
     <uiIconPath>Things/Building/VV_HardenHoneycombWall_Icon</uiIconPath>
     <uiIconColor>(1.0, 0.8, 0.6, 1.0)</uiIconColor>
     <statBases>
-      <MaxHitPoints>400</MaxHitPoints>
+      <MaxHitPoints>450</MaxHitPoints>
       <Flammability>0</Flammability>
     </statBases>
     <building>
@@ -318,7 +318,7 @@
     </building>
     <costList>
       <VV_Viviwax>2</VV_Viviwax>
-      <VV_Geosteel>3</VV_Geosteel>
+      <VV_Lifestrand>1</VV_Lifestrand>
     </costList>
     <useStuffTerrainAffordance>false</useStuffTerrainAffordance>
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
@@ -327,7 +327,7 @@
     <damageMultipliers Inherit="False">
       <li>
         <damageDef>Cut</damageDef>
-        <multiplier>0.25</multiplier>
+        <multiplier>0.55</multiplier>
       </li>
       <li>
         <damageDef>Crush</damageDef>
@@ -343,27 +343,27 @@
       </li>
       <li>
         <damageDef>Stab</damageDef>
-        <multiplier>0.25</multiplier>
+        <multiplier>0.5</multiplier>
       </li>
       <li>
         <damageDef>Scratch</damageDef>
-        <multiplier>0.25</multiplier>
+        <multiplier>0.5</multiplier>
       </li>
       <li>
         <damageDef>ScratchToxic</damageDef>
-        <multiplier>0.25</multiplier>
+        <multiplier>0.5</multiplier>
       </li>
       <li>
         <damageDef>Bite</damageDef>
-        <multiplier>0.25</multiplier>
+        <multiplier>0.5</multiplier>
       </li>
       <li>
         <damageDef>ToxicBite</damageDef>
-        <multiplier>0.25</multiplier>
+        <multiplier>0.5</multiplier>
       </li>
       <li>
         <damageDef>RangedStab</damageDef>
-        <multiplier>0.25</multiplier>
+        <multiplier>0.5</multiplier>
       </li>
       <li>
         <damageDef>Bullet</damageDef>
@@ -371,27 +371,27 @@
       </li>
       <li>
         <damageDef>Arrow</damageDef>
-        <multiplier>0.25</multiplier>
+        <multiplier>0.5</multiplier>
       </li>
       <li>
         <damageDef>ArrowHighVelocity</damageDef>
-        <multiplier>0.25</multiplier>
+        <multiplier>0.5</multiplier>
       </li>
       <li>
         <damageDef>Bomb</damageDef>
-        <multiplier>0.67</multiplier>
+        <multiplier>0.5</multiplier>
       </li>
       <li>
         <damageDef>BombSuper</damageDef>
-        <multiplier>0.67</multiplier>
+        <multiplier>0.5</multiplier>
       </li>
       <li>
         <damageDef>Thump</damageDef>
-        <multiplier>0.67</multiplier>
+        <multiplier>0.5</multiplier>
       </li>
       <li>
         <damageDef>Demolish</damageDef>
-        <multiplier>0.67</multiplier>
+        <multiplier>0.5</multiplier>
       </li>
       <li>
         <damageDef>Mining</damageDef>
@@ -409,6 +409,10 @@
     
     <costStuffCount>0</costStuffCount>
     <stuffCategories Inherit="False"></stuffCategories>
+    
+    <researchPrerequisites>
+      <li>VV_Lifestrand</li>
+    </researchPrerequisites>
   </ThingDef>
   
 </Defs>
