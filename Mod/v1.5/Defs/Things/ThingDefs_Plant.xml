@@ -9,8 +9,8 @@
       <BeautyOutdoors>5</BeautyOutdoors>
       <Nutrition>0.1</Nutrition>
       <VV_MinGrowthPlantGatherable>0.9</VV_MinGrowthPlantGatherable>
-      <VV_PlantGatherCooldown>1</VV_PlantGatherCooldown>
-      <VV_PlantHoneyGatherYield>1.1</VV_PlantHoneyGatherYield>
+      <VV_PlantGatherCooldown>0.45</VV_PlantGatherCooldown>
+      <VV_PlantHoneyGatherYield>2.5</VV_PlantHoneyGatherYield>
     </statBases>
     <hideAtSnowDepth>0.6</hideAtSnowDepth>
     <ingestible />
@@ -117,7 +117,7 @@
     <plant>
       <harvestTag>Standard</harvestTag>
       <harvestedThingDef>VV_PerfumingPetal</harvestedThingDef>
-      <harvestYield>2</harvestYield>
+      <harvestYield>3</harvestYield>
     </plant>
     <comps>
       <li Class="CompProperties_Glower">
