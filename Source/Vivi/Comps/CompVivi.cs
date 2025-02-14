@@ -127,29 +127,32 @@ namespace VVRace
                 _originalHairColor = null;
             }
 
-            if (ShouldBeRoyalIfMature)
+            if (!pawn.IsRoyalVivi())
             {
-                SetRoyal();
-
-                pawn.story.bodyType = BodyTypeDefOf.Female;
-                pawn.apparel?.DropAllOrMoveAllToInventory((Apparel apparel) => !apparel.def.apparel.PawnCanWear(pawn));
-
-                if (pawn.IsColonist)
+                if (ShouldBeRoyalIfMature)
                 {
-                    Find.LetterStack.ReceiveLetter(
-                        LocalizeString_Letter.VV_Letter_RoyalViviGrownLabel.Translate(pawn.Named("PAWN")),
-                        LocalizeString_Letter.VV_Letter_RoyalViviGrown.Translate(pawn.Named("PAWN")),
-                        LetterDefOf.PositiveEvent,
-                        pawn);
-                }
-            }
-            else
-            {
-                pawn.story.bodyType = BodyTypeDefOf.Thin;
-                pawn.apparel?.DropAllOrMoveAllToInventory((Apparel apparel) => !apparel.def.apparel.PawnCanWear(pawn));
-            }
+                    SetRoyal();
 
-            pawn.Drawer.renderer.SetAllGraphicsDirty();
+                    pawn.story.bodyType = BodyTypeDefOf.Female;
+                    pawn.apparel?.DropAllOrMoveAllToInventory((Apparel apparel) => !apparel.def.apparel.PawnCanWear(pawn));
+
+                    if (pawn.IsColonist)
+                    {
+                        Find.LetterStack.ReceiveLetter(
+                            LocalizeString_Letter.VV_Letter_RoyalViviGrownLabel.Translate(pawn.Named("PAWN")),
+                            LocalizeString_Letter.VV_Letter_RoyalViviGrown.Translate(pawn.Named("PAWN")),
+                            LetterDefOf.PositiveEvent,
+                            pawn);
+                    }
+                }
+                else
+                {
+                    pawn.story.bodyType = BodyTypeDefOf.Thin;
+                    pawn.apparel?.DropAllOrMoveAllToInventory((Apparel apparel) => !apparel.def.apparel.PawnCanWear(pawn));
+                }
+
+                pawn.Drawer.renderer.SetAllGraphicsDirty();
+            }
         }
     }
 }
