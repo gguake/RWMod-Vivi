@@ -153,7 +153,7 @@
       <Flammability>0.7</Flammability>
       <Beauty>-1</Beauty>
     </statBases>
-    <placingDraggableDimensions>1</placingDraggableDimensions>
+    <drawStyleCategory>Conduits</drawStyleCategory>
     <costList>
       <VV_Viviwax>2</VV_Viviwax>
       <VV_SparklingPetal>3</VV_SparklingPetal>
@@ -176,6 +176,9 @@
     <researchPrerequisites>
       <li>VV_ManaTransferTube</li>
     </researchPrerequisites>
+    <replaceTags>
+      <li>VV_ManaTransferTube</li>
+    </replaceTags>
   </ThingDef>
 
   <!-- 숨겨진 마나 전송 튜브 -->

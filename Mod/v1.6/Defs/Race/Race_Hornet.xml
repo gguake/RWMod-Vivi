@@ -33,6 +33,7 @@
       <Flammability>2.0</Flammability>
 
       <MinimumHandlingSkill>99</MinimumHandlingSkill>
+      <Wildness>1.0</Wildness>
     </statBases>
     <uiIconScale>1.35</uiIconScale>
     
@@ -97,7 +98,6 @@
       <baseHungerRate>4.0</baseHungerRate>
       <baseHealthScale>6.0</baseHealthScale>
       <useMeatFrom>Megaspider</useMeatFrom>
-      <wildness>1.0</wildness>
       <petness>0.0</petness>
 
       <lifeExpectancy>15</lifeExpectancy>

@@ -12,7 +12,7 @@
       <VV_PlantGatherCooldown>0.45</VV_PlantGatherCooldown>
       <VV_PlantHoneyGatherYield>2.5</VV_PlantHoneyGatherYield>
     </statBases>
-    <hideAtSnowDepth>0.6</hideAtSnowDepth>
+    <hideAtSnowOrSandDepth>0.6</hideAtSnowOrSandDepth>
     <ingestible />
     <plant>
       <dieIfLeafless>true</dieIfLeafless>

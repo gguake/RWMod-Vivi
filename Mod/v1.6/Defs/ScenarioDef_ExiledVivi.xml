@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <ScenarioDef>
+  <ScenarioDef ParentName="ScenarioBase">
     <defName>VV_ViviStart</defName>
     <label>exiled vivi</label>
     <description>You dreamed of becoming a distinguished Royal Vivi, feasting on the expensive royal jelly in the nest. That dream came true when you became an adult, except for the fact that your body did not grow at all.

@@ -249,8 +249,8 @@
       <renderNodeProperties>
         <li>
           <parentTagDef>ApparelBody</parentTagDef>
-          <nodeClass>RPEF.PawnRenderNode_BodyApparelBase</nodeClass>
-          <workerClass>RPEF.PawnRenderNodeWorker_BodyApparelBase</workerClass>
+          <nodeClass>PawnRenderNode_Apparel</nodeClass>
+          <workerClass>PawnRenderNodeWorker_Apparel_Body</workerClass>
           <texPath>Things/Apparel/WaterproofCoat</texPath>
 
           <children>

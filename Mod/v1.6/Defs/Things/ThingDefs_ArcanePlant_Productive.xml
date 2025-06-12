@@ -1294,7 +1294,6 @@
         <canChangeAssignedThingsAfterStarting>true</canChangeAssignedThingsAfterStarting>
       </li>
       <li Class="VVRace.CompProperties_LaunchableCustom">
-        <requireFuel>false</requireFuel>
         <fixedLaunchDistanceMax>18</fixedLaunchDistanceMax>
         <skyfallerLeaving>VV_SkyweedBoxLeaving</skyfallerLeaving>
         <activeDropPod>VV_ActiveSkyweedBox</activeDropPod>
@@ -1319,12 +1318,12 @@
     <uiIconScale>0.65</uiIconScale>
   </ThingDef>
   
-  <ThingDef Name="ActiveDropPod">
+  <ThingDef>
     <defName>VV_ActiveSkyweedBox</defName>
     <label>skyweed box</label>
     <category>Item</category>
     <drawerType>MapMeshAndRealTime</drawerType>
-    <thingClass>ActiveDropPod</thingClass>
+    <thingClass>ActiveTransporter</thingClass>
     <scatterableOnMapGen>false</scatterableOnMapGen>
     <tickerType>Normal</tickerType>
     <soundOpen>DropPod_Open</soundOpen>
@@ -1347,7 +1346,7 @@
     <selectable>true</selectable>
   </ThingDef>
 
-  <ThingDef Name="DropPodIncoming" ParentName="SkyfallerBase">
+  <ThingDef ParentName="SkyfallerBase">
     <defName>VV_SkyweedBoxIncoming</defName>
     <label>skyweed box (incoming)</label>
     <thingClass>DropPodIncoming</thingClass>
