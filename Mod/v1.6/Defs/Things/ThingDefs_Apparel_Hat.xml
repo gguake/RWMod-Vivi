@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <ThingDef Abstract="True" Name="VV_HatMakeableBase" ParentName="HatMakeableBase">
+    <smeltable>false</smeltable>
+    <thingCategories>
+      <li>VV_ViviApparel</li>
+    </thingCategories>
+
+    <apparel>
+      <countsAsClothingForNudity>false</countsAsClothingForNudity>
+      <tags>
+        <li>VV_ViviApparel</li>
+      </tags>
+      <canBeDesiredForIdeo>false</canBeDesiredForIdeo>
+    </apparel>
+
+    <tradeTags Inherit="False">
+      <li>VV_ViviApparel</li>
+    </tradeTags>
+    
+    <colorGenerator Class="ColorGenerator_White" />
+    
+    <modExtensions>
+      <li Class="RPEF.ConstraintModExtension">
+        <def>VV_RaceConstraint</def>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- 비비 제복 모자 -->
+  <ThingDef ParentName="VV_HatMakeableBase">
+    <defName>VV_UniformHat</defName>
+    <label>vivi uniform hat</label>
+    <description>The uniform hat worn by Vivis affiliated with a large hive. It might not provide much defense, but it does bring a sense of stability to the mind.</description>
+    <graphicData>
+      <texPath>Things/Apparel/VV_UniformHat</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(0.9,0.9)</drawSize>
+    </graphicData>
+    
+    <statBases>
+      <MaxHitPoints>120</MaxHitPoints>
+      <WorkToMake>6000</WorkToMake>
+      <Mass>0.3</Mass>
+      <StuffEffectMultiplierArmor>0.3</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>0.3</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.3</StuffEffectMultiplierInsulation_Heat>
+      <EquipDelay>1.5</EquipDelay>
+    </statBases>
+    <equippedStatOffsets>
+      <PainShockThreshold>0.05</PainShockThreshold>
+      <MentalBreakThreshold>-0.05</MentalBreakThreshold>
+      <ToxicEnvironmentResistance>0.2</ToxicEnvironmentResistance>
+    </equippedStatOffsets>
+
+    <costStuffCount>50</costStuffCount>
+    <stuffCategories>
+      <li>Fabric</li>
+      <li>Leathery</li>
+    </stuffCategories>
+
+    <apparel>
+      <useWornGraphicMask>true</useWornGraphicMask>
+      <wornGraphicPath>Things/Apparel/VV_UniformHat</wornGraphicPath>
+      <bodyPartGroups>
+        <li>FullHead</li>
+      </bodyPartGroups>
+      <layers>
+        <li>Overhead</li>
+      </layers>
+      <developmentalStageFilter>Adult,Child</developmentalStageFilter>
+      <canBeGeneratedToSatisfyToxicEnvironmentResistance>false</canBeGeneratedToSatisfyToxicEnvironmentResistance>
+    </apparel>
+
+    <recipeMaker>
+      <researchPrerequisite>VV_AdvancedApparels</researchPrerequisite>
+      <displayPriority>3400</displayPriority>
+    </recipeMaker>
+  </ThingDef>
+
+  <!-- 비비 제복 헬멧 -->
+  <ThingDef ParentName="ArmorSmithableBase">
+    <defName>VV_UniformHelmet</defName>
+    <label>vivi uniform helmet</label>
+    <description>The uniform helmet worn by Vivis affiliated with a large hive. Although it has a similar design to a hat, its metal material makes it sturdy.</description>
+    <graphicData>
+      <texPath>Things/Apparel/VV_UniformHelmet</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(0.9,0.9)</drawSize>
+    </graphicData>
+    <thingCategories Inherit="False">
+      <li>ArmorHeadgear</li>
+      <li>VV_ViviApparel</li>
+    </thingCategories>
+    
+    <statBases>
+      <MaxHitPoints>250</MaxHitPoints>
+      <WorkToMake>9000</WorkToMake>
+      <Mass>1.5</Mass>
+      <StuffEffectMultiplierArmor>0.8</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>0.07</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.07</StuffEffectMultiplierInsulation_Heat>
+      <EquipDelay>1.5</EquipDelay>
+    </statBases>
+    <equippedStatOffsets>
+      <MoveSpeed>-0.1</MoveSpeed>
+    </equippedStatOffsets>
+
+    <smeltable>true</smeltable>
+    <costStuffCount>70</costStuffCount>
+    <stuffCategories>
+      <li>Metallic</li>
+    </stuffCategories>
+
+    <apparel>
+      <canBeDesiredForIdeo>false</canBeDesiredForIdeo>
+      <useWornGraphicMask>true</useWornGraphicMask>
+      <wornGraphicPath>Things/Apparel/VV_UniformHelmet</wornGraphicPath>
+      <bodyPartGroups>
+        <li>FullHead</li>
+      </bodyPartGroups>
+      <layers>
+        <li>Overhead</li>
+      </layers>
+      <countsAsClothingForNudity>false</countsAsClothingForNudity>
+      <tags>
+        <li>VV_ViviCombatApparel</li>
+      </tags>
+    </apparel>
+
+    <recipeMaker>
+      <researchPrerequisite>VV_AdvancedApparels</researchPrerequisite>
+      <displayPriority>3401</displayPriority>
+      <skillRequirements>
+        <Crafting>4</Crafting>
+      </skillRequirements>
+    </recipeMaker>
+    
+    <tradeTags Inherit="False">
+      <li>VV_ViviApparel</li>
+    </tradeTags>
+    
+    <colorGenerator Class="ColorGenerator_White" />
+  </ThingDef>
+
+  <!-- 비비 왕관 -->
+  <ThingDef ParentName="ArmorSmithableBase">
+    <defName>VV_Crown</defName>
+    <label>vivi crown</label>
+    <description>A small crown for Royal Vivis. Wearing it gives one a touch of authority.</description>
+    <graphicData>
+      <texPath>Things/Apparel/VV_Crown</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(0.9,0.9)</drawSize>
+    </graphicData>
+    <thingCategories Inherit="False">
+      <li>Headgear</li>
+      <li>VV_ViviApparel</li>
+    </thingCategories>
+    
+    <statBases>
+      <MaxHitPoints>120</MaxHitPoints>
+      <WorkToMake>7000</WorkToMake>
+      <Mass>0.5</Mass>
+      <StuffEffectMultiplierArmor>0.1</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>0.07</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.07</StuffEffectMultiplierInsulation_Heat>
+      <EquipDelay>1.5</EquipDelay>
+    </statBases>
+    <equippedStatOffsets>
+      <SocialImpact>0.25</SocialImpact>
+      <NegotiationAbility>0.25</NegotiationAbility>
+      <TradePriceImprovement>0.15</TradePriceImprovement>
+      <PsychicSensitivity>0.25</PsychicSensitivity>
+    </equippedStatOffsets>
+
+    <smeltable>true</smeltable>
+    <costStuffCount>50</costStuffCount>
+    <stuffCategories>
+      <li>Metallic</li>
+    </stuffCategories>
+
+    <apparel>
+      <canBeDesiredForIdeo>false</canBeDesiredForIdeo>
+      <useWornGraphicMask>true</useWornGraphicMask>
+      <wornGraphicPath>Things/Apparel/VV_Crown</wornGraphicPath>
+      <bodyPartGroups>
+        <li>UpperHead</li>
+      </bodyPartGroups>
+      <layers>
+        <li>Overhead</li>
+      </layers>
+      <countsAsClothingForNudity>false</countsAsClothingForNudity>
+      <tags>
+        <li>VV_RoyalViviApparel</li>
+        <li>Royal</li>
+        <li>RoyalTier2</li>
+        <li>RoyalTier5</li>
+        <li>RoyalTier6</li>
+        <li>RoyalTier7</li>
+      </tags>
+    </apparel>
+
+    <recipeMaker>
+      <researchPrerequisite>VV_AdvancedApparels</researchPrerequisite>
+      <displayPriority>3401</displayPriority>
+      <skillRequirements>
+        <Crafting>8</Crafting>
+        <Artistic>4</Artistic>
+      </skillRequirements>
+    </recipeMaker>
+    
+    <tradeTags Inherit="False">
+      <li>VV_ViviApparel</li>
+    </tradeTags>
+    
+    <colorGenerator Class="ColorGenerator_White" />
+  </ThingDef>
+</Defs>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+<VV_Letter_ViviEggHatchedLabel>New Vivi Born</VV_Letter_ViviEggHatchedLabel>
+<VV_Letter_ViviEggHatched>A new Vivi has hatched from an egg laid by {PARENT_labelShort}. Vivi grow and learn faster than typical humans but have shorter lifespans. They also inherit random genetic modifiers at birth, including those from their mother.
+\nIf Vivi consume enough royal jelly during their growth stage, they develop into Royal Vivi, who live longer and can lay eggs. Royal Vivi have higher mental sensitivity and social skills but significantly lower work abilities and slower movement.</VV_Letter_ViviEggHatched>
+<VV_Letter_ViviEggHatchedNoParent>A new Vivi has been born. Vivi grow and learn faster than typical humans but have shorter lifespans. They also inherit random genetic modifiers at birth, including those from their mother.
+\nIf Vivi consume enough royal jelly during their growth stage, they develop into Royal Vivi, who live longer and can lay eggs. Royal Vivi have higher mental sensitivity and social skills but significantly lower work abilities and slower movement.</VV_Letter_ViviEggHatchedNoParent>
+
+<VV_Letter_RoyalViviGrownLabel>New Royal Vivi: {PAWN_labelShort}</VV_Letter_RoyalViviGrownLabel>
+<VV_Letter_RoyalViviGrown>{PAWN_labelShort} has consumed enough royal jelly to grow into a Royal Vivi.</VV_Letter_RoyalViviGrown>
+
+<VV_Letter_IncidentHornetSwarmArrivedLabel>Titanic Hornet Swarm</VV_Letter_IncidentHornetSwarmArrivedLabel>
+<VV_Letter_IncidentHornetSwarmArrived>A frenzied swarm of titanic hornets has appeared. They will roam around and attack any life forms they encounter. Titanic hornets are very fast and durable, difficult to take down with conventional weapons, but vulnerable to fire and poison.
+\nThey cannot pass through doors, so hiding behind walls is safe. They will indiscriminately hunt the nearest targets, so it is advisable to hide if you lack adequate defenses. The swarm will hunt everything moving in the area and will leave on its own after a few days.</VV_Letter_IncidentHornetSwarmArrived>
+
+</LanguageData>

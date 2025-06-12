@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 비비 새총 -->
+  <ThingDef ParentName="BaseWeaponNeolithic">
+    <defName>VV_Slingshot</defName>
+    <label>vivi slingshot</label>
+    <description>a simple slingshot used by the Vivis to chase away rats or small animals. It's easy to handle and quite effective and has a chance to stun the target briefly.
+\nIt is too small for an average person to handle, so only Vivi can use it.</description>
+    <graphicData>
+      <texPath>Things/Item/Equipment/VV_Slingshot</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>0.8</drawSize>
+    </graphicData>
+    <equippedAngleOffset>0</equippedAngleOffset>
+    <rotateInShelves>false</rotateInShelves>
+    <soundInteract>Bow_Recurve</soundInteract>
+
+    <techLevel>Medieval</techLevel>
+    <statBases>
+      <MaxHitPoints>50</MaxHitPoints>
+      <WorkToMake>2000</WorkToMake>
+      <Mass>0.5</Mass>
+      <AccuracyTouch>0.85</AccuracyTouch>
+      <AccuracyShort>0.6</AccuracyShort>
+      <AccuracyMedium>0.2</AccuracyMedium>
+      <AccuracyLong>0.03</AccuracyLong>
+      <RangedWeapon_Cooldown>0.8</RangedWeapon_Cooldown>
+    </statBases>
+
+    <thingCategories Inherit="False">
+      <li>VV_ViviWeapon</li>
+    </thingCategories>
+    <weaponClasses Inherit="False">
+      <li>Ranged</li>
+      <li>RangedLight</li>
+    </weaponClasses>
+    <weaponTags Inherit="False">
+      <li>NoRelic</li>
+    </weaponTags>
+
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>VV_Arrow_SlingshotStone</defaultProjectile>
+        <warmupTime>2.0</warmupTime>
+        <range>13.9</range>
+        <soundCast>Bow_Small</soundCast>
+      </li>
+    </verbs>
+    <tools>
+      <li>
+        <label>handle</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>10</power>
+        <cooldownTime>2</cooldownTime>
+      </li>
+    </tools>
+
+    <costList>
+      <WoodLog>20</WoodLog>
+      <VV_Viviwax>10</VV_Viviwax>
+    </costList>
+
+    <recipeMaker>
+      <recipeUsers>
+        <li>CraftingSpot</li>
+        <li>ElectricSmithy</li>
+        <li>FueledSmithy</li>
+      </recipeUsers>
+      <researchPrerequisites>
+        <li>VV_Weaponry</li>
+      </researchPrerequisites>
+      <displayPriority>-520</displayPriority>
+    </recipeMaker>
+    
+    <relicChance>0</relicChance>
+    
+    <tradeTags>
+      <li>VV_ViviTool</li>
+    </tradeTags>
+    
+    <modExtensions>
+      <li Class="RPEF.ConstraintModExtension">
+        <def>VV_RaceConstraint</def>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseProjectileNeolithic">
+    <defName>VV_Arrow_SlingshotStone</defName>
+    <label>stone</label>
+    <graphicData>
+      <texPath>Things/Mote/Stone</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <damageDef>Blunt</damageDef>
+      <damageAmountBase>11</damageAmountBase>
+      <stoppingPower>1.0</stoppingPower>
+      <speed>30</speed>
+      <extraDamages>
+        <li>
+          <def>Stun</def>
+          <amount>10</amount>
+          <chance>0.25</chance>
+        </li>
+      </extraDamages>
+    </projectile>
+  </ThingDef>
+
+  <!-- 비비 충격 다트 -->
+  <ThingDef ParentName="BaseWeaponNeolithic">
+    <defName>VV_ShockDart</defName>
+    <label>vivi shock dart</label>
+    <description>a small dart for throwing. There is a slight current flowing through the tip, and if it hits a weak point, it can short-circuit and knock out machines or mechanoids.
+\nIt is too small and uncomfortable for an average person to throw, so only Vivi can use it.</description>
+    <graphicData>
+      <texPath>Things/Item/Equipment/VV_Dart</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <equippedAngleOffset>60</equippedAngleOffset>
+    <soundInteract>Interact_BeatFire</soundInteract>
+
+    <techLevel>Medieval</techLevel>
+    <statBases>
+      <WorkToMake>4500</WorkToMake>
+      <Mass>0.3</Mass>
+      <AccuracyTouch>0.9</AccuracyTouch>
+      <AccuracyShort>0.75</AccuracyShort>
+      <AccuracyMedium>0.2</AccuracyMedium>
+      <AccuracyLong>0.1</AccuracyLong>
+      <RangedWeapon_Cooldown>1.8</RangedWeapon_Cooldown>
+    </statBases>
+    
+    <thingCategories Inherit="False">
+      <li>VV_ViviWeapon</li>
+    </thingCategories>
+    <weaponClasses Inherit="False">
+      <li>Ranged</li>
+      <li>RangedLight</li>
+    </weaponClasses>
+    <weaponTags Inherit="False">
+      <li>NoRelic</li>
+    </weaponTags>
+
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>VV_Dart_ShockDart</defaultProjectile>
+        <warmupTime>1.2</warmupTime>
+        <range>15.9</range>
+        <soundCast>Interact_BeatFire</soundCast>
+        <rangedFireRulepack>Combat_RangedFire_Thrown</rangedFireRulepack>
+      </li>
+    </verbs>
+    <tools>
+      <li>
+        <label>point</label>
+        <capacities>
+          <li>Stab</li>
+        </capacities>
+        <power>4</power>
+        <cooldownTime>1.2</cooldownTime>
+        <extraMeleeDamages>
+          <li>
+            <def>EMP</def>
+            <amount>16</amount>
+            <armorPenetration>0.9</armorPenetration>
+            <chance>0.9</chance>
+          </li>
+        </extraMeleeDamages>
+      </li>
+    </tools>
+    
+    <costList>
+      <VV_Viviwax>35</VV_Viviwax>
+      <Steel>20</Steel>
+      <VV_SparklingPetal>5</VV_SparklingPetal>
+    </costList>
+
+    <recipeMaker>
+      <recipeUsers>
+        <li>CraftingSpot</li>
+        <li>ElectricSmithy</li>
+        <li>FueledSmithy</li>
+      </recipeUsers>
+      <researchPrerequisites>
+        <li>VV_Weaponry</li>
+      </researchPrerequisites>
+      <skillRequirements>
+        <Crafting>2</Crafting>
+      </skillRequirements>
+      <displayPriority>-521</displayPriority>
+    </recipeMaker>
+
+    <relicChance>0</relicChance>
+    
+    <tradeTags>
+      <li>VV_ViviTool</li>
+    </tradeTags>
+    
+    <modExtensions>
+      <li Class="RPEF.ConstraintModExtension">
+        <def>VV_RaceConstraint</def>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseProjectileNeolithic">
+    <defName>VV_Dart_ShockDart</defName>
+    <label>shock dart</label>
+    <graphicData>
+      <texPath>Things/Item/Equipment/VV_Dart</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <damageDef>Stab</damageDef>
+      <damageAmountBase>8</damageAmountBase>
+      <speed>24</speed>
+
+      <extraDamages>
+        <li>
+          <def>EMP</def>
+          <amount>24</amount>
+          <armorPenetration>0.5</armorPenetration>
+        </li>
+      </extraDamages>
+    </projectile>
+  </ThingDef>
+
+  <!-- 비비 롱 재블린 -->
+  <ThingDef ParentName="BaseWeaponNeolithic">
+    <defName>VV_ViviLongJavelin</defName>
+    <label>vivi long javelin</label>
+    <description>a long javelin commonly used by Vivis against strong enemies. The tip is coated with poison, causing those hit to become poisoned. It has high destructive and penetrative power, but it's difficult to hit the target.
+\nIt is also effective in close combat, allowing it to respond to enemies without being neutralized. It is too small and uncomfortable for an average person to throw, so only Vivi can use it.</description>
+    <graphicData>
+      <texPath>Things/Item/Equipment/VV_ViviLongJavelin</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+    <soundInteract>Interact_BeatFire</soundInteract>
+
+    <techLevel>Medieval</techLevel>
+    <statBases>
+      <WorkToMake>9000</WorkToMake>
+      <Mass>2</Mass>
+      <AccuracyTouch>0.88</AccuracyTouch>
+      <AccuracyShort>0.66</AccuracyShort>
+      <AccuracyMedium>0.4</AccuracyMedium>
+      <AccuracyLong>0.1</AccuracyLong>
+      <RangedWeapon_Cooldown>1.5</RangedWeapon_Cooldown>
+    </statBases>
+    
+    <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
+    <thingCategories Inherit="False">
+      <li>VV_ViviWeapon</li>
+    </thingCategories>
+    <weaponClasses Inherit="False">
+      <li>Ranged</li>
+      <li>RangedLight</li>
+    </weaponClasses>
+    <weaponTags Inherit="False">
+      <li>VV_ViviWeapon</li>
+      <li>VV_ViviWeaponRange</li>
+    </weaponTags>
+
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>VV_Arrow_LongJavelin</defaultProjectile>
+        <warmupTime>2.2</warmupTime>
+        <range>22.9</range>
+        <soundCast>Interact_BeatFire</soundCast>
+        <rangedFireRulepack>Combat_RangedFire_Thrown</rangedFireRulepack>
+      </li>
+    </verbs>
+    <tools>
+      <li>
+        <label>shaft</label>
+        <capacities>
+          <li>Blunt</li>
+          <li>Poke</li>
+        </capacities>
+        <power>8</power>
+        <cooldownTime>1.7</cooldownTime>
+        <chanceFactor>0.5</chanceFactor>
+      </li>
+      <li>
+        <label>point</label>
+        <capacities>
+          <li>VV_ToxicStab</li>
+        </capacities>
+        <power>17</power>
+        <cooldownTime>2.1</cooldownTime>
+      </li>
+    </tools>
+    
+    <costStuffCount>60</costStuffCount>
+    <stuffCategories>
+      <li>Metallic</li>
+      <li>Woody</li>
+    </stuffCategories>
+    <recipeMaker>
+      <researchPrerequisites>
+        <li>VV_Weaponry</li>
+        <li>Smithing</li>
+      </researchPrerequisites>
+      <skillRequirements>
+        <Crafting>4</Crafting>
+      </skillRequirements>
+      <displayPriority>-522</displayPriority>
+    </recipeMaker>
+
+    <relicChance>0</relicChance>
+    
+    <tradeTags>
+      <li>VV_ViviTool</li>
+    </tradeTags>
+    
+    <modExtensions>
+      <li Class="RPEF.ConstraintModExtension">
+        <def>VV_RaceConstraint</def>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseProjectileNeolithic">
+    <defName>VV_Arrow_LongJavelin</defName>
+    <label>long javelin</label>
+    <graphicData>
+      <texPath>Things/Item/Equipment/VV_ViviLongJavelinProjectile</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+    <projectile>
+      <damageDef>VV_RangedToxicStab</damageDef>
+      <damageAmountBase>21</damageAmountBase>
+      <stoppingPower>2</stoppingPower>
+      <armorPenetrationBase>0.2</armorPenetrationBase>
+      <speed>24</speed>
+    </projectile>
+  </ThingDef>
+
+  <!-- 비비 연발 석궁 -->
+  <ThingDef ParentName="BaseWeaponNeolithic">
+    <defName>VV_RepeatingCrossbow</defName>
+    <label>vivi repeating crossbow</label>
+    <description>a repeating crossbow that requires almost no reloading or aiming time. The tip of the bolt is coated with poison, causing those hit to become poisoned.
+\nIt uses needle-like ammunition instead of traditional arrows, resulting in minimal range and power, but it offers overwhelming firepower and convenience, making it popular for self-defense.
+\nIt is too small and complex for a regular person to handle, so only Vivi can use it.</description>
+    <graphicData>
+      <texPath>Things/Item/Equipment/VV_RepeatingCrossbow</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>0.8</drawSize>
+    </graphicData>
+    <equippedAngleOffset>0</equippedAngleOffset>
+    <rotateInShelves>false</rotateInShelves>
+    <soundInteract>Bow_Recurve</soundInteract>
+
+    <techLevel>Medieval</techLevel>
+    <statBases>
+      <WorkToMake>15000</WorkToMake>
+      <Mass>1.6</Mass>
+      <AccuracyTouch>0.6</AccuracyTouch>
+      <AccuracyShort>0.12</AccuracyShort>
+      <AccuracyMedium>0.07</AccuracyMedium>
+      <AccuracyLong>0.03</AccuracyLong>
+      <RangedWeapon_Cooldown>0.12</RangedWeapon_Cooldown>
+    </statBases>
+
+    <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
+    <thingCategories Inherit="False">
+      <li>VV_ViviWeapon</li>
+    </thingCategories>
+    <weaponClasses Inherit="False">
+      <li>Ranged</li>
+      <li>RangedLight</li>
+    </weaponClasses>
+    <weaponTags Inherit="False">
+      <li>VV_ViviWeaponRange</li>
+    </weaponTags>
+
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>VV_Arrow_RepeatingCrossbow</defaultProjectile>
+        <warmupTime>0.11</warmupTime>
+        <range>15.9</range>
+        <soundCast>Bow_Small</soundCast>
+      </li>
+    </verbs>
+    <tools>
+      <li>
+        <label>limb</label>
+        <capacities>
+          <li>Blunt</li>
+          <li>Poke</li>
+        </capacities>
+        <power>9</power>
+        <cooldownTime>2</cooldownTime>
+      </li>
+    </tools>
+
+    <costList>
+      <WoodLog>60</WoodLog>
+      <ComponentIndustrial>1</ComponentIndustrial>
+      <VV_Viviwax>40</VV_Viviwax>
+    </costList>
+    <recipeMaker>
+      <recipeUsers>
+        <li>CraftingSpot</li>
+      </recipeUsers>
+      <researchPrerequisites>
+        <li>VV_Weaponry</li>
+        <li>Greatbow</li>
+      </researchPrerequisites>
+      <skillRequirements>
+        <Crafting>8</Crafting>
+      </skillRequirements>
+      <displayPriority>-523</displayPriority>
+    </recipeMaker>
+    
+    <tradeTags>
+      <li>VV_ViviTool</li>
+    </tradeTags>
+
+    <modExtensions>
+      <li Class="RPEF.ConstraintModExtension">
+        <def>VV_RaceConstraint</def>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseProjectileNeolithic">
+    <defName>VV_Arrow_RepeatingCrossbow</defName>
+    <label>repeating crossbow needle</label>
+    <graphicData>
+      <texPath>Things/Projectile/Needle</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <damageDef>VV_ToxicArrow</damageDef>
+      <damageAmountBase>5</damageAmountBase>
+      <stoppingPower>0.5</stoppingPower>
+      <speed>40</speed>
+      <armorPenetrationBase>0</armorPenetrationBase>
+    </projectile>
+  </ThingDef>
+
+</Defs>

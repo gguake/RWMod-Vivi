@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <ThingDef Abstract="True" Name="VV_ThinApparelBase" ParentName="ApparelMakeableBase">
+    <smeltable>false</smeltable>
+    <thingCategories>
+      <li>VV_ViviApparel</li>
+    </thingCategories>
+
+    <apparel>
+      <tags>
+        <li>VV_ViviApparel</li>
+      </tags>
+      <canBeDesiredForIdeo>false</canBeDesiredForIdeo>
+      <developmentalStageFilter>Child, Adult</developmentalStageFilter>
+    </apparel>
+
+    <tradeTags Inherit="False">
+      <li>VV_ViviApparel</li>
+    </tradeTags>
+    
+    <colorGenerator Class="ColorGenerator_White" />
+    
+    <modExtensions>
+      <li Class="RPEF.ConstraintModExtension">
+        <def>VV_ThinApparelConstraint</def>
+      </li>
+      <li Class="RPEF.ApparelGraphicHook">
+        <defaultBodyTypeGraphicOverride>Thin</defaultBodyTypeGraphicOverride>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- 비비 작업복 -->
+  <ThingDef ParentName="VV_ThinApparelBase">
+    <defName>VV_BasicWorkerCostume</defName>
+    <label>vivi basic worker costume</label>
+    <description>A worker suit for Vivis, designed with a focus on convenience and practicality. It's comfortable for activity, good at retaining body temperature, and also provides some defense.</description>
+    <graphicData>
+      <texPath>Things/Apparel/BasicWorkerCostume</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+
+    <statBases>
+      <MaxHitPoints>180</MaxHitPoints>
+      <WorkToMake>3000</WorkToMake>
+      <Mass>0.5</Mass>
+      <StuffEffectMultiplierArmor>0.2</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>0.6</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>1.2</StuffEffectMultiplierInsulation_Heat>
+      <EquipDelay>2.5</EquipDelay>
+      
+      <ArmorRating_Blunt>0.05</ArmorRating_Blunt>
+    </statBases>
+    <equippedStatOffsets>
+      <MoveSpeed>0.2</MoveSpeed>
+      <ToxicEnvironmentResistance>0.2</ToxicEnvironmentResistance>
+    </equippedStatOffsets>
+
+    <costStuffCount>60</costStuffCount>
+    <stuffCategories>
+      <li>Fabric</li>
+      <li>Leathery</li>
+    </stuffCategories>
+
+    <apparel>
+      <useWornGraphicMask>true</useWornGraphicMask>
+      <wornGraphicPath>Things/Apparel/BasicWorkerCostume</wornGraphicPath>
+      <bodyPartGroups>
+        <li>Torso</li>
+        <li>Legs</li>
+      </bodyPartGroups>
+      <layers>
+        <li>OnSkin</li>
+      </layers>
+      <tags>
+        <li>VV_ViviStartingApparel</li>
+      </tags>
+      <canBeGeneratedToSatisfyToxicEnvironmentResistance>false</canBeGeneratedToSatisfyToxicEnvironmentResistance>
+    </apparel>
+    
+    <recipeMaker>
+      <recipeUsers>
+        <li>CraftingSpot</li>
+      </recipeUsers>
+      <researchPrerequisite>VV_Apparels</researchPrerequisite>
+      <displayPriority>3101</displayPriority>
+    </recipeMaker>
+  </ThingDef>
+
+  <!-- 비비 제복 -->
+  <ThingDef ParentName="VV_ThinApparelBase">
+    <defName>VV_WorkerUniformDress</defName>
+    <label>vivi worker uniform</label>
+    <description>The uniform worn by Vivis affiliated with a large hive. It provides emotional stability and decent defense.</description>
+    <graphicData>
+      <texPath>Things/Apparel/WorkerUniformDress</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+
+    <statBases>
+      <MaxHitPoints>210</MaxHitPoints>
+      <WorkToMake>10000</WorkToMake>
+      <Mass>0.5</Mass>
+      <StuffEffectMultiplierArmor>0.32</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>0.45</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.45</StuffEffectMultiplierInsulation_Heat>
+      <EquipDelay>2.5</EquipDelay>
+    </statBases>
+    <equippedStatOffsets>
+      <PainShockThreshold>0.05</PainShockThreshold>
+      <MentalBreakThreshold>-0.05</MentalBreakThreshold>
+      <ToxicEnvironmentResistance>0.1</ToxicEnvironmentResistance>
+    </equippedStatOffsets>
+
+    <costStuffCount>90</costStuffCount>
+    <stuffCategories>
+      <li>Fabric</li>
+      <li>Leathery</li>
+    </stuffCategories>
+
+    <apparel>
+      <useWornGraphicMask>true</useWornGraphicMask>
+      <wornGraphicPath>Things/Apparel/WorkerUniformDress</wornGraphicPath>
+      <bodyPartGroups>
+        <li>Neck</li>
+        <li>Shoulders</li>
+        <li>Torso</li>
+        <li>Arms</li>
+        <li>Hands</li>
+        <li>Legs</li>
+      </bodyPartGroups>
+      <layers>
+        <li>OnSkin</li>
+      </layers>
+    </apparel>
+    
+    <recipeMaker>
+      <skillRequirements>
+        <Crafting>5</Crafting>
+      </skillRequirements>
+      <researchPrerequisite>VV_AdvancedApparels</researchPrerequisite>
+      <displayPriority>3102</displayPriority>
+    </recipeMaker>
+  </ThingDef>
+  
+  <!-- 비비 겨울 망토 -->
+  <ThingDef ParentName="VV_ThinApparelBase">
+    <defName>VV_WinterCape</defName>
+    <label>vivi winter cape</label>
+    <description>A cape worn by Vivis to get through the winter. It has excellent insulation but is not suitable for warm places.</description>
+    <graphicData>
+      <texPath>Things/Apparel/WinterCape</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+
+    <statBases>
+      <MaxHitPoints>180</MaxHitPoints>
+      <WorkToMake>7200</WorkToMake>
+      <Mass>2.0</Mass>
+      <StuffEffectMultiplierArmor>0.16</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>2.2</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0</StuffEffectMultiplierInsulation_Heat>
+      <EquipDelay>1.5</EquipDelay>
+      
+      <Insulation_Heat>-6</Insulation_Heat>
+    </statBases>
+    
+    <costStuffCount>80</costStuffCount>
+    <stuffCategories>
+      <li>Fabric</li>
+      <li>Leathery</li>
+    </stuffCategories>
+
+    <apparel>
+      <useWornGraphicMask>true</useWornGraphicMask>
+      <wornGraphicPath>Things/Apparel/WinterCape</wornGraphicPath>
+      <bodyPartGroups>
+        <li>Neck</li>
+        <li>Shoulders</li>
+        <li>Torso</li>
+        <li>Arms</li>
+      </bodyPartGroups>
+      <layers>
+        <li>Middle</li>
+        <li>Shell</li>
+      </layers>
+    </apparel>
+    
+    <recipeMaker>
+      <researchPrerequisite>VV_Apparels</researchPrerequisite>
+      <displayPriority>3300</displayPriority>
+    </recipeMaker>
+  </ThingDef>
+  
+  <!-- 비비 방수 코트 -->
+  <ThingDef ParentName="VV_ThinApparelBase">
+    <defName>VV_WaterproofCoat</defName>
+    <label>vivi waterproof coat</label>
+    <description>A coat Vivis usually wear for long-term outdoor activity. It has decent defense and waterproof coating, so it doesn't get damp when it rains or crossing water.</description>
+    <graphicData>
+      <texPath>Things/Apparel/WaterproofCoat</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+
+    <statBases>
+      <MaxHitPoints>240</MaxHitPoints>
+      <WorkToMake>7200</WorkToMake>
+      <Mass>1.2</Mass>
+      <StuffEffectMultiplierArmor>0.36</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>0.4</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.4</StuffEffectMultiplierInsulation_Heat>
+      <EquipDelay>1.5</EquipDelay>
+      
+      <ArmorRating_Sharp>0.32</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.32</ArmorRating_Blunt>
+      <ArmorRating_Heat>0.5</ArmorRating_Heat>
+    </statBases>
+    <equippedStatOffsets>
+      <IncomingDamageFactor>-0.1</IncomingDamageFactor>
+      <PainShockThreshold>0.08</PainShockThreshold>
+      <ToxicEnvironmentResistance>0.75</ToxicEnvironmentResistance>
+    </equippedStatOffsets>
+    
+    <costStuffCount>70</costStuffCount>
+    <stuffCategories>
+      <li>Fabric</li>
+      <li>Leathery</li>
+    </stuffCategories>
+
+    <apparel>
+      <useWornGraphicMask>true</useWornGraphicMask>
+      <wornGraphicPath>Things/Apparel/WaterproofCoat</wornGraphicPath>
+      <bodyPartGroups>
+        <li>Neck</li>
+        <li>Shoulders</li>
+        <li>Torso</li>
+        <li>Arms</li>
+      </bodyPartGroups>
+      <layers>
+        <li>Middle</li>
+        <li>Shell</li>
+      </layers>
+      <canBeGeneratedToSatisfyToxicEnvironmentResistance>false</canBeGeneratedToSatisfyToxicEnvironmentResistance>
+
+      <renderNodeProperties>
+        <li>
+          <parentTagDef>ApparelBody</parentTagDef>
+          <nodeClass>RPEF.PawnRenderNode_BodyApparelBase</nodeClass>
+          <workerClass>RPEF.PawnRenderNodeWorker_BodyApparelBase</workerClass>
+          <texPath>Things/Apparel/WaterproofCoat</texPath>
+
+          <children>
+            <li>
+              <parentTagDef>ApparelBody</parentTagDef>
+              <texPath>Things/Apparel/WaterproofCoatHood</texPath>
+              <drawData>
+                <defaultData>
+                  <layer>22</layer>
+                </defaultData>
+                <dataNorth>
+                  <layer>95</layer>
+                </dataNorth>
+              </drawData>
+            </li>
+          </children>
+        </li>
+      </renderNodeProperties>
+    </apparel>
+    
+    <recipeMaker>
+      <skillRequirements>
+        <Crafting>5</Crafting>
+      </skillRequirements>
+      <researchPrerequisite>VV_AdvancedApparels</researchPrerequisite>
+      <displayPriority>3301</displayPriority>
+    </recipeMaker>
+
+    <modExtensions Inherit="False">
+      <li Class="RPEF.ConstraintModExtension">
+        <def>VV_WaterproofCoatApparelConstraint</def>
+      </li>
+      <li Class="RPEF.ApparelGraphicHook">
+        <defaultBodyTypeGraphicOverride>Thin</defaultBodyTypeGraphicOverride>
+      </li>
+    </modExtensions>
+  </ThingDef>
+</Defs>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+<ViviFactionGreetingHostile>{0} abruptly disconnected with a hostile buzz.</ViviFactionGreetingHostile>
+<ViviFactionGreetingHostileAppreciative>{0} is buzzing fiercely. They will not trade with you until you are in a friendly relationship. You can improve relations by sending gifts to {0_possessive} settlement or by safely releasing prisoners belonging to {0_possessive}.
+\n{0_pronoun} suddenly disconnected.</ViviFactionGreetingHostileAppreciative>
+<ViviFactionGreetingWary>{0} is waiting for you with a buzz.</ViviFactionGreetingWary>
+<ViviFactionGreetingWarm>{0} greets {NEGOTIATOR_labelShort} with a warm buzz.</ViviFactionGreetingWarm>
+
+<VV_DialogGrowArcanePlantTitleChooseOption>Select Arcane Plant to Cultivate</VV_DialogGrowArcanePlantTitleChooseOption>
+<VV_DialogGrowArcanePlantTitleSelected>Cultivate {0}</VV_DialogGrowArcanePlantTitleSelected>
+
+<VV_DialogGrowArcanePlantTotalGrowDays>Total Growth Period: {0} days</VV_DialogGrowArcanePlantTotalGrowDays>
+<VV_DialogGrowArcanePlantExpectedAmount>Expected Yield: {0}</VV_DialogGrowArcanePlantExpectedAmount>
+<VV_DialogGrowArcanePlantExpectedAmountDesc>Indicates the predicted yield when cultivation is complete. Actual yield may vary based on vitality and cleanliness at the time of cultivation completion.
+\nIf vitality is low, cultivation may fail, resulting in no yield.</VV_DialogGrowArcanePlantExpectedAmountDesc>
+
+<VV_DialogGrowArcanePlantTotalHealth>Vitality: {0}</VV_DialogGrowArcanePlantTotalHealth>
+<VV_DialogGrowArcanePlantTotalHealthDesc>Represents the health of the arcane plant. Plants with high vitality can withstand adverse conditions and slowly recover when all requirements are met.
+\nIf vitality is low, the likelihood of cultivation failure increases, and if it reaches zero, the cultivation fails regardless of the remaining growth period.</VV_DialogGrowArcanePlantTotalHealthDesc>
+
+<VV_DialogGrowArcanePlantTotalMana>Mana: {0} (-{1}/day)</VV_DialogGrowArcanePlantTotalMana>
+<VV_DialogGrowArcanePlantTotalManaDesc>Arcane plants use mana as a nutrient for growth and require regular mana fertilizer supplies.
+\nMana decreases over time, and plants with a higher mana reserve can last longer without fertilizer.
+\nIf mana is too low, vitality deteriorates, and if not fertilized, the plant will eventually die.</VV_DialogGrowArcanePlantTotalManaDesc>
+
+<VV_DialogGrowArcanePlantManaSensitivity>Mana Sensitivity: {0}</VV_DialogGrowArcanePlantManaSensitivity>
+<VV_DialogGrowArcanePlantManaSensitivityDesc>Indicates how quickly the vitality of the arcane plant decreases when mana is low.
+\nThe higher the sensitivity, the more critical the impact on vitality.</VV_DialogGrowArcanePlantManaSensitivityDesc>
+
+<VV_DialogGrowArcanePlantOptimalTemperature>Required Temperature: {0}</VV_DialogGrowArcanePlantOptimalTemperature>
+<VV_DialogGrowArcanePlantTemperatureSensitivity>Temperature Sensitivity: {0}</VV_DialogGrowArcanePlantTemperatureSensitivity>
+<VV_DialogGrowArcanePlantTemperatureSensitivityDesc>Some plants require a specific temperature, and if the required temperature is not met over time, vitality deteriorates.
+\nThe higher the sensitivity, the more critical the impact on vitality.</VV_DialogGrowArcanePlantTemperatureSensitivityDesc>
+
+<VV_DialogGrowArcanePlantOptimalGlow>Required Light Intensity: {0}</VV_DialogGrowArcanePlantOptimalGlow>
+<VV_DialogGrowArcanePlantGlowSensitivity>Light Sensitivity: {0}</VV_DialogGrowArcanePlantGlowSensitivity>
+<VV_DialogGrowArcanePlantGlowSensitivityDesc>Some plants require a specific light source, and if the required light is not met over time, vitality deteriorates.
+\nThe higher the sensitivity, the more critical the impact on vitality.</VV_DialogGrowArcanePlantGlowSensitivityDesc>
+
+<VV_DialogGrowArcanePlantManageInterval>Management Job Interval: {0}</VV_DialogGrowArcanePlantManageInterval>
+<VV_DialogGrowArcanePlantManageIntervalDesc>Some arcane plants require management jobs at regular intervals after cultivation starts; failing to perform these jobs will deteriorate their vitality.
+\nGardening-capable settlers are needed, and those with higher gardening skills can perform these jobs more quickly.</VV_DialogGrowArcanePlantManageIntervalDesc>
+<VV_DialogGrowArcanePlantManageSensitivity>Management Sensitivity: {0}</VV_DialogGrowArcanePlantManageSensitivity>
+<VV_DialogGrowArcanePlantManageSensitivityDesc>Indicates how quickly the vitality of the arcane plant deteriorates if management jobs are not performed over time.
+\nThe higher the sensitivity, the more critical the impact on vitality.</VV_DialogGrowArcanePlantManageSensitivityDesc>
+
+<VV_PlantSensitivity_None>None</VV_PlantSensitivity_None>
+<VV_PlantSensitivity_Low>Low</VV_PlantSensitivity_Low>
+<VV_PlantSensitivity_Medium>Medium</VV_PlantSensitivity_Medium>
+<VV_PlantSensitivity_High>High</VV_PlantSensitivity_High>
+
+<VV_DialogStartGrowingArcanePlantIngredientLabel>Ingredients Needed to Start Cultivation</VV_DialogStartGrowingArcanePlantIngredientLabel>
+<VV_DialogCancelGrowingArcanePlantBillInGrowing>If cultivation is canceled midway, all invested resources will be lost and cannot be recovered.</VV_DialogCancelGrowingArcanePlantBillInGrowing>
+</LanguageData>

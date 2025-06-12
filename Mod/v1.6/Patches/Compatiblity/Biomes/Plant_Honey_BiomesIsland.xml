@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+  <Operation Class="PatchOperationSequence">
+    <operations>
+      <li Class="PatchOperationSequence" MayRequireAnyOf="BiomesTeam.BiomesIslands,BiomesTeam.BiomesIslands_steam">
+        <operations>
+          <!-- BiomesIslands_FloweringFern -->
+          <li Class="PatchOperationConditional">
+            <xpath>Defs/ThingDef[defName="BiomesIslands_FloweringFern"]/comps</xpath>
+            <nomatch Class="PatchOperationAdd">
+              <xpath>Defs/ThingDef[defName="BiomesIslands_FloweringFern"]</xpath>
+              <value>
+                <comps />
+              </value>
+            </nomatch>
+          </li>
+          <li Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="BiomesIslands_FloweringFern"]/comps</xpath>
+            <value>
+              <li Class="VVRace.CompProperties_RepeatGatherable" />
+            </value>
+          </li>
+          <li Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="BiomesIslands_FloweringFern"]/statBases</xpath>
+            <value>
+              <VV_MinGrowthPlantGatherable>0.99</VV_MinGrowthPlantGatherable>
+              <VV_PlantGatherCooldown>1</VV_PlantGatherCooldown>
+              <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
+            </value>
+          </li>
+          
+          <!-- BiomesIslands_FloweringFernDomestic -->
+          <li Class="PatchOperationConditional">
+            <xpath>Defs/ThingDef[defName="BiomesIslands_FloweringFernDomestic"]/comps</xpath>
+            <nomatch Class="PatchOperationAdd">
+              <xpath>Defs/ThingDef[defName="BiomesIslands_FloweringFernDomestic"]</xpath>
+              <value>
+                <comps />
+              </value>
+            </nomatch>
+          </li>
+          <li Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="BiomesIslands_FloweringFernDomestic"]/comps</xpath>
+            <value>
+              <li Class="VVRace.CompProperties_RepeatGatherable" />
+            </value>
+          </li>
+          <li Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="BiomesIslands_FloweringFernDomestic"]/statBases</xpath>
+            <value>
+              <VV_MinGrowthPlantGatherable>0.99</VV_MinGrowthPlantGatherable>
+              <VV_PlantGatherCooldown>1</VV_PlantGatherCooldown>
+              <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
+            </value>
+          </li>
+          
+          <!-- BiomesIslands_Lavender -->
+          <li Class="PatchOperationConditional">
+            <xpath>Defs/ThingDef[defName="BiomesIslands_Lavender"]/comps</xpath>
+            <nomatch Class="PatchOperationAdd">
+              <xpath>Defs/ThingDef[defName="BiomesIslands_Lavender"]</xpath>
+              <value>
+                <comps />
+              </value>
+            </nomatch>
+          </li>
+          <li Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="BiomesIslands_Lavender"]/comps</xpath>
+            <value>
+              <li Class="VVRace.CompProperties_RepeatGatherable" />
+            </value>
+          </li>
+          <li Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="BiomesIslands_Lavender"]/statBases</xpath>
+            <value>
+              <VV_MinGrowthPlantGatherable>0.99</VV_MinGrowthPlantGatherable>
+              <VV_PlantGatherCooldown>1</VV_PlantGatherCooldown>
+              <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
+            </value>
+          </li>
+          
+          <!-- BiomesIslands_PurpleSaxifrage -->
+          <li Class="PatchOperationConditional">
+            <xpath>Defs/ThingDef[defName="BiomesIslands_PurpleSaxifrage"]/comps</xpath>
+            <nomatch Class="PatchOperationAdd">
+              <xpath>Defs/ThingDef[defName="BiomesIslands_PurpleSaxifrage"]</xpath>
+              <value>
+                <comps />
+              </value>
+            </nomatch>
+          </li>
+          <li Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="BiomesIslands_PurpleSaxifrage"]/comps</xpath>
+            <value>
+              <li Class="VVRace.CompProperties_RepeatGatherable" />
+            </value>
+          </li>
+          <li Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="BiomesIslands_PurpleSaxifrage"]/statBases</xpath>
+            <value>
+              <VV_MinGrowthPlantGatherable>0.99</VV_MinGrowthPlantGatherable>
+              <VV_PlantGatherCooldown>1</VV_PlantGatherCooldown>
+              <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
+            </value>
+          </li>
+        </operations>
+      </li>
+    </operations>
+  </Operation>
+</Patch>

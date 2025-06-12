@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 비비 크림 생산 -->
+  <RecipeDef>
+    <defName>VV_MakeVivicream</defName>
+    <label>make vivicream</label>
+    <description>Produces cream from Vivi's body. Only Vivi can make it and it does not require materials, instead it consumes Vivi's calories and cannot be made when hungry.</description>
+    <descriptionHyperlinks>
+      <XenotypeDef>VV_Vivi</XenotypeDef>
+    </descriptionHyperlinks>
+
+    <jobString>making vivicream.</jobString>
+    <workAmount>500</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+
+    <effectWorking>Clean</effectWorking>
+    <soundWorking>Recipe_Brewing</soundWorking>
+    <uiIconThing>VV_Vivicream</uiIconThing>
+
+    <ingredients>
+    </ingredients>
+    <fixedIngredientFilter>
+    </fixedIngredientFilter>
+    <products>
+      <VV_Vivicream>30</VV_Vivicream>
+    </products>
+    <researchPrerequisite>VV_BasicInfra</researchPrerequisite>
+
+    <modExtensions>
+      <li Class="RPEF.ConstraintModExtension">
+        <def>VV_RaceConstraint</def>
+      </li>
+      <li Class="RPEF.RecipeBillHook">
+        <billOverrideType>VVRace.Bill_ProductionWithFoodDrain</billOverrideType>
+      </li>
+      <li Class="VVRace.RecipeModExtension">
+        <foodDrains>0.28</foodDrains>
+      </li>
+    </modExtensions>
+  </RecipeDef>
+
+  <!-- 밀랍 정제 -->
+  <RecipeDef>
+    <defName>VV_MakeViviwax</defName>
+    <label>make viviwax</label>
+    <description>Produce viviwax from vivi creams.</description>
+
+    <jobString>making viviwax.</jobString>
+    <workAmount>1000</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <workSkill>Crafting</workSkill>
+    <workSkillLearnFactor>0.03</workSkillLearnFactor>
+
+    <effectWorking>Smelt</effectWorking>
+    <soundWorking>Recipe_Brewing</soundWorking>
+    <uiIconThing>VV_Viviwax</uiIconThing>
+
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_Vivicream</li>
+          </thingDefs>
+        </filter>
+        <count>30</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>VV_Vivicream</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <VV_Viviwax>30</VV_Viviwax>
+    </products>
+    <researchPrerequisite>VV_BasicInfra</researchPrerequisite>
+  </RecipeDef>
+
+  <!-- 꿀 정제 -->
+  <RecipeDef>
+    <defName>VV_FilteringHoney</defName>
+    <label>filter honey</label>
+    <description>Filter the Vivi honey by removing impurities to create pure honey.</description>
+
+    <jobString>filtering honey.</jobString>
+    <workAmount>600</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <workSkill>Crafting</workSkill>
+    <workSkillLearnFactor>0.01</workSkillLearnFactor>
+
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_Brewing</soundWorking>
+    <uiIconThing>VV_FilteredHoney</uiIconThing>
+
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_RawHoney</li>
+          </thingDefs>
+        </filter>
+        <count>20</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>VV_RawHoney</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <VV_FilteredHoney>10</VV_FilteredHoney>
+    </products>
+    <researchPrerequisite>VV_BasicGathering</researchPrerequisite>
+  </RecipeDef>
+  
+  <!-- 프로폴리스 정제 -->
+  <RecipeDef>
+    <defName>VV_RefiningPropolis</defName>
+    <label>refining propolis</label>
+    <description>Refine propolis to extract medicines and neutroamines.</description>
+
+    <jobString>refining propolis.</jobString>
+    <workAmount>1800</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <workSkill>Crafting</workSkill>
+    <workSkillLearnFactor>0.1</workSkillLearnFactor>
+
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_Brewing</soundWorking>
+    <uiIconThing>Neutroamine</uiIconThing>
+
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_Propolis</li>
+          </thingDefs>
+        </filter>
+        <count>4</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>VV_Propolis</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <MedicineHerbal>1</MedicineHerbal>
+      <Neutroamine>1</Neutroamine>
+    </products>
+    
+    <researchPrerequisite>VV_AdvancedGathering</researchPrerequisite>
+  </RecipeDef>
+
+  <!-- 비료 제작 (썩은 시체) -->
+  <RecipeDef>
+    <defName>VV_MakeFertilizerCorpse</defName>
+    <label>make fertilizer from bones</label>
+    <description>Combine bones with soil and pollen to produce mana fertilizers.</description>
+    <jobString>making fertilizer from bones.</jobString>
+    <workAmount>500</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <workSkill>Plants</workSkill>
+    <workSkillLearnFactor>0.05</workSkillLearnFactor>
+
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_Brewing</soundWorking>
+    <uiIconThing>VV_Fertilizer</uiIconThing>
+
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>Corpses</li>
+          </categories>
+        </filter>
+        <count>1</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_Pollen</li>
+          </thingDefs>
+        </filter>
+        <count>50</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <categories>
+        <li>Corpses</li>
+      </categories>
+      <disallowedCategories>
+        <li>CorpsesMechanoid</li>
+      </disallowedCategories>
+      <specialFiltersToAllow>
+        <li>AllowRotten</li>
+      </specialFiltersToAllow>
+      <specialFiltersToDisallow>
+        <li>AllowFresh</li>
+      </specialFiltersToDisallow>
+    </fixedIngredientFilter>
+    <defaultIngredientFilter>
+      <categories>
+        <li>Corpses</li>
+      </categories>
+      <specialFiltersToAllow>
+        <li>AllowCorpsesColonist</li>
+        <li MayRequire="Ludeon.RimWorld.Ideology">AllowCorpsesSlave</li>
+        <li>AllowCorpsesStranger</li>
+        <li>AllowRotten</li>
+      </specialFiltersToAllow>
+    </defaultIngredientFilter>
+    
+    <products>
+      <VV_Fertilizer>25</VV_Fertilizer>
+    </products>
+    
+    <researchPrerequisite>VV_ArcaneBotany</researchPrerequisite>
+  </RecipeDef>
+  
+  <!-- 비료 제작 (자원) -->
+  <RecipeDef>
+    <defName>VV_MakeFertilizerResource</defName>
+    <label>make fertilizer from organics</label>
+    <description>Ferment organic matter and mix it with soil and pollen to produce mana fertilizers.</description>
+    <jobString>making fertilizer from organics.</jobString>
+    <workAmount>2000</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <workSkill>Plants</workSkill>
+    <workSkillLearnFactor>0.05</workSkillLearnFactor>
+
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_Brewing</soundWorking>
+    <uiIconThing>VV_Fertilizer</uiIconThing>
+
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <ingredientValueGetterClass>IngredientValueGetter_Nutrition</ingredientValueGetterClass>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>Foods</li>
+            <li>PlantMatter</li>
+          </categories>
+          <disallowedCategories>
+            <li>FoodMeals</li>
+          </disallowedCategories>
+        </filter>
+        <count>2.0</count>
+      </li>
+      <li>
+        <filter>
+          <customSummary>pollen or unknown seeds</customSummary>
+          <thingDefs>
+            <li>VV_Pollen</li>
+            <li>VV_UnknownSeed</li>
+          </thingDefs>
+        </filter>
+        <count>0.5</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>VV_Pollen</li>
+        <li>VV_UnknownSeed</li>
+      </thingDefs>
+      <categories>
+        <li>Foods</li>
+        <li>PlantMatter</li>
+      </categories>
+      <disallowedThingDefs>
+        <li>VV_Propolis</li>
+        <li>HemogenPack</li>
+        <li>BabyFood</li>
+      </disallowedThingDefs>
+      <disallowedCategories>
+        <li>FoodMeals</li>
+      </disallowedCategories>
+    </fixedIngredientFilter>
+    <defaultIngredientFilter>
+      <thingDefs>
+        <li>VV_Pollen</li>
+      </thingDefs>
+      <categories>
+        <li>FoodRaw</li>
+      </categories>
+      <disallowedCategories>
+        <li>AnimalProductRaw</li>
+      </disallowedCategories>
+    </defaultIngredientFilter>
+    
+    <products>
+      <VV_Fertilizer>25</VV_Fertilizer>
+    </products>
+    
+    <researchPrerequisite>VV_ArcaneBotany</researchPrerequisite>
+  </RecipeDef>
+  
+</Defs>

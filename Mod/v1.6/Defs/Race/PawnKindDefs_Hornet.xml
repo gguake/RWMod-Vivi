@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <PawnKindDef ParentName="AnimalKindBase">
+    <defName>VV_TitanicHornet</defName>
+    <label>titanic hornet</label>
+    <race>VV_TitanicHornet</race>
+    <combatPower>300</combatPower>
+    <canArriveManhunter>false</canArriveManhunter>
+    <ecoSystemWeight>0</ecoSystemWeight>
+    
+    <lifeStages>
+      <li>
+        <bodyGraphicData>
+          <texPath>Things/Pawn/Hornet/Hornet</texPath>
+          <drawSize>2.5</drawSize>
+          <color>(255,255,255)</color>
+        </bodyGraphicData>
+        <dessicatedBodyGraphicData>
+          <texPath>Things/Pawn/Animal/Spelopede/Dessicated_Spelopede</texPath>
+          <drawSize>2.5</drawSize>
+        </dessicatedBodyGraphicData>
+        <butcherBodyPart>
+          <bodyPartGroup>VV_HornetWing</bodyPartGroup>
+          <thing>VV_TitanicHornetWing</thing>
+        </butcherBodyPart>
+      </li>
+    </lifeStages>
+  </PawnKindDef>
+
+</Defs>

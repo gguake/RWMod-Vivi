@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+<VV_StatsReport_Mana>Maximum Mana</VV_StatsReport_Mana>
+<VV_StatsReport_Mana_Desc>The amount of mana a arcane plant can store at maximum.</VV_StatsReport_Mana_Desc>
+
+<VV_StatsReport_ManaFlux>Mana Fluctuation</VV_StatsReport_ManaFlux>
+<VV_StatsReport_ManaFlux_Desc>The daily mana fluctuation of this arcane plant. Mana can be produced by certain arcane plants when fertilized or under suitable conditions, and is not consumed when packaged.\nIf reserved mana is at maximum, any overproduced mana is transferred to adjacent connected arcane plants.</VV_StatsReport_ManaFlux_Desc>
+
+<VV_StatsReport_ManaPerShoot>Mana Consumption Per Shoot</VV_StatsReport_ManaPerShoot>
+<VV_StatsReport_ManaPerShootDesc>The amount of mana consumed each time the arcane plant fires</VV_StatsReport_ManaPerShootDesc>
+
+<VV_StatsReport_ManaFluxRule_AdjacentPlant_Desc>{0} mana from each adjacent arcane plants\{0} mana from each adjacent plant propotional to its growth</VV_StatsReport_ManaFluxRule_AdjacentPlant_Desc>
+<VV_StatsReport_ManaFluxRule_AdjacentPollution_Desc>{0} mana if placed on polluted soil\n{1} mana from each adjacent polluted soil</VV_StatsReport_ManaFluxRule_AdjacentPollution_Desc>
+<VV_StatsReport_ManaFluxRule_AdjacentWater_Desc>{0} mana if placed on water\n{1} mana from each adjacent water</VV_StatsReport_ManaFluxRule_AdjacentWater_Desc>
+<VV_StatsReport_ManaFluxRule_BatteryStored_Desc>{0} mana propotional to the charged rate</VV_StatsReport_ManaFluxRule_BatteryStored_Desc>
+<VV_StatsReport_ManaFluxRule_Constant_Desc>{0} mana always</VV_StatsReport_ManaFluxRule_Constant_Desc>
+<VV_StatsReport_ManaFluxRule_GlowerActive_Desc>{0} mana if glowing</VV_StatsReport_ManaFluxRule_GlowerActive_Desc>
+<VV_StatsReport_ManaFluxRule_HasRoof_Desc>{0} mana if roofed</VV_StatsReport_ManaFluxRule_HasRoof_Desc>
+<VV_StatsReport_ManaFluxRule_Sunlight_Desc>{0} mana from sunlight</VV_StatsReport_ManaFluxRule_Sunlight_Desc>
+<VV_StatsReport_ManaFluxRule_Temperature_Desc>{2}~{3} mana if temperature is between {0}~{1}</VV_StatsReport_ManaFluxRule_Temperature_Desc>
+<VV_StatsReport_ManaFluxRule_WeatherRainyNoRoof_Desc>{0} mana if rains and no roofed</VV_StatsReport_ManaFluxRule_WeatherRainyNoRoof_Desc>
+<VV_StatsReport_ManaFluxRule_WeatherRainy_Desc>{0} mana if rains</VV_StatsReport_ManaFluxRule_WeatherRainy_Desc>
+<VV_StatsReport_ManaFluxRule_WeatherSnowyNoRoof_Desc>{0} mana if snowy and no roofed</VV_StatsReport_ManaFluxRule_WeatherSnowyNoRoof_Desc>
+<VV_StatsReport_ManaFluxRule_WeatherSnowy_Desc>{0} mana if snowy</VV_StatsReport_ManaFluxRule_WeatherSnowy_Desc>
+<VV_StatsReport_ManaFluxRule_Wind_Desc>{0} mana propotional to the wind speed</VV_StatsReport_ManaFluxRule_Wind_Desc>
+<VV_StatsReport_ManaFluxRule_RadialPollution_Desc>{0}~{1} mana from each near pollutions</VV_StatsReport_ManaFluxRule_RadialPollution_Desc>
+
+</LanguageData>

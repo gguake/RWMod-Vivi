@@ -1,0 +1,76 @@
+<Defs>
+  <PawnKindDef ParentName="ViviBase" Name="PlayerVivi" Class="VVRace.PawnKindDef_Vivi">
+    <defName>VV_PlayerVivi</defName>
+    <label>vivi</label>
+    <defaultFactionDef>VV_PlayerVivi</defaultFactionDef>
+    <combatPower>45</combatPower>
+    <isFighter>false</isFighter>
+
+    <forceNormalGearQuality>true</forceNormalGearQuality>
+    <gearHealthRange>1.0~1.0</gearHealthRange>
+    <apparelMoney>500~1000</apparelMoney>
+    <apparelAllowHeadgearChance>0</apparelAllowHeadgearChance>
+    <apparelIgnoreSeasons>true</apparelIgnoreSeasons>
+    <apparelIgnorePollution>true</apparelIgnorePollution>
+    <apparelTags Inherit="False">
+      <li>VV_ViviStartingApparel</li>
+    </apparelTags>
+
+    <allowOldAgeInjuries>false</allowOldAgeInjuries>
+    <initialWillRange>0~0</initialWillRange>
+    <initialResistanceRange>13~21</initialResistanceRange>
+
+    <backstoryFiltersOverride>
+      <li>
+        <categories>
+          <li>VV_SettlerBackstory</li>
+        </categories>
+        <categoriesAdulthood>
+          <li>VV_SettlerBackstory</li>
+        </categoriesAdulthood>
+      </li>
+    </backstoryFiltersOverride>
+    <forcedBodyType>Thin</forcedBodyType>
+  </PawnKindDef>
+  
+  <PawnKindDef ParentName="PlayerVivi" Name="PlayerRoyalVivi" Class="VVRace.PawnKindDef_Vivi">
+    <defName>VV_PlayerRoyalVivi</defName>
+    <label>royal vivi</label>
+    <isRoyal>true</isRoyal>
+    <forcedBodyType>Female</forcedBodyType>
+  </PawnKindDef>
+  
+  <PawnKindDef ParentName="PlayerRoyalVivi" Class="VVRace.PawnKindDef_Vivi">
+    <defName>VV_PlayerExiledRoyalVivi</defName>
+    <label>exiled royal vivi</label>
+    <defaultFactionDef>VV_PlayerExiledVivi</defaultFactionDef>
+    
+    <minGenerationAge>20</minGenerationAge>
+    <maxGenerationAge>25</maxGenerationAge>
+    <minTotalSkillLevels>30</minTotalSkillLevels>
+
+    <backstoryFiltersOverride Inherit="False">
+      <li>
+        <categoriesChildhood>
+          <li>VV_SettlerBackstory</li>
+        </categoriesChildhood>
+        <categoriesAdulthood>
+          <li>VV_PlayerExiledBackstory</li>
+        </categoriesAdulthood>
+      </li>
+    </backstoryFiltersOverride>
+    <forcedBodyType>Thin</forcedBodyType>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="PlayerVivi" Class="VVRace.PawnKindDef_Vivi">
+    <defName>VV_PlayerRefugeeVivi</defName>
+    <label>vivi refugee</label>
+    
+    <minGenerationAge>7</minGenerationAge>
+    <maxGenerationAge>30</maxGenerationAge>
+    <apparelRequired>
+      <li>VV_UniformHat</li>
+      <li>VV_WorkerUniformDress</li>
+    </apparelRequired>
+  </PawnKindDef>
+</Defs>

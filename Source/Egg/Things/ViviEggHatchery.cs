@@ -99,40 +99,9 @@ namespace VVRace
             base.Destroy(mode);
         }
 
-        public override void Tick()
+        protected override void TickInterval(int delta)
         {
-            base.Tick();
-            _innerContainer.ThingOwnerTick();
-
-            if (ViviEgg != null)
-            {
-                var comp = ViviEgg.TryGetComp<CompViviHatcher>();
-                if (comp.TemperatureDamaged)
-                {
-                    _innerContainer.ClearAndDestroyContents();
-                }
-            }
-        }
-
-        public override void TickRare()
-        {
-            base.TickRare();
-            _innerContainer.ThingOwnerTickRare();
-
-            if (ViviEgg != null)
-            {
-                var comp = ViviEgg.TryGetComp<CompViviHatcher>();
-                if (comp.TemperatureDamaged)
-                {
-                    _innerContainer.ClearAndDestroyContents();
-                }
-            }
-        }
-
-        public override void TickLong()
-        {
-            base.TickLong();
-            _innerContainer.ThingOwnerTickLong();
+            base.TickInterval(delta);
 
             if (ViviEgg != null)
             {

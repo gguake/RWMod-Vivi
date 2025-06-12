@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <HeadTypeDef Abstract="True" Name="VV_HeadBase" ParentName="AverageBase">
+    <gender>None</gender>
+    <eyeOffsetEastWest>(0.1, 0, 0.17)</eyeOffsetEastWest>
+
+    <modExtensions>
+      <li Class="RPEF.ConstraintModExtension">
+        <def>VV_RaceConstraint</def>
+      </li>
+    </modExtensions>
+  </HeadTypeDef>
+  
+  <HeadTypeDef ParentName="VV_HeadBase">
+    <defName>VV_Vivi_A</defName>
+    <label>vivi headA</label>
+    <graphicPath>Things/Pawn/Vivi/Heads/HeadA</graphicPath>
+  </HeadTypeDef>
+  
+  <HeadTypeDef ParentName="VV_HeadBase">
+    <defName>VV_Vivi_B</defName>
+    <label>vivi headB</label>
+    <graphicPath>Things/Pawn/Vivi/Heads/HeadB</graphicPath>
+  </HeadTypeDef>
+
+  <HeadTypeDef ParentName="VV_HeadBase">
+    <defName>VV_Vivi_C</defName>
+    <label>vivi headC</label>
+    <graphicPath>Things/Pawn/Vivi/Heads/HeadC</graphicPath>
+  </HeadTypeDef>
+
+  <HeadTypeDef ParentName="VV_HeadBase">
+    <defName>VV_Vivi_D</defName>
+    <label>vivi headD</label>
+    <graphicPath>Things/Pawn/Vivi/Heads/HeadD</graphicPath>
+  </HeadTypeDef>
+
+  <HeadTypeDef ParentName="VV_HeadBase">
+    <defName>VV_Vivi_E</defName>
+    <label>vivi headE</label>
+    <graphicPath>Things/Pawn/Vivi/Heads/HeadE</graphicPath>
+  </HeadTypeDef>
+
+  <HeadTypeDef ParentName="VV_HeadBase">
+    <defName>VV_Vivi_F</defName>
+    <label>vivi headF</label>
+    <graphicPath>Things/Pawn/Vivi/Heads/HeadF</graphicPath>
+  </HeadTypeDef>
+</Defs>

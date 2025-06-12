@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+  <Operation Class="PatchOperationSequence">
+    <operations>
+      <li Class="PatchOperationSequence" MayRequireAnyOf="sumika.OverflowingFlowers,sumika.OverflowingFlowers_steam">
+        <operations>
+          <!-- Rose_bush -->
+          <li Class="PatchOperationConditional">
+            <xpath>Defs/ThingDef[defName="Rose_bush"]/comps</xpath>
+            <nomatch Class="PatchOperationAdd">
+              <xpath>Defs/ThingDef[defName="Rose_bush"]</xpath>
+              <value>
+                <comps />
+              </value>
+            </nomatch>
+          </li>
+          <li Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Rose_bush"]/comps</xpath>
+            <value>
+              <li Class="VVRace.CompProperties_RepeatGatherable" />
+            </value>
+          </li>
+          <li Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Rose_bush"]/statBases</xpath>
+            <value>
+              <VV_MinGrowthPlantGatherable>0.9</VV_MinGrowthPlantGatherable>
+              <VV_PlantGatherCooldown>1</VV_PlantGatherCooldown>
+              <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
+            </value>
+          </li>
+
+          <!-- OF_Rose_P_Red -->
+          <li Class="PatchOperationConditional">
+            <xpath>Defs/ThingDef[defName="OF_Rose_P_Red"]/comps</xpath>
+            <nomatch Class="PatchOperationAdd">
+              <xpath>Defs/ThingDef[defName="OF_Rose_P_Red"]</xpath>
+              <value>
+                <comps />
+              </value>
+            </nomatch>
+          </li>
+          <li Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="OF_Rose_P_Red"]/comps</xpath>
+            <value>
+              <li Class="VVRace.CompProperties_RepeatGatherable" />
+            </value>
+          </li>
+          <li Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="OF_Rose_P_Red"]/statBases</xpath>
+            <value>
+              <VV_MinGrowthPlantGatherable>0.9</VV_MinGrowthPlantGatherable>
+              <VV_PlantGatherCooldown>1</VV_PlantGatherCooldown>
+              <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
+            </value>
+          </li>
+        </operations>
+      </li>
+    </operations>
+  </Operation>
+</Patch>

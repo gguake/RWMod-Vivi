@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>  <BackstoryDef ParentName="VV_ViviChildBackstory">
+    <defName>VV_ViviHiveChild</defName>
+    <title>vivi hive child</title>
+    <titleShort>hive child</titleShort>
+    <description>[PAWN_nameDef] had an ordinary childhood in the nest.</description>
+    <spawnCategories>
+      <li>VV_SettlerBackstory</li>
+      <li>VV_CombatSettlerBackstory</li>
+      <li>VV_SettlerGrown</li>
+    </spawnCategories>
+    <skillGains>
+      <Plants>2</Plants>
+      <Construction>1</Construction>
+      <Intellectual>-1</Intellectual>
+    </skillGains>
+  </BackstoryDef>
+</Defs>

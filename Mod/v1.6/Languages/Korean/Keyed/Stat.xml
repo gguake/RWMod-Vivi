@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+<VV_StatsReport_Mana>최대 마나 비축량</VV_StatsReport_Mana>
+<VV_StatsReport_Mana_Desc>마법 식물이 최대로 저장할수 있는 마나의 양입니다.</VV_StatsReport_Mana_Desc>
+
+<VV_StatsReport_ManaFlux>마나 변동량</VV_StatsReport_ManaFlux>
+<VV_StatsReport_ManaFlux_Desc>하루동안의 마법 식물의 마나 변동량입니다. 마나는 비료를 투입하거나 조건에 맞는 환경이 갖춰지면 특정 마법 식물들이 생산할수 있으며 포장되어있을때는 소모되지 않습니다.
+\n비축량이 최대치인 경우 남은 마나 생산량은 인접해서 연결된 다른 마법 식물들에 전달됩니다.</VV_StatsReport_ManaFlux_Desc>
+
+<VV_StatsReport_ManaPerShoot>사격당 마나 소모량</VV_StatsReport_ManaPerShoot>
+<VV_StatsReport_ManaPerShootDesc>마법 식물이 사격할때마다 소모되는 마나의 양입니다.</VV_StatsReport_ManaPerShootDesc>
+
+<VV_StatsReport_ManaFluxRule_AdjacentPlant_Desc>인접한 마법 식물마다 마나 {0}\n인접한 식물마다 마나 {0} (식물의 성장도에 비례)</VV_StatsReport_ManaFluxRule_AdjacentPlant_Desc>
+<VV_StatsReport_ManaFluxRule_AdjacentPollution_Desc>오염된 토양에 배치되어있으면 마나 {0}\n인접한 오염된 토양 1개당 마나 {1}</VV_StatsReport_ManaFluxRule_AdjacentPollution_Desc>
+<VV_StatsReport_ManaFluxRule_AdjacentWater_Desc>물 위에 배치되어 있으면 마나 {0}\n인접한 물 1개당 마나 {1}</VV_StatsReport_ManaFluxRule_AdjacentWater_Desc>
+<VV_StatsReport_ManaFluxRule_BatteryStored_Desc>전기 충전량에 비례해 마나 {0}</VV_StatsReport_ManaFluxRule_BatteryStored_Desc>
+<VV_StatsReport_ManaFluxRule_Constant_Desc>항상 마나 {0}</VV_StatsReport_ManaFluxRule_Constant_Desc>
+<VV_StatsReport_ManaFluxRule_GlowerActive_Desc>빛을 내고 있으면 마나 {0}</VV_StatsReport_ManaFluxRule_GlowerActive_Desc>
+<VV_StatsReport_ManaFluxRule_HasRoof_Desc>지붕 아래에 있으면 마나 {0}</VV_StatsReport_ManaFluxRule_HasRoof_Desc>
+<VV_StatsReport_ManaFluxRule_Sunlight_Desc>받는 태양빛에 비례해 마나 {0}</VV_StatsReport_ManaFluxRule_Sunlight_Desc>
+<VV_StatsReport_ManaFluxRule_Temperature_Desc>주변 온도가 {0}~{1}이면 마나 {2}~{3}</VV_StatsReport_ManaFluxRule_Temperature_Desc>
+<VV_StatsReport_ManaFluxRule_WeatherRainyNoRoof_Desc>비를 맞으면 마나 {0}</VV_StatsReport_ManaFluxRule_WeatherRainyNoRoof_Desc>
+<VV_StatsReport_ManaFluxRule_WeatherRainy_Desc>비가 오는 날씨에 마나 {0}</VV_StatsReport_ManaFluxRule_WeatherRainy_Desc>
+<VV_StatsReport_ManaFluxRule_WeatherSnowyNoRoof_Desc>눈을 맞으면 마나 {0}</VV_StatsReport_ManaFluxRule_WeatherSnowyNoRoof_Desc>
+<VV_StatsReport_ManaFluxRule_WeatherSnowy_Desc>눈이 오는 날씨에 마나 {0}</VV_StatsReport_ManaFluxRule_WeatherSnowy_Desc>
+<VV_StatsReport_ManaFluxRule_Wind_Desc>주변 바람의 세기에 비례해 마나 {0}</VV_StatsReport_ManaFluxRule_Wind_Desc>
+<VV_StatsReport_ManaFluxRule_RadialPollution_Desc>주변의 오염된 토양 마다 마나 {0}~{1}</VV_StatsReport_ManaFluxRule_RadialPollution_Desc>
+
+</LanguageData>

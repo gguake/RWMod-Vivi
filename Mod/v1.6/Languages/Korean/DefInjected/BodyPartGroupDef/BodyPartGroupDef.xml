@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <VV_LeftClaw.label>왼쪽 발톱</VV_LeftClaw.label>
+  <VV_LeftClaw.labelShort>발톱</VV_LeftClaw.labelShort>
+  
+  <VV_RightClaw.label>오른쪽 발톱</VV_RightClaw.label>
+  <VV_RightClaw.labelShort>발톱</VV_RightClaw.labelShort>
+  
+  <VV_HornetWings.label>말벌 날개</VV_HornetWings.label>
+  <VV_HornetWings.labelShort>날개</VV_HornetWings.labelShort>
+</LanguageData>

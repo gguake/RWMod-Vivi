@@ -61,14 +61,9 @@ namespace VVRace
             RefreshHairColor();
         }
 
-        public override void PostDeSpawn(Map map)
+        public override void CompTickInterval(int delta)
         {
-            base.PostDeSpawn(map);
-        }
-
-        public override void CompTick()
-        {
-            if (parent.IsHashIntervalTick(60000))
+            if (parent.IsHashIntervalTick(20000, delta))
             {
                 RefreshHairColor();
             }

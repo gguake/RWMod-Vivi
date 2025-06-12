@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+<VV_Pollen.label>꽃가루</VV_Pollen.label>
+<VV_Pollen.description>꽃이나 각종 식물들이 퍼트리는 꽃가루를 모아둔 것입니다. 일반적인 인간들은 이것을 먹지 않지만 약간의 마나와 비비들에게 필요한 영양분이 들어있습니다.</VV_Pollen.description>
+
+<VV_RawHoney.label>정제되지 않은 비비 꿀</VV_RawHoney.label>
+<VV_RawHoney.description>비비가 꽃이나 식물에서 채집한 꿀입니다. 밀랍부분은 먹을 수 없고 불순물이 다소 섞여있지만 그래도 맛있습니다.</VV_RawHoney.description>
+
+<VV_FilteredHoney.label>정제된 비비 꿀</VV_FilteredHoney.label>
+<VV_FilteredHoney.description>불필요한 수분과 불순물을 정제한 순수한 꿀입니다. 대량의 영양분을 가지고 있어 비비들의 주식으로 사용됩니다.
+\n암브로시아와 유사한 성분을 가지고 있으며 고대에는 넥타르라는 이름으로 불리기도 했습니다.</VV_FilteredHoney.description>
+
+<VV_HoneyPollenCake.label>꽃가루 경단</VV_HoneyPollenCake.label>
+<VV_HoneyPollenCake.description>대량의 꽃가루와 꿀을 뭉쳐 만든 경단으로 비비들의 주식입니다. 작게 나눠져있어 유아기의 비비에게도 먹이기 좋으며 어린 비비들이 먹으면 학습에 도움되는 효과를 받습니다.
+\n인간도 먹을수는 있지만 이런 음식을 좋아하지 않습니다.</VV_HoneyPollenCake.description>
+
+<VV_RoyalJelly.label>로열 젤리</VV_RoyalJelly.label>
+<VV_RoyalJelly.description>대량의 비비 크림에서 희소한 성분을 모아 만든 젤리입니다. 그대로는 매우 맛이 없어서 약간의 꿀이 첨가됩니다. 어린 비비들이 먹으면 학습에 도움되는 효과를 받으며 꾸준히 섭취한 어린 비비들은 성체가 되면 로열 비비가 됩니다.
+\n이미 성체가 된 비비는 먹어도 로열 비비가 되지는 않지만 정기적으로 복용할 경우 수명이 조금 늘어나며 노화 질환을 예방할 수 있습니다.</VV_RoyalJelly.description>
+
+<VV_FloralHotTea.label>따뜻한 꽃차</VV_FloralHotTea.label>
+<VV_FloralHotTea.description>따뜻한 꽃잎과 약간의 꿀을 넣고 끓여 우려낸 차입니다. 마시면 몸이 따뜻해져 추위를 덜 느낄 수 있습니다. 특이한 꽃잎의 성질 때문에 저장된 온도와 상관없이 따뜻함을 유지하고 있습니다.</VV_FloralHotTea.description>
+<VV_FloralHotTea.ingestible.ingestCommandString>{0} 마시기</VV_FloralHotTea.ingestible.ingestCommandString>
+<VV_FloralHotTea.ingestible.ingestReportString>{0} 마시는 중.</VV_FloralHotTea.ingestible.ingestReportString>
+
+<VV_FloralIceTea.label>얼음 꽃차</VV_FloralIceTea.label>
+<VV_FloralIceTea.description>차가운 꽃잎과 약간의 꿀을 넣고 끓여 우려낸 차입니다. 마시면 몸이 서늘해져 더위를 덜 느낄 수 있습니다. 특이한 꽃잎의 성질 때문에 저장된 온도와 상관없이 차가움을 유지하고 있습니다.</VV_FloralIceTea.description>
+<VV_FloralIceTea.ingestible.ingestCommandString>{0} 마시기</VV_FloralIceTea.ingestible.ingestCommandString>
+<VV_FloralIceTea.ingestible.ingestReportString>{0} 마시는 중.</VV_FloralIceTea.ingestible.ingestReportString>
+
+<VV_FloralMilkTea.label>우유 꽃차</VV_FloralMilkTea.label>
+<VV_FloralMilkTea.description>향기나는 꽃잎을 넣고 끓여 우려낸 것에 우유를 더한 차입니다. 마시면 일정 시간동안 몸에서 꽃향기가 풍겨 기분이 좋아지며 수면에도 도움이 됩니다.</VV_FloralMilkTea.description>
+<VV_FloralMilkTea.ingestible.ingestCommandString>{0} 마시기</VV_FloralMilkTea.ingestible.ingestCommandString>
+<VV_FloralMilkTea.ingestible.ingestReportString>{0} 마시는 중.</VV_FloralMilkTea.ingestible.ingestReportString>
+
+<VV_UnfermentedMead.label>숙성중인 비비 꿀술</VV_UnfermentedMead.label>
+<VV_UnfermentedMead.description>꿀에 물과 효모를 섞어 숙성중인 비비 꿀술입니다. 제대로 숙성하려면 20~28℃에서 10일간 숙성해야 합니다.</VV_UnfermentedMead.description>
+
+<VV_Mead.label>비비 꿀술</VV_Mead.label>
+<VV_Mead.description>꿀을 발효시켜 만든 비비들의 전통주입니다. 의외로 단맛은 거의 나지 않고 독하지만 꿀 특유의 향이 납니다.
+\n비비들은 술을 선호하지 않지만 외지인들의 수요가 많아 남는 꿀을 비싸게 팔기 위해 만듭니다.</VV_Mead.description>
+<VV_Mead.ingestible.ingestCommandString>{0} 마시기</VV_Mead.ingestible.ingestCommandString>
+<VV_Mead.ingestible.ingestReportString>{0} 마시는 중.</VV_Mead.ingestible.ingestReportString>
+<VV_Mead.tools.li.bottle.label>병</VV_Mead.tools.li.bottle.label>
+<VV_Mead.tools.li.neck.label>병목</VV_Mead.tools.li.neck.label>
+
+<VV_CombatHormoneJelly.label>비비 전투 호르몬 젤리</VV_CombatHormoneJelly.label>
+<VV_CombatHormoneJelly.description>꿀술을 화학적으로 농축하고 가공해 만든 젤리입니다. 알코올 농도가 매우 높으며 비비가 섭취할 경우 전투 기술이 일시적으로 향상되고 불을 두려워 하지 않게 되지만 공격성이 강화되며 피로와 배고픔을 빠르게 느끼게 됩니다.
+\n비비가 아닌 일반 인간들에게는 자극적이고 특이한 맛의 간식으로 유통되기도 합니다.</VV_CombatHormoneJelly.description>
+
+</LanguageData>

@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <HediffDef>
+    <defName>VV_RoyalJelly</defName>
+    <label>royal jelly effect</label>
+    <description>The effects of royal jelly slow down aging. In the case of child Vivi, their bodies are transforming into Royal Vivi.
+\nConsuming additional royal jelly will not stack the effects.</description>
+    <descriptionHyperlinks>
+      <HediffDef>VV_RoyalVivi</HediffDef>
+    </descriptionHyperlinks>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(1,0,0.5)</defaultLabelColor>
+
+    <isBad>false</isBad>
+    <priceImpact>false</priceImpact>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>45000~45000</disappearsAfterTicks>
+        <showRemainingTime>true</showRemainingTime>
+      </li>
+      <li Class="VVRace.HediffCompProperties_ChangeRoyalJellyNeed">
+        <percentPerDay>0.0032</percentPerDay>
+      </li>
+    </comps>
+
+    <stages>
+      <li>
+        <makeImmuneTo>
+          <li>HeartAttack</li>
+          <li>BadBack</li>
+          <li>Frail</li>
+          <li>Dementia</li>
+          <li>Alzheimers</li>
+          <li>Asthma</li>
+        </makeImmuneTo>
+
+        <statOffsets>
+          <ImmunityGainSpeed>0.15</ImmunityGainSpeed>
+          <PsychicSensitivity>0.3</PsychicSensitivity>
+          <MeditationFocusGain>0.15</MeditationFocusGain>
+          <PsychicEntropyRecoveryRate>0.15</PsychicEntropyRecoveryRate>
+        </statOffsets>
+        <statFactors>
+          <LifespanFactor>2.5</LifespanFactor>
+        </statFactors>
+      </li>
+    </stages>
+
+    <modExtensions>
+      <li Class="RPEF.ConstraintModExtension">
+        <def>VV_HeartAttackBlockRaceConstraint</def>
+      </li>
+    </modExtensions>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>VV_ViviGrowthBoost</defName>
+    <label>learning boost</label>
+    <description>Gain additional bonuses to global learning speed and growth point.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(1,0,0.5)</defaultLabelColor>
+    
+    <isBad>false</isBad>
+    <priceImpact>false</priceImpact>
+    <scenarioCanAdd>false</scenarioCanAdd>
+
+    <stages>
+      <li>
+        <statFactors>
+          <VV_GrowthPointsFactor>2.0</VV_GrowthPointsFactor>
+        </statFactors>
+        <statOffsets>
+          <GlobalLearningFactor>1.0</GlobalLearningFactor>
+        </statOffsets>
+      </li>
+    </stages>
+
+    <comps>
+      <li Class="VVRace.HediffCompProperties_GrowthBoost" />
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>54000~66000</disappearsAfterTicks>
+        <showRemainingTime>true</showRemainingTime>
+      </li>
+    </comps>
+
+    <modExtensions>
+      <li Class="RPEF.ConstraintModExtension">
+        <def>VV_RaceConstraint</def>
+      </li>
+    </modExtensions>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>VV_FloralTea</defName>
+    <label>relaxed on flower tea</label>
+    <description>Drunk flower tea and are now in a serene state of mind.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(1,0,0.5)</defaultLabelColor>
+    
+    <isBad>false</isBad>
+    <priceImpact>false</priceImpact>
+    <scenarioCanAdd>false</scenarioCanAdd>
+
+    <stages>
+      <li>
+        <socialFightChanceFactor>0.5</socialFightChanceFactor>
+        <capMods>
+          <li>
+            <capacity>Breathing</capacity>
+            <offset>0.07</offset>
+          </li>
+          <li>
+            <capacity>BloodPumping</capacity>
+            <offset>0.07</offset>
+          </li>
+          <li>
+            <capacity>Metabolism</capacity>
+            <offset>0.07</offset>
+          </li>
+        </capMods>
+      </li>
+    </stages>
+
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>50000~50000</disappearsAfterTicks>
+        <showRemainingTime>true</showRemainingTime>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>VV_WarmingFloralTea</defName>
+    <label>high on hot tea</label>
+    <description>Drunk hot flower tea, making their body more resistant to the cold.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(1,0,0.5)</defaultLabelColor>
+    
+    <isBad>false</isBad>
+    <priceImpact>false</priceImpact>
+    <scenarioCanAdd>false</scenarioCanAdd>
+
+    <stages>
+      <li>
+        <statOffsets>
+          <ComfyTemperatureMin>-27</ComfyTemperatureMin>
+        </statOffsets>
+      </li>
+    </stages>
+
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>50000~50000</disappearsAfterTicks>
+        <showRemainingTime>true</showRemainingTime>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>VV_CoolingFloralTea</defName>
+    <label>high on ice tea</label>
+    <description>Drunk ice flower tea, making their body more resistant to heat.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(1,0,0.5)</defaultLabelColor>
+    
+    <isBad>false</isBad>
+    <priceImpact>false</priceImpact>
+    <scenarioCanAdd>false</scenarioCanAdd>
+
+    <stages>
+      <li>
+        <statOffsets>
+          <ComfyTemperatureMax>27</ComfyTemperatureMax>
+        </statOffsets>
+      </li>
+    </stages>
+
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>50000~50000</disappearsAfterTicks>
+        <showRemainingTime>true</showRemainingTime>
+      </li>
+    </comps>
+  </HediffDef>
+  
+  <HediffDef>
+    <defName>VV_FlowerScent</defName>
+    <label>flower scent</label>
+    <description>Emitting a floral scent from body.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(1,0,0.5)</defaultLabelColor>
+    
+    <isBad>false</isBad>
+    <priceImpact>false</priceImpact>
+    <scenarioCanAdd>false</scenarioCanAdd>
+
+    <stages>
+      <li>
+        <statOffsets>
+          <MeditationFocusGain>0.05</MeditationFocusGain>
+          <PsychicEntropyRecoveryRate>0.05</PsychicEntropyRecoveryRate>
+        </statOffsets>
+      </li>
+    </stages>
+
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>50000~50000</disappearsAfterTicks>
+        <showRemainingTime>true</showRemainingTime>
+      </li>
+    </comps>
+  </HediffDef>
+  
+  <HediffDef>
+    <defName>VV_CombatHormoneJelly</defName>
+    <label>combat hormone</label>
+    <description>It is in a state where combat hormones that greatly enhance the Vivi's inherent aggressiveness have been injected. Combat-related skills are enhanced, and sensitivity to pain is reduced; they do not panic at the sight of fire, but they tire very quickly and become hungry.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(1,0,0.5)</defaultLabelColor>
+    
+    <isBad>false</isBad>
+    <priceImpact>false</priceImpact>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <maxSeverity>1.0</maxSeverity>
+
+    <stages>
+      <li>
+        <capMods>
+          <li>
+            <capacity>Sight</capacity>
+            <offset>0.1</offset>
+          </li>
+          <li>
+            <capacity>Moving</capacity>
+            <offset>0.1</offset>
+          </li>
+        </capMods>
+        <statOffsets>
+          <RestFallRateFactor>1.2</RestFallRateFactor>
+        </statOffsets>
+        <hungerRateFactorOffset>1.2</hungerRateFactorOffset>
+        <socialFightChanceFactor>8.0</socialFightChanceFactor>
+        <extraTooltip>Temporarily prevents mental break caused by the 'Fire Terror' gene.</extraTooltip>
+      </li>
+    </stages>
+
+    <aptitudes>
+      <Shooting>4</Shooting>
+      <Melee>4</Melee>
+    </aptitudes>
+
+    <comps>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-0.333</severityPerDay>
+        <showHoursToRecover>true</showHoursToRecover>
+      </li>
+    </comps>
+
+    <modExtensions>
+      <li Class="RPEF.ConstraintModExtension">
+        <def>VV_RaceConstraint</def>
+      </li>
+    </modExtensions>
+  </HediffDef>
+</Defs>

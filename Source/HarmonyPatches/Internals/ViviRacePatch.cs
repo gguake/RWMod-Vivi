@@ -240,9 +240,9 @@ namespace VVRace.HarmonyPatches
             if (xenotype == VVXenotypeDefOf.VV_Vivi && 
                 request.KindDef != null && 
                 request.KindDef.race == VVThingDefOf.VV_Vivi &&
-                request.KindDef.defaultFactionType != null && 
-                request.KindDef.defaultFactionType.allowedCultures.Contains(VVCultureDefOf.VV_ViviCulture) &&
-                !request.KindDef.defaultFactionType.isPlayer &&
+                request.KindDef.defaultFactionDef != null && 
+                request.KindDef.defaultFactionDef.allowedCultures.Contains(VVCultureDefOf.VV_ViviCulture) &&
+                !request.KindDef.defaultFactionDef.isPlayer &&
                 pawn.genes.Xenogenes.Count == 0)
             {
                 var genes = ViviUtility.SelectRandomGeneForVivi(Rand.Range(1, 2));

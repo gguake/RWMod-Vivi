@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 비비 부화장 -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>VV_ViviHatchery</defName>
+    <label>vivi hatchery</label>
+    <description>a structure for hatching Vivi eggs. It must be indoors with a roof and requires the right temperature. If there is an incubator in a suitable environment, Royal Vivis will go there to lay their eggs.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_ViviEgg</ThingDef>
+    </descriptionHyperlinks>
+    <thingClass>VVRace.ViviEggHatchery</thingClass>
+    <tickerType>Rare</tickerType>
+    
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <graphicData>
+      <texPath>Things/Building/VV_Hatchery</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(1.5, 1.5)</drawSize>
+      <drawRotated>false</drawRotated>
+      <shadowData>
+        <volume>(0.6, 0.3, 0.6)</volume>
+        <offset>(0, 0, 0.05)</offset>
+      </shadowData>
+    </graphicData>
+
+    <uiOrder>2101</uiOrder>
+    <altitudeLayer>Building</altitudeLayer>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.4</fillPercent>
+    <pathCost>50</pathCost>
+    <statBases>
+      <MaxHitPoints>200</MaxHitPoints>
+      <Mass>8</Mass>
+      <WorkToBuild>3800</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Beauty>0.5</Beauty>
+    </statBases>
+    <size>(1,1)</size>
+    <rotatable>false</rotatable>
+    <thingCategories>
+      <li>VV_BuildingsVivi</li>
+    </thingCategories>
+
+    <costList>
+      <VV_Viviwax>60</VV_Viviwax>
+      <VV_Vivicream>40</VV_Vivicream>
+    </costList>
+
+    <defaultPlacingRot>South</defaultPlacingRot>
+    <building>
+      <preventDeteriorationOnTop>true</preventDeteriorationOnTop>
+      <ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
+    </building>
+    <designationCategory>VV_Bulidings</designationCategory>
+    <designationHotKey>Misc3</designationHotKey>
+
+    <surfaceType>Item</surfaceType>
+    <canOverlapZones>false</canOverlapZones>
+    <comps>
+      <li Class="CompProperties_Forbiddable"/>
+      <li Class="VVRace.CompProperties_ViviHatcheryEggDrawer">
+        <graphicData>
+          <texPath>Things/Building/VV_Hatchery_front</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <shaderType>CutoutComplex</shaderType>
+          <drawSize>(1.5, 1.5)</drawSize>
+          <drawRotated>false</drawRotated>
+        </graphicData>
+      </li>
+    </comps>
+    <researchPrerequisites>
+      <li>VV_BasicInfra</li>
+    </researchPrerequisites>
+  </ThingDef>
+  
+  <!-- 간이 채집 장소 -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>VV_GatheringSpot</defName>
+    <label>gathering spot</label>
+    <description>a place to perform various gathering jobs from nearby plants. Because of insufficient equipment, only half of the original collection amount is obtained, and gathering is possible only near the gathering place.</description>
+    <thingClass>VVRace.Building_GatherWorkTable</thingClass>
+    <graphicData>
+      <texPath>Things/Building/VV_GatheringSpot</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1,1)</drawSize>
+    </graphicData>
+
+    <uiOrder>2200</uiOrder>
+    <altitudeLayer>FloorEmplacement</altitudeLayer>
+    <passability>Standable</passability>
+    <useHitPoints>false</useHitPoints>
+    <statBases>
+      <WorkToBuild>0</WorkToBuild>
+      <WorkTableEfficiencyFactor>0.5</WorkTableEfficiencyFactor>
+    </statBases>
+    <size>(1,1)</size>
+    
+    <scatterableOnMapGen>false</scatterableOnMapGen>
+    <hasInteractionCell>True</hasInteractionCell>
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+
+    <inspectorTabs>
+      <li>ITab_Bills</li>
+      <li>VVRace.ITab_GatherWorkTable</li>
+    </inspectorTabs>
+
+    <building>
+      <spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity>
+      <sowTag>SupportPlantsOnly</sowTag>
+      <canPlaceOverImpassablePlant>false</canPlaceOverImpassablePlant>
+      <ai_chillDestination>false</ai_chillDestination>
+      <wakeDormantPawnsOnConstruction>false</wakeDormantPawnsOnConstruction>
+      <artificialForMeditationPurposes>false</artificialForMeditationPurposes>
+      
+      <buildingTags>
+        <li>Production</li>
+      </buildingTags>
+    </building>
+    <designationCategory>VV_Bulidings</designationCategory>
+    <placeWorkers>
+      <li>PlaceWorker_PreventInteractionSpotOverlap</li>
+    </placeWorkers>
+
+    <surfaceType>Item</surfaceType>
+    <comps>
+      <li Class="CompProperties_ReportWorkSpeed">
+        <workSpeedStat>WorkTableWorkSpeedFactor</workSpeedStat>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- 채집 작업대 -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>VV_GatheringBarrel</defName>
+    <label>gathering workbench</label>
+    <description>a workbench for conducting various gathering jobs from nearby plants. Gathering jobs can only be done near the workstation.</description>
+    <thingClass>VVRace.Building_GatherWorkTable</thingClass>
+
+    <graphicData>
+      <texPath>Things/Building/VV_HoneyHarvestBarrel</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(2.0,2.0)</drawSize>
+      <drawRotated>false</drawRotated>
+      <damageData>
+        <rect>(0.05,0.1,0.9,0.9)</rect>
+      </damageData>
+      <shadowData>
+        <volume>(0.75, 0.35, 0.33)</volume>
+      </shadowData>
+    </graphicData>
+
+    <uiOrder>2201</uiOrder>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <useHitPoints>True</useHitPoints>
+    <fillPercent>0.3</fillPercent>
+    <pathCost>50</pathCost>
+    <statBases>
+      <Mass>20</Mass>
+      <WorkToBuild>1500</WorkToBuild>
+      <MaxHitPoints>150</MaxHitPoints>
+      <Flammability>1.0</Flammability>
+      <Cleanliness>-1</Cleanliness>
+    </statBases>
+    <size>(1,1)</size>
+    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+
+    <stuffCategories>
+      <li>Woody</li>
+      <li>VV_Wax</li>
+    </stuffCategories>
+    <costStuffCount>60</costStuffCount>
+
+    <inspectorTabs>
+      <li>ITab_Bills</li>
+      <li>VVRace.ITab_GatherWorkTable</li>
+    </inspectorTabs>
+    <thingCategories>
+      <li>VV_BuildingsVivi</li>
+    </thingCategories>
+
+    <hasInteractionCell>True</hasInteractionCell>
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <building>
+      <buildingTags>
+        <li>Production</li>
+      </buildingTags>
+    </building>
+    <designationCategory>VV_Bulidings</designationCategory>
+    <placeWorkers>
+      <li>PlaceWorker_PreventInteractionSpotOverlap</li>
+    </placeWorkers>
+    
+    <surfaceType>Item</surfaceType>
+    <canOverlapZones>false</canOverlapZones>
+    <comps>
+    </comps>
+    <researchPrerequisites>
+      <li>VV_BasicGathering</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!-- 비비 가공 작업대 -->
+  <ThingDef ParentName="BenchBase">
+    <defName>VV_RefiningWorkbench</defName>
+    <label>vivi refining workbench</label>
+    <description>a workbench for Vivi to carry out processing jobs.</description>
+    <thingClass>Building_WorkTable</thingClass>
+    <graphicData>
+      <texPath>Things/Building/VV_RefiningTable</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(4,4)</drawSize>
+      <shadowData>
+        <volume>(2.9, 0.3, 0.5)</volume>
+        <offset>(0, 0, 0)</offset>
+      </shadowData>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+    </graphicData>
+    
+    <costList>
+      <Steel>20</Steel>
+    </costList>
+    <stuffCategories>
+      <li>Woody</li>
+      <li>Stony</li>
+      <li>Metallic</li>
+    </stuffCategories>
+    <costStuffCount>60</costStuffCount>
+    
+    <uiOrder>2300</uiOrder>
+    <altitudeLayer>Building</altitudeLayer>
+    <fillPercent>0.5</fillPercent>
+    <useHitPoints>True</useHitPoints>
+    <statBases>
+      <WorkToBuild>1500</WorkToBuild>
+      <MaxHitPoints>180</MaxHitPoints>
+      <Flammability>1.0</Flammability>
+      <Cleanliness>-5</Cleanliness>
+    </statBases>
+    <size>(2,1)</size>
+    <designationCategory>VV_Bulidings</designationCategory>
+    <designationHotKey>Misc4</designationHotKey>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <hasInteractionCell>True</hasInteractionCell>
+    <interactionCellOffset>(1,0,-1)</interactionCellOffset>
+    <surfaceType>Item</surfaceType>
+    <recipes>
+      <li>VV_MakeVivicream</li>
+      <li>VV_MakeViviwax</li>
+      <li>VV_FilteringHoney</li>
+      <li>VV_RefiningPropolis</li>
+      <li>VV_RefineTitanicHornetWing</li>
+      <li>VV_MakeLifestrand</li>
+      <li>VV_MakeFertilizerCorpse</li>
+      <li>VV_MakeFertilizerResource</li>
+    </recipes>
+    <inspectorTabs>
+      <li>ITab_Bills</li>
+    </inspectorTabs>
+    <building>
+      <spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity>
+    </building>
+    <comps>
+      <li Class="CompProperties_AffectedByFacilities">
+        <linkableFacilities>
+          <li>ToolCabinet</li>
+        </linkableFacilities>
+      </li>
+    </comps>
+    <placeWorkers>
+      <li>PlaceWorker_ShowFacilitiesConnections</li>
+      <li>PlaceWorker_PreventInteractionSpotOverlap</li>
+    </placeWorkers>
+    <researchPrerequisites>
+      <li>VV_BasicInfra</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!-- 비비 자동 추출기 -->
+  <ThingDef ParentName="BenchBase">
+    <defName>VV_AutoExtractor</defName>
+    <label>automatic honey extractor</label>
+    <description>a machine that uses centrifugal force to extract necessary ingredients in large quantities from unrefined Vivi honey or propolis. It is much faster and capable of handling larger quantities than manual work, but requires electricity.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_SparklingPetal</ThingDef>
+    </descriptionHyperlinks>
+
+    <thingClass>Building_WorkTable</thingClass>
+    <graphicData>
+      <texPath>Things/Building/VV_AutoExtractor</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(2.7,2.7)</drawSize>
+      <shadowData>
+        <volume>(2.22, 0.8, 0.62)</volume>
+        <offset>(0, 0, -0.13)</offset>
+      </shadowData>
+      <damageData>
+        <rect>(0.3,0.1,2.4,1.8)</rect>
+      </damageData>
+    </graphicData>
+    
+    <costList>
+      <ComponentIndustrial>3</ComponentIndustrial>
+      <VV_SparklingPetal>40</VV_SparklingPetal>
+    </costList>
+    <stuffCategories>
+      <li>VV_Wax</li>
+      <li>Metallic</li>
+    </stuffCategories>
+    <costStuffCount>100</costStuffCount>
+    
+    <uiOrder>2301</uiOrder>
+    <altitudeLayer>Building</altitudeLayer>
+    <fillPercent>0.5</fillPercent>
+    <useHitPoints>True</useHitPoints>
+    <statBases>
+      <WorkToBuild>2000</WorkToBuild>
+      <MaxHitPoints>200</MaxHitPoints>
+      <Flammability>1.0</Flammability>
+      <Cleanliness>-3</Cleanliness>
+    </statBases>
+    <size>(2,2)</size>
+    <designationCategory>VV_Bulidings</designationCategory>
+    <designationHotKey>Misc5</designationHotKey>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <hasInteractionCell>True</hasInteractionCell>
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+    <surfaceType>Item</surfaceType>
+    <recipes>
+      <li>VV_ExtractBulkHoney</li>
+      <li>VV_ExtractBulkPropolis</li>
+      <li>VV_MakeFertilizerSeeds</li>
+    </recipes>
+    <inspectorTabs>
+      <li>ITab_Bills</li>
+    </inspectorTabs>
+    <building>
+      <spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity>
+    </building>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>200</basePowerConsumption>
+        <shortCircuitInRain>true</shortCircuitInRain>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_AffectedByFacilities">
+        <linkableFacilities>
+          <li>ToolCabinet</li>
+        </linkableFacilities>
+      </li>
+    </comps>
+    <placeWorkers>
+      <li>PlaceWorker_ShowFacilitiesConnections</li>
+      <li>PlaceWorker_PreventInteractionSpotOverlap</li>
+    </placeWorkers>
+    <researchPrerequisites>
+      <li>VV_AutomatedInfra</li>
+    </researchPrerequisites>
+    <constructionSkillPrerequisite>7</constructionSkillPrerequisite>
+  </ThingDef>
+
+</Defs>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <HediffGiverSetDef>
+    <defName>VV_TitanicHornet</defName>
+    <hediffGivers>
+      <li Class="VVRace.HediffGiver_ConstantScaria">
+        <hediff>Scaria</hediff>
+      </li>
+    </hediffGivers>
+  </HediffGiverSetDef>
+  
+  <ThingDef ParentName="AnimalThingBase">
+    <defName>VV_TitanicHornet</defName>
+    <label>titanic hornet</label>
+    <description>A titanic hornet with an odd shape. It boasts fast speed and a robust exterior, and shreds its enemies with its powerful jaw and large-sized claws on its two legs. However, it is surprisingly vulnerable to pollution and heat, and doesn't handle pain well.
+\nIt has a symbiotic relationship with the scaria fungus, carrying it at all times but not dying from it over time. Even if the scaria is treated, as soon as they regain consciousness, they get infected again immediately and start to rampage.
+\nThe wings of the titanic hornet are incredibly strong yet lightweight, making them a useful material. However, they are typically difficult to obtain intact, as the corpse rapidly decays due to the scaria.
+\nThe exact origin of the titanic hornet is unknown, but according to various records, it is known to have appeared after outlanders arrived on this planet.</description>
+    <statBases>
+      <MoveSpeed>8.1</MoveSpeed>
+      <PsychicSensitivity>0</PsychicSensitivity>
+      <ComfyTemperatureMin>0</ComfyTemperatureMin>
+      <ComfyTemperatureMax>36</ComfyTemperatureMax>
+      <MarketValue>500</MarketValue>
+      <LeatherAmount>0</LeatherAmount>
+      <ArmorRating_Sharp>1.0</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.5</ArmorRating_Blunt>
+      <ArmorRating_Heat>0</ArmorRating_Heat>
+      <PainShockThreshold>0.55</PainShockThreshold>
+
+      <ToxicResistance>-1.00</ToxicResistance>
+      <ToxicEnvironmentResistance>0</ToxicEnvironmentResistance>
+      <Flammability>2.0</Flammability>
+
+      <MinimumHandlingSkill>99</MinimumHandlingSkill>
+    </statBases>
+    <uiIconScale>1.35</uiIconScale>
+    
+    <tools>
+      <li>
+        <label>jaw</label>
+        <capacities>
+          <li>Bite</li>
+        </capacities>
+        <power>19</power>
+        <cooldownTime>1.5</cooldownTime>
+        <linkedBodyPartsGroup>Mouth</linkedBodyPartsGroup>
+      </li>
+      <li>
+        <label>head</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>12</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+        <chanceFactor>0.2</chanceFactor>
+      </li>
+      <li>
+        <label>left claw</label>
+        <capacities>
+          <li>Scratch</li>
+          <li>Stab</li>
+        </capacities>
+        <power>28</power>
+        <cooldownTime>2.5</cooldownTime>
+        <linkedBodyPartsGroup>VV_LeftClaw</linkedBodyPartsGroup>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+        <armorPenetration>0.3</armorPenetration>
+      </li>
+      <li>
+        <label>right claw</label>
+        <capacities>
+          <li>Scratch</li>
+          <li>Stab</li>
+        </capacities>
+        <power>28</power>
+        <cooldownTime>2.5</cooldownTime>
+        <linkedBodyPartsGroup>VV_RightClaw</linkedBodyPartsGroup>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+        <armorPenetration>0.3</armorPenetration>
+      </li>
+    </tools>
+
+    <race>
+      <hasGenders>false</hasGenders>
+
+      <bloodDef>Filth_BloodInsect</bloodDef>
+      <foodType>CarnivoreAnimal</foodType>
+      <manhunterOnDamageChance>1.00</manhunterOnDamageChance>
+      <canBePredatorPrey>false</canBePredatorPrey>
+      <herdMigrationAllowed>false</herdMigrationAllowed>
+
+      <body>VV_TitanicHornet</body>
+      <baseBodySize>4.0</baseBodySize>
+      <baseHungerRate>4.0</baseHungerRate>
+      <baseHealthScale>6.0</baseHealthScale>
+      <useMeatFrom>Megaspider</useMeatFrom>
+      <wildness>1.0</wildness>
+      <petness>0.0</petness>
+
+      <lifeExpectancy>15</lifeExpectancy>
+      <trainability>None</trainability>
+      <showTrainables>false</showTrainables>
+      <hideTrainingTab>true</hideTrainingTab>
+
+      <lifeStageAges>
+        <li>
+          <def>VV_TitanicHornetAdult</def>
+          <minAge>0</minAge>
+          <soundWounded>Pawn_BigInsect_Pain</soundWounded>
+          <soundDeath>Pawn_BigInsect_Death</soundDeath>
+          <soundCall>Pawn_BigInsect_Call</soundCall>
+          <soundAngry>Pawn_BigInsect_Angry</soundAngry>
+        </li>
+      </lifeStageAges>
+      <soundMeleeHitPawn>Pawn_Melee_BigBash_HitPawn</soundMeleeHitPawn>
+      <soundMeleeHitBuilding>Pawn_Melee_BigBash_HitBuilding</soundMeleeHitBuilding>
+      <soundMeleeMiss>Pawn_Melee_BigBash_Miss</soundMeleeMiss>
+
+      <hediffGiverSets>
+        <li>VV_TitanicHornet</li>
+      </hediffGiverSets>
+    </race>
+
+    <ingredient>
+      <mergeCompatibilityTags>
+        <li MayRequire="Ludeon.RimWorld.Ideology">InsectMeat</li>
+      </mergeCompatibilityTags>
+    </ingredient>
+
+    <tradeTags>
+    </tradeTags>
+
+    <killedLeavingsChance>0.5</killedLeavingsChance>
+    <killedLeavingsRanges>
+      <VV_TitanicHornetWing>1~4</VV_TitanicHornetWing>
+    </killedLeavingsRanges>
+  </ThingDef>
+</Defs>

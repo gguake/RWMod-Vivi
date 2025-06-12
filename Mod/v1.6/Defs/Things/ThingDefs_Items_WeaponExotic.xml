@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 예식용 창 -->
+  <ThingDef ParentName="BaseWeapon">
+    <defName>VV_RitualLance</defName>
+    <label>vivi ritual lance</label>
+    <description>a large spear with various decorations and a large blade given in a form of ceremony to Vivi who saved the hive from danger. Due to the abnormal size of the blade and decorations compared to the length of the handle, only Vivi can use it as it is optimized for them.
+\nIt inflicts additional damage that completely penetrates the defense with a certain probability when attacking.</description>
+    <graphicData>
+      <texPath>Things/Item/Equipment/VV_RitualLance</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.3</drawSize>
+    </graphicData>
+    <equippedAngleOffset>0</equippedAngleOffset>
+    
+    <techLevel>Medieval</techLevel>
+    <statBases>
+      <WorkToMake>50000</WorkToMake>
+      <Mass>4</Mass>
+    </statBases>
+    <equippedStatOffsets>
+      <MoveSpeed>-0.8</MoveSpeed>
+    </equippedStatOffsets>
+    <tradeNeverStack>true</tradeNeverStack>
+    <relicChance>2</relicChance>
+
+    <thingSetMakerTags><li>RewardStandardMidFreq</li></thingSetMakerTags>
+    <thingCategories Inherit="False">
+      <li>VV_ViviWeapon</li>
+    </thingCategories>
+    <weaponClasses>
+      <li>Melee</li>
+      <li>MeleePiercer</li>
+    </weaponClasses>
+    <weaponTags Inherit="False">
+      <li>VV_ViviExotic</li>
+    </weaponTags>
+    
+    <comps>
+      <li>
+        <compClass>CompQuality</compClass>
+      </li>
+      <li Class="CompProperties_Art">
+        <nameMaker>NamerArtWeaponMelee</nameMaker>
+        <descriptionMaker>ArtDescription_WeaponMelee</descriptionMaker>
+        <minQualityForArtistic>Excellent</minQualityForArtistic>
+      </li>
+    </comps>
+    <smeltable>false</smeltable>
+    <burnableByRecipe>true</burnableByRecipe>
+    <notifyMapRemoved>true</notifyMapRemoved>
+
+    <tools>
+      <li>
+        <label>shaft</label>
+        <capacities>
+          <li>Blunt</li>
+          <li>Poke</li>
+        </capacities>
+        <power>12</power>
+        <cooldownTime>1.7</cooldownTime>
+        <chanceFactor>0.33</chanceFactor>
+      </li>
+      <li>
+        <label>point</label>
+        <capacities>
+          <li>Stab</li>
+        </capacities>
+        <power>27</power>
+        <armorPenetration>0.3</armorPenetration>
+        <cooldownTime>3.9</cooldownTime>
+      </li>
+      <li>
+        <label>point</label>
+        <capacities>
+          <li>Stab</li>
+        </capacities>
+        <power>51</power>
+        <armorPenetration>0.9</armorPenetration>
+        <cooldownTime>3.9</cooldownTime>
+        <chanceFactor>0.33</chanceFactor>
+      </li>
+    </tools>
+    
+    <costList>
+      <Plasteel>75</Plasteel>
+      <VV_Lifestrand>45</VV_Lifestrand>
+      <VV_TitanicHornetWing>2</VV_TitanicHornetWing>
+    </costList>
+    
+    <recipeMaker>
+      <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+      <workSkill>Crafting</workSkill>
+      <effectWorking>Smith</effectWorking>
+      <soundWorking>Recipe_Smith</soundWorking>
+      <recipeUsers>
+        <li>ElectricSmithy</li>
+        <li>FueledSmithy</li>
+      </recipeUsers>
+      <unfinishedThingDef>UnfinishedWeapon</unfinishedThingDef>
+
+      <researchPrerequisites>
+        <li>VV_RitualWeaponry</li>
+      </researchPrerequisites>
+      <skillRequirements>
+        <Crafting>12</Crafting>
+      </skillRequirements>
+      <displayPriority>-530</displayPriority>
+    </recipeMaker>
+
+    <tradeTags>
+      <li>VV_ViviExotic</li>
+    </tradeTags>
+
+    <modExtensions>
+      <li Class="RPEF.ConstraintModExtension">
+        <def>VV_RaceConstraint</def>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- 비비 엘텍스 바늘 -->
+  <ThingDef ParentName="BaseWeapon">
+    <defName>VV_EltexNeedle</defName>
+    <label>vivi eltex needle</label>
+    <description>a specially processed sharp needle. Only Vivi can handle it, and when equipped, it resonates with the wearer and becomes bound so others cannot use it.
+\nWhen equipped, you can summon a ghost needle that moves freely ignoring physical laws through the needle, and attack enemies.
+\nThe ghost needle penetrates all obstacles and is always accurate. It also penetrates all enemies and shields in its path and tracks and attacks any surrounding targets that can be attacked.
+\nThe higher the psychic sensitivity, the more powerful and frequent the attacks can be, and the needles must be retrieved before they can attack again.</description>
+    <graphicData>
+      <texPath>Things/Item/Equipment/VV_Needle</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>1.3</drawSize>
+    </graphicData>
+    <equippedAngleOffset>-30</equippedAngleOffset>
+    <soundInteract>Interact_BeatFire</soundInteract>
+
+    <techLevel>Medieval</techLevel>
+    <statBases>
+      <WorkToMake>70000</WorkToMake>
+      <Mass>1</Mass>
+      <AccuracyTouch>1</AccuracyTouch>
+      <AccuracyShort>1</AccuracyShort>
+      <AccuracyMedium>1</AccuracyMedium>
+      <AccuracyLong>1</AccuracyLong>
+      <RangedWeapon_Cooldown>30.0</RangedWeapon_Cooldown>
+    </statBases>
+    <tradeNeverStack>true</tradeNeverStack>
+    <relicChance>3</relicChance>
+
+    <thingSetMakerTags><li>RewardStandardMidFreq</li></thingSetMakerTags>
+    <thingCategories Inherit="False">
+      <li>VV_ViviWeapon</li>
+    </thingCategories>
+    <weaponTags Inherit="False">
+      <li>VV_ViviExotic</li>
+      <li>VV_ViviGuardian</li>
+    </weaponTags>
+
+    <comps>
+      <li>
+        <compClass>CompQuality</compClass>
+      </li>
+      <li Class="CompProperties_Art">
+        <nameMaker>NamerArtWeaponMelee</nameMaker>
+        <descriptionMaker>ArtDescription_WeaponMelee</descriptionMaker>
+        <minQualityForArtistic>Excellent</minQualityForArtistic>
+      </li>
+      <li Class="CompProperties_Biocodable">
+        <biocodeOnEquip>true</biocodeOnEquip>
+      </li>
+    </comps>
+    <smeltable>false</smeltable>
+    <burnableByRecipe>true</burnableByRecipe>
+    <notifyMapRemoved>true</notifyMapRemoved>
+
+    <verbs>
+      <li>
+        <verbClass>Verb_LaunchProjectile</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>VV_Projectile_EltexNeedle</defaultProjectile>
+        <warmupTime>1.0</warmupTime>
+        <range>40.6</range>
+        <soundCast>Interact_BeatFire</soundCast>
+        <rangedFireRulepack>Combat_RangedFire_Thrown</rangedFireRulepack>
+      </li>
+    </verbs>
+
+    <tools>
+      <li>
+        <label>point</label>
+        <capacities>
+          <li>Stab</li>
+        </capacities>
+        <power>7</power>
+        <armorPenetration>0.5</armorPenetration>
+        <cooldownTime>1.4</cooldownTime>
+      </li>
+    </tools>
+    
+    <costList>
+      <Plasteel>100</Plasteel>
+      <VV_TitanicHornetWing>5</VV_TitanicHornetWing>
+      <VV_Lifestrand>200</VV_Lifestrand>
+    </costList>
+    
+    <recipeMaker>
+      <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+      <workSkill>Crafting</workSkill>
+      <effectWorking>Smith</effectWorking>
+      <soundWorking>Recipe_Smith</soundWorking>
+      <recipeUsers>
+        <li>ElectricSmithy</li>
+        <li>FueledSmithy</li>
+      </recipeUsers>
+      <unfinishedThingDef>UnfinishedWeapon</unfinishedThingDef>
+
+      <researchPrerequisites>
+        <li>VV_RitualWeaponry</li>
+      </researchPrerequisites>
+      <skillRequirements>
+        <Crafting>16</Crafting>
+      </skillRequirements>
+      <displayPriority>-531</displayPriority>
+    </recipeMaker>
+
+    <tradeTags>
+      <li>VV_ViviExotic</li>
+    </tradeTags>
+
+    <modExtensions>
+      <li Class="RPEF.ConstraintModExtension">
+        <def>VV_RaceConstraint</def>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseProjectileNeolithic">
+    <defName>VV_Projectile_EltexNeedle</defName>
+    <label>eltex needle</label>
+    <thingClass>VVRace.Needle</thingClass>
+    <graphicData>
+      <texPath>Things/Item/Equipment/VV_NeedleProjectile</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.5</drawSize>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+
+    <projectile Class="VVRace.NeedleProperties">
+      <damageDef>Stab</damageDef>
+      <damageAmountBase>12</damageAmountBase>
+      <stoppingPower>0.5</stoppingPower>
+      <armorPenetrationBase>0.33</armorPenetrationBase>
+      <speed>49</speed>
+
+      <maxAttackCount>7</maxAttackCount>
+      <targettingRadius>3.6</targettingRadius>
+      <overrunTicks>8~12</overrunTicks>
+
+      <maxAngleVelocity>10.1</maxAngleVelocity>
+      <forceDirectingRadiusSqr>11</forceDirectingRadiusSqr>
+    </projectile>
+
+    <comps>
+      <li Class="RPEF.CompProperties_TrailRenderer">
+        <texPath>VFX/VV_NeedleTrail</texPath>
+        <shader>MotePawnBodyGlow</shader>
+        <color>(1.0, 0.8, 0.6)</color>
+        <widthCurve>
+          <points>
+            <li>(0, 0)</li>
+            <li>(1, 1)</li>
+          </points>
+        </widthCurve>
+        <lineTextureMode>DistributePerSegment</lineTextureMode>
+        
+        <maxTrailPoint>15</maxTrailPoint>
+        <refreshIntervalTicks>1</refreshIntervalTicks>
+      </li>
+    </comps>
+  </ThingDef>
+</Defs>

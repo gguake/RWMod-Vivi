@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <ThingDef Abstract="True" Name="VV_FemaleApparelBase" ParentName="ApparelMakeableBase">
+    <smeltable>false</smeltable>
+    <thingCategories>
+      <li>VV_ViviApparel</li>
+    </thingCategories>
+
+    <apparel>
+      <tags>
+        <li>VV_ViviApparel</li>
+      </tags>
+      <canBeDesiredForIdeo>false</canBeDesiredForIdeo>
+      <developmentalStageFilter>Adult</developmentalStageFilter>
+    </apparel>
+
+    <tradeTags Inherit="False">
+      <li>VV_RoyalViviApparel</li>
+    </tradeTags>
+    
+    <colorGenerator Class="ColorGenerator_White" />
+    
+    <modExtensions>
+      <li Class="RPEF.ConstraintModExtension">
+        <def>VV_FemaleApparelConstraint</def>
+      </li>
+      <li Class="RPEF.ApparelGraphicHook">
+        <defaultBodyTypeGraphicOverride>Female</defaultBodyTypeGraphicOverride>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <ThingDef ParentName="VV_FemaleApparelBase">
+    <defName>VV_BasicRoyalCostume</defName>
+    <label>vivi basic royal costume</label>
+    <description>A simple dress worn by Royal Vivis.</description>
+    <graphicData>
+      <texPath>Things/Apparel/BasicRoyalCostume</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+
+    <smeltable>false</smeltable>
+    <statBases>
+      <MaxHitPoints>180</MaxHitPoints>
+      <WorkToMake>4800</WorkToMake>
+      <Mass>0.6</Mass>
+      <StuffEffectMultiplierArmor>0.24</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>1.0</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>1.0</StuffEffectMultiplierInsulation_Heat>
+      <EquipDelay>1.5</EquipDelay>
+    </statBases>
+    <equippedStatOffsets>
+      <SocialImpact>0.2</SocialImpact>
+      <TradePriceImprovement>0.2</TradePriceImprovement>
+      <ToxicEnvironmentResistance>0.1</ToxicEnvironmentResistance>
+    </equippedStatOffsets>
+
+    <costStuffCount>80</costStuffCount>
+    <stuffCategories>
+      <li>Fabric</li>
+      <li>Leathery</li>
+    </stuffCategories>
+
+    <apparel>
+      <useWornGraphicMask>true</useWornGraphicMask>
+      <wornGraphicPath>Things/Apparel/BasicRoyalCostume</wornGraphicPath>
+      <bodyPartGroups>
+        <li>Neck</li>
+        <li>Shoulders</li>
+        <li>Torso</li>
+        <li>Arms</li>
+        <li>Hands</li>
+        <li>Legs</li>
+      </bodyPartGroups>
+      <layers>
+        <li>OnSkin</li>
+      </layers>
+      <tags>
+        <li>VV_ViviStartingApparel</li>
+        <li>Royal</li>
+        <li>RoyalTier2</li>
+        <li>RoyalTier5</li>
+      </tags>
+    </apparel>
+    
+    <recipeMaker>
+      <recipeUsers>
+        <li>CraftingSpot</li>
+      </recipeUsers>
+      <researchPrerequisite>VV_Apparels</researchPrerequisite>
+      <displayPriority>3200</displayPriority>
+    </recipeMaker>
+  </ThingDef>
+</Defs>

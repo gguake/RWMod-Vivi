@@ -3,7 +3,7 @@ using Verse;
 
 namespace VVRace
 {
-    public class ActiveDropPodInfoCustom : ActiveDropPodInfo
+    public class ActiveDropPodInfoCustom : ActiveTransporterInfo
     {
         public ThingDef activeDropPod;
         public ThingDef incomingDropPod;

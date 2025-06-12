@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <StyleItemCategoryDef>
+    <defName>VV_Vivi</defName>
+    <label>vivi</label>
+  </StyleItemCategoryDef>
+
+  <HairDef Abstract="True" Name="ViviHairBase">
+    <styleGender>Female</styleGender>
+    <category>VV_Vivi</category>
+    <hairGender>Female</hairGender>
+    <styleTags>
+      <li>Rural</li>
+      <li>Urban</li>
+      <li>Tribal</li>
+      <li>VV_Vivi</li>
+    </styleTags>
+
+    <modExtensions>
+      <li Class="RPEF.ConstraintModExtension">
+        <def>VV_RaceConstraint</def>
+      </li>
+    </modExtensions>
+  </HairDef>
+
+  <HairDef ParentName="ViviHairBase">
+    <defName>VV_HairA</defName>
+    <label>vivi hairA</label>
+    <texPath>Things/Pawn/Vivi/Hairs/HairA</texPath>
+  </HairDef>
+
+  <HairDef ParentName="ViviHairBase">
+    <defName>VV_HairB</defName>
+    <label>vivi hairB</label>
+    <texPath>Things/Pawn/Vivi/Hairs/HairB</texPath>
+  </HairDef>
+
+  <HairDef ParentName="ViviHairBase">
+    <defName>VV_HairC</defName>
+    <label>vivi hairC</label>
+    <texPath>Things/Pawn/Vivi/Hairs/HairC</texPath>
+  </HairDef>
+
+  <HairDef ParentName="ViviHairBase">
+    <defName>VV_HairD</defName>
+    <label>vivi hairD</label>
+    <texPath>Things/Pawn/Vivi/Hairs/HairD</texPath>
+  </HairDef>
+
+  <HairDef ParentName="ViviHairBase">
+    <defName>VV_HairE</defName>
+    <label>vivi hairE</label>
+    <texPath>Things/Pawn/Vivi/Hairs/HairE</texPath>
+  </HairDef>
+
+  <HairDef ParentName="ViviHairBase">
+    <defName>VV_HairF</defName>
+    <label>vivi hairF</label>
+    <texPath>Things/Pawn/Vivi/Hairs/HairF</texPath>
+  </HairDef>
+
+  <HairDef ParentName="ViviHairBase">
+    <defName>VV_HairG</defName>
+    <label>vivi hairG</label>
+    <texPath>Things/Pawn/Vivi/Hairs/HairG</texPath>
+  </HairDef>
+</Defs>

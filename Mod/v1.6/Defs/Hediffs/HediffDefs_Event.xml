@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <HediffDef>
+    <defName>VV_GeneticUnstability</defName>
+    <label>genetic unstable</label>
+    <labelNoun>genetic unstability</labelNoun>
+    <description>Vivi's genes have become extremely unstable, leading to unpredictable cell division. Continuous treatment is necessary, and in the worst case, something terrible will happen..</description>
+    <hediffClass>VVRace.Hediff_GeneticUnstablity</hediffClass>
+    <defaultLabelColor>(1, 0.2, 0.2)</defaultLabelColor>
+    <initialSeverity>0.4</initialSeverity>
+    <tendable>true</tendable>
+    <stages>
+      <li>
+        <label>painful</label>
+        <lifeThreatening>true</lifeThreatening>
+        <painOffset>0.4</painOffset>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <postFactor>0.5</postFactor>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <label>debilitating</label>
+        <minSeverity>0.6</minSeverity>
+        <lifeThreatening>true</lifeThreatening>
+        <painOffset>0.6</painOffset>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <setMax>0.1</setMax>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <label>fatal</label>
+        <minSeverity>1</minSeverity>
+      </li>
+    </stages>
+  </HediffDef>
+  
+  <HediffDef>
+    <defName>VV_EverflowerImpact</defName>
+    <label>everflower fatigue</label>
+    <description>Somewhat tired due to the influence of the everflower's fragrance.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(1,1,0)</defaultLabelColor>
+    
+    <isBad>false</isBad>
+    <priceImpact>false</priceImpact>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <initialSeverity>1</initialSeverity>
+    <maxSeverity>1</maxSeverity>
+
+    <stages>
+      <li>
+        <statOffsets>
+          <RestFallRateFactor>0.05</RestFallRateFactor>
+        </statOffsets>
+      </li>
+    </stages>
+
+    <comps>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-0.2</severityPerDay>
+        <showDaysToRecover>true</showDaysToRecover>
+        <showHoursToRecover>true</showHoursToRecover>
+      </li>
+    </comps>
+  </HediffDef>
+</Defs>

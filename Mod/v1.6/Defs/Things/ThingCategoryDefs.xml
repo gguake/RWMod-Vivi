@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <ThingCategoryDef>
+    <defName>VV_ViviWeapon</defName>
+    <label>vivi weapons</label>
+    <parent>Weapons</parent>
+    <iconPath>UI/Icons/ThingCategories/VV_ViviWeapon</iconPath>
+  </ThingCategoryDef>
+
+  <ThingCategoryDef>
+    <defName>VV_ViviApparel</defName>
+    <label>vivi apparel</label>
+    <parent>Apparel</parent>
+    <iconPath>UI/Icons/ThingCategories/VV_ViviApparel</iconPath>
+  </ThingCategoryDef>
+
+  <ThingCategoryDef>
+    <defName>VV_ViviTool</defName>
+    <label>vivi tool</label>
+    <parent>VV_ViviApparel</parent>
+    <iconPath>UI/Icons/ThingCategories/VV_ViviEquipments</iconPath>
+  </ThingCategoryDef>
+
+  <ThingCategoryDef>
+    <defName>VV_BuildingsVivi</defName>
+    <label>vivi buildings</label>
+    <parent>Buildings</parent>
+    <iconPath>UI/Icons/ThingCategories/VV_ViviBuildings</iconPath>
+  </ThingCategoryDef>
+  
+  <ThingCategoryDef>
+    <defName>VV_ViviProduct</defName>
+    <label>vivi honey products</label>
+    <parent>AnimalProductRaw</parent>
+    <iconPath>UI/Icons/ThingCategories/VV_ViviProduct</iconPath>
+  </ThingCategoryDef>
+  
+  <ThingCategoryDef>
+    <defName>VV_ViviResource</defName>
+    <label>vivi resources</label>
+    <parent>ResourcesRaw</parent>
+    <iconPath>UI/Icons/ThingCategories/VV_ViviResource</iconPath>
+  </ThingCategoryDef>
+
+  <ThingCategoryDef>
+    <defName>VV_Petal</defName>
+    <label>petals</label>
+    <parent>VV_ViviResource</parent>
+    <iconPath>UI/Icons/ThingCategories/VV_ViviProduct</iconPath>
+  </ThingCategoryDef>
+  
+  <ThingCategoryDef>
+    <defName>VV_ArcanePlant</defName>
+    <label>arcane plant</label>
+    <parent>Root</parent>
+    <iconPath>UI/Icons/ThingCategories/VV_ArcanePlant</iconPath>
+  </ThingCategoryDef>
+</Defs>

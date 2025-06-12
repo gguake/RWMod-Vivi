@@ -77,7 +77,8 @@ namespace VVRace
             yield return commandActivateShield;
         }
 
-        public override void PostDeSpawn(Map map)
+
+        public override void PostDeSpawn(Map map, DestroyMode mode = DestroyMode.Vanish)
         {
             if (_shield != null)
             {

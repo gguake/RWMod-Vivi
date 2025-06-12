@@ -88,7 +88,7 @@ namespace VVRace
                 __result = false;
             }
 
-            if (typeof(ActiveDropPod).IsAssignableFrom(newThingDef.thingClass) && typeof(ActiveDropPod).IsAssignableFrom(oldThingDef.thingClass))
+            if (typeof(ActiveTransporter).IsAssignableFrom(newThingDef.thingClass) && typeof(ActiveTransporter).IsAssignableFrom(oldThingDef.thingClass))
             {
                 __result = false;
             }
@@ -214,7 +214,7 @@ namespace VVRace
         {
             var instructions = codeInstructions.ToList();
 
-            var index = instructions.FindIndex(v => v.opcode == OpCodes.Newobj && v.OperandIs(AccessTools.Constructor(typeof(ActiveDropPodInfo))));
+            var index = instructions.FindIndex(v => v.opcode == OpCodes.Newobj && v.OperandIs(AccessTools.Constructor(typeof(ActiveTransporterInfo))));
             if (index < 0) { throw new NotImplementedException("failed to find index for patch CompLaunchable_TryLaunch"); }
 
             var skipLabel = il.DefineLabel();
@@ -276,7 +276,7 @@ namespace VVRace
                 var injectionIndex = instructions.FindIndex(
                     v =>
                     v.opcode == OpCodes.Callvirt &&
-                    v.OperandIs(AccessTools.PropertySetter(typeof(ActiveDropPod), nameof(ActiveDropPod.Contents))));
+                    v.OperandIs(AccessTools.PropertySetter(typeof(ActiveTransporter), nameof(ActiveTransporter.Contents))));
 
                 var jumpIndex = instructions.FindIndex(
                     v =>

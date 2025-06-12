@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+  <Operation Class="PatchOperationSequence">
+    <operations>
+
+      <li Class="PatchOperationAdd" MayRequire="Ludeon.RimWorld.Ideology">
+        <xpath>Defs/ThingDef[plant/sowTags/li="DecorativeTree"]/statBases</xpath>
+        <value>
+          <VV_MinGrowthPlantGatherable>0.7</VV_MinGrowthPlantGatherable>
+          <VV_PlantGatherCooldown>1</VV_PlantGatherCooldown>
+          <VV_TreeResinGatherYield>1</VV_TreeResinGatherYield>
+        </value>
+      </li>
+
+
+      <li Class="PatchOperationAdd" MayRequire="Ludeon.RimWorld.Royalty">
+        <xpath>Defs/FactionDef[defName="Empire"]/permanentEnemyToEveryoneExcept</xpath>
+        <value>
+          <li>VV_ViviFederation</li>
+          <li>VV_PlayerVivi</li>
+          <li>VV_PlayerExiledVivi</li>
+          <li>VV_PlayerViviRefugee</li>
+        </value>
+      </li>
+      
+        <!-- Guests -->
+      <li Class="PatchOperationAdd" MayRequire="Ludeon.RimWorld.Royalty">
+        <xpath>Defs/QuestScriptDef/root[@Class="QuestNode_Sequence"]/nodes/li[@Class="QuestNode_IsSet"]/node[@Class="QuestNode_GetRandomPawnKindForFaction"]/choices</xpath>
+        <order>Prepend</order>
+        <value>
+          <li>
+            <factionDef>VV_ViviFederation</factionDef>
+            <pawnKinds>
+              <li>VV_RoyalVivi</li>
+              <li>VV_ViviTribesman</li>
+            </pawnKinds>
+          </li>
+        </value>
+      </li>
+
+      <!-- Mercenaries -->
+      <li Class="PatchOperationAdd" MayRequire="Ludeon.RimWorld.Royalty">
+        <xpath>Defs/QuestScriptDef/root[@Class="QuestNode_Sequence"]/nodes/li[@Class="QuestNode_GetRandomPawnKindForFaction"]/choices</xpath>
+        <order>Prepend</order>
+        <value>
+          <li>
+            <factionDef>VV_ViviFederation</factionDef>
+            <pawnKinds>
+              <li>VV_ViviGuard</li>
+              <li>VV_ViviArcher</li>
+            </pawnKinds>
+          </li>  
+        </value>
+      </li>
+      
+      <!-- Meditation -->
+      <li Class="PatchOperationAdd">
+        <xpath>/Defs/MeditationFocusDef[defName="Natural"]/requiredBackstoriesAny</xpath>
+        <value>
+          <li>
+            <categoryName>VV_SettlerBackstory</categoryName>
+            <slot>Childhood</slot>
+          </li>
+        </value>
+      </li>
+    </operations>
+  </Operation>
+
+</Patch>

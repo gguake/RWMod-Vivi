@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <VV_ViviMetabolism.label>과다한 신진대사</VV_ViviMetabolism.label>
+  <VV_ViviMetabolism.description>비비 고유의 유전자로 기술 습득 속도가 대폭 증가하며 성장 단계에서 학습 관련 보너스를 받습니다.
+\n성장과 노화가 매우 빠르게 진행되고 일반적인 방법으로 생식할 수 없습니다.</VV_ViviMetabolism.description>
+
+  <VV_HoneyDepedency.label>과당 의존증</VV_HoneyDepedency.label>
+  <VV_HoneyDepedency.description>이 유전자를 보유하면 꿀이나 암브로시아에 포함된 과당을 주기적으로 섭취해야 건강을 유지할 수 있습니다. 꿀이나 암브로시아 섭취 없이 5일이 지나면 결핍에 시달립니다.</VV_HoneyDepedency.description>
+  
+  <VV_Skin_Melanin.label>피부색</VV_Skin_Melanin.label>
+  <VV_Skin_Melanin.description>이 유전자를 보유하면 특정 피부색을 갖습니다. 다수의 피부색 유전자를 보유하면 하나를 무작위로 선택합니다.</VV_Skin_Melanin.description>
+</LanguageData>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <BackstoryDef ParentName="VV_ViviAdultBackstory">
+    <defName>VV_ViviExiled</defName>
+    <title>vivi exiled</title>
+    <titleShort>exiled</titleShort>
+    <description>[PAWN_nameDef] was banished from the nest where he lived due to his different appearance. To survive, [PAWN_pronoun] learned various skills that are not necessary for ordinary royal vivi.</description>
+    <spawnCategories>
+      <li>VV_PlayerExiledBackstory</li>
+    </spawnCategories>
+    <skillGains>
+      <Shooting>-5</Shooting>
+      <Melee>-5</Melee>
+      <Mining>-5</Mining>
+      <Artistic>-5</Artistic>
+      <Social>-5</Social>
+      <Cooking>5</Cooking>
+      <Animals>5</Animals>
+      <Medicine>5</Medicine>
+      <Crafting>5</Crafting>
+      <Intellectual>5</Intellectual>
+    </skillGains>
+
+    <forcedTraits>
+      <Industriousness>2</Industriousness>
+    </forcedTraits>
+  </BackstoryDef>
+</Defs>

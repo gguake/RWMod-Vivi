@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <PawnKindDef ParentName="ViviBase" Name="ViviNPCBase" Abstract="True">
+    <defaultFactionDef>VV_ViviFederation</defaultFactionDef>
+    <invNutrition>2.55</invNutrition>
+    <invFoodDef>VV_FilteredHoney</invFoodDef>
+    
+    <apparelIgnorePollution>true</apparelIgnorePollution>
+    <backstoryFiltersOverride>
+      <li>
+        <categories>
+          <li>VV_SettlerBackstory</li>
+        </categories>
+      </li>
+    </backstoryFiltersOverride>
+  </PawnKindDef>
+
+  <!-- 일반 비비 -->
+  <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
+    <defName>VV_ViviTribesman</defName>
+    <label>vivi tribesman</label>
+    <combatPower>70</combatPower>
+    <isFighter>false</isFighter>
+    <itemQuality>Poor</itemQuality>
+
+    <gearHealthRange>0.4~1.1</gearHealthRange>
+    <apparelMoney>500~1000</apparelMoney>
+    <weaponMoney>1000~1500</weaponMoney>
+    <weaponTags>
+      <li>VV_ViviWeapon</li>
+      <li>VV_ViviTool</li>
+    </weaponTags>
+
+    <initialWillRange>1~2</initialWillRange>
+    <initialResistanceRange>10~17</initialResistanceRange>
+    <forcedBodyType>Thin</forcedBodyType>
+    
+    <modExtensions>
+      <li Class="RPEF.PawnGeneratorKindHook">
+        <replaceHooks>
+          <Refugee MayRequire="Ludeon.RimWorld.Royalty">700</Refugee>
+          <Slave>700</Slave>
+        </replaceHooks>
+      </li>
+    </modExtensions>
+  </PawnKindDef>
+
+  <!-- 비비 가드 -->
+  <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
+    <defName>VV_ViviGuard</defName>
+    <label>vivi guard</label>
+    <combatPower>140</combatPower>
+    <isFighter>true</isFighter>
+    <itemQuality>Normal</itemQuality>
+
+    <requiredWorkTags>
+      <li>Violent</li>
+    </requiredWorkTags>
+
+    <gearHealthRange>0.9~3.2</gearHealthRange>
+    <apparelMoney>1000~2000</apparelMoney>
+    <apparelTags>
+      <li>VV_ViviCombatApparel</li>
+    </apparelTags>
+    <weaponMoney>1000~1500</weaponMoney>
+    <weaponTags>
+      <li>VV_ViviWeapon</li>
+    </weaponTags>
+
+    <initialWillRange>3~5</initialWillRange>
+    <initialResistanceRange>30~40</initialResistanceRange>
+
+    <backstoryFiltersOverride Inherit="False">
+      <li>
+        <categories>
+          <li>VV_CombatSettlerBackstory</li>
+        </categories>
+      </li>
+    </backstoryFiltersOverride>
+    <forcedBodyType>Thin</forcedBodyType>
+  </PawnKindDef>
+
+  <!-- 비비 아처 -->
+  <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
+    <defName>VV_ViviArcher</defName>
+    <label>vivi archer</label>
+    <combatPower>140</combatPower>
+    <isFighter>true</isFighter>
+    <itemQuality>Normal</itemQuality>
+
+    <requiredWorkTags>
+      <li>Violent</li>
+    </requiredWorkTags>
+
+    <gearHealthRange>0.9~3.2</gearHealthRange>
+    <apparelMoney>400~1500</apparelMoney>
+    <weaponMoney>1000~1500</weaponMoney>
+    <weaponTags>
+      <li>VV_ViviWeaponRange</li>
+    </weaponTags>
+
+    <initialWillRange>3~5</initialWillRange>
+    <initialResistanceRange>30~40</initialResistanceRange>
+
+    <backstoryFiltersOverride Inherit="False">
+      <li>
+        <categories>
+          <li>VV_CombatSettlerBackstory</li>
+        </categories>
+      </li>
+    </backstoryFiltersOverride>
+    <forcedBodyType>Thin</forcedBodyType>
+  </PawnKindDef>
+  
+  <!-- 로열 비비 여제 -->
+  <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
+    <defName>VV_RoyalViviEmpress</defName>
+    <label>royal vivi empress</label>
+    <combatPower>300</combatPower>
+    <isFighter>true</isFighter>
+    <itemQuality>Masterwork</itemQuality>
+
+    <requiredWorkTags>
+      <li>Violent</li>
+    </requiredWorkTags>
+
+    <gearHealthRange>1.5~4.2</gearHealthRange>
+    <apparelMoney>5000~10000</apparelMoney>
+    <apparelTags>
+      <li>VV_RoyalViviApparel</li>
+      <li>VV_ViviCombatApparel</li>
+    </apparelTags>
+    <apparelRequired>
+      <li>VV_GuardianCoat</li>
+    </apparelRequired>
+
+    <nakedChance>0</nakedChance>
+
+    <weaponMoney>5000~10000</weaponMoney>
+    <weaponTags>
+      <li>VV_ViviGuardian</li>
+    </weaponTags>
+
+    <acceptArrestChanceFactor>0.5</acceptArrestChanceFactor>
+    <factionHostileOnDeath>true</factionHostileOnDeath>
+    <initialWillRange>80~90</initialWillRange>
+    <initialResistanceRange>48~70</initialResistanceRange>
+
+    <isRoyal>true</isRoyal>
+    <forcedBodyType>Female</forcedBodyType>
+  </PawnKindDef>
+  
+  
+  <!-- 리더 로열 비비 -->
+  <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
+    <defName>VV_RoyalViviLeader</defName>
+    <label>royal vivi leader</label>
+    <combatPower>100</combatPower>
+    <isFighter>true</isFighter>
+    <itemQuality>Good</itemQuality>
+    <factionLeader>true</factionLeader>
+
+    <requiredWorkTags>
+      <li>Violent</li>
+    </requiredWorkTags>
+
+    <gearHealthRange>1.2~3.2</gearHealthRange>
+    <apparelMoney>5000~10000</apparelMoney>
+    <apparelTags>
+      <li>VV_RoyalViviApparel</li>
+      <li>VV_ViviCombatApparel</li>
+      <li>BeltDefensePop</li>
+    </apparelTags>
+    <apparelRequired>
+      <li>VV_GuardianCoat</li>
+    </apparelRequired>
+
+    <nakedChance>0</nakedChance>
+
+    <weaponMoney>5000~10000</weaponMoney>
+    <weaponTags>
+      <li>VV_ViviGuardian</li>
+    </weaponTags>
+
+    <acceptArrestChanceFactor>0.1</acceptArrestChanceFactor>
+    <factionHostileOnDeath>true</factionHostileOnDeath>
+    <initialWillRange>16~19</initialWillRange>
+    <initialResistanceRange>38~58</initialResistanceRange>
+
+    <isRoyal>true</isRoyal>
+    <forcedBodyType>Female</forcedBodyType>
+  </PawnKindDef>
+  
+  <!-- 일반 로열 비비 -->
+  <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
+    <defName>VV_RoyalVivi</defName>
+    <label>royal vivi</label>
+    <combatPower>90</combatPower>
+    <isFighter>false</isFighter>
+    <itemQuality>Normal</itemQuality>
+
+    <gearHealthRange>0.9~3.2</gearHealthRange>
+    <apparelMoney>600~1000</apparelMoney>
+    <apparelTags>
+      <li>VV_RoyalViviApparel</li>
+      <li>BeltDefensePop</li>
+    </apparelTags>
+
+    <nakedChance>0</nakedChance>
+
+    <weaponMoney>1000~1500</weaponMoney>
+    <weaponTags>
+      <li>VV_ViviWeaponRange</li>
+    </weaponTags>
+
+    <acceptArrestChanceFactor>0.5</acceptArrestChanceFactor>
+    <initialWillRange>16~19</initialWillRange>
+    <initialResistanceRange>38~58</initialResistanceRange>
+
+    <isRoyal>true</isRoyal>
+    <forcedBodyType>Female</forcedBodyType>
+
+    <modExtensions>
+      <li Class="RPEF.PawnGeneratorKindHook">
+        <replaceHooks>
+          <Refugee MayRequire="Ludeon.RimWorld.Royalty">200</Refugee>
+          <Slave>200</Slave>
+        </replaceHooks>
+      </li>
+    </modExtensions>
+  </PawnKindDef>
+  
+  <!-- 상인 로열 비비 -->
+  <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
+    <defName>VV_RoyalViviTrader</defName>
+    <label>royal vivi</label>
+    <trader>true</trader>
+    <combatPower>90</combatPower>
+    <isFighter>false</isFighter>
+    <itemQuality>Normal</itemQuality>
+
+    <gearHealthRange>1~2</gearHealthRange>
+    <apparelMoney>600~3000</apparelMoney>
+    <apparelTags>
+      <li>VV_RoyalViviApparel</li>
+      <li>BeltDefensePop</li>
+    </apparelTags>
+
+    <nakedChance>0</nakedChance>
+
+    <weaponMoney>1000~1500</weaponMoney>
+    <weaponTags>
+      <li>VV_ViviWeaponRange</li>
+    </weaponTags>
+
+    <acceptArrestChanceFactor>0.5</acceptArrestChanceFactor>
+    <initialWillRange>16~19</initialWillRange>
+    <initialResistanceRange>38~58</initialResistanceRange>
+
+    <isRoyal>true</isRoyal>
+    <forcedBodyType>Female</forcedBodyType>
+  </PawnKindDef>
+</Defs>

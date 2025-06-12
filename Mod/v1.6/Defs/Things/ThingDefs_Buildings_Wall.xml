@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 비비 크림 벽 -->
+  <ThingDef ParentName="Wall">
+    <defName>VV_ViviCreamWall</defName>
+    <label>vivicream wall</label>
+    <description>a makeshift wall made of Vivi's cream. It's impassable and supports roofs, but it's very vulnerable to impact.
+\nBy refining and drying this wall, it can be turned into a sturdy structure. Its unique structure allows it to be constructed on unstable ground.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_SmoothedViviCreamWall</ThingDef>
+    </descriptionHyperlinks>
+
+    <graphicData>
+      <texPath>Things/Building/Linked/RockFlecked_Atlas</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <color>(1.0, 0.9, 0.7, 1.0)</color>
+      <colorTwo>(1.0, 1.0, 1.0, 1.0)</colorTwo>
+    </graphicData>
+    
+    <uiOrder>2100</uiOrder>
+    <uiIconPath>Things/Building/VV_ViviCreamWall_MenuIcon</uiIconPath>
+    <uiIconColor>(1.0, 0.9, 0.7, 1.0)</uiIconColor>
+    <statBases>
+      <MaxHitPoints>60</MaxHitPoints>
+      <WorkToBuild>80</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Beauty>-2</Beauty>
+    </statBases>
+    <building>
+      <smoothedThing>VV_SmoothedViviCreamWall</smoothedThing>
+      <isPlaceOverableWall>true</isPlaceOverableWall>
+    </building>
+
+    <costList>
+      <VV_Vivicream>2</VV_Vivicream>
+    </costList>
+    <useStuffTerrainAffordance>false</useStuffTerrainAffordance>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    
+    <designationCategory>VV_Bulidings</designationCategory>
+    <designationHotKey>Misc2</designationHotKey>
+    <researchPrerequisites>
+      <li>VV_BasicInfra</li>
+    </researchPrerequisites>
+    
+    <damageMultipliers Inherit="False">
+      <li>
+        <damageDef>Bullet</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Arrow</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Blunt</damageDef>
+        <multiplier>2</multiplier>
+      </li>
+      <li>
+        <damageDef>Poke</damageDef>
+        <multiplier>2</multiplier>
+      </li>
+      <li>
+        <damageDef>Demolish</damageDef>
+        <multiplier>2</multiplier>
+      </li>
+      <li>
+        <damageDef>Bomb</damageDef>
+        <multiplier>2</multiplier>
+      </li>
+      <li>
+        <damageDef>Thump</damageDef>
+        <multiplier>2</multiplier>
+      </li>
+      <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>2</multiplier>
+      </li>
+    </damageMultipliers>
+    
+    <costStuffCount>0</costStuffCount>
+    <stuffCategories Inherit="False"></stuffCategories>
+  </ThingDef>
+
+  <!-- 매끄러운 비비 크림 벽 -->
+  <ThingDef ParentName="Wall">
+    <defName>VV_SmoothedViviCreamWall</defName>
+    <label>smoothed vivicream wall</label>
+    <description>a refined Vivi cream wall. It's impassable and supports roofs, but it's very vulnerable to impact.
+\nOnce the cream dries over time, it becomes a sturdy wall.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_ViviHoneycombWall</ThingDef>
+    </descriptionHyperlinks>
+
+    <graphicData>
+      <texPath>Things/Building/Wall_Atlas_UnfinishedHoneycombWall</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <color>(1.0, 0.9, 0.7, 1.0)</color>
+    </graphicData>
+    <tickerType>Long</tickerType>
+    
+    <uiIconPath>Things/Building/VV_UnfinishedHoneycombWall_Icon</uiIconPath>
+    <uiIconColor>(1.0, 0.9, 0.7, 1.0)</uiIconColor>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <Flammability>0.9</Flammability>
+    </statBases>
+    <building>
+      <relatedBuildCommands>
+        <li>VV_ViviCreamWall</li>
+      </relatedBuildCommands>
+    </building>
+    <costList>
+      <VV_Vivicream>2</VV_Vivicream>
+    </costList>
+    <useStuffTerrainAffordance>false</useStuffTerrainAffordance>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    
+    <designationCategory Inherit="False" />
+    <comps Inherit="False">
+      <li Class="VVRace.CompProperties_CompWallReplace">
+        <replaceTicks>540000</replaceTicks>
+        <replaceThing>VV_ViviHoneycombWall</replaceThing>
+      </li>
+    </comps>
+    
+    <damageMultipliers Inherit="False">
+      <li>
+        <damageDef>Bullet</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Arrow</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Blunt</damageDef>
+        <multiplier>2</multiplier>
+      </li>
+      <li>
+        <damageDef>Poke</damageDef>
+        <multiplier>2</multiplier>
+      </li>
+      <li>
+        <damageDef>Demolish</damageDef>
+        <multiplier>2</multiplier>
+      </li>
+      <li>
+        <damageDef>Bomb</damageDef>
+        <multiplier>2</multiplier>
+      </li>
+      <li>
+        <damageDef>Thump</damageDef>
+        <multiplier>2</multiplier>
+      </li>
+      <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>2</multiplier>
+      </li>
+    </damageMultipliers>
+    
+    <costStuffCount>0</costStuffCount>
+    <stuffCategories Inherit="False"></stuffCategories>
+  </ThingDef>
+  
+  <!-- 비비 벌집 벽 -->
+  <ThingDef ParentName="Wall">
+    <defName>VV_ViviHoneycombWall</defName>
+    <label>vivi honeycomb wall</label>
+    <description>a hexagonal structured honeycomb wall. It's impassable and supports roofs.
+\nWhile it's very sturdy against various impacts, it's very vulnerable to fire.</description>
+    
+    <graphicData>
+      <texPath>Things/Building/Wall_Atlas_HoneycombWall</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutWithOverlay</shaderType>
+      <color>(1, 1, 1, 1)</color>
+    </graphicData>
+    
+    <uiIconPath>Things/Building/VV_HoneycombWall_Icon</uiIconPath>
+    <uiIconColor>(1.0, 0.8, 0.6, 1.0)</uiIconColor>
+    <statBases>
+      <MaxHitPoints>480</MaxHitPoints>
+      <Flammability>0.55</Flammability>
+    </statBases>
+    <building>
+      <relatedBuildCommands>
+        <li>VV_ViviCreamWall</li>
+      </relatedBuildCommands>
+    </building>
+    <costList>
+      <VV_Viviwax>2</VV_Viviwax>
+    </costList>
+    <useStuffTerrainAffordance>false</useStuffTerrainAffordance>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    
+    <designationCategory Inherit="False" />
+    <damageMultipliers Inherit="False">
+      <li>
+        <damageDef>Cut</damageDef>
+        <multiplier>0.25</multiplier>
+      </li>
+      <li>
+        <damageDef>Crush</damageDef>
+        <multiplier>0.25</multiplier>
+      </li>
+      <li>
+        <damageDef>Blunt</damageDef>
+        <multiplier>0.25</multiplier>
+      </li>
+      <li>
+        <damageDef>Poke</damageDef>
+        <multiplier>0.25</multiplier>
+      </li>
+      <li>
+        <damageDef>Stab</damageDef>
+        <multiplier>0.25</multiplier>
+      </li>
+      <li>
+        <damageDef>Scratch</damageDef>
+        <multiplier>0.25</multiplier>
+      </li>
+      <li>
+        <damageDef>ScratchToxic</damageDef>
+        <multiplier>0.25</multiplier>
+      </li>
+      <li>
+        <damageDef>Bite</damageDef>
+        <multiplier>0.25</multiplier>
+      </li>
+      <li>
+        <damageDef>ToxicBite</damageDef>
+        <multiplier>0.25</multiplier>
+      </li>
+      <li>
+        <damageDef>RangedStab</damageDef>
+        <multiplier>0.25</multiplier>
+      </li>
+      <li>
+        <damageDef>Bullet</damageDef>
+        <multiplier>0.25</multiplier>
+      </li>
+      <li>
+        <damageDef>Arrow</damageDef>
+        <multiplier>0.25</multiplier>
+      </li>
+      <li>
+        <damageDef>ArrowHighVelocity</damageDef>
+        <multiplier>0.25</multiplier>
+      </li>
+      <li>
+        <damageDef>Bomb</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>BombSuper</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Thump</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Demolish</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Mining</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>8</multiplier>
+      </li>
+      <li>
+        <damageDef>Burn</damageDef>
+        <multiplier>8</multiplier>
+      </li>
+    </damageMultipliers>
+    
+    <costStuffCount>0</costStuffCount>
+    <stuffCategories Inherit="False"></stuffCategories>
+
+    <comps>
+      <li Class="VVRace.CompProperties_ShowDesignator">
+        <designatorType>VVRace.Designator_FortifyHoneycombWall</designatorType>
+        <designationDef>VV_FortifyHoneycombWall</designationDef>
+        <researchProjectDef>VV_Lifestrand</researchProjectDef>
+      </li>
+    </comps>
+  </ThingDef>
+  
+  <!-- 경화된 비비 벌집 벽 -->
+  <ThingDef ParentName="Wall">
+    <defName>VV_ViviHardenHoneycombWall</defName>
+    <label>vivi harden honeycomb wall</label>
+    <description>a hexagonal structured harden honeycomb wall. It's impassable and supports roofs.
+\nIt's slightly less durable than regular honeycomb walls, but it's fire-resistant, making it a good choice for exterior walls.</description>
+    
+    <graphicData>
+      <texPath>Things/Building/Wall_Atlas_HardenHoneycombWall</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutWithOverlay</shaderType>
+      <color>(1, 1, 1, 1)</color>
+    </graphicData>
+    
+    <uiIconPath>Things/Building/VV_HardenHoneycombWall_Icon</uiIconPath>
+    <uiIconColor>(1.0, 0.8, 0.6, 1.0)</uiIconColor>
+    <statBases>
+      <MaxHitPoints>450</MaxHitPoints>
+      <Flammability>0</Flammability>
+    </statBases>
+    <building>
+      <relatedBuildCommands>
+        <li>VV_ViviCreamWall</li>
+      </relatedBuildCommands>
+    </building>
+    <costList>
+      <VV_Viviwax>2</VV_Viviwax>
+      <VV_Lifestrand>1</VV_Lifestrand>
+    </costList>
+    <useStuffTerrainAffordance>false</useStuffTerrainAffordance>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    
+    <designationCategory Inherit="False" />
+    <damageMultipliers Inherit="False">
+      <li>
+        <damageDef>Cut</damageDef>
+        <multiplier>0.55</multiplier>
+      </li>
+      <li>
+        <damageDef>Crush</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Blunt</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Poke</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Stab</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Scratch</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>ScratchToxic</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Bite</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>ToxicBite</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>RangedStab</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Bullet</damageDef>
+        <multiplier>0.25</multiplier>
+      </li>
+      <li>
+        <damageDef>Arrow</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>ArrowHighVelocity</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Bomb</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>BombSuper</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Thump</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Demolish</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Mining</damageDef>
+        <multiplier>0.67</multiplier>
+      </li>
+      <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>2</multiplier>
+      </li>
+      <li>
+        <damageDef>Burn</damageDef>
+        <multiplier>2</multiplier>
+      </li>
+    </damageMultipliers>
+    
+    <costStuffCount>0</costStuffCount>
+    <stuffCategories Inherit="False"></stuffCategories>
+    
+    <researchPrerequisites>
+      <li>VV_Lifestrand</li>
+    </researchPrerequisites>
+  </ThingDef>
+  
+</Defs>

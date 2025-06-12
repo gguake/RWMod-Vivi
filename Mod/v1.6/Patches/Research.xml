@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[
+        defName="TreeSowing" or 
+        defName="PassiveCooler" or 
+        defName="Stonecutting" or 
+        defName="ComplexFurniture" or
+        defName="ComplexClothing"
+        ]/tags</xpath>
+    <value>
+      <li>VV_ViviStart</li>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="DrugProduction"]/tags</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ResearchProjectDef[defName="DrugProduction"]</xpath>
+      <value>
+        <tags>
+          <li>VV_ExiledVivi</li>
+        </tags>
+      </value>
+    </nomatch>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ResearchProjectDef[defName="DrugProduction"]/tags</xpath>
+      <value>
+        <li>VV_ExiledVivi</li>
+      </value>
+    </match>
+  </Operation>
+  
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Devilstrand"]/tags</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ResearchProjectDef[defName="Devilstrand"]</xpath>
+      <value>
+        <tags>
+          <li>VV_ExiledVivi</li>
+        </tags>
+      </value>
+    </nomatch>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ResearchProjectDef[defName="Devilstrand"]/tags</xpath>
+      <value>
+        <li>VV_ExiledVivi</li>
+      </value>
+    </match>
+  </Operation>
+  
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Smithing"]/tags</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ResearchProjectDef[defName="Smithing"]</xpath>
+      <value>
+        <tags>
+          <li>VV_ViviRefugee</li>
+        </tags>
+      </value>
+    </nomatch>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ResearchProjectDef[defName="Smithing"]/tags</xpath>
+      <value>
+        <li>VV_ViviRefugee</li>
+      </value>
+    </match>
+  </Operation>
+</Patch>

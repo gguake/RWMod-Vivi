@@ -16,7 +16,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Build|AnyCPU' ">
     <DebugType>none</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\Mod\v1.5\Assemblies\</OutputPath>
+    <OutputPath>..\Mod\v1.6\Assemblies\</OutputPath>
     <DefineConstants>
     </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -24,7 +24,7 @@
     <NoWarn>CS0649</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Build_Dev|AnyCPU'">
-    <OutputPath>..\Mod\v1.5\Assemblies\</OutputPath>
+    <OutputPath>..\Mod\v1.6\Assemblies\</OutputPath>
     <Optimize>true</Optimize>
     <NoWarn>CS0649</NoWarn>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -136,7 +136,6 @@
     <Compile Include="ArcanePlant\Growing\UI\Dialog_StartGrowingArcanePlant.cs" />
     <Compile Include="ArcanePlant\Growing\UI\ITab_ArcanePlantFarmBill.cs" />
     <Compile Include="ArcanePlant\Plant\UI\ITab_ManaFluxStats.cs" />
-    <Compile Include="Book\Book_Vivi.cs" />
     <Compile Include="Egg\Comps\CompViviEggLayer.cs" />
     <Compile Include="GlideAbility\CompAbilityEffect_FoodCost.cs" />
     <Compile Include="GlideAbility\CompAbility_RequiresBodyPart.cs" />
@@ -172,7 +171,6 @@
     <Compile Include="MapGeneration\SymbolResolvers\Settlement\SymbolResolver_HexaRoomBarracks.cs" />
     <Compile Include="Gather\UI\ITab_GatherWorkTable.cs" />
     <Compile Include="MapGeneration\SymbolResolvers\SymbolResolver_EdgeHoneycombWall.cs" />
-    <Compile Include="Book\ReadingOutcomeDoerGainResearchIncludeOnly.cs" />
     <Compile Include="RPEF\PawnRenderSubWorker_WingCondition.cs" />
     <Compile Include="Utility\Graphics\Graphic_Conditional.cs" />
     <Compile Include="ArcanePlant\Plant\Comps\CompHeatPusherMana.cs" />
@@ -254,6 +252,5 @@
     <Compile Include="VVDefOf.cs" />
     <Compile Include="Wall\Designator_FortifyHoneycombWall.cs" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

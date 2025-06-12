@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 말벌 날개 정제 -->
+  <RecipeDef>
+    <defName>VV_RefineTitanicHornetWing</defName>
+    <label>refine titanic hornet wing</label>
+    <description>Refine lifestrand from titanic hornet wing.</description>
+
+    <jobString>refining hornet wing.</jobString>
+    <workAmount>800</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <workSkill>Crafting</workSkill>
+    <workSkillLearnFactor>0.03</workSkillLearnFactor>
+
+    <effectWorking>Smelt</effectWorking>
+    <soundWorking>Recipe_Brewing</soundWorking>
+    <uiIconThing>VV_Lifestrand</uiIconThing>
+
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_TitanicHornetWing</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>VV_TitanicHornetWing</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <VV_Lifestrand>25</VV_Lifestrand>
+    </products>
+    <researchPrerequisite>VV_Lifestrand</researchPrerequisite>
+  </RecipeDef>
+
+  <!-- 생체 가닥 직조 -->
+  <RecipeDef>
+    <defName>VV_MakeLifestrand</defName>
+    <label>weave lifestrand</label>
+    <description>Process devilstrand with mana-infused materials to weave lifestrand.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_LivingLeaf</ThingDef>
+    </descriptionHyperlinks>
+
+    <jobString>weaving lifestrand.</jobString>
+    <workAmount>2800</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <workSkill>Crafting</workSkill>
+
+    <effectWorking>Tailor</effectWorking>
+    <soundWorking>Recipe_Tailor</soundWorking>
+    <uiIconThing>VV_Lifestrand</uiIconThing>
+
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>DevilstrandCloth</li>
+          </thingDefs>
+        </filter>
+        <count>40</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_LivingLeaf</li>
+          </thingDefs>
+        </filter>
+        <count>10</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_HeatingPetal</li>
+            <li>VV_CoolingPetal</li>
+            <li>VV_SparklingPetal</li>
+          </thingDefs>
+        </filter>
+        <count>20</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>VV_HeatingPetal</li>
+        <li>VV_CoolingPetal</li>
+        <li>VV_SparklingPetal</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <VV_Lifestrand>40</VV_Lifestrand>
+    </products>
+    <researchPrerequisite>VV_Lifestrand</researchPrerequisite>
+
+    <skillRequirements>
+      <Crafting>8</Crafting>
+    </skillRequirements>
+  </RecipeDef>
+
+  <!-- 대량 꿀 정제 -->
+  <RecipeDef>
+    <defName>VV_ExtractBulkHoney</defName>
+    <label>extract bulk honey</label>
+    <description>Extract pure honey from a large amount of Vivi honey.</description>
+
+    <jobString>extrating honey.</jobString>
+    <workAmount>400</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+
+    <effectWorking>Cremate</effectWorking>
+    <soundWorking>Recipe_Cremate</soundWorking>
+    <uiIconThing>VV_FilteredHoney</uiIconThing>
+
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_RawHoney</li>
+          </thingDefs>
+        </filter>
+        <count>75</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>VV_RawHoney</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <VV_FilteredHoney>35</VV_FilteredHoney>
+    </products>
+  </RecipeDef>
+
+  <!-- 대량 프로폴리스 정제 -->
+  <RecipeDef>
+    <defName>VV_ExtractBulkPropolis</defName>
+    <label>refining bulk propolis</label>
+    <description>Refine a large amount of propolis at once. It is much faster and more efficient than manual labor.</description>
+
+    <jobString>refining propolis.</jobString>
+    <workAmount>1800</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+
+    <effectWorking>Cremate</effectWorking>
+    <soundWorking>Recipe_Cremate</soundWorking>
+    <uiIconThing>Neutroamine</uiIconThing>
+
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_Propolis</li>
+          </thingDefs>
+        </filter>
+        <count>20</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>VV_Propolis</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <MedicineHerbal>6</MedicineHerbal>
+      <Neutroamine>6</Neutroamine>
+    </products>
+  </RecipeDef>
+
+  <!-- 대량 비료 정제-->
+  <RecipeDef>
+    <defName>VV_MakeFertilizerSeeds</defName>
+    <label>make bulk fertilizer</label>
+    <description>Extract mana components from a large amount of unknown seeds or pollens to make fertilizers.</description>
+    <jobString>making fertilizer.</jobString>
+    <workAmount>1500</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+
+    <effectWorking>Cremate</effectWorking>
+    <soundWorking>Recipe_Cremate</soundWorking>
+    <uiIconThing>VV_Fertilizer</uiIconThing>
+
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <ingredientValueGetterClass>IngredientValueGetter_Nutrition</ingredientValueGetterClass>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>Foods</li>
+            <li>PlantMatter</li>
+          </categories>
+          <disallowedCategories>
+            <li>FoodMeals</li>
+          </disallowedCategories>
+        </filter>
+        <count>3.5</count>
+      </li>
+      <li>
+        <filter>
+          <customSummary>pollen or unknown seeds</customSummary>
+          <thingDefs>
+            <li>VV_Pollen</li>
+            <li>VV_UnknownSeed</li>
+          </thingDefs>
+        </filter>
+        <count>1.0</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>VV_Pollen</li>
+        <li>VV_UnknownSeed</li>
+      </thingDefs>
+      <categories>
+        <li>Foods</li>
+        <li>PlantMatter</li>
+      </categories>
+      <disallowedThingDefs>
+        <li>VV_Propolis</li>
+      </disallowedThingDefs>
+      <disallowedCategories>
+        <li>FoodMeals</li>
+      </disallowedCategories>
+    </fixedIngredientFilter>
+    <defaultIngredientFilter>
+      <thingDefs>
+        <li>VV_Pollen</li>
+      </thingDefs>
+      <categories>
+        <li>FoodRaw</li>
+      </categories>
+      <disallowedCategories>
+        <li>AnimalProductRaw</li>
+      </disallowedCategories>
+    </defaultIngredientFilter>
+    <products>
+      <VV_Fertilizer>45</VV_Fertilizer>
+    </products>
+  </RecipeDef>
+</Defs>

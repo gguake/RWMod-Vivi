@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+	<ResearchTabDef>
+		<defName>VV_Vivi</defName>
+		<label>vivi tech</label>
+    <generalTitle>vivi research projects</generalTitle>
+    <generalDescription>Unlock vivi's unique technologies.</generalDescription>
+	</ResearchTabDef>
+
+  <ResearchProjectTagDef>
+    <defName>VV_ViviStart</defName>
+  </ResearchProjectTagDef>
+
+  <ResearchProjectTagDef>
+    <defName>VV_ExiledVivi</defName>
+  </ResearchProjectTagDef>
+
+  <ResearchProjectTagDef>
+    <defName>VV_ViviRefugee</defName>
+  </ResearchProjectTagDef>
+
+  <!-- 테크 1 -->
+  <ResearchProjectDef Abstract="True" Name="ViviResearchProjectTier1Base">
+		<tab>VV_Vivi</tab>
+    <techLevel>Neolithic</techLevel>
+  </ResearchProjectDef>
+  
+  <ResearchProjectDef ParentName="ViviResearchProjectTier1Base">
+    <defName>VV_BasicInfra</defName>
+    <label>vivi basic infrastructures</label>
+    <description>Build basic production facilities and structures for the Vivis.</description>
+    <baseCost>400</baseCost>
+    <researchViewX>0</researchViewX>
+    <researchViewY>0.7</researchViewY>
+
+    <tags>
+      <li>VV_ViviStart</li>
+    </tags>
+  </ResearchProjectDef>
+	
+  <ResearchProjectDef ParentName="ViviResearchProjectTier1Base">
+    <defName>VV_Apparels</defName>
+    <label>vivi apparels</label>
+    <description>Make basic clothing for the Vivis.</description>
+    <baseCost>200</baseCost>
+    <researchViewX>0</researchViewX>
+    <researchViewY>0</researchViewY>
+    
+    <tags>
+      <li>VV_ExiledVivi</li>
+      <li>VV_ViviRefugee</li>
+    </tags>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef ParentName="ViviResearchProjectTier1Base">
+    <defName>VV_AdvancedApparels</defName>
+    <label>vivi advanced apparels</label>
+    <description>You make advanced clothing for the Vivis.</description>
+    <baseCost>600</baseCost>
+    <researchViewX>1</researchViewX>
+    <researchViewY>0</researchViewY>
+    <prerequisites>
+      <li>VV_Apparels</li>
+    </prerequisites>
+
+    <tags>
+      <li>VV_ViviRefugee</li>
+    </tags>
+  </ResearchProjectDef>
+  
+  <ResearchProjectDef ParentName="ViviResearchProjectTier1Base">
+    <defName>VV_Weaponry</defName>
+    <label>vivi weaponry</label>
+    <description>Make traditional weapons used by the Vivis.</description>
+    <baseCost>600</baseCost>
+    <researchViewX>0</researchViewX>
+    <researchViewY>3.5</researchViewY>
+
+    <tags>
+      <li>VV_ViviRefugee</li>
+    </tags>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef ParentName="ViviResearchProjectTier1Base">
+    <defName>VV_BasicGathering</defName>
+    <label>basic gathering</label>
+    <description>Build facilities for collecting and processing honey and pollen, the staple foods of the Vivis.</description>
+    <baseCost>300</baseCost>
+    <researchViewX>1</researchViewX>
+    <researchViewY>0.7</researchViewY>
+
+    <tags>
+      <li>VV_ViviStart</li>
+    </tags>
+  </ResearchProjectDef>
+  
+  <ResearchProjectDef ParentName="ViviResearchProjectTier1Base">
+    <defName>VV_Tools</defName>
+    <label>gathering tools</label>
+    <description>Make tools for the Vivis to use in gathering.</description>
+    <baseCost>300</baseCost>
+    <researchViewX>2</researchViewX>
+    <researchViewY>0</researchViewY>
+    <prerequisites>
+      <li>VV_BasicGathering</li>
+    </prerequisites>
+    
+    <tags>
+      <li>VV_ViviStart</li>
+    </tags>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef ParentName="ViviResearchProjectTier1Base">
+    <defName>VV_AdvancedGathering</defName>
+    <label>advanced gathering</label>
+    <description>Can collect and process propolis from trees.</description>
+    <baseCost>900</baseCost>
+    <researchViewX>2</researchViewX>
+    <researchViewY>0.7</researchViewY>
+    <prerequisites>
+      <li>VV_BasicGathering</li>
+    </prerequisites>
+    <techLevel>Medieval</techLevel>
+  </ResearchProjectDef>
+  
+  <ResearchProjectDef ParentName="ViviResearchProjectTier1Base">
+    <defName>VV_ArcaneBotany</defName>
+    <label>arcane botany</label>
+    <description>Build facilities to cultivate arcane plants with various uses.</description>
+    <discoveredLetterTitle>Arcane plant</discoveredLetterTitle>
+    <discoveredLetterText>To cultivate arcane plants, you need unidentified seeds, and each plant requires different materials. Regular maintenance during cultivation is necessary for good results, and you must apply mana fertilizer to sustain their vitality.
+\nArcane plants produce and consume a resource called mana. Each plant must meet specific conditions to produce mana. If the produced mana exceeds its storage capacity, it transfers to adjacent arcane plants, so make sure to utilize this feature effectively.</discoveredLetterText>
+    <baseCost>700</baseCost>
+    <researchViewX>2</researchViewX>
+    <researchViewY>1.4</researchViewY>
+    <prerequisites>
+      <li>VV_BasicGathering</li>
+    </prerequisites>
+    <techLevel>Medieval</techLevel>
+    <tags>
+      <li>VV_ExiledVivi</li>
+    </tags>
+  </ResearchProjectDef>
+</Defs>

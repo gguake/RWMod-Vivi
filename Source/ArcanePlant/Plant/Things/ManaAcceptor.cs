@@ -1,4 +1,5 @@
 ﻿using RimWorld;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Verse;
@@ -83,7 +84,7 @@ namespace VVRace
             }
         }
 
-        public override void Tick()
+        protected override void TickInterval(int delta)
         {
             if (Spawned)
             {
@@ -92,13 +93,11 @@ namespace VVRace
                     ManaFluxGrid.RefreshNetworks();
                 }
 
-                if (ManaFluxNetwork != null && (Find.TickManager.TicksGame + ManaFluxNetwork.NetworkHash) % GenTicks.TickRareInterval == 0)
+                if (ManaFluxNetwork != null && Math.Abs((Find.TickManager.TicksGame + ManaFluxNetwork.NetworkHash) % GenTicks.TickRareInterval) < delta)
                 {
                     ManaFluxNetwork.Tick();
                 }
             }
-
-            base.Tick();
         }
 
         public override void Print(SectionLayer layer)

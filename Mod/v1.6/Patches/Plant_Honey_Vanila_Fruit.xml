@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+  <!-- Plant_Agave -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Plant_Agave"]/comps</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Plant_Agave"]</xpath>
+      <value><comps /></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Plant_Agave"]/comps</xpath>
+    <value>
+      <li Class="VVRace.CompProperties_RepeatGatherable" />
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Plant_Agave"]/statBases</xpath>
+    <value>
+      <VV_MinGrowthPlantGatherable>0.9</VV_MinGrowthPlantGatherable>
+      <VV_PlantGatherCooldown>1</VV_PlantGatherCooldown>
+      <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
+    </value>
+  </Operation>
+  
+  <!-- Plant_Strawberry -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Plant_Strawberry"]/comps</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Plant_Strawberry"]</xpath>
+      <value><comps /></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Plant_Strawberry"]/comps</xpath>
+    <value>
+      <li Class="VVRace.CompProperties_RepeatGatherable" />
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Plant_Strawberry"]/statBases</xpath>
+    <value>
+      <VV_MinGrowthPlantGatherable>0.9</VV_MinGrowthPlantGatherable>
+      <VV_PlantGatherCooldown>1</VV_PlantGatherCooldown>
+      <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
+    </value>
+  </Operation>
+  
+  <!-- Plant_Berry -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Plant_Berry"]/comps</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Plant_Berry"]</xpath>
+      <value><comps /></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Plant_Berry"]/comps</xpath>
+    <value>
+      <li Class="VVRace.CompProperties_RepeatGatherable" />
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Plant_Berry"]/statBases</xpath>
+    <value>
+      <VV_MinGrowthPlantGatherable>0.9</VV_MinGrowthPlantGatherable>
+      <VV_PlantGatherCooldown>1</VV_PlantGatherCooldown>
+      <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
+    </value>
+  </Operation>
+  
+  <!-- Plant_Ambrosia -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Plant_Ambrosia"]/comps</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Plant_Ambrosia"]</xpath>
+      <value><comps /></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Plant_Ambrosia"]/comps</xpath>
+    <value>
+      <li Class="VVRace.CompProperties_RepeatGatherable" />
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Plant_Ambrosia"]/statBases</xpath>
+    <value>
+      <VV_MinGrowthPlantGatherable>0.9</VV_MinGrowthPlantGatherable>
+      <VV_PlantGatherCooldown>1</VV_PlantGatherCooldown>
+      <VV_PlantHoneyGatherYield>3</VV_PlantHoneyGatherYield>
+    </value>
+  </Operation>
+</Patch>

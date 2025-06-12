@@ -30,7 +30,7 @@ namespace VVRace
 
             if (target != null)
             {
-                using (var pawnPath = pawn.Map.pathFinder.FindPath(pawn.Position, target.Position, TraverseParms.For(pawn, Danger.Deadly, TraverseMode.PassDoors)))
+                using (var pawnPath = pawn.Map.pathFinder.FindPathNow(pawn.Position, target.Position, TraverseParms.For(pawn, Danger.Deadly, TraverseMode.PassDoors)))
                 {
                     if (!pawnPath.Found)
                     {

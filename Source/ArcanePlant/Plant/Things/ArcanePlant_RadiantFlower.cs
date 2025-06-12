@@ -22,28 +22,12 @@ namespace VVRace
 
         private bool? _lastCompGlowerState = null;
 
-        public override void Tick()
+        protected override void TickInterval(int delta)
         {
-            base.Tick();
-
             if (!Spawned || Destroyed)
             {
                 return;
             }
-
-            UpdateGraphic();
-        }
-
-        public override void TickRare()
-        {
-            base.TickRare();
-
-            UpdateGraphic();
-        }
-
-        public override void TickLong()
-        {
-            base.TickLong();
 
             UpdateGraphic();
         }

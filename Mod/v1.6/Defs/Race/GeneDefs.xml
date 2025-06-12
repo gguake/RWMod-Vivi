@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <GeneDef>
+    <defName>VV_ViviMetabolism</defName>
+    <label>excessive metabolism</label>
+    <description>Vivi's unique genes greatly increase their speed of technology acquisition, and they receive learning bonuses at developmental stages.
+\nThey age and grow very quickly and cannot reproduce via traditional methods.</description>
+    <iconPath>UI/Icons/Genes/Gene_Vivi</iconPath>
+    <displayCategory>Miscellaneous</displayCategory>
+    <biologicalAgeTickFactorFromAgeCurve>
+      <points>
+        <li>(0, 2)</li>
+        <li>(3, 3)</li>
+        <li>(6.999999, 3)</li>
+        <li>(7, 3)</li>
+        <li>(12.999999, 3)</li>
+        <li>(13, 11)</li>
+      </points>
+    </biologicalAgeTickFactorFromAgeCurve>
+    <biostatMet>-4</biostatMet>
+    <biostatCpx>4</biostatCpx>
+    <sterilize>true</sterilize>
+    <statOffsets>
+      <GlobalLearningFactor>0.5</GlobalLearningFactor>
+    </statOffsets>
+    <statFactors>
+      <LearningRateFactor>2.0</LearningRateFactor>
+    </statFactors>
+    <canGenerateInGeneSet>false</canGenerateInGeneSet>
+  </GeneDef>
+  
+  <GeneDef>
+    <defName>VV_HoneyDepedency</defName>
+    <label>fructose dependency</label>
+    <description>Carriers of this gene need to ingest vivi honey or ambrosia on a regular basis to survive. After 5 days without vivi honey or ambrosia, carriers will suffer from fructose deficiency.</description>
+    <geneClass>VVRace.Gene_HoneyDependency</geneClass>
+    <iconPath>UI/Icons/Genes/Gene_Vivi2</iconPath>
+    <displayCategory>Miscellaneous</displayCategory>
+    <biostatMet>2</biostatMet>
+    <biostatCpx>1</biostatCpx>
+    <canGenerateInGeneSet>false</canGenerateInGeneSet>
+  </GeneDef>
+  
+  <GeneDef ParentName="GeneSkinColorMelanin">
+    <defName>VV_Skin_Melanin</defName>
+    <skinColorBase>(255, 255, 255)</skinColorBase>
+    <minMelanin>0</minMelanin>
+    <selectionWeight>1</selectionWeight>
+  </GeneDef>
+</Defs>

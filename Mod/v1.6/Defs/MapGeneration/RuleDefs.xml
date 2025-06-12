@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <RuleDef>
+    <defName>VV_ThingSetStorage</defName>
+    <symbol>vv_thingSet_storage</symbol>
+    <resolvers>
+      <li Class="VVRace.SymbolResolver_ThingSetStorage" />
+    </resolvers>
+  </RuleDef>
+
+  <RuleDef>
+    <defName>VV_HexaClear</defName>
+    <symbol>vv_hexa_clear</symbol>
+    <resolvers>
+      <li Class="VVRace.SymbolResolver_HexaClear" />
+    </resolvers>
+  </RuleDef>
+
+  <RuleDef>
+    <defName>VV_HexaRoof</defName>
+    <symbol>vv_hexa_roof</symbol>
+    <resolvers>
+      <li Class="VVRace.SymbolResolver_HexaRoof" />
+    </resolvers>
+  </RuleDef>
+  
+  <RuleDef>
+    <defName>VV_HexaFloor</defName>
+    <symbol>vv_hexa_floor</symbol>
+    <resolvers>
+      <li Class="VVRace.SymbolResolver_HexaFloor" />
+    </resolvers>
+  </RuleDef>
+  
+  <RuleDef>
+    <defName>VV_HexaEdgeHoneycombWall</defName>
+    <symbol>vv_hexa_edge_honeycomb_wall</symbol>
+    <resolvers>
+      <li Class="VVRace.SymbolResolver_HexaEdgeHoneycombWall" />
+    </resolvers>
+  </RuleDef>
+  
+  <RuleDef>
+    <defName>VV_EdgeHoneycombWall</defName>
+    <symbol>vv_edge_honeycomb_wall</symbol>
+    <resolvers>
+      <li Class="VVRace.SymbolResolver_EdgeHoneycombWall" />
+    </resolvers>
+  </RuleDef>
+  
+  <RuleDef>
+    <defName>VV_ArcanePlant</defName>
+    <symbol>vv_arcane_plant</symbol>
+    <resolvers>
+      <li Class="VVRace.SymbolResolver_ArcanePlant" />
+    </resolvers>
+  </RuleDef>
+</Defs>

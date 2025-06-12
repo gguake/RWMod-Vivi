@@ -88,7 +88,7 @@ namespace VVRace
             ResetCurrentTarget();
         }
 
-        public override void Tick()
+        protected override void TickInterval(int delta)
         {
             base.Tick();
 
@@ -115,7 +115,7 @@ namespace VVRace
                     {
                         _burstCooldownTicksLeft--;
                     }
-                    if (_burstCooldownTicksLeft <= 0 && this.IsHashIntervalTick(30))
+                    if (_burstCooldownTicksLeft <= 0 && this.IsHashIntervalTick(30, delta))
                     {
                         TryStartShootSomething(canBeginBurstImmediately: true);
                     }
@@ -155,8 +155,10 @@ namespace VVRace
             }
         }
 
-        public override bool ClaimableBy(Faction by, StringBuilder reason = null)
-            => base.ClaimableBy(by, reason) && !Active;
+        public override AcceptanceReport ClaimableBy(Faction by)
+        {
+            return base.ClaimableBy(by) && !Active;
+        }
 
         protected void TryActivateBurst()
         {

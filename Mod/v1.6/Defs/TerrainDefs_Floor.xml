@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <TerrainDef ParentName="FloorBase">
+    <defName>VV_ViviCreamFloor</defName>
+    <label>vivi cream floor</label>
+    <description>The floor is made by spreading Vivi cream on the ground. It's less comfortable to walk on than a dirt road, but it can be made quickly and doesn't produce dust.
+\nIt can be refined into honeycomb tiles, but in many ways, it's less efficient than using wax from the start.</description>
+    <texturePath>Terrain/Surfaces/VV_Cream</texturePath>
+    <color>(1.0, 0.898, 0.8)</color>
+    <edgeType>Hard</edgeType>
+    <renderPrecedence>70</renderPrecedence>
+    <isPaintable>true</isPaintable>
+    <takeSplashes>true</takeSplashes>
+
+    <pathCost>4</pathCost>
+    <uiOrder>2020</uiOrder>
+    <statBases>
+      <WorkToBuild>100</WorkToBuild>
+      <Cleanliness>-0.5</Cleanliness>
+      <Flammability>0.22</Flammability>
+    </statBases>
+
+    <constructEffect>ConstructDirt</constructEffect>
+    <costList>
+      <VV_Vivicream>5</VV_Vivicream>
+    </costList>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <smoothedTerrain>VV_HoneycombTile</smoothedTerrain>
+
+    <affordances>
+      <li>SmoothableStone</li>
+    </affordances>
+
+    <designationCategory>VV_Bulidings</designationCategory>
+    <designationHotKey>Misc1</designationHotKey>
+
+    <researchPrerequisites>
+      <li>VV_BasicInfra</li>
+    </researchPrerequisites>
+  </TerrainDef>
+
+  <TerrainDef ParentName="FloorBase">
+    <defName>VV_HoneycombTile</defName>
+    <label>vivi honeycomb tile</label>
+    <description>The floor is filled with hexagonal tiles made of wax. It's comfortable to walk on, clean, and nice to look at.
+\nIt can be built even on unstable ground.</description>
+    <texturePath>Terrain/Surfaces/VV_HoneycombTile</texturePath>
+    <color>(1.0, 0.898, 0.647)</color>
+    <edgeType>Hard</edgeType>
+    <renderPrecedence>70</renderPrecedence>
+    <isPaintable>true</isPaintable>
+
+    <uiOrder>2021</uiOrder>
+    <statBases>
+      <WorkToBuild>300</WorkToBuild>
+      <Beauty>1</Beauty>
+      <CleaningTimeFactor>0.7</CleaningTimeFactor>
+      <FilthMultiplier>0.9</FilthMultiplier>
+      <Flammability>0.1</Flammability>
+    </statBases>
+
+    <constructEffect>ConstructWood</constructEffect>
+    <costList>
+      <VV_Viviwax>3</VV_Viviwax>
+    </costList>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+
+    <designationCategory>VV_Bulidings</designationCategory>
+    <designationHotKey>Misc2</designationHotKey>
+    <constructionSkillPrerequisite>3</constructionSkillPrerequisite>
+
+    <researchPrerequisites>
+      <li>VV_BasicInfra</li>
+    </researchPrerequisites>
+  </TerrainDef>
+
+<TerrainDef ParentName="FloorBase">
+  <defName>VV_SterileHoneycombTile</defName>
+  <label>vivi sterile honeycomb tile</label>
+  <description>This is an sterile tile made in Vivi's traditional way. It uses propolis, a powerful sterile substance, so it's cleaner than regular sterile tiles, but harder and more time-consuming to make.
+\nDue to the material's characteristics, it is very vulnerable to fire, but its structure allows construction even on unstable ground.</description>
+  <renderPrecedence>243</renderPrecedence>
+  <texturePath>Terrain/Surfaces/VV_SterileTile</texturePath>
+  <color>(1.0, 0.898, 0.647)</color>
+  <edgeType>Hard</edgeType>
+  <pollutionTintColor>(0.95, 0.95, 0.93, 1)</pollutionTintColor>
+  <isPaintable>true</isPaintable>
+  <burnedDef>BurnedWoodPlankFloor</burnedDef>
+
+  <uiOrder>2050</uiOrder>
+  <statBases>
+    <WorkToBuild>2400</WorkToBuild>
+    <Beauty>1</Beauty>
+    <Cleanliness>0.7</Cleanliness>
+    <CleaningTimeFactor>0.5</CleaningTimeFactor>
+    <Flammability>1.0</Flammability>
+  </statBases>
+
+  <constructEffect>ConstructWood</constructEffect>
+  <costList>
+    <VV_Viviwax>9</VV_Viviwax>
+    <VV_Propolis>5</VV_Propolis>
+  </costList>
+  <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+
+  <designationCategory>VV_Bulidings</designationCategory>
+  <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
+  <researchPrerequisites>
+    <li>SterileMaterials</li>
+    <li>VV_AdvancedGathering</li>
+  </researchPrerequisites>
+</TerrainDef>
+
+</Defs>

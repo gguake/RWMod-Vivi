@@ -210,25 +210,7 @@ namespace VVRace
             return sb.ToString();
         }
 
-        public override void Tick()
-        {
-            base.Tick();
-            Tick(1);
-        }
-
-        public override void TickRare()
-        {
-            base.TickRare();
-            Tick(GenTicks.TickRareInterval);
-        }
-
-        public override void TickLong()
-        {
-            base.TickLong();
-            Tick(GenTicks.TickLongInterval);
-        }
-
-        private void Tick(int ticks)
+        protected override void TickInterval(int delta)
         {
             if (Spawned && _bill != null)
             {
@@ -239,7 +221,7 @@ namespace VVRace
                         break;
 
                     case GrowingArcanePlantBillStage.Growing:
-                        _bill.Tick(ticks);
+                        _bill.Tick(delta);
                         break;
 
                     case GrowingArcanePlantBillStage.Complete:

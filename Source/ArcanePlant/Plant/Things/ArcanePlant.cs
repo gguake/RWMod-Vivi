@@ -314,11 +314,12 @@ namespace VVRace
             }
         }
 
-        private List<IntVec3> _tmpGrowingNearFlowerCells = new List<IntVec3>();
-        public override void Tick()
-        {
-            base.Tick();
+        public override int UpdateRateTicks => 150;
+        protected override int MaxTickIntervalRate => 200;
 
+        private List<IntVec3> _tmpGrowingNearFlowerCells = new List<IntVec3>();
+        protected override void TickInterval(int delta)
+        {
             if (!Spawned || Destroyed)
             {
                 return;
@@ -331,61 +332,55 @@ namespace VVRace
                 return;
             }
 
-            if (this.IsHashIntervalTick(GenTicks.TickRareInterval))
+            if ((int)Mana == 0)
             {
-                if ((int)Mana == 0)
-                {
-                    _zeroManaTicks += GenTicks.TickRareInterval;
+                _zeroManaTicks += delta;
 
-                    if (_zeroManaTicks >= ArcanePlantModExtension.zeroManaDurableTicks)
-                    {
-                        _zeroManaTicks = 0;
-                        TakeDamage(new DamageInfo(DamageDefOf.Rotting, ArcanePlantModExtension.zeroManaDamageByChance.RandomInRange));
-                    }
-                }
-                else if (ManaChargeRatio > 0.1f)
+                if (_zeroManaTicks >= ArcanePlantModExtension.zeroManaDurableTicks)
                 {
-                    HitPoints = Mathf.Clamp(HitPoints + 1, 0, MaxHitPoints);
+                    _zeroManaTicks = 0;
+                    TakeDamage(new DamageInfo(DamageDefOf.Rotting, ArcanePlantModExtension.zeroManaDamageByChance.RandomInRange));
                 }
             }
-
-            if (this.IsHashIntervalTick(GenTicks.TickLongInterval))
+            else if (ManaChargeRatio > 0.1f)
             {
-                var flowerDef = ArcanePlantModExtension.growingAdjacentFlowerDef;
-                if (flowerDef != null)
+                HitPoints = Mathf.Clamp(HitPoints + 1, 0, MaxHitPoints);
+            }
+
+            var flowerDef = ArcanePlantModExtension.growingAdjacentFlowerDef;
+            if (flowerDef != null)
+            {
+                if (GenTicks.TicksGame >= _nextGrowNearFlowerTick)
                 {
-                    if (GenTicks.TicksGame >= _nextGrowNearFlowerTick)
+                    if (Rand.Chance(ArcanePlantModExtension.growingAdjacentFlowerChance))
                     {
-                        if (Rand.Chance(ArcanePlantModExtension.growingAdjacentFlowerChance))
+                        foreach (var cell in GenRadial.RadialCellsAround(Position, ArcanePlantModExtension.growingAdjacentFlowerRange, false))
                         {
-                            foreach (var cell in GenRadial.RadialCellsAround(Position, ArcanePlantModExtension.growingAdjacentFlowerRange, false))
-                            {
-                                if (cell.InBounds(Map) == false || 
-                                    cell.GetPlant(Map) != null || 
-                                    cell.GetEdifice(Map) != null || 
-                                    Map.fertilityGrid.FertilityAt(cell) <= 0f || 
-                                    flowerDef.CanEverPlantAt(cell, Map) == false) { continue; }
+                            if (cell.InBounds(Map) == false ||
+                                cell.GetPlant(Map) != null ||
+                                cell.GetEdifice(Map) != null ||
+                                Map.fertilityGrid.FertilityAt(cell) <= 0f ||
+                                flowerDef.CanEverPlantAt(cell, Map) == false) { continue; }
 
-                                _tmpGrowingNearFlowerCells.Add(cell);
-                            }
+                            _tmpGrowingNearFlowerCells.Add(cell);
                         }
-
-                        if (_tmpGrowingNearFlowerCells.Count > 0)
-                        {
-                            var cell = _tmpGrowingNearFlowerCells.RandomElement();
-                            var plant = (ViviFlower)ThingMaker.MakeThing(flowerDef);
-                            plant.Growth = 0.1f;
-                            GenSpawn.Spawn(plant, cell, Map);
-                            _tmpGrowingNearFlowerCells.Clear();
-                        }
-
-                        _nextGrowNearFlowerTick = GenTicks.TicksGame + ArcanePlantModExtension.growingAdjacentFlowerIntervalTicks.Lerped(1f - ManaChargeRatio);
                     }
+
+                    if (_tmpGrowingNearFlowerCells.Count > 0)
+                    {
+                        var cell = _tmpGrowingNearFlowerCells.RandomElement();
+                        var plant = (ViviFlower)ThingMaker.MakeThing(flowerDef);
+                        plant.Growth = 0.1f;
+                        GenSpawn.Spawn(plant, cell, Map);
+                        _tmpGrowingNearFlowerCells.Clear();
+                    }
+
+                    _nextGrowNearFlowerTick = GenTicks.TicksGame + ArcanePlantModExtension.growingAdjacentFlowerIntervalTicks.Lerped(1f - ManaChargeRatio);
                 }
             }
         }
 
-        public override bool DeconstructibleBy(Faction faction)
+        public override AcceptanceReport DeconstructibleBy(Faction faction)
         {
             if (DebugSettings.godMode)
             {

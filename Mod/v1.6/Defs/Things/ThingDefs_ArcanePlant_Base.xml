@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <ThingDef ParentName="MinifiedThing">
+    <defName>MinifiedArcanePlant</defName>
+    <label>minified arcane plant</label>
+    <thingClass>VVRace.MinifiedArcanePlant</thingClass>
+    
+    <statBases>
+      <Mass>3</Mass>
+      <Flammability>1</Flammability>
+    </statBases>
+  </ThingDef>
+
+  <ThingDef Abstract="True" Name="VV_ArcanePlantBase">
+    <category>Building</category>
+    <thingClass>VVRace.ArcanePlant</thingClass>
+    <tickerType>Normal</tickerType>
+    <selectable>true</selectable>
+
+    <drawerType>MapMeshOnly</drawerType>
+    <graphicData>
+      <shaderType>TransparentPlant</shaderType>
+      <drawSize>(1.2, 1.2)</drawSize>
+    </graphicData>
+    <altitudeLayer>BuildingBelowTop</altitudeLayer>
+    
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Metal_Drop</soundDrop>
+
+    <minifiedDef>MinifiedArcanePlant</minifiedDef>
+    <pathCost>14</pathCost>
+    <pathCostIgnoreRepeat>false</pathCostIgnoreRepeat>
+
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <Mass>3</Mass>
+      <Flammability>1</Flammability>
+      <WorkToBuild>1800</WorkToBuild>
+    </statBases>
+
+    <size>(1,1)</size>
+    <stackLimit>1</stackLimit>
+    <fillPercent>0.2</fillPercent>
+
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <thingCategories>
+      <li>VV_ArcanePlant</li>
+    </thingCategories>
+
+    <placeWorkers>
+      <li>VVRace.PlaceWorker_AllowArcanePlantPot</li>
+    </placeWorkers>
+    <rotatable>false</rotatable>
+    
+    <building>
+      <ai_neverTrashThis>true</ai_neverTrashThis>
+      <ai_chillDestination>false</ai_chillDestination>
+      <deconstructible>true</deconstructible>
+      <claimable>false</claimable>
+      <allowWireConnection>false</allowWireConnection>
+      <allowAutoroof>false</allowAutoroof>
+      <repairable>false</repairable>
+      <artificialForMeditationPurposes>false</artificialForMeditationPurposes>
+      <canPlaceOverWall>false</canPlaceOverWall>
+      <uninstallWork>250</uninstallWork>
+      <haulToContainerDuration>250</haulToContainerDuration>
+      
+    </building>
+    <resourcesFractionWhenDeconstructed>1</resourcesFractionWhenDeconstructed>
+
+    <comps>
+      <li Class="VVRace.CompProperties_ArcanePlantStatsDisplay" />
+    </comps>
+
+    <inspectorTabs>
+      <li>VVRace.ITab_ManaFluxStats</li>
+    </inspectorTabs>
+
+    <tradeTags>
+      <li>VV_ArcanePlant</li>
+    </tradeTags>
+    <tradeability>All</tradeability>
+  </ThingDef>
+
+  <ThingDef Abstract="True" Name="VV_ArcanePlantProductive" ParentName="VV_ArcanePlantBase">
+    <building>
+      <uninstallWork>250</uninstallWork>
+    </building>
+    
+    <tradeTags>
+      <li>VV_ArcanePlantProductive</li>
+    </tradeTags>
+  </ThingDef>
+
+  <ThingDef Abstract="True" Name="VV_ArcanePlantCombat" ParentName="VV_ArcanePlantBase">
+    <statBases>
+      <Mass>9</Mass>
+    </statBases>
+
+    <building>
+      <uninstallWork>750</uninstallWork>
+      <ai_combatDangerous>true</ai_combatDangerous>
+    </building>
+    
+    <tradeTags>
+      <li>VV_ArcanePlantCombat</li>
+    </tradeTags>
+  </ThingDef>
+
+  <!-- 마나 전송 튜브-->
+  <ThingDef Name="VV_ManaTransferTube" ParentName="BuildingBase">
+    <defName>VV_ManaTransferTube</defName>
+    <label>mana transfer tube</label>
+    <description>a tube for long-distance mana transmission. It can be built under walls or other buildings. It merely transmits mana and does not produce any additional mana.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_SparklingPetal</ThingDef>
+    </descriptionHyperlinks>
+    <thingClass>VVRace.ManaTransmitter</thingClass>
+    <category>Building</category>
+    <graphicData>
+      <texPath>Things/Building/VV_ManaFluxTube_Atlas</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <linkType>Basic</linkType>
+      <linkFlags>
+        <li>Custom4</li>
+      </linkFlags>
+      <damageData>
+        <rect>(0,0.35,1,0.3)</rect>
+      </damageData>
+    </graphicData>
+    <uiIconPath>Things/Building/VV_ManaFluxTube_MenuIcon</uiIconPath>
+    <uiIconScale>0.7</uiIconScale>
+    <building>
+      <ai_chillDestination>false</ai_chillDestination>
+      <isInert>true</isInert>
+      <isEdifice>false</isEdifice>
+      <blueprintGraphicData>
+        <texPath>Things/Building/VV_ManaFluxTube_Blueprint_Atlas</texPath>
+      </blueprintGraphicData>
+    </building>
+    <inspectorTabs>
+      <li>VVRace.ITab_ManaFluxStats</li>
+    </inspectorTabs>
+    <drawerType>MapMeshOnly</drawerType>
+    <altitudeLayer>Conduits</altitudeLayer>
+    <passability>Standable</passability>
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+    <resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+    <statBases>
+      <MaxHitPoints>50</MaxHitPoints>
+      <WorkToBuild>40</WorkToBuild>
+      <Flammability>0.7</Flammability>
+      <Beauty>-1</Beauty>
+    </statBases>
+    <placingDraggableDimensions>1</placingDraggableDimensions>
+    <costList>
+      <VV_Viviwax>2</VV_Viviwax>
+      <VV_SparklingPetal>3</VV_SparklingPetal>
+    </costList>
+    <comps>
+    </comps>
+    <placeWorkers>
+      <li>VVRace.PlaceWorker_ManaFluxTube</li>
+    </placeWorkers>
+    <rotatable>false</rotatable>
+    <selectable>true</selectable>
+    <neverMultiSelect>true</neverMultiSelect>
+    <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <designationCategory>VV_Bulidings</designationCategory>
+    <uiOrder>2400</uiOrder>
+    <constructEffect>ConstructMetal</constructEffect>
+    <clearBuildingArea>false</clearBuildingArea>
+    <designationHotKey>Misc8</designationHotKey>
+    <researchPrerequisites>
+      <li>VV_ManaTransferTube</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!-- 숨겨진 마나 전송 튜브 -->
+  <ThingDef ParentName="VV_ManaTransferTube">
+    <defName>VV_HiddenManaTransferTube</defName>
+    <label>hidden mana transfer tube</label>
+    <description>a Mana transfer tube buried underground. It is not visible from the surface, so it does not become a target of attacks and does not interfere with aesthetics, but it is more expensive to construct.</description>
+    <graphicData>
+      <color>(0,0,0,0)</color>
+      <shaderType>Transparent</shaderType>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>80</MaxHitPoints>
+      <WorkToBuild>300</WorkToBuild>
+      <Flammability>0</Flammability>
+      <Beauty>0</Beauty>
+    </statBases>
+    <uiIconPath>Things/Building/VV_ManaFluxTube_MenuIcon</uiIconPath>
+    <designationHotKey>Misc9</designationHotKey>
+    <costList>
+      <VV_Viviwax>20</VV_Viviwax>
+      <VV_SparklingPetal>3</VV_SparklingPetal>
+    </costList>
+    <constructEffect>ConstructDirt</constructEffect>
+    <building>
+      <ai_neverTrashThis>true</ai_neverTrashThis>
+      <isTargetable>false</isTargetable>
+      <expandHomeArea>false</expandHomeArea>
+      <canBeDamagedByAttacks>false</canBeDamagedByAttacks>
+    </building>
+  </ThingDef>
+</Defs>

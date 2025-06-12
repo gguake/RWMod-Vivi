@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <ThingDef ParentName="BaseFilth">
+    <defName>VV_FilthPollen</defName>
+    <thingClass>VVRace.Filth_Pollen</thingClass>
+    <label>pollen</label>
+    <description>The pollen that often scatters around when a Vivi collects honey.</description>
+    <statBases>
+      <Beauty>-5</Beauty>
+      <Cleanliness>-5</Cleanliness>
+    </statBases>
+    <graphicData>
+      <texPath>Things/Filth/Grainy</texPath>
+      <color>(255, 220, 40, 90)</color>
+      <drawSize>1</drawSize>
+    </graphicData>
+    <filth>
+      <ignoreFilthMultiplierStat>true</ignoreFilthMultiplierStat>
+      <disappearsInDays>0.15~0.3</disappearsInDays>
+      <rainWashes>true</rainWashes>
+      <cleaningWorkToReduceThickness>350</cleaningWorkToReduceThickness>
+      <canFilthAttach>true</canFilthAttach>
+      <cleaningSound>Interact_CleanFilth_Dirt</cleaningSound>
+    </filth>
+  </ThingDef>
+
+</Defs>

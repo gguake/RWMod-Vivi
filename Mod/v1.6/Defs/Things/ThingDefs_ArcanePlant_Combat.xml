@@ -1,0 +1,600 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 콩뿌리개 -->
+  <ThingDef ParentName="VV_ArcanePlantCombat">
+    <defName>VV_Peashooter</defName>
+    <label>peashooter</label>
+    <description>It is a arcane plant that fires beans to drive away nearby enemies when it detects them. Each bean firing consumes mana, and while the power is weak, it is effective against lightly armored enemies because it fires a large number of beans at once.
+\nWhen the fired beans pass over the arcane plant, they may receive special effects depending on the plant.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_LivingLeaf</ThingDef>
+    </descriptionHyperlinks>
+    <thingClass>VVRace.ArcanePlant_TurretFixedGun</thingClass>
+    <tickerType>Normal</tickerType>
+
+    <graphicData>
+      <texPath>Things/Plants/VV_Peashooter_Base</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <drawerType>MapMeshAndRealTime</drawerType>
+
+    <uiIconPath>Things/Plants/VV_Peashooter</uiIconPath>
+
+    <statBases>
+      <MaxHitPoints>120</MaxHitPoints>
+      <WorkToBuild>27000</WorkToBuild>
+    </statBases>
+
+    <fillPercent>0.25</fillPercent>
+    <costList>
+      <VV_LivingLeaf>20</VV_LivingLeaf>
+    </costList>
+
+    <comps>
+    </comps>
+
+    <researchPrerequisites>
+      <li>VV_CombatArcaneBotany</li>
+    </researchPrerequisites>
+
+    <building>
+      <combatPower>45</combatPower>
+      <ai_combatDangerous>true</ai_combatDangerous>
+      <turretGunDef>VV_Gun_Peashooter</turretGunDef>
+      <turretBurstCooldownTime>3.2</turretBurstCooldownTime>
+      <turretBurstWarmupTime>1.4</turretBurstWarmupTime>
+      <turretTopOffset>(0, 0.05)</turretTopOffset>
+      <turretTopDrawSize>1</turretTopDrawSize>
+    </building>
+
+    <placeWorkers>
+      <li>PlaceWorker_TurretTop</li>
+      <li>VVRace.PlaceWorker_ShowPlantTurretRadius</li>
+    </placeWorkers>
+
+    <modExtensions>
+      <li Class="VVRace.ManaExtension">
+        <manaCapacity>600</manaCapacity>
+
+        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
+          <mana>10</mana>
+        </manaConsumeRule>
+      </li>
+
+      <li Class="VVRace.ArcanePlantExtension">
+        <zeroManaDamageByChance>1~10</zeroManaDamageByChance>
+        <zeroManaDurableTicks>30000</zeroManaDurableTicks>
+        
+        <consumeManaPerVerbShoot>2</consumeManaPerVerbShoot>
+      </li>
+
+      <li Class="VVRace.GrowingArcanePlantData">
+        <ingredients>
+          <VV_UnknownSeed>1</VV_UnknownSeed>
+          <MedicineHerbal>20</MedicineHerbal>
+          <VV_Pollen>120</VV_Pollen>
+        </ingredients>
+
+        <totalGrowDays>15</totalGrowDays>
+        <maxHealth>200</maxHealth>
+        <healthRegenNoDamagedByDays>40</healthRegenNoDamagedByDays>
+
+        <maxMana>400</maxMana>
+        <consumedManaByDay>80</consumedManaByDay>
+
+        <manaSensitivity>Medium</manaSensitivity>
+        <manageSensitivity>Medium</manageSensitivity>
+        <temperatureSensitivity>Medium</temperatureSensitivity>
+        <glowSensitivity>Medium</glowSensitivity>
+        
+        <manageIntervalTicks>150000</manageIntervalTicks>
+        <optimalTemperatureRange>6~38</optimalTemperatureRange>
+        <optimalGlowRange>0.4~1.0</optimalGlowRange>
+
+        <successChanceCurve>
+          <points>
+            <li>(0,0)</li>
+            <li>(0.3,0.15)</li>
+            <li>(0.5,0.5)</li>
+            <li>(0.7,0.8)</li>
+            <li>(0.9,1)</li>
+          </points>
+        </successChanceCurve>
+        <healthBonusAmountCurve>
+          <points>
+            <li>(0,0)</li>
+            <li>(0.5,0)</li>
+            <li>(0.75,0.75)</li>
+            <li>(1,1.5)</li>
+          </points>
+        </healthBonusAmountCurve>
+        <cleanlinessBonusAmountCurve>
+          <points>
+            <li>(-10,0)</li>
+            <li>(-0.0001,0)</li>
+            <li>(0,1)</li>
+            <li>(0.2,1.5)</li>
+            <li>(0.4,2.5)</li>
+            <li>(0.6,4.5)</li>
+            <li>(1.0,6)</li>
+          </points>
+        </cleanlinessBonusAmountCurve>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>VV_Bullet_Pea</defName>
+    <label>pea bullet</label>
+    <thingClass>VVRace.PeaBullet</thingClass>
+    <graphicData>
+      <texPath>Things/Projectile/VV_Pea</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <damageDef>Poke</damageDef>
+      <damageAmountBase>5</damageAmountBase>
+      <armorPenetrationBase>0</armorPenetrationBase>
+      <stoppingPower>1</stoppingPower>
+      <speed>27</speed>
+    </projectile>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>VV_Gun_Peashooter</defName>
+    <label>pea pod</label>
+    <description>.</description>
+    <graphicData>
+      <texPath>Things/Plants/VV_Peashooter_Top</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <drawerType>MapMeshAndRealTime</drawerType>
+
+    <statBases>
+      <AccuracyTouch>0.95</AccuracyTouch>
+      <AccuracyShort>0.78</AccuracyShort>
+      <AccuracyMedium>0.32</AccuracyMedium>
+      <AccuracyLong>0.15</AccuracyLong>
+      <RangedWeapon_Cooldown>3.8</RangedWeapon_Cooldown>
+      <DeteriorationRate>0</DeteriorationRate>
+      <Mass>40</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+
+    <verbs>
+      <li>
+        <verbClass>VVRace.Verb_ShootWithMana</verbClass>
+        <defaultProjectile>VV_Bullet_Pea</defaultProjectile>
+        <warmupTime>0</warmupTime>
+        <range>24.9</range>
+        <ticksBetweenBurstShots>9</ticksBetweenBurstShots>
+        <burstShotCount>6</burstShotCount>
+        <soundCast>ThumpCannon_Fire</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>3</muzzleFlashScale>
+      </li>
+    </verbs>
+  </ThingDef>
+
+
+  <!-- 건인장 -->
+  <ThingDef ParentName="VV_ArcanePlantCombat">
+    <defName>VV_Shootus</defName>
+    <label>Shootus</label>
+    <description>It is a arcane cactus with a peculiar facial expression. It moves so flexibly that it doesn't seem like a plant, and it is extremely tough, resistant to most types of damage.
+\nIt can be equipped with a ranged weapon in one hand, and when it detects enemies, it automatically attacks them using the equipped weapon. It cannot wear melee or biocoded weapons, and its reloading is somewhat slower than when handled by a person.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_LivingLeaf</ThingDef>
+    </descriptionHyperlinks>
+    <thingClass>VVRace.ArcanePlant_Shootus</thingClass>
+    <tickerType>Normal</tickerType>
+
+    <graphicData>
+      <texPath>Things/Plants/VV_Cactus</texPath>
+      <graphicClass>VVRace.Graphic_Conditional</graphicClass>
+      <drawSize>(1.5,1.5)</drawSize>
+    </graphicData>
+    <drawerType>MapMeshAndRealTime</drawerType>
+
+    <uiIconOffset>(0,0.16)</uiIconOffset>
+    
+    <pathCost>30</pathCost>
+    <pathCostIgnoreRepeat>true</pathCostIgnoreRepeat>
+
+    <statBases>
+      <MaxHitPoints>240</MaxHitPoints>
+      <WorkToBuild>45000</WorkToBuild>
+      <Flammability>0.7</Flammability>
+    </statBases>
+
+    <damageMultipliers Inherit="False">
+      <li>
+        <damageDef>Cut</damageDef>
+        <multiplier>0.7</multiplier>
+      </li>
+      <li>
+        <damageDef>Crush</damageDef>
+        <multiplier>0.7</multiplier>
+      </li>
+      <li>
+        <damageDef>Blunt</damageDef>
+        <multiplier>0.7</multiplier>
+      </li>
+      <li>
+        <damageDef>Poke</damageDef>
+        <multiplier>0.7</multiplier>
+      </li>
+      <li>
+        <damageDef>Stab</damageDef>
+        <multiplier>0.7</multiplier>
+      </li>
+      <li>
+        <damageDef>Scratch</damageDef>
+        <multiplier>0.7</multiplier>
+      </li>
+      <li>
+        <damageDef>ScratchToxic</damageDef>
+        <multiplier>0.7</multiplier>
+      </li>
+      <li>
+        <damageDef>Bite</damageDef>
+        <multiplier>0.7</multiplier>
+      </li>
+      <li>
+        <damageDef>ToxicBite</damageDef>
+        <multiplier>0.7</multiplier>
+      </li>
+      <li>
+        <damageDef>RangedStab</damageDef>
+        <multiplier>0.7</multiplier>
+      </li>
+      <li>
+        <damageDef>Bullet</damageDef>
+        <multiplier>0.7</multiplier>
+      </li>
+      <li>
+        <damageDef>Arrow</damageDef>
+        <multiplier>0.7</multiplier>
+      </li>
+      <li>
+        <damageDef>ArrowHighVelocity</damageDef>
+        <multiplier>0.7</multiplier>
+      </li>
+      <li>
+        <damageDef>Bomb</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>BombSuper</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Thump</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Demolish</damageDef>
+        <multiplier>0.5</multiplier>
+      </li>
+    </damageMultipliers>
+    <fillPercent>0.6</fillPercent>
+
+    <costList>
+      <VV_LivingLeaf>20</VV_LivingLeaf>
+    </costList>
+
+    <comps>
+    </comps>
+
+    <researchPrerequisites>
+      <li>VV_CombatArcaneBotany</li>
+      <li>VV_AdvancedArcaneBotany</li>
+    </researchPrerequisites>
+
+    <building>
+      <combatPower>75</combatPower>
+      <ai_combatDangerous>true</ai_combatDangerous>
+      <turretTopOffset>(0, 0.11)</turretTopOffset>
+      <turretTopDrawSize>0.5</turretTopDrawSize>
+    </building>
+
+    <placeWorkers>
+    </placeWorkers>
+
+    <modExtensions>
+      <li Class="VVRace.ManaExtension">
+        <manaCapacity>500</manaCapacity>
+
+        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
+          <mana>40</mana>
+        </manaConsumeRule>
+      </li>
+      
+      <li Class="VVRace.ArcanePlantExtension">
+        <zeroManaDamageByChance>1~10</zeroManaDamageByChance>
+        <zeroManaDurableTicks>60000</zeroManaDurableTicks>
+        
+        <consumeManaPerVerbShoot>1</consumeManaPerVerbShoot>
+        <idleTurnAnglePerTick>1</idleTurnAnglePerTick>
+        <turretTopBaseOffset>(0.24,0.2,0.6)</turretTopBaseOffset>
+        <turretTopBaseAngle>0</turretTopBaseAngle>
+        <turretTopBaseFlippable>true</turretTopBaseFlippable>
+
+        <hasRandomDrawScale>false</hasRandomDrawScale>
+      </li>
+
+      <li Class="VVRace.GrowingArcanePlantData">
+        <ingredients>
+          <VV_UnknownSeed>1</VV_UnknownSeed>
+          <SmokeleafJoint>25</SmokeleafJoint>
+          <VV_Pollen>120</VV_Pollen>
+        </ingredients>
+
+        <totalGrowDays>20</totalGrowDays>
+        <maxHealth>250</maxHealth>
+        <healthRegenNoDamagedByDays>20</healthRegenNoDamagedByDays>
+
+        <maxMana>500</maxMana>
+        <consumedManaByDay>60</consumedManaByDay>
+
+        <manaSensitivity>High</manaSensitivity>
+        <temperatureSensitivity>High</temperatureSensitivity>
+        <glowSensitivity>Low</glowSensitivity>
+        
+        <optimalTemperatureRange>12~70</optimalTemperatureRange>
+        <optimalGlowRange>0.4~1.0</optimalGlowRange>
+
+        <successChanceCurve>
+          <points>
+            <li>(0,0)</li>
+            <li>(0.3,0.15)</li>
+            <li>(0.5,0.5)</li>
+            <li>(0.7,0.8)</li>
+            <li>(0.9,1)</li>
+          </points>
+        </successChanceCurve>
+        <healthBonusAmountCurve>
+          <points>
+            <li>(0,0)</li>
+            <li>(0.5,0)</li>
+            <li>(0.75,0.75)</li>
+            <li>(1,1.5)</li>
+          </points>
+        </healthBonusAmountCurve>
+        <cleanlinessBonusAmountCurve>
+          <points>
+            <li>(-10,0)</li>
+            <li>(-0.0001,0)</li>
+            <li>(0,1)</li>
+            <li>(0.2,1.5)</li>
+            <li>(0.4,2.5)</li>
+            <li>(0.6,4.5)</li>
+            <li>(1.0,6)</li>
+          </points>
+        </cleanlinessBonusAmountCurve>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+
+  <!-- 콘뿌리개 -->
+  <ThingDef ParentName="VV_ArcanePlantCombat">
+    <defName>VV_Cornlauncher</defName>
+    <label>cornlauncher</label>
+    <description>It is a arcane plant that detects nearby enemies and attacks by launching corn. It consumes mana each time it fires, and the launched corn explodes upon impact, scattering corn kernels around, which then explode on a smaller scale.
+\nIt works well against many enemies, but the explosion can also hurt allies. If health is low, it might explode, so you need to be careful where you put it.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_LivingLeaf</ThingDef>
+    </descriptionHyperlinks>
+    <thingClass>VVRace.ArcanePlant_TurretFixedGun</thingClass>
+    <tickerType>Normal</tickerType>
+
+    <graphicData>
+      <texPath>Things/Plants/VV_Cornlauncher_Base</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <drawerType>MapMeshAndRealTime</drawerType>
+
+    <uiIconPath>Things/Plants/VV_Cornlauncher</uiIconPath>
+    
+    <statBases>
+      <MaxHitPoints>120</MaxHitPoints>
+      <WorkToBuild>30000</WorkToBuild>
+    </statBases>
+
+    <fillPercent>0.25</fillPercent>
+    <costList>
+      <VV_LivingLeaf>20</VV_LivingLeaf>
+    </costList>
+
+    <comps>
+      <li Class="CompProperties_Explosive">
+        <explosiveRadius>1.9</explosiveRadius>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+        <startWickHitPointsPercent>0.25</startWickHitPointsPercent>
+        <wickTicks>150~300</wickTicks>
+      </li>
+    </comps>
+
+    <researchPrerequisites>
+      <li>VV_CombatArcaneBotany</li>
+    </researchPrerequisites>
+
+    <recoilPower>3</recoilPower>
+    <building>
+      <combatPower>125</combatPower>
+      <ai_combatDangerous>true</ai_combatDangerous>
+      <turretGunDef>VV_Gun_Cornlauncher</turretGunDef>
+      <turretBurstCooldownTime>5.7</turretBurstCooldownTime>
+      <turretBurstWarmupTime>2.3</turretBurstWarmupTime>
+      <turretTopOffset>(0, 0.05)</turretTopOffset>
+      <turretTopDrawSize>1</turretTopDrawSize>
+    </building>
+
+    <placeWorkers>
+      <li>PlaceWorker_TurretTop</li>
+      <li>VVRace.PlaceWorker_ShowPlantTurretRadius</li>
+    </placeWorkers>
+
+    <modExtensions>
+      <li Class="VVRace.ManaExtension">
+        <manaCapacity>800</manaCapacity>
+
+        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
+          <mana>20</mana>
+        </manaConsumeRule>
+      </li>
+
+      <li Class="VVRace.ArcanePlantExtension">
+        <zeroManaDamageByChance>1~10</zeroManaDamageByChance>
+        <zeroManaDurableTicks>30000</zeroManaDurableTicks>
+        
+        <consumeManaPerVerbShoot>18</consumeManaPerVerbShoot>
+      </li>
+
+      <li Class="VVRace.GrowingArcanePlantData">
+        <ingredients>
+          <VV_UnknownSeed>1</VV_UnknownSeed>
+          <MedicineHerbal>10</MedicineHerbal>
+          <RawCorn>100</RawCorn>
+          <VV_Pollen>120</VV_Pollen>
+        </ingredients>
+
+        <totalGrowDays>15</totalGrowDays>
+        <maxHealth>200</maxHealth>
+        <healthRegenNoDamagedByDays>40</healthRegenNoDamagedByDays>
+
+        <maxMana>400</maxMana>
+        <consumedManaByDay>80</consumedManaByDay>
+
+        <manaSensitivity>Medium</manaSensitivity>
+        <manageSensitivity>Medium</manageSensitivity>
+        <temperatureSensitivity>Medium</temperatureSensitivity>
+        <glowSensitivity>Medium</glowSensitivity>
+        
+        <manageIntervalTicks>150000</manageIntervalTicks>
+        <optimalTemperatureRange>6~38</optimalTemperatureRange>
+        <optimalGlowRange>0.4~1.0</optimalGlowRange>
+
+        <successChanceCurve>
+          <points>
+            <li>(0,0)</li>
+            <li>(0.3,0.15)</li>
+            <li>(0.5,0.5)</li>
+            <li>(0.7,0.8)</li>
+            <li>(0.9,1)</li>
+          </points>
+        </successChanceCurve>
+        <healthBonusAmountCurve>
+          <points>
+            <li>(0,0)</li>
+            <li>(0.5,0)</li>
+            <li>(0.75,0.75)</li>
+            <li>(1,1.5)</li>
+          </points>
+        </healthBonusAmountCurve>
+        <cleanlinessBonusAmountCurve>
+          <points>
+            <li>(-10,0)</li>
+            <li>(-0.0001,0)</li>
+            <li>(0,1)</li>
+            <li>(0.2,1.5)</li>
+            <li>(0.4,2.5)</li>
+            <li>(0.6,4.5)</li>
+            <li>(1.0,6)</li>
+          </points>
+        </cleanlinessBonusAmountCurve>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>VV_Bullet_Corn</defName>
+    <label>corn</label>
+    <thingClass>VVRace.CornBullet</thingClass>
+
+    <graphicData>
+      <texPath>Things/Projectile/VV_Corn</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1,1)</drawSize>
+      <shaderType>Transparent</shaderType>
+    </graphicData>
+
+    <projectile>
+      <damageDef>Bomb</damageDef>
+      <speed>40</speed>
+      <explosionRadius>1.1</explosionRadius>
+      <damageAmountBase>25</damageAmountBase>
+      <screenShakeFactor>0.25</screenShakeFactor>
+    </projectile>
+
+    <modExtensions>
+      <li Class="VVRace.CornBulletData">
+        <scatterBulletDef>VV_Bullet_CornKernel</scatterBulletDef>
+        <scatterRadius>5.5</scatterRadius>
+        <scatterCount>15~23</scatterCount>
+        <includeExplosionCells>false</includeExplosionCells>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>VV_Bullet_CornKernel</defName>
+    <label>corn kernel</label>
+    <thingClass>Projectile_Explosive</thingClass>
+
+    <graphicData>
+      <texPath>Things/Projectile/VV_CornKernel</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1,1)</drawSize>
+      <shaderType>Transparent</shaderType>
+    </graphicData>
+
+    <projectile>
+      <damageDef>Bomb</damageDef>
+      <speed>15</speed>
+      <explosionRadius>0.6</explosionRadius>
+      <damageAmountBase>13</damageAmountBase>
+      <screenShakeFactor>0</screenShakeFactor>
+    </projectile>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>VV_Gun_Cornlauncher</defName>
+    <label>corn pod</label>
+    <description>.</description>
+    <graphicData>
+      <texPath>Things/Plants/VV_Cornlauncher_Top</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2,2)</drawSize>
+    </graphicData>
+    <drawerType>MapMeshAndRealTime</drawerType>
+
+    <statBases>
+      <AccuracyTouch>0.24</AccuracyTouch>
+      <AccuracyShort>0.34</AccuracyShort>
+      <AccuracyMedium>0.55</AccuracyMedium>
+      <AccuracyLong>0.45</AccuracyLong>
+      <RangedWeapon_Cooldown>6.9</RangedWeapon_Cooldown>
+      <DeteriorationRate>0</DeteriorationRate>
+      <Mass>40</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+
+    <verbs>
+      <li>
+        <verbClass>VVRace.Verb_ShootWithMana</verbClass>
+        <defaultProjectile>VV_Bullet_Corn</defaultProjectile>
+        <warmupTime>0</warmupTime>
+        <range>36.9</range>
+        <ticksBetweenBurstShots>60</ticksBetweenBurstShots>
+        <burstShotCount>3</burstShotCount>
+        <forcedMissRadius>3.6</forcedMissRadius>
+        <forcedMissEvenDispersal>true</forcedMissEvenDispersal>
+        <soundCast>InfernoCannon_Fire</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>3</muzzleFlashScale>
+      </li>
+    </verbs>
+  </ThingDef>
+</Defs>

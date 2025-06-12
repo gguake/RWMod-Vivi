@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <VV_NamerFactionVivi.rulePack.rulesStrings.0>r_name->[colors] 독립 비비 왕국</VV_NamerFactionVivi.rulePack.rulesStrings.0>
+  <VV_NamerFactionVivi.rulePack.rulesStrings.1>r_name->[vivi_adjective] 비비 왕국</VV_NamerFactionVivi.rulePack.rulesStrings.1>
+
+  <VV_NamerNPCFactionVivi.rulePack.rulesStrings.0>r_name->[vivi_flower_nouns] 비비 연합</VV_NamerNPCFactionVivi.rulePack.rulesStrings.0>
+  <VV_NamerNPCFactionVivi.rulePack.rulesStrings.1>r_name->[colors] [vivi_flower_nouns] 비비 연합</VV_NamerNPCFactionVivi.rulePack.rulesStrings.1>
+
+  <VV_NamerSettlementVivi.rulePack.rulesStrings.0>r_name->[colors] 둥지</VV_NamerSettlementVivi.rulePack.rulesStrings.0>
+  <VV_NamerSettlementVivi.rulePack.rulesStrings.1>r_name->[nature] [position] 둥지</VV_NamerSettlementVivi.rulePack.rulesStrings.1>
+</LanguageData>

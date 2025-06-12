@@ -21,7 +21,6 @@ namespace VVRace
 
     public class Needle : Projectile
     {
-        public Thing caster;
         public int attackedCount;
 
         public LocalTargetInfo curTarget;
@@ -33,34 +32,34 @@ namespace VVRace
         public Vector3 curDirection;
         public IntVec3 lastAttackedTargetCell;
 
-        public float damageMultiplier = 1f;
         public float psychicMultiplier = 1f;
 
         private PriorityQueue<Thing, int> _tmpTargetCandidates = new PriorityQueue<Thing, int>();
         private PriorityQueue<Thing, int> _tmpTargetDuplicatedCandidates = new PriorityQueue<Thing, int>();
 
-        public void Launch(Thing caster, Thing equipment, LocalTargetInfo target)
+        public override void Launch(Thing launcher, Vector3 origin, LocalTargetInfo usedTarget, LocalTargetInfo intendedTarget, ProjectileHitFlags hitFlags, bool preventFriendlyFire = false, Thing equipment = null, ThingDef targetCoverDef = null)
         {
-            this.caster = caster;
-            this.curTarget = target;
+            base.Launch(launcher, origin, usedTarget, intendedTarget, hitFlags, preventFriendlyFire, equipment, targetCoverDef);
 
             curPos = this.TrueCenter();
             curDirection = (curTarget.CenterVector3 - curPos).normalized.Yto0();
 
-            equipmentDef = equipment.def;
-            damageMultiplier = equipment.GetStatValue(StatDefOf.RangedWeapon_DamageMultiplier);
-            equipment.TryGetQuality(out equipmentQuality);
+        }
+
+        public void Launch(Thing caster, Thing equipment, LocalTargetInfo target)
+        {
+            this.curTarget = target;
             psychicMultiplier = Mathf.Min(10f, Mathf.Pow(2.4f, caster.GetStatValue(StatDefOf.PsychicSensitivity) / 2.67f - 1f));
         }
 
-        public override void Tick()
+        protected override void TickInterval(int delta)
         {
             try
             {
                 if (!Spawned) { return; }
 
-                var casterPawn = caster as Pawn;
-                if (casterPawn == null || casterPawn.DeadOrDowned || caster.DestroyedOrNull() || equipmentDef == null)
+                var casterPawn = launcher as Pawn;
+                if (casterPawn == null || casterPawn.DeadOrDowned || launcher.DestroyedOrNull() || equipmentDef == null)
                 {
                     Destroy();
                     return;
@@ -160,7 +159,6 @@ namespace VVRace
         {
             base.ExposeData();
 
-            Scribe_References.Look(ref caster, "caster");
             Scribe_Values.Look(ref attackedCount, "attackedCount");
 
             Scribe_TargetInfo.Look(ref curTarget, "curTarget");
@@ -171,10 +169,7 @@ namespace VVRace
             Scribe_Values.Look(ref curPos, "curPos");
             Scribe_Values.Look(ref curDirection, "curDirection");
             Scribe_Values.Look(ref lastAttackedTargetCell, "lastAttackedTargetCell");
-
-            Scribe_Defs.Look(ref equipmentDef, "equipmentDef");
-            Scribe_Values.Look(ref damageMultiplier, "damageMultiplier");
-            Scribe_Values.Look(ref equipmentQuality, "equipmentQuality");
+            
             Scribe_Values.Look(ref psychicMultiplier, "psychicMultiplier");
         }
 
@@ -251,7 +246,7 @@ namespace VVRace
 
         private void ImpactToTarget(NeedleProperties props)
         {
-            if (curTarget == caster)
+            if (curTarget == launcher)
             {
                 Destroy();
                 return;
@@ -271,13 +266,13 @@ namespace VVRace
             if (target == null) { return; }
             if (targetHistory.Contains(target)) { return; }
 
-            var instigatorGuilty = !(caster is Pawn casterPawn) || !casterPawn.Drafted;
+            var instigatorGuilty = !(launcher is Pawn casterPawn) || !casterPawn.Drafted;
             var dinfo = new DamageInfo(
                 def.projectile.damageDef,
-                Mathf.Max(1f, def.projectile.GetDamageAmount(damageMultiplier * psychicMultiplier)),
-                Mathf.Clamp01(def.projectile.GetArmorPenetration(damageMultiplier * psychicMultiplier)),
+                Mathf.Max(1f, def.projectile.GetDamageAmount(equipment) * psychicMultiplier),
+                Mathf.Clamp01(def.projectile.GetArmorPenetration(equipment)),
                 Quaternion.LookRotation(curDirection.Yto0()).eulerAngles.y,
-                caster,
+                launcher,
                 null,
                 equipmentDef,
                 DamageInfo.SourceCategory.ThingOrUnknown,
@@ -292,10 +287,10 @@ namespace VVRace
 
         private void RefreshTarget(NeedleProperties props)
         {
-            var casterPawn = caster as Pawn;
+            var casterPawn = launcher as Pawn;
             if (casterPawn == null || attackedCount >= MaxAttackCount)
             {
-                curTarget = caster;
+                curTarget = launcher;
                 return;
             }
 
@@ -307,7 +302,7 @@ namespace VVRace
 
                 if (rootRegion == null)
                 {
-                    curTarget = caster;
+                    curTarget = launcher;
                     return;
                 }
 
@@ -360,7 +355,7 @@ namespace VVRace
                 else if (_tmpTargetDuplicatedCandidates.Count > 0)
                     curTarget = _tmpTargetDuplicatedCandidates.Dequeue();
                 else
-                    curTarget = caster;
+                    curTarget = launcher;
 
                 targetHistory.Clear();
             }
@@ -373,7 +368,7 @@ namespace VVRace
 
         public override void Destroy(DestroyMode mode = DestroyMode.Vanish)
         {
-            var pawn = caster as Pawn;
+            var pawn = launcher as Pawn;
             var cooldownStance = pawn?.stances?.curStance as Stance_Cooldown;
             if (cooldownStance != null && cooldownStance.verb is Verb_SpawnNeedle)
             {

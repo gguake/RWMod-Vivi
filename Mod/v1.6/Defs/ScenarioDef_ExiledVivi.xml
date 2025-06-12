@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <ScenarioDef>
+    <defName>VV_ViviStart</defName>
+    <label>exiled vivi</label>
+    <description>You dreamed of becoming a distinguished Royal Vivi, feasting on the expensive royal jelly in the nest. That dream came true when you became an adult, except for the fact that your body did not grow at all.
+\nThe regular Vivis did not treat you as a Royal Vivi due to your small stature. Enduring oppression and discrimination, one day you decided to leave the nest.
+\nAfter wandering the planet and experiencing many things, you resolved to fulfill your first dream again. It's time to build your own new nest.
+\nNote: The game starts with one Royal Vivi who lacks combat and work abilities, making it more challenging.</description>
+    <scenario>
+      <name>exiled vivi</name>
+      <summary>An exiled Royal Vivi dreaming of becoming a new queen.</summary>
+      <description>You dreamed of becoming a distinguished Royal Vivi, feasting on the expensive royal jelly in the nest. That dream came true when you became an adult, except for the fact that your body did not grow at all.
+\nThe regular Vivis did not treat you as a Royal Vivi due to your small stature. Enduring oppression and discrimination, one day you decided to leave the nest.
+\nAfter wandering the planet and experiencing many things, you resolved to fulfill your first dream again. It's time to build your own new nest.
+\nNote: The game starts with one Royal Vivi who lacks combat and work abilities, making it more challenging.</description>
+      <playerFaction>
+        <def>PlayerFaction</def>
+        <factionDef>VV_PlayerExiledVivi</factionDef>
+      </playerFaction>
+      <parts>
+        <li Class="ScenPart_GameStartDialog">
+          <def>GameStartDialog</def>
+          <text>You've decided to build a new nest here. As a rightful Queen Vivi, you will build a big nest to show your old friends that looks don't matter.
+\nYou've unpacked everything, including the precious eggs you laid while roaming the planet. There's a lot to do, but the first thing is to build a simple house and incubator to increase the number of Vivis to help you.
+\nTip: You can quickly build walls with Vivi cream, which can be later refined and strengthened. Be careful with the eggs, as they are sensitive to cold and can break.</text>
+          <closeSound>GameStartSting</closeSound>
+        </li>
+
+        <li Class="ScenPart_ConfigPage_ConfigureStartingPawns_KindDefs">
+          <def>ConfigurePawnsKindDefs</def>
+          <pawnChoiceCount>1</pawnChoiceCount>
+          <leftBehindPawnKind>VV_PlayerExiledRoyalVivi</leftBehindPawnKind>
+          <kindCounts>
+            <li>
+              <kindDef>VV_PlayerExiledRoyalVivi</kindDef>
+              <count>1</count>
+              <requiredAtStart>true</requiredAtStart>
+            </li>
+          </kindCounts>
+        </li>
+
+        <li Class="ScenPart_PawnFilter_Age">
+          <def>PawnFilter_Age</def>
+          <allowedAgeRange>20~24</allowedAgeRange>
+        </li>
+        
+        <li Class="ScenPart_PlayerPawnsArriveMethod">
+          <def>PlayerPawnsArriveMethod</def>
+          <method>Standing</method>
+        </li>
+
+        <!-- 시작시 소유품 -->
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>VV_Vivicream</thingDef>
+          <count>225</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>VV_Viviwax</thingDef>
+          <count>300</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>VV_FilteredHoney</thingDef>
+          <count>225</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>VV_HoneyPollenCake</thingDef>
+          <count>150</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>MedicineHerbal</thingDef>
+          <count>25</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>VV_Slingshot</thingDef>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>VV_StrawTool</thingDef>
+          <stuff>VV_Viviwax</stuff>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>VV_ViviEgg</thingDef>
+          <count>1</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>VV_ViviEgg</thingDef>
+          <count>1</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>VV_Fertilizer</thingDef>
+          <count>50</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>VV_Richflower</thingDef>
+          <count>1</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>VV_Peashooter</thingDef>
+          <count>3</count>
+        </li>
+
+        <!-- 시작시 소유품 (분산) -->
+        <li Class="ScenPart_ScatterThingsNearPlayerStart">
+          <def>ScatterThingsNearPlayerStart</def>
+          <thingDef>Steel</thingDef>
+          <count>150</count>
+        </li>
+      </parts>
+    </scenario>
+  </ScenarioDef>
+</Defs>

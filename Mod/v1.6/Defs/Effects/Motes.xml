@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <ThingDef ParentName="MoteBase">
+    <defName>VV_Mote_ShieldProjectorEffect</defName>
+    <mote>
+      <fadeInTime>0.05</fadeInTime>
+      <solidTime>0.5</solidTime>
+      <fadeOutTime>1.5</fadeOutTime>
+    </mote>
+    <graphicData>
+      <graphicClass>Graphic_MoteWithAgeSecs</graphicClass>
+      <texPath>Things/Mote/VV_PsychicEffect</texPath>
+      <shaderType>MotePsychicConditionCauser</shaderType>
+      <shaderParameters>
+        <_distortionIntensity>1.0</_distortionIntensity>
+        <_brightnessMultiplier>1.7</_brightnessMultiplier>
+        <_distortionScale>20</_distortionScale>
+      </shaderParameters>
+      <drawSize>10</drawSize>
+    </graphicData>
+  </ThingDef>
+  
+  <ThingDef ParentName="MoteBase">
+    <defName>VV_Mote_GatherHoney</defName>
+    <thingClass>MoteDualAttached</thingClass>
+    <altitudeLayer>MetaOverlays</altitudeLayer>
+    <mote>
+      <solidTime>600</solidTime>
+      <rotateTowardsTarget>true</rotateTowardsTarget>
+    </mote>
+    <graphicData>
+      <texPath>Things/Mote/VV_GatherHoney</texPath>
+    </graphicData>
+  </ThingDef>
+
+</Defs>

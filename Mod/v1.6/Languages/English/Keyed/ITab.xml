@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+<VV_ITab_GatherWorkerTable_TabLabel>Gathering</VV_ITab_GatherWorkerTable_TabLabel>
+<VV_ITab_GatherWorkerTable_GatherRadiusSlider>Change Gathering Work Radius</VV_ITab_GatherWorkerTable_GatherRadiusSlider>
+
+<VV_ITab_ArcanePlantFarmBill_TabLabel>Cultivation</VV_ITab_ArcanePlantFarmBill_TabLabel>
+<VV_ITab_ArcanePlantFarmBill_Title>Cultivate {0}</VV_ITab_ArcanePlantFarmBill_Title>
+<VV_ITab_ArcanePlantFarmBill_GrowthPct>Growth Rate</VV_ITab_ArcanePlantFarmBill_GrowthPct>
+<VV_ITab_ArcanePlantFarmBill_GrowthPctDesc>Shows the progress of the current cultivation effort. When it reaches 100%, the cultivation is complete.</VV_ITab_ArcanePlantFarmBill_GrowthPctDesc>
+<VV_ITab_ArcanePlantFarmBill_HealthPct>Vitality</VV_ITab_ArcanePlantFarmBill_HealthPct>
+<VV_ITab_ArcanePlantFarmBill_HealthPctDesc>Current vitality of the arcane plant. Slowly recovers when all cultivation conditions are met and will fail if it reaches 0%.
+\nLow vitality at the end of cultivation may result in failure.</VV_ITab_ArcanePlantFarmBill_HealthPctDesc>
+<VV_ITab_ArcanePlantFarmBill_ManaPct>Held Mana</VV_ITab_ArcanePlantFarmBill_ManaPct>
+<VV_ITab_ArcanePlantFarmBill_ManaPctDesc>Current mana held by the arcane plant. It is consumed over time and can be replenished with mana fertilizer.</VV_ITab_ArcanePlantFarmBill_ManaPctDesc>
+<VV_ITab_ArcanePlantFarmBill_Management>Management Level</VV_ITab_ArcanePlantFarmBill_Management>
+<VV_ITab_ArcanePlantFarmBill_ManagementDesc>Current management status of the arcane plant. Management jobs are required every {0} and failing to perform them on time will decrease vitality over time.</VV_ITab_ArcanePlantFarmBill_ManagementDesc>
+<VV_ITab_ArcanePlantFarmBill_Temperature>Temperature Sensitivity</VV_ITab_ArcanePlantFarmBill_Temperature>
+<VV_ITab_ArcanePlantFarmBill_TemperatureDesc>Current temperature sensitivity of the arcane plant. Recovers when the cultivation environment's temperature is within the {0}~{1} range and deteriorates otherwise. Leaving it in a deteriorated state will decrease vitality.</VV_ITab_ArcanePlantFarmBill_TemperatureDesc>
+<VV_ITab_ArcanePlantFarmBill_Glow>Light Sensitivity</VV_ITab_ArcanePlantFarmBill_Glow>
+<VV_ITab_ArcanePlantFarmBill_GlowDesc>Current light sensitivity of the arcane plant. Recovers when the cultivation environment's light is within the {0}~{1} range and deteriorates otherwise. Leaving it in a deteriorated state will decrease vitality.</VV_ITab_ArcanePlantFarmBill_GlowDesc>
+
+<VV_ITab_ManaAcceptor_StatsTabLabel>Stats</VV_ITab_ManaAcceptor_StatsTabLabel>
+<VV_ITab_ManaAcceptor_ManaGenCurveLabel>Generated Mana</VV_ITab_ManaAcceptor_ManaGenCurveLabel>
+<VV_ITab_ManaAcceptor_ManaConCurveLabel>Consumed Mana</VV_ITab_ManaAcceptor_ManaConCurveLabel>
+<VV_ITab_ManaAcceptor_ManaTrsCurveLabel>Transferred Mana</VV_ITab_ManaAcceptor_ManaTrsCurveLabel>
+<VV_ITab_ManaAcceptor_ManaExcCurveLabel>Overflowed Mana</VV_ITab_ManaAcceptor_ManaExcCurveLabel>
+<VV_ITab_ManaAcceptor_LegendTooltip>All arcane plants continuously consume mana, and some arcane plants produce mana.
+\nAll arcane plants first store the produced mana up to their maximum capacity, and any excess production is transmitted to other connected arcane plants.</VV_ITab_ManaAcceptor_LegendTooltip>
+</LanguageData>

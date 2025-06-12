@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <BackstoryDef Abstract="True" Name="VV_AdultSettlerViviBackstory" ParentName="VV_ViviAdultBackstory">
+    <spawnCategories>
+      <li>VV_SettlerBackstory</li>
+    </spawnCategories>
+  </BackstoryDef>
+
+  <!-- VV_ViviSettler -->
+  <BackstoryDef ParentName="VV_AdultSettlerViviBackstory">
+    <defName>VV_ViviSettler</defName>
+    <title>vivi settler</title>
+    <titleShort>settler</titleShort>
+    <description>[PAWN_nameDef] is a Vivi belonging to the settlement.</description>
+    <skillGains>
+      <Construction>2</Construction>
+      <Crafting>1</Crafting>
+      <Plants>1</Plants>
+      <Intellectual>-2</Intellectual>
+    </skillGains>
+    <spawnCategories>
+      <li>AdultColonist</li>
+      <li>AdultTribal</li>
+      <li>VatGrown</li>
+    </spawnCategories>
+  </BackstoryDef>
+
+  <!-- VV_ViviCook -->
+  <BackstoryDef ParentName="VV_AdultSettlerViviBackstory">
+    <defName>VV_ViviCook</defName>
+    <title>vivi cook</title>
+    <titleShort>cook</titleShort>
+    <description>[PAWN_nameDef] is a cook in vivi hive.</description>
+    <skillGains>
+      <Cooking>5</Cooking>
+      <Animals>3</Animals>
+      <Plants>3</Plants>
+      <Construction>-2</Construction>
+    </skillGains>
+    <workDisables>
+      <li>Crafting</li>
+    </workDisables>
+  </BackstoryDef>
+
+  <!-- VV_ViviGatherer -->
+  <BackstoryDef ParentName="VV_AdultSettlerViviBackstory">
+    <defName>VV_ViviGatherer</defName>
+    <title>vivi gatherer</title>
+    <titleShort>gatherer</titleShort>
+    <description>[PAWN_nameDef] is a gatherer in vivi hive.</description>
+    <skillGains>
+      <Plants>5</Plants>
+      <Animals>3</Animals>
+      <Medicine>3</Medicine>
+      <Crafting>-2</Crafting>
+    </skillGains>
+    <workDisables>
+      <li>Intellectual</li>
+    </workDisables>
+  </BackstoryDef>
+
+  <!-- VV_ViviArchitect -->
+  <BackstoryDef ParentName="VV_AdultSettlerViviBackstory">
+    <defName>VV_ViviArchitect</defName>
+    <title>vivi architect</title>
+    <titleShort>architect</titleShort>
+    <description>[PAWN_nameDef] is a architect in vivi hive.</description>
+    <skillGains>
+      <Artistic>5</Artistic>
+      <Construction>3</Construction>
+      <Crafting>3</Crafting>
+      <Cooking>-2</Cooking>
+    </skillGains>
+    <workDisables>
+      <li>Animals</li>
+    </workDisables>
+  </BackstoryDef>
+
+  <!-- VV_ViviResearcher -->
+  <BackstoryDef ParentName="VV_AdultSettlerViviBackstory">
+    <defName>VV_ViviResearcher</defName>
+    <title>vivi researcher</title>
+    <titleShort>researcher</titleShort>
+    <description>[PAWN_nameDef] is a researcher in vivi hive.</description>
+    <skillGains>
+      <Intellectual>5</Intellectual>
+      <Medicine>5</Medicine>
+      <Construction>3</Construction>
+    </skillGains>
+    <workDisables>
+      <li>Violent</li>
+    </workDisables>
+  </BackstoryDef>
+
+  <!-- VV_ViviHerbalist -->
+  <BackstoryDef ParentName="VV_AdultSettlerViviBackstory">
+    <defName>VV_ViviHerbalist</defName>
+    <title>vivi herbalist</title>
+    <titleShort>herbalist</titleShort>
+    <description>[PAWN_nameDef] is a herbalist in vivi hive.</description>
+    <skillGains>
+      <Plants>5</Plants>
+      <Medicine>3</Medicine>
+      <Intellectual>3</Intellectual>
+      <Animals>-2</Animals>
+    </skillGains>
+    <workDisables>
+      <li>Mining</li>
+    </workDisables>
+    <possessions>
+      <MedicineHerbal>5</MedicineHerbal>
+    </possessions>
+  </BackstoryDef>
+
+  <!-- VV_ViviGuard -->
+  <BackstoryDef ParentName="VV_AdultSettlerViviBackstory">
+    <defName>VV_ViviGuard</defName>
+    <title>vivi guard</title>
+    <titleShort>guard</titleShort>
+    <description>[PAWN_nameDef] is a guard in vivi hive.</description>
+    <skillGains>
+      <Melee>5</Melee>
+      <Shooting>3</Shooting>
+    </skillGains>
+    <workDisables>
+      <li>Intellectual</li>
+    </workDisables>
+    <forcedTraits>
+      <Tough>0</Tough>
+    </forcedTraits>
+    <spawnCategories>
+      <li>VV_CombatSettlerBackstory</li>
+    </spawnCategories>
+  </BackstoryDef>
+
+  <!-- VV_ViviScout -->
+  <BackstoryDef ParentName="VV_AdultSettlerViviBackstory">
+    <defName>VV_ViviScout</defName>
+    <title>vivi scout</title>
+    <titleShort>scout</titleShort>
+    <description>[PAWN_nameDef] is a scout in vivi hive.</description>
+    <skillGains>
+      <Shooting>5</Shooting>
+      <Medicine>3</Medicine>
+    </skillGains>
+    <workDisables>
+      <li>PlantWork</li>
+    </workDisables>
+    <forcedTraits>
+      <SpeedOffset>2</SpeedOffset>
+    </forcedTraits>
+    <spawnCategories>
+      <li>VV_CombatSettlerBackstory</li>
+    </spawnCategories>
+  </BackstoryDef>
+</Defs>

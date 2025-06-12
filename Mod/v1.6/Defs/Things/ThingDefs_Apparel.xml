@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 비비 수호자 코트 -->
+  <ThingDef ParentName="ApparelMakeableBase">
+    <defName>VV_GuardianCoat</defName>
+    <label>vivi guardian coat</label>
+    <description>a coat for Vivi guardians who eliminate enemies of the hive. It is cut from lifestrand, so it looks like an ordinary cloth garment but provides very high defense.</description>
+    <graphicData>
+      <texPath>Things/Apparel/VV_GuardianCoat</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+    <thingCategories>
+      <li>VV_ViviApparel</li>
+    </thingCategories>
+
+    <statBases>
+      <MaxHitPoints>320</MaxHitPoints>
+      <WorkToMake>48000</WorkToMake>
+      <Mass>2.5</Mass>
+      <StuffEffectMultiplierArmor>0.5</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>0.75</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.75</StuffEffectMultiplierInsulation_Heat>
+      <EquipDelay>2.5</EquipDelay>
+      
+      <ArmorRating_Sharp>0.4</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.4</ArmorRating_Blunt>
+      <ArmorRating_Heat>1.0</ArmorRating_Heat>
+      <Insulation_Cold>12</Insulation_Cold>
+      <Insulation_Heat>12</Insulation_Heat>
+    </statBases>
+    <equippedStatOffsets>
+      <IncomingDamageFactor>-0.2</IncomingDamageFactor>
+      <PainShockThreshold>0.15</PainShockThreshold>
+      <ToxicEnvironmentResistance>0.75</ToxicEnvironmentResistance>
+    </equippedStatOffsets>
+
+    <smeltable>false</smeltable>
+    <costStuffCount>80</costStuffCount>
+    <stuffCategories>
+      <li>Fabric</li>
+      <li>Leathery</li>
+    </stuffCategories>
+    <costList>
+      <VV_Lifestrand>80</VV_Lifestrand>
+    </costList>
+
+    <apparel>
+      <useWornGraphicMask>true</useWornGraphicMask>
+      <wornGraphicPath>Things/Apparel/VV_GuardianCoat</wornGraphicPath>
+      <bodyPartGroups>
+        <li>Neck</li>
+        <li>Shoulders</li>
+        <li>Torso</li>
+        <li>Arms</li>
+        <li>Legs</li>
+      </bodyPartGroups>
+      <layers>
+        <li>Middle</li>
+        <li>Shell</li>
+      </layers>
+      <tags>
+        <li>VV_ViviCombatApparel</li>
+        <li>Royal</li>
+        <li>RoyalTier2</li>
+        <li>RoyalTier5</li>
+        <li>RoyalTier6</li>
+        <li>RoyalTier7</li>
+      </tags>
+      <developmentalStageFilter>Adult</developmentalStageFilter>
+      <canBeDesiredForIdeo>false</canBeDesiredForIdeo>
+      <canBeGeneratedToSatisfyToxicEnvironmentResistance>false</canBeGeneratedToSatisfyToxicEnvironmentResistance>
+    </apparel>
+    
+    <recipeMaker>
+      <skillRequirements>
+        <Crafting>12</Crafting>
+      </skillRequirements>
+      <researchPrerequisites>
+        <li>VV_AdvancedApparels</li>
+      </researchPrerequisites>
+      <displayPriority>3500</displayPriority>
+    </recipeMaker>
+
+    <tradeTags Inherit="False">
+      <li>VV_ViviApparel</li>
+    </tradeTags>
+    
+    <colorGenerator Class="ColorGenerator_White" />
+    
+    <modExtensions>
+      <li Class="RPEF.ConstraintModExtension">
+        <def>VV_AdultApparelConstraint</def>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- 비비 어린이 옷 -->
+  <ThingDef ParentName="ApparelMakeableBase">
+    <defName>VV_Childrenswear</defName>
+    <label>vivi childrenswear</label>
+    <description>A small outfit for child Vivis. It's warm, designed for children's activities and uses little material to make, but it's too small to be worn once they become adults.</description>
+    <graphicData>
+      <texPath>Things/Apparel/VV_ChildApparel</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+    <thingCategories>
+      <li>VV_ViviApparel</li>
+    </thingCategories>
+
+    <statBases>
+      <MaxHitPoints>120</MaxHitPoints>
+      <WorkToMake>1800</WorkToMake>
+      <Mass>0.5</Mass>
+      <StuffEffectMultiplierArmor>0.15</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>0.7</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.7</StuffEffectMultiplierInsulation_Heat>
+      <EquipDelay>2.5</EquipDelay>
+
+      <ArmorRating_Sharp>0.04</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.04</ArmorRating_Blunt>
+    </statBases>
+    <equippedStatOffsets>
+      <MoveSpeed>0.5</MoveSpeed>
+      <RestRateMultiplier>0.1</RestRateMultiplier>
+      <ToxicEnvironmentResistance>0.25</ToxicEnvironmentResistance>
+    </equippedStatOffsets>
+
+    <smeltable>false</smeltable>
+    <costStuffCount>30</costStuffCount>
+    <stuffCategories>
+      <li>Fabric</li>
+      <li>Leathery</li>
+    </stuffCategories>
+
+    <apparel>
+      <useWornGraphicMask>true</useWornGraphicMask>
+      <wornGraphicPath>Things/Apparel/VV_ChildApparel</wornGraphicPath>
+      <bodyPartGroups>
+        <li>Torso</li>
+        <li>Legs</li>
+      </bodyPartGroups>
+      <layers>
+        <li>OnSkin</li>
+      </layers>
+      <tags>
+        <li>VV_ViviApparel</li>
+      </tags>
+      <developmentalStageFilter>Child</developmentalStageFilter>
+      <canBeDesiredForIdeo>false</canBeDesiredForIdeo>
+      <canBeGeneratedToSatisfyToxicEnvironmentResistance>false</canBeGeneratedToSatisfyToxicEnvironmentResistance>
+    </apparel>
+    
+    <recipeMaker>
+      <recipeUsers>
+        <li>CraftingSpot</li>
+      </recipeUsers>
+
+      <researchPrerequisite>VV_Apparels</researchPrerequisite>
+      <displayPriority>3100</displayPriority>
+    </recipeMaker>
+
+    <tradeTags Inherit="False">
+      <li>VV_ViviApparel</li>
+    </tradeTags>
+    
+    <colorGenerator Class="ColorGenerator_White" />
+    
+    <modExtensions>
+      <li Class="RPEF.ConstraintModExtension">
+        <def>VV_RaceConstraint</def>
+      </li>
+    </modExtensions>
+  </ThingDef>
+</Defs>

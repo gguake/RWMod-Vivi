@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <ThingDef ParentName="BasePawn" HasImport="True">
+    <defName>VV_Vivi</defName>
+    <label>vivi</label>
+    <description>A race similar to a kind of fairy that lives a lifestyle similar to bees.
+\nTheir origin is unknown, but their lifestyle is mostly similar to bees, and unlike normal humans, they reproduce through parthenogenesis, and are known to have their unique mode of communication and a short lifespan.
+\nVivi genes are abnormally prone to mutations compared to other creatures, so it is common to be born with random xenogenes. For this reason, despite parthenogenesis, they show a diverse genetic distribution.
+\nTypically, Vivis live only near their nests, so they are not commonly seen outside, but occasionally you can see Vivi who wander to create new nests.</description>
+
+    <statBases>
+			<MarketValue>1250</MarketValue>
+			<Mass>45</Mass>
+      <Flammability>0.9</Flammability>
+			<CarryingCapacity>85</CarryingCapacity>
+			<PainShockThreshold>0.7</PainShockThreshold>
+			<MeatAmount>35</MeatAmount>
+			<LeatherAmount>35</LeatherAmount>
+
+      <ComfyTemperatureMin>16</ComfyTemperatureMin>
+      <ComfyTemperatureMax>36</ComfyTemperatureMax>
+
+      <ConstructionSpeed>1.25</ConstructionSpeed>
+      <SmoothingSpeed>1.5</SmoothingSpeed>
+      <CleaningSpeed>1.25</CleaningSpeed>
+      <PawnTrapSpringChance>0.3</PawnTrapSpringChance>
+      <MeleeDodgeChance>10</MeleeDodgeChance>
+
+      <MoveSpeed>5.8</MoveSpeed>
+      <MiningSpeed>0.5</MiningSpeed>
+      <MiningYield>0.5</MiningYield>
+      <PsychicSensitivity>0.5</PsychicSensitivity>
+      <Fertility>0</Fertility>
+
+      <RoyalFavorValue>1</RoyalFavorValue>
+
+      <VV_HoneyGatherSpeed>1</VV_HoneyGatherSpeed>
+      <VV_HoneyGatherYield>1</VV_HoneyGatherYield>
+      <VV_PlantGatherSpeed>1</VV_PlantGatherSpeed>
+      <VV_PlantGatherYield>1</VV_PlantGatherYield>
+    </statBases>
+
+    <tools Inherit="False">
+      <li>
+        <label>left fist</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>6.2</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>LeftHand</linkedBodyPartsGroup>
+        <surpriseAttack>
+          <extraMeleeDamages>
+            <li>
+              <def>Stun</def>
+              <amount>14</amount>
+            </li>
+          </extraMeleeDamages>
+        </surpriseAttack>
+      </li>
+      <li>
+        <label>right fist</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>6.2</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>RightHand</linkedBodyPartsGroup>
+        <surpriseAttack>
+          <extraMeleeDamages>
+            <li>
+              <def>Stun</def>
+              <amount>14</amount>
+            </li>
+          </extraMeleeDamages>
+        </surpriseAttack>
+      </li>
+      <li>
+        <label>teeth</label>
+        <capacities>
+          <li>Bite</li>
+        </capacities>
+        <power>6.2</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>Teeth</linkedBodyPartsGroup>
+        <chanceFactor>0.07</chanceFactor>
+        <soundMeleeHit>Pawn_Melee_HumanBite_Hit</soundMeleeHit>
+        <soundMeleeMiss>Pawn_Melee_HumanBite_Miss</soundMeleeMiss>
+      </li>
+      <li>
+        <label>head</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>4</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+        <chanceFactor>0.2</chanceFactor>
+      </li>
+    </tools>
+
+    <race>
+      <thinkTreeMain>Humanlike</thinkTreeMain>
+      <thinkTreeConstant>HumanlikeConstant</thinkTreeConstant>
+      <intelligence>Humanlike</intelligence>
+      <makesFootprints>true</makesFootprints>
+      <lifeExpectancy>60</lifeExpectancy>
+
+      <bloodDef>Filth_Blood</bloodDef>
+      <bloodSmearDef>Filth_BloodSmear</bloodSmearDef>
+      <leatherDef>Leather_Light</leatherDef>
+
+      <body>VV_Vivi</body>
+      <renderTree>VV_Vivi</renderTree>
+      <foodType>OmnivoreHuman</foodType>
+      <gestationPeriodDays>300</gestationPeriodDays>
+      <meatMarketValue>0.5</meatMarketValue>
+      <manhunterOnTameFailChance>0.50</manhunterOnTameFailChance>
+      <manhunterOnDamageChance>0.90</manhunterOnDamageChance>
+      <soundCallIntervalRange>2000~5000</soundCallIntervalRange>
+      <canBecomeShambler>true</canBecomeShambler>
+      <knowledgeCategory MayRequire="Ludeon.RimWorld.Anomaly">Basic</knowledgeCategory>
+      <anomalyKnowledge>1</anomalyKnowledge>
+
+      <litterSizeCurve>
+        <points>
+          <li>(0.5, 0)</li>
+          <li>(1, 1)</li>
+          <li>(1.01, 0.02)</li>
+          <li>(3.5, 0)</li>
+        </points>
+      </litterSizeCurve>
+
+			<lifeStageAges Inherit="False">
+				<li>
+					<def>HumanlikeBaby</def>
+					<minAge>0</minAge>
+				</li>
+				<li>
+					<def>HumanlikeChild</def>
+					<minAge>2.999999</minAge>
+				</li>
+				<li>
+					<def>HumanlikeChild_Vivi</def>
+					<minAge>3</minAge>
+				</li>
+				<li>
+					<def>HumanlikePreTeenager</def>
+					<minAge>11.999999</minAge>
+				</li>
+				<li>
+					<def>HumanlikePreTeenager_Vivi</def>
+					<minAge>12</minAge>
+				</li>
+				<li>
+					<def>HumanlikeTeenager</def>
+					<minAge>12.999999</minAge>
+				</li>
+				<li>
+					<def>HumanlikeTeenager_Vivi</def>
+					<minAge>13</minAge>
+				</li>
+				<li>
+					<def>HumanlikeAdult</def>
+					<minAge>16</minAge>
+				</li>
+				<li>
+					<def>HumanlikeAdult_Vivi</def>
+					<minAge>16.000001</minAge>
+				</li>
+			</lifeStageAges>
+
+      <lifeStageWorkSettings Inherit="False">
+        <Firefighter>13</Firefighter>
+        <Patient>0</Patient>
+        <Doctor>10</Doctor>
+        <PatientBedRest>0</PatientBedRest>
+        <Childcare>0</Childcare>
+        <BasicWorker>3</BasicWorker>
+        <Warden>13</Warden>
+        <Handling>7</Handling>
+        <Cooking>3</Cooking>
+        <Hunting>10</Hunting>
+        <Construction>7</Construction>
+        <Growing>3</Growing>
+        <Mining>13</Mining>
+        <PlantCutting>3</PlantCutting>
+        <Smithing>7</Smithing>
+        <Tailoring>7</Tailoring>
+        <Art>7</Art>
+        <Crafting>3</Crafting>
+        <Hauling>3</Hauling>
+        <Cleaning>3</Cleaning>
+        <Research>10</Research>
+      </lifeStageWorkSettings>
+      
+      <soundMeleeDodge>Pawn_MeleeDodge</soundMeleeDodge>
+      <soundMeleeHitPawn>Pawn_Melee_Punch_HitPawn</soundMeleeHitPawn>
+			<soundMeleeMiss>Pawn_Melee_Punch_Miss</soundMeleeMiss>
+
+      <specialShadowData Inherit="False">
+        <volume>(0.24, 0.45, 0.32)</volume>
+        <offset>(0,0,-0.27)</offset>
+      </specialShadowData>
+      
+      <ageGenerationCurve Inherit="False">
+        <points>
+          <li>(0,0)</li>
+          <li>(0.001,23)</li>
+          <li>(8,30)</li>
+          <li>(12.5,98)</li>  <!-- Exclude 12.5-13 years to avoid spawning pawns who are very close to becoming adults -->  
+          <li>(12.51,0)</li>  
+          <li>(13,0)</li>      
+          <li>(13.001,122)</li><!-- End exclude -->
+          <li>(13.999,130)</li>
+          <li>(14,0)</li>
+          <li>(14.001,130)</li>
+          <li>(16,100)</li>
+          <li>(17.999,100)</li>
+          <li>(18,0)</li>
+          <li>(18.001,0)</li>
+          <li>(18.002,150)</li>
+          <li>(19,200)</li>
+          <li>(25,100)</li>
+          <li>(30,10)</li>
+          <li>(50,0)</li>
+        </points>
+      </ageGenerationCurve>
+      
+      <hediffGiverSets ImportPath="Defs/ThingDef[@Name=&quot;Human&quot;]/race/hediffGiverSets">
+        <li>VV_Vivi</li>
+      </hediffGiverSets>
+
+			<nameCategory>HumanStandard</nameCategory>
+      <nameGenerator>VV_NamerPersonVivi</nameGenerator>
+      <nameGeneratorFemale>VV_NamerPersonVivi</nameGeneratorFemale>
+
+      <baseBodySize>0.8</baseBodySize>
+      <baseHealthScale>0.85</baseHealthScale>
+      <baseHungerRate>0.8</baseHungerRate>
+    </race>
+
+    <recipes ImportPath="Defs/ThingDef[@Name=&quot;Human&quot;]/recipes">
+    </recipes>
+
+    <ingredient>
+      <mergeCompatibilityTags>
+        <li>HumanMeat</li>
+      </mergeCompatibilityTags>
+    </ingredient>
+
+    <comps>
+      <li MayRequire="Ludeon.RimWorld.Anomaly" Class="CompProperties_HoldingPlatformTarget">
+        <baseEscapeIntervalMtbDays>120</baseEscapeIntervalMtbDays>
+        <getsColdContainmentBonus>true</getsColdContainmentBonus>
+      </li>
+
+      <li MayRequire="Ludeon.RimWorld.Anomaly" Class="CompProperties_Studiable">
+        <frequencyTicks>120000</frequencyTicks>
+        <minMonolithLevelForStudy>1</minMonolithLevelForStudy>
+        <requiresImprisonment>true</requiresImprisonment>
+      </li>
+
+      <li Class="VVRace.CompProperties_EggLayer">
+        <eggProgressDays>6</eggProgressDays>
+      </li>
+      
+      <li Class="VVRace.CompProperties_Vivi" />
+    </comps>
+
+    <modExtensions>
+      <li Class="RPEF.RaceExtension">
+        <thoughtReplacer>
+          <SleptInBarracks>VV_SleptInBarracks</SleptInBarracks>
+          <MyDaughterDied>VV_MyDaughterDied</MyDaughterDied>
+          <MyDaughterLost>VV_MyDaughterLost</MyDaughterLost>
+          <PawnWithGoodOpinionDied>VV_PawnWithGoodOpinionDied</PawnWithGoodOpinionDied>
+          <PawnWithGoodOpinionLost>VV_PawnWithGoodOpinionLost</PawnWithGoodOpinionLost>
+        </thoughtReplacer>
+
+        <sterile>true</sterile>
+        <growthMomentAgeOverride>
+          <li>5</li>
+          <li>7</li>
+          <li>10</li>
+          <li>13</li>
+        </growthMomentAgeOverride>
+        <growthPointFactorCurve>
+          <points>
+            <li>(6.9999,3.0)</li>
+            <li>(7,2.5)</li>
+          </points>
+        </growthPointFactorCurve>
+
+        <romanceFrequencyWeight>0</romanceFrequencyWeight>
+        <romanceSuccessChanceMultiplierAsInitiator>0</romanceSuccessChanceMultiplierAsInitiator>
+        <romanceSuccessChanceMultiplierAsRecipient>0</romanceSuccessChanceMultiplierAsRecipient>
+      </li>
+
+      <li Class="RPEF.PawnGeneratorRaceHook">
+        <relationChanceMultiplier>
+          <Spouse>0</Spouse>
+          <Fiance>0</Fiance>
+          <ExSpouse>0</ExSpouse>
+          <Lover>0</Lover>
+          <ExLover>0</ExLover>
+          <Parent>0</Parent>
+          <Child>0</Child>
+          <Sibling>0</Sibling>
+          <HalfSibling>0</HalfSibling>
+        </relationChanceMultiplier>
+
+        <fixedFemaleBodyType>Thin</fixedFemaleBodyType>
+        <minAgeForAdulthood>16</minAgeForAdulthood>
+
+        <melaninGeneOverrides>
+          <VV_Skin_Melanin>100</VV_Skin_Melanin>
+        </melaninGeneOverrides>
+
+        <hairColorGeneOverrides>
+          <Hair_InkBlack>5</Hair_InkBlack>
+          <Hair_Gray>5</Hair_Gray>
+          <Hair_DarkBlack>5</Hair_DarkBlack>
+          <Hair_DarkReddish>10</Hair_DarkReddish>
+          <Hair_DarkSaturatedReddish>10</Hair_DarkSaturatedReddish>
+          <Hair_DarkBrown>10</Hair_DarkBrown>
+          <Hair_ReddishBrown>10</Hair_ReddishBrown>
+          <Hair_SandyBlonde>5</Hair_SandyBlonde>
+          <Hair_Blonde>5</Hair_Blonde>
+        </hairColorGeneOverrides>
+
+        <forcedXenotype>VV_Vivi</forcedXenotype>
+      </li>
+
+      <li Class="RPEF.ConstraintModExtension">
+        <def>VV_PawnConstraint</def>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <HediffGiverSetDef>
+    <defName>VV_Vivi</defName>
+    <hediffGivers>
+      <li Class="VVRace.HediffGiver_GeneticUnstablity">
+        <hediff>VV_GeneticUnstability</hediff>
+        <partsToAffect>
+          <li>Torso</li>
+        </partsToAffect>
+
+        <causingHediffs>
+          <li>XenogerminationComa</li>
+          <li>XenogermLossShock</li>
+          <li>XenogermReplicating</li>
+        </causingHediffs>
+        <chance>0.02</chance>
+
+        <letterLabel>Genetic unstable</letterLabel>
+        <letter>[PAWN_nameDef]'s genes have become extremely unstable. In the worst case, something terrible might happen.</letter>
+      </li>
+    </hediffGivers>
+  </HediffGiverSetDef>
+
+</Defs>

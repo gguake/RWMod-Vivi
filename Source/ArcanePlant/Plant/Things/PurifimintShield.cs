@@ -8,6 +8,8 @@ namespace VVRace
     {
         private CompProjectileInterceptor _compProjectileInterceptor;
 
+        public override int UpdateRateTicks => 1;
+
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
@@ -20,10 +22,8 @@ namespace VVRace
             Comps_PostDraw();
         }
 
-        public override void Tick()
+        protected override void TickInterval(int delta)
         {
-            base.Tick();
-
             if (_compProjectileInterceptor.currentHitPoints <= 0)
             {
                 Destroy();

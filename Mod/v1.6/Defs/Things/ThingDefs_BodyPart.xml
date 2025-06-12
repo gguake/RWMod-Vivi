@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+	<ThingDef ParentName="BodyPartProstheticMakeableBase">
+		<defName>VV_FakeAntennae</defName>
+		<label>fake vivi antennae</label>
+		<description>A fake antenna made from fibers mixed with Vivi cream. It doesn't help much, but it looks better than not having one.</description>
+		<techLevel>Medieval</techLevel>
+		<costList>
+			<VV_Viviwax>25</VV_Viviwax>
+			<Cloth>25</Cloth>
+		</costList>
+		<statBases>
+			<WorkToMake>3000</WorkToMake>
+			<Mass>0.5</Mass>
+		</statBases>
+		<techHediffsTags>
+			<li>Simple</li>
+		</techHediffsTags>
+	</ThingDef>	
+	
+	<ThingDef ParentName="BodyPartProstheticMakeableBase">
+		<defName>VV_FakeWing</defName>
+		<label>fake vivi wing</label>
+		<description>A fake wing made from fibers mixed with Vivi cream. It doesn't help much, but it looks better than not having one.</description>
+		<techLevel>Medieval</techLevel>
+		<costList>
+			<VV_Viviwax>80</VV_Viviwax>
+			<Cloth>40</Cloth>
+		</costList>
+		<statBases>
+			<WorkToMake>4000</WorkToMake>
+			<Mass>0.5</Mass>
+		</statBases>
+		<techHediffsTags>
+			<li>Simple</li>
+		</techHediffsTags>
+	</ThingDef>
+  
+	<ThingDef ParentName="BodyPartBionicBase">
+		<defName>VV_BionicAntennae</defName>
+		<label>bionic vivi antennae</label>
+		<description>a bionic vivi antennae made with foreign technology. Not only can it move like a real antenna, but it can also detect further distances due to its built-in advanced sensors.</description>
+		<techLevel>Spacer</techLevel>
+		<costList> 
+			<Plasteel>10</Plasteel>
+			<VV_Viviwax>30</VV_Viviwax>
+			<ComponentSpacer>2</ComponentSpacer>
+		</costList>
+		<statBases>
+			<WorkToMake>18000</WorkToMake>
+			<Mass>3</Mass>
+		</statBases>
+		<techHediffsTags>
+			<li>Advanced</li>
+		</techHediffsTags>
+	</ThingDef>
+  
+	<ThingDef ParentName="BodyPartBionicBase">
+		<defName>VV_BionicWing</defName>
+		<label>bionic vivi wing</label>
+		<description>a bionic vivi wing made with foreign technology. Not only can it flutter like a real wing, but it can also move with less effort and is much lighter.</description>
+		<techLevel>Spacer</techLevel>
+		<costList> 
+			<Plasteel>15</Plasteel>
+			<VV_Viviwax>60</VV_Viviwax>
+			<ComponentSpacer>3</ComponentSpacer>
+		</costList>
+		<statBases>
+			<WorkToMake>24000</WorkToMake>
+			<Mass>3</Mass>
+		</statBases>
+		<techHediffsTags>
+			<li>Advanced</li>
+		</techHediffsTags>
+	</ThingDef>
+</Defs>

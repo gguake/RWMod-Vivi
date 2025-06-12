@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <RuleDef>
+    <defName>VV_EdgeBarricade</defName>
+    <symbol>vv_edgebarricade</symbol>
+    <resolvers>
+      <li Class="VVRace.SymbolResolver_EdgeBarricade" />
+    </resolvers>
+  </RuleDef>
+  
+  <RuleDef>
+    <defName>VV_TurretGarden</defName>
+    <symbol>vv_turret_garden</symbol>
+    <resolvers>
+      <li Class="VVRace.SymbolResolver_TurretGarden">
+        <minRectSize>(7,7)</minRectSize>
+      </li>
+    </resolvers>
+  </RuleDef>
+  
+  <RuleDef>
+    <defName>VV_HexaEmptyRoom</defName>
+    <symbol>vv_hexa_empty_room</symbol>
+    <resolvers>
+      <li Class="VVRace.SymbolResolver_HexaEmptyRoom" />
+    </resolvers>
+  </RuleDef>
+
+  <RuleDef>
+    <defName>VV_HexaRoomBarracks</defName>
+    <symbol>vv_hexa_room_barracks</symbol>
+    <resolvers>
+      <li Class="VVRace.SymbolResolver_HexaRoomBarracks" />
+    </resolvers>
+  </RuleDef>
+
+  <RuleDef>
+    <defName>VV_HexaRoomDining</defName>
+    <symbol>vv_hexa_room_dining</symbol>
+    <resolvers>
+      <li Class="VVRace.SymbolResolver_HexaRoomDining" />
+    </resolvers>
+  </RuleDef>
+
+  <RuleDef>
+    <defName>VV_HexaRoomGatheringHoney</defName>
+    <symbol>vv_hexa_room_gathering_honey</symbol>
+    <resolvers>
+      <li Class="VVRace.SymbolResolver_HexaRoomGatheringHoney" />
+    </resolvers>
+  </RuleDef>
+
+  <RuleDef>
+    <defName>VV_HexaRoomGreenhouse</defName>
+    <symbol>vv_hexa_room_greenhouse</symbol>
+    <resolvers>
+      <li Class="VVRace.SymbolResolver_HexaRoomGreenhouse" />
+    </resolvers>
+  </RuleDef>
+
+  <RuleDef>
+    <defName>VV_HexaRoomCrafting</defName>
+    <symbol>vv_hexa_room_crafting</symbol>
+    <resolvers>
+      <li Class="VVRace.SymbolResolver_HexaRoomCrafting" />
+    </resolvers>
+  </RuleDef>
+
+  <RuleDef>
+    <defName>VV_HexaRoomRefining</defName>
+    <symbol>vv_hexa_room_refining</symbol>
+    <resolvers>
+      <li Class="VVRace.SymbolResolver_HexaRoomRefining" />
+    </resolvers>
+  </RuleDef>
+
+  <RuleDef>
+    <defName>VV_HexaRoomTrap</defName>
+    <symbol>vv_hexa_room_trap</symbol>
+    <resolvers>
+      <li Class="VVRace.SymbolResolver_HexaRoomTrap" />
+    </resolvers>
+  </RuleDef>
+
+  <RuleDef>
+    <defName>VV_HexaRoomHatchery</defName>
+    <symbol>vv_hexa_room_hatchery</symbol>
+    <resolvers>
+      <li Class="VVRace.SymbolResolver_HexaRoomHatchery" />
+    </resolvers>
+  </RuleDef>
+
+  <RuleDef>
+    <defName>VV_ViviEggSpawn</defName>
+    <symbol>vv_vivi_egg_spawn</symbol>
+    <resolvers>
+      <li Class="VVRace.SymbolResolver_ViviEggSpawn" />
+    </resolvers>
+  </RuleDef>
+
+  <RuleDef>
+    <defName>VV_ViviBasePart</defName>
+    <symbol>vv_vivi_basePart</symbol>
+    <resolvers>
+      <li Class="VVRace.SymbolResolver_ViviBasePart">
+        <minRectSize>(17, 11)</minRectSize>
+      </li>
+    </resolvers>
+  </RuleDef>
+
+  <RuleDef>
+    <defName>VV_ViviSettlement</defName>
+    <symbol>vv_vivi_settlement</symbol>
+    <resolvers>
+      <li Class="VVRace.SymbolResolver_ViviSettlement">
+        <minRectSize>(25, 19)</minRectSize>
+      </li>
+    </resolvers>
+  </RuleDef>
+</Defs>

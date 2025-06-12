@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+<VV_ViviCreamWall.label>비비 크림 벽</VV_ViviCreamWall.label>
+<VV_ViviCreamWall.description>비비 크림으로 급조한 벽입니다. 지나갈수 없고 지붕을 지지하지만 충격에 매우 취약합니다.
+\n이 벽을 다듬고 말리면 견고한 구조의 벽으로 만들 수 있습니다. 특유의 구조로 인해 불안정한 지반에도 건설할 수 있습니다.</VV_ViviCreamWall.description>
+
+<VV_SmoothedViviCreamWall.label>매끄러운 비비 크림 벽</VV_SmoothedViviCreamWall.label>
+<VV_SmoothedViviCreamWall.description>다듬어진 비비 크림 벽입니다. 지나갈수 없고 지붕을 지지하지만 충격에 매우 취약합니다.
+\n시간이 지나서 크림이 마르면 견고한 벽이 됩니다.</VV_SmoothedViviCreamWall.description>
+
+<VV_ViviHoneycombWall.label>비비 벌집 벽</VV_ViviHoneycombWall.label>
+<VV_ViviHoneycombWall.description>육각 구조가 층층히 쌓여있는 벽입니다. 지나갈수 없고 지붕을 지지합니다.
+\n각종 충격에는 매우 튼튼하지만 화재에는 매우 취약합니다.</VV_ViviHoneycombWall.description>
+
+<VV_ViviHardenHoneycombWall.label>경화된 비비 벌집 벽</VV_ViviHardenHoneycombWall.label>
+<VV_ViviHardenHoneycombWall.description>생체가닥으로 경화된 벌집 벽입니다. 지나갈수 없고 지붕을 지지합니다.
+\n일반 벌집 벽보다는 내구성이 조금 낮지만 불이 붙지 않아 외벽으로 사용하기 좋습니다.</VV_ViviHardenHoneycombWall.description>
+
+<VV_ViviHatchery.label>비비 부화기</VV_ViviHatchery.label>
+<VV_ViviHatchery.description>비비 알을 부화시키기 위한 구조물입니다. 지붕이 있는 실내에 있어야 하며 적절한 온도가 필요합니다. 적절한 환경의 부화기가 있다면 로열 비비들은 그곳에 가서 알을 낳습니다.</VV_ViviHatchery.description>
+
+<VV_GatheringSpot.label>간이 채집 장소</VV_GatheringSpot.label>
+<VV_GatheringSpot.description>주변의 식물에서 각종 채집 작업을 하기 위한 장소입니다.
+\n적당한 장비가 없기 때문에 원래 채집량의 절반만 얻을 수 있으며 채집 장소 근처에서만 채집이 가능합니다.</VV_GatheringSpot.description>
+
+<VV_GatheringBarrel.label>채집 작업대</VV_GatheringBarrel.label>
+<VV_GatheringBarrel.description>주변의 식물에서 각종 채집 작업을 하기 위한 작업대입니다.
+\n채집 작업은 작업대 근처에서만 할 수 있습니다.</VV_GatheringBarrel.description>
+
+<VV_RefiningWorkbench.label>비비 가공 작업대</VV_RefiningWorkbench.label>
+<VV_RefiningWorkbench.description>비비들이 가공 작업을 하기 위한 작업대입니다.</VV_RefiningWorkbench.description>
+
+<VV_ArcanePlantPot.label>마법 식물 화분</VV_ArcanePlantPot.label>
+<VV_ArcanePlantPot.description>마법 식물을 심을수 있는 화분입니다. 보통 실내나 식물이 자라지 못하는곳에 마법 식물을 배치하기 위해 사용됩니다.</VV_ArcanePlantPot.description>
+
+<VV_ArcanePlantFarm.label>마법 식물 재배 작업대</VV_ArcanePlantFarm.label>
+<VV_ArcanePlantFarm.description>마법 식물을 재배하기 위한 대형 화분입니다.</VV_ArcanePlantFarm.description>
+
+<VV_AutoExtractor.label>자동 꿀 추출기</VV_AutoExtractor.label>
+<VV_AutoExtractor.description>원심력을 이용해 정제되지 않은 비비 꿀이나 프로폴리스에서 필요한 성분을 대량으로 추출하는 기계입니다. 손으로 작업하는것보다 훨씬 빠르고 대량으로 작업 가능하지만 전기가 필요합니다.</VV_AutoExtractor.description>
+</LanguageData>

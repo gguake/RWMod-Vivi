@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <VV_PlayerVivi.label>비비</VV_PlayerVivi.label>
+  <VV_PlayerVivi.description>.</VV_PlayerVivi.description>
+  <VV_PlayerVivi.pawnSingular>비비</VV_PlayerVivi.pawnSingular>
+  <VV_PlayerVivi.pawnsPlural>비비</VV_PlayerVivi.pawnsPlural>
+  <VV_PlayerVivi.leaderTitle>대변인</VV_PlayerVivi.leaderTitle>
+
+  <VV_PlayerExiledVivi.label>추방된 비비</VV_PlayerExiledVivi.label>
+  <VV_PlayerExiledVivi.description>.</VV_PlayerExiledVivi.description>
+  <VV_PlayerExiledVivi.pawnSingular>비비</VV_PlayerExiledVivi.pawnSingular>
+  <VV_PlayerExiledVivi.pawnsPlural>비비</VV_PlayerExiledVivi.pawnsPlural>
+  <VV_PlayerExiledVivi.leaderTitle>대변인</VV_PlayerExiledVivi.leaderTitle>
+
+  <VV_PlayerViviRefugee.label>비비 피난민</VV_PlayerViviRefugee.label>
+  <VV_PlayerViviRefugee.description>.</VV_PlayerViviRefugee.description>
+  <VV_PlayerViviRefugee.pawnSingular>비비</VV_PlayerViviRefugee.pawnSingular>
+  <VV_PlayerViviRefugee.pawnsPlural>비비</VV_PlayerViviRefugee.pawnsPlural>
+  <VV_PlayerViviRefugee.leaderTitle>대변인</VV_PlayerViviRefugee.leaderTitle>
+
+  <VV_ViviFederation.label>비비 연방</VV_ViviFederation.label>
+  <VV_ViviFederation.description>독립된 비비 둥지들이 공동의 이익을 위해 설립한 연방입니다. 과거 한때에 통합된 비비 제국이 있었지만 외지인들의 유입과 습격으로 인해 현재는 분열되어 각자 독립된 둥지들로 이루어져 있습니다.
+\n현재 제국의 흔적은 몇가지 전통과 행정 구조로서만 남아있습니다. 이들은 자신들의 일 이외에는 관심이 없으며 먼저 공격하는 일은 거의 없지만 위험을 가하는 자들에게는 호전적이며 특유의 고유 기술로 자신들을 방어합니다.</VV_ViviFederation.description>
+  <VV_ViviFederation.pawnSingular>비비</VV_ViviFederation.pawnSingular>
+  <VV_ViviFederation.pawnsPlural>비비</VV_ViviFederation.pawnsPlural>
+  <VV_ViviFederation.leaderTitle>여제</VV_ViviFederation.leaderTitle>
+</LanguageData>

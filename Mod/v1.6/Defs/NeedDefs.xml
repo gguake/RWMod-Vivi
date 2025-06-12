@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <NeedDef>
+    <defName>VV_RoyalJelly</defName>
+    <needClass>VVRace.Need_RoyalJelly</needClass>
+    <label>royal jelly</label>
+    <description>The total amount of royal jelly a Vivi eats affects how it grows. If a Vivi is fully fed by the time it grows up, it becomes a Royal Vivi; if not, it stays a regular Vivi.
+\nRoyal Vivis can reproduce and are good at interacting and have high psychic sensitivity, but they are not as good at working.</description>
+    <baseLevel>0</baseLevel>
+    <listPriority>45</listPriority>
+    <fallPerDay>0</fallPerDay>
+    <developmentalStageFilter>Baby, Child</developmentalStageFilter>
+  </NeedDef>
+</Defs>

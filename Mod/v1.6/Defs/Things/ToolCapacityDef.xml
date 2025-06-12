@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <ToolCapacityDef>
+    <defName>VV_ToxicStab</defName>
+    <label>toxic stab</label>
+  </ToolCapacityDef>
+  
+</Defs>

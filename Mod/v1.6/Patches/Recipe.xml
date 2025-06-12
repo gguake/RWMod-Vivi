@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/ThingDef/recipes[li="Make_Pemmican" or li="CookMealSimple"]</xpath>
+    <value>
+      <li>VV_Make_HoneyPollenCake</li>
+      <li>VV_Make_HoneyPollenCake_Bulk</li>
+      <li>VV_Make_RoyalJelly</li>
+      <li>VV_Make_FloralHotTea</li>
+      <li>VV_Make_FloralIceTea</li>
+      <li>VV_Make_FloralMilkTea</li>
+    </value>
+  </Operation>
+  
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/ThingDef/recipes[li="AdministerMechSerumHealer"]</xpath>
+    <value>
+      <li>VV_InjectPropolis</li>
+    </value>
+  </Operation>
+  
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/RecipeDef/recipeUsers[li="Human"]</xpath>
+    <value>
+      <li>VV_Vivi</li>
+    </value>
+  </Operation>
+  
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/RecipeDef/defaultIngredientFilter/disallowedThingDefs[li="Meat_Human"]</xpath>
+    <value>
+      <li>Meat_VV_Vivi</li>
+    </value>
+  </Operation>
+  
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/ThingDef/building/defaultStorageSettings/filter/disallowedThingDefs[li="Meat_Human"]</xpath>
+    <value>
+      <li>Meat_VV_Vivi</li>
+    </value>
+  </Operation>
+</Patch>

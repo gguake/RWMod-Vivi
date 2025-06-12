@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <HumanlikeChild_Vivi.label>소아</HumanlikeChild_Vivi.label>
+
+  <HumanlikePreTeenager_Vivi.label>청소년</HumanlikePreTeenager_Vivi.label>
+
+  <HumanlikeTeenager_Vivi.label>청소년</HumanlikeTeenager_Vivi.label>
+  <HumanlikeTeenager_Vivi.adjective>청소년</HumanlikeTeenager_Vivi.adjective>
+
+  <HumanlikeAdult_Vivi.label>성체</HumanlikeAdult_Vivi.label>
+  
+  <VV_TitanicHornetAdult.label>성체</VV_TitanicHornetAdult.label>
+  
+</LanguageData>

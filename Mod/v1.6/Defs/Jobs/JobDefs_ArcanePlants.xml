@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <JobDef>
+    <defName>VV_FertilizeArcanePlant</defName>
+    <driverClass>VVRace.JobDriver_FertilizeArcanePlant</driverClass>
+    <reportString>fertilize TargetA.</reportString>
+    <suspendable>false</suspendable>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef>
+
+  <JobDef>
+    <defName>VV_ManageArcanePlantFarm</defName>
+    <driverClass>VVRace.JobDriver_ManageArcanePlantFarm</driverClass>
+    <reportString>managing arcane plant at TargetA.</reportString>
+    <suspendable>false</suspendable>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef>
+</Defs>

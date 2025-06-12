@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+<VV_HeatingPetal.label>따뜻한 꽃잎</VV_HeatingPetal.label>
+<VV_HeatingPetal.description>마법 꽃을 분해해 얻은 꽃잎입니다. 미약하지만 따뜻한 온기가 남아있습니다.
+\n차로 달여마시면 몸이 조금 따뜻해지며 일부 장비의 제작에도 사용됩니다.</VV_HeatingPetal.description>
+
+<VV_CoolingPetal.label>차가운 꽃잎</VV_CoolingPetal.label>
+<VV_CoolingPetal.description>마법 꽃을 분해해 얻은 꽃잎입니다. 미약하지만 차가운 냉기가 남아있습니다.
+\n차로 달여마시면 몸이 조금 서늘해지며 일부 장비의 제작에도 사용됩니다.</VV_CoolingPetal.description>
+
+<VV_SparklingPetal.label>따끔한 꽃잎</VV_SparklingPetal.label>
+<VV_SparklingPetal.description>마법 꽃을 분해해 얻은 꽃잎입니다. 만지면 미약한 정전기가 느껴집니다.
+\n꽃잎 상태에서도 마나가 잘 흐르는 성질이 있어 다양한 재료로 사용됩니다.</VV_SparklingPetal.description>
+
+<VV_PerfumingPetal.label>향기나는 꽃잎</VV_PerfumingPetal.label>
+<VV_PerfumingPetal.description>마법 꽃을 분해해 얻은 꽃잎입니다. 시간이 지났음에도 여전히 좋은 향기가 납니다.
+\n우유와 함께 차로 달여마시면 일시적으로 기분이 좋아지며 피로 회복에 도움되는 성분이 들어있습니다.</VV_PerfumingPetal.description>
+
+<VV_LivingLeaf.label>살아있는 잎</VV_LivingLeaf.label>
+<VV_LivingLeaf.description>마법 식물을 분해해 얻은 잎입니다. 마치 살아있는것처럼 주변의 자극과 마나에 활발하게 반응합니다.
+\n굉장히 튼튼하고 손상을 스스로 복구하는 성질이 있으며 주로 생체 가닥을 직조하는데 사용됩니다.</VV_LivingLeaf.description>
+
+<VV_SkyweedFluff.label>하늘풀 홀씨</VV_SkyweedFluff.label>
+<VV_SkyweedFluff.description>하늘풀을 분해해 얻은 홀씨입니다. 매우 가벼우며 남아있는 마나에 의해 공중에 뜨는 성질이 있어 홀씨를 묶어 물건을 하늘로 날려보낼수 있습니다.</VV_SkyweedFluff.description>
+
+</LanguageData>

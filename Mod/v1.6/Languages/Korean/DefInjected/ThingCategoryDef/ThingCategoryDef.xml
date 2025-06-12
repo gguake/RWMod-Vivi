@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <VV_ViviWeapon.label>비비 무기</VV_ViviWeapon.label>
+  <VV_ViviWeapon.description>비비 무기</VV_ViviWeapon.description>
+
+  <VV_ViviApparel.label>비비 의류</VV_ViviApparel.label>
+  <VV_ViviApparel.description>비비 의류</VV_ViviApparel.description>
+
+  <VV_ViviTool.label>비비 개인 도구</VV_ViviTool.label>
+  <VV_ViviTool.description>비비 개인 도구</VV_ViviTool.description>
+
+  <VV_BuildingsVivi.label>비비 건물</VV_BuildingsVivi.label>
+  <VV_BuildingsVivi.description>비비 건물</VV_BuildingsVivi.description>
+
+  <VV_ViviProduct.label>비비 꿀 생산품</VV_ViviProduct.label>
+  <VV_ViviProduct.description>비비 꿀 생산품</VV_ViviProduct.description>
+
+  <VV_ViviResource.label>비비 자원</VV_ViviResource.label>
+  <VV_ViviResource.description>비비 자원</VV_ViviResource.description>
+
+  <VV_Petal.label>꽃잎</VV_Petal.label>
+  <VV_Petal.description>꽃잎</VV_Petal.description>
+
+  <VV_ArcanePlant.label>마법 식물</VV_ArcanePlant.label>
+  <VV_ArcanePlant.description>마법 식물</VV_ArcanePlant.description>
+</LanguageData>

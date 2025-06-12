@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 꽃가루 -->
+  <ThingDef ParentName="ResourceBase">
+    <defName>VV_Pollen</defName>
+    <label>vivi pollen</label>
+    <description>Collected pollen from flowers and various plants. Although it's not eaten by typical humans, it contains a bit of mana and nutrients necessary for Vivis.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_HoneyPollenCake</ThingDef>
+      <ThingDef>VV_RoyalJelly</ThingDef>
+    </descriptionHyperlinks>
+
+    <graphicData>
+      <texPath>Things/Item/VV_ViviDust</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <thingCategories>
+      <li>VV_ViviResource</li>
+    </thingCategories>
+
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Grain_Drop</soundInteract>
+    <soundDrop>Grain_Drop</soundDrop>
+    
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <Mass>0.001</Mass>
+      <MarketValue>0.1</MarketValue>
+      <MaxHitPoints>30</MaxHitPoints>
+      <Flammability>1.0</Flammability>
+      <Nutrition>0.02</Nutrition>
+      <DeteriorationRate>8</DeteriorationRate>
+      <FoodPoisonChanceFixedHuman>0.5</FoodPoisonChanceFixedHuman>
+    </statBases>
+    <stackLimit>500</stackLimit>
+
+    <ingestible>
+      <preferability>NeverForNutrition</preferability>
+      <tasteThought>VV_AtePollen</tasteThought>
+      <foodType>Plant</foodType>
+    </ingestible>
+
+    <tradeability>None</tradeability>
+    <tradeTags>
+      <li>VV_ViviResource</li>
+    </tradeTags>
+  </ThingDef>
+  
+  <!-- 정제되지 않은 꿀 -->
+  <ThingDef ParentName="OrganicProductBase">
+    <defName>VV_RawHoney</defName>
+    <label>vivi raw honey</label>
+    <description>Honey collected by Vivi from flowers or plants. The wax part is inedible and it is somewhat mixed with impurities, but it still tastes good.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_FilteredHoney</ThingDef>
+    </descriptionHyperlinks>
+
+    <graphicData>
+      <texPath>Things/Item/VV_CombHoney</texPath>
+    </graphicData>
+    <socialPropernessMatters>true</socialPropernessMatters>
+    <statBases>
+      <Mass>0.03</Mass>
+      <MaxHitPoints>30</MaxHitPoints>
+      <Flammability>0.7</Flammability>
+      <MarketValue>1.1</MarketValue>
+      <Nutrition>0.05</Nutrition>
+      <DeteriorationRate>3</DeteriorationRate>
+      <Beauty>-2</Beauty>
+    </statBases>
+    <stackLimit>75</stackLimit>
+
+    <comps>
+			<li Class="CompProperties_Rottable">
+				<daysToRotStart>60</daysToRotStart>
+				<rotDestroys>true</rotDestroys>
+			</li>
+      <li Class="VVRace.CompProperties_Honey" />
+    </comps>
+
+    <ingestible>
+      <preferability>RawTasty</preferability>
+      <foodType>AnimalProduct, Fluid</foodType>
+    </ingestible>
+    <thingCategories>
+      <li>VV_ViviProduct</li>
+    </thingCategories>
+    
+    <tradeTags>
+      <li>VV_ViviResource</li>
+      <li>VV_ViviHoney</li>
+    </tradeTags>
+  </ThingDef>
+  
+  <!-- 정제된 꿀 -->
+  <ThingDef ParentName="OrganicProductBase">
+    <defName>VV_FilteredHoney</defName>
+    <label>vivi filtered honey</label>
+    <description>pure honey that has been refined to remove unnecessary moisture and impurities. It contains a large amount of nutrients and is used as a staple food for Vivis.
+\nIt contains similar ingredients to ambrosia and was also called nectar in ancient times.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_HoneyPollenCake</ThingDef>
+      <ThingDef>VV_RoyalJelly</ThingDef>
+    </descriptionHyperlinks>
+
+    <graphicData>
+      <texPath>Things/Item/VV_FilteredHoney</texPath>
+    </graphicData>
+    <socialPropernessMatters>true</socialPropernessMatters>
+    <statBases>
+      <Mass>0.1</Mass>
+      <MaxHitPoints>40</MaxHitPoints>
+      <Flammability>0.8</Flammability>
+      <MarketValue>2.4</MarketValue>
+      <Nutrition>0.125</Nutrition>
+    </statBases>
+    <stackLimit>200</stackLimit>
+    <comps>
+      <li Class="VVRace.CompProperties_Honey" />
+    </comps>
+    <ingestible>
+      <preferability>MealAwful</preferability>
+      <foodType>AnimalProduct, Fluid</foodType>
+      <babiesCanIngest>true</babiesCanIngest>
+    </ingestible>
+    <thingCategories>
+      <li>VV_ViviProduct</li>
+    </thingCategories>
+    
+    <tradeTags>
+      <li>VV_ViviProduct</li>
+      <li>VV_ViviHoney</li>
+    </tradeTags>
+  </ThingDef>
+
+	<!-- 꿀 경단 -->
+  <ThingDef ParentName="OrganicProductBase">
+    <defName>VV_HoneyPollenCake</defName>
+    <label>honey pollen cake</label>
+    <description>a cake made from a large amount of pollen and honey, a staple food for Vivis. Since it is divided into small pieces, it's good for feeding to baby Vivis, and young Vivis receive beneficial effects for learning when they eat it.
+\nHumans can eat it too, but they usually don't prefer this type of food.</description>
+    <descriptionHyperlinks>
+      <HediffDef>VV_ViviGrowthBoost</HediffDef>
+    </descriptionHyperlinks>
+    <graphicData>
+      <texPath>Things/Item/VV_HoneyCake</texPath>
+    </graphicData>
+    <socialPropernessMatters>true</socialPropernessMatters>
+    <thingCategories>
+      <li>Foods</li>
+    </thingCategories>
+
+    <statBases>
+      <Mass>0.054</Mass>
+      <Nutrition>0.1</Nutrition>
+    </statBases>
+
+    <ingestible>
+      <foodType>Meal</foodType>
+      <preferability>MealSimple</preferability>
+      <babiesCanIngest>true</babiesCanIngest>
+      <ingestSound>Ingest_Pill</ingestSound>
+      <maxNumToIngestAtOnce>10</maxNumToIngestAtOnce>
+      <optimalityOffsetHumanlikes>10</optimalityOffsetHumanlikes>
+      <optimalityOffsetFeedingAnimals>-15</optimalityOffsetFeedingAnimals>
+			
+      <tasteThought>VV_AtePollen</tasteThought>
+      <outcomeDoers>
+        <li Class="IngestionOutcomeDoer_GiveHediff">
+          <hediffDef>VV_ViviGrowthBoost</hediffDef>
+        </li>
+      </outcomeDoers>
+    </ingestible>
+
+    <stackLimit>75</stackLimit>
+    <comps>
+			<li Class="CompProperties_Rottable">
+				<daysToRotStart>30</daysToRotStart>
+				<rotDestroys>true</rotDestroys>
+			</li>
+      <li Class="VVRace.CompProperties_Honey" />
+    </comps>
+    <allowedArchonexusCount>150</allowedArchonexusCount>
+    
+    <tradeTags>
+      <li>VV_ViviProduct</li>
+    </tradeTags>
+  </ThingDef>
+
+	<!-- 로열 젤리 -->
+	<ThingDef ParentName="OrganicProductBase">
+		<defName>VV_RoyalJelly</defName>
+		<label>royal jelly</label>
+		<description>jelly made from gathering rare ingredients from large amounts of Vivi cream. It's not very tasty on its own, so a bit of honey is added. When child Vivis consume it, they receive beneficial effects for learning, and child Vivis who continuously ingest it grow into Royal Vivis.
+\nAdult Vivis who eat it do not become Royal Vivis, but if consumed regularly, their lifespan can be slightly extended and aging diseases can be prevented.</description>
+    <descriptionHyperlinks>
+      <HediffDef>VV_RoyalJelly</HediffDef>
+      <HediffDef>VV_ViviGrowthBoost</HediffDef>
+      <HediffDef>VV_RoyalVivi</HediffDef>
+    </descriptionHyperlinks>
+		<graphicData>
+			<texPath>Things/Item/VV_RoyalJelly</texPath>
+		</graphicData>
+		<socialPropernessMatters>true</socialPropernessMatters>
+    <orderedTakeGroup>Drug</orderedTakeGroup>
+		<thingCategories>
+			<li>Drugs</li>
+		</thingCategories>
+
+		<statBases>
+			<Mass>0.1</Mass>
+			<Nutrition>0.5</Nutrition>
+		</statBases>
+
+		<ingestible>
+      <baseIngestTicks>120</baseIngestTicks>
+      <chairSearchRadius>8</chairSearchRadius>
+
+      <foodType>Fluid, Processed</foodType>
+			<preferability>NeverForNutrition</preferability>
+			<joy>0.2</joy>
+			<joyKind>Gluttonous</joyKind>
+      
+			<drugCategory>Medical</drugCategory>
+      <canAutoSelectAsFoodForCaravan>false</canAutoSelectAsFoodForCaravan>
+      <outcomeDoers>
+        <li Class="IngestionOutcomeDoer_GiveHediff">
+          <hediffDef>VV_RoyalJelly</hediffDef>
+					<severity>1.0</severity>
+        </li>
+        <li Class="IngestionOutcomeDoer_GiveHediff">
+          <hediffDef>VV_ViviGrowthBoost</hediffDef>
+        </li>
+      </outcomeDoers>
+
+      <maxNumToIngestAtOnce>1</maxNumToIngestAtOnce>
+      <defaultNumToIngestAtOnce>1</defaultNumToIngestAtOnce>
+      <ingestHoldUsesTable>false</ingestHoldUsesTable>
+      <optimalityOffsetFeedingAnimals>-10</optimalityOffsetFeedingAnimals>
+		</ingestible>
+
+    <stackLimit>25</stackLimit>
+		<comps>
+			<li Class="CompProperties_Rottable">
+				<daysToRotStart>60</daysToRotStart>
+				<rotDestroys>true</rotDestroys>
+			</li>
+      <li Class="CompProperties_Drug">
+        <listOrder>2000</listOrder>
+				<overdoseSeverityOffset>0.08~0.14</overdoseSeverityOffset>
+      </li>
+      <li Class="VVRace.CompProperties_Honey" />
+		</comps>
+    
+    <tradeTags>
+      <li>VV_ViviProduct</li>
+    </tradeTags>
+	</ThingDef>
+
+  <!-- 꽃차 -->
+  <ThingDef Abstract="True" Name="VV_FloweringTeaBase" ParentName="DrugBase">
+    <rotatable>false</rotatable>
+
+    <statBases>
+      <WorkToMake>300</WorkToMake>
+      <Mass>0.1</Mass>
+      <DeteriorationRate>6</DeteriorationRate>
+    </statBases>
+
+    <techLevel>Neolithic</techLevel>
+    
+    <ingestible>
+      <foodType>Fluid, Processed</foodType>
+      <joyKind>Chemical</joyKind>
+      <joy>0.5</joy>
+      <baseIngestTicks>750</baseIngestTicks>
+      <nurseable>true</nurseable>
+      <drugCategory>Social</drugCategory>
+      <ingestSound>Ingest_Drink</ingestSound>
+      <ingestHoldOffsetStanding>
+        <northDefault>
+          <offset>(0.18,0,0)</offset>
+        </northDefault>
+      </ingestHoldOffsetStanding>
+      <ingestHoldUsesTable>false</ingestHoldUsesTable>
+      <ingestCommandString>Drink {0}</ingestCommandString>
+      <ingestReportString>Drinking {0}.</ingestReportString>
+
+      <maxNumToIngestAtOnce>1</maxNumToIngestAtOnce>
+      <defaultNumToIngestAtOnce>1</defaultNumToIngestAtOnce>
+      <chairSearchRadius>25</chairSearchRadius>
+      <outcomeDoers>
+        <li Class="IngestionOutcomeDoer_GiveHediff">
+          <hediffDef>VV_FloralTea</hediffDef>
+        </li>
+      </outcomeDoers>
+    </ingestible>
+    <socialPropernessMatters>true</socialPropernessMatters>
+
+    <comps>
+      <li Class="CompProperties_Drug">
+        <listOrder>2100</listOrder>
+        <overdoseSeverityOffset>0.08~0.14</overdoseSeverityOffset>
+      </li>
+    </comps>
+
+    <tradeTags>
+      <li>VV_FloweringTea</li>
+    </tradeTags>
+  </ThingDef>
+  
+  <ThingDef ParentName="VV_FloweringTeaBase">
+    <defName>VV_FloralHotTea</defName>
+    <label>floral hot tea</label>
+    <description>A tea made by steaming warm flower petals and a bit of honey. Drinking it makes the body feel warm, reducing the sensation of cold. Because of the unique properties of the petals, it maintains warmth regardless of stored temperature.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_HeatingPetal</ThingDef>
+      <HediffDef>VV_FloralTea</HediffDef>
+      <HediffDef>VV_WarmingFloralTea</HediffDef>
+    </descriptionHyperlinks>
+
+    <graphicData>
+      <texPath>Things/Item/VV_FloralHotTea</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <drawSize>0.88</drawSize>
+      <color>(255,255,255)</color>
+    </graphicData>
+
+    <ingestible>
+      <outcomeDoers>
+        <li Class="IngestionOutcomeDoer_GiveHediff">
+          <hediffDef>VV_WarmingFloralTea</hediffDef>
+        </li>
+      </outcomeDoers>
+    </ingestible>
+
+    <comps>
+      <li Class="VVRace.CompProperties_Honey" />
+    </comps>
+  </ThingDef>
+  
+  <ThingDef ParentName="VV_FloweringTeaBase">
+    <defName>VV_FloralIceTea</defName>
+    <label>floral ice tea</label>
+    <description>A tea made by steaming cold flower petals and a bit of honey. Drinking it makes the body feel cool, reducing the sensation of heat. Because of the unique properties of the petals, it maintains its coolness regardless of stored temperature.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_CoolingPetal</ThingDef>
+      <HediffDef>VV_FloralTea</HediffDef>
+      <HediffDef>VV_CoolingFloralTea</HediffDef>
+    </descriptionHyperlinks>
+
+    <graphicData>
+      <texPath>Things/Item/VV_FloralIceTea</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <drawSize>0.88</drawSize>
+      <color>(255,255,255)</color>
+    </graphicData>
+
+    <ingestible>
+      <outcomeDoers>
+        <li Class="IngestionOutcomeDoer_GiveHediff">
+          <hediffDef>VV_CoolingFloralTea</hediffDef>
+        </li>
+      </outcomeDoers>
+    </ingestible>
+
+    <comps>
+      <li Class="VVRace.CompProperties_Honey" />
+    </comps>
+  </ThingDef>
+  
+  <ThingDef ParentName="VV_FloweringTeaBase">
+    <defName>VV_FloralMilkTea</defName>
+    <label>floral milk tea</label>
+    <description>A tea made by steeping fragrant flower petals and adding milk. Drinking it makes the body emit a floral scent for a certain period of time, improving mood and aiding sleep.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_PerfumingPetal</ThingDef>
+      <HediffDef>VV_FloralTea</HediffDef>
+      <HediffDef>VV_FlowerScent</HediffDef>
+    </descriptionHyperlinks>
+
+    <graphicData>
+      <texPath>Things/Item/VV_FloralMilkTea</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <drawSize>0.88</drawSize>
+      <color>(255,255,255)</color>
+    </graphicData>
+
+    <ingestible>
+      <outcomeDoers>
+        <li Class="IngestionOutcomeDoer_GiveHediff">
+          <hediffDef>VV_FlowerScent</hediffDef>
+        </li>
+      </outcomeDoers>
+    </ingestible>
+
+    <comps>
+      <li Class="VVRace.CompProperties_Honey" />
+    </comps>
+  </ThingDef>
+
+  <!-- 전투 호르몬 젤리 -->
+  <ThingDef ParentName="MakeableDrugPillBase">
+    <defName>VV_CombatHormoneJelly</defName>
+    <label>vivi combat hormone jelly</label>
+    <description>It is a jelly made by chemically concentrating and processing mead. It has a very high alcohol content, and when consumed by Vivi, it temporary enhances their combat abilities and makes them fearless of fire, but it also increases their aggressiveness and makes them feel fatigue and hunger quickly.
+\nFor non-Vivi humans, it is also marketed as a snack with a stimulating and unique taste.</description>
+    <descriptionHyperlinks>
+      <HediffDef>VV_CombatHormoneJelly</HediffDef>
+      <HediffDef>AlcoholHigh</HediffDef>
+      <HediffDef>AlcoholTolerance</HediffDef>
+      <HediffDef>Hangover</HediffDef>
+      <HediffDef>AlcoholAddiction</HediffDef>
+      <HediffDef>Cirrhosis</HediffDef>
+      <HediffDef>ChemicalDamageModerate</HediffDef>
+    </descriptionHyperlinks>
+
+    <graphicData>
+      <texPath>Things/Item/VV_HormoneJelly</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>1.0</drawSize>
+    </graphicData>
+    <rotatable>false</rotatable>
+    <stackLimit>25</stackLimit>
+    <statBases>
+      <Mass>0.1</Mass>
+      <DeteriorationRate>1.0</DeteriorationRate>
+      <Flammability>0.7</Flammability>
+      <WorkToMake>1800</WorkToMake>
+    </statBases>
+
+    <techLevel>Medieval</techLevel>
+    <ingestible>
+      <foodType>Fluid, Processed, Liquor</foodType>
+      <joyKind>Chemical</joyKind>
+      <joy>0.35</joy>
+      <drugCategory>Hard</drugCategory>
+      
+      <baseIngestTicks>120</baseIngestTicks>
+      <chairSearchRadius>0</chairSearchRadius>
+      <outcomeDoers>
+        <li Class="IngestionOutcomeDoer_GiveHediff">
+          <hediffDef>VV_CombatHormoneJelly</hediffDef>
+          <severity>0.9</severity>
+        </li>
+        <li Class="IngestionOutcomeDoer_GiveHediff">
+          <hediffDef>AlcoholHigh</hediffDef>
+          <severity>0.4</severity>
+          <toleranceChemical>Alcohol</toleranceChemical>
+        </li>
+        <li Class="IngestionOutcomeDoer_GiveHediff">
+          <hediffDef>AlcoholTolerance</hediffDef>
+          <severity>0.04</severity>
+          <divideByBodySize>true</divideByBodySize>
+          <multiplyByGeneToleranceFactors>true</multiplyByGeneToleranceFactors>
+        </li>
+      </outcomeDoers>
+    </ingestible>
+
+    <recipeMaker>
+      <researchPrerequisite>VV_AdvancedGathering</researchPrerequisite>
+      <recipeUsers>
+        <li>DrugLab</li>
+      </recipeUsers>
+      <displayPriority>3000</displayPriority>
+    </recipeMaker>
+    
+    <costList>
+      <VV_Mead>1</VV_Mead>
+      <VV_Propolis>5</VV_Propolis>
+      <VV_Vivicream>10</VV_Vivicream>
+    </costList>
+    
+    <comps>
+      <li Class="CompProperties_Drug">
+        <chemical>Alcohol</chemical>
+        <addictiveness>0.1</addictiveness>
+        <minToleranceToAddict>0.25</minToleranceToAddict>
+        <existingAddictionSeverityOffset>0.20</existingAddictionSeverityOffset>
+        <needLevelOffset>0.9</needLevelOffset>
+        <listOrder>10</listOrder>
+      </li>
+    </comps>
+    <allowedArchonexusCount>50</allowedArchonexusCount>
+    
+    <tradeTags>
+      <li>VV_ViviProduct</li>
+    </tradeTags>
+  </ThingDef>
+
+	<!-- 꿀 젤리 -->
+	<ThingDef ParentName="OrganicProductBase">
+		<defName>VV_ViviHoneyJelly</defName>
+		<label>vivi honey jelly</label>
+		<description>.</description>
+		<graphicData>
+      <texPath>Things/Item/Resource/AnimalProductRaw/InsectJelly</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<socialPropernessMatters>true</socialPropernessMatters>
+    <orderedTakeGroup>Drug</orderedTakeGroup>
+		<thingCategories>
+			<li>Drugs</li>
+		</thingCategories>
+
+		<statBases>
+      <MarketValue>9.6</MarketValue>
+			<Mass>0.025</Mass>
+			<Nutrition>0.6</Nutrition>
+		</statBases>
+
+		<ingestible>
+      <foodType>Fluid, Processed</foodType>
+			<preferability>NeverForNutrition</preferability>
+			<joy>0.3</joy>
+			<joyKind>Gluttonous</joyKind>
+      
+			<drugCategory>Medical</drugCategory>
+      <canAutoSelectAsFoodForCaravan>false</canAutoSelectAsFoodForCaravan>
+      <maxNumToIngestAtOnce>1</maxNumToIngestAtOnce>
+      <defaultNumToIngestAtOnce>1</defaultNumToIngestAtOnce>
+      <ingestHoldUsesTable>false</ingestHoldUsesTable>
+      <optimalityOffsetFeedingAnimals>-10</optimalityOffsetFeedingAnimals>
+		</ingestible>
+
+    <stackLimit>75</stackLimit>
+		<comps>
+      <li Class="CompProperties_Drug">
+        <listOrder>2000</listOrder>
+				<overdoseSeverityOffset>0.08~0.14</overdoseSeverityOffset>
+      </li>
+      <li Class="VVRace.CompProperties_Honey" />
+		</comps>
+    
+    <tradeTags>
+      <li>VV_ViviProduct</li>
+    </tradeTags>
+	</ThingDef>
+
+  
+  
+
+</Defs>

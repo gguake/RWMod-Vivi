@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <ThingDef Abstract="True" Name="VV_PetalBase" ParentName="ResourceBase">
+    <tickerType>Rare</tickerType>
+    <thingCategories>
+      <li>VV_Petal</li>
+    </thingCategories>
+
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Standard_Drop</soundInteract>
+    <soundDrop>Standard_Drop</soundDrop>
+
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <Mass>0.1</Mass>
+      <MaxHitPoints>60</MaxHitPoints>
+      <Flammability>1.0</Flammability>
+      <DeteriorationRate>4</DeteriorationRate>
+    </statBases>
+    <stackLimit>75</stackLimit>
+
+    <tradeTags>
+      <li>VV_Petal</li>
+    </tradeTags>
+
+    <comps>
+      <li Class="CompProperties_Rottable">
+        <daysToRotStart>15</daysToRotStart>
+        <rotDestroys>true</rotDestroys>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="VV_PetalBase">
+    <defName>VV_HeatingPetal</defName>
+    <label>heating petal</label>
+    <description>An petals obtained from deconstructing a arcane flower. There's a slight but warm heat remaining.
+\nIf boiled and drunk as tea, it warms up the body a bit and is also used in the production of some equipment.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_EmberBloom</ThingDef>
+      <ThingDef>VV_Radiantflower</ThingDef>
+    </descriptionHyperlinks>
+
+    <graphicData>
+      <texPath>Things/Item/VV_Petal</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <color>(240,150,15)</color>
+    </graphicData>
+
+    <statBases>
+      <MarketValue>6</MarketValue>
+    </statBases>
+  </ThingDef>
+
+  <ThingDef ParentName="VV_PetalBase">
+    <defName>VV_CoolingPetal</defName>
+    <label>cooling petal</label>
+    <description>An petals obtained from deconstructing a arcane flower. There's a slight but cold air remaining.
+\nIf brewed into a tea, it can slightly cool down the body and it's also used in crafting some equipment.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_FrostBloom</ThingDef>
+      <ThingDef>VV_Waterdrops</ThingDef>
+    </descriptionHyperlinks>
+
+    <graphicData>
+      <texPath>Things/Item/VV_Petal</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <color>(172,255,255)</color>
+    </graphicData>
+
+    <statBases>
+      <MarketValue>6</MarketValue>
+    </statBases>
+  </ThingDef>
+
+  <ThingDef ParentName="VV_PetalBase">
+    <defName>VV_SparklingPetal</defName>
+    <label>sparkling petal</label>
+    <description>An petals obtained from deconstructing a arcane flower. When touched, a slight static electricity is felt.
+
+      \nEven in petal form, it has the property of good mana flow, making it useful in various materials.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_Thunderpetals</ThingDef>
+      <ThingDef>VV_Shockerbud</ThingDef>
+    </descriptionHyperlinks>
+
+    <graphicData>
+      <texPath>Things/Item/VV_Petal</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <color>(180,120,250)</color>
+    </graphicData>
+
+    <statBases>
+      <MarketValue>6</MarketValue>
+    </statBases>
+  </ThingDef>
+
+  <ThingDef ParentName="VV_PetalBase">
+    <defName>VV_PerfumingPetal</defName>
+    <label>perfuming petal</label>
+    <description>An petals obtained from deconstructing a arcane flower. Even though some time has passed, it still gives off a pleasant scent.
+\nWhen brewed into a tea with milk, it temporarily uplifts the mood and contains ingredients that are beneficial for fatigue recovery.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_Richflower</ThingDef>
+      <ThingDef>VV_Purifimint</ThingDef>
+    </descriptionHyperlinks>
+
+    <graphicData>
+      <texPath>Things/Item/VV_Petal</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <color>(250,255,150)</color>
+    </graphicData>
+
+    <statBases>
+      <MarketValue>6</MarketValue>
+    </statBases>
+  </ThingDef>
+
+  <ThingDef ParentName="VV_PetalBase">
+    <defName>VV_LivingLeaf</defName>
+    <label>living leaf</label>
+    <description>an Leaves obtained from deconstructing a arcane plant. It reacts vigorously to the surrounding stimuli and mana, as if it's alive.
+\nIt's incredibly durable and has the ability to self-recover, primarily used for weaving lifestrand.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_Skyweed</ThingDef>
+      <ThingDef>VV_Peashooter</ThingDef>
+      <ThingDef>VV_Cornlauncher</ThingDef>
+      <ThingDef>VV_Shootus</ThingDef>
+    </descriptionHyperlinks>
+
+    <graphicData>
+      <texPath>Things/Item/VV_LivingLeaf</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <color>(255,255,255)</color>
+    </graphicData>
+
+    <statBases>
+      <Mass>0.5</Mass>
+      <MarketValue>6</MarketValue>
+    </statBases>
+  </ThingDef>
+  
+  <ThingDef ParentName="VV_PetalBase">
+    <defName>VV_SkyweedFluff</defName>
+    <label>skyweed fluff</label>
+    <description>These are fluff obtained from deconstructing skyweed. They are very light and have properties that allow them to float in the air due to the remaining mana. By tying the fluff together, objects can be sent flying into the sky.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_Skyweed</ThingDef>
+      <ThingDef>VV_SkyweedBox</ThingDef>
+    </descriptionHyperlinks>
+
+    <graphicData>
+      <texPath>Things/Item/VV_SkyweedFluff</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <color>(255,255,255)</color>
+    </graphicData>
+
+    <statBases>
+      <Mass>0.001</Mass>
+      <MarketValue>8</MarketValue>
+    </statBases>
+    
+    <tradeTags Inherit="False">
+    </tradeTags>
+  </ThingDef>
+</Defs>

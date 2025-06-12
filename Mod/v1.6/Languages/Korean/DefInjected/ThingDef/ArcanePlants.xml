@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+<MinifiedArcanePlant.label>포장된 마법 식물</MinifiedArcanePlant.label>
+
+<VV_ManaTransferTube.label>마나 전송 튜브</VV_ManaTransferTube.label>
+<VV_ManaTransferTube.description>마나를 원거리 전송하는 튜브입니다. 벽이나 다른 건물 아래에 건설할 수 있습니다. 마나를 단순히 전송할 뿐 별도의 마나를 생산하지는 않습니다.</VV_ManaTransferTube.description>
+
+<VV_HiddenManaTransferTube.label>숨겨진 마나 전송 튜브</VV_HiddenManaTransferTube.label>
+<VV_HiddenManaTransferTube.description>땅속에 매립된 마나 전송 튜브입니다. 겉으로 보이지 않아 공격 대상이 되지 않으며 미관에 방해되지도 않지만 건설 비용이 더 비쌉니다.</VV_HiddenManaTransferTube.description>
+
+<VV_EmberBloom.label>잔불꽃</VV_EmberBloom.label>
+<VV_EmberBloom.description>불꽃같은 모양을 띄고있는 마법 꽃으로 주변 온도가 일정 온도에 도달할때까지 마나를 열로 변환해 발산합니다. 주변 온도가 충분히 뜨거운 환경에서는 열을 발산하는 대신 마나를 생산하고 축적합니다.
+\n콩뿌리개의 콩이 잔불꽃 위로 지나가는 경우 일정 확률로 대상에게 화상 피해를 추가로 입히고 불을 붙입니다.</VV_EmberBloom.description>
+
+<VV_FrostBloom.label>서리꽃</VV_FrostBloom.label>
+<VV_FrostBloom.description>얼음 결정같은 모양을 띄고있는 마법 꽃으로 주변 온도가 일정 온도에 도달할때까지 마나를 소모해 열을 흡수합니다. 주변 온도가 충분히 차가운 환경에서는 열을 흡수하는 대신 마나를 생산하고 축적합니다.
+\n콩뿌리개의 콩이 서리꽃 위로 지나가는 경우 콩이 단단하게 변해 대상에게 관통 피해를 추가로 입힙니다.</VV_FrostBloom.description>
+
+<VV_Shockerbud.label>섬광꽃</VV_Shockerbud.label>
+<VV_Shockerbud.description>투명한 꽃잎 내부에서 전기가 방전되는 마법 꽃으로 전선을 연결해 전력을 저장할 수 있습니다. 전력이 충전된 정도에 비례해 마나를 생산합니다.
+\n외부의 충격을 받거나 주변에 메카노이드가 접근하면 내부의 전압이 불안정해져 주변에 막대한 전자기 펄스를 발생시키고 마나가 방전됩니다.
+\n콩뿌리개의 콩이 섬광꽃 위로 지나가는 경우 낮은 확률로 콩이 적을 감전시켜 잠시 기절시킵니다.</VV_Shockerbud.description>
+
+<VV_Thunderpetals.label>벼락꽃</VV_Thunderpetals.label>
+<VV_Thunderpetals.description>꽃술에서 전류가 흐르는 마법 꽃으로 전선을 연결해 마나를 전력으로 변환할 수 있습니다. 번개가 칠때 마나가 일정 이상일 경우 번개를 자신에게 유도해 마나로 전환합니다.
+\n콩뿌리개의 콩이 벼락꽃 위로 지나가는 경우 낮은 확률로 콩이 적을 감전시켜 잠시 기절시킵니다.</VV_Thunderpetals.description>
+
+<VV_Waterdrops.label>물방울꽃</VV_Waterdrops.label>
+<VV_Waterdrops.description>물방울같은 모양을 가진 마법 꽃으로 주변의 물을 흡수해 마나로 변환합니다. 물 위에도 심을 수 있으며 인접한 물 타일이 많을수록 더 많은 마나를 생산합니다. 가까운 화재를 감지하면 저장된 마나를 물로 변환하고 분출해 화재를 진압합니다.
+\n마법 식물 재배 작업대와 같은 방에 배치하면 재배중인 마법 식물의 마나 소모량을 줄여줍니다.</VV_Waterdrops.description>
+
+<VV_Radiantflower.label>빛바라기</VV_Radiantflower.label>
+<VV_Radiantflower.description>해바라기를 닮은 마법 꽃으로 태양광을 마나로 변환합니다. 지붕으로 막혀 태양광을 받을 수 없는 환경에서는 마나를 소모해 작물이 자랄수 있는 강한 빛을 주변에 발산합니다.</VV_Radiantflower.description>
+
+<VV_Richflower.label>풍년화</VV_Richflower.label>
+<VV_Richflower.description>커다란 꽃잎을 가진 마법꽃으로 주기적으로 꽃가루를 주변 바닥에 퍼뜨리며 꿀을 채집할때 많은 꿀을 얻을 수 있습니다.
+\n인접한 식물의 생명 활동에서 마나를 생산하며 주변의 토양을 재배에 유리한 환경으로 변화시킵니다.</VV_Richflower.description>
+
+<VV_Purifimint.label>정화초</VV_Purifimint.label>
+<VV_Purifimint.description>주변에 빛을 내는 작은 마법 식물로 인접한 토양의 오염을 흡수해 마나로 변환하며 주변에 오염된 토양이 많을수록 많은 마나를 생산합니다. 미관상 아름다워 장식에 쓰이기도 합니다.
+\n저장된 마나를 일시적으로 방출해 외부의 투사체를 잠시동안 차단하는 보호막을 잠시동안 생성할 수도 있습니다.</VV_Purifimint.description>
+<VV_PurifimintShield.label>정화초 보호막</VV_PurifimintShield.label>
+
+<VV_Skyweed.label>하늘풀</VV_Skyweed.label>
+<VV_Skyweed.description>민들레 씨앗과 비슷한 모양의 마법 식물로 실외에 있을때 바람의 힘을 마나로 변환합니다.
+\n이 풀의 홀씨는 매우 가볍고 잘 날아가는 성질이 있어 소량의 물건을 실어보내는 용도로도 사용할 수 있습니다.</VV_Skyweed.description>
+
+<VV_SkyweedBox.label>하늘풀 상자</VV_SkyweedBox.label>
+<VV_SkyweedBox.description>하늘풀의 홀씨를 묶어 멀리 날려보낼 수 있는 상자입니다. 파손을 방지하기 위해 밀랍과 천으로 묶었습니다. 별다른 연료는 필요없지만 외지인들이 사용하는 수송 포드보다 용량이 적고 운송가능한 거리가 짧습니다.</VV_SkyweedBox.description>
+<VV_ActiveSkyweedBox.label>하늘풀 상자</VV_ActiveSkyweedBox.label>
+<VV_SkyweedBoxIncoming.label>하늘풀 상자 (접근 중)</VV_SkyweedBoxIncoming.label>
+<VV_SkyweedBoxLeaving.label>하늘풀 상자 (떠나는 중)</VV_SkyweedBoxLeaving.label>
+
+<VV_Peashooter.label>콩뿌리개</VV_Peashooter.label>
+<VV_Peashooter.description>주변의 적을 감지하면 마법 콩을 발사해 쫓아내는 마법 식물입니다. 콩을 발사할 때마다 마나를 소모하며 위력은 약하지만 한번에 대량의 콩을 발사하므로 경장갑의 적에게 효과적입니다.
+\n발사된 콩이 마법 식물 위를 지나가는 경우 식물에 따라 특수한 효과를 적용받기도 합니다.</VV_Peashooter.description>
+<VV_Bullet_Pea.label>완두콩</VV_Bullet_Pea.label>
+<VV_Gun_Peashooter.label>콩뿌리개 꼬투리</VV_Gun_Peashooter.label>
+<VV_Gun_Peashooter.description>.</VV_Gun_Peashooter.description>
+
+<VV_Pealauncher.label>폭탄뿌리개</VV_Pealauncher.label>
+<VV_Pealauncher.description>주변의 적을 감지하면 폭발하는 콩을 발사해 쫓아내는 마법 식물입니다. 폭탄콩을 발사할 때마다 마나를 소모하며 발사된 콩은 탄속이 매우 빠르고 착탄지에서 작게 폭발합니다.
+\n대규모의 적을 토벌하는데 적합하지만 폭발은 아군에게도 큰 피해를 주므로 신중한 배치가 필요합니다.</VV_Pealauncher.description>
+<VV_Bullet_PeaFast.label>폭발콩</VV_Bullet_PeaFast.label>
+<VV_Gun_Pealauncher.label>폭탄뿌리개</VV_Gun_Pealauncher.label>
+<VV_Gun_Pealauncher.description>.</VV_Gun_Pealauncher.description>
+
+<VV_Shootus.label>건인장</VV_Shootus.label>
+<VV_Shootus.description>기묘한 표정의 얼굴을 가진 마법 선인장입니다. 식물이라고 생각되지 않을 정도로 유연하게 움직이며 굉장히 터프해서 대부분의 피해에 내성이 있습니다.
+\n한쪽 손에 원거리 무기를 장착할 수 있으며 적을 감지하면 장착된 무기를 사용해 자동으로 적을 공격합니다. 근접 무기나 생체인증 무기는 착용할 수 없으며 사람이 다루는것보다는 재장전이 다소 느립니다.</VV_Shootus.description>
+
+<VV_Cornlauncher.label>콘뿌리개</VV_Cornlauncher.label>
+<VV_Cornlauncher.description>주변의 적을 감지하면 마법 옥수수를 발사해 공격하는 식물입니다. 발사할 때마다 마나를 소모하며 발사된 마법 옥수수는 착탄시 폭발해 옥수수 낱알을 주변에 퍼뜨리며 옥수수 낱알은 작게 폭발합니다.
+\n대규모의 적을 토벌하는데 적합하지만 폭발은 아군에게도 큰 피해를 주며 생명력이 낮으면 폭발할 위험이 있으므로 신중한 배치가 필요합니다.</VV_Cornlauncher.description>
+<VV_Bullet_Corn.label>옥수수</VV_Bullet_Corn.label>
+<VV_Bullet_CornKernel.label>옥수수 낱알</VV_Bullet_CornKernel.label>
+<VV_Gun_Cornlauncher.label>콘뿌리개</VV_Gun_Cornlauncher.label>
+<VV_Gun_Cornlauncher.description>.</VV_Gun_Cornlauncher.description>
+
+<VV_Everflower.label>영원꽃</VV_Everflower.label>
+<VV_Everflower.description>매우 희귀한 마법 꽃으로 비비들에게 신성한 꽃으로 취급되며 구체적인 재배 방식이 알려지지 않았지만 드물게 다른 마법 식물을 재배할때 함께 발견됩니다.
+\n주기적으로 많은 꽃가루를 내뿜으며 성체 비비가 이 꽃에서 꿀을 채집할때 신체 시간을 마나로 변환해 흡수하여 노화를 되돌리는 특성이 있습니다.
+\n영원꽃의 향기는 강력한 수면 효과가 있지만 비비들은 어느정도 내성을 가지고 있어 비비들만 꿀을 채집할 수 있으며 한 명의 비비가 반복해서 채집할 수는 없습니다.</VV_Everflower.description>
+
+</LanguageData>

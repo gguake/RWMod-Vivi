@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 꿀 채집 -->
+  <RecipeDef Class="VVRace.RecipeDef_Gathering">
+    <defName>VV_GatherHoney</defName>
+    <label>gather honey</label>
+    <description>Gather honey from mature flowers or fruit trees. The speed and yield of honey gathering must be greater than 0 to perform the job.</description>
+    <jobString>Gathering honey.</jobString>
+    
+    <workAmount>920</workAmount>
+    <workSkill>Plants</workSkill>
+    <workSkillLearnFactor>0.025</workSkillLearnFactor>
+    <workSpeedStat>VV_HoneyGatherSpeed</workSpeedStat>
+    <efficiencyStat>VV_HoneyGatherYield</efficiencyStat>
+
+    <effectWorking>VV_Gather_Honey</effectWorking>
+    <soundWorking>Recipe_Brewing</soundWorking>
+    <uiIconThing>VV_RawHoney</uiIconThing>
+
+    <recipeUsers>
+      <li>VV_GatheringSpot</li>
+      <li>VV_GatheringBarrel</li>
+    </recipeUsers>
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <targetCountAdjustment>4</targetCountAdjustment>
+
+    <products>
+      <VV_RawHoney>4</VV_RawHoney>
+    </products>
+    <researchPrerequisite>VV_BasicGathering</researchPrerequisite>
+
+    <gatherWorkerType>VVRace.GatherWorker_Honey</gatherWorkerType>
+    <gatheringJob>VV_GatherHoney</gatheringJob>
+    <gatheringWorkWeight>7</gatheringWorkWeight>
+    <processingWorkWeight>3</processingWorkWeight>
+    <targetCooldownStat>VV_PlantGatherCooldown</targetCooldownStat>
+    <targetYieldStat>VV_PlantHoneyGatherYield</targetYieldStat>
+    <maxPathDanger>Some</maxPathDanger>
+  </RecipeDef>
+  
+  <!-- 꽃가루 채집 -->
+  <RecipeDef Class="VVRace.RecipeDef_Gathering">
+    <defName>VV_GatherPollen</defName>
+    <label>gather pollen</label>
+    <description>Collect scattered pollen from the surrounding ground. Pollen is occasionally dropped around when collecting honey or when moving with it stuck to the body.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_FilthPollen</ThingDef>
+    </descriptionHyperlinks>
+
+    <jobString>Gathering pollen.</jobString>
+    
+    <workAmount>540</workAmount>
+    <workSkill>Plants</workSkill>
+    <workSkillLearnFactor>0.01</workSkillLearnFactor>
+    <workSpeedStat>CleaningSpeed</workSpeedStat>
+    <efficiencyStat>PlantHarvestYield</efficiencyStat>
+
+    <effectWorking>Clean</effectWorking>
+    <soundWorking>Interact_CleanFilth</soundWorking>
+    <uiIconThing>VV_Pollen</uiIconThing>
+
+    <recipeUsers>
+      <li>VV_GatheringBarrel</li>
+    </recipeUsers>
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <targetCountAdjustment>1</targetCountAdjustment>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_FilthPollen</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>VV_FilthPollen</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+
+    <products>
+      <VV_Pollen>8</VV_Pollen>
+    </products>
+    <researchPrerequisite>VV_BasicGathering</researchPrerequisite>
+
+    <gatherWorkerType>VVRace.GatherWorker_Pollen</gatherWorkerType>
+    <gatheringJob>VV_GatherPollen</gatheringJob>
+    <gatheringWorkWeight>1</gatheringWorkWeight>
+    <maxPathDanger>Some</maxPathDanger>
+  </RecipeDef>
+  
+  <!-- 프로폴리스 채집 -->
+  <RecipeDef Class="VVRace.RecipeDef_Gathering">
+    <defName>VV_GatherPropolis</defName>
+    <label>gather propolis</label>
+    <description>Collect rare propolis from surrounding trees. The speed and yield of propolis gathering must be greater than 0 to perform the job, and it takes a significant amount of time to gather.</description>
+
+    <jobString>Gathering propolis.</jobString>
+    
+    <workAmount>3000</workAmount>
+    <workSkill>Plants</workSkill>
+    <workSpeedStat>VV_PlantGatherSpeed</workSpeedStat>
+    <efficiencyStat>VV_PlantGatherYield</efficiencyStat>
+    <workSkillLearnFactor>0.1</workSkillLearnFactor>
+
+    <effectWorking>Clean</effectWorking>
+    <soundWorking>Interact_CleanFilth</soundWorking>
+    <uiIconThing>VV_Propolis</uiIconThing>
+
+    <recipeUsers>
+      <li>VV_GatheringSpot</li>
+      <li>VV_GatheringBarrel</li>
+    </recipeUsers>
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <targetCountAdjustment>2</targetCountAdjustment>
+    <products>
+      <VV_Propolis>2</VV_Propolis>
+    </products>
+    <researchPrerequisite>VV_AdvancedGathering</researchPrerequisite>
+
+    <gatherWorkerType>VVRace.GatherWorker_Plant</gatherWorkerType>
+    <gatheringJob>VV_GatherPropolis</gatheringJob>
+    <gatheringWorkWeight>1</gatheringWorkWeight>
+    <targetCooldownStat>VV_PlantGatherCooldown</targetCooldownStat>
+    <targetYieldStat>VV_TreeResinGatherYield</targetYieldStat>
+    <maxPathDanger>Some</maxPathDanger>
+
+    <skillRequirements>
+      <Plants>8</Plants>
+    </skillRequirements>
+  </RecipeDef>
+</Defs>

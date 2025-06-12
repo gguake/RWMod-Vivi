@@ -7,7 +7,9 @@ namespace VVRace
 {
     public class Designator_FortifyHoneycombWall : Designator
     {
-        public override int DraggableDimensions => 2;
+        public override bool DragDrawMeasurements => true;
+
+        public override DrawStyleCategoryDef DrawStyleCategory => DrawStyleCategoryDefOf.FilledRectangle;
 
         public Designator_FortifyHoneycombWall()
         {

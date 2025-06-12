@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <ThingDef ParentName="VV_ArcanePlantBase">
+    <defName>VV_Everflower</defName>
+    <thingClass>VVRace.ArcanePlant_Everflower</thingClass>
+    <label>everflower</label>
+    <description>It is a very rare arcane flower, treated as a sacred flower by the Vivi. Although its specific cultivation methods are not known, it is occasionally found alongside other arcane plants.
+\nIt periodically releases a large amount of pollen. When an adult Vivi gathers honey from this flower, it has the ability to convert biological age into mana, absorbing it to reverse aging.
+\nThe scent of the everflower has a strong sedative effect, but the Vivi have some resistance to it, allowing only them to gather the honey. However, a single Vivi cannot gather honey repeatedly.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_PerfumingPetal</ThingDef>
+    </descriptionHyperlinks>
+
+    <graphicData>
+      <texPath>Things/Plants/VV_Everflower</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+
+    <statBases>
+      <MaxHitPoints>120</MaxHitPoints>
+      <WorkToBuild>90000</WorkToBuild>
+      <Beauty>15</Beauty>
+      <BeautyOutdoors>15</BeautyOutdoors>
+
+      <VV_PlantGatherCooldown>0.8</VV_PlantGatherCooldown>
+      <VV_PlantHoneyGatherYield>1.4</VV_PlantHoneyGatherYield>
+    </statBases>
+
+    <costList>
+      <VV_PerfumingPetal>20</VV_PerfumingPetal>
+      <VV_Pollen>100</VV_Pollen>
+    </costList>
+
+    <building>
+      <uninstallWork>250</uninstallWork>
+    </building>
+
+    <comps>
+      <li Class="VVRace.CompProperties_RepeatGatherable" />
+
+      <li Class="VVRace.CompProperties_GlowerArcanePlant">
+        <glowRadius>7</glowRadius>
+        <glowColor>(241,178,83,0)</glowColor>
+      </li>
+
+      <li Class="VVRace.CompProperties_FilthMakerArcanePlant">
+        <filthDef>VV_FilthPollen</filthDef>
+        <makeAmountPerDays>3~5</makeAmountPerDays>
+        <radius>1.9</radius>
+        <exceptCenter>true</exceptCenter>
+
+        <spawnEffecter>VV_PollenEmitting</spawnEffecter>
+      </li>
+    </comps>
+
+    <modExtensions>
+      <li Class="VVRace.ManaExtension">
+        <manaCapacity>500</manaCapacity>
+
+        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
+          <mana>80</mana>
+        </manaConsumeRule>
+      </li>
+
+      <li Class="VVRace.ArcanePlantExtension">
+        <zeroManaDamageByChance>1~5</zeroManaDamageByChance>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+</Defs>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <ThingDef ParentName="OrganicProductBase">
+    <defName>VV_ViviEgg</defName>
+    <label>vivi egg</label>
+    <description>This is an egg from which a Vivi can be born. It only hatches when placed in a warm incubator between 19-39℃, and the closer the temperature is maintained to 30℃, the faster it hatches.
+\nIf it's in an inadequate temperature, the egg gets damaged but it automatically recovers once the proper environment is restored.
+\nThe born Vivi inherits the mother's xenogenes and additionally, is born with random xenogenes. (Archites are not inherited.)
+\nCaution: Be careful not to accidentally eat it or let passing animals eat it.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_ViviHatchery</ThingDef>
+    </descriptionHyperlinks>
+    <thingClass>VVRace.ViviEgg</thingClass>
+    
+    <graphicData>
+      <graphicClass>VVRace.Graphic_Conditional</graphicClass>
+      <texPath>Things/Item/VV_ViviEgg</texPath>
+      <color>(245,245,200)</color>
+    </graphicData>
+    <ingestible>
+      <preferability>NeverForNutrition</preferability>
+      <foodType>AnimalProduct</foodType>
+      <ingestEffect>EatMeat</ingestEffect>
+      <ingestSound>RawMeat_Eat</ingestSound>
+      <tasteThought>AteRawFood</tasteThought>
+    </ingestible>
+    <socialPropernessMatters>false</socialPropernessMatters>
+    <statBases>
+      <Mass>1.0</Mass>
+      <MaxHitPoints>50</MaxHitPoints>
+      <DeteriorationRate>0</DeteriorationRate>
+      <Flammability>1.0</Flammability>
+      <Nutrition>0.25</Nutrition>
+      <MarketValue>50.0</MarketValue>
+    </statBases>
+    <stackLimit>1</stackLimit>
+    <healthAffectsPrice>true</healthAffectsPrice>
+    <thingCategories>
+      <li>EggsFertilized</li>
+    </thingCategories>
+    <tickerType>Rare</tickerType>
+    <comps>
+      <li Class="CompProperties_TemperatureRuinable">
+        <compClass>VVRace.CompTemperatureRuinableEgg</compClass>
+        <minSafeTemperature>19</minSafeTemperature>
+        <maxSafeTemperature>39</maxSafeTemperature>
+        <progressPerDegreePerTick>0.0000005</progressPerDegreePerTick>
+      </li>
+
+      <li Class="VVRace.CompProperties_ViviHatcher">
+        <hatcherDaystoHatch>
+          <points>
+            <li>(0, 4)</li>
+            <li>(2500, 6)</li>
+            <li>(7500, 10)</li>
+            <li>(10000, 12)</li>
+          </points>
+        </hatcherDaystoHatch>
+        <adaptTemperatureBonus>0.25</adaptTemperatureBonus>
+
+        <geneCountCurve>
+          <points>
+            <li>(0, 1)</li>
+            <li>(1999, 1)</li>
+            <li>(2000, 2)</li>
+            <li>(4999, 2)</li>
+            <li>(5000, 3)</li>
+            <li>(7999, 3)</li>
+            <li>(8000, 4)</li>
+          </points>
+        </geneCountCurve>
+      </li>
+    </comps>
+    <drawGUIOverlay>false</drawGUIOverlay>
+  </ThingDef>
+</Defs>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+    
+<VV_Alert_ViviDangerousEggs>비비 알 손상중</VV_Alert_ViviDangerousEggs>
+<VV_Alert_ViviDangerousEggsDesc>방치되어 있거나 부화기 안에 있는 알이 적절하지 않은 온도에 의해 손상되고 있습니다.
+\n알이 완전히 손상되면 파괴되므로 알이 보관된 곳의 온도를 {MINTEMP}도 ~ {MAXTEMP}도 사이로 유지하도록 하세요.</VV_Alert_ViviDangerousEggsDesc>
+
+<VV_Alert_ArcanePlantLowMana>마나 매우 낮음</VV_Alert_ArcanePlantLowMana>
+<VV_Alert_ArcanePlantLowManaDesc>식물이 보유한 마나가 매우 낮습니다. 마나가 고갈된 상태에서 방치되면 점차 손상되어 파괴됩니다.
+\n식물이 마나를 얻을수 있는 환경을 갖추거나 마나를 최대치보다 초과해서 생산하는 식물과 붙여서 배치하세요. 비료를 투입해 마나를 충전할 수도 있습니다.
+\n마나를 충전할 여건이 되지 않는다면 포장해서 파손을 방지할 수 있습니다.</VV_Alert_ArcanePlantLowManaDesc>
+
+<VV_Alert_GrowingArcanePlantLowHP>재배중인 식물 위험</VV_Alert_GrowingArcanePlantLowHP>
+<VV_Alert_GrowingArcanePlantLowHPDesc>재배중인 마법 식물의 생명력이 낮습니다. 재배 도중 생명력이 0이되면 재배에 실패하며 소모된 자원은 반환되지 않습니다.
+\n식물의 생명력은 재배 조건이 적절하지 않거나, 마나가 부족하거나, 관리 작업이 제때 되지 않았을 경우 감소할 수 있습니다.
+\n모든 재배 환경이 만족된 상태가 되면 식물의 생명력은 천천히 회복됩니다.</VV_Alert_GrowingArcanePlantLowHPDesc>
+</LanguageData>
