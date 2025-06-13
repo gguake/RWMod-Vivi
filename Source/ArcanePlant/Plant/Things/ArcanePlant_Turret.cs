@@ -88,10 +88,8 @@ namespace VVRace
             ResetCurrentTarget();
         }
 
-        protected override void TickInterval(int delta)
+        protected override void Tick()
         {
-            base.Tick();
-
             if (Active && Spawned && !Destroyed)
             {
                 GunCompEq.verbTracker.VerbsTick();
@@ -115,7 +113,7 @@ namespace VVRace
                     {
                         _burstCooldownTicksLeft--;
                     }
-                    if (_burstCooldownTicksLeft <= 0 && this.IsHashIntervalTick(30, delta))
+                    if (_burstCooldownTicksLeft <= 0 && this.IsHashIntervalTick(30))
                     {
                         TryStartShootSomething(canBeginBurstImmediately: true);
                     }
