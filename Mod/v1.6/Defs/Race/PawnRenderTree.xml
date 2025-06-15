@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
+  <PawnRenderNodeTagDef>
+    <defName>VV_LeftWing</defName>
+  </PawnRenderNodeTagDef>
+  
+  <PawnRenderNodeTagDef>
+    <defName>VV_RightWing</defName>
+  </PawnRenderNodeTagDef>
     
   <PawnRenderTreeDef>
     <defName>VV_Vivi</defName>
@@ -78,6 +85,7 @@
 
             <li>
               <debugLabel>LeftWing</debugLabel>
+              <tagDef>VV_LeftWing</tagDef>
               <workerClass>PawnRenderNodeWorker_AttachmentBody</workerClass>
               <subworkerClasses>
                 <li>VVRace.PawnRenderSubWorker_WingCondition</li>
@@ -107,6 +115,7 @@
             </li>
             <li>
               <debugLabel>RightWing</debugLabel>
+              <tagDef>VV_RightWing</tagDef>
               <workerClass>PawnRenderNodeWorker_AttachmentBody</workerClass>
               <subworkerClasses>
                 <li>VVRace.PawnRenderSubWorker_WingCondition</li>
