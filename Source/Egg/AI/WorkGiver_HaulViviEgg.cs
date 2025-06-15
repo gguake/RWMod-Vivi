@@ -51,7 +51,6 @@ namespace VVRace
                 if (thing is ViviEggHatchery hatchery && 
                     hatchery.Spawned &&
                     hatchery.ViviEgg == null &&
-                    hatchery.CanHatchNow &&
                     hatchery.Faction == pawn.Faction &&
                     !hatchery.IsForbidden(pawn) &&
                     !hatchery.IsBurning() &&

@@ -9,7 +9,7 @@
       <ThingDef>VV_ViviEgg</ThingDef>
     </descriptionHyperlinks>
     <thingClass>VVRace.ViviEggHatchery</thingClass>
-    <tickerType>Rare</tickerType>
+    <tickerType>Normal</tickerType>
     
     <drawerType>MapMeshAndRealTime</drawerType>
     <graphicData>

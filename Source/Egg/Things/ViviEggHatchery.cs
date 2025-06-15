@@ -5,23 +5,34 @@ using Verse;
 
 namespace VVRace
 {
-    public class ViviEggHatchery : Building, IThingHolder
+    public class ViviEggHatchery : Building, IThingHolder, IThingHolderTickable
     {
-        public bool CanHatchNow => HatchingDisabledReason.Accepted;
         public AcceptanceReport HatchingDisabledReason
         {
             get
             {
                 if (!Spawned) { return false; }
 
+                var reasons = new StringBuilder();
                 if (Position.GetRoof(Map) == null)
                 {
-                    return LocalizeString_Inspector.VV_Inspector_HatcheryDisabledReasonNoRoof.Translate();
+                    reasons.Append(LocalizeString_Inspector.VV_Inspector_HatcheryDisabledReasonNoRoof.Translate());
                 }
 
-                if (Position.UsesOutdoorTemperature(Map))
+                var room = Position.GetRoom(Map);
+                if (room == null || room.OutdoorsForWork)
                 {
-                    return LocalizeString_Inspector.VV_Inspector_HatcheryDisabledReasonOutdoor.Translate();
+                    if (reasons.Length > 0)
+                    {
+                        reasons.Append(", ");
+                    }
+
+                    reasons.Append(LocalizeString_Inspector.VV_Inspector_HatcheryDisabledReasonOutdoor.Translate());
+                }
+
+                if (reasons.Length > 0)
+                {
+                    return reasons.ToString();
                 }
 
                 return true;
@@ -32,7 +43,7 @@ namespace VVRace
         {
             get
             {
-                if (!CanHatchNow || ViviEgg != null) { return false; }
+                if (ViviEgg != null) { return false; }
 
                 var compForbiddable = GetComp<CompForbiddable>();
                 if (compForbiddable != null && compForbiddable.Forbidden)
@@ -68,6 +79,12 @@ namespace VVRace
                 }
             }
         }
+
+        public bool ShouldTickContents => true;
+
+        protected override int MinTickIntervalRate => 60;
+
+        protected override int MaxTickIntervalRate => 250;
 
         private ThingOwner _innerContainer;
 
@@ -119,21 +136,17 @@ namespace VVRace
             var hatchingDisabledReason = HatchingDisabledReason;
             if (!hatchingDisabledReason.Accepted)
             {
-                sb.Append(LocalizeString_Inspector.VV_Inspector_HatcheryDisabled.Translate());
+                sb.AppendInNewLine(LocalizeString_Inspector.VV_Inspector_HatcheryDisabled.Translate());
 
                 if (hatchingDisabledReason.Reason != null)
                 {
                     sb.Append(": ").Append(hatchingDisabledReason.Reason);
                 }
-
-                return sb.ToString();
             }
-            else
+
+            if (ViviEgg != null)
             {
-                if (ViviEgg != null)
-                {
-                    sb.Append(ViviEgg.GetInspectString());
-                }
+                sb.AppendInNewLine(ViviEgg.GetInspectString());
             }
 
             return sb.ToString();

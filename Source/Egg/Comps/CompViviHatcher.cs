@@ -46,7 +46,7 @@ namespace VVRace
                 var parentHolder = parent.ParentHolder;
                 if (parent.Spawned || parentHolder == null || !(parentHolder is ViviEggHatchery hatchery)) { return false; }
 
-                return hatchery.CanHatchNow;
+                return true;
             }
         }
 
@@ -91,19 +91,47 @@ namespace VVRace
             return sb.Length > 0 ? sb.ToString() : null;
         }
 
-        public override void CompTick()
-        {
-            Tick(1);
-        }
-
         public override void CompTickRare()
         {
-            Tick(250);
+            TickInterval(GenTicks.TickRareInterval);
         }
 
-        public override void CompTickLong()
+        public override void CompTickInterval(int delta)
         {
-            Tick(2000);
+            TickInterval(delta);
+        }
+
+        private void TickInterval(int delta)
+        {
+            if (TemperatureDamaged)
+            {
+                parent.TakeDamage(new DamageInfo(DamageDefOf.Deterioration, Mathf.Max(1f, parent.MaxHitPoints * delta / 10000f)));
+            }
+            else
+            {
+                if (!CanHatch) { return; }
+
+                var t = Mathf.InverseLerp(FreezerComp.Props.minSafeTemperature, FreezerComp.Props.maxSafeTemperature, parent.AmbientTemperature);
+                var bonusMultiplier = Mathf.Lerp(1f, 1f + Props.adaptTemperatureBonus, Mathf.Clamp01(1f - (t - 0.5f) * (t - 0.5f) * 4f));
+
+                if (parent.PositionHeld.GetRoof(parent.MapHeld) == null)
+                {
+                    bonusMultiplier /= 2f;
+                }
+
+                var room = parent.PositionHeld.GetRoom(parent.MapHeld);
+                if (room == null || room.OutdoorsForWork)
+                {
+                    bonusMultiplier /= 2f;
+                }
+
+                hatchProgress += 1f / (hatchDays * 60000f) * delta * bonusMultiplier;
+
+                if (hatchProgress > 1f)
+                {
+                    Hatch();
+                }
+            }
         }
 
         public override bool AllowStackWith(Thing other)
@@ -122,7 +150,6 @@ namespace VVRace
                 pieceComp.parentXenogenes = parentXenogenes;
                 pieceComp.randomSeed = randomSeed;
             }
-
         }
 
         public override void PreAbsorbStack(Thing otherStack, int count)
@@ -142,28 +169,6 @@ namespace VVRace
                 };
 
                 yield return commandDebugHatching;
-            }
-        }
-
-        private void Tick(int ticks)
-        {
-            if (TemperatureDamaged)
-            {
-                parent.TakeDamage(new DamageInfo(DamageDefOf.Deterioration, Mathf.Max(1f, parent.MaxHitPoints * ticks / 10000f)));
-            }
-            else
-            {
-                if (!CanHatch) { return; }
-
-                var t = Mathf.InverseLerp(FreezerComp.Props.minSafeTemperature, FreezerComp.Props.maxSafeTemperature, parent.AmbientTemperature);
-                var bonusMultiplier = Mathf.Lerp(1f, 1f + Props.adaptTemperatureBonus, Mathf.Clamp01(1f - (t - 0.5f) * (t - 0.5f) * 4f));
-
-                hatchProgress += 1f / (hatchDays * 60000f) * ticks * bonusMultiplier;
-
-                if (hatchProgress > 1f)
-                {
-                    Hatch();
-                }
             }
         }
 

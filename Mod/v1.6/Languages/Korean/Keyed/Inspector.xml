@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
 <VV_Inspector_ProperTemperature>적정 온도: {0} ~ {1}</VV_Inspector_ProperTemperature>
-<VV_Inspector_HatcheryDisabled>부화기 비활성화됨</VV_Inspector_HatcheryDisabled>
+<VV_Inspector_HatcheryDisabled>부적합한 부화기</VV_Inspector_HatcheryDisabled>
 <VV_Inspector_HatcheryDisabledReasonNoRoof>지붕 없음</VV_Inspector_HatcheryDisabledReasonNoRoof>
 <VV_Inspector_HatcheryDisabledReasonOutdoor>실외</VV_Inspector_HatcheryDisabledReasonOutdoor>
 
