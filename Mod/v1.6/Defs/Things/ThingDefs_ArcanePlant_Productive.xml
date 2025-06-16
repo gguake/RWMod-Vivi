@@ -315,18 +315,6 @@
         <shortCircuitInRain>false</shortCircuitInRain>
         <transmitsPower>true</transmitsPower>
       </li>
-
-      <li Class="VVRace.CompProperties_SensorExplosive">
-        <requiredManaAmount>125</requiredManaAmount>
-        <useManaAmount>100</useManaAmount>
-        
-        <sensorRadius>3.9</sensorRadius>
-        <sensorWorkerClass>VVRace.SensorWorker_Mechanoid</sensorWorkerClass>
-        <explosiveRadius>10.9</explosiveRadius>
-        <explosiveCooldownTicks>7500~20000</explosiveCooldownTicks>
-        <explosiveDamageDef>EMP</explosiveDamageDef>
-        <damageAmountBase>70</damageAmountBase>
-      </li>
     </comps>
 
     <building>
