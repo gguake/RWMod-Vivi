@@ -6,6 +6,7 @@
     <reportString>fertilize TargetA.</reportString>
     <suspendable>false</suspendable>
     <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+    <ifFlyingKeepFlying>true</ifFlyingKeepFlying>
   </JobDef>
 
   <JobDef>
@@ -14,5 +15,6 @@
     <reportString>managing arcane plant at TargetA.</reportString>
     <suspendable>false</suspendable>
     <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+    <ifFlyingKeepFlying>true</ifFlyingKeepFlying>
   </JobDef>
 </Defs>

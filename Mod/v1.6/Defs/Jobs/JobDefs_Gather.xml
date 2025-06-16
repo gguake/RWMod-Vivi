@@ -5,6 +5,7 @@
     <driverClass>VVRace.JobDriver_Gather</driverClass>
     <reportString>gather honey at TargetA.</reportString>
     <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+    <ifFlyingKeepFlying>true</ifFlyingKeepFlying>
   </JobDef>
   
   <JobDef>
@@ -12,6 +13,7 @@
     <driverClass>VVRace.JobDriver_Gather</driverClass>
     <reportString>gather pollens.</reportString>
     <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+    <ifFlyingKeepFlying>true</ifFlyingKeepFlying>
   </JobDef>
 
   <JobDef>
@@ -19,5 +21,6 @@
     <driverClass>VVRace.JobDriver_Gather</driverClass>
     <reportString>gather propolis at TargetA.</reportString>
     <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+    <ifFlyingKeepFlying>true</ifFlyingKeepFlying>
   </JobDef>
 </Defs>

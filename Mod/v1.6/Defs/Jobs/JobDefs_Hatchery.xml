@@ -6,5 +6,6 @@
     <reportString>laying egg.</reportString>
     <casualInterruptible>false</casualInterruptible>
     <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+    <overrideFlyChance>0</overrideFlyChance>
   </JobDef>
 </Defs>
