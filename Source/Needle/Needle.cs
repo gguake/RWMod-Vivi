@@ -4,7 +4,6 @@ using System.Linq;
 using UnityEngine;
 using Verse;
 using Verse.AI;
-using Verse.Noise;
 
 namespace VVRace
 {
@@ -12,12 +11,6 @@ namespace VVRace
     {
         public int maxAttackCount;
         public float targettingRadius;
-        public IntRange overrunTicks;
-
-        public float maxAngleVelocity;
-        public float forceDirectingRadiusSqr;
-
-        public int maxTargettingTicks = 1000;
     }
 
     public class Needle : Projectile
@@ -35,6 +28,19 @@ namespace VVRace
         }
         private CompTrailRenderer _trailRenderer;
 
+        public NeedleProperties NeedleProperties
+        {
+            get
+            {
+                if (_needleProps == null)
+                {
+                    _needleProps = def.projectile as NeedleProperties;
+                }
+                return _needleProps;
+            }
+        }
+        private NeedleProperties _needleProps;
+
         private Vector3 _realPosition;
         private Vector3 _realDirection;
 
@@ -45,6 +51,8 @@ namespace VVRace
         private Vector3 _curDirectionInVector;
         private float _totalMoveDistance;
         private float _curMoveDistance;
+
+        private int _remainedAttackCount;
 
         public override Vector3 DrawPos => _realPosition;
 
@@ -67,6 +75,8 @@ namespace VVRace
             _curDirectionInVector = (_curTargetThing.Position.ToVector3() - launcher.Position.ToVector3()).Yto0().normalized;
             _totalMoveDistance = CalculateBezierCurveLengthApproximate(_moveStartPosition, _moveEndPosition, _curDirectionOutVector, _curDirectionInVector);
             _curMoveDistance = 0f;
+
+            _remainedAttackCount = NeedleProperties.maxAttackCount;
         }
 
         protected override void TickInterval(int delta)
@@ -92,11 +102,15 @@ namespace VVRace
 
                     TrailRenderer.RegisterNewTrail(position);
 
+                    _remainedAttackCount--;
                     var previousTargetThing = _curTargetThing;
                     Impact(_curTargetThing);
                     _curTargetThing = null;
 
-                    SearchNewTarget(previousTargetThing, _moveEndPosition);
+                    if (_remainedAttackCount > 0)
+                    {
+                        SearchNewTarget(previousTargetThing, _moveEndPosition);
+                    }
 
                     if (_curTargetThing == null)
                     {
@@ -173,7 +187,7 @@ namespace VVRace
         {
             var caster = launcher as IAttackTargetSearcher;
             var cellPosition = targetSearchPosition.ToIntVec3();
-            foreach (var offset in GenRadial.RadialPatternInRadius(6f))
+            foreach (var offset in GenRadial.RadialPatternInRadius(NeedleProperties.targettingRadius))
             {
                 if (offset == IntVec3.Zero) { continue; }
 

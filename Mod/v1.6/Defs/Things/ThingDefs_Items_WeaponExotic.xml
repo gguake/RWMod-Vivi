@@ -257,10 +257,6 @@
 
       <maxAttackCount>7</maxAttackCount>
       <targettingRadius>3.6</targettingRadius>
-      <overrunTicks>8~12</overrunTicks>
-
-      <maxAngleVelocity>10.1</maxAngleVelocity>
-      <forceDirectingRadiusSqr>11</forceDirectingRadiusSqr>
     </projectile>
 
     <comps>
