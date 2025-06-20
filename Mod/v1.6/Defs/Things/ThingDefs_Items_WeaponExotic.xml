@@ -144,7 +144,7 @@
       <AccuracyShort>1</AccuracyShort>
       <AccuracyMedium>1</AccuracyMedium>
       <AccuracyLong>1</AccuracyLong>
-      <RangedWeapon_Cooldown>30.0</RangedWeapon_Cooldown>
+      <RangedWeapon_Cooldown>5.0</RangedWeapon_Cooldown>
     </statBases>
     <tradeNeverStack>true</tradeNeverStack>
     <relicChance>3</relicChance>
@@ -180,10 +180,11 @@
         <verbClass>Verb_LaunchProjectile</verbClass>
         <hasStandardCommand>true</hasStandardCommand>
         <defaultProjectile>VV_Projectile_EltexNeedle</defaultProjectile>
-        <warmupTime>1.0</warmupTime>
+        <warmupTime>3.0</warmupTime>
         <range>40.6</range>
         <soundCast>Interact_BeatFire</soundCast>
         <rangedFireRulepack>Combat_RangedFire_Thrown</rangedFireRulepack>
+        <canGoWild>false</canGoWild>
       </li>
     </verbs>
 
@@ -249,10 +250,10 @@
 
     <projectile Class="VVRace.NeedleProperties">
       <damageDef>Stab</damageDef>
-      <damageAmountBase>12</damageAmountBase>
+      <damageAmountBase>8</damageAmountBase>
       <stoppingPower>0.5</stoppingPower>
       <armorPenetrationBase>0.33</armorPenetrationBase>
-      <speed>49</speed>
+      <speed>159</speed>
 
       <maxAttackCount>7</maxAttackCount>
       <targettingRadius>3.6</targettingRadius>

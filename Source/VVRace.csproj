@@ -218,7 +218,6 @@
     <Compile Include="MapGeneration\SymbolResolverUtility.cs" />
     <Compile Include="Hornet\MentalState_HornetBerserk.cs" />
     <Compile Include="Needle\Needle.cs" />
-    <Compile Include="Needle\Verb_SpawnNeedle.cs" />
     <Compile Include="FoodDrainRecipe\RecipeModExtension.cs" />
     <Compile Include="Utility\ViviUtility.cs" />
     <Compile Include="FoodDrainRecipe\Bill_ProductionWithFoodDrain.cs" />

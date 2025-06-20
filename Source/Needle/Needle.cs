@@ -1,9 +1,10 @@
 ﻿using RimWorld;
-using System;
-using System.Collections.Generic;
+using RPEF;
+using System.Linq;
 using UnityEngine;
 using Verse;
 using Verse.AI;
+using Verse.Noise;
 
 namespace VVRace
 {
@@ -21,361 +22,235 @@ namespace VVRace
 
     public class Needle : Projectile
     {
-        public int attackedCount;
+        public CompTrailRenderer TrailRenderer
+        {
+            get
+            {
+                if (_trailRenderer == null)
+                {
+                    _trailRenderer = GetComp<CompTrailRenderer>();
+                }
+                return _trailRenderer;
+            }
+        }
+        private CompTrailRenderer _trailRenderer;
 
-        public LocalTargetInfo curTarget;
-        public List<Thing> targetHistory = new List<Thing>();
-        public int targetLossTicks;
-        public int targetHoldTicks;
+        private Vector3 _realPosition;
+        private Vector3 _realDirection;
 
-        public Vector3 curPos;
-        public Vector3 curDirection;
-        public IntVec3 lastAttackedTargetCell;
+        private Thing _curTargetThing;
+        private Vector3 _moveStartPosition;
+        private Vector3 _moveEndPosition;
+        private Vector3 _curDirectionOutVector;
+        private Vector3 _curDirectionInVector;
+        private float _totalMoveDistance;
+        private float _curMoveDistance;
 
-        public float psychicMultiplier = 1f;
+        public override Vector3 DrawPos => _realPosition;
 
-        private PriorityQueue<Thing, int> _tmpTargetCandidates = new PriorityQueue<Thing, int>();
-        private PriorityQueue<Thing, int> _tmpTargetDuplicatedCandidates = new PriorityQueue<Thing, int>();
+        public override Vector3 ExactPosition => _realPosition;
+        public override Quaternion ExactRotation => Quaternion.LookRotation(_realDirection);
 
         public override void Launch(Thing launcher, Vector3 origin, LocalTargetInfo usedTarget, LocalTargetInfo intendedTarget, ProjectileHitFlags hitFlags, bool preventFriendlyFire = false, Thing equipment = null, ThingDef targetCoverDef = null)
         {
+            usedTarget = intendedTarget;
+
             base.Launch(launcher, origin, usedTarget, intendedTarget, hitFlags, preventFriendlyFire, equipment, targetCoverDef);
 
-            curPos = this.TrueCenter();
-            curDirection = (curTarget.CenterVector3 - curPos).normalized.Yto0();
+            _realPosition = launcher.Position.ToVector3().Yto0();
+            _realDirection = (usedTarget.Thing.TrueCenter() - launcher.TrueCenter()).Yto0().normalized;
 
-        }
-
-        public void Launch(Thing caster, Thing equipment, LocalTargetInfo target)
-        {
-            this.curTarget = target;
-            psychicMultiplier = Mathf.Min(10f, Mathf.Pow(2.4f, caster.GetStatValue(StatDefOf.PsychicSensitivity) / 2.67f - 1f));
+            _curTargetThing = usedTarget.Thing;
+            _moveStartPosition = _realPosition;
+            _moveEndPosition = usedTarget.HasThing ? usedTarget.Thing.TrueCenter().Yto0() : usedTarget.Cell.ToVector3().Yto0();
+            _curDirectionOutVector = _realDirection;
+            _curDirectionInVector = (_curTargetThing.Position.ToVector3() - launcher.Position.ToVector3()).Yto0().normalized;
+            _totalMoveDistance = CalculateBezierCurveLengthApproximate(_moveStartPosition, _moveEndPosition, _curDirectionOutVector, _curDirectionInVector);
+            _curMoveDistance = 0f;
         }
 
         protected override void TickInterval(int delta)
         {
-            try
+            var totalCost = delta * def.projectile.speed;
+
+            var position = _realPosition;
+            while (totalCost > 0)
             {
-                if (!Spawned) { return; }
+                var moves = Mathf.Clamp(10, 0, totalCost);
 
-                var casterPawn = launcher as Pawn;
-                if (casterPawn == null || casterPawn.DeadOrDowned || launcher.DestroyedOrNull() || equipmentDef == null)
+                bool approach = false;
+                if (moves >= _totalMoveDistance - _curMoveDistance)
                 {
-                    Destroy();
-                    return;
+                    moves = _totalMoveDistance - _curMoveDistance;
+                    approach = true;
                 }
 
-                var props = def.projectile as NeedleProperties;
-                if (props == null)
+                if (approach)
                 {
-                    return;
-                }
+                    _realPosition = _moveEndPosition;
+                    _realDirection = _curDirectionInVector;
 
-                if (!curTarget.IsValid)
-                {
-                    if (targetLossTicks <= 0)
+                    TrailRenderer.RegisterNewTrail(position);
+
+                    var previousTargetThing = _curTargetThing;
+                    Impact(_curTargetThing);
+                    _curTargetThing = null;
+
+                    SearchNewTarget(previousTargetThing, _moveEndPosition);
+
+                    if (_curTargetThing == null)
                     {
-                        RefreshTarget(props);
-                    }
-                    else
-                    {
-                        targetLossTicks--;
+                        Destroy();
                     }
                 }
                 else
                 {
-                    targetHoldTicks++;
+                    position = CalculateBezierCurvePoint(_moveStartPosition, _moveEndPosition, _curDirectionOutVector, _curDirectionInVector, _curMoveDistance / _totalMoveDistance);
+                    TrailRenderer.RegisterNewTrail(position);
 
-                    if (targetHoldTicks > props.maxTargettingTicks)
-                    {
-                        RefreshTarget(props);
-                        targetHoldTicks = 0;
-                    }
+                    _curMoveDistance += moves;
                 }
 
-                if (!TryMoveForward(props))
-                {
-                    Destroy();
-                    return;
-                }
-
-                var impact = false;
-                if (curTarget.IsValid)
-                {
-                    IntVec2 targetSize;
-                    if (curTarget.HasThing)
-                    {
-                        targetSize = curTarget.Thing.def.Size;
-                    }
-                    else
-                    {
-                        targetSize = new IntVec2(1, 1);
-                    }
-
-                    if (targetSize.x == 1 && targetSize.z == 1)
-                    {
-                        if (Position == curTarget.Cell || (curTarget.CenterVector3 - curPos).sqrMagnitude < 1)
-                        {
-                            impact = true;
-                        }
-                    }
-                    else
-                    {
-                        var d = curTarget.Thing.TrueCenter() - curPos;
-                        if (Mathf.Abs(d.x) < targetSize.x && Math.Abs(d.z) < targetSize.z)
-                        {
-                            impact = true;
-                        }
-                    }
-                }
-
-                if (impact)
-                {
-                    ImpactToTarget(props);
-                }
-
-                if (Spawned && !Destroyed)
-                {
-                    var curCellThings = new List<Thing>(Position.GetThingList(Map));
-                    foreach (var thing in curCellThings)
-                    {
-                        if (thing is IAttackTarget target && GenHostility.IsActiveThreatTo(target, casterPawn.Faction) && !target.ThreatDisabled(casterPawn))
-                        {
-                            DamageTo(props, thing);
-                        }
-                    }
-                }
+                totalCost -= moves;
             }
-            finally
-            {
-                foreach (var comp in AllComps)
-                {
-                    comp.CompTick();
-                }
-            }
+
+            _realPosition = position;
+            _realDirection = CalculateBezierCurveDerivative(_moveStartPosition, _moveEndPosition, _curDirectionOutVector, _curDirectionInVector, _curMoveDistance / _totalMoveDistance);
         }
 
-        public override void ExposeData()
+        protected override void Impact(Thing hitThing, bool blockedByShield = false)
         {
-            base.ExposeData();
+            if (!hitThing.Spawned) { return; }
+            if (hitThing == launcher) { return; }
+            if (hitThing.Map != Map) { return; }
 
-            Scribe_Values.Look(ref attackedCount, "attackedCount");
+            GenClamor.DoClamor(this, 12f, ClamorDefOf.Impact);
 
-            Scribe_TargetInfo.Look(ref curTarget, "curTarget");
-            Scribe_Collections.Look(ref targetHistory, "targetHistory", LookMode.Reference);
-            Scribe_Values.Look(ref targetLossTicks, "targetLossTicks");
-            Scribe_Values.Look(ref targetHoldTicks, "targetHoldTicks");
+            BattleLogEntry_RangedImpact battleLogEntry_RangedImpact = new BattleLogEntry_RangedImpact(launcher, hitThing, intendedTarget.Thing, equipmentDef, def, targetCoverDef);
+            Find.BattleLog.Add(battleLogEntry_RangedImpact);
 
-            Scribe_Values.Look(ref curPos, "curPos");
-            Scribe_Values.Look(ref curDirection, "curDirection");
-            Scribe_Values.Look(ref lastAttackedTargetCell, "lastAttackedTargetCell");
+            if (hitThing != null)
+            {
+                bool instigatorGuilty = !(launcher is Pawn pawn) || !pawn.Drafted;
+                DamageInfo dinfo = new DamageInfo(
+                    DamageDef, 
+                    DamageAmount, 
+                    ArmorPenetration, 
+                    ExactRotation.eulerAngles.y, 
+                    launcher, 
+                    null, 
+                    equipmentDef, 
+                    DamageInfo.SourceCategory.ThingOrUnknown, 
+                    intendedTarget.Thing, 
+                    instigatorGuilty);
+
+                dinfo.SetWeaponQuality(equipmentQuality);
+                hitThing.TakeDamage(dinfo).AssociateWithLog(battleLogEntry_RangedImpact);
+            }
+
+            Log.Message($"impact to : {hitThing}");
+        }
+
+        protected override void ImpactSomething()
+        {
+            base.ImpactSomething();
+        }
+
+        private void SetTarget(Thing thing)
+        {
+            var nearEdges = thing.OccupiedRect().ExpandedBy(1).EdgeCellsNoCorners.Where(v => v.InBounds(Map));
             
-            Scribe_Values.Look(ref psychicMultiplier, "psychicMultiplier");
+            _curTargetThing = thing;
+            _moveStartPosition = _realPosition;
+            _moveEndPosition = thing.TrueCenter().Yto0();
+            _curDirectionOutVector = _realDirection;
+            _curDirectionInVector = (thing.TrueCenter() - nearEdges.RandomElement().ToVector3()).Yto0();
+            _totalMoveDistance = CalculateBezierCurveLengthApproximate(_moveStartPosition, _moveEndPosition, _curDirectionOutVector, _curDirectionInVector);
+            _curMoveDistance = 0f;
         }
 
-        public override Vector3 DrawPos => curPos;
-
-        public int MaxAttackCount => Mathf.Max(1, Mathf.RoundToInt(((NeedleProperties)def.projectile).maxAttackCount * psychicMultiplier * psychicMultiplier));
-
-        protected override void DrawAt(Vector3 drawLoc, bool flip = false)
+        private void SearchNewTarget(Thing previousTarget, Vector3 targetSearchPosition)
         {
-            var vector = drawLoc + Vector3.up * def.Altitude;
-            var rotation = Quaternion.LookRotation(curDirection.Yto0());
-
-            if (def.projectile.useGraphicClass)
+            var caster = launcher as IAttackTargetSearcher;
+            var cellPosition = targetSearchPosition.ToIntVec3();
+            foreach (var offset in GenRadial.RadialPatternInRadius(6f))
             {
-                Graphic.Draw(vector, Rotation, this, rotation.eulerAngles.y);
-            }
-            else
-            {
-                Graphics.DrawMesh(
-                    MeshPool.GridPlane(def.graphicData.drawSize), 
-                    vector, 
-                    rotation, 
-                    def.graphic.MatSingleFor(this), 
-                    0);
-            }
+                if (offset == IntVec3.Zero) { continue; }
 
-            Comps_PostDraw();
-        }
+                var cell = offset + cellPosition;
+                if (!cell.InBounds(Map)) { continue; }
 
-        private bool TryMoveForward(NeedleProperties props)
-        {
-            float deltaAngle = 0f;
-
-            if (curTarget.IsValid)
-            {
-                var directionToTarget = (curTarget.CenterVector3 - curPos).normalized.Yto0();
-                var sqrDist = (curTarget.CenterVector3 - curPos).Yto0().sqrMagnitude;
-
-                deltaAngle = Quaternion.FromToRotation(directionToTarget, curDirection).eulerAngles.y;
-                if (sqrDist >= props.forceDirectingRadiusSqr)
+                var things = cellPosition.GetThingList(Map);
+                foreach (var thing in things)
                 {
-                    if (deltaAngle >= 180)
+                    if (thing is IAttackTarget attackTarget && 
+                        !thing.Fogged() && 
+                        GenSight.LineOfSightToThing(launcher.PositionHeld, thing, Map, true) &&
+                        GenHostility.IsActiveThreatTo(attackTarget, launcher.Faction) &&
+                        !attackTarget.ThreatDisabled(caster))
                     {
-                        deltaAngle = 180 - deltaAngle;
+                        SetTarget(thing);
+                        return;
                     }
-
-                    deltaAngle = Mathf.Clamp(deltaAngle, -props.maxAngleVelocity, props.maxAngleVelocity);
-                    curDirection = curDirection.RotatedBy(-deltaAngle).normalized.Yto0();
                 }
-                else
-                {
-                    curDirection = directionToTarget;
-                }
-            }
+            };
 
-            var speed = props.SpeedTilesPerTick * Mathf.Lerp(1f, 0.707f, Mathf.Abs(deltaAngle / 180f));
-
-            curPos += curDirection * speed;
-            var curPosCell = curPos.ToIntVec3();
-            if (curPosCell.InBounds(Map))
+            if (previousTarget is IAttackTarget previousAttackTarget &&
+                !previousTarget.Fogged() &&
+                GenSight.LineOfSightToThing(launcher.PositionHeld, previousTarget, Map, true) &&
+                GenHostility.IsActiveThreatTo(previousAttackTarget, launcher.Faction) &&
+                !previousAttackTarget.ThreatDisabled(caster))
             {
-                if (Position != curPosCell)
-                {
-                    Position = curPosCell;
-                }
-
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        private void ImpactToTarget(NeedleProperties props)
-        {
-            if (curTarget == launcher)
-            {
-                Destroy();
+                SetTarget(previousTarget);
                 return;
             }
-
-            DamageTo(props, curTarget.Thing);
-            lastAttackedTargetCell = curTarget.Cell;
-
-            targetHoldTicks = 0;
-            curTarget = LocalTargetInfo.Invalid;
-            targetLossTicks = props.overrunTicks.RandomInRange;
-            attackedCount++;
         }
 
-        private void DamageTo(NeedleProperties props, Thing target)
+        private const int BezierLengthInterval = 4;
+        private float CalculateBezierCurveLengthApproximate(Vector3 p1, Vector3 p2, Vector3 w1, Vector3 w2)
         {
-            if (target == null) { return; }
-            if (targetHistory.Contains(target)) { return; }
+            var distance = 0f;
 
-            var instigatorGuilty = !(launcher is Pawn casterPawn) || !casterPawn.Drafted;
-            var dinfo = new DamageInfo(
-                def.projectile.damageDef,
-                Mathf.Max(1f, def.projectile.GetDamageAmount(equipment) * psychicMultiplier),
-                Mathf.Clamp01(def.projectile.GetArmorPenetration(equipment)),
-                Quaternion.LookRotation(curDirection.Yto0()).eulerAngles.y,
-                launcher,
-                null,
-                equipmentDef,
-                DamageInfo.SourceCategory.ThingOrUnknown,
-                curTarget.IsValid ? curTarget.Thing : target,
-                instigatorGuilty);
+            var point = p1;
+            for (int i = 1; i < BezierLengthInterval; ++i)
+            {
+                var newPoint = CalculateBezierCurvePoint(p1, p2, w1, w2, i / (float)BezierLengthInterval);
+                distance += (newPoint - point).magnitude;
+                point = newPoint;
+            }
 
-            dinfo.SetWeaponQuality(equipmentQuality);
-            target.TakeDamage(dinfo);
-
-            targetHistory.Add(target);
+            distance += (p2 - point).magnitude;
+            return distance;
         }
 
-        private void RefreshTarget(NeedleProperties props)
+        private Vector3 CalculateBezierCurvePoint(Vector3 p1, Vector3 p2, Vector3 w1, Vector3 w2, float t)
         {
-            var casterPawn = launcher as Pawn;
-            if (casterPawn == null || attackedCount >= MaxAttackCount)
-            {
-                curTarget = launcher;
-                return;
-            }
+            var tInv = 1 - t;
+            var c1 = p1 + w1 / 3f;
+            var c2 = p2 - w2 / 3f;
 
-            try
-            {
-                var rootRegion = lastAttackedTargetCell.GetRegion(Map);
-                var radiusSq = props.targettingRadius * props.targettingRadius;
-                var prioritySign = Rand.Chance(0.75f) ? -1 : 1;
-
-                if (rootRegion == null)
-                {
-                    curTarget = launcher;
-                    return;
-                }
-
-                RegionTraverser.BreadthFirstTraverse(
-                    rootRegion,
-                    delegate (Region from, Region r)
-                    {
-                        var traverseParams = TraverseParms.For(TraverseMode.PassAllDestroyableThings);
-                        if (!r.Allows(traverseParams, isDestination: false))
-                        {
-                            return false;
-                        }
-
-                        var extentsClose = r.extentsClose;
-                        var xRange = Math.Abs(lastAttackedTargetCell.x - Math.Max(extentsClose.minX, Math.Min(lastAttackedTargetCell.x, extentsClose.maxX)));
-                        if (xRange > props.targettingRadius)
-                        {
-                            return false;
-                        }
-
-                        var zRange = Math.Abs(lastAttackedTargetCell.z - Math.Max(extentsClose.minZ, Math.Min(lastAttackedTargetCell.z, extentsClose.maxZ)));
-                        return !(zRange > props.targettingRadius) && (xRange * xRange + zRange * zRange) <= radiusSq;
-                    },
-                    delegate (Region r)
-                    {
-                        var targets = new List<Thing>();
-                        var candidates = r.ListerThings.ThingsInGroup(ThingRequestGroup.AttackTarget);
-                        for (int i = 0; i < candidates.Count; ++i)
-                        {
-                            var thing = candidates[i];
-                            if (!(thing is IAttackTarget targetThing) || thing.Position.Fogged(Map) || thing.Position == Position || !GenSight.LineOfSightToThing(casterPawn.PositionHeld, thing, Map, skipFirstCell: true)) { continue; }
-                            if (!GenHostility.IsActiveThreatTo(targetThing, casterPawn.Faction) || targetThing.ThreatDisabled(casterPawn)) { continue; }
-
-                            if (targetHistory.Contains(thing))
-                            {
-                                _tmpTargetDuplicatedCandidates.Enqueue(thing, prioritySign * Position.DistanceToSquared(thing.Position));
-                            }
-                            else
-                            {
-                                _tmpTargetCandidates.Enqueue(thing, prioritySign * Position.DistanceToSquared(thing.Position));
-                            }
-                        }
-
-                        return _tmpTargetCandidates.Count > 0;
-                    },
-                    9);
-
-                if (_tmpTargetCandidates.Count > 0)
-                    curTarget = _tmpTargetCandidates.Dequeue();
-                else if (_tmpTargetDuplicatedCandidates.Count > 0)
-                    curTarget = _tmpTargetDuplicatedCandidates.Dequeue();
-                else
-                    curTarget = launcher;
-
-                targetHistory.Clear();
-            }
-            finally
-            {
-                _tmpTargetCandidates.Clear();
-                _tmpTargetDuplicatedCandidates.Clear();
-            }
+            /// p1, w1 : start coordinate, derivative
+            /// p2, w2 : dest coordinate, derivative
+            /// t : [0,1]
+            return Mathf.Pow(tInv, 3) * p1 +
+                3 * tInv * tInv * t * c1 +
+                3 * tInv * t * t * c2 +
+                t * t * t * p2;
         }
 
-        public override void Destroy(DestroyMode mode = DestroyMode.Vanish)
+        private Vector3 CalculateBezierCurveDerivative(Vector3 p1, Vector3 p2, Vector3 w1, Vector3 w2, float t)
         {
-            var pawn = launcher as Pawn;
-            var cooldownStance = pawn?.stances?.curStance as Stance_Cooldown;
-            if (cooldownStance != null && cooldownStance.verb is Verb_SpawnNeedle)
-            {
-                pawn.stances.CancelBusyStanceHard();
-            }
+            var tInv = 1 - t;
+            var c1 = p1 + w1 / 3f;
+            var c2 = p2 - w2 / 3f;
 
-            base.Destroy(mode);
+            /// p1, w1 : start coordinate, derivative
+            /// p2, w2 : dest coordinate, derivative
+            /// t : [0,1]
+            return -3 * tInv * tInv * p1 +
+                3 * tInv * (1 - 3 * t) * c1 + 
+                3 * t * (2 - 3 * t) * c2 + 
+                3 * t * t * p2;
         }
     }
 }
