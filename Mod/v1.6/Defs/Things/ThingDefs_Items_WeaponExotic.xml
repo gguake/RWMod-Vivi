@@ -273,7 +273,7 @@
         <lineTextureMode>DistributePerSegment</lineTextureMode>
         
         <maxTrailPoint>15</maxTrailPoint>
-        <refreshIntervalTicks>1</refreshIntervalTicks>
+        <refreshIntervalTicks>0</refreshIntervalTicks>
       </li>
     </comps>
   </ThingDef>
