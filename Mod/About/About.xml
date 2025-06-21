@@ -28,9 +28,5 @@ bee-like fairy race
 		<li>brrainz.harmony</li>
 		<li>Ludeon.RimWorld.Biotech</li>
   </loadAfter>
-  <forceLoadAfter>
-		<li>brrainz.harmony</li>
-		<li>Ludeon.RimWorld.Biotech</li>
-  </forceLoadAfter>
 	<modIconPath>UI/Icons/ViviFaction</modIconPath>
 </ModMetaData>
