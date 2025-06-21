@@ -83,7 +83,7 @@
     </tools>
     
     <costList>
-      <Plasteel>75</Plasteel>
+      <Plasteel>80</Plasteel>
       <VV_Lifestrand>45</VV_Lifestrand>
       <VV_TitanicHornetWing>2</VV_TitanicHornetWing>
     </costList>
@@ -103,7 +103,7 @@
         <li>VV_RitualWeaponry</li>
       </researchPrerequisites>
       <skillRequirements>
-        <Crafting>12</Crafting>
+        <Crafting>10</Crafting>
       </skillRequirements>
       <displayPriority>-530</displayPriority>
     </recipeMaker>
@@ -138,13 +138,13 @@
 
     <techLevel>Medieval</techLevel>
     <statBases>
-      <WorkToMake>70000</WorkToMake>
+      <WorkToMake>60000</WorkToMake>
       <Mass>1</Mass>
       <AccuracyTouch>1</AccuracyTouch>
       <AccuracyShort>1</AccuracyShort>
       <AccuracyMedium>1</AccuracyMedium>
       <AccuracyLong>1</AccuracyLong>
-      <RangedWeapon_Cooldown>5.0</RangedWeapon_Cooldown>
+      <RangedWeapon_Cooldown>25.0</RangedWeapon_Cooldown>
     </statBases>
     <tradeNeverStack>true</tradeNeverStack>
     <relicChance>3</relicChance>
@@ -180,8 +180,8 @@
         <verbClass>Verb_LaunchProjectile</verbClass>
         <hasStandardCommand>true</hasStandardCommand>
         <defaultProjectile>VV_Projectile_EltexNeedle</defaultProjectile>
-        <warmupTime>3.0</warmupTime>
-        <range>40.6</range>
+        <warmupTime>0.5</warmupTime>
+        <range>38.6</range>
         <soundCast>Interact_BeatFire</soundCast>
         <rangedFireRulepack>Combat_RangedFire_Thrown</rangedFireRulepack>
         <canGoWild>false</canGoWild>
@@ -195,15 +195,15 @@
           <li>Stab</li>
         </capacities>
         <power>7</power>
-        <armorPenetration>0.5</armorPenetration>
-        <cooldownTime>1.4</cooldownTime>
+        <armorPenetration>0.15</armorPenetration>
+        <cooldownTime>0.5</cooldownTime>
       </li>
     </tools>
     
     <costList>
-      <Plasteel>100</Plasteel>
-      <VV_TitanicHornetWing>5</VV_TitanicHornetWing>
-      <VV_Lifestrand>200</VV_Lifestrand>
+      <Plasteel>180</Plasteel>
+      <VV_TitanicHornetWing>4</VV_TitanicHornetWing>
+      <VV_Lifestrand>100</VV_Lifestrand>
     </costList>
     
     <recipeMaker>
@@ -221,7 +221,7 @@
         <li>VV_RitualWeaponry</li>
       </researchPrerequisites>
       <skillRequirements>
-        <Crafting>16</Crafting>
+        <Crafting>15</Crafting>
       </skillRequirements>
       <displayPriority>-531</displayPriority>
     </recipeMaker>
@@ -250,13 +250,13 @@
 
     <projectile Class="VVRace.NeedleProperties">
       <damageDef>Stab</damageDef>
-      <damageAmountBase>8</damageAmountBase>
+      <damageAmountBase>6</damageAmountBase>
       <stoppingPower>0.5</stoppingPower>
-      <armorPenetrationBase>0.33</armorPenetrationBase>
-      <speed>159</speed>
+      <armorPenetrationBase>0.15</armorPenetrationBase>
+      <speed>110</speed>
 
-      <maxAttackCount>7</maxAttackCount>
-      <targettingRadius>3.6</targettingRadius>
+      <maxAttackCount>15</maxAttackCount>
+      <targettingRadius>4.3</targettingRadius>
     </projectile>
 
     <comps>
@@ -272,7 +272,7 @@
         </widthCurve>
         <lineTextureMode>DistributePerSegment</lineTextureMode>
         
-        <maxTrailPoint>15</maxTrailPoint>
+        <maxTrailPoint>60</maxTrailPoint>
         <refreshIntervalTicks>0</refreshIntervalTicks>
       </li>
     </comps>

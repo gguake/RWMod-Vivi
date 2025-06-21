@@ -15,6 +15,9 @@ namespace VVRace
 
     public class Needle : Projectile
     {
+        private const float RefreshInterval = 25;
+        private const float BezierWeight = 20;
+
         public CompTrailRenderer TrailRenderer
         {
             get
@@ -26,6 +29,7 @@ namespace VVRace
                 return _trailRenderer;
             }
         }
+        [Unsaved]
         private CompTrailRenderer _trailRenderer;
 
         public NeedleProperties NeedleProperties
@@ -39,7 +43,13 @@ namespace VVRace
                 return _needleProps;
             }
         }
+        [Unsaved]
         private NeedleProperties _needleProps;
+
+        private float _appliedSpeed;
+        private int _remainedAttackCount;
+
+        private Vector3 _initialTargettingPosition;
 
         private Vector3 _realPosition;
         private Vector3 _realDirection;
@@ -51,13 +61,33 @@ namespace VVRace
         private Vector3 _curDirectionInVector;
         private float _totalMoveDistance;
         private float _curMoveDistance;
-
-        private int _remainedAttackCount;
+        private bool _isReturning;
 
         public override Vector3 DrawPos => _realPosition;
 
         public override Vector3 ExactPosition => _realPosition;
         public override Quaternion ExactRotation => Quaternion.LookRotation(_realDirection);
+
+        public override void ExposeData()
+        {
+            base.ExposeData();
+
+            Scribe_Values.Look(ref _appliedSpeed, "appliedSpeed");
+            Scribe_Values.Look(ref _remainedAttackCount, "remainedAttackCount");
+
+            Scribe_Values.Look(ref _initialTargettingPosition, "initialTargettingPosition");
+            Scribe_Values.Look(ref _realPosition, "realPosition");
+            Scribe_Values.Look(ref _realDirection, "realDirection");
+
+            Scribe_References.Look(ref _curTargetThing, "curTargetThing");
+            Scribe_Values.Look(ref _moveStartPosition, "moveStartPosition");
+            Scribe_Values.Look(ref _moveEndPosition, "moveEndPosition");
+            Scribe_Values.Look(ref _curDirectionOutVector, "curDirectionOutVector");
+            Scribe_Values.Look(ref _curDirectionInVector, "curDirectionInVector");
+            Scribe_Values.Look(ref _totalMoveDistance, "totalMoveDistance");
+            Scribe_Values.Look(ref _curMoveDistance, "curMoveDistance");
+            Scribe_Values.Look(ref _isReturning, "isReturning");
+        }
 
         public override void Launch(Thing launcher, Vector3 origin, LocalTargetInfo usedTarget, LocalTargetInfo intendedTarget, ProjectileHitFlags hitFlags, bool preventFriendlyFire = false, Thing equipment = null, ThingDef targetCoverDef = null)
         {
@@ -65,28 +95,33 @@ namespace VVRace
 
             base.Launch(launcher, origin, usedTarget, intendedTarget, hitFlags, preventFriendlyFire, equipment, targetCoverDef);
 
-            _realPosition = launcher.Position.ToVector3().Yto0();
+            _realPosition = origin.Yto0();
             _realDirection = (usedTarget.Thing.TrueCenter() - launcher.TrueCenter()).Yto0().normalized;
+
+            _initialTargettingPosition = usedTarget.Thing.PositionHeld.ToVector3();
 
             _curTargetThing = usedTarget.Thing;
             _moveStartPosition = _realPosition;
             _moveEndPosition = usedTarget.HasThing ? usedTarget.Thing.TrueCenter().Yto0() : usedTarget.Cell.ToVector3().Yto0();
             _curDirectionOutVector = _realDirection;
             _curDirectionInVector = (_curTargetThing.Position.ToVector3() - launcher.Position.ToVector3()).Yto0().normalized;
-            _totalMoveDistance = CalculateBezierCurveLengthApproximate(_moveStartPosition, _moveEndPosition, _curDirectionOutVector, _curDirectionInVector);
+            _totalMoveDistance = CalculateBezierCurveLengthApproximate(_moveStartPosition, _moveEndPosition, _curDirectionOutVector * BezierWeight, _curDirectionInVector * BezierWeight);
             _curMoveDistance = 0f;
 
-            _remainedAttackCount = NeedleProperties.maxAttackCount;
+            var psychicSensitivityFactor = Mathf.Clamp(launcher.GetStatValue(StatDefOf.PsychicSensitivity), 0.5f, 10f);
+            var factor = Mathf.Log10(psychicSensitivityFactor * psychicSensitivityFactor);
+            _appliedSpeed = def.projectile.speed * (0.5f * factor + 1f);
+            _remainedAttackCount = 1 + (int)(NeedleProperties.maxAttackCount * (factor + 1f));
         }
 
         protected override void TickInterval(int delta)
         {
-            var totalCost = delta * def.projectile.speed;
+            var totalCost = delta * _appliedSpeed;
 
             var position = _realPosition;
             while (totalCost > 0)
             {
-                var moves = Mathf.Clamp(10, 0, totalCost);
+                var moves = Mathf.Clamp(RefreshInterval, 0, totalCost);
 
                 bool approach = false;
                 if (moves >= _totalMoveDistance - _curMoveDistance)
@@ -102,24 +137,43 @@ namespace VVRace
 
                     TrailRenderer.RegisterNewTrail(position);
 
-                    _remainedAttackCount--;
-                    var previousTargetThing = _curTargetThing;
-                    Impact(_curTargetThing);
-                    _curTargetThing = null;
-
-                    if (_remainedAttackCount > 0)
+                    if (_isReturning)
                     {
-                        SearchNewTarget(previousTargetThing, _moveEndPosition);
+                        ReturnNeedle();
+                        return;
                     }
-
-                    if (_curTargetThing == null)
+                    else
                     {
-                        Destroy();
+                        var previousTargetThing = _curTargetThing;
+                        if (_curTargetThing != null)
+                        {
+                            Impact(_curTargetThing);
+                        }
+
+                        _curTargetThing = null;
+                        if (_remainedAttackCount > 0)
+                        {
+                            _remainedAttackCount--;
+                            SearchNewTarget(previousTargetThing, _moveEndPosition);
+                        }
+
+                        if (_curTargetThing == null)
+                        {
+                            if (launcher.Spawned && !launcher.Destroyed)
+                            {
+                                _isReturning = true;
+                                SetTarget(launcher);
+                            }
+                            else
+                            {
+                                Destroy();
+                            }
+                        }
                     }
                 }
                 else
                 {
-                    position = CalculateBezierCurvePoint(_moveStartPosition, _moveEndPosition, _curDirectionOutVector, _curDirectionInVector, _curMoveDistance / _totalMoveDistance);
+                    position = CalculateBezierCurvePoint(_moveStartPosition, _moveEndPosition, _curDirectionOutVector * BezierWeight, _curDirectionInVector * BezierWeight, _curMoveDistance / _totalMoveDistance);
                     TrailRenderer.RegisterNewTrail(position);
 
                     _curMoveDistance += moves;
@@ -128,8 +182,18 @@ namespace VVRace
                 totalCost -= moves;
             }
 
-            _realPosition = position;
-            _realDirection = CalculateBezierCurveDerivative(_moveStartPosition, _moveEndPosition, _curDirectionOutVector, _curDirectionInVector, _curMoveDistance / _totalMoveDistance);
+            var positionCell = position.ToIntVec3();
+            if (!positionCell.InBounds(Map))
+            {
+                ReturnNeedle();
+            }
+            else
+            {
+                Position = position.ToIntVec3();
+
+                _realPosition = position;
+                _realDirection = CalculateBezierCurveDerivative(_moveStartPosition, _moveEndPosition, _curDirectionOutVector * BezierWeight, _curDirectionInVector * BezierWeight, _curMoveDistance / _totalMoveDistance);
+            }
         }
 
         protected override void Impact(Thing hitThing, bool blockedByShield = false)
@@ -161,13 +225,6 @@ namespace VVRace
                 dinfo.SetWeaponQuality(equipmentQuality);
                 hitThing.TakeDamage(dinfo).AssociateWithLog(battleLogEntry_RangedImpact);
             }
-
-            Log.Message($"impact to : {hitThing}");
-        }
-
-        protected override void ImpactSomething()
-        {
-            base.ImpactSomething();
         }
 
         private void SetTarget(Thing thing)
@@ -177,9 +234,10 @@ namespace VVRace
             _curTargetThing = thing;
             _moveStartPosition = _realPosition;
             _moveEndPosition = thing.TrueCenter().Yto0();
+
             _curDirectionOutVector = _realDirection;
             _curDirectionInVector = (thing.TrueCenter() - nearEdges.RandomElement().ToVector3()).Yto0();
-            _totalMoveDistance = CalculateBezierCurveLengthApproximate(_moveStartPosition, _moveEndPosition, _curDirectionOutVector, _curDirectionInVector);
+            _totalMoveDistance = CalculateBezierCurveLengthApproximate(_moveStartPosition, _moveEndPosition, _curDirectionOutVector * BezierWeight, _curDirectionInVector * BezierWeight);
             _curMoveDistance = 0f;
         }
 
@@ -187,37 +245,61 @@ namespace VVRace
         {
             var caster = launcher as IAttackTargetSearcher;
             var cellPosition = targetSearchPosition.ToIntVec3();
-            foreach (var offset in GenRadial.RadialPatternInRadius(NeedleProperties.targettingRadius))
-            {
-                if (offset == IntVec3.Zero) { continue; }
 
-                var cell = offset + cellPosition;
-                if (!cell.InBounds(Map)) { continue; }
+            var potentialTargets = Map.attackTargetsCache.GetPotentialTargetsFor(caster);
 
-                var things = cellPosition.GetThingList(Map);
-                foreach (var thing in things)
+            var tmp = (_initialTargettingPosition - targetSearchPosition).sqrMagnitude;
+            var target = GenClosest.ClosestThing_Global(
+                cellPosition,
+                potentialTargets,
+                maxDistance: NeedleProperties.targettingRadius,
+                validator: (Thing t) =>
                 {
-                    if (thing is IAttackTarget attackTarget && 
-                        !thing.Fogged() && 
-                        GenSight.LineOfSightToThing(launcher.PositionHeld, thing, Map, true) &&
-                        GenHostility.IsActiveThreatTo(attackTarget, launcher.Faction) &&
-                        !attackTarget.ThreatDisabled(caster))
-                    {
-                        SetTarget(thing);
-                        return;
-                    }
-                }
-            };
+                    if (t == previousTarget) { return false; }
 
-            if (previousTarget is IAttackTarget previousAttackTarget &&
-                !previousTarget.Fogged() &&
-                GenSight.LineOfSightToThing(launcher.PositionHeld, previousTarget, Map, true) &&
-                GenHostility.IsActiveThreatTo(previousAttackTarget, launcher.Faction) &&
-                !previousAttackTarget.ThreatDisabled(caster))
+                    var attackTarget = t as IAttackTarget;
+                    if (attackTarget == null) { return false; }
+
+                    if (!t.Spawned) { return false; }
+                    if (t.Fogged()) { return false; }
+                    if (t.HostileTo(launcher.Faction) == false) { return false; }
+                    if (GenSight.LineOfSightToThing(launcher.PositionHeld, t, Map, true) == false) { return false; }
+                    if (GenHostility.IsActiveThreatTo(attackTarget, launcher.Faction) == false) { return false; }
+                    
+                    return true;
+                },
+                priorityGetter: (Thing t) => Mathf.Abs((int)((t.Position.ToVector3() - targetSearchPosition).sqrMagnitude - tmp)));
+
+            if (target != null)
             {
-                SetTarget(previousTarget);
-                return;
+                SetTarget(target);
             }
+            else
+            {
+                if (previousTarget != null &&
+                    previousTarget.Spawned &&
+                    previousTarget is IAttackTarget previousAttackTarget &&
+                    previousTarget.Fogged() == false &&
+                    previousTarget.Position.DistanceTo(cellPosition) < NeedleProperties.targettingRadius &&
+                    GenSight.LineOfSightToThing(launcher.PositionHeld, previousTarget, Map, true) &&
+                    GenHostility.IsActiveThreatTo(previousAttackTarget, launcher.Faction))
+                {
+                    SetTarget(previousTarget);
+                }
+            }
+
+        }
+
+        private void ReturnNeedle()
+        {
+            var pawn = launcher as Pawn;
+            var stance = pawn?.stances?.curStance as Stance_Cooldown;
+            if (stance != null && stance.verb is Verb_LaunchProjectile)
+            {
+                pawn.stances.CancelBusyStanceHard();
+            }
+
+            Destroy();
         }
 
         private const int BezierLengthInterval = 4;
@@ -234,7 +316,7 @@ namespace VVRace
             }
 
             distance += (p2 - point).magnitude;
-            return distance;
+            return distance * 100;
         }
 
         private Vector3 CalculateBezierCurvePoint(Vector3 p1, Vector3 p2, Vector3 w1, Vector3 w2, float t)
