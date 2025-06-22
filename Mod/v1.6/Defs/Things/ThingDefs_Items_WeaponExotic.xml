@@ -201,7 +201,7 @@
     </tools>
     
     <costList>
-      <Plasteel>180</Plasteel>
+      <Plasteel>150</Plasteel>
       <VV_TitanicHornetWing>4</VV_TitanicHornetWing>
       <VV_Lifestrand>100</VV_Lifestrand>
     </costList>
@@ -255,7 +255,7 @@
       <armorPenetrationBase>0.15</armorPenetrationBase>
       <speed>110</speed>
 
-      <maxAttackCount>15</maxAttackCount>
+      <maxAttackCount>16</maxAttackCount>
       <targettingRadius>4.3</targettingRadius>
     </projectile>
 
