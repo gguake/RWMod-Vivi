@@ -1093,9 +1093,9 @@
 
     <comps>
       <li Class="CompProperties_ProjectileInterceptor">
-        <radius>4.9</radius>
+        <radius>6.6</radius>
         <interceptGroundProjectiles>true</interceptGroundProjectiles>
-        <interceptNonHostileProjectiles>true</interceptNonHostileProjectiles>
+        <interceptNonHostileProjectiles>false</interceptNonHostileProjectiles>
         <interceptOutgoingProjectiles>false</interceptOutgoingProjectiles>
         <color>(0.6, 0.6, 0.8)</color>
         <drawWithNoSelection>True</drawWithNoSelection>
