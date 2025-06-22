@@ -181,7 +181,7 @@
         <hasStandardCommand>true</hasStandardCommand>
         <defaultProjectile>VV_Projectile_EltexNeedle</defaultProjectile>
         <warmupTime>0.5</warmupTime>
-        <range>38.6</range>
+        <range>37.6</range>
         <soundCast>Interact_BeatFire</soundCast>
         <rangedFireRulepack>Combat_RangedFire_Thrown</rangedFireRulepack>
         <canGoWild>false</canGoWild>
@@ -250,13 +250,13 @@
 
     <projectile Class="VVRace.NeedleProperties">
       <damageDef>Stab</damageDef>
-      <damageAmountBase>6</damageAmountBase>
+      <damageAmountBase>7</damageAmountBase>
       <stoppingPower>0.5</stoppingPower>
-      <armorPenetrationBase>0.15</armorPenetrationBase>
+      <armorPenetrationBase>0.2</armorPenetrationBase>
       <speed>110</speed>
 
-      <maxAttackCount>16</maxAttackCount>
-      <targettingRadius>4.3</targettingRadius>
+      <maxAttackCount>15</maxAttackCount>
+      <targettingRadius>5.7</targettingRadius>
     </projectile>
 
     <comps>
