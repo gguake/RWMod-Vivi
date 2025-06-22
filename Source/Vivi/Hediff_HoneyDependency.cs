@@ -43,7 +43,7 @@ namespace VVRace
                         sb.AppendLine();
                     }
 
-                    sb.AppendInNewLine(LocalizeString_Etc.VV_GeneDefHoneyNeedDurationDesc.Translate(pawn.Named("PAWN"), "PeriodDays".Translate(5f).Named("DEFICIENCYDURATION")).Resolve());
+                    sb.AppendInNewLine(LocalizeString_Etc.VV_GeneDefHoneyNeedDurationDesc.Translate(pawn.Named("PAWN"), "PeriodDays".Translate(15f).Named("DEFICIENCYDURATION")).Resolve());
                     sb.AppendInNewLine(LocalizeString_Etc.VV_LastHoneyIngestedDurationAgo.Translate((Find.TickManager.TicksGame - linkedGene.lastIngestedTick).ToStringTicksToPeriod().Named("DURATION")).Resolve());
                 }
 

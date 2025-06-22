@@ -14,7 +14,7 @@
       </li>
       <li>
         <label>deficiency</label>
-        <minSeverity>1</minSeverity>
+        <minSeverity>1.5</minSeverity>
         <capMods>
           <li>
             <capacity>Moving</capacity>
@@ -60,39 +60,10 @@
           </li>
         </capMods>
       </li>
-      <li>
-        <minSeverity>12</minSeverity>
-        <capMods>
-          <li>
-            <capacity>Moving</capacity>
-            <setMax>0.5</setMax>
-          </li>
-          <li>
-            <capacity>Manipulation</capacity>
-            <setMax>0.5</setMax>
-          </li>
-          <li>
-            <capacity>Metabolism</capacity>
-            <setMax>0.5</setMax>
-          </li>
-          <li>
-            <capacity>Sight</capacity>
-            <setMax>0.7</setMax>
-          </li>
-          <li>
-            <capacity>Hearing</capacity>
-            <setMax>0.7</setMax>
-          </li>
-          <li>
-            <capacity>Talking</capacity>
-            <setMax>0.7</setMax>
-          </li>
-        </capMods>
-      </li>
     </stages>
     <comps>
       <li Class="HediffCompProperties_SeverityPerDay">
-        <severityPerDay>0.2</severityPerDay>
+        <severityPerDay>0.1</severityPerDay>
       </li>
     </comps>
   </HediffDef>

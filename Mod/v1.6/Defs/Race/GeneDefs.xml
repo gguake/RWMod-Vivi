@@ -32,7 +32,7 @@
   <GeneDef>
     <defName>VV_HoneyDepedency</defName>
     <label>fructose dependency</label>
-    <description>Carriers of this gene need to ingest vivi honey or ambrosia on a regular basis to survive. After 5 days without vivi honey or ambrosia, carriers will suffer from fructose deficiency.</description>
+    <description>Carriers of this gene need to ingest vivi honey or ambrosia on a regular basis to survive. After 15 days without vivi honey or ambrosia, carriers will suffer from fructose deficiency.</description>
     <geneClass>VVRace.Gene_HoneyDependency</geneClass>
     <iconPath>UI/Icons/Genes/Gene_Vivi2</iconPath>
     <displayCategory>Miscellaneous</displayCategory>
