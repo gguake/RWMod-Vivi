@@ -29,7 +29,7 @@
     <defName>VV_BasicInfra</defName>
     <label>vivi basic infrastructures</label>
     <description>Build basic production facilities and structures for the Vivis.</description>
-    <baseCost>400</baseCost>
+    <baseCost>200</baseCost>
     <researchViewX>0</researchViewX>
     <researchViewY>0.7</researchViewY>
 
@@ -85,9 +85,12 @@
     <defName>VV_BasicGathering</defName>
     <label>basic gathering</label>
     <description>Build facilities for collecting and processing honey and pollen, the staple foods of the Vivis.</description>
-    <baseCost>300</baseCost>
+    <baseCost>150</baseCost>
     <researchViewX>1</researchViewX>
     <researchViewY>0.7</researchViewY>
+    <prerequisites>
+      <li>VV_BasicInfra</li>
+    </prerequisites>
 
     <tags>
       <li>VV_ViviStart</li>
