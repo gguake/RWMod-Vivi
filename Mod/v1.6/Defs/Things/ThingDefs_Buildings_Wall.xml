@@ -181,7 +181,7 @@
     <uiIconPath>Things/Building/VV_HoneycombWall_Icon</uiIconPath>
     <uiIconColor>(1.0, 0.8, 0.6, 1.0)</uiIconColor>
     <statBases>
-      <MaxHitPoints>480</MaxHitPoints>
+      <MaxHitPoints>840</MaxHitPoints>
       <Flammability>0.55</Flammability>
     </statBases>
     <building>
@@ -198,76 +198,12 @@
     <designationCategory Inherit="False" />
     <damageMultipliers Inherit="False">
       <li>
-        <damageDef>Cut</damageDef>
-        <multiplier>0.25</multiplier>
-      </li>
-      <li>
-        <damageDef>Crush</damageDef>
-        <multiplier>0.25</multiplier>
-      </li>
-      <li>
-        <damageDef>Blunt</damageDef>
-        <multiplier>0.25</multiplier>
-      </li>
-      <li>
-        <damageDef>Poke</damageDef>
-        <multiplier>0.25</multiplier>
-      </li>
-      <li>
-        <damageDef>Stab</damageDef>
-        <multiplier>0.25</multiplier>
-      </li>
-      <li>
-        <damageDef>Scratch</damageDef>
-        <multiplier>0.25</multiplier>
-      </li>
-      <li>
-        <damageDef>ScratchToxic</damageDef>
-        <multiplier>0.25</multiplier>
-      </li>
-      <li>
-        <damageDef>Bite</damageDef>
-        <multiplier>0.25</multiplier>
-      </li>
-      <li>
-        <damageDef>ToxicBite</damageDef>
-        <multiplier>0.25</multiplier>
-      </li>
-      <li>
-        <damageDef>RangedStab</damageDef>
-        <multiplier>0.25</multiplier>
-      </li>
-      <li>
-        <damageDef>Bullet</damageDef>
-        <multiplier>0.25</multiplier>
-      </li>
-      <li>
-        <damageDef>Arrow</damageDef>
-        <multiplier>0.25</multiplier>
-      </li>
-      <li>
-        <damageDef>ArrowHighVelocity</damageDef>
-        <multiplier>0.25</multiplier>
-      </li>
-      <li>
         <damageDef>Bomb</damageDef>
-        <multiplier>0.5</multiplier>
-      </li>
-      <li>
-        <damageDef>BombSuper</damageDef>
-        <multiplier>0.5</multiplier>
+        <multiplier>2</multiplier>
       </li>
       <li>
         <damageDef>Thump</damageDef>
-        <multiplier>0.5</multiplier>
-      </li>
-      <li>
-        <damageDef>Demolish</damageDef>
-        <multiplier>0.5</multiplier>
-      </li>
-      <li>
-        <damageDef>Mining</damageDef>
-        <multiplier>0.5</multiplier>
+        <multiplier>2</multiplier>
       </li>
       <li>
         <damageDef>Flame</damageDef>
@@ -308,7 +244,7 @@
     <uiIconPath>Things/Building/VV_HardenHoneycombWall_Icon</uiIconPath>
     <uiIconColor>(1.0, 0.8, 0.6, 1.0)</uiIconColor>
     <statBases>
-      <MaxHitPoints>450</MaxHitPoints>
+      <MaxHitPoints>700</MaxHitPoints>
       <Flammability>0</Flammability>
     </statBases>
     <building>
@@ -326,84 +262,20 @@
     <designationCategory Inherit="False" />
     <damageMultipliers Inherit="False">
       <li>
-        <damageDef>Cut</damageDef>
-        <multiplier>0.55</multiplier>
-      </li>
-      <li>
-        <damageDef>Crush</damageDef>
-        <multiplier>0.5</multiplier>
-      </li>
-      <li>
-        <damageDef>Blunt</damageDef>
-        <multiplier>0.5</multiplier>
-      </li>
-      <li>
-        <damageDef>Poke</damageDef>
-        <multiplier>0.5</multiplier>
-      </li>
-      <li>
-        <damageDef>Stab</damageDef>
-        <multiplier>0.5</multiplier>
-      </li>
-      <li>
-        <damageDef>Scratch</damageDef>
-        <multiplier>0.5</multiplier>
-      </li>
-      <li>
-        <damageDef>ScratchToxic</damageDef>
-        <multiplier>0.5</multiplier>
-      </li>
-      <li>
-        <damageDef>Bite</damageDef>
-        <multiplier>0.5</multiplier>
-      </li>
-      <li>
-        <damageDef>ToxicBite</damageDef>
-        <multiplier>0.5</multiplier>
-      </li>
-      <li>
-        <damageDef>RangedStab</damageDef>
-        <multiplier>0.5</multiplier>
-      </li>
-      <li>
-        <damageDef>Bullet</damageDef>
-        <multiplier>0.25</multiplier>
-      </li>
-      <li>
-        <damageDef>Arrow</damageDef>
-        <multiplier>0.5</multiplier>
-      </li>
-      <li>
-        <damageDef>ArrowHighVelocity</damageDef>
-        <multiplier>0.5</multiplier>
-      </li>
-      <li>
         <damageDef>Bomb</damageDef>
-        <multiplier>0.5</multiplier>
-      </li>
-      <li>
-        <damageDef>BombSuper</damageDef>
-        <multiplier>0.5</multiplier>
+        <multiplier>2</multiplier>
       </li>
       <li>
         <damageDef>Thump</damageDef>
-        <multiplier>0.5</multiplier>
-      </li>
-      <li>
-        <damageDef>Demolish</damageDef>
-        <multiplier>0.5</multiplier>
-      </li>
-      <li>
-        <damageDef>Mining</damageDef>
-        <multiplier>0.67</multiplier>
+        <multiplier>2</multiplier>
       </li>
       <li>
         <damageDef>Flame</damageDef>
-        <multiplier>2</multiplier>
+        <multiplier>0.25</multiplier>
       </li>
       <li>
         <damageDef>Burn</damageDef>
-        <multiplier>2</multiplier>
+        <multiplier>0.25</multiplier>
       </li>
     </damageMultipliers>
     
