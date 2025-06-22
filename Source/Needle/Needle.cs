@@ -116,6 +116,12 @@ namespace VVRace
 
         protected override void TickInterval(int delta)
         {
+            if (!launcher.Spawned || launcher.Destroyed || (launcher is Pawn pawn && pawn.DeadOrDowned))
+            {
+                ReturnNeedle();
+                return;
+            }
+
             var totalCost = delta * _appliedSpeed;
 
             var position = _realPosition;
@@ -268,7 +274,7 @@ namespace VVRace
                     
                     return true;
                 },
-                priorityGetter: (Thing t) => Mathf.Abs((int)((t.Position.ToVector3() - targetSearchPosition).sqrMagnitude - tmp)));
+                priorityGetter: (Thing t) => Mathf.Abs((int)((t.Position.ToVector3() - targetSearchPosition).sqrMagnitude - tmp)) - launcher.Position.DistanceToSquared(t.Position));
 
             if (target != null)
             {
@@ -293,10 +299,13 @@ namespace VVRace
         private void ReturnNeedle()
         {
             var pawn = launcher as Pawn;
-            var stance = pawn?.stances?.curStance as Stance_Cooldown;
-            if (stance != null && stance.verb is Verb_LaunchProjectile)
+            if (pawn.Spawned && !pawn.DeadOrDowned)
             {
-                pawn.stances.CancelBusyStanceHard();
+                var stance = pawn?.stances?.curStance as Stance_Cooldown;
+                if (stance != null && stance.verb is Verb_LaunchProjectile)
+                {
+                    pawn.stances.CancelBusyStanceHard();
+                }
             }
 
             Destroy();
