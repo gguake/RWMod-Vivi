@@ -724,7 +724,12 @@
         <overlightRadius>7.7</overlightRadius>
         <glowOnlyRoofed>true</glowOnlyRoofed>
       </li>
+
+      <li Class="VVRace.CompProperties_ManaGenerator">
+        <mana>1800</mana>
+      </li>
     </comps>
+
     <specialDisplayRadius>6.2</specialDisplayRadius>
 
     <researchPrerequisites>
@@ -866,6 +871,10 @@
         <exceptCenter>true</exceptCenter>
 
         <spawnEffecter>VV_PollenEmitting</spawnEffecter>
+      </li>
+
+      <li Class="VVRace.CompProperties_ManaGenerator">
+        <mana>900</mana>
       </li>
     </comps>
 
@@ -1145,6 +1154,10 @@
       <li Class="VVRace.CompProperties_GlowerArcanePlant">
         <glowRadius>3</glowRadius>
         <glowColor>(255,255,255,0)</glowColor>
+      </li>
+
+      <li Class="VVRace.CompProperties_ManaGenerator">
+        <mana>400</mana>
       </li>
     </comps>
 

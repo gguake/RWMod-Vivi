@@ -81,6 +81,7 @@
   <ItemGroup>
     <Compile Include="ArcanePlant\Growing\Comps\CompFarmSeedlingDrawer.cs" />
     <Compile Include="ArcanePlant\Growing\UI\Alert_GrowingArcanePlantLowHP.cs" />
+    <Compile Include="ArcanePlant\Mana\CompManaGenerator.cs" />
     <Compile Include="ArcanePlant\Mana\ManaDiffusionJob.cs" />
     <Compile Include="ArcanePlant\Mana\ManaGrid.cs" />
     <Compile Include="ArcanePlant\Plant\AI\JobDriver_FertilizeArcanePlant.cs" />

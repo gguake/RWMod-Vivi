@@ -11,8 +11,8 @@ namespace VVRace
 {
     public class ManaGrid : MapComponent, ICellBoolGiver, IDisposable
     {
-        public const int RefreshManaInterval = 250;
-        public const int DiffuseInterval = 2503;
+        public const int RefreshManaInterval = 300;
+        public const int DiffuseInterval = 2307;
 
         private const string ManaGridExposeName = "encodedManaGrid";
 
@@ -123,7 +123,7 @@ namespace VVRace
         public void AddMana(IntVec3 cell, float flux)
         {
             var idx = map.cellIndices.CellToIndex(cell);
-            _manaGrid[idx] = Mathf.Max(0f, _manaGrid[idx] + flux);
+            _manaGrid[idx] = Mathf.Clamp(_manaGrid[idx] + flux, 0f, 10000f);
         }
 
         public void Dispose()
@@ -135,7 +135,8 @@ namespace VVRace
         {
             foreach (var plant in _manaProducers)
             {
-                AddMana(plant.Position, 50f);
+                var comp = plant.TryGetComp<CompManaGenerator>();
+                AddMana(plant.Position, comp.Props.mana / 60000f * RefreshManaInterval);
             }
 
             _cellBoolDrawer.SetDirty();
@@ -156,7 +157,7 @@ namespace VVRace
 
         private void Notify_BuildingSpawned(Building building)
         {
-            if (building is ArcanePlant)
+            if (building.HasComp<CompManaGenerator>())
             {
                 _manaProducers.Add(building);
                 _manaConsumers.Add(building);
@@ -167,7 +168,7 @@ namespace VVRace
 
         private void Notify_BuildingDespawned(Building building)
         {
-            if (building is ArcanePlant)
+            if (building.HasComp<CompManaGenerator>())
             {
                 _manaProducers.Remove(building);
                 _manaConsumers.Remove(building);
@@ -178,7 +179,7 @@ namespace VVRace
 
         public bool GetCellBool(int index)
         {
-            return _manaGrid[index] > 0.1f;
+            return _manaGrid[index] > 5f;
         }
 
         public Color GetCellExtraColor(int index)
@@ -187,19 +188,29 @@ namespace VVRace
             var value = _manaGrid[index];
             if (value < 200)
             {
-                float normalized = value / 300.0f;
-                color = Color.Lerp(new Color(0, 0.84f, 1, 0), new Color(0, 0.84f, 1, 1), normalized);
+                float normalized = value / 200.0f;
+                color = Color.Lerp(new Color(0, 1, 1, 0.1f), new Color(0, 1, 1, 1), normalized);
+            }
+            else if (value >= 200 && value < 400)
+            {
+                float normalized = (value - 200) / 200.0f;
+                color = Color.Lerp(new Color(0, 1, 1, 1), new Color(0, 0, 1, 1), normalized);
+            }
+            else if (value >= 400 && value < 600)
+            {
+                float normalized = (value - 400) / 200.0f;
+                color = Color.Lerp(new Color(0, 0, 1, 1), new Color(0, 1, 0, 1), normalized);
             }
             else
             {
-                float normalized = (value - 300) / 300.0f;
-                color = Color.Lerp(new Color(0, 0.84f, 1, 1), new Color(0, 0, 1, 1), normalized);
+                float normalized = (value - 600) / 200.0f;
+                color = Color.Lerp(new Color(0, 1, 0, 1), new Color(1, 1, 1, 1), normalized);
             }
 
-            color.r = Mathf.Round(color.r / 0.04f) * 0.04f;
-            color.g = Mathf.Round(color.g / 0.04f) * 0.04f;
-            color.b = Mathf.Round(color.b / 0.04f) * 0.04f;
-            color.a = Mathf.Round(color.a / 0.04f) * 0.04f;
+            color.r = Mathf.Round(color.r / 0.05f) * 0.05f;
+            color.g = Mathf.Round(color.g / 0.05f) * 0.05f;
+            color.b = Mathf.Round(color.b / 0.05f) * 0.05f;
+            color.a = Mathf.Round(color.a / 0.05f) * 0.05f;
             return color;
         }
     }
