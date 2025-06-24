@@ -22,6 +22,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>CS0649</NoWarn>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Build_Dev|AnyCPU'">
     <OutputPath>..\Mod\v1.6\Assemblies\</OutputPath>
@@ -31,6 +32,7 @@
     <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <DefineConstants>DEBUG</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -75,6 +77,8 @@
   <ItemGroup>
     <Compile Include="ArcanePlant\Growing\Comps\CompFarmSeedlingDrawer.cs" />
     <Compile Include="ArcanePlant\Growing\UI\Alert_GrowingArcanePlantLowHP.cs" />
+    <Compile Include="ArcanePlant\Mana\ManaDiffusionJob.cs" />
+    <Compile Include="ArcanePlant\Mana\ManaGrid.cs" />
     <Compile Include="ArcanePlant\Plant\AI\JobDriver_FertilizeArcanePlant.cs" />
     <Compile Include="ArcanePlant\Growing\AI\JobDriver_ManageArcanePlantFarm.cs" />
     <Compile Include="ArcanePlant\Plant\AI\WorkGiver_EquipShootus.cs" />
@@ -219,6 +223,7 @@
     <Compile Include="Hornet\MentalState_HornetBerserk.cs" />
     <Compile Include="Needle\Needle.cs" />
     <Compile Include="FoodDrainRecipe\RecipeModExtension.cs" />
+    <Compile Include="Utility\IOUtility.cs" />
     <Compile Include="Utility\ViviUtility.cs" />
     <Compile Include="FoodDrainRecipe\Bill_ProductionWithFoodDrain.cs" />
     <Compile Include="Vivi\Comps\CompFermentItem.cs" />

@@ -69,6 +69,10 @@ namespace VVRace
                 harmony.Patch(innerMethod, postfix: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(Map_FinalizeLoading_OrderBy_Postfix)));
             }
 
+            harmony.Patch(
+                original: AccessTools.Method(typeof(Map), nameof(Map.MapPreTick)),
+                postfix: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(Map_MapPreTick_Postfix)));
+
             Log.Message("!! [ViViRace] arcane plant patch complete");
         }
 
@@ -326,6 +330,15 @@ namespace VVRace
             if (t is ArcanePlant)
             {
                 __result += 0.00001f;
+            }
+        }
+
+        private static void Map_MapPreTick_Postfix(Map __instance)
+        {
+            if (GenTicks.TicksGame % ManaGrid.DiffuseInterval == 0)
+            {
+                var grid = __instance.GetComponent<ManaGrid>();
+                grid.MapComponentPreTick();
             }
         }
     }
