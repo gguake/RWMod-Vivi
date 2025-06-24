@@ -1,11 +1,9 @@
-﻿using Unity.Burst;
-using Unity.Collections;
+﻿using Unity.Collections;
 using Unity.Jobs;
 using Verse;
 
 namespace VVRace
 {
-    [BurstCompile]
     public struct ManaDiffusionJob : IJobParallelFor
     {
         [ReadOnly]
@@ -17,7 +15,6 @@ namespace VVRace
         [WriteOnly]
         public NativeArray<float> outputGrid;
 
-        [BurstCompile]
         public void Execute(int index)
         {
             var x = index % mapSize.x;
