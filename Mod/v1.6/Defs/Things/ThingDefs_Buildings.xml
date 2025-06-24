@@ -4,7 +4,8 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VV_ViviHatchery</defName>
     <label>vivi hatchery</label>
-    <description>a structure for hatching Vivi eggs. It must be indoors with a roof and requires the right temperature. If there is an incubator in a suitable environment, Royal Vivis will go there to lay their eggs.</description>
+    <description>a structure for incubating Vivi eggs. If there is an empty hatchery, Royal Vivi will go there to lay their eggs.
+\nIf the hatchery is placed indoors with a roof and kept at an appropriate temperature, it receives a bonus to hatching speed.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_ViviEgg</ThingDef>
     </descriptionHyperlinks>
