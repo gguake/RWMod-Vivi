@@ -7,11 +7,11 @@ namespace VVRace
 {
     public class CompProperties_ManaInteractive : CompProperties
     {
-        public float manaGenenerate;
-        public float manaConsume;
+        public float manaGeneneratePerDay;
+        public float manaConsumePerDay;
+        public float manaAbsorbPerDay;
 
         public float manaStorage;
-        public float manaAbsorbRate;
 
         public CompProperties_ManaInteractive()
         {
@@ -71,85 +71,53 @@ namespace VVRace
         public void RefreshMana(ManaGrid manaGrid, int ticks)
         {
             // CalcGeneratedMana, CalcConsumedMana
-            _manaGeneratesByDay = Props.manaGenenerate;
-            _manaConsumesByDay = Props.manaConsume;
+            _manaGeneratesByDay = Props.manaGeneneratePerDay;
+            _manaConsumesByDay = Props.manaConsumePerDay;
 
-            var netManaChange = (_manaGeneratesByDay - _manaConsumesByDay) / 60000f * ticks;
-            if (netManaChange > 0)
+            var absorbableMana = Mathf.Clamp(manaGrid[parent.Position], 0f, Props.manaAbsorbPerDay / 60000f * ticks);
+            var generatedMana = _manaGeneratesByDay / 60000f * ticks;
+            var consumedMana = _manaConsumesByDay / 60000f * ticks;
+
+            float manaChange;
+            if (consumedMana <= absorbableMana + generatedMana + _manaStored)
             {
-                // 생산량이 소모량보다 많은 경우 1. 비축 2. 방출
-                var storable = Mathf.Max(0f, Props.manaStorage - _manaStored);
-                if (netManaChange < storable)
-                {
-                    _manaStored += netManaChange;
-                    netManaChange = 0f;
-                }
-                else
-                {
-                    netManaChange -= storable;
-                    _manaStored = Props.manaStorage;
-
-                    var cellRect = parent.OccupiedRect();
-                    if (cellRect.Size != IntVec2.One)
-                    {
-                        foreach (var cell in cellRect)
-                        {
-                            manaGrid.AddMana(cell, netManaChange / cellRect.Count());
-                        }
-                    }
-                    else
-                    {
-                        manaGrid.AddMana(parent.Position, netManaChange);
-                    }
-
-                    netManaChange = 0f;
-                }
+                _manaActivated = true;
+                manaChange = absorbableMana + generatedMana - consumedMana;
             }
             else
             {
-                var totalAbsorbableMana = parent.OccupiedRect().Cells.Sum(cell => manaGrid[cell]) * Props.manaAbsorbRate;
-                var cellRect = parent.OccupiedRect();
-
-                if (totalAbsorbableMana > -netManaChange)
-                {
-                    foreach (var cell in parent.OccupiedRect())
-                    {
-                        manaGrid.AddMana(cell, manaGrid[cell] * Props.manaAbsorbRate / totalAbsorbableMana * netManaChange);
-                    }
-
-                    netManaChange = 0f;
-                }
-                else
-                {
-                    foreach (var cell in parent.OccupiedRect())
-                    {
-                        manaGrid.AddMana(cell, manaGrid[cell] * -Props.manaAbsorbRate);
-                    }
-
-                    netManaChange += totalAbsorbableMana;
-                }
-
-                if (-netManaChange < _manaStored)
-                {
-                    _manaStored += netManaChange;
-                    netManaChange = 0f;
-                }
-                else if (-netManaChange > _manaStored)
-                {
-                    netManaChange += _manaStored;
-                    _manaStored = 0f;
-                }
+                _manaActivated = false;
+                manaChange = absorbableMana + generatedMana;
             }
 
-            if (netManaChange > 0)
+            if (manaChange > 0f)
             {
+                if (_manaStored < Props.manaStorage)
+                {
+                    var deposited = Mathf.Clamp(manaChange, 0f, Props.manaStorage - _manaStored);
+                    manaChange -= deposited;
+                    _manaStored += deposited;
+                }
+
+                manaGrid.AddMana(parent.Position, -absorbableMana + manaChange);
             }
             else
             {
+                if (absorbableMana > 0f)
+                {
+                    var absorbed = Mathf.Clamp(-manaChange, 0f, absorbableMana);
+                    manaChange += absorbed;
+
+                    manaGrid.AddMana(parent.Position, -absorbed);
+                }
+
+                if (_manaStored > 0f)
+                {
+                    var withdrawn = Mathf.Clamp(-manaChange, 0f, _manaStored);
+                    manaChange += withdrawn;
+                    _manaStored -= withdrawn;
+                }
             }
-
-
-            _manaActivated = netManaChange >= 0f;
         }
     }
 }

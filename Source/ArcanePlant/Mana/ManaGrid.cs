@@ -12,7 +12,7 @@ namespace VVRace
     public class ManaGrid : MapComponent, ICellBoolGiver, IDisposable
     {
         public const int RefreshManaInterval = 300;
-        public const int DiffuseInterval = 2307;
+        public const int DiffuseInterval = 1997;
 
         private const string ManaGridExposeName = "encodedManaGrid";
 
@@ -211,10 +211,10 @@ namespace VVRace
                 color = Color.Lerp(new Color(0, 1, 0, 1), new Color(1, 1, 1, 1), normalized);
             }
 
-            color.r = Mathf.Round(color.r / 0.05f) * 0.05f;
-            color.g = Mathf.Round(color.g / 0.05f) * 0.05f;
-            color.b = Mathf.Round(color.b / 0.05f) * 0.05f;
-            color.a = Mathf.Round(color.a / 0.05f) * 0.05f;
+            color.r = Mathf.Round(color.r / 0.1f) * 0.1f;
+            color.g = Mathf.Round(color.g / 0.1f) * 0.1f;
+            color.b = Mathf.Round(color.b / 0.1f) * 0.1f;
+            color.a = Mathf.Round(color.a / 0.1f) * 0.1f;
             return color;
         }
     }
