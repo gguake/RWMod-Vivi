@@ -725,8 +725,10 @@
         <glowOnlyRoofed>true</glowOnlyRoofed>
       </li>
 
-      <li Class="VVRace.CompProperties_ManaGenerator">
-        <mana>1800</mana>
+      <li Class="VVRace.CompProperties_ManaInteractive">
+        <manaConsume>1800</manaConsume>
+        <manaStorage>1000</manaStorage>
+        <manaAbsorbRate>2000</manaAbsorbRate>
       </li>
     </comps>
 
@@ -873,8 +875,11 @@
         <spawnEffecter>VV_PollenEmitting</spawnEffecter>
       </li>
 
-      <li Class="VVRace.CompProperties_ManaGenerator">
-        <mana>900</mana>
+      <li Class="VVRace.CompProperties_ManaInteractive">
+        <manaGenenerate>1200</manaGenenerate>
+        <manaConsume>50</manaConsume>
+        <manaStorage>500</manaStorage>
+        <manaAbsorbRate>100</manaAbsorbRate>
       </li>
     </comps>
 
@@ -1156,8 +1161,8 @@
         <glowColor>(255,255,255,0)</glowColor>
       </li>
 
-      <li Class="VVRace.CompProperties_ManaGenerator">
-        <mana>400</mana>
+      <li Class="VVRace.CompProperties_ManaInteractive">
+        <manaGenenerate>500</manaGenenerate>
       </li>
     </comps>
 

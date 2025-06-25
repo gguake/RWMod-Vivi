@@ -16,15 +16,20 @@ namespace VVRace
 
         private const string ManaGridExposeName = "encodedManaGrid";
 
-        private List<Thing> _manaProducers = new List<Thing>();
-        private List<Thing> _manaConsumers = new List<Thing>();
-
+        [Unsaved]
         private NativeArray<float> _manaGrid;
 
+        [Unsaved]
         private JobHandle _jobHandle;
+
+        [Unsaved]
         private NativeArray<float> _tmpArray;
 
+        [Unsaved]
         private CellBoolDrawer _cellBoolDrawer;
+
+        [Unsaved]
+        private HashSet<CompManaInteractive> _manaComps = new HashSet<CompManaInteractive>();
 
         public Color Color => new Color(1f, 1f, 1f);
 
@@ -133,10 +138,9 @@ namespace VVRace
 
         private void Refresh()
         {
-            foreach (var plant in _manaProducers)
+            foreach (var comp in _manaComps)
             {
-                var comp = plant.TryGetComp<CompManaGenerator>();
-                AddMana(plant.Position, comp.Props.mana / 60000f * RefreshManaInterval);
+                comp.RefreshMana(this, RefreshManaInterval);
             }
 
             _cellBoolDrawer.SetDirty();
@@ -157,10 +161,10 @@ namespace VVRace
 
         private void Notify_BuildingSpawned(Building building)
         {
-            if (building.HasComp<CompManaGenerator>())
+            var comp = building.TryGetComp<CompManaInteractive>();
+            if (comp != null)
             {
-                _manaProducers.Add(building);
-                _manaConsumers.Add(building);
+                _manaComps.Add(comp);
 
                 _cellBoolDrawer.SetDirty();
             }
@@ -168,10 +172,10 @@ namespace VVRace
 
         private void Notify_BuildingDespawned(Building building)
         {
-            if (building.HasComp<CompManaGenerator>())
+            var comp = building.TryGetComp<CompManaInteractive>();
+            if (comp != null)
             {
-                _manaProducers.Remove(building);
-                _manaConsumers.Remove(building);
+                _manaComps.Remove(comp);
 
                 _cellBoolDrawer.SetDirty();
             }

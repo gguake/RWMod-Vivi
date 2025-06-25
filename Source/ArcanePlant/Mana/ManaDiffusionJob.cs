@@ -6,6 +6,8 @@ namespace VVRace
 {
     public struct ManaDiffusionJob : IJobParallelFor
     {
+        private const float DistributeRatio = 0.16f;
+
         [ReadOnly]
         public IntVec2 mapSize;
 
@@ -20,29 +22,25 @@ namespace VVRace
             var x = index % mapSize.x;
             var y = index / mapSize.z;
 
-            var flowFromLeft = x > 0 ? manaGrid[index - 1] : 0f;
-            var flowFromRight = x < mapSize.x - 1 ? manaGrid[index + 1] : 0f;
-            var flowFromUp = y > 0 ? manaGrid[index - mapSize.x] : 0f;
-            var flowFromDown = y < mapSize.z - 1 ? manaGrid[index + mapSize.x] : 0f;
+            var cell = manaGrid[index];
+            var leftCell = x > 0 ? manaGrid[index - 1] : 0f;
+            var rightCell = x < mapSize.x - 1 ? manaGrid[index + 1] : 0f;
+            var upCell = y > 0 ? manaGrid[index - mapSize.x] : 0f;
+            var downCell = y < mapSize.z - 1 ? manaGrid[index + mapSize.x] : 0f;
 
-            var result = 0f;
-            if (flowFromLeft == 0 && flowFromRight == 0 && flowFromUp == 0 && flowFromDown == 0)
+            if (leftCell == 0 && rightCell == 0 && upCell == 0 && downCell == 0)
             {
-                outputGrid[index] = 0;
+                outputGrid[index] = cell * (1f - DistributeRatio * 4f);
                 return;
             }
 
-            var horizontal = flowFromLeft > 0f && flowFromRight > 0f;
-            var vertical = flowFromUp > 0f && flowFromDown > 0f;
-            if (!(horizontal ^ vertical))
-            {
-                result = manaGrid[index] * 0.35f + (flowFromLeft + flowFromRight + flowFromUp + flowFromDown) * 0.162f;
-            }
-            else
-            {
-                result = manaGrid[index] * 0.65f + (flowFromLeft + flowFromRight + flowFromUp + flowFromDown) * 0.087f;
-            }
+            float result = cell * (1 - DistributeRatio * 4f);
+            result += leftCell > cell ? (leftCell + cell) * DistributeRatio : cell * DistributeRatio;
+            result += rightCell > cell ? (rightCell + cell) * DistributeRatio : cell * DistributeRatio;
+            result += upCell > cell ? (upCell + cell) * DistributeRatio : cell * DistributeRatio;
+            result += downCell > cell ? (downCell + cell) * DistributeRatio : cell * DistributeRatio;
 
+            result *= 0.75f;
             if (result < 0.1f)
             {
                 result = 0f;
