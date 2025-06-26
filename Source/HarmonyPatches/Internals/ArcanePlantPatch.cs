@@ -139,7 +139,7 @@ namespace VVRace
         {
             if (!strikeLoc.IsValid)
             {
-                var candidates = map.listerBuildings.allBuildingsColonist.Where(v => v.TryGetComp<CompLightningLod>()?.Active ?? false).ToList();
+                var candidates = map.listerBuildings.allBuildingsColonist.Where(v => v.TryGetComp<CompManaLightningLod>()?.Active ?? false).ToList();
                 if (candidates.Count > 0)
                 {
                     return candidates.RandomElement().Position;
@@ -168,19 +168,19 @@ namespace VVRace
             return instructions;
         }
 
-        private static CompLightningLod FindLightningBolt(Map map, IntVec3 loc)
+        private static CompManaLightningLod FindLightningBolt(Map map, IntVec3 loc)
         {
             if (!loc.IsValid) { return null; }
 
-            var thing = loc.GetFirstThingWithComp<CompLightningLod>(map);
-            return thing.TryGetComp<CompLightningLod>();
+            var thing = loc.GetFirstThingWithComp<CompManaLightningLod>(map);
+            return thing.TryGetComp<CompManaLightningLod>();
         }
 
         private static IEnumerable<CodeInstruction> WeatherEvent_LightningStrike_DoStrike_Transpiler(IEnumerable<CodeInstruction> codeInstructions, ILGenerator ilGenerator)
         {
             var instructions = codeInstructions.ToList();
 
-            var localLightningBolt = ilGenerator.DeclareLocal(typeof(CompLightningLod));
+            var localLightningBolt = ilGenerator.DeclareLocal(typeof(CompManaLightningLod));
 
             var doExplosionLabel = ilGenerator.DefineLabel();
             var skipExplosionLabel = ilGenerator.DefineLabel();
@@ -193,7 +193,7 @@ namespace VVRace
                 new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(ArcanePlantPatch), nameof(FindLightningBolt))),
                 new CodeInstruction(OpCodes.Dup),
                 new CodeInstruction(OpCodes.Brfalse_S, doExplosionLabel),
-                new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(CompLightningLod), nameof(CompLightningLod.OnLightningStrike))),
+                new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(CompManaLightningLod), nameof(CompManaLightningLod.OnLightningStrike))),
                 new CodeInstruction(OpCodes.Br_S, skipExplosionLabel),
                 new CodeInstruction(OpCodes.Pop).WithLabels(doExplosionLabel),
             };

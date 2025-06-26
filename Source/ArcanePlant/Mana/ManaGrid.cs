@@ -29,7 +29,7 @@ namespace VVRace
         private CellBoolDrawer _cellBoolDrawer;
 
         [Unsaved]
-        private HashSet<CompManaInteractive> _manaComps = new HashSet<CompManaInteractive>();
+        private HashSet<CompMana> _manaComps = new HashSet<CompMana>();
 
         public Color Color => new Color(1f, 1f, 1f);
 
@@ -161,7 +161,7 @@ namespace VVRace
 
         private void Notify_BuildingSpawned(Building building)
         {
-            var comp = building.TryGetComp<CompManaInteractive>();
+            var comp = building.TryGetComp<CompMana>();
             if (comp != null)
             {
                 _manaComps.Add(comp);
@@ -172,7 +172,7 @@ namespace VVRace
 
         private void Notify_BuildingDespawned(Building building)
         {
-            var comp = building.TryGetComp<CompManaInteractive>();
+            var comp = building.TryGetComp<CompMana>();
             if (comp != null)
             {
                 _manaComps.Remove(comp);
@@ -190,31 +190,21 @@ namespace VVRace
         {
             Color color;
             var value = _manaGrid[index];
-            if (value < 200)
+            if (value < 500)
             {
-                float normalized = value / 200.0f;
-                color = Color.Lerp(new Color(0, 1, 1, 0.1f), new Color(0, 1, 1, 1), normalized);
-            }
-            else if (value >= 200 && value < 400)
-            {
-                float normalized = (value - 200) / 200.0f;
-                color = Color.Lerp(new Color(0, 1, 1, 1), new Color(0, 0, 1, 1), normalized);
-            }
-            else if (value >= 400 && value < 600)
-            {
-                float normalized = (value - 400) / 200.0f;
-                color = Color.Lerp(new Color(0, 0, 1, 1), new Color(0, 1, 0, 1), normalized);
+                float normalized = value / 500.0f;
+                color = Color.Lerp(new Color(0, 1, 1, 0f), new Color(0, 1, 1, 1), normalized);
             }
             else
             {
-                float normalized = (value - 600) / 200.0f;
-                color = Color.Lerp(new Color(0, 1, 0, 1), new Color(1, 1, 1, 1), normalized);
+                float normalized = (value - 500) / 500.0f;
+                color = Color.Lerp(new Color(0, 1, 1, 1), new Color(0, 0, 1, 1), normalized);
             }
 
-            color.r = Mathf.Round(color.r / 0.1f) * 0.1f;
-            color.g = Mathf.Round(color.g / 0.1f) * 0.1f;
-            color.b = Mathf.Round(color.b / 0.1f) * 0.1f;
-            color.a = Mathf.Round(color.a / 0.1f) * 0.1f;
+            color.r = Mathf.Round(color.r / 0.05f) * 0.05f;
+            color.g = Mathf.Round(color.g / 0.05f) * 0.05f;
+            color.b = Mathf.Round(color.b / 0.05f) * 0.05f;
+            color.a = Mathf.Round(color.a / 0.05f) * 0.05f;
             return color;
         }
     }

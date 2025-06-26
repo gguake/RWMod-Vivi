@@ -9,33 +9,33 @@ namespace VVRace
         public FloatRange manaFromTemperatureRange;
         public bool manaLerpReversed = false;
 
-        public override IntRange ApproximateManaFlux => new IntRange((int)manaFromTemperatureRange.min, (int)manaFromTemperatureRange.max);
+        public override IntRange FluxRangeForDisplay => new IntRange((int)manaFromTemperatureRange.min, (int)manaFromTemperatureRange.max);
 
-        public override string GetRuleString(bool inverse)
+        public override string GetRuleString()
         {
             if (manaLerpReversed)
             {
                 return LocalizeString_Stat.VV_StatsReport_ManaFluxRule_Temperature_Desc.Translate(
                     activeTemperatureRange.TrueMin.ToStringTemperature(),
                     activeTemperatureRange.TrueMax.ToStringTemperature(),
-                    (inverse ? -manaFromTemperatureRange.TrueMax : manaFromTemperatureRange.TrueMax).ToString("+0;-#"),
-                    (inverse ? -manaFromTemperatureRange.TrueMin : manaFromTemperatureRange.TrueMin).ToString("+0;-#"));
+                    manaFromTemperatureRange.TrueMax.ToString("+0;-#"),
+                    manaFromTemperatureRange.TrueMin.ToString("+0;-#"));
             }
             else
             {
                 return LocalizeString_Stat.VV_StatsReport_ManaFluxRule_Temperature_Desc.Translate(
                     activeTemperatureRange.TrueMin.ToStringTemperature(),
                     activeTemperatureRange.TrueMax.ToStringTemperature(),
-                    (inverse ? -manaFromTemperatureRange.TrueMin : manaFromTemperatureRange.TrueMin).ToString("+0;-#"),
-                    (inverse ? -manaFromTemperatureRange.TrueMax : manaFromTemperatureRange.TrueMax).ToString("+0;-#"));
+                    manaFromTemperatureRange.TrueMin.ToString("+0;-#"),
+                    manaFromTemperatureRange.TrueMax.ToString("+0;-#"));
             }
         }
 
-        public override int CalcManaFlux(ManaAcceptor plant)
+        public override int CalcManaFlux(Thing thing)
         {
-            if (!plant.Spawned || plant.Destroyed) { return 0; }
+            if (!thing.Spawned || thing.Destroyed) { return 0; }
 
-            var temperature = plant.AmbientTemperature;
+            var temperature = thing.AmbientTemperature;
             if (activeTemperatureRange.IncludesEpsilon(temperature))
             {
                 var t = activeTemperatureRange.InverseLerpThroughRange(temperature);

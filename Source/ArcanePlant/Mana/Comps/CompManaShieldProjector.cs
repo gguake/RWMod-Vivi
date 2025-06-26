@@ -9,11 +9,10 @@ namespace VVRace
     public class CompProperties_ManaShieldProjector : CompProperties
     {
         public ThingDef shieldDef;
-
-        public int requiredMinimumManaForActivate;
-        public float manaEfficiency;
-
         public ThingDef mote;
+
+        public int shieldMaxHp;
+        public float requiredManaPct;
 
         public CompProperties_ManaShieldProjector()
         {
@@ -42,6 +41,16 @@ namespace VVRace
         }
         private Thing _shield;
 
+        public CompMana ManaComp
+        {
+            get
+            {
+                if (_manaComp == null) { _manaComp = parent.GetComp<CompMana>(); }
+                return _manaComp;
+            }
+        }
+        private CompMana _manaComp;
+
         public override void PostExposeData()
         {
             Scribe_References.Look(ref _shield, "shield");
@@ -67,11 +76,11 @@ namespace VVRace
                 commandActivateShield.disabledReason = LocalizeString_Command.VV_Command_ActivateShieldAlreadyActivated.Translate();
             }
 
-            var plant = parent as ArcanePlant;
-            if (plant == null || plant.Mana < Props.requiredMinimumManaForActivate)
+            var manaComp = ManaComp;
+            if (manaComp == null || manaComp.StoredPct < Props.requiredManaPct)
             {
                 commandActivateShield.Disabled = true;
-                commandActivateShield.disabledReason = LocalizeString_Command.VV_Command_ActivateShieldNotEnoughEnergy.Translate(Props.requiredMinimumManaForActivate);
+                commandActivateShield.disabledReason = LocalizeString_Command.VV_Command_ActivateShieldNotEnoughEnergy.Translate(Props.requiredManaPct.ToStringPercentEmptyZero());
             }
 
             yield return commandActivateShield;
@@ -116,11 +125,10 @@ namespace VVRace
         {
             if (Shield != null) { return; }
 
-            var plant = parent as ArcanePlant;
-            if (plant == null || plant.Mana < Props.requiredMinimumManaForActivate) { return; }
+            var manaComp = ManaComp;
+            if (manaComp == null || manaComp.StoredPct < Props.requiredManaPct) { return; }
 
-            var hitPoints = (int)(Props.manaEfficiency * plant.Mana);
-            if (hitPoints <= 0) { return; }
+            var hitPoints = 1 + (int)(Props.shieldMaxHp * ManaComp.StoredPct * parent.HitPoints / parent.MaxHitPoints);
 
             _shield = GenSpawn.Spawn(Props.shieldDef, parent.Position, parent.Map);
             
@@ -128,7 +136,7 @@ namespace VVRace
             interceptor.maxHitPointsOverride = hitPoints;
             interceptor.currentHitPoints = hitPoints;
 
-            plant.AddMana(-plant.Mana);
+            ManaComp.Stored = 0f;
 
             if (Props.mote != null)
             {

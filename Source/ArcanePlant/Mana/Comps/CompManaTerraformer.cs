@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 using Verse;
-using Verse.Noise;
 
 namespace VVRace
 {
@@ -11,7 +9,7 @@ namespace VVRace
         public TerrainDef to;
     }
 
-    public class CompProperties_Terraformer : CompProperties
+    public class CompProperties_ManaTerraformer : CompProperties
     {
         [Unsaved]
         private Dictionary<TerrainDef, TerrainDef> _cachedDataDictionary;
@@ -24,9 +22,9 @@ namespace VVRace
         public bool removePollution;
         public bool showRadius = true;
         
-        public CompProperties_Terraformer()
+        public CompProperties_ManaTerraformer()
         {
-            compClass = typeof(CompTerraformer);
+            compClass = typeof(CompManaTerraformer);
         }
 
         public TerrainDef TryGetTerraformResult(TerrainDef current)
@@ -45,9 +43,19 @@ namespace VVRace
         }
     }
 
-    public class CompTerraformer : ThingComp
+    public class CompManaTerraformer : ThingComp
     {
-        public CompProperties_Terraformer Props => (CompProperties_Terraformer)props;
+        public CompProperties_ManaTerraformer Props => (CompProperties_ManaTerraformer)props;
+
+        public CompMana ManaComp
+        {
+            get
+            {
+                if (_manaComp == null) { _manaComp = parent.GetComp<CompMana>(); }
+                return _manaComp;
+            }
+        }
+        private CompMana _manaComp;
 
         private float _terraformRadius;
         private int _remainedCooldown = -1;
@@ -67,22 +75,19 @@ namespace VVRace
             }
         }
 
-        public override void CompTick()
+        public override void CompTickInterval(int delta)
         {
-            if (parent.IsHashIntervalTick(GenTicks.TickRareInterval))
+            if (!parent.Spawned || parent.Destroyed || !ManaComp.Active) { return; }
+
+            if (_remainedCooldown > 0)
             {
-                Tick(GenTicks.TickRareInterval);
+                _remainedCooldown -= delta;
             }
-        }
-
-        public override void CompTickRare()
-        {
-            Tick(GenTicks.TickRareInterval);
-        }
-
-        public override void CompTickLong()
-        {
-            Tick(GenTicks.TickLongInterval);
+            else
+            {
+                TryTerraform();
+                _remainedCooldown = Props.cooldownTicks.RandomInRange;
+            }
         }
 
         public override void PostDrawExtraSelectionOverlays()
@@ -90,31 +95,6 @@ namespace VVRace
             if (Props.showRadius)
             {
                 GenDraw.DrawRadiusRing(parent.Position, Props.radiusRange.TrueMax);
-            }
-        }
-
-        public void Tick(int ticks = 1)
-        {
-            if (!parent.Spawned || parent.Destroyed) { return; }
-
-            bool hasMana = false;
-            var plant = parent as ArcanePlant;
-            if (plant != null)
-            {
-                hasMana = plant.ManaChargeRatio > 0f;
-            }
-
-            if (hasMana)
-            {
-                if (_remainedCooldown > 0)
-                {
-                    _remainedCooldown -= ticks;
-                }
-                else
-                {
-                    TryTerraform();
-                    _remainedCooldown = Props.cooldownTicks.RandomInRange;
-                }
             }
         }
 

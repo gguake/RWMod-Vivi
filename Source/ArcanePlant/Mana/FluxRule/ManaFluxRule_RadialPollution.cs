@@ -29,7 +29,7 @@ namespace VVRace
             }
         }
 
-        public override IntRange ApproximateManaFlux
+        public override IntRange FluxRangeForDisplay
         {
             get
             {
@@ -38,18 +38,18 @@ namespace VVRace
             }
         }
 
-        public override string GetRuleString(bool inverse) =>
+        public override string GetRuleString() =>
             LocalizeString_Stat.VV_StatsReport_ManaFluxRule_RadialPollution_Desc.Translate(
-                (inverse ? -manaCurveFromDistanceSqr.MinY : manaCurveFromDistanceSqr.MinY).ToString("+0;-#"),
-                (inverse ? -manaCurveFromDistanceSqr.MaxY : manaCurveFromDistanceSqr.MaxY).ToString("+0;-#"));
+                manaCurveFromDistanceSqr.MinY.ToString("+0;-#"),
+                manaCurveFromDistanceSqr.MaxY.ToString("+0;-#"));
 
-        public override int CalcManaFlux(ManaAcceptor manaAcceptor)
+        public override int CalcManaFlux(Thing thing)
         {
             var manaSum = 0f;
             foreach (var tuple in RadialCellAndMana)
             {
-                var map = manaAcceptor.Map;
-                var cell = manaAcceptor.Position + tuple.v;
+                var map = thing.Map;
+                var cell = thing.Position + tuple.v;
                 if (cell.InBounds(map) && !cell.Impassable(map) && cell.IsPolluted(map))
                 {
                     manaSum += tuple.mana;

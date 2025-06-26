@@ -7,6 +7,8 @@
 
 <VV_Inspector_ViviWallReplaceCooldown>Time Remaining Until Solidification: {0}</VV_Inspector_ViviWallReplaceCooldown>
 
+<VV_Inspector_PlantActive>Active</VV_Inspector_PlantActive>
+<VV_Inspector_PlantInactive>Inactive</VV_Inspector_PlantInactive>
 <VV_Inspector_PlantMana>Mana: {0}/{1}</VV_Inspector_PlantMana>
 <VV_Inspector_PlantManaFlux>({0}/day)</VV_Inspector_PlantManaFlux>
 

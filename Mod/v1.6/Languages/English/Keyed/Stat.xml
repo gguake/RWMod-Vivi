@@ -10,7 +10,6 @@
 <VV_StatsReport_ManaPerShootDesc>The amount of mana consumed each time the arcane plant fires</VV_StatsReport_ManaPerShootDesc>
 
 <VV_StatsReport_ManaFluxRule_AdjacentPlant_Desc>{0} mana from each adjacent arcane plants\{0} mana from each adjacent plant propotional to its growth</VV_StatsReport_ManaFluxRule_AdjacentPlant_Desc>
-<VV_StatsReport_ManaFluxRule_AdjacentPollution_Desc>{0} mana if placed on polluted soil\n{1} mana from each adjacent polluted soil</VV_StatsReport_ManaFluxRule_AdjacentPollution_Desc>
 <VV_StatsReport_ManaFluxRule_AdjacentWater_Desc>{0} mana if placed on water\n{1} mana from each adjacent water</VV_StatsReport_ManaFluxRule_AdjacentWater_Desc>
 <VV_StatsReport_ManaFluxRule_BatteryStored_Desc>{0} mana propotional to the charged rate</VV_StatsReport_ManaFluxRule_BatteryStored_Desc>
 <VV_StatsReport_ManaFluxRule_Constant_Desc>{0} mana always</VV_StatsReport_ManaFluxRule_Constant_Desc>

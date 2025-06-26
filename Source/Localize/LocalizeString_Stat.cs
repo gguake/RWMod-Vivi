@@ -2,6 +2,15 @@
 {
     public static class LocalizeString_Stat
     {
+        public const string VV_StatsReport_ManaStorage = nameof(VV_StatsReport_ManaStorage);
+        public const string VV_StatsReport_ManaStorage_Desc = nameof(VV_StatsReport_ManaStorage_Desc);
+        public const string VV_StatsReport_ManaGenerate = nameof(VV_StatsReport_ManaGenerate);
+        public const string VV_StatsReport_ManaGenerate_Desc = nameof(VV_StatsReport_ManaGenerate_Desc);
+        public const string VV_StatsReport_ManaConsume = nameof(VV_StatsReport_ManaConsume);
+        public const string VV_StatsReport_ManaConsume_Desc = nameof(VV_StatsReport_ManaConsume_Desc);
+        public const string VV_StatsReport_ManaAbsorb = nameof(VV_StatsReport_ManaAbsorb);
+        public const string VV_StatsReport_ManaAbsorb_Desc = nameof(VV_StatsReport_ManaAbsorb_Desc);
+
         public const string VV_StatsReport_Mana = nameof(VV_StatsReport_Mana);
         public const string VV_StatsReport_Mana_Desc = nameof(VV_StatsReport_Mana_Desc);
         public const string VV_StatsReport_ManaFlux = nameof(VV_StatsReport_ManaFlux);

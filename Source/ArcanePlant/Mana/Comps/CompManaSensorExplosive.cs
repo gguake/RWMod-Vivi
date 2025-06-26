@@ -4,10 +4,9 @@ using Verse;
 
 namespace VVRace
 {
-    public class CompProperties_SensorExplosive : CompProperties
+    public class CompProperties_ManaSensorExplosive : CompProperties
     {
-        public int requiredManaAmount;
-        public int useManaAmount;
+        public float requiredManaPct;
 
         public float sensorRadius;
         public Type sensorWorkerClass;
@@ -54,15 +53,25 @@ namespace VVRace
             }
         }
 
-        public CompProperties_SensorExplosive()
+        public CompProperties_ManaSensorExplosive()
         {
-            compClass = typeof(CompSensorExplosive);
+            compClass = typeof(CompManaSensorExplosive);
         }
     }
 
-    public class CompSensorExplosive : ThingComp
+    public class CompManaSensorExplosive : ThingComp
     {
-        CompProperties_SensorExplosive Props => (CompProperties_SensorExplosive)props;
+        CompProperties_ManaSensorExplosive Props => (CompProperties_ManaSensorExplosive)props;
+
+        public CompMana ManaComp
+        {
+            get
+            {
+                if (_manaComp == null) { _manaComp = parent.GetComp<CompMana>(); }
+                return _manaComp;
+            }
+        }
+        private CompMana _manaComp;
 
         private int _remainedCooldown = -1;
         public bool IsCooldown => _remainedCooldown > 0;
@@ -72,52 +81,29 @@ namespace VVRace
             Scribe_Values.Look(ref _remainedCooldown, "remainedCooldown", defaultValue: -1);
         }
 
-        public override void CompTick()
-        {
-            if (parent.IsHashIntervalTick(GenTicks.TickRareInterval))
-            {
-                Tick(GenTicks.TickRareInterval);
-            }
-        }
-
-        public override void CompTickRare()
-        {
-            Tick(GenTicks.TickRareInterval);
-        }
-
-        public override void CompTickLong()
-        {
-            Tick(GenTicks.TickLongInterval);
-        }
-
         public override void PostDrawExtraSelectionOverlays()
         {
             GenDraw.DrawRadiusRing(parent.Position, Props.sensorRadius, Color.yellow, c => GenSight.LineOfSight(parent.Position, c, parent.Map));
             GenDraw.DrawRadiusRing(parent.Position, Props.explosiveRadius, Color.red);
         }
 
-        public void Tick(int ticks = 1)
+        public override void CompTickInterval(int delta)
         {
-            if (!parent.Spawned || parent.Destroyed) { return; }
+            if (!parent.Spawned || parent.Destroyed || !ManaComp.Active) { return; }
 
-            var plant = parent as ArcanePlant;
-            if (plant == null || plant.ManaChargeRatio > 0f)
+            if (_remainedCooldown > 0)
             {
-                if (_remainedCooldown > 0)
-                {
-                    _remainedCooldown = Mathf.Max(0, _remainedCooldown - ticks);
-                }
-                else if (Props.SensorWorker.Detected(parent, Props.sensorRadius))
-                {
-                    TryExplosive();
-                }
+                _remainedCooldown = Mathf.Max(0, _remainedCooldown - delta);
+            }
+            else if (Props.SensorWorker.Detected(parent, Props.sensorRadius))
+            {
+                TryExplosive();
             }
         }
 
         public bool TryExplosive()
         {
-            var plant = parent as ArcanePlant;
-            if (plant != null && plant.Mana < Props.requiredManaAmount)
+            if (ManaComp.StoredPct < Props.requiredManaPct)
             {
                 return false;
             }
@@ -151,7 +137,7 @@ namespace VVRace
                 doVisualEffects: Props.doVisualEffects,
                 propagationSpeed: Props.propagationSpeed);
 
-            plant?.AddMana(-Props.useManaAmount);
+            ManaComp.Stored -= ManaComp.Props.manaCapacity * Props.requiredManaPct;
 
             _remainedCooldown = Props.explosiveCooldownTicks.RandomInRange;
             return true;

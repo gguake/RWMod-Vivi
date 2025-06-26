@@ -5,7 +5,7 @@ using Verse;
 
 namespace VVRace
 {
-    public class CompProperties_FilthMakerArcanePlant : CompProperties
+    public class CompProperties_ManaFilthMaker : CompProperties
     {
         public ThingDef filthDef;
         public FloatRange makeAmountPerDays = new FloatRange(1f, 1f);
@@ -14,15 +14,25 @@ namespace VVRace
 
         public EffecterDef spawnEffecter;
 
-        public CompProperties_FilthMakerArcanePlant()
+        public CompProperties_ManaFilthMaker()
         {
-            compClass = typeof(CompFilthMakerArcanePlant);
+            compClass = typeof(CompManaFilthMaker);
         }
     }
 
-    public class CompFilthMakerArcanePlant : ThingComp
+    public class CompManaFilthMaker : ThingComp
     {
-        public CompProperties_FilthMakerArcanePlant Props => (CompProperties_FilthMakerArcanePlant)props;
+        public CompProperties_ManaFilthMaker Props => (CompProperties_ManaFilthMaker)props;
+
+        public CompMana ManaComp
+        {
+            get
+            {
+                if (_manaComp == null) { _manaComp = parent.GetComp<CompMana>(); }
+                return _manaComp;
+            }
+        }
+        private CompMana _manaComp;
 
         private int _nextRefreshTick;
 
@@ -48,7 +58,7 @@ namespace VVRace
         {
             if (GenTicks.TicksGame >= _nextRefreshTick)
             {
-                if (parent.Spawned && !parent.Destroyed && parent is ArcanePlant arcanePlant && arcanePlant.ManaChargeRatio > 0f)
+                if (parent.Spawned && !parent.Destroyed && ManaComp.Active)
                 {
                     try
                     {
