@@ -218,7 +218,8 @@ namespace VVRace
         public override void SelectedUpdate()
         {
             base.SelectedUpdate();
-            SectionLayer_ThingsManaFluxGrid.DrawManaFluxGridOverlayThisFrame();
+
+            Map.GetComponent<EnvironmentManaGrid>()?.MarkForDrawOverlay();
         }
     }
 }

@@ -113,17 +113,25 @@ namespace VVRace
 
         private static void Designator_Build_SelectedUpdate_Postfix(BuildableDef ___entDef)
         {
-            if (___entDef is ThingDef thingDef && (typeof(ManaAcceptor).IsAssignableFrom(thingDef.thingClass) || typeof(ArcanePlantPot).IsAssignableFrom(thingDef.thingClass)))
+            if (___entDef is ThingDef thingDef && (thingDef.HasComp<CompMana>() || typeof(ArcanePlantPot).IsAssignableFrom(thingDef.thingClass)))
             {
-                SectionLayer_ThingsManaFluxGrid.DrawManaFluxGridOverlayThisFrame();
+                var manaGrid = Find.CurrentMap.GetComponent<EnvironmentManaGrid>();
+                if (manaGrid != null)
+                {
+                    manaGrid.MarkForDrawOverlay();
+                }
             }
         }
 
         private static void Designator_Install_SelectedUpdate_Postfix(Designator_Install __instance)
         {
-            if (__instance.PlacingDef is ThingDef thingDef && (typeof(ManaAcceptor).IsAssignableFrom(thingDef.thingClass) || typeof(ArcanePlantPot).IsAssignableFrom(thingDef.thingClass)))
+            if (__instance.PlacingDef is ThingDef thingDef && (thingDef.HasComp<CompMana>() || typeof(ArcanePlantPot).IsAssignableFrom(thingDef.thingClass)))
             {
-                SectionLayer_ThingsManaFluxGrid.DrawManaFluxGridOverlayThisFrame();
+                var manaGrid = Find.CurrentMap.GetComponent<EnvironmentManaGrid>();
+                if (manaGrid != null)
+                {
+                    manaGrid.MarkForDrawOverlay();
+                }
             }
         }
 
@@ -335,9 +343,9 @@ namespace VVRace
 
         private static void Map_MapPreTick_Postfix(Map __instance)
         {
-            if (GenTicks.TicksGame % ManaGrid.DiffuseInterval == 0)
+            var grid = __instance.GetComponent<EnvironmentManaGrid>();
+            if (grid != null)
             {
-                var grid = __instance.GetComponent<ManaGrid>();
                 grid.MapComponentPreTick();
             }
         }

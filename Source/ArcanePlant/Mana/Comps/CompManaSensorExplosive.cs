@@ -137,7 +137,7 @@ namespace VVRace
                 doVisualEffects: Props.doVisualEffects,
                 propagationSpeed: Props.propagationSpeed);
 
-            ManaComp.Stored -= ManaComp.Props.manaCapacity * Props.requiredManaPct;
+            ManaComp.StoredPct -= Props.requiredManaPct;
 
             _remainedCooldown = Props.explosiveCooldownTicks.RandomInRange;
             return true;

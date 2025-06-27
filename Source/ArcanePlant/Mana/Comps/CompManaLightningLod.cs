@@ -30,7 +30,7 @@ namespace VVRace
 
         public void OnLightningStrike()
         {
-            parent.Map.GetComponent<ManaGrid>().AddMana(parent.Position, Props.mana);
+            parent.Map.GetComponent<EnvironmentManaGrid>().ChangeEnvironmentMana(parent.Position, Props.mana);
         }
     }
 }

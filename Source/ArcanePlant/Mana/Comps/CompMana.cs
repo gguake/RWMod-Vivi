@@ -44,7 +44,18 @@ namespace VVRace
                 _manaStored = Mathf.Clamp(value, 0f, Props.manaCapacity);
             }
         }
-        public float StoredPct => _manaStored / Props.manaCapacity;
+        public float StoredPct
+        {
+            get
+            {
+                return _manaStored / Props.manaCapacity;
+            }
+            set
+            {
+                Stored = Props.manaCapacity * value;
+            }
+        }
+            
 
         public override void PostPostMake()
         {
@@ -133,7 +144,7 @@ namespace VVRace
 
         }
 
-        public void RefreshMana(ManaGrid manaGrid, int ticks)
+        public void RefreshMana(EnvironmentManaGrid manaGrid, int ticks)
         {
             _manaGeneratesByDay = Props.manaGenenerateRule?.CalcManaFlux(parent) * parent.HitPoints / (float)parent.MaxHitPoints ?? 0f;
             _manaConsumesByDay = Props.manaConsumeRule?.CalcManaFlux(parent) ?? 0f;
@@ -145,12 +156,10 @@ namespace VVRace
             float manaChange;
             if (consumedMana <= absorbableMana + generatedMana + _manaStored)
             {
-                _manaActivated = true;
                 manaChange = absorbableMana + generatedMana - consumedMana;
             }
             else
             {
-                _manaActivated = false;
                 manaChange = absorbableMana + generatedMana;
             }
 
@@ -164,7 +173,7 @@ namespace VVRace
                     _manaStored += deposited;
                 }
 
-                manaGrid.AddMana(parent.Position, -absorbableMana + manaChange);
+                manaGrid.ChangeEnvironmentMana(parent.Position, -absorbableMana + manaChange, direct: true);
             }
             else
             {
@@ -173,7 +182,7 @@ namespace VVRace
                     var absorbed = Mathf.Clamp(-manaChange, 0f, absorbableMana);
                     manaChange += absorbed;
 
-                    manaGrid.AddMana(parent.Position, -absorbed);
+                    manaGrid.ChangeEnvironmentMana(parent.Position, -absorbed, direct: true);
                 }
 
                 if (_manaStored > 0f)
@@ -184,6 +193,7 @@ namespace VVRace
                 }
             }
 
+            _manaActivated = manaChange >= 0f;
             _manaExternalChange = manaGrid[parent.Position] - beforeExternalMana;
         }
     }

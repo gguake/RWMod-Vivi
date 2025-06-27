@@ -48,7 +48,6 @@ namespace VVRace
         public static JobDef VV_GatherPollen;
         public static JobDef VV_GatherPropolis;
 
-        public static JobDef VV_FertilizeArcanePlant;
         public static JobDef VV_ManageArcanePlantFarm;
 
         public static JobDef VV_FortifyHoneycombWall;
@@ -243,7 +242,6 @@ namespace VVRace
     [DefOf]
     public static class VVWorkGiverDefOf
     {
-        public static WorkGiverDef VV_FertilizeArcanePlant;
     }
 
     [DefOf]

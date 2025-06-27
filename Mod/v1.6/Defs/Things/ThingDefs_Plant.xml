@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
   <ThingDef Abstract="True" Name="VV_ArcaneFlowerBase" ParentName="PlantBase">
-    <thingClass>VVRace.ViviFlower</thingClass>
     <selectable>true</selectable>
     <statBases>
       <MaxHitPoints>70</MaxHitPoints>
