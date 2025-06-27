@@ -10,7 +10,7 @@ namespace VVRace
     {
         public float manaCapacity;
 
-        public ManaFluxRule manaGenenerateRule;
+        public ManaFluxRule manaGenerateRule;
         public ManaFluxRule manaConsumeRule;
         public float manaAbsorbPerDay;
 
@@ -122,7 +122,7 @@ namespace VVRace
                     -22200);
             }
 
-            if (Props.manaGenenerateRule != null)
+            if (Props.manaGenerateRule != null)
             {
 
             }
@@ -146,7 +146,7 @@ namespace VVRace
 
         public void RefreshMana(EnvironmentManaGrid manaGrid, int ticks)
         {
-            _manaGeneratesByDay = Props.manaGenenerateRule?.CalcManaFlux(parent) * parent.HitPoints / (float)parent.MaxHitPoints ?? 0f;
+            _manaGeneratesByDay = Props.manaGenerateRule?.CalcManaFlux(parent) * parent.HitPoints / (float)parent.MaxHitPoints ?? 0f;
             _manaConsumesByDay = Props.manaConsumeRule?.CalcManaFlux(parent) ?? 0f;
 
             var absorbableMana = Mathf.Clamp(manaGrid[parent.Position], 0f, Props.manaAbsorbPerDay / 60000f * ticks);

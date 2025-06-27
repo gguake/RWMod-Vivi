@@ -70,11 +70,9 @@
     <resourcesFractionWhenDeconstructed>1</resourcesFractionWhenDeconstructed>
 
     <comps>
-      <li Class="VVRace.CompProperties_ArcanePlantStatsDisplay" />
     </comps>
 
     <inspectorTabs>
-      <li>VVRace.ITab_ManaFluxStats</li>
     </inspectorTabs>
 
     <tradeTags>

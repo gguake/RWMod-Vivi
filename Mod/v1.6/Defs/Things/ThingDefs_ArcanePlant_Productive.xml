@@ -31,10 +31,10 @@
 
     <comps>
       <li Class="VVRace.CompProperties_Mana">
-        <manaGenenerateRule Class="VVRace.ManaFluxRule_Temperature">
+        <manaGenerateRule Class="VVRace.ManaFluxRule_Temperature">
           <activeTemperatureRange>30~230</activeTemperatureRange>
           <manaFromTemperatureRange>0~2000</manaFromTemperatureRange>
-        </manaGenenerateRule>
+        </manaGenerateRule>
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
           <mana>30</mana>
         </manaConsumeRule>
@@ -43,13 +43,13 @@
 
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
-      <li Class="VVRace.CompProperties_GlowerArcanePlant">
+      <li Class="VVRace.CompProperties_ManaGlower">
         <glowRadius>10</glowRadius>
         <glowColor>(255,247,138,0)</glowColor>
       </li>
 
       <li Class="CompProperties_HeatPusher">
-        <compClass>VVRace.CompHeatPusherMana</compClass>
+        <compClass>VVRace.CompManaHeatPusher</compClass>
         <heatPerSecond>13</heatPerSecond>
         <heatPushMaxTemperature>29</heatPushMaxTemperature>
       </li>
@@ -185,7 +185,7 @@
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
       <li Class="CompProperties_HeatPusher">
-        <compClass>VVRace.CompHeatPusherMana</compClass>
+        <compClass>VVRace.CompManaHeatPusher</compClass>
         <heatPerSecond>-7</heatPerSecond>
         <heatPushMinTemperature>-10</heatPushMinTemperature>
       </li>
@@ -311,7 +311,7 @@
 
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
-      <li Class="VVRace.CompProperties_GlowerArcanePlant">
+      <li Class="VVRace.CompProperties_ManaGlower">
         <glowRadius>3</glowRadius>
         <glowColor>(213,110,248,0)</glowColor>
       </li>
@@ -437,11 +437,11 @@
     <comps>
       <li Class="VVRace.CompProperties_Mana">
         <manaCapacity>1500</manaCapacity>
-        <manaGenenerateRule Class="VVRace.ManaFluxRule_Power">
+        <manaGenerateRule Class="VVRace.ManaFluxRule_Power">
           <powerManaRatio>0.5</powerManaRatio>
           <min>0</min>
           <max>500</max>
-        </manaGenenerateRule>
+        </manaGenerateRule>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
           <mana>600</mana>
@@ -456,9 +456,8 @@
         <basePowerConsumption>-300</basePowerConsumption>
         <transmitsPower>true</transmitsPower>
       </li>
-      <li Class="VVRace.CompProperties_LightningLod">
-        <manaConditionRange>250~500</manaConditionRange>
-        <manaGain>500</manaGain>
+      <li Class="VVRace.CompProperties_ManaLightningLod">
+        <mana>500</mana>
       </li>
     </comps>
 
@@ -598,9 +597,8 @@
 
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
-      <li Class="VVRace.CompProperties_SensorExplosive">
-        <requiredManaAmount>50</requiredManaAmount>
-        <useManaAmount>30</useManaAmount>
+      <li Class="VVRace.CompProperties_ManaSensorExplosive">
+        <requiredManaPct>0.1</requiredManaPct>
         
         <sensorRadius>3.7</sensorRadius>
         <sensorWorkerClass>VVRace.SensorWorker_Fire</sensorWorkerClass>
@@ -735,17 +733,11 @@
 
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
-      <li Class="VVRace.CompProperties_GlowerArcanePlant">
+      <li Class="VVRace.CompProperties_ManaGlower">
         <glowRadius>16</glowRadius>
         <glowColor>(370,370,370,0)</glowColor>
         <overlightRadius>7.7</overlightRadius>
         <glowOnlyRoofed>true</glowOnlyRoofed>
-      </li>
-
-      <li Class="VVRace.CompProperties_ManaInteractive">
-        <manaConsumePerDay>1500</manaConsumePerDay>
-        <manaAbsorbPerDay>1600</manaAbsorbPerDay>
-        <manaStorage>1000</manaStorage>
       </li>
     </comps>
 
@@ -862,7 +854,7 @@
 
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
-      <li Class="VVRace.CompProperties_Terraformer">
+      <li Class="VVRace.CompProperties_ManaTerraformer">
         <cooldownTicks>60000~300000</cooldownTicks>
         <radiusRange>0.3~3.8</radiusRange>
         <radiusGrowth>0.9</radiusGrowth>
@@ -876,20 +868,13 @@
         </terraforms>
       </li>
 
-      <li Class="VVRace.CompProperties_FilthMakerArcanePlant">
+      <li Class="VVRace.CompProperties_ManaFilthMaker">
         <filthDef>VV_FilthPollen</filthDef>
         <makeAmountPerDays>1~3</makeAmountPerDays>
         <radius>1.9</radius>
         <exceptCenter>true</exceptCenter>
 
         <spawnEffecter>VV_PollenEmitting</spawnEffecter>
-      </li>
-
-      <li Class="VVRace.CompProperties_ManaInteractive">
-        <manaGeneneratePerDay>1200</manaGeneneratePerDay>
-        <manaConsumePerDay>50</manaConsumePerDay>
-        <manaAbsorbPerDay>100</manaAbsorbPerDay>
-        <manaStorage>500</manaStorage>
       </li>
     </comps>
 
@@ -1010,12 +995,12 @@
 
       <li Class="VVRace.CompProperties_RepeatGatherable" />
       
-      <li Class="VVRace.CompProperties_GlowerArcanePlant">
+      <li Class="VVRace.CompProperties_ManaGlower">
         <glowRadius>10</glowRadius>
         <glowColor>(255,255,255,0)</glowColor>
       </li>
       
-      <li Class="VVRace.CompProperties_Terraformer">
+      <li Class="VVRace.CompProperties_ManaTerraformer">
         <cooldownTicks>120000~180000</cooldownTicks>
         <radiusRange>0.6~2.9</radiusRange>
         <radiusGrowth>0.5</radiusGrowth>
@@ -1025,10 +1010,11 @@
 
       <li Class="VVRace.CompProperties_ManaShieldProjector">
         <shieldDef>VV_PurifimintShield</shieldDef>
-        <requiredMinimumManaForActivate>30</requiredMinimumManaForActivate>
-        <manaEfficiency>3.5</manaEfficiency>
-
         <mote>VV_Mote_ShieldProjectorEffect</mote>
+
+        <shieldMaxHp>600</shieldMaxHp>
+        <requiredManaPct>0.1</requiredManaPct>
+
       </li>
     </comps>
     
@@ -1172,13 +1158,9 @@
 
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
-      <li Class="VVRace.CompProperties_GlowerArcanePlant">
+      <li Class="VVRace.CompProperties_ManaGlower">
         <glowRadius>3</glowRadius>
         <glowColor>(255,255,255,0)</glowColor>
-      </li>
-
-      <li Class="VVRace.CompProperties_ManaInteractive">
-        <manaGeneneratePerDay>400</manaGeneneratePerDay>
       </li>
     </comps>
 
