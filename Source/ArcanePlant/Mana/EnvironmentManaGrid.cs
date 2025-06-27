@@ -12,8 +12,8 @@ namespace VVRace
     {
         public const float EnvironmentManaMax = 1000f;
 
-        public const int RefreshManaInterval = 300;
-        public const int DiffuseInterval = 1997;
+        public const int RefreshManaInterval = 250;
+        public const int DiffuseInterval = 1129;
 
         private NativeArray<float> _manaReserveGrid;
         private NativeArray<float> _manaGrid;
@@ -47,7 +47,7 @@ namespace VVRace
             _manaGrid = new NativeArray<float>(map.cellIndices.NumGridCells, Allocator.Persistent);
             _tmpGrid = new NativeArray<float>(map.cellIndices.NumGridCells, Allocator.Persistent);
 
-            _cellBoolDrawer = new CellBoolDrawer(this, map.Size.x, map.Size.z, 3634, 0.4f);
+            _cellBoolDrawer = new CellBoolDrawer(this, map.Size.x, map.Size.z, 3634, 0.7f);
 
             map.events.BuildingSpawned += Notify_BuildingSpawned;
             map.events.BuildingDespawned += Notify_BuildingDespawned;
@@ -73,12 +73,13 @@ namespace VVRace
 
         public override void MapComponentDraw()
         {
-            if (Find.ScreenshotModeHandler.Active) { return; }
-
-            if (_drawManaOverlay)
+            if (!Find.ScreenshotModeHandler.Active)
             {
-                _cellBoolDrawer.MarkForDraw();
-                _drawManaOverlay = false;
+                if (_drawManaOverlay)
+                {
+                    _cellBoolDrawer.MarkForDraw();
+                    _drawManaOverlay = false;
+                }
             }
 
             _cellBoolDrawer.CellBoolDrawerUpdate();
@@ -239,14 +240,14 @@ namespace VVRace
         {
             Color color;
             var value = _manaGrid[index] + _manaReserveGrid[index];
-            if (value < 500)
+            if (value < 250)
             {
-                float normalized = value / 500.0f;
-                color = Color.Lerp(new Color(0, 1, 1, 0f), new Color(0, 1, 1, 1), normalized);
+                float normalized = value / 250.0f;
+                color = Color.Lerp(new Color(0, 1, 1, 0.1f), new Color(0, 1, 1, 1), normalized);
             }
             else
             {
-                float normalized = (value - 500) / 500.0f;
+                float normalized = (value - 250) / 500.0f;
                 color = Color.Lerp(new Color(0, 1, 1, 1), new Color(0, 0, 1, 1), normalized);
             }
 

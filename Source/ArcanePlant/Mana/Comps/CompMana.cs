@@ -100,11 +100,7 @@ namespace VVRace
                 sb.Append(" ");
                 sb.Append(LocalizeString_Inspector.VV_Inspector_PlantManaFlux.Translate(netChange.ToString("+0;-#")));
 
-                if (DebugSettings.godMode)
-                {
-                    sb.AppendLine();
-                    sb.Append($"external mana flux: {_manaExternalChange}");
-                }
+                sb.AppendInNewLine($"environment mana flux: {(int)(_manaExternalChange * 60000f / EnvironmentManaGrid.RefreshManaInterval)}");
             }
 
             return sb.ToString();
@@ -195,6 +191,11 @@ namespace VVRace
 
             _manaActivated = manaChange >= 0f;
             _manaExternalChange = manaGrid[parent.Position] - beforeExternalMana;
+        }
+
+        public override void PostDrawExtraSelectionOverlays()
+        {
+            parent.Map.GetComponent<EnvironmentManaGrid>()?.MarkForDrawOverlay();
         }
     }
 }

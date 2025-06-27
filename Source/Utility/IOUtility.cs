@@ -44,7 +44,7 @@ namespace VVRace
                 if (encoded != null)
                 {
                     var bytes = IOUtility.DeserializeGZipBase64String(encoded);
-                    if (BitConverter.IsLittleEndian)
+                    if (!BitConverter.IsLittleEndian)
                     {
                         for (int i = 0; i < bytes.Length; i += 4)
                         {
@@ -60,10 +60,7 @@ namespace VVRace
                         }
                     }
 
-                    var sizeBytes = new byte[4];
-                    Array.Copy(bytes, sizeBytes, 4);
-
-                    var arrLength = BitConverter.ToInt32(sizeBytes, 0);
+                    var arrLength = BitConverter.ToInt32(bytes, 0);
                     if (arrLength == arr.Length)
                     {
                         unsafe
@@ -82,7 +79,7 @@ namespace VVRace
             {
                 // size 4bytes + float array
                 var bytes = new byte[sizeof(int) + arr.Length * 4];
-                Array.Copy(BitConverter.GetBytes(arr.Length), bytes, 0);
+                Array.Copy(BitConverter.GetBytes(arr.Length), 0, bytes, 0, 4);
 
                 unsafe
                 {
@@ -90,7 +87,7 @@ namespace VVRace
                     Marshal.Copy(ptr, bytes, sizeof(int), arr.Length * 4);
                 }
 
-                if (BitConverter.IsLittleEndian)
+                if (!BitConverter.IsLittleEndian)
                 {
                     for (int i = 0; i < bytes.Length; i += 4)
                     {
