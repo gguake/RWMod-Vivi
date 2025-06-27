@@ -5,11 +5,6 @@
 <VV_Alert_ViviDangerousEggsDesc>The vivi eggs that are being neglected or in the incubator are being damaged due to inappropriate temperatures.
 \nIf the eggs are completely damaged, they will be destroyed, so please maintain the temperature where the eggs are stored between {MINTEMP} degrees and {MAXTEMP} degrees.</VV_Alert_ViviDangerousEggsDesc>
 
-<VV_Alert_ArcanePlantLowMana>very low mana</VV_Alert_ArcanePlantLowMana>
-<VV_Alert_ArcanePlantLowManaDesc>The mana held by the plant is very low. If left neglected in a depleted mana state, it will gradually become damaged and eventually be destroyed.
-\nEnsure the plant has an environment where it can gain mana, or place it next to a plant that produces more mana than its maximum capacity. You can also recharge its mana by applying fertilizer.
-\nIf conditions do not allow for recharging mana, you can package it to prevent damage.</VV_Alert_ArcanePlantLowManaDesc>
-
 <VV_Alert_GrowingArcanePlantLowHP>low health of cultivated plants.</VV_Alert_GrowingArcanePlantLowHP>
 <VV_Alert_GrowingArcanePlantLowHPDesc>The health of the cultivated arcane plants is low. If the health reaches zero during cultivation, the cultivation fails and the consumed resources are not returned.
 The health of the plant can decrease if the cultivation conditions are not suitable, there is a lack of mana, or the management tasks are not performed in time.

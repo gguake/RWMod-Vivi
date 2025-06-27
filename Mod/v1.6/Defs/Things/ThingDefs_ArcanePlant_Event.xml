@@ -36,6 +36,17 @@
     </building>
 
     <comps>
+      <li Class="VVRace.CompProperties_Mana">
+        <manaGenenerateRule Class="VVRace.ManaFluxRule_Random">
+          <min>137</min>
+          <max>274</max>
+        </manaGenenerateRule>
+        <manaConsumeRule Class="VVRace.ManaFluxRule_Random">
+          <min>0</min>
+          <max>137</max>
+        </manaConsumeRule>
+      </li>
+
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
       <li Class="VVRace.CompProperties_GlowerArcanePlant">
@@ -54,14 +65,6 @@
     </comps>
 
     <modExtensions>
-      <li Class="VVRace.ManaExtension">
-        <manaCapacity>500</manaCapacity>
-
-        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>80</mana>
-        </manaConsumeRule>
-      </li>
-
       <li Class="VVRace.ArcanePlantExtension">
         <zeroManaDamageByChance>1~5</zeroManaDamageByChance>
       </li>

@@ -2,12 +2,6 @@
 <LanguageData>
 <MinifiedArcanePlant.label>포장된 마법 식물</MinifiedArcanePlant.label>
 
-<VV_ManaTransferTube.label>마나 전송 튜브</VV_ManaTransferTube.label>
-<VV_ManaTransferTube.description>마나를 원거리 전송하는 튜브입니다. 벽이나 다른 건물 아래에 건설할 수 있습니다. 마나를 단순히 전송할 뿐 별도의 마나를 생산하지는 않습니다.</VV_ManaTransferTube.description>
-
-<VV_HiddenManaTransferTube.label>숨겨진 마나 전송 튜브</VV_HiddenManaTransferTube.label>
-<VV_HiddenManaTransferTube.description>땅속에 매립된 마나 전송 튜브입니다. 겉으로 보이지 않아 공격 대상이 되지 않으며 미관에 방해되지도 않지만 건설 비용이 더 비쌉니다.</VV_HiddenManaTransferTube.description>
-
 <VV_EmberBloom.label>잔불꽃</VV_EmberBloom.label>
 <VV_EmberBloom.description>불꽃같은 모양을 띄고있는 마법 꽃으로 주변 온도가 일정 온도에 도달할때까지 마나를 열로 변환해 발산합니다. 주변 온도가 충분히 뜨거운 환경에서는 열을 발산하는 대신 마나를 생산하고 축적합니다.
 \n콩뿌리개의 콩이 잔불꽃 위로 지나가는 경우 일정 확률로 대상에게 화상 피해를 추가로 입히고 불을 붙입니다.</VV_EmberBloom.description>

@@ -48,6 +48,10 @@
       <li>Stony</li>
     </stuffCategories>
     <costStuffCount>30</costStuffCount>
+    <costList>
+      <VV_Fertilizer>10</VV_Fertilizer>
+    </costList>
+
     <comps>
       <li Class="CompProperties_Forbiddable"/>
     </comps>

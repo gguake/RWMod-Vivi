@@ -19,11 +19,4 @@
 <VV_ITab_ArcanePlantFarmBill_Glow>Light Sensitivity</VV_ITab_ArcanePlantFarmBill_Glow>
 <VV_ITab_ArcanePlantFarmBill_GlowDesc>Current light sensitivity of the arcane plant. Recovers when the cultivation environment's light is within the {0}~{1} range and deteriorates otherwise. Leaving it in a deteriorated state will decrease vitality.</VV_ITab_ArcanePlantFarmBill_GlowDesc>
 
-<VV_ITab_ManaAcceptor_StatsTabLabel>Stats</VV_ITab_ManaAcceptor_StatsTabLabel>
-<VV_ITab_ManaAcceptor_ManaGenCurveLabel>Generated Mana</VV_ITab_ManaAcceptor_ManaGenCurveLabel>
-<VV_ITab_ManaAcceptor_ManaConCurveLabel>Consumed Mana</VV_ITab_ManaAcceptor_ManaConCurveLabel>
-<VV_ITab_ManaAcceptor_ManaTrsCurveLabel>Transferred Mana</VV_ITab_ManaAcceptor_ManaTrsCurveLabel>
-<VV_ITab_ManaAcceptor_ManaExcCurveLabel>Overflowed Mana</VV_ITab_ManaAcceptor_ManaExcCurveLabel>
-<VV_ITab_ManaAcceptor_LegendTooltip>All arcane plants continuously consume mana, and some arcane plants produce mana.
-\nAll arcane plants first store the produced mana up to their maximum capacity, and any excess production is transmitted to other connected arcane plants.</VV_ITab_ManaAcceptor_LegendTooltip>
 </LanguageData>

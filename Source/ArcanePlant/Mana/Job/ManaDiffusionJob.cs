@@ -34,7 +34,7 @@ namespace VVRace
                 new float3(x > 0 ? manaGrid[idx + width - 1] : 0f, manaGrid[idx + width], x < width - 1 ? manaGrid[idx + width + 1] : 0f) :
                 float3.zero;
 
-            var r = math.csum(k / 16f * (v1 + 2 * v2 + v3));
+            var r = math.csum(k * (v1 + 2 * v2 + v3)) / 17f;
             outputGrid[idx] = math.clamp(r, 0f, EnvironmentManaGrid.EnvironmentManaMax);
         }
     }

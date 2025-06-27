@@ -81,6 +81,7 @@
     <Compile Include="ArcanePlant\Mana\Comps\CompManaHeatPusher.cs" />
     <Compile Include="ArcanePlant\Mana\Comps\CompManaSensorExplosive.cs" />
     <Compile Include="ArcanePlant\Mana\FluxRule\ManaFluxRule_Power.cs" />
+    <Compile Include="ArcanePlant\Mana\FluxRule\ManaFluxRule_Random.cs" />
     <Compile Include="ArcanePlant\Mana\Job\ManaUpdateJob.cs" />
     <Compile Include="ArcanePlant\Mana\Job\ManaDiffusionJob.cs" />
     <Compile Include="ArcanePlant\Mana\EnvironmentManaGrid.cs" />

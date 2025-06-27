@@ -48,21 +48,6 @@
     <prioritizeSustains>true</prioritizeSustains>
   </WorkGiverDef>
   
-  <WorkGiverDef>
-    <defName>VV_FertilizeArcanePlant</defName>
-    <label>fertilize arcane plant</label>
-    <giverClass>VVRace.WorkGiver_FertilizeArcanePlant</giverClass>
-    <emergency>true</emergency>
-    <workType>Hauling</workType>
-    <verb>fertilize</verb>
-    <gerund>fertilizing</gerund>
-    <priorityInType>155</priorityInType>
-    <requiredCapacities>
-      <li>Manipulation</li>
-    </requiredCapacities>
-    <prioritizeSustains>true</prioritizeSustains>
-  </WorkGiverDef>
-
   <WorkGiverDef ParentName="HaulToBase">
     <defName>VV_EquipShootus</defName>
     <label>equip weapon to shootus</label>

@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-<VV_Command_FertilizeAutoActivated>Automatic Fertilizer Use</VV_Command_FertilizeAutoActivated>
-<VV_Command_FertilizeAutoActivatedDesc>Sets whether settlers automatically use fertilizer when the plant's mana is below a certain level.</VV_Command_FertilizeAutoActivatedDesc>
-<VV_Command_SetFertilizeAutoThreshold>Set Fertilizer Usage Threshold</VV_Command_SetFertilizeAutoThreshold>
-<VV_Command_SetFertilizeAutoThresholdDesc>Sets the mana threshold to decide whether to use fertilizer. If the mana is below this threshold, settlers will use fertilizer up to the maximum limit.</VV_Command_SetFertilizeAutoThresholdDesc>
 
 <VV_Command_CancelReserveWeapon>Cancel Weapon Equip</VV_Command_CancelReserveWeapon>
 <VV_Command_CancelReserveWeaponDesc>Cancels the currently reserved weapon equip.</VV_Command_CancelReserveWeaponDesc>

@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-<VV_Command_FertilizeAutoActivated>비료 자동 사용</VV_Command_FertilizeAutoActivated>
-<VV_Command_FertilizeAutoActivatedDesc>식물의 마나가 일정 이하일때 정착민들이 비료를 자동으로 사용할지 설정합니다.</VV_Command_FertilizeAutoActivatedDesc>
-<VV_Command_SetFertilizeAutoThreshold>비료 사용 기준 설정</VV_Command_SetFertilizeAutoThreshold>
-<VV_Command_SetFertilizeAutoThresholdDesc>비료 사용 여부를 판단할 기준 마나를 설정합니다. 마나가 기준치 이하이면 정착민들이 최대치까지 비료를 사용합니다.</VV_Command_SetFertilizeAutoThresholdDesc>
-
 <VV_Command_CancelReserveWeapon>무기 장착 취소</VV_Command_CancelReserveWeapon>
 <VV_Command_CancelReserveWeaponDesc>현재 예약된 무기 장착을 취소합니다.</VV_Command_CancelReserveWeaponDesc>
 <VV_Command_EquipWeapon>무기 장착</VV_Command_EquipWeapon>

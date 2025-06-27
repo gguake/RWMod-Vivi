@@ -21,19 +21,6 @@
   </ResearchProjectDef>
 
   <ResearchProjectDef ParentName="ViviResearchProjectTier3Base">
-    <defName>VV_ManaTransferTube</defName>
-    <label>mana transfer tube</label>
-    <description>Construct mana transfer tubes that can transmit mana over long distances and through walls, mimicking the mana transfer method of arcane plants.</description>
-    <baseCost>1000</baseCost>
-    <researchViewX>4</researchViewX>
-    <researchViewY>2.1</researchViewY>
-    <prerequisites>
-      <li>MicroelectronicsBasics</li>
-      <li>VV_ElectricArcaneBotany</li>
-    </prerequisites>
-  </ResearchProjectDef>
-
-  <ResearchProjectDef ParentName="ViviResearchProjectTier3Base">
     <defName>VV_RitualWeaponry</defName>
     <label>vivi ritual weaponry</label>
     <description>Make special weapons exclusively for recognized Vivi warriors.</description>
