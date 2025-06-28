@@ -20,7 +20,7 @@ namespace VVRace
         }
     }
 
-    public class CompMana : ThingComp
+    public class CompMana : ThingComp, IThingGlower
     {
         public CompProperties_Mana Props => (CompProperties_Mana)props;
 
@@ -83,24 +83,33 @@ namespace VVRace
         public override string CompInspectStringExtra()
         {
             var sb = new StringBuilder();
-            if (Active)
-            {
-                sb.Append(LocalizeString_Inspector.VV_Inspector_PlantActive);
-            }
-            else
-            {
-                sb.Append(LocalizeString_Inspector.VV_Inspector_PlantInactive);
-            }
-
-            sb.Append(", ");
-            sb.Append(LocalizeString_Inspector.VV_Inspector_PlantMana.Translate((int)_manaStored, Props.manaCapacity));
             if (parent.Spawned)
             {
                 var netChange = _manaGeneratesByDay - _manaConsumesByDay;
-                sb.Append(" ");
-                sb.Append(LocalizeString_Inspector.VV_Inspector_PlantManaFlux.Translate(netChange.ToString("+0;-#")));
+                var envChange = (int)(_manaExternalChange * 60000f / EnvironmentManaGrid.RefreshManaInterval);
 
-                sb.AppendInNewLine($"environment mana flux: {(int)(_manaExternalChange * 60000f / EnvironmentManaGrid.RefreshManaInterval)}");
+                var activeStr = Active ? 
+                    LocalizeString_Inspector.VV_Inspector_PlantActive.Translate() : 
+                    LocalizeString_Inspector.VV_Inspector_PlantInactive.Translate();
+
+                sb.Append(LocalizeString_Inspector.VV_Inspector_PlantManaFlux.Translate(
+                    activeStr,
+                    netChange.ToString("+0;-#")));
+
+                if (envChange != 0)
+                {
+                    sb.Append(", ");
+                    sb.Append(envChange > 0 ?
+                        LocalizeString_Inspector.VV_Inspector_PlantEmitMana.Translate() :
+                        LocalizeString_Inspector.VV_Inspector_PlantAbsorbMana.Translate());
+                }
+            }
+
+            if (Props.manaCapacity > 0f)
+            {
+                sb.AppendInNewLine(LocalizeString_Inspector.VV_Inspector_PlantStoredMana.Translate(
+                    (int)_manaStored, 
+                    Props.manaCapacity));
             }
 
             return sb.ToString();
@@ -149,15 +158,17 @@ namespace VVRace
             var generatedMana = _manaGeneratesByDay / 60000f * ticks;
             var consumedMana = _manaConsumesByDay / 60000f * ticks;
 
-            float manaChange;
-            if (consumedMana <= absorbableMana + generatedMana + _manaStored)
-            {
-                manaChange = absorbableMana + generatedMana - consumedMana;
-            }
-            else
-            {
-                manaChange = absorbableMana + generatedMana;
-            }
+            float manaChange = absorbableMana + generatedMana - consumedMana;
+            //if (consumedMana <= absorbableMana + generatedMana + _manaStored)
+            //{
+            //    manaChange = absorbableMana + generatedMana - consumedMana;
+            //    _manaActivated = true;
+            //}
+            //else
+            //{
+            //    manaChange = absorbableMana + generatedMana;
+            //    _manaActivated = false;
+            //}
 
             var beforeExternalMana = manaGrid[parent.Position];
             if (manaChange > 0f)
@@ -197,5 +208,7 @@ namespace VVRace
         {
             parent.Map.GetComponent<EnvironmentManaGrid>()?.MarkForDrawOverlay();
         }
+
+        public bool ShouldBeLitNow() => Active;
     }
 }

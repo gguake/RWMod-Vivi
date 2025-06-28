@@ -49,8 +49,8 @@ namespace VVRace
 
             _cellBoolDrawer = new CellBoolDrawer(this, map.Size.x, map.Size.z, 3634, 0.7f);
 
-            map.events.BuildingSpawned += Notify_BuildingSpawned;
-            map.events.BuildingDespawned += Notify_BuildingDespawned;
+            map.events.ThingSpawned += Notify_BuildingSpawned;
+            map.events.ThingDespawned += Notify_BuildingDespawned;
         }
 
         public override void ExposeData()
@@ -209,9 +209,9 @@ namespace VVRace
             _diffusionJobStart = false;
         }
 
-        private void Notify_BuildingSpawned(Building building)
+        private void Notify_BuildingSpawned(Thing thing)
         {
-            var comp = building.TryGetComp<CompMana>();
+            var comp = thing.TryGetComp<CompMana>();
             if (comp != null)
             {
                 _manaComps.Add(comp);
@@ -220,9 +220,9 @@ namespace VVRace
             }
         }
 
-        private void Notify_BuildingDespawned(Building building)
+        private void Notify_BuildingDespawned(Thing thing)
         {
-            var comp = building.TryGetComp<CompMana>();
+            var comp = thing.TryGetComp<CompMana>();
             if (comp != null)
             {
                 _manaComps.Remove(comp);
@@ -254,7 +254,7 @@ namespace VVRace
             color.r = Mathf.Round(color.r / 0.05f) * 0.05f;
             color.g = Mathf.Round(color.g / 0.05f) * 0.05f;
             color.b = Mathf.Round(color.b / 0.05f) * 0.05f;
-            color.a = Mathf.Round(color.a / 0.05f) * 0.05f;
+            color.a = 0.05f + Mathf.Round(color.a / 0.05f) * 0.05f;
             return color;
         }
     }

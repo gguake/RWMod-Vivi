@@ -9,10 +9,13 @@
         public const string VV_Inspector_ViviWallReplaceCooldown = nameof(VV_Inspector_ViviWallReplaceCooldown);
 
 
+        public const string VV_Inspector_PlantManaFlux = nameof(VV_Inspector_PlantManaFlux);
+        public const string VV_Inspector_PlantStoredMana = nameof(VV_Inspector_PlantStoredMana);
         public const string VV_Inspector_PlantActive = nameof(VV_Inspector_PlantActive);
         public const string VV_Inspector_PlantInactive = nameof(VV_Inspector_PlantInactive);
-        public const string VV_Inspector_PlantMana = nameof(VV_Inspector_PlantMana);
-        public const string VV_Inspector_PlantManaFlux = nameof(VV_Inspector_PlantManaFlux);
+        public const string VV_Inspector_PlantEmitMana = nameof(VV_Inspector_PlantEmitMana);
+        public const string VV_Inspector_PlantAbsorbMana = nameof(VV_Inspector_PlantAbsorbMana);
+
         public const string VV_Inspector_ShootusWeaponReserved = nameof(VV_Inspector_ShootusWeaponReserved);
         public const string VV_Inspector_ShootusWeaponEquipped = nameof(VV_Inspector_ShootusWeaponEquipped);
         public const string VV_Inspector_ViviBroadShieldHitPoint = nameof(VV_Inspector_ViviBroadShieldHitPoint);

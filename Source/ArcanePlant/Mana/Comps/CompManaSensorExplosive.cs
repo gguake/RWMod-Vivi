@@ -7,6 +7,7 @@ namespace VVRace
     public class CompProperties_ManaSensorExplosive : CompProperties
     {
         public float requiredManaPct;
+        public float chanceToExplodeFromDamage = 0f;
 
         public float sensorRadius;
         public Type sensorWorkerClass;
@@ -44,7 +45,7 @@ namespace VVRace
         {
             get
             {
-                if (_sensorWorker == null)
+                if (_sensorWorker == null && sensorWorkerClass != null)
                 {
                     _sensorWorker = (SensorWorker)Activator.CreateInstance(sensorWorkerClass);
                 }
@@ -94,10 +95,30 @@ namespace VVRace
             if (_remainedCooldown > 0)
             {
                 _remainedCooldown = Mathf.Max(0, _remainedCooldown - delta);
+                return;
             }
-            else if (Props.SensorWorker.Detected(parent, Props.sensorRadius))
+
+            if (Props.sensorWorkerClass != null && Props.SensorWorker.Detected(parent, Props.sensorRadius))
             {
                 TryExplosive();
+            }
+        }
+
+        public override void PostPreApplyDamage(ref DamageInfo dinfo, out bool absorbed)
+        {
+            absorbed = false;
+            if (!parent.Spawned || parent.Destroyed || !ManaComp.Active || _remainedCooldown > 0)
+            {
+                return;
+            }
+
+            if (Props.chanceToExplodeFromDamage > 0f && Rand.Chance(Props.chanceToExplodeFromDamage))
+            {
+                TryExplosive();
+                if (parent.Destroyed)
+                {
+                    absorbed = true;
+                }
             }
         }
 

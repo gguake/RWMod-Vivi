@@ -513,9 +513,9 @@
 
     <projectile>
       <damageDef>Bomb</damageDef>
-      <speed>40</speed>
+      <speed>50</speed>
       <explosionRadius>1.1</explosionRadius>
-      <damageAmountBase>25</damageAmountBase>
+      <damageAmountBase>30</damageAmountBase>
       <screenShakeFactor>0.25</screenShakeFactor>
     </projectile>
 
@@ -543,9 +543,9 @@
 
     <projectile>
       <damageDef>Bomb</damageDef>
-      <speed>15</speed>
+      <speed>18</speed>
       <explosionRadius>0.6</explosionRadius>
-      <damageAmountBase>13</damageAmountBase>
+      <damageAmountBase>16</damageAmountBase>
       <screenShakeFactor>0</screenShakeFactor>
     </projectile>
   </ThingDef>

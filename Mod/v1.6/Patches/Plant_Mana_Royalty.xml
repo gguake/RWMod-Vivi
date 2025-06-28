@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+  <Operation Class="PatchOperationSequence">
+    <operations>
+      <li Class="PatchOperationSequence" MayRequire="Ludeon.RimWorld.Royalty">
+        <operations>
+          <!-- Plant_GrassAnima -->
+          <li Class="PatchOperationConditional">
+            <xpath>Defs/ThingDef[defName="Plant_GrassAnima"]/comps</xpath>
+            <nomatch Class="PatchOperationAdd">
+              <xpath>Defs/ThingDef[defName="Plant_GrassAnima"]</xpath>
+              <value>
+                <comps />
+              </value>
+            </nomatch>
+          </li>
+          <li Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Plant_GrassAnima"]/comps</xpath>
+            <value>
+              <li Class="VVRace.CompProperties_Mana">
+                <manaGenerateRule Class="VVRace.ManaFluxRule_Constant">
+                    <mana>600</mana>
+                </manaGenerateRule>
+              </li>
+            </value>
+          </li>
+
+        </operations>
+      </li>
+    </operations>
+  </Operation>
+</Patch>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+  <Operation Class="PatchOperationSequence">
+    <operations>
+      <li Class="PatchOperationSequence" MayRequire="Ludeon.RimWorld.Ideology">
+        <operations>
+          <!-- Plant_MossGauranlen -->
+          <li Class="PatchOperationConditional">
+            <xpath>Defs/ThingDef[defName="Plant_MossGauranlen"]/comps</xpath>
+            <nomatch Class="PatchOperationAdd">
+              <xpath>Defs/ThingDef[defName="Plant_MossGauranlen"]</xpath>
+              <value>
+                <comps />
+              </value>
+            </nomatch>
+          </li>
+          <li Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Plant_MossGauranlen"]/comps</xpath>
+            <value>
+                <li Class="VVRace.CompProperties_Mana">
+                    <manaGenerateRule Class="VVRace.ManaFluxRule_Constant">
+                        <mana>350</mana>
+                    </manaGenerateRule>
+                </li>
+            </value>
+          </li>
+
+        </operations>
+      </li>
+    </operations>
+  </Operation>
+</Patch>

@@ -7,10 +7,12 @@
 
 <VV_Inspector_ViviWallReplaceCooldown>Time Remaining Until Solidification: {0}</VV_Inspector_ViviWallReplaceCooldown>
 
+<VV_Inspector_PlantManaFlux>Mana Flux: {0}, {1}/day</VV_Inspector_PlantManaFlux>
+<VV_Inspector_PlantStoredMana>Stored Mana: {0}/{1}</VV_Inspector_PlantStoredMana>
 <VV_Inspector_PlantActive>Active</VV_Inspector_PlantActive>
 <VV_Inspector_PlantInactive>Inactive</VV_Inspector_PlantInactive>
-<VV_Inspector_PlantMana>Mana: {0}/{1}</VV_Inspector_PlantMana>
-<VV_Inspector_PlantManaFlux>({0}/day)</VV_Inspector_PlantManaFlux>
+<VV_Inspector_PlantEmitMana>Emitting</VV_Inspector_PlantEmitMana>
+<VV_Inspector_PlantAbsorbMana>Absorbing</VV_Inspector_PlantAbsorbMana>
 
 <VV_Inspector_ShootusWeaponReserved>Reserved: {0}</VV_Inspector_ShootusWeaponReserved>
 <VV_Inspector_ShootusWeaponEquipped>Equipped: {0}</VV_Inspector_ShootusWeaponEquipped>
