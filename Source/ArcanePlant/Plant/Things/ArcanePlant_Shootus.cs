@@ -84,15 +84,6 @@ namespace VVRace
         protected override void BeginBurst()
         {
             base.BeginBurst();
-
-            if (Active)
-            {
-                var manaPerShoot = ArcanePlantModExtension.consumeManaPerVerbShoot * AttackVerb.verbProps.burstShotCount;
-                if (manaPerShoot > 0)
-                {
-                    AddMana(-manaPerShoot);
-                }
-            }
         }
 
         protected override void BurstComplete()

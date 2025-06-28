@@ -11,7 +11,6 @@
 <VV_StatsReport_ManaPerShootDesc>마법 식물이 사격할때마다 소모되는 마나의 양입니다.</VV_StatsReport_ManaPerShootDesc>
 
 <VV_StatsReport_ManaFluxRule_AdjacentPlant_Desc>인접한 마법 식물마다 마나 {0}\n인접한 식물마다 마나 {0} (식물의 성장도에 비례)</VV_StatsReport_ManaFluxRule_AdjacentPlant_Desc>
-<VV_StatsReport_ManaFluxRule_AdjacentPollution_Desc>오염된 토양에 배치되어있으면 마나 {0}\n인접한 오염된 토양 1개당 마나 {1}</VV_StatsReport_ManaFluxRule_AdjacentPollution_Desc>
 <VV_StatsReport_ManaFluxRule_AdjacentWater_Desc>물 위에 배치되어 있으면 마나 {0}\n인접한 물 1개당 마나 {1}</VV_StatsReport_ManaFluxRule_AdjacentWater_Desc>
 <VV_StatsReport_ManaFluxRule_BatteryStored_Desc>전기 충전량에 비례해 마나 {0}</VV_StatsReport_ManaFluxRule_BatteryStored_Desc>
 <VV_StatsReport_ManaFluxRule_Constant_Desc>항상 마나 {0}</VV_StatsReport_ManaFluxRule_Constant_Desc>

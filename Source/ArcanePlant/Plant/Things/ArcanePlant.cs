@@ -1,15 +1,13 @@
 ﻿using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using UnityEngine;
 using Verse;
-using Verse.AI;
 
 namespace VVRace
 {
     [StaticConstructorOnStartup]
-    public class ArcanePlant : ManaAcceptor
+    public class ArcanePlant : Building
     {
         public const float ManaByFertilizer = 20f;
 
@@ -20,7 +18,9 @@ namespace VVRace
             {
                 if (_allArcanePlantDefs == null)
                 {
-                    _allArcanePlantDefs = DefDatabase<ThingDef>.AllDefsListForReading.Where(def => def.GetModExtension<ArcanePlantExtension>() != null).ToList();
+                    _allArcanePlantDefs = DefDatabase<ThingDef>.AllDefsListForReading
+                        .Where(def => def.GetModExtension<ArcanePlantExtension>() != null)
+                        .ToList();
                 }
 
                 return _allArcanePlantDefs;
@@ -41,90 +41,39 @@ namespace VVRace
             }
         }
 
-        public override bool HasManaFlux => true;
-
-        public override ManaFluxNetwork ManaFluxNetwork { get; set; }
-        public override ManaFluxNetworkNode ManaFluxNode => _manaFluxNode;
-        private ManaFluxNetworkNode _manaFluxNode;
-
-        private int _zeroManaTicks = 0;
-
-        private bool _fertilizeAutoActivated = true;
-        public bool FertilizeAutoActivated => _fertilizeAutoActivated;
-
-        private int _fertilizeAutoThreshold = 0;
-        public int FertilizeAutoThreshold
-        {
-            get => (int)Mathf.Clamp(_fertilizeAutoThreshold, 0, ManaExtension.manaCapacity - ManaByFertilizer);
-            set
-            {
-                ((WorkGiver_FertilizeArcanePlant)VVWorkGiverDefOf.VV_FertilizeArcanePlant.Worker).RefreshCandidatesCache(true);
-
-                _fertilizeAutoThreshold = value;
-            }
-        }
-
-        public int RequiredFertilizerToFullyRecharge
+        public CompMana CompMana
         {
             get
             {
-                return Mathf.CeilToInt((ManaExtension.manaCapacity - _manaFluxNode.mana) / ManaByFertilizer);
+                if (_cachedCompMana == null)
+                {
+                    _cachedCompMana = GetComp<CompMana>();
+                }
+                return _cachedCompMana;
             }
         }
-
-        public bool ShouldAutoFertilizeNowIgnoringManaPct
-        {
-            get
-            {
-                return !this.IsBurning() && 
-                    Map.designationManager.DesignationOn(this, DesignationDefOf.Uninstall) == null &&
-                    Map.designationManager.DesignationOn(this, DesignationDefOf.Deconstruct) == null;
-            }
-        }
+        private CompMana _cachedCompMana;
 
         protected virtual bool ShouldFlip => thingIDNumber % 2 == 0;
 
         private bool _forceMinify = false;
-
         private int _nextGrowNearFlowerTick = 0;
 
         public ArcanePlant()
         {
-            _manaFluxNode = new ManaFluxNetworkNode(this);
         }
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
-
-            if (!respawningAfterLoad)
-            {
-                _nextGrowNearFlowerTick = GenTicks.TicksGame + ArcanePlantModExtension.growingAdjacentFlowerIntervalTicks.Lerped(1f - ManaChargeRatio);
-            }
         }
 
         public override void ExposeData()
         {
             base.ExposeData();
 
-            Scribe_Deep.Look(ref _manaFluxNode, "manaFluxNode");
-            Scribe_Values.Look(ref _zeroManaTicks, "zeroManaTicks");
-            Scribe_Values.Look(ref _fertilizeAutoActivated, "fertilizeAutoActivated", defaultValue: true);
-            Scribe_Values.Look(ref _fertilizeAutoThreshold, "fertilizeAutoThreshold", defaultValue: 0);
             Scribe_Values.Look(ref _forceMinify, "forceMinify");
             Scribe_Values.Look(ref _nextGrowNearFlowerTick, "nextGrowNearFlowerTick", defaultValue: 0);
-
-            if (Scribe.mode == LoadSaveMode.LoadingVars)
-            {
-                _manaFluxNode.manaAcceptor = this;
-            }
-        }
-
-        public override void PostMake()
-        {
-            base.PostMake();
-
-            FertilizeAutoThreshold = Mathf.FloorToInt(ManaExtension.manaCapacity * 0.25f);
         }
 
         public override void Print(SectionLayer layer)
@@ -186,138 +135,11 @@ namespace VVRace
             {
                 Rand.PopState();
             }
-
-            PostPrint(layer);
         }
 
-        public override void PostPrint(SectionLayer layer)
-        {
-            if (!Spawned) { return; }
-
-            foreach (var thing in AdjacentManaTransmitter)
-            {
-                PrintManaFluxWirePieceConnecting(layer, thing, false);
-                return;
-            }
-        }
-
-        public override void PrintForManaFluxGrid(SectionLayer layer)
-        {
-            PrintOverlayConnectorBaseFor(layer);
-
-            foreach (var thing in AdjacentManaAcceptor)
-            {
-                PrintManaFluxWirePieceConnecting(layer, thing, true);
-            }
-        }
-
-        public override string GetInspectString()
-        {
-            var sb = new StringBuilder(base.GetInspectString());
-            if (sb.Length > 0)
-            {
-                sb.Append("\n");
-            }
-
-            sb.Append(LocalizeString_Inspector.VV_Inspector_PlantMana.Translate((int)_manaFluxNode.mana, ManaExtension.manaCapacity));
-
-            if (Spawned)
-            {
-                var manaFlux = _manaFluxNode.LocalManaFluxForInspector;
-                sb.Append(" ");
-                sb.Append(LocalizeString_Inspector.VV_Inspector_PlantManaFlux.Translate(manaFlux.ToString("+0;-#")));
-
-                if (DebugSettings.godMode && ManaFluxNetwork != null)
-                {
-                    sb.AppendLine();
-                    sb.Append($"flux network: {ManaFluxNetwork.NetworkHash}");
-                }
-            }
-
-            return sb.ToString();
-        }
-
-        public override string GetInspectStringLowPriority()
-        {
-            return null;
-        }
-
-        private static readonly Texture2D SetTargetFuelLevelCommand = ContentFinder<Texture2D>.Get("UI/Commands/SetTargetFuelLevel");
-        private static readonly Texture2D SetFertilizeAutoActivated = ContentFinder<Texture2D>.Get("UI/Commands/VV_SetFertilizeAutoActivated");
-        public override IEnumerable<Gizmo> GetGizmos()
-        {
-            var gizmos = base.GetGizmos();
-            if (gizmos != null)
-            {
-                foreach (var gizmo in gizmos)
-                {
-                    if (gizmo is Designator_Install)
-                    {
-                        yield return ArcanePlantDesignatorCache.GetReplantDesignator(def);
-                        continue;
-                    }
-
-                    yield return gizmo;
-                }
-            }
-
-            if (Spawned && Faction != null && Faction.IsPlayer)
-            {
-                var CommandFertilizeAutoActivated = new Command_Toggle();
-                CommandFertilizeAutoActivated.defaultLabel = LocalizeString_Command.VV_Command_FertilizeAutoActivated.Translate();
-                CommandFertilizeAutoActivated.defaultDesc = LocalizeString_Command.VV_Command_FertilizeAutoActivatedDesc.Translate();
-                CommandFertilizeAutoActivated.icon = SetFertilizeAutoActivated;
-                CommandFertilizeAutoActivated.iconOffset = new Vector2(0f, -0.08f);
-
-                CommandFertilizeAutoActivated.isActive = () => _fertilizeAutoActivated;
-                CommandFertilizeAutoActivated.toggleAction = () =>
-                {
-                    _fertilizeAutoActivated = !_fertilizeAutoActivated;
-
-                    ((WorkGiver_FertilizeArcanePlant)VVWorkGiverDefOf.VV_FertilizeArcanePlant.Worker).RefreshCandidatesCache(true);
-                };
-                yield return CommandFertilizeAutoActivated;
-
-                if (_fertilizeAutoActivated)
-                {
-                    var commandSetFertilizeAutoThreshold = new Command_SetFertilizeAutoThreshold();
-                    commandSetFertilizeAutoThreshold.plant = this;
-                    commandSetFertilizeAutoThreshold.defaultLabel = LocalizeString_Command.VV_Command_SetFertilizeAutoThreshold.Translate();
-                    commandSetFertilizeAutoThreshold.defaultDesc = LocalizeString_Command.VV_Command_SetFertilizeAutoThresholdDesc.Translate();
-                    commandSetFertilizeAutoThreshold.icon = SetTargetFuelLevelCommand;
-                    yield return commandSetFertilizeAutoThreshold;
-                }
-            }
-
-            if (DebugSettings.godMode)
-            {
-                Command_Action commandAddMana = new Command_Action();
-                commandAddMana.defaultLabel = "DEV: Add mana +10";
-                commandAddMana.action = () =>
-                {
-                    _manaFluxNode.mana = Mathf.Clamp(_manaFluxNode.mana + 10, 0f, ManaExtension.manaCapacity);
-                };
-
-                yield return commandAddMana;
-            }
-
-            if (DebugSettings.godMode)
-            {
-                Command_Action commandSubtractMana = new Command_Action();
-                commandSubtractMana.defaultLabel = "DEV: Add mana -10";
-                commandSubtractMana.action = () =>
-                {
-                    _manaFluxNode.mana = Mathf.Clamp(_manaFluxNode.mana - 10, 0f, ManaExtension.manaCapacity);
-                };
-
-                yield return commandSubtractMana;
-            }
-        }
-
-        public override int UpdateRateTicks => 150;
+        public override int UpdateRateTicks => 200;
         protected override int MaxTickIntervalRate => 200;
 
-        private List<IntVec3> _tmpGrowingNearFlowerCells = new List<IntVec3>();
         protected override void TickInterval(int delta)
         {
             if (!Spawned || Destroyed)
@@ -331,53 +153,6 @@ namespace VVRace
                 ForceMinifyAndDropDirect();
                 return;
             }
-
-            if ((int)Mana == 0)
-            {
-                _zeroManaTicks += delta;
-
-                if (_zeroManaTicks >= ArcanePlantModExtension.zeroManaDurableTicks)
-                {
-                    _zeroManaTicks = 0;
-                    TakeDamage(new DamageInfo(DamageDefOf.Rotting, ArcanePlantModExtension.zeroManaDamageByChance.RandomInRange));
-                }
-            }
-            else if (ManaChargeRatio > 0.1f)
-            {
-                HitPoints = Mathf.Clamp(HitPoints + 1, 0, MaxHitPoints);
-            }
-
-            var flowerDef = ArcanePlantModExtension.growingAdjacentFlowerDef;
-            if (flowerDef != null)
-            {
-                if (GenTicks.TicksGame >= _nextGrowNearFlowerTick)
-                {
-                    if (Rand.Chance(ArcanePlantModExtension.growingAdjacentFlowerChance))
-                    {
-                        foreach (var cell in GenRadial.RadialCellsAround(Position, ArcanePlantModExtension.growingAdjacentFlowerRange, false))
-                        {
-                            if (cell.InBounds(Map) == false ||
-                                cell.GetPlant(Map) != null ||
-                                cell.GetEdifice(Map) != null ||
-                                Map.fertilityGrid.FertilityAt(cell) <= 0f ||
-                                flowerDef.CanEverPlantAt(cell, Map) == false) { continue; }
-
-                            _tmpGrowingNearFlowerCells.Add(cell);
-                        }
-                    }
-
-                    if (_tmpGrowingNearFlowerCells.Count > 0)
-                    {
-                        var cell = _tmpGrowingNearFlowerCells.RandomElement();
-                        var plant = (ViviFlower)ThingMaker.MakeThing(flowerDef);
-                        plant.Growth = 0.1f;
-                        GenSpawn.Spawn(plant, cell, Map);
-                        _tmpGrowingNearFlowerCells.Clear();
-                    }
-
-                    _nextGrowNearFlowerTick = GenTicks.TicksGame + ArcanePlantModExtension.growingAdjacentFlowerIntervalTicks.Lerped(1f - ManaChargeRatio);
-                }
-            }
         }
 
         public override AcceptanceReport DeconstructibleBy(Faction faction)
@@ -390,21 +165,7 @@ namespace VVRace
             return Spawned ? Faction == faction : true;
         }
 
-        public void AddMana(float mana)
-        {
-            _manaFluxNode.mana = Mathf.Clamp(_manaFluxNode.mana + mana, 0f, ManaExtension.manaCapacity);
-        }
-
-        public void Notify_TurretVerbShot()
-        {
-            var manaPerShoot = ArcanePlantModExtension.consumeManaPerVerbShoot;
-            if (manaPerShoot > 0)
-            {
-                AddMana(-manaPerShoot);
-            }
-        }
-
-        public void ReserveMinify()
+        public void ReserveAutoMinify()
         {
             _forceMinify = true;
         }

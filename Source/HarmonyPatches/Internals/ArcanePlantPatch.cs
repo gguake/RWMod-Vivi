@@ -69,6 +69,10 @@ namespace VVRace
                 harmony.Patch(innerMethod, postfix: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(Map_FinalizeLoading_OrderBy_Postfix)));
             }
 
+            harmony.Patch(
+                original: AccessTools.Method(typeof(Map), nameof(Map.MapPreTick)),
+                postfix: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(Map_MapPreTick_Postfix)));
+
             Log.Message("!! [ViViRace] arcane plant patch complete");
         }
 
@@ -109,17 +113,25 @@ namespace VVRace
 
         private static void Designator_Build_SelectedUpdate_Postfix(BuildableDef ___entDef)
         {
-            if (___entDef is ThingDef thingDef && (typeof(ManaAcceptor).IsAssignableFrom(thingDef.thingClass) || typeof(ArcanePlantPot).IsAssignableFrom(thingDef.thingClass)))
+            if (___entDef is ThingDef thingDef && (thingDef.HasComp<CompMana>() || typeof(ArcanePlantPot).IsAssignableFrom(thingDef.thingClass)))
             {
-                SectionLayer_ThingsManaFluxGrid.DrawManaFluxGridOverlayThisFrame();
+                var manaGrid = Find.CurrentMap.GetComponent<EnvironmentManaGrid>();
+                if (manaGrid != null)
+                {
+                    manaGrid.MarkForDrawOverlay();
+                }
             }
         }
 
         private static void Designator_Install_SelectedUpdate_Postfix(Designator_Install __instance)
         {
-            if (__instance.PlacingDef is ThingDef thingDef && (typeof(ManaAcceptor).IsAssignableFrom(thingDef.thingClass) || typeof(ArcanePlantPot).IsAssignableFrom(thingDef.thingClass)))
+            if (__instance.PlacingDef is ThingDef thingDef && (thingDef.HasComp<CompMana>() || typeof(ArcanePlantPot).IsAssignableFrom(thingDef.thingClass)))
             {
-                SectionLayer_ThingsManaFluxGrid.DrawManaFluxGridOverlayThisFrame();
+                var manaGrid = Find.CurrentMap.GetComponent<EnvironmentManaGrid>();
+                if (manaGrid != null)
+                {
+                    manaGrid.MarkForDrawOverlay();
+                }
             }
         }
 
@@ -135,7 +147,7 @@ namespace VVRace
         {
             if (!strikeLoc.IsValid)
             {
-                var candidates = map.listerBuildings.allBuildingsColonist.Where(v => v.TryGetComp<CompLightningLod>()?.Active ?? false).ToList();
+                var candidates = map.listerBuildings.allBuildingsColonist.Where(v => v.TryGetComp<CompManaLightningLod>()?.Active ?? false).ToList();
                 if (candidates.Count > 0)
                 {
                     return candidates.RandomElement().Position;
@@ -164,19 +176,19 @@ namespace VVRace
             return instructions;
         }
 
-        private static CompLightningLod FindLightningBolt(Map map, IntVec3 loc)
+        private static CompManaLightningLod FindLightningBolt(Map map, IntVec3 loc)
         {
             if (!loc.IsValid) { return null; }
 
-            var thing = loc.GetFirstThingWithComp<CompLightningLod>(map);
-            return thing.TryGetComp<CompLightningLod>();
+            var thing = loc.GetFirstThingWithComp<CompManaLightningLod>(map);
+            return thing.TryGetComp<CompManaLightningLod>();
         }
 
         private static IEnumerable<CodeInstruction> WeatherEvent_LightningStrike_DoStrike_Transpiler(IEnumerable<CodeInstruction> codeInstructions, ILGenerator ilGenerator)
         {
             var instructions = codeInstructions.ToList();
 
-            var localLightningBolt = ilGenerator.DeclareLocal(typeof(CompLightningLod));
+            var localLightningBolt = ilGenerator.DeclareLocal(typeof(CompManaLightningLod));
 
             var doExplosionLabel = ilGenerator.DefineLabel();
             var skipExplosionLabel = ilGenerator.DefineLabel();
@@ -189,7 +201,7 @@ namespace VVRace
                 new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(ArcanePlantPatch), nameof(FindLightningBolt))),
                 new CodeInstruction(OpCodes.Dup),
                 new CodeInstruction(OpCodes.Brfalse_S, doExplosionLabel),
-                new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(CompLightningLod), nameof(CompLightningLod.OnLightningStrike))),
+                new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(CompManaLightningLod), nameof(CompManaLightningLod.OnLightningStrike))),
                 new CodeInstruction(OpCodes.Br_S, skipExplosionLabel),
                 new CodeInstruction(OpCodes.Pop).WithLabels(doExplosionLabel),
             };
@@ -326,6 +338,15 @@ namespace VVRace
             if (t is ArcanePlant)
             {
                 __result += 0.00001f;
+            }
+        }
+
+        private static void Map_MapPreTick_Postfix(Map __instance)
+        {
+            var grid = __instance.GetComponent<EnvironmentManaGrid>();
+            if (grid != null)
+            {
+                grid.MapComponentPreTick();
             }
         }
     }

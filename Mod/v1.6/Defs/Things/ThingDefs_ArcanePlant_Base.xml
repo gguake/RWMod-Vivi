@@ -70,11 +70,9 @@
     <resourcesFractionWhenDeconstructed>1</resourcesFractionWhenDeconstructed>
 
     <comps>
-      <li Class="VVRace.CompProperties_ArcanePlantStatsDisplay" />
     </comps>
 
     <inspectorTabs>
-      <li>VVRace.ITab_ManaFluxStats</li>
     </inspectorTabs>
 
     <tradeTags>
@@ -106,108 +104,5 @@
     <tradeTags>
       <li>VV_ArcanePlantCombat</li>
     </tradeTags>
-  </ThingDef>
-
-  <!-- 마나 전송 튜브-->
-  <ThingDef Name="VV_ManaTransferTube" ParentName="BuildingBase">
-    <defName>VV_ManaTransferTube</defName>
-    <label>mana transfer tube</label>
-    <description>a tube for long-distance mana transmission. It can be built under walls or other buildings. It merely transmits mana and does not produce any additional mana.</description>
-    <descriptionHyperlinks>
-      <ThingDef>VV_SparklingPetal</ThingDef>
-    </descriptionHyperlinks>
-    <thingClass>VVRace.ManaTransmitter</thingClass>
-    <category>Building</category>
-    <graphicData>
-      <texPath>Things/Building/VV_ManaFluxTube_Atlas</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
-      <linkType>Basic</linkType>
-      <linkFlags>
-        <li>Custom4</li>
-      </linkFlags>
-      <damageData>
-        <rect>(0,0.35,1,0.3)</rect>
-      </damageData>
-    </graphicData>
-    <uiIconPath>Things/Building/VV_ManaFluxTube_MenuIcon</uiIconPath>
-    <uiIconScale>0.7</uiIconScale>
-    <building>
-      <ai_chillDestination>false</ai_chillDestination>
-      <isInert>true</isInert>
-      <isEdifice>false</isEdifice>
-      <blueprintGraphicData>
-        <texPath>Things/Building/VV_ManaFluxTube_Blueprint_Atlas</texPath>
-      </blueprintGraphicData>
-    </building>
-    <inspectorTabs>
-      <li>VVRace.ITab_ManaFluxStats</li>
-    </inspectorTabs>
-    <drawerType>MapMeshOnly</drawerType>
-    <altitudeLayer>Conduits</altitudeLayer>
-    <passability>Standable</passability>
-    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
-    <resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
-    <statBases>
-      <MaxHitPoints>50</MaxHitPoints>
-      <WorkToBuild>40</WorkToBuild>
-      <Flammability>0.7</Flammability>
-      <Beauty>-1</Beauty>
-    </statBases>
-    <drawStyleCategory>Conduits</drawStyleCategory>
-    <costList>
-      <VV_Viviwax>2</VV_Viviwax>
-      <VV_SparklingPetal>3</VV_SparklingPetal>
-    </costList>
-    <comps>
-    </comps>
-    <placeWorkers>
-      <li>VVRace.PlaceWorker_ManaFluxTube</li>
-    </placeWorkers>
-    <rotatable>false</rotatable>
-    <selectable>true</selectable>
-    <neverMultiSelect>true</neverMultiSelect>
-    <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
-    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
-    <designationCategory>VV_Bulidings</designationCategory>
-    <uiOrder>2400</uiOrder>
-    <constructEffect>ConstructMetal</constructEffect>
-    <clearBuildingArea>false</clearBuildingArea>
-    <designationHotKey>Misc8</designationHotKey>
-    <researchPrerequisites>
-      <li>VV_ManaTransferTube</li>
-    </researchPrerequisites>
-    <replaceTags>
-      <li>VV_ManaTransferTube</li>
-    </replaceTags>
-  </ThingDef>
-
-  <!-- 숨겨진 마나 전송 튜브 -->
-  <ThingDef ParentName="VV_ManaTransferTube">
-    <defName>VV_HiddenManaTransferTube</defName>
-    <label>hidden mana transfer tube</label>
-    <description>a Mana transfer tube buried underground. It is not visible from the surface, so it does not become a target of attacks and does not interfere with aesthetics, but it is more expensive to construct.</description>
-    <graphicData>
-      <color>(0,0,0,0)</color>
-      <shaderType>Transparent</shaderType>
-    </graphicData>
-    <statBases>
-      <MaxHitPoints>80</MaxHitPoints>
-      <WorkToBuild>300</WorkToBuild>
-      <Flammability>0</Flammability>
-      <Beauty>0</Beauty>
-    </statBases>
-    <uiIconPath>Things/Building/VV_ManaFluxTube_MenuIcon</uiIconPath>
-    <designationHotKey>Misc9</designationHotKey>
-    <costList>
-      <VV_Viviwax>20</VV_Viviwax>
-      <VV_SparklingPetal>3</VV_SparklingPetal>
-    </costList>
-    <constructEffect>ConstructDirt</constructEffect>
-    <building>
-      <ai_neverTrashThis>true</ai_neverTrashThis>
-      <isTargetable>false</isTargetable>
-      <expandHomeArea>false</expandHomeArea>
-      <canBeDamagedByAttacks>false</canBeDamagedByAttacks>
-    </building>
   </ThingDef>
 </Defs>

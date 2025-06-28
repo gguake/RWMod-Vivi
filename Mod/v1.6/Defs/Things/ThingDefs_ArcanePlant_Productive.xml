@@ -30,16 +30,27 @@
     </costList>
 
     <comps>
+      <li Class="VVRace.CompProperties_Mana">
+        <manaGenerateRule Class="VVRace.ManaFluxRule_Temperature">
+          <activeTemperatureRange>0~200</activeTemperatureRange>
+          <manaFromTemperatureRange>0~2000</manaFromTemperatureRange>
+        </manaGenerateRule>
+        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
+          <mana>300</mana>
+        </manaConsumeRule>
+        <manaAbsorbPerDay>300</manaAbsorbPerDay>
+      </li>
+
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
-      <li Class="VVRace.CompProperties_GlowerArcanePlant">
+      <li Class="VVRace.CompProperties_ManaGlower">
         <glowRadius>10</glowRadius>
         <glowColor>(255,247,138,0)</glowColor>
       </li>
 
       <li Class="CompProperties_HeatPusher">
-        <compClass>VVRace.CompHeatPusherMana</compClass>
-        <heatPerSecond>13</heatPerSecond>
+        <compClass>VVRace.CompManaHeatPusher</compClass>
+        <heatPerSecond>14</heatPerSecond>
         <heatPushMaxTemperature>29</heatPushMaxTemperature>
       </li>
     </comps>
@@ -49,21 +60,7 @@
     </researchPrerequisites>
 
     <modExtensions>
-      <li Class="VVRace.ManaExtension">
-        <manaCapacity>200</manaCapacity>
-
-        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>20</mana>
-        </manaConsumeRule>
-        <manaGenerateRule Class="VVRace.ManaFluxRule_Temperature">
-          <activeTemperatureRange>25~200</activeTemperatureRange>
-          <manaFromTemperatureRange>0~200</manaFromTemperatureRange>
-        </manaGenerateRule>
-      </li>
-
       <li Class="VVRace.ArcanePlantExtension">
-        <zeroManaDamageByChance>1~3</zeroManaDamageByChance>
-
         <passedBulletOverrides>
           <li>
             <thingDef>VV_Bullet_Pea</thingDef>
@@ -163,12 +160,32 @@
     </costList>
 
     <comps>
+      <li Class="VVRace.CompProperties_Mana">
+        <manaGenerateRule Class="VVRace.ManaFluxRule_CompositeSum">
+          <rules>
+            <li Class="VVRace.ManaFluxRule_Temperature">
+              <activeTemperatureRange>-100~0</activeTemperatureRange>
+              <manaFromTemperatureRange>0~2000</manaFromTemperatureRange>
+              <manaLerpReversed>true</manaLerpReversed>
+            </li>
+            <li Class="VVRace.ManaFluxRule_WeatherSnowy">
+              <disableIfRoofed>true</disableIfRoofed>
+              <mana>600</mana>
+            </li>
+          </rules>
+        </manaGenerateRule>
+        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
+          <mana>300</mana>
+        </manaConsumeRule>
+        <manaAbsorbPerDay>300</manaAbsorbPerDay>
+      </li>
+
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
       <li Class="CompProperties_HeatPusher">
-        <compClass>VVRace.CompHeatPusherMana</compClass>
-        <heatPerSecond>-7</heatPerSecond>
-        <heatPushMinTemperature>-10</heatPushMinTemperature>
+        <compClass>VVRace.CompManaHeatPusher</compClass>
+        <heatPerSecond>-8</heatPerSecond>
+        <heatPushMinTemperature>-15</heatPushMinTemperature>
       </li>
     </comps>
     
@@ -177,29 +194,7 @@
     </researchPrerequisites>
 
     <modExtensions>
-      <li Class="VVRace.ManaExtension">
-        <manaCapacity>200</manaCapacity>
-
-        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>20</mana>
-        </manaConsumeRule>
-        <manaGenerateRule Class="VVRace.ManaFluxRule_CompositeSum">
-          <rules>
-            <li Class="VVRace.ManaFluxRule_Temperature">
-              <activeTemperatureRange>-180~0</activeTemperatureRange>
-              <manaFromTemperatureRange>0~300</manaFromTemperatureRange>
-              <manaLerpReversed>true</manaLerpReversed>
-            </li>
-            <li Class="VVRace.ManaFluxRule_WeatherSnowy">
-              <disableIfRoofed>true</disableIfRoofed>
-              <mana>85</mana>
-            </li>
-          </rules>
-        </manaGenerateRule>
-      </li>
-
       <li Class="VVRace.ArcanePlantExtension">
-        <zeroManaDamageByChance>1~3</zeroManaDamageByChance>
 
         <passedBulletOverrides>
           <li>
@@ -289,7 +284,7 @@
     </graphicData>
 
     <statBases>
-      <MaxHitPoints>80</MaxHitPoints>
+      <MaxHitPoints>100</MaxHitPoints>
       <WorkToBuild>28000</WorkToBuild>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
@@ -303,9 +298,17 @@
     </costList>
 
     <comps>
+      <li Class="VVRace.CompProperties_Mana">
+        <manaCapacity>1200</manaCapacity>
+        <manaConsumeRule Class="VVRace.ManaFluxRule_BatteryStored">
+          <manaFromStoredEnergy>0~800</manaFromStoredEnergy>
+        </manaConsumeRule>
+        <manaAbsorbPerDay>1200</manaAbsorbPerDay>
+      </li>
+
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
-      <li Class="VVRace.CompProperties_GlowerArcanePlant">
+      <li Class="VVRace.CompProperties_ManaGlower">
         <glowRadius>3</glowRadius>
         <glowColor>(213,110,248,0)</glowColor>
       </li>
@@ -326,20 +329,7 @@
     </researchPrerequisites>
 
     <modExtensions>
-      <li Class="VVRace.ManaExtension">
-        <manaCapacity>300</manaCapacity>
-
-        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>50</mana>
-        </manaConsumeRule>
-        <manaGenerateRule Class="VVRace.ManaFluxRule_BatteryStored">
-          <manaFromStoredEnergy>0~80</manaFromStoredEnergy>
-        </manaGenerateRule>
-      </li>
-
       <li Class="VVRace.ArcanePlantExtension">
-        <zeroManaDamageByChance>1~3</zeroManaDamageByChance>
-
         <passedBulletOverrides>
           <li>
             <thingDef>VV_Bullet_Pea</thingDef>
@@ -426,7 +416,7 @@
     </graphicData>
 
     <statBases>
-      <MaxHitPoints>50</MaxHitPoints>
+      <MaxHitPoints>60</MaxHitPoints>
       <WorkToBuild>28000</WorkToBuild>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
@@ -440,16 +430,29 @@
     </costList>
 
     <comps>
+      <li Class="VVRace.CompProperties_Mana">
+        <manaCapacity>2500</manaCapacity>
+        <manaGenerateRule Class="VVRace.ManaFluxRule_Power">
+          <powerManaRatio>0.5</powerManaRatio>
+          <min>0</min>
+          <max>1000</max>
+        </manaGenerateRule>
+
+        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
+          <mana>1000</mana>
+        </manaConsumeRule>
+        <manaAbsorbPerDay>2000</manaAbsorbPerDay>
+      </li>
+
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
       <li Class="CompProperties_Power">
-        <compClass>VVRace.CompPowerMana</compClass>
-        <basePowerConsumption>-300</basePowerConsumption>
+        <compClass>VVRace.CompManaPowerPlant</compClass>
+        <basePowerConsumption>-500</basePowerConsumption>
         <transmitsPower>true</transmitsPower>
       </li>
-      <li Class="VVRace.CompProperties_LightningLod">
-        <manaConditionRange>250~500</manaConditionRange>
-        <manaGain>500</manaGain>
+      <li Class="VVRace.CompProperties_ManaLightningLod">
+        <mana>500</mana>
       </li>
     </comps>
 
@@ -462,17 +465,7 @@
     </researchPrerequisites>
 
     <modExtensions>
-      <li Class="VVRace.ManaExtension">
-        <manaCapacity>600</manaCapacity>
-
-        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>120</mana>
-        </manaConsumeRule>
-      </li>
-
       <li Class="VVRace.ArcanePlantExtension">
-        <zeroManaDamageByChance>1~3</zeroManaDamageByChance>
-
         <passedBulletOverrides>
           <li>
             <thingDef>VV_Bullet_Pea</thingDef>
@@ -575,11 +568,30 @@
     </costList>
 
     <comps>
+      <li Class="VVRace.CompProperties_Mana">
+        <manaCapacity>1000</manaCapacity>
+        <manaGenerateRule Class="VVRace.ManaFluxRule_CompositeSum">
+          <rules>
+            <li Class="VVRace.ManaFluxRule_AdjacentWater">
+              <manaFromOccupiedWater>550</manaFromOccupiedWater>
+              <manaPerAdjacentWater>125</manaPerAdjacentWater>
+            </li>
+            <li Class="VVRace.ManaFluxRule_WeatherRainy">
+              <mana>300</mana>
+            </li>
+          </rules>
+        </manaGenerateRule>
+
+        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
+          <mana>50</mana>
+        </manaConsumeRule>
+        <manaAbsorbPerDay>500</manaAbsorbPerDay>
+      </li>
+
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
-      <li Class="VVRace.CompProperties_SensorExplosive">
-        <requiredManaAmount>50</requiredManaAmount>
-        <useManaAmount>30</useManaAmount>
+      <li Class="VVRace.CompProperties_ManaSensorExplosive">
+        <requiredManaPct>0.1</requiredManaPct>
         
         <sensorRadius>3.7</sensorRadius>
         <sensorWorkerClass>VVRace.SensorWorker_Fire</sensorWorkerClass>
@@ -603,28 +615,7 @@
     </researchPrerequisites>
 
     <modExtensions>
-      <li Class="VVRace.ManaExtension">
-        <manaCapacity>450</manaCapacity>
-
-        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>15</mana>
-        </manaConsumeRule>
-        <manaGenerateRule Class="VVRace.ManaFluxRule_CompositeSum">
-          <rules>
-            <li Class="VVRace.ManaFluxRule_AdjacentWater">
-              <manaFromOccupiedWater>30</manaFromOccupiedWater>
-              <manaPerAdjacentWater>15</manaPerAdjacentWater>
-            </li>
-            <li Class="VVRace.ManaFluxRule_WeatherRainy">
-              <mana>60</mana>
-            </li>
-          </rules>
-        </manaGenerateRule>
-      </li>
-
       <li Class="VVRace.ArcanePlantExtension">
-        <zeroManaDamageByChance>2~4</zeroManaDamageByChance>
-
         <growingAdjacentFlowerDef>VV_Plant_IceArcaneFlower</growingAdjacentFlowerDef>
         <growingAdjacentFlowerIntervalTicks>45000~180000</growingAdjacentFlowerIntervalTicks>
         <growingAdjacentFlowerChance>0.5</growingAdjacentFlowerChance>
@@ -702,7 +693,7 @@
     </graphicData>
 
     <statBases>
-      <MaxHitPoints>50</MaxHitPoints>
+      <MaxHitPoints>60</MaxHitPoints>
       <WorkToBuild>33000</WorkToBuild>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
@@ -716,15 +707,31 @@
     </costList>
 
     <comps>
+      <li Class="VVRace.CompProperties_Mana">
+        <manaGenerateRule Class="VVRace.ManaFluxRule_Sunlight">
+          <manaFromSunlightRange>0~2000</manaFromSunlightRange>
+        </manaGenerateRule>
+
+        <manaConsumeRule Class="VVRace.ManaFluxRule_CompositeSum">
+          <rules>
+            <li Class="VVRace.ManaFluxRule_GlowerActive">
+              <mana>2000</mana>
+            </li>
+          </rules>
+        </manaConsumeRule>
+        <manaAbsorbPerDay>2000</manaAbsorbPerDay>
+      </li>
+
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
-      <li Class="VVRace.CompProperties_GlowerArcanePlant">
+      <li Class="VVRace.CompProperties_ManaGlower">
         <glowRadius>16</glowRadius>
         <glowColor>(370,370,370,0)</glowColor>
         <overlightRadius>7.7</overlightRadius>
         <glowOnlyRoofed>true</glowOnlyRoofed>
       </li>
     </comps>
+
     <specialDisplayRadius>6.2</specialDisplayRadius>
 
     <researchPrerequisites>
@@ -732,27 +739,7 @@
     </researchPrerequisites>
 
     <modExtensions>
-      <li Class="VVRace.ManaExtension">
-        <manaCapacity>500</manaCapacity>
-
-        <manaConsumeRule Class="VVRace.ManaFluxRule_CompositeSum">
-          <rules>
-            <li Class="VVRace.ManaFluxRule_GlowerActive">
-              <mana>190</mana>
-            </li>
-            <li Class="VVRace.ManaFluxRule_Constant">
-              <mana>10</mana>
-            </li>
-          </rules>
-        </manaConsumeRule>
-        <manaGenerateRule Class="VVRace.ManaFluxRule_Sunlight">
-          <manaFromSunlightRange>0~200</manaFromSunlightRange>
-        </manaGenerateRule>
-      </li>
-
       <li Class="VVRace.ArcanePlantExtension">
-        <zeroManaDamageByChance>2~5</zeroManaDamageByChance>
-
         <growingAdjacentFlowerDef>VV_Plant_FireArcaneFlower</growingAdjacentFlowerDef>
         <growingAdjacentFlowerIntervalTicks>45000~180000</growingAdjacentFlowerIntervalTicks>
         <growingAdjacentFlowerChance>0.5</growingAdjacentFlowerChance>
@@ -843,9 +830,20 @@
     </costList>
 
     <comps>
+      <li Class="VVRace.CompProperties_Mana">
+        <manaGenerateRule Class="VVRace.ManaFluxRule_AdjacentPlant">
+          <manaPerAdjacentPlant>250</manaPerAdjacentPlant>
+        </manaGenerateRule>
+
+        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
+          <mana>600</mana>
+        </manaConsumeRule>
+        <manaAbsorbPerDay>600</manaAbsorbPerDay>
+      </li>
+
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
-      <li Class="VVRace.CompProperties_Terraformer">
+      <li Class="VVRace.CompProperties_ManaTerraformer">
         <cooldownTicks>60000~300000</cooldownTicks>
         <radiusRange>0.3~3.8</radiusRange>
         <radiusGrowth>0.9</radiusGrowth>
@@ -859,7 +857,7 @@
         </terraforms>
       </li>
 
-      <li Class="VVRace.CompProperties_FilthMakerArcanePlant">
+      <li Class="VVRace.CompProperties_ManaFilthMaker">
         <filthDef>VV_FilthPollen</filthDef>
         <makeAmountPerDays>1~3</makeAmountPerDays>
         <radius>1.9</radius>
@@ -874,20 +872,7 @@
     </researchPrerequisites>
 
     <modExtensions>
-      <li Class="VVRace.ManaExtension">
-        <manaCapacity>400</manaCapacity>
-
-        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>50</mana>
-        </manaConsumeRule>
-        <manaGenerateRule Class="VVRace.ManaFluxRule_AdjacentPlant">
-          <manaPerAdjacentPlant>25</manaPerAdjacentPlant>
-        </manaGenerateRule>
-      </li>
-
       <li Class="VVRace.ArcanePlantExtension">
-        <zeroManaDamageByChance>1~3</zeroManaDamageByChance>
-
         <growingAdjacentFlowerDef>VV_Plant_LifeArcaneFlower</growingAdjacentFlowerDef>
         <growingAdjacentFlowerIntervalTicks>45000~180000</growingAdjacentFlowerIntervalTicks>
         <growingAdjacentFlowerChance>0.5</growingAdjacentFlowerChance>
@@ -974,14 +959,35 @@
     </costList>
 
     <comps>
+      <li Class="VVRace.CompProperties_Mana">
+        <manaCapacity>1500</manaCapacity>
+
+        <manaGenerateRule Class="VVRace.ManaFluxRule_RadialPollution">
+          <radius>2.9</radius>
+          <manaCurveFromDistanceSqr>
+            <points>
+              <li>(0,400)</li>
+              <li>(1,200)</li>
+              <li>(4,100)</li>
+              <li>(9,50)</li>
+            </points>
+          </manaCurveFromDistanceSqr>
+        </manaGenerateRule>
+
+        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
+          <mana>500</mana>
+        </manaConsumeRule>
+        <manaAbsorbPerDay>1000</manaAbsorbPerDay>
+      </li>
+
       <li Class="VVRace.CompProperties_RepeatGatherable" />
       
-      <li Class="VVRace.CompProperties_GlowerArcanePlant">
+      <li Class="VVRace.CompProperties_ManaGlower">
         <glowRadius>10</glowRadius>
         <glowColor>(255,255,255,0)</glowColor>
       </li>
       
-      <li Class="VVRace.CompProperties_Terraformer">
+      <li Class="VVRace.CompProperties_ManaTerraformer">
         <cooldownTicks>120000~180000</cooldownTicks>
         <radiusRange>0.6~2.9</radiusRange>
         <radiusGrowth>0.5</radiusGrowth>
@@ -991,10 +997,11 @@
 
       <li Class="VVRace.CompProperties_ManaShieldProjector">
         <shieldDef>VV_PurifimintShield</shieldDef>
-        <requiredMinimumManaForActivate>30</requiredMinimumManaForActivate>
-        <manaEfficiency>3.5</manaEfficiency>
-
         <mote>VV_Mote_ShieldProjectorEffect</mote>
+
+        <shieldMaxHp>600</shieldMaxHp>
+        <requiredManaPct>0.1</requiredManaPct>
+
       </li>
     </comps>
     
@@ -1003,28 +1010,7 @@
     </researchPrerequisites>
 
     <modExtensions>
-      <li Class="VVRace.ManaExtension">
-        <manaCapacity>400</manaCapacity>
-
-        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>40</mana>
-        </manaConsumeRule>
-        <manaGenerateRule Class="VVRace.ManaFluxRule_RadialPollution">
-          <radius>2.9</radius>
-          <manaCurveFromDistanceSqr>
-            <points>
-              <li>(0,40)</li>
-              <li>(1,10)</li>
-              <li>(4,5)</li>
-              <li>(9,2.5)</li>
-            </points>
-          </manaCurveFromDistanceSqr>
-        </manaGenerateRule>
-      </li>
-
       <li Class="VVRace.ArcanePlantExtension">
-        <zeroManaDamageByChance>1~5</zeroManaDamageByChance>
-
         <growingAdjacentFlowerDef>VV_Plant_LifeArcaneFlower</growingAdjacentFlowerDef>
         <growingAdjacentFlowerIntervalTicks>45000~180000</growingAdjacentFlowerIntervalTicks>
         <growingAdjacentFlowerChance>0.5</growingAdjacentFlowerChance>
@@ -1140,9 +1126,24 @@
     </costList>
 
     <comps>
+      <li Class="VVRace.CompProperties_Mana">
+        <manaGenerateRule Class="VVRace.ManaFluxRule_Wind">
+          <manaFromWindSpeed>
+            <points>
+              <li>(0,0)</li>
+              <li>(0.25,0)</li>
+              <li>(0.5,200)</li>
+              <li>(1.0,250)</li>
+              <li>(1.5,300)</li>
+              <li>(2.0,400)</li>
+            </points>
+          </manaFromWindSpeed>
+        </manaGenerateRule>
+      </li>
+
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
-      <li Class="VVRace.CompProperties_GlowerArcanePlant">
+      <li Class="VVRace.CompProperties_ManaGlower">
         <glowRadius>3</glowRadius>
         <glowColor>(255,255,255,0)</glowColor>
       </li>
@@ -1153,30 +1154,7 @@
     </researchPrerequisites>
 
     <modExtensions>
-      <li Class="VVRace.ManaExtension">
-        <manaCapacity>50</manaCapacity>
-        <initialManaPercent>0.5</initialManaPercent>
-
-        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>5</mana>
-        </manaConsumeRule>
-        <manaGenerateRule Class="VVRace.ManaFluxRule_Wind">
-          <manaFromWindSpeed>
-            <points>
-              <li>(0,0)</li>
-              <li>(0.25,0)</li>
-              <li>(0.5,30)</li>
-              <li>(1.0,45)</li>
-              <li>(1.5,60)</li>
-              <li>(2.0,70)</li>
-            </points>
-          </manaFromWindSpeed>
-        </manaGenerateRule>
-      </li>
-
       <li Class="VVRace.ArcanePlantExtension">
-        <zeroManaDamageByChance>1~3</zeroManaDamageByChance>
-
         <growingAdjacentFlowerDef>VV_Plant_LifeArcaneFlower</growingAdjacentFlowerDef>
         <growingAdjacentFlowerIntervalTicks>90000~180000</growingAdjacentFlowerIntervalTicks>
         <growingAdjacentFlowerChance>0.25</growingAdjacentFlowerChance>

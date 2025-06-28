@@ -1,6 +1,5 @@
 ﻿using RimWorld;
 using System.Linq;
-using System.Text;
 using Verse;
 using Verse.AI;
 
@@ -40,7 +39,7 @@ namespace VVRace
         {
             get
             {
-                return ManaChargeRatio > 0f;
+                return CompMana?.Active ?? true;
             }
         }
 

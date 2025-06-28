@@ -7,6 +7,8 @@
 
 <VV_Inspector_ViviWallReplaceCooldown>굳기까지 남은 시간: {0}</VV_Inspector_ViviWallReplaceCooldown>
 
+<VV_Inspector_PlantActive>활성</VV_Inspector_PlantActive>
+<VV_Inspector_PlantInactive>비활성</VV_Inspector_PlantInactive>
 <VV_Inspector_PlantMana>마나: {0}/{1}</VV_Inspector_PlantMana>
 <VV_Inspector_PlantManaFlux>({0}/일)</VV_Inspector_PlantManaFlux>
 

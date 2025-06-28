@@ -2,10 +2,6 @@
 {
     public static class LocalizeString_Command
     {
-        public const string VV_Command_FertilizeAutoActivated = nameof(VV_Command_FertilizeAutoActivated);
-        public const string VV_Command_FertilizeAutoActivatedDesc = nameof(VV_Command_FertilizeAutoActivatedDesc);
-        public const string VV_Command_SetFertilizeAutoThreshold = nameof(VV_Command_SetFertilizeAutoThreshold);
-        public const string VV_Command_SetFertilizeAutoThresholdDesc = nameof(VV_Command_SetFertilizeAutoThresholdDesc);
         public const string VV_Command_CancelReserveWeapon = nameof(VV_Command_CancelReserveWeapon);
         public const string VV_Command_CancelReserveWeaponDesc = nameof(VV_Command_CancelReserveWeaponDesc);
         public const string VV_Command_EquipWeapon = nameof(VV_Command_EquipWeapon);

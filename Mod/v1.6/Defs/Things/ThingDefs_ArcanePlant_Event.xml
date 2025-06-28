@@ -36,14 +36,25 @@
     </building>
 
     <comps>
+      <li Class="VVRace.CompProperties_Mana">
+        <manaGenerateRule Class="VVRace.ManaFluxRule_Random">
+          <min>137</min>
+          <max>274</max>
+        </manaGenerateRule>
+        <manaConsumeRule Class="VVRace.ManaFluxRule_Random">
+          <min>0</min>
+          <max>137</max>
+        </manaConsumeRule>
+      </li>
+
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
-      <li Class="VVRace.CompProperties_GlowerArcanePlant">
+      <li Class="VVRace.CompProperties_ManaGlower">
         <glowRadius>7</glowRadius>
         <glowColor>(241,178,83,0)</glowColor>
       </li>
 
-      <li Class="VVRace.CompProperties_FilthMakerArcanePlant">
+      <li Class="VVRace.CompProperties_ManaFilthMaker">
         <filthDef>VV_FilthPollen</filthDef>
         <makeAmountPerDays>3~5</makeAmountPerDays>
         <radius>1.9</radius>
@@ -54,16 +65,7 @@
     </comps>
 
     <modExtensions>
-      <li Class="VVRace.ManaExtension">
-        <manaCapacity>500</manaCapacity>
-
-        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>80</mana>
-        </manaConsumeRule>
-      </li>
-
       <li Class="VVRace.ArcanePlantExtension">
-        <zeroManaDamageByChance>1~5</zeroManaDamageByChance>
       </li>
     </modExtensions>
   </ThingDef>

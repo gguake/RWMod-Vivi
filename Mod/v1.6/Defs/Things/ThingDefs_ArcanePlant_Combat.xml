@@ -31,6 +31,14 @@
     </costList>
 
     <comps>
+      <li Class="VVRace.CompProperties_Mana">
+        <manaCapacity>900</manaCapacity>
+        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
+          <mana>30</mana>
+        </manaConsumeRule>
+
+        <manaAbsorbPerDay>900</manaAbsorbPerDay>
+      </li>
     </comps>
 
     <researchPrerequisites>
@@ -53,16 +61,7 @@
     </placeWorkers>
 
     <modExtensions>
-      <li Class="VVRace.ManaExtension">
-        <manaCapacity>600</manaCapacity>
-
-        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>10</mana>
-        </manaConsumeRule>
-      </li>
-
       <li Class="VVRace.ArcanePlantExtension">
-        <zeroManaDamageByChance>1~10</zeroManaDamageByChance>
         <zeroManaDurableTicks>30000</zeroManaDurableTicks>
         
         <consumeManaPerVerbShoot>2</consumeManaPerVerbShoot>
@@ -284,6 +283,14 @@
     </costList>
 
     <comps>
+      <li Class="VVRace.CompProperties_Mana">
+        <manaCapacity>1200</manaCapacity>
+        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
+          <mana>120</mana>
+        </manaConsumeRule>
+
+        <manaAbsorbPerDay>600</manaAbsorbPerDay>
+      </li>
     </comps>
 
     <researchPrerequisites>
@@ -302,16 +309,7 @@
     </placeWorkers>
 
     <modExtensions>
-      <li Class="VVRace.ManaExtension">
-        <manaCapacity>500</manaCapacity>
-
-        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>40</mana>
-        </manaConsumeRule>
-      </li>
-      
       <li Class="VVRace.ArcanePlantExtension">
-        <zeroManaDamageByChance>1~10</zeroManaDamageByChance>
         <zeroManaDurableTicks>60000</zeroManaDurableTicks>
         
         <consumeManaPerVerbShoot>1</consumeManaPerVerbShoot>
@@ -408,11 +406,13 @@
     </costList>
 
     <comps>
-      <li Class="CompProperties_Explosive">
-        <explosiveRadius>1.9</explosiveRadius>
-        <explosiveDamageType>Bomb</explosiveDamageType>
-        <startWickHitPointsPercent>0.25</startWickHitPointsPercent>
-        <wickTicks>150~300</wickTicks>
+      <li Class="VVRace.CompProperties_Mana">
+        <manaCapacity>900</manaCapacity>
+        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
+          <mana>30</mana>
+        </manaConsumeRule>
+
+        <manaAbsorbPerDay>900</manaAbsorbPerDay>
       </li>
     </comps>
 
@@ -437,16 +437,7 @@
     </placeWorkers>
 
     <modExtensions>
-      <li Class="VVRace.ManaExtension">
-        <manaCapacity>800</manaCapacity>
-
-        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>20</mana>
-        </manaConsumeRule>
-      </li>
-
       <li Class="VVRace.ArcanePlantExtension">
-        <zeroManaDamageByChance>1~10</zeroManaDamageByChance>
         <zeroManaDurableTicks>30000</zeroManaDurableTicks>
         
         <consumeManaPerVerbShoot>18</consumeManaPerVerbShoot>

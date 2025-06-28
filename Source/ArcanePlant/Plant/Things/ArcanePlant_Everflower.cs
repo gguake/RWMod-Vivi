@@ -26,11 +26,12 @@ namespace VVRace
                     Mathf.CeilToInt(Rand.Range(60000 * 5, 60000 * 10) * pawn.ageTracker.BiologicalTicksPerTick), 
                     0, 
                     (int)(pawn.ageTracker.AgeBiologicalTicks - 13 * 60000 * 60)) - 1;
+
                 if (ticks > 0)
                 {
                     pawn.ageTracker.AgeBiologicalTicks -= ticks;
-                    ManaFluxNode.mana = Mathf.Clamp(ManaFluxNode.mana + ticks / 60000f * 25, 0, ManaExtension.manaCapacity);
 
+                    Map.GetComponent<EnvironmentManaGrid>().ChangeEnvironmentMana(Position, ticks / 60000f * 50);
                     pawn.health.AddHediff(VVHediffDefOf.VV_EverflowerImpact);
                 }
             }

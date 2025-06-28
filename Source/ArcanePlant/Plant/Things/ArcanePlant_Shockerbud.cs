@@ -5,19 +5,19 @@ namespace VVRace
 {
     public class ArcanePlant_Shockerbud : ArcanePlant
     {
-        public CompSensorExplosive CompSensorExplosive
+        public CompManaSensorExplosive CompSensorExplosive
         {
             get
             {
                 if (_compSensorExplosive == null)
                 {
-                    _compSensorExplosive = this.TryGetComp<CompSensorExplosive>();
+                    _compSensorExplosive = this.TryGetComp<CompManaSensorExplosive>();
                 }
 
                 return _compSensorExplosive;
             }
         }
-        private CompSensorExplosive _compSensorExplosive;
+        private CompManaSensorExplosive _compSensorExplosive;
 
         public override void PreApplyDamage(ref DamageInfo dinfo, out bool absorbed)
         {
