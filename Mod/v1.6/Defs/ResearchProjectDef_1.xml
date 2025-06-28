@@ -132,7 +132,8 @@
     <description>Build facilities to cultivate arcane plants with various uses.</description>
     <discoveredLetterTitle>Arcane plant</discoveredLetterTitle>
     <discoveredLetterText>To cultivate arcane plants, you need unidentified seeds, and each plant requires different materials. Regular maintenance during cultivation is necessary for good results, and you must apply mana fertilizer to sustain their vitality.
-\nArcane plants produce and consume a resource called mana. Each plant must meet specific conditions to produce mana. If the produced mana exceeds its storage capacity, it transfers to adjacent arcane plants, so make sure to utilize this feature effectively.</discoveredLetterText>
+\nArcane plants produce and consume a resource called mana, and each plant requires specific conditions to be met in order to generate it. The mana produced slowly spreads through the ground and can be absorbed by nearby arcane plants.
+\nWhile mana is generally generated and consumed by arcane plants, it can occasionally occur naturally through certain wild plants.</discoveredLetterText>
     <baseCost>700</baseCost>
     <researchViewX>2</researchViewX>
     <researchViewY>1.4</researchViewY>

@@ -269,7 +269,7 @@
   <ThingDef ParentName="VV_ArcanePlantProductive">
     <defName>VV_Shockerbud</defName>
     <label>flashbud</label>
-    <description>a arcane flower with transparent petals where electricity discharges, capable of connecting to power lines to store electricity. It produces mana in proportion to the amount of electricity charged.
+    <description>a arcane flower that discharges electricity within its transparent petals. It can be wired to store a large amount of power, but consumes mana in proportion.
 \nIf it receives external shocks, the internal voltage becomes unstable, generating massive electromagnetic pulses in the vicinity and discharging mana.
 \nWhen the peas from a peashooter pass over the flashbud, there is a low chance that the beans will electrify the target, temporarily stunning them.</description>
     <descriptionHyperlinks>

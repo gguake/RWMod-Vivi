@@ -18,13 +18,12 @@
             <xpath>Defs/ThingDef[defName="Plant_GrassAnima"]/comps</xpath>
             <value>
               <li Class="VVRace.CompProperties_Mana">
-                <manaGenerateRule Class="VVRace.ManaFluxRule_Constant">
-                    <mana>600</mana>
+                <manaGenerateRule Class="VVRace.ManaFluxRule_PlantGrowth">
+                    <manaFromGrowth>0~700</manaFromGrowth>
                 </manaGenerateRule>
               </li>
             </value>
           </li>
-
         </operations>
       </li>
     </operations>

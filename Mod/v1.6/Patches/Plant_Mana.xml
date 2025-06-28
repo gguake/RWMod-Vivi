@@ -2,29 +2,28 @@
 <Patch>
   <Operation Class="PatchOperationSequence">
     <operations>
-      <li Class="PatchOperationSequence" MayRequire="Ludeon.RimWorld.Ideology">
+      <li Class="PatchOperationSequence">
         <operations>
-          <!-- Plant_MossGauranlen -->
+          <!-- Plant_Ambrosia -->
           <li Class="PatchOperationConditional">
-            <xpath>Defs/ThingDef[defName="Plant_MossGauranlen"]/comps</xpath>
+            <xpath>Defs/ThingDef[defName="Plant_Ambrosia"]/comps</xpath>
             <nomatch Class="PatchOperationAdd">
-              <xpath>Defs/ThingDef[defName="Plant_MossGauranlen"]</xpath>
+              <xpath>Defs/ThingDef[defName="Plant_Ambrosia"]</xpath>
               <value>
                 <comps />
               </value>
             </nomatch>
           </li>
           <li Class="PatchOperationAdd">
-            <xpath>Defs/ThingDef[defName="Plant_MossGauranlen"]/comps</xpath>
+            <xpath>Defs/ThingDef[defName="Plant_Ambrosia"]/comps</xpath>
             <value>
               <li Class="VVRace.CompProperties_Mana">
                 <manaGenerateRule Class="VVRace.ManaFluxRule_PlantGrowth">
-                    <manaFromGrowth>0~900</manaFromGrowth>
+                    <manaFromGrowth>0~150</manaFromGrowth>
                 </manaGenerateRule>
               </li>
             </value>
           </li>
-
         </operations>
       </li>
     </operations>
