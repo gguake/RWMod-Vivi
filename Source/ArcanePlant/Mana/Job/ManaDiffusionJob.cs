@@ -1,6 +1,8 @@
-﻿using Unity.Collections;
+﻿using LudeonTK;
+using Unity.Collections;
 using Unity.Jobs;
 using Unity.Mathematics;
+using Verse;
 
 namespace VVRace
 {
@@ -18,6 +20,12 @@ namespace VVRace
         [WriteOnly]
         public NativeArray<float> outputGrid;
 
+        [ReadOnly]
+        public bool checkFlowerCells;
+
+        [WriteOnly]
+        public NativePriorityQueue<int, float, FloatMinComparer> flowerCellQueue;
+
         public void Execute(int idx)
         {
             var x = idx % width;
@@ -34,9 +42,13 @@ namespace VVRace
                 new float3(x > 0 ? manaGrid[idx + width - 1] : 0f, manaGrid[idx + width], x < width - 1 ? manaGrid[idx + width + 1] : 0f) :
                 float3.zero;
 
-            var r = math.csum(k * (v1 + 2 * v2 + v3)) / 16f;
-            if (r < 0.01f) { outputGrid[idx] = 0f; }
-            else { outputGrid[idx] = math.clamp(r, 0f, EnvironmentManaGrid.EnvironmentManaMax); }
+            var r = math.clamp(math.csum(k * (v1 + 2 * v2 + v3)) / 16f, 0f, EnvironmentManaGrid.EnvironmentManaMax);
+            outputGrid[idx] = r > 0.01f ? r : 0f;
+
+            if (checkFlowerCells && r >= 150f)
+            {
+                flowerCellQueue.Enqueue(idx, -r);
+            }
         }
     }
 }

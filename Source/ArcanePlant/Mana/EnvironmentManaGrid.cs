@@ -1,4 +1,5 @@
 ﻿using LudeonTK;
+using RimWorld;
 using System;
 using System.Collections.Generic;
 using Unity.Collections;
@@ -10,6 +11,7 @@ namespace VVRace
 {
     public class EnvironmentManaGrid : MapComponent, ICellBoolGiver, IDisposable
     {
+        public const float ViviFlowerChance = 0.04f;
         public const float EnvironmentManaMax = 1000f;
 
         public const int RefreshManaInterval = 250;
@@ -18,6 +20,9 @@ namespace VVRace
         private NativeArray<float> _manaReserveGrid;
         private NativeArray<float> _manaGrid;
         private NativeArray<float> _tmpGrid;
+
+        private bool _checkFlowerCells;
+        private NativePriorityQueue<int, float, FloatMinComparer> _flowerCellQueue;
 
         private bool _shouldUpdate;
         private bool _updateJobStart;
@@ -46,8 +51,9 @@ namespace VVRace
             _manaReserveGrid = new NativeArray<float>(map.cellIndices.NumGridCells, Allocator.Persistent);
             _manaGrid = new NativeArray<float>(map.cellIndices.NumGridCells, Allocator.Persistent);
             _tmpGrid = new NativeArray<float>(map.cellIndices.NumGridCells, Allocator.Persistent);
+            _flowerCellQueue = new NativePriorityQueue<int, float, FloatMinComparer>(map.cellIndices.NumGridCells, default(FloatMinComparer), Allocator.Persistent);
 
-            _cellBoolDrawer = new CellBoolDrawer(this, map.Size.x, map.Size.z, 3634, 0.7f);
+            _cellBoolDrawer = new CellBoolDrawer(this, map.Size.x, map.Size.z, 3634, 0.5f);
 
             map.events.ThingSpawned += Notify_BuildingSpawned;
             map.events.ThingDespawned += Notify_BuildingDespawned;
@@ -103,11 +109,57 @@ namespace VVRace
             }
         }
 
+        private static IEnumerable<ThingDef> ViviFlowerDefs
+        {
+            get
+            {
+                yield return VVThingDefOf.VV_Plant_FireArcaneFlower;
+                yield return VVThingDefOf.VV_Plant_IceArcaneFlower;
+                yield return VVThingDefOf.VV_Plant_LightningArcaneFlower;
+                yield return VVThingDefOf.VV_Plant_LifeArcaneFlower;
+            }
+        }
+
         public override void MapComponentTick()
         {
             if (_diffusionJobStart)
             {
                 CompleteDiffuseManaJob();
+
+                if (_checkFlowerCells)
+                {
+                    var sum = 0f;
+                    for (int i = 0; i < _manaGrid.Length; ++i)
+                    {
+                        sum += _manaGrid[i];
+                    }
+
+                    var thingDef = ViviFlowerDefs.RandomElement();
+                    int flowerCount = (int)Mathf.Clamp(sum / 50000f, 1, 20) + Rand.Range(1, 5);
+                    while (flowerCount > 0)
+                    {
+                        if (_flowerCellQueue.Count == 0) { break; }
+
+                        _flowerCellQueue.Dequeue(out var cellIndex, out _);
+
+                        var c = map.cellIndices.IndexToCell(cellIndex);
+                        if (c.GetPlant(map) != null) { continue; }
+                        if (c.GetCover(map) != null) { continue; }
+                        if (c.GetEdifice(map) != null) { continue; }
+                        if (c.GetFertility(map) < 0.5f) { continue; }
+                        if (c.GetTemperature(map) < thingDef.plant.minGrowthTemperature || c.GetTemperature(map) > thingDef.plant.maxGrowthTemperature) { continue; }
+                        if (!PlantUtility.SnowAllowsPlanting(c, map)) { continue; }
+                        if (!PlantUtility.SandAllowsPlanting(c, map)) { continue; }
+
+                        if (GenSpawn.TrySpawn(thingDef, c, map, out _, canWipeEdifices: false))
+                        {
+                            flowerCount--;
+                            thingDef = ViviFlowerDefs.RandomElement();
+                        }
+                    }
+
+                    _checkFlowerCells = false;
+                }
             }
 
             if (GenTicks.TicksGame % RefreshManaInterval == 0)
@@ -144,6 +196,8 @@ namespace VVRace
 
         public void Dispose()
         {
+            _flowerCellQueue.Dispose();
+
             _tmpGrid.Dispose();
             _manaGrid.Dispose();
             _manaReserveGrid.Dispose();
@@ -178,12 +232,21 @@ namespace VVRace
         {
             if (_diffusionJobStart) { return; }
 
+            _checkFlowerCells = Rand.Chance(ViviFlowerChance);
+            if (_checkFlowerCells)
+            {
+                _flowerCellQueue.Clear();
+            }
+
             var job = new ManaDiffusionJob()
             {
                 width = map.Size.x,
                 height = map.Size.z,
                 manaGrid = _manaGrid,
                 outputGrid = _tmpGrid,
+
+                checkFlowerCells = _checkFlowerCells,
+                flowerCellQueue = _flowerCellQueue,
             };
 
             _diffusionJobHandle = job.Schedule(map.cellIndices.NumGridCells, map.Size.x);

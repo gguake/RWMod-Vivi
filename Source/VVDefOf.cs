@@ -112,6 +112,11 @@ namespace VVRace
         public static ThingDef FueledSmithy;
 
         public static ThingDef VV_TitanicHornet;
+
+        public static ThingDef VV_Plant_FireArcaneFlower;
+        public static ThingDef VV_Plant_IceArcaneFlower;
+        public static ThingDef VV_Plant_LightningArcaneFlower;
+        public static ThingDef VV_Plant_LifeArcaneFlower;
     }
 
     [DefOf]
