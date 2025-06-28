@@ -14,6 +14,6 @@ namespace VVRace
         }
         private CompMana _manaComp;
 
-        protected override float DesiredPowerOutput => _manaComp.Active ? Props.PowerConsumption : 0f;
+        protected override float DesiredPowerOutput => ManaComp.Active ? -Props.PowerConsumption : 0f;
     }
 }

@@ -20,7 +20,7 @@ namespace VVRace
             var compPower = thing.TryGetComp<CompPower>();
             if (compPower == null) { return 0; }
 
-            return (int)Mathf.Clamp(compPower.PowerNet.CurrentEnergyGainRate() * powerManaRatio, min, max);
+            return (int)Mathf.Clamp(compPower.PowerNet.CurrentEnergyGainRate() * 60000 * powerManaRatio, min, max);
         }
     }
 }
