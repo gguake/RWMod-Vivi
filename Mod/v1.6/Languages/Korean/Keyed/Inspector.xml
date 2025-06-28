@@ -11,8 +11,8 @@
 <VV_Inspector_PlantStoredMana>저장된 마나: {0}/{1}</VV_Inspector_PlantStoredMana>
 <VV_Inspector_PlantActive>활성</VV_Inspector_PlantActive>
 <VV_Inspector_PlantInactive>비활성</VV_Inspector_PlantInactive>
-<VV_Inspector_PlantEmitMana>방출중</VV_Inspector_PlantEmitMana>
-<VV_Inspector_PlantAbsorbMana>흡수중</VV_Inspector_PlantAbsorbMana>
+<VV_Inspector_PlantEmitMana>환경 마나 방출중</VV_Inspector_PlantEmitMana>
+<VV_Inspector_PlantAbsorbMana>환경 마나 흡수중</VV_Inspector_PlantAbsorbMana>
 
 <VV_Inspector_ShootusWeaponReserved>예약됨: {0}</VV_Inspector_ShootusWeaponReserved>
 <VV_Inspector_ShootusWeaponEquipped>장착됨: {0}</VV_Inspector_ShootusWeaponEquipped>

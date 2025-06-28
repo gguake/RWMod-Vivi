@@ -301,6 +301,8 @@ namespace VVRace
 
         public Color GetCellExtraColor(int index)
         {
+            if (map.fogGrid.IsFogged(index)) { return new Color(0f, 0f, 0f, 0f); }
+
             Color color;
             var value = _manaGrid[index] + _manaReserveGrid[index];
             if (value < 250)
