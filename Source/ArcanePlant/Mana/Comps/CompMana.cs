@@ -134,10 +134,13 @@ namespace VVRace
                 desc.AppendLine();
                 desc.AppendInNewLine(Props.manaGenerateRule.GetRuleString());
 
+                var valueStr = Props.manaGenerateRule.FluxRangeForDisplay.TrueMax.ToString();
+                if (Props.manaGenerateRule is ManaFluxRule_Random) { valueStr = "???"; }
+
                 yield return new StatDrawEntry(
                     StatCategoryDefOf.Basics,
                     LocalizeString_Stat.VV_StatsReport_ManaGenerate.Translate(),
-                    Props.manaGenerateRule.FluxRangeForDisplay.TrueMax.ToString(),
+                    valueStr,
                     desc.ToString(),
                     -22201);
             }
@@ -149,10 +152,13 @@ namespace VVRace
                 desc.AppendLine();
                 desc.AppendInNewLine(Props.manaConsumeRule.GetRuleString());
 
+                var valueStr = Props.manaConsumeRule.FluxRangeForDisplay.TrueMax.ToString();
+                if (Props.manaConsumeRule is ManaFluxRule_Random) { valueStr = "???"; }
+
                 yield return new StatDrawEntry(
                     StatCategoryDefOf.Basics,
                     LocalizeString_Stat.VV_StatsReport_ManaConsume.Translate(),
-                    Props.manaConsumeRule.FluxRangeForDisplay.TrueMax.ToString(),
+                    valueStr,
                     desc.ToString(),
                     -22202);
             }

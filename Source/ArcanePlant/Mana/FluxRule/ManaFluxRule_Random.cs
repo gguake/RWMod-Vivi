@@ -13,7 +13,7 @@ namespace VVRace
 
         public override int CalcManaFlux(Thing thing)
         {
-            return min + Rand.Int % (max - min);
+            return Rand.Range(min, max);
         }
     }
 }
