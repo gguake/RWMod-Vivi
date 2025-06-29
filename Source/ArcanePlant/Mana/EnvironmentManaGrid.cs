@@ -32,8 +32,12 @@ namespace VVRace
 
         private CellBoolDrawer _cellBoolDrawer;
         private bool _drawManaOverlay;
+        public bool manaOverlaySetting;
 
         private HashSet<CompMana> _manaComps = new HashSet<CompMana>();
+
+        public bool HasAnyArcanePlant => _arcanePlantCount > 0;
+        private int _arcanePlantCount;
 
         public Color Color => new Color(1f, 1f, 1f);
 
@@ -55,8 +59,8 @@ namespace VVRace
 
             _cellBoolDrawer = new CellBoolDrawer(this, map.Size.x, map.Size.z, 3634, 0.5f);
 
-            map.events.ThingSpawned += Notify_BuildingSpawned;
-            map.events.ThingDespawned += Notify_BuildingDespawned;
+            map.events.ThingSpawned += Notify_ThingSpawned;
+            map.events.ThingDespawned += Notify_ThingDespawned;
         }
 
         public override void ExposeData()
@@ -68,6 +72,7 @@ namespace VVRace
             IOUtility.ScribeNativeFloatArray(ref _manaGrid, "encodedManaGrid");
 
             Scribe_Values.Look(ref _shouldUpdate, "shouldUpdateMana");
+            Scribe_Values.Look(ref manaOverlaySetting, "manaOverlaySetting");
         }
 
         public override void FinalizeInit()
@@ -81,6 +86,7 @@ namespace VVRace
         {
             if (!Find.ScreenshotModeHandler.Active)
             {
+                _drawManaOverlay = _drawManaOverlay || manaOverlaySetting;
                 if (_drawManaOverlay)
                 {
                     _cellBoolDrawer.MarkForDraw();
@@ -272,7 +278,7 @@ namespace VVRace
             _diffusionJobStart = false;
         }
 
-        private void Notify_BuildingSpawned(Thing thing)
+        private void Notify_ThingSpawned(Thing thing)
         {
             var comp = thing.TryGetComp<CompMana>();
             if (comp != null)
@@ -281,10 +287,20 @@ namespace VVRace
 
                 _cellBoolDrawer.SetDirty();
             }
+
+            if (thing is ArcanePlant)
+            {
+                _arcanePlantCount++;
+            }
         }
 
-        private void Notify_BuildingDespawned(Thing thing)
+        private void Notify_ThingDespawned(Thing thing)
         {
+            if (thing is ArcanePlant)
+            {
+                _arcanePlantCount--;
+            }
+
             var comp = thing.TryGetComp<CompMana>();
             if (comp != null)
             {

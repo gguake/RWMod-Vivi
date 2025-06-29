@@ -10,7 +10,7 @@ namespace VVRace
         public override IntRange FluxRangeForDisplay => new IntRange((int)manaFromFertility.MinY, (int)manaFromFertility.MaxY);
 
         public override string GetRuleString() =>
-            LocalizeString_Stat.VV_StatsReport_ManaFluxRule_Fertility_Desc.Translate(((int)manaFromFertility.MaxY).ToString("+0;-#"));
+            LocalizeString_Stat.VV_StatsReport_ManaFluxRule_Fertility_Desc.Translate(((int)manaFromFertility.Evaluate(1f)).ToString("+0;-#"));
 
         public override int CalcManaFlux(Thing thing)
         {

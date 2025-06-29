@@ -13,8 +13,7 @@
         public const string VV_GeneDefHoneyNeedDurationDesc = nameof(VV_GeneDefHoneyNeedDurationDesc);
         public const string VV_LastHoneyIngestedDurationAgo = nameof(VV_LastHoneyIngestedDurationAgo);
 
-        public const string VV_Reward_PurgeOutlanders = nameof(VV_Reward_PurgeOutlanders);
-        public const string VV_Reward_PurgeOutlandersDesc = nameof(VV_Reward_PurgeOutlandersDesc);
+        public const string VV_ShowManaOverlayTooltip = nameof(VV_ShowManaOverlayTooltip);
 
         public const string VV_ModSettings_AllowSelectModGenes = nameof(VV_ModSettings_AllowSelectModGenes);
         public const string VV_ModSettings_AllowSelectModGenesDesc = nameof(VV_ModSettings_AllowSelectModGenesDesc);

@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-<VV_PlantGatherCooldownInspectorString>Time remaining until next gathering: {0}</VV_PlantGatherCooldownInspectorString>
-
 <VV_JobFailReasonNoHarvestablePlants>No harvestable plants nearby</VV_JobFailReasonNoHarvestablePlants>
 <VV_JobFailReasonNoHarvestablePollenFilths>No harvestable pollen filths nearby</VV_JobFailReasonNoHarvestablePollenFilths>
 <VV_JobFailReasonNotVivi>Not Vivi</VV_JobFailReasonNotVivi>
-<VV_JobFailReasonViviStarving>Vivi is starving</VV_JobFailReasonViviStarving>
 <VV_JobFailReasonNoIngredients>No ingredients</VV_JobFailReasonNoIngredients>
 
 <VV_AbilityDisabledNoFood>{0_labelShort} cannot use this due to hunger</VV_AbilityDisabledNoFood>
@@ -13,6 +10,10 @@
 
 <VV_GeneDefHoneyNeedDurationDesc>{PAWN_nameDef} must consume honey regularly to survive. Suffering from deficiency worsens over time if {PAWN_nameDef} does not consume honey within {DEFICIENCYDURATION}.</VV_GeneDefHoneyNeedDurationDesc>
 <VV_LastHoneyIngestedDurationAgo>Last consumed honey {DURATION} ago.</VV_LastHoneyIngestedDurationAgo>
+
+<VV_ShowManaOverlayTooltip>Toggle environment mana overlay.
+\nEnvironmental mana is emitted or absorbed by rare plants or arcane plants, and it gradually spreads over time.
+\nWhen mana accumulates beyond a certain threshold, Vivia flowers may naturally appear, and some Vivi equipment can utilize environmental mana.</VV_ShowManaOverlayTooltip>
 
 <VV_ModSettings_AllowSelectModGenes>Allow added genes in mods</VV_ModSettings_AllowSelectModGenes>
 <VV_ModSettings_AllowSelectModGenesDesc>Sets whether Vivi can use genes added in other mods when given random genes.</VV_ModSettings_AllowSelectModGenesDesc>

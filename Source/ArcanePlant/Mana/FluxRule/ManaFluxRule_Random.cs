@@ -9,7 +9,7 @@ namespace VVRace
 
         public override IntRange FluxRangeForDisplay => new IntRange(-1, -1);
 
-        public override string GetRuleString() => $"?";
+        public override string GetRuleString() => $"+???";
 
         public override int CalcManaFlux(Thing thing)
         {

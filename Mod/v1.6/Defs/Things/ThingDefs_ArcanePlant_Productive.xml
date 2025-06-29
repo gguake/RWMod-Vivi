@@ -31,6 +31,7 @@
 
     <comps>
       <li Class="VVRace.CompProperties_Mana">
+        <manaCapacity>300</manaCapacity>
         <manaGenerateRule Class="VVRace.ManaFluxRule_Temperature">
           <activeTemperatureRange>0~200</activeTemperatureRange>
           <manaFromTemperatureRange>0~2000</manaFromTemperatureRange>
@@ -161,6 +162,7 @@
 
     <comps>
       <li Class="VVRace.CompProperties_Mana">
+        <manaCapacity>300</manaCapacity>
         <manaGenerateRule Class="VVRace.ManaFluxRule_CompositeSum">
           <rules>
             <li Class="VVRace.ManaFluxRule_Temperature">
@@ -299,11 +301,11 @@
 
     <comps>
       <li Class="VVRace.CompProperties_Mana">
-        <manaCapacity>1000</manaCapacity>
+        <manaCapacity>1500</manaCapacity>
         <manaConsumeRule Class="VVRace.ManaFluxRule_BatteryStored">
-          <manaFromStoredEnergy>0~900</manaFromStoredEnergy>
+          <manaFromStoredEnergy>0~750</manaFromStoredEnergy>
         </manaConsumeRule>
-        <manaAbsorbPerDay>1000</manaAbsorbPerDay>
+        <manaAbsorbPerDay>1500</manaAbsorbPerDay>
       </li>
 
       <li Class="VVRace.CompProperties_RepeatGatherable" />
@@ -444,11 +446,11 @@
         <manaGenerateRule Class="VVRace.ManaFluxRule_Power">
           <powerManaRatio>0.5</powerManaRatio>
           <min>0</min>
-          <max>950</max>
+          <max>1200</max>
         </manaGenerateRule>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>1000</mana>
+          <mana>1500</mana>
         </manaConsumeRule>
         <manaAbsorbPerDay>2000</manaAbsorbPerDay>
       </li>
@@ -582,7 +584,7 @@
         <manaGenerateRule Class="VVRace.ManaFluxRule_CompositeSum">
           <rules>
             <li Class="VVRace.ManaFluxRule_AdjacentWater">
-              <manaFromOccupiedWater>400</manaFromOccupiedWater>
+              <manaFromOccupiedWater>500</manaFromOccupiedWater>
               <manaPerAdjacentWater>100</manaPerAdjacentWater>
             </li>
             <li Class="VVRace.ManaFluxRule_WeatherRainy">
@@ -718,17 +720,17 @@
     <comps>
       <li Class="VVRace.CompProperties_Mana">
         <manaGenerateRule Class="VVRace.ManaFluxRule_Sunlight">
-          <manaFromSunlightRange>0~1800</manaFromSunlightRange>
+          <manaFromSunlightRange>0~2000</manaFromSunlightRange>
         </manaGenerateRule>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_CompositeSum">
           <rules>
             <li Class="VVRace.ManaFluxRule_GlowerActive">
-              <mana>1800</mana>
+              <mana>2000</mana>
             </li>
           </rules>
         </manaConsumeRule>
-        <manaAbsorbPerDay>1800</manaAbsorbPerDay>
+        <manaAbsorbPerDay>2000</manaAbsorbPerDay>
       </li>
 
       <li Class="VVRace.CompProperties_RepeatGatherable" />
@@ -983,7 +985,7 @@
           <radius>2.9</radius>
           <manaCurveFromDistanceSqr>
             <points>
-              <li>(0,400)</li>
+              <li>(0,500)</li>
               <li>(1,200)</li>
               <li>(4,100)</li>
               <li>(9,50)</li>

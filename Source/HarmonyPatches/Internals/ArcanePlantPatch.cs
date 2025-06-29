@@ -73,6 +73,10 @@ namespace VVRace
                 original: AccessTools.Method(typeof(Map), nameof(Map.MapPreTick)),
                 postfix: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(Map_MapPreTick_Postfix)));
 
+            harmony.Patch(
+                original: AccessTools.Method(typeof(PlaySettings), "DoMapControls"),
+                postfix: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(PlaySettings_DoMapControls_Postfix)));
+
             Log.Message("!! [ViViRace] arcane plant patch complete");
         }
 
@@ -347,6 +351,18 @@ namespace VVRace
             if (grid != null)
             {
                 grid.MapComponentPreTick();
+            }
+        }
+
+        private static void PlaySettings_DoMapControls_Postfix(WidgetRow row)
+        {
+            var manaGrid = Find.CurrentMap?.GetComponent<EnvironmentManaGrid>();
+            if (manaGrid != null && (VVResearchProjectDefOf.VV_ArcaneBotany.IsFinished || manaGrid.HasAnyArcanePlant))
+            {
+                row.ToggleableIcon(
+                    ref manaGrid.manaOverlaySetting, 
+                    TexButton.ShowRoofOverlay, 
+                    LocalizeString_Etc.VV_ShowManaOverlayTooltip.Translate());
             }
         }
     }

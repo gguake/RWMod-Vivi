@@ -11,8 +11,8 @@
 <VV_Inspector_PlantStoredMana>Stored Mana: {0}/{1}</VV_Inspector_PlantStoredMana>
 <VV_Inspector_PlantActive>Active</VV_Inspector_PlantActive>
 <VV_Inspector_PlantInactive>Inactive</VV_Inspector_PlantInactive>
-<VV_Inspector_PlantEmitMana>Emitting Mana</VV_Inspector_PlantEmitMana>
-<VV_Inspector_PlantAbsorbMana>Absorbing Mana</VV_Inspector_PlantAbsorbMana>
+<VV_Inspector_PlantEmitMana>Emitting Env.Mana</VV_Inspector_PlantEmitMana>
+<VV_Inspector_PlantAbsorbMana>Absorbing Env.Mana</VV_Inspector_PlantAbsorbMana>
 
 <VV_Inspector_ShootusWeaponReserved>Reserved: {0}</VV_Inspector_ShootusWeaponReserved>
 <VV_Inspector_ShootusWeaponEquipped>Equipped: {0}</VV_Inspector_ShootusWeaponEquipped>

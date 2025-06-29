@@ -43,7 +43,7 @@
         </manaGenerateRule>
         <manaConsumeRule Class="VVRace.ManaFluxRule_Random">
           <min>0</min>
-          <max>137</max>
+          <max>42</max>
         </manaConsumeRule>
       </li>
 

@@ -129,12 +129,32 @@ namespace VVRace
 
             if (Props.manaGenerateRule != null)
             {
+                var desc = new StringBuilder();
+                desc.Append(LocalizeString_Stat.VV_StatsReport_ManaGenerate_Desc.Translate());
+                desc.AppendLine();
+                desc.AppendInNewLine(Props.manaGenerateRule.GetRuleString());
 
+                yield return new StatDrawEntry(
+                    StatCategoryDefOf.Basics,
+                    LocalizeString_Stat.VV_StatsReport_ManaGenerate.Translate(),
+                    Props.manaGenerateRule.FluxRangeForDisplay.TrueMax.ToString(),
+                    desc.ToString(),
+                    -22201);
             }
 
             if (Props.manaConsumeRule != null)
             {
+                var desc = new StringBuilder();
+                desc.Append(LocalizeString_Stat.VV_StatsReport_ManaConsume_Desc.Translate());
+                desc.AppendLine();
+                desc.AppendInNewLine(Props.manaConsumeRule.GetRuleString());
 
+                yield return new StatDrawEntry(
+                    StatCategoryDefOf.Basics,
+                    LocalizeString_Stat.VV_StatsReport_ManaConsume.Translate(),
+                    Props.manaConsumeRule.FluxRangeForDisplay.TrueMax.ToString(),
+                    desc.ToString(),
+                    -22202);
             }
 
             if (Props.manaAbsorbPerDay > 0f)

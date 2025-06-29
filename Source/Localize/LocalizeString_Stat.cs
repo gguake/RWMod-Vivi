@@ -19,7 +19,6 @@
         public const string VV_StatsReport_ManaPerShootDesc = nameof(VV_StatsReport_ManaPerShootDesc);
 
         public const string VV_StatsReport_ManaFluxRule_AdjacentPlant_Desc = nameof(VV_StatsReport_ManaFluxRule_AdjacentPlant_Desc);
-        public const string VV_StatsReport_ManaFluxRule_AdjacentPollution_Desc = nameof(VV_StatsReport_ManaFluxRule_AdjacentPollution_Desc);
         public const string VV_StatsReport_ManaFluxRule_AdjacentWater_Desc = nameof(VV_StatsReport_ManaFluxRule_AdjacentWater_Desc);
         public const string VV_StatsReport_ManaFluxRule_BatteryStored_Desc = nameof(VV_StatsReport_ManaFluxRule_BatteryStored_Desc);
         public const string VV_StatsReport_ManaFluxRule_Constant_Desc = nameof(VV_StatsReport_ManaFluxRule_Constant_Desc);
