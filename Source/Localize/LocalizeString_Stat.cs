@@ -34,5 +34,6 @@
         public const string VV_StatsReport_ManaFluxRule_Wind_Desc = nameof(VV_StatsReport_ManaFluxRule_Wind_Desc);
         public const string VV_StatsReport_ManaFluxRule_RadialPollution_Desc = nameof(VV_StatsReport_ManaFluxRule_RadialPollution_Desc);
         public const string VV_StatsReport_ManaFluxRule_PlantGrowth_Desc = nameof(VV_StatsReport_ManaFluxRule_PlantGrowth_Desc);
+        public const string VV_StatsReport_ManaFluxRule_Fertility_Desc = nameof(VV_StatsReport_ManaFluxRule_Fertility_Desc);
     }
 }
