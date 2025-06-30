@@ -9,10 +9,10 @@ namespace VVRace
     public struct ManaDiffusionJob : IJobParallelFor
     {
         [ReadOnly]
-        public int width;
+        public int w;
 
         [ReadOnly]
-        public int height;
+        public int h;
 
         [ReadOnly]
         public NativeArray<float> manaGrid;
@@ -26,28 +26,34 @@ namespace VVRace
         [WriteOnly]
         public NativePriorityQueue<int, float, FloatMinComparer> flowerCellQueue;
 
-        public void Execute(int idx)
+        public void Execute(int i)
         {
-            var x = idx % width;
-            var y = idx / height;
+            var x = i % w;
+            var y = i / h;
 
-            var k = new float3(1, 2, 1);
-            var v1 = y > 0 ? 
-                new float3(x > 0 ? manaGrid[idx - width - 1] : 0f, manaGrid[idx - width], x < width - 1 ? manaGrid[idx - width + 1] : 0f) :
-                float3.zero;
+            var left = x > 0;
+            var up = y > 0;
+            var right = x < w - 1;
+            var down = y < h - 1;
 
-            var v2 = new float3(x > 0 ? manaGrid[idx - 1] : 0f, manaGrid[idx], x < width - 1 ? manaGrid[idx + 1] : 0f);
+            var v1 = new float4(
+                left && up ? manaGrid[i - 1 - w] : 0f,
+                right && up ? manaGrid[i + 1 - w] : 0f,
+                left && down ? manaGrid[i - 1 + w] : 0f,
+                right && down ? manaGrid[i + 1 + w] : 0f);
 
-            var v3 = y < height - 1 ?
-                new float3(x > 0 ? manaGrid[idx + width - 1] : 0f, manaGrid[idx + width], x < width - 1 ? manaGrid[idx + width + 1] : 0f) :
-                float3.zero;
+            var v2 = new float4(
+                left ? manaGrid[i - 1] : 0f,
+                up ? manaGrid[i - w] : 0f,
+                right ? manaGrid[i + 1] : 0f,
+                down ? manaGrid[i + w] : 0f);
 
-            var r = math.clamp(math.csum(k * (v1 + 2 * v2 + v3)) / 16f, 0f, EnvironmentManaGrid.EnvironmentManaMax);
-            outputGrid[idx] = r > 0.01f ? r : 0f;
+            var r = (math.csum(v1) + math.csum(v2) * 2f + manaGrid[i] * 4f) / 16f;
+            outputGrid[i] = r > 0.01f ? r > 1000f ? 1000f : r : 0f;
 
             if (checkFlowerCells && r >= 150f)
             {
-                flowerCellQueue.Enqueue(idx, -r);
+                flowerCellQueue.Enqueue(i, -math.clamp(r, 150f, 750f));
             }
         }
     }

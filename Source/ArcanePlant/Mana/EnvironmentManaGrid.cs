@@ -202,8 +202,10 @@ namespace VVRace
 
         public void Dispose()
         {
-            _flowerCellQueue.Dispose();
+            if (!_updateJobHandle.IsCompleted) { _updateJobHandle.Complete(); }
+            if (!_diffusionJobHandle.IsCompleted) { _diffusionJobHandle.Complete(); }
 
+            _flowerCellQueue.Dispose();
             _tmpGrid.Dispose();
             _manaGrid.Dispose();
             _manaReserveGrid.Dispose();
@@ -246,8 +248,8 @@ namespace VVRace
 
             var job = new ManaDiffusionJob()
             {
-                width = map.Size.x,
-                height = map.Size.z,
+                w = map.Size.x,
+                h = map.Size.z,
                 manaGrid = _manaGrid,
                 outputGrid = _tmpGrid,
 
