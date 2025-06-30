@@ -15,9 +15,6 @@ namespace VVRace
 
     public class ArcanePlantExtension : DefModExtension
     {
-        public int zeroManaDurableTicks = 15000;
-        
-        public int consumeManaPerVerbShoot = 0;
         public float idleTurnAnglePerTick = 0.1f;
         public Vector3 turretTopBaseOffset = Vector3.zero;
         public float turretTopBaseAngle = 0f;

@@ -7,6 +7,8 @@ namespace VVRace
 {
     public abstract class ArcanePlant_Turret : ArcanePlant, IAttackTarget, IAttackTargetSearcher, ILoadReferenceable
     {
+        public float ManaPerVerbShoot => Gun.GetStatValue(VVStatDefOf.VV_RangedWeapon_ManaCost);
+
         public ArcanePlantTurretTop TurretTop => _turretTop;
         protected ArcanePlantTurretTop _turretTop;
 
@@ -39,7 +41,10 @@ namespace VVRace
         {
             get
             {
-                return CompMana?.Active ?? true;
+                var compMana = CompMana;
+                if (compMana == null) { return false; }
+
+                return compMana.Active && compMana.Stored >= ManaPerVerbShoot * AttackVerb.BurstShotCount;
             }
         }
 
@@ -251,7 +256,7 @@ namespace VVRace
 
         protected virtual void BeginBurst()
         {
-            if (!Active) { return; }
+            if (!Active ) { return; }
 
             AttackVerb.TryStartCastOn(_currentTarget);
 

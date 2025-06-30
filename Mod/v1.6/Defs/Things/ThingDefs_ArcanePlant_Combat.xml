@@ -61,12 +61,6 @@
     </placeWorkers>
 
     <modExtensions>
-      <li Class="VVRace.ArcanePlantExtension">
-        <zeroManaDurableTicks>30000</zeroManaDurableTicks>
-        
-        <consumeManaPerVerbShoot>2</consumeManaPerVerbShoot>
-      </li>
-
       <li Class="VVRace.GrowingArcanePlantData">
         <ingredients>
           <VV_UnknownSeed>1</VV_UnknownSeed>
@@ -158,6 +152,7 @@
       <DeteriorationRate>0</DeteriorationRate>
       <Mass>40</Mass>
       <Flammability>0</Flammability>
+      <VV_RangedWeapon_ManaCost>5</VV_RangedWeapon_ManaCost>
     </statBases>
 
     <verbs>
@@ -310,9 +305,6 @@
 
     <modExtensions>
       <li Class="VVRace.ArcanePlantExtension">
-        <zeroManaDurableTicks>60000</zeroManaDurableTicks>
-        
-        <consumeManaPerVerbShoot>1</consumeManaPerVerbShoot>
         <idleTurnAnglePerTick>1</idleTurnAnglePerTick>
         <turretTopBaseOffset>(0.24,0.2,0.6)</turretTopBaseOffset>
         <turretTopBaseAngle>0</turretTopBaseAngle>
@@ -412,7 +404,7 @@
           <mana>30</mana>
         </manaConsumeRule>
 
-        <manaAbsorbPerDay>900</manaAbsorbPerDay>
+        <manaAbsorbPerDay>1500</manaAbsorbPerDay>
       </li>
     </comps>
 
@@ -437,12 +429,6 @@
     </placeWorkers>
 
     <modExtensions>
-      <li Class="VVRace.ArcanePlantExtension">
-        <zeroManaDurableTicks>30000</zeroManaDurableTicks>
-        
-        <consumeManaPerVerbShoot>18</consumeManaPerVerbShoot>
-      </li>
-
       <li Class="VVRace.GrowingArcanePlantData">
         <ingredients>
           <VV_UnknownSeed>1</VV_UnknownSeed>
@@ -570,10 +556,11 @@
       <DeteriorationRate>0</DeteriorationRate>
       <Mass>40</Mass>
       <Flammability>0</Flammability>
+      <VV_RangedWeapon_ManaCost>50</VV_RangedWeapon_ManaCost>
     </statBases>
 
     <verbs>
-      <li>
+      <li Class="VVRace.VerbProperties_ConsumeMana">
         <verbClass>VVRace.Verb_ShootWithMana</verbClass>
         <defaultProjectile>VV_Bullet_Corn</defaultProjectile>
         <warmupTime>0</warmupTime>

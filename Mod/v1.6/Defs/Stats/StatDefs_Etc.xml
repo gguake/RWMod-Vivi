@@ -13,4 +13,16 @@
     <minValue>0</minValue>
     <displayPriorityInCategory>3501</displayPriorityInCategory>
   </StatDef>
+  
+  <StatDef>
+    <defName>VV_RangedWeapon_ManaCost</defName>
+    <label>mana cost</label>
+    <description>A mana consumption per shoot.</description>
+    <category>Weapon_Ranged</category>
+    <defaultBaseValue>0</defaultBaseValue>
+    <minValue>0</minValue>
+    <toStringStyle>Integer</toStringStyle>
+    <showIfUndefined>true</showIfUndefined>
+    <displayPriorityInCategory>5107</displayPriorityInCategory>
+  </StatDef>
 </Defs>
