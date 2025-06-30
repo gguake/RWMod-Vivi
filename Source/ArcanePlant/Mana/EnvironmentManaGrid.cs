@@ -282,33 +282,39 @@ namespace VVRace
 
         private void Notify_ThingSpawned(Thing thing)
         {
-            var comp = thing.TryGetComp<CompMana>();
-            if (comp != null)
+            if (thing is Building || thing is Plant)
             {
-                _manaComps.Add(comp);
+                var comp = thing.TryGetComp<CompMana>();
+                if (comp != null)
+                {
+                    _manaComps.Add(comp);
 
-                _cellBoolDrawer.SetDirty();
-            }
+                    _cellBoolDrawer.SetDirty();
+                }
 
-            if (thing is ArcanePlant)
-            {
-                _arcanePlantCount++;
+                if (thing is ArcanePlant)
+                {
+                    _arcanePlantCount++;
+                }
             }
         }
 
         private void Notify_ThingDespawned(Thing thing)
         {
-            if (thing is ArcanePlant)
+            if (thing is Building || thing is Plant)
             {
-                _arcanePlantCount--;
-            }
+                if (thing is ArcanePlant)
+                {
+                    _arcanePlantCount--;
+                }
 
-            var comp = thing.TryGetComp<CompMana>();
-            if (comp != null)
-            {
-                _manaComps.Remove(comp);
+                var comp = thing.TryGetComp<CompMana>();
+                if (comp != null)
+                {
+                    _manaComps.Remove(comp);
 
-                _cellBoolDrawer.SetDirty();
+                    _cellBoolDrawer.SetDirty();
+                }
             }
         }
 
