@@ -63,11 +63,6 @@
         <spawnEffecter>VV_PollenEmitting</spawnEffecter>
       </li>
     </comps>
-
-    <modExtensions>
-      <li Class="VVRace.ArcanePlantExtension">
-      </li>
-    </modExtensions>
   </ThingDef>
 
 </Defs>

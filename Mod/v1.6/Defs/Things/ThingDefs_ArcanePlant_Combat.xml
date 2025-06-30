@@ -61,6 +61,9 @@
     </placeWorkers>
 
     <modExtensions>
+      <li Class="VVRace.ArcanePlantTurretExtension">
+      </li>
+
       <li Class="VVRace.GrowingArcanePlantData">
         <ingredients>
           <VV_UnknownSeed>1</VV_UnknownSeed>
@@ -126,7 +129,7 @@
     </graphicData>
     <projectile>
       <damageDef>Poke</damageDef>
-      <damageAmountBase>5</damageAmountBase>
+      <damageAmountBase>7</damageAmountBase>
       <armorPenetrationBase>0</armorPenetrationBase>
       <stoppingPower>1</stoppingPower>
       <speed>27</speed>
@@ -145,14 +148,14 @@
 
     <statBases>
       <AccuracyTouch>0.95</AccuracyTouch>
-      <AccuracyShort>0.78</AccuracyShort>
-      <AccuracyMedium>0.32</AccuracyMedium>
-      <AccuracyLong>0.15</AccuracyLong>
-      <RangedWeapon_Cooldown>3.8</RangedWeapon_Cooldown>
+      <AccuracyShort>0.82</AccuracyShort>
+      <AccuracyMedium>0.5</AccuracyMedium>
+      <AccuracyLong>0.24</AccuracyLong>
+      <RangedWeapon_Cooldown>2.0</RangedWeapon_Cooldown>
       <DeteriorationRate>0</DeteriorationRate>
       <Mass>40</Mass>
       <Flammability>0</Flammability>
-      <VV_RangedWeapon_ManaCost>5</VV_RangedWeapon_ManaCost>
+      <VV_RangedWeapon_ManaCost>8</VV_RangedWeapon_ManaCost>
     </statBases>
 
     <verbs>
@@ -160,9 +163,9 @@
         <verbClass>VVRace.Verb_ShootWithMana</verbClass>
         <defaultProjectile>VV_Bullet_Pea</defaultProjectile>
         <warmupTime>0</warmupTime>
-        <range>24.9</range>
+        <range>26.9</range>
         <ticksBetweenBurstShots>9</ticksBetweenBurstShots>
-        <burstShotCount>6</burstShotCount>
+        <burstShotCount>3</burstShotCount>
         <soundCast>ThumpCannon_Fire</soundCast>
         <soundCastTail>GunTail_Heavy</soundCastTail>
         <muzzleFlashScale>3</muzzleFlashScale>
@@ -190,7 +193,8 @@
     </graphicData>
     <drawerType>MapMeshAndRealTime</drawerType>
 
-    <uiIconOffset>(0,0.16)</uiIconOffset>
+    <uiIconPath>Things/Plants/VV_CactusIcon</uiIconPath>
+    <uiIconOffset>(0,0)</uiIconOffset>
     
     <pathCost>30</pathCost>
     <pathCostIgnoreRepeat>true</pathCostIgnoreRepeat>
@@ -304,13 +308,11 @@
     </placeWorkers>
 
     <modExtensions>
-      <li Class="VVRace.ArcanePlantExtension">
+      <li Class="VVRace.ArcanePlantTurretExtension">
         <idleTurnAnglePerTick>1</idleTurnAnglePerTick>
         <turretTopBaseOffset>(0.24,0.2,0.6)</turretTopBaseOffset>
         <turretTopBaseAngle>0</turretTopBaseAngle>
         <turretTopBaseFlippable>true</turretTopBaseFlippable>
-
-        <hasRandomDrawScale>false</hasRandomDrawScale>
       </li>
 
       <li Class="VVRace.GrowingArcanePlantData">
@@ -417,8 +419,8 @@
       <combatPower>125</combatPower>
       <ai_combatDangerous>true</ai_combatDangerous>
       <turretGunDef>VV_Gun_Cornlauncher</turretGunDef>
-      <turretBurstCooldownTime>5.7</turretBurstCooldownTime>
-      <turretBurstWarmupTime>2.3</turretBurstWarmupTime>
+      <turretBurstCooldownTime>3.1</turretBurstCooldownTime>
+      <turretBurstWarmupTime>1.3</turretBurstWarmupTime>
       <turretTopOffset>(0, 0.05)</turretTopOffset>
       <turretTopDrawSize>1</turretTopDrawSize>
     </building>
@@ -429,6 +431,9 @@
     </placeWorkers>
 
     <modExtensions>
+      <li Class="VVRace.ArcanePlantTurretExtension">
+      </li>
+
       <li Class="VVRace.GrowingArcanePlantData">
         <ingredients>
           <VV_UnknownSeed>1</VV_UnknownSeed>
@@ -500,7 +505,7 @@
     <projectile>
       <damageDef>Bomb</damageDef>
       <speed>50</speed>
-      <explosionRadius>1.1</explosionRadius>
+      <explosionRadius>1.9</explosionRadius>
       <damageAmountBase>30</damageAmountBase>
       <screenShakeFactor>0.25</screenShakeFactor>
     </projectile>
@@ -560,14 +565,13 @@
     </statBases>
 
     <verbs>
-      <li Class="VVRace.VerbProperties_ConsumeMana">
+      <li>
         <verbClass>VVRace.Verb_ShootWithMana</verbClass>
         <defaultProjectile>VV_Bullet_Corn</defaultProjectile>
         <warmupTime>0</warmupTime>
-        <range>36.9</range>
-        <ticksBetweenBurstShots>60</ticksBetweenBurstShots>
-        <burstShotCount>3</burstShotCount>
-        <forcedMissRadius>3.6</forcedMissRadius>
+        <range>39.9</range>
+        <burstShotCount>1</burstShotCount>
+        <forcedMissRadius>2.6</forcedMissRadius>
         <forcedMissEvenDispersal>true</forcedMissEvenDispersal>
         <soundCast>InfernoCannon_Fire</soundCast>
         <soundCastTail>GunTail_Heavy</soundCastTail>

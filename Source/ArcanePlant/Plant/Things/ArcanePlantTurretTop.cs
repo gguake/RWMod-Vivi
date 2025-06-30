@@ -94,11 +94,11 @@ namespace VVRace
             {
                 if (idleTurnClockwise)
                 {
-                    CurRotation += parent.ArcanePlantModExtension.idleTurnAnglePerTick;
+                    CurRotation += parent.ArcanePlantTurretExtension.idleTurnAnglePerTick;
                 }
                 else
                 {
-                    CurRotation -= parent.ArcanePlantModExtension.idleTurnAnglePerTick;
+                    CurRotation -= parent.ArcanePlantTurretExtension.idleTurnAnglePerTick;
                 }
 
                 idleTurnTicksLeft--;

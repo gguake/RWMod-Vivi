@@ -24,12 +24,14 @@ namespace VVRace
     {
         public CompProperties_Mana Props => (CompProperties_Mana)props;
 
+        public int ManaExternalChangeByDay => (int)(_manaExternalChange * 60000f / EnvironmentManaGrid.RefreshManaInterval);
+
         private float _manaGeneratesByDay;
         private float _manaConsumesByDay;
         private float _manaStored;
         private float _manaExternalChange;
 
-        private bool _manaActivated;
+        private bool _manaActivated = true;
 
         public bool Active => _manaActivated;
 
@@ -56,10 +58,9 @@ namespace VVRace
             }
         }
             
-
         public override void PostPostMake()
         {
-            _manaStored = 0;
+            _manaStored = Props.manaCapacity;
         }
 
         public override void PostExposeData()
@@ -83,11 +84,9 @@ namespace VVRace
         public override string CompInspectStringExtra()
         {
             var sb = new StringBuilder();
-            if (parent.Spawned)
+            if (parent.Spawned && (Props.manaGenerateRule != null || Props.manaConsumeRule != null))
             {
                 var netChange = _manaGeneratesByDay - _manaConsumesByDay;
-                var envChange = (int)(_manaExternalChange * 60000f / EnvironmentManaGrid.RefreshManaInterval);
-
                 var activeStr = Active ? 
                     LocalizeString_Inspector.VV_Inspector_PlantActive.Translate() : 
                     LocalizeString_Inspector.VV_Inspector_PlantInactive.Translate();
@@ -95,24 +94,25 @@ namespace VVRace
                 sb.Append(LocalizeString_Inspector.VV_Inspector_PlantManaFlux.Translate(
                     activeStr,
                     netChange.ToString("+0;-#")));
-
-                if (envChange != 0)
-                {
-                    sb.Append(", ");
-                    sb.Append(envChange > 0 ?
-                        LocalizeString_Inspector.VV_Inspector_PlantEmitMana.Translate() :
-                        LocalizeString_Inspector.VV_Inspector_PlantAbsorbMana.Translate());
-                }
-            }
-
-            if (Props.manaCapacity > 0f)
-            {
-                sb.AppendInNewLine(LocalizeString_Inspector.VV_Inspector_PlantStoredMana.Translate(
-                    (int)_manaStored, 
-                    Props.manaCapacity));
             }
 
             return sb.ToString();
+        }
+
+        public override IEnumerable<Gizmo> CompGetGizmosExtra()
+        {
+            if (Props.manaCapacity > 0)
+            {
+                yield return new ManaGizmo(this);
+            }
+        }
+
+        public override IEnumerable<Gizmo> CompGetWornGizmosExtra()
+        {
+            if (Props.manaCapacity > 0)
+            {
+                yield return new ManaGizmo(this);
+            }
         }
 
         public override IEnumerable<StatDrawEntry> SpecialDisplayStats()
@@ -175,6 +175,24 @@ namespace VVRace
 
         }
 
+        public override void PostDrawExtraSelectionOverlays()
+        {
+            if (parent.Spawned && parent is Building)
+            {
+                parent.Map.GetComponent<EnvironmentManaGrid>()?.MarkForDrawOverlay();
+            }
+        }
+
+        public override void PostSpawnSetup(bool respawningAfterLoad)
+        {
+            parent.MapHeld.GetComponent<EnvironmentManaGrid>().RegisterCompMana(this);
+        }
+
+        public override void PostDeSpawn(Map map, DestroyMode mode = DestroyMode.Vanish)
+        {
+            map.GetComponent<EnvironmentManaGrid>().UnregisterCompMana(this);
+        }
+
         public void RefreshMana(EnvironmentManaGrid manaGrid, int ticks)
         {
             _manaGeneratesByDay = Props.manaGenerateRule?.CalcManaFlux(parent) * parent.HitPoints / (float)parent.MaxHitPoints ?? 0f;
@@ -228,11 +246,6 @@ namespace VVRace
 
             _manaActivated = manaChange >= 0f;
             _manaExternalChange = manaGrid[parent.Position] - beforeExternalMana;
-        }
-
-        public override void PostDrawExtraSelectionOverlays()
-        {
-            parent.Map.GetComponent<EnvironmentManaGrid>()?.MarkForDrawOverlay();
         }
 
         public bool ShouldBeLitNow() => Active;

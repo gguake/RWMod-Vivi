@@ -7,7 +7,21 @@ namespace VVRace
 {
     public abstract class ArcanePlant_Turret : ArcanePlant, IAttackTarget, IAttackTargetSearcher, ILoadReferenceable
     {
-        public float ManaPerVerbShoot => Gun.GetStatValue(VVStatDefOf.VV_RangedWeapon_ManaCost);
+        public virtual float ManaPerVerbShoot => Gun.GetStatValue(VVStatDefOf.VV_RangedWeapon_ManaCost);
+
+        private ArcanePlantTurretExtension _arcanePlantTurretExtension;
+        public ArcanePlantTurretExtension ArcanePlantTurretExtension
+        {
+            get
+            {
+                if (_arcanePlantTurretExtension == null)
+                {
+                    _arcanePlantTurretExtension = def.GetModExtension<ArcanePlantTurretExtension>();
+                }
+
+                return _arcanePlantTurretExtension;
+            }
+        }
 
         public ArcanePlantTurretTop TurretTop => _turretTop;
         protected ArcanePlantTurretTop _turretTop;
@@ -29,8 +43,8 @@ namespace VVRace
         public abstract Thing Gun { get; }
 
         Verb IAttackTargetSearcher.CurrentEffectiveVerb => AttackVerb;
-        public Verb AttackVerb => GunCompEq.PrimaryVerb;
-        protected CompEquippable GunCompEq => Gun.TryGetComp<CompEquippable>();
+        public Verb AttackVerb => GunCompEq?.PrimaryVerb;
+        protected CompEquippable GunCompEq => Gun?.TryGetComp<CompEquippable>();
 
         public bool WarmingUp => _burstWarmupTicksLeft > 0;
         protected bool _burstActivated;
@@ -44,7 +58,7 @@ namespace VVRace
                 var compMana = CompMana;
                 if (compMana == null) { return false; }
 
-                return compMana.Active && compMana.Stored >= ManaPerVerbShoot * AttackVerb.BurstShotCount;
+                return compMana.Active;
             }
         }
 
@@ -53,7 +67,7 @@ namespace VVRace
             _turretTop = new ArcanePlantTurretTop(this);
         }
 
-        public virtual bool ThreatDisabled(IAttackTargetSearcher disabledFor) => !Active;
+        public virtual bool ThreatDisabled(IAttackTargetSearcher disabledFor) => !Active || !AttackVerb.Available();
 
         public override void ExposeData()
         {
@@ -256,7 +270,7 @@ namespace VVRace
 
         protected virtual void BeginBurst()
         {
-            if (!Active ) { return; }
+            if (!Active || !AttackVerb.Available()) { return; }
 
             AttackVerb.TryStartCastOn(_currentTarget);
 

@@ -2,4 +2,7 @@
 <LanguageData>
 <VV_Gizmo_ViviEggProgressHeader>산란 진행도</VV_Gizmo_ViviEggProgressHeader>
 <VV_Gizmo_ViviEggProgressTooltip>다음 알을 낳기까지 얼마나 남았는지를 나타냅니다.\n\n진행도가 100%인 상태에서 산란에 적합한 비비 부화기가 존재하면 그곳에 가서 알을 낳습니다.</VV_Gizmo_ViviEggProgressTooltip>
+
+<VV_Gizmo_ManaStorageHeader>마나 보유량</VV_Gizmo_ManaStorageHeader>
+<VV_Gizmo_ManaStorageTooltip>현재 대상이 보유한 마나량입니다. 마법 식물들이 방출한 환경 마나를 흡수해 마나를 충전할 수 있습니다.</VV_Gizmo_ManaStorageTooltip>
 </LanguageData>

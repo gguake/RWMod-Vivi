@@ -29,4 +29,7 @@
 <VV_GrowthPointsFactor.label>성장 등급 획득 속도</VV_GrowthPointsFactor.label>
 <VV_GrowthPointsFactor.description>어린이가 성장 등급을 얼마나 많이 획득하는지 나타냅니다.</VV_GrowthPointsFactor.description>
 
+<VV_RangedWeapon_ManaCost.label>마나 소모량</VV_RangedWeapon_ManaCost.label>
+<VV_RangedWeapon_ManaCost.description>무기를 발사할때마다 소모되는 마나의 양을 나타냅니다.</VV_RangedWeapon_ManaCost.description>
+
 </LanguageData>

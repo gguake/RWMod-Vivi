@@ -17,12 +17,12 @@
   <StatDef>
     <defName>VV_RangedWeapon_ManaCost</defName>
     <label>mana cost</label>
-    <description>A mana consumption per shoot.</description>
+    <description>The amount of mana consumed each time the weapon is fired.</description>
     <category>Weapon_Ranged</category>
     <defaultBaseValue>0</defaultBaseValue>
     <minValue>0</minValue>
     <toStringStyle>Integer</toStringStyle>
     <showIfUndefined>true</showIfUndefined>
-    <displayPriorityInCategory>5107</displayPriorityInCategory>
+    <displayPriorityInCategory>5120</displayPriorityInCategory>
   </StatDef>
 </Defs>

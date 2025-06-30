@@ -2,21 +2,21 @@
 <LanguageData>
 
 <VV_StatsReport_ManaStorage>최대 마나 비축량</VV_StatsReport_ManaStorage>
-<VV_StatsReport_ManaStorage_Desc>마법 식물이 최대로 저장할수 있는 마나의 양입니다.</VV_StatsReport_ManaStorage_Desc>
+<VV_StatsReport_ManaStorage_Desc>최대로 저장할수 있는 마나의 양입니다.</VV_StatsReport_ManaStorage_Desc>
 
 <VV_StatsReport_ManaGenerate>일일 최대 마나 생산량</VV_StatsReport_ManaGenerate>
-<VV_StatsReport_ManaGenerate_Desc>마법 식물이 매일 생산하는 마나의 최대값입니다. 마나 생산량은 특정 조건에 따라 변화합니다.
+<VV_StatsReport_ManaGenerate_Desc>매일 생산하는 마나의 최대값입니다. 마나 생산량은 특정 조건에 따라 변화합니다.
 \n비축이 불가능하거나 비축량을 초과해 생산되는 마나는 환경 마나로 전환되어 현재 위치를 중심으로 주변 땅에 천천히 퍼지며 다른 마법 식물들이 흡수할 수 있습니다.</VV_StatsReport_ManaGenerate_Desc>
 
 <VV_StatsReport_ManaConsume>일일 최대 마나 소비량</VV_StatsReport_ManaConsume>
-<VV_StatsReport_ManaConsume_Desc>마법 식물이 매일 소비하는 마나의 최대값입니다. 마나 소비량은 특정 조건에 따라 변화합니다.
+<VV_StatsReport_ManaConsume_Desc>매일 소비하는 마나의 최대값입니다. 마나 소비량은 특정 조건에 따라 변화합니다.
 \n마나 소비량이 생산량보다 많으면서 비축된 마나도 없다면 마법 식물의 기능이 동작하지 않습니다.</VV_StatsReport_ManaConsume_Desc>
 
 <VV_StatsReport_ManaAbsorb>일일 마나 흡수량</VV_StatsReport_ManaAbsorb>
-<VV_StatsReport_ManaAbsorb_Desc>마법 식물이 매일 흡수 가능한 환경 마나의 양입니다. 마나가 부족하거나 비축이 가능한 상태라면 환경 마나를 흡수해 소비합니다.</VV_StatsReport_ManaAbsorb_Desc>
+<VV_StatsReport_ManaAbsorb_Desc>매일 흡수 가능한 환경 마나의 양입니다. 마나가 부족하거나 비축이 가능한 상태라면 환경 마나를 흡수해 소비합니다.</VV_StatsReport_ManaAbsorb_Desc>
 
 <VV_StatsReport_ManaPerShoot>사격당 마나 소모량</VV_StatsReport_ManaPerShoot>
-<VV_StatsReport_ManaPerShootDesc>마법 식물이 사격할때마다 소모되는 마나의 양입니다.</VV_StatsReport_ManaPerShootDesc>
+<VV_StatsReport_ManaPerShootDesc>무기를 사격할때마다 소모되는 마나의 양입니다.</VV_StatsReport_ManaPerShootDesc>
 
 <VV_StatsReport_ManaFluxRule_AdjacentPlant_Desc>인접한 마법 식물마다 마나 {0}\n인접한 식물마다 마나 {0} (식물의 성장도에 비례)</VV_StatsReport_ManaFluxRule_AdjacentPlant_Desc>
 <VV_StatsReport_ManaFluxRule_AdjacentWater_Desc>물 위에 배치되어 있으면 마나 {0}\n인접한 물 1개당 마나 {1}</VV_StatsReport_ManaFluxRule_AdjacentWater_Desc>

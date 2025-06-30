@@ -124,13 +124,13 @@
     <defName>VV_EltexNeedle</defName>
     <label>vivi eltex needle</label>
     <description>A specially crafted sharp needle. Only vivi can handle it, and once equipped, it resonates with the wearer, becoming bound to them so that others cannot use it.
-\nWhen equipped, it allows the wearer to summon psychic needles that can move freely, ignoring the laws of physics, to attack enemies. These psychic needles can pass through all obstacles and will always hit their target. The higher the mental acuity, the faster the needles move and the more attacks can be made simultaneously.
-\nAfter the attack is completed, the needles return, and they must be retrieved before they can be used again.</description>
+\nWhen equipped, it allows the wearer to summon psychic needles that can move freely, ignoring the laws of physics, to attack enemies. These psychic needles can pass through all obstacles and will always hit their target. The higher the psychic sensitivity, the faster the needles move and the more attacks can be made simultaneously.
+\nAfter the attack is completed, the needles return and they must be retrieved before they can be used again.</description>
     <graphicData>
       <texPath>Things/Item/Equipment/VV_Needle</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <shaderType>CutoutComplex</shaderType>
-      <drawSize>1.3</drawSize>
+      <drawSize>1.0</drawSize>
     </graphicData>
     <equippedAngleOffset>-30</equippedAngleOffset>
     <soundInteract>Interact_BeatFire</soundInteract>
@@ -144,6 +144,7 @@
       <AccuracyMedium>1</AccuracyMedium>
       <AccuracyLong>1</AccuracyLong>
       <RangedWeapon_Cooldown>25.0</RangedWeapon_Cooldown>
+      <VV_RangedWeapon_ManaCost>40</VV_RangedWeapon_ManaCost>
     </statBases>
     <tradeNeverStack>true</tradeNeverStack>
     <relicChance>3</relicChance>
@@ -169,6 +170,10 @@
       <li Class="CompProperties_Biocodable">
         <biocodeOnEquip>true</biocodeOnEquip>
       </li>
+      <li Class="VVRace.CompProperties_Mana">
+        <manaCapacity>1000</manaCapacity>
+        <manaAbsorbPerDay>3000</manaAbsorbPerDay>
+      </li>
     </comps>
     <smeltable>false</smeltable>
     <burnableByRecipe>true</burnableByRecipe>
@@ -176,7 +181,7 @@
 
     <verbs>
       <li>
-        <verbClass>Verb_LaunchProjectile</verbClass>
+        <verbClass>VVRace.Verb_ShootWithMana</verbClass>
         <hasStandardCommand>true</hasStandardCommand>
         <defaultProjectile>VV_Projectile_EltexNeedle</defaultProjectile>
         <warmupTime>0.5</warmupTime>

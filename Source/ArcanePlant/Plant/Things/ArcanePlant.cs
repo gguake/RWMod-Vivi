@@ -19,25 +19,11 @@ namespace VVRace
                 if (_allArcanePlantDefs == null)
                 {
                     _allArcanePlantDefs = DefDatabase<ThingDef>.AllDefsListForReading
-                        .Where(def => def.GetModExtension<ArcanePlantExtension>() != null)
+                        .Where(def => typeof(ArcanePlant).IsAssignableFrom(def.thingClass))
                         .ToList();
                 }
 
                 return _allArcanePlantDefs;
-            }
-        }
-
-        private ArcanePlantExtension _arcanePlantExtension;
-        public ArcanePlantExtension ArcanePlantModExtension
-        {
-            get
-            {
-                if (_arcanePlantExtension == null)
-                {
-                    _arcanePlantExtension = def.GetModExtension<ArcanePlantExtension>();
-                }
-
-                return _arcanePlantExtension;
             }
         }
 
@@ -55,6 +41,8 @@ namespace VVRace
         private CompMana _cachedCompMana;
 
         protected virtual bool ShouldFlip => thingIDNumber % 2 == 0;
+
+        protected virtual bool HasRandomDrawScale => true;
 
         private bool _forceMinify = false;
         private int _nextGrowNearFlowerTick = 0;
@@ -95,7 +83,7 @@ namespace VVRace
                     isShift = true;
                 }
 
-                var scale = ArcanePlantModExtension.hasRandomDrawScale ? Rand.Range(0.9f, 1.1f) : 1f;
+                var scale = HasRandomDrawScale ? Rand.Range(0.9f, 1.1f) : 1f;
                 drawSize.Scale(new Vector2(scale, scale));
 
                 var isFlipUV = ShouldFlip;

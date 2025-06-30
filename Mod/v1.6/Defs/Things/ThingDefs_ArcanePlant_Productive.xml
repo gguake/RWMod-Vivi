@@ -61,23 +61,6 @@
     </researchPrerequisites>
 
     <modExtensions>
-      <li Class="VVRace.ArcanePlantExtension">
-        <passedBulletOverrides>
-          <li>
-            <thingDef>VV_Bullet_Pea</thingDef>
-            <damageDef>Flame</damageDef>
-            <amount>5</amount>
-            <armorPenetration>0</armorPenetration>
-            <chance>0.1</chance>
-          </li>
-        </passedBulletOverrides>
-
-        <growingAdjacentFlowerDef>VV_Plant_FireArcaneFlower</growingAdjacentFlowerDef>
-        <growingAdjacentFlowerIntervalTicks>45000~180000</growingAdjacentFlowerIntervalTicks>
-        <growingAdjacentFlowerChance>0.5</growingAdjacentFlowerChance>
-        <growingAdjacentFlowerRange>2.4</growingAdjacentFlowerRange>
-      </li>
-
       <li Class="VVRace.GrowingArcanePlantData">
         <ingredients>
           <VV_UnknownSeed>1</VV_UnknownSeed>
@@ -196,24 +179,6 @@
     </researchPrerequisites>
 
     <modExtensions>
-      <li Class="VVRace.ArcanePlantExtension">
-
-        <passedBulletOverrides>
-          <li>
-            <thingDef>VV_Bullet_Pea</thingDef>
-            <damageDef>Bullet</damageDef>
-            <amount>5</amount>
-            <armorPenetration>0.25</armorPenetration>
-            <chance>0.5</chance>
-          </li>
-        </passedBulletOverrides>
-
-        <growingAdjacentFlowerDef>VV_Plant_IceArcaneFlower</growingAdjacentFlowerDef>
-        <growingAdjacentFlowerIntervalTicks>45000~180000</growingAdjacentFlowerIntervalTicks>
-        <growingAdjacentFlowerChance>0.5</growingAdjacentFlowerChance>
-        <growingAdjacentFlowerRange>2.4</growingAdjacentFlowerRange>
-      </li>
-
       <li Class="VVRace.GrowingArcanePlantData">
         <ingredients>
           <VV_UnknownSeed>1</VV_UnknownSeed>
@@ -340,23 +305,6 @@
     </researchPrerequisites>
 
     <modExtensions>
-      <li Class="VVRace.ArcanePlantExtension">
-        <passedBulletOverrides>
-          <li>
-            <thingDef>VV_Bullet_Pea</thingDef>
-            <damageDef>Stun</damageDef>
-            <amount>10</amount>
-            <armorPenetration>0</armorPenetration>
-            <chance>0.025</chance>
-          </li>
-        </passedBulletOverrides>
-
-        <growingAdjacentFlowerDef>VV_Plant_LightningArcaneFlower</growingAdjacentFlowerDef>
-        <growingAdjacentFlowerIntervalTicks>45000~180000</growingAdjacentFlowerIntervalTicks>
-        <growingAdjacentFlowerChance>0.5</growingAdjacentFlowerChance>
-        <growingAdjacentFlowerRange>2.4</growingAdjacentFlowerRange>
-      </li>
-
       <li Class="VVRace.GrowingArcanePlantData">
         <ingredients>
           <VV_UnknownSeed>1</VV_UnknownSeed>
@@ -476,23 +424,6 @@
     </researchPrerequisites>
 
     <modExtensions>
-      <li Class="VVRace.ArcanePlantExtension">
-        <passedBulletOverrides>
-          <li>
-            <thingDef>VV_Bullet_Pea</thingDef>
-            <damageDef>Stun</damageDef>
-            <amount>10</amount>
-            <armorPenetration>0</armorPenetration>
-            <chance>0.025</chance>
-          </li>
-        </passedBulletOverrides>
-
-        <growingAdjacentFlowerDef>VV_Plant_LightningArcaneFlower</growingAdjacentFlowerDef>
-        <growingAdjacentFlowerIntervalTicks>45000~180000</growingAdjacentFlowerIntervalTicks>
-        <growingAdjacentFlowerChance>0.5</growingAdjacentFlowerChance>
-        <growingAdjacentFlowerRange>2.4</growingAdjacentFlowerRange>
-      </li>
-
       <li Class="VVRace.GrowingArcanePlantData">
         <ingredients>
           <VV_UnknownSeed>1</VV_UnknownSeed>
@@ -626,13 +557,6 @@
     </researchPrerequisites>
 
     <modExtensions>
-      <li Class="VVRace.ArcanePlantExtension">
-        <growingAdjacentFlowerDef>VV_Plant_IceArcaneFlower</growingAdjacentFlowerDef>
-        <growingAdjacentFlowerIntervalTicks>45000~180000</growingAdjacentFlowerIntervalTicks>
-        <growingAdjacentFlowerChance>0.5</growingAdjacentFlowerChance>
-        <growingAdjacentFlowerRange>2.4</growingAdjacentFlowerRange>
-      </li>
-
       <li Class="VVRace.GrowingArcanePlantData">
         <ingredients>
           <VV_UnknownSeed>1</VV_UnknownSeed>
@@ -750,13 +674,6 @@
     </researchPrerequisites>
 
     <modExtensions>
-      <li Class="VVRace.ArcanePlantExtension">
-        <growingAdjacentFlowerDef>VV_Plant_FireArcaneFlower</growingAdjacentFlowerDef>
-        <growingAdjacentFlowerIntervalTicks>45000~180000</growingAdjacentFlowerIntervalTicks>
-        <growingAdjacentFlowerChance>0.5</growingAdjacentFlowerChance>
-        <growingAdjacentFlowerRange>2.4</growingAdjacentFlowerRange>
-      </li>
-
       <li Class="VVRace.GrowingArcanePlantData">
         <ingredients>
           <VV_UnknownSeed>1</VV_UnknownSeed>
@@ -891,13 +808,6 @@
     </researchPrerequisites>
 
     <modExtensions>
-      <li Class="VVRace.ArcanePlantExtension">
-        <growingAdjacentFlowerDef>VV_Plant_LifeArcaneFlower</growingAdjacentFlowerDef>
-        <growingAdjacentFlowerIntervalTicks>45000~180000</growingAdjacentFlowerIntervalTicks>
-        <growingAdjacentFlowerChance>0.5</growingAdjacentFlowerChance>
-        <growingAdjacentFlowerRange>2.4</growingAdjacentFlowerRange>
-      </li>
-
       <li Class="VVRace.GrowingArcanePlantData">
         <ingredients>
           <VV_UnknownSeed>1</VV_UnknownSeed>
@@ -1029,13 +939,6 @@
     </researchPrerequisites>
 
     <modExtensions>
-      <li Class="VVRace.ArcanePlantExtension">
-        <growingAdjacentFlowerDef>VV_Plant_LifeArcaneFlower</growingAdjacentFlowerDef>
-        <growingAdjacentFlowerIntervalTicks>45000~180000</growingAdjacentFlowerIntervalTicks>
-        <growingAdjacentFlowerChance>0.5</growingAdjacentFlowerChance>
-        <growingAdjacentFlowerRange>2.4</growingAdjacentFlowerRange>
-      </li>
-
       <li Class="VVRace.GrowingArcanePlantData">
         <ingredients>
           <VV_UnknownSeed>1</VV_UnknownSeed>
@@ -1173,13 +1076,6 @@
     </researchPrerequisites>
 
     <modExtensions>
-      <li Class="VVRace.ArcanePlantExtension">
-        <growingAdjacentFlowerDef>VV_Plant_LifeArcaneFlower</growingAdjacentFlowerDef>
-        <growingAdjacentFlowerIntervalTicks>90000~180000</growingAdjacentFlowerIntervalTicks>
-        <growingAdjacentFlowerChance>0.25</growingAdjacentFlowerChance>
-        <growingAdjacentFlowerRange>2.4</growingAdjacentFlowerRange>
-      </li>
-
       <li Class="VVRace.GrowingArcanePlantData">
         <ingredients>
           <VV_UnknownSeed>1</VV_UnknownSeed>

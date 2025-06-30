@@ -9,6 +9,7 @@ namespace VVRace
     [StaticConstructorOnStartup]
     public class ArcanePlant_Shootus : ArcanePlant_Turret, IThingHolder, IThingHolderTickable, INotifyHauledTo, IConditionalGraphicProvider
     {
+        public override float ManaPerVerbShoot => 0;
         public override Thing Gun => _innerContainer.Count > 0 ? _innerContainer[0] : null;
         private ThingOwner _innerContainer;
 
@@ -18,7 +19,10 @@ namespace VVRace
         public int GraphicIndex => _innerContainer.Count > 0 ? 1 : 0;
 
         protected override bool ShouldFlip => Gun != null && TurretTop.CurRotation >= 180;
+
         public override bool Active => base.Active && _innerContainer.Count > 0;
+
+        protected override bool HasRandomDrawScale => false;
 
         public bool ShouldTickContents => true;
 
@@ -61,8 +65,8 @@ namespace VVRace
         {
             if (Gun != null)
             {
-                var topBaseOffset = ArcanePlantModExtension.turretTopBaseOffset;
-                if (ArcanePlantModExtension.turretTopBaseFlippable && TurretTop.CurRotation >= 180)
+                var topBaseOffset = ArcanePlantTurretExtension.turretTopBaseOffset;
+                if (ArcanePlantTurretExtension.turretTopBaseFlippable && TurretTop.CurRotation >= 180)
                 {
                     topBaseOffset.x = -topBaseOffset.x;
                 }
@@ -70,20 +74,15 @@ namespace VVRace
                 if (AttackVerb is Verb_LaunchProjectile verbLaunchProjectile)
                 {
                     EquipmentUtility.Recoil(Gun.def, verbLaunchProjectile, out var drawOffset, out var angleOffset, _turretTop.CurRotation);
-                    _turretTop.DrawTurret(topBaseOffset + drawOffset, ArcanePlantModExtension.turretTopBaseAngle + angleOffset);
+                    _turretTop.DrawTurret(topBaseOffset + drawOffset, ArcanePlantTurretExtension.turretTopBaseAngle + angleOffset);
                 }
                 else
                 {
-                    _turretTop.DrawTurret(topBaseOffset, ArcanePlantModExtension.turretTopBaseAngle);
+                    _turretTop.DrawTurret(topBaseOffset, ArcanePlantTurretExtension.turretTopBaseAngle);
                 }
             }
 
             base.DrawAt(drawLoc, flip);
-        }
-
-        protected override void BeginBurst()
-        {
-            base.BeginBurst();
         }
 
         protected override void BurstComplete()

@@ -58,9 +58,6 @@ namespace VVRace
             _flowerCellQueue = new NativePriorityQueue<int, float, FloatMinComparer>(map.cellIndices.NumGridCells, default(FloatMinComparer), Allocator.Persistent);
 
             _cellBoolDrawer = new CellBoolDrawer(this, map.Size.x, map.Size.z, 3634, 0.5f);
-
-            map.events.ThingSpawned += Notify_ThingSpawned;
-            map.events.ThingDespawned += Notify_ThingDespawned;
         }
 
         public override void ExposeData()
@@ -280,42 +277,24 @@ namespace VVRace
             _diffusionJobStart = false;
         }
 
-        private void Notify_ThingSpawned(Thing thing)
+        public void RegisterCompMana(CompMana comp)
         {
-            if (thing is Building || thing is Plant)
-            {
-                var comp = thing.TryGetComp<CompMana>();
-                if (comp != null)
-                {
-                    _manaComps.Add(comp);
+            if (comp == null) { return; }
 
-                    _cellBoolDrawer.SetDirty();
-                }
+            _manaComps.Add(comp);
+            _cellBoolDrawer.SetDirty();
 
-                if (thing is ArcanePlant)
-                {
-                    _arcanePlantCount++;
-                }
-            }
+            if (comp.parent is ArcanePlant) { _arcanePlantCount++; }
         }
 
-        private void Notify_ThingDespawned(Thing thing)
+        public void UnregisterCompMana(CompMana comp)
         {
-            if (thing is Building || thing is Plant)
-            {
-                if (thing is ArcanePlant)
-                {
-                    _arcanePlantCount--;
-                }
+            if (comp == null) { return; }
 
-                var comp = thing.TryGetComp<CompMana>();
-                if (comp != null)
-                {
-                    _manaComps.Remove(comp);
+            _manaComps.Add(comp);
+            _cellBoolDrawer.SetDirty();
 
-                    _cellBoolDrawer.SetDirty();
-                }
-            }
+            if (comp.parent is ArcanePlant) { _arcanePlantCount--; }
         }
 
         public bool GetCellBool(int index)

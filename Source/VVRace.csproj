@@ -92,6 +92,7 @@
     <Compile Include="ArcanePlant\Mana\FluxRule\ManaFluxRule_Random.cs" />
     <Compile Include="ArcanePlant\Mana\FluxRule\ManaFluxRule_PlantGrowth.cs" />
     <Compile Include="ArcanePlant\Mana\FluxRule\ManaFluxRule_Fertility.cs" />
+    <Compile Include="ArcanePlant\Mana\Gizmo\ManaGizmo.cs" />
     <Compile Include="ArcanePlant\Mana\Job\ManaUpdateJob.cs" />
     <Compile Include="ArcanePlant\Mana\Job\ManaDiffusionJob.cs" />
     <Compile Include="ArcanePlant\Mana\EnvironmentManaGrid.cs" />
@@ -122,7 +123,7 @@
     <Compile Include="ArcanePlant\Plant\Sensor\SensorWorker.cs" />
     <Compile Include="ArcanePlant\Plant\ArcanePlantDesignatorCache.cs" />
     <Compile Include="ArcanePlant\Plant\Things\ArcanePlantPot.cs" />
-    <Compile Include="ArcanePlant\Plant\ArcanePlantExtension.cs" />
+    <Compile Include="ArcanePlant\Plant\ArcanePlantTurretExtension.cs" />
     <Compile Include="ArcanePlant\Mana\Comps\CompManaGlower.cs" />
     <Compile Include="ArcanePlant\Mana\Comps\CompManaPowerPlant.cs" />
     <Compile Include="ArcanePlant\Plant\Designator_ReplantArcanePlant.cs" />
