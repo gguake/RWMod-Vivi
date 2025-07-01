@@ -9,7 +9,7 @@
   
   <VV_RitualLance.label>비비 예식용 창</VV_RitualLance.label>
   <VV_RitualLance.description>둥지를 위험에서 구해낸 비비들에게 하사되는 일종의 예식용 무기로 다양한 장식과 커다란 날이 달린 대형 창입니다. 손잡이의 길이에 비해 기형적인 크기의 날과 장식때문에 비비에게 최적화되어있어 비비만 사용할 수 있습니다.
-\n공격시 확률로 방어력을 완전히 관통하는 추가 피해를 입힙니다.</VV_RitualLance.description>
+\n환경 마나를 흡수해 마나를 충전할 수 있으며, 충전된 창은 놀라울 정도로 가벼워져 공격 속도가 매우 빨라지고 공격력과 관통력이 크게 증가합니다.</VV_RitualLance.description>
   <VV_RitualLance.tools.shaft.label>장대</VV_RitualLance.tools.shaft.label>
   <VV_RitualLance.tools.point.label>창끝</VV_RitualLance.tools.point.label>
   

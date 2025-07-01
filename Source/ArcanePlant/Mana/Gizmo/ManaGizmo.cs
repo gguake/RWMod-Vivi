@@ -9,15 +9,15 @@ namespace VVRace
         private static readonly Color EmptyBlockColor = new Color(0.3f, 0.3f, 0.3f, 1f);
         private static readonly Color FilledBlockColor = Color.grey;
 
-        private CompMana _compMana;
+        private CompMana _comp;
 
         public override float GetWidth(float maxWidth) => Width;
 
-        public override bool Visible => _compMana != null && Find.Selector.NumSelected == 1;
+        public override bool Visible => _comp != null && Find.Selector.NumSelected == 1;
 
         public ManaGizmo(CompMana compMana)
         {
-            _compMana = compMana;
+            _comp = compMana;
 
             Order = -100;
         }
@@ -30,7 +30,7 @@ namespace VVRace
             var mainRect = new RectDivider(backPanelRect.ContractedBy(6f), 686495832, margin: new Vector2(4f, 2f));
             var iconRect = mainRect.NewCol(64f);
             {
-                var thingIcon = _compMana.parent.UIIconOverride ?? _compMana.parent.def.GetUIIconForStuff(_compMana.parent.Stuff);
+                var thingIcon = _comp.parent.UIIconOverride ?? _comp.parent.def.GetUIIconForStuff(_comp.parent.Stuff);
                 if (thingIcon != null)
                 {
                     var r = new Rect(0f, 0f, 64f, 64f);
@@ -47,7 +47,7 @@ namespace VVRace
 
                 using (new TextBlock(GameFont.Tiny, TextAnchor.LowerLeft))
                 {
-                    var description = $"{_compMana.Stored.ToString("F0")}/{_compMana.Props.manaCapacity}";
+                    var description = $"{_comp.Stored.ToString("F0")}/{_comp.Props.manaCapacity}";
                     Widgets.Label(headerRow, description);
                 }
             }
@@ -56,14 +56,14 @@ namespace VVRace
             Widgets.DrawBoxSolid(progressRect, EmptyBlockColor);
 
             var frontRect = progressRect.ContractedBy(3f);
-            frontRect.width = frontRect.width * _compMana.StoredPct;
+            frontRect.width = frontRect.width * _comp.StoredPct;
 
             Widgets.DrawBoxSolid(frontRect, FilledBlockColor);
 
             TooltipHandler.TipRegion(
                 backPanelRect, 
                 LocalizeString_Gizmo.VV_Gizmo_ManaStorageTooltip.Translate(
-                    _compMana.ManaExternalChangeByDay));
+                    _comp.ManaExternalChangeByDay));
 
             if (Mouse.IsOver(backPanelRect))
             {

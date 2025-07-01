@@ -5,7 +5,7 @@
     <defName>VV_RitualLance</defName>
     <label>vivi ritual lance</label>
     <description>a large spear with various decorations and a large blade given in a form of ceremony to Vivi who saved the hive from danger. Due to the abnormal size of the blade and decorations compared to the length of the handle, only Vivi can use it as it is optimized for them.
-\nIt inflicts additional damage that completely penetrates the defense with a certain probability when attacking.</description>
+\nLance can absorb environmental mana to recharge and the recharged lance becomes remarkably light, significantly increasing attack speed, attack power and penetration.</description>
     <graphicData>
       <texPath>Things/Item/Equipment/VV_RitualLance</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -17,6 +17,7 @@
     <statBases>
       <WorkToMake>50000</WorkToMake>
       <Mass>4</Mass>
+      <VV_MeleeWeapon_ManaCost>25</VV_MeleeWeapon_ManaCost>
     </statBases>
     <equippedStatOffsets>
       <MoveSpeed>-0.8</MoveSpeed>
@@ -36,14 +37,34 @@
       <li>VV_ViviExotic</li>
     </weaponTags>
     
-    <comps>
-      <li>
-        <compClass>CompQuality</compClass>
+    <comps Inherit="False">
+      <li Class="VVRace.CompProperties_EquippableManaWeapon">
+        <statFactorCurves>
+          <MeleeWeapon_DamageMultiplier>
+            <points>
+              <li>(0, 1)</li>
+              <li>(1, 2)</li>
+            </points>
+          </MeleeWeapon_DamageMultiplier>
+          <MeleeWeapon_CooldownMultiplier>
+            <points>
+              <li>(0, 1)</li>
+              <li>(1, 0.5)</li>
+            </points>
+          </MeleeWeapon_CooldownMultiplier>
+        </statFactorCurves>
       </li>
+      <li><compClass>CompQuality</compClass></li>
+      <li Class="CompProperties_Forbiddable"/>
+      <li Class="CompProperties_Styleable"/>
       <li Class="CompProperties_Art">
         <nameMaker>NamerArtWeaponMelee</nameMaker>
         <descriptionMaker>ArtDescription_WeaponMelee</descriptionMaker>
         <minQualityForArtistic>Excellent</minQualityForArtistic>
+      </li>
+      <li Class="VVRace.CompProperties_Mana">
+        <manaCapacity>900</manaCapacity>
+        <manaAbsorbPerDay>600</manaAbsorbPerDay>
       </li>
     </comps>
     <smeltable>false</smeltable>
@@ -68,17 +89,7 @@
         </capacities>
         <power>27</power>
         <armorPenetration>0.3</armorPenetration>
-        <cooldownTime>3.9</cooldownTime>
-      </li>
-      <li>
-        <label>point</label>
-        <capacities>
-          <li>Stab</li>
-        </capacities>
-        <power>51</power>
-        <armorPenetration>0.9</armorPenetration>
-        <cooldownTime>3.9</cooldownTime>
-        <chanceFactor>0.33</chanceFactor>
+        <cooldownTime>3.6</cooldownTime>
       </li>
     </tools>
     
@@ -144,7 +155,7 @@
       <AccuracyMedium>1</AccuracyMedium>
       <AccuracyLong>1</AccuracyLong>
       <RangedWeapon_Cooldown>25.0</RangedWeapon_Cooldown>
-      <VV_RangedWeapon_ManaCost>40</VV_RangedWeapon_ManaCost>
+      <VV_RangedWeapon_ManaCost>15</VV_RangedWeapon_ManaCost>
     </statBases>
     <tradeNeverStack>true</tradeNeverStack>
     <relicChance>3</relicChance>
@@ -155,13 +166,14 @@
     </thingCategories>
     <weaponTags Inherit="False">
       <li>VV_ViviExotic</li>
-      <li>VV_ViviGuardian</li>
+      <li>VV_ViviNeedle</li>
     </weaponTags>
 
     <comps>
-      <li>
-        <compClass>CompQuality</compClass>
-      </li>
+      <li Class="VVRace.CompProperties_EquippableManaWeapon" />
+      <li><compClass>CompQuality</compClass></li>
+      <li Class="CompProperties_Forbiddable"/>
+      <li Class="CompProperties_Styleable"/>
       <li Class="CompProperties_Art">
         <nameMaker>NamerArtWeaponMelee</nameMaker>
         <descriptionMaker>ArtDescription_WeaponMelee</descriptionMaker>
@@ -171,8 +183,8 @@
         <biocodeOnEquip>true</biocodeOnEquip>
       </li>
       <li Class="VVRace.CompProperties_Mana">
-        <manaCapacity>1000</manaCapacity>
-        <manaAbsorbPerDay>3000</manaAbsorbPerDay>
+        <manaCapacity>1500</manaCapacity>
+        <manaAbsorbPerDay>500</manaAbsorbPerDay>
       </li>
     </comps>
     <smeltable>false</smeltable>

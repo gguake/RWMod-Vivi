@@ -5,22 +5,22 @@ namespace VVRace
 {
     public class Verb_ShootWithMana : Verb_Shoot
     {
-        private CompMana _compMana;
-        public CompMana CompMana
+        private CompMana _manaComp;
+        public CompMana ManaComp
         {
             get
             {
-                if (_compMana == null)
+                if (_manaComp == null)
                 { 
-                    _compMana = caster.TryGetComp<CompMana>();
+                    _manaComp = caster.TryGetComp<CompMana>();
                 }
 
-                if (_compMana == null)
+                if (_manaComp == null)
                 {
-                    _compMana = EquipmentSource?.TryGetComp<CompMana>();
+                    _manaComp = EquipmentSource?.TryGetComp<CompMana>();
                 }
 
-                return _compMana;
+                return _manaComp;
             }
         }
 
@@ -30,11 +30,11 @@ namespace VVRace
             {
                 if (Bursting)
                 {
-                    return CompMana.Stored >= EquipmentSource?.GetStatValue(VVStatDefOf.VV_RangedWeapon_ManaCost);
+                    return ManaComp.Stored >= EquipmentSource?.GetStatValue(VVStatDefOf.VV_RangedWeapon_ManaCost);
                 }
                 else
                 {
-                    return CompMana.Stored >= EquipmentSource?.GetStatValue(VVStatDefOf.VV_RangedWeapon_ManaCost) * BurstShotCount;
+                    return ManaComp.Stored >= EquipmentSource?.GetStatValue(VVStatDefOf.VV_RangedWeapon_ManaCost) * BurstShotCount;
                 }
             }
         }
@@ -66,7 +66,7 @@ namespace VVRace
 
         protected override bool TryCastShot()
         {
-            var compMana = CompMana;
+            var compMana = ManaComp;
             if (compMana == null) { return false; }
 
             var manaPerShoot = EquipmentSource?.GetStatValue(VVStatDefOf.VV_RangedWeapon_ManaCost) ?? 0;

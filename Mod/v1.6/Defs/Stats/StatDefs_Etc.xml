@@ -13,11 +13,23 @@
     <minValue>0</minValue>
     <displayPriorityInCategory>3501</displayPriorityInCategory>
   </StatDef>
+
+  <StatDef>
+    <defName>VV_MeleeWeapon_ManaCost</defName>
+    <label>melee mana cost</label>
+    <description>The amount of mana consumed each time the weapon used in melee combat. Even if mana is insufficient, it can still be used but it won't perform at its full potential.</description>
+    <category>Weapon_Melee</category>
+    <defaultBaseValue>0</defaultBaseValue>
+    <minValue>0</minValue>
+    <toStringStyle>Integer</toStringStyle>
+    <showIfUndefined>true</showIfUndefined>
+    <displayPriorityInCategory>4503</displayPriorityInCategory>
+  </StatDef>
   
   <StatDef>
     <defName>VV_RangedWeapon_ManaCost</defName>
-    <label>mana cost</label>
-    <description>The amount of mana consumed each time the weapon is fired.</description>
+    <label>ranged mana cost</label>
+    <description>The amount of mana consumed each time the weapon is fired. If mana is insufficient, weapon can no longer shoot.</description>
     <category>Weapon_Ranged</category>
     <defaultBaseValue>0</defaultBaseValue>
     <minValue>0</minValue>

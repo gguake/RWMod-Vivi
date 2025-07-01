@@ -18,6 +18,7 @@ namespace VVRace
         public static StatDef VV_TreeResinGatherYield;
 
         public static StatDef VV_GrowthPointsFactor;
+        public static StatDef VV_MeleeWeapon_ManaCost;
         public static StatDef VV_RangedWeapon_ManaCost;
     }
 

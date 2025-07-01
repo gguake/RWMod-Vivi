@@ -29,7 +29,10 @@
 <VV_GrowthPointsFactor.label>성장 등급 획득 속도</VV_GrowthPointsFactor.label>
 <VV_GrowthPointsFactor.description>어린이가 성장 등급을 얼마나 많이 획득하는지 나타냅니다.</VV_GrowthPointsFactor.description>
 
-<VV_RangedWeapon_ManaCost.label>마나 소모량</VV_RangedWeapon_ManaCost.label>
-<VV_RangedWeapon_ManaCost.description>무기를 발사할때마다 소모되는 마나의 양을 나타냅니다.</VV_RangedWeapon_ManaCost.description>
+<VV_MeleeWeapon_ManaCost.label>근접 마나 소모량</VV_MeleeWeapon_ManaCost.label>
+<VV_MeleeWeapon_ManaCost.description>무기를 근접전에서 사용할때마다 소모되는 마나의 양을 나타냅니다. 마나가 부족해도 여전히 사용할 수는 있지만 제 성능을 발휘하지는 못합니다.</VV_MeleeWeapon_ManaCost.description>
+
+<VV_RangedWeapon_ManaCost.label>사격 마나 소모량</VV_RangedWeapon_ManaCost.label>
+<VV_RangedWeapon_ManaCost.description>무기를 사격할때마다 소모되는 마나의 양을 나타냅니다. 마나가 부족하면 더이상 사격할 수 없습니다.</VV_RangedWeapon_ManaCost.description>
 
 </LanguageData>

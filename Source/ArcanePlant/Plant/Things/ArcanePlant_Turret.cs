@@ -55,7 +55,7 @@ namespace VVRace
         {
             get
             {
-                var compMana = CompMana;
+                var compMana = ManaComp;
                 if (compMana == null) { return false; }
 
                 return compMana.Active;

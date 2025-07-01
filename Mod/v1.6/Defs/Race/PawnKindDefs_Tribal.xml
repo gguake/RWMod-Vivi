@@ -138,7 +138,7 @@
 
     <weaponMoney>5000~10000</weaponMoney>
     <weaponTags>
-      <li>VV_ViviGuardian</li>
+      <li>VV_ViviNeedle</li>
     </weaponTags>
 
     <acceptArrestChanceFactor>0.5</acceptArrestChanceFactor>
@@ -179,7 +179,7 @@
 
     <weaponMoney>5000~10000</weaponMoney>
     <weaponTags>
-      <li>VV_ViviGuardian</li>
+      <li>VV_ViviNeedle</li>
     </weaponTags>
 
     <acceptArrestChanceFactor>0.1</acceptArrestChanceFactor>

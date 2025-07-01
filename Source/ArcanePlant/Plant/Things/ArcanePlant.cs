@@ -27,18 +27,18 @@ namespace VVRace
             }
         }
 
-        public CompMana CompMana
+        public CompMana ManaComp
         {
             get
             {
-                if (_cachedCompMana == null)
+                if (_cachedManaComp == null)
                 {
-                    _cachedCompMana = GetComp<CompMana>();
+                    _cachedManaComp = GetComp<CompMana>();
                 }
-                return _cachedCompMana;
+                return _cachedManaComp;
             }
         }
-        private CompMana _cachedCompMana;
+        private CompMana _cachedManaComp;
 
         protected virtual bool ShouldFlip => thingIDNumber % 2 == 0;
 

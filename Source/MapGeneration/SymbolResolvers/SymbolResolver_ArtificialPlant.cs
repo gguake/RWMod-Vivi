@@ -34,7 +34,7 @@ namespace VVRace
 
             if (thing is ArcanePlant plant)
             {
-                plant.CompMana.StoredPct = 1f;
+                plant.ManaComp.StoredPct = 1f;
             }
 
             GenSpawn.Spawn(
