@@ -7,7 +7,8 @@
 <VV_Command_UnequipWeapon>장착된 무기 해제</VV_Command_UnequipWeapon>
 
 <VV_Command_ActivateShield>보호막 활성화</VV_Command_ActivateShield>
-<VV_Command_ActivateShieldDesc>보유한 모든 마나를 소모하여 외부에서 들어오는 투사체를 차단하는 보호막을 활성화합니다. 보호막의 내구도는 소모된 마나에 비례하며 {0}동안 지속됩니다.</VV_Command_ActivateShieldDesc>
+<VV_Command_ActivateShieldDesc>보유한 모든 마나를 소모하여 외부에서 들어오는 투사체를 차단하는 보호막을 활성화합니다.
+\n보호막의 내구도는 소모된 마나에 비례하며 {0}동안 지속됩니다.</VV_Command_ActivateShieldDesc>
 <VV_Command_ActivateShieldAlreadyActivated>보호막이 이미 활성화 되어있음.</VV_Command_ActivateShieldAlreadyActivated>
 <VV_Command_ActivateShieldNotEnoughEnergy>마나가 최소 {0}이상 필요합니다.</VV_Command_ActivateShieldNotEnoughEnergy>
 

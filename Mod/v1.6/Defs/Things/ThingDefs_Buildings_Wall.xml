@@ -22,7 +22,7 @@
     <uiIconPath>Things/Building/VV_ViviCreamWall_MenuIcon</uiIconPath>
     <uiIconColor>(1.0, 0.9, 0.7, 1.0)</uiIconColor>
     <statBases>
-      <MaxHitPoints>60</MaxHitPoints>
+      <MaxHitPoints>50</MaxHitPoints>
       <WorkToBuild>80</WorkToBuild>
       <Flammability>1.0</Flammability>
       <Beauty>-2</Beauty>
@@ -43,41 +43,6 @@
     <researchPrerequisites>
       <li>VV_BasicInfra</li>
     </researchPrerequisites>
-    
-    <damageMultipliers Inherit="False">
-      <li>
-        <damageDef>Bullet</damageDef>
-        <multiplier>0.5</multiplier>
-      </li>
-      <li>
-        <damageDef>Arrow</damageDef>
-        <multiplier>0.5</multiplier>
-      </li>
-      <li>
-        <damageDef>Blunt</damageDef>
-        <multiplier>2</multiplier>
-      </li>
-      <li>
-        <damageDef>Poke</damageDef>
-        <multiplier>2</multiplier>
-      </li>
-      <li>
-        <damageDef>Demolish</damageDef>
-        <multiplier>2</multiplier>
-      </li>
-      <li>
-        <damageDef>Bomb</damageDef>
-        <multiplier>2</multiplier>
-      </li>
-      <li>
-        <damageDef>Thump</damageDef>
-        <multiplier>2</multiplier>
-      </li>
-      <li>
-        <damageDef>Flame</damageDef>
-        <multiplier>2</multiplier>
-      </li>
-    </damageMultipliers>
     
     <costStuffCount>0</costStuffCount>
     <stuffCategories Inherit="False"></stuffCategories>
@@ -103,7 +68,7 @@
     <uiIconPath>Things/Building/VV_UnfinishedHoneycombWall_Icon</uiIconPath>
     <uiIconColor>(1.0, 0.9, 0.7, 1.0)</uiIconColor>
     <statBases>
-      <MaxHitPoints>100</MaxHitPoints>
+      <MaxHitPoints>80</MaxHitPoints>
       <Flammability>0.9</Flammability>
     </statBases>
     <building>
@@ -118,47 +83,14 @@
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
     
     <designationCategory Inherit="False" />
-    <comps Inherit="False">
+    <comps>
       <li Class="VVRace.CompProperties_CompWallReplace">
         <replaceTicks>540000</replaceTicks>
         <replaceThing>VV_ViviHoneycombWall</replaceThing>
       </li>
+
+      <li><compClass>VVRace.CompViviHoneycombWall</compClass></li>
     </comps>
-    
-    <damageMultipliers Inherit="False">
-      <li>
-        <damageDef>Bullet</damageDef>
-        <multiplier>0.5</multiplier>
-      </li>
-      <li>
-        <damageDef>Arrow</damageDef>
-        <multiplier>0.5</multiplier>
-      </li>
-      <li>
-        <damageDef>Blunt</damageDef>
-        <multiplier>2</multiplier>
-      </li>
-      <li>
-        <damageDef>Poke</damageDef>
-        <multiplier>2</multiplier>
-      </li>
-      <li>
-        <damageDef>Demolish</damageDef>
-        <multiplier>2</multiplier>
-      </li>
-      <li>
-        <damageDef>Bomb</damageDef>
-        <multiplier>2</multiplier>
-      </li>
-      <li>
-        <damageDef>Thump</damageDef>
-        <multiplier>2</multiplier>
-      </li>
-      <li>
-        <damageDef>Flame</damageDef>
-        <multiplier>2</multiplier>
-      </li>
-    </damageMultipliers>
     
     <costStuffCount>0</costStuffCount>
     <stuffCategories Inherit="False"></stuffCategories>
@@ -181,7 +113,7 @@
     <uiIconPath>Things/Building/VV_HoneycombWall_Icon</uiIconPath>
     <uiIconColor>(1.0, 0.8, 0.6, 1.0)</uiIconColor>
     <statBases>
-      <MaxHitPoints>840</MaxHitPoints>
+      <MaxHitPoints>620</MaxHitPoints>
       <Flammability>0.55</Flammability>
     </statBases>
     <building>
@@ -196,24 +128,6 @@
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
     
     <designationCategory Inherit="False" />
-    <damageMultipliers Inherit="False">
-      <li>
-        <damageDef>Bomb</damageDef>
-        <multiplier>2</multiplier>
-      </li>
-      <li>
-        <damageDef>Thump</damageDef>
-        <multiplier>2</multiplier>
-      </li>
-      <li>
-        <damageDef>Flame</damageDef>
-        <multiplier>8</multiplier>
-      </li>
-      <li>
-        <damageDef>Burn</damageDef>
-        <multiplier>8</multiplier>
-      </li>
-    </damageMultipliers>
     
     <costStuffCount>0</costStuffCount>
     <stuffCategories Inherit="False"></stuffCategories>
@@ -224,6 +138,8 @@
         <designationDef>VV_FortifyHoneycombWall</designationDef>
         <researchProjectDef>VV_Lifestrand</researchProjectDef>
       </li>
+
+      <li><compClass>VVRace.CompViviHoneycombWall</compClass></li>
     </comps>
   </ThingDef>
   
@@ -244,7 +160,7 @@
     <uiIconPath>Things/Building/VV_HardenHoneycombWall_Icon</uiIconPath>
     <uiIconColor>(1.0, 0.8, 0.6, 1.0)</uiIconColor>
     <statBases>
-      <MaxHitPoints>700</MaxHitPoints>
+      <MaxHitPoints>620</MaxHitPoints>
       <Flammability>0</Flammability>
     </statBases>
     <building>
@@ -260,28 +176,14 @@
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
     
     <designationCategory Inherit="False" />
-    <damageMultipliers Inherit="False">
-      <li>
-        <damageDef>Bomb</damageDef>
-        <multiplier>2</multiplier>
-      </li>
-      <li>
-        <damageDef>Thump</damageDef>
-        <multiplier>2</multiplier>
-      </li>
-      <li>
-        <damageDef>Flame</damageDef>
-        <multiplier>0.25</multiplier>
-      </li>
-      <li>
-        <damageDef>Burn</damageDef>
-        <multiplier>0.25</multiplier>
-      </li>
-    </damageMultipliers>
     
     <costStuffCount>0</costStuffCount>
     <stuffCategories Inherit="False"></stuffCategories>
     
+    <comps>
+      <li><compClass>VVRace.CompViviHoneycombWall</compClass></li>
+    </comps>
+  
     <researchPrerequisites>
       <li>VV_Lifestrand</li>
     </researchPrerequisites>

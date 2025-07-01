@@ -5,9 +5,8 @@ namespace VVRace
 {
     public class ManaGizmo : Gizmo
     {
-        private const float Width = 200f;
-        private static readonly Color EmptyBlockColor = new Color(0.3f, 0.3f, 0.3f, 1f);
-        private static readonly Color FilledBlockColor = Color.grey;
+        private const float Width = 160f;
+        private static readonly Color EmptyBlockColor = new Color(0.2f, 0.2f, 0.24f, 1f);
 
         private CompMana _comp;
 
@@ -27,43 +26,38 @@ namespace VVRace
             var backPanelRect = new Rect(topLeft.x, topLeft.y, GetWidth(maxWidth), Height);
             Widgets.DrawWindowBackground(backPanelRect);
 
-            var mainRect = new RectDivider(backPanelRect.ContractedBy(6f), 686495832, margin: new Vector2(4f, 2f));
-            var iconRect = mainRect.NewCol(64f);
-            {
-                var thingIcon = _comp.parent.UIIconOverride ?? _comp.parent.def.GetUIIconForStuff(_comp.parent.Stuff);
-                if (thingIcon != null)
-                {
-                    var r = new Rect(0f, 0f, 64f, 64f);
-                    r.center = iconRect.Rect.center;
-                    Widgets.DrawTextureFitted(r, thingIcon, 1f, );
-                }
-            }
-            var headerRow = mainRect.NewRow(40f);
-            {
-                using (new TextBlock(GameFont.Small, TextAnchor.UpperLeft))
-                {
-                    Widgets.Label(headerRow, LocalizeString_Gizmo.VV_Gizmo_ManaStorageHeader.Translate());
-                }
+            var mainRect = new RectDivider(backPanelRect.ContractedBy(5f), 686495832, margin: new Vector2(4f, 1f));
 
+            var upperRect = mainRect.NewRow(38f);
+            {
+                var labelRect = upperRect.NewRow(19f, marginOverride: 0f);
+                using (new TextBlock(GameFont.Tiny, TextAnchor.UpperLeft))
+                {
+                    Widgets.LabelEllipses(upperRect, _comp.parent.LabelShortCap);
+                }
                 using (new TextBlock(GameFont.Tiny, TextAnchor.LowerLeft))
                 {
-                    var description = $"{_comp.Stored.ToString("F0")}/{_comp.Props.manaCapacity}";
-                    Widgets.Label(headerRow, description);
+                    Widgets.Label(labelRect, LocalizeString_Gizmo.VV_Gizmo_ManaStorageHeader.Translate());
                 }
             }
 
-            var progressRect = mainRect.Rect;
-            Widgets.DrawBoxSolid(progressRect, EmptyBlockColor);
+            var progressRect = mainRect.Rect.ContractedBy(2f);
+            var progressBarRect = progressRect;
+            progressBarRect.width = progressRect.width * _comp.StoredPct;
 
-            var frontRect = progressRect.ContractedBy(3f);
-            frontRect.width = frontRect.width * _comp.StoredPct;
+            Widgets.DrawBoxSolid(progressBarRect, EmptyBlockColor);
 
-            Widgets.DrawBoxSolid(frontRect, FilledBlockColor);
+            using (new TextBlock(GameFont.Tiny, TextAnchor.MiddleCenter))
+            {
+                var progressText = $"{_comp.Stored.ToString("F0")}/{_comp.Props.manaCapacity}";
+                Widgets.Label(progressRect, progressText);
+            }
 
             TooltipHandler.TipRegion(
                 backPanelRect, 
                 LocalizeString_Gizmo.VV_Gizmo_ManaStorageTooltip.Translate(
-                    _comp.ManaExternalChangeByDay));
+                    _comp.parent.LabelCap.Colorize(Color.yellow).Named("THING"),
+                    (-_comp.ManaExternalChangeByDay).ToString().Colorize(Color.yellow).Named("DAILYMANA")));
 
             if (Mouse.IsOver(backPanelRect))
             {

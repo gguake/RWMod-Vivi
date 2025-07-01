@@ -5,7 +5,7 @@ using Verse;
 
 namespace VVRace
 {
-    public struct ManaWeaponStatModifier
+    public class ManaWeaponStatModifier
     {
         public StatDef stat;
         public SimpleCurve curve;
@@ -27,34 +27,36 @@ namespace VVRace
 
         public float GetStatOffset(StatDef stat, float t)
         {
-            if (!_offsetCurveDict.TryGetValue(stat, out var curve))
+            if (_offsetCurveDict == null)
             {
-                var data = statOffsetCurves.FirstOrDefault(v => v.stat == stat);
-                if (data.stat == stat)
+                _offsetCurveDict = new Dictionary<StatDef, SimpleCurve>();
+                if (statOffsetCurves != null)
                 {
-                    curve = data.curve;
+                    foreach (var mod in statOffsetCurves)
+                    {
+                        _offsetCurveDict.Add(mod.stat, mod.curve);
+                    }
                 }
-
-                _offsetCurveDict.Add(stat, curve);
             }
 
-            return curve != null ? curve.Evaluate(t) : 0f;
+            return _offsetCurveDict.TryGetValue(stat, out var curve) ? curve.Evaluate(t) : 0f;
         }
 
         public float GetStatFactor(StatDef stat, float t)
         {
-            if (!_factorCurveDict.TryGetValue(stat, out var curve))
+            if (_factorCurveDict == null)
             {
-                var data = statFactorCurves.FirstOrDefault(v => v.stat == stat);
-                if (data.stat == stat)
+                _factorCurveDict = new Dictionary<StatDef, SimpleCurve>();
+                if (statFactorCurves != null)
                 {
-                    curve = data.curve;
+                    foreach (var mod in statFactorCurves)
+                    {
+                        _factorCurveDict.Add(mod.stat, mod.curve);
+                    }
                 }
-
-                _factorCurveDict.Add(stat, curve);
             }
 
-            return curve != null ? curve.Evaluate(t) : 1f;
+            return _factorCurveDict.TryGetValue(stat, out var curve) ? curve.Evaluate(t) : 1f;
         }
 
         public CompProperties_EquippableManaWeapon()
@@ -95,7 +97,10 @@ namespace VVRace
 
         public override IEnumerable<Gizmo> CompGetEquippedGizmosExtra()
         {
-            yield return new ManaGizmo(ManaComp);
+            if (Holder?.Faction?.IsPlayer ?? false)
+            {
+                yield return new ManaGizmo(ManaComp);
+            }
         }
 
         public override void Notify_UsedWeapon(Pawn pawn)
@@ -103,7 +108,7 @@ namespace VVRace
             if (parent.def.IsMeleeWeapon)
             {
                 var cost = parent.GetStatValue(VVStatDefOf.VV_MeleeWeapon_ManaCost);
-                if (cost > 0 && ManaComp.Stored > cost)
+                if (cost > 0 && ManaComp.Stored >= cost)
                 {
                     ManaComp.Stored -= cost;
                 }

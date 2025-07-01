@@ -4,5 +4,8 @@
 <VV_Gizmo_ViviEggProgressTooltip>다음 알을 낳기까지 얼마나 남았는지를 나타냅니다.\n\n진행도가 100%인 상태에서 산란에 적합한 비비 부화기가 존재하면 그곳에 가서 알을 낳습니다.</VV_Gizmo_ViviEggProgressTooltip>
 
 <VV_Gizmo_ManaStorageHeader>마나 보유량</VV_Gizmo_ManaStorageHeader>
-<VV_Gizmo_ManaStorageTooltip>현재 대상이 보유한 마나량입니다. 마법 식물들이 방출한 환경 마나를 흡수해 마나를 충전할 수 있습니다.</VV_Gizmo_ManaStorageTooltip>
+<VV_Gizmo_ManaStorageTooltip>현재 {THING}이(가) 보유한 마나량입니다.
+\n마법 식물들이 방출한 환경 마나를 흡수해 마나를 충전할 수 있으며 환경 마나가 분포한 지역에 위치하면 천천히 마나를 흡수합니다.
+\n현재 위치에서 하루에 {DAILYMANA}의 환경 마나를 흡수하고 있습니다.
+</VV_Gizmo_ManaStorageTooltip>
 </LanguageData>

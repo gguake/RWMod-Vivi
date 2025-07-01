@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using Verse;
+using Verse.Noise;
 
 namespace VVRace
 {
@@ -32,6 +33,8 @@ namespace VVRace
         private float _manaExternalChange;
 
         private bool _manaActivated = true;
+
+        private Map _registeredMap;
 
         public bool Active => _manaActivated;
 
@@ -101,17 +104,23 @@ namespace VVRace
 
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
         {
-            if (Props.manaCapacity > 0)
+            if (parent.Faction == null || !parent.Faction.HostileTo(Faction.OfPlayer))
             {
-                yield return new ManaGizmo(this);
+                if (Props.manaCapacity > 0)
+                {
+                    yield return new ManaGizmo(this);
+                }
             }
         }
 
         public override IEnumerable<Gizmo> CompGetWornGizmosExtra()
         {
-            if (Props.manaCapacity > 0)
+            if (parent.Faction == null || !parent.Faction.HostileTo(Faction.OfPlayer))
             {
-                yield return new ManaGizmo(this);
+                if (Props.manaCapacity > 0)
+                {
+                    yield return new ManaGizmo(this);
+                }
             }
         }
 
@@ -186,10 +195,12 @@ namespace VVRace
         public override void PostSpawnSetup(bool respawningAfterLoad)
         {
             parent.MapHeld.GetComponent<EnvironmentManaGrid>().RegisterCompMana(this);
+            _registeredMap = parent.MapHeld;
         }
 
         public override void PostDeSpawn(Map map, DestroyMode mode = DestroyMode.Vanish)
         {
+            _registeredMap = null;
             map.GetComponent<EnvironmentManaGrid>().UnregisterCompMana(this);
         }
 

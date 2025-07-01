@@ -291,7 +291,7 @@ namespace VVRace
         {
             if (comp == null) { return; }
 
-            _manaComps.Add(comp);
+            _manaComps.Remove(comp);
             _cellBoolDrawer.SetDirty();
 
             if (comp.parent is ArcanePlant) { _arcanePlantCount--; }

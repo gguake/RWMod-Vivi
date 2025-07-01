@@ -33,7 +33,10 @@ namespace VVRace
             var innerRect = backPanelRect.ContractedBy(6f);
 
             var headerRect = new Rect(innerRect.x, innerRect.y, innerRect.width, HeaderHeight);
-            Widgets.Label(headerRect, LocalizeString_Gizmo.VV_Gizmo_ViviEggProgressHeader.Translate());
+            using (new TextBlock(GameFont.Tiny))
+            {
+                Widgets.Label(headerRect, LocalizeString_Gizmo.VV_Gizmo_ViviEggProgressHeader.Translate());
+            }
 
             var descriptionRect = new Rect(innerRect.x, headerRect.yMax + 2f, innerRect.width, HeaderHeight);
             using (new TextBlock(GameFont.Tiny))

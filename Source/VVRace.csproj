@@ -248,6 +248,7 @@
     <Compile Include="Wall\AI\JobDriver_FortifyHoneycombWall.cs" />
     <Compile Include="Wall\AI\WorkGiver_FortifyHoneycombWall.cs" />
     <Compile Include="Wall\Comps\CompShowDesignator.cs" />
+    <Compile Include="Wall\Comps\CompViviHoneycombWall.cs" />
     <Compile Include="Wall\Comps\CompWallReplace.cs" />
     <Compile Include="Vivi\Need_RoyalJelly.cs" />
     <Compile Include="Egg\UI\EggProgressGizmo.cs" />

@@ -43,7 +43,7 @@
           <MeleeWeapon_DamageMultiplier>
             <points>
               <li>(0, 1)</li>
-              <li>(1, 2)</li>
+              <li>(1, 1.5)</li>
             </points>
           </MeleeWeapon_DamageMultiplier>
           <MeleeWeapon_CooldownMultiplier>
@@ -79,7 +79,7 @@
           <li>Poke</li>
         </capacities>
         <power>12</power>
-        <cooldownTime>1.7</cooldownTime>
+        <cooldownTime>1.8</cooldownTime>
         <chanceFactor>0.33</chanceFactor>
       </li>
       <li>
@@ -169,7 +169,7 @@
       <li>VV_ViviNeedle</li>
     </weaponTags>
 
-    <comps>
+    <comps Inherit="False">
       <li Class="VVRace.CompProperties_EquippableManaWeapon" />
       <li><compClass>CompQuality</compClass></li>
       <li Class="CompProperties_Forbiddable"/>
