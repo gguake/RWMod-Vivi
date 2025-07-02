@@ -65,6 +65,7 @@
       <li Class="VVRace.CompProperties_Mana">
         <manaCapacity>900</manaCapacity>
         <manaAbsorbPerDay>600</manaAbsorbPerDay>
+        <workOnlySpawned>false</workOnlySpawned>
       </li>
     </comps>
     <smeltable>false</smeltable>
@@ -185,6 +186,7 @@
       <li Class="VVRace.CompProperties_Mana">
         <manaCapacity>1500</manaCapacity>
         <manaAbsorbPerDay>500</manaAbsorbPerDay>
+        <workOnlySpawned>false</workOnlySpawned>
       </li>
     </comps>
     <smeltable>false</smeltable>

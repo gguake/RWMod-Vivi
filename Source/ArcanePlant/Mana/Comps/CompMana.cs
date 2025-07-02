@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using Verse;
-using Verse.Noise;
 
 namespace VVRace
 {
@@ -14,6 +13,8 @@ namespace VVRace
         public ManaFluxRule manaGenerateRule;
         public ManaFluxRule manaConsumeRule;
         public float manaAbsorbPerDay;
+
+        public bool workOnlySpawned = true;
 
         public CompProperties_Mana()
         {
@@ -33,8 +34,6 @@ namespace VVRace
         private float _manaExternalChange;
 
         private bool _manaActivated = true;
-
-        private Map _registeredMap;
 
         public bool Active => _manaActivated;
 
@@ -64,6 +63,13 @@ namespace VVRace
         public override void PostPostMake()
         {
             _manaStored = Props.manaCapacity;
+
+            Current.Game.GetComponent<GameComponent_Mana>().RegisterCompMana(this);
+        }
+
+        public override void PostDestroy(DestroyMode mode, Map previousMap)
+        {
+            Current.Game.GetComponent<GameComponent_Mana>().UnregisterCompMana(this);
         }
 
         public override void PostExposeData()
@@ -192,40 +198,20 @@ namespace VVRace
             }
         }
 
-        public override void PostSpawnSetup(bool respawningAfterLoad)
+        public void RefreshMana(EnvironmentManaGrid manaGrid, IntVec3 pos, int ticks)
         {
-            parent.MapHeld.GetComponent<EnvironmentManaGrid>().RegisterCompMana(this);
-            _registeredMap = parent.MapHeld;
-        }
+            if (Props.workOnlySpawned && !parent.Spawned) { return; }
 
-        public override void PostDeSpawn(Map map, DestroyMode mode = DestroyMode.Vanish)
-        {
-            _registeredMap = null;
-            map.GetComponent<EnvironmentManaGrid>().UnregisterCompMana(this);
-        }
-
-        public void RefreshMana(EnvironmentManaGrid manaGrid, int ticks)
-        {
             _manaGeneratesByDay = Props.manaGenerateRule?.CalcManaFlux(parent) * parent.HitPoints / (float)parent.MaxHitPoints ?? 0f;
             _manaConsumesByDay = Props.manaConsumeRule?.CalcManaFlux(parent) ?? 0f;
 
-            var absorbableMana = Mathf.Clamp(manaGrid[parent.Position], 0f, Props.manaAbsorbPerDay / 60000f * ticks);
+            var absorbableMana = Mathf.Clamp(manaGrid[pos], 0f, Props.manaAbsorbPerDay / 60000f * ticks);
             var generatedMana = _manaGeneratesByDay / 60000f * ticks;
             var consumedMana = _manaConsumesByDay / 60000f * ticks;
 
             float manaChange = absorbableMana + generatedMana - consumedMana;
-            //if (consumedMana <= absorbableMana + generatedMana + _manaStored)
-            //{
-            //    manaChange = absorbableMana + generatedMana - consumedMana;
-            //    _manaActivated = true;
-            //}
-            //else
-            //{
-            //    manaChange = absorbableMana + generatedMana;
-            //    _manaActivated = false;
-            //}
 
-            var beforeExternalMana = manaGrid[parent.Position];
+            var beforeExternalMana = manaGrid[pos];
             if (manaChange > 0f)
             {
                 if (_manaStored < Props.manaCapacity)
@@ -235,7 +221,7 @@ namespace VVRace
                     _manaStored += deposited;
                 }
 
-                manaGrid.ChangeEnvironmentMana(parent.Position, -absorbableMana + manaChange, direct: true);
+                manaGrid.ChangeEnvironmentMana(pos, -absorbableMana + manaChange, direct: true);
             }
             else
             {
@@ -244,7 +230,7 @@ namespace VVRace
                     var absorbed = Mathf.Clamp(-manaChange, 0f, absorbableMana);
                     manaChange += absorbed;
 
-                    manaGrid.ChangeEnvironmentMana(parent.Position, -absorbed, direct: true);
+                    manaGrid.ChangeEnvironmentMana(pos, -absorbed, direct: true);
                 }
 
                 if (_manaStored > 0f)
@@ -256,7 +242,7 @@ namespace VVRace
             }
 
             _manaActivated = manaChange >= 0f;
-            _manaExternalChange = manaGrid[parent.Position] - beforeExternalMana;
+            _manaExternalChange = manaGrid[pos] - beforeExternalMana;
         }
 
         public bool ShouldBeLitNow() => Active;

@@ -11,11 +11,11 @@ namespace VVRace
 {
     public class EnvironmentManaGrid : MapComponent, ICellBoolGiver, IDisposable
     {
-        public const float ViviFlowerChance = 0.04f;
+        public const float ViviFlowerChance = 0.06f;
         public const float EnvironmentManaMax = 1000f;
 
-        public const int RefreshManaInterval = 250;
         public const int DiffuseInterval = 1129;
+        public const int RefreshManaInterval = 250;
 
         private NativeArray<float> _manaReserveGrid;
         private NativeArray<float> _manaGrid;
@@ -33,8 +33,6 @@ namespace VVRace
         private CellBoolDrawer _cellBoolDrawer;
         private bool _drawManaOverlay;
         public bool manaOverlaySetting;
-
-        private HashSet<CompMana> _manaComps = new HashSet<CompMana>();
 
         public bool HasAnyArcanePlant => _arcanePlantCount > 0;
         private int _arcanePlantCount;
@@ -167,7 +165,20 @@ namespace VVRace
 
             if (GenTicks.TicksGame % RefreshManaInterval == 0)
             {
-                Refresh();
+                var gameComponentMana = Current.Game.GetComponent<GameComponent_Mana>();
+                if (gameComponentMana != null)
+                {
+                    foreach (var comp in gameComponentMana.AllManaComps)
+                    {
+                        var root = comp.parent.SpawnedParentOrMe;
+                        if (root != null && root.Map == map)
+                        {
+                            comp.RefreshMana(this, root.Position, RefreshManaInterval);
+                        }
+                    }
+
+                    _cellBoolDrawer.SetDirty();
+                }
             }
 
             if (_shouldUpdate)
@@ -206,16 +217,6 @@ namespace VVRace
             _tmpGrid.Dispose();
             _manaGrid.Dispose();
             _manaReserveGrid.Dispose();
-        }
-
-        private void Refresh()
-        {
-            foreach (var comp in _manaComps)
-            {
-                comp.RefreshMana(this, RefreshManaInterval);
-            }
-
-            _cellBoolDrawer.SetDirty();
         }
 
         private void ScheduleUpdateManaJob()
@@ -275,26 +276,6 @@ namespace VVRace
             _tmpGrid.CopyTo(_manaGrid);
 
             _diffusionJobStart = false;
-        }
-
-        public void RegisterCompMana(CompMana comp)
-        {
-            if (comp == null) { return; }
-
-            _manaComps.Add(comp);
-            _cellBoolDrawer.SetDirty();
-
-            if (comp.parent is ArcanePlant) { _arcanePlantCount++; }
-        }
-
-        public void UnregisterCompMana(CompMana comp)
-        {
-            if (comp == null) { return; }
-
-            _manaComps.Remove(comp);
-            _cellBoolDrawer.SetDirty();
-
-            if (comp.parent is ArcanePlant) { _arcanePlantCount--; }
         }
 
         public bool GetCellBool(int index)
