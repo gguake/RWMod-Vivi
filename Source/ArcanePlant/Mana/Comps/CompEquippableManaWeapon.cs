@@ -19,45 +19,8 @@ namespace VVRace
 
     public class CompProperties_EquippableManaWeapon : CompProperties
     {
-        public List<ManaWeaponStatModifier> statOffsetCurves;
-        public List<ManaWeaponStatModifier> statFactorCurves;
-
-        private Dictionary<StatDef, SimpleCurve> _offsetCurveDict;
-        private Dictionary<StatDef, SimpleCurve> _factorCurveDict;
-
-        public float GetStatOffset(StatDef stat, float t)
-        {
-            if (_offsetCurveDict == null)
-            {
-                _offsetCurveDict = new Dictionary<StatDef, SimpleCurve>();
-                if (statOffsetCurves != null)
-                {
-                    foreach (var mod in statOffsetCurves)
-                    {
-                        _offsetCurveDict.Add(mod.stat, mod.curve);
-                    }
-                }
-            }
-
-            return _offsetCurveDict.TryGetValue(stat, out var curve) ? curve.Evaluate(t) : 0f;
-        }
-
-        public float GetStatFactor(StatDef stat, float t)
-        {
-            if (_factorCurveDict == null)
-            {
-                _factorCurveDict = new Dictionary<StatDef, SimpleCurve>();
-                if (statFactorCurves != null)
-                {
-                    foreach (var mod in statFactorCurves)
-                    {
-                        _factorCurveDict.Add(mod.stat, mod.curve);
-                    }
-                }
-            }
-
-            return _factorCurveDict.TryGetValue(stat, out var curve) ? curve.Evaluate(t) : 1f;
-        }
+        public SimpleCurve meleeDamageOffsetCurve;
+        public SimpleCurve meleeDamageFactorCurve;
 
         public CompProperties_EquippableManaWeapon()
         {
@@ -81,18 +44,36 @@ namespace VVRace
 
         public override float GetStatOffset(StatDef stat)
         {
-            var manaComp = ManaComp;
-            if (manaComp == null) { return 0f; }
+            if (stat == StatDefOf.MeleeWeapon_DamageMultiplier)
+            {
+                if (Props.meleeDamageOffsetCurve != null)
+                {
+                    var manaComp = ManaComp;
+                    if (manaComp != null)
+                    {
+                        return Props.meleeDamageOffsetCurve.Evaluate(ManaComp.StoredPct);
+                    }
+                }
+            }
 
-            return Props.GetStatOffset(stat, ManaComp.StoredPct);
+            return 0f;
         }
 
         public override float GetStatFactor(StatDef stat)
         {
-            var manaComp = ManaComp;
-            if (manaComp == null) { return 1f; }
+            if (stat == StatDefOf.MeleeWeapon_DamageMultiplier)
+            {
+                if (Props.meleeDamageFactorCurve != null)
+                {
+                    var manaComp = ManaComp;
+                    if (manaComp != null)
+                    {
+                        return Props.meleeDamageFactorCurve.Evaluate(ManaComp.StoredPct);
+                    }
+                }
+            }
 
-            return Props.GetStatFactor(stat, ManaComp.StoredPct);
+            return 1f;
         }
 
         public override IEnumerable<Gizmo> CompGetEquippedGizmosExtra()

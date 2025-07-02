@@ -5,7 +5,7 @@
     <defName>VV_RitualLance</defName>
     <label>vivi ritual lance</label>
     <description>a large spear with various decorations and a large blade given in a form of ceremony to Vivi who saved the hive from danger. Due to the abnormal size of the blade and decorations compared to the length of the handle, only Vivi can use it as it is optimized for them.
-\nLance can absorb environmental mana to recharge and the recharged lance becomes remarkably light, significantly increasing attack speed, attack power and penetration.</description>
+\nLance can absorb environmental mana to recharge and the recharged lance becomes remarkably sharp, significantly increasing attack power and penetration.</description>
     <graphicData>
       <texPath>Things/Item/Equipment/VV_RitualLance</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -17,7 +17,7 @@
     <statBases>
       <WorkToMake>50000</WorkToMake>
       <Mass>4</Mass>
-      <VV_MeleeWeapon_ManaCost>25</VV_MeleeWeapon_ManaCost>
+      <VV_MeleeWeapon_ManaCost>30</VV_MeleeWeapon_ManaCost>
     </statBases>
     <equippedStatOffsets>
       <MoveSpeed>-0.8</MoveSpeed>
@@ -39,20 +39,12 @@
     
     <comps Inherit="False">
       <li Class="VVRace.CompProperties_EquippableManaWeapon">
-        <statFactorCurves>
-          <MeleeWeapon_DamageMultiplier>
-            <points>
-              <li>(0, 1)</li>
-              <li>(1, 1.5)</li>
-            </points>
-          </MeleeWeapon_DamageMultiplier>
-          <MeleeWeapon_CooldownMultiplier>
-            <points>
-              <li>(0, 1)</li>
-              <li>(1, 0.5)</li>
-            </points>
-          </MeleeWeapon_CooldownMultiplier>
-        </statFactorCurves>
+        <meleeDamageFactorCurve>
+          <points>
+            <li>(0, 1)</li>
+            <li>(1, 2)</li>
+          </points>
+        </meleeDamageFactorCurve>
       </li>
       <li><compClass>CompQuality</compClass></li>
       <li Class="CompProperties_Forbiddable"/>
@@ -135,9 +127,10 @@
   <ThingDef ParentName="BaseWeapon">
     <defName>VV_EltexNeedle</defName>
     <label>vivi eltex needle</label>
-    <description>A specially crafted sharp needle. Only vivi can handle it, and once equipped, it resonates with the wearer, becoming bound to them so that others cannot use it.
-\nWhen equipped, it allows the wearer to summon psychic needles that can move freely, ignoring the laws of physics, to attack enemies. These psychic needles can pass through all obstacles and will always hit their target. The higher the psychic sensitivity, the faster the needles move and the more attacks can be made simultaneously.
-\nAfter the attack is completed, the needles return and they must be retrieved before they can be used again.</description>
+    <description>A specially processed sharp needles. Only Vivi can handle them and once equipped they resonate with the wearer becoming bound so that no one else can use them.
+\Needle can absorb environmental mana to recharge, and by using the needles as a medium, you can summon psychic needles that resonate with mana ignoring physical laws and moving freely according to the users will.
+\nThe psychic needles pass through all obstacles and always hit their target. The higher the mental sensitivity, the faster the needles move, and the more attacks can be made at once.
+\nWhile summoning the psychic needles, you enter a state of deep concentration, making it impossible to move until the needles are retrieved.</description>
     <graphicData>
       <texPath>Things/Item/Equipment/VV_Needle</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -184,8 +177,8 @@
         <biocodeOnEquip>true</biocodeOnEquip>
       </li>
       <li Class="VVRace.CompProperties_Mana">
-        <manaCapacity>1500</manaCapacity>
-        <manaAbsorbPerDay>500</manaAbsorbPerDay>
+        <manaCapacity>1200</manaCapacity>
+        <manaAbsorbPerDay>750</manaAbsorbPerDay>
         <workOnlySpawned>false</workOnlySpawned>
       </li>
     </comps>
