@@ -31,10 +31,10 @@
     </graphicData>
     <projectile>
       <damageDef>Flame</damageDef>
-      <damageAmountBase>12</damageAmountBase>
+      <damageAmountBase>11</damageAmountBase>
       <armorPenetrationBase>0</armorPenetrationBase>
-      <stoppingPower>1</stoppingPower>
-      <speed>27</speed>
+      <stoppingPower>0.5</stoppingPower>
+      <speed>22</speed>
     </projectile>
   </ThingDef>
   
@@ -50,10 +50,10 @@
     </graphicData>
     <projectile>
       <damageDef>VV_Frostbite</damageDef>
-      <damageAmountBase>12</damageAmountBase>
+      <damageAmountBase>11</damageAmountBase>
       <armorPenetrationBase>0</armorPenetrationBase>
-      <stoppingPower>1</stoppingPower>
-      <speed>27</speed>
+      <stoppingPower>0.5</stoppingPower>
+      <speed>22</speed>
     </projectile>
   </ThingDef>
   
@@ -69,17 +69,17 @@
     </graphicData>
     <projectile>
       <damageDef>EMP</damageDef>
-      <damageAmountBase>20</damageAmountBase>
+      <damageAmountBase>25</damageAmountBase>
       <armorPenetrationBase>0</armorPenetrationBase>
       <stoppingPower>4</stoppingPower>
-      <speed>27</speed>
+      <speed>22</speed>
     </projectile>
   </ThingDef>
 
   <!-- 고속 콩 -->
   <ThingDef ParentName="BaseBullet">
     <defName>VV_Bullet_PeaFast</defName>
-    <label>high velocity pea</label>
+    <label>high-velocity pea</label>
     <thingClass>VVRace.PeaBullet</thingClass>
     <graphicData>
       <texPath>Things/Projectile/VV_PeaFast</texPath>
@@ -87,8 +87,8 @@
     </graphicData>
     <projectile>
       <damageDef>Bullet</damageDef>
-      <damageAmountBase>9</damageAmountBase>
-      <armorPenetrationBase>0.22</armorPenetrationBase>
+      <damageAmountBase>8</damageAmountBase>
+      <armorPenetrationBase>0.28</armorPenetrationBase>
       <stoppingPower>2</stoppingPower>
       <speed>60</speed>
     </projectile>

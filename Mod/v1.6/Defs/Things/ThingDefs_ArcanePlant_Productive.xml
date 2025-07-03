@@ -5,7 +5,7 @@
     <defName>VV_EmberBloom</defName>
     <label>emberbloom</label>
     <description>a arcane flower shaped like flames that converts mana into heat until the surrounding temperature reaches a certain level. In environments that are sufficiently hot, it produces and accumulates mana instead of emitting heat.
-\nWhen the peas from a peashooter pass over the emberbloom, there is a chance to inflict additional burn damage and set the target on fire.</description>
+\nIf placed adjacent to a peashooter, it has a 25% chance to fire a fire pea instead when the peashooter attacks. Fire peas deal flame damage instead of physical damage and set the target on fire.\nIf multiple emberblooms are adjacent, the effect stacks.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_HeatingPetal</ThingDef>
     </descriptionHyperlinks>
@@ -128,7 +128,7 @@
     <defName>VV_FrostBloom</defName>
     <label>frostbloom</label>
     <description>a arcane flower shaped like ice crystals that consumes mana to absorb heat until the surrounding temperature reaches a certain level. In environments that are sufficiently cold, it produces and accumulates mana instead of absorbing heat.
-\nWhen the peas from a peashooter pass over the frostbloom, the peas harden and inflict additional piercing damage to the target.</description>
+\nIf placed adjacent to a peashooter, it has a 25% chance to fire an ice pea instead when the peashooter attacks. Ice peas deal frost damage instead of physical damage and temporarily slow the target's movement speed.\nIf multiple frostblooms are adjacent, the effect stacks.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_CoolingPetal</ThingDef>
     </descriptionHyperlinks>
@@ -256,7 +256,7 @@
     <label>flashbud</label>
     <description>a arcane flower that discharges electricity within its transparent petals. It can be wired to store a large amount of power, but consumes mana in proportion.
 \nIf it receives external shocks, the internal voltage becomes unstable, generating massive electromagnetic pulses in the vicinity and discharging mana.
-\nWhen the peas from a peashooter pass over the flashbud, there is a low chance that the beans will electrify the target, temporarily stunning them.</description>
+\nIf placed adjacent to a peashooter, it has a 25% chance to fire an electric pea instead when the peashooter attacks. Electric Peas deal EMP damage instead of physical damage and stun mechanical units.\nIf multiple flashbud or thunderpetals are adjacent, the effect stacks.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_SparklingPetal</ThingDef>
     </descriptionHyperlinks>
@@ -390,7 +390,7 @@
     <defName>VV_Thunderpetals</defName>
     <label>thunderpetals</label>
     <description>a arcane flower with stamens that conduct electricity, capable of connecting to power lines to convert mana into electricity. When lightning strikes and the mana level is sufficient, it attracts the lightning to itself and converts it into mana.
-\nWhen the peas from a peashooter pass over the thunderpetals, there is a low chance that the beans will electrify the target, temporarily stunning them.</description>
+\nIf placed adjacent to a peashooter, it has a 25% chance to fire an electric pea instead when the peashooter attacks. Electric peas deal EMP damage instead of physical damage and stun mechanical units.\nIf multiple flashbud or thunderpetals are adjacent, the effect stacks.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_SparklingPetal</ThingDef>
     </descriptionHyperlinks>
@@ -768,7 +768,8 @@
     <defName>VV_Richflower</defName>
     <label>richflower</label>
     <description>a arcane flower with large petals that periodically spreads pollen on the surrounding ground and yields a lot of honey when harvested.
-\nIt produces mana from the life activities of nearby plants and transforms the surrounding soil into an environment favorable for cultivation.</description>
+\nIt produces mana from the life activities of nearby plants and transforms the surrounding soil into an environment favorable for cultivation.
+\nIf placed adjacent to a peashooter, it slightly increases the power and armor penetration of its peas when fired. If multiple richflowers or purifimints are adjacent, the effect stacks.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_PerfumingPetal</ThingDef>
     </descriptionHyperlinks>
@@ -817,7 +818,7 @@
         <modifiers>
           <VV_Peashooter>
             <additionalDamage>1</additionalDamage>
-            <additionalArmorPenetration>0.04</additionalArmorPenetration>
+            <additionalArmorPenetration>0.03</additionalArmorPenetration>
           </VV_Peashooter>
         </modifiers>
       </li>
@@ -911,7 +912,8 @@
     <defName>VV_Purifimint</defName>
     <label>purifimint</label>
     <description>a small arcane plant that emits light and converts soil contamination into mana by absorbing it from adjacent soil; the more contaminated the surrounding soil, the more mana it produces. It is also aesthetically pleasing and used for decoration.
-\nIt can also create a temporary shield that blocks incoming projectiles by briefly releasing stored mana.</description>
+\nIt can also create a temporary shield that blocks incoming projectiles by briefly releasing stored mana.
+\nIf placed adjacent to a peashooter, it slightly increases the power and armor penetration of its peas when fired. If multiple richflowers or purifimints are adjacent, the effect stacks.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_PerfumingPetal</ThingDef>
     </descriptionHyperlinks>
@@ -1076,7 +1078,8 @@
     <defName>VV_Skyweed</defName>
     <label>skyweed</label>
     <description>a arcane plant that resembles a dandelion seed and converts the power of the wind into mana when outdoors.
-\nThe fluff of this grass is very light and has the property of flying well, so it can also be used to send small items.</description>
+\nThe fluff of this grass is very light and has the property of flying well, so it can also be used to send small items.
+\nIf placed adjacent to a peashooter, it has a 25% chance to fire a High-velocity pea instead when the peashooter attacks. High-velocity peas have faster projectile speed and higher piercing power.\nIf multiple skyweeds are adjacent, the effect stacks.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_SkyweedFluff</ThingDef>
       <ThingDef>VV_LivingLeaf</ThingDef>

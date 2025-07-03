@@ -5,11 +5,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
+using UnityEngine;
 using Verse;
-using VVRace.HarmonyPatches;
 
 namespace VVRace
 {
+    [StaticConstructorOnStartup]
+    internal static class ArcanePlantPatchTextures
+    {
+        public static Texture2D ToggleManaGrid = ContentFinder<Texture2D>.Get("UI/Buttons/ToggleManaGrid");
+    }
+
     internal static class ArcanePlantPatch
     {
         internal static void Patch(Harmony harmony)
@@ -386,8 +392,8 @@ namespace VVRace
             if (manaGrid != null && (VVResearchProjectDefOf.VV_ArcaneBotany.IsFinished || manaGrid.HasAnyArcanePlant))
             {
                 row.ToggleableIcon(
-                    ref manaGrid.manaOverlaySetting, 
-                    TexButton.ShowRoofOverlay, 
+                    ref manaGrid.manaOverlaySetting,
+                    ArcanePlantPatchTextures.ToggleManaGrid, 
                     LocalizeString_Etc.VV_ShowManaOverlayTooltip.Translate());
             }
         }

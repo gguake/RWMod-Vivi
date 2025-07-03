@@ -12,31 +12,31 @@
     <stages>
       <li>
         <statFactors>
-          <MoveSpeed>0.9</MoveSpeed>
+          <MoveSpeed>0.85</MoveSpeed>
         </statFactors>
       </li>
       <li>
         <minSeverity>0.4</minSeverity>
         <statFactors>
-          <MoveSpeed>0.8</MoveSpeed>
+          <MoveSpeed>0.7</MoveSpeed>
         </statFactors>
       </li>
       <li>
         <minSeverity>0.8</minSeverity>
         <statFactors>
-          <MoveSpeed>0.7</MoveSpeed>
+          <MoveSpeed>0.5</MoveSpeed>
         </statFactors>
       </li>
       <li>
         <minSeverity>0.95</minSeverity>
         <statFactors>
-          <MoveSpeed>0.5</MoveSpeed>
+          <MoveSpeed>0.4</MoveSpeed>
         </statFactors>
       </li>
     </stages>
     <comps>
       <li Class="HediffCompProperties_SelfHeal">
-        <healAmount>0.05</healAmount>
+        <healAmount>0.02</healAmount>
       </li>
     </comps>
   </HediffDef>
