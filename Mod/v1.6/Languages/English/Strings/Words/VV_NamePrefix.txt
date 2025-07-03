@@ -20,7 +20,6 @@ clear
 ivory
 jade
 ash
-cherry
 snow
 mild
 blue
@@ -32,3 +31,7 @@ aqua
 purple
 brown
 solar
+gray
+moon
+sand
+mist
