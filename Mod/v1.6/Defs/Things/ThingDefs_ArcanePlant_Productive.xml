@@ -128,7 +128,7 @@
     <defName>VV_FrostBloom</defName>
     <label>frostbloom</label>
     <description>a arcane flower shaped like ice crystals that consumes mana to absorb heat until the surrounding temperature reaches a certain level. In environments that are sufficiently cold, it produces and accumulates mana instead of absorbing heat.
-\nIf placed adjacent to a peashooter, it has a 25% chance to fire an ice pea instead when the peashooter attacks. Ice peas deal frost damage instead of physical damage and temporarily slow the target's movement speed.\nIf multiple frostblooms are adjacent, the effect stacks.</description>
+\nIf placed adjacent to a peashooter, it has a 25% chance to fire an ice pea instead when the peashooter attacks. Ice peas deal frostbite damage instead of physical damage and temporarily slow the target's movement speed.\nIf multiple frostblooms are adjacent, the effect stacks.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_CoolingPetal</ThingDef>
     </descriptionHyperlinks>
