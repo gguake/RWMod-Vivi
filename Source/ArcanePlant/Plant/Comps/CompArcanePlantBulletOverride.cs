@@ -4,7 +4,7 @@ using Verse;
 
 namespace VVRace
 {
-    public struct BulletReplaceData
+    public class BulletReplaceData
     {
         public ThingDef targetTurretDef;
         public BulletReplacer replacer;
@@ -16,7 +16,7 @@ namespace VVRace
         }
     }
 
-    public struct BulletModifierData
+    public class BulletModifierData
     {
         public ThingDef targetTurretDef;
         public BulletModifier modifier;
@@ -57,6 +57,7 @@ namespace VVRace
 
         public override void PostSpawnSetup(bool respawningAfterLoad)
         {
+            Log.Message($"spawn: {parent} {parent.Position}");
             foreach (var pos in GenAdjFast.AdjacentCellsCardinal(parent.Position))
             {
                 var turret = pos.GetFirstThing<ArcanePlant_Turret>(parent.Map);
@@ -69,12 +70,12 @@ namespace VVRace
 
         public override void PostDeSpawn(Map map, DestroyMode mode = DestroyMode.Vanish)
         {
-            RemoveAdjacentBulletOverrides();
+            RemoveAdjacentBulletOverrides(map);
         }
 
         public override void Notify_DefsHotReloaded()
         {
-            RemoveAdjacentBulletOverrides();
+            RemoveAdjacentBulletOverrides(parent.Map);
 
             foreach (var pos in GenAdjFast.AdjacentCellsCardinal(parent.Position))
             {
@@ -113,12 +114,15 @@ namespace VVRace
             }
         }
 
-        private void RemoveAdjacentBulletOverrides()
+        private void RemoveAdjacentBulletOverrides(Map map)
         {
             foreach (var pos in GenAdjFast.AdjacentCellsCardinal(parent.Position))
             {
-                var turret = pos.GetFirstThing<ArcanePlant_Turret>(parent.Map);
-                turret.RemoveBulletOverrideData(parent);
+                var turret = pos.GetFirstThing<ArcanePlant_Turret>(map);
+                if (turret != null)
+                {
+                    turret.RemoveBulletOverrideData(parent);
+                }
             }
         }
     }

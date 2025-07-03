@@ -41,17 +41,15 @@ namespace VVRace
             }
         }
 
-        private Dictionary<ThingDef, float> _tmpProjectileSelector;
+        private Dictionary<ThingDef, float> _tmpProjectileSelector = new Dictionary<ThingDef, float>();
         public override ThingDef Projectile
         {
             get
             {
                 if (caster is ArcanePlant_Turret turret)
                 {
-                    if (_tmpProjectileSelector == null)
+                    if (_tmpProjectileSelector.Count == 0)
                     {
-                        _tmpProjectileSelector = new Dictionary<ThingDef, float>();
-
                         var bulletReplacers = turret.BulletReplacers;
                         if (bulletReplacers.Any())
                         {
@@ -68,13 +66,13 @@ namespace VVRace
                                 _tmpProjectileSelector[replacer.bulletDef] = value + replacer.chance;
                             }
                         }
+                        else
+                        {
+                            _tmpProjectileSelector.Add(base.Projectile, 1f);
+                        }
                     }
-
-                    if (_tmpProjectileSelector.Count == 0)
-                    {
-                        return base.Projectile;
-                    }
-                    else if (_tmpProjectileSelector.Count == 1)
+                    
+                    if (_tmpProjectileSelector.Count == 1)
                     {
                         return _tmpProjectileSelector.FirstOrDefault().Key;
                     }
@@ -125,6 +123,8 @@ namespace VVRace
             if (shot)
             {
                 compMana.Stored -= manaPerShoot;
+
+                _tmpProjectileSelector.Clear();
             }
 
             return shot;

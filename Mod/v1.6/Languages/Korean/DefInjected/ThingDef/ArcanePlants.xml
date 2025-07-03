@@ -48,16 +48,13 @@
 <VV_Peashooter.label>콩뿌리개</VV_Peashooter.label>
 <VV_Peashooter.description>주변의 적을 감지하면 마법 콩을 발사해 쫓아내는 마법 식물입니다. 콩을 발사할 때마다 마나를 소모하며 위력은 약하지만 한번에 대량의 콩을 발사하므로 경장갑의 적에게 효과적입니다.
 \n발사된 콩이 마법 식물 위를 지나가는 경우 식물에 따라 특수한 효과를 적용받기도 합니다.</VV_Peashooter.description>
-<VV_Bullet_Pea.label>완두콩</VV_Bullet_Pea.label>
 <VV_Gun_Peashooter.label>콩뿌리개 꼬투리</VV_Gun_Peashooter.label>
 <VV_Gun_Peashooter.description>.</VV_Gun_Peashooter.description>
-
-<VV_Pealauncher.label>폭탄뿌리개</VV_Pealauncher.label>
-<VV_Pealauncher.description>주변의 적을 감지하면 폭발하는 콩을 발사해 쫓아내는 마법 식물입니다. 폭탄콩을 발사할 때마다 마나를 소모하며 발사된 콩은 탄속이 매우 빠르고 착탄지에서 작게 폭발합니다.
-\n대규모의 적을 토벌하는데 적합하지만 폭발은 아군에게도 큰 피해를 주므로 신중한 배치가 필요합니다.</VV_Pealauncher.description>
-<VV_Bullet_PeaFast.label>폭발콩</VV_Bullet_PeaFast.label>
-<VV_Gun_Pealauncher.label>폭탄뿌리개</VV_Gun_Pealauncher.label>
-<VV_Gun_Pealauncher.description>.</VV_Gun_Pealauncher.description>
+<VV_Bullet_Pea.label>콩</VV_Bullet_Pea.label>
+<VV_Bullet_PeaFlame.label>화염콩</VV_Bullet_PeaFlame.label>
+<VV_Bullet_PeaIce.label>얼음콩</VV_Bullet_PeaIce.label>
+<VV_Bullet_PeaLightning.label>감전콩</VV_Bullet_PeaLightning.label>
+<VV_Bullet_PeaFast.label>고속콩</VV_Bullet_PeaFast.label>
 
 <VV_Shootus.label>건인장</VV_Shootus.label>
 <VV_Shootus.description>기묘한 표정의 얼굴을 가진 마법 선인장입니다. 식물이라고 생각되지 않을 정도로 유연하게 움직이며 굉장히 터프해서 대부분의 피해에 내성이 있습니다.
@@ -66,10 +63,10 @@
 <VV_Cornlauncher.label>콘뿌리개</VV_Cornlauncher.label>
 <VV_Cornlauncher.description>주변의 적을 감지하면 마법 옥수수를 발사해 공격하는 식물입니다. 발사할 때마다 마나를 소모하며 발사된 마법 옥수수는 착탄시 폭발해 옥수수 낱알을 주변에 퍼뜨리며 옥수수 낱알은 작게 폭발합니다.
 \n대규모의 적을 토벌하는데 적합하지만 폭발은 아군에게도 큰 피해를 주며 생명력이 낮으면 폭발할 위험이 있으므로 신중한 배치가 필요합니다.</VV_Cornlauncher.description>
-<VV_Bullet_Corn.label>옥수수</VV_Bullet_Corn.label>
-<VV_Bullet_CornKernel.label>옥수수 낱알</VV_Bullet_CornKernel.label>
 <VV_Gun_Cornlauncher.label>콘뿌리개</VV_Gun_Cornlauncher.label>
 <VV_Gun_Cornlauncher.description>.</VV_Gun_Cornlauncher.description>
+<VV_Bullet_Corn.label>옥수수</VV_Bullet_Corn.label>
+<VV_Bullet_CornKernel.label>옥수수 낱알</VV_Bullet_CornKernel.label>
 
 <VV_Everflower.label>영원꽃</VV_Everflower.label>
 <VV_Everflower.description>매우 희귀한 마법 꽃으로 비비들에게 신성한 꽃으로 취급되며 구체적인 재배 방식이 알려지지 않았지만 드물게 다른 마법 식물을 재배할때 함께 발견됩니다.

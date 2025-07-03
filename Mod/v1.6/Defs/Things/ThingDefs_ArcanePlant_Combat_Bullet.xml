@@ -4,7 +4,7 @@
   <!-- 콩 -->
   <ThingDef ParentName="BaseBullet">
     <defName>VV_Bullet_Pea</defName>
-    <label>pea bullet</label>
+    <label>pea</label>
     <thingClass>VVRace.PeaBullet</thingClass>
     <graphicData>
       <texPath>Things/Projectile/VV_Pea</texPath>
@@ -22,7 +22,7 @@
   <!-- 화염 콩 -->
   <ThingDef ParentName="BaseBullet">
     <defName>VV_Bullet_PeaFlame</defName>
-    <label>pea bullet</label>
+    <label>fire pea</label>
     <thingClass>VVRace.PeaBullet</thingClass>
     <graphicData>
       <texPath>Things/Projectile/VV_Pea</texPath>
@@ -31,7 +31,7 @@
     </graphicData>
     <projectile>
       <damageDef>Flame</damageDef>
-      <damageAmountBase>10</damageAmountBase>
+      <damageAmountBase>12</damageAmountBase>
       <armorPenetrationBase>0</armorPenetrationBase>
       <stoppingPower>1</stoppingPower>
       <speed>27</speed>
@@ -41,7 +41,7 @@
   <!-- 얼음 콩 -->
   <ThingDef ParentName="BaseBullet">
     <defName>VV_Bullet_PeaIce</defName>
-    <label>pea bullet</label>
+    <label>ice pea</label>
     <thingClass>VVRace.PeaBullet</thingClass>
     <graphicData>
       <texPath>Things/Projectile/VV_Pea</texPath>
@@ -50,7 +50,7 @@
     </graphicData>
     <projectile>
       <damageDef>VV_Frostbite</damageDef>
-      <damageAmountBase>10</damageAmountBase>
+      <damageAmountBase>12</damageAmountBase>
       <armorPenetrationBase>0</armorPenetrationBase>
       <stoppingPower>1</stoppingPower>
       <speed>27</speed>
@@ -60,7 +60,7 @@
   <!-- 전기 콩 -->
   <ThingDef ParentName="BaseBullet">
     <defName>VV_Bullet_PeaLightning</defName>
-    <label>pea bullet</label>
+    <label>electric pea</label>
     <thingClass>VVRace.PeaBullet</thingClass>
     <graphicData>
       <texPath>Things/Projectile/VV_Pea</texPath>
@@ -76,10 +76,10 @@
     </projectile>
   </ThingDef>
 
-  <!-- 가속 콩 -->
+  <!-- 고속 콩 -->
   <ThingDef ParentName="BaseBullet">
     <defName>VV_Bullet_PeaFast</defName>
-    <label>pea bullet</label>
+    <label>high velocity pea</label>
     <thingClass>VVRace.PeaBullet</thingClass>
     <graphicData>
       <texPath>Things/Projectile/VV_PeaFast</texPath>
