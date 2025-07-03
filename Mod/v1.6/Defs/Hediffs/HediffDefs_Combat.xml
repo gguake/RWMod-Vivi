@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+    
+  <HediffDef>
+    <defName>VV_Frozen</defName>
+    <label>frozen</label>
+    <labelNoun>frozen</labelNoun>
+    <description>It has frozen. It  slows movement speed, but can be recovered in a few moments.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <battleStateLabel>freeze</battleStateLabel>
+    <maxSeverity>1</maxSeverity>
+    <stages>
+      <li>
+        <statFactors>
+          <MoveSpeed>0.9</MoveSpeed>
+        </statFactors>
+      </li>
+      <li>
+        <minSeverity>0.4</minSeverity>
+        <statFactors>
+          <MoveSpeed>0.8</MoveSpeed>
+        </statFactors>
+      </li>
+      <li>
+        <minSeverity>0.8</minSeverity>
+        <statFactors>
+          <MoveSpeed>0.7</MoveSpeed>
+        </statFactors>
+      </li>
+      <li>
+        <minSeverity>0.95</minSeverity>
+        <statFactors>
+          <MoveSpeed>0.5</MoveSpeed>
+        </statFactors>
+      </li>
+    </stages>
+    <comps>
+      <li Class="HediffCompProperties_SelfHeal">
+        <healAmount>0.05</healAmount>
+      </li>
+    </comps>
+  </HediffDef>
+</Defs>

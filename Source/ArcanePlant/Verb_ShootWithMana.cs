@@ -1,4 +1,6 @@
 ﻿using RimWorld;
+using System.Collections.Generic;
+using System.Linq;
 using Verse;
 
 namespace VVRace
@@ -36,6 +38,53 @@ namespace VVRace
                 {
                     return ManaComp.Stored >= EquipmentSource?.GetStatValue(VVStatDefOf.VV_RangedWeapon_ManaCost) * BurstShotCount;
                 }
+            }
+        }
+
+        private Dictionary<ThingDef, float> _tmpProjectileSelector;
+        public override ThingDef Projectile
+        {
+            get
+            {
+                if (caster is ArcanePlant_Turret turret)
+                {
+                    if (_tmpProjectileSelector == null)
+                    {
+                        _tmpProjectileSelector = new Dictionary<ThingDef, float>();
+
+                        var bulletReplacers = turret.BulletReplacers;
+                        if (bulletReplacers.Any())
+                        {
+                            var baseProjectileProb = 1f - bulletReplacers.Sum(v => v.chance);
+                            if (baseProjectileProb > 0f) { _tmpProjectileSelector.Add(base.Projectile, baseProjectileProb); }
+
+                            foreach (var replacer in turret.BulletReplacers)
+                            {
+                                if (!_tmpProjectileSelector.TryGetValue(replacer.bulletDef, out var value))
+                                {
+                                    value = 0f;
+                                }
+
+                                _tmpProjectileSelector[replacer.bulletDef] = value + replacer.chance;
+                            }
+                        }
+                    }
+
+                    if (_tmpProjectileSelector.Count == 0)
+                    {
+                        return base.Projectile;
+                    }
+                    else if (_tmpProjectileSelector.Count == 1)
+                    {
+                        return _tmpProjectileSelector.FirstOrDefault().Key;
+                    }
+                    else
+                    {
+                        return _tmpProjectileSelector.RandomElementByWeight(kv => kv.Value).Key;
+                    }
+                }
+
+                return base.Projectile;
             }
         }
 

@@ -40,4 +40,7 @@
 
   <VV_EverflowerImpact.label>영원꽃 피로</VV_EverflowerImpact.label>
   <VV_EverflowerImpact.description>영원꽃의 향에 영향을 받아 다소 피로해진 상태입니다.</VV_EverflowerImpact.description>
+
+  <VV_Frozen.label>빙결</VV_Frozen.label>
+  <VV_Frozen.description>얼어붙은 상태입니다. 이동 속도가 느려지지만 곧 회복됩니다.</VV_Frozen.description>
 </LanguageData>

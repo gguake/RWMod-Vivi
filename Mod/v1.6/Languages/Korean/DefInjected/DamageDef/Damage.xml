@@ -8,4 +8,10 @@
 
   <VV_ExtinguishWithWater.label>화재 진압</VV_ExtinguishWithWater.label>
   <VV_ExtinguishWithWater.deathMessage>{0}(이)가 죽었습니다.</VV_ExtinguishWithWater.deathMessage>
+  
+  <!-- EN: frostbite -->
+  <VV_Frostbite.label>동상</VV_Frostbite.label>
+  <!-- EN: {0} has succumbed to frostbite. -->
+  <VV_Frostbite.deathMessage>{0}(이)가 동사했습니다.</VV_Frostbite.deathMessage>
+  
 </LanguageData>

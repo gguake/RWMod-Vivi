@@ -42,6 +42,15 @@
         <manaAbsorbPerDay>300</manaAbsorbPerDay>
       </li>
 
+      <li Class="VVRace.CompProperties_ArcanePlantBulletOverride">
+        <replacers>
+          <VV_Peashooter>
+            <bulletDef>VV_Bullet_PeaFlame</bulletDef>
+            <chance>0.25</chance>
+          </VV_Peashooter>
+        </replacers>
+      </li>
+
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
       <li Class="VVRace.CompProperties_ManaGlower">
@@ -165,6 +174,15 @@
         <manaAbsorbPerDay>300</manaAbsorbPerDay>
       </li>
 
+      <li Class="VVRace.CompProperties_ArcanePlantBulletOverride">
+        <replacers>
+          <VV_Peashooter>
+            <bulletDef>VV_Bullet_PeaIce</bulletDef>
+            <chance>0.25</chance>
+          </VV_Peashooter>
+        </replacers>
+      </li>
+
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
       <li Class="CompProperties_HeatPusher">
@@ -271,6 +289,15 @@
           <manaFromStoredEnergy>0~750</manaFromStoredEnergy>
         </manaConsumeRule>
         <manaAbsorbPerDay>1500</manaAbsorbPerDay>
+      </li>
+
+      <li Class="VVRace.CompProperties_ArcanePlantBulletOverride">
+        <replacers>
+          <VV_Peashooter>
+            <bulletDef>VV_Bullet_PeaLightning</bulletDef>
+            <chance>0.25</chance>
+          </VV_Peashooter>
+        </replacers>
       </li>
 
       <li Class="VVRace.CompProperties_RepeatGatherable" />
@@ -403,6 +430,15 @@
         <manaAbsorbPerDay>2000</manaAbsorbPerDay>
       </li>
 
+      <li Class="VVRace.CompProperties_ArcanePlantBulletOverride">
+        <replacers>
+          <VV_Peashooter>
+            <bulletDef>VV_Bullet_PeaLightning</bulletDef>
+            <chance>0.25</chance>
+          </VV_Peashooter>
+        </replacers>
+      </li>
+
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
       <li Class="CompProperties_Power">
@@ -519,7 +555,7 @@
               <manaPerAdjacentWater>100</manaPerAdjacentWater>
             </li>
             <li Class="VVRace.ManaFluxRule_WeatherRainy">
-              <mana>300</mana>
+              <mana>500</mana>
             </li>
           </rules>
         </manaGenerateRule>
@@ -777,6 +813,15 @@
         <manaAbsorbPerDay>600</manaAbsorbPerDay>
       </li>
 
+      <li Class="VVRace.CompProperties_ArcanePlantBulletOverride">
+        <modifiers>
+          <VV_Peashooter>
+            <additionalDamage>1</additionalDamage>
+            <additionalArmorPenetration>0.04</additionalArmorPenetration>
+          </VV_Peashooter>
+        </modifiers>
+      </li>
+
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
       <li Class="VVRace.CompProperties_ManaTerraformer">
@@ -907,6 +952,15 @@
           <mana>500</mana>
         </manaConsumeRule>
         <manaAbsorbPerDay>1000</manaAbsorbPerDay>
+      </li>
+
+      <li Class="VVRace.CompProperties_ArcanePlantBulletOverride">
+        <modifiers>
+          <VV_Peashooter>
+            <additionalDamage>1</additionalDamage>
+            <additionalArmorPenetration>0.03</additionalArmorPenetration>
+          </VV_Peashooter>
+        </modifiers>
       </li>
 
       <li Class="VVRace.CompProperties_RepeatGatherable" />
@@ -1061,6 +1115,15 @@
             </points>
           </manaFromWindSpeed>
         </manaGenerateRule>
+      </li>
+
+      <li Class="VVRace.CompProperties_ArcanePlantBulletOverride">
+        <replacers>
+          <VV_Peashooter>
+            <bulletDef>VV_Bullet_PeaFast</bulletDef>
+            <chance>0.25</chance>
+          </VV_Peashooter>
+        </replacers>
       </li>
 
       <li Class="VVRace.CompProperties_RepeatGatherable" />

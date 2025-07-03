@@ -112,6 +112,7 @@
     <Compile Include="ArcanePlant\Mana\FluxRule\ManaFluxRule_RadialPollution.cs" />
     <Compile Include="ArcanePlant\Mana\FluxRule\ManaFluxRule_Wind.cs" />
     <Compile Include="ArcanePlant\Growing\Things\Building_ArcanePlantFarm.cs" />
+    <Compile Include="ArcanePlant\Plant\Comps\CompArcanePlantBulletOverride.cs" />
     <Compile Include="ArcanePlant\Plant\Things\ArcanePlant_Everflower.cs" />
     <Compile Include="ArcanePlant\Plant\Things\CornBullet.cs" />
     <Compile Include="Gather\StatWorker_Honey.cs" />
@@ -187,7 +188,7 @@
     <Compile Include="ArcanePlant\Plant\UI\PlaceWorker_AllowArtificialPlantPot.cs" />
     <Compile Include="ArcanePlant\Plant\UI\PlaceWorker_ShowPlantTurretRadius.cs" />
     <Compile Include="ArcanePlant\Plant\UI\PlaceWorker_TurretPlantTop.cs" />
-    <Compile Include="ArcanePlant\Plant\Verb_ShootWithMana.cs" />
+    <Compile Include="ArcanePlant\Verb_ShootWithMana.cs" />
     <Compile Include="Egg\AI\WorkGiver_HaulViviEgg.cs" />
     <Compile Include="Egg\UI\Alert_DangerViviEgg.cs" />
     <Compile Include="Egg\Comps\CompTemperatureRuinableEgg.cs" />

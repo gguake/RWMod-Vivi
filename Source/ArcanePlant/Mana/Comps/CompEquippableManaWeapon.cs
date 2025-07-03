@@ -5,18 +5,6 @@ using Verse;
 
 namespace VVRace
 {
-    public class ManaWeaponStatModifier
-    {
-        public StatDef stat;
-        public SimpleCurve curve;
-
-        public void LoadDataFromXmlCustom(XmlNode xmlRoot)
-        {
-            DirectXmlCrossRefLoader.RegisterObjectWantsCrossRef(this, "stat", xmlRoot.Name);
-            curve = DirectXmlToObject.ObjectFromXml<SimpleCurve>(xmlRoot, true);
-        }
-    }
-
     public class CompProperties_EquippableManaWeapon : CompProperties
     {
         public SimpleCurve meleeDamageOffsetCurve;

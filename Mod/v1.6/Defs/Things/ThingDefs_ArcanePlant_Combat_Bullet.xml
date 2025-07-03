@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 콩뿌리개 -->
+  <!-- 콩 -->
+  <ThingDef ParentName="BaseBullet">
+    <defName>VV_Bullet_Pea</defName>
+    <label>pea bullet</label>
+    <thingClass>VVRace.PeaBullet</thingClass>
+    <graphicData>
+      <texPath>Things/Projectile/VV_Pea</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <damageDef>Poke</damageDef>
+      <damageAmountBase>6</damageAmountBase>
+      <armorPenetrationBase>0</armorPenetrationBase>
+      <stoppingPower>1</stoppingPower>
+      <speed>27</speed>
+    </projectile>
+  </ThingDef>
+  
+  <!-- 화염 콩 -->
+  <ThingDef ParentName="BaseBullet">
+    <defName>VV_Bullet_PeaFlame</defName>
+    <label>pea bullet</label>
+    <thingClass>VVRace.PeaBullet</thingClass>
+    <graphicData>
+      <texPath>Things/Projectile/VV_Pea</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <color>(255,0,0)</color>
+    </graphicData>
+    <projectile>
+      <damageDef>Flame</damageDef>
+      <damageAmountBase>10</damageAmountBase>
+      <armorPenetrationBase>0</armorPenetrationBase>
+      <stoppingPower>1</stoppingPower>
+      <speed>27</speed>
+    </projectile>
+  </ThingDef>
+  
+  <!-- 얼음 콩 -->
+  <ThingDef ParentName="BaseBullet">
+    <defName>VV_Bullet_PeaIce</defName>
+    <label>pea bullet</label>
+    <thingClass>VVRace.PeaBullet</thingClass>
+    <graphicData>
+      <texPath>Things/Projectile/VV_Pea</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <color>(0,255,255)</color>
+    </graphicData>
+    <projectile>
+      <damageDef>VV_Frostbite</damageDef>
+      <damageAmountBase>10</damageAmountBase>
+      <armorPenetrationBase>0</armorPenetrationBase>
+      <stoppingPower>1</stoppingPower>
+      <speed>27</speed>
+    </projectile>
+  </ThingDef>
+  
+  <!-- 전기 콩 -->
+  <ThingDef ParentName="BaseBullet">
+    <defName>VV_Bullet_PeaLightning</defName>
+    <label>pea bullet</label>
+    <thingClass>VVRace.PeaBullet</thingClass>
+    <graphicData>
+      <texPath>Things/Projectile/VV_Pea</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <color>(255,0,255)</color>
+    </graphicData>
+    <projectile>
+      <damageDef>EMP</damageDef>
+      <damageAmountBase>20</damageAmountBase>
+      <armorPenetrationBase>0</armorPenetrationBase>
+      <stoppingPower>4</stoppingPower>
+      <speed>27</speed>
+    </projectile>
+  </ThingDef>
+
+  <!-- 가속 콩 -->
+  <ThingDef ParentName="BaseBullet">
+    <defName>VV_Bullet_PeaFast</defName>
+    <label>pea bullet</label>
+    <thingClass>VVRace.PeaBullet</thingClass>
+    <graphicData>
+      <texPath>Things/Projectile/VV_PeaFast</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <damageDef>Bullet</damageDef>
+      <damageAmountBase>9</damageAmountBase>
+      <armorPenetrationBase>0.22</armorPenetrationBase>
+      <stoppingPower>2</stoppingPower>
+      <speed>60</speed>
+    </projectile>
+  </ThingDef>
+
+  <!-- 콘뿌리개 -->
+  <!-- 옥수수 -->
+  <ThingDef ParentName="BaseBullet">
+    <defName>VV_Bullet_Corn</defName>
+    <label>corn</label>
+    <thingClass>VVRace.CornBullet</thingClass>
+
+    <graphicData>
+      <texPath>Things/Projectile/VV_Corn</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1,1)</drawSize>
+      <shaderType>Transparent</shaderType>
+    </graphicData>
+
+    <projectile>
+      <damageDef>Bomb</damageDef>
+      <speed>50</speed>
+      <explosionRadius>1.9</explosionRadius>
+      <damageAmountBase>30</damageAmountBase>
+      <screenShakeFactor>0.25</screenShakeFactor>
+    </projectile>
+
+    <modExtensions>
+      <li Class="VVRace.CornBulletData">
+        <scatterBulletDef>VV_Bullet_CornKernel</scatterBulletDef>
+        <scatterRadius>5.5</scatterRadius>
+        <scatterCount>15~23</scatterCount>
+        <includeExplosionCells>false</includeExplosionCells>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- 옥수수 낱알 -->
+  <ThingDef ParentName="BaseBullet">
+    <defName>VV_Bullet_CornKernel</defName>
+    <label>corn kernel</label>
+    <thingClass>Projectile_Explosive</thingClass>
+
+    <graphicData>
+      <texPath>Things/Projectile/VV_CornKernel</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1,1)</drawSize>
+      <shaderType>Transparent</shaderType>
+    </graphicData>
+
+    <projectile>
+      <damageDef>Bomb</damageDef>
+      <speed>18</speed>
+      <explosionRadius>0.6</explosionRadius>
+      <damageAmountBase>16</damageAmountBase>
+      <screenShakeFactor>0</screenShakeFactor>
+    </projectile>
+  </ThingDef>
+
+</Defs>

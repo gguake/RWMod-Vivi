@@ -119,23 +119,6 @@
     </modExtensions>
   </ThingDef>
 
-  <ThingDef ParentName="BaseBullet">
-    <defName>VV_Bullet_Pea</defName>
-    <label>pea bullet</label>
-    <thingClass>VVRace.PeaBullet</thingClass>
-    <graphicData>
-      <texPath>Things/Projectile/VV_Pea</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
-    </graphicData>
-    <projectile>
-      <damageDef>Poke</damageDef>
-      <damageAmountBase>7</damageAmountBase>
-      <armorPenetrationBase>0</armorPenetrationBase>
-      <stoppingPower>1</stoppingPower>
-      <speed>27</speed>
-    </projectile>
-  </ThingDef>
-
   <ThingDef ParentName="BaseWeaponTurret">
     <defName>VV_Gun_Peashooter</defName>
     <label>pea pod</label>
@@ -488,57 +471,6 @@
         </cleanlinessBonusAmountCurve>
       </li>
     </modExtensions>
-  </ThingDef>
-
-  <ThingDef ParentName="BaseBullet">
-    <defName>VV_Bullet_Corn</defName>
-    <label>corn</label>
-    <thingClass>VVRace.CornBullet</thingClass>
-
-    <graphicData>
-      <texPath>Things/Projectile/VV_Corn</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
-      <drawSize>(1,1)</drawSize>
-      <shaderType>Transparent</shaderType>
-    </graphicData>
-
-    <projectile>
-      <damageDef>Bomb</damageDef>
-      <speed>50</speed>
-      <explosionRadius>1.9</explosionRadius>
-      <damageAmountBase>30</damageAmountBase>
-      <screenShakeFactor>0.25</screenShakeFactor>
-    </projectile>
-
-    <modExtensions>
-      <li Class="VVRace.CornBulletData">
-        <scatterBulletDef>VV_Bullet_CornKernel</scatterBulletDef>
-        <scatterRadius>5.5</scatterRadius>
-        <scatterCount>15~23</scatterCount>
-        <includeExplosionCells>false</includeExplosionCells>
-      </li>
-    </modExtensions>
-  </ThingDef>
-
-  <ThingDef ParentName="BaseBullet">
-    <defName>VV_Bullet_CornKernel</defName>
-    <label>corn kernel</label>
-    <thingClass>Projectile_Explosive</thingClass>
-
-    <graphicData>
-      <texPath>Things/Projectile/VV_CornKernel</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
-      <drawSize>(1,1)</drawSize>
-      <shaderType>Transparent</shaderType>
-    </graphicData>
-
-    <projectile>
-      <damageDef>Bomb</damageDef>
-      <speed>18</speed>
-      <explosionRadius>0.6</explosionRadius>
-      <damageAmountBase>16</damageAmountBase>
-      <screenShakeFactor>0</screenShakeFactor>
-    </projectile>
   </ThingDef>
 
   <ThingDef ParentName="BaseWeaponTurret">

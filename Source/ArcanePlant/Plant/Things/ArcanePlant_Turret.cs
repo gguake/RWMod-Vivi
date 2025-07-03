@@ -1,4 +1,5 @@
 ﻿using RimWorld;
+using System.Collections.Generic;
 using System.Linq;
 using Verse;
 using Verse.AI;
@@ -51,6 +52,12 @@ namespace VVRace
         protected int _burstCooldownTicksLeft;
         protected int _burstWarmupTicksLeft;
 
+        public IEnumerable<BulletReplacer> BulletReplacers => _bulletReplacers.Values;
+        protected Dictionary<Thing, BulletReplacer> _bulletReplacers = new Dictionary<Thing, BulletReplacer>();
+
+        public IEnumerable<BulletModifier> BulletModifiers => _bulletModifiers.Values;
+        protected Dictionary<Thing, BulletModifier> _bulletModifiers = new Dictionary<Thing, BulletModifier>();
+
         public virtual bool Active
         {
             get
@@ -98,12 +105,59 @@ namespace VVRace
             {
                 _turretTop.SetRotationFromOrientation();
             }
+
+            foreach (var pos in GenAdjFast.AdjacentCellsCardinal(Position))
+            {
+                var overrider = pos.GetFirstThingWithComp<CompArcanePlantBulletOverride>(Map);
+                if (overrider != null)
+                {
+                    var comp = overrider.GetComp<CompArcanePlantBulletOverride>();
+                    if (comp != null)
+                    {
+                        comp.ApplyBulletOverrides(this);
+                    }
+                }
+            }
         }
 
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
         {
             base.DeSpawn(mode);
             ResetCurrentTarget();
+
+            _bulletReplacers.Clear();
+            _bulletModifiers.Clear();
+        }
+
+        public override void DrawExtraSelectionOverlays()
+        {
+            base.DrawExtraSelectionOverlays();
+
+            if (Spawned && Active)
+            {
+                float range = AttackVerb.verbProps.range;
+                if (range < 90f)
+                {
+                    GenDraw.DrawRadiusRing(base.Position, range);
+                }
+
+                float num = AttackVerb.verbProps.EffectiveMinRange(allowAdjacentShot: true);
+                if (num < 90f && num > 0.1f)
+                {
+                    GenDraw.DrawRadiusRing(base.Position, num);
+                }
+
+                if (WarmingUp)
+                {
+                    int degreesWide = (int)((float)_burstWarmupTicksLeft * 0.5f);
+                    GenDraw.DrawAimPie(this, _currentTarget, degreesWide, (float)def.size.x * 0.5f);
+                }
+            }
+        }
+
+        public override AcceptanceReport ClaimableBy(Faction by)
+        {
+            return base.ClaimableBy(by) && !Active;
         }
 
         protected override void Tick()
@@ -145,35 +199,26 @@ namespace VVRace
             }
         }
 
-        public override void DrawExtraSelectionOverlays()
+        public void AddBulletReplaceData(Thing thing, BulletReplacer replacer)
         {
-            base.DrawExtraSelectionOverlays();
-
-            if (Spawned && Active)
+            if (!_bulletReplacers.ContainsKey(thing))
             {
-                float range = AttackVerb.verbProps.range;
-                if (range < 90f)
-                {
-                    GenDraw.DrawRadiusRing(base.Position, range);
-                }
-
-                float num = AttackVerb.verbProps.EffectiveMinRange(allowAdjacentShot: true);
-                if (num < 90f && num > 0.1f)
-                {
-                    GenDraw.DrawRadiusRing(base.Position, num);
-                }
-
-                if (WarmingUp)
-                {
-                    int degreesWide = (int)((float)_burstWarmupTicksLeft * 0.5f);
-                    GenDraw.DrawAimPie(this, _currentTarget, degreesWide, (float)def.size.x * 0.5f);
-                }
+                _bulletReplacers.Add(thing, replacer);
             }
         }
 
-        public override AcceptanceReport ClaimableBy(Faction by)
+        public void AddBulletModifierData(Thing thing, BulletModifier modifier)
         {
-            return base.ClaimableBy(by) && !Active;
+            if (!_bulletModifiers.ContainsKey(thing))
+            {
+                _bulletModifiers.Add(thing, modifier);
+            }
+        }
+
+        public void RemoveBulletOverrideData(Thing thing)
+        {
+            _bulletReplacers.Remove(thing);
+            _bulletModifiers.Remove(thing);
         }
 
         protected void TryActivateBurst()

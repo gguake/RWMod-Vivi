@@ -76,4 +76,36 @@
     <combatLogRules>Damage_Extinguish</combatLogRules>
     <consideredHelpful>true</consideredHelpful>
   </DamageDef>
+  
+  <DamageDef>
+    <defName>VV_Frostbite</defName>
+    <workerClass>DamageWorker_Frostbite</workerClass>
+    <label>frostbite</label>
+    <hasForcefulImpact>false</hasForcefulImpact>
+    <makesBlood>false</makesBlood>
+    <canInterruptJobs>false</canInterruptJobs>
+    <externalViolence>true</externalViolence>
+    <deathMessage>{0} has succumbed to frostbite.</deathMessage>
+    <hediff>Frostbite</hediff>
+    <armorCategory>Heat</armorCategory>
+    <minDamageToFragment>15</minDamageToFragment>
+    <defaultDamage>10</defaultDamage>
+    <defaultArmorPenetration>0</defaultArmorPenetration>
+    <!-- TODO -->
+    <explosionCellFleck>BlastFlame</explosionCellFleck>
+    <explosionColorCenter>(0.7, 1, 1)</explosionColorCenter>
+    <explosionColorEdge>(1, 1, 1)</explosionColorEdge>
+    <soundExplosion>Explosion_Flame</soundExplosion>
+    <combatLogRules>VV_Damage_Frostbite</combatLogRules>
+    <!---->
+    <canUseDeflectMetalEffect>false</canUseDeflectMetalEffect>
+    <scaleDamageToBuildingsBasedOnFlammability>true</scaleDamageToBuildingsBasedOnFlammability>
+    
+    <additionalHediffs>
+      <li>
+        <hediff>VV_Frozen</hediff>
+        <severityPerDamageDealt>0.009</severityPerDamageDealt>
+      </li>
+    </additionalHediffs>
+  </DamageDef>
 </Defs>
