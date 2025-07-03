@@ -199,6 +199,11 @@ namespace VVRace
                             forcedXenotype: VVXenotypeDefOf.VV_Vivi,
                             forcedXenogenes: xenogenes);
 
+                        if (hatcheeParent != null && hatcheeParent.Name is NameTriple nameTriple)
+                        {
+                            request.SetFixedLastName(nameTriple.Last);
+                        }
+
                         var pawn = PawnGenerator.GeneratePawn(request);
                         if (GenSpawn.Spawn(pawn, hatchery.Position, hatchery.Map) != null)
                         {
