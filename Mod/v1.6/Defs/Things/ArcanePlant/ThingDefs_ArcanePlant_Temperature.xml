@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 잔불꽃 -->
+  <ThingDef ParentName="VV_ArcanePlantProductive">
+    <defName>VV_EmberBloom</defName>
+    <label>emberbloom</label>
+    <description>a arcane flower shaped like flames that converts mana into heat until the surrounding temperature reaches a certain level. In environments that are sufficiently hot, it produces and accumulates mana instead of emitting heat.
+\nIf placed adjacent to a peashooter, it has a 25% chance to fire a fire pea instead when the peashooter attacks. Fire peas deal flame damage instead of physical damage and set the target on fire.\nIf multiple emberblooms are adjacent, the effect stacks.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_HeatingPetal</ThingDef>
+    </descriptionHyperlinks>
+
+    <graphicData>
+      <texPath>Things/Plants/VV_EmberBloom</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+
+    <statBases>
+      <MaxHitPoints>50</MaxHitPoints>
+      <WorkToBuild>15000</WorkToBuild>
+      <Beauty>10</Beauty>
+      <BeautyOutdoors>10</BeautyOutdoors>
+
+      <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
+      <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
+    </statBases>
+
+    <costList>
+      <VV_HeatingPetal>20</VV_HeatingPetal>
+    </costList>
+
+    <comps>
+      <li Class="VVRace.CompProperties_Mana">
+        <manaCapacity>300</manaCapacity>
+        <manaGenerateRule Class="VVRace.ManaFluxRule_Temperature">
+          <activeTemperatureRange>0~200</activeTemperatureRange>
+          <manaFromTemperatureRange>0~2000</manaFromTemperatureRange>
+        </manaGenerateRule>
+        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
+          <mana>300</mana>
+        </manaConsumeRule>
+        <manaAbsorbPerDay>300</manaAbsorbPerDay>
+      </li>
+
+      <li Class="VVRace.CompProperties_ArcanePlantBulletOverride">
+        <replacers>
+          <VV_Peashooter>
+            <bulletDef>VV_Bullet_PeaFlame</bulletDef>
+            <chance>0.25</chance>
+          </VV_Peashooter>
+        </replacers>
+      </li>
+
+      <li Class="VVRace.CompProperties_RepeatGatherable" />
+
+      <li Class="VVRace.CompProperties_ManaGlower">
+        <glowRadius>10</glowRadius>
+        <glowColor>(255,247,138,0)</glowColor>
+      </li>
+
+      <li Class="CompProperties_HeatPusher">
+        <compClass>VVRace.CompManaHeatPusher</compClass>
+        <heatPerSecond>14</heatPerSecond>
+        <heatPushMaxTemperature>29</heatPushMaxTemperature>
+      </li>
+    </comps>
+    
+    <researchPrerequisites>
+      <li>VV_ArcaneBotany</li>
+    </researchPrerequisites>
+
+    <modExtensions>
+      <li Class="VVRace.GrowingArcanePlantData">
+        <ingredients>
+          <VV_UnknownSeed>1</VV_UnknownSeed>
+          <VV_Fertilizer>30</VV_Fertilizer>
+          <VV_Pollen>100</VV_Pollen>
+        </ingredients>
+
+        <totalGrowDays>7.5</totalGrowDays>
+        <maxHealth>200</maxHealth>
+        <healthRegenNoDamagedByDays>50</healthRegenNoDamagedByDays>
+
+        <maxMana>150</maxMana>
+        <consumedManaByDay>60</consumedManaByDay>
+
+        <manaSensitivity>Medium</manaSensitivity>
+        <manageSensitivity>Low</manageSensitivity>
+        <temperatureSensitivity>High</temperatureSensitivity>
+        
+        <manageIntervalTicks>90000</manageIntervalTicks>
+        <optimalTemperatureRange>8~120</optimalTemperatureRange>
+
+        <successChanceCurve>
+          <points>
+            <li>(0,0)</li>
+            <li>(0.3,0.15)</li>
+            <li>(0.5,0.5)</li>
+            <li>(0.7,0.8)</li>
+            <li>(0.9,1)</li>
+          </points>
+        </successChanceCurve>
+        <healthBonusAmountCurve>
+          <points>
+            <li>(0,0)</li>
+            <li>(0.5,0)</li>
+            <li>(0.75,0.75)</li>
+            <li>(1,1.5)</li>
+          </points>
+        </healthBonusAmountCurve>
+        <cleanlinessBonusAmountCurve>
+          <points>
+            <li>(-10,0)</li>
+            <li>(-0.0001,0)</li>
+            <li>(0,1)</li>
+            <li>(0.2,1.5)</li>
+            <li>(0.4,2.5)</li>
+            <li>(0.6,4.5)</li>
+            <li>(1.0,6)</li>
+          </points>
+        </cleanlinessBonusAmountCurve>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- 서리꽃 -->
+  <ThingDef ParentName="VV_ArcanePlantProductive">
+    <defName>VV_FrostBloom</defName>
+    <label>frostbloom</label>
+    <description>a arcane flower shaped like ice crystals that consumes mana to absorb heat until the surrounding temperature reaches a certain level. In environments that are sufficiently cold, it produces and accumulates mana instead of absorbing heat.
+\nIf placed adjacent to a peashooter, it has a 25% chance to fire an ice pea instead when the peashooter attacks. Ice peas deal frostbite damage instead of physical damage and temporarily slow the target's movement speed.\nIf multiple frostblooms are adjacent, the effect stacks.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_CoolingPetal</ThingDef>
+    </descriptionHyperlinks>
+
+    <graphicData>
+      <texPath>Things/Plants/VV_FrostBloom</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+
+    <statBases>
+      <MaxHitPoints>50</MaxHitPoints>
+      <WorkToBuild>15000</WorkToBuild>
+      <Beauty>10</Beauty>
+      <BeautyOutdoors>10</BeautyOutdoors>
+      
+      <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
+      <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
+    </statBases>
+
+    <costList>
+      <VV_CoolingPetal>20</VV_CoolingPetal>
+    </costList>
+
+    <comps>
+      <li Class="VVRace.CompProperties_Mana">
+        <manaCapacity>300</manaCapacity>
+        <manaGenerateRule Class="VVRace.ManaFluxRule_CompositeSum">
+          <rules>
+            <li Class="VVRace.ManaFluxRule_Temperature">
+              <activeTemperatureRange>-100~0</activeTemperatureRange>
+              <manaFromTemperatureRange>0~2000</manaFromTemperatureRange>
+              <manaLerpReversed>true</manaLerpReversed>
+            </li>
+            <li Class="VVRace.ManaFluxRule_WeatherSnowy">
+              <disableIfRoofed>true</disableIfRoofed>
+              <mana>600</mana>
+            </li>
+          </rules>
+        </manaGenerateRule>
+        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
+          <mana>300</mana>
+        </manaConsumeRule>
+        <manaAbsorbPerDay>300</manaAbsorbPerDay>
+      </li>
+
+      <li Class="VVRace.CompProperties_ArcanePlantBulletOverride">
+        <replacers>
+          <VV_Peashooter>
+            <bulletDef>VV_Bullet_PeaIce</bulletDef>
+            <chance>0.25</chance>
+          </VV_Peashooter>
+        </replacers>
+      </li>
+
+      <li Class="VVRace.CompProperties_RepeatGatherable" />
+
+      <li Class="CompProperties_HeatPusher">
+        <compClass>VVRace.CompManaHeatPusher</compClass>
+        <heatPerSecond>-8</heatPerSecond>
+        <heatPushMinTemperature>-15</heatPushMinTemperature>
+      </li>
+    </comps>
+    
+    <researchPrerequisites>
+      <li>VV_ArcaneBotany</li>
+    </researchPrerequisites>
+
+    <modExtensions>
+      <li Class="VVRace.GrowingArcanePlantData">
+        <ingredients>
+          <VV_UnknownSeed>1</VV_UnknownSeed>
+          <VV_Fertilizer>30</VV_Fertilizer>
+          <VV_Pollen>100</VV_Pollen>
+        </ingredients>
+
+        <totalGrowDays>7.5</totalGrowDays>
+        <maxHealth>200</maxHealth>
+        <healthRegenNoDamagedByDays>50</healthRegenNoDamagedByDays>
+
+        <maxMana>150</maxMana>
+        <consumedManaByDay>60</consumedManaByDay>
+
+        <manaSensitivity>Medium</manaSensitivity>
+        <manageSensitivity>Low</manageSensitivity>
+        <temperatureSensitivity>High</temperatureSensitivity>
+        
+        <manageIntervalTicks>90000</manageIntervalTicks>
+        <optimalTemperatureRange>-100~17</optimalTemperatureRange>
+
+        <successChanceCurve>
+          <points>
+            <li>(0,0)</li>
+            <li>(0.3,0.15)</li>
+            <li>(0.5,0.5)</li>
+            <li>(0.7,0.8)</li>
+            <li>(0.9,1)</li>
+          </points>
+        </successChanceCurve>
+        <healthBonusAmountCurve>
+          <points>
+            <li>(0,0)</li>
+            <li>(0.5,0)</li>
+            <li>(0.75,0.75)</li>
+            <li>(1,1.5)</li>
+          </points>
+        </healthBonusAmountCurve>
+        <cleanlinessBonusAmountCurve>
+          <points>
+            <li>(-10,0)</li>
+            <li>(-0.0001,0)</li>
+            <li>(0,1)</li>
+            <li>(0.2,1.5)</li>
+            <li>(0.4,2.5)</li>
+            <li>(0.6,4.5)</li>
+            <li>(1.0,6)</li>
+          </points>
+        </cleanlinessBonusAmountCurve>
+      </li>
+    </modExtensions>
+  </ThingDef>
+</Defs>

@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 섬광꽃 -->
+  <ThingDef ParentName="VV_ArcanePlantProductive">
+    <defName>VV_Shockerbud</defName>
+    <label>flashbud</label>
+    <description>a arcane flower that discharges electricity within its transparent petals. It can be wired to store a large amount of power, but consumes mana in proportion.
+\nIf it receives external shocks, the internal voltage becomes unstable, generating massive electromagnetic pulses in the vicinity and discharging mana.
+\nIf placed adjacent to a peashooter, it has a 25% chance to fire an electric pea instead when the peashooter attacks. Electric Peas deal EMP damage instead of physical damage and stun mechanical units.\nIf multiple flashbud or thunderpetals are adjacent, the effect stacks.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_SparklingPetal</ThingDef>
+    </descriptionHyperlinks>
+    <tickerType>Normal</tickerType>
+    <thingClass>VVRace.ArcanePlant_Shockerbud</thingClass>
+
+    <graphicData>
+      <texPath>Things/Plants/VV_Shockerbud</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <WorkToBuild>28000</WorkToBuild>
+      <Beauty>10</Beauty>
+      <BeautyOutdoors>10</BeautyOutdoors>
+
+      <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
+      <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
+    </statBases>
+
+    <costList>
+      <VV_SparklingPetal>20</VV_SparklingPetal>
+    </costList>
+
+    <comps>
+      <li Class="VVRace.CompProperties_Mana">
+        <manaCapacity>1500</manaCapacity>
+        <manaConsumeRule Class="VVRace.ManaFluxRule_BatteryStored">
+          <manaFromStoredEnergy>0~750</manaFromStoredEnergy>
+        </manaConsumeRule>
+        <manaAbsorbPerDay>1500</manaAbsorbPerDay>
+      </li>
+
+      <li Class="VVRace.CompProperties_ArcanePlantBulletOverride">
+        <replacers>
+          <VV_Peashooter>
+            <bulletDef>VV_Bullet_PeaLightning</bulletDef>
+            <chance>0.25</chance>
+          </VV_Peashooter>
+        </replacers>
+      </li>
+
+      <li Class="VVRace.CompProperties_RepeatGatherable" />
+
+      <li Class="VVRace.CompProperties_ManaGlower">
+        <glowRadius>3</glowRadius>
+        <glowColor>(213,110,248,0)</glowColor>
+      </li>
+      <li Class="CompProperties_Battery">
+        <storedEnergyMax>1200</storedEnergyMax>
+        <efficiency>0.5</efficiency>
+        <shortCircuitInRain>false</shortCircuitInRain>
+        <transmitsPower>true</transmitsPower>
+      </li>
+
+      <li Class="VVRace.CompProperties_ManaSensorExplosive">
+        <requiredManaPct>0.5</requiredManaPct>
+        <chanceToExplodeFromDamage>1</chanceToExplodeFromDamage>
+        
+        <explosiveRadius>6.9</explosiveRadius>
+        <explosiveCooldownTicks>2500~2500</explosiveCooldownTicks>
+        <explosiveDamageDef>EMP</explosiveDamageDef>
+      </li>
+    </comps>
+
+    <building>
+      <allowWireConnection>true</allowWireConnection>
+    </building>
+    
+    <researchPrerequisites>
+      <li>VV_ElectricArcaneBotany</li>
+    </researchPrerequisites>
+
+    <modExtensions>
+      <li Class="VVRace.GrowingArcanePlantData">
+        <ingredients>
+          <VV_UnknownSeed>1</VV_UnknownSeed>
+          <Steel>100</Steel>
+          <VV_Pollen>150</VV_Pollen>
+        </ingredients>
+
+        <totalGrowDays>10</totalGrowDays>
+        <maxHealth>120</maxHealth>
+        <healthRegenNoDamagedByDays>50</healthRegenNoDamagedByDays>
+
+        <maxMana>240</maxMana>
+        <consumedManaByDay>180</consumedManaByDay>
+
+        <manaSensitivity>High</manaSensitivity>
+        <manageSensitivity>Low</manageSensitivity>
+        <glowSensitivity>Low</glowSensitivity>
+        
+        <manageIntervalTicks>150000</manageIntervalTicks>
+        <optimalGlowRange>0.5~1.0</optimalGlowRange>
+
+        <successChanceCurve>
+          <points>
+            <li>(0,0)</li>
+            <li>(0.3,0.15)</li>
+            <li>(0.5,0.5)</li>
+            <li>(0.7,0.8)</li>
+            <li>(0.9,1)</li>
+          </points>
+        </successChanceCurve>
+        <healthBonusAmountCurve>
+          <points>
+            <li>(0,0)</li>
+            <li>(0.5,0)</li>
+            <li>(0.75,0.75)</li>
+            <li>(1,1.5)</li>
+          </points>
+        </healthBonusAmountCurve>
+        <cleanlinessBonusAmountCurve>
+          <points>
+            <li>(-10,0)</li>
+            <li>(-0.0001,0)</li>
+            <li>(0,1)</li>
+            <li>(0.2,1.5)</li>
+            <li>(0.4,2.5)</li>
+            <li>(0.6,4.5)</li>
+            <li>(1.0,6)</li>
+          </points>
+        </cleanlinessBonusAmountCurve>
+      </li>
+    </modExtensions>
+  </ThingDef>
+  
+  <!-- 번개꽃 -->
+  <ThingDef ParentName="VV_ArcanePlantProductive">
+    <defName>VV_Thunderpetals</defName>
+    <label>thunderpetals</label>
+    <description>a arcane flower with stamens that conduct electricity, capable of connecting to power lines to convert mana into electricity. When lightning strikes and the mana level is sufficient, it attracts the lightning to itself and converts it into mana.
+\nIf placed adjacent to a peashooter, it has a 25% chance to fire an electric pea instead when the peashooter attacks. Electric peas deal EMP damage instead of physical damage and stun mechanical units.\nIf multiple flashbud or thunderpetals are adjacent, the effect stacks.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_SparklingPetal</ThingDef>
+    </descriptionHyperlinks>
+    <tickerType>Normal</tickerType>
+
+    <graphicData>
+      <texPath>Things/Plants/VV_Thunderpetals</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+
+    <statBases>
+      <MaxHitPoints>60</MaxHitPoints>
+      <WorkToBuild>28000</WorkToBuild>
+      <Beauty>10</Beauty>
+      <BeautyOutdoors>10</BeautyOutdoors>
+      
+      <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
+      <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
+    </statBases>
+
+    <costList>
+      <VV_SparklingPetal>20</VV_SparklingPetal>
+    </costList>
+
+    <comps>
+      <li Class="VVRace.CompProperties_Mana">
+        <manaCapacity>3000</manaCapacity>
+        <manaGenerateRule Class="VVRace.ManaFluxRule_Power">
+          <powerManaRatio>0.5</powerManaRatio>
+          <min>0</min>
+          <max>1200</max>
+        </manaGenerateRule>
+
+        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
+          <mana>1500</mana>
+        </manaConsumeRule>
+        <manaAbsorbPerDay>2000</manaAbsorbPerDay>
+      </li>
+
+      <li Class="VVRace.CompProperties_ArcanePlantBulletOverride">
+        <replacers>
+          <VV_Peashooter>
+            <bulletDef>VV_Bullet_PeaLightning</bulletDef>
+            <chance>0.25</chance>
+          </VV_Peashooter>
+        </replacers>
+      </li>
+
+      <li Class="VVRace.CompProperties_RepeatGatherable" />
+
+      <li Class="CompProperties_Power">
+        <compClass>VVRace.CompManaPowerPlant</compClass>
+        <basePowerConsumption>-700</basePowerConsumption>
+        <transmitsPower>true</transmitsPower>
+      </li>
+      <li Class="VVRace.CompProperties_ManaLightningLod">
+        <mana>500</mana>
+      </li>
+    </comps>
+
+    <building>
+      <allowWireConnection>true</allowWireConnection>
+    </building>
+    
+    <researchPrerequisites>
+      <li>VV_ElectricArcaneBotany</li>
+    </researchPrerequisites>
+
+    <modExtensions>
+      <li Class="VVRace.GrowingArcanePlantData">
+        <ingredients>
+          <VV_UnknownSeed>1</VV_UnknownSeed>
+          <Gold>20</Gold>
+          <VV_Pollen>150</VV_Pollen>
+        </ingredients>
+
+        <totalGrowDays>10</totalGrowDays>
+        <maxHealth>120</maxHealth>
+        <healthRegenNoDamagedByDays>50</healthRegenNoDamagedByDays>
+
+        <maxMana>400</maxMana>
+        <consumedManaByDay>100</consumedManaByDay>
+
+        <manaSensitivity>Medium</manaSensitivity>
+        <manageSensitivity>High</manageSensitivity>
+        <glowSensitivity>Low</glowSensitivity>
+        
+        <manageIntervalTicks>45000</manageIntervalTicks>
+        <optimalGlowRange>0.5~1.0</optimalGlowRange>
+
+        <successChanceCurve>
+          <points>
+            <li>(0,0)</li>
+            <li>(0.3,0.15)</li>
+            <li>(0.5,0.5)</li>
+            <li>(0.7,0.8)</li>
+            <li>(0.9,1)</li>
+          </points>
+        </successChanceCurve>
+        <healthBonusAmountCurve>
+          <points>
+            <li>(0,0)</li>
+            <li>(0.5,0)</li>
+            <li>(0.75,0.75)</li>
+            <li>(1,1.5)</li>
+          </points>
+        </healthBonusAmountCurve>
+        <cleanlinessBonusAmountCurve>
+          <points>
+            <li>(-10,0)</li>
+            <li>(-0.0001,0)</li>
+            <li>(0,1)</li>
+            <li>(0.2,1.5)</li>
+            <li>(0.4,2.5)</li>
+            <li>(0.6,4.5)</li>
+            <li>(1.0,6)</li>
+          </points>
+        </cleanlinessBonusAmountCurve>
+      </li>
+    </modExtensions>
+  </ThingDef>
+</Defs>
