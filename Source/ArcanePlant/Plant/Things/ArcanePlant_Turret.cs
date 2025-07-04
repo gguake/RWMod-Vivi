@@ -74,7 +74,7 @@ namespace VVRace
             _turretTop = new ArcanePlantTurretTop(this);
         }
 
-        public virtual bool ThreatDisabled(IAttackTargetSearcher disabledFor) => !Active || !AttackVerb.Available();
+        public virtual bool ThreatDisabled(IAttackTargetSearcher disabledFor) => !Active || (!AttackVerb.Available() && -ManaComp.ManaExternalChangeByDay < 30);
 
         public override void ExposeData()
         {

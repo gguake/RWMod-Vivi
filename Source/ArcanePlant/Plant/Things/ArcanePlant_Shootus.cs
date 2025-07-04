@@ -234,6 +234,12 @@ namespace VVRace
             return sb.ToString();
         }
 
+        public override void PreApplyDamage(ref DamageInfo dinfo, out bool absorbed)
+        {
+            base.PreApplyDamage(ref dinfo, out absorbed);
+            dinfo.SetAmount(0.9f * dinfo.Amount);
+        }
+
         public void GetChildHolders(List<IThingHolder> outChildren)
         {
             ThingOwnerUtility.AppendThingHoldersFromThings(outChildren, GetDirectlyHeldThings());

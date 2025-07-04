@@ -102,13 +102,13 @@
         </li>
         <li Class="ScenPart_StartingThing_Defined">
           <def>StartingThing_Defined</def>
-          <thingDef>VV_Richflower</thingDef>
+          <thingDef>VV_Starlitflower</thingDef>
           <count>1</count>
         </li>
         <li Class="ScenPart_StartingThing_Defined">
           <def>StartingThing_Defined</def>
           <thingDef>VV_Peashooter</thingDef>
-          <count>3</count>
+          <count>2</count>
         </li>
 
         <!-- 시작시 소유품 (분산) -->

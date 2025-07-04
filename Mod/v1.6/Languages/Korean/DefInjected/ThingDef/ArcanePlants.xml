@@ -31,10 +31,9 @@
 \n콩뿌리개와 인접한 위치에 설치하면 콩뿌리개가 사격시 발사하는 콩의 위력과 관통력을 소폭 증가시킵니다.\n인접한 풍년화나 정화초가 여러개 있다면 효과가 중첩됩니다.</VV_Richflower.description>
 
 <VV_Purifimint.label>정화초</VV_Purifimint.label>
-<VV_Purifimint.description>주변에 빛을 내는 작은 마법 식물로 독성 폐기물을 배치하면 이를 천천히 흡수해 마나를 생산하며 주변 토양의 오염을 정화하기도 합니다. 미관상 아름다워 장식에 쓰이기도 합니다.
-\n저장된 마나를 일시적으로 방출해 외부의 투사체를 잠시동안 차단하는 보호막을 잠시동안 생성할 수도 있습니다.
+<VV_Purifimint.description>주변에 빛을 내는 작은 마법 식물로 독성 폐기물을 배치하면 이를 천천히 흡수해 마나를 생산합니다. 주변 토양의 오염을 정화하기도 하며 미관상 아름다워 장식에 쓰이기도 합니다.
 \n콩뿌리개와 인접한 위치에 설치하면 콩뿌리개가 사격시 발사하는 콩의 위력과 관통력을 소폭 증가시킵니다.\n인접한 풍년화나 정화초가 여러개 있다면 효과가 중첩됩니다.</VV_Purifimint.description>
-<VV_PurifimintShield.label>정화초 보호막</VV_PurifimintShield.label>
+
 
 <VV_Skyweed.label>하늘풀</VV_Skyweed.label>
 <VV_Skyweed.description>민들레 씨앗과 비슷한 모양의 마법 식물로 실외에 있을때 바람의 힘을 마나로 변환합니다. 이 풀의 홀씨는 매우 가볍고 잘 날아가는 성질이 있어 소량의 물건을 실어보내는 용도로도 사용할 수 있습니다.
@@ -45,6 +44,11 @@
 <VV_ActiveSkyweedBox.label>하늘풀 상자</VV_ActiveSkyweedBox.label>
 <VV_SkyweedBoxIncoming.label>하늘풀 상자 (접근 중)</VV_SkyweedBoxIncoming.label>
 <VV_SkyweedBoxLeaving.label>하늘풀 상자 (떠나는 중)</VV_SkyweedBoxLeaving.label>
+
+<VV_Starlitflower.label>별맞이꽃</VV_Starlitflower.label>
+<VV_Starlitflower.description>밤에만 피는 마법 꽃으로 밤에는 마나를 생산해 방출하며 빛을 내고 낮에는 꽃이 지며 소량의 마나를 흡수합니다.
+\n주변의 마나와 공명해 특수한 에너지로 이루어진 별빛 장막을 짧은 시간동안 생성할 수 있습니다. 별빛 장막은 적대적인 투사체를 차단하며 일정 피해를 흡수하거나 시간이 지나면 사라집니다. 밤에 별빛 장막을 생성하면 훨씬 많은 피해를 흡수할 수 있습니다.</VV_Starlitflower.description>
+<VV_StarlitVeil.label>별빛 장막</VV_StarlitVeil.label>
 
 <VV_Peashooter.label>콩뿌리개</VV_Peashooter.label>
 <VV_Peashooter.description>주변의 적을 감지하면 마법 콩을 발사해 쫓아내는 마법 식물입니다. 콩을 발사할 때마다 마나를 소모하며 위력은 약하지만 한번에 대량의 콩을 발사하므로 경장갑의 적에게 효과적입니다.

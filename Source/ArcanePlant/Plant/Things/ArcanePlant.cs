@@ -153,6 +153,26 @@ namespace VVRace
             return Spawned ? Faction == faction : true;
         }
 
+        public override void PreApplyDamage(ref DamageInfo dinfo, out bool absorbed)
+        {
+            base.PreApplyDamage(ref dinfo, out absorbed);
+
+            var damage = dinfo.Amount;
+            if (dinfo.Def.Worker is DamageWorker_Blunt || dinfo.Def.isExplosive)
+            {
+                damage *= 0.8f;
+            }
+
+            if (damage < 1f)
+            {
+                absorbed = true;
+            }
+            else
+            {
+                dinfo.SetAmount(damage);
+            }
+        }
+
         public void ReserveAutoMinify()
         {
             _forceMinify = true;

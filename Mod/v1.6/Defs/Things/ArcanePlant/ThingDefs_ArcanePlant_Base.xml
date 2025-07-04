@@ -39,6 +39,17 @@
       <WorkToBuild>1800</WorkToBuild>
     </statBases>
 
+    <damageMultipliers>
+      <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>2</multiplier>
+      </li>
+      <li>
+        <damageDef>Burn</damageDef>
+        <multiplier>2</multiplier>
+      </li>
+    </damageMultipliers>
+
     <size>(1,1)</size>
     <stackLimit>1</stackLimit>
     <fillPercent>0.2</fillPercent>

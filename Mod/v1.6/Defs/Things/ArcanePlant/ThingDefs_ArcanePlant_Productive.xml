@@ -28,6 +28,17 @@
       <VV_PlantHoneyGatherYield>0.5</VV_PlantHoneyGatherYield>
     </statBases>
 
+    <damageMultipliers Inherit="False">
+      <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+      <li>
+        <damageDef>Burn</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>
+
     <costList>
       <VV_CoolingPetal>20</VV_CoolingPetal>
     </costList>
@@ -288,9 +299,9 @@
             <points>
               <li>(0,0)</li>
               <li>(0.5,0)</li>
-              <li>(1.0,200)</li>
+              <li>(1.0,300)</li>
               <li>(1.3,600)</li>
-              <li>(1.4,900)</li>
+              <li>(1.4,1000)</li>
             </points>
           </manaFromFertility>
         </manaGenerateRule>
@@ -313,7 +324,7 @@
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
       <li Class="VVRace.CompProperties_ManaTerraformer">
-        <cooldownTicks>90000~600000</cooldownTicks>
+        <cooldownTicks>180000~400000</cooldownTicks>
         <radiusRange>0.3~3.8</radiusRange>
         <radiusGrowth>0.9</radiusGrowth>
         <terraforms>
@@ -399,7 +410,6 @@
     <defName>VV_Purifimint</defName>
     <label>purifimint</label>
     <description>a arcane plant that emits a small glow around it will slowly absorb toxic wastepacks placed, producing mana and also purifying the surrounding pollutions. It is also aesthetically pleasing and used for decoration.
-\nIt can also create a temporary shield that blocks incoming projectiles by briefly releasing stored mana.
 \nIf placed adjacent to a peashooter, it slightly increases the power and armor penetration of its peas when fired. If multiple richflowers or purifimints are adjacent, the effect stacks.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_PerfumingPetal</ThingDef>
@@ -423,7 +433,7 @@
 
     <comps>
       <li Class="VVRace.CompProperties_Mana">
-        <manaCapacity>1500</manaCapacity>
+        <manaCapacity>600</manaCapacity>
 
         <manaGenerateRule Class="VVRace.ManaFluxRule_Refuelable">
           <mana>1200</mana>
@@ -431,7 +441,7 @@
         </manaGenerateRule>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>400</mana>
+          <mana>200</mana>
         </manaConsumeRule>
         <manaAbsorbPerDay>500</manaAbsorbPerDay>
       </li>
@@ -471,13 +481,121 @@
         </fuelFilter>
         <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
       </li>
+    </comps>
+    
+    <researchPrerequisites>
+      <li>VV_AdvancedArcaneBotany</li>
+    </researchPrerequisites>
+
+    <modExtensions>
+      <li Class="VVRace.GrowingArcanePlantData">
+        <ingredients>
+          <VV_UnknownSeed>1</VV_UnknownSeed>
+          <Neutroamine>20</Neutroamine>
+          <VV_Pollen>150</VV_Pollen>
+        </ingredients>
+
+        <totalGrowDays>25</totalGrowDays>
+        <maxHealth>250</maxHealth>
+        <healthRegenNoDamagedByDays>25</healthRegenNoDamagedByDays>
+
+        <maxMana>270</maxMana>
+        <consumedManaByDay>50</consumedManaByDay>
+
+        <manaSensitivity>Medium</manaSensitivity>
+        <temperatureSensitivity>Low</temperatureSensitivity>
+        
+        <optimalTemperatureRange>4~36</optimalTemperatureRange>
+
+        <successChanceCurve>
+          <points>
+            <li>(0,0)</li>
+            <li>(0.3,0.15)</li>
+            <li>(0.5,0.5)</li>
+            <li>(0.7,0.8)</li>
+            <li>(0.9,1)</li>
+          </points>
+        </successChanceCurve>
+        <healthBonusAmountCurve>
+          <points>
+            <li>(0,0)</li>
+            <li>(0.5,0)</li>
+            <li>(0.75,0.75)</li>
+            <li>(1,1.5)</li>
+          </points>
+        </healthBonusAmountCurve>
+        <cleanlinessBonusAmountCurve>
+          <points>
+            <li>(-10,0)</li>
+            <li>(-0.0001,0)</li>
+            <li>(0,1)</li>
+            <li>(0.2,1.5)</li>
+            <li>(0.4,2.5)</li>
+            <li>(0.6,4.5)</li>
+            <li>(1.0,6)</li>
+          </points>
+        </cleanlinessBonusAmountCurve>
+      </li>
+    </modExtensions>
+  </ThingDef>
+  
+  <!-- 별맞이꽃 -->
+  <ThingDef ParentName="VV_ArcanePlantProductive">
+    <defName>VV_Starlitflower</defName>
+    <label>starlitflower</label>
+    <description>a arcane flower blooms exclusively at night, generating and emitting mana while radiating light. During the day, the flower wilts and absorbs a small amount of mana.
+\nStarlitflower resonates with the surrounding mana to create a starlit veil, a barrier of unique energy, for a brief period. Starlit veil blocks hostile projectiles and absorbs a certain amount of damage before dissipating. When starlit veil is formed at night, it can absorb significantly more damage.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_PerfumingPetal</ThingDef>
+    </descriptionHyperlinks>
+
+    <graphicData>
+      <texPath>Things/Plants/VV_Purifier</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+
+    <statBases>
+      <MaxHitPoints>90</MaxHitPoints>
+      <WorkToBuild>33000</WorkToBuild>
+      <Beauty>15</Beauty>
+      <BeautyOutdoors>15</BeautyOutdoors>
+    </statBases>
+
+    <costList>
+      <VV_PerfumingPetal>20</VV_PerfumingPetal>
+    </costList>
+
+    <comps>
+      <li Class="VVRace.CompProperties_Mana">
+        <manaCapacity>1000</manaCapacity>
+
+        <manaGenerateRule Class="VVRace.ManaFluxRule_TimeOfDay">
+          <mana>1000</mana>
+          <timeOfDay>Night</timeOfDay>
+        </manaGenerateRule>
+        
+        <manaConsumeRule Class="VVRace.ManaFluxRule_TimeOfDay">
+          <mana>200</mana>
+          <timeOfDay>Day</timeOfDay>
+        </manaConsumeRule>
+        <manaAbsorbPerDay>400</manaAbsorbPerDay>
+      </li>
+
+      <li Class="VVRace.CompProperties_RepeatGatherable" />
+      
+      <li Class="VVRace.CompProperties_ManaGlower">
+        <glowRadius>12</glowRadius>
+        <glowColor>(213,110,248,0)</glowColor>
+      </li>
       
       <li Class="VVRace.CompProperties_ManaShieldProjector">
-        <shieldDef>VV_PurifimintShield</shieldDef>
+        <shieldDef>VV_StarlitVeil</shieldDef>
         <mote>VV_Mote_ShieldProjectorEffect</mote>
 
-        <shieldMaxHp>600</shieldMaxHp>
-        <requiredManaPct>0.1</requiredManaPct>
+        <iconPath>UI/Commands/VV_StarlitVeil</iconPath>
+
+        <shieldMaxHp>160</shieldMaxHp>
+        <requiredManaPct>0.4</requiredManaPct>
       </li>
     </comps>
     
@@ -538,9 +656,9 @@
   </ThingDef>
   
   <ThingDef>
-    <defName>VV_PurifimintShield</defName>
-    <label>purifimint shield</label>
-    <thingClass>VVRace.PurifimintShield</thingClass>
+    <defName>VV_StarlitVeil</defName>
+    <label>starlit veil</label>
+    <thingClass>VVRace.StarlitVeil</thingClass>
     <tickerType>Normal</tickerType>
     <drawerType>RealtimeOnly</drawerType>
     <drawOffscreen>true</drawOffscreen>
@@ -548,283 +666,21 @@
 
     <comps>
       <li Class="CompProperties_ProjectileInterceptor">
-        <radius>6.6</radius>
+        <radius>5.6</radius>
         <interceptGroundProjectiles>true</interceptGroundProjectiles>
+        <interceptAirProjectiles>true</interceptAirProjectiles>
         <interceptNonHostileProjectiles>false</interceptNonHostileProjectiles>
         <interceptOutgoingProjectiles>false</interceptOutgoingProjectiles>
-        <color>(0.6, 0.6, 0.8)</color>
+        <color>(0.6, 0, 0.4)</color>
         <drawWithNoSelection>True</drawWithNoSelection>
         <activeSound>BulletShield_Ambience</activeSound>
         <rechargeHitPointsIntervalTicks>60000</rechargeHitPointsIntervalTicks>
       </li>
       <li Class="CompProperties_DestroyAfterDelay">
-        <delayTicks>15000</delayTicks>
+        <delayTicks>3000</delayTicks>
         <destroyMode>KillFinalize</destroyMode>
       </li>
     </comps>
   </ThingDef>
   
-  <!-- 하늘풀 -->
-  <ThingDef ParentName="VV_ArcanePlantProductive">
-    <defName>VV_Skyweed</defName>
-    <label>skyweed</label>
-    <description>a arcane plant that resembles a dandelion seed and converts the power of the wind into mana when outdoors.
-\nThe fluff of this grass is very light and has the property of flying well, so it can also be used to send small items.
-\nIf placed adjacent to a peashooter, it has a 25% chance to fire a High-velocity pea instead when the peashooter attacks. High-velocity peas have faster projectile speed and higher piercing power.\nIf multiple skyweeds are adjacent, the effect stacks.</description>
-    <descriptionHyperlinks>
-      <ThingDef>VV_SkyweedFluff</ThingDef>
-      <ThingDef>VV_LivingLeaf</ThingDef>
-    </descriptionHyperlinks>
-
-    <graphicData>
-      <texPath>Things/Plants/VV_Skyweed</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
-      <shaderType>TransparentPlant</shaderType>
-      <drawSize>(1.8, 1.8)</drawSize>
-    </graphicData>
-
-    <statBases>
-      <MaxHitPoints>50</MaxHitPoints>
-      <WorkToBuild>10000</WorkToBuild>
-      <Beauty>10</Beauty>
-      <BeautyOutdoors>10</BeautyOutdoors>
-    </statBases>
-
-    <costList>
-      <VV_LivingLeaf>5</VV_LivingLeaf>
-      <VV_SkyweedFluff>10</VV_SkyweedFluff>
-    </costList>
-
-    <comps>
-      <li Class="VVRace.CompProperties_Mana">
-        <manaGenerateRule Class="VVRace.ManaFluxRule_Wind">
-          <manaFromWindSpeed>
-            <points>
-              <li>(0,0)</li>
-              <li>(0.25,0)</li>
-              <li>(0.5,250)</li>
-              <li>(1.0,350)</li>
-              <li>(1.5,400)</li>
-              <li>(2.0,500)</li>
-            </points>
-          </manaFromWindSpeed>
-        </manaGenerateRule>
-      </li>
-
-      <li Class="VVRace.CompProperties_ArcanePlantBulletOverride">
-        <replacers>
-          <VV_Peashooter>
-            <bulletDef>VV_Bullet_PeaFast</bulletDef>
-            <chance>0.25</chance>
-          </VV_Peashooter>
-        </replacers>
-      </li>
-
-      <li Class="VVRace.CompProperties_RepeatGatherable" />
-
-      <li Class="VVRace.CompProperties_ManaGlower">
-        <glowRadius>3</glowRadius>
-        <glowColor>(255,255,255,0)</glowColor>
-      </li>
-    </comps>
-
-    <researchPrerequisites>
-      <li>VV_ArcaneBotany</li>
-    </researchPrerequisites>
-
-    <modExtensions>
-      <li Class="VVRace.GrowingArcanePlantData">
-        <ingredients>
-          <VV_UnknownSeed>1</VV_UnknownSeed>
-          <VV_Fertilizer>20</VV_Fertilizer>
-          <VV_Pollen>100</VV_Pollen>
-        </ingredients>
-
-        <totalGrowDays>5</totalGrowDays>
-        <maxHealth>50</maxHealth>
-        <healthRegenNoDamagedByDays>10</healthRegenNoDamagedByDays>
-
-        <maxMana>100</maxMana>
-        <consumedManaByDay>40</consumedManaByDay>
-
-        <manaSensitivity>High</manaSensitivity>
-        <manageSensitivity>Low</manageSensitivity>
-        
-        <manageIntervalTicks>45000</manageIntervalTicks>
-
-        <successChanceCurve>
-          <points>
-            <li>(0,0)</li>
-            <li>(0.3,0.15)</li>
-            <li>(0.5,0.5)</li>
-            <li>(0.7,0.8)</li>
-            <li>(0.9,1)</li>
-          </points>
-        </successChanceCurve>
-        <healthBonusAmountCurve>
-          <points>
-            <li>(0,0)</li>
-            <li>(0.5,0)</li>
-            <li>(0.75,0.75)</li>
-            <li>(1,1.5)</li>
-          </points>
-        </healthBonusAmountCurve>
-        <cleanlinessBonusAmountCurve>
-          <points>
-            <li>(-10,0)</li>
-            <li>(-0.0001,0)</li>
-            <li>(0,1)</li>
-            <li>(0.2,1.5)</li>
-            <li>(0.4,2.5)</li>
-            <li>(0.6,4.5)</li>
-            <li>(1.0,6)</li>
-          </points>
-        </cleanlinessBonusAmountCurve>
-      </li>
-    </modExtensions>
-  </ThingDef>
-
-  <ThingDef ParentName="BuildingBase">
-    <defName>VV_SkyweedBox</defName>
-    <label>skyweed box</label>
-    <description>a box that can send the fluff of skyweed far away by tying it together. It is bound with viviwax and cloth to prevent damage. No special fuel is required, but it has a smaller capacity and shorter transport distance than the transport pods used by outlanders.</description>
-    <descriptionHyperlinks>
-      <ThingDef>VV_Skyweed</ThingDef>
-      <ThingDef>VV_SkyweedFluff</ThingDef>
-    </descriptionHyperlinks>
-
-    <graphicData>
-      <texPath>Things/Building/VV_SkyweedPod</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
-      <shaderType>Transparent</shaderType>
-      <drawSize>(2.5,2.5)</drawSize>
-    </graphicData>
-
-    <size>(1,1)</size>
-    <rotatable>false</rotatable>
-    <tickerType>Normal</tickerType>
-    <altitudeLayer>BuildingOnTop</altitudeLayer>
-    <passability>PassThroughOnly</passability>
-    <castEdgeShadows>false</castEdgeShadows>
-    <fillPercent>0.5</fillPercent>
-    <designationCategory>VV_Bulidings</designationCategory>
-    <designationHotKey>Misc12</designationHotKey>
-    <uiOrder>2500</uiOrder>
-    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
-
-    <statBases>
-      <MaxHitPoints>120</MaxHitPoints>
-      <WorkToBuild>1500</WorkToBuild>
-      <Flammability>1.0</Flammability>
-    </statBases>
-
-    <resourcesFractionWhenDeconstructed>1</resourcesFractionWhenDeconstructed>
-
-    <costList>
-      <VV_SkyweedFluff>10</VV_SkyweedFluff>
-      <VV_Viviwax>10</VV_Viviwax>
-      <Cloth>10</Cloth>
-    </costList>
-    <comps>
-      <li Class="CompProperties_Transporter">
-        <massCapacity>75</massCapacity>
-        <restEffectiveness>0.5</restEffectiveness>
-        <canChangeAssignedThingsAfterStarting>true</canChangeAssignedThingsAfterStarting>
-      </li>
-      <li Class="VVRace.CompProperties_LaunchableCustom">
-        <fixedLaunchDistanceMax>18</fixedLaunchDistanceMax>
-        <skyfallerLeaving>VV_SkyweedBoxLeaving</skyfallerLeaving>
-        <activeDropPod>VV_ActiveSkyweedBox</activeDropPod>
-        <incomingDropPod>VV_SkyweedBoxIncoming</incomingDropPod>
-      </li>
-      <li Class="CompProperties_Glower">
-        <glowRadius>2</glowRadius>
-        <glowColor>(255,255,255,0)</glowColor>
-      </li>
-    </comps>
-    
-    <researchPrerequisites>
-      <li>VV_ArcaneBotany</li>
-    </researchPrerequisites>
-
-    <inspectorTabs>
-      <li>ITab_ContentsTransporter</li>
-    </inspectorTabs>
-    <placeWorkers>
-      <li>PlaceWorker_NotUnderRoof</li>
-    </placeWorkers>
-    <uiIconScale>0.65</uiIconScale>
-  </ThingDef>
-  
-  <ThingDef>
-    <defName>VV_ActiveSkyweedBox</defName>
-    <label>skyweed box</label>
-    <category>Item</category>
-    <drawerType>MapMeshAndRealTime</drawerType>
-    <thingClass>ActiveTransporter</thingClass>
-    <scatterableOnMapGen>false</scatterableOnMapGen>
-    <tickerType>Normal</tickerType>
-    <soundOpen>DropPod_Open</soundOpen>
-    <graphicData>
-      <texPath>Things/Building/VV_SkyweedPod</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
-      <shaderType>Transparent</shaderType>
-      <drawSize>2.4</drawSize>
-      <shadowData>
-        <volume>(0.8, 0.6, 0.8)</volume>
-      </shadowData>
-    </graphicData>
-    <altitudeLayer>Building</altitudeLayer>
-    <blockWind>true</blockWind>
-    <useHitPoints>true</useHitPoints>
-    <statBases>
-      <MaxHitPoints>500</MaxHitPoints>
-      <Flammability>0</Flammability>
-    </statBases>
-    <selectable>true</selectable>
-  </ThingDef>
-
-  <ThingDef ParentName="SkyfallerBase">
-    <defName>VV_SkyweedBoxIncoming</defName>
-    <label>skyweed box (incoming)</label>
-    <thingClass>DropPodIncoming</thingClass>
-    <graphicData>
-      <texPath>Things/Building/VV_SkyweedPod</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
-      <shaderType>CutoutFlying</shaderType>
-      <drawSize>2.4</drawSize>
-    </graphicData>
-    <skyfaller>
-      <speed>0.1</speed>
-      <movementType>Decelerate</movementType>
-      <shadow>Things/Skyfaller/SkyfallerShadowDropPod</shadow>
-      <shadowSize>(2, 2)</shadowSize>
-      <anticipationSound>DropPod_Fall</anticipationSound>
-      <anticipationSoundTicks>100</anticipationSoundTicks>
-      <impactSound>DropPod_Impact</impactSound>
-      <motesPerCell>0</motesPerCell>
-    </skyfaller>
-  </ThingDef>
-
-  <ThingDef ParentName="SkyfallerBase">
-    <defName>VV_SkyweedBoxLeaving</defName>
-    <label>skyweed box (leaving)</label>
-    <thingClass>FlyShipLeaving</thingClass>
-    <graphicData>
-      <texPath>Things/Building/VV_SkyweedPod</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
-      <shaderType>CutoutFlying</shaderType>
-      <drawSize>2.4</drawSize>
-    </graphicData>
-    <skyfaller>
-      <speed>0.1</speed>
-      <movementType>Decelerate</movementType>
-      <reversed>true</reversed>
-      <shadow>Things/Skyfaller/SkyfallerShadowDropPod</shadow>
-      <shadowSize>(2, 2)</shadowSize>
-      <anticipationSound>DropPod_Leaving</anticipationSound>
-      <anticipationSoundTicks>-10</anticipationSoundTicks>
-      <ticksToImpactRange><min>-40</min><max>-15</max></ticksToImpactRange>
-    </skyfaller>
-  </ThingDef>
 </Defs>

@@ -11,8 +11,24 @@ namespace VVRace
         public ThingDef shieldDef;
         public ThingDef mote;
 
+        [NoTranslate]
+        public string iconPath;
+
         public int shieldMaxHp;
         public float requiredManaPct;
+
+        public Texture2D Icon
+        {
+            get
+            {
+                if (_icon == null)
+                {
+                    _icon = ContentFinder<Texture2D>.Get(iconPath);
+                }
+                return _icon;
+            }
+        }
+        private Texture2D _icon;
 
         public CompProperties_ManaShieldProjector()
         {
@@ -56,15 +72,14 @@ namespace VVRace
             Scribe_References.Look(ref _shield, "shield");
         }
 
-        private static readonly Texture2D ShieldActivateTex = ContentFinder<Texture2D>.Get("UI/Commands/VV_PurifimintShield");
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
         {
             var duration = Props.shieldDef.GetCompProperties<CompProperties_DestroyAfterDelay>().delayTicks;
 
             var commandActivateShield = new Command_Action();
-            commandActivateShield.icon = ShieldActivateTex;
+            commandActivateShield.icon = Props.Icon;
             commandActivateShield.defaultLabel = LocalizeString_Command.VV_Command_ActivateShield.Translate();
-            commandActivateShield.defaultDesc = LocalizeString_Command.VV_Command_ActivateShieldDesc.Translate(duration.ToStringTicksToPeriod().Colorize(ColoredText.DateTimeColor));
+            commandActivateShield.defaultDesc = LocalizeString_Command.VV_Command_ActivateShieldDesc.Translate(duration.ToStringTicksToPeriod().Colorize(ColoredText.DateTimeColor), Props.requiredManaPct.ToStringPercentEmptyZero());
             commandActivateShield.action = () =>
             {
                 DeployShield();
@@ -85,7 +100,6 @@ namespace VVRace
 
             yield return commandActivateShield;
         }
-
 
         public override void PostDeSpawn(Map map, DestroyMode mode = DestroyMode.Vanish)
         {
@@ -128,15 +142,20 @@ namespace VVRace
             var manaComp = ManaComp;
             if (manaComp == null || manaComp.StoredPct < Props.requiredManaPct) { return; }
 
-            var hitPoints = 1 + (int)(Props.shieldMaxHp * ManaComp.StoredPct * parent.HitPoints / parent.MaxHitPoints);
-
             _shield = GenSpawn.Spawn(Props.shieldDef, parent.Position, parent.Map);
-            
-            var interceptor = _shield.TryGetComp<CompProjectileInterceptor>();
-            interceptor.maxHitPointsOverride = hitPoints;
-            interceptor.currentHitPoints = hitPoints;
 
-            ManaComp.Stored = 0f;
+            var shieldHp = Props.shieldMaxHp;
+            var dayPct = GenLocalDate.DayPercent(parent.Map);
+            if (dayPct < 0.2f || dayPct > 0.7f)
+            {
+                shieldHp *= 8;
+            }
+
+            var interceptor = _shield.TryGetComp<CompProjectileInterceptor>();
+            interceptor.maxHitPointsOverride = shieldHp;
+            interceptor.currentHitPoints = shieldHp;
+
+            ManaComp.StoredPct -= Props.requiredManaPct;
 
             if (Props.mote != null)
             {

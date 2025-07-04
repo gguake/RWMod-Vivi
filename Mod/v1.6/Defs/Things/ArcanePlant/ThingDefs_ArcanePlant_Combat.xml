@@ -189,75 +189,8 @@
     </statBases>
 
     <damageMultipliers Inherit="False">
-      <li>
-        <damageDef>Cut</damageDef>
-        <multiplier>0.7</multiplier>
-      </li>
-      <li>
-        <damageDef>Crush</damageDef>
-        <multiplier>0.7</multiplier>
-      </li>
-      <li>
-        <damageDef>Blunt</damageDef>
-        <multiplier>0.7</multiplier>
-      </li>
-      <li>
-        <damageDef>Poke</damageDef>
-        <multiplier>0.7</multiplier>
-      </li>
-      <li>
-        <damageDef>Stab</damageDef>
-        <multiplier>0.7</multiplier>
-      </li>
-      <li>
-        <damageDef>Scratch</damageDef>
-        <multiplier>0.7</multiplier>
-      </li>
-      <li>
-        <damageDef>ScratchToxic</damageDef>
-        <multiplier>0.7</multiplier>
-      </li>
-      <li>
-        <damageDef>Bite</damageDef>
-        <multiplier>0.7</multiplier>
-      </li>
-      <li>
-        <damageDef>ToxicBite</damageDef>
-        <multiplier>0.7</multiplier>
-      </li>
-      <li>
-        <damageDef>RangedStab</damageDef>
-        <multiplier>0.7</multiplier>
-      </li>
-      <li>
-        <damageDef>Bullet</damageDef>
-        <multiplier>0.7</multiplier>
-      </li>
-      <li>
-        <damageDef>Arrow</damageDef>
-        <multiplier>0.7</multiplier>
-      </li>
-      <li>
-        <damageDef>ArrowHighVelocity</damageDef>
-        <multiplier>0.7</multiplier>
-      </li>
-      <li>
-        <damageDef>Bomb</damageDef>
-        <multiplier>0.5</multiplier>
-      </li>
-      <li>
-        <damageDef>BombSuper</damageDef>
-        <multiplier>0.5</multiplier>
-      </li>
-      <li>
-        <damageDef>Thump</damageDef>
-        <multiplier>0.5</multiplier>
-      </li>
-      <li>
-        <damageDef>Demolish</damageDef>
-        <multiplier>0.5</multiplier>
-      </li>
     </damageMultipliers>
+
     <fillPercent>0.6</fillPercent>
 
     <costList>

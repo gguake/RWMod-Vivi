@@ -4,7 +4,7 @@ using Verse;
 
 namespace VVRace
 {
-    public class PurifimintShield : ThingWithComps
+    public class StarlitVeil : ThingWithComps
     {
         private CompProjectileInterceptor _compProjectileInterceptor;
 
