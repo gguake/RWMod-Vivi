@@ -122,7 +122,7 @@
     <Compile Include="ArcanePlant\Plant\Things\PeaBullet.cs" />
     <Compile Include="ArcanePlant\Plant\Things\ArcanePlant_Shootus.cs" />
     <Compile Include="ArcanePlant\Plant\Things\ArcanePlant_Turret.cs" />
-    <Compile Include="ArcanePlant\Plant\Things\PurifimintShield.cs" />
+    <Compile Include="ArcanePlant\Plant\Things\StarlitVeil.cs" />
     <Compile Include="ArcanePlant\Mana\Comps\CompManaLightningLod.cs" />
     <Compile Include="ArcanePlant\Mana\Comps\CompManaTerraformer.cs" />
     <Compile Include="ArcanePlant\Plant\Sensor\SensorWorker.cs" />
