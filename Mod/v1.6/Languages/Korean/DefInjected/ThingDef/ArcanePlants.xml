@@ -31,7 +31,7 @@
 \n콩뿌리개와 인접한 위치에 설치하면 콩뿌리개가 사격시 발사하는 콩의 위력과 관통력을 소폭 증가시킵니다.\n인접한 풍년화나 정화초가 여러개 있다면 효과가 중첩됩니다.</VV_Richflower.description>
 
 <VV_Purifimint.label>정화초</VV_Purifimint.label>
-<VV_Purifimint.description>주변에 빛을 내는 작은 마법 식물로 인접한 토양의 오염을 흡수해 마나로 변환하며 주변에 오염된 토양이 많을수록 많은 마나를 생산합니다. 미관상 아름다워 장식에 쓰이기도 합니다.
+<VV_Purifimint.description>주변에 빛을 내는 작은 마법 식물로 독성 폐기물을 배치하면 이를 천천히 흡수해 마나를 생산하며 주변 토양의 오염을 정화하기도 합니다. 미관상 아름다워 장식에 쓰이기도 합니다.
 \n저장된 마나를 일시적으로 방출해 외부의 투사체를 잠시동안 차단하는 보호막을 잠시동안 생성할 수도 있습니다.
 \n콩뿌리개와 인접한 위치에 설치하면 콩뿌리개가 사격시 발사하는 콩의 위력과 관통력을 소폭 증가시킵니다.\n인접한 풍년화나 정화초가 여러개 있다면 효과가 중첩됩니다.</VV_Purifimint.description>
 <VV_PurifimintShield.label>정화초 보호막</VV_PurifimintShield.label>

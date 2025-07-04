@@ -89,10 +89,12 @@
     <Compile Include="ArcanePlant\Mana\Comps\CompMana.cs" />
     <Compile Include="ArcanePlant\Mana\Comps\CompManaHeatPusher.cs" />
     <Compile Include="ArcanePlant\Mana\Comps\CompManaSensorExplosive.cs" />
+    <Compile Include="ArcanePlant\Mana\FluxRule\ManaFluxRule_TimeOfDay.cs" />
     <Compile Include="ArcanePlant\Mana\FluxRule\ManaFluxRule_Power.cs" />
     <Compile Include="ArcanePlant\Mana\FluxRule\ManaFluxRule_Random.cs" />
     <Compile Include="ArcanePlant\Mana\FluxRule\ManaFluxRule_PlantGrowth.cs" />
     <Compile Include="ArcanePlant\Mana\FluxRule\ManaFluxRule_Fertility.cs" />
+    <Compile Include="ArcanePlant\Mana\FluxRule\ManaFluxRule_Refuelable.cs" />
     <Compile Include="ArcanePlant\Mana\GameComponent_Mana.cs" />
     <Compile Include="ArcanePlant\Mana\Gizmo\ManaGizmo.cs" />
     <Compile Include="ArcanePlant\Mana\Job\ManaUpdateJob.cs" />

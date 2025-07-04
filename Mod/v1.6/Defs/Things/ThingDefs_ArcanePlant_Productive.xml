@@ -911,7 +911,7 @@
   <ThingDef ParentName="VV_ArcanePlantProductive">
     <defName>VV_Purifimint</defName>
     <label>purifimint</label>
-    <description>a small arcane plant that emits light and converts soil contamination into mana by absorbing it from adjacent soil; the more contaminated the surrounding soil, the more mana it produces. It is also aesthetically pleasing and used for decoration.
+    <description>a arcane plant that emits a small glow around it will slowly absorb toxic wastepacks placed, producing mana and also purifying the surrounding pollutions. It is also aesthetically pleasing and used for decoration.
 \nIt can also create a temporary shield that blocks incoming projectiles by briefly releasing stored mana.
 \nIf placed adjacent to a peashooter, it slightly increases the power and armor penetration of its peas when fired. If multiple richflowers or purifimints are adjacent, the effect stacks.</description>
     <descriptionHyperlinks>
@@ -938,22 +938,15 @@
       <li Class="VVRace.CompProperties_Mana">
         <manaCapacity>1500</manaCapacity>
 
-        <manaGenerateRule Class="VVRace.ManaFluxRule_RadialPollution">
-          <radius>2.9</radius>
-          <manaCurveFromDistanceSqr>
-            <points>
-              <li>(0,500)</li>
-              <li>(1,200)</li>
-              <li>(4,100)</li>
-              <li>(9,50)</li>
-            </points>
-          </manaCurveFromDistanceSqr>
+        <manaGenerateRule Class="VVRace.ManaFluxRule_Refuelable">
+          <mana>1200</mana>
+          <fuelDef>Wastepack</fuelDef>
         </manaGenerateRule>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>500</mana>
+          <mana>400</mana>
         </manaConsumeRule>
-        <manaAbsorbPerDay>1000</manaAbsorbPerDay>
+        <manaAbsorbPerDay>500</manaAbsorbPerDay>
       </li>
 
       <li Class="VVRace.CompProperties_ArcanePlantBulletOverride">
@@ -980,13 +973,24 @@
         <showRadius>true</showRadius>
       </li>
 
+      <li Class="CompProperties_Refuelable">
+        <fuelConsumptionRate>1</fuelConsumptionRate>
+        <fuelCapacity>15</fuelCapacity>
+        <initialFuelPercent>0</initialFuelPercent>
+        <fuelFilter>
+          <thingDefs>
+            <li>Wastepack</li>
+          </thingDefs>
+        </fuelFilter>
+        <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+      </li>
+      
       <li Class="VVRace.CompProperties_ManaShieldProjector">
         <shieldDef>VV_PurifimintShield</shieldDef>
         <mote>VV_Mote_ShieldProjectorEffect</mote>
 
         <shieldMaxHp>600</shieldMaxHp>
         <requiredManaPct>0.1</requiredManaPct>
-
       </li>
     </comps>
     
