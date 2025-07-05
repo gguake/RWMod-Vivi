@@ -121,7 +121,6 @@
     <Compile Include="ArcanePlant\Mana\Comps\CompManaLightningLod.cs" />
     <Compile Include="ArcanePlant\Mana\Comps\CompManaTerraformer.cs" />
     <Compile Include="ArcanePlant\Plant\Sensor\SensorWorker.cs" />
-    <Compile Include="ArcanePlant\Plant\ArcanePlantDesignatorCache.cs" />
     <Compile Include="ArcanePlant\Plant\Things\ArcanePlantPot.cs" />
     <Compile Include="ArcanePlant\Plant\ArcanePlantTurretExtension.cs" />
     <Compile Include="ArcanePlant\Mana\Comps\CompManaGlower.cs" />
