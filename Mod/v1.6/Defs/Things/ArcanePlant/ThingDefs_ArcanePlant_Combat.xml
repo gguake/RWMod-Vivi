@@ -130,11 +130,11 @@
     <drawerType>MapMeshAndRealTime</drawerType>
 
     <statBases>
-      <AccuracyTouch>0.95</AccuracyTouch>
+      <AccuracyTouch>0.9</AccuracyTouch>
       <AccuracyShort>0.82</AccuracyShort>
-      <AccuracyMedium>0.5</AccuracyMedium>
+      <AccuracyMedium>0.4</AccuracyMedium>
       <AccuracyLong>0.24</AccuracyLong>
-      <RangedWeapon_Cooldown>2.0</RangedWeapon_Cooldown>
+      <RangedWeapon_Cooldown>1.8</RangedWeapon_Cooldown>
       <DeteriorationRate>0</DeteriorationRate>
       <Mass>40</Mass>
       <Flammability>0</Flammability>
@@ -145,9 +145,9 @@
       <li>
         <verbClass>VVRace.Verb_ShootWithMana</verbClass>
         <defaultProjectile>VV_Bullet_Pea</defaultProjectile>
-        <warmupTime>0</warmupTime>
+        <warmupTime>0.5</warmupTime>
         <range>26.9</range>
-        <ticksBetweenBurstShots>9</ticksBetweenBurstShots>
+        <ticksBetweenBurstShots>8</ticksBetweenBurstShots>
         <burstShotCount>3</burstShotCount>
         <soundCast>ThumpCannon_Fire</soundCast>
         <soundCastTail>GunTail_Heavy</soundCastTail>

@@ -436,14 +436,14 @@
         <manaCapacity>600</manaCapacity>
 
         <manaGenerateRule Class="VVRace.ManaFluxRule_Refuelable">
-          <mana>1200</mana>
+          <mana>500</mana>
           <fuelDef>Wastepack</fuelDef>
         </manaGenerateRule>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>200</mana>
+          <mana>150</mana>
         </manaConsumeRule>
-        <manaAbsorbPerDay>500</manaAbsorbPerDay>
+        <manaAbsorbPerDay>450</manaAbsorbPerDay>
       </li>
 
       <li Class="VVRace.CompProperties_ArcanePlantBulletOverride">
@@ -471,9 +471,10 @@
       </li>
 
       <li Class="CompProperties_Refuelable">
-        <fuelConsumptionRate>1</fuelConsumptionRate>
+        <fuelConsumptionRate>1.5</fuelConsumptionRate>
         <fuelCapacity>15</fuelCapacity>
         <initialFuelPercent>0</initialFuelPercent>
+        <fuelMultiplier>3</fuelMultiplier>
         <fuelFilter>
           <thingDefs>
             <li>Wastepack</li>
@@ -567,18 +568,18 @@
 
     <comps>
       <li Class="VVRace.CompProperties_Mana">
-        <manaCapacity>1000</manaCapacity>
+        <manaCapacity>500</manaCapacity>
 
         <manaGenerateRule Class="VVRace.ManaFluxRule_TimeOfDay">
-          <mana>1000</mana>
+          <mana>800</mana>
           <timeOfDay>Night</timeOfDay>
         </manaGenerateRule>
         
         <manaConsumeRule Class="VVRace.ManaFluxRule_TimeOfDay">
-          <mana>200</mana>
+          <mana>100</mana>
           <timeOfDay>Day</timeOfDay>
         </manaConsumeRule>
-        <manaAbsorbPerDay>400</manaAbsorbPerDay>
+        <manaAbsorbPerDay>350</manaAbsorbPerDay>
       </li>
 
       <li Class="VVRace.CompProperties_RepeatGatherable" />
@@ -594,8 +595,8 @@
 
         <iconPath>UI/Commands/VV_StarlitVeil</iconPath>
 
-        <shieldMaxHp>160</shieldMaxHp>
-        <requiredManaPct>0.4</requiredManaPct>
+        <shieldMaxHp>200</shieldMaxHp>
+        <requiredManaPct>0.35</requiredManaPct>
       </li>
     </comps>
     
@@ -677,7 +678,7 @@
         <rechargeHitPointsIntervalTicks>60000</rechargeHitPointsIntervalTicks>
       </li>
       <li Class="CompProperties_DestroyAfterDelay">
-        <delayTicks>3000</delayTicks>
+        <delayTicks>2500</delayTicks>
         <destroyMode>KillFinalize</destroyMode>
       </li>
     </comps>

@@ -236,7 +236,7 @@ namespace VVRace
             }
 
             _currentTarget = TryFindNewTarget();
-            if (_currentTarget.IsValid)
+            if (_currentTarget.IsValid && Rand.Chance(0.7f))
             {
                 var randomInRange = def.building.turretBurstWarmupTime.RandomInRange;
                 if (randomInRange > 0f)

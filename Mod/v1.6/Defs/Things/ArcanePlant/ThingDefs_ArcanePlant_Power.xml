@@ -6,7 +6,7 @@
     <label>flashbud</label>
     <description>a arcane flower that discharges electricity within its transparent petals. It can be wired to store a large amount of power, but consumes mana in proportion.
 \nIf it receives external shocks, the internal voltage becomes unstable, generating massive electromagnetic pulses in the vicinity and discharging mana.
-\nIf placed adjacent to a peashooter, it has a 25% chance to fire an electric pea instead when the peashooter attacks. Electric Peas deal EMP damage instead of physical damage and stun mechanical units.\nIf multiple flashbud or thunderpetals are adjacent, the effect stacks.</description>
+\nIf placed adjacent to a peashooter, it has a 25% chance to fire an electric pea instead when the peashooter attacks. Electric peas briefly stun targets instead of physical damage.\nIf multiple flashbud or thunderpetals are adjacent, the effect stacks.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_SparklingPetal</ThingDef>
     </descriptionHyperlinks>
@@ -140,7 +140,7 @@
     <defName>VV_Thunderpetals</defName>
     <label>thunderpetals</label>
     <description>a arcane flower with stamens that conduct electricity, capable of connecting to power lines to convert mana into electricity. When lightning strikes and the mana level is sufficient, it attracts the lightning to itself and converts it into mana.
-\nIf placed adjacent to a peashooter, it has a 25% chance to fire an electric pea instead when the peashooter attacks. Electric peas deal EMP damage instead of physical damage and stun mechanical units.\nIf multiple flashbud or thunderpetals are adjacent, the effect stacks.</description>
+\nIf placed adjacent to a peashooter, it has a 25% chance to fire an electric pea instead when the peashooter attacks. Electric peas briefly stun targets instead of physical damage.\nIf multiple flashbud or thunderpetals are adjacent, the effect stacks.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_SparklingPetal</ThingDef>
     </descriptionHyperlinks>
