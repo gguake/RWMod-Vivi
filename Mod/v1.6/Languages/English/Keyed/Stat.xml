@@ -34,7 +34,7 @@
 <VV_StatsReport_ManaFluxRule_RadialPollution_Desc>{0}~{1} mana from each near pollutions</VV_StatsReport_ManaFluxRule_RadialPollution_Desc>
 <VV_StatsReport_ManaFluxRule_PlantGrowth_Desc>{0} mana propotional to the growth</VV_StatsReport_ManaFluxRule_PlantGrowth_Desc>
 <VV_StatsReport_ManaFluxRule_Fertility_Desc>{0} mana propotional to the fertility
-(Applies up to a maximum fertility of 140%, pot is treated as having 100% fertility)</VV_StatsReport_ManaFluxRule_Fertility_Desc>
+(Applies up to a maximum fertility of 140%, pot is treated as having 90% fertility)</VV_StatsReport_ManaFluxRule_Fertility_Desc>
 <VV_StatsReport_ManaFluxRule_Refuelable_Desc>{0} mana if has sufficient {1}</VV_StatsReport_ManaFluxRule_Refuelable_Desc>
 <VV_StatsReport_ManaFluxRule_TimeOfDay_Day_Desc>{0} mana during the daytime</VV_StatsReport_ManaFluxRule_TimeOfDay_Day_Desc>
 <VV_StatsReport_ManaFluxRule_TimeOfDay_Night_Desc>{0} mana during the night</VV_StatsReport_ManaFluxRule_TimeOfDay_Night_Desc>

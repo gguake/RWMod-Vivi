@@ -17,7 +17,7 @@ namespace VVRace
             if (!thing.Spawned || thing.Destroyed) { return 0; }
 
             var fertility = thing.Position.GetFirstThing<ArcanePlantPot>(thing.Map) != null ?
-                1f :
+                0.9f :
                 thing.Position.GetFertility(thing.Map);
 
             return Mathf.RoundToInt(manaFromFertility.Evaluate(fertility));
