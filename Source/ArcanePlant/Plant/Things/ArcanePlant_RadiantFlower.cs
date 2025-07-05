@@ -2,7 +2,7 @@
 
 namespace VVRace
 {
-    public class ArcanePlant_RadiantFlower : ArcanePlant, IConditionalGraphicProvider
+    public class ArcanePlant_RadiantFlower : ArcanePlant
     {
         public int GraphicIndex => CompGlower.Glows ? 1 : 0;
 
@@ -31,6 +31,8 @@ namespace VVRace
 
             UpdateGraphic();
         }
+
+        public override int? OverrideGraphicIndex => CompGlower.Glows ? 1 : 0;
 
         private void UpdateGraphic()
         {

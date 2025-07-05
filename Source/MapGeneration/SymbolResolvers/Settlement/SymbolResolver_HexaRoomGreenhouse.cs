@@ -63,21 +63,6 @@ namespace VVRace
             }
             #endregion
 
-            #region 배양기 생성
-            {
-                foreach (var germinator in _germinatorLayout)
-                {
-                    var p = resolveParams;
-                    p.rect = new CellRect(center.x + germinator.xOffset, center.z + germinator.zOffset, 1, 1);
-                    p.thingRot = Rot4.South;
-                    p.singleThingDef = VVThingDefOf.VV_ArcanePlantFarm;
-                    p.singleThingStuff = VVThingDefOf.VV_Viviwax;
-                    p.faction = resolveParams.faction;
-                    BaseGen.symbolStack.Push("thing", p);
-                }
-            }
-            #endregion
-
             #region 저장된 아이템 생성
             {
                 foreach (var smallShelf in _smallShelfLayout)

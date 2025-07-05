@@ -50,8 +50,6 @@ namespace VVRace
         public static JobDef VV_GatherPollen;
         public static JobDef VV_GatherPropolis;
 
-        public static JobDef VV_ManageArcanePlantFarm;
-
         public static JobDef VV_FortifyHoneycombWall;
     }
 
@@ -77,7 +75,6 @@ namespace VVRace
         public static ThingDef VV_GatheringBarrel;
         public static ThingDef VV_RefiningWorkbench;
         public static ThingDef VV_ArcanePlantPot;
-        public static ThingDef VV_ArcanePlantFarm;
 
         public static ThingDef VV_EmberBloom;
         public static ThingDef VV_FrostBloom;
@@ -244,11 +241,6 @@ namespace VVRace
     public static class VVDutyDefOf
     {
         public static DutyDef VV_DefendViviBase;
-    }
-
-    [DefOf]
-    public static class VVWorkGiverDefOf
-    {
     }
 
     [DefOf]

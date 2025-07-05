@@ -158,7 +158,7 @@
 
     <graphicData>
       <texPath>Things/Plants/VV_Radiantflower</texPath>
-      <graphicClass>VVRace.Graphic_Conditional</graphicClass>
+      <graphicClass>Graphic_Random</graphicClass>
     </graphicData>
 
     <statBases>
@@ -178,13 +178,16 @@
     <comps>
       <li Class="VVRace.CompProperties_Mana">
         <manaGenerateRule Class="VVRace.ManaFluxRule_Sunlight">
-          <manaFromSunlightRange>0~2000</manaFromSunlightRange>
+          <manaFromSunlightRange>0~2050</manaFromSunlightRange>
         </manaGenerateRule>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_CompositeSum">
           <rules>
             <li Class="VVRace.ManaFluxRule_GlowerActive">
-              <mana>2000</mana>
+              <mana>1950</mana>
+            </li>
+            <li Class="VVRace.ManaFluxRule_Constant">
+              <mana>50</mana>
             </li>
           </rules>
         </manaConsumeRule>

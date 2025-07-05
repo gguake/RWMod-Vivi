@@ -7,7 +7,7 @@ using Verse;
 namespace VVRace
 {
     [StaticConstructorOnStartup]
-    public class ArcanePlant_Shootus : ArcanePlant_Turret, IThingHolder, IThingHolderTickable, INotifyHauledTo, IConditionalGraphicProvider
+    public class ArcanePlant_Shootus : ArcanePlant_Turret, IThingHolder, IThingHolderTickable, INotifyHauledTo
     {
         public override float ManaPerVerbShoot => 0;
         public override Thing Gun => _innerContainer.Count > 0 ? _innerContainer[0] : null;
@@ -16,7 +16,7 @@ namespace VVRace
         private Thing _reservedWeapon;
         public Thing ReservedWeapon => _reservedWeapon;
 
-        public int GraphicIndex => _innerContainer.Count > 0 ? 1 : 0;
+        public override int? OverrideGraphicIndex => _innerContainer.Count > 0 ? 1 : 0;
 
         protected override bool ShouldFlip => Gun != null && TurretTop.CurRotation >= 180;
 

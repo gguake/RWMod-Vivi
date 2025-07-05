@@ -42,11 +42,11 @@
     <damageMultipliers>
       <li>
         <damageDef>Flame</damageDef>
-        <multiplier>2</multiplier>
+        <multiplier>2.5</multiplier>
       </li>
       <li>
         <damageDef>Burn</damageDef>
-        <multiplier>2</multiplier>
+        <multiplier>2.5</multiplier>
       </li>
     </damageMultipliers>
 
@@ -93,10 +93,6 @@
   </ThingDef>
 
   <ThingDef Abstract="True" Name="VV_ArcanePlantProductive" ParentName="VV_ArcanePlantBase">
-    <building>
-      <uninstallWork>250</uninstallWork>
-    </building>
-    
     <tradeTags>
       <li>VV_ArcanePlantProductive</li>
     </tradeTags>

@@ -171,7 +171,7 @@
 
     <graphicData>
       <texPath>Things/Plants/VV_Cactus</texPath>
-      <graphicClass>VVRace.Graphic_Conditional</graphicClass>
+      <graphicClass>Graphic_Random</graphicClass>
       <drawSize>(1.5,1.5)</drawSize>
     </graphicData>
     <drawerType>MapMeshAndRealTime</drawerType>

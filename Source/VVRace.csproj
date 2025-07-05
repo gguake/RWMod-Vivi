@@ -83,8 +83,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArcanePlant\Growing\Comps\CompFarmSeedlingDrawer.cs" />
-    <Compile Include="ArcanePlant\Growing\UI\Alert_GrowingArcanePlantLowHP.cs" />
     <Compile Include="ArcanePlant\Mana\Comps\CompEquippableManaWeapon.cs" />
     <Compile Include="ArcanePlant\Mana\Comps\CompMana.cs" />
     <Compile Include="ArcanePlant\Mana\Comps\CompManaHeatPusher.cs" />
@@ -100,21 +98,17 @@
     <Compile Include="ArcanePlant\Mana\Job\ManaUpdateJob.cs" />
     <Compile Include="ArcanePlant\Mana\Job\ManaDiffusionJob.cs" />
     <Compile Include="ArcanePlant\Mana\EnvironmentManaGrid.cs" />
-    <Compile Include="ArcanePlant\Growing\AI\JobDriver_ManageArcanePlantFarm.cs" />
     <Compile Include="ArcanePlant\Plant\AI\WorkGiver_EquipShootus.cs" />
-    <Compile Include="ArcanePlant\Growing\AI\WorkGiver_HaulToArcanePlantFarm.cs" />
-    <Compile Include="ArcanePlant\Growing\AI\WorkGiver_ManageArcanePlantFarm.cs" />
     <Compile Include="ArcanePlant\Plant\ArcanePlantUtility.cs" />
     <Compile Include="ArcanePlant\Mana\Comps\CompManaFilthMaker.cs" />
     <Compile Include="ArcanePlant\Mana\Comps\CompManaShieldProjector.cs" />
     <Compile Include="ArcanePlant\Buildings\Comps\CompProperties_LaunchableCustom.cs" />
-    <Compile Include="ArcanePlant\Growing\GrowingArcanePlantBill.cs" />
     <Compile Include="ArcanePlant\Growing\GrowingArcanePlantData.cs" />
     <Compile Include="ArcanePlant\Growing\GrowingArcanePlantSensitivity.cs" />
     <Compile Include="ArcanePlant\Mana\FluxRule\ManaFluxRule_RadialPollution.cs" />
     <Compile Include="ArcanePlant\Mana\FluxRule\ManaFluxRule_Wind.cs" />
-    <Compile Include="ArcanePlant\Growing\Things\Building_ArcanePlantFarm.cs" />
     <Compile Include="ArcanePlant\Plant\Comps\CompArcanePlantBulletOverride.cs" />
+    <Compile Include="ArcanePlant\Plant\Graphic_Seedling.cs" />
     <Compile Include="ArcanePlant\Plant\Things\ArcanePlant_Everflower.cs" />
     <Compile Include="ArcanePlant\Plant\Things\CornBullet.cs" />
     <Compile Include="Gather\StatWorker_Honey.cs" />
@@ -143,8 +137,6 @@
     <Compile Include="ArcanePlant\Mana\FluxRule\ManaFluxRule_Weather.cs" />
     <Compile Include="ArcanePlant\Mana\FluxRule\ManaFluxRule_Sunlight.cs" />
     <Compile Include="ArcanePlant\Mana\FluxRule\ManaFluxRule_Temperature.cs" />
-    <Compile Include="ArcanePlant\Growing\UI\Dialog_StartGrowingArcanePlant.cs" />
-    <Compile Include="ArcanePlant\Growing\UI\ITab_ArcanePlantFarmBill.cs" />
     <Compile Include="Egg\Comps\CompViviEggLayer.cs" />
     <Compile Include="GlideAbility\CompAbilityEffect_FoodCost.cs" />
     <Compile Include="GlideAbility\CompAbility_RequiresBodyPart.cs" />
@@ -181,7 +173,6 @@
     <Compile Include="Gather\UI\ITab_GatherWorkTable.cs" />
     <Compile Include="MapGeneration\SymbolResolvers\SymbolResolver_EdgeHoneycombWall.cs" />
     <Compile Include="RPEF\PawnRenderSubWorker_WingCondition.cs" />
-    <Compile Include="Utility\Graphics\Graphic_Conditional.cs" />
     <Compile Include="ArcanePlant\Plant\Things\ArcanePlant_Shockerbud.cs" />
     <Compile Include="ArcanePlant\Plant\Things\ArcanePlant_TurretFixedGun.cs" />
     <Compile Include="ArcanePlant\Plant\Things\ArcanePlantTurretTop.cs" />

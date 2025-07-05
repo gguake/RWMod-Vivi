@@ -2,7 +2,7 @@
 
 namespace VVRace
 {
-    public class ViviEgg : ThingWithComps, IConditionalGraphicProvider
+    public class ViviEgg : ThingWithComps
     {
         public CompViviHatcher CompViviHatcher
         {
@@ -20,7 +20,7 @@ namespace VVRace
 
         private int _seed;
 
-        public int GraphicIndex
+        public override int? OverrideGraphicIndex
         {
             get
             {

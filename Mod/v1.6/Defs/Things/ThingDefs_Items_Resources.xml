@@ -224,7 +224,6 @@
     <description>a seed from an unidentified plant. It is often found when collecting honey. It cannot be grown by conventional means and can be cultured at a arcane plant farm.</description>
     <descriptionHyperlinks>
       <RecipeDef>VV_GatherHoney</RecipeDef>
-      <ThingDef>VV_ArcanePlantFarm</ThingDef>
     </descriptionHyperlinks>
 
     <graphicData>

@@ -13,7 +13,7 @@
     <thingClass>VVRace.ViviEgg</thingClass>
     
     <graphicData>
-      <graphicClass>VVRace.Graphic_Conditional</graphicClass>
+      <graphicClass>Graphic_Random</graphicClass>
       <texPath>Things/Item/VV_ViviEgg</texPath>
       <color>(245,245,200)</color>
     </graphicData>
