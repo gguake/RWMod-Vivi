@@ -56,6 +56,8 @@ namespace VVRace
             _flowerCellQueue = new NativePriorityQueue<int, float, FloatMinComparer>(map.cellIndices.NumGridCells, default(FloatMinComparer), Allocator.Persistent);
 
             _cellBoolDrawer = new CellBoolDrawer(this, map.Size.x, map.Size.z, 3634, 0.5f);
+
+            map.events.RoofChanged += Notify_RoofChanged;
         }
 
         public override void ExposeData()
@@ -217,6 +219,18 @@ namespace VVRace
             _tmpGrid.Dispose();
             _manaGrid.Dispose();
             _manaReserveGrid.Dispose();
+        }
+
+        private void Notify_RoofChanged(IntVec3 c)
+        {
+            foreach (var thing in c.GetThingList(map))
+            {
+                var comp = thing.TryGetComp<CompManaGlower>();
+                if (comp != null)
+                {
+                    comp.UpdateLit(map);
+                }
+            }
         }
 
         private void ScheduleUpdateManaJob()

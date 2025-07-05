@@ -13,7 +13,7 @@ namespace VVRace
         }
     }
 
-    public class CompManaGlower : CompGlower
+    public class CompManaGlower : CompGlower, IManaChangeEventReceiver
     {
         private new CompProperties_ManaGlower Props => (CompProperties_ManaGlower)props;
 
@@ -36,6 +36,14 @@ namespace VVRace
                 if (Props.glowOnlyRoofed && !parent.Position.Roofed(parent.Map)) { return false; }
 
                 return ManaComp.Active;
+            }
+        }
+
+        public void Notify_ManaActivateChanged(bool before, bool current)
+        {
+            if (parent.Spawned)
+            {
+                UpdateLit(parent.Map);
             }
         }
     }

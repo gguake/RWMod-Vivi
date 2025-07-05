@@ -6,6 +6,11 @@ using Verse;
 
 namespace VVRace
 {
+    public interface IManaChangeEventReceiver
+    {
+        void Notify_ManaActivateChanged(bool before, bool current);
+    }
+
     public class CompProperties_Mana : CompProperties
     {
         public float manaCapacity;
@@ -241,8 +246,20 @@ namespace VVRace
                 }
             }
 
+            var beforeActivated = _manaActivated;
             _manaActivated = manaChange >= 0f;
             _manaExternalChange = manaGrid[pos] - beforeExternalMana;
+
+            if (beforeActivated != _manaActivated)
+            {
+                foreach (var comp in parent.AllComps)
+                {
+                    if (comp is IManaChangeEventReceiver manaChangeEventReceiver)
+                    {
+                        manaChangeEventReceiver.Notify_ManaActivateChanged(beforeActivated, _manaActivated);
+                    }
+                }
+            }
         }
 
         public bool ShouldBeLitNow() => Active;

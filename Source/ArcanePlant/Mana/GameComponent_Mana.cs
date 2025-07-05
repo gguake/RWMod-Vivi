@@ -7,6 +7,8 @@ namespace VVRace
     {
         public IEnumerable<CompMana> AllManaComps => _manaCompCache;
 
+        public IEnumerable<ThingWithComps> AllThingsUsingMana => _thingWithManaComps;
+
         private Game _game;
         private List<ThingWithComps> _thingWithManaComps;
         private List<CompMana> _manaCompCache;
