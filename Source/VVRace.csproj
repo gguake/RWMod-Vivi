@@ -111,6 +111,7 @@
     <Compile Include="ArcanePlant\Plant\Graphic_Seedling.cs" />
     <Compile Include="ArcanePlant\Plant\Things\ArcanePlant_Everflower.cs" />
     <Compile Include="ArcanePlant\Plant\Things\CornBullet.cs" />
+    <Compile Include="ArcanePlant\Plant\Things\PeaShooterGun.cs" />
     <Compile Include="Gather\StatWorker_Honey.cs" />
     <Compile Include="ArcanePlant\Plant\Sensor\SensorWorker_Fire.cs" />
     <Compile Include="ArcanePlant\Plant\Things\PeaBullet.cs" />

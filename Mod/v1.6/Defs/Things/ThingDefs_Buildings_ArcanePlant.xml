@@ -27,7 +27,7 @@
     <uiOrder>2401</uiOrder>
     <uiIconScale>1</uiIconScale>
     <uiIconOffset>(0, -0.1)</uiIconOffset>
-    <altitudeLayer>Building</altitudeLayer>
+    <altitudeLayer>LowPlant</altitudeLayer>
     <passability>PassThroughOnly</passability>
     <fillPercent>0.3</fillPercent>
     <pathCost>14</pathCost>

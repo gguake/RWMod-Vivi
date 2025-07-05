@@ -125,9 +125,11 @@
     <description>.</description>
     <graphicData>
       <texPath>Things/Plants/VV_Peashooter_Top</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
+      <graphicClass>Graphic_Random</graphicClass>
     </graphicData>
     <drawerType>MapMeshAndRealTime</drawerType>
+
+    <thingClass>VVRace.PeaShooterGun</thingClass>
 
     <statBases>
       <AccuracyTouch>0.9</AccuracyTouch>

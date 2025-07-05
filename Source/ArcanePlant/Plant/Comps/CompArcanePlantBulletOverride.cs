@@ -57,7 +57,6 @@ namespace VVRace
 
         public override void PostSpawnSetup(bool respawningAfterLoad)
         {
-            Log.Message($"spawn: {parent} {parent.Position}");
             foreach (var pos in GenAdjFast.AdjacentCellsCardinal(parent.Position))
             {
                 var turret = pos.GetFirstThing<ArcanePlant_Turret>(parent.Map);

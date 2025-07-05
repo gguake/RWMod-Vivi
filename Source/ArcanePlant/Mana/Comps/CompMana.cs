@@ -122,6 +122,40 @@ namespace VVRace
                     yield return new ManaGizmo(this);
                 }
             }
+
+            if (DebugSettings.godMode)
+            {
+                Command_Action command_addMana = new Command_Action();
+                command_addMana.defaultLabel = "DEV: Stored Mana +10%";
+                command_addMana.action = () =>
+                {
+                    StoredPct += 0.1f;
+                };
+
+                yield return command_addMana;
+
+                Command_Action command_subtractMana = new Command_Action();
+                command_subtractMana.defaultLabel = "DEV: Stored Mana -10%";
+                command_subtractMana.action = () =>
+                {
+                    StoredPct -= 0.1f;
+                };
+
+                yield return command_subtractMana;
+
+                Command_Action command_setEnvMana = new Command_Action();
+                command_setEnvMana.defaultLabel = "DEV: Set environment mana full";
+                command_setEnvMana.action = () =>
+                {
+                    var manaGrid = parent.MapHeld.GetComponent<EnvironmentManaGrid>();
+                    if (manaGrid != null)
+                    {
+                        manaGrid.ChangeEnvironmentMana(parent.PositionHeld, 10000f);
+                    }
+                };
+
+                yield return command_setEnvMana;
+            }
         }
 
         public override IEnumerable<Gizmo> CompGetWornGizmosExtra()

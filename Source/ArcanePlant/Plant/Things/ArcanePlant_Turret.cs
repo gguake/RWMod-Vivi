@@ -52,6 +52,9 @@ namespace VVRace
         protected int _burstCooldownTicksLeft;
         protected int _burstWarmupTicksLeft;
 
+        public bool HasAnyBulletOverrides => _hasAnyBulletOverrides;
+        protected bool _hasAnyBulletOverrides;
+
         public IEnumerable<BulletReplacer> BulletReplacers => _bulletReplacers.Values;
         protected Dictionary<Thing, BulletReplacer> _bulletReplacers = new Dictionary<Thing, BulletReplacer>();
 
@@ -204,6 +207,7 @@ namespace VVRace
             if (!_bulletReplacers.ContainsKey(thing))
             {
                 _bulletReplacers.Add(thing, replacer);
+                _hasAnyBulletOverrides = true;
             }
         }
 
@@ -212,6 +216,7 @@ namespace VVRace
             if (!_bulletModifiers.ContainsKey(thing))
             {
                 _bulletModifiers.Add(thing, modifier);
+                _hasAnyBulletOverrides = true;
             }
         }
 
@@ -219,6 +224,8 @@ namespace VVRace
         {
             _bulletReplacers.Remove(thing);
             _bulletModifiers.Remove(thing);
+
+            _hasAnyBulletOverrides = _bulletReplacers.Count > 0 || _bulletModifiers.Count > 0;
         }
 
         protected void TryActivateBurst()
