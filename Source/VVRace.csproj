@@ -99,6 +99,7 @@
     <Compile Include="ArcanePlant\Mana\Job\ManaDiffusionJob.cs" />
     <Compile Include="ArcanePlant\Mana\ManaMapComponent.cs" />
     <Compile Include="ArcanePlant\Plant\AI\WorkGiver_EquipShootus.cs" />
+    <Compile Include="ArcanePlant\Plant\ArcanePlantMapComponent.cs" />
     <Compile Include="ArcanePlant\Plant\ArcanePlantUtility.cs" />
     <Compile Include="ArcanePlant\Mana\Comps\CompManaFilthMaker.cs" />
     <Compile Include="ArcanePlant\Mana\Comps\CompManaShieldProjector.cs" />
