@@ -63,8 +63,6 @@ namespace VVRace
 
         protected virtual bool HasRandomDrawScale => true;
 
-        private bool _forceMinify = false;
-
         private int _lastDamagedTick = 0;
 
         public ArcanePlant()
@@ -75,7 +73,6 @@ namespace VVRace
         {
             base.ExposeData();
 
-            Scribe_Values.Look(ref _forceMinify, "forceMinify");
             Scribe_Values.Look(ref _lastDamagedTick, "lastDamagedTick");
         }
 
@@ -151,13 +148,6 @@ namespace VVRace
                 return;
             }
 
-            if (_forceMinify || !ArcanePlantUtility.CanPlaceArcanePlantToCell(Map, Position, def))
-            {
-                _forceMinify = false;
-                ForceMinifyAndDropDirect();
-                return;
-            }
-
             if (HitPoints < MaxHitPoints && ManaComp.Active && GenTicks.TicksGame >= _lastDamagedTick + RequiredTicksForRecoveryFromDamaged)
             {
                 if (GenTicks.TicksGame % 3 == 0)
@@ -226,12 +216,7 @@ namespace VVRace
             }
         }
 
-        public void ReserveAutoMinify()
-        {
-            _forceMinify = true;
-        }
-
-        private void ForceMinifyAndDropDirect()
+        public void MinifyAndDropDirect()
         {
             var position = Position;
             var map = Map;

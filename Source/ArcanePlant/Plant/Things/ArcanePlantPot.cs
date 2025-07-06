@@ -15,7 +15,7 @@ namespace VVRace
                 var plants = thingList.OfType<ArcanePlant>().ToList();
                 foreach (var plant in plants)
                 {
-                    plant.ReserveAutoMinify();
+                    plant.MinifyAndDropDirect();
                 }
 
                 var blueprints = thingList.OfType<Blueprint>().ToList();
