@@ -106,6 +106,7 @@
     <Compile Include="ArcanePlant\Mana\FluxRule\ManaFluxRule_RadialPollution.cs" />
     <Compile Include="ArcanePlant\Mana\FluxRule\ManaFluxRule_Wind.cs" />
     <Compile Include="ArcanePlant\Plant\Comps\CompArcaneSeed.cs" />
+    <Compile Include="ArcanePlant\Plant\Designator_PlantSeed.cs" />
     <Compile Include="ArcanePlant\Plant\ModExtension\ArcaneSeedExtension.cs" />
     <Compile Include="ArcanePlant\Plant\ThingDefGenerator_ArcaneSeed.cs" />
     <Compile Include="ArcanePlant\Plant\Comps\CompArcanePlantBulletOverride.cs" />

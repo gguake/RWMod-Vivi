@@ -1,4 +1,5 @@
-﻿using Verse;
+﻿using System.Collections.Generic;
+using Verse;
 
 namespace VVRace
 {
@@ -14,6 +15,22 @@ namespace VVRace
 
     public class CompArcaneSeed : ThingComp
     {
+        public static Designator_PlantSeed DesignatorPlantSeed
+        {
+            get
+            {
+                if (_designatorPlantSeed == null)
+                {
+                    _designatorPlantSeed = new Designator_PlantSeed();
+                }
+                return _designatorPlantSeed;
+            }
+        }
+        private static Designator_PlantSeed _designatorPlantSeed;
 
+        public override IEnumerable<Gizmo> CompGetGizmosExtra()
+        {
+            yield return DesignatorPlantSeed;
+        }
     }
 }

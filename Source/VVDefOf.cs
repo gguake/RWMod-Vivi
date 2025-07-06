@@ -88,6 +88,8 @@ namespace VVRace
         public static ThingDef VV_Skyweed;
         public static ThingDef VV_Everflower;
 
+        public static ThingDef VV_ArcanePlantSeedling;
+
         public static ThingDef VV_ViviCreamWall;
         public static ThingDef VV_SmoothedViviCreamWall;
         public static ThingDef VV_ViviHoneycombWall;
