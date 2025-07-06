@@ -19,17 +19,20 @@
 \n이미 성체가 된 비비는 먹어도 로열 비비가 되지는 않지만 정기적으로 복용할 경우 수명이 조금 늘어나며 노화 질환을 예방할 수 있습니다.</VV_RoyalJelly.description>
 
 <VV_FloralHotTea.label>따뜻한 꽃차</VV_FloralHotTea.label>
-<VV_FloralHotTea.description>따뜻한 꽃잎과 약간의 꿀을 넣고 끓여 우려낸 차입니다. 마시면 몸이 따뜻해져 추위를 덜 느낄 수 있습니다. 특이한 꽃잎의 성질 때문에 저장된 온도와 상관없이 따뜻함을 유지하고 있습니다.</VV_FloralHotTea.description>
+<VV_FloralHotTea.description>따뜻한 꽃잎과 약간의 꿀을 넣고 끓여 우려낸 차입니다. 마시면 몸이 따뜻해져 추위를 덜 느낄 수 있습니다.
+\n특이한 꽃잎의 성질 때문에 저장된 온도와 상관없이 따뜻함을 유지하고 있습니다.</VV_FloralHotTea.description>
 <VV_FloralHotTea.ingestible.ingestCommandString>{0} 마시기</VV_FloralHotTea.ingestible.ingestCommandString>
 <VV_FloralHotTea.ingestible.ingestReportString>{0} 마시는 중.</VV_FloralHotTea.ingestible.ingestReportString>
 
 <VV_FloralIceTea.label>얼음 꽃차</VV_FloralIceTea.label>
-<VV_FloralIceTea.description>차가운 꽃잎과 약간의 꿀을 넣고 끓여 우려낸 차입니다. 마시면 몸이 서늘해져 더위를 덜 느낄 수 있습니다. 특이한 꽃잎의 성질 때문에 저장된 온도와 상관없이 차가움을 유지하고 있습니다.</VV_FloralIceTea.description>
+<VV_FloralIceTea.description>차가운 꽃잎과 약간의 꿀을 넣고 끓여 우려낸 차입니다. 마시면 몸이 서늘해져 더위를 덜 느낄 수 있습니다.
+\n특이한 꽃잎의 성질 때문에 저장된 온도와 상관없이 차가움을 유지하고 있습니다.</VV_FloralIceTea.description>
 <VV_FloralIceTea.ingestible.ingestCommandString>{0} 마시기</VV_FloralIceTea.ingestible.ingestCommandString>
 <VV_FloralIceTea.ingestible.ingestReportString>{0} 마시는 중.</VV_FloralIceTea.ingestible.ingestReportString>
 
 <VV_FloralMilkTea.label>우유 꽃차</VV_FloralMilkTea.label>
-<VV_FloralMilkTea.description>향기나는 꽃잎을 넣고 끓여 우려낸 것에 우유를 더한 차입니다. 마시면 일정 시간동안 몸에서 꽃향기가 풍겨 기분이 좋아지며 수면에도 도움이 됩니다.</VV_FloralMilkTea.description>
+<VV_FloralMilkTea.description>향기나는 꽃잎을 넣고 끓여 우려낸 것에 우유를 더한 차입니다.
+\n마시면 일정 시간동안 몸에서 꽃향기가 풍겨 기분이 좋아지며 수면에도 도움이 됩니다.</VV_FloralMilkTea.description>
 <VV_FloralMilkTea.ingestible.ingestCommandString>{0} 마시기</VV_FloralMilkTea.ingestible.ingestCommandString>
 <VV_FloralMilkTea.ingestible.ingestReportString>{0} 마시는 중.</VV_FloralMilkTea.ingestible.ingestReportString>
 

@@ -218,48 +218,55 @@
   </ThingDef>
   
   <!-- 꽃씨 -->
-  <ThingDef ParentName="ResourceBase">
-    <defName>VV_UnknownSeed</defName>
+  <ThingDef>
+    <defName>VV_Seed_UnknownPlant</defName>
+    <thingClass>ThingWithComps</thingClass>
+    <category>Item</category>
     <label>unknown seed</label>
-    <description>a seed from an unidentified plant. It is often found when collecting honey. It cannot be grown by conventional means and can be cultured at a arcane plant farm.</description>
-    <descriptionHyperlinks>
-      <RecipeDef>VV_GatherHoney</RecipeDef>
-    </descriptionHyperlinks>
+    <description>An arcane seed of unknown species, occasionally found during gathering. Its plant type cannot be identified until it fully matures.\nArcane plants require both mana and nutrients to grow.
+\nMana is absorbed from the environment mana and can also be supplied by nearby mana emitter or other arcane plants that produce mana.
+\nNutrients must be supplied regularly by a person using mana fertilizer. If left without sufficient nutrients for too long, the seedling will die.</description>
+
+    <tickerType>Never</tickerType>
+    <selectable>true</selectable>
 
     <graphicData>
-      <texPath>Things/Item/VV_FlowerSeed</texPath>
       <graphicClass>Graphic_StackCount</graphicClass>
+      <texPath>Things/Item/VV_FlowerSeed</texPath>
     </graphicData>
+
+    <drawerType>MapMeshOnly</drawerType>
+    <altitudeLayer>Item</altitudeLayer>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <rotatable>false</rotatable>
+
+    <useHitPoints>true</useHitPoints>
+    <stackLimit>25</stackLimit>
+    <pathCost>14</pathCost>
+    <alwaysHaulable>true</alwaysHaulable>
+
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <MarketValue>30</MarketValue>
+      <Mass>0.001</Mass>
+      <MaxHitPoints>20</MaxHitPoints>
+      <DeteriorationRate>1</DeteriorationRate>
+      <Flammability>1.0</Flammability>
+    </statBases>
+    
     <thingCategories>
-      <li>VV_ViviResource</li>
+      <li>VV_ArcaneSeed</li>
     </thingCategories>
 
+    <comps>
+      <li Class="CompProperties_Forbiddable" />
+      <li Class="VVRace.CompProperties_ArcaneSeed" />
+    </comps>
+
+    <socialPropernessMatters>true</socialPropernessMatters>
     <resourceReadoutPriority>Middle</resourceReadoutPriority>
     <soundInteract>Grain_Drop</soundInteract>
     <soundDrop>Grain_Drop</soundDrop>
-    
-    <useHitPoints>true</useHitPoints>
-    <statBases>
-      <Mass>0.01</Mass>
-      <MarketValue>10</MarketValue>
-      <MaxHitPoints>30</MaxHitPoints>
-      <Flammability>1.0</Flammability>
-      <Nutrition>0.1</Nutrition>
-      <DeteriorationRate>5</DeteriorationRate>
-    </statBases>
-    <stackLimit>25</stackLimit>
-    
-    <ingestible>
-      <preferability>NeverForNutrition</preferability>
-      <tasteThought>AteRawFood</tasteThought>
-      <ingestEffect>EatVegetarian</ingestEffect>
-      <ingestSound>RawVegetable_Eat</ingestSound>
-      <foodType>Seed</foodType>
-    </ingestible>
-
-    <tradeTags>
-      <li>VV_ViviProduct</li>
-    </tradeTags>
   </ThingDef>
 
   <!-- 마나 비료 -->

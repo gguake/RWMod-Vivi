@@ -18,9 +18,10 @@
 
     <statBases>
       <MaxHitPoints>120</MaxHitPoints>
-      <WorkToBuild>90000</WorkToBuild>
+      <WorkToBuild>200000</WorkToBuild>
       <Beauty>15</Beauty>
       <BeautyOutdoors>15</BeautyOutdoors>
+      <SellPriceFactor>0.75</SellPriceFactor>
 
       <VV_PlantGatherCooldown>0.8</VV_PlantGatherCooldown>
       <VV_PlantHoneyGatherYield>1.4</VV_PlantHoneyGatherYield>
@@ -63,6 +64,20 @@
         <spawnEffecter>VV_PollenEmitting</spawnEffecter>
       </li>
     </comps>
+
+    <modExtensions>
+      <li Class="VVRace.ArcaneSeedExtension">
+        <seedMarketValue>800</seedMarketValue>
+        <seedColor>(255,255,0)</seedColor>
+
+        <leavingSeedCountCurve>
+          <points>
+            <li>(0, 1)</li>
+            <li>(1.0, 1)</li>
+          </points>
+        </leavingSeedCountCurve>
+      </li>
+    </modExtensions>
   </ThingDef>
 
 </Defs>

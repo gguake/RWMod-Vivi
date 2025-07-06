@@ -37,6 +37,7 @@
       <Mass>3</Mass>
       <Flammability>1</Flammability>
       <WorkToBuild>1800</WorkToBuild>
+      <SellPriceFactor>0.25</SellPriceFactor>
     </statBases>
 
     <damageMultipliers>

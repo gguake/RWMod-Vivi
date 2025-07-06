@@ -83,6 +83,15 @@ namespace VVRace
                 original: AccessTools.Method(typeof(PlaySettings), "DoMapControls"),
                 postfix: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(PlaySettings_DoMapControls_Postfix)));
 
+            // 씨앗
+            harmony.Patch(
+                original: AccessTools.Method(typeof(DefGenerator), nameof(DefGenerator.GenerateImpliedDefs_PreResolve)),
+                postfix: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(DefGenerator_GenerateImpliedDefs_PreResolve_Postfix)));
+
+            harmony.Patch(
+                original: AccessTools.Method(typeof(GenLeaving), nameof(GenLeaving.DoLeavingsFor), parameters: new Type[] { typeof(Thing), typeof(Map), typeof(DestroyMode), typeof(CellRect), typeof(Predicate<IntVec3>), typeof(List<Thing>) }),
+                transpiler: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(GenLeaving_DoLeavingsFor_Transpiler)));
+
             Log.Message("!! [ViViRace] arcane plant patch complete");
         }
 
@@ -397,5 +406,37 @@ namespace VVRace
                     LocalizeString_Etc.VV_ShowManaOverlayTooltip.Translate());
             }
         }
+
+        private static void DefGenerator_GenerateImpliedDefs_PreResolve_Postfix(bool hotReload)
+        {
+            foreach (var def in ThingDefGenerator_ArcaneSeed.ImpliedSeedDefs(hotReload))
+            {
+                DefGenerator.AddImpliedDef(def, hotReload);
+            }
+        }
+
+        private static IEnumerable<CodeInstruction> GenLeaving_DoLeavingsFor_Transpiler(IEnumerable<CodeInstruction> codeInstructions, ILGenerator ilGenerator)
+        {
+            var instructions = codeInstructions.ToList();
+
+            var injectionIndex = instructions.FirstIndexOfInstruction(OpCodes.Call, operand: AccessTools.Method(typeof(CostListCalculator), nameof(CostListCalculator.CostListAdjusted), new Type[] { typeof(Thing) })) + 2;
+
+            var jumpLabel = ilGenerator.DefineLabel();
+            instructions[injectionIndex] = instructions[injectionIndex].WithLabels(jumpLabel);
+
+            var injections = new List<CodeInstruction>()
+            {
+                new CodeInstruction(OpCodes.Ldarg_0),
+                new CodeInstruction(OpCodes.Isinst, typeof(INotifyBuildingDeconstruct)),
+                new CodeInstruction(OpCodes.Brfalse_S, jumpLabel),
+                new CodeInstruction(OpCodes.Ldarg_0),
+                new CodeInstruction(OpCodes.Ldloc_2),
+                new CodeInstruction(OpCodes.Callvirt, AccessTools.Method(typeof(INotifyBuildingDeconstruct), nameof(INotifyBuildingDeconstruct.Notify_BuildingDeconstruct))),
+            };
+
+            instructions.InsertRange(injectionIndex, injections);
+            return instructions;
+        }
+
     }
 }

@@ -43,6 +43,13 @@
   </ThingCategoryDef>
 
   <ThingCategoryDef>
+    <defName>VV_ArcaneSeed</defName>
+    <label>arcane seeds</label>
+    <parent>VV_ViviResource</parent>
+    <iconPath>UI/Icons/ThingCategories/VV_FlowerSeed</iconPath>
+  </ThingCategoryDef>
+
+  <ThingCategoryDef>
     <defName>VV_Petal</defName>
     <label>petals</label>
     <parent>VV_ViviResource</parent>

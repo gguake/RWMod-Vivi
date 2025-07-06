@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <ThingDef ParentName="VV_ArcanePlantBase">
+    <defName>VV_ArcanePlantSeedling</defName>
+    <label>arcane plant seedling</label>
+    <description>A young arcane plant still in the process of growing.\nArcane plants require both mana and nutrients to grow, and they do not grow while packaged.
+\nMana is absorbed from the environment mana and can also be supplied by nearby mana emitter or other arcane plants that produce mana.
+\nNutrients must be supplied regularly by a person using mana fertilizer. If left without sufficient nutrients for too long, the seedling will die.</description>
+    
+    <thingClass>VVRace.ArcanePlant_Seedling</thingClass>
+
+    <graphicData>
+      <texPath>Things/Plants/VV_Seedling</texPath>
+      <graphicClass>Graphic_Random</graphicClass>
+    </graphicData>
+    <drawerType>MapMeshAndRealTime</drawerType>
+
+    <minifiedDef></minifiedDef>
+
+    <statBases>
+      <MaxHitPoints>30</MaxHitPoints>
+      <MarketValue>10</MarketValue>
+    </statBases>
+    
+    <comps>
+      <li Class="VVRace.CompProperties_Mana">
+        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
+          <mana>50</mana>
+        </manaConsumeRule>
+
+        <manaAbsorbPerDay>50</manaAbsorbPerDay>
+      </li>
+      
+      <li Class="CompProperties_Refuelable">
+        <fuelLabel>Nutrition</fuelLabel>
+        <fuelGizmoLabel>Nutrition</fuelGizmoLabel>
+        <fuelConsumptionRate>15</fuelConsumptionRate>
+        <fuelCapacity>40</fuelCapacity>
+        <initialFuelPercent>1</initialFuelPercent>
+        <fuelMultiplier>1</fuelMultiplier>
+        <fuelFilter>
+          <thingDefs>
+            <li>VV_Fertilizer</li>
+          </thingDefs>
+        </fuelFilter>
+        <showFuelGizmo>true</showFuelGizmo>
+        <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+        <functionsInVacuum>false</functionsInVacuum>
+      </li>
+    </comps>
+
+    <thingCategories Inherit="False">
+    </thingCategories>
+    
+    <tradeTags Inherit="False">
+    </tradeTags>
+    <tradeability>None</tradeability>
+    
+    <modExtensions>
+      <li Class="VVRace.SeedlingExtension">
+        <dailyGrowth>0.142857</dailyGrowth>
+        <ticksToDamageFromZeroNutrition>30000</ticksToDamageFromZeroNutrition>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+</Defs>

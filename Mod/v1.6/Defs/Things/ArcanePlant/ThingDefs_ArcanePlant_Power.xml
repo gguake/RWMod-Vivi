@@ -20,7 +20,7 @@
 
     <statBases>
       <MaxHitPoints>100</MaxHitPoints>
-      <WorkToBuild>28000</WorkToBuild>
+      <WorkToBuild>47500</WorkToBuild>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
 
@@ -82,55 +82,17 @@
     </researchPrerequisites>
 
     <modExtensions>
-      <li Class="VVRace.GrowingArcanePlantData">
-        <ingredients>
-          <VV_UnknownSeed>1</VV_UnknownSeed>
-          <Steel>100</Steel>
-          <VV_Pollen>150</VV_Pollen>
-        </ingredients>
+      <li Class="VVRace.ArcaneSeedExtension">
+        <seedMarketValueRatio>0.25</seedMarketValueRatio>
+        <seedColor>(200,150,255)</seedColor>
 
-        <totalGrowDays>10</totalGrowDays>
-        <maxHealth>120</maxHealth>
-        <healthRegenNoDamagedByDays>50</healthRegenNoDamagedByDays>
-
-        <maxMana>240</maxMana>
-        <consumedManaByDay>180</consumedManaByDay>
-
-        <manaSensitivity>High</manaSensitivity>
-        <manageSensitivity>Low</manageSensitivity>
-        <glowSensitivity>Low</glowSensitivity>
-        
-        <manageIntervalTicks>150000</manageIntervalTicks>
-        <optimalGlowRange>0.5~1.0</optimalGlowRange>
-
-        <successChanceCurve>
+        <leavingSeedCountCurve>
           <points>
-            <li>(0,0)</li>
-            <li>(0.3,0.15)</li>
-            <li>(0.5,0.5)</li>
-            <li>(0.7,0.8)</li>
-            <li>(0.9,1)</li>
+            <li>(0, 2)</li>
+            <li>(0.7, 3)</li>
+            <li>(1.0, 4.5)</li>
           </points>
-        </successChanceCurve>
-        <healthBonusAmountCurve>
-          <points>
-            <li>(0,0)</li>
-            <li>(0.5,0)</li>
-            <li>(0.75,0.75)</li>
-            <li>(1,1.5)</li>
-          </points>
-        </healthBonusAmountCurve>
-        <cleanlinessBonusAmountCurve>
-          <points>
-            <li>(-10,0)</li>
-            <li>(-0.0001,0)</li>
-            <li>(0,1)</li>
-            <li>(0.2,1.5)</li>
-            <li>(0.4,2.5)</li>
-            <li>(0.6,4.5)</li>
-            <li>(1.0,6)</li>
-          </points>
-        </cleanlinessBonusAmountCurve>
+        </leavingSeedCountCurve>
       </li>
     </modExtensions>
   </ThingDef>
@@ -153,7 +115,7 @@
 
     <statBases>
       <MaxHitPoints>60</MaxHitPoints>
-      <WorkToBuild>28000</WorkToBuild>
+      <WorkToBuild>47500</WorkToBuild>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
       
@@ -210,55 +172,17 @@
     </researchPrerequisites>
 
     <modExtensions>
-      <li Class="VVRace.GrowingArcanePlantData">
-        <ingredients>
-          <VV_UnknownSeed>1</VV_UnknownSeed>
-          <Gold>20</Gold>
-          <VV_Pollen>150</VV_Pollen>
-        </ingredients>
+      <li Class="VVRace.ArcaneSeedExtension">
+        <seedMarketValueRatio>0.25</seedMarketValueRatio>
+        <seedColor>(255,150,255)</seedColor>
 
-        <totalGrowDays>10</totalGrowDays>
-        <maxHealth>120</maxHealth>
-        <healthRegenNoDamagedByDays>50</healthRegenNoDamagedByDays>
-
-        <maxMana>400</maxMana>
-        <consumedManaByDay>100</consumedManaByDay>
-
-        <manaSensitivity>Medium</manaSensitivity>
-        <manageSensitivity>High</manageSensitivity>
-        <glowSensitivity>Low</glowSensitivity>
-        
-        <manageIntervalTicks>45000</manageIntervalTicks>
-        <optimalGlowRange>0.5~1.0</optimalGlowRange>
-
-        <successChanceCurve>
+        <leavingSeedCountCurve>
           <points>
-            <li>(0,0)</li>
-            <li>(0.3,0.15)</li>
-            <li>(0.5,0.5)</li>
-            <li>(0.7,0.8)</li>
-            <li>(0.9,1)</li>
+            <li>(0, 2)</li>
+            <li>(0.7, 3)</li>
+            <li>(1.0, 4.5)</li>
           </points>
-        </successChanceCurve>
-        <healthBonusAmountCurve>
-          <points>
-            <li>(0,0)</li>
-            <li>(0.5,0)</li>
-            <li>(0.75,0.75)</li>
-            <li>(1,1.5)</li>
-          </points>
-        </healthBonusAmountCurve>
-        <cleanlinessBonusAmountCurve>
-          <points>
-            <li>(-10,0)</li>
-            <li>(-0.0001,0)</li>
-            <li>(0,1)</li>
-            <li>(0.2,1.5)</li>
-            <li>(0.4,2.5)</li>
-            <li>(0.6,4.5)</li>
-            <li>(1.0,6)</li>
-          </points>
-        </cleanlinessBonusAmountCurve>
+        </leavingSeedCountCurve>
       </li>
     </modExtensions>
   </ThingDef>

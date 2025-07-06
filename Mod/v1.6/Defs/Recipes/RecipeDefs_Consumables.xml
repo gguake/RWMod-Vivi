@@ -168,7 +168,7 @@
     </descriptionHyperlinks>
 
     <jobString>Making floral hot tea.</jobString>
-    <workAmount>900</workAmount>
+    <workAmount>500</workAmount>
     <workSpeedStat>DrugCookingSpeed</workSpeedStat>
     <requiredGiverWorkType>Cooking</requiredGiverWorkType>
     <effectWorking>Cook</effectWorking>
@@ -222,7 +222,7 @@
     </descriptionHyperlinks>
 
     <jobString>Making floral ice tea.</jobString>
-    <workAmount>900</workAmount>
+    <workAmount>500</workAmount>
     <workSpeedStat>DrugCookingSpeed</workSpeedStat>
     <requiredGiverWorkType>Cooking</requiredGiverWorkType>
     <effectWorking>Cook</effectWorking>
@@ -276,7 +276,7 @@
     </descriptionHyperlinks>
 
     <jobString>Making floral milk tea.</jobString>
-    <workAmount>900</workAmount>
+    <workAmount>500</workAmount>
     <workSpeedStat>DrugCookingSpeed</workSpeedStat>
     <requiredGiverWorkType>Cooking</requiredGiverWorkType>
     <effectWorking>Cook</effectWorking>

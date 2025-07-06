@@ -7,10 +7,15 @@ using Verse;
 
 namespace VVRace
 {
-    [StaticConstructorOnStartup]
-    public class ArcanePlant : Building
+    public interface INotifyBuildingDeconstruct
     {
-        public const float ManaByFertilizer = 20f;
+        void Notify_BuildingDeconstruct(ThingOwner<Thing> leavingThingOwner);
+    }
+
+    [StaticConstructorOnStartup]
+    public class ArcanePlant : Building, INotifyBuildingDeconstruct
+    {
+        public const int RequiredTicksForRecoveryFromDamaged = 30000;
 
         private static List<ThingDef> _allArcanePlantDefs;
         public static List<ThingDef> AllArcanePlantDefs
@@ -41,20 +46,29 @@ namespace VVRace
         }
         private CompMana _cachedManaComp;
 
+        public ArcaneSeedExtension SeedExtension
+        {
+            get
+            {
+                if (_seedExtension == null)
+                {
+                    _seedExtension = def.GetModExtension<ArcaneSeedExtension>();
+                }
+                return _seedExtension;
+            }
+        }
+        private ArcaneSeedExtension _seedExtension;
+
         protected virtual bool ShouldFlip => thingIDNumber % 2 == 0;
 
         protected virtual bool HasRandomDrawScale => true;
 
         private bool _forceMinify = false;
-        private int _nextGrowNearFlowerTick = 0;
+
+        private int _lastDamagedTick = 0;
 
         public ArcanePlant()
         {
-        }
-
-        public override void SpawnSetup(Map map, bool respawningAfterLoad)
-        {
-            base.SpawnSetup(map, respawningAfterLoad);
         }
 
         public override void ExposeData()
@@ -62,7 +76,7 @@ namespace VVRace
             base.ExposeData();
 
             Scribe_Values.Look(ref _forceMinify, "forceMinify");
-            Scribe_Values.Look(ref _nextGrowNearFlowerTick, "nextGrowNearFlowerTick", defaultValue: 0);
+            Scribe_Values.Look(ref _lastDamagedTick, "lastDamagedTick");
         }
 
         public override void Print(SectionLayer layer)
@@ -127,8 +141,8 @@ namespace VVRace
             }
         }
 
-        public override int UpdateRateTicks => 200;
-        protected override int MaxTickIntervalRate => 200;
+        public override int UpdateRateTicks => 1200;
+        protected override int MaxTickIntervalRate => 1000;
 
         protected override void TickInterval(int delta)
         {
@@ -142,6 +156,14 @@ namespace VVRace
                 _forceMinify = false;
                 ForceMinifyAndDropDirect();
                 return;
+            }
+
+            if (HitPoints < MaxHitPoints && ManaComp.Active && GenTicks.TicksGame >= _lastDamagedTick + RequiredTicksForRecoveryFromDamaged)
+            {
+                if (GenTicks.TicksGame % 3 == 0)
+                {
+                    HitPoints++;
+                }
             }
         }
 
@@ -172,6 +194,35 @@ namespace VVRace
             else
             {
                 dinfo.SetAmount(damage);
+            }
+        }
+
+        public override void PostApplyDamage(DamageInfo dinfo, float totalDamageDealt)
+        {
+            base.PostApplyDamage(dinfo, totalDamageDealt);
+
+            _lastDamagedTick = GenTicks.TicksGame;
+        }
+
+        public void Notify_BuildingDeconstruct(ThingOwner<Thing> leavingThingOwner)
+        {
+            if (leavingThingOwner == null) { return; }
+
+            try
+            {
+                Rand.PushState(thingIDNumber);
+
+                var seedCount = (int)SeedExtension.leavingSeedCountCurve.Evaluate(Rand.Value);
+                if (seedCount > 0)
+                {
+                    var thing = ThingMaker.MakeThing(SeedExtension.seedDef);
+                    thing.stackCount = seedCount;
+                    leavingThingOwner.TryAdd(thing);
+                }
+            }
+            finally
+            {
+                Rand.PopState();
             }
         }
 

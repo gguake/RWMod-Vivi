@@ -286,11 +286,16 @@ namespace VVRace
 
             if (beforeActivated != _manaActivated)
             {
+                if (parent is IManaChangeEventReceiver manaChangeEventReceiver)
+                {
+                    manaChangeEventReceiver.Notify_ManaActivateChanged(beforeActivated, _manaActivated);
+                }
+
                 foreach (var comp in parent.AllComps)
                 {
-                    if (comp is IManaChangeEventReceiver manaChangeEventReceiver)
+                    if (comp is IManaChangeEventReceiver manaChangeEventReceiverComp)
                     {
-                        manaChangeEventReceiver.Notify_ManaActivateChanged(beforeActivated, _manaActivated);
+                        manaChangeEventReceiverComp.Notify_ManaActivateChanged(beforeActivated, _manaActivated);
                     }
                 }
             }

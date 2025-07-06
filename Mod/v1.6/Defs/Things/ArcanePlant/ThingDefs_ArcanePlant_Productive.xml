@@ -19,7 +19,7 @@
     <terrainAffordanceNeeded>VV_WaterOrLight</terrainAffordanceNeeded>
     <statBases>
       <MaxHitPoints>70</MaxHitPoints>
-      <WorkToBuild>33000</WorkToBuild>
+      <WorkToBuild>47500</WorkToBuild>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
       <Flammability>0</Flammability>
@@ -91,55 +91,17 @@
     </researchPrerequisites>
 
     <modExtensions>
-      <li Class="VVRace.GrowingArcanePlantData">
-        <ingredients>
-          <VV_UnknownSeed>1</VV_UnknownSeed>
-          <VV_Vivicream>120</VV_Vivicream>
-          <VV_Pollen>150</VV_Pollen>
-        </ingredients>
+      <li Class="VVRace.ArcaneSeedExtension">
+        <seedMarketValueRatio>0.25</seedMarketValueRatio>
+        <seedColor>(150,150,255)</seedColor>
 
-        <totalGrowDays>10</totalGrowDays>
-        <maxHealth>300</maxHealth>
-        <healthRegenNoDamagedByDays>30</healthRegenNoDamagedByDays>
-
-        <maxMana>300</maxMana>
-        <consumedManaByDay>80</consumedManaByDay>
-
-        <manaSensitivity>Medium</manaSensitivity>
-        <manageSensitivity>High</manageSensitivity>
-        <temperatureSensitivity>Medium</temperatureSensitivity>
-        
-        <manageIntervalTicks>210000</manageIntervalTicks>
-        <optimalTemperatureRange>12~39</optimalTemperatureRange>
-
-        <successChanceCurve>
+        <leavingSeedCountCurve>
           <points>
-            <li>(0,0)</li>
-            <li>(0.3,0.15)</li>
-            <li>(0.5,0.5)</li>
-            <li>(0.7,0.8)</li>
-            <li>(0.9,1)</li>
+            <li>(0, 2)</li>
+            <li>(0.7, 3)</li>
+            <li>(1.0, 4.5)</li>
           </points>
-        </successChanceCurve>
-        <healthBonusAmountCurve>
-          <points>
-            <li>(0,0)</li>
-            <li>(0.5,0)</li>
-            <li>(0.75,0.75)</li>
-            <li>(1,1.5)</li>
-          </points>
-        </healthBonusAmountCurve>
-        <cleanlinessBonusAmountCurve>
-          <points>
-            <li>(-10,0)</li>
-            <li>(-0.0001,0)</li>
-            <li>(0,1)</li>
-            <li>(0.2,1.5)</li>
-            <li>(0.4,2.5)</li>
-            <li>(0.6,4.5)</li>
-            <li>(1.0,6)</li>
-          </points>
-        </cleanlinessBonusAmountCurve>
+        </leavingSeedCountCurve>
       </li>
     </modExtensions>
   </ThingDef>
@@ -163,7 +125,7 @@
 
     <statBases>
       <MaxHitPoints>60</MaxHitPoints>
-      <WorkToBuild>33000</WorkToBuild>
+      <WorkToBuild>47500</WorkToBuild>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
       
@@ -211,55 +173,17 @@
     </researchPrerequisites>
 
     <modExtensions>
-      <li Class="VVRace.GrowingArcanePlantData">
-        <ingredients>
-          <VV_UnknownSeed>1</VV_UnknownSeed>
-          <Hay>200</Hay>
-          <VV_Pollen>200</VV_Pollen>
-        </ingredients>
+      <li Class="VVRace.ArcaneSeedExtension">
+        <seedMarketValueRatio>0.25</seedMarketValueRatio>
+        <seedColor>(255,200,150)</seedColor>
 
-        <totalGrowDays>15</totalGrowDays>
-        <maxHealth>300</maxHealth>
-        <healthRegenNoDamagedByDays>300</healthRegenNoDamagedByDays>
-
-        <maxMana>240</maxMana>
-        <consumedManaByDay>80</consumedManaByDay>
-
-        <manaSensitivity>Medium</manaSensitivity>
-        <manageSensitivity>Low</manageSensitivity>
-        <glowSensitivity>High</glowSensitivity>
-        
-        <manageIntervalTicks>210000</manageIntervalTicks>
-        <optimalGlowRange>0.5~1.0</optimalGlowRange>
-
-        <successChanceCurve>
+        <leavingSeedCountCurve>
           <points>
-            <li>(0,0)</li>
-            <li>(0.3,0.15)</li>
-            <li>(0.5,0.5)</li>
-            <li>(0.7,0.8)</li>
-            <li>(0.9,1)</li>
+            <li>(0, 2)</li>
+            <li>(0.7, 3)</li>
+            <li>(1.0, 4.5)</li>
           </points>
-        </successChanceCurve>
-        <healthBonusAmountCurve>
-          <points>
-            <li>(0,0)</li>
-            <li>(0.5,0)</li>
-            <li>(0.75,0.75)</li>
-            <li>(1,1.5)</li>
-          </points>
-        </healthBonusAmountCurve>
-        <cleanlinessBonusAmountCurve>
-          <points>
-            <li>(-10,0)</li>
-            <li>(-0.0001,0)</li>
-            <li>(0,1)</li>
-            <li>(0.2,1.5)</li>
-            <li>(0.4,2.5)</li>
-            <li>(0.6,4.5)</li>
-            <li>(1.0,6)</li>
-          </points>
-        </cleanlinessBonusAmountCurve>
+        </leavingSeedCountCurve>
       </li>
     </modExtensions>
   </ThingDef>
@@ -283,7 +207,7 @@
 
     <statBases>
       <MaxHitPoints>60</MaxHitPoints>
-      <WorkToBuild>21000</WorkToBuild>
+      <WorkToBuild>47500</WorkToBuild>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
       
@@ -355,55 +279,17 @@
     </researchPrerequisites>
 
     <modExtensions>
-      <li Class="VVRace.GrowingArcanePlantData">
-        <ingredients>
-          <VV_UnknownSeed>1</VV_UnknownSeed>
-          <VV_Fertilizer>50</VV_Fertilizer>
-          <VV_Pollen>100</VV_Pollen>
-        </ingredients>
+      <li Class="VVRace.ArcaneSeedExtension">
+        <seedMarketValueRatio>0.25</seedMarketValueRatio>
+        <seedColor>(255,150,150)</seedColor>
 
-        <totalGrowDays>10</totalGrowDays>
-        <maxHealth>150</maxHealth>
-        <healthRegenNoDamagedByDays>30</healthRegenNoDamagedByDays>
-
-        <maxMana>400</maxMana>
-        <consumedManaByDay>60</consumedManaByDay>
-
-        <manaSensitivity>Low</manaSensitivity>
-        <manageSensitivity>High</manageSensitivity>
-        <glowSensitivity>Medium</glowSensitivity>
-        
-        <manageIntervalTicks>150000</manageIntervalTicks>
-        <optimalGlowRange>0.5~1.0</optimalGlowRange>
-
-        <successChanceCurve>
+        <leavingSeedCountCurve>
           <points>
-            <li>(0,0)</li>
-            <li>(0.3,0.15)</li>
-            <li>(0.5,0.5)</li>
-            <li>(0.7,0.8)</li>
-            <li>(0.9,1)</li>
+            <li>(0, 2)</li>
+            <li>(0.7, 3)</li>
+            <li>(1.0, 4.5)</li>
           </points>
-        </successChanceCurve>
-        <healthBonusAmountCurve>
-          <points>
-            <li>(0,0)</li>
-            <li>(0.5,0)</li>
-            <li>(0.75,0.75)</li>
-            <li>(1,1.5)</li>
-          </points>
-        </healthBonusAmountCurve>
-        <cleanlinessBonusAmountCurve>
-          <points>
-            <li>(-10,0)</li>
-            <li>(-0.0001,0)</li>
-            <li>(0,1)</li>
-            <li>(0.2,1.5)</li>
-            <li>(0.4,2.5)</li>
-            <li>(0.6,4.5)</li>
-            <li>(1.0,6)</li>
-          </points>
-        </cleanlinessBonusAmountCurve>
+        </leavingSeedCountCurve>
       </li>
     </modExtensions>
   </ThingDef>
@@ -425,7 +311,7 @@
 
     <statBases>
       <MaxHitPoints>90</MaxHitPoints>
-      <WorkToBuild>55000</WorkToBuild>
+      <WorkToBuild>47500</WorkToBuild>
       <Beauty>15</Beauty>
       <BeautyOutdoors>15</BeautyOutdoors>
     </statBases>
@@ -474,6 +360,8 @@
       </li>
 
       <li Class="CompProperties_Refuelable">
+        <fuelLabel>Wastepack</fuelLabel>
+        <fuelGizmoLabel>Wastepack</fuelGizmoLabel>
         <fuelConsumptionRate>1.5</fuelConsumptionRate>
         <fuelCapacity>15</fuelCapacity>
         <initialFuelPercent>0</initialFuelPercent>
@@ -483,6 +371,7 @@
             <li>Wastepack</li>
           </thingDefs>
         </fuelFilter>
+        <showFuelGizmo>true</showFuelGizmo>
         <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
       </li>
     </comps>
@@ -492,53 +381,17 @@
     </researchPrerequisites>
 
     <modExtensions>
-      <li Class="VVRace.GrowingArcanePlantData">
-        <ingredients>
-          <VV_UnknownSeed>1</VV_UnknownSeed>
-          <Neutroamine>20</Neutroamine>
-          <VV_Pollen>150</VV_Pollen>
-        </ingredients>
+      <li Class="VVRace.ArcaneSeedExtension">
+        <seedMarketValueRatio>0.25</seedMarketValueRatio>
+        <seedColor>(200,255,200)</seedColor>
 
-        <totalGrowDays>25</totalGrowDays>
-        <maxHealth>250</maxHealth>
-        <healthRegenNoDamagedByDays>25</healthRegenNoDamagedByDays>
-
-        <maxMana>270</maxMana>
-        <consumedManaByDay>50</consumedManaByDay>
-
-        <manaSensitivity>Medium</manaSensitivity>
-        <temperatureSensitivity>Low</temperatureSensitivity>
-        
-        <optimalTemperatureRange>4~36</optimalTemperatureRange>
-
-        <successChanceCurve>
+        <leavingSeedCountCurve>
           <points>
-            <li>(0,0)</li>
-            <li>(0.3,0.15)</li>
-            <li>(0.5,0.5)</li>
-            <li>(0.7,0.8)</li>
-            <li>(0.9,1)</li>
+            <li>(0, 2)</li>
+            <li>(0.7, 3)</li>
+            <li>(1.0, 4.5)</li>
           </points>
-        </successChanceCurve>
-        <healthBonusAmountCurve>
-          <points>
-            <li>(0,0)</li>
-            <li>(0.5,0)</li>
-            <li>(0.75,0.75)</li>
-            <li>(1,1.5)</li>
-          </points>
-        </healthBonusAmountCurve>
-        <cleanlinessBonusAmountCurve>
-          <points>
-            <li>(-10,0)</li>
-            <li>(-0.0001,0)</li>
-            <li>(0,1)</li>
-            <li>(0.2,1.5)</li>
-            <li>(0.4,2.5)</li>
-            <li>(0.6,4.5)</li>
-            <li>(1.0,6)</li>
-          </points>
-        </cleanlinessBonusAmountCurve>
+        </leavingSeedCountCurve>
       </li>
     </modExtensions>
   </ThingDef>
@@ -560,7 +413,7 @@
 
     <statBases>
       <MaxHitPoints>90</MaxHitPoints>
-      <WorkToBuild>33000</WorkToBuild>
+      <WorkToBuild>47500</WorkToBuild>
       <Beauty>15</Beauty>
       <BeautyOutdoors>15</BeautyOutdoors>
     </statBases>
@@ -608,53 +461,17 @@
     </researchPrerequisites>
 
     <modExtensions>
-      <li Class="VVRace.GrowingArcanePlantData">
-        <ingredients>
-          <VV_UnknownSeed>1</VV_UnknownSeed>
-          <Neutroamine>20</Neutroamine>
-          <VV_Pollen>150</VV_Pollen>
-        </ingredients>
+      <li Class="VVRace.ArcaneSeedExtension">
+        <seedMarketValueRatio>0.25</seedMarketValueRatio>
+        <seedColor>(255,200,255)</seedColor>
 
-        <totalGrowDays>25</totalGrowDays>
-        <maxHealth>250</maxHealth>
-        <healthRegenNoDamagedByDays>25</healthRegenNoDamagedByDays>
-
-        <maxMana>270</maxMana>
-        <consumedManaByDay>50</consumedManaByDay>
-
-        <manaSensitivity>Medium</manaSensitivity>
-        <temperatureSensitivity>Low</temperatureSensitivity>
-        
-        <optimalTemperatureRange>4~36</optimalTemperatureRange>
-
-        <successChanceCurve>
+        <leavingSeedCountCurve>
           <points>
-            <li>(0,0)</li>
-            <li>(0.3,0.15)</li>
-            <li>(0.5,0.5)</li>
-            <li>(0.7,0.8)</li>
-            <li>(0.9,1)</li>
+            <li>(0, 2)</li>
+            <li>(0.7, 3)</li>
+            <li>(1.0, 4.5)</li>
           </points>
-        </successChanceCurve>
-        <healthBonusAmountCurve>
-          <points>
-            <li>(0,0)</li>
-            <li>(0.5,0)</li>
-            <li>(0.75,0.75)</li>
-            <li>(1,1.5)</li>
-          </points>
-        </healthBonusAmountCurve>
-        <cleanlinessBonusAmountCurve>
-          <points>
-            <li>(-10,0)</li>
-            <li>(-0.0001,0)</li>
-            <li>(0,1)</li>
-            <li>(0.2,1.5)</li>
-            <li>(0.4,2.5)</li>
-            <li>(0.6,4.5)</li>
-            <li>(1.0,6)</li>
-          </points>
-        </cleanlinessBonusAmountCurve>
+        </leavingSeedCountCurve>
       </li>
     </modExtensions>
   </ThingDef>

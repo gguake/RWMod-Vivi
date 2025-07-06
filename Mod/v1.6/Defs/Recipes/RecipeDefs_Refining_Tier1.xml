@@ -254,8 +254,10 @@
           <customSummary>pollen or unknown seeds</customSummary>
           <thingDefs>
             <li>VV_Pollen</li>
-            <li>VV_UnknownSeed</li>
           </thingDefs>
+          <categories>
+            <li>VV_ArcaneSeed</li>
+          </categories>
         </filter>
         <count>0.5</count>
       </li>
@@ -263,13 +265,14 @@
     <fixedIngredientFilter>
       <thingDefs>
         <li>VV_Pollen</li>
-        <li>VV_UnknownSeed</li>
       </thingDefs>
       <categories>
         <li>Foods</li>
         <li>PlantMatter</li>
+        <li>VV_ArcaneSeed</li>
       </categories>
       <disallowedThingDefs>
+        <li>VV_Seed_Everflower</li>
         <li>VV_Propolis</li>
         <li>HemogenPack</li>
         <li>BabyFood</li>

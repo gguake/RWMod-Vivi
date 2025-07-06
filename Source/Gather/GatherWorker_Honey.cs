@@ -37,10 +37,10 @@ namespace VVRace
 
                 if (Rand.Chance(0.04f))
                 {
-                    var seed = ThingMaker.MakeThing(VVThingDefOf.VV_UnknownSeed);
-                    seed.stackCount = 1;
+                    //var seed = ThingMaker.MakeThing(VVThingDefOf.VV_UnknownSeed);
+                    //seed.stackCount = 1;
 
-                    GenPlace.TryPlaceThing(seed, pawn.Position, pawn.Map, ThingPlaceMode.Near);
+                    //GenPlace.TryPlaceThing(seed, pawn.Position, pawn.Map, ThingPlaceMode.Near);
                 }
             }
         }

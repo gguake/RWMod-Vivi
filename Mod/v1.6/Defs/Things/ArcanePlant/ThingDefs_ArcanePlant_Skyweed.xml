@@ -21,7 +21,7 @@
 
     <statBases>
       <MaxHitPoints>50</MaxHitPoints>
-      <WorkToBuild>10000</WorkToBuild>
+      <WorkToBuild>47500</WorkToBuild>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
     </statBases>
@@ -69,53 +69,17 @@
     </researchPrerequisites>
 
     <modExtensions>
-      <li Class="VVRace.GrowingArcanePlantData">
-        <ingredients>
-          <VV_UnknownSeed>1</VV_UnknownSeed>
-          <VV_Fertilizer>20</VV_Fertilizer>
-          <VV_Pollen>100</VV_Pollen>
-        </ingredients>
+      <li Class="VVRace.ArcaneSeedExtension">
+        <seedMarketValueRatio>0.25</seedMarketValueRatio>
+        <seedColor>(200,200,200)</seedColor>
 
-        <totalGrowDays>5</totalGrowDays>
-        <maxHealth>50</maxHealth>
-        <healthRegenNoDamagedByDays>10</healthRegenNoDamagedByDays>
-
-        <maxMana>100</maxMana>
-        <consumedManaByDay>40</consumedManaByDay>
-
-        <manaSensitivity>High</manaSensitivity>
-        <manageSensitivity>Low</manageSensitivity>
-        
-        <manageIntervalTicks>45000</manageIntervalTicks>
-
-        <successChanceCurve>
+        <leavingSeedCountCurve>
           <points>
-            <li>(0,0)</li>
-            <li>(0.3,0.15)</li>
-            <li>(0.5,0.5)</li>
-            <li>(0.7,0.8)</li>
-            <li>(0.9,1)</li>
+            <li>(0, 2)</li>
+            <li>(0.7, 3)</li>
+            <li>(1.0, 4.5)</li>
           </points>
-        </successChanceCurve>
-        <healthBonusAmountCurve>
-          <points>
-            <li>(0,0)</li>
-            <li>(0.5,0)</li>
-            <li>(0.75,0.75)</li>
-            <li>(1,1.5)</li>
-          </points>
-        </healthBonusAmountCurve>
-        <cleanlinessBonusAmountCurve>
-          <points>
-            <li>(-10,0)</li>
-            <li>(-0.0001,0)</li>
-            <li>(0,1)</li>
-            <li>(0.2,1.5)</li>
-            <li>(0.4,2.5)</li>
-            <li>(0.6,4.5)</li>
-            <li>(1.0,6)</li>
-          </points>
-        </cleanlinessBonusAmountCurve>
+        </leavingSeedCountCurve>
       </li>
     </modExtensions>
   </ThingDef>

@@ -312,7 +312,8 @@
   <ThingDef ParentName="VV_FloweringTeaBase">
     <defName>VV_FloralHotTea</defName>
     <label>floral hot tea</label>
-    <description>A tea made by steaming warm flower petals and a bit of honey. Drinking it makes the body feel warm, reducing the sensation of cold. Because of the unique properties of the petals, it maintains warmth regardless of stored temperature.</description>
+    <description>A tea made by steaming warm flower petals and a bit of honey. Drinking it makes the body feel warm, reducing the sensation of cold.
+\nBecause of the unique properties of the petals, it maintains warmth regardless of stored temperature.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_HeatingPetal</ThingDef>
       <HediffDef>VV_FloralTea</HediffDef>
@@ -342,7 +343,8 @@
   <ThingDef ParentName="VV_FloweringTeaBase">
     <defName>VV_FloralIceTea</defName>
     <label>floral ice tea</label>
-    <description>A tea made by steaming cold flower petals and a bit of honey. Drinking it makes the body feel cool, reducing the sensation of heat. Because of the unique properties of the petals, it maintains its coolness regardless of stored temperature.</description>
+    <description>A tea made by steaming cold flower petals and a bit of honey. Drinking it makes the body feel cool, reducing the sensation of heat.
+\nBecause of the unique properties of the petals, it maintains its coolness regardless of stored temperature.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_CoolingPetal</ThingDef>
       <HediffDef>VV_FloralTea</HediffDef>
@@ -372,7 +374,8 @@
   <ThingDef ParentName="VV_FloweringTeaBase">
     <defName>VV_FloralMilkTea</defName>
     <label>floral milk tea</label>
-    <description>A tea made by steeping fragrant flower petals and adding milk. Drinking it makes the body emit a floral scent for a certain period of time, improving mood and aiding sleep.</description>
+    <description>A tea made by steeping fragrant flower petals and adding milk.
+\nDrinking it makes the body emit a floral scent for a certain period of time, improving mood and aiding sleep.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_PerfumingPetal</ThingDef>
       <HediffDef>VV_FloralTea</HediffDef>

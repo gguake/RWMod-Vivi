@@ -33,7 +33,8 @@
 <VV_Purifimint.label>정화초</VV_Purifimint.label>
 <VV_Purifimint.description>주변에 빛을 내는 작은 마법 식물로 독성 폐기물을 배치하면 이를 천천히 흡수해 마나를 생산합니다. 주변 토양의 오염을 정화하기도 하며 미관상 아름다워 장식에 쓰이기도 합니다.
 \n콩뿌리개와 인접한 위치에 설치하면 콩뿌리개가 사격시 발사하는 콩의 위력과 관통력을 소폭 증가시킵니다.\n인접한 풍년화나 정화초가 여러개 있다면 효과가 중첩됩니다.</VV_Purifimint.description>
-
+<VV_Purifimint.comps.CompRefuelable.fuelLabel>독성 폐기물</VV_Purifimint.comps.CompRefuelable.fuelLabel>
+<VV_Purifimint.comps.CompRefuelable.fuelGizmoLabel>독성 폐기물</VV_Purifimint.comps.CompRefuelable.fuelGizmoLabel>
 
 <VV_Skyweed.label>하늘풀</VV_Skyweed.label>
 <VV_Skyweed.description>민들레 씨앗과 비슷한 모양의 마법 식물로 실외에 있을때 바람의 힘을 마나로 변환합니다. 이 풀의 홀씨는 매우 가볍고 잘 날아가는 성질이 있어 소량의 물건을 실어보내는 용도로도 사용할 수 있습니다.
@@ -77,5 +78,12 @@
 <VV_Everflower.description>매우 희귀한 마법 꽃으로 비비들에게 신성한 꽃으로 취급되며 구체적인 재배 방식이 알려지지 않았지만 드물게 다른 마법 식물을 재배할때 함께 발견됩니다.
 \n주기적으로 많은 꽃가루를 내뿜으며 성체 비비가 이 꽃에서 꿀을 채집할때 신체 시간을 마나로 변환해 흡수하여 노화를 되돌리는 특성이 있습니다.
 \n영원꽃의 향기는 강력한 수면 효과가 있지만 비비들은 어느정도 내성을 가지고 있어 비비들만 꿀을 채집할 수 있으며 한 명의 비비가 반복해서 채집할 수는 없습니다.</VV_Everflower.description>
+
+<VV_ArcanePlantSeedling.label>마법 식물 모종</VV_ArcanePlantSeedling.label>
+<VV_ArcanePlantSeedling.description>아직 성장중인 작은 마법 식물입니다. 마법 식물이 성장하려면 마나와 양분이 모두 공급되야 하며 포장된 상태에서는 성장하지 않습니다.
+\n마나는 환경 마나를 흡수하므로 주변에 마나 발생기를 설치하거나 마나를 생산하는 마법 식물로부터 공급할 수 있습니다.
+\n양분은 정기적으로 사람이 비료를 공급해야하며 양분이 부족한 상태로 시간이 오래 지나면 모종이 죽습니다.</VV_ArcanePlantSeedling.description>
+<VV_ArcanePlantSeedling.comps.CompRefuelable.fuelLabel>양분</VV_ArcanePlantSeedling.comps.CompRefuelable.fuelLabel>
+<VV_ArcanePlantSeedling.comps.CompRefuelable.fuelGizmoLabel>양분</VV_ArcanePlantSeedling.comps.CompRefuelable.fuelGizmoLabel>
 
 </LanguageData>
