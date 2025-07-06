@@ -173,7 +173,7 @@ namespace VVRace
         {
             base.SelectedUpdate();
 
-            Map.GetComponent<EnvironmentManaGrid>()?.MarkForDrawOverlay();
+            Map.GetComponent<ManaMapComponent>()?.MarkForDrawOverlay();
         }
     }
 }

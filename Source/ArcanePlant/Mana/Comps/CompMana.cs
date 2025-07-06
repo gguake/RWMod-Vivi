@@ -31,7 +31,7 @@ namespace VVRace
     {
         public CompProperties_Mana Props => (CompProperties_Mana)props;
 
-        public int ManaExternalChangeByDay => (int)(_manaExternalChange * 60000f / EnvironmentManaGrid.RefreshManaInterval);
+        public int ManaExternalChangeByDay => (int)(_manaExternalChange * 60000f / ManaMapComponent.RefreshManaInterval);
 
         private float _manaGeneratesByDay;
         private float _manaConsumesByDay;
@@ -147,7 +147,7 @@ namespace VVRace
                 command_setEnvMana.defaultLabel = "DEV: Set environment mana full";
                 command_setEnvMana.action = () =>
                 {
-                    var manaGrid = parent.MapHeld.GetComponent<EnvironmentManaGrid>();
+                    var manaGrid = parent.MapHeld.GetComponent<ManaMapComponent>();
                     if (manaGrid != null)
                     {
                         manaGrid.ChangeEnvironmentMana(parent.PositionHeld, 10000f);
@@ -233,11 +233,11 @@ namespace VVRace
         {
             if (parent.Spawned && parent is Building)
             {
-                parent.Map.GetComponent<EnvironmentManaGrid>()?.MarkForDrawOverlay();
+                parent.Map.GetComponent<ManaMapComponent>()?.MarkForDrawOverlay();
             }
         }
 
-        public void RefreshMana(EnvironmentManaGrid manaGrid, IntVec3 pos, int ticks)
+        public void RefreshMana(ManaMapComponent manaGrid, IntVec3 pos, int ticks)
         {
             if (Props.workOnlySpawned && !parent.Spawned) { return; }
 

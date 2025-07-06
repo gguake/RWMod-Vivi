@@ -9,7 +9,7 @@ using Verse;
 
 namespace VVRace
 {
-    public class EnvironmentManaGrid : MapComponent, ICellBoolGiver, IDisposable
+    public class ManaMapComponent : MapComponent, ICellBoolGiver, IDisposable
     {
         public const float ViviFlowerChance = 0.06f;
         public const float EnvironmentManaMax = 1000f;
@@ -48,7 +48,7 @@ namespace VVRace
             }
         }
 
-        public EnvironmentManaGrid(Map map) : base(map)
+        public ManaMapComponent(Map map) : base(map)
         {
             _manaReserveGrid = new NativeArray<float>(map.cellIndices.NumGridCells, Allocator.Persistent);
             _manaGrid = new NativeArray<float>(map.cellIndices.NumGridCells, Allocator.Persistent);
