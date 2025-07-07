@@ -89,7 +89,7 @@ namespace VVRace
             var splittedCount = _seedlingBlueprints.Count - piece.stackCount;
             if (splittedCount > 0)
             {
-                for (int i = 0; i < splittedCount; ++i)
+                for (int i = 0; i < piece.stackCount; ++i)
                 {
                     _seedlingBlueprints[i].SetSeedToPlant((ThingWithComps)piece);
                     otherComp._seedlingBlueprints.Add(_seedlingBlueprints[i]);

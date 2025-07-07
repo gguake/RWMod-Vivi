@@ -13,7 +13,7 @@
       <texPath>Things/Plants/VV_Seedling</texPath>
       <graphicClass>Graphic_Random</graphicClass>
     </graphicData>
-    <drawerType>MapMeshAndRealTime</drawerType>
+    <drawerType>MapMeshOnly</drawerType>
 
     <minifiedDef></minifiedDef>
 

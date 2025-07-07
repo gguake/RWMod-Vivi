@@ -80,56 +80,54 @@ namespace VVRace
         {
             try
             {
+                Rand.PushState();
+                Rand.Seed = base.thingIDNumber.GetHashCode();
+
+                var thingTrueCenter = this.TrueCenter();
+
+                var drawSize = def.graphicData.drawSize;
+
+                bool isShift = false;
+                var zero = thingTrueCenter + new Vector3(0f, 0f, 0.11f);
+                if (zero.z - 0.5f < Position.z)
                 {
-                    Rand.PushState();
-                    Rand.Seed = base.thingIDNumber.GetHashCode();
+                    zero.z = Position.z + 0.5f;
+                    isShift = true;
+                }
 
-                    var thingTrueCenter = this.TrueCenter();
+                var scale = HasRandomDrawScale ? Rand.Range(0.9f, 1.1f) : 1f;
+                drawSize.Scale(new Vector2(scale, scale));
 
-                    var drawSize = def.graphicData.drawSize;
+                var isFlipUV = ShouldFlip;
+                var material = Graphic.MatSingleFor(this);
+                Graphic.TryGetTextureAtlasReplacementInfo(material, def.category.ToAtlasGroup(), isFlipUV, vertexColors: false, out material, out var uvs, out var _);
 
-                    bool isShift = false;
-                    var zero = thingTrueCenter + new Vector3(0f, 0f, 0.11f);
-                    if (zero.z - 0.5f < Position.z)
+                var colors = new Color32[4];
+                colors[1].a = (colors[2].a = 25);
+                colors[0].a = (colors[3].a = 0);
+
+                Printer_Plane.PrintPlane(
+                    size: drawSize,
+                    layer: layer,
+                    center: zero,
+                    mat: material,
+                    rot: 0f,
+                    flipUv: isFlipUV,
+                    uvs: uvs,
+                    colors: colors,
+                    uvzPayload: this.HashOffset() % 1024);
+
+                if (def.graphicData.shadowData != null)
+                {
+                    Vector3 center = thingTrueCenter + def.graphicData.shadowData.offset;
+                    if (isShift)
                     {
-                        zero.z = Position.z + 0.5f;
-                        isShift = true;
+                        center.z = base.Position.ToVector3Shifted().z + def.graphicData.shadowData.offset.z;
                     }
 
-                    var scale = HasRandomDrawScale ? Rand.Range(0.9f, 1.1f) : 1f;
-                    drawSize.Scale(new Vector2(scale, scale));
-
-                    var isFlipUV = ShouldFlip;
-                    var material = Graphic.MatSingleFor(this);
-                    Graphic.TryGetTextureAtlasReplacementInfo(material, def.category.ToAtlasGroup(), isFlipUV, vertexColors: false, out material, out var uvs, out var _);
-
-                    var colors = new Color32[4];
-                    colors[1].a = (colors[2].a = 25);
-                    colors[0].a = (colors[3].a = 0);
-
-                    Printer_Plane.PrintPlane(
-                        size: drawSize,
-                        layer: layer,
-                        center: zero,
-                        mat: material,
-                        rot: 0f,
-                        flipUv: isFlipUV,
-                        uvs: uvs,
-                        colors: colors,
-                        uvzPayload: this.HashOffset() % 1024);
-
-                    if (def.graphicData.shadowData != null)
-                    {
-                        Vector3 center = thingTrueCenter + def.graphicData.shadowData.offset;
-                        if (isShift)
-                        {
-                            center.z = base.Position.ToVector3Shifted().z + def.graphicData.shadowData.offset.z;
-                        }
-
-                        center.y -= 3f / 82f;
-                        Vector3 volume = def.graphicData.shadowData.volume;
-                        Printer_Shadow.PrintShadow(layer, center, volume, Rot4.North);
-                    }
+                    center.y -= 3f / 82f;
+                    Vector3 volume = def.graphicData.shadowData.volume;
+                    Printer_Shadow.PrintShadow(layer, center, volume, Rot4.North);
                 }
             }
             finally
@@ -197,6 +195,7 @@ namespace VVRace
         public void Notify_BuildingDeconstruct(ThingOwner<Thing> leavingThingOwner)
         {
             if (leavingThingOwner == null) { return; }
+            if (SeedExtension == null) { return; }
 
             try
             {

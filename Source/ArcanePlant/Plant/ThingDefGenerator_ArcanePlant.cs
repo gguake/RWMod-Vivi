@@ -115,7 +115,7 @@ namespace VVRace
                     modContentPack = def.modContentPack,
                 };
 
-                thingDef.graphicData = def.graphicData;
+                thingDef.graphicData = new GraphicData();
                 thingDef.graphicData.CopyFrom(def.graphicData);
                 thingDef.graphicData.shaderType = ShaderTypeDefOf.EdgeDetect;
                 thingDef.graphicData.color = ThingDefGenerator_Buildings.BlueprintColor;

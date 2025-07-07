@@ -36,7 +36,7 @@ namespace VVRace
 
         private ThingOwner _innerContainer;
 
-        public ThingDef MaturePlantDef => _innerContainer.Count > 0 ? _innerContainer[0].def : null;
+        public ThingDef MaturePlantDef => _innerContainer.Count > 0 ? _innerContainer[0].TryGetComp<CompArcaneSeed>()?.Props.targetPlantDef : null;
 
         public float Growth
         {
@@ -157,6 +157,11 @@ namespace VVRace
                                 {
                                     Rand.PopState();
                                 }
+                            }
+
+                            if (_innerContainer.Count > 0)
+                            {
+                                _innerContainer.ClearAndDestroyContents();
                             }
 
                             var healthPct = (float)HitPoints / MaxHitPoints;
