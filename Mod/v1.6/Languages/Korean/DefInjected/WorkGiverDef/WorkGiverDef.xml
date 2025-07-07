@@ -31,4 +31,8 @@
 <VV_FortifyHoneycombWalls.label>벌집 벽 강화</VV_FortifyHoneycombWalls.label>
 <VV_FortifyHoneycombWalls.verb>벽 강화</VV_FortifyHoneycombWalls.verb>
 <VV_FortifyHoneycombWalls.gerund> 벽 강화</VV_FortifyHoneycombWalls.gerund>
+
+<VV_PlantArcaneSeed.label>마법 식물 씨를 뿌림</VV_PlantArcaneSeed.label>
+<VV_PlantArcaneSeed.gerund> 심기</VV_PlantArcaneSeed.gerund>
+<VV_PlantArcaneSeed.verb>심기</VV_PlantArcaneSeed.verb>
 </LanguageData>

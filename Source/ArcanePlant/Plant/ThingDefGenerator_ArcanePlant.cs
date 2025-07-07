@@ -83,51 +83,6 @@ namespace VVRace
                 extension.seedDef = seedDef;
                 yield return seedDef;
             }
-
-            // Seedling BP
-            {
-                var def = VVThingDefOf.VV_ArcanePlantSeedling;
-                var defName = ThingDefGenerator_Buildings.BlueprintDefNamePrefix + def.defName;
-                var thingDef = hotReload ? DefDatabase<ThingDef>.GetNamed(defName) : new ThingDef()
-                {
-                    defName = defName,
-                    label = def.label + "BlueprintLabelExtra".Translate(),
-
-                    thingClass = typeof(Blueprint_PlantSeed),
-                    category = ThingCategory.Ethereal,
-
-                    altitudeLayer = AltitudeLayer.Blueprint,
-                    drawerType = DrawerType.MapMeshOnly,
-                    size = def.size,
-
-                    clearBuildingArea = def.clearBuildingArea,
-                    rotatable = def.rotatable,
-                    replaceTags = def.replaceTags,
-                    useHitPoints = false,
-                    selectable = true,
-                    seeThroughFog = true,
-
-                    comps =
-                    {
-                        new CompProperties_Forbiddable(),
-                        new CompProperties_Styleable()
-                    },
-                    modContentPack = def.modContentPack,
-                };
-
-                thingDef.graphicData = new GraphicData();
-                thingDef.graphicData.CopyFrom(def.graphicData);
-                thingDef.graphicData.shaderType = ShaderTypeDefOf.EdgeDetect;
-                thingDef.graphicData.color = ThingDefGenerator_Buildings.BlueprintColor;
-                thingDef.graphicData.colorTwo = Color.white;
-                thingDef.graphicData.shadowData = null;
-                thingDef.graphicData.renderQueue = 2950;
-                thingDef.defaultPlacingRot = def.defaultPlacingRot;
-                thingDef.entityDefToBuild = def;
-
-                def.blueprintDef = thingDef;
-                yield return thingDef;
-            }
         }
     }
 }

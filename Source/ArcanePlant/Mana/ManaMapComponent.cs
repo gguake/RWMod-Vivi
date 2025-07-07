@@ -303,21 +303,26 @@ namespace VVRace
 
             Color color;
             var value = _manaGrid[index] + _manaReserveGrid[index];
-            if (value < 250)
+            if (value <= 100)
             {
-                float normalized = value / 250.0f;
+                float normalized = value / 100.0f;
                 color = Color.Lerp(new Color(0, 1, 1, 0.1f), new Color(0, 1, 1, 1), normalized);
+            }
+            else if (value <= 500)
+            {
+                float normalized = (value - 100) / 400.0f;
+                color = Color.Lerp(new Color(0, 1, 1, 1), new Color(0, 0, 1, 1), normalized);
             }
             else
             {
-                float normalized = (value - 250) / 500.0f;
-                color = Color.Lerp(new Color(0, 1, 1, 1), new Color(0, 0, 1, 1), normalized);
+                float normalized = (value - 500) / 500.0f;
+                color = Color.Lerp(new Color(0, 0, 1, 1), new Color(0, 1, 0, 1), normalized);
             }
 
             color.r = Mathf.Round(color.r / 0.05f) * 0.05f;
             color.g = Mathf.Round(color.g / 0.05f) * 0.05f;
             color.b = Mathf.Round(color.b / 0.05f) * 0.05f;
-            color.a = 0.05f + Mathf.Round(color.a / 0.05f) * 0.05f;
+            color.a = Mathf.Round(color.a / 0.05f) * 0.05f;
             return color;
         }
     }

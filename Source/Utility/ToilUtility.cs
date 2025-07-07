@@ -18,6 +18,12 @@ namespace VVRace
             return toil;
         }
 
+        public static Toil WithTickIntervalAction(this Toil toil, Action<int> action)
+        {
+            toil.tickIntervalAction = action;
+            return toil;
+        }
+
         public static Toil WithFinishAction(this Toil toil, Action action)
         {
             toil.AddFinishAction(action);

@@ -49,11 +49,11 @@
         <manaGenerateRule Class="VVRace.ManaFluxRule_CompositeSum">
           <rules>
             <li Class="VVRace.ManaFluxRule_AdjacentWater">
-              <manaFromOccupiedWater>500</manaFromOccupiedWater>
-              <manaPerAdjacentWater>100</manaPerAdjacentWater>
+              <manaFromOccupiedWater>400</manaFromOccupiedWater>
+              <manaPerAdjacentWater>50</manaPerAdjacentWater>
             </li>
             <li Class="VVRace.ManaFluxRule_WeatherRainy">
-              <mana>500</mana>
+              <mana>400</mana>
             </li>
           </rules>
         </manaGenerateRule>
@@ -61,7 +61,7 @@
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
           <mana>50</mana>
         </manaConsumeRule>
-        <manaAbsorbPerDay>500</manaAbsorbPerDay>
+        <manaAbsorbPerDay>350</manaAbsorbPerDay>
       </li>
 
       <li Class="VVRace.CompProperties_RepeatGatherable" />
@@ -140,20 +140,20 @@
     <comps>
       <li Class="VVRace.CompProperties_Mana">
         <manaGenerateRule Class="VVRace.ManaFluxRule_Sunlight">
-          <manaFromSunlightRange>0~2050</manaFromSunlightRange>
+          <manaFromSunlightRange>0~1550</manaFromSunlightRange>
         </manaGenerateRule>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_CompositeSum">
           <rules>
             <li Class="VVRace.ManaFluxRule_GlowerActive">
-              <mana>1950</mana>
+              <mana>1450</mana>
             </li>
             <li Class="VVRace.ManaFluxRule_Constant">
               <mana>50</mana>
             </li>
           </rules>
         </manaConsumeRule>
-        <manaAbsorbPerDay>2000</manaAbsorbPerDay>
+        <manaAbsorbPerDay>1500</manaAbsorbPerDay>
       </li>
 
       <li Class="VVRace.CompProperties_RepeatGatherable" />
@@ -234,9 +234,9 @@
         </manaGenerateRule>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>600</mana>
+          <mana>500</mana>
         </manaConsumeRule>
-        <manaAbsorbPerDay>600</manaAbsorbPerDay>
+        <manaAbsorbPerDay>500</manaAbsorbPerDay>
       </li>
 
       <li Class="VVRace.CompProperties_ArcanePlantBulletOverride">
@@ -325,14 +325,14 @@
         <manaCapacity>600</manaCapacity>
 
         <manaGenerateRule Class="VVRace.ManaFluxRule_Refuelable">
-          <mana>500</mana>
+          <mana>600</mana>
           <fuelDef>Wastepack</fuelDef>
         </manaGenerateRule>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
           <mana>150</mana>
         </manaConsumeRule>
-        <manaAbsorbPerDay>450</manaAbsorbPerDay>
+        <manaAbsorbPerDay>300</manaAbsorbPerDay>
       </li>
 
       <li Class="VVRace.CompProperties_ArcanePlantBulletOverride">
@@ -427,7 +427,7 @@
         <manaCapacity>500</manaCapacity>
 
         <manaGenerateRule Class="VVRace.ManaFluxRule_TimeOfDay">
-          <mana>800</mana>
+          <mana>1000</mana>
           <timeOfDay>Night</timeOfDay>
         </manaGenerateRule>
         
@@ -435,7 +435,7 @@
           <mana>100</mana>
           <timeOfDay>Day</timeOfDay>
         </manaConsumeRule>
-        <manaAbsorbPerDay>350</manaAbsorbPerDay>
+        <manaAbsorbPerDay>250</manaAbsorbPerDay>
       </li>
 
       <li Class="VVRace.CompProperties_RepeatGatherable" />

@@ -84,4 +84,17 @@
     </requiredCapacities>
   </WorkGiverDef>
   
+  <WorkGiverDef>
+    <defName>VV_PlantArcaneSeed</defName>
+    <label>plant arcane seeds</label>
+    <giverClass>VVRace.WorkGiver_PlantArcaneSeed</giverClass>
+    <workType>Growing</workType>
+    <verb>plant</verb>
+    <gerund>planting</gerund>
+    <priorityInType>80</priorityInType>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+  </WorkGiverDef>
+  
 </Defs>

@@ -225,7 +225,7 @@
     <label>unknown seed</label>
     <description>An arcane seed of unknown species, occasionally found during gathering. Its plant type cannot be identified until it fully matures.\nArcane plants require both mana and nutrients to grow.
 \nMana is absorbed from the environment mana and can also be supplied by nearby mana emitter or other arcane plants that produce mana.
-\nNutrients must be supplied regularly by a person using mana fertilizer. If left without sufficient nutrients for too long, the seedling will die.</description>
+\nutrients continuously decrease regardless of mana, so a person must regularly apply arcane fertilizer. If left without sufficient nutrients for too long, the seedling will die.</description>
 
     <tickerType>Never</tickerType>
     <selectable>true</selectable>
@@ -269,11 +269,11 @@
     <soundDrop>Grain_Drop</soundDrop>
   </ThingDef>
 
-  <!-- 마나 비료 -->
+  <!-- 마법 비료 -->
   <ThingDef ParentName="ResourceBase">
     <defName>VV_Fertilizer</defName>
-    <label>mana fertilizer</label>
-    <description>a special fertilizer made by the Vivi, mixing organic matter and pollen. It contains a small amount of mana, so it can be used to cultivate arcane plants or temporarily recharge the mana of arcane plants. Each fertilizer recovers 20 mana.</description>
+    <label>arcane fertilizer</label>
+    <description>A special Vivi-made fertilizer blended with organic matter and pollen. It's mainly used for cultivating arcane plants, but it can also be fed into a mana emitter to extract the mana mixed in the fertilizer as environment mana.</description>
 
     <graphicData>
       <texPath>Things/Item/VV_Fertilizer</texPath>

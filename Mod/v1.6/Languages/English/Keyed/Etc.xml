@@ -21,7 +21,7 @@
 <VV_Thing_Seed>{0} seed</VV_Thing_Seed>
 <VV_Thing_SeedDesc>A seed of {0}. When planted in soil or an arcane plant pot, it becomes a seedling, which will eventually grow into {0}.\nArcane plants require both mana and nutrients to grow.
 \nMana is absorbed from the environment mana and can also be supplied by nearby mana emitter or other arcane plants that produce mana.
-\nNutrients must be supplied regularly by a person using mana fertilizer. If left without sufficient nutrients for too long, the seedling will die.</VV_Thing_SeedDesc>
+\nutrients continuously decrease regardless of mana, so a person must regularly apply arcane fertilizer. If left without sufficient nutrients for too long, the seedling will die.</VV_Thing_SeedDesc>
 
 <VV_Thing_Seedling>{0} seedling</VV_Thing_Seedling>
 </LanguageData>

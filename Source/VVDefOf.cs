@@ -51,6 +51,8 @@ namespace VVRace
         public static JobDef VV_GatherPropolis;
 
         public static JobDef VV_FortifyHoneycombWall;
+
+        public static JobDef VV_PlantArcaneSeed;
     }
 
     [DefOf]

@@ -93,10 +93,6 @@ namespace VVRace
                 original: AccessTools.Method(typeof(GenLeaving), nameof(GenLeaving.DoLeavingsFor), parameters: new Type[] { typeof(Thing), typeof(Map), typeof(DestroyMode), typeof(CellRect), typeof(Predicate<IntVec3>), typeof(List<Thing>) }),
                 transpiler: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(GenLeaving_DoLeavingsFor_Transpiler)));
 
-            harmony.Patch(
-                original: AccessTools.Method(typeof(WorkGiver_ConstructDeliverResources), "ResourceDeliverJobFor"),
-                prefix: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(WorkGiver_ConstructDeliverResources_ResourceDeliverJobFor_Prefix)));
-
             Log.Message("!! [ViViRace] arcane plant patch complete");
         }
 
@@ -441,57 +437,6 @@ namespace VVRace
 
             instructions.InsertRange(injectionIndex, injections);
             return instructions;
-        }
-
-        private static bool WorkGiver_ConstructDeliverResources_ResourceDeliverJobFor_Prefix(Pawn pawn, IConstructible c, ref Job __result)
-        {
-            if (c is Blueprint_PlantSeed bpPlantSeed)
-            {
-                var seed = bpPlantSeed.Seed;
-                var parentHolder = seed.ParentHolder;
-                if (parentHolder != null && parentHolder is Pawn_CarryTracker pawn_CarryTracker)
-                {
-                    JobFailReason.Is("BeingCarriedBy".Translate(pawn_CarryTracker.pawn));
-                    __result = null;
-                    return false;
-                }
-
-                if (seed.IsForbidden(pawn))
-                {
-                    JobFailReason.Is("ForbiddenLower".Translate());
-                    __result = null;
-                    return false;
-                }
-
-                if (!pawn.CanReach(seed, PathEndMode.ClosestTouch, pawn.NormalMaxDanger()))
-                {
-                    JobFailReason.Is("NoPath".Translate());
-                    __result = null;
-                    return false;
-                }
-
-                if (!pawn.CanReserve(seed))
-                {
-                    var otherPawn = pawn.Map.reservationManager.FirstRespectedReserver(seed, pawn);
-                    if (otherPawn != null)
-                    {
-                        JobFailReason.Is("ReservedBy".Translate(otherPawn.LabelShort, otherPawn));
-                    }
-                    __result = null;
-                    return false;
-                }
-
-                var job = JobMaker.MakeJob(JobDefOf.HaulToContainer);
-                job.targetA = seed;
-                job.targetB = bpPlantSeed;
-                job.count = 1;
-                job.haulMode = HaulMode.ToContainer;
-
-                __result = job;
-                return false;
-            }
-
-            return true;
         }
     }
 }

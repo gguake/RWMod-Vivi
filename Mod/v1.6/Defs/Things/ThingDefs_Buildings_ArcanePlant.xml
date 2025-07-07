@@ -79,7 +79,8 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VV_ManaEmitter</defName>
     <label>mana emitter</label>
-    <description>.</description>
+    <description>A device that extracts inactive mana contained in arcane fertilizer and converts it into environment mana. When arcane fertilizer is inserted, it slowly transforms it into environment mana and disperses it for use nearby.
+\nIts conversion efficiency is low, but it's useful when mana production is insufficient or in need of an emergency supply, making it an essential device used by the Vivi when establishing a nest.</description>
 
     <thingClass>VVRace.ManaEmitter</thingClass>
     <tickerType>Normal</tickerType>
@@ -121,7 +122,8 @@
     <designationCategory>VV_Bulidings</designationCategory>
     
     <costList>
-      <VV_Viviwax>70</VV_Viviwax>
+      <VV_Viviwax>60</VV_Viviwax>
+      <WoodLog>40</WoodLog>
       <VV_Fertilizer>40</VV_Fertilizer>
     </costList>
 
@@ -135,9 +137,9 @@
       </li>
 
       <li Class="CompProperties_Refuelable">
-        <fuelLabel>Fertilizer</fuelLabel>
-        <fuelGizmoLabel>Fertilizer</fuelGizmoLabel>
-        <fuelConsumptionRate>4</fuelConsumptionRate>
+        <fuelLabel>Arcane Fertilizer</fuelLabel>
+        <fuelGizmoLabel>Arcane Fertilizer</fuelGizmoLabel>
+        <fuelConsumptionRate>5</fuelConsumptionRate>
         <fuelCapacity>40</fuelCapacity>
         <initialFuelPercent>1</initialFuelPercent>
         <fuelMultiplier>1</fuelMultiplier>

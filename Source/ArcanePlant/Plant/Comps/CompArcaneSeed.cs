@@ -23,32 +23,40 @@ namespace VVRace
 
         public CompProperties_ArcaneSeed Props => (CompProperties_ArcaneSeed)props;
 
-        public List<Blueprint_PlantSeed> SeedlingBlueprints => _seedlingBlueprints;
-        private List<Blueprint_PlantSeed> _seedlingBlueprints = new List<Blueprint_PlantSeed>();
+        public List<IntVec3> SeedlingCells => _seedlingCells;
+        private List<IntVec3> _seedlingCells = new List<IntVec3>();
+
+        public override void PostDestroy(DestroyMode mode, Map previousMap)
+        {
+            base.PostDestroy(mode, previousMap);
+
+            previousMap?.GetComponent<ArcaneSeedMapComponent>()?.Unregister(parent);
+        }
 
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
         {
-            if (SeedlingBlueprints.Count > 0)
+            if (SeedlingCells.Count > 0)
             {
                 yield return new Command_Action
                 {
-                    defaultLabel = "CancelPlantThing".Translate(Props.targetPlantDef),
-                    defaultDesc = "CancelPlantThingDesc".Translate(Props.targetPlantDef),
+                    defaultLabel = "CancelPlantThing".Translate(Props.targetPlantDef ?? parent.def),
+                    defaultDesc = "CancelPlantThingDesc".Translate(Props.targetPlantDef ?? parent.def),
                     icon = CancelCommandTex,
                     hotKey = KeyBindingDefOf.Designator_Cancel,
                     action = () =>
                     {
-                        _seedlingBlueprints.Clear();
+                        parent.MapHeld.GetComponent<ArcaneSeedMapComponent>()?.Unregister(parent);
+                        _seedlingCells.Clear();
                     }
                 };
             }
 
-            if (SeedlingBlueprints.Count < parent.stackCount)
+            if (SeedlingCells.Count < parent.stackCount)
             {
                 yield return new Command_Action
                 {
-                    defaultLabel = "PlantThing".Translate(Props.targetPlantDef),
-                    defaultDesc = "PlantThingDesc".Translate(Props.targetPlantDef),
+                    defaultLabel = "PlantThing".Translate(Props.targetPlantDef ?? parent.def),
+                    defaultDesc = "PlantThingDesc".Translate(Props.targetPlantDef ?? parent.def),
                     icon = Props.targetPlantDef?.uiIcon ?? parent.def.uiIcon,
                     hotKey = KeyBindingDefOf.Misc1,
                     action = BeginTargeting
@@ -58,12 +66,20 @@ namespace VVRace
 
         public override void PostDrawExtraSelectionOverlays()
         {
-            for (var i = 0; i < _seedlingBlueprints.Count; i++)
+            for (var i = 0; i < _seedlingCells.Count; i++)
             {
                 GenDraw.DrawLineBetween(
                     parent.PositionHeld.ToVector3Shifted(), 
-                    _seedlingBlueprints[i].PositionHeld.ToVector3Shifted(), 
+                    _seedlingCells[i].ToVector3Shifted(), 
                     AltitudeLayer.Blueprint.AltitudeFor());
+
+                GhostDrawer.DrawGhostThing(
+                    _seedlingCells[i], 
+                    Rot4.North, 
+                    VVThingDefOf.VV_ArcanePlantSeedling, 
+                    VVThingDefOf.VV_ArcanePlantSeedling.graphic, 
+                    Color.white, 
+                    AltitudeLayer.Blueprint);
             }
         }
 
@@ -75,7 +91,7 @@ namespace VVRace
                 return;
             }
 
-            _seedlingBlueprints.AddRange(otherComp.SeedlingBlueprints);
+            _seedlingCells.AddRange(otherComp.SeedlingCells);
         }
 
         public override void PostSplitOff(Thing piece)
@@ -86,16 +102,12 @@ namespace VVRace
                 return;
             }
 
-            var splittedCount = _seedlingBlueprints.Count - piece.stackCount;
-            if (splittedCount > 0)
+            for (int i = 0; i < SeedlingCells.Count; ++i)
             {
-                for (int i = 0; i < piece.stackCount; ++i)
+                if (SeedlingCells[i].IsValid && !otherComp.SeedlingCells.Contains(SeedlingCells[i]))
                 {
-                    _seedlingBlueprints[i].SetSeedToPlant((ThingWithComps)piece);
-                    otherComp._seedlingBlueprints.Add(_seedlingBlueprints[i]);
+                    otherComp.SeedlingCells.Add(SeedlingCells[i]);
                 }
-
-                _seedlingBlueprints.RemoveRange(0, splittedCount);
             }
         }
 
@@ -103,23 +115,7 @@ namespace VVRace
         {
             base.PostExposeData();
 
-            Scribe_Collections.Look(ref _seedlingBlueprints, "seedlingBlueprints", LookMode.Reference);
-        }
-
-        public override void PrePreTraded(TradeAction action, Pawn playerNegotiator, ITrader trader)
-        {
-            for (int i = 0; i < _seedlingBlueprints.Count; ++i)
-            {
-                _seedlingBlueprints[i].Destroy();
-            }
-        }
-
-        public override void PostDestroy(DestroyMode mode, Map previousMap)
-        {
-            for (int i = 0; i < _seedlingBlueprints.Count; ++i)
-            {
-                _seedlingBlueprints[i].Destroy();
-            }
+            Scribe_Collections.Look(ref _seedlingCells, "seedlingCells", LookMode.Value);
         }
 
         public AcceptanceReport CanSowAt(IntVec3 c, Map map)
@@ -129,18 +125,13 @@ namespace VVRace
                 return false;
             }
 
-            var canPlaceArcanePlantToCell = ArcanePlantUtility.CanPlaceArcanePlantToCell(map, c, Props.targetPlantDef);
+            var canPlaceArcanePlantToCell = ArcanePlantUtility.CanPlaceArcanePlantToCell(map, c, VVThingDefOf.VV_ArcanePlantSeedling);
             if (canPlaceArcanePlantToCell.Accepted == false)
             {
                 return canPlaceArcanePlantToCell;
             }
 
             return true;
-        }
-
-        public void Notify_DespawnBlueprint(Blueprint_PlantSeed bp)
-        {
-            _seedlingBlueprints.Remove(bp);
         }
 
         private void BeginTargeting()
@@ -156,18 +147,16 @@ namespace VVRace
                     if (ValidateTarget(target))
                     {
                         var cell = target.Cell;
-                        GenSpawn.WipeExistingThings(cell, Rot4.South, VVThingDefOf.VV_ArcanePlantSeedling.blueprintDef, parent.MapHeld, DestroyMode.Deconstruct);
+                        _seedlingCells.Add(cell);
 
-                        var bp = (Blueprint_PlantSeed)ThingMaker.MakeThing(VVThingDefOf.VV_ArcanePlantSeedling.blueprintDef);
-                        bp.SetSeedToPlant(parent);
-                        bp.SetFactionDirect(Faction.OfPlayerSilentFail);
-                        GenSpawn.Spawn(bp, target.Cell, parent.Map);
-
-                        _seedlingBlueprints.Add(bp);
+                        if (_seedlingCells.Count == 1)
+                        {
+                            parent.MapHeld.GetComponent<ArcaneSeedMapComponent>()?.Register(parent);
+                        }
 
                         SoundDefOf.Tick_High.PlayOneShotOnCamera();
 
-                        if (_seedlingBlueprints.Count < parent.stackCount)
+                        if (_seedlingCells.Count < parent.stackCount)
                         {
                             BeginTargeting();
                         }
@@ -187,7 +176,7 @@ namespace VVRace
                 (_) => true,
                 null,
                 null,
-                Props.targetPlantDef.uiIcon,
+                parent.def.uiIcon,
                 playSoundOnAction: false);
         }
 

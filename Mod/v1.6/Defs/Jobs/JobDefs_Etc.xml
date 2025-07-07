@@ -7,4 +7,12 @@
     <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
     <ifFlyingKeepFlying>true</ifFlyingKeepFlying>
   </JobDef>
+  
+  <JobDef>
+    <defName>VV_PlantArcaneSeed</defName>
+    <driverClass>VVRace.JobDriver_PlantArcaneSeed</driverClass>
+    <reportString>planting TargetA.</reportString>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef>
+
   </Defs>
