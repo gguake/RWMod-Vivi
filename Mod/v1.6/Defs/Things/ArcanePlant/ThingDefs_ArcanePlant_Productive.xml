@@ -362,10 +362,10 @@
       <li Class="CompProperties_Refuelable">
         <fuelLabel>Wastepack</fuelLabel>
         <fuelGizmoLabel>Wastepack</fuelGizmoLabel>
-        <fuelConsumptionRate>1.5</fuelConsumptionRate>
+        <fuelConsumptionRate>2</fuelConsumptionRate>
         <fuelCapacity>15</fuelCapacity>
         <initialFuelPercent>0</initialFuelPercent>
-        <fuelMultiplier>3</fuelMultiplier>
+        <fuelMultiplier>1</fuelMultiplier>
         <fuelFilter>
           <thingDefs>
             <li>Wastepack</li>

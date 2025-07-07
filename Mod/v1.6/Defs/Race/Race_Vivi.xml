@@ -26,6 +26,7 @@
       <PawnTrapSpringChance>0.3</PawnTrapSpringChance>
       <MeleeDodgeChance>10</MeleeDodgeChance>
 
+      <MaxNutrition>1.25</MaxNutrition>
       <MoveSpeed>5.8</MoveSpeed>
       <MiningSpeed>0.5</MiningSpeed>
       <MiningYield>0.5</MiningYield>
