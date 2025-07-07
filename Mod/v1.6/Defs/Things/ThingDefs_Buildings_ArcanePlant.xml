@@ -85,9 +85,9 @@
     <tickerType>Normal</tickerType>
 
     <graphicData>
-      <texPath>Things/Building/VV_HoneyHarvestBarrel</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
-      <shaderType>CutoutComplex</shaderType>
+      <texPath>Things/Building/VV_ManaEmitter</texPath>
+      <graphicClass>Graphic_Random</graphicClass>
+      <shaderType>Transparent</shaderType>
       <drawSize>(2.0,2.0)</drawSize>
       <drawRotated>false</drawRotated>
       <damageData>
