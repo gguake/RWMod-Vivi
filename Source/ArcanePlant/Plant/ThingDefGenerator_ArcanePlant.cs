@@ -5,9 +5,9 @@ using Verse;
 
 namespace VVRace
 {
-    public class ThingDefGenerator_ArcaneSeed
+    public class ThingDefGenerator_ArcanePlant
     {
-        public static IEnumerable<ThingDef> ImpliedSeedDefs(bool hotReload = false)
+        public static IEnumerable<ThingDef> ImpliedDefs(bool hotReload = false)
         {
             foreach (var plantDef in DefDatabase<ThingDef>.AllDefs.ToList())
             {
