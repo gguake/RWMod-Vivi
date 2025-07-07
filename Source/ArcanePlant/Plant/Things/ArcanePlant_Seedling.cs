@@ -6,7 +6,7 @@ using Verse;
 
 namespace VVRace
 {
-    public class ArcanePlant_Seedling : ArcanePlant
+    public class ArcanePlant_Seedling : ArcanePlant, IThingHolder
     {
         public SeedlingExtension Extension
         {
@@ -34,10 +34,9 @@ namespace VVRace
         }
         private CompRefuelable _refuelableComp;
 
-        public ThingDef MaturePlantDef => _maturePlantDef;
-        public ThingDef _maturePlantDef;
+        private ThingOwner _innerContainer;
 
-        private bool _isUnknown;
+        public ThingDef MaturePlantDef => _innerContainer.Count > 0 ? _innerContainer[0].def : null;
 
         public float Growth
         {
@@ -86,6 +85,11 @@ namespace VVRace
             }
         }
 
+        public ArcanePlant_Seedling()
+        {
+            _innerContainer = new ThingOwner<Thing>(this, oneStackOnly: true);
+        }
+
         public override void PostMake()
         {
             base.PostMake();
@@ -93,23 +97,27 @@ namespace VVRace
             _growth = Rand.Range(0.01f, 0.03f);
         }
 
-        public override void SpawnSetup(Map map, bool respawningAfterLoad)
+        public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
         {
-            base.SpawnSetup(map, respawningAfterLoad);
+            _innerContainer.TryDropAll(Position, Map, ThingPlaceMode.Near);
+            _innerContainer.ClearAndDestroyContents();
 
-            if (_maturePlantDef == null)
-            {
-                _maturePlantDef = AllArcanePlantDefs.Except(VVThingDefOf.VV_Everflower).RandomElement();
-                _isUnknown = true;
-            }
+            base.DeSpawn(mode);
+        }
+
+        public override void Destroy(DestroyMode mode = DestroyMode.Vanish)
+        {
+            _innerContainer.TryDropAll(Position, Map, ThingPlaceMode.Near);
+            _innerContainer.ClearAndDestroyContents();
+
+            base.Destroy(mode);
         }
 
         public override void ExposeData()
         {
             base.ExposeData();
 
-            Scribe_Defs.Look(ref _maturePlantDef, "maturePlantDef");
-            Scribe_Values.Look(ref _isUnknown, "isUnknown");
+            Scribe_Deep.Look(ref _innerContainer, "innerContainer", this);
 
             Scribe_Values.Look(ref _growth, "growth");
             Scribe_Values.Look(ref _lastZeroNutritionTick, "lastZeroNutritionTick");
@@ -137,10 +145,24 @@ namespace VVRace
                             var position = Position;
                             var rotation = Rotation;
 
+                            var plantDef = MaturePlantDef;
+                            if (plantDef == null)
+                            {
+                                try
+                                {
+                                    Rand.PushState(thingIDNumber);
+                                    plantDef = AllArcanePlantDefs.Except(VVThingDefOf.VV_Everflower).RandomElement();
+                                }
+                                finally
+                                {
+                                    Rand.PopState();
+                                }
+                            }
+
                             var healthPct = (float)HitPoints / MaxHitPoints;
                             Destroy(DestroyMode.WillReplace);
 
-                            var plant = ThingMaker.MakeThing(MaturePlantDef);
+                            var plant = ThingMaker.MakeThing(plantDef);
                             plant.SetFaction(Faction ?? Faction.OfPlayer);
                             plant.HitPoints = Mathf.Clamp(Mathf.CeilToInt(healthPct * plant.MaxHitPoints), 1, plant.MaxHitPoints);
                             GenSpawn.Spawn(plant, position, map, rotation);
@@ -164,6 +186,7 @@ namespace VVRace
                                     LocalizeString_Message.VV_Message_ArcanePlantSeedlingDeadCausedNoNutrition.Translate(LabelCap), 
                                     MessageTypeDefOf.NegativeHealthEvent);
 
+                                _innerContainer.ClearAndDestroyContents();
                                 Destroy();
                                 return;
                             }
@@ -206,10 +229,14 @@ namespace VVRace
             return sb.ToString();
         }
 
-        public void InitalizeArcanePlantDef(ThingDef plantDef, bool isUnknownSeed)
+        public ThingOwner GetDirectlyHeldThings()
         {
-            _maturePlantDef = plantDef;
-            _isUnknown = isUnknownSeed;
+            return _innerContainer;
+        }
+
+        public void GetChildHolders(List<IThingHolder> outChildren)
+        {
+            ThingOwnerUtility.AppendThingHoldersFromThings(outChildren, GetDirectlyHeldThings());
         }
     }
 }

@@ -74,4 +74,86 @@
     </researchPrerequisites>
   </ThingDef>
 
+
+  <!-- 마나 방출기 -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>VV_ManaEmitter</defName>
+    <label>mana emitter</label>
+    <description>.</description>
+
+    <thingClass>VVRace.ManaEmitter</thingClass>
+    <tickerType>Normal</tickerType>
+
+    <graphicData>
+      <texPath>Things/Building/VV_HoneyHarvestBarrel</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(2.0,2.0)</drawSize>
+      <drawRotated>false</drawRotated>
+      <damageData>
+        <rect>(0.05,0.1,0.9,0.9)</rect>
+      </damageData>
+      <shadowData>
+        <volume>(0.75, 0.35, 0.33)</volume>
+      </shadowData>
+    </graphicData>
+
+    <uiOrder>2402</uiOrder>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <useHitPoints>True</useHitPoints>
+    <fillPercent>0.3</fillPercent>
+    <pathCost>50</pathCost>
+    <statBases>
+      <Mass>20</Mass>
+      <WorkToBuild>4500</WorkToBuild>
+      <MaxHitPoints>100</MaxHitPoints>
+      <Flammability>0.5</Flammability>
+    </statBases>
+    <size>(1,1)</size>
+    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+
+    <thingCategories>
+      <li>VV_BuildingsVivi</li>
+    </thingCategories>
+    <minifiedDef>MinifiedThing</minifiedDef>
+
+    <designationCategory>VV_Bulidings</designationCategory>
+    
+    <costList>
+      <VV_Viviwax>70</VV_Viviwax>
+      <VV_Fertilizer>40</VV_Fertilizer>
+    </costList>
+
+    <canOverlapZones>false</canOverlapZones>
+    <comps>
+      <li Class="VVRace.CompProperties_Mana">
+        <manaGenerateRule Class="VVRace.ManaFluxRule_Refuelable">
+          <mana>400</mana>
+          <fuelDef>VV_Fertilizer</fuelDef>
+        </manaGenerateRule>
+      </li>
+
+      <li Class="CompProperties_Refuelable">
+        <fuelLabel>Fertilizer</fuelLabel>
+        <fuelGizmoLabel>Fertilizer</fuelGizmoLabel>
+        <fuelConsumptionRate>4</fuelConsumptionRate>
+        <fuelCapacity>40</fuelCapacity>
+        <initialFuelPercent>1</initialFuelPercent>
+        <fuelMultiplier>1</fuelMultiplier>
+        <fuelFilter>
+          <thingDefs>
+            <li>VV_Fertilizer</li>
+          </thingDefs>
+        </fuelFilter>
+        <showFuelGizmo>true</showFuelGizmo>
+        <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+      </li>
+    </comps>
+
+    <researchPrerequisites>
+      <li>VV_ArcaneBotany</li>
+    </researchPrerequisites>
+  </ThingDef>
+
 </Defs>

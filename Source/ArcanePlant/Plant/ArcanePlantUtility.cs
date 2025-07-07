@@ -55,6 +55,11 @@ namespace VVRace
                     return new AcceptanceReport("CannotBePlantedHere".Translate());
                 }
 
+                if (thing is Blueprint_PlantSeed blueprint_PlantSeed)
+                {
+                    return new AcceptanceReport("IdenticalThingExists".Translate());
+                }
+
                 if (thing is Blueprint_Install blueprint_Install && blueprint_Install.ThingToInstall is ArcanePlant)
                 {
                     return new AcceptanceReport("IdenticalThingExists".Translate());
