@@ -13,7 +13,7 @@ namespace VVRace
             return map.GetComponent<ManaMapComponent>();
         }
 
-        public static AcceptanceReport CanPlaceArcanePlantToCell(Map map, IntVec3 cell, ThingDef def)
+        public static AcceptanceReport CanPlaceArcanePlantToCell(Map map, IntVec3 cell, ThingDef def, Thing currentThing = null)
         {
             if (map == null || def == null || !cell.InBounds(map)) { return false; }
 
@@ -32,6 +32,8 @@ namespace VVRace
 
             foreach (var thing in blockingThings)
             {
+                if (thing == currentThing) { continue; }
+
                 if (thing.def.category == ThingCategory.Building && !(thing is ArcanePlantPot) && thing.def.IsEdifice())
                 {
                     return new AcceptanceReport("CannotBePlantedHere".Translate() + ": " + "BlockedBy".Translate(thing));
