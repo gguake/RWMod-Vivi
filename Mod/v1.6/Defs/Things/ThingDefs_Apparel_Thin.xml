@@ -42,22 +42,21 @@
     </graphicData>
 
     <statBases>
-      <MaxHitPoints>180</MaxHitPoints>
-      <WorkToMake>3000</WorkToMake>
+      <MaxHitPoints>200</MaxHitPoints>
+      <WorkToMake>6000</WorkToMake>
       <Mass>0.5</Mass>
       <StuffEffectMultiplierArmor>0.2</StuffEffectMultiplierArmor>
       <StuffEffectMultiplierInsulation_Cold>0.6</StuffEffectMultiplierInsulation_Cold>
-      <StuffEffectMultiplierInsulation_Heat>1.2</StuffEffectMultiplierInsulation_Heat>
+      <StuffEffectMultiplierInsulation_Heat>1.0</StuffEffectMultiplierInsulation_Heat>
       <EquipDelay>2.5</EquipDelay>
-      
-      <ArmorRating_Blunt>0.05</ArmorRating_Blunt>
     </statBases>
     <equippedStatOffsets>
-      <MoveSpeed>0.2</MoveSpeed>
+      <MoveSpeed>0.3</MoveSpeed>
       <ToxicEnvironmentResistance>0.2</ToxicEnvironmentResistance>
+      <WorkSpeedGlobal>0.2</WorkSpeedGlobal>
     </equippedStatOffsets>
 
-    <costStuffCount>60</costStuffCount>
+    <costStuffCount>50</costStuffCount>
     <stuffCategories>
       <li>Fabric</li>
       <li>Leathery</li>
@@ -100,21 +99,20 @@
     </graphicData>
 
     <statBases>
-      <MaxHitPoints>210</MaxHitPoints>
-      <WorkToMake>10000</WorkToMake>
+      <MaxHitPoints>240</MaxHitPoints>
+      <WorkToMake>12000</WorkToMake>
       <Mass>0.5</Mass>
-      <StuffEffectMultiplierArmor>0.32</StuffEffectMultiplierArmor>
-      <StuffEffectMultiplierInsulation_Cold>0.45</StuffEffectMultiplierInsulation_Cold>
-      <StuffEffectMultiplierInsulation_Heat>0.45</StuffEffectMultiplierInsulation_Heat>
+      <StuffEffectMultiplierArmor>0.43</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>0.5</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.5</StuffEffectMultiplierInsulation_Heat>
       <EquipDelay>2.5</EquipDelay>
     </statBases>
     <equippedStatOffsets>
       <PainShockThreshold>0.05</PainShockThreshold>
       <MentalBreakThreshold>-0.05</MentalBreakThreshold>
-      <ToxicEnvironmentResistance>0.1</ToxicEnvironmentResistance>
     </equippedStatOffsets>
 
-    <costStuffCount>90</costStuffCount>
+    <costStuffCount>70</costStuffCount>
     <stuffCategories>
       <li>Fabric</li>
       <li>Leathery</li>
@@ -157,8 +155,8 @@
     </graphicData>
 
     <statBases>
-      <MaxHitPoints>180</MaxHitPoints>
-      <WorkToMake>7200</WorkToMake>
+      <MaxHitPoints>200</MaxHitPoints>
+      <WorkToMake>9000</WorkToMake>
       <Mass>2.0</Mass>
       <StuffEffectMultiplierArmor>0.16</StuffEffectMultiplierArmor>
       <StuffEffectMultiplierInsulation_Cold>2.2</StuffEffectMultiplierInsulation_Cold>
@@ -168,7 +166,7 @@
       <Insulation_Heat>-6</Insulation_Heat>
     </statBases>
     
-    <costStuffCount>80</costStuffCount>
+    <costStuffCount>60</costStuffCount>
     <stuffCategories>
       <li>Fabric</li>
       <li>Leathery</li>
@@ -207,25 +205,25 @@
     </graphicData>
 
     <statBases>
-      <MaxHitPoints>240</MaxHitPoints>
-      <WorkToMake>7200</WorkToMake>
-      <Mass>1.2</Mass>
+      <MaxHitPoints>260</MaxHitPoints>
+      <WorkToMake>10000</WorkToMake>
+      <Mass>1.0</Mass>
       <StuffEffectMultiplierArmor>0.36</StuffEffectMultiplierArmor>
-      <StuffEffectMultiplierInsulation_Cold>0.4</StuffEffectMultiplierInsulation_Cold>
-      <StuffEffectMultiplierInsulation_Heat>0.4</StuffEffectMultiplierInsulation_Heat>
+      <StuffEffectMultiplierInsulation_Cold>0.32</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.32</StuffEffectMultiplierInsulation_Heat>
       <EquipDelay>1.5</EquipDelay>
       
-      <ArmorRating_Sharp>0.32</ArmorRating_Sharp>
-      <ArmorRating_Blunt>0.32</ArmorRating_Blunt>
+      <ArmorRating_Sharp>0.24</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.24</ArmorRating_Blunt>
       <ArmorRating_Heat>0.5</ArmorRating_Heat>
     </statBases>
     <equippedStatOffsets>
-      <IncomingDamageFactor>-0.1</IncomingDamageFactor>
+      <IncomingDamageFactor>-0.05</IncomingDamageFactor>
       <PainShockThreshold>0.08</PainShockThreshold>
-      <ToxicEnvironmentResistance>0.75</ToxicEnvironmentResistance>
+      <ToxicEnvironmentResistance>0.8</ToxicEnvironmentResistance>
     </equippedStatOffsets>
     
-    <costStuffCount>70</costStuffCount>
+    <costStuffCount>60</costStuffCount>
     <stuffCategories>
       <li>Fabric</li>
       <li>Leathery</li>

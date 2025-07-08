@@ -24,14 +24,14 @@
 
         <hungerRateFactorOffset>0.25</hungerRateFactorOffset>
         <statOffsets>
-          <WorkSpeedGlobal>-0.6</WorkSpeedGlobal>
+          <WorkSpeedGlobal>-0.5</WorkSpeedGlobal>
           <MoveSpeed>-2.2</MoveSpeed>
-          <PsychicSensitivity>1.0</PsychicSensitivity>
           <NegotiationAbility>0.35</NegotiationAbility>
           <SocialImpact>0.35</SocialImpact>
-          <MeditationFocusGain MayRequire="Ludeon.RimWorld.Royalty">0.2</MeditationFocusGain>
+          <PsychicSensitivity>1.25</PsychicSensitivity>
+          <MeditationFocusGain>0.2</MeditationFocusGain>
           <PsychicEntropyRecoveryRate>0.2</PsychicEntropyRecoveryRate>
-          <MeleeDodgeChance>-10</MeleeDodgeChance>
+          <MeleeDodgeChance>-15</MeleeDodgeChance>
         </statOffsets>
         <statFactors>
           <LifespanFactor>20</LifespanFactor>

@@ -40,21 +40,21 @@
     </graphicData>
     
     <statBases>
-      <MaxHitPoints>120</MaxHitPoints>
-      <WorkToMake>6000</WorkToMake>
-      <Mass>0.3</Mass>
-      <StuffEffectMultiplierArmor>0.3</StuffEffectMultiplierArmor>
-      <StuffEffectMultiplierInsulation_Cold>0.3</StuffEffectMultiplierInsulation_Cold>
-      <StuffEffectMultiplierInsulation_Heat>0.3</StuffEffectMultiplierInsulation_Heat>
-      <EquipDelay>1.5</EquipDelay>
+      <MaxHitPoints>160</MaxHitPoints>
+      <WorkToMake>8000</WorkToMake>
+      <Mass>0.1</Mass>
+      <StuffEffectMultiplierArmor>0.6</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>0.32</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.32</StuffEffectMultiplierInsulation_Heat>
+      <EquipDelay>1.0</EquipDelay>
     </statBases>
     <equippedStatOffsets>
-      <PainShockThreshold>0.05</PainShockThreshold>
-      <MentalBreakThreshold>-0.05</MentalBreakThreshold>
+      <PainShockThreshold>0.04</PainShockThreshold>
+      <MentalBreakThreshold>-0.04</MentalBreakThreshold>
       <ToxicEnvironmentResistance>0.2</ToxicEnvironmentResistance>
     </equippedStatOffsets>
 
-    <costStuffCount>50</costStuffCount>
+    <costStuffCount>40</costStuffCount>
     <stuffCategories>
       <li>Fabric</li>
       <li>Leathery</li>
@@ -96,9 +96,9 @@
     </thingCategories>
     
     <statBases>
-      <MaxHitPoints>250</MaxHitPoints>
-      <WorkToMake>9000</WorkToMake>
-      <Mass>1.5</Mass>
+      <MaxHitPoints>300</MaxHitPoints>
+      <WorkToMake>15000</WorkToMake>
+      <Mass>1.0</Mass>
       <StuffEffectMultiplierArmor>0.8</StuffEffectMultiplierArmor>
       <StuffEffectMultiplierInsulation_Cold>0.07</StuffEffectMultiplierInsulation_Cold>
       <StuffEffectMultiplierInsulation_Heat>0.07</StuffEffectMultiplierInsulation_Heat>
@@ -109,7 +109,7 @@
     </equippedStatOffsets>
 
     <smeltable>true</smeltable>
-    <costStuffCount>70</costStuffCount>
+    <costStuffCount>40</costStuffCount>
     <stuffCategories>
       <li>Metallic</li>
     </stuffCategories>
@@ -165,7 +165,7 @@
       <MaxHitPoints>120</MaxHitPoints>
       <WorkToMake>7000</WorkToMake>
       <Mass>0.5</Mass>
-      <StuffEffectMultiplierArmor>0.1</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierArmor>0.05</StuffEffectMultiplierArmor>
       <StuffEffectMultiplierInsulation_Cold>0.07</StuffEffectMultiplierInsulation_Cold>
       <StuffEffectMultiplierInsulation_Heat>0.07</StuffEffectMultiplierInsulation_Heat>
       <EquipDelay>1.5</EquipDelay>
@@ -182,6 +182,9 @@
     <stuffCategories>
       <li>Metallic</li>
     </stuffCategories>
+    <costList>
+      <Jade>20</Jade>
+    </costList>
 
     <apparel>
       <canBeDesiredForIdeo>false</canBeDesiredForIdeo>
@@ -208,8 +211,8 @@
       <researchPrerequisite>VV_AdvancedApparels</researchPrerequisite>
       <displayPriority>3401</displayPriority>
       <skillRequirements>
-        <Crafting>8</Crafting>
-        <Artistic>4</Artistic>
+        <Crafting>9</Crafting>
+        <Artistic>2</Artistic>
       </skillRequirements>
     </recipeMaker>
     

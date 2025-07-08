@@ -30,7 +30,7 @@
       <MoveSpeed>5.8</MoveSpeed>
       <MiningSpeed>0.5</MiningSpeed>
       <MiningYield>0.5</MiningYield>
-      <PsychicSensitivity>0.5</PsychicSensitivity>
+      <PsychicSensitivity>0.25</PsychicSensitivity>
       <Fertility>0</Fertility>
 
       <RoyalFavorValue>1</RoyalFavorValue>

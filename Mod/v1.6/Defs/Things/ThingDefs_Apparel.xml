@@ -15,10 +15,10 @@
     </thingCategories>
 
     <statBases>
-      <MaxHitPoints>320</MaxHitPoints>
-      <WorkToMake>48000</WorkToMake>
-      <Mass>2.5</Mass>
-      <StuffEffectMultiplierArmor>0.5</StuffEffectMultiplierArmor>
+      <MaxHitPoints>360</MaxHitPoints>
+      <WorkToMake>60000</WorkToMake>
+      <Mass>2.0</Mass>
+      <StuffEffectMultiplierArmor>0.53</StuffEffectMultiplierArmor>
       <StuffEffectMultiplierInsulation_Cold>0.75</StuffEffectMultiplierInsulation_Cold>
       <StuffEffectMultiplierInsulation_Heat>0.75</StuffEffectMultiplierInsulation_Heat>
       <EquipDelay>2.5</EquipDelay>
@@ -30,19 +30,19 @@
       <Insulation_Heat>12</Insulation_Heat>
     </statBases>
     <equippedStatOffsets>
-      <IncomingDamageFactor>-0.2</IncomingDamageFactor>
-      <PainShockThreshold>0.15</PainShockThreshold>
-      <ToxicEnvironmentResistance>0.75</ToxicEnvironmentResistance>
+      <IncomingDamageFactor>-0.1</IncomingDamageFactor>
+      <PainShockThreshold>0.1</PainShockThreshold>
+      <ToxicEnvironmentResistance>1.0</ToxicEnvironmentResistance>
     </equippedStatOffsets>
 
     <smeltable>false</smeltable>
-    <costStuffCount>80</costStuffCount>
+    <costStuffCount>90</costStuffCount>
     <stuffCategories>
       <li>Fabric</li>
       <li>Leathery</li>
     </stuffCategories>
     <costList>
-      <VV_Lifestrand>80</VV_Lifestrand>
+      <VV_Lifestrand>90</VV_Lifestrand>
     </costList>
 
     <apparel>
@@ -110,25 +110,22 @@
     </thingCategories>
 
     <statBases>
-      <MaxHitPoints>120</MaxHitPoints>
-      <WorkToMake>1800</WorkToMake>
-      <Mass>0.5</Mass>
-      <StuffEffectMultiplierArmor>0.15</StuffEffectMultiplierArmor>
+      <MaxHitPoints>140</MaxHitPoints>
+      <WorkToMake>3200</WorkToMake>
+      <Mass>0.2</Mass>
+      <StuffEffectMultiplierArmor>0.28</StuffEffectMultiplierArmor>
       <StuffEffectMultiplierInsulation_Cold>0.7</StuffEffectMultiplierInsulation_Cold>
       <StuffEffectMultiplierInsulation_Heat>0.7</StuffEffectMultiplierInsulation_Heat>
-      <EquipDelay>2.5</EquipDelay>
-
-      <ArmorRating_Sharp>0.04</ArmorRating_Sharp>
-      <ArmorRating_Blunt>0.04</ArmorRating_Blunt>
+      <EquipDelay>2.0</EquipDelay>
     </statBases>
     <equippedStatOffsets>
       <MoveSpeed>0.5</MoveSpeed>
-      <RestRateMultiplier>0.1</RestRateMultiplier>
+      <RestRateMultiplier>0.15</RestRateMultiplier>
       <ToxicEnvironmentResistance>0.25</ToxicEnvironmentResistance>
     </equippedStatOffsets>
 
     <smeltable>false</smeltable>
-    <costStuffCount>30</costStuffCount>
+    <costStuffCount>40</costStuffCount>
     <stuffCategories>
       <li>Fabric</li>
       <li>Leathery</li>
