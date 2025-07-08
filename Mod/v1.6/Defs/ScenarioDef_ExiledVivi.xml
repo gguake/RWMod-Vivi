@@ -50,6 +50,11 @@
           <method>Standing</method>
         </li>
 
+        <li Class="ScenPart_DisableIncident">
+          <def>DisableIncident</def>
+          <incident>WandererJoin</incident>
+        </li>
+
         <!-- 시작시 소유품 -->
         <li Class="ScenPart_StartingThing_Defined">
           <def>StartingThing_Defined</def>

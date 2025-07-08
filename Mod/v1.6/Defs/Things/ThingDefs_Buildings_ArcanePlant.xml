@@ -119,8 +119,8 @@
     <designationCategory>VV_Bulidings</designationCategory>
     
     <costList>
-      <VV_Viviwax>60</VV_Viviwax>
-      <WoodLog>40</WoodLog>
+      <VV_Viviwax>50</VV_Viviwax>
+      <WoodLog>30</WoodLog>
       <VV_Fertilizer>40</VV_Fertilizer>
     </costList>
 
