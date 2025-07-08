@@ -22,5 +22,16 @@ namespace VVRace
 
         public override int UpdateRateTicks => 1200;
         protected override int MaxTickIntervalRate => 1000;
+
+        protected override void ReceiveCompSignal(string signal)
+        {
+            if (Spawned)
+            {
+                if (signal == "RanOutOfFuel" || signal == "Refueled")
+                {
+                    DirtyMapMesh(Map);
+                }
+            }
+        }
     }
 }

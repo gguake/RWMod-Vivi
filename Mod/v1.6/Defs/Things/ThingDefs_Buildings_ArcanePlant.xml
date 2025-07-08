@@ -147,6 +147,7 @@
         </fuelFilter>
         <showFuelGizmo>true</showFuelGizmo>
         <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+        <externalTicking>false</externalTicking>
       </li>
     </comps>
   </ThingDef>

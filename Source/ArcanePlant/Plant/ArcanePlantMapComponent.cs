@@ -57,7 +57,7 @@ namespace VVRace
                 var plant = GetArcanePlantAtCell(cell);
                 if (plant != null)
                 {
-                    if (!ArcanePlantUtility.CanPlaceArcanePlantToCell(map, cell, plant.def))
+                    if (!ArcanePlantUtility.CanPlaceArcanePlantToCell(map, cell, plant.def, plant))
                     {
                         plant.MinifyAndDropDirect();
                     }
