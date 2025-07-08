@@ -1,9 +1,6 @@
 ﻿using RimWorld;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Verse;
 using Verse.AI;
 
@@ -15,6 +12,8 @@ namespace VVRace
 
         public override bool ShouldSkip(Pawn pawn, bool forced = false)
         {
+            if (!VVResearchProjectDefOf.VV_ArcaneBotany.IsFinished) { return true; }
+
             return !pawn.MapHeld?.GetComponent<ArcanePlantMapComponent>()?.ArcaneSeeds.Any() ?? true;
         }
 

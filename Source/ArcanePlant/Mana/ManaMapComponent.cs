@@ -190,7 +190,10 @@ namespace VVRace
 
         public void MarkForDrawOverlay()
         {
-            _drawManaOverlay = true;
+            if (VVResearchProjectDefOf.VV_ArcaneBotany.IsFinished)
+            {
+                _drawManaOverlay = true;
+            }
         }
 
         public void ChangeEnvironmentMana(IntVec3 cell, float flux, bool direct = false)

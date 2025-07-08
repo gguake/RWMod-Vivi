@@ -53,14 +53,21 @@ namespace VVRace
 
             if (SeedlingCells.Count < parent.stackCount)
             {
-                yield return new Command_Action
+                var commandPlant = new Command_Action
                 {
                     defaultLabel = "PlantThing".Translate(Props.targetPlantDef ?? parent.def),
                     defaultDesc = "PlantThingDesc".Translate(Props.targetPlantDef ?? parent.def),
                     icon = Props.targetPlantDef?.uiIcon ?? parent.def.uiIcon,
                     hotKey = KeyBindingDefOf.Misc1,
-                    action = BeginTargeting
+                    action = BeginTargeting,
                 };
+
+                if (!VVResearchProjectDefOf.VV_ArcaneBotany.IsFinished)
+                {
+                    commandPlant.Disable("NotStudied".Translate(VVResearchProjectDefOf.VV_ArcaneBotany.LabelCap));
+                }
+
+                yield return commandPlant;
             }
         }
 

@@ -16,7 +16,7 @@
 
   <ThingCategoryDef>
     <defName>VV_ViviTool</defName>
-    <label>vivi tool</label>
+    <label>vivi tools</label>
     <parent>VV_ViviApparel</parent>
     <iconPath>UI/Icons/ThingCategories/VV_ViviEquipments</iconPath>
   </ThingCategoryDef>
@@ -58,8 +58,15 @@
   
   <ThingCategoryDef>
     <defName>VV_ArcanePlant</defName>
-    <label>arcane plant</label>
+    <label>arcane plants</label>
     <parent>Root</parent>
     <iconPath>UI/Icons/ThingCategories/VV_ArcanePlant</iconPath>
+  </ThingCategoryDef>
+  
+  <ThingCategoryDef>
+    <defName>VV_ArcaneWeapon</defName>
+    <label>arcane weapons</label>
+    <parent>Weapons</parent>
+    <iconPath>UI/Icons/ThingCategories/VV_ArcaneWeapon</iconPath>
   </ThingCategoryDef>
 </Defs>

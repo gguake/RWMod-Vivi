@@ -41,10 +41,6 @@
       </li>
     </comps>
 
-    <researchPrerequisites>
-      <li>VV_CombatArcaneBotany</li>
-    </researchPrerequisites>
-
     <building>
       <combatPower>45</combatPower>
       <ai_combatDangerous>true</ai_combatDangerous>
@@ -170,11 +166,6 @@
       </li>
     </comps>
 
-    <researchPrerequisites>
-      <li>VV_CombatArcaneBotany</li>
-      <li>VV_AdvancedArcaneBotany</li>
-    </researchPrerequisites>
-
     <building>
       <combatPower>75</combatPower>
       <ai_combatDangerous>true</ai_combatDangerous>
@@ -249,10 +240,6 @@
         <manaAbsorbPerDay>1500</manaAbsorbPerDay>
       </li>
     </comps>
-
-    <researchPrerequisites>
-      <li>VV_CombatArcaneBotany</li>
-    </researchPrerequisites>
 
     <recoilPower>3</recoilPower>
     <building>

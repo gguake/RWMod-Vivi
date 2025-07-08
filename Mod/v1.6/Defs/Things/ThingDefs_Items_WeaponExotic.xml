@@ -28,6 +28,7 @@
     <thingSetMakerTags><li>RewardStandardMidFreq</li></thingSetMakerTags>
     <thingCategories Inherit="False">
       <li>VV_ViviWeapon</li>
+      <li>VV_ArcaneWeapon</li>
     </thingCategories>
     <weaponClasses>
       <li>Melee</li>
@@ -54,8 +55,9 @@
         <descriptionMaker>ArtDescription_WeaponMelee</descriptionMaker>
         <minQualityForArtistic>Excellent</minQualityForArtistic>
       </li>
+      <li Class="CompProperties_Biocodable"/>
       <li Class="VVRace.CompProperties_Mana">
-        <manaCapacity>900</manaCapacity>
+        <manaCapacity>1200</manaCapacity>
         <manaAbsorbPerDay>600</manaAbsorbPerDay>
         <workOnlySpawned>false</workOnlySpawned>
       </li>
@@ -104,12 +106,13 @@
       <unfinishedThingDef>UnfinishedWeapon</unfinishedThingDef>
 
       <researchPrerequisites>
-        <li>VV_RitualWeaponry</li>
+        <li>VV_Weaponry</li>
+        <li>VV_ArcaneWeaponry</li>
       </researchPrerequisites>
       <skillRequirements>
         <Crafting>10</Crafting>
       </skillRequirements>
-      <displayPriority>-530</displayPriority>
+      <displayPriority>-540</displayPriority>
     </recipeMaker>
 
     <tradeTags>
@@ -157,6 +160,7 @@
     <thingSetMakerTags><li>RewardStandardMidFreq</li></thingSetMakerTags>
     <thingCategories Inherit="False">
       <li>VV_ViviWeapon</li>
+      <li>VV_ArcaneWeapon</li>
     </thingCategories>
     <weaponTags Inherit="False">
       <li>VV_ViviExotic</li>
@@ -177,7 +181,7 @@
         <biocodeOnEquip>true</biocodeOnEquip>
       </li>
       <li Class="VVRace.CompProperties_Mana">
-        <manaCapacity>1200</manaCapacity>
+        <manaCapacity>2000</manaCapacity>
         <manaAbsorbPerDay>750</manaAbsorbPerDay>
         <workOnlySpawned>false</workOnlySpawned>
       </li>
@@ -229,12 +233,13 @@
       <unfinishedThingDef>UnfinishedWeapon</unfinishedThingDef>
 
       <researchPrerequisites>
-        <li>VV_RitualWeaponry</li>
+        <li>VV_Weaponry</li>
+        <li>VV_ArcaneWeaponry</li>
       </researchPrerequisites>
       <skillRequirements>
         <Crafting>15</Crafting>
       </skillRequirements>
-      <displayPriority>-531</displayPriority>
+      <displayPriority>-541</displayPriority>
     </recipeMaker>
 
     <tradeTags>

@@ -86,6 +86,8 @@ namespace VVRace
             }
         }
 
+        public override string ReportLabel => base.ReportLabel;
+
         public override bool ValidateTarget(LocalTargetInfo target, bool showMessages = true)
         {
             if (!base.ValidateTarget(target, showMessages))
@@ -108,8 +110,6 @@ namespace VVRace
 
             return HasSufficientMana;
         }
-
-        public override string ReportLabel => base.ReportLabel;
 
         protected override bool TryCastShot()
         {

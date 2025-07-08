@@ -65,10 +65,6 @@
       </li>
     </comps>
     
-    <researchPrerequisites>
-      <li>VV_ArcaneBotany</li>
-    </researchPrerequisites>
-
     <modExtensions>
       <li Class="VVRace.ArcaneSeedExtension">
         <seedMarketValueRatio>0.25</seedMarketValueRatio>
@@ -146,10 +142,6 @@
       </li>
     </comps>
     
-    <researchPrerequisites>
-      <li>VV_ArcaneBotany</li>
-    </researchPrerequisites>
-
     <modExtensions>
       <li Class="VVRace.ArcaneSeedExtension">
         <seedMarketValueRatio>0.25</seedMarketValueRatio>

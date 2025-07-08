@@ -77,10 +77,6 @@
       <allowWireConnection>true</allowWireConnection>
     </building>
     
-    <researchPrerequisites>
-      <li>VV_ElectricArcaneBotany</li>
-    </researchPrerequisites>
-
     <modExtensions>
       <li Class="VVRace.ArcaneSeedExtension">
         <seedMarketValueRatio>0.25</seedMarketValueRatio>
@@ -167,10 +163,6 @@
       <allowWireConnection>true</allowWireConnection>
     </building>
     
-    <researchPrerequisites>
-      <li>VV_ElectricArcaneBotany</li>
-    </researchPrerequisites>
-
     <modExtensions>
       <li Class="VVRace.ArcaneSeedExtension">
         <seedMarketValueRatio>0.25</seedMarketValueRatio>

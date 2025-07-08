@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <ThingDef ParentName="EtherealThingBase">
+    <defName>VV_ArcSpray</defName>
+    <selectable>false</selectable>
+    <tickerType>Normal</tickerType>
+    <thingClass>VVRace.ArcSpray</thingClass>
+    <drawOffscreen>true</drawOffscreen>
+  </ThingDef>
+
+  <!-- 증기 방사기 -->
+  <ThingDef ParentName="BaseHumanMakeableGun">
+    <defName>VV_Steamthrower</defName>
+    <label>steamthrower</label>
+    <description>.</description>
+
+    <graphicData>
+      <texPath>Things/Item/Equipment/WeaponRanged/Incinerator</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <soundInteract>Interact_Rifle</soundInteract>
+
+    <techLevel>Industrial</techLevel>
+    <statBases>
+      <WorkToMake>48000</WorkToMake>
+      <Mass>3.4</Mass>
+      <RangedWeapon_Cooldown>3</RangedWeapon_Cooldown>
+      <VV_RangedWeapon_ManaCost>20</VV_RangedWeapon_ManaCost>
+    </statBases>
+    <relicChance>0</relicChance>
+    
+    <thingCategories Inherit="False">
+      <li>VV_ArcaneWeapon</li>
+    </thingCategories>
+    <weaponClasses Inherit="False">
+      <li>RangedHeavy</li>
+    </weaponClasses>
+    <weaponTags Inherit="False">
+      <li>VV_ViviWeaponMana</li>
+    </weaponTags>
+
+    <verbs>
+      <li>
+        <verbClass>VVRace.Verb_Steamthrower</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <forcedMissRadius>1.9</forcedMissRadius>
+        <warmupTime>0.5</warmupTime>
+        <range>10.9</range>
+        <burstShotCount>20</burstShotCount>
+        <showBurstShotStats>false</showBurstShotStats>
+        <requireLineOfSight>true</requireLineOfSight>
+        <ticksBetweenBurstShots>2</ticksBetweenBurstShots>
+        <muzzleFlashScale>9</muzzleFlashScale>
+        <targetParams>
+          <canTargetLocations>true</canTargetLocations>
+        </targetParams>
+      </li>
+    </verbs>
+    
+    <tools>
+      <li>
+        <label>stock</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>9</power>
+        <cooldownTime>2</cooldownTime>
+      </li>
+      <li>
+        <label>barrel</label>
+        <capacities>
+          <li>Blunt</li>
+          <li>Poke</li>
+        </capacities>
+        <power>9</power>
+        <cooldownTime>2</cooldownTime>
+      </li>
+    </tools>
+    
+    <costList>
+      <Steel>60</Steel>
+      <VV_HeatingPetal>20</VV_HeatingPetal>
+      <VV_CoolingPetal>20</VV_CoolingPetal>
+      <VV_SparklingPetal>30</VV_SparklingPetal>
+    </costList>
+
+    <recipeMaker>
+      <skillRequirements>
+        <Crafting>6</Crafting>
+      </skillRequirements>
+      <researchPrerequisites>
+        <li>VV_ArcaneWeaponry</li>
+        <li>Gunsmithing</li>
+      </researchPrerequisites>
+      <displayPriority>-530</displayPriority>
+    </recipeMaker>
+    
+    <comps Inherit="False">
+      <li Class="VVRace.CompProperties_EquippableManaWeapon" />
+      <li><compClass>CompQuality</compClass></li>
+      <li Class="CompProperties_Forbiddable"/>
+      <li Class="CompProperties_Styleable"/>
+      <li Class="CompProperties_Biocodable"/>
+      <li Class="VVRace.CompProperties_Mana">
+        <manaCapacity>1000</manaCapacity>
+        <manaAbsorbPerDay>500</manaAbsorbPerDay>
+        <workOnlySpawned>false</workOnlySpawned>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- 눈사람 발사기 -->
+  <ThingDef ParentName="BaseHumanMakeableGun">
+    <defName>VV_SnowmanLauncher</defName>
+    <label>snowman launcher</label>
+    <description>.</description>
+
+    <graphicData>
+      <texPath>Things/Item/Equipment/WeaponRanged/EMPLauncher</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <soundInteract>Interact_Rifle</soundInteract>
+    
+    <techLevel>Industrial</techLevel>
+    <statBases>
+      <WorkToMake>45000</WorkToMake>
+      <Mass>7</Mass>
+      <RangedWeapon_Cooldown>3.2</RangedWeapon_Cooldown>
+      <VV_RangedWeapon_ManaCost>60</VV_RangedWeapon_ManaCost>
+    </statBases>
+    <relicChance>0</relicChance>
+
+    <thingCategories Inherit="False">
+      <li>VV_ArcaneWeapon</li>
+    </thingCategories>
+    <weaponClasses Inherit="False">
+      <li>RangedHeavy</li>
+    </weaponClasses>
+    <weaponTags Inherit="False">
+      <li>VV_ViviWeaponMana</li>
+    </weaponTags>
+
+    <verbs>
+      <li>
+        <verbClass>VVRace.Verb_ShootWithMana</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>VV_Bullet_Snowman</defaultProjectile>
+        <forcedMissRadius>1.9</forcedMissRadius>
+        <warmupTime>3.5</warmupTime>
+        <ai_AvoidFriendlyFireRadius>3</ai_AvoidFriendlyFireRadius>
+        <range>35.9</range>
+        <burstShotCount>1</burstShotCount>
+        <soundCast>InfernoCannon_Fire</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <targetParams>
+          <canTargetLocations>true</canTargetLocations>
+        </targetParams>
+        <muzzleFlashScale>14</muzzleFlashScale>
+      </li>
+    </verbs>
+    
+    <tools>
+      <li>
+        <label>barrel</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>10.2</power>
+        <cooldownTime>2.6</cooldownTime>
+      </li>
+    </tools>
+    
+    <costList>
+      <Steel>65</Steel>
+      <VV_CoolingPetal>45</VV_CoolingPetal>
+      <VV_SparklingPetal>30</VV_SparklingPetal>
+    </costList>
+
+    <recipeMaker>
+      <skillRequirements>
+        <Crafting>6</Crafting>
+      </skillRequirements>
+      <researchPrerequisites>
+        <li>VV_ArcaneWeaponry</li>
+        <li>Gunsmithing</li>
+      </researchPrerequisites>
+      <displayPriority>-530</displayPriority>
+    </recipeMaker>
+
+    <comps>
+      <li Class="VVRace.CompProperties_EquippableManaWeapon" />
+      <li Class="VVRace.CompProperties_Mana">
+        <manaCapacity>1200</manaCapacity>
+        <manaAbsorbPerDay>350</manaAbsorbPerDay>
+        <workOnlySpawned>false</workOnlySpawned>
+      </li>
+    </comps>
+  </ThingDef>
+  <ThingDef ParentName="BaseBullet">
+    <defName>VV_Bullet_Snowman</defName>
+    <label>snowman</label>
+    <graphicData>
+      <texPath>Things/Projectile/LauncherShot</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+      <color>(68,150,215)</color>
+    </graphicData>
+    <thingClass>Projectile_Explosive</thingClass>
+    <projectile>
+      <speed>40</speed>
+      <damageDef>VV_Frostbite</damageDef>
+      <explosionRadius>2.9</explosionRadius>
+      <damageAmountBase>40</damageAmountBase>
+      <arcHeightFactor>0.2</arcHeightFactor>
+      <shadowSize>0.6</shadowSize>
+    </projectile>
+  </ThingDef>
+
+
+
+</Defs>

@@ -5,55 +5,41 @@
 		<tab>VV_Vivi</tab>
     <techLevel>Industrial</techLevel>
   </ResearchProjectDef>
-  
-  <ResearchProjectDef ParentName="ViviResearchProjectTier1Base">
-    <defName>VV_CombatArcaneBotany</defName>
-    <label>combat arcane botany</label>
-    <description>Cultivate arcane plants specialized for combat.</description>
-    <baseCost>600</baseCost>
-    <researchViewX>3</researchViewX>
-    <researchViewY>0.7</researchViewY>
-    <prerequisites>
-      <li>VV_ArcaneBotany</li>
-    </prerequisites>
-    <techLevel>Medieval</techLevel>
-  </ResearchProjectDef>
-  
-  <ResearchProjectDef ParentName="ViviResearchProjectTier1Base">
-    <defName>VV_AdvancedArcaneBotany</defName>
-    <label>advanced arcane botany</label>
-    <description>Cultivate arcane plants with special functions.</description>
-    <baseCost>900</baseCost>
+
+  <ResearchProjectDef ParentName="ViviResearchProjectTier2Base">
+    <defName>VV_AutomatedInfra</defName>
+    <label>vivi automated infrastructures</label>
+    <description>Automate some of the manual jobs previously done by the Vivis using electricity, increasing efficiency.</description>
+    <baseCost>1000</baseCost>
     <researchViewX>3</researchViewX>
     <researchViewY>1.4</researchViewY>
     <prerequisites>
-      <li>VV_ArcaneBotany</li>
-    </prerequisites>
-    <techLevel>Medieval</techLevel>
-  </ResearchProjectDef>
-
-  <ResearchProjectDef ParentName="ViviResearchProjectTier2Base">
-    <defName>VV_ElectricArcaneBotany</defName>
-    <label>electric arcane botany</label>
-    <description>Cultivate arcane plants that control electricity.</description>
-    <baseCost>400</baseCost>
-    <researchViewX>3</researchViewX>
-    <researchViewY>2.1</researchViewY>
-    <prerequisites>
       <li>Electricity</li>
-      <li>VV_ArcaneBotany</li>
     </prerequisites>
   </ResearchProjectDef>
-
+  
   <ResearchProjectDef ParentName="ViviResearchProjectTier2Base">
     <defName>VV_Lifestrand</defName>
     <label>lifestrand</label>
     <description>Weave lifestrand cloth reinforced with arcane materials processed from devilstrand fabric.</description>
     <baseCost>1800</baseCost>
     <researchViewX>3</researchViewX>
-    <researchViewY>2.8</researchViewY>
+    <researchViewY>2.1</researchViewY>
     <prerequisites>
       <li>Devilstrand</li>
+      <li>VV_ArcaneBotany</li>
+    </prerequisites>
+  </ResearchProjectDef>
+  
+  <ResearchProjectDef ParentName="ViviResearchProjectTier2Base">
+    <defName>VV_ArcaneWeaponry</defName>
+    <label>arcane weaponry</label>
+    <description>Make special weapons using materials from arcane plants. These arcane weapons absorb environment mana to charge and consume stored mana when used, but they possess powerful effects.
+\nIf the mana is depleted, the arcane weapons become unusable or weakened.</description>
+    <baseCost>2400</baseCost>
+    <researchViewX>3</researchViewX>
+    <researchViewY>2.8</researchViewY>
+    <prerequisites>
       <li>VV_ArcaneBotany</li>
     </prerequisites>
   </ResearchProjectDef>

@@ -97,8 +97,8 @@
         </li>
         <li Class="ScenPart_StartingThing_Defined">
           <def>StartingThing_Defined</def>
-          <thingDef>VV_Fertilizer</thingDef>
-          <count>50</count>
+          <thingDef>VV_Everflower</thingDef>
+          <count>1</count>
         </li>
         <li Class="ScenPart_StartingThing_Defined">
           <def>StartingThing_Defined</def>

@@ -114,13 +114,14 @@
     <Compile Include="ArcanePlant\Plant\Comps\CompArcanePlantBulletOverride.cs" />
     <Compile Include="ArcanePlant\Plant\ModExtension\SeedlingExtension.cs" />
     <Compile Include="ArcanePlant\Plant\Things\ArcanePlant_Everflower.cs" />
-    <Compile Include="ArcanePlant\Plant\Things\Bullet\CornBullet.cs" />
+    <Compile Include="ArcanePlant\Bullet\Things\CornBullet.cs" />
     <Compile Include="ArcanePlant\Buildings\ManaEmitter.cs" />
     <Compile Include="ArcanePlant\Plant\Things\PeaShooterGun.cs" />
     <Compile Include="ArcanePlant\Plant\Things\ArcanePlant_Seedling.cs" />
+    <Compile Include="ArcanePlant\Bullet\Verb_Steamthrower.cs" />
     <Compile Include="Gather\StatWorker_Honey.cs" />
     <Compile Include="ArcanePlant\Plant\Sensor\SensorWorker_Fire.cs" />
-    <Compile Include="ArcanePlant\Plant\Things\Bullet\PeaBullet.cs" />
+    <Compile Include="ArcanePlant\Bullet\Things\PeaBullet.cs" />
     <Compile Include="ArcanePlant\Plant\Things\ArcanePlant_Shootus.cs" />
     <Compile Include="ArcanePlant\Plant\Things\ArcanePlant_Turret.cs" />
     <Compile Include="ArcanePlant\Plant\Things\StarlitVeil.cs" />
@@ -187,7 +188,7 @@
     <Compile Include="ArcanePlant\Plant\UI\PlaceWorker_AllowArtificialPlantPot.cs" />
     <Compile Include="ArcanePlant\Plant\UI\PlaceWorker_ShowPlantTurretRadius.cs" />
     <Compile Include="ArcanePlant\Plant\UI\PlaceWorker_TurretPlantTop.cs" />
-    <Compile Include="ArcanePlant\Verb_ShootWithMana.cs" />
+    <Compile Include="ArcanePlant\Bullet\Verb_ShootWithMana.cs" />
     <Compile Include="Egg\AI\WorkGiver_HaulViviEgg.cs" />
     <Compile Include="Egg\UI\Alert_DangerViviEgg.cs" />
     <Compile Include="Egg\Comps\CompTemperatureRuinableEgg.cs" />

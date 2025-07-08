@@ -97,6 +97,10 @@
     <tradeTags>
       <li>VV_ArcanePlantProductive</li>
     </tradeTags>
+    
+    <researchPrerequisites>
+      <li>VV_ArcaneBotany</li>
+    </researchPrerequisites>
   </ThingDef>
 
   <ThingDef Abstract="True" Name="VV_ArcanePlantCombat" ParentName="VV_ArcanePlantBase">
@@ -112,5 +116,9 @@
     <tradeTags>
       <li>VV_ArcanePlantCombat</li>
     </tradeTags>
+    
+    <researchPrerequisites>
+      <li>VV_ArcaneBotany</li>
+    </researchPrerequisites>
   </ThingDef>
 </Defs>

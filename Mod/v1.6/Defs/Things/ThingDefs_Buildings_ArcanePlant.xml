@@ -69,9 +69,6 @@
     <designationHotKey>Misc6</designationHotKey>
 
     <canOverlapZones>false</canOverlapZones>
-    <researchPrerequisites>
-      <li>VV_ArcaneBotany</li>
-    </researchPrerequisites>
   </ThingDef>
 
 
@@ -152,10 +149,6 @@
         <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
       </li>
     </comps>
-
-    <researchPrerequisites>
-      <li>VV_ArcaneBotany</li>
-    </researchPrerequisites>
   </ThingDef>
 
 </Defs>

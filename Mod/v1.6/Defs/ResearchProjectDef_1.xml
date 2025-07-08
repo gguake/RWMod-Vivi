@@ -55,7 +55,7 @@
   <ResearchProjectDef ParentName="ViviResearchProjectTier1Base">
     <defName>VV_AdvancedApparels</defName>
     <label>vivi advanced apparels</label>
-    <description>You make advanced clothing for the Vivis.</description>
+    <description>Make advanced clothing for the Vivis.</description>
     <baseCost>600</baseCost>
     <researchViewX>1</researchViewX>
     <researchViewY>0</researchViewY>
@@ -75,6 +75,9 @@
     <baseCost>600</baseCost>
     <researchViewX>0</researchViewX>
     <researchViewY>3.5</researchViewY>
+    <prerequisites>
+      <li>Smithing</li>
+    </prerequisites>
 
     <tags>
       <li>VV_ViviRefugee</li>
@@ -85,7 +88,7 @@
     <defName>VV_BasicGathering</defName>
     <label>basic gathering</label>
     <description>Build facilities for collecting and processing honey and pollen, the staple foods of the Vivis.</description>
-    <baseCost>150</baseCost>
+    <baseCost>250</baseCost>
     <researchViewX>1</researchViewX>
     <researchViewY>0.7</researchViewY>
     <prerequisites>
@@ -117,7 +120,7 @@
     <defName>VV_AdvancedGathering</defName>
     <label>advanced gathering</label>
     <description>Can collect and process propolis from trees.</description>
-    <baseCost>900</baseCost>
+    <baseCost>800</baseCost>
     <researchViewX>2</researchViewX>
     <researchViewY>0.7</researchViewY>
     <prerequisites>
@@ -131,10 +134,8 @@
     <label>arcane botany</label>
     <description>Build facilities to cultivate arcane plants with various uses.</description>
     <discoveredLetterTitle>Arcane plant</discoveredLetterTitle>
-    <discoveredLetterText>To cultivate arcane plants, you need unidentified seeds, and each plant requires different materials. Regular maintenance during cultivation is necessary for good results, and you must apply mana fertilizer to sustain their vitality.
-\nArcane plants produce and consume a resource called mana, and each plant requires specific conditions to be met in order to generate it. The mana produced slowly spreads through the ground and can be absorbed by nearby arcane plants.
-\nWhile mana is generally generated and consumed by arcane plants, it can occasionally occur naturally through certain wild plants.</discoveredLetterText>
-    <baseCost>700</baseCost>
+    <discoveredLetterText>.</discoveredLetterText>
+    <baseCost>800</baseCost>
     <researchViewX>2</researchViewX>
     <researchViewY>1.4</researchViewY>
     <prerequisites>
