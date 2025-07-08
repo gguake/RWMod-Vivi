@@ -35,7 +35,8 @@
 <VV_ArcaneBotany.discoveredLetterTitle>마법 식물</VV_ArcaneBotany.discoveredLetterTitle>
 <VV_ArcaneBotany.discoveredLetterText>마법 식물은 고유한 자원인 마나를 사용하는 특수한 식물입니다. 마법 식물은 일반적인 재배 방법으로는 재배할 수 없으며 마법 씨앗이 필요합니다.
 \n마법 씨앗은 채집중에 우연히 발견하거나 비비 상단에게서 구매할 수 있습니다. 마법 식물을 해체해도 소재와 함께 여러개 얻을 수 있습니다.
-\n마법 씨앗을 적절한 바닥이나 화분에 심으면 모종이 자라나며 마법 식물로 성장하려면 양분과 마나가 모두 필요합니다.\n양분은 사람이 주기적으로 마법 비료를 투입해줘야 하며 고갈된 상태로 시간이 지나면 모종이 죽습니다.\n마나는 마법 모종이 스스로 환경 마나를 흡수하며 근처에 환경 마나를 방출하는 마법 식물을 같이 두거나 마나 방출기를 건설해 공급할 수 있습니다.</VV_ArcaneBotany.discoveredLetterText>
+\n마법 씨앗을 적절한 바닥이나 화분에 심으면 모종이 자라나며 마법 식물로 성장하려면 양분과 마나가 모두 필요합니다.
+\n양분은 사람이 주기적으로 마법 비료를 투입해줘야 하며 고갈된 상태로 시간이 지나면 모종이 죽습니다.\n마나는 마법 모종이 스스로 환경 마나를 흡수하며 근처에 환경 마나를 방출하는 마법 식물을 같이 두거나 마나 방출기를 건설해 공급할 수 있습니다.</VV_ArcaneBotany.discoveredLetterText>
 
 <VV_AutomatedInfra.label>자동화 비비 시설</VV_AutomatedInfra.label>
 <VV_AutomatedInfra.description>전기를 이용해 기존의 비비들이 하던 일부 수작업들을 자동화하고 효율을 증대시킵니다.</VV_AutomatedInfra.description>

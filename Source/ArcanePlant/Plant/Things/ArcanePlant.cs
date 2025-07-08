@@ -62,7 +62,12 @@ namespace VVRace
 
         protected virtual bool HasRandomDrawScale => true;
 
+        private ArcanePlantMapComponent _mapComponent;
         private int _lastDamagedTick = 0;
+
+        public override int UpdateRateTicks => 1000;
+        protected override int MinTickIntervalRate => 1000;
+        protected override int MaxTickIntervalRate => 1000;
 
         public ArcanePlant()
         {
@@ -71,12 +76,14 @@ namespace VVRace
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
-            map.GetComponent<ArcanePlantMapComponent>().Notify_ArcanePlantSpawned(this);
+            _mapComponent = map.GetComponent<ArcanePlantMapComponent>();
+            _mapComponent?.Notify_ArcanePlantSpawned(this);
         }
 
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
         {
-            Map.GetComponent<ArcanePlantMapComponent>().Notify_ArcanePlantDespawned(this);
+            _mapComponent?.Notify_ArcanePlantDespawned(this);
+            _mapComponent = null;
             base.DeSpawn(mode);
         }
 
@@ -147,11 +154,10 @@ namespace VVRace
             }
         }
 
-        public override int UpdateRateTicks => 1200;
-        protected override int MaxTickIntervalRate => 1000;
-
         protected override void TickInterval(int delta)
         {
+            base.TickInterval(delta);
+
             if (!Spawned || Destroyed)
             {
                 return;
@@ -178,6 +184,34 @@ namespace VVRace
 
         public override void PreApplyDamage(ref DamageInfo dinfo, out bool absorbed)
         {
+            if (!dinfo.Def.isExplosive)
+            {
+                if (Spawned)
+                {
+                    var pot = _mapComponent?.GetArcanePlantPot(Position);
+                    if (pot != null)
+                    {
+                        var damageResult = pot.TakeDamage(dinfo);
+                        if (pot.HitPoints == 0 || pot.Destroyed)
+                        {
+                            var afterDamage = dinfo.Amount - damageResult.totalDamageDealt;
+                            if (afterDamage <= 0)
+                            {
+                                absorbed = true;
+                                return;
+                            }
+
+                            dinfo.SetAmount(afterDamage);
+                        }
+                        else
+                        {
+                            absorbed = true;
+                            return;
+                        }
+                    }
+                }
+            }
+
             base.PreApplyDamage(ref dinfo, out absorbed);
 
             var damage = dinfo.Amount;

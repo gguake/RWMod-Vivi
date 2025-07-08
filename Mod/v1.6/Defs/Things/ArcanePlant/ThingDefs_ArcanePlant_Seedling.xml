@@ -25,17 +25,17 @@
     <comps>
       <li Class="VVRace.CompProperties_Mana">
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>50</mana>
+          <mana>60</mana>
         </manaConsumeRule>
 
-        <manaAbsorbPerDay>50</manaAbsorbPerDay>
+        <manaAbsorbPerDay>60</manaAbsorbPerDay>
       </li>
       
       <li Class="CompProperties_Refuelable">
         <fuelLabel>Nutrition</fuelLabel>
         <fuelGizmoLabel>Nutrition</fuelGizmoLabel>
-        <fuelConsumptionRate>15</fuelConsumptionRate>
-        <fuelCapacity>40</fuelCapacity>
+        <fuelConsumptionRate>12</fuelConsumptionRate>
+        <fuelCapacity>22</fuelCapacity>
         <initialFuelPercent>1</initialFuelPercent>
         <fuelMultiplier>1</fuelMultiplier>
         <fuelFilter>

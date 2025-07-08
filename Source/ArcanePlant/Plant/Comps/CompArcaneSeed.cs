@@ -1,5 +1,6 @@
 ﻿using RimWorld;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Verse;
 using Verse.Sound;
@@ -147,6 +148,7 @@ namespace VVRace
                 new TargetingParameters
                 {
                     canTargetPawns = false,
+                    canTargetBuildings = false,
                     canTargetLocations = true
                 },
                 (target) =>
@@ -189,6 +191,11 @@ namespace VVRace
 
         private bool ValidateTarget(LocalTargetInfo target)
         {
+            if (_seedlingCells.Contains(target.Cell))
+            {
+                return false;
+            }
+
             var canSowAt = CanSowAt(target.Cell, parent.MapHeld);
             if (canSowAt.Accepted == false)
             {

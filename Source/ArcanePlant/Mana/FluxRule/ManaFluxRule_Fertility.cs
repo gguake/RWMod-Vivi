@@ -16,7 +16,7 @@ namespace VVRace
         {
             if (!thing.Spawned || thing.Destroyed) { return 0; }
 
-            var fertility = thing.Position.GetFirstThing<ArcanePlantPot>(thing.Map) != null ?
+            var fertility = thing.Map.GetComponent<ArcanePlantMapComponent>()?.GetArcanePlantPot(thing.Position) != null ?
                 0.9f :
                 thing.Position.GetFertility(thing.Map);
 

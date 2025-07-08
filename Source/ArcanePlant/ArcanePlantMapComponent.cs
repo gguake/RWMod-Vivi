@@ -20,7 +20,7 @@ namespace VVRace
         {
             if (_arcanePlants.TryGetValue(cell, out var plant))
             {
-                if (!plant.Spawned || plant.Destroyed || plant.Position != cell)
+                if (!plant.Spawned || plant.Destroyed)
                 {
                     _arcanePlants.Remove(cell);
                     return null;
@@ -33,12 +33,30 @@ namespace VVRace
         }
         private Dictionary<IntVec3, ArcanePlant> _arcanePlants;
 
+        public ArcanePlantPot GetArcanePlantPot(IntVec3 cell)
+        {
+            if (_arcanePlantPots.TryGetValue(cell, out var pot))
+            {
+                if (!pot.Spawned || pot.Destroyed)
+                {
+                    _arcanePlantPots.Remove(cell);
+                    return null;
+                }
+
+                return pot;
+            }
+
+            return null;
+        }
+        private Dictionary<IntVec3, ArcanePlantPot> _arcanePlantPots;
+
         public bool HasAnyArcanePlant => _arcanePlants.Count > 0;
 
         public ArcanePlantMapComponent(Map map) : base(map)
         {
             _arcaneSeeds = new List<ThingWithComps>();
             _arcanePlants = new Dictionary<IntVec3, ArcanePlant>();
+            _arcanePlantPots = new Dictionary<IntVec3, ArcanePlantPot>();
 
             map.events.TerrainChanged += (cell) =>
             {
@@ -88,6 +106,19 @@ namespace VVRace
         public void Notify_ArcanePlantDespawned(ArcanePlant plant)
         {
             _arcanePlants.Remove(plant.Position);
+        }
+
+        public void Notify_ArcanePlantPotSpawned(ArcanePlantPot pot)
+        {
+            foreach (var cell in pot.OccupiedRect())
+            {
+                _arcanePlantPots.Add(cell, pot);
+            }
+        }
+
+        public void Notify_ArcanePlantPotDespawned(ArcanePlantPot pot)
+        {
+            _arcanePlantPots.RemoveAll(kv => kv.Value == pot);
         }
     }
 }

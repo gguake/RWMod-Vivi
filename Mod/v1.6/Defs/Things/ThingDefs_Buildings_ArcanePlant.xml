@@ -4,7 +4,8 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VV_ArcanePlantPot</defName>
     <label>arcane plant pot</label>
-    <description>a pot that you can plant arcane plants in. It is typically used to place arcane plants indoors or in places where plants cannot grow.</description>
+    <description>a pot that can hold arcane plants. It is typically used to place arcane plants indoors or in locations where normal plants can't grow.
+\nIf an arcane plant in the pot is attacked, the pot will absorb the damage first unless it's an explosive attack. If the pot is destroyed, the arcane plant will automatically be packed up.</description>
     <descriptionHyperlinks>
     </descriptionHyperlinks>
     <thingClass>VVRace.ArcanePlantPot</thingClass>
@@ -29,12 +30,12 @@
     <uiIconOffset>(0, -0.1)</uiIconOffset>
     <altitudeLayer>LowPlant</altitudeLayer>
     <passability>PassThroughOnly</passability>
-    <fillPercent>0.3</fillPercent>
+    <fillPercent>0.25</fillPercent>
     <pathCost>14</pathCost>
 
     <statBases>
       <MaxHitPoints>160</MaxHitPoints>
-      <WorkToBuild>800</WorkToBuild>
+      <WorkToBuild>1500</WorkToBuild>
       <Mass>4</Mass>
       <Flammability>1.0</Flammability>
       <Beauty>1</Beauty>
@@ -71,13 +72,12 @@
     <canOverlapZones>false</canOverlapZones>
   </ThingDef>
 
-
   <!-- 마나 방출기 -->
   <ThingDef ParentName="BuildingBase">
     <defName>VV_ManaEmitter</defName>
     <label>mana emitter</label>
     <description>A device that extracts inactive mana contained in arcane fertilizer and converts it into environment mana. When arcane fertilizer is inserted, it slowly transforms it into environment mana and disperses it for use nearby.
-\nIts conversion efficiency is low, but it's useful when mana production is insufficient or in need of an emergency supply, making it an essential device used by the Vivi when establishing a nest.</description>
+\nIts conversion efficiency is low, but it's useful when mana production is insufficient or in need of an emergency supply, making it an essential device used by the Vivi when establishing a hive.</description>
 
     <thingClass>VVRace.ManaEmitter</thingClass>
     <tickerType>Normal</tickerType>
@@ -100,7 +100,7 @@
     <altitudeLayer>Building</altitudeLayer>
     <passability>PassThroughOnly</passability>
     <useHitPoints>True</useHitPoints>
-    <fillPercent>0.3</fillPercent>
+    <fillPercent>0.4</fillPercent>
     <pathCost>50</pathCost>
     <statBases>
       <Mass>20</Mass>
@@ -117,6 +117,8 @@
     <minifiedDef>MinifiedThing</minifiedDef>
 
     <designationCategory>VV_Bulidings</designationCategory>
+    <designationHotKey>Misc7</designationHotKey>
+    <canOverlapZones>false</canOverlapZones>
     
     <costList>
       <VV_Viviwax>50</VV_Viviwax>
@@ -124,7 +126,6 @@
       <VV_Fertilizer>40</VV_Fertilizer>
     </costList>
 
-    <canOverlapZones>false</canOverlapZones>
     <comps>
       <li Class="VVRace.CompProperties_Mana">
         <manaGenerateRule Class="VVRace.ManaFluxRule_Refuelable">
@@ -150,6 +151,91 @@
         <externalTicking>false</externalTicking>
       </li>
     </comps>
+  </ThingDef>
+
+  
+  <!-- 대형 마법 식물 화분 -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>VV_LargeArcanePlantPot</defName>
+    <label>large arcane plant pot</label>
+    <description>a large pot used for cultivating arcane seedlings. It can hold a large amount of fertilizer and automatically manages the nutrient levels of the seedlings on the farm with high efficiency.
+\nGrown arcane plants can also be planted in the cultivation bed, making it useful as a large pot for planting multiple arcane plants indoors at once.</description>
+    <descriptionHyperlinks>
+    </descriptionHyperlinks>
+    <thingClass>VVRace.ArcaneSeedlingFarm</thingClass>
+    <tickerType>Normal</tickerType>
+    
+    <graphicData>
+      <texPath>Things/Building/VV_SeedlingFarm</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(4.25, 4.25)</drawSize>
+      <drawOffset>(0, 0, -0.06)</drawOffset>
+      <shadowData>
+        <volume>(0.55, 0.35, 0.3)</volume>
+        <offset>(0, 0, -0.28)</offset>
+      </shadowData>
+      <damageData>
+        <rect>(0.2,0.2,0.6,0.6)</rect>
+      </damageData>
+    </graphicData>
+
+    <uiOrder>2403</uiOrder>
+    <uiIconScale>1</uiIconScale>
+    <altitudeLayer>LowPlant</altitudeLayer>
+    <passability>Standable</passability>
+    <pathCost>14</pathCost>
+
+    <statBases>
+      <MaxHitPoints>480</MaxHitPoints>
+      <WorkToBuild>9000</WorkToBuild>
+      <Mass>20</Mass>
+      <Flammability>1.0</Flammability>
+    </statBases>
+    <size>(3,3)</size>
+    <rotatable>false</rotatable>
+
+    <stuffCategories>
+      <li>Metallic</li>
+      <li>Woody</li>
+      <li>Stony</li>
+    </stuffCategories>
+    <costStuffCount>100</costStuffCount>
+    <costList>
+      <VV_LivingLeaf>25</VV_LivingLeaf>
+      <VV_Fertilizer>60</VV_Fertilizer>
+    </costList>
+
+    <comps>
+      <li Class="CompProperties_Forbiddable"/>
+
+      <li Class="CompProperties_Refuelable">
+        <fuelLabel>Arcane Fertilizer</fuelLabel>
+        <fuelGizmoLabel>Arcane Fertilizer</fuelGizmoLabel>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <fuelCapacity>300</fuelCapacity>
+        <initialFuelPercent>0.2</initialFuelPercent>
+        <fuelMultiplier>1</fuelMultiplier>
+        <fuelFilter>
+          <thingDefs>
+            <li>VV_Fertilizer</li>
+          </thingDefs>
+        </fuelFilter>
+        <showFuelGizmo>true</showFuelGizmo>
+        <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+        <targetFuelLevelConfigurable>true</targetFuelLevelConfigurable>
+        <externalTicking>false</externalTicking>
+      </li>
+    </comps>
+    
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+    <building>
+      <paintable>true</paintable>
+    </building>
+
+    <designationCategory>VV_Bulidings</designationCategory>
+    <designationHotKey>Misc8</designationHotKey>
+    <canOverlapZones>false</canOverlapZones>
   </ThingDef>
 
 </Defs>

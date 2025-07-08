@@ -27,14 +27,13 @@ namespace VVRace
                 return new AcceptanceReport("CannotPlaceInUndiscovered".Translate());
             }
 
+            var arcanePlantPot = map.GetComponent<ArcanePlantMapComponent>()?.GetArcanePlantPot(cell);
             var blockingThings = map.thingGrid.ThingsListAtFast(cell);
-            var onArcanePlantPot = blockingThings.Any(v => v is ArcanePlantPot);
-
             foreach (var thing in blockingThings)
             {
-                if (thing == currentThing) { continue; }
+                if (thing == currentThing || thing == arcanePlantPot) { continue; }
 
-                if (thing.def.category == ThingCategory.Building && !(thing is ArcanePlantPot) && thing.def.IsEdifice())
+                if (thing.def.category == ThingCategory.Building && thing.def.IsEdifice())
                 {
                     return new AcceptanceReport("CannotBePlantedHere".Translate() + ": " + "BlockedBy".Translate(thing));
                 }
@@ -42,7 +41,7 @@ namespace VVRace
 
             var terrain = cell.GetTerrain(map);
             var isWaterPlant = terrain.IsWater && def.terrainAffordanceNeeded != null && terrain.affordances.Contains(def.terrainAffordanceNeeded);
-            if (!onArcanePlantPot && !isWaterPlant && map.fertilityGrid.FertilityAt(cell) <= 0f)
+            if (arcanePlantPot == null && !isWaterPlant && map.fertilityGrid.FertilityAt(cell) <= 0f)
             {
                 return new AcceptanceReport("CannotBePlantedHere".Translate() + ": " + "MessageWarningNotEnoughFertility".Translate().CapitalizeFirst());
             }
