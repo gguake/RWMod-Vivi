@@ -61,7 +61,7 @@ namespace VVRace
 
             if (Mouse.IsOver(backPanelRect))
             {
-                Find.CurrentMap?.GetComponent<ManaMapComponent>()?.MarkForDrawOverlay();
+                Find.CurrentMap.GetManaComponent()?.MarkForDrawOverlay();
             }
 
             return new GizmoResult(GizmoState.Clear);

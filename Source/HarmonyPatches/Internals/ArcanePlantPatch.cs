@@ -147,7 +147,7 @@ namespace VVRace
 
                 if (show)
                 {
-                    var manaGrid = Find.CurrentMap.GetComponent<ManaMapComponent>();
+                    var manaGrid = Find.CurrentMap.GetManaComponent();
                     if (manaGrid != null)
                     {
                         manaGrid.MarkForDrawOverlay();
@@ -172,7 +172,7 @@ namespace VVRace
 
                 if (show)
                 {
-                    var manaGrid = Find.CurrentMap.GetComponent<ManaMapComponent>();
+                    var manaGrid = Find.CurrentMap.GetManaComponent();
                     if (manaGrid != null)
                     {
                         manaGrid.MarkForDrawOverlay();
@@ -389,7 +389,7 @@ namespace VVRace
 
         private static void Map_MapPreTick_Postfix(Map __instance)
         {
-            var grid = __instance.GetComponent<ManaMapComponent>();
+            var grid = __instance.GetManaComponent();
             if (grid != null)
             {
                 grid.MapComponentPreTick();
@@ -398,8 +398,8 @@ namespace VVRace
 
         private static void PlaySettings_DoMapControls_Postfix(WidgetRow row)
         {
-            var manaGrid = Find.CurrentMap?.GetComponent<ManaMapComponent>();
-            if (manaGrid != null && (VVResearchProjectDefOf.VV_ArcaneBotany.IsFinished || manaGrid.HasAnyArcanePlant))
+            var manaGrid = Find.CurrentMap.GetManaComponent();
+            if (manaGrid != null && VVResearchProjectDefOf.VV_ArcaneBotany.IsFinished)
             {
                 row.ToggleableIcon(
                     ref manaGrid.manaOverlaySetting,

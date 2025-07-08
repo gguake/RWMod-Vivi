@@ -30,7 +30,7 @@ namespace VVRace
         {
             base.PostDestroy(mode, previousMap);
 
-            previousMap?.GetComponent<ArcaneSeedMapComponent>()?.Unregister(parent);
+            previousMap?.GetComponent<ArcanePlantMapComponent>()?.Notify_ArcaneSeedPlantCanceled(parent);
         }
 
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
@@ -45,7 +45,7 @@ namespace VVRace
                     hotKey = KeyBindingDefOf.Designator_Cancel,
                     action = () =>
                     {
-                        parent.MapHeld.GetComponent<ArcaneSeedMapComponent>()?.Unregister(parent);
+                        parent.MapHeld.GetComponent<ArcanePlantMapComponent>()?.Notify_ArcaneSeedPlantCanceled(parent);
                         _seedlingCells.Clear();
                     }
                 };
@@ -151,7 +151,7 @@ namespace VVRace
 
                         if (_seedlingCells.Count == 1)
                         {
-                            parent.MapHeld.GetComponent<ArcaneSeedMapComponent>()?.Register(parent);
+                            parent.MapHeld.GetComponent<ArcanePlantMapComponent>()?.Notify_ArcaneSeedPlantReserved(parent);
                         }
 
                         SoundDefOf.Tick_High.PlayOneShotOnCamera();

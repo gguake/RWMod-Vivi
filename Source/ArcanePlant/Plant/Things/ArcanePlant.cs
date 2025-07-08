@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Verse;
+using Verse.Noise;
 
 namespace VVRace
 {
@@ -67,6 +68,18 @@ namespace VVRace
 
         public ArcanePlant()
         {
+        }
+
+        public override void SpawnSetup(Map map, bool respawningAfterLoad)
+        {
+            base.SpawnSetup(map, respawningAfterLoad);
+            map.GetComponent<ArcanePlantMapComponent>().Notify_ArcanePlantSpawned(this);
+        }
+
+        public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
+        {
+            Map.GetComponent<ArcanePlantMapComponent>().Notify_ArcanePlantDespawned(this);
+            base.DeSpawn(mode);
         }
 
         public override void ExposeData()

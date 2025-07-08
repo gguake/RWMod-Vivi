@@ -6,6 +6,13 @@ namespace VVRace
 {
     public static class ArcanePlantUtility
     {
+        public static ManaMapComponent GetManaComponent(this Map map)
+        {
+            if (map == null) { return null; }
+
+            return map.GetComponent<ManaMapComponent>();
+        }
+
         public static AcceptanceReport CanPlaceArcanePlantToCell(Map map, IntVec3 cell, ThingDef def)
         {
             if (map == null || def == null || !cell.InBounds(map)) { return false; }

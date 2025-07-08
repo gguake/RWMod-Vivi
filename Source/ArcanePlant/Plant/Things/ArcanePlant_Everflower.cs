@@ -31,7 +31,7 @@ namespace VVRace
                 {
                     pawn.ageTracker.AgeBiologicalTicks -= ticks;
 
-                    Map.GetComponent<ManaMapComponent>().ChangeEnvironmentMana(Position, ticks / 60000f * 50);
+                    Map.GetManaComponent().ChangeEnvironmentMana(Position, ticks / 60000f * 50);
                     pawn.health.AddHediff(VVHediffDefOf.VV_EverflowerImpact);
                 }
             }

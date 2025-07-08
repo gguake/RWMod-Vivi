@@ -147,7 +147,7 @@ namespace VVRace
                 command_setEnvMana.defaultLabel = "DEV: Set environment mana full";
                 command_setEnvMana.action = () =>
                 {
-                    var manaGrid = parent.MapHeld.GetComponent<ManaMapComponent>();
+                    var manaGrid = parent.MapHeld.GetManaComponent();
                     if (manaGrid != null)
                     {
                         manaGrid.ChangeEnvironmentMana(parent.PositionHeld, 10000f);
@@ -233,7 +233,7 @@ namespace VVRace
         {
             if (parent.Spawned && parent is Building)
             {
-                parent.Map.GetComponent<ManaMapComponent>()?.MarkForDrawOverlay();
+                parent.Map.GetManaComponent()?.MarkForDrawOverlay();
             }
         }
 

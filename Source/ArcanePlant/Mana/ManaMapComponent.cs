@@ -34,9 +34,6 @@ namespace VVRace
         private bool _drawManaOverlay;
         public bool manaOverlaySetting;
 
-        public bool HasAnyArcanePlant => _arcanePlantCount > 0;
-        private int _arcanePlantCount;
-
         public Color Color => new Color(1f, 1f, 1f);
 
         public float this[IntVec3 cell]
