@@ -83,6 +83,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArcanePlant\Bullet\Things\SnowmanRocket.cs" />
     <Compile Include="ArcanePlant\Mana\Comps\CompEquippableManaWeapon.cs" />
     <Compile Include="ArcanePlant\Mana\Comps\CompMana.cs" />
     <Compile Include="ArcanePlant\Mana\Comps\CompManaHeatPusher.cs" />

@@ -27,6 +27,11 @@
       <LearningRateFactor>2.0</LearningRateFactor>
     </statFactors>
     <canGenerateInGeneSet>false</canGenerateInGeneSet>
+    <symbolPack>
+      <suffixSymbols>
+        <li><symbol>vivi</symbol><weight>100000000</weight></li>
+      </suffixSymbols>
+    </symbolPack>
   </GeneDef>
   
   <GeneDef>
