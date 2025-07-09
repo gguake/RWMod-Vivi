@@ -84,6 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArcanePlant\Buildings\ArcaneSeedlingFarm.cs" />
+    <Compile Include="ArcanePlant\Weapon\Graphic_MoteTiled.cs" />
     <Compile Include="ArcanePlant\Weapon\Things\SnowmanRocket.cs" />
     <Compile Include="ArcanePlant\DamageWorker_FrostbiteCustom.cs" />
     <Compile Include="ArcanePlant\Mana\Comps\CompEquippableManaWeapon.cs" />
@@ -121,6 +122,7 @@
     <Compile Include="ArcanePlant\Buildings\ManaEmitter.cs" />
     <Compile Include="ArcanePlant\Plant\Things\PeaShooterGun.cs" />
     <Compile Include="ArcanePlant\Plant\Things\ArcanePlant_Seedling.cs" />
+    <Compile Include="ArcanePlant\Weapon\Verb_ChainLightning.cs" />
     <Compile Include="Gather\StatWorker_Honey.cs" />
     <Compile Include="ArcanePlant\Plant\Sensor\SensorWorker_Fire.cs" />
     <Compile Include="ArcanePlant\Weapon\Things\PeaBullet.cs" />

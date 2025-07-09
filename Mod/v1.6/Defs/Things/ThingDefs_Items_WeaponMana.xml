@@ -256,8 +256,114 @@
       <isInert>true</isInert>
       <artificialForMeditationPurposes>false</artificialForMeditationPurposes>
     </building>
+    <filthLeaving></filthLeaving>
   </ThingDef>
 
+  <!-- 아크 피스톨 -->
+  <ThingDef ParentName="BaseHumanMakeableGun">
+    <defName>VV_ArcPistol</defName>
+    <label>arc pistol</label>
+    <description>.</description>
+
+    <graphicData>
+      <texPath>Things/Item/Equipment/VV_ArcPistol</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    
+    <techLevel>Industrial</techLevel>
+    <statBases>
+      <WorkToMake>45000</WorkToMake>
+      <Mass>2.5</Mass>
+      <RangedWeapon_Cooldown>1.7</RangedWeapon_Cooldown>
+      <VV_RangedWeapon_ManaCost>10</VV_RangedWeapon_ManaCost>
+    </statBases>
+    <relicChance>0</relicChance>
+
+    <thingCategories Inherit="False">
+      <li>VV_ArcaneWeapon</li>
+    </thingCategories>
+    <weaponClasses Inherit="False">
+      <li>RangedHeavy</li>
+    </weaponClasses>
+    <weaponTags Inherit="False">
+      <li>VV_ViviWeaponMana</li>
+    </weaponTags>
+
+    <verbs>
+      <li Class="VVRace.VerbProperties_ChainLightning">
+        <hasStandardCommand>true</hasStandardCommand>
+        <warmupTime>1.0</warmupTime>
+        <range>21.9</range>
+        <burstShotCount>3</burstShotCount>
+        <stopBurstWithoutLos>true</stopBurstWithoutLos>
+        <showBurstShotStats>false</showBurstShotStats>
+        <ticksBetweenBurstShots>3</ticksBetweenBurstShots>
+
+        <damageDef>Burn</damageDef>
+        <damageAmount>8</damageAmount>
+        <lightningMoteDef>VV_Mote_ChainLightning</lightningMoteDef>
+        <lightningStartOffset>0.65</lightningStartOffset>
+        <lightningTargetEffectDef>GraserBeam_End</lightningTargetEffectDef>
+
+        <beamLineFleckDef>LightningGlow</beamLineFleckDef>
+        <beamLineFleckChanceCurve>
+          <points>
+            <li>(0, 0)</li>
+            <li>(0.65, 0.4)</li>
+            <li>(1, 0.75)</li>
+          </points>
+        </beamLineFleckChanceCurve>
+
+        <soundCastTail>GunTail_Medium</soundCastTail>
+        <soundCastBeam>BeamGraser_Shooting</soundCastBeam>
+        
+        <muzzleFlashScale>9</muzzleFlashScale>
+      </li>
+    </verbs>
+    
+    <tools>
+      <li>
+        <label>barrel</label>
+        <capacities>
+          <li>Blunt</li>
+          <li>Poke</li>
+        </capacities>
+        <power>9</power>
+        <cooldownTime>2</cooldownTime>
+      </li>
+    </tools>
+    
+    <costList>
+      <Steel>60</Steel>
+      <ComponentIndustrial>3</ComponentIndustrial>
+      <VV_SparklingPetal>50</VV_SparklingPetal>
+    </costList>
+
+    <recipeMaker>
+      <skillRequirements>
+        <Crafting>6</Crafting>
+      </skillRequirements>
+      <researchPrerequisites>
+        <li>VV_ArcaneWeaponry</li>
+        <li>Gunsmithing</li>
+      </researchPrerequisites>
+      <displayPriority>-530</displayPriority>
+    </recipeMaker>
+
+    <comps Inherit="False">
+      <li Class="VVRace.CompProperties_EquippableManaWeapon" />
+      <li><compClass>CompQuality</compClass></li>
+      <li Class="CompProperties_Forbiddable"/>
+      <li Class="CompProperties_Styleable"/>
+      <li Class="CompProperties_Biocodable"/>
+      <li Class="VVRace.CompProperties_Mana">
+        <manaCapacity>450</manaCapacity>
+        <manaAbsorbPerDay>450</manaAbsorbPerDay>
+        <workOnlySpawned>false</workOnlySpawned>
+      </li>
+    </comps>
+  </ThingDef>
+  
 
 
 </Defs>

@@ -32,4 +32,26 @@
       <texPath>Things/Mote/VV_GatherHoney</texPath>
     </graphicData>
   </ThingDef>
+  
+  <ThingDef ParentName="MoteBase">
+    <defName>VV_Mote_ChainLightning</defName>
+    <thingClass>MoteDualAttached</thingClass>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <mote>
+      <fadeInTime>0.01</fadeInTime>
+      <fadeOutTime>0.3</fadeOutTime>
+      <solidTime>999999</solidTime>
+      <needsMaintenance>True</needsMaintenance>
+      <rotateTowardsTarget>True</rotateTowardsTarget>
+      <scaleToConnectTargets>True</scaleToConnectTargets>
+      <fadeOutUnmaintained>True</fadeOutUnmaintained>
+    </mote>
+    <drawOffscreen>true</drawOffscreen>
+    <graphicData>
+      <texPath>Things/Mote/VV_LightningBolt</texPath>
+      <graphicClass>VVRace.Graphic_MoteTiled</graphicClass>
+      <shaderType>GlowAnimated</shaderType>
+    </graphicData>
+  </ThingDef>
+
 </Defs>
