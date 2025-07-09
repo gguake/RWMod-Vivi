@@ -278,7 +278,7 @@
     <comps>
       <li Class="RPEF.CompProperties_TrailRenderer">
         <texPath>VFX/VV_NeedleTrail</texPath>
-        <shader>MotePawnBodyGlow</shader>
+        <shader>AdditiveChangeHue</shader>
         <color>(1.0, 0.8, 0.6)</color>
         <widthCurve>
           <points>
