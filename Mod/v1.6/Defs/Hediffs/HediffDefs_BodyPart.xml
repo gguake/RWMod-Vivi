@@ -64,6 +64,14 @@
 \nThese wings are simply devices for receiving lift, so in order to fly, the Vivi's wings must be intact.</description>
     <descriptionHyperlinks><RecipeDef>VV_InstallGliderWing</RecipeDef></descriptionHyperlinks>
 		<spawnThingOnRemoved>VV_TitanicHornetWing</spawnThingOnRemoved>
+    <stages>
+      <li>
+        <statOffsets>
+          <MaxFlightTime>12</MaxFlightTime>
+        </statOffsets>
+      </li>
+    </stages>
+
 		<addedPartProps>
 			<solid>true</solid>
 		</addedPartProps>
@@ -79,7 +87,7 @@
 			<li>
 				<debugLabel>LeftUpperWing</debugLabel>
 				<workerClass>PawnRenderNodeWorker_AttachmentBody</workerClass>
-        	<texPath>Things/Pawn/Vivi/BodyParts/UpperWingL</texPath>
+				<texPath>Things/Pawn/Vivi/BodyParts/UpperWingL</texPath>
 				<parentTagDef>Body</parentTagDef>
 				<rotDrawMode>Fresh</rotDrawMode>
 				<drawData>
@@ -105,7 +113,7 @@
 			<li>
 				<debugLabel>RightUpperWing</debugLabel>
 				<workerClass>PawnRenderNodeWorker_AttachmentBody</workerClass>
-        	<texPath>Things/Pawn/Vivi/BodyParts/UpperWingR</texPath>
+				<texPath>Things/Pawn/Vivi/BodyParts/UpperWingR</texPath>
 				<parentTagDef>Body</parentTagDef>
 				<rotDrawMode>Fresh</rotDrawMode>
 				<drawData>

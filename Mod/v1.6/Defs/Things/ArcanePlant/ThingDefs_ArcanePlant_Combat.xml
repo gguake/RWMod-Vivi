@@ -10,7 +10,6 @@
       <ThingDef>VV_LivingLeaf</ThingDef>
     </descriptionHyperlinks>
     <thingClass>VVRace.ArcanePlant_TurretFixedGun</thingClass>
-    <tickerType>Normal</tickerType>
 
     <graphicData>
       <texPath>Things/Plants/VV_Peashooter_Base</texPath>
@@ -125,7 +124,6 @@
       <ThingDef>VV_LivingLeaf</ThingDef>
     </descriptionHyperlinks>
     <thingClass>VVRace.ArcanePlant_Shootus</thingClass>
-    <tickerType>Normal</tickerType>
 
     <graphicData>
       <texPath>Things/Plants/VV_Cactus</texPath>
@@ -210,7 +208,6 @@
       <ThingDef>VV_LivingLeaf</ThingDef>
     </descriptionHyperlinks>
     <thingClass>VVRace.ArcanePlant_TurretFixedGun</thingClass>
-    <tickerType>Normal</tickerType>
 
     <graphicData>
       <texPath>Things/Plants/VV_Cornlauncher_Base</texPath>

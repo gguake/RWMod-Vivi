@@ -19,6 +19,7 @@
       <requireLineOfSight>true</requireLineOfSight>
       <soundCast>Longjump_Jump</soundCast>
       <soundLanding>Longjump_Land</soundLanding>
+      <flyWithCarriedThing>true</flyWithCarriedThing>
       <targetParams>
         <canTargetLocations>true</canTargetLocations>
         <canTargetPawns>false</canTargetPawns>

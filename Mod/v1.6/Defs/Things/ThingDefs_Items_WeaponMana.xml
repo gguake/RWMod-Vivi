@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <ThingDef ParentName="EtherealThingBase">
-    <defName>VV_ArcSpray</defName>
-    <selectable>false</selectable>
-    <tickerType>Normal</tickerType>
-    <thingClass>VVRace.ArcSpray</thingClass>
-    <drawOffscreen>true</drawOffscreen>
-  </ThingDef>
-
   <!-- 증기 방사기 -->
   <ThingDef ParentName="BaseHumanMakeableGun">
     <defName>VV_Steamthrower</defName>

@@ -72,6 +72,18 @@ namespace VVRace
             }
         }
 
+        public override int UpdateRateTicks
+        {
+            get
+            {
+                if (!Active) { return 1000; }
+
+                return _currentTarget.IsValid ? 15 : 250;
+            }
+        }
+        protected override int MinTickIntervalRate => 15;
+        protected override int MaxTickIntervalRate => 1000;
+
         public ArcanePlant_Turret()
         {
             _turretTop = new ArcanePlantTurretTop(this);

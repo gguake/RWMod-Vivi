@@ -41,7 +41,7 @@
       <VV_PlantGatherYield>1</VV_PlantGatherYield>
       
       <MaxFlightTime>3</MaxFlightTime>
-      <FlightCooldown>1</FlightCooldown>
+      <FlightCooldown>10</FlightCooldown>
     </statBases>
 
     <tools Inherit="False">
@@ -110,7 +110,7 @@
       <intelligence>Humanlike</intelligence>
       <makesFootprints>true</makesFootprints>
       <lifeExpectancy>60</lifeExpectancy>
-      <flightStartChanceOnJobStart>0.2</flightStartChanceOnJobStart>
+      <flightStartChanceOnJobStart>0.5</flightStartChanceOnJobStart>
 
       <bloodDef>Filth_Blood</bloodDef>
       <bloodSmearDef>Filth_BloodSmear</bloodSmearDef>

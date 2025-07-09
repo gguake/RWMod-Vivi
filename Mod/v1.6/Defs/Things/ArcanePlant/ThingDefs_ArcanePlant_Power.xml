@@ -10,7 +10,6 @@
     <descriptionHyperlinks>
       <ThingDef>VV_SparklingPetal</ThingDef>
     </descriptionHyperlinks>
-    <tickerType>Normal</tickerType>
     <thingClass>VVRace.ArcanePlant_Shockerbud</thingClass>
 
     <graphicData>
@@ -102,7 +101,6 @@
     <descriptionHyperlinks>
       <ThingDef>VV_SparklingPetal</ThingDef>
     </descriptionHyperlinks>
-    <tickerType>Normal</tickerType>
 
     <graphicData>
       <texPath>Things/Plants/VV_Thunderpetals</texPath>

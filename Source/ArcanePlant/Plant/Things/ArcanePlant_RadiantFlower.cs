@@ -29,18 +29,13 @@ namespace VVRace
                 return;
             }
 
-            UpdateGraphic();
-        }
-
-        public override int? OverrideGraphicIndex => CompGlower.Glows ? 1 : 0;
-
-        private void UpdateGraphic()
-        {
             if (_lastCompGlowerState != CompGlower.Glows)
             {
                 _lastCompGlowerState = CompGlower.Glows;
                 DirtyMapMesh(Map);
             }
         }
+
+        public override int? OverrideGraphicIndex => CompGlower.Glows ? 1 : 0;
     }
 }
