@@ -41,6 +41,16 @@
   <VV_RepeatingCrossbow.tools.limb.label>활대</VV_RepeatingCrossbow.tools.limb.label>
   <VV_Arrow_RepeatingCrossbow.label>연발 쇠뇌 바늘</VV_Arrow_RepeatingCrossbow.label>
 
+  <!-- 마나 -->
+  <VV_SnowmanLauncher.label>눈사람 발사기</VV_SnowmanLauncher.label>
+  <VV_SnowmanLauncher.description>대기중의 수증기를 냉각해 눈사람 모양으로 뭉쳐 발사하는 마법 무기입니다. 우스꽝스럽지만 착탄 지점 주변의 넓은 범위에 강력한 냉기 폭발을 일으켜 동상을 입힙니다. 폭발이 지나간 자리에는 눈이 쌓이며 눈사람이 짧은 시간 남아있다가 한번 더 폭발합니다.
+\n사격시마다 대량의 마나를 소모합니다. 마나가 고갈되면 사격할 수 없으며 주변의 환경 마나를 흡수해 자동으로 충전됩니다.</VV_SnowmanLauncher.description>
+  <VV_SnowmanLauncher.tools.barrel.label>총열</VV_SnowmanLauncher.tools.barrel.label>
+  <VV_Bullet_Snowman.label>눈사람</VV_Bullet_Snowman.label>
+  <VV_ExplosiveSnowman.label>폭발 눈사람</VV_ExplosiveSnowman.label>
+  <VV_ExplosiveSnowman.description>두 개의 커다란 눈덩이를 간단히 쌓아 만든, 사람 모양의 눈폭탄입니다.</VV_ExplosiveSnowman.description>
+
+
   <!-- Exotics -->
   <VV_EltexNeedle.label>비비 엘텍스 바늘</VV_EltexNeedle.label>
   <VV_EltexNeedle.description>특수 가공된 날카로운 바늘입니다. 비비만 다룰 수 있으며 장착시 착용자와 공명해 귀속되어 다른 이들은 사용할 수 없습니다.

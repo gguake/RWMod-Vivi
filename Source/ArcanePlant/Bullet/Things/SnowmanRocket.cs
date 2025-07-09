@@ -1,20 +1,30 @@
-﻿using Verse;
+﻿using RimWorld;
+using Verse;
 
 namespace VVRace
 {
-    public class SnowmanRocket : Projectile
+    public class SnowmanRocket : Projectile_Explosive
     {
-        protected override void Impact(Thing hitThing, bool blockedByShield = false)
+        protected override void Explode()
         {
-            base.Impact(hitThing, blockedByShield);
+            var map = Map;
+            var position = Position;
 
-        }
+            base.Explode();
 
-        protected override void ImpactSomething()
-        {
-            base.ImpactSomething();
+            if (!GenSpawn.TrySpawn(VVThingDefOf.VV_ExplosiveSnowman, position, map, out var snowman, canWipeEdifices: false))
+            {
+                if (snowman != null)
+                {
+                    snowman.Destroy();
+                }
+            }
 
-
+            foreach (var cell in GenRadial.RadialCellsAround(position, def.projectile.explosionRadius, true))
+            {
+                if (!cell.InBounds(map)) { continue; }
+                map.snowGrid.AddDepth(cell, 1f);
+            }
         }
     }
 }

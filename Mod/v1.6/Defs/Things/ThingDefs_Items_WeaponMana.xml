@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
   <!-- 증기 방사기 -->
+  <!--
   <ThingDef ParentName="BaseHumanMakeableGun">
     <defName>VV_Steamthrower</defName>
     <label>steamthrower</label>
@@ -100,6 +101,7 @@
       </li>
     </comps>
   </ThingDef>
+  -->
 
   <!-- 눈사람 발사기 -->
   <ThingDef ParentName="BaseHumanMakeableGun">
@@ -108,17 +110,18 @@
     <description>.</description>
 
     <graphicData>
-      <texPath>Things/Item/Equipment/WeaponRanged/EMPLauncher</texPath>
+      <texPath>Things/Item/Equipment/VV_SnowmanLauncher</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <soundInteract>Interact_Rifle</soundInteract>
+    <equippedAngleOffset>45</equippedAngleOffset>
     
     <techLevel>Industrial</techLevel>
     <statBases>
       <WorkToMake>45000</WorkToMake>
       <Mass>7</Mass>
-      <RangedWeapon_Cooldown>3.2</RangedWeapon_Cooldown>
-      <VV_RangedWeapon_ManaCost>60</VV_RangedWeapon_ManaCost>
+      <RangedWeapon_Cooldown>2.9</RangedWeapon_Cooldown>
+      <VV_RangedWeapon_ManaCost>150</VV_RangedWeapon_ManaCost>
     </statBases>
     <relicChance>0</relicChance>
 
@@ -142,7 +145,7 @@
         <ai_AvoidFriendlyFireRadius>3</ai_AvoidFriendlyFireRadius>
         <range>35.9</range>
         <burstShotCount>1</burstShotCount>
-        <soundCast>InfernoCannon_Fire</soundCast>
+        <soundCast>Shot_IncendiaryLauncher</soundCast>
         <soundCastTail>GunTail_Heavy</soundCastTail>
         <targetParams>
           <canTargetLocations>true</canTargetLocations>
@@ -179,33 +182,34 @@
       <displayPriority>-530</displayPriority>
     </recipeMaker>
 
-    <comps>
+    <comps Inherit="False">
       <li Class="VVRace.CompProperties_EquippableManaWeapon" />
+      <li><compClass>CompQuality</compClass></li>
+      <li Class="CompProperties_Forbiddable"/>
+      <li Class="CompProperties_Styleable"/>
+      <li Class="CompProperties_Biocodable"/>
       <li Class="VVRace.CompProperties_Mana">
-        <manaCapacity>1200</manaCapacity>
-        <manaAbsorbPerDay>350</manaAbsorbPerDay>
+        <manaCapacity>900</manaCapacity>
+        <manaAbsorbPerDay>300</manaAbsorbPerDay>
         <workOnlySpawned>false</workOnlySpawned>
       </li>
     </comps>
   </ThingDef>
+
   <ThingDef ParentName="BaseBullet">
     <defName>VV_Bullet_Snowman</defName>
     <label>snowman</label>
     <graphicData>
-      <texPath>Things/Projectile/LauncherShot</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
-      <shaderType>TransparentPostLight</shaderType>
-      <color>(68,150,215)</color>
+      <graphicClass>Graphic_Random</graphicClass>
+      <texPath>Things/Building/Art/Snowman</texPath>
+      <drawSize>(0.5,0.5)</drawSize>
     </graphicData>
-    <thingClass>Projectile_Explosive</thingClass>
+    <thingClass>VVRace.SnowmanRocket</thingClass>
     <projectile>
-      <speed>40</speed>
+      <speed>32</speed>
       <damageDef>VV_Frostbite</damageDef>
-      <explosionRadius>2.9</explosionRadius>
-      <damageAmountBase>40</damageAmountBase>
-      <postExplosionSpawnThingDef>VV_ExplosiveSnowman</postExplosionSpawnThingDef>
-      <postExplosionSpawnChance>1</postExplosionSpawnChance>
-      <postExplosionSpawnThingCount>1</postExplosionSpawnThingCount>
+      <explosionRadius>2.6</explosionRadius>
+      <damageAmountBase>32</damageAmountBase>
       <arcHeightFactor>0.2</arcHeightFactor>
       <shadowSize>0.6</shadowSize>
     </projectile>
@@ -214,7 +218,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VV_ExplosiveSnowman</defName>
     <label>explosive snowman</label>
-    <description>A set of large snowballs piled and shaped to resemble a person. People make these for the fun of it.</description>
+    <description>A set of large snow bomb piled and shaped to resemble a person. People make these for the fun of it.</description>
     <thingClass>Building</thingClass>
     <altitudeLayer>Building</altitudeLayer>
     <passability>PassThroughOnly</passability>
@@ -237,10 +241,10 @@
     </statBases>
     <comps>
       <li Class="CompProperties_Explosive">
-        <wickTicks>300</wickTicks>
+        <wickTicks>120</wickTicks>
         <explosiveDamageType>VV_Frostbite</explosiveDamageType>
-        <explosiveRadius>1.9</explosiveRadius>
-        <damageAmountBase>40</damageAmountBase>
+        <explosiveRadius>2.6</explosiveRadius>
+        <damageAmountBase>32</damageAmountBase>
         <chanceNeverExplodeFromDamage>0.5</chanceNeverExplodeFromDamage>
         <countdownTicks>1~1</countdownTicks>
       </li>

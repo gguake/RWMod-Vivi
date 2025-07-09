@@ -74,7 +74,7 @@
     <description>Make traditional weapons used by the Vivis.</description>
     <baseCost>600</baseCost>
     <researchViewX>0</researchViewX>
-    <researchViewY>3.5</researchViewY>
+    <researchViewY>2.1</researchViewY>
     <prerequisites>
       <li>Smithing</li>
     </prerequisites>

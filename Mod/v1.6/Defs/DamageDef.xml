@@ -79,7 +79,7 @@
   
   <DamageDef>
     <defName>VV_Frostbite</defName>
-    <workerClass>DamageWorker_Frostbite</workerClass>
+    <workerClass>VVRace.DamageWorker_FrostbiteCustom</workerClass>
     <label>frostbite</label>
     <hasForcefulImpact>false</hasForcefulImpact>
     <makesBlood>false</makesBlood>
@@ -91,15 +91,14 @@
     <minDamageToFragment>15</minDamageToFragment>
     <defaultDamage>10</defaultDamage>
     <defaultArmorPenetration>0</defaultArmorPenetration>
-    <!-- TODO -->
-    <explosionCellFleck>BlastFlame</explosionCellFleck>
-    <explosionColorCenter>(0.7, 1, 1)</explosionColorCenter>
+    <explosionCellFleck>VV_BlastFrost</explosionCellFleck>
+    <explosionColorCenter>(1, 1, 1)</explosionColorCenter>
     <explosionColorEdge>(1, 1, 1)</explosionColorEdge>
-    <soundExplosion>Explosion_Flame</soundExplosion>
+    <soundExplosion>Explosion_Rocket</soundExplosion>
     <combatLogRules>VV_Damage_Frostbite</combatLogRules>
-    <!---->
     <canUseDeflectMetalEffect>false</canUseDeflectMetalEffect>
     <scaleDamageToBuildingsBasedOnFlammability>true</scaleDamageToBuildingsBasedOnFlammability>
+    <explosionSnowMeltAmount>0</explosionSnowMeltAmount>
     
     <additionalHediffs>
       <li>

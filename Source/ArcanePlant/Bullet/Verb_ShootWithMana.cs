@@ -7,7 +7,6 @@ namespace VVRace
 {
     public class Verb_ShootWithMana : Verb_Shoot
     {
-        private CompMana _manaComp;
         public CompMana ManaComp
         {
             get
@@ -25,6 +24,8 @@ namespace VVRace
                 return _manaComp;
             }
         }
+        [Unsaved]
+        private CompMana _manaComp;
 
         public bool HasSufficientMana
         {
@@ -41,6 +42,7 @@ namespace VVRace
             }
         }
 
+        [Unsaved]
         private Dictionary<ThingDef, float> _tmpProjectileSelector = new Dictionary<ThingDef, float>();
         public override ThingDef Projectile
         {

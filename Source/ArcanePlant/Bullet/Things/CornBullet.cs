@@ -16,7 +16,6 @@ namespace VVRace
     {
         protected override void Impact(Thing hitThing, bool blockedByShield = false)
         {
-
             var parentLauncher = launcher;
             var parentUsedTarget = usedTarget;
             var parentIntendedTarget = intendedTarget;
