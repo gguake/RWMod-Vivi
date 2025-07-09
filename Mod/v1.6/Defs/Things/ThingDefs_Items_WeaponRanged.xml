@@ -17,7 +17,7 @@
 
     <techLevel>Medieval</techLevel>
     <statBases>
-      <MaxHitPoints>50</MaxHitPoints>
+      <MaxHitPoints>70</MaxHitPoints>
       <WorkToMake>2000</WorkToMake>
       <Mass>0.5</Mass>
       <AccuracyTouch>0.85</AccuracyTouch>

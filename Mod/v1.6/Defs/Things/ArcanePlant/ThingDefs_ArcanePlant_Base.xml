@@ -66,6 +66,7 @@
     <rotatable>false</rotatable>
     
     <building>
+      <isInert>true</isInert>
       <ai_neverTrashThis>true</ai_neverTrashThis>
       <ai_chillDestination>false</ai_chillDestination>
       <deconstructible>true</deconstructible>
@@ -77,7 +78,7 @@
       <canPlaceOverWall>false</canPlaceOverWall>
       <uninstallWork>250</uninstallWork>
       <haulToContainerDuration>250</haulToContainerDuration>
-      
+      <expandHomeArea>false</expandHomeArea>
     </building>
     <resourcesFractionWhenDeconstructed>1</resourcesFractionWhenDeconstructed>
 
@@ -109,6 +110,7 @@
     </statBases>
 
     <building>
+      <isInert>false</isInert>
       <uninstallWork>750</uninstallWork>
       <ai_combatDangerous>true</ai_combatDangerous>
     </building>

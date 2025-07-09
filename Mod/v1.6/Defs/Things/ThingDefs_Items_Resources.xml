@@ -57,7 +57,7 @@
     <soundDrop>Wood_Drop</soundDrop>
     <statBases>
       <MarketValue>0.22</MarketValue>
-      <MaxHitPoints>150</MaxHitPoints>
+      <MaxHitPoints>100</MaxHitPoints>
       <Mass>0.05</Mass>
       <Flammability>0.7</Flammability>
       <StuffPower_Armor_Sharp>0.36</StuffPower_Armor_Sharp>
@@ -175,7 +175,7 @@
       <StuffPower_Insulation_Cold>30</StuffPower_Insulation_Cold>
       <StuffPower_Insulation_Heat>36</StuffPower_Insulation_Heat>
 
-      <MaxHitPoints>150</MaxHitPoints>
+      <MaxHitPoints>100</MaxHitPoints>
       <MarketValue>11</MarketValue>
       <Mass>0.05</Mass>
       <Flammability>0.1</Flammability>

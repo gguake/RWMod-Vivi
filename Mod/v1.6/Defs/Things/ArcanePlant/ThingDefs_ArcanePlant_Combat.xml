@@ -20,7 +20,7 @@
     <uiIconPath>Things/Plants/VV_Peashooter</uiIconPath>
 
     <statBases>
-      <MaxHitPoints>120</MaxHitPoints>
+      <MaxHitPoints>90</MaxHitPoints>
       <WorkToBuild>50000</WorkToBuild>
     </statBases>
 
@@ -139,7 +139,7 @@
     <pathCostIgnoreRepeat>true</pathCostIgnoreRepeat>
 
     <statBases>
-      <MaxHitPoints>240</MaxHitPoints>
+      <MaxHitPoints>160</MaxHitPoints>
       <WorkToBuild>50000</WorkToBuild>
       <Flammability>0.7</Flammability>
     </statBases>
@@ -218,7 +218,7 @@
     <uiIconPath>Things/Plants/VV_Cornlauncher</uiIconPath>
     
     <statBases>
-      <MaxHitPoints>120</MaxHitPoints>
+      <MaxHitPoints>90</MaxHitPoints>
       <WorkToBuild>50000</WorkToBuild>
     </statBases>
 

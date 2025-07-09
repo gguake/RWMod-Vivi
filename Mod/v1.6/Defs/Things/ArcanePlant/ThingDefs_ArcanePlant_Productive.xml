@@ -18,7 +18,7 @@
 
     <terrainAffordanceNeeded>VV_WaterOrLight</terrainAffordanceNeeded>
     <statBases>
-      <MaxHitPoints>70</MaxHitPoints>
+      <MaxHitPoints>50</MaxHitPoints>
       <WorkToBuild>47500</WorkToBuild>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
@@ -119,7 +119,7 @@
     </graphicData>
 
     <statBases>
-      <MaxHitPoints>60</MaxHitPoints>
+      <MaxHitPoints>50</MaxHitPoints>
       <WorkToBuild>47500</WorkToBuild>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
@@ -196,7 +196,7 @@
     </graphicData>
 
     <statBases>
-      <MaxHitPoints>60</MaxHitPoints>
+      <MaxHitPoints>50</MaxHitPoints>
       <WorkToBuild>47500</WorkToBuild>
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
@@ -296,7 +296,7 @@
     </graphicData>
 
     <statBases>
-      <MaxHitPoints>90</MaxHitPoints>
+      <MaxHitPoints>50</MaxHitPoints>
       <WorkToBuild>47500</WorkToBuild>
       <Beauty>15</Beauty>
       <BeautyOutdoors>15</BeautyOutdoors>
@@ -395,7 +395,7 @@
     </graphicData>
 
     <statBases>
-      <MaxHitPoints>90</MaxHitPoints>
+      <MaxHitPoints>50</MaxHitPoints>
       <WorkToBuild>47500</WorkToBuild>
       <Beauty>15</Beauty>
       <BeautyOutdoors>15</BeautyOutdoors>

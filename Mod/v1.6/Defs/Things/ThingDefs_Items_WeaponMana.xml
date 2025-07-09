@@ -203,9 +203,55 @@
       <damageDef>VV_Frostbite</damageDef>
       <explosionRadius>2.9</explosionRadius>
       <damageAmountBase>40</damageAmountBase>
+      <postExplosionSpawnThingDef>VV_ExplosiveSnowman</postExplosionSpawnThingDef>
+      <postExplosionSpawnChance>1</postExplosionSpawnChance>
+      <postExplosionSpawnThingCount>1</postExplosionSpawnThingCount>
       <arcHeightFactor>0.2</arcHeightFactor>
       <shadowSize>0.6</shadowSize>
     </projectile>
+  </ThingDef>
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>VV_ExplosiveSnowman</defName>
+    <label>explosive snowman</label>
+    <description>A set of large snowballs piled and shaped to resemble a person. People make these for the fun of it.</description>
+    <thingClass>Building</thingClass>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>30</pathCost>
+    <pathCostIgnoreRepeat>false</pathCostIgnoreRepeat>
+    <useHitPoints>true</useHitPoints>
+    <graphicData>
+      <graphicClass>Graphic_Random</graphicClass>
+      <texPath>Things/Building/Art/Snowman</texPath>
+    </graphicData>
+    <fillPercent>0.35</fillPercent>
+    <rotatable>false</rotatable>
+    <tickerType>Normal</tickerType>
+    <drawDamagedOverlay>false</drawDamagedOverlay>
+    <statBases>
+      <MaxHitPoints>50</MaxHitPoints>
+      <Beauty>4</Beauty>
+      <WorkToBuild>1</WorkToBuild>
+      <MarketValue>0</MarketValue>
+    </statBases>
+    <comps>
+      <li Class="CompProperties_Explosive">
+        <wickTicks>300</wickTicks>
+        <explosiveDamageType>VV_Frostbite</explosiveDamageType>
+        <explosiveRadius>1.9</explosiveRadius>
+        <damageAmountBase>40</damageAmountBase>
+        <chanceNeverExplodeFromDamage>0.5</chanceNeverExplodeFromDamage>
+        <countdownTicks>1~1</countdownTicks>
+      </li>
+    </comps>
+    <forceDebugSpawnable>true</forceDebugSpawnable>
+    <building>
+      <expandHomeArea>false</expandHomeArea>
+      <repairable>false</repairable>
+      <isInert>true</isInert>
+      <artificialForMeditationPurposes>false</artificialForMeditationPurposes>
+    </building>
   </ThingDef>
 
 

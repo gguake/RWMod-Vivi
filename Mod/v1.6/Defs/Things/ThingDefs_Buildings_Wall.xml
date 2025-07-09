@@ -68,7 +68,7 @@
     <uiIconPath>Things/Building/VV_UnfinishedHoneycombWall_Icon</uiIconPath>
     <uiIconColor>(1.0, 0.9, 0.7, 1.0)</uiIconColor>
     <statBases>
-      <MaxHitPoints>80</MaxHitPoints>
+      <MaxHitPoints>70</MaxHitPoints>
       <Flammability>0.9</Flammability>
     </statBases>
     <building>

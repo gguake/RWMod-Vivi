@@ -34,7 +34,7 @@
     <pathCost>14</pathCost>
 
     <statBases>
-      <MaxHitPoints>160</MaxHitPoints>
+      <MaxHitPoints>120</MaxHitPoints>
       <WorkToBuild>1500</WorkToBuild>
       <Mass>4</Mass>
       <Flammability>1.0</Flammability>
@@ -187,7 +187,7 @@
     <pathCost>14</pathCost>
 
     <statBases>
-      <MaxHitPoints>480</MaxHitPoints>
+      <MaxHitPoints>400</MaxHitPoints>
       <WorkToBuild>9000</WorkToBuild>
       <Mass>20</Mass>
       <Flammability>1.0</Flammability>
