@@ -33,17 +33,19 @@
     </weaponTags>
 
     <verbs>
-      <li>
-        <verbClass>VVRace.Verb_Steamthrower</verbClass>
+      <li Class="VVRace.VerbProperties_Steamthrower">
         <hasStandardCommand>true</hasStandardCommand>
         <forcedMissRadius>1.9</forcedMissRadius>
         <warmupTime>0.5</warmupTime>
-        <range>10.9</range>
+        <range>11.9</range>
         <burstShotCount>40</burstShotCount>
         <showBurstShotStats>false</showBurstShotStats>
         <requireLineOfSight>true</requireLineOfSight>
         <ticksBetweenBurstShots>3</ticksBetweenBurstShots>
-        <beamStartOffset>2.0</beamStartOffset>
+        <breathAngleHalf></breathAngleHalf>
+
+        <breathStartOffset>2.0</breathStartOffset>
+        <breathAngleHalf>15</breathAngleHalf>
         <targetParams>
           <canTargetLocations>true</canTargetLocations>
         </targetParams>
