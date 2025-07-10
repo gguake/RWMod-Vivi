@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
   <!-- 증기 방사기 -->
-  <!--
   <ThingDef ParentName="BaseHumanMakeableGun">
     <defName>VV_Steamthrower</defName>
     <label>steamthrower</label>
@@ -39,11 +38,11 @@
         <forcedMissRadius>1.9</forcedMissRadius>
         <warmupTime>0.5</warmupTime>
         <range>10.9</range>
-        <burstShotCount>20</burstShotCount>
+        <burstShotCount>40</burstShotCount>
         <showBurstShotStats>false</showBurstShotStats>
         <requireLineOfSight>true</requireLineOfSight>
-        <ticksBetweenBurstShots>2</ticksBetweenBurstShots>
-        <muzzleFlashScale>9</muzzleFlashScale>
+        <ticksBetweenBurstShots>3</ticksBetweenBurstShots>
+        <beamStartOffset>0.8</beamStartOffset>
         <targetParams>
           <canTargetLocations>true</canTargetLocations>
         </targetParams>
@@ -101,7 +100,6 @@
       </li>
     </comps>
   </ThingDef>
-  -->
 
   <!-- 눈사람 발사기 -->
   <ThingDef ParentName="BaseHumanMakeableGun">
@@ -287,6 +285,7 @@
     </weaponClasses>
     <weaponTags Inherit="False">
       <li>VV_ViviWeaponMana</li>
+      <li>VV_Vivi</li>
     </weaponTags>
 
     <verbs>

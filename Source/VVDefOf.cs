@@ -240,6 +240,8 @@ namespace VVRace
         public static FleckDef HeatGlow_Intense;
         public static FleckDef ElectricalSpark;
         public static FleckDef Fleck_VaporizeCenterFlash;
+
+        public static FleckDef VV_Steam;
     }
 
     [DefOf]

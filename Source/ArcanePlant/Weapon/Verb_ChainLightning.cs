@@ -72,7 +72,7 @@ namespace VVRace
         private List<Thing> _subTargets = new List<Thing>();
         private List<LightningEffect> _effects = new List<LightningEffect>();
 
-        protected override int ShotsPerBurst => base.BurstShotCount;
+        protected override int ShotsPerBurst => BurstShotCount;
 
         public override void ExposeData()
         {
@@ -99,12 +99,6 @@ namespace VVRace
             if (verbProps.stopBurstWithoutLos && !los)
             {
                 return false;
-            }
-
-            if (EquipmentSource != null)
-            {
-                EquipmentSource.GetComp<CompChangeableProjectile>()?.Notify_ProjectileLaunched();
-                EquipmentSource.GetComp<CompApparelReloadable>()?.UsedOnce();
             }
 
             lastShotTick = Find.TickManager.TicksGame;

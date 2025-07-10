@@ -123,6 +123,7 @@
     <Compile Include="ArcanePlant\Plant\Things\PeaShooterGun.cs" />
     <Compile Include="ArcanePlant\Plant\Things\ArcanePlant_Seedling.cs" />
     <Compile Include="ArcanePlant\Weapon\Verb_ChainLightning.cs" />
+    <Compile Include="ArcanePlant\Weapon\Verb_Steamthrower.cs" />
     <Compile Include="Gather\StatWorker_Honey.cs" />
     <Compile Include="ArcanePlant\Plant\Sensor\SensorWorker_Fire.cs" />
     <Compile Include="ArcanePlant\Weapon\Things\PeaBullet.cs" />
