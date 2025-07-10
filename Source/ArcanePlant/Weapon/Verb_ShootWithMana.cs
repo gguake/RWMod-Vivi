@@ -33,11 +33,11 @@ namespace VVRace
             {
                 if (Bursting)
                 {
-                    return ManaComp.Stored >= EquipmentSource?.GetStatValue(VVStatDefOf.VV_RangedWeapon_ManaCost);
+                    return ManaComp.Stored >= EquipmentSource?.GetStatValue(VVStatDefOf.VV_RangedWeapon_ManaCost) / BurstShotCount;
                 }
                 else
                 {
-                    return ManaComp.Stored >= EquipmentSource?.GetStatValue(VVStatDefOf.VV_RangedWeapon_ManaCost) * BurstShotCount;
+                    return ManaComp.Stored >= EquipmentSource?.GetStatValue(VVStatDefOf.VV_RangedWeapon_ManaCost);
                 }
             }
         }
@@ -118,7 +118,7 @@ namespace VVRace
             var compMana = ManaComp;
             if (compMana == null) { return false; }
 
-            var manaPerShoot = EquipmentSource?.GetStatValue(VVStatDefOf.VV_RangedWeapon_ManaCost) ?? 0;
+            var manaPerShoot = EquipmentSource?.GetStatValue(VVStatDefOf.VV_RangedWeapon_ManaCost) / BurstShotCount ?? 0;
             if (compMana.Stored < manaPerShoot) { return false; }
 
             var shot =  base.TryCastShot();

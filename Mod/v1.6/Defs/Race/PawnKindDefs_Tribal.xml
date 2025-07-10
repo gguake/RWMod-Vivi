@@ -180,6 +180,7 @@
     <weaponMoney>5000~10000</weaponMoney>
     <weaponTags>
       <li>VV_ViviNeedle</li>
+      <li>VV_ViviWeaponMana</li>
     </weaponTags>
 
     <acceptArrestChanceFactor>0.1</acceptArrestChanceFactor>
@@ -203,7 +204,6 @@
     <apparelMoney>600~1000</apparelMoney>
     <apparelTags>
       <li>VV_RoyalViviApparel</li>
-      <li>BeltDefensePop</li>
     </apparelTags>
 
     <nakedChance>0</nakedChance>
@@ -248,9 +248,10 @@
 
     <nakedChance>0</nakedChance>
 
-    <weaponMoney>1000~1500</weaponMoney>
+    <weaponMoney>1000~2500</weaponMoney>
     <weaponTags>
       <li>VV_ViviWeaponRange</li>
+      <li>VV_ViviWeaponMana</li>
     </weaponTags>
 
     <acceptArrestChanceFactor>0.5</acceptArrestChanceFactor>
