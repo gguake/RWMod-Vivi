@@ -12,6 +12,9 @@
     <graphicData>
       <texPath>Things/Plants/VV_Seedling</texPath>
       <graphicClass>Graphic_Random</graphicClass>
+      <damageData>
+        <enabled>false</enabled>
+      </damageData>
     </graphicData>
     <drawerType>MapMeshOnly</drawerType>
 

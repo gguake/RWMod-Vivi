@@ -174,8 +174,8 @@ namespace VVRace
                             else
                             {
                                 HitPoints--;
+                                _lastDamagedTick = GenTicks.TicksGame;
                             }
-
                         }
                     }
                 }

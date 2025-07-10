@@ -5,7 +5,7 @@
     <defName>VV_ArcanePlantPot</defName>
     <label>arcane plant pot</label>
     <description>a pot that can hold arcane plants. It is typically used to place arcane plants indoors or in locations where normal plants can't grow.
-\nIf an arcane plant in the pot is attacked, the pot will absorb the damage first unless it's an explosive attack. If the pot is destroyed, the arcane plant will automatically be packed up.</description>
+\nIf an arcane plant in the pot is attacked, the pot will absorb the damage first unless it's an flame damage. If the pot is destroyed, the arcane plant will automatically be packed up.</description>
     <descriptionHyperlinks>
     </descriptionHyperlinks>
     <thingClass>VVRace.ArcanePlantPot</thingClass>

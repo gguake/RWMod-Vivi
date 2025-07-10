@@ -63,7 +63,7 @@ namespace VVRace
         protected virtual bool HasRandomDrawScale => true;
 
         private ArcanePlantMapComponent _mapComponent;
-        private int _lastDamagedTick = 0;
+        protected int _lastDamagedTick = 0;
 
         public override int UpdateRateTicks => 1000;
         protected override int MinTickIntervalRate => 1000;
@@ -184,7 +184,7 @@ namespace VVRace
 
         public override void PreApplyDamage(ref DamageInfo dinfo, out bool absorbed)
         {
-            if (!dinfo.Def.isExplosive)
+            if (dinfo.Def != DamageDefOf.Flame)
             {
                 if (Spawned)
                 {
