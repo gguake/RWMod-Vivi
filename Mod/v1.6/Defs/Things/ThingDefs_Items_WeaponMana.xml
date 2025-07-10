@@ -7,10 +7,11 @@
     <description>.</description>
 
     <graphicData>
-      <texPath>Things/Item/Equipment/WeaponRanged/Incinerator</texPath>
+      <texPath>Things/Item/Equipment/VV_Steamthrower</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <soundInteract>Interact_Rifle</soundInteract>
+    <equippedAngleOffset>45</equippedAngleOffset>
 
     <techLevel>Industrial</techLevel>
     <statBases>
@@ -42,7 +43,7 @@
         <showBurstShotStats>false</showBurstShotStats>
         <requireLineOfSight>true</requireLineOfSight>
         <ticksBetweenBurstShots>3</ticksBetweenBurstShots>
-        <beamStartOffset>0.8</beamStartOffset>
+        <beamStartOffset>2.0</beamStartOffset>
         <targetParams>
           <canTargetLocations>true</canTargetLocations>
         </targetParams>
@@ -291,7 +292,7 @@
     <verbs>
       <li Class="VVRace.VerbProperties_ChainLightning">
         <hasStandardCommand>true</hasStandardCommand>
-        <warmupTime>3.5</warmupTime>
+        <warmupTime>1.5</warmupTime>
         <range>23.9</range>
         <burstShotCount>3</burstShotCount>
         <stopBurstWithoutLos>true</stopBurstWithoutLos>
