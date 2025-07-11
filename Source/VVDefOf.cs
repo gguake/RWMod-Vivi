@@ -71,6 +71,7 @@ namespace VVRace
         public static ThingDef VV_Viviwax;
         public static ThingDef VV_Lifestrand;
 
+        public static ThingDef VV_Seed_UnknownPlant;
         public static ThingDef VV_Fertilizer;
 
         public static ThingDef VV_GatheringBarrel;
