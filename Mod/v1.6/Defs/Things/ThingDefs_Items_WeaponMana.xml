@@ -35,17 +35,22 @@
     <verbs>
       <li Class="VVRace.VerbProperties_Steamthrower">
         <hasStandardCommand>true</hasStandardCommand>
-        <forcedMissRadius>1.9</forcedMissRadius>
-        <warmupTime>0.5</warmupTime>
+        <warmupTime>0.8</warmupTime>
         <range>11.9</range>
-        <burstShotCount>40</burstShotCount>
+        <burstShotCount>6</burstShotCount>
         <showBurstShotStats>false</showBurstShotStats>
         <requireLineOfSight>true</requireLineOfSight>
-        <ticksBetweenBurstShots>3</ticksBetweenBurstShots>
-        <breathAngleHalf></breathAngleHalf>
+        <ticksBetweenBurstShots>10</ticksBetweenBurstShots>
 
-        <breathStartOffset>2.0</breathStartOffset>
+        <steamDamageDef>Burn</steamDamageDef>
+        <steamDamageAmount>7</steamDamageAmount>
+        <steamProjectile>VV_SteamProjectile</steamProjectile>
+
+        <breathStartOffset>0.9</breathStartOffset>
         <breathAngleHalf>15</breathAngleHalf>
+        <breathFriendlyFireSafeDistance>2.9</breathFriendlyFireSafeDistance>
+        <propagationSpeed>10</propagationSpeed>
+
         <targetParams>
           <canTargetLocations>true</canTargetLocations>
         </targetParams>
@@ -59,13 +64,12 @@
           <li>Blunt</li>
         </capacities>
         <power>9</power>
-        <cooldownTime>2</cooldownTime>
+        <cooldownTime>1.5</cooldownTime>
       </li>
       <li>
         <label>barrel</label>
         <capacities>
           <li>Blunt</li>
-          <li>Poke</li>
         </capacities>
         <power>9</power>
         <cooldownTime>2</cooldownTime>
@@ -102,6 +106,12 @@
         <workOnlySpawned>false</workOnlySpawned>
       </li>
     </comps>
+  </ThingDef>
+  <ThingDef ParentName="EtherealThingBase">
+    <defName>VV_SteamProjectile</defName>
+    <label>steam</label>
+    <thingClass>VVRace.SteamProjectile</thingClass>
+    <tickerType>Normal</tickerType>
   </ThingDef>
 
   <!-- 눈사람 발사기 -->

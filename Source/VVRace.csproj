@@ -122,6 +122,7 @@
     <Compile Include="ArcanePlant\Buildings\ManaEmitter.cs" />
     <Compile Include="ArcanePlant\Plant\Things\PeaShooterGun.cs" />
     <Compile Include="ArcanePlant\Plant\Things\ArcanePlant_Seedling.cs" />
+    <Compile Include="ArcanePlant\Weapon\Things\SteamProjectile.cs" />
     <Compile Include="ArcanePlant\Weapon\Verb_ChainLightning.cs" />
     <Compile Include="ArcanePlant\Weapon\Verb_Steamthrower.cs" />
     <Compile Include="Gather\StatWorker_Honey.cs" />
@@ -229,6 +230,7 @@
     <Compile Include="Hornet\MentalState_HornetBerserk.cs" />
     <Compile Include="Needle\Needle.cs" />
     <Compile Include="FoodDrainRecipe\RecipeModExtension.cs" />
+    <Compile Include="Utility\CellUtility.cs" />
     <Compile Include="Utility\IOUtility.cs" />
     <Compile Include="Utility\ViviUtility.cs" />
     <Compile Include="FoodDrainRecipe\Bill_ProductionWithFoodDrain.cs" />

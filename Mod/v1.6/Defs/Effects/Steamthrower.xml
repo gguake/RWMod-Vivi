@@ -7,9 +7,10 @@
       <renderInstanced>true</renderInstanced>
     </graphicData>
     <altitudeLayer>MoteOverhead</altitudeLayer>
-    <growthRate>4</growthRate>
-    <fadeInTime>0.04</fadeInTime>
-    <solidTime>0.29</solidTime>
-    <fadeOutTime>1.0</fadeOutTime>
+    <growthRate>3.6</growthRate>
+    <fadeInTime>0.01</fadeInTime>
+    <solidTime>0.7</solidTime>
+    <fadeOutTime>0.4</fadeOutTime>
+    <collide>true</collide>
   </FleckDef>
 </Defs>
