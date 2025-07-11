@@ -5,9 +5,40 @@ namespace VVRace
 {
     public class GameComponent_Mana : GameComponent
     {
-        public IEnumerable<CompMana> AllManaComps => _manaCompCache;
+        public IEnumerable<CompMana> AllManaComps
+        {
+            get
+            {
+                for (int i = 0; i < _manaCompCache.Count; ++i)
+                {
+                    if (_manaCompCache[i] == null || _manaCompCache[i].parent == null || _manaCompCache[i].parent.Destroyed)
+                    {
+                        _manaCompCache.RemoveAt(i);
+                        i--;
+                    }
 
-        public IEnumerable<ThingWithComps> AllThingsUsingMana => _thingWithManaComps;
+                    yield return _manaCompCache[i];
+
+                }
+            }
+        }
+
+        public IEnumerable<ThingWithComps> AllThingsUsingMana
+        {
+            get
+            {
+                for (int i = 0; i < _thingWithManaComps.Count; ++i)
+                {
+                    if (_thingWithManaComps[i] == null || _thingWithManaComps[i].Destroyed)
+                    {
+                        _thingWithManaComps.RemoveAt(i);
+                        i--;
+                    }
+
+                    yield return _thingWithManaComps[i];
+                }
+            }
+        }
 
         private Game _game;
         private List<ThingWithComps> _thingWithManaComps;
@@ -22,11 +53,18 @@ namespace VVRace
 
         public override void ExposeData()
         {
+            if (Scribe.mode == LoadSaveMode.Saving)
+            {
+                _thingWithManaComps.RemoveAll(v => v.DestroyedOrNull());
+            }
+
             Scribe_Collections.Look(ref _thingWithManaComps, "_thingWithManaComps", LookMode.Reference);
+
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
                 _manaCompCache.Clear();
 
+                _thingWithManaComps.RemoveAll(v => v.DestroyedOrNull());
                 foreach (var thing in _thingWithManaComps)
                 {
                     var compMana = thing.GetComp<CompMana>();
