@@ -5,7 +5,9 @@
 <VV_Inspector_HatcheryDisabledReasonNoRoof>No Roof</VV_Inspector_HatcheryDisabledReasonNoRoof>
 <VV_Inspector_HatcheryDisabledReasonOutdoor>Outdoor</VV_Inspector_HatcheryDisabledReasonOutdoor>
 
-<VV_Inspector_ViviWallReplaceCooldown>Time Remaining Until Solidification: {0}</VV_Inspector_ViviWallReplaceCooldown>
+<VV_Inspector_Cooldown_PlantGatherCooldown>Time remaining to next gathering: {0}</VV_Inspector_Cooldown_PlantGatherCooldown>
+
+<VV_Inspector_ViviWallReplaceCooldown>Time remaining until solidification: {0}</VV_Inspector_ViviWallReplaceCooldown>
 
 <VV_Inspector_PlantManaFlux>Mana Flux: {0}, {1}/day</VV_Inspector_PlantManaFlux>
 <VV_Inspector_PlantStoredMana>Stored Mana: {0}/{1}</VV_Inspector_PlantStoredMana>

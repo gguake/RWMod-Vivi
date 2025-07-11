@@ -5,6 +5,8 @@
 <VV_Inspector_HatcheryDisabledReasonNoRoof>지붕 없음</VV_Inspector_HatcheryDisabledReasonNoRoof>
 <VV_Inspector_HatcheryDisabledReasonOutdoor>실외</VV_Inspector_HatcheryDisabledReasonOutdoor>
 
+<VV_Inspector_Cooldown_PlantGatherCooldown>다음 채집까지 남은 시간: {0}</VV_Inspector_Cooldown_PlantGatherCooldown>
+
 <VV_Inspector_ViviWallReplaceCooldown>굳기까지 남은 시간: {0}</VV_Inspector_ViviWallReplaceCooldown>
 
 <VV_Inspector_PlantManaFlux>마나 흐름: {0}, {1}/일</VV_Inspector_PlantManaFlux>

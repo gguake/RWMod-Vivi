@@ -60,7 +60,7 @@ namespace VVRace
                     if (IsCooldown(kv.Key))
                     {
                         var cooldownTicks = kv.Value + (int)(parent.GetStatValue(kv.Key) * 60000f) - Find.TickManager.TicksGame;
-                        return (kv.Key.defName + "InspectorString").Translate(cooldownTicks.ToStringTicksToPeriod());
+                        return ("VV_Inspector_Cooldown_" + kv.Key.defName.Replace("VV_", "")).Translate(cooldownTicks.ToStringTicksToPeriod());
                     }
                 }
 
