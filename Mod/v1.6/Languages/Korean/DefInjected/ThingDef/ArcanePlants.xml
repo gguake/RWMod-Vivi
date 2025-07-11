@@ -52,8 +52,8 @@
 <VV_StarlitVeil.label>별빛 장막</VV_StarlitVeil.label>
 
 <VV_Peashooter.label>콩뿌리개</VV_Peashooter.label>
-<VV_Peashooter.description>주변의 적을 감지하면 마법 콩을 발사해 쫓아내는 마법 식물입니다. 콩을 발사할 때마다 마나를 소모하며 위력은 약하지만 한번에 대량의 콩을 발사하므로 경장갑의 적에게 효과적입니다.
-\n발사된 콩이 마법 식물 위를 지나가는 경우 식물에 따라 특수한 효과를 적용받기도 합니다.</VV_Peashooter.description>
+<VV_Peashooter.description>주변의 적을 감지하면 마법 콩을 발사해 쫓아내는 마법 식물입니다. 콩을 발사할 때마다 마나를 소모하며 위력은 약하지만 화력 지속력이 좋습니다.
+\n콩뿌리개는 인접한 식물의 마나에 영향을 받아 식물에 따라 발사하는 콩이 강화됩니다.</VV_Peashooter.description>
 <VV_Gun_Peashooter.label>콩뿌리개 꼬투리</VV_Gun_Peashooter.label>
 <VV_Gun_Peashooter.description>.</VV_Gun_Peashooter.description>
 <VV_Bullet_Pea.label>콩</VV_Bullet_Pea.label>

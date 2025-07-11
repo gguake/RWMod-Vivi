@@ -410,7 +410,7 @@
         <manaCapacity>500</manaCapacity>
 
         <manaGenerateRule Class="VVRace.ManaFluxRule_TimeOfDay">
-          <mana>1000</mana>
+          <mana>800</mana>
           <timeOfDay>Night</timeOfDay>
         </manaGenerateRule>
         

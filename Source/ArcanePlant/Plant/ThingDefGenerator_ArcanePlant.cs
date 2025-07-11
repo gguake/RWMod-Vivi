@@ -27,6 +27,7 @@ namespace VVRace
                 seedDef.category = ThingCategory.Item;
                 seedDef.label = LocalizeString_Etc.VV_Thing_Seed.Translate(plantDef.label);
                 seedDef.description = LocalizeString_Etc.VV_Thing_SeedDesc.Translate(plantDef.label);
+                seedDef.descriptionHyperlinks = new List<DefHyperlink>() { new DefHyperlink(plantDef) };
 
                 seedDef.tickerType = TickerType.Never;
                 seedDef.selectable = true;

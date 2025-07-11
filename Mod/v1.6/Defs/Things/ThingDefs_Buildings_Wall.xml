@@ -104,6 +104,9 @@
     <label>vivi honeycomb wall</label>
     <description>a hexagonal structured honeycomb wall. It's impassable and supports roofs.
 \nWhile it's very sturdy against various impacts, it's very vulnerable to fire.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_ViviHardenHoneycombWall</ThingDef>
+    </descriptionHyperlinks>
     
     <graphicData>
       <texPath>Things/Building/Wall_Atlas_HoneycombWall</texPath>

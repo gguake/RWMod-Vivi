@@ -4,8 +4,8 @@
   <ThingDef ParentName="VV_ArcanePlantCombat">
     <defName>VV_Peashooter</defName>
     <label>peashooter</label>
-    <description>It is a arcane plant that fires beans to drive away nearby enemies when it detects them. Each bean firing consumes mana, and while the power is weak, it is effective against lightly armored enemies because it fires a large number of beans at once.
-\nWhen the fired beans pass over the arcane plant, they may receive special effects depending on the plant.</description>
+    <description>It is a arcane plant that fires peas to drive away nearby enemies when it detects them. Consumes mana each time it fires a pea. While its damage is low, it excels in sustained firepower.
+\nPeashooter is affected by the mana of adjacent arcane plants, and the type of arcane plant can enhance the fired peas.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_LivingLeaf</ThingDef>
     </descriptionHyperlinks>
