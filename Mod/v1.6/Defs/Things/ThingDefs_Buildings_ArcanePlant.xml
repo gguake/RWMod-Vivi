@@ -70,6 +70,10 @@
     <designationHotKey>Misc6</designationHotKey>
 
     <canOverlapZones>false</canOverlapZones>
+
+    <researchPrerequisites>
+      <li>VV_BasicInfra</li>
+    </researchPrerequisites>
   </ThingDef>
 
   <!-- 마나 방출기 -->
@@ -151,9 +155,12 @@
         <externalTicking>false</externalTicking>
       </li>
     </comps>
+
+    <researchPrerequisites>
+      <li>VV_ArcaneBotany</li>
+    </researchPrerequisites>
   </ThingDef>
 
-  
   <!-- 대형 마법 식물 화분 -->
   <ThingDef ParentName="BuildingBase">
     <defName>VV_LargeArcanePlantPot</defName>
@@ -236,6 +243,10 @@
     <designationCategory>VV_Bulidings</designationCategory>
     <designationHotKey>Misc8</designationHotKey>
     <canOverlapZones>false</canOverlapZones>
+
+    <researchPrerequisites>
+      <li>VV_ArcaneBotany</li>
+    </researchPrerequisites>
   </ThingDef>
 
 </Defs>

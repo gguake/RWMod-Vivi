@@ -252,8 +252,14 @@
       <MaxHitPoints>20</MaxHitPoints>
       <DeteriorationRate>1</DeteriorationRate>
       <Flammability>1.0</Flammability>
+      <Nutrition>0.125</Nutrition>
     </statBases>
     
+    <ingestible>
+      <preferability>NeverForNutrition</preferability>
+      <foodType>Seed</foodType>
+    </ingestible>
+
     <thingCategories>
       <li>VV_ArcaneSeed</li>
     </thingCategories>

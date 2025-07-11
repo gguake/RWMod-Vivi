@@ -63,6 +63,13 @@ namespace VVRace
                 seedDef.SetStatBaseValue(StatDefOf.MaxHitPoints, 20f);
                 seedDef.SetStatBaseValue(StatDefOf.DeteriorationRate, 1f);
                 seedDef.SetStatBaseValue(StatDefOf.Flammability, 1f);
+                seedDef.SetStatBaseValue(StatDefOf.Nutrition, 0.125f);
+
+                seedDef.ingestible = new IngestibleProperties()
+                {
+                    preferability = FoodPreferability.NeverForNutrition,
+                    foodType = FoodTypeFlags.Seed,
+                };
 
                 seedDef.thingCategories = new List<ThingCategoryDef>();
                 DirectXmlCrossRefLoader.RegisterListWantsCrossRef(seedDef.thingCategories, "VV_ArcaneSeed", seedDef);
