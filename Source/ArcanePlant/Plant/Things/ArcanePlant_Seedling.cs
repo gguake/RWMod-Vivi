@@ -126,6 +126,7 @@ namespace VVRace
                             var map = Map;
                             var position = Position;
                             var rotation = Rotation;
+                            var faction = Faction;
 
                             var plantDef = MaturePlantDef;
                             if (plantDef == null)
@@ -145,7 +146,7 @@ namespace VVRace
                             Destroy(DestroyMode.WillReplace);
 
                             var plant = ThingMaker.MakeThing(plantDef);
-                            plant.SetFaction(Faction ?? Faction.OfPlayer);
+                            plant.SetFaction(faction ?? Faction.OfPlayer);
                             plant.HitPoints = Mathf.Clamp(Mathf.CeilToInt(healthPct * plant.MaxHitPoints), 1, plant.MaxHitPoints);
                             GenSpawn.Spawn(plant, position, map, rotation);
                             return;
