@@ -16,9 +16,9 @@
     <techLevel>Industrial</techLevel>
     <statBases>
       <WorkToMake>48000</WorkToMake>
-      <Mass>3.4</Mass>
-      <RangedWeapon_Cooldown>3</RangedWeapon_Cooldown>
-      <VV_RangedWeapon_ManaCost>20</VV_RangedWeapon_ManaCost>
+      <Mass>6.0</Mass>
+      <RangedWeapon_Cooldown>0.2</RangedWeapon_Cooldown>
+      <VV_RangedWeapon_ManaCost>30</VV_RangedWeapon_ManaCost>
     </statBases>
     <relicChance>0</relicChance>
     
@@ -35,7 +35,7 @@
     <verbs>
       <li Class="VVRace.VerbProperties_Steamthrower">
         <hasStandardCommand>true</hasStandardCommand>
-        <warmupTime>0.8</warmupTime>
+        <warmupTime>0.7</warmupTime>
         <range>11.9</range>
         <burstShotCount>6</burstShotCount>
         <showBurstShotStats>false</showBurstShotStats>
@@ -45,6 +45,7 @@
         <steamDamageDef>Burn</steamDamageDef>
         <steamDamageAmount>7</steamDamageAmount>
         <steamProjectile>VV_SteamProjectile</steamProjectile>
+        <steamHeatPerCell>1.2</steamHeatPerCell>
 
         <breathStartOffset>0.9</breathStartOffset>
         <breathAngleHalf>15</breathAngleHalf>
@@ -101,8 +102,8 @@
       <li Class="CompProperties_Styleable"/>
       <li Class="CompProperties_Biocodable"/>
       <li Class="VVRace.CompProperties_Mana">
-        <manaCapacity>1000</manaCapacity>
-        <manaAbsorbPerDay>500</manaAbsorbPerDay>
+        <manaCapacity>900</manaCapacity>
+        <manaAbsorbPerDay>600</manaAbsorbPerDay>
         <workOnlySpawned>false</workOnlySpawned>
       </li>
     </comps>

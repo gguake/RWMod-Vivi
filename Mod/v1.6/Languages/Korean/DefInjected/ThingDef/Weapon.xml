@@ -42,10 +42,17 @@
   <VV_Arrow_RepeatingCrossbow.label>연발 쇠뇌 바늘</VV_Arrow_RepeatingCrossbow.label>
 
   <!-- 마나 -->
+  <VV_Steamthrower.label>수증기 방사기</VV_Steamthrower.label>
+  <VV_Steamthrower.description>뜨거운 수증기를 고압으로 분사하는 마법 무기입니다. 범위 내의 모든 대상에게 화상 피해를 입히며 사용자와 가까이 붙어있는 아군은 피해를 받지 않습니다.
+\n분사된 수증기는 범위 내의 모든 화재를 진압하며 실내에서 사용하면 수증기가 방의 온도를 점차 높입니다.
+\n사격시마다 마나를 소모하고, 마나가 고갈되면 사격할 수 없으며 주변의 환경 마나를 흡수해 자동으로 충전됩니다.</VV_Steamthrower.description>
+  <VV_Steamthrower.tools.stock.label>개머리판</VV_Steamthrower.tools.stock.label>
+  <VV_Steamthrower.tools.barrel.label>총열</VV_Steamthrower.tools.barrel.label>
+  <VV_SteamProjectile.label>증기</VV_SteamProjectile.label>
+
   <VV_SnowmanLauncher.label>눈사람 발사기</VV_SnowmanLauncher.label>
   <VV_SnowmanLauncher.description>대기중의 수증기를 냉각해 눈사람 모양으로 뭉쳐 발사하는 마법 무기입니다. 우스꽝스럽지만 착탄 지점 주변의 넓은 범위에 강력한 냉기 폭발을 일으켜 동상을 입힙니다. 폭발이 지나간 자리에는 눈이 쌓이며 눈사람이 짧은 시간 남아있다가 한번 더 폭발합니다.
-\n사격시마다 대량의 마나를 소모하고, 마나가 고갈되면 사격할 수 없으며 주변의 환경 마나를 흡수해 자동으로 충전됩니다.
-\n본래는 여름에 눈사람을 보고싶었던 어떤 비비가 만든 장난감이었지만, 장난감에 의해 의도치 않은 사상사고가 자주 발생하자 비비끼리 발사하는것이 금지된 후 출력을 조정해 무기로 채택되었습니다.</VV_SnowmanLauncher.description>
+\n사격시마다 대량의 마나를 소모하고, 마나가 고갈되면 사격할 수 없으며 주변의 환경 마나를 흡수해 자동으로 충전됩니다.</VV_SnowmanLauncher.description>
   <VV_SnowmanLauncher.tools.barrel.label>총열</VV_SnowmanLauncher.tools.barrel.label>
   <VV_Bullet_Snowman.label>눈사람</VV_Bullet_Snowman.label>
   <VV_ExplosiveSnowman.label>폭발 눈사람</VV_ExplosiveSnowman.label>
@@ -53,8 +60,7 @@
 
   <VV_ChainThunderPistol.label>연쇄 번개 권총</VV_ChainThunderPistol.label>
   <VV_ChainThunderPistol.description>조준한 대상에게 강력한 전류를 발사하는 마법 무기입니다. 전류는 대상에게 화상을 입히면서 동시에 전자 장비를 잠시 마비시키고, 주변의 적에게도 여러 차례 유도되어 동일한 피해를 입힙니다.
-\n사격시마다 마나를 소모하고, 마나가 고갈되면 사격할 수 없으며 주변의 환경 마나를 흡수해 자동으로 충전됩니다.
-\n연쇄 번개 권총은 외지인들이 사용하는 펄스 발사기를 비비들이 베껴 만든 물건입니다. 모양과 효과는 원본과 많이 다르지만 아무튼 비슷한 역할을 수행할 수 있어 인기가 많습니다.</VV_ChainThunderPistol.description>
+\n사격시마다 마나를 소모하고, 마나가 고갈되면 사격할 수 없으며 주변의 환경 마나를 흡수해 자동으로 충전됩니다.</VV_ChainThunderPistol.description>
 
 
   <!-- Exotics -->

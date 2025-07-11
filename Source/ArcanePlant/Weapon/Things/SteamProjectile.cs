@@ -1,6 +1,6 @@
 ﻿using RimWorld;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Linq;
 using Verse;
 using Verse.AI;
 
@@ -14,6 +14,7 @@ namespace VVRace
         public float damageAmount;
 
         public float friendlyFireSafeDistance;
+        public float heatPerCell;
 
         public float range;
         public float propagationSpeed;
@@ -24,6 +25,8 @@ namespace VVRace
         private int _index;
 
         private HashSet<Thing> _damagedTargets = new HashSet<Thing>();
+
+        public override int UpdateRateTicks => 15;
 
         public override void ExposeData()
         {
@@ -54,6 +57,7 @@ namespace VVRace
             _initalPosition = Position;
         }
 
+        private Dictionary<Room, float> _roomHeatDict = new Dictionary<Room, float>(4);
         protected override void Tick()
         {
             base.Tick();
@@ -72,6 +76,19 @@ namespace VVRace
                     {
                         var thing = thingList[j];
                         if (_damagedTargets.Contains(thing)) { continue; }
+
+                        if (thing is Fire)
+                        {
+                            j--;
+                            thing.Destroy();
+                            continue;
+                        }
+
+                        var fireAttachment = thing.GetAttachment(ThingDefOf.Fire);
+                        if (fireAttachment != null)
+                        {
+                            fireAttachment.Destroy();
+                        }
 
                         if (thing is IAttackTarget && !(distance <= friendlyFireSafeDistance && !caster.HostileTo(thing)))
                         {
@@ -95,12 +112,32 @@ namespace VVRace
 
                         _damagedTargets.Add(thing);
                     }
+
+                    var room = cell.GetRoom(Map);
+                    if (room != null)
+                    {
+                        if (!_roomHeatDict.ContainsKey(room))
+                        {
+                            _roomHeatDict.Add(room, 0f);
+                        }
+
+                        _roomHeatDict[room] += heatPerCell;
+                    }
                 }
                 else
                 {
                     _index = i;
                     break;
                 }
+            }
+
+            if (_roomHeatDict.Any())
+            {
+                foreach (var kv in _roomHeatDict)
+                {
+                    kv.Key.PushHeat(kv.Value);
+                }
+                _roomHeatDict.Clear();
             }
 
             if (_progress >= range) { Destroy(); }

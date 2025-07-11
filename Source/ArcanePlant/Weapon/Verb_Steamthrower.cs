@@ -14,6 +14,7 @@ namespace VVRace
 
         public ThingDef steamProjectile;
         public int steamProjectileSpawnTerm;
+        public float steamHeatPerCell;
 
         public float breathStartOffset;
         public float breathAngleHalf;
@@ -104,6 +105,7 @@ namespace VVRace
             steam.damageDef = VerbProps.steamDamageDef;
             steam.damageAmount = VerbProps.steamDamageAmount;
             steam.friendlyFireSafeDistance = VerbProps.breathFriendlyFireSafeDistance;
+            steam.heatPerCell = VerbProps.steamHeatPerCell;
 
             steam.range = VerbProps.range;
             steam.propagationSpeed = 20;
