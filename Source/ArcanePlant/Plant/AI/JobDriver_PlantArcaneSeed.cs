@@ -88,6 +88,7 @@ namespace VVRace
                 var compArcaneSeed = Seed.TryGetComp<CompArcaneSeed>();
 
                 var seedling = (ArcanePlant_Seedling)ThingMaker.MakeThing(VVThingDefOf.VV_ArcanePlantSeedling);
+                seedling.SetFactionDirect(pawn.Faction);
                 seedling.SetMaturePlant(compArcaneSeed.Props.targetPlantDef);
 
                 if (GenPlace.TryPlaceThing(seedling, SeedlingCell, Map, ThingPlaceMode.Direct))
