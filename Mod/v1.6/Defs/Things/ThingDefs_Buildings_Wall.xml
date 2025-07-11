@@ -30,6 +30,7 @@
     <building>
       <smoothedThing>VV_SmoothedViviCreamWall</smoothedThing>
       <isPlaceOverableWall>true</isPlaceOverableWall>
+      <isStuffableAirtight>false</isStuffableAirtight>
     </building>
 
     <costList>
@@ -75,6 +76,7 @@
       <relatedBuildCommands>
         <li>VV_ViviCreamWall</li>
       </relatedBuildCommands>
+      <isStuffableAirtight>false</isStuffableAirtight>
     </building>
     <costList>
       <VV_Vivicream>2</VV_Vivicream>
@@ -120,6 +122,8 @@
       <relatedBuildCommands>
         <li>VV_ViviCreamWall</li>
       </relatedBuildCommands>
+      <isAirtight>true</isAirtight>
+      <isStuffableAirtight>false</isStuffableAirtight>
     </building>
     <costList>
       <VV_Viviwax>2</VV_Viviwax>
@@ -167,6 +171,8 @@
       <relatedBuildCommands>
         <li>VV_ViviCreamWall</li>
       </relatedBuildCommands>
+      <isAirtight>true</isAirtight>
+      <isStuffableAirtight>false</isStuffableAirtight>
     </building>
     <costList>
       <VV_Viviwax>2</VV_Viviwax>
