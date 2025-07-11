@@ -107,7 +107,7 @@ namespace VVRace
 
             steam.range = VerbProps.range;
             steam.propagationSpeed = 20;
-            steam.affectCells = GetArcShapedCells(caster.Position, _targetCell, verbProps.range).ToList();
+            steam.affectCells = GetArcShapedCells(caster.Map, caster.Position, _targetCell, verbProps.range).ToList();
 
             compMana.Stored -= manaPerShoot;
             return true;
@@ -141,30 +141,36 @@ namespace VVRace
         {
             verbProps.DrawRadiusRing(caster.Position, this);
 
-            var lastLOSCell = CellUtility.FindLOSLastCell(
-                caster.Map,
-                caster.Position, 
-                caster.Position + ((target.Cell - caster.Position).ToVector3().normalized * verbProps.range).ToIntVec3(),
-                verbProps.range);
-
-            var cells = GetArcShapedCells(caster.Position, lastLOSCell, verbProps.range);
-            _tmpHighlightColoredCells.Clear();
-            _tmpHighlightCells.Clear();
-
-            foreach (var cell in cells)
+            if (target.IsValid)
             {
-                if (cell.DistanceTo(caster.Position) <= VerbProps.breathFriendlyFireSafeDistance)
-                {
-                    _tmpHighlightColoredCells.Add(cell);
-                }
-                else
-                {
-                    _tmpHighlightCells.Add(cell);
-                }
-            }
+                var lastLOSCell = CellUtility.FindLOSLastCell(
+                    caster.Map,
+                    caster.Position,
+                    caster.Position + ((target.Cell - caster.Position).ToVector3().normalized * verbProps.range).ToIntVec3(),
+                    verbProps.range);
 
-            GenDraw.DrawFieldEdges(_tmpHighlightColoredCells, Color.green);
-            GenDraw.DrawFieldEdges(_tmpHighlightCells);
+                var cells = GetArcShapedCells(caster.Map, caster.Position, lastLOSCell, verbProps.range);
+                _tmpHighlightColoredCells.Clear();
+                _tmpHighlightCells.Clear();
+
+                foreach (var cell in cells)
+                {
+                    if (GenSight.LineOfSight(caster.Position, cell, caster.Map))
+                    {
+                        if (cell.DistanceTo(caster.Position) <= VerbProps.breathFriendlyFireSafeDistance)
+                        {
+                            _tmpHighlightColoredCells.Add(cell);
+                        }
+                        else
+                        {
+                            _tmpHighlightCells.Add(cell);
+                        }
+                    }
+                }
+
+                GenDraw.DrawFieldEdges(_tmpHighlightColoredCells, Color.green);
+                GenDraw.DrawFieldEdges(_tmpHighlightCells);
+            }
         }
 
         private void MakeAirPuff(Vector3 loc, Map map, float throwAngle)
@@ -184,26 +190,18 @@ namespace VVRace
             }
         }
 
-        private IEnumerable<IntVec3> GetArcShapedCells(IntVec3 center, IntVec3 target, float radius)
+        private IEnumerable<IntVec3> GetArcShapedCells(Map map, IntVec3 center, IntVec3 target, float radius)
         {
             var vector = (target - center).ToVector3();
             return GenRadial.RadialCellsAround(center, radius, false)
                 .Where(c =>
                 {
                     var l = c.ToVector3() - center.ToVector3();
-                    if (Vector3.Angle(l, vector) < VerbProps.breathAngleHalf) { return true; }
-
-                    var lt = c.ToVector3() + new Vector3(-0.5f, 0f, -0.5f) - center.ToVector3();
-                    if (Vector3.Angle(lt, vector) < VerbProps.breathAngleHalf) { return true; }
-
-                    var lb = c.ToVector3() + new Vector3(-0.5f, 0f, 0.5f) - center.ToVector3();
-                    if (Vector3.Angle(lb, vector) < VerbProps.breathAngleHalf) { return true; }
-
-                    var rt = c.ToVector3() + new Vector3(0.5f, 0f, -0.5f) - center.ToVector3();
-                    if (Vector3.Angle(rt, vector) < VerbProps.breathAngleHalf) { return true; }
-
-                    var rb = c.ToVector3() + new Vector3(0.5f, 0f, 0.5f) - center.ToVector3();
-                    if (Vector3.Angle(rb, vector) < VerbProps.breathAngleHalf) { return true; }
+                    if (Vector3.Angle(l, vector) < VerbProps.breathAngleHalf) { return GenSight.LineOfSight(center, c, map, true); }
+                    if (Vector3.Angle(c.ToVector3() + new Vector3(-0.5f, 0f, -0.5f) - center.ToVector3(), vector) < VerbProps.breathAngleHalf) { return GenSight.LineOfSight(center, c, map, true); }
+                    if (Vector3.Angle(c.ToVector3() + new Vector3(-0.5f, 0f, 0.5f) - center.ToVector3(), vector) < VerbProps.breathAngleHalf) { return GenSight.LineOfSight(center, c, map, true); }
+                    if (Vector3.Angle(c.ToVector3() + new Vector3(0.5f, 0f, -0.5f) - center.ToVector3(), vector) < VerbProps.breathAngleHalf) { return GenSight.LineOfSight(center, c, map, true); }
+                    if (Vector3.Angle(c.ToVector3() + new Vector3(0.5f, 0f, 0.5f) - center.ToVector3(), vector) < VerbProps.breathAngleHalf) { return GenSight.LineOfSight(center, c, map, true); }
 
                     return false;
                 });
