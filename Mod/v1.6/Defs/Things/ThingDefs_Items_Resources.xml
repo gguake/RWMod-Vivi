@@ -155,8 +155,6 @@
       <ThingDef>VV_LivingLeaf</ThingDef>
       <ThingDef>VV_HeatingPetal</ThingDef>
       <ThingDef>VV_CoolingPetal</ThingDef>
-      <ThingDef>VV_SparklingPetal</ThingDef>
-      <ThingDef>VV_PerfumingPetal</ThingDef>
     </descriptionHyperlinks>
 
     <graphicData>

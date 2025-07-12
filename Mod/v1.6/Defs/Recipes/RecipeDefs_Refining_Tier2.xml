@@ -77,7 +77,6 @@
           <thingDefs>
             <li>VV_HeatingPetal</li>
             <li>VV_CoolingPetal</li>
-            <li>VV_SparklingPetal</li>
           </thingDefs>
         </filter>
         <count>20</count>
@@ -87,7 +86,6 @@
       <thingDefs>
         <li>VV_HeatingPetal</li>
         <li>VV_CoolingPetal</li>
-        <li>VV_SparklingPetal</li>
       </thingDefs>
     </fixedIngredientFilter>
     <products>
