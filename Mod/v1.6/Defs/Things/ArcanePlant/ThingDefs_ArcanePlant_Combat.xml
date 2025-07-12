@@ -36,7 +36,7 @@
           <mana>30</mana>
         </manaConsumeRule>
 
-        <manaAbsorbPerDay>900</manaAbsorbPerDay>
+        <manaAbsorbPerDay>600</manaAbsorbPerDay>
       </li>
     </comps>
 
@@ -234,7 +234,7 @@
           <mana>30</mana>
         </manaConsumeRule>
 
-        <manaAbsorbPerDay>1500</manaAbsorbPerDay>
+        <manaAbsorbPerDay>1200</manaAbsorbPerDay>
       </li>
     </comps>
 
