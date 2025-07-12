@@ -31,15 +31,15 @@
 
     <comps>
       <li Class="VVRace.CompProperties_Mana">
-        <manaCapacity>300</manaCapacity>
+        <manaCapacity>400</manaCapacity>
         <manaGenerateRule Class="VVRace.ManaFluxRule_Temperature">
           <activeTemperatureRange>0~200</activeTemperatureRange>
           <manaFromTemperatureRange>0~2000</manaFromTemperatureRange>
         </manaGenerateRule>
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>300</mana>
+          <mana>350</mana>
         </manaConsumeRule>
-        <manaAbsorbPerDay>300</manaAbsorbPerDay>
+        <manaAbsorbPerDay>350</manaAbsorbPerDay>
       </li>
 
       <li Class="VVRace.CompProperties_ArcanePlantBulletOverride">
@@ -112,7 +112,7 @@
 
     <comps>
       <li Class="VVRace.CompProperties_Mana">
-        <manaCapacity>300</manaCapacity>
+        <manaCapacity>400</manaCapacity>
         <manaGenerateRule Class="VVRace.ManaFluxRule_CompositeSum">
           <rules>
             <li Class="VVRace.ManaFluxRule_Temperature">
@@ -122,14 +122,14 @@
             </li>
             <li Class="VVRace.ManaFluxRule_WeatherSnowy">
               <disableIfRoofed>true</disableIfRoofed>
-              <mana>600</mana>
+              <mana>500</mana>
             </li>
           </rules>
         </manaGenerateRule>
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>300</mana>
+          <mana>350</mana>
         </manaConsumeRule>
-        <manaAbsorbPerDay>300</manaAbsorbPerDay>
+        <manaAbsorbPerDay>350</manaAbsorbPerDay>
       </li>
 
       <li Class="VVRace.CompProperties_ArcanePlantBulletOverride">

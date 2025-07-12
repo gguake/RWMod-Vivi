@@ -48,11 +48,11 @@
         <manaGenerateRule Class="VVRace.ManaFluxRule_CompositeSum">
           <rules>
             <li Class="VVRace.ManaFluxRule_AdjacentWater">
-              <manaFromOccupiedWater>400</manaFromOccupiedWater>
+              <manaFromOccupiedWater>300</manaFromOccupiedWater>
               <manaPerAdjacentWater>50</manaPerAdjacentWater>
             </li>
             <li Class="VVRace.ManaFluxRule_WeatherRainy">
-              <mana>400</mana>
+              <mana>350</mana>
             </li>
           </rules>
         </manaGenerateRule>
@@ -60,7 +60,7 @@
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
           <mana>50</mana>
         </manaConsumeRule>
-        <manaAbsorbPerDay>350</manaAbsorbPerDay>
+        <manaAbsorbPerDay>450</manaAbsorbPerDay>
       </li>
 
       <li Class="VVRace.CompProperties_RepeatGatherable" />
@@ -134,20 +134,20 @@
     <comps>
       <li Class="VVRace.CompProperties_Mana">
         <manaGenerateRule Class="VVRace.ManaFluxRule_Sunlight">
-          <manaFromSunlightRange>0~1550</manaFromSunlightRange>
+          <manaFromSunlightRange>0~1300</manaFromSunlightRange>
         </manaGenerateRule>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_CompositeSum">
           <rules>
             <li Class="VVRace.ManaFluxRule_GlowerActive">
-              <mana>1450</mana>
+              <mana>1200</mana>
             </li>
             <li Class="VVRace.ManaFluxRule_Constant">
               <mana>50</mana>
             </li>
           </rules>
         </manaConsumeRule>
-        <manaAbsorbPerDay>1500</manaAbsorbPerDay>
+        <manaAbsorbPerDay>1250</manaAbsorbPerDay>
       </li>
 
       <li Class="VVRace.CompProperties_RepeatGatherable" />
@@ -215,9 +215,9 @@
             <points>
               <li>(0,0)</li>
               <li>(0.5,0)</li>
-              <li>(1.0,300)</li>
-              <li>(1.3,600)</li>
-              <li>(1.4,1000)</li>
+              <li>(1.0,200)</li>
+              <li>(1.3,500)</li>
+              <li>(1.4,850)</li>
             </points>
           </manaFromFertility>
         </manaGenerateRule>
@@ -307,15 +307,15 @@
 
     <comps>
       <li Class="VVRace.CompProperties_Mana">
-        <manaCapacity>600</manaCapacity>
+        <manaCapacity>750</manaCapacity>
 
         <manaGenerateRule Class="VVRace.ManaFluxRule_Refuelable">
-          <mana>600</mana>
+          <mana>550</mana>
           <fuelDef>Wastepack</fuelDef>
         </manaGenerateRule>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>150</mana>
+          <mana>100</mana>
         </manaConsumeRule>
         <manaAbsorbPerDay>300</manaAbsorbPerDay>
       </li>
@@ -406,10 +406,10 @@
 
     <comps>
       <li Class="VVRace.CompProperties_Mana">
-        <manaCapacity>500</manaCapacity>
+        <manaCapacity>400</manaCapacity>
 
         <manaGenerateRule Class="VVRace.ManaFluxRule_TimeOfDay">
-          <mana>800</mana>
+          <mana>600</mana>
           <timeOfDay>Night</timeOfDay>
         </manaGenerateRule>
         
@@ -417,7 +417,7 @@
           <mana>100</mana>
           <timeOfDay>Day</timeOfDay>
         </manaConsumeRule>
-        <manaAbsorbPerDay>250</manaAbsorbPerDay>
+        <manaAbsorbPerDay>200</manaAbsorbPerDay>
       </li>
 
       <li Class="VVRace.CompProperties_RepeatGatherable" />

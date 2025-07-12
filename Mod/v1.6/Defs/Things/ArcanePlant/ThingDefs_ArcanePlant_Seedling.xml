@@ -28,10 +28,10 @@
     <comps>
       <li Class="VVRace.CompProperties_Mana">
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>60</mana>
+          <mana>70</mana>
         </manaConsumeRule>
 
-        <manaAbsorbPerDay>60</manaAbsorbPerDay>
+        <manaAbsorbPerDay>70</manaAbsorbPerDay>
       </li>
       
       <li Class="CompProperties_Refuelable">

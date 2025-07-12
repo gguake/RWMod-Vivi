@@ -31,12 +31,12 @@
 
     <comps>
       <li Class="VVRace.CompProperties_Mana">
-        <manaCapacity>1000</manaCapacity>
+        <manaCapacity>900</manaCapacity>
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
           <mana>30</mana>
         </manaConsumeRule>
 
-        <manaAbsorbPerDay>1000</manaAbsorbPerDay>
+        <manaAbsorbPerDay>900</manaAbsorbPerDay>
       </li>
     </comps>
 
@@ -89,7 +89,7 @@
     <statBases>
       <AccuracyTouch>0.9</AccuracyTouch>
       <AccuracyShort>0.82</AccuracyShort>
-      <AccuracyMedium>0.4</AccuracyMedium>
+      <AccuracyMedium>0.44</AccuracyMedium>
       <AccuracyLong>0.24</AccuracyLong>
       <RangedWeapon_Cooldown>1.8</RangedWeapon_Cooldown>
       <DeteriorationRate>0</DeteriorationRate>
@@ -229,7 +229,7 @@
 
     <comps>
       <li Class="VVRace.CompProperties_Mana">
-        <manaCapacity>900</manaCapacity>
+        <manaCapacity>800</manaCapacity>
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
           <mana>30</mana>
         </manaConsumeRule>
@@ -289,7 +289,7 @@
       <AccuracyShort>0.34</AccuracyShort>
       <AccuracyMedium>0.55</AccuracyMedium>
       <AccuracyLong>0.45</AccuracyLong>
-      <RangedWeapon_Cooldown>6.9</RangedWeapon_Cooldown>
+      <RangedWeapon_Cooldown>5.9</RangedWeapon_Cooldown>
       <DeteriorationRate>0</DeteriorationRate>
       <Mass>40</Mass>
       <Flammability>0</Flammability>

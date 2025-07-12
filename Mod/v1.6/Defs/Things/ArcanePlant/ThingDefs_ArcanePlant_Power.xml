@@ -37,7 +37,7 @@
         <manaConsumeRule Class="VVRace.ManaFluxRule_BatteryStored">
           <manaFromStoredEnergy>0~800</manaFromStoredEnergy>
         </manaConsumeRule>
-        <manaAbsorbPerDay>1200</manaAbsorbPerDay>
+        <manaAbsorbPerDay>1400</manaAbsorbPerDay>
       </li>
 
       <li Class="VVRace.CompProperties_ArcanePlantBulletOverride">
