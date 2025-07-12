@@ -53,7 +53,7 @@
     <defName>VV_Petal</defName>
     <label>petals</label>
     <parent>VV_ViviResource</parent>
-    <iconPath>UI/Icons/ThingCategories/VV_ViviProduct</iconPath>
+    <iconPath>UI/Icons/ThingCategories/VV_Petal</iconPath>
   </ThingCategoryDef>
   
   <ThingCategoryDef>
