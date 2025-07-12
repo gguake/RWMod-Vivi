@@ -184,49 +184,44 @@ namespace VVRace
 
         public override void PreApplyDamage(ref DamageInfo dinfo, out bool absorbed)
         {
-            if (dinfo.Def != DamageDefOf.Flame)
+            if (!Spawned)
             {
-                if (Spawned)
+                absorbed = true;
+                if (ParentHolder != null && ParentHolder is MinifiedArcanePlant minified)
+                {
+                    minified.TakeDamage(dinfo);
+                    return;
+                }
+            }
+            else
+            {
+                if (dinfo.Def != DamageDefOf.Flame)
                 {
                     var pot = _mapComponent?.GetArcanePlantPot(Position);
                     if (pot != null)
                     {
                         var damageResult = pot.TakeDamage(dinfo);
-                        if (pot.HitPoints == 0 || pot.Destroyed)
-                        {
-                            var afterDamage = dinfo.Amount - damageResult.totalDamageDealt;
-                            if (afterDamage <= 0)
-                            {
-                                absorbed = true;
-                                return;
-                            }
-
-                            dinfo.SetAmount(afterDamage);
-                        }
-                        else
-                        {
-                            absorbed = true;
-                            return;
-                        }
+                        absorbed = true;
+                        return;
                     }
                 }
-            }
 
-            base.PreApplyDamage(ref dinfo, out absorbed);
+                base.PreApplyDamage(ref dinfo, out absorbed);
 
-            var damage = dinfo.Amount;
-            if (dinfo.Def.Worker is DamageWorker_Blunt || dinfo.Def.isExplosive)
-            {
-                damage *= 0.8f;
-            }
+                var damage = dinfo.Amount;
+                if (dinfo.Def.Worker is DamageWorker_Blunt || dinfo.Def.isExplosive)
+                {
+                    damage *= 0.8f;
+                }
 
-            if (damage < 1f)
-            {
-                absorbed = true;
-            }
-            else
-            {
-                dinfo.SetAmount(damage);
+                if (damage < 1f && Rand.Chance(1f - Mathf.Clamp01(damage)))
+                {
+                    absorbed = true;
+                }
+                else
+                {
+                    dinfo.SetAmount(Mathf.Min(1, damage));
+                }
             }
         }
 

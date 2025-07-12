@@ -24,9 +24,8 @@ namespace VVRace
             foreach (var cell in this.OccupiedRect().Cells)
             {
                 var thingList = cell.GetThingList(Map);
-
-                var plants = thingList.OfType<ArcanePlant>().ToList();
-                foreach (var plant in plants)
+                var plant = cell.GetFirstThing<ArcanePlant>(Map);
+                if (!plant.DestroyedOrNull())
                 {
                     if (plant.def.Minifiable)
                     {
