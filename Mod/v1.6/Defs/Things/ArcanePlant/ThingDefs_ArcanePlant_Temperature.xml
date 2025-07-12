@@ -60,7 +60,7 @@
 
       <li Class="CompProperties_HeatPusher">
         <compClass>VVRace.CompManaHeatPusher</compClass>
-        <heatPerSecond>14</heatPerSecond>
+        <heatPerSecond>19</heatPerSecond>
         <heatPushMaxTemperature>29</heatPushMaxTemperature>
       </li>
     </comps>
@@ -145,7 +145,7 @@
 
       <li Class="CompProperties_HeatPusher">
         <compClass>VVRace.CompManaHeatPusher</compClass>
-        <heatPerSecond>-8</heatPerSecond>
+        <heatPerSecond>-9</heatPerSecond>
         <heatPushMinTemperature>-15</heatPushMinTemperature>
       </li>
     </comps>
