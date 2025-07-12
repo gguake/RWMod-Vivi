@@ -29,7 +29,7 @@ namespace VVRace
 
         private static bool Pawn_FlightTracker_Notify_JobStarted_Prefix(Job job, Pawn ___pawn)
         {
-            if (___pawn.RaceProps.Humanlike && job?.def == null) { return false; }
+            if (job?.def == null) { return false; }
             return true;
         }
     }

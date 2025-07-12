@@ -51,9 +51,9 @@ namespace VVRace
             var r = (math.csum(v1) + math.csum(v2) * 2f + manaGrid[i] * 4f) / 16f;
             outputGrid[i] = r > 0.01f ? r > 1000f ? 1000f : r : 0f;
 
-            if (checkFlowerCells && r >= 150f)
+            if (checkFlowerCells && r >= 50f)
             {
-                flowerCellQueue.Enqueue(i, -math.clamp(r, 150f, 750f));
+                flowerCellQueue.Enqueue(i, -math.clamp(r, 50f, 500f));
             }
         }
     }

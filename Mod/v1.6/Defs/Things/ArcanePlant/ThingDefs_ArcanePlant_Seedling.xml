@@ -37,8 +37,8 @@
       <li Class="CompProperties_Refuelable">
         <fuelLabel>Nutrition</fuelLabel>
         <fuelGizmoLabel>Nutrition</fuelGizmoLabel>
-        <fuelConsumptionRate>12</fuelConsumptionRate>
-        <fuelCapacity>22</fuelCapacity>
+        <fuelConsumptionRate>11</fuelConsumptionRate>
+        <fuelCapacity>20</fuelCapacity>
         <initialFuelPercent>1</initialFuelPercent>
         <fuelMultiplier>1</fuelMultiplier>
         <fuelFilter>
