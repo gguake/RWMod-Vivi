@@ -20,8 +20,7 @@
 \n콩뿌리개와 인접한 위치에 설치하면 콩뿌리개가 사격시 25%로 전기콩을 대신 발사합니다. 전기콩은 물리적인 피해를 입히지 못하지만 대상을 잠깐 기절시킵니다.\n인접한 섬광꽃이나 벼락꽃이 여러개 있다면 효과가 중첩됩니다.</VV_Thunderpetals.description>
 
 <VV_Waterdrops.label>물방울꽃</VV_Waterdrops.label>
-<VV_Waterdrops.description>물방울같은 모양을 가진 마법 꽃으로 주변의 물을 흡수해 마나로 변환합니다. 물 위에도 심을 수 있으며 인접한 물 타일이 많을수록 더 많은 마나를 생산합니다. 가까운 화재를 감지하면 저장된 마나를 물로 변환하고 분출해 화재를 진압합니다.
-\n마법 식물 재배 작업대와 같은 방에 배치하면 재배중인 마법 식물의 마나 소모량을 줄여줍니다.</VV_Waterdrops.description>
+<VV_Waterdrops.description>물방울같은 모양을 가진 마법 꽃으로 주변의 물을 흡수해 마나로 변환합니다. 물 위에도 심을 수 있으며 인접한 물 타일이 많을수록 더 많은 마나를 생산합니다. 가까운 화재를 감지하면 저장된 마나를 물로 변환하고 분출해 화재를 진압합니다.</VV_Waterdrops.description>
 
 <VV_Radiantflower.label>빛바라기</VV_Radiantflower.label>
 <VV_Radiantflower.description>해바라기를 닮은 마법 꽃으로 태양광을 마나로 변환합니다. 지붕으로 막혀 태양광을 받을 수 없는 환경에서는 마나를 소모해 작물이 자랄수 있는 강한 빛을 주변에 발산합니다.</VV_Radiantflower.description>

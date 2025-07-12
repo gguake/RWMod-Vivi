@@ -4,8 +4,7 @@
   <ThingDef ParentName="VV_ArcanePlantProductive">
     <defName>VV_Waterdrops</defName>
     <label>waterdrops</label>
-    <description>a arcane flower shaped like a water droplet that absorbs surrounding water and converts it into mana. It can also be planted on water, and the more adjacent water tiles there are, the more mana it produces. When it detects a nearby fire, it converts stored mana into water and ejects it to extinguish the fire.
-\nWhen placed in the same room as a arcane plant farm, it reduces the mana consumption of the magical plants being cultivated.</description>
+    <description>a arcane flower shaped like a water droplet that absorbs surrounding water and converts it into mana. It can also be planted on water, and the more adjacent water tiles there are, the more mana it produces. When it detects a nearby fire, it converts stored mana into water and ejects it to extinguish the fire.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_CoolingPetal</ThingDef>
     </descriptionHyperlinks>

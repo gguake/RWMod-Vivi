@@ -26,4 +26,7 @@
 
   <VV_ArcanePlant.label>마법 식물</VV_ArcanePlant.label>
   <VV_ArcanePlant.description>마법 식물</VV_ArcanePlant.description>
+
+  <VV_ArcaneWeapon.label>마법 무기</VV_ArcaneWeapon.label>
+  <VV_ArcaneWeapon.description>마법 무기</VV_ArcaneWeapon.description>
 </LanguageData>
