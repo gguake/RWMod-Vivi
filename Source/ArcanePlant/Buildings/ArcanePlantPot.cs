@@ -21,30 +21,34 @@ namespace VVRace
             _arcanePlantMapComp?.Notify_ArcanePlantPotDespawned(this);
             _arcanePlantMapComp = null;
 
-            foreach (var cell in this.OccupiedRect().Cells)
+            if (mode != DestroyMode.WillReplace)
             {
-                var thingList = cell.GetThingList(Map);
-                var plant = cell.GetFirstThing<ArcanePlant>(Map);
-                if (!plant.DestroyedOrNull())
+                foreach (var cell in this.OccupiedRect().Cells)
                 {
-                    if (plant.def.Minifiable)
+                    var thingList = cell.GetThingList(Map);
+                    var plant = cell.GetFirstThing<ArcanePlant>(Map);
+                    if (!plant.DestroyedOrNull())
                     {
-                        plant.MinifyAndDropDirect();
+                        if (plant.def.Minifiable)
+                        {
+                            plant.MinifyAndDropDirect();
+                        }
+                        else
+                        {
+                            plant.Destroy();
+                        }
                     }
-                    else
+
+                    var blueprints = thingList.OfType<Blueprint>().ToList();
+                    foreach (var blueprint in blueprints)
                     {
-                        plant.Destroy();
+                        if (blueprint.def.entityDefToBuild is ThingDef thingDef && typeof(ArcanePlant).IsAssignableFrom(thingDef.thingClass))
+                        {
+                            blueprint.DeSpawn();
+                        }
                     }
                 }
 
-                var blueprints = thingList.OfType<Blueprint>().ToList();
-                foreach (var blueprint in blueprints)
-                {
-                    if (blueprint.def.entityDefToBuild is ThingDef thingDef && typeof(ArcanePlant).IsAssignableFrom(thingDef.thingClass))
-                    {
-                        blueprint.DeSpawn();
-                    }
-                }
             }
 
             base.DeSpawn(mode);

@@ -33,11 +33,11 @@
 
     <comps>
       <li Class="VVRace.CompProperties_Mana">
-        <manaCapacity>1200</manaCapacity>
+        <manaCapacity>1000</manaCapacity>
         <manaConsumeRule Class="VVRace.ManaFluxRule_BatteryStored">
-          <manaFromStoredEnergy>0~800</manaFromStoredEnergy>
+          <manaFromStoredEnergy>0~500</manaFromStoredEnergy>
         </manaConsumeRule>
-        <manaAbsorbPerDay>1200</manaAbsorbPerDay>
+        <manaAbsorbPerDay>1000</manaAbsorbPerDay>
       </li>
 
       <li Class="VVRace.CompProperties_ArcanePlantBulletOverride">
@@ -123,17 +123,17 @@
 
     <comps>
       <li Class="VVRace.CompProperties_Mana">
-        <manaCapacity>800</manaCapacity>
+        <manaCapacity>400</manaCapacity>
         <manaGenerateRule Class="VVRace.ManaFluxRule_Power">
-          <powerManaRatio>0.8</powerManaRatio>
+          <powerManaRatio>0.5</powerManaRatio>
           <min>0</min>
-          <max>1150</max>
+          <max>700</max>
         </manaGenerateRule>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>1200</mana>
+          <mana>800</mana>
         </manaConsumeRule>
-        <manaAbsorbPerDay>1600</manaAbsorbPerDay>
+        <manaAbsorbPerDay>1100</manaAbsorbPerDay>
       </li>
 
       <li Class="VVRace.CompProperties_ArcanePlantBulletOverride">
@@ -149,7 +149,7 @@
 
       <li Class="CompProperties_Power">
         <compClass>VVRace.CompManaPowerPlant</compClass>
-        <basePowerConsumption>-750</basePowerConsumption>
+        <basePowerConsumption>-650</basePowerConsumption>
         <transmitsPower>true</transmitsPower>
       </li>
       <li Class="VVRace.CompProperties_ManaLightningLod">

@@ -142,6 +142,7 @@ namespace VVRace
 
             _bulletReplacers.Clear();
             _bulletModifiers.Clear();
+            _hasAnyBulletOverrides = false;
         }
 
         public override void DrawExtraSelectionOverlays()

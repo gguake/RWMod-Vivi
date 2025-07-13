@@ -58,16 +58,19 @@ namespace VVRace
 
             if (!PowerTraderComp.Off && RefuelableComp.HasFuel)
             {
-                var rawHoneyAmount = Mathf.Clamp(GenTicks.TickLongInterval * DailyExtractRawHoneyAmount / 60000f, 0f, RefuelableComp.Fuel);
+                var rawHoneyAmount = (int)Mathf.Clamp(GenTicks.TickLongInterval * DailyExtractRawHoneyAmount / 60000f, 0f, RefuelableComp.Fuel);
                 RefuelableComp.ConsumeFuel(rawHoneyAmount);
 
                 var filtered = (int)Mathf.Clamp(rawHoneyAmount * FilterEfficiencyRatio, 0, VVThingDefOf.VV_FilteredHoney.stackLimit);
-                var honey = ThingMaker.MakeThing(VVThingDefOf.VV_FilteredHoney);
-                honey.stackCount = filtered;
-
-                if (!GenPlace.TryPlaceThing(honey, InteractionCell, Map, ThingPlaceMode.Direct))
+                if (filtered > 0)
                 {
-                    honey.Destroy();
+                    var honey = ThingMaker.MakeThing(VVThingDefOf.VV_FilteredHoney);
+                    honey.stackCount = filtered;
+
+                    if (!GenPlace.TryPlaceThing(honey, InteractionCell, Map, ThingPlaceMode.Direct))
+                    {
+                        honey.Destroy();
+                    }
                 }
             }
         }
