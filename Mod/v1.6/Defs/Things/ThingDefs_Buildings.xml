@@ -293,9 +293,6 @@
     <defName>VV_AutoExtractor</defName>
     <label>automatic honey extractor</label>
     <description>a machine that uses electricity and centrifugal force to refine large quantities of raw vivi honey. Load the honey, and it runs automatically, periodically outputting pure vivi honey—processing far more than manual labor can.</description>
-    <descriptionHyperlinks>
-      <ThingDef>VV_SparklingPetal</ThingDef>
-    </descriptionHyperlinks>
 
     <thingClass>VVRace.Building_AutoHoneyExtractor</thingClass>
     <tickerType>Long</tickerType>

@@ -19,7 +19,7 @@
             <value>
               <li Class="VVRace.CompProperties_Mana">
                 <manaGenerateRule Class="VVRace.ManaFluxRule_PlantGrowth">
-                    <manaFromGrowth>0~900</manaFromGrowth>
+                    <manaFromGrowth>0~80</manaFromGrowth>
                 </manaGenerateRule>
               </li>
             </value>
