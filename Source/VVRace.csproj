@@ -151,6 +151,7 @@
     <Compile Include="ArcanePlant\Mana\FluxRule\ManaFluxRule_Sunlight.cs" />
     <Compile Include="ArcanePlant\Mana\FluxRule\ManaFluxRule_Temperature.cs" />
     <Compile Include="Egg\Comps\CompViviEggLayer.cs" />
+    <Compile Include="Gather\Things\Building_AutoExtractor.cs" />
     <Compile Include="GlideAbility\CompAbilityEffect_FoodCost.cs" />
     <Compile Include="GlideAbility\CompAbility_RequiresBodyPart.cs" />
     <Compile Include="HarmonyPatches\Internals\VanilaBugFixPatch.cs" />

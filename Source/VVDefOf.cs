@@ -64,6 +64,7 @@ namespace VVRace
         public static ThingDef VV_ViviHatchery;
 
         public static ThingDef VV_RawHoney;
+        public static ThingDef VV_FilteredHoney;
 
         public static ThingDef VV_FilthPollen;
 
@@ -143,6 +144,7 @@ namespace VVRace
         public static RecipeDef VV_GatherPropolis;
 
         public static RecipeDef VV_MakeVivicream;
+        public static RecipeDef VV_FilteringHoney;
     }
 
     [DefOf]

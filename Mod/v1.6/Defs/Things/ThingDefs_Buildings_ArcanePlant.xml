@@ -76,91 +76,6 @@
     </researchPrerequisites>
   </ThingDef>
 
-  <!-- 마나 방출기 -->
-  <ThingDef ParentName="BuildingBase">
-    <defName>VV_ManaEmitter</defName>
-    <label>mana emitter</label>
-    <description>A device that extracts inactive mana contained in arcane fertilizer and converts it into environment mana. When arcane fertilizer is inserted, it slowly transforms it into environment mana and disperses it for use nearby.
-\nIts conversion efficiency is low, but it's useful when mana production is insufficient or in need of an emergency supply, making it an essential device used by the Vivi when establishing a hive.</description>
-
-    <thingClass>VVRace.ManaEmitter</thingClass>
-    <tickerType>Normal</tickerType>
-
-    <graphicData>
-      <texPath>Things/Building/VV_ManaEmitter</texPath>
-      <graphicClass>Graphic_Random</graphicClass>
-      <shaderType>Transparent</shaderType>
-      <drawSize>(2.0,2.0)</drawSize>
-      <drawRotated>false</drawRotated>
-      <damageData>
-        <rect>(0.05,0.1,0.9,0.9)</rect>
-      </damageData>
-      <shadowData>
-        <volume>(0.75, 0.35, 0.33)</volume>
-      </shadowData>
-    </graphicData>
-
-    <uiOrder>2402</uiOrder>
-    <altitudeLayer>Building</altitudeLayer>
-    <passability>PassThroughOnly</passability>
-    <useHitPoints>True</useHitPoints>
-    <fillPercent>0.4</fillPercent>
-    <pathCost>50</pathCost>
-    <statBases>
-      <Mass>20</Mass>
-      <WorkToBuild>4500</WorkToBuild>
-      <MaxHitPoints>100</MaxHitPoints>
-      <Flammability>0.5</Flammability>
-    </statBases>
-    <size>(1,1)</size>
-    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
-
-    <thingCategories>
-      <li>VV_BuildingsVivi</li>
-    </thingCategories>
-    <minifiedDef>MinifiedThing</minifiedDef>
-
-    <designationCategory>VV_Bulidings</designationCategory>
-    <designationHotKey>Misc7</designationHotKey>
-    <canOverlapZones>false</canOverlapZones>
-    
-    <costList>
-      <VV_Viviwax>50</VV_Viviwax>
-      <WoodLog>30</WoodLog>
-      <VV_Fertilizer>40</VV_Fertilizer>
-    </costList>
-
-    <comps>
-      <li Class="VVRace.CompProperties_Mana">
-        <manaGenerateRule Class="VVRace.ManaFluxRule_Refuelable">
-          <mana>400</mana>
-          <fuelDef>VV_Fertilizer</fuelDef>
-        </manaGenerateRule>
-      </li>
-
-      <li Class="CompProperties_Refuelable">
-        <fuelLabel>Arcane Fertilizer</fuelLabel>
-        <fuelGizmoLabel>Arcane Fertilizer</fuelGizmoLabel>
-        <fuelConsumptionRate>5</fuelConsumptionRate>
-        <fuelCapacity>40</fuelCapacity>
-        <initialFuelPercent>1</initialFuelPercent>
-        <fuelMultiplier>1</fuelMultiplier>
-        <fuelFilter>
-          <thingDefs>
-            <li>VV_Fertilizer</li>
-          </thingDefs>
-        </fuelFilter>
-        <showFuelGizmo>true</showFuelGizmo>
-        <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
-        <externalTicking>false</externalTicking>
-      </li>
-    </comps>
-
-    <researchPrerequisites>
-      <li>VV_ArcaneBotany</li>
-    </researchPrerequisites>
-  </ThingDef>
-
   <!-- 대형 마법 식물 화분 -->
   <ThingDef ParentName="BuildingBase">
     <defName>VV_LargeArcanePlantPot</defName>
@@ -187,7 +102,7 @@
       </damageData>
     </graphicData>
 
-    <uiOrder>2403</uiOrder>
+    <uiOrder>2402</uiOrder>
     <uiIconScale>1</uiIconScale>
     <altitudeLayer>LowPlant</altitudeLayer>
     <passability>Standable</passability>
@@ -243,6 +158,92 @@
     <designationCategory>VV_Bulidings</designationCategory>
     <designationHotKey>Misc8</designationHotKey>
     <canOverlapZones>false</canOverlapZones>
+
+    <researchPrerequisites>
+      <li>VV_ArcaneBotany</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+
+  <!-- 마나 방출기 -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>VV_ManaEmitter</defName>
+    <label>mana emitter</label>
+    <description>A device that extracts inactive mana contained in arcane fertilizer and converts it into environment mana. When arcane fertilizer is inserted, it slowly transforms it into environment mana and disperses it for use nearby.
+\nIts conversion efficiency is low, but it's useful when mana production is insufficient or in need of an emergency supply, making it an essential device used by the Vivi when establishing a hive.</description>
+
+    <thingClass>VVRace.ManaEmitter</thingClass>
+    <tickerType>Normal</tickerType>
+
+    <graphicData>
+      <texPath>Things/Building/VV_ManaEmitter</texPath>
+      <graphicClass>Graphic_Random</graphicClass>
+      <shaderType>Transparent</shaderType>
+      <drawSize>(2.0,2.0)</drawSize>
+      <drawRotated>false</drawRotated>
+      <damageData>
+        <rect>(0.05,0.1,0.9,0.9)</rect>
+      </damageData>
+      <shadowData>
+        <volume>(0.75, 0.35, 0.33)</volume>
+      </shadowData>
+    </graphicData>
+
+    <uiOrder>2403</uiOrder>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <useHitPoints>True</useHitPoints>
+    <fillPercent>0.4</fillPercent>
+    <pathCost>50</pathCost>
+    <statBases>
+      <Mass>20</Mass>
+      <WorkToBuild>4500</WorkToBuild>
+      <MaxHitPoints>100</MaxHitPoints>
+      <Flammability>0.5</Flammability>
+    </statBases>
+    <size>(1,1)</size>
+    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+
+    <thingCategories>
+      <li>VV_BuildingsVivi</li>
+    </thingCategories>
+    <minifiedDef>MinifiedThing</minifiedDef>
+
+    <designationCategory>VV_Bulidings</designationCategory>
+    <designationHotKey>Misc7</designationHotKey>
+    <canOverlapZones>false</canOverlapZones>
+    
+    <costList>
+      <VV_Viviwax>50</VV_Viviwax>
+      <WoodLog>30</WoodLog>
+      <VV_Fertilizer>40</VV_Fertilizer>
+    </costList>
+
+    <comps>
+      <li Class="VVRace.CompProperties_Mana">
+        <manaGenerateRule Class="VVRace.ManaFluxRule_Refuelable">
+          <mana>400</mana>
+          <fuelDef>VV_Fertilizer</fuelDef>
+        </manaGenerateRule>
+      </li>
+
+      <li Class="CompProperties_Refuelable">
+        <fuelLabel>Arcane Fertilizer</fuelLabel>
+        <fuelGizmoLabel>Arcane Fertilizer</fuelGizmoLabel>
+        <fuelConsumptionRate>5</fuelConsumptionRate>
+        <fuelCapacity>40</fuelCapacity>
+        <initialFuelPercent>1</initialFuelPercent>
+        <fuelMultiplier>1</fuelMultiplier>
+        <fuelFilter>
+          <thingDefs>
+            <li>VV_Fertilizer</li>
+          </thingDefs>
+        </fuelFilter>
+        <showFuelGizmo>true</showFuelGizmo>
+        <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+        <externalTicking>false</externalTicking>
+      </li>
+    </comps>
 
     <researchPrerequisites>
       <li>VV_ArcaneBotany</li>

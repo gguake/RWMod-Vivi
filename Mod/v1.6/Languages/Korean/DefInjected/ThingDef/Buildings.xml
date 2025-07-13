@@ -36,7 +36,9 @@
 \n화분에 있는 마법 식물이 공격을 받을 경우 화염 피해가 아니라면 화분이 우선 피해를 흡수하지만, 화분이 파괴되면 마법 식물이 자동으로 포장됩니다.</VV_ArcanePlantPot.description>
 
 <VV_AutoExtractor.label>자동 꿀 추출기</VV_AutoExtractor.label>
-<VV_AutoExtractor.description>원심력을 이용해 정제되지 않은 비비 꿀이나 프로폴리스에서 필요한 성분을 대량으로 추출하는 기계입니다. 손으로 작업하는것보다 훨씬 빠르고 대량으로 작업 가능하지만 전기가 필요합니다.</VV_AutoExtractor.description>
+<VV_AutoExtractor.description>전기와 원심력을 이용해 정제되지 않은 비비 꿀을 대량으로 정제하는 기계입니다. 꿀을 투입하면 기계가 동작해 주기적으로 정제된 비비 꿀을 배출하며 사람이 작업하는것보다 더 많은 꿀을 정제할 수 있습니다.</VV_AutoExtractor.description>
+<VV_AutoExtractor.comps.CompRefuelable.fuelLabel>정제되지 않은 비비 꿀</VV_AutoExtractor.comps.CompRefuelable.fuelLabel>
+<VV_AutoExtractor.comps.CompRefuelable.fuelGizmoLabel>비비 꿀</VV_AutoExtractor.comps.CompRefuelable.fuelGizmoLabel>
 
 <VV_ManaEmitter.label>마나 방출기</VV_ManaEmitter.label>
 <VV_ManaEmitter.description>마법 비료에 포함된 비활성 마나를 추출해 환경 마나로 변환하는 장치입니다. 마법 비료를 투입하면 이를 환경 마나로 천천히 변환해 주변에 퍼뜨려 활용할 수 있게 합니다.

@@ -10,11 +10,12 @@
     <defName>VV_AutomatedInfra</defName>
     <label>vivi automated infrastructures</label>
     <description>Automate some of the manual jobs previously done by the Vivis using electricity, increasing efficiency.</description>
-    <baseCost>1000</baseCost>
+    <baseCost>700</baseCost>
     <researchViewX>3</researchViewX>
     <researchViewY>0</researchViewY>
     <prerequisites>
       <li>Electricity</li>
+      <li>VV_AdvancedGathering</li>
     </prerequisites>
   </ResearchProjectDef>
   
@@ -34,8 +35,8 @@
   <ResearchProjectDef ParentName="ViviResearchProjectTier2Base">
     <defName>VV_ArcaneWeaponry</defName>
     <label>arcane weaponry</label>
-    <description>Make special weapons using materials from arcane plants. These arcane weapons absorb environment mana to charge and consume stored mana when used, but they possess powerful effects.
-\nIf the mana is depleted, the arcane weapons become unusable or weakened.</description>
+    <description>Craft arcane weapons using materials from arcane plants, using mana in specialized ways. These weapons are tricky to handle but exceptionally powerful.
+\nArcane weapons recharge by absorbing environment mana; once their mana is spent, they either weaken or cannot be used at all.</description>
     <baseCost>2400</baseCost>
     <researchViewX>3</researchViewX>
     <researchViewY>2.1</researchViewY>

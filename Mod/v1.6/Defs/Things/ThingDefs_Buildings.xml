@@ -289,15 +289,16 @@
   </ThingDef>
 
   <!-- 비비 자동 추출기 -->
-  <ThingDef ParentName="BenchBase">
+  <ThingDef ParentName="BuildingBase">
     <defName>VV_AutoExtractor</defName>
     <label>automatic honey extractor</label>
-    <description>a machine that uses centrifugal force to extract necessary ingredients in large quantities from unrefined Vivi honey or propolis. It is much faster and capable of handling larger quantities than manual work, but requires electricity.</description>
+    <description>a machine that uses electricity and centrifugal force to refine large quantities of raw vivi honey. Load the honey, and it runs automatically, periodically outputting pure vivi honey—processing far more than manual labor can.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_SparklingPetal</ThingDef>
     </descriptionHyperlinks>
 
-    <thingClass>Building_WorkTable</thingClass>
+    <thingClass>VVRace.Building_AutoHoneyExtractor</thingClass>
+    <tickerType>Long</tickerType>
     <graphicData>
       <texPath>Things/Building/VV_AutoExtractor</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
@@ -312,14 +313,13 @@
     </graphicData>
     
     <costList>
-      <ComponentIndustrial>3</ComponentIndustrial>
-      <VV_SparklingPetal>40</VV_SparklingPetal>
+      <ComponentIndustrial>4</ComponentIndustrial>
     </costList>
     <stuffCategories>
       <li>VV_Wax</li>
       <li>Metallic</li>
     </stuffCategories>
-    <costStuffCount>100</costStuffCount>
+    <costStuffCount>90</costStuffCount>
     
     <uiOrder>2301</uiOrder>
     <altitudeLayer>Building</altitudeLayer>
@@ -327,7 +327,7 @@
     <useHitPoints>True</useHitPoints>
     <statBases>
       <WorkToBuild>2400</WorkToBuild>
-      <MaxHitPoints>200</MaxHitPoints>
+      <MaxHitPoints>160</MaxHitPoints>
       <Flammability>1.0</Flammability>
       <Cleanliness>-3</Cleanliness>
     </statBases>
@@ -339,39 +339,42 @@
     <hasInteractionCell>True</hasInteractionCell>
     <interactionCellOffset>(0,0,-1)</interactionCellOffset>
     <surfaceType>Item</surfaceType>
-    <recipes>
-      <li>VV_ExtractBulkHoney</li>
-      <li>VV_ExtractBulkPropolis</li>
-      <li>VV_MakeFertilizerSeeds</li>
-    </recipes>
-    <inspectorTabs>
-      <li>ITab_Bills</li>
-    </inspectorTabs>
     <building>
-      <spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity>
     </building>
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>400</basePowerConsumption>
-        <shortCircuitInRain>true</shortCircuitInRain>
+        <basePowerConsumption>200</basePowerConsumption>
       </li>
       <li Class="CompProperties_Flickable"/>
       <li Class="CompProperties_Breakdownable"/>
-      <li Class="CompProperties_AffectedByFacilities">
-        <linkableFacilities>
-          <li>ToolCabinet</li>
-        </linkableFacilities>
+
+      <li Class="CompProperties_Refuelable">
+        <fuelLabel>Vivi Raw Honey</fuelLabel>
+        <fuelGizmoLabel>Raw Honey</fuelGizmoLabel>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <autoRefuelPercent>1</autoRefuelPercent>
+        <fuelCapacity>150</fuelCapacity>
+        <initialFuelPercent>0</initialFuelPercent>
+        <fuelMultiplier>1</fuelMultiplier>
+        <fuelFilter>
+          <thingDefs>
+            <li>VV_RawHoney</li>
+          </thingDefs>
+        </fuelFilter>
+        <showFuelGizmo>true</showFuelGizmo>
+        <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+        <targetFuelLevelConfigurable>true</targetFuelLevelConfigurable>
+        <externalTicking>false</externalTicking>
       </li>
     </comps>
     <placeWorkers>
-      <li>PlaceWorker_ShowFacilitiesConnections</li>
       <li>PlaceWorker_PreventInteractionSpotOverlap</li>
     </placeWorkers>
     <researchPrerequisites>
       <li>VV_AutomatedInfra</li>
     </researchPrerequisites>
-    <constructionSkillPrerequisite>7</constructionSkillPrerequisite>
+    <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
   </ThingDef>
 
 </Defs>
