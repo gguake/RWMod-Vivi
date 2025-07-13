@@ -232,6 +232,24 @@ namespace VVRace
             _lastDamagedTick = GenTicks.TicksGame;
         }
 
+        public override IEnumerable<Gizmo> GetGizmos()
+        {
+            var gizmos = base.GetGizmos();
+            if (gizmos != null)
+            {
+                foreach (var gizmo in gizmos)
+                {
+                    if (gizmo is Designator_Install)
+                    {
+                        yield return Designator_ReplantArcanePlant.GetCache(def);
+                        continue;
+                    }
+
+                    yield return gizmo;
+                }
+            }
+        }
+
         public void Notify_BuildingDeconstruct(ThingOwner<Thing> leavingThingOwner)
         {
             if (leavingThingOwner == null) { return; }

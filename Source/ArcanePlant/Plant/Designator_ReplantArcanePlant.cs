@@ -1,4 +1,5 @@
 ﻿using RimWorld;
+using System.Collections.Generic;
 using UnityEngine;
 using Verse;
 
@@ -6,6 +7,19 @@ namespace VVRace
 {
     public class Designator_ReplantArcanePlant : Designator_Install
     {
+        public static Designator_ReplantArcanePlant GetCache(ThingDef thingDef)
+        {
+            if (!_cache.TryGetValue(thingDef, out var designator))
+            {
+                designator = new Designator_ReplantArcanePlant();
+                designator.hotKey = KeyBindingDefOf.Misc1;
+                _cache.Add(thingDef, designator);
+            }
+
+            return designator;
+        }
+        private static Dictionary<ThingDef, Designator_ReplantArcanePlant> _cache = new Dictionary<ThingDef, Designator_ReplantArcanePlant>();
+
         protected new Thing MiniToInstallOrBuildingToReinstall
         {
             get
