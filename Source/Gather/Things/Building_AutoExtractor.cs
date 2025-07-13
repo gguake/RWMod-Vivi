@@ -45,7 +45,7 @@ namespace VVRace
                     var rawHoneyCount = VVRecipeDefOf.VV_FilteringHoney.ingredients.FirstOrDefault(ic => ic.filter.AllowedThingDefs.Any(v => v == VVThingDefOf.VV_RawHoney))?.GetBaseCount() ?? 1;
                     var filteredCount = VVRecipeDefOf.VV_FilteringHoney.products.FirstOrDefault(v => v.thingDef == VVThingDefOf.VV_FilteredHoney)?.count ?? 2;
 
-                    _filterEfficiencyRatio = filteredCount / rawHoneyCount * 1.1f;
+                    _filterEfficiencyRatio = filteredCount / rawHoneyCount * 1.2f;
                 }
                 return _filterEfficiencyRatio.Value;
             }

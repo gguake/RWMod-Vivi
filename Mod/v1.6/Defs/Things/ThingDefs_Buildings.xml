@@ -350,7 +350,7 @@
         <fuelLabel>Vivi Raw Honey</fuelLabel>
         <fuelGizmoLabel>Raw Honey</fuelGizmoLabel>
         <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
-        <autoRefuelPercent>1</autoRefuelPercent>
+        <autoRefuelPercent>0.5</autoRefuelPercent>
         <fuelCapacity>150</fuelCapacity>
         <initialFuelPercent>0</initialFuelPercent>
         <fuelMultiplier>1</fuelMultiplier>

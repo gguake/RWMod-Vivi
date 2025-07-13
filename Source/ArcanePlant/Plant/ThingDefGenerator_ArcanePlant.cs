@@ -57,7 +57,7 @@ namespace VVRace
                 }
                 else
                 {
-                    seedDef.BaseMarketValue = 50;
+                    seedDef.BaseMarketValue = 30;
                 }
 
                 seedDef.SetStatBaseValue(StatDefOf.Mass, 0.001f);
@@ -65,6 +65,7 @@ namespace VVRace
                 seedDef.SetStatBaseValue(StatDefOf.DeteriorationRate, 1f);
                 seedDef.SetStatBaseValue(StatDefOf.Flammability, 1f);
                 seedDef.SetStatBaseValue(StatDefOf.Nutrition, 0.125f);
+                seedDef.SetStatBaseValue(StatDefOf.SellPriceFactor, 0.5f);
 
                 seedDef.ingestible = new IngestibleProperties()
                 {

@@ -245,12 +245,13 @@
 
     <useHitPoints>true</useHitPoints>
     <statBases>
-      <MarketValue>30</MarketValue>
+      <MarketValue>20</MarketValue>
       <Mass>0.001</Mass>
       <MaxHitPoints>20</MaxHitPoints>
       <DeteriorationRate>1</DeteriorationRate>
       <Flammability>1.0</Flammability>
       <Nutrition>0.125</Nutrition>
+      <SellPriceFactor>0.5</SellPriceFactor>
     </statBases>
     
     <ingestible>
