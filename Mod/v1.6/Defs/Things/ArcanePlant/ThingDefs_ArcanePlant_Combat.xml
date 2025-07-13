@@ -33,7 +33,7 @@
       <li Class="VVRace.CompProperties_Mana">
         <manaCapacity>900</manaCapacity>
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>30</mana>
+          <mana>20</mana>
         </manaConsumeRule>
 
         <manaAbsorbPerDay>600</manaAbsorbPerDay>
@@ -44,8 +44,8 @@
       <combatPower>45</combatPower>
       <ai_combatDangerous>true</ai_combatDangerous>
       <turretGunDef>VV_Gun_Peashooter</turretGunDef>
-      <turretBurstCooldownTime>3.2</turretBurstCooldownTime>
-      <turretBurstWarmupTime>1.4</turretBurstWarmupTime>
+      <turretBurstCooldownTime>2.2</turretBurstCooldownTime>
+      <turretBurstWarmupTime>1.0</turretBurstWarmupTime>
       <turretTopOffset>(0, 0.05)</turretTopOffset>
       <turretTopDrawSize>1</turretTopDrawSize>
     </building>
@@ -65,9 +65,9 @@
 
         <leavingSeedCountCurve>
           <points>
-            <li>(0, 2)</li>
-            <li>(0.7, 3.5)</li>
-            <li>(1.0, 5)</li>
+            <li>(0, 2.5)</li>
+            <li>(0.7, 4.5)</li>
+            <li>(1.0, 5.5)</li>
           </points>
         </leavingSeedCountCurve>
       </li>
@@ -87,9 +87,9 @@
     <thingClass>VVRace.PeaShooterGun</thingClass>
 
     <statBases>
-      <AccuracyTouch>0.9</AccuracyTouch>
-      <AccuracyShort>0.82</AccuracyShort>
-      <AccuracyMedium>0.44</AccuracyMedium>
+      <AccuracyTouch>0.96</AccuracyTouch>
+      <AccuracyShort>0.86</AccuracyShort>
+      <AccuracyMedium>0.48</AccuracyMedium>
       <AccuracyLong>0.24</AccuracyLong>
       <RangedWeapon_Cooldown>1.8</RangedWeapon_Cooldown>
       <DeteriorationRate>0</DeteriorationRate>
@@ -188,9 +188,9 @@
 
         <leavingSeedCountCurve>
           <points>
-            <li>(0, 2)</li>
-            <li>(0.7, 3.5)</li>
-            <li>(1.0, 5)</li>
+            <li>(0, 2.5)</li>
+            <li>(0.7, 4.5)</li>
+            <li>(1.0, 5.5)</li>
           </points>
         </leavingSeedCountCurve>
       </li>
@@ -264,9 +264,9 @@
 
         <leavingSeedCountCurve>
           <points>
-            <li>(0, 2)</li>
-            <li>(0.7, 3.5)</li>
-            <li>(1.0, 5)</li>
+            <li>(0, 2.5)</li>
+            <li>(0.7, 4.5)</li>
+            <li>(1.0, 5.5)</li>
           </points>
         </leavingSeedCountCurve>
       </li>

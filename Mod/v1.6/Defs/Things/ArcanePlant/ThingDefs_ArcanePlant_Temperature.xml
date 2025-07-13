@@ -72,9 +72,9 @@
 
         <leavingSeedCountCurve>
           <points>
-            <li>(0, 2)</li>
-            <li>(0.7, 3)</li>
-            <li>(1.0, 4.5)</li>
+            <li>(0, 3)</li>
+            <li>(0.7, 5)</li>
+            <li>(1.0, 6)</li>
           </points>
         </leavingSeedCountCurve>
       </li>
@@ -145,8 +145,8 @@
 
       <li Class="CompProperties_HeatPusher">
         <compClass>VVRace.CompManaHeatPusher</compClass>
-        <heatPerSecond>-9</heatPerSecond>
-        <heatPushMinTemperature>-15</heatPushMinTemperature>
+        <heatPerSecond>-10</heatPerSecond>
+        <heatPushMinTemperature>-20</heatPushMinTemperature>
       </li>
     </comps>
     
@@ -157,9 +157,9 @@
         
         <leavingSeedCountCurve>
           <points>
-            <li>(0, 2)</li>
-            <li>(0.7, 3)</li>
-            <li>(1.0, 4.5)</li>
+            <li>(0, 3)</li>
+            <li>(0.7, 5)</li>
+            <li>(1.0, 6)</li>
           </points>
         </leavingSeedCountCurve>
       </li>

@@ -48,13 +48,11 @@
       <li>Woody</li>
       <li>Stony</li>
     </stuffCategories>
-    <costStuffCount>30</costStuffCount>
-    <costList>
-      <VV_Fertilizer>10</VV_Fertilizer>
-    </costList>
+    <costStuffCount>45</costStuffCount>
 
     <comps>
       <li Class="CompProperties_Forbiddable"/>
+      <li><compClass>CompQuality</compClass></li>
     </comps>
     
     <thingCategories>
