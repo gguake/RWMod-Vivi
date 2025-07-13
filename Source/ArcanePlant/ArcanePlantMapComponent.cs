@@ -10,7 +10,7 @@ namespace VVRace
         {
             get
             {
-                _arcaneSeeds.RemoveWhere(v => v.Destroyed || v.MapHeld != map);
+                _arcaneSeeds.RemoveWhere(v => v == null || v.Destroyed || v.MapHeld != map);
                 return _arcaneSeeds;
             }
         }

@@ -1,6 +1,7 @@
 ﻿using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 using Verse;
 using Verse.AI;
 
@@ -68,8 +69,8 @@ namespace VVRace
                 var cell = affectCells[i];
                 if (!cell.InBounds(Map)) { continue; }
 
-                var distance = cell.DistanceToSquared(_initalPosition);
-                if (distance < _progress * _progress)
+                var distanceSqr = cell.DistanceToSquared(_initalPosition);
+                if (distanceSqr < _progress * _progress)
                 {
                     var thingList = cell.GetThingList(Map);
                     for (int j = 0; j < thingList.Count; ++j)
@@ -90,7 +91,7 @@ namespace VVRace
                             fireAttachment.Destroy();
                         }
 
-                        if (thing is IAttackTarget && !(distance <= friendlyFireSafeDistance && !caster.HostileTo(thing)))
+                        if (thing is IAttackTarget && !(distanceSqr <= Mathf.Pow(friendlyFireSafeDistance + 0.05f, 2f) && !caster.HostileTo(thing)))
                         {
                             var log = new BattleLogEntry_RangedImpact(caster, thing, thing, weaponDef, null, null);
                             var angleFlat = (cell - _initalPosition).AngleFlat;

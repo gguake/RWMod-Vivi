@@ -125,7 +125,7 @@
       <li Class="VVRace.CompProperties_Mana">
         <manaCapacity>800</manaCapacity>
         <manaGenerateRule Class="VVRace.ManaFluxRule_Power">
-          <powerManaRatio>0.5</powerManaRatio>
+          <powerManaRatio>0.8</powerManaRatio>
           <min>0</min>
           <max>1150</max>
         </manaGenerateRule>

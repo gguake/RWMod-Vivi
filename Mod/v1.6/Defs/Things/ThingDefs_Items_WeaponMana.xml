@@ -17,7 +17,7 @@
     <statBases>
       <WorkToMake>48000</WorkToMake>
       <Mass>6.0</Mass>
-      <RangedWeapon_Cooldown>0.2</RangedWeapon_Cooldown>
+      <RangedWeapon_Cooldown>2.6</RangedWeapon_Cooldown>
       <VV_RangedWeapon_ManaCost>30</VV_RangedWeapon_ManaCost>
     </statBases>
     <relicChance>0</relicChance>
@@ -35,17 +35,17 @@
     <verbs>
       <li Class="VVRace.VerbProperties_Steamthrower">
         <hasStandardCommand>true</hasStandardCommand>
-        <warmupTime>0.7</warmupTime>
+        <warmupTime>1.3</warmupTime>
         <range>11.9</range>
-        <burstShotCount>6</burstShotCount>
+        <burstShotCount>5</burstShotCount>
         <showBurstShotStats>false</showBurstShotStats>
         <requireLineOfSight>true</requireLineOfSight>
         <ticksBetweenBurstShots>10</ticksBetweenBurstShots>
 
         <steamDamageDef>Burn</steamDamageDef>
-        <steamDamageAmount>7</steamDamageAmount>
+        <steamDamageAmount>4</steamDamageAmount>
         <steamProjectile>VV_SteamProjectile</steamProjectile>
-        <steamHeatPerCell>1.2</steamHeatPerCell>
+        <steamHeatPerCell>1.4</steamHeatPerCell>
 
         <breathStartOffset>0.9</breathStartOffset>
         <breathAngleHalf>15</breathAngleHalf>
@@ -286,7 +286,7 @@
     <statBases>
       <WorkToMake>45000</WorkToMake>
       <Mass>2.5</Mass>
-      <RangedWeapon_Cooldown>1.0</RangedWeapon_Cooldown>
+      <RangedWeapon_Cooldown>1.8</RangedWeapon_Cooldown>
       <VV_RangedWeapon_ManaCost>30</VV_RangedWeapon_ManaCost>
     </statBases>
     <relicChance>0</relicChance>
@@ -305,7 +305,7 @@
     <verbs>
       <li Class="VVRace.VerbProperties_ChainLightning">
         <hasStandardCommand>true</hasStandardCommand>
-        <warmupTime>1.5</warmupTime>
+        <warmupTime>1.0</warmupTime>
         <range>23.9</range>
         <burstShotCount>3</burstShotCount>
         <stopBurstWithoutLos>true</stopBurstWithoutLos>

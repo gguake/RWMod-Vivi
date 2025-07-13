@@ -18,7 +18,7 @@ namespace VVRace
         public override int CalcManaFlux(Thing thing)
         {
             var compPower = thing.TryGetComp<CompPower>();
-            if (compPower == null) { return 0; }
+            if (compPower == null || compPower.PowerNet == null) { return 0; }
 
             return (int)Mathf.Clamp(compPower.PowerNet.CurrentEnergyGainRate() * 60000 * powerManaRatio, min, max);
         }

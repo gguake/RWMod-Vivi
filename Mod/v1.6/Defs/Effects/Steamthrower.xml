@@ -11,6 +11,5 @@
     <fadeInTime>0.01</fadeInTime>
     <solidTime>0.7</solidTime>
     <fadeOutTime>0.4</fadeOutTime>
-    <collide>true</collide>
   </FleckDef>
 </Defs>
