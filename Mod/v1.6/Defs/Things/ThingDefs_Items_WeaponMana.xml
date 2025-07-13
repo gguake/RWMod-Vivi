@@ -15,7 +15,7 @@
 
     <techLevel>Industrial</techLevel>
     <statBases>
-      <WorkToMake>48000</WorkToMake>
+      <WorkToMake>35000</WorkToMake>
       <Mass>6.0</Mass>
       <RangedWeapon_Cooldown>2.6</RangedWeapon_Cooldown>
       <VV_RangedWeapon_ManaCost>30</VV_RangedWeapon_ManaCost>
@@ -79,9 +79,9 @@
     
     <costList>
       <Steel>60</Steel>
-      <VV_HeatingPetal>20</VV_HeatingPetal>
-      <VV_CoolingPetal>20</VV_CoolingPetal>
-      <VV_SparklingPetal>30</VV_SparklingPetal>
+      <VV_HeatingPetal>15</VV_HeatingPetal>
+      <VV_CoolingPetal>15</VV_CoolingPetal>
+      <VV_SparklingPetal>25</VV_SparklingPetal>
     </costList>
 
     <recipeMaker>
@@ -130,7 +130,7 @@
     
     <techLevel>Industrial</techLevel>
     <statBases>
-      <WorkToMake>45000</WorkToMake>
+      <WorkToMake>35000</WorkToMake>
       <Mass>7</Mass>
       <RangedWeapon_Cooldown>3.9</RangedWeapon_Cooldown>
       <VV_RangedWeapon_ManaCost>150</VV_RangedWeapon_ManaCost>
@@ -178,7 +178,7 @@
     
     <costList>
       <Steel>65</Steel>
-      <VV_CoolingPetal>45</VV_CoolingPetal>
+      <VV_CoolingPetal>40</VV_CoolingPetal>
       <VV_SparklingPetal>25</VV_SparklingPetal>
     </costList>
 
@@ -284,7 +284,7 @@
     
     <techLevel>Industrial</techLevel>
     <statBases>
-      <WorkToMake>45000</WorkToMake>
+      <WorkToMake>40000</WorkToMake>
       <Mass>2.5</Mass>
       <RangedWeapon_Cooldown>1.8</RangedWeapon_Cooldown>
       <VV_RangedWeapon_ManaCost>30</VV_RangedWeapon_ManaCost>
@@ -306,14 +306,14 @@
       <li Class="VVRace.VerbProperties_ChainLightning">
         <hasStandardCommand>true</hasStandardCommand>
         <warmupTime>1.0</warmupTime>
-        <range>23.9</range>
+        <range>20.9</range>
         <burstShotCount>3</burstShotCount>
         <stopBurstWithoutLos>true</stopBurstWithoutLos>
         <ticksBetweenBurstShots>2</ticksBetweenBurstShots>
         <showBurstShotStats>false</showBurstShotStats>
 
         <damageDef>Burn</damageDef>
-        <damageAmount>9</damageAmount>
+        <damageAmount>10</damageAmount>
         <lightningMoteDef>VV_Mote_ChainLightning</lightningMoteDef>
         <lightningStartOffset>0.65</lightningStartOffset>
         <lightningTargetEffectDef>VV_LightningBolt_End</lightningTargetEffectDef>
