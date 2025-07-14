@@ -207,21 +207,6 @@ namespace VVRace
                 }
 
                 base.PreApplyDamage(ref dinfo, out absorbed);
-
-                var damage = dinfo.Amount;
-                if (dinfo.Def.Worker is DamageWorker_Blunt || dinfo.Def.isExplosive)
-                {
-                    damage *= 0.8f;
-                }
-
-                if (damage < 1f && Rand.Chance(1f - Mathf.Clamp01(damage)))
-                {
-                    absorbed = true;
-                }
-                else
-                {
-                    dinfo.SetAmount(Mathf.Min(1, damage));
-                }
             }
         }
 

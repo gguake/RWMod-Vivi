@@ -4,4 +4,7 @@
 
 <VV_Message_HoneycombWallBeingFortified>Honeycomb wall being fortified.</VV_Message_HoneycombWallBeingFortified>
 <VV_Message_MustDesignateHoneycombWall>Must target a honeycomb wall.</VV_Message_MustDesignateHoneycombWall>
+
+<VV_Message_LinkEverflowerComplete>Attunement to the Everflower of {PAWN_nameDef} has been established.</VV_Message_LinkEverflowerComplete>
+<VV_Message_LinkDisconnectedEverflower>Everflower attuned to {PAWN_nameDef} was destroyed, severing the attunement.</VV_Message_LinkDisconnectedEverflower>
 </LanguageData>

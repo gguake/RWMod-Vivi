@@ -4,5 +4,11 @@
 <VV_Gizmo_ViviEggProgressTooltip>Shows how much time is left until the next egg is laid.\n\nWhen progress reaches 100% and a suitable Vivi incubator is available, Vivi will go there to lay the egg.</VV_Gizmo_ViviEggProgressTooltip>
 
 <VV_Gizmo_ManaStorageHeader>Mana Capacity</VV_Gizmo_ManaStorageHeader>
-<VV_Gizmo_ManaStorageTooltip>.</VV_Gizmo_ManaStorageTooltip>
+<VV_Gizmo_ManaStorageTooltip>Amount of mana currently held by {THING}.
+\nAbsorbs environment mana released by arcane plants, and when situated in an area containing environment mana it gradually recharges.
+\nAt its current location, it is absorbing {DAILYMANA} environment mana per day.</VV_Gizmo_ManaStorageTooltip>
+
+<VV_Gizmo_LinkFailReason_AlreadyLinked>Already attuned to an Everflower</VV_Gizmo_LinkFailReason_AlreadyLinked>
+<VV_Gizmo_LinkFailReason_PsychicSensitivityRequire>Insufficient psychic sensitivity</VV_Gizmo_LinkFailReason_PsychicSensitivityRequire>
+<VV_Gizmo_OptionLabel_NoRoyalVivi>No royal vivi</VV_Gizmo_OptionLabel_NoRoyalVivi>
 </LanguageData>

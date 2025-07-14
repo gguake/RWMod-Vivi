@@ -1,5 +1,4 @@
 ﻿using RimWorld;
-using System.Linq;
 using Verse;
 
 namespace VVRace
@@ -67,6 +66,24 @@ namespace VVRace
                 {
                     return new AcceptanceReport("IdenticalThingExists".Translate());
                 }
+            }
+
+            return true;
+        }
+
+        public static AcceptanceReport CanLinkEverflower(this Pawn pawn)
+        {
+            if (!pawn.IsRoyalVivi()) { return false; }
+
+            if (pawn.GetCompVivi().LinkedEverflower != null)
+            {
+                return new AcceptanceReport(LocalizeString_Gizmo.VV_Gizmo_LinkFailReason_AlreadyLinked.Translate());
+            }
+
+            var psychicSensitivity = pawn.GetStatValue(StatDefOf.PsychicSensitivity);
+            if (psychicSensitivity < 1.5f)
+            {
+                return new AcceptanceReport(LocalizeString_Gizmo.VV_Gizmo_LinkFailReason_PsychicSensitivityRequire.Translate());
             }
 
             return true;

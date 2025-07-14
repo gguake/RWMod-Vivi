@@ -85,6 +85,8 @@
   <ItemGroup>
     <Compile Include="ArcanePlant\Buildings\ArcaneSeedlingFarm.cs" />
     <Compile Include="ArcanePlant\Mana\FluxRule\ManaFluxRule_InVaccum.cs" />
+    <Compile Include="ArcanePlant\Plant\AI\JobDriver_LinkEverflower.cs" />
+    <Compile Include="ArcanePlant\Plant\AI\JobGiver_LinkEverflower.cs" />
     <Compile Include="ArcanePlant\Plant\Comps\CompRadiantflowerGlower.cs" />
     <Compile Include="ArcanePlant\Plant\Comps\CompStalitflowerGlower.cs" />
     <Compile Include="ArcanePlant\Plant\Things\ArcanePlant_Starlitflower.cs" />

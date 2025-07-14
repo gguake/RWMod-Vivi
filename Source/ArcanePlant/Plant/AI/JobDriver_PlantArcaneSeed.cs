@@ -89,7 +89,7 @@ namespace VVRace
 
                 var seedling = (ArcanePlant_Seedling)ThingMaker.MakeThing(VVThingDefOf.VV_ArcanePlantSeedling);
                 seedling.SetFactionDirect(pawn.Faction);
-                seedling.SetMaturePlant(compArcaneSeed.Props.targetPlantDef);
+                seedling.SetMaturePlant(Seed.def, compArcaneSeed.Props.targetPlantDef);
 
                 if (GenPlace.TryPlaceThing(seedling, SeedlingCell, Map, ThingPlaceMode.Direct))
                 {

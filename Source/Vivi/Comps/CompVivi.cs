@@ -17,7 +17,8 @@ namespace VVRace
         public bool isRoyal = false;
         private Color? _originalHairColor = null;
 
-        private Thing _linkedEverflower;
+        public ArcanePlant_Everflower LinkedEverflower => _linkedEverflower;
+        private ArcanePlant_Everflower _linkedEverflower;
 
         public bool ShouldBeRoyalIfMature
         {
@@ -60,8 +61,20 @@ namespace VVRace
                     }
                 }
             }
+            else
+            {
+                if (isRoyal && LinkedEverflower != null && LinkedEverflower.Spawned && LinkedEverflower.Map == parent.Map)
+                {
+                    GiveEverflowerLinkHediff();
+                }
+            }
 
             RefreshHairColor();
+        }
+
+        public override void PostDeSpawn(Map map, DestroyMode mode = DestroyMode.Vanish)
+        {
+            RemoveEverflowerLinkHediff();
         }
 
         public override void CompTickInterval(int delta)
@@ -149,6 +162,60 @@ namespace VVRace
                 }
 
                 pawn.Drawer.renderer.SetAllGraphicsDirty();
+            }
+        }
+
+        public void Notify_LinkEverflower(ArcanePlant_Everflower everflower)
+        {
+            _linkedEverflower = everflower;
+
+            Find.LetterStack.ReceiveLetter(
+                LocalizeString_Letter.VV_Letter_LinkEverflowerLabel.Translate(),
+                LocalizeString_Letter.VV_Letter_LinkEverflower.Translate(parent.Named("PAWN")),
+                LetterDefOf.PositiveEvent,
+                parent);
+
+            GiveEverflowerLinkHediff();
+        }
+
+        public void Notify_LinkedEverflowerSpawned()
+        {
+            if (isRoyal && LinkedEverflower != null && LinkedEverflower.Spawned && LinkedEverflower.Map == parent.Map)
+            {
+                GiveEverflowerLinkHediff();
+            }
+        }
+
+        public void Notify_LinkedEverflowerDespawned()
+        {
+            RemoveEverflowerLinkHediff();
+        }
+
+        public void Notify_LinkedEverflowerDestroyed()
+        {
+            _linkedEverflower = null;
+            RemoveEverflowerLinkHediff();
+
+            Messages.Message(LocalizeString_Message.VV_Message_LinkDisconnectedEverflower.Translate(parent.Named("PAWN")), MessageTypeDefOf.NegativeEvent);
+        }
+
+        private void GiveEverflowerLinkHediff()
+        {
+            var pawn = (Pawn)parent;
+            var hediff = pawn.health.hediffSet.GetFirstHediffOfDef(VVHediffDefOf.VV_EverflowerLink);
+            if (hediff == null)
+            {
+                pawn.health.AddHediff(VVHediffDefOf.VV_EverflowerLink);
+            }
+        }
+
+        private void RemoveEverflowerLinkHediff()
+        {
+            var pawn = (Pawn)parent;
+            var hediff = pawn.health.hediffSet.GetFirstHediffOfDef(VVHediffDefOf.VV_EverflowerLink);
+            if (hediff != null)
+            {
+                pawn.health.RemoveHediff(hediff);
             }
         }
     }

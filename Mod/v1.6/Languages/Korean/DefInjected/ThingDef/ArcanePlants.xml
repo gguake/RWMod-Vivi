@@ -73,12 +73,13 @@
 <VV_Bullet_CornKernel.label>옥수수 낱알</VV_Bullet_CornKernel.label>
 
 <VV_Everflower.label>영원꽃</VV_Everflower.label>
-<VV_Everflower.description>매우 희귀한 마법 꽃으로 비비들에게 신성한 꽃으로 취급되며 구체적인 재배 방식이 알려지지 않았지만 드물게 다른 마법 식물을 재배할때 함께 발견됩니다.
-\n주기적으로 많은 꽃가루를 내뿜으며 성체 비비가 이 꽃에서 꿀을 채집할때 신체 시간을 마나로 변환해 흡수하여 노화를 되돌리는 특성이 있습니다.
-\n영원꽃의 향기는 강력한 수면 효과가 있지만 비비들은 어느정도 내성을 가지고 있어 비비들만 꿀을 채집할 수 있으며 한 명의 비비가 반복해서 채집할 수는 없습니다.</VV_Everflower.description>
+<VV_Everflower.description>매우 희귀한 마법 꽃으로 비비들에게 신성한 꽃으로 취급됩니다. 영원꽃은 통상적인 방법으로 재배가 불가능하며 미확인 씨앗을 재배할때 매우 드물게 얻을 수 있습니다.
+\n비비들만 이 꽃에서 꿀을 채집할 수 있으며, 비비는 이 꽃에서 꿀을 채집하면 비비의 신체 나이를 마나로 변환해 흡수하는 특성을 가지고 있습니다.
+\n정신 감응이 가능한 로열 비비는 영원꽃과 초정신 교감을 통해 특별한 능력을 해금할 수 있지만 영원꽃은 한번에 하나의 로열 비비만 교감할 수 있습니다.
+\n\n비비 사회에서는 새로운 둥지를 건축하러 떠나는 비비들에게 영원꽃 하나를 나눠주는것이 전통입니다.</VV_Everflower.description>
 
 <VV_ArcanePlantSeedling.label>마법 식물 모종</VV_ArcanePlantSeedling.label>
-<VV_ArcanePlantSeedling.description>아직 성장중인 작은 마법 식물입니다. 마법 식물이 성장하려면 마나와 양분이 모두 공급되야 하며 포장된 상태에서는 성장하지 않습니다.
+<VV_ArcanePlantSeedling.description>아직 성장중인 작은 마법 식물입니다. 마법 식물이 성장하려면 마나와 양분이 모두 공급되야 하며 옮겨 심을 수 없습니다.
 \n마나는 환경 마나를 흡수하므로 주변에 마나 발생기를 설치하거나 마나를 생산하는 마법 식물로부터 공급할 수 있습니다.
 \n양분은 마나와 관계없이 지속적으로 감소하므로 정기적으로 사람이 마법 비료를 공급해야 합니다. 양분이 부족한 상태로 시간이 오래 지나면 모종이 죽습니다.</VV_ArcanePlantSeedling.description>
 <VV_ArcanePlantSeedling.comps.CompRefuelable.fuelLabel>양분</VV_ArcanePlantSeedling.comps.CompRefuelable.fuelLabel>

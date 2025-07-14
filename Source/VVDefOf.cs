@@ -53,6 +53,7 @@ namespace VVRace
         public static JobDef VV_FortifyHoneycombWall;
 
         public static JobDef VV_PlantArcaneSeed;
+        public static JobDef VV_LinkEverflower;
     }
 
     [DefOf]
@@ -182,6 +183,8 @@ namespace VVRace
 
         public static HediffDef Flu;
         public static HediffDef Malaria;
+
+        public static HediffDef VV_EverflowerLink;
     }
 
     [DefOf]
@@ -230,6 +233,8 @@ namespace VVRace
     public static class VVEffecterDefOf
     {
         public static EffecterDef VV_PollenEmitting;
+
+        public static EffecterDef VV_EverflowerLink;
     }
 
     [DefOf]

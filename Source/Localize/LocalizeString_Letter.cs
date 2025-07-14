@@ -9,5 +9,8 @@
         public const string VV_Letter_RoyalViviGrown = nameof(VV_Letter_RoyalViviGrown);
         public const string VV_Letter_IncidentHornetSwarmArrivedLabel = nameof(VV_Letter_IncidentHornetSwarmArrivedLabel);
         public const string VV_Letter_IncidentHornetSwarmArrived = nameof(VV_Letter_IncidentHornetSwarmArrived);
+
+        public const string VV_Letter_LinkEverflowerLabel = nameof(VV_Letter_LinkEverflowerLabel);
+        public const string VV_Letter_LinkEverflower = nameof(VV_Letter_LinkEverflower);
     }
 }

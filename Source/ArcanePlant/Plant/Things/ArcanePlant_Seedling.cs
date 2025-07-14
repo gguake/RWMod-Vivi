@@ -37,6 +37,8 @@ namespace VVRace
         public ThingDef MaturePlantDef => _maturePlantDef;
         private ThingDef _maturePlantDef;
 
+        private ThingDef _seedDef;
+
         public float Growth
         {
             get => _growth;
@@ -95,6 +97,21 @@ namespace VVRace
             _growth = Rand.Range(0.01f, 0.03f);
         }
 
+        public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
+        {
+            var map = Map;
+            var position = Position;
+
+            base.DeSpawn(mode);
+            if (mode == DestroyMode.Deconstruct && _seedDef != null)
+            {
+                if (GenSpawn.CanSpawnAt(_seedDef, position, map, canWipeEdifices: false))
+                {
+                    GenSpawn.TrySpawn(_seedDef, position, map, out _, canWipeEdifices: false);
+                }
+            }
+        }
+
         public override void ExposeData()
         {
             base.ExposeData();
@@ -134,7 +151,15 @@ namespace VVRace
                                 try
                                 {
                                     Rand.PushState(thingIDNumber);
-                                    plantDef = AllArcanePlantDefs.Except(VVThingDefOf.VV_Everflower).RandomElement();
+
+                                    if (Rand.Chance(0.01f))
+                                    {
+                                        plantDef = VVThingDefOf.VV_Everflower;
+                                    }
+                                    else
+                                    {
+                                        plantDef = AllArcanePlantDefs.Except(VVThingDefOf.VV_Everflower).RandomElement();
+                                    }
                                 }
                                 finally
                                 {
@@ -211,8 +236,9 @@ namespace VVRace
             return sb.ToString();
         }
 
-        public void SetMaturePlant(ThingDef plantDef)
+        public void SetMaturePlant(ThingDef seedDef, ThingDef plantDef)
         {
+            _seedDef = seedDef;
             _maturePlantDef = plantDef;
         }
     }

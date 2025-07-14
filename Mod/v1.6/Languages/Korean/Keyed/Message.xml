@@ -4,4 +4,7 @@
 
 <VV_Message_HoneycombWallBeingFortified>해당 위치에 이미 벽 강화가 지정되었습니다.</VV_Message_HoneycombWallBeingFortified>
 <VV_Message_MustDesignateHoneycombWall>비비 벌집 벽을 선택해야 합니다.</VV_Message_MustDesignateHoneycombWall>
+
+<VV_Message_LinkEverflowerComplete>{PAWN_nameDef}의 영원꽃 교감이 연결되었습니다.</VV_Message_LinkEverflowerComplete>
+<VV_Message_LinkDisconnectedEverflower>{PAWN_nameDef}와 교감한 영원꽃이 파괴되어 교감이 단절되었습니다.</VV_Message_LinkDisconnectedEverflower>
 </LanguageData>

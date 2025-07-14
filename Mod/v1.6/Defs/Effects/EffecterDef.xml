@@ -82,4 +82,34 @@
       </li>
     </children>
   </EffecterDef>
+
+  <EffecterDef>
+    <defName>VV_EverflowerLink</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <moteDef>VV_Mote_EverflowerCircle</moteDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <ticksBetweenMotes>24</ticksBetweenMotes>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <moteDef>VV_Mote_EverflowerCircle</moteDef>
+        <spawnLocType>OnTarget</spawnLocType>
+        <ticksBetweenMotes>24</ticksBetweenMotes>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <moteDef>VV_Mote_EverflowerLinkDistortion</moteDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <ticksBetweenMotes>24</ticksBetweenMotes>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <moteDef>VV_Mote_EverflowerLinkDistortion</moteDef>
+        <spawnLocType>OnTarget</spawnLocType>
+        <ticksBetweenMotes>24</ticksBetweenMotes>
+      </li>
+    </children>
+  </EffecterDef>
 </Defs>

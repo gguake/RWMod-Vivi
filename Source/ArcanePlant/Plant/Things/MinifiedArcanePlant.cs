@@ -25,5 +25,12 @@ namespace VVRace
         {
             return GraphicDatabase.Get<Graphic_Single>("Things/Item/Minified/BurlapBag", ShaderDatabase.Cutout, GetMinifiedDrawSize(base.InnerThing.def.size.ToVector2(), 1.1f) * 1.16f, Color.white);
         }
+
+        public override void PreTraded(TradeAction action, Pawn playerNegotiator, ITrader trader)
+        {
+            base.PreTraded(action, playerNegotiator, trader);
+
+            InnerThing?.PreTraded(action, playerNegotiator, trader);
+        }
     }
 }

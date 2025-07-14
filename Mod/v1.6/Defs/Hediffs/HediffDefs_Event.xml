@@ -69,4 +69,27 @@
       </li>
     </comps>
   </HediffDef>
+  
+  <HediffDef>
+    <defName>VV_EverflowerLink</defName>
+    <label>everflower attunement</label>
+    <description>.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(0,1,1)</defaultLabelColor>
+    
+    <isBad>false</isBad>
+    <priceImpact>false</priceImpact>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <initialSeverity>1</initialSeverity>
+    <maxSeverity>10</maxSeverity>
+
+    <stages>
+      <li>
+        <minSeverity>1</minSeverity>
+        <statFactors>
+          <IncomingDamageFactor>0.5</IncomingDamageFactor>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
 </Defs>

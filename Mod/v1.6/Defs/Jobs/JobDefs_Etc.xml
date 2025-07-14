@@ -15,4 +15,12 @@
     <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
   </JobDef>
 
+  <JobDef>
+    <defName>VV_LinkEverflower</defName>
+    <driverClass>VVRace.JobDriver_LinkEverflower</driverClass>
+    <reportString>attuning TargetA.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+    <overrideFlyChance>0</overrideFlyChance>
+  </JobDef>
   </Defs>
