@@ -103,7 +103,7 @@
         <verbClass>VVRace.Verb_ShootWithMana</verbClass>
         <defaultProjectile>VV_Bullet_Pea</defaultProjectile>
         <warmupTime>0.5</warmupTime>
-        <range>26.9</range>
+        <range>28.9</range>
         <ticksBetweenBurstShots>7</ticksBetweenBurstShots>
         <burstShotCount>4</burstShotCount>
         <soundCast>ThumpCannon_Fire</soundCast>

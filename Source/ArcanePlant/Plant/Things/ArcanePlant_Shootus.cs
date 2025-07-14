@@ -49,12 +49,15 @@ namespace VVRace
 
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
         {
-            _reservedWeapon = null;
-
-            if (_innerContainer.Count > 0)
+            if (mode != DestroyMode.WillReplace)
             {
-                _innerContainer.TryDropAll(Position, Map, ThingPlaceMode.Near);
-                _innerContainer.ClearAndDestroyContents(mode);
+                _reservedWeapon = null;
+
+                if (_innerContainer.Count > 0)
+                {
+                    _innerContainer.TryDropAll(Position, Map, ThingPlaceMode.Near);
+                    _innerContainer.ClearAndDestroyContents(mode);
+                }
             }
 
             base.DeSpawn(mode);

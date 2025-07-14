@@ -50,11 +50,6 @@
 
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
-      <li Class="VVRace.CompProperties_ManaGlower">
-        <glowRadius>7</glowRadius>
-        <glowColor>(241,178,83,0)</glowColor>
-      </li>
-
       <li Class="VVRace.CompProperties_ManaFilthMaker">
         <filthDef>VV_FilthPollen</filthDef>
         <makeAmountPerDays>3~5</makeAmountPerDays>
@@ -62,6 +57,12 @@
         <exceptCenter>true</exceptCenter>
 
         <spawnEffecter>VV_PollenEmitting</spawnEffecter>
+      </li>
+
+      <li Class="CompProperties_Glower">
+        <compClass>VVRace.CompManaGlower</compClass>
+        <glowRadius>7</glowRadius>
+        <glowColor>(241,178,83,0)</glowColor>
       </li>
     </comps>
 

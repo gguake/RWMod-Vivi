@@ -84,6 +84,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArcanePlant\Buildings\ArcaneSeedlingFarm.cs" />
+    <Compile Include="ArcanePlant\Mana\FluxRule\ManaFluxRule_InVaccum.cs" />
+    <Compile Include="ArcanePlant\Plant\Comps\CompRadiantflowerGlower.cs" />
+    <Compile Include="ArcanePlant\Plant\Comps\CompStalitflowerGlower.cs" />
+    <Compile Include="ArcanePlant\Plant\Things\ArcanePlant_Starlitflower.cs" />
     <Compile Include="ArcanePlant\Weapon\Graphic_MoteTiled.cs" />
     <Compile Include="ArcanePlant\Weapon\Things\SnowmanRocket.cs" />
     <Compile Include="ArcanePlant\DamageWorker_FrostbiteCustom.cs" />

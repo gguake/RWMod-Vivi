@@ -125,7 +125,6 @@
       <relatedBuildCommands>
         <li>VV_ViviCreamWall</li>
       </relatedBuildCommands>
-      <isAirtight>true</isAirtight>
       <isStuffableAirtight>false</isStuffableAirtight>
     </building>
     <costList>

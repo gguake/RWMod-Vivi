@@ -53,15 +53,16 @@
 
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
-      <li Class="VVRace.CompProperties_ManaGlower">
-        <glowRadius>10</glowRadius>
-        <glowColor>(255,247,138,0)</glowColor>
-      </li>
-
       <li Class="CompProperties_HeatPusher">
         <compClass>VVRace.CompManaHeatPusher</compClass>
         <heatPerSecond>19</heatPerSecond>
         <heatPushMaxTemperature>29</heatPushMaxTemperature>
+      </li>
+
+      <li Class="CompProperties_Glower">
+        <compClass>VVRace.CompManaGlower</compClass>
+        <glowRadius>10</glowRadius>
+        <glowColor>(255,247,138,0)</glowColor>
       </li>
     </comps>
     

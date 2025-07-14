@@ -102,8 +102,11 @@ namespace VVRace
 
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
         {
-            _innerContainer.TryDropAll(Position, Map, ThingPlaceMode.Near);
-            _innerContainer.ClearAndDestroyContents();
+            if (mode != DestroyMode.WillReplace)
+            {
+                _innerContainer.TryDropAll(Position, Map, ThingPlaceMode.Near);
+                _innerContainer.ClearAndDestroyContents();
+            }
 
             base.DeSpawn(mode);
         }

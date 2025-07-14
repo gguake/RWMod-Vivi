@@ -1,22 +1,9 @@
-﻿using RimWorld;
-using Verse;
+﻿using Verse;
 
 namespace VVRace
 {
-    public class CompProperties_ManaGlower : CompProperties_Glower
-    {
-        public bool glowOnlyRoofed;
-
-        public CompProperties_ManaGlower() : base()
-        {
-            compClass = typeof(CompManaGlower);
-        }
-    }
-
     public class CompManaGlower : CompGlower, IManaChangeEventReceiver
     {
-        private new CompProperties_ManaGlower Props => (CompProperties_ManaGlower)props;
-
         public CompMana ManaComp
         {
             get
@@ -32,8 +19,6 @@ namespace VVRace
             get
             {
                 if (!base.ShouldBeLitNow) { return false; }
-
-                if (Props.glowOnlyRoofed && !parent.Position.Roofed(parent.Map)) { return false; }
 
                 return ManaComp.Active;
             }

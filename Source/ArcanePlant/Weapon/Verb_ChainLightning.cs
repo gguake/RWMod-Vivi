@@ -271,7 +271,6 @@ namespace VVRace
 
                         if (!t.Spawned || !t.HostileTo(caster.Faction)) { return false; }
                         if (!GenSight.LineOfSightToThing(chainSourceCell, t, caster.Map, true)) { return false; }
-                        if (!GenHostility.IsActiveThreatTo(attackTarget, caster.Faction)) { return false; }
 
                         return true;
                     },

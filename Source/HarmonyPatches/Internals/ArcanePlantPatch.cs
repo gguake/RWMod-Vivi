@@ -93,6 +93,14 @@ namespace VVRace
                 original: AccessTools.Method(typeof(GenLeaving), nameof(GenLeaving.DoLeavingsFor), parameters: new Type[] { typeof(Thing), typeof(Map), typeof(DestroyMode), typeof(CellRect), typeof(Predicate<IntVec3>), typeof(List<Thing>) }),
                 transpiler: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(GenLeaving_DoLeavingsFor_Transpiler)));
 
+            // 진공
+            if (ModsConfig.OdysseyActive)
+            {
+                harmony.Patch(
+                    original: AccessTools.Method(typeof(VacuumUtility), "EverInVacuum"),
+                    postfix: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(VacuumUtility_EverInVacuum_Postfix)));
+            }
+
             Log.Message("!! [ViViRace] arcane plant patch complete");
         }
 
@@ -437,6 +445,20 @@ namespace VVRace
 
             instructions.InsertRange(injectionIndex, injections);
             return instructions;
+        }
+
+        private static void VacuumUtility_EverInVacuum_Postfix(IntVec3 cell, Map map, ref bool __result)
+        {
+            if (!__result) { return; }
+
+            var comp = map.GetComponent<ArcanePlantMapComponent>();
+            if (comp != null)
+            {
+                if (comp.CheckVaccumResistance(cell))
+                {
+                    __result = false;
+                }
+            }
         }
     }
 }

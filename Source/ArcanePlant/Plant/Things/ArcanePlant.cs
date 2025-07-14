@@ -62,7 +62,7 @@ namespace VVRace
 
         protected virtual bool HasRandomDrawScale => true;
 
-        private ArcanePlantMapComponent _mapComponent;
+        protected ArcanePlantMapComponent _mapComponent;
         protected int _lastDamagedTick = 0;
 
         public override int UpdateRateTicks => 1000;

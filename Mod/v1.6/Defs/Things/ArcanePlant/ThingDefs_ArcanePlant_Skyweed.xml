@@ -57,11 +57,6 @@
       </li>
 
       <li Class="VVRace.CompProperties_RepeatGatherable" />
-
-      <li Class="VVRace.CompProperties_ManaGlower">
-        <glowRadius>3</glowRadius>
-        <glowColor>(255,255,255,0)</glowColor>
-      </li>
     </comps>
 
     <modExtensions>

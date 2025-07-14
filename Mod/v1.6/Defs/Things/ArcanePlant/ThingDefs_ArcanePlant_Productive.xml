@@ -83,6 +83,12 @@
 
         <applyDamageToExplosionCellsNeighbors>true</applyDamageToExplosionCellsNeighbors>
       </li>
+
+      <li Class="CompProperties_Glower">
+        <compClass>VVRace.CompManaGlower</compClass>
+        <glowRadius>3</glowRadius>
+        <glowColor>(90,220,255)</glowColor>
+      </li>
     </comps>
     
     <modExtensions>
@@ -152,11 +158,10 @@
 
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
-      <li Class="VVRace.CompProperties_ManaGlower">
+      <li Class="VVRace.CompProperties_RadiantflowerGlower">
         <glowRadius>16</glowRadius>
         <glowColor>(370,370,370,0)</glowColor>
         <overlightRadius>7.7</overlightRadius>
-        <glowOnlyRoofed>true</glowOnlyRoofed>
       </li>
     </comps>
 
@@ -240,9 +245,9 @@
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
       <li Class="VVRace.CompProperties_ManaTerraformer">
-        <cooldownTicks>180000~400000</cooldownTicks>
-        <radiusRange>0.3~3.8</radiusRange>
-        <radiusGrowth>0.9</radiusGrowth>
+        <cooldownTicks>75000~150000</cooldownTicks>
+        <radiusRange>0.3~3.9</radiusRange>
+        <radiusGrowth>0.3</radiusGrowth>
         <terraforms>
           <li><from>SoftSand</from><to>Sand</to></li>
           <li><from>Sand</from><to>Gravel</to></li>
@@ -307,17 +312,24 @@
 
     <comps>
       <li Class="VVRace.CompProperties_Mana">
-        <manaCapacity>750</manaCapacity>
+        <manaCapacity>500</manaCapacity>
 
         <manaGenerateRule Class="VVRace.ManaFluxRule_Refuelable">
-          <mana>550</mana>
+          <mana>600</mana>
           <fuelDef>Wastepack</fuelDef>
         </manaGenerateRule>
 
-        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>100</mana>
+        <manaConsumeRule Class="VVRace.ManaFluxRule_RadialPollution">
+          <radius>1.9</radius>
+          <manaCurveFromDistanceSqr>
+            <points>
+              <li>(0,200)</li>
+              <li>(1,100)</li>
+              <li>(2,50)</li>
+            </points>
+          </manaCurveFromDistanceSqr>
         </manaConsumeRule>
-        <manaAbsorbPerDay>300</manaAbsorbPerDay>
+        <manaAbsorbPerDay>750</manaAbsorbPerDay>
       </li>
 
       <li Class="VVRace.CompProperties_ArcanePlantBulletOverride">
@@ -331,15 +343,10 @@
 
       <li Class="VVRace.CompProperties_RepeatGatherable" />
       
-      <li Class="VVRace.CompProperties_ManaGlower">
-        <glowRadius>10</glowRadius>
-        <glowColor>(255,255,255,0)</glowColor>
-      </li>
-      
       <li Class="VVRace.CompProperties_ManaTerraformer">
         <cooldownTicks>120000~180000</cooldownTicks>
-        <radiusRange>0.6~2.9</radiusRange>
-        <radiusGrowth>0.5</radiusGrowth>
+        <radiusRange>0.6~1.9</radiusRange>
+        <radiusGrowth>0.65</radiusGrowth>
         <removePollution>true</removePollution>
         <showRadius>true</showRadius>
       </li>
@@ -347,7 +354,7 @@
       <li Class="CompProperties_Refuelable">
         <fuelLabel>Wastepack</fuelLabel>
         <fuelGizmoLabel>Wastepack</fuelGizmoLabel>
-        <fuelConsumptionRate>2</fuelConsumptionRate>
+        <fuelConsumptionRate>3</fuelConsumptionRate>
         <fuelCapacity>15</fuelCapacity>
         <initialFuelPercent>0</initialFuelPercent>
         <fuelMultiplier>1</fuelMultiplier>
@@ -359,6 +366,12 @@
         <showFuelGizmo>true</showFuelGizmo>
         <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
         <externalTicking>false</externalTicking>
+      </li>
+
+      <li Class="CompProperties_Glower">
+        <compClass>VVRace.CompManaGlower</compClass>
+        <glowRadius>10</glowRadius>
+        <glowColor>(255,255,255,0)</glowColor>
       </li>
     </comps>
     
@@ -388,9 +401,12 @@
       <ThingDef>VV_PerfumingPetal</ThingDef>
     </descriptionHyperlinks>
 
+    <thingClass>VVRace.ArcanePlant_Starlitflower</thingClass>
+
     <graphicData>
       <texPath>Things/Plants/VV_Purifier</texPath>
       <graphicClass>Graphic_Single</graphicClass>
+      <color>(255,0,255)</color>
     </graphicData>
 
     <statBases>
@@ -401,43 +417,37 @@
     </statBases>
 
     <costList>
-      <VV_PerfumingPetal>20</VV_PerfumingPetal>
+      <VV_HeatingPetal>5</VV_HeatingPetal>
+      <VV_CoolingPetal>5</VV_CoolingPetal>
+      <VV_PerfumingPetal>10</VV_PerfumingPetal>
     </costList>
 
     <comps>
       <li Class="VVRace.CompProperties_Mana">
-        <manaCapacity>400</manaCapacity>
+        <manaCapacity>200</manaCapacity>
 
         <manaGenerateRule Class="VVRace.ManaFluxRule_TimeOfDay">
-          <mana>600</mana>
+          <mana>400</mana>
           <timeOfDay>Night</timeOfDay>
+          <alwaysIfVaccumBiome>true</alwaysIfVaccumBiome>
         </manaGenerateRule>
         
-        <manaConsumeRule Class="VVRace.ManaFluxRule_TimeOfDay">
-          <mana>100</mana>
-          <timeOfDay>Day</timeOfDay>
+        <manaConsumeRule Class="VVRace.ManaFluxRule_InVaccum">
+          <mana>500</mana>
         </manaConsumeRule>
-        <manaAbsorbPerDay>200</manaAbsorbPerDay>
+        <manaAbsorbPerDay>50</manaAbsorbPerDay>
       </li>
 
       <li Class="VVRace.CompProperties_RepeatGatherable" />
-      
-      <li Class="VVRace.CompProperties_ManaGlower">
-        <glowRadius>12</glowRadius>
+
+      <li Class="VVRace.CompProperties_StalitflowerGlower">
+        <glowRadius>7.5</glowRadius>
         <glowColor>(213,110,248,0)</glowColor>
-      </li>
-      
-      <li Class="VVRace.CompProperties_ManaShieldProjector">
-        <shieldDef>VV_StarlitVeil</shieldDef>
-        <mote>VV_Mote_ShieldProjectorEffect</mote>
-
-        <iconPath>UI/Commands/VV_StarlitVeil</iconPath>
-
-        <shieldMaxHp>200</shieldMaxHp>
-        <requiredManaPct>0.35</requiredManaPct>
       </li>
     </comps>
     
+    <specialDisplayRadius>4.6</specialDisplayRadius>
+
     <modExtensions>
       <li Class="VVRace.ArcaneSeedExtension">
         <seedMarketValueRatio>0.25</seedMarketValueRatio>
@@ -445,40 +455,12 @@
 
         <leavingSeedCountCurve>
           <points>
-            <li>(0, 2)</li>
-            <li>(0.7, 3)</li>
-            <li>(1.0, 4.5)</li>
+            <li>(0, 2.5)</li>
+            <li>(0.7, 4.5)</li>
+            <li>(1.0, 5.5)</li>
           </points>
         </leavingSeedCountCurve>
       </li>
     </modExtensions>
   </ThingDef>
-  
-  <ThingDef>
-    <defName>VV_StarlitVeil</defName>
-    <label>starlit veil</label>
-    <thingClass>VVRace.StarlitVeil</thingClass>
-    <drawerType>RealtimeOnly</drawerType>
-    <drawOffscreen>true</drawOffscreen>
-    <useHitPoints>false</useHitPoints>
-
-    <comps>
-      <li Class="CompProperties_ProjectileInterceptor">
-        <radius>5.6</radius>
-        <interceptGroundProjectiles>true</interceptGroundProjectiles>
-        <interceptAirProjectiles>true</interceptAirProjectiles>
-        <interceptNonHostileProjectiles>false</interceptNonHostileProjectiles>
-        <interceptOutgoingProjectiles>false</interceptOutgoingProjectiles>
-        <color>(0.6, 0, 0.4)</color>
-        <drawWithNoSelection>True</drawWithNoSelection>
-        <activeSound>BulletShield_Ambience</activeSound>
-        <rechargeHitPointsIntervalTicks>60000</rechargeHitPointsIntervalTicks>
-      </li>
-      <li Class="CompProperties_DestroyAfterDelay">
-        <delayTicks>2500</delayTicks>
-        <destroyMode>KillFinalize</destroyMode>
-      </li>
-    </comps>
-  </ThingDef>
-  
 </Defs>

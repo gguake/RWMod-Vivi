@@ -37,7 +37,7 @@
         <manaConsumeRule Class="VVRace.ManaFluxRule_BatteryStored">
           <manaFromStoredEnergy>0~500</manaFromStoredEnergy>
         </manaConsumeRule>
-        <manaAbsorbPerDay>1000</manaAbsorbPerDay>
+        <manaAbsorbPerDay>850</manaAbsorbPerDay>
       </li>
 
       <li Class="VVRace.CompProperties_ArcanePlantBulletOverride">
@@ -51,10 +51,6 @@
 
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
-      <li Class="VVRace.CompProperties_ManaGlower">
-        <glowRadius>3</glowRadius>
-        <glowColor>(213,110,248,0)</glowColor>
-      </li>
       <li Class="CompProperties_Battery">
         <storedEnergyMax>1200</storedEnergyMax>
         <efficiency>0.5</efficiency>
@@ -69,6 +65,12 @@
         <explosiveRadius>6.9</explosiveRadius>
         <explosiveCooldownTicks>2500~2500</explosiveCooldownTicks>
         <explosiveDamageDef>EMP</explosiveDamageDef>
+      </li>
+
+      <li Class="CompProperties_Glower">
+        <compClass>VVRace.CompManaGlower</compClass>
+        <glowRadius>3</glowRadius>
+        <glowColor>(213,110,248)</glowColor>
       </li>
     </comps>
 
@@ -123,17 +125,17 @@
 
     <comps>
       <li Class="VVRace.CompProperties_Mana">
-        <manaCapacity>500</manaCapacity>
+        <manaCapacity>1000</manaCapacity>
         <manaGenerateRule Class="VVRace.ManaFluxRule_Power">
-          <powerManaRatio>0.1</powerManaRatio>
+          <powerManaRatio>1.2</powerManaRatio>
           <min>0</min>
-          <max>200</max>
+          <max>1000</max>
         </manaGenerateRule>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>700</mana>
+          <mana>1000</mana>
         </manaConsumeRule>
-        <manaAbsorbPerDay>1000</manaAbsorbPerDay>
+        <manaAbsorbPerDay>2000</manaAbsorbPerDay>
       </li>
 
       <li Class="VVRace.CompProperties_ArcanePlantBulletOverride">
@@ -149,7 +151,7 @@
 
       <li Class="CompProperties_Power">
         <compClass>VVRace.CompManaPowerPlant</compClass>
-        <basePowerConsumption>-600</basePowerConsumption>
+        <basePowerConsumption>-750</basePowerConsumption>
         <transmitsPower>true</transmitsPower>
       </li>
       <li Class="VVRace.CompProperties_ManaLightningLod">

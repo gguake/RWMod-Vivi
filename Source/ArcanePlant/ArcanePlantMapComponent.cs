@@ -50,6 +50,9 @@ namespace VVRace
         }
         private Dictionary<IntVec3, ArcanePlantPot> _arcanePlantPots;
 
+        public bool CheckVaccumResistance(IntVec3 cell) => _plantVaccumOverrideGrid[cell] > 0;
+        private IntGrid _plantVaccumOverrideGrid;
+
         public bool HasAnyArcanePlant => _arcanePlants.Count > 0;
 
         public ArcanePlantMapComponent(Map map) : base(map)
@@ -57,6 +60,8 @@ namespace VVRace
             _arcaneSeeds = new List<ThingWithComps>();
             _arcanePlants = new Dictionary<IntVec3, ArcanePlant>();
             _arcanePlantPots = new Dictionary<IntVec3, ArcanePlantPot>();
+
+            _plantVaccumOverrideGrid = new IntGrid(map);
 
             map.events.TerrainChanged += (cell) =>
             {
@@ -103,9 +108,29 @@ namespace VVRace
             _arcanePlants.Add(plant.Position, plant);
         }
 
+        public void Notify_StalitflowerSpawned(ArcanePlant plant)
+        {
+            if (!ModsConfig.OdysseyActive) { return; }
+
+            foreach (var cell in GenRadial.RadialCellsAround(plant.Position, ArcanePlant_Starlitflower.VaccumResistRange, true))
+            {
+                _plantVaccumOverrideGrid[cell]++;
+            }
+        }
+
         public void Notify_ArcanePlantDespawned(ArcanePlant plant)
         {
             _arcanePlants.Remove(plant.Position);
+        }
+
+        public void Notify_StalitflowerDespawned(ArcanePlant plant)
+        {
+            if (!ModsConfig.OdysseyActive) { return; }
+
+            foreach (var cell in GenRadial.RadialCellsAround(plant.Position, ArcanePlant_Starlitflower.VaccumResistRange, true))
+            {
+                _plantVaccumOverrideGrid[cell]--;
+            }
         }
 
         public void Notify_ArcanePlantPotSpawned(ArcanePlantPot pot)
