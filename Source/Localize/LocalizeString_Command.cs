@@ -22,5 +22,10 @@
 
         public const string VV_Designator_FortifyHoneycombWall = nameof(VV_Designator_FortifyHoneycombWall);
         public const string VV_Designator_FortifyHoneycombWallDesc = nameof(VV_Designator_FortifyHoneycombWallDesc);
+
+        public const string VV_Command_ReserveLinkEverflower = nameof(VV_Command_ReserveLinkEverflower);
+        public const string VV_Command_ReserveLinkEverflowerDesc = nameof(VV_Command_ReserveLinkEverflowerDesc);
+        public const string VV_Command_CancelReserveLinkEverflower = nameof(VV_Command_CancelReserveLinkEverflower);
+        public const string VV_Command_CancelReserveLinkEverflowerDesc = nameof(VV_Command_CancelReserveLinkEverflowerDesc);
     }
 }

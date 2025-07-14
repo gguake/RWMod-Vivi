@@ -1,5 +1,4 @@
 ﻿using RimWorld;
-using System.Collections.Generic;
 using UnityEngine;
 using Verse;
 
@@ -18,6 +17,8 @@ namespace VVRace
         public bool isRoyal = false;
         private Color? _originalHairColor = null;
 
+        private Thing _linkedEverflower;
+
         public bool ShouldBeRoyalIfMature
         {
             get
@@ -33,6 +34,8 @@ namespace VVRace
         {
             Scribe_Values.Look(ref isRoyal, "isRoyal");
             Scribe_Values.Look(ref _originalHairColor, "originalHairColor");
+
+            Scribe_References.Look(ref _linkedEverflower, "linkedEverflower");
         }
 
         public override void PostSpawnSetup(bool respawningAfterLoad)
@@ -106,7 +109,6 @@ namespace VVRace
                 pawn.Drawer.renderer.SetAllGraphicsDirty();
             }
         }
-
 
         public void Notify_ChildLifeStageStart()
         {
