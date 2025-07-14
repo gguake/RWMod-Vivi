@@ -7,12 +7,6 @@
 <VV_Command_EquipWeaponDesc>Equips the selected weapon to the gunholder. Melee weapons or biocoded weapons cannot be equipped.</VV_Command_EquipWeaponDesc>
 <VV_Command_UnequipWeapon>Unequip Weapon</VV_Command_UnequipWeapon>
 
-<VV_Command_ActivateShield>Create starlit veil</VV_Command_ActivateShield>
-<VV_Command_ActivateShieldDesc>Uses {1} of maximum mana to create a starlit veil around it, blocking hostile projectiles for a short duration.
-\nThe starlit veil will vanish after {0} time or after absorbing a certain amount of damage.</VV_Command_ActivateShieldDesc>
-<VV_Command_ActivateShieldAlreadyActivated>Shield already activated.</VV_Command_ActivateShieldAlreadyActivated>
-<VV_Command_ActivateShieldNotEnoughEnergy>At least {0} mana is required.</VV_Command_ActivateShieldNotEnoughEnergy>
-
 <VV_Command_NewGrowArcanePlantBill>Start Growing New Arcane Plant</VV_Command_NewGrowArcanePlantBill>
 <VV_Command_NewGrowArcanePlantBillDesc>Starts the cultivation of a new arcane plant.</VV_Command_NewGrowArcanePlantBillDesc>
 <VV_Command_CancelGrowArcanePlantBill>Cancel Arcane Plant Cultivation</VV_Command_CancelGrowArcanePlantBill>
