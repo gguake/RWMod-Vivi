@@ -87,7 +87,10 @@ namespace VVRace
                 seedDef.resourceReadoutPriority = ResourceCountPriority.Middle;
                 DirectXmlCrossRefLoader.RegisterObjectWantsCrossRef(seedDef, "soundInteract", "Grain_Drop");
                 DirectXmlCrossRefLoader.RegisterObjectWantsCrossRef(seedDef, "soundDrop", "Grain_Drop");
-                
+
+                seedDef.thingSetMakerTags = new List<string>();
+                seedDef.thingSetMakerTags.Add("NonStandardReward");
+
                 seedDef.modContentPack = plantDef.modContentPack;
                 extension.seedDef = seedDef;
                 yield return seedDef;

@@ -7,9 +7,9 @@
       <Beauty>5</Beauty>
       <BeautyOutdoors>5</BeautyOutdoors>
       <Nutrition>0.1</Nutrition>
-      <VV_MinGrowthPlantGatherable>0.9</VV_MinGrowthPlantGatherable>
-      <VV_PlantGatherCooldown>0.45</VV_PlantGatherCooldown>
-      <VV_PlantHoneyGatherYield>2.5</VV_PlantHoneyGatherYield>
+      <VV_MinGrowthPlantGatherable>0.7</VV_MinGrowthPlantGatherable>
+      <VV_PlantGatherCooldown>0.6</VV_PlantGatherCooldown>
+      <VV_PlantHoneyGatherYield>1.5</VV_PlantHoneyGatherYield>
     </statBases>
     <hideAtSnowOrSandDepth>0.6</hideAtSnowOrSandDepth>
     <ingestible />

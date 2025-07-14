@@ -23,8 +23,8 @@
       <BeautyOutdoors>15</BeautyOutdoors>
       <SellPriceFactor>0.75</SellPriceFactor>
 
-      <VV_PlantGatherCooldown>0.8</VV_PlantGatherCooldown>
-      <VV_PlantHoneyGatherYield>1.4</VV_PlantHoneyGatherYield>
+      <VV_PlantGatherCooldown>0.1</VV_PlantGatherCooldown>
+      <VV_PlantHoneyGatherYield>1.0</VV_PlantHoneyGatherYield>
     </statBases>
 
     <costList>

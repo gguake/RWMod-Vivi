@@ -200,7 +200,7 @@ namespace VVRace
                     var pot = _mapComponent?.GetArcanePlantPot(Position);
                     if (pot != null)
                     {
-                        var damageResult = pot.TakeDamage(dinfo);
+                        _ = pot.TakeDamage(dinfo);
                         absorbed = true;
                         return;
                     }

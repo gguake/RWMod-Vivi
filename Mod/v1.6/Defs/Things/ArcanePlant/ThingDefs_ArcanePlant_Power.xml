@@ -23,7 +23,7 @@
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
 
-      <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
+      <VV_PlantGatherCooldown>2.4</VV_PlantGatherCooldown>
       <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
     </statBases>
 
@@ -33,11 +33,11 @@
 
     <comps>
       <li Class="VVRace.CompProperties_Mana">
-        <manaCapacity>1000</manaCapacity>
+        <manaCapacity>600</manaCapacity>
         <manaConsumeRule Class="VVRace.ManaFluxRule_BatteryStored">
-          <manaFromStoredEnergy>0~500</manaFromStoredEnergy>
+          <manaFromStoredEnergy>0~400</manaFromStoredEnergy>
         </manaConsumeRule>
-        <manaAbsorbPerDay>850</manaAbsorbPerDay>
+        <manaAbsorbPerDay>800</manaAbsorbPerDay>
       </li>
 
       <li Class="VVRace.CompProperties_ArcanePlantBulletOverride">
@@ -52,7 +52,7 @@
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
       <li Class="CompProperties_Battery">
-        <storedEnergyMax>1200</storedEnergyMax>
+        <storedEnergyMax>1000</storedEnergyMax>
         <efficiency>0.5</efficiency>
         <shortCircuitInRain>false</shortCircuitInRain>
         <transmitsPower>true</transmitsPower>
@@ -115,7 +115,7 @@
       <Beauty>10</Beauty>
       <BeautyOutdoors>10</BeautyOutdoors>
       
-      <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
+      <VV_PlantGatherCooldown>2.4</VV_PlantGatherCooldown>
       <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
     </statBases>
 

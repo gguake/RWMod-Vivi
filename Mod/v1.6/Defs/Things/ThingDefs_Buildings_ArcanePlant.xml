@@ -35,8 +35,8 @@
 
     <statBases>
       <MaxHitPoints>120</MaxHitPoints>
-      <WorkToBuild>1500</WorkToBuild>
-      <Mass>4</Mass>
+      <WorkToBuild>1200</WorkToBuild>
+      <Mass>2</Mass>
       <Flammability>1.0</Flammability>
       <Beauty>1</Beauty>
     </statBases>
@@ -48,7 +48,7 @@
       <li>Woody</li>
       <li>Stony</li>
     </stuffCategories>
-    <costStuffCount>45</costStuffCount>
+    <costStuffCount>40</costStuffCount>
 
     <comps>
       <li Class="CompProperties_Forbiddable"/>
@@ -107,8 +107,8 @@
     <pathCost>14</pathCost>
 
     <statBases>
-      <MaxHitPoints>400</MaxHitPoints>
-      <WorkToBuild>9000</WorkToBuild>
+      <MaxHitPoints>600</MaxHitPoints>
+      <WorkToBuild>8000</WorkToBuild>
       <Mass>20</Mass>
       <Flammability>1.0</Flammability>
     </statBases>
@@ -120,9 +120,9 @@
       <li>Woody</li>
       <li>Stony</li>
     </stuffCategories>
-    <costStuffCount>100</costStuffCount>
+    <costStuffCount>200</costStuffCount>
     <costList>
-      <VV_LivingLeaf>25</VV_LivingLeaf>
+      <VV_LivingLeaf>10</VV_LivingLeaf>
       <VV_Fertilizer>60</VV_Fertilizer>
     </costList>
 
@@ -220,7 +220,7 @@
     <comps>
       <li Class="VVRace.CompProperties_Mana">
         <manaGenerateRule Class="VVRace.ManaFluxRule_Refuelable">
-          <mana>400</mana>
+          <mana>500</mana>
           <fuelDef>VV_Fertilizer</fuelDef>
         </manaGenerateRule>
       </li>
@@ -228,7 +228,7 @@
       <li Class="CompProperties_Refuelable">
         <fuelLabel>Arcane Fertilizer</fuelLabel>
         <fuelGizmoLabel>Arcane Fertilizer</fuelGizmoLabel>
-        <fuelConsumptionRate>5</fuelConsumptionRate>
+        <fuelConsumptionRate>8</fuelConsumptionRate>
         <fuelCapacity>40</fuelCapacity>
         <initialFuelPercent>1</initialFuelPercent>
         <fuelMultiplier>1</fuelMultiplier>

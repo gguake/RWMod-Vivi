@@ -25,10 +25,14 @@
 
     <comps>
       <li Class="CompProperties_Rottable">
-        <daysToRotStart>15</daysToRotStart>
+        <daysToRotStart>30</daysToRotStart>
         <rotDestroys>true</rotDestroys>
       </li>
     </comps>
+
+    <thingSetMakerTags>
+      <li>NonStandardReward</li>
+    </thingSetMakerTags>
   </ThingDef>
 
   <ThingDef ParentName="VV_PetalBase">

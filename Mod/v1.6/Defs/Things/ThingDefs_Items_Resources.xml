@@ -272,6 +272,10 @@
     <resourceReadoutPriority>Middle</resourceReadoutPriority>
     <soundInteract>Grain_Drop</soundInteract>
     <soundDrop>Grain_Drop</soundDrop>
+
+    <thingSetMakerTags>
+      <li>NonStandardReward</li>
+    </thingSetMakerTags>
   </ThingDef>
 
   <!-- 마법 비료 -->
@@ -305,6 +309,10 @@
     <tradeTags>
       <li>VV_ViviProduct</li>
     </tradeTags>
+
+    <thingSetMakerTags>
+      <li>NonStandardReward</li>
+    </thingSetMakerTags>
   </ThingDef>
   
 </Defs>

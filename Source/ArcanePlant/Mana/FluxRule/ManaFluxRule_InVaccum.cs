@@ -13,14 +13,10 @@ namespace VVRace
 
         public override int CalcManaFlux(Thing thing)
         {
-            if (!thing.Spawned || thing.Destroyed) { return 0; }
+            if (!thing.Spawned || thing.Destroyed || !thing.Map.Biome.inVacuum) { return 0; }
 
-            if (thing.Position.GetVacuum(thing.Map) >= 0.5f)
-            {
-                return mana;
-            }
-
-            return 0;
+            var vaccum = thing.GetRoom()?.Vacuum ?? 1f;
+            return vaccum >= 0.5f ? mana : 0;
         }
     }
 }
