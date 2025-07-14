@@ -52,22 +52,33 @@ namespace VVRace
         }
         private float? _filterEfficiencyRatio;
 
+        private float _filteredHoneyAmount;
+
+        public override void ExposeData()
+        {
+            base.ExposeData();
+
+            Scribe_Values.Look(ref _filteredHoneyAmount, "filteredHoneyAmount");
+        }
+
         public override void TickLong()
         {
             base.TickLong();
 
-            if (!PowerTraderComp.Off && RefuelableComp.HasFuel)
+            if (!PowerTraderComp.Off && RefuelableComp.HasFuel && _filteredHoneyAmount < VVThingDefOf.VV_FilteredHoney.stackLimit)
             {
-                var rawHoneyAmount = (int)Mathf.Clamp(GenTicks.TickLongInterval * DailyExtractRawHoneyAmount / 60000f, 0f, RefuelableComp.Fuel);
+                var rawHoneyAmount = Mathf.Clamp(GenTicks.TickLongInterval * DailyExtractRawHoneyAmount / 60000f, 0f, RefuelableComp.Fuel);
                 RefuelableComp.ConsumeFuel(rawHoneyAmount);
 
-                var filtered = (int)Mathf.Clamp(rawHoneyAmount * FilterEfficiencyRatio, 0, VVThingDefOf.VV_FilteredHoney.stackLimit);
-                if (filtered > 0)
+                _filteredHoneyAmount += rawHoneyAmount * FilterEfficiencyRatio;
+                if (_filteredHoneyAmount >= 1)
                 {
-                    var honey = ThingMaker.MakeThing(VVThingDefOf.VV_FilteredHoney);
-                    honey.stackCount = filtered;
+                    var stackCount = Mathf.Clamp((int)_filteredHoneyAmount, 1, VVThingDefOf.VV_FilteredHoney.stackLimit);
 
-                    if (!GenPlace.TryPlaceThing(honey, InteractionCell, Map, ThingPlaceMode.Direct))
+                    var honey = ThingMaker.MakeThing(VVThingDefOf.VV_FilteredHoney);
+                    honey.stackCount = stackCount;
+
+                    if (!GenPlace.TryPlaceThing(honey, InteractionCell, Map, ThingPlaceMode.Direct, placedAction: (_, actualPlaced) => { _filteredHoneyAmount -= actualPlaced; }))
                     {
                         honey.Destroy();
                     }
