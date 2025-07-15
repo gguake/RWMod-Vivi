@@ -43,4 +43,71 @@
       <li>VV_ViviExotic</li>
     </tradeTags>
   </ThingDef>
+  
+  <!-- 영원꽃 씨앗 -->
+  <ThingDef>
+    <defName>VV_Seed_Everflower</defName>
+    <thingClass>ThingWithComps</thingClass>
+    <category>Item</category>
+    <label>everfloweer seed</label>
+    <description>A seed of everflower. When planted in soil or an arcane plant pot, it becomes a seedling, which will eventually grow into everflower. Arcane plants require both mana and nutrients to grow.
+\nMana is absorbed from the environment mana and can also be supplied by nearby mana emitter or other arcane plants that produce mana.
+\nutrients continuously decrease regardless of mana, so a person must regularly apply mana fertilizer. If left without sufficient nutrients for too long, the seedling will die.
+\nOnce planted, an everflower cannot be moved easily.</description>
+
+    <tickerType>Never</tickerType>
+    <selectable>true</selectable>
+
+    <graphicData>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <texPath>Things/Item/VV_FlowerSeed</texPath>
+    </graphicData>
+
+    <drawerType>MapMeshOnly</drawerType>
+    <altitudeLayer>Item</altitudeLayer>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <rotatable>false</rotatable>
+
+    <useHitPoints>true</useHitPoints>
+    <stackLimit>1</stackLimit>
+    <pathCost>14</pathCost>
+    <alwaysHaulable>true</alwaysHaulable>
+
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <MarketValue>20</MarketValue>
+      <Mass>0.001</Mass>
+      <MaxHitPoints>20</MaxHitPoints>
+      <DeteriorationRate>0.5</DeteriorationRate>
+      <Flammability>1.0</Flammability>
+      <Nutrition>0.125</Nutrition>
+      <SellPriceFactor>0.5</SellPriceFactor>
+    </statBases>
+    
+    <ingestible>
+      <preferability>NeverForNutrition</preferability>
+      <foodType>Seed</foodType>
+    </ingestible>
+
+    <thingCategories>
+      <li>VV_ArcaneSeed</li>
+    </thingCategories>
+
+    <comps>
+      <li Class="CompProperties_Forbiddable" />
+      <li Class="VVRace.CompProperties_ArcaneSeed">
+        <targetPlantDef>VV_Everflower</targetPlantDef>
+      </li>
+    </comps>
+
+    <socialPropernessMatters>true</socialPropernessMatters>
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Grain_Drop</soundInteract>
+    <soundDrop>Grain_Drop</soundDrop>
+
+    <thingSetMakerTags>
+      <li>NonStandardReward</li>
+    </thingSetMakerTags>
+  </ThingDef>
+
 </Defs>

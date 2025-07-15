@@ -244,7 +244,7 @@
         <countRange>-1~7</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
-        <thingDef>VV_Everflower</thingDef>
+        <thingDef>VV_Seed_Everflower</thingDef>
         <countRange>-4~1</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">

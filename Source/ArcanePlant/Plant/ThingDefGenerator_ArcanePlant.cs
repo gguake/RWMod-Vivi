@@ -1,7 +1,6 @@
 ﻿using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 using Verse;
 
 namespace VVRace
@@ -18,7 +17,7 @@ namespace VVRace
                 }
 
                 var extension = plantDef.GetModExtension<ArcaneSeedExtension>();
-                if (extension == null) { continue; }
+                if (extension == null || extension.seedDef != null) { continue; }
 
                 var defName = $"VV_Seed_{plantDef.defName.Replace("VV_", "")}";
                 var seedDef = hotReload ? DefDatabase<ThingDef>.GetNamed(defName) : new ThingDef();
@@ -62,7 +61,7 @@ namespace VVRace
 
                 seedDef.SetStatBaseValue(StatDefOf.Mass, 0.001f);
                 seedDef.SetStatBaseValue(StatDefOf.MaxHitPoints, 20f);
-                seedDef.SetStatBaseValue(StatDefOf.DeteriorationRate, 1f);
+                seedDef.SetStatBaseValue(StatDefOf.DeteriorationRate, 0.5f);
                 seedDef.SetStatBaseValue(StatDefOf.Flammability, 1f);
                 seedDef.SetStatBaseValue(StatDefOf.Nutrition, 0.125f);
                 seedDef.SetStatBaseValue(StatDefOf.SellPriceFactor, 0.5f);

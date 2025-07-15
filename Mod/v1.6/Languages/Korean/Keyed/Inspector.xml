@@ -24,4 +24,6 @@
 
 <VV_Inspector_GrowingArcanePlantReady>{0} 재배 준비중</VV_Inspector_GrowingArcanePlantReady>
 <VV_Inspector_GrowingArcanePlantProgress>{1} 재배 진행도: {0}</VV_Inspector_GrowingArcanePlantProgress>
+
+<VV_Inspector_EverflowerAttunementState>교감: {LEVEL}단계 ({EXP})</VV_Inspector_EverflowerAttunementState>
 </LanguageData>

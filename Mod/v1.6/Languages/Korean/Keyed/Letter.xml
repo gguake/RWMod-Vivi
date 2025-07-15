@@ -16,10 +16,9 @@
 
 <VV_Letter_LinkEverflowerLabel>영원꽃 교감</VV_Letter_LinkEverflowerLabel>
 <VV_Letter_LinkEverflower>{PAWN_labelShort}가 영원꽃과 교감해 연결되었습니다. 영원꽃과 교감중인 로열 비비가 환경 마나가 있는 지역에 머무르면 환경 마나가 소량 흡수되어 교감 연결이 천천히 강화되며, 교감 연결이 강해지면 점차 영원꽃의 마나를 다룰수 있게 됩니다.
-\n교감 연결이 형성된 로열 비비는 모든 받는 피해가 줄어들지만 영원꽃이 받는 모든 피해는 연결된 로열 비비가 대신 받습니다. 이 연결은 어느 한쪽이 죽을때까지 끊어지지 않지만 아주 멀리 떨어지거나 로열 비비가 차단되면 연결이 약해져 일시적으로 교감의 영향을 받지 않고 관련 능력도 사용할 수 없습니다.
-\n영원꽃이 파괴되면 교감한 로열 비비의 교감 연결이 약화되지만 완전히 사라지지는 않으므로 새로운 영원꽃에 교감해 교감을 지속할 수 있습니다.</VV_Letter_LinkEverflower>
+\n교감 연결이 형성된 로열 비비는 모든 받는 피해가 줄어들지만 영원꽃이 받는 모든 피해는 연결된 로열 비비가 대신 받습니다.</VV_Letter_LinkEverflower>
 
 <VV_Letter_EverflowerAttumentLevelUpLabel>영원꽃 교감: {LEVEL}단계</VV_Letter_EverflowerAttumentLevelUpLabel>
-<VV_Letter_EverflowerAttumentLevelUp>{PAWN_labelShort}의 영원꽃 교감이 강해졌습니다.</VV_Letter_EverflowerAttumentLevelUp>
+<VV_Letter_EverflowerAttumentLevelUp>영원꽃의 교감 연결이 강해졌습니다.</VV_Letter_EverflowerAttumentLevelUp>
 
 </LanguageData>

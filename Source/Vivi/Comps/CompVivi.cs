@@ -1,5 +1,4 @@
 ﻿using RimWorld;
-using System.Collections.Generic;
 using UnityEngine;
 using Verse;
 
@@ -7,17 +6,17 @@ namespace VVRace
 {
     public class CompProperties_Vivi : CompProperties
     {
-        public SimpleCurve everflowerAttuneRateCurve;
-        public SimpleCurve everflowerAttuneLevelCurve;
-
         public CompProperties_Vivi()
         {
             compClass = typeof(CompVivi);
         }
     }
 
+    [StaticConstructorOnStartup]
     public class CompVivi : ThingComp
     {
+        public static Material AttunementLineMat = MaterialPool.MatFrom(GenDraw.LineTexPath, ShaderDatabase.Transparent, new Color(0.5f, 1f, 0.5f));
+
         public CompProperties_Vivi Props => (CompProperties_Vivi)props;
 
         public bool isRoyal = false;
@@ -25,27 +24,6 @@ namespace VVRace
 
         public ArcanePlant_Everflower LinkedEverflower => _linkedEverflower;
         private ArcanePlant_Everflower _linkedEverflower;
-
-        public float EverflowerAttunement
-        {
-            get => _everflowerAttunement;
-            set
-            {
-                var minimumAttunement = Props.everflowerAttuneLevelCurve.EvaluateInverted(_everflowerAttunementLevel);
-                _everflowerAttunement = Mathf.Max(minimumAttunement, value);
-                
-                var afterLevel = (int)Props.everflowerAttuneLevelCurve.Evaluate(_everflowerAttunement);
-                if (afterLevel > _everflowerAttunementLevel)
-                {
-                    AttunementLevelUp(afterLevel);
-                }
-
-                UpdateLinkHediff();
-            }
-        }
-
-        private int _everflowerAttunementLevel;
-        private float _everflowerAttunement;
 
         public bool ShouldBeRoyalIfMature
         {
@@ -58,14 +36,20 @@ namespace VVRace
             }
         }
 
+        public bool AttunementActive
+        {
+            get
+            {
+                return isRoyal && parent.Spawned && LinkedEverflower != null && LinkedEverflower.Spawned && parent.Map == LinkedEverflower.Map;
+            }
+        }
+
         public override void PostExposeData()
         {
             Scribe_Values.Look(ref isRoyal, "isRoyal");
             Scribe_Values.Look(ref _originalHairColor, "originalHairColor");
 
             Scribe_References.Look(ref _linkedEverflower, "linkedEverflower");
-            Scribe_Values.Look(ref _everflowerAttunementLevel, "_everflowerAttunementLevel");
-            Scribe_Values.Look(ref _everflowerAttunement, "everflowerAttunement");
         }
 
         public override void PostSpawnSetup(bool respawningAfterLoad)
@@ -92,7 +76,7 @@ namespace VVRace
             }
             else
             {
-                if (isRoyal && LinkedEverflower != null && LinkedEverflower.Spawned && LinkedEverflower.Map == parent.Map)
+                if (AttunementActive)
                 {
                     GiveEverflowerLinkHediff();
                 }
@@ -106,6 +90,14 @@ namespace VVRace
             RemoveEverflowerLinkHediff();
         }
 
+        public override void Notify_Killed(Map prevMap, DamageInfo? dinfo = null)
+        {
+            if (LinkedEverflower != null)
+            {
+                LinkedEverflower.EverflowerComp.Unlink((Pawn)parent);
+            }
+        }
+
         public override void CompTickInterval(int delta)
         {
             if (parent.Spawned)
@@ -115,13 +107,23 @@ namespace VVRace
                     RefreshHairColor();
                 }
 
-                if (isRoyal && parent.IsHashIntervalTick(GenTicks.TickRareInterval, delta) && LinkedEverflower != null)
+                if (AttunementActive && parent.IsHashIntervalTick(GenTicks.TickRareInterval, delta))
                 {
                     var mapManaComp = parent.Map.GetManaComponent();
                     var mana = mapManaComp[parent.Position];
 
-                    EverflowerAttunement += Props.everflowerAttuneRateCurve.Evaluate(mana) / 60000f * GenTicks.TickRareInterval * delta;
+                    LinkedEverflower.EverflowerComp.TransferMana(mana);
                 }
+            }
+        }
+
+        public override void PostDrawExtraSelectionOverlays()
+        {
+            if (AttunementActive)
+            {
+                var a = parent.TrueCenter();
+                var b = LinkedEverflower.TrueCenter();
+                GenDraw.DrawLineBetween(a, b, AttunementLineMat);
             }
         }
 
@@ -132,24 +134,6 @@ namespace VVRace
             {
                 isRoyal = sourceComp.isRoyal;
                 _originalHairColor = sourceComp._originalHairColor;
-            }
-        }
-
-        public override IEnumerable<Gizmo> CompGetGizmosExtra()
-        {
-            if (DebugSettings.godMode)
-            {
-                if (isRoyal && LinkedEverflower != null)
-                {
-                    yield return new Command_Action()
-                    {
-                        defaultLabel = "DEV: +10 Attunement EXP",
-                        action = () =>
-                        {
-                            EverflowerAttunement += 10;
-                        }
-                    };
-                }
             }
         }
 
@@ -226,7 +210,6 @@ namespace VVRace
         public void Notify_LinkEverflower(ArcanePlant_Everflower everflower)
         {
             _linkedEverflower = everflower;
-            _everflowerAttunementLevel = Mathf.Max(1, _everflowerAttunementLevel);
 
             Find.LetterStack.ReceiveLetter(
                 LocalizeString_Letter.VV_Letter_LinkEverflowerLabel.Translate(),
@@ -237,26 +220,11 @@ namespace VVRace
             GiveEverflowerLinkHediff();
         }
 
-        public void Notify_LinkedEverflowerSpawned()
-        {
-            if (isRoyal && LinkedEverflower != null && LinkedEverflower.Spawned && LinkedEverflower.Map == parent.Map)
-            {
-                GiveEverflowerLinkHediff();
-            }
-        }
-
-        public void Notify_LinkedEverflowerDespawned()
-        {
-            RemoveEverflowerLinkHediff();
-        }
-
         public void Notify_LinkedEverflowerDestroyed()
         {
             _linkedEverflower = null;
-            EverflowerAttunement = EverflowerAttunement * 0.7f;
 
             RemoveEverflowerLinkHediff();
-
             Messages.Message(LocalizeString_Message.VV_Message_LinkDisconnectedEverflower.Translate(parent.Named("PAWN")), MessageTypeDefOf.NegativeEvent);
         }
 
@@ -267,9 +235,8 @@ namespace VVRace
             if (hediff == null)
             {
                 hediff = pawn.health.AddHediff(VVHediffDefOf.VV_EverflowerLink);
+                hediff.Severity = LinkedEverflower.EverflowerComp.AttunementHediffSeverity;
             }
-
-            UpdateLinkHediff(hediff);
         }
 
         private void RemoveEverflowerLinkHediff()
@@ -280,29 +247,6 @@ namespace VVRace
             {
                 pawn.health.RemoveHediff(hediff);
             }
-        }
-
-        private void AttunementLevelUp(int level)
-        {
-            _everflowerAttunementLevel = level;
-
-            Find.LetterStack.ReceiveLetter(
-                LocalizeString_Letter.VV_Letter_EverflowerAttumentLevelUpLabel.Translate(parent.Named("PAWN"), level.Named("LEVEL")),
-                LocalizeString_Letter.VV_Letter_EverflowerAttumentLevelUp.Translate(parent.Named("PAWN"), level.Named("LEVEL")),
-                LetterDefOf.PositiveEvent,
-                parent);
-        }
-
-        private void UpdateLinkHediff(Hediff hediff = null)
-        {
-            if (hediff == null)
-            {
-                hediff = ((Pawn)parent).health.hediffSet.GetFirstHediffOfDef(VVHediffDefOf.VV_EverflowerLink);
-            }
-
-            var nextLevelExp = Props.everflowerAttuneLevelCurve.EvaluateInverted(_everflowerAttunementLevel + 1);
-            var curLevelExp = Props.everflowerAttuneLevelCurve.EvaluateInverted(_everflowerAttunementLevel);
-            hediff.Severity = _everflowerAttunementLevel + (_everflowerAttunement - curLevelExp) / (nextLevelExp - curLevelExp);
         }
     }
 }

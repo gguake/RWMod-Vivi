@@ -49,7 +49,7 @@ namespace VVRace
 
             yield return Toils_General.Do(() =>
             {
-                Everflower.Link(pawn);
+                Everflower.EverflowerComp.Link(pawn);
             });
         }
     }

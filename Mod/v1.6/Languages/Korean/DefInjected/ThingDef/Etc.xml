@@ -8,4 +8,10 @@
 
 <VV_FilthPollen.label>꽃가루</VV_FilthPollen.label>
 <VV_FilthPollen.description>비비가 꿀을 채집할때 종종 주변에 흩어지는 꽃가루입니다.</VV_FilthPollen.description>
+
+<VV_Seed_Everflower.label>영원꽃 씨앗</VV_Seed_Everflower.label>
+<VV_Seed_Everflower.description>영원꽃의 씨앗으로 심으면 영원꽃으로 자랍니다.\n마법 식물이 성장하려면 마나와 양분이 모두 공급되야 합니다.
+\n마나는 환경 마나를 흡수하므로 주변에 마나 발생기를 설치하거나 마나를 생산하는 마법 식물로부터 공급할 수 있습니다.
+\n양분은 마나와 관계없이 지속적으로 감소하므로 정기적으로 사람이 마나 비료를 공급해야 합니다. 양분이 부족한 상태로 시간이 오래 지나면 모종이 죽습니다.
+\n한번 심은 영원꽃은 쉽게 옮길수 없습니다.</VV_Seed_Everflower.description>
 </LanguageData>

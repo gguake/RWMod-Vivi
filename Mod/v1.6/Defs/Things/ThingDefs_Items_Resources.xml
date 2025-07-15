@@ -247,7 +247,7 @@
       <MarketValue>20</MarketValue>
       <Mass>0.001</Mass>
       <MaxHitPoints>20</MaxHitPoints>
-      <DeteriorationRate>1</DeteriorationRate>
+      <DeteriorationRate>0.5</DeteriorationRate>
       <Flammability>1.0</Flammability>
       <Nutrition>0.125</Nutrition>
       <SellPriceFactor>0.5</SellPriceFactor>

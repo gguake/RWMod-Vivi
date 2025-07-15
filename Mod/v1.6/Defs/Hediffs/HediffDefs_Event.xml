@@ -154,6 +154,11 @@
 
     <comps>
       <li><compClass>VVRace.HediffComp_EverflowerLink</compClass></li>
+      <li Class="VVRace.HediffCompProperties_GiveEverflowerAbility">
+        <abilities>
+          <VV_Fairyfication>3</VV_Fairyfication>
+        </abilities>
+      </li>
     </comps>
   </HediffDef>
 </Defs>

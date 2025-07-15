@@ -102,7 +102,7 @@
         </li>
         <li Class="ScenPart_StartingThing_Defined">
           <def>StartingThing_Defined</def>
-          <thingDef>VV_Everflower</thingDef>
+          <thingDef>VV_Seed_Everflower</thingDef>
           <count>1</count>
         </li>
         <li Class="ScenPart_StartingThing_Defined">

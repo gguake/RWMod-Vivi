@@ -24,4 +24,6 @@
 \nutrients continuously decrease regardless of mana, so a person must regularly apply mana fertilizer. If left without sufficient nutrients for too long, the seedling will die.</VV_Thing_SeedDesc>
 
 <VV_Thing_Seedling>{0} seedling</VV_Thing_Seedling>
+
+<VV_FailReasonToDeconstructEverflowerPotted>Cannot deconstruct since everflower overhead.</VV_FailReasonToDeconstructEverflowerPotted>
 </LanguageData>

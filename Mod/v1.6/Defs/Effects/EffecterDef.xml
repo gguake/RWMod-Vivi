@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  
   <FleckDef ParentName="FleckBase_Thrown">
     <defName>VV_PollenPuff</defName>
     <graphicData>
@@ -79,36 +78,6 @@
         <fleckDef>Beam_Glow</fleckDef>
         <chancePerTick>0.5</chancePerTick>
         <scale>0.8</scale>
-      </li>
-    </children>
-  </EffecterDef>
-
-  <EffecterDef>
-    <defName>VV_EverflowerLink</defName>
-    <children>
-      <li>
-        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
-        <moteDef>VV_Mote_EverflowerCircle</moteDef>
-        <spawnLocType>OnSource</spawnLocType>
-        <ticksBetweenMotes>24</ticksBetweenMotes>
-      </li>
-      <li>
-        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
-        <moteDef>VV_Mote_EverflowerCircle</moteDef>
-        <spawnLocType>OnTarget</spawnLocType>
-        <ticksBetweenMotes>24</ticksBetweenMotes>
-      </li>
-      <li>
-        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
-        <moteDef>VV_Mote_EverflowerLinkDistortion</moteDef>
-        <spawnLocType>OnSource</spawnLocType>
-        <ticksBetweenMotes>24</ticksBetweenMotes>
-      </li>
-      <li>
-        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
-        <moteDef>VV_Mote_EverflowerLinkDistortion</moteDef>
-        <spawnLocType>OnTarget</spawnLocType>
-        <ticksBetweenMotes>24</ticksBetweenMotes>
       </li>
     </children>
   </EffecterDef>

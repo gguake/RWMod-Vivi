@@ -1,5 +1,8 @@
-﻿using RimWorld;
+﻿using HarmonyLib;
+using RimWorld;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using Verse;
 
 namespace VVRace
@@ -52,6 +55,63 @@ namespace VVRace
             }
 
             base.DeSpawn(mode);
+        }
+
+        public override IEnumerable<Gizmo> GetGizmos()
+        {
+            var gizmos = base.GetGizmos();
+
+            bool canMinify = true;
+            if (Spawned)
+            {
+                foreach (var cell in this.OccupiedRect())
+                {
+                    if (cell.GetFirstThing<ArcanePlant_Everflower>(Map) != null)
+                    {
+                        canMinify = false;
+                        break;
+                    }
+                }
+            }
+
+            if (Spawned)
+            {
+                foreach (var gizmo in gizmos)
+                {
+                    if ((gizmo is Designator_Install || gizmo is Designator_Uninstall) && !canMinify)
+                    {
+                        continue;
+                    }
+
+                    yield return gizmo;
+                }
+            }
+            else
+            {
+                foreach (var gizmo in gizmos)
+                {
+                    yield return gizmo;
+                }
+            }
+
+        }
+
+        public override AcceptanceReport DeconstructibleBy(Faction faction)
+        {
+            if (Spawned)
+            {
+                foreach (var cell in this.OccupiedRect())
+                {
+                    if (cell.GetFirstThing<ArcanePlant_Everflower>(Map) != null)
+                    {
+                        return new AcceptanceReport(LocalizeString_Etc.VV_FailReasonToDeconstructEverflowerPotted.Translate());
+                    }
+                }
+
+                return false;
+            }
+
+            return base.DeconstructibleBy(faction);
         }
     }
 }

@@ -1,41 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <ThingDef ParentName="VV_ArcanePlantBase">
+  <!-- Everflower -->
+  <ThingDef>
     <defName>VV_Everflower</defName>
-    <thingClass>VVRace.ArcanePlant_Everflower</thingClass>
     <label>everflower</label>
-    <description>It is a very rare arcane flower, treated as a sacred flower by the Vivi. Although its specific cultivation methods are not known, it is occasionally found alongside other arcane plants.
-\nIt periodically releases a large amount of pollen. When an adult Vivi gathers honey from this flower, it has the ability to convert biological age into mana, absorbing it to reverse aging.
-\nThe scent of the everflower has a strong sedative effect, but the Vivi have some resistance to it, allowing only them to gather the honey. However, a single Vivi cannot gather honey repeatedly.</description>
+    <description>A very rare arcane flower revered as sacred by the Vivi. Everflowers cannot be transplanted or cultivated by conventional means; only those attuned beyond a certain stage can be moved or grown.
+\nOnly vivi can gather honey from the everflower, and doing so converts the gatherer's biological age into mana, which the flower absorbs.
+\nRoyal vivi with high psychic sensitivity can unlock special abilities by entering a psychic attunement with an everflower, but each royal vivi may link with only one everflower.
+\n\nWithin Vivi society, it is customary to give a single everflower seed to vivi who depart to build a new hive.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_PerfumingPetal</ThingDef>
     </descriptionHyperlinks>
 
+    <category>Building</category>
+    <thingClass>VVRace.ArcanePlant_Everflower</thingClass>
+    <tickerType>Normal</tickerType>
+    <selectable>true</selectable>
+
+    <drawerType>RealtimeOnly</drawerType>
+    <altitudeLayer>MoteOverheadLow</altitudeLayer>
     <graphicData>
       <texPath>Things/Plants/VV_Everflower</texPath>
       <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1.0, 1.0)</drawSize>
     </graphicData>
+    
+    <pathCost>50</pathCost>
+    <pathCostIgnoreRepeat>false</pathCostIgnoreRepeat>
 
     <statBases>
-      <MaxHitPoints>120</MaxHitPoints>
+      <MaxHitPoints>250</MaxHitPoints>
       <WorkToBuild>250000</WorkToBuild>
-      <Beauty>15</Beauty>
-      <BeautyOutdoors>15</BeautyOutdoors>
-      <SellPriceFactor>0.75</SellPriceFactor>
+      <Flammability>0</Flammability>
+      <Beauty>30</Beauty>
+      <BeautyOutdoors>30</BeautyOutdoors>
+      <SellPriceFactor>0</SellPriceFactor>
 
       <VV_PlantGatherCooldown>0.1</VV_PlantGatherCooldown>
       <VV_PlantHoneyGatherYield>1.0</VV_PlantHoneyGatherYield>
     </statBases>
 
+    <fillPercent>0.1</fillPercent>
+
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+
     <costList>
-      <VV_PerfumingPetal>20</VV_PerfumingPetal>
-      <VV_Pollen>100</VV_Pollen>
+      <VV_PerfumingPetal>100</VV_PerfumingPetal>
+      <VV_Seed_Everflower>1</VV_Seed_Everflower>
     </costList>
 
-    <building>
-      <uninstallWork>250</uninstallWork>
-    </building>
+    <placeWorkers>
+      <li>VVRace.PlaceWorker_AllowArcanePlantPot</li>
+    </placeWorkers>
 
+    <building>
+      <isInert>true</isInert>
+      <ai_neverTrashThis>true</ai_neverTrashThis>
+      <ai_chillDestination>false</ai_chillDestination>
+      <deconstructible>false</deconstructible>
+      <claimable>false</claimable>
+      <allowWireConnection>false</allowWireConnection>
+      <allowAutoroof>false</allowAutoroof>
+      <repairable>false</repairable>
+      <artificialForMeditationPurposes>false</artificialForMeditationPurposes>
+      <canPlaceOverWall>false</canPlaceOverWall>
+      <expandHomeArea>true</expandHomeArea>
+    </building>
+    
     <comps>
       <li Class="VVRace.CompProperties_Mana">
         <manaGenerateRule Class="VVRace.ManaFluxRule_Random">
@@ -50,34 +81,84 @@
 
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
-      <li Class="VVRace.CompProperties_ManaFilthMaker">
-        <filthDef>VV_FilthPollen</filthDef>
-        <makeAmountPerDays>3~5</makeAmountPerDays>
-        <radius>1.9</radius>
-        <exceptCenter>true</exceptCenter>
-
-        <spawnEffecter>VV_PollenEmitting</spawnEffecter>
-      </li>
-
       <li Class="CompProperties_Forbiddable"/>
       <li Class="CompProperties_Glower">
         <compClass>VVRace.CompManaGlower</compClass>
         <glowRadius>7</glowRadius>
         <glowColor>(241,178,83,0)</glowColor>
       </li>
+
+      <li Class="VVRace.CompProperties_Everflower">
+        <everflowerAttuneRateCurve>
+          <points>
+            <li>(0,0)</li>
+            <li>(5,1)</li>
+            <li>(45,3.5)</li>
+            <li>(100,5)</li>
+            <li>(250,7)</li>
+            <li>(500,9)</li>
+          </points>
+        </everflowerAttuneRateCurve>
+
+        <everflowerAttuneLevelCurve>
+          <points>
+            <li>(0,1)</li>
+            <li>(30,2)</li>
+            <li>(100,3)</li>
+            <li>(270,4)</li>
+          </points>
+        </everflowerAttuneLevelCurve>
+
+        <graphicsByLevel>
+          <li>
+              <texPath>Things/Plants/VV_Everflower/VV_EverflowerA</texPath>
+              <graphicClass>Graphic_Single</graphicClass>
+              <shaderType>Cutout</shaderType>
+              <drawSize>(1.0, 1.0)</drawSize>
+          </li>
+          <li>
+              <texPath>Things/Plants/VV_Everflower/VV_EverflowerA</texPath>
+              <graphicClass>Graphic_Single</graphicClass>
+              <shaderType>Cutout</shaderType>
+              <drawSize>(1.0, 1.0)</drawSize>
+          </li>
+          <li>
+              <texPath>Things/Plants/VV_Everflower/VV_EverflowerA</texPath>
+              <graphicClass>Graphic_Single</graphicClass>
+              <shaderType>Cutout</shaderType>
+              <drawSize>(1.2, 1.2)</drawSize>
+          </li>
+          <li>
+              <texPath>Things/Plants/VV_Everflower/VV_EverflowerB</texPath>
+              <graphicClass>Graphic_Single</graphicClass>
+              <shaderType>Cutout</shaderType>
+              <drawSize>(6, 6)</drawSize>
+              <drawOffset>(0, 0.2, 1.8)</drawOffset>
+          </li>
+          <li>
+              <texPath>Things/Plants/VV_Everflower/VV_EverflowerC</texPath>
+              <graphicClass>Graphic_Single</graphicClass>
+              <shaderType>Cutout</shaderType>
+              <drawSize>(6, 6)</drawSize>
+              <drawOffset>(0, 0.2, 1.8)</drawOffset>
+          </li>
+        </graphicsByLevel>
+        <effectsOnLevelAcquire>
+          <li>VV_EverflowerGrow_0_Level</li>
+          <li>VV_EverflowerGrow_1_Level</li>
+          <li>VV_EverflowerGrow_2_Level</li>
+          <li>VV_EverflowerGrow_3_Level</li>
+        </effectsOnLevelAcquire>
+      </li>
     </comps>
+
+    <inspectorTabs>
+      <li>VVRace.ITab_EverflowerFairies</li>
+    </inspectorTabs>
 
     <modExtensions>
       <li Class="VVRace.ArcaneSeedExtension">
-        <seedMarketValue>800</seedMarketValue>
-        <seedColor>(255,255,0)</seedColor>
-
-        <leavingSeedCountCurve>
-          <points>
-            <li>(0, 1)</li>
-            <li>(1.0, 1)</li>
-          </points>
-        </leavingSeedCountCurve>
+        <seedDef>VV_Seed_Everflower</seedDef>
       </li>
     </modExtensions>
   </ThingDef>

@@ -12,56 +12,37 @@ namespace VVRace
         private static readonly Texture2D ReserveLinkCommandTex = ContentFinder<Texture2D>.Get("UI/Commands/VV_LinkConnect");
         private static readonly Texture2D CancelCommandTex = ContentFinder<Texture2D>.Get("UI/Designators/Cancel");
 
-        private Pawn _linkReserved;
-        private Pawn _linked;
+        public CompEverflower EverflowerComp
+        {
+            get
+            {
+                if (_everflowerComp == null)
+                {
+                    _everflowerComp = GetComp<CompEverflower>();
+                }
+                return _everflowerComp;
+            }
+        }
+        private CompEverflower _everflowerComp;
 
-        public bool CanReserveRoyalViviLink => _linked == null && _linkReserved == null;
+        public int AttunementLevel => EverflowerComp.AttunementLevel;
 
-        public Pawn LinkedPawn => _linked;
-
-        public Pawn ReservedPawn => _linkReserved;
+        public Pawn ReservedPawn => _linkReservedPawn;
+        private Pawn _linkReservedPawn;
 
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_References.Look(ref _linkReserved, "linkReserved");
-            Scribe_References.Look(ref _linked, "linked");
-        }
-
-        public override void SpawnSetup(Map map, bool respawningAfterLoad)
-        {
-            base.SpawnSetup(map, respawningAfterLoad);
-
-            if (!respawningAfterLoad)
-            {
-                if (LinkedPawn != null && !LinkedPawn.Destroyed)
-                {
-                    LinkedPawn.GetCompVivi()?.Notify_LinkedEverflowerSpawned();
-                }
-            }
-        }
-
-        public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
-        {
-            if (LinkedPawn != null && !LinkedPawn.Destroyed)
-            {
-                LinkedPawn.GetCompVivi()?.Notify_LinkedEverflowerDespawned();
-            }
-
-            UnreserveLink();
-            base.DeSpawn(mode);
+            Scribe_References.Look(ref _linkReservedPawn, "linkReserved");
         }
 
         public override void Destroy(DestroyMode mode = DestroyMode.Vanish)
         {
-            if (LinkedPawn != null && !LinkedPawn.Destroyed)
-            {
-                LinkedPawn.GetCompVivi().Notify_LinkedEverflowerDestroyed();
-            }
-
             UnreserveLink();
             base.Destroy(mode);
         }
+
+        public override AcceptanceReport DeconstructibleBy(Faction faction) => false;
 
         private List<FloatMenuOption> _tmpFloatMenuOptions = new List<FloatMenuOption>();
         public override IEnumerable<Gizmo> GetGizmos()
@@ -81,7 +62,7 @@ namespace VVRace
                     {
                         _tmpFloatMenuOptions.Add(new FloatMenuOption(pawn.Label, () =>
                         {
-                            _linkReserved = pawn;
+                            _linkReservedPawn = pawn;
 
                         }, pawn, Color.white));
                     }
@@ -95,73 +76,43 @@ namespace VVRace
                     }
                 }
 
-                if (LinkedPawn == null)
+                if (Map.mapPawns.AllPawnsSpawned.Any(p => p.IsRoyalVivi()))
                 {
-                    if (Map.mapPawns.AllPawnsSpawned.Any(p => p.IsRoyalVivi()))
+                    if (ReservedPawn == null)
                     {
-                        if (ReservedPawn == null)
+                        var cmd = new Command_Action()
                         {
-                            var cmd = new Command_Action()
+                            icon = ReserveLinkCommandTex,
+                            defaultLabel = LocalizeString_Command.VV_Command_ReserveLinkEverflower.Translate(),
+                            defaultDesc = LocalizeString_Command.VV_Command_ReserveLinkEverflowerDesc.Translate(),
+                            action = () =>
                             {
-                                icon = ReserveLinkCommandTex,
-                                defaultLabel = LocalizeString_Command.VV_Command_ReserveLinkEverflower.Translate(),
-                                defaultDesc = LocalizeString_Command.VV_Command_ReserveLinkEverflowerDesc.Translate(),
-                                action = () =>
+                                if (!_tmpFloatMenuOptions.Any())
                                 {
-                                    if (!_tmpFloatMenuOptions.Any())
-                                    {
-                                        _tmpFloatMenuOptions.Add(new FloatMenuOption(LocalizeString_Gizmo.VV_Gizmo_OptionLabel_NoRoyalVivi.Translate(), null));
-                                    }
+                                    _tmpFloatMenuOptions.Add(new FloatMenuOption(LocalizeString_Gizmo.VV_Gizmo_OptionLabel_NoRoyalVivi.Translate(), null));
+                                }
 
-                                    Find.WindowStack.Add(new FloatMenu(_tmpFloatMenuOptions));
-                                }
-                            };
-                            yield return cmd;
-                        }
-                        else
+                                Find.WindowStack.Add(new FloatMenu(_tmpFloatMenuOptions));
+                            }
+                        };
+                        yield return cmd;
+                    }
+                    else
+                    {
+                        var cmd = new Command_Action()
                         {
-                            var cmd = new Command_Action()
+                            icon = CancelCommandTex,
+                            defaultLabel = LocalizeString_Command.VV_Command_CancelReserveLinkEverflower.Translate(),
+                            defaultDesc = LocalizeString_Command.VV_Command_CancelReserveLinkEverflowerDesc.Translate(),
+                            action = () =>
                             {
-                                icon = CancelCommandTex,
-                                defaultLabel = LocalizeString_Command.VV_Command_CancelReserveLinkEverflower.Translate(),
-                                defaultDesc = LocalizeString_Command.VV_Command_CancelReserveLinkEverflowerDesc.Translate(),
-                                action = () =>
-                                {
-                                    UnreserveLink();
-                                }
-                            };
-                            yield return cmd;
-                        }
+                                UnreserveLink();
+                            }
+                        };
+                        yield return cmd;
                     }
                 }
             }
-
-        }
-
-        public override void PreApplyDamage(ref DamageInfo dinfo, out bool absorbed)
-        {
-            if (LinkedPawn != null && LinkedPawn.Spawned && LinkedPawn.Map == Map)
-            {
-                LinkedPawn.TakeDamage(dinfo);
-                absorbed = true;
-                return;
-            }
-
-            base.PreApplyDamage(ref dinfo, out absorbed);
-        }
-
-        public override void PreTraded(TradeAction action, Pawn playerNegotiator, ITrader trader)
-        {
-            if (LinkedPawn != null)
-            {
-                LinkedPawn.GetCompVivi().Notify_LinkedEverflowerDestroyed();
-            }
-            else
-            {
-                UnreserveLink();
-            }
-
-            base.PreTraded(action, playerNegotiator, trader);
         }
 
         public bool CanGatherByPawn(Pawn pawn, RecipeDef_Gathering recipe)
@@ -195,19 +146,9 @@ namespace VVRace
             }
         }
 
-        public void Link(Pawn pawn)
-        {
-            _linkReserved = null;
-            _linked = pawn;
-
-            pawn.GetCompVivi()?.Notify_LinkEverflower(this);
-
-            Messages.Message(LocalizeString_Message.VV_Message_LinkEverflowerComplete.Translate(pawn.Named("PAWN")), MessageTypeDefOf.PositiveEvent);
-        }
-
         public void UnreserveLink()
         {
-            _linkReserved = null;
+            _linkReservedPawn = null;
         }
     }
 }

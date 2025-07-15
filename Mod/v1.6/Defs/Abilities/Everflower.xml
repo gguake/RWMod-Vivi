@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <AbilityDef>
+    <defName>VV_Fairyfication</defName>
+    <label>fairyfication</label>
+    <description>.</description>
+    
+    <iconPath>UI/Icons/Genes/Gene_FoamSpray</iconPath>
+    <cooldownTicksRange>60000</cooldownTicksRange>
+
+    <stunTargetWhileCasting>true</stunTargetWhileCasting>
+
+    <showPsycastEffects>false</showPsycastEffects>
+    <stunTargetWhileCasting>true</stunTargetWhileCasting>
+    <displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
+    <disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
+
+    <hostile>false</hostile>
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+
+    <verbProperties>
+      <verbClass>Verb_CastAbilityTouch</verbClass>
+      <drawAimPie>false</drawAimPie>
+      <warmupTime>1</warmupTime>
+      <range>-1</range>
+      <targetParams>
+        <canTargetSelf>false</canTargetSelf>
+        <canTargetMechs>false</canTargetMechs>
+        <canTargetBuildings>false</canTargetBuildings>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="VVRace.AbilityCompProperties_Fairyfication">
+        <completeEffect>VV_FairyficationComplete</completeEffect>
+      </li>
+    </comps>
+  </AbilityDef>
+
+
+</Defs>

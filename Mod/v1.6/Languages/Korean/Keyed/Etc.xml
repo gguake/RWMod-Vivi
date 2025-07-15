@@ -24,4 +24,6 @@
 \n양분은 마나와 관계없이 지속적으로 감소하므로 정기적으로 사람이 마나 비료를 공급해야 합니다. 양분이 부족한 상태로 시간이 오래 지나면 모종이 죽습니다.</VV_Thing_SeedDesc>
 
 <VV_Thing_Seedling>{0} 모종</VV_Thing_Seedling>
+
+<VV_FailReasonToDeconstructEverflowerPotted>영원꽃이 위에 있어 철거할 수 없음</VV_FailReasonToDeconstructEverflowerPotted>
 </LanguageData>

@@ -20,6 +20,6 @@
 \nIf the everflower is destroyed, the vivi's attunement link is weakened but not lost, allowing the vivi to attune to a new everflower and continue the bond.</VV_Letter_Linkeverflower>
 
 <VV_Letter_EverflowerAttumentLevelUpLabel>Attunement: {LEVEL} level</VV_Letter_EverflowerAttumentLevelUpLabel>
-<VV_Letter_EverflowerAttumentLevelUp>{PAWN_labelShort}'s everflower2 attunement has strengthened.</VV_Letter_EverflowerAttumentLevelUp>
+<VV_Letter_EverflowerAttumentLevelUp>everflower's attunement has strengthened.</VV_Letter_EverflowerAttumentLevelUp>
 
 </LanguageData>

@@ -22,5 +22,7 @@
         public const string VV_Thing_SeedDesc = nameof(VV_Thing_SeedDesc);
 
         public const string VV_Thing_Seedling = nameof(VV_Thing_Seedling);
+
+        public const string VV_FailReasonToDeconstructEverflowerPotted = nameof(VV_FailReasonToDeconstructEverflowerPotted);
     }
 }
