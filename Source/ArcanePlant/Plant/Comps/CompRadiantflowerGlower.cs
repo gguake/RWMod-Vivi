@@ -18,12 +18,7 @@ namespace VVRace
             get
             {
                 if (!base.ShouldBeLitNow) { return false; }
-
-                if (parent.Position.GetVacuum(parent.Map) < 0.5f)
-                {
-                    var dayPct = GenLocalDate.DayPercent(parent.Map);
-                    return dayPct < 0.2f || dayPct > 0.7f;
-                }
+                if (!parent.Position.Roofed(parent.Map)) { return false; }
 
                 return true;
             }
