@@ -115,6 +115,7 @@
       <bloodDef>Filth_Blood</bloodDef>
       <bloodSmearDef>Filth_BloodSmear</bloodSmearDef>
       <leatherDef>Leather_Light</leatherDef>
+      <specificMeatDef>Meat_Human</specificMeatDef>
 
       <body>VV_Vivi</body>
       <renderTree>VV_Vivi</renderTree>

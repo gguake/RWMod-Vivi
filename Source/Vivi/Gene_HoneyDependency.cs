@@ -34,8 +34,11 @@ namespace VVRace
         {
             base.PostAdd();
 
-            var hediff = (Hediff_HoneyDependency)HediffMaker.MakeHediff(VVHediffDefOf.VV_HoneyNeed, pawn);
-            pawn.health.AddHediff(hediff);
+            if (pawn.kindDef != null)
+            {
+                var hediff = (Hediff_HoneyDependency)HediffMaker.MakeHediff(VVHediffDefOf.VV_HoneyNeed, pawn);
+                pawn.health.AddHediff(hediff);
+            }
 
             lastIngestedTick = Find.TickManager.TicksGame;
         }
