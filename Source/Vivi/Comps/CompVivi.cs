@@ -1,4 +1,5 @@
 ﻿using RimWorld;
+using System.Collections.Generic;
 using UnityEngine;
 using Verse;
 
@@ -6,6 +7,9 @@ namespace VVRace
 {
     public class CompProperties_Vivi : CompProperties
     {
+        public SimpleCurve everflowerAttuneRateCurve;
+        public SimpleCurve everflowerAttuneLevelCurve;
+
         public CompProperties_Vivi()
         {
             compClass = typeof(CompVivi);
@@ -14,11 +18,34 @@ namespace VVRace
 
     public class CompVivi : ThingComp
     {
+        public CompProperties_Vivi Props => (CompProperties_Vivi)props;
+
         public bool isRoyal = false;
         private Color? _originalHairColor = null;
 
         public ArcanePlant_Everflower LinkedEverflower => _linkedEverflower;
         private ArcanePlant_Everflower _linkedEverflower;
+
+        public float EverflowerAttunement
+        {
+            get => _everflowerAttunement;
+            set
+            {
+                var minimumAttunement = Props.everflowerAttuneLevelCurve.EvaluateInverted(_everflowerAttunementLevel);
+                _everflowerAttunement = Mathf.Max(minimumAttunement, value);
+                
+                var afterLevel = (int)Props.everflowerAttuneLevelCurve.Evaluate(_everflowerAttunement);
+                if (afterLevel > _everflowerAttunementLevel)
+                {
+                    AttunementLevelUp(afterLevel);
+                }
+
+                UpdateLinkHediff();
+            }
+        }
+
+        private int _everflowerAttunementLevel;
+        private float _everflowerAttunement;
 
         public bool ShouldBeRoyalIfMature
         {
@@ -37,6 +64,8 @@ namespace VVRace
             Scribe_Values.Look(ref _originalHairColor, "originalHairColor");
 
             Scribe_References.Look(ref _linkedEverflower, "linkedEverflower");
+            Scribe_Values.Look(ref _everflowerAttunementLevel, "_everflowerAttunementLevel");
+            Scribe_Values.Look(ref _everflowerAttunement, "everflowerAttunement");
         }
 
         public override void PostSpawnSetup(bool respawningAfterLoad)
@@ -79,9 +108,20 @@ namespace VVRace
 
         public override void CompTickInterval(int delta)
         {
-            if (parent.IsHashIntervalTick(20000, delta))
+            if (parent.Spawned)
             {
-                RefreshHairColor();
+                if (parent.IsHashIntervalTick(20000, delta))
+                {
+                    RefreshHairColor();
+                }
+
+                if (isRoyal && parent.IsHashIntervalTick(GenTicks.TickRareInterval, delta) && LinkedEverflower != null)
+                {
+                    var mapManaComp = parent.Map.GetManaComponent();
+                    var mana = mapManaComp[parent.Position];
+
+                    EverflowerAttunement += Props.everflowerAttuneRateCurve.Evaluate(mana) / 60000f * GenTicks.TickRareInterval * delta;
+                }
             }
         }
 
@@ -92,6 +132,24 @@ namespace VVRace
             {
                 isRoyal = sourceComp.isRoyal;
                 _originalHairColor = sourceComp._originalHairColor;
+            }
+        }
+
+        public override IEnumerable<Gizmo> CompGetGizmosExtra()
+        {
+            if (DebugSettings.godMode)
+            {
+                if (isRoyal && LinkedEverflower != null)
+                {
+                    yield return new Command_Action()
+                    {
+                        defaultLabel = "DEV: +10 Attunement EXP",
+                        action = () =>
+                        {
+                            EverflowerAttunement += 10;
+                        }
+                    };
+                }
             }
         }
 
@@ -168,6 +226,7 @@ namespace VVRace
         public void Notify_LinkEverflower(ArcanePlant_Everflower everflower)
         {
             _linkedEverflower = everflower;
+            _everflowerAttunementLevel = Mathf.Max(1, _everflowerAttunementLevel);
 
             Find.LetterStack.ReceiveLetter(
                 LocalizeString_Letter.VV_Letter_LinkEverflowerLabel.Translate(),
@@ -194,6 +253,8 @@ namespace VVRace
         public void Notify_LinkedEverflowerDestroyed()
         {
             _linkedEverflower = null;
+            EverflowerAttunement = EverflowerAttunement * 0.7f;
+
             RemoveEverflowerLinkHediff();
 
             Messages.Message(LocalizeString_Message.VV_Message_LinkDisconnectedEverflower.Translate(parent.Named("PAWN")), MessageTypeDefOf.NegativeEvent);
@@ -205,8 +266,10 @@ namespace VVRace
             var hediff = pawn.health.hediffSet.GetFirstHediffOfDef(VVHediffDefOf.VV_EverflowerLink);
             if (hediff == null)
             {
-                pawn.health.AddHediff(VVHediffDefOf.VV_EverflowerLink);
+                hediff = pawn.health.AddHediff(VVHediffDefOf.VV_EverflowerLink);
             }
+
+            UpdateLinkHediff(hediff);
         }
 
         private void RemoveEverflowerLinkHediff()
@@ -217,6 +280,29 @@ namespace VVRace
             {
                 pawn.health.RemoveHediff(hediff);
             }
+        }
+
+        private void AttunementLevelUp(int level)
+        {
+            _everflowerAttunementLevel = level;
+
+            Find.LetterStack.ReceiveLetter(
+                LocalizeString_Letter.VV_Letter_EverflowerAttumentLevelUpLabel.Translate(parent.Named("PAWN"), level.Named("LEVEL")),
+                LocalizeString_Letter.VV_Letter_EverflowerAttumentLevelUp.Translate(parent.Named("PAWN"), level.Named("LEVEL")),
+                LetterDefOf.PositiveEvent,
+                parent);
+        }
+
+        private void UpdateLinkHediff(Hediff hediff = null)
+        {
+            if (hediff == null)
+            {
+                hediff = ((Pawn)parent).health.hediffSet.GetFirstHediffOfDef(VVHediffDefOf.VV_EverflowerLink);
+            }
+
+            var nextLevelExp = Props.everflowerAttuneLevelCurve.EvaluateInverted(_everflowerAttunementLevel + 1);
+            var curLevelExp = Props.everflowerAttuneLevelCurve.EvaluateInverted(_everflowerAttunementLevel);
+            hediff.Severity = _everflowerAttunementLevel + (_everflowerAttunement - curLevelExp) / (nextLevelExp - curLevelExp);
         }
     }
 }

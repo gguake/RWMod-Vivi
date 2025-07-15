@@ -49,7 +49,7 @@
     <workAmount>1000</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <workSkill>Crafting</workSkill>
-    <workSkillLearnFactor>0.03</workSkillLearnFactor>
+    <workSkillLearnFactor>0.01</workSkillLearnFactor>
 
     <effectWorking>Smelt</effectWorking>
     <soundWorking>Recipe_Brewing</soundWorking>
@@ -85,8 +85,8 @@
     <jobString>filtering honey.</jobString>
     <workAmount>600</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
-    <workSkill>Crafting</workSkill>
-    <workSkillLearnFactor>0.01</workSkillLearnFactor>
+    <workSkill>Cooking</workSkill>
+    <workSkillLearnFactor>0.05</workSkillLearnFactor>
 
     <effectWorking>Cook</effectWorking>
     <soundWorking>Recipe_Brewing</soundWorking>
@@ -168,6 +168,7 @@
     <soundWorking>Recipe_Brewing</soundWorking>
     <uiIconThing>VV_Fertilizer</uiIconThing>
 
+    <ingredientValueGetterClass>IngredientValueGetter_Nutrition</ingredientValueGetterClass>
     <ingredients>
       <li>
         <filter>
@@ -175,24 +176,35 @@
             <li>Corpses</li>
           </categories>
         </filter>
-        <count>1</count>
+        <count>2.0</count>
       </li>
       <li>
         <filter>
+          <customSummary>pollen or plant matters</customSummary>
           <thingDefs>
             <li>VV_Pollen</li>
           </thingDefs>
+          <categories>
+            <li>PlantMatter</li>
+          </categories>
         </filter>
-        <count>15</count>
+        <count>0.5</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
+      <thingDefs>
+        <li>VV_Pollen</li>
+      </thingDefs>
       <categories>
         <li>Corpses</li>
+        <li>PlantMatter</li>
       </categories>
       <disallowedCategories>
         <li>CorpsesMechanoid</li>
       </disallowedCategories>
+      <disallowedThingDefs>
+        <li>VV_Seed_Everflower</li>
+      </disallowedThingDefs>
       <specialFiltersToAllow>
         <li>AllowRotten</li>
       </specialFiltersToAllow>
@@ -201,8 +213,13 @@
       </specialFiltersToDisallow>
     </fixedIngredientFilter>
     <defaultIngredientFilter>
+      <thingDefs>
+        <li>VV_Pollen</li>
+      </thingDefs>
       <categories>
         <li>Corpses</li>
+        <li>MeatRaw</li>
+        <li>PlantMatter</li>
       </categories>
       <specialFiltersToAllow>
         <li>AllowCorpsesColonist</li>
@@ -216,7 +233,7 @@
       <VV_Fertilizer>30</VV_Fertilizer>
     </products>
     
-    <researchPrerequisite>VV_ArcaneBotany</researchPrerequisite>
+    <researchPrerequisite>VV_ArcanePlantSowing</researchPrerequisite>
   </RecipeDef>
   
   <!-- 비료 제작 (자원) -->
@@ -240,23 +257,20 @@
       <li>
         <filter>
           <categories>
-            <li>Foods</li>
-            <li>PlantMatter</li>
+            <li>MeatRaw</li>
+            <li>VV_ArcaneSeed</li>
           </categories>
-          <disallowedCategories>
-            <li>FoodMeals</li>
-          </disallowedCategories>
         </filter>
         <count>2.0</count>
       </li>
       <li>
         <filter>
-          <customSummary>pollen or unknown seeds</customSummary>
+          <customSummary>pollen or plant matters</customSummary>
           <thingDefs>
             <li>VV_Pollen</li>
           </thingDefs>
           <categories>
-            <li>VV_ArcaneSeed</li>
+            <li>PlantMatter</li>
           </categories>
         </filter>
         <count>0.5</count>
@@ -267,37 +281,29 @@
         <li>VV_Pollen</li>
       </thingDefs>
       <categories>
-        <li>Foods</li>
+        <li>MeatRaw</li>
         <li>PlantMatter</li>
         <li>VV_ArcaneSeed</li>
       </categories>
       <disallowedThingDefs>
         <li>VV_Seed_Everflower</li>
-        <li>VV_Propolis</li>
-        <li>HemogenPack</li>
-        <li>BabyFood</li>
       </disallowedThingDefs>
-      <disallowedCategories>
-        <li>FoodMeals</li>
-      </disallowedCategories>
     </fixedIngredientFilter>
     <defaultIngredientFilter>
       <thingDefs>
         <li>VV_Pollen</li>
       </thingDefs>
       <categories>
-        <li>FoodRaw</li>
+        <li>MeatRaw</li>
+        <li>PlantMatter</li>
       </categories>
-      <disallowedCategories>
-        <li>AnimalProductRaw</li>
-      </disallowedCategories>
     </defaultIngredientFilter>
     
     <products>
       <VV_Fertilizer>25</VV_Fertilizer>
     </products>
     
-    <researchPrerequisite>VV_ArcaneBotany</researchPrerequisite>
+    <researchPrerequisite>VV_ArcanePlantSowing</researchPrerequisite>
   </RecipeDef>
   
 </Defs>

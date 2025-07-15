@@ -101,6 +101,30 @@
   </ResearchProjectDef>
   
   <ResearchProjectDef ParentName="ViviResearchProjectTier1Base">
+    <defName>VV_ArcanePlantSowing</defName>
+    <label>arcane plant sowing</label>
+    <description>Grow arcane plants by planting arcane seeds. Arcane seeds can be found by chance while foraging or purchased from vivi caravans.
+\nDeconstructing an arcane plant also yields multiple seeds along with materials. When planted in suitable soil or a pot, an arcane seed grows into a seedling. To mature into a full arcane plant, it requires both nutrients and mana.
+\nNutrients must be regularly supplied using mana fertilizer. If left depleted for too long, the seedling will die.
+\nMana is naturally absorbed from the environment, so placing the seedling near arcane plants that emit environment mana or building a Mana emitter can help provide it.
+    </description>
+    <discoveredLetterTitle>Arcane plant</discoveredLetterTitle>
+    <discoveredLetterText>Arcane seeds can be found by chance while foraging or purchased from vivi caravans. Deconstructing an arcane plant also yields multiple seeds along with materials.
+\nWhen planted in suitable soil or a pot, an arcane seed grows into a seedling. To mature into a full arcane plant, it requires both nutrients and mana.
+\nNutrients must be regularly supplied using mana fertilizer. If left depleted for too long, the seedling will die.
+\nMana is naturally absorbed from the environment, so placing the seedling near arcane plants that emit environment mana or building a Mana emitter can help provide it.</discoveredLetterText>
+    <baseCost>400</baseCost>
+    <researchViewX>1</researchViewX>
+    <researchViewY>1.4</researchViewY>
+    <prerequisites>
+      <li>VV_BasicInfra</li>
+    </prerequisites>
+    <tags>
+      <li>VV_ViviStart</li>
+    </tags>
+  </ResearchProjectDef>
+  
+  <ResearchProjectDef ParentName="ViviResearchProjectTier1Base">
     <defName>VV_Tools</defName>
     <label>gathering tools</label>
     <description>Make tools for the Vivis to use in gathering.</description>
@@ -133,13 +157,12 @@
     <defName>VV_ArcaneBotany</defName>
     <label>arcane botany</label>
     <description>Build facilities to cultivate arcane plants with various uses.</description>
-    <discoveredLetterTitle>Arcane plant</discoveredLetterTitle>
-    <discoveredLetterText>.</discoveredLetterText>
-    <baseCost>800</baseCost>
+    <baseCost>700</baseCost>
     <researchViewX>2</researchViewX>
     <researchViewY>1.4</researchViewY>
     <prerequisites>
       <li>VV_BasicGathering</li>
+      <li>VV_ArcanePlantSowing</li>
     </prerequisites>
     <techLevel>Medieval</techLevel>
     <tags>

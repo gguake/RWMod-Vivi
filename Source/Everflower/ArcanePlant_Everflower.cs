@@ -48,6 +48,7 @@ namespace VVRace
                 LinkedPawn.GetCompVivi()?.Notify_LinkedEverflowerDespawned();
             }
 
+            UnreserveLink();
             base.DeSpawn(mode);
         }
 
@@ -58,6 +59,7 @@ namespace VVRace
                 LinkedPawn.GetCompVivi().Notify_LinkedEverflowerDestroyed();
             }
 
+            UnreserveLink();
             base.Destroy(mode);
         }
 

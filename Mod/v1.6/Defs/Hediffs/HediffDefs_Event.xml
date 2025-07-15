@@ -73,23 +73,87 @@
   <HediffDef>
     <defName>VV_EverflowerLink</defName>
     <label>everflower attunement</label>
-    <description>.</description>
+    <description>An attunement link with an everflower is active. If the everflower moves to a different area or becomes isolated, the link will be temporarily severed.</description>
     <hediffClass>HediffWithComps</hediffClass>
     <defaultLabelColor>(0,1,1)</defaultLabelColor>
     
     <isBad>false</isBad>
     <priceImpact>false</priceImpact>
     <scenarioCanAdd>false</scenarioCanAdd>
+    <everCurableByItem>false</everCurableByItem>
+
     <initialSeverity>1</initialSeverity>
-    <maxSeverity>10</maxSeverity>
+    <maxSeverity>4</maxSeverity>
 
     <stages>
       <li>
+        <label>I</label>
         <minSeverity>1</minSeverity>
         <statFactors>
-          <IncomingDamageFactor>0.5</IncomingDamageFactor>
+          <IncomingDamageFactor>0.9</IncomingDamageFactor>
         </statFactors>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>0.05</offset>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <minSeverity>2</minSeverity>
+        <label>II</label>
+        <statOffsets>
+          <RestFallRateFactor>0.1</RestFallRateFactor>
+          <PsychicSensitivity>0.1</PsychicSensitivity>
+        </statOffsets>
+        <statFactors>
+          <IncomingDamageFactor>0.85</IncomingDamageFactor>
+        </statFactors>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>0.05</offset>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <minSeverity>3</minSeverity>
+        <label>III</label>
+        <statOffsets>
+          <RestFallRateFactor>0.2</RestFallRateFactor>
+          <PsychicSensitivity>0.2</PsychicSensitivity>
+        </statOffsets>
+        <statFactors>
+          <IncomingDamageFactor>0.8</IncomingDamageFactor>
+        </statFactors>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>0.1</offset>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <minSeverity>4</minSeverity>
+        <label>IV</label>
+        <statOffsets>
+          <RestFallRateFactor>0.3</RestFallRateFactor>
+          <PsychicSensitivity>0.3</PsychicSensitivity>
+        </statOffsets>
+        <statFactors>
+          <IncomingDamageFactor>0.75</IncomingDamageFactor>
+        </statFactors>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>0.15</offset>
+          </li>
+        </capMods>
       </li>
     </stages>
+
+    <comps>
+      <li><compClass>VVRace.HediffComp_EverflowerLink</compClass></li>
+    </comps>
   </HediffDef>
 </Defs>

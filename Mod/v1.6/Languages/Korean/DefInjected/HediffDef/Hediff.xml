@@ -41,6 +41,9 @@
   <VV_EverflowerImpact.label>영원꽃 피로</VV_EverflowerImpact.label>
   <VV_EverflowerImpact.description>영원꽃의 향에 영향을 받아 다소 피로해진 상태입니다.</VV_EverflowerImpact.description>
 
+  <VV_EverflowerLink.label>영원꽃 교감</VV_EverflowerLink.label>
+  <VV_EverflowerLink.description>영원꽃과의 교감 연결이 형성된 상태입니다. 영원꽃과 다른 지역으로 이동하거나 격리된 상태가 되면 연결이 일시적으로 해제됩니다.</VV_EverflowerLink.description>
+
   <VV_Frozen.label>빙결</VV_Frozen.label>
   <VV_Frozen.description>얼어붙은 상태입니다. 이동 속도가 느려지지만 곧 회복됩니다.</VV_Frozen.description>
   <VV_Frozen.battleStateLabel>얼어붙음</VV_Frozen.battleStateLabel>

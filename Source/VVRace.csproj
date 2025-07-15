@@ -85,8 +85,9 @@
   <ItemGroup>
     <Compile Include="ArcanePlant\Buildings\ArcaneSeedlingFarm.cs" />
     <Compile Include="ArcanePlant\Mana\FluxRule\ManaFluxRule_InVaccum.cs" />
-    <Compile Include="ArcanePlant\Plant\AI\JobDriver_LinkEverflower.cs" />
-    <Compile Include="ArcanePlant\Plant\AI\JobGiver_LinkEverflower.cs" />
+    <Compile Include="Everflower\HediffComp_EverflowerLink.cs" />
+    <Compile Include="Everflower\JobDriver_LinkEverflower.cs" />
+    <Compile Include="Everflower\JobGiver_LinkEverflower.cs" />
     <Compile Include="ArcanePlant\Plant\Comps\CompRadiantflowerGlower.cs" />
     <Compile Include="ArcanePlant\Plant\Comps\CompStalitflowerGlower.cs" />
     <Compile Include="ArcanePlant\Plant\Things\ArcanePlant_Starlitflower.cs" />
@@ -123,7 +124,7 @@
     <Compile Include="ArcanePlant\Plant\ThingDefGenerator_ArcanePlant.cs" />
     <Compile Include="ArcanePlant\Plant\Comps\CompArcanePlantBulletOverride.cs" />
     <Compile Include="ArcanePlant\Plant\ModExtension\SeedlingExtension.cs" />
-    <Compile Include="ArcanePlant\Plant\Things\ArcanePlant_Everflower.cs" />
+    <Compile Include="Everflower\ArcanePlant_Everflower.cs" />
     <Compile Include="ArcanePlant\Weapon\Things\CornBullet.cs" />
     <Compile Include="ArcanePlant\Buildings\ManaEmitter.cs" />
     <Compile Include="ArcanePlant\Plant\Things\PeaShooterGun.cs" />

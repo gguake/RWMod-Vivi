@@ -12,7 +12,7 @@ namespace VVRace
 
         public override bool ShouldSkip(Pawn pawn, bool forced = false)
         {
-            if (!VVResearchProjectDefOf.VV_ArcaneBotany.IsFinished) { return true; }
+            if (!VVResearchProjectDefOf.VV_ArcanePlantSowing.IsFinished) { return true; }
 
             return !pawn.MapHeld?.GetComponent<ArcanePlantMapComponent>()?.ArcaneSeeds.Any() ?? true;
         }

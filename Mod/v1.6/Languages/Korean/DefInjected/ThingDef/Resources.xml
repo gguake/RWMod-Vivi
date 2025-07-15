@@ -18,9 +18,9 @@
   <VV_Seed_UnknownPlant.label>미확인 마법 씨앗</VV_Seed_UnknownPlant.label>
   <VV_Seed_UnknownPlant.description>종을 알 수 없는 마법 씨앗으로 채집 작업중에 가끔 발견됩니다. 심으면 마법 식물로 자라지만 완전히 성장하기 전까지는 어떤 종의 식물인지 알아낼 수 없습니다.\n마법 식물이 성장하려면 마나와 양분이 모두 공급되야 합니다.
 \n마나는 환경 마나를 흡수하므로 주변에 마나 발생기를 설치하거나 마나를 생산하는 마법 식물로부터 공급할 수 있습니다.
-\n양분은 마나와 관계없이 지속적으로 감소하므로 정기적으로 사람이 마법 비료를 공급해야 합니다. 양분이 부족한 상태로 시간이 오래 지나면 모종이 죽습니다.</VV_Seed_UnknownPlant.description>
+\n양분은 마나와 관계없이 지속적으로 감소하므로 정기적으로 사람이 마나 비료를 공급해야 합니다. 양분이 부족한 상태로 시간이 오래 지나면 모종이 죽습니다.</VV_Seed_UnknownPlant.description>
 
-  <VV_Fertilizer.label>마법 비료</VV_Fertilizer.label>
+  <VV_Fertilizer.label>마나 비료</VV_Fertilizer.label>
   <VV_Fertilizer.description>유기물과 꽃가루를 배합해 만든 비비 특제 비료입니다. 마법 식물을 재배하는데 주로 사용되지만 마나 방출기에 투입해 비료에 섞인 마나를 환경 마나로 추출할 수도 있습니다.</VV_Fertilizer.description>
 
   <VV_TitanicHornetWing.label>거대 말벌 날개 조각</VV_TitanicHornetWing.label>

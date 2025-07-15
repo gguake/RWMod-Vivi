@@ -59,6 +59,7 @@
         <spawnEffecter>VV_PollenEmitting</spawnEffecter>
       </li>
 
+      <li Class="CompProperties_Forbiddable"/>
       <li Class="CompProperties_Glower">
         <compClass>VVRace.CompManaGlower</compClass>
         <glowRadius>7</glowRadius>

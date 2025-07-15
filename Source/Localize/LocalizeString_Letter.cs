@@ -12,5 +12,8 @@
 
         public const string VV_Letter_LinkEverflowerLabel = nameof(VV_Letter_LinkEverflowerLabel);
         public const string VV_Letter_LinkEverflower = nameof(VV_Letter_LinkEverflower);
+
+        public const string VV_Letter_EverflowerAttumentLevelUpLabel = nameof(VV_Letter_EverflowerAttumentLevelUpLabel);
+        public const string VV_Letter_EverflowerAttumentLevelUp = nameof(VV_Letter_EverflowerAttumentLevelUp);
     }
 }

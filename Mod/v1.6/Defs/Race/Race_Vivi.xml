@@ -271,7 +271,27 @@
         <eggProgressDays>8</eggProgressDays>
       </li>
       
-      <li Class="VVRace.CompProperties_Vivi" />
+      <li Class="VVRace.CompProperties_Vivi">
+        <everflowerAttuneRateCurve>
+          <points>
+            <li>(0,0)</li>
+            <li>(2.5,0)</li>
+            <li>(10,5)</li>
+            <li>(100,10)</li>
+            <li>(200,15)</li>
+            <li>(400,20)</li>
+          </points>
+        </everflowerAttuneRateCurve>
+
+        <everflowerAttuneLevelCurve>
+          <points>
+            <li>(0,1)</li>
+            <li>(100,2)</li>
+            <li>(200,3)</li>
+            <li>(400,4)</li>
+          </points>
+        </everflowerAttuneLevelCurve>
+      </li>
     </comps>
 
     <modExtensions>

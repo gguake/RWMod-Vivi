@@ -63,9 +63,9 @@ namespace VVRace
                     action = BeginTargeting,
                 };
 
-                if (!VVResearchProjectDefOf.VV_ArcaneBotany.IsFinished)
+                if (!VVResearchProjectDefOf.VV_ArcanePlantSowing.IsFinished)
                 {
-                    commandPlant.Disable("NotStudied".Translate(VVResearchProjectDefOf.VV_ArcaneBotany.LabelCap));
+                    commandPlant.Disable("NotStudied".Translate(VVResearchProjectDefOf.VV_ArcanePlantSowing.LabelCap));
                 }
 
                 yield return commandPlant;

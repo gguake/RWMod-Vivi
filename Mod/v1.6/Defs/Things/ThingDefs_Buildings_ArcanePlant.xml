@@ -70,7 +70,7 @@
     <canOverlapZones>false</canOverlapZones>
 
     <researchPrerequisites>
-      <li>VV_BasicInfra</li>
+      <li>VV_ArcaneBotany</li>
     </researchPrerequisites>
   </ThingDef>
 
@@ -130,8 +130,8 @@
       <li Class="CompProperties_Forbiddable"/>
 
       <li Class="CompProperties_Refuelable">
-        <fuelLabel>Arcane Fertilizer</fuelLabel>
-        <fuelGizmoLabel>Arcane Fertilizer</fuelGizmoLabel>
+        <fuelLabel>Mana Fertilizer</fuelLabel>
+        <fuelGizmoLabel>Mana Fertilizer</fuelGizmoLabel>
         <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
         <fuelCapacity>300</fuelCapacity>
         <initialFuelPercent>0.2</initialFuelPercent>
@@ -167,7 +167,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VV_ManaEmitter</defName>
     <label>mana emitter</label>
-    <description>A device that extracts inactive mana contained in arcane fertilizer and converts it into environment mana. When arcane fertilizer is inserted, it slowly transforms it into environment mana and disperses it for use nearby.
+    <description>A device that extracts inactive mana contained in mana fertilizer and converts it into environment mana. When mana fertilizer is inserted, it slowly transforms it into environment mana and disperses it for use nearby.
 \nIts conversion efficiency is low, but it's useful when mana production is insufficient or in need of an emergency supply, making it an essential device used by the Vivi when establishing a hive.</description>
 
     <thingClass>VVRace.ManaEmitter</thingClass>
@@ -226,8 +226,8 @@
       </li>
 
       <li Class="CompProperties_Refuelable">
-        <fuelLabel>Arcane Fertilizer</fuelLabel>
-        <fuelGizmoLabel>Arcane Fertilizer</fuelGizmoLabel>
+        <fuelLabel>Mana Fertilizer</fuelLabel>
+        <fuelGizmoLabel>Mana Fertilizer</fuelGizmoLabel>
         <fuelConsumptionRate>8</fuelConsumptionRate>
         <fuelCapacity>40</fuelCapacity>
         <initialFuelPercent>1</initialFuelPercent>
@@ -244,7 +244,7 @@
     </comps>
 
     <researchPrerequisites>
-      <li>VV_ArcaneBotany</li>
+      <li>VV_ArcanePlantSowing</li>
     </researchPrerequisites>
   </ThingDef>
 

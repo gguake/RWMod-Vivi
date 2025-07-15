@@ -100,7 +100,7 @@
     </tradeTags>
     
     <researchPrerequisites>
-      <li>VV_ArcaneBotany</li>
+      <li>VV_ArcanePlantSowing</li>
     </researchPrerequisites>
   </ThingDef>
 
@@ -120,7 +120,7 @@
     </tradeTags>
     
     <researchPrerequisites>
-      <li>VV_ArcaneBotany</li>
+      <li>VV_ArcanePlantSowing</li>
     </researchPrerequisites>
   </ThingDef>
 </Defs>

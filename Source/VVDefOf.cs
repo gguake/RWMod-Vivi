@@ -262,6 +262,7 @@ namespace VVRace
     [DefOf]
     public static class VVResearchProjectDefOf
     {
+        public static ResearchProjectDef VV_ArcanePlantSowing;
         public static ResearchProjectDef VV_ArcaneBotany;
         public static ResearchProjectDef VV_Lifestrand;
     }

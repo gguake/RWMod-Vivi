@@ -81,7 +81,7 @@
 <VV_ArcanePlantSeedling.label>마법 식물 모종</VV_ArcanePlantSeedling.label>
 <VV_ArcanePlantSeedling.description>아직 성장중인 작은 마법 식물입니다. 마법 식물이 성장하려면 마나와 양분이 모두 공급되야 하며 옮겨 심을 수 없습니다.
 \n마나는 환경 마나를 흡수하므로 주변에 마나 발생기를 설치하거나 마나를 생산하는 마법 식물로부터 공급할 수 있습니다.
-\n양분은 마나와 관계없이 지속적으로 감소하므로 정기적으로 사람이 마법 비료를 공급해야 합니다. 양분이 부족한 상태로 시간이 오래 지나면 모종이 죽습니다.</VV_ArcanePlantSeedling.description>
+\n양분은 마나와 관계없이 지속적으로 감소하므로 정기적으로 사람이 마나 비료를 공급해야 합니다. 양분이 부족한 상태로 시간이 오래 지나면 모종이 죽습니다.</VV_ArcanePlantSeedling.description>
 <VV_ArcanePlantSeedling.comps.CompRefuelable.fuelLabel>양분</VV_ArcanePlantSeedling.comps.CompRefuelable.fuelLabel>
 <VV_ArcanePlantSeedling.comps.CompRefuelable.fuelGizmoLabel>양분</VV_ArcanePlantSeedling.comps.CompRefuelable.fuelGizmoLabel>
 
