@@ -9,7 +9,6 @@ namespace VVRace
             get
             {
                 var str = (parent.Severity - (int)parent.Severity).ToStringPercent();
-                Log.Message($"{str}");
                 return str;
             }
         }
