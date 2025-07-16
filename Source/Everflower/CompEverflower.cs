@@ -252,6 +252,8 @@ namespace VVRace
 
         public void GainAttunement(float attunement)
         {
+            if (attunement == 0) { return; }
+
             var nextLevelExp = Props.everflowerAttuneLevelCurve.EvaluateInverted(_attunementInfo.attunementLevel + 1);
             var curLevelExp = Props.everflowerAttuneLevelCurve.EvaluateInverted(_attunementInfo.attunementLevel);
             if (nextLevelExp == curLevelExp) { return; }
