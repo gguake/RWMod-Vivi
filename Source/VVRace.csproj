@@ -85,15 +85,15 @@
   <ItemGroup>
     <Compile Include="ArcanePlant\Buildings\ArcaneSeedlingFarm.cs" />
     <Compile Include="ArcanePlant\Mana\FluxRule\ManaFluxRule_InVaccum.cs" />
+    <Compile Include="Everflower\AI\JobDriver_Fairyfication.cs" />
     <Compile Include="Everflower\CompAbilityEffect_Fairyfication.cs" />
     <Compile Include="Everflower\CompEverflower.cs" />
     <Compile Include="Everflower\AI\JobGiver_TryEverflowerRitual.cs" />
     <Compile Include="Everflower\Ritual\EverflowerRitualDef.cs" />
     <Compile Include="Everflower\Ritual\EverflowerRitualWorker.cs" />
     <Compile Include="Everflower\HediffComp_EverflowerLink.cs" />
-    <Compile Include="Everflower\HediffComp_GiveEverflowerAbility.cs" />
-    <Compile Include="Everflower\Ritual\EverflowerRitualWorker_SingleJob.cs" />
-    <Compile Include="Everflower\UI\ITab_EverflowerFairies.cs" />
+    <Compile Include="Everflower\Ritual\EverflowerRitualWorker_SimpleJob.cs" />
+    <Compile Include="Everflower\Ritual\EverflowerRitualWorker_FairyficationJob.cs" />
     <Compile Include="Everflower\AI\JobDriver_AttunementEverflower.cs" />
     <Compile Include="ArcanePlant\Plant\Comps\CompRadiantflowerGlower.cs" />
     <Compile Include="ArcanePlant\Plant\Comps\CompStalitflowerGlower.cs" />
@@ -250,6 +250,7 @@
     <Compile Include="FoodDrainRecipe\Bill_ProductionWithFoodDrain.cs" />
     <Compile Include="Vivi\Comps\CompFermentItem.cs" />
     <Compile Include="Vivi\Comps\CompHoney.cs" />
+    <Compile Include="Vivi\Comps\CompViviHolder.cs" />
     <Compile Include="Vivi\Gene_HoneyDependency.cs" />
     <Compile Include="Vivi\HediffComp_ChangeRoyalJellyNeed.cs" />
     <Compile Include="Vivi\HediffComp_GrowthBoost.cs" />

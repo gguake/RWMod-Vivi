@@ -50,7 +50,7 @@ namespace VVRace
     }
 
     [StaticConstructorOnStartup]
-    public class CompEverflower : ThingComp, IThingHolder
+    public class CompEverflower : ThingComp
     {
         public static Material AttunementLineMat = MaterialPool.MatFrom(GenDraw.LineTexPath, ShaderDatabase.Transparent, new Color(0.5f, 1f, 0.5f));
 
@@ -80,18 +80,13 @@ namespace VVRace
         public IEnumerable<Pawn> LinkedPawns => _linked;
         private List<Pawn> _linked = new List<Pawn>();
 
-        public IEnumerable<Pawn> InnerFairyPawns => _innerContainer.Where(v => v is Pawn).Cast<Pawn>();
-        private ThingOwner _innerContainer;
-
         public CompEverflower()
         {
             _attunementInfo = new EverflowerAttunementInfo();
-            _innerContainer = new ThingOwner<Pawn>(this);
         }
 
         public override void PostExposeData()
         {
-            Scribe_Deep.Look(ref _innerContainer, "innerContainer", this);
             Scribe_Deep.Look(ref _attunementInfo, "attunementInfo");
             Scribe_Collections.Look(ref _linked, "linked", LookMode.Reference);
 
@@ -106,14 +101,6 @@ namespace VVRace
             foreach (var pawn in LinkedPawns)
             {
                 pawn.GetCompVivi().Notify_LinkedEverflowerDestroyed();
-            }
-
-            if (mode != DestroyMode.WillReplace)
-            {
-                if (_innerContainer.Count > 0)
-                {
-                    _innerContainer.ClearAndDestroyContents(mode);
-                }
             }
         }
 
@@ -154,25 +141,10 @@ namespace VVRace
                 {
                     yield return new Command_Action()
                     {
-                        defaultLabel = "DEV: +1000 Attunement from mana",
+                        defaultLabel = "DEV: +1000 Attunement",
                         action = () =>
                         {
-                            GainAttunementFromMana(1000);
-                        }
-                    };
-                }
-
-                if (_innerContainer.Count > 0)
-                {
-                    yield return new Command_Action()
-                    {
-                        defaultLabel = "DEV: Eject directly pawn",
-                        action = () =>
-                        {
-                            foreach (var thing in _innerContainer)
-                            {
-                                EjectFairy((Pawn)thing);
-                            }
+                            GainAttunement(1000);
                         }
                     };
                 }
@@ -202,16 +174,6 @@ namespace VVRace
                 var b = pawn.TrueCenter();
                 GenDraw.DrawLineBetween(a, b, AttunementLineMat);
             }
-        }
-
-        public void GetChildHolders(List<IThingHolder> outChildren)
-        {
-            ThingOwnerUtility.AppendThingHoldersFromThings(outChildren, GetDirectlyHeldThings());
-        }
-
-        public ThingOwner GetDirectlyHeldThings()
-        {
-            return _innerContainer;
         }
 
         public void LinkAttunement(Pawn pawn)
@@ -295,15 +257,6 @@ namespace VVRace
                     LetterDefOf.PositiveEvent);
             }
 
-            foreach (var linked in _linked)
-            {
-                var hediff = linked.health.hediffSet.GetFirstHediffOfDef(VVHediffDefOf.VV_EverflowerLink);
-                if (hediff != null)
-                {
-                    hediff.TryGetComp<HediffComp_GiveEverflowerAbility>()?.CheckAndGiveAbility();
-                }
-            }
-
             if (parent.Spawned)
             {
                 if (level - 1 < Props.effectsOnLevelAcquire.Count)
@@ -311,14 +264,6 @@ namespace VVRace
                     var effect = Props.effectsOnLevelAcquire[level - 1];
                     effect?.SpawnAttached(parent, parent.Map);
                 }
-            }
-        }
-
-        private void EjectFairy(Pawn pawn)
-        {
-            if (_innerContainer.Contains(pawn))
-            {
-                _innerContainer.TryDrop(pawn, ThingPlaceMode.Radius, out _);
             }
         }
     }

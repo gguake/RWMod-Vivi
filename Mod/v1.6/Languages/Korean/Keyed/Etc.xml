@@ -30,4 +30,11 @@
 <VV_FailReason_PawnMentalState>정신 이상</VV_FailReason_PawnMentalState>
 <VV_FailReason_PawnPsychicSensitivity>정신 감응력이 낮음</VV_FailReason_PawnPsychicSensitivity>
 <VV_FailReason_RitualCooldown>재사용 대기 중입니다. {0} 후 다시 사용할 수 있습니다.</VV_FailReason_RitualCooldown>
+
+<VV_Targetter_TargetEverflowerRitual>{RITUAL} 대상 선택: {TARGET_labelShort}</VV_Targetter_TargetEverflowerRitual>
+
+<VV_Targetter_InvalidTarget_NotVivi>{RITUAL} 대상 선택: 비비가 아님</VV_Targetter_InvalidTarget_NotVivi>
+<VV_Targetter_InvalidTarget_CannotTargetRoyalVivi>{RITUAL} 대상 선택: 로열 비비를 선택할 수 없음</VV_Targetter_InvalidTarget_CannotTargetRoyalVivi>
+<VV_Targetter_InvalidTarget_NotMyChild>{RITUAL} 대상 선택: 자식인 비비가 아님</VV_Targetter_InvalidTarget_NotMyChild>
+<VV_Targetter_InvalidTarget_NotAdult>{RITUAL} 대상 선택: 성체가 아님</VV_Targetter_InvalidTarget_NotAdult>
 </LanguageData>

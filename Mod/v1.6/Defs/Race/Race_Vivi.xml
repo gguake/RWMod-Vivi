@@ -272,8 +272,8 @@
         <eggProgressDays>8</eggProgressDays>
       </li>
       
-      <li Class="VVRace.CompProperties_Vivi">
-      </li>
+      <li><compClass>VVRace.CompVivi</compClass></li>
+      <li><compClass>VVRace.CompViviHolder</compClass></li>
     </comps>
 
     <modExtensions>

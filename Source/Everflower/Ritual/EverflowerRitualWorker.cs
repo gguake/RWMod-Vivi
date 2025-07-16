@@ -1,6 +1,7 @@
 ﻿using RimWorld;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Verse;
 using Verse.AI;
 
@@ -17,7 +18,20 @@ namespace VVRace
             _def = def;
         }
 
-        public abstract IEnumerable<Pawn> GetCandidates(ArcanePlant_Everflower flower);
+        public virtual IEnumerable<Pawn> GetCandidates(ArcanePlant_Everflower flower)
+        {
+            foreach (var pawn in flower.Map.mapPawns.AllPawnsSpawned.Where(p => p.IsColonist))
+            {
+                var compVivi = pawn.GetCompVivi();
+                if (compVivi == null || !compVivi.isRoyal) { continue; }
+
+                var linkedFlower = compVivi.LinkedEverflower;
+                if (linkedFlower == flower || (_def.allowUnlinkedPawn && linkedFlower == null))
+                {
+                    yield return pawn;
+                }
+            }
+        }
 
         public virtual AcceptanceReport CanRitual(ArcanePlant_Everflower everflower, Pawn caster)
         {
@@ -49,11 +63,13 @@ namespace VVRace
             return true;
         }
 
-        public abstract void StartRitual(ArcanePlant_Everflower flower, Pawn caster, Action onStartCallback);
+        public abstract void StartRitual(ArcanePlant_Everflower flower, Pawn caster, Action<EverflowerRitualReservation> onStartCallback);
 
         public virtual void Complete(ArcanePlant_Everflower flower, Pawn caster)
         {
             flower.Notify_RitualComplete(caster);
         }
+
+        public abstract Job TryGiveJob(ArcanePlant_Everflower flower);
     }
 }

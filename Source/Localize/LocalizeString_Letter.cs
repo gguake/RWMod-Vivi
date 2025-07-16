@@ -15,5 +15,8 @@
 
         public const string VV_Letter_EverflowerAttumentLevelUpLabel = nameof(VV_Letter_EverflowerAttumentLevelUpLabel);
         public const string VV_Letter_EverflowerAttumentLevelUp = nameof(VV_Letter_EverflowerAttumentLevelUp);
+
+        public const string VV_Letter_FairyficationCompleteLabel = nameof(VV_Letter_FairyficationCompleteLabel);
+        public const string VV_Letter_FairyficationComplete = nameof(VV_Letter_FairyficationComplete);
     }
 }

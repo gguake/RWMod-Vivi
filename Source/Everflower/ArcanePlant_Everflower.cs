@@ -6,6 +6,20 @@ using Verse;
 
 namespace VVRace
 {
+    public class EverflowerRitualReservation : IExposable
+    {
+        public EverflowerRitualDef ritualDef;
+        public Pawn casterPawn;
+        public Pawn targetPawn;
+
+        public void ExposeData()
+        {
+            Scribe_Defs.Look(ref ritualDef, "ritualDef");
+            Scribe_References.Look(ref casterPawn, "casterPawn");
+            Scribe_References.Look(ref targetPawn, "targetPawn");
+        }
+    }
+
     [StaticConstructorOnStartup]
     public class ArcanePlant_Everflower : ArcanePlant, IGatherableTarget
     {
@@ -26,10 +40,11 @@ namespace VVRace
 
         public int AttunementLevel => EverflowerComp.AttunementLevel;
 
-        public Pawn CurReservedPawn => _reservedPawn;
-        public EverflowerRitualDef CurReservedRitual => _reservedRitual;
-        private Pawn _reservedPawn;
-        private EverflowerRitualDef _reservedRitual;
+        public Pawn CurReservedPawn => _reservedRitual?.casterPawn;
+        public EverflowerRitualDef CurReservedRitual => _reservedRitual?.ritualDef;
+
+        public EverflowerRitualReservation CurReservationInfo => _reservedRitual;
+        private EverflowerRitualReservation _reservedRitual;
 
         public bool HasRitualCooldown => _ritualCooldownTick > GenTicks.TicksGame;
         private int _ritualCooldownTick;
@@ -38,8 +53,7 @@ namespace VVRace
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_References.Look(ref _reservedPawn, "reservedPawn");
-            Scribe_Defs.Look(ref _reservedRitual, "reservedRitual");
+            Scribe_Deep.Look(ref _reservedRitual, "reservedRitual");
 
             Scribe_Values.Look(ref _ritualCooldownTick, "ritualCooldownTick");
             Scribe_Values.Look(ref _lastRitualTick, "lastRitualTick");
@@ -119,10 +133,12 @@ namespace VVRace
                                     {
                                         _tmpFloatMenuOptions.Add(new FloatMenuOption(pawn.Label, () =>
                                         {
-                                            ritualDef.Worker.StartRitual(this, pawn, () =>
+                                            ritualDef.Worker.StartRitual(this, pawn, (ritualReservation) =>
                                             {
-                                                _reservedPawn = pawn;
-                                                _reservedRitual = ritualDef;
+                                                if (ritualReservation != null)
+                                                {
+                                                    _reservedRitual = ritualReservation;
+                                                }
                                             });
 
                                         }, pawn, Color.white));
@@ -162,6 +178,22 @@ namespace VVRace
                         }
                     };
                 }
+
+                if (DebugSettings.godMode)
+                {
+                    if (HasRitualCooldown)
+                    {
+                        yield return new Command_Action()
+                        {
+                            defaultLabel = $"DEV: Reset ritual cooldown",
+                            action = () =>
+                            {
+                                _ritualCooldownTick = GenTicks.TicksGame + 1;
+                                _lastRitualTick = GenTicks.TicksGame - 1;
+                            }
+                        };
+                    }
+                }
             }
         }
 
@@ -198,10 +230,10 @@ namespace VVRace
 
         public void Notify_RitualComplete(Pawn pawn)
         {
-            if (_reservedRitual.globalCooldown > 0)
+            if (_reservedRitual.ritualDef.globalCooldown > 0)
             {
                 _lastRitualTick = GenTicks.TicksGame;
-                _ritualCooldownTick = _lastRitualTick + _reservedRitual.globalCooldown;
+                _ritualCooldownTick = _lastRitualTick + _reservedRitual.ritualDef.globalCooldown;
             }
 
             Unreserve();
@@ -209,14 +241,13 @@ namespace VVRace
 
         public void Unreserve(bool cancelled = false)
         {
-            if (_reservedPawn == null) { return; }
+            if (_reservedRitual == null || _reservedRitual.casterPawn == null) { return; }
 
             if (cancelled)
             {
-                Messages.Message(LocalizeString_Message.VV_Message_ReserveEverflowerCancelled.Translate(_reservedPawn.Named("PAWN")), MessageTypeDefOf.NeutralEvent, historical: false);
+                Messages.Message(LocalizeString_Message.VV_Message_ReserveEverflowerCancelled.Translate(_reservedRitual.casterPawn.Named("PAWN")), MessageTypeDefOf.NeutralEvent, historical: false);
             }
 
-            _reservedPawn = null;
             _reservedRitual = null;
         }
     }

@@ -1,22 +1,119 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
   <VVRace.EverflowerRitualDef Abstract="True" Name="EverflowerRitualBase">
-    <globalCooldown>180000</globalCooldown>
+    <globalCooldown>300000</globalCooldown>
     <requiredPsychicSensitivity>1.5</requiredPsychicSensitivity>
   </VVRace.EverflowerRitualDef>
 
   <VVRace.EverflowerRitualDef ParentName="EverflowerRitualBase">
     <defName>VV_Attunement</defName>
-    <label>attunement</label>
+    <label>attunement ritual</label>
     <description>.</description>
-    <workerClass>VVRace.EverflowerRitualWorker_SingleJob</workerClass>
+    <workerClass>VVRace.EverflowerRitualWorker_SimpleJob</workerClass>
     
+
+    <uiOrder>1</uiOrder>
+    <uiIconPath>UI/Commands/VV_Attunement</uiIconPath>
+
+    <attuneLevel>0</attuneLevel>
+    <allowUnlinkedPawn>true</allowUnlinkedPawn>
+
+    <job>VV_AttunementEverflower</job>
     <jobWorkAmount>2000</jobWorkAmount>
+  </VVRace.EverflowerRitualDef>
+
+  <!-- TODO -->
+  <VVRace.EverflowerRitualDef ParentName="EverflowerRitualBase">
+    <defName>VV_Wish</defName>
+    <label>wish</label>
+    <description>.</description>
+    <workerClass>VVRace.EverflowerRitualWorker_SimpleJob</workerClass>
 
     <uiOrder>1</uiOrder>
     <uiIconPath>UI/Commands/VV_LinkConnect</uiIconPath>
 
     <attuneLevel>0</attuneLevel>
-    <job>VV_AttunementEverflower</job>
+
+    <job>VV_Fairyfication</job>
+    <jobWorkAmount>1000</jobWorkAmount>
+  </VVRace.EverflowerRitualDef>
+
+  <!-- TODO -->
+  <VVRace.EverflowerRitualDef ParentName="EverflowerRitualBase">
+    <defName>VV_Fertilization</defName>
+    <label>fertilization</label>
+    <description>.</description>
+    <workerClass>VVRace.EverflowerRitualWorker_SimpleJob</workerClass>
+
+    <uiOrder>1</uiOrder>
+    <uiIconPath>UI/Commands/VV_LinkConnect</uiIconPath>
+
+    <attuneLevel>0</attuneLevel>
+
+    <job>VV_Fairyfication</job>
+    <jobWorkAmount>1000</jobWorkAmount>
+  </VVRace.EverflowerRitualDef>
+  
+  <!-- TODO -->
+  <VVRace.EverflowerRitualDef ParentName="EverflowerRitualBase">
+    <defName>VV_Rainmaker</defName>
+    <label>rainmaker</label>
+    <description>.</description>
+    <workerClass>VVRace.EverflowerRitualWorker_SimpleJob</workerClass>
+
+    <uiOrder>1</uiOrder>
+    <uiIconPath>UI/Commands/VV_LinkConnect</uiIconPath>
+
+    <attuneLevel>0</attuneLevel>
+
+    <job>VV_Fairyfication</job>
+    <jobWorkAmount>1000</jobWorkAmount>
+  </VVRace.EverflowerRitualDef>
+
+  <VVRace.EverflowerRitualDef ParentName="EverflowerRitualBase">
+    <defName>VV_Fairyfication</defName>
+    <label>fairyfication</label>
+    <description>.</description>
+    <workerClass>VVRace.EverflowerRitualWorker_FairyficationJob</workerClass>
+
+    <uiOrder>1</uiOrder>
+    <uiIconPath>UI/Commands/VV_LinkConnect</uiIconPath>
+
+    <attuneLevel>0</attuneLevel>
+
+    <job>VV_Fairyfication</job>
+    <jobWorkAmount>1000</jobWorkAmount>
+  </VVRace.EverflowerRitualDef>
+  
+  <!-- TODO -->
+  <VVRace.EverflowerRitualDef ParentName="EverflowerRitualBase">
+    <defName>VV_UndoFairyfication</defName>
+    <label>undo fairyfication</label>
+    <description>.</description>
+    <workerClass>VVRace.EverflowerRitualWorker_SimpleJob</workerClass>
+
+    <uiOrder>1</uiOrder>
+    <uiIconPath>UI/Commands/VV_LinkConnect</uiIconPath>
+
+    <attuneLevel>0</attuneLevel>
+
+    <job>VV_Fairyfication</job>
+    <jobWorkAmount>1000</jobWorkAmount>
+  </VVRace.EverflowerRitualDef>
+  
+  <!-- TODO -->
+  <VVRace.EverflowerRitualDef ParentName="EverflowerRitualBase">
+    <defName>VV_Manawave</defName>
+    <label>mana wave</label>
+    <description>.</description>
+    <workerClass>VVRace.EverflowerRitualWorker_SimpleJob</workerClass>
+
+    <uiOrder>1</uiOrder>
+    <uiIconPath>UI/Commands/VV_LinkConnect</uiIconPath>
+
+    <attuneLevel>0</attuneLevel>
+
+    <job>VV_Fairyfication</job>
+    <jobWorkAmount>1000</jobWorkAmount>
   </VVRace.EverflowerRitualDef>
 </Defs>

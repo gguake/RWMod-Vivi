@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-<VV_Message_ArcanePlantSeedlingDeadCausedNoNutrition>{0}이 양분 부족으로 죽었습니다.</VV_Message_ArcanePlantSeedlingDeadCausedNoNutrition>
+<VV_Message_ArcanePlantSeedlingDeadCausedNoNutrition>{0}이(가) 양분 부족으로 죽었습니다.</VV_Message_ArcanePlantSeedlingDeadCausedNoNutrition>
 
 <VV_Message_HoneycombWallBeingFortified>해당 위치에 이미 벽 강화가 지정되었습니다.</VV_Message_HoneycombWallBeingFortified>
 <VV_Message_MustDesignateHoneycombWall>비비 벌집 벽을 선택해야 합니다.</VV_Message_MustDesignateHoneycombWall>

@@ -162,10 +162,6 @@
       </li>
     </comps>
 
-    <inspectorTabs>
-      <li>VVRace.ITab_EverflowerFairies</li>
-    </inspectorTabs>
-
     <modExtensions>
       <li Class="VVRace.ArcaneSeedExtension">
         <seedDef>VV_Seed_Everflower</seedDef>

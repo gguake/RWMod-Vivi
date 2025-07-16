@@ -89,9 +89,6 @@
       <li>
         <label>I</label>
         <minSeverity>1</minSeverity>
-        <statFactors>
-          <IncomingDamageFactor>0.9</IncomingDamageFactor>
-        </statFactors>
         <capMods>
           <li>
             <capacity>Consciousness</capacity>
@@ -103,11 +100,10 @@
         <minSeverity>2</minSeverity>
         <label>II</label>
         <statOffsets>
-          <RestFallRateFactor>0.1</RestFallRateFactor>
           <PsychicSensitivity>0.1</PsychicSensitivity>
         </statOffsets>
         <statFactors>
-          <IncomingDamageFactor>0.85</IncomingDamageFactor>
+          <IncomingDamageFactor>0.95</IncomingDamageFactor>
         </statFactors>
         <capMods>
           <li>
@@ -120,11 +116,10 @@
         <minSeverity>3</minSeverity>
         <label>III</label>
         <statOffsets>
-          <RestFallRateFactor>0.2</RestFallRateFactor>
           <PsychicSensitivity>0.2</PsychicSensitivity>
         </statOffsets>
         <statFactors>
-          <IncomingDamageFactor>0.8</IncomingDamageFactor>
+          <IncomingDamageFactor>0.9</IncomingDamageFactor>
         </statFactors>
         <capMods>
           <li>
@@ -137,11 +132,10 @@
         <minSeverity>4</minSeverity>
         <label>IV</label>
         <statOffsets>
-          <RestFallRateFactor>0.3</RestFallRateFactor>
           <PsychicSensitivity>0.3</PsychicSensitivity>
         </statOffsets>
         <statFactors>
-          <IncomingDamageFactor>0.75</IncomingDamageFactor>
+          <IncomingDamageFactor>0.85</IncomingDamageFactor>
         </statFactors>
         <capMods>
           <li>
@@ -154,11 +148,6 @@
 
     <comps>
       <li><compClass>VVRace.HediffComp_EverflowerLink</compClass></li>
-      <li Class="VVRace.HediffCompProperties_GiveEverflowerAbility">
-        <abilities>
-          <VV_Fairyfication>3</VV_Fairyfication>
-        </abilities>
-      </li>
     </comps>
   </HediffDef>
 </Defs>

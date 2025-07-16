@@ -20,7 +20,6 @@
 
         public const string VV_Thing_Seed = nameof(VV_Thing_Seed);
         public const string VV_Thing_SeedDesc = nameof(VV_Thing_SeedDesc);
-
         public const string VV_Thing_Seedling = nameof(VV_Thing_Seedling);
 
         public const string VV_FailReason_EverflowerOnPot = nameof(VV_FailReason_EverflowerOnPot);
@@ -28,5 +27,11 @@
         public const string VV_FailReason_PawnMentalState = nameof(VV_FailReason_PawnMentalState);
         public const string VV_FailReason_PawnPsychicSensitivity = nameof(VV_FailReason_PawnPsychicSensitivity);
         public const string VV_FailReason_RitualCooldown = nameof(VV_FailReason_RitualCooldown);
+
+        public const string VV_Targetter_TargetEverflowerRitual = nameof(VV_Targetter_TargetEverflowerRitual);
+        public const string VV_Targetter_InvalidTarget_NotVivi = nameof(VV_Targetter_InvalidTarget_NotVivi);
+        public const string VV_Targetter_InvalidTarget_CannotTargetRoyalVivi = nameof(VV_Targetter_InvalidTarget_CannotTargetRoyalVivi);
+        public const string VV_Targetter_InvalidTarget_NotMyChild = nameof(VV_Targetter_InvalidTarget_NotMyChild);
+        public const string VV_Targetter_InvalidTarget_NotAdult = nameof(VV_Targetter_InvalidTarget_NotAdult);
     }
 }

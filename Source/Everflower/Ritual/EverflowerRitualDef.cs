@@ -28,14 +28,12 @@ namespace VVRace
         public string uiIconPath;
         public Texture2D uiIcon = BaseContent.BadTex;
 
+        public int attuneLevel;
+        public bool allowUnlinkedPawn;
         public float requiredPsychicSensitivity = 1.5f;
 
-        public int attuneLevel;
         public JobDef job;
         public int jobWorkAmount;
-
-        public TargetingParameters targetParms;
-        public float range;
 
         public int globalCooldown;
 

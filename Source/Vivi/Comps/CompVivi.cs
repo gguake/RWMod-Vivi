@@ -4,20 +4,10 @@ using Verse;
 
 namespace VVRace
 {
-    public class CompProperties_Vivi : CompProperties
-    {
-        public CompProperties_Vivi()
-        {
-            compClass = typeof(CompVivi);
-        }
-    }
-
     [StaticConstructorOnStartup]
     public class CompVivi : ThingComp
     {
         public static Material AttunementLineMat = MaterialPool.MatFrom(GenDraw.LineTexPath, ShaderDatabase.Transparent, new Color(0.5f, 1f, 0.5f));
-
-        public CompProperties_Vivi Props => (CompProperties_Vivi)props;
 
         public bool isRoyal = false;
         private Color? _originalHairColor = null;

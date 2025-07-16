@@ -30,4 +30,6 @@
 <VV_FailReason_PawnMentalState>in mental state</VV_FailReason_PawnMentalState>
 <VV_FailReason_PawnPsychicSensitivity>low psychic sensitivity</VV_FailReason_PawnPsychicSensitivity>
 <VV_FailReason_RitualCooldown>attunement on cooldown. It will be available in {0}.</VV_FailReason_RitualCooldown>
+
+<VV_Targetter_TargetEverflowerRitual>Target of {RITUAL}: {TARGET_labelShort}</VV_Targetter_TargetEverflowerRitual>
 </LanguageData>
