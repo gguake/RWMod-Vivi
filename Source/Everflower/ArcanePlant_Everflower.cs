@@ -49,6 +49,13 @@ namespace VVRace
 
         public override AcceptanceReport DeconstructibleBy(Faction faction) => false;
 
+        public override ushort PathWalkCostFor(Pawn p)
+        {
+            if (EverflowerComp.AttunementLevel >= 3) { return 36; }
+
+            return 0;
+        }
+
         private List<FloatMenuOption> _tmpFloatMenuOptions = new List<FloatMenuOption>();
         public override IEnumerable<Gizmo> GetGizmos()
         {
