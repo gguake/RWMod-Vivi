@@ -38,7 +38,11 @@ namespace VVRace
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_References.Look(ref _reservedPawn, "linkReserved");
+            Scribe_References.Look(ref _reservedPawn, "reservedPawn");
+            Scribe_Defs.Look(ref _reservedRitual, "reservedRitual");
+
+            Scribe_Values.Look(ref _ritualCooldownTick, "ritualCooldownTick");
+            Scribe_Values.Look(ref _lastRitualTick, "lastRitualTick");
         }
 
         public override void Destroy(DestroyMode mode = DestroyMode.Vanish)
@@ -75,13 +79,13 @@ namespace VVRace
                         {
                             command = new Command_ActionWithCooldown()
                             {
-                                cooldownPercentGetter = () => (GenTicks.TicksGame - _lastRitualTick) / (_ritualCooldownTick - _lastRitualTick)
+                                cooldownPercentGetter = () => HasRitualCooldown ? (float)(GenTicks.TicksGame - _lastRitualTick) / (_ritualCooldownTick - _lastRitualTick) : 1
                             };
 
                             if (HasRitualCooldown)
                             {
                                 var cooldownTicksRemaining = _ritualCooldownTick - GenTicks.TicksGame;
-                                command.Disable(LocalizeString_Command.VV_Command_EverflowerRitualCooldown.Translate(cooldownTicksRemaining.ToStringSecondsFromTicks()));
+                                command.Disable(LocalizeString_Etc.VV_FailReason_RitualCooldown.Translate(cooldownTicksRemaining.ToStringSecondsFromTicks()));
                             }
                         }
                         else
@@ -115,11 +119,11 @@ namespace VVRace
                                     {
                                         _tmpFloatMenuOptions.Add(new FloatMenuOption(pawn.Label, () =>
                                         {
-                                            if (ritualDef.Worker.StartRitual(this, pawn))
+                                            ritualDef.Worker.StartRitual(this, pawn, () =>
                                             {
                                                 _reservedPawn = pawn;
                                                 _reservedRitual = ritualDef;
-                                            }
+                                            });
 
                                         }, pawn, Color.white));
                                     }
@@ -192,15 +196,15 @@ namespace VVRace
             }
         }
 
-        public void Notify_RitualComplete(Pawn pawn, EverflowerRitualDef ritualDef)
+        public void Notify_RitualComplete(Pawn pawn)
         {
-            Unreserve();
-
-            if (ritualDef.globalCooldown > 0)
+            if (_reservedRitual.globalCooldown > 0)
             {
                 _lastRitualTick = GenTicks.TicksGame;
-                _ritualCooldownTick = _lastRitualTick + ritualDef.globalCooldown;
+                _ritualCooldownTick = _lastRitualTick + _reservedRitual.globalCooldown;
             }
+
+            Unreserve();
         }
 
         public void Unreserve(bool cancelled = false)

@@ -1,4 +1,5 @@
 ﻿using RimWorld;
+using System;
 using System.Collections.Generic;
 using Verse;
 using Verse.AI;
@@ -27,12 +28,12 @@ namespace VVRace
 
             if (caster.InMentalState)
             {
-                return LocalizeString_Etc.VV_FailReasonPawnMentalState.Translate(caster);
+                return LocalizeString_Etc.VV_FailReason_PawnMentalState.Translate(caster);
             }
 
             if (caster.GetStatValue(StatDefOf.PsychicSensitivity) < _def.requiredPsychicSensitivity)
             {
-                return LocalizeString_Etc.VV_FailReasonPawnPsychicSensitivity.Translate();
+                return LocalizeString_Etc.VV_FailReason_PawnPsychicSensitivity.Translate();
             }
 
             if (!caster.CanReserve(everflower, ignoreOtherReservations: true))
@@ -48,6 +49,11 @@ namespace VVRace
             return true;
         }
 
-        public abstract bool StartRitual(ArcanePlant_Everflower flower, Pawn caster);
+        public abstract void StartRitual(ArcanePlant_Everflower flower, Pawn caster, Action onStartCallback);
+
+        public virtual void Complete(ArcanePlant_Everflower flower, Pawn caster)
+        {
+            flower.Notify_RitualComplete(caster);
+        }
     }
 }

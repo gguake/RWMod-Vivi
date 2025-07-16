@@ -34,7 +34,7 @@ namespace VVRace
 
             if (targetEverflower == null || targetEverflower.CurReservedRitual == null || targetEverflower.CurReservedPawn != pawn) { return null; }
 
-            if (targetEverflower.CurReservedRitual.Worker is EverflowerRitualWorker_GiveJob giveJobWorker)
+            if (targetEverflower.CurReservedRitual.Worker is EverflowerRitualWorker_SingleJob giveJobWorker)
             {
                 var job = giveJobWorker.TryGiveJob(targetEverflower, pawn);
                 return job;

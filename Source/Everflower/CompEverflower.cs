@@ -36,7 +36,6 @@ namespace VVRace
     {
         public SimpleCurve everflowerAttuneRateCurve;
         public SimpleCurve everflowerAttuneLevelCurve;
-
         public SimpleCurve everflowerAttunementRitualCurve;
 
         public List<GraphicData> graphicsByLevel;

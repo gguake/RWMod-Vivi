@@ -48,6 +48,8 @@ namespace VVRace
             yield return Toils_General.Do(() =>
             {
                 Everflower.EverflowerComp.LinkAttunement(pawn);
+
+                Everflower.CurReservedRitual.Worker.Complete(Everflower, pawn);
             });
         }
     }

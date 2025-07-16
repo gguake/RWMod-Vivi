@@ -104,7 +104,7 @@ namespace VVRace
                 {
                     if (cell.GetFirstThing<ArcanePlant_Everflower>(Map) != null)
                     {
-                        return new AcceptanceReport(LocalizeString_Etc.VV_FailReasonToDeconstructEverflowerPotted.Translate());
+                        return new AcceptanceReport(LocalizeString_Etc.VV_FailReason_EverflowerOnPot.Translate());
                     }
                 }
 

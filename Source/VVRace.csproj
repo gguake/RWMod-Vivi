@@ -92,7 +92,7 @@
     <Compile Include="Everflower\Ritual\EverflowerRitualWorker.cs" />
     <Compile Include="Everflower\HediffComp_EverflowerLink.cs" />
     <Compile Include="Everflower\HediffComp_GiveEverflowerAbility.cs" />
-    <Compile Include="Everflower\Ritual\EverflowerRitualWorker_GiveJob.cs" />
+    <Compile Include="Everflower\Ritual\EverflowerRitualWorker_SingleJob.cs" />
     <Compile Include="Everflower\UI\ITab_EverflowerFairies.cs" />
     <Compile Include="Everflower\AI\JobDriver_AttunementEverflower.cs" />
     <Compile Include="ArcanePlant\Plant\Comps\CompRadiantflowerGlower.cs" />

@@ -1,13 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Verse;
 using Verse.AI;
 
 namespace VVRace
 {
-    public class EverflowerRitualWorker_GiveJob : EverflowerRitualWorker
+    public class EverflowerRitualWorker_SingleJob : EverflowerRitualWorker
     {
-        public EverflowerRitualWorker_GiveJob(EverflowerRitualDef def) : base(def)
+        public EverflowerRitualWorker_SingleJob(EverflowerRitualDef def) : base(def)
         {
         }
 
@@ -26,13 +27,13 @@ namespace VVRace
             }
         }
 
-        public override bool StartRitual(ArcanePlant_Everflower flower, Pawn caster)
+        public override void StartRitual(ArcanePlant_Everflower flower, Pawn caster, Action onStartCallback)
         {
             var job = TryGiveJob(flower, caster);
-            if (job == null) { return false; }
+            if (job == null) { return; }
 
             caster.jobs.StartJob(job, JobCondition.InterruptForced);
-            return true;
+            onStartCallback();
         }
 
         public virtual Job TryGiveJob(ArcanePlant_Everflower everflower, Pawn caster)

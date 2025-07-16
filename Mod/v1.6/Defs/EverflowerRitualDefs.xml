@@ -9,8 +9,10 @@
     <defName>VV_Attunement</defName>
     <label>attunement</label>
     <description>.</description>
-    <workerClass>VVRace.EverflowerRitualWorker_GiveJob</workerClass>
+    <workerClass>VVRace.EverflowerRitualWorker_SingleJob</workerClass>
     
+    <jobWorkAmount>2000</jobWorkAmount>
+
     <uiOrder>1</uiOrder>
     <uiIconPath>UI/Commands/VV_LinkConnect</uiIconPath>
 
