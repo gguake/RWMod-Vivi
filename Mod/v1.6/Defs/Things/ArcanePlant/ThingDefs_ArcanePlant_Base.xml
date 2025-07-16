@@ -111,7 +111,6 @@
 
     <building>
       <isInert>false</isInert>
-      <uninstallWork>750</uninstallWork>
       <ai_combatDangerous>true</ai_combatDangerous>
     </building>
     

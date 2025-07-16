@@ -26,4 +26,7 @@
 <VV_Thing_Seedling>{0} seedling</VV_Thing_Seedling>
 
 <VV_FailReasonToDeconstructEverflowerPotted>Cannot deconstruct since everflower overhead.</VV_FailReasonToDeconstructEverflowerPotted>
+
+<VV_FailReasonPawnMentalState>In mental state</VV_FailReasonPawnMentalState>
+<VV_FailReasonPawnPsychicSensitivity>Low psychic sensitivity</VV_FailReasonPawnPsychicSensitivity>
 </LanguageData>

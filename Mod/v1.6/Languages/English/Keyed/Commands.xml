@@ -18,9 +18,6 @@
 <VV_Designator_FortifyHoneycombWallDesc>Fortify the honeycomb walls with lifestrands. The fortified walls are non-flammable but slightly less resistant to impacts.
 \nRequires one lifestrand for each wall.</VV_Designator_FortifyHoneycombWallDesc>
 
-<VV_Command_ReserveLinkEverflower>Reserve to attune</VV_Command_ReserveLinkEverflower>
-<VV_Command_ReserveLinkEverflowerDesc>Reserves the selected royal vivi to attune to the everflower. A royal vivi can attune to multiple everflowers, but each Everflower can be attuned to only one royal vivi.</VV_Command_ReserveLinkEverflowerDesc>
-
-<VV_Command_CancelReserveLinkEverflower>Cancel attune</VV_Command_CancelReserveLinkEverflower>
-<VV_Command_CancelReserveLinkEverflowerDesc>Cancel reserved attunement.</VV_Command_CancelReserveLinkEverflowerDesc>
+<VV_Command_CancelReservationEverflower>Cancel reservation</VV_Command_CancelReservationEverflower>
+<VV_Command_CancelReservationEverflowerDesc>Cancel reserved attunement.</VV_Command_CancelReservationEverflowerDesc>
 </LanguageData>

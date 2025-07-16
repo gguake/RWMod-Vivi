@@ -308,7 +308,7 @@ namespace VVRace
 
             if (VerbProps.chainRadius > 0f)
             {
-                GenDraw.DrawCircleOutline(target.CenterVector3, VerbProps.chainRadius);
+                GenDraw.DrawRadiusRing(target.Cell, VerbProps.chainRadius);
             }
         }
     }

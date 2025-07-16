@@ -255,6 +255,9 @@
           <li><from>Soil</from><to>SoilRich</to></li>
           <li><from>MossyTerrain</from><to>SoilRich</to></li>
           <li><from>MarshyTerrain</from><to>SoilRich</to></li>
+          <li MayRequire="Ludeon.RimWorld.Odyssey"><from>AncientMegastructure</from><to>Sand</to></li>
+          <li MayRequire="Ludeon.RimWorld.Odyssey"><from>GlowforestSoil</from><to>SoilRich</to></li>
+          <li MayRequire="Ludeon.RimWorld.Odyssey"><from>GrasslandSoil</from><to>SoilRich</to></li>
         </terraforms>
       </li>
 

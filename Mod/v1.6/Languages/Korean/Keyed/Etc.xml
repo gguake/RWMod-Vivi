@@ -26,4 +26,7 @@
 <VV_Thing_Seedling>{0} 모종</VV_Thing_Seedling>
 
 <VV_FailReasonToDeconstructEverflowerPotted>영원꽃이 위에 있어 철거할 수 없음</VV_FailReasonToDeconstructEverflowerPotted>
+
+<VV_FailReasonPawnMentalState>정신 이상</VV_FailReasonPawnMentalState>
+<VV_FailReasonPawnPsychicSensitivity>정신 감응력이 낮음</VV_FailReasonPawnPsychicSensitivity>
 </LanguageData>

@@ -17,6 +17,8 @@ namespace VVRace
     {
         public new AbilityCompProperties_Fairyfication Props => (AbilityCompProperties_Fairyfication)props;
 
+        public override bool CanCast => base.CanCast;
+
         public override bool Valid(LocalTargetInfo target, bool throwMessages = false)
         {
             var targetPawn = target.Pawn;

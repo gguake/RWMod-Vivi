@@ -29,7 +29,6 @@
       <drawSize>(6, 6)</drawSize>
     </graphicData>
   </ThingDef>
-
   <ThingDef ParentName="MoteBase">
     <defName>VV_Mote_EverflowerLinkDistortion</defName>
     <thingClass>MoteAttached</thingClass>
@@ -276,7 +275,6 @@
       </li>
     </children>
   </EffecterDef>
-
 
   <!-- Fairyfication -->
   <EffecterDef>

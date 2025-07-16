@@ -24,5 +24,8 @@
         public const string VV_Thing_Seedling = nameof(VV_Thing_Seedling);
 
         public const string VV_FailReasonToDeconstructEverflowerPotted = nameof(VV_FailReasonToDeconstructEverflowerPotted);
+
+        public const string VV_FailReasonPawnMentalState = nameof(VV_FailReasonPawnMentalState);
+        public const string VV_FailReasonPawnPsychicSensitivity = nameof(VV_FailReasonPawnPsychicSensitivity);
     }
 }

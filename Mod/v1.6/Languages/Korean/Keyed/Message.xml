@@ -7,4 +7,7 @@
 
 <VV_Message_LinkEverflowerComplete>{PAWN_nameDef}의 영원꽃 교감이 연결되었습니다.</VV_Message_LinkEverflowerComplete>
 <VV_Message_LinkDisconnectedEverflower>{PAWN_nameDef}와 교감한 영원꽃이 파괴되어 교감이 단절되었습니다.</VV_Message_LinkDisconnectedEverflower>
+<VV_Message_ReserveEverflowerCancelled>{PAWN_nameDef}에게 예약된 영원꽃 교감 작업이 취소되었습니다.</VV_Message_ReserveEverflowerCancelled>
+
+<VV_Message_AttunementEverflowerComplete>{PAWN_nameDef}의 영원꽃 교감 의식으로 교감 연결이 더 강해졌습니다.</VV_Message_AttunementEverflowerComplete>
 </LanguageData>

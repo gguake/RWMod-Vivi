@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
+  <!-- Pollen Emitting -->
   <FleckDef ParentName="FleckBase_Thrown">
     <defName>VV_PollenPuff</defName>
     <graphicData>
@@ -12,7 +13,6 @@
     <solidTime>1.2</solidTime>
     <fadeOutTime>3.0</fadeOutTime>
   </FleckDef>
-
   <EffecterDef>
     <defName>VV_PollenEmitting</defName>
     <children>
@@ -27,6 +27,19 @@
     </children>
   </EffecterDef>
 
+  <!-- Gather_Honey -->
+  <ThingDef ParentName="MoteBase">
+    <defName>VV_Mote_GatherHoney</defName>
+    <thingClass>MoteDualAttached</thingClass>
+    <altitudeLayer>MetaOverlays</altitudeLayer>
+    <mote>
+      <solidTime>600</solidTime>
+      <rotateTowardsTarget>true</rotateTowardsTarget>
+    </mote>
+    <graphicData>
+      <texPath>Things/Mote/VV_GatherHoney</texPath>
+    </graphicData>
+  </ThingDef>
   <EffecterDef>
     <defName>VV_Gather_Honey</defName>
     <children>
@@ -43,41 +56,6 @@
         <scale>0.7~1.2</scale>
         <angle>0~360</angle>
         <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
-      </li>
-    </children>
-  </EffecterDef>
-  
-  <EffecterDef>
-    <defName>VV_LightningBolt_End</defName>
-    <children>
-      <li>
-        <subEffecterClass>SubEffecter_SprayerChance</subEffecterClass>
-        <fleckDef>Smoke</fleckDef>
-        <chancePerTick>0.4</chancePerTick>
-        <scale>0.6~1.1</scale>
-        <spawnLocType>OnSource</spawnLocType>
-        <absoluteAngle>true</absoluteAngle>
-        <angle>30~70</angle>
-        <speed>0.2~0.35</speed>
-      </li>
-      <li>
-        <subEffecterClass>SubEffecter_SprayerChance</subEffecterClass>
-        <positionRadius>0.1</positionRadius>
-        <moteDef>Mote_SparkThrownFast</moteDef>
-        <spawnLocType>OnSource</spawnLocType>
-        <chancePerTick>0.9</chancePerTick>
-        <speed>3.3~5</speed>
-        <scale>0.1~0.2</scale>
-        <angle>88~104</angle>
-        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
-      </li>
-      <li>
-        <subEffecterClass>SubEffecter_SprayerChance</subEffecterClass>
-        <positionRadius>0.1</positionRadius>
-        <spawnLocType>OnSource</spawnLocType>
-        <fleckDef>Beam_Glow</fleckDef>
-        <chancePerTick>0.5</chancePerTick>
-        <scale>0.8</scale>
       </li>
     </children>
   </EffecterDef>

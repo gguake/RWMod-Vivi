@@ -1,37 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
+  <!-- StalitFlowerAura -->
   <ThingDef ParentName="MoteBase">
-    <defName>VV_Mote_GatherHoney</defName>
-    <thingClass>MoteDualAttached</thingClass>
-    <altitudeLayer>MetaOverlays</altitudeLayer>
+    <defName>VV_Mote_StalitFlowerAura</defName>
+    <thingClass>MoteAttached</thingClass>
+    <altitudeLayer>MoteOverheadLow</altitudeLayer>
     <mote>
-      <solidTime>600</solidTime>
-      <rotateTowardsTarget>true</rotateTowardsTarget>
+      <fadeInTime>0.05</fadeInTime>
+      <fadeOutTime>0.8</fadeOutTime>
+      <solidTime>0.1</solidTime>
+      <growthRate>0.05</growthRate>
     </mote>
     <graphicData>
-      <texPath>Things/Mote/VV_GatherHoney</texPath>
-    </graphicData>
-  </ThingDef>
-  
-  <ThingDef ParentName="MoteBase">
-    <defName>VV_Mote_ChainLightning</defName>
-    <thingClass>MoteDualAttached</thingClass>
-    <altitudeLayer>MoteOverhead</altitudeLayer>
-    <mote>
-      <fadeInTime>0.01</fadeInTime>
-      <fadeOutTime>0.3</fadeOutTime>
-      <solidTime>999999</solidTime>
-      <needsMaintenance>True</needsMaintenance>
-      <rotateTowardsTarget>True</rotateTowardsTarget>
-      <scaleToConnectTargets>True</scaleToConnectTargets>
-      <fadeOutUnmaintained>True</fadeOutUnmaintained>
-    </mote>
-    <drawOffscreen>true</drawOffscreen>
-    <graphicData>
-      <texPath>Things/Mote/VV_LightningBolt</texPath>
-      <graphicClass>VVRace.Graphic_MoteTiled</graphicClass>
-      <shaderType>GlowAnimated</shaderType>
+      <texPath>Things/Mote/RadiationDistortion_A</texPath>
+      <graphicClass>Graphic_MoteWithAgeSecs</graphicClass>
+      <color>(0.9, 0.86, 1, 0.8)</color>
+      <shaderType>MoteMultiplyAddCircular</shaderType>
+      <shaderParameters>
+        <_MultiplyTex>/Things/Mote/RadiationDistortion_B</_MultiplyTex>
+        <_texAScale>0.3</_texAScale>
+        <_texBScale>0.3</_texBScale>
+        <_texAScrollSpeed>0.4</_texAScrollSpeed>
+        <_texBScrollSpeed>-0.3</_texBScrollSpeed>
+        <_texAScaleDist>0.5</_texAScaleDist>
+        <_DistortionScale>0.5</_DistortionScale>
+        <_Intensity>3</_Intensity>
+      </shaderParameters>
+      <drawSize>(1, 1)</drawSize>
     </graphicData>
   </ThingDef>
 
+  <EffecterDef>
+    <defName>VV_StalitFlowerAura</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <moteDef>VV_Mote_EverflowerCircle</moteDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <ticksBetweenMotes>60</ticksBetweenMotes>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <moteDef>VV_Mote_EverflowerLinkDistortion</moteDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <ticksBetweenMotes>60</ticksBetweenMotes>
+      </li>
+    </children>
+  </EffecterDef>
+  
 </Defs>

@@ -11,7 +11,7 @@
         </races>
         <subNodes>
           <li Class="VVRace.JobGiver_LayViviEgg" />
-          <li Class="VVRace.JobGiver_LinkEverflower" />
+          <li Class="VVRace.JobGiver_TryEverflowerRitual" />
         </subNodes>
       </li>
     </value>

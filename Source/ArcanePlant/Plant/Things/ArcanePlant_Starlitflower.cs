@@ -48,6 +48,21 @@ namespace VVRace
                 _lastCompGlowerState = CompGlower.Glows;
                 DirtyMapMesh(Map);
             }
+
+            if (this.IsHashIntervalTick(250, delta) && Map.Biome.inVacuum)
+            {
+                VVEffecterDefOf.VV_StalitFlowerAura.SpawnAttached(this, Map, VaccumResistRange);
+            }
+        }
+
+        public override void DrawExtraSelectionOverlays()
+        {
+            base.DrawExtraSelectionOverlays();
+
+            if (Spawned && Map.Biome.inVacuum)
+            {
+                GenDraw.DrawRadiusRing(Position, VaccumResistRange);
+            }
         }
 
         public override int? OverrideGraphicIndex => CompGlower.Glows ? 1 : 0;

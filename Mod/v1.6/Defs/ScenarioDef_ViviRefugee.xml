@@ -141,6 +141,11 @@
         </li>
         <li Class="ScenPart_StartingThing_Defined">
           <def>StartingThing_Defined</def>
+          <thingDef>VV_Waterdrops</thingDef>
+          <count>1</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
           <thingDef>VV_Richflower</thingDef>
           <count>1</count>
         </li>

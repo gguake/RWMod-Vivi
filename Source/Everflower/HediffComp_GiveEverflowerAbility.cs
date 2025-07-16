@@ -1,6 +1,4 @@
-﻿using RimWorld;
-using System.Collections.Generic;
-using System.Xml;
+﻿using System.Collections.Generic;
 using Verse;
 
 namespace VVRace

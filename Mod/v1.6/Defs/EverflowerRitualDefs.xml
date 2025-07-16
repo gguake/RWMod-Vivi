@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <VVRace.EverflowerRitualDef Abstract="True" Name="EverflowerRitualBase">
+    <globalCooldown>180000</globalCooldown>
+    <requiredPsychicSensitivity>1.5</requiredPsychicSensitivity>
+  </VVRace.EverflowerRitualDef>
+
+  <VVRace.EverflowerRitualDef ParentName="EverflowerRitualBase">
+    <defName>VV_Attunement</defName>
+    <label>attunement</label>
+    <description>.</description>
+    <workerClass>VVRace.EverflowerRitualWorker_GiveJob</workerClass>
+    
+    <uiOrder>1</uiOrder>
+    <uiIconPath>UI/Commands/VV_LinkConnect</uiIconPath>
+
+    <attuneLevel>0</attuneLevel>
+    <job>VV_AttunementEverflower</job>
+  </VVRace.EverflowerRitualDef>
+</Defs>

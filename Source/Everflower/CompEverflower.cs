@@ -37,6 +37,8 @@ namespace VVRace
         public SimpleCurve everflowerAttuneRateCurve;
         public SimpleCurve everflowerAttuneLevelCurve;
 
+        public SimpleCurve everflowerAttunementRitualCurve;
+
         public List<GraphicData> graphicsByLevel;
         public List<EffecterDef> effectsOnLevelAcquire;
 
@@ -147,11 +149,6 @@ namespace VVRace
 
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
         {
-            if (AttunementLevel >= 1)
-            {
-
-            }
-
             if (DebugSettings.godMode)
             {
                 if (_attunementInfo.attunementLevel >= 1)
@@ -161,7 +158,7 @@ namespace VVRace
                         defaultLabel = "DEV: +1000 Attunement from mana",
                         action = () =>
                         {
-                            TransferMana(1000);
+                            GainAttunementFromMana(1000);
                         }
                     };
                 }
@@ -218,35 +215,48 @@ namespace VVRace
             return _innerContainer;
         }
 
-        public void Link(Pawn pawn)
+        public void LinkAttunement(Pawn pawn)
         {
-            Everflower.UnreserveLink();
-            _linked.Add(pawn);
-
-            if (_attunementInfo.attunementLevel == 0)
+            if (_linked.Contains(pawn))
             {
-                ChangeAttunementLevel(1);
+                var psychicSensitivity = pawn.GetStatValue(StatDefOf.PsychicSensitivity);
+                GainAttunement(Props.everflowerAttunementRitualCurve.Evaluate(psychicSensitivity));
+
+                Messages.Message(LocalizeString_Message.VV_Message_AttunementEverflowerComplete.Translate(pawn.Named("PAWN")), MessageTypeDefOf.PositiveEvent);
             }
+            else
+            {
+                _linked.Add(pawn);
 
-            pawn.GetCompVivi()?.Notify_LinkEverflower(Everflower);
+                if (_attunementInfo.attunementLevel == 0)
+                {
+                    ChangeAttunementLevel(1);
+                }
 
-            Messages.Message(LocalizeString_Message.VV_Message_LinkEverflowerComplete.Translate(pawn.Named("PAWN")), MessageTypeDefOf.PositiveEvent);
+                pawn.GetCompVivi()?.Notify_LinkEverflower(Everflower);
+
+                Messages.Message(LocalizeString_Message.VV_Message_LinkEverflowerComplete.Translate(pawn.Named("PAWN")), MessageTypeDefOf.PositiveEvent);
+            }
         }
 
-        public void Unlink(Pawn pawn)
+        public void UnlinkAttunement(Pawn pawn)
         {
             if (!_linked.Contains(pawn)) { return; }
-
             _linked.Remove(pawn);
+
+            if (pawn == Everflower.CurReservedPawn)
+            {
+                Everflower.Unreserve(true);
+            }
         }
 
-        public void TransferMana(float mana)
+        public void GainAttunement(float attunement)
         {
             var nextLevelExp = Props.everflowerAttuneLevelCurve.EvaluateInverted(_attunementInfo.attunementLevel + 1);
             var curLevelExp = Props.everflowerAttuneLevelCurve.EvaluateInverted(_attunementInfo.attunementLevel);
             if (nextLevelExp == curLevelExp) { return; }
 
-            _attunementInfo.attunement += Props.everflowerAttuneRateCurve.Evaluate(mana);
+            _attunementInfo.attunement += attunement;
 
             var newLevel = (int)Props.everflowerAttuneLevelCurve.Evaluate(_attunementInfo.attunement);
             if (newLevel > _attunementInfo.attunementLevel)
@@ -263,6 +273,12 @@ namespace VVRace
                     hediff.Severity = hediffSeverity;
                 }
             }
+        }
+
+        public void GainAttunementFromMana(float mana)
+        {
+            GainAttunement(Props.everflowerAttuneRateCurve.Evaluate(mana));
+
         }
 
         private void ChangeAttunementLevel(int level)

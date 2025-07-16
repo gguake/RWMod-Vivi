@@ -9,5 +9,8 @@
 
         public const string VV_Message_LinkEverflowerComplete = nameof(VV_Message_LinkEverflowerComplete);
         public const string VV_Message_LinkDisconnectedEverflower = nameof(VV_Message_LinkDisconnectedEverflower);
+        public const string VV_Message_ReserveEverflowerCancelled = nameof(VV_Message_ReserveEverflowerCancelled);
+
+        public const string VV_Message_AttunementEverflowerComplete = nameof(VV_Message_AttunementEverflowerComplete);
     }
 }

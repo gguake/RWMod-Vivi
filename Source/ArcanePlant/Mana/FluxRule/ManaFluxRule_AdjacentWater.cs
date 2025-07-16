@@ -21,10 +21,11 @@ namespace VVRace
 
             if (manaPerAdjacentWater != 0)
             {
-                var mana = thing.Position.GetTerrain(thing.Map).IsWater ? manaFromOccupiedWater : 0;
+                var terrain = thing.Position.GetTerrain(thing.Map);
+                var mana = terrain.IsWater && !terrain.bridge ? manaFromOccupiedWater : 0;
                 foreach (var cell in GenAdj.CellsAdjacentCardinal(thing).Where(v => v.InBounds(thing.Map)))
                 {
-                    var terrain = cell.GetTerrain(thing.Map);
+                    terrain = cell.GetTerrain(thing.Map);
                     if (terrain.IsWater && !terrain.bridge)
                     {
                         mana += manaPerAdjacentWater;

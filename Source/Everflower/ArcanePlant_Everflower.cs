@@ -9,7 +9,6 @@ namespace VVRace
     [StaticConstructorOnStartup]
     public class ArcanePlant_Everflower : ArcanePlant, IGatherableTarget
     {
-        private static readonly Texture2D ReserveLinkCommandTex = ContentFinder<Texture2D>.Get("UI/Commands/VV_LinkConnect");
         private static readonly Texture2D CancelCommandTex = ContentFinder<Texture2D>.Get("UI/Designators/Cancel");
 
         public CompEverflower EverflowerComp
@@ -27,18 +26,24 @@ namespace VVRace
 
         public int AttunementLevel => EverflowerComp.AttunementLevel;
 
-        public Pawn ReservedPawn => _linkReservedPawn;
-        private Pawn _linkReservedPawn;
+        public Pawn CurReservedPawn => _reservedPawn;
+        public EverflowerRitualDef CurReservedRitual => _reservedRitual;
+        private Pawn _reservedPawn;
+        private EverflowerRitualDef _reservedRitual;
+
+        public bool HasRitualCooldown => _ritualCooldownTick > GenTicks.TicksGame;
+        private int _ritualCooldownTick;
+        private int _lastRitualTick;
 
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_References.Look(ref _linkReservedPawn, "linkReserved");
+            Scribe_References.Look(ref _reservedPawn, "linkReserved");
         }
 
         public override void Destroy(DestroyMode mode = DestroyMode.Vanish)
         {
-            UnreserveLink();
+            Unreserve(true);
             base.Destroy(mode);
         }
 
@@ -54,63 +59,97 @@ namespace VVRace
 
             if (Spawned && (Faction?.IsPlayer ?? false))
             {
-                _tmpFloatMenuOptions.Clear();
-                foreach (var pawn in Map.mapPawns.AllPawnsSpawned.Where(p => p.IsRoyalVivi() && (p.IsColonist || p.IsSlaveOfColony)).OrderBy(p => p.IsColonist ? 0 : 1))
+                if (CurReservedPawn == null)
                 {
-                    var report = pawn.CanLinkEverflower();
-                    if (report.Accepted)
+                    foreach (var ritualDef in DefDatabase<EverflowerRitualDef>.AllDefsListForReading.Where(v => AttunementLevel >= v.attuneLevel).OrderBy(v => v.uiOrder))
                     {
-                        _tmpFloatMenuOptions.Add(new FloatMenuOption(pawn.Label, () =>
+                        Command_Action command;
+                        if (ritualDef.globalCooldown > 0)
                         {
-                            _linkReservedPawn = pawn;
-
-                        }, pawn, Color.white));
-                    }
-                    else
-                    {
-                        if (!report.Reason.NullOrEmpty())
-                        {
-                            _tmpFloatMenuOptions.Add(new FloatMenuOption($"{pawn.Label}: {report.Reason}", null, pawn, Color.white));
-                            continue;
-                        }
-                    }
-                }
-
-                if (Map.mapPawns.AllPawnsSpawned.Any(p => p.IsRoyalVivi()))
-                {
-                    if (ReservedPawn == null)
-                    {
-                        var cmd = new Command_Action()
-                        {
-                            icon = ReserveLinkCommandTex,
-                            defaultLabel = LocalizeString_Command.VV_Command_ReserveLinkEverflower.Translate(),
-                            defaultDesc = LocalizeString_Command.VV_Command_ReserveLinkEverflowerDesc.Translate(),
-                            action = () =>
+                            command = new Command_ActionWithCooldown()
                             {
+                                cooldownPercentGetter = () => (GenTicks.TicksGame - _lastRitualTick) / (_ritualCooldownTick - _lastRitualTick)
+                            };
+
+                            if (HasRitualCooldown)
+                            {
+                                var cooldownTicksRemaining = _ritualCooldownTick - GenTicks.TicksGame;
+                                command.Disable(LocalizeString_Command.VV_Command_EverflowerRitualCooldown.Translate(cooldownTicksRemaining.ToStringSecondsFromTicks()));
+                            }
+                        }
+                        else
+                        {
+                            command = new Command_Action();
+                        }
+
+                        command.defaultLabel = ritualDef.LabelCap;
+                        command.defaultDesc = ritualDef.description;
+                        command.icon = ritualDef.uiIcon;
+
+                        if (this.IsBurning())
+                        {
+                            command.Disable("BurningLower".Translate());
+                        }
+                        else if (this.IsForbidden(Faction.OfPlayer))
+                        {
+                            command.Disable("ForbiddenLower".Translate());
+                        }
+
+                        if (!command.Disabled)
+                        {
+                            command.action = () =>
+                            {
+                                _tmpFloatMenuOptions.Clear();
+
+                                foreach (var pawn in ritualDef.Worker.GetCandidates(this))
+                                {
+                                    var report = ritualDef.Worker.CanRitual(this, pawn);
+                                    if (report.Accepted)
+                                    {
+                                        _tmpFloatMenuOptions.Add(new FloatMenuOption(pawn.Label, () =>
+                                        {
+                                            if (ritualDef.Worker.StartRitual(this, pawn))
+                                            {
+                                                _reservedPawn = pawn;
+                                                _reservedRitual = ritualDef;
+                                            }
+
+                                        }, pawn, Color.white));
+                                    }
+                                    else
+                                    {
+                                        if (!report.Reason.NullOrEmpty())
+                                        {
+                                            _tmpFloatMenuOptions.Add(new FloatMenuOption($"{pawn.Label}: {report.Reason}", null, pawn, Color.white));
+                                            continue;
+                                        }
+                                    }
+                                }
+
                                 if (!_tmpFloatMenuOptions.Any())
                                 {
                                     _tmpFloatMenuOptions.Add(new FloatMenuOption(LocalizeString_Gizmo.VV_Gizmo_OptionLabel_NoRoyalVivi.Translate(), null));
                                 }
 
                                 Find.WindowStack.Add(new FloatMenu(_tmpFloatMenuOptions));
-                            }
-                        };
-                        yield return cmd;
+                            };
+                        }
+
+                        yield return command;
                     }
-                    else
+                }
+                else
+                {
+                    yield return new Command_Action()
                     {
-                        var cmd = new Command_Action()
+                        defaultLabel = LocalizeString_Command.VV_Command_CancelReservationEverflower.Translate(),
+                        defaultDesc = LocalizeString_Command.VV_Command_CancelReservationEverflowerDesc.Translate(),
+                        icon = CancelCommandTex,
+                        action = () =>
                         {
-                            icon = CancelCommandTex,
-                            defaultLabel = LocalizeString_Command.VV_Command_CancelReserveLinkEverflower.Translate(),
-                            defaultDesc = LocalizeString_Command.VV_Command_CancelReserveLinkEverflowerDesc.Translate(),
-                            action = () =>
-                            {
-                                UnreserveLink();
-                            }
-                        };
-                        yield return cmd;
-                    }
+                            Unreserve(true);
+                        }
+                    };
                 }
             }
         }
@@ -146,9 +185,28 @@ namespace VVRace
             }
         }
 
-        public void UnreserveLink()
+        public void Notify_RitualComplete(Pawn pawn, EverflowerRitualDef ritualDef)
         {
-            _linkReservedPawn = null;
+            Unreserve();
+
+            if (ritualDef.globalCooldown > 0)
+            {
+                _lastRitualTick = GenTicks.TicksGame;
+                _ritualCooldownTick = _lastRitualTick + ritualDef.globalCooldown;
+            }
+        }
+
+        public void Unreserve(bool cancelled = false)
+        {
+            if (_reservedPawn == null) { return; }
+
+            if (cancelled)
+            {
+                Messages.Message(LocalizeString_Message.VV_Message_ReserveEverflowerCancelled.Translate(_reservedPawn.Named("PAWN")), MessageTypeDefOf.NeutralEvent, historical: false);
+            }
+
+            _reservedPawn = null;
+            _reservedRitual = null;
         }
     }
 }

@@ -88,13 +88,28 @@ namespace VVRace
         public override void PostDeSpawn(Map map, DestroyMode mode = DestroyMode.Vanish)
         {
             RemoveEverflowerLinkHediff();
+
+            if (LinkedEverflower != null && LinkedEverflower.CurReservedPawn == parent)
+            {
+                LinkedEverflower.Unreserve(true);
+            }
+        }
+
+        public override void PostDestroy(DestroyMode mode, Map previousMap)
+        {
+            base.PostDestroy(mode, previousMap);
+
+            if (LinkedEverflower != null)
+            {
+                LinkedEverflower.EverflowerComp.UnlinkAttunement((Pawn)parent);
+            }
         }
 
         public override void Notify_Killed(Map prevMap, DamageInfo? dinfo = null)
         {
             if (LinkedEverflower != null)
             {
-                LinkedEverflower.EverflowerComp.Unlink((Pawn)parent);
+                LinkedEverflower.EverflowerComp.UnlinkAttunement((Pawn)parent);
             }
         }
 
@@ -112,7 +127,7 @@ namespace VVRace
                     var mapManaComp = parent.Map.GetManaComponent();
                     var mana = mapManaComp[parent.Position];
 
-                    LinkedEverflower.EverflowerComp.TransferMana(mana);
+                    LinkedEverflower.EverflowerComp.GainAttunementFromMana(mana);
                 }
             }
         }
