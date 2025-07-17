@@ -92,9 +92,13 @@
     <Compile Include="Everflower\Ritual\EverflowerRitualDef.cs" />
     <Compile Include="Everflower\Ritual\EverflowerRitualWorker.cs" />
     <Compile Include="Everflower\HediffComp_EverflowerLink.cs" />
+    <Compile Include="Everflower\Ritual\EverflowerRitualWorker_Attunement.cs" />
+    <Compile Include="Everflower\Ritual\EverflowerRitualWorker_ChangeWeather.cs" />
+    <Compile Include="Everflower\Ritual\EverflowerRitualWorker_UndoFairy.cs" />
+    <Compile Include="Everflower\Ritual\EverflowerRitualWorker_Manawave.cs" />
     <Compile Include="Everflower\Ritual\EverflowerRitualWorker_SimpleJob.cs" />
-    <Compile Include="Everflower\Ritual\EverflowerRitualWorker_FairyficationJob.cs" />
-    <Compile Include="Everflower\AI\JobDriver_AttunementEverflower.cs" />
+    <Compile Include="Everflower\Ritual\EverflowerRitualWorker_Fairyfication.cs" />
+    <Compile Include="Everflower\AI\JobDriver_EverflowerSimpleRitual.cs" />
     <Compile Include="ArcanePlant\Plant\Comps\CompRadiantflowerGlower.cs" />
     <Compile Include="ArcanePlant\Plant\Comps\CompStalitflowerGlower.cs" />
     <Compile Include="ArcanePlant\Plant\Things\ArcanePlant_Starlitflower.cs" />
@@ -259,6 +263,7 @@
     <Compile Include="Vivi\HediffGiver_GeneticUnstablity.cs" />
     <Compile Include="Vivi\Hediff_GeneticUnstablity.cs" />
     <Compile Include="Vivi\Hediff_HoneyDependency.cs" />
+    <Compile Include="Vivi\MoteViviFairy.cs" />
     <Compile Include="Vivi\PawnKindDef_Vivi.cs" />
     <Compile Include="Gather\RecipeDef_Gathering.cs" />
     <Compile Include="Recipe_InjectPropolis.cs" />

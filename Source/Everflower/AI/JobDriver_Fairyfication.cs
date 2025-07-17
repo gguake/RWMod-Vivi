@@ -38,14 +38,14 @@ namespace VVRace
         {
             this.FailOnDestroyedNullOrForbidden(EverflowerIndex);
             this.FailOnDestroyedNullOrForbidden(TargetPawnIndex);
-            this.FailOn(() => Everflower.CurReservedPawn != pawn);
+            this.FailOn(() => Everflower.CurReservationInfo == null || Everflower.CurReservationInfo.casterPawn != pawn);
 
             yield return Toils_Goto.GotoThing(TargetPawnIndex, PathEndMode.Touch);
 
             yield return Toils_Haul.StartCarryThing(TargetPawnIndex);
             yield return Toils_Goto.GotoThing(EverflowerIndex, PathEndMode.Touch);
 
-            var ticks = (int)(Everflower.CurReservedRitual.jobWorkAmount / pawn.GetStatValue(StatDefOf.PsychicSensitivity));
+            var workAmount = Everflower.CurReservedRitual.jobWorkAmount;
             yield return ToilMaker.MakeToil("JobDriver_Fairyfication_Work")
                 .WithInitAction(() =>
                 {
@@ -54,24 +54,19 @@ namespace VVRace
                 .WithTickIntervalAction((delta) =>
                 {
                     _workDone += pawn.GetStatValue(StatDefOf.PsychicSensitivity) * delta;
-                    if (_workDone >= Everflower.CurReservedRitual.jobWorkAmount)
+                    if (_workDone >= workAmount)
                     {
                         ReadyForNextToil();
                     }
                 })
-                .WithProgressBar(TargetPawnIndex, () => _workDone / Everflower.CurReservedRitual.jobWorkAmount, interpolateBetweenActorAndTarget: true)
+                .WithProgressBar(TargetPawnIndex, () => _workDone / workAmount, interpolateBetweenActorAndTarget: true)
                 .WithEffect(() => VVEffecterDefOf.VV_EverflowerLink, TargetPawnIndex)
                 //.PlaySustainerOrSound()
                 .WithDefaultCompleteMode(ToilCompleteMode.Never);
 
             yield return Toils_General.DoAtomic(() =>
             {
-                if (pawn.TryGetComp<CompViviHolder>(out var compViviHolder))
-                {
-                    compViviHolder.JoinVivi(TargetPawn);
-                }
-
-                Everflower.CurReservedRitual.Worker.Complete(Everflower, pawn);
+                Everflower.CurReservationInfo.ritualDef.Worker.Complete(Everflower.CurReservationInfo);
             });
         }
     }

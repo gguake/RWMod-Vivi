@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-  <VV_ToxicStab.label>찔림</VV_ToxicStab.label>
-  <VV_ToxicStab.deathMessage>{0}(이)가 찔려 죽었습니다.</VV_ToxicStab.deathMessage>
+<VV_ToxicStab.label>찔림</VV_ToxicStab.label>
+<VV_ToxicStab.deathMessage>{0}(이)가 찔려 죽었습니다.</VV_ToxicStab.deathMessage>
 
-  <VV_RangedToxicStab.label>찔림</VV_RangedToxicStab.label>
-  <VV_RangedToxicStab.deathMessage>{0}(이)가 찔려 죽었습니다.</VV_RangedToxicStab.deathMessage>
+<VV_RangedToxicStab.label>찔림</VV_RangedToxicStab.label>
+<VV_RangedToxicStab.deathMessage>{0}(이)가 찔려 죽었습니다.</VV_RangedToxicStab.deathMessage>
 
-  <VV_ExtinguishWithWater.label>화재 진압</VV_ExtinguishWithWater.label>
-  <VV_ExtinguishWithWater.deathMessage>{0}(이)가 죽었습니다.</VV_ExtinguishWithWater.deathMessage>
-  
-  <!-- EN: frostbite -->
-  <VV_Frostbite.label>동상</VV_Frostbite.label>
-  <!-- EN: {0} has succumbed to frostbite. -->
-  <VV_Frostbite.deathMessage>{0}(이)가 동사했습니다.</VV_Frostbite.deathMessage>
-  
+<VV_ExtinguishWithWater.label>화재 진압</VV_ExtinguishWithWater.label>
+<VV_ExtinguishWithWater.deathMessage>{0}(이)가 죽었습니다.</VV_ExtinguishWithWater.deathMessage>
+
+<VV_Frostbite.label>동상</VV_Frostbite.label>
+<VV_Frostbite.deathMessage>{0}(이)가 동사했습니다.</VV_Frostbite.deathMessage>
+
+<VV_Manawave.label>마나 파동</VV_Manawave.label>
+<VV_Manawave.deathMessage>{0}(이)가 마나 파동에 의해 죽었습니다.</VV_Manawave.deathMessage>
 </LanguageData>

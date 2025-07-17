@@ -182,7 +182,7 @@ namespace VVRace
                 var dataStatic = FleckMaker.GetDataStatic(
                     loc + new Vector3(Rand.Range(-0.005f, 0.005f), 0f, Rand.Range(-0.005f, 0.005f)),
                     map,
-                    VVFleckDefOf.VV_Steam,
+                    VVFleckDefOf.VV_Fleck_Steam,
                     Rand.Range(0.7f, 0.9f));
 
                 dataStatic.rotationRate = Rand.RangeInclusive(-240, 240);

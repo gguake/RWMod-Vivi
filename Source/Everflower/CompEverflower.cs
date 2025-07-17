@@ -183,7 +183,44 @@ namespace VVRace
                 var psychicSensitivity = pawn.GetStatValue(StatDefOf.PsychicSensitivity);
                 GainAttunement(Props.everflowerAttunementRitualCurve.Evaluate(psychicSensitivity));
 
-                Messages.Message(LocalizeString_Message.VV_Message_AttunementEverflowerComplete.Translate(pawn.Named("PAWN")), MessageTypeDefOf.PositiveEvent);
+                Messages.Message(LocalizeString_Message.VV_Message_AttunementEverflowerComplete.Translate(pawn.Named("PAWN")), MessageTypeDefOf.NeutralEvent);
+
+                var count = 0;
+                var v = Rand.Value;
+                if (v <= 0.5f)
+                {
+                    count += GrowViviFlowerRandomly();
+                    if (Rand.Chance(0.4f))
+                    {
+                        count += GrowArcanePlantRandomly();
+                    }
+
+                    if (count > 0)
+                    {
+                        Messages.Message(LocalizeString_Message.VV_Message_PlantGrownAfterAttunement.Translate(), MessageTypeDefOf.PositiveEvent, historical: false);
+                    }
+                }
+                else if (v < 0.7f)
+                {
+                    foreach (var cell in GenRadial.RadialCellsAround(parent.Position, 4f, false))
+                    {
+                        if (!cell.InBounds(parent.Map)) { continue; }
+
+                        if (FilthMaker.CanMakeFilth(cell, parent.Map, VVThingDefOf.VV_FilthPollen))
+                        {
+                            if (FilthMaker.TryMakeFilth(cell, parent.Map, VVThingDefOf.VV_FilthPollen))
+                            {
+                                count++;
+                            }
+                        }
+                    }
+
+                    if (count > 0)
+                    {
+                        Messages.Message(LocalizeString_Message.VV_Message_PollenWaveAfterAttunement.Translate(), MessageTypeDefOf.PositiveEvent, historical: false);
+                    }
+                }
+
             }
             else
             {
@@ -265,6 +302,57 @@ namespace VVRace
                     effect?.SpawnAttached(parent, parent.Map);
                 }
             }
+        }
+
+        private int GrowArcanePlantRandomly()
+        {
+            var spawnedCount = 0;
+            var nearCells = GenRadial.RadialCellsAround(parent.Position, 5f, false)
+                .Where(c => ArcanePlantUtility.CanPlaceArcanePlantToCell(parent.Map, c, VVThingDefOf.VV_ArcanePlantSeedling)).ToList();
+
+            var count = Mathf.Min(nearCells.Count(), Rand.Range(2, 5));
+            for (int i = 0; i < count; ++i)
+            {
+                var cell = nearCells.RandomElement();
+                nearCells.Remove(cell);
+
+                if (GenSpawn.TrySpawn(VVThingDefOf.VV_ArcanePlantSeedling, cell, parent.Map, out var thing, canWipeEdifices: false))
+                {
+                    var seedling = thing as ArcanePlant_Seedling;
+                    if (seedling != null)
+                    {
+                        seedling.Growth = Random.Range(0.05f, 0.6f);
+                    }
+
+                    spawnedCount++;
+                }
+            }
+
+            return spawnedCount;
+        }
+
+        private int GrowViviFlowerRandomly()
+        {
+            var spawnedCount = 0;
+            var nearCells = GenRadial.RadialCellsAround(parent.Position, 9f, false)
+                .Where(c => c.InBounds(parent.Map))
+                .ToList();
+
+            var count = Mathf.Min(nearCells.Count(), Rand.Range(6, 15));
+            while (nearCells.Count > 0)
+            {
+                var cell = nearCells.RandomElement();
+                nearCells.Remove(cell);
+
+                if (ArcanePlantUtility.TrySpawnViviFlower(parent.Map, cell, out var flower))
+                {
+                    spawnedCount++;
+                }
+
+                if (spawnedCount >= count) { break; }
+            }
+
+            return spawnedCount;
         }
     }
 }

@@ -12,20 +12,20 @@ namespace VVRace
 
         public override void StartRitual(ArcanePlant_Everflower flower, Pawn caster, Action<EverflowerRitualReservation> onStartCallback)
         {
-            onStartCallback(new EverflowerRitualReservation()
+            onStartCallback(new EverflowerRitualReservation(flower)
             {
                 ritualDef = _def,
                 casterPawn = caster,
             });
         }
 
-        public override Job TryGiveJob(ArcanePlant_Everflower flower)
+        public override Job TryGiveJob(EverflowerRitualReservation reservation)
         {
-            if (flower.CurReservationInfo == null || flower.CurReservedRitual.Worker != this) { return null; }
+            if (reservation.ritualDef == null || reservation.ritualDef.Worker != this) { return null; }
 
-            if (!flower.CurReservationInfo.casterPawn.CanReserveAndReach(flower, PathEndMode.Touch, Danger.Deadly)) { return null; }
+            if (!reservation.flower.CurReservationInfo.casterPawn.CanReserveAndReach(reservation.flower, PathEndMode.Touch, Danger.Deadly)) { return null; }
 
-            var job = JobMaker.MakeJob(_def.job, flower);
+            var job = JobMaker.MakeJob(_def.job, reservation.flower);
             return job;
         }
     }

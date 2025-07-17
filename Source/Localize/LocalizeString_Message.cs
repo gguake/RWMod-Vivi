@@ -12,5 +12,8 @@
         public const string VV_Message_ReserveEverflowerCancelled = nameof(VV_Message_ReserveEverflowerCancelled);
 
         public const string VV_Message_AttunementEverflowerComplete = nameof(VV_Message_AttunementEverflowerComplete);
+
+        public const string VV_Message_PollenWaveAfterAttunement = nameof(VV_Message_PollenWaveAfterAttunement);
+        public const string VV_Message_PlantGrownAfterAttunement = nameof(VV_Message_PlantGrownAfterAttunement);
     }
 }

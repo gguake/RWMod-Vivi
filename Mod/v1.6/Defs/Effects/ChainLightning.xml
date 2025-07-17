@@ -20,7 +20,6 @@
       <shaderType>GlowAnimated</shaderType>
     </graphicData>
   </ThingDef>
-  
   <EffecterDef>
     <defName>VV_LightningBolt_End</defName>
     <children>

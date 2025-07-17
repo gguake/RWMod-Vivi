@@ -19,101 +19,68 @@
     <allowUnlinkedPawn>true</allowUnlinkedPawn>
 
     <job>VV_AttunementEverflower</job>
-    <jobWorkAmount>2000</jobWorkAmount>
+    <jobWorkAmount>1500</jobWorkAmount>
+
+    <effectOnCasting></effectOnCasting>
   </VVRace.EverflowerRitualDef>
 
-  <!-- TODO -->
   <VVRace.EverflowerRitualDef ParentName="EverflowerRitualBase">
-    <defName>VV_Wish</defName>
-    <label>wish</label>
+    <defName>VV_ChangeWeatherRitual</defName>
+    <label>change weather ritual</label>
     <description>.</description>
-    <workerClass>VVRace.EverflowerRitualWorker_SimpleJob</workerClass>
+    <workerClass>VVRace.EverflowerRitualWorker_ChangeWeather</workerClass>
 
-    <uiOrder>1</uiOrder>
-    <uiIconPath>UI/Commands/VV_LinkConnect</uiIconPath>
+    <uiOrder>2</uiOrder>
 
-    <attuneLevel>0</attuneLevel>
+    <attuneLevel>2</attuneLevel>
 
-    <job>VV_Fairyfication</job>
-    <jobWorkAmount>1000</jobWorkAmount>
-  </VVRace.EverflowerRitualDef>
-
-  <!-- TODO -->
-  <VVRace.EverflowerRitualDef ParentName="EverflowerRitualBase">
-    <defName>VV_Fertilization</defName>
-    <label>fertilization</label>
-    <description>.</description>
-    <workerClass>VVRace.EverflowerRitualWorker_SimpleJob</workerClass>
-
-    <uiOrder>1</uiOrder>
-    <uiIconPath>UI/Commands/VV_LinkConnect</uiIconPath>
-
-    <attuneLevel>0</attuneLevel>
-
-    <job>VV_Fairyfication</job>
-    <jobWorkAmount>1000</jobWorkAmount>
-  </VVRace.EverflowerRitualDef>
-  
-  <!-- TODO -->
-  <VVRace.EverflowerRitualDef ParentName="EverflowerRitualBase">
-    <defName>VV_Rainmaker</defName>
-    <label>rainmaker</label>
-    <description>.</description>
-    <workerClass>VVRace.EverflowerRitualWorker_SimpleJob</workerClass>
-
-    <uiOrder>1</uiOrder>
-    <uiIconPath>UI/Commands/VV_LinkConnect</uiIconPath>
-
-    <attuneLevel>0</attuneLevel>
-
-    <job>VV_Fairyfication</job>
-    <jobWorkAmount>1000</jobWorkAmount>
+    <job>VV_ChangeWeather</job>
+    <jobWorkAmount>3000</jobWorkAmount>
   </VVRace.EverflowerRitualDef>
 
   <VVRace.EverflowerRitualDef ParentName="EverflowerRitualBase">
     <defName>VV_Fairyfication</defName>
     <label>fairyfication</label>
     <description>.</description>
-    <workerClass>VVRace.EverflowerRitualWorker_FairyficationJob</workerClass>
+    <workerClass>VVRace.EverflowerRitualWorker_Fairyfication</workerClass>
 
-    <uiOrder>1</uiOrder>
+    <uiOrder>3</uiOrder>
     <uiIconPath>UI/Commands/VV_LinkConnect</uiIconPath>
 
-    <attuneLevel>0</attuneLevel>
+    <attuneLevel>3</attuneLevel>
 
     <job>VV_Fairyfication</job>
-    <jobWorkAmount>1000</jobWorkAmount>
+    <jobWorkAmount>4000</jobWorkAmount>
   </VVRace.EverflowerRitualDef>
   
-  <!-- TODO -->
   <VVRace.EverflowerRitualDef ParentName="EverflowerRitualBase">
     <defName>VV_UndoFairyfication</defName>
     <label>undo fairyfication</label>
     <description>.</description>
-    <workerClass>VVRace.EverflowerRitualWorker_SimpleJob</workerClass>
+    <workerClass>VVRace.EverflowerRitualWorker_UndoFairy</workerClass>
 
-    <uiOrder>1</uiOrder>
-    <uiIconPath>UI/Commands/VV_LinkConnect</uiIconPath>
+    <uiOrder>4</uiOrder>
+    <uiIconPath>UI/Commands/VV_LinkDisconnect</uiIconPath>
 
-    <attuneLevel>0</attuneLevel>
+    <attuneLevel>3</attuneLevel>
 
-    <job>VV_Fairyfication</job>
-    <jobWorkAmount>1000</jobWorkAmount>
+    <job>VV_UndoFairyfication</job>
+    <jobWorkAmount>4000</jobWorkAmount>
   </VVRace.EverflowerRitualDef>
   
-  <!-- TODO -->
   <VVRace.EverflowerRitualDef ParentName="EverflowerRitualBase">
     <defName>VV_Manawave</defName>
     <label>mana wave</label>
     <description>.</description>
-    <workerClass>VVRace.EverflowerRitualWorker_SimpleJob</workerClass>
+    <workerClass>VVRace.EverflowerRitualWorker_Manawave</workerClass>
 
-    <uiOrder>1</uiOrder>
-    <uiIconPath>UI/Commands/VV_LinkConnect</uiIconPath>
+    <uiOrder>5</uiOrder>
 
-    <attuneLevel>0</attuneLevel>
+    <attuneLevel>3</attuneLevel>
 
-    <job>VV_Fairyfication</job>
-    <jobWorkAmount>1000</jobWorkAmount>
+    <job>VV_Manawave</job>
+    <jobWorkAmount>4000</jobWorkAmount>
+
+    <effectOnComplete>VV_Manawave</effectOnComplete>
   </VVRace.EverflowerRitualDef>
 </Defs>

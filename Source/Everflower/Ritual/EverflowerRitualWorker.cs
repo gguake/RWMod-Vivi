@@ -65,11 +65,11 @@ namespace VVRace
 
         public abstract void StartRitual(ArcanePlant_Everflower flower, Pawn caster, Action<EverflowerRitualReservation> onStartCallback);
 
-        public virtual void Complete(ArcanePlant_Everflower flower, Pawn caster)
+        public virtual void Complete(EverflowerRitualReservation reservation)
         {
-            flower.Notify_RitualComplete(caster);
+            reservation.flower.Notify_RitualComplete(reservation.casterPawn);
         }
 
-        public abstract Job TryGiveJob(ArcanePlant_Everflower flower);
+        public abstract Job TryGiveJob(EverflowerRitualReservation reservation);
     }
 }

@@ -1,16 +1,25 @@
 ﻿using RimWorld;
 using System;
-using UnityEngine;
 using Verse;
 using Verse.AI;
 
 namespace VVRace
 {
     [StaticConstructorOnStartup]
-    public class EverflowerRitualWorker_FairyficationJob : EverflowerRitualWorker
+    public class EverflowerRitualWorker_Fairyfication : EverflowerRitualWorker
     {
-        public EverflowerRitualWorker_FairyficationJob(EverflowerRitualDef def) : base(def)
+        public EverflowerRitualWorker_Fairyfication(EverflowerRitualDef def) : base(def)
         {
+        }
+
+        public override AcceptanceReport CanRitual(ArcanePlant_Everflower everflower, Pawn caster)
+        {
+            if (!caster.TryGetComp<CompViviHolder>(out var compViviHolder) || !compViviHolder.CanJoin)
+            {
+                return LocalizeString_Etc.VV_FailReason_FairyViviFull.Translate();
+            }
+
+            return base.CanRitual(everflower, caster);
         }
 
         public override void StartRitual(ArcanePlant_Everflower flower, Pawn caster, Action<EverflowerRitualReservation> onStartCallback)
@@ -21,7 +30,7 @@ namespace VVRace
                 targetParms,
                 action: (target) =>
                 {
-                    onStartCallback(new EverflowerRitualReservation()
+                    onStartCallback(new EverflowerRitualReservation(flower)
                     {
                         ritualDef = _def,
                         casterPawn = caster,
@@ -68,6 +77,12 @@ namespace VVRace
                             return;
                         }
 
+                        if (pawn.health.hediffSet.HasHediff(VVHediffDefOf.VV_FairyficationSickness))
+                        {
+                            Widgets.MouseAttachedLabel(LocalizeString_Etc.VV_Targetter_InvalidTarget_FairyficationSickness.Translate(_def.LabelCap.Named("RITUAL")));
+                            return;
+                        }
+
                         Widgets.MouseAttachedLabel(LocalizeString_Etc.VV_Targetter_TargetEverflowerRitual.Translate(target.Thing.Named("TARGET"), _def.LabelCap.Named("RITUAL")));
                     }
                 });
@@ -76,25 +91,36 @@ namespace VVRace
             {
                 var pawn = target.Pawn;
                 if (pawn == null) { return false; }
-                if (pawn.TryGetComp<CompVivi>(out var compVivi) && compVivi.isRoyal) { return false; }
+                if (!pawn.TryGetComp<CompVivi>(out var compVivi) || !compVivi.isRoyal) { return false; }
                 if (pawn.GetMother() != caster) { return false; }
                 if (pawn.DevelopmentalStage != DevelopmentalStage.Adult) { return false; }
+                if (pawn.health.hediffSet.HasHediff(VVHediffDefOf.VV_FairyficationSickness)) { return false; }
 
                 return true;
             }
         }
 
-        public override Job TryGiveJob(ArcanePlant_Everflower flower)
+        public override Job TryGiveJob(EverflowerRitualReservation reservation)
         {
-            if (flower.CurReservedRitual.Worker != this) { return null; }
+            if (reservation.ritualDef.Worker != this) { return null; }
 
-            if (!flower.CurReservationInfo.casterPawn.CanReserveAndReach(flower, PathEndMode.Touch, Danger.Deadly)) { return null; }
-            if (!flower.CurReservationInfo.targetPawn.CanReserveAndReach(flower, PathEndMode.Touch, Danger.Deadly)) { return null; }
+            if (!reservation.casterPawn.CanReserveAndReach(reservation.flower, PathEndMode.Touch, Danger.Deadly)) { return null; }
+            if (!reservation.targetPawn.CanReserveAndReach(reservation.flower, PathEndMode.Touch, Danger.Deadly)) { return null; }
 
-            var job = JobMaker.MakeJob(_def.job, flower, flower.CurReservationInfo.targetPawn);
+            var job = JobMaker.MakeJob(_def.job, reservation.flower, reservation.targetPawn);
             job.count = 1;
 
             return job;
+        }
+
+        public override void Complete(EverflowerRitualReservation reservation)
+        {
+            if (reservation.casterPawn.TryGetComp<CompViviHolder>(out var compViviHolder))
+            {
+                compViviHolder.JoinVivi(reservation.targetPawn);
+            }
+
+            base.Complete(reservation);
         }
     }
 }

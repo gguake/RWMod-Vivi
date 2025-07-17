@@ -99,12 +99,6 @@
     </graphicData>
   </ThingDef>
   <ThingDef ParentName="VV_MoteEverflowerGrowthGlow">
-    <defName>VV_Mote_EverflowerGrowthGlow_0_Level</defName>
-    <graphicData>
-      <texPath>Things/Plants/VV_Everflower/VV_EverflowerA</texPath>
-    </graphicData>
-  </ThingDef>
-  <ThingDef ParentName="VV_MoteEverflowerGrowthGlow">
     <defName>VV_Mote_EverflowerGrowthGlow_1_Level</defName>
     <graphicData>
       <texPath>Things/Plants/VV_Everflower/VV_EverflowerA</texPath>
@@ -123,36 +117,6 @@
     </graphicData>
   </ThingDef>
 
-  <EffecterDef>
-    <defName>VV_EverflowerGrow_0_Level</defName>
-    <children>
-      <li>
-        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
-        <moteDef>VV_Mote_EverflowerGrowthGlow_0_Level</moteDef>
-        <rotation>0~0</rotation>
-        <absoluteAngle>true</absoluteAngle>
-        <attachToSpawnThing>true</attachToSpawnThing>
-        <spawnLocType>OnSource</spawnLocType>
-      </li>
-      <li>
-        <subEffecterClass>SubEffecter_SprayerChance</subEffecterClass>
-        <positionRadius>0.3</positionRadius>
-        <fleckDef>NewbornBecomeChildGlimmer</fleckDef>
-        <burstCount>1~3</burstCount>
-        <chancePerTick>0.5</chancePerTick>
-        <speed>0.2~0.4</speed>
-        <rotation>-45</rotation>
-        <angle>0</angle>
-        <spawnLocType>OnSource</spawnLocType>
-      </li>
-      <li>
-        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
-        <moteDef>VV_Mote_EverflowerCircle</moteDef>
-        <spawnLocType>OnSource</spawnLocType>
-        <ticksBetweenMotes>24</ticksBetweenMotes>
-      </li>
-    </children>
-  </EffecterDef>
   <EffecterDef>
     <defName>VV_EverflowerGrow_1_Level</defName>
     <children>
@@ -301,4 +265,68 @@
       </li>
     </children>
   </EffecterDef>
+
+  <!-- Mana wave -->
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>VV_Fleck_Manawave</defName>
+    <altitudeLayer>LightingOverlay</altitudeLayer>
+    <fadeInTime>0.1</fadeInTime>
+    <fadeOutTime>0.28</fadeOutTime>
+    <solidTime>1.7</solidTime>
+    <growthRate>11</growthRate>
+    <drawOffscreen>true</drawOffscreen>
+    <graphicData>
+      <texPath>Things/Mote/RedLineGlow</texPath>
+      <graphicClass>Graphic_FleckPulse</graphicClass>
+      <shaderType>MoteMultiplyAddCircular</shaderType>
+      <shaderParameters>
+        <_DistortionTex>/Things/Mote/RadiationDistortion_A</_DistortionTex>
+        <_texAScale>0.5</_texAScale>
+        <_texBScale>2</_texBScale>
+        <_texAScrollSpeed>0</_texAScrollSpeed>
+        <_texBScrollSpeed>-0.4</_texBScrollSpeed>
+        <_Intensity>0.5</_Intensity>
+        <_InnerFadeAmount>0</_InnerFadeAmount>
+        <_DistortionIntensity>0.5</_DistortionIntensity>
+        <_TexAScaleDivisorPerProgress>1.5</_TexAScaleDivisorPerProgress>
+      </shaderParameters>
+      <drawSize>(6, 6)</drawSize>
+    </graphicData>
+  </FleckDef>
+  <ThingDef ParentName="MoteBase">
+    <defName>VV_Mote_ManawaveFlash</defName>
+    <thingClass>MoteAttached</thingClass>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <mote>
+      <fadeInTime>0.1</fadeInTime>
+      <fadeOutTime>0.13</fadeOutTime>
+      <solidTime>0.1</solidTime>
+    </mote>
+    <graphicData>
+      <texPath>Things/Mote/BrightFlash</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <color>(1, 0.34, 0.2, 0.75)</color>
+    </graphicData>
+  </ThingDef>
+  <EffecterDef>
+    <defName>VV_Manawave</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_Manawave</fleckDef>
+        <burstCount>1</burstCount>
+        <spawnLocType>OnSource</spawnLocType>
+        <absoluteAngle>true</absoluteAngle>
+        <rotation>0~0</rotation>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>VV_Mote_ManawaveFlash</moteDef>
+        <burstCount>1</burstCount>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>24</scale>
+      </li>
+    </children>
+  </EffecterDef>
+
 </Defs>

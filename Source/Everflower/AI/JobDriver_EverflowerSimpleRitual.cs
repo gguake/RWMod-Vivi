@@ -5,7 +5,7 @@ using Verse.AI;
 
 namespace VVRace
 {
-    public class JobDriver_AttunementEverflower : JobDriver
+    public class JobDriver_EverflowerSimpleRitual : JobDriver
     {
         private const TargetIndex EverflowerIndex = TargetIndex.A;
 
@@ -26,30 +26,36 @@ namespace VVRace
 
         protected override IEnumerable<Toil> MakeNewToils()
         {
+            var ritualDef = Everflower.CurReservationInfo.ritualDef;
             this.FailOnDestroyedNullOrForbidden(EverflowerIndex);
-            this.FailOn(() => Everflower.CurReservedPawn != pawn);
+            this.FailOn(() => Everflower.CurReservationInfo == null || Everflower.CurReservationInfo.casterPawn != pawn);
 
             yield return Toils_Goto.GotoThing(EverflowerIndex, PathEndMode.Touch);
 
-            yield return ToilMaker.MakeToil("JobDriver_AttunementEverflower_Work")
+            var workAmount = ritualDef.jobWorkAmount;
+            var toil = ToilMaker.MakeToil("JobDriver_AttunementEverflower_Work")
                 .WithTickIntervalAction((delta) =>
                 {
                     _workDone += pawn.GetStatValue(StatDefOf.PsychicSensitivity) * delta;
-                    if (_workDone >= Everflower.CurReservedRitual.jobWorkAmount)
+                    if (_workDone >= workAmount)
                     {
                         ReadyForNextToil();
                     }
                 })
-                .WithProgressBar(EverflowerIndex, () => _workDone / Everflower.CurReservedRitual.jobWorkAmount, interpolateBetweenActorAndTarget: true)
-                .WithEffect(() => VVEffecterDefOf.VV_EverflowerLink, EverflowerIndex)
+                .WithProgressBar(EverflowerIndex, () => _workDone / workAmount, interpolateBetweenActorAndTarget: true)
                 //.PlaySustainerOrSound()
                 .WithDefaultCompleteMode(ToilCompleteMode.Never);
 
+            if (ritualDef.effectOnCasting != null)
+            {
+                toil = toil.WithEffect(ritualDef.effectOnCasting, EverflowerIndex);
+            }
+
+            yield return toil;
+
             yield return Toils_General.Do(() =>
             {
-                Everflower.EverflowerComp.LinkAttunement(pawn);
-
-                Everflower.CurReservedRitual.Worker.Complete(Everflower, pawn);
+                Everflower.CurReservationInfo.ritualDef.Worker.Complete(Everflower.CurReservationInfo);
             });
         }
     }

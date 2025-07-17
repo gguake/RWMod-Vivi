@@ -124,6 +124,8 @@ namespace VVRace
 
         public static ThingDef VV_SteamProjectile;
         public static ThingDef VV_ExplosiveSnowman;
+
+        public static ThingDef VV_Mote_FairyVivi;
     }
 
     [DefOf]
@@ -184,6 +186,8 @@ namespace VVRace
         public static HediffDef Malaria;
 
         public static HediffDef VV_EverflowerLink;
+        public static HediffDef VV_ViviFairyFollow;
+        public static HediffDef VV_FairyficationSickness;
     }
 
     [DefOf]
@@ -249,7 +253,7 @@ namespace VVRace
         public static FleckDef ElectricalSpark;
         public static FleckDef Fleck_VaporizeCenterFlash;
 
-        public static FleckDef VV_Steam;
+        public static FleckDef VV_Fleck_Steam;
     }
 
     [DefOf]
@@ -274,5 +278,17 @@ namespace VVRace
         public static LifeStageDef HumanlikeTeenager_Vivi;
         public static LifeStageDef HumanlikeTeenager;
         public static LifeStageDef HumanlikeAdult_Vivi;
+    }
+
+    [DefOf]
+    public static class VVDamageDefOf
+    {
+        public static DamageDef VV_Manawave;
+    }
+
+    [DefOf]
+    public static class VVGameConditionDefOf
+    {
+        public static GameConditionDef VV_Rainmaker;
     }
 }

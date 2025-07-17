@@ -109,17 +109,6 @@ namespace VVRace
             }
         }
 
-        private static IEnumerable<ThingDef> ViviFlowerDefs
-        {
-            get
-            {
-                yield return VVThingDefOf.VV_Plant_FireArcaneFlower;
-                yield return VVThingDefOf.VV_Plant_IceArcaneFlower;
-                yield return VVThingDefOf.VV_Plant_LightningArcaneFlower;
-                yield return VVThingDefOf.VV_Plant_LifeArcaneFlower;
-            }
-        }
-
         public override void MapComponentTick()
         {
             if (_diffusionJobStart)
@@ -134,7 +123,7 @@ namespace VVRace
                         sum += _manaGrid[i];
                     }
 
-                    var thingDef = ViviFlowerDefs.RandomElement();
+                    var thingDef = ArcanePlantUtility.ViviFlowerDefs.RandomElement();
                     int flowerCount = (int)Mathf.Clamp(sum / 50000f, 1, 20) + Rand.Range(1, 5);
                     while (flowerCount > 0)
                     {
@@ -143,18 +132,10 @@ namespace VVRace
                         _flowerCellQueue.Dequeue(out var cellIndex, out _);
 
                         var c = map.cellIndices.IndexToCell(cellIndex);
-                        if (c.GetPlant(map) != null) { continue; }
-                        if (c.GetCover(map) != null) { continue; }
-                        if (c.GetEdifice(map) != null) { continue; }
-                        if (c.GetFertility(map) < 0.5f) { continue; }
-                        if (c.GetTemperature(map) < thingDef.plant.minGrowthTemperature || c.GetTemperature(map) > thingDef.plant.maxGrowthTemperature) { continue; }
-                        if (!PlantUtility.SnowAllowsPlanting(c, map)) { continue; }
-                        if (!PlantUtility.SandAllowsPlanting(c, map)) { continue; }
-
-                        if (GenSpawn.TrySpawn(thingDef, c, map, out _, canWipeEdifices: false))
+                        if (ArcanePlantUtility.TrySpawnViviFlower(map, c, out _, flowerDef: thingDef))
                         {
                             flowerCount--;
-                            thingDef = ViviFlowerDefs.RandomElement();
+                            thingDef = ArcanePlantUtility.ViviFlowerDefs.RandomElement();
                         }
                     }
 

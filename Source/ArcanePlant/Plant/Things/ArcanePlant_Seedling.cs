@@ -152,7 +152,7 @@ namespace VVRace
                                 {
                                     Rand.PushState(thingIDNumber);
 
-                                    plantDef = AllArcanePlantDefs.Except(VVThingDefOf.VV_Everflower).RandomElement();
+                                    plantDef = AllGeneratableArcanePlantDefs.RandomElement();
                                 }
                                 finally
                                 {

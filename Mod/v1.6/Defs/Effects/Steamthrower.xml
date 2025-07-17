@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
   <FleckDef ParentName="FleckBase_Thrown">
-    <defName>VV_Steam</defName>
+    <defName>VV_Fleck_Steam</defName>
     <graphicData>
       <texPath>Things/Mote/AirPuff</texPath>
       <renderInstanced>true</renderInstanced>

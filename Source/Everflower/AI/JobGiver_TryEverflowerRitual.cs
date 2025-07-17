@@ -32,9 +32,9 @@ namespace VVRace
                 }
             }
 
-            if (targetEverflower == null || targetEverflower.CurReservedRitual == null || targetEverflower.CurReservedPawn != pawn) { return null; }
+            if (targetEverflower == null || targetEverflower.CurReservationInfo == null || targetEverflower.CurReservedPawn != pawn) { return null; }
 
-            var job = targetEverflower.CurReservedRitual.Worker.TryGiveJob(targetEverflower);
+            var job = targetEverflower.CurReservedRitual.Worker.TryGiveJob(targetEverflower.CurReservationInfo);
             return job;
         }
     }

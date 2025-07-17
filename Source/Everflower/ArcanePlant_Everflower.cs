@@ -8,9 +8,15 @@ namespace VVRace
 {
     public class EverflowerRitualReservation : IExposable
     {
+        public ArcanePlant_Everflower flower;
         public EverflowerRitualDef ritualDef;
         public Pawn casterPawn;
         public Pawn targetPawn;
+
+        public EverflowerRitualReservation(ArcanePlant_Everflower flower)
+        {
+            this.flower = flower;
+        }
 
         public void ExposeData()
         {
@@ -53,7 +59,7 @@ namespace VVRace
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_Deep.Look(ref _reservedRitual, "reservedRitual");
+            Scribe_Deep.Look(ref _reservedRitual, "reservedRitual", new object[] { this });
 
             Scribe_Values.Look(ref _ritualCooldownTick, "ritualCooldownTick");
             Scribe_Values.Look(ref _lastRitualTick, "lastRitualTick");

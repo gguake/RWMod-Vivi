@@ -103,9 +103,8 @@
         <everflowerAttuneLevelCurve>
           <points>
             <li>(0,1)</li>
-            <li>(30000,2)</li>
-            <li>(100000,3)</li>
-            <li>(270000,4)</li>
+            <li>(100000,2)</li>
+            <li>(270000,3)</li>
           </points>
         </everflowerAttuneLevelCurve>
 
@@ -120,12 +119,6 @@
         </everflowerAttunementRitualCurve>
 
         <graphicsByLevel>
-          <li>
-              <texPath>Things/Plants/VV_Everflower/VV_EverflowerA</texPath>
-              <graphicClass>Graphic_Single</graphicClass>
-              <shaderType>Cutout</shaderType>
-              <drawSize>(1.0, 1.0)</drawSize>
-          </li>
           <li>
               <texPath>Things/Plants/VV_Everflower/VV_EverflowerA</texPath>
               <graphicClass>Graphic_Single</graphicClass>
@@ -154,7 +147,6 @@
           </li>
         </graphicsByLevel>
         <effectsOnLevelAcquire>
-          <li>VV_EverflowerGrow_0_Level</li>
           <li>VV_EverflowerGrow_1_Level</li>
           <li>VV_EverflowerGrow_2_Level</li>
           <li>VV_EverflowerGrow_3_Level</li>

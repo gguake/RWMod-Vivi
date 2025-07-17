@@ -28,10 +28,14 @@
         public const string VV_FailReason_PawnPsychicSensitivity = nameof(VV_FailReason_PawnPsychicSensitivity);
         public const string VV_FailReason_RitualCooldown = nameof(VV_FailReason_RitualCooldown);
 
+        public const string VV_FailReason_HasNoFairyVivi = nameof(VV_FailReason_HasNoFairyVivi);
+        public const string VV_FailReason_FairyViviFull = nameof(VV_FailReason_FairyViviFull);
+
         public const string VV_Targetter_TargetEverflowerRitual = nameof(VV_Targetter_TargetEverflowerRitual);
         public const string VV_Targetter_InvalidTarget_NotVivi = nameof(VV_Targetter_InvalidTarget_NotVivi);
         public const string VV_Targetter_InvalidTarget_CannotTargetRoyalVivi = nameof(VV_Targetter_InvalidTarget_CannotTargetRoyalVivi);
         public const string VV_Targetter_InvalidTarget_NotMyChild = nameof(VV_Targetter_InvalidTarget_NotMyChild);
         public const string VV_Targetter_InvalidTarget_NotAdult = nameof(VV_Targetter_InvalidTarget_NotAdult);
+        public const string VV_Targetter_InvalidTarget_FairyficationSickness = nameof(VV_Targetter_InvalidTarget_FairyficationSickness);
     }
 }

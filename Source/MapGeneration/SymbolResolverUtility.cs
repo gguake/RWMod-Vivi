@@ -8,7 +8,7 @@ namespace VVRace
     {
         public static Thing MakeMinifiedArcanePlantRandom()
         {
-            var def = ArcanePlant.AllArcanePlantDefs.RandomElement();
+            var def = ArcanePlant.AllGeneratableArcanePlantDefs.RandomElement();
             var thing = ThingMaker.MakeThing(def).MakeMinified();
             return thing;
         }

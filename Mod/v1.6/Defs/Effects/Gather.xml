@@ -2,7 +2,7 @@
 <Defs>
   <!-- Pollen Emitting -->
   <FleckDef ParentName="FleckBase_Thrown">
-    <defName>VV_PollenPuff</defName>
+    <defName>VV_Fleck_PollenPuff</defName>
     <graphicData>
       <texPath>Things/Mote/VV_PollenPuff</texPath>
       <shaderType>MoteGlow</shaderType>
@@ -19,7 +19,7 @@
       <li>
         <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
         <positionRadius>0.5</positionRadius>
-        <fleckDef>VV_PollenPuff</fleckDef>
+        <fleckDef>VV_Fleck_PollenPuff</fleckDef>
         <burstCount>5~10</burstCount>
         <speed>0.1~0.3</speed>
         <scale>0.8~1.3</scale>
@@ -49,7 +49,7 @@
       </li>
       <li>
         <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
-        <fleckDef>VV_PollenPuff</fleckDef>
+        <fleckDef>VV_Fleck_PollenPuff</fleckDef>
         <spawnLocType>BetweenPositions</spawnLocType>
         <ticksBetweenMotes>59</ticksBetweenMotes>
         <speed>0.1~0.3</speed>

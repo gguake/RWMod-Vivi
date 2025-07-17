@@ -17,19 +17,46 @@
 
   <JobDef>
     <defName>VV_AttunementEverflower</defName>
-    <driverClass>VVRace.JobDriver_AttunementEverflower</driverClass>
+    <driverClass>VVRace.JobDriver_EverflowerSimpleRitual</driverClass>
     <reportString>attuning TargetA.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+    <overrideFlyChance>1</overrideFlyChance>
+  </JobDef>
+
+  <JobDef>
+    <defName>VV_ChangeWeather</defName>
+    <driverClass>VVRace.JobDriver_EverflowerSimpleRitual</driverClass>
+    <reportString>attuning TargetA to change weather.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+    <overrideFlyChance>1</overrideFlyChance>
+  </JobDef>
+
+  <JobDef>
+    <defName>VV_Fairyfication</defName>
+    <driverClass>VVRace.JobDriver_Fairyfication</driverClass>
+    <reportString>transforming TargetB to fairy at TargetA.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+    <overrideFlyChance>0</overrideFlyChance>
+  </JobDef>
+  
+  <JobDef>
+    <defName>VV_UndoFairyfication</defName>
+    <driverClass>VVRace.JobDriver_EverflowerSimpleRitual</driverClass>
+    <reportString>transforming fairy to vivi at TargetA.</reportString>
     <casualInterruptible>false</casualInterruptible>
     <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
     <overrideFlyChance>0</overrideFlyChance>
   </JobDef>
 
   <JobDef>
-    <defName>VV_Fairyfication</defName>
-    <driverClass>VVRace.JobDriver_Fairyfication</driverClass>
-    <reportString>convert TargetB to fairy.</reportString>
+    <defName>VV_Manawave</defName>
+    <driverClass>VVRace.JobDriver_EverflowerSimpleRitual</driverClass>
+    <reportString>attuning TargetA to emit manawave.</reportString>
     <casualInterruptible>false</casualInterruptible>
     <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
-    <overrideFlyChance>0</overrideFlyChance>
+    <overrideFlyChance>1</overrideFlyChance>
   </JobDef>
   </Defs>

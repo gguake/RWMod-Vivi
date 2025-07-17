@@ -37,6 +37,9 @@ namespace VVRace
 
         public int globalCooldown;
 
+        public EffecterDef effectOnCasting;
+        public EffecterDef effectOnComplete;
+
         public override void PostLoad()
         {
             if (!string.IsNullOrEmpty(uiIconPath))

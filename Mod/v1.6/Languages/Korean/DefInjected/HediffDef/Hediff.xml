@@ -47,4 +47,7 @@
   <VV_Frozen.label>빙결</VV_Frozen.label>
   <VV_Frozen.description>얼어붙은 상태입니다. 이동 속도가 느려지지만 곧 회복됩니다.</VV_Frozen.description>
   <VV_Frozen.battleStateLabel>얼어붙음</VV_Frozen.battleStateLabel>
+
+  <VV_FairyficationSickness.label>요정화 후유증</VV_FairyficationSickness.label>
+  <VV_FairyficationSickness.description>.</VV_FairyficationSickness.description>
 </LanguageData>

@@ -32,6 +32,25 @@ namespace VVRace
             }
         }
 
+        private static List<ThingDef> _allGeneratableArcanePlantDefs;
+        public static List<ThingDef> AllGeneratableArcanePlantDefs
+        {
+            get
+            {
+                if (_allGeneratableArcanePlantDefs == null)
+                {
+                    _allGeneratableArcanePlantDefs = DefDatabase<ThingDef>.AllDefsListForReading
+                        .Where(def => typeof(ArcanePlant).IsAssignableFrom(def.thingClass))
+                        .ToList();
+
+                    _allGeneratableArcanePlantDefs.Remove(VVThingDefOf.VV_Everflower);
+                    _allGeneratableArcanePlantDefs.Remove(VVThingDefOf.VV_ArcanePlantSeedling);
+                }
+
+                return _allGeneratableArcanePlantDefs;
+            }
+        }
+
         public CompMana ManaComp
         {
             get

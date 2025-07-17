@@ -1,10 +1,31 @@
 ﻿using RimWorld;
+using System.Collections.Generic;
 using Verse;
 
 namespace VVRace
 {
     public static class ArcanePlantUtility
     {
+        public static IEnumerable<ThingDef> ViviFlowerDefs
+        {
+            get
+            {
+                if (_viviFlowerDefs == null)
+                {
+                    _viviFlowerDefs = new ThingDef[]
+                    {
+                        VVThingDefOf.VV_Plant_FireArcaneFlower,
+                        VVThingDefOf.VV_Plant_IceArcaneFlower,
+                        VVThingDefOf.VV_Plant_LightningArcaneFlower,
+                        VVThingDefOf.VV_Plant_LifeArcaneFlower
+                    };
+                }
+
+                return _viviFlowerDefs;
+            }
+        }
+        private static ThingDef[] _viviFlowerDefs;
+
         public static ManaMapComponent GetManaComponent(this Map map)
         {
             if (map == null) { return null; }
@@ -87,6 +108,25 @@ namespace VVRace
             }
 
             return true;
+        }
+
+        public static bool TrySpawnViviFlower(Map map, IntVec3 c, out Thing flower, ThingDef flowerDef = null)
+        {
+            if (flowerDef == null)
+            {
+                flowerDef = ViviFlowerDefs.RandomElement();
+            }
+
+            flower = null;
+            if (c.GetPlant(map) != null) { return false; }
+            if (c.GetCover(map) != null) { return false; }
+            if (c.GetEdifice(map) != null) { return false; }
+            if (c.GetFertility(map) < 0.5f) { return false; }
+            if (c.GetTemperature(map) < flowerDef.plant.minGrowthTemperature || c.GetTemperature(map) > flowerDef.plant.maxGrowthTemperature) { return false; }
+            if (!PlantUtility.SnowAllowsPlanting(c, map)) { return false; }
+            if (!PlantUtility.SandAllowsPlanting(c, map)) { return false; }
+
+            return GenSpawn.TrySpawn(flowerDef, c, map, out flower, canWipeEdifices: false);
         }
     }
 }

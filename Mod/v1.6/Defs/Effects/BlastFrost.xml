@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
   <FleckDef ParentName="FleckBase">
-    <defName>VV_BlastFrost</defName>
+    <defName>VV_Fleck_BlastFrost</defName>
     <graphicData>
       <texPath>Things/Mote/VV_BlastFrost</texPath>
       <shaderType>TransparentPostLight</shaderType>
