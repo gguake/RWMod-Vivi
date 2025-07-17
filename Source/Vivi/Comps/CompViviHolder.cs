@@ -1,5 +1,6 @@
 ﻿using RimWorld;
 using System.Collections.Generic;
+using System.Linq;
 using Verse;
 
 namespace VVRace
@@ -59,6 +60,16 @@ namespace VVRace
                     _innerViviContainer.ClearAndDestroyContents(mode);
                 }
             }
+        }
+
+        public override void Notify_Killed(Map prevMap, DamageInfo? dinfo = null)
+        {
+            for (int i = 0; i < _innerViviContainer.Count; ++i)
+            {
+                _innerViviContainer.FirstOrDefault().Kill(dinfo);
+            }
+
+            _innerViviContainer.ClearAndDestroyContents();
         }
 
         public void GetChildHolders(List<IThingHolder> outChildren)
