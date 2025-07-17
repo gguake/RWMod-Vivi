@@ -329,7 +329,7 @@
         <chainCount>3</chainCount>
         <chainRadius>3.8</chainRadius>
 
-        <soundCast>Thunder_OnMap</soundCast>
+        <soundCast>VV_LightningboltShot</soundCast>
         
         <muzzleFlashScale>9</muzzleFlashScale>
       </li>
