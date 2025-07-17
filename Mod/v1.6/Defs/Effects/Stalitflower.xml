@@ -20,30 +20,65 @@
         <_MultiplyTex>/Things/Mote/RadiationDistortion_B</_MultiplyTex>
         <_texAScale>0.3</_texAScale>
         <_texBScale>0.3</_texBScale>
-        <_texAScrollSpeed>0.4</_texAScrollSpeed>
-        <_texBScrollSpeed>-0.3</_texBScrollSpeed>
+        <_texAScrollSpeed>0.2</_texAScrollSpeed>
+        <_texBScrollSpeed>-0.1</_texBScrollSpeed>
         <_texAScaleDist>0.5</_texAScaleDist>
         <_DistortionScale>0.5</_DistortionScale>
         <_Intensity>3</_Intensity>
       </shaderParameters>
-      <drawSize>(1, 1)</drawSize>
+      <drawSize>(1.9, 1.9)</drawSize>
     </graphicData>
   </ThingDef>
-
+  <ThingDef ParentName="MoteBase">
+    <defName>VV_Mote_StarlitFlowerAuraDistortion</defName>
+    <thingClass>MoteAttached</thingClass>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <mote>
+      <fadeInTime>0.1</fadeInTime>
+      <fadeOutTime>0.8</fadeOutTime>
+      <solidTime>0.1</solidTime>
+      <growthRate>-1</growthRate>
+    </mote>
+    <graphicData>
+      <graphicClass>Graphic_MoteWithAgeSecs</graphicClass>
+      <shaderType>MotePsychicWarmupNeuroquake</shaderType>
+      <texPath>Things/Mote/MoteHellfireCannon_HeatWaveDistortion</texPath>
+      <shaderParameters>
+        <_distortionIntensity>0.15</_distortionIntensity>
+        <_brightnessMultiplier>1.1</_brightnessMultiplier>
+        <_distortionTint>(0.1, 0, 0.3, 0)</_distortionTint>
+        <_pulseSpeed>5</_pulseSpeed>
+      </shaderParameters>
+      <drawSize>1</drawSize>
+    </graphicData>
+  </ThingDef>
   <EffecterDef>
     <defName>VV_StalitFlowerAura</defName>
+    <maintainTicks>1000</maintainTicks>
     <children>
       <li>
         <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
-        <moteDef>VV_Mote_EverflowerCircle</moteDef>
+        <moteDef>VV_Mote_StalitFlowerAura</moteDef>
         <spawnLocType>OnSource</spawnLocType>
-        <ticksBetweenMotes>60</ticksBetweenMotes>
+        <ticksBetweenMotes>20</ticksBetweenMotes>
       </li>
       <li>
         <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
-        <moteDef>VV_Mote_EverflowerLinkDistortion</moteDef>
+        <moteDef>VV_Mote_StarlitFlowerAuraDistortion</moteDef>
         <spawnLocType>OnSource</spawnLocType>
-        <ticksBetweenMotes>60</ticksBetweenMotes>
+        <ticksBetweenMotes>20</ticksBetweenMotes>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <moteDef>VV_Mote_StalitFlowerAura</moteDef>
+        <spawnLocType>OnTarget</spawnLocType>
+        <ticksBetweenMotes>20</ticksBetweenMotes>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <moteDef>VV_Mote_StarlitFlowerAuraDistortion</moteDef>
+        <spawnLocType>OnTarget</spawnLocType>
+        <ticksBetweenMotes>20</ticksBetweenMotes>
       </li>
     </children>
   </EffecterDef>
