@@ -51,7 +51,7 @@ namespace VVRace
             var moved = false;
             var vectorToParent = _parent.TrueCenter() - _curPosition;
             var distanceToParentSqr = vectorToParent.sqrMagnitude;
-            if (distanceToParentSqr > 1)
+            if (distanceToParentSqr > 1.5f)
             {
                 if (_destOffset == null)
                 {
@@ -97,6 +97,8 @@ namespace VVRace
                     (ZSwayIntervalOffset / swayTick) :
                     -(ZSwayIntervalOffset / swayTick));
             }
+
+            Position = _curPosition.ToIntVec3();
         }
     }
 }

@@ -163,9 +163,8 @@ namespace VVRace
 
             if (_shouldUpdate)
             {
-                _shouldUpdate = false;
-
                 ScheduleUpdateManaJob();
+                _shouldUpdate = false;
             }
         }
 
@@ -177,17 +176,17 @@ namespace VVRace
             }
         }
 
-        public void ChangeEnvironmentMana(IntVec3 cell, float flux, bool direct = false)
+        public void ChangeEnvironmentMana(IntVec3 cell, float flux)
         {
             var idx = map.cellIndices.CellToIndex(cell);
-            if (direct)
-            {
-                _manaGrid[idx] = Mathf.Clamp(_manaGrid[idx] + flux, 0f, EnvironmentManaMax);
-            }
-            else
+            if (_diffusionJobStart)
             {
                 _manaReserveGrid[idx] = flux;
                 _shouldUpdate = true;
+            }
+            else
+            {
+                _manaGrid[idx] = Mathf.Clamp(_manaGrid[idx] + flux, 0f, EnvironmentManaMax);
             }
         }
 
@@ -225,7 +224,7 @@ namespace VVRace
                 outputGrid = _tmpGrid,
             };
 
-            _updateJobHandle = job.ScheduleBatch(map.cellIndices.NumGridCells, map.Size.x);
+            _updateJobHandle = job.Schedule(map.cellIndices.NumGridCells, map.Size.x);
             _updateJobStart = true;
         }
 
@@ -260,7 +259,6 @@ namespace VVRace
 
             _tmpGrid.CopyTo(_manaGrid);
             _manaReserveGrid.Clear();
-
             _updateJobStart = false;
         }
 
@@ -269,7 +267,6 @@ namespace VVRace
             _diffusionJobHandle.Complete();
 
             _tmpGrid.CopyTo(_manaGrid);
-
             _diffusionJobStart = false;
         }
 

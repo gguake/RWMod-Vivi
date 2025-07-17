@@ -9,7 +9,7 @@
     <defName>VV_Attunement</defName>
     <label>attunement ritual</label>
     <description>.</description>
-    <workerClass>VVRace.EverflowerRitualWorker_SimpleJob</workerClass>
+    <workerClass>VVRace.EverflowerRitualWorker_Attunement</workerClass>
     
 
     <uiOrder>1</uiOrder>
@@ -21,7 +21,7 @@
     <job>VV_AttunementEverflower</job>
     <jobWorkAmount>1500</jobWorkAmount>
 
-    <effectOnCasting></effectOnCasting>
+    <effectOnCasting>VV_EverflowerLink</effectOnCasting>
   </VVRace.EverflowerRitualDef>
 
   <VVRace.EverflowerRitualDef ParentName="EverflowerRitualBase">
@@ -31,6 +31,7 @@
     <workerClass>VVRace.EverflowerRitualWorker_ChangeWeather</workerClass>
 
     <uiOrder>2</uiOrder>
+    <uiIconPath>UI/Commands/VV_ChangeWeatherRitual</uiIconPath>
 
     <attuneLevel>2</attuneLevel>
 
@@ -75,6 +76,7 @@
     <workerClass>VVRace.EverflowerRitualWorker_Manawave</workerClass>
 
     <uiOrder>5</uiOrder>
+    <uiIconPath>UI/Commands/VV_Manawave</uiIconPath>
 
     <attuneLevel>3</attuneLevel>
 

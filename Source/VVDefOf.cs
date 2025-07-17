@@ -279,16 +279,4 @@ namespace VVRace
         public static LifeStageDef HumanlikeTeenager;
         public static LifeStageDef HumanlikeAdult_Vivi;
     }
-
-    [DefOf]
-    public static class VVDamageDefOf
-    {
-        public static DamageDef VV_Manawave;
-    }
-
-    [DefOf]
-    public static class VVGameConditionDefOf
-    {
-        public static GameConditionDef VV_Rainmaker;
-    }
 }

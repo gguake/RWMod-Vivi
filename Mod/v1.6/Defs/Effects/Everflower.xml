@@ -276,7 +276,7 @@
     <growthRate>11</growthRate>
     <drawOffscreen>true</drawOffscreen>
     <graphicData>
-      <texPath>Things/Mote/RedLineGlow</texPath>
+      <texPath>VFX/VV_ManaPulse</texPath>
       <graphicClass>Graphic_FleckPulse</graphicClass>
       <shaderType>MoteMultiplyAddCircular</shaderType>
       <shaderParameters>
@@ -318,13 +318,6 @@
         <spawnLocType>OnSource</spawnLocType>
         <absoluteAngle>true</absoluteAngle>
         <rotation>0~0</rotation>
-      </li>
-      <li>
-        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
-        <moteDef>VV_Mote_ManawaveFlash</moteDef>
-        <burstCount>1</burstCount>
-        <spawnLocType>OnSource</spawnLocType>
-        <scale>24</scale>
       </li>
     </children>
   </EffecterDef>
