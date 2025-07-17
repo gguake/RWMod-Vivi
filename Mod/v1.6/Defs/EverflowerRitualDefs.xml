@@ -37,6 +37,8 @@
 
     <job>VV_ChangeWeather</job>
     <jobWorkAmount>3000</jobWorkAmount>
+    
+    <effectOnCasting>VV_EverflowerLink</effectOnCasting>
   </VVRace.EverflowerRitualDef>
 
   <VVRace.EverflowerRitualDef ParentName="EverflowerRitualBase">
@@ -52,6 +54,8 @@
 
     <job>VV_Fairyfication</job>
     <jobWorkAmount>4000</jobWorkAmount>
+    
+    <effectOnCasting>VV_EverflowerLink</effectOnCasting>
   </VVRace.EverflowerRitualDef>
   
   <VVRace.EverflowerRitualDef ParentName="EverflowerRitualBase">
@@ -67,6 +71,8 @@
 
     <job>VV_UndoFairyfication</job>
     <jobWorkAmount>4000</jobWorkAmount>
+    
+    <effectOnCasting>VV_EverflowerLink</effectOnCasting>
   </VVRace.EverflowerRitualDef>
   
   <VVRace.EverflowerRitualDef ParentName="EverflowerRitualBase">
@@ -83,6 +89,7 @@
     <job>VV_Manawave</job>
     <jobWorkAmount>4000</jobWorkAmount>
 
+    <effectOnCasting>VV_EverflowerLink</effectOnCasting>
     <effectOnComplete>VV_Manawave</effectOnComplete>
   </VVRace.EverflowerRitualDef>
 </Defs>
