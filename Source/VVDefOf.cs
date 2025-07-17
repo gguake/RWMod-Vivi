@@ -238,6 +238,10 @@ namespace VVRace
         public static EffecterDef VV_PollenEmitting;
         public static EffecterDef VV_EverflowerLink;
         public static EffecterDef VV_StalitFlowerAura;
+
+        public static EffecterDef VV_EverflowerGrow_1_Level;
+        public static EffecterDef VV_EverflowerGrow_2_Level;
+        public static EffecterDef VV_EverflowerGrow_3_Level;
     }
 
     [DefOf]

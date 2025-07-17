@@ -25,6 +25,15 @@
   </JobDef>
 
   <JobDef>
+    <defName>VV_MoveEverflower</defName>
+    <driverClass>VVRace.JobDriver_EverflowerSimpleRitual</driverClass>
+    <reportString>attuning TargetA to move place.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+    <overrideFlyChance>1</overrideFlyChance>
+  </JobDef>
+
+  <JobDef>
     <defName>VV_ChangeWeather</defName>
     <driverClass>VVRace.JobDriver_EverflowerSimpleRitual</driverClass>
     <reportString>attuning TargetA to change weather.</reportString>

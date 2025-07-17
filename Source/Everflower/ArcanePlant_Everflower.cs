@@ -12,6 +12,7 @@ namespace VVRace
         public EverflowerRitualDef ritualDef;
         public Pawn casterPawn;
         public Pawn targetPawn;
+        public IntVec3 targetCell;
 
         public EverflowerRitualReservation(ArcanePlant_Everflower flower)
         {

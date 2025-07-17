@@ -38,7 +38,7 @@ namespace VVRace
         {
             this.FailOnDestroyedNullOrForbidden(EverflowerIndex);
             this.FailOnDestroyedNullOrForbidden(TargetPawnIndex);
-            this.FailOn(() => Everflower.CurReservationInfo == null || Everflower.CurReservationInfo.casterPawn != pawn);
+            this.FailOn(() => Everflower.CurReservationInfo == null || Everflower.CurReservationInfo.casterPawn != pawn || !Everflower.CurReservationInfo.ritualDef.Worker.CanRitual(Everflower, pawn));
 
             yield return Toils_Goto.GotoThing(TargetPawnIndex, PathEndMode.Touch);
 
