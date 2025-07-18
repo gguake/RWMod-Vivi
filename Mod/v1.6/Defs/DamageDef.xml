@@ -94,7 +94,7 @@
     <explosionCellFleck>VV_Fleck_BlastFrost</explosionCellFleck>
     <explosionColorCenter>(1, 1, 1)</explosionColorCenter>
     <explosionColorEdge>(1, 1, 1)</explosionColorEdge>
-    <soundExplosion>Explosion_Rocket</soundExplosion>
+    <soundExplosion>VV_Explosion_Frostbite</soundExplosion>
     <combatLogRules>VV_Damage_Frostbite</combatLogRules>
     <canUseDeflectMetalEffect>false</canUseDeflectMetalEffect>
     <scaleDamageToBuildingsBasedOnFlammability>true</scaleDamageToBuildingsBasedOnFlammability>

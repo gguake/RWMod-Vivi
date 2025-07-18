@@ -12,4 +12,6 @@
 <VV_Message_AttunementEverflowerComplete>{PAWN_nameDef}의 영원꽃 교감 의식으로 교감 연결이 더 강해졌습니다.</VV_Message_AttunementEverflowerComplete>
 <VV_Message_PollenWaveAfterAttunement>영원꽃 교감 의식의 영향으로 주변이 꽃가루 범벅이 되었습니다.</VV_Message_PollenWaveAfterAttunement>
 <VV_Message_PlantGrownAfterAttunement>영원꽃 교감 의식의 영향으로 주변에 식물이 자라났습니다.</VV_Message_PlantGrownAfterAttunement>
+
+<VV_Message_AttunementRitualComplete>{RITUAL} 영원꽃 의식이 완료되었습니다.</VV_Message_AttunementRitualComplete>
 </LanguageData>

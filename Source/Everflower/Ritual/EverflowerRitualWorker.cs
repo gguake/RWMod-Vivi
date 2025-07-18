@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Verse;
 using Verse.AI;
+using Verse.Sound;
 
 namespace VVRace
 {
@@ -67,6 +68,17 @@ namespace VVRace
 
         public virtual void Complete(EverflowerRitualReservation reservation)
         {
+            if (reservation.ritualDef.effectOnComplete != null)
+            {
+                reservation.ritualDef.effectOnComplete.SpawnMaintained(reservation.flower.Position, reservation.flower.Map);
+            }
+
+            if (reservation.ritualDef.soundOnComplete != null)
+            {
+                var sound = reservation.ritualDef.soundOnComplete;
+                sound.PlayOneShot(new TargetInfo(reservation.flower.Position, reservation.flower.Map));
+            }
+
             reservation.flower.Notify_RitualComplete(reservation.casterPawn);
         }
 

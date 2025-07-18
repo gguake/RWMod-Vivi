@@ -23,11 +23,6 @@ namespace VVRace
                 map.GameConditionManager.RegisterCondition(gameCond);
             }
 
-            if (reservation.ritualDef.effectOnComplete != null)
-            {
-                reservation.ritualDef.effectOnComplete.SpawnMaintained(reservation.flower.Position, map);
-            }
-
             base.Complete(reservation);
         }
     }

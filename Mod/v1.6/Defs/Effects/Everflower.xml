@@ -298,14 +298,15 @@
     <thingClass>MoteAttached</thingClass>
     <altitudeLayer>MoteOverhead</altitudeLayer>
     <mote>
-      <fadeInTime>0.1</fadeInTime>
-      <fadeOutTime>0.13</fadeOutTime>
-      <solidTime>0.1</solidTime>
+      <fadeInTime>0.01</fadeInTime>
+      <fadeOutTime>0.9</fadeOutTime>
+      <solidTime>0.2</solidTime>
     </mote>
     <graphicData>
       <texPath>Things/Mote/BrightFlash</texPath>
       <shaderType>MoteGlow</shaderType>
-      <color>(1, 0.34, 0.2, 0.75)</color>
+      <color>(0.8, 0.9, 1, 0.75)</color>
+      <drawSize>(24, 24)</drawSize>
     </graphicData>
   </ThingDef>
   <EffecterDef>
@@ -318,6 +319,136 @@
         <spawnLocType>OnSource</spawnLocType>
         <absoluteAngle>true</absoluteAngle>
         <rotation>0~0</rotation>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>VV_Mote_ManawaveFlash</moteDef>
+        <burstCount>1</burstCount>
+        <spawnLocType>OnSource</spawnLocType>
+        <attachToSpawnThing>true</attachToSpawnThing>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <!-- EverflowerRitual_Complete -->
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>VV_ExpandingDistortionRing</defName>
+    <altitudeLayer>LowPlant</altitudeLayer>
+    <fadeInTime>0.15</fadeInTime>
+    <solidTime>1.1</solidTime>
+    <fadeOutTime>0.1</fadeOutTime>
+    <scalers>
+      <li>
+        <curve>
+          <points>
+              <li>(0,0)</li>
+              <li>(0.5,0.5)</li>
+              <li>(0.95,1)</li>
+              <li>(1,0)</li>
+          </points>
+        </curve>
+        <scaleAmt>2</scaleAmt>
+        <scaleTime>2</scaleTime>
+      </li>
+    </scalers>
+    <graphicData>
+      <graphicClass>Graphic_FleckPulse</graphicClass>
+      <texPath>Things/Mote/Black</texPath>
+      <shaderType>MoteLargeDistortionWave</shaderType>
+      <shaderParameters>
+        <_DistortionTex>/Things/Mote/PsychicDistortionCurrents</_DistortionTex>
+        <_NoiseTex>/Things/Mote/PsycastNoise</_NoiseTex>
+        <_distortionIntensity>0.4</_distortionIntensity>
+        <_brightnessMultiplier>2.15</_brightnessMultiplier>
+        <_noiseIntensity>2</_noiseIntensity>
+        <_ageToNoiseRatio>5</_ageToNoiseRatio>
+      </shaderParameters>
+      <drawSize>10.0</drawSize>
+    </graphicData>
+    <useAttachLink>True</useAttachLink>
+  </FleckDef>
+  <ThingDef ParentName="MoteBase">
+    <defName>VV_Mote_VV_EverflowerRitualCircle</defName>
+    <thingClass>MoteAttached</thingClass>
+    <altitudeLayer>MoteOverheadLow</altitudeLayer>
+    <mote>
+      <fadeInTime>0.1</fadeInTime>
+      <fadeOutTime>1</fadeOutTime>
+      <solidTime>0.1</solidTime>
+      <growthRate>4</growthRate>
+    </mote>
+    <graphicData>
+      <texPath>Things/Mote/RadiationDistortion_B</texPath>
+      <graphicClass>Graphic_MoteWithAgeSecs</graphicClass>
+      <color>(1, 0.9, 0.6, 1)</color>
+      <shaderType>MoteMultiplyAddCircular</shaderType>
+      <shaderParameters>
+        <_MultiplyTex>/Things/Mote/RadiationDistortion_B</_MultiplyTex>
+        <_texAScale>0.3</_texAScale>
+        <_texBScale>0.3</_texBScale>
+        <_texAScrollSpeed>0.4</_texAScrollSpeed>
+        <_texBScrollSpeed>-0.3</_texBScrollSpeed>
+        <_texAScaleDist>0.5</_texAScaleDist>
+        <_DistortionScale>0.5</_DistortionScale>
+        <_Intensity>5</_Intensity>
+      </shaderParameters>
+      <drawSize>(8, 8)</drawSize>
+    </graphicData>
+  </ThingDef>
+  <ThingDef ParentName="MoteBase">
+    <defName>VV_Mote_EverflowerRitualFlash</defName>
+    <thingClass>MoteAttached</thingClass>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <mote>
+      <fadeInTime>0.01</fadeInTime>
+      <fadeOutTime>0.9</fadeOutTime>
+      <solidTime>0.2</solidTime>
+    </mote>
+    <graphicData>
+      <texPath>Things/Mote/BrightFlash</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <color>(1.0, 0.95, 0.7, 0.75)</color>
+      <drawSize>(15, 15)</drawSize>
+    </graphicData>
+  </ThingDef>
+  <EffecterDef>
+    <defName>VV_EverflowerRitual_Complete</defName>
+    <maintainTicks>120</maintainTicks>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_CameraShakeChance</subEffecterClass>
+        <initialDelayTicks>0</initialDelayTicks>
+        <positionOffset>(0, 0, 0)</positionOffset>
+        <chancePerTick>1</chancePerTick>
+        <cameraShake>.5</cameraShake>
+        <lifespanMaxTicks>1</lifespanMaxTicks>
+        <distanceAttenuationScale>.5</distanceAttenuationScale>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>VV_Mote_VV_EverflowerRitualCircle</moteDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_ExpandingDistortionRing</fleckDef>
+        <spawnLocType>OnTarget</spawnLocType>
+        <burstCount>1</burstCount>
+        <positionRadius>0</positionRadius>
+        <positionRadiusMin>0</positionRadiusMin>
+        <scale>1</scale>
+        <rotation>0</rotation>
+        <rotationRate>0</rotationRate>
+        <angle>0~0</angle>
+        <speed>0</speed>
+        <attachToSpawnThing>true</attachToSpawnThing>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>VV_Mote_EverflowerRitualFlash</moteDef>
+        <burstCount>1</burstCount>
+        <spawnLocType>OnSource</spawnLocType>
+        <attachToSpawnThing>true</attachToSpawnThing>
       </li>
     </children>
   </EffecterDef>

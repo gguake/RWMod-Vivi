@@ -1,6 +1,7 @@
 ﻿using RimWorld;
 using UnityEngine;
 using Verse;
+using Verse.Sound;
 
 namespace VVRace
 {
@@ -27,11 +28,6 @@ namespace VVRace
                         manaComponent.ChangeEnvironmentMana(cell, mana);
                     }
                 }
-            }
-
-            if (reservation.ritualDef.effectOnComplete != null)
-            {
-                reservation.ritualDef.effectOnComplete.SpawnMaintained(reservation.flower.Position, reservation.flower.Map);
             }
 
             GenExplosion.DoExplosion(

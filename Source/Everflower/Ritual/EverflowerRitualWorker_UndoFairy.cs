@@ -26,11 +26,6 @@ namespace VVRace
                 if (vivi != null)
                 {
                     vivi.health.AddHediff(VVHediffDefOf.VV_FairyficationSickness);
-
-                    if (reservation.ritualDef.effectOnComplete != null)
-                    {
-                        reservation.ritualDef.effectOnComplete.Spawn(vivi.Position, vivi.Map);
-                    }
                 }
             }
 

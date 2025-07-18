@@ -12,7 +12,6 @@
     <description>.</description>
     <workerClass>VVRace.EverflowerRitualWorker_Attunement</workerClass>
     
-
     <uiOrder>1</uiOrder>
     <uiIconPath>UI/Commands/VV_Attunement</uiIconPath>
 
@@ -23,6 +22,10 @@
     <jobWorkAmount>1500</jobWorkAmount>
 
     <effectOnCasting>VV_EverflowerLink</effectOnCasting>
+    <soundOnCasting>VV_EverflowerRitualCast</soundOnCasting>
+
+    <effectOnComplete>VV_EverflowerRitual_Complete</effectOnComplete>
+    <soundOnComplete>VV_EverflowerRitualComplete</soundOnComplete>
   </VVRace.EverflowerRitualDef>
 
   <!-- 영원꽃 위치 이동 -->
@@ -41,6 +44,9 @@
     <jobWorkAmount>2000</jobWorkAmount>
     
     <effectOnCasting>VV_EverflowerLink</effectOnCasting>
+    <soundOnCasting>VV_EverflowerRitualCast</soundOnCasting>
+    
+    <soundOnComplete>VV_EverflowerRitualComplete</soundOnComplete>
   </VVRace.EverflowerRitualDef>
 
   <!-- 날씨 변경 기원 -->
@@ -59,6 +65,10 @@
     <jobWorkAmount>3000</jobWorkAmount>
     
     <effectOnCasting>VV_EverflowerLink</effectOnCasting>
+    <soundOnCasting>VV_EverflowerRitualCast</soundOnCasting>
+
+    <effectOnComplete>VV_EverflowerRitual_Complete</effectOnComplete>
+    <soundOnComplete>VV_EverflowerRitualComplete</soundOnComplete>
   </VVRace.EverflowerRitualDef>
 
   <!-- 요정화 -->
@@ -77,6 +87,7 @@
     <jobWorkAmount>4000</jobWorkAmount>
     
     <effectOnCasting>VV_EverflowerLink</effectOnCasting>
+    <soundOnCasting>VV_EverflowerRitualCast</soundOnCasting>
   </VVRace.EverflowerRitualDef>
   
   <!-- 요정화 해제 -->
@@ -95,6 +106,7 @@
     <jobWorkAmount>4000</jobWorkAmount>
     
     <effectOnCasting>VV_EverflowerLink</effectOnCasting>
+    <soundOnCasting>VV_EverflowerRitualCast</soundOnCasting>
   </VVRace.EverflowerRitualDef>
   
   <!-- 마나 파동 방출-->
@@ -113,7 +125,10 @@
     <jobWorkAmount>4000</jobWorkAmount>
 
     <effectOnCasting>VV_EverflowerLink</effectOnCasting>
+    <soundOnCasting>VV_EverflowerRitualCast</soundOnCasting>
+
     <effectOnComplete>VV_Manawave</effectOnComplete>
+    <soundOnComplete>VV_Manawave</soundOnComplete>
 
     <incidentProb>1</incidentProb>
     <incidentDelayTicks>90000~900000</incidentDelayTicks>

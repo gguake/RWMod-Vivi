@@ -38,6 +38,7 @@ namespace VVRace
         public int globalCooldown;
 
         public SoundDef soundOnCasting;
+        public SoundDef soundOnComplete;
 
         public EffecterDef effectOnCasting;
         public EffecterDef effectOnComplete;

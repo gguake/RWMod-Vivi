@@ -449,8 +449,6 @@
       </li>
     </comps>
     
-    <specialDisplayRadius>4.6</specialDisplayRadius>
-
     <modExtensions>
       <li Class="VVRace.ArcaneSeedExtension">
         <seedMarketValueRatio>0.25</seedMarketValueRatio>

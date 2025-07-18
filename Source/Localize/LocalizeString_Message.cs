@@ -15,5 +15,7 @@
 
         public const string VV_Message_PollenWaveAfterAttunement = nameof(VV_Message_PollenWaveAfterAttunement);
         public const string VV_Message_PlantGrownAfterAttunement = nameof(VV_Message_PlantGrownAfterAttunement);
+
+        public const string VV_Message_AttunementRitualComplete = nameof(VV_Message_AttunementRitualComplete);
     }
 }

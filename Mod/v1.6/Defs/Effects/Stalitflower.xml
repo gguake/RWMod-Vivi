@@ -26,7 +26,7 @@
         <_DistortionScale>0.5</_DistortionScale>
         <_Intensity>3</_Intensity>
       </shaderParameters>
-      <drawSize>(1.9, 1.9)</drawSize>
+      <drawSize>(1.8, 1.8)</drawSize>
     </graphicData>
   </ThingDef>
   <ThingDef ParentName="MoteBase">

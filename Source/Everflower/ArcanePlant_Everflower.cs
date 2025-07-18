@@ -237,6 +237,10 @@ namespace VVRace
 
         public void Notify_RitualComplete(Pawn pawn)
         {
+            Messages.Message(
+                LocalizeString_Message.VV_Message_AttunementRitualComplete.Translate(_reservedRitual.ritualDef.LabelCap.Named("RITUAL")),
+                MessageTypeDefOf.NeutralEvent);
+
             if (_reservedRitual.ritualDef.globalCooldown > 0)
             {
                 _lastRitualTick = GenTicks.TicksGame;
