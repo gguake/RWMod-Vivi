@@ -42,4 +42,5 @@
 <VV_Targetter_InvalidTarget_FairyficationSickness>{RITUAL} 대상 선택: 요정화 후유증이 남아 있음</VV_Targetter_InvalidTarget_FairyficationSickness>
 
 <VV_TextMote_GatherFailed>채집 실수로 파손</VV_TextMote_GatherFailed>
+<VV_TextMote_DamageBlockedByFairy>요정에 의해 보호됨</VV_TextMote_DamageBlockedByFairy>
 </LanguageData>

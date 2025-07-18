@@ -273,7 +273,23 @@
       </li>
       
       <li><compClass>VVRace.CompVivi</compClass></li>
-      <li><compClass>VVRace.CompViviHolder</compClass></li>
+
+      <li Class="VVRace.CompProperties_ViviHolder">
+        <maxCount>6</maxCount>
+        <preventDamageChanceByInnerCount>
+          <points>
+            <li>(0,0)</li>
+            <li>(1,0.01)</li>
+            <li>(2,0.02)</li>
+            <li>(3,0.04)</li>
+            <li>(4,0.08)</li>
+            <li>(5,0.16)</li>
+            <li>(6,0.24)</li>
+            <li>(7,0.32)</li>
+            <li>(8,0.4)</li>
+          </points>
+        </preventDamageChanceByInnerCount>
+      </li>
     </comps>
 
     <modExtensions>

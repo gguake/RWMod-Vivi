@@ -42,5 +42,6 @@
         public const string VV_Targetter_InvalidTarget_FairyficationSickness = nameof(VV_Targetter_InvalidTarget_FairyficationSickness);
 
         public const string VV_TextMote_GatherFailed = nameof(VV_TextMote_GatherFailed);
+        public const string VV_TextMote_DamageBlockedByFairy = nameof(VV_TextMote_DamageBlockedByFairy);
     }
 }

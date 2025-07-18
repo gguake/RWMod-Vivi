@@ -170,6 +170,9 @@
       <li>
         <label>I</label>
         <minSeverity>1</minSeverity>
+        <statOffsets>
+          <PsychicSensitivity>0.1</PsychicSensitivity>
+        </statOffsets>
         <statFactors>
           <GlobalLearningFactor>1.05</GlobalLearningFactor>
           <JoyFallRateFactor>0.8</JoyFallRateFactor>
@@ -178,6 +181,9 @@
       <li>
         <label>II</label>
         <minSeverity>2</minSeverity>
+        <statOffsets>
+          <PsychicSensitivity>0.2</PsychicSensitivity>
+        </statOffsets>
         <statFactors>
           <GlobalLearningFactor>1.1</GlobalLearningFactor>
           <JoyFallRateFactor>0.8</JoyFallRateFactor>
@@ -186,6 +192,9 @@
       <li>
         <label>III</label>
         <minSeverity>3</minSeverity>
+        <statOffsets>
+          <PsychicSensitivity>0.3</PsychicSensitivity>
+        </statOffsets>
         <statFactors>
           <GlobalLearningFactor>1.15</GlobalLearningFactor>
           <JoyFallRateFactor>0.8</JoyFallRateFactor>
@@ -194,6 +203,9 @@
       <li>
         <label>IV</label>
         <minSeverity>4</minSeverity>
+        <statOffsets>
+          <PsychicSensitivity>0.4</PsychicSensitivity>
+        </statOffsets>
         <statFactors>
           <MoveSpeed>0.95</MoveSpeed>
           <GlobalLearningFactor>1.2</GlobalLearningFactor>
@@ -205,6 +217,9 @@
       <li>
         <label>V</label>
         <minSeverity>5</minSeverity>
+        <statOffsets>
+          <PsychicSensitivity>0.5</PsychicSensitivity>
+        </statOffsets>
         <statFactors>
           <MoveSpeed>0.95</MoveSpeed>
           <GlobalLearningFactor>1.25</GlobalLearningFactor>
@@ -216,6 +231,9 @@
       <li>
         <label>VI</label>
         <minSeverity>6</minSeverity>
+        <statOffsets>
+          <PsychicSensitivity>0.6</PsychicSensitivity>
+        </statOffsets>
         <statFactors>
           <MoveSpeed>0.9</MoveSpeed>
           <GlobalLearningFactor>1.3</GlobalLearningFactor>
@@ -226,6 +244,9 @@
       <li>
         <label>VII</label>
         <minSeverity>7</minSeverity>
+        <statOffsets>
+          <PsychicSensitivity>0.7</PsychicSensitivity>
+        </statOffsets>
         <statFactors>
           <MoveSpeed>0.9</MoveSpeed>
           <GlobalLearningFactor>1.35</GlobalLearningFactor>
@@ -236,6 +257,9 @@
       <li>
         <label>VIII</label>
         <minSeverity>8</minSeverity>
+        <statOffsets>
+          <PsychicSensitivity>0.8</PsychicSensitivity>
+        </statOffsets>
         <statFactors>
           <MoveSpeed>0.85</MoveSpeed>
           <GlobalLearningFactor>1.4</GlobalLearningFactor>
@@ -246,6 +270,9 @@
       <li>
         <label>IX</label>
         <minSeverity>9</minSeverity>
+        <statOffsets>
+          <PsychicSensitivity>0.9</PsychicSensitivity>
+        </statOffsets>
         <statFactors>
           <MoveSpeed>0.85</MoveSpeed>
           <GlobalLearningFactor>1.45</GlobalLearningFactor>
@@ -256,6 +283,9 @@
       <li>
         <label>X</label>
         <minSeverity>10</minSeverity>
+        <statOffsets>
+          <PsychicSensitivity>1.0</PsychicSensitivity>
+        </statOffsets>
         <statFactors>
           <MoveSpeed>0.8</MoveSpeed>
           <GlobalLearningFactor>1.5</GlobalLearningFactor>

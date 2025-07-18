@@ -1,13 +1,29 @@
 ﻿using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 using Verse;
 
 namespace VVRace
 {
+    public class CompProperties_ViviHolder : CompProperties
+    {
+        public int maxCount;
+
+        public SimpleCurve preventDamageChanceByInnerCount;
+        public EffecterDef preventDamageEffect;
+
+        public CompProperties_ViviHolder()
+        {
+            compClass = typeof(CompViviHolder);
+        }
+    }
+
     public class CompViviHolder : ThingComp, IThingHolder
     {
-        public bool CanJoin => _innerViviContainer.Count < 10;
+        public CompProperties_ViviHolder Props => (CompProperties_ViviHolder)props;
+
+        public bool CanJoin => _innerViviContainer.Count < Props.maxCount;
         public int InnerViviCount => _innerViviContainer.Count;
 
         private ThingOwner _innerViviContainer;
@@ -41,6 +57,26 @@ namespace VVRace
             }
 
             _innerViviContainer.ClearAndDestroyContents();
+        }
+
+        public override void PostPreApplyDamage(ref DamageInfo dinfo, out bool absorbed)
+        {
+            base.PostPreApplyDamage(ref dinfo, out absorbed);
+
+            if (Props.preventDamageChanceByInnerCount != null && Rand.Chance(Props.preventDamageChanceByInnerCount.Evaluate(InnerViviCount)))
+            {
+                if (Props.preventDamageEffect != null)
+                {
+                    Props.preventDamageEffect.SpawnAttached(parent, parent.Map);
+                }
+
+                MoteMaker.ThrowText(
+                    new Vector3(parent.Position.x + 1f, parent.Position.y, parent.Position.z + 1f), 
+                    parent.Map, 
+                    LocalizeString_Etc.VV_TextMote_DamageBlockedByFairy.Translate());
+
+                absorbed = true;
+            }
         }
 
         public void GetChildHolders(List<IThingHolder> outChildren)
