@@ -255,7 +255,6 @@
     <Compile Include="Vivi\Comps\CompFermentItem.cs" />
     <Compile Include="Vivi\Comps\CompHoney.cs" />
     <Compile Include="Vivi\Comps\CompViviHolder.cs" />
-    <Compile Include="Vivi\Fairy\FairyBehaviour_Wait.cs" />
     <Compile Include="Vivi\Gene_HoneyDependency.cs" />
     <Compile Include="Vivi\HediffComp_ChangeRoyalJellyNeed.cs" />
     <Compile Include="Vivi\HediffComp_GrowthBoost.cs" />
@@ -264,7 +263,6 @@
     <Compile Include="Vivi\HediffGiver_GeneticUnstablity.cs" />
     <Compile Include="Vivi\Hediff_GeneticUnstablity.cs" />
     <Compile Include="Vivi\Hediff_HoneyDependency.cs" />
-    <Compile Include="Vivi\Fairy\MoteViviFairy.cs" />
     <Compile Include="Vivi\PawnKindDef_Vivi.cs" />
     <Compile Include="Gather\RecipeDef_Gathering.cs" />
     <Compile Include="Recipe_InjectPropolis.cs" />

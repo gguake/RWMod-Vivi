@@ -11,7 +11,6 @@ namespace VVRace
         public int InnerViviCount => _innerViviContainer.Count;
 
         private ThingOwner _innerViviContainer;
-        private List<MoteViviFairy> _motes;
 
         public CompViviHolder()
         {
@@ -21,34 +20,6 @@ namespace VVRace
         public override void PostExposeData()
         {
             Scribe_Deep.Look(ref _innerViviContainer, "innerViviContainer", new object[] { this });
-        }
-
-        public override void PostSpawnSetup(bool respawningAfterLoad)
-        {
-            if (_motes == null)
-            {
-                _motes = new List<MoteViviFairy>();
-            }
-
-            for (int i = 0; i < InnerViviCount; ++i)
-            {
-                var mote = (MoteViviFairy)ThingMaker.MakeThing(VVThingDefOf.VV_Mote_FairyVivi);
-                mote.Initialize((Pawn)parent);
-                GenSpawn.Spawn(mote, parent.Position, parent.Map);
-                _motes.Add(mote);
-            }
-        }
-
-        public override void PostDeSpawn(Map map, DestroyMode mode = DestroyMode.Vanish)
-        {
-            foreach (var mote in _motes)
-            {
-                if (!mote.Destroyed)
-                {
-                    mote.Destroy();
-                }
-            }
-            _motes.Clear();
         }
 
         public override void PostDestroy(DestroyMode mode, Map previousMap)
