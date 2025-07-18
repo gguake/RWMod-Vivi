@@ -25,7 +25,6 @@
     </targetTags>
     <workerClass>VVRace.IncidentWorker_HornetAssault</workerClass>
     <baseChance>0</baseChance>
-    <minRefireDays>15</minRefireDays>
     <category>ThreatBig</category>
     <pointsScaleable>true</pointsScaleable>
     <tale>ManhunterPack</tale>

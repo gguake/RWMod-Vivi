@@ -50,17 +50,28 @@
   
   <DutyDef>
     <defName>VV_TitanicHornetAssault</defName>
-    <alwaysShowWeapon>true</alwaysShowWeapon>
     <thinkNode Class="ThinkNode_Priority">
       <subNodes>
+        <li Class="ThinkNode_HarmedRecently">
+          <thresholdTicks>600</thresholdTicks>
+          <subNodes>
+            <li Class="JobGiver_AIFightEnemies"> <!-- respond if attacked -->
+              <targetAcquireRadius>65</targetAcquireRadius>
+              <targetKeepRadius>72</targetKeepRadius>
+              <needLOSToAcquireNonPawnTargets>true</needLOSToAcquireNonPawnTargets>
+            </li>
+          </subNodes>
+        </li>
+        <li Class="JobGiver_AIFightEnemies">
+          <targetAcquireRadius>12</targetAcquireRadius>
+          <targetKeepRadius>15</targetKeepRadius>
+        </li>
+        <li Class="JobGiver_AIBreaching" />
         <li Class="JobGiver_AIFightEnemies">
           <targetAcquireRadius>65</targetAcquireRadius>
           <targetKeepRadius>72</targetKeepRadius>
         </li>
         <li Class="JobGiver_AITrashColonyClose" />
-        <li Class="VVRace.JobGiver_WanderNearAllyHornets">
-          <maxDanger>Deadly</maxDanger>
-        </li>
         <li Class="JobGiver_AITrashBuildingsDistant" />
         <li Class="JobGiver_AIGotoNearestHostile">
           <overrideExpiryInterval>60</overrideExpiryInterval>

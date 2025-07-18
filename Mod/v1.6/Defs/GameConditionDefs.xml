@@ -2,7 +2,7 @@
 <Defs>
   <GameConditionDef>
     <defName>VV_EverflowerWeatherControl</defName>
-    <conditionClass>VV_GameCondition_ForceWeather</conditionClass>
+    <conditionClass>GameCondition_ForceWeather</conditionClass>
     <label>forced weather</label>
     <description>everflower is forcing the weather.</description>
     <canBePermanent>false</canBePermanent>

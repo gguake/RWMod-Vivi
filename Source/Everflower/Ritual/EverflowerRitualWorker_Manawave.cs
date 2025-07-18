@@ -48,12 +48,11 @@ namespace VVRace
                 var incidentParms = new IncidentParms();
                 incidentParms.target = reservation.flower.Map;
                 incidentParms.points = StorytellerUtility.DefaultThreatPointsNow(reservation.flower.Map) * Rand.Range(1.5f, 3f);
+                incidentParms.forced = true;
 
                 if (VVIncidentDefOf.VV_TitanicHornetAssault.Worker.CanFireNow(incidentParms))
                 {
-                    Find.Storyteller.incidentQueue.Add(VVIncidentDefOf.VV_TitanicHornetAssault, _def.incidentDelayTicks.RandomInRange, incidentParms);
-
-                    VVIncidentDefOf.VV_TitanicHornetAssault.Worker.TryExecute(incidentParms);
+                    Find.Storyteller.incidentQueue.Add(VVIncidentDefOf.VV_TitanicHornetAssault, GenTicks.TicksGame + _def.incidentDelayTicks.RandomInRange, incidentParms);
                 }
             }
 

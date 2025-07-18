@@ -179,6 +179,7 @@
     <Compile Include="Hornet\JobGiver_HornetBerserk.cs" />
     <Compile Include="Hornet\LordJob_HornetAssault.cs" />
     <Compile Include="Hornet\LordToil_HornetAssault.cs" />
+    <Compile Include="Hornet\ThinkNode_ConditionalCanDoLordJobNowHornet.cs" />
     <Compile Include="Localize\LocalizeString_Alert.cs" />
     <Compile Include="Localize\LocalizeString_Command.cs" />
     <Compile Include="Localize\LocalizeString_Dialog.cs" />
