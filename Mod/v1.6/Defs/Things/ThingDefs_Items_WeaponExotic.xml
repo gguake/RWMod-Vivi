@@ -73,18 +73,18 @@
           <li>Blunt</li>
           <li>Poke</li>
         </capacities>
-        <power>12</power>
-        <cooldownTime>1.8</cooldownTime>
-        <chanceFactor>0.33</chanceFactor>
+        <power>10</power>
+        <cooldownTime>1.4</cooldownTime>
+        <chanceFactor>0.2</chanceFactor>
       </li>
       <li>
         <label>point</label>
         <capacities>
           <li>Stab</li>
         </capacities>
-        <power>27</power>
-        <armorPenetration>0.3</armorPenetration>
-        <cooldownTime>3.6</cooldownTime>
+        <power>29</power>
+        <armorPenetration>0.45</armorPenetration>
+        <cooldownTime>3.2</cooldownTime>
       </li>
     </tools>
     
@@ -151,7 +151,7 @@
       <AccuracyShort>1</AccuracyShort>
       <AccuracyMedium>1</AccuracyMedium>
       <AccuracyLong>1</AccuracyLong>
-      <RangedWeapon_Cooldown>25.0</RangedWeapon_Cooldown>
+      <RangedWeapon_Cooldown>30.0</RangedWeapon_Cooldown>
       <VV_RangedWeapon_ManaCost>15</VV_RangedWeapon_ManaCost>
     </statBases>
     <tradeNeverStack>true</tradeNeverStack>
@@ -210,7 +210,7 @@
           <li>Stab</li>
         </capacities>
         <power>7</power>
-        <armorPenetration>0.15</armorPenetration>
+        <armorPenetration>0.24</armorPenetration>
         <cooldownTime>0.5</cooldownTime>
       </li>
     </tools>

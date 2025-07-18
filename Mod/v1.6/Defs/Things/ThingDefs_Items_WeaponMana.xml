@@ -43,9 +43,9 @@
         <ticksBetweenBurstShots>10</ticksBetweenBurstShots>
 
         <steamDamageDef>Burn</steamDamageDef>
-        <steamDamageAmount>4</steamDamageAmount>
+        <steamDamageAmount>3</steamDamageAmount>
         <steamProjectile>VV_SteamProjectile</steamProjectile>
-        <steamHeatPerCell>1.4</steamHeatPerCell>
+        <steamHeatPerCell>1.9</steamHeatPerCell>
 
         <breathStartOffset>0.9</breathStartOffset>
         <breathAngleHalf>15</breathAngleHalf>
@@ -220,7 +220,7 @@
       <speed>32</speed>
       <damageDef>VV_Frostbite</damageDef>
       <explosionRadius>2.6</explosionRadius>
-      <damageAmountBase>32</damageAmountBase>
+      <damageAmountBase>30</damageAmountBase>
       <arcHeightFactor>0.2</arcHeightFactor>
       <shadowSize>0.6</shadowSize>
     </projectile>
@@ -256,7 +256,7 @@
         <drawWick>false</drawWick>
         <explosiveDamageType>VV_Frostbite</explosiveDamageType>
         <explosiveRadius>2.6</explosiveRadius>
-        <damageAmountBase>32</damageAmountBase>
+        <damageAmountBase>30</damageAmountBase>
         <chanceNeverExplodeFromDamage>0.5</chanceNeverExplodeFromDamage>
         <countdownTicks>1~1</countdownTicks>
       </li>
@@ -310,7 +310,7 @@
         <stopBurstWithoutLos>true</stopBurstWithoutLos>
 
         <damageDef>Burn</damageDef>
-        <damageAmount>12</damageAmount>
+        <damageAmount>11</damageAmount>
         <burstShotCount>2</burstShotCount>
         <ticksBetweenBurstShots>3</ticksBetweenBurstShots>
         <lightningMoteDef>VV_Mote_ChainLightning</lightningMoteDef>

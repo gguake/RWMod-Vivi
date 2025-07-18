@@ -37,9 +37,9 @@
           <li>Blunt</li>
           <li>Poke</li>
         </capacities>
-        <power>7</power>
+        <power>8</power>
         <cooldownTime>1.3</cooldownTime>
-        <chanceFactor>0.3</chanceFactor>
+        <chanceFactor>0.2</chanceFactor>
       </li>
       <li>
         <label>point</label>
@@ -48,7 +48,7 @@
         </capacities>
         <power>18</power>
         <armorPenetration>0.48</armorPenetration>
-        <cooldownTime>2.1</cooldownTime>
+        <cooldownTime>1.8</cooldownTime>
       </li>
     </tools>
     

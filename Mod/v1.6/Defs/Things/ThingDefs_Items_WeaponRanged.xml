@@ -43,8 +43,8 @@
         <verbClass>Verb_Shoot</verbClass>
         <hasStandardCommand>true</hasStandardCommand>
         <defaultProjectile>VV_Arrow_SlingshotStone</defaultProjectile>
-        <warmupTime>2.0</warmupTime>
-        <range>13.9</range>
+        <warmupTime>1.6</warmupTime>
+        <range>14.9</range>
         <soundCast>Bow_Small</soundCast>
       </li>
     </verbs>
@@ -104,8 +104,8 @@
       <extraDamages>
         <li>
           <def>Stun</def>
-          <amount>10</amount>
-          <chance>0.25</chance>
+          <amount>20</amount>
+          <chance>0.75</chance>
         </li>
       </extraDamages>
     </projectile>
@@ -168,7 +168,7 @@
         <extraMeleeDamages>
           <li>
             <def>EMP</def>
-            <amount>16</amount>
+            <amount>40</amount>
             <armorPenetration>0.9</armorPenetration>
             <chance>0.9</chance>
           </li>
@@ -219,14 +219,14 @@
     </graphicData>
     <projectile>
       <damageDef>Stab</damageDef>
-      <damageAmountBase>8</damageAmountBase>
+      <damageAmountBase>6</damageAmountBase>
       <speed>24</speed>
 
       <extraDamages>
         <li>
           <def>EMP</def>
-          <amount>24</amount>
-          <armorPenetration>0.5</armorPenetration>
+          <amount>40</amount>
+          <armorPenetration>0.75</armorPenetration>
         </li>
       </extraDamages>
     </projectile>
@@ -250,9 +250,9 @@
       <WorkToMake>9000</WorkToMake>
       <Mass>2</Mass>
       <AccuracyTouch>0.88</AccuracyTouch>
-      <AccuracyShort>0.66</AccuracyShort>
-      <AccuracyMedium>0.4</AccuracyMedium>
-      <AccuracyLong>0.1</AccuracyLong>
+      <AccuracyShort>0.75</AccuracyShort>
+      <AccuracyMedium>0.45</AccuracyMedium>
+      <AccuracyLong>0.2</AccuracyLong>
       <RangedWeapon_Cooldown>1.5</RangedWeapon_Cooldown>
     </statBases>
     
@@ -288,16 +288,16 @@
           <li>Poke</li>
         </capacities>
         <power>8</power>
-        <cooldownTime>1.7</cooldownTime>
-        <chanceFactor>0.5</chanceFactor>
+        <cooldownTime>1.2</cooldownTime>
+        <chanceFactor>0.3</chanceFactor>
       </li>
       <li>
         <label>point</label>
         <capacities>
           <li>VV_ToxicStab</li>
         </capacities>
-        <power>17</power>
-        <cooldownTime>2.1</cooldownTime>
+        <power>18</power>
+        <cooldownTime>2</cooldownTime>
       </li>
     </tools>
     
@@ -340,10 +340,10 @@
     </graphicData>
     <projectile>
       <damageDef>VV_RangedToxicStab</damageDef>
-      <damageAmountBase>21</damageAmountBase>
+      <damageAmountBase>24</damageAmountBase>
       <stoppingPower>2</stoppingPower>
       <armorPenetrationBase>0.2</armorPenetrationBase>
-      <speed>24</speed>
+      <speed>32</speed>
     </projectile>
   </ThingDef>
 
