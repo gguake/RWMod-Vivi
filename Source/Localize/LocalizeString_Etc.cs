@@ -18,6 +18,9 @@
         public const string VV_ModSettings_AllowSelectModGenes = nameof(VV_ModSettings_AllowSelectModGenes);
         public const string VV_ModSettings_AllowSelectModGenesDesc = nameof(VV_ModSettings_AllowSelectModGenesDesc);
 
+        public const string VV_ModSettings_RoyalJellyNeedMultiplier = nameof(VV_ModSettings_RoyalJellyNeedMultiplier);
+        public const string VV_ModSettings_RoyalJellyNeedMultiplierDesc = nameof(VV_ModSettings_RoyalJellyNeedMultiplierDesc);
+
         public const string VV_Thing_Seed = nameof(VV_Thing_Seed);
         public const string VV_Thing_SeedDesc = nameof(VV_Thing_SeedDesc);
         public const string VV_Thing_Seedling = nameof(VV_Thing_Seedling);
