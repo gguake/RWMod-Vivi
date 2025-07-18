@@ -40,4 +40,6 @@
 <VV_Targetter_InvalidTarget_NotMyChild>{RITUAL} 대상 선택: 자식인 비비가 아님</VV_Targetter_InvalidTarget_NotMyChild>
 <VV_Targetter_InvalidTarget_NotAdult>{RITUAL} 대상 선택: 성체가 아님</VV_Targetter_InvalidTarget_NotAdult>
 <VV_Targetter_InvalidTarget_FairyficationSickness>{RITUAL} 대상 선택: 요정화 후유증이 남아 있음</VV_Targetter_InvalidTarget_FairyficationSickness>
+
+<VV_TextMote_GatherFailed>채집 실수로 파손</VV_TextMote_GatherFailed>
 </LanguageData>

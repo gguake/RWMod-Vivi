@@ -25,10 +25,10 @@
     <useHitPoints>true</useHitPoints>
     <statBases>
       <Mass>0.001</Mass>
-      <MarketValue>0.1</MarketValue>
+      <MarketValue>0.25</MarketValue>
       <MaxHitPoints>30</MaxHitPoints>
       <Flammability>1.0</Flammability>
-      <Nutrition>0.02</Nutrition>
+      <Nutrition>0.05</Nutrition>
       <DeteriorationRate>8</DeteriorationRate>
       <FoodPoisonChanceFixedHuman>0.5</FoodPoisonChanceFixedHuman>
     </statBases>
@@ -311,7 +311,7 @@
   
   <ThingDef ParentName="VV_FloweringTeaBase">
     <defName>VV_FloralHotTea</defName>
-    <label>floral hot tea</label>
+    <label>hot flowering tea</label>
     <description>A tea made by steaming warm flower petals and a bit of honey. Drinking it makes the body feel warm, reducing the sensation of cold.
 \nBecause of the unique properties of the petals, it maintains warmth regardless of stored temperature.</description>
     <descriptionHyperlinks>
@@ -342,7 +342,7 @@
   
   <ThingDef ParentName="VV_FloweringTeaBase">
     <defName>VV_FloralIceTea</defName>
-    <label>floral ice tea</label>
+    <label>ice flowering tea</label>
     <description>A tea made by steaming cold flower petals and a bit of honey. Drinking it makes the body feel cool, reducing the sensation of heat.
 \nBecause of the unique properties of the petals, it maintains its coolness regardless of stored temperature.</description>
     <descriptionHyperlinks>
@@ -373,7 +373,7 @@
   
   <ThingDef ParentName="VV_FloweringTeaBase">
     <defName>VV_FloralMilkTea</defName>
-    <label>floral milk tea</label>
+    <label>aromatic flowering tea</label>
     <description>A tea made by steeping fragrant flower petals and adding milk.
 \nDrinking it makes the body emit a floral scent for a certain period of time, improving mood and aiding sleep.</description>
     <descriptionHyperlinks>

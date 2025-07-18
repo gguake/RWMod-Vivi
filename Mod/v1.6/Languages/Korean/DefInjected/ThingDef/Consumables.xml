@@ -30,8 +30,8 @@
 <VV_FloralIceTea.ingestible.ingestCommandString>{0} 마시기</VV_FloralIceTea.ingestible.ingestCommandString>
 <VV_FloralIceTea.ingestible.ingestReportString>{0} 마시는 중.</VV_FloralIceTea.ingestible.ingestReportString>
 
-<VV_FloralMilkTea.label>우유 꽃차</VV_FloralMilkTea.label>
-<VV_FloralMilkTea.description>향기나는 꽃잎을 넣고 끓여 우려낸 것에 우유를 더한 차입니다.
+<VV_FloralMilkTea.label>진한 꽃차</VV_FloralMilkTea.label>
+<VV_FloralMilkTea.description>향기나는 꽃잎을 넣고 끓여 우려낸 것에 우유나 꿀을 더한 차입니다.
 \n마시면 일정 시간동안 몸에서 꽃향기가 풍겨 기분이 좋아지며 수면에도 도움이 됩니다.</VV_FloralMilkTea.description>
 <VV_FloralMilkTea.ingestible.ingestCommandString>{0} 마시기</VV_FloralMilkTea.ingestible.ingestCommandString>
 <VV_FloralMilkTea.ingestible.ingestReportString>{0} 마시는 중.</VV_FloralMilkTea.ingestible.ingestReportString>

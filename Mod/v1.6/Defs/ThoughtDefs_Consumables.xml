@@ -22,7 +22,7 @@
     <developmentalStageFilter>Baby, Child, Adult</developmentalStageFilter>
     <stages>
       <li>
-        <label>drink floral tea</label>
+        <label>drink flowering tea</label>
         <description>Drinking that flowering tea made me feel relaxed.</description>
         <baseMoodEffect>5</baseMoodEffect>
       </li>

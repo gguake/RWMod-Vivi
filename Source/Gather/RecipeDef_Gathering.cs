@@ -27,6 +27,8 @@ namespace VVRace
 
         public Danger maxPathDanger;
 
+        public SimpleCurve damageChanceBySkillLevel;
+
         private void AddThingDefToThingFilter(ThingFilter thingFilter, IEnumerable<ThingDef> thingDefs)
         {
             var fieldInfo_thingDefs = AccessTools.Field(typeof(ThingFilter), "thingDefs");

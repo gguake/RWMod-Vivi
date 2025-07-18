@@ -23,7 +23,7 @@
           <li Class="PatchOperationAdd">
             <xpath>Defs/ThingDef[defName="BMT_Archaefructus"]/statBases</xpath>
             <value>
-              <VV_MinGrowthPlantGatherable>0.99</VV_MinGrowthPlantGatherable>
+              <VV_MinGrowthPlantGatherable>0.7</VV_MinGrowthPlantGatherable>
               <VV_PlantGatherCooldown>1</VV_PlantGatherCooldown>
               <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
             </value>
@@ -48,7 +48,7 @@
           <li Class="PatchOperationAdd">
             <xpath>Defs/ThingDef[defName="BMT_Nymphaeaceae"]/statBases</xpath>
             <value>
-              <VV_MinGrowthPlantGatherable>0.99</VV_MinGrowthPlantGatherable>
+              <VV_MinGrowthPlantGatherable>0.7</VV_MinGrowthPlantGatherable>
               <VV_PlantGatherCooldown>1</VV_PlantGatherCooldown>
               <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
             </value>
@@ -73,7 +73,7 @@
           <li Class="PatchOperationAdd">
             <xpath>Defs/ThingDef[defName="BMT_Potentilla"]/statBases</xpath>
             <value>
-              <VV_MinGrowthPlantGatherable>0.99</VV_MinGrowthPlantGatherable>
+              <VV_MinGrowthPlantGatherable>0.7</VV_MinGrowthPlantGatherable>
               <VV_PlantGatherCooldown>1</VV_PlantGatherCooldown>
               <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
             </value>
@@ -98,7 +98,7 @@
           <li Class="PatchOperationAdd">
             <xpath>Defs/ThingDef[defName="BMT_Sagaria"]/statBases</xpath>
             <value>
-              <VV_MinGrowthPlantGatherable>0.99</VV_MinGrowthPlantGatherable>
+              <VV_MinGrowthPlantGatherable>0.7</VV_MinGrowthPlantGatherable>
               <VV_PlantGatherCooldown>1</VV_PlantGatherCooldown>
               <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
             </value>

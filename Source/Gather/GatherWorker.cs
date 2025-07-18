@@ -54,6 +54,21 @@ namespace VVRace
                 }
             }
 
+            if (recipe.damageChanceBySkillLevel != null)
+            {
+                var damageChance = recipe.damageChanceBySkillLevel.Evaluate(pawn.skills.GetSkill(recipe.workSkill).Level);
+                if (damageChance > 0 && Rand.Chance(damageChance))
+                {
+                    var beforeHitPoint = target.HitPoints;
+                    var afterHitPoint = Mathf.Max(1, (int)(target.HitPoints * Rand.Range(0.8f, 0.9f)));
+                    var damage = beforeHitPoint - afterHitPoint;
+                    if (damage > 0)
+                    {
+                        MoteMaker.ThrowText((pawn.DrawPos + target.DrawPos) / 2f, pawn.Map, LocalizeString_Etc.VV_TextMote_GatherFailed.Translate(), 3.65f);
+                        target.TakeDamage(new DamageInfo(DamageDefOf.Crush, damage));
+                    }
+                }
+            }
 
             if (target is IGatherableTarget notifyReceiver)
             {

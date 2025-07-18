@@ -40,5 +40,7 @@
         public const string VV_Targetter_InvalidTarget_NotMyChild = nameof(VV_Targetter_InvalidTarget_NotMyChild);
         public const string VV_Targetter_InvalidTarget_NotAdult = nameof(VV_Targetter_InvalidTarget_NotAdult);
         public const string VV_Targetter_InvalidTarget_FairyficationSickness = nameof(VV_Targetter_InvalidTarget_FairyficationSickness);
+
+        public const string VV_TextMote_GatherFailed = nameof(VV_TextMote_GatherFailed);
     }
 }

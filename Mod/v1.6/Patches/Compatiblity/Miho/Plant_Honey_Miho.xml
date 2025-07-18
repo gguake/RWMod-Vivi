@@ -23,7 +23,7 @@
           <li Class="PatchOperationAdd">
             <xpath>Defs/ThingDef[defName="Plant_PosFlower"]/statBases</xpath>
             <value>
-              <VV_MinGrowthPlantGatherable>0.9</VV_MinGrowthPlantGatherable>
+              <VV_MinGrowthPlantGatherable>0.7</VV_MinGrowthPlantGatherable>
               <VV_PlantGatherCooldown>1</VV_PlantGatherCooldown>
               <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
             </value>

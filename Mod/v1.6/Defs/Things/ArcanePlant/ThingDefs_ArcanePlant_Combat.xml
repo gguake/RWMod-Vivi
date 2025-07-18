@@ -65,9 +65,9 @@
 
         <leavingSeedCountCurve>
           <points>
-            <li>(0, 2.5)</li>
-            <li>(0.7, 4.5)</li>
-            <li>(1.0, 5.5)</li>
+            <li>(0, 3)</li>
+            <li>(0.7, 5)</li>
+            <li>(1.0, 6)</li>
           </points>
         </leavingSeedCountCurve>
       </li>

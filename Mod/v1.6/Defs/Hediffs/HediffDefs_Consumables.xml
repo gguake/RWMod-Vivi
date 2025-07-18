@@ -94,8 +94,8 @@
 
   <HediffDef>
     <defName>VV_FloralTea</defName>
-    <label>relaxed on flower tea</label>
-    <description>Drunk flower tea and are now in a serene state of mind.</description>
+    <label>relaxed on flowering tea</label>
+    <description>Drunk flowering tea and are now in a serene state of mind.</description>
     <hediffClass>HediffWithComps</hediffClass>
     <defaultLabelColor>(1,0,0.5)</defaultLabelColor>
     
@@ -134,7 +134,7 @@
   <HediffDef>
     <defName>VV_WarmingFloralTea</defName>
     <label>high on hot tea</label>
-    <description>Drunk hot flower tea, making their body more resistant to the cold.</description>
+    <description>Drunk hot flowering tea, making their body more resistant to the cold.</description>
     <hediffClass>HediffWithComps</hediffClass>
     <defaultLabelColor>(1,0,0.5)</defaultLabelColor>
     
@@ -152,7 +152,7 @@
 
     <comps>
       <li Class="HediffCompProperties_Disappears">
-        <disappearsAfterTicks>50000~50000</disappearsAfterTicks>
+        <disappearsAfterTicks>50000~60000</disappearsAfterTicks>
         <showRemainingTime>true</showRemainingTime>
       </li>
     </comps>
@@ -161,7 +161,7 @@
   <HediffDef>
     <defName>VV_CoolingFloralTea</defName>
     <label>high on ice tea</label>
-    <description>Drunk ice flower tea, making their body more resistant to heat.</description>
+    <description>Drunk ice flowering tea, making their body more resistant to heat.</description>
     <hediffClass>HediffWithComps</hediffClass>
     <defaultLabelColor>(1,0,0.5)</defaultLabelColor>
     
@@ -179,7 +179,7 @@
 
     <comps>
       <li Class="HediffCompProperties_Disappears">
-        <disappearsAfterTicks>50000~50000</disappearsAfterTicks>
+        <disappearsAfterTicks>50000~60000</disappearsAfterTicks>
         <showRemainingTime>true</showRemainingTime>
       </li>
     </comps>
@@ -207,7 +207,7 @@
 
     <comps>
       <li Class="HediffCompProperties_Disappears">
-        <disappearsAfterTicks>50000~50000</disappearsAfterTicks>
+        <disappearsAfterTicks>50000~60000</disappearsAfterTicks>
         <showRemainingTime>true</showRemainingTime>
       </li>
     </comps>

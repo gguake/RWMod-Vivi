@@ -22,10 +22,10 @@
       <li>VV_GatheringBarrel</li>
     </recipeUsers>
     <allowMixingIngredients>true</allowMixingIngredients>
-    <targetCountAdjustment>4</targetCountAdjustment>
+    <targetCountAdjustment>5</targetCountAdjustment>
 
     <products>
-      <VV_RawHoney>4</VV_RawHoney>
+      <VV_RawHoney>5</VV_RawHoney>
     </products>
     <researchPrerequisite>VV_BasicGathering</researchPrerequisite>
 
@@ -36,6 +36,18 @@
     <targetCooldownStat>VV_PlantGatherCooldown</targetCooldownStat>
     <targetYieldStat>VV_PlantHoneyGatherYield</targetYieldStat>
     <maxPathDanger>Some</maxPathDanger>
+
+    <damageChanceBySkillLevel>
+      <points>
+        <li>(0,0.5)</li>
+        <li>(4,0.25)</li>
+        <li>(8,0.12)</li>
+        <li>(12,0.07)</li>
+        <li>(16,0.04)</li>
+        <li>(20,0)</li>
+      </points>
+    </damageChanceBySkillLevel>
+
   </RecipeDef>
   
   <!-- 꽃가루 채집 -->
@@ -49,7 +61,7 @@
 
     <jobString>Gathering pollen.</jobString>
     
-    <workAmount>540</workAmount>
+    <workAmount>400</workAmount>
     <workSkill>Plants</workSkill>
     <workSkillLearnFactor>0.01</workSkillLearnFactor>
     <workSpeedStat>CleaningSpeed</workSpeedStat>
@@ -63,7 +75,7 @@
       <li>VV_GatheringBarrel</li>
     </recipeUsers>
     <allowMixingIngredients>true</allowMixingIngredients>
-    <targetCountAdjustment>1</targetCountAdjustment>
+    <targetCountAdjustment>3</targetCountAdjustment>
     <ingredients>
       <li>
         <filter>
@@ -81,7 +93,7 @@
     </fixedIngredientFilter>
 
     <products>
-      <VV_Pollen>8</VV_Pollen>
+      <VV_Pollen>3</VV_Pollen>
     </products>
     <researchPrerequisite>VV_BasicGathering</researchPrerequisite>
 
@@ -99,7 +111,7 @@
 
     <jobString>Gathering propolis.</jobString>
     
-    <workAmount>3000</workAmount>
+    <workAmount>3600</workAmount>
     <workSkill>Plants</workSkill>
     <workSpeedStat>VV_PlantGatherSpeed</workSpeedStat>
     <efficiencyStat>VV_PlantGatherYield</efficiencyStat>
@@ -114,9 +126,9 @@
       <li>VV_GatheringBarrel</li>
     </recipeUsers>
     <allowMixingIngredients>true</allowMixingIngredients>
-    <targetCountAdjustment>2</targetCountAdjustment>
+    <targetCountAdjustment>3</targetCountAdjustment>
     <products>
-      <VV_Propolis>2</VV_Propolis>
+      <VV_Propolis>3</VV_Propolis>
     </products>
     <researchPrerequisite>VV_AdvancedGathering</researchPrerequisite>
 
@@ -126,6 +138,15 @@
     <targetCooldownStat>VV_PlantGatherCooldown</targetCooldownStat>
     <targetYieldStat>VV_TreeResinGatherYield</targetYieldStat>
     <maxPathDanger>Some</maxPathDanger>
+
+    <damageChanceBySkillLevel>
+      <points>
+        <li>(8,0.5)</li>
+        <li>(12,0.25)</li>
+        <li>(16,0.125)</li>
+        <li>(20,0.07)</li>
+      </points>
+    </damageChanceBySkillLevel>
 
     <skillRequirements>
       <Plants>8</Plants>

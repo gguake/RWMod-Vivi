@@ -20,7 +20,7 @@
   <VV_Make_FloralIceTea.description>차가운 꽃잎과 약간의 꿀로 꽃차를 끓입니다.</VV_Make_FloralIceTea.description>
   <VV_Make_FloralIceTea.jobString>얼음 꽃차 만드는 중.</VV_Make_FloralIceTea.jobString>
 
-  <VV_Make_FloralMilkTea.label>꽃 밀크티 만들기</VV_Make_FloralMilkTea.label>
-  <VV_Make_FloralMilkTea.description>향기나는 꽃잎과 우유를 섞어 밀크티를 만듭니다.</VV_Make_FloralMilkTea.description>
-  <VV_Make_FloralMilkTea.jobString>꽃 밀크티 만드는 중.</VV_Make_FloralMilkTea.jobString>
+  <VV_Make_FloralMilkTea.label>진한 꽃차 만들기</VV_Make_FloralMilkTea.label>
+  <VV_Make_FloralMilkTea.description>향기나는 꽃잎에 꿀이나 우유를 섞어 밀크티를 만듭니다.</VV_Make_FloralMilkTea.description>
+  <VV_Make_FloralMilkTea.jobString>진한 꽃차 만드는 중.</VV_Make_FloralMilkTea.jobString>
 </LanguageData>

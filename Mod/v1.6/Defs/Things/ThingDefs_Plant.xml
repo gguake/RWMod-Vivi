@@ -3,7 +3,7 @@
   <ThingDef Abstract="True" Name="VV_ArcaneFlowerBase" ParentName="PlantBase">
     <selectable>true</selectable>
     <statBases>
-      <MaxHitPoints>50</MaxHitPoints>
+      <MaxHitPoints>60</MaxHitPoints>
       <Beauty>5</Beauty>
       <BeautyOutdoors>5</BeautyOutdoors>
       <Nutrition>0.1</Nutrition>
