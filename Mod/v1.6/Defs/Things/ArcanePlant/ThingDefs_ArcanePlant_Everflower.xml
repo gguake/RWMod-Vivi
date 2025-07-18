@@ -29,14 +29,14 @@
     <pathCostIgnoreRepeat>false</pathCostIgnoreRepeat>
 
     <statBases>
-      <MaxHitPoints>250</MaxHitPoints>
+      <MaxHitPoints>500</MaxHitPoints>
       <WorkToBuild>250000</WorkToBuild>
       <Flammability>0</Flammability>
       <Beauty>30</Beauty>
       <BeautyOutdoors>30</BeautyOutdoors>
       <SellPriceFactor>0</SellPriceFactor>
 
-      <VV_PlantGatherCooldown>0.1</VV_PlantGatherCooldown>
+      <VV_PlantGatherCooldown>0.3</VV_PlantGatherCooldown>
       <VV_PlantHoneyGatherYield>1.0</VV_PlantHoneyGatherYield>
     </statBases>
 
@@ -45,7 +45,7 @@
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
 
     <costList>
-      <VV_PerfumingPetal>100</VV_PerfumingPetal>
+      <VV_PerfumingPetal>200</VV_PerfumingPetal>
       <VV_Seed_Everflower>1</VV_Seed_Everflower>
     </costList>
 
