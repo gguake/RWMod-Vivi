@@ -268,10 +268,50 @@
       <damageDef>Stab</damageDef>
       <damageAmountBase>8</damageAmountBase>
       <stoppingPower>0.5</stoppingPower>
-      <armorPenetrationBase>0.1</armorPenetrationBase>
-      <speed>120</speed>
+      <armorPenetrationBase>0.16</armorPenetrationBase>
+      <speed>100</speed>
 
-      <maxAttackCount>15</maxAttackCount>
+      <bonusSpeedByPsychicSensitivity>
+        <points>
+          <li>(0.5,-50)</li>
+          <li>(1,0)</li>
+          <li>(1.5,10)</li>
+          <li>(2,30)</li>
+          <li>(2.5,50)</li>
+          <li>(3,70)</li>
+          <li>(3.5,90)</li>
+          <li>(4,110)</li>
+          <li>(4.5,130)</li>
+          <li>(5,150)</li>
+          <li>(6,160)</li>
+          <li>(7,170)</li>
+          <li>(8,180)</li>
+          <li>(9,190)</li>
+          <li>(10,200)</li>
+        </points>
+      </bonusSpeedByPsychicSensitivity>
+
+      <maxAttackCount>10</maxAttackCount>
+      <bonusAttackCountByPsychicSensitivity>
+        <points>
+          <li>(0.5,-5)</li>
+          <li>(1,0)</li>
+          <li>(1.5,1)</li>
+          <li>(2,4)</li>
+          <li>(2.5,7)</li>
+          <li>(3,10)</li>
+          <li>(3.5,12)</li>
+          <li>(4,14)</li>
+          <li>(4.5,16)</li>
+          <li>(5,18)</li>
+          <li>(6,20)</li>
+          <li>(7,22)</li>
+          <li>(8,24)</li>
+          <li>(9,26)</li>
+          <li>(10,27)</li>
+        </points>
+      </bonusAttackCountByPsychicSensitivity>
+
       <targettingRadius>5.7</targettingRadius>
     </projectile>
 

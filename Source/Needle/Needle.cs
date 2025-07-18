@@ -9,8 +9,11 @@ namespace VVRace
 {
     public class NeedleProperties : ProjectileProperties
     {
+        public SimpleCurve bonusSpeedByPsychicSensitivity;
         public int maxAttackCount;
+
         public float targettingRadius;
+        public SimpleCurve bonusAttackCountByPsychicSensitivity;
     }
 
     public class Needle : Projectile
@@ -109,9 +112,8 @@ namespace VVRace
             _curMoveDistance = 0f;
 
             var psychicSensitivityFactor = Mathf.Clamp(launcher.GetStatValue(StatDefOf.PsychicSensitivity), 0.5f, 10f);
-            var factor = Mathf.Log10(psychicSensitivityFactor * psychicSensitivityFactor);
-            _appliedSpeed = def.projectile.speed * (0.5f * factor + 1f);
-            _remainedAttackCount = 1 + (int)(NeedleProperties.maxAttackCount * (factor + 1f));
+            _appliedSpeed = NeedleProperties.speed + NeedleProperties.bonusSpeedByPsychicSensitivity.Evaluate(psychicSensitivityFactor);
+            _remainedAttackCount = (int)(NeedleProperties.maxAttackCount + NeedleProperties.bonusAttackCountByPsychicSensitivity.Evaluate(psychicSensitivityFactor));
         }
 
         protected override void TickInterval(int delta)
