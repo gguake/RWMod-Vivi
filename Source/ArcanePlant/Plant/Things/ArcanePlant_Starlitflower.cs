@@ -1,4 +1,5 @@
 ﻿using Verse;
+using Verse.AI;
 
 namespace VVRace
 {
@@ -49,9 +50,9 @@ namespace VVRace
                 DirtyMapMesh(Map);
             }
 
-            if (this.IsHashIntervalTick(250, delta) && Map.Biome.inVacuum)
+            if (Map.Biome.inVacuum)
             {
-                VVEffecterDefOf.VV_StalitFlowerAura.SpawnAttached(this, Map, VaccumResistRange);
+                VVEffecterDefOf.VV_StalitFlowerAura.SpawnMaintained(Position, Map, VaccumResistRange);
             }
         }
 

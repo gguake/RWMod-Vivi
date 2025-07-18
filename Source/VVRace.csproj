@@ -94,6 +94,7 @@
     <Compile Include="Everflower\HediffComp_EverflowerLink.cs" />
     <Compile Include="Everflower\Ritual\EverflowerRitualWorker_Attunement.cs" />
     <Compile Include="Everflower\Ritual\EverflowerRitualWorker_ChangeWeather.cs" />
+    <Compile Include="Everflower\Ritual\EverflowerRitualWorker_MoveEverflower.cs" />
     <Compile Include="Everflower\Ritual\EverflowerRitualWorker_UndoFairy.cs" />
     <Compile Include="Everflower\Ritual\EverflowerRitualWorker_Manawave.cs" />
     <Compile Include="Everflower\Ritual\EverflowerRitualWorker_SimpleJob.cs" />

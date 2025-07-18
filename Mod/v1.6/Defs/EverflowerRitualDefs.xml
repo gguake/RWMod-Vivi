@@ -5,11 +5,12 @@
     <requiredPsychicSensitivity>1.5</requiredPsychicSensitivity>
   </VVRace.EverflowerRitualDef>
 
+  <!-- 교감 연결 의식 -->
   <VVRace.EverflowerRitualDef ParentName="EverflowerRitualBase">
     <defName>VV_Attunement</defName>
     <label>attunement ritual</label>
     <description>.</description>
-    <workerClass>VVRace.EverflowerRitualWorker_SimpleJob</workerClass>
+    <workerClass>VVRace.EverflowerRitualWorker_Attunement</workerClass>
     
 
     <uiOrder>1</uiOrder>
@@ -21,66 +22,97 @@
     <job>VV_AttunementEverflower</job>
     <jobWorkAmount>1500</jobWorkAmount>
 
-    <effectOnCasting></effectOnCasting>
+    <effectOnCasting>VV_EverflowerLink</effectOnCasting>
   </VVRace.EverflowerRitualDef>
 
+  <!-- 영원꽃 위치 이동 -->
+  <VVRace.EverflowerRitualDef ParentName="EverflowerRitualBase">
+    <defName>VV_MoveEverflower</defName>
+    <label>move everflower</label>
+    <description>.</description>
+    <workerClass>VVRace.EverflowerRitualWorker_MoveEverflower</workerClass>
+
+    <uiOrder>2</uiOrder>
+    <uiIconPath>UI/Commands/VV_MoveEverflower</uiIconPath>
+
+    <attuneLevel>1</attuneLevel>
+
+    <job>VV_MoveEverflower</job>
+    <jobWorkAmount>2000</jobWorkAmount>
+    
+    <effectOnCasting>VV_EverflowerLink</effectOnCasting>
+  </VVRace.EverflowerRitualDef>
+
+  <!-- 날씨 변경 기원 -->
   <VVRace.EverflowerRitualDef ParentName="EverflowerRitualBase">
     <defName>VV_ChangeWeatherRitual</defName>
     <label>change weather ritual</label>
     <description>.</description>
     <workerClass>VVRace.EverflowerRitualWorker_ChangeWeather</workerClass>
 
-    <uiOrder>2</uiOrder>
+    <uiOrder>3</uiOrder>
+    <uiIconPath>UI/Commands/VV_ChangeWeatherRitual</uiIconPath>
 
     <attuneLevel>2</attuneLevel>
 
     <job>VV_ChangeWeather</job>
     <jobWorkAmount>3000</jobWorkAmount>
+    
+    <effectOnCasting>VV_EverflowerLink</effectOnCasting>
   </VVRace.EverflowerRitualDef>
 
+  <!-- 요정화 -->
   <VVRace.EverflowerRitualDef ParentName="EverflowerRitualBase">
     <defName>VV_Fairyfication</defName>
     <label>fairyfication</label>
     <description>.</description>
     <workerClass>VVRace.EverflowerRitualWorker_Fairyfication</workerClass>
 
-    <uiOrder>3</uiOrder>
+    <uiOrder>4</uiOrder>
     <uiIconPath>UI/Commands/VV_LinkConnect</uiIconPath>
 
     <attuneLevel>3</attuneLevel>
 
     <job>VV_Fairyfication</job>
     <jobWorkAmount>4000</jobWorkAmount>
+    
+    <effectOnCasting>VV_EverflowerLink</effectOnCasting>
   </VVRace.EverflowerRitualDef>
   
+  <!-- 요정화 해제 -->
   <VVRace.EverflowerRitualDef ParentName="EverflowerRitualBase">
     <defName>VV_UndoFairyfication</defName>
     <label>undo fairyfication</label>
     <description>.</description>
     <workerClass>VVRace.EverflowerRitualWorker_UndoFairy</workerClass>
 
-    <uiOrder>4</uiOrder>
+    <uiOrder>5</uiOrder>
     <uiIconPath>UI/Commands/VV_LinkDisconnect</uiIconPath>
 
     <attuneLevel>3</attuneLevel>
 
     <job>VV_UndoFairyfication</job>
     <jobWorkAmount>4000</jobWorkAmount>
+    
+    <effectOnCasting>VV_EverflowerLink</effectOnCasting>
   </VVRace.EverflowerRitualDef>
   
+  <!-- 마나 파동 방출-->
   <VVRace.EverflowerRitualDef ParentName="EverflowerRitualBase">
     <defName>VV_Manawave</defName>
-    <label>mana wave</label>
+    <label>emit manawave</label>
     <description>.</description>
     <workerClass>VVRace.EverflowerRitualWorker_Manawave</workerClass>
 
-    <uiOrder>5</uiOrder>
+    <uiOrder>6</uiOrder>
+    <uiIconPath>UI/Commands/VV_Manawave</uiIconPath>
 
     <attuneLevel>3</attuneLevel>
 
     <job>VV_Manawave</job>
     <jobWorkAmount>4000</jobWorkAmount>
 
+    <effectOnCasting>VV_EverflowerLink</effectOnCasting>
     <effectOnComplete>VV_Manawave</effectOnComplete>
   </VVRace.EverflowerRitualDef>
 </Defs>

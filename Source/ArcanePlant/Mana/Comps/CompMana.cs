@@ -260,7 +260,7 @@ namespace VVRace
                     _manaStored += deposited;
                 }
 
-                manaGrid.ChangeEnvironmentMana(pos, -absorbableMana + manaChange, direct: true);
+                manaGrid.ChangeEnvironmentMana(pos, -absorbableMana + manaChange);
             }
             else
             {
@@ -269,7 +269,7 @@ namespace VVRace
                     var absorbed = Mathf.Clamp(-manaChange, 0f, absorbableMana);
                     manaChange += absorbed;
 
-                    manaGrid.ChangeEnvironmentMana(pos, -absorbed, direct: true);
+                    manaGrid.ChangeEnvironmentMana(pos, -absorbed);
                 }
 
                 if (_manaStored > 0f)

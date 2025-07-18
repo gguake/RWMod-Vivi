@@ -164,7 +164,7 @@
     <everCurableByItem>false</everCurableByItem>
 
     <initialSeverity>1</initialSeverity>
-    <maxSeverity>4</maxSeverity>
+    <maxSeverity>10</maxSeverity>
 
     <stages>
       <li>

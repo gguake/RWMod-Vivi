@@ -1,11 +1,13 @@
-﻿using Verse;
+﻿using RimWorld;
+using UnityEngine;
+using Verse;
 
 namespace VVRace
 {
     public class EverflowerRitualWorker_Manawave : EverflowerRitualWorker_SimpleJob
     {
-        private const float RadiusSqr = 50 * 50f;
-        private const float Mana = 800f;
+        private const float RadiusSqr = 55f * 55f;
+        private const float Mana = 120f;
 
         public EverflowerRitualWorker_Manawave(EverflowerRitualDef def) : base(def)
         {
@@ -21,7 +23,7 @@ namespace VVRace
                     var distanceSqr = cell.DistanceToSquared(reservation.flower.Position);
                     if (distanceSqr < RadiusSqr)
                     {
-                        var mana = Mana * (distanceSqr / RadiusSqr);
+                        var mana = Mana * Mathf.Pow(1f - distanceSqr / RadiusSqr, 1.5f);
                         manaComponent.ChangeEnvironmentMana(cell, mana);
                     }
                 }
@@ -35,10 +37,11 @@ namespace VVRace
             GenExplosion.DoExplosion(
                 reservation.flower.Position, 
                 reservation.flower.Map, 
-                50f, 
-                VVDamageDefOf.VV_Manawave, 
+                55f, 
+                DamageDefOf.Stun, 
                 reservation.casterPawn,
-                propagationSpeed: 0.5f);
+                propagationSpeed: 0.5f,
+                doSoundEffects: false);
 
             base.Complete(reservation);
         }

@@ -141,10 +141,10 @@ namespace VVRace
                 {
                     yield return new Command_Action()
                     {
-                        defaultLabel = "DEV: +1000 Attunement",
+                        defaultLabel = "DEV: +10000 Attunement",
                         action = () =>
                         {
-                            GainAttunement(1000);
+                            GainAttunement(10000);
                         }
                     };
                 }

@@ -238,6 +238,10 @@ namespace VVRace
         public static EffecterDef VV_PollenEmitting;
         public static EffecterDef VV_EverflowerLink;
         public static EffecterDef VV_StalitFlowerAura;
+
+        public static EffecterDef VV_EverflowerGrow_1_Level;
+        public static EffecterDef VV_EverflowerGrow_2_Level;
+        public static EffecterDef VV_EverflowerGrow_3_Level;
     }
 
     [DefOf]
@@ -278,17 +282,5 @@ namespace VVRace
         public static LifeStageDef HumanlikeTeenager_Vivi;
         public static LifeStageDef HumanlikeTeenager;
         public static LifeStageDef HumanlikeAdult_Vivi;
-    }
-
-    [DefOf]
-    public static class VVDamageDefOf
-    {
-        public static DamageDef VV_Manawave;
-    }
-
-    [DefOf]
-    public static class VVGameConditionDefOf
-    {
-        public static GameConditionDef VV_Rainmaker;
     }
 }

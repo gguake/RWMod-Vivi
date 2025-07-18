@@ -12,7 +12,8 @@ namespace VVRace
 
         public override void Complete(EverflowerRitualReservation reservation)
         {
-            reservation.flower.Map.weatherDecider.StartNextWeather();
+            var weather = DefDatabase<WeatherDef>.AllDefs.RandomElement();
+            reservation.flower.Map.weatherManager.TransitionTo(weather);
 
             if (reservation.ritualDef.effectOnComplete != null)
             {

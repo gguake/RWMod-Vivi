@@ -26,7 +26,7 @@
         <_DistortionScale>0.5</_DistortionScale>
         <_Intensity>3</_Intensity>
       </shaderParameters>
-      <drawSize>(6, 6)</drawSize>
+      <drawSize>(5, 5)</drawSize>
     </graphicData>
   </ThingDef>
   <ThingDef ParentName="MoteBase">
@@ -49,7 +49,7 @@
         <_distortionTint>(0.15, 0, 0, 0)</_distortionTint>
         <_pulseSpeed>5</_pulseSpeed>
       </shaderParameters>
-      <drawSize>5</drawSize>
+      <drawSize>4</drawSize>
     </graphicData>
   </ThingDef>
 
@@ -276,7 +276,7 @@
     <growthRate>11</growthRate>
     <drawOffscreen>true</drawOffscreen>
     <graphicData>
-      <texPath>Things/Mote/RedLineGlow</texPath>
+      <texPath>VFX/VV_ManaPulse</texPath>
       <graphicClass>Graphic_FleckPulse</graphicClass>
       <shaderType>MoteMultiplyAddCircular</shaderType>
       <shaderParameters>
@@ -318,13 +318,6 @@
         <spawnLocType>OnSource</spawnLocType>
         <absoluteAngle>true</absoluteAngle>
         <rotation>0~0</rotation>
-      </li>
-      <li>
-        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
-        <moteDef>VV_Mote_ManawaveFlash</moteDef>
-        <burstCount>1</burstCount>
-        <spawnLocType>OnSource</spawnLocType>
-        <scale>24</scale>
       </li>
     </children>
   </EffecterDef>
