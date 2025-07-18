@@ -6,7 +6,14 @@
     <reportString>attuning TargetA.</reportString>
     <casualInterruptible>false</casualInterruptible>
     <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
-    <overrideFlyChance>1</overrideFlyChance>
+  </JobDef>
+
+  <JobDef>
+    <defName>VV_MoveEverflower</defName>
+    <driverClass>VVRace.JobDriver_EverflowerSimpleRitual</driverClass>
+    <reportString>attuning TargetA to move position.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
   </JobDef>
 
   <JobDef>
@@ -15,7 +22,6 @@
     <reportString>attuning TargetA to change weather.</reportString>
     <casualInterruptible>false</casualInterruptible>
     <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
-    <overrideFlyChance>1</overrideFlyChance>
   </JobDef>
 
   <JobDef>
@@ -42,6 +48,5 @@
     <reportString>attuning TargetA to emit manawave.</reportString>
     <casualInterruptible>false</casualInterruptible>
     <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
-    <overrideFlyChance>1</overrideFlyChance>
   </JobDef>
 </Defs>
