@@ -7,11 +7,14 @@ namespace VVRace
     {
         public bool allowSelectModGenes = false;
 
+        public float royalJellyMultiplier = 1f;
+
         public override void ExposeData()
         {
             base.ExposeData();
 
             Scribe_Values.Look(ref allowSelectModGenes, "allowSelectModGenes");
+            Scribe_Values.Look(ref royalJellyMultiplier, "royalJellyMultiplier");
         }
     }
 
@@ -33,6 +36,13 @@ namespace VVRace
                 LocalizeString_Etc.VV_ModSettings_AllowSelectModGenes.Translate(),
                 ref _settings.allowSelectModGenes,
                 LocalizeString_Etc.VV_ModSettings_AllowSelectModGenesDesc.Translate());
+
+            _settings.royalJellyMultiplier = listing.SliderLabeled(
+                LocalizeString_Etc.VV_ModSettings_RoyalJellyNeedMultiplierDesc.Translate(), 
+                _settings.royalJellyMultiplier, 
+                0.1f, 
+                10f, 
+                tooltip: LocalizeString_Etc.VV_ModSettings_RoyalJellyNeedMultiplierDesc.Translate());
 
             listing.End();
 

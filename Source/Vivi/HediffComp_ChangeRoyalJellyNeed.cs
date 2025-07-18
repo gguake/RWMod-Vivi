@@ -1,4 +1,5 @@
 ﻿using RimWorld;
+using System.Security.Cryptography;
 using Verse;
 
 namespace VVRace
@@ -15,6 +16,13 @@ namespace VVRace
 
     public class HediffComp_ChangeRoyalJellyNeed : HediffComp
     {
+        private VVRaceModSettings _modSettingCache;
+
+        public HediffComp_ChangeRoyalJellyNeed()
+        {
+            _modSettingCache = LoadedModManager.GetMod<VVRaceMod>().GetSettings<VVRaceModSettings>();
+        }
+
         private Need _needCached;
         public Need Need
         {
@@ -36,7 +44,7 @@ namespace VVRace
             var need = Need;
             if (need != null)
             {
-                need.CurLevelPercentage += Props.percentPerDay / 60000f * (Pawn.ageTracker.BiologicalTicksPerTick);
+                need.CurLevelPercentage += Props.percentPerDay / 60000f * (Pawn.ageTracker.BiologicalTicksPerTick) * _modSettingCache.royalJellyMultiplier;
             }
         }
     }
