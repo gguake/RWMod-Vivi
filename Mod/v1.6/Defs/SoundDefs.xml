@@ -34,7 +34,7 @@
             <clipPath>SFX/VV_Manawave</clipPath>
           </li>
         </grains>
-        <volumeRange>60</volumeRange>
+        <volumeRange>70</volumeRange>
         <pitchRange>0.9~1.1</pitchRange>
       </li>
     </subSounds>
@@ -83,7 +83,7 @@
             <clipPath>SFX/VV_EverflowerRitualComplete</clipPath>
           </li>
         </grains>
-        <volumeRange>70</volumeRange>
+        <volumeRange>80</volumeRange>
         <distRange>5~30</distRange>
       </li>
     </subSounds>
@@ -100,7 +100,7 @@
             <clipPath>SFX/VV_Fairyfication</clipPath>
           </li>
         </grains>
-        <volumeRange>70</volumeRange>
+        <volumeRange>80</volumeRange>
         <pitchRange>0.9~1.1</pitchRange>
       </li>
     </subSounds>
@@ -117,7 +117,7 @@
             <clipPath>SFX/VV_UndoFairyfication</clipPath>
           </li>
         </grains>
-        <volumeRange>70</volumeRange>
+        <volumeRange>80</volumeRange>
         <pitchRange>0.9~1.1</pitchRange>
       </li>
     </subSounds>
