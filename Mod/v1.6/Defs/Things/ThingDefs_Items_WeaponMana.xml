@@ -52,6 +52,7 @@
         <breathFriendlyFireSafeDistance>2.9</breathFriendlyFireSafeDistance>
         <propagationSpeed>10</propagationSpeed>
 
+        <soundCast>VV_Steamthrower</soundCast>
         <targetParams>
           <canTargetLocations>true</canTargetLocations>
         </targetParams>
@@ -132,7 +133,7 @@
     <statBases>
       <WorkToMake>35000</WorkToMake>
       <Mass>7</Mass>
-      <RangedWeapon_Cooldown>3.9</RangedWeapon_Cooldown>
+      <RangedWeapon_Cooldown>0.9</RangedWeapon_Cooldown>
       <VV_RangedWeapon_ManaCost>150</VV_RangedWeapon_ManaCost>
     </statBases>
     <relicChance>0</relicChance>
@@ -153,9 +154,9 @@
         <hasStandardCommand>true</hasStandardCommand>
         <defaultProjectile>VV_Bullet_Snowman</defaultProjectile>
         <forcedMissRadius>1.9</forcedMissRadius>
-        <warmupTime>2.7</warmupTime>
+        <warmupTime>3.8</warmupTime>
         <ai_AvoidFriendlyFireRadius>3</ai_AvoidFriendlyFireRadius>
-        <range>30.9</range>
+        <range>33.9</range>
         <soundCast>Shot_IncendiaryLauncher</soundCast>
         <soundCastTail>GunTail_Heavy</soundCastTail>
         <targetParams>

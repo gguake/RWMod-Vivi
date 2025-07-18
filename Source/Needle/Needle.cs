@@ -1,5 +1,6 @@
 ﻿using RimWorld;
 using RPEF;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Verse;
@@ -65,6 +66,7 @@ namespace VVRace
         private float _totalMoveDistance;
         private float _curMoveDistance;
         private bool _isReturning;
+        private Dictionary<int, int> _attackedCounter = new Dictionary<int, int>();
 
         public override Vector3 DrawPos => _realPosition;
 
@@ -90,6 +92,8 @@ namespace VVRace
             Scribe_Values.Look(ref _totalMoveDistance, "totalMoveDistance");
             Scribe_Values.Look(ref _curMoveDistance, "curMoveDistance");
             Scribe_Values.Look(ref _isReturning, "isReturning");
+
+            Scribe_Collections.Look(ref _attackedCounter, "attackedCounter", LookMode.Value, LookMode.Value);
         }
 
         public override void Launch(Thing launcher, Vector3 origin, LocalTargetInfo usedTarget, LocalTargetInfo intendedTarget, ProjectileHitFlags hitFlags, bool preventFriendlyFire = false, Thing equipment = null, ThingDef targetCoverDef = null)
@@ -232,6 +236,15 @@ namespace VVRace
 
                 dinfo.SetWeaponQuality(equipmentQuality);
                 hitThing.TakeDamage(dinfo).AssociateWithLog(battleLogEntry_RangedImpact);
+
+                if (_attackedCounter.TryGetValue(hitThing.thingIDNumber, out var count))
+                {
+                    _attackedCounter[hitThing.thingIDNumber] = count++;
+                }
+                else
+                {
+                    _attackedCounter.Add(hitThing.thingIDNumber, 1);
+                }
             }
         }
 
@@ -276,7 +289,10 @@ namespace VVRace
                     
                     return true;
                 },
-                priorityGetter: (Thing t) => Mathf.Abs((int)((t.Position.ToVector3() - targetSearchPosition).sqrMagnitude - tmp)) - launcher.Position.DistanceToSquared(t.Position));
+                priorityGetter: (Thing t) => 
+                    (_attackedCounter.TryGetValue(t.thingIDNumber, out var attackedCount) ? attackedCount * -12 : 0) + 
+                    Mathf.Abs((int)((t.Position.ToVector3() - targetSearchPosition).sqrMagnitude - tmp)) - 
+                    launcher.Position.DistanceToSquared(t.Position));
 
             if (target != null)
             {

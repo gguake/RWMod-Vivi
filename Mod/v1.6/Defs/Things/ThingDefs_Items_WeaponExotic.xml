@@ -209,16 +209,16 @@
         <capacities>
           <li>Stab</li>
         </capacities>
-        <power>7</power>
+        <power>9</power>
         <armorPenetration>0.24</armorPenetration>
         <cooldownTime>0.5</cooldownTime>
       </li>
     </tools>
     
     <costList>
-      <Plasteel>150</Plasteel>
+      <Plasteel>160</Plasteel>
       <VV_TitanicHornetWing>4</VV_TitanicHornetWing>
-      <VV_Lifestrand>100</VV_Lifestrand>
+      <VV_Lifestrand>120</VV_Lifestrand>
     </costList>
     
     <recipeMaker>
