@@ -23,6 +23,7 @@
         public const string VV_Inspector_GrowingArcanePlantReady = nameof(VV_Inspector_GrowingArcanePlantReady);
         public const string VV_Inspector_GrowingArcanePlantProgress = nameof(VV_Inspector_GrowingArcanePlantProgress);
 
+        public const string VV_Inspector_AttunementReserved = nameof(VV_Inspector_AttunementReserved);
         public const string VV_Inspector_EverflowerAttunementState = nameof(VV_Inspector_EverflowerAttunementState);
     }
 }

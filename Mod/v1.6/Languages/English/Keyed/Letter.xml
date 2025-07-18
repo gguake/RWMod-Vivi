@@ -15,13 +15,20 @@
 \nThey cannot pass through doors, so hiding behind walls is safe. They will indiscriminately hunt the nearest targets, so it is advisable to hide if you lack adequate defenses. The swarm will hunt everything moving in the area and will leave on its own after a few days.</VV_Letter_IncidentHornetSwarmArrived>
 
 <VV_Letter_LinkeverflowerLabel>Everflower attuned</VV_Letter_LinkeverflowerLabel>
-<VV_Letter_Linkeverflower>{PAWN_labelShort} has formed an attunement link with an everflower. While an attuned royal vivi stays in an area containing environment mana, a small amount is absorbed, slowly strengthening the link; as it grows stronger, the vivi gradually gains the ability to wield the everflowers mana.
-\nAttuned royal vivi takes reduced incoming damage from all sources, but any damage that would hit the everflower is instead redirected to the linked vivi. The link endures until either partner dies; however, if they become very far apart or the vivi is blocked, the bond weakens and its effects—and related abilities—are suspended.
-\nIf the everflower is destroyed, the vivi's attunement link is weakened but not lost, allowing the vivi to attune to a new everflower and continue the bond.</VV_Letter_Linkeverflower>
+<VV_Letter_Linkeverflower>{PAWN_labelShort} has attuned with the Everflower, establishing a mental link. As the Everflower's attune rank rises, you gain various beneficial effects and can use the Everflower's abilities.
+\nThe Everflower draws environment mana through the Royal Vivi, and the attune link strengthens whenever it absorbs mana or the attuned Royal Vivi performs an additional Attune Link Ritual.</VV_Letter_Linkeverflower>
 
-<VV_Letter_EverflowerAttumentLevelUpLabel>Attunement: {LEVEL} level</VV_Letter_EverflowerAttumentLevelUpLabel>
-<VV_Letter_EverflowerAttumentLevelUp>everflower's attunement has strengthened.</VV_Letter_EverflowerAttumentLevelUp>
+<VV_Letter_EverflowerAttumentLevelUpLabel>Attunement: {LEVEL} rank</VV_Letter_EverflowerAttumentLevelUpLabel>
+<VV_Letter_EverflowerAttumentLevelUp>everflower's attunement has strengthened. The following attunement rituals are now available.</VV_Letter_EverflowerAttumentLevelUp>
 
 <VV_Letter_FairyficationCompleteLabel>Fairyfication: {TARGET_nameDef}</VV_Letter_FairyficationCompleteLabel>
-<VV_Letter_FairyficationComplete></VV_Letter_FairyficationComplete>
+<VV_Letter_FairyficationComplete>{CASTER_nameDef} has fairyficated {TARGET_nameDef}. The fairyficated vivi shrinks to a tiny form and follows the Royal Vivi.
+\nA fairy vivi does not experience time, has no needs, and cannot be attacked, but if the royal vivi dies it disperses and disappears.
+\nThe fairy vivi usually does nothing but trail the royal vivi, though it may occasionally lend help.
+\n\nA fairy vivi can be returned to its original form through the returning vivi ritual, but this leaves lingering after-effects and while they persist the vivi cannot be fairyficated again.</VV_Letter_FairyficationComplete>
+
+<VV_Letter_IncidentHornetAssaultArrivedLabel>Titanic Hornet Swarm</VV_Letter_IncidentHornetAssaultArrivedLabel>
+<VV_Letter_IncidentHornetAssaultArrived>A frenzied swarm of titanic hornets has appeared. They will roam around and attack any life forms they encounter. Titanic hornets are very fast and durable, difficult to take down with conventional weapons, but vulnerable to fire and poison.
+\nThey are drawn by mana waves, exhibiting strong aggression. Unlike typical titanic hornet swarms, they will attack everything in sight until all living beings and structures are destroyed.</VV_Letter_IncidentHornetAssaultArrived>
+
 </LanguageData>

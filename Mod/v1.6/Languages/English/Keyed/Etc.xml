@@ -18,10 +18,13 @@
 <VV_ModSettings_AllowSelectModGenes>Allow added genes in mods</VV_ModSettings_AllowSelectModGenes>
 <VV_ModSettings_AllowSelectModGenesDesc>Sets whether Vivi can use genes added in other mods when given random genes.</VV_ModSettings_AllowSelectModGenesDesc>
 
+<VV_ModSettings_RoyalJellyNeedMultiplier>Royal jelly needs multiplier</VV_ModSettings_RoyalJellyNeedMultiplier>
+<VV_ModSettings_RoyalJellyNeedMultiplierDesc>Sets the rate at which a young Vivi's desire for royal jelly increases when consumed. The higher the rate, the less royal jelly is consumed to become a royal Vivi.</VV_ModSettings_RoyalJellyNeedMultiplierDesc>
+
 <VV_Thing_Seed>{0} seed</VV_Thing_Seed>
 <VV_Thing_SeedDesc>A seed of {0}. When planted in soil or an arcane plant pot, it becomes a seedling, which will eventually grow into {0}.\nArcane plants require both mana and nutrients to grow.
 \nMana is absorbed from the environment mana and can also be supplied by nearby mana emitter or other arcane plants that produce mana.
-\nutrients continuously decrease regardless of mana, so a person must regularly apply mana fertilizer. If left without sufficient nutrients for too long, the seedling will die.</VV_Thing_SeedDesc>
+\nNutrients continuously decrease regardless of mana, so a person must regularly apply mana fertilizer. If left without sufficient nutrients for too long, the seedling will die.</VV_Thing_SeedDesc>
 
 <VV_Thing_Seedling>{0} seedling</VV_Thing_Seedling>
 
@@ -31,5 +34,17 @@
 <VV_FailReason_PawnPsychicSensitivity>low psychic sensitivity</VV_FailReason_PawnPsychicSensitivity>
 <VV_FailReason_RitualCooldown>attunement on cooldown. It will be available in {0}.</VV_FailReason_RitualCooldown>
 
+<VV_FailReason_HasNoFairyVivi>No fairy Vivi following</VV_FailReason_HasNoFairyVivi>
+<VV_FailReason_FairyViviFull>Fairy Vivi limit reached</VV_FailReason_FairyViviFull>
+
 <VV_Targetter_TargetEverflowerRitual>Target of {RITUAL}: {TARGET_labelShort}</VV_Targetter_TargetEverflowerRitual>
+<VV_Targetter_InvalidTarget_NotVivi>Target of {RITUAL}: Not vivi</VV_Targetter_InvalidTarget_NotVivi>
+<VV_Targetter_InvalidTarget_CannotTargetRoyalVivi>Target of {RITUAL}: Cannot target royal Vivi</VV_Targetter_InvalidTarget_CannotTargetRoyalVivi>
+<VV_Targetter_InvalidTarget_NotMyChild>Target of {RITUAL}: Not my child</VV_Targetter_InvalidTarget_NotMyChild>
+<VV_Targetter_InvalidTarget_NotAdult>Target of {RITUAL}: Not adult</VV_Targetter_InvalidTarget_NotAdult>
+<VV_Targetter_InvalidTarget_FairyficationSickness>Target of {RITUAL}: Fairyfication sickness present</VV_Targetter_InvalidTarget_FairyficationSickness>
+
+<VV_TextMote_GatherFailed>Gathering failed due to mishap</VV_TextMote_GatherFailed>
+<VV_TextMote_DamageBlockedByFairy>Protected by fairy</VV_TextMote_DamageBlockedByFairy>
+
 </LanguageData>

@@ -52,6 +52,10 @@
       <rulesStrings>
         <li>r_name->[colors] hive</li>
         <li>r_name->hive [position] [nature]</li>
+        <li>r_name->honey storage [position] [nature]</li>
+        <li>r_name->pollen storage [position] [nature]</li>
+        <li>r_name->vivi town [position] [nature]</li>
+        <li>r_name->[colors] arcane plant farm</li>
       </rulesStrings>
       <rulesFiles>
         <li>colors->Words/Nouns/Colors</li>

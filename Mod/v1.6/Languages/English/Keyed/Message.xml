@@ -7,4 +7,12 @@
 
 <VV_Message_LinkEverflowerComplete>Attunement to the Everflower of {PAWN_nameDef} has been established.</VV_Message_LinkEverflowerComplete>
 <VV_Message_LinkDisconnectedEverflower>Everflower attuned to {PAWN_nameDef} was destroyed, severing the attunement.</VV_Message_LinkDisconnectedEverflower>
+<VV_Message_ReserveEverflowerCancelled></VV_Message_ReserveEverflowerCancelled>
+
+<VV_Message_AttunementEverflowerComplete>{PAWN_nameDef}’s everflower attunement ritual has strengthened the attune link.</VV_Message_AttunementEverflowerComplete>
+<VV_Message_PollenWaveAfterAttunement>Everflower attunement ritual has left the surroundings coated in pollen.</VV_Message_PollenWaveAfterAttunement>
+<VV_Message_PlantGrownAfterAttunement>Everflower attunement ritual has left the plants in the area flourishing.</VV_Message_PlantGrownAfterAttunement>
+
+<VV_Message_AttunementRitualComplete>Attunement ritual '{RITUAL}' has been completed.</VV_Message_AttunementRitualComplete>
+
 </LanguageData>

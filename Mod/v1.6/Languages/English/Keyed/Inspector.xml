@@ -13,8 +13,8 @@
 <VV_Inspector_PlantStoredMana>Stored Mana: {0}/{1}</VV_Inspector_PlantStoredMana>
 <VV_Inspector_PlantActive>Active</VV_Inspector_PlantActive>
 <VV_Inspector_PlantInactive>Inactive</VV_Inspector_PlantInactive>
-<VV_Inspector_PlantEmitMana>Emitting Env.Mana</VV_Inspector_PlantEmitMana>
-<VV_Inspector_PlantAbsorbMana>Absorbing Env.Mana</VV_Inspector_PlantAbsorbMana>
+<VV_Inspector_PlantEmitMana>Emitting Env. Mana</VV_Inspector_PlantEmitMana>
+<VV_Inspector_PlantAbsorbMana>Absorbing Env. Mana</VV_Inspector_PlantAbsorbMana>
 
 <VV_Inspector_ShootusWeaponReserved>Reserved: {0}</VV_Inspector_ShootusWeaponReserved>
 <VV_Inspector_ShootusWeaponEquipped>Equipped: {0}</VV_Inspector_ShootusWeaponEquipped>
@@ -25,5 +25,6 @@
 <VV_Inspector_GrowingArcanePlantReady>Prepare to grow {0}</VV_Inspector_GrowingArcanePlantReady>
 <VV_Inspector_GrowingArcanePlantProgress>Growing {1} progress: {0}</VV_Inspector_GrowingArcanePlantProgress>
 
+<VV_Inspector_AttunementReserved>{RITUAL} reserved: {PAWN_nameDef}</VV_Inspector_AttunementReserved>
 <VV_Inspector_EverflowerAttunementState>Attunement: Level {LEVEL} ({EXP})</VV_Inspector_EverflowerAttunementState>
 </LanguageData>

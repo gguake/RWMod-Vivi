@@ -12,11 +12,6 @@
         public const string VV_Command_ActivateShieldAlreadyActivated = nameof(VV_Command_ActivateShieldAlreadyActivated);
         public const string VV_Command_ActivateShieldNotEnoughEnergy = nameof(VV_Command_ActivateShieldNotEnoughEnergy);
 
-        public const string VV_Command_NewGrowArcanePlantBill = nameof(VV_Command_NewGrowArcanePlantBill);
-        public const string VV_Command_NewGrowArcanePlantBillDesc = nameof(VV_Command_NewGrowArcanePlantBillDesc);
-        public const string VV_Command_CancelGrowArcanePlantBill = nameof(VV_Command_CancelGrowArcanePlantBill);
-        public const string VV_Command_CancelGrowArcanePlantBillDesc = nameof(VV_Command_CancelGrowArcanePlantBillDesc);
-
         public const string VV_Command_ToggleLayEgg = nameof(VV_Command_ToggleLayEgg);
         public const string VV_Command_ToggleLayEggDesc = nameof(VV_Command_ToggleLayEggDesc);
 

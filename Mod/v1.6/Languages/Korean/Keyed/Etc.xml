@@ -18,6 +18,9 @@
 <VV_ModSettings_AllowSelectModGenes>모드에서 추가된 유전자 허용</VV_ModSettings_AllowSelectModGenes>
 <VV_ModSettings_AllowSelectModGenesDesc>비비에게 랜덤한 유전자가 주어질때 다른 모드에서 추가된 유전자를 사용가능한지 여부를 설정합니다.</VV_ModSettings_AllowSelectModGenesDesc>
 
+<VV_ModSettings_RoyalJellyNeedMultiplier>로열 젤리 충전량 배율</VV_ModSettings_RoyalJellyNeedMultiplier>
+<VV_ModSettings_RoyalJellyNeedMultiplierDesc>어린 비비가 로열 젤리를 섭취했을때 관련 욕구가 증가하는 비율을 설정합니다. 높을수록 로열 비비가 되는데 더 적은 로열 젤리가 소모됩니다.</VV_ModSettings_RoyalJellyNeedMultiplierDesc>
+
 <VV_Thing_Seed>{0} 씨앗</VV_Thing_Seed>
 <VV_Thing_SeedDesc>{0}의 씨앗입니다. 땅이나 마법 식물 화분에 심으면 모종이 되며, 모종이 완전히 자라면 {0}이(가) 됩니다.\n마법 식물이 성장하려면 마나와 양분이 모두 공급되야 합니다.
 \n마나는 환경 마나를 흡수하므로 주변에 마나 발생기를 설치하거나 마나를 생산하는 마법 식물로부터 공급할 수 있습니다.

@@ -288,9 +288,17 @@ namespace VVRace
 
             if (level > 1)
             {
+                var sb = new StringBuilder();
+                sb.Append(LocalizeString_Letter.VV_Letter_EverflowerAttumentLevelUp.Translate(level.Named("LEVEL")));
+                sb.Append("\n\n");
+                foreach (var ritualDef in DefDatabase<EverflowerRitualDef>.AllDefsListForReading.Where(v => v.attuneLevel == level))
+                {
+                    sb.AppendInNewLine($"- {ritualDef.LabelCap}");
+                }
+
                 Find.LetterStack.ReceiveLetter(
                     LocalizeString_Letter.VV_Letter_EverflowerAttumentLevelUpLabel.Translate(level.Named("LEVEL")),
-                    LocalizeString_Letter.VV_Letter_EverflowerAttumentLevelUp.Translate(level.Named("LEVEL")),
+                    sb.ToString(),
                     LetterDefOf.PositiveEvent);
             }
 

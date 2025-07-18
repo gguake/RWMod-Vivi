@@ -6,8 +6,7 @@
 <VV_Gizmo_ManaStorageHeader>마나 보유량</VV_Gizmo_ManaStorageHeader>
 <VV_Gizmo_ManaStorageTooltip>현재 {THING}이(가) 보유한 마나량입니다.
 \n마법 식물들이 방출한 환경 마나를 흡수해 마나를 충전할 수 있으며 환경 마나가 분포한 지역에 위치하면 천천히 마나를 흡수합니다.
-\n현재 위치에서 하루에 {DAILYMANA}의 환경 마나를 흡수하고 있습니다.
-</VV_Gizmo_ManaStorageTooltip>
+\n현재 위치에서 하루에 {DAILYMANA}의 환경 마나를 흡수하고 있습니다.</VV_Gizmo_ManaStorageTooltip>
 
 <VV_Gizmo_LinkFailReason_AlreadyLinked>이미 교감한 영원꽃 있음</VV_Gizmo_LinkFailReason_AlreadyLinked>
 <VV_Gizmo_LinkFailReason_PsychicSensitivityRequire>정신 감응력 부족</VV_Gizmo_LinkFailReason_PsychicSensitivityRequire>

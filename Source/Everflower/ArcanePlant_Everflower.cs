@@ -1,6 +1,7 @@
 ﻿using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using UnityEngine;
 using Verse;
 
@@ -202,6 +203,19 @@ namespace VVRace
                     }
                 }
             }
+        }
+
+        public override string GetInspectString()
+        {
+            var sb = new StringBuilder(base.GetInspectString());
+            if (CurReservationInfo != null)
+            {
+                sb.AppendInNewLine(LocalizeString_Inspector.VV_Inspector_AttunementReserved.Translate(
+                    CurReservationInfo.ritualDef.LabelCap.Named("RITUAL"), 
+                    CurReservationInfo.casterPawn.Named("CASTER")));
+            }
+
+            return sb.ToString();
         }
 
         public bool CanGatherByPawn(Pawn pawn, RecipeDef_Gathering recipe)

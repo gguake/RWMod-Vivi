@@ -6,11 +6,6 @@
 <VV_Command_EquipWeaponDesc>Equips the selected weapon to the gunholder. Melee weapons or biocoded weapons cannot be equipped.</VV_Command_EquipWeaponDesc>
 <VV_Command_UnequipWeapon>Unequip Weapon</VV_Command_UnequipWeapon>
 
-<VV_Command_NewGrowArcanePlantBill>Start Growing New Arcane Plant</VV_Command_NewGrowArcanePlantBill>
-<VV_Command_NewGrowArcanePlantBillDesc>Starts the cultivation of a new arcane plant.</VV_Command_NewGrowArcanePlantBillDesc>
-<VV_Command_CancelGrowArcanePlantBill>Cancel Arcane Plant Cultivation</VV_Command_CancelGrowArcanePlantBill>
-<VV_Command_CancelGrowArcanePlantBillDesc>Cancels the scheduled arcane plant cultivation. If cultivation has already begun, the spent resources are non-refundable.</VV_Command_CancelGrowArcanePlantBillDesc>
-
 <VV_Command_ToggleLayEgg>Activate spawn egg</VV_Command_ToggleLayEgg>
 <VV_Command_ToggleLayEggDesc>Sets whether or not this royal vivi spawns eggs.</VV_Command_ToggleLayEggDesc>
 
