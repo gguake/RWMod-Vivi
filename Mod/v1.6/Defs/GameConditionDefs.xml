@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <GameConditionDef>
+    <defName>VV_EverflowerWeatherControl</defName>
+    <conditionClass>VV_GameCondition_ForceWeather</conditionClass>
+    <label>forced weather</label>
+    <description>everflower is forcing the weather.</description>
+    <canBePermanent>false</canBePermanent>
+    <natural>false</natural>
+  </GameConditionDef>
+</Defs>

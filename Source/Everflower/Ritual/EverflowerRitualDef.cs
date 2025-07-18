@@ -37,8 +37,13 @@ namespace VVRace
 
         public int globalCooldown;
 
+        public SoundDef soundOnCasting;
+
         public EffecterDef effectOnCasting;
         public EffecterDef effectOnComplete;
+
+        public float incidentProb;
+        public IntRange incidentDelayTicks;
 
         public override void PostLoad()
         {

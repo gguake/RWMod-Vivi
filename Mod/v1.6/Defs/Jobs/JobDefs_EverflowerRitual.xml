@@ -20,7 +20,7 @@
 
   <JobDef>
     <defName>VV_Fairyfication</defName>
-    <driverClass>VVRace.JobDriver_Fairyfication</driverClass>
+    <driverClass>VVRace.JobDriver_EverflowerCarryPawn</driverClass>
     <reportString>transforming TargetB to fairy at TargetA.</reportString>
     <casualInterruptible>false</casualInterruptible>
     <allowOpportunisticPrefix>true</allowOpportunisticPrefix>

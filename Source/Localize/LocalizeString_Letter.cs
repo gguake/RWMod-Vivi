@@ -18,5 +18,8 @@
 
         public const string VV_Letter_FairyficationCompleteLabel = nameof(VV_Letter_FairyficationCompleteLabel);
         public const string VV_Letter_FairyficationComplete = nameof(VV_Letter_FairyficationComplete);
+
+        public const string VV_Letter_IncidentHornetAssaultArrivedLabel = nameof(VV_Letter_IncidentHornetAssaultArrivedLabel);
+        public const string VV_Letter_IncidentHornetAssaultArrived = nameof(VV_Letter_IncidentHornetAssaultArrived);
     }
 }

@@ -26,13 +26,13 @@ namespace VVRace
 
         protected override IEnumerable<Toil> MakeNewToils()
         {
-            var ritualDef = Everflower.CurReservationInfo.ritualDef;
+            var ritualDef = Everflower?.CurReservationInfo?.ritualDef;
             this.FailOnDestroyedNullOrForbidden(EverflowerIndex);
-            this.FailOn(() => Everflower.CurReservationInfo == null || Everflower.CurReservationInfo.casterPawn != pawn || !Everflower.CurReservationInfo.ritualDef.Worker.CanRitual(Everflower, pawn));
+            this.FailOn(() => ritualDef == null || Everflower.CurReservationInfo == null || Everflower.CurReservationInfo.casterPawn != pawn || !Everflower.CurReservationInfo.ritualDef.Worker.CanRitual(Everflower, pawn));
 
             yield return Toils_Goto.GotoThing(EverflowerIndex, PathEndMode.Touch);
 
-            var workAmount = ritualDef.jobWorkAmount;
+            var workAmount = ritualDef?.jobWorkAmount ?? 1;
             var toil = ToilMaker.MakeToil("JobDriver_AttunementEverflower_Work")
                 .WithTickIntervalAction((delta) =>
                 {
@@ -43,10 +43,14 @@ namespace VVRace
                     }
                 })
                 .WithProgressBar(EverflowerIndex, () => _workDone / workAmount, interpolateBetweenActorAndTarget: true)
-                //.PlaySustainerOrSound()
                 .WithDefaultCompleteMode(ToilCompleteMode.Never);
 
-            if (ritualDef.effectOnCasting != null)
+            if (ritualDef?.soundOnCasting != null)
+            {
+                toil = toil.PlaySustainerOrSound(ritualDef.soundOnCasting);
+            }
+
+            if (ritualDef?.effectOnCasting != null)
             {
                 toil = toil.WithEffect(ritualDef.effectOnCasting, EverflowerIndex);
             }

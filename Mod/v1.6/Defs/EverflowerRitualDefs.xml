@@ -114,5 +114,8 @@
 
     <effectOnCasting>VV_EverflowerLink</effectOnCasting>
     <effectOnComplete>VV_Manawave</effectOnComplete>
+
+    <incidentProb>1</incidentProb>
+    <incidentDelayTicks>90000~900000</incidentDelayTicks>
   </VVRace.EverflowerRitualDef>
 </Defs>

@@ -7,7 +7,7 @@ namespace VVRace
     public class EverflowerRitualWorker_Manawave : EverflowerRitualWorker_SimpleJob
     {
         private const float RadiusSqr = 55f * 55f;
-        private const float Mana = 120f;
+        private const float Mana = 200f;
 
         public EverflowerRitualWorker_Manawave(EverflowerRitualDef def) : base(def)
         {
@@ -42,6 +42,20 @@ namespace VVRace
                 reservation.casterPawn,
                 propagationSpeed: 0.5f,
                 doSoundEffects: false);
+
+            if (Rand.Chance(_def.incidentProb))
+            {
+                var incidentParms = new IncidentParms();
+                incidentParms.target = reservation.flower.Map;
+                incidentParms.points = StorytellerUtility.DefaultThreatPointsNow(reservation.flower.Map) * Rand.Range(1.5f, 3f);
+
+                if (VVIncidentDefOf.VV_TitanicHornetAssault.Worker.CanFireNow(incidentParms))
+                {
+                    Find.Storyteller.incidentQueue.Add(VVIncidentDefOf.VV_TitanicHornetAssault, _def.incidentDelayTicks.RandomInRange, incidentParms);
+
+                    VVIncidentDefOf.VV_TitanicHornetAssault.Worker.TryExecute(incidentParms);
+                }
+            }
 
             base.Complete(reservation);
         }

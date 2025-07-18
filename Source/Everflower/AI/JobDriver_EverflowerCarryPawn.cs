@@ -5,7 +5,7 @@ using Verse.AI;
 
 namespace VVRace
 {
-    public class JobDriver_Fairyfication : JobDriver
+    public class JobDriver_EverflowerCarryPawn : JobDriver
     {
         private const TargetIndex EverflowerIndex = TargetIndex.A;
         private const TargetIndex TargetPawnIndex = TargetIndex.B;
@@ -36,17 +36,18 @@ namespace VVRace
 
         protected override IEnumerable<Toil> MakeNewToils()
         {
+            var ritualDef = Everflower?.CurReservationInfo?.ritualDef;
             this.FailOnDestroyedNullOrForbidden(EverflowerIndex);
             this.FailOnDestroyedNullOrForbidden(TargetPawnIndex);
-            this.FailOn(() => Everflower.CurReservationInfo == null || Everflower.CurReservationInfo.casterPawn != pawn || !Everflower.CurReservationInfo.ritualDef.Worker.CanRitual(Everflower, pawn));
+            this.FailOn(() => ritualDef == null || Everflower.CurReservationInfo == null || Everflower.CurReservationInfo.casterPawn != pawn || !ritualDef.Worker.CanRitual(Everflower, pawn));
 
             yield return Toils_Goto.GotoThing(TargetPawnIndex, PathEndMode.Touch);
 
             yield return Toils_Haul.StartCarryThing(TargetPawnIndex);
             yield return Toils_Goto.GotoThing(EverflowerIndex, PathEndMode.Touch);
 
-            var workAmount = Everflower.CurReservedRitual.jobWorkAmount;
-            yield return ToilMaker.MakeToil("JobDriver_Fairyfication_Work")
+            var workAmount = ritualDef?.jobWorkAmount ?? 1;
+            var toil = ToilMaker.MakeToil("JobDriver_EverflowerCarryPawn_Work")
                 .WithInitAction(() =>
                 {
                     pawn.pather.StopDead();
@@ -60,13 +61,23 @@ namespace VVRace
                     }
                 })
                 .WithProgressBar(TargetPawnIndex, () => _workDone / workAmount, interpolateBetweenActorAndTarget: true)
-                .WithEffect(() => VVEffecterDefOf.VV_EverflowerLink, TargetPawnIndex)
-                //.PlaySustainerOrSound()
                 .WithDefaultCompleteMode(ToilCompleteMode.Never);
+
+            if (ritualDef?.soundOnCasting != null)
+            {
+                toil = toil.PlaySustainerOrSound(ritualDef.soundOnCasting);
+            }
+
+            if (ritualDef?.effectOnCasting != null)
+            {
+                toil = toil.WithEffect(ritualDef.effectOnCasting, EverflowerIndex);
+            }
+
+            yield return toil;
 
             yield return Toils_General.DoAtomic(() =>
             {
-                Everflower.CurReservationInfo.ritualDef.Worker.Complete(Everflower.CurReservationInfo);
+                ritualDef.Worker.Complete(Everflower.CurReservationInfo);
             });
         }
     }

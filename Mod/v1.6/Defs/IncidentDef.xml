@@ -16,4 +16,21 @@
       <li>Scaria</li>
     </letterHyperlinkHediffDefs>
   </IncidentDef>
+  
+  <IncidentDef>
+    <defName>VV_TitanicHornetAssault</defName>
+    <label>hornet swarm</label>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <workerClass>VVRace.IncidentWorker_HornetAssault</workerClass>
+    <baseChance>0</baseChance>
+    <minRefireDays>15</minRefireDays>
+    <category>ThreatBig</category>
+    <pointsScaleable>true</pointsScaleable>
+    <tale>ManhunterPack</tale>
+    <letterHyperlinkHediffDefs>
+      <li>Scaria</li>
+    </letterHyperlinkHediffDefs>
+  </IncidentDef>
 </Defs>

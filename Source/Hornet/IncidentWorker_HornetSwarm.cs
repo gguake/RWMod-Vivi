@@ -42,6 +42,8 @@ namespace VVRace
             }
 
             var map = (Map)parms.target;
+            if (map.Biome.inVacuum || map.IsTempIncidentMap) { return false; }
+
             var viviCount = map.PlayerPawnsForStoryteller.Count(v => v.IsVivi());
             var points = parms.points * _curvePointFactor.Evaluate(viviCount);
             if (points < 1500) { return false; }
@@ -61,7 +63,7 @@ namespace VVRace
             }
 
             var viviCount = map.PlayerPawnsForStoryteller.Count(v => v.IsVivi());
-            var points = parms.points * _curvePointFactor.Evaluate(viviCount);
+            var points = parms.points * parms.pointMultiplier * _curvePointFactor.Evaluate(viviCount);
 
             var pawns = AggressiveAnimalIncidentUtility.GenerateAnimals(kindDef, map.Tile, points, parms.pawnCount);
             var rot = Rot4.FromAngleFlat((map.Center - spawnPosition).AngleFlat);

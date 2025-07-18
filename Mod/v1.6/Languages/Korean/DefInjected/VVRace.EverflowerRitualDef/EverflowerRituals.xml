@@ -12,7 +12,7 @@
 \n모든 종류의 교감 의식은 재사용 대기시간을 공유합니다.</VV_MoveEverflower.description>
 
 <VV_ChangeWeatherRitual.label>날씨 변경 기원</VV_ChangeWeatherRitual.label>
-<VV_ChangeWeatherRitual.description>영원꽃과 교감해 현재 지역의 날씨를 변경합니다. 어떤 날씨가 될지는 알 수 없으며 운이 나쁘면 아무 변화가 없을수도 있습니다.
+<VV_ChangeWeatherRitual.description>영원꽃과 교감해 현재 지역의 날씨를 변경합니다. 날씨가 달라지는 것은 확실하지만 이후에 어떤 날씨가 될지는 알 수 없습니다.
 \n모든 종류의 교감 의식은 재사용 대기시간을 공유합니다.</VV_ChangeWeatherRitual.description>
 
 <VV_Fairyfication.label>요정화</VV_Fairyfication.label>
@@ -27,7 +27,8 @@
 \n모든 종류의 교감 의식은 재사용 1대기시간을 공유합니다.</VV_UndoFairyfication.description>
 
 <VV_Manawave.label>마나 파동 방출</VV_Manawave.label>
-<VV_Manawave.description>영원꽃에 저장된 마나를 순간적으로 방출해 주변 넓은 영역에 엄청난 양의 환경 마나를 흐르게 합니다. 강력한 에너지 파동으로 인해 범위 내의 모든 대상이 잠깐 기절합니다.
+<VV_Manawave.description>영원꽃이 강력한 마나 파동을 방출해 범위 내의 모든 대상을 잠깐 기절시키고 주변을 엄청난 양의 환경 마나로 채웁니다.
+\n거대 말벌들은 이 마나 파동에 민감하게 반응하기에 거대 말벌 무리들이 습격해올 수도 있습니다.
 \n모든 종류의 교감 의식은 재사용 대기시간을 공유합니다.</VV_Manawave.description>
 
 </LanguageData>

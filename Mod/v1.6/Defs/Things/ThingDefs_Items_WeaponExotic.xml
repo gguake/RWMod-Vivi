@@ -17,10 +17,10 @@
     <statBases>
       <WorkToMake>50000</WorkToMake>
       <Mass>4</Mass>
-      <VV_MeleeWeapon_ManaCost>30</VV_MeleeWeapon_ManaCost>
+      <VV_MeleeWeapon_ManaCost>20</VV_MeleeWeapon_ManaCost>
     </statBases>
     <equippedStatOffsets>
-      <MoveSpeed>-0.8</MoveSpeed>
+      <MoveSpeed>-0.5</MoveSpeed>
     </equippedStatOffsets>
     <tradeNeverStack>true</tradeNeverStack>
     <relicChance>2</relicChance>

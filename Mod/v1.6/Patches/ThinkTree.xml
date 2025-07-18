@@ -34,6 +34,14 @@
                   </li>
                 </subNodes>
               </li>
+              <li Class="ThinkNode_ConditionalCanDoLordJobNow">
+                <subNodes>
+                  <!-- Lord directives -->
+                  <li Class="ThinkNode_Subtree">
+                    <treeDef>LordDutyConstant</treeDef>
+                  </li>
+                </subNodes>
+              </li>
               <li Class="ThinkNode_ConditionalExitTimedOut">
                 <subNodes>
                   <li Class="ThinkNode_Tagger">

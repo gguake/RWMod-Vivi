@@ -264,6 +264,8 @@ namespace VVRace
     public static class VVDutyDefOf
     {
         public static DutyDef VV_DefendViviBase;
+
+        public static DutyDef VV_TitanicHornetAssault;
     }
 
     [DefOf]
@@ -282,5 +284,18 @@ namespace VVRace
         public static LifeStageDef HumanlikeTeenager_Vivi;
         public static LifeStageDef HumanlikeTeenager;
         public static LifeStageDef HumanlikeAdult_Vivi;
+    }
+
+    [DefOf]
+    public static class VVIncidentDefOf
+    {
+        public static IncidentDef VV_TitanicHornetSwarm;
+        public static IncidentDef VV_TitanicHornetAssault;
+    }
+
+    [DefOf]
+    public static class VVGameConditionDefOf
+    {
+        public static GameConditionDef VV_EverflowerWeatherControl;
     }
 }
