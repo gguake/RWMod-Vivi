@@ -52,7 +52,6 @@
       <drawSize>4</drawSize>
     </graphicData>
   </ThingDef>
-
   <EffecterDef>
     <defName>VV_EverflowerLink</defName>
     <children>
@@ -240,32 +239,6 @@
     </children>
   </EffecterDef>
 
-  <!-- Fairyfication -->
-  <EffecterDef>
-    <defName>VV_FairyficationComplete</defName>
-    <children>
-      <li>
-        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
-        <moteDef>Mote_NewbornBecomeChildGlow</moteDef>
-        <rotation>0~0</rotation>
-        <absoluteAngle>true</absoluteAngle>
-        <attachToSpawnThing>true</attachToSpawnThing>
-        <spawnLocType>OnSource</spawnLocType>
-      </li>
-      <li>
-        <subEffecterClass>SubEffecter_SprayerChance</subEffecterClass>
-        <positionRadius>0.3</positionRadius>
-        <fleckDef>NewbornBecomeChildGlimmer</fleckDef>
-        <burstCount>1~3</burstCount>
-        <chancePerTick>0.5</chancePerTick>
-        <speed>0.2~0.4</speed>
-        <rotation>-45</rotation>
-        <angle>0</angle>
-        <spawnLocType>OnSource</spawnLocType>
-      </li>
-    </children>
-  </EffecterDef>
-
   <!-- Mana wave -->
   <FleckDef ParentName="FleckBase_Thrown">
     <defName>VV_Fleck_Manawave</defName>
@@ -449,6 +422,143 @@
         <burstCount>1</burstCount>
         <spawnLocType>OnSource</spawnLocType>
         <attachToSpawnThing>true</attachToSpawnThing>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <!-- Fairyfication -->
+  <ThingDef ParentName="MoteBase">
+    <defName>VV_Mote_VV_FairyficationCircle</defName>
+    <thingClass>MoteAttached</thingClass>
+    <altitudeLayer>MoteOverheadLow</altitudeLayer>
+    <mote>
+      <fadeInTime>0.05</fadeInTime>
+      <fadeOutTime>0.4</fadeOutTime>
+      <solidTime>0.05</solidTime>
+      <growthRate>4</growthRate>
+    </mote>
+    <graphicData>
+      <texPath>VFX/VV_RadiationDistortion</texPath>
+      <graphicClass>Graphic_MoteWithAgeSecs</graphicClass>
+      <color>(1, 0.9, 0.6, 1)</color>
+      <shaderType>MoteMultiplyAddCircular</shaderType>
+      <shaderParameters>
+        <_MultiplyTex>/VFX/VV_RadiationDistortion</_MultiplyTex>
+        <_texAScale>0.3</_texAScale>
+        <_texBScale>0.3</_texBScale>
+        <_texAScrollSpeed>0.5</_texAScrollSpeed>
+        <_texBScrollSpeed>-0.4</_texBScrollSpeed>
+        <_texAScaleDist>0</_texAScaleDist>
+        <_DistortionScale>0.3</_DistortionScale>
+        <_Intensity>1.5</_Intensity>
+      </shaderParameters>
+      <drawSize>(1.2, 1.2)</drawSize>
+    </graphicData>
+  </ThingDef>
+  <ThingDef ParentName="MoteBase">
+    <defName>VV_Mote_FairyficationFlash</defName>
+    <thingClass>MoteAttached</thingClass>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <mote>
+      <fadeInTime>0.01</fadeInTime>
+      <fadeOutTime>0.6</fadeOutTime>
+      <solidTime>0.4</solidTime>
+    </mote>
+    <graphicData>
+      <texPath>Things/Mote/BrightFlash</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <color>(1.0, 0.95, 0.7, 0.75)</color>
+      <drawSize>(2.2, 2.2)</drawSize>
+    </graphicData>
+  </ThingDef>
+  <EffecterDef>
+    <defName>VV_Fairyfication</defName>
+    <maintainTicks>120</maintainTicks>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <moteDef>VV_Mote_VV_FairyficationCircle</moteDef>
+        <spawnLocType>OnTarget</spawnLocType>
+        <ticksBetweenMotes>3</ticksBetweenMotes>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <moteDef>VV_Mote_FairyficationFlash</moteDef>
+        <spawnLocType>OnTarget</spawnLocType>
+        <ticksBetweenMotes>12</ticksBetweenMotes>
+      </li>
+    </children>
+  </EffecterDef>
+
+
+  <!-- UndoFairyfication -->
+  <ThingDef ParentName="MoteBase">
+    <defName>VV_Mote_VV_UndoFairyficationCircle</defName>
+    <thingClass>MoteAttached</thingClass>
+    <altitudeLayer>MoteOverheadLow</altitudeLayer>
+    <mote>
+      <fadeInTime>0.4</fadeInTime>
+      <fadeOutTime>0.05</fadeOutTime>
+      <solidTime>0.05</solidTime>
+      <growthRate>-3</growthRate>
+    </mote>
+    <graphicData>
+      <texPath>VFX/VV_RadiationDistortion</texPath>
+      <graphicClass>Graphic_MoteWithAgeSecs</graphicClass>
+      <color>(1, 0.9, 0.6, 1)</color>
+      <shaderType>MoteMultiplyAddCircular</shaderType>
+      <shaderParameters>
+        <_MultiplyTex>/VFX/VV_RadiationDistortion</_MultiplyTex>
+        <_texAScale>0.3</_texAScale>
+        <_texBScale>0.3</_texBScale>
+        <_texAScrollSpeed>0.5</_texAScrollSpeed>
+        <_texBScrollSpeed>-0.4</_texBScrollSpeed>
+        <_texAScaleDist>0</_texAScaleDist>
+        <_DistortionScale>0.3</_DistortionScale>
+        <_Intensity>2</_Intensity>
+      </shaderParameters>
+      <drawSize>(4, 4)</drawSize>
+    </graphicData>
+  </ThingDef>
+  <EffecterDef>
+    <defName>VV_UndoFairyfication</defName>
+    <maintainTicks>120</maintainTicks>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <moteDef>VV_Mote_EverflowerCircle</moteDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <ticksBetweenMotes>24</ticksBetweenMotes>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <moteDef>VV_Mote_EverflowerCircle</moteDef>
+        <spawnLocType>OnTarget</spawnLocType>
+        <ticksBetweenMotes>24</ticksBetweenMotes>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <moteDef>VV_Mote_EverflowerLinkDistortion</moteDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <ticksBetweenMotes>24</ticksBetweenMotes>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <moteDef>VV_Mote_EverflowerLinkDistortion</moteDef>
+        <spawnLocType>OnTarget</spawnLocType>
+        <ticksBetweenMotes>24</ticksBetweenMotes>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <moteDef>VV_Mote_VV_UndoFairyficationCircle</moteDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <ticksBetweenMotes>3</ticksBetweenMotes>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <moteDef>VV_Mote_FairyficationFlash</moteDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <ticksBetweenMotes>12</ticksBetweenMotes>
       </li>
     </children>
   </EffecterDef>

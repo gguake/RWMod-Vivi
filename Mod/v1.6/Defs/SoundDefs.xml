@@ -1,28 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
   <SoundDef>
-    <defName>VV_EverflowerAttunement</defName>
-    <sustain>True</sustain>
-    <context>MapOnly</context>
-    <priorityMode>PrioritizeNearest</priorityMode>
-    <subSounds>
-      <li>
-        <grains>
-          <li Class="AudioGrain_Clip">
-            <clipPath>SFX/VV_EverflowerAttunement</clipPath>
-          </li>
-        </grains>
-        <volumeRange>60</volumeRange>
-        <pitchRange>0.5~1.5</pitchRange>
-        <distRange>5~25</distRange> 
-        <repeatMode>NeverTwice</repeatMode>     
-        <sustainLoop>False</sustainLoop>
-        <sustainIntervalRange>-1</sustainIntervalRange>
-      </li>
-    </subSounds>
-  </SoundDef>
-
-  <SoundDef>
     <defName>VV_EverflowerRitualCast</defName>
     <sustain>True</sustain>
     <context>MapOnly</context>
@@ -107,6 +85,40 @@
         </grains>
         <volumeRange>70</volumeRange>
         <distRange>5~30</distRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+  <SoundDef>
+    <defName>VV_Fairyfication</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>  
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>SFX/VV_Fairyfication</clipPath>
+          </li>
+        </grains>
+        <volumeRange>70</volumeRange>
+        <pitchRange>0.9~1.1</pitchRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+  <SoundDef>
+    <defName>VV_UndoFairyfication</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>  
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>SFX/VV_UndoFairyfication</clipPath>
+          </li>
+        </grains>
+        <volumeRange>70</volumeRange>
+        <pitchRange>0.9~1.1</pitchRange>
       </li>
     </subSounds>
   </SoundDef>

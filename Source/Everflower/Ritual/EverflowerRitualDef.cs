@@ -43,6 +43,8 @@ namespace VVRace
         public EffecterDef effectOnCasting;
         public EffecterDef effectOnComplete;
 
+        public EffecterDef targetEffectOnCasting;
+
         public float incidentProb;
         public IntRange incidentDelayTicks;
 

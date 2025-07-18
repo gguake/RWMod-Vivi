@@ -73,6 +73,11 @@ namespace VVRace
                 toil = toil.WithEffect(ritualDef.effectOnCasting, EverflowerIndex);
             }
 
+            if (ritualDef?.targetEffectOnCasting != null)
+            {
+                toil = toil.WithEffect(ritualDef.targetEffectOnCasting, TargetPawnIndex);
+            }
+
             yield return toil;
 
             yield return Toils_General.DoAtomic(() =>

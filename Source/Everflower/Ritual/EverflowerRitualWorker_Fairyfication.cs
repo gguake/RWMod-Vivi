@@ -91,7 +91,7 @@ namespace VVRace
             {
                 var pawn = target.Pawn;
                 if (pawn == null) { return false; }
-                if (!pawn.TryGetComp<CompVivi>(out var compVivi) || !compVivi.isRoyal) { return false; }
+                if (!pawn.TryGetComp<CompVivi>(out var compVivi) || compVivi.isRoyal) { return false; }
                 if (pawn.GetMother() != caster) { return false; }
                 if (pawn.DevelopmentalStage != DevelopmentalStage.Adult) { return false; }
                 if (pawn.health.hediffSet.HasHediff(VVHediffDefOf.VV_FairyficationSickness)) { return false; }

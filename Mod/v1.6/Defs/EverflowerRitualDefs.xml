@@ -87,7 +87,10 @@
     <jobWorkAmount>4000</jobWorkAmount>
     
     <effectOnCasting>VV_EverflowerLink</effectOnCasting>
+    <targetEffectOnCasting>VV_Fairyfication</targetEffectOnCasting>
     <soundOnCasting>VV_EverflowerRitualCast</soundOnCasting>
+
+    <soundOnComplete>VV_Fairyfication</soundOnComplete>
   </VVRace.EverflowerRitualDef>
   
   <!-- 요정화 해제 -->
@@ -105,8 +108,10 @@
     <job>VV_UndoFairyfication</job>
     <jobWorkAmount>4000</jobWorkAmount>
     
-    <effectOnCasting>VV_EverflowerLink</effectOnCasting>
+    <effectOnCasting>VV_UndoFairyfication</effectOnCasting>
     <soundOnCasting>VV_EverflowerRitualCast</soundOnCasting>
+
+    <soundOnComplete>VV_UndoFairyfication</soundOnComplete>
   </VVRace.EverflowerRitualDef>
   
   <!-- 마나 파동 방출-->

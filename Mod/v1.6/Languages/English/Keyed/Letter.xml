@@ -22,4 +22,6 @@
 <VV_Letter_EverflowerAttumentLevelUpLabel>Attunement: {LEVEL} level</VV_Letter_EverflowerAttumentLevelUpLabel>
 <VV_Letter_EverflowerAttumentLevelUp>everflower's attunement has strengthened.</VV_Letter_EverflowerAttumentLevelUp>
 
+<VV_Letter_FairyficationCompleteLabel>Fairyfication: {TARGET_nameDef}</VV_Letter_FairyficationCompleteLabel>
+<VV_Letter_FairyficationComplete></VV_Letter_FairyficationComplete>
 </LanguageData>

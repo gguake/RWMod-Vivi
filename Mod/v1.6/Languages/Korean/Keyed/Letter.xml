@@ -21,7 +21,7 @@
 <VV_Letter_EverflowerAttumentLevelUpLabel>영원꽃 교감: {LEVEL}단계</VV_Letter_EverflowerAttumentLevelUpLabel>
 <VV_Letter_EverflowerAttumentLevelUp>영원꽃의 교감 연결이 강해졌습니다.</VV_Letter_EverflowerAttumentLevelUp>
 
-<VV_Letter_FairyficationCompleteLabel>{TARGET_nameDef}: 요정화</VV_Letter_FairyficationCompleteLabel>
+<VV_Letter_FairyficationCompleteLabel>요정화: {TARGET_nameDef}</VV_Letter_FairyficationCompleteLabel>
 <VV_Letter_FairyficationComplete>{CASTER_nameDef}이(가) {TARGET_nameDef}을(를) 요정화했습니다. 요정화된 비비는 아주 작은 형체가 되어 로열 비비를 따라다닙니다.
 \n요정 형태가 된 비비는 시간이 흐르지 않아 아무런 욕구를 채울 필요가 없으며 공격을 받지도 않지만 로열 비비가 죽으면 흩어져 사라집니다.
 \n요정 비비는 평소에는 아무것도 하지 않고 로열 비비를 따라다닐 뿐이지만 가끔 도움을 주기도 합니다. 영원꽃의 교감이 더 강해지면 요정 비비와 소통해 몇가지 명령을 지시할 수 있습니다.
