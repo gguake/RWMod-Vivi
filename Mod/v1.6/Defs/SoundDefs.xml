@@ -51,6 +51,9 @@
             <clipPath>SFX/VV_Lightningbolt</clipPath>
           </li>
         </grains>
+        <volumeRange>50</volumeRange>
+        <pitchRange>0.8~1.2</pitchRange>
+        <sustainLoop>False</sustainLoop>
       </li>
     </subSounds>
   </SoundDef>

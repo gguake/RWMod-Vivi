@@ -317,8 +317,8 @@
         <stopBurstWithoutLos>true</stopBurstWithoutLos>
 
         <damageDef>Burn</damageDef>
-        <damageAmount>11</damageAmount>
-        <burstShotCount>2</burstShotCount>
+        <damageAmount>8</damageAmount>
+        <burstShotCount>3</burstShotCount>
         <ticksBetweenBurstShots>3</ticksBetweenBurstShots>
         <lightningMoteDef>VV_Mote_ChainLightning</lightningMoteDef>
         <lightningStartOffset>0.65</lightningStartOffset>
