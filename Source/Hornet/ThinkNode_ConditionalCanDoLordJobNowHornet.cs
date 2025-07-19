@@ -34,7 +34,6 @@ namespace VVRace
                 return false;
             }
 
-            Log.Message($"{123} {pawn.mindState.duty} {pawn.GetLord()}");
             return true;
         }
     }
