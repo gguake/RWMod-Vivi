@@ -5,7 +5,7 @@
     <needClass>VVRace.Need_RoyalJelly</needClass>
     <label>royal jelly</label>
     <description>The total amount of royal jelly a Vivi eats affects how it grows. If a Vivi is fully fed by the time it grows up, it becomes a Royal Vivi; if not, it stays a regular Vivi.
-\nRoyal Vivis can reproduce and are good at interacting and have high psychic sensitivity, but they are not as good at working.</description>
+\nRoyal vivis can reproduce, have high social ability and psychic sensitivity, and possess several unique abilities, but their work capability is low.</description>
     <baseLevel>0</baseLevel>
     <listPriority>45</listPriority>
     <fallPerDay>0</fallPerDay>

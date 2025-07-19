@@ -112,10 +112,10 @@
     <forcedBodyType>Thin</forcedBodyType>
   </PawnKindDef>
   
-  <!-- 로열 비비 여제 -->
+  <!-- 비비 연방 대표 -->
   <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
     <defName>VV_RoyalViviEmpress</defName>
-    <label>royal vivi empress</label>
+    <label>vivi federation representative</label>
     <combatPower>300</combatPower>
     <isFighter>true</isFighter>
     <itemQuality>Masterwork</itemQuality>
@@ -136,7 +136,7 @@
 
     <nakedChance>0</nakedChance>
 
-    <weaponMoney>5000~10000</weaponMoney>
+    <weaponMoney>4000~10000</weaponMoney>
     <weaponTags>
       <li>VV_ViviNeedle</li>
     </weaponTags>
@@ -150,12 +150,11 @@
     <forcedBodyType>Female</forcedBodyType>
   </PawnKindDef>
   
-  
-  <!-- 리더 로열 비비 -->
+  <!-- 리더 비비 -->
   <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
     <defName>VV_RoyalViviLeader</defName>
-    <label>royal vivi leader</label>
-    <combatPower>100</combatPower>
+    <label>vivi leader</label>
+    <combatPower>120</combatPower>
     <isFighter>true</isFighter>
     <itemQuality>Good</itemQuality>
     <factionLeader>true</factionLeader>
@@ -177,7 +176,7 @@
 
     <nakedChance>0</nakedChance>
 
-    <weaponMoney>5000~10000</weaponMoney>
+    <weaponMoney>4000~10000</weaponMoney>
     <weaponTags>
       <li>VV_ViviNeedle</li>
       <li>VV_ViviWeaponMana</li>
@@ -233,7 +232,7 @@
   <!-- 상인 로열 비비 -->
   <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
     <defName>VV_RoyalViviTrader</defName>
-    <label>royal vivi</label>
+    <label>vivi trader</label>
     <trader>true</trader>
     <combatPower>90</combatPower>
     <isFighter>false</isFighter>

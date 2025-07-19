@@ -1,20 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-<VV_ViviCreamWall.label>비비 크림 벽</VV_ViviCreamWall.label>
-<VV_ViviCreamWall.description>비비 크림으로 급조한 벽입니다. 지나갈수 없고 지붕을 지지하지만 충격에 매우 취약합니다.
-\n이 벽을 다듬고 말리면 견고한 구조의 벽으로 만들 수 있습니다. 특유의 구조로 인해 불안정한 지반에도 건설할 수 있습니다.</VV_ViviCreamWall.description>
-
-<VV_SmoothedViviCreamWall.label>매끄러운 비비 크림 벽</VV_SmoothedViviCreamWall.label>
-<VV_SmoothedViviCreamWall.description>다듬어진 비비 크림 벽입니다. 지나갈수 없고 지붕을 지지하지만 충격에 매우 취약합니다.
-\n시간이 지나서 크림이 마르면 견고한 벽이 됩니다.</VV_SmoothedViviCreamWall.description>
-
-<VV_ViviHoneycombWall.label>비비 벌집 벽</VV_ViviHoneycombWall.label>
-<VV_ViviHoneycombWall.description>육각 구조가 층층히 쌓여있는 벽입니다. 지나갈수 없고 지붕을 지지합니다.
-\n각종 충격에는 매우 튼튼하지만 화재에는 매우 취약합니다.</VV_ViviHoneycombWall.description>
-
-<VV_ViviHardenHoneycombWall.label>경화된 비비 벌집 벽</VV_ViviHardenHoneycombWall.label>
-<VV_ViviHardenHoneycombWall.description>생체가닥으로 경화된 벌집 벽입니다. 지나갈수 없고 지붕을 지지합니다.
-\n일반 벌집 벽보다는 내구성이 조금 낮지만 불이 붙지 않아 외벽으로 사용하기 좋습니다.</VV_ViviHardenHoneycombWall.description>
 
 <VV_ViviHatchery.label>비비 부화기</VV_ViviHatchery.label>
 <VV_ViviHatchery.description>비비 알을 부화시키기 위한 구조물입니다. 비어있는 부화기가 있다면 로열 비비들은 그곳에 가서 알을 낳습니다.
@@ -29,27 +14,11 @@
 \n채집 작업은 작업대 근처에서만 할 수 있습니다.</VV_GatheringBarrel.description>
 
 <VV_RefiningWorkbench.label>비비 가공 작업대</VV_RefiningWorkbench.label>
-<VV_RefiningWorkbench.description>비비들이 가공 작업을 하기 위한 작업대입니다.</VV_RefiningWorkbench.description>
+<VV_RefiningWorkbench.description>비비들에게 필요한 여러 자원을 수가공하는 작업대입니다.</VV_RefiningWorkbench.description>
 
-<VV_ArcanePlantPot.label>마법 식물 화분</VV_ArcanePlantPot.label>
-<VV_ArcanePlantPot.description>마법 식물을 심을수 있는 화분입니다. 보통 실내나 식물이 자라지 못하는곳에 마법 식물을 배치하기 위해 사용됩니다.
-\n화분에 있는 마법 식물이 공격을 받을 경우 화염 피해가 아니라면 화분이 우선 피해를 흡수하지만, 화분이 파괴되면 마법 식물이 자동으로 포장됩니다.</VV_ArcanePlantPot.description>
-
-<VV_AutoExtractor.label>자동 꿀 추출기</VV_AutoExtractor.label>
-<VV_AutoExtractor.description>전기와 원심력을 이용해 정제되지 않은 비비 꿀을 대량으로 정제하는 기계입니다. 꿀을 투입하면 기계가 동작해 주기적으로 정제된 비비 꿀을 배출하며 사람이 작업하는것보다 더 많은 꿀을 정제할 수 있습니다.</VV_AutoExtractor.description>
+<VV_AutoExtractor.label>비비 꿀 자동 정제기</VV_AutoExtractor.label>
+<VV_AutoExtractor.description>전기와 원심력을 이용해 정제되지 않은 비비 꿀을 대량으로 정제하는 기계입니다. 꿀을 투입해 가동하면 주기적으로 정제된 비비 꿀을 배출하며 사람이 작업하는것보다 높은 효율로 꿀을 정제할 수 있습니다.</VV_AutoExtractor.description>
 <VV_AutoExtractor.comps.CompRefuelable.fuelLabel>정제되지 않은 비비 꿀</VV_AutoExtractor.comps.CompRefuelable.fuelLabel>
 <VV_AutoExtractor.comps.CompRefuelable.fuelGizmoLabel>비비 꿀</VV_AutoExtractor.comps.CompRefuelable.fuelGizmoLabel>
-
-<VV_ManaEmitter.label>마나 방출기</VV_ManaEmitter.label>
-<VV_ManaEmitter.description>마나 비료에 포함된 비활성 마나를 추출해 환경 마나로 변환하는 장치입니다. 마나 비료를 투입하면 이를 환경 마나로 천천히 변환해 주변에 퍼뜨려 활용할 수 있게 합니다.
-\n마나 변환 효율은 낮지만 마나 생산량이 부족하거나 긴급한 마나 공급이 필요한 경우 유용하므로 비비들이 둥지를 세울때 꼭 사용되는 장치입니다.</VV_ManaEmitter.description>
-<VV_ManaEmitter.comps.CompRefuelable.fuelLabel>마나 비료</VV_ManaEmitter.comps.CompRefuelable.fuelLabel>
-<VV_ManaEmitter.comps.CompRefuelable.fuelGizmoLabel>마나 비료</VV_ManaEmitter.comps.CompRefuelable.fuelGizmoLabel>
-
-<VV_LargeArcanePlantPot.label>대형 마법 식물 화분</VV_LargeArcanePlantPot.label>
-<VV_LargeArcanePlantPot.description>마법 모종을 배양하기 위해 사용되는 대형 화분입니다. 대량의 비료를 수용할 수 있으며 농장에 있는 모종들의 양분을 높은 효율로 자동 관리해줍니다.
-\n이미 성장한 마법 식물도 심을 수 있으므로 실내에 많은 마법 식물을 한번에 심기 위한 대형 화분으로 사용할 수도 있습니다.</VV_LargeArcanePlantPot.description>
-<VV_LargeArcanePlantPot.comps.CompRefuelable.fuelLabel>마나 비료</VV_LargeArcanePlantPot.comps.CompRefuelable.fuelLabel>
-<VV_LargeArcanePlantPot.comps.CompRefuelable.fuelGizmoLabel>마나 비료</VV_LargeArcanePlantPot.comps.CompRefuelable.fuelGizmoLabel>
 
 </LanguageData>

@@ -4,45 +4,47 @@
 <VV_BasicInfra.label>기초 비비 시설</VV_BasicInfra.label>
 <VV_BasicInfra.description>비비들이 사용하는 기초적인 생산 시설과 구조물을 건설할 수 있습니다.</VV_BasicInfra.description>
 
-<VV_BasicGathering.label>기초 채집학</VV_BasicGathering.label>
-<VV_BasicGathering.description>비비들의 주식인 꿀과 꽃가루를 채집하는 시설을 건설하고 기초적인 가공품을 만들 수 있습니다.</VV_BasicGathering.description>
-
-<VV_AdvancedGathering.label>고급 채집학</VV_AdvancedGathering.label>
-<VV_AdvancedGathering.description>비비들이 자연에서 희귀한 물질들을 채집하고 기초적인 가공품을 만들 수 있습니다.</VV_AdvancedGathering.description>
-
-<VV_ArcanePlantSowing.label>마법 식물 파종</VV_ArcanePlantSowing.label>
-<VV_ArcanePlantSowing.description>마법 씨앗을 심어 마법 식물을 재배할 수 있습니다. 마법 식물은 일반적인 재배 방법으로는 재배할 수 없으며 마법 씨앗이 필요합니다.
-\n마법 씨앗은 채집중에 우연히 발견하거나 비비 상단에게서 구매할 수 있습니다. 마법 식물을 해체해도 소재와 함께 여러개 얻을 수 있습니다.
-\n마법 씨앗을 적절한 바닥이나 화분에 심으면 모종이 자라나며 마법 식물로 성장하려면 양분과 마나가 모두 필요합니다.
-\n양분은 사람이 주기적으로 마나 비료를 투입해줘야 하며 고갈된 상태로 시간이 지나면 모종이 죽습니다.\n마나는 마법 모종이 스스로 환경 마나를 흡수하므로 근처에 환경 마나를 방출하는 마법 식물을 같이 두거나 마나 방출기를 건설해 제공할 수 있습니다.</VV_ArcanePlantSowing.description>
-<VV_ArcanePlantSowing.discoveredLetterTitle>마법 식물</VV_ArcanePlantSowing.discoveredLetterTitle>
-<VV_ArcanePlantSowing.discoveredLetterText>마법 식물은 고유한 자원인 마나를 사용하는 특수한 식물입니다. 마법 식물은 일반적인 재배 방법으로는 재배할 수 없으며 마법 씨앗이 필요합니다.
-\n마법 씨앗은 채집중에 우연히 발견하거나 비비 상단에게서 구매할 수 있습니다. 마법 식물을 해체해도 소재와 함께 여러개 얻을 수 있습니다.
-\n마법 씨앗을 적절한 바닥이나 화분에 심으면 모종이 자라나며 마법 식물로 성장하려면 양분과 마나가 모두 필요합니다. 양분은 사람이 주기적으로 마나 비료를 투입해줘야 하며 고갈된 상태로 시간이 지나면 모종이 죽습니다.\n마나는 마법 모종이 스스로 환경 마나를 흡수하며 근처에 환경 마나를 방출하는 마법 식물을 같이 두거나 마나 방출기를 건설해 제공할 수 있습니다.</VV_ArcanePlantSowing.discoveredLetterText>
-
-<VV_Tools.label>채집 도구 제조</VV_Tools.label>
-<VV_Tools.description>비비들이 채집에 사용하는 도구를 제작할 수 있습니다.</VV_Tools.description>
-
-<VV_Weaponry.label>비비 전통 무기</VV_Weaponry.label>
-<VV_Weaponry.description>비비들이 전통적으로 사용해온 무기를 제작할 수 있습니다.</VV_Weaponry.description>
-
-<VV_ArcaneWeaponry.label>마법 무기</VV_ArcaneWeaponry.label>
-<VV_ArcaneWeaponry.description>마법 식물의 소재를 사용해 마나를 응용하는 마법 무기를 제작할 수 있습니다. 마법 무기는 일반적으로 다루기 까다롭지만 강력한 위력을 가지고 있습니다.
-\n마법 무기는 환경 마나를 흡수해 충전되며 마나가 고갈된 마법 무기는 사용할 수 없거나 약화됩니다.</VV_ArcaneWeaponry.description>
-
 <VV_Apparels.label>비비 의류</VV_Apparels.label>
 <VV_Apparels.description>비비들이 입는 기초적인 의류를 제작할 수 있습니다.</VV_Apparels.description>
 
 <VV_AdvancedApparels.label>고급 비비 의류</VV_AdvancedApparels.label>
 <VV_AdvancedApparels.description>비비들이 입는 고급 의류를 제작할 수 있습니다.</VV_AdvancedApparels.description>
 
-<VV_Lifestrand.label>생체가닥</VV_Lifestrand.label>
-<VV_Lifestrand.description>악마가닥 천을 마법 재료로 가공해 강화한 생체가닥 천을 직조할 수 있습니다.</VV_Lifestrand.description>
+<VV_Weaponry.label>비비 전통 무기</VV_Weaponry.label>
+<VV_Weaponry.description>비비들이 전통적으로 사용해온 무기를 제작할 수 있습니다. 이 무기들은 비비들만 사용 가능합니다.</VV_Weaponry.description>
+
+<VV_BasicGathering.label>기초 채집학</VV_BasicGathering.label>
+<VV_BasicGathering.description>비비들의 주식인 꿀과 꽃가루를 채집하는 시설을 건설하고 기초적인 가공품을 만들 수 있습니다.</VV_BasicGathering.description>
+
+<VV_ArcanePlantSowing.label>마법 식물 파종</VV_ArcanePlantSowing.label>
+<VV_ArcanePlantSowing.description>마법 씨앗을 심어 마법 식물을 재배할 수 있습니다. 마법 식물은 일반적인 재배 방법으로는 재배할 수 없으며 마법 씨앗이 필요합니다.
+\n마법 씨앗은 채집중에 우연히 발견하거나 비비 상단에게서 구매할 수 있습니다. 마법 식물을 해체해도 소재와 함께 여러개 얻을 수 있습니다.
+\n마법 씨앗을 적절한 땅이나 화분에 심으면 모종이 자라나며 마법 식물로 성장하려면 양분과 마나가 모두 필요합니다.
+\n양분은 사람이 주기적으로 마나 비료를 투입해줘야 하며 고갈된 상태로 시간이 지나면 모종이 죽습니다.\n마나는 마법 모종이 스스로 환경 마나를 흡수하므로 근처에 환경 마나를 방출하는 마법 식물을 같이 두거나 마나 방출기를 건설해 제공할 수 있습니다.</VV_ArcanePlantSowing.description>
+<VV_ArcanePlantSowing.discoveredLetterTitle>마법 식물</VV_ArcanePlantSowing.discoveredLetterTitle>
+<VV_ArcanePlantSowing.discoveredLetterText>마법 식물은 고유한 자원인 마나를 사용하는 특수한 식물입니다. 마법 식물은 일반적인 재배 방법으로는 재배할 수 없으며 마법 씨앗이 필요합니다.
+\n마법 씨앗은 채집중에 우연히 발견하거나 비비 상단에게서 구매할 수 있습니다. 마법 식물을 해체해도 소재와 함께 여러개 얻을 수 있습니다.
+\n마법 씨앗을 적절한 땅이나 화분에 심으면 모종이 자라나며 마법 식물로 성장하려면 양분과 마나가 모두 필요합니다. 양분은 사람이 주기적으로 마나 비료를 투입해줘야 하며 고갈된 상태로 시간이 지나면 모종이 죽습니다.\n마나는 마법 모종이 스스로 환경 마나를 흡수하며 근처에 환경 마나를 방출하는 마법 식물을 같이 두거나 마나 방출기를 건설해 제공할 수 있습니다.</VV_ArcanePlantSowing.discoveredLetterText>
+
+<VV_Tools.label>채집 도구</VV_Tools.label>
+<VV_Tools.description>채집 능력을 향상시켜 주는 도구를 제작할 수 있습니다. 채집 도구는 평소에는 허리에 차고다닐 수 있습니다.</VV_Tools.description>
+
+<VV_AdvancedGathering.label>고급 채집학</VV_AdvancedGathering.label>
+<VV_AdvancedGathering.description>나무에서 프로폴리스를 채집하고 가공해 뉴트로이민과 생약으로 정제할 수 있습니다.</VV_AdvancedGathering.description>
 
 <VV_ArcaneBotany.label>마법 식물학</VV_ArcaneBotany.label>
 <VV_ArcaneBotany.description>마법 식물이 방출하는 환경 마나의 흐름을 가시적으로 표시할 수 있게 됩니다. 마법 식물 소재를 사용하는 물건을 제작하고 재배에 유용한 시설 또한 건설할 수 있습니다.</VV_ArcaneBotany.description>
+<VV_ArcaneBotany.discoveredLetterTitle>환경 마나 그리드</VV_ArcaneBotany.discoveredLetterTitle>
+<VV_ArcaneBotany.discoveredLetterText>이제 환경 마나의 흐름을 시각적으로 확인할 수 있습니다. 마법 식물을 선택하거나 오른쪽 아래의 토글바에서 환경 마나 그리드를 활성화할 수 있습니다.</VV_ArcaneBotany.discoveredLetterText>
 
 <VV_AutomatedInfra.label>자동화 비비 시설</VV_AutomatedInfra.label>
 <VV_AutomatedInfra.description>전기를 이용해 기존의 비비들이 하던 일부 수작업들을 자동화하고 효율을 증대시킵니다.</VV_AutomatedInfra.description>
+
+<VV_Lifestrand.label>생체가닥</VV_Lifestrand.label>
+<VV_Lifestrand.description>악마가닥 천을 마법 재료로 가공해 강화한 생체가닥 천을 직조할 수 있습니다.</VV_Lifestrand.description>
+
+<VV_ArcaneWeaponry.label>마법 무기</VV_ArcaneWeaponry.label>
+<VV_ArcaneWeaponry.description>마법 식물의 소재를 사용해 마나를 응용하는 마법 무기를 제작할 수 있습니다. 마법 무기는 일반적으로 다루기 까다롭지만 강력한 위력을 가지고 있습니다.
+\n마법 무기는 환경 마나를 흡수해 충전되며 마나가 고갈된 마법 무기는 사용할 수 없거나 약화됩니다.</VV_ArcaneWeaponry.description>
 
 </LanguageData>

@@ -32,12 +32,17 @@
 
 <VV_FloralMilkTea.label>진한 꽃차</VV_FloralMilkTea.label>
 <VV_FloralMilkTea.description>향기나는 꽃잎을 넣고 끓여 우려낸 것에 우유나 꿀을 더한 차입니다.
-\n마시면 일정 시간동안 몸에서 꽃향기가 풍겨 기분이 좋아지며 수면에도 도움이 됩니다.</VV_FloralMilkTea.description>
+\n마시면 일정 시간동안 몸에서 꽃향기가 풍겨 기분이 좋아지며 수면과 초정신 집중에 도움이 됩니다.</VV_FloralMilkTea.description>
 <VV_FloralMilkTea.ingestible.ingestCommandString>{0} 마시기</VV_FloralMilkTea.ingestible.ingestCommandString>
 <VV_FloralMilkTea.ingestible.ingestReportString>{0} 마시는 중.</VV_FloralMilkTea.ingestible.ingestReportString>
 
+<VV_CombatHormoneJelly.label>비비 전투 호르몬 젤리</VV_CombatHormoneJelly.label>
+<VV_CombatHormoneJelly.description>꿀술을 화학적으로 농축하고 가공해 만든 젤리입니다. 알코올 농도가 매우 높으며 비비가 섭취할 경우 전투 기술이 일시적으로 향상되고 불을 두려워 하지 않게 되지만 공격성이 강화되며 피로와 배고픔을 빠르게 느끼게 됩니다.
+\n비비가 아닌 일반 인간들에게는 자극적이고 특이한 맛의 간식으로 유통되기도 합니다.</VV_CombatHormoneJelly.description>
+
+<!-- Mead -->
 <VV_UnfermentedMead.label>숙성중인 비비 꿀술</VV_UnfermentedMead.label>
-<VV_UnfermentedMead.description>꿀에 물과 효모를 섞어 숙성중인 비비 꿀술입니다. 제대로 숙성하려면 20~28℃에서 10일간 숙성해야 합니다.</VV_UnfermentedMead.description>
+<VV_UnfermentedMead.description>꿀에 물과 효모를 섞어 숙성중인 비비 꿀술입니다. 제대로 숙성하려면 20~28℃ (68-82℉)에서 10일간 숙성해야 합니다. 온도가 적절하지 않으면 썩어서 사라집니다.</VV_UnfermentedMead.description>
 
 <VV_Mead.label>비비 꿀술</VV_Mead.label>
 <VV_Mead.description>꿀을 발효시켜 만든 비비들의 전통주입니다. 의외로 단맛은 거의 나지 않고 독하지만 꿀 특유의 향이 납니다.
@@ -46,9 +51,5 @@
 <VV_Mead.ingestible.ingestReportString>{0} 마시는 중.</VV_Mead.ingestible.ingestReportString>
 <VV_Mead.tools.li.bottle.label>병</VV_Mead.tools.li.bottle.label>
 <VV_Mead.tools.li.neck.label>병목</VV_Mead.tools.li.neck.label>
-
-<VV_CombatHormoneJelly.label>비비 전투 호르몬 젤리</VV_CombatHormoneJelly.label>
-<VV_CombatHormoneJelly.description>꿀술을 화학적으로 농축하고 가공해 만든 젤리입니다. 알코올 농도가 매우 높으며 비비가 섭취할 경우 전투 기술이 일시적으로 향상되고 불을 두려워 하지 않게 되지만 공격성이 강화되며 피로와 배고픔을 빠르게 느끼게 됩니다.
-\n비비가 아닌 일반 인간들에게는 자극적이고 특이한 맛의 간식으로 유통되기도 합니다.</VV_CombatHormoneJelly.description>
 
 </LanguageData>

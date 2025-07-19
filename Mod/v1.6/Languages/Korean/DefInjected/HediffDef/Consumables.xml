@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+<VV_RoyalJelly.label>로열 젤리 섭취</VV_RoyalJelly.label>
+<VV_RoyalJelly.description>로열 젤리의 효과로 노화가 느려지고 있습니다. 또한 신체가 회복되는 속도가
+\n어린 비비의 경우 신체가 로열 비비로 변화하며 추가로 로열 젤리를 섭취해도 효과가 중첩되지는 않습니다.</VV_RoyalJelly.description>
+
+<VV_ViviGrowthBoost.label>학습 가속</VV_ViviGrowthBoost.label>
+<VV_ViviGrowthBoost.description>전역 학습 속도와 학습 욕구 충족에 추가적인 보너스를 얻습니다.</VV_ViviGrowthBoost.description>
+
+<VV_FloralTea.label>꽃차를 마심</VV_FloralTea.label>
+<VV_FloralTea.description>꽃차를 마셔 마음이 차분해진 상태입니다.</VV_FloralTea.description>
+
+<VV_WarmingFloralTea.label>따뜻한 꽃차</VV_WarmingFloralTea.label>
+<VV_WarmingFloralTea.description>따뜻한 꽃차를 마셔 몸이 추위를 더 견딜 수 있습니다.</VV_WarmingFloralTea.description>
+
+<VV_CoolingFloralTea.label>얼음 꽃차</VV_CoolingFloralTea.label>
+<VV_CoolingFloralTea.description>얼음 꽃차를 마셔 몸이 더위를 더 견딜 수 있습니다.</VV_CoolingFloralTea.description>
+
+<VV_FlowerScent.label>꽃 향기</VV_FlowerScent.label>
+<VV_FlowerScent.description>몸에서 꽃 향기가 나고 있습니다. 정신 집중이 더 편해집니다.</VV_FlowerScent.description>
+
+<VV_CombatHormoneJelly.label>전투 호르몬</VV_CombatHormoneJelly.label>
+<VV_CombatHormoneJelly.description>비비들의 내재된 공격성을 극도로 강화하는 전투 호르몬이 주입된 상태입니다. 전투 관련 능력이 향상되고 고통에 둔감해지며 불꽃을 보아도 겁에 질리지 않지만 매우 빠르게 지치고 배가 고파집니다.</VV_CombatHormoneJelly.description>
+<VV_CombatHormoneJelly.stages.0.extraTooltip>'불 공포증' 유전자로 인한 정신이상을 일시적으로 방지합니다.</VV_CombatHormoneJelly.stages.0.extraTooltip>
+
+</LanguageData>

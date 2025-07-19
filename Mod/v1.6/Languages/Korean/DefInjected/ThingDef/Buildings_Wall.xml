@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+    
+<VV_ViviCreamWall.label>비비 크림 벽</VV_ViviCreamWall.label>
+<VV_ViviCreamWall.description>비비 크림으로 급조한 벽입니다. 지나갈수 없고 지붕을 지지하지만 충격에 매우 취약합니다.
+\n이 벽을 다듬고 말리면 견고한 구조의 벽으로 만들 수 있습니다. 특유의 구조로 인해 불안정한 지반에도 건설할 수 있습니다.</VV_ViviCreamWall.description>
+
+<VV_SmoothedViviCreamWall.label>매끄러운 비비 크림 벽</VV_SmoothedViviCreamWall.label>
+<VV_SmoothedViviCreamWall.description>다듬어진 비비 크림 벽입니다. 지나갈수 없고 지붕을 지지하지만 충격에 매우 취약합니다.
+\n시간이 지나서 크림이 마르면 견고한 벽이 됩니다.</VV_SmoothedViviCreamWall.description>
+
+<VV_ViviHoneycombWall.label>비비 벌집 벽</VV_ViviHoneycombWall.label>
+<VV_ViviHoneycombWall.description>육각 구조가 층층히 쌓여있는 벽입니다. 지나갈수 없고 지붕을 지지합니다.
+\n각종 충격에는 매우 튼튼하지만 화재에는 매우 취약합니다.</VV_ViviHoneycombWall.description>
+
+<VV_ViviHardenHoneycombWall.label>경화된 비비 벌집 벽</VV_ViviHardenHoneycombWall.label>
+<VV_ViviHardenHoneycombWall.description>생체가닥으로 경화된 벌집 벽입니다. 지나갈수 없고 지붕을 지지합니다.
+\n일반 벌집 벽보다는 내구성이 조금 낮지만 불이 붙지 않아 외벽으로 사용하기 좋습니다.</VV_ViviHardenHoneycombWall.description>
+
+</LanguageData>

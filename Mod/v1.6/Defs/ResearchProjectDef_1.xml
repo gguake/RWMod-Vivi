@@ -71,7 +71,7 @@
   <ResearchProjectDef ParentName="ViviResearchProjectTier1Base">
     <defName>VV_Weaponry</defName>
     <label>vivi weaponry</label>
-    <description>Make traditional weapons used by the Vivis.</description>
+    <description>Make traditional weapons used by the Vivis. These weapons can only be used by vivis.</description>
     <baseCost>600</baseCost>
     <researchViewX>0</researchViewX>
     <researchViewY>2.1</researchViewY>
@@ -87,7 +87,7 @@
   <ResearchProjectDef ParentName="ViviResearchProjectTier1Base">
     <defName>VV_BasicGathering</defName>
     <label>basic gathering</label>
-    <description>Build facilities for collecting and processing honey and pollen, the staple foods of the Vivis.</description>
+    <description>Build facilities for collecting and processing honey and pollen, the staple foods of the vivis.</description>
     <baseCost>250</baseCost>
     <researchViewX>1</researchViewX>
     <researchViewY>0.7</researchViewY>
@@ -104,16 +104,16 @@
     <defName>VV_ArcanePlantSowing</defName>
     <label>arcane plant sowing</label>
     <description>Grow arcane plants by planting arcane seeds. Arcane seeds can be found by chance while foraging or purchased from vivi caravans.
-\nDeconstructing an arcane plant also yields multiple seeds along with materials. When planted in suitable soil or a pot, an arcane seed grows into a seedling. To mature into a full arcane plant, it requires both nutrients and mana.
+\nDeconstructing an arcane plant also yields multiple seeds along with materials. When planted in suitable soil or a pot, an arcane seed grows into a seedling. To mature into a full arcane plant it requires both nutrients and mana.
 \nNutrients must be regularly supplied using mana fertilizer. If left depleted for too long, the seedling will die.
 \nMana is naturally absorbed from the environment, so placing the seedling near arcane plants that emit environment mana or building a Mana emitter can help provide it.
     </description>
     <discoveredLetterTitle>Arcane plant</discoveredLetterTitle>
     <discoveredLetterText>Arcane seeds can be found by chance while foraging or purchased from vivi caravans. Deconstructing an arcane plant also yields multiple seeds along with materials.
-\nWhen planted in suitable soil or a pot, an arcane seed grows into a seedling. To mature into a full arcane plant, it requires both nutrients and mana.
+\nWhen planted in suitable soil or a pot, an arcane seed grows into a seedling. To mature into a full arcane plant it requires both nutrients and mana.
 \nNutrients must be regularly supplied using mana fertilizer. If left depleted for too long, the seedling will die.
 \nMana is naturally absorbed from the environment, so placing the seedling near arcane plants that emit environment mana or building a Mana emitter can help provide it.</discoveredLetterText>
-    <baseCost>400</baseCost>
+    <baseCost>300</baseCost>
     <researchViewX>1</researchViewX>
     <researchViewY>1.4</researchViewY>
     <prerequisites>
@@ -127,8 +127,8 @@
   <ResearchProjectDef ParentName="ViviResearchProjectTier1Base">
     <defName>VV_Tools</defName>
     <label>gathering tools</label>
-    <description>Make tools for the Vivis to use in gathering.</description>
-    <baseCost>300</baseCost>
+    <description>Make tools that enhance gathering ability. The gathering tool can be worn at the waist when not in use.</description>
+    <baseCost>400</baseCost>
     <researchViewX>2</researchViewX>
     <researchViewY>0</researchViewY>
     <prerequisites>
@@ -143,8 +143,8 @@
   <ResearchProjectDef ParentName="ViviResearchProjectTier1Base">
     <defName>VV_AdvancedGathering</defName>
     <label>advanced gathering</label>
-    <description>Can collect and process propolis from trees.</description>
-    <baseCost>800</baseCost>
+    <description>Harvest propolis from trees and process it to refine neutroamine and herbs.</description>
+    <baseCost>900</baseCost>
     <researchViewX>2</researchViewX>
     <researchViewY>0.7</researchViewY>
     <prerequisites>
@@ -156,8 +156,10 @@
   <ResearchProjectDef ParentName="ViviResearchProjectTier1Base">
     <defName>VV_ArcaneBotany</defName>
     <label>arcane botany</label>
-    <description>Build facilities to cultivate arcane plants with various uses.</description>
-    <baseCost>700</baseCost>
+    <description>Can visually display the flow of environment mana emitted by arcane plants. Can make items using arcane plant materials and build facilities that aid cultivation.</description>
+    <discoveredLetterTitle>Env. Mana grid</discoveredLetterTitle>
+    <discoveredLetterText>You can now visualize the flow of environment mana. Select an arcane plant or enable the environment mana grid from the bottom-right toggle bar.</discoveredLetterText>
+    <baseCost>600</baseCost>
     <researchViewX>2</researchViewX>
     <researchViewY>1.4</researchViewY>
     <prerequisites>

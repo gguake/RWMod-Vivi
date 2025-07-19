@@ -3,9 +3,9 @@
   <ThingDef ParentName="VV_ArcanePlantBase">
     <defName>VV_ArcanePlantSeedling</defName>
     <label>arcane plant seedling</label>
-    <description>A young arcane plant still in the process of growing.\nArcane plants require both mana and nutrients to grow, and they do not grow while packaged.
+    <description>A young arcane plant still in the process of growing. Arcane plants require both mana and nutrients to grow, and they do not grow while packaged.
 \nMana is absorbed from the environment mana and can also be supplied by nearby mana emitter or other arcane plants that produce mana.
-\nutrients continuously decrease regardless of mana, so a person must regularly apply mana fertilizer. If left without sufficient nutrients for too long, the seedling will die.</description>
+\nNutrients continuously decrease regardless of mana, so a person must regularly apply mana fertilizer. If left without sufficient nutrients for too long, the seedling will die.</description>
     
     <thingClass>VVRace.ArcanePlant_Seedling</thingClass>
 
@@ -28,10 +28,10 @@
     <comps>
       <li Class="VVRace.CompProperties_Mana">
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>70</mana>
+          <mana>60</mana>
         </manaConsumeRule>
 
-        <manaAbsorbPerDay>70</manaAbsorbPerDay>
+        <manaAbsorbPerDay>60</manaAbsorbPerDay>
       </li>
       
       <li Class="CompProperties_Refuelable">

@@ -130,10 +130,10 @@
   <ThingDef ParentName="BaseWeapon">
     <defName>VV_EltexNeedle</defName>
     <label>vivi eltex needle</label>
-    <description>A specially processed sharp needles. Only Vivi can handle them and once equipped they resonate with the wearer becoming bound so that no one else can use them.
+    <description>A specially processed sharp needles. Only vivi can handle them and once equipped they resonate with the wearer becoming bound so that no one else can use them.
 \Needle can absorb environmental mana to recharge, and by using the needles as a medium, you can summon psychic needles that resonate with mana ignoring physical laws and moving freely according to the users will.
 \nThe psychic needles pass through all obstacles and always hit their target. The higher the mental sensitivity, the faster the needles move, and the more attacks can be made at once.
-\nWhile summoning the psychic needles, you enter a state of deep concentration, making it impossible to move until the needles are retrieved.</description>
+\nWhile summoning the psychic needles, vivi enter a state of deep concentration, making it impossible to move until the needles are retrieved.</description>
     <graphicData>
       <texPath>Things/Item/Equipment/VV_Needle</texPath>
       <graphicClass>Graphic_Single</graphicClass>

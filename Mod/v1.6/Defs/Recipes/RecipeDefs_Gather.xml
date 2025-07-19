@@ -4,7 +4,8 @@
   <RecipeDef Class="VVRace.RecipeDef_Gathering">
     <defName>VV_GatherHoney</defName>
     <label>gather honey</label>
-    <description>Gather honey from mature flowers or fruit trees. The speed and yield of honey gathering must be greater than 0 to perform the job.</description>
+    <description>Gather honey from mature flowers or fruit trees. The speed and yield of honey gathering must be greater than 0 to perform the job.
+\nIf the worker's plant skill is low, they may damage gathered plant.</description>
     <jobString>Gathering honey.</jobString>
     
     <workAmount>920</workAmount>
@@ -107,7 +108,8 @@
   <RecipeDef Class="VVRace.RecipeDef_Gathering">
     <defName>VV_GatherPropolis</defName>
     <label>gather propolis</label>
-    <description>Collect rare propolis from surrounding trees. The speed and yield of propolis gathering must be greater than 0 to perform the job, and it takes a significant amount of time to gather.</description>
+    <description>Collect rare propolis from surrounding trees. The speed and yield of propolis gathering must be greater than 0 to perform the job, and it takes a significant amount of time to gather.
+\nIf the worker's plant skill is low, they may damage gathered plant.</description>
 
     <jobString>Gathering propolis.</jobString>
     

@@ -110,7 +110,7 @@
   <ThingDef ParentName="VV_UtilityApparelBase">
     <defName>VV_MultiuseBrushTool</defName>
     <label>vivi multiuse brush</label>
-    <description>A large brush that can be used for cleaning pollen or collecting material precisely from plants.</description>
+    <description>A large brush that can be used for cleaning pollen or collecting material precisely from plants. It's also very helpful when smoothing rough surfaces, and humans can use it too.</description>
     <graphicData>
       <texPath>Things/Apparel/MultiuseBrush/VV_MultiuseBrush</texPath>
       <graphicClass>Graphic_Single</graphicClass>

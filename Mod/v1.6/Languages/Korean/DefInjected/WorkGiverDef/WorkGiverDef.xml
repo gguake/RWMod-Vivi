@@ -16,18 +16,6 @@
 <VV_EquipShootus.verb>무기 장착</VV_EquipShootus.verb>
 <VV_EquipShootus.gerund> 무기 장착</VV_EquipShootus.gerund>
 
-<VV_HaulToArcanePlantFarm.label>자원을 재배 작업대로 운반</VV_HaulToArcanePlantFarm.label>
-<VV_HaulToArcanePlantFarm.verb>운반</VV_HaulToArcanePlantFarm.verb>
-<VV_HaulToArcanePlantFarm.gerund> 운반</VV_HaulToArcanePlantFarm.gerund>
-
-<VV_ManageArcanePlantFarm.label>재배중인 마법 식물 관리</VV_ManageArcanePlantFarm.label>
-<VV_ManageArcanePlantFarm.verb>관리</VV_ManageArcanePlantFarm.verb>
-<VV_ManageArcanePlantFarm.gerund> 관리</VV_ManageArcanePlantFarm.gerund>
-
-<VV_DoBillsExtractor.label>추출기에서 작업</VV_DoBillsExtractor.label>
-<VV_DoBillsExtractor.verb>추출</VV_DoBillsExtractor.verb>
-<VV_DoBillsExtractor.gerund> 추출</VV_DoBillsExtractor.gerund>
-
 <VV_FortifyHoneycombWalls.label>벌집 벽 강화</VV_FortifyHoneycombWalls.label>
 <VV_FortifyHoneycombWalls.verb>벽 강화</VV_FortifyHoneycombWalls.verb>
 <VV_FortifyHoneycombWalls.gerund> 벽 강화</VV_FortifyHoneycombWalls.gerund>

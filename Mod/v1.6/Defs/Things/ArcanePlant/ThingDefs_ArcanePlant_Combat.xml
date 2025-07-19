@@ -66,7 +66,7 @@
         <leavingSeedCountCurve>
           <points>
             <li>(0, 3)</li>
-            <li>(0.7, 5)</li>
+            <li>(0.7, 4.5)</li>
             <li>(1.0, 6)</li>
           </points>
         </leavingSeedCountCurve>
@@ -95,7 +95,7 @@
       <DeteriorationRate>0</DeteriorationRate>
       <Mass>40</Mass>
       <Flammability>0</Flammability>
-      <VV_RangedWeapon_ManaCost>40</VV_RangedWeapon_ManaCost>
+      <VV_RangedWeapon_ManaCost>20</VV_RangedWeapon_ManaCost>
     </statBases>
 
     <verbs>
@@ -188,9 +188,9 @@
 
         <leavingSeedCountCurve>
           <points>
-            <li>(0, 2.5)</li>
+            <li>(0, 3)</li>
             <li>(0.7, 4.5)</li>
-            <li>(1.0, 5.5)</li>
+            <li>(1.0, 6)</li>
           </points>
         </leavingSeedCountCurve>
       </li>
@@ -202,8 +202,7 @@
   <ThingDef ParentName="VV_ArcanePlantCombat">
     <defName>VV_Cornlauncher</defName>
     <label>cornlauncher</label>
-    <description>It is a arcane plant that detects nearby enemies and attacks by launching corn. It consumes mana each time it fires, and the launched corn explodes upon impact, scattering corn kernels around, which then explode on a smaller scale.
-\nIt works well against many enemies, but the explosion can also hurt allies. If health is low, it might explode, so you need to be careful where you put it.</description>
+    <description>It is a arcane plant that detects nearby enemies and attacks by launching corn. It consumes mana each time it fires, and the launched corn explodes upon impact, scattering corn kernels around, which then explode on a smaller scale. It works well against many enemies, but the explosion can also hurt allies.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_LivingLeaf</ThingDef>
     </descriptionHyperlinks>
@@ -264,9 +263,9 @@
 
         <leavingSeedCountCurve>
           <points>
-            <li>(0, 2.5)</li>
+            <li>(0, 3)</li>
             <li>(0.7, 4.5)</li>
-            <li>(1.0, 5.5)</li>
+            <li>(1.0, 6)</li>
           </points>
         </leavingSeedCountCurve>
       </li>

@@ -3,8 +3,7 @@
   <GeneDef>
     <defName>VV_ViviMetabolism</defName>
     <label>excessive metabolism</label>
-    <description>Vivi's unique genes greatly increase their speed of technology acquisition, and they receive learning bonuses at developmental stages.
-\nThey age and grow very quickly and cannot reproduce via traditional methods.</description>
+    <description>Vivi's unique genes greatly boost skill learning speed and grant learning bonuses during growth stages. Growth and aging are very rapid, and it cannot reproduce by normal means.</description>
     <iconPath>UI/Icons/Genes/Gene_Vivi</iconPath>
     <displayCategory>Miscellaneous</displayCategory>
     <biologicalAgeTickFactorFromAgeCurve>

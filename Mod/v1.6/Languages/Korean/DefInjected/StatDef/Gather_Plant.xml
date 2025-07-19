@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+<VV_PlantGatherCooldown.label>채집 재생시간</VV_PlantGatherCooldown.label>
+<VV_PlantGatherCooldown.description>식물을 채집 후 다시 채집 가능할때까지 걸리는 시간을 나타냅니다. 오염된 지형에서는 재생하는데 더 오랜 시간이 걸립니다.</VV_PlantGatherCooldown.description>
+<VV_PlantGatherCooldown.formatString>{0} 일</VV_PlantGatherCooldown.formatString>
+
+<VV_PlantHoneyGatherYield.label>꿀 생산량</VV_PlantHoneyGatherYield.label>
+<VV_PlantHoneyGatherYield.description>식물에서 평균 대비 얼마나 많은 꿀을 채집 가능한지 나타냅니다. 생산량은 내구도, 성장도, 오염에 영향을 받습니다.</VV_PlantHoneyGatherYield.description>
+
+<VV_TreeResinGatherYield.label>프로폴리스 생산량</VV_TreeResinGatherYield.label>
+<VV_TreeResinGatherYield.description>식물에서 평균 대비 얼마나 많은 프로폴리스를 채집 가능한지 나타냅니다. 생산량은 내구도, 성장도, 오염에 영향을 받습니다.</VV_TreeResinGatherYield.description>
+
+</LanguageData>

@@ -55,23 +55,6 @@
   </WorkGiverDef>
 
   <WorkGiverDef>
-    <defName>VV_DoBillsExtractor</defName>
-    <label>work at auto extractor</label>
-    <giverClass>WorkGiver_DoBill</giverClass>
-    <workType>Crafting</workType>
-    <priorityInType>98</priorityInType>
-    <fixedBillGiverDefs>
-      <li>VV_AutoExtractor</li>
-    </fixedBillGiverDefs>
-    <verb>extract something</verb>
-    <gerund>extracting somethings at</gerund>
-    <requiredCapacities>
-      <li>Manipulation</li>
-    </requiredCapacities>
-    <prioritizeSustains>true</prioritizeSustains>
-  </WorkGiverDef>
-
-  <WorkGiverDef>
     <defName>VV_FortifyHoneycombWalls</defName>
     <label>fortify honeycomb walls</label>
     <giverClass>VVRace.WorkGiver_FortifyHoneycombWall</giverClass>

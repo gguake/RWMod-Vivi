@@ -7,7 +7,7 @@ namespace VVRace
 {
     public class Recipe_InjectPropolis : Recipe_Surgery
     {
-        public const float BaseOffset = 0.1f;
+        public const float BaseOffset = 0.06f;
 
         public override void ApplyOnPawn(Pawn pawn, BodyPartRecord part, Pawn billDoer, List<Thing> ingredients, Bill bill)
         {

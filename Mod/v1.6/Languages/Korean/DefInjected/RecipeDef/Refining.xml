@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
+
+<!-- Tier1 -->
 <VV_MakeVivicream.label>비비 크림 만들기</VV_MakeVivicream.label>
 <VV_MakeVivicream.description>비비가 몸에서 크림을 만들어내 모읍니다. 비비만 만들 수 있고 재료를 요구하지 않는 대신 비비의 열량을 소모하며 배고프면 만들 수 없습니다.</VV_MakeVivicream.description>
 <VV_MakeVivicream.jobString>비비 크림 만드는 중.</VV_MakeVivicream.jobString>
@@ -16,6 +18,17 @@
 <VV_RefiningPropolis.description>프로폴리스를 정제해 생약 성분과 뉴트로아민을 추출합니다.</VV_RefiningPropolis.description>
 <VV_RefiningPropolis.jobString>프로폴리스 정제 중.</VV_RefiningPropolis.jobString>
 
+<VV_MakeFertilizerCorpse.label>뼈로 마나 비료 만들기</VV_MakeFertilizerCorpse.label>
+<VV_MakeFertilizerCorpse.description>썩은 시체나 뼈를 꽃가루나 식물성 재료와 배합해 마나 비료를 만듭니다.</VV_MakeFertilizerCorpse.description>
+<VV_MakeFertilizerCorpse.jobString>뼈로 비료를 배합하는 중.</VV_MakeFertilizerCorpse.jobString>
+<VV_MakeFertilizerCorpse.ingredients.1.filter.customSummary>꽃가루나 식물성 재료</VV_MakeFertilizerCorpse.ingredients.1.filter.customSummary>
+
+<VV_MakeFertilizerResource.label>유기물로 마나 비료 만들기</VV_MakeFertilizerResource.label>
+<VV_MakeFertilizerResource.description>유기물을 숙성시켜 꽃가루나 식물성 재료와 배합해 마나 비료를 만듭니다.</VV_MakeFertilizerResource.description>
+<VV_MakeFertilizerResource.jobString>유기물로 비료를 배합하는 중.</VV_MakeFertilizerResource.jobString>
+<VV_MakeFertilizerResource.ingredients.1.filter.customSummary>꽃가루나 식물성 재료</VV_MakeFertilizerResource.ingredients.1.filter.customSummary>
+
+<!-- Tier2 -->
 <VV_RefineTitanicHornetWing.label>거대 말벌 날개 가공</VV_RefineTitanicHornetWing.label>
 <VV_RefineTitanicHornetWing.description>강력하고 튼튼한 섬유질로 이루어진 말벌 날개를 생체가닥으로 가공합니다.</VV_RefineTitanicHornetWing.description>
 <VV_RefineTitanicHornetWing.jobString>말벌 날개 가공 중.</VV_RefineTitanicHornetWing.jobString>
@@ -23,14 +36,5 @@
 <VV_MakeLifestrand.label>생체가닥 직조</VV_MakeLifestrand.label>
 <VV_MakeLifestrand.description>악마가닥을 마나가 깃든 재료로 가공해 생체가닥을 직조합니다.</VV_MakeLifestrand.description>
 <VV_MakeLifestrand.jobString>생체가닥 직조 중.</VV_MakeLifestrand.jobString>
-
-<VV_MakeFertilizerCorpse.label>뼈로 마나 비료 만들기</VV_MakeFertilizerCorpse.label>
-<VV_MakeFertilizerCorpse.description>뼈를 흙, 꽃가루와 배합해 마나 비료를 만듭니다.</VV_MakeFertilizerCorpse.description>
-<VV_MakeFertilizerCorpse.jobString>뼈로 비료를 배합하는 중.</VV_MakeFertilizerCorpse.jobString>
-
-<VV_MakeFertilizerResource.label>유기물로 마나 비료 만들기</VV_MakeFertilizerResource.label>
-<VV_MakeFertilizerResource.description>유기물을 숙성시켜 흙, 꽃가루와 배합해 마나 비료를 만듭니다.</VV_MakeFertilizerResource.description>
-<VV_MakeFertilizerResource.jobString>유기물로 비료를 배합하는 중.</VV_MakeFertilizerResource.jobString>
-<VV_MakeFertilizerResource.ingredients.1.filter.customSummary>꽃가루나 미확인 씨앗</VV_MakeFertilizerResource.ingredients.1.filter.customSummary>
 
 </LanguageData>

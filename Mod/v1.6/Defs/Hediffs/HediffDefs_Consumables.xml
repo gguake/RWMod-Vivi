@@ -38,7 +38,7 @@
 
         <statOffsets>
           <ImmunityGainSpeed>0.15</ImmunityGainSpeed>
-          <PsychicSensitivity>0.3</PsychicSensitivity>
+          <PsychicSensitivity>0.15</PsychicSensitivity>
           <MeditationFocusGain>0.15</MeditationFocusGain>
           <PsychicEntropyRecoveryRate>0.15</PsychicEntropyRecoveryRate>
         </statOffsets>
@@ -133,8 +133,8 @@
 
   <HediffDef>
     <defName>VV_WarmingFloralTea</defName>
-    <label>high on hot tea</label>
-    <description>Drunk hot flowering tea, making their body more resistant to the cold.</description>
+    <label>high on warm tea</label>
+    <description>Drunk warm flowering tea, making their body more resistant to the cold.</description>
     <hediffClass>HediffWithComps</hediffClass>
     <defaultLabelColor>(1,0,0.5)</defaultLabelColor>
     
@@ -188,7 +188,7 @@
   <HediffDef>
     <defName>VV_FlowerScent</defName>
     <label>flower scent</label>
-    <description>Emitting a floral scent from body.</description>
+    <description>Emitting a floral scent from body. It becomes easier to focus psychic energy.</description>
     <hediffClass>HediffWithComps</hediffClass>
     <defaultLabelColor>(1,0,0.5)</defaultLabelColor>
     
@@ -199,9 +199,13 @@
     <stages>
       <li>
         <statOffsets>
+          <PsychicSensitivity>0.25</PsychicSensitivity>
           <MeditationFocusGain>0.05</MeditationFocusGain>
           <PsychicEntropyRecoveryRate>0.05</PsychicEntropyRecoveryRate>
         </statOffsets>
+        <statFactors>
+          <RestRateMultiplier>0.85</RestRateMultiplier>
+        </statFactors>
       </li>
     </stages>
 

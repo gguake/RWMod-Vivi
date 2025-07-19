@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+
+<VV_EverflowerImpact.label>영원꽃 피로</VV_EverflowerImpact.label>
+<VV_EverflowerImpact.description>영원꽃의 향에 영향을 받아 다소 피로해진 상태입니다.</VV_EverflowerImpact.description>
+
+<VV_EverflowerLink.label>영원꽃 교감</VV_EverflowerLink.label>
+<VV_EverflowerLink.description>영원꽃과의 교감 연결이 형성된 상태입니다. 영원꽃과 다른 지역으로 이동하거나 격리된 상태가 되면 연결이 일시적으로 해제됩니다.</VV_EverflowerLink.description>
+
+<VV_ViviFairyFollow.label>요정 비비 결속</VV_ViviFairyFollow.label>
+<VV_ViviFairyFollow.description>요정 비비가 로열 비비에 결속된 상태입니다. 요정 비비는 로열 비비의 학습과 정신 집중에 도움을 주며 종종 로열 비비에게 가해지는 피해를 흡수해줍니다.
+\n하지만 결속된 요정 비비가 너무 많으면 로열 비비가 겪는 피로가 점차 심해집니다.</VV_ViviFairyFollow.description>
+
+<VV_FairyficationSickness.label>요정화 후유증</VV_FairyficationSickness.label>
+<VV_FairyficationSickness.description>요정화가 해제되어 원래의 신체로 돌아오면서 발생하는 후유증입니다. 후유증을 겪는중에는 다시 요정화를 할 수 없습니다.</VV_FairyficationSickness.description>
+
+</Defs>

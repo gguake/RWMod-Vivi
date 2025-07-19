@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
 <VV_Inspector_ProperTemperature>Proper Temperature: {0} ~ {1}</VV_Inspector_ProperTemperature>
-<VV_Inspector_HatcheryDisabled>Unsuitable Incubator</VV_Inspector_HatcheryDisabled>
+<VV_Inspector_HatcheryDisabled>Unsuitable Hatchery</VV_Inspector_HatcheryDisabled>
 <VV_Inspector_HatcheryDisabledReasonNoRoof>No Roof</VV_Inspector_HatcheryDisabledReasonNoRoof>
 <VV_Inspector_HatcheryDisabledReasonOutdoor>Outdoor</VV_Inspector_HatcheryDisabledReasonOutdoor>
 

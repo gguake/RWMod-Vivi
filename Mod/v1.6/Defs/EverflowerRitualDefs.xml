@@ -9,7 +9,9 @@
   <VVRace.EverflowerRitualDef ParentName="EverflowerRitualBase">
     <defName>VV_Attunement</defName>
     <label>attunement ritual</label>
-    <description>.</description>
+    <description>Creates or strengthens an everflower attunement link. Higher attunement rank grants beneficial effects and more ability use.
+\nRe-attuning an already linked royal vivi reinforces the link (occasionally spawning arcane plants).
+\nAll everflower attunement rituals share a cooldown.</description>
     <workerClass>VVRace.EverflowerRitualWorker_Attunement</workerClass>
     
     <uiOrder>1</uiOrder>
@@ -32,7 +34,8 @@
   <VVRace.EverflowerRitualDef ParentName="EverflowerRitualBase">
     <defName>VV_MoveEverflower</defName>
     <label>move everflower</label>
-    <description>.</description>
+    <description>Teleports the Everflower to a new location. It can't be moved too far in one jump.
+\nAll everflower attunement rituals share a cooldown.</description>
     <workerClass>VVRace.EverflowerRitualWorker_MoveEverflower</workerClass>
 
     <uiOrder>2</uiOrder>
@@ -53,7 +56,8 @@
   <VVRace.EverflowerRitualDef ParentName="EverflowerRitualBase">
     <defName>VV_ChangeWeatherRitual</defName>
     <label>change weather ritual</label>
-    <description>.</description>
+    <description>Changes the area's weather via Everflower attunement—resulting weather is unpredictable.
+\nAll everflower attunement rituals share a cooldown.</description>
     <workerClass>VVRace.EverflowerRitualWorker_ChangeWeather</workerClass>
 
     <uiOrder>3</uiOrder>
@@ -75,7 +79,10 @@
   <VVRace.EverflowerRitualDef ParentName="EverflowerRitualBase">
     <defName>VV_Fairyfication</defName>
     <label>fairyfication</label>
-    <description>.</description>
+    <description>Transform the selected vivi to fairy form using everflower's mana. The fairyfication ritual can only target an adult common Vivi that hatched from an egg laid by this Royal Vivi.
+\nA vivi in fairy form becomes tiny and follows the royal vivi. Time does not pass for a fairy vivi, so it has no needs and cannot be attacked, but if the royal vivi dies it disperses and vanishes.
+\nA fairy vivi can be returned to its original form through the defairyfication ritual, but this leaves lingering after-effects and while they persist the vivi cannot be fairyficated again.
+\nAll everflower attunement rituals share a cooldown.</description>
     <workerClass>VVRace.EverflowerRitualWorker_Fairyfication</workerClass>
 
     <uiOrder>4</uiOrder>
@@ -96,8 +103,10 @@
   <!-- 요정화 해제 -->
   <VVRace.EverflowerRitualDef ParentName="EverflowerRitualBase">
     <defName>VV_UndoFairyfication</defName>
-    <label>undo fairyfication</label>
-    <description>.</description>
+    <label>defairyfication</label>
+    <description>Reverts a fairy vivi to its original form. You can't choose which fairy vivi will revert.
+\nThe reverted vivi suffers after-effects for 1 year, and cannot be fairyficated again while they last.
+\nAll everflower attunement rituals share a cooldown.</description>
     <workerClass>VVRace.EverflowerRitualWorker_UndoFairy</workerClass>
 
     <uiOrder>5</uiOrder>
@@ -118,7 +127,9 @@
   <VVRace.EverflowerRitualDef ParentName="EverflowerRitualBase">
     <defName>VV_Manawave</defName>
     <label>emit manawave</label>
-    <description>.</description>
+    <description>Releases a powerful mana wave that briefly stuns all targets in range and floods the surroundings with an enormous amount of environment mana.
+\nTitanic hornets are highly sensitive to this wave, so swarms may be lured in to attack.
+\nAll everflower attunement rituals share a cooldown.</description>
     <workerClass>VVRace.EverflowerRitualWorker_Manawave</workerClass>
 
     <uiOrder>6</uiOrder>
@@ -135,7 +146,7 @@
     <effectOnComplete>VV_Manawave</effectOnComplete>
     <soundOnComplete>VV_Manawave</soundOnComplete>
 
-    <incidentProb>1</incidentProb>
-    <incidentDelayTicks>90000~900000</incidentDelayTicks>
+    <incidentProb>0.25</incidentProb>
+    <incidentDelayTicks>90000~600000</incidentDelayTicks>
   </VVRace.EverflowerRitualDef>
 </Defs>

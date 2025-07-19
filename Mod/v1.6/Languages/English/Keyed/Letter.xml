@@ -25,7 +25,7 @@
 <VV_Letter_FairyficationComplete>{CASTER_nameDef} has fairyficated {TARGET_nameDef}. The fairyficated vivi shrinks to a tiny form and follows the Royal Vivi.
 \nA fairy vivi does not experience time, has no needs, and cannot be attacked, but if the royal vivi dies it disperses and disappears.
 \nThe fairy vivi usually does nothing but trail the royal vivi, though it may occasionally lend help.
-\n\nA fairy vivi can be returned to its original form through the returning vivi ritual, but this leaves lingering after-effects and while they persist the vivi cannot be fairyficated again.</VV_Letter_FairyficationComplete>
+\n\nA fairy vivi can be returned to its original form through the defairyfication ritual, but this leaves lingering after-effects and while they persist the vivi cannot be fairyficated again.</VV_Letter_FairyficationComplete>
 
 <VV_Letter_IncidentHornetAssaultArrivedLabel>Titanic Hornet Swarm</VV_Letter_IncidentHornetAssaultArrivedLabel>
 <VV_Letter_IncidentHornetAssaultArrived>A frenzied swarm of titanic hornets has appeared. They will roam around and attack any life forms they encounter. Titanic hornets are very fast and durable, difficult to take down with conventional weapons, but vulnerable to fire and poison.

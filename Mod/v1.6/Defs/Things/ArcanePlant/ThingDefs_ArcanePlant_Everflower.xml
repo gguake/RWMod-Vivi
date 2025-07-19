@@ -4,7 +4,7 @@
   <ThingDef>
     <defName>VV_Everflower</defName>
     <label>everflower</label>
-    <description>A very rare arcane flower revered as sacred by the Vivi. Everflowers cannot be transplanted or cultivated by conventional means; only those attuned beyond a certain stage can be moved or grown.
+    <description>A very rare arcane flower revered as sacred by the vivi. Everflowers cannot be transplanted or cultivated by conventional means; only those attuned beyond a certain rank can be moved.
 \nOnly vivi can gather honey from the everflower, and doing so converts the gatherer's biological age into mana, which the flower absorbs.
 \nRoyal vivi with high psychic sensitivity can unlock special abilities by entering a psychic attunement with an everflower, but each royal vivi may link with only one everflower.
 \n\nWithin Vivi society, it is customary to give a single everflower seed to vivi who depart to build a new hive.</description>

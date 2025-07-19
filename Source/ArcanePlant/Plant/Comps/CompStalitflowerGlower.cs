@@ -19,13 +19,16 @@ namespace VVRace
             {
                 if (!base.ShouldBeLitNow) { return false; }
 
-                if (parent.Position.GetVacuum(parent.Map) < 0.5f)
+                if (parent.Map.Biome.inVacuum)
+                {
+                    var vaccum = parent.GetRoom()?.Vacuum ?? 1f;
+                    return vaccum >= 0.5f;
+                }
+                else
                 {
                     var dayPct = GenLocalDate.DayPercent(parent.Map);
                     return dayPct < 0.2f || dayPct > 0.7f;
                 }
-
-                return true;
             }
         }
     }

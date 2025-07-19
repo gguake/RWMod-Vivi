@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+<VV_ArcanePlantPot.label>마법 식물 화분</VV_ArcanePlantPot.label>
+<VV_ArcanePlantPot.description>마법 식물을 심을수 있는 화분입니다. 보통 실내나 식물이 자라지 못하는곳에 마법 식물을 배치하기 위해 사용됩니다.
+\n화분에 있는 마법 식물이 공격을 받을 경우 화염 피해가 아니라면 화분이 우선 피해를 흡수하지만, 화분이 파괴되면 마법 식물이 자동으로 포장됩니다.</VV_ArcanePlantPot.description>
+
+<VV_LargeArcanePlantPot.label>대형 마법 식물 화분</VV_LargeArcanePlantPot.label>
+<VV_LargeArcanePlantPot.description>마법 모종을 배양하기 위해 사용되는 대형 화분입니다. 대량의 비료를 수용할 수 있으며 농장에 있는 모종들의 양분을 높은 효율로 자동 관리해줍니다.
+\n이미 성장한 마법 식물도 심을 수 있으므로 실내에 많은 마법 식물을 한번에 심기 위한 대형 화분으로 사용할 수도 있습니다.</VV_LargeArcanePlantPot.description>
+<VV_LargeArcanePlantPot.comps.CompRefuelable.fuelLabel>마나 비료</VV_LargeArcanePlantPot.comps.CompRefuelable.fuelLabel>
+<VV_LargeArcanePlantPot.comps.CompRefuelable.fuelGizmoLabel>마나 비료</VV_LargeArcanePlantPot.comps.CompRefuelable.fuelGizmoLabel>
+
+<VV_ManaEmitter.label>마나 방출기</VV_ManaEmitter.label>
+<VV_ManaEmitter.description>마나 비료에 포함된 비활성 마나를 추출해 환경 마나로 변환하는 장치입니다. 마나 비료를 투입하면 이를 환경 마나로 천천히 변환해 주변에 퍼뜨려 활용할 수 있게 합니다.
+\n마나 변환 효율은 낮지만 마나 생산량이 부족하거나 긴급한 마나 공급이 필요한 경우 유용하므로 비비들이 둥지를 세울때 꼭 사용되는 장치입니다.</VV_ManaEmitter.description>
+<VV_ManaEmitter.comps.CompRefuelable.fuelLabel>마나 비료</VV_ManaEmitter.comps.CompRefuelable.fuelLabel>
+<VV_ManaEmitter.comps.CompRefuelable.fuelGizmoLabel>마나 비료</VV_ManaEmitter.comps.CompRefuelable.fuelGizmoLabel>
+
+</LanguageData>

@@ -4,7 +4,7 @@
   <RecipeDef>
     <defName>VV_Make_HoneyPollenCake</defName>
     <label>make honey pollen cake</label>
-    <description>Make honey pollen cake.</description>
+    <description>Mixes pollen with honey and packs it into small little balls.</description>
     <jobString>Making honey pollen cake.</jobString>
     <workAmount>400</workAmount>
     <workSpeedStat>CookSpeed</workSpeedStat>
@@ -53,7 +53,7 @@
   <RecipeDef>
     <defName>VV_Make_HoneyPollenCake_Bulk</defName>
     <label>make honey pollen cake x4</label>
-    <description>Make bulk honey pollen cake.</description>
+    <description>Mixes pollen with honey and packs it into small little balls.</description>
     <jobString>Making bulk honey pollen cake.</jobString>
     <workAmount>1600</workAmount>
     <workSpeedStat>CookSpeed</workSpeedStat>
@@ -102,7 +102,7 @@
   <RecipeDef>
     <defName>VV_Make_RoyalJelly</defName>
     <label>make royal jelly</label>
-    <description>Make royal jelly.</description>
+    <description>Extracts rare components from large quantities of Vivi cream, then mixes them with honey and pollen to produce royal jelly.</description>
 
     <jobString>Making royal jelly.</jobString>
     <workAmount>1000</workAmount>
@@ -161,13 +161,13 @@
   <!-- 따뜻한 꽃차 -->
   <RecipeDef>
     <defName>VV_Make_FloralHotTea</defName>
-    <label>make hot flowering tea</label>
-    <description>Make hot flowering tea.</description>
+    <label>brew warm flowering tea</label>
+    <description>Brews flowering tea with heating petals and a little honey.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_HeatingPetal</ThingDef>
     </descriptionHyperlinks>
 
-    <jobString>Making hot flowering tea.</jobString>
+    <jobString>brewing warm flowering tea.</jobString>
     <workAmount>500</workAmount>
     <workSpeedStat>DrugCookingSpeed</workSpeedStat>
     <requiredGiverWorkType>Cooking</requiredGiverWorkType>
@@ -213,13 +213,13 @@
   <!-- 얼음 꽃차 -->
   <RecipeDef>
     <defName>VV_Make_FloralIceTea</defName>
-    <label>make ice flowering tea</label>
-    <description>Make ice flowering tea.</description>
+    <label>brew ice flowering tea</label>
+    <description>Brews flowering tea with cooling petals and a little honey.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_CoolingPetal</ThingDef>
     </descriptionHyperlinks>
 
-    <jobString>Making ice flowering tea.</jobString>
+    <jobString>brewing ice flowering tea.</jobString>
     <workAmount>500</workAmount>
     <workSpeedStat>DrugCookingSpeed</workSpeedStat>
     <requiredGiverWorkType>Cooking</requiredGiverWorkType>
@@ -265,13 +265,13 @@
   <!-- 진한 꽃차 -->
   <RecipeDef>
     <defName>VV_Make_FloralMilkTea</defName>
-    <label>make aromatic flowering tea</label>
-    <description>Make aromatic flowering tea.</description>
+    <label>brew aromatic flowering tea</label>
+    <description>Brews aromatic flowering tea with perfuming petals and a little honey or milks.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_PerfumingPetal</ThingDef>
     </descriptionHyperlinks>
 
-    <jobString>Making aromatic flowering tea.</jobString>
+    <jobString>brewing aromatic flowering tea.</jobString>
     <workAmount>600</workAmount>
     <workSpeedStat>DrugCookingSpeed</workSpeedStat>
     <requiredGiverWorkType>Cooking</requiredGiverWorkType>

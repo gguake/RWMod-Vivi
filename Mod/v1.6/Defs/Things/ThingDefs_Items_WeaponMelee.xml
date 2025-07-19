@@ -4,8 +4,8 @@
   <ThingDef ParentName="BaseMeleeWeapon_Sharp_Quality">
     <defName>VV_ViviSpear</defName>
     <label>vivi spear</label>
-    <description>a spear commonly used by the Vivis. The tip of the spear is poisoned, intoxicating the opponent when hit, and is shaped for easy withdrawal after striking.
-\nIt is too small for an average person to handle, so only Vivi can use it.</description>
+    <description>a spear commonly used by vivis. Too small for ordinary humans, so only vivis can wield it.
+\nIts tip is poison-coated, poisoning struck enemies and attacking faster than a normal spear.</description>
     <graphicData>
       <texPath>Things/Item/Equipment/VV_Spear</texPath>
       <graphicClass>Graphic_Single</graphicClass>

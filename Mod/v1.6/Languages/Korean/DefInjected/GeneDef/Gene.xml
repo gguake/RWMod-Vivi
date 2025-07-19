@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
   <VV_ViviMetabolism.label>과다한 신진대사</VV_ViviMetabolism.label>
-  <VV_ViviMetabolism.description>비비 고유의 유전자로 기술 습득 속도가 대폭 증가하며 성장 단계에서 학습 관련 보너스를 받습니다.
-\n성장과 노화가 매우 빠르게 진행되고 일반적인 방법으로 생식할 수 없습니다.</VV_ViviMetabolism.description>
+  <VV_ViviMetabolism.description>비비 고유의 유전자로 기술 습득 속도가 대폭 증가하며 성장 단계에서 학습 관련 보너스를 받습니다. 성장과 노화가 매우 빠르게 진행되고 일반적인 방식으로는 생식할 수 없습니다.</VV_ViviMetabolism.description>
   <VV_ViviMetabolism.symbolPack.suffixSymbols.0.symbol>비비</VV_ViviMetabolism.symbolPack.suffixSymbols.0.symbol>
 
   <VV_HoneyDepedency.label>과당 의존증</VV_HoneyDepedency.label>

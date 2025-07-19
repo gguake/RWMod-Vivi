@@ -157,7 +157,7 @@
   <RecipeDef>
     <defName>VV_MakeFertilizerCorpse</defName>
     <label>make fertilizer from bones</label>
-    <description>Combine bones with soil and pollen to produce mana fertilizers.</description>
+    <description>Combine rotten corpse or bones with pollen or plant matters to produce mana fertilizers.</description>
     <jobString>making fertilizer from bones.</jobString>
     <workAmount>500</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
@@ -240,7 +240,7 @@
   <RecipeDef>
     <defName>VV_MakeFertilizerResource</defName>
     <label>make fertilizer from organics</label>
-    <description>Ferment organic matter and mix it with soil and pollen to produce mana fertilizers.</description>
+    <description>Ferment organic matter and mix it with pollen or plant matters to produce mana fertilizers.</description>
     <jobString>making fertilizer from organics.</jobString>
     <workAmount>2000</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>

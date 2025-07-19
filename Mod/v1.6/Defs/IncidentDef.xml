@@ -19,7 +19,7 @@
   
   <IncidentDef>
     <defName>VV_TitanicHornetAssault</defName>
-    <label>hornet swarm</label>
+    <label>hornet assault</label>
     <targetTags>
       <li>Map_PlayerHome</li>
     </targetTags>

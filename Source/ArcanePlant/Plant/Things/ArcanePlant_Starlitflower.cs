@@ -1,5 +1,4 @@
 ﻿using Verse;
-using Verse.AI;
 
 namespace VVRace
 {
@@ -39,16 +38,14 @@ namespace VVRace
 
         protected override void TickInterval(int delta)
         {
+            base.TickInterval(delta);
+
             if (!Spawned || Destroyed)
             {
                 return;
             }
 
-            if (_lastCompGlowerState != CompGlower.Glows)
-            {
-                _lastCompGlowerState = CompGlower.Glows;
-                DirtyMapMesh(Map);
-            }
+            CompGlower.UpdateLit(Map);
 
             if (Map.Biome.inVacuum)
             {

@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <HediffDef>
+    <defName>VV_EverflowerImpact</defName>
+    <label>everflower fatigue</label>
+    <description>Somewhat tired due to the influence of the everflower's fragrance.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(1,1,0)</defaultLabelColor>
+    
+    <isBad>false</isBad>
+    <priceImpact>false</priceImpact>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <initialSeverity>1</initialSeverity>
+    <maxSeverity>1</maxSeverity>
+
+    <stages>
+      <li>
+        <statOffsets>
+          <RestFallRateFactor>0.05</RestFallRateFactor>
+        </statOffsets>
+      </li>
+    </stages>
+
+    <comps>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-0.2</severityPerDay>
+        <showDaysToRecover>true</showDaysToRecover>
+        <showHoursToRecover>true</showHoursToRecover>
+      </li>
+    </comps>
+  </HediffDef>
+  
+  <HediffDef>
+    <defName>VV_EverflowerLink</defName>
+    <label>everflower attunement</label>
+    <description>An attunement link with an everflower is active. If the everflower moves to a different area or becomes isolated, the link will be temporarily severed.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(0,1,1)</defaultLabelColor>
+    
+    <isBad>false</isBad>
+    <priceImpact>false</priceImpact>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <everCurableByItem>false</everCurableByItem>
+
+    <initialSeverity>1</initialSeverity>
+    <maxSeverity>4</maxSeverity>
+
+    <stages>
+      <li>
+        <label>I</label>
+        <minSeverity>1</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>0.05</offset>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <minSeverity>2</minSeverity>
+        <label>II</label>
+        <statOffsets>
+          <PsychicSensitivity>0.1</PsychicSensitivity>
+        </statOffsets>
+        <statFactors>
+          <IncomingDamageFactor>0.95</IncomingDamageFactor>
+        </statFactors>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>0.075</offset>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <minSeverity>3</minSeverity>
+        <label>III</label>
+        <statOffsets>
+          <PsychicSensitivity>0.2</PsychicSensitivity>
+        </statOffsets>
+        <statFactors>
+          <IncomingDamageFactor>0.9</IncomingDamageFactor>
+        </statFactors>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>0.1</offset>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <minSeverity>4</minSeverity>
+        <label>IV</label>
+        <statOffsets>
+          <PsychicSensitivity>0.3</PsychicSensitivity>
+        </statOffsets>
+        <statFactors>
+          <IncomingDamageFactor>0.85</IncomingDamageFactor>
+        </statFactors>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>0.125</offset>
+          </li>
+        </capMods>
+      </li>
+    </stages>
+
+    <comps>
+      <li><compClass>VVRace.HediffComp_EverflowerLink</compClass></li>
+    </comps>
+  </HediffDef>
+  
+  <HediffDef>
+    <defName>VV_ViviFairyFollow</defName>
+    <label>vivi fairy</label>
+    <description>A fairy vivi is bound, aiding learning and focus and sometimes absorbing damage. too many bound fairies steadily increase fatigue.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(0,1,1)</defaultLabelColor>
+    
+    <isBad>false</isBad>
+    <priceImpact>false</priceImpact>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <everCurableByItem>false</everCurableByItem>
+
+    <initialSeverity>1</initialSeverity>
+    <maxSeverity>10</maxSeverity>
+
+    <stages>
+      <li>
+        <label>I</label>
+        <minSeverity>1</minSeverity>
+        <statOffsets>
+          <PsychicSensitivity>0.1</PsychicSensitivity>
+        </statOffsets>
+        <statFactors>
+          <GlobalLearningFactor>1.05</GlobalLearningFactor>
+          <JoyFallRateFactor>0.8</JoyFallRateFactor>
+        </statFactors>
+      </li>
+      <li>
+        <label>II</label>
+        <minSeverity>2</minSeverity>
+        <statOffsets>
+          <PsychicSensitivity>0.2</PsychicSensitivity>
+        </statOffsets>
+        <statFactors>
+          <GlobalLearningFactor>1.1</GlobalLearningFactor>
+          <JoyFallRateFactor>0.8</JoyFallRateFactor>
+        </statFactors>
+      </li>
+      <li>
+        <label>III</label>
+        <minSeverity>3</minSeverity>
+        <statOffsets>
+          <PsychicSensitivity>0.3</PsychicSensitivity>
+        </statOffsets>
+        <statFactors>
+          <GlobalLearningFactor>1.15</GlobalLearningFactor>
+          <JoyFallRateFactor>0.8</JoyFallRateFactor>
+        </statFactors>
+      </li>
+      <li>
+        <label>IV</label>
+        <minSeverity>4</minSeverity>
+        <statOffsets>
+          <PsychicSensitivity>0.4</PsychicSensitivity>
+        </statOffsets>
+        <statFactors>
+          <MoveSpeed>0.95</MoveSpeed>
+          <GlobalLearningFactor>1.2</GlobalLearningFactor>
+          <RestFallRateFactor>1.2</RestFallRateFactor>
+          <RestRateMultiplier>1.2</RestRateMultiplier>
+          <JoyFallRateFactor>0.9</JoyFallRateFactor>
+        </statFactors>
+      </li>
+      <li>
+        <label>V</label>
+        <minSeverity>5</minSeverity>
+        <statOffsets>
+          <PsychicSensitivity>0.5</PsychicSensitivity>
+        </statOffsets>
+        <statFactors>
+          <MoveSpeed>0.95</MoveSpeed>
+          <GlobalLearningFactor>1.25</GlobalLearningFactor>
+          <RestFallRateFactor>1.3</RestFallRateFactor>
+          <RestRateMultiplier>1.3</RestRateMultiplier>
+          <JoyFallRateFactor>0.9</JoyFallRateFactor>
+        </statFactors>
+      </li>
+      <li>
+        <label>VI</label>
+        <minSeverity>6</minSeverity>
+        <statOffsets>
+          <PsychicSensitivity>0.6</PsychicSensitivity>
+        </statOffsets>
+        <statFactors>
+          <MoveSpeed>0.9</MoveSpeed>
+          <GlobalLearningFactor>1.3</GlobalLearningFactor>
+          <RestFallRateFactor>1.4</RestFallRateFactor>
+          <RestRateMultiplier>1.4</RestRateMultiplier>
+        </statFactors>
+      </li>
+      <li>
+        <label>VII</label>
+        <minSeverity>7</minSeverity>
+        <statOffsets>
+          <PsychicSensitivity>0.7</PsychicSensitivity>
+        </statOffsets>
+        <statFactors>
+          <MoveSpeed>0.9</MoveSpeed>
+          <GlobalLearningFactor>1.35</GlobalLearningFactor>
+          <RestFallRateFactor>1.55</RestFallRateFactor>
+          <RestRateMultiplier>1.55</RestRateMultiplier>
+        </statFactors>
+      </li>
+      <li>
+        <label>VIII</label>
+        <minSeverity>8</minSeverity>
+        <statOffsets>
+          <PsychicSensitivity>0.8</PsychicSensitivity>
+        </statOffsets>
+        <statFactors>
+          <MoveSpeed>0.85</MoveSpeed>
+          <GlobalLearningFactor>1.4</GlobalLearningFactor>
+          <RestFallRateFactor>1.7</RestFallRateFactor>
+          <RestRateMultiplier>1.7</RestRateMultiplier>
+        </statFactors>
+      </li>
+      <li>
+        <label>IX</label>
+        <minSeverity>9</minSeverity>
+        <statOffsets>
+          <PsychicSensitivity>0.9</PsychicSensitivity>
+        </statOffsets>
+        <statFactors>
+          <MoveSpeed>0.85</MoveSpeed>
+          <GlobalLearningFactor>1.45</GlobalLearningFactor>
+          <RestFallRateFactor>1.85</RestFallRateFactor>
+          <RestRateMultiplier>1.85</RestRateMultiplier>
+        </statFactors>
+      </li>
+      <li>
+        <label>X</label>
+        <minSeverity>10</minSeverity>
+        <statOffsets>
+          <PsychicSensitivity>1.0</PsychicSensitivity>
+        </statOffsets>
+        <statFactors>
+          <MoveSpeed>0.8</MoveSpeed>
+          <GlobalLearningFactor>1.5</GlobalLearningFactor>
+          <RestFallRateFactor>2</RestFallRateFactor>
+          <RestRateMultiplier>2</RestRateMultiplier>
+        </statFactors>
+      </li>
+    </stages>
+
+    <comps>
+      <li><compClass>VVRace.HediffComp_EverflowerLink</compClass></li>
+    </comps>
+  </HediffDef>
+  
+  <HediffDef ParentName="DiseaseBase">
+    <defName>VV_FairyficationSickness</defName>
+    <label>fairyfication sickness</label>
+    <description>after-effect that occurs when fairy form ends and the original body is restored. While under this after-effect, they cannot undergo fairyfication again.</description>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>2700000~4500000</disappearsAfterTicks>
+        <showRemainingTime>true</showRemainingTime>
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <postFactor>0.9</postFactor>
+          </li>
+          <li>
+            <capacity>Moving</capacity>
+            <postFactor>0.9</postFactor>
+          </li>
+          <li>
+            <capacity>Manipulation</capacity>
+            <postFactor>0.9</postFactor>
+          </li>
+        </capMods>
+      </li>
+    </stages>
+  </HediffDef>
+</Defs>

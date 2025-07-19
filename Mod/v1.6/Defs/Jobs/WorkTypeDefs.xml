@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  
   <WorkTypeDef>
     <defName>VV_Gathering</defName>
     <labelShort>gather</labelShort>
     <pawnLabel>Gather</pawnLabel>
     <gerundLabel>gathering</gerundLabel>
-    <description>Harvest resources without completely depleting them.</description>
+    <description>Harvest useful resources without completely depleting them. Low skill can damage the target.</description>
     <verb>Gather</verb>
     <naturalPriority>690</naturalPriority>
     <requireCapableColonist>true</requireCapableColonist>

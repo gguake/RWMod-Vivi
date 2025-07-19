@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+<VV_GeneticUnstability.label>유전자 불안정</VV_GeneticUnstability.label>
+<VV_GeneticUnstability.description>비비의 유전자가 극도로 불안정해져 예측할수 없는 세포 분열이 발생하고 있습니다. 지속적인 치료가 필요하며 최악의 경우 끔찍한 일이 일어날 것입니다..</VV_GeneticUnstability.description>
+<VV_GeneticUnstability.stages.painful.label>고통</VV_GeneticUnstability.stages.painful.label>
+<VV_GeneticUnstability.stages.debilitating.label>쇠약</VV_GeneticUnstability.stages.debilitating.label>
+<VV_GeneticUnstability.stages.fatal.label>치명적</VV_GeneticUnstability.stages.fatal.label>
+
+</LanguageData>

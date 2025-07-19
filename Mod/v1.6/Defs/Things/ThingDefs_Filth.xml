@@ -4,7 +4,7 @@
     <defName>VV_FilthPollen</defName>
     <thingClass>VVRace.Filth_Pollen</thingClass>
     <label>pollen</label>
-    <description>The pollen that often scatters around when a Vivi collects honey.</description>
+    <description>The pollen that often scatters around when a vivi collects honey.</description>
     <statBases>
       <Beauty>-5</Beauty>
       <Cleanliness>-5</Cleanliness>

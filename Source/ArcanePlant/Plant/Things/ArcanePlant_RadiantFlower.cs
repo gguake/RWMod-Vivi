@@ -24,16 +24,14 @@ namespace VVRace
 
         protected override void TickInterval(int delta)
         {
+            base.TickInterval(delta);
+
             if (!Spawned || Destroyed)
             {
                 return;
             }
 
-            if (_lastCompGlowerState != CompGlower.Glows)
-            {
-                _lastCompGlowerState = CompGlower.Glows;
-                DirtyMapMesh(Map);
-            }
+            CompGlower.UpdateLit(Map);
         }
 
         public override int? OverrideGraphicIndex => CompGlower.Glows ? 1 : 0;

@@ -87,7 +87,7 @@
           <points>
             <li>(0, 2.5)</li>
             <li>(0.7, 4.5)</li>
-            <li>(1.0, 5.5)</li>
+            <li>(1.0, 6)</li>
           </points>
         </leavingSeedCountCurve>
       </li>
@@ -98,7 +98,7 @@
   <ThingDef ParentName="VV_ArcanePlantProductive">
     <defName>VV_Thunderpetals</defName>
     <label>thunderpetals</label>
-    <description>a arcane flower with stamens that conduct electricity, capable of connecting to power lines to convert mana into electricity. When lightning strikes and the mana level is sufficient, it attracts the lightning to itself and converts it into mana.
+    <description>a arcane flower with stamens that conduct electricity, capable of connecting to power lines to convert mana into electricity. When lightning strikes and the mana is sufficient, it attracts the lightning to itself and converts it into mana.
 \nIf placed adjacent to a peashooter, it has a 25% chance to fire an electric pea instead when the peashooter attacks. Electric peas briefly stun targets instead of physical damage.\nIf multiple flashbud or thunderpetals are adjacent, the effect stacks.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_SparklingPetal</ThingDef>
@@ -172,7 +172,7 @@
           <points>
             <li>(0, 2.5)</li>
             <li>(0.7, 4.5)</li>
-            <li>(1.0, 5.5)</li>
+            <li>(1.0, 6)</li>
           </points>
         </leavingSeedCountCurve>
       </li>

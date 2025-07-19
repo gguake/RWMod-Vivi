@@ -182,7 +182,7 @@
 
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_Seed_Everflower</thingDef>
-        <countRange>-4~1</countRange>
+        <countRange>-9~1</countRange>
       </li>
 
       <!-- Exotic -->

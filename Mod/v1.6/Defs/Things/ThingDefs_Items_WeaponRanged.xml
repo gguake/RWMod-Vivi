@@ -4,8 +4,8 @@
   <ThingDef ParentName="BaseWeaponNeolithic">
     <defName>VV_Slingshot</defName>
     <label>vivi slingshot</label>
-    <description>a simple slingshot used by the Vivis to chase away rats or small animals. It's easy to handle and quite effective and has a chance to stun the target briefly.
-\nIt is too small for an average person to handle, so only Vivi can use it.</description>
+    <description>a simple slingshot used by young vivis to drive off rats and small animals. Too small for ordinary humans, so only Vivis can use it.
+\nRange is short, but it's easy to make and handle, effective, and has a high chance to stun on hit.</description>
     <graphicData>
       <texPath>Things/Item/Equipment/VV_Slingshot</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -20,9 +20,9 @@
       <MaxHitPoints>70</MaxHitPoints>
       <WorkToMake>2000</WorkToMake>
       <Mass>0.5</Mass>
-      <AccuracyTouch>0.85</AccuracyTouch>
-      <AccuracyShort>0.6</AccuracyShort>
-      <AccuracyMedium>0.2</AccuracyMedium>
+      <AccuracyTouch>0.9</AccuracyTouch>
+      <AccuracyShort>0.65</AccuracyShort>
+      <AccuracyMedium>0.1</AccuracyMedium>
       <AccuracyLong>0.03</AccuracyLong>
       <RangedWeapon_Cooldown>0.8</RangedWeapon_Cooldown>
     </statBases>
@@ -98,13 +98,13 @@
     </graphicData>
     <projectile>
       <damageDef>Blunt</damageDef>
-      <damageAmountBase>11</damageAmountBase>
+      <damageAmountBase>8</damageAmountBase>
       <stoppingPower>1.0</stoppingPower>
       <speed>30</speed>
       <extraDamages>
         <li>
           <def>Stun</def>
-          <amount>20</amount>
+          <amount>11</amount>
           <chance>0.75</chance>
         </li>
       </extraDamages>
@@ -115,8 +115,8 @@
   <ThingDef ParentName="BaseWeaponNeolithic">
     <defName>VV_ShockDart</defName>
     <label>vivi shock dart</label>
-    <description>a small dart for throwing. There is a slight current flowing through the tip, and if it hits a weak point, it can short-circuit and knock out machines or mechanoids.
-\nIt is too small and uncomfortable for an average person to throw, so only Vivi can use it.</description>
+    <description>a small throwing dart with an electrified tip. Too small and awkward for ordinary humans to throw, so only vivis can use it.
+\nA well-placed hit to a weak point can short-circuit machinery and stun it.</description>
     <graphicData>
       <texPath>Things/Item/Equipment/VV_Dart</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -236,8 +236,9 @@
   <ThingDef ParentName="BaseWeaponNeolithic">
     <defName>VV_ViviLongJavelin</defName>
     <label>vivi long javelin</label>
-    <description>a long javelin commonly used by Vivis against strong enemies. The tip is coated with poison, causing those hit to become poisoned. It has high destructive and penetrative power, but it's difficult to hit the target.
-\nIt is also effective in close combat, allowing it to respond to enemies without being neutralized. It is too small and uncomfortable for an average person to throw, so only Vivi can use it.</description>
+    <description>a long javelin commonly used by vivis against strong enemies. The tip is coated with poison, causing those hit to become poisoned. It has high destructive and penetrative power, but it's difficult to hit the target.
+\nIt is also effective in close combat, allowing it to respond to enemies without being neutralized. It is too small and uncomfortable for an average person to throw, so only vivis can use it.</description>
+
     <graphicData>
       <texPath>Things/Item/Equipment/VV_ViviLongJavelin</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -351,9 +352,9 @@
   <ThingDef ParentName="BaseWeaponNeolithic">
     <defName>VV_RepeatingCrossbow</defName>
     <label>vivi repeating crossbow</label>
-    <description>a repeating crossbow that requires almost no reloading or aiming time. The tip of the bolt is coated with poison, causing those hit to become poisoned.
-\nIt uses needle-like ammunition instead of traditional arrows, resulting in minimal range and power, but it offers overwhelming firepower and convenience, making it popular for self-defense.
-\nIt is too small and complex for a regular person to handle, so only Vivi can use it.</description>
+    <description>a rapid-fire crossbow that requires virtually no time to reload or aim. Too small and intricate for humans, so only vivis can wield it.
+\nFires poison-tipped, needle-like bolts instead of regular arrows—range and power are very low, but its overwhelming rate of fire and ease of use make it popular for self-defense and ideal for target practice.</description>
+
     <graphicData>
       <texPath>Things/Item/Equipment/VV_RepeatingCrossbow</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -440,7 +441,7 @@
 
   <ThingDef ParentName="BaseProjectileNeolithic">
     <defName>VV_Arrow_RepeatingCrossbow</defName>
-    <label>repeating crossbow needle</label>
+    <label>crossbow needle</label>
     <graphicData>
       <texPath>Things/Projectile/Needle</texPath>
       <graphicClass>Graphic_Single</graphicClass>

@@ -10,7 +10,7 @@ Only a few traces of the former empire remain, in the form of certain traditions
     <settlementNameMaker>VV_NamerSettlementVivi</settlementNameMaker>
     <pawnSingular>vivi</pawnSingular>
     <pawnsPlural>vivis</pawnsPlural>
-    <leaderTitle>empress</leaderTitle>
+    <leaderTitle>federation representative</leaderTitle>
     <techLevel>Medieval</techLevel>
 
     <replacesFaction>TribeCivil</replacesFaction>

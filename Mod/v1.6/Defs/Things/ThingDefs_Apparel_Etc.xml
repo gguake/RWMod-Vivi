@@ -4,7 +4,7 @@
   <ThingDef ParentName="ApparelMakeableBase">
     <defName>VV_GuardianCoat</defName>
     <label>vivi guardian coat</label>
-    <description>a coat for Vivi guardians who eliminate enemies of the hive. It is cut from lifestrand, so it looks like an ordinary cloth garment but provides very high defense.</description>
+    <description>A very sturdy coat tailored from biostrands for the vivis primary frontline fighters. It looks like ordinary cloth, yet provides very high protection, and with superior materials can rival heavy heavy-armor suits.</description>
     <graphicData>
       <texPath>Things/Apparel/VV_GuardianCoat</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -99,7 +99,7 @@
   <ThingDef ParentName="ApparelMakeableBase">
     <defName>VV_Childrenswear</defName>
     <label>vivi childrenswear</label>
-    <description>A small outfit for child Vivis. It's warm, designed for children's activities and uses little material to make, but it's too small to be worn once they become adults.</description>
+    <description>A small outfit for child vivis. It's warm, designed for children's activities and uses little material to make, but it's too small to be worn once they become adults.</description>
     <graphicData>
       <texPath>Things/Apparel/VV_ChildApparel</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -120,7 +120,7 @@
     </statBases>
     <equippedStatOffsets>
       <MoveSpeed>0.5</MoveSpeed>
-      <RestRateMultiplier>0.15</RestRateMultiplier>
+      <RestRateMultiplier>-0.1</RestRateMultiplier>
       <ToxicEnvironmentResistance>0.25</ToxicEnvironmentResistance>
     </equippedStatOffsets>
 

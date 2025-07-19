@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-<VV_GatherHoney.reportString>TargetA에서 꿀 채집 중.</VV_GatherHoney.reportString>
-<VV_GatherPollen.reportString>꽃가루 채집 중.</VV_GatherPollen.reportString>
-<VV_GatherPropolis.reportString>TargetA에서 프로폴리스 채집 중.</VV_GatherPropolis.reportString>
 
-<VV_LayViviEgg.reportString>알 낳는 중.</VV_LayViviEgg.reportString>
-
-<VV_ManageArcanePlantFarm.reportString>TargetA의 마법 식물을 돌보는 중.</VV_ManageArcanePlantFarm.reportString>
-
+<!-- Etc -->
 <VV_FortifyHoneycombWall.reportString>벌집 벽을 강화하는 중.</VV_FortifyHoneycombWall.reportString>
-
 <VV_PlantArcaneSeed.reportString>TargetA 심는 중.</VV_PlantArcaneSeed.reportString>
 
+<!-- EverflowerRitual -->
 <VV_AttunementEverflower.reportString>TargetA에 교감 중.</VV_AttunementEverflower.reportString>
+<VV_MoveEverflower.reportString>TargetA를 옮기기 위해 교감 중.</VV_MoveEverflower.reportString>
 <VV_ChangeWeather.reportString>날씨를 바꾸기 위해 TargetA에 교감 중.</VV_ChangeWeather.reportString>
 <VV_Fairyfication.reportString>TargetA에서 TargetB를 요정화 하는 중.</VV_Fairyfication.reportString>
 <VV_UndoFairyfication.reportString>TargetA에서 요정화를 해제하는 중.</VV_UndoFairyfication.reportString>
 <VV_Manawave.reportString>마나 파동을 방출하기 위해 TargetA에 교감 중.</VV_Manawave.reportString>
 
+<!-- Gather -->
+<VV_GatherHoney.reportString>TargetA에서 꿀 채집 중.</VV_GatherHoney.reportString>
+<VV_GatherPollen.reportString>꽃가루 채집 중.</VV_GatherPollen.reportString>
+<VV_GatherPropolis.reportString>TargetA에서 프로폴리스 채집 중.</VV_GatherPropolis.reportString>
+
+<!-- Hatchery -->
+<VV_LayViviEgg.reportString>알 낳는 중.</VV_LayViviEgg.reportString>
 
 </LanguageData>

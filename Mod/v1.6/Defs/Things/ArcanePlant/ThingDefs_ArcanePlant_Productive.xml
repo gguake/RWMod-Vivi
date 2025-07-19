@@ -100,7 +100,7 @@
           <points>
             <li>(0, 2.5)</li>
             <li>(0.7, 4.5)</li>
-            <li>(1.0, 5.5)</li>
+            <li>(1.0, 6)</li>
           </points>
         </leavingSeedCountCurve>
       </li>
@@ -139,6 +139,8 @@
 
     <comps>
       <li Class="VVRace.CompProperties_Mana">
+        <manaCapacity>250</manaCapacity>
+
         <manaGenerateRule Class="VVRace.ManaFluxRule_Sunlight">
           <manaFromSunlightRange>0~1300</manaFromSunlightRange>
         </manaGenerateRule>
@@ -153,7 +155,7 @@
             </li>
           </rules>
         </manaConsumeRule>
-        <manaAbsorbPerDay>1250</manaAbsorbPerDay>
+        <manaAbsorbPerDay>1400</manaAbsorbPerDay>
       </li>
 
       <li Class="VVRace.CompProperties_RepeatGatherable" />
@@ -176,7 +178,7 @@
           <points>
             <li>(0, 2.5)</li>
             <li>(0.7, 4.5)</li>
-            <li>(1.0, 5.5)</li>
+            <li>(1.0, 6)</li>
           </points>
         </leavingSeedCountCurve>
       </li>
@@ -188,7 +190,7 @@
     <defName>VV_Richflower</defName>
     <label>richflower</label>
     <description>a arcane flower with large petals that periodically spreads pollen on the surrounding ground and yields a lot of honey when harvested.
-\nIt produces mana from the life activities of nearby plants and transforms the surrounding soil into an environment favorable for cultivation.
+\nGenerates mana proportional to the soil's fertility and slowly enriches nearby soil.
 \nIf placed adjacent to a peashooter, it slightly increases the power and armor penetration of its peas when fired. If multiple richflowers or purifimints are adjacent, the effect stacks.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_PerfumingPetal</ThingDef>
@@ -280,7 +282,7 @@
           <points>
             <li>(0, 2.5)</li>
             <li>(0.7, 4.5)</li>
-            <li>(1.0, 5.5)</li>
+            <li>(1.0, 6)</li>
           </points>
         </leavingSeedCountCurve>
       </li>
@@ -315,7 +317,7 @@
 
     <comps>
       <li Class="VVRace.CompProperties_Mana">
-        <manaCapacity>500</manaCapacity>
+        <manaCapacity>300</manaCapacity>
 
         <manaGenerateRule Class="VVRace.ManaFluxRule_Refuelable">
           <mana>600</mana>
@@ -387,7 +389,7 @@
           <points>
             <li>(0, 2.5)</li>
             <li>(0.7, 4.5)</li>
-            <li>(1.0, 5.5)</li>
+            <li>(1.0, 6)</li>
           </points>
         </leavingSeedCountCurve>
       </li>
@@ -399,7 +401,7 @@
     <defName>VV_Starlitflower</defName>
     <label>starlitflower</label>
     <description>a arcane flower blooms exclusively at night, generating and emitting mana while radiating light. During the day, the flower wilts and absorbs a small amount of mana.
-\nStarlitflower resonates with the surrounding mana to create a starlit veil, a barrier of unique energy, for a brief period. Starlit veil blocks hostile projectiles and absorbs a certain amount of damage before dissipating. When starlit veil is formed at night, it can absorb significantly more damage.</description>
+\nIn vacuum environments like space it always produces mana, but at a reduced rate. It also generates a field that grants nearby units vacuum resistance.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_PerfumingPetal</ThingDef>
     </descriptionHyperlinks>
@@ -407,9 +409,8 @@
     <thingClass>VVRace.ArcanePlant_Starlitflower</thingClass>
 
     <graphicData>
-      <texPath>Things/Plants/VV_Purifier</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
-      <color>(255,0,255)</color>
+      <texPath>Things/Plants/VV_Starlitflower</texPath>
+      <graphicClass>Graphic_Random</graphicClass>
     </graphicData>
 
     <statBases>
@@ -427,7 +428,7 @@
 
     <comps>
       <li Class="VVRace.CompProperties_Mana">
-        <manaCapacity>200</manaCapacity>
+        <manaCapacity>150</manaCapacity>
 
         <manaGenerateRule Class="VVRace.ManaFluxRule_TimeOfDay">
           <mana>600</mana>
@@ -436,16 +437,16 @@
         </manaGenerateRule>
         
         <manaConsumeRule Class="VVRace.ManaFluxRule_InVaccum">
-          <mana>500</mana>
+          <mana>520</mana>
         </manaConsumeRule>
-        <manaAbsorbPerDay>50</manaAbsorbPerDay>
+        <manaAbsorbPerDay>75</manaAbsorbPerDay>
       </li>
 
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
       <li Class="VVRace.CompProperties_StalitflowerGlower">
-        <glowRadius>7.5</glowRadius>
-        <glowColor>(213,110,248,0)</glowColor>
+        <glowRadius>7.3</glowRadius>
+        <glowColor>(260,300,280,0)</glowColor>
       </li>
     </comps>
     
@@ -458,7 +459,7 @@
           <points>
             <li>(0, 2.5)</li>
             <li>(0.7, 4.5)</li>
-            <li>(1.0, 5.5)</li>
+            <li>(1.0, 6)</li>
           </points>
         </leavingSeedCountCurve>
       </li>

@@ -4,7 +4,9 @@
   <ThingDef ParentName="BaseHumanMakeableGun">
     <defName>VV_Steamthrower</defName>
     <label>steamthrower</label>
-    <description>.</description>
+    <description>A arcane weapon that sprays high-pressure hot steam. It inflicts burn damage on all targets in range, but allied units very close to the user are not harmed.
+\nThe steam extinguishes all fires in the area and, if in an enclosed space, raises the temperature. Highly effective against crowds of heat-vulnerable enemies, and vivis also use it to suppress large-scale fires.
+\nEach shot consumes mana; if mana is depleted it cannot fire, and it automatically recharges by absorbing environment mana nearby.</description>
 
     <graphicData>
       <texPath>Things/Item/Equipment/VV_Steamthrower</texPath>
@@ -120,7 +122,9 @@
   <ThingDef ParentName="BaseHumanMakeableGun">
     <defName>VV_SnowmanLauncher</defName>
     <label>snowman launcher</label>
-    <description>.</description>
+    <description>a arcane weapon that compacts and launches a snowman. Comical, but it triggers a powerful cold explosion over a wide area at impact, inflicting frostbite.
+\nSnow piles up where the blast passes, and the launched snowman lingers briefly before exploding a second time. Targets that suffer frostbite have their movement briefly slowed.
+\nEach shot consumes mana; if mana is depleted it cannot fire, and it automatically recharges by absorbing environment mana nearby.</description>
 
     <graphicData>
       <texPath>Things/Item/Equipment/VV_SnowmanLauncher</texPath>
@@ -230,7 +234,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VV_ExplosiveSnowman</defName>
     <label>explosive snowman</label>
-    <description>A set of large snow bomb piled and shaped to resemble a person. People make these for the fun of it.</description>
+    <description>A set of large snow bomb piled and shaped to resemble a person. People don't make these for the fear of it.</description>
     <thingClass>Building</thingClass>
     <altitudeLayer>Building</altitudeLayer>
     <passability>PassThroughOnly</passability>
@@ -276,7 +280,9 @@
   <ThingDef ParentName="BaseHumanMakeableGun">
     <defName>VV_ChainThunderPistol</defName>
     <label>chain thunder pistol</label>
-    <description>.</description>
+    <description>A arcane weapon that induces and fires a powerful, unfailing electric current at the aimed target. The current inflicts burn damage and briefly disables electronic equipment.
+\nIt then chains multiple times to nearby enemies for the same damage, making it effective indoors against scattered groups.
+\nEach shot consumes mana; if mana is depleted it cannot fire, and it automatically recharges by absorbing environment mana nearby.</description>
 
     <graphicData>
       <texPath>Things/Item/Equipment/VV_ArcPistol</texPath>

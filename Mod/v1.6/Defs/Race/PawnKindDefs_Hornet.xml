@@ -16,7 +16,7 @@
           <color>(255,255,255)</color>
         </bodyGraphicData>
         <dessicatedBodyGraphicData>
-          <texPath>Things/Pawn/Animal/Spelopede/Dessicated_Spelopede</texPath>
+          <texPath>Things/Pawn/Hornet/Dessicated_Hornet</texPath>
           <drawSize>2.5</drawSize>
         </dessicatedBodyGraphicData>
         <butcherBodyPart>
