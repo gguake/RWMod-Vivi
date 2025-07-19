@@ -112,6 +112,7 @@
     <building>
       <isInert>false</isInert>
       <ai_combatDangerous>true</ai_combatDangerous>
+      <uninstallWork>500</uninstallWork>
     </building>
     
     <tradeTags>

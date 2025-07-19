@@ -169,6 +169,7 @@
       <ai_combatDangerous>true</ai_combatDangerous>
       <turretTopOffset>(0, 0.11)</turretTopOffset>
       <turretTopDrawSize>0.5</turretTopDrawSize>
+      <uninstallWork>80</uninstallWork>
     </building>
 
     <placeWorkers>

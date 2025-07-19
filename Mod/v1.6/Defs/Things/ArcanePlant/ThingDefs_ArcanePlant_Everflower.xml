@@ -67,6 +67,10 @@
       <expandHomeArea>true</expandHomeArea>
     </building>
     
+    <tradeTags Inherit="False">
+    </tradeTags>
+    
+    
     <comps>
       <li Class="VVRace.CompProperties_Mana">
         <manaGenerateRule Class="VVRace.ManaFluxRule_Random">

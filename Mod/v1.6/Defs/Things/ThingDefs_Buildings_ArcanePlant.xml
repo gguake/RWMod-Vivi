@@ -52,7 +52,6 @@
 
     <comps>
       <li Class="CompProperties_Forbiddable"/>
-      <li><compClass>CompQuality</compClass></li>
     </comps>
     
     <thingCategories>
