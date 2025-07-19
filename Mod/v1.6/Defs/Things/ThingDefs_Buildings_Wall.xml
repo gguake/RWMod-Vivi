@@ -149,12 +149,12 @@
     </comps>
   </ThingDef>
   
-  <!-- 경화된 비비 벌집 벽 -->
+  <!-- 강화된 비비 벌집 벽 -->
   <ThingDef ParentName="Wall">
     <defName>VV_ViviHardenHoneycombWall</defName>
     <label>vivi harden honeycomb wall</label>
-    <description>a hexagonal structured harden honeycomb wall. It's impassable and supports roofs.
-\nIt's slightly less durable than regular honeycomb walls, but it's fire-resistant, making it a good choice for exterior walls.</description>
+    <description>A fireproof honeycomb wall reinforced with lifestrands. It's impassable and supports roofs.
+\nIt's slightly less durable than regular honeycomb walls, but it's , making it a good choice for exterior walls.</description>
     
     <graphicData>
       <texPath>Things/Building/Wall_Atlas_HardenHoneycombWall</texPath>

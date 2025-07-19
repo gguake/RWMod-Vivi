@@ -13,8 +13,7 @@
 <VV_ViviHoneycombWall.description>육각 구조가 층층히 쌓여있는 벽입니다. 지나갈수 없고 지붕을 지지합니다.
 \n각종 충격에는 매우 튼튼하지만 화재에는 매우 취약합니다.</VV_ViviHoneycombWall.description>
 
-<VV_ViviHardenHoneycombWall.label>경화된 비비 벌집 벽</VV_ViviHardenHoneycombWall.label>
-<VV_ViviHardenHoneycombWall.description>생체가닥으로 경화된 벌집 벽입니다. 지나갈수 없고 지붕을 지지합니다.
-\n일반 벌집 벽보다는 내구성이 조금 낮지만 불이 붙지 않아 외벽으로 사용하기 좋습니다.</VV_ViviHardenHoneycombWall.description>
+<VV_ViviHardenHoneycombWall.label>강화된 비비 벌집 벽</VV_ViviHardenHoneycombWall.label>
+<VV_ViviHardenHoneycombWall.description>A fireproof honeycomb wall reinforced with lifestrands. 지나갈수 없고 지붕을 지지합니다.</VV_ViviHardenHoneycombWall.description>
 
 </LanguageData>
