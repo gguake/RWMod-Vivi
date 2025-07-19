@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
 
+<VV_MinGrowthPlantGatherable.label>채집 가능 최소 성장율</VV_MinGrowthPlantGatherable.label>
+<VV_MinGrowthPlantGatherable.description>채집할 수 있는 식물의 최소 성장율입니다. 최소 성장율보다 덜 성장한 식물에서는 채집할 수 없습니다.</VV_MinGrowthPlantGatherable.description>
+
 <VV_PlantGatherCooldown.label>채집 재생시간</VV_PlantGatherCooldown.label>
 <VV_PlantGatherCooldown.description>식물을 채집 후 다시 채집 가능할때까지 걸리는 시간을 나타냅니다. 오염된 지형에서는 재생하는데 더 오랜 시간이 걸립니다.</VV_PlantGatherCooldown.description>
 <VV_PlantGatherCooldown.formatString>{0} 일</VV_PlantGatherCooldown.formatString>

@@ -157,7 +157,7 @@
   <RecipeDef>
     <defName>VV_MakeFertilizerCorpse</defName>
     <label>make fertilizer from bones</label>
-    <description>Combine rotten corpse or bones with pollen or plant matters to produce mana fertilizers.</description>
+    <description>Combine rotten corpse or bones with pollen to produce mana fertilizers.</description>
     <jobString>making fertilizer from bones.</jobString>
     <workAmount>500</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
@@ -168,7 +168,6 @@
     <soundWorking>Recipe_Brewing</soundWorking>
     <uiIconThing>VV_Fertilizer</uiIconThing>
 
-    <ingredientValueGetterClass>IngredientValueGetter_Nutrition</ingredientValueGetterClass>
     <ingredients>
       <li>
         <filter>
@@ -176,19 +175,16 @@
             <li>Corpses</li>
           </categories>
         </filter>
-        <count>2.0</count>
+        <count>1</count>
       </li>
       <li>
         <filter>
-          <customSummary>pollen or plant matters</customSummary>
+          <customSummary>pollen</customSummary>
           <thingDefs>
             <li>VV_Pollen</li>
           </thingDefs>
-          <categories>
-            <li>PlantMatter</li>
-          </categories>
         </filter>
-        <count>0.5</count>
+        <count>15</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
@@ -197,14 +193,10 @@
       </thingDefs>
       <categories>
         <li>Corpses</li>
-        <li>PlantMatter</li>
       </categories>
       <disallowedCategories>
         <li>CorpsesMechanoid</li>
       </disallowedCategories>
-      <disallowedThingDefs>
-        <li>VV_Seed_Everflower</li>
-      </disallowedThingDefs>
       <specialFiltersToAllow>
         <li>AllowRotten</li>
       </specialFiltersToAllow>
@@ -218,8 +210,6 @@
       </thingDefs>
       <categories>
         <li>Corpses</li>
-        <li>MeatRaw</li>
-        <li>PlantMatter</li>
       </categories>
       <specialFiltersToAllow>
         <li>AllowCorpsesColonist</li>
@@ -240,7 +230,7 @@
   <RecipeDef>
     <defName>VV_MakeFertilizerResource</defName>
     <label>make fertilizer from organics</label>
-    <description>Ferment organic matter and mix it with pollen or plant matters to produce mana fertilizers.</description>
+    <description>Ferment organic matter and mix it with pollen or crops to produce mana fertilizers.</description>
     <jobString>making fertilizer from organics.</jobString>
     <workAmount>2000</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
@@ -265,12 +255,12 @@
       </li>
       <li>
         <filter>
-          <customSummary>pollen or plant matters</customSummary>
+          <customSummary>pollen or crops</customSummary>
           <thingDefs>
             <li>VV_Pollen</li>
           </thingDefs>
           <categories>
-            <li>PlantMatter</li>
+            <li>PlantFoodRaw</li>
           </categories>
         </filter>
         <count>0.5</count>
@@ -282,7 +272,7 @@
       </thingDefs>
       <categories>
         <li>MeatRaw</li>
-        <li>PlantMatter</li>
+        <li>PlantFoodRaw</li>
         <li>VV_ArcaneSeed</li>
       </categories>
       <disallowedThingDefs>
@@ -295,7 +285,7 @@
       </thingDefs>
       <categories>
         <li>MeatRaw</li>
-        <li>PlantMatter</li>
+        <li>PlantFoodRaw</li>
       </categories>
     </defaultIngredientFilter>
     
