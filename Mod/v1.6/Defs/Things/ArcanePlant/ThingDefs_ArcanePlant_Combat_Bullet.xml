@@ -25,9 +25,8 @@
     <label>fire pea</label>
     <thingClass>VVRace.PeaBullet</thingClass>
     <graphicData>
-      <texPath>Things/Projectile/VV_Pea</texPath>
+      <texPath>Things/Projectile/VV_PeaFlame</texPath>
       <graphicClass>Graphic_Single</graphicClass>
-      <color>(255,0,0)</color>
     </graphicData>
     <projectile>
       <damageDef>Flame</damageDef>
@@ -44,9 +43,8 @@
     <label>ice pea</label>
     <thingClass>VVRace.PeaBullet</thingClass>
     <graphicData>
-      <texPath>Things/Projectile/VV_Pea</texPath>
+      <texPath>Things/Projectile/VV_PeaFrost</texPath>
       <graphicClass>Graphic_Single</graphicClass>
-      <color>(0,255,255)</color>
     </graphicData>
     <projectile>
       <damageDef>VV_Frostbite</damageDef>
@@ -63,9 +61,8 @@
     <label>electric pea</label>
     <thingClass>VVRace.PeaBullet</thingClass>
     <graphicData>
-      <texPath>Things/Projectile/VV_Pea</texPath>
+      <texPath>Things/Projectile/VV_PeaLightning</texPath>
       <graphicClass>Graphic_Single</graphicClass>
-      <color>(255,0,255)</color>
     </graphicData>
     <projectile>
       <damageDef>Stun</damageDef>
