@@ -82,9 +82,9 @@
     
     <costList>
       <Steel>60</Steel>
-      <VV_HeatingPetal>15</VV_HeatingPetal>
-      <VV_CoolingPetal>15</VV_CoolingPetal>
-      <VV_SparklingPetal>25</VV_SparklingPetal>
+      <VV_HeatingPetal>25</VV_HeatingPetal>
+      <VV_CoolingPetal>25</VV_CoolingPetal>
+      <VV_SparklingPetal>40</VV_SparklingPetal>
     </costList>
 
     <recipeMaker>
@@ -183,7 +183,7 @@
     
     <costList>
       <Steel>65</Steel>
-      <VV_CoolingPetal>40</VV_CoolingPetal>
+      <VV_CoolingPetal>60</VV_CoolingPetal>
       <VV_SparklingPetal>25</VV_SparklingPetal>
     </costList>
 
@@ -357,7 +357,7 @@
     <costList>
       <Steel>60</Steel>
       <ComponentIndustrial>4</ComponentIndustrial>
-      <VV_SparklingPetal>40</VV_SparklingPetal>
+      <VV_SparklingPetal>60</VV_SparklingPetal>
     </costList>
 
     <recipeMaker>
