@@ -107,8 +107,6 @@ namespace VVRace
                         return new AcceptanceReport(LocalizeString_Etc.VV_FailReason_EverflowerOnPot.Translate());
                     }
                 }
-
-                return false;
             }
 
             return base.DeconstructibleBy(faction);

@@ -431,13 +431,21 @@
         <manaCapacity>150</manaCapacity>
 
         <manaGenerateRule Class="VVRace.ManaFluxRule_TimeOfDay">
-          <mana>600</mana>
+          <mana>650</mana>
           <timeOfDay>Night</timeOfDay>
           <alwaysIfVaccumBiome>true</alwaysIfVaccumBiome>
         </manaGenerateRule>
         
-        <manaConsumeRule Class="VVRace.ManaFluxRule_InVaccum">
-          <mana>520</mana>
+        <manaConsumeRule Class="VVRace.ManaFluxRule_CompositeSum">
+          <rules>
+            <li Class="VVRace.ManaFluxRule_InVaccum">
+              <mana>500</mana>
+            </li>
+            <li Class="VVRace.ManaFluxRule_TimeOfDay">
+              <mana>75</mana>
+              <timeOfDay>Day</timeOfDay>
+            </li>
+          </rules>
         </manaConsumeRule>
         <manaAbsorbPerDay>75</manaAbsorbPerDay>
       </li>
