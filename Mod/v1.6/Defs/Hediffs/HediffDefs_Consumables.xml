@@ -202,10 +202,8 @@
           <PsychicSensitivity>0.25</PsychicSensitivity>
           <MeditationFocusGain>0.05</MeditationFocusGain>
           <PsychicEntropyRecoveryRate>0.05</PsychicEntropyRecoveryRate>
+          <RestRateMultiplier>0.25</RestRateMultiplier>
         </statOffsets>
-        <statFactors>
-          <RestRateMultiplier>0.85</RestRateMultiplier>
-        </statFactors>
       </li>
     </stages>
 

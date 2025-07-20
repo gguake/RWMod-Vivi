@@ -3,8 +3,8 @@
   <VV_AtePollen.stages.ate_pollen.label>꽃가루를 먹음</VV_AtePollen.stages.ate_pollen.label>
   <VV_AtePollen.stages.ate_pollen.description>쓰고 텁텁해. 평소에 이런걸 먹고 산다고?</VV_AtePollen.stages.ate_pollen.description>
 
-  <VV_FloralTea.stages.drink_floral_tea.label>꽃차를 마심</VV_FloralTea.stages.drink_floral_tea.label>
-  <VV_FloralTea.stages.drink_floral_tea.description>꽃차를 마셔서 마음이 차분해졌어.</VV_FloralTea.stages.drink_floral_tea.description>
+  <VV_FloralTea.stages.drink_flowering_tea.label>꽃차를 마심</VV_FloralTea.stages.drink_flowering_tea.label>
+  <VV_FloralTea.stages.drink_flowering_tea.description>꽃차를 마셔서 마음이 차분해졌어.</VV_FloralTea.stages.drink_flowering_tea.description>
 
   <VV_FlowerScent.stages.flower_scent.label>꽃 향기</VV_FlowerScent.stages.flower_scent.label>
   <VV_FlowerScent.stages.flower_scent.description>내 몸에서 꽃 향기가 나는것같아.</VV_FlowerScent.stages.flower_scent.description>
