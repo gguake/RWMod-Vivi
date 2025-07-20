@@ -91,7 +91,7 @@
       <AccuracyShort>0.86</AccuracyShort>
       <AccuracyMedium>0.48</AccuracyMedium>
       <AccuracyLong>0.24</AccuracyLong>
-      <RangedWeapon_Cooldown>1.8</RangedWeapon_Cooldown>
+      <RangedWeapon_Cooldown>1.2</RangedWeapon_Cooldown>
       <DeteriorationRate>0</DeteriorationRate>
       <Mass>40</Mass>
       <Flammability>0</Flammability>
@@ -147,7 +147,7 @@
     <damageMultipliers Inherit="False">
     </damageMultipliers>
 
-    <fillPercent>0.6</fillPercent>
+    <fillPercent>0.8</fillPercent>
 
     <costList>
       <VV_LivingLeaf>20</VV_LivingLeaf>

@@ -61,7 +61,7 @@
     
     <modExtensions>
       <li Class="VVRace.SeedlingExtension">
-        <dailyGrowth>0.142857</dailyGrowth>
+        <dailyGrowth>0.18</dailyGrowth>
         <ticksToDamageFromZeroNutrition>30000</ticksToDamageFromZeroNutrition>
       </li>
     </modExtensions>
