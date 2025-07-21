@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 using Verse;
 
 namespace VVRace
 {
+    [StaticConstructorOnStartup]
     public class Graphic_MoteTiled : Graphic_Single
     {
         protected static MaterialPropertyBlock propertyBlock = new MaterialPropertyBlock();

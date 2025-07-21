@@ -15,14 +15,14 @@
     <pathCost>4</pathCost>
     <uiOrder>2020</uiOrder>
     <statBases>
-      <WorkToBuild>100</WorkToBuild>
-      <Cleanliness>-0.5</Cleanliness>
+      <WorkToBuild>200</WorkToBuild>
+      <Cleanliness>-0.3</Cleanliness>
       <Flammability>0.22</Flammability>
     </statBases>
 
     <constructEffect>ConstructDirt</constructEffect>
     <costList>
-      <VV_Vivicream>5</VV_Vivicream>
+      <VV_Vivicream>3</VV_Vivicream>
     </costList>
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
     <smoothedTerrain>VV_HoneycombTile</smoothedTerrain>
@@ -52,7 +52,7 @@
 
     <uiOrder>2021</uiOrder>
     <statBases>
-      <WorkToBuild>300</WorkToBuild>
+      <WorkToBuild>200</WorkToBuild>
       <Beauty>1</Beauty>
       <CleaningTimeFactor>0.7</CleaningTimeFactor>
       <FilthMultiplier>0.9</FilthMultiplier>
