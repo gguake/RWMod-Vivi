@@ -33,6 +33,7 @@
       <Flammability>1.0</Flammability>
       <DeteriorationRate>8</DeteriorationRate>
     </statBases>
+    <stackLimit>150</stackLimit>
 
     <comps>
     </comps>
@@ -69,6 +70,8 @@
       <BluntDamageMultiplier>0.9</BluntDamageMultiplier>
       <DeteriorationRate>2</DeteriorationRate>
     </statBases>
+    <stackLimit>150</stackLimit>
+    
     <healthAffectsPrice>false</healthAffectsPrice>
     <thingCategories>
       <li>VV_ViviResource</li>
