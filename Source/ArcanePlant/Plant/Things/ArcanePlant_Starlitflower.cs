@@ -22,8 +22,6 @@ namespace VVRace
             }
         }
 
-        private bool? _lastCompGlowerState = null;
-
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
