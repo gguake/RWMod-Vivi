@@ -78,7 +78,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VV_SkyweedBox</defName>
     <label>skyweed box</label>
-    <description>a box that can send the fluff of skyweed far away by tying it together. It is bound with viviwax and cloth to prevent damage. No special fuel is required, but it has a smaller capacity and shorter transport distance than the transport pods used by outlanders.</description>
+    <description>a box that can send the fluff of skyweed far away by tying it together. No special fuel is required, but it has a smaller capacity and shorter transport distance than the transport pods used by outlanders.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_Skyweed</ThingDef>
       <ThingDef>VV_SkyweedFluff</ThingDef>
@@ -114,7 +114,6 @@
     <costList>
       <VV_SkyweedFluff>10</VV_SkyweedFluff>
       <VV_Viviwax>10</VV_Viviwax>
-      <Cloth>10</Cloth>
     </costList>
     <comps>
       <li Class="CompProperties_Transporter">

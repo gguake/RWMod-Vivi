@@ -23,13 +23,6 @@
       <li>VV_Petal</li>
     </tradeTags>
 
-    <comps>
-      <li Class="CompProperties_Rottable">
-        <daysToRotStart>30</daysToRotStart>
-        <rotDestroys>true</rotDestroys>
-      </li>
-    </comps>
-
     <thingSetMakerTags>
       <li>NonStandardReward</li>
     </thingSetMakerTags>
@@ -55,6 +48,13 @@
     <statBases>
       <MarketValue>6</MarketValue>
     </statBases>
+
+    <comps>
+      <li Class="CompProperties_Rottable">
+        <daysToRotStart>60</daysToRotStart>
+        <rotDestroys>true</rotDestroys>
+      </li>
+    </comps>
   </ThingDef>
 
   <ThingDef ParentName="VV_PetalBase">
@@ -77,6 +77,13 @@
     <statBases>
       <MarketValue>6</MarketValue>
     </statBases>
+
+    <comps>
+      <li Class="CompProperties_Rottable">
+        <daysToRotStart>60</daysToRotStart>
+        <rotDestroys>true</rotDestroys>
+      </li>
+    </comps>
   </ThingDef>
 
   <ThingDef ParentName="VV_PetalBase">
@@ -100,6 +107,13 @@
     <statBases>
       <MarketValue>6</MarketValue>
     </statBases>
+
+    <comps>
+      <li Class="CompProperties_Rottable">
+        <daysToRotStart>60</daysToRotStart>
+        <rotDestroys>true</rotDestroys>
+      </li>
+    </comps>
   </ThingDef>
 
   <ThingDef ParentName="VV_PetalBase">
@@ -122,6 +136,13 @@
     <statBases>
       <MarketValue>6</MarketValue>
     </statBases>
+
+    <comps>
+      <li Class="CompProperties_Rottable">
+        <daysToRotStart>60</daysToRotStart>
+        <rotDestroys>true</rotDestroys>
+      </li>
+    </comps>
   </ThingDef>
 
   <ThingDef ParentName="VV_PetalBase">
@@ -146,6 +167,13 @@
       <Mass>0.5</Mass>
       <MarketValue>6</MarketValue>
     </statBases>
+
+    <comps>
+      <li Class="CompProperties_Rottable">
+        <daysToRotStart>30</daysToRotStart>
+        <rotDestroys>true</rotDestroys>
+      </li>
+    </comps>
   </ThingDef>
   
   <ThingDef ParentName="VV_PetalBase">

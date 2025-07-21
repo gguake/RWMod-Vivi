@@ -48,7 +48,7 @@
 \n콩뿌리개와 인접한 위치에 설치하면 콩뿌리개가 사격시 25%로 고속콩을 대신 발사합니다. 고속콩은 빠른 탄속과 높은 관통력을 가지고 있습니다.\n인접한 하늘풀이 여러개 있다면 효과가 중첩됩니다.</VV_Skyweed.description>
 
 <VV_SkyweedBox.label>하늘풀 상자</VV_SkyweedBox.label>
-<VV_SkyweedBox.description>하늘풀의 홀씨를 묶어 멀리 날려보낼 수 있는 상자입니다. 파손을 방지하기 위해 밀랍과 천으로 묶었습니다. 별다른 연료는 필요없지만 외지인들이 사용하는 수송 포드보다 용량이 적고 운송가능한 거리가 짧습니다.</VV_SkyweedBox.description>
+<VV_SkyweedBox.description>하늘풀의 홀씨를 묶어 멀리 날려보낼 수 있는 상자입니다. 별다른 연료는 필요없지만 외지인들이 사용하는 수송 포드보다 용량이 적고 운송가능한 거리가 짧습니다.</VV_SkyweedBox.description>
 <VV_ActiveSkyweedBox.label>하늘풀 상자</VV_ActiveSkyweedBox.label>
 <VV_SkyweedBoxIncoming.label>하늘풀 상자 (접근 중)</VV_SkyweedBoxIncoming.label>
 <VV_SkyweedBoxLeaving.label>하늘풀 상자 (떠나는 중)</VV_SkyweedBoxLeaving.label>
