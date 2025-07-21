@@ -19,7 +19,6 @@
 
 <VV_GliderWing.label>비비 글라이더 날개</VV_GliderWing.label>
 <VV_GliderWing.labelNoun>비비 글라이더 날개</VV_GliderWing.labelNoun>
-<VV_GliderWing.description>장착된 글라이더 날개입니다. 비비들의 더 자주 날아다닐 수 있게 하고 비행 시간을 늘려줍니다. 순간적으로 짧은 거리를 날아서 이동할 수 있지만 비행시 조금 배고파집니다.
-\n이 날개는 단순히 양력을 받기위한 장치이므로 비행을 하기 위해서는 비비의 날개가 온전해야 합니다.</VV_GliderWing.description>
+<VV_GliderWing.description>장착된 글라이더 날개입니다. 비비들이 더 자주 날아다닐 수 있게 하고 비행 시간을 늘려줍니다. 이 날개는 단순히 양력을 받기위한 장치이므로 비행을 하기 위해서는 비비의 날개가 온전해야 합니다.</VV_GliderWing.description>
 
 </LanguageData>

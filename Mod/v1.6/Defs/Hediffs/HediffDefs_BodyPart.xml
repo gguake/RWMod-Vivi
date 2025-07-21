@@ -60,31 +60,21 @@
     <defName>VV_GliderWing</defName>
     <label>glider wing</label>
     <labelNoun>glider wing</labelNoun>
-    <description>Installed glider wings. It makes vivi fly more often and stay airborne longer and allows for a brief short-distance flight to move, but flying makes them a little hungry.
-\nThese wings are only a lift-assist device, so the vivi's own wings must be intact to fly.</description>
+    <description>Installed glider wings. It makes vivi fly more often and stay airborne longer. These wings are only a lift-assist device, so the vivi's own wings must be intact to fly.</description>
     <descriptionHyperlinks><RecipeDef>VV_InstallGliderWing</RecipeDef></descriptionHyperlinks>
     <spawnThingOnRemoved>VV_TitanicHornetWing</spawnThingOnRemoved>
     <stages>
       <li>
         <statOffsets>
           <MaxFlightTime>20</MaxFlightTime>
+          <FlightCooldown>-7.5</FlightCooldown>
         </statOffsets>
-        <statFactors>
-          <FlightCooldown>0.25</FlightCooldown>
-        </statFactors>
       </li>
     </stages>
 
     <addedPartProps>
       <solid>true</solid>
     </addedPartProps>
-    <comps>
-      <li Class="HediffCompProperties_GiveAbility">
-        <abilityDefs>
-          <li>VV_Glide</li>
-        </abilityDefs>
-      </li>
-    </comps>
 
     <renderNodeProperties>
       <li>

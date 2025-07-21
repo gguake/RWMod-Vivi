@@ -106,8 +106,7 @@
     <description>Grow arcane plants by planting arcane seeds. Arcane seeds can be found by chance while foraging or purchased from vivi caravans.
 \nDeconstructing an arcane plant also yields multiple seeds along with materials. When planted in suitable soil or a pot, an arcane seed grows into a seedling. To mature into a full arcane plant it requires both nutrients and mana.
 \nNutrients must be regularly supplied using mana fertilizer. If left depleted for too long, the seedling will die.
-\nMana is naturally absorbed from the environment, so placing the seedling near arcane plants that emit environment mana or building a Mana emitter can help provide it.
-    </description>
+\nMana is naturally absorbed from the environment, so placing the seedling near arcane plants that emit environment mana or building a Mana emitter can help provide it.</description>
     <discoveredLetterTitle>Arcane plant</discoveredLetterTitle>
     <discoveredLetterText>Arcane seeds can be found by chance while foraging or purchased from vivi caravans. Deconstructing an arcane plant also yields multiple seeds along with materials.
 \nWhen planted in suitable soil or a pot, an arcane seed grows into a seedling. To mature into a full arcane plant it requires both nutrients and mana.

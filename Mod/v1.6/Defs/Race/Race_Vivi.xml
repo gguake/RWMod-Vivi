@@ -404,6 +404,8 @@
           <li>left wing</li>
           <li>right wing</li>
         </requireBodyParts>
+
+        <alwaysFlyIfDrafted>true</alwaysFlyIfDrafted>
       </li>
     </modExtensions>
   </ThingDef>
