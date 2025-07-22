@@ -56,6 +56,14 @@
     </addedPartProps>
   </HediffDef>
 
+  <PawnRenderNodeTagDef>
+    <defName>VV_LeftGliderWing</defName>
+  </PawnRenderNodeTagDef>
+  
+  <PawnRenderNodeTagDef>
+    <defName>VV_RightGliderWing</defName>
+  </PawnRenderNodeTagDef>
+    
   <HediffDef ParentName="ImplantHediffBase">
     <defName>VV_GliderWing</defName>
     <label>glider wing</label>
@@ -79,6 +87,7 @@
     <renderNodeProperties>
       <li>
         <debugLabel>LeftUpperWing</debugLabel>
+        <tagDef>VV_LeftGliderWing</tagDef>
         <workerClass>PawnRenderNodeWorker_AttachmentBody</workerClass>
         <texPath>Things/Pawn/Vivi/BodyParts/UpperWingL</texPath>
         <parentTagDef>Body</parentTagDef>
@@ -87,7 +96,7 @@
           <scaleOffsetByBodySize>true</scaleOffsetByBodySize>
           <dataNorth>
             <offset>(-0.01, 0, 0.0)</offset>
-            <layer>94</layer>
+            <layer>100</layer>
           </dataNorth>
           <dataSouth>
             <offset>(0.01, 0, 0.0)</offset>
@@ -105,6 +114,7 @@
       </li>
       <li>
         <debugLabel>RightUpperWing</debugLabel>
+        <tagDef>VV_RightGliderWing</tagDef>
         <workerClass>PawnRenderNodeWorker_AttachmentBody</workerClass>
         <texPath>Things/Pawn/Vivi/BodyParts/UpperWingR</texPath>
         <parentTagDef>Body</parentTagDef>
@@ -113,7 +123,7 @@
           <scaleOffsetByBodySize>true</scaleOffsetByBodySize>
           <dataNorth>
             <offset>(0.01, 0, 0)</offset>
-            <layer>94</layer>
+            <layer>100</layer>
           </dataNorth>
           <dataSouth>
             <offset>(-0.01, 0, 0)</offset>

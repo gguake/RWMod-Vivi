@@ -40,7 +40,7 @@
       <VV_PlantGatherSpeed>1</VV_PlantGatherSpeed>
       <VV_PlantGatherYield>1</VV_PlantGatherYield>
       
-      <MaxFlightTime>5</MaxFlightTime>
+      <MaxFlightTime>3</MaxFlightTime>
       <FlightCooldown>10</FlightCooldown>
     </statBases>
 

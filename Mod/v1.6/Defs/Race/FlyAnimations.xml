@@ -25,6 +25,8 @@
           </keyframes>
         </value>
       </li>
+
+      <!-- Wing -->
       <li>
         <key>VV_LeftWing</key>
         <value>
@@ -79,6 +81,66 @@
             <li><tick>17</tick><angle>-20</angle></li>
             <li><tick>18</tick><angle>-40</angle></li>
             <li><tick>19</tick><angle>-20</angle></li>
+            <li><tick>20</tick><angle>0</angle></li>
+          </keyframes>
+        </value>
+      </li>
+
+      <!-- Glider Wing -->
+      <li>
+        <key>VV_LeftGliderWing</key>
+        <value>
+          <workerType>AnimationWorker_Keyframes</workerType>
+          <keyframes>
+            <li><tick>0</tick><angle>0</angle></li>
+            <li><tick>1</tick><angle>10</angle></li>
+            <li><tick>2</tick><angle>20</angle></li>
+            <li><tick>3</tick><angle>10</angle></li>
+            <li><tick>4</tick><angle>0</angle></li>
+            <li><tick>5</tick><angle>10</angle></li>
+            <li><tick>6</tick><angle>20</angle></li>
+            <li><tick>7</tick><angle>10</angle></li>
+            <li><tick>8</tick><angle>0</angle></li>
+            <li><tick>9</tick><angle>10</angle></li>
+            <li><tick>10</tick><angle>20</angle></li>
+            <li><tick>11</tick><angle>10</angle></li>
+            <li><tick>12</tick><angle>0</angle></li>
+            <li><tick>13</tick><angle>10</angle></li>
+            <li><tick>14</tick><angle>20</angle></li>
+            <li><tick>15</tick><angle>10</angle></li>
+            <li><tick>16</tick><angle>0</angle></li>
+            <li><tick>17</tick><angle>10</angle></li>
+            <li><tick>18</tick><angle>20</angle></li>
+            <li><tick>19</tick><angle>10</angle></li>
+            <li><tick>20</tick><angle>0</angle></li>
+          </keyframes>
+        </value>
+      </li>
+      <li>
+        <key>VV_RightGliderWing</key>
+        <value>
+          <workerType>AnimationWorker_Keyframes</workerType>
+          <keyframes>
+            <li><tick>0</tick><angle>0</angle></li>
+            <li><tick>1</tick><angle>-10</angle></li>
+            <li><tick>2</tick><angle>-20</angle></li>
+            <li><tick>3</tick><angle>-10</angle></li>
+            <li><tick>4</tick><angle>0</angle></li>
+            <li><tick>5</tick><angle>-10</angle></li>
+            <li><tick>6</tick><angle>-20</angle></li>
+            <li><tick>7</tick><angle>-10</angle></li>
+            <li><tick>8</tick><angle>0</angle></li>
+            <li><tick>9</tick><angle>-10</angle></li>
+            <li><tick>10</tick><angle>-20</angle></li>
+            <li><tick>11</tick><angle>-10</angle></li>
+            <li><tick>12</tick><angle>0</angle></li>
+            <li><tick>13</tick><angle>-10</angle></li>
+            <li><tick>14</tick><angle>-20</angle></li>
+            <li><tick>15</tick><angle>-10</angle></li>
+            <li><tick>16</tick><angle>0</angle></li>
+            <li><tick>17</tick><angle>-10</angle></li>
+            <li><tick>18</tick><angle>-20</angle></li>
+            <li><tick>19</tick><angle>-10</angle></li>
             <li><tick>20</tick><angle>0</angle></li>
           </keyframes>
         </value>
@@ -111,6 +173,8 @@
           </keyframes>
         </value>
       </li>
+      
+      <!-- Wing -->
       <li>
         <key>VV_LeftWing</key>
         <value>
@@ -165,6 +229,66 @@
             <li><tick>17</tick><angle>-15</angle></li>
             <li><tick>18</tick><angle>-30</angle></li>
             <li><tick>19</tick><angle>-15</angle></li>
+            <li><tick>20</tick><angle>0</angle></li>
+          </keyframes>
+        </value>
+      </li>
+      
+      <!-- Glider Wing -->
+      <li>
+        <key>VV_LeftGliderWing</key>
+        <value>
+          <workerType>AnimationWorker_Keyframes</workerType>
+          <keyframes>
+            <li><tick>0</tick><angle>0</angle></li>
+            <li><tick>1</tick><angle>-5</angle></li>
+            <li><tick>2</tick><angle>-10</angle></li>
+            <li><tick>3</tick><angle>-5</angle></li>
+            <li><tick>4</tick><angle>0</angle></li>
+            <li><tick>5</tick><angle>-5</angle></li>
+            <li><tick>6</tick><angle>-10</angle></li>
+            <li><tick>7</tick><angle>-5</angle></li>
+            <li><tick>8</tick><angle>0</angle></li>
+            <li><tick>9</tick><angle>-5</angle></li>
+            <li><tick>10</tick><angle>-10</angle></li>
+            <li><tick>11</tick><angle>-5</angle></li>
+            <li><tick>12</tick><angle>0</angle></li>
+            <li><tick>13</tick><angle>-5</angle></li>
+            <li><tick>14</tick><angle>-10</angle></li>
+            <li><tick>15</tick><angle>-5</angle></li>
+            <li><tick>16</tick><angle>0</angle></li>
+            <li><tick>17</tick><angle>-5</angle></li>
+            <li><tick>18</tick><angle>-10</angle></li>
+            <li><tick>19</tick><angle>-5</angle></li>
+            <li><tick>20</tick><angle>0</angle></li>
+          </keyframes>
+        </value>
+      </li>
+      <li>
+        <key>VV_RightGliderWing</key>
+        <value>
+          <workerType>AnimationWorker_Keyframes</workerType>
+          <keyframes>
+            <li><tick>0</tick><angle>0</angle></li>
+            <li><tick>1</tick><angle>-5</angle></li>
+            <li><tick>2</tick><angle>-10</angle></li>
+            <li><tick>3</tick><angle>-5</angle></li>
+            <li><tick>4</tick><angle>0</angle></li>
+            <li><tick>5</tick><angle>-5</angle></li>
+            <li><tick>6</tick><angle>-10</angle></li>
+            <li><tick>7</tick><angle>-5</angle></li>
+            <li><tick>8</tick><angle>0</angle></li>
+            <li><tick>9</tick><angle>-5</angle></li>
+            <li><tick>10</tick><angle>-10</angle></li>
+            <li><tick>11</tick><angle>-5</angle></li>
+            <li><tick>12</tick><angle>0</angle></li>
+            <li><tick>13</tick><angle>-5</angle></li>
+            <li><tick>14</tick><angle>-10</angle></li>
+            <li><tick>15</tick><angle>-5</angle></li>
+            <li><tick>16</tick><angle>0</angle></li>
+            <li><tick>17</tick><angle>-5</angle></li>
+            <li><tick>18</tick><angle>-10</angle></li>
+            <li><tick>19</tick><angle>-5</angle></li>
             <li><tick>20</tick><angle>0</angle></li>
           </keyframes>
         </value>
@@ -197,6 +321,8 @@
           </keyframes>
         </value>
       </li>
+      
+      <!-- Wing -->
       <li>
         <key>VV_LeftWing</key>
         <value>
@@ -255,6 +381,66 @@
           </keyframes>
         </value>
       </li>
+      
+      <!-- Glider Wing -->
+      <li>
+        <key>VV_LeftGliderWing</key>
+        <value>
+          <workerType>AnimationWorker_Keyframes</workerType>
+          <keyframes>
+            <li><tick>0</tick><angle>0</angle></li>
+            <li><tick>1</tick><angle>5</angle></li>
+            <li><tick>2</tick><angle>10</angle></li>
+            <li><tick>3</tick><angle>5</angle></li>
+            <li><tick>4</tick><angle>0</angle></li>
+            <li><tick>5</tick><angle>5</angle></li>
+            <li><tick>6</tick><angle>10</angle></li>
+            <li><tick>7</tick><angle>5</angle></li>
+            <li><tick>8</tick><angle>0</angle></li>
+            <li><tick>9</tick><angle>5</angle></li>
+            <li><tick>10</tick><angle>10</angle></li>
+            <li><tick>11</tick><angle>5</angle></li>
+            <li><tick>12</tick><angle>0</angle></li>
+            <li><tick>13</tick><angle>5</angle></li>
+            <li><tick>14</tick><angle>10</angle></li>
+            <li><tick>15</tick><angle>5</angle></li>
+            <li><tick>16</tick><angle>0</angle></li>
+            <li><tick>17</tick><angle>5</angle></li>
+            <li><tick>18</tick><angle>10</angle></li>
+            <li><tick>19</tick><angle>5</angle></li>
+            <li><tick>20</tick><angle>0</angle></li>
+          </keyframes>
+        </value>
+      </li>
+      <li>
+        <key>VV_RightGliderWing</key>
+        <value>
+          <workerType>AnimationWorker_Keyframes</workerType>
+          <keyframes>
+            <li><tick>0</tick><angle>0</angle></li>
+            <li><tick>1</tick><angle>5</angle></li>
+            <li><tick>2</tick><angle>10</angle></li>
+            <li><tick>3</tick><angle>5</angle></li>
+            <li><tick>4</tick><angle>0</angle></li>
+            <li><tick>5</tick><angle>5</angle></li>
+            <li><tick>6</tick><angle>10</angle></li>
+            <li><tick>7</tick><angle>5</angle></li>
+            <li><tick>8</tick><angle>0</angle></li>
+            <li><tick>9</tick><angle>5</angle></li>
+            <li><tick>10</tick><angle>10</angle></li>
+            <li><tick>11</tick><angle>5</angle></li>
+            <li><tick>12</tick><angle>0</angle></li>
+            <li><tick>13</tick><angle>5</angle></li>
+            <li><tick>14</tick><angle>10</angle></li>
+            <li><tick>15</tick><angle>5</angle></li>
+            <li><tick>16</tick><angle>0</angle></li>
+            <li><tick>17</tick><angle>5</angle></li>
+            <li><tick>18</tick><angle>10</angle></li>
+            <li><tick>19</tick><angle>5</angle></li>
+            <li><tick>20</tick><angle>0</angle></li>
+          </keyframes>
+        </value>
+      </li>
     </keyframeParts>
   </AnimationDef>
 
@@ -283,6 +469,8 @@
           </keyframes>
         </value>
       </li>
+
+      <!-- Wing -->
       <li>
         <key>VV_LeftWing</key>
         <value>
@@ -337,6 +525,66 @@
             <li><tick>17</tick><angle>20</angle></li>
             <li><tick>18</tick><angle>40</angle></li>
             <li><tick>19</tick><angle>20</angle></li>
+            <li><tick>20</tick><angle>0</angle></li>
+          </keyframes>
+        </value>
+      </li>
+
+      <!-- Glider Wing -->
+      <li>
+        <key>VV_LeftGliderWing</key>
+        <value>
+          <workerType>AnimationWorker_Keyframes</workerType>
+          <keyframes>
+            <li><tick>0</tick><angle>0</angle></li>
+            <li><tick>1</tick><angle>-10</angle></li>
+            <li><tick>2</tick><angle>-20</angle></li>
+            <li><tick>3</tick><angle>-10</angle></li>
+            <li><tick>4</tick><angle>0</angle></li>
+            <li><tick>5</tick><angle>-10</angle></li>
+            <li><tick>6</tick><angle>-20</angle></li>
+            <li><tick>7</tick><angle>-10</angle></li>
+            <li><tick>8</tick><angle>0</angle></li>
+            <li><tick>9</tick><angle>-10</angle></li>
+            <li><tick>10</tick><angle>-20</angle></li>
+            <li><tick>11</tick><angle>-10</angle></li>
+            <li><tick>12</tick><angle>0</angle></li>
+            <li><tick>13</tick><angle>-10</angle></li>
+            <li><tick>14</tick><angle>-20</angle></li>
+            <li><tick>15</tick><angle>-10</angle></li>
+            <li><tick>16</tick><angle>0</angle></li>
+            <li><tick>17</tick><angle>-10</angle></li>
+            <li><tick>18</tick><angle>-20</angle></li>
+            <li><tick>19</tick><angle>-10</angle></li>
+            <li><tick>20</tick><angle>0</angle></li>
+          </keyframes>
+        </value>
+      </li>
+      <li>
+        <key>VV_RightGliderWing</key>
+        <value>
+          <workerType>AnimationWorker_Keyframes</workerType>
+          <keyframes>
+            <li><tick>0</tick><angle>0</angle></li>
+            <li><tick>1</tick><angle>10</angle></li>
+            <li><tick>2</tick><angle>20</angle></li>
+            <li><tick>3</tick><angle>10</angle></li>
+            <li><tick>4</tick><angle>0</angle></li>
+            <li><tick>5</tick><angle>10</angle></li>
+            <li><tick>6</tick><angle>20</angle></li>
+            <li><tick>7</tick><angle>10</angle></li>
+            <li><tick>8</tick><angle>0</angle></li>
+            <li><tick>9</tick><angle>10</angle></li>
+            <li><tick>10</tick><angle>20</angle></li>
+            <li><tick>11</tick><angle>10</angle></li>
+            <li><tick>12</tick><angle>0</angle></li>
+            <li><tick>13</tick><angle>10</angle></li>
+            <li><tick>14</tick><angle>20</angle></li>
+            <li><tick>15</tick><angle>10</angle></li>
+            <li><tick>16</tick><angle>0</angle></li>
+            <li><tick>17</tick><angle>10</angle></li>
+            <li><tick>18</tick><angle>20</angle></li>
+            <li><tick>19</tick><angle>10</angle></li>
             <li><tick>20</tick><angle>0</angle></li>
           </keyframes>
         </value>

@@ -20,8 +20,6 @@ namespace VVRace
             }
         }
 
-        private bool? _lastCompGlowerState = null;
-
         protected override void TickInterval(int delta)
         {
             base.TickInterval(delta);
