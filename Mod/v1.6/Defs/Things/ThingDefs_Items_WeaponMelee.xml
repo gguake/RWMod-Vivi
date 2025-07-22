@@ -5,7 +5,7 @@
     <defName>VV_ViviSpear</defName>
     <label>vivi spear</label>
     <description>a spear commonly used by vivis. Too small for ordinary humans, so only vivis can wield it.
-\nIts tip is poison-coated, poisoning struck enemies and attacking faster than a normal spear.</description>
+\nThe tip of the spear is coated with poison, which can intoxicate those it strikes. It possesses powerful impact, but it is difficult to handle.</description>
     <graphicData>
       <texPath>Things/Item/Equipment/VV_Spear</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -18,6 +18,9 @@
       <WorkToMake>13000</WorkToMake>
       <Mass>2.5</Mass>
     </statBases>
+    <equippedStatOffsets>
+      <MeleeHitChance>-5</MeleeHitChance>
+    </equippedStatOffsets>
 
     <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
     <thingCategories Inherit="False">
@@ -37,8 +40,8 @@
           <li>Blunt</li>
           <li>Poke</li>
         </capacities>
-        <power>8</power>
-        <cooldownTime>1.3</cooldownTime>
+        <power>11</power>
+        <cooldownTime>1.2</cooldownTime>
         <chanceFactor>0.2</chanceFactor>
       </li>
       <li>
@@ -46,9 +49,9 @@
         <capacities>
           <li>VV_ToxicStab</li>
         </capacities>
-        <power>18</power>
-        <armorPenetration>0.48</armorPenetration>
-        <cooldownTime>1.8</cooldownTime>
+        <power>34</power>
+        <armorPenetration>0.5</armorPenetration>
+        <cooldownTime>3.8</cooldownTime>
       </li>
     </tools>
     

@@ -41,10 +41,10 @@ namespace VVRace
                 {
                     var seedlingRefuelable = seedling.GetComp<CompRefuelable>();
                     var requiredFuel = seedlingRefuelable.Props.fuelCapacity - seedlingRefuelable.Fuel;
-                    if (requiredFuel > 1.5f)
+                    if (requiredFuel > 1.15f)
                     {
                         compRefuelable.ConsumeFuel(1f);
-                        seedlingRefuelable.Refuel(1.5f);
+                        seedlingRefuelable.Refuel(1.15f);
                     }
                 }
             }

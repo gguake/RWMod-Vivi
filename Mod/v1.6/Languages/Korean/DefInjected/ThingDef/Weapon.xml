@@ -3,7 +3,7 @@
   <!-- Melee -->
   <VV_ViviSpear.label>비비 창</VV_ViviSpear.label>
   <VV_ViviSpear.description>비비들이 보편적으로 사용하는 창입니다. 일반 사람이 다루기에는 너무 작아 비비만 다룰 수 있습니다.
-\n창 끝에 독이 묻어있어 맞은 적을 중독시키며 일반 창보다 더 빠르게 공격할 수 있습니다.</VV_ViviSpear.description>
+\n창 끝에 독이 묻어있어 맞은 적을 중독시키며 강력한 한방의 위력을 가지고 있지만 잘 다루기 어렵습니다.</VV_ViviSpear.description>
   <VV_ViviSpear.tools.shaft.label>장대</VV_ViviSpear.tools.shaft.label>
   <VV_ViviSpear.tools.point.label>창끝</VV_ViviSpear.tools.point.label>
   
