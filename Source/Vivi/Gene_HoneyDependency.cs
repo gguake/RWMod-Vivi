@@ -34,7 +34,7 @@ namespace VVRace
         {
             base.PostAdd();
 
-            if (pawn.kindDef != null)
+            if (Active)
             {
                 var hediff = (Hediff_HoneyDependency)HediffMaker.MakeHediff(VVHediffDefOf.VV_HoneyNeed, pawn);
                 pawn.health.AddHediff(hediff);
@@ -68,6 +68,14 @@ namespace VVRace
             if (linkedHediff != null)
             {
                 linkedHediff.Severity = linkedHediff.def.initialSeverity;
+            }
+            else
+            {
+                if (Active)
+                {
+                    var hediff = (Hediff_HoneyDependency)HediffMaker.MakeHediff(VVHediffDefOf.VV_HoneyNeed, pawn);
+                    pawn.health.AddHediff(hediff);
+                }
             }
 
             lastIngestedTick = Find.TickManager.TicksGame;

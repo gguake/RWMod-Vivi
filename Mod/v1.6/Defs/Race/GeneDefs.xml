@@ -42,6 +42,7 @@
     <displayCategory>Miscellaneous</displayCategory>
     <biostatMet>2</biostatMet>
     <biostatCpx>1</biostatCpx>
+    <minAgeActive>3</minAgeActive>
     <canGenerateInGeneSet>false</canGenerateInGeneSet>
   </GeneDef>
   
