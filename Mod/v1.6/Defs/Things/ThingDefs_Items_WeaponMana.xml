@@ -530,7 +530,7 @@
       <AccuracyShort>1</AccuracyShort>
       <AccuracyMedium>1</AccuracyMedium>
       <AccuracyLong>1</AccuracyLong>
-      <RangedWeapon_Cooldown>1.9</RangedWeapon_Cooldown>
+      <RangedWeapon_Cooldown>2.9</RangedWeapon_Cooldown>
       <VV_RangedWeapon_ManaCost>50</VV_RangedWeapon_ManaCost>
     </statBases>
     <relicChance>0</relicChance>
@@ -552,7 +552,7 @@
         <defaultProjectile>VV_Bullet_Froststing</defaultProjectile>
         <warmupTime>4.5</warmupTime>
         <minRange>18.9</minRange>
-        <range>52.9</range>
+        <range>54.9</range>
         <soundCast>Bow_Large</soundCast>
         <canGoWild>false</canGoWild>
       </li>
