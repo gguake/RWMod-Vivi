@@ -37,7 +37,7 @@
     <label>arcane weaponry</label>
     <description>Craft arcane weapons using materials from arcane plants, using mana in specialized ways. These weapons are tricky to handle but exceptionally powerful.
 \nArcane weapons recharge by absorbing environment mana; once their mana is spent, they either weaken or cannot be used at all.</description>
-    <baseCost>2000</baseCost>
+    <baseCost>1000</baseCost>
     <researchViewX>3</researchViewX>
     <researchViewY>2.1</researchViewY>
     <prerequisites>

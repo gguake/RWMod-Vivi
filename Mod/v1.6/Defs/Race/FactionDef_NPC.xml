@@ -91,9 +91,9 @@ Only a few traces of the former empire remain, in the form of certain traditions
         <kindDef>Combat</kindDef>
         <commonality>100</commonality>
         <options>
-          <VV_ViviGuard>50</VV_ViviGuard>
-          <VV_ViviArcher>40</VV_ViviArcher>
-          <VV_ViviTribesman>70</VV_ViviTribesman>
+          <VV_ViviGuard>70</VV_ViviGuard>
+          <VV_ViviArcher>50</VV_ViviArcher>
+          <VV_ViviTribesman>20</VV_ViviTribesman>
           <VV_RoyalViviLeader>1</VV_RoyalViviLeader>
           <VV_RoyalVivi>10</VV_RoyalVivi>
         </options>
