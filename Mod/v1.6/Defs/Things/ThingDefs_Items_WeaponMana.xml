@@ -183,7 +183,7 @@
     
     <costList>
       <Steel>65</Steel>
-      <VV_CoolingPetal>60</VV_CoolingPetal>
+      <VV_CoolingPetal>65</VV_CoolingPetal>
       <VV_SparklingPetal>25</VV_SparklingPetal>
     </costList>
 
@@ -386,6 +386,128 @@
     </comps>
   </ThingDef>
   
+  <!-- 화산탄 기관총 -->
+  <ThingDef ParentName="BaseHumanMakeableGun">
+    <defName>VV_LavaShredder</defName>
+    <label>lava shredder</label>
+    <description>.</description>
 
+    <graphicData>
+      <texPath>Things/Item/Equipment/VV_Steamthrower</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <soundInteract>Interact_Rifle</soundInteract>
+    <equippedAngleOffset>45</equippedAngleOffset>
+
+    <techLevel>Industrial</techLevel>
+    <statBases>
+      <WorkToMake>35000</WorkToMake>
+      <Mass>8.0</Mass>
+      <AccuracyTouch>0.21</AccuracyTouch>
+      <AccuracyShort>0.17</AccuracyShort>
+      <AccuracyMedium>0.12</AccuracyMedium>
+      <AccuracyLong>0.07</AccuracyLong>
+      <RangedWeapon_Cooldown>1.8</RangedWeapon_Cooldown>
+      <VV_RangedWeapon_ManaCost>15</VV_RangedWeapon_ManaCost>
+      <VV_BulletPelletCount>3</VV_BulletPelletCount>
+    </statBases>
+    <relicChance>0</relicChance>
+    
+    <thingCategories Inherit="False">
+      <li>VV_ArcaneWeapon</li>
+    </thingCategories>
+    <weaponClasses Inherit="False">
+      <li>RangedHeavy</li>
+    </weaponClasses>
+    <weaponTags Inherit="False">
+      <li>VV_ViviWeaponMana</li>
+    </weaponTags>
+
+    <verbs>
+      <li>
+        <verbClass>VVRace.Verb_ShootWithMana</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>VV_Bullet_LavaShredder</defaultProjectile>
+        <warmupTime>2.0</warmupTime>
+        <range>25.9</range>
+        <ticksBetweenBurstShots>6</ticksBetweenBurstShots>
+        <burstShotCount>6</burstShotCount>
+        <soundCast>Shot_Minigun</soundCast>
+        <soundCastTail>GunTail_Medium</soundCastTail>
+        <muzzleFlashScale>10</muzzleFlashScale>
+      </li>
+    </verbs>
+    
+    <tools>
+      <li>
+        <label>stock</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>9</power>
+        <cooldownTime>2</cooldownTime>
+      </li>
+      <li>
+        <label>barrel</label>
+        <capacities>
+          <li>Blunt</li>
+          <li>Poke</li>
+        </capacities>
+        <power>9</power>
+        <cooldownTime>2</cooldownTime>
+      </li>
+    </tools>
+    
+    <costList>
+      <Steel>60</Steel>
+      <VV_HeatingPetal>40</VV_HeatingPetal>
+      <VV_SkyweedFluff>30</VV_SkyweedFluff>
+      <VV_SparklingPetal>20</VV_SparklingPetal>
+    </costList>
+
+    <recipeMaker>
+      <skillRequirements>
+        <Crafting>6</Crafting>
+      </skillRequirements>
+      <researchPrerequisites>
+        <li>VV_ArcaneWeaponry</li>
+        <li>Gunsmithing</li>
+      </researchPrerequisites>
+      <displayPriority>-530</displayPriority>
+    </recipeMaker>
+    
+    <comps Inherit="False">
+      <li Class="VVRace.CompProperties_EquippableManaWeapon" />
+      <li><compClass>CompQuality</compClass></li>
+      <li Class="CompProperties_Forbiddable"/>
+      <li Class="CompProperties_Styleable"/>
+      <li Class="CompProperties_Biocodable"/>
+      <li Class="VVRace.CompProperties_Mana">
+        <manaCapacity>450</manaCapacity>
+        <manaAbsorbPerDay>450</manaAbsorbPerDay>
+        <workOnlySpawned>false</workOnlySpawned>
+      </li>
+    </comps>
+  </ThingDef>
+  <ThingDef ParentName="BaseBullet">
+    <defName>VV_Bullet_LavaShredder</defName>
+    <label>lava fragment</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_Small</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>0.8</drawSize>
+      <color>(255,170,40)</color>
+    </graphicData>
+    <projectile>
+      <damageDef>VV_Bullet_Lava</damageDef>
+      <damageAmountBase>6</damageAmountBase>
+      <stoppingPower>0.8</stoppingPower>
+      <speed>33</speed>
+      <ai_IsIncendiary>true</ai_IsIncendiary>
+      <filth>Filth_Ash</filth>
+      <filthCount>1</filthCount>
+      <landedEffecter>VV_Impact_BulletLava</landedEffecter>
+    </projectile>
+  </ThingDef>
 
 </Defs>

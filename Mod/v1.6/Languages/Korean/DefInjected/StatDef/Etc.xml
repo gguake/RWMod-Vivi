@@ -8,4 +8,7 @@
 
 <VV_RangedWeapon_ManaCost.label>사격 마나 소모량</VV_RangedWeapon_ManaCost.label>
 <VV_RangedWeapon_ManaCost.description>무기를 사격할때마다 소모되는 마나의 양을 나타냅니다. 마나가 부족하면 더이상 사격할 수 없습니다.</VV_RangedWeapon_ManaCost.description>
+
+<VV_BulletPelletCount.label>발사 총탄 수</VV_BulletPelletCount.label>
+<VV_BulletPelletCount.label>무기를 사격할때 한번에 발사되는 총탄의 수입니다.</VV_BulletPelletCount.label>
 </LanguageData>

@@ -1,6 +1,7 @@
 ﻿using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 using Verse;
 
 namespace VVRace
@@ -121,7 +122,14 @@ namespace VVRace
             var manaPerShoot = EquipmentSource?.GetStatValue(VVStatDefOf.VV_RangedWeapon_ManaCost) / BurstShotCount ?? 0;
             if (compMana.Stored < manaPerShoot) { return false; }
 
-            var shot =  base.TryCastShot();
+            var pelletCount = (int)(Mathf.Max(1, EquipmentSource?.GetStatValue(VVStatDefOf.VV_BulletPelletCount) ?? 0));
+
+            bool shot = false;
+            for (int i = 0; i < pelletCount; ++i)
+            {
+                shot |= base.TryCastShot();
+            }
+
             if (shot)
             {
                 compMana.Stored -= manaPerShoot;

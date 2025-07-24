@@ -11,4 +11,6 @@
 
 <VV_Frostbite.label>동상</VV_Frostbite.label>
 <VV_Frostbite.deathMessage>{0}(이)가 동사했습니다.</VV_Frostbite.deathMessage>
+
+<VV_Bullet_Lava.label>총상</VV_Bullet_Lava.label>
 </LanguageData>

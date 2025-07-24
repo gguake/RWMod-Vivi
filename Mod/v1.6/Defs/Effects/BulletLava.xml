@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <EffecterDef>
+    <defName>VV_Impact_BulletLava</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>SparkFlash</fleckDef>
+        <positionLerpFactor>0.6</positionLerpFactor>
+        <chancePerTick>0.2</chancePerTick>
+        <scale>1~2</scale>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <positionRadius>0.3</positionRadius>
+        <fleckDef>AirPuff</fleckDef>
+        <burstCount>2~3</burstCount>
+        <speed>0.4~0.8</speed>
+        <scale>0.3~0.5</scale>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <positionRadius>0.02</positionRadius>
+        <moteDef>Mote_SparkThrownFast</moteDef>
+        <burstCount>4~5</burstCount>
+        <speed>3.3~5</speed>
+        <scale>0.1~0.2</scale>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <chancePerTick>0.3</chancePerTick>
+        <positionRadius>0.4</positionRadius>
+        <fleckDef>HeatGlow_Intense</fleckDef>
+        <burstCount>1~1</burstCount>
+        <scale>0.5~0.7</scale>
+        <spawnLocType>OnSource</spawnLocType>
+        <color>(255,100,0)</color>
+      </li>
+    </children>
+  </EffecterDef>
+</Defs>

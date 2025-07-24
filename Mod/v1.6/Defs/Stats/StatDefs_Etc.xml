@@ -37,4 +37,20 @@
     <showIfUndefined>true</showIfUndefined>
     <displayPriorityInCategory>5120</displayPriorityInCategory>
   </StatDef>
+  
+  <StatDef>
+    <defName>VV_BulletPelletCount</defName>
+    <label>pellet count</label>
+    <description>The amount of bullet pellets each time the weapon is fired.</description>
+    <category>Weapon_Ranged</category>
+    <displayPriorityInCategory>5500</displayPriorityInCategory>
+    <defaultBaseValue>1</defaultBaseValue>
+    <minValue>0</minValue>
+    <alwaysHide>true</alwaysHide>
+    <toStringStyle>Integer</toStringStyle>
+    <showOnAnimals>false</showOnAnimals>
+    <showOnEntities>false</showOnEntities>
+    <showOnDrones>false</showOnDrones>
+    <showDevelopmentalStageFilter>Child, Adult</showDevelopmentalStageFilter>
+  </StatDef>
 </Defs>
