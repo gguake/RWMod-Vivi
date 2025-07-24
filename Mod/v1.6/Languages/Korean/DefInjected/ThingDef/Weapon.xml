@@ -1,80 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-  <!-- Melee -->
-  <VV_ViviSpear.label>비비 창</VV_ViviSpear.label>
-  <VV_ViviSpear.description>비비들이 보편적으로 사용하는 창입니다. 일반 사람이 다루기에는 너무 작아 비비만 다룰 수 있습니다.
+<!-- Melee -->
+<VV_ViviSpear.label>비비 창</VV_ViviSpear.label>
+<VV_ViviSpear.description>비비들이 보편적으로 사용하는 창입니다. 일반 사람이 다루기에는 너무 작아 비비만 다룰 수 있습니다.
 \n창 끝에 독이 묻어있어 맞은 적을 중독시키며 강력한 한방의 위력을 가지고 있지만 잘 다루기 어렵습니다.</VV_ViviSpear.description>
-  <VV_ViviSpear.tools.shaft.label>장대</VV_ViviSpear.tools.shaft.label>
-  <VV_ViviSpear.tools.point.label>창끝</VV_ViviSpear.tools.point.label>
-  
-  <VV_RitualLance.label>비비 예식용 창</VV_RitualLance.label>
-  <VV_RitualLance.description>둥지를 위험에서 구해낸 비비들에게 하사되는 일종의 예식용 무기로 다양한 장식과 커다란 날이 달린 대형 창입니다. 손잡이의 길이에 비해 기형적인 크기의 날과 장식때문에 비비에게 최적화되어있어 비비만 사용할 수 있습니다.
+<VV_ViviSpear.tools.shaft.label>장대</VV_ViviSpear.tools.shaft.label>
+<VV_ViviSpear.tools.point.label>창끝</VV_ViviSpear.tools.point.label>
+
+<VV_RitualLance.label>비비 예식용 창</VV_RitualLance.label>
+<VV_RitualLance.description>둥지를 위험에서 구해낸 비비들에게 하사되는 일종의 예식용 무기로 다양한 장식과 커다란 날이 달린 대형 창입니다. 손잡이의 길이에 비해 기형적인 크기의 날과 장식때문에 비비에게 최적화되어있어 비비만 사용할 수 있습니다.
 \n환경 마나를 흡수해 충전할 수 있으며, 충전된 창은 놀라울 정도로 날카로워져 공격력과 관통력이 크게 증가합니다.</VV_RitualLance.description>
-  <VV_RitualLance.tools.shaft.label>장대</VV_RitualLance.tools.shaft.label>
-  <VV_RitualLance.tools.point.label>창끝</VV_RitualLance.tools.point.label>
-  
-  <!-- Ranged -->
-  <VV_Slingshot.label>비비 새총</VV_Slingshot.label>
-  <VV_Slingshot.description>어린 비비들이 쥐나 작은 동물을 쫓아낼때 사용하는 단순한 새총입니다. 일반 사람이 다루기에는 너무 작아 비비만 다룰 수 있습니다. 사거리는 짧지만 만들거나 다루기 쉽고 효과적이며 맞추면 높은 확률로 적을 기절시킵니다.</VV_Slingshot.description>
-  <VV_Slingshot.tools.handle.label>손잡이</VV_Slingshot.tools.handle.label>
-  <VV_Arrow_SlingshotStone.label>돌멩이</VV_Arrow_SlingshotStone.label>
+<VV_RitualLance.tools.shaft.label>장대</VV_RitualLance.tools.shaft.label>
+<VV_RitualLance.tools.point.label>창끝</VV_RitualLance.tools.point.label>
 
-  <VV_ShockDart.label>비비 충격 다트</VV_ShockDart.label>
-  <VV_ShockDart.description>촉에 전류가 흐르는 작은 투척용 다트입니다. 일반 사람이 던지기에는 너무 작고 불편해 비비만 다룰 수 있습니다. 약점을 잘 맞추면 기계류를 합선시켜 기절시킬 수 있습니다.</VV_ShockDart.description>
-  <VV_ShockDart.tools.point.label>다트촉</VV_ShockDart.tools.point.label>
-  <VV_Dart_ShockDart.label>충격 다트</VV_Dart_ShockDart.label>
+<!-- Ranged -->
+<VV_Slingshot.label>비비 새총</VV_Slingshot.label>
+<VV_Slingshot.description>어린 비비들이 쥐나 작은 동물을 쫓아낼때 사용하는 단순한 새총입니다. 일반 사람이 다루기에는 너무 작아 비비만 다룰 수 있습니다. 사거리는 짧지만 만들거나 다루기 쉽고 효과적이며 맞추면 높은 확률로 적을 기절시킵니다.</VV_Slingshot.description>
+<VV_Slingshot.tools.handle.label>손잡이</VV_Slingshot.tools.handle.label>
+<VV_Arrow_SlingshotStone.label>돌멩이</VV_Arrow_SlingshotStone.label>
 
-  <VV_ViviLongJavelin.label>비비 롱 재블린</VV_ViviLongJavelin.label>
-  <VV_ViviLongJavelin.description>비비들이 강한 적을 상대할때 보편적으로 사용하는 길다란 투창입니다. 일반 사람이 던지기에는 너무 작고 불편해 비비만 다룰 수 있습니다.
+<VV_ShockDart.label>비비 충격 다트</VV_ShockDart.label>
+<VV_ShockDart.description>촉에 전류가 흐르는 작은 투척용 다트입니다. 일반 사람이 던지기에는 너무 작고 불편해 비비만 다룰 수 있습니다. 약점을 잘 맞추면 기계류를 합선시켜 기절시킬 수 있습니다.</VV_ShockDart.description>
+<VV_ShockDart.tools.point.label>다트촉</VV_ShockDart.tools.point.label>
+<VV_Dart_ShockDart.label>충격 다트</VV_Dart_ShockDart.label>
+
+<VV_ViviLongJavelin.label>비비 롱 재블린</VV_ViviLongJavelin.label>
+<VV_ViviLongJavelin.description>비비들이 강한 적을 상대할때 보편적으로 사용하는 길다란 투창입니다. 일반 사람이 던지기에는 너무 작고 불편해 비비만 다룰 수 있습니다.
 \n맞추기 어렵지만 창 끝에 독이 묻어있어 맞은 적을 중독시키고 높은 파괴력과 관통력을 가지고 있습니다. 근접전에서도 유효한 무기로서 무력화되지않고 적에게 대응할 수 있습니다.</VV_ViviLongJavelin.description>
-  <VV_ViviLongJavelin.tools.shaft.label>장대</VV_ViviLongJavelin.tools.shaft.label>
-  <VV_ViviLongJavelin.tools.point.label>창끝</VV_ViviLongJavelin.tools.point.label>
-  <VV_ViviLongJavelin.tools.2.label>창끝</VV_ViviLongJavelin.tools.2.label>
-  <VV_Arrow_LongJavelin.label>롱 재블린</VV_Arrow_LongJavelin.label>
+<VV_ViviLongJavelin.tools.shaft.label>장대</VV_ViviLongJavelin.tools.shaft.label>
+<VV_ViviLongJavelin.tools.point.label>창끝</VV_ViviLongJavelin.tools.point.label>
+<VV_ViviLongJavelin.tools.2.label>창끝</VV_ViviLongJavelin.tools.2.label>
+<VV_Arrow_LongJavelin.label>롱 재블린</VV_Arrow_LongJavelin.label>
 
-  <VV_RepeatingCrossbow.label>비비 연발 석궁</VV_RepeatingCrossbow.label>
-  <VV_RepeatingCrossbow.description>재장전과 조준시간이 거의 들지 않는 연발 석궁입니다. 일반 사람이 다루기에는 너무 작고 복잡해 비비만 다룰 수 있습니다.
+<VV_RepeatingCrossbow.label>비비 연발 석궁</VV_RepeatingCrossbow.label>
+<VV_RepeatingCrossbow.description>재장전과 조준시간이 거의 들지 않는 연발 석궁입니다. 일반 사람이 다루기에는 너무 작고 복잡해 비비만 다룰 수 있습니다.
 \n일반적인 화살 대신 독이 발린 바늘같은 탄환을 사용해 사거리와 위력은 매우 약하지만 압도적인 연사력과 편의성을 가지고 있어 호신용으로 애용되며 사격 연습용으로도 좋습니다.</VV_RepeatingCrossbow.description>
-  <VV_RepeatingCrossbow.tools.limb.label>활대</VV_RepeatingCrossbow.tools.limb.label>
-  <VV_Arrow_RepeatingCrossbow.label>쇠뇌 바늘</VV_Arrow_RepeatingCrossbow.label>
+<VV_RepeatingCrossbow.tools.limb.label>활대</VV_RepeatingCrossbow.tools.limb.label>
+<VV_Arrow_RepeatingCrossbow.label>석궁 바늘</VV_Arrow_RepeatingCrossbow.label>
 
-  <!-- 마나 -->
-  <VV_Steamthrower.label>수증기 방사기</VV_Steamthrower.label>
-  <VV_Steamthrower.description>뜨거운 수증기를 고압으로 분사하는 마법 무기입니다. 범위 내의 모든 대상에게 화상 피해를 입히지만 사용자와 가까이 붙어있는 아군은 피해를 받지 않습니다.
+<!-- 마나 -->
+<VV_Steamthrower.label>수증기 방사기</VV_Steamthrower.label>
+<VV_Steamthrower.description>뜨거운 수증기를 고압으로 분사하는 마법 무기입니다. 범위 내의 모든 대상에게 화상 피해를 입히지만 사용자와 가까이 붙어있는 아군은 피해를 받지 않습니다.
 \n수증기는 범위 내의 모든 화재를 진압하며 밀폐된 공간이라면 온도를 높입니다. 열에 약한 다수의 적을 상대하는데 매우 효과적이며 비비들은 대규모 화재를 진압하는데에도 사용합니다.
 \n사격시마다 마나를 소모하고 마나가 고갈되면 사격할 수 없으며 주변의 환경 마나를 흡수해 자동으로 충전됩니다.</VV_Steamthrower.description>
-  <VV_Steamthrower.tools.stock.label>개머리판</VV_Steamthrower.tools.stock.label>
-  <VV_Steamthrower.tools.barrel.label>총열</VV_Steamthrower.tools.barrel.label>
-  <VV_SteamProjectile.label>증기</VV_SteamProjectile.label>
+<VV_Steamthrower.tools.stock.label>개머리판</VV_Steamthrower.tools.stock.label>
+<VV_Steamthrower.tools.barrel.label>총열</VV_Steamthrower.tools.barrel.label>
+<VV_SteamProjectile.label>증기</VV_SteamProjectile.label>
 
-  <VV_SnowmanLauncher.label>눈사람 발사기</VV_SnowmanLauncher.label>
-  <VV_SnowmanLauncher.description>눈사람을 뭉쳐 발사하는 마법 무기입니다. 우스꽝스럽지만 착탄 지점 주변의 넓은 범위에 강력한 냉기 폭발을 일으켜 동상을 입힙니다.
+<VV_SnowmanLauncher.label>눈사람 발사기</VV_SnowmanLauncher.label>
+<VV_SnowmanLauncher.description>눈사람을 뭉쳐 발사하는 마법 무기입니다. 우스꽝스럽지만 착탄 지점 주변의 넓은 범위에 강력한 냉기 폭발을 일으켜 동상을 입힙니다.
 \n폭발이 지나간 자리에는 눈이 쌓이며 발사된 눈사람이 짧은 시간 남아있다가 한번 더 폭발합니다. 동상 피해를 받은 대상들은 이동이 잠시 느려집니다.
 \n사격시마다 마나를 소모하고 마나가 고갈되면 사격할 수 없으며 주변의 환경 마나를 흡수해 자동으로 충전됩니다.</VV_SnowmanLauncher.description>
-  <VV_SnowmanLauncher.tools.barrel.label>총열</VV_SnowmanLauncher.tools.barrel.label>
-  <VV_Bullet_Snowman.label>눈사람</VV_Bullet_Snowman.label>
-  <VV_ExplosiveSnowman.label>폭발 눈사람</VV_ExplosiveSnowman.label>
-  <VV_ExplosiveSnowman.description>두 개의 커다란 눈덩이를 간단히 쌓아 만든, 사람 모양의 눈폭탄입니다.</VV_ExplosiveSnowman.description>
+<VV_SnowmanLauncher.tools.barrel.label>총열</VV_SnowmanLauncher.tools.barrel.label>
+<VV_Bullet_Snowman.label>눈사람</VV_Bullet_Snowman.label>
+<VV_ExplosiveSnowman.label>폭발 눈사람</VV_ExplosiveSnowman.label>
+<VV_ExplosiveSnowman.description>두 개의 커다란 눈덩이를 간단히 쌓아 만든, 사람 모양의 눈폭탄입니다.</VV_ExplosiveSnowman.description>
 
-  <VV_ChainThunderPistol.label>연쇄 번개 권총</VV_ChainThunderPistol.label>
-  <VV_ChainThunderPistol.description>조준한 대상에게 빗나가지 않는 강력한 전류를 유도해 발사하는 마법 무기입니다. 전류는 대상에게 화상을 입히며 동시에 전자 장비를 잠시 마비시킵니다.
+<VV_ChainThunderPistol.label>연쇄 번개 권총</VV_ChainThunderPistol.label>
+<VV_ChainThunderPistol.description>조준한 대상에게 빗나가지 않는 강력한 전류를 유도해 발사하는 마법 무기입니다. 전류는 대상에게 화상을 입히며 동시에 전자 장비를 잠시 마비시킵니다.
 \n발사된 전류는 주변의 가까운 적에게도 여러 차례 유도되어 동일한 피해를 입히므로 실내에서 다수의 산개된 적을 상대할때 효과적입니다.
 \n사격시마다 마나를 소모하고 마나가 고갈되면 사격할 수 없으며 주변의 환경 마나를 흡수해 자동으로 충전됩니다.</VV_ChainThunderPistol.description>
+<VV_ChainThunderPistol.tools.barrel.label>총열</VV_ChainThunderPistol.tools.barrel.label>
 
-  <VV_LavaShredder.label>화산탄 기관총</VV_LavaShredder.label>
-  <VV_LavaShredder.description>뜨겁게 가열된 산탄을 흩뿌리는 기관총입니다. 엄청난 반동으로 인해 정확한 조준이 어렵고 발사되는 소이 산탄들은 위력은 약하지만 이 모든 단점을 압도적인 탄막의 양으로 이를 해결합니다.
+<VV_LavaShredder.label>화산탄 기관총</VV_LavaShredder.label>
+<VV_LavaShredder.description>뜨겁게 가열된 산탄을 흩뿌리는 기관총입니다. 엄청난 반동으로 인해 정확한 조준이 어렵고 발사되는 소이 산탄들은 위력은 약하지만 이 모든 단점을 압도적인 탄막의 양으로 이를 해결합니다.
 \n다수의 적을 상대로 매우 강력하지만 다루기 어렵고 화재 위험 때문에 비비들은 이 무기의 활용을 통제하고 있으며 노련한 비비들에게만 사용이 허가됩니다.
 \n사격시마다 마나를 소모하고 마나가 고갈되면 사격할 수 없으며 주변의 환경 마나를 흡수해 자동으로 충전됩니다.</VV_LavaShredder.description>
-  <VV_Bullet_LavaShredder.label>화산탄</VV_Bullet_LavaShredder.label>
+<VV_LavaShredder.tools.stock.label>개머리판</VV_LavaShredder.tools.stock.label>
+<VV_LavaShredder.tools.barrel.label>총열</VV_LavaShredder.tools.barrel.label>
+<VV_Bullet_LavaShredder.label>화산탄</VV_Bullet_LavaShredder.label>
 
+<VV_FroststingCrossbow.label>서리침 저격 석궁</VV_FroststingCrossbow.label>
+<VV_FroststingCrossbow.description>매우 날카롭고 가늘지만 단단한 고드름을 발사하는 석궁입니다. 고배율 조준경이 장착되어 아주 먼 거리의 대상을 강력한 위력으로 정확히 저격할 수 있지만 사격시 많은 마나가 소모되어 재충전이 자주 필요하며, 가까운 대상을 공격할 수 없습니다.
+\n주로 단독임무에 배치되는 노련한 저격수 비비들은 이 무기로 둥지에 찾아오는 수많은 공격을 사전에 차단해왔습니다.
+\n사격시마다 마나를 소모하고 마나가 고갈되면 사격할 수 없으며 주변의 환경 마나를 흡수해 자동으로 충전됩니다.</VV_FroststingCrossbow.description>
+<VV_FroststingCrossbow.tools.limb.label>활대</VV_FroststingCrossbow.tools.limb.label>
 
-
-  <!-- Exotics -->
-  <VV_EltexNeedle.label>비비 엘텍스 바늘</VV_EltexNeedle.label>
-  <VV_EltexNeedle.description>특수 가공된 날카로운 바늘입니다. 비비만 다룰 수 있으며 장착시 착용자와 공명해 귀속되어 다른 이들은 사용할 수 없습니다.
+<!-- Exotics -->
+<VV_EltexNeedle.label>비비 엘텍스 바늘</VV_EltexNeedle.label>
+<VV_EltexNeedle.description>특수 가공된 날카로운 바늘입니다. 비비만 다룰 수 있으며 장착시 착용자와 공명해 귀속되어 다른 이들은 사용할 수 없습니다.
 \n환경 마나를 흡수해 충전할 수 있으며, 바늘을 매개로 마나와 공명해 물리법칙을 무시하고 착용자의 의지에 따라 자유자재로 움직일 수 있는 초정신 바늘을 소환할 수 있습니다.
 \n초정신 바늘은 모든 장애물을 투과하며 움직이고 반드시 명중하며, 정신 감응력이 높을수록 바늘이 빨라지며 한번에 더 많이 공격할 수 있습니다.
 \n초정신 바늘을 소환중인 상태에서는 깊은 집중 상태가 되므로 초정신 바늘을 회수하기 전까지는 이동할 수 없습니다.</VV_EltexNeedle.description>
-  <VV_EltexNeedle.tools.point.label>바늘</VV_EltexNeedle.tools.point.label>
-  <VV_Projectile_EltexNeedle.label>초정신 바늘</VV_Projectile_EltexNeedle.label>
+<VV_EltexNeedle.tools.point.label>바늘</VV_EltexNeedle.tools.point.label>
+<VV_Projectile_EltexNeedle.label>초정신 바늘</VV_Projectile_EltexNeedle.label>
 </LanguageData>
