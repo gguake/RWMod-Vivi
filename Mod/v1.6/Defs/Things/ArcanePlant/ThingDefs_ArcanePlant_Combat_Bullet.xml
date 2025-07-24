@@ -138,9 +138,9 @@
 
     <projectile>
       <damageDef>Bomb</damageDef>
-      <speed>18</speed>
+      <speed>30</speed>
       <explosionRadius>0.6</explosionRadius>
-      <damageAmountBase>17</damageAmountBase>
+      <damageAmountBase>18</damageAmountBase>
       <screenShakeFactor>0</screenShakeFactor>
     </projectile>
   </ThingDef>

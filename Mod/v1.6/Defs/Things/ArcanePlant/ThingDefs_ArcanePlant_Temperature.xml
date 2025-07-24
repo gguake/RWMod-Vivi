@@ -37,9 +37,9 @@
           <manaFromTemperatureRange>0~2000</manaFromTemperatureRange>
         </manaGenerateRule>
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>350</mana>
+          <mana>300</mana>
         </manaConsumeRule>
-        <manaAbsorbPerDay>350</manaAbsorbPerDay>
+        <manaAbsorbPerDay>300</manaAbsorbPerDay>
       </li>
 
       <li Class="VVRace.CompProperties_ArcanePlantBulletOverride">

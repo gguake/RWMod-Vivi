@@ -32,6 +32,7 @@
     </weaponClasses>
     <weaponTags Inherit="False">
       <li>VV_ViviWeaponMana</li>
+      <li>VV_Firefighter</li>
     </weaponTags>
 
     <verbs>
@@ -150,6 +151,7 @@
     </weaponClasses>
     <weaponTags Inherit="False">
       <li>VV_ViviWeaponMana</li>
+      <li>VV_Firefighter</li>
     </weaponTags>
 
     <verbs>
@@ -305,7 +307,7 @@
     </weaponClasses>
     <weaponTags Inherit="False">
       <li>VV_ViviWeaponMana</li>
-      <li>VV_Vivi</li>
+      <li>VV_RoyalViviOnly</li>
     </weaponTags>
 
     <verbs>
@@ -543,6 +545,7 @@
     </weaponClasses>
     <weaponTags Inherit="False">
       <li>VV_ViviWeaponMana</li>
+      <li>VV_Froststing</li>
     </weaponTags>
 
     <verbs>

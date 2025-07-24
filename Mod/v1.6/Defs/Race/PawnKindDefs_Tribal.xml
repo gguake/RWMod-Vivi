@@ -19,7 +19,7 @@
   <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
     <defName>VV_ViviTribesman</defName>
     <label>vivi tribesman</label>
-    <combatPower>70</combatPower>
+    <combatPower>60</combatPower>
     <isFighter>false</isFighter>
     <itemQuality>Poor</itemQuality>
 
@@ -49,7 +49,7 @@
   <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
     <defName>VV_ViviGuard</defName>
     <label>vivi guard</label>
-    <combatPower>140</combatPower>
+    <combatPower>100</combatPower>
     <isFighter>true</isFighter>
     <itemQuality>Normal</itemQuality>
 
@@ -70,6 +70,16 @@
     <initialWillRange>3~5</initialWillRange>
     <initialResistanceRange>30~40</initialResistanceRange>
 
+    <inventoryOptions>
+      <skipChance>0.8</skipChance>
+      <subOptionsChooseOne>
+        <li>
+          <thingDef>VV_CombatHormoneJelly</thingDef>
+          <countRange>1</countRange>
+        </li>
+      </subOptionsChooseOne>
+    </inventoryOptions>
+
     <backstoryFiltersOverride Inherit="False">
       <li>
         <categories>
@@ -84,7 +94,7 @@
   <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
     <defName>VV_ViviArcher</defName>
     <label>vivi archer</label>
-    <combatPower>140</combatPower>
+    <combatPower>100</combatPower>
     <isFighter>true</isFighter>
     <itemQuality>Normal</itemQuality>
 
@@ -112,11 +122,86 @@
     <forcedBodyType>Thin</forcedBodyType>
   </PawnKindDef>
   
+  <!-- 비비 소방수 -->
+  <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
+    <defName>VV_ViviFirefighter</defName>
+    <label>vivi firefighter</label>
+    <combatPower>180</combatPower>
+    <isFighter>true</isFighter>
+
+    <requiredWorkTags>
+      <li>Violent</li>
+    </requiredWorkTags>
+
+    <gearHealthRange>0.7~3.2</gearHealthRange>
+    <apparelMoney>500~1200</apparelMoney>
+    <apparelTags>
+      <li>VV_ViviCombatApparel</li>
+    </apparelTags>
+    <weaponMoney>1000~2000</weaponMoney>
+    <weaponTags>
+      <li>VV_Firefighter</li>
+    </weaponTags>
+
+    <initialWillRange>9~14</initialWillRange>
+    <initialResistanceRange>30~40</initialResistanceRange>
+
+    <inventoryOptions>
+      <skipChance>0.3</skipChance>
+      <subOptionsChooseOne>
+        <li>
+          <thingDef>VV_CombatHormoneJelly</thingDef>
+          <countRange>1</countRange>
+        </li>
+      </subOptionsChooseOne>
+    </inventoryOptions>
+
+    <backstoryFiltersOverride Inherit="False">
+      <li>
+        <categories>
+          <li>VV_FirefighterBackstory</li>
+        </categories>
+      </li>
+    </backstoryFiltersOverride>
+    <forcedBodyType>Thin</forcedBodyType>
+  </PawnKindDef>
+
+  <!-- 비비 저격수 -->
+  <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
+    <defName>VV_ViviSniper</defName>
+    <label>vivi sniper</label>
+    <combatPower>180</combatPower>
+    <isFighter>true</isFighter>
+
+    <requiredWorkTags>
+      <li>Violent</li>
+    </requiredWorkTags>
+
+    <gearHealthRange>0.7~3.2</gearHealthRange>
+    <apparelMoney>500~1200</apparelMoney>
+    <weaponMoney>1000~2000</weaponMoney>
+    <weaponTags>
+      <li>VV_Froststing</li>
+    </weaponTags>
+
+    <initialWillRange>9~14</initialWillRange>
+    <initialResistanceRange>30~40</initialResistanceRange>
+
+    <backstoryFiltersOverride Inherit="False">
+      <li>
+        <categories>
+          <li>VV_SniperBackstory</li>
+        </categories>
+      </li>
+    </backstoryFiltersOverride>
+    <forcedBodyType>Thin</forcedBodyType>
+  </PawnKindDef>
+  
   <!-- 비비 연방 대표 -->
   <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
     <defName>VV_RoyalViviEmpress</defName>
     <label>vivi federation representative</label>
-    <combatPower>300</combatPower>
+    <combatPower>500</combatPower>
     <isFighter>true</isFighter>
     <itemQuality>Masterwork</itemQuality>
 
@@ -154,7 +239,7 @@
   <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
     <defName>VV_RoyalViviLeader</defName>
     <label>vivi leader</label>
-    <combatPower>120</combatPower>
+    <combatPower>200</combatPower>
     <isFighter>true</isFighter>
     <itemQuality>Good</itemQuality>
     <factionLeader>true</factionLeader>
@@ -180,6 +265,7 @@
     <weaponTags>
       <li>VV_ViviNeedle</li>
       <li>VV_ViviWeaponMana</li>
+      <li>VV_RoyalViviOnly</li>
     </weaponTags>
 
     <acceptArrestChanceFactor>0.1</acceptArrestChanceFactor>
@@ -195,7 +281,7 @@
   <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
     <defName>VV_RoyalVivi</defName>
     <label>royal vivi</label>
-    <combatPower>90</combatPower>
+    <combatPower>50</combatPower>
     <isFighter>false</isFighter>
     <itemQuality>Normal</itemQuality>
 
@@ -210,6 +296,7 @@
     <weaponMoney>1000~1500</weaponMoney>
     <weaponTags>
       <li>VV_ViviWeaponRange</li>
+      <li>VV_RoyalViviOnly</li>
     </weaponTags>
 
     <acceptArrestChanceFactor>0.5</acceptArrestChanceFactor>
@@ -234,7 +321,7 @@
     <defName>VV_RoyalViviTrader</defName>
     <label>vivi trader</label>
     <trader>true</trader>
-    <combatPower>90</combatPower>
+    <combatPower>110</combatPower>
     <isFighter>false</isFighter>
     <itemQuality>Normal</itemQuality>
 

@@ -453,8 +453,8 @@
       <li Class="VVRace.CompProperties_RepeatGatherable" />
 
       <li Class="VVRace.CompProperties_StalitflowerGlower">
-        <glowRadius>7.3</glowRadius>
-        <glowColor>(260,300,280,0)</glowColor>
+        <glowRadius>5.3</glowRadius>
+        <glowColor>(120,180,280,0)</glowColor>
       </li>
     </comps>
     

@@ -153,4 +153,42 @@
       <li>VV_CombatSettlerBackstory</li>
     </spawnCategories>
   </BackstoryDef>
+
+  <!-- VV_ViviFirefighter -->
+  <BackstoryDef ParentName="VV_AdultSettlerViviBackstory">
+    <defName>VV_ViviFirefighter</defName>
+    <title>vivi firefighter</title>
+    <titleShort>firefighter</titleShort>
+    <description>[PAWN_nameDef] is a firefighter in vivi hive.</description>
+    <skillGains>
+      <Melee>5</Melee>
+      <Construction>5</Construction>
+      <Medicine>5</Medicine>
+    </skillGains>
+    <disallowedTraits>
+      <DrugDesire>-1</DrugDesire>
+    </disallowedTraits>
+    <spawnCategories>
+      <li>VV_FirefighterBackstory</li>
+    </spawnCategories>
+  </BackstoryDef>
+  
+  <!-- VV_ViviSniper -->
+  <BackstoryDef ParentName="VV_AdultSettlerViviBackstory">
+    <defName>VV_ViviSniper</defName>
+    <title>vivi sniper</title>
+    <titleShort>sniper</titleShort>
+    <description>[PAWN_nameDef] is a sniper in vivi hive.</description>
+    <skillGains>
+      <Shooting>10</Shooting>
+      <Animals>3</Animals>
+      <Medicine>3</Medicine>
+    </skillGains>
+    <disallowedTraits>
+      <Brawler />
+    </disallowedTraits>
+    <spawnCategories>
+      <li>VV_SniperBackstory</li>
+    </spawnCategories>
+  </BackstoryDef>
 </Defs>
