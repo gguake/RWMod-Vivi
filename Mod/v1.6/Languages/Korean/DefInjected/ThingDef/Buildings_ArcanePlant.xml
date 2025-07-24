@@ -18,6 +18,6 @@
 <VV_ManaEmitter.comps.CompRefuelable.fuelGizmoLabel>마나 비료</VV_ManaEmitter.comps.CompRefuelable.fuelGizmoLabel>
 
 <VV_ShockNetTrap.label>감전 그물 덫</VV_ShockNetTrap.label>
-<VV_ShockNetTrap.description>전류가 흐르는 그물 덫입니다. 밟으면 작은 전자기 펄스가 발생해 기계류를 잠시 고장내며 생명체가 밟으면 전류가 흘려 기절시킵니다. 전기가 연결되어 있어야 하며 한번 발동되어도 계속 사용할 수 있지만 재충전에 시간이 필요합니다.</VV_ShockNetTrap.description>
+<VV_ShockNetTrap.description>전류가 흐르는 그물 덫입니다. 밟으면 작은 전자기 펄스가 발생해 기계류를 일시적으로 고장내며, 생명체인 경우 순간적인 전류가 흘려 잠깐 기절시킵니다. 전기가 연결되어 있어야 하며 한번 발동되어도 계속 사용할 수 있지만 재충전에 시간이 필요합니다.</VV_ShockNetTrap.description>
 
 </LanguageData>

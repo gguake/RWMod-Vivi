@@ -59,6 +59,8 @@
         <targetParams>
           <canTargetLocations>true</canTargetLocations>
         </targetParams>
+
+        <ai_AvoidFriendlyFireRadius>7</ai_AvoidFriendlyFireRadius>
       </li>
     </verbs>
     
@@ -391,10 +393,12 @@
   <ThingDef ParentName="BaseHumanMakeableGun">
     <defName>VV_LavaShredder</defName>
     <label>lava shredder</label>
-    <description>.</description>
+    <description>A machine gun that sprays searing pellets. Its massive recoil makes precision aiming difficult and each incendiary round is weak, but the weapon compensates with an overwhelming torrent of fire.
+\nLethal against large groups yet hard to control, it poses a fire hazard, so the vivi restrict its use to seasoned operators only.
+\nEach shot consumes mana; if mana is depleted it cannot fire, and it automatically recharges by absorbing environment mana nearby.</description>
 
     <graphicData>
-      <texPath>Things/Item/Equipment/VV_Steamthrower</texPath>
+      <texPath>Things/Item/Equipment/VV_Lavashredder</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <soundInteract>Interact_Rifle</soundInteract>
@@ -410,7 +414,7 @@
       <AccuracyLong>0.07</AccuracyLong>
       <RangedWeapon_Cooldown>1.8</RangedWeapon_Cooldown>
       <VV_RangedWeapon_ManaCost>15</VV_RangedWeapon_ManaCost>
-      <VV_BulletPelletCount>3</VV_BulletPelletCount>
+      <VV_BulletPelletCount>4</VV_BulletPelletCount>
     </statBases>
     <relicChance>0</relicChance>
     
@@ -433,7 +437,7 @@
         <range>25.9</range>
         <ticksBetweenBurstShots>6</ticksBetweenBurstShots>
         <burstShotCount>6</burstShotCount>
-        <soundCast>Shot_Minigun</soundCast>
+        <soundCast>VV_LavaShrudderShot</soundCast>
         <soundCastTail>GunTail_Medium</soundCastTail>
         <muzzleFlashScale>10</muzzleFlashScale>
       </li>
@@ -501,7 +505,7 @@
     </graphicData>
     <projectile>
       <damageDef>VV_Bullet_Lava</damageDef>
-      <damageAmountBase>6</damageAmountBase>
+      <damageAmountBase>7</damageAmountBase>
       <stoppingPower>0.8</stoppingPower>
       <speed>33</speed>
       <ai_IsIncendiary>true</ai_IsIncendiary>
@@ -515,10 +519,12 @@
   <ThingDef ParentName="BaseHumanMakeableGun">
     <defName>VV_FroststingCrossbow</defName>
     <label>froststing sniper crossbow</label>
-    <description>.</description>
+    <description>A crossbow that shoots needle-thin, razor-sharp icicles. With a high-magnification scope it can snipe distant targets with heavy punch and pinpoint accuracy. Each shot burns a lot of mana, forcing frequent recharges, and it's useless at close range.
+\nSeasoned Vivi snipers on solo duty use it to stop threats long before they reach the nest.
+\nEach shot consumes mana; if mana is depleted it cannot fire, and it automatically recharges by absorbing environment mana nearby.</description>
 
     <graphicData>
-      <texPath>Things/Item/Equipment/VV_SnowmanLauncher</texPath>
+      <texPath>Things/Item/Equipment/VV_FroststingCrossbow</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <soundInteract>Bow_Recurve</soundInteract>
@@ -556,7 +562,7 @@
         <warmupTime>4.5</warmupTime>
         <minRange>18.9</minRange>
         <range>54.9</range>
-        <soundCast>Bow_Large</soundCast>
+        <soundCast>VV_FroststingShot</soundCast>
         <canGoWild>false</canGoWild>
       </li>
     </verbs>
@@ -609,8 +615,9 @@
     <label>froststing</label>
     <graphicData>
       <graphicClass>Graphic_Single</graphicClass>
-      <texPath>Things/Building/Art/Snowman</texPath>
-      <drawSize>(1,1)</drawSize>
+      <texPath>Things/Projectile/VV_Bullet_Froststing</texPath>
+      <shaderType>AdditiveChangeHue</shaderType>
+      <drawSize>(0.75,3)</drawSize>
     </graphicData>
     <projectile>
       <speed>140</speed>

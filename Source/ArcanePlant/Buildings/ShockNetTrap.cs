@@ -20,14 +20,23 @@ namespace VVRace
         private CompPowerTrader _compPowerTrader;
 
         private int _cooldownTicks;
+        private bool _powered;
 
-        public override int? OverrideGraphicIndex => _cooldownTicks > 0 ? 0 : 1;
+        public override int? OverrideGraphicIndex => _cooldownTicks > 0 || !_powered ? 0 : 1;
 
         public override void ExposeData()
         {
             base.ExposeData();
 
             Scribe_Values.Look(ref _cooldownTicks, "cooldownTicks");
+            Scribe_Values.Look(ref _powered, "powered");
+        }
+
+        public override void SpawnSetup(Map map, bool respawningAfterLoad)
+        {
+            base.SpawnSetup(map, respawningAfterLoad);
+
+            _powered = !CompPowerTrader.Off;
         }
 
         protected override float SpringChance(Pawn p)
@@ -47,6 +56,8 @@ namespace VVRace
             {
                 _ = p.TakeDamage(new DamageInfo(DamageDefOf.Stun, 30f));
             }
+
+            DirtyMapMesh(Map);
         }
 
         protected override void Tick()
@@ -55,7 +66,26 @@ namespace VVRace
 
             if (Spawned && _cooldownTicks > 0)
             {
-                if (!CompPowerTrader.Off) { _cooldownTicks--; }
+                if (!CompPowerTrader.Off)
+                {
+                    _cooldownTicks--;
+                    if (_cooldownTicks == 0)
+                    {
+                        DirtyMapMesh(Map);
+                    }
+                }
+            }
+        }
+
+        protected override void ReceiveCompSignal(string signal)
+        {
+            if (signal == CompPowerPlant.PowerTurnedOnSignal)
+            {
+                _powered = true;
+            }
+            if (signal == CompPowerPlant.PowerTurnedOffSignal)
+            {
+                _powered = false;
             }
         }
 

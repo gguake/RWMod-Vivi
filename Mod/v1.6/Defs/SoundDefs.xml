@@ -143,4 +143,40 @@
     </subSounds>
   </SoundDef>
 
+  <SoundDef>
+    <defName>VV_LavaShrudderShot</defName>
+    <context>MapOnly</context>
+    <maxVoices>8</maxVoices>  
+    <maxSimultaneous>4</maxSimultaneous>  
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>SFX/VV_LavaShrudderShot</clipPath>
+          </li>
+        </grains>
+        <volumeRange>50</volumeRange>
+        <pitchRange>0.9~1.1</pitchRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+  <SoundDef>
+    <defName>VV_FroststingShot</defName>
+    <context>MapOnly</context>
+    <maxVoices>8</maxVoices>  
+    <maxSimultaneous>4</maxSimultaneous>  
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>SFX/VV_FroststingShot</clipPath>
+          </li>
+        </grains>
+        <volumeRange>70</volumeRange>
+        <pitchRange>0.8~1.2</pitchRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+
 </Defs>

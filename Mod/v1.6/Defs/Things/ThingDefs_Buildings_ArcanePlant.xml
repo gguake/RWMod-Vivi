@@ -250,17 +250,18 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VV_ShockNetTrap</defName>
     <label>shock net trap</label>
-    <description>.</description>
+    <description>An electrified net trap. Stepping on it releases a small EMP that temporarily disables machines, while living targets are briefly stunned by a pulse of current. It must stay powered, and although it can be reused after triggering, it requires time to recharge.</description>
 
     <thingClass>VVRace.ShockNetTrap</thingClass>
     <tickerType>Normal</tickerType>
 
     <graphicData>
-      <graphicClass>Graphic_Single</graphicClass>
-      <texPath>Things/Building/Security/IEDHighExplosive</texPath>
+      <graphicClass>Graphic_Random</graphicClass>
+      <texPath>Things/Building/VV_ShockwebTrap</texPath>
       <damageData>
         <rect>(0.1,0,0.8,0.3)</rect>
       </damageData>
+      <drawSize>2.2</drawSize>
     </graphicData>
 
     <uiOrder>2404</uiOrder>
