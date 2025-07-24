@@ -408,9 +408,9 @@
     <statBases>
       <WorkToMake>35000</WorkToMake>
       <Mass>8.0</Mass>
-      <AccuracyTouch>0.21</AccuracyTouch>
-      <AccuracyShort>0.17</AccuracyShort>
-      <AccuracyMedium>0.12</AccuracyMedium>
+      <AccuracyTouch>0.25</AccuracyTouch>
+      <AccuracyShort>0.2</AccuracyShort>
+      <AccuracyMedium>0.13</AccuracyMedium>
       <AccuracyLong>0.07</AccuracyLong>
       <RangedWeapon_Cooldown>1.8</RangedWeapon_Cooldown>
       <VV_RangedWeapon_ManaCost>15</VV_RangedWeapon_ManaCost>
