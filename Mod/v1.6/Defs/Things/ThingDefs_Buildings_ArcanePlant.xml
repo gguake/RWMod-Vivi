@@ -161,7 +161,6 @@
     </researchPrerequisites>
   </ThingDef>
 
-
   <!-- 마나 방출기 -->
   <ThingDef ParentName="BuildingBase">
     <defName>VV_ManaEmitter</defName>
@@ -245,6 +244,83 @@
     <researchPrerequisites>
       <li>VV_ArcanePlantSowing</li>
     </researchPrerequisites>
+  </ThingDef>
+
+  <!-- 감전 그물덫 -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>VV_ShockNetTrap</defName>
+    <label>shock net trap</label>
+    <description>.</description>
+
+    <thingClass>VVRace.ShockNetTrap</thingClass>
+    <tickerType>Normal</tickerType>
+
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>Things/Building/Security/IEDHighExplosive</texPath>
+      <damageData>
+        <rect>(0.1,0,0.8,0.3)</rect>
+      </damageData>
+    </graphicData>
+
+    <uiOrder>2404</uiOrder>
+    <altitudeLayer>Building</altitudeLayer>
+    <useHitPoints>True</useHitPoints>
+    <statBases>
+      <Mass>1</Mass>
+      <MaxHitPoints>40</MaxHitPoints>
+      <WorkToBuild>1000</WorkToBuild>
+      <Flammability>0.5</Flammability>
+      <Beauty>-4</Beauty>
+      <TrapSpringChance>1.0</TrapSpringChance>
+    </statBases>
+    <rotatable>false</rotatable>
+    <stealable>false</stealable>
+
+    <costList>
+      <VV_Viviwax>25</VV_Viviwax>
+      <VV_SparklingPetal>10</VV_SparklingPetal>
+    </costList>
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>10</basePowerConsumption>
+        <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+
+      <li Class="CompProperties_Glower">
+        <glowRadius>1.5</glowRadius>
+        <glowColor>(213,110,248)</glowColor>
+      </li>
+    </comps>
+
+    <thingCategories>
+      <li>VV_BuildingsVivi</li>
+    </thingCategories>
+    <minifiedDef>MinifiedThing</minifiedDef>
+
+    <designationCategory>VV_Bulidings</designationCategory>
+    <designationHotKey>Misc8</designationHotKey>
+
+    <building>
+      <isTrap>true</isTrap>
+      <trapPeacefulWildAnimalsSpringChanceFactor>0.1</trapPeacefulWildAnimalsSpringChanceFactor>
+      <expandHomeArea>false</expandHomeArea>
+      <ai_chillDestination>false</ai_chillDestination>
+    </building>
+
+    <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
+
+    <researchPrerequisites>
+      <li>VV_ArcaneBotany</li>
+      <li>Electricity</li>
+    </researchPrerequisites>
+
+    <placeWorkers>
+      <li>PlaceWorker_NeverAdjacentTrap</li>
+    </placeWorkers>
   </ThingDef>
 
 </Defs>

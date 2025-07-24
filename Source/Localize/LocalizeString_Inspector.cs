@@ -25,5 +25,7 @@
 
         public const string VV_Inspector_AttunementReserved = nameof(VV_Inspector_AttunementReserved);
         public const string VV_Inspector_EverflowerAttunementState = nameof(VV_Inspector_EverflowerAttunementState);
+
+        public const string VV_Inspector_ShockNetTrapCooldown = nameof(VV_Inspector_ShockNetTrapCooldown);
     }
 }
