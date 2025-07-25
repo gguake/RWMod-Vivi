@@ -55,6 +55,8 @@ namespace VVRace
         private EverflowerRitualReservation _reservedRitual;
 
         public bool HasRitualCooldown => _ritualCooldownTick > GenTicks.TicksGame;
+        public int CurRitualCooldownTicks => _ritualCooldownTick;
+
         private int _ritualCooldownTick;
         private int _lastRitualTick;
 
@@ -259,6 +261,19 @@ namespace VVRace
             {
                 _lastRitualTick = GenTicks.TicksGame;
                 _ritualCooldownTick = _lastRitualTick + _reservedRitual.ritualDef.globalCooldown;
+            }
+
+            Unreserve();
+        }
+
+        public void Notify_RitualComplete(float quality)
+        {
+            var cooldown = Mathf.CeilToInt(EverflowerComp.Props.ritualCooldownCurve.Evaluate(quality));
+
+            if (cooldown > 0)
+            {
+                _lastRitualTick = GenTicks.TicksGame;
+                _ritualCooldownTick = _lastRitualTick + cooldown;
             }
 
             Unreserve();

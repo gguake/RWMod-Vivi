@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- Attunement -->
+  <RitualVisualEffectDef>
+    <defName>VV_EverflowerLink</defName>
+    <comps>
+      <li Class="CompProperties_RitualEffectSpawnOnRole">
+        <roleId>attuner</roleId>
+        <moteDef>VV_Mote_EverflowerCircle</moteDef>
+        <spawnIntervalTicks>24</spawnIntervalTicks>
+      </li>
+      <li Class="CompProperties_RitualEffectSpawnOnRole">
+        <roleId>attuner</roleId>
+        <moteDef>VV_Mote_EverflowerLinkDistortion</moteDef>
+        <spawnIntervalTicks>24</spawnIntervalTicks>
+      </li>
+    </comps>
+  </RitualVisualEffectDef>
+
+
+</Defs>

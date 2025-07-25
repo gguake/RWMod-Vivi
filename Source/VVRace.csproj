@@ -145,6 +145,10 @@
     <Compile Include="ArcanePlant\Weapon\Things\SteamProjectile.cs" />
     <Compile Include="ArcanePlant\Weapon\Verb_ChainLightning.cs" />
     <Compile Include="ArcanePlant\Weapon\Verb_Steamthrower.cs" />
+    <Compile Include="Everflower\Ritual\RitualBehaviorWorker_Attunement.cs" />
+    <Compile Include="Everflower\Ritual\RitualObligationTargetWorker_EverflowerRitual.cs" />
+    <Compile Include="Everflower\Ritual\RitualOutcomeEffectWorker_Attunement.cs" />
+    <Compile Include="Everflower\Ritual\RitualRoleEverflowerAttuner.cs" />
     <Compile Include="Gather\StatWorker_Honey.cs" />
     <Compile Include="ArcanePlant\Plant\Sensor\SensorWorker_Fire.cs" />
     <Compile Include="ArcanePlant\Weapon\Things\PeaBullet.cs" />

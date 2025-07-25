@@ -38,6 +38,8 @@ namespace VVRace
         public SimpleCurve everflowerAttuneLevelCurve;
         public SimpleCurve everflowerAttunementRitualCurve;
 
+        public SimpleCurve ritualCooldownCurve;
+
         public List<GraphicData> graphicsByLevel;
         public List<EffecterDef> effectsOnLevelAcquire;
 
@@ -234,6 +236,65 @@ namespace VVRace
                 pawn.GetCompVivi()?.Notify_LinkEverflower(Everflower);
 
                 Messages.Message(LocalizeString_Message.VV_Message_LinkEverflowerComplete.Translate(pawn.Named("PAWN")), MessageTypeDefOf.PositiveEvent);
+            }
+        }
+
+        public void LinkAttunement(Pawn pawn, float quality)
+        {
+            if (!_linked.Contains(pawn))
+            {
+                _linked.Add(pawn);
+
+                if (_attunementInfo.attunementLevel == 0)
+                {
+                    ChangeAttunementLevel(1);
+                }
+
+                pawn.GetCompVivi()?.Notify_LinkEverflower(Everflower);
+
+                Messages.Message(LocalizeString_Message.VV_Message_LinkEverflowerComplete.Translate(pawn.Named("PAWN")), MessageTypeDefOf.PositiveEvent);
+            }
+            else
+            {
+                Messages.Message(LocalizeString_Message.VV_Message_AttunementEverflowerComplete.Translate(pawn.Named("PAWN")), MessageTypeDefOf.NeutralEvent);
+            }
+
+            GainAttunement(Props.everflowerAttunementRitualCurve.Evaluate(quality));
+
+            var count = 0;
+            var v = Rand.Value;
+            if ( v <= 0.5f)
+            {
+                count += GrowViviFlowerRandomly();
+                if (Rand.Chance(0.4f))
+                {
+                    count += GrowArcanePlantRandomly();
+                }
+
+                if (count > 0)
+                {
+                    Messages.Message(LocalizeString_Message.VV_Message_PlantGrownAfterAttunement.Translate(), MessageTypeDefOf.PositiveEvent, historical: false);
+                }
+            }
+            else if (v < 0.7f)
+            {
+                foreach (var cell in GenRadial.RadialCellsAround(parent.Position, 4f, false))
+                {
+                    if (!cell.InBounds(parent.Map)) { continue; }
+
+                    if (FilthMaker.CanMakeFilth(cell, parent.Map, VVThingDefOf.VV_FilthPollen))
+                    {
+                        if (FilthMaker.TryMakeFilth(cell, parent.Map, VVThingDefOf.VV_FilthPollen))
+                        {
+                            count++;
+                        }
+                    }
+                }
+
+                if (count > 0)
+                {
+                    Messages.Message(LocalizeString_Message.VV_Message_PollenWaveAfterAttunement.Translate(), MessageTypeDefOf.PositiveEvent, historical: false);
+                }
             }
         }
 

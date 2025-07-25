@@ -56,6 +56,11 @@
     <defName>VV_EverflowerLink</defName>
     <children>
       <li>
+        <subEffecterClass>SubEffecter_Sustainer</subEffecterClass>
+        <soundDef>VV_EverflowerRitualCast</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
         <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
         <moteDef>VV_Mote_EverflowerCircle</moteDef>
         <spawnLocType>OnSource</spawnLocType>
@@ -388,6 +393,11 @@
     <defName>VV_EverflowerRitual_Complete</defName>
     <maintainTicks>120</maintainTicks>
     <children>
+      <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>VV_EverflowerRitualComplete</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
       <li>
         <subEffecterClass>SubEffecter_CameraShakeChance</subEffecterClass>
         <initialDelayTicks>0</initialDelayTicks>

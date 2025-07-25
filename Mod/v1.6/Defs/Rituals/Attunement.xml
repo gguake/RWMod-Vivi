@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <PreceptDef>
+    <defName>VV_Attunement</defName>
+    <label>attunement</label>
+    <description>.</description>
+    <issue>Ritual</issue>
+    <preceptClass>Precept_Ritual</preceptClass>
+    <visible>false</visible>
+    <classic>true</classic>
+    <countsTowardsPreceptLimit>false</countsTowardsPreceptLimit>
+    <selectionWeight>1.0</selectionWeight>
+    <ritualPatternBase>VV_Attunement</ritualPatternBase>
+    <iconPath>UI/Commands/VV_Attunement</iconPath>
+    <usesIdeoVisualEffects>false</usesIdeoVisualEffects>
+    <mergeRitualGizmosFromAllIdeos>true</mergeRitualGizmosFromAllIdeos>
+    <useRepeatPenalty>false</useRepeatPenalty>
+    <showRitualFloatMenuOption>false</showRitualFloatMenuOption>
+  </PreceptDef>
+
+  <RitualPatternDef>
+    <defName>VV_Attunement</defName>
+    <ritualOnlyForIdeoMembers>false</ritualOnlyForIdeoMembers>
+    <ritualBehavior>VV_Attunement</ritualBehavior>
+    <ritualOutcomeEffect>VV_Attunement</ritualOutcomeEffect>
+    <ritualObligationTargetFilter>VV_Attunement</ritualObligationTargetFilter>
+    <playsIdeoMusic>false</playsIdeoMusic>
+    <alwaysStartAnytime>true</alwaysStartAnytime>
+    <iconPathOverride>UI/Commands/VV_Attunement</iconPathOverride>
+    <showIdeoIconsInDialog>false</showIdeoIconsInDialog>
+  </RitualPatternDef>
+
+  <RitualBehaviorDef>
+    <defName>VV_Attunement</defName>
+    <durationTicks>1500</durationTicks>
+    <workerClass>VVRace.RitualBehaviorWorker_Attunement</workerClass>
+    <displayCompletedMessage>true</displayCompletedMessage>
+    <roles>
+      <li Class="VVRace.RitualRoleEverflowerAttuner">
+        <id>attuner</id>
+        <label>attuner</label>
+        <maxCount>1</maxCount>
+        <required>True</required>
+        <usedSkill>Plants</usedSkill>
+        <usedStat>PsychicSensitivity</usedStat>
+        <defaultForSelectedColonist>true</defaultForSelectedColonist>
+        <allowChild>false</allowChild>
+        <blocksSocialInteraction>true</blocksSocialInteraction>
+        <countsAsParticipant>false</countsAsParticipant>
+      </li>
+    </roles>
+    <stages>
+      <li>
+        <defaultDuty>Spectate</defaultDuty>
+        <showProgressBar>false</showProgressBar>
+        <endTriggers>
+          <li Class="StageEndTrigger_RolesArrived">
+            <roleIds>
+              <li>attuner</li>
+            </roleIds>
+          </li>
+        </endTriggers>
+        <roleBehaviors>
+          <li>
+            <roleId>attuner</roleId>
+            <dutyDef>ArriveToCell</dutyDef>
+            <customPositions>
+              <li Class="RitualPosition_PreferredAdjacentCellCardinal">
+                <faceThing>true</faceThing>
+              </li>
+            </customPositions>
+          </li>
+        </roleBehaviors>
+      </li>
+      <li>
+        <defaultDuty>SpectateCircle</defaultDuty>
+        <spectateDistanceOverride>4~6</spectateDistanceOverride>
+        <visualEffectDef>VV_EverflowerLink</visualEffectDef>
+        <endTriggers>
+          <li Class="StageEndTrigger_DurationPercentage">
+            <percentage>1</percentage>
+          </li>
+        </endTriggers>
+        <roleBehaviors>
+          <li>
+            <roleId>attuner</roleId>
+            <dutyDef>Idle</dutyDef>
+            <customPositions>
+              <li Class="RitualPosition_PreferredAdjacentCellCardinal">
+                <faceThing>true</faceThing>
+              </li>
+            </customPositions>
+          </li>
+        </roleBehaviors>
+      </li>
+    </stages>
+  </RitualBehaviorDef>
+
+  <RitualOutcomeEffectDef>
+    <defName>VV_Attunement</defName>
+    <description>.</description>
+    <workerClass>VVRace.RitualOutcomeEffectWorker_Attunement</workerClass>
+    <allowAttachableOutcome>false</allowAttachableOutcome>
+    <givesDevelopmentPoints>false</givesDevelopmentPoints>
+    <allowOutcomeWithNoAttendance>true</allowOutcomeWithNoAttendance>
+    <effecter>VV_EverflowerRitual_Complete</effecter>
+    <comps>
+      <li Class="RitualOutcomeComp_PawnStatScaled">
+        <label>{PAWN_labelShort}'s psychic sensitivity</label>
+        <labelAbstract>attuner's psychic sensitivity</labelAbstract>
+        <roleId>attuner</roleId>
+        <statDef>PsychicSensitivity</statDef>
+        <curve>
+          <points>
+            <li>(0.5, 0.0)</li>
+            <li>(1.5, 1.0)</li>
+            <li>(2.5, 1.5)</li>
+            <li>(4.0, 2.0)</li>
+            <li>(6.0, 2.5)</li>
+            <li>(8.5, 3.0)</li>
+          </points>
+        </curve>
+      </li>
+      <li Class="RitualOutcomeComp_ParticipantCount">
+        <label>participant count</label>
+        <curve>
+          <points>
+            <li>(0,  0.0)</li>
+            <li>(4,  0.5)</li>
+            <li>(10, 1.0)</li>
+            <li>(20, 2.0)</li>
+          </points>
+        </curve>
+      </li>
+    </comps>
+  </RitualOutcomeEffectDef>
+
+  <RitualObligationTargetFilterDef Class="VVRace.RitualObligationTargetFilterDef_EverflowerRitual">
+    <defName>VV_Attunement</defName>
+    <workerClass>VVRace.RitualObligationTargetWorker_EverflowerRitual</workerClass>
+    <requiredAttunementLevel>0</requiredAttunementLevel>
+  </RitualObligationTargetFilterDef>
+</Defs>

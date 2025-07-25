@@ -114,13 +114,27 @@
 
         <everflowerAttunementRitualCurve>
           <points>
-            <li>(1.0,0)</li>
+            <li>(0,0)</li>
+            <li>(0.5,500)</li>
             <li>(1.5,1000)</li>
             <li>(2.0,1500)</li>
             <li>(4.0,2000)</li>
-            <li>(6.0,2250)</li>
+            <li>(6.0,2500)</li>
+            <li>(8.0,2750)</li>
+            <li>(10.0,3000)</li>
           </points>
         </everflowerAttunementRitualCurve>
+
+        <ritualCooldownCurve>
+          <points>
+            <li>(0,900000)</li>
+            <li>(1,600000)</li>
+            <li>(1.5,450000)</li>
+            <li>(3.0,360000)</li>
+            <li>(6.0,240000)</li>
+            <li>(10.0,180000)</li>
+          </points>
+        </ritualCooldownCurve>
 
         <graphicsByLevel>
           <li>
