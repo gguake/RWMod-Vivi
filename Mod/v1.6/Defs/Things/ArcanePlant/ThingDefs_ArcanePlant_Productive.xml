@@ -139,7 +139,7 @@
 
     <comps>
       <li Class="VVRace.CompProperties_Mana">
-        <manaCapacity>250</manaCapacity>
+        <manaCapacity>400</manaCapacity>
 
         <manaGenerateRule Class="VVRace.ManaFluxRule_Sunlight">
           <manaFromSunlightRange>0~1300</manaFromSunlightRange>
@@ -148,7 +148,7 @@
         <manaConsumeRule Class="VVRace.ManaFluxRule_CompositeSum">
           <rules>
             <li Class="VVRace.ManaFluxRule_GlowerActive">
-              <mana>1200</mana>
+              <mana>1050</mana>
             </li>
             <li Class="VVRace.ManaFluxRule_Constant">
               <mana>50</mana>

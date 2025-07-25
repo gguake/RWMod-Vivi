@@ -19,10 +19,9 @@ namespace VVRace
             {
                 if (!base.ShouldBeLitNow) { return false; }
 
-                if (parent.Map.Biome.inVacuum)
+                if (parent.Map.Tile.LayerDef == PlanetLayerDefOf.Orbit)
                 {
-                    var vaccum = parent.GetRoom()?.Vacuum ?? 1f;
-                    return vaccum >= 0.5f;
+                    return true;
                 }
                 else
                 {

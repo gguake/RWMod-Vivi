@@ -1,4 +1,5 @@
-﻿using Verse;
+﻿using RimWorld;
+using Verse;
 
 namespace VVRace
 {
@@ -45,7 +46,7 @@ namespace VVRace
 
             CompGlower.UpdateLit(Map);
 
-            if (Map.Biome.inVacuum)
+            if (Map.Tile.LayerDef == PlanetLayerDefOf.Orbit)
             {
                 VVEffecterDefOf.VV_StalitFlowerAura.SpawnMaintained(Position, Map, VaccumResistRange);
             }
@@ -55,7 +56,7 @@ namespace VVRace
         {
             base.DrawExtraSelectionOverlays();
 
-            if (Spawned && Map.Biome.inVacuum)
+            if (Spawned && Map.Tile.LayerDef == PlanetLayerDefOf.Orbit)
             {
                 GenDraw.DrawRadiusRing(Position, VaccumResistRange);
             }
