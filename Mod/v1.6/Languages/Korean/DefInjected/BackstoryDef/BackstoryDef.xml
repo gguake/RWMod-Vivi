@@ -40,8 +40,8 @@
 <VV_ViviScout.description>[PAWN_nameDef]는 비비 둥지 주변을 순찰하며 외부의 적을 감지하거나 주변 정착지의 사건을 정찰해 보고하는 정탐꾼입니다.</VV_ViviScout.description>
 
 <VV_ViviFirefighter.title>비비 소방수</VV_ViviFirefighter.title>
-<VV_ViviFirefighter.titleShort>[PAWN_nameDef]는 비비 둥지나 인근 환경에 발생하는 화재를 진압하는 소방수입니다. 전투에 노련한 비비들이 주로 선발되기에 둥지 방어나 경호 임무도 수행합니다.</VV_ViviFirefighter.titleShort>
-<VV_ViviFirefighter.description>소방수</VV_ViviFirefighter.description>
+<VV_ViviFirefighter.titleShort>소방수</VV_ViviFirefighter.titleShort>
+<VV_ViviFirefighter.description>[PAWN_nameDef]는 비비 둥지나 인근 환경에 발생하는 화재를 진압하는 소방수입니다. 전투에 노련한 비비들이 주로 선발되기에 둥지 방어나 경호 임무도 수행합니다.</VV_ViviFirefighter.description>
 
 <VV_ViviSniper.title>비비 저격수</VV_ViviSniper.title>
 <VV_ViviSniper.titleShort>저격수</VV_ViviSniper.titleShort>

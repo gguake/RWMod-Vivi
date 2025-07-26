@@ -295,6 +295,10 @@ namespace VVRace.HarmonyPatches
                 new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(Thing), nameof(Thing.def))),
                 new CodeInstruction(OpCodes.Ldsfld, AccessTools.Field(typeof(VVThingDefOf), nameof(VVThingDefOf.VV_ViviHoneycombWall))),
                 new CodeInstruction(OpCodes.Beq_S, skipLabel),
+                new CodeInstruction(OpCodes.Ldarg_0),
+                new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(Thing), nameof(Thing.def))),
+                new CodeInstruction(OpCodes.Ldsfld, AccessTools.Field(typeof(VVThingDefOf), nameof(VVThingDefOf.VV_ViviHardenHoneycombWall))),
+                new CodeInstruction(OpCodes.Beq_S, skipLabel),
             };
             instructions.InsertRange(injectionIndex, injection);
             
