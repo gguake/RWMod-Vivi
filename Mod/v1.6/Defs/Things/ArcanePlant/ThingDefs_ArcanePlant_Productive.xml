@@ -48,7 +48,7 @@
         <manaGenerateRule Class="VVRace.ManaFluxRule_CompositeSum">
           <rules>
             <li Class="VVRace.ManaFluxRule_AdjacentWater">
-              <manaFromOccupiedWater>350</manaFromOccupiedWater>
+              <manaFromOccupiedWater>450</manaFromOccupiedWater>
               <manaPerAdjacentWater>100</manaPerAdjacentWater>
             </li>
             <li Class="VVRace.ManaFluxRule_WeatherRainy">
@@ -191,7 +191,7 @@
     <label>richflower</label>
     <description>a arcane flower with large petals that periodically spreads pollen on the surrounding ground and yields a lot of honey when harvested.
 \nGenerates mana proportional to the soil's fertility and slowly enriches nearby soil.
-\nIf placed adjacent to a peashooter, it slightly increases the power and armor penetration of its peas when fired. If multiple richflowers or purifimints are adjacent, the effect stacks.</description>
+\nIf placed adjacent to a peashooter, it slightly increases the power of its peas when fired. If multiple richflowers or purifimints are adjacent, the effect stacks.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_PerfumingPetal</ThingDef>
     </descriptionHyperlinks>
@@ -224,7 +224,7 @@
               <li>(0.5,0)</li>
               <li>(1.0,200)</li>
               <li>(1.3,500)</li>
-              <li>(1.4,750)</li>
+              <li>(1.4,800)</li>
             </points>
           </manaFromFertility>
         </manaGenerateRule>
@@ -239,7 +239,6 @@
         <modifiers>
           <VV_Peashooter>
             <additionalDamage>2</additionalDamage>
-            <additionalArmorPenetration>0.02</additionalArmorPenetration>
           </VV_Peashooter>
         </modifiers>
       </li>
@@ -294,7 +293,7 @@
     <defName>VV_Purifimint</defName>
     <label>purifimint</label>
     <description>a arcane plant that emits a small glow around it will slowly absorb toxic wastepacks placed, producing mana and also purifying the surrounding pollutions. It is also aesthetically pleasing and used for decoration.
-\nIf placed adjacent to a peashooter, it slightly increases the power and armor penetration of its peas when fired. If multiple richflowers or purifimints are adjacent, the effect stacks.</description>
+\nIf placed adjacent to a peashooter, it slightly increases the power of its peas when fired. If multiple richflowers or purifimints are adjacent, the effect stacks.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_PerfumingPetal</ThingDef>
     </descriptionHyperlinks>
@@ -320,7 +319,7 @@
         <manaCapacity>300</manaCapacity>
 
         <manaGenerateRule Class="VVRace.ManaFluxRule_Refuelable">
-          <mana>600</mana>
+          <mana>650</mana>
           <fuelDef>Wastepack</fuelDef>
         </manaGenerateRule>
 
@@ -341,7 +340,6 @@
         <modifiers>
           <VV_Peashooter>
             <additionalDamage>2</additionalDamage>
-            <additionalArmorPenetration>0.02</additionalArmorPenetration>
           </VV_Peashooter>
         </modifiers>
       </li>
@@ -401,7 +399,7 @@
     <defName>VV_Starlitflower</defName>
     <label>starlitflower</label>
     <description>a arcane flower blooms exclusively at night, generating and emitting mana while radiating light. During the day, the flower wilts and absorbs a small amount of mana.
-\nIn vacuum environments like space it always produces mana, but at a reduced rate. It also generates a field that grants nearby units vacuum resistance.</description>
+\nIt always produces mana in space, but at a reduced rate. It also generates a field that grants nearby units vacuum resistance.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_PerfumingPetal</ThingDef>
     </descriptionHyperlinks>
@@ -431,7 +429,7 @@
         <manaCapacity>150</manaCapacity>
 
         <manaGenerateRule Class="VVRace.ManaFluxRule_TimeOfDay">
-          <mana>650</mana>
+          <mana>700</mana>
           <timeOfDay>Night</timeOfDay>
           <alwaysIfVaccumBiome>true</alwaysIfVaccumBiome>
         </manaGenerateRule>
@@ -439,11 +437,12 @@
         <manaConsumeRule Class="VVRace.ManaFluxRule_CompositeSum">
           <rules>
             <li Class="VVRace.ManaFluxRule_InVaccum">
-              <mana>500</mana>
+              <mana>400</mana>
             </li>
             <li Class="VVRace.ManaFluxRule_TimeOfDay">
               <mana>75</mana>
               <timeOfDay>Day</timeOfDay>
+          <alwaysIfVaccumBiome>true</alwaysIfVaccumBiome>
             </li>
           </rules>
         </manaConsumeRule>

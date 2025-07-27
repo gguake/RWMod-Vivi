@@ -6,7 +6,7 @@
     <label>skyweed</label>
     <description>a arcane plant that resembles a dandelion seed and converts the power of the wind into mana when outdoors.
 \nThe fluff of this grass is very light and has the property of flying well, so it can also be used to send small items.
-\nIf placed adjacent to a peashooter, it has a 25% chance to fire a High-velocity pea instead when the peashooter attacks. High-velocity peas have faster projectile speed and higher piercing power.\nIf multiple skyweeds are adjacent, the effect stacks.</description>
+\nIf placed adjacent to a peashooter, it has a 50% chance to fire a High-velocity pea instead when the peashooter attacks. High-velocity peas have faster projectile speed and higher piercing power.\nIf multiple skyweeds are adjacent, the effect stacks.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_SkyweedFluff</ThingDef>
       <ThingDef>VV_LivingLeaf</ThingDef>
@@ -39,9 +39,9 @@
               <li>(0,0)</li>
               <li>(0.25,0)</li>
               <li>(0.5,100)</li>
-              <li>(1.0,150)</li>
-              <li>(1.5,200)</li>
-              <li>(2.0,300)</li>
+              <li>(1.0,200)</li>
+              <li>(1.5,250)</li>
+              <li>(2.0,400)</li>
             </points>
           </manaFromWindSpeed>
         </manaGenerateRule>
@@ -51,7 +51,7 @@
         <replacers>
           <VV_Peashooter>
             <bulletDef>VV_Bullet_PeaFast</bulletDef>
-            <chance>0.25</chance>
+            <chance>0.5</chance>
           </VV_Peashooter>
         </replacers>
       </li>

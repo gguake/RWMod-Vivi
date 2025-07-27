@@ -87,8 +87,8 @@
     <thingClass>VVRace.PeaShooterGun</thingClass>
 
     <statBases>
-      <AccuracyTouch>0.96</AccuracyTouch>
-      <AccuracyShort>0.86</AccuracyShort>
+      <AccuracyTouch>0.92</AccuracyTouch>
+      <AccuracyShort>0.84</AccuracyShort>
       <AccuracyMedium>0.48</AccuracyMedium>
       <AccuracyLong>0.24</AccuracyLong>
       <RangedWeapon_Cooldown>1.2</RangedWeapon_Cooldown>

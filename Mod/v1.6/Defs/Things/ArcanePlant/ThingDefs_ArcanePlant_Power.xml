@@ -6,7 +6,7 @@
     <label>flashbud</label>
     <description>a arcane flower that discharges electricity within its transparent petals. It can be wired to store a large amount of power, but consumes mana in proportion.
 \nIf it receives external shocks, the internal voltage becomes unstable, generating massive electromagnetic pulses in the vicinity and discharging mana.
-\nIf placed adjacent to a peashooter, it has a 25% chance to fire an electric pea instead when the peashooter attacks. Electric peas briefly stun targets instead of physical damage.\nIf multiple flashbud or thunderpetals are adjacent, the effect stacks.</description>
+\nIf placed adjacent to a peashooter, it has a 50% chance to fire an electric pea instead when the peashooter attacks. Electric peas briefly stun targets instead of physical damage.\nIf multiple flashbud or thunderpetals are adjacent, the effect stacks.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_SparklingPetal</ThingDef>
     </descriptionHyperlinks>
@@ -37,14 +37,14 @@
         <manaConsumeRule Class="VVRace.ManaFluxRule_BatteryStored">
           <manaFromStoredEnergy>0~400</manaFromStoredEnergy>
         </manaConsumeRule>
-        <manaAbsorbPerDay>800</manaAbsorbPerDay>
+        <manaAbsorbPerDay>1200</manaAbsorbPerDay>
       </li>
 
       <li Class="VVRace.CompProperties_ArcanePlantBulletOverride">
         <replacers>
           <VV_Peashooter>
             <bulletDef>VV_Bullet_PeaLightning</bulletDef>
-            <chance>0.25</chance>
+            <chance>0.5</chance>
           </VV_Peashooter>
         </replacers>
       </li>
@@ -53,7 +53,7 @@
 
       <li Class="CompProperties_Battery">
         <storedEnergyMax>1000</storedEnergyMax>
-        <efficiency>0.75</efficiency>
+        <efficiency>0.9</efficiency>
         <shortCircuitInRain>false</shortCircuitInRain>
         <transmitsPower>true</transmitsPower>
       </li>
@@ -99,7 +99,7 @@
     <defName>VV_Thunderpetals</defName>
     <label>thunderpetals</label>
     <description>a arcane flower with stamens that conduct electricity, capable of connecting to power lines to convert mana into electricity. When lightning strikes and the mana is sufficient, it attracts the lightning to itself and converts it into mana.
-\nIf placed adjacent to a peashooter, it has a 25% chance to fire an electric pea instead when the peashooter attacks. Electric peas briefly stun targets instead of physical damage.\nIf multiple flashbud or thunderpetals are adjacent, the effect stacks.</description>
+\nIf placed adjacent to a peashooter, it has a 50% chance to fire an electric pea instead when the peashooter attacks. Electric peas briefly stun targets instead of physical damage.\nIf multiple flashbud or thunderpetals are adjacent, the effect stacks.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_SparklingPetal</ThingDef>
     </descriptionHyperlinks>
@@ -127,22 +127,22 @@
       <li Class="VVRace.CompProperties_Mana">
         <manaCapacity>1000</manaCapacity>
         <manaGenerateRule Class="VVRace.ManaFluxRule_Power">
-          <powerManaRatio>1.2</powerManaRatio>
+          <powerManaRatio>1.1</powerManaRatio>
           <min>0</min>
-          <max>800</max>
+          <max>750</max>
         </manaGenerateRule>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
           <mana>1000</mana>
         </manaConsumeRule>
-        <manaAbsorbPerDay>2000</manaAbsorbPerDay>
+        <manaAbsorbPerDay>2500</manaAbsorbPerDay>
       </li>
 
       <li Class="VVRace.CompProperties_ArcanePlantBulletOverride">
         <replacers>
           <VV_Peashooter>
             <bulletDef>VV_Bullet_PeaLightning</bulletDef>
-            <chance>0.25</chance>
+            <chance>0.5</chance>
           </VV_Peashooter>
         </replacers>
       </li>

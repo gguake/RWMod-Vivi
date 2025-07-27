@@ -5,21 +5,21 @@
 <!-- Temperature -->
 <VV_EmberBloom.label>잔불꽃</VV_EmberBloom.label>
 <VV_EmberBloom.description>불꽃같은 모양을 띄고있는 마법 꽃으로 주변 온도가 일정 온도에 도달할때까지 마나를 열로 변환해 발산합니다. 주변 온도가 충분히 뜨거운 환경에서는 열을 발산하는 대신 마나를 생산하고 축적합니다.
-\n콩뿌리개와 인접한 위치에 설치하면 콩뿌리개가 사격시 25%로 화염콩을 대신 발사합니다. 화염콩은 대상에게 물리 피해 대신 화상 피해를 입히고 불을 붙입니다.\n인접한 잔불꽃이 여러개 있다면 효과가 중첩됩니다.</VV_EmberBloom.description>
+\n콩뿌리개와 인접한 위치에 설치하면 콩뿌리개가 사격시 50%로 화염콩을 대신 발사합니다. 화염콩은 대상에게 물리 피해 대신 화상 피해를 입히고 불을 붙입니다.\n인접한 잔불꽃이 여러개 있다면 효과가 중첩됩니다.</VV_EmberBloom.description>
 
 <VV_FrostBloom.label>서리꽃</VV_FrostBloom.label>
 <VV_FrostBloom.description>얼음 결정같은 모양을 띄고있는 마법 꽃으로 주변 온도가 일정 온도에 도달할때까지 마나를 소모해 열을 흡수합니다. 주변 온도가 충분히 차가운 환경에서는 열을 흡수하는 대신 마나를 생산하고 축적합니다.
-\n콩뿌리개와 인접한 위치에 설치하면 콩뿌리개가 사격시 25%로 얼음콩을 대신 발사합니다. 화염콩은 대상에게 물리 피해 대신 동상 피해를 입히고 잠깐동안 이동 속도를 감소시킵니다.\n인접한 서리꽃이 여러개 있다면 효과가 중첩됩니다.</VV_FrostBloom.description>
+\n콩뿌리개와 인접한 위치에 설치하면 콩뿌리개가 사격시 50%로 얼음콩을 대신 발사합니다. 화염콩은 대상에게 물리 피해 대신 동상 피해를 입히고 잠깐동안 이동 속도를 감소시킵니다.\n인접한 서리꽃이 여러개 있다면 효과가 중첩됩니다.</VV_FrostBloom.description>
 
 <!-- Power -->
 <VV_Shockerbud.label>섬광꽃</VV_Shockerbud.label>
 <VV_Shockerbud.description>투명한 꽃잎 내부에서 전기가 방전되는 마법 꽃으로 전선을 연결해 많은 전력을 저장할 수 있지만 그에 비례해 마나를 소비합니다.
 \n외부의 충격을 받으면 내부의 전압이 불안정해져 주변에 막대한 전자기 펄스를 발생시키고 마나가 방전됩니다.
-\n콩뿌리개와 인접한 위치에 설치하면 콩뿌리개가 사격시 25%로 전기콩을 대신 발사합니다. 전기콩은 물리적인 피해를 입히지 못하지만 대상을 잠깐 기절시킵니다.\n인접한 섬광꽃이나 벼락꽃이 여러개 있다면 효과가 중첩됩니다.</VV_Shockerbud.description>
+\n콩뿌리개와 인접한 위치에 설치하면 콩뿌리개가 사격시 50%로 전기콩을 대신 발사합니다. 전기콩은 물리적인 피해를 입히지 못하지만 대상을 잠깐 기절시킵니다.\n인접한 섬광꽃이나 벼락꽃이 여러개 있다면 효과가 중첩됩니다.</VV_Shockerbud.description>
 
 <VV_Thunderpetals.label>벼락꽃</VV_Thunderpetals.label>
 <VV_Thunderpetals.description>꽃술에서 전류가 흐르는 마법 꽃으로 전선을 연결해 마나를 전력으로 변환할 수 있습니다. 번개가 칠때 마나가 일정 이상일 경우 번개를 자신에게 유도해 마나로 전환합니다.
-\n콩뿌리개와 인접한 위치에 설치하면 콩뿌리개가 사격시 25%로 전기콩을 대신 발사합니다. 전기콩은 물리적인 피해를 입히지 못하지만 대상을 잠깐 기절시킵니다.\n인접한 섬광꽃이나 벼락꽃이 여러개 있다면 효과가 중첩됩니다.</VV_Thunderpetals.description>
+\n콩뿌리개와 인접한 위치에 설치하면 콩뿌리개가 사격시 50%로 전기콩을 대신 발사합니다. 전기콩은 물리적인 피해를 입히지 못하지만 대상을 잠깐 기절시킵니다.\n인접한 섬광꽃이나 벼락꽃이 여러개 있다면 효과가 중첩됩니다.</VV_Thunderpetals.description>
 
 <!-- Productive -->
 <VV_Waterdrops.label>물방울꽃</VV_Waterdrops.label>
@@ -30,22 +30,22 @@
 
 <VV_Richflower.label>풍년화</VV_Richflower.label>
 <VV_Richflower.description>커다란 꽃잎을 가진 마법꽃으로 주기적으로 꽃가루를 주변 바닥에 퍼뜨리며 꿀을 채집할때 많은 꿀을 얻을 수 있습니다. 토양의 비옥도에 비례해 마나를 생산하며 주변의 토양을 서서히 비옥화합니다.
-\n콩뿌리개와 인접한 위치에 설치하면 콩뿌리개가 사격시 발사하는 콩의 위력과 관통력을 소폭 증가시킵니다. 인접한 풍년화나 정화초가 여러개 있다면 효과가 중첩됩니다.</VV_Richflower.description>
+\n콩뿌리개와 인접한 위치에 설치하면 콩뿌리개가 사격시 발사하는 콩의 위력을 소폭 증가시킵니다. 인접한 풍년화나 정화초가 여러개 있다면 효과가 중첩됩니다.</VV_Richflower.description>
 
 <VV_Purifimint.label>정화초</VV_Purifimint.label>
 <VV_Purifimint.description>주변에 빛을 내는 작은 마법 식물로 독성 폐기물을 배치하면 이를 천천히 흡수해 마나를 생산합니다. 주변 토양의 오염을 정화하기도 하며 미관상 아름다워 장식에 쓰이기도 합니다.
-\n콩뿌리개와 인접한 위치에 설치하면 콩뿌리개가 사격시 발사하는 콩의 위력과 관통력을 소폭 증가시킵니다. 인접한 풍년화나 정화초가 여러개 있다면 효과가 중첩됩니다.</VV_Purifimint.description>
+\n콩뿌리개와 인접한 위치에 설치하면 콩뿌리개가 사격시 발사하는 콩의 위력을 소폭 증가시킵니다. 인접한 풍년화나 정화초가 여러개 있다면 효과가 중첩됩니다.</VV_Purifimint.description>
 <VV_Purifimint.comps.CompRefuelable.fuelLabel>독성 폐기물</VV_Purifimint.comps.CompRefuelable.fuelLabel>
 <VV_Purifimint.comps.CompRefuelable.fuelGizmoLabel>독성 폐기물</VV_Purifimint.comps.CompRefuelable.fuelGizmoLabel>
 
 <VV_Starlitflower.label>별맞이꽃</VV_Starlitflower.label>
 <VV_Starlitflower.description>밤에만 피는 마법 꽃으로 밤에는 마나를 생산해 방출하며 빛을 내고 낮에는 꽃이 지며 소량의 마나를 흡수합니다.
-\n우주와 같은 진공 환경에서는 마나를 항상 생산하지만 그 생산량은 줄어듭니다. 또한 주변에 진공 저항을 제공하는 역장을 생성합니다.</VV_Starlitflower.description>
+\n우주 환경에서는 마나를 항상 생산하지만 그 생산량은 줄어듭니다. 또한 주변에 진공 저항을 제공하는 역장을 생성합니다.</VV_Starlitflower.description>
 
 <!-- Skyweed -->
 <VV_Skyweed.label>하늘풀</VV_Skyweed.label>
 <VV_Skyweed.description>민들레 씨앗과 비슷한 모양의 마법 식물로 실외에 있을때 바람의 힘을 마나로 변환합니다. 이 풀의 홀씨는 매우 가볍고 잘 날아가는 성질이 있어 소량의 물건을 실어보내는 용도로도 사용할 수 있습니다.
-\n콩뿌리개와 인접한 위치에 설치하면 콩뿌리개가 사격시 25%로 고속콩을 대신 발사합니다. 고속콩은 빠른 탄속과 높은 관통력을 가지고 있습니다.\n인접한 하늘풀이 여러개 있다면 효과가 중첩됩니다.</VV_Skyweed.description>
+\n콩뿌리개와 인접한 위치에 설치하면 콩뿌리개가 사격시 50%로 고속콩을 대신 발사합니다. 고속콩은 빠른 탄속과 높은 관통력을 가지고 있습니다.\n인접한 하늘풀이 여러개 있다면 효과가 중첩됩니다.</VV_Skyweed.description>
 
 <VV_SkyweedBox.label>하늘풀 상자</VV_SkyweedBox.label>
 <VV_SkyweedBox.description>하늘풀의 홀씨를 묶어 멀리 날려보낼 수 있는 상자입니다. 별다른 연료는 필요없지만 외지인들이 사용하는 수송 포드보다 용량이 적고 운송가능한 거리가 짧습니다.</VV_SkyweedBox.description>

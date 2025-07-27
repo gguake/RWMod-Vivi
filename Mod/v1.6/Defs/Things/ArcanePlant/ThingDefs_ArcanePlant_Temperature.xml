@@ -5,7 +5,7 @@
     <defName>VV_EmberBloom</defName>
     <label>emberbloom</label>
     <description>a arcane flower shaped like flames that converts mana into heat until the surrounding temperature reaches a certain level. In environments that are sufficiently hot, it produces and accumulates mana instead of emitting heat.
-\nIf placed adjacent to a peashooter, it has a 25% chance to fire a fire pea instead when the peashooter attacks. Fire peas deal flame damage instead of physical damage and set the target on fire.\nIf multiple emberblooms are adjacent, the effect stacks.</description>
+\nIf placed adjacent to a peashooter, it has a 50% chance to fire a fire pea instead when the peashooter attacks. Fire peas deal flame damage instead of physical damage and set the target on fire.\nIf multiple emberblooms are adjacent, the effect stacks.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_HeatingPetal</ThingDef>
     </descriptionHyperlinks>
@@ -37,16 +37,16 @@
           <manaFromTemperatureRange>0~2000</manaFromTemperatureRange>
         </manaGenerateRule>
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>300</mana>
+          <mana>250</mana>
         </manaConsumeRule>
-        <manaAbsorbPerDay>300</manaAbsorbPerDay>
+        <manaAbsorbPerDay>400</manaAbsorbPerDay>
       </li>
 
       <li Class="VVRace.CompProperties_ArcanePlantBulletOverride">
         <replacers>
           <VV_Peashooter>
             <bulletDef>VV_Bullet_PeaFlame</bulletDef>
-            <chance>0.25</chance>
+            <chance>0.5</chance>
           </VV_Peashooter>
         </replacers>
       </li>
@@ -87,7 +87,7 @@
     <defName>VV_FrostBloom</defName>
     <label>frostbloom</label>
     <description>a arcane flower shaped like ice crystals that consumes mana to absorb heat until the surrounding temperature reaches a certain level. In environments that are sufficiently cold, it produces and accumulates mana instead of absorbing heat.
-\nIf placed adjacent to a peashooter, it has a 25% chance to fire an ice pea instead when the peashooter attacks. Ice peas deal frostbite damage instead of physical damage and temporarily slow the target's movement speed.\nIf multiple frostblooms are adjacent, the effect stacks.</description>
+\nIf placed adjacent to a peashooter, it has a 50% chance to fire an ice pea instead when the peashooter attacks. Ice peas deal frostbite damage instead of physical damage and temporarily slow the target's movement speed.\nIf multiple frostblooms are adjacent, the effect stacks.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_CoolingPetal</ThingDef>
     </descriptionHyperlinks>
@@ -130,14 +130,14 @@
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
           <mana>300</mana>
         </manaConsumeRule>
-        <manaAbsorbPerDay>300</manaAbsorbPerDay>
+        <manaAbsorbPerDay>450</manaAbsorbPerDay>
       </li>
 
       <li Class="VVRace.CompProperties_ArcanePlantBulletOverride">
         <replacers>
           <VV_Peashooter>
             <bulletDef>VV_Bullet_PeaIce</bulletDef>
-            <chance>0.25</chance>
+            <chance>0.5</chance>
           </VV_Peashooter>
         </replacers>
       </li>
