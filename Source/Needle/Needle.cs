@@ -285,11 +285,11 @@ namespace VVRace
                     if (t.Fogged()) { return false; }
                     if (t.HostileTo(launcher.Faction) == false) { return false; }
                     if (GenSight.LineOfSightToThing(launcher.PositionHeld, t, Map, true) == false) { return false; }
-                    if (GenHostility.IsActiveThreatTo(attackTarget, launcher.Faction) == false) { return false; }
                     
                     return true;
                 },
                 priorityGetter: (Thing t) => 
+                    (t is IAttackTarget at && GenHostility.IsActiveThreatTo(at, launcher.Faction) ? 10000 : 0) + 
                     (_attackedCounter.TryGetValue(t.thingIDNumber, out var attackedCount) ? attackedCount * -12 : 0) + 
                     Mathf.Abs((int)((t.Position.ToVector3() - targetSearchPosition).sqrMagnitude - tmp)) - 
                     launcher.Position.DistanceToSquared(t.Position));
@@ -305,8 +305,7 @@ namespace VVRace
                     previousTarget is IAttackTarget previousAttackTarget &&
                     previousTarget.Fogged() == false &&
                     previousTarget.Position.DistanceTo(cellPosition) < NeedleProperties.targettingRadius &&
-                    GenSight.LineOfSightToThing(launcher.PositionHeld, previousTarget, Map, true) &&
-                    GenHostility.IsActiveThreatTo(previousAttackTarget, launcher.Faction))
+                    GenSight.LineOfSightToThing(launcher.PositionHeld, previousTarget, Map, true))
                 {
                     SetTarget(previousTarget);
                 }
