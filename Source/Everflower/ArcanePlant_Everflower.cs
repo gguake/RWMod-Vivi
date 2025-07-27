@@ -1,36 +1,17 @@
 ﻿using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using UnityEngine;
 using Verse;
 
 namespace VVRace
 {
-    public class EverflowerRitualReservation : IExposable
-    {
-        public ArcanePlant_Everflower flower;
-        public EverflowerRitualDef ritualDef;
-        public Pawn casterPawn;
-        public Pawn targetPawn;
-        public IntVec3 targetCell;
-
-        public EverflowerRitualReservation(ArcanePlant_Everflower flower)
-        {
-            this.flower = flower;
-        }
-
-        public void ExposeData()
-        {
-            Scribe_Defs.Look(ref ritualDef, "ritualDef");
-            Scribe_References.Look(ref casterPawn, "casterPawn");
-            Scribe_References.Look(ref targetPawn, "targetPawn");
-        }
-    }
-
     [StaticConstructorOnStartup]
     public class ArcanePlant_Everflower : ArcanePlant, IGatherableTarget
     {
+        public static readonly Material TeleportLineMat = MaterialPool.MatFrom(GenDraw.LineTexPath, ShaderDatabase.Transparent, new Color(1f, 1f, 1f));
+
+        private static readonly Texture2D TeleportCommandTex = ContentFinder<Texture2D>.Get("UI/Commands/VV_MoveEverflower");
         private static readonly Texture2D CancelCommandTex = ContentFinder<Texture2D>.Get("UI/Designators/Cancel");
 
         public CompEverflower EverflowerComp
@@ -48,30 +29,26 @@ namespace VVRace
 
         public int AttunementLevel => EverflowerComp.AttunementLevel;
 
-        public Pawn CurReservedPawn => _reservedRitual?.casterPawn;
-        public EverflowerRitualDef CurReservedRitual => _reservedRitual?.ritualDef;
-
-        public EverflowerRitualReservation CurReservationInfo => _reservedRitual;
-        private EverflowerRitualReservation _reservedRitual;
-
         public bool HasRitualCooldown => _ritualCooldownTick > GenTicks.TicksGame;
         public int CurRitualCooldownTicks => _ritualCooldownTick;
 
         private int _ritualCooldownTick;
         private int _lastRitualTick;
 
+        public IntVec3? ReservedTeleportCell => _reserveTeleportCell;
+        private IntVec3? _reserveTeleportCell;
+
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_Deep.Look(ref _reservedRitual, "reservedRitual", new object[] { this });
-
             Scribe_Values.Look(ref _ritualCooldownTick, "ritualCooldownTick");
             Scribe_Values.Look(ref _lastRitualTick, "lastRitualTick");
+            Scribe_Values.Look(ref _reserveTeleportCell, "reserveTeleportCell");
         }
 
         public override void Destroy(DestroyMode mode = DestroyMode.Vanish)
         {
-            Unreserve(true);
+            Unreserve();
             base.Destroy(mode);
         }
 
@@ -92,88 +69,47 @@ namespace VVRace
                 yield return gizmo;
             }
 
-            if (Spawned && (Faction?.IsPlayer ?? false))
+            bool ValidateCell(LocalTargetInfo target)
             {
-                if (CurReservedPawn == null)
+                var cell = target.Cell;
+                if (cell.DistanceToSquared(Position) > Mathf.Pow(EverflowerComp.Props.teleportRange, 2f)) { return false; }
+                if (!ArcanePlantUtility.CanPlaceArcanePlantToCell(Map, cell, def)) { return false; }
+
+                return true;
+            }
+
+            if (Spawned && (Faction?.IsPlayer ?? false) && EverflowerComp.AttunementLevel >= 1)
+            {
+                if (!_reserveTeleportCell.HasValue)
                 {
-                    foreach (var ritualDef in DefDatabase<EverflowerRitualDef>.AllDefsListForReading.Where(v => AttunementLevel >= v.attuneLevel).OrderBy(v => v.uiOrder))
+                    yield return new Command_Action()
                     {
-                        Command_Action command;
-                        if (ritualDef.globalCooldown > 0)
+                        defaultLabel = LocalizeString_Command.VV_Command_ReserveTeleportEverflower.Translate(),
+                        defaultDesc = LocalizeString_Command.VV_Command_ReserveTeleportEverflowerDesc.Translate(),
+                        icon = TeleportCommandTex,
+                        action = () =>
                         {
-                            command = new Command_ActionWithCooldown()
-                            {
-                                cooldownPercentGetter = () => HasRitualCooldown ? (float)(GenTicks.TicksGame - _lastRitualTick) / (_ritualCooldownTick - _lastRitualTick) : 1
-                            };
-
-                            if (HasRitualCooldown)
-                            {
-                                var cooldownTicksRemaining = _ritualCooldownTick - GenTicks.TicksGame;
-                                command.Disable(LocalizeString_Etc.VV_FailReason_RitualCooldown.Translate(cooldownTicksRemaining.ToStringSecondsFromTicks()));
-                            }
-                        }
-                        else
-                        {
-                            command = new Command_Action();
-                        }
-
-                        command.defaultLabel = ritualDef.LabelCap;
-                        command.defaultDesc = ritualDef.description;
-                        command.icon = ritualDef.uiIcon;
-
-                        if (this.IsBurning())
-                        {
-                            command.Disable("BurningLower".Translate());
-                        }
-                        else if (this.IsForbidden(Faction.OfPlayer))
-                        {
-                            command.Disable("ForbiddenLower".Translate());
-                        }
-
-                        if (!command.Disabled)
-                        {
-                            command.action = () =>
-                            {
-                                _tmpFloatMenuOptions.Clear();
-
-                                foreach (var pawn in ritualDef.Worker.GetCandidates(this))
+                            Find.Targeter.BeginTargeting(
+                                TargetingParameters.ForCell(),
+                                action: (target) =>
                                 {
-                                    var report = ritualDef.Worker.CanRitual(this, pawn);
-                                    if (report.Accepted)
-                                    {
-                                        _tmpFloatMenuOptions.Add(new FloatMenuOption(pawn.Label, () =>
-                                        {
-                                            ritualDef.Worker.StartRitual(this, pawn, (ritualReservation) =>
-                                            {
-                                                if (ritualReservation != null)
-                                                {
-                                                    _reservedRitual = ritualReservation;
-                                                }
-                                            });
-
-                                        }, pawn, Color.white));
-                                    }
-                                    else
-                                    {
-                                        if (!report.Reason.NullOrEmpty())
-                                        {
-                                            _tmpFloatMenuOptions.Add(new FloatMenuOption($"{pawn.Label}: {report.Reason}", null, pawn, Color.white));
-                                            continue;
-                                        }
-                                    }
-                                }
-
-                                if (!_tmpFloatMenuOptions.Any())
+                                    _reserveTeleportCell = target.Cell;
+                                },
+                                highlightAction: (target) =>
                                 {
-                                    _tmpFloatMenuOptions.Add(new FloatMenuOption(LocalizeString_Gizmo.VV_Gizmo_OptionLabel_NoRoyalVivi.Translate(), null));
-                                }
-
-                                Find.WindowStack.Add(new FloatMenu(_tmpFloatMenuOptions));
-                            };
+                                    if (ValidateCell(target))
+                                    {
+                                        GenDraw.DrawTargetHighlight(target.Cell);
+                                    }
+                                },
+                                targetValidator: ValidateCell,
+                                mouseAttachment: null,
+                                onUpdateAction: (target) =>
+                                {
+                                    GenDraw.DrawRadiusRing(Position, EverflowerComp.Props.teleportRange);
+                                });
                         }
-
-                        yield return command;
-                    }
+                    };
                 }
                 else
                 {
@@ -184,7 +120,7 @@ namespace VVRace
                         icon = CancelCommandTex,
                         action = () =>
                         {
-                            Unreserve(true);
+                            _reserveTeleportCell = default;
                         }
                     };
                 }
@@ -207,17 +143,90 @@ namespace VVRace
             }
         }
 
-        public override string GetInspectString()
+        public override void DrawExtraSelectionOverlays()
         {
-            var sb = new StringBuilder(base.GetInspectString());
-            if (CurReservationInfo != null)
+            base.DrawExtraSelectionOverlays();
+
+            if (_reserveTeleportCell.HasValue)
             {
-                sb.AppendInNewLine(LocalizeString_Inspector.VV_Inspector_AttunementReserved.Translate(
-                    CurReservationInfo.ritualDef.LabelCap.Named("RITUAL"), 
-                    CurReservationInfo.casterPawn.Named("CASTER")));
+                var a = this.TrueCenter();
+                var b = _reserveTeleportCell.Value.ToVector3Shifted();
+                GenDraw.DrawLineBetween(a, b, TeleportLineMat);
+            }
+        }
+
+        public override void Notify_ArcanePlantPotDespawned()
+        {
+            if (TeleportRandomly())
+            {
+                return;
             }
 
-            return sb.ToString();
+            base.Notify_ArcanePlantPotDespawned();
+        }
+
+        public void Notify_TeleportJobCompleted()
+        {
+            if (_reserveTeleportCell.HasValue)
+            {
+                if (!Teleport(_reserveTeleportCell.Value))
+                {
+                    TeleportRandomly();
+                }
+
+                _reserveTeleportCell = null;
+            }
+        }
+
+        public bool TeleportRandomly()
+        {
+            var cells = Map.AllCells.Where(c => c != Position && ArcanePlantUtility.CanPlaceArcanePlantToCell(Map, c, def)).ToList();
+            if (cells.Count > 0)
+            {
+                if (Teleport(cells.RandomElement()))
+                {
+                    Messages.Message(LocalizeString_Message.VV_Message_EverflowerRandomTeleported.Translate(), MessageTypeDefOf.NeutralEvent);
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public bool Teleport(IntVec3 cell)
+        {
+            if (!cell.IsValid || !cell.InBounds(Map) || !ArcanePlantUtility.CanPlaceArcanePlantToCell(Map, cell, def))
+            {
+                return false;
+            }
+
+            var previousPosition = Position;
+            Position = cell;
+
+            EffecterDef effecterDef = null;
+            switch (EverflowerComp.AttunementLevel)
+            {
+                case 1:
+                    effecterDef = VVEffecterDefOf.VV_EverflowerGrow_1_Level;
+                    break;
+                case 2:
+                    effecterDef = VVEffecterDefOf.VV_EverflowerGrow_2_Level;
+                    break;
+                case 3:
+                    effecterDef = VVEffecterDefOf.VV_EverflowerGrow_3_Level;
+                    break;
+                case 4:
+                    effecterDef = VVEffecterDefOf.VV_EverflowerGrow_4_Level;
+                    break;
+            }
+
+            if (effecterDef != null)
+            {
+                effecterDef.Spawn(previousPosition, Map);
+                effecterDef.SpawnAttached(this, Map);
+            }
+
+            return true;
         }
 
         public bool CanGatherByPawn(Pawn pawn, RecipeDef_Gathering recipe)
@@ -251,21 +260,6 @@ namespace VVRace
             }
         }
 
-        public void Notify_RitualComplete(Pawn pawn)
-        {
-            Messages.Message(
-                LocalizeString_Message.VV_Message_AttunementRitualComplete.Translate(_reservedRitual.ritualDef.LabelCap.Named("RITUAL")),
-                MessageTypeDefOf.NeutralEvent);
-
-            if (_reservedRitual.ritualDef.globalCooldown > 0)
-            {
-                _lastRitualTick = GenTicks.TicksGame;
-                _ritualCooldownTick = _lastRitualTick + _reservedRitual.ritualDef.globalCooldown;
-            }
-
-            Unreserve();
-        }
-
         public void Notify_RitualComplete(float quality)
         {
             var cooldown = Mathf.CeilToInt(EverflowerComp.Props.ritualCooldownCurve.Evaluate(quality));
@@ -279,16 +273,9 @@ namespace VVRace
             Unreserve();
         }
 
-        public void Unreserve(bool cancelled = false)
+        public void Unreserve()
         {
-            if (_reservedRitual == null || _reservedRitual.casterPawn == null) { return; }
-
-            if (cancelled)
-            {
-                Messages.Message(LocalizeString_Message.VV_Message_ReserveEverflowerCancelled.Translate(_reservedRitual.casterPawn.Named("PAWN")), MessageTypeDefOf.NeutralEvent, historical: false);
-            }
-
-            _reservedRitual = null;
+            _reserveTeleportCell = default;
         }
     }
 }

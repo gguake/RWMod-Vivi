@@ -6,10 +6,10 @@ using Verse.Sound;
 
 namespace VVRace
 {
-    public class RitualBehaviorWorker_Attunement : RitualBehaviorWorker
+    public class RitualBehaviorWorker_GeneralEverflowerRitual : RitualBehaviorWorker
     {
-        public RitualBehaviorWorker_Attunement() { }
-        public RitualBehaviorWorker_Attunement(RitualBehaviorDef def) : base(def) { }
+        public RitualBehaviorWorker_GeneralEverflowerRitual() { }
+        public RitualBehaviorWorker_GeneralEverflowerRitual(RitualBehaviorDef def) : base(def) { }
 
         private Sustainer _soundPlaying;
         public override Sustainer SoundPlaying => _soundPlaying;
@@ -32,7 +32,7 @@ namespace VVRace
         {
             reason = null;
 
-            if (role is RitualRoleEverflowerAttuner)
+            if (role is RitualRoleEverflowerResonator)
             {
                 var everflower = ritualTarget.Thing as ArcanePlant_Everflower;
                 if (everflower == null) { return false; }
@@ -43,9 +43,9 @@ namespace VVRace
                     return false;
                 }
 
-                if (compVivi.LinkedEverflower != null && compVivi.LinkedEverflower != everflower)
+                if (compVivi.LinkedEverflower != everflower)
                 {
-                    reason = LocalizeString_Etc.VV_FailReason_AlreadyAttunedOther.Translate();
+                    reason = LocalizeString_Etc.VV_FailReason_NotAttunedEverflower.Translate();
                     return false;
                 }
 

@@ -26,23 +26,18 @@
         public const string VV_Thing_Seedling = nameof(VV_Thing_Seedling);
 
         public const string VV_FailReason_EverflowerOnPot = nameof(VV_FailReason_EverflowerOnPot);
-
-        public const string VV_FailReason_PawnMentalState = nameof(VV_FailReason_PawnMentalState);
-        public const string VV_FailReason_PawnPsychicSensitivity = nameof(VV_FailReason_PawnPsychicSensitivity);
         public const string VV_FailReason_RitualCooldown = nameof(VV_FailReason_RitualCooldown);
 
         public const string VV_FailReason_HasNoFairyVivi = nameof(VV_FailReason_HasNoFairyVivi);
         public const string VV_FailReason_FairyViviFull = nameof(VV_FailReason_FairyViviFull);
 
         public const string VV_FailReason_NotRoyalVivi = nameof(VV_FailReason_NotRoyalVivi);
+        public const string VV_FailReason_NotAttunedEverflower = nameof(VV_FailReason_NotAttunedEverflower);
         public const string VV_FailReason_AlreadyAttunedOther = nameof(VV_FailReason_AlreadyAttunedOther);
-
-        public const string VV_Targetter_TargetEverflowerRitual = nameof(VV_Targetter_TargetEverflowerRitual);
-        public const string VV_Targetter_InvalidTarget_NotVivi = nameof(VV_Targetter_InvalidTarget_NotVivi);
-        public const string VV_Targetter_InvalidTarget_CannotTargetRoyalVivi = nameof(VV_Targetter_InvalidTarget_CannotTargetRoyalVivi);
-        public const string VV_Targetter_InvalidTarget_NotMyChild = nameof(VV_Targetter_InvalidTarget_NotMyChild);
-        public const string VV_Targetter_InvalidTarget_NotAdult = nameof(VV_Targetter_InvalidTarget_NotAdult);
-        public const string VV_Targetter_InvalidTarget_FairyficationSickness = nameof(VV_Targetter_InvalidTarget_FairyficationSickness);
+        public const string VV_FailReason_FairyficationSickness = nameof(VV_FailReason_FairyficationSickness);
+        public const string VV_FailReason_NotVivi = nameof(VV_FailReason_NotVivi);
+        public const string VV_FailReason_RoyalVivi = nameof(VV_FailReason_RoyalVivi);
+        public const string VV_FailReason_NotMyChild = nameof(VV_FailReason_NotMyChild);
 
         public const string VV_TextMote_GatherFailed = nameof(VV_TextMote_GatherFailed);
         public const string VV_TextMote_DamageBlockedByFairy = nameof(VV_TextMote_DamageBlockedByFairy);

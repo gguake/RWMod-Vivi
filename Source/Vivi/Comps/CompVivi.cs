@@ -78,11 +78,6 @@ namespace VVRace
         public override void PostDeSpawn(Map map, DestroyMode mode = DestroyMode.Vanish)
         {
             RemoveEverflowerLinkHediff();
-
-            if (LinkedEverflower != null && LinkedEverflower.CurReservedPawn == parent)
-            {
-                LinkedEverflower.Unreserve(true);
-            }
         }
 
         public override void PostDestroy(DestroyMode mode, Map previousMap)

@@ -20,5 +20,8 @@
 
         public const string VV_Command_CancelReservationEverflower = nameof(VV_Command_CancelReservationEverflower);
         public const string VV_Command_CancelReservationEverflowerDesc = nameof(VV_Command_CancelReservationEverflowerDesc);
+
+        public const string VV_Command_ReserveTeleportEverflower = nameof(VV_Command_ReserveTeleportEverflower);
+        public const string VV_Command_ReserveTeleportEverflowerDesc = nameof(VV_Command_ReserveTeleportEverflowerDesc);
     }
 }

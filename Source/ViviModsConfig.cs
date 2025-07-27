@@ -38,7 +38,7 @@ namespace VVRace
                 LocalizeString_Etc.VV_ModSettings_AllowSelectModGenesDesc.Translate());
 
             _settings.royalJellyMultiplier = listing.SliderLabeled(
-                LocalizeString_Etc.VV_ModSettings_RoyalJellyNeedMultiplierDesc.Translate(), 
+                LocalizeString_Etc.VV_ModSettings_RoyalJellyNeedMultiplier.Translate(), 
                 _settings.royalJellyMultiplier, 
                 0.1f, 
                 10f, 

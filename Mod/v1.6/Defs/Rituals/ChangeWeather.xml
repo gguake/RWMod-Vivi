@@ -1,46 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
   <PreceptDef>
-    <defName>VV_Attunement</defName>
-    <label>attunement ritual</label>
-    <description>A Royal vivi enters resonance with an everflower through psychic attunement. A royal vivi can attune to only one everflower at a time, and if a royal vivi already in resonance performs the attunement ritual, it deepens the everflower's attunement level.</description>
+    <defName>VV_ChangeWeatherRitual</defName>
+    <label>change weather ritual</label>
+    <description>Arbitrarily changes the weather in the current area. The resulting weather cannot be predicted.</description>
     <issue>Ritual</issue>
     <preceptClass>Precept_Ritual</preceptClass>
     <visible>false</visible>
     <classic>true</classic>
     <countsTowardsPreceptLimit>false</countsTowardsPreceptLimit>
     <selectionWeight>0</selectionWeight>
-    <ritualPatternBase>VV_Attunement</ritualPatternBase>
-    <iconPath>UI/Commands/VV_Attunement</iconPath>
+    <ritualPatternBase>VV_ChangeWeatherRitual</ritualPatternBase>
+    <iconPath>UI/Commands/VV_ChangeWeatherRitual</iconPath>
     <usesIdeoVisualEffects>false</usesIdeoVisualEffects>
     <mergeRitualGizmosFromAllIdeos>true</mergeRitualGizmosFromAllIdeos>
     <useRepeatPenalty>false</useRepeatPenalty>
     <showRitualFloatMenuOption>false</showRitualFloatMenuOption>
-    <displayOrderInImpact>1000</displayOrderInImpact>
-    <displayOrderInIssue>1000</displayOrderInIssue>
+    <displayOrderInImpact>999</displayOrderInImpact>
+    <displayOrderInIssue>999</displayOrderInIssue>
   </PreceptDef>
 
   <RitualPatternDef>
-    <defName>VV_Attunement</defName>
+    <defName>VV_ChangeWeatherRitual</defName>
     <ritualOnlyForIdeoMembers>false</ritualOnlyForIdeoMembers>
-    <ritualBehavior>VV_Attunement</ritualBehavior>
-    <ritualOutcomeEffect>VV_Attunement</ritualOutcomeEffect>
-    <ritualObligationTargetFilter>VV_Attunement</ritualObligationTargetFilter>
+    <ritualBehavior>VV_ChangeWeatherRitual</ritualBehavior>
+    <ritualOutcomeEffect>VV_ChangeWeatherRitual</ritualOutcomeEffect>
+    <ritualObligationTargetFilter>VV_ChangeWeatherRitual</ritualObligationTargetFilter>
     <playsIdeoMusic>false</playsIdeoMusic>
     <alwaysStartAnytime>true</alwaysStartAnytime>
-    <iconPathOverride>UI/Commands/VV_Attunement</iconPathOverride>
+    <iconPathOverride>UI/Commands/VV_ChangeWeatherRitual</iconPathOverride>
     <showIdeoIconsInDialog>false</showIdeoIconsInDialog>
   </RitualPatternDef>
 
   <RitualBehaviorDef>
-    <defName>VV_Attunement</defName>
+    <defName>VV_ChangeWeatherRitual</defName>
     <durationTicks>1500</durationTicks>
-    <workerClass>VVRace.RitualBehaviorWorker_Attunement</workerClass>
+    <workerClass>VVRace.RitualBehaviorWorker_GeneralEverflowerRitual</workerClass>
     <displayCompletedMessage>true</displayCompletedMessage>
     <roles>
-      <li Class="VVRace.RitualRoleEverflowerAttuner">
+      <li Class="VVRace.RitualRoleEverflowerResonator">
         <id>resonator</id>
-        <label>attuner</label>
+        <label>resonator</label>
         <maxCount>1</maxCount>
         <required>True</required>
         <usedStat>PsychicSensitivity</usedStat>
@@ -98,10 +98,10 @@
   </RitualBehaviorDef>
 
   <RitualOutcomeEffectDef>
-    <defName>VV_Attunement</defName>
-    <description>The better a ritual's result, the shorter the cooldown on the next everflower ritual and the stronger the everflower's attunement becomes.
+    <defName>VV_ChangeWeatherRitual</defName>
+    <description>The better a ritual's result, the shorter the cooldown on the next everflower ritual.
 \nAll everflower rituals share a cooldown.</description>
-    <workerClass>VVRace.RitualOutcomeEffectWorker_Attunement</workerClass>
+    <workerClass>VVRace.RitualOutcomeEffectWorker_ChangeWeather</workerClass>
     <allowAttachableOutcome>false</allowAttachableOutcome>
     <givesDevelopmentPoints>false</givesDevelopmentPoints>
     <allowOutcomeWithNoAttendance>true</allowOutcomeWithNoAttendance>
@@ -117,10 +117,10 @@
           <points>
             <li>(0.5, 0.0)</li>
             <li>(1.5, 1.0)</li>
-            <li>(2.5, 2.0)</li>
-            <li>(4.0, 4.0)</li>
-            <li>(6.0, 6.0)</li>
-            <li>(9.0, 8.0)</li>
+            <li>(2.5, 1.5)</li>
+            <li>(4.0, 2.0)</li>
+            <li>(6.0, 2.5)</li>
+            <li>(8.5, 3.0)</li>
           </points>
         </curve>
       </li>
@@ -139,8 +139,8 @@
   </RitualOutcomeEffectDef>
 
   <RitualObligationTargetFilterDef Class="VVRace.RitualObligationTargetFilterDef_EverflowerRitual">
-    <defName>VV_Attunement</defName>
+    <defName>VV_ChangeWeatherRitual</defName>
     <workerClass>VVRace.RitualObligationTargetWorker_EverflowerRitual</workerClass>
-    <requiredAttunementLevel>0</requiredAttunementLevel>
+    <requiredAttunementLevel>2</requiredAttunementLevel>
   </RitualObligationTargetFilterDef>
 </Defs>

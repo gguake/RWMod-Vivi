@@ -32,8 +32,9 @@
   
   <HediffDef>
     <defName>VV_EverflowerLink</defName>
-    <label>everflower attunement</label>
-    <description>An attunement link with an everflower is active. If the everflower moves to a different area or becomes isolated, the link will be temporarily severed.</description>
+    <label>everflower resonance</label>
+    <description>An resonance link with an everflower is active. If the everflower moves to a different area or becomes isolated, the link will be temporarily severed.
+\nThe higher an everflower's attunement level, the more varied effects it grants.</description>
     <hediffClass>HediffWithComps</hediffClass>
     <defaultLabelColor>(0,1,1)</defaultLabelColor>
     

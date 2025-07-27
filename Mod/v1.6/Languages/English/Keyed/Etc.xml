@@ -28,23 +28,22 @@
 
 <VV_Thing_Seedling>{0} seedling</VV_Thing_Seedling>
 
-<VV_FailReason_EverflowerOnPot>cannot deconstruct since everflower overhead.</VV_FailReason_EverflowerOnPot>
+<VV_FailReason_EverflowerOnPot>Cannot deconstruct since everflower overhead.</VV_FailReason_EverflowerOnPot>
+<VV_FailReason_RitualCooldown>Ritual on cooldown. It will be available in {0}.</VV_FailReason_RitualCooldown>
 
-<VV_FailReason_PawnMentalState>in mental state</VV_FailReason_PawnMentalState>
-<VV_FailReason_PawnPsychicSensitivity>low psychic sensitivity</VV_FailReason_PawnPsychicSensitivity>
-<VV_FailReason_RitualCooldown>attunement on cooldown. It will be available in {0}.</VV_FailReason_RitualCooldown>
+<VV_FailReason_HasNoFairyVivi>No fairy vivi following</VV_FailReason_HasNoFairyVivi>
+<VV_FailReason_FairyViviFull>Fairy vivi limit reached</VV_FailReason_FairyViviFull>
+<VV_FailReason_NotRoyalVivi>Not royal vivi</VV_FailReason_NotRoyalVivi>
+<VV_FailReason_NotAttunedEverflower>Not resonant to everflower</VV_FailReason_NotAttunedEverflower>
+<VV_FailReason_AlreadyAttunedOther>Already resonant to another everflower</VV_FailReason_AlreadyAttunedOther>
+<VV_FailReason_FairyficationSickness>Fairyfication sickness present</VV_FailReason_FairyficationSickness>
+<VV_FailReason_NotVivi>Not vivi</VV_FailReason_NotVivi>
+<VV_FailReason_RoyalVivi>Cannot target royal vivi</VV_FailReason_RoyalVivi>
+<VV_FailReason_NotMyChild>Not a mother-daughter relationship</VV_FailReason_NotMyChild>
 
-<VV_FailReason_HasNoFairyVivi>No fairy Vivi following</VV_FailReason_HasNoFairyVivi>
-<VV_FailReason_FairyViviFull>Fairy Vivi limit reached</VV_FailReason_FairyViviFull>
-
-<VV_Targetter_TargetEverflowerRitual>Target of {RITUAL}: {TARGET_labelShort}</VV_Targetter_TargetEverflowerRitual>
-<VV_Targetter_InvalidTarget_NotVivi>Target of {RITUAL}: Not vivi</VV_Targetter_InvalidTarget_NotVivi>
-<VV_Targetter_InvalidTarget_CannotTargetRoyalVivi>Target of {RITUAL}: Cannot target royal Vivi</VV_Targetter_InvalidTarget_CannotTargetRoyalVivi>
-<VV_Targetter_InvalidTarget_NotMyChild>Target of {RITUAL}: Not my child</VV_Targetter_InvalidTarget_NotMyChild>
-<VV_Targetter_InvalidTarget_NotAdult>Target of {RITUAL}: Not adult</VV_Targetter_InvalidTarget_NotAdult>
-<VV_Targetter_InvalidTarget_FairyficationSickness>Target of {RITUAL}: Fairyfication sickness present</VV_Targetter_InvalidTarget_FairyficationSickness>
 
 <VV_TextMote_GatherFailed>Gathering failed due to mishap</VV_TextMote_GatherFailed>
 <VV_TextMote_DamageBlockedByFairy>Protected by fairy</VV_TextMote_DamageBlockedByFairy>
 
+<VV_RitualTarget_Everflower>Everflower</VV_RitualTarget_Everflower>
 </LanguageData>

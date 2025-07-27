@@ -1,8 +1,7 @@
-﻿using HarmonyLib;
-using RimWorld;
+﻿using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Emit;
+using UnityEngine;
 using Verse;
 
 namespace VVRace
@@ -32,14 +31,7 @@ namespace VVRace
                     var plant = cell.GetFirstThing<ArcanePlant>(Map);
                     if (!plant.DestroyedOrNull())
                     {
-                        if (plant.def.Minifiable)
-                        {
-                            plant.MinifyAndDropDirect();
-                        }
-                        else
-                        {
-                            plant.Destroy();
-                        }
+                        plant.Notify_ArcanePlantPotDespawned();
                     }
 
                     var blueprints = thingList.OfType<Blueprint>().ToList();
@@ -55,61 +47,6 @@ namespace VVRace
             }
 
             base.DeSpawn(mode);
-        }
-
-        public override IEnumerable<Gizmo> GetGizmos()
-        {
-            var gizmos = base.GetGizmos();
-
-            bool canMinify = true;
-            if (Spawned)
-            {
-                foreach (var cell in this.OccupiedRect())
-                {
-                    if (cell.GetFirstThing<ArcanePlant_Everflower>(Map) != null)
-                    {
-                        canMinify = false;
-                        break;
-                    }
-                }
-            }
-
-            if (Spawned)
-            {
-                foreach (var gizmo in gizmos)
-                {
-                    if ((gizmo is Designator_Install || gizmo is Designator_Uninstall) && !canMinify)
-                    {
-                        continue;
-                    }
-
-                    yield return gizmo;
-                }
-            }
-            else
-            {
-                foreach (var gizmo in gizmos)
-                {
-                    yield return gizmo;
-                }
-            }
-
-        }
-
-        public override AcceptanceReport DeconstructibleBy(Faction faction)
-        {
-            if (Spawned)
-            {
-                foreach (var cell in this.OccupiedRect())
-                {
-                    if (cell.GetFirstThing<ArcanePlant_Everflower>(Map) != null)
-                    {
-                        return new AcceptanceReport(LocalizeString_Etc.VV_FailReason_EverflowerOnPot.Translate());
-                    }
-                }
-            }
-
-            return base.DeconstructibleBy(faction);
         }
     }
 }

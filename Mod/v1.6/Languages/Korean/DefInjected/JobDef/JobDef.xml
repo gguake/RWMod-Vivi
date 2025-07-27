@@ -6,12 +6,7 @@
 <VV_PlantArcaneSeed.reportString>TargetA 심는 중.</VV_PlantArcaneSeed.reportString>
 
 <!-- EverflowerRitual -->
-<VV_AttunementEverflower.reportString>TargetA에 교감 중.</VV_AttunementEverflower.reportString>
-<VV_MoveEverflower.reportString>TargetA를 옮기기 위해 교감 중.</VV_MoveEverflower.reportString>
-<VV_ChangeWeather.reportString>날씨를 바꾸기 위해 TargetA에 교감 중.</VV_ChangeWeather.reportString>
-<VV_Fairyfication.reportString>TargetA에서 TargetB를 요정화 하는 중.</VV_Fairyfication.reportString>
-<VV_UndoFairyfication.reportString>TargetA에서 요정화를 해제하는 중.</VV_UndoFairyfication.reportString>
-<VV_Manawave.reportString>마나 파동을 방출하기 위해 TargetA에 교감 중.</VV_Manawave.reportString>
+<VV_MoveEverflower.reportString>TargetA를 옮기기 위해 공명 중.</VV_MoveEverflower.reportString>
 
 <!-- Gather -->
 <VV_GatherHoney.reportString>TargetA에서 꿀 채집 중.</VV_GatherHoney.reportString>

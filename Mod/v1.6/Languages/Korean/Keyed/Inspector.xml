@@ -26,7 +26,7 @@
 <VV_Inspector_GrowingArcanePlantProgress>{1} 재배 진행도: {0}</VV_Inspector_GrowingArcanePlantProgress>
 
 <VV_Inspector_AttunementReserved>{RITUAL} 예약됨: {CASTER_nameDef}</VV_Inspector_AttunementReserved>
-<VV_Inspector_EverflowerAttunementState>교감: {LEVEL}단계 ({EXP})</VV_Inspector_EverflowerAttunementState>
+<VV_Inspector_EverflowerAttunementState>조율: {LEVEL}단계 ({EXP})</VV_Inspector_EverflowerAttunementState>
 
 <VV_Inspector_ShockNetTrapCooldown>재충전까지 남은 시간: {0}</VV_Inspector_ShockNetTrapCooldown>
 </LanguageData>

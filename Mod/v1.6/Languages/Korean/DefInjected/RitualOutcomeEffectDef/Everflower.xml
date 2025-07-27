@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+<VV_Attunement.description>의식 결과가 좋을수록 다음 영원꽃 의식의 재사용 대기시간이 줄어들며 영원꽃 조율이 더 강화됩니다.
+\n모든 영원꽃 의식의 재사용 대기시간은 공유됩니다.</VV_Attunement.description>
+<VV_Attunement.comps.0.label>{PAWN_labelShort}의 정신 감응력</VV_Attunement.comps.0.label>
+<VV_Attunement.comps.1.label>참여자 수</VV_Attunement.comps.1.label>
+
+<VV_ChangeWeatherRitual.description>의식 결과가 좋을수록 다음 영원꽃 의식의 재사용 대기시간이 줄어듭니다.
+\n모든 영원꽃 의식의 재사용 대기시간은 공유됩니다.</VV_ChangeWeatherRitual.description>
+<VV_ChangeWeatherRitual.comps.0.label>{PAWN_labelShort}의 정신 감응력</VV_ChangeWeatherRitual.comps.0.label>
+<VV_ChangeWeatherRitual.comps.1.label>참여자 수</VV_ChangeWeatherRitual.comps.1.label>
+
+<VV_Fairyfication.description>의식 결과가 좋을수록 다음 영원꽃 의식의 재사용 대기시간이 줄어듭니다.
+\n모든 영원꽃 의식의 재사용 대기시간은 공유됩니다.</VV_Fairyfication.description>
+<VV_Fairyfication.comps.0.label>{PAWN_labelShort}의 정신 감응력</VV_Fairyfication.comps.0.label>
+<VV_Fairyfication.comps.1.label>참여자 수</VV_Fairyfication.comps.1.label>
+
+<VV_Defairyfication.description>의식 결과가 좋을수록 다음 영원꽃 의식의 재사용 대기시간이 줄어듭니다.
+\n모든 영원꽃 의식의 재사용 대기시간은 공유됩니다.</VV_Defairyfication.description>
+<VV_Defairyfication.comps.0.label>{PAWN_labelShort}의 정신 감응력</VV_Defairyfication.comps.0.label>
+<VV_Defairyfication.comps.1.label>참여자 수</VV_Defairyfication.comps.1.label>
+
+<VV_Manawave.description>의식 결과가 좋을수록 다음 영원꽃 의식의 재사용 대기시간이 줄어들며 강한 파동이 발생합니다.
+\n모든 영원꽃 의식의 재사용 대기시간은 공유됩니다.</VV_Manawave.description>
+<VV_Manawave.comps.0.label>{PAWN_labelShort}의 정신 감응력</VV_Manawave.comps.0.label>
+<VV_Manawave.comps.1.label>참여자 수</VV_Manawave.comps.1.label>
+
+
+</LanguageData>

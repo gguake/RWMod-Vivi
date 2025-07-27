@@ -4,12 +4,16 @@
   <ThingDef>
     <defName>VV_Everflower</defName>
     <label>everflower</label>
-    <description>A very rare arcane flower revered as sacred by the vivi. Everflowers cannot be transplanted or cultivated by conventional means; only those attuned beyond a certain rank can be moved.
-\nOnly vivi can gather honey from the everflower, and doing so converts the gatherer's biological age into mana, which the flower absorbs.
-\nRoyal vivi with high psychic sensitivity can unlock special abilities by entering a psychic attunement with an everflower, but each royal vivi may link with only one everflower.
-\n\nWithin Vivi society, it is customary to give a single everflower seed to vivi who depart to build a new hive.</description>
+    <description>An everflower is an extremely rare bloom revered as sacred by vivis and endowed with a range of mysterious powers. It cannot be transplanted or cultivated by conventional means and may only be moved by a royal vivi in psychic resonance.
+\nOnly vivis can harvest its honey, and when they do, they convert their physical age into mana and absorb it.
+\nA royal vivi resonates with an everflower through psychic attunement, granting access to various mystical abilities. A royal vivi can resonate with only one everflower.
+\n\nIn vivi society, it's traditional to give each vivi who sets out to build a new nest a single everflower seed, and it's said that in the distant past an enormous everflower once existed.</description>
     <descriptionHyperlinks>
-      <ThingDef>VV_PerfumingPetal</ThingDef>
+      <PreceptDef>VV_Attunement</PreceptDef>
+      <PreceptDef>VV_ChangeWeatherRitual</PreceptDef>
+      <PreceptDef>VV_Fairyfication</PreceptDef>
+      <PreceptDef>VV_Defairyfication</PreceptDef>
+      <PreceptDef>VV_Manawave</PreceptDef>
     </descriptionHyperlinks>
 
     <category>Building</category>
@@ -18,7 +22,7 @@
     <selectable>true</selectable>
 
     <drawerType>RealtimeOnly</drawerType>
-    <altitudeLayer>MoteOverheadLow</altitudeLayer>
+    <altitudeLayer>Pawn</altitudeLayer>
     <graphicData>
       <texPath>Things/Plants/VV_Everflower</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -93,7 +97,7 @@
       </li>
 
       <li Class="VVRace.CompProperties_Everflower">
-        <everflowerAttuneRateCurve>
+        <everflowerResonateRateCurve>
           <points>
             <li>(0,0)</li>
             <li>(5,1)</li>
@@ -102,17 +106,18 @@
             <li>(250,7)</li>
             <li>(500,9)</li>
           </points>
-        </everflowerAttuneRateCurve>
+        </everflowerResonateRateCurve>
 
-        <everflowerAttuneLevelCurve>
+        <everflowerResonateLevelCurve>
           <points>
             <li>(0,1)</li>
             <li>(100000,2)</li>
-            <li>(270000,3)</li>
+            <li>(240000,3)</li>
+            <li>(600000,4)</li>
           </points>
-        </everflowerAttuneLevelCurve>
+        </everflowerResonateLevelCurve>
 
-        <everflowerAttunementRitualCurve>
+        <everflowerResonateRitualCurve>
           <points>
             <li>(0,0)</li>
             <li>(0.5,500)</li>
@@ -123,7 +128,7 @@
             <li>(8.0,2750)</li>
             <li>(10.0,3000)</li>
           </points>
-        </everflowerAttunementRitualCurve>
+        </everflowerResonateRitualCurve>
 
         <ritualCooldownCurve>
           <points>
@@ -163,11 +168,19 @@
               <drawSize>(6, 6)</drawSize>
               <drawOffset>(0, 0.2, 1.8)</drawOffset>
           </li>
+          <li>
+              <texPath>Things/Plants/VV_Everflower/VV_EverflowerD</texPath>
+              <graphicClass>Graphic_Single</graphicClass>
+              <shaderType>Cutout</shaderType>
+              <drawSize>(6, 12)</drawSize>
+              <drawOffset>(0, 0.2, 4.3)</drawOffset>
+          </li>
         </graphicsByLevel>
         <effectsOnLevelAcquire>
           <li>VV_EverflowerGrow_1_Level</li>
           <li>VV_EverflowerGrow_2_Level</li>
           <li>VV_EverflowerGrow_3_Level</li>
+          <li>VV_EverflowerGrow_4_Level</li>
         </effectsOnLevelAcquire>
       </li>
     </comps>

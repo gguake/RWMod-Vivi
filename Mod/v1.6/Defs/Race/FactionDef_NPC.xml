@@ -119,9 +119,9 @@ Only a few traces of the former empire remain, in the form of certain traditions
           <Muffalo>5</Muffalo>
         </carriers>
         <guards>
-          <VV_ViviTribesman>5</VV_ViviTribesman>
-          <VV_ViviGuard>10</VV_ViviGuard>
-          <VV_ViviArcher>10</VV_ViviArcher>
+          <VV_ViviTribesman>10</VV_ViviTribesman>
+          <VV_ViviGuard>20</VV_ViviGuard>
+          <VV_ViviArcher>20</VV_ViviArcher>
           <VV_ViviFirefighter>5</VV_ViviFirefighter>
         </guards>
       </li>

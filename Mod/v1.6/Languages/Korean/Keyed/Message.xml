@@ -5,13 +5,11 @@
 <VV_Message_HoneycombWallBeingFortified>해당 위치에 이미 벽 강화가 지정되었습니다.</VV_Message_HoneycombWallBeingFortified>
 <VV_Message_MustDesignateHoneycombWall>비비 벌집 벽을 선택해야 합니다.</VV_Message_MustDesignateHoneycombWall>
 
-<VV_Message_LinkEverflowerComplete>{PAWN_nameDef}의 영원꽃 교감이 연결되었습니다.</VV_Message_LinkEverflowerComplete>
-<VV_Message_LinkDisconnectedEverflower>{PAWN_nameDef}와 교감한 영원꽃이 파괴되어 교감이 단절되었습니다.</VV_Message_LinkDisconnectedEverflower>
-<VV_Message_ReserveEverflowerCancelled>{PAWN_nameDef}에게 예약된 영원꽃 교감 작업이 취소되었습니다.</VV_Message_ReserveEverflowerCancelled>
+<VV_Message_LinkEverflowerComplete>{PAWN_nameDef}이(가) 영원꽃을 조율해 공명자가 되었습니다.</VV_Message_LinkEverflowerComplete>
+<VV_Message_LinkDisconnectedEverflower>{PAWN_nameDef}와 공명한 영원꽃이 파괴되어 단절되었습니다.</VV_Message_LinkDisconnectedEverflower>
+<VV_Message_EverflowerRandomTeleported>영원꽃이 어디론가 순간이동했습니다.</VV_Message_EverflowerRandomTeleported>
 
-<VV_Message_AttunementEverflowerComplete>{PAWN_nameDef}의 영원꽃 교감 의식으로 교감 연결이 더 강해졌습니다.</VV_Message_AttunementEverflowerComplete>
-<VV_Message_PollenWaveAfterAttunement>영원꽃 교감 의식의 영향으로 주변이 꽃가루 범벅이 되었습니다.</VV_Message_PollenWaveAfterAttunement>
-<VV_Message_PlantGrownAfterAttunement>영원꽃 교감 의식의 영향으로 주변에 식물이 자라났습니다.</VV_Message_PlantGrownAfterAttunement>
-
-<VV_Message_AttunementRitualComplete>{RITUAL} 영원꽃 의식이 완료되었습니다.</VV_Message_AttunementRitualComplete>
+<VV_Message_AttunementEverflowerComplete>{PAWN_nameDef}의 영원꽃 조율 의식으로 공명 연결이 더 강해졌습니다.</VV_Message_AttunementEverflowerComplete>
+<VV_Message_PollenWaveAfterAttunement>영원꽃 조율 의식의 영향으로 주변이 꽃가루 범벅이 되었습니다.</VV_Message_PollenWaveAfterAttunement>
+<VV_Message_PlantGrownAfterAttunement>영원꽃 조율 의식의 영향으로 주변에 식물이 자라났습니다.</VV_Message_PlantGrownAfterAttunement>
 </LanguageData>

@@ -5,7 +5,7 @@ using Verse.AI;
 
 namespace VVRace
 {
-    public class JobDriver_EverflowerSimpleRitual : JobDriver
+    public class JobDriver_TeleportEverflower : JobDriver
     {
         private const TargetIndex EverflowerIndex = TargetIndex.A;
 
@@ -21,19 +21,18 @@ namespace VVRace
 
         public override bool TryMakePreToilReservations(bool errorOnFailed)
         {
-            return pawn.Reserve(Everflower, job, 1, 1, null, errorOnFailed, ignoreOtherReservations: true);
+            return pawn.Reserve(Everflower, job, 1, 1, null, errorOnFailed);
         }
 
         protected override IEnumerable<Toil> MakeNewToils()
         {
-            var ritualDef = Everflower?.CurReservationInfo?.ritualDef;
             this.FailOnDestroyedNullOrForbidden(EverflowerIndex);
-            this.FailOn(() => ritualDef == null || Everflower.CurReservationInfo == null || Everflower.CurReservationInfo.casterPawn != pawn || !Everflower.CurReservationInfo.ritualDef.Worker.CanRitual(Everflower, pawn));
+            this.FailOn(() => !Everflower.ReservedTeleportCell.HasValue);
 
             yield return Toils_Goto.GotoThing(EverflowerIndex, PathEndMode.Touch);
 
-            var workAmount = ritualDef?.jobWorkAmount ?? 1;
-            var toil = ToilMaker.MakeToil("JobDriver_AttunementEverflower_Work")
+            var workAmount = 3000;
+            var toil = ToilMaker.MakeToil()
                 .WithTickIntervalAction((delta) =>
                 {
                     _workDone += pawn.GetStatValue(StatDefOf.PsychicSensitivity) * delta;
@@ -43,23 +42,14 @@ namespace VVRace
                     }
                 })
                 .WithProgressBar(EverflowerIndex, () => _workDone / workAmount, interpolateBetweenActorAndTarget: true)
-                .WithDefaultCompleteMode(ToilCompleteMode.Never);
-
-            if (ritualDef?.soundOnCasting != null)
-            {
-                toil = toil.PlaySustainerOrSound(ritualDef.soundOnCasting);
-            }
-
-            if (ritualDef?.effectOnCasting != null)
-            {
-                toil = toil.WithEffect(ritualDef.effectOnCasting, EverflowerIndex);
-            }
+                .WithDefaultCompleteMode(ToilCompleteMode.Never)
+                .WithEffect(VVEffecterDefOf.VV_EverflowerLink, EverflowerIndex);
 
             yield return toil;
 
             yield return Toils_General.Do(() =>
             {
-                Everflower.CurReservationInfo.ritualDef.Worker.Complete(Everflower.CurReservationInfo);
+                Everflower.Notify_TeleportJobCompleted();
             });
         }
     }

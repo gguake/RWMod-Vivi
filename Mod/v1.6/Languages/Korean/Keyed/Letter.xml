@@ -14,12 +14,12 @@
 <VV_Letter_IncidentHornetSwarmArrived>광폭한 거대 말벌 무리가 나타났습니다. 이들은 근처를 돌아다니면서 눈에 띄는 모든 생명체를 공격할 것입니다. 거대 말벌은 매우 빠르고 튼튼하며 일반적인 무기로 쓰러뜨리려면 대단히 어렵지만 화염이나 독에는 취약합니다.
 \n이들은 문을 통과할 수 없어 벽 뒤에 숨어있으면 안전합니다. 가까운 대상부터 무차별적으로 사냥하므로 적절한 방어수단이 없다면 숨어있는것이 좋습니다. 무리는 이 지역의 모든 움직이는 것들을 사냥하다가 며칠 뒤에 스스로 떠날 것입니다.</VV_Letter_IncidentHornetSwarmArrived>
 
-<VV_Letter_LinkEverflowerLabel>영원꽃 교감</VV_Letter_LinkEverflowerLabel>
-<VV_Letter_LinkEverflower>{PAWN_labelShort}이(가) 영원꽃과 교감해 정신이 연결되었습니다. 영원꽃의 교감 등급이 강해질수록 여러 이로운 효과와 영원꽃의 능력을 사용할 수 있습니다.
-\n영원꽃은 로열 비비를 통해 환경 마나를 흡수하며, 마나를 흡수하거나 교감중인 로열 비비가 추가적인 교감 연결 의식을 수행하면 교감 연결이 강해집니다.</VV_Letter_LinkEverflower>
+<VV_Letter_LinkEverflowerLabel>영원꽃 공명</VV_Letter_LinkEverflowerLabel>
+<VV_Letter_LinkEverflower>{PAWN_labelShort}이(가) 영원꽃과 공명해 정신이 연결되었습니다. 영원꽃의 조율 등급이 강해질수록 여러 이로운 효과와 영원꽃의 능력을 사용할 수 있습니다.
+\n영원꽃은 로열 비비를 통해 환경 마나를 흡수하며, 마나를 흡수하거나 공명 중인 로열 비비가 추가적인 공명 연결 의식을 수행하면 공명 연결이 강해집니다.</VV_Letter_LinkEverflower>
 
-<VV_Letter_EverflowerAttumentLevelUpLabel>영원꽃 교감: {LEVEL}단계</VV_Letter_EverflowerAttumentLevelUpLabel>
-<VV_Letter_EverflowerAttumentLevelUp>영원꽃의 교감 연결이 강해졌습니다. 이제 다음과 같은 영원꽃의 교감 의식이 가능합니다.</VV_Letter_EverflowerAttumentLevelUp>
+<VV_Letter_EverflowerAttumentLevelUpLabel>영원꽃 조율: {LEVEL}단계</VV_Letter_EverflowerAttumentLevelUpLabel>
+<VV_Letter_EverflowerAttumentLevelUp>영원꽃의 조율 상태가 높아졌습니다. 이제 다음과 같은 영원꽃 의식이 가능합니다.</VV_Letter_EverflowerAttumentLevelUp>
 
 <VV_Letter_FairyficationCompleteLabel>요정화: {TARGET_nameDef}</VV_Letter_FairyficationCompleteLabel>
 <VV_Letter_FairyficationComplete>{CASTER_nameDef}이(가) {TARGET_nameDef}을(를) 요정화했습니다. 요정화된 비비는 아주 작은 형체가 되어 로열 비비를 따라다닙니다.

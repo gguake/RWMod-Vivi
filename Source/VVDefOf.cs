@@ -55,6 +55,9 @@ namespace VVRace
         public static JobDef VV_FortifyHoneycombWall;
 
         public static JobDef VV_PlantArcaneSeed;
+
+        public static JobDef VV_MoveEverflower;
+        public static JobDef VV_DeliverToEverflower;
     }
 
     [DefOf]
@@ -242,6 +245,7 @@ namespace VVRace
         public static EffecterDef VV_EverflowerGrow_1_Level;
         public static EffecterDef VV_EverflowerGrow_2_Level;
         public static EffecterDef VV_EverflowerGrow_3_Level;
+        public static EffecterDef VV_EverflowerGrow_4_Level;
     }
 
     [DefOf]
@@ -297,5 +301,11 @@ namespace VVRace
     public static class VVGameConditionDefOf
     {
         public static GameConditionDef VV_EverflowerWeatherControl;
+    }
+
+    [DefOf]
+    public static class VVSoundDefOf
+    {
+        public static SoundDef VV_EverflowerRitualCast;
     }
 }

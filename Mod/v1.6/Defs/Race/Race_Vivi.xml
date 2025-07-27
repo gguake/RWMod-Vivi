@@ -276,7 +276,7 @@
       <li><compClass>VVRace.CompVivi</compClass></li>
 
       <li Class="VVRace.CompProperties_ViviHolder">
-        <maxCount>6</maxCount>
+        <maxCount>1</maxCount>
         <preventDamageChanceByInnerCount>
           <points>
             <li>(0,0)</li>

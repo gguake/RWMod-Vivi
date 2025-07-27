@@ -13,6 +13,9 @@
 <VV_Designator_FortifyHoneycombWallDesc>Fortify the honeycomb walls with lifestrands. The fortified walls are non-flammable but slightly less resistant to impacts.
 \nRequires one lifestrand for each wall.</VV_Designator_FortifyHoneycombWallDesc>
 
-<VV_Command_CancelReservationEverflower>Cancel reservation</VV_Command_CancelReservationEverflower>
-<VV_Command_CancelReservationEverflowerDesc>Cancel reserved attunement.</VV_Command_CancelReservationEverflowerDesc>
+<VV_Command_CancelReservationEverflower>Cancel teleport</VV_Command_CancelReservationEverflower>
+<VV_Command_CancelReservationEverflowerDesc>Cancel reserved teleport.</VV_Command_CancelReservationEverflowerDesc>
+
+<VV_Command_ReserveTeleportEverflower>Reserve teleport</VV_Command_ReserveTeleportEverflower>   
+<VV_Command_ReserveTeleportEverflowerDesc>Reserve teleporting the everflower to a specified location. Requires a resonating royal vivi.</VV_Command_ReserveTeleportEverflowerDesc>
 </LanguageData>

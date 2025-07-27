@@ -254,6 +254,18 @@ namespace VVRace
             }
         }
 
+        public virtual void Notify_ArcanePlantPotDespawned()
+        {
+            if (def.Minifiable)
+            {
+                MinifyAndDropDirect();
+            }
+            else
+            {
+                Destroy();
+            }
+        }
+
         public void Notify_BuildingDeconstruct(ThingOwner<Thing> leavingThingOwner)
         {
             if (leavingThingOwner == null) { return; }

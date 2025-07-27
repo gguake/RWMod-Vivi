@@ -6,10 +6,10 @@ using Verse.Sound;
 
 namespace VVRace
 {
-    public class RitualBehaviorWorker_Attunement : RitualBehaviorWorker
+    public class RitualBehaviorWorker_Fairyfication : RitualBehaviorWorker
     {
-        public RitualBehaviorWorker_Attunement() { }
-        public RitualBehaviorWorker_Attunement(RitualBehaviorDef def) : base(def) { }
+        public RitualBehaviorWorker_Fairyfication() { }
+        public RitualBehaviorWorker_Fairyfication(RitualBehaviorDef def) : base(def) { }
 
         private Sustainer _soundPlaying;
         public override Sustainer SoundPlaying => _soundPlaying;
@@ -32,7 +32,7 @@ namespace VVRace
         {
             reason = null;
 
-            if (role is RitualRoleEverflowerAttuner)
+            if (role is RitualRoleEverflowerResonator)
             {
                 var everflower = ritualTarget.Thing as ArcanePlant_Everflower;
                 if (everflower == null) { return false; }
@@ -43,9 +43,20 @@ namespace VVRace
                     return false;
                 }
 
-                if (compVivi.LinkedEverflower != null && compVivi.LinkedEverflower != everflower)
+                if (compVivi.LinkedEverflower != everflower)
                 {
-                    reason = LocalizeString_Etc.VV_FailReason_AlreadyAttunedOther.Translate();
+                    reason = LocalizeString_Etc.VV_FailReason_NotAttunedEverflower.Translate();
+                    return false;
+                }
+
+                if (!pawn.TryGetComp<CompViviHolder>(out var compViviHolder))
+                {
+                    return false;
+                }
+
+                if (!compViviHolder.CanJoin)
+                {
+                    reason = LocalizeString_Etc.VV_FailReason_FairyViviFull.Translate();
                     return false;
                 }
 
@@ -61,7 +72,7 @@ namespace VVRace
 
         public override void Tick(LordJob_Ritual ritual)
         {
-            if (ritual.StageIndex > 0)
+            if (ritual.StageIndex > 1)
             {
                 if (_soundPlaying == null || _soundPlaying.Ended)
                 {

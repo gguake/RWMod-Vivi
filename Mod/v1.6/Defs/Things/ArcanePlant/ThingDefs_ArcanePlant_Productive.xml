@@ -230,9 +230,9 @@
         </manaGenerateRule>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>500</mana>
+          <mana>350</mana>
         </manaConsumeRule>
-        <manaAbsorbPerDay>500</manaAbsorbPerDay>
+        <manaAbsorbPerDay>350</manaAbsorbPerDay>
       </li>
 
       <li Class="VVRace.CompProperties_ArcanePlantBulletOverride">

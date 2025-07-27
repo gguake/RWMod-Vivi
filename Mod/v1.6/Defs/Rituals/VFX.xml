@@ -5,17 +5,70 @@
     <defName>VV_EverflowerLink</defName>
     <comps>
       <li Class="CompProperties_RitualEffectSpawnOnRole">
-        <roleId>attuner</roleId>
+        <roleId>resonator</roleId>
         <moteDef>VV_Mote_EverflowerCircle</moteDef>
         <spawnIntervalTicks>24</spawnIntervalTicks>
       </li>
       <li Class="CompProperties_RitualEffectSpawnOnRole">
-        <roleId>attuner</roleId>
+        <roleId>resonator</roleId>
         <moteDef>VV_Mote_EverflowerLinkDistortion</moteDef>
         <spawnIntervalTicks>24</spawnIntervalTicks>
       </li>
     </comps>
   </RitualVisualEffectDef>
 
+  <!-- Fairyfication -->
+  <RitualVisualEffectDef>
+    <defName>VV_Fairyfication</defName>
+    <comps>
+      <li Class="CompProperties_RitualEffectSpawnOnRole">
+        <roleId>resonator</roleId>
+        <moteDef>VV_Mote_EverflowerCircle</moteDef>
+        <spawnIntervalTicks>24</spawnIntervalTicks>
+      </li>
+      <li Class="CompProperties_RitualEffectSpawnOnRole">
+        <roleId>resonator</roleId>
+        <moteDef>VV_Mote_EverflowerLinkDistortion</moteDef>
+        <spawnIntervalTicks>24</spawnIntervalTicks>
+      </li>
+      <li Class="CompProperties_RitualEffectSpawnOnRole">
+        <roleId>vivi</roleId>
+        <moteDef>VV_Mote_VV_FairyficationCircle</moteDef>
+        <spawnIntervalTicks>12</spawnIntervalTicks>
+      </li>
+      <li Class="CompProperties_RitualEffectSpawnOnRole">
+        <roleId>vivi</roleId>
+        <moteDef>VV_Mote_FairyficationFlash</moteDef>
+        <spawnIntervalTicks>12</spawnIntervalTicks>
+      </li>
+    </comps>
+  </RitualVisualEffectDef>
+
+  <!-- Defairyfication -->
+  <RitualVisualEffectDef>
+    <defName>VV_Defairyfication</defName>
+    <comps>
+      <li Class="CompProperties_RitualEffectSpawnOnRole">
+        <roleId>resonator</roleId>
+        <moteDef>VV_Mote_EverflowerCircle</moteDef>
+        <spawnIntervalTicks>24</spawnIntervalTicks>
+      </li>
+      <li Class="CompProperties_RitualEffectSpawnOnRole">
+        <roleId>resonator</roleId>
+        <moteDef>VV_Mote_EverflowerLinkDistortion</moteDef>
+        <spawnIntervalTicks>24</spawnIntervalTicks>
+      </li>
+      <li Class="CompProperties_RitualEffectSpawnOnRole">
+        <roleId>resonator</roleId>
+        <moteDef>VV_Mote_VV_UndoFairyficationCircle</moteDef>
+        <spawnIntervalTicks>12</spawnIntervalTicks>
+      </li>
+      <li Class="CompProperties_RitualEffectSpawnOnRole">
+        <roleId>resonator</roleId>
+        <moteDef>VV_Mote_FairyficationFlash</moteDef>
+        <spawnIntervalTicks>12</spawnIntervalTicks>
+      </li>
+    </comps>
+  </RitualVisualEffectDef>
 
 </Defs>

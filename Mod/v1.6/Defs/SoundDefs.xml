@@ -2,8 +2,8 @@
 <Defs>
   <SoundDef>
     <defName>VV_EverflowerRitualCast</defName>
-    <sustain>True</sustain>
     <context>MapOnly</context>
+    <sustain>True</sustain>
     <priorityMode>PrioritizeNearest</priorityMode>
     <subSounds>
       <li>
@@ -15,10 +15,12 @@
         </grains>
         <volumeRange>60</volumeRange>
         <pitchRange>0.5~1.5</pitchRange>
-        <distRange>5~25</distRange> 
-        <repeatMode>NeverTwice</repeatMode>     
+        <distRange>5~25</distRange>
+        <repeatMode>NeverTwice</repeatMode>      
         <sustainLoop>False</sustainLoop>
-        <sustainIntervalRange>-1</sustainIntervalRange>
+        <sustainIntervalRange>-1</sustainIntervalRange>      
+        <sustainAttack>0.5</sustainAttack>
+        <sustainRelease>0.5</sustainRelease>
       </li>
     </subSounds>
   </SoundDef>

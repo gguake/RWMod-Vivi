@@ -1,56 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
   <PreceptDef>
-    <defName>VV_Attunement</defName>
-    <label>attunement ritual</label>
-    <description>A Royal vivi enters resonance with an everflower through psychic attunement. A royal vivi can attune to only one everflower at a time, and if a royal vivi already in resonance performs the attunement ritual, it deepens the everflower's attunement level.</description>
+    <defName>VV_Fairyfication</defName>
+    <label>fairyfication ritual</label>
+    <description>Transforms a vivi into its fairy form and binds it to the resonator. The fairyfication ritual can only be performed on adult common vivis hatched from eggs laid by the resonator.
+\nA fairy vivi does not age, has no needs, and cannot be harmed, but vanishes if the bound royal vivi dies.</description>
     <issue>Ritual</issue>
     <preceptClass>Precept_Ritual</preceptClass>
     <visible>false</visible>
     <classic>true</classic>
     <countsTowardsPreceptLimit>false</countsTowardsPreceptLimit>
     <selectionWeight>0</selectionWeight>
-    <ritualPatternBase>VV_Attunement</ritualPatternBase>
-    <iconPath>UI/Commands/VV_Attunement</iconPath>
+    <ritualPatternBase>VV_Fairyfication</ritualPatternBase>
+    <iconPath>UI/Commands/VV_LinkConnect</iconPath>
     <usesIdeoVisualEffects>false</usesIdeoVisualEffects>
     <mergeRitualGizmosFromAllIdeos>true</mergeRitualGizmosFromAllIdeos>
     <useRepeatPenalty>false</useRepeatPenalty>
     <showRitualFloatMenuOption>false</showRitualFloatMenuOption>
-    <displayOrderInImpact>1000</displayOrderInImpact>
-    <displayOrderInIssue>1000</displayOrderInIssue>
+    <displayOrderInImpact>998</displayOrderInImpact>
+    <displayOrderInIssue>998</displayOrderInIssue>
   </PreceptDef>
 
   <RitualPatternDef>
-    <defName>VV_Attunement</defName>
+    <defName>VV_Fairyfication</defName>
     <ritualOnlyForIdeoMembers>false</ritualOnlyForIdeoMembers>
-    <ritualBehavior>VV_Attunement</ritualBehavior>
-    <ritualOutcomeEffect>VV_Attunement</ritualOutcomeEffect>
-    <ritualObligationTargetFilter>VV_Attunement</ritualObligationTargetFilter>
+    <ritualBehavior>VV_Fairyfication</ritualBehavior>
+    <ritualOutcomeEffect>VV_Fairyfication</ritualOutcomeEffect>
+    <ritualObligationTargetFilter>VV_Fairyfication</ritualObligationTargetFilter>
     <playsIdeoMusic>false</playsIdeoMusic>
     <alwaysStartAnytime>true</alwaysStartAnytime>
-    <iconPathOverride>UI/Commands/VV_Attunement</iconPathOverride>
+    <iconPathOverride>UI/Commands/VV_LinkConnect</iconPathOverride>
     <showIdeoIconsInDialog>false</showIdeoIconsInDialog>
   </RitualPatternDef>
 
   <RitualBehaviorDef>
-    <defName>VV_Attunement</defName>
+    <defName>VV_Fairyfication</defName>
     <durationTicks>1500</durationTicks>
-    <workerClass>VVRace.RitualBehaviorWorker_Attunement</workerClass>
+    <workerClass>VVRace.RitualBehaviorWorker_Fairyfication</workerClass>
     <displayCompletedMessage>true</displayCompletedMessage>
     <roles>
-      <li Class="VVRace.RitualRoleEverflowerAttuner">
+      <li Class="VVRace.RitualRoleEverflowerResonator">
         <id>resonator</id>
-        <label>attuner</label>
+        <label>resonator</label>
         <maxCount>1</maxCount>
         <required>True</required>
         <usedStat>PsychicSensitivity</usedStat>
-        <defaultForSelectedColonist>true</defaultForSelectedColonist>
+        <allowChild>false</allowChild>
+        <blocksSocialInteraction>true</blocksSocialInteraction>
+        <countsAsParticipant>false</countsAsParticipant>
+      </li>
+      <li Class="VVRace.RitualRoleEverflowerFairyficationVivi">
+        <id>vivi</id>
+        <label>fairyfied vivi</label>
+        <maxCount>1</maxCount>
+        <required>True</required>
         <allowChild>false</allowChild>
         <blocksSocialInteraction>true</blocksSocialInteraction>
         <countsAsParticipant>false</countsAsParticipant>
       </li>
     </roles>
     <stages>
+      <li Class="RitualStage_InteractWithRole">
+        <defaultDuty>Spectate</defaultDuty>
+        <showProgressBar>false</showProgressBar>
+        <targetId>vivi</targetId>
+        <endTriggers>
+          <li Class="StageEndTrigger_PawnDeliveredOrNotValid"/>
+        </endTriggers>
+        <failTriggers>
+          <li Class="StageFailTrigger_TargetPawnUnreachable">
+            <takerId>resonator</takerId>
+            <takeeId>vivi</takeeId>
+            <desc>Vivi is not reachable.</desc>
+          </li>
+          <li Class="StageFailTrigger_PawnAsleep">
+            <desc>resonator asleep</desc>
+            <pawnId>resonator</pawnId>
+          </li>
+        </failTriggers>
+        <roleBehaviors>
+          <li>
+            <roleId>resonator</roleId>
+            <dutyDef>VV_DeliverPawnToEverflower</dutyDef>
+          </li>
+          <li>
+            <roleId>vivi</roleId>
+            <dutyDef>ArriveToCell</dutyDef>
+            <customPositions>
+              <li Class="RitualPosition_InFrontThingCenter"/>
+            </customPositions>
+          </li>
+        </roleBehaviors>
+      </li>
       <li>
         <defaultDuty>Spectate</defaultDuty>
         <showProgressBar>false</showProgressBar>
@@ -71,12 +112,16 @@
               </li>
             </customPositions>
           </li>
+          <li>
+            <roleId>vivi</roleId>
+            <dutyDef>LayDownAwake</dutyDef>
+          </li>
         </roleBehaviors>
       </li>
       <li>
         <defaultDuty>SpectateCircle</defaultDuty>
         <spectateDistanceOverride>4~6</spectateDistanceOverride>
-        <visualEffectDef>VV_EverflowerLink</visualEffectDef>
+        <visualEffectDef>VV_Fairyfication</visualEffectDef>
         <endTriggers>
           <li Class="StageEndTrigger_DurationPercentage">
             <percentage>1</percentage>
@@ -92,20 +137,24 @@
               </li>
             </customPositions>
           </li>
+          <li>
+            <roleId>vivi</roleId>
+            <dutyDef>LayDownAwake</dutyDef>
+          </li>
         </roleBehaviors>
       </li>
     </stages>
   </RitualBehaviorDef>
 
   <RitualOutcomeEffectDef>
-    <defName>VV_Attunement</defName>
-    <description>The better a ritual's result, the shorter the cooldown on the next everflower ritual and the stronger the everflower's attunement becomes.
+    <defName>VV_Fairyfication</defName>
+    <description>The better a ritual's result, the shorter the cooldown on the next everflower ritual.
 \nAll everflower rituals share a cooldown.</description>
-    <workerClass>VVRace.RitualOutcomeEffectWorker_Attunement</workerClass>
+    <workerClass>VVRace.RitualOutcomeEffectWorker_Fairyfication</workerClass>
     <allowAttachableOutcome>false</allowAttachableOutcome>
     <givesDevelopmentPoints>false</givesDevelopmentPoints>
     <allowOutcomeWithNoAttendance>true</allowOutcomeWithNoAttendance>
-    <effecter>VV_EverflowerRitual_Complete</effecter>
+    <effecter>VV_Fairyfication_Complete</effecter>
     <maxQuality>10</maxQuality>
     <comps>
       <li Class="RitualOutcomeComp_PawnStatScaled">
@@ -139,8 +188,8 @@
   </RitualOutcomeEffectDef>
 
   <RitualObligationTargetFilterDef Class="VVRace.RitualObligationTargetFilterDef_EverflowerRitual">
-    <defName>VV_Attunement</defName>
+    <defName>VV_Fairyfication</defName>
     <workerClass>VVRace.RitualObligationTargetWorker_EverflowerRitual</workerClass>
-    <requiredAttunementLevel>0</requiredAttunementLevel>
+    <requiredAttunementLevel>3</requiredAttunementLevel>
   </RitualObligationTargetFilterDef>
 </Defs>

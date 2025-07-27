@@ -8,18 +8,6 @@ using Verse;
 
 namespace VVRace
 {
-    public class EverflowerAttunementAbilityInfo
-    {
-        public AbilityDef abilityDef;
-        public int level;
-
-        public void LoadDataFromXmlCustom(XmlNode xmlRoot)
-        {
-            DirectXmlCrossRefLoader.RegisterObjectWantsCrossRef(this, "abilityDef", xmlRoot.Name);
-            level = int.Parse(xmlRoot.InnerText);
-        }
-    }
-
     public class EverflowerAttunementInfo : IExposable
     {
         public float attunement = 0f;
@@ -34,16 +22,16 @@ namespace VVRace
 
     public class CompProperties_Everflower : CompProperties
     {
-        public SimpleCurve everflowerAttuneRateCurve;
-        public SimpleCurve everflowerAttuneLevelCurve;
-        public SimpleCurve everflowerAttunementRitualCurve;
+        public SimpleCurve everflowerResonateRateCurve;
+        public SimpleCurve everflowerResonateLevelCurve;
+        public SimpleCurve everflowerResonateRitualCurve;
 
         public SimpleCurve ritualCooldownCurve;
 
         public List<GraphicData> graphicsByLevel;
         public List<EffecterDef> effectsOnLevelAcquire;
 
-        public List<EverflowerAttunementAbilityInfo> abilities;
+        public float teleportRange = 10.9f;
 
         public CompProperties_Everflower()
         {
@@ -54,7 +42,7 @@ namespace VVRace
     [StaticConstructorOnStartup]
     public class CompEverflower : ThingComp
     {
-        public static Material AttunementLineMat = MaterialPool.MatFrom(GenDraw.LineTexPath, ShaderDatabase.Transparent, new Color(0.5f, 1f, 0.5f));
+        public static readonly Material AttunementLineMat = MaterialPool.MatFrom(GenDraw.LineTexPath, ShaderDatabase.Transparent, new Color(0.5f, 1f, 0.5f));
 
         public CompProperties_Everflower Props => (CompProperties_Everflower)props;
 
@@ -69,8 +57,8 @@ namespace VVRace
         {
             get
             {
-                var nextLevelExp = Props.everflowerAttuneLevelCurve.EvaluateInverted(_attunementInfo.attunementLevel + 1);
-                var curLevelExp = Props.everflowerAttuneLevelCurve.EvaluateInverted(_attunementInfo.attunementLevel);
+                var nextLevelExp = Props.everflowerResonateLevelCurve.EvaluateInverted(_attunementInfo.attunementLevel + 1);
+                var curLevelExp = Props.everflowerResonateLevelCurve.EvaluateInverted(_attunementInfo.attunementLevel);
 
                 if (nextLevelExp == curLevelExp) { return 0; }
                 return (_attunementInfo.attunement - curLevelExp) / (nextLevelExp - curLevelExp);
@@ -119,7 +107,7 @@ namespace VVRace
             var drawPos = parent.DrawPos;
             Graphics.DrawMesh(
                 mesh, 
-                drawPos + graphic.drawOffset.RotatedBy(parent.Rotation), 
+                drawPos + graphic.drawOffset, 
                 Quaternion.identity, 
                 graphic.Graphic.MatAt(parent.Rotation), 0);
         }
@@ -178,67 +166,6 @@ namespace VVRace
             }
         }
 
-        public void LinkAttunement(Pawn pawn)
-        {
-            if (_linked.Contains(pawn))
-            {
-                var psychicSensitivity = pawn.GetStatValue(StatDefOf.PsychicSensitivity);
-                GainAttunement(Props.everflowerAttunementRitualCurve.Evaluate(psychicSensitivity));
-
-                Messages.Message(LocalizeString_Message.VV_Message_AttunementEverflowerComplete.Translate(pawn.Named("PAWN")), MessageTypeDefOf.NeutralEvent);
-
-                var count = 0;
-                var v = Rand.Value;
-                if (v <= 0.5f)
-                {
-                    count += GrowViviFlowerRandomly();
-                    if (Rand.Chance(0.4f))
-                    {
-                        count += GrowArcanePlantRandomly();
-                    }
-
-                    if (count > 0)
-                    {
-                        Messages.Message(LocalizeString_Message.VV_Message_PlantGrownAfterAttunement.Translate(), MessageTypeDefOf.PositiveEvent, historical: false);
-                    }
-                }
-                else if (v < 0.7f)
-                {
-                    foreach (var cell in GenRadial.RadialCellsAround(parent.Position, 4f, false))
-                    {
-                        if (!cell.InBounds(parent.Map)) { continue; }
-
-                        if (FilthMaker.CanMakeFilth(cell, parent.Map, VVThingDefOf.VV_FilthPollen))
-                        {
-                            if (FilthMaker.TryMakeFilth(cell, parent.Map, VVThingDefOf.VV_FilthPollen))
-                            {
-                                count++;
-                            }
-                        }
-                    }
-
-                    if (count > 0)
-                    {
-                        Messages.Message(LocalizeString_Message.VV_Message_PollenWaveAfterAttunement.Translate(), MessageTypeDefOf.PositiveEvent, historical: false);
-                    }
-                }
-
-            }
-            else
-            {
-                _linked.Add(pawn);
-
-                if (_attunementInfo.attunementLevel == 0)
-                {
-                    ChangeAttunementLevel(1);
-                }
-
-                pawn.GetCompVivi()?.Notify_LinkEverflower(Everflower);
-
-                Messages.Message(LocalizeString_Message.VV_Message_LinkEverflowerComplete.Translate(pawn.Named("PAWN")), MessageTypeDefOf.PositiveEvent);
-            }
-        }
-
         public void LinkAttunement(Pawn pawn, float quality)
         {
             if (!_linked.Contains(pawn))
@@ -259,7 +186,7 @@ namespace VVRace
                 Messages.Message(LocalizeString_Message.VV_Message_AttunementEverflowerComplete.Translate(pawn.Named("PAWN")), MessageTypeDefOf.NeutralEvent);
             }
 
-            GainAttunement(Props.everflowerAttunementRitualCurve.Evaluate(quality));
+            GainAttunement(Props.everflowerResonateRitualCurve.Evaluate(quality));
 
             var count = 0;
             var v = Rand.Value;
@@ -302,24 +229,19 @@ namespace VVRace
         {
             if (!_linked.Contains(pawn)) { return; }
             _linked.Remove(pawn);
-
-            if (pawn == Everflower.CurReservedPawn)
-            {
-                Everflower.Unreserve(true);
-            }
         }
 
         public void GainAttunement(float attunement)
         {
             if (attunement == 0) { return; }
 
-            var nextLevelExp = Props.everflowerAttuneLevelCurve.EvaluateInverted(_attunementInfo.attunementLevel + 1);
-            var curLevelExp = Props.everflowerAttuneLevelCurve.EvaluateInverted(_attunementInfo.attunementLevel);
+            var nextLevelExp = Props.everflowerResonateLevelCurve.EvaluateInverted(_attunementInfo.attunementLevel + 1);
+            var curLevelExp = Props.everflowerResonateLevelCurve.EvaluateInverted(_attunementInfo.attunementLevel);
             if (nextLevelExp == curLevelExp) { return; }
 
             _attunementInfo.attunement += attunement;
 
-            var newLevel = (int)Props.everflowerAttuneLevelCurve.Evaluate(_attunementInfo.attunement);
+            var newLevel = (int)Props.everflowerResonateLevelCurve.Evaluate(_attunementInfo.attunement);
             if (newLevel > _attunementInfo.attunementLevel)
             {
                 ChangeAttunementLevel(newLevel);
@@ -338,7 +260,7 @@ namespace VVRace
 
         public void GainAttunementFromMana(float mana)
         {
-            GainAttunement(Props.everflowerAttuneRateCurve.Evaluate(mana));
+            GainAttunement(Props.everflowerResonateRateCurve.Evaluate(mana));
 
         }
 
@@ -352,9 +274,14 @@ namespace VVRace
                 var sb = new StringBuilder();
                 sb.Append(LocalizeString_Letter.VV_Letter_EverflowerAttumentLevelUp.Translate(level.Named("LEVEL")));
                 sb.Append("\n\n");
-                foreach (var ritualDef in DefDatabase<EverflowerRitualDef>.AllDefsListForReading.Where(v => v.attuneLevel == level))
+
+                foreach (var ritualDef in DefDatabase<PreceptDef>.AllDefsListForReading)
                 {
-                    sb.AppendInNewLine($"- {ritualDef.LabelCap}");
+                    var obligation = ritualDef.ritualPatternBase?.ritualObligationTargetFilter;
+                    if (obligation != null && obligation is RitualObligationTargetFilterDef_EverflowerRitual everflowerRitualObligation && everflowerRitualObligation.requiredAttunementLevel == level)
+                    {
+                        sb.AppendInNewLine($"- {ritualDef.LabelCap}");
+                    }
                 }
 
                 Find.LetterStack.ReceiveLetter(

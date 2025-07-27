@@ -5,7 +5,7 @@ namespace VVRace
 {
     public class ArcanePlant_Starlitflower : ArcanePlant
     {
-        public const float VaccumResistRange = 3.4f;
+        public const float VaccumResistRange = 5.7f;
 
         public int GraphicIndex => CompGlower.Glows ? 1 : 0;
 
