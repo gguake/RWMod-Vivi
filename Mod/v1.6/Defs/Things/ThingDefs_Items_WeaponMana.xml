@@ -20,7 +20,7 @@
       <WorkToMake>35000</WorkToMake>
       <Mass>6.0</Mass>
       <RangedWeapon_Cooldown>2.6</RangedWeapon_Cooldown>
-      <VV_RangedWeapon_ManaCost>30</VV_RangedWeapon_ManaCost>
+      <VV_RangedWeapon_ManaCost>25</VV_RangedWeapon_ManaCost>
     </statBases>
     <relicChance>0</relicChance>
     
@@ -141,7 +141,7 @@
       <WorkToMake>35000</WorkToMake>
       <Mass>7</Mass>
       <RangedWeapon_Cooldown>0.9</RangedWeapon_Cooldown>
-      <VV_RangedWeapon_ManaCost>150</VV_RangedWeapon_ManaCost>
+      <VV_RangedWeapon_ManaCost>100</VV_RangedWeapon_ManaCost>
     </statBases>
     <relicChance>0</relicChance>
 
@@ -210,7 +210,7 @@
       <li Class="CompProperties_Biocodable"/>
       <li Class="VVRace.CompProperties_Mana">
         <manaCapacity>900</manaCapacity>
-        <manaAbsorbPerDay>750</manaAbsorbPerDay>
+        <manaAbsorbPerDay>600</manaAbsorbPerDay>
         <workOnlySpawned>false</workOnlySpawned>
       </li>
     </comps>
@@ -228,7 +228,7 @@
       <speed>32</speed>
       <damageDef>VV_Frostbite</damageDef>
       <explosionRadius>2.6</explosionRadius>
-      <damageAmountBase>30</damageAmountBase>
+      <damageAmountBase>24</damageAmountBase>
       <arcHeightFactor>0.2</arcHeightFactor>
       <shadowSize>0.6</shadowSize>
     </projectile>
@@ -264,7 +264,7 @@
         <drawWick>false</drawWick>
         <explosiveDamageType>VV_Frostbite</explosiveDamageType>
         <explosiveRadius>2.6</explosiveRadius>
-        <damageAmountBase>30</damageAmountBase>
+        <damageAmountBase>24</damageAmountBase>
         <chanceNeverExplodeFromDamage>0.5</chanceNeverExplodeFromDamage>
         <countdownTicks>1~1</countdownTicks>
       </li>
@@ -316,11 +316,11 @@
       <li Class="VVRace.VerbProperties_ChainLightning">
         <hasStandardCommand>true</hasStandardCommand>
         <warmupTime>1.5</warmupTime>
-        <range>18.9</range>
+        <range>17.9</range>
         <stopBurstWithoutLos>true</stopBurstWithoutLos>
 
         <damageDef>Burn</damageDef>
-        <damageAmount>8</damageAmount>
+        <damageAmount>7</damageAmount>
         <burstShotCount>3</burstShotCount>
         <ticksBetweenBurstShots>3</ticksBetweenBurstShots>
         <lightningMoteDef>VV_Mote_ChainLightning</lightningMoteDef>
@@ -336,7 +336,7 @@
           </points>
         </lightningLineFleckChanceCurve>
 
-        <chainCount>3</chainCount>
+        <chainCount>4</chainCount>
         <chainRadius>3.8</chainRadius>
 
         <soundCast>VV_LightningboltShot</soundCast>
@@ -488,8 +488,8 @@
       <li Class="CompProperties_Styleable"/>
       <li Class="CompProperties_Biocodable"/>
       <li Class="VVRace.CompProperties_Mana">
-        <manaCapacity>450</manaCapacity>
-        <manaAbsorbPerDay>450</manaAbsorbPerDay>
+        <manaCapacity>500</manaCapacity>
+        <manaAbsorbPerDay>500</manaAbsorbPerDay>
         <workOnlySpawned>false</workOnlySpawned>
       </li>
     </comps>

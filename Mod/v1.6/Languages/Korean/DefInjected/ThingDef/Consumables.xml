@@ -40,6 +40,10 @@
 <VV_CombatHormoneJelly.description>꿀술을 화학적으로 농축하고 가공해 만든 젤리입니다. 알코올 농도가 매우 높으며 비비가 섭취할 경우 전투 기술이 일시적으로 향상되고 불을 두려워 하지 않게 되지만 공격성이 강화되며 피로와 배고픔을 빠르게 느끼게 됩니다.
 \n비비들이 남은 꿀술을 처분하기위해 마셔보다가 발명한 물건으로, 비비가 아닌 일반 인간들에게는 자극적이고 특이한 맛의 간식으로 유통되기도 합니다.</VV_CombatHormoneJelly.description>
 
+<VV_HoneyWaterFruit.label>꿀물 열매</VV_HoneyWaterFruit.label>
+<VV_HoneyWaterFruit.description>물방울꽃에서 주기적으로 열리는 물방울 모양의 열매입니다. 물방울꽃의 모양과 비슷하며 반투명한 얇은 껍질속에 과당이 가득한 과즙이 가득 차있습니다.
+\n매우 연약해 쉽게 손상되어 요리에는 사용할 수 없지만 그냥 먹어도 맛있으며 손상되지만 않는다면 오랫동안 보존됩니다. 마나를 소량 흡수하면 빛나는 성질이 있어 비비들은 과즙을 먹고 남은 열매를 방부처리해 광원으로 활용하기도 합니다.</VV_HoneyWaterFruit.description>
+
 <!-- Mead -->
 <VV_UnfermentedMead.label>숙성중인 비비 꿀술</VV_UnfermentedMead.label>
 <VV_UnfermentedMead.description>꿀에 물과 효모를 섞어 숙성중인 비비 꿀술입니다. 제대로 숙성하려면 20~28℃ (68-82℉)에서 10일간 숙성해야 합니다. 온도가 적절하지 않으면 썩어서 사라집니다.</VV_UnfermentedMead.description>

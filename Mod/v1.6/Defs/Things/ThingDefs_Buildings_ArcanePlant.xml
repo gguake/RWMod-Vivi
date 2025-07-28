@@ -1,13 +1,192 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
+  <!-- 물방울 벽등 -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>VV_WaterdropLamp</defName>
+    <label>waterdrop lamp</label>
+    <description>.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_HoneyWaterFruit</ThingDef>
+    </descriptionHyperlinks>
+
+    <thingClass>Building</thingClass>
+    <category>Building</category>
+    
+    <graphicData>
+      <texPath>Things/Building/Furniture/WallLamp/WallLamp</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawOffsetNorth>(0,0,0.9)</drawOffsetNorth>
+      <drawOffsetSouth>(0,0,-0.9)</drawOffsetSouth>
+      <drawOffsetWest>(-0.9,0,0)</drawOffsetWest>
+      <drawOffsetEast>(0.9,0,0)</drawOffsetEast>
+      <damageData>
+        <enabled>false</enabled>
+      </damageData>
+    </graphicData>
+    
+    <uiOrder>2401</uiOrder>
+    <uiIconPath>Things/Building/Furniture/WallLamp/WallLamp_MenuIcon</uiIconPath>
+    <altitudeLayer>BuildingOnTop</altitudeLayer>
+    <rotatable>true</rotatable>
+    <passability>Standable</passability>
+    <selectable>true</selectable>
+    <noRightClickDraftAttack>true</noRightClickDraftAttack>
+
+    <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
+
+    <statBases>
+      <WorkToBuild>450</WorkToBuild>
+      <MaxHitPoints>30</MaxHitPoints>
+      <Mass>1</Mass>
+      <Flammability>0.1</Flammability>
+    </statBases>
+
+    <costList>
+      <VV_HoneyWaterFruit>1</VV_HoneyWaterFruit>
+      <VV_Viviwax>25</VV_Viviwax>
+    </costList>
+
+    <fillPercent>0.1</fillPercent>
+    <pathCost>0</pathCost>
+    <terrainAffordanceNeeded IsNull="True" />
+
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+    <building>
+      <isEdifice>false</isEdifice>
+      <isAttachment>true</isAttachment>
+    </building>
+
+    <placeWorkers>
+      <li>PlaceWorker_GlowRadius</li>
+      <li>Placeworker_AttachedToWall</li>
+    </placeWorkers>
+    <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+
+    <comps>
+      <li Class="VVRace.CompProperties_Mana">
+        <manaCapacity>30</manaCapacity>
+
+        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
+          <mana>15</mana>
+        </manaConsumeRule>
+        <manaAbsorbPerDay>30</manaAbsorbPerDay>
+      </li>
+
+      <li Class="CompProperties_Glower">
+        <compClass>VVRace.CompManaGlower</compClass>
+        <glowRadius>11</glowRadius>
+        <glowColor>(255,255,245)</glowColor>
+      </li>
+    </comps>
+
+    <thingCategories>
+      <li>VV_BuildingsVivi</li>
+    </thingCategories>
+
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <minifiedDrawOffset>(0, 0, 0.2)</minifiedDrawOffset>
+    <overrideMinifiedRot>North</overrideMinifiedRot>
+
+    <designationCategory>VV_Bulidings</designationCategory>
+    <designationHotKey>Misc4</designationHotKey>
+
+    <researchPrerequisites>
+      <li>VV_ArcaneBotany</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!-- 마나 방출기 -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>VV_ManaEmitter</defName>
+    <label>mana emitter</label>
+    <description>A device that extracts inactive mana contained in mana fertilizer and converts it into environment mana. When mana fertilizer is inserted, it slowly transforms it into environment mana and disperses it for use nearby.
+\nIts conversion efficiency is low, but it's useful when mana production is insufficient or in need of an emergency supply, making it an essential device used by the Vivi when establishing a hive.</description>
+
+    <thingClass>VVRace.ManaEmitter</thingClass>
+    <tickerType>Normal</tickerType>
+
+    <graphicData>
+      <texPath>Things/Building/VV_ManaEmitter</texPath>
+      <graphicClass>Graphic_Random</graphicClass>
+      <shaderType>Transparent</shaderType>
+      <drawSize>(2.0,2.0)</drawSize>
+      <drawRotated>false</drawRotated>
+      <damageData>
+        <rect>(0.05,0.1,0.9,0.9)</rect>
+      </damageData>
+      <shadowData>
+        <volume>(0.75, 0.35, 0.33)</volume>
+      </shadowData>
+    </graphicData>
+
+    <uiOrder>2402</uiOrder>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <useHitPoints>True</useHitPoints>
+    <fillPercent>0.4</fillPercent>
+    <pathCost>50</pathCost>
+    <statBases>
+      <Mass>20</Mass>
+      <WorkToBuild>4500</WorkToBuild>
+      <MaxHitPoints>100</MaxHitPoints>
+      <Flammability>0.5</Flammability>
+    </statBases>
+    <size>(1,1)</size>
+    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+
+    <thingCategories>
+      <li>VV_BuildingsVivi</li>
+    </thingCategories>
+    <minifiedDef>MinifiedThing</minifiedDef>
+
+    <designationCategory>VV_Bulidings</designationCategory>
+    <designationHotKey>Misc5</designationHotKey>
+    <canOverlapZones>false</canOverlapZones>
+    
+    <costList>
+      <VV_Viviwax>50</VV_Viviwax>
+      <WoodLog>30</WoodLog>
+      <VV_Fertilizer>40</VV_Fertilizer>
+    </costList>
+
+    <comps>
+      <li Class="VVRace.CompProperties_Mana">
+        <manaGenerateRule Class="VVRace.ManaFluxRule_Refuelable">
+          <mana>500</mana>
+          <fuelDef>VV_Fertilizer</fuelDef>
+        </manaGenerateRule>
+      </li>
+
+      <li Class="CompProperties_Refuelable">
+        <fuelLabel>Mana Fertilizer</fuelLabel>
+        <fuelGizmoLabel>Mana Fertilizer</fuelGizmoLabel>
+        <fuelConsumptionRate>8</fuelConsumptionRate>
+        <fuelCapacity>40</fuelCapacity>
+        <initialFuelPercent>1</initialFuelPercent>
+        <fuelMultiplier>1</fuelMultiplier>
+        <fuelFilter>
+          <thingDefs>
+            <li>VV_Fertilizer</li>
+          </thingDefs>
+        </fuelFilter>
+        <showFuelGizmo>true</showFuelGizmo>
+        <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+        <externalTicking>false</externalTicking>
+      </li>
+    </comps>
+
+    <researchPrerequisites>
+      <li>VV_ArcanePlantSowing</li>
+    </researchPrerequisites>
+  </ThingDef>
+
   <!-- 마법 식물 화분 -->
   <ThingDef ParentName="BuildingBase">
     <defName>VV_ArcanePlantPot</defName>
     <label>arcane plant pot</label>
     <description>a pot that can hold arcane plants. It is typically used to place arcane plants indoors or in locations where normal plants can't grow.
 \nIf an arcane plant in the pot is attacked, the pot will absorb the damage first unless it's an flame damage. If the pot is destroyed, the arcane plant will automatically be packed up.</description>
-    <descriptionHyperlinks>
-    </descriptionHyperlinks>
+
     <thingClass>VVRace.ArcanePlantPot</thingClass>
     
     <graphicData>
@@ -25,7 +204,7 @@
       </damageData>
     </graphicData>
 
-    <uiOrder>2401</uiOrder>
+    <uiOrder>2403</uiOrder>
     <uiIconScale>1</uiIconScale>
     <uiIconOffset>(0, -0.1)</uiIconOffset>
     <altitudeLayer>LowPlant</altitudeLayer>
@@ -80,7 +259,9 @@
     <description>a large pot used for cultivating arcane seedlings. It can hold a large amount of fertilizer and automatically manages the nutrient levels of the seedlings on the farm with high efficiency.
 \nGrown arcane plants can also be planted in the cultivation bed, making it useful as a large pot for planting multiple arcane plants indoors at once.</description>
     <descriptionHyperlinks>
+      <ThingDef>VV_LivingLeaf</ThingDef>
     </descriptionHyperlinks>
+
     <thingClass>VVRace.ArcaneSeedlingFarm</thingClass>
     <tickerType>Normal</tickerType>
     
@@ -99,7 +280,7 @@
       </damageData>
     </graphicData>
 
-    <uiOrder>2402</uiOrder>
+    <uiOrder>2404</uiOrder>
     <uiIconScale>1</uiIconScale>
     <altitudeLayer>LowPlant</altitudeLayer>
     <passability>Standable</passability>
@@ -119,9 +300,9 @@
       <li>Woody</li>
       <li>Stony</li>
     </stuffCategories>
-    <costStuffCount>200</costStuffCount>
+    <costStuffCount>180</costStuffCount>
     <costList>
-      <VV_LivingLeaf>10</VV_LivingLeaf>
+      <VV_LivingLeaf>20</VV_LivingLeaf>
       <VV_Fertilizer>60</VV_Fertilizer>
     </costList>
 
@@ -153,96 +334,11 @@
     </building>
 
     <designationCategory>VV_Bulidings</designationCategory>
-    <designationHotKey>Misc8</designationHotKey>
+    <designationHotKey>Misc7</designationHotKey>
     <canOverlapZones>false</canOverlapZones>
 
     <researchPrerequisites>
       <li>VV_ArcaneBotany</li>
-    </researchPrerequisites>
-  </ThingDef>
-
-  <!-- 마나 방출기 -->
-  <ThingDef ParentName="BuildingBase">
-    <defName>VV_ManaEmitter</defName>
-    <label>mana emitter</label>
-    <description>A device that extracts inactive mana contained in mana fertilizer and converts it into environment mana. When mana fertilizer is inserted, it slowly transforms it into environment mana and disperses it for use nearby.
-\nIts conversion efficiency is low, but it's useful when mana production is insufficient or in need of an emergency supply, making it an essential device used by the Vivi when establishing a hive.</description>
-
-    <thingClass>VVRace.ManaEmitter</thingClass>
-    <tickerType>Normal</tickerType>
-
-    <graphicData>
-      <texPath>Things/Building/VV_ManaEmitter</texPath>
-      <graphicClass>Graphic_Random</graphicClass>
-      <shaderType>Transparent</shaderType>
-      <drawSize>(2.0,2.0)</drawSize>
-      <drawRotated>false</drawRotated>
-      <damageData>
-        <rect>(0.05,0.1,0.9,0.9)</rect>
-      </damageData>
-      <shadowData>
-        <volume>(0.75, 0.35, 0.33)</volume>
-      </shadowData>
-    </graphicData>
-
-    <uiOrder>2403</uiOrder>
-    <altitudeLayer>Building</altitudeLayer>
-    <passability>PassThroughOnly</passability>
-    <useHitPoints>True</useHitPoints>
-    <fillPercent>0.4</fillPercent>
-    <pathCost>50</pathCost>
-    <statBases>
-      <Mass>20</Mass>
-      <WorkToBuild>4500</WorkToBuild>
-      <MaxHitPoints>100</MaxHitPoints>
-      <Flammability>0.5</Flammability>
-    </statBases>
-    <size>(1,1)</size>
-    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
-
-    <thingCategories>
-      <li>VV_BuildingsVivi</li>
-    </thingCategories>
-    <minifiedDef>MinifiedThing</minifiedDef>
-
-    <designationCategory>VV_Bulidings</designationCategory>
-    <designationHotKey>Misc7</designationHotKey>
-    <canOverlapZones>false</canOverlapZones>
-    
-    <costList>
-      <VV_Viviwax>50</VV_Viviwax>
-      <WoodLog>30</WoodLog>
-      <VV_Fertilizer>40</VV_Fertilizer>
-    </costList>
-
-    <comps>
-      <li Class="VVRace.CompProperties_Mana">
-        <manaGenerateRule Class="VVRace.ManaFluxRule_Refuelable">
-          <mana>500</mana>
-          <fuelDef>VV_Fertilizer</fuelDef>
-        </manaGenerateRule>
-      </li>
-
-      <li Class="CompProperties_Refuelable">
-        <fuelLabel>Mana Fertilizer</fuelLabel>
-        <fuelGizmoLabel>Mana Fertilizer</fuelGizmoLabel>
-        <fuelConsumptionRate>8</fuelConsumptionRate>
-        <fuelCapacity>40</fuelCapacity>
-        <initialFuelPercent>1</initialFuelPercent>
-        <fuelMultiplier>1</fuelMultiplier>
-        <fuelFilter>
-          <thingDefs>
-            <li>VV_Fertilizer</li>
-          </thingDefs>
-        </fuelFilter>
-        <showFuelGizmo>true</showFuelGizmo>
-        <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
-        <externalTicking>false</externalTicking>
-      </li>
-    </comps>
-
-    <researchPrerequisites>
-      <li>VV_ArcanePlantSowing</li>
     </researchPrerequisites>
   </ThingDef>
 
@@ -251,6 +347,9 @@
     <defName>VV_ShockNetTrap</defName>
     <label>shock net trap</label>
     <description>An electrified net trap. Stepping on it releases a small EMP that temporarily disables machines, while living targets are briefly stunned by a pulse of current. It must stay powered, and although it can be reused after triggering, it requires time to recharge.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_SparklingPetal</ThingDef>
+    </descriptionHyperlinks>
 
     <thingClass>VVRace.ShockNetTrap</thingClass>
     <tickerType>Normal</tickerType>
@@ -264,7 +363,7 @@
       <drawSize>2.2</drawSize>
     </graphicData>
 
-    <uiOrder>2404</uiOrder>
+    <uiOrder>2500</uiOrder>
     <altitudeLayer>Building</altitudeLayer>
     <useHitPoints>True</useHitPoints>
     <statBases>
@@ -303,7 +402,7 @@
     <minifiedDef>MinifiedThing</minifiedDef>
 
     <designationCategory>VV_Bulidings</designationCategory>
-    <designationHotKey>Misc8</designationHotKey>
+    <designationHotKey>Misc11</designationHotKey>
 
     <building>
       <isTrap>true</isTrap>

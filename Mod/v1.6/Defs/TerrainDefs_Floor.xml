@@ -15,7 +15,7 @@
     <pathCost>4</pathCost>
     <uiOrder>2020</uiOrder>
     <statBases>
-      <WorkToBuild>200</WorkToBuild>
+      <WorkToBuild>50</WorkToBuild>
       <Cleanliness>-0.3</Cleanliness>
       <Flammability>0.22</Flammability>
     </statBases>
@@ -52,7 +52,7 @@
 
     <uiOrder>2021</uiOrder>
     <statBases>
-      <WorkToBuild>200</WorkToBuild>
+      <WorkToBuild>400</WorkToBuild>
       <Beauty>1</Beauty>
       <CleaningTimeFactor>0.7</CleaningTimeFactor>
       <FilthMultiplier>0.9</FilthMultiplier>
@@ -67,7 +67,7 @@
 
     <designationCategory>VV_Bulidings</designationCategory>
     <designationHotKey>Misc2</designationHotKey>
-    <constructionSkillPrerequisite>3</constructionSkillPrerequisite>
+    <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
 
     <researchPrerequisites>
       <li>VV_BasicInfra</li>
@@ -87,7 +87,7 @@
   <isPaintable>true</isPaintable>
   <burnedDef>BurnedWoodPlankFloor</burnedDef>
 
-  <uiOrder>2050</uiOrder>
+  <uiOrder>2022</uiOrder>
   <statBases>
     <WorkToBuild>2400</WorkToBuild>
     <Beauty>1</Beauty>

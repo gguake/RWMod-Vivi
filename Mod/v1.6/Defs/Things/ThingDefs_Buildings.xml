@@ -55,7 +55,6 @@
       <ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
     </building>
     <designationCategory>VV_Bulidings</designationCategory>
-    <designationHotKey>Misc3</designationHotKey>
 
     <surfaceType>Item</surfaceType>
     <canOverlapZones>false</canOverlapZones>
@@ -250,7 +249,6 @@
     </statBases>
     <size>(2,1)</size>
     <designationCategory>VV_Bulidings</designationCategory>
-    <designationHotKey>Misc4</designationHotKey>
     <passability>PassThroughOnly</passability>
     <pathCost>50</pathCost>
     <hasInteractionCell>True</hasInteractionCell>
@@ -330,7 +328,7 @@
     </statBases>
     <size>(2,2)</size>
     <designationCategory>VV_Bulidings</designationCategory>
-    <designationHotKey>Misc5</designationHotKey>
+    
     <passability>PassThroughOnly</passability>
     <pathCost>50</pathCost>
     <hasInteractionCell>True</hasInteractionCell>

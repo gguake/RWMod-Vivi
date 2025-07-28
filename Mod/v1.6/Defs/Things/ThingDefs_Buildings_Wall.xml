@@ -40,7 +40,7 @@
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
     
     <designationCategory>VV_Bulidings</designationCategory>
-    <designationHotKey>Misc2</designationHotKey>
+    <designationHotKey>Misc3</designationHotKey>
     <researchPrerequisites>
       <li>VV_BasicInfra</li>
     </researchPrerequisites>

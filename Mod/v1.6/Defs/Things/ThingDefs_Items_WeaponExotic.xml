@@ -17,7 +17,7 @@
     <statBases>
       <WorkToMake>50000</WorkToMake>
       <Mass>4</Mass>
-      <VV_MeleeWeapon_ManaCost>20</VV_MeleeWeapon_ManaCost>
+      <VV_MeleeWeapon_ManaCost>10</VV_MeleeWeapon_ManaCost>
     </statBases>
     <equippedStatOffsets>
       <MoveSpeed>-0.5</MoveSpeed>

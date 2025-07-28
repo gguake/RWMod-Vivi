@@ -100,7 +100,7 @@
     <fillPercent>0.5</fillPercent>
     <designationCategory>VV_Bulidings</designationCategory>
     <designationHotKey>Misc12</designationHotKey>
-    <uiOrder>2500</uiOrder>
+    <uiOrder>2501</uiOrder>
     <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
 
     <statBases>

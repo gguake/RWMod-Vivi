@@ -6,6 +6,7 @@
     <label>waterdrops</label>
     <description>a arcane flower shaped like a water droplet that absorbs surrounding water and converts it into mana. It can also be planted on water, and the more adjacent water tiles there are, the more mana it produces. When it detects a nearby fire, it converts stored mana into water and ejects it to extinguish the fire.</description>
     <descriptionHyperlinks>
+      <ThingDef>VV_HoneyWaterFruit</ThingDef>
       <ThingDef>VV_CoolingPetal</ThingDef>
       <ThingDef>VV_PerfumingPetal</ThingDef>
     </descriptionHyperlinks>
@@ -90,6 +91,12 @@
         <compClass>VVRace.CompManaGlower</compClass>
         <glowRadius>3</glowRadius>
         <glowColor>(90,220,255)</glowColor>
+      </li>
+
+      <li Class="VVRace.CompProperties_WaterdropFruit">
+        <fruitDef>VV_HoneyWaterFruit</fruitDef>
+        <intervalDays>3.5~8.5</intervalDays>
+        <count>3~6</count>
       </li>
     </comps>
     

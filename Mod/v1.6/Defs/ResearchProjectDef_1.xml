@@ -56,7 +56,7 @@
     <defName>VV_AdvancedApparels</defName>
     <label>vivi advanced apparels</label>
     <description>Make advanced clothing for the Vivis.</description>
-    <baseCost>600</baseCost>
+    <baseCost>500</baseCost>
     <researchViewX>1</researchViewX>
     <researchViewY>0</researchViewY>
     <prerequisites>
@@ -72,7 +72,7 @@
     <defName>VV_Weaponry</defName>
     <label>vivi weaponry</label>
     <description>Make traditional weapons used by the Vivis. These weapons can only be used by vivis.</description>
-    <baseCost>600</baseCost>
+    <baseCost>500</baseCost>
     <researchViewX>0</researchViewX>
     <researchViewY>2.1</researchViewY>
     <prerequisites>
@@ -143,7 +143,7 @@
     <defName>VV_AdvancedGathering</defName>
     <label>advanced gathering</label>
     <description>Harvest propolis from trees and process it to refine neutroamine and herbs.</description>
-    <baseCost>900</baseCost>
+    <baseCost>800</baseCost>
     <researchViewX>2</researchViewX>
     <researchViewY>0.7</researchViewY>
     <prerequisites>

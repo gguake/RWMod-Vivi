@@ -24,7 +24,7 @@
         <_texBScrollSpeed>-0.1</_texBScrollSpeed>
         <_texAScaleDist>0.5</_texAScaleDist>
         <_DistortionScale>0.5</_DistortionScale>
-        <_Intensity>3</_Intensity>
+        <_Intensity>1</_Intensity>
       </shaderParameters>
       <drawSize>(1.8, 1.8)</drawSize>
     </graphicData>

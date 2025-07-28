@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
 
-<VV_HoneyNeed.label>꿀 의존성</VV_HoneyNeed.label>
-<VV_HoneyNeed.description>유전적인 요인으로 꿀에 의존합니다 주기적인 꿀 섭취 없이는 신체가 건강한 상태를 유지할 수 없으며, 건강이 점점 약화됩니다.\n\n3세 이후부터 적용됩니다.</VV_HoneyNeed.description>
+<VV_HoneyNeed.label>과당 의존성</VV_HoneyNeed.label>
+<VV_HoneyNeed.description>유전적인 요인으로 과당에 의존합니다 주기적인 과당 섭취 없이는 신체가 건강한 상태를 유지할 수 없으며, 건강이 점점 약화됩니다.\n\n3세 이후부터 적용됩니다.</VV_HoneyNeed.description>
 <VV_HoneyNeed.stages.deficiency.label>결핍</VV_HoneyNeed.stages.deficiency.label>
-<VV_HoneyNeed.stages.2.overrideLabel>치명적인 꿀 결핍</VV_HoneyNeed.stages.2.overrideLabel>
+<VV_HoneyNeed.stages.2.overrideLabel>치명적인 과당 결핍</VV_HoneyNeed.stages.2.overrideLabel>
 
 </LanguageData>
