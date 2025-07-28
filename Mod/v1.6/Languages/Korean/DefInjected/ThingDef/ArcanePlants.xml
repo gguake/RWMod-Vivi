@@ -24,7 +24,7 @@
 <!-- Productive -->
 <VV_Waterdrops.label>물방울꽃</VV_Waterdrops.label>
 <VV_Waterdrops.description>물방울같은 모양을 가진 마법 꽃으로 주변의 물을 흡수해 마나로 변환합니다. 물 위에도 심을 수 있으며 인접한 물 타일이 많을수록 더 많은 마나를 생산합니다. 가까운 화재를 감지하면 주변으로 물을 순간적으로 방출해 화재를 진압합니다.
-\n주기적으로 맛있는 물방울 열매가 열려 완전히 익으면 바닥에 떨어지며 열매는 먹거나 장식으로 사용할 수 있습니다.</VV_Waterdrops.description>
+\n주기적으로 맛있는 꿀물 열매가 열려 완전히 익으면 바닥에 떨어지며, 열매는 먹거나 장식으로 사용할 수 있습니다.</VV_Waterdrops.description>
 
 <VV_Radiantflower.label>빛바라기</VV_Radiantflower.label>
 <VV_Radiantflower.description>해바라기를 닮은 마법 꽃으로 태양광을 마나로 변환합니다. 지붕으로 막혀 태양광을 받을 수 없는 환경에서는 마나를 소모해 작물이 자랄수 있는 강한 빛을 주변에 발산합니다.</VV_Radiantflower.description>

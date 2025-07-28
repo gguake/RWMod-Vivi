@@ -4,7 +4,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VV_WaterdropLamp</defName>
     <label>waterdrop lamp</label>
-    <description>.</description>
+    <description>a wall lamp decoration shaped like a Waterdrops flower. It emits light and illuminates the surroundings when it absorbs a small amount of environment mana.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_HoneyWaterFruit</ThingDef>
     </descriptionHyperlinks>
