@@ -71,7 +71,7 @@ namespace VVRace
                 RefuelableComp.ConsumeFuel(rawHoneyAmount);
 
                 _filteredHoneyAmount += rawHoneyAmount * FilterEfficiencyRatio;
-                if (_filteredHoneyAmount >= 1)
+                if (_filteredHoneyAmount >= VVThingDefOf.VV_FilteredHoney.stackLimit || RefuelableComp.Fuel < 1f)
                 {
                     var stackCount = Mathf.Clamp((int)_filteredHoneyAmount, 1, VVThingDefOf.VV_FilteredHoney.stackLimit);
 
