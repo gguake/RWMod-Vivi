@@ -497,12 +497,13 @@
   <ThingDef ParentName="ResourceBase">
     <defName>VV_HoneyWaterFruit</defName>
     <label>honeywater fruit</label>
-    <description>a droplet-shaped fruit that periodically grows on Waterdrops. Resembling the flower itself, it has a translucent thin skin filled with fructose-rich juice.
+    <description>a droplet-shaped fruit that periodically grows on Waterdrops. Resembling the shape of a waterdrops flower, it has a translucent thin skin filled with fructose-rich juice, making it a great snack for the vivi.
 It's extremely delicate and easily damaged, making it unsuitable for cooking, but it's tasty when eaten raw and can be preserved for a long time if kept intact.
 When infused with a small amount of mana, it glows - so the Vivi sometimes preserve the emptied fruits and use them as light sources.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_Waterdrops</ThingDef>
     </descriptionHyperlinks>
+    <tickerType>Rare</tickerType>
 
     <graphicData>
       <texPath>Things/Item/VV_Petal</texPath>

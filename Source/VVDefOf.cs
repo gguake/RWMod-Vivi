@@ -129,8 +129,6 @@ namespace VVRace
 
         public static ThingDef VV_SteamProjectile;
         public static ThingDef VV_ExplosiveSnowman;
-
-        public static ThingDef VV_WaterdropFruit;
     }
 
     [DefOf]

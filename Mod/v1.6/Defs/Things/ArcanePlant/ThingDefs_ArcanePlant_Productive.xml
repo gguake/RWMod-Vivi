@@ -56,7 +56,7 @@
               <manaPerAdjacentWater>150</manaPerAdjacentWater>
             </li>
             <li Class="VVRace.ManaFluxRule_WeatherRainy">
-              <mana>200</mana>
+              <mana>450</mana>
             </li>
           </rules>
         </manaGenerateRule>

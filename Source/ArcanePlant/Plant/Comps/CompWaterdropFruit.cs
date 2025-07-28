@@ -31,7 +31,8 @@ namespace VVRace
 
         public override void PostPostMake()
         {
-            _remainingTicks = Mathf.CeilToInt(Props.intervalDays.RandomInRange * 60000f);
+            _nextMatureTicks = Mathf.CeilToInt(Props.intervalDays.RandomInRange * 60000f);
+            _remainingTicks = _nextMatureTicks + _remainingTicks;
         }
 
         public override void CompTickInterval(int delta)
@@ -41,17 +42,17 @@ namespace VVRace
                 if (Plant.ManaComp.Active)
                 {
                     _remainingTicks -= delta;
-                    if (_remainingTicks < 0)
+                    if (_remainingTicks <= 0)
                     {
                         _nextMatureTicks = Mathf.CeilToInt(Props.intervalDays.RandomInRange * 60000f);
                         _remainingTicks = _nextMatureTicks + _remainingTicks;
-                    }
 
-                    var thing = ThingMaker.MakeThing(Props.fruitDef);
-                    thing.stackCount = Props.count.RandomInRange;
-                    if (!GenPlace.TryPlaceThing(thing, parent.Position, parent.Map, ThingPlaceMode.Near))
-                    {
-                        thing.Destroy();
+                        var thing = ThingMaker.MakeThing(Props.fruitDef);
+                        thing.stackCount = Props.count.RandomInRange;
+                        if (!GenPlace.TryPlaceThing(thing, parent.Position, parent.Map, ThingPlaceMode.Near))
+                        {
+                            thing.Destroy();
+                        }
                     }
                 }
             }
@@ -59,7 +60,7 @@ namespace VVRace
 
         public override string CompInspectStringExtra()
         {
-            return $"{Props.fruitDef.LabelCap}: {Mathf.Clamp01(1f - _remainingTicks / _nextMatureTicks).ToStringPercent()}";
+            return $"{Props.fruitDef.LabelCap}: {Mathf.Clamp01(1f - (float)_remainingTicks / _nextMatureTicks).ToStringPercent()}";
         }
     }
 }

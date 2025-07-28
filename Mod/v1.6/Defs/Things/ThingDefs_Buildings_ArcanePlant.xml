@@ -75,7 +75,7 @@
       <li Class="CompProperties_Glower">
         <compClass>VVRace.CompManaGlower</compClass>
         <glowRadius>11</glowRadius>
-        <glowColor>(255,255,245)</glowColor>
+        <glowColor>(190,240,255)</glowColor>
       </li>
     </comps>
 
@@ -269,8 +269,8 @@
       <texPath>Things/Building/VV_SeedlingFarm</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <shaderType>CutoutComplex</shaderType>
-      <drawSize>(4.25, 4.25)</drawSize>
-      <drawOffset>(0, 0, -0.06)</drawOffset>
+      <drawSize>(4.2, 4.2)</drawSize>
+      <drawOffset>(0, 0, -0.09)</drawOffset>
       <shadowData>
         <volume>(0.55, 0.35, 0.3)</volume>
         <offset>(0, 0, -0.28)</offset>
