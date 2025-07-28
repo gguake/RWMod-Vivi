@@ -28,7 +28,7 @@
     </statBases>
 
     <costList>
-      <VV_SparklingPetal>20</VV_SparklingPetal>
+      <VV_SparklingPetal>30</VV_SparklingPetal>
     </costList>
 
     <comps>
@@ -120,16 +120,16 @@
     </statBases>
 
     <costList>
-      <VV_SparklingPetal>20</VV_SparklingPetal>
+      <VV_SparklingPetal>30</VV_SparklingPetal>
     </costList>
 
     <comps>
       <li Class="VVRace.CompProperties_Mana">
-        <manaCapacity>1000</manaCapacity>
+        <manaCapacity>1500</manaCapacity>
         <manaGenerateRule Class="VVRace.ManaFluxRule_Power">
-          <powerManaRatio>1.1</powerManaRatio>
+          <powerManaRatio>0.2</powerManaRatio>
           <min>0</min>
-          <max>750</max>
+          <max>500</max>
         </manaGenerateRule>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">

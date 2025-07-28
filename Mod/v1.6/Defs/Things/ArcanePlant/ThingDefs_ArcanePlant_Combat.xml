@@ -26,14 +26,14 @@
 
     <fillPercent>0.25</fillPercent>
     <costList>
-      <VV_LivingLeaf>20</VV_LivingLeaf>
+      <VV_LivingLeaf>30</VV_LivingLeaf>
     </costList>
 
     <comps>
       <li Class="VVRace.CompProperties_Mana">
-        <manaCapacity>900</manaCapacity>
+        <manaCapacity>1000</manaCapacity>
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>20</mana>
+          <mana>25</mana>
         </manaConsumeRule>
 
         <manaAbsorbPerDay>600</manaAbsorbPerDay>
@@ -95,7 +95,7 @@
       <DeteriorationRate>0</DeteriorationRate>
       <Mass>40</Mass>
       <Flammability>0</Flammability>
-      <VV_RangedWeapon_ManaCost>20</VV_RangedWeapon_ManaCost>
+      <VV_RangedWeapon_ManaCost>15</VV_RangedWeapon_ManaCost>
     </statBases>
 
     <verbs>
@@ -150,17 +150,17 @@
     <fillPercent>0.8</fillPercent>
 
     <costList>
-      <VV_LivingLeaf>20</VV_LivingLeaf>
+      <VV_LivingLeaf>30</VV_LivingLeaf>
     </costList>
 
     <comps>
       <li Class="VVRace.CompProperties_Mana">
-        <manaCapacity>1000</manaCapacity>
+        <manaCapacity>1500</manaCapacity>
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>100</mana>
+          <mana>75</mana>
         </manaConsumeRule>
 
-        <manaAbsorbPerDay>600</manaAbsorbPerDay>
+        <manaAbsorbPerDay>750</manaAbsorbPerDay>
       </li>
     </comps>
 
@@ -224,12 +224,12 @@
 
     <fillPercent>0.25</fillPercent>
     <costList>
-      <VV_LivingLeaf>20</VV_LivingLeaf>
+      <VV_LivingLeaf>30</VV_LivingLeaf>
     </costList>
 
     <comps>
       <li Class="VVRace.CompProperties_Mana">
-        <manaCapacity>800</manaCapacity>
+        <manaCapacity>900</manaCapacity>
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
           <mana>30</mana>
         </manaConsumeRule>
@@ -293,7 +293,7 @@
       <DeteriorationRate>0</DeteriorationRate>
       <Mass>40</Mass>
       <Flammability>0</Flammability>
-      <VV_RangedWeapon_ManaCost>50</VV_RangedWeapon_ManaCost>
+      <VV_RangedWeapon_ManaCost>45</VV_RangedWeapon_ManaCost>
     </statBases>
 
     <verbs>
@@ -301,7 +301,7 @@
         <verbClass>VVRace.Verb_ShootWithMana</verbClass>
         <defaultProjectile>VV_Bullet_Corn</defaultProjectile>
         <warmupTime>0</warmupTime>
-        <range>39.9</range>
+        <range>40.9</range>
         <forcedMissRadius>2.6</forcedMissRadius>
         <forcedMissEvenDispersal>true</forcedMissEvenDispersal>
         <soundCast>InfernoCannon_Fire</soundCast>

@@ -30,11 +30,11 @@
     <uiIconOffset>(0, -0.1)</uiIconOffset>
     <altitudeLayer>LowPlant</altitudeLayer>
     <passability>PassThroughOnly</passability>
-    <fillPercent>0.25</fillPercent>
+    <fillPercent>0.4</fillPercent>
     <pathCost>14</pathCost>
 
     <statBases>
-      <MaxHitPoints>120</MaxHitPoints>
+      <MaxHitPoints>270</MaxHitPoints>
       <WorkToBuild>1200</WorkToBuild>
       <Mass>2</Mass>
       <Flammability>1.0</Flammability>
@@ -106,8 +106,8 @@
     <pathCost>14</pathCost>
 
     <statBases>
-      <MaxHitPoints>600</MaxHitPoints>
-      <WorkToBuild>8000</WorkToBuild>
+      <MaxHitPoints>800</MaxHitPoints>
+      <WorkToBuild>9000</WorkToBuild>
       <Mass>20</Mass>
       <Flammability>1.0</Flammability>
     </statBases>

@@ -26,18 +26,18 @@
     </statBases>
 
     <costList>
-      <VV_HeatingPetal>20</VV_HeatingPetal>
+      <VV_HeatingPetal>30</VV_HeatingPetal>
     </costList>
 
     <comps>
       <li Class="VVRace.CompProperties_Mana">
         <manaCapacity>700</manaCapacity>
         <manaGenerateRule Class="VVRace.ManaFluxRule_Temperature">
-          <activeTemperatureRange>0~200</activeTemperatureRange>
-          <manaFromTemperatureRange>0~2000</manaFromTemperatureRange>
+          <activeTemperatureRange>20~220</activeTemperatureRange>
+          <manaFromTemperatureRange>0~1500</manaFromTemperatureRange>
         </manaGenerateRule>
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>250</mana>
+          <mana>200</mana>
         </manaConsumeRule>
         <manaAbsorbPerDay>400</manaAbsorbPerDay>
       </li>
@@ -108,7 +108,7 @@
     </statBases>
 
     <costList>
-      <VV_CoolingPetal>20</VV_CoolingPetal>
+      <VV_CoolingPetal>30</VV_CoolingPetal>
     </costList>
 
     <comps>
@@ -117,18 +117,18 @@
         <manaGenerateRule Class="VVRace.ManaFluxRule_CompositeSum">
           <rules>
             <li Class="VVRace.ManaFluxRule_Temperature">
-              <activeTemperatureRange>-100~-10</activeTemperatureRange>
-              <manaFromTemperatureRange>0~2000</manaFromTemperatureRange>
+              <activeTemperatureRange>-110~-10</activeTemperatureRange>
+              <manaFromTemperatureRange>0~1000</manaFromTemperatureRange>
               <manaLerpReversed>true</manaLerpReversed>
             </li>
             <li Class="VVRace.ManaFluxRule_WeatherSnowy">
               <disableIfRoofed>true</disableIfRoofed>
-              <mana>500</mana>
+              <mana>800</mana>
             </li>
           </rules>
         </manaGenerateRule>
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>300</mana>
+          <mana>250</mana>
         </manaConsumeRule>
         <manaAbsorbPerDay>450</manaAbsorbPerDay>
       </li>
