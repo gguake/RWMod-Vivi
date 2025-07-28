@@ -77,14 +77,15 @@
     
     <comps>
       <li Class="VVRace.CompProperties_Mana">
-        <manaGenerateRule Class="VVRace.ManaFluxRule_Random">
-          <min>137</min>
-          <max>274</max>
+        <manaGenerateRule Class="VVRace.ManaFluxRule_Everflower">
+          <ranges>
+            <li>0~200</li>
+            <li>200~400</li>
+            <li>400~800</li>
+            <li>800~1600</li>
+            <li>1600~3200</li>
+          </ranges>
         </manaGenerateRule>
-        <manaConsumeRule Class="VVRace.ManaFluxRule_Random">
-          <min>0</min>
-          <max>42</max>
-        </manaConsumeRule>
       </li>
 
       <li Class="VVRace.CompProperties_RepeatGatherable" />

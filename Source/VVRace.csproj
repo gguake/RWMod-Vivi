@@ -85,6 +85,7 @@
   <ItemGroup>
     <Compile Include="ArcanePlant\Buildings\ArcaneSeedlingFarm.cs" />
     <Compile Include="ArcanePlant\Buildings\ShockNetTrap.cs" />
+    <Compile Include="ArcanePlant\Mana\FluxRule\ManaFluxRule_Everflower.cs" />
     <Compile Include="ArcanePlant\Mana\FluxRule\ManaFluxRule_InVaccum.cs" />
     <Compile Include="Everflower\AI\JobDriver_DeliverPawnToEverflower.cs" />
     <Compile Include="Everflower\AI\JobGiver_DeliverPawnToEverflower.cs" />
