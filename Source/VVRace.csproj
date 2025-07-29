@@ -90,7 +90,6 @@
     <Compile Include="ArcanePlant\Plant\Comps\CompWaterdropFruit.cs" />
     <Compile Include="Everflower\AI\JobDriver_DeliverPawnToEverflower.cs" />
     <Compile Include="Everflower\AI\JobGiver_DeliverPawnToEverflower.cs" />
-    <Compile Include="Everflower\CompAbilityEffect_Fairyfication.cs" />
     <Compile Include="Everflower\CompEverflower.cs" />
     <Compile Include="Everflower\AI\JobGiver_TryTeleportEverflower.cs" />
     <Compile Include="Everflower\Ritual\RitualBehaviorWorker_Fairyfication.cs" />
@@ -125,7 +124,7 @@
     <Compile Include="ArcanePlant\ArcanePlantUtility.cs" />
     <Compile Include="ArcanePlant\Mana\Comps\CompManaFilthMaker.cs" />
     <Compile Include="ArcanePlant\Mana\Comps\CompManaShieldProjector.cs" />
-    <Compile Include="ArcanePlant\Buildings\Comps\CompProperties_LaunchableCustom.cs" />
+    <Compile Include="ArcanePlant\Buildings\Comps\CompLaunchableCustom.cs" />
     <Compile Include="ArcanePlant\Mana\FluxRule\ManaFluxRule_RadialPollution.cs" />
     <Compile Include="ArcanePlant\Mana\FluxRule\ManaFluxRule_Wind.cs" />
     <Compile Include="ArcanePlant\Plant\AI\WorkGiver_PlantArcaneSeed.cs" />
