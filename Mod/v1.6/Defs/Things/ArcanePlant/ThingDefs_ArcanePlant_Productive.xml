@@ -282,6 +282,10 @@
 
         <spawnEffecter>VV_PollenEmitting</spawnEffecter>
       </li>
+
+      <li Class="VVRace.CompProperties_SeedlingGrowthAccelerator">
+        <growthBonus>1.1</growthBonus>
+      </li>
     </comps>
 
     <modExtensions>

@@ -87,6 +87,7 @@
     <Compile Include="ArcanePlant\Buildings\ShockNetTrap.cs" />
     <Compile Include="ArcanePlant\Mana\FluxRule\ManaFluxRule_Everflower.cs" />
     <Compile Include="ArcanePlant\Mana\FluxRule\ManaFluxRule_InVaccum.cs" />
+    <Compile Include="ArcanePlant\Plant\Comps\CompSeedlingGrowthAccelerator.cs" />
     <Compile Include="ArcanePlant\Plant\Comps\CompWaterdropFruit.cs" />
     <Compile Include="Everflower\AI\JobDriver_DeliverPawnToEverflower.cs" />
     <Compile Include="Everflower\AI\JobGiver_DeliverPawnToEverflower.cs" />

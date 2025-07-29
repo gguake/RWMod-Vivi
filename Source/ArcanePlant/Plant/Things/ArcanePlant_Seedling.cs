@@ -39,6 +39,31 @@ namespace VVRace
 
         private ThingDef _seedDef;
 
+        public float GrowthBonusCached
+        {
+            get
+            {
+                if (_growthBonusCached == null)
+                {
+                    var growthBonus = 1f;
+                    foreach (var cell in GenAdjFast.AdjacentCellsCardinal(Position))
+                    {
+                        if (!cell.InBounds(Map)) { continue; }
+
+                        var accelerator = cell.GetFirstThingWithComp<CompSeedlingGrowthAccelerator>(Map);
+                        if (accelerator != null && accelerator.TryGetComp<CompSeedlingGrowthAccelerator>(out var comp))
+                        {
+                            growthBonus *= comp.Props.growthBonus;
+                        }
+                    }
+
+                    _growthBonusCached = growthBonus;
+                }
+                return _growthBonusCached.Value;
+            }
+        }
+        private float? _growthBonusCached;
+
         public float Growth
         {
             get => _growth;
@@ -57,7 +82,7 @@ namespace VVRace
         {
             get
             {
-                return Extension.dailyGrowth / 60000f * ((thingIDNumber % 30) + 85) / 100f;
+                return Extension.dailyGrowth / 60000f * ((thingIDNumber % 30) + 85) / 100f * GrowthBonusCached;
             }
         }
 
@@ -233,6 +258,11 @@ namespace VVRace
         {
             _seedDef = seedDef;
             _maturePlantDef = plantDef;
+        }
+
+        public void ResetGrowthBonusCache()
+        {
+            _growthBonusCached = null;
         }
     }
 }

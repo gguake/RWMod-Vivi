@@ -30,7 +30,7 @@
 <VV_Radiantflower.description>해바라기를 닮은 마법 꽃으로 태양광을 마나로 변환합니다. 지붕으로 막혀 태양광을 받을 수 없는 환경에서는 마나를 소모해 작물이 자랄수 있는 강한 빛을 주변에 발산합니다.</VV_Radiantflower.description>
 
 <VV_Richflower.label>풍년화</VV_Richflower.label>
-<VV_Richflower.description>커다란 꽃잎을 가진 마법꽃으로 주기적으로 꽃가루를 주변 바닥에 퍼뜨리며 꿀을 채집할때 많은 꿀을 얻을 수 있습니다. 토양의 비옥도에 비례해 마나를 생산하며 주변의 토양을 서서히 비옥화합니다.
+<VV_Richflower.description>커다란 꽃잎을 가진 마법꽃으로 주기적으로 꽃가루를 주변 바닥에 퍼뜨리며 꿀을 채집할때 많은 꿀을 얻을 수 있습니다. 토양의 비옥도에 비례해 마나를 생산하며 주변의 토양을 서서히 비옥화하며, 인접한 마법 식물 모종의 성장 속도를 10% 올립니다.
 \n콩뿌리개와 인접한 위치에 설치하면 콩뿌리개가 사격시 발사하는 콩의 위력을 소폭 증가시킵니다. 인접한 풍년화나 정화초가 여러개 있다면 효과가 중첩됩니다.</VV_Richflower.description>
 
 <VV_Purifimint.label>정화초</VV_Purifimint.label>
