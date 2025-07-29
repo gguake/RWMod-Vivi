@@ -151,23 +151,23 @@
 
     <comps>
       <li Class="VVRace.CompProperties_Mana">
-        <manaCapacity>400</manaCapacity>
+        <manaCapacity>500</manaCapacity>
 
         <manaGenerateRule Class="VVRace.ManaFluxRule_Sunlight">
-          <manaFromSunlightRange>0~1300</manaFromSunlightRange>
+          <manaFromSunlightRange>0~1600</manaFromSunlightRange>
         </manaGenerateRule>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_CompositeSum">
           <rules>
             <li Class="VVRace.ManaFluxRule_GlowerActive">
-              <mana>1050</mana>
+              <mana>1100</mana>
             </li>
             <li Class="VVRace.ManaFluxRule_Constant">
-              <mana>50</mana>
+              <mana>100</mana>
             </li>
           </rules>
         </manaConsumeRule>
-        <manaAbsorbPerDay>1400</manaAbsorbPerDay>
+        <manaAbsorbPerDay>1000</manaAbsorbPerDay>
       </li>
 
       <li Class="VVRace.CompProperties_RepeatGatherable" />
@@ -202,7 +202,7 @@
     <defName>VV_Richflower</defName>
     <label>richflower</label>
     <description>a arcane flower with large petals that periodically spreads pollen on the surrounding ground and yields a lot of honey when harvested.
-\nGenerates mana proportional to the soil's fertility and slowly enriches nearby soil.
+\nGenerates mana proportional to the soil's fertility and slowly enriches nearby soil and increases the growth speed of adjacent arcane plant seedlings by 10%.
 \nIf placed adjacent to a peashooter, it slightly increases the power of its peas when fired. If multiple richflowers or purifimints are adjacent, the effect stacks.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_PerfumingPetal</ThingDef>
@@ -229,22 +229,24 @@
 
     <comps>
       <li Class="VVRace.CompProperties_Mana">
+        <manaCapacity>300</manaCapacity>
+
         <manaGenerateRule Class="VVRace.ManaFluxRule_Fertility">
           <manaFromFertility>
             <points>
               <li>(0,0)</li>
               <li>(0.5,0)</li>
-              <li>(1.0,150)</li>
-              <li>(1.3,600)</li>
-              <li>(1.4,900)</li>
+              <li>(1.0,200)</li>
+              <li>(1.2,750)</li>
+              <li>(1.4,950)</li>
             </points>
           </manaFromFertility>
         </manaGenerateRule>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>300</mana>
+          <mana>350</mana>
         </manaConsumeRule>
-        <manaAbsorbPerDay>300</manaAbsorbPerDay>
+        <manaAbsorbPerDay>350</manaAbsorbPerDay>
       </li>
 
       <li Class="VVRace.CompProperties_ArcanePlantBulletOverride">
@@ -335,7 +337,7 @@
         <manaCapacity>300</manaCapacity>
 
         <manaGenerateRule Class="VVRace.ManaFluxRule_Refuelable">
-          <mana>800</mana>
+          <mana>900</mana>
           <fuelDef>Wastepack</fuelDef>
         </manaGenerateRule>
 
@@ -442,23 +444,23 @@
 
     <comps>
       <li Class="VVRace.CompProperties_Mana">
-        <manaCapacity>150</manaCapacity>
+        <manaCapacity>50</manaCapacity>
 
         <manaGenerateRule Class="VVRace.ManaFluxRule_TimeOfDay">
-          <mana>800</mana>
+          <mana>1050</mana>
           <timeOfDay>Night</timeOfDay>
           <alwaysIfVaccumBiome>true</alwaysIfVaccumBiome>
         </manaGenerateRule>
         
         <manaConsumeRule Class="VVRace.ManaFluxRule_CompositeSum">
           <rules>
-            <li Class="VVRace.ManaFluxRule_InVaccum">
-              <mana>400</mana>
-            </li>
             <li Class="VVRace.ManaFluxRule_TimeOfDay">
-              <mana>75</mana>
+              <mana>150</mana>
               <timeOfDay>Day</timeOfDay>
-          <alwaysIfVaccumBiome>true</alwaysIfVaccumBiome>
+              <alwaysIfVaccumBiome>true</alwaysIfVaccumBiome>
+            </li>
+            <li Class="VVRace.ManaFluxRule_InVaccum">
+              <mana>550</mana>
             </li>
           </rules>
         </manaConsumeRule>

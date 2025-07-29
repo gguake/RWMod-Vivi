@@ -95,7 +95,7 @@
       <DeteriorationRate>0</DeteriorationRate>
       <Mass>40</Mass>
       <Flammability>0</Flammability>
-      <VV_RangedWeapon_ManaCost>15</VV_RangedWeapon_ManaCost>
+      <VV_RangedWeapon_ManaCost>20</VV_RangedWeapon_ManaCost>
     </statBases>
 
     <verbs>
@@ -139,7 +139,7 @@
     <pathCostIgnoreRepeat>true</pathCostIgnoreRepeat>
 
     <statBases>
-      <MaxHitPoints>160</MaxHitPoints>
+      <MaxHitPoints>200</MaxHitPoints>
       <WorkToBuild>50000</WorkToBuild>
       <Flammability>0.7</Flammability>
     </statBases>
@@ -293,7 +293,7 @@
       <DeteriorationRate>0</DeteriorationRate>
       <Mass>40</Mass>
       <Flammability>0</Flammability>
-      <VV_RangedWeapon_ManaCost>45</VV_RangedWeapon_ManaCost>
+      <VV_RangedWeapon_ManaCost>50</VV_RangedWeapon_ManaCost>
     </statBases>
 
     <verbs>

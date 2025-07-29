@@ -303,7 +303,6 @@
     <costStuffCount>180</costStuffCount>
     <costList>
       <VV_LivingLeaf>20</VV_LivingLeaf>
-      <VV_Fertilizer>60</VV_Fertilizer>
     </costList>
 
     <comps>
@@ -314,7 +313,7 @@
         <fuelGizmoLabel>Mana Fertilizer</fuelGizmoLabel>
         <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
         <fuelCapacity>300</fuelCapacity>
-        <initialFuelPercent>0.2</initialFuelPercent>
+        <initialFuelPercent>0</initialFuelPercent>
         <fuelMultiplier>1</fuelMultiplier>
         <fuelFilter>
           <thingDefs>
