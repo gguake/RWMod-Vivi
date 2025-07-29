@@ -3,7 +3,7 @@
   <!-- 비비 수호자 코트 -->
   <ThingDef ParentName="ApparelMakeableBase">
     <defName>VV_GuardianCoat</defName>
-    <label>vivi guardian coat</label>
+    <label>vivi combat coat</label>
     <description>A very sturdy coat tailored from biostrands for the vivis primary frontline fighters. It looks like ordinary cloth, yet provides very high protection, and with superior materials can rival heavy heavy-armor suits.</description>
     <graphicData>
       <texPath>Things/Apparel/VV_GuardianCoat</texPath>
@@ -19,8 +19,8 @@
       <WorkToMake>50000</WorkToMake>
       <Mass>2.0</Mass>
       <StuffEffectMultiplierArmor>0.53</StuffEffectMultiplierArmor>
-      <StuffEffectMultiplierInsulation_Cold>0.75</StuffEffectMultiplierInsulation_Cold>
-      <StuffEffectMultiplierInsulation_Heat>0.75</StuffEffectMultiplierInsulation_Heat>
+      <StuffEffectMultiplierInsulation_Cold>0.8</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.8</StuffEffectMultiplierInsulation_Heat>
       <EquipDelay>2.0</EquipDelay>
       
       <ArmorRating_Sharp>0.4</ArmorRating_Sharp>
@@ -30,6 +30,7 @@
       <Insulation_Heat>12</Insulation_Heat>
     </statBases>
     <equippedStatOffsets>
+      <Flammability>-0.7</Flammability>
       <IncomingDamageFactor>-0.1</IncomingDamageFactor>
       <PainShockThreshold>0.1</PainShockThreshold>
       <ToxicEnvironmentResistance>1.0</ToxicEnvironmentResistance>
