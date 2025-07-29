@@ -6,13 +6,6 @@
     <invFoodDef>VV_FilteredHoney</invFoodDef>
     
     <apparelIgnorePollution>true</apparelIgnorePollution>
-    <backstoryFiltersOverride>
-      <li>
-        <categories>
-          <li>VV_SettlerBackstory</li>
-        </categories>
-      </li>
-    </backstoryFiltersOverride>
   </PawnKindDef>
 
   <!-- 일반 비비 -->
@@ -35,6 +28,14 @@
     <initialResistanceRange>10~17</initialResistanceRange>
     <forcedBodyType>Thin</forcedBodyType>
     
+    <backstoryFiltersOverride>
+      <li>
+        <categories>
+          <li>VV_SettlerBackstory</li>
+        </categories>
+      </li>
+    </backstoryFiltersOverride>
+
     <modExtensions>
       <li Class="RPEF.PawnGeneratorKindHook">
         <replaceHooks>
@@ -80,7 +81,7 @@
       </subOptionsChooseOne>
     </inventoryOptions>
 
-    <backstoryFiltersOverride Inherit="False">
+    <backstoryFiltersOverride>
       <li>
         <categories>
           <li>VV_CombatSettlerBackstory</li>
@@ -112,7 +113,7 @@
     <initialWillRange>3~5</initialWillRange>
     <initialResistanceRange>30~40</initialResistanceRange>
 
-    <backstoryFiltersOverride Inherit="False">
+    <backstoryFiltersOverride>
       <li>
         <categories>
           <li>VV_CombatSettlerBackstory</li>
@@ -156,7 +157,7 @@
       </subOptionsChooseOne>
     </inventoryOptions>
 
-    <backstoryFiltersOverride Inherit="False">
+    <backstoryFiltersOverride>
       <li>
         <categories>
           <li>VV_FirefighterBackstory</li>
@@ -187,7 +188,7 @@
     <initialWillRange>9~14</initialWillRange>
     <initialResistanceRange>30~40</initialResistanceRange>
 
-    <backstoryFiltersOverride Inherit="False">
+    <backstoryFiltersOverride>
       <li>
         <categories>
           <li>VV_SniperBackstory</li>
@@ -231,6 +232,13 @@
     <initialWillRange>80~90</initialWillRange>
     <initialResistanceRange>48~70</initialResistanceRange>
 
+    <backstoryFiltersOverride>
+      <li>
+        <categories>
+          <li>VV_RoyalViviSettlerBackstory</li>
+        </categories>
+      </li>
+    </backstoryFiltersOverride>
     <isRoyal>true</isRoyal>
     <forcedBodyType>Female</forcedBodyType>
   </PawnKindDef>
@@ -273,6 +281,13 @@
     <initialWillRange>16~19</initialWillRange>
     <initialResistanceRange>38~58</initialResistanceRange>
 
+    <backstoryFiltersOverride>
+      <li>
+        <categories>
+          <li>VV_RoyalViviSettlerBackstory</li>
+        </categories>
+      </li>
+    </backstoryFiltersOverride>
     <isRoyal>true</isRoyal>
     <forcedBodyType>Female</forcedBodyType>
   </PawnKindDef>
@@ -303,6 +318,13 @@
     <initialWillRange>16~19</initialWillRange>
     <initialResistanceRange>38~58</initialResistanceRange>
 
+    <backstoryFiltersOverride>
+      <li>
+        <categories>
+          <li>VV_RoyalViviSettlerBackstory</li>
+        </categories>
+      </li>
+    </backstoryFiltersOverride>
     <isRoyal>true</isRoyal>
     <forcedBodyType>Female</forcedBodyType>
 
@@ -344,6 +366,13 @@
     <initialWillRange>16~19</initialWillRange>
     <initialResistanceRange>38~58</initialResistanceRange>
 
+    <backstoryFiltersOverride>
+      <li>
+        <categories>
+          <li>VV_RoyalViviSettlerBackstory</li>
+        </categories>
+      </li>
+    </backstoryFiltersOverride>
     <isRoyal>true</isRoyal>
     <forcedBodyType>Female</forcedBodyType>
   </PawnKindDef>

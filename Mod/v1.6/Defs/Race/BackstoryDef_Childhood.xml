@@ -8,9 +8,11 @@
     <spawnCategories>
       <li>VV_SettlerBackstory</li>
       <li>VV_CombatSettlerBackstory</li>
-      <li>VV_SettlerGrown</li>
       <li>VV_FirefighterBackstory</li>
       <li>VV_SniperBackstory</li>
+      <li>VV_SettlerGrown</li>
+
+      <li>VV_RoyalViviSettlerBackstory</li>
     </spawnCategories>
     <skillGains>
       <Plants>2</Plants>

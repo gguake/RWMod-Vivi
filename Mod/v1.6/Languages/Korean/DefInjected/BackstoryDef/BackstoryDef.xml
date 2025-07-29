@@ -47,6 +47,10 @@
 <VV_ViviSniper.titleShort>저격수</VV_ViviSniper.titleShort>
 <VV_ViviSniper.description>[PAWN_nameDef]는 비비 둥지에 찾아오는 여러 위협들을 사전에 제거하는 저격수입니다. 사격에 능숙한 비비들이 주로 선발됩니다.</VV_ViviSniper.description>
 
+<VV_ViviPrincess.title>비비 공주</VV_ViviPrincess.title>
+<VV_ViviPrincess.titleShort>공주</VV_ViviPrincess.titleShort>
+<VV_ViviPrincess.description>[PAWN_nameDef]는 비비 둥지에서 귀하게 자란 공주님입니다.</VV_ViviPrincess.description>
+
 <!-- Adulthoods - Player -->
 <VV_ViviExiled.title>비비 추방자</VV_ViviExiled.title>
 <VV_ViviExiled.titleShort>추방자</VV_ViviExiled.titleShort>

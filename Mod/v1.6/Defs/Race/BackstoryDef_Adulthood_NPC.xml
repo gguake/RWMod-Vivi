@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <BackstoryDef Abstract="True" Name="VV_AdultSettlerViviBackstory" ParentName="VV_ViviAdultBackstory">
-    <spawnCategories>
-      <li>VV_SettlerBackstory</li>
-    </spawnCategories>
-  </BackstoryDef>
-
   <!-- VV_ViviSettler -->
-  <BackstoryDef ParentName="VV_AdultSettlerViviBackstory">
+  <BackstoryDef ParentName="VV_ViviAdultBackstory">
     <defName>VV_ViviSettler</defName>
     <title>vivi settler</title>
     <titleShort>settler</titleShort>
@@ -19,6 +13,8 @@
       <Intellectual>-2</Intellectual>
     </skillGains>
     <spawnCategories>
+      <li>VV_SettlerBackstory</li>
+      <li>VV_RoyalViviSettlerBackstory</li>
       <li>AdultColonist</li>
       <li>AdultTribal</li>
       <li>VatGrown</li>
@@ -26,7 +22,7 @@
   </BackstoryDef>
 
   <!-- VV_ViviCook -->
-  <BackstoryDef ParentName="VV_AdultSettlerViviBackstory">
+  <BackstoryDef ParentName="VV_ViviAdultBackstory">
     <defName>VV_ViviCook</defName>
     <title>vivi cook</title>
     <titleShort>cook</titleShort>
@@ -40,10 +36,14 @@
     <workDisables>
       <li>Crafting</li>
     </workDisables>
+    <spawnCategories>
+      <li>VV_SettlerBackstory</li>
+      <li>VV_RoyalViviSettlerBackstory</li>
+    </spawnCategories>
   </BackstoryDef>
 
   <!-- VV_ViviGatherer -->
-  <BackstoryDef ParentName="VV_AdultSettlerViviBackstory">
+  <BackstoryDef ParentName="VV_ViviAdultBackstory">
     <defName>VV_ViviGatherer</defName>
     <title>vivi gatherer</title>
     <titleShort>gatherer</titleShort>
@@ -57,10 +57,13 @@
     <workDisables>
       <li>Intellectual</li>
     </workDisables>
+    <spawnCategories>
+      <li>VV_SettlerBackstory</li>
+    </spawnCategories>
   </BackstoryDef>
 
   <!-- VV_ViviArchitect -->
-  <BackstoryDef ParentName="VV_AdultSettlerViviBackstory">
+  <BackstoryDef ParentName="VV_ViviAdultBackstory">
     <defName>VV_ViviArchitect</defName>
     <title>vivi architect</title>
     <titleShort>architect</titleShort>
@@ -74,10 +77,13 @@
     <workDisables>
       <li>Animals</li>
     </workDisables>
+    <spawnCategories>
+      <li>VV_SettlerBackstory</li>
+    </spawnCategories>
   </BackstoryDef>
 
   <!-- VV_ViviResearcher -->
-  <BackstoryDef ParentName="VV_AdultSettlerViviBackstory">
+  <BackstoryDef ParentName="VV_ViviAdultBackstory">
     <defName>VV_ViviResearcher</defName>
     <title>vivi researcher</title>
     <titleShort>researcher</titleShort>
@@ -90,10 +96,14 @@
     <workDisables>
       <li>Violent</li>
     </workDisables>
+    <spawnCategories>
+      <li>VV_SettlerBackstory</li>
+      <li>VV_RoyalViviSettlerBackstory</li>
+    </spawnCategories>
   </BackstoryDef>
 
   <!-- VV_ViviHerbalist -->
-  <BackstoryDef ParentName="VV_AdultSettlerViviBackstory">
+  <BackstoryDef ParentName="VV_ViviAdultBackstory">
     <defName>VV_ViviHerbalist</defName>
     <title>vivi herbalist</title>
     <titleShort>herbalist</titleShort>
@@ -110,10 +120,14 @@
     <possessions>
       <MedicineHerbal>5</MedicineHerbal>
     </possessions>
+    <spawnCategories>
+      <li>VV_SettlerBackstory</li>
+      <li>VV_RoyalViviSettlerBackstory</li>
+    </spawnCategories>
   </BackstoryDef>
 
   <!-- VV_ViviGuard -->
-  <BackstoryDef ParentName="VV_AdultSettlerViviBackstory">
+  <BackstoryDef ParentName="VV_ViviAdultBackstory">
     <defName>VV_ViviGuard</defName>
     <title>vivi guard</title>
     <titleShort>guard</titleShort>
@@ -129,12 +143,13 @@
       <Tough>0</Tough>
     </forcedTraits>
     <spawnCategories>
+      <li>VV_SettlerBackstory</li>
       <li>VV_CombatSettlerBackstory</li>
     </spawnCategories>
   </BackstoryDef>
 
   <!-- VV_ViviScout -->
-  <BackstoryDef ParentName="VV_AdultSettlerViviBackstory">
+  <BackstoryDef ParentName="VV_ViviAdultBackstory">
     <defName>VV_ViviScout</defName>
     <title>vivi scout</title>
     <titleShort>scout</titleShort>
@@ -150,12 +165,13 @@
       <SpeedOffset>2</SpeedOffset>
     </forcedTraits>
     <spawnCategories>
+      <li>VV_SettlerBackstory</li>
       <li>VV_CombatSettlerBackstory</li>
     </spawnCategories>
   </BackstoryDef>
 
   <!-- VV_ViviFirefighter -->
-  <BackstoryDef ParentName="VV_AdultSettlerViviBackstory">
+  <BackstoryDef ParentName="VV_ViviAdultBackstory">
     <defName>VV_ViviFirefighter</defName>
     <title>vivi firefighter</title>
     <titleShort>firefighter</titleShort>
@@ -165,16 +181,13 @@
       <Construction>5</Construction>
       <Medicine>5</Medicine>
     </skillGains>
-    <disallowedTraits>
-      <DrugDesire>-1</DrugDesire>
-    </disallowedTraits>
     <spawnCategories>
       <li>VV_FirefighterBackstory</li>
     </spawnCategories>
   </BackstoryDef>
   
   <!-- VV_ViviSniper -->
-  <BackstoryDef ParentName="VV_AdultSettlerViviBackstory">
+  <BackstoryDef ParentName="VV_ViviAdultBackstory">
     <defName>VV_ViviSniper</defName>
     <title>vivi sniper</title>
     <titleShort>sniper</titleShort>
@@ -191,4 +204,30 @@
       <li>VV_SniperBackstory</li>
     </spawnCategories>
   </BackstoryDef>
+
+  <!-- VV_ViviPrincess -->
+  <BackstoryDef ParentName="VV_ViviAdultBackstory">
+    <defName>VV_ViviPrincess</defName>
+    <title>vivi princess</title>
+    <titleShort>princess</titleShort>
+    <description>[PAWN_nameDef] is a princess in vivi hive.</description>
+    <skillGains>
+      <Social>12</Social>
+      <Medicine>4</Medicine>
+      <Intellectual>4</Intellectual>
+      <Shooting>-4</Shooting>
+      <Melee>-4</Melee>
+      <Crafting>-4</Crafting>
+    </skillGains>
+    <workDisables>
+      <li>ManualDumb</li>
+    </workDisables>
+    <possessions>
+      <VV_RoyalJelly>3</VV_RoyalJelly>
+    </possessions>
+    <spawnCategories>
+      <li>VV_RoyalViviSettlerBackstory</li>
+    </spawnCategories>
+  </BackstoryDef>
+
 </Defs>
