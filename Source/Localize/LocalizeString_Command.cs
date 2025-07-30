@@ -23,5 +23,8 @@
 
         public const string VV_Command_ReserveTeleportEverflower = nameof(VV_Command_ReserveTeleportEverflower);
         public const string VV_Command_ReserveTeleportEverflowerDesc = nameof(VV_Command_ReserveTeleportEverflowerDesc);
+
+        public const string VV_Command_CanGatherPollens = nameof(VV_Command_CanGatherPollens);
+        public const string VV_Command_CanGatherPollensDesc = nameof(VV_Command_CanGatherPollensDesc);
     }
 }

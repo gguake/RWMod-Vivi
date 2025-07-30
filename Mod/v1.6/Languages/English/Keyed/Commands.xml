@@ -18,4 +18,7 @@
 
 <VV_Command_ReserveTeleportEverflower>Reserve teleport</VV_Command_ReserveTeleportEverflower>   
 <VV_Command_ReserveTeleportEverflowerDesc>Reserve teleporting the everflower to a specified location. Requires a resonating royal vivi.</VV_Command_ReserveTeleportEverflowerDesc>
+
+<VV_Command_CanGatherPollens>Allow gather pollens</VV_Command_CanGatherPollens>
+<VV_Command_CanGatherPollensDesc>When cleaning pollen within the gather range, gather it without throwing it away.</VV_Command_CanGatherPollensDesc>
 </LanguageData>

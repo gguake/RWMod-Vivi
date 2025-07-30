@@ -25,6 +25,16 @@ namespace VVRace
             Scribe_Collections.Look(ref lastGatheredTicks, "lastGatheredTicks", LookMode.Def, LookMode.Value);
         }
 
+        public override void PostSpawnSetup(bool respawningAfterLoad)
+        {
+            parent.Map.GetComponent<GatheringMapComponent>().Notify_GatherableSpawned(parent);
+        }
+
+        public override void PostDeSpawn(Map map, DestroyMode mode = DestroyMode.Vanish)
+        {
+            map.GetComponent<GatheringMapComponent>().Notify_GatherableDespawned(parent);
+        }
+
         public void Gathered(StatDef cooldownStat)
         {
             if (lastGatheredTicks == null) { lastGatheredTicks = new Dictionary<StatDef, int>(); }

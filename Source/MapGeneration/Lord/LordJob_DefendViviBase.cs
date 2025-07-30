@@ -66,7 +66,7 @@ namespace VVRace
             transition3.AddTrigger(new Trigger_OnClamor(ClamorDefOf.Ability));
             transition3.AddPostAction(new TransitionAction_WakeAll());
 
-            var taggedString = "MessageDefendersAttacking".Translate(_faction.def.pawnsPlural, _faction.Name, Faction.OfPlayer.def.pawnsPlural).CapitalizeFirst();
+            var taggedString = "MessageDefendersAttacking".Translate(_faction.def.pawnsPlural, _faction.Name, Faction.OfPlayerSilentFail.def.pawnsPlural).CapitalizeFirst();
             transition3.AddPreAction(new TransitionAction_Message(taggedString, MessageTypeDefOf.ThreatBig));
             stateGraph.AddTransition(transition3);
 

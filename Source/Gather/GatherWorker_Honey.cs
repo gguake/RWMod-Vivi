@@ -1,6 +1,7 @@
 ﻿using HarmonyLib;
 using RimWorld;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Verse;
@@ -16,6 +17,13 @@ namespace VVRace
         {
             throw new NotImplementedException("stub");
         }
+
+        [HarmonyReversePatch]
+        [HarmonyPatch(typeof(Pawn_FilthTracker), "ThinCarriedFilth")]
+        public static void ThinCarriedFilth(Pawn_FilthTracker __instance, Filth f)
+        {
+            throw new NotImplementedException("stub");
+        }
     }
 
     public class GatherWorker_Honey : GatherWorker_Plant
@@ -26,13 +34,17 @@ namespace VVRace
 
             if (target is Plant plant)
             {
-                if (pawn.filth != null && Rand.Bool)
+                var pollenChance = Rand.Chance(0.7f);
+                if (pollenChance)
                 {
-                    pawn.filth.GainFilth(VVThingDefOf.VV_FilthPollen, Gen.YieldSingle(target.def.defName));
-                }
-                else if (Rand.Bool)
-                {
-                    FilthMaker.TryMakeFilth(pawn.Position, pawn.Map, VVThingDefOf.VV_FilthPollen, target.def.defName, 1);
+                    if (pawn.filth != null)
+                    {
+                        pawn.filth.GainFilth(VVThingDefOf.VV_FilthPollen);
+                    }
+                    else
+                    {
+                        FilthMaker.TryMakeFilth(pawn.Position, pawn.Map, VVThingDefOf.VV_FilthPollen, target.def.defName, 1);
+                    }
                 }
 
                 if (Rand.Chance(0.03f))
@@ -45,17 +57,36 @@ namespace VVRace
             }
         }
 
-        public override void Notify_ProcessStarted(Pawn pawn)
+        private List<Filth_Pollen> _tmpFilthPollens = new List<Filth_Pollen>();
+        public override void Notify_ProcessStarted(Pawn pawn, Building_GatherWorkTable workTable)
         {
-            base.Notify_ProcessStarted(pawn);
+            base.Notify_ProcessStarted(pawn, workTable);
 
-            var filths = pawn.filth.CarriedFilthListForReading;
-            for (int i = 0; i < filths.Count; ++i)
+            _tmpFilthPollens.Clear();
+            _tmpFilthPollens.AddRange(pawn.filth.CarriedFilthListForReading.OfType<Filth_Pollen>());
+
+            if (_tmpFilthPollens.Count > 0 && workTable.CanGatherFilth)
             {
-                var filth = filths[i];
-                if (filth.def == VVThingDefOf.VV_FilthPollen && filth.CanDropAt(pawn.Position, pawn.Map))
+                if (workTable.CanGatherFilth)
                 {
-                    Pawn_FilthTracker_ReversePatch.DropCarriedFilth(pawn.filth, filth);
+                    for (int i = 0; i < _tmpFilthPollens.Count; ++i)
+                    {
+                        var filthPollen = _tmpFilthPollens[i];
+                        filthPollen.GatherPollen(workTable.Map, pawn);
+
+                        Pawn_FilthTracker_ReversePatch.ThinCarriedFilth(pawn.filth, filthPollen);
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < _tmpFilthPollens.Count; ++i)
+                    {
+                        var filthPollen = _tmpFilthPollens[i];
+                        if (filthPollen.CanDropAt(pawn.Position, pawn.Map))
+                        {
+                            Pawn_FilthTracker_ReversePatch.DropCarriedFilth(pawn.filth, filthPollen);
+                        }
+                    }
                 }
             }
         }

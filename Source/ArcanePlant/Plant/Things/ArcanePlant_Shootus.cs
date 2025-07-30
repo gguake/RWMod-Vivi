@@ -117,7 +117,7 @@ namespace VVRace
                     EquipGun(null);
                 };
 
-                if (Faction != Faction.OfPlayer)
+                if (Faction != Faction.OfPlayerSilentFail)
                 {
                     command_unequipWeapon.Disable("CannotOrderNonControlled".Translate());
                 }

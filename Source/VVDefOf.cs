@@ -49,7 +49,6 @@ namespace VVRace
         public static JobDef VV_LayViviEgg;
 
         public static JobDef VV_GatherHoney;
-        public static JobDef VV_GatherPollen;
         public static JobDef VV_GatherPropolis;
 
         public static JobDef VV_FortifyHoneycombWall;
@@ -145,7 +144,6 @@ namespace VVRace
     public static class VVRecipeDefOf
     {
         public static RecipeDef VV_GatherHoney;
-        public static RecipeDef VV_GatherPollen;
         public static RecipeDef VV_GatherPropolis;
 
         public static RecipeDef VV_MakeVivicream;

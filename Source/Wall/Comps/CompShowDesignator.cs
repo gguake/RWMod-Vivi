@@ -37,7 +37,7 @@ namespace VVRace
 
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
         {
-            if (!parent.Spawned || parent.Faction != Faction.OfPlayer)
+            if (!parent.Spawned || parent.Faction != Faction.OfPlayerSilentFail)
             {
                 yield break;
             }

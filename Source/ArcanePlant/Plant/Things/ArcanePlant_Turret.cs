@@ -283,7 +283,7 @@ namespace VVRace
             var faction = Faction;
             var range = AttackVerb.verbProps.range;
 
-            if (Rand.Value < 0.5f && AttackVerb.ProjectileFliesOverhead() && faction.HostileTo(Faction.OfPlayer) && Map.listerBuildings.allBuildingsColonist.Where(building =>
+            if (Rand.Value < 0.5f && AttackVerb.ProjectileFliesOverhead() && faction.HostileTo(Faction.OfPlayerSilentFail) && Map.listerBuildings.allBuildingsColonist.Where(building =>
             {
                 var verbRange = AttackVerb.verbProps.EffectiveMinRange(building, this);
                 var distance = building.Position.DistanceToSquared(Position);
@@ -313,7 +313,7 @@ namespace VVRace
         {
             if (thing is Pawn pawn)
             {
-                if (Faction == Faction.OfPlayer && pawn.IsPrisoner)
+                if (Faction == Faction.OfPlayerSilentFail && pawn.IsPrisoner)
                 {
                     return false;
                 }

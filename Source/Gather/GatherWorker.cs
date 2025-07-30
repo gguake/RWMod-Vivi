@@ -25,8 +25,6 @@ namespace VVRace
             return pawn.GetStatValue(bill.recipe.workSpeedStat) > 0f && pawn.GetStatValue(bill.recipe.efficiencyStat) > 0f;
         }
 
-        public abstract IEnumerable<Thing> FindAllGatherableTargetInRegion(Region region);
-
         public abstract Thing FilterGatherableTarget(Pawn pawn, Thing billGiver, Bill bill, IEnumerable<Thing> candidates);
 
         public virtual Job MakeJob(Pawn pawn, Thing billGiver, Thing target, Bill bill)
@@ -60,7 +58,7 @@ namespace VVRace
                 if (damageChance > 0 && Rand.Chance(damageChance))
                 {
                     var beforeHitPoint = target.HitPoints;
-                    var afterHitPoint = Mathf.Max(1, (int)(target.HitPoints * Rand.Range(0.8f, 0.9f)));
+                    var afterHitPoint = Mathf.Max(1, (int)(target.HitPoints * Rand.Range(0.75f, 0.9f)));
                     var damage = beforeHitPoint - afterHitPoint;
                     if (damage > 0)
                     {
@@ -76,7 +74,7 @@ namespace VVRace
             }
         }
 
-        public virtual void Notify_ProcessStarted(Pawn pawn)
+        public virtual void Notify_ProcessStarted(Pawn pawn, Building_GatherWorkTable workTable)
         {
         }
 

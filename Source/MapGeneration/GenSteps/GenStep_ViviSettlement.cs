@@ -48,7 +48,7 @@ namespace VVRace
             var rect =  CellRect.CenteredOn(c, sizeX, sizeZ);
             rect.ClipInsideMap(map);
 
-            var faction = ((map.ParentFaction != null && map.ParentFaction != Faction.OfPlayer) ? 
+            var faction = ((map.ParentFaction != null && map.ParentFaction != Faction.OfPlayerSilentFail) ? 
                 map.ParentFaction : 
                 Find.FactionManager.RandomEnemyFaction());
 

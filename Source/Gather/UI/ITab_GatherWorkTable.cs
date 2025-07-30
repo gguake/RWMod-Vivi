@@ -13,7 +13,7 @@ namespace VVRace
         public ITab_GatherWorkTable()
         {
             size = Size;
-            labelKey = LocalizeString_ITab.VV_ITab_GatherWorkerTable_TabLabel.Translate();
+            labelKey = LocalizeString_ITab.VV_ITab_GatherWorkerTable_TabLabel;
         }
 
         protected override void FillTab()

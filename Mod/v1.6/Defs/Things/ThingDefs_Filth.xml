@@ -22,6 +22,14 @@
       <canFilthAttach>true</canFilthAttach>
       <cleaningSound>Interact_CleanFilth_Dirt</cleaningSound>
     </filth>
+
+    <modExtensions>
+      <li Class="VVRace.GatherableFilthExtension">
+        <yieldStat>CleaningSpeed</yieldStat>
+        <thingDef>VV_Pollen</thingDef>
+        <amount>4</amount>
+      </li>
+    </modExtensions>
   </ThingDef>
 
 </Defs>

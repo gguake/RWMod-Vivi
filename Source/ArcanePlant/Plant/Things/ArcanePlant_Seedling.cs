@@ -189,7 +189,7 @@ namespace VVRace
                             Destroy(DestroyMode.WillReplace);
 
                             var plant = ThingMaker.MakeThing(plantDef);
-                            plant.SetFaction(faction ?? Faction.OfPlayer);
+                            plant.SetFaction(faction ?? Faction.OfPlayerSilentFail);
                             plant.HitPoints = Mathf.Clamp(Mathf.CeilToInt(healthPct * plant.MaxHitPoints), 1, plant.MaxHitPoints);
                             GenSpawn.Spawn(plant, position, map, rotation);
                             return;

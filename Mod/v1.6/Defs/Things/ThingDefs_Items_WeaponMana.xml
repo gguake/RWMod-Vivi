@@ -141,7 +141,7 @@
       <WorkToMake>35000</WorkToMake>
       <Mass>7</Mass>
       <RangedWeapon_Cooldown>0.9</RangedWeapon_Cooldown>
-      <VV_RangedWeapon_ManaCost>100</VV_RangedWeapon_ManaCost>
+      <VV_RangedWeapon_ManaCost>150</VV_RangedWeapon_ManaCost>
     </statBases>
     <relicChance>0</relicChance>
 
@@ -209,8 +209,8 @@
       <li Class="CompProperties_Styleable"/>
       <li Class="CompProperties_Biocodable"/>
       <li Class="VVRace.CompProperties_Mana">
-        <manaCapacity>900</manaCapacity>
-        <manaAbsorbPerDay>600</manaAbsorbPerDay>
+        <manaCapacity>750</manaCapacity>
+        <manaAbsorbPerDay>900</manaAbsorbPerDay>
         <workOnlySpawned>false</workOnlySpawned>
       </li>
     </comps>
@@ -228,7 +228,7 @@
       <speed>32</speed>
       <damageDef>VV_Frostbite</damageDef>
       <explosionRadius>2.6</explosionRadius>
-      <damageAmountBase>24</damageAmountBase>
+      <damageAmountBase>30</damageAmountBase>
       <arcHeightFactor>0.2</arcHeightFactor>
       <shadowSize>0.6</shadowSize>
     </projectile>
@@ -264,7 +264,7 @@
         <drawWick>false</drawWick>
         <explosiveDamageType>VV_Frostbite</explosiveDamageType>
         <explosiveRadius>2.6</explosiveRadius>
-        <damageAmountBase>24</damageAmountBase>
+        <damageAmountBase>30</damageAmountBase>
         <chanceNeverExplodeFromDamage>0.5</chanceNeverExplodeFromDamage>
         <countdownTicks>1~1</countdownTicks>
       </li>
@@ -467,7 +467,7 @@
       <Steel>60</Steel>
       <VV_HeatingPetal>40</VV_HeatingPetal>
       <VV_SkyweedFluff>30</VV_SkyweedFluff>
-      <VV_SparklingPetal>20</VV_SparklingPetal>
+      <ComponentIndustrial>2</ComponentIndustrial>
     </costList>
 
     <recipeMaker>
@@ -489,7 +489,7 @@
       <li Class="CompProperties_Biocodable"/>
       <li Class="VVRace.CompProperties_Mana">
         <manaCapacity>500</manaCapacity>
-        <manaAbsorbPerDay>500</manaAbsorbPerDay>
+        <manaAbsorbPerDay>750</manaAbsorbPerDay>
         <workOnlySpawned>false</workOnlySpawned>
       </li>
     </comps>
@@ -505,7 +505,7 @@
     </graphicData>
     <projectile>
       <damageDef>VV_Bullet_Lava</damageDef>
-      <damageAmountBase>7</damageAmountBase>
+      <damageAmountBase>8</damageAmountBase>
       <stoppingPower>0.8</stoppingPower>
       <speed>33</speed>
       <ai_IsIncendiary>true</ai_IsIncendiary>
@@ -580,9 +580,9 @@
     </tools>
     
     <costList>
-      <Steel>50</Steel>
+      <Steel>60</Steel>
       <ComponentIndustrial>2</ComponentIndustrial>
-      <VV_CoolingPetal>50</VV_CoolingPetal>
+      <VV_CoolingPetal>40</VV_CoolingPetal>
       <VV_SkyweedFluff>30</VV_SkyweedFluff>
     </costList>
 
@@ -604,8 +604,8 @@
       <li Class="CompProperties_Styleable"/>
       <li Class="CompProperties_Biocodable"/>
       <li Class="VVRace.CompProperties_Mana">
-        <manaCapacity>400</manaCapacity>
-        <manaAbsorbPerDay>600</manaAbsorbPerDay>
+        <manaCapacity>500</manaCapacity>
+        <manaAbsorbPerDay>750</manaAbsorbPerDay>
         <workOnlySpawned>false</workOnlySpawned>
       </li>
     </comps>

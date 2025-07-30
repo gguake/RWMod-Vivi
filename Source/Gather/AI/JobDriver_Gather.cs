@@ -115,7 +115,7 @@ namespace VVRace
                     {
                         pawn.rotationTracker.FaceTarget(BillGiver);
 
-                        GatheringRecipeDef.gatherWorker.Notify_ProcessStarted(pawn);
+                        GatheringRecipeDef.gatherWorker.Notify_ProcessStarted(pawn, BillGiverTargetInfo.Thing as Building_GatherWorkTable);
                     })
                     .WithTickAction(() =>
                     {

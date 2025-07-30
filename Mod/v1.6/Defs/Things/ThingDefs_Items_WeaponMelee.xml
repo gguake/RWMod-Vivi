@@ -16,7 +16,7 @@
     <techLevel>Medieval</techLevel>
     <statBases>
       <WorkToMake>13000</WorkToMake>
-      <Mass>2.5</Mass>
+      <Mass>1.5</Mass>
     </statBases>
     <equippedStatOffsets>
       <MeleeHitChance>-5</MeleeHitChance>

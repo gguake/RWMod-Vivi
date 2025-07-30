@@ -147,11 +147,11 @@ namespace VVRace
             GenSpawn.WipeExistingThings(c, placingRot, placingDef.installBlueprintDef, Map, DestroyMode.Deconstruct);
             if (thingToInstall is MinifiedThing minified)
             {
-                GenConstruct.PlaceBlueprintForInstall(minified, c, Map, placingRot, Faction.OfPlayer);
+                GenConstruct.PlaceBlueprintForInstall(minified, c, Map, placingRot, Faction.OfPlayerSilentFail);
             }
             else
             {
-                GenConstruct.PlaceBlueprintForReinstall((Building)thingToInstall, c, Map, placingRot, Faction.OfPlayer);
+                GenConstruct.PlaceBlueprintForReinstall((Building)thingToInstall, c, Map, placingRot, Faction.OfPlayerSilentFail);
             }
             FleckMaker.ThrowMetaPuffs(GenAdj.OccupiedRect(c, placingRot, placingDef.Size), Map);
 
@@ -165,8 +165,8 @@ namespace VVRace
         {
             if (PlacingDef is ThingDef def)
             {
-                MeditationUtility.DrawMeditationFociAffectedByBuildingOverlay(base.Map, def, Faction.OfPlayer, UI.MouseCell(), placingRot);
-                GauranlenUtility.DrawConnectionsAffectedByBuildingOverlay(base.Map, def, Faction.OfPlayer, UI.MouseCell(), placingRot);
+                MeditationUtility.DrawMeditationFociAffectedByBuildingOverlay(base.Map, def, Faction.OfPlayerSilentFail, UI.MouseCell(), placingRot);
+                GauranlenUtility.DrawConnectionsAffectedByBuildingOverlay(base.Map, def, Faction.OfPlayerSilentFail, UI.MouseCell(), placingRot);
                 PsychicRitualUtility.DrawPsychicRitualSpotsAffectedByThingOverlay(base.Map, def, UI.MouseCell(), placingRot);
             }
 

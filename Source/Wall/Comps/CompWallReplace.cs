@@ -51,7 +51,7 @@ namespace VVRace
 
                 parent.Destroy(DestroyMode.WillReplace);
                 var wall = ThingMaker.MakeThing(Props.replaceThing, Props.replaceThingStuff);
-                wall.SetFaction(faction ?? Faction.OfPlayer);
+                wall.SetFaction(faction ?? Faction.OfPlayerSilentFail);
                 wall.HitPoints = Mathf.Clamp(Mathf.CeilToInt(currentHealthPct * wall.MaxHitPoints), 1, wall.MaxHitPoints);
 
                 GenSpawn.Spawn(wall, position, map, rotation);

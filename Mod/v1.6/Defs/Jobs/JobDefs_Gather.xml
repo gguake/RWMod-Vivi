@@ -9,14 +9,6 @@
   </JobDef>
   
   <JobDef>
-    <defName>VV_GatherPollen</defName>
-    <driverClass>VVRace.JobDriver_Gather</driverClass>
-    <reportString>gather pollens.</reportString>
-    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
-    <ifFlyingKeepFlying>true</ifFlyingKeepFlying>
-  </JobDef>
-
-  <JobDef>
     <defName>VV_GatherPropolis</defName>
     <driverClass>VVRace.JobDriver_Gather</driverClass>
     <reportString>gather propolis at TargetA.</reportString>

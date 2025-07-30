@@ -52,7 +52,7 @@ namespace VVRace
         protected override void ScatterAt(IntVec3 c, Map map, GenStepParams parms, int stackCount = 1)
         {
             var rect = CellRect.CenteredOn(c, 7, 7);
-            var faction = ((map.ParentFaction != null && map.ParentFaction != Faction.OfPlayer) ? map.ParentFaction : Find.FactionManager.RandomEnemyFaction());
+            var faction = ((map.ParentFaction != null && map.ParentFaction != Faction.OfPlayerSilentFail) ? map.ParentFaction : Find.FactionManager.RandomEnemyFaction());
             rect.ClipInsideMap(map);
 
             var resolveParams = default(ResolveParams);

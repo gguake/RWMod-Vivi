@@ -115,7 +115,7 @@ namespace VVRace
 
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
         {
-            if (parent.Faction == null || !parent.Faction.HostileTo(Faction.OfPlayer))
+            if (parent.Faction == null || !parent.Faction.HostileTo(Faction.OfPlayerSilentFail))
             {
                 if (Props.manaCapacity > 0)
                 {
@@ -160,7 +160,7 @@ namespace VVRace
 
         public override IEnumerable<Gizmo> CompGetWornGizmosExtra()
         {
-            if (parent.Faction == null || !parent.Faction.HostileTo(Faction.OfPlayer))
+            if (parent.Faction == null || !parent.Faction.HostileTo(Faction.OfPlayerSilentFail))
             {
                 if (Props.manaCapacity > 0)
                 {

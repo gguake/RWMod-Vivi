@@ -1,6 +1,4 @@
 ﻿using RimWorld;
-using System.Collections.Generic;
-using System.Linq;
 using Verse;
 using Verse.AI;
 
@@ -31,8 +29,12 @@ namespace VVRace
                     continue;
                 }
 
-                var targetCandidates = FindGatherableTargets(pawn, thing, bill);
-                var target = recipeGathering.gatherWorker.FilterGatherableTarget(pawn, thing, bill, targetCandidates);
+                var candidates = thing.Map.GetComponent<GatheringMapComponent>().GetGatherableCandidatesForWorkTable((Building_GatherWorkTable)thing);
+                var target = recipeGathering.gatherWorker.FilterGatherableTarget(
+                    pawn, 
+                    thing, 
+                    bill, 
+                    candidates);
 
                 if (target == null)
                 {
@@ -44,17 +46,6 @@ namespace VVRace
             }
 
             return null;
-        }
-
-        protected virtual IEnumerable<Thing> FindGatherableTargets(Pawn pawn, Thing billGiver, Bill bill)
-        {
-            var gatheringRecipe = bill.recipe as RecipeDef_Gathering;
-            if (!(billGiver is Building_GatherWorkTable workTable))
-            {
-                return Enumerable.Empty<Thing>();
-            }
-
-            return workTable.GetGatherableCandidates(gatheringRecipe);
         }
     }
 }

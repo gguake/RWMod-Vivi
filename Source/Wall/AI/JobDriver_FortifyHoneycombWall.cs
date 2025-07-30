@@ -74,7 +74,7 @@ namespace VVRace
 
                         wall.Destroy(DestroyMode.WillReplace);
                         var newWall = ThingMaker.MakeThing(VVThingDefOf.VV_ViviHardenHoneycombWall);
-                        newWall.SetFaction(faction ?? Faction.OfPlayer);
+                        newWall.SetFaction(faction ?? Faction.OfPlayerSilentFail);
                         newWall.HitPoints = Mathf.Clamp(Mathf.CeilToInt(currentHealthPct * newWall.MaxHitPoints), 1, newWall.MaxHitPoints);
 
                         GenSpawn.Spawn(newWall, position, map, rotation);

@@ -126,8 +126,8 @@
     </statBases>
 
     <equippedStatOffsets>
-      <CleaningSpeed>0.25</CleaningSpeed>
-      <SmoothingSpeed>1.0</SmoothingSpeed>
+      <CleaningSpeed>0.5</CleaningSpeed>
+      <SmoothingSpeed>0.5</SmoothingSpeed>
       <VV_PlantGatherSpeed>0.25</VV_PlantGatherSpeed>
       <VV_PlantGatherYield>0.25</VV_PlantGatherYield>
     </equippedStatOffsets>

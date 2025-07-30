@@ -66,10 +66,6 @@ namespace VVRace
                 original: AccessTools.Method(typeof(DropPodUtility), nameof(DropPodUtility.MakeDropPodAt)),
                 transpiler: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(DropPodUtility_MakeDropPodAt_Transpiler)));
 
-            harmony.Patch(
-                original: AccessTools.Method("RimWorld.WorkGiver_CleanFilth:HasJobOnThing"),
-                postfix: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(WorkGiver_CleanFilth_HasJobOnThing_Postfix)));
-
             {
                 var innerType = typeof(Map).GetNestedTypes(BindingFlags.NonPublic).FirstOrDefault(t => t.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance).Any(m => m.Name.Contains("FinalizeLoading")));
                 var innerMethod = innerType.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault(m => m.Name.Contains("FinalizeLoading"));
@@ -374,17 +370,6 @@ namespace VVRace
             }
 
             return instructions;
-        }
-
-        private static void WorkGiver_CleanFilth_HasJobOnThing_Postfix(ref bool __result, Thing t, bool forced)
-        {
-            if (!__result || forced || t.def != VVThingDefOf.VV_FilthPollen) { return; }
-
-            var room = t.GetRoom();
-            if (room != null && room.ContainsThing(VVThingDefOf.VV_GatheringBarrel))
-            {
-                __result = false;
-            }
         }
 
         private static void Map_FinalizeLoading_OrderBy_Postfix(ref float __result, Building t)

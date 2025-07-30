@@ -57,7 +57,7 @@ namespace VVRace
                 return AcceptanceReport.WasRejected;
             }
 
-            if (t.Faction != null && t.Faction != Faction.OfPlayer)
+            if (t.Faction != null && t.Faction != Faction.OfPlayerSilentFail)
             {
                 return AcceptanceReport.WasRejected;
             }

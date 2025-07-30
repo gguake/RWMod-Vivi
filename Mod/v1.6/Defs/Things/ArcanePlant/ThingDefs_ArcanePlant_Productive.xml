@@ -434,6 +434,9 @@
       <WorkToBuild>47500</WorkToBuild>
       <Beauty>15</Beauty>
       <BeautyOutdoors>15</BeautyOutdoors>
+      
+      <VV_PlantGatherCooldown>2.4</VV_PlantGatherCooldown>
+      <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
     </statBases>
 
     <costList>
