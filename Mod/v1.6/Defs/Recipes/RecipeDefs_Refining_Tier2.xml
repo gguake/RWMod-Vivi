@@ -70,16 +70,23 @@
             <li>VV_LivingLeaf</li>
           </thingDefs>
         </filter>
-        <count>20</count>
+        <count>25</count>
       </li>
       <li>
         <filter>
           <thingDefs>
             <li>VV_HeatingPetal</li>
+          </thingDefs>
+        </filter>
+        <count>5</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
             <li>VV_CoolingPetal</li>
           </thingDefs>
         </filter>
-        <count>10</count>
+        <count>5</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
