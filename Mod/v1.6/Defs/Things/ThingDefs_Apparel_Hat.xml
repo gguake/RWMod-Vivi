@@ -8,9 +8,6 @@
 
     <apparel>
       <countsAsClothingForNudity>false</countsAsClothingForNudity>
-      <tags>
-        <li>VV_ViviApparel</li>
-      </tags>
       <canBeDesiredForIdeo>false</canBeDesiredForIdeo>
     </apparel>
 
@@ -43,14 +40,14 @@
       <MaxHitPoints>160</MaxHitPoints>
       <WorkToMake>7000</WorkToMake>
       <Mass>0.1</Mass>
-      <StuffEffectMultiplierArmor>0.6</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierArmor>0.55</StuffEffectMultiplierArmor>
       <StuffEffectMultiplierInsulation_Cold>0.32</StuffEffectMultiplierInsulation_Cold>
       <StuffEffectMultiplierInsulation_Heat>0.32</StuffEffectMultiplierInsulation_Heat>
       <EquipDelay>1.0</EquipDelay>
     </statBases>
     <equippedStatOffsets>
-      <PainShockThreshold>0.04</PainShockThreshold>
-      <MentalBreakThreshold>-0.04</MentalBreakThreshold>
+      <PainShockThreshold>0.03</PainShockThreshold>
+      <MentalBreakThreshold>-0.03</MentalBreakThreshold>
       <ToxicEnvironmentResistance>0.2</ToxicEnvironmentResistance>
     </equippedStatOffsets>
 
@@ -71,6 +68,65 @@
       </layers>
       <developmentalStageFilter>Adult,Child</developmentalStageFilter>
       <canBeGeneratedToSatisfyToxicEnvironmentResistance>false</canBeGeneratedToSatisfyToxicEnvironmentResistance>
+      <tags>
+        <li>VV_ViviApparel</li>
+      </tags>
+    </apparel>
+
+    <recipeMaker>
+      <researchPrerequisite>VV_AdvancedApparels</researchPrerequisite>
+      <displayPriority>3400</displayPriority>
+    </recipeMaker>
+  </ThingDef>
+
+  <!-- 비비 빵모자 -->
+  <ThingDef ParentName="VV_HatMakeableBase">
+    <defName>VV_HuntingCap</defName>
+    <label>vivi hunting cap</label>
+    <description>The uniform hat worn by vivis affiliated with a large hive. It might not provide much defense, but it does bring a sense of stability to the mind.</description>
+    <graphicData>
+      <texPath>Things/Apparel/VV_UniformHat</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(0.9,0.9)</drawSize>
+    </graphicData>
+    
+    <statBases>
+      <MaxHitPoints>160</MaxHitPoints>
+      <WorkToMake>7000</WorkToMake>
+      <Mass>0.1</Mass>
+      <StuffEffectMultiplierArmor>0.55</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>0.32</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0.32</StuffEffectMultiplierInsulation_Heat>
+      <EquipDelay>1.0</EquipDelay>
+    </statBases>
+    <equippedStatOffsets>
+      <PainShockThreshold>0.03</PainShockThreshold>
+      <MentalBreakThreshold>-0.03</MentalBreakThreshold>
+      <ToxicEnvironmentResistance>0.2</ToxicEnvironmentResistance>
+    </equippedStatOffsets>
+
+    <costStuffCount>40</costStuffCount>
+    <stuffCategories>
+      <li>Fabric</li>
+      <li>Leathery</li>
+    </stuffCategories>
+
+    <apparel>
+      <useWornGraphicMask>true</useWornGraphicMask>
+      <wornGraphicPath>Things/Apparel/VV_UniformHat</wornGraphicPath>
+      <bodyPartGroups>
+        <li>FullHead</li>
+      </bodyPartGroups>
+      <layers>
+        <li>Overhead</li>
+      </layers>
+      <developmentalStageFilter>Adult,Child</developmentalStageFilter>
+      <canBeGeneratedToSatisfyToxicEnvironmentResistance>false</canBeGeneratedToSatisfyToxicEnvironmentResistance>
+      <tags>
+        <li>VV_ViviOutdoorApparel</li>
+        <li>VV_ViviCombatApparel</li>
+      </tags>
     </apparel>
 
     <recipeMaker>
@@ -126,6 +182,7 @@
       </layers>
       <countsAsClothingForNudity>false</countsAsClothingForNudity>
       <tags>
+        <li>VV_ViviApparel</li>
         <li>VV_ViviCombatApparel</li>
       </tags>
     </apparel>
@@ -222,4 +279,5 @@
     
     <colorGenerator Class="ColorGenerator_White" />
   </ThingDef>
+  
 </Defs>

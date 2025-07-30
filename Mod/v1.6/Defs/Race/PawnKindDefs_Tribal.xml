@@ -127,7 +127,7 @@
   <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
     <defName>VV_ViviFirefighter</defName>
     <label>vivi firefighter</label>
-    <combatPower>180</combatPower>
+    <combatPower>200</combatPower>
     <isFighter>true</isFighter>
 
     <requiredWorkTags>
@@ -135,9 +135,10 @@
     </requiredWorkTags>
 
     <gearHealthRange>0.7~3.2</gearHealthRange>
-    <apparelMoney>500~1200</apparelMoney>
+    <apparelMoney>800~1600</apparelMoney>
     <apparelTags>
-      <li>VV_ViviCombatApparel</li>
+      <li>VV_ViviCombatCoat</li>
+      <li>VV_ViviOutdoorApparel</li>
     </apparelTags>
     <weaponMoney>1000~2000</weaponMoney>
     <weaponTags>
@@ -171,7 +172,7 @@
   <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
     <defName>VV_ViviSniper</defName>
     <label>vivi sniper</label>
-    <combatPower>180</combatPower>
+    <combatPower>200</combatPower>
     <isFighter>true</isFighter>
 
     <requiredWorkTags>
@@ -179,9 +180,13 @@
     </requiredWorkTags>
 
     <gearHealthRange>0.7~3.2</gearHealthRange>
-    <apparelMoney>500~1200</apparelMoney>
+    <apparelMoney>600~1600</apparelMoney>
+    <apparelTags>
+      <li>VV_ViviOutdoorApparel</li>
+    </apparelTags>
     <weaponMoney>1000~2000</weaponMoney>
     <weaponTags>
+      <li>NeolithicRangedChief</li>
       <li>VV_Froststing</li>
     </weaponTags>
 
@@ -214,7 +219,7 @@
     <apparelMoney>5000~10000</apparelMoney>
     <apparelTags>
       <li>VV_RoyalViviApparel</li>
-      <li>VV_ViviCombatApparel</li>
+      <li>VV_ViviCombatCoat</li>
     </apparelTags>
     <apparelRequired>
       <li>VV_GuardianCoat</li>
@@ -260,7 +265,7 @@
     <apparelMoney>5000~10000</apparelMoney>
     <apparelTags>
       <li>VV_RoyalViviApparel</li>
-      <li>VV_ViviCombatApparel</li>
+      <li>VV_ViviCombatCoat</li>
       <li>BeltDefensePop</li>
     </apparelTags>
     <apparelRequired>

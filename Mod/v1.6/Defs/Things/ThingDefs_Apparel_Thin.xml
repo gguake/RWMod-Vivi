@@ -108,8 +108,8 @@
       <EquipDelay>2.5</EquipDelay>
     </statBases>
     <equippedStatOffsets>
-      <PainShockThreshold>0.05</PainShockThreshold>
-      <MentalBreakThreshold>-0.05</MentalBreakThreshold>
+      <PainShockThreshold>0.04</PainShockThreshold>
+      <MentalBreakThreshold>-0.04</MentalBreakThreshold>
     </equippedStatOffsets>
 
     <costStuffCount>70</costStuffCount>
@@ -159,7 +159,7 @@
       <WorkToMake>8000</WorkToMake>
       <Mass>2.0</Mass>
       <StuffEffectMultiplierArmor>0.18</StuffEffectMultiplierArmor>
-      <StuffEffectMultiplierInsulation_Cold>2.5</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Cold>2.2</StuffEffectMultiplierInsulation_Cold>
       <StuffEffectMultiplierInsulation_Heat>0</StuffEffectMultiplierInsulation_Heat>
       <EquipDelay>1.0</EquipDelay>
       
