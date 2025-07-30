@@ -229,6 +229,7 @@
       <damageDef>VV_Frostbite</damageDef>
       <explosionRadius>2.6</explosionRadius>
       <damageAmountBase>30</damageAmountBase>
+      <armorPenetrationBase>0</armorPenetrationBase>
       <arcHeightFactor>0.2</arcHeightFactor>
       <shadowSize>0.6</shadowSize>
     </projectile>
@@ -265,6 +266,7 @@
         <explosiveDamageType>VV_Frostbite</explosiveDamageType>
         <explosiveRadius>2.6</explosiveRadius>
         <damageAmountBase>30</damageAmountBase>
+      <armorPenetrationBase>0</armorPenetrationBase>
         <chanceNeverExplodeFromDamage>0.5</chanceNeverExplodeFromDamage>
         <countdownTicks>1~1</countdownTicks>
       </li>
