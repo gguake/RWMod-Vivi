@@ -31,12 +31,12 @@
 
     <comps>
       <li Class="VVRace.CompProperties_Mana">
-        <manaCapacity>1000</manaCapacity>
+        <manaCapacity>900</manaCapacity>
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>25</mana>
+          <mana>20</mana>
         </manaConsumeRule>
 
-        <manaAbsorbPerDay>600</manaAbsorbPerDay>
+        <manaAbsorbPerDay>900</manaAbsorbPerDay>
       </li>
     </comps>
 
@@ -95,7 +95,7 @@
       <DeteriorationRate>0</DeteriorationRate>
       <Mass>40</Mass>
       <Flammability>0</Flammability>
-      <VV_RangedWeapon_ManaCost>20</VV_RangedWeapon_ManaCost>
+      <VV_RangedWeapon_ManaCost>10</VV_RangedWeapon_ManaCost>
     </statBases>
 
     <verbs>
@@ -231,10 +231,10 @@
       <li Class="VVRace.CompProperties_Mana">
         <manaCapacity>900</manaCapacity>
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>30</mana>
+          <mana>20</mana>
         </manaConsumeRule>
 
-        <manaAbsorbPerDay>1200</manaAbsorbPerDay>
+        <manaAbsorbPerDay>900</manaAbsorbPerDay>
       </li>
     </comps>
 
@@ -302,7 +302,7 @@
         <defaultProjectile>VV_Bullet_Corn</defaultProjectile>
         <warmupTime>0</warmupTime>
         <range>40.9</range>
-        <forcedMissRadius>2.6</forcedMissRadius>
+        <forcedMissRadius>1.9</forcedMissRadius>
         <forcedMissEvenDispersal>true</forcedMissEvenDispersal>
         <soundCast>InfernoCannon_Fire</soundCast>
         <soundCastTail>GunTail_Heavy</soundCastTail>

@@ -48,12 +48,12 @@ namespace VVRace
                 right ? manaGrid[i + 1] : 0f,
                 down ? manaGrid[i + w] : 0f);
 
-            var r = (math.csum(v1) + math.csum(v2) * 2f + manaGrid[i] * 4f) / 16f;
+            var r = (math.csum(v1) * 5f + math.csum(v2) * 8f + manaGrid[i] * 12f) / 64f;
             outputGrid[i] = r > 0.01f ? r > 1000f ? 1000f : r : 0f;
 
-            if (checkFlowerCells && r >= 50f)
+            if (checkFlowerCells && r >= 60f)
             {
-                flowerCellQueue.Enqueue(i, -math.clamp(r, 50f, 500f));
+                flowerCellQueue.Enqueue(i, -math.clamp(r, 60f, 500f));
             }
         }
     }
