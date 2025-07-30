@@ -506,10 +506,8 @@ When infused with a small amount of mana, it glows - so the Vivi sometimes prese
     <tickerType>Rare</tickerType>
 
     <graphicData>
-      <texPath>Things/Item/VV_Petal</texPath>
+      <texPath>Things/Item/VV_HoneywaterFruit</texPath>
       <graphicClass>Graphic_StackCount</graphicClass>
-      <shaderType>CutoutComplex</shaderType>
-      <color>(255,255,255)</color>
     </graphicData>
     <thingCategories>
       <li>VV_ViviResource</li>
@@ -540,7 +538,7 @@ When infused with a small amount of mana, it glows - so the Vivi sometimes prese
       
       <baseIngestTicks>120</baseIngestTicks>
       <chairSearchRadius>8</chairSearchRadius>
-			<preferability>DesperateOnly</preferability>
+			<preferability>RawTasty</preferability>
       <tasteThought></tasteThought>
       <ingestSound>RawVegetable_Eat</ingestSound>
 

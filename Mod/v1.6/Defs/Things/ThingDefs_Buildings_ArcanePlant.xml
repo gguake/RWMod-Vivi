@@ -13,19 +13,21 @@
     <category>Building</category>
     
     <graphicData>
-      <texPath>Things/Building/Furniture/WallLamp/WallLamp</texPath>
+      <texPath>Things/Building/VV_WaterdropLamp/VV_WaterdropLamp</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
-      <drawOffsetNorth>(0,0,0.9)</drawOffsetNorth>
-      <drawOffsetSouth>(0,0,-0.9)</drawOffsetSouth>
-      <drawOffsetWest>(-0.9,0,0)</drawOffsetWest>
-      <drawOffsetEast>(0.9,0,0)</drawOffsetEast>
+      <drawOffsetNorth>(0,0,0.85)</drawOffsetNorth>
+      <drawOffsetSouth>(0,0,-0.7)</drawOffsetSouth>
+      <drawOffsetWest>(-0.75,0,0)</drawOffsetWest>
+      <drawOffsetEast>(0.75,0,0)</drawOffsetEast>
       <damageData>
         <enabled>false</enabled>
       </damageData>
     </graphicData>
     
     <uiOrder>2401</uiOrder>
-    <uiIconPath>Things/Building/Furniture/WallLamp/WallLamp_MenuIcon</uiIconPath>
+    <uiIconPath>Things/Building/VV_WaterdropLamp</uiIconPath>
+    <uiIconScale>1.5</uiIconScale>
+    <uiIconOffset>(0, -0.1)</uiIconOffset>
     <altitudeLayer>BuildingOnTop</altitudeLayer>
     <rotatable>true</rotatable>
     <passability>Standable</passability>

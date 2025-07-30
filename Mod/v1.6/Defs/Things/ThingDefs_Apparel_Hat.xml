@@ -83,11 +83,11 @@
   <ThingDef ParentName="VV_HatMakeableBase">
     <defName>VV_HuntingCap</defName>
     <label>vivi hunting cap</label>
-    <description>The uniform hat worn by vivis affiliated with a large hive. It might not provide much defense, but it does bring a sense of stability to the mind.</description>
+    <description>a hat mainly worn by vivi who engage in outdoor activities. Unlike uniform hats, its color varies depending on the material used, making it a popular choice among vivi with strong personalities. It might not provide much defense, but it does bring a sense of stability to the mind.</description>
     <graphicData>
-      <texPath>Things/Apparel/VV_UniformHat</texPath>
+      <texPath>Things/Apparel/VV_HuntingCap</texPath>
       <graphicClass>Graphic_Single</graphicClass>
-      <shaderType>CutoutComplex</shaderType>
+      <shaderType>Cutout</shaderType>
       <drawSize>(0.9,0.9)</drawSize>
     </graphicData>
     
@@ -113,8 +113,7 @@
     </stuffCategories>
 
     <apparel>
-      <useWornGraphicMask>true</useWornGraphicMask>
-      <wornGraphicPath>Things/Apparel/VV_UniformHat</wornGraphicPath>
+      <wornGraphicPath>Things/Apparel/VV_HuntingCap</wornGraphicPath>
       <bodyPartGroups>
         <li>FullHead</li>
       </bodyPartGroups>
