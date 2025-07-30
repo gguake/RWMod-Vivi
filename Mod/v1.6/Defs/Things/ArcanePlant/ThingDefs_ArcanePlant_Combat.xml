@@ -22,6 +22,8 @@
     <statBases>
       <MaxHitPoints>90</MaxHitPoints>
       <WorkToBuild>50000</WorkToBuild>
+      <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
+      <VV_LivingLeafGatherYield>1</VV_LivingLeafGatherYield>
     </statBases>
 
     <fillPercent>0.25</fillPercent>
@@ -38,6 +40,8 @@
 
         <manaAbsorbPerDay>900</manaAbsorbPerDay>
       </li>
+
+      <li Class="VVRace.CompProperties_RepeatGatherable" />
     </comps>
 
     <building>
@@ -142,6 +146,8 @@
       <MaxHitPoints>200</MaxHitPoints>
       <WorkToBuild>50000</WorkToBuild>
       <Flammability>0.7</Flammability>
+      <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
+      <VV_LivingLeafGatherYield>1</VV_LivingLeafGatherYield>
     </statBases>
 
     <damageMultipliers Inherit="False">
@@ -162,6 +168,8 @@
 
         <manaAbsorbPerDay>750</manaAbsorbPerDay>
       </li>
+
+      <li Class="VVRace.CompProperties_RepeatGatherable" />
     </comps>
 
     <building>
@@ -220,6 +228,8 @@
     <statBases>
       <MaxHitPoints>90</MaxHitPoints>
       <WorkToBuild>50000</WorkToBuild>
+      <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
+      <VV_LivingLeafGatherYield>1</VV_LivingLeafGatherYield>
     </statBases>
 
     <fillPercent>0.25</fillPercent>
@@ -236,6 +246,8 @@
 
         <manaAbsorbPerDay>900</manaAbsorbPerDay>
       </li>
+
+      <li Class="VVRace.CompProperties_RepeatGatherable" />
     </comps>
 
     <recoilPower>3</recoilPower>

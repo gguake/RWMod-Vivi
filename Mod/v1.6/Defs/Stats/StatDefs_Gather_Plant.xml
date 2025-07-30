@@ -100,4 +100,15 @@
       </li>
     </parts>
   </StatDef>
+  
+  <!-- 살아있는 잎 생산량 -->
+  <StatDef ParentName="VV_StatPlantGatherYieldBase">
+    <defName>VV_LivingLeafGatherYield</defName>
+    <label>living leaf yield multiplier</label>
+    <description>It indicates how much more living leaf can be gathered from the plant compared to the average. Production is influenced by health and mana.</description>
+    <displayPriorityInCategory>5102</displayPriorityInCategory>
+    <parts>
+      <li Class="VVRace.StatPart_Mana"/>
+    </parts>
+  </StatDef>
 </Defs>

@@ -57,9 +57,7 @@ namespace VVRace
                 var damageChance = recipe.damageChanceBySkillLevel.Evaluate(pawn.skills.GetSkill(recipe.workSkill).Level);
                 if (damageChance > 0 && Rand.Chance(damageChance))
                 {
-                    var beforeHitPoint = target.HitPoints;
-                    var afterHitPoint = Mathf.Max(1, (int)(target.HitPoints * Rand.Range(0.75f, 0.9f)));
-                    var damage = beforeHitPoint - afterHitPoint;
+                    var damage = (int)(target.MaxHitPoints * Rand.Range(0.1f, 0.4f));
                     if (damage > 0)
                     {
                         MoteMaker.ThrowText((pawn.DrawPos + target.DrawPos) / 2f, pawn.Map, LocalizeString_Etc.VV_TextMote_GatherFailed.Translate(), 3.65f);

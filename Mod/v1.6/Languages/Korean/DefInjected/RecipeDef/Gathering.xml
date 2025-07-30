@@ -9,4 +9,9 @@
   <VV_GatherPropolis.description>주변의 나무에서 희귀한 프로폴리스를 채집합니다. 식물 자재 채집 속도가 0보다 높아야 작업 가능하며 채집에 많은 시간이 걸립니다.
 \n작업자의 원예 기술이 낮으면 식물에 피해를 입힐 수도 있습니다.</VV_GatherPropolis.description>
   <VV_GatherPropolis.jobString>프로폴리스 채집 중.</VV_GatherPropolis.jobString>
+
+  <VV_GatherLivingLeaf.label>살아있는 잎 채집</VV_GatherLivingLeaf.label>
+  <VV_GatherLivingLeaf.description>주변의 마법 식물에서 살아있는 잎을 채집합니다. 식물 자재 채집 속도가 0보다 높아야 작업 가능하며 채집에 많은 시간이 걸립니다.
+\n작업자의 원예 기술이 낮으면 식물에 피해를 입힐 수도 있습니다.</VV_GatherLivingLeaf.description>
+  <VV_GatherLivingLeaf.jobString>살아있는 잎 채집 중.</VV_GatherLivingLeaf.jobString>
 </LanguageData>

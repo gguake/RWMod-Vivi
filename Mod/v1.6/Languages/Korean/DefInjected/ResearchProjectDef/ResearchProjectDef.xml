@@ -30,7 +30,7 @@
 <VV_Tools.description>채집 능력을 향상시켜 주는 도구를 제작할 수 있습니다. 채집 도구는 평소에는 허리에 차고다닐 수 있습니다.</VV_Tools.description>
 
 <VV_AdvancedGathering.label>고급 채집학</VV_AdvancedGathering.label>
-<VV_AdvancedGathering.description>나무에서 프로폴리스를 채집하고 가공해 뉴트로이민과 생약으로 정제할 수 있습니다.</VV_AdvancedGathering.description>
+<VV_AdvancedGathering.description>나무에서 프로폴리스를 채집하고 가공해 뉴트로아민과 생약으로 정제할 수 있습니다. 일부 마법 식물에서 살아있는 잎을 채집할 수도 있습니다.</VV_AdvancedGathering.description>
 
 <VV_ArcaneBotany.label>마법 식물학</VV_ArcaneBotany.label>
 <VV_ArcaneBotany.description>마법 식물이 방출하는 환경 마나의 흐름을 가시적으로 표시할 수 있게 됩니다. 마법 식물 소재를 사용하는 물건을 제작하고 재배에 유용한 시설 또한 건설할 수 있습니다.</VV_ArcaneBotany.description>

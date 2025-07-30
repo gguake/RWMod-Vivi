@@ -40,4 +40,6 @@
 <VV_StatsReport_ManaFluxRule_TimeOfDay_Night_Desc>밤 시간동안 {0}</VV_StatsReport_ManaFluxRule_TimeOfDay_Night_Desc>
 <VV_StatsReport_ManaFluxRule_TimeOfDay_VaccumBiome_Desc>(우주에 있을 경우 시간 조건 무시)</VV_StatsReport_ManaFluxRule_TimeOfDay_VaccumBiome_Desc>
 <VV_StatsReport_ManaFluxRule_InVaccum_Desc>진공에 있으면 마나 {0}</VV_StatsReport_ManaFluxRule_InVaccum_Desc>
+
+<VV_StatReport_Mana_Multiplier>마나 {0}의 계수</VV_StatReport_Mana_Multiplier>
 </LanguageData>

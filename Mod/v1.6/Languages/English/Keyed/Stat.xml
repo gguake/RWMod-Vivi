@@ -40,4 +40,6 @@
 <VV_StatsReport_ManaFluxRule_TimeOfDay_Night_Desc>{0} mana during the night</VV_StatsReport_ManaFluxRule_TimeOfDay_Night_Desc>
 <VV_StatsReport_ManaFluxRule_TimeOfDay_VaccumBiome_Desc>(Ignores time condition if in space)</VV_StatsReport_ManaFluxRule_TimeOfDay_VaccumBiome_Desc>
 <VV_StatsReport_ManaFluxRule_InVaccum_Desc>{0} mana if in vaccum</VV_StatsReport_ManaFluxRule_InVaccum_Desc>
+
+<VV_StatReport_Mana_Multiplier>Multiplier for mana {0}</VV_StatReport_Mana_Multiplier>
 </LanguageData>

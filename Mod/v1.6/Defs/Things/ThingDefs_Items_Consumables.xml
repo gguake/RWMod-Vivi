@@ -509,6 +509,7 @@ When infused with a small amount of mana, it glows - so the Vivi sometimes prese
       <texPath>Things/Item/VV_HoneywaterFruit</texPath>
       <graphicClass>Graphic_StackCount</graphicClass>
     </graphicData>
+    <socialPropernessMatters>true</socialPropernessMatters>
     <thingCategories>
       <li>VV_ViviResource</li>
     </thingCategories>

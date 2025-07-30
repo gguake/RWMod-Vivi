@@ -39,5 +39,7 @@
         public const string VV_StatsReport_ManaFluxRule_TimeOfDay_Night_Desc = nameof(VV_StatsReport_ManaFluxRule_TimeOfDay_Night_Desc);
         public const string VV_StatsReport_ManaFluxRule_TimeOfDay_VaccumBiome_Desc = nameof(VV_StatsReport_ManaFluxRule_TimeOfDay_VaccumBiome_Desc);
         public const string VV_StatsReport_ManaFluxRule_InVaccum_Desc = nameof(VV_StatsReport_ManaFluxRule_InVaccum_Desc);
+
+        public const string VV_StatReport_Mana_Multiplier = nameof(VV_StatReport_Mana_Multiplier);
     }
 }

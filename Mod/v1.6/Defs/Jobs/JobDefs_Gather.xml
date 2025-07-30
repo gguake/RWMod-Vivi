@@ -15,4 +15,12 @@
     <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
     <ifFlyingKeepFlying>true</ifFlyingKeepFlying>
   </JobDef>
+  
+  <JobDef>
+    <defName>VV_GatherLivingLeaf</defName>
+    <driverClass>VVRace.JobDriver_Gather</driverClass>
+    <reportString>gather living leaf at TargetA.</reportString>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+    <ifFlyingKeepFlying>true</ifFlyingKeepFlying>
+  </JobDef>
 </Defs>

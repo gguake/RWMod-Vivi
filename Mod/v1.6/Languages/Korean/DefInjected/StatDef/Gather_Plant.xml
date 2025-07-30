@@ -14,4 +14,7 @@
 <VV_TreeResinGatherYield.label>프로폴리스 생산량</VV_TreeResinGatherYield.label>
 <VV_TreeResinGatherYield.description>식물에서 평균 대비 얼마나 많은 프로폴리스를 채집 가능한지 나타냅니다. 생산량은 내구도, 성장도, 오염에 영향을 받습니다.</VV_TreeResinGatherYield.description>
 
+<VV_LivingLeafGatherYield.label>살아있는 잎 생산량</VV_LivingLeafGatherYield.label>
+<VV_LivingLeafGatherYield.description>식물에서 평균 대비 얼마나 많은 살아있는 잎을 채집 가능한지 나타냅니다. 생산량은 내구도와 보유 마나에 영향을 받습니다.</VV_LivingLeafGatherYield.description>
+
 </LanguageData>

@@ -142,7 +142,7 @@
   <ResearchProjectDef ParentName="ViviResearchProjectTier1Base">
     <defName>VV_AdvancedGathering</defName>
     <label>advanced gathering</label>
-    <description>Harvest propolis from trees and process it to refine neutroamine and herbs.</description>
+    <description>Can gather propolis from trees and process it into neutroamine and herbal medicine. Some living leaves can also be gathered from certain arcane plants.</description>
     <baseCost>800</baseCost>
     <researchViewX>2</researchViewX>
     <researchViewY>0.7</researchViewY>

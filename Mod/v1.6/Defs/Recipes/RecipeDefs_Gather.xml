@@ -8,9 +8,9 @@
 \nIf the worker's plant skill is low, they may damage gathered plant.</description>
     <jobString>Gathering honey.</jobString>
     
-    <workAmount>920</workAmount>
+    <workAmount>1000</workAmount>
     <workSkill>Plants</workSkill>
-    <workSkillLearnFactor>0.025</workSkillLearnFactor>
+    <workSkillLearnFactor>0.01</workSkillLearnFactor>
     <workSpeedStat>VV_HoneyGatherSpeed</workSpeedStat>
     <efficiencyStat>VV_HoneyGatherYield</efficiencyStat>
 
@@ -36,7 +36,7 @@
     <processingWorkWeight>3</processingWorkWeight>
     <targetCooldownStat>VV_PlantGatherCooldown</targetCooldownStat>
     <targetYieldStat>VV_PlantHoneyGatherYield</targetYieldStat>
-    <maxPathDanger>Some</maxPathDanger>
+    <maxPathDanger>Deadly</maxPathDanger>
 
     <damageChanceBySkillLevel>
       <points>
@@ -55,7 +55,7 @@
   <RecipeDef Class="VVRace.RecipeDef_Gathering">
     <defName>VV_GatherPropolis</defName>
     <label>gather propolis</label>
-    <description>Collect rare propolis from surrounding trees. The speed and yield of propolis gathering must be greater than 0 to perform the job, and it takes a significant amount of time to gather.
+    <description>Gather rare propolis from surrounding trees. The speed and yield of propolis gathering must be greater than 0 to perform the job, and it takes a significant amount of time to gather.
 \nIf the worker's plant skill is low, they may damage gathered plant.</description>
 
     <jobString>Gathering propolis.</jobString>
@@ -75,9 +75,9 @@
       <li>VV_GatheringBarrel</li>
     </recipeUsers>
     <allowMixingIngredients>true</allowMixingIngredients>
-    <targetCountAdjustment>3</targetCountAdjustment>
+    <targetCountAdjustment>2</targetCountAdjustment>
     <products>
-      <VV_Propolis>3</VV_Propolis>
+      <VV_Propolis>2</VV_Propolis>
     </products>
     <researchPrerequisite>VV_AdvancedGathering</researchPrerequisite>
 
@@ -90,15 +90,66 @@
 
     <damageChanceBySkillLevel>
       <points>
-        <li>(8,0.5)</li>
-        <li>(12,0.3)</li>
-        <li>(16,0.2)</li>
+        <li>(10,0.75)</li>
+        <li>(12,0.6)</li>
+        <li>(16,0.35)</li>
         <li>(20,0.1)</li>
       </points>
     </damageChanceBySkillLevel>
 
     <skillRequirements>
-      <Plants>8</Plants>
+      <Plants>10</Plants>
+    </skillRequirements>
+  </RecipeDef>
+  
+  <!-- 살아있는 잎 채집 -->
+  <RecipeDef Class="VVRace.RecipeDef_Gathering">
+    <defName>VV_GatherLivingLeaf</defName>
+    <label>gather living leaf</label>
+    <description>Gather rare living leaves from arcane plants. The speed and yield of living leaf gathering must be greater than 0 to perform the job, and it takes a significant amount of time to gather.
+\nIf the worker's plant skill is low, they may damage gathered plant.</description>
+
+    <jobString>Gathering living leaves.</jobString>
+    
+    <workAmount>3000</workAmount>
+    <workSkill>Plants</workSkill>
+    <workSpeedStat>VV_PlantGatherSpeed</workSpeedStat>
+    <efficiencyStat>VV_PlantGatherYield</efficiencyStat>
+    <workSkillLearnFactor>0.15</workSkillLearnFactor>
+
+    <effectWorking>Clean</effectWorking>
+    <soundWorking>Interact_CleanFilth</soundWorking>
+    <uiIconThing>VV_LivingLeaf</uiIconThing>
+
+    <recipeUsers>
+      <li>VV_GatheringSpot</li>
+      <li>VV_GatheringBarrel</li>
+    </recipeUsers>
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <targetCountAdjustment>2</targetCountAdjustment>
+    <products>
+      <VV_LivingLeaf>2</VV_LivingLeaf>
+    </products>
+    <researchPrerequisite>VV_AdvancedGathering</researchPrerequisite>
+
+    <gatherWorkerType>VVRace.GatherWorker_Plant</gatherWorkerType>
+    <gatheringJob>VV_GatherLivingLeaf</gatheringJob>
+    <gatheringWorkWeight>1</gatheringWorkWeight>
+    <targetCooldownStat>VV_PlantGatherCooldown</targetCooldownStat>
+    <targetYieldStat>VV_LivingLeafGatherYield</targetYieldStat>
+    <maxPathDanger>Deadly</maxPathDanger>
+
+    <damageChanceBySkillLevel>
+      <points>
+        <li>(11,1)</li>
+        <li>(12,0.8)</li>
+        <li>(16,0.55)</li>
+        <li>(20,0.3)</li>
+      </points>
+    </damageChanceBySkillLevel>
+
+    <skillRequirements>
+      <Plants>12</Plants>
     </skillRequirements>
   </RecipeDef>
 </Defs>

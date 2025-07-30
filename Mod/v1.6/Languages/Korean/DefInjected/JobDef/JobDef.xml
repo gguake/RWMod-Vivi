@@ -11,6 +11,7 @@
 <!-- Gather -->
 <VV_GatherHoney.reportString>TargetA에서 꿀 채집 중.</VV_GatherHoney.reportString>
 <VV_GatherPropolis.reportString>TargetA에서 프로폴리스 채집 중.</VV_GatherPropolis.reportString>
+<VV_GatherLivingLeaf.reportString>TargetA에서 살아있는 잎 채집 중.</VV_GatherLivingLeaf.reportString>
 
 <!-- Hatchery -->
 <VV_LayViviEgg.reportString>알 낳는 중.</VV_LayViviEgg.reportString>
