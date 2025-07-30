@@ -16,13 +16,13 @@ namespace VVRace
             var cleaner = reservers.Where(v => v.Position.DistanceToSquared(Position) < 4).FirstOrDefault();
             if (cleaner != null)
             {
-                GatherPollen(map, cleaner);
+                GatherPollen(map, cleaner, Position);
             }
 
             base.DeSpawn(mode);
         }
 
-        public void GatherPollen(Map map, Pawn gatherer)
+        public void GatherPollen(Map map, Pawn gatherer, IntVec3 position)
         {
             var extension = def.GetModExtension<GatherableFilthExtension>();
             if (extension != null)
@@ -31,12 +31,12 @@ namespace VVRace
                 var actualStackCount = (int)stackCount + (Rand.Chance(stackCount - (int)stackCount) ? 1 : 0);
                 if (actualStackCount > 0)
                 {
-                    if (map.GetComponent<GatheringMapComponent>()[Position].gatherableWorkTables.Any(v => v.CanGatherFilth))
+                    if (map.GetComponent<GatheringMapComponent>()[position].gatherableWorkTables.Any(v => v.CanGatherFilth))
                     {
                         var thing = ThingMaker.MakeThing(extension.thingDef);
                         thing.stackCount = actualStackCount;
 
-                        var placed = GenPlace.TryPlaceThing(thing, Position, map, ThingPlaceMode.Direct);
+                        var placed = GenPlace.TryPlaceThing(thing, position, map, ThingPlaceMode.Direct);
                         if (!placed)
                         {
                             thing.Destroy();

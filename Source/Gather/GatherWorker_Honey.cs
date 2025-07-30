@@ -72,7 +72,7 @@ namespace VVRace
                     for (int i = 0; i < _tmpFilthPollens.Count; ++i)
                     {
                         var filthPollen = _tmpFilthPollens[i];
-                        filthPollen.GatherPollen(workTable.Map, pawn);
+                        filthPollen.GatherPollen(workTable.Map, pawn, pawn.Position);
 
                         Pawn_FilthTracker_ReversePatch.ThinCarriedFilth(pawn.filth, filthPollen);
                     }
