@@ -322,6 +322,10 @@
       <HediffDef>VV_WarmingFloralTea</HediffDef>
     </descriptionHyperlinks>
 
+    <statBases>
+      <MarketValue>9.6</MarketValue>
+    </statBases>
+
     <graphicData>
       <texPath>Things/Item/VV_FloralHotTea</texPath>
       <graphicClass>Graphic_StackCount</graphicClass>
@@ -353,6 +357,10 @@
       <HediffDef>VV_CoolingFloralTea</HediffDef>
     </descriptionHyperlinks>
 
+    <statBases>
+      <MarketValue>9.6</MarketValue>
+    </statBases>
+
     <graphicData>
       <texPath>Things/Item/VV_FloralIceTea</texPath>
       <graphicClass>Graphic_StackCount</graphicClass>
@@ -383,6 +391,10 @@
       <HediffDef>VV_FloralTea</HediffDef>
       <HediffDef>VV_FlowerScent</HediffDef>
     </descriptionHyperlinks>
+
+    <statBases>
+      <MarketValue>8.4</MarketValue>
+    </statBases>
 
     <graphicData>
       <texPath>Things/Item/VV_FloralMilkTea</texPath>

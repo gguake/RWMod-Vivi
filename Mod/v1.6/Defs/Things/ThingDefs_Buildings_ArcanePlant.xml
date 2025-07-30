@@ -77,7 +77,7 @@
       <li Class="CompProperties_Glower">
         <compClass>VVRace.CompManaGlower</compClass>
         <glowRadius>11</glowRadius>
-        <glowColor>(190,240,255)</glowColor>
+        <glowColor>(240,240,255)</glowColor>
       </li>
     </comps>
 

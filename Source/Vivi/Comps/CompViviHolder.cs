@@ -95,7 +95,8 @@ namespace VVRace
 
             if (vivi.Spawned)
             {
-                vivi.DeSpawn();
+                vivi.jobs.StopAll();
+                vivi.DeSpawnOrDeselect(DestroyMode.Vanish);
             }
 
             _innerViviContainer.TryAddOrTransfer(vivi);
