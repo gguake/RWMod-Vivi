@@ -39,7 +39,10 @@ namespace VVRace
                     if (!cell.InBounds(map)) { continue; }
 
                     var seedling = cell.GetFirstThing<ArcanePlant_Seedling>(map);
-                    seedling.ResetGrowthBonusCache();
+                    if (seedling != null)
+                    {
+                        seedling.ResetGrowthBonusCache();
+                    }
                 }
             }
         }
