@@ -37,7 +37,7 @@
           <manaFromTemperatureRange>0~1500</manaFromTemperatureRange>
         </manaGenerateRule>
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>250</mana>
+          <mana>200</mana>
         </manaConsumeRule>
         <manaAbsorbPerDay>400</manaAbsorbPerDay>
       </li>
@@ -128,7 +128,7 @@
           </rules>
         </manaGenerateRule>
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>250</mana>
+          <mana>200</mana>
         </manaConsumeRule>
         <manaAbsorbPerDay>450</manaAbsorbPerDay>
       </li>

@@ -8,7 +8,7 @@
 \nIf the worker's plant skill is low, they may damage gathered plant.</description>
     <jobString>Gathering honey.</jobString>
     
-    <workAmount>1000</workAmount>
+    <workAmount>1100</workAmount>
     <workSkill>Plants</workSkill>
     <workSkillLearnFactor>0.01</workSkillLearnFactor>
     <workSpeedStat>VV_HoneyGatherSpeed</workSpeedStat>
@@ -44,10 +44,10 @@
     <damageChanceBySkillLevel>
       <points>
         <li>(0,0.5)</li>
-        <li>(4,0.25)</li>
-        <li>(8,0.12)</li>
-        <li>(12,0.07)</li>
-        <li>(16,0.04)</li>
+        <li>(4,0.3)</li>
+        <li>(8,0.15)</li>
+        <li>(12,0.1)</li>
+        <li>(16,0.05)</li>
         <li>(20,0)</li>
       </points>
     </damageChanceBySkillLevel>
@@ -95,15 +95,15 @@
 
     <damageChanceBySkillLevel>
       <points>
-        <li>(10,0.75)</li>
-        <li>(12,0.6)</li>
-        <li>(16,0.35)</li>
+        <li>(8,0.75)</li>
+        <li>(12,0.5)</li>
+        <li>(16,0.3)</li>
         <li>(20,0.1)</li>
       </points>
     </damageChanceBySkillLevel>
 
     <skillRequirements>
-      <Plants>10</Plants>
+      <Plants>8</Plants>
     </skillRequirements>
   </RecipeDef>
   

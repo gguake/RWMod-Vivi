@@ -79,11 +79,11 @@
       <li Class="VVRace.CompProperties_Mana">
         <manaGenerateRule Class="VVRace.ManaFluxRule_Everflower">
           <ranges>
-            <li>0~200</li>
-            <li>200~400</li>
-            <li>400~800</li>
-            <li>800~1600</li>
-            <li>1600~3200</li>
+            <li>0~800</li>
+            <li>200~1600</li>
+            <li>400~3200</li>
+            <li>800~4800</li>
+            <li>1600~6400</li>
           </ranges>
         </manaGenerateRule>
       </li>

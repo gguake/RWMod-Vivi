@@ -20,5 +20,5 @@
 <VV_Command_ReserveTeleportEverflowerDesc>영원꽃을 지정한 위치로 순간이동시킵니다. 공명 상태의 로열 비비가 필요합니다.</VV_Command_ReserveTeleportEverflowerDesc>
 
 <VV_Command_CanGatherPollens>꽃가루 채집 허용</VV_Command_CanGatherPollens>
-<VV_Command_CanGatherPollensDesc>채집 범위안에 있는 꽃가루를 청소할때 버리지 않고 수집하도록 합니다.</VV_Command_CanGatherPollensDesc>
+<VV_Command_CanGatherPollensDesc>채집 범위안에 있는 꽃가루를 청소할때 버리지 않고 수집하도록 합니다. 꽃가루의 채집량은 청소 속도에 비례합니다.</VV_Command_CanGatherPollensDesc>
 </LanguageData>

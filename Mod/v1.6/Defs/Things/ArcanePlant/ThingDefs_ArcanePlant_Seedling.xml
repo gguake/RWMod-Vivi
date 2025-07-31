@@ -22,22 +22,22 @@
 
     <statBases>
       <MaxHitPoints>30</MaxHitPoints>
-      <MarketValue>10</MarketValue>
+      <MarketValue>20</MarketValue>
     </statBases>
     
     <comps>
       <li Class="VVRace.CompProperties_Mana">
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>60</mana>
+          <mana>80</mana>
         </manaConsumeRule>
 
-        <manaAbsorbPerDay>60</manaAbsorbPerDay>
+        <manaAbsorbPerDay>80</manaAbsorbPerDay>
       </li>
       
       <li Class="CompProperties_Refuelable">
         <fuelLabel>Nutrition</fuelLabel>
         <fuelGizmoLabel>Nutrition</fuelGizmoLabel>
-        <fuelConsumptionRate>11</fuelConsumptionRate>
+        <fuelConsumptionRate>10</fuelConsumptionRate>
         <fuelCapacity>20</fuelCapacity>
         <initialFuelPercent>1</initialFuelPercent>
         <fuelMultiplier>1</fuelMultiplier>
@@ -61,8 +61,8 @@
     
     <modExtensions>
       <li Class="VVRace.SeedlingExtension">
-        <dailyGrowth>0.18</dailyGrowth>
-        <ticksToDamageFromZeroNutrition>30000</ticksToDamageFromZeroNutrition>
+        <dailyGrowth>0.21</dailyGrowth>
+        <ticksToDamageFromZeroNutrition>20000</ticksToDamageFromZeroNutrition>
       </li>
     </modExtensions>
   </ThingDef>

@@ -38,10 +38,10 @@
             <points>
               <li>(0,0)</li>
               <li>(0.25,0)</li>
-              <li>(0.5,150)</li>
-              <li>(1.0,300)</li>
-              <li>(1.5,600)</li>
-              <li>(2.0,1200)</li>
+              <li>(0.5,400)</li>
+              <li>(1.0,700)</li>
+              <li>(1.5,1150)</li>
+              <li>(2.0,1800)</li>
             </points>
           </manaFromWindSpeed>
         </manaGenerateRule>

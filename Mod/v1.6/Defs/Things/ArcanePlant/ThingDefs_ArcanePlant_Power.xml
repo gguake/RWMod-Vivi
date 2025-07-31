@@ -129,11 +129,11 @@
         <manaGenerateRule Class="VVRace.ManaFluxRule_Power">
           <powerManaRatio>0.1</powerManaRatio>
           <min>0</min>
-          <max>500</max>
+          <max>400</max>
         </manaGenerateRule>
 
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>900</mana>
+          <mana>800</mana>
         </manaConsumeRule>
         <manaAbsorbPerDay>1500</manaAbsorbPerDay>
       </li>
@@ -155,7 +155,7 @@
         <transmitsPower>true</transmitsPower>
       </li>
       <li Class="VVRace.CompProperties_ManaLightningLod">
-        <mana>400</mana>
+        <mana>600</mana>
       </li>
     </comps>
 

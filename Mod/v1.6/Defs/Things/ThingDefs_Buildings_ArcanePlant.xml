@@ -40,12 +40,13 @@
       <WorkToBuild>450</WorkToBuild>
       <MaxHitPoints>30</MaxHitPoints>
       <Mass>1</Mass>
-      <Flammability>0.1</Flammability>
+      <Flammability>0</Flammability>
+      <Beauty>0.5</Beauty>
     </statBases>
 
     <costList>
       <VV_HoneyWaterFruit>1</VV_HoneyWaterFruit>
-      <VV_Viviwax>25</VV_Viviwax>
+      <VV_Viviwax>20</VV_Viviwax>
     </costList>
 
     <fillPercent>0.1</fillPercent>
@@ -76,8 +77,8 @@
 
       <li Class="CompProperties_Glower">
         <compClass>VVRace.CompManaGlower</compClass>
-        <glowRadius>11</glowRadius>
-        <glowColor>(255,255,230)</glowColor>
+        <glowRadius>10.9</glowRadius>
+        <glowColor>(250,250,220)</glowColor>
       </li>
     </comps>
 

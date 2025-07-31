@@ -32,7 +32,7 @@ namespace VVRace
         {
             base.Notify_Gathered(pawn, billGiver, target, recipe);
 
-            if (target is Plant plant)
+            if (target is Plant)
             {
                 var pollenChance = recipe.basePollenChance;
                 pollenChance *= pawn.GetStatValue(recipe.efficiencyStat) * target.GetStatValue(recipe.targetYieldStat);
