@@ -111,7 +111,7 @@
       <WorkToMake>11000</WorkToMake>
       <Mass>1.4</Mass>
       <StuffEffectMultiplierArmor>0.34</StuffEffectMultiplierArmor>
-      <StuffEffectMultiplierInsulation_Cold>2.0</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Cold>2.1</StuffEffectMultiplierInsulation_Cold>
       <StuffEffectMultiplierInsulation_Heat>1.2</StuffEffectMultiplierInsulation_Heat>
       <EquipDelay>1.0</EquipDelay>
     </statBases>
@@ -121,7 +121,7 @@
       <ToxicEnvironmentResistance>0.8</ToxicEnvironmentResistance>
     </equippedStatOffsets>
     
-    <costStuffCount>75</costStuffCount>
+    <costStuffCount>80</costStuffCount>
     <stuffCategories>
       <li>Fabric</li>
       <li>Leathery</li>
