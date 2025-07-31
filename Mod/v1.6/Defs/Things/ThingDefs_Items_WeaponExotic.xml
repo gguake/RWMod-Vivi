@@ -17,7 +17,7 @@
     <statBases>
       <WorkToMake>50000</WorkToMake>
       <Mass>4</Mass>
-      <VV_MeleeWeapon_ManaCost>10</VV_MeleeWeapon_ManaCost>
+      <VV_MeleeWeapon_ManaCost>15</VV_MeleeWeapon_ManaCost>
     </statBases>
     <equippedStatOffsets>
       <MoveSpeed>-0.5</MoveSpeed>
@@ -44,7 +44,7 @@
         <meleeDamageFactorCurve>
           <points>
             <li>(0, 1)</li>
-            <li>(1, 2)</li>
+            <li>(1, 1.5)</li>
           </points>
         </meleeDamageFactorCurve>
       </li>
@@ -58,7 +58,7 @@
       </li>
       <li Class="CompProperties_Biocodable"/>
       <li Class="VVRace.CompProperties_Mana">
-        <manaCapacity>1200</manaCapacity>
+        <manaCapacity>1000</manaCapacity>
         <manaAbsorbPerDay>750</manaAbsorbPerDay>
         <workOnlySpawned>false</workOnlySpawned>
       </li>
@@ -153,7 +153,7 @@
       <AccuracyMedium>1</AccuracyMedium>
       <AccuracyLong>1</AccuracyLong>
       <RangedWeapon_Cooldown>30.0</RangedWeapon_Cooldown>
-      <VV_RangedWeapon_ManaCost>15</VV_RangedWeapon_ManaCost>
+      <VV_RangedWeapon_ManaCost>20</VV_RangedWeapon_ManaCost>
     </statBases>
     <tradeNeverStack>true</tradeNeverStack>
     <relicChance>3</relicChance>
@@ -182,7 +182,7 @@
         <biocodeOnEquip>true</biocodeOnEquip>
       </li>
       <li Class="VVRace.CompProperties_Mana">
-        <manaCapacity>2000</manaCapacity>
+        <manaCapacity>1000</manaCapacity>
         <manaAbsorbPerDay>750</manaAbsorbPerDay>
         <workOnlySpawned>false</workOnlySpawned>
       </li>
@@ -196,7 +196,7 @@
         <verbClass>VVRace.Verb_ShootWithMana</verbClass>
         <hasStandardCommand>true</hasStandardCommand>
         <defaultProjectile>VV_Projectile_EltexNeedle</defaultProjectile>
-        <warmupTime>0.5</warmupTime>
+        <warmupTime>1.4</warmupTime>
         <range>37.6</range>
         <soundCast>Interact_BeatFire</soundCast>
         <rangedFireRulepack>Combat_RangedFire_Thrown</rangedFireRulepack>
@@ -210,7 +210,7 @@
         <capacities>
           <li>Stab</li>
         </capacities>
-        <power>9</power>
+        <power>8</power>
         <armorPenetration>0.24</armorPenetration>
         <cooldownTime>0.5</cooldownTime>
       </li>
@@ -267,9 +267,9 @@
 
     <projectile Class="VVRace.NeedleProperties">
       <damageDef>Stab</damageDef>
-      <damageAmountBase>6</damageAmountBase>
+      <damageAmountBase>5</damageAmountBase>
       <stoppingPower>0.5</stoppingPower>
-      <armorPenetrationBase>0.12</armorPenetrationBase>
+      <armorPenetrationBase>0.1</armorPenetrationBase>
       <speed>100</speed>
 
       <bonusSpeedByPsychicSensitivity>

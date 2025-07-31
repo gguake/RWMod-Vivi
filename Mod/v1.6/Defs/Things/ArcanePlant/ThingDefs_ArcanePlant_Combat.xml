@@ -93,8 +93,8 @@
     <statBases>
       <AccuracyTouch>0.92</AccuracyTouch>
       <AccuracyShort>0.84</AccuracyShort>
-      <AccuracyMedium>0.48</AccuracyMedium>
-      <AccuracyLong>0.24</AccuracyLong>
+      <AccuracyMedium>0.62</AccuracyMedium>
+      <AccuracyLong>0.34</AccuracyLong>
       <RangedWeapon_Cooldown>1.2</RangedWeapon_Cooldown>
       <DeteriorationRate>0</DeteriorationRate>
       <Mass>40</Mass>
@@ -108,7 +108,7 @@
         <defaultProjectile>VV_Bullet_Pea</defaultProjectile>
         <warmupTime>0.5</warmupTime>
         <range>28.9</range>
-        <ticksBetweenBurstShots>7</ticksBetweenBurstShots>
+        <ticksBetweenBurstShots>8</ticksBetweenBurstShots>
         <burstShotCount>4</burstShotCount>
         <soundCast>ThumpCannon_Fire</soundCast>
         <soundCastTail>GunTail_Heavy</soundCastTail>
