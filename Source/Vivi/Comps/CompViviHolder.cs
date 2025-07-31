@@ -19,51 +19,49 @@ namespace VVRace
         }
     }
 
-    public class CompViviHolder : ThingComp, IThingHolder
+    public class CompViviHolder : ThingComp
     {
         public CompProperties_ViviHolder Props => (CompProperties_ViviHolder)props;
 
-        public bool CanJoin => _innerViviContainer.Count < Props.maxCount;
-        public int InnerViviCount => _innerViviContainer.Count;
+        public bool CanJoin => FairyficatedPawnCount < Props.maxCount;
 
-        private ThingOwner _innerViviContainer;
+        public IEnumerable<Pawn> FairyficatedPawns => Current.Game.GetComponent<GameComponent_Mana>().GetFairyficatedPawns((Pawn)parent);
+        public int FairyficatedPawnCount => FairyficatedPawns.Count();
 
         public CompViviHolder()
         {
-            _innerViviContainer = new ThingOwner<Pawn>(this);
         }
 
         public override void PostExposeData()
         {
-            Scribe_Deep.Look(ref _innerViviContainer, "innerViviContainer", new object[] { this });
+            ThingOwner<Pawn> innerContainer = null;
+            Scribe_Deep.Look(ref innerContainer, "innerViviContainer", new object[] { this });
         }
 
         public override void PostDestroy(DestroyMode mode, Map previousMap)
         {
             if (mode != DestroyMode.WillReplace)
             {
-                if (_innerViviContainer.Count > 0)
-                {
-                    _innerViviContainer.ClearAndDestroyContents(mode);
-                }
+                Current.Game.GetComponent<GameComponent_Mana>().UnregisterAllFairyByLinker((Pawn)parent);
             }
         }
 
         public override void Notify_Killed(Map prevMap, DamageInfo? dinfo = null)
         {
-            for (int i = 0; i < _innerViviContainer.Count; ++i)
+            var gameCompMana = Current.Game.GetComponent<GameComponent_Mana>();
+            foreach (var fairy in gameCompMana.GetFairyficatedPawns((Pawn)parent))
             {
-                _innerViviContainer.FirstOrDefault().Kill(dinfo);
+                fairy.Kill(dinfo);
             }
 
-            _innerViviContainer.ClearAndDestroyContents();
+            gameCompMana.UnregisterAllFairyByLinker((Pawn)parent);
         }
 
         public override void PostPreApplyDamage(ref DamageInfo dinfo, out bool absorbed)
         {
             base.PostPreApplyDamage(ref dinfo, out absorbed);
 
-            if (Props.preventDamageChanceByInnerCount != null && Rand.Chance(Props.preventDamageChanceByInnerCount.Evaluate(InnerViviCount)))
+            if (Props.preventDamageChanceByInnerCount != null && Rand.Chance(Props.preventDamageChanceByInnerCount.Evaluate(FairyficatedPawnCount)))
             {
                 if (Props.preventDamageEffect != null)
                 {
@@ -79,16 +77,6 @@ namespace VVRace
             }
         }
 
-        public void GetChildHolders(List<IThingHolder> outChildren)
-        {
-            ThingOwnerUtility.AppendThingHoldersFromThings(outChildren, GetDirectlyHeldThings());
-        }
-
-        public ThingOwner GetDirectlyHeldThings()
-        {
-            return _innerViviContainer;
-        }
-
         public void JoinVivi(Pawn vivi)
         {
             if (!vivi.IsVivi()) { return; }
@@ -99,7 +87,7 @@ namespace VVRace
                 vivi.DeSpawnOrDeselect(DestroyMode.Vanish);
             }
 
-            _innerViviContainer.TryAddOrTransfer(vivi);
+            Current.Game.GetComponent<GameComponent_Mana>().RegisterFairy((Pawn)parent, vivi);
 
             Find.LetterStack.ReceiveLetter(
                 LocalizeString_Letter.VV_Letter_FairyficationCompleteLabel.Translate(vivi.Named("TARGET")),
@@ -112,10 +100,12 @@ namespace VVRace
 
         public Pawn DetachVivi()
         {
-            var vivi = _innerViviContainer.RandomElement();
-            if (_innerViviContainer.TryDrop(vivi, ThingPlaceMode.Near, 1, out _))
+            var gameCompMana = Current.Game.GetComponent<GameComponent_Mana>();
+            var vivi = gameCompMana.GetFairyficatedPawns((Pawn)parent).RandomElement();
+
+            if (GenPlace.TryPlaceThing(vivi, parent.Position, parent.Map, ThingPlaceMode.Near))
             {
-                Refresh();
+                gameCompMana.UnregisterFairy(vivi);
                 return (Pawn)vivi;
             }
 
@@ -126,7 +116,7 @@ namespace VVRace
         {
             var pawn = (Pawn)parent;
             var hediff = pawn.health.hediffSet.GetFirstHediffOfDef(VVHediffDefOf.VV_ViviFairyFollow);
-            var severity = _innerViviContainer.Count;
+            var severity = FairyficatedPawnCount;
             if (severity > 0)
             {
                 if (hediff == null)

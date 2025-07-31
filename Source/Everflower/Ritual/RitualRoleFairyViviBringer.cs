@@ -18,7 +18,7 @@ namespace VVRace
                 return false;
             }
 
-            if (compViviHolder.InnerViviCount == 0)
+            if (compViviHolder.FairyficatedPawnCount == 0)
             {
                 reason = LocalizeString_Etc.VV_FailReason_HasNoFairyVivi.Translate();
                 return false;
