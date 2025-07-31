@@ -209,28 +209,28 @@ namespace VVRace
                         {
                             if (pawn != null)
                             {
-                                if (hatcheeParent != null)
+                                var description = new StringBuilder();
+                                if (pawn.IsColonist)
                                 {
-                                    if (pawn.IsColonist)
+                                    description.Append(hatcheeParent != null ?
+                                        LocalizeString_Letter.VV_Letter_ViviEggHatched.Translate(hatcheeParent.Named("PARENT")) :
+                                        LocalizeString_Letter.VV_Letter_ViviEggHatchedNoParent.Translate(hatcheeParent.Named("PARENT")));
+
+                                    if (pawn.genes != null && pawn.genes.Xenogenes.Count > 0)
                                     {
-                                        Find.LetterStack.ReceiveLetter(
-                                            LocalizeString_Letter.VV_Letter_ViviEggHatchedLabel.Translate(),
-                                            LocalizeString_Letter.VV_Letter_ViviEggHatched.Translate(hatcheeParent.Named("PARENT")),
-                                            LetterDefOf.PositiveEvent,
-                                            pawn);
+                                        description.AppendLine();
+                                        description.AppendInNewLine(LocalizeString_Letter.VV_Letter_ViviEggHatchedWithGene.Translate());
+
+                                        description.AppendInNewLine(string.Join(", ", pawn.genes.Xenogenes.Select(v => v.def.LabelCap)));
                                     }
+
+                                    Find.LetterStack.ReceiveLetter(
+                                        LocalizeString_Letter.VV_Letter_ViviEggHatchedLabel.Translate(),
+                                        description.ToString(),
+                                        LetterDefOf.PositiveEvent,
+                                        pawn);
                                 }
-                                else
-                                {
-                                    if (pawn.IsColonist)
-                                    {
-                                        Find.LetterStack.ReceiveLetter(
-                                            LocalizeString_Letter.VV_Letter_ViviEggHatchedLabel.Translate(),
-                                            LocalizeString_Letter.VV_Letter_ViviEggHatchedNoParent.Translate(hatcheeParent.Named("PARENT")),
-                                            LetterDefOf.PositiveEvent,
-                                            pawn);
-                                    }
-                                }
+
 
                                 if (hatcheeParent != null)
                                 {

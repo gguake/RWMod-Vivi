@@ -5,6 +5,8 @@
         public const string VV_Letter_ViviEggHatchedLabel = nameof(VV_Letter_ViviEggHatchedLabel);
         public const string VV_Letter_ViviEggHatched = nameof(VV_Letter_ViviEggHatched);
         public const string VV_Letter_ViviEggHatchedNoParent = nameof(VV_Letter_ViviEggHatchedNoParent);
+        public const string VV_Letter_ViviEggHatchedWithGene = nameof(VV_Letter_ViviEggHatchedWithGene);
+
         public const string VV_Letter_RoyalViviGrownLabel = nameof(VV_Letter_RoyalViviGrownLabel);
         public const string VV_Letter_RoyalViviGrown = nameof(VV_Letter_RoyalViviGrown);
         public const string VV_Letter_IncidentHornetSwarmArrivedLabel = nameof(VV_Letter_IncidentHornetSwarmArrivedLabel);

@@ -7,6 +7,8 @@
 <VV_Letter_ViviEggHatchedNoParent>A new Vivi has been born. Vivi grow and learn faster than typical humans but have shorter lifespans. They also inherit random genetic modifiers at birth, including those from their mother.
 \nIf Vivi consume enough royal jelly during their growth stage, they develop into royal vivi, who live longer and can lay eggs. royal vivi have higher mental sensitivity and social skills but significantly lower work abilities and slower movement.</VV_Letter_ViviEggHatchedNoParent>
 
+<VV_Letter_ViviEggHatchedWithGene>It has the following genes:</VV_Letter_ViviEggHatchedWithGene>
+
 <VV_Letter_RoyalViviGrownLabel>New royal vivi: {PAWN_labelShort}</VV_Letter_RoyalViviGrownLabel>
 <VV_Letter_RoyalViviGrown>{PAWN_labelShort} has consumed enough royal jelly to grow into a royal vivi.</VV_Letter_RoyalViviGrown>
 
