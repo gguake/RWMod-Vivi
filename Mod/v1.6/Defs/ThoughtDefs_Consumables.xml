@@ -9,7 +9,7 @@
       <li>
         <label>ate pollen</label>
         <description>It's bitter and dry. Do you usually eat this kind of food?</description>
-        <baseMoodEffect>-4</baseMoodEffect>
+        <baseMoodEffect>-3</baseMoodEffect>
       </li>
     </stages>
   </ThoughtDef>
@@ -24,7 +24,7 @@
       <li>
         <label>drink flowering tea</label>
         <description>Drinking that flowering tea made me feel relaxed.</description>
-        <baseMoodEffect>5</baseMoodEffect>
+        <baseMoodEffect>4</baseMoodEffect>
       </li>
     </stages>
   </ThoughtDef>
@@ -39,7 +39,7 @@
       <li>
         <label>flower scent</label>
         <description>Feel like I'm radiating a scent of flowers.</description>
-        <baseMoodEffect>5</baseMoodEffect>
+        <baseMoodEffect>4</baseMoodEffect>
       </li>
     </stages>
   </ThoughtDef>
