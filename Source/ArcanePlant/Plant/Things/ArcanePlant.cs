@@ -214,7 +214,7 @@ namespace VVRace
             }
             else
             {
-                if (dinfo.Def != DamageDefOf.Flame)
+                if (dinfo.Def != DamageDefOf.Flame && dinfo.Def != DamageDefOf.SurgicalCut)
                 {
                     var pot = _mapComponent?.GetArcanePlantPot(Position);
                     if (pot != null)
