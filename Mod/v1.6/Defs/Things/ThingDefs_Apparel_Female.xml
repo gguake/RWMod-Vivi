@@ -149,6 +149,7 @@
         <li>RoyalTier6</li>
         <li>RoyalTier7</li>
       </tags>
+      <canBeDesiredForIdeo>false</canBeDesiredForIdeo>
     </apparel>
     
     <recipeMaker>
