@@ -30,6 +30,7 @@
     </modExtensions>
   </ThingDef>
 
+  <!-- 로열 비비 드레스 -->
   <ThingDef ParentName="VV_FemaleApparelBase">
     <defName>VV_BasicRoyalCostume</defName>
     <label>vivi basic royal costume</label>
@@ -40,7 +41,6 @@
       <shaderType>CutoutComplex</shaderType>
     </graphicData>
 
-    <smeltable>false</smeltable>
     <statBases>
       <MaxHitPoints>180</MaxHitPoints>
       <WorkToMake>4800</WorkToMake>
@@ -51,8 +51,8 @@
       <EquipDelay>1.5</EquipDelay>
     </statBases>
     <equippedStatOffsets>
-      <SocialImpact>0.2</SocialImpact>
-      <TradePriceImprovement>0.2</TradePriceImprovement>
+      <SocialImpact>0.1</SocialImpact>
+      <TradePriceImprovement>0.1</TradePriceImprovement>
       <ToxicEnvironmentResistance>0.1</ToxicEnvironmentResistance>
     </equippedStatOffsets>
 
@@ -93,4 +93,71 @@
       <displayPriority>3200</displayPriority>
     </recipeMaker>
   </ThingDef>
+  
+  <!-- 로열 비비 여행 망토 -->
+  <ThingDef ParentName="VV_FemaleApparelBase">
+    <defName>VV_RoyalViviTravelCape</defName>
+    <label>royal vivi travel cape</label>
+    <description>A cape commonly worn by royal vivis when traveling long distances. Designed to be quite thick, it provides substantial protection for the vulnerable royal vivis in the wild and enables them to endure various environments. Its luxurious appearance makes it a favored garment among royal vivis when interacting with outsiders.
+\nCan wear only royal vivi.</description>
+    <graphicData>
+      <texPath>Things/Apparel/VV_RoyalViviTravelCape</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+
+    <statBases>
+      <MaxHitPoints>300</MaxHitPoints>
+      <WorkToMake>11000</WorkToMake>
+      <Mass>1.4</Mass>
+      <StuffEffectMultiplierArmor>0.34</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>2.0</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>1.2</StuffEffectMultiplierInsulation_Heat>
+      <EquipDelay>1.0</EquipDelay>
+    </statBases>
+    <equippedStatOffsets>
+      <SocialImpact>0.2</SocialImpact>
+      <TradePriceImprovement>0.2</TradePriceImprovement>
+      <ToxicEnvironmentResistance>0.8</ToxicEnvironmentResistance>
+    </equippedStatOffsets>
+    
+    <costStuffCount>75</costStuffCount>
+    <stuffCategories>
+      <li>Fabric</li>
+      <li>Leathery</li>
+    </stuffCategories>
+
+    <apparel>
+      <useWornGraphicMask>true</useWornGraphicMask>
+      <wornGraphicPath>Things/Apparel/VV_RoyalViviTravelCape</wornGraphicPath>
+      <bodyPartGroups>
+        <li>Neck</li>
+        <li>Shoulders</li>
+        <li>Torso</li>
+        <li>Arms</li>
+        <li>Legs</li>
+      </bodyPartGroups>
+      <layers>
+        <li>Middle</li>
+        <li>Shell</li>
+      </layers>
+      <tags>
+        <li>VV_RoyalViviApparel</li>
+        <li>Royal</li>
+        <li>RoyalTier2</li>
+        <li>RoyalTier5</li>
+        <li>RoyalTier6</li>
+        <li>RoyalTier7</li>
+      </tags>
+    </apparel>
+    
+    <recipeMaker>
+      <skillRequirements>
+        <Crafting>5</Crafting>
+      </skillRequirements>
+      <researchPrerequisite>VV_AdvancedApparels</researchPrerequisite>
+      <displayPriority>3201</displayPriority>
+    </recipeMaker>
+  </ThingDef>
+
 </Defs>

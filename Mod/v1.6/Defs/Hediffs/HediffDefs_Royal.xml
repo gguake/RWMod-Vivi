@@ -22,20 +22,20 @@
           <li>HeartAttack</li>
         </makeImmuneTo>
 
-        <hungerRateFactorOffset>0.25</hungerRateFactorOffset>
+        <hungerRateFactorOffset>0.15</hungerRateFactorOffset>
         <statOffsets>
-          <WorkSpeedGlobal>-0.5</WorkSpeedGlobal>
-          <MoveSpeed>-2.2</MoveSpeed>
-          <NegotiationAbility>0.35</NegotiationAbility>
-          <SocialImpact>0.35</SocialImpact>
+          <WorkSpeedGlobal>-0.4</WorkSpeedGlobal>
+          <MoveSpeed>-2</MoveSpeed>
+          <NegotiationAbility>0.3</NegotiationAbility>
+          <SocialImpact>0.3</SocialImpact>
           <PsychicSensitivity>1.25</PsychicSensitivity>
-          <MeditationFocusGain>0.2</MeditationFocusGain>
+          <MeditationFocusGain>0.1</MeditationFocusGain>
           <PsychicEntropyRecoveryRate>0.2</PsychicEntropyRecoveryRate>
-          <MeleeDodgeChance>-15</MeleeDodgeChance>
+          <MeleeDodgeChance>-20</MeleeDodgeChance>
         </statOffsets>
         <statFactors>
           <LifespanFactor>20</LifespanFactor>
-          <ImmunityGainSpeed>2</ImmunityGainSpeed>
+          <ImmunityGainSpeed>1.8</ImmunityGainSpeed>
         </statFactors>
       </li>
     </stages>
