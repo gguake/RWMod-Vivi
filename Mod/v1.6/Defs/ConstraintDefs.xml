@@ -112,6 +112,28 @@
     </constraints>
   </RPEF.ConstraintDef>
 
+  <RPEF.ConstraintDef>
+    <defName>VV_ApparelConstraint</defName>
+    <constraints>
+      <li Class="RPEF.RaceConstraint">
+        <type>Required</type>
+        <things>
+          <li>VV_Vivi</li>
+        </things>
+        <failReason>not vivi</failReason>
+      </li>
+      <li Class="RPEF.BodyTypeConstraint">
+        <type>Required</type>
+        <bodyTypes>
+          <li>Child</li>
+          <li>Thin</li>
+          <li>Female</li>
+        </bodyTypes>
+        <failReason>not adapt body</failReason>
+      </li>
+    </constraints>
+  </RPEF.ConstraintDef>
+  
   
   <RPEF.ConstraintDef>
     <defName>VV_FemaleApparelConstraint</defName>

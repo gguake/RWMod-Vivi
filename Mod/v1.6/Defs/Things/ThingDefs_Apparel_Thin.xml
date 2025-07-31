@@ -34,7 +34,8 @@
   <ThingDef ParentName="VV_ThinApparelBase">
     <defName>VV_BasicWorkerCostume</defName>
     <label>vivi basic worker costume</label>
-    <description>Workwear for vivis focused on convenience and practicality. Comfortable for most tasks while retaining body heat well.</description>
+    <description>Workwear for vivis focused on convenience and practicality. Comfortable for most tasks while retaining body heat well.
+\nCan wear only normal vivi or childs.</description>
     <graphicData>
       <texPath>Things/Apparel/BasicWorkerCostume</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -91,7 +92,8 @@
   <ThingDef ParentName="VV_ThinApparelBase">
     <defName>VV_WorkerUniformDress</defName>
     <label>vivi worker uniform</label>
-    <description>Uniform for vivis on key duties or outside assignments; offers fair protection and mental steadiness.</description>
+    <description>Uniform for vivis on key duties or outside assignments; offers fair protection and mental steadiness.
+\nCan wear only normal vivi or childs.</description>
     <graphicData>
       <texPath>Things/Apparel/WorkerUniformDress</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -143,62 +145,12 @@
     </recipeMaker>
   </ThingDef>
   
-  <!-- 비비 겨울 망토 -->
-  <ThingDef ParentName="VV_ThinApparelBase">
-    <defName>VV_WinterCape</defName>
-    <label>vivi winter cape</label>
-    <description>A cape worn by Vivis to get through the winter. It has excellent insulation but is not suitable for warm places.</description>
-    <graphicData>
-      <texPath>Things/Apparel/WinterCape</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
-      <shaderType>CutoutComplex</shaderType>
-    </graphicData>
-
-    <statBases>
-      <MaxHitPoints>200</MaxHitPoints>
-      <WorkToMake>8000</WorkToMake>
-      <Mass>2.0</Mass>
-      <StuffEffectMultiplierArmor>0.18</StuffEffectMultiplierArmor>
-      <StuffEffectMultiplierInsulation_Cold>2.2</StuffEffectMultiplierInsulation_Cold>
-      <StuffEffectMultiplierInsulation_Heat>0</StuffEffectMultiplierInsulation_Heat>
-      <EquipDelay>1.0</EquipDelay>
-      
-      <Insulation_Heat>-6</Insulation_Heat>
-    </statBases>
-    
-    <costStuffCount>60</costStuffCount>
-    <stuffCategories>
-      <li>Fabric</li>
-      <li>Leathery</li>
-    </stuffCategories>
-
-    <apparel>
-      <useWornGraphicMask>true</useWornGraphicMask>
-      <wornGraphicPath>Things/Apparel/WinterCape</wornGraphicPath>
-      <bodyPartGroups>
-        <li>Neck</li>
-        <li>Shoulders</li>
-        <li>Torso</li>
-        <li>Arms</li>
-      </bodyPartGroups>
-      <layers>
-        <li>Middle</li>
-        <li>Shell</li>
-      </layers>
-    </apparel>
-    
-    <recipeMaker>
-      <researchPrerequisite>VV_Apparels</researchPrerequisite>
-      <displayPriority>3300</displayPriority>
-    </recipeMaker>
-  </ThingDef>
-  
   <!-- 비비 방수 코트 -->
   <ThingDef ParentName="VV_ThinApparelBase">
     <defName>VV_WaterproofCoat</defName>
     <label>vivi waterproof coat</label>
-    <description>A waterproof coat mainly worn by vivis during extended outdoor activity. Built sturdy to provide high protection.
-\nIts waterproof coating keeps it from getting soaked in rain or while crossing water.</description>
+    <description>A waterproof coat mainly worn by vivis during extended outdoor activity. Built sturdy to provide high protection. Its waterproof coating keeps it from getting soaked in rain or while crossing water.
+\nCan wear only normal vivi or childs.</description>
     <graphicData>
       <texPath>Things/Apparel/WaterproofCoat</texPath>
       <graphicClass>Graphic_Single</graphicClass>

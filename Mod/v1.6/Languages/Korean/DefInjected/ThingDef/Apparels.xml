@@ -14,17 +14,19 @@
 
 <!-- Vivi -->
 <VV_BasicWorkerCostume.label>비비 작업복</VV_BasicWorkerCostume.label>
-<VV_BasicWorkerCostume.description>편의성과 실용성에 초점을 맞춘 비비들의 작업복입니다. 대부분의 작업시 활동하기 편하면서 체온을 잘 보존시켜줍니다.</VV_BasicWorkerCostume.description>
+<VV_BasicWorkerCostume.description>편의성과 실용성에 초점을 맞춘 비비들의 작업복입니다. 대부분의 작업시 활동하기 편하면서 체온을 잘 보존시켜줍니다.
+\n일반 비비나 어린이만 입을 수 있습니다.</VV_BasicWorkerCostume.description>
 
 <VV_WorkerUniformDress.label>비비 제복</VV_WorkerUniformDress.label>
-<VV_WorkerUniformDress.description>둥지에서 중요한 역할이나 외부 활동에 배정된 비비들이 입는 제복입니다. 괜찮은 방어력을 제공하며 착용한 비비에게 정서적 안정감을 줍니다.</VV_WorkerUniformDress.description>
+<VV_WorkerUniformDress.description>둥지에서 중요한 역할이나 외부 활동에 배정된 비비들이 입는 제복입니다. 괜찮은 방어력을 제공하며 착용한 비비에게 정서적 안정감을 줍니다.
+\n일반 비비나 어린이만 입을 수 있습니다.</VV_WorkerUniformDress.description>
 
 <VV_WinterCape.label>비비 겨울 망토</VV_WinterCape.label>
 <VV_WinterCape.description>비비들이 겨울을 지내기 위해 입는 망토입니다. 매우 뛰어난 방한 성능을 가지고 있지만 더운 곳에서는 적합하지 않습니다.</VV_WinterCape.description>
 
 <VV_WaterproofCoat.label>비비 방수 코트</VV_WaterproofCoat.label>
-<VV_WaterproofCoat.description>비비들이 장기간 외부 활동을 할때 주로 입는 코트입니다. 튼튼하게 제작되어 높은 방호력을 제공합니다.
-\n방수 코팅이 되어있어 비가 오거나 물을 건널때에도 축축해지지 않습니다.</VV_WaterproofCoat.description>
+<VV_WaterproofCoat.description>비비들이 장기간 외부 활동을 할때 주로 입는 코트입니다. 튼튼하게 제작되어 높은 방호력을 제공합니다. 방수 코팅이 되어있어 비가 오거나 물을 건널때에도 축축해지지 않습니다.
+\n일반 비비나 어린이만 입을 수 있습니다.</VV_WaterproofCoat.description>
 
 <!-- Head -->
 <VV_UniformHat.label>비비 제복 모자</VV_UniformHat.label>

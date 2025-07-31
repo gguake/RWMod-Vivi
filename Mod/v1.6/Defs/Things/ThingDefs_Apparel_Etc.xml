@@ -1,10 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
+  <!-- 비비 겨울 망토 -->
+  <ThingDef ParentName="ApparelMakeableBase">
+    <defName>VV_WinterCape</defName>
+    <label>vivi winter cape</label>
+    <description>A cape worn by vivis to get through the winter. It has excellent insulation but is not suitable for warm places.
+\nCan wear only any vivi.</description>
+    <graphicData>
+      <texPath>Things/Apparel/WinterCape</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+    <thingCategories>
+      <li>VV_ViviApparel</li>
+    </thingCategories>
+
+    <statBases>
+      <MaxHitPoints>200</MaxHitPoints>
+      <WorkToMake>8000</WorkToMake>
+      <Mass>2.0</Mass>
+      <StuffEffectMultiplierArmor>0.18</StuffEffectMultiplierArmor>
+      <StuffEffectMultiplierInsulation_Cold>2.2</StuffEffectMultiplierInsulation_Cold>
+      <StuffEffectMultiplierInsulation_Heat>0</StuffEffectMultiplierInsulation_Heat>
+      <EquipDelay>1.0</EquipDelay>
+      
+      <Insulation_Heat>-6</Insulation_Heat>
+    </statBases>
+    
+    <costStuffCount>60</costStuffCount>
+    <stuffCategories>
+      <li>Fabric</li>
+      <li>Leathery</li>
+    </stuffCategories>
+
+    <smeltable>false</smeltable>
+    <apparel>
+      <tags>
+        <li>VV_ViviApparel</li>
+      </tags>
+      <canBeDesiredForIdeo>false</canBeDesiredForIdeo>
+      <developmentalStageFilter>Child, Adult</developmentalStageFilter>
+
+      <useWornGraphicMask>true</useWornGraphicMask>
+      <wornGraphicPath>Things/Apparel/WinterCape</wornGraphicPath>
+      <bodyPartGroups>
+        <li>Neck</li>
+        <li>Shoulders</li>
+        <li>Torso</li>
+        <li>Arms</li>
+      </bodyPartGroups>
+      <layers>
+        <li>Middle</li>
+        <li>Shell</li>
+      </layers>
+    </apparel>
+    
+    <recipeMaker>
+      <researchPrerequisite>VV_Apparels</researchPrerequisite>
+      <displayPriority>3500</displayPriority>
+    </recipeMaker>
+
+    <tradeTags Inherit="False">
+      <li>VV_ViviApparel</li>
+    </tradeTags>
+
+    <colorGenerator Class="ColorGenerator_White" />
+
+    <modExtensions>
+      <li Class="RPEF.ConstraintModExtension">
+        <def>VV_ApparelConstraint</def>
+      </li>
+      <li Class="RPEF.ApparelGraphicHook">
+        <defaultBodyTypeGraphicOverride>Thin</defaultBodyTypeGraphicOverride>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
   <!-- 비비 수호자 코트 -->
   <ThingDef ParentName="ApparelMakeableBase">
     <defName>VV_GuardianCoat</defName>
     <label>vivi combat coat</label>
-    <description>A very sturdy coat tailored from biostrands for the vivis primary frontline fighters. It looks like ordinary cloth, yet provides very high protection, and with superior materials can rival heavy heavy-armor suits.</description>
+    <description>A very sturdy coat tailored from biostrands for the vivis primary frontline fighters. It looks like ordinary cloth, yet provides very high protection, and with superior materials can rival heavy heavy-armor suits.
+\nCan wear only adult vivi.</description>
     <graphicData>
       <texPath>Things/Apparel/VV_GuardianCoat</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -80,7 +157,7 @@
       <researchPrerequisites>
         <li>VV_AdvancedApparels</li>
       </researchPrerequisites>
-      <displayPriority>3500</displayPriority>
+      <displayPriority>3501</displayPriority>
     </recipeMaker>
 
     <tradeTags Inherit="False">
