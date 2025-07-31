@@ -52,7 +52,7 @@ namespace VVRace
             base.Destroy(mode);
         }
 
-        public override AcceptanceReport DeconstructibleBy(Faction faction) => false;
+        public override AcceptanceReport DeconstructibleBy(Faction faction) => EverflowerComp.AttunementLevel == 0;
 
         public override ushort PathWalkCostFor(Pawn p)
         {

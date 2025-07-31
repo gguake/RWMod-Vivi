@@ -15,9 +15,9 @@
     
     <techLevel>Medieval</techLevel>
     <statBases>
-      <WorkToMake>50000</WorkToMake>
+      <WorkToMake>40000</WorkToMake>
       <Mass>4</Mass>
-      <VV_MeleeWeapon_ManaCost>15</VV_MeleeWeapon_ManaCost>
+      <VV_MeleeWeapon_ManaCost>40</VV_MeleeWeapon_ManaCost>
     </statBases>
     <equippedStatOffsets>
       <MoveSpeed>-0.5</MoveSpeed>
@@ -85,13 +85,13 @@
         </capacities>
         <power>36</power>
         <armorPenetration>0.5</armorPenetration>
-        <cooldownTime>3.6</cooldownTime>
+        <cooldownTime>3.9</cooldownTime>
       </li>
     </tools>
     
     <costList>
-      <Plasteel>90</Plasteel>
-      <VV_Lifestrand>45</VV_Lifestrand>
+      <Plasteel>100</Plasteel>
+      <VV_Lifestrand>60</VV_Lifestrand>
       <VV_TitanicHornetWing>2</VV_TitanicHornetWing>
     </costList>
     
@@ -146,7 +146,7 @@
 
     <techLevel>Medieval</techLevel>
     <statBases>
-      <WorkToMake>60000</WorkToMake>
+      <WorkToMake>50000</WorkToMake>
       <Mass>1</Mass>
       <AccuracyTouch>1</AccuracyTouch>
       <AccuracyShort>1</AccuracyShort>
@@ -197,7 +197,7 @@
         <hasStandardCommand>true</hasStandardCommand>
         <defaultProjectile>VV_Projectile_EltexNeedle</defaultProjectile>
         <warmupTime>1.4</warmupTime>
-        <range>37.6</range>
+        <range>35.6</range>
         <soundCast>Interact_BeatFire</soundCast>
         <rangedFireRulepack>Combat_RangedFire_Thrown</rangedFireRulepack>
         <canGoWild>false</canGoWild>
@@ -210,16 +210,17 @@
         <capacities>
           <li>Stab</li>
         </capacities>
-        <power>8</power>
+        <power>6</power>
         <armorPenetration>0.24</armorPenetration>
-        <cooldownTime>0.5</cooldownTime>
+        <cooldownTime>0.9</cooldownTime>
       </li>
     </tools>
     
     <costList>
-      <Plasteel>160</Plasteel>
-      <VV_TitanicHornetWing>4</VV_TitanicHornetWing>
+      <Plasteel>60</Plasteel>
       <VV_Lifestrand>120</VV_Lifestrand>
+      <Jade>30</Jade>
+      <VV_Seed_Everflower>1</VV_Seed_Everflower>
     </costList>
     
     <recipeMaker>
@@ -267,9 +268,9 @@
 
     <projectile Class="VVRace.NeedleProperties">
       <damageDef>Stab</damageDef>
-      <damageAmountBase>5</damageAmountBase>
+      <damageAmountBase>6</damageAmountBase>
       <stoppingPower>0.5</stoppingPower>
-      <armorPenetrationBase>0.1</armorPenetrationBase>
+      <armorPenetrationBase>0.15</armorPenetrationBase>
       <speed>100</speed>
 
       <bonusSpeedByPsychicSensitivity>
