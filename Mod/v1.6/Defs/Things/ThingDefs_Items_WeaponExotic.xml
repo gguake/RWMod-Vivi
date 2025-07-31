@@ -83,7 +83,7 @@
         <capacities>
           <li>Stab</li>
         </capacities>
-        <power>38</power>
+        <power>36</power>
         <armorPenetration>0.5</armorPenetration>
         <cooldownTime>3.6</cooldownTime>
       </li>
@@ -267,9 +267,9 @@
 
     <projectile Class="VVRace.NeedleProperties">
       <damageDef>Stab</damageDef>
-      <damageAmountBase>7</damageAmountBase>
+      <damageAmountBase>6</damageAmountBase>
       <stoppingPower>0.5</stoppingPower>
-      <armorPenetrationBase>0.16</armorPenetrationBase>
+      <armorPenetrationBase>0.12</armorPenetrationBase>
       <speed>100</speed>
 
       <bonusSpeedByPsychicSensitivity>

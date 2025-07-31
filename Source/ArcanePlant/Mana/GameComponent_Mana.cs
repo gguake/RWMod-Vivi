@@ -1,8 +1,21 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Verse;
 
 namespace VVRace
 {
+    public class FairyficatedPawn : IExposable
+    {
+        public Pawn linker;
+        public Pawn fairy;
+
+        public void ExposeData()
+        {
+            Scribe_References.Look(ref linker, "linker");
+            Scribe_Deep.Look(ref fairy, "fairy");
+        }
+    }
+
     public class GameComponent_Mana : GameComponent
     {
         public IEnumerable<CompMana> AllManaComps
@@ -44,11 +57,15 @@ namespace VVRace
         private List<ThingWithComps> _thingWithManaComps;
         private List<CompMana> _manaCompCache;
 
+        public IEnumerable<Pawn> GetFairyficatedPawns(Pawn pawn) => _fairyficated.Where(v => v.linker == pawn).Select(v => v.fairy);
+        private List<FairyficatedPawn> _fairyficated = new List<FairyficatedPawn>();
+
         public GameComponent_Mana(Game game)
         {
             _game = game;
             _thingWithManaComps = new List<ThingWithComps>();
             _manaCompCache = new List<CompMana>();
+            _fairyficated = new List<FairyficatedPawn>();
         }
 
         public override void ExposeData()
@@ -59,6 +76,7 @@ namespace VVRace
             }
 
             Scribe_Collections.Look(ref _thingWithManaComps, "_thingWithManaComps", LookMode.Reference);
+            Scribe_Collections.Look(ref _fairyficated, "fairyficated", LookMode.Deep);
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
@@ -78,6 +96,11 @@ namespace VVRace
                         _thingWithManaComps.Remove(thing);
                     }
                 }
+
+                if (_fairyficated == null)
+                {
+                    _fairyficated = new List<FairyficatedPawn>();
+                }
             }
         }
 
@@ -91,6 +114,25 @@ namespace VVRace
         {
             _thingWithManaComps.Remove(comp.parent);
             _manaCompCache.Remove(comp);
+        }
+
+        public void RegisterFairy(Pawn linker, Pawn target)
+        {
+            _fairyficated.Add(new FairyficatedPawn()
+            {
+                linker = linker,
+                fairy = target,
+            });
+        }
+
+        public void UnregisterFairy(Pawn target)
+        {
+            _fairyficated.RemoveAll(v => v.fairy == target);
+        }
+
+        public void UnregisterAllFairyByLinker(Pawn linker)
+        {
+            _fairyficated.RemoveAll(v => v.linker == linker);
         }
     }
 }

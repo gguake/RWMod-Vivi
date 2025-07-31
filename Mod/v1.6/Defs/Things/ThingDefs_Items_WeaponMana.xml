@@ -412,8 +412,8 @@
       <Mass>8.0</Mass>
       <AccuracyTouch>0.25</AccuracyTouch>
       <AccuracyShort>0.2</AccuracyShort>
-      <AccuracyMedium>0.13</AccuracyMedium>
-      <AccuracyLong>0.07</AccuracyLong>
+      <AccuracyMedium>0.14</AccuracyMedium>
+      <AccuracyLong>0.08</AccuracyLong>
       <RangedWeapon_Cooldown>1.8</RangedWeapon_Cooldown>
       <VV_RangedWeapon_ManaCost>15</VV_RangedWeapon_ManaCost>
       <VV_BulletPelletCount>4</VV_BulletPelletCount>
@@ -507,7 +507,7 @@
     </graphicData>
     <projectile>
       <damageDef>VV_Bullet_Lava</damageDef>
-      <damageAmountBase>8</damageAmountBase>
+      <damageAmountBase>9</damageAmountBase>
       <stoppingPower>0.8</stoppingPower>
       <speed>33</speed>
       <ai_IsIncendiary>true</ai_IsIncendiary>
@@ -622,9 +622,9 @@
       <drawSize>(0.75,3)</drawSize>
     </graphicData>
     <projectile>
-      <speed>140</speed>
+      <speed>150</speed>
       <damageDef>ArrowHighVelocity</damageDef>
-      <damageAmountBase>55</damageAmountBase>
+      <damageAmountBase>48</damageAmountBase>
       <armorPenetrationBase>1</armorPenetrationBase>
       <stoppingPower>4</stoppingPower>
     </projectile>
