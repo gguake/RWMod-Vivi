@@ -29,6 +29,9 @@ namespace VVRace
 
         public SimpleCurve damageChanceBySkillLevel;
 
+        public float basePollenChance;
+        public float baseArcaneSeedChance;
+
         private void AddThingDefToThingFilter(ThingFilter thingFilter, IEnumerable<ThingDef> thingDefs)
         {
             var fieldInfo_thingDefs = AccessTools.Field(typeof(ThingFilter), "thingDefs");

@@ -38,6 +38,9 @@
     <targetYieldStat>VV_PlantHoneyGatherYield</targetYieldStat>
     <maxPathDanger>Deadly</maxPathDanger>
 
+    <basePollenChance>0.6</basePollenChance>
+    <baseArcaneSeedChance>0.03</baseArcaneSeedChance>
+
     <damageChanceBySkillLevel>
       <points>
         <li>(0,0.5)</li>
@@ -87,6 +90,8 @@
     <targetCooldownStat>VV_PlantGatherCooldown</targetCooldownStat>
     <targetYieldStat>VV_TreeResinGatherYield</targetYieldStat>
     <maxPathDanger>Some</maxPathDanger>
+
+    <baseArcaneSeedChance>0.045</baseArcaneSeedChance>
 
     <damageChanceBySkillLevel>
       <points>

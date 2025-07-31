@@ -70,13 +70,24 @@ namespace VVRace
             {
                 notifyReceiver.Notify_Gathered(pawn, recipe);
             }
+
+            if (target is Plant plant && recipe.baseArcaneSeedChance > 0)
+            {
+                if (Rand.Chance(recipe.baseArcaneSeedChance))
+                {
+                    var seed = ThingMaker.MakeThing(VVThingDefOf.VV_Seed_UnknownPlant);
+                    seed.stackCount = 1;
+
+                    GenPlace.TryPlaceThing(seed, pawn.Position, pawn.Map, ThingPlaceMode.Near);
+                }
+            }
         }
 
         public virtual void Notify_ProcessStarted(Pawn pawn, Building_GatherWorkTable workTable)
         {
         }
 
-        public virtual void Notify_RecipeComplete(Pawn pawn, ThingDef productDef, ref float productCount)
+        public virtual void Notify_RecipeComplete(Pawn pawn, Building_GatherWorkTable workTable, ThingDef productDef, ref float productCount)
         {
         }
     }

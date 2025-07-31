@@ -168,7 +168,7 @@ namespace VVRace
                         foreach (var productThingDefCount in curJob.RecipeDef.products)
                         {
                             var actualProductCount = productThingDefCount.count * efficiency;
-                            GatheringRecipeDef.gatherWorker.Notify_RecipeComplete(actor, productThingDefCount.thingDef, ref actualProductCount);
+                            GatheringRecipeDef.gatherWorker.Notify_RecipeComplete(actor, BillGiverTargetInfo.Thing as Building_GatherWorkTable, productThingDefCount.thingDef, ref actualProductCount);
 
                             var minProductCount = (int)actualProductCount;
                             var productCount = minProductCount + (Rand.Chance(actualProductCount - minProductCount) ? 1 : 0);
@@ -301,7 +301,7 @@ namespace VVRace
                         foreach (var productThingDefCount in curJob.RecipeDef.products)
                         {
                             var productCount = productThingDefCount.count * efficiency;
-                            GatheringRecipeDef.gatherWorker.Notify_RecipeComplete(actor, productThingDefCount.thingDef, ref productCount);
+                            GatheringRecipeDef.gatherWorker.Notify_RecipeComplete(actor, BillGiverTargetInfo.Thing as Building_GatherWorkTable, productThingDefCount.thingDef, ref productCount);
 
                             while (productCount > 0)
                             {

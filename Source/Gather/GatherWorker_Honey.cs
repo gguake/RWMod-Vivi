@@ -34,8 +34,10 @@ namespace VVRace
 
             if (target is Plant plant)
             {
-                var pollenChance = Rand.Chance(0.7f);
-                if (pollenChance)
+                var pollenChance = recipe.basePollenChance;
+                pollenChance *= pawn.GetStatValue(recipe.efficiencyStat) * target.GetStatValue(recipe.targetYieldStat);
+
+                if (pollenChance > 0 && Rand.Chance(pollenChance))
                 {
                     if (pawn.filth != null)
                     {
@@ -46,33 +48,41 @@ namespace VVRace
                         FilthMaker.TryMakeFilth(pawn.Position, pawn.Map, VVThingDefOf.VV_FilthPollen, target.def.defName, 1);
                     }
                 }
-
-                if (Rand.Chance(0.03f))
-                {
-                    var seed = ThingMaker.MakeThing(VVThingDefOf.VV_Seed_UnknownPlant);
-                    seed.stackCount = 1;
-
-                    GenPlace.TryPlaceThing(seed, pawn.Position, pawn.Map, ThingPlaceMode.Near);
-                }
             }
         }
 
-        private List<Filth_Pollen> _tmpFilthPollens = new List<Filth_Pollen>();
         public override void Notify_ProcessStarted(Pawn pawn, Building_GatherWorkTable workTable)
         {
             base.Notify_ProcessStarted(pawn, workTable);
 
+        }
+
+        private List<Filth_Pollen> _tmpFilthPollens = new List<Filth_Pollen>();
+        public override void Notify_RecipeComplete(Pawn pawn, Building_GatherWorkTable workTable, ThingDef productDef, ref float productCount)
+        {
+            var gene = pawn.genes.GenesListForReading.FirstOrDefault(v => v is Gene_HoneyDependency) as Gene_HoneyDependency;
+            if (gene == null) { return; }
+
+            var hediff = gene.LinkedHediff;
+            if (hediff == null) { return; }
+
+            if (hediff.Severity > 0.8f && productCount > 1f)
+            {
+                gene.Reset();
+                productCount = Mathf.Clamp(productCount - 1f, 1f, productDef.stackLimit);
+            }
+
             _tmpFilthPollens.Clear();
             _tmpFilthPollens.AddRange(pawn.filth.CarriedFilthListForReading.OfType<Filth_Pollen>());
 
-            if (_tmpFilthPollens.Count > 0 && workTable.CanGatherFilth)
+            if (_tmpFilthPollens.Count > 0)
             {
                 if (workTable.CanGatherFilth)
                 {
                     for (int i = 0; i < _tmpFilthPollens.Count; ++i)
                     {
                         var filthPollen = _tmpFilthPollens[i];
-                        filthPollen.GatherPollen(workTable.Map, pawn, pawn.Position);
+                        filthPollen.GatherPollen(workTable.Map, pawn);
 
                         Pawn_FilthTracker_ReversePatch.ThinCarriedFilth(pawn.filth, filthPollen);
                     }
@@ -88,21 +98,6 @@ namespace VVRace
                         }
                     }
                 }
-            }
-        }
-
-        public override void Notify_RecipeComplete(Pawn pawn, ThingDef productDef, ref float productCount)
-        {
-            var gene = pawn.genes.GenesListForReading.FirstOrDefault(v => v is Gene_HoneyDependency) as Gene_HoneyDependency;
-            if (gene == null) { return; }
-
-            var hediff = gene.LinkedHediff;
-            if (hediff == null) { return; }
-
-            if (hediff.Severity > 0.8f && productCount > 1f)
-            {
-                gene.Reset();
-                productCount = Mathf.Clamp(productCount - 1f, 1f, productDef.stackLimit);
             }
         }
     }
