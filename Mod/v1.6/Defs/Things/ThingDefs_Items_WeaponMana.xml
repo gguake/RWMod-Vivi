@@ -411,10 +411,10 @@
     <statBases>
       <WorkToMake>35000</WorkToMake>
       <Mass>8.0</Mass>
-      <AccuracyTouch>0.25</AccuracyTouch>
-      <AccuracyShort>0.2</AccuracyShort>
-      <AccuracyMedium>0.14</AccuracyMedium>
-      <AccuracyLong>0.08</AccuracyLong>
+      <AccuracyTouch>0.27</AccuracyTouch>
+      <AccuracyShort>0.21</AccuracyShort>
+      <AccuracyMedium>0.18</AccuracyMedium>
+      <AccuracyLong>0.11</AccuracyLong>
       <RangedWeapon_Cooldown>1.8</RangedWeapon_Cooldown>
       <VV_RangedWeapon_ManaCost>15</VV_RangedWeapon_ManaCost>
       <VV_BulletPelletCount>4</VV_BulletPelletCount>
@@ -434,7 +434,7 @@
         <hasStandardCommand>true</hasStandardCommand>
         <defaultProjectile>VV_Bullet_LavaShredder</defaultProjectile>
         <warmupTime>2.0</warmupTime>
-        <range>25.9</range>
+        <range>27.9</range>
         <ticksBetweenBurstShots>6</ticksBetweenBurstShots>
         <burstShotCount>6</burstShotCount>
         <soundCast>VV_LavaShrudderShot</soundCast>
@@ -504,9 +504,9 @@
     </graphicData>
     <projectile>
       <damageDef>VV_Bullet_Lava</damageDef>
-      <damageAmountBase>9</damageAmountBase>
-      <stoppingPower>0.8</stoppingPower>
-      <speed>33</speed>
+      <damageAmountBase>10</damageAmountBase>
+      <stoppingPower>1</stoppingPower>
+      <speed>36</speed>
       <ai_IsIncendiary>true</ai_IsIncendiary>
       <filth>Filth_Ash</filth>
       <filthCount>1</filthCount>
