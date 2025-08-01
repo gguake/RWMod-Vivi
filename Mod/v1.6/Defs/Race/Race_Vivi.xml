@@ -50,7 +50,7 @@
         <capacities>
           <li>Blunt</li>
         </capacities>
-        <power>6.2</power>
+        <power>4.1</power>
         <cooldownTime>2</cooldownTime>
         <linkedBodyPartsGroup>LeftHand</linkedBodyPartsGroup>
         <surpriseAttack>
@@ -67,7 +67,7 @@
         <capacities>
           <li>Blunt</li>
         </capacities>
-        <power>6.2</power>
+        <power>4.1</power>
         <cooldownTime>2</cooldownTime>
         <linkedBodyPartsGroup>RightHand</linkedBodyPartsGroup>
         <surpriseAttack>
@@ -84,7 +84,7 @@
         <capacities>
           <li>Bite</li>
         </capacities>
-        <power>6.2</power>
+        <power>4.1</power>
         <cooldownTime>2</cooldownTime>
         <linkedBodyPartsGroup>Teeth</linkedBodyPartsGroup>
         <chanceFactor>0.07</chanceFactor>

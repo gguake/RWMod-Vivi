@@ -24,13 +24,13 @@
       <MarketValue>500</MarketValue>
       <LeatherAmount>0</LeatherAmount>
       <ArmorRating_Sharp>1.0</ArmorRating_Sharp>
-      <ArmorRating_Blunt>0.5</ArmorRating_Blunt>
+      <ArmorRating_Blunt>0.6</ArmorRating_Blunt>
       <ArmorRating_Heat>0</ArmorRating_Heat>
-      <PainShockThreshold>0.55</PainShockThreshold>
+      <PainShockThreshold>0.6</PainShockThreshold>
 
-      <ToxicResistance>-1.00</ToxicResistance>
+      <ToxicResistance>-0.5</ToxicResistance>
       <ToxicEnvironmentResistance>0</ToxicEnvironmentResistance>
-      <Flammability>2.0</Flammability>
+      <Flammability>1.5</Flammability>
 
       <MinimumHandlingSkill>99</MinimumHandlingSkill>
       <Wildness>1.0</Wildness>
@@ -68,7 +68,7 @@
         <cooldownTime>2.5</cooldownTime>
         <linkedBodyPartsGroup>VV_LeftClaw</linkedBodyPartsGroup>
         <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
-        <armorPenetration>0.3</armorPenetration>
+        <armorPenetration>0.5</armorPenetration>
       </li>
       <li>
         <label>right claw</label>
@@ -80,7 +80,7 @@
         <cooldownTime>2.5</cooldownTime>
         <linkedBodyPartsGroup>VV_RightClaw</linkedBodyPartsGroup>
         <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
-        <armorPenetration>0.3</armorPenetration>
+        <armorPenetration>0.5</armorPenetration>
       </li>
     </tools>
 
@@ -123,6 +123,10 @@
         <li>VV_TitanicHornet</li>
       </hediffGiverSets>
     </race>
+
+    <comps>
+      <li><compClass>VVRace.CompHornet</compClass></li>
+    </comps>
 
     <ingredient>
       <mergeCompatibilityTags>
