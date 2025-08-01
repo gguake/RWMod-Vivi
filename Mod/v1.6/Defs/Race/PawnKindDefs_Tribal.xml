@@ -227,12 +227,12 @@
 
     <nakedChance>0</nakedChance>
 
-    <weaponMoney>4000~10000</weaponMoney>
+    <weaponMoney>5000~10000</weaponMoney>
     <weaponTags>
       <li>VV_ViviNeedle</li>
     </weaponTags>
 
-    <acceptArrestChanceFactor>0.5</acceptArrestChanceFactor>
+    <acceptArrestChanceFactor>0.1</acceptArrestChanceFactor>
     <factionHostileOnDeath>true</factionHostileOnDeath>
     <initialWillRange>80~90</initialWillRange>
     <initialResistanceRange>48~70</initialResistanceRange>
@@ -274,7 +274,7 @@
 
     <nakedChance>0</nakedChance>
 
-    <weaponMoney>4000~10000</weaponMoney>
+    <weaponMoney>3000~8000</weaponMoney>
     <weaponTags>
       <li>VV_ViviNeedle</li>
       <li>VV_ViviWeaponMana</li>
@@ -313,13 +313,13 @@
 
     <nakedChance>0</nakedChance>
 
-    <weaponMoney>1000~1500</weaponMoney>
+    <weaponMoney>1000~2000</weaponMoney>
     <weaponTags>
       <li>VV_ViviWeaponRange</li>
       <li>VV_RoyalViviOnly</li>
     </weaponTags>
 
-    <acceptArrestChanceFactor>0.5</acceptArrestChanceFactor>
+    <acceptArrestChanceFactor>0.25</acceptArrestChanceFactor>
     <initialWillRange>16~19</initialWillRange>
     <initialResistanceRange>38~58</initialResistanceRange>
 
@@ -361,13 +361,13 @@
 
     <nakedChance>0</nakedChance>
 
-    <weaponMoney>1000~2500</weaponMoney>
+    <weaponMoney>1500~3500</weaponMoney>
     <weaponTags>
       <li>VV_ViviWeaponRange</li>
       <li>VV_ViviWeaponMana</li>
     </weaponTags>
 
-    <acceptArrestChanceFactor>0.5</acceptArrestChanceFactor>
+    <acceptArrestChanceFactor>0.25</acceptArrestChanceFactor>
     <initialWillRange>16~19</initialWillRange>
     <initialResistanceRange>38~58</initialResistanceRange>
 

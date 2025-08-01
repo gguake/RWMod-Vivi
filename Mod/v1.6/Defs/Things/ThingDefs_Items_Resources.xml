@@ -169,14 +169,14 @@
     </thingCategories>
 
     <statBases>
-      <StuffPower_Armor_Sharp>1.75</StuffPower_Armor_Sharp>
-      <StuffPower_Armor_Blunt>0.72</StuffPower_Armor_Blunt>
+      <StuffPower_Armor_Sharp>1.76</StuffPower_Armor_Sharp>
+      <StuffPower_Armor_Blunt>0.74</StuffPower_Armor_Blunt>
       <StuffPower_Armor_Heat>3.00</StuffPower_Armor_Heat>
       <StuffPower_Insulation_Cold>30</StuffPower_Insulation_Cold>
       <StuffPower_Insulation_Heat>36</StuffPower_Insulation_Heat>
 
       <MaxHitPoints>100</MaxHitPoints>
-      <MarketValue>11</MarketValue>
+      <MarketValue>14</MarketValue>
       <Mass>0.05</Mass>
       <Flammability>0.1</Flammability>
       <DeteriorationRate>2</DeteriorationRate>
@@ -198,11 +198,11 @@
           <stat>PsychicSensitivityOffset</stat>
           <awful>0</awful>
           <poor>0</poor>
-          <normal>0.025</normal>
-          <good>0.05</good>
-          <excellent>0.075</excellent>
-          <masterwork>0.1</masterwork>
-          <legendary>0.15</legendary>
+          <normal>0.01</normal>
+          <good>0.03</good>
+          <excellent>0.06</excellent>
+          <masterwork>0.09</masterwork>
+          <legendary>0.12</legendary>
         </li>
       </statOffsetsQuality>
       <categories>

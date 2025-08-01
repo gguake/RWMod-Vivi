@@ -531,10 +531,10 @@ When infused with a small amount of mana, it glows - so the Vivi sometimes prese
     <useHitPoints>true</useHitPoints>
     <statBases>
       <Mass>0.1</Mass>
-      <MarketValue>4</MarketValue>
+      <MarketValue>3</MarketValue>
       <MaxHitPoints>20</MaxHitPoints>
       <Flammability>0.0</Flammability>
-      <Nutrition>0.2</Nutrition>
+      <Nutrition>0.1</Nutrition>
       <DeteriorationRate>10</DeteriorationRate>
       <FoodPoisonChanceFixedHuman>0</FoodPoisonChanceFixedHuman>
     </statBases>
@@ -551,7 +551,7 @@ When infused with a small amount of mana, it glows - so the Vivi sometimes prese
       
       <baseIngestTicks>120</baseIngestTicks>
       <chairSearchRadius>8</chairSearchRadius>
-			<preferability>RawTasty</preferability>
+			<preferability>DesperateOnly</preferability>
       <tasteThought></tasteThought>
       <ingestSound>RawVegetable_Eat</ingestSound>
 

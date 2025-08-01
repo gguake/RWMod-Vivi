@@ -420,7 +420,6 @@
       </recipeUsers>
       <researchPrerequisites>
         <li>VV_Weaponry</li>
-        <li>Greatbow</li>
       </researchPrerequisites>
       <skillRequirements>
         <Crafting>8</Crafting>

@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
+  <ThingDef Abstract="True" ParentName="BaseHumanMakeableGun" Name="VV_BaseManaWeapon">
+    <techLevel>Industrial</techLevel>
+    <thingCategories Inherit="False">
+      <li>VV_ArcaneWeapon</li>
+    </thingCategories>
+
+    <recipeMaker>
+      <researchPrerequisite />
+      <researchPrerequisites>
+        <li>VV_ArcaneWeaponry</li>
+      </researchPrerequisites>
+    </recipeMaker>
+  </ThingDef>
+
   <!-- 증기 방사기 -->
-  <ThingDef ParentName="BaseHumanMakeableGun">
+  <ThingDef ParentName="VV_BaseManaWeapon">
     <defName>VV_Steamthrower</defName>
     <label>steamthrower</label>
     <description>A arcane weapon that sprays high-pressure hot steam. It inflicts burn damage on all targets in range, but allied units very close to the user are not harmed.
@@ -15,7 +29,6 @@
     <soundInteract>Interact_Rifle</soundInteract>
     <equippedAngleOffset>45</equippedAngleOffset>
 
-    <techLevel>Industrial</techLevel>
     <statBases>
       <WorkToMake>35000</WorkToMake>
       <Mass>6.0</Mass>
@@ -23,10 +36,6 @@
       <VV_RangedWeapon_ManaCost>25</VV_RangedWeapon_ManaCost>
     </statBases>
     <relicChance>0</relicChance>
-    
-    <thingCategories Inherit="False">
-      <li>VV_ArcaneWeapon</li>
-    </thingCategories>
     <weaponClasses Inherit="False">
       <li>RangedHeavy</li>
     </weaponClasses>
@@ -95,11 +104,14 @@
         <Crafting>6</Crafting>
       </skillRequirements>
       <researchPrerequisites>
-        <li>VV_ArcaneWeaponry</li>
-        <li>Gunsmithing</li>
+        <li>Machining</li>
       </researchPrerequisites>
       <displayPriority>-530</displayPriority>
     </recipeMaker>
+
+    <tradeTags Inherit="False">
+      <li>WeaponRanged</li>
+    </tradeTags>
     
     <comps Inherit="False">
       <li Class="VVRace.CompProperties_EquippableManaWeapon" />
@@ -122,7 +134,7 @@
   </ThingDef>
 
   <!-- 눈사람 발사기 -->
-  <ThingDef ParentName="BaseHumanMakeableGun">
+  <ThingDef ParentName="VV_BaseManaWeapon">
     <defName>VV_SnowmanLauncher</defName>
     <label>snowman launcher</label>
     <description>a arcane weapon that compacts and launches a snowman. Comical, but it triggers a powerful cold explosion over a wide area at impact, inflicting frostbite.
@@ -136,7 +148,6 @@
     <soundInteract>Interact_Rifle</soundInteract>
     <equippedAngleOffset>45</equippedAngleOffset>
     
-    <techLevel>Industrial</techLevel>
     <statBases>
       <WorkToMake>35000</WorkToMake>
       <Mass>7</Mass>
@@ -145,9 +156,6 @@
     </statBases>
     <relicChance>0</relicChance>
 
-    <thingCategories Inherit="False">
-      <li>VV_ArcaneWeapon</li>
-    </thingCategories>
     <weaponClasses Inherit="False">
       <li>RangedHeavy</li>
     </weaponClasses>
@@ -196,8 +204,7 @@
         <Crafting>6</Crafting>
       </skillRequirements>
       <researchPrerequisites>
-        <li>VV_ArcaneWeaponry</li>
-        <li>Gunsmithing</li>
+        <li>Machining</li>
       </researchPrerequisites>
       <displayPriority>-531</displayPriority>
     </recipeMaker>
@@ -282,7 +289,7 @@
   </ThingDef>
 
   <!-- 연쇄 번개 권총 -->
-  <ThingDef ParentName="BaseHumanMakeableGun">
+  <ThingDef ParentName="VV_BaseManaWeapon">
     <defName>VV_ChainThunderPistol</defName>
     <label>chain thunder pistol</label>
     <description>A arcane weapon that induces and fires a powerful, unfailing electric current at the aimed target. The current inflicts burn damage and briefly disables electronic equipment.
@@ -294,7 +301,6 @@
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     
-    <techLevel>Industrial</techLevel>
     <statBases>
       <WorkToMake>40000</WorkToMake>
       <Mass>2.5</Mass>
@@ -303,9 +309,6 @@
     </statBases>
     <relicChance>0</relicChance>
 
-    <thingCategories Inherit="False">
-      <li>VV_ArcaneWeapon</li>
-    </thingCategories>
     <weaponClasses Inherit="False">
       <li>RangedHeavy</li>
     </weaponClasses>
@@ -370,8 +373,7 @@
         <Crafting>6</Crafting>
       </skillRequirements>
       <researchPrerequisites>
-        <li>VV_ArcaneWeaponry</li>
-        <li>Gunsmithing</li>
+        <li>Machining</li>
         <li>MicroelectronicsBasics</li>
       </researchPrerequisites>
       <displayPriority>-532</displayPriority>
@@ -392,7 +394,7 @@
   </ThingDef>
   
   <!-- 화산탄 기관총 -->
-  <ThingDef ParentName="BaseHumanMakeableGun">
+  <ThingDef ParentName="VV_BaseManaWeapon">
     <defName>VV_LavaShredder</defName>
     <label>lava shredder</label>
     <description>A machine gun that sprays searing pellets. Its massive recoil makes precision aiming difficult and each incendiary round is weak, but the weapon compensates with an overwhelming torrent of fire.
@@ -406,7 +408,6 @@
     <soundInteract>Interact_Rifle</soundInteract>
     <equippedAngleOffset>45</equippedAngleOffset>
 
-    <techLevel>Industrial</techLevel>
     <statBases>
       <WorkToMake>35000</WorkToMake>
       <Mass>8.0</Mass>
@@ -420,9 +421,6 @@
     </statBases>
     <relicChance>0</relicChance>
     
-    <thingCategories Inherit="False">
-      <li>VV_ArcaneWeapon</li>
-    </thingCategories>
     <weaponClasses Inherit="False">
       <li>RangedHeavy</li>
     </weaponClasses>
@@ -477,8 +475,7 @@
         <Crafting>6</Crafting>
       </skillRequirements>
       <researchPrerequisites>
-        <li>VV_ArcaneWeaponry</li>
-        <li>Gunsmithing</li>
+        <li>Machining</li>
       </researchPrerequisites>
       <displayPriority>-533</displayPriority>
     </recipeMaker>
@@ -518,7 +515,7 @@
   </ThingDef>
 
   <!-- 서리침 석궁 -->
-  <ThingDef ParentName="BaseHumanMakeableGun">
+  <ThingDef ParentName="VV_BaseManaWeapon">
     <defName>VV_FroststingCrossbow</defName>
     <label>froststing sniper crossbow</label>
     <description>A crossbow that shoots needle-thin, razor-sharp icicles. With a high-magnification scope it can snipe distant targets with heavy punch and pinpoint accuracy. Each shot burns a lot of mana, forcing frequent recharges, and it's useless at close range.
@@ -532,7 +529,6 @@
     <soundInteract>Bow_Recurve</soundInteract>
     <equippedAngleOffset>45</equippedAngleOffset>
     
-    <techLevel>Industrial</techLevel>
     <statBases>
       <WorkToMake>35000</WorkToMake>
       <Mass>4.5</Mass>
@@ -545,9 +541,6 @@
     </statBases>
     <relicChance>0</relicChance>
 
-    <thingCategories Inherit="False">
-      <li>VV_ArcaneWeapon</li>
-    </thingCategories>
     <weaponClasses Inherit="False">
       <li>RangedHeavy</li>
     </weaponClasses>
@@ -593,7 +586,7 @@
         <Crafting>6</Crafting>
       </skillRequirements>
       <researchPrerequisites>
-        <li>VV_ArcaneWeaponry</li>
+        <li>Machining</li>
       </researchPrerequisites>
       <displayPriority>-534</displayPriority>
     </recipeMaker>
