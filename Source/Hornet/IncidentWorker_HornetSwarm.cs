@@ -9,11 +9,11 @@ namespace VVRace
         private static SimpleCurve _curveChanceFactor = new SimpleCurve(new CurvePoint[]
         {
             new CurvePoint(0f, 1f),
-            new CurvePoint(2.999f, 1f),
-            new CurvePoint(3f, 2.5f),
-            new CurvePoint(10f, 6f),
-            new CurvePoint(20f, 8.5f),
-            new CurvePoint(100f, 11f),
+            new CurvePoint(4.999f, 1f),
+            new CurvePoint(5f, 4f),
+            new CurvePoint(10f, 9f),
+            new CurvePoint(25f, 15f),
+            new CurvePoint(100f, 15f),
         });
 
         private static SimpleCurve _curvePointFactor = new SimpleCurve(new CurvePoint[]
@@ -25,11 +25,13 @@ namespace VVRace
             new CurvePoint(100f, 2.5f),
         });
 
-        private const int AnimalsStayDurationMin = 90000;
-        private const int AnimalsStayDurationMax = 180000;
+        private const int AnimalsStayDurationMin = 120000;
+        private const int AnimalsStayDurationMax = 270000;
 
         public override float ChanceFactorNow(IIncidentTarget target)
         {
+            if (target.Tile == null || !target.Tile.Valid || target.Tile.LayerDef == PlanetLayerDefOf.Orbit) { return 0f; }
+
             var viviCount = target.PlayerPawnsForStoryteller.Count(v => v.IsVivi());
             return _curveChanceFactor.Evaluate(viviCount);
         }
@@ -42,7 +44,7 @@ namespace VVRace
             }
 
             var map = (Map)parms.target;
-            if (map.Biome.inVacuum || map.IsTempIncidentMap) { return false; }
+            if (map.Tile.LayerDef == PlanetLayerDefOf.Orbit || map.IsTempIncidentMap) { return false; }
 
             var viviCount = map.PlayerPawnsForStoryteller.Count(v => v.IsVivi());
             var points = parms.points * _curvePointFactor.Evaluate(viviCount);
