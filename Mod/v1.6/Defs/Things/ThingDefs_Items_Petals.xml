@@ -193,7 +193,7 @@
 
     <statBases>
       <Mass>0.001</Mass>
-      <MarketValue>6</MarketValue>
+      <MarketValue>4</MarketValue>
     </statBases>
     
     <tradeTags Inherit="False">
