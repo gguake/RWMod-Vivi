@@ -85,6 +85,7 @@
     <graphicData>
       <texPath>Things/Plants/VV_Peashooter_Top</texPath>
       <graphicClass>Graphic_Random</graphicClass>
+      <renderQueue>2901</renderQueue>
     </graphicData>
     <drawerType>MapMeshAndRealTime</drawerType>
 
@@ -293,6 +294,7 @@
       <texPath>Things/Plants/VV_Cornlauncher_Top</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <drawSize>(2,2)</drawSize>
+      <renderQueue>2901</renderQueue>
     </graphicData>
     <drawerType>MapMeshAndRealTime</drawerType>
 

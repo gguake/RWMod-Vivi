@@ -17,6 +17,7 @@
       <graphicClass>Graphic_Single</graphicClass>
       <shaderType>TransparentPlant</shaderType>
       <drawSize>(1.8, 1.8)</drawSize>
+      <renderQueue>3001</renderQueue>
     </graphicData>
 
     <statBases>
