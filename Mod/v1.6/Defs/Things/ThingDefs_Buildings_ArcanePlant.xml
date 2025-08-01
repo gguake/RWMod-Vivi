@@ -360,9 +360,9 @@
     <tickerType>Normal</tickerType>
 
     <graphicData>
-      <graphicClass>Graphic_Random</graphicClass>
       <texPath>Things/Building/VV_ShockwebTrap</texPath>
-      <renderQueue>2901</renderQueue>
+      <graphicClass>Graphic_Random</graphicClass>
+      <shaderType>Transparent</shaderType>
       <damageData>
         <rect>(0.1,0,0.8,0.3)</rect>
       </damageData>

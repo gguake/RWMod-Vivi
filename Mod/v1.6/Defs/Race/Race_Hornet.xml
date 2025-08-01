@@ -139,7 +139,7 @@
 
     <killedLeavingsChance>0.5</killedLeavingsChance>
     <killedLeavingsRanges>
-      <VV_TitanicHornetWing>1~4</VV_TitanicHornetWing>
+      <VV_TitanicHornetWing>1~2</VV_TitanicHornetWing>
     </killedLeavingsRanges>
   </ThingDef>
 </Defs>

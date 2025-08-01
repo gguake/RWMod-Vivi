@@ -32,7 +32,7 @@
       </thingDefs>
     </fixedIngredientFilter>
     <products>
-      <VV_Lifestrand>25</VV_Lifestrand>
+      <VV_Lifestrand>15</VV_Lifestrand>
     </products>
     <researchPrerequisite>VV_Lifestrand</researchPrerequisite>
   </RecipeDef>
