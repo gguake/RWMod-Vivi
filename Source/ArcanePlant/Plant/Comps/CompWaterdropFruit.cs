@@ -60,7 +60,8 @@ namespace VVRace
 
         public override string CompInspectStringExtra()
         {
-            return $"{Props.fruitDef.LabelCap}: {Mathf.Clamp01(1f - (float)_remainingTicks / _nextMatureTicks).ToStringPercent()}";
+            var pct = _nextMatureTicks > 0 ? Mathf.Clamp01(1f - (float)_remainingTicks / _nextMatureTicks) : 0f;
+            return $"{Props.fruitDef.LabelCap}: {pct.ToStringPercent()}";
         }
     }
 }

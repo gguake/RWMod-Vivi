@@ -214,7 +214,7 @@ namespace VVRace
             }
             else
             {
-                if (dinfo.Def != DamageDefOf.Flame)
+                if (dinfo.Def != DamageDefOf.Flame && dinfo.Def != DamageDefOf.SurgicalCut)
                 {
                     var pot = _mapComponent?.GetArcanePlantPot(Position);
                     if (pot != null)
@@ -271,21 +271,24 @@ namespace VVRace
             if (leavingThingOwner == null) { return; }
             if (SeedExtension == null) { return; }
 
-            try
+            if (SeedExtension.leavingSeedCountCurve != null)
             {
-                Rand.PushState(thingIDNumber);
-
-                var seedCount = (int)SeedExtension.leavingSeedCountCurve.Evaluate(Rand.Value);
-                if (seedCount > 0)
+                try
                 {
-                    var thing = ThingMaker.MakeThing(SeedExtension.seedDef);
-                    thing.stackCount = seedCount;
-                    leavingThingOwner.TryAdd(thing);
+                    Rand.PushState(thingIDNumber);
+
+                    var seedCount = (int)SeedExtension.leavingSeedCountCurve.Evaluate(Rand.Value);
+                    if (seedCount > 0)
+                    {
+                        var thing = ThingMaker.MakeThing(SeedExtension.seedDef);
+                        thing.stackCount = seedCount;
+                        leavingThingOwner.TryAdd(thing);
+                    }
                 }
-            }
-            finally
-            {
-                Rand.PopState();
+                finally
+                {
+                    Rand.PopState();
+                }
             }
         }
 

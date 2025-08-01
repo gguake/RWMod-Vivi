@@ -177,7 +177,14 @@ namespace VVRace
                                 {
                                     Rand.PushState(thingIDNumber);
 
-                                    plantDef = AllGeneratableArcanePlantDefs.RandomElement();
+                                    if (Rand.Chance(0.015f))
+                                    {
+                                        plantDef = VVThingDefOf.VV_Everflower;
+                                    }
+                                    else
+                                    {
+                                        plantDef = AllGeneratableArcanePlantDefs.RandomElement();
+                                    }
                                 }
                                 finally
                                 {

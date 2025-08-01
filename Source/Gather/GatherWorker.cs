@@ -61,7 +61,7 @@ namespace VVRace
                     if (damage > 0)
                     {
                         MoteMaker.ThrowText((pawn.DrawPos + target.DrawPos) / 2f, pawn.Map, LocalizeString_Etc.VV_TextMote_GatherFailed.Translate(), 3.65f);
-                        target.TakeDamage(new DamageInfo(DamageDefOf.Crush, damage));
+                        target.TakeDamage(new DamageInfo(DamageDefOf.SurgicalCut, damage));
                     }
                 }
             }

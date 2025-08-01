@@ -49,9 +49,9 @@
         <capacities>
           <li>VV_ToxicStab</li>
         </capacities>
-        <power>34</power>
+        <power>30</power>
         <armorPenetration>0.5</armorPenetration>
-        <cooldownTime>3.8</cooldownTime>
+        <cooldownTime>3.5</cooldownTime>
       </li>
     </tools>
     

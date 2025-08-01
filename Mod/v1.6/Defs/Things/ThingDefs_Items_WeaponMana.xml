@@ -594,7 +594,6 @@
       </skillRequirements>
       <researchPrerequisites>
         <li>VV_ArcaneWeaponry</li>
-        <li>Greatbow</li>
       </researchPrerequisites>
       <displayPriority>-534</displayPriority>
     </recipeMaker>

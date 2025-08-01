@@ -50,10 +50,10 @@
     <thingClass>ThingWithComps</thingClass>
     <category>Item</category>
     <label>everfloweer seed</label>
-    <description>A seed of everflower. When planted in soil or an arcane plant pot, it becomes a seedling, which will eventually grow into everflower. Arcane plants require both mana and nutrients to grow.
+    <description>A seed of everflower. When planted in soil or an arcane plant pot, it becomes a seedling, which will eventually grow into everflower. It's extremely rare and is obtained by dismantling an everflower. Arcane plants require both mana and nutrients to grow.
 \nMana is absorbed from the environment mana and can also be supplied by nearby mana emitter or other arcane plants that produce mana.
 \nutrients continuously decrease regardless of mana, so a person must regularly apply mana fertilizer. If left without sufficient nutrients for too long, the seedling will die.
-\nOnce planted, an everflower cannot be moved easily.</description>
+\nOnce planted, an everflower can't be moved until a royal vivi attunes to it, and once attuned it can no longer be dismantled.</description>
 
     <tickerType>Never</tickerType>
     <selectable>true</selectable>
