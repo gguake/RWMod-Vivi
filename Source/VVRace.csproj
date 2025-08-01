@@ -184,6 +184,7 @@
     <Compile Include="GlideAbility\CompAbility_RequiresBodyPart.cs" />
     <Compile Include="HarmonyPatches\Internals\GatherPatch.cs" />
     <Compile Include="HarmonyPatches\Internals\VanilaBugFixPatch.cs" />
+    <Compile Include="Hornet\CompHornet.cs" />
     <Compile Include="Hornet\HediffGiver_ConstantScaria.cs" />
     <Compile Include="Hornet\IncidentWorker_HornetAssault.cs" />
     <Compile Include="Hornet\JobGiver_FollowAnotherHornet.cs" />
