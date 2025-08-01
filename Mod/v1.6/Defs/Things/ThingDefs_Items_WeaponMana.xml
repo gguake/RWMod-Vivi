@@ -341,7 +341,7 @@
           </points>
         </lightningLineFleckChanceCurve>
 
-        <chainCount>4</chainCount>
+        <chainCount>3</chainCount>
         <chainRadius>3.8</chainRadius>
 
         <soundCast>VV_LightningboltShot</soundCast>
