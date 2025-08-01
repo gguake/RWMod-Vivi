@@ -9,7 +9,7 @@ namespace VVRace
         {
             base.PostPreApplyDamage(ref dinfo, out absorbed);
 
-            if (dinfo.Def.armorCategory.armorRatingStat == StatDefOf.ArmorRating_Heat)
+            if (dinfo.Def?.armorCategory?.armorRatingStat == StatDefOf.ArmorRating_Heat)
             {
                 dinfo.SetAmount(dinfo.Amount * 2f);
             }

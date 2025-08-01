@@ -34,10 +34,16 @@ namespace VVRace
         public float chance;
     }
 
-    public class BulletModifier
+    public class BulletModifier : IExposable
     {
         public int additionalDamage;
         public float additionalArmorPenetration;
+
+        public void ExposeData()
+        {
+            Scribe_Values.Look(ref additionalDamage, "addditionalDamage");
+            Scribe_Values.Look(ref additionalArmorPenetration, "additionalArmorPenetration");
+        }
     }
 
     public class CompProperties_ArcanePlantBulletOverride : CompProperties
