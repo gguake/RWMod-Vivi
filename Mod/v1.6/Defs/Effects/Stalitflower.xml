@@ -54,31 +54,31 @@
   </ThingDef>
   <EffecterDef>
     <defName>VV_StalitFlowerAura</defName>
-    <maintainTicks>500</maintainTicks>
+    <maintainTicks>300</maintainTicks>
     <children>
       <li>
         <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
         <moteDef>VV_Mote_StalitFlowerAura</moteDef>
         <spawnLocType>OnSource</spawnLocType>
-        <ticksBetweenMotes>20</ticksBetweenMotes>
+        <ticksBetweenMotes>24</ticksBetweenMotes>
       </li>
       <li>
         <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
         <moteDef>VV_Mote_StarlitFlowerAuraDistortion</moteDef>
         <spawnLocType>OnSource</spawnLocType>
-        <ticksBetweenMotes>20</ticksBetweenMotes>
+        <ticksBetweenMotes>24</ticksBetweenMotes>
       </li>
       <li>
         <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
         <moteDef>VV_Mote_StalitFlowerAura</moteDef>
         <spawnLocType>OnTarget</spawnLocType>
-        <ticksBetweenMotes>20</ticksBetweenMotes>
+        <ticksBetweenMotes>24</ticksBetweenMotes>
       </li>
       <li>
         <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
         <moteDef>VV_Mote_StarlitFlowerAuraDistortion</moteDef>
         <spawnLocType>OnTarget</spawnLocType>
-        <ticksBetweenMotes>20</ticksBetweenMotes>
+        <ticksBetweenMotes>24</ticksBetweenMotes>
       </li>
     </children>
   </EffecterDef>

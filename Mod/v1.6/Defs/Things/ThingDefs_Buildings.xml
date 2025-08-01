@@ -149,6 +149,7 @@
       <shadowData>
         <volume>(0.75, 0.35, 0.33)</volume>
       </shadowData>
+      <renderQueue>2901</renderQueue>
     </graphicData>
 
     <uiOrder>2201</uiOrder>
@@ -224,6 +225,7 @@
         <cornerBL>Damage/Corner</cornerBL>
         <cornerBR>Damage/Corner</cornerBR>
       </damageData>
+      <renderQueue>2901</renderQueue>
     </graphicData>
     
     <costList>
@@ -304,6 +306,7 @@
       <damageData>
         <rect>(0.3,0.1,2.4,1.8)</rect>
       </damageData>
+      <renderQueue>2901</renderQueue>
     </graphicData>
     
     <costList>

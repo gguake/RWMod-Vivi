@@ -120,6 +120,7 @@
       <shadowData>
         <volume>(0.75, 0.35, 0.33)</volume>
       </shadowData>
+      <renderQueue>2901</renderQueue>
     </graphicData>
 
     <uiOrder>2402</uiOrder>
@@ -198,6 +199,7 @@
       <shaderType>CutoutComplex</shaderType>
       <drawSize>(2.5, 2.5)</drawSize>
       <drawOffset>(0, 0, 0.15)</drawOffset>
+      <renderQueue>2901</renderQueue>
       <shadowData>
         <volume>(0.55, 0.35, 0.3)</volume>
         <offset>(0, 0, -0.28)</offset>
@@ -274,6 +276,7 @@
       <shaderType>CutoutComplex</shaderType>
       <drawSize>(4.2, 4.2)</drawSize>
       <drawOffset>(0, 0, -0.09)</drawOffset>
+      <renderQueue>2901</renderQueue>
       <shadowData>
         <volume>(0.55, 0.35, 0.3)</volume>
         <offset>(0, 0, -0.28)</offset>
@@ -359,6 +362,7 @@
     <graphicData>
       <graphicClass>Graphic_Random</graphicClass>
       <texPath>Things/Building/VV_ShockwebTrap</texPath>
+      <renderQueue>2901</renderQueue>
       <damageData>
         <rect>(0.1,0,0.8,0.3)</rect>
       </damageData>

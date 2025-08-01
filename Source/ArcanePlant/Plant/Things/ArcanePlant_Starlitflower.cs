@@ -23,6 +23,8 @@ namespace VVRace
             }
         }
 
+        private Effecter _curEffecter;
+
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
@@ -31,6 +33,12 @@ namespace VVRace
 
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
         {
+            if (_curEffecter != null)
+            {
+                _curEffecter.ForceEnd();
+                _curEffecter = null;
+            }
+
             _mapComponent.Notify_StalitflowerDespawned(this);
             base.DeSpawn(mode);
         }
@@ -46,9 +54,12 @@ namespace VVRace
 
             CompGlower.UpdateLit(Map);
 
-            if (Map.Tile.LayerDef == PlanetLayerDefOf.Orbit)
+            if (this.IsHashIntervalTick(450, delta))
             {
-                VVEffecterDefOf.VV_StalitFlowerAura.SpawnMaintained(Position, Map, VaccumResistRange);
+                if (Map.Tile.LayerDef == PlanetLayerDefOf.Orbit)
+                {
+                    _curEffecter = VVEffecterDefOf.VV_StalitFlowerAura.SpawnMaintained(Position, Map, VaccumResistRange);
+                }
             }
         }
 

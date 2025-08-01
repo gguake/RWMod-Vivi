@@ -21,6 +21,7 @@
     <graphicData>
       <shaderType>CutoutPlant</shaderType>
       <drawSize>(1.2, 1.2)</drawSize>
+      <renderQueue>2901</renderQueue>
     </graphicData>
     <altitudeLayer>Building</altitudeLayer>
     
