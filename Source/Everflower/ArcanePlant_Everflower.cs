@@ -155,6 +155,17 @@ namespace VVRace
             }
         }
 
+        public override void PreApplyDamage(ref DamageInfo dinfo, out bool absorbed)
+        {
+            if (dinfo.Def == DamageDefOf.SurgicalCut)
+            {
+                absorbed = true;
+                return;
+            }
+
+            base.PreApplyDamage(ref dinfo, out absorbed);
+        }
+
         public override void Notify_ArcanePlantPotDespawned()
         {
             if (TeleportRandomly())
