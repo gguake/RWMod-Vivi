@@ -108,8 +108,8 @@
 
         <leavingSeedCountCurve>
           <points>
-            <li>(0, 2.5)</li>
-            <li>(0.7, 4.5)</li>
+            <li>(0, 4)</li>
+            <li>(0.7, 5.5)</li>
             <li>(1.0, 6)</li>
           </points>
         </leavingSeedCountCurve>
@@ -188,8 +188,8 @@
 
         <leavingSeedCountCurve>
           <points>
-            <li>(0, 2.5)</li>
-            <li>(0.7, 4.5)</li>
+            <li>(0, 4)</li>
+            <li>(0.7, 5.5)</li>
             <li>(1.0, 6)</li>
           </points>
         </leavingSeedCountCurve>
@@ -297,8 +297,8 @@
 
         <leavingSeedCountCurve>
           <points>
-            <li>(0, 2.5)</li>
-            <li>(0.7, 4.5)</li>
+            <li>(0, 4)</li>
+            <li>(0.7, 5.5)</li>
             <li>(1.0, 6)</li>
           </points>
         </leavingSeedCountCurve>
@@ -411,8 +411,8 @@
 
         <leavingSeedCountCurve>
           <points>
-            <li>(0, 2.5)</li>
-            <li>(0.7, 4.5)</li>
+            <li>(0, 4)</li>
+            <li>(0.7, 5.5)</li>
             <li>(1.0, 6)</li>
           </points>
         </leavingSeedCountCurve>
@@ -493,8 +493,8 @@
 
         <leavingSeedCountCurve>
           <points>
-            <li>(0, 2.5)</li>
-            <li>(0.7, 4.5)</li>
+            <li>(0, 4)</li>
+            <li>(0.7, 5.5)</li>
             <li>(1.0, 6)</li>
           </points>
         </leavingSeedCountCurve>

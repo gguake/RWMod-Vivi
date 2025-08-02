@@ -121,7 +121,7 @@
       <li Class="CompProperties_Biocodable"/>
       <li Class="VVRace.CompProperties_Mana">
         <manaCapacity>450</manaCapacity>
-        <manaAbsorbPerDay>450</manaAbsorbPerDay>
+        <manaAbsorbPerDay>300</manaAbsorbPerDay>
         <workOnlySpawned>false</workOnlySpawned>
       </li>
     </comps>
@@ -217,7 +217,7 @@
       <li Class="CompProperties_Biocodable"/>
       <li Class="VVRace.CompProperties_Mana">
         <manaCapacity>750</manaCapacity>
-        <manaAbsorbPerDay>900</manaAbsorbPerDay>
+        <manaAbsorbPerDay>500</manaAbsorbPerDay>
         <workOnlySpawned>false</workOnlySpawned>
       </li>
     </comps>
@@ -386,8 +386,8 @@
       <li Class="CompProperties_Styleable"/>
       <li Class="CompProperties_Biocodable"/>
       <li Class="VVRace.CompProperties_Mana">
-        <manaCapacity>500</manaCapacity>
-        <manaAbsorbPerDay>500</manaAbsorbPerDay>
+        <manaCapacity>450</manaCapacity>
+        <manaAbsorbPerDay>300</manaAbsorbPerDay>
         <workOnlySpawned>false</workOnlySpawned>
       </li>
     </comps>
@@ -488,7 +488,7 @@
       <li Class="CompProperties_Biocodable"/>
       <li Class="VVRace.CompProperties_Mana">
         <manaCapacity>500</manaCapacity>
-        <manaAbsorbPerDay>750</manaAbsorbPerDay>
+        <manaAbsorbPerDay>350</manaAbsorbPerDay>
         <workOnlySpawned>false</workOnlySpawned>
       </li>
     </comps>
@@ -599,7 +599,7 @@
       <li Class="CompProperties_Biocodable"/>
       <li Class="VVRace.CompProperties_Mana">
         <manaCapacity>400</manaCapacity>
-        <manaAbsorbPerDay>750</manaAbsorbPerDay>
+        <manaAbsorbPerDay>270</manaAbsorbPerDay>
         <workOnlySpawned>false</workOnlySpawned>
       </li>
     </comps>

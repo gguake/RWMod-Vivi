@@ -40,7 +40,7 @@
       <BeautyOutdoors>30</BeautyOutdoors>
       <SellPriceFactor>0</SellPriceFactor>
 
-      <VV_PlantGatherCooldown>0.3</VV_PlantGatherCooldown>
+      <VV_PlantGatherCooldown>0.25</VV_PlantGatherCooldown>
       <VV_PlantHoneyGatherYield>1.0</VV_PlantHoneyGatherYield>
     </statBases>
 
@@ -146,35 +146,35 @@
           <li>
               <texPath>Things/Plants/VV_Everflower/VV_EverflowerA</texPath>
               <graphicClass>Graphic_Single</graphicClass>
-              <shaderType>Cutout</shaderType>
               <drawSize>(1.0, 1.0)</drawSize>
+              <renderQueue>2901</renderQueue>
           </li>
           <li>
               <texPath>Things/Plants/VV_Everflower/VV_EverflowerA</texPath>
               <graphicClass>Graphic_Single</graphicClass>
-              <shaderType>Cutout</shaderType>
               <drawSize>(1.2, 1.2)</drawSize>
+              <renderQueue>2901</renderQueue>
           </li>
           <li>
               <texPath>Things/Plants/VV_Everflower/VV_EverflowerB</texPath>
               <graphicClass>Graphic_Single</graphicClass>
-              <shaderType>Cutout</shaderType>
               <drawSize>(6, 6)</drawSize>
               <drawOffset>(0, 0.2, 1.8)</drawOffset>
+              <renderQueue>2901</renderQueue>
           </li>
           <li>
               <texPath>Things/Plants/VV_Everflower/VV_EverflowerC</texPath>
               <graphicClass>Graphic_Single</graphicClass>
-              <shaderType>Cutout</shaderType>
               <drawSize>(6, 6)</drawSize>
               <drawOffset>(0, 0.2, 1.8)</drawOffset>
+              <renderQueue>2901</renderQueue>
           </li>
           <li>
               <texPath>Things/Plants/VV_Everflower/VV_EverflowerD</texPath>
               <graphicClass>Graphic_Single</graphicClass>
-              <shaderType>Cutout</shaderType>
               <drawSize>(6, 12)</drawSize>
               <drawOffset>(0, 0.2, 4.3)</drawOffset>
+              <renderQueue>2901</renderQueue>
           </li>
         </graphicsByLevel>
         <effectsOnLevelAcquire>

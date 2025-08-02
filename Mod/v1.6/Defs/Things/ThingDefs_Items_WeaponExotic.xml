@@ -58,8 +58,8 @@
       </li>
       <li Class="CompProperties_Biocodable"/>
       <li Class="VVRace.CompProperties_Mana">
-        <manaCapacity>1000</manaCapacity>
-        <manaAbsorbPerDay>750</manaAbsorbPerDay>
+        <manaCapacity>900</manaCapacity>
+        <manaAbsorbPerDay>600</manaAbsorbPerDay>
         <workOnlySpawned>false</workOnlySpawned>
       </li>
     </comps>
@@ -182,8 +182,8 @@
         <biocodeOnEquip>true</biocodeOnEquip>
       </li>
       <li Class="VVRace.CompProperties_Mana">
-        <manaCapacity>1000</manaCapacity>
-        <manaAbsorbPerDay>750</manaAbsorbPerDay>
+        <manaCapacity>900</manaCapacity>
+        <manaAbsorbPerDay>600</manaAbsorbPerDay>
         <workOnlySpawned>false</workOnlySpawned>
       </li>
     </comps>
@@ -211,7 +211,7 @@
           <li>Stab</li>
         </capacities>
         <power>6</power>
-        <armorPenetration>0.24</armorPenetration>
+        <armorPenetration>0.2</armorPenetration>
         <cooldownTime>0.9</cooldownTime>
       </li>
     </tools>
@@ -270,8 +270,8 @@
       <damageDef>Stab</damageDef>
       <damageAmountBase>6</damageAmountBase>
       <stoppingPower>0.5</stoppingPower>
-      <armorPenetrationBase>0.15</armorPenetrationBase>
-      <speed>100</speed>
+      <armorPenetrationBase>0.12</armorPenetrationBase>
+      <speed>90</speed>
 
       <bonusSpeedByPsychicSensitivity>
         <points>
