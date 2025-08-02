@@ -75,7 +75,8 @@
 \n주로 단독임무에 배치되는 노련한 저격수 비비들은 이 무기로 둥지에 찾아오는 수많은 공격을 사전에 차단해왔습니다.
 \n사격시마다 마나를 소모하고 마나가 고갈되면 사격할 수 없으며 주변의 환경 마나를 흡수해 자동으로 충전됩니다.</VV_FroststingCrossbow.description>
 <VV_FroststingCrossbow.tools.limb.label>활대</VV_FroststingCrossbow.tools.limb.label>
-
+<VV_Bullet_Froststing.label>서리침</VV_Bullet_Froststing.label>
+2
 <!-- Exotics -->
 <VV_EltexNeedle.label>비비 엘텍스 바늘</VV_EltexNeedle.label>
 <VV_EltexNeedle.description>특수 가공된 날카로운 바늘입니다. 비비만 다룰 수 있으며 장착시 착용자와 공명해 귀속되어 다른 이들은 사용할 수 없습니다.

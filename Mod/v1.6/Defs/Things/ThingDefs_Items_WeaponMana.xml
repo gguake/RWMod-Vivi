@@ -62,7 +62,7 @@
         <breathStartOffset>0.9</breathStartOffset>
         <breathAngleHalf>15</breathAngleHalf>
         <breathFriendlyFireSafeDistance>2.9</breathFriendlyFireSafeDistance>
-        <propagationSpeed>10</propagationSpeed>
+        <propagationSpeed>11</propagationSpeed>
 
         <soundCast>VV_Steamthrower</soundCast>
         <targetParams>
@@ -305,7 +305,7 @@
       <WorkToMake>40000</WorkToMake>
       <Mass>2.5</Mass>
       <RangedWeapon_Cooldown>1.8</RangedWeapon_Cooldown>
-      <VV_RangedWeapon_ManaCost>25</VV_RangedWeapon_ManaCost>
+      <VV_RangedWeapon_ManaCost>30</VV_RangedWeapon_ManaCost>
     </statBases>
     <relicChance>0</relicChance>
 
@@ -555,7 +555,7 @@
         <hasStandardCommand>true</hasStandardCommand>
         <defaultProjectile>VV_Bullet_Froststing</defaultProjectile>
         <warmupTime>4.5</warmupTime>
-        <minRange>18.9</minRange>
+        <minRange>15.9</minRange>
         <range>54.9</range>
         <soundCast>VV_FroststingShot</soundCast>
         <canGoWild>false</canGoWild>
@@ -598,7 +598,7 @@
       <li Class="CompProperties_Styleable"/>
       <li Class="CompProperties_Biocodable"/>
       <li Class="VVRace.CompProperties_Mana">
-        <manaCapacity>500</manaCapacity>
+        <manaCapacity>400</manaCapacity>
         <manaAbsorbPerDay>750</manaAbsorbPerDay>
         <workOnlySpawned>false</workOnlySpawned>
       </li>

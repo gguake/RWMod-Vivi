@@ -102,16 +102,18 @@ namespace VVRace
 
             base.Launch(launcher, origin, usedTarget, intendedTarget, hitFlags, preventFriendlyFire, equipment, targetCoverDef);
 
+            var moveEndPosition = usedTarget.HasThing ? usedTarget.Thing.TrueCenter().Yto0() : usedTarget.Cell.ToVector3Shifted().Yto0();
+
             _realPosition = origin.Yto0();
-            _realDirection = (usedTarget.Thing.TrueCenter() - launcher.TrueCenter()).Yto0().normalized;
+            _realDirection = (moveEndPosition - launcher.TrueCenter()).Yto0().normalized;
 
-            _initialTargettingPosition = usedTarget.Thing.PositionHeld.ToVector3();
+            _initialTargettingPosition = moveEndPosition;
 
-            _curTargetThing = usedTarget.Thing;
+            _curTargetThing = usedTarget.HasThing ? usedTarget.Thing : null;
             _moveStartPosition = _realPosition;
-            _moveEndPosition = usedTarget.HasThing ? usedTarget.Thing.TrueCenter().Yto0() : usedTarget.Cell.ToVector3().Yto0();
+            _moveEndPosition = moveEndPosition;
             _curDirectionOutVector = _realDirection;
-            _curDirectionInVector = (_curTargetThing.Position.ToVector3() - launcher.Position.ToVector3()).Yto0().normalized;
+            _curDirectionInVector = _realDirection;
             _totalMoveDistance = CalculateBezierCurveLengthApproximate(_moveStartPosition, _moveEndPosition, _curDirectionOutVector * BezierWeight, _curDirectionInVector * BezierWeight);
             _curMoveDistance = 0f;
 

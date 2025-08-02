@@ -53,6 +53,7 @@
             <clipPath>SFX/VV_Lightningbolt</clipPath>
           </li>
         </grains>
+        <distRange>20~60</distRange>
         <volumeRange>50</volumeRange>
         <pitchRange>0.8~1.2</pitchRange>
         <sustainLoop>False</sustainLoop>
@@ -71,7 +72,8 @@
             <clipPath>SFX/VV_Explosion_Frostbite</clipPath>
           </li>
         </grains>
-        <volumeRange>70</volumeRange>
+        <distRange>10~30</distRange>
+        <volumeRange>60</volumeRange>
         <pitchRange>0.9~1.1</pitchRange>
       </li>
     </subSounds>
@@ -139,7 +141,8 @@
             <clipPath>SFX/VV_Steamthrower</clipPath>
           </li>
         </grains>
-        <volumeRange>60</volumeRange>
+        <distRange>10~30</distRange>
+        <volumeRange>45</volumeRange>
         <pitchRange>0.9~1.1</pitchRange>
       </li>
     </subSounds>
@@ -157,7 +160,8 @@
             <clipPath>SFX/VV_LavaShrudderShot</clipPath>
           </li>
         </grains>
-        <volumeRange>55</volumeRange>
+        <distRange>30~60</distRange>
+        <volumeRange>50</volumeRange>
         <pitchRange>0.9~1.1</pitchRange>
       </li>
     </subSounds>
@@ -175,7 +179,8 @@
             <clipPath>SFX/VV_FroststingShot</clipPath>
           </li>
         </grains>
-        <volumeRange>70</volumeRange>
+        <distRange>30~60</distRange>
+        <volumeRange>60</volumeRange>
         <pitchRange>0.8~1.2</pitchRange>
       </li>
     </subSounds>
