@@ -29,4 +29,7 @@
 <VV_Inspector_EverflowerAttunementState>조율: {LEVEL}단계 ({EXP})</VV_Inspector_EverflowerAttunementState>
 
 <VV_Inspector_ShockNetTrapCooldown>재충전까지 남은 시간: {0}</VV_Inspector_ShockNetTrapCooldown>
+
+<VV_Inspector_SeedlingOutOfFertilzier>양분 부족</VV_Inspector_SeedlingOutOfFertilzier>
+<VV_Inspector_SeedlingOutOfMana>마나 부족</VV_Inspector_SeedlingOutOfMana>
 </LanguageData>

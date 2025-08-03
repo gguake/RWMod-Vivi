@@ -27,4 +27,9 @@
 
 <VV_Inspector_AttunementReserved>{RITUAL} reserved: {PAWN_nameDef}</VV_Inspector_AttunementReserved>
 <VV_Inspector_EverflowerAttunementState>Attunement: Level {LEVEL} ({EXP})</VV_Inspector_EverflowerAttunementState>
+
+<VV_Inspector_ShockNetTrapCooldown>Time remaining until recharge: {0}</VV_Inspector_ShockNetTrapCooldown>
+
+<VV_Inspector_SeedlingOutOfFertilzier>Out of nutrition</VV_Inspector_SeedlingOutOfFertilzier>
+<VV_Inspector_SeedlingOutOfMana>Out of mana</VV_Inspector_SeedlingOutOfMana>
 </LanguageData>

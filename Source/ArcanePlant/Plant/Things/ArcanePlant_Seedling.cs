@@ -153,7 +153,7 @@ namespace VVRace
 
             if (Spawned)
             {
-                if (RefuelableComp.Fuel > 0f)
+                if (RefuelableComp.HasFuel)
                 {
                     if (_lastZeroNutritionTick > 0)
                     {
@@ -257,6 +257,18 @@ namespace VVRace
         {
             var sb = new StringBuilder(base.GetInspectString());
             sb.AppendInNewLine("PercentGrowth".Translate(Growth.ToStringPercent()));
+
+            if (!RefuelableComp.HasFuel)
+            {
+                sb.Append(", ");
+                sb.Append(LocalizeString_Inspector.VV_Inspector_SeedlingOutOfFertilzier.Translate());
+            }
+
+            if (!ManaComp.Active)
+            {
+                sb.Append(", ");
+                sb.Append(LocalizeString_Inspector.VV_Inspector_SeedlingOutOfMana.Translate());
+            }
 
             return sb.ToString();
         }

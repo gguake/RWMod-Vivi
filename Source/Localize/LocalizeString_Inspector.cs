@@ -27,5 +27,8 @@
         public const string VV_Inspector_EverflowerAttunementState = nameof(VV_Inspector_EverflowerAttunementState);
 
         public const string VV_Inspector_ShockNetTrapCooldown = nameof(VV_Inspector_ShockNetTrapCooldown);
+
+        public const string VV_Inspector_SeedlingOutOfFertilzier = nameof(VV_Inspector_SeedlingOutOfFertilzier);
+        public const string VV_Inspector_SeedlingOutOfMana = nameof(VV_Inspector_SeedlingOutOfMana);
     }
 }
