@@ -6,15 +6,16 @@ namespace VVRace
     public class VVRaceModSettings : ModSettings
     {
         public bool allowSelectModGenes = false;
-
         public float royalJellyMultiplier = 1f;
+        public bool alwaysShowManaIfSelected = true;
 
         public override void ExposeData()
         {
             base.ExposeData();
 
-            Scribe_Values.Look(ref allowSelectModGenes, "allowSelectModGenes");
-            Scribe_Values.Look(ref royalJellyMultiplier, "royalJellyMultiplier");
+            Scribe_Values.Look(ref allowSelectModGenes, "allowSelectModGenes", defaultValue: false);
+            Scribe_Values.Look(ref royalJellyMultiplier, "royalJellyMultiplier", defaultValue: 1f);
+            Scribe_Values.Look(ref alwaysShowManaIfSelected, "alwaysShowManaIfSelected", defaultValue: true);
         }
     }
 
@@ -43,6 +44,11 @@ namespace VVRace
                 0.1f, 
                 10f, 
                 tooltip: LocalizeString_Etc.VV_ModSettings_RoyalJellyNeedMultiplierDesc.Translate());
+
+            listing.CheckboxLabeled(
+                LocalizeString_Etc.VV_ModSettings_AlwaysShowManaGridOnSelect.Translate(),
+                ref _settings.alwaysShowManaIfSelected,
+                LocalizeString_Etc.VV_ModSettings_AlwaysShowManaGridOnSelectDesc.Translate());
 
             listing.End();
 

@@ -29,6 +29,8 @@ namespace VVRace
 
     public class CompMana : ThingComp, IThingGlower
     {
+        private VVRaceModSettings _modSettingCache = LoadedModManager.GetMod<VVRaceMod>().GetSettings<VVRaceModSettings>();
+
         public CompProperties_Mana Props => (CompProperties_Mana)props;
 
         public int ManaExternalChangeByDay => (int)(_manaExternalChange * 60000f / ManaMapComponent.RefreshManaInterval);
@@ -64,7 +66,7 @@ namespace VVRace
                 Stored = Props.manaCapacity * value;
             }
         }
-            
+
         public override void PostPostMake()
         {
             _manaStored = Props.manaCapacity;
@@ -231,7 +233,7 @@ namespace VVRace
 
         public override void PostDrawExtraSelectionOverlays()
         {
-            if (parent.Spawned && parent is Building)
+            if (parent.Spawned && parent is Building && _modSettingCache.alwaysShowManaIfSelected)
             {
                 parent.Map.GetManaComponent()?.MarkForDrawOverlay();
             }

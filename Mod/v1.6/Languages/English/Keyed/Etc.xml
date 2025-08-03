@@ -21,6 +21,9 @@
 <VV_ModSettings_RoyalJellyNeedMultiplier>Royal jelly needs multiplier</VV_ModSettings_RoyalJellyNeedMultiplier>
 <VV_ModSettings_RoyalJellyNeedMultiplierDesc>Sets the rate at which a young Vivi's desire for royal jelly increases when consumed. The higher the rate, the less royal jelly is consumed to become a royal Vivi.</VV_ModSettings_RoyalJellyNeedMultiplierDesc>
 
+<VV_ModSettings_AlwaysShowManaGridOnSelect>Always show mana grid when selecting arcane plants</VV_ModSettings_AlwaysShowManaGridOnSelect>
+<VV_ModSettings_AlwaysShowManaGridOnSelectDesc>Sets whether to always display the environment mana grid when selecting arcane plants or mana-using structures. Applies only when the 'Arcane Botany' research is completed.</VV_ModSettings_AlwaysShowManaGridOnSelectDesc>
+
 <VV_Thing_Seed>{0} seed</VV_Thing_Seed>
 <VV_Thing_SeedDesc>A seed of {0}. When planted in soil or an arcane plant pot, it becomes a seedling, which will eventually grow into {0}.\nArcane plants require both mana and nutrients to grow.
 \nMana is absorbed from the environment mana and can also be supplied by nearby mana emitter or other arcane plants that produce mana.
