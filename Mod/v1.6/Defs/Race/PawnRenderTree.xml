@@ -255,7 +255,7 @@
                 <li>
                   <debugLabel>Hair</debugLabel>
                   <nodeClass>RPEF.PawnRenderNode_HairConstant</nodeClass>
-                  <workerClass>PawnRenderNodeWorker_FlipWhenCrawling</workerClass>
+                  <workerClass>RPEF.PawnRenderNodeWorker_CustomHair</workerClass>
                   <rotDrawMode>Fresh, Rotting</rotDrawMode>
                   <colorType>Hair</colorType>
                   <!-- skipFlag>Hair</skipFlag -->
