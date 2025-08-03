@@ -16,6 +16,14 @@ namespace VVRace
             Scribe_Values.Look(ref allowSelectModGenes, "allowSelectModGenes", defaultValue: false);
             Scribe_Values.Look(ref royalJellyMultiplier, "royalJellyMultiplier", defaultValue: 1f);
             Scribe_Values.Look(ref alwaysShowManaIfSelected, "alwaysShowManaIfSelected", defaultValue: true);
+
+            if (Scribe.mode == LoadSaveMode.PostLoadInit)
+            {
+                if (royalJellyMultiplier < 1f)
+                {
+                    royalJellyMultiplier = 1f;
+                }
+            }
         }
     }
 
@@ -41,7 +49,7 @@ namespace VVRace
             _settings.royalJellyMultiplier = listing.SliderLabeled(
                 LocalizeString_Etc.VV_ModSettings_RoyalJellyNeedMultiplier.Translate(), 
                 _settings.royalJellyMultiplier, 
-                0.1f, 
+                1f, 
                 10f, 
                 tooltip: LocalizeString_Etc.VV_ModSettings_RoyalJellyNeedMultiplierDesc.Translate());
 
