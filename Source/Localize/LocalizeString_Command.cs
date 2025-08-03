@@ -26,5 +26,8 @@
 
         public const string VV_Command_CanGatherPollens = nameof(VV_Command_CanGatherPollens);
         public const string VV_Command_CanGatherPollensDesc = nameof(VV_Command_CanGatherPollensDesc);
+
+        public const string VV_Command_EjectFilteredHoney = nameof(VV_Command_EjectFilteredHoney);
+        public const string VV_Command_EjectFilteredHoneyDesc = nameof(VV_Command_EjectFilteredHoneyDesc);
     }
 }

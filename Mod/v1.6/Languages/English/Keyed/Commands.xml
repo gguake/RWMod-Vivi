@@ -21,4 +21,7 @@
 
 <VV_Command_CanGatherPollens>Allow gather pollens</VV_Command_CanGatherPollens>
 <VV_Command_CanGatherPollensDesc>When cleaning pollen within the gather range, gather it without throwing it away. Pollen yield is proportional to cleaning speed.</VV_Command_CanGatherPollensDesc>
+
+<VV_Command_EjectFilteredHoney>Eject filtered honey</VV_Command_EjectFilteredHoney>
+<VV_Command_EjectFilteredHoneyDesc>Ejects the currently filtered honey.</VV_Command_EjectFilteredHoneyDesc>
 </LanguageData>
