@@ -72,6 +72,11 @@ namespace VVRace
 
             Scribe_Values.Look(ref _filteredHoneyAmount, "filteredHoneyAmount");
             Scribe_Deep.Look(ref _innerContainer, "innerContainer", this);
+
+            if (Scribe.mode == LoadSaveMode.PostLoadInit && _innerContainer == null)
+            {
+                _innerContainer = new ThingOwner<Thing>(this);
+            }
         }
 
         public override void TickLong()
