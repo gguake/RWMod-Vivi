@@ -78,6 +78,7 @@ namespace VVRace
                 })
                 .WithFailCondition(() => !GatherTargetInfo.Thing.CanGatherable(GatheringRecipeDef.targetYieldStat, GatheringRecipeDef.targetCooldownStat))
                 .WithEffect(() => GetActor().CurJob.bill.recipe.effectWorking, TargetIndex.A)
+                .WithActiveSkill(() => job.bill.recipe.workSkill)
                 .WithProgressBarToilDelay(GatherTargetIdx);
 
             // 채집 체크
