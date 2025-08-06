@@ -26,7 +26,8 @@
 <VV_MakeFertilizerResource.label>유기물로 마나 비료 만들기</VV_MakeFertilizerResource.label>
 <VV_MakeFertilizerResource.description>유기물을 숙성시켜 꽃가루나 작물과 배합해 마나 비료를 만듭니다.</VV_MakeFertilizerResource.description>
 <VV_MakeFertilizerResource.jobString>유기물로 비료를 배합하는 중.</VV_MakeFertilizerResource.jobString>
-<VV_MakeFertilizerResource.ingredients.1.filter.customSummary>꽃가루나 작물</VV_MakeFertilizerResource.ingredients.1.filter.customSummary>
+<VV_MakeFertilizerResource.ingredients.0.filter.customSummary>육류나 마법 씨앗</VV_MakeFertilizerResource.ingredients.0.filter.customSummary>
+<VV_MakeFertilizerResource.ingredients.1.filter.customSummary>채식재료나 꽃가루</VV_MakeFertilizerResource.ingredients.1.filter.customSummary>
 
 <!-- Tier2 -->
 <VV_RefineTitanicHornetWing.label>거대 말벌 날개 가공</VV_RefineTitanicHornetWing.label>

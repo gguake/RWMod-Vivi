@@ -246,6 +246,7 @@
     <ingredients>
       <li>
         <filter>
+          <customSummary>meat or arcane seeds</customSummary>
           <categories>
             <li>MeatRaw</li>
             <li>VV_ArcaneSeed</li>
@@ -255,7 +256,7 @@
       </li>
       <li>
         <filter>
-          <customSummary>pollen or crops</customSummary>
+          <customSummary>crops or pollen</customSummary>
           <thingDefs>
             <li>VV_Pollen</li>
           </thingDefs>
