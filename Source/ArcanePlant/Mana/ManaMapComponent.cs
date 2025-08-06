@@ -9,7 +9,7 @@ namespace VVRace
 {
     public class ManaMapComponent : MapComponent, ICellBoolGiver, IDisposable
     {
-        public const float ViviFlowerChance = 0.06f;
+        public const float ViviFlowerChance = 0.04f;
         public const float EnvironmentManaMax = 1000f;
 
         public const int DiffuseInterval = 1129;

@@ -49,7 +49,7 @@
     <comps>
       <li Class="CompProperties_Glower">
         <glowRadius>1.9</glowRadius>
-        <glowColor>(255,175,148,0)</glowColor>
+        <glowColor>(155,75,48,0)</glowColor>
       </li>
     </comps>
   </ThingDef>
@@ -73,7 +73,7 @@
     <comps>
       <li Class="CompProperties_Glower">
         <glowRadius>1.9</glowRadius>
-        <glowColor>(194,250,255,0)</glowColor>
+        <glowColor>(94,150,155,0)</glowColor>
       </li>
     </comps>
   </ThingDef>
@@ -97,7 +97,7 @@
     <comps>
       <li Class="CompProperties_Glower">
         <glowRadius>1.9</glowRadius>
-        <glowColor>(225,201,255,0)</glowColor>
+        <glowColor>(125,101,155,0)</glowColor>
       </li>
     </comps>
   </ThingDef>
@@ -121,7 +121,7 @@
     <comps>
       <li Class="CompProperties_Glower">
         <glowRadius>1.9</glowRadius>
-        <glowColor>(255,230,168,0)</glowColor>
+        <glowColor>(155,130,68,0)</glowColor>
       </li>
     </comps>
   </ThingDef>
