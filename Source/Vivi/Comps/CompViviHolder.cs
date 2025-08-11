@@ -38,6 +38,17 @@ namespace VVRace
             Scribe_Deep.Look(ref innerContainer, "innerViviContainer", new object[] { this });
         }
 
+        public override void PostSpawnSetup(bool respawningAfterLoad)
+        {
+            if (!respawningAfterLoad)
+            {
+                if (parent.TryGetComp<CompVivi>(out var compVivi) && compVivi.AttunementActive)
+                {
+                    Refresh();
+                }
+            }
+        }
+
         public override void PostDestroy(DestroyMode mode, Map previousMap)
         {
             if (mode != DestroyMode.WillReplace)
