@@ -136,6 +136,8 @@ namespace VVRace
                 var amount = (float)(VerbProps.damageAmount ?? VerbProps.damageDef.defaultDamage);
                 if (amount <= 0) { return false; }
 
+                amount *= EquipmentSource?.GetStatValue(StatDefOf.RangedWeapon_DamageMultiplier) ?? 1f;
+
                 if (VerbProps.damageDef != null)
                 {
                     var dinfo = new DamageInfo(
