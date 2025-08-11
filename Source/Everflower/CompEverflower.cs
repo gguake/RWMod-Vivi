@@ -314,6 +314,8 @@ namespace VVRace
 
                 if (GenSpawn.TrySpawn(VVThingDefOf.VV_ArcanePlantSeedling, cell, parent.Map, out var thing, canWipeEdifices: false))
                 {
+                    thing.SetFaction(parent.Faction ?? Faction.OfPlayerSilentFail);
+
                     var seedling = thing as ArcanePlant_Seedling;
                     if (seedling != null)
                     {

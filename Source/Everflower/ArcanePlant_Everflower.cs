@@ -259,7 +259,7 @@ namespace VVRace
                 var ticks = Mathf.Clamp(
                     Mathf.CeilToInt(Rand.Range(60000 * 5, 60000 * 10) * pawn.ageTracker.BiologicalTicksPerTick), 
                     0, 
-                    (int)(pawn.ageTracker.AgeBiologicalTicks - 13 * 60000 * 60)) - 1;
+                    (int)(pawn.ageTracker.AgeBiologicalTicks - 13.01f * 60000 * 60));
 
                 if (ticks > 0)
                 {
