@@ -64,7 +64,7 @@
       </li>
 
       <li Class="VVRace.ArcaneSeedExtension">
-        <seedMarketValueRatio>0.25</seedMarketValueRatio>
+        <seedMarketValueRatio>0.2</seedMarketValueRatio>
         <seedColor>(150,200,150)</seedColor>
 
         <leavingSeedCountCurve>
@@ -193,7 +193,7 @@
       </li>
 
       <li Class="VVRace.ArcaneSeedExtension">
-        <seedMarketValueRatio>0.25</seedMarketValueRatio>
+        <seedMarketValueRatio>0.2</seedMarketValueRatio>
         <seedColor>(150,255,150)</seedColor>
 
         <leavingSeedCountCurve>
@@ -272,7 +272,7 @@
       </li>
 
       <li Class="VVRace.ArcaneSeedExtension">
-        <seedMarketValueRatio>0.25</seedMarketValueRatio>
+        <seedMarketValueRatio>0.2</seedMarketValueRatio>
         <seedColor>(200,200,150)</seedColor>
 
         <leavingSeedCountCurve>

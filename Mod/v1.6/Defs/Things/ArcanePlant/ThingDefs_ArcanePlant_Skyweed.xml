@@ -62,7 +62,7 @@
 
     <modExtensions>
       <li Class="VVRace.ArcaneSeedExtension">
-        <seedMarketValueRatio>0.25</seedMarketValueRatio>
+        <seedMarketValueRatio>0.2</seedMarketValueRatio>
         <seedColor>(200,200,200)</seedColor>
 
         <leavingSeedCountCurve>

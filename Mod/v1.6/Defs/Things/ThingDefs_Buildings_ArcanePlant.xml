@@ -218,7 +218,7 @@
     <pathCost>14</pathCost>
 
     <statBases>
-      <MaxHitPoints>220</MaxHitPoints>
+      <MaxHitPoints>200</MaxHitPoints>
       <WorkToBuild>1200</WorkToBuild>
       <Mass>2</Mass>
       <Flammability>1.0</Flammability>

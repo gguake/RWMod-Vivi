@@ -12,9 +12,9 @@
     </graphicData>
     <projectile>
       <damageDef>Poke</damageDef>
-      <damageAmountBase>7</damageAmountBase>
+      <damageAmountBase>6</damageAmountBase>
       <armorPenetrationBase>0</armorPenetrationBase>
-      <stoppingPower>1</stoppingPower>
+      <stoppingPower>0.5</stoppingPower>
       <speed>27</speed>
     </projectile>
   </ThingDef>
@@ -30,7 +30,7 @@
     </graphicData>
     <projectile>
       <damageDef>Flame</damageDef>
-      <damageAmountBase>7</damageAmountBase>
+      <damageAmountBase>6</damageAmountBase>
       <armorPenetrationBase>0</armorPenetrationBase>
       <stoppingPower>0.5</stoppingPower>
       <speed>27</speed>
@@ -48,7 +48,7 @@
     </graphicData>
     <projectile>
       <damageDef>VV_Frostbite</damageDef>
-      <damageAmountBase>7</damageAmountBase>
+      <damageAmountBase>6</damageAmountBase>
       <armorPenetrationBase>0</armorPenetrationBase>
       <stoppingPower>0.5</stoppingPower>
       <speed>27</speed>
@@ -84,7 +84,7 @@
     </graphicData>
     <projectile>
       <damageDef>Bullet</damageDef>
-      <damageAmountBase>9</damageAmountBase>
+      <damageAmountBase>8</damageAmountBase>
       <armorPenetrationBase>0.3</armorPenetrationBase>
       <stoppingPower>2</stoppingPower>
       <speed>63</speed>
