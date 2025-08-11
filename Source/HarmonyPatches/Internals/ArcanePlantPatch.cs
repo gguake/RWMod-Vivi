@@ -97,6 +97,10 @@ namespace VVRace
                     postfix: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(VacuumUtility_EverInVacuum_Postfix)));
             }
 
+            harmony.Patch(
+                original: AccessTools.Method(typeof(Designator_Uninstall), nameof(Designator_Uninstall.CanDesignateThing)),
+                prefix: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(Designator_Uninstall_CanDesignateThing_Prefix)));
+
             Log.Message("!! [ViViRace] arcane plant patch complete");
         }
 
@@ -444,6 +448,17 @@ namespace VVRace
                     __result = false;
                 }
             }
+        }
+
+        private static bool Designator_Uninstall_CanDesignateThing_Prefix(ref AcceptanceReport __result, Thing t)
+        {
+            if (t is ArcanePlant_Everflower)
+            {
+                __result = false;
+                return false;
+            }
+
+            return true;
         }
     }
 }

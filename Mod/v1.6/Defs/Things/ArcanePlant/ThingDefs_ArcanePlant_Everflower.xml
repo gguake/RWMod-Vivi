@@ -29,10 +29,12 @@
       <drawSize>(1.0, 1.0)</drawSize>
     </graphicData>
     
+    <minifiedDef>MinifiedArcanePlant</minifiedDef>
     <pathCost>14</pathCost>
     <pathCostIgnoreRepeat>false</pathCostIgnoreRepeat>
 
     <statBases>
+      <Mass>3</Mass>
       <MaxHitPoints>500</MaxHitPoints>
       <WorkToBuild>250000</WorkToBuild>
       <Flammability>0</Flammability>
@@ -47,6 +49,9 @@
     <fillPercent>0.1</fillPercent>
 
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <thingCategories>
+      <li>VV_ArcanePlant</li>
+    </thingCategories>
 
     <costList>
       <VV_PerfumingPetal>200</VV_PerfumingPetal>

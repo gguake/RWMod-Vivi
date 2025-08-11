@@ -66,6 +66,8 @@ namespace VVRace
         {
             foreach (var gizmo in base.GetGizmos())
             {
+                if (gizmo is Designator_Install || gizmo is Designator_Uninstall) { continue; }
+
                 yield return gizmo;
             }
 
