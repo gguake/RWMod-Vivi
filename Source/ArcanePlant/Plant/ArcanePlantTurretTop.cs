@@ -114,7 +114,7 @@ namespace VVRace
             var gun = parent.Gun;
             if (gun == null) { return; }
 
-            var angle = (parent.AttackVerb?.AimAngleOverride ?? CurRotation) + recoilAngleOffset;
+            var angle = (parent.AttackVerb?.AimAngleOverride ?? CurRotation) + (parent.Gun?.def.equippedAngleOffset ?? 0f) + recoilAngleOffset;
             var offset = new Vector3(parent.def.building.turretTopOffset.x, 0f, parent.def.building.turretTopOffset.y).RotatedBy(angle);
             float turretTopDrawSize = gun.DrawSize.x;
 

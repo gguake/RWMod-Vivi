@@ -13,13 +13,13 @@ namespace VVRace
             get
             {
                 if (_manaComp == null)
-                { 
-                    _manaComp = caster.TryGetComp<CompMana>();
+                {
+                    _manaComp = EquipmentSource?.TryGetComp<CompMana>();
                 }
 
                 if (_manaComp == null)
                 {
-                    _manaComp = EquipmentSource?.TryGetComp<CompMana>();
+                    _manaComp = caster.TryGetComp<CompMana>();
                 }
 
                 return _manaComp;
