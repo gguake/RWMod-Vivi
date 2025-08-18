@@ -27,7 +27,7 @@
       <li Class="VVRace.GatherableFilthExtension">
         <yieldStat>CleaningSpeed</yieldStat>
         <thingDef>VV_Pollen</thingDef>
-        <amount>7</amount>
+        <amount>5</amount>
       </li>
     </modExtensions>
   </ThingDef>
