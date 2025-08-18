@@ -9,6 +9,8 @@ namespace VVRace
 {
     public class ManaMapComponent : MapComponent, ICellBoolGiver, IDisposable
     {
+        private VVRaceModSettings _modSettingCache = LoadedModManager.GetMod<VVRaceMod>().GetSettings<VVRaceModSettings>();
+
         public const float ViviFlowerChance = 0.04f;
         public const float EnvironmentManaMax = 1000f;
 
@@ -50,7 +52,7 @@ namespace VVRace
             _tmpGrid = new NativeArray<float>(map.cellIndices.NumGridCells, Allocator.Persistent);
             _flowerCellQueue = new NativePriorityQueue<int, float, FloatMinComparer>(map.cellIndices.NumGridCells, default(FloatMinComparer), Allocator.Persistent);
 
-            _cellBoolDrawer = new CellBoolDrawer(this, map.Size.x, map.Size.z, 3634, 0.5f);
+            _cellBoolDrawer = new CellBoolDrawer(this, map.Size.x, map.Size.z, 3634, _modSettingCache.manaGridOpacity);
 
             map.events.RoofChanged += Notify_RoofChanged;
         }
@@ -70,8 +72,9 @@ namespace VVRace
         public override void FinalizeInit()
         {
             _tmpGrid.Clear();
-
             _cellBoolDrawer.SetDirty();
+
+            LoadedModManager.GetMod<VVRaceMod>().OnWriteSettings += Notify_ModSettingChanged;
         }
 
         public override void MapComponentDraw()
@@ -190,6 +193,8 @@ namespace VVRace
 
         public void Dispose()
         {
+            LoadedModManager.GetMod<VVRaceMod>().OnWriteSettings -= Notify_ModSettingChanged;
+
             if (!_updateJobHandle.IsCompleted) { _updateJobHandle.Complete(); }
             if (!_diffusionJobHandle.IsCompleted) { _diffusionJobHandle.Complete(); }
 
@@ -197,6 +202,11 @@ namespace VVRace
             _tmpGrid.Dispose();
             _manaGrid.Dispose();
             _manaReserveGrid.Dispose();
+        }
+
+        private void Notify_ModSettingChanged()
+        {
+            _cellBoolDrawer = new CellBoolDrawer(this, map.Size.x, map.Size.z, 3634, _modSettingCache.manaGridOpacity);
         }
 
         private void Notify_RoofChanged(IntVec3 c)

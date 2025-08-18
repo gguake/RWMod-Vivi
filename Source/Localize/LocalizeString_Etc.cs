@@ -24,6 +24,9 @@
         public const string VV_ModSettings_AlwaysShowManaGridOnSelect = nameof(VV_ModSettings_AlwaysShowManaGridOnSelect);
         public const string VV_ModSettings_AlwaysShowManaGridOnSelectDesc = nameof(VV_ModSettings_AlwaysShowManaGridOnSelectDesc);
 
+        public const string VV_ModSettings_ManaGridOpacity = nameof(VV_ModSettings_ManaGridOpacity);
+        public const string VV_ModSettings_ManaGridOpacityDesc = nameof(VV_ModSettings_ManaGridOpacityDesc);
+
         public const string VV_Thing_Seed = nameof(VV_Thing_Seed);
         public const string VV_Thing_SeedDesc = nameof(VV_Thing_SeedDesc);
         public const string VV_Thing_Seedling = nameof(VV_Thing_Seedling);

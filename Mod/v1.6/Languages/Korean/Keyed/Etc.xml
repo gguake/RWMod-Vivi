@@ -24,6 +24,9 @@
 <VV_ModSettings_AlwaysShowManaGridOnSelect>마법 식물 선택시 항상 마나 그리드 표시</VV_ModSettings_AlwaysShowManaGridOnSelect>
 <VV_ModSettings_AlwaysShowManaGridOnSelectDesc>마법 식물이나 마나를 사용하는 구조물 선택시 항상 환경 마나 그리드를 표시할지 설정합니다. '마법 식물학' 연구가 완료된 상태에서만 적용됩니다.</VV_ModSettings_AlwaysShowManaGridOnSelectDesc>
 
+<VV_ModSettings_ManaGridOpacity>마나 그리드 불투명도</VV_ModSettings_ManaGridOpacity>
+<VV_ModSettings_ManaGridOpacityDesc>마법 식물이나 마나를 사용하는 구조물을 선택할 때 환경 마나 그리드의 불투명도를 설정합니다. '마법 식물학' 연구가 완료된 상태에서만 적용됩니다.</VV_ModSettings_ManaGridOpacityDesc>
+
 <VV_Thing_Seed>{0} 씨앗</VV_Thing_Seed>
 <VV_Thing_SeedDesc>{0}의 씨앗입니다. 땅이나 마법 식물 화분에 심으면 모종이 되며, 모종이 완전히 자라면 {0}이(가) 됩니다.\n마법 식물이 성장하려면 마나와 양분이 모두 공급되야 합니다.
 \n마나는 환경 마나를 흡수하므로 주변에 마나 발생기를 설치하거나 마나를 생산하는 마법 식물로부터 공급할 수 있습니다.
