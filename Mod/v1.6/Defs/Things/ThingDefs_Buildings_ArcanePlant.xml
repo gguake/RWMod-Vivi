@@ -57,6 +57,9 @@
     <building>
       <isEdifice>false</isEdifice>
       <isAttachment>true</isAttachment>
+      <leavingsBlacklist>
+        <li>VV_HoneyWaterFruit</li>
+      </leavingsBlacklist>
     </building>
 
     <placeWorkers>
