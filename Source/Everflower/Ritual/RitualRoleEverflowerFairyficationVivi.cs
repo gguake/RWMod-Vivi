@@ -37,7 +37,6 @@ namespace VVRace
             if (assignments != null)
             {
                 var resonator = assignments.AssignedPawns("resonator").FirstOrDefault();
-                Log.Message($"{resonator}");
                 if (resonator != null && pawn.GetMother() != resonator)
                 {
                     reason = LocalizeString_Etc.VV_FailReason_NotMyChild.Translate();
