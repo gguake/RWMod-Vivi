@@ -196,7 +196,7 @@
         <verbClass>VVRace.Verb_ShootWithMana</verbClass>
         <hasStandardCommand>true</hasStandardCommand>
         <defaultProjectile>VV_Projectile_EltexNeedle</defaultProjectile>
-        <warmupTime>1.4</warmupTime>
+        <warmupTime>2.2</warmupTime>
         <range>35.6</range>
         <soundCast>Interact_BeatFire</soundCast>
         <rangedFireRulepack>Combat_RangedFire_Thrown</rangedFireRulepack>

@@ -35,7 +35,7 @@
       <li Class="VVRace.CompProperties_Mana">
         <manaCapacity>900</manaCapacity>
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>20</mana>
+          <mana>40</mana>
         </manaConsumeRule>
 
         <manaAbsorbPerDay>900</manaAbsorbPerDay>
@@ -92,28 +92,28 @@
     <thingClass>VVRace.PeaShooterGun</thingClass>
 
     <statBases>
-      <AccuracyTouch>0.92</AccuracyTouch>
-      <AccuracyShort>0.84</AccuracyShort>
-      <AccuracyMedium>0.58</AccuracyMedium>
-      <AccuracyLong>0.3</AccuracyLong>
-      <RangedWeapon_Cooldown>1.2</RangedWeapon_Cooldown>
+      <AccuracyTouch>0.88</AccuracyTouch>
+      <AccuracyShort>0.72</AccuracyShort>
+      <AccuracyMedium>0.3</AccuracyMedium>
+      <AccuracyLong>0.15</AccuracyLong>
+      <RangedWeapon_Cooldown>1.65</RangedWeapon_Cooldown>
       <DeteriorationRate>0</DeteriorationRate>
       <Mass>40</Mass>
       <Flammability>0</Flammability>
-      <VV_RangedWeapon_ManaCost>10</VV_RangedWeapon_ManaCost>
+      <VV_RangedWeapon_ManaCost>15</VV_RangedWeapon_ManaCost>
     </statBases>
 
     <verbs>
       <li>
         <verbClass>VVRace.Verb_ShootWithMana</verbClass>
         <defaultProjectile>VV_Bullet_Pea</defaultProjectile>
-        <warmupTime>0.5</warmupTime>
+        <warmupTime>0.9</warmupTime>
         <range>28.9</range>
-        <ticksBetweenBurstShots>8</ticksBetweenBurstShots>
+        <ticksBetweenBurstShots>10</ticksBetweenBurstShots>
         <burstShotCount>4</burstShotCount>
         <soundCast>ThumpCannon_Fire</soundCast>
         <soundCastTail>GunTail_Heavy</soundCastTail>
-        <muzzleFlashScale>3</muzzleFlashScale>
+        <muzzleFlashScale>2</muzzleFlashScale>
       </li>
     </verbs>
   </ThingDef>
@@ -164,7 +164,7 @@
       <li Class="VVRace.CompProperties_Mana">
         <manaCapacity>1500</manaCapacity>
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>75</mana>
+          <mana>120</mana>
         </manaConsumeRule>
 
         <manaAbsorbPerDay>750</manaAbsorbPerDay>
@@ -174,7 +174,7 @@
     </comps>
 
     <building>
-      <combatPower>70</combatPower>
+      <combatPower>75</combatPower>
       <ai_combatDangerous>true</ai_combatDangerous>
       <turretTopOffset>(0, 0.11)</turretTopOffset>
       <turretTopDrawSize>0.5</turretTopDrawSize>
@@ -242,7 +242,7 @@
       <li Class="VVRace.CompProperties_Mana">
         <manaCapacity>900</manaCapacity>
         <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
-          <mana>20</mana>
+          <mana>40</mana>
         </manaConsumeRule>
 
         <manaAbsorbPerDay>900</manaAbsorbPerDay>
@@ -253,7 +253,7 @@
 
     <recoilPower>3</recoilPower>
     <building>
-      <combatPower>100</combatPower>
+      <combatPower>90</combatPower>
       <ai_combatDangerous>true</ai_combatDangerous>
       <turretGunDef>VV_Gun_Cornlauncher</turretGunDef>
       <turretBurstCooldownTime>3.1</turretBurstCooldownTime>
@@ -307,7 +307,7 @@
       <DeteriorationRate>0</DeteriorationRate>
       <Mass>40</Mass>
       <Flammability>0</Flammability>
-      <VV_RangedWeapon_ManaCost>50</VV_RangedWeapon_ManaCost>
+      <VV_RangedWeapon_ManaCost>60</VV_RangedWeapon_ManaCost>
     </statBases>
 
     <verbs>

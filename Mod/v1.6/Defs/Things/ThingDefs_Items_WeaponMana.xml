@@ -55,7 +55,7 @@
         <ticksBetweenBurstShots>10</ticksBetweenBurstShots>
 
         <steamDamageDef>Burn</steamDamageDef>
-        <steamDamageAmount>3</steamDamageAmount>
+        <steamDamageAmount>4</steamDamageAmount>
         <steamProjectile>VV_SteamProjectile</steamProjectile>
         <steamHeatPerCell>1.9</steamHeatPerCell>
 
@@ -235,7 +235,7 @@
       <speed>32</speed>
       <damageDef>VV_Frostbite</damageDef>
       <explosionRadius>2.6</explosionRadius>
-      <damageAmountBase>30</damageAmountBase>
+      <damageAmountBase>36</damageAmountBase>
       <armorPenetrationBase>0</armorPenetrationBase>
       <arcHeightFactor>0.2</arcHeightFactor>
       <shadowSize>0.6</shadowSize>
@@ -272,7 +272,7 @@
         <drawWick>false</drawWick>
         <explosiveDamageType>VV_Frostbite</explosiveDamageType>
         <explosiveRadius>2.6</explosiveRadius>
-        <damageAmountBase>30</damageAmountBase>
+        <damageAmountBase>36</damageAmountBase>
       <armorPenetrationBase>0</armorPenetrationBase>
         <chanceNeverExplodeFromDamage>0.5</chanceNeverExplodeFromDamage>
         <countdownTicks>1~1</countdownTicks>
@@ -411,9 +411,9 @@
     <statBases>
       <WorkToMake>35000</WorkToMake>
       <Mass>8.0</Mass>
-      <AccuracyTouch>0.27</AccuracyTouch>
-      <AccuracyShort>0.21</AccuracyShort>
-      <AccuracyMedium>0.18</AccuracyMedium>
+      <AccuracyTouch>0.3</AccuracyTouch>
+      <AccuracyShort>0.22</AccuracyShort>
+      <AccuracyMedium>0.19</AccuracyMedium>
       <AccuracyLong>0.11</AccuracyLong>
       <RangedWeapon_Cooldown>1.8</RangedWeapon_Cooldown>
       <VV_RangedWeapon_ManaCost>15</VV_RangedWeapon_ManaCost>
@@ -506,7 +506,7 @@
       <damageDef>VV_Bullet_Lava</damageDef>
       <damageAmountBase>10</damageAmountBase>
       <stoppingPower>1</stoppingPower>
-      <speed>36</speed>
+      <speed>45</speed>
       <ai_IsIncendiary>true</ai_IsIncendiary>
       <filth>Filth_Ash</filth>
       <filthCount>1</filthCount>
@@ -537,7 +537,7 @@
       <AccuracyMedium>1</AccuracyMedium>
       <AccuracyLong>1</AccuracyLong>
       <RangedWeapon_Cooldown>2.9</RangedWeapon_Cooldown>
-      <VV_RangedWeapon_ManaCost>50</VV_RangedWeapon_ManaCost>
+      <VV_RangedWeapon_ManaCost>40</VV_RangedWeapon_ManaCost>
     </statBases>
     <relicChance>0</relicChance>
 
@@ -555,7 +555,7 @@
         <hasStandardCommand>true</hasStandardCommand>
         <defaultProjectile>VV_Bullet_Froststing</defaultProjectile>
         <warmupTime>4.5</warmupTime>
-        <minRange>15.9</minRange>
+        <minRange>11.9</minRange>
         <range>54.9</range>
         <soundCast>VV_FroststingShot</soundCast>
         <canGoWild>false</canGoWild>
