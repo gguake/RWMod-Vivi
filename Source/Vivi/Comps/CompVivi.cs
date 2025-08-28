@@ -220,12 +220,16 @@ namespace VVRace
             GiveEverflowerLinkHediff();
         }
 
-        public void Notify_LinkedEverflowerDestroyed()
+        public void Notify_LinkedEverflowerDestroyed(bool showMessages = true)
         {
             _linkedEverflower = null;
 
             RemoveEverflowerLinkHediff();
-            Messages.Message(LocalizeString_Message.VV_Message_LinkDisconnectedEverflower.Translate(parent.Named("PAWN")), MessageTypeDefOf.NegativeEvent);
+
+            if (showMessages)
+            {
+                Messages.Message(LocalizeString_Message.VV_Message_LinkDisconnectedEverflower.Translate(parent.Named("PAWN")), MessageTypeDefOf.NegativeEvent);
+            }
         }
 
         private void GiveEverflowerLinkHediff()

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Runtime.InteropServices;
 using Verse;
 using Verse.AI;
 
@@ -82,6 +83,11 @@ namespace VVRace.HarmonyPatches
             harmony.Patch(
                 original: AccessTools.Method(typeof(GeneUtility), nameof(GeneUtility.AddedAndImplantedPartsWithXenogenesCount)),
                 transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(GeneUtility_AddedAndImplantedPartsWithXenogenesCount_Transpiler)));
+
+            // 초월연결체 패치
+            harmony.Patch(
+                original: AccessTools.Method(typeof(MoveColonyUtility), nameof(MoveColonyUtility.MoveColonyAndReset)),
+                transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(MoveColonyUtility_MoveColonyAndReset_Transpiler)));
 
             Log.Message("!! [ViViRace] race patch complete");
         }
@@ -335,6 +341,39 @@ namespace VVRace.HarmonyPatches
                 new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(ViviUtility), nameof(ViviUtility.IsVivi))),
                 new CodeInstruction(OpCodes.Brtrue_S, label),
             });
+
+            return instructions;
+        }
+
+        private static void MoveColonyUtility_MoveColonyAndReset_Injection(List<Pawn> pawns)
+        {
+            foreach (var pawn in pawns)
+            {
+                var compVivi = pawn.GetCompVivi();
+                if (compVivi != null)
+                {
+                    compVivi.Notify_LinkedEverflowerDestroyed(false);
+                }
+            }
+        }
+
+        private static IEnumerable<CodeInstruction> MoveColonyUtility_MoveColonyAndReset_Transpiler(IEnumerable<CodeInstruction> codeInstructions)
+        {
+            var instructions = codeInstructions.ToList();
+
+            var index = instructions.FindIndex(
+                v => v.opcode == OpCodes.Call &&
+                v.OperandIs(AccessTools.Method(typeof(MoveColonyUtility), "RemoveWeaponsAndUtilityItems")));
+
+            if (index >= 0)
+            {
+                var injectionIndex = index + 1;
+                instructions.InsertRange(injectionIndex, new List<CodeInstruction>()
+                {
+                    new CodeInstruction(OpCodes.Ldloc_S, 10),
+                    new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(ViviRacePatch), nameof(MoveColonyUtility_MoveColonyAndReset_Injection))),
+                });
+            }
 
             return instructions;
         }
