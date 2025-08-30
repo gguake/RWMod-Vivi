@@ -123,6 +123,16 @@ namespace VVRace
             return null;
         }
 
+        public void Notify_EverflowerLinked()
+        {
+            Refresh();
+        }
+
+        public void Notify_EverflowerUnlinked()
+        {
+            Refresh();
+        }
+
         private void Refresh()
         {
             var pawn = (Pawn)parent;

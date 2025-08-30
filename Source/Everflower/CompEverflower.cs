@@ -179,6 +179,11 @@ namespace VVRace
 
                 pawn.GetCompVivi()?.Notify_LinkEverflower(Everflower);
 
+                if (pawn.TryGetComp<CompViviHolder>(out var compViviHolder))
+                {
+                    compViviHolder.Notify_EverflowerLinked();
+                }
+
                 Messages.Message(LocalizeString_Message.VV_Message_LinkEverflowerComplete.Translate(pawn.Named("PAWN")), MessageTypeDefOf.PositiveEvent);
             }
             else
