@@ -57,12 +57,10 @@
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_RawHoney</thingDef>
         <countRange>200~500</countRange>
-        <price>Cheap</price>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_FilteredHoney</thingDef>
         <countRange>500~1500</countRange>
-        <price>Cheap</price>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_RoyalJelly</thingDef>
@@ -100,7 +98,7 @@
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_TitanicHornetWing</thingDef>
-        <countRange>-3~3</countRange>
+        <countRange>-5~10</countRange>
       </li>
       <li Class="StockGenerator_Category">
         <categoryDef>VV_ArcaneSeed</categoryDef>
@@ -185,7 +183,7 @@
 
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_Seed_Everflower</thingDef>
-        <countRange>-7~1</countRange>
+        <countRange>-8~1</countRange>
       </li>
 
       <!-- Exotic -->
