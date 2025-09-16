@@ -46,6 +46,8 @@
 
     <verbs>
       <li Class="VVRace.VerbProperties_Steamthrower">
+        <verbClass>VVRace.Verb_Steamthrower</verbClass>
+
         <hasStandardCommand>true</hasStandardCommand>
         <warmupTime>1.3</warmupTime>
         <range>11.9</range>
@@ -319,6 +321,8 @@
 
     <verbs>
       <li Class="VVRace.VerbProperties_ChainLightning">
+        <verbClass>VVRace.Verb_ChainLightning</verbClass>
+
         <hasStandardCommand>true</hasStandardCommand>
         <warmupTime>1.5</warmupTime>
         <range>17.9</range>
