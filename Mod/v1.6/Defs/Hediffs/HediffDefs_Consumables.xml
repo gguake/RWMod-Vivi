@@ -3,7 +3,7 @@
   <HediffDef>
     <defName>VV_RoyalJelly</defName>
     <label>royal jelly effect</label>
-    <description>The effects of royal jelly slow down aging. In the case of child Vivi, their bodies are transforming into Royal Vivi.
+    <description>The effects of royal jelly are slowing aging and speeding up the body's recovery. In the case of child Vivi, their bodies are transforming into Royal Vivi.
 \nConsuming additional royal jelly will not stack the effects.</description>
     <descriptionHyperlinks>
       <HediffDef>VV_RoyalVivi</HediffDef>
