@@ -48,7 +48,7 @@ namespace VVRace
                 right ? manaGrid[i + 1] : 0f,
                 down ? manaGrid[i + w] : 0f);
 
-            var r = (math.csum(v1) * 5f + math.csum(v2) * 8f + manaGrid[i] * 11f) / 64f;
+            var r = (math.csum(v1) * 5f + math.csum(v2) * 8f + manaGrid[i] * 11.8f) / 64f;
             outputGrid[i] = r > 0.01f ? r > 1000f ? 1000f : r : 0f;
 
             if (checkFlowerCells && r >= 100f)
