@@ -57,10 +57,12 @@
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_RawHoney</thingDef>
         <countRange>200~500</countRange>
+        <price>Cheap</price>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_FilteredHoney</thingDef>
         <countRange>500~1500</countRange>
+        <price>Cheap</price>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_RoyalJelly</thingDef>
@@ -93,7 +95,8 @@
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_ViviEgg</thingDef>
-        <countRange>-1~1</countRange>
+        <countRange>0~1</countRange>
+        <price>Exorbitant</price>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_TitanicHornetWing</thingDef>

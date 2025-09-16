@@ -95,7 +95,7 @@
     <ingestible>
       <foodType>Fluid, Processed, Liquor</foodType>
       <joyKind>Chemical</joyKind>
-      <joy>0.17</joy>
+      <joy>0.28</joy>
       <nurseable>true</nurseable>
       <drugCategory>Social</drugCategory>
       <ingestSound>Ingest_Drink</ingestSound>
