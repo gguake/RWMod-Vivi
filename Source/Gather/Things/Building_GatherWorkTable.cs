@@ -48,7 +48,7 @@ namespace VVRace
             base.ExposeData();
 
             Scribe_Values.Look(ref _gatherRadius, "gatherRadius", GatherDefaultRadius);
-            Scribe_Values.Look(ref _canGatherFilth, "canGatherFilth", _canGatherFilth);
+            Scribe_Values.Look(ref _canGatherFilth, "canGatherFilth");
         }
 
         // 맵별로 모든 채집 건물은 캐시를 공유한다
