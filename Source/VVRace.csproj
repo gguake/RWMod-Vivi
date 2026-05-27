@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>VVRace</RootNamespace>
     <AssemblyName>VVRace</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
@@ -47,7 +47,8 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="RPEF">
-      <HintPath>..\..\RWMod-RPEF\Mod\v1.5\Assemblies\RPEF.dll</HintPath>
+      <HintPath>..\Mod\v1.6\Assemblies\RPEF.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
