@@ -251,6 +251,9 @@
             <li>MeatRaw</li>
             <li>VV_ArcaneSeed</li>
           </categories>
+          <disallowedThingDefs>
+            <li>VV_Seed_Everflower</li>
+          </disallowedThingDefs>
         </filter>
         <count>2.0</count>
       </li>
