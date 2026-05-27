@@ -81,7 +81,7 @@ namespace VVRace
                     foreach (var tdc in Props.fermentedThings)
                     {
                         var thingDef = tdc.thingDef;
-                        var count = tdc.count;
+                        var count = tdc.count * parent.stackCount;
 
                         var stackLimit = thingDef.stackLimit;
                         while (count > 0)
