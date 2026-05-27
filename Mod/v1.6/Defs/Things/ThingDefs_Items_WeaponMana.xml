@@ -415,13 +415,13 @@
     <statBases>
       <WorkToMake>35000</WorkToMake>
       <Mass>8.0</Mass>
-      <AccuracyTouch>0.3</AccuracyTouch>
-      <AccuracyShort>0.22</AccuracyShort>
-      <AccuracyMedium>0.19</AccuracyMedium>
-      <AccuracyLong>0.11</AccuracyLong>
-      <RangedWeapon_Cooldown>1.8</RangedWeapon_Cooldown>
-      <VV_RangedWeapon_ManaCost>15</VV_RangedWeapon_ManaCost>
-      <VV_BulletPelletCount>4</VV_BulletPelletCount>
+      <AccuracyTouch>0.4</AccuracyTouch>
+      <AccuracyShort>0.24</AccuracyShort>
+      <AccuracyMedium>0.17</AccuracyMedium>
+      <AccuracyLong>0.1</AccuracyLong>
+      <RangedWeapon_Cooldown>2.4</RangedWeapon_Cooldown>
+      <VV_RangedWeapon_ManaCost>30</VV_RangedWeapon_ManaCost>
+      <VV_BulletPelletCount>3</VV_BulletPelletCount>
     </statBases>
     <relicChance>0</relicChance>
     
@@ -439,11 +439,11 @@
         <defaultProjectile>VV_Bullet_LavaShredder</defaultProjectile>
         <warmupTime>2.0</warmupTime>
         <range>27.9</range>
-        <ticksBetweenBurstShots>6</ticksBetweenBurstShots>
-        <burstShotCount>6</burstShotCount>
+        <ticksBetweenBurstShots>9</ticksBetweenBurstShots>
+        <burstShotCount>10</burstShotCount>
         <soundCast>VV_LavaShrudderShot</soundCast>
         <soundCastTail>GunTail_Medium</soundCastTail>
-        <muzzleFlashScale>10</muzzleFlashScale>
+        <muzzleFlashScale>3</muzzleFlashScale>
       </li>
     </verbs>
     
@@ -508,7 +508,7 @@
     </graphicData>
     <projectile>
       <damageDef>VV_Bullet_Lava</damageDef>
-      <damageAmountBase>10</damageAmountBase>
+      <damageAmountBase>6</damageAmountBase>
       <stoppingPower>1</stoppingPower>
       <speed>45</speed>
       <ai_IsIncendiary>true</ai_IsIncendiary>

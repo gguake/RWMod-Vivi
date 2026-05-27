@@ -104,8 +104,8 @@
       <extraDamages>
         <li>
           <def>Stun</def>
-          <amount>11</amount>
-          <chance>0.75</chance>
+          <amount>10</amount>
+          <chance>0.5</chance>
         </li>
       </extraDamages>
     </projectile>

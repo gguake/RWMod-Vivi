@@ -219,7 +219,7 @@
     <defName>VV_CombatHormoneJelly</defName>
     <label>combat hormone</label>
     <description>It is in a state where combat hormones that greatly enhance the Vivi's inherent aggressiveness have been injected. Combat-related skills are enhanced, and sensitivity to pain is reduced; they do not panic at the sight of fire, but they tire very quickly and become hungry.</description>
-    <hediffClass>HediffWithComps</hediffClass>
+    <hediffClass>RPEF.HediffWithSkillAptitude</hediffClass>
     <defaultLabelColor>(1,0,0.5)</defaultLabelColor>
     
     <isBad>false</isBad>
@@ -228,7 +228,7 @@
     <maxSeverity>1.0</maxSeverity>
 
     <stages>
-      <li>
+      <li Class="RPEF.HediffStageWithSkillAptitude">
         <capMods>
           <li>
             <capacity>Sight</capacity>
@@ -245,13 +245,13 @@
         <hungerRateFactorOffset>1.2</hungerRateFactorOffset>
         <socialFightChanceFactor>8.0</socialFightChanceFactor>
         <extraTooltip>Temporarily prevents mental break caused by the 'Fire Terror' gene.</extraTooltip>
+
+        <skillAptitudes>
+          <Shooting>4</Shooting>
+          <Melee>4</Melee>
+        </skillAptitudes>
       </li>
     </stages>
-
-    <aptitudes>
-      <Shooting>4</Shooting>
-      <Melee>4</Melee>
-    </aptitudes>
 
     <comps>
       <li Class="HediffCompProperties_SeverityPerDay">

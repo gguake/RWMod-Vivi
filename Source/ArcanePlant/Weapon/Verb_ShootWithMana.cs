@@ -1,12 +1,16 @@
-﻿using RimWorld;
+﻿using HarmonyLib;
+using RimWorld;
+using RPEF;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using UnityEngine;
 using Verse;
 
 namespace VVRace
 {
-    public class Verb_ShootWithMana : Verb_Shoot
+    public class Verb_ShootWithMana : Verb_ShootWithMode
     {
         public CompMana ManaComp
         {
@@ -89,6 +93,8 @@ namespace VVRace
             }
         }
 
+        public override int ProjectileCount => (int)EquipmentSource.GetStatValue(VVStatDefOf.VV_BulletPelletCount);
+
         public override string ReportLabel => base.ReportLabel;
 
         public override bool ValidateTarget(LocalTargetInfo target, bool showMessages = true)
@@ -122,22 +128,15 @@ namespace VVRace
             var manaPerShoot = EquipmentSource?.GetStatValue(VVStatDefOf.VV_RangedWeapon_ManaCost) / BurstShotCount ?? 0;
             if (compMana.Stored < manaPerShoot) { return false; }
 
-            var pelletCount = (int)(Mathf.Max(1, EquipmentSource?.GetStatValue(VVStatDefOf.VV_BulletPelletCount) ?? 0));
-
-            bool shot = false;
-            for (int i = 0; i < pelletCount; ++i)
-            {
-                shot |= base.TryCastShot();
-            }
-
-            if (shot)
+            if (base.TryCastShot())
             {
                 compMana.Stored -= manaPerShoot;
 
                 _tmpProjectileSelector.Clear();
+                return true;
             }
 
-            return shot;
+            return false;
         }
     }
 }
