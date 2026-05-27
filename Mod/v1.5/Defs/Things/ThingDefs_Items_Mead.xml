@@ -13,7 +13,7 @@
     </graphicData>
     <soundInteract>Metal_Drop</soundInteract>
     <soundDrop>Standard_Drop</soundDrop>
-    <stackLimit>5</stackLimit>
+    <stackLimit>1</stackLimit>
     <healthAffectsPrice>false</healthAffectsPrice>
     <statBases>
       <MaxHitPoints>50</MaxHitPoints>
