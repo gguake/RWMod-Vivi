@@ -146,7 +146,7 @@
     <statBases>
       <MaxHitPoints>200</MaxHitPoints>
       <WorkToBuild>50000</WorkToBuild>
-      <Flammability>0.7</Flammability>
+      <Flammability>1.0</Flammability>
       <VV_PlantGatherCooldown>3</VV_PlantGatherCooldown>
       <VV_LivingLeafGatherYield>1</VV_LivingLeafGatherYield>
     </statBases>
@@ -154,7 +154,7 @@
     <damageMultipliers Inherit="False">
     </damageMultipliers>
 
-    <fillPercent>0.8</fillPercent>
+    <fillPercent>0.75</fillPercent>
 
     <costList>
       <VV_LivingLeaf>30</VV_LivingLeaf>
