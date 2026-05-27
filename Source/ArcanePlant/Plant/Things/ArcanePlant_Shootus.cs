@@ -40,9 +40,13 @@ namespace VVRace
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
-                if (Gun != null)
+                if (!Gun.DestroyedOrNull())
                 {
                     UpdateGunVerbs();
+                }
+                else
+                {
+                    _innerContainer.ClearAndDestroyContents();
                 }
             }
         }
@@ -90,7 +94,16 @@ namespace VVRace
 
         protected override void BurstComplete()
         {
-            _burstCooldownTicksLeft = (Gun.GetStatValue(StatDefOf.RangedWeapon_Cooldown) * 2.5f).SecondsToTicks();
+            if (Gun.DestroyedOrNull())
+            {
+                _innerContainer.ClearAndDestroyContents();
+                _burstCooldownTicksLeft = 0;
+                DirtyMapMesh(Map);
+            }
+            else
+            {
+                _burstCooldownTicksLeft = (Gun.GetStatValue(StatDefOf.RangedWeapon_Cooldown) * 2.5f).SecondsToTicks();
+            }
         }
 
         private static readonly Texture2D EquipCommandTex = ContentFinder<Texture2D>.Get("UI/Commands/VV_EquipShootus");
