@@ -618,11 +618,30 @@
       <drawSize>(0.75,3)</drawSize>
     </graphicData>
     <projectile>
-      <speed>150</speed>
+      <speed>115</speed>
       <damageDef>ArrowHighVelocity</damageDef>
       <damageAmountBase>45</damageAmountBase>
       <armorPenetrationBase>1</armorPenetrationBase>
       <stoppingPower>4</stoppingPower>
     </projectile>
+    <comps>
+      <li Class="VVRace.CompProperties_ProjectileFleckSpray">
+        <fleckDef>VV_Fleck_FroststingShard</fleckDef>
+        <intervalTicks>1</intervalTicks>
+        <burstCount>
+          <min>2</min>
+          <max>5</max>
+        </burstCount>
+        <positionRadius>0.3</positionRadius>
+        <scaleRange>
+          <min>0.1</min>
+          <max>0.4</max>
+        </scaleRange>
+        <speedRange>
+          <min>0.4</min>
+          <max>0.7</max>
+        </speedRange>
+      </li>
+    </comps>
   </ThingDef>
 </Defs>

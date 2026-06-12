@@ -158,6 +158,7 @@
     <Compile Include="Gather\StatWorker_Honey.cs" />
     <Compile Include="ArcanePlant\Plant\Sensor\SensorWorker_Fire.cs" />
     <Compile Include="ArcanePlant\Weapon\Things\PeaBullet.cs" />
+    <Compile Include="ArcanePlant\Weapon\CompProjectileFleckSpray.cs" />
     <Compile Include="ArcanePlant\Plant\Things\ArcanePlant_Shootus.cs" />
     <Compile Include="ArcanePlant\Plant\Things\ArcanePlant_Turret.cs" />
     <Compile Include="ArcanePlant\Mana\Comps\CompManaLightningLod.cs" />

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>VV_Fleck_FroststingShard</defName>
+    <graphicData>
+      <texPath>Things/Mote/VV_FroststingShard</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <growthRate>-0.12</growthRate>
+    <fadeInTime>0.08</fadeInTime>
+    <solidTime>0.07</solidTime>
+    <fadeOutTime>0.5</fadeOutTime>
+  </FleckDef>
+</Defs>
