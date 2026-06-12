@@ -48,6 +48,32 @@ namespace VVRace
             Tick(GenTicks.TickRareInterval);
         }
 
+        public override bool AllowStackWith(Thing other)
+        {
+            if (!base.AllowStackWith(other)) { return false; }
+
+            var otherComp = other.TryGetComp<CompFermentItem>();
+            return otherComp != null && Ruined == otherComp.Ruined;
+        }
+
+        public override void PreAbsorbStack(Thing otherStack, int count)
+        {
+            base.PreAbsorbStack(otherStack, count);
+
+            var otherComp = otherStack.TryGetComp<CompFermentItem>();
+            if (otherComp == null) { return; }
+
+            if (Ruined || otherComp.Ruined)
+            {
+                _temperatureDamagedProgress = 1f;
+                return;
+            }
+
+            var progress = (float)count / (parent.stackCount + count);
+            _fermentedProgress = Mathf.Lerp(_fermentedProgress, otherComp._fermentedProgress, progress);
+            _temperatureDamagedProgress = Mathf.Lerp(_temperatureDamagedProgress, otherComp._temperatureDamagedProgress, progress);
+        }
+
         public void Tick(int ticks)
         {
             if (Ruined)
