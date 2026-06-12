@@ -109,15 +109,15 @@
       <damageDef>Bomb</damageDef>
       <speed>50</speed>
       <explosionRadius>1.9</explosionRadius>
-      <damageAmountBase>27</damageAmountBase>
+      <damageAmountBase>20</damageAmountBase>
       <screenShakeFactor>0.25</screenShakeFactor>
     </projectile>
 
     <modExtensions>
       <li Class="VVRace.CornBulletData">
         <scatterBulletDef>VV_Bullet_CornKernel</scatterBulletDef>
-        <scatterRadius>5.5</scatterRadius>
-        <scatterCount>15~23</scatterCount>
+        <scatterRadius>5.9</scatterRadius>
+        <scatterCount>20~25</scatterCount>
         <includeExplosionCells>false</includeExplosionCells>
       </li>
     </modExtensions>
@@ -140,7 +140,7 @@
       <damageDef>Bomb</damageDef>
       <speed>30</speed>
       <explosionRadius>0.6</explosionRadius>
-      <damageAmountBase>27</damageAmountBase>
+      <damageAmountBase>20</damageAmountBase>
       <screenShakeFactor>0</screenShakeFactor>
     </projectile>
   </ThingDef>
