@@ -29,7 +29,7 @@ namespace VVRace
 
             if (targetYieldStat != null)
             {
-                var yieldStat = thing.GetStatValue(targetYieldStat);
+                var yieldStat = thing.GetStatValue(targetYieldStat, cacheStaleAfterTicks: 2000);
                 if (yieldStat <= 0f)
                 {
                     return false;

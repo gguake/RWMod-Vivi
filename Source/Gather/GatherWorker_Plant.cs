@@ -14,11 +14,11 @@ namespace VVRace
         {
             foreach (var thing in candidates)
             {
-                // Bill에 허용되지 않는 경우
-                if (!bill.IsFixedOrAllowedIngredient(thing)) { continue; }
-
                 // 식물 채집이 불가능한 경우
                 if (!thing.CanGatherable(recipeDef.targetYieldStat, recipeDef.targetCooldownStat)) { continue; }
+
+                // Bill에 허용되지 않는 경우
+                if (!bill.IsFixedOrAllowedIngredient(thing)) { continue; }
 
                 // 식물이 병에 걸린 경우
                 if (thing is Plant plant && plant.Blighted) { continue; }
@@ -26,13 +26,11 @@ namespace VVRace
                 // 상호작용이 불가능한 경우
                 if (thing.IsForbidden(pawn) || thing.IsBurning()) { continue; }
 
+                // 특수 조건
+                if (thing is IGatherableTarget gatherableTarget && !gatherableTarget.CanGatherByPawn(pawn, recipeDef)) { continue; }
+
                 // 접근 불가능한 경우
                 if (!pawn.CanReserveAndReach(thing, PathEndMode.Touch, recipeDef.maxPathDanger)) { continue; }
-
-                if (thing is IGatherableTarget gatherableTarget)
-                {
-                    if (!gatherableTarget.CanGatherByPawn(pawn, recipeDef)) { continue; }
-                }
 
                 return thing;
             }

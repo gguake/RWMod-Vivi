@@ -27,6 +27,7 @@
     <formatString>{0} day</formatString>
     <applyFactorsIfNegative>false</applyFactorsIfNegative>
     <displayPriorityInCategory>5198</displayPriorityInCategory>
+    <cacheable>true</cacheable>
     <parts>
       <li Class="StatPart_Pollution">
         <multiplier>1.5</multiplier>
@@ -46,6 +47,7 @@
     <hideAtValue>0</hideAtValue>
     <toStringStyle>PercentZero</toStringStyle>
     <applyFactorsIfNegative>false</applyFactorsIfNegative>
+    <cacheable>true</cacheable>
     <parts>
       <li Class="StatPart_Health">
         <curve>

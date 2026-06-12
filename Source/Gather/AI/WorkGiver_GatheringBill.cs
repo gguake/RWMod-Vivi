@@ -20,6 +20,10 @@ namespace VVRace
             foreach (var bill in billGiver.BillStack)
             {
                 if (!(bill.recipe is RecipeDef_Gathering recipeGathering) || recipeGathering.gatherWorker == null) { continue; }
+
+                // early-exit
+                if (Find.TickManager.TicksGame < bill.nextTickToSearchForIngredients && FloatMenuMakerMap.makingFor != pawn && !forced) { continue; }
+
                 if (!bill.ShouldDoNow() || !bill.PawnAllowedToStartAnew(pawn) || !recipeGathering.gatherWorker.PawnCanDoBill(pawn, bill)) { continue; }
 
                 var skillRequirement = bill.recipe.FirstSkillRequirementPawnDoesntSatisfy(pawn);
@@ -30,6 +34,11 @@ namespace VVRace
                 }
 
                 var candidates = thing.Map.GetComponent<GatheringMapComponent>().GetGatherableCandidatesForWorkTable((Building_GatherWorkTable)thing);
+                if (candidates == null)
+                {
+                    continue;
+                }
+
                 var target = recipeGathering.gatherWorker.FilterGatherableTarget(
                     pawn, 
                     thing, 
@@ -38,6 +47,8 @@ namespace VVRace
 
                 if (target == null)
                 {
+                    bill.nextTickToSearchForIngredients = Find.TickManager.TicksGame + 600;
+
                     JobFailReason.Is(recipeGathering.gatherWorker.JobFailReasonIfNoHarvestable);
                     continue;
                 }

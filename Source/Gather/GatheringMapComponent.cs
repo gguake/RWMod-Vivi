@@ -56,7 +56,7 @@ namespace VVRace
             return Enumerable.Empty<IntVec3>();
         }
 
-        public IEnumerable<Thing> GetGatherableCandidatesForWorkTable(Building_GatherWorkTable building)
+        public IReadOnlyCollection<Thing> GetGatherableCandidatesForWorkTable(Building_GatherWorkTable building)
         {
             if (_dirtyGatherWorkTables.Contains(building))
             {
@@ -68,7 +68,7 @@ namespace VVRace
                 return caches;
             }
 
-            return Enumerable.Empty<Thing>();
+            return null;
         }
 
         public void Notify_WorkTableSpawned(Building_GatherWorkTable building)

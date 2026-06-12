@@ -53,7 +53,7 @@ namespace VVRace
             if (lastGatheredTicks == null) { return false; }
             if (lastGatheredTicks.TryGetValue(cooldownStat, out var ticks))
             {
-                return ticks > 0 && Find.TickManager.TicksGame < ticks + (int)(parent.GetStatValue(cooldownStat) * 60000f);
+                return ticks > 0 && Find.TickManager.TicksGame < ticks + (int)(parent.GetStatValue(cooldownStat, cacheStaleAfterTicks: 2000) * 60000f);
             }
             else
             {
