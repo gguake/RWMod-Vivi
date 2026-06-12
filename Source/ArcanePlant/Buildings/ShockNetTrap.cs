@@ -1,5 +1,6 @@
 ﻿using RimWorld;
 using System.Text;
+using UnityEngine;
 using Verse;
 
 namespace VVRace
@@ -47,9 +48,18 @@ namespace VVRace
             return base.SpringChance(p);
         }
 
+        public override void PreApplyDamage(ref DamageInfo dinfo, out bool absorbed)
+        {
+            base.PreApplyDamage(ref dinfo, out absorbed);
+
+            if (absorbed) { return; }
+
+            if (dinfo.Def.isExplosive || dinfo.Def.isRanged) { dinfo.SetAmount(Mathf.Max(dinfo.Amount / 10f, 1f)); }
+        }
+
         protected override void SpringSub(Pawn p)
         {
-            _cooldownTicks = Rand.Range(7500, 10000);
+            _cooldownTicks = Rand.Range(15000, 30000);
 
             GenExplosion.DoExplosion(Position, Map, 0.9f, DamageDefOf.EMP, this);
             if (!p.RaceProps.IsMechanoid)

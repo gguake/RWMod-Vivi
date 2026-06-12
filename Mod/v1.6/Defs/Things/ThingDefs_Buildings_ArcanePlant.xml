@@ -159,7 +159,7 @@
     <comps>
       <li Class="VVRace.CompProperties_Mana">
         <manaGenerateRule Class="VVRace.ManaFluxRule_Refuelable">
-          <mana>500</mana>
+          <mana>750</mana>
           <fuelDef>VV_Fertilizer</fuelDef>
         </manaGenerateRule>
       </li>
@@ -354,7 +354,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VV_ShockNetTrap</defName>
     <label>shock net trap</label>
-    <description>An electrified net trap. Stepping on it releases a small EMP that temporarily disables machines, while living targets are briefly stunned by a pulse of current. It must stay powered, and although it can be reused after triggering, it requires time to recharge.</description>
+    <description>An electrified net trap. Stepping on it releases a small EMP that temporarily disables machines, while living targets are briefly stunned by a pulse of current. It must stay powered, and although it can be reused after triggering, it requires time to recharge. Damage from projectiles such as bullets or explosions is reduced to 10%.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_SparklingPetal</ThingDef>
     </descriptionHyperlinks>
@@ -377,7 +377,7 @@
     <useHitPoints>True</useHitPoints>
     <statBases>
       <Mass>1</Mass>
-      <MaxHitPoints>40</MaxHitPoints>
+      <MaxHitPoints>200</MaxHitPoints>
       <WorkToBuild>1000</WorkToBuild>
       <Flammability>0.5</Flammability>
       <Beauty>-4</Beauty>

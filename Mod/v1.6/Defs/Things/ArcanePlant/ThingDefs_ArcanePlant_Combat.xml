@@ -93,14 +93,14 @@
 
     <statBases>
       <AccuracyTouch>0.88</AccuracyTouch>
-      <AccuracyShort>0.72</AccuracyShort>
-      <AccuracyMedium>0.3</AccuracyMedium>
-      <AccuracyLong>0.15</AccuracyLong>
+      <AccuracyShort>0.64</AccuracyShort>
+      <AccuracyMedium>0.27</AccuracyMedium>
+      <AccuracyLong>0.14</AccuracyLong>
       <RangedWeapon_Cooldown>1.65</RangedWeapon_Cooldown>
       <DeteriorationRate>0</DeteriorationRate>
       <Mass>40</Mass>
       <Flammability>0</Flammability>
-      <VV_RangedWeapon_ManaCost>15</VV_RangedWeapon_ManaCost>
+      <VV_RangedWeapon_ManaCost>14</VV_RangedWeapon_ManaCost>
     </statBases>
 
     <verbs>
