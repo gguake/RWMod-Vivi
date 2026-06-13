@@ -224,11 +224,20 @@ namespace VVRace
                                         description.AppendInNewLine(string.Join(", ", pawn.genes.Xenogenes.Select(v => v.def.LabelCap)));
                                     }
 
-                                    Find.LetterStack.ReceiveLetter(
+                                    description.AppendLine();
+                                    description.AppendInNewLine("LetterPartTempBabyName".Translate((NamedArgument)pawn));
+                                    if (pawn.babyNamingDeadline >= 0)
+                                    {
+                                        description.Append(" ").Append("LetterPartLiveBirthNameDeadline".Translate(60000.ToStringTicksToPeriod()));
+                                    }
+
+                                    var babyBirthLetter = (ChoiceLetter_BabyBirth)LetterMaker.MakeLetter(
                                         LocalizeString_Letter.VV_Letter_ViviEggHatchedLabel.Translate(),
                                         description.ToString(),
-                                        LetterDefOf.PositiveEvent,
+                                        LetterDefOf.BabyBirth,
                                         pawn);
+                                    babyBirthLetter.Start();
+                                    Find.LetterStack.ReceiveLetter(babyBirthLetter);
                                 }
 
 

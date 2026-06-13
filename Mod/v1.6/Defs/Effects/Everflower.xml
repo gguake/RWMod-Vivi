@@ -313,7 +313,7 @@
         <speed>1~2.5</speed>
         <rotation>0~360</rotation>
         <rotationRate>-260~260</rotationRate>
-        <scale>0.55~1.0</scale>
+        <scale>0.25~0.55</scale>
       </li>
     </children>
   </EffecterDef>
