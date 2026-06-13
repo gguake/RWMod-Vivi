@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <FleckDef ParentName="FleckBase">
+    <defName>VV_Fleck_NeedlePierce</defName>
+    <graphicData>
+      <texPath>VFX/VV_NeedlePierce</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <growthRate>1.8</growthRate>
+    <fadeInTime>0.02</fadeInTime>
+    <solidTime>0.04</solidTime>
+    <fadeOutTime>0.33</fadeOutTime>
+  </FleckDef>
+
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>VV_Fleck_NeedleShard</defName>
+    <graphicData>
+      <texPath>VFX/VV_NeedleShard</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <growthRate>-0.4</growthRate>
+    <fadeInTime>0.02</fadeInTime>
+    <solidTime>0.05</solidTime>
+    <fadeOutTime>0.4</fadeOutTime>
+  </FleckDef>
+</Defs>

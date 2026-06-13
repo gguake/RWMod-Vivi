@@ -239,6 +239,8 @@ namespace VVRace
                 dinfo.SetWeaponQuality(equipmentQuality);
                 hitThing.TakeDamage(dinfo).AssociateWithLog(battleLogEntry_RangedImpact);
 
+                SpawnPierceEffect(hitThing);
+
                 if (_attackedCounter.TryGetValue(hitThing.thingIDNumber, out var count))
                 {
                     _attackedCounter[hitThing.thingIDNumber] = count++;
@@ -247,6 +249,39 @@ namespace VVRace
                 {
                     _attackedCounter.Add(hitThing.thingIDNumber, 1);
                 }
+            }
+        }
+
+        private void SpawnPierceEffect(Thing hitThing)
+        {
+            var map = hitThing.Map;
+            if (map == null) { return; }
+
+            var basePos = hitThing.TrueCenter().Yto0();
+            basePos.y = AltitudeLayer.MoteOverhead.AltitudeFor();
+
+            if (!basePos.ToIntVec3().ShouldSpawnMotesAt(map)) { return; }
+
+            var direction = _realDirection.Yto0();
+            if (direction.sqrMagnitude < 0.0001f) { direction = Vector3.forward; }
+            direction.Normalize();
+            var angle = direction.AngleFlat();
+
+            var pierceData = FleckMaker.GetDataStatic(basePos, map, VVFleckDefOf.VV_Fleck_NeedlePierce, Rand.Range(1.1f, 1.4f));
+            pierceData.rotation = angle;
+            map.flecks.CreateFleck(pierceData);
+
+            var shardCount = Rand.RangeInclusive(4, 6);
+            for (int i = 0; i < shardCount; i++)
+            {
+                var offset = new Vector3(Rand.Range(-0.12f, 0.12f), 0f, Rand.Range(-0.12f, 0.12f));
+
+                var shardData = FleckMaker.GetDataStatic(basePos + offset, map, VVFleckDefOf.VV_Fleck_NeedleShard, Rand.Range(0.35f, 0.6f));
+                shardData.velocityAngle = angle + Rand.Range(-60f, 60f);
+                shardData.velocitySpeed = Rand.Range(1.4f, 3f);
+                shardData.rotation = shardData.velocityAngle + Rand.Range(-25f, 25f);
+                shardData.rotationRate = Rand.Range(-360f, 360f);
+                map.flecks.CreateFleck(shardData);
             }
         }
 
