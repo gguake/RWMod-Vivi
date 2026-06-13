@@ -80,10 +80,6 @@
       </li>
     </stages>
 
-    <addedPartProps>
-      <solid>true</solid>
-    </addedPartProps>
-
     <renderNodeProperties>
       <li>
         <debugLabel>LeftUpperWing</debugLabel>
