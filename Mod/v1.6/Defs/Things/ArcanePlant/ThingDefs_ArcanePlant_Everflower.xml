@@ -189,6 +189,15 @@
           <li>VV_EverflowerGrow_3_Level</li>
           <li>VV_EverflowerGrow_4_Level</li>
         </effectsOnLevelAcquire>
+
+        <!-- 의식 완료 이펙트(꽃잎 분출 등) 생성 위치. 각 단계 텍스처의 꽃봉오리 중심에 맞춰 세팅. -->
+        <ritualEffecterOffsetByLevel>
+          <li>(0, 0, 0.2)</li>    <!-- Lv0: VV_EverflowerA, drawSize 1.0 -->
+          <li>(0, 0, 0.25)</li>   <!-- Lv1: VV_EverflowerA, drawSize 1.2 -->
+          <li>(0, 0.2, 2.3)</li>  <!-- Lv2: VV_EverflowerB, drawSize 6 -->
+          <li>(0, 0.2, 3.0)</li>  <!-- Lv3: VV_EverflowerC, drawSize 6 -->
+          <li>(0, 0.2, 5.9)</li>  <!-- Lv4: VV_EverflowerD, drawSize 6x12 -->
+        </ritualEffecterOffsetByLevel>
       </li>
     </comps>
 

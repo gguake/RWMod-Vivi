@@ -31,6 +31,10 @@ namespace VVRace
         public List<GraphicData> graphicsByLevel;
         public List<EffecterDef> effectsOnLevelAcquire;
 
+        // 레벨별 의식 완료 이펙트 생성 위치(셀 중심 기준 오프셋). 각 단계 텍스처의 꽃봉오리 위치에 맞춰 세팅한다.
+        // 비어 있으면 해당 레벨 그래픽의 drawOffset(= 텍스처 중심)을 사용한다.
+        public List<Vector3> ritualEffecterOffsetByLevel;
+
         public float teleportRange = 10.9f;
 
         public CompProperties_Everflower()
@@ -50,6 +54,24 @@ namespace VVRace
 
         public float Attunement => _attunementInfo.attunement;
         public int AttunementLevel => _attunementInfo.attunementLevel;
+
+        // 현재 성장 레벨의 그래픽이 셀 중심으로부터 그려지는 오프셋.
+        // 이펙트를 thing 중심이 아니라 실제 꽃 그래픽 위치에서 재생할 때 사용한다. (DrawAt 참고)
+        public Vector3 CurrentGraphicOffset => Props.graphicsByLevel[_attunementInfo.attunementLevel].drawOffset;
+
+        // 의식 완료 이펙트는 텍스처 중심(drawOffset)이 아니라 각 성장 단계 꽃봉오리 위치에서 터지도록 보정한다.
+        public Vector3 RitualEffecterOffset
+        {
+            get
+            {
+                var offsets = Props.ritualEffecterOffsetByLevel;
+                if (offsets != null && _attunementInfo.attunementLevel < offsets.Count)
+                {
+                    return offsets[_attunementInfo.attunementLevel];
+                }
+                return CurrentGraphicOffset;
+            }
+        }
 
         private EverflowerAttunementInfo _attunementInfo;
 

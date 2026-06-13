@@ -29,6 +29,7 @@
       <drawSize>(5, 5)</drawSize>
     </graphicData>
   </ThingDef>
+
   <ThingDef ParentName="MoteBase">
     <defName>VV_Mote_EverflowerLinkDistortion</defName>
     <thingClass>MoteAttached</thingClass>
@@ -157,6 +158,25 @@
   </EffecterDef>
 
   <!-- EverflowerRitual_Complete -->
+  <FleckDef ParentName="FleckBase_Thrown" Name="VV_FleckEverflowerPetalBase" Abstract="True">
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <graphicData>
+      <texPath>VFX/VV_EverflowerPetal</texPath>
+      <graphicClass>Graphic_FleckPulse</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+  </FleckDef>
+  <!-- Fast, bright petals for the burst moment -->
+  <FleckDef ParentName="VV_FleckEverflowerPetalBase">
+    <defName>VV_Fleck_EverflowerPetal_Burst</defName>
+    <fadeInTime>0.08</fadeInTime>
+    <solidTime>0.25</solidTime>
+    <fadeOutTime>1.5</fadeOutTime>
+    <graphicData>
+      <color>(1, 0.97, 0.8, 1)</color>
+    </graphicData>
+  </FleckDef>
   <FleckDef ParentName="FleckBase_Thrown">
     <defName>VV_ExpandingDistortionRing</defName>
     <altitudeLayer>LowPlant</altitudeLayer>
@@ -280,6 +300,20 @@
         <burstCount>1</burstCount>
         <spawnLocType>OnSource</spawnLocType>
         <attachToSpawnThing>true</attachToSpawnThing>
+      </li>
+      <!-- Petals: sharp outward burst -->
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_EverflowerPetal_Burst</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>20~30</burstCount>
+        <positionRadius>0.4</positionRadius>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>1~2.5</speed>
+        <rotation>0~360</rotation>
+        <rotationRate>-260~260</rotationRate>
+        <scale>0.55~1.0</scale>
       </li>
     </children>
   </EffecterDef>

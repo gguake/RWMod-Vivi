@@ -43,7 +43,7 @@ namespace VVRace
                 map.GameConditionManager.RegisterCondition(gameCond);
             }
 
-            def.effecter.Spawn(everflower, map).Cleanup();
+            def.effecter.Spawn(everflower, map, everflower.EverflowerComp.RitualEffecterOffset).Cleanup();
 
             everflower.Notify_RitualComplete(quality);
         }

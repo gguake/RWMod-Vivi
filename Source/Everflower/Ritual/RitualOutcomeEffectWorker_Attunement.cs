@@ -21,7 +21,7 @@ namespace VVRace
                 everflower.EverflowerComp.LinkAttunement(attuner, quality);
             }
 
-            def.effecter.Spawn(everflower, map).Cleanup();
+            def.effecter.Spawn(everflower, map, everflower.EverflowerComp.RitualEffecterOffset).Cleanup();
 
             everflower.Notify_RitualComplete(quality);
         }
