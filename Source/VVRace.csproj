@@ -144,6 +144,10 @@
     <Compile Include="ArcanePlant\Weapon\Things\SteamProjectile.cs" />
     <Compile Include="ArcanePlant\Weapon\Verb_ChainLightning.cs" />
     <Compile Include="ArcanePlant\Weapon\Verb_Steamthrower.cs" />
+    <Compile Include="Everflower\Ritual\EverflowerWeatherChoice.cs" />
+    <Compile Include="Everflower\Ritual\Dialog_BeginRitual_ChangeWeather.cs" />
+    <Compile Include="Everflower\Ritual\Precept_RitualChangeWeather.cs" />
+    <Compile Include="Everflower\Ritual\GameComponent_ViviPreceptMigration.cs" />
     <Compile Include="Everflower\Ritual\RitualBehaviorWorker_GeneralEverflowerRitual.cs" />
     <Compile Include="Everflower\Ritual\RitualBehaviorWorker_Attunement.cs" />
     <Compile Include="Everflower\Ritual\RitualObligationTargetWorker_EverflowerRitual.cs" />

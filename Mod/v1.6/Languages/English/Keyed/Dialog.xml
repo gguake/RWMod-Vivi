@@ -6,4 +6,8 @@
 <ViviFactionGreetingWary>{0} is waiting for you with a buzz.</ViviFactionGreetingWary>
 <ViviFactionGreetingWarm>{0} greets {NEGOTIATOR_labelShort} with a warm buzz.</ViviFactionGreetingWarm>
 
+<VV_DialogChangeWeatherSelectLabel>Weather to summon:</VV_DialogChangeWeatherSelectLabel>
+<VV_DialogChangeWeatherRainDesc>If the temperature is below freezing, snow will fall instead of rain.</VV_DialogChangeWeatherRainDesc>
+<VV_DialogChangeWeatherMustSelect>You must choose a weather to summon.</VV_DialogChangeWeatherMustSelect>
+
 </LanguageData>

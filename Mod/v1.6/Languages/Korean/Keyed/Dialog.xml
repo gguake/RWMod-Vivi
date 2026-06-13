@@ -6,4 +6,8 @@
 <ViviFactionGreetingWary>{0}는 윙윙거리며 당신을 기다리고 있습니다.</ViviFactionGreetingWary>
 <ViviFactionGreetingWarm>{0}는 반가운듯 윙윙거리며 {NEGOTIATOR_labelShort}에게 인사합니다.</ViviFactionGreetingWarm>
 
+<VV_DialogChangeWeatherSelectLabel>불러올 날씨:</VV_DialogChangeWeatherSelectLabel>
+<VV_DialogChangeWeatherRainDesc>기온이 영하인 경우 비 대신 눈이 내립니다.</VV_DialogChangeWeatherRainDesc>
+<VV_DialogChangeWeatherMustSelect>불러올 날씨를 선택해야 합니다.</VV_DialogChangeWeatherMustSelect>
+
 </LanguageData>

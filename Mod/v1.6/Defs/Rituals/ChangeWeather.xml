@@ -5,7 +5,7 @@
     <label>change weather ritual</label>
     <description>Arbitrarily changes the weather in the current area. The resulting weather cannot be predicted.</description>
     <issue>Ritual</issue>
-    <preceptClass>Precept_Ritual</preceptClass>
+    <preceptClass>VVRace.Precept_RitualChangeWeather</preceptClass>
     <visible>false</visible>
     <classic>true</classic>
     <countsTowardsPreceptLimit>false</countsTowardsPreceptLimit>

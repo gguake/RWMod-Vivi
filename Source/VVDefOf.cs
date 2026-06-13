@@ -302,6 +302,21 @@ namespace VVRace
     }
 
     [DefOf]
+    public static class VVWeatherDefOf
+    {
+        public static WeatherDef Clear;
+        public static WeatherDef Fog;
+        public static WeatherDef Rain;
+        public static WeatherDef SnowGentle;
+    }
+
+    [DefOf]
+    public static class VVPreceptDefOf
+    {
+        public static PreceptDef VV_ChangeWeatherRitual;
+    }
+
+    [DefOf]
     public static class VVSoundDefOf
     {
         public static SoundDef VV_EverflowerRitualCast;

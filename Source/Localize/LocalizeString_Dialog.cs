@@ -26,5 +26,9 @@
 
         public const string VV_DialogStartGrowingArcanePlantIngredientLabel = nameof(VV_DialogStartGrowingArcanePlantIngredientLabel);
         public const string VV_DialogCancelGrowingArcanePlantBillInGrowing = nameof(VV_DialogCancelGrowingArcanePlantBillInGrowing);
+
+        public const string VV_DialogChangeWeatherSelectLabel = nameof(VV_DialogChangeWeatherSelectLabel);
+        public const string VV_DialogChangeWeatherRainDesc = nameof(VV_DialogChangeWeatherRainDesc);
+        public const string VV_DialogChangeWeatherMustSelect = nameof(VV_DialogChangeWeatherMustSelect);
     }
 }

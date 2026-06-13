@@ -38,12 +38,29 @@ namespace VVRace
         public IntVec3? ReservedTeleportCell => _reserveTeleportCell;
         private IntVec3? _reserveTeleportCell;
 
+        // 날씨 변경 의식에서 선택한 날씨. 의식 시작 시 설정되고 의식 완료(Apply) 시 소비된다.
+        // null인 경우 (구버전 세이브 / 선택 없이 시작된 경우) 랜덤하게 결정된다.
+        public EverflowerWeatherChoice? SelectedRitualWeather
+        {
+            get => _selectedRitualWeather;
+            set => _selectedRitualWeather = value;
+        }
+        private EverflowerWeatherChoice? _selectedRitualWeather;
+
+        public EverflowerWeatherChoice? ConsumeSelectedRitualWeather()
+        {
+            var selected = _selectedRitualWeather;
+            _selectedRitualWeather = null;
+            return selected;
+        }
+
         public override void ExposeData()
         {
             base.ExposeData();
             Scribe_Values.Look(ref _ritualCooldownTick, "ritualCooldownTick");
             Scribe_Values.Look(ref _lastRitualTick, "lastRitualTick");
             Scribe_Values.Look(ref _reserveTeleportCell, "reserveTeleportCell");
+            Scribe_Values.Look(ref _selectedRitualWeather, "selectedRitualWeather");
         }
 
         public override void Destroy(DestroyMode mode = DestroyMode.Vanish)
