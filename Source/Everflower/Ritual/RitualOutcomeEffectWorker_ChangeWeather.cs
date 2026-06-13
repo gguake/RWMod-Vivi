@@ -17,6 +17,15 @@ namespace VVRace
             var map = everflower.Map;
             if (map.Tile.LayerDef == PlanetLayerDefOf.Surface)
             {
+                var existingConditions = map.GameConditionManager.ActiveConditions
+                    .Where(c => c.def == VVGameConditionDefOf.VV_EverflowerWeatherControl)
+                    .ToList();
+
+                foreach (var existingCondition in existingConditions)
+                {
+                    existingCondition.End();
+                }
+
                 var gameCond = GameConditionMaker.MakeCondition(VVGameConditionDefOf.VV_EverflowerWeatherControl, Rand.Range(60000, 120000)) as GameCondition_ForceWeather;
                 gameCond.conditionCauser = everflower;
 
