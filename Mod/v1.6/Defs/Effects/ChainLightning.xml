@@ -20,9 +20,33 @@
       <shaderType>GlowAnimated</shaderType>
     </graphicData>
   </ThingDef>
+  <ThingDef ParentName="MoteBase">
+    <defName>VV_Mote_ChainLightningImpact</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <graphicData>
+      <texPath>Things/Mote/VV_ChainLightningImpact</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>1.2</drawSize>
+      <color>(1,1,1,0.9)</color>
+    </graphicData>
+    <mote>
+      <fadeInTime>0.03</fadeInTime>
+      <solidTime>0.05</solidTime>
+      <fadeOutTime>0.6</fadeOutTime>
+    </mote>
+  </ThingDef>
   <EffecterDef>
     <defName>VV_LightningBolt_End</defName>
     <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerChance</subEffecterClass>
+        <moteDef>VV_Mote_ChainLightningImpact</moteDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <chancePerTick>0.45</chancePerTick>
+        <positionRadius>0.12</positionRadius>
+        <scale>1.1~1.45</scale>
+        <rotation>0~360</rotation>
+      </li>
       <li>
         <subEffecterClass>SubEffecter_SprayerChance</subEffecterClass>
         <fleckDef>Smoke</fleckDef>

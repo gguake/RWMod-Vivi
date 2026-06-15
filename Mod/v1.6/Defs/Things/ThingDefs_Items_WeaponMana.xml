@@ -334,6 +334,9 @@
         <ticksBetweenBurstShots>3</ticksBetweenBurstShots>
         <lightningMoteDef>VV_Mote_ChainLightning</lightningMoteDef>
         <lightningStartOffset>0.65</lightningStartOffset>
+        <lightningPathSegmentLength>1.15</lightningPathSegmentLength>
+        <lightningPathJitter>0.45</lightningPathJitter>
+        <lightningPathMaxSegments>20</lightningPathMaxSegments>
         <lightningTargetEffectDef>VV_LightningBolt_End</lightningTargetEffectDef>
 
         <lightningLineFleckDef>LightningGlow</lightningLineFleckDef>
