@@ -49,5 +49,7 @@
         public const string VV_TextMote_DamageBlockedByFairy = nameof(VV_TextMote_DamageBlockedByFairy);
 
         public const string VV_RitualTarget_Everflower = nameof(VV_RitualTarget_Everflower);
+
+        public const string VV_Hediff_AgingFactor = nameof(VV_Hediff_AgingFactor);
     }
 }

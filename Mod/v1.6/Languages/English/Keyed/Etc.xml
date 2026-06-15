@@ -52,4 +52,6 @@
 <VV_TextMote_DamageBlockedByFairy>Protected by fairy</VV_TextMote_DamageBlockedByFairy>
 
 <VV_RitualTarget_Everflower>Everflower</VV_RitualTarget_Everflower>
+
+<VV_Hediff_AgingFactor>  - Ages at a rate of {0}.</VV_Hediff_AgingFactor>
 </LanguageData>

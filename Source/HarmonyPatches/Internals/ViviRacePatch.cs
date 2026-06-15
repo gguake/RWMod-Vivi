@@ -42,6 +42,11 @@ namespace VVRace.HarmonyPatches
                 original: AccessTools.PropertyGetter(typeof(Pawn_AgeTracker), "GrowthPointsFactor"),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(Pawn_AgeTracker_get_GrowthPointsFactor_Postfix)));
 
+            // 노화 속도 조절 HediffComp(HediffComp_AgingFactor) 패치
+            harmony.Patch(
+                original: AccessTools.PropertyGetter(typeof(Pawn_GeneTracker), nameof(Pawn_GeneTracker.BiologicalAgeTickFactor)),
+                transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(Pawn_GeneTracker_get_BiologicalAgeTickFactor_Transpiler)));
+
             // 이복형제 방지
             harmony.Patch(
                 original: AccessTools.Method(typeof(PawnRelationWorker_Sibling), nameof(PawnRelationWorker_Sibling.InRelation)),
@@ -374,6 +379,24 @@ namespace VVRace.HarmonyPatches
                     new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(ViviRacePatch), nameof(MoveColonyUtility_MoveColonyAndReset_Injection))),
                 });
             }
+
+            return instructions;
+        }
+
+        private static IEnumerable<CodeInstruction> Pawn_GeneTracker_get_BiologicalAgeTickFactor_Transpiler(IEnumerable<CodeInstruction> codeInstructions)
+        {
+            var instructions = codeInstructions.ToList();
+
+            var retIndex = instructions.FindLastIndex(v => v.opcode == OpCodes.Ret);
+            var injection = new List<CodeInstruction>()
+            {
+                new CodeInstruction(OpCodes.Ldarg_0),
+                new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(HediffComp_AgingFactor), nameof(HediffComp_AgingFactor.ApplyAgingFactor))),
+            };
+
+            injection[0].labels.AddRange(instructions[retIndex].labels);
+            instructions[retIndex].labels.Clear();
+            instructions.InsertRange(retIndex, injection);
 
             return instructions;
         }

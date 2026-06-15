@@ -278,6 +278,7 @@
     <Compile Include="Vivi\Comps\CompViviHolder.cs" />
     <Compile Include="Gather\GatheringMapComponent.cs" />
     <Compile Include="Vivi\Gene_HoneyDependency.cs" />
+    <Compile Include="Vivi\HediffComp_AgingFactor.cs" />
     <Compile Include="Vivi\HediffComp_ChangeRoyalJellyNeed.cs" />
     <Compile Include="Vivi\HediffComp_GrowthBoost.cs" />
     <Compile Include="Vivi\Comps\CompVivi.cs" />

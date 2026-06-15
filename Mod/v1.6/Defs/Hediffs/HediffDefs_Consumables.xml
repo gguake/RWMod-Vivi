@@ -23,6 +23,9 @@
       <li Class="VVRace.HediffCompProperties_ChangeRoyalJellyNeed">
         <percentPerDay>0.0032</percentPerDay>
       </li>
+      <li Class="VVRace.HediffCompProperties_AgingFactor">
+        <factor>0.5</factor>
+      </li>
     </comps>
 
     <stages>
@@ -43,7 +46,7 @@
           <PsychicEntropyRecoveryRate>0.15</PsychicEntropyRecoveryRate>
         </statOffsets>
         <statFactors>
-          <LifespanFactor>2.5</LifespanFactor>
+          <LifespanFactor>2</LifespanFactor>
         </statFactors>
       </li>
     </stages>

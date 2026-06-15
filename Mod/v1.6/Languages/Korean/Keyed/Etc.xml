@@ -51,4 +51,6 @@
 <VV_TextMote_DamageBlockedByFairy>요정에 의해 보호됨</VV_TextMote_DamageBlockedByFairy>
 
 <VV_RitualTarget_Everflower>영원꽃</VV_RitualTarget_Everflower>
+
+<VV_Hediff_AgingFactor>  - {0}의 속도로 나이를 먹습니다.</VV_Hediff_AgingFactor>
 </LanguageData>

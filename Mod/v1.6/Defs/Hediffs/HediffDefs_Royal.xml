@@ -41,6 +41,9 @@
     </stages>
 
     <comps>
+      <li Class="VVRace.HediffCompProperties_AgingFactor">
+        <factor>0.2</factor>
+      </li>
     </comps>
 
     <modExtensions>
