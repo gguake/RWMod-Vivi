@@ -517,7 +517,6 @@
       <landedEffecter>VV_Impact_BulletLava</landedEffecter>
     </projectile>
     <comps>
-      <!-- 화산탄 느낌의 비행 궤적: 녹은 불똥이 떨어지듯 흩날림 -->
       <li Class="VVRace.CompProperties_ProjectileFleckSpray">
         <fleckDef>VV_Fleck_LavaEmber</fleckDef>
         <intervalTicks>6</intervalTicks>
