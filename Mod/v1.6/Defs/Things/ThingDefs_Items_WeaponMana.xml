@@ -501,10 +501,10 @@
     <defName>VV_Bullet_LavaShredder</defName>
     <label>lava fragment</label>
     <graphicData>
-      <texPath>Things/Projectile/Bullet_Small</texPath>
+      <texPath>Things/Projectile/VV_Bullet_LavaShredder</texPath>
       <graphicClass>Graphic_Single</graphicClass>
-      <drawSize>0.8</drawSize>
-      <color>(255,170,40)</color>
+      <shaderType>AdditiveChangeHue</shaderType>
+      <drawSize>(0.5, 0.75)</drawSize>
     </graphicData>
     <projectile>
       <damageDef>VV_Bullet_Lava</damageDef>
@@ -516,6 +516,30 @@
       <filthCount>1</filthCount>
       <landedEffecter>VV_Impact_BulletLava</landedEffecter>
     </projectile>
+    <comps>
+      <!-- 화산탄 느낌의 비행 궤적: 녹은 불똥이 떨어지듯 흩날림 -->
+      <li Class="VVRace.CompProperties_ProjectileFleckSpray">
+        <fleckDef>VV_Fleck_LavaEmber</fleckDef>
+        <intervalTicks>6</intervalTicks>
+        <burstCount>
+          <min>1</min>
+          <max>2</max>
+        </burstCount>
+        <positionRadius>0.1</positionRadius>
+        <scaleRange>
+          <min>0.1</min>
+          <max>0.3</max>
+        </scaleRange>
+        <speedRange>
+          <min>0.1</min>
+          <max>0.45</max>
+        </speedRange>
+        <rotationRate>
+          <min>-120</min>
+          <max>120</max>
+        </rotationRate>
+      </li>
+    </comps>
   </ThingDef>
 
   <!-- 서리침 석궁 -->

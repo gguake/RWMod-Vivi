@@ -1,43 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>VV_Fleck_LavaEmber</defName>
+    <graphicData>
+      <texPath>VFX/VV_LavaEmber</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <growthRate>-0.22</growthRate>
+    <fadeInTime>0.04</fadeInTime>
+    <solidTime>0.12</solidTime>
+    <fadeOutTime>0.45</fadeOutTime>
+  </FleckDef>
+
+  <FleckDef ParentName="FleckBase">
+    <defName>VV_Fleck_LavaBurst</defName>
+    <graphicData>
+      <texPath>VFX/VV_LavaBurst</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <growthRate>0.6</growthRate>
+    <fadeInTime>0.05</fadeInTime>
+    <solidTime>0.08</solidTime>
+    <fadeOutTime>0.35</fadeOutTime>
+  </FleckDef>
+
   <EffecterDef>
     <defName>VV_Impact_BulletLava</defName>
     <children>
       <li>
         <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
-        <fleckDef>SparkFlash</fleckDef>
-        <positionLerpFactor>0.6</positionLerpFactor>
-        <chancePerTick>0.2</chancePerTick>
-        <scale>1~2</scale>
-        <spawnLocType>OnSource</spawnLocType>
-      </li>
-      <li>
-        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
-        <positionRadius>0.3</positionRadius>
-        <fleckDef>AirPuff</fleckDef>
-        <burstCount>2~3</burstCount>
-        <speed>0.4~0.8</speed>
-        <scale>0.3~0.5</scale>
-        <spawnLocType>OnSource</spawnLocType>
-      </li>
-      <li>
-        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
-        <positionRadius>0.02</positionRadius>
-        <moteDef>Mote_SparkThrownFast</moteDef>
-        <burstCount>4~5</burstCount>
-        <speed>3.3~5</speed>
-        <scale>0.1~0.2</scale>
-        <spawnLocType>OnSource</spawnLocType>
-      </li>
-      <li>
-        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
-        <chancePerTick>0.3</chancePerTick>
-        <positionRadius>0.4</positionRadius>
-        <fleckDef>HeatGlow_Intense</fleckDef>
+        <fleckDef>VV_Fleck_LavaBurst</fleckDef>
         <burstCount>1~1</burstCount>
-        <scale>0.5~0.7</scale>
+        <scale>0.9~1.2</scale>
+        <rotation>0~360</rotation>
         <spawnLocType>OnSource</spawnLocType>
-        <color>(255,100,0)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_LavaEmber</fleckDef>
+        <burstCount>5~7</burstCount>
+        <positionRadius>0.12</positionRadius>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>0~360</angle>
+        <speed>1.2~2.8</speed>
+        <scale>0.25~0.5</scale>
+        <rotationRate>-180~180</rotationRate>
+        <spawnLocType>OnSource</spawnLocType>
       </li>
     </children>
   </EffecterDef>
