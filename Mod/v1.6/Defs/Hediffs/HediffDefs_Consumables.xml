@@ -23,9 +23,6 @@
       <li Class="VVRace.HediffCompProperties_ChangeRoyalJellyNeed">
         <percentPerDay>0.0032</percentPerDay>
       </li>
-      <li Class="VVRace.HediffCompProperties_AgingFactor">
-        <factor>0.5</factor>
-      </li>
     </comps>
 
     <stages>

@@ -3,7 +3,7 @@
   <HediffDef>
     <defName>VV_EverflowerImpact</defName>
     <label>everflower fatigue</label>
-    <description>Somewhat tired due to the influence of the everflower's fragrance.</description>
+    <description>somewhat tired due to the influence of the everflower's fragrance.</description>
     <hediffClass>HediffWithComps</hediffClass>
     <defaultLabelColor>(1,1,0)</defaultLabelColor>
     
