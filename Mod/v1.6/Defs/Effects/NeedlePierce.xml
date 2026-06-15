@@ -17,7 +17,7 @@
   <FleckDef ParentName="FleckBase_Thrown">
     <defName>VV_Fleck_NeedleShard</defName>
     <graphicData>
-      <texPath>VFX/VV_NeedleShard</texPath>
+      <texPath>VFX/VV_EverflowerPetal</texPath>
       <shaderType>MoteGlow</shaderType>
       <renderInstanced>true</renderInstanced>
     </graphicData>
