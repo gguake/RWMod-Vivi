@@ -187,6 +187,7 @@ namespace VVRace
         public static HediffDef Malaria;
 
         public static HediffDef VV_EverflowerLink;
+        public static HediffDef VV_EverflowerReverberation;
         public static HediffDef VV_ViviFairyFollow;
         public static HediffDef VV_FairyficationSickness;
     }

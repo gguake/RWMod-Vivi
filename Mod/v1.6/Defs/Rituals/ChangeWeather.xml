@@ -3,7 +3,7 @@
   <PreceptDef>
     <defName>VV_ChangeWeatherRitual</defName>
     <label>change weather ritual</label>
-    <description>Arbitrarily changes the weather in the current area. The resulting weather cannot be predicted.</description>
+    <description>Changes the current local weather to your desired weather.</description>
     <issue>Ritual</issue>
     <preceptClass>VVRace.Precept_RitualChangeWeather</preceptClass>
     <visible>false</visible>

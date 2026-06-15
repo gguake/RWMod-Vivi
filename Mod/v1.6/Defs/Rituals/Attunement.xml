@@ -3,7 +3,8 @@
   <PreceptDef>
     <defName>VV_Attunement</defName>
     <label>attunement ritual</label>
-    <description>A Royal vivi enters resonance with an everflower through psychic attunement. A royal vivi can attune to only one everflower at a time, and if a royal vivi already in resonance performs the attunement ritual, it deepens the everflower's attunement level.</description>
+    <description>A Royal vivi enters resonance with an everflower through psychic attunement. A royal vivi can attune to only one everflower at a time, and if a royal vivi already in resonance performs the attunement ritual, it deepens the everflower's attunement level.
+\nCompleting the attunement leaves the everflower's reverberation in the current region, delaying the aging process of all normal vivis. The duration of this effect scales with the attunement level.</description>
     <issue>Ritual</issue>
     <preceptClass>Precept_Ritual</preceptClass>
     <visible>false</visible>
@@ -100,6 +101,7 @@
   <RitualOutcomeEffectDef>
     <defName>VV_Attunement</defName>
     <description>The better a ritual's result, the shorter the cooldown on the next everflower ritual and the stronger the everflower's attunement becomes.
+\nCompleting the attunement leaves the everflower's reverberation in the current region, delaying the aging process of all normal vivis. The duration of this effect scales with the attunement level.
 \nAll everflower rituals share a cooldown.</description>
     <workerClass>VVRace.RitualOutcomeEffectWorker_Attunement</workerClass>
     <allowAttachableOutcome>false</allowAttachableOutcome>

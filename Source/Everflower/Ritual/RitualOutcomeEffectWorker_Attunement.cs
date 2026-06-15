@@ -19,11 +19,35 @@ namespace VVRace
             if (everflower != null)
             {
                 everflower.EverflowerComp.LinkAttunement(attuner, quality);
+
+                ApplyReverberation(attuner, everflower, map);
             }
 
             def.effecter.Spawn(everflower, map, everflower.EverflowerComp.RitualEffecterOffset).Cleanup();
 
             everflower.Notify_RitualComplete(quality);
+        }
+
+        private void ApplyReverberation(Pawn attuner, ArcanePlant_Everflower everflower, Map map)
+        {
+            if (attuner == null || map == null) { return; }
+
+            var severity = everflower.EverflowerComp.AttunementHediffSeverity;
+            if (severity <= 0f) { return; }
+
+            foreach (var pawn in map.mapPawns.AllPawnsSpawned)
+            {
+                if (!pawn.IsVivi() || pawn.IsRoyalVivi()) { continue; }
+
+                var existing = pawn.health.hediffSet.GetFirstHediffOfDef(VVHediffDefOf.VV_EverflowerReverberation);
+                if (existing != null)
+                {
+                    pawn.health.RemoveHediff(existing);
+                }
+
+                var hediff = pawn.health.AddHediff(VVHediffDefOf.VV_EverflowerReverberation);
+                hediff.Severity = severity;
+            }
         }
     }
 }

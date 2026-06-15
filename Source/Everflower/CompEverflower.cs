@@ -87,7 +87,7 @@ namespace VVRace
             }
         }
 
-        public float AttunementHediffSeverity => _attunementInfo.attunementLevel + AttunementPct;
+        public float AttunementHediffSeverity => _attunementInfo.attunementLevel + Mathf.Pow(AttunementPct, 2);
 
         public IEnumerable<Pawn> LinkedPawns => _linked;
         private List<Pawn> _linked = new List<Pawn>();

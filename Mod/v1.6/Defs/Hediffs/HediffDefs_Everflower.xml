@@ -111,7 +111,32 @@
       <li><compClass>VVRace.HediffComp_EverflowerLink</compClass></li>
     </comps>
   </HediffDef>
-  
+
+  <HediffDef>
+    <defName>VV_EverflowerReverberation</defName>
+    <label>everflower reverberation</label>
+    <description>The reverberation left by the everflower slows the passage of time, delaying the aging process.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(0.6,1,0.8)</defaultLabelColor>
+
+    <isBad>false</isBad>
+    <priceImpact>false</priceImpact>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <everCurableByItem>false</everCurableByItem>
+
+    <maxSeverity>10</maxSeverity>
+
+    <comps>
+      <li Class="VVRace.HediffCompProperties_AgingFactor">
+        <factor>0.3</factor>
+      </li>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-0.25</severityPerDay>
+        <showDaysToRecover>true</showDaysToRecover>
+      </li>
+    </comps>
+  </HediffDef>
+
   <HediffDef>
     <defName>VV_ViviFairyFollow</defName>
     <label>vivi fairy</label>
