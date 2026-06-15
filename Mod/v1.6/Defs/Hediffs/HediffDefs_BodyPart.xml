@@ -92,7 +92,7 @@
           <scaleOffsetByBodySize>true</scaleOffsetByBodySize>
           <dataNorth>
             <offset>(-0.01, 0, 0.0)</offset>
-            <layer>100</layer>
+            <layer>94</layer>
           </dataNorth>
           <dataSouth>
             <offset>(0.01, 0, 0.0)</offset>
@@ -119,7 +119,7 @@
           <scaleOffsetByBodySize>true</scaleOffsetByBodySize>
           <dataNorth>
             <offset>(0.01, 0, 0)</offset>
-            <layer>100</layer>
+            <layer>94</layer>
           </dataNorth>
           <dataSouth>
             <offset>(-0.01, 0, 0)</offset>

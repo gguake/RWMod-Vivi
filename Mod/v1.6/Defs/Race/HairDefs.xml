@@ -71,4 +71,11 @@
     <texPath>Things/Pawn/Vivi/Hairs/HairH</texPath>
     <scale>(1.333333,1.333333)</scale>
   </HairDef>
+
+  <HairDef ParentName="ViviHairBase" Class="RPEF.ScaleableHairDef">
+    <defName>VV_HairI</defName>
+    <label>vivi hairI</label>
+    <texPath>Things/Pawn/Vivi/Hairs/HairI</texPath>
+    <scale>(1.333333,1.333333)</scale>
+  </HairDef>
 </Defs>
