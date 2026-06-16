@@ -11,4 +11,7 @@
 <VV_Gizmo_LinkFailReason_AlreadyLinked>이미 공명한 영원꽃 있음</VV_Gizmo_LinkFailReason_AlreadyLinked>
 <VV_Gizmo_LinkFailReason_PsychicSensitivityRequire>정신 감응력 부족</VV_Gizmo_LinkFailReason_PsychicSensitivityRequire>
 <VV_Gizmo_OptionLabel_NoRoyalVivi>로열 비비 없음</VV_Gizmo_OptionLabel_NoRoyalVivi>
+
+<VV_Gizmo_FairyStatusHeader>요정 비비</VV_Gizmo_FairyStatusHeader>
+<VV_Gizmo_FairyStatusTooltip>실체화된 요정 비비: {0} / {1}\n\n흰색 사각형은 대기중인 요정, 빨간색 사각형은 행동중인 요정입니다. 귀속된 요정 비비 수만큼 실체화할 수 있습니다.</VV_Gizmo_FairyStatusTooltip>
 </LanguageData>

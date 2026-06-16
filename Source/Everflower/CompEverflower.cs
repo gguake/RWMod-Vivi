@@ -325,6 +325,11 @@ namespace VVRace
                     effect?.SpawnAttached(parent, parent.Map);
                 }
             }
+
+            foreach (var pawn in LinkedPawns)
+            {
+                pawn.GetCompVivi()?.RefreshFairyMastery();
+            }
         }
 
         private int GrowArcanePlantRandomly()

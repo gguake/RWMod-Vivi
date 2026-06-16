@@ -8,6 +8,16 @@
 <VV_AbilityDisabledNoFood>{0_labelShort}는 배고파서 사용할 수 없음</VV_AbilityDisabledNoFood>
 <VV_AbilityDisabledNoBodyPart>{0_labelShort}의 신체 부위 {1}가 {2}개 부족함</VV_AbilityDisabledNoBodyPart>
 
+<VV_AbilityDisabledNoFairySlot>실체화할 수 있는 요정 비비 없음</VV_AbilityDisabledNoFairySlot>
+<VV_AbilityFailNoMana>대상 위치의 환경 마나가 부족함</VV_AbilityFailNoMana>
+<VV_AbilityDisabledNotEnoughFairies>대기 중인 요정 비비 부족 ({0}기 필요)</VV_AbilityDisabledNotEnoughFairies>
+<VV_AbilityFailNotAlly>아군 대상에게만 사용 가능</VV_AbilityFailNotAlly>
+<VV_AbilityFailAlreadyGuarded>이미 요정의 경호를 받는 중</VV_AbilityFailAlreadyGuarded>
+<VV_AbilityFailNotHostile>적대 대상에게만 사용 가능</VV_AbilityFailNotHostile>
+<VV_AbilityFailAlreadyConcentrated>이미 요정 집중 대상</VV_AbilityFailAlreadyConcentrated>
+<VV_Command_ReleaseGuard>요정 경호 해제</VV_Command_ReleaseGuard>
+<VV_Command_ReleaseGuardDesc>이 대상을 경호 중인 요정 비비를 해제합니다. 요정은 로열 비비에게 돌아갑니다.</VV_Command_ReleaseGuardDesc>
+
 <VV_GeneDefHoneyNeedDurationDesc>{PAWN_nameDef}(은)는 꿀을 주기적으로 섭취해야 생존할 수 있습니다. 꿀을 섭취하지 않고 {DEFICIENCYDURATION}(이)가 지나면 결핍에 시달리며 시간이 지날수록 악화됩니다.</VV_GeneDefHoneyNeedDurationDesc>
 <VV_LastHoneyIngestedDurationAgo>꿀을 {DURATION} 전에 마지막으로 섭취했습니다.</VV_LastHoneyIngestedDurationAgo>
 
@@ -38,6 +48,7 @@
 <VV_FailReason_RitualCooldown>재사용 대기 중입니다. {0} 후 다시 사용할 수 있습니다.</VV_FailReason_RitualCooldown>
 
 <VV_FailReason_HasNoFairyVivi>따르는 요정 비비 없음</VV_FailReason_HasNoFairyVivi>
+<VV_FailReason_HasMaterializedFairyVivi>실체화된 요정 비비가 있어 해제할 수 없음</VV_FailReason_HasMaterializedFairyVivi>
 <VV_FailReason_FairyViviFull>따르는 요정 비비 최대치</VV_FailReason_FairyViviFull>
 <VV_FailReason_NotRoyalVivi>로열 비비가 아님</VV_FailReason_NotRoyalVivi>
 <VV_FailReason_NotAttunedEverflower>영원꽃에 공명하지 않음</VV_FailReason_NotAttunedEverflower>

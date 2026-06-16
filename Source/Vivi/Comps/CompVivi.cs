@@ -40,6 +40,11 @@ namespace VVRace
             Scribe_Values.Look(ref _originalHairColor, "originalHairColor");
 
             Scribe_References.Look(ref _linkedEverflower, "linkedEverflower");
+
+            if (Scribe.mode == LoadSaveMode.PostLoadInit)
+            {
+                RefreshFairyMastery();
+            }
         }
 
         public override void PostSpawnSetup(bool respawningAfterLoad)
@@ -73,6 +78,7 @@ namespace VVRace
             }
 
             RefreshHairColor();
+            RefreshFairyMastery();
         }
 
         public override void PostDeSpawn(Map map, DestroyMode mode = DestroyMode.Vanish)
@@ -146,6 +152,33 @@ namespace VVRace
             {
                 pawn.health.AddHediff(VVHediffDefOf.VV_RoyalVivi);
             }
+
+            RefreshFairyMastery();
+        }
+
+        public void RefreshFairyMastery()
+        {
+            var pawn = (Pawn)parent;
+            if (pawn.health == null) { return; }
+
+            var existing = pawn.health.hediffSet.GetFirstHediffOfDef(VVHediffDefOf.VV_FairyMastery);
+            bool shouldHave = pawn.IsRoyalVivi() && LinkedEverflower != null && LinkedEverflower.EverflowerComp.AttunementLevel >= 4;
+
+            if (shouldHave)
+            {
+                if (existing == null)
+                {
+                    pawn.health.AddHediff(VVHediffDefOf.VV_FairyMastery);
+                }
+                return;
+            }
+
+            if (existing != null)
+            {
+                pawn.health.RemoveHediff(existing);
+            }
+
+            parent.GetComp<CompViviFairyController>()?.DematerializeAll();
         }
 
         public void RefreshHairColor()
@@ -218,6 +251,7 @@ namespace VVRace
                 parent);
 
             GiveEverflowerLinkHediff();
+            RefreshFairyMastery();
         }
 
         public void Notify_LinkedEverflowerDestroyed(bool showMessages = true)
@@ -225,6 +259,7 @@ namespace VVRace
             _linkedEverflower = null;
 
             RemoveEverflowerLinkHediff();
+            RefreshFairyMastery();
 
             if (showMessages)
             {

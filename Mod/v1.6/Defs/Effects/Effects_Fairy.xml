@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+
+  <!-- 요정 비비 생성/소멸/순간이동 공통 영원꽃 이펙트. (한 번 트리거되고 정리되는 경량 버스트) -->
+  <EffecterDef>
+    <defName>VV_Effecter_FairyPhase</defName>
+    <maintainTicks>30</maintainTicks>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>VV_Fairyfication</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>VV_Mote_VV_EverflowerRitualCircle</moteDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>0.5</scale>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_EverflowerPetal_Burst</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>8~14</burstCount>
+        <positionRadius>0.2</positionRadius>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>0.8~1.8</speed>
+        <rotation>0~360</rotation>
+        <rotationRate>-260~260</rotationRate>
+        <scale>0.15~0.35</scale>
+      </li>
+    </children>
+  </EffecterDef>
+
+</Defs>

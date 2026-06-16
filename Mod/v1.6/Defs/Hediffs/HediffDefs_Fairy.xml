@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+
+  <!-- 요정 능력 해금 헤디프. abilities 목록의 능력들을 자동 부여하며 헤디프가 사라지면 능력도 사라진다.
+       (Phase 2에서 경호/집중/전개 AbilityDef를 abilities 목록에 추가) -->
+  <HediffDef>
+    <defName>VV_FairyMastery</defName>
+    <label>fairy mastery</label>
+    <description>Through deep attunement with an everflower, this royal vivi can briefly materialize bound fairy vivi to wield various abilities.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(0.7, 1, 0.9)</defaultLabelColor>
+
+    <isBad>false</isBad>
+    <priceImpact>false</priceImpact>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <everCurableByItem>false</everCurableByItem>
+    <maxSeverity>1</maxSeverity>
+    <initialSeverity>1</initialSeverity>
+
+    <stages>
+      <li>
+        <becomeVisible>false</becomeVisible>
+      </li>
+    </stages>
+
+    <abilities>
+      <li>VV_FairyMaterialize</li>
+      <li>VV_FairyGuard</li>
+      <li>VV_FairyConcentration</li>
+      <li>VV_FairyExpansion</li>
+    </abilities>
+  </HediffDef>
+
+  <!-- 경호 대상 마커. 보호 해제 Gizmo가 이 정보로 세션을 종료한다. -->
+  <HediffDef>
+    <defName>VV_FairyGuarded</defName>
+    <label>fairy escort</label>
+    <description>A fairy vivi is escorting and protecting this pawn.</description>
+    <hediffClass>VVRace.Hediff_FairyGuarded</hediffClass>
+    <defaultLabelColor>(0.7, 1, 0.9)</defaultLabelColor>
+    <isBad>false</isBad>
+    <priceImpact>false</priceImpact>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <everCurableByItem>false</everCurableByItem>
+    <maxSeverity>1</maxSeverity>
+    <initialSeverity>1</initialSeverity>
+  </HediffDef>
+
+  <!-- 집중 대상 마커. 이미 적용된 대상 재시전 방지용. -->
+  <HediffDef>
+    <defName>VV_FairyConcentrated</defName>
+    <label>fairy concentration</label>
+    <description>Fairy vivi are concentrating their attacks on this target.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(1, 0.4, 0.4)</defaultLabelColor>
+    <isBad>true</isBad>
+    <priceImpact>false</priceImpact>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <everCurableByItem>false</everCurableByItem>
+    <maxSeverity>1</maxSeverity>
+    <initialSeverity>1</initialSeverity>
+  </HediffDef>
+
+  <!-- 요정 비비 소멸 시 로열 비비에 누적. 정신 감응력을 높이지만 정신적으로 더 불안정해진다. 시간이 지나면 감쇠. -->
+  <HediffDef>
+    <defName>VV_EverflowerAssimilation</defName>
+    <label>everflower assimilation</label>
+    <description>Lingering resonance from materialized fairy vivi. Heightens psychic sensitivity, but the mind grows more unstable. Fades over time.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(0.6, 1, 0.8)</defaultLabelColor>
+
+    <isBad>false</isBad>
+    <priceImpact>false</priceImpact>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <everCurableByItem>false</everCurableByItem>
+
+    <initialSeverity>1</initialSeverity>
+    <maxSeverity>5</maxSeverity>
+
+    <stages>
+      <li>
+        <minSeverity>1</minSeverity>
+        <label>I</label>
+        <statOffsets>
+          <PsychicSensitivity>0.05</PsychicSensitivity>
+          <MentalBreakThreshold>0.02</MentalBreakThreshold>
+        </statOffsets>
+      </li>
+      <li>
+        <minSeverity>2</minSeverity>
+        <label>II</label>
+        <statOffsets>
+          <PsychicSensitivity>0.1</PsychicSensitivity>
+          <MentalBreakThreshold>0.04</MentalBreakThreshold>
+        </statOffsets>
+      </li>
+      <li>
+        <minSeverity>3</minSeverity>
+        <label>III</label>
+        <statOffsets>
+          <PsychicSensitivity>0.15</PsychicSensitivity>
+          <MentalBreakThreshold>0.06</MentalBreakThreshold>
+        </statOffsets>
+      </li>
+      <li>
+        <minSeverity>4</minSeverity>
+        <label>IV</label>
+        <statOffsets>
+          <PsychicSensitivity>0.2</PsychicSensitivity>
+          <MentalBreakThreshold>0.08</MentalBreakThreshold>
+        </statOffsets>
+      </li>
+      <li>
+        <minSeverity>5</minSeverity>
+        <label>V</label>
+        <statOffsets>
+          <PsychicSensitivity>0.25</PsychicSensitivity>
+          <MentalBreakThreshold>0.1</MentalBreakThreshold>
+        </statOffsets>
+      </li>
+    </stages>
+
+    <comps>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-0.5</severityPerDay>
+        <showDaysToRecover>true</showDaysToRecover>
+        <showHoursToRecover>true</showHoursToRecover>
+      </li>
+    </comps>
+  </HediffDef>
+
+</Defs>

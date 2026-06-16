@@ -128,6 +128,17 @@ namespace VVRace
 
         public static ThingDef VV_SteamProjectile;
         public static ThingDef VV_ExplosiveSnowman;
+
+        public static ThingDef VV_ViviFairy;
+    }
+
+    [DefOf]
+    public static class VVAbilityDefOf
+    {
+        public static AbilityDef VV_FairyMaterialize;
+        public static AbilityDef VV_FairyGuard;
+        public static AbilityDef VV_FairyConcentration;
+        public static AbilityDef VV_FairyExpansion;
     }
 
     [DefOf]
@@ -190,6 +201,11 @@ namespace VVRace
         public static HediffDef VV_EverflowerReverberation;
         public static HediffDef VV_ViviFairyFollow;
         public static HediffDef VV_FairyficationSickness;
+
+        public static HediffDef VV_FairyMastery;
+        public static HediffDef VV_EverflowerAssimilation;
+        public static HediffDef VV_FairyGuarded;
+        public static HediffDef VV_FairyConcentrated;
     }
 
     [DefOf]
@@ -245,6 +261,8 @@ namespace VVRace
         public static EffecterDef VV_EverflowerGrow_2_Level;
         public static EffecterDef VV_EverflowerGrow_3_Level;
         public static EffecterDef VV_EverflowerGrow_4_Level;
+
+        public static EffecterDef VV_Effecter_FairyPhase;
     }
 
     [DefOf]

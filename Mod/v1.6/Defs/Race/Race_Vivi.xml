@@ -291,6 +291,15 @@
           </points>
         </preventDamageChanceByInnerCount>
       </li>
+
+      <li Class="VVRace.CompProperties_ViviFairyController">
+        <fairyDef>VV_ViviFairy</fairyDef>
+        <fairyLifespanTicks>30000</fairyLifespanTicks>
+        <orbitRadiusX>0.45</orbitRadiusX>
+        <orbitRadiusZ>0.24</orbitRadiusZ>
+        <orbitDepth>0.09</orbitDepth>
+        <orbitAngularSpeed>0.02</orbitAngularSpeed>
+      </li>
     </comps>
 
     <modExtensions>

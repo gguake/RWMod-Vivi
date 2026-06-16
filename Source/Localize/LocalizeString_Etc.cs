@@ -10,6 +10,16 @@
         public const string VV_AbilityDisabledNoFood = nameof(VV_AbilityDisabledNoFood);
         public const string VV_AbilityDisabledNoBodyPart = nameof(VV_AbilityDisabledNoBodyPart);
 
+        public const string VV_AbilityDisabledNoFairySlot = nameof(VV_AbilityDisabledNoFairySlot);
+        public const string VV_AbilityFailNoMana = nameof(VV_AbilityFailNoMana);
+        public const string VV_AbilityDisabledNotEnoughFairies = nameof(VV_AbilityDisabledNotEnoughFairies);
+        public const string VV_AbilityFailNotAlly = nameof(VV_AbilityFailNotAlly);
+        public const string VV_AbilityFailAlreadyGuarded = nameof(VV_AbilityFailAlreadyGuarded);
+        public const string VV_AbilityFailNotHostile = nameof(VV_AbilityFailNotHostile);
+        public const string VV_AbilityFailAlreadyConcentrated = nameof(VV_AbilityFailAlreadyConcentrated);
+        public const string VV_Command_ReleaseGuard = nameof(VV_Command_ReleaseGuard);
+        public const string VV_Command_ReleaseGuardDesc = nameof(VV_Command_ReleaseGuardDesc);
+
         public const string VV_GeneDefHoneyNeedDurationDesc = nameof(VV_GeneDefHoneyNeedDurationDesc);
         public const string VV_LastHoneyIngestedDurationAgo = nameof(VV_LastHoneyIngestedDurationAgo);
 
@@ -35,6 +45,7 @@
         public const string VV_FailReason_RitualCooldown = nameof(VV_FailReason_RitualCooldown);
 
         public const string VV_FailReason_HasNoFairyVivi = nameof(VV_FailReason_HasNoFairyVivi);
+        public const string VV_FailReason_HasMaterializedFairyVivi = nameof(VV_FailReason_HasMaterializedFairyVivi);
         public const string VV_FailReason_FairyViviFull = nameof(VV_FailReason_FairyViviFull);
 
         public const string VV_FailReason_NotRoyalVivi = nameof(VV_FailReason_NotRoyalVivi);

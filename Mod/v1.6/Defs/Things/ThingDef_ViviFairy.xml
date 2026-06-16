@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+
+  <!-- 실체화된 요정 비비. 선택/상호작용 불가능한 시각 효과형 엔티티. -->
+  <ThingDef>
+    <defName>VV_ViviFairy</defName>
+    <label>fairy vivi</label>
+    <thingClass>VVRace.ViviFairy</thingClass>
+    <category>Ethereal</category>
+    <selectable>false</selectable>
+    <useHitPoints>false</useHitPoints>
+    <isSaveable>true</isSaveable>
+    <tickerType>Normal</tickerType>
+    <drawerType>RealtimeOnly</drawerType>
+    <altitudeLayer>Pawn</altitudeLayer>
+    <passability>Standable</passability>
+    <rotatable>true</rotatable>
+    <drawGUIOverlay>false</drawGUIOverlay>
+
+    <graphicData>
+      <texPath>Things/Mote/VV_Fairy/VV_Fairy</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>0.5</drawSize>
+      <color>(1, 1, 1, 0.8)</color>
+    </graphicData>
+
+    <comps>
+      <li Class="RPEF.CompProperties_TrailRenderer">
+        <texPath>VFX/VV_NeedleTrail</texPath>
+        <shader>AdditiveChangeHue</shader>
+        <color>(0.8, 0.95, 1.0)</color>
+        <widthCurve>
+          <points>
+            <li>(0, 0)</li>
+            <li>(1, 0.6)</li>
+          </points>
+        </widthCurve>
+        <lineTextureMode>DistributePerSegment</lineTextureMode>
+        <maxTrailPoint>40</maxTrailPoint>
+        <refreshIntervalTicks>0</refreshIntervalTicks>
+      </li>
+    </comps>
+  </ThingDef>
+
+</Defs>

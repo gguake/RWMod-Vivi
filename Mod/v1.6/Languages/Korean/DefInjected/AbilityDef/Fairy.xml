@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+
+<VV_FairyMaterialize.label>요정 실체화</VV_FairyMaterialize.label>
+<VV_FairyMaterialize.description>지정한 위치에 결속된 요정 비비 하나를 실체화합니다. 대상 위치의 환경 마나를 소모하며, 시전자의 정신 감응력이 높을수록 더 빠르게 소환됩니다. 요정 비비는 일정 시간 후 소멸하며 로열 비비에게 영원꽃 동화를 남깁니다.</VV_FairyMaterialize.description>
+
+<VV_FairyGuard.label>요정 - 경호</VV_FairyGuard.label>
+<VV_FairyGuard.description>대기 중인 요정 비비 1기를 아군 대상에게 배정해 따라다니게 합니다. 대상 주변 5x5 범위의 시야에 보이는, 쓰러지지 않은 적대 대상을 공격합니다. 대상이 죽거나 사라지면 취소되며, 요정의 행동 시간이 만료되면 취소되고 요정도 소멸합니다.</VV_FairyGuard.description>
+
+<VV_FairyConcentration.label>요정 - 집중</VV_FairyConcentration.label>
+<VV_FairyConcentration.description>대기 중인 요정 비비 3기가 적대 대상 주변으로 순간이동해 잠시 대기한 뒤 집중 공격합니다. 최대 시간이 지나거나 대상이 죽거나 사라지면 종료됩니다.</VV_FairyConcentration.description>
+
+<VV_FairyExpansion.label>요정 - 전개</VV_FairyExpansion.label>
+<VV_FairyExpansion.description>대기 중인 요정 비비 6기가 로열 비비 주위를 6각형 궤도로 맴돌며 로열 비비의 시야에 들어온 넓은 범위의 모든 적대 대상을 추적 공격합니다. 능력을 재사용하면 해제되며, 최대 시간이 지나거나 로열 비비가 사망해도 해제됩니다.</VV_FairyExpansion.description>
+
+</Defs>

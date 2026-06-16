@@ -11,5 +11,8 @@
         public const string VV_Gizmo_LinkFailReason_AlreadyLinked = nameof(VV_Gizmo_LinkFailReason_AlreadyLinked);
         public const string VV_Gizmo_LinkFailReason_PsychicSensitivityRequire = nameof(VV_Gizmo_LinkFailReason_PsychicSensitivityRequire);
         public const string VV_Gizmo_OptionLabel_NoRoyalVivi = nameof(VV_Gizmo_OptionLabel_NoRoyalVivi);
+
+        public const string VV_Gizmo_FairyStatusHeader = nameof(VV_Gizmo_FairyStatusHeader);
+        public const string VV_Gizmo_FairyStatusTooltip = nameof(VV_Gizmo_FairyStatusTooltip);
     }
 }

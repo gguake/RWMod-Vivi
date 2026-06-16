@@ -8,6 +8,16 @@
 <VV_AbilityDisabledNoFood>{0_labelShort} cannot use this due to hunger</VV_AbilityDisabledNoFood>
 <VV_AbilityDisabledNoBodyPart>{0_labelShort} lacks {2} {1} body parts</VV_AbilityDisabledNoBodyPart>
 
+<VV_AbilityDisabledNoFairySlot>No available fairy vivi to materialize</VV_AbilityDisabledNoFairySlot>
+<VV_AbilityFailNoMana>Not enough environment mana at the target location</VV_AbilityFailNoMana>
+<VV_AbilityDisabledNotEnoughFairies>Not enough idle fairy vivi (needs {0})</VV_AbilityDisabledNotEnoughFairies>
+<VV_AbilityFailNotAlly>Must target an allied pawn</VV_AbilityFailNotAlly>
+<VV_AbilityFailAlreadyGuarded>Already escorted by a fairy</VV_AbilityFailAlreadyGuarded>
+<VV_AbilityFailNotHostile>Must target a hostile pawn</VV_AbilityFailNotHostile>
+<VV_AbilityFailAlreadyConcentrated>Already targeted by fairy concentration</VV_AbilityFailAlreadyConcentrated>
+<VV_Command_ReleaseGuard>Release fairy escort</VV_Command_ReleaseGuard>
+<VV_Command_ReleaseGuardDesc>Dismiss the fairy vivi escorting this pawn. The fairy returns to the royal vivi.</VV_Command_ReleaseGuardDesc>
+
 <VV_GeneDefHoneyNeedDurationDesc>{PAWN_nameDef} must consume honey regularly to survive. Suffering from deficiency worsens over time if {PAWN_nameDef} does not consume honey within {DEFICIENCYDURATION}.</VV_GeneDefHoneyNeedDurationDesc>
 <VV_LastHoneyIngestedDurationAgo>Last consumed honey {DURATION} ago.</VV_LastHoneyIngestedDurationAgo>
 
@@ -38,6 +48,7 @@
 <VV_FailReason_RitualCooldown>Ritual on cooldown. It will be available in {0}.</VV_FailReason_RitualCooldown>
 
 <VV_FailReason_HasNoFairyVivi>No fairy vivi following</VV_FailReason_HasNoFairyVivi>
+<VV_FailReason_HasMaterializedFairyVivi>Cannot restore a fairy vivi while any fairy vivi is materialized</VV_FailReason_HasMaterializedFairyVivi>
 <VV_FailReason_FairyViviFull>Fairy vivi limit reached</VV_FailReason_FairyViviFull>
 <VV_FailReason_NotRoyalVivi>Not royal vivi</VV_FailReason_NotRoyalVivi>
 <VV_FailReason_NotAttunedEverflower>Not resonant to everflower</VV_FailReason_NotAttunedEverflower>
