@@ -73,9 +73,6 @@ namespace VVRace
         [Unsaved]
         private CompTrailRenderer _trailRenderer;
 
-        private static readonly FieldInfo TrailPointsField = typeof(CompTrailRenderer).GetField("points", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-        private static readonly FieldInfo TrailStartField = typeof(CompTrailRenderer).GetField("trailStart", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-
         public Pawn Owner => _owner;
         public FairyState State => _state;
         public FairyRole Role => CurrentJob.Role;
@@ -226,7 +223,7 @@ namespace VVRace
         {
             if (Scribe.mode == LoadSaveMode.Inactive)
             {
-                ClearToilTrail();
+                TrailRenderer?.ResetTrail();
             }
             _attackGraphicActive = false;
             _state = FairyState.Idle;
@@ -254,14 +251,15 @@ namespace VVRace
         // 빈 셀로 순간이동(대기 복귀/포위 배치 등에 사용). Phase 2에서 사용.
         public void TeleportTo(IntVec3 cell)
         {
-            if (Map == null) { return; }
+            var map = Map;
+            if (map == null) { return; }
 
             _attackGraphicActive = false;
-            PlayPhaseEffect();
+            PlayPhaseEffectAt(CurrentEffectCell(), map);
             Position = cell;
             _realPosition = CellCenter(cell);
             _drawAltitude = null;
-            PlayPhaseEffect();
+            PlayPhaseEffectAt(cell, map);
 
             _state = FairyState.Teleporting;
             _stateTicks = TeleportDurationTicks;
@@ -293,7 +291,7 @@ namespace VVRace
             _stateTicks = durationTicks;
             if (playPhaseEffect)
             {
-                PlayPhaseEffect();
+                PlayPhaseEffectAtCurrentPosition();
             }
         }
 
@@ -341,26 +339,6 @@ namespace VVRace
             TrailRenderer?.RegisterNewTrail(position);
         }
 
-        private void ClearToilTrail()
-        {
-            var trail = TrailRenderer;
-            if (trail == null) { return; }
-
-            var clearPosition = RealPosition;
-            var points = TrailPointsField?.GetValue(trail) as Vector3[];
-            if (points == null || points.Length == 0)
-            {
-                return;
-            }
-
-            for (int i = 0; i < points.Length; i++)
-            {
-                points[i] = clearPosition;
-            }
-
-            TrailStartField?.SetValue(trail, true);
-        }
-
         internal void ImpactToilTarget(Thing hitThing)
         {
             Impact(hitThing);
@@ -385,7 +363,7 @@ namespace VVRace
             if (hitThing == null || !hitThing.Spawned || hitThing.Map != Map || hitThing == _owner) { return; }
 
             float psy = _owner != null ? Mathf.Clamp(_owner.GetStatValue(StatDefOf.PsychicSensitivity), 0.5f, 10f) : 1f;
-            int dmg = Mathf.Max(1, Mathf.RoundToInt(Rand.Range(1f, 2f) * psy));
+            int dmg = Mathf.Max(1, Mathf.RoundToInt(1f * psy));
             float angle = _realDirection.AngleFlat();
 
             var dinfo = new DamageInfo(DamageDefOf.Blunt, dmg, 0f, angle, _owner, null, null, DamageInfo.SourceCategory.ThingOrUnknown, hitThing);
@@ -419,13 +397,34 @@ namespace VVRace
             map.flecks.CreateFleck(pierceData);
         }
 
-        private void PlayPhaseEffect()
+        private void PlayPhaseEffectAtCurrentPosition()
         {
-            if (Map == null) { return; }
+            var map = Map;
+            if (map == null) { return; }
+
+            PlayPhaseEffectAt(CurrentEffectCell(), map);
+        }
+
+        private IntVec3 CurrentEffectCell()
+        {
+            var cell = _realPosition.ToIntVec3();
+            var map = Map;
+            if (map != null && cell.IsValid && cell.InBounds(map))
+            {
+                return cell;
+            }
+
+            return Position;
+        }
+
+        private static void PlayPhaseEffectAt(IntVec3 cell, Map map)
+        {
+            if (map == null || !cell.IsValid || !cell.InBounds(map)) { return; }
+
             var effecter = VVEffecterDefOf.VV_Effecter_FairyPhase;
             if (effecter != null)
             {
-                effecter.Spawn(this, Map).Cleanup();
+                effecter.Spawn(cell, map).Cleanup();
             }
         }
 

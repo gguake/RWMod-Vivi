@@ -20,7 +20,7 @@
     <graphicData>
       <texPath>Things/Mote/VV_Fairy/VV_Fairy</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
-      <shaderType>MoteGlow</shaderType>
+      <shaderType>AdditiveChangeHue</shaderType>
       <drawSize>0.5</drawSize>
       <color>(1, 1, 1, 0.8)</color>
     </graphicData>
@@ -39,6 +39,10 @@
         <lineTextureMode>DistributePerSegment</lineTextureMode>
         <maxTrailPoint>40</maxTrailPoint>
         <refreshIntervalTicks>0</refreshIntervalTicks>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>1</glowRadius>
+        <glowColor>(255,255,200,0)</glowColor>
       </li>
     </comps>
   </ThingDef>

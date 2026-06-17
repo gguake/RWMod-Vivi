@@ -1,10 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
 
+  <ThingDef ParentName="MoteBase">
+    <defName>VV_Mote_FairyPhaseRing</defName>
+    <thingClass>MoteAttached</thingClass>
+    <altitudeLayer>MoteOverheadLow</altitudeLayer>
+    <mote>
+      <fadeInTime>0.03</fadeInTime>
+      <solidTime>0.03</solidTime>
+      <fadeOutTime>0.28</fadeOutTime>
+      <growthRate>0.45</growthRate>
+    </mote>
+    <graphicData>
+      <texPath>VFX/VV_FairyPhaseRing</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <color>(1, 1, 1, 0.7)</color>
+      <drawSize>(0.9, 0.9)</drawSize>
+    </graphicData>
+  </ThingDef>
+
+  <ThingDef ParentName="MoteBase">
+    <defName>VV_Mote_FairyPhaseDistortion</defName>
+    <thingClass>MoteAttached</thingClass>
+    <altitudeLayer>MoteOverheadLow</altitudeLayer>
+    <mote>
+      <fadeInTime>0.03</fadeInTime>
+      <solidTime>0.03</solidTime>
+      <fadeOutTime>0.28</fadeOutTime>
+      <growthRate>0.45</growthRate>
+    </mote>
+    <graphicData>
+      <texPath>Things/Mote/Black</texPath>
+      <graphicClass>Graphic_MoteWithAgeSecs</graphicClass>
+      <color>(1, 0.9, 0.65, 0.9)</color>
+      <shaderType>MoteLargeDistortionWave</shaderType>
+      <shaderParameters>
+        <_DistortionTex>/Things/Mote/PsychicDistortionCurrents</_DistortionTex>
+        <_NoiseTex>/Things/Mote/PsycastNoise</_NoiseTex>
+        <_distortionIntensity>0.25</_distortionIntensity>
+        <_brightnessMultiplier>5.15</_brightnessMultiplier>
+      </shaderParameters>
+      <drawSize>(0.5, 0.5)</drawSize>
+    </graphicData>
+  </ThingDef>
+
+  <ThingDef ParentName="MoteBase">
+    <defName>VV_Mote_FairyPhaseFlash</defName>
+    <thingClass>MoteAttached</thingClass>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <mote>
+      <fadeInTime>0.01</fadeInTime>
+      <solidTime>0.04</solidTime>
+      <fadeOutTime>0.22</fadeOutTime>
+    </mote>
+    <graphicData>
+      <texPath>Things/Mote/BrightFlash</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <color>(1, 0.95, 0.75, 0.55)</color>
+      <drawSize>(0.7, 0.7)</drawSize>
+    </graphicData>
+  </ThingDef>
+
   <!-- 요정 비비 생성/소멸/순간이동 공통 영원꽃 이펙트. (한 번 트리거되고 정리되는 경량 버스트) -->
   <EffecterDef>
     <defName>VV_Effecter_FairyPhase</defName>
-    <maintainTicks>30</maintainTicks>
+    <maintainTicks>18</maintainTicks>
     <children>
       <li>
         <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
@@ -13,22 +73,33 @@
       </li>
       <li>
         <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
-        <moteDef>VV_Mote_VV_EverflowerRitualCircle</moteDef>
+        <moteDef>VV_Mote_FairyPhaseRing</moteDef>
         <spawnLocType>OnSource</spawnLocType>
-        <scale>0.5</scale>
+        <scale>1</scale>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>VV_Mote_FairyPhaseDistortion</moteDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>1</scale>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>VV_Mote_FairyPhaseFlash</moteDef>
+        <spawnLocType>OnSource</spawnLocType>
       </li>
       <li>
         <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
         <fleckDef>VV_Fleck_EverflowerPetal_Burst</fleckDef>
         <spawnLocType>OnSource</spawnLocType>
-        <burstCount>8~14</burstCount>
-        <positionRadius>0.2</positionRadius>
+        <burstCount>6~10</burstCount>
+        <positionRadius>0.12</positionRadius>
         <angle>0~360</angle>
         <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
-        <speed>0.8~1.8</speed>
+        <speed>0.35~0.9</speed>
         <rotation>0~360</rotation>
-        <rotationRate>-260~260</rotationRate>
-        <scale>0.15~0.35</scale>
+        <rotationRate>-180~180</rotationRate>
+        <scale>0.06~0.13</scale>
       </li>
     </children>
   </EffecterDef>
