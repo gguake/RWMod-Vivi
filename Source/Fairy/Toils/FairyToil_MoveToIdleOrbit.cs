@@ -8,6 +8,7 @@ namespace VVRace
         private Vector3 targetPosition;
         private int teleportTicksLeft;
         private bool curvedReturn;
+        private bool targetConfigured;
 
         public FairyToil_MoveToIdleOrbit() { }
 
@@ -15,11 +16,13 @@ namespace VVRace
         {
             this.targetPosition = targetPosition.Yto0();
             curvedReturn = true;
+            targetConfigured = true;
         }
 
         public void ConfigureStepTarget(Vector3 targetPosition)
         {
             this.targetPosition = targetPosition.Yto0();
+            targetConfigured = true;
         }
 
         protected override void OnStarted()
@@ -43,6 +46,11 @@ namespace VVRace
                     Fairy?.EnterIdleFromToil();
                 }
                 return result;
+            }
+
+            if (!targetConfigured || delta <= 0)
+            {
+                return FairyToilStatus.Running;
             }
 
             TickFollowStep(delta);
@@ -104,6 +112,7 @@ namespace VVRace
             Scribe_Values.Look(ref targetPosition, "targetPosition");
             Scribe_Values.Look(ref teleportTicksLeft, "teleportTicksLeft");
             Scribe_Values.Look(ref curvedReturn, "curvedReturn");
+            Scribe_Values.Look(ref targetConfigured, "targetConfigured");
         }
     }
 }

@@ -5,8 +5,8 @@ namespace VVRace
 {
     public abstract class FairyToil_CurvedMove : FairyToil
     {
-        protected const float DefaultSpeed = 60f;
-        private const float RefreshInterval = 25f;
+        protected const float DefaultSpeed = 40f;
+        private const float RefreshInterval = 10f;
         private const float BezierWeight = 20f;
         private const int BezierLengthInterval = 4;
 
@@ -19,7 +19,7 @@ namespace VVRace
         private float appliedSpeed = DefaultSpeed;
         private bool moveInitialized;
 
-        protected void SetMoveTarget(Vector3 end, float speed)
+        protected void SetMoveTarget(Vector3 end, float speed, float? curveOffsetOverride = null)
         {
             var fairy = Fairy;
             if (fairy == null || fairy.Destroyed)
@@ -39,6 +39,7 @@ namespace VVRace
 
             curDirectionOutVector = fairy.RealDirection.sqrMagnitude > 0.0001f ? fairy.RealDirection.normalized : dir;
             curDirectionInVector = dir;
+            ApplyFairyCurveVariation(fairy, dir, curveOffsetOverride);
             totalMoveDistance = CalculateBezierCurveLengthApproximate(
                 moveStartPosition,
                 moveEndPosition,
@@ -46,6 +47,25 @@ namespace VVRace
                 curDirectionInVector * BezierWeight);
             curMoveDistance = 0f;
             moveInitialized = true;
+        }
+
+        private void ApplyFairyCurveVariation(ViviFairy fairy, Vector3 baseDirection, float? curveOffsetOverride)
+        {
+            if (fairy == null)
+            {
+                return;
+            }
+
+            var side = new Vector3(-baseDirection.z, 0f, baseDirection.x);
+            if (side.sqrMagnitude < 0.0001f)
+            {
+                return;
+            }
+
+            side.Normalize();
+            float offset = curveOffsetOverride.HasValue ? curveOffsetOverride.Value : fairy.MotionCurveOffsetFactor;
+            curDirectionOutVector = (curDirectionOutVector + side * offset).normalized;
+            curDirectionInVector = (curDirectionInVector - side * offset * 0.65f).normalized;
         }
 
         protected FairyToilStatus AdvanceMove(int delta, bool registerTrail)
@@ -76,7 +96,6 @@ namespace VVRace
                     return OnArrived(position);
                 }
 
-                curMoveDistance += moves;
                 position = CalculateBezierCurvePoint(
                     moveStartPosition,
                     moveEndPosition,
@@ -89,6 +108,7 @@ namespace VVRace
                     fairy.RegisterToilTrail(position);
                 }
 
+                curMoveDistance += moves;
                 totalCost -= moves;
             }
 

@@ -1,3 +1,4 @@
+using RimWorld;
 using UnityEngine;
 using Verse;
 
@@ -6,6 +7,7 @@ namespace VVRace
     public class FairyToil_Teleport : FairyToil
     {
         private IntVec3 cell;
+        private Thing lookTarget;
         private int ticksLeft;
 
         public FairyToil_Teleport() { }
@@ -16,9 +18,19 @@ namespace VVRace
             ticksLeft = ViviFairy.TeleportDurationTicks;
         }
 
+        public FairyToil_Teleport(IntVec3 cell, Thing lookTarget) : this(cell)
+        {
+            this.lookTarget = lookTarget;
+        }
+
         protected override void OnStarted()
         {
-            Fairy?.TeleportTo(cell);
+            var fairy = Fairy;
+            fairy?.TeleportTo(cell);
+            if (fairy != null && lookTarget != null && lookTarget.Spawned && lookTarget.Map == fairy.Map)
+            {
+                fairy.FaceTowards(lookTarget.TrueCenter());
+            }
             if (ticksLeft <= 0)
             {
                 ticksLeft = ViviFairy.TeleportDurationTicks;
@@ -42,6 +54,7 @@ namespace VVRace
         {
             base.ExposeData();
             Scribe_Values.Look(ref cell, "cell");
+            Scribe_References.Look(ref lookTarget, "lookTarget");
             Scribe_Values.Look(ref ticksLeft, "ticksLeft", ViviFairy.TeleportDurationTicks);
         }
     }

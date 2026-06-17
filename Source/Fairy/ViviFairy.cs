@@ -1,5 +1,6 @@
 using RimWorld;
 using RPEF;
+using System.Reflection;
 using UnityEngine;
 using Verse;
 
@@ -52,26 +53,48 @@ namespace VVRace
         private Vector3 _realPosition;
         private Vector3 _realDirection = Vector3.forward;
         private Rot4 _facing = Rot4.South;
+        private bool _orbitVariationInitialized;
+        private int _orbitDirection = 1;
+        private float _orbitPhaseOffset;
+        private float _orbitSpeedFactor = 1f;
+        private float _orbitRadiusXFactor = 1f;
+        private float _orbitRadiusZFactor = 1f;
+        private bool _orbitShapeVariationInitialized;
+        private float _orbitTiltAngle;
+        private float _motionCurveOffsetFactor;
         [Unsaved]
         private float? _drawAltitude;
 
         // 돌진 공격 상태.
         [Unsaved]
+        private bool _attackGraphicActive;
+        [Unsaved]
         private Graphic _attackGraphicCached;
         [Unsaved]
         private CompTrailRenderer _trailRenderer;
+
+        private static readonly FieldInfo TrailPointsField = typeof(CompTrailRenderer).GetField("points", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+        private static readonly FieldInfo TrailStartField = typeof(CompTrailRenderer).GetField("trailStart", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
 
         public Pawn Owner => _owner;
         public FairyState State => _state;
         public FairyRole Role => CurrentJob.Role;
         internal Vector3 RealPosition => _realPosition.Yto0();
         internal Vector3 RealDirection => _realDirection;
+        internal int OrbitDirection { get { EnsureOrbitVariation(); return _orbitDirection; } }
+        internal float OrbitPhaseOffset { get { EnsureOrbitVariation(); return _orbitPhaseOffset; } }
+        internal float OrbitSpeedFactor { get { EnsureOrbitVariation(); return _orbitSpeedFactor; } }
+        internal float OrbitRadiusXFactor { get { EnsureOrbitVariation(); return _orbitRadiusXFactor; } }
+        internal float OrbitRadiusZFactor { get { EnsureOrbitVariation(); return _orbitRadiusZFactor; } }
+        internal float OrbitTiltAngle { get { EnsureOrbitVariation(); return _orbitTiltAngle; } }
+        internal float MotionCurveOffsetFactor { get { EnsureOrbitVariation(); return _motionCurveOffsetFactor; } }
 
         // 능력에 배정된 요정은 '행동중'으로 간주(Gizmo 빨강, 다른 능력에 사용 불가).
         public bool InAction => Role != FairyRole.None;
         // 새 명령에 사용 가능한 요정: 대기 상태이며 어떤 세션에도 배정되지 않음.
         public bool IsAvailable => _state == FairyState.Idle && CurrentJob.Kind == FairyJobKind.Idle;
         public bool LifespanExpired => GenTicks.TicksGame - _spawnTick >= _lifespanTicks;
+
 
         public CompViviFairyController Controller => _owner != null ? _owner.GetComp<CompViviFairyController>() : null;
         public FairyJob CurrentJob
@@ -152,7 +175,7 @@ namespace VVRace
         {
             get
             {
-                if (_state == FairyState.Attacking)
+                if (_state == FairyState.Attacking || _attackGraphicActive)
                 {
                     return AttackGraphic;
                 }
@@ -176,6 +199,7 @@ namespace VVRace
             _owner = owner;
             _lifespanTicks = lifespanTicks;
             _spawnTick = GenTicks.TicksGame;
+            EnsureOrbitVariation();
         }
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
@@ -184,7 +208,7 @@ namespace VVRace
 
             if (!respawningAfterLoad)
             {
-                _realPosition = this.TrueCenter();
+                _realPosition = CellCenter(Position);
             }
             else
             {
@@ -200,6 +224,11 @@ namespace VVRace
 
         private void EnterIdle()
         {
+            if (Scribe.mode == LoadSaveMode.Inactive)
+            {
+                ClearToilTrail();
+            }
+            _attackGraphicActive = false;
             _state = FairyState.Idle;
             _stateTicks = 0;
         }
@@ -227,9 +256,10 @@ namespace VVRace
         {
             if (Map == null) { return; }
 
+            _attackGraphicActive = false;
             PlayPhaseEffect();
             Position = cell;
-            _realPosition = this.TrueCenter();
+            _realPosition = CellCenter(cell);
             _drawAltitude = null;
             PlayPhaseEffect();
 
@@ -237,9 +267,28 @@ namespace VVRace
             _stateTicks = TeleportDurationTicks;
         }
 
+        private static Vector3 CellCenter(IntVec3 cell)
+        {
+            return cell.ToVector3Shifted().Yto0();
+        }
+
+        internal void FaceTowards(Vector3 targetPosition)
+        {
+            var direction = (targetPosition - _realPosition).Yto0();
+            if (direction.sqrMagnitude <= 0.0001f)
+            {
+                return;
+            }
+
+            _realDirection = direction.normalized;
+            _facing = Rot4.FromAngleFlat(_realDirection.AngleFlat());
+            Rotation = _facing;
+        }
+
         internal void StartTimedState(FairyState state, int durationTicks, bool playPhaseEffect)
         {
             _drawAltitude = null;
+            _attackGraphicActive = state == FairyState.Attacking;
             _state = state;
             _stateTicks = durationTicks;
             if (playPhaseEffect)
@@ -262,6 +311,10 @@ namespace VVRace
 
             _drawAltitude = null;
             _state = state;
+            if (state == FairyState.Attacking)
+            {
+                _attackGraphicActive = true;
+            }
         }
 
         // 세션 액션이 계산한 실제 위치와 방향을 적용한다.
@@ -286,6 +339,26 @@ namespace VVRace
         internal void RegisterToilTrail(Vector3 position)
         {
             TrailRenderer?.RegisterNewTrail(position);
+        }
+
+        private void ClearToilTrail()
+        {
+            var trail = TrailRenderer;
+            if (trail == null) { return; }
+
+            var clearPosition = RealPosition;
+            var points = TrailPointsField?.GetValue(trail) as Vector3[];
+            if (points == null || points.Length == 0)
+            {
+                return;
+            }
+
+            for (int i = 0; i < points.Length; i++)
+            {
+                points[i] = clearPosition;
+            }
+
+            TrailStartField?.SetValue(trail, true);
         }
 
         internal void ImpactToilTarget(Thing hitThing)
@@ -353,6 +426,51 @@ namespace VVRace
             if (effecter != null)
             {
                 effecter.Spawn(this, Map).Cleanup();
+            }
+        }
+
+        private void EnsureOrbitVariation()
+        {
+            if (_orbitVariationInitialized && _orbitShapeVariationInitialized)
+            {
+                return;
+            }
+
+            if (!_orbitVariationInitialized)
+            {
+                Rand.PushState(Gen.HashCombineInt(thingIDNumber, 7919));
+                try
+                {
+                    _orbitDirection = Rand.Value < 0.5f ? -1 : 1;
+                    _orbitPhaseOffset = Rand.Range(0f, Mathf.PI * 2f);
+                    _orbitSpeedFactor = Rand.Range(0.72f, 1.28f);
+                    _orbitRadiusXFactor = Rand.Range(0.82f, 1.18f);
+                    _orbitRadiusZFactor = Rand.Range(0.82f, 1.18f);
+                    _orbitVariationInitialized = true;
+                }
+                finally
+                {
+                    Rand.PopState();
+                }
+            }
+
+            if (!_orbitShapeVariationInitialized)
+            {
+                Rand.PushState(Gen.HashCombineInt(thingIDNumber, 104729));
+                try
+                {
+                    _orbitTiltAngle = Rand.Range(0f, Mathf.PI);
+                    _motionCurveOffsetFactor = Rand.Range(-0.85f, 0.85f);
+                    if (Mathf.Abs(_motionCurveOffsetFactor) < 0.25f)
+                    {
+                        _motionCurveOffsetFactor += _motionCurveOffsetFactor < 0f ? -0.25f : 0.25f;
+                    }
+                    _orbitShapeVariationInitialized = true;
+                }
+                finally
+                {
+                    Rand.PopState();
+                }
             }
         }
 
@@ -449,9 +567,26 @@ namespace VVRace
             Scribe_Values.Look(ref _realPosition, "realPosition");
             Scribe_Values.Look(ref _realDirection, "realDirection", Vector3.forward);
             Scribe_Values.Look(ref _facing, "facing");
+            Scribe_Values.Look(ref _orbitVariationInitialized, "orbitVariationInitialized");
+            Scribe_Values.Look(ref _orbitDirection, "orbitDirection", 1);
+            Scribe_Values.Look(ref _orbitPhaseOffset, "orbitPhaseOffset");
+            Scribe_Values.Look(ref _orbitSpeedFactor, "orbitSpeedFactor", 1f);
+            Scribe_Values.Look(ref _orbitRadiusXFactor, "orbitRadiusXFactor", 1f);
+            Scribe_Values.Look(ref _orbitRadiusZFactor, "orbitRadiusZFactor", 1f);
+            Scribe_Values.Look(ref _orbitShapeVariationInitialized, "orbitShapeVariationInitialized");
+            Scribe_Values.Look(ref _orbitTiltAngle, "orbitTiltAngle");
+            Scribe_Values.Look(ref _motionCurveOffsetFactor, "motionCurveOffsetFactor");
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
+                if (_orbitDirection == 0)
+                {
+                    _orbitVariationInitialized = false;
+                }
+                if (!_orbitVariationInitialized || !_orbitShapeVariationInitialized)
+                {
+                    EnsureOrbitVariation();
+                }
                 if (_state == FairyState.Attacking || _state == FairyState.MovingToRest)
                 {
                     StopToilMotion();

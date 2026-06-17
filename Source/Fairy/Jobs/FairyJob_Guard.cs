@@ -48,22 +48,33 @@ namespace VVRace
         protected override void TickActiveBeforeToil(int delta)
         {
             var orbit = CurrentToilAs<FairyToil_IdleOrbit>();
-            if (orbit == null) { return; }
+            var move = CurrentToilAs<FairyToil_MoveToIdleOrbit>();
+            if (orbit == null && move == null) { return; }
 
-            orbit.Configure(ally, 0, 1);
+            orbit?.Configure(ally, 0, 1);
 
-            if (fairy == null || fairy.State != FairyState.Idle) { return; }
+            if (fairy == null) { return; }
+
+            Vector3 restPos = FairyJobUtility.OrbitPositionAround(fairy, ally, 0, 1);
+            move?.ConfigureStepTarget(restPos);
+
+            if (fairy.State != FairyState.Idle && fairy.State != FairyState.Attacking) { return; }
 
             var target = ViviFairyTargeting.FindHostileNear(
                 owner as IAttackTargetSearcher, ally.Position, GuardScanRadius, ally.Position, excludeDowned: true);
 
-            if (target == null) { return; }
+            if (target == null)
+            {
+                if (fairy.State == FairyState.Attacking)
+                {
+                    fairy.EnterIdleFromToil();
+                }
+                return;
+            }
 
-            Vector3 restPos = FairyJobUtility.OrbitPositionAround(fairy, ally, 0, 1);
             ResetToils(
                 new FairyToil_Attack(target),
-                new FairyToil_MoveToIdleOrbit(restPos),
-                new FairyToil_IdleOrbit(ally, 0, 1));
+                new FairyToil_MoveToIdleOrbit());
         }
 
         protected override void OnInterrupted(FairyJobInterruptReason reason)

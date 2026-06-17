@@ -41,23 +41,29 @@ namespace VVRace
                 return;
             }
 
-            orbitPhase += OrbitSpeed * delta;
             var move = CurrentToilAs<FairyToil_MoveToIdleOrbit>();
             if (move == null || fairy == null) { return; }
 
+            orbitPhase += OrbitSpeed * delta * fairy.OrbitSpeedFactor * fairy.OrbitDirection;
             Vector3 restPos = SlotPos();
             move.ConfigureStepTarget(restPos);
 
-            if (fairy.State != FairyState.Idle) { return; }
+            if (fairy.State != FairyState.Idle && fairy.State != FairyState.Attacking) { return; }
 
             var target = ViviFairyTargeting.FindHostileNear(
                 owner as IAttackTargetSearcher, owner.Position, ExpansionRadius, owner.Position, excludeDowned: false);
 
-            if (target == null) { return; }
+            if (target == null)
+            {
+                if (fairy.State == FairyState.Attacking)
+                {
+                    fairy.EnterIdleFromToil();
+                }
+                return;
+            }
 
             ResetToils(
                 new FairyToil_Attack(target),
-                new FairyToil_MoveToIdleOrbit(restPos),
                 new FairyToil_MoveToIdleOrbit());
         }
 
@@ -75,8 +81,10 @@ namespace VVRace
         private Vector3 SlotPos()
         {
             Vector3 center = owner.DrawPos.Yto0();
-            float ang = (Mathf.PI / 3f) * slot + orbitPhase;
-            return center + new Vector3(Mathf.Cos(ang), 0f, Mathf.Sin(ang)) * HexRadius;
+            float radiusFactor = fairy != null ? (fairy.OrbitRadiusXFactor + fairy.OrbitRadiusZFactor) * 0.5f : 1f;
+            float phaseOffset = fairy != null ? fairy.OrbitPhaseOffset : 0f;
+            float ang = (Mathf.PI / 3f) * slot + orbitPhase + phaseOffset;
+            return center + new Vector3(Mathf.Cos(ang), 0f, Mathf.Sin(ang)) * HexRadius * radiusFactor;
         }
 
         public override void ExposeData()

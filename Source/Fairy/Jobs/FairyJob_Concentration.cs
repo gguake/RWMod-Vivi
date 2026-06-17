@@ -38,7 +38,7 @@ namespace VVRace
             }
 
             ResetToils(
-                new FairyToil_Teleport(cell),
+                new FairyToil_Teleport(cell, target),
                 new FairyToil_Wait(Mathf.Max(0, SpreadWaitTicks - ViviFairy.TeleportDurationTicks)),
                 new FairyToil_MoveToIdleOrbit());
         }
@@ -69,14 +69,15 @@ namespace VVRace
             }
 
             var move = CurrentToilAs<FairyToil_MoveToIdleOrbit>();
-            if (move == null || fairy == null || fairy.State != FairyState.Idle) { return; }
+            if (move == null || fairy == null) { return; }
 
             Vector3 restPos = SlotPos(target.TrueCenter().Yto0(), slot);
             move.ConfigureStepTarget(restPos);
 
+            if (fairy.State != FairyState.Idle && fairy.State != FairyState.Attacking) { return; }
+
             ResetToils(
                 new FairyToil_Attack(target),
-                new FairyToil_MoveToIdleOrbit(restPos),
                 new FairyToil_MoveToIdleOrbit());
         }
 

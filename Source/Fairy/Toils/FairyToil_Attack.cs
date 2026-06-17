@@ -6,8 +6,13 @@ namespace VVRace
 {
     public class FairyToil_Attack : FairyToil_CurvedMove
     {
+        private const float AttackCurveOffsetMin = 0.45f;
+        private const float AttackCurveOffsetMax = 1.25f;
+
         private Thing target;
         private bool invalid;
+        private bool attackCurveInitialized;
+        private float attackCurveOffset;
 
         public FairyToil_Attack() { }
 
@@ -25,8 +30,24 @@ namespace VVRace
                 return;
             }
 
-            SetMoveTarget(target.TrueCenter().Yto0(), DefaultSpeed);
+            EnsureAttackCurve();
+            SetMoveTarget(target.TrueCenter().Yto0(), DefaultSpeed, attackCurveOffset);
             fairy.BeginToilMotion(FairyState.Attacking);
+        }
+
+        private void EnsureAttackCurve()
+        {
+            if (attackCurveInitialized)
+            {
+                return;
+            }
+
+            attackCurveOffset = Rand.Range(AttackCurveOffsetMin, AttackCurveOffsetMax);
+            if (Rand.Value < 0.5f)
+            {
+                attackCurveOffset *= -1f;
+            }
+            attackCurveInitialized = true;
         }
 
         protected override FairyToilStatus TickAction(int delta)
@@ -58,6 +79,7 @@ namespace VVRace
             }
 
             fairy.RegisterToilTrail(previousPosition);
+            fairy.RegisterToilTrail(fairy.RealPosition);
 
             var hit = target;
             target = null;
@@ -74,6 +96,8 @@ namespace VVRace
             base.ExposeData();
             Scribe_References.Look(ref target, "target");
             Scribe_Values.Look(ref invalid, "invalid");
+            Scribe_Values.Look(ref attackCurveInitialized, "attackCurveInitialized");
+            Scribe_Values.Look(ref attackCurveOffset, "attackCurveOffset");
         }
     }
 }
