@@ -27,9 +27,9 @@
 
     <comps>
       <li Class="RPEF.CompProperties_TrailRenderer">
-        <texPath>VFX/VV_NeedleTrail</texPath>
+        <texPath>VFX/VV_FairySpearTrail</texPath>
         <shader>AdditiveChangeHue</shader>
-        <color>(0.8, 0.95, 1.0)</color>
+        <color>(1.0, 0.96, 0.86)</color>
         <widthCurve>
           <points>
             <li>(0, 0)</li>

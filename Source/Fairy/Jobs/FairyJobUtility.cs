@@ -28,18 +28,33 @@ namespace VVRace
             var props = fairy.Controller?.Props;
             if (props == null || centerPawn == null || !centerPawn.Spawned || centerPawn.Map != fairy.Map) { return; }
 
-            float angle = OrbitAngle(fairy, props, GenTicks.TicksGame, slot, count);
+            float angle = IdleOrbitAngle(props, GenTicks.TicksGame, slot, count);
             float cos = Mathf.Cos(angle);
             float sin = Mathf.Sin(angle);
-            float radiusX = props.orbitRadiusX * fairy.OrbitRadiusXFactor;
-            float radiusZ = props.orbitRadiusZ * fairy.OrbitRadiusZFactor;
+            float radiusX = props.orbitRadiusX;
+            float radiusZ = props.orbitRadiusZ;
 
-            var orbit = centerPawn.DrawPos.Yto0() + RotateOrbitVector(new Vector3(cos * radiusX, 0f, sin * radiusZ), fairy.OrbitTiltAngle);
-            var tangent = RotateOrbitVector(new Vector3(-sin * radiusX, 0f, cos * radiusZ), fairy.OrbitTiltAngle) * fairy.OrbitDirection;
+            var orbit = centerPawn.DrawPos.Yto0() + new Vector3(cos * radiusX, 0f, sin * radiusZ);
+            var tangent = new Vector3(-sin * radiusX, 0f, cos * radiusZ);
             var drawAltitude = OrbitDrawAltitude(orbit, centerPawn.DrawPos, props);
 
             fairy.SetToilPosition(orbit, tangent, drawAltitude);
         }
+
+        public static Vector3 IdleOrbitPositionAround(ViviFairy fairy, Pawn centerPawn, int slot, int count)
+        {
+            var props = fairy?.Controller?.Props;
+            if (props == null || fairy == null || centerPawn == null || !centerPawn.Spawned || centerPawn.Map != fairy.Map)
+            {
+                return fairy != null ? fairy.RealPosition.Yto0() : Vector3.zero;
+            }
+
+            float angle = IdleOrbitAngle(props, GenTicks.TicksGame, slot, count);
+            float cos = Mathf.Cos(angle);
+            float sin = Mathf.Sin(angle);
+            return centerPawn.DrawPos.Yto0() + new Vector3(cos * props.orbitRadiusX, 0f, sin * props.orbitRadiusZ);
+        }
+
         private static float OrbitDrawAltitude(Vector3 orbit, Vector3 center, CompProperties_ViviFairyController props)
         {
             float radiusZ = Mathf.Max(0.0001f, props.orbitRadiusZ);
@@ -63,6 +78,13 @@ namespace VVRace
             float slotOffset = slot * (Mathf.PI * 2f / Mathf.Max(1, count));
             float motion = clockTicks * props.orbitAngularSpeed * fairy.OrbitSpeedFactor * fairy.OrbitDirection;
             return motion + slotOffset + fairy.OrbitPhaseOffset;
+        }
+
+        private static float IdleOrbitAngle(CompProperties_ViviFairyController props, float clockTicks, int slot, int count)
+        {
+            float slotOffset = slot * (Mathf.PI * 2f / Mathf.Max(1, count));
+            float motion = clockTicks * props.orbitAngularSpeed;
+            return motion + slotOffset;
         }
 
     }

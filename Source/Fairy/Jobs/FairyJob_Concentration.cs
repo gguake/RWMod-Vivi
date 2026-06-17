@@ -75,6 +75,7 @@ namespace VVRace
             move.ConfigureStepTarget(restPos);
 
             if (fairy.State != FairyState.Idle && fairy.State != FairyState.Attacking) { return; }
+            if (fairy.State != FairyState.Attacking && !move.IsNearStepTarget(0.35f)) { return; }
 
             ResetToils(
                 new FairyToil_Attack(target),

@@ -22,7 +22,7 @@ namespace VVRace
 
         protected override void MakeToils()
         {
-            ResetToils(new FairyToil_IdleOrbit(ally, 0, 1));
+            ResetToils(new FairyToil_MoveToIdleOrbit());
         }
 
         protected override bool TryGetInterruptReason(out FairyJobInterruptReason reason)
@@ -71,6 +71,7 @@ namespace VVRace
                 }
                 return;
             }
+            if (fairy.State != FairyState.Attacking && move != null && !move.IsNearStepTarget(0.35f)) { return; }
 
             ResetToils(
                 new FairyToil_Attack(target),

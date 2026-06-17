@@ -61,6 +61,7 @@ namespace VVRace
                 }
                 return;
             }
+            if (fairy.State != FairyState.Attacking && !move.IsNearStepTarget(0.35f)) { return; }
 
             ResetToils(
                 new FairyToil_Attack(target),

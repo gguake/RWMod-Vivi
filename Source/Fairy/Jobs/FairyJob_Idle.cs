@@ -12,15 +12,27 @@ namespace VVRace
 
         public FairyJob_Idle(Pawn owner) : base(0, owner) { }
 
+        internal override void NotifyAssigned(ViviFairy fairy)
+        {
+            base.NotifyAssigned(fairy);
+            if (toils != null && toils.Count == 1 && toils[0] is FairyToil_MoveToIdleOrbit)
+            {
+                MakeToils();
+            }
+        }
+
         protected override void MakeToils()
         {
-            ResetToils(new FairyToil_IdleOrbit(owner, 0, 1));
+            ResetToils(
+                new FairyToil_MoveToIdleOrbit(completeWhenNear: true),
+                new FairyToil_IdleOrbit());
         }
 
         protected override void TickActiveBeforeToil(int delta)
         {
+            var move = CurrentToilAs<FairyToil_MoveToIdleOrbit>();
             var orbit = CurrentToilAs<FairyToil_IdleOrbit>();
-            if (orbit == null) { return; }
+            if ((move == null && orbit == null) || fairy == null) { return; }
 
             int slot = 0;
             int count = 1;
@@ -28,7 +40,7 @@ namespace VVRace
             if (ctrl != null)
             {
                 var idleFairies = ctrl.ActiveFairies
-                    .Where(f => f != null && !f.Destroyed && f.Spawned && f.CurrentJob.Kind == FairyJobKind.Idle && f.State == FairyState.Idle)
+                    .Where(f => f != null && !f.Destroyed && f.Spawned && f.CurrentJob.Kind == FairyJobKind.Idle)
                     .OrderBy(f => f.thingIDNumber)
                     .ToList();
                 count = Mathf.Max(1, idleFairies.Count);
@@ -36,7 +48,8 @@ namespace VVRace
                 slot = index >= 0 ? index : 0;
             }
 
-            orbit.Configure(owner, slot, count);
+            move?.ConfigureStepTarget(FairyJobUtility.IdleOrbitPositionAround(fairy, owner, slot, count));
+            orbit?.Configure(owner, slot, count);
         }
 
         protected override void OnInterrupted(FairyJobInterruptReason reason)
