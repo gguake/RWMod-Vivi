@@ -56,8 +56,8 @@ namespace VVRace
             if (ally == null || ctrl == null) { return; }
             if (!ctrl.TryReserveIdleFairies(1, FairyRole.Guard, out var reserved)) { return; }
 
-            int id = ctrl.NextSessionId();
-            ctrl.AddSession(new GuardSession(id, parent.pawn, reserved, ally));
+            int id = ctrl.NextJobId();
+            reserved[0].StartJob(new FairyJob_Guard(id, parent.pawn, ally));
 
             var hediff = (Hediff_FairyGuarded)ally.health.AddHediff(VVHediffDefOf.VV_FairyGuarded);
             hediff.ownerVivi = parent.pawn;
@@ -107,8 +107,11 @@ namespace VVRace
             if (enemy == null || ctrl == null) { return; }
             if (!ctrl.TryReserveIdleFairies(3, FairyRole.Concentration, out var reserved)) { return; }
 
-            int id = ctrl.NextSessionId();
-            ctrl.AddSession(new ConcentrationSession(id, parent.pawn, reserved, enemy));
+            int id = ctrl.NextJobId();
+            for (int i = 0; i < reserved.Count; i++)
+            {
+                reserved[i].StartJob(new FairyJob_Concentration(id, parent.pawn, enemy, i, reserved.Count));
+            }
 
             enemy.health.AddHediff(VVHediffDefOf.VV_FairyConcentrated);
         }
@@ -155,24 +158,27 @@ namespace VVRace
             var ctrl = Controller;
             if (ctrl == null) { return; }
 
-            var active = ctrl.GetActiveSession<ExpansionSession>();
+            var active = ctrl.GetActiveJob<FairyJob_Expansion>();
             if (active != null)
             {
-                active.End();
+                ctrl.InterruptJob(active.id, FairyJobInterruptReason.AbilityToggledOff);
                 return;
             }
 
             if (!ctrl.TryReserveIdleFairies(RequiredFairies, FairyRole.Expansion, out var reserved)) { return; }
 
-            int id = ctrl.NextSessionId();
-            ctrl.AddSession(new ExpansionSession(id, parent.pawn, reserved));
+            int id = ctrl.NextJobId();
+            for (int i = 0; i < reserved.Count; i++)
+            {
+                reserved[i].StartJob(new FairyJob_Expansion(id, parent.pawn, i, reserved.Count));
+            }
         }
 
         public override bool GizmoDisabled(out string reason)
         {
             var ctrl = Controller;
             // 이미 전개 중이면 토글 해제 가능하므로 활성.
-            if (ctrl != null && ctrl.GetActiveSession<ExpansionSession>() != null)
+            if (ctrl != null && ctrl.GetActiveJob<FairyJob_Expansion>() != null)
             {
                 reason = null;
                 return false;

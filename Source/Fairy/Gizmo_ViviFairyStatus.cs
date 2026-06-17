@@ -5,12 +5,9 @@ using Verse;
 
 namespace VVRace
 {
-    // 실체화된 요정 비비 상태를 메카니터 대역폭 UI처럼 표시한다.
-    // 요정 1기당 작은 사각형. 대기중=흰색, 행동중=빨강.
     [StaticConstructorOnStartup]
     public class Gizmo_ViviFairyStatus : Gizmo
     {
-        private const float Height = 75f;
         private const float CellSize = 13f;
         private const float CellGap = 4f;
         private const float Padding = 8f;
@@ -52,8 +49,7 @@ namespace VVRace
                     LocalizeString_Gizmo.VV_Gizmo_FairyStatusHeader.Translate());
             }
 
-            // 행동중 요정을 앞쪽에 모아 안정적으로 표시(빨강 먼저, 흰색 다음, 빈 슬롯 마지막).
-            List<ViviFairy> ordered = _comp.ActiveFairies
+            var ordered = _comp.ActiveFairies
                 .Where(f => f != null && !f.Destroyed)
                 .OrderByDescending(f => f.InAction)
                 .ToList();

@@ -32,17 +32,10 @@ namespace VVRace
         public const int DematerializeDurationTicks = 60;
         public const int TeleportDurationTicks = 20;
 
-        // 대기 시 이동 관련 상수. (궤도 모양/속도는 CompProperties_ViviFairyController로 이동)
-        private const float IdleFollowSpeed = 0.1f;        // 따라잡는 속도(셀/틱)
-        private const float IdleTeleportDistance = 9f;      // 이보다 멀어지면 순간이동으로 복귀
-
         // 행동중인데도 수명이 지나 대기로 못 돌아오는 경우를 대비한 강제 소멸 여유분.
         private const int LifespanHardCapExtraTicks = 5000;
 
-        // 돌진 공격(베지어) 관련 상수. Needle 구현을 차용.
-        private const float RefreshInterval = 25f;
-        private const float BezierWeight = 20f;
-        public const float DefaultDashSpeed = 60f;
+        // 돌진 공격 피해 처리. 이동 상태와 속도는 세션이 소유한다.
         private const int StaggerStunAmount = 12;
 
         private Pawn _owner;
@@ -54,44 +47,41 @@ namespace VVRace
         private bool _wantsDematerialize;
         private bool _applyAssimilationOnDematerialize = true;
         private FairyRole _role = FairyRole.None;
+        private FairyJob _job;
 
         private Vector3 _realPosition;
         private Vector3 _realDirection = Vector3.forward;
         private Rot4 _facing = Rot4.South;
+        [Unsaved]
+        private float? _drawAltitude;
 
         // 돌진 공격 상태.
-        private Thing _curTargetThing;
-        private Vector3 _restPosition;
-        private Vector3 _moveStartPosition;
-        private Vector3 _moveEndPosition;
-        private Vector3 _curDirectionOutVector;
-        private Vector3 _curDirectionInVector;
-        private float _totalMoveDistance;
-        private float _curMoveDistance;
-        private float _appliedSpeed;
-
         [Unsaved]
         private Graphic _attackGraphicCached;
         [Unsaved]
         private CompTrailRenderer _trailRenderer;
-        // 자유 대기 궤도 슬롯(컨트롤러가 매 틱 배정). 위치 계산은 요정 자신이 매 틱 수행.
-        [Unsaved]
-        private int _orbitSlot;
-        [Unsaved]
-        private int _orbitCount = 1;
-        [Unsaved]
-        private Pawn _drawOrbitCenter;
 
         public Pawn Owner => _owner;
         public FairyState State => _state;
-        public FairyRole Role => _role;
+        public FairyRole Role => CurrentJob.Role;
+        internal Vector3 RealPosition => _realPosition.Yto0();
+        internal Vector3 RealDirection => _realDirection;
+
         // 능력에 배정된 요정은 '행동중'으로 간주(Gizmo 빨강, 다른 능력에 사용 불가).
-        public bool InAction => _role != FairyRole.None;
+        public bool InAction => Role != FairyRole.None;
         // 새 명령에 사용 가능한 요정: 대기 상태이며 어떤 세션에도 배정되지 않음.
-        public bool IsAvailable => _state == FairyState.Idle && _role == FairyRole.None;
+        public bool IsAvailable => _state == FairyState.Idle && CurrentJob.Kind == FairyJobKind.Idle;
         public bool LifespanExpired => GenTicks.TicksGame - _spawnTick >= _lifespanTicks;
 
         public CompViviFairyController Controller => _owner != null ? _owner.GetComp<CompViviFairyController>() : null;
+        public FairyJob CurrentJob
+        {
+            get
+            {
+                EnsureJob();
+                return _job;
+            }
+        }
 
         // 매 틱 갱신(기본은 카메라 거리 기반 저빈도 틱이라 느린 회전이 끊겨 보임 → 항상 1로 고정).
         public override int UpdateRateTicks => 1;
@@ -99,16 +89,36 @@ namespace VVRace
         public void SetRole(FairyRole role)
         {
             _role = role;
-            if (role != FairyRole.Guard)
-            {
-                _drawOrbitCenter = null;
-            }
         }
 
-        public void SetOrbitSlot(int slot, int count)
+        internal void EnsureJob()
         {
-            _orbitSlot = slot;
-            _orbitCount = Mathf.Max(1, count);
+            if (_job == null || _job.Ended)
+            {
+                StartJob(new FairyJob_Idle(_owner));
+                return;
+            }
+
+            _job.NotifyAssigned(this);
+            _role = _job.Role;
+        }
+
+        public void StartJob(FairyJob job)
+        {
+            if (job == null)
+            {
+                job = new FairyJob_Idle(_owner);
+            }
+
+            if (_job != null && !_job.Ended && _job != job)
+            {
+                _job.NotifyReplaced();
+            }
+
+            _job = job;
+            _job.NotifyAssigned(this);
+            _role = _job.Role;
+            _job.StartCurrentToil();
         }
 
         private CompTrailRenderer TrailRenderer
@@ -154,38 +164,11 @@ namespace VVRace
         {
             get
             {
-                var props = Controller?.Props;
-                if (IsAvailable && props != null && _owner != null && _owner.Spawned && _owner.Map == Map)
-                {
-                    float angle = OrbitAngle(props, GenTicks.TicksGame);
-                    float cos = Mathf.Cos(angle);
-                    float sin = Mathf.Sin(angle);
-
-                    Vector3 center = _owner.DrawPos;   // 폰의 프레임 보간 위치(이동 중에도 부드럽게 추종)
-                    var orbit = center.Yto0() + new Vector3(cos * props.orbitRadiusX, 0f, sin * props.orbitRadiusZ);
-
-                    return ApplyOrbitDrawDepth(orbit, center, props);
-                }
-
                 // 그 외(행동중/순간이동/생성·소멸/세션 배정 등)는 _realPosition + MoteOverhead 수준으로.
                 var p = _realPosition;
-                if (_state == FairyState.Idle && props != null && _drawOrbitCenter != null && _drawOrbitCenter.Spawned && _drawOrbitCenter.Map == Map)
-                {
-                    return ApplyOrbitDrawDepth(p, _drawOrbitCenter.DrawPos, props);
-                }
-
-                p.y = AltitudeLayer.MoteOverhead.AltitudeFor();
+                p.y = _drawAltitude ?? AltitudeLayer.MoteOverhead.AltitudeFor();
                 return p;
             }
-        }
-
-        private Vector3 ApplyOrbitDrawDepth(Vector3 orbit, Vector3 center, CompProperties_ViviFairyController props)
-        {
-            float radiusZ = Mathf.Max(0.0001f, props.orbitRadiusZ);
-            float rel = Mathf.Clamp((center.z - orbit.z) / radiusZ, -1f, 1f);
-            float t = 0.5f + 0.5f * rel; // 0 = 뒤(북), 1 = 앞(남)
-            orbit.y = center.y + Mathf.Lerp(-props.orbitDepth, props.orbitDepth, t);
-            return orbit;
         }
 
         public void Initialize(Pawn owner, int lifespanTicks)
@@ -212,9 +195,7 @@ namespace VVRace
 
         public void BeginMaterialize()
         {
-            _state = FairyState.Materializing;
-            _stateTicks = MaterializeDurationTicks;
-            PlayPhaseEffect();
+            StartJob(new FairyJob_Materialize(_owner));
         }
 
         private void EnterIdle()
@@ -225,49 +206,20 @@ namespace VVRace
 
         // 컨트롤러가 매 틱 호출. 대기 상태 요정을 주어진 대형 위치로 부드럽게 이동시킨다.
         // 거리가 너무 멀면(주인 순간이동 등) 순간이동으로 복귀한다.
-        public void IdleFollowStep(Vector3 target, int delta)
-        {
-            if (_state != FairyState.Idle || Map == null) { return; }
-
-            _drawOrbitCenter = null;
-
-            Vector3 cur = _realPosition.Yto0();
-            Vector3 tar = target.Yto0();
-            Vector3 diff = tar - cur;
-            float dist = diff.magnitude;
-
-            if (dist > IdleTeleportDistance)
-            {
-                var cell = tar.ToIntVec3();
-                if (!cell.InBounds(Map))
-                {
-                    cell = (_owner != null && _owner.Spawned) ? _owner.Position : Position;
-                }
-                TeleportTo(cell);
-                return;
-            }
-
-            if (dist > 0.02f)
-            {
-                float step = IdleFollowSpeed * delta;
-                _realPosition += (step >= dist) ? diff : diff.normalized * step;
-
-                var cell = _realPosition.ToIntVec3();
-                if (cell.InBounds(Map) && cell != Position)
-                {
-                    Position = cell;
-                }
-            }
-        }
-
         public void BeginDematerialize(bool applyAssimilation)
         {
             if (_state == FairyState.Dematerializing) { return; }
 
             _applyAssimilationOnDematerialize = applyAssimilation;
-            _state = FairyState.Dematerializing;
-            _stateTicks = DematerializeDurationTicks;
-            PlayPhaseEffect();
+            if (_job != null && !_job.Ended && _job.Kind != FairyJobKind.Dematerialize)
+            {
+                _job.Interrupt(applyAssimilation ? FairyJobInterruptReason.LifespanExpired : FairyJobInterruptReason.DematerializeAll);
+            }
+            if (_job != null && !_job.Ended && _job.Kind == FairyJobKind.Dematerialize)
+            {
+                return;
+            }
+            StartJob(new FairyJob_Dematerialize(_owner, applyAssimilation));
         }
 
         // 빈 셀로 순간이동(대기 복귀/포위 배치 등에 사용). Phase 2에서 사용.
@@ -278,117 +230,80 @@ namespace VVRace
             PlayPhaseEffect();
             Position = cell;
             _realPosition = this.TrueCenter();
+            _drawAltitude = null;
             PlayPhaseEffect();
 
             _state = FairyState.Teleporting;
             _stateTicks = TeleportDurationTicks;
         }
 
-        // === 돌진 공격 (세션이 구동) ===
-
-        // 대상에게 빠르게 돌진해 관통 공격하고, 끝나면 restPos로 복귀한다.
-        public void StartDashAttack(Thing target, Vector3 restPos, float speed)
+        internal void StartTimedState(FairyState state, int durationTicks, bool playPhaseEffect)
         {
-            if (Map == null || target == null) { return; }
-
-            _curTargetThing = target;
-            _restPosition = restPos.Yto0();
-            _appliedSpeed = speed > 0f ? speed : DefaultDashSpeed;
-            SetMoveTarget(target.TrueCenter().Yto0());
-            _state = FairyState.Attacking;
-        }
-
-        // 공격하지 않고 지정 위치로 활주 복귀.
-        public void StartReturnTo(Vector3 restPos, float speed)
-        {
-            if (Map == null) { return; }
-
-            _curTargetThing = null;
-            _restPosition = restPos.Yto0();
-            _appliedSpeed = speed > 0f ? speed : DefaultDashSpeed;
-            SetMoveTarget(_restPosition);
-            _state = FairyState.MovingToRest;
-        }
-
-        private void SetMoveTarget(Vector3 end)
-        {
-            _moveStartPosition = _realPosition.Yto0();
-            _moveEndPosition = end.Yto0();
-
-            var dir = _moveEndPosition - _moveStartPosition;
-            if (dir.sqrMagnitude < 0.0001f) { dir = _realDirection; }
-            dir = dir.normalized;
-
-            _curDirectionOutVector = _realDirection.sqrMagnitude > 0.0001f ? _realDirection.normalized : dir;
-            _curDirectionInVector = dir;
-            _totalMoveDistance = CalculateBezierCurveLengthApproximate(_moveStartPosition, _moveEndPosition, _curDirectionOutVector * BezierWeight, _curDirectionInVector * BezierWeight);
-            _curMoveDistance = 0f;
-        }
-
-        private void AdvanceDash(int delta)
-        {
-            float totalCost = delta * _appliedSpeed;
-            var position = _realPosition;
-
-            while (totalCost > 0)
+            _drawAltitude = null;
+            _state = state;
+            _stateTicks = durationTicks;
+            if (playPhaseEffect)
             {
-                float moves = Mathf.Clamp(RefreshInterval, 0, totalCost);
-                bool approach = false;
-                if (moves >= _totalMoveDistance - _curMoveDistance)
-                {
-                    moves = _totalMoveDistance - _curMoveDistance;
-                    approach = true;
-                }
+                PlayPhaseEffect();
+            }
+        }
 
-                if (approach)
-                {
-                    _realPosition = _moveEndPosition;
-                    _realDirection = _curDirectionInVector;
+        internal void SetTimedStateTicks(int ticks)
+        {
+            _stateTicks = ticks;
+        }
 
-                    if (_state == FairyState.Attacking)
-                    {
-                        TrailRenderer?.RegisterNewTrail(position);
+        // === 세션 구동 이동 API ===
 
-                        var hit = _curTargetThing;
-                        _curTargetThing = null;
-                        if (hit != null && hit.Spawned && hit.Map == Map)
-                        {
-                            Impact(hit);
-                        }
+        // 세션 액션이 돌진/복귀 표시 상태를 시작한다.
+        internal void BeginToilMotion(FairyState state)
+        {
+            if (state != FairyState.Attacking && state != FairyState.MovingToRest) { return; }
 
-                        StartReturnTo(_restPosition, _appliedSpeed);
-                    }
-                    else
-                    {
-                        EnterIdle();
-                    }
-                    return;
-                }
-                else
-                {
-                    _curMoveDistance += moves;
-                    position = CalculateBezierCurvePoint(_moveStartPosition, _moveEndPosition, _curDirectionOutVector * BezierWeight, _curDirectionInVector * BezierWeight, _curMoveDistance / _totalMoveDistance);
-                    if (_state == FairyState.Attacking)
-                    {
-                        TrailRenderer?.RegisterNewTrail(position);
-                    }
-                }
+            _drawAltitude = null;
+            _state = state;
+        }
 
-                totalCost -= moves;
+        // 세션 액션이 계산한 실제 위치와 방향을 적용한다.
+        internal void SetToilPosition(Vector3 position, Vector3 direction, float? drawAltitude = null)
+        {
+            _realPosition = position.Yto0();
+            _drawAltitude = drawAltitude;
+            if (direction.sqrMagnitude > 0.0001f)
+            {
+                _realDirection = direction.normalized;
+                _facing = Rot4.FromAngleFlat(_realDirection.AngleFlat());
             }
 
-            var cell = position.ToIntVec3();
-            if (!cell.InBounds(Map))
+            var map = Map;
+            var cell = _realPosition.ToIntVec3();
+            if (map != null && cell.InBounds(map) && cell != Position)
             {
-                // 맵 밖이면 파괴하지 않고 복귀로 전환(예외 안전).
-                _realPosition = position;
-                StartReturnTo(_restPosition, _appliedSpeed);
-                return;
+                Position = cell;
             }
+        }
 
-            Position = cell;
-            _realPosition = position;
-            _realDirection = CalculateBezierCurveDerivative(_moveStartPosition, _moveEndPosition, _curDirectionOutVector * BezierWeight, _curDirectionInVector * BezierWeight, _curMoveDistance / _totalMoveDistance);
+        internal void RegisterToilTrail(Vector3 position)
+        {
+            TrailRenderer?.RegisterNewTrail(position);
+        }
+
+        internal void ImpactToilTarget(Thing hitThing)
+        {
+            Impact(hitThing);
+        }
+
+        internal void EnterIdleFromToil()
+        {
+            EnterIdle();
+        }
+
+        internal void StopToilMotion()
+        {
+            if (_state == FairyState.Attacking || _state == FairyState.MovingToRest)
+            {
+                EnterIdle();
+            }
         }
 
         // 매우 낮은 피해 + 높은 저지력(스턴). 피해는 로열 비비의 정신 감응력에 비례.
@@ -431,44 +346,6 @@ namespace VVRace
             map.flecks.CreateFleck(pierceData);
         }
 
-        private const int BezierLengthInterval = 4;
-        private float CalculateBezierCurveLengthApproximate(Vector3 p1, Vector3 p2, Vector3 w1, Vector3 w2)
-        {
-            var distance = 0f;
-            var point = p1;
-            for (int i = 1; i < BezierLengthInterval; ++i)
-            {
-                var newPoint = CalculateBezierCurvePoint(p1, p2, w1, w2, i / (float)BezierLengthInterval);
-                distance += (newPoint - point).magnitude;
-                point = newPoint;
-            }
-
-            distance += (p2 - point).magnitude;
-            return distance * 100;
-        }
-
-        private Vector3 CalculateBezierCurvePoint(Vector3 p1, Vector3 p2, Vector3 w1, Vector3 w2, float t)
-        {
-            var tInv = 1 - t;
-            var c1 = p1 + w1 / 3f;
-            var c2 = p2 - w2 / 3f;
-            return Mathf.Pow(tInv, 3) * p1 +
-                3 * tInv * tInv * t * c1 +
-                3 * tInv * t * t * c2 +
-                t * t * t * p2;
-        }
-
-        private Vector3 CalculateBezierCurveDerivative(Vector3 p1, Vector3 p2, Vector3 w1, Vector3 w2, float t)
-        {
-            var tInv = 1 - t;
-            var c1 = p1 + w1 / 3f;
-            var c2 = p2 - w2 / 3f;
-            return -3 * tInv * tInv * p1 +
-                3 * tInv * (1 - 3 * t) * c1 +
-                3 * t * (2 - 3 * t) * c2 +
-                3 * t * t * p2;
-        }
-
         private void PlayPhaseEffect()
         {
             if (Map == null) { return; }
@@ -498,7 +375,7 @@ namespace VVRace
             {
                 _wantsDematerialize = true;
                 bool hardCap = GenTicks.TicksGame - _spawnTick >= _lifespanTicks + LifespanHardCapExtraTicks;
-                if ((_state == FairyState.Idle && _role == FairyRole.None) || hardCap)
+                if (IsAvailable || hardCap)
                 {
                     BeginDematerialize(true);
                 }
@@ -506,108 +383,13 @@ namespace VVRace
 
             Controller?.Notify_FairyTick(this, delta);
 
+            CurrentJob.Tick(delta);
             UpdateFacing();
-
-            switch (_state)
-            {
-                case FairyState.Materializing:
-                    _stateTicks -= delta;
-                    if (_stateTicks <= 0) { EnterIdle(); }
-                    break;
-
-                case FairyState.Teleporting:
-                    _stateTicks -= delta;
-                    if (_stateTicks <= 0) { EnterIdle(); }
-                    break;
-
-                case FairyState.Dematerializing:
-                    _stateTicks -= delta;
-                    if (_stateTicks <= 0)
-                    {
-                        if (_applyAssimilationOnDematerialize)
-                        {
-                            ApplyAssimilation();
-                        }
-                        Destroy();
-                    }
-                    break;
-
-                case FairyState.Attacking:
-                case FairyState.MovingToRest:
-                    AdvanceDash(delta);
-                    break;
-
-                case FairyState.Idle:
-                    // 자유 대기 요정의 궤도 회전은 요정 자신이 매 틱 구동(부드러운 회전).
-                    // 세션 배정 요정(role != None)은 세션이 위치를 잡는다.
-                    if (_role == FairyRole.None)
-                    {
-                        DoIdleOrbit();
-                    }
-                    break;
-            }
-        }
-
-        public Vector3 OrbitPositionAround(Pawn centerPawn, int slot, int count)
-        {
-            var props = Controller?.Props;
-            if (props == null || centerPawn == null || !centerPawn.Spawned || centerPawn.Map != Map)
-            {
-                return _realPosition.Yto0();
-            }
-
-            _drawOrbitCenter = centerPawn;
-
-            float angle = OrbitAngle(props, GenTicks.TicksGame, slot, count);
-            float cos = Mathf.Cos(angle);
-            float sin = Mathf.Sin(angle);
-            return centerPawn.DrawPos.Yto0() + new Vector3(cos * props.orbitRadiusX, 0f, sin * props.orbitRadiusZ);
-        }
-
-        public void IdleOrbitAround(Pawn centerPawn, int slot, int count)
-        {
-            if (_state != FairyState.Idle || Map == null) { return; }
-
-            var props = Controller?.Props;
-            if (props == null || centerPawn == null || !centerPawn.Spawned || centerPawn.Map != Map) { return; }
-
-            _drawOrbitCenter = centerPawn;
-
-            float angle = OrbitAngle(props, GenTicks.TicksGame, slot, count);
-            float cos = Mathf.Cos(angle);
-            float sin = Mathf.Sin(angle);
-
-            _realPosition = centerPawn.DrawPos.Yto0() + new Vector3(cos * props.orbitRadiusX, 0f, sin * props.orbitRadiusZ);
-
-            var cell = _realPosition.ToIntVec3();
-            if (cell.InBounds(Map) && cell != Position) { Position = cell; }
-
-            Vector3 tangent = new Vector3(-sin * props.orbitRadiusX, 0f, cos * props.orbitRadiusZ);
-            if (tangent.sqrMagnitude > 0.0001f)
-            {
-                _realDirection = tangent.normalized;
-                _facing = Rot4.FromAngleFlat(_realDirection.AngleFlat());
-            }
         }
 
         // 회전 각도(라디안). 시계는 초 단위이므로 틱당 각속도(orbitAngularSpeed)에 60을 곱해 초당 각속도로 환산.
-        private float OrbitAngle(CompProperties_ViviFairyController props, float clockSeconds)
-        {
-            return OrbitAngle(props, clockSeconds, _orbitSlot, _orbitCount);
-        }
-
-        private float OrbitAngle(CompProperties_ViviFairyController props, float clockSeconds, int slot, int count)
-        {
-            return clockSeconds * props.orbitAngularSpeed + slot * (Mathf.PI * 2f / Mathf.Max(1, count));
-        }
-
         // 그리기(궤도 시각)는 DrawPos가 매 프레임 처리한다. 여기서는 논리 위치(_realPosition/셀)와
         // 바라보는 방향만 동기화한다. (대기→돌진 전이 시작점을 현재 궤도 위치에 맞추고 4방향 스프라이트 방향 갱신)
-        private void DoIdleOrbit()
-        {
-            IdleOrbitAround(_owner, _orbitSlot, _orbitCount);
-        }
-
         private void UpdateFacing()
         {
             // 이동/공격 중에는 진행 방향을 향한다. 대기 궤도 중의 방향은 OrbitIdleStep이 접선 방향으로 갱신한다.
@@ -637,6 +419,11 @@ namespace VVRace
             }
         }
 
+        internal void ApplyAssimilationFromJob()
+        {
+            ApplyAssimilation();
+        }
+
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
         {
             var ctrl = Controller;
@@ -657,20 +444,20 @@ namespace VVRace
             Scribe_Values.Look(ref _wantsDematerialize, "wantsDematerialize");
             Scribe_Values.Look(ref _applyAssimilationOnDematerialize, "applyAssimilationOnDematerialize", true);
             Scribe_Values.Look(ref _role, "role", FairyRole.None);
+            Scribe_Deep.Look(ref _job, "job");
 
             Scribe_Values.Look(ref _realPosition, "realPosition");
             Scribe_Values.Look(ref _realDirection, "realDirection", Vector3.forward);
             Scribe_Values.Look(ref _facing, "facing");
 
-            Scribe_References.Look(ref _curTargetThing, "curTargetThing");
-            Scribe_Values.Look(ref _restPosition, "restPosition");
-            Scribe_Values.Look(ref _moveStartPosition, "moveStartPosition");
-            Scribe_Values.Look(ref _moveEndPosition, "moveEndPosition");
-            Scribe_Values.Look(ref _curDirectionOutVector, "curDirectionOutVector");
-            Scribe_Values.Look(ref _curDirectionInVector, "curDirectionInVector");
-            Scribe_Values.Look(ref _totalMoveDistance, "totalMoveDistance");
-            Scribe_Values.Look(ref _curMoveDistance, "curMoveDistance");
-            Scribe_Values.Look(ref _appliedSpeed, "appliedSpeed");
+            if (Scribe.mode == LoadSaveMode.PostLoadInit)
+            {
+                if (_state == FairyState.Attacking || _state == FairyState.MovingToRest)
+                {
+                    StopToilMotion();
+                }
+                EnsureJob();
+            }
         }
     }
 }

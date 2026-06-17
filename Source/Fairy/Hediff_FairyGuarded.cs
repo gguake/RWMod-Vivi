@@ -1,14 +1,48 @@
+using RimWorld;
+using System.Collections.Generic;
+using UnityEngine;
 using Verse;
 
 namespace VVRace
 {
-    // 경호 대상에 부착되는 마커 헤디프. 보호 해제 Gizmo(Harmony)가 이 정보로 세션을 종료한다.
     public class Hediff_FairyGuarded : HediffWithComps
     {
         public Pawn ownerVivi;
         public int sessionId;
 
         public override bool ShouldRemove => ownerVivi == null || ownerVivi.Dead || !ownerVivi.Spawned;
+
+        public override IEnumerable<Gizmo> GetGizmos()
+        {
+            foreach (var gizmo in base.GetGizmos())
+            {
+                yield return gizmo;
+            }
+
+            if (pawn == null || pawn.Faction != Faction.OfPlayer || ownerVivi == null)
+            {
+                yield break;
+            }
+
+            yield return new Command_Action
+            {
+                defaultLabel = LocalizeString_Etc.VV_Command_ReleaseGuard.Translate(),
+                defaultDesc = LocalizeString_Etc.VV_Command_ReleaseGuardDesc.Translate(),
+                icon = ContentFinder<Texture2D>.Get("Things/Mote/VV_Fairy/VV_Fairy_south", reportFailure: false),
+                action = () =>
+                {
+                    var ctrl = ownerVivi != null ? ownerVivi.GetComp<CompViviFairyController>() : null;
+                    if (ctrl != null)
+                    {
+                        ctrl.EndJob(sessionId);
+                    }
+                    else if (pawn?.health != null)
+                    {
+                        pawn.health.RemoveHediff(this);
+                    }
+                }
+            };
+        }
 
         public override void ExposeData()
         {

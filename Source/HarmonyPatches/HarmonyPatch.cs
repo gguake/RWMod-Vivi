@@ -14,7 +14,6 @@ namespace VVRace
                 ArcanePlantPatch.Patch(harmony);
                 VanilaBugFixPatch.Patch(harmony);
                 GatherPatch.Patch(harmony);
-                FairyPatch.Patch(harmony);
 
                 harmony.PatchAll();
             }

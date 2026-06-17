@@ -38,6 +38,33 @@ namespace VVRace
             Scribe_Deep.Look(ref innerContainer, "innerViviContainer", new object[] { this });
         }
 
+        public override IEnumerable<Gizmo> CompGetGizmosExtra()
+        {
+            foreach (var gizmo in base.CompGetGizmosExtra())
+            {
+                yield return gizmo;
+            }
+
+            if (!DebugSettings.godMode || !(parent is Pawn pawn) || !pawn.IsRoyalVivi())
+            {
+                yield break;
+            }
+
+            var command = new Command_Action
+            {
+                defaultLabel = "DEV: Add fairyficated Vivi",
+                defaultDesc = "Generate a random Vivi pawn and register it as fairyficated to this royal Vivi.",
+                action = () => AddRandomFairyficatedVivi(pawn)
+            };
+
+            if (!CanJoin)
+            {
+                command.Disable($"Fairyfication stage is already at max ({Props.maxCount}).");
+            }
+
+            yield return command;
+        }
+
         public override void PostSpawnSetup(bool respawningAfterLoad)
         {
             if (!respawningAfterLoad)
@@ -107,6 +134,23 @@ namespace VVRace
                 parent);
 
             Refresh();
+        }
+
+        private void AddRandomFairyficatedVivi(Pawn royal)
+        {
+            if (royal == null || !royal.IsRoyalVivi() || !CanJoin) { return; }
+
+            var request = new PawnGenerationRequest(
+                VVPawnKindDefOf.VV_PlayerVivi,
+                faction: royal.Faction ?? Faction.OfPlayer,
+                allowDowned: true,
+                forceGenerateNewPawn: true,
+                developmentalStages: DevelopmentalStage.Adult,
+                forcedXenotype: VVXenotypeDefOf.VV_Vivi);
+
+            var vivi = PawnGenerator.GeneratePawn(request);
+            vivi.relations?.AddDirectRelation(PawnRelationDefOf.Parent, royal);
+            JoinVivi(vivi);
         }
 
         public Pawn DetachVivi()
