@@ -27,8 +27,7 @@ namespace VVRace
                     if (!(t is Pawn p)) { return false; }
                     if (!p.Spawned || p.Fogged() || p.DeadOrDowned || p.health == null) { return false; }
                     if (!p.HostileTo(owner)) { return false; }
-                    var marker = p.health.hediffSet.GetFirstHediffOfDef(VVHediffDefOf.VV_FairyConcentrated) as Hediff_FairyConcentrated;
-                    if (marker == null || !marker.IsOwnedBy(owner)) { return false; }
+                    if (Hediff_FairyConcentrated.GetOwnedBy(p, owner) == null) { return false; }
                     if (!GenSight.LineOfSightToThing(owner.Position, p, map, skipFirstCell: true)) { return false; }
                     return true;
                 },

@@ -46,7 +46,7 @@
     <initialSeverity>1</initialSeverity>
   </HediffDef>
 
-  <!-- 집중 대상 마커. 이미 적용된 대상 재시전 방지용. -->
+  <!-- 집중 대상 마커. 로열 비비별로 하나만 유지한다. -->
   <HediffDef>
     <defName>VV_FairyConcentrated</defName>
     <label>fairy concentration</label>
@@ -59,6 +59,12 @@
     <everCurableByItem>false</everCurableByItem>
     <maxSeverity>1</maxSeverity>
     <initialSeverity>1</initialSeverity>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>2000~2000</disappearsAfterTicks>
+        <showRemainingTime>true</showRemainingTime>
+      </li>
+    </comps>
   </HediffDef>
 
   <!-- 요정 비비 소멸 시 로열 비비에 누적. 정신 감응력을 높이지만 정신적으로 더 불안정해진다. 시간이 지나면 감쇠. -->
