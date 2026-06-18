@@ -237,4 +237,20 @@
     </subSounds>
   </SoundDef>
 
+  <SoundDef>
+    <defName>VV_PeaShooter_Fire</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>SFX/VV_PeaShooterFire</clipPath>
+          </li>
+        </grains>
+        <pitchRange>0.91~1.05</pitchRange>
+        <volumeRange>40~50</volumeRange>
+      </li>
+    </subSounds>
+  </SoundDef>
 </Defs>
