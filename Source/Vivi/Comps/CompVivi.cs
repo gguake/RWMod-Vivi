@@ -8,6 +8,7 @@ namespace VVRace
     public class CompVivi : ThingComp
     {
         public static Material AttunementLineMat = MaterialPool.MatFrom(GenDraw.LineTexPath, ShaderDatabase.Transparent, new Color(0.5f, 1f, 0.5f));
+        public static Material ConcentrationLineMat = MaterialPool.MatFrom(GenDraw.LineTexPath, ShaderDatabase.Transparent, new Color(1f, 0.75f, 0.4f, 0.6f));
 
         public bool isRoyal = false;
         private Color? _originalHairColor = null;
@@ -123,6 +124,15 @@ namespace VVRace
                 var a = parent.TrueCenter();
                 var b = LinkedEverflower.TrueCenter();
                 GenDraw.DrawLineBetween(a, b, AttunementLineMat);
+            }
+
+            if (isRoyal && parent.Spawned)
+            {
+                var marker = Hediff_FairyConcentrated.GetTargetOwnedBy((Pawn)parent);
+                if (marker?.pawn != null && marker.pawn.Spawned && marker.pawn.Map == parent.Map)
+                {
+                    GenDraw.DrawLineBetween(((Pawn)parent).DrawPos, marker.pawn.DrawPos, ConcentrationLineMat);
+                }
             }
         }
 

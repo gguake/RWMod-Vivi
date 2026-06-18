@@ -23,6 +23,7 @@ namespace VVRace
     public class CompViviHolder : ThingComp
     {
         private const int AutoMaterializeIntervalTicks = 15;
+        private const float MaterializeSpawnRadius = 2f;
 
         public CompProperties_ViviHolder Props => (CompProperties_ViviHolder)props;
 
@@ -110,6 +111,16 @@ namespace VVRace
             }
 
             yield return command;
+        }
+
+        public override void PostDrawExtraSelectionOverlays()
+        {
+            base.PostDrawExtraSelectionOverlays();
+
+            if (parent.Spawned && parent.Map != null && GetActiveJob<FairyJob_Expansion>() != null)
+            {
+                GenDraw.DrawRadiusRing(parent.Position, FairyJob_Expansion.ExpansionRadius);
+            }
         }
 
         public override void PostSpawnSetup(bool respawningAfterLoad)
@@ -333,11 +344,34 @@ namespace VVRace
             var fairyDef = VVThingDefOf.VV_ViviFairy;
             var fairy = (ViviFairy)ThingMaker.MakeThing(fairyDef);
             fairy.Initialize(pawn, Props.fairyLifespanTicks);
-            GenSpawn.Spawn(fairy, pawn.Position, pawn.Map);
+            GenSpawn.Spawn(fairy, RandomMaterializeCellNear(pawn), pawn.Map);
 
             RegisterFairy(fairy);
             fairy.StartJob(new FairyJob_Materialize(fairy.Owner));
             return fairy;
+        }
+
+        private IntVec3 RandomMaterializeCellNear(Pawn pawn)
+        {
+            var map = pawn.Map;
+            if (map == null)
+            {
+                return pawn.Position;
+            }
+
+            var candidates = GenRadial.RadialCellsAround(pawn.Position, MaterializeSpawnRadius, useCenter: false)
+                .Where(c => IsValidMaterializeCell(c, map))
+                .ToList();
+
+            return candidates.Count > 0 ? candidates.RandomElement() : pawn.Position;
+        }
+
+        private static bool IsValidMaterializeCell(IntVec3 cell, Map map)
+        {
+            return cell.InBounds(map) &&
+                cell.Standable(map) &&
+                cell.GetFirstPawn(map) == null &&
+                cell.GetFirstBuilding(map) == null;
         }
 
         public void RegisterFairy(ViviFairy fairy)

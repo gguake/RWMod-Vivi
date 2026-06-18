@@ -88,6 +88,7 @@
     <Compile Include="Fairy\Abilities\CompAbilityEffect_FairyExpansion.cs" />
     <Compile Include="Fairy\Abilities\CompAbilityEffect_FairyGuard.cs" />
     <Compile Include="Fairy\Hediff_FairyConcentrated.cs" />
+    <Compile Include="Fairy\SubEffecter_FairyTargetMarkerAttached.cs" />
     <Compile Include="Fairy\ViviFairy.cs" />
     <Compile Include="Fairy\Gizmo_ViviFairyStatus.cs" />
     <Compile Include="Fairy\ViviFairyTargeting.cs" />

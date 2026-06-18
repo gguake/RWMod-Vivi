@@ -3,6 +3,7 @@ using RPEF;
 using System.Reflection;
 using UnityEngine;
 using Verse;
+using Verse.Sound;
 
 namespace VVRace
 {
@@ -30,6 +31,8 @@ namespace VVRace
         public const int TeleportDurationTicks = 20;
 
         private const int LifespanHardCapExtraTicks = 5000;
+        private const float DrawCatchUpCellsPerSecond = 28f;
+        private const float DrawSnapDistance = 8f;
 
         private Pawn _owner;
         private int _spawnTick;
@@ -41,6 +44,12 @@ namespace VVRace
 
         private Vector3 _realPosition;
         private Vector3 _realDirection = Vector3.forward;
+        [Unsaved]
+        private bool _visualPositionInitialized;
+        [Unsaved]
+        private Vector3 _visualPosition;
+        [Unsaved]
+        private int _lastVisualFrame = -1;
         private Rot4 _facing = Rot4.South;
         private bool _orbitVariationInitialized;
         private int _orbitDirection = 1;
@@ -164,7 +173,7 @@ namespace VVRace
             get
             {
                 // 그 외(행동중/순간이동/생성·소멸/세션 배정 등)는 _realPosition + MoteOverhead 수준으로.
-                var p = _realPosition;
+                var p = SmoothedDrawPosition();
                 p.y = _drawAltitude ?? AltitudeLayer.MoteOverhead.AltitudeFor();
                 return p;
             }
@@ -186,6 +195,7 @@ namespace VVRace
             {
                 _realPosition = Position.ToVector3Shifted().Yto0();
             }
+            SnapVisualPositionToReal();
         }
 
         internal void EnterIdle()
@@ -227,11 +237,12 @@ namespace VVRace
             if (map == null) { return; }
 
             _attackGraphicActive = false;
-            PlayPhaseEffectAt(CurrentEffectCell(), map);
+            PlayPhaseEffectAt(CurrentEffectCell(), map, VVSoundDefOf.VV_FairyTeleport);
             Position = cell;
             _realPosition = cell.ToVector3Shifted().Yto0();
             _drawAltitude = null;
-            PlayPhaseEffectAt(cell, map);
+            SnapVisualPositionToReal();
+            PlayPhaseEffectAt(cell, map, VVSoundDefOf.VV_FairyTeleport);
 
             _state = FairyState.Teleporting;
             _stateTicks = TeleportDurationTicks;
@@ -262,7 +273,7 @@ namespace VVRace
                 var map = Map;
                 if (map == null) { return; }
 
-                PlayPhaseEffectAt(CurrentEffectCell(), map);
+                PlayPhaseEffectAt(CurrentEffectCell(), map, PhaseSoundForState(state));
             }
         }
 
@@ -285,6 +296,11 @@ namespace VVRace
 
         internal void SetToilPosition(Vector3 position, Vector3 direction, float? drawAltitude = null)
         {
+            if (!_visualPositionInitialized)
+            {
+                SnapVisualPositionToReal();
+            }
+
             _realPosition = position.Yto0();
             _drawAltitude = drawAltitude;
             if (direction.sqrMagnitude > 0.0001f)
@@ -310,11 +326,11 @@ namespace VVRace
         {
             if (hitThing == null || !hitThing.Spawned || hitThing.Map != Map || hitThing == _owner) { return; }
 
-            float psy = _owner != null ? Mathf.Clamp(_owner.GetStatValue(StatDefOf.PsychicSensitivity), 0.5f, 10f) : 1f;
-            int dmg = Mathf.Max(1, Mathf.RoundToInt(1f * psy));
-            float angle = _realDirection.AngleFlat();
+            var psychicSensitivity = _owner != null ? Mathf.Clamp(_owner.GetStatValue(StatDefOf.PsychicSensitivity), 0.5f, 10f) : 1f;
+            var damageBase = Mathf.Clamp(Mathf.Sqrt(psychicSensitivity), 1f, 4f);
+            var actualDamage = (int)damageBase + (Rand.Chance(damageBase - (int)damageBase) ? 1 : 0);
 
-            var dinfo = new DamageInfo(DamageDefOf.Stab, dmg, 0f, angle, _owner, null, null, DamageInfo.SourceCategory.ThingOrUnknown, hitThing);
+            var dinfo = new DamageInfo(DamageDefOf.Stab, actualDamage, 0f, _realDirection.AngleFlat(), _owner, null, null, DamageInfo.SourceCategory.ThingOrUnknown, hitThing);
             hitThing.TakeDamage(dinfo);
         }
 
@@ -330,9 +346,64 @@ namespace VVRace
             return Position;
         }
 
-        private static void PlayPhaseEffectAt(IntVec3 cell, Map map)
+        private Vector3 SmoothedDrawPosition()
+        {
+            var target = _realPosition.Yto0();
+            if (!_visualPositionInitialized)
+            {
+                SnapVisualPositionToReal();
+                return target;
+            }
+
+            int frame = Time.frameCount;
+            if (_lastVisualFrame == frame)
+            {
+                return _visualPosition;
+            }
+
+            _lastVisualFrame = frame;
+            var diff = target - _visualPosition;
+            float sqrDistance = diff.sqrMagnitude;
+            if (sqrDistance <= 0.0001f || sqrDistance >= DrawSnapDistance * DrawSnapDistance)
+            {
+                _visualPosition = target;
+                return _visualPosition;
+            }
+
+            float tickRate = Find.TickManager != null ? Mathf.Max(1f, Find.TickManager.TickRateMultiplier) : 1f;
+            float maxStep = DrawCatchUpCellsPerSecond * tickRate * Time.deltaTime;
+            if (maxStep > 0f)
+            {
+                _visualPosition = Vector3.MoveTowards(_visualPosition, target, maxStep);
+            }
+            return _visualPosition;
+        }
+
+        private void SnapVisualPositionToReal()
+        {
+            _visualPosition = _realPosition.Yto0();
+            _visualPositionInitialized = true;
+            _lastVisualFrame = Time.frameCount;
+        }
+
+        private static SoundDef PhaseSoundForState(FairyState state)
+        {
+            switch (state)
+            {
+                case FairyState.Materializing:
+                    return VVSoundDefOf.VV_FairyMaterialize;
+                case FairyState.Dematerializing:
+                    return VVSoundDefOf.VV_FairyDematerialize;
+                default:
+                    return null;
+            }
+        }
+
+        private static void PlayPhaseEffectAt(IntVec3 cell, Map map, SoundDef soundDef = null)
         {
             if (map == null || !cell.IsValid || !cell.InBounds(map)) { return; }
+
+            soundDef?.PlayOneShot(SoundInfo.InMap(new TargetInfo(cell, map), MaintenanceType.None));
 
             var effecter = VVEffecterDefOf.VV_Effecter_FairyPhase;
             if (effecter != null)

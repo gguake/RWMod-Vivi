@@ -263,6 +263,7 @@ namespace VVRace
         public static EffecterDef VV_EverflowerGrow_4_Level;
 
         public static EffecterDef VV_Effecter_FairyPhase;
+        public static EffecterDef VV_Effecter_FairyTargetMarker;
     }
 
     [DefOf]
@@ -342,5 +343,9 @@ namespace VVRace
     public static class VVSoundDefOf
     {
         public static SoundDef VV_EverflowerRitualCast;
+        public static SoundDef VV_Fairyfication;
+        public static SoundDef VV_FairyMaterialize;
+        public static SoundDef VV_FairyDematerialize;
+        public static SoundDef VV_FairyTeleport;
     }
 }

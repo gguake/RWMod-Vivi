@@ -8,6 +8,8 @@ namespace VVRace
     public class Hediff_FairyConcentrated : HediffWithComps
     {
         public Pawn ownerVivi;
+        [Unsaved]
+        private Effecter _targetMarkerEffecter;
 
         public override bool ShouldRemove
         {
@@ -35,6 +37,20 @@ namespace VVRace
                 {
                     return marker;
                 }
+            }
+
+            return null;
+        }
+
+        public static Hediff_FairyConcentrated GetTargetOwnedBy(Pawn owner)
+        {
+            if (owner == null || owner.Map == null) { return null; }
+
+            var pawns = owner.Map.mapPawns.AllPawnsSpawned;
+            for (int i = 0; i < pawns.Count; i++)
+            {
+                var marker = GetOwnedBy(pawns[i], owner);
+                if (marker != null) { return marker; }
             }
 
             return null;
@@ -73,6 +89,49 @@ namespace VVRace
         public bool IsOwnedBy(Pawn owner)
         {
             return owner != null && ownerVivi == owner && !ShouldRemove;
+        }
+
+        public override void Tick()
+        {
+            base.Tick();
+            MaintainTargetMarkerEffect();
+        }
+
+        public override void PostRemoved()
+        {
+            EndTargetMarkerEffect();
+            base.PostRemoved();
+        }
+
+        public override void Notify_PawnDied(DamageInfo? dinfo, Hediff culprit = null)
+        {
+            base.Notify_PawnDied(dinfo, culprit);
+
+            pawn?.health?.RemoveHediff(this);
+        }
+
+        private void MaintainTargetMarkerEffect()
+        {
+            if (pawn == null || !pawn.Spawned || pawn.Map == null || ShouldRemove)
+            {
+                EndTargetMarkerEffect();
+                return;
+            }
+
+            if (_targetMarkerEffecter == null)
+            {
+                _targetMarkerEffecter = VVEffecterDefOf.VV_Effecter_FairyTargetMarker?.SpawnAttached(pawn, pawn.Map);
+            }
+
+            _targetMarkerEffecter?.EffectTick(new TargetInfo(pawn), TargetInfo.Invalid);
+        }
+
+        private void EndTargetMarkerEffect()
+        {
+            if (_targetMarkerEffecter == null) { return; }
+
+            _targetMarkerEffecter.ForceEnd();
+            _targetMarkerEffecter = null;
         }
 
         public override void ExposeData()

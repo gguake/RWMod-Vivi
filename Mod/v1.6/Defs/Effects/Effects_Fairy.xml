@@ -61,16 +61,29 @@
     </graphicData>
   </ThingDef>
 
+  <ThingDef ParentName="MoteBase">
+    <defName>VV_Mote_FairyTargetMarker</defName>
+    <thingClass>MoteAttached</thingClass>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <mote>
+      <fadeInTime>0.2</fadeInTime>
+      <solidTime>3.0</solidTime>
+      <fadeOutTime>1.0</fadeOutTime>
+    </mote>
+    <graphicData>
+      <texPath>VFX/VV_FairyTargetMarker</texPath>
+      <graphicClass>Graphic_MoteWithAgeSecs</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <color>(1, 1, 1, 0.78)</color>
+      <drawSize>(1.15, 1.15)</drawSize>
+    </graphicData>
+  </ThingDef>
+
   <!-- 요정 비비 생성/소멸/순간이동 공통 영원꽃 이펙트. (한 번 트리거되고 정리되는 경량 버스트) -->
   <EffecterDef>
     <defName>VV_Effecter_FairyPhase</defName>
     <maintainTicks>18</maintainTicks>
     <children>
-      <li>
-        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
-        <soundDef>VV_Fairyfication</soundDef>
-        <spawnLocType>OnSource</spawnLocType>
-      </li>
       <li>
         <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
         <moteDef>VV_Mote_FairyPhaseRing</moteDef>
@@ -100,6 +113,19 @@
         <rotation>0~360</rotation>
         <rotationRate>-180~180</rotationRate>
         <scale>0.06~0.13</scale>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <EffecterDef>
+    <defName>VV_Effecter_FairyTargetMarker</defName>
+    <maintainTicks>2400</maintainTicks>
+    <children>
+      <li>
+        <subEffecterClass>VVRace.SubEffecter_FairyTargetMarkerAttached</subEffecterClass>
+        <moteDef>VV_Mote_FairyTargetMarker</moteDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>1</scale>
       </li>
     </children>
   </EffecterDef>

@@ -114,6 +114,57 @@
   </SoundDef>
 
   <SoundDef>
+    <defName>VV_FairyMaterialize</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>SFX/VV_FairyMaterialize</clipPath>
+          </li>
+        </grains>
+        <volumeRange>80</volumeRange>
+        <pitchRange>0.9~1.1</pitchRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+  <SoundDef>
+    <defName>VV_FairyDematerialize</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>SFX/VV_FairyDematerialize</clipPath>
+          </li>
+        </grains>
+        <volumeRange>80</volumeRange>
+        <pitchRange>0.9~1.1</pitchRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+  <SoundDef>
+    <defName>VV_FairyTeleport</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>SFX/VV_FairyTeleport</clipPath>
+          </li>
+        </grains>
+        <volumeRange>80</volumeRange>
+        <pitchRange>0.9~1.1</pitchRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+  <SoundDef>
     <defName>VV_UndoFairyfication</defName>
     <context>MapOnly</context>
     <maxSimultaneous>1</maxSimultaneous>  
