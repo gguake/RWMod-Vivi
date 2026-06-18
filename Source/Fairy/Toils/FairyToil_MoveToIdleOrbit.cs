@@ -5,11 +5,16 @@ namespace VVRace
 {
     public class FairyToil_MoveToIdleOrbit : FairyToil_CurvedMove
     {
+        private const float MinCompletionDistance = 0.02f;
+        private const float TeleportDistance = 9f;
+        private const float StepPerTick = 0.1f;
+
         private Vector3 targetPosition;
         private int teleportTicksLeft;
         private bool curvedReturn;
         private bool targetConfigured;
         private bool completeWhenNear;
+        private float speed = DefaultSpeed;
         private float completionDistance = 0.08f;
 
         public FairyToil_MoveToIdleOrbit() { }
@@ -17,6 +22,7 @@ namespace VVRace
         public FairyToil_MoveToIdleOrbit(Vector3 targetPosition, float speed = DefaultSpeed)
         {
             this.targetPosition = targetPosition.Yto0();
+            this.speed = speed > 0f ? speed : DefaultSpeed;
             curvedReturn = true;
             targetConfigured = true;
         }
@@ -24,7 +30,7 @@ namespace VVRace
         public FairyToil_MoveToIdleOrbit(bool completeWhenNear, float completionDistance = 0.08f)
         {
             this.completeWhenNear = completeWhenNear;
-            this.completionDistance = Mathf.Max(0.02f, completionDistance);
+            this.completionDistance = Mathf.Max(MinCompletionDistance, completionDistance);
         }
 
         public void ConfigureStepTarget(Vector3 targetPosition)
@@ -51,7 +57,7 @@ namespace VVRace
             var fairy = Fairy;
             if (fairy == null || fairy.Destroyed || fairy.Map == null) { return; }
 
-            SetMoveTarget(targetPosition, DefaultSpeed);
+            SetMoveTarget(targetPosition, speed);
             fairy.BeginToilMotion(FairyState.MovingToRest);
         }
 
@@ -62,7 +68,7 @@ namespace VVRace
                 var result = AdvanceMove(delta, registerTrail: false);
                 if (result == FairyToilStatus.Complete)
                 {
-                    Fairy?.EnterIdleFromToil();
+                    Fairy?.EnterIdle();
                 }
                 return result;
             }
@@ -86,14 +92,14 @@ namespace VVRace
                 fairy.SetTimedStateTicks(Mathf.Max(0, teleportTicksLeft));
                 if (teleportTicksLeft <= 0)
                 {
-                    fairy.EnterIdleFromToil();
+                    fairy.EnterIdle();
                 }
                 return FairyToilStatus.Running;
             }
 
             if (fairy.State == FairyState.Attacking || fairy.State == FairyState.MovingToRest)
             {
-                fairy.EnterIdleFromToil();
+                fairy.EnterIdle();
             }
             if (fairy.State != FairyState.Idle) { return FairyToilStatus.Running; }
 
@@ -102,7 +108,7 @@ namespace VVRace
             Vector3 diff = tar - cur;
             float dist = diff.magnitude;
 
-            if (dist > 9f)
+            if (dist > TeleportDistance)
             {
                 var cell = tar.ToIntVec3();
                 if (!cell.InBounds(fairy.Map))
@@ -120,9 +126,9 @@ namespace VVRace
                 return FairyToilStatus.Complete;
             }
 
-            if (dist > 0.02f)
+            if (dist > MinCompletionDistance)
             {
-                float step = 0.1f * delta;
+                float step = StepPerTick * delta;
                 var next = cur + (step >= dist ? diff : diff.normalized * step);
                 fairy.SetToilPosition(next, diff);
             }
@@ -143,6 +149,7 @@ namespace VVRace
             Scribe_Values.Look(ref curvedReturn, "curvedReturn");
             Scribe_Values.Look(ref targetConfigured, "targetConfigured");
             Scribe_Values.Look(ref completeWhenNear, "completeWhenNear");
+            Scribe_Values.Look(ref speed, "speed", DefaultSpeed);
             Scribe_Values.Look(ref completionDistance, "completionDistance", 0.08f);
         }
     }

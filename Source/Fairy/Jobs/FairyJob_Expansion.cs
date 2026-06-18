@@ -45,7 +45,12 @@ namespace VVRace
             if (move == null || fairy == null) { return; }
 
             orbitPhase += OrbitSpeed * delta * fairy.OrbitSpeedFactor * fairy.OrbitDirection;
-            Vector3 restPos = SlotPos();
+            Vector3 center = owner.DrawPos.Yto0();
+            float radiusFactor = (fairy.OrbitRadiusXFactor + fairy.OrbitRadiusZFactor) * 0.5f;
+            float phaseOffset = fairy.OrbitPhaseOffset;
+            float slotAngle = Mathf.PI * 2f / Mathf.Max(1, count);
+            float angle = slotAngle * slot + orbitPhase + phaseOffset;
+            Vector3 restPos = center + new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle)) * HexRadius * radiusFactor;
             move.ConfigureStepTarget(restPos);
 
             if (fairy.State != FairyState.Idle && fairy.State != FairyState.Attacking) { return; }
@@ -57,7 +62,7 @@ namespace VVRace
             {
                 if (fairy.State == FairyState.Attacking)
                 {
-                    fairy.EnterIdleFromToil();
+                    fairy.EnterIdle();
                 }
                 return;
             }
@@ -75,17 +80,13 @@ namespace VVRace
                 fairy?.StartJob(new FairyJob_Dematerialize(owner, applyAssimilation: false));
                 return;
             }
+            if (reason == FairyJobInterruptReason.LifespanExpired)
+            {
+                fairy?.StartJob(new FairyJob_Dematerialize(owner, applyAssimilation: true));
+                return;
+            }
 
-            StartIdleJob();
-        }
-
-        private Vector3 SlotPos()
-        {
-            Vector3 center = owner.DrawPos.Yto0();
-            float radiusFactor = fairy != null ? (fairy.OrbitRadiusXFactor + fairy.OrbitRadiusZFactor) * 0.5f : 1f;
-            float phaseOffset = fairy != null ? fairy.OrbitPhaseOffset : 0f;
-            float ang = (Mathf.PI / 3f) * slot + orbitPhase + phaseOffset;
-            return center + new Vector3(Mathf.Cos(ang), 0f, Mathf.Sin(ang)) * HexRadius * radiusFactor;
+            fairy?.StartJob(new FairyJob_Idle(owner));
         }
 
         public override void ExposeData()

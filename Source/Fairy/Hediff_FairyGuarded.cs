@@ -34,7 +34,7 @@ namespace VVRace
                     var ctrl = ownerVivi != null ? ownerVivi.GetComp<CompViviFairyController>() : null;
                     if (ctrl != null)
                     {
-                        ctrl.EndJob(sessionId);
+                        ctrl.InterruptJob(sessionId, FairyJobInterruptReason.ExternalCancel);
                     }
                     else if (pawn?.health != null)
                     {

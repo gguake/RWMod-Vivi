@@ -29,6 +29,8 @@ namespace VVRace
 
     public abstract class FairyJob : IExposable
     {
+        private const int MaxToilTransitionsPerTick = 8;
+
         public int id;
 
         [Unsaved]
@@ -60,15 +62,7 @@ namespace VVRace
             {
                 owner = fairy?.Owner;
             }
-            if (toils == null)
-            {
-                toils = new List<FairyToil>();
-            }
-            if (toils.Count == 0)
-            {
-                MakeToils();
-            }
-            AttachToils();
+            EnsureToils();
         }
 
         internal void StartCurrentToil()
@@ -95,15 +89,11 @@ namespace VVRace
             TickActiveBeforeToil(delta);
             if (ended) { return; }
 
-            if (toils == null || toils.Count == 0)
-            {
-                MakeToils();
-                AttachToils();
-            }
+            EnsureToils();
 
-            int guard = 0;
+            int transitions = 0;
             int tickDelta = delta;
-            while (!ended && guard++ < 8)
+            while (!ended && transitions++ < MaxToilTransitionsPerTick)
             {
                 var toil = CurrentToil;
                 if (toil == null)
@@ -206,11 +196,6 @@ namespace VVRace
 
         protected virtual void OnEnded() { }
 
-        protected void StartIdleJob()
-        {
-            fairy?.StartJob(new FairyJob_Idle(owner));
-        }
-
         private FairyToil CurrentToil
         {
             get
@@ -221,6 +206,19 @@ namespace VVRace
                 }
                 return toils[toilIndex];
             }
+        }
+
+        private void EnsureToils()
+        {
+            if (toils == null)
+            {
+                toils = new List<FairyToil>();
+            }
+            if (toils.Count == 0)
+            {
+                MakeToils();
+            }
+            AttachToils();
         }
 
         private void AttachToils()

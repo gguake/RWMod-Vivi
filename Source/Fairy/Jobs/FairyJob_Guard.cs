@@ -27,13 +27,13 @@ namespace VVRace
 
         protected override bool TryGetInterruptReason(out FairyJobInterruptReason reason)
         {
+            if (base.TryGetInterruptReason(out reason))
+            {
+                return true;
+            }
             if (ally == null || !ally.Spawned || ally.Dead)
             {
                 reason = FairyJobInterruptReason.TargetUnavailable;
-                return true;
-            }
-            if (base.TryGetInterruptReason(out reason))
-            {
                 return true;
             }
             if (fairy != null && fairy.LifespanExpired)
@@ -67,7 +67,7 @@ namespace VVRace
             {
                 if (fairy.State == FairyState.Attacking)
                 {
-                    fairy.EnterIdleFromToil();
+                    fairy.EnterIdle();
                 }
                 return;
             }
@@ -80,18 +80,18 @@ namespace VVRace
 
         protected override void OnInterrupted(FairyJobInterruptReason reason)
         {
-            if (reason == FairyJobInterruptReason.LifespanExpired)
-            {
-                fairy?.StartJob(new FairyJob_Dematerialize(owner, applyAssimilation: true));
-                return;
-            }
             if (reason == FairyJobInterruptReason.OwnerUnavailable)
             {
                 fairy?.StartJob(new FairyJob_Dematerialize(owner, applyAssimilation: false));
                 return;
             }
+            if (reason == FairyJobInterruptReason.LifespanExpired)
+            {
+                fairy?.StartJob(new FairyJob_Dematerialize(owner, applyAssimilation: true));
+                return;
+            }
 
-            StartIdleJob();
+            fairy?.StartJob(new FairyJob_Idle(owner));
         }
 
         protected override void OnEnded()

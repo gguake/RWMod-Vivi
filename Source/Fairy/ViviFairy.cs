@@ -16,7 +16,6 @@ namespace VVRace
         Dematerializing,
     }
 
-    // 요정이 현재 어떤 능력 세션에 배정되어 있는지. None이면 자유(대기 대형 추종).
     public enum FairyRole : byte
     {
         None,
@@ -25,19 +24,13 @@ namespace VVRace
         Expansion,
     }
 
-    // 실체화된 요정 비비. 선택/상호작용 불가능한 시각 효과형 엔티티이며 로열 비비(owner)에 귀속된다.
-    // Needle(Projectile)의 그리기/이동/저장 패턴을 차용하되, 행동 완료 후 소멸하지 않고 대기 상태로 복귀한다.
     public class ViviFairy : ThingWithComps
     {
         public const int MaterializeDurationTicks = 90;
         public const int DematerializeDurationTicks = 60;
         public const int TeleportDurationTicks = 20;
 
-        // 행동중인데도 수명이 지나 대기로 못 돌아오는 경우를 대비한 강제 소멸 여유분.
         private const int LifespanHardCapExtraTicks = 5000;
-
-        // 돌진 공격 피해 처리. 이동 상태와 속도는 세션이 소유한다.
-        private const int StaggerStunAmount = 12;
 
         private Pawn _owner;
         private int _spawnTick;
@@ -45,9 +38,6 @@ namespace VVRace
 
         private FairyState _state = FairyState.Materializing;
         private int _stateTicks;
-        private bool _wantsDematerialize;
-        private bool _applyAssimilationOnDematerialize = true;
-        private FairyRole _role = FairyRole.None;
         private FairyJob _job;
 
         private Vector3 _realPosition;
@@ -86,9 +76,7 @@ namespace VVRace
         internal float OrbitTiltAngle { get { EnsureOrbitVariation(); return _orbitTiltAngle; } }
         internal float MotionCurveOffsetFactor { get { EnsureOrbitVariation(); return _motionCurveOffsetFactor; } }
 
-        // 능력에 배정된 요정은 '행동중'으로 간주(Gizmo 빨강, 다른 능력에 사용 불가).
         public bool InAction => Role != FairyRole.None;
-        // 새 명령에 사용 가능한 요정: 대기 상태이며 어떤 세션에도 배정되지 않음.
         public bool IsAvailable => _state == FairyState.Idle && CurrentJob.Kind == FairyJobKind.Idle;
         public bool LifespanExpired => GenTicks.TicksGame - _spawnTick >= _lifespanTicks;
 
@@ -103,13 +91,7 @@ namespace VVRace
             }
         }
 
-        // 매 틱 갱신(기본은 카메라 거리 기반 저빈도 틱이라 느린 회전이 끊겨 보임 → 항상 1로 고정).
         public override int UpdateRateTicks => 1;
-
-        public void SetRole(FairyRole role)
-        {
-            _role = role;
-        }
 
         internal void EnsureJob()
         {
@@ -120,7 +102,6 @@ namespace VVRace
             }
 
             _job.NotifyAssigned(this);
-            _role = _job.Role;
         }
 
         public void StartJob(FairyJob job)
@@ -137,7 +118,6 @@ namespace VVRace
 
             _job = job;
             _job.NotifyAssigned(this);
-            _role = _job.Role;
             _job.StartCurrentToil();
         }
 
@@ -205,21 +185,15 @@ namespace VVRace
 
             if (!respawningAfterLoad)
             {
-                _realPosition = CellCenter(Position);
+                _realPosition = Position.ToVector3Shifted().Yto0();
             }
             else
             {
-                // 로드 시 컨트롤러 목록 복원 백업(멱등).
-                Controller?.NotifyFairyRestored(this);
+                Controller?.RegisterFairy(this);
             }
         }
 
-        public void BeginMaterialize()
-        {
-            StartJob(new FairyJob_Materialize(_owner));
-        }
-
-        private void EnterIdle()
+        internal void EnterIdle()
         {
             if (Scribe.mode == LoadSaveMode.Inactive)
             {
@@ -230,13 +204,10 @@ namespace VVRace
             _stateTicks = 0;
         }
 
-        // 컨트롤러가 매 틱 호출. 대기 상태 요정을 주어진 대형 위치로 부드럽게 이동시킨다.
-        // 거리가 너무 멀면(주인 순간이동 등) 순간이동으로 복귀한다.
         public void BeginDematerialize(bool applyAssimilation)
         {
             if (_state == FairyState.Dematerializing) { return; }
 
-            _applyAssimilationOnDematerialize = applyAssimilation;
             if (_job != null && !_job.Ended && _job.Kind != FairyJobKind.Dematerialize)
             {
                 _job.Interrupt(applyAssimilation ? FairyJobInterruptReason.LifespanExpired : FairyJobInterruptReason.DematerializeAll);
@@ -248,7 +219,6 @@ namespace VVRace
             StartJob(new FairyJob_Dematerialize(_owner, applyAssimilation));
         }
 
-        // 빈 셀로 순간이동(대기 복귀/포위 배치 등에 사용). Phase 2에서 사용.
         public void TeleportTo(IntVec3 cell)
         {
             var map = Map;
@@ -257,17 +227,12 @@ namespace VVRace
             _attackGraphicActive = false;
             PlayPhaseEffectAt(CurrentEffectCell(), map);
             Position = cell;
-            _realPosition = CellCenter(cell);
+            _realPosition = cell.ToVector3Shifted().Yto0();
             _drawAltitude = null;
             PlayPhaseEffectAt(cell, map);
 
             _state = FairyState.Teleporting;
             _stateTicks = TeleportDurationTicks;
-        }
-
-        private static Vector3 CellCenter(IntVec3 cell)
-        {
-            return cell.ToVector3Shifted().Yto0();
         }
 
         internal void FaceTowards(Vector3 targetPosition)
@@ -289,9 +254,13 @@ namespace VVRace
             _attackGraphicActive = state == FairyState.Attacking;
             _state = state;
             _stateTicks = durationTicks;
+
             if (playPhaseEffect)
             {
-                PlayPhaseEffectAtCurrentPosition();
+                var map = Map;
+                if (map == null) { return; }
+
+                PlayPhaseEffectAt(CurrentEffectCell(), map);
             }
         }
 
@@ -300,9 +269,6 @@ namespace VVRace
             _stateTicks = ticks;
         }
 
-        // === 세션 구동 이동 API ===
-
-        // 세션 액션이 돌진/복귀 표시 상태를 시작한다.
         internal void BeginToilMotion(FairyState state)
         {
             if (state != FairyState.Attacking && state != FairyState.MovingToRest) { return; }
@@ -315,7 +281,6 @@ namespace VVRace
             }
         }
 
-        // 세션 액션이 계산한 실제 위치와 방향을 적용한다.
         internal void SetToilPosition(Vector3 position, Vector3 direction, float? drawAltitude = null)
         {
             _realPosition = position.Yto0();
@@ -341,68 +306,14 @@ namespace VVRace
 
         internal void ImpactToilTarget(Thing hitThing)
         {
-            Impact(hitThing);
-        }
-
-        internal void EnterIdleFromToil()
-        {
-            EnterIdle();
-        }
-
-        internal void StopToilMotion()
-        {
-            if (_state == FairyState.Attacking || _state == FairyState.MovingToRest)
-            {
-                EnterIdle();
-            }
-        }
-
-        // 매우 낮은 피해 + 높은 저지력(스턴). 피해는 로열 비비의 정신 감응력에 비례.
-        private void Impact(Thing hitThing)
-        {
             if (hitThing == null || !hitThing.Spawned || hitThing.Map != Map || hitThing == _owner) { return; }
 
             float psy = _owner != null ? Mathf.Clamp(_owner.GetStatValue(StatDefOf.PsychicSensitivity), 0.5f, 10f) : 1f;
             int dmg = Mathf.Max(1, Mathf.RoundToInt(1f * psy));
             float angle = _realDirection.AngleFlat();
 
-            var dinfo = new DamageInfo(DamageDefOf.Blunt, dmg, 0f, angle, _owner, null, null, DamageInfo.SourceCategory.ThingOrUnknown, hitThing);
+            var dinfo = new DamageInfo(DamageDefOf.Stab, dmg, 0f, angle, _owner, null, null, DamageInfo.SourceCategory.ThingOrUnknown, hitThing);
             hitThing.TakeDamage(dinfo);
-
-            if (hitThing is Pawn p && !p.Dead && !p.RaceProps.IsMechanoid)
-            {
-                var stun = new DamageInfo(DamageDefOf.Stun, StaggerStunAmount, 0f, angle, _owner, null, null, DamageInfo.SourceCategory.ThingOrUnknown, hitThing);
-                hitThing.TakeDamage(stun);
-            }
-
-            SpawnPierceFlecks(hitThing);
-        }
-
-        private void SpawnPierceFlecks(Thing hitThing)
-        {
-            var map = hitThing.Map;
-            if (map == null) { return; }
-
-            var basePos = hitThing.TrueCenter().Yto0();
-            basePos.y = AltitudeLayer.MoteOverhead.AltitudeFor();
-            if (!basePos.ToIntVec3().ShouldSpawnMotesAt(map)) { return; }
-
-            var direction = _realDirection.Yto0();
-            if (direction.sqrMagnitude < 0.0001f) { direction = Vector3.forward; }
-            direction.Normalize();
-            var angle = direction.AngleFlat();
-
-            var pierceData = FleckMaker.GetDataStatic(basePos, map, VVFleckDefOf.VV_Fleck_NeedlePierce, Rand.Range(0.7f, 0.95f));
-            pierceData.rotation = angle;
-            map.flecks.CreateFleck(pierceData);
-        }
-
-        private void PlayPhaseEffectAtCurrentPosition()
-        {
-            var map = Map;
-            if (map == null) { return; }
-
-            PlayPhaseEffectAt(CurrentEffectCell(), map);
         }
 
         private IntVec3 CurrentEffectCell()
@@ -478,27 +389,20 @@ namespace VVRace
             base.TickInterval(delta);
 
             // owner가 사라졌거나 다른 맵으로 이동/사망하면 안전하게 소멸. (동화 헤디프는 남기지 않음)
-            if (_state != FairyState.Dematerializing)
+            if (_state != FairyState.Dematerializing && (_owner == null || !_owner.Spawned || _owner.Destroyed || _owner.Dead || _owner.Map != Map))
             {
-                if (_owner == null || !_owner.Spawned || _owner.Destroyed || _owner.Dead || _owner.Map != Map)
-                {
-                    BeginDematerialize(false);
-                }
+                BeginDematerialize(false);
             }
 
             // 수명 만료 처리: 자유 대기 상태(미배정)일 때만 소멸. 세션에 배정된 요정은 세션이 처리한다.
             // 단 너무 오래 행동중이면(안전장치) 강제 소멸.
-            if (_state != FairyState.Dematerializing && LifespanExpired)
+            bool lifespanHardCapExpired = GenTicks.TicksGame - _spawnTick >= _lifespanTicks + LifespanHardCapExtraTicks;
+            if (_state != FairyState.Dematerializing && LifespanExpired && (IsAvailable || lifespanHardCapExpired))
             {
-                _wantsDematerialize = true;
-                bool hardCap = GenTicks.TicksGame - _spawnTick >= _lifespanTicks + LifespanHardCapExtraTicks;
-                if (IsAvailable || hardCap)
-                {
-                    BeginDematerialize(true);
-                }
+                BeginDematerialize(true);
             }
 
-            Controller?.Notify_FairyTick(this, delta);
+            Controller?.Notify_FairyTick(this);
 
             CurrentJob.Tick(delta);
             UpdateFacing();
@@ -521,7 +425,7 @@ namespace VVRace
             Rotation = _facing;
         }
 
-        private void ApplyAssimilation()
+        internal void ApplyAssimilationFromJob()
         {
             if (_owner == null || _owner.Dead || _owner.health == null) { return; }
 
@@ -534,11 +438,6 @@ namespace VVRace
             {
                 hediff.Severity = Mathf.Min(hediff.Severity + 1f, hediff.def.maxSeverity);
             }
-        }
-
-        internal void ApplyAssimilationFromJob()
-        {
-            ApplyAssimilation();
         }
 
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
@@ -558,9 +457,6 @@ namespace VVRace
 
             Scribe_Values.Look(ref _state, "state", FairyState.Idle);
             Scribe_Values.Look(ref _stateTicks, "stateTicks");
-            Scribe_Values.Look(ref _wantsDematerialize, "wantsDematerialize");
-            Scribe_Values.Look(ref _applyAssimilationOnDematerialize, "applyAssimilationOnDematerialize", true);
-            Scribe_Values.Look(ref _role, "role", FairyRole.None);
             Scribe_Deep.Look(ref _job, "job");
 
             Scribe_Values.Look(ref _realPosition, "realPosition");
@@ -588,7 +484,7 @@ namespace VVRace
                 }
                 if (_state == FairyState.Attacking || _state == FairyState.MovingToRest)
                 {
-                    StopToilMotion();
+                    EnterIdle();
                 }
                 EnsureJob();
             }

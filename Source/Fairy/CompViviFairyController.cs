@@ -2,6 +2,7 @@ using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
 using Verse;
+using Verse.Noise;
 
 namespace VVRace
 {
@@ -45,11 +46,7 @@ namespace VVRace
             }
         }
 
-        public int RemainingMaterializeCharges => FairyPoolCount - MaterializedCount;
-
         public int AvailableCount => _activeFairies.Count(f => f != null && !f.Destroyed && f.IsAvailable);
-
-        public bool CanMaterialize => RemainingMaterializeCharges > 0;
 
         public ViviFairy MaterializeFairyAt(IntVec3 cell)
         {
@@ -61,7 +58,7 @@ namespace VVRace
             GenSpawn.Spawn(fairy, cell, pawn.Map);
 
             RegisterFairy(fairy);
-            fairy.BeginMaterialize();
+            fairy.StartJob(new FairyJob_Materialize(fairy.Owner));
             return fairy;
         }
 
@@ -75,11 +72,6 @@ namespace VVRace
             fairy.EnsureJob();
         }
 
-        public void NotifyFairyRestored(ViviFairy fairy)
-        {
-            RegisterFairy(fairy);
-        }
-
         public void Notify_FairyGone(ViviFairy fairy)
         {
             _activeFairies.Remove(fairy);
@@ -87,21 +79,12 @@ namespace VVRace
 
         public int NextJobId() => _nextJobId++;
 
-        public int NextSessionId() => NextJobId();
-
-        public void EndJob(int id)
-        {
-            InterruptJobGroup(id, FairyJobInterruptReason.ExternalCancel);
-        }
-
         public void InterruptJob(int id, FairyJobInterruptReason reason)
         {
-            InterruptJobGroup(id, reason);
-        }
-
-        public void EndSession(int id)
-        {
-            EndJob(id);
+            foreach (var job in ActiveJobs().Where(j => j.id == id).ToList())
+            {
+                job.Interrupt(reason);
+            }
         }
 
         public T GetActiveJob<T>() where T : FairyJob
@@ -114,7 +97,7 @@ namespace VVRace
             return ActiveJobs().Any(j => j != null && j != except && !j.Ended && j.id == id && j.Kind == kind);
         }
 
-        public bool TryReserveIdleFairies(int n, FairyRole role, out List<ViviFairy> reserved)
+        public bool TryReserveIdleFairies(int n, out List<ViviFairy> reserved)
         {
             reserved = _activeFairies
                 .Where(f => f != null && !f.Destroyed && f.IsAvailable)
@@ -137,7 +120,7 @@ namespace VVRace
             PruneActiveFairies();
         }
 
-        public void Notify_FairyTick(ViviFairy fairy, int delta)
+        public void Notify_FairyTick(ViviFairy fairy)
         {
             if (fairy == null || fairy.Destroyed || !_activeFairies.Contains(fairy)) { return; }
 
@@ -164,7 +147,10 @@ namespace VVRace
         public override void Notify_Killed(Map prevMap, DamageInfo? dinfo = null)
         {
             base.Notify_Killed(prevMap, dinfo);
-            InterruptAllJobs(FairyJobInterruptReason.OwnerUnavailable);
+            foreach (var job in ActiveJobs().ToList())
+            {
+                job.Interrupt(FairyJobInterruptReason.OwnerUnavailable);
+            }
             DestroyAllFairiesImmediate();
         }
 
@@ -173,7 +159,10 @@ namespace VVRace
             base.PostDeSpawn(map, mode);
             if (mode != DestroyMode.WillReplace)
             {
-                InterruptAllJobs(FairyJobInterruptReason.OwnerUnavailable);
+                foreach (var job in ActiveJobs().ToList())
+                {
+                    job.Interrupt(FairyJobInterruptReason.OwnerUnavailable);
+                }
                 DestroyAllFairiesImmediate();
             }
         }
@@ -181,13 +170,19 @@ namespace VVRace
         public override void PostDestroy(DestroyMode mode, Map previousMap)
         {
             base.PostDestroy(mode, previousMap);
-            InterruptAllJobs(FairyJobInterruptReason.OwnerUnavailable);
+            foreach (var job in ActiveJobs().ToList())
+            {
+                job.Interrupt(FairyJobInterruptReason.OwnerUnavailable);
+            }
             DestroyAllFairiesImmediate();
         }
 
         public void DematerializeAll()
         {
-            InterruptAllJobs(FairyJobInterruptReason.DematerializeAll);
+            foreach (var job in ActiveJobs().ToList())
+            {
+                job.Interrupt(FairyJobInterruptReason.DematerializeAll);
+            }
             foreach (var f in _activeFairies.ToList())
             {
                 if (f != null && !f.Destroyed)
@@ -203,22 +198,6 @@ namespace VVRace
                 .Where(f => f != null && !f.Destroyed)
                 .Select(f => f.CurrentJob)
                 .Where(j => j != null && !j.Ended);
-        }
-
-        private void InterruptJobGroup(int id, FairyJobInterruptReason reason)
-        {
-            foreach (var job in ActiveJobs().Where(j => j.id == id).ToList())
-            {
-                job.Interrupt(reason);
-            }
-        }
-
-        private void InterruptAllJobs(FairyJobInterruptReason reason)
-        {
-            foreach (var job in ActiveJobs().ToList())
-            {
-                job.Interrupt(reason);
-            }
         }
 
         private void PruneActiveFairies()

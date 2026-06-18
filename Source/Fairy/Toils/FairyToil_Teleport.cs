@@ -46,7 +46,7 @@ namespace VVRace
                 return FairyToilStatus.Running;
             }
 
-            Fairy?.EnterIdleFromToil();
+            Fairy?.EnterIdle();
             return FairyToilStatus.Complete;
         }
 

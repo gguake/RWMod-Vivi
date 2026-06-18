@@ -84,6 +84,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Fairy\Abilities\CompAbilityEffect_FairyConcentration.cs" />
+    <Compile Include="Fairy\Abilities\CompAbilityEffect_FairyExpansion.cs" />
+    <Compile Include="Fairy\Abilities\CompAbilityEffect_FairyGuard.cs" />
     <Compile Include="Fairy\ViviFairy.cs" />
     <Compile Include="Fairy\CompViviFairyController.cs" />
     <Compile Include="Fairy\Gizmo_ViviFairyStatus.cs" />
@@ -106,7 +109,7 @@
     <Compile Include="Fairy\Toils\FairyToil_MoveToIdleOrbit.cs" />
     <Compile Include="Fairy\Abilities\Verb_CastAbilityMaterialize.cs" />
     <Compile Include="Fairy\Abilities\CompAbilityEffect_FairyMaterialize.cs" />
-    <Compile Include="Fairy\Abilities\FairyAbilityComps.cs" />
+    <Compile Include="Fairy\Abilities\CompAbility_RequireFairies.cs" />
     <Compile Include="ArcanePlant\Buildings\ArcaneSeedlingFarm.cs" />
     <Compile Include="ArcanePlant\Buildings\ShockNetTrap.cs" />
     <Compile Include="ArcanePlant\Mana\FluxRule\ManaFluxRule_Everflower.cs" />

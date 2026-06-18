@@ -12,6 +12,7 @@ namespace VVRace
         private const float CellGap = 4f;
         private const float Padding = 8f;
         private const float LabelHeight = 20f;
+        private const int MaxCellsPerRow = 4;
 
         private static readonly Color IdleColor = new Color(0.92f, 0.92f, 0.95f, 1f);
         private static readonly Color ActionColor = new Color(0.85f, 0.25f, 0.25f, 1f);
@@ -27,12 +28,11 @@ namespace VVRace
 
         public override bool Visible => _comp != null && _comp.MaterializedCount > 0 && Find.Selector.NumSelected == 1;
 
-        private int SlotCount => Mathf.Max(_comp.FairyPoolCount, _comp.MaterializedCount);
-
         public override float GetWidth(float maxWidth)
         {
-            int slots = Mathf.Max(1, SlotCount);
-            float w = Padding * 2f + slots * CellSize + (slots - 1) * CellGap;
+            int slots = Mathf.Max(1, Mathf.Max(_comp.FairyPoolCount, _comp.MaterializedCount));
+            int columns = Mathf.Min(slots, MaxCellsPerRow);
+            float w = Padding * 2f + columns * CellSize + (columns - 1) * CellGap;
             return Mathf.Clamp(w, 75f, maxWidth);
         }
 
@@ -54,12 +54,15 @@ namespace VVRace
                 .OrderByDescending(f => f.InAction)
                 .ToList();
 
-            float x = inner.x;
-            float y = inner.y + LabelHeight + 4f;
-            int slots = SlotCount;
+            float startX = inner.x;
+            float startY = inner.y + LabelHeight + 4f;
+            float cellStride = CellSize + CellGap;
+            int slots = Mathf.Max(_comp.FairyPoolCount, _comp.MaterializedCount);
             for (int i = 0; i < slots; i++)
             {
-                var cell = new Rect(x, y, CellSize, CellSize);
+                int column = i % MaxCellsPerRow;
+                int row = i / MaxCellsPerRow;
+                var cell = new Rect(startX + column * cellStride, startY + row * cellStride, CellSize, CellSize);
                 Color color;
                 if (i < ordered.Count)
                 {
@@ -71,7 +74,6 @@ namespace VVRace
                 }
 
                 Widgets.DrawBoxSolid(cell, color);
-                x += CellSize + CellGap;
             }
 
             TooltipHandler.TipRegion(rect, LocalizeString_Gizmo.VV_Gizmo_FairyStatusTooltip.Translate(

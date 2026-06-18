@@ -29,7 +29,7 @@ namespace VVRace
             if (map == null) { return; }
 
             var ctrl = Controller;
-            if (ctrl == null || !ctrl.CanMaterialize) { return; }
+            if (ctrl == null || ctrl.FairyPoolCount <= ctrl.MaterializedCount) { return; }
 
             var cell = target.Cell;
             var manaComp = map.GetManaComponent();
@@ -64,7 +64,7 @@ namespace VVRace
         public override bool GizmoDisabled(out string reason)
         {
             var ctrl = Controller;
-            if (ctrl == null || !ctrl.CanMaterialize)
+            if (ctrl == null || ctrl.FairyPoolCount <= ctrl.MaterializedCount)
             {
                 reason = LocalizeString_Etc.VV_AbilityDisabledNoFairySlot.Translate();
                 return true;

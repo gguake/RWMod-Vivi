@@ -50,7 +50,7 @@ namespace VVRace
 
             if (enterIdleOnComplete)
             {
-                Fairy?.EnterIdleFromToil();
+                Fairy?.EnterIdle();
             }
             return FairyToilStatus.Complete;
         }

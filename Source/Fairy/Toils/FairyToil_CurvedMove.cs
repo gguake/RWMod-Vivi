@@ -138,7 +138,11 @@ namespace VVRace
 
         public override void Cancel()
         {
-            Fairy?.StopToilMotion();
+            var fairy = Fairy;
+            if (fairy != null && (fairy.State == FairyState.Attacking || fairy.State == FairyState.MovingToRest))
+            {
+                fairy.EnterIdle();
+            }
         }
 
         private static float CalculateBezierCurveLengthApproximate(Vector3 p1, Vector3 p2, Vector3 w1, Vector3 w2)

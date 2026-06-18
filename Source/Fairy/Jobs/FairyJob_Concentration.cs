@@ -30,7 +30,9 @@ namespace VVRace
         protected override void MakeToils()
         {
             var center = target != null ? target.TrueCenter().Yto0() : Vector3.zero;
-            var cell = SlotPos(center, slot).ToIntVec3();
+            float slotAngle = 360f / Mathf.Max(1, count);
+            float angle = (90f + slotAngle * slot) * Mathf.Deg2Rad;
+            var cell = (center + new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle)) * ConcRadius).ToIntVec3();
             var map = owner != null ? owner.Map : null;
             if (target != null && (map == null || !cell.InBounds(map)))
             {
@@ -71,7 +73,10 @@ namespace VVRace
             var move = CurrentToilAs<FairyToil_MoveToIdleOrbit>();
             if (move == null || fairy == null) { return; }
 
-            Vector3 restPos = SlotPos(target.TrueCenter().Yto0(), slot);
+            Vector3 center = target.TrueCenter().Yto0();
+            float slotAngle = 360f / Mathf.Max(1, count);
+            float angle = (90f + slotAngle * slot) * Mathf.Deg2Rad;
+            Vector3 restPos = center + new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle)) * ConcRadius;
             move.ConfigureStepTarget(restPos);
 
             if (fairy.State != FairyState.Idle && fairy.State != FairyState.Attacking) { return; }
@@ -89,8 +94,13 @@ namespace VVRace
                 fairy?.StartJob(new FairyJob_Dematerialize(owner, applyAssimilation: false));
                 return;
             }
+            if (reason == FairyJobInterruptReason.LifespanExpired)
+            {
+                fairy?.StartJob(new FairyJob_Dematerialize(owner, applyAssimilation: true));
+                return;
+            }
 
-            StartIdleJob();
+            fairy?.StartJob(new FairyJob_Idle(owner));
         }
 
         protected override void OnEnded()
@@ -106,12 +116,6 @@ namespace VVRace
                 var hediff = p.health.hediffSet.GetFirstHediffOfDef(VVHediffDefOf.VV_FairyConcentrated);
                 if (hediff != null) { p.health.RemoveHediff(hediff); }
             }
-        }
-
-        private static Vector3 SlotPos(Vector3 center, int i)
-        {
-            float ang = (90f + 120f * i) * Mathf.Deg2Rad;
-            return center + new Vector3(Mathf.Cos(ang), 0f, Mathf.Sin(ang)) * ConcRadius;
         }
 
         public override void ExposeData()

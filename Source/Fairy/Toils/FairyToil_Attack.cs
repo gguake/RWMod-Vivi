@@ -30,24 +30,18 @@ namespace VVRace
                 return;
             }
 
-            EnsureAttackCurve();
+            if (!attackCurveInitialized)
+            {
+                attackCurveOffset = Rand.Range(AttackCurveOffsetMin, AttackCurveOffsetMax);
+                if (Rand.Value < 0.5f)
+                {
+                    attackCurveOffset *= -1f;
+                }
+                attackCurveInitialized = true;
+            }
+
             SetMoveTarget(target.TrueCenter().Yto0(), DefaultSpeed, attackCurveOffset);
             fairy.BeginToilMotion(FairyState.Attacking);
-        }
-
-        private void EnsureAttackCurve()
-        {
-            if (attackCurveInitialized)
-            {
-                return;
-            }
-
-            attackCurveOffset = Rand.Range(AttackCurveOffsetMin, AttackCurveOffsetMax);
-            if (Rand.Value < 0.5f)
-            {
-                attackCurveOffset *= -1f;
-            }
-            attackCurveInitialized = true;
         }
 
         protected override FairyToilStatus TickAction(int delta)
