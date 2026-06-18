@@ -1,4 +1,4 @@
-﻿using Verse;
+using Verse;
 using Verse.AI.Group;
 
 namespace VVRace

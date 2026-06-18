@@ -20,7 +20,6 @@ namespace VVRace
     {
         None,
         Guard,
-        Concentration,
         Expansion,
     }
 

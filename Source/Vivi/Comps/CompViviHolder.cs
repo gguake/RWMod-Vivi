@@ -1,4 +1,4 @@
-﻿using RimWorld;
+using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -22,6 +22,8 @@ namespace VVRace
 
     public class CompViviHolder : ThingComp
     {
+        private const int AutoMaterializeIntervalTicks = 15;
+
         public CompProperties_ViviHolder Props => (CompProperties_ViviHolder)props;
 
         public bool CanJoin => FairyficatedPawnCount < Props.maxCount;
@@ -33,10 +35,13 @@ namespace VVRace
         private List<ViviFairy> _activeFairies = new List<ViviFairy>();
         public IReadOnlyList<ViviFairy> ActiveFairies => _activeFairies;
         public int MaterializedCount => _activeFairies.Count;
+        public int PendingMaterializeCount => _pendingMaterializeCount;
         public int AvailableCount => _activeFairies.Count(f => f != null && !f.Destroyed && f.IsAvailable);
 
         private int _nextFairyJobId = 1;
         public int NextFairyJobId() => _nextFairyJobId++;
+        private int _pendingMaterializeCount;
+        private int _ticksUntilNextMaterialize;
 
         public CompViviHolder()
         {
@@ -50,6 +55,8 @@ namespace VVRace
             Scribe_Deep.Look(ref innerContainer, "innerViviContainer", new object[] { this });
             Scribe_Collections.Look(ref _activeFairies, "activeFairies", LookMode.Reference);
             Scribe_Values.Look(ref _nextFairyJobId, "nextFairyJobId", 1);
+            Scribe_Values.Look(ref _pendingMaterializeCount, "pendingMaterializeCount");
+            Scribe_Values.Look(ref _ticksUntilNextMaterialize, "ticksUntilNextMaterialize");
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
@@ -67,6 +74,11 @@ namespace VVRace
                     fairy?.EnsureJob();
                 }
             }
+        }
+
+        public override void CompTickInterval(int delta)
+        {
+            TickQueuedMaterialize(delta);
         }
 
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
@@ -115,6 +127,7 @@ namespace VVRace
         {
             base.PostDestroy(mode, previousMap);
 
+            CancelMaterializeQueue();
             foreach (var job in ActiveJobs().ToList())
             {
                 job.Interrupt(FairyJobInterruptReason.OwnerUnavailable);
@@ -133,6 +146,7 @@ namespace VVRace
             base.PostDeSpawn(map, mode);
             if (mode != DestroyMode.WillReplace)
             {
+                CancelMaterializeQueue();
                 foreach (var job in ActiveJobs().ToList())
                 {
                     job.Interrupt(FairyJobInterruptReason.OwnerUnavailable);
@@ -146,6 +160,7 @@ namespace VVRace
         {
             base.Notify_Downed();
 
+            CancelMaterializeQueue();
             foreach (var job in ActiveJobs().ToList())
             {
                 job.Interrupt(FairyJobInterruptReason.OwnerUnavailable);
@@ -158,6 +173,7 @@ namespace VVRace
         {
             base.Notify_Killed(prevMap, dinfo);
 
+            CancelMaterializeQueue();
             foreach (var job in ActiveJobs().ToList())
             {
                 job.Interrupt(FairyJobInterruptReason.OwnerUnavailable);
@@ -245,7 +261,71 @@ namespace VVRace
             return null;
         }
 
-        public ViviFairy MaterializeFairyAt(IntVec3 cell)
+        public bool TryQueueMaterializeAllAvailable()
+        {
+            if (!CanMaterializeFairy()) { return false; }
+
+            int count = FairyficatedPawnCount - MaterializedCount - _pendingMaterializeCount;
+            if (count <= 0) { return false; }
+
+            bool wasIdle = _pendingMaterializeCount <= 0;
+            _pendingMaterializeCount += count;
+            if (wasIdle)
+            {
+                _ticksUntilNextMaterialize = 0;
+                TickQueuedMaterialize(0);
+            }
+
+            return true;
+        }
+
+        public void CancelMaterializeQueue()
+        {
+            _pendingMaterializeCount = 0;
+            _ticksUntilNextMaterialize = 0;
+        }
+
+        private void TickQueuedMaterialize(int delta)
+        {
+            if (_pendingMaterializeCount <= 0) { return; }
+            if (!CanMaterializeFairy())
+            {
+                CancelMaterializeQueue();
+                return;
+            }
+
+            _ticksUntilNextMaterialize -= delta;
+            while (_pendingMaterializeCount > 0 && _ticksUntilNextMaterialize <= 0)
+            {
+                if (FairyficatedPawnCount <= MaterializedCount)
+                {
+                    CancelMaterializeQueue();
+                    return;
+                }
+
+                if (MaterializeFairy() == null)
+                {
+                    CancelMaterializeQueue();
+                    return;
+                }
+
+                _pendingMaterializeCount--;
+                _ticksUntilNextMaterialize += AutoMaterializeIntervalTicks;
+            }
+
+            if (_pendingMaterializeCount <= 0)
+            {
+                _ticksUntilNextMaterialize = 0;
+            }
+        }
+
+        private bool CanMaterializeFairy()
+        {
+            var pawn = (Pawn)parent;
+            return pawn.Spawned && !pawn.Dead && pawn.Map != null && pawn.health?.hediffSet.HasHediff(VVHediffDefOf.VV_FairyMastery) == true;
+        }
+
+        public ViviFairy MaterializeFairy()
         {
             var pawn = (Pawn)parent;
             if (pawn.Map == null) { return null; }
@@ -253,7 +333,7 @@ namespace VVRace
             var fairyDef = VVThingDefOf.VV_ViviFairy;
             var fairy = (ViviFairy)ThingMaker.MakeThing(fairyDef);
             fairy.Initialize(pawn, Props.fairyLifespanTicks);
-            GenSpawn.Spawn(fairy, cell, pawn.Map);
+            GenSpawn.Spawn(fairy, pawn.Position, pawn.Map);
 
             RegisterFairy(fairy);
             fairy.StartJob(new FairyJob_Materialize(fairy.Owner));
@@ -290,11 +370,6 @@ namespace VVRace
             return ActiveJobs().OfType<T>().FirstOrDefault(j => !j.Ended);
         }
 
-        public bool HasActiveJobInGroup(int id, FairyJobKind kind, FairyJob except = null)
-        {
-            return ActiveJobs().Any(j => j != null && j != except && !j.Ended && j.id == id && j.Kind == kind);
-        }
-
         public bool TryReserveIdleFairies(int count, out List<ViviFairy> reserved)
         {
             reserved = _activeFairies
@@ -314,56 +389,28 @@ namespace VVRace
 
         public void DematerializeAll()
         {
-            foreach (var job in ActiveJobs().ToList())
+            CancelMaterializeQueue();
+            foreach (var job in ActiveJobs().Where(j => j.Kind != FairyJobKind.Dematerialize).ToList())
             {
                 job.Interrupt(FairyJobInterruptReason.DematerializeAll);
             }
             foreach (var f in _activeFairies.ToList())
             {
-                if (f != null && !f.Destroyed)
+                if (f != null && !f.Destroyed && f.CurrentJob.Kind != FairyJobKind.Dematerialize)
                 {
                     f.BeginDematerialize(false);
                 }
             }
         }
 
-        public void RefreshFairyMastery()
-        {
-            var pawn = (Pawn)parent;
-            if (pawn.health == null) { return; }
-
-            var compVivi = parent.GetComp<CompVivi>();
-            if (compVivi == null) { return; }
-
-            var masteryHediff = pawn.health.hediffSet.GetFirstHediffOfDef(VVHediffDefOf.VV_FairyMastery);
-            var shouldHave = compVivi.AttunementActive && compVivi.LinkedEverflower?.EverflowerComp.AttunementLevel >= 4;
-            if (shouldHave)
-            {
-                if (masteryHediff == null)
-                {
-                    pawn.health.AddHediff(VVHediffDefOf.VV_FairyMastery);
-                }
-                return;
-            }
-
-            if (masteryHediff != null)
-            {
-                pawn.health.RemoveHediff(masteryHediff);
-            }
-
-            DematerializeAll();
-        }
-
         public void Notify_EverflowerLinked()
         {
             Refresh();
-            RefreshFairyMastery();
         }
 
         public void Notify_EverflowerUnlinked()
         {
             Refresh();
-            RefreshFairyMastery();
         }
 
         private IEnumerable<FairyJob> ActiveJobs()
@@ -376,6 +423,7 @@ namespace VVRace
 
         private void DestroyAllActiveFairies()
         {
+            CancelMaterializeQueue();
             foreach (var f in _activeFairies.ToList())
             {
                 if (f != null && !f.Destroyed)

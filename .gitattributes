@@ -1,2 +1,10 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+# Text files are edited in the working tree as CRLF.
+* text=auto eol=crlf
+
+# Binary assets must not be line-ending normalized.
+*.cache -text -eol
+*.db -text -eol
+*.dll -text -eol
+*.ogg -text -eol
+*.pdb -text -eol
+*.png -text -eol

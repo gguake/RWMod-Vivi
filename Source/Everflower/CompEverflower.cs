@@ -1,4 +1,4 @@
-﻿using RimWorld;
+using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -269,7 +269,7 @@ namespace VVRace
 
             if (shouldNotifyPawn)
             {
-                compVivi.Notify_UnlinkEverflower(showMessages, refreshFairyMastery: false);
+                compVivi.Notify_UnlinkEverflower(showMessages);
 
                 if (pawn.TryGetComp<CompViviHolder>(out var compViviHolder))
                 {
@@ -348,7 +348,7 @@ namespace VVRace
 
             foreach (var pawn in LinkedPawns)
             {
-                pawn.GetComp<CompViviHolder>()?.RefreshFairyMastery();
+                pawn.GetCompVivi()?.RefreshEverflowerHediffs();
             }
         }
 

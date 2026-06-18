@@ -1,4 +1,4 @@
-﻿using RPEF;
+using RPEF;
 using Verse;
 
 namespace VVRace

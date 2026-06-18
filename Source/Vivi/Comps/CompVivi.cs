@@ -1,4 +1,4 @@
-﻿using RimWorld;
+using RimWorld;
 using UnityEngine;
 using Verse;
 
@@ -44,7 +44,7 @@ namespace VVRace
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
-                ViviHolder?.RefreshFairyMastery();
+                RefreshEverflowerHediffs();
             }
         }
 
@@ -70,21 +70,13 @@ namespace VVRace
                     }
                 }
             }
-            else
-            {
-                if (AttunementActive)
-                {
-                    GiveEverflowerLinkHediff();
-                }
-            }
-
             RefreshHairColor();
-            ViviHolder?.RefreshFairyMastery();
+            RefreshEverflowerHediffs();
         }
 
         public override void PostDeSpawn(Map map, DestroyMode mode = DestroyMode.Vanish)
         {
-            RemoveEverflowerLinkHediff();
+            RefreshEverflowerHediffs();
         }
 
         public override void PostDestroy(DestroyMode mode, Map previousMap)
@@ -154,7 +146,7 @@ namespace VVRace
                 pawn.health.AddHediff(VVHediffDefOf.VV_RoyalVivi);
             }
 
-            ViviHolder?.RefreshFairyMastery();
+            RefreshEverflowerHediffs();
         }
 
         public void RefreshHairColor()
@@ -226,24 +218,14 @@ namespace VVRace
                 LetterDefOf.PositiveEvent,
                 parent);
 
-            GiveEverflowerLinkHediff();
-            ViviHolder?.RefreshFairyMastery();
+            RefreshEverflowerHediffs();
         }
 
         public void Notify_UnlinkEverflower(bool showMessages = true)
         {
-            Notify_UnlinkEverflower(showMessages, true);
-        }
-
-        public void Notify_UnlinkEverflower(bool showMessages, bool refreshFairyMastery)
-        {
             _linkedEverflower = null;
 
-            RemoveEverflowerLinkHediff();
-            if (refreshFairyMastery)
-            {
-                ViviHolder?.RefreshFairyMastery();
-            }
+            RefreshEverflowerHediffs();
 
             if (showMessages)
             {
@@ -251,24 +233,55 @@ namespace VVRace
             }
         }
 
-        private void GiveEverflowerLinkHediff()
+        public void RefreshEverflowerHediffs()
         {
             var pawn = (Pawn)parent;
-            var hediff = pawn.health.hediffSet.GetFirstHediffOfDef(VVHediffDefOf.VV_EverflowerLink);
-            if (hediff == null)
-            {
-                hediff = pawn.health.AddHediff(VVHediffDefOf.VV_EverflowerLink);
-                hediff.Severity = LinkedEverflower.EverflowerComp.AttunementHediffSeverity;
-            }
+            if (pawn.health == null) { return; }
+
+            RefreshEverflowerLinkHediff(pawn);
+            RefreshFairyMasteryHediff(pawn);
         }
 
-        private void RemoveEverflowerLinkHediff()
+        private void RefreshEverflowerLinkHediff(Pawn pawn)
         {
-            var pawn = (Pawn)parent;
             var hediff = pawn.health.hediffSet.GetFirstHediffOfDef(VVHediffDefOf.VV_EverflowerLink);
+            if (AttunementActive)
+            {
+                if (hediff == null)
+                {
+                    hediff = pawn.health.AddHediff(VVHediffDefOf.VV_EverflowerLink);
+                }
+                hediff.Severity = LinkedEverflower.EverflowerComp.AttunementHediffSeverity;
+                return;
+            }
+
             if (hediff != null)
             {
                 pawn.health.RemoveHediff(hediff);
+            }
+        }
+
+        private void RefreshFairyMasteryHediff(Pawn pawn)
+        {
+            var hediff = pawn.health.hediffSet.GetFirstHediffOfDef(VVHediffDefOf.VV_FairyMastery);
+            if (AttunementActive && LinkedEverflower?.EverflowerComp.AttunementLevel >= 4)
+            {
+                if (hediff == null)
+                {
+                    pawn.health.AddHediff(VVHediffDefOf.VV_FairyMastery);
+                }
+                return;
+            }
+
+            if (hediff != null)
+            {
+                pawn.health.RemoveHediff(hediff);
+            }
+
+            var holder = ViviHolder;
+            if (holder != null && (hediff != null || holder.MaterializedCount > 0 || holder.PendingMaterializeCount > 0))
+            {
+                holder.DematerializeAll();
             }
         }
     }

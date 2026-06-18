@@ -1,0 +1,11 @@
+root = true
+
+[*.{bat,cs,csproj,json,md,sln,txt,user,xml}]
+charset = utf-8
+end_of_line = crlf
+insert_final_newline = true
+
+[.{editorconfig,gitattributes,gitignore}]
+charset = utf-8
+end_of_line = crlf
+insert_final_newline = true

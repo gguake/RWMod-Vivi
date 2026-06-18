@@ -1,4 +1,4 @@
-﻿using HarmonyLib;
+using HarmonyLib;
 using VVRace.HarmonyPatches;
 
 namespace VVRace

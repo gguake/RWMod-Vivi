@@ -87,6 +87,7 @@
     <Compile Include="Fairy\Abilities\CompAbilityEffect_FairyConcentration.cs" />
     <Compile Include="Fairy\Abilities\CompAbilityEffect_FairyExpansion.cs" />
     <Compile Include="Fairy\Abilities\CompAbilityEffect_FairyGuard.cs" />
+    <Compile Include="Fairy\Hediff_FairyConcentrated.cs" />
     <Compile Include="Fairy\ViviFairy.cs" />
     <Compile Include="Fairy\Gizmo_ViviFairyStatus.cs" />
     <Compile Include="Fairy\ViviFairyTargeting.cs" />
@@ -96,7 +97,6 @@
     <Compile Include="Fairy\Jobs\FairyJob_Dematerialize.cs" />
     <Compile Include="Fairy\Jobs\FairyJob_Idle.cs" />
     <Compile Include="Fairy\Jobs\FairyJob_Guard.cs" />
-    <Compile Include="Fairy\Jobs\FairyJob_Concentration.cs" />
     <Compile Include="Fairy\Jobs\FairyJob_Expansion.cs" />
     <Compile Include="Fairy\Jobs\FairyJobUtility.cs" />
     <Compile Include="Fairy\Toils\FairyToil.cs" />

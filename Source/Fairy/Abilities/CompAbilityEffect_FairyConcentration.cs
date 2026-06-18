@@ -1,4 +1,4 @@
-﻿using RimWorld;
+using RimWorld;
 using Verse;
 
 namespace VVRace
@@ -13,26 +13,16 @@ namespace VVRace
 
     public class CompAbilityEffect_FairyConcentration : CompAbilityEffect
     {
-        private const int RequiredFairies = 3;
-
-        private CompViviHolder Controller => parent.pawn.GetComp<CompViviHolder>();
-
         public override void Apply(LocalTargetInfo target, LocalTargetInfo dest)
         {
             base.Apply(target, dest);
 
             var enemy = target.Pawn;
-            var ctrl = Controller;
-            if (enemy == null || ctrl == null) { return; }
-            if (!ctrl.TryReserveIdleFairies(RequiredFairies, out var reserved)) { return; }
+            if (enemy == null || enemy.health == null) { return; }
 
-            int id = ctrl.NextFairyJobId();
-            for (int i = 0; i < reserved.Count; i++)
-            {
-                reserved[i].StartJob(new FairyJob_Concentration(id, parent.pawn, enemy, i, reserved.Count));
-            }
-
-            enemy.health.AddHediff(VVHediffDefOf.VV_FairyConcentrated);
+            var hediff = (Hediff_FairyConcentrated)enemy.health.AddHediff(VVHediffDefOf.VV_FairyConcentrated);
+            hediff.ownerVivi = parent.pawn;
+            hediff.ResetDuration();
         }
 
         public override bool Valid(LocalTargetInfo target, bool throwMessages = false)
@@ -54,5 +44,4 @@ namespace VVRace
             return base.Valid(target, throwMessages);
         }
     }
-
 }

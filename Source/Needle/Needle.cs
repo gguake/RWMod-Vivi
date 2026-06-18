@@ -1,4 +1,4 @@
-﻿using RimWorld;
+using RimWorld;
 using RPEF;
 using System.Collections.Generic;
 using System.Linq;

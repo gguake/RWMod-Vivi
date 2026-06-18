@@ -1,4 +1,4 @@
-﻿namespace VVRace
+namespace VVRace
 {
     public static class LocalizeString_ITab
     {

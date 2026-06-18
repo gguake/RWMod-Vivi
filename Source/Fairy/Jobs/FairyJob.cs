@@ -10,7 +10,6 @@ namespace VVRace
         Dematerialize,
         Idle,
         Guard,
-        Concentration,
         Expansion,
     }
 
@@ -176,6 +175,38 @@ namespace VVRace
             AttachToils();
 
             CurrentToil?.Start();
+        }
+
+        protected bool TryStartAttackOrReturn(Thing target, FairyToil_MoveToIdleOrbit move)
+        {
+            if (fairy == null || (fairy.State != FairyState.Idle && fairy.State != FairyState.Attacking))
+            {
+                return false;
+            }
+
+            if (target == null)
+            {
+                if (fairy.State == FairyState.Attacking)
+                {
+                    fairy.EnterIdle();
+                    ResetToils(new FairyToil_MoveToIdleOrbit());
+                }
+                return false;
+            }
+
+            if (CurrentToil is FairyToil_Attack)
+            {
+                return true;
+            }
+            if (fairy.State != FairyState.Attacking && move != null && !move.IsNearStepTarget(0.35f))
+            {
+                return false;
+            }
+
+            ResetToils(
+                new FairyToil_Attack(target),
+                new FairyToil_MoveToIdleOrbit());
+            return true;
         }
 
         public virtual void End()

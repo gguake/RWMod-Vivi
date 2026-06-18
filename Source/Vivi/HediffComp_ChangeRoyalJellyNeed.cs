@@ -1,4 +1,4 @@
-﻿using RimWorld;
+using RimWorld;
 using System.Security.Cryptography;
 using Verse;
 

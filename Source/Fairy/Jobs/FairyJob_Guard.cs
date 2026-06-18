@@ -6,8 +6,6 @@ namespace VVRace
 {
     public class FairyJob_Guard : FairyJob
     {
-        private const float GuardScanRadius = 4.9f;
-
         private Pawn ally;
 
         public override FairyJobKind Kind => FairyJobKind.Guard;
@@ -49,7 +47,7 @@ namespace VVRace
         {
             var orbit = CurrentToilAs<FairyToil_IdleOrbit>();
             var move = CurrentToilAs<FairyToil_MoveToIdleOrbit>();
-            if (orbit == null && move == null) { return; }
+            if (orbit == null && move == null && !(CurrentToil is FairyToil_Attack)) { return; }
 
             orbit?.Configure(ally, 0, 1);
 
@@ -58,24 +56,13 @@ namespace VVRace
             Vector3 restPos = FairyJobUtility.OrbitPositionAround(fairy, ally, 0, 1);
             move?.ConfigureStepTarget(restPos);
 
-            if (fairy.State != FairyState.Idle && fairy.State != FairyState.Attacking) { return; }
-
             var target = ViviFairyTargeting.FindHostileNear(
-                owner as IAttackTargetSearcher, ally.Position, GuardScanRadius, ally.Position, excludeDowned: true);
-
-            if (target == null)
-            {
-                if (fairy.State == FairyState.Attacking)
-                {
-                    fairy.EnterIdle();
-                }
-                return;
-            }
-            if (fairy.State != FairyState.Attacking && move != null && !move.IsNearStepTarget(0.35f)) { return; }
-
-            ResetToils(
-                new FairyToil_Attack(target),
-                new FairyToil_MoveToIdleOrbit());
+                owner as IAttackTargetSearcher,
+                ally.Position,
+                ViviFairyTargeting.GuardScanRadius,
+                ally.Position,
+                excludeDowned: true);
+            TryStartAttackOrReturn(target, move);
         }
 
         protected override void OnInterrupted(FairyJobInterruptReason reason)

@@ -50,8 +50,8 @@
   <HediffDef>
     <defName>VV_FairyConcentrated</defName>
     <label>fairy concentration</label>
-    <description>Fairy vivi are concentrating their attacks on this target.</description>
-    <hediffClass>HediffWithComps</hediffClass>
+    <description>Fairy vivi are focusing this target while it remains within the royal vivi's sight and range.</description>
+    <hediffClass>VVRace.Hediff_FairyConcentrated</hediffClass>
     <defaultLabelColor>(1, 0.4, 0.4)</defaultLabelColor>
     <isBad>true</isBad>
     <priceImpact>false</priceImpact>

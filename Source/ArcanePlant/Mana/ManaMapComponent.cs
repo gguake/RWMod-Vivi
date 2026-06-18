@@ -1,4 +1,4 @@
-﻿using LudeonTK;
+using LudeonTK;
 using System;
 using Unity.Collections;
 using Unity.Jobs;

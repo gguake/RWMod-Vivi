@@ -1,44 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
 
-  <!-- 요정 실체화: 지정한 위치에 요정 비비 하나를 실체화한다. 대상 셀의 환경마나를 소모하며,
-       시전 시간은 정신 감응력이 높을수록 짧아진다(Verb_CastAbilityMaterialize). -->
   <AbilityDef>
     <defName>VV_FairyMaterialize</defName>
     <label>fairy materialization</label>
-    <description>Materialize one bound fairy vivi at a target location, drawing on the environment mana there. The higher the caster's psychic sensitivity, the faster the summoning. The fairy fades after a time, leaving behind everflower assimilation.</description>
+    <description>Materialize all currently bound fairy vivi that are not already outside. They appear one after another near the royal vivi, then fade after a time and leave behind everflower assimilation.</description>
     <iconPath>Things/Mote/VV_Fairy/VV_Fairy_south</iconPath>
     <cooldownTicksRange>300</cooldownTicksRange>
     <hostile>false</hostile>
     <aiCanUse>false</aiCanUse>
+    <targetRequired>false</targetRequired>
 
     <verbProperties>
       <verbClass>VVRace.Verb_CastAbilityMaterialize</verbClass>
       <label>materialize fairy</label>
       <violent>false</violent>
       <warmupTime>8.8</warmupTime>
-      <range>6.4</range>
-      <requireLineOfSight>true</requireLineOfSight>
+      <range>1.9</range>
+      <requireLineOfSight>false</requireLineOfSight>
+      <nonInterruptingSelfCast>true</nonInterruptingSelfCast>
+      <targetable>false</targetable>
       <targetParams>
-        <canTargetLocations>true</canTargetLocations>
+        <canTargetSelf>true</canTargetSelf>
+        <canTargetLocations>false</canTargetLocations>
         <canTargetPawns>false</canTargetPawns>
         <canTargetBuildings>false</canTargetBuildings>
-        <canTargetSelf>false</canTargetSelf>
       </targetParams>
     </verbProperties>
 
     <comps>
-      <li Class="VVRace.CompProperties_AbilityFairyMaterialize">
-        <manaCost>40</manaCost>
-      </li>
+      <li Class="VVRace.CompProperties_AbilityFairyMaterialize" />
     </comps>
   </AbilityDef>
 
-  <!-- 요정 - 경호: 요정 1기가 아군을 따라다니며 주변 5x5 적을 공격. -->
   <AbilityDef>
     <defName>VV_FairyGuard</defName>
     <label>fairy - guard</label>
-    <description>Assign one idle fairy vivi to escort an allied pawn, attacking nearby visible, non-downed hostiles within a 5x5 area. The escort ends if the target deads or vanishes, or when the fairy's duration expires (in which case the fairy fades).</description>
+    <description>Assign one idle fairy vivi to escort an allied pawn, using the same protection behavior idle fairy vivi use around the royal vivi. The fairy attacks nearby visible, non-downed hostiles within a 5x5 area.</description>
     <iconPath>Things/Mote/VV_Fairy/VV_Fairy_east</iconPath>
     <cooldownTicksRange>600</cooldownTicksRange>
     <hostile>false</hostile>
@@ -68,11 +66,10 @@
     </comps>
   </AbilityDef>
 
-  <!-- 요정 - 집중: 요정 3기가 적 주변으로 포위 이동 후 집중 공격(최대 2000틱). -->
   <AbilityDef>
     <defName>VV_FairyConcentration</defName>
     <label>fairy - concentration</label>
-    <description>Three idle fairy vivi teleport around a hostile target and concentrate their attacks for a short time. Ends after the duration or when the target falls or vanishes.</description>
+    <description>Mark a hostile target for fairy concentration. While the marked target remains within the royal vivi's sight and range, every idle fairy vivi concentrates attacks on it.</description>
     <iconPath>Things/Mote/VV_FairyAttack/VV_FairyAttack_south</iconPath>
     <cooldownTicksRange>1200</cooldownTicksRange>
     <hostile>true</hostile>
@@ -95,14 +92,10 @@
     </verbProperties>
 
     <comps>
-      <li Class="VVRace.CompProperties_AbilityRequireFairies">
-        <requiredIdle>3</requiredIdle>
-      </li>
       <li Class="VVRace.CompProperties_AbilityFairyConcentration" />
     </comps>
   </AbilityDef>
 
-  <!-- 요정 - 전개: 요정 6기가 로열 비비 주위를 6각 궤도로 맴돌며 시야 내 적을 추적 공격(토글, 최대 10000틱). -->
   <AbilityDef>
     <defName>VV_FairyExpansion</defName>
     <label>fairy - expansion</label>

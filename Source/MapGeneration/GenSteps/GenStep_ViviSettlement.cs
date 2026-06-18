@@ -1,4 +1,4 @@
-﻿using RimWorld;
+using RimWorld;
 using RimWorld.BaseGen;
 using UnityEngine;
 using Verse;

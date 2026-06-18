@@ -1,6 +1,7 @@
 using System.Linq;
 using UnityEngine;
 using Verse;
+using Verse.AI;
 
 namespace VVRace
 {
@@ -32,7 +33,8 @@ namespace VVRace
         {
             var move = CurrentToilAs<FairyToil_MoveToIdleOrbit>();
             var orbit = CurrentToilAs<FairyToil_IdleOrbit>();
-            if ((move == null && orbit == null) || fairy == null) { return; }
+            if (fairy == null) { return; }
+            if (move == null && orbit == null && !(CurrentToil is FairyToil_Attack)) { return; }
 
             int slot = 0;
             int count = 1;
@@ -50,6 +52,15 @@ namespace VVRace
 
             move?.ConfigureStepTarget(FairyJobUtility.IdleOrbitPositionAround(fairy, owner, slot, count));
             orbit?.Configure(owner, slot, count);
+
+            var target = ViviFairyTargeting.FindConcentratedTarget(owner)
+                ?? ViviFairyTargeting.FindHostileNear(
+                    owner as IAttackTargetSearcher,
+                    owner.Position,
+                    ViviFairyTargeting.GuardScanRadius,
+                    owner.Position,
+                    excludeDowned: true);
+            TryStartAttackOrReturn(target, move);
         }
 
         protected override void OnInterrupted(FairyJobInterruptReason reason)

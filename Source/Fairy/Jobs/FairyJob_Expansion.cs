@@ -43,35 +43,24 @@ namespace VVRace
             }
 
             var move = CurrentToilAs<FairyToil_MoveToIdleOrbit>();
-            if (move == null || fairy == null) { return; }
+            if (fairy == null) { return; }
+            if (move == null && !(CurrentToil is FairyToil_Attack)) { return; }
 
             orbitPhase += OrbitSpeed * delta * fairy.OrbitSpeedFactor * fairy.OrbitDirection;
-            Vector3 center = owner.DrawPos.Yto0();
-            float radiusFactor = (fairy.OrbitRadiusXFactor + fairy.OrbitRadiusZFactor) * 0.5f;
-            float phaseOffset = fairy.OrbitPhaseOffset;
-            float slotAngle = Mathf.PI * 2f / Mathf.Max(1, count);
-            float angle = slotAngle * slot + orbitPhase + phaseOffset;
-            Vector3 restPos = center + new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle)) * HexRadius * radiusFactor;
-            move.ConfigureStepTarget(restPos);
-
-            if (fairy.State != FairyState.Idle && fairy.State != FairyState.Attacking) { return; }
+            if (move != null)
+            {
+                Vector3 center = owner.DrawPos.Yto0();
+                float radiusFactor = (fairy.OrbitRadiusXFactor + fairy.OrbitRadiusZFactor) * 0.5f;
+                float phaseOffset = fairy.OrbitPhaseOffset;
+                float slotAngle = Mathf.PI * 2f / Mathf.Max(1, count);
+                float angle = slotAngle * slot + orbitPhase + phaseOffset;
+                Vector3 restPos = center + new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle)) * HexRadius * radiusFactor;
+                move.ConfigureStepTarget(restPos);
+            }
 
             var target = ViviFairyTargeting.FindHostileNear(
                 owner as IAttackTargetSearcher, owner.Position, ExpansionRadius, owner.Position, excludeDowned: false);
-
-            if (target == null)
-            {
-                if (fairy.State == FairyState.Attacking)
-                {
-                    fairy.EnterIdle();
-                }
-                return;
-            }
-            if (fairy.State != FairyState.Attacking && !move.IsNearStepTarget(0.35f)) { return; }
-
-            ResetToils(
-                new FairyToil_Attack(target),
-                new FairyToil_MoveToIdleOrbit());
+            TryStartAttackOrReturn(target, move);
         }
 
         protected override void OnInterrupted(FairyJobInterruptReason reason)
