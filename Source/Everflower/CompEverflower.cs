@@ -110,9 +110,9 @@ namespace VVRace
 
         public override void PostDestroy(DestroyMode mode, Map previousMap)
         {
-            foreach (var pawn in LinkedPawns)
+            foreach (var pawn in LinkedPawns.ToList())
             {
-                pawn.GetCompVivi().Notify_UnlinkEverflower();
+                UnlinkAttunement(pawn);
             }
         }
 
@@ -254,17 +254,27 @@ namespace VVRace
 
         public void UnlinkAttunement(Pawn pawn)
         {
-            if (!_linked.Contains(pawn)) { return; }
+            UnlinkAttunement(pawn, true);
+        }
 
-            if (pawn.TryGetComp<CompVivi>(out var compVivi))
-            {
-                compVivi.Notify_UnlinkEverflower(true);
-            }
+        public void UnlinkAttunement(Pawn pawn, bool showMessages)
+        {
+            if (pawn == null) { return; }
 
-            _linked.Remove(pawn);
-            if (pawn.TryGetComp<CompViviHolder>(out var compViviHolder))
+            var removed = _linked.Remove(pawn);
+            var compVivi = pawn.GetComp<CompVivi>();
+            var shouldNotifyPawn = compVivi != null && compVivi.LinkedEverflower == Everflower;
+
+            if (!removed && !shouldNotifyPawn) { return; }
+
+            if (shouldNotifyPawn)
             {
-                compViviHolder.Notify_EverflowerUnlinked();
+                compVivi.Notify_UnlinkEverflower(showMessages, refreshFairyMastery: false);
+
+                if (pawn.TryGetComp<CompViviHolder>(out var compViviHolder))
+                {
+                    compViviHolder.Notify_EverflowerUnlinked();
+                }
             }
         }
 

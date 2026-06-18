@@ -93,7 +93,7 @@ namespace VVRace
 
             if (LinkedEverflower != null)
             {
-                LinkedEverflower.EverflowerComp.UnlinkAttunement((Pawn)parent);
+                LinkedEverflower.EverflowerComp.UnlinkAttunement((Pawn)parent, showMessages: false);
             }
         }
 
@@ -101,7 +101,7 @@ namespace VVRace
         {
             if (LinkedEverflower != null)
             {
-                LinkedEverflower.EverflowerComp.UnlinkAttunement((Pawn)parent);
+                LinkedEverflower.EverflowerComp.UnlinkAttunement((Pawn)parent, showMessages: false);
             }
         }
 
@@ -232,10 +232,18 @@ namespace VVRace
 
         public void Notify_UnlinkEverflower(bool showMessages = true)
         {
+            Notify_UnlinkEverflower(showMessages, true);
+        }
+
+        public void Notify_UnlinkEverflower(bool showMessages, bool refreshFairyMastery)
+        {
             _linkedEverflower = null;
 
             RemoveEverflowerLinkHediff();
-            ViviHolder?.RefreshFairyMastery();
+            if (refreshFairyMastery)
+            {
+                ViviHolder?.RefreshFairyMastery();
+            }
 
             if (showMessages)
             {

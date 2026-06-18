@@ -355,9 +355,9 @@ namespace VVRace.HarmonyPatches
             foreach (var pawn in pawns)
             {
                 var compVivi = pawn.GetCompVivi();
-                if (compVivi != null)
+                if (compVivi?.LinkedEverflower != null)
                 {
-                    compVivi.Notify_UnlinkEverflower(false);
+                    compVivi.LinkedEverflower.EverflowerComp.UnlinkAttunement(pawn, showMessages: false);
                 }
             }
         }
