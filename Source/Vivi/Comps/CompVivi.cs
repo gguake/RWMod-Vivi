@@ -12,6 +12,8 @@ namespace VVRace
 
         public bool isRoyal = false;
         private Color? _originalHairColor = null;
+        [Unsaved]
+        private bool _refreshEverflowerHediffsAfterLoad;
 
         public ArcanePlant_Everflower LinkedEverflower => _linkedEverflower;
         private ArcanePlant_Everflower _linkedEverflower;
@@ -45,7 +47,7 @@ namespace VVRace
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
-                RefreshEverflowerHediffs();
+                _refreshEverflowerHediffsAfterLoad = true;
             }
         }
 
@@ -72,7 +74,15 @@ namespace VVRace
                 }
             }
             RefreshHairColor();
-            RefreshEverflowerHediffs();
+            if (respawningAfterLoad)
+            {
+                _refreshEverflowerHediffsAfterLoad = true;
+                TryRefreshEverflowerHediffsAfterLoad();
+            }
+            else
+            {
+                RefreshEverflowerHediffs();
+            }
         }
 
         public override void PostDeSpawn(Map map, DestroyMode mode = DestroyMode.Vanish)
@@ -100,6 +110,11 @@ namespace VVRace
 
         public override void CompTickInterval(int delta)
         {
+            if (_refreshEverflowerHediffsAfterLoad)
+            {
+                TryRefreshEverflowerHediffsAfterLoad();
+            }
+
             if (parent.Spawned)
             {
                 if (parent.IsHashIntervalTick(20000, delta))
@@ -115,6 +130,23 @@ namespace VVRace
                     LinkedEverflower.EverflowerComp.GainAttunementFromMana(mana);
                 }
             }
+        }
+
+        private bool TryRefreshEverflowerHediffsAfterLoad()
+        {
+            if (!parent.Spawned)
+            {
+                return false;
+            }
+
+            if (LinkedEverflower != null && !LinkedEverflower.Destroyed && !LinkedEverflower.Spawned)
+            {
+                return false;
+            }
+
+            _refreshEverflowerHediffsAfterLoad = false;
+            RefreshEverflowerHediffs();
+            return true;
         }
 
         public override void PostDrawExtraSelectionOverlays()

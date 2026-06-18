@@ -5,7 +5,7 @@
     <defName>VV_FairyMaterialize</defName>
     <label>fairy materialization</label>
     <description>Materialize all currently bound fairy vivi that are not already outside. They appear one after another near the royal vivi, then fade after a time and leave behind everflower assimilation.</description>
-    <iconPath>Things/Mote/VV_Fairy/VV_Fairy_south</iconPath>
+    <iconPath>UI/Commands/VV_FairyMaterialize</iconPath>
     <cooldownTicksRange>300</cooldownTicksRange>
     <hostile>false</hostile>
     <aiCanUse>false</aiCanUse>
@@ -37,7 +37,7 @@
     <defName>VV_FairyGuard</defName>
     <label>fairy - guard</label>
     <description>Assign one idle fairy vivi to escort an allied pawn, using the same protection behavior idle fairy vivi use around the royal vivi. The fairy attacks nearby visible, non-downed hostiles within a 5x5 area.</description>
-    <iconPath>Things/Mote/VV_Fairy/VV_Fairy_east</iconPath>
+    <iconPath>UI/Commands/VV_FairyGuard</iconPath>
     <cooldownTicksRange>600</cooldownTicksRange>
     <hostile>false</hostile>
     <aiCanUse>false</aiCanUse>
@@ -70,7 +70,7 @@
     <defName>VV_FairyConcentration</defName>
     <label>fairy - concentration</label>
     <description>Mark a hostile target for fairy concentration. While the marked target remains within the royal vivi's sight and range, every idle fairy vivi concentrates attacks on it.</description>
-    <iconPath>Things/Mote/VV_FairyAttack/VV_FairyAttack_south</iconPath>
+    <iconPath>UI/Commands/VV_FairyConcentration</iconPath>
     <cooldownTicksRange>1200</cooldownTicksRange>
     <hostile>true</hostile>
     <aiCanUse>false</aiCanUse>
@@ -100,7 +100,7 @@
     <defName>VV_FairyExpansion</defName>
     <label>fairy - expansion</label>
     <description>Six idle fairy vivi orbit the royal vivi in a hexagonal formation, tracking and attacking all hostiles within the royal vivi's sight. Toggle off by recasting; also ends after the duration or if the royal vivi dies.</description>
-    <iconPath>Things/Mote/VV_FairyAttack/VV_FairyAttack_east</iconPath>
+    <iconPath>UI/Commands/VV_FairyExpansion</iconPath>
     <cooldownTicksRange>600</cooldownTicksRange>
     <hostile>false</hostile>
     <aiCanUse>false</aiCanUse>

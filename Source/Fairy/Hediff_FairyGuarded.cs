@@ -28,7 +28,7 @@ namespace VVRace
             {
                 defaultLabel = LocalizeString_Etc.VV_Command_ReleaseGuard.Translate(),
                 defaultDesc = LocalizeString_Etc.VV_Command_ReleaseGuardDesc.Translate(),
-                icon = ContentFinder<Texture2D>.Get("Things/Mote/VV_Fairy/VV_Fairy_south", reportFailure: false),
+                icon = ContentFinder<Texture2D>.Get("UI/Commands/VV_FairyReleaseGuard", reportFailure: false),
                 action = () =>
                 {
                     var ctrl = ownerVivi != null ? ownerVivi.GetComp<CompViviHolder>() : null;

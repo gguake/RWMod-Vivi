@@ -2,15 +2,15 @@
 <Defs>
 
 <VV_FairyMastery.label>요정 비비 제어</VV_FairyMastery.label>
-<VV_FairyMastery.description>영원꽃과의 깊은 조율을 통해, 이 로열 비비는 결속된 요정 비비를 짧은 시간 실체화시켜 다양한 능력으로 다룰 수 있습니다.</VV_FairyMastery.description>
+<VV_FairyMastery.description>영원꽃과의 깊은 조율을 통해, 이 로열 비비는 결속된 요정 비비를 짧은 시간 실체화시켜 다양한 용도로 다룰 수 있습니다.</VV_FairyMastery.description>
 
 <VV_EverflowerAssimilation.label>영원꽃 동화</VV_EverflowerAssimilation.label>
-<VV_EverflowerAssimilation.description>실체화했던 요정 비비가 남긴 영향입니다. 정신 감응력이 높아지지만 정신이 불안정해집니다. 시간이 지나면 옅어집니다.</VV_EverflowerAssimilation.description>
+<VV_EverflowerAssimilation.description>요정 비비를 실체화해 현실에 간섭시킨 영향입니다. 정신 감응력이 높아지지만 정신이 불안정해집니다. 시간이 지나면 옅어집니다.</VV_EverflowerAssimilation.description>
 
-<VV_FairyGuarded.label>요정 경호</VV_FairyGuarded.label>
-<VV_FairyGuarded.description>요정 비비가 이 대상을 따라다니며 보호하고 있습니다.</VV_FairyGuarded.description>
+<VV_FairyGuarded.label>요정 - 경호</VV_FairyGuarded.label>
+<VV_FairyGuarded.description>요정 비비가 이 대상을 따라다니며 보호하고 있습니다. 가까운 적을 요정 비비가 자동 공격합니다.</VV_FairyGuarded.description>
 
-<VV_FairyConcentrated.label>요정 집중 대상</VV_FairyConcentrated.label>
-<VV_FairyConcentrated.description>요정 비비들이 이 대상에게 집중 공격을 가하고 있습니다.</VV_FairyConcentrated.description>
+<VV_FairyConcentrated.label>요정 - 집중</VV_FairyConcentrated.label>
+<VV_FairyConcentrated.description>요정 비비들의 집중 공격 대상이 된 상태입니다.</VV_FairyConcentrated.description>
 
 </Defs>

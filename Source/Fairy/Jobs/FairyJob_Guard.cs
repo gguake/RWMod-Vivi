@@ -18,9 +18,20 @@ namespace VVRace
             this.ally = ally;
         }
 
+        public override void Notify_AssignedToFairy(ViviFairy fairy)
+        {
+            base.Notify_AssignedToFairy(fairy);
+            if (toils != null && toils.Count == 1 && toils[0] is FairyToil_MoveToIdleOrbit)
+            {
+                MakeToils();
+            }
+        }
+
         protected override void MakeToils()
         {
-            ResetToils(new FairyToil_MoveToIdleOrbit());
+            ResetToils(
+                new FairyToil_MoveToIdleOrbit(completeWhenNear: true),
+                new FairyToil_IdleOrbit());
         }
 
         protected override bool TryGetInterruptReason(out FairyJobInterruptReason reason)
@@ -53,7 +64,7 @@ namespace VVRace
 
             if (fairy == null) { return; }
 
-            Vector3 restPos = FairyJobUtility.OrbitPositionAround(fairy, ally, 0, 1);
+            Vector3 restPos = FairyJobUtility.IdleOrbitPositionAround(fairy, ally, 0, 1);
             move?.ConfigureStepTarget(restPos);
 
             var target = ViviFairyTargeting.FindHostileNear(

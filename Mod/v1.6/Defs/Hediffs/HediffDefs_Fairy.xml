@@ -105,7 +105,7 @@
         <label>III</label>
         <statOffsets>
           <PsychicSensitivity>0.15</PsychicSensitivity>
-          <MentalBreakThreshold>0.06</MentalBreakThreshold>
+          <MentalBreakThreshold>0.07</MentalBreakThreshold>
         </statOffsets>
       </li>
       <li>
@@ -113,7 +113,7 @@
         <label>IV</label>
         <statOffsets>
           <PsychicSensitivity>0.2</PsychicSensitivity>
-          <MentalBreakThreshold>0.08</MentalBreakThreshold>
+          <MentalBreakThreshold>0.1</MentalBreakThreshold>
         </statOffsets>
       </li>
       <li>
@@ -121,7 +121,7 @@
         <label>V</label>
         <statOffsets>
           <PsychicSensitivity>0.25</PsychicSensitivity>
-          <MentalBreakThreshold>0.1</MentalBreakThreshold>
+          <MentalBreakThreshold>0.15</MentalBreakThreshold>
         </statOffsets>
       </li>
     </stages>
