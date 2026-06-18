@@ -18,7 +18,7 @@ namespace VVRace
     {
         public new CompProperties_AbilityFairyMaterialize Props => (CompProperties_AbilityFairyMaterialize)props;
 
-        private CompViviFairyController Controller => parent.pawn.GetComp<CompViviFairyController>();
+        private CompViviHolder Controller => parent.pawn.GetComp<CompViviHolder>();
 
         public override void Apply(LocalTargetInfo target, LocalTargetInfo dest)
         {
@@ -29,7 +29,7 @@ namespace VVRace
             if (map == null) { return; }
 
             var ctrl = Controller;
-            if (ctrl == null || ctrl.FairyPoolCount <= ctrl.MaterializedCount) { return; }
+            if (ctrl == null || ctrl.FairyficatedPawnCount <= ctrl.MaterializedCount) { return; }
 
             var cell = target.Cell;
             var manaComp = map.GetManaComponent();
@@ -64,7 +64,7 @@ namespace VVRace
         public override bool GizmoDisabled(out string reason)
         {
             var ctrl = Controller;
-            if (ctrl == null || ctrl.FairyPoolCount <= ctrl.MaterializedCount)
+            if (ctrl == null || ctrl.FairyficatedPawnCount <= ctrl.MaterializedCount)
             {
                 reason = LocalizeString_Etc.VV_AbilityDisabledNoFairySlot.Translate();
                 return true;

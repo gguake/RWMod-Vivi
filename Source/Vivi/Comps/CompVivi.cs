@@ -14,6 +14,7 @@ namespace VVRace
 
         public ArcanePlant_Everflower LinkedEverflower => _linkedEverflower;
         private ArcanePlant_Everflower _linkedEverflower;
+        private CompViviHolder ViviHolder => parent.GetComp<CompViviHolder>();
 
         public bool ShouldBeRoyalIfMature
         {
@@ -43,7 +44,7 @@ namespace VVRace
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
-                RefreshFairyMastery();
+                ViviHolder?.RefreshFairyMastery();
             }
         }
 
@@ -78,7 +79,7 @@ namespace VVRace
             }
 
             RefreshHairColor();
-            RefreshFairyMastery();
+            ViviHolder?.RefreshFairyMastery();
         }
 
         public override void PostDeSpawn(Map map, DestroyMode mode = DestroyMode.Vanish)
@@ -153,32 +154,7 @@ namespace VVRace
                 pawn.health.AddHediff(VVHediffDefOf.VV_RoyalVivi);
             }
 
-            RefreshFairyMastery();
-        }
-
-        public void RefreshFairyMastery()
-        {
-            var pawn = (Pawn)parent;
-            if (pawn.health == null) { return; }
-
-            var existing = pawn.health.hediffSet.GetFirstHediffOfDef(VVHediffDefOf.VV_FairyMastery);
-            bool shouldHave = pawn.IsRoyalVivi() && LinkedEverflower != null && LinkedEverflower.EverflowerComp.AttunementLevel >= 4;
-
-            if (shouldHave)
-            {
-                if (existing == null)
-                {
-                    pawn.health.AddHediff(VVHediffDefOf.VV_FairyMastery);
-                }
-                return;
-            }
-
-            if (existing != null)
-            {
-                pawn.health.RemoveHediff(existing);
-            }
-
-            parent.GetComp<CompViviFairyController>()?.DematerializeAll();
+            ViviHolder?.RefreshFairyMastery();
         }
 
         public void RefreshHairColor()
@@ -251,7 +227,7 @@ namespace VVRace
                 parent);
 
             GiveEverflowerLinkHediff();
-            RefreshFairyMastery();
+            ViviHolder?.RefreshFairyMastery();
         }
 
         public void Notify_LinkedEverflowerDestroyed(bool showMessages = true)
@@ -259,7 +235,7 @@ namespace VVRace
             _linkedEverflower = null;
 
             RemoveEverflowerLinkHediff();
-            RefreshFairyMastery();
+            ViviHolder?.RefreshFairyMastery();
 
             if (showMessages)
             {

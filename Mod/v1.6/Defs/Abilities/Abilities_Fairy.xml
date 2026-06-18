@@ -111,6 +111,7 @@
     <cooldownTicksRange>600</cooldownTicksRange>
     <hostile>false</hostile>
     <aiCanUse>false</aiCanUse>
+    <targetRequired>false</targetRequired>
 
     <verbProperties>
       <verbClass>Verb_CastAbility</verbClass>
@@ -119,6 +120,8 @@
       <warmupTime>1</warmupTime>
       <range>1.9</range>
       <requireLineOfSight>false</requireLineOfSight>
+      <nonInterruptingSelfCast>true</nonInterruptingSelfCast>
+      <targetable>false</targetable>
       <targetParams>
         <canTargetSelf>true</canTargetSelf>
         <canTargetPawns>false</canTargetPawns>

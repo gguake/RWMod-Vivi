@@ -47,6 +47,19 @@ namespace VVRace
         public abstract FairyJobKind Kind { get; }
         public virtual FairyRole Role => FairyRole.None;
 
+        public FairyToil CurrentToil
+        {
+            get
+            {
+                if (toils == null || toilIndex < 0 || toilIndex >= toils.Count)
+                {
+                    return null;
+                }
+
+                return toils[toilIndex];
+            }
+        }
+
         protected FairyJob() { }
 
         protected FairyJob(int id, Pawn owner)
@@ -55,7 +68,7 @@ namespace VVRace
             this.owner = owner;
         }
 
-        internal virtual void NotifyAssigned(ViviFairy fairy)
+        public virtual void Notify_AssignedToFairy(ViviFairy fairy)
         {
             this.fairy = fairy;
             if (owner == null)
@@ -65,12 +78,7 @@ namespace VVRace
             EnsureToils();
         }
 
-        internal void StartCurrentToil()
-        {
-            CurrentToil?.Start();
-        }
-
-        internal void NotifyReplaced()
+        public void Notify_ReplacedToAnotherJob()
         {
             ended = true;
             CancelToils();
@@ -162,10 +170,12 @@ namespace VVRace
         protected void ResetToils(params FairyToil[] newToils)
         {
             CancelToils();
+
             toils = newToils != null ? newToils.Where(t => t != null).ToList() : new List<FairyToil>();
             toilIndex = 0;
             AttachToils();
-            StartCurrentToil();
+
+            CurrentToil?.Start();
         }
 
         public virtual void End()
@@ -195,18 +205,6 @@ namespace VVRace
         protected virtual void OnInterrupted(FairyJobInterruptReason reason) { }
 
         protected virtual void OnEnded() { }
-
-        private FairyToil CurrentToil
-        {
-            get
-            {
-                if (toils == null || toilIndex < 0 || toilIndex >= toils.Count)
-                {
-                    return null;
-                }
-                return toils[toilIndex];
-            }
-        }
 
         private void EnsureToils()
         {

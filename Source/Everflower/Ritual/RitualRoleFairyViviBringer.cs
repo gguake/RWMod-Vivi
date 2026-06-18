@@ -24,8 +24,7 @@ namespace VVRace
                 return false;
             }
 
-            var fairyController = pawn.GetComp<CompViviFairyController>();
-            if (fairyController != null && fairyController.MaterializedCount > 0)
+            if (compViviHolder.MaterializedCount > 0)
             {
                 reason = LocalizeString_Etc.VV_FailReason_HasMaterializedFairyVivi.Translate();
                 return false;

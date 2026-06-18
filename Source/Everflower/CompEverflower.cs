@@ -328,7 +328,7 @@ namespace VVRace
 
             foreach (var pawn in LinkedPawns)
             {
-                pawn.GetCompVivi()?.RefreshFairyMastery();
+                pawn.GetComp<CompViviHolder>()?.RefreshFairyMastery();
             }
         }
 

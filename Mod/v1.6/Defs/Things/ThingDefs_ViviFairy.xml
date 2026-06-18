@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-
-  <!-- 실체화된 요정 비비. 선택/상호작용 불가능한 시각 효과형 엔티티. -->
   <ThingDef>
     <defName>VV_ViviFairy</defName>
     <label>fairy vivi</label>
@@ -40,11 +38,11 @@
         <maxTrailPoint>40</maxTrailPoint>
         <refreshIntervalTicks>0</refreshIntervalTicks>
       </li>
+      
       <li Class="CompProperties_Glower">
         <glowRadius>1</glowRadius>
         <glowColor>(255,255,200,0)</glowColor>
       </li>
     </comps>
   </ThingDef>
-
 </Defs>

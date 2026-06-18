@@ -15,7 +15,7 @@ namespace VVRace
     {
         private const int RequiredFairies = 1;
 
-        private CompViviFairyController Controller => parent.pawn.GetComp<CompViviFairyController>();
+        private CompViviHolder Controller => parent.pawn.GetComp<CompViviHolder>();
 
         public override void Apply(LocalTargetInfo target, LocalTargetInfo dest)
         {
@@ -31,7 +31,7 @@ namespace VVRace
 
             var hediff = (Hediff_FairyGuarded)ally.health.AddHediff(VVHediffDefOf.VV_FairyGuarded);
             hediff.ownerVivi = parent.pawn;
-            hediff.sessionId = id;
+            hediff.jobId = id;
         }
 
         public override bool Valid(LocalTargetInfo target, bool throwMessages = false)

@@ -5,10 +5,8 @@ using Verse.AI;
 
 namespace VVRace
 {
-    // 요정/세션이 공유하는 적대 대상 탐색. Needle.SearchNewTarget의 validator/priority를 재사용.
     public static class ViviFairyTargeting
     {
-        // searcher: 로열 비비(파벌/위협 캐시 기준). center/losFrom은 세션별로 다르게 전달.
         public static Thing FindHostileNear(
             IAttackTargetSearcher searcher,
             IntVec3 center,

@@ -8,7 +8,7 @@ namespace VVRace
     public class Hediff_FairyGuarded : HediffWithComps
     {
         public Pawn ownerVivi;
-        public int sessionId;
+        public int jobId;
 
         public override bool ShouldRemove => ownerVivi == null || ownerVivi.Dead || !ownerVivi.Spawned;
 
@@ -31,10 +31,10 @@ namespace VVRace
                 icon = ContentFinder<Texture2D>.Get("Things/Mote/VV_Fairy/VV_Fairy_south", reportFailure: false),
                 action = () =>
                 {
-                    var ctrl = ownerVivi != null ? ownerVivi.GetComp<CompViviFairyController>() : null;
+                    var ctrl = ownerVivi != null ? ownerVivi.GetComp<CompViviHolder>() : null;
                     if (ctrl != null)
                     {
-                        ctrl.InterruptJob(sessionId, FairyJobInterruptReason.ExternalCancel);
+                        ctrl.InterruptJob(jobId, FairyJobInterruptReason.ExternalCancel);
                     }
                     else if (pawn?.health != null)
                     {
@@ -48,7 +48,7 @@ namespace VVRace
         {
             base.ExposeData();
             Scribe_References.Look(ref ownerVivi, "ownerVivi");
-            Scribe_Values.Look(ref sessionId, "sessionId");
+            Scribe_Values.Look(ref jobId, "jobId");
         }
     }
 }

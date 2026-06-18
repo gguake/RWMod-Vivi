@@ -15,7 +15,7 @@ namespace VVRace
     {
         private const int RequiredFairies = 6;
 
-        private CompViviFairyController Controller => parent.pawn.GetComp<CompViviFairyController>();
+        private CompViviHolder Controller => parent.pawn.GetComp<CompViviHolder>();
 
         public override void Apply(LocalTargetInfo target, LocalTargetInfo dest)
         {

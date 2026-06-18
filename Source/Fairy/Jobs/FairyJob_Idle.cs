@@ -12,9 +12,9 @@ namespace VVRace
 
         public FairyJob_Idle(Pawn owner) : base(0, owner) { }
 
-        internal override void NotifyAssigned(ViviFairy fairy)
+        public override void Notify_AssignedToFairy(ViviFairy fairy)
         {
-            base.NotifyAssigned(fairy);
+            base.Notify_AssignedToFairy(fairy);
             if (toils != null && toils.Count == 1 && toils[0] is FairyToil_MoveToIdleOrbit)
             {
                 MakeToils();

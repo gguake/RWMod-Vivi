@@ -18,8 +18,7 @@ namespace VVRace
             var resonator = jobRitual.PawnWithRole("resonator");
             if (resonator != null && resonator.TryGetComp<CompViviHolder>(out var compViviHolder))
             {
-                var fairyController = resonator.GetComp<CompViviFairyController>();
-                if (fairyController != null && fairyController.MaterializedCount > 0)
+                if (compViviHolder.MaterializedCount > 0)
                 {
                     Messages.Message(LocalizeString_Etc.VV_FailReason_HasMaterializedFairyVivi.Translate(), resonator, MessageTypeDefOf.RejectInput, historical: false);
                     return;

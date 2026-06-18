@@ -1,5 +1,6 @@
 using UnityEngine;
 using Verse;
+using Verse.Noise;
 
 namespace VVRace
 {
@@ -38,9 +39,21 @@ namespace VVRace
         {
             if (applyAssimilation)
             {
-                fairy?.ApplyAssimilationFromJob();
+                var owner = fairy.Owner;
+                if (owner == null || owner.Dead || owner.health == null) { return; }
+
+                var hediff = owner.health.hediffSet.GetFirstHediffOfDef(VVHediffDefOf.VV_EverflowerAssimilation);
+                if (hediff == null)
+                {
+                    hediff = owner.health.AddHediff(VVHediffDefOf.VV_EverflowerAssimilation);
+                }
+                else
+                {
+                    hediff.Severity = Mathf.Min(hediff.Severity + 1f, hediff.def.maxSeverity);
+                }
             }
-            fairy?.Destroy();
+
+            fairy.Destroy();
         }
 
         public override void ExposeData()

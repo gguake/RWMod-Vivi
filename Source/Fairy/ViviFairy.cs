@@ -81,7 +81,7 @@ namespace VVRace
         public bool LifespanExpired => GenTicks.TicksGame - _spawnTick >= _lifespanTicks;
 
 
-        public CompViviFairyController Controller => _owner != null ? _owner.GetComp<CompViviFairyController>() : null;
+        public CompViviHolder Controller => _owner != null ? _owner.GetComp<CompViviHolder>() : null;
         public FairyJob CurrentJob
         {
             get
@@ -101,7 +101,7 @@ namespace VVRace
                 return;
             }
 
-            _job.NotifyAssigned(this);
+            _job.Notify_AssignedToFairy(this);
         }
 
         public void StartJob(FairyJob job)
@@ -113,12 +113,12 @@ namespace VVRace
 
             if (_job != null && !_job.Ended && _job != job)
             {
-                _job.NotifyReplaced();
+                _job.Notify_ReplacedToAnotherJob();
             }
 
             _job = job;
-            _job.NotifyAssigned(this);
-            _job.StartCurrentToil();
+            _job.Notify_AssignedToFairy(this);
+            _job.CurrentToil?.Start();
         }
 
         private CompTrailRenderer TrailRenderer
@@ -208,14 +208,20 @@ namespace VVRace
         {
             if (_state == FairyState.Dematerializing) { return; }
 
-            if (_job != null && !_job.Ended && _job.Kind != FairyJobKind.Dematerialize)
+            if (_job != null && !_job.Ended)
             {
-                _job.Interrupt(applyAssimilation ? FairyJobInterruptReason.LifespanExpired : FairyJobInterruptReason.DematerializeAll);
+                if (_job.Kind != FairyJobKind.Dematerialize)
+                {
+                    _job.Interrupt(applyAssimilation ?
+                        FairyJobInterruptReason.LifespanExpired :
+                        FairyJobInterruptReason.DematerializeAll);
+                }
+                else
+                {
+                    return;
+                }
             }
-            if (_job != null && !_job.Ended && _job.Kind == FairyJobKind.Dematerialize)
-            {
-                return;
-            }
+
             StartJob(new FairyJob_Dematerialize(_owner, applyAssimilation));
         }
 
@@ -388,29 +394,21 @@ namespace VVRace
         {
             base.TickInterval(delta);
 
-            // owner가 사라졌거나 다른 맵으로 이동/사망하면 안전하게 소멸. (동화 헤디프는 남기지 않음)
             if (_state != FairyState.Dematerializing && (_owner == null || !_owner.Spawned || _owner.Destroyed || _owner.Dead || _owner.Map != Map))
             {
                 BeginDematerialize(false);
             }
 
-            // 수명 만료 처리: 자유 대기 상태(미배정)일 때만 소멸. 세션에 배정된 요정은 세션이 처리한다.
-            // 단 너무 오래 행동중이면(안전장치) 강제 소멸.
             bool lifespanHardCapExpired = GenTicks.TicksGame - _spawnTick >= _lifespanTicks + LifespanHardCapExtraTicks;
             if (_state != FairyState.Dematerializing && LifespanExpired && (IsAvailable || lifespanHardCapExpired))
             {
                 BeginDematerialize(true);
             }
 
-            Controller?.Notify_FairyTick(this);
-
             CurrentJob.Tick(delta);
             UpdateFacing();
         }
 
-        // 회전 각도(라디안). 시계는 초 단위이므로 틱당 각속도(orbitAngularSpeed)에 60을 곱해 초당 각속도로 환산.
-        // 그리기(궤도 시각)는 DrawPos가 매 프레임 처리한다. 여기서는 논리 위치(_realPosition/셀)와
-        // 바라보는 방향만 동기화한다. (대기→돌진 전이 시작점을 현재 궤도 위치에 맞추고 4방향 스프라이트 방향 갱신)
         private void UpdateFacing()
         {
             // 이동/공격 중에는 진행 방향을 향한다. 대기 궤도 중의 방향은 OrbitIdleStep이 접선 방향으로 갱신한다.
@@ -425,26 +423,10 @@ namespace VVRace
             Rotation = _facing;
         }
 
-        internal void ApplyAssimilationFromJob()
-        {
-            if (_owner == null || _owner.Dead || _owner.health == null) { return; }
-
-            var hediff = _owner.health.hediffSet.GetFirstHediffOfDef(VVHediffDefOf.VV_EverflowerAssimilation);
-            if (hediff == null)
-            {
-                hediff = _owner.health.AddHediff(VVHediffDefOf.VV_EverflowerAssimilation);
-            }
-            else
-            {
-                hediff.Severity = Mathf.Min(hediff.Severity + 1f, hediff.def.maxSeverity);
-            }
-        }
-
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
         {
-            var ctrl = Controller;
             base.DeSpawn(mode);
-            ctrl?.Notify_FairyGone(this);
+            Controller.Notify_FairyGone(this);
         }
 
         public override void ExposeData()

@@ -17,7 +17,7 @@ namespace VVRace
     {
         public CompProperties_AbilityRequireFairies Props => (CompProperties_AbilityRequireFairies)props;
 
-        private CompViviFairyController Controller => parent.pawn.GetComp<CompViviFairyController>();
+        private CompViviHolder Controller => parent.pawn.GetComp<CompViviHolder>();
 
         public override bool GizmoDisabled(out string reason)
         {

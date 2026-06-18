@@ -18,9 +18,9 @@ namespace VVRace
         private static readonly Color ActionColor = new Color(0.85f, 0.25f, 0.25f, 1f);
         private static readonly Color EmptyColor = new Color(0.25f, 0.25f, 0.28f, 1f);
 
-        private readonly CompViviFairyController _comp;
+        private readonly CompViviHolder _comp;
 
-        public Gizmo_ViviFairyStatus(CompViviFairyController comp)
+        public Gizmo_ViviFairyStatus(CompViviHolder comp)
         {
             _comp = comp;
             Order = -90f;
@@ -30,7 +30,7 @@ namespace VVRace
 
         public override float GetWidth(float maxWidth)
         {
-            int slots = Mathf.Max(1, Mathf.Max(_comp.FairyPoolCount, _comp.MaterializedCount));
+            int slots = Mathf.Max(1, Mathf.Max(_comp.FairyficatedPawnCount, _comp.MaterializedCount));
             int columns = Mathf.Min(slots, MaxCellsPerRow);
             float w = Padding * 2f + columns * CellSize + (columns - 1) * CellGap;
             return Mathf.Clamp(w, 75f, maxWidth);
@@ -57,7 +57,7 @@ namespace VVRace
             float startX = inner.x;
             float startY = inner.y + LabelHeight + 4f;
             float cellStride = CellSize + CellGap;
-            int slots = Mathf.Max(_comp.FairyPoolCount, _comp.MaterializedCount);
+            int slots = Mathf.Max(_comp.FairyficatedPawnCount, _comp.MaterializedCount);
             for (int i = 0; i < slots; i++)
             {
                 int column = i % MaxCellsPerRow;
@@ -77,7 +77,7 @@ namespace VVRace
             }
 
             TooltipHandler.TipRegion(rect, LocalizeString_Gizmo.VV_Gizmo_FairyStatusTooltip.Translate(
-                _comp.MaterializedCount, _comp.FairyPoolCount));
+                _comp.MaterializedCount, _comp.FairyficatedPawnCount));
 
             return new GizmoResult(GizmoState.Clear);
         }
