@@ -26,7 +26,7 @@ namespace VVRace
             if (enemy == null || ctrl == null) { return; }
             if (!ctrl.TryReserveIdleFairies(RequiredFairies, out var reserved)) { return; }
 
-            int id = ctrl.NextJobId();
+            int id = ctrl.NextFairyJobId();
             for (int i = 0; i < reserved.Count; i++)
             {
                 reserved[i].StartJob(new FairyJob_Concentration(id, parent.pawn, enemy, i, reserved.Count));
@@ -38,7 +38,7 @@ namespace VVRace
         public override bool Valid(LocalTargetInfo target, bool throwMessages = false)
         {
             var enemy = target.Pawn;
-            if (enemy == null || enemy.Dead || !enemy.Spawned) { return false; }
+            if (enemy == null || enemy.DeadOrDowned || !enemy.Spawned || enemy.health == null) { return false; }
 
             if (!enemy.HostileTo(parent.pawn))
             {

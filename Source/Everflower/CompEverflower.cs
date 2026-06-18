@@ -112,7 +112,7 @@ namespace VVRace
         {
             foreach (var pawn in LinkedPawns)
             {
-                pawn.GetCompVivi().Notify_LinkedEverflowerDestroyed();
+                pawn.GetCompVivi().Notify_UnlinkEverflower();
             }
         }
 
@@ -255,7 +255,17 @@ namespace VVRace
         public void UnlinkAttunement(Pawn pawn)
         {
             if (!_linked.Contains(pawn)) { return; }
+
+            if (pawn.TryGetComp<CompVivi>(out var compVivi))
+            {
+                compVivi.Notify_UnlinkEverflower(true);
+            }
+
             _linked.Remove(pawn);
+            if (pawn.TryGetComp<CompViviHolder>(out var compViviHolder))
+            {
+                compViviHolder.Notify_EverflowerUnlinked();
+            }
         }
 
         public void GainAttunement(float attunement)

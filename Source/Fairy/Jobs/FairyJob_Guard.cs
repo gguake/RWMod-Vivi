@@ -96,7 +96,7 @@ namespace VVRace
 
         protected override void OnEnded()
         {
-            if (ally != null && !ally.Dead && ally.health != null)
+            if (ally != null)
             {
                 var hediff = ally.health.hediffSet.GetFirstHediffOfDef(VVHediffDefOf.VV_FairyGuarded);
                 if (hediff != null) { ally.health.RemoveHediff(hediff); }

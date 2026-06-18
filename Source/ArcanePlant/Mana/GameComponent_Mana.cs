@@ -118,6 +118,8 @@ namespace VVRace
 
         public void RegisterFairy(Pawn linker, Pawn target)
         {
+            if (_fairyficated.Any(v => v.linker == linker && v.fairy == target)) { return; }
+                
             _fairyficated.Add(new FairyficatedPawn()
             {
                 linker = linker,
@@ -130,7 +132,7 @@ namespace VVRace
             _fairyficated.RemoveAll(v => v.fairy == target);
         }
 
-        public void UnregisterAllFairyByLinker(Pawn linker)
+        public void UnregisterAllFairy(Pawn linker)
         {
             _fairyficated.RemoveAll(v => v.linker == linker);
         }

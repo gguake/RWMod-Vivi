@@ -38,7 +38,7 @@
   <AbilityDef>
     <defName>VV_FairyGuard</defName>
     <label>fairy - guard</label>
-    <description>Assign one idle fairy vivi to escort an allied pawn, attacking nearby visible, non-downed hostiles within a 5x5 area. The escort ends if the target falls or vanishes, or when the fairy's duration expires (in which case the fairy fades).</description>
+    <description>Assign one idle fairy vivi to escort an allied pawn, attacking nearby visible, non-downed hostiles within a 5x5 area. The escort ends if the target deads or vanishes, or when the fairy's duration expires (in which case the fairy fades).</description>
     <iconPath>Things/Mote/VV_Fairy/VV_Fairy_east</iconPath>
     <cooldownTicksRange>600</cooldownTicksRange>
     <hostile>false</hostile>

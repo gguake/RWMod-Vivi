@@ -37,6 +37,8 @@ namespace VVRace
 
         protected override void OnToilSequenceFinished()
         {
+            fairy.Destroy();
+
             if (applyAssimilation)
             {
                 var owner = fairy.Owner;
@@ -52,8 +54,6 @@ namespace VVRace
                     hediff.Severity = Mathf.Min(hediff.Severity + 1f, hediff.def.maxSeverity);
                 }
             }
-
-            fairy.Destroy();
         }
 
         public override void ExposeData()

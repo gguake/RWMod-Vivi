@@ -230,7 +230,7 @@ namespace VVRace
             ViviHolder?.RefreshFairyMastery();
         }
 
-        public void Notify_LinkedEverflowerDestroyed(bool showMessages = true)
+        public void Notify_UnlinkEverflower(bool showMessages = true)
         {
             _linkedEverflower = null;
 

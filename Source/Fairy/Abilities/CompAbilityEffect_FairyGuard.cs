@@ -26,7 +26,7 @@ namespace VVRace
             if (ally == null || ctrl == null) { return; }
             if (!ctrl.TryReserveIdleFairies(RequiredFairies, out var reserved)) { return; }
 
-            int id = ctrl.NextJobId();
+            int id = ctrl.NextFairyJobId();
             reserved[0].StartJob(new FairyJob_Guard(id, parent.pawn, ally));
 
             var hediff = (Hediff_FairyGuarded)ally.health.AddHediff(VVHediffDefOf.VV_FairyGuarded);
@@ -37,7 +37,7 @@ namespace VVRace
         public override bool Valid(LocalTargetInfo target, bool throwMessages = false)
         {
             var ally = target.Pawn;
-            if (ally == null || ally.Dead || !ally.Spawned) { return false; }
+            if (ally == null || ally.Dead || !ally.Spawned || ally.health == null) { return false; }
             if (ally == parent.pawn) { return false; }
 
             if (ally.HostileTo(parent.pawn))

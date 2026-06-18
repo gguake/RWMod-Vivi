@@ -24,18 +24,19 @@ namespace VVRace
     {
         public CompProperties_ViviHolder Props => (CompProperties_ViviHolder)props;
 
-        private List<ViviFairy> _activeFairies = new List<ViviFairy>();
-        private int _nextJobId = 1;
-
         public bool CanJoin => FairyficatedPawnCount < Props.maxCount;
 
         public IEnumerable<Pawn> FairyficatedPawns => Current.Game.GetComponent<GameComponent_Mana>().GetFairyficatedPawns((Pawn)parent);
         public int FairyficatedPawnCount => FairyficatedPawns.Count();
         public Pawn Royal => (Pawn)parent;
 
+        private List<ViviFairy> _activeFairies = new List<ViviFairy>();
         public IReadOnlyList<ViviFairy> ActiveFairies => _activeFairies;
         public int MaterializedCount => _activeFairies.Count;
         public int AvailableCount => _activeFairies.Count(f => f != null && !f.Destroyed && f.IsAvailable);
+
+        private int _nextFairyJobId = 1;
+        public int NextFairyJobId() => _nextFairyJobId++;
 
         public CompViviHolder()
         {
@@ -48,7 +49,7 @@ namespace VVRace
             ThingOwner<Pawn> innerContainer = null;
             Scribe_Deep.Look(ref innerContainer, "innerViviContainer", new object[] { this });
             Scribe_Collections.Look(ref _activeFairies, "activeFairies", LookMode.Reference);
-            Scribe_Values.Look(ref _nextJobId, "nextJobId", 1);
+            Scribe_Values.Look(ref _nextFairyJobId, "nextFairyJobId", 1);
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
@@ -119,11 +120,11 @@ namespace VVRace
                 job.Interrupt(FairyJobInterruptReason.OwnerUnavailable);
             }
 
-            DestroyAllFairiesImmediate();
+            DestroyAllActiveFairies();
 
             if (mode != DestroyMode.WillReplace)
             {
-                Current.Game.GetComponent<GameComponent_Mana>().UnregisterAllFairyByLinker((Pawn)parent);
+                Current.Game.GetComponent<GameComponent_Mana>().UnregisterAllFairy((Pawn)parent);
             }
         }
 
@@ -137,7 +138,7 @@ namespace VVRace
                     job.Interrupt(FairyJobInterruptReason.OwnerUnavailable);
                 }
 
-                DestroyAllFairiesImmediate();
+                DestroyAllActiveFairies();
             }
         }
 
@@ -150,7 +151,7 @@ namespace VVRace
                 job.Interrupt(FairyJobInterruptReason.OwnerUnavailable);
             }
 
-            DestroyAllFairiesImmediate();
+            DestroyAllActiveFairies();
         }
 
         public override void Notify_Killed(Map prevMap, DamageInfo? dinfo = null)
@@ -161,7 +162,7 @@ namespace VVRace
             {
                 job.Interrupt(FairyJobInterruptReason.OwnerUnavailable);
             }
-            DestroyAllFairiesImmediate();
+            DestroyAllActiveFairies();
 
             var gameCompMana = Current.Game.GetComponent<GameComponent_Mana>();
             foreach (var fairyPawn in gameCompMana.GetFairyficatedPawns((Pawn)parent))
@@ -169,7 +170,7 @@ namespace VVRace
                 fairyPawn.Kill(dinfo);
             }
 
-            gameCompMana.UnregisterAllFairyByLinker((Pawn)parent);
+            gameCompMana.UnregisterAllFairy((Pawn)parent);
         }
 
         public override void PostPreApplyDamage(ref DamageInfo dinfo, out bool absorbed)
@@ -266,16 +267,15 @@ namespace VVRace
             {
                 _activeFairies.Add(fairy);
             }
+
             fairy.EnsureJob();
-            _nextJobId = Mathf.Max(_nextJobId, fairy.CurrentJob.id + 1);
+            _nextFairyJobId = Mathf.Max(_nextFairyJobId, fairy.CurrentJob.id + 1);
         }
 
-        public void Notify_FairyGone(ViviFairy fairy)
+        public void Notify_FairyDestroyed(ViviFairy fairy)
         {
             _activeFairies.Remove(fairy);
         }
-
-        public int NextJobId() => _nextJobId++;
 
         public void InterruptJob(int id, FairyJobInterruptReason reason)
         {
@@ -333,22 +333,22 @@ namespace VVRace
             if (pawn.health == null) { return; }
 
             var compVivi = parent.GetComp<CompVivi>();
-            var linkedEverflower = compVivi?.LinkedEverflower;
-            var existing = pawn.health.hediffSet.GetFirstHediffOfDef(VVHediffDefOf.VV_FairyMastery);
-            bool shouldHave = pawn.IsRoyalVivi() && linkedEverflower != null && linkedEverflower.EverflowerComp.AttunementLevel >= 4;
+            if (compVivi == null) { return; }
 
+            var masteryHediff = pawn.health.hediffSet.GetFirstHediffOfDef(VVHediffDefOf.VV_FairyMastery);
+            var shouldHave = compVivi.AttunementActive && compVivi.LinkedEverflower?.EverflowerComp.AttunementLevel >= 4;
             if (shouldHave)
             {
-                if (existing == null)
+                if (masteryHediff == null)
                 {
                     pawn.health.AddHediff(VVHediffDefOf.VV_FairyMastery);
                 }
                 return;
             }
 
-            if (existing != null)
+            if (masteryHediff != null)
             {
-                pawn.health.RemoveHediff(existing);
+                pawn.health.RemoveHediff(masteryHediff);
             }
 
             DematerializeAll();
@@ -374,19 +374,7 @@ namespace VVRace
                 .Where(j => j != null && !j.Ended);
         }
 
-        private void PruneActiveFairies()
-        {
-            for (int i = _activeFairies.Count - 1; i >= 0; i--)
-            {
-                var f = _activeFairies[i];
-                if (f == null || f.Destroyed || !f.Spawned)
-                {
-                    _activeFairies.RemoveAt(i);
-                }
-            }
-        }
-
-        private void DestroyAllFairiesImmediate()
+        private void DestroyAllActiveFairies()
         {
             foreach (var f in _activeFairies.ToList())
             {

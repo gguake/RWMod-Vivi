@@ -187,10 +187,6 @@ namespace VVRace
             {
                 _realPosition = Position.ToVector3Shifted().Yto0();
             }
-            else
-            {
-                Controller?.RegisterFairy(this);
-            }
         }
 
         internal void EnterIdle()
@@ -199,6 +195,7 @@ namespace VVRace
             {
                 TrailRenderer?.ResetTrail();
             }
+
             _attackGraphicActive = false;
             _state = FairyState.Idle;
             _stateTicks = 0;
@@ -423,10 +420,10 @@ namespace VVRace
             Rotation = _facing;
         }
 
-        public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
+        public override void Destroy(DestroyMode mode = DestroyMode.Vanish)
         {
-            base.DeSpawn(mode);
-            Controller.Notify_FairyGone(this);
+            Controller?.Notify_FairyDestroyed(this);
+            base.Destroy(mode);
         }
 
         public override void ExposeData()

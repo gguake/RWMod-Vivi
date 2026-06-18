@@ -10,7 +10,7 @@ namespace VVRace
         private const int SpreadWaitTicks = 35;
         private const float ConcRadius = 1.6f;
 
-        private Thing target;
+        private Pawn target;
         private int slot;
         private int count = 1;
         private int elapsed;
@@ -20,7 +20,7 @@ namespace VVRace
 
         public FairyJob_Concentration() { }
 
-        public FairyJob_Concentration(int id, Pawn owner, Thing target, int slot, int count) : base(id, owner)
+        public FairyJob_Concentration(int id, Pawn owner, Pawn target, int slot, int count) : base(id, owner)
         {
             this.target = target;
             this.slot = slot;
@@ -52,7 +52,7 @@ namespace VVRace
                 return true;
             }
 
-            if (target == null || !target.Spawned || target.Map != owner.Map || (target is Pawn tp && tp.Dead))
+            if (target == null || !target.Spawned || target.Map != owner.Map || (target.DeadOrDowned))
             {
                 reason = FairyJobInterruptReason.TargetUnavailable;
                 return true;
@@ -63,6 +63,7 @@ namespace VVRace
 
         protected override void TickActiveBeforeToil(int delta)
         {
+            // 요정의 활성 시간이 지나도 끝날때까지 유지되야함
             elapsed += delta;
             if (elapsed >= MaxDurationTicks)
             {
@@ -111,10 +112,10 @@ namespace VVRace
                 return;
             }
 
-            if (target is Pawn p && !p.Dead && p.health != null)
+            if (target != null)
             {
-                var hediff = p.health.hediffSet.GetFirstHediffOfDef(VVHediffDefOf.VV_FairyConcentrated);
-                if (hediff != null) { p.health.RemoveHediff(hediff); }
+                var hediff = target.health.hediffSet.GetFirstHediffOfDef(VVHediffDefOf.VV_FairyConcentrated);
+                if (hediff != null) { target.health.RemoveHediff(hediff); }
             }
         }
 

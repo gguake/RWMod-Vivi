@@ -33,7 +33,7 @@ namespace VVRace
 
             if (!ctrl.TryReserveIdleFairies(RequiredFairies, out var reserved)) { return; }
 
-            int id = ctrl.NextJobId();
+            int id = ctrl.NextFairyJobId();
             for (int i = 0; i < reserved.Count; i++)
             {
                 reserved[i].StartJob(new FairyJob_Expansion(id, parent.pawn, i, reserved.Count));

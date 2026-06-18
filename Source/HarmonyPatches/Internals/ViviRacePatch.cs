@@ -357,7 +357,7 @@ namespace VVRace.HarmonyPatches
                 var compVivi = pawn.GetCompVivi();
                 if (compVivi != null)
                 {
-                    compVivi.Notify_LinkedEverflowerDestroyed(false);
+                    compVivi.Notify_UnlinkEverflower(false);
                 }
             }
         }

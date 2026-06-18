@@ -34,6 +34,7 @@ namespace VVRace
 
         protected override void TickActiveBeforeToil(int delta)
         {
+            // 요정의 활성 시간이 지나도 끝날때까지 유지되야함
             elapsed += delta;
             if (elapsed >= MaxDurationTicks)
             {
