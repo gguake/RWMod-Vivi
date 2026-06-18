@@ -48,8 +48,8 @@
       <combatPower>50</combatPower>
       <ai_combatDangerous>true</ai_combatDangerous>
       <turretGunDef>VV_Gun_Peashooter</turretGunDef>
-      <turretBurstCooldownTime>2.2</turretBurstCooldownTime>
-      <turretBurstWarmupTime>1.0</turretBurstWarmupTime>
+      <turretBurstCooldownTime>2.4</turretBurstCooldownTime>
+      <turretBurstWarmupTime>1.2</turretBurstWarmupTime>
       <turretTopOffset>(0, 0.05)</turretTopOffset>
       <turretTopDrawSize>1</turretTopDrawSize>
     </building>
@@ -92,7 +92,7 @@
     <thingClass>VVRace.PeaShooterGun</thingClass>
 
     <statBases>
-      <AccuracyTouch>0.88</AccuracyTouch>
+      <AccuracyTouch>0.8</AccuracyTouch>
       <AccuracyShort>0.64</AccuracyShort>
       <AccuracyMedium>0.27</AccuracyMedium>
       <AccuracyLong>0.14</AccuracyLong>
@@ -111,9 +111,9 @@
         <range>28.9</range>
         <ticksBetweenBurstShots>10</ticksBetweenBurstShots>
         <burstShotCount>4</burstShotCount>
-        <soundCast>ThumpCannon_Fire</soundCast>
+        <soundCast>VV_PeaShooter_Fire</soundCast>
         <soundCastTail>GunTail_Heavy</soundCastTail>
-        <muzzleFlashScale>2</muzzleFlashScale>
+        <muzzleFlashScale>0</muzzleFlashScale>
       </li>
     </verbs>
   </ThingDef>
