@@ -76,7 +76,7 @@
     <everCurableByItem>false</everCurableByItem>
 
     <initialSeverity>1</initialSeverity>
-    <maxSeverity>5</maxSeverity>
+    <maxSeverity>10</maxSeverity>
 
     <stages>
       <li>
@@ -84,7 +84,7 @@
         <label>I</label>
         <statOffsets>
           <PsychicSensitivity>0.05</PsychicSensitivity>
-          <MentalBreakThreshold>0.02</MentalBreakThreshold>
+          <MentalBreakThreshold>0.03</MentalBreakThreshold>
         </statOffsets>
       </li>
       <li>
@@ -92,31 +92,31 @@
         <label>II</label>
         <statOffsets>
           <PsychicSensitivity>0.1</PsychicSensitivity>
-          <MentalBreakThreshold>0.04</MentalBreakThreshold>
-        </statOffsets>
-      </li>
-      <li>
-        <minSeverity>3</minSeverity>
-        <label>III</label>
-        <statOffsets>
-          <PsychicSensitivity>0.15</PsychicSensitivity>
-          <MentalBreakThreshold>0.07</MentalBreakThreshold>
+          <MentalBreakThreshold>0.06</MentalBreakThreshold>
         </statOffsets>
       </li>
       <li>
         <minSeverity>4</minSeverity>
-        <label>IV</label>
+        <label>III</label>
         <statOffsets>
-          <PsychicSensitivity>0.2</PsychicSensitivity>
+          <PsychicSensitivity>0.15</PsychicSensitivity>
           <MentalBreakThreshold>0.1</MentalBreakThreshold>
         </statOffsets>
       </li>
       <li>
-        <minSeverity>5</minSeverity>
+        <minSeverity>6</minSeverity>
+        <label>IV</label>
+        <statOffsets>
+          <PsychicSensitivity>0.2</PsychicSensitivity>
+          <MentalBreakThreshold>0.15</MentalBreakThreshold>
+        </statOffsets>
+      </li>
+      <li>
+        <minSeverity>8</minSeverity>
         <label>V</label>
         <statOffsets>
           <PsychicSensitivity>0.25</PsychicSensitivity>
-          <MentalBreakThreshold>0.15</MentalBreakThreshold>
+          <MentalBreakThreshold>0.2</MentalBreakThreshold>
         </statOffsets>
       </li>
     </stages>
