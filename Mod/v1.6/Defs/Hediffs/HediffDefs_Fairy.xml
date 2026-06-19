@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
 
-  <!-- 요정 능력 해금 헤디프. abilities 목록의 능력들을 자동 부여하며 헤디프가 사라지면 능력도 사라진다.
-       (Phase 2에서 경호/집중/전개 AbilityDef를 abilities 목록에 추가) -->
   <HediffDef>
     <defName>VV_FairyMastery</defName>
     <label>fairy mastery</label>
@@ -31,7 +29,6 @@
     </abilities>
   </HediffDef>
 
-  <!-- 경호 대상 마커. 보호 해제 Gizmo가 이 정보로 세션을 종료한다. -->
   <HediffDef>
     <defName>VV_FairyGuarded</defName>
     <label>fairy escort</label>
@@ -46,7 +43,6 @@
     <initialSeverity>1</initialSeverity>
   </HediffDef>
 
-  <!-- 집중 대상 마커. 로열 비비별로 하나만 유지한다. -->
   <HediffDef>
     <defName>VV_FairyConcentrated</defName>
     <label>fairy concentration</label>
@@ -67,7 +63,6 @@
     </comps>
   </HediffDef>
 
-  <!-- 요정 비비 소멸 시 로열 비비에 누적. 정신 감응력을 높이지만 정신적으로 더 불안정해진다. 시간이 지나면 감쇠. -->
   <HediffDef>
     <defName>VV_EverflowerAssimilation</defName>
     <label>everflower assimilation</label>
@@ -128,7 +123,7 @@
 
     <comps>
       <li Class="HediffCompProperties_SeverityPerDay">
-        <severityPerDay>-0.5</severityPerDay>
+        <severityPerDay>-0.33</severityPerDay>
         <showDaysToRecover>true</showDaysToRecover>
         <showHoursToRecover>true</showHoursToRecover>
       </li>

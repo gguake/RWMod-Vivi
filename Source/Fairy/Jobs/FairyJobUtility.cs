@@ -12,69 +12,103 @@ namespace VVRace
 
         public static Vector3 OrbitPositionAround(ViviFairy fairy, Pawn centerPawn, int slot, int count)
         {
-            var props = fairy?.Controller?.Props;
-            if (props == null || fairy == null || centerPawn == null || !centerPawn.Spawned || centerPawn.Map != fairy.Map)
+            if (!TryGetOrbitParameters(fairy, centerPawn, slot, count, out var center, out var angle, out var radiusX, out var radiusZ, out var tiltCos, out var tiltSin))
             {
-                return fairy != null ? fairy.RealPosition.Yto0() : Vector3.zero;
+                return FallbackOrbitPosition(fairy);
             }
 
-            float slotOffset = slot * (Mathf.PI * 2f / Mathf.Max(1, count));
-            float motion = GenTicks.TicksGame * IdleOrbitAngularSpeed * fairy.OrbitSpeedFactor * fairy.OrbitDirection;
-            float angle = motion + slotOffset + fairy.OrbitPhaseOffset;
-            float cos = Mathf.Cos(angle);
-            float sin = Mathf.Sin(angle);
-            float radiusX = IdleOrbitRadiusX * fairy.OrbitRadiusXFactor;
-            float radiusZ = IdleOrbitRadiusZ * fairy.OrbitRadiusZFactor;
-
-            var vector = new Vector3(cos * radiusX, 0f, sin * radiusZ);
-            float tiltCos = Mathf.Cos(fairy.OrbitTiltAngle);
-            float tiltSin = Mathf.Sin(fairy.OrbitTiltAngle);
-            var rotated = new Vector3(
-                vector.x * tiltCos - vector.z * tiltSin,
-                0f,
-                vector.x * tiltSin + vector.z * tiltCos);
-            return centerPawn.DrawPos.Yto0() + rotated;
+            return center + OrbitOffset(angle, radiusX, radiusZ, tiltCos, tiltSin);
         }
 
         public static void IdleOrbitAround(ViviFairy fairy, Pawn centerPawn, int slot, int count)
         {
             if (fairy == null || fairy.Destroyed || fairy.State != FairyState.Idle || fairy.Map == null) { return; }
 
-            var props = fairy.Controller?.Props;
-            if (props == null || centerPawn == null || !centerPawn.Spawned || centerPawn.Map != fairy.Map) { return; }
+            if (!TryGetOrbitParameters(fairy, centerPawn, slot, count, out var center, out var angle, out var radiusX, out var radiusZ, out var tiltCos, out var tiltSin))
+            {
+                return;
+            }
 
-            float slotOffset = slot * (Mathf.PI * 2f / Mathf.Max(1, count));
-            float motion = GenTicks.TicksGame * IdleOrbitAngularSpeed;
-            float angle = motion + slotOffset;
-            float cos = Mathf.Cos(angle);
-            float sin = Mathf.Sin(angle);
-            float radiusX = IdleOrbitRadiusX;
-            float radiusZ = IdleOrbitRadiusZ;
-
-            var center = centerPawn.DrawPos;
-            var orbit = center.Yto0() + new Vector3(cos * radiusX, 0f, sin * radiusZ);
-            var tangent = new Vector3(-sin * radiusX, 0f, cos * radiusZ);
-            float depthRadius = Mathf.Max(0.0001f, IdleOrbitRadiusZ);
-            float rel = Mathf.Clamp((center.z - orbit.z) / depthRadius, -1f, 1f);
-            float drawAltitude = center.y + Mathf.Lerp(-IdleOrbitDepth, IdleOrbitDepth, 0.5f + 0.5f * rel);
+            var orbit = center + OrbitOffset(angle, radiusX, radiusZ, tiltCos, tiltSin);
+            var tangent = OrbitTangent(angle, radiusX, radiusZ, tiltCos, tiltSin);
+            var centerDraw = centerPawn.DrawPos;
+            float depthRadius = OrbitDepthRadius(radiusX, radiusZ, tiltCos, tiltSin);
+            float rel = Mathf.Clamp((centerDraw.z - orbit.z) / depthRadius, -1f, 1f);
+            float drawAltitude = centerDraw.y + Mathf.Lerp(-IdleOrbitDepth, IdleOrbitDepth, 0.5f + 0.5f * rel);
 
             fairy.SetToilPosition(orbit, tangent, drawAltitude);
         }
 
         public static Vector3 IdleOrbitPositionAround(ViviFairy fairy, Pawn centerPawn, int slot, int count)
         {
-            var props = fairy?.Controller?.Props;
-            if (props == null || fairy == null || centerPawn == null || !centerPawn.Spawned || centerPawn.Map != fairy.Map)
+            return OrbitPositionAround(fairy, centerPawn, slot, count);
+        }
+
+        private static bool TryGetOrbitParameters(
+            ViviFairy fairy,
+            Pawn centerPawn,
+            int slot,
+            int count,
+            out Vector3 center,
+            out float angle,
+            out float radiusX,
+            out float radiusZ,
+            out float tiltCos,
+            out float tiltSin)
+        {
+            center = Vector3.zero;
+            angle = 0f;
+            radiusX = 0f;
+            radiusZ = 0f;
+            tiltCos = 1f;
+            tiltSin = 0f;
+
+            if (fairy == null || fairy.Controller?.Props == null || centerPawn == null || !centerPawn.Spawned || centerPawn.Map != fairy.Map)
             {
-                return fairy != null ? fairy.RealPosition.Yto0() : Vector3.zero;
+                return false;
             }
 
             float slotOffset = slot * (Mathf.PI * 2f / Mathf.Max(1, count));
-            float motion = GenTicks.TicksGame * IdleOrbitAngularSpeed;
-            float angle = motion + slotOffset;
+            float motion = GenTicks.TicksGame * IdleOrbitAngularSpeed * fairy.OrbitSpeedFactor * fairy.OrbitDirection;
+            angle = motion + slotOffset + fairy.OrbitPhaseOffset;
+            radiusX = IdleOrbitRadiusX * fairy.OrbitRadiusXFactor;
+            radiusZ = IdleOrbitRadiusZ * fairy.OrbitRadiusZFactor;
+            tiltCos = Mathf.Cos(fairy.OrbitTiltAngle);
+            tiltSin = Mathf.Sin(fairy.OrbitTiltAngle);
+            center = centerPawn.DrawPos.Yto0();
+            return true;
+        }
+
+        private static Vector3 OrbitOffset(float angle, float radiusX, float radiusZ, float tiltCos, float tiltSin)
+        {
             float cos = Mathf.Cos(angle);
             float sin = Mathf.Sin(angle);
-            return centerPawn.DrawPos.Yto0() + new Vector3(cos * IdleOrbitRadiusX, 0f, sin * IdleOrbitRadiusZ);
+            var vector = new Vector3(cos * radiusX, 0f, sin * radiusZ);
+            return new Vector3(
+                vector.x * tiltCos - vector.z * tiltSin,
+                0f,
+                vector.x * tiltSin + vector.z * tiltCos);
+        }
+
+        private static Vector3 OrbitTangent(float angle, float radiusX, float radiusZ, float tiltCos, float tiltSin)
+        {
+            float cos = Mathf.Cos(angle);
+            float sin = Mathf.Sin(angle);
+            var tangent = new Vector3(-sin * radiusX, 0f, cos * radiusZ);
+            return new Vector3(
+                tangent.x * tiltCos - tangent.z * tiltSin,
+                0f,
+                tangent.x * tiltSin + tangent.z * tiltCos);
+        }
+
+        private static float OrbitDepthRadius(float radiusX, float radiusZ, float tiltCos, float tiltSin)
+        {
+            return Mathf.Max(0.0001f, Mathf.Abs(radiusX * tiltSin) + Mathf.Abs(radiusZ * tiltCos));
+        }
+
+        private static Vector3 FallbackOrbitPosition(ViviFairy fairy)
+        {
+            return fairy != null ? fairy.RealPosition.Yto0() : Vector3.zero;
         }
     }
 }

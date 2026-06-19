@@ -8,25 +8,20 @@ namespace VVRace
     public class FairyJob_Idle : FairyJob
     {
         public override FairyJobKind Kind => FairyJobKind.Idle;
+        protected override bool RebuildLegacyMoveOnlyToils => true;
 
         public FairyJob_Idle() { }
 
         public FairyJob_Idle(Pawn owner) : base(0, owner) { }
 
-        public override void Notify_AssignedToFairy(ViviFairy fairy)
-        {
-            base.Notify_AssignedToFairy(fairy);
-            if (toils != null && toils.Count == 1 && toils[0] is FairyToil_MoveToIdleOrbit)
-            {
-                MakeToils();
-            }
-        }
-
         protected override void MakeToils()
         {
-            ResetToils(
-                new FairyToil_MoveToIdleOrbit(completeWhenNear: true),
-                new FairyToil_IdleOrbit());
+            ResetToils(MakeReturnToRestToils());
+        }
+
+        protected override FairyToil[] MakeReturnToRestToils()
+        {
+            return MakeMoveThenIdleOrbitToils();
         }
 
         protected override void TickActiveBeforeToil(int delta)

@@ -45,6 +45,7 @@ namespace VVRace
         public bool Ended => ended;
         public abstract FairyJobKind Kind { get; }
         public virtual FairyRole Role => FairyRole.None;
+        protected virtual bool RebuildLegacyMoveOnlyToils => false;
 
         public FairyToil CurrentToil
         {
@@ -75,6 +76,10 @@ namespace VVRace
                 owner = fairy?.Owner;
             }
             EnsureToils();
+            if (RebuildLegacyMoveOnlyToils && HasLegacyMoveOnlyToils())
+            {
+                ResetToils(MakeReturnToRestToils());
+            }
         }
 
         public void Notify_ReplacedToAnotherJob()
@@ -189,7 +194,7 @@ namespace VVRace
                 if (fairy.State == FairyState.Attacking)
                 {
                     fairy.EnterIdle();
-                    ResetToils(new FairyToil_MoveToIdleOrbit());
+                    ResetToils(MakeReturnToRestToils());
                 }
                 return false;
             }
@@ -203,10 +208,33 @@ namespace VVRace
                 return false;
             }
 
-            ResetToils(
-                new FairyToil_Attack(target),
-                new FairyToil_MoveToIdleOrbit());
+            ResetToils(MakeAttackThenReturnToRestToils(target));
             return true;
+        }
+
+        protected virtual FairyToil[] MakeReturnToRestToils()
+        {
+            return new FairyToil[] { new FairyToil_MoveToIdleOrbit() };
+        }
+
+        protected FairyToil[] MakeMoveThenIdleOrbitToils()
+        {
+            return new FairyToil[]
+            {
+                new FairyToil_MoveToIdleOrbit(completeWhenNear: true),
+                new FairyToil_IdleOrbit()
+            };
+        }
+
+        private FairyToil[] MakeAttackThenReturnToRestToils(Thing target)
+        {
+            var returnToils = MakeReturnToRestToils() ?? new FairyToil[0];
+            return new FairyToil[] { new FairyToil_Attack(target) }.Concat(returnToils).ToArray();
+        }
+
+        private bool HasLegacyMoveOnlyToils()
+        {
+            return toils != null && toils.Count == 1 && toils[0] is FairyToil_MoveToIdleOrbit;
         }
 
         public virtual void End()

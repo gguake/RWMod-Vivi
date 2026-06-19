@@ -10,6 +10,7 @@ namespace VVRace
 
         public override FairyJobKind Kind => FairyJobKind.Guard;
         public override FairyRole Role => FairyRole.Guard;
+        protected override bool RebuildLegacyMoveOnlyToils => true;
 
         public FairyJob_Guard() { }
 
@@ -18,20 +19,14 @@ namespace VVRace
             this.ally = ally;
         }
 
-        public override void Notify_AssignedToFairy(ViviFairy fairy)
-        {
-            base.Notify_AssignedToFairy(fairy);
-            if (toils != null && toils.Count == 1 && toils[0] is FairyToil_MoveToIdleOrbit)
-            {
-                MakeToils();
-            }
-        }
-
         protected override void MakeToils()
         {
-            ResetToils(
-                new FairyToil_MoveToIdleOrbit(completeWhenNear: true),
-                new FairyToil_IdleOrbit());
+            ResetToils(MakeReturnToRestToils());
+        }
+
+        protected override FairyToil[] MakeReturnToRestToils()
+        {
+            return MakeMoveThenIdleOrbitToils();
         }
 
         protected override bool TryGetInterruptReason(out FairyJobInterruptReason reason)
@@ -43,11 +38,6 @@ namespace VVRace
             if (ally == null || !ally.Spawned || ally.Dead)
             {
                 reason = FairyJobInterruptReason.TargetUnavailable;
-                return true;
-            }
-            if (fairy != null && fairy.LifespanExpired)
-            {
-                reason = FairyJobInterruptReason.LifespanExpired;
                 return true;
             }
 
