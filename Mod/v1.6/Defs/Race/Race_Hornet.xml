@@ -104,6 +104,7 @@
       <trainability>None</trainability>
       <showTrainables>false</showTrainables>
       <hideTrainingTab>true</hideTrainingTab>
+      <neverIncludeInQuests>true</neverIncludeInQuests>
 
       <lifeStageAges>
         <li>
