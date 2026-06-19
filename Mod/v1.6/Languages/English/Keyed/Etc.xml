@@ -61,6 +61,7 @@
 
 <VV_TextMote_GatherFailed>Damaged due to gathering mistake</VV_TextMote_GatherFailed>
 <VV_TextMote_DamageBlockedByFairy>Protected by fairy</VV_TextMote_DamageBlockedByFairy>
+<VV_BattleLog_FairyImpact>{COMMANDER_labelShort}'s command sends {FAIRY} to stab {TARGET_labelShort}.</VV_BattleLog_FairyImpact>
 
 <VV_RitualTarget_Everflower>Everflower</VV_RitualTarget_Everflower>
 

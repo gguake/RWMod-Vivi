@@ -58,6 +58,7 @@ namespace VVRace
 
         public const string VV_TextMote_GatherFailed = nameof(VV_TextMote_GatherFailed);
         public const string VV_TextMote_DamageBlockedByFairy = nameof(VV_TextMote_DamageBlockedByFairy);
+        public const string VV_BattleLog_FairyImpact = nameof(VV_BattleLog_FairyImpact);
 
         public const string VV_RitualTarget_Everflower = nameof(VV_RitualTarget_Everflower);
 

@@ -87,6 +87,7 @@
     <Compile Include="Fairy\Abilities\CompAbilityEffect_FairyConcentration.cs" />
     <Compile Include="Fairy\Abilities\CompAbilityEffect_FairyExpansion.cs" />
     <Compile Include="Fairy\Abilities\CompAbilityEffect_FairyGuard.cs" />
+    <Compile Include="Fairy\BattleLogEntry_FairyImpact.cs" />
     <Compile Include="Fairy\Hediff_FairyConcentrated.cs" />
     <Compile Include="Fairy\SubEffecter_FairyTargetMarkerAttached.cs" />
     <Compile Include="Fairy\ViviFairy.cs" />

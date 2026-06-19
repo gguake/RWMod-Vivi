@@ -330,8 +330,19 @@ namespace VVRace
             var damageBase = Mathf.Clamp(Mathf.Sqrt(psychicSensitivity), 1f, 4f);
             var actualDamage = (int)damageBase + (Rand.Chance(damageBase - (int)damageBase) ? 1 : 0);
 
-            var dinfo = new DamageInfo(DamageDefOf.Stab, actualDamage, 0f, _realDirection.AngleFlat(), _owner, null, null, DamageInfo.SourceCategory.ThingOrUnknown, hitThing);
-            hitThing.TakeDamage(dinfo);
+            var sourceDef = def;
+            var log = _owner != null ? new BattleLogEntry_FairyImpact(_owner, hitThing, sourceDef) : null;
+            if (log != null)
+            {
+                Find.BattleLog.Add(log);
+            }
+
+            var dinfo = new DamageInfo(DamageDefOf.Stab, actualDamage, 0f, _realDirection.AngleFlat(), _owner, null, sourceDef, DamageInfo.SourceCategory.ThingOrUnknown, hitThing);
+            var result = hitThing.TakeDamage(dinfo);
+            if (log != null)
+            {
+                result.AssociateWithLog(log);
+            }
         }
 
         private IntVec3 CurrentEffectCell()
