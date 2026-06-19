@@ -177,7 +177,7 @@ namespace VVRace
                                 {
                                     Rand.PushState(thingIDNumber);
 
-                                    if (Rand.Chance(0.015f))
+                                    if (Rand.Chance(0.015f) && !map.IsPocketMap)
                                     {
                                         plantDef = VVThingDefOf.VV_Everflower;
                                     }

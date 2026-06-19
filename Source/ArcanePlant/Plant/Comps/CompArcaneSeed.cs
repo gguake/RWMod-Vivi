@@ -23,6 +23,8 @@ namespace VVRace
 
         public CompProperties_ArcaneSeed Props => (CompProperties_ArcaneSeed)props;
 
+        private bool IsEverflowerSeedInPocketMap => Props.targetPlantDef == VVThingDefOf.VV_Everflower && parent.MapHeld?.IsPocketMap == true;
+
         public List<IntVec3> SeedlingCells => _seedlingCells;
         private List<IntVec3> _seedlingCells = new List<IntVec3>();
 
@@ -65,6 +67,10 @@ namespace VVRace
                 if (!VVResearchProjectDefOf.VV_ArcanePlantSowing.IsFinished)
                 {
                     commandPlant.Disable("NotStudied".Translate(VVResearchProjectDefOf.VV_ArcanePlantSowing.LabelCap));
+                }
+                else if (IsEverflowerSeedInPocketMap)
+                {
+                    commandPlant.Disable("CannotBePlantedHere".Translate());
                 }
 
                 yield return commandPlant;
@@ -127,6 +133,11 @@ namespace VVRace
 
         public AcceptanceReport CanSowAt(IntVec3 c, Map map)
         {
+            if (Props.targetPlantDef == VVThingDefOf.VV_Everflower && map?.IsPocketMap == true)
+            {
+                return "CannotBePlantedHere".Translate();
+            }
+
             if (!c.IsValid)
             {
                 return false;
