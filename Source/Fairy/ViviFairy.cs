@@ -195,6 +195,10 @@ namespace VVRace
             {
                 _realPosition = Position.ToVector3Shifted().Yto0();
             }
+            else
+            {
+                _realPosition = ClampPositionToMap(_realPosition);
+            }
             SnapVisualPositionToReal();
         }
 
@@ -235,6 +239,10 @@ namespace VVRace
         {
             var map = Map;
             if (map == null) { return; }
+            if (!cell.IsValid || !cell.InBounds(map))
+            {
+                cell = ClampCellToMap(cell, map);
+            }
 
             _attackGraphicActive = false;
             PlayPhaseEffectAt(CurrentEffectCell(), map, VVSoundDefOf.VV_FairyTeleport);
@@ -301,7 +309,8 @@ namespace VVRace
                 SnapVisualPositionToReal();
             }
 
-            _realPosition = position.Yto0();
+            var map = Map;
+            _realPosition = map != null ? ClampPositionToMap(position) : position.Yto0();
             _drawAltitude = drawAltitude;
             if (direction.sqrMagnitude > 0.0001f)
             {
@@ -309,7 +318,6 @@ namespace VVRace
                 _facing = Rot4.FromAngleFlat(_realDirection.AngleFlat());
             }
 
-            var map = Map;
             var cell = _realPosition.ToIntVec3();
             if (map != null && cell.InBounds(map) && cell != Position)
             {
@@ -319,7 +327,22 @@ namespace VVRace
 
         internal void RegisterToilTrail(Vector3 position)
         {
-            TrailRenderer?.RegisterNewTrail(position);
+            TrailRenderer?.RegisterNewTrail(ClampPositionToMap(position));
+        }
+
+        internal Vector3 ClampPositionToMap(Vector3 position)
+        {
+            position = position.Yto0();
+            var map = Map;
+            if (map == null) { return position; }
+
+            var cell = position.ToIntVec3();
+            if (cell.IsValid && cell.InBounds(map))
+            {
+                return position;
+            }
+
+            return ClampCellToMap(cell, map).ToVector3Shifted().Yto0();
         }
 
         internal void ImpactToilTarget(Thing hitThing)
@@ -342,6 +365,15 @@ namespace VVRace
             if (log != null)
             {
                 result.AssociateWithLog(log);
+            }
+
+            if (result.totalDamageDealt > 0 && hitThing is Pawn hitPawn)
+            {
+                var stagger = hitPawn.stances?.stagger;
+                if (stagger != null)
+                {
+                    stagger.StaggerFor(30);
+                }
             }
         }
 
@@ -421,6 +453,15 @@ namespace VVRace
             {
                 effecter.Spawn(cell, map).Cleanup();
             }
+        }
+
+        private static IntVec3 ClampCellToMap(IntVec3 cell, Map map)
+        {
+            if (map == null) { return cell; }
+
+            int x = Mathf.Clamp(cell.x, 0, map.Size.x - 1);
+            int z = Mathf.Clamp(cell.z, 0, map.Size.z - 1);
+            return new IntVec3(x, 0, z);
         }
 
         private void EnsureOrbitVariation()

@@ -9,7 +9,7 @@ namespace VVRace
         private const int MaxDurationTicks = 10000;
         private const float HexRadius = 2.2f;
         private const float OrbitSpeed = 0.01f;
-        public const float ExpansionRadius = 14f;
+        public const float ExpansionRadius = 18.6f;
 
         private int slot;
         private int count = 1;

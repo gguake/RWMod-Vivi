@@ -57,11 +57,12 @@ namespace VVRace
             Vector3 restPos = FairyJobUtility.IdleOrbitPositionAround(fairy, ally, 0, 1);
             move?.ConfigureStepTarget(restPos);
 
-            var target = ViviFairyTargeting.FindHostileNear(
+            var target = ViviFairyTargeting.FindGuardTargetNear(
                 owner as IAttackTargetSearcher,
                 ally.Position,
                 ViviFairyTargeting.GuardScanRadius,
                 ally.Position,
+                owner.Position,
                 excludeDowned: true);
             TryStartAttackOrReturn(target, move);
         }

@@ -35,7 +35,8 @@ namespace VVRace
 
         public void ConfigureStepTarget(Vector3 targetPosition)
         {
-            this.targetPosition = targetPosition.Yto0();
+            var fairy = Fairy;
+            this.targetPosition = fairy != null ? fairy.ClampPositionToMap(targetPosition) : targetPosition.Yto0();
             targetConfigured = true;
         }
 
@@ -103,15 +104,16 @@ namespace VVRace
             }
             if (fairy.State != FairyState.Idle) { return FairyToilStatus.Running; }
 
-            Vector3 cur = fairy.RealPosition.Yto0();
-            Vector3 tar = targetPosition.Yto0();
+            Vector3 cur = fairy.ClampPositionToMap(fairy.RealPosition);
+            Vector3 tar = fairy.ClampPositionToMap(targetPosition);
+            targetPosition = tar;
             Vector3 diff = tar - cur;
             float dist = diff.magnitude;
 
             if (dist > TeleportDistance)
             {
                 var cell = tar.ToIntVec3();
-                if (!cell.InBounds(fairy.Map))
+                if (!cell.IsValid || !cell.InBounds(fairy.Map))
                 {
                     var owner = fairy.Owner;
                     cell = owner != null && owner.Spawned ? owner.Position : fairy.Position;

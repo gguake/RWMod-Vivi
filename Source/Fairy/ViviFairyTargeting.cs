@@ -1,5 +1,6 @@
 using RimWorld;
 using System.Collections;
+using UnityEngine;
 using Verse;
 using Verse.AI;
 
@@ -55,19 +56,64 @@ namespace VVRace
                 center,
                 potentialTargets,
                 maxDistance: radius,
-                validator: (Thing t) =>
+                validator: (Thing t) => IsValidHostileTarget(t, faction, map, losFrom, excludeDowned, exclude),
+                priorityGetter: (Thing t) => (t is IAttackTarget at && GenHostility.IsActiveThreatTo(at, faction) ? 10000f : 0f) - Mathf.RoundToInt(center.DistanceToSquared(t.Position) / 5f));
+        }
+
+        public static Thing FindGuardTargetNear(
+            IAttackTargetSearcher searcher,
+            IntVec3 center,
+            float radius,
+            IntVec3 losFrom,
+            IntVec3 priorityOrigin,
+            bool excludeDowned,
+            Thing exclude = null)
+        {
+            var searcherThing = searcher != null ? searcher.Thing : null;
+            var map = searcherThing != null ? searcherThing.Map : null;
+            if (map == null) { return null; }
+
+            var faction = searcherThing.Faction;
+            IEnumerable potentialTargets = map.attackTargetsCache.GetPotentialTargetsFor(searcher);
+            Thing selected = null;
+            int selectedDistance = int.MaxValue;
+            int sameDistanceCount = 0;
+
+            foreach (var potentialTarget in potentialTargets)
+            {
+                var target = potentialTarget as Thing;
+                if (!IsValidHostileTarget(target, faction, map, losFrom, excludeDowned, exclude)) { continue; }
+                if (center.DistanceTo(target.Position) > radius) { continue; }
+
+                int distance = (int)priorityOrigin.DistanceTo(target.Position);
+                if (distance < selectedDistance)
                 {
-                    if (t == exclude) { return false; }
-                    if (!(t is IAttackTarget)) { return false; }
-                    if (!t.Spawned || t.Fogged()) { return false; }
-                    if (!t.HostileTo(faction)) { return false; }
-                    if (excludeDowned && t is Pawn p && p.Downed) { return false; }
-                    if (!GenSight.LineOfSightToThing(losFrom, t, map, skipFirstCell: true)) { return false; }
-                    return true;
-                },
-                priorityGetter: (Thing t) =>
-                    (t is IAttackTarget at && GenHostility.IsActiveThreatTo(at, faction) ? 10000f : 0f)
-                    - center.DistanceToSquared(t.Position));
+                    selected = target;
+                    selectedDistance = distance;
+                    sameDistanceCount = 1;
+                }
+                else if (distance == selectedDistance)
+                {
+                    sameDistanceCount++;
+                    if (Rand.Chance(1f / sameDistanceCount))
+                    {
+                        selected = target;
+                    }
+                }
+            }
+
+            return selected;
+        }
+
+        private static bool IsValidHostileTarget(Thing target, Faction faction, Map map, IntVec3 losFrom, bool excludeDowned, Thing exclude)
+        {
+            if (target == null || target == exclude) { return false; }
+            if (!(target is IAttackTarget)) { return false; }
+            if (!target.Spawned || target.Fogged()) { return false; }
+            if (!target.HostileTo(faction)) { return false; }
+            if (excludeDowned && target is Pawn p && p.Downed) { return false; }
+            if (!GenSight.LineOfSightToThing(losFrom, target, map, skipFirstCell: true)) { return false; }
+            return true;
         }
     }
 }

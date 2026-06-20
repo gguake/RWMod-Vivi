@@ -28,8 +28,8 @@ namespace VVRace
                 return;
             }
 
-            moveStartPosition = fairy.RealPosition.Yto0();
-            moveEndPosition = end.Yto0();
+            moveStartPosition = fairy.ClampPositionToMap(fairy.RealPosition);
+            moveEndPosition = fairy.ClampPositionToMap(end);
             appliedSpeed = speed > 0f ? speed : DefaultSpeed;
 
             var dir = moveEndPosition - moveStartPosition;
@@ -113,7 +113,7 @@ namespace VVRace
             }
 
             var cell = position.ToIntVec3();
-            if (!cell.InBounds(fairy.Map))
+            if (!cell.IsValid || !cell.InBounds(fairy.Map))
             {
                 fairy.SetToilPosition(position, fairy.RealDirection);
                 return OnOutOfBounds(position);
@@ -133,7 +133,7 @@ namespace VVRace
 
         protected virtual FairyToilStatus OnOutOfBounds(Vector3 position)
         {
-            return FairyToilStatus.Complete;
+            return FairyToilStatus.Running;
         }
 
         public override void Cancel()

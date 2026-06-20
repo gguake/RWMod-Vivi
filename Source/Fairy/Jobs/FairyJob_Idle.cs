@@ -49,10 +49,11 @@ namespace VVRace
             orbit?.Configure(owner, slot, count);
 
             var target = ViviFairyTargeting.FindConcentratedTarget(owner)
-                ?? ViviFairyTargeting.FindHostileNear(
+                ?? ViviFairyTargeting.FindGuardTargetNear(
                     owner as IAttackTargetSearcher,
                     owner.Position,
                     ViviFairyTargeting.GuardScanRadius,
+                    owner.Position,
                     owner.Position,
                     excludeDowned: true);
             TryStartAttackOrReturn(target, move);
