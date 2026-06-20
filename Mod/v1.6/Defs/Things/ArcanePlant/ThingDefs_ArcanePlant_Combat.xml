@@ -316,7 +316,7 @@
         <defaultProjectile>VV_Bullet_Corn</defaultProjectile>
         <warmupTime>0</warmupTime>
         <range>40.9</range>
-        <forcedMissRadius>1.9</forcedMissRadius>
+        <forcedMissRadius>2.6</forcedMissRadius>
         <forcedMissEvenDispersal>true</forcedMissEvenDispersal>
         <soundCast>InfernoCannon_Fire</soundCast>
         <soundCastTail>GunTail_Heavy</soundCastTail>

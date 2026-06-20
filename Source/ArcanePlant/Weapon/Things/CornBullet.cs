@@ -7,6 +7,8 @@ namespace VVRace
     public class CornBulletData : DefModExtension
     {
         public ThingDef scatterBulletDef;
+        public ThingDef alternateScatterBulletDef;
+        public float alternateScatterBulletChance;
         public float scatterRadius;
         public IntRange scatterCount;
         public bool includeExplosionCells;
@@ -28,6 +30,7 @@ namespace VVRace
 
             var data = def.GetModExtension<CornBulletData>();
             if (data == null) { return; }
+            if (data.scatterBulletDef == null) { return; }
 
             var cellCandidates = GenRadial.RadialPatternInRadius(data.scatterRadius)
                 .Select(cell => impactCell + cell)
@@ -43,7 +46,13 @@ namespace VVRace
                 foreach (var cell in selected)
                 {
                     var flag = ProjectileHitFlags.All;
-                    var projectile = (Projectile)GenSpawn.Spawn(data.scatterBulletDef, impactCell, map);
+                    var scatterBulletDef = data.scatterBulletDef;
+                    if (data.alternateScatterBulletDef != null && data.alternateScatterBulletChance > 0f && Rand.Chance(data.alternateScatterBulletChance))
+                    {
+                        scatterBulletDef = data.alternateScatterBulletDef;
+                    }
+
+                    var projectile = (Projectile)GenSpawn.Spawn(scatterBulletDef, impactCell, map);
                     projectile.Launch(parentLauncher, startDrawPos, cell, cell, flag);
                 }
             }

@@ -116,6 +116,8 @@
     <modExtensions>
       <li Class="VVRace.CornBulletData">
         <scatterBulletDef>VV_Bullet_CornKernel</scatterBulletDef>
+        <alternateScatterBulletDef>VV_Bullet_PopCornKernel</alternateScatterBulletDef>
+        <alternateScatterBulletChance>0.34</alternateScatterBulletChance>
         <scatterRadius>5.9</scatterRadius>
         <scatterCount>20~25</scatterCount>
         <includeExplosionCells>false</includeExplosionCells>
@@ -131,6 +133,28 @@
 
     <graphicData>
       <texPath>Things/Projectile/VV_CornKernel</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1,1)</drawSize>
+      <shaderType>Transparent</shaderType>
+    </graphicData>
+
+    <projectile>
+      <damageDef>Bomb</damageDef>
+      <speed>30</speed>
+      <explosionRadius>0.6</explosionRadius>
+      <damageAmountBase>10</damageAmountBase>
+      <screenShakeFactor>0</screenShakeFactor>
+    </projectile>
+  </ThingDef>
+
+  <!-- 팝콘 -->
+  <ThingDef ParentName="BaseBullet">
+    <defName>VV_Bullet_PopCornKernel</defName>
+    <label>popcorn kernel</label>
+    <thingClass>Projectile_Explosive</thingClass>
+
+    <graphicData>
+      <texPath>Things/Projectile/VV_PopCornKernel</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <drawSize>(1,1)</drawSize>
       <shaderType>Transparent</shaderType>
