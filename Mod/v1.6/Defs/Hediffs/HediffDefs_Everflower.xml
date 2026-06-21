@@ -131,7 +131,7 @@
         <factor>0.3</factor>
       </li>
       <li Class="HediffCompProperties_SeverityPerDay">
-        <severityPerDay>-0.25</severityPerDay>
+        <severityPerDay>-0.2</severityPerDay>
         <showDaysToRecover>true</showDaysToRecover>
       </li>
     </comps>
