@@ -22,7 +22,7 @@ namespace VVRace
             if (everflower.HasRitualCooldown)
             {
                 var cooldownTicksRemaining = everflower.CurRitualCooldownTicks - GenTicks.TicksGame;
-                return LocalizeString_Etc.VV_FailReason_RitualCooldown.Translate(cooldownTicksRemaining.ToStringSecondsFromTicks());
+                return LocalizeString_Etc.VV_FailReason_RitualCooldown.Translate(cooldownTicksRemaining.ToStringTicksToPeriod());
             }
 
             return null;
