@@ -9,7 +9,7 @@ namespace VVRace
     public static class ViviFairyTargeting
     {
         public const float GuardScanRadius = 4.9f;
-        public const float ConcentrationScanRadius = 28.9f;
+        public const float ConcentrationScanRadius = 36.9f;
 
         public static Thing FindConcentratedTarget(Pawn owner)
         {

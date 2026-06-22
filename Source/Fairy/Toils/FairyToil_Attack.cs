@@ -8,11 +8,16 @@ namespace VVRace
     {
         private const float AttackCurveOffsetMin = 0.45f;
         private const float AttackCurveOffsetMax = 1.25f;
+        private const float AttackSpeedGlobalFactor = 0.9f;
+        private const float AttackSpeedFactorMin = 0.5f;
+        private const float AttackSpeedFactorMax = 1.0f;
 
         private Thing target;
         private bool invalid;
         private bool attackCurveInitialized;
         private float attackCurveOffset;
+        private bool attackSpeedInitialized;
+        private float attackSpeedFactor = 1f;
 
         public FairyToil_Attack() { }
 
@@ -40,7 +45,13 @@ namespace VVRace
                 attackCurveInitialized = true;
             }
 
-            SetMoveTarget(target.TrueCenter().Yto0(), DefaultSpeed, attackCurveOffset);
+            if (!attackSpeedInitialized)
+            {
+                attackSpeedFactor = Rand.Range(AttackSpeedFactorMin, AttackSpeedFactorMax);
+                attackSpeedInitialized = true;
+            }
+
+            SetMoveTarget(target.TrueCenter().Yto0(), DefaultSpeed * AttackSpeedGlobalFactor * attackSpeedFactor, attackCurveOffset);
             fairy.BeginToilMotion(FairyState.Attacking);
         }
 
@@ -92,6 +103,8 @@ namespace VVRace
             Scribe_Values.Look(ref invalid, "invalid");
             Scribe_Values.Look(ref attackCurveInitialized, "attackCurveInitialized");
             Scribe_Values.Look(ref attackCurveOffset, "attackCurveOffset");
+            Scribe_Values.Look(ref attackSpeedInitialized, "attackSpeedInitialized");
+            Scribe_Values.Look(ref attackSpeedFactor, "attackSpeedFactor", 1f);
         }
     }
 }

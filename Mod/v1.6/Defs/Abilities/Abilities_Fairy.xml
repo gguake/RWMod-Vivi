@@ -80,7 +80,7 @@
       <label>fairy concentration</label>
       <violent>true</violent>
       <warmupTime>1.5</warmupTime>
-      <range>28.9</range>
+      <range>31.4</range>
       <requireLineOfSight>true</requireLineOfSight>
       <targetParams>
         <canTargetPawns>true</canTargetPawns>
