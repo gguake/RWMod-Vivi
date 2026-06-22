@@ -99,7 +99,7 @@
   <AbilityDef>
     <defName>VV_FairyExpansion</defName>
     <label>fairy - expansion</label>
-    <description>Six idle fairy vivi orbit the royal vivi in a hexagonal formation, tracking and attacking all hostiles within the royal vivi's sight. Toggle off by recasting; also ends after the duration or if the royal vivi dies.</description>
+    <description>All currently available idle fairy vivi orbit the royal vivi, tracking and attacking all hostiles within the royal vivi's sight. Toggle off by recasting; also ends after the duration or if the royal vivi dies.</description>
     <iconPath>UI/Commands/VV_FairyExpansion</iconPath>
     <cooldownTicksRange>600</cooldownTicksRange>
     <hostile>false</hostile>

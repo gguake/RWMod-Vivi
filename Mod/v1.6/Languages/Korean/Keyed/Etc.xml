@@ -9,6 +9,7 @@
 <VV_AbilityDisabledNoBodyPart>{0_labelShort}의 신체 부위 {1}가 {2}개 부족함</VV_AbilityDisabledNoBodyPart>
 
 <VV_AbilityDisabledNoFairySlot>실체화할 수 있는 요정 비비 없음</VV_AbilityDisabledNoFairySlot>
+<VV_AbilityDisabledNoMaterializedFairies>실체화된 요정 비비 없음</VV_AbilityDisabledNoMaterializedFairies>
 <VV_AbilityFailNoMana>대상 위치의 환경 마나가 부족함</VV_AbilityFailNoMana>
 <VV_AbilityDisabledNotEnoughFairies>대기 중인 요정 비비 부족 ({0}기 필요)</VV_AbilityDisabledNotEnoughFairies>
 <VV_AbilityFailNotAlly>아군 대상에게만 사용 가능</VV_AbilityFailNotAlly>

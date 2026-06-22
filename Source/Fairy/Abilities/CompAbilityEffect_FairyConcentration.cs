@@ -13,9 +13,14 @@ namespace VVRace
 
     public class CompAbilityEffect_FairyConcentration : CompAbilityEffect
     {
+        private CompViviHolder Controller => parent.pawn.GetComp<CompViviHolder>();
+
         public override void Apply(LocalTargetInfo target, LocalTargetInfo dest)
         {
             base.Apply(target, dest);
+
+            var ctrl = Controller;
+            if (ctrl == null || ctrl.MaterializedCount <= 0) { return; }
 
             var enemy = target.Pawn;
             if (enemy == null || enemy.health == null) { return; }
@@ -23,6 +28,19 @@ namespace VVRace
             Hediff_FairyConcentrated.RemoveOwnedBy(parent.pawn);
             var hediff = (Hediff_FairyConcentrated)enemy.health.AddHediff(VVHediffDefOf.VV_FairyConcentrated);
             hediff.ownerVivi = parent.pawn;
+        }
+
+        public override bool GizmoDisabled(out string reason)
+        {
+            var ctrl = Controller;
+            if (ctrl == null || ctrl.MaterializedCount <= 0)
+            {
+                reason = LocalizeString_Etc.VV_AbilityDisabledNoMaterializedFairies.Translate();
+                return true;
+            }
+
+            reason = null;
+            return false;
         }
 
         public override bool Valid(LocalTargetInfo target, bool throwMessages = false)

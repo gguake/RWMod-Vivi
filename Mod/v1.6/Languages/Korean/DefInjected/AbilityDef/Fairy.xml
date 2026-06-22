@@ -15,6 +15,6 @@
 \n한번에 하나의 대상에만 집중 표식을 남길 수 있으며 대상이 무력화되면 사라집니다.</VV_FairyConcentration.description>
 
 <VV_FairyExpansion.label>요정 - 전개</VV_FairyExpansion.label>
-<VV_FairyExpansion.description>요정 비비 6기를 전개해 로열 비비 주위를 맴돌며 경계 상태로 전환합니다. 경계 상태의 요정 비비들은 로열 비비의 시야에 들어온 넓은 범위의 모든 적대 대상을 추적 공격합니다. 재사용하면 경계 상태가 해제됩니다.</VV_FairyExpansion.description>
+<VV_FairyExpansion.description>현재 가용한 모든 요정 비비를 전개해 로열 비비 주위를 맴돌며 경계 상태로 전환합니다. 경계 상태의 요정 비비들은 로열 비비의 시야에 들어온 넓은 범위의 모든 적대 대상을 추적 공격합니다. 재사용하면 경계 상태가 해제됩니다.</VV_FairyExpansion.description>
 
 </Defs>

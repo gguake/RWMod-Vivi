@@ -1,4 +1,5 @@
 using RimWorld;
+using System.Linq;
 using Verse;
 
 namespace VVRace
@@ -13,7 +14,7 @@ namespace VVRace
 
     public class CompAbilityEffect_FairyExpansion : CompAbilityEffect
     {
-        private const int RequiredFairies = 6;
+        private const int RequiredFairies = 3;
 
         private CompViviHolder Controller => parent.pawn.GetComp<CompViviHolder>();
 
@@ -31,7 +32,11 @@ namespace VVRace
                 return;
             }
 
-            if (!ctrl.TryReserveIdleFairies(RequiredFairies, out var reserved)) { return; }
+            var reserved = ctrl.ActiveFairies
+                .Where(f => f != null && !f.Destroyed && f.IsAvailable)
+                .OrderBy(f => f.thingIDNumber)
+                .ToList();
+            if (reserved.Count < RequiredFairies) { return; }
 
             int id = ctrl.NextFairyJobId();
             for (int i = 0; i < reserved.Count; i++)

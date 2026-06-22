@@ -9,6 +9,7 @@
 <VV_AbilityDisabledNoBodyPart>{0_labelShort} lacks {2} {1} body parts</VV_AbilityDisabledNoBodyPart>
 
 <VV_AbilityDisabledNoFairySlot>No available fairy vivi to materialize</VV_AbilityDisabledNoFairySlot>
+<VV_AbilityDisabledNoMaterializedFairies>No materialized fairy vivi</VV_AbilityDisabledNoMaterializedFairies>
 <VV_AbilityFailNoMana>Not enough environment mana at the target location</VV_AbilityFailNoMana>
 <VV_AbilityDisabledNotEnoughFairies>Not enough idle fairy vivi (needs {0})</VV_AbilityDisabledNotEnoughFairies>
 <VV_AbilityFailNotAlly>Must target an allied pawn</VV_AbilityFailNotAlly>

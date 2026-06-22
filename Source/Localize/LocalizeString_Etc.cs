@@ -1,4 +1,4 @@
-namespace VVRace
+﻿namespace VVRace
 {
     public static class LocalizeString_Etc
     {
@@ -11,6 +11,7 @@ namespace VVRace
         public const string VV_AbilityDisabledNoBodyPart = nameof(VV_AbilityDisabledNoBodyPart);
 
         public const string VV_AbilityDisabledNoFairySlot = nameof(VV_AbilityDisabledNoFairySlot);
+        public const string VV_AbilityDisabledNoMaterializedFairies = nameof(VV_AbilityDisabledNoMaterializedFairies);
         public const string VV_AbilityFailNoMana = nameof(VV_AbilityFailNoMana);
         public const string VV_AbilityDisabledNotEnoughFairies = nameof(VV_AbilityDisabledNotEnoughFairies);
         public const string VV_AbilityFailNotAlly = nameof(VV_AbilityFailNotAlly);
