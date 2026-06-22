@@ -48,7 +48,7 @@
       <combatPower>50</combatPower>
       <ai_combatDangerous>true</ai_combatDangerous>
       <turretGunDef>VV_Gun_Peashooter</turretGunDef>
-      <turretBurstCooldownTime>2.4</turretBurstCooldownTime>
+      <turretBurstCooldownTime>2.1</turretBurstCooldownTime>
       <turretBurstWarmupTime>1.2</turretBurstWarmupTime>
       <turretTopOffset>(0, 0.05)</turretTopOffset>
       <turretTopDrawSize>1</turretTopDrawSize>

@@ -128,7 +128,7 @@
 
     <comps>
       <li Class="VVRace.HediffCompProperties_AgingFactor">
-        <factor>0.3</factor>
+        <factor>0.5</factor>
       </li>
       <li Class="HediffCompProperties_SeverityPerDay">
         <severityPerDay>-0.2</severityPerDay>

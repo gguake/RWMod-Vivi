@@ -118,7 +118,7 @@
         <scatterBulletDef>VV_Bullet_CornKernel</scatterBulletDef>
         <alternateScatterBulletDef>VV_Bullet_PopCornKernel</alternateScatterBulletDef>
         <alternateScatterBulletChance>0.34</alternateScatterBulletChance>
-        <scatterRadius>5.9</scatterRadius>
+        <scatterRadius>5.3</scatterRadius>
         <scatterCount>20~25</scatterCount>
         <includeExplosionCells>false</includeExplosionCells>
       </li>

@@ -43,7 +43,7 @@
           <PsychicEntropyRecoveryRate>0.15</PsychicEntropyRecoveryRate>
         </statOffsets>
         <statFactors>
-          <LifespanFactor>2</LifespanFactor>
+          <LifespanFactor>3</LifespanFactor>
         </statFactors>
       </li>
     </stages>
