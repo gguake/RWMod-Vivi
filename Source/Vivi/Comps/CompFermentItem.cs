@@ -36,6 +36,11 @@ namespace VVRace
         {
             Scribe_Values.Look(ref _fermentedProgress, "_fermentedProgress");
             Scribe_Values.Look(ref _temperatureDamagedProgress, "_temperatureDamagedProgress");
+
+            if (Scribe.mode == LoadSaveMode.PostLoadInit && parent.stackCount <= 0)
+            {
+                parent.stackCount = 1;
+            }
         }
 
         public override void CompTick()
@@ -102,12 +107,13 @@ namespace VVRace
                 {
                     var map = parent.Map;
                     var position = parent.Position;
+                    var sourceStackCount = Mathf.Max(1, parent.stackCount);
                     parent.Destroy();
 
                     foreach (var tdc in Props.fermentedThings)
                     {
                         var thingDef = tdc.thingDef;
-                        var count = tdc.count * parent.stackCount;
+                        var count = tdc.count * sourceStackCount;
 
                         var stackLimit = thingDef.stackLimit;
                         while (count > 0)
