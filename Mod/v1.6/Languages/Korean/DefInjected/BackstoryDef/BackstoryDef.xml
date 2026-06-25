@@ -4,7 +4,15 @@
 <!-- Childhoods -->
 <VV_ViviHiveChild.title>비비 둥지 아이</VV_ViviHiveChild.title>
 <VV_ViviHiveChild.titleShort>둥지 아이</VV_ViviHiveChild.titleShort>
-<VV_ViviHiveChild.description>[PAWN_nameDef]는 비비 둥지에서 평범한 어린 시절을 보냈습니다.</VV_ViviHiveChild.description>
+<VV_ViviHiveChild.description>[PAWN_nameDef]는 비비 둥지에서 특별할 것 없는 평범한 어린 시절을 보냈습니다.</VV_ViviHiveChild.description>
+
+<VV_ViviHivePlayfulChild.title>비비 활발한 둥지 아이</VV_ViviHivePlayfulChild.title>
+<VV_ViviHivePlayfulChild.titleShort>활발한 둥지 아이</VV_ViviHivePlayfulChild.titleShort>
+<VV_ViviHivePlayfulChild.description>[PAWN_nameDef]는 수시로 둥지 밖으로 놀러나가 사고를 치고 혼나는 아주 활발한 어린 시절을 보냈습니다. 굳이 둥지에서 멀리까지 나갔다가 배고픈 야생 동물에게 쫓기거나.. 몰래 콘뿌리개의 옥수수를 가지고 놀다가 꽃밭에 불을 내거나..</VV_ViviHivePlayfulChild.description>
+
+<VV_ViviHiveQuietChild.title>비비 얌전한 둥지 아이</VV_ViviHiveQuietChild.title>
+<VV_ViviHiveQuietChild.titleShort>얌전한 둥지 아이</VV_ViviHiveQuietChild.titleShort>
+<VV_ViviHiveQuietChild.description>[PAWN_nameDef]는 따뜻한 비비 둥지 내에서 밖에 나온적이 손에 꼽을정도로 얌전한 어린 시절을 보냈습니다. 심지어는 비비라면 누구나 해야할 꿀 채집조차도 여러 핑계를 대고 잘 나오지 않았습니다.</VV_ViviHiveQuietChild.description>
 
 <!-- Adulthoods - NPC -->
 <VV_ViviSettler.title>비비 둥지 정착민</VV_ViviSettler.title>
@@ -13,35 +21,36 @@
 
 <VV_ViviCook.title>비비 요리사</VV_ViviCook.title>
 <VV_ViviCook.titleShort>요리사</VV_ViviCook.titleShort>
-<VV_ViviCook.description>[PAWN_nameDef]는 비비 둥지의 식량을 담당하는 요리사입니다.</VV_ViviCook.description>
+<VV_ViviCook.description>[PAWN_nameDef]는 비비 둥지의 식량을 담당하는 요리사입니다. 이들이 만들기 선호하는 요리는 꿀이 들어간 경단, 꿀을 바른 암브로시아, 꿀을 버무린 딸기 샐러드, 꿀에 절인 페미컨.. 등등이 있습니다.</VV_ViviCook.description>
 
 <VV_ViviGatherer.title>비비 채집가</VV_ViviGatherer.title>
 <VV_ViviGatherer.titleShort>채집가</VV_ViviGatherer.titleShort>
-<VV_ViviGatherer.description>[PAWN_nameDef]는 비비 둥지의 자원 채집을 담당하는 채집가입니다.</VV_ViviGatherer.description>
+<VV_ViviGatherer.description>[PAWN_nameDef]는 비비 둥지의 자원 채집을 담당하는 채집가입니다. 둥지에서 제일 바쁘게 일하는 비비들이지만 대부분은 매일 비슷한 일을 반복하기에 지루해하는 비비도 많습니다.</VV_ViviGatherer.description>
 
 <VV_ViviArchitect.title>비비 건축가</VV_ViviArchitect.title>
 <VV_ViviArchitect.titleShort>건축가</VV_ViviArchitect.titleShort>
-<VV_ViviArchitect.description>[PAWN_nameDef]는 비비 둥지를 확장하고 보수하는 작업을 담당하는 건축가입니다.</VV_ViviArchitect.description>
+<VV_ViviArchitect.description>[PAWN_nameDef]는 비비 둥지를 확장하고 보수하는 작업을 담당하는 건축가입니다. 비비들은 가능한 모든 구조물을 육각형 모양으로 짓는것을 선호하지만 구체적인 이유는 아무도 모릅니다.</VV_ViviArchitect.description>
 
 <VV_ViviResearcher.title>비비 연구원</VV_ViviResearcher.title>
 <VV_ViviResearcher.titleShort>연구원</VV_ViviResearcher.titleShort>
-<VV_ViviResearcher.description>[PAWN_nameDef]는 비비 둥지에서 새로운 기술을 연구하거나 외부의 현대적인 기술을 공부하고 적용하는 연구원입니다.</VV_ViviResearcher.description>
+<VV_ViviResearcher.description>[PAWN_nameDef]는 비비 둥지에서 새로운 기술을 연구하거나 외부의 현대적인 기술을 공부하고 적용하는 연구원입니다. 비비들에게는 일은 안하고 구석에 처박혀서 노닥거리는 쓸모없는 존재들로 자주 인식됩니다.</VV_ViviResearcher.description>
 
 <VV_ViviHerbalist.title>비비 약초꾼</VV_ViviHerbalist.title>
 <VV_ViviHerbalist.titleShort>약초꾼</VV_ViviHerbalist.titleShort>
-<VV_ViviHerbalist.description>[PAWN_nameDef]는 비비 둥지 주변을 돌아다니면서 약초를 찾거나 새로운 식물을 연구하는 약초꾼입니다.</VV_ViviHerbalist.description>
+<VV_ViviHerbalist.description>[PAWN_nameDef]는 비비 둥지 주변을 돌아다니면서 약초를 찾거나 새로운 식물을 연구하는 약초꾼입니다. 둥지에 무언가 도움이 되기위해 항상 다양한 풀을 수집해오지만 대부분은 잡초입니다.</VV_ViviHerbalist.description>
 
 <VV_ViviGuard.title>비비 경비원</VV_ViviGuard.title>
 <VV_ViviGuard.titleShort>경비원</VV_ViviGuard.titleShort>
-<VV_ViviGuard.description>[PAWN_nameDef]는 비비 둥지 외부의 적에 대항하거나 내부의 질서를 유지하는 경비원입니다.</VV_ViviGuard.description>
+<VV_ViviGuard.description>[PAWN_nameDef]는 비비 둥지 외부의 적에 대항하거나 내부의 질서를 유지하는 경비원입니다. 대부분의 비비들은 싸움에 자신이 없기에 타고난 재능을 가진 비비들이 주로 전문 경비원 역할을 맡습니다.</VV_ViviGuard.description>
 
 <VV_ViviScout.title>비비 정탐꾼</VV_ViviScout.title>
 <VV_ViviScout.titleShort>정탐꾼</VV_ViviScout.titleShort>
-<VV_ViviScout.description>[PAWN_nameDef]는 비비 둥지 주변을 순찰하며 외부의 적을 감지하거나 주변 정착지의 사건을 정찰해 보고하는 정탐꾼입니다.</VV_ViviScout.description>
+<VV_ViviScout.description>[PAWN_nameDef]는 비비 둥지 주변을 순찰하며 외부의 적을 감지하거나 주변 정착지의 사건을 정찰해 보고하는 정탐꾼입니다. 둥지에 잘 돌아오지 않고 위험한 지역을 자주 다니기에 둥지에서도 이들의 존재를 잊어버리는 경우가 많습니다.</VV_ViviScout.description>
 
 <VV_ViviFirefighter.title>비비 소방수</VV_ViviFirefighter.title>
 <VV_ViviFirefighter.titleShort>소방수</VV_ViviFirefighter.titleShort>
-<VV_ViviFirefighter.description>[PAWN_nameDef]는 비비 둥지나 인근 환경에 발생하는 화재를 진압하는 소방수입니다. 전투에 노련한 비비들이 주로 선발되기에 둥지 방어나 경호 임무도 수행합니다.</VV_ViviFirefighter.description>
+<VV_ViviFirefighter.description>[PAWN_nameDef]는 비비 둥지나 인근 환경에 발생하는 화재를 진압하는 소방수입니다. 전투에 노련한 비비들이 주로 선발되기에 둥지 방어나 경호 임무도 수행합니다.
+\n화재 진압이라는 중요한 임무를 맡고있지만 불을 무서워하는건 어쩔 수 없습니다.</VV_ViviFirefighter.description>
 
 <VV_ViviSniper.title>비비 저격수</VV_ViviSniper.title>
 <VV_ViviSniper.titleShort>저격수</VV_ViviSniper.titleShort>
@@ -49,7 +58,7 @@
 
 <VV_ViviPrincess.title>비비 공주</VV_ViviPrincess.title>
 <VV_ViviPrincess.titleShort>공주</VV_ViviPrincess.titleShort>
-<VV_ViviPrincess.description>[PAWN_nameDef]는 비비 둥지에서 귀하게 자란 공주님입니다.</VV_ViviPrincess.description>
+<VV_ViviPrincess.description>[PAWN_nameDef]는 비비 둥지에서 귀하게 자란 공주님입니다. 귀하게 자랐음에도 이들은 세력을 모아 새로운 둥지를 만들기 위해 멀리 떠나거나 둥지 구석에서 눈치를 보며 사는 혹독한 미래만 남아있습니다.</VV_ViviPrincess.description>
 
 <!-- Adulthoods - Player -->
 <VV_ViviExiled.title>비비 추방자</VV_ViviExiled.title>

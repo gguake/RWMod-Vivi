@@ -20,4 +20,52 @@
       <Intellectual>-1</Intellectual>
     </skillGains>
   </BackstoryDef>
+  
+  <BackstoryDef ParentName="VV_ViviChildBackstory">
+    <defName>VV_ViviHivePlayfulChild</defName>
+    <title>vivi hive playful child</title>
+    <titleShort>hive playful child</titleShort>
+    <description>[PAWN_nameDef] spent a very active childhood, frequently leaving the nest to play, getting into trouble, and being scolded. This included going far from the nest for no good reason and being chased by hungry wild animals... or secretly playing with a cornlauncher's corn and setting a flower field on fire...</description>
+    <spawnCategories>
+      <li>VV_SettlerBackstory</li>
+      <li>VV_CombatSettlerBackstory</li>
+      <li>VV_FirefighterBackstory</li>
+      <li>VV_SniperBackstory</li>
+      <li>VV_SettlerGrown</li>
+
+      <li>VV_RoyalViviSettlerBackstory</li>
+    </spawnCategories>
+    <skillGains>
+      <Shooting>2</Shooting>
+      <Melee>2</Melee>
+      <Social>3</Social>
+      <Construction>-1</Construction>
+      <Cooking>-1</Cooking>
+      <Intellectual>-3</Intellectual>
+    </skillGains>
+  </BackstoryDef>
+  
+  <BackstoryDef ParentName="VV_ViviChildBackstory">
+    <defName>VV_ViviHiveQuietChild</defName>
+    <title>vivi hive quiet child</title>
+    <titleShort>hive quiet child</titleShort>
+    <description>[PAWN_nameDef] spent such a quiet childhood inside a warm vivi nest that the times [PAWN_nameDef] went outside could be counted on one hand. Even for honey gathering, something every vivi is supposed to do, [PAWN_nameDef] rarely came out and made various excuses.</description>
+    <spawnCategories>
+      <li>VV_SettlerBackstory</li>
+      <li>VV_CombatSettlerBackstory</li>
+      <li>VV_FirefighterBackstory</li>
+      <li>VV_SniperBackstory</li>
+      <li>VV_SettlerGrown</li>
+
+      <li>VV_RoyalViviSettlerBackstory</li>
+    </spawnCategories>
+    <skillGains>
+      <Crafting>2</Crafting>
+      <Construction>2</Construction>
+      <Intellectual>3</Intellectual>
+      <Animals>-1</Animals>
+      <Melee>-1</Melee>
+      <Plants>-3</Plants>
+    </skillGains>
+  </BackstoryDef>
 </Defs>

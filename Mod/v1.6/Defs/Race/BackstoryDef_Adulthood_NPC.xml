@@ -26,7 +26,7 @@
     <defName>VV_ViviCook</defName>
     <title>vivi cook</title>
     <titleShort>cook</titleShort>
-    <description>[PAWN_nameDef] is a cook responsible for the food of a vivi hive.</description>
+    <description>[PAWN_nameDef] is a cook responsible for the food of a vivi hive. Dishes they prefer to make include honey-filled pollen cake, honey-glazed ambrosia, strawberry salad mixed with honey, pemmican soaked in honey... and so on.</description>
     <skillGains>
       <Cooking>5</Cooking>
       <Animals>3</Animals>
@@ -47,7 +47,7 @@
     <defName>VV_ViviGatherer</defName>
     <title>vivi gatherer</title>
     <titleShort>gatherer</titleShort>
-    <description>[PAWN_nameDef] is a gatherer responsible for collecting resources for a vivi hive.</description>
+    <description>[PAWN_nameDef] is a gatherer responsible for collecting resources for a vivi hive. They are among the busiest vivis in the hive, but since most of them repeat similar work every day, many grow bored of it.</description>
     <skillGains>
       <Plants>5</Plants>
       <Animals>3</Animals>
@@ -67,7 +67,7 @@
     <defName>VV_ViviArchitect</defName>
     <title>vivi architect</title>
     <titleShort>architect</titleShort>
-    <description>[PAWN_nameDef] is an architect responsible for expanding and repairing a vivi hive.</description>
+    <description>[PAWN_nameDef] is an architect responsible for expanding and repairing a vivi hive. Vivis prefer to build every structure they can in a hexagonal shape, though no one knows the exact reason why.</description>
     <skillGains>
       <Artistic>5</Artistic>
       <Construction>3</Construction>
@@ -87,7 +87,7 @@
     <defName>VV_ViviResearcher</defName>
     <title>vivi researcher</title>
     <titleShort>researcher</titleShort>
-    <description>[PAWN_nameDef] is a researcher in a vivi hive, researching new technologies or studying and applying modern technology from outside.</description>
+    <description>[PAWN_nameDef] is a researcher in a vivi hive, researching new technologies or studying and applying modern technology from outside. Other vivis often see researchers as useless layabouts who do no work and sit around in a corner.</description>
     <skillGains>
       <Intellectual>5</Intellectual>
       <Medicine>5</Medicine>
@@ -107,7 +107,7 @@
     <defName>VV_ViviHerbalist</defName>
     <title>vivi herbalist</title>
     <titleShort>herbalist</titleShort>
-    <description>[PAWN_nameDef] is a herbalist who roams around a vivi hive looking for herbs or researching new plants.</description>
+    <description>[PAWN_nameDef] is a herbalist who roams around a vivi hive looking for herbs or researching new plants. They always bring back all kinds of grasses in hopes of helping the hive, but most of them are weeds.</description>
     <skillGains>
       <Plants>5</Plants>
       <Medicine>3</Medicine>
@@ -131,7 +131,7 @@
     <defName>VV_ViviGuard</defName>
     <title>vivi guard</title>
     <titleShort>guard</titleShort>
-    <description>[PAWN_nameDef] is a guard who fights enemies outside a vivi hive or maintains order within it.</description>
+    <description>[PAWN_nameDef] is a guard who fights enemies outside a vivi hive or maintains order within it. Since most vivis are not confident in combat, vivis with natural talent usually serve as professional guards.</description>
     <skillGains>
       <Melee>5</Melee>
       <Shooting>3</Shooting>
@@ -153,10 +153,10 @@
     <defName>VV_ViviScout</defName>
     <title>vivi scout</title>
     <titleShort>scout</titleShort>
-    <description>[PAWN_nameDef] is a scout who patrols around a vivi hive, detects outside enemies, or scouts and reports on events in nearby settlements.</description>
+    <description>[PAWN_nameDef] is a scout who patrols around a vivi hive, detects outside enemies, or scouts and reports on events in nearby settlements. Because they rarely return to the hive and often travel through dangerous areas, even the hive often forgets they exist.</description>
     <skillGains>
-      <Shooting>5</Shooting>
-      <Medicine>3</Medicine>
+      <Shooting>6</Shooting>
+      <Medicine>4</Medicine>
     </skillGains>
     <workDisables>
       <li>PlantWork</li>
@@ -175,7 +175,7 @@
     <defName>VV_ViviFirefighter</defName>
     <title>vivi firefighter</title>
     <titleShort>firefighter</titleShort>
-    <description>[PAWN_nameDef] is a firefighter who extinguishes fires in a vivi hive or the nearby environment. Since experienced fighters are usually selected for this role, it also includes hive defense and escort duties.</description>
+    <description>[PAWN_nameDef] is a firefighter who extinguishes fires in a vivi hive or the nearby environment. Since experienced fighters are usually selected for this role, it also includes hive defense and escort duties.\nAlthough they hold the important duty of fighting fires, they still cannot help being afraid of fire.</description>
     <skillGains>
       <Melee>5</Melee>
       <Construction>5</Construction>
@@ -210,7 +210,7 @@
     <defName>VV_ViviPrincess</defName>
     <title>vivi princess</title>
     <titleShort>princess</titleShort>
-    <description>[PAWN_nameDef] is a cherished princess raised in a vivi hive.</description>
+    <description>[PAWN_nameDef] is a cherished princess raised in a vivi hive. Despite being raised with care, they have only a harsh future ahead: either gathering followers and leaving far away to build a new hive, or living quietly in a corner of the hive while watching how others treat them.</description>
     <skillGains>
       <Social>12</Social>
       <Medicine>4</Medicine>
