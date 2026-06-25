@@ -410,7 +410,7 @@
         <li>
           <def>Shoulder</def>
           <customLabel>right shoulder</customLabel>
-          <coverage>0.09</coverage>
+          <coverage>0.12</coverage>
           <woundAnchorTag>RightShoulder</woundAnchorTag>
           <groups>
             <li>Shoulders</li>
@@ -524,7 +524,7 @@
         <li>
           <def>Leg</def>
           <customLabel>left leg</customLabel>
-          <coverage>0.1</coverage>
+          <coverage>0.14</coverage>
           <height>Bottom</height>
           <groups>
             <li>Legs</li>

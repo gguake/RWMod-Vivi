@@ -160,7 +160,7 @@
       <preferability>MealSimple</preferability>
       <babiesCanIngest>true</babiesCanIngest>
       <ingestSound>Ingest_Pill</ingestSound>
-      <maxNumToIngestAtOnce>10</maxNumToIngestAtOnce>
+      <maxNumToIngestAtOnce>25</maxNumToIngestAtOnce>
       <optimalityOffsetHumanlikes>10</optimalityOffsetHumanlikes>
       <optimalityOffsetFeedingAnimals>-15</optimalityOffsetFeedingAnimals>
 			
