@@ -88,6 +88,27 @@ namespace VVRace
             return true;
         }
 
+        private static List<HeadTypeDef> _vanillaFemaleAverageHeadsCache;
+
+        // '바닐라 헤드만 사용' 옵션: Female_AverageNormal / Female_AveragePointy / Female_AverageWide 중 랜덤
+        public static HeadTypeDef RandomVanillaFemaleAverageHead()
+        {
+            if (_vanillaFemaleAverageHeadsCache == null)
+            {
+                _vanillaFemaleAverageHeadsCache = new List<HeadTypeDef>();
+                foreach (var defName in new[] { "Female_AverageNormal", "Female_AveragePointy", "Female_AverageWide" })
+                {
+                    var def = DefDatabase<HeadTypeDef>.GetNamedSilentFail(defName);
+                    if (def != null)
+                    {
+                        _vanillaFemaleAverageHeadsCache.Add(def);
+                    }
+                }
+            }
+
+            return _vanillaFemaleAverageHeadsCache.TryRandomElement(out var result) ? result : null;
+        }
+
         public static void GenerateHornetFromGeneticDeath(this Pawn pawn)
         {
             var map = pawn.MapHeld;

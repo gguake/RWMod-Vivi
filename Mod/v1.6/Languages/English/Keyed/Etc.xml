@@ -38,6 +38,9 @@
 <VV_ModSettings_ManaGridOpacity>Mana grid opacity</VV_ModSettings_ManaGridOpacity>
 <VV_ModSettings_ManaGridOpacityDesc>Sets the opacity of the environment mana grid when selecting arcane plants or mana-using structures. Applies only when the 'Arcane Botany' research is completed.</VV_ModSettings_ManaGridOpacityDesc>
 
+<VV_ModSettings_UseVanillaHeadOnly>Use vanilla head only</VV_ModSettings_UseVanillaHeadOnly>
+<VV_ModSettings_UseVanillaHeadOnlyDesc>When a Vivi is generated, replaces its unique head type with a vanilla female head type. Does not affect Vivis that already exist.</VV_ModSettings_UseVanillaHeadOnlyDesc>
+
 <VV_Thing_Seed>{0} seed</VV_Thing_Seed>
 <VV_Thing_SeedDesc>A seed of {0}. When planted in soil or an arcane plant pot, it becomes a seedling, which will eventually grow into {0}.\nArcane plants require both mana and nutrients to grow.
 \nMana is absorbed from the environment mana and can also be supplied by nearby mana emitter or other arcane plants that produce mana.

@@ -67,6 +67,11 @@ namespace VVRace.HarmonyPatches
                 original: AccessTools.Method(typeof(PawnGenerator), "GenerateGenes"),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(PawnGenerator_GenerateGenes_Postfix)));
 
+            // 바닐라 헤어/헤드 대체 모드 옵션
+            harmony.Patch(
+                original: AccessTools.Method(typeof(PawnGenerator), nameof(PawnGenerator.GeneratePawn), new[] { typeof(PawnGenerationRequest) }),
+                postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(PawnGenerator_GeneratePawn_Postfix)));
+
             // 비비 바닥 폐허에 안나오게 수정
             {
                 var innerType = typeof(BaseGenUtility).GetNestedTypes(BindingFlags.NonPublic).FirstOrDefault(t => t.GetField("costCalculator") != null);
@@ -260,6 +265,22 @@ namespace VVRace.HarmonyPatches
                 foreach (var gene in genes)
                 {
                     pawn.genes.AddGene(gene, true);
+                }
+            }
+        }
+
+        private static void PawnGenerator_GeneratePawn_Postfix(Pawn __result)
+        {
+            if (__result?.story == null || !__result.IsVivi()) { return; }
+
+            var settings = LoadedModManager.GetMod<VVRaceMod>().GetSettings<VVRaceModSettings>();
+
+            if (settings.useVanillaHeadOnly)
+            {
+                var head = ViviUtility.RandomVanillaFemaleAverageHead();
+                if (head != null)
+                {
+                    __result.story.headType = head;
                 }
             }
         }

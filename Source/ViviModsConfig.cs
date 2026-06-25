@@ -10,6 +10,7 @@ namespace VVRace
         public float royalJellyMultiplier = 1f;
         public bool alwaysShowManaIfSelected = true;
         public float manaGridOpacity = 0.5f;
+        public bool useVanillaHeadOnly = false;
 
         public override void ExposeData()
         {
@@ -19,6 +20,7 @@ namespace VVRace
             Scribe_Values.Look(ref royalJellyMultiplier, "royalJellyMultiplier", defaultValue: 1f);
             Scribe_Values.Look(ref alwaysShowManaIfSelected, "alwaysShowManaIfSelected", defaultValue: true);
             Scribe_Values.Look(ref manaGridOpacity, "manaGridOpacity", defaultValue: 0.5f);
+            Scribe_Values.Look(ref useVanillaHeadOnly, "useVanillaHeadOnly", defaultValue: false);
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
@@ -69,6 +71,11 @@ namespace VVRace
                 0.1f,
                 0.5f,
                 tooltip: LocalizeString_Etc.VV_ModSettings_ManaGridOpacityDesc.Translate());
+
+            listing.CheckboxLabeled(
+                LocalizeString_Etc.VV_ModSettings_UseVanillaHeadOnly.Translate(),
+                ref _settings.useVanillaHeadOnly,
+                LocalizeString_Etc.VV_ModSettings_UseVanillaHeadOnlyDesc.Translate());
 
 
             listing.End();
