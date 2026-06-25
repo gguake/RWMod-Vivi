@@ -32,7 +32,7 @@
   <HediffDef>
     <defName>VV_FairyGuarded</defName>
     <label>fairy escort</label>
-    <description>A fairy vivi is escorting and protecting this pawn.</description>
+    <description>A Fairy vivi is following and protecting this target. While guarding, the fairy vivi automatically attacks nearby enemies.</description>
     <hediffClass>VVRace.Hediff_FairyGuarded</hediffClass>
     <defaultLabelColor>(0.7, 1, 0.9)</defaultLabelColor>
     <isBad>false</isBad>
@@ -46,7 +46,7 @@
   <HediffDef>
     <defName>VV_FairyConcentrated</defName>
     <label>fairy concentration</label>
-    <description>Fairy vivi are focusing this target while it remains within the royal vivi's sight and range.</description>
+    <description>They are marked as the focus target for fairy vivis. If they are within a royal vivi's line of sight, attacks will continue until the target is incapacitated.</description>
     <hediffClass>VVRace.Hediff_FairyConcentrated</hediffClass>
     <defaultLabelColor>(1, 0.4, 0.4)</defaultLabelColor>
     <isBad>true</isBad>

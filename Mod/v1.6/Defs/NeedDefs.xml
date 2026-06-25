@@ -4,7 +4,7 @@
     <defName>VV_RoyalJelly</defName>
     <needClass>VVRace.Need_RoyalJelly</needClass>
     <label>royal jelly</label>
-    <description>The total amount of royal jelly a Vivi eats affects how it grows. If a Vivi is fully fed by the time it grows up, it becomes a Royal Vivi; if not, it stays a regular Vivi.
+    <description>The more consistently a child vivi consumes Royal Jelly, the more its effects accumulate, influencing the moment when vivi becomes an adult. If it is completely filled when Vivi matures, Vivi becomes a Royal Vivi; otherwise, Vivi becomes a normal Vivi.
 \nRoyal vivis can reproduce, have high social ability and psychic sensitivity, and possess several unique abilities, but their work capability is low.</description>
     <baseLevel>0</baseLevel>
     <listPriority>45</listPriority>

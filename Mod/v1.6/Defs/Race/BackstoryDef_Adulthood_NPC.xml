@@ -5,7 +5,7 @@
     <defName>VV_ViviSettler</defName>
     <title>vivi settler</title>
     <titleShort>settler</titleShort>
-    <description>[PAWN_nameDef] is a Vivi belonging to the settlement.</description>
+    <description>[PAWN_nameDef] is an ordinary settler of a vivi hive.</description>
     <skillGains>
       <Construction>2</Construction>
       <Crafting>1</Crafting>
@@ -26,7 +26,7 @@
     <defName>VV_ViviCook</defName>
     <title>vivi cook</title>
     <titleShort>cook</titleShort>
-    <description>[PAWN_nameDef] is a cook in vivi hive.</description>
+    <description>[PAWN_nameDef] is a cook responsible for the food of a vivi hive.</description>
     <skillGains>
       <Cooking>5</Cooking>
       <Animals>3</Animals>
@@ -47,7 +47,7 @@
     <defName>VV_ViviGatherer</defName>
     <title>vivi gatherer</title>
     <titleShort>gatherer</titleShort>
-    <description>[PAWN_nameDef] is a gatherer in vivi hive.</description>
+    <description>[PAWN_nameDef] is a gatherer responsible for collecting resources for a vivi hive.</description>
     <skillGains>
       <Plants>5</Plants>
       <Animals>3</Animals>
@@ -67,7 +67,7 @@
     <defName>VV_ViviArchitect</defName>
     <title>vivi architect</title>
     <titleShort>architect</titleShort>
-    <description>[PAWN_nameDef] is a architect in vivi hive.</description>
+    <description>[PAWN_nameDef] is an architect responsible for expanding and repairing a vivi hive.</description>
     <skillGains>
       <Artistic>5</Artistic>
       <Construction>3</Construction>
@@ -87,7 +87,7 @@
     <defName>VV_ViviResearcher</defName>
     <title>vivi researcher</title>
     <titleShort>researcher</titleShort>
-    <description>[PAWN_nameDef] is a researcher in vivi hive.</description>
+    <description>[PAWN_nameDef] is a researcher in a vivi hive, researching new technologies or studying and applying modern technology from outside.</description>
     <skillGains>
       <Intellectual>5</Intellectual>
       <Medicine>5</Medicine>
@@ -107,7 +107,7 @@
     <defName>VV_ViviHerbalist</defName>
     <title>vivi herbalist</title>
     <titleShort>herbalist</titleShort>
-    <description>[PAWN_nameDef] is a herbalist in vivi hive.</description>
+    <description>[PAWN_nameDef] is a herbalist who roams around a vivi hive looking for herbs or researching new plants.</description>
     <skillGains>
       <Plants>5</Plants>
       <Medicine>3</Medicine>
@@ -131,7 +131,7 @@
     <defName>VV_ViviGuard</defName>
     <title>vivi guard</title>
     <titleShort>guard</titleShort>
-    <description>[PAWN_nameDef] is a guard in vivi hive.</description>
+    <description>[PAWN_nameDef] is a guard who fights enemies outside a vivi hive or maintains order within it.</description>
     <skillGains>
       <Melee>5</Melee>
       <Shooting>3</Shooting>
@@ -153,7 +153,7 @@
     <defName>VV_ViviScout</defName>
     <title>vivi scout</title>
     <titleShort>scout</titleShort>
-    <description>[PAWN_nameDef] is a scout in vivi hive.</description>
+    <description>[PAWN_nameDef] is a scout who patrols around a vivi hive, detects outside enemies, or scouts and reports on events in nearby settlements.</description>
     <skillGains>
       <Shooting>5</Shooting>
       <Medicine>3</Medicine>
@@ -175,7 +175,7 @@
     <defName>VV_ViviFirefighter</defName>
     <title>vivi firefighter</title>
     <titleShort>firefighter</titleShort>
-    <description>[PAWN_nameDef] is a firefighter in vivi hive.</description>
+    <description>[PAWN_nameDef] is a firefighter who extinguishes fires in a vivi hive or the nearby environment. Since experienced fighters are usually selected for this role, it also includes hive defense and escort duties.</description>
     <skillGains>
       <Melee>5</Melee>
       <Construction>5</Construction>
@@ -191,7 +191,7 @@
     <defName>VV_ViviSniper</defName>
     <title>vivi sniper</title>
     <titleShort>sniper</titleShort>
-    <description>[PAWN_nameDef] is a sniper in vivi hive.</description>
+    <description>[PAWN_nameDef] is a sniper who eliminates various threats to a vivi hive before they arrive. Vivis skilled in shooting are usually selected for this role.</description>
     <skillGains>
       <Shooting>10</Shooting>
       <Animals>3</Animals>
@@ -210,7 +210,7 @@
     <defName>VV_ViviPrincess</defName>
     <title>vivi princess</title>
     <titleShort>princess</titleShort>
-    <description>[PAWN_nameDef] is a princess in vivi hive.</description>
+    <description>[PAWN_nameDef] is a cherished princess raised in a vivi hive.</description>
     <skillGains>
       <Social>12</Social>
       <Medicine>4</Medicine>

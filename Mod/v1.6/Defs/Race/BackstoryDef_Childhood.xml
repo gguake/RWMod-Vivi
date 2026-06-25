@@ -4,7 +4,7 @@
     <defName>VV_ViviHiveChild</defName>
     <title>vivi hive child</title>
     <titleShort>hive child</titleShort>
-    <description>[PAWN_nameDef] had an ordinary childhood in the nest.</description>
+    <description>[PAWN_nameDef] spent an ordinary childhood in a vivi hive.</description>
     <spawnCategories>
       <li>VV_SettlerBackstory</li>
       <li>VV_CombatSettlerBackstory</li>

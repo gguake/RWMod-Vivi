@@ -3,16 +3,16 @@
   <ScenarioDef ParentName="ScenarioBase">
     <defName>VV_ViviStart</defName>
     <label>exiled vivi</label>
-    <description>You dreamed of becoming a distinguished Royal Vivi, feasting on the expensive royal jelly in the nest. That dream came true when you became an adult, except for the fact that your body did not grow at all.
-\nThe regular Vivis did not treat you as a Royal Vivi due to your small stature. Enduring oppression and discrimination, one day you decided to leave the nest.
-\nAfter wandering the planet and experiencing many things, you resolved to fulfill your first dream again. It's time to build your own new nest.
+    <description>You dreamed of becoming a distinguished Royal Vivi, feasting on the expensive royal jelly in the hive. That dream came true when you became an adult, except for the fact that your body did not grow at all.
+\nThe regular Vivis did not treat you as a Royal Vivi due to your small stature. Enduring oppression and discrimination, one day you decided to leave the hive.
+\nAfter wandering the planet and experiencing many things, you resolved to fulfill your first dream again. It's time to build your own new hive.
 \nNote: The game starts with one Royal Vivi who lacks combat and work abilities, making it more challenging.</description>
     <scenario>
       <name>exiled vivi</name>
       <summary>An exiled Royal Vivi dreaming of becoming a new queen.</summary>
-      <description>You dreamed of becoming a distinguished Royal Vivi, feasting on the expensive royal jelly in the nest. That dream came true when you became an adult, except for the fact that your body did not grow at all.
-\nThe regular Vivis did not treat you as a Royal Vivi due to your small stature. Enduring oppression and discrimination, one day you decided to leave the nest.
-\nAfter wandering the planet and experiencing many things, you resolved to fulfill your first dream again. It's time to build your own new nest.
+      <description>You dreamed of becoming a distinguished Royal Vivi, feasting on the expensive royal jelly in the hive. That dream came true when you became an adult, except for the fact that your body did not grow at all.
+\nThe regular Vivis did not treat you as a Royal Vivi due to your small stature. Enduring oppression and discrimination, one day you decided to leave the hive.
+\nAfter wandering the planet and experiencing many things, you resolved to fulfill your first dream again. It's time to build your own new hive.
 \nNote: The game starts with one Royal Vivi who lacks combat and work abilities, making it more challenging.</description>
       <playerFaction>
         <def>PlayerFaction</def>
@@ -21,7 +21,7 @@
       <parts>
         <li Class="ScenPart_GameStartDialog">
           <def>GameStartDialog</def>
-          <text>You've decided to build a new nest here. As a rightful Queen Vivi, you will build a big nest to show your old friends that looks don't matter.
+          <text>You've decided to build a new hive here. As a rightful Queen Vivi, you will build a big hive to show your old friends that looks don't matter.
 \nYou've unpacked everything, including the precious eggs you laid while roaming the planet. There's a lot to do, but the first thing is to build a simple house and incubator to increase the number of Vivis to help you.
 \nTip: You can quickly build walls with Vivi cream, which can be later refined and strengthened. Be careful with the eggs, as they are sensitive to cold and can break.</text>
           <closeSound>GameStartSting</closeSound>

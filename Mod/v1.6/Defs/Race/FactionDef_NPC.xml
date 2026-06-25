@@ -3,7 +3,7 @@
   <FactionDef ParentName="TribeBase">
     <defName>VV_ViviFederation</defName>
     <label>Commonwealth of vivi</label>
-    <description>Federation established by independent Vivi nests for their common interest. There was once a unified Vivi Empire, but due to the influx and attack of outsiders, it is currently divided into individual, independent nests.
+    <description>Federation established by independent Vivi hives for their common interest. There was once a unified Vivi Empire, but due to the influx and attack of outsiders, it is currently divided into individual, independent hives.
 Only a few traces of the former empire remain, in the form of certain traditions and administrative structures. They are uninterested in anything beyond their own activities, rarely initiate attacks, but are aggressive to those who pose a threat and defend themselves with their unique peculiar technology.</description>
     <factionIconPath>UI/Icons/ViviFaction</factionIconPath>
     <factionNameMaker>VV_NamerNPCFactionVivi</factionNameMaker>

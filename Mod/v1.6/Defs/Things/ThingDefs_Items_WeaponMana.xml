@@ -549,7 +549,7 @@
     <defName>VV_FroststingCrossbow</defName>
     <label>froststing sniper crossbow</label>
     <description>A crossbow that shoots needle-thin, razor-sharp icicles. With a high-magnification scope it can snipe distant targets with heavy punch and pinpoint accuracy. Each shot burns a lot of mana, forcing frequent recharges, and it's useless at close range.
-\nSeasoned Vivi snipers on solo duty use it to stop threats long before they reach the nest.
+\nSeasoned Vivi snipers on solo duty use it to stop threats long before they reach the hive.
 \nEach shot consumes mana; if mana is depleted it cannot fire, and it automatically recharges by absorbing environment mana nearby.</description>
 
     <graphicData>

@@ -7,7 +7,7 @@
       <stages>
         <li>
           <label>awful barracks</label>
-          <description>I had to sleep in an awful barracks. Not only was it a horrible room, but I also had to share it!</description>
+          <description>I had to sleep in an awful barracks.</description>
           <baseMoodEffect>-2</baseMoodEffect>
         </li>
         <li>
@@ -47,12 +47,12 @@
         </li>
         <li>
           <label>unbelievably impressive barracks</label>
-          <description>The barracks I slept in was so impressive that I don't even mind sharing it.</description>
+          <description>The barracks I slept in was so impressive.</description>
           <baseMoodEffect>7</baseMoodEffect>
         </li>
         <li>
           <label>wondrously impressive barracks</label>
-          <description>I slept in a barracks that was simply wondrous. Even sharing such a space makes me happy.</description>
+          <description>I slept in a barracks that was simply wondrous.</description>
           <baseMoodEffect>8</baseMoodEffect>
         </li>
       </stages>
