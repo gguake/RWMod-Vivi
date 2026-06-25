@@ -5,16 +5,20 @@
 <VV_FairyMaterialize.description>결속된 요정 비비들을 실체해 현실에 간섭시킵니다. 실체화된 요정 비비들은 로열 비비 주변을 돌면서 대기하며 로열 비비 근처의 가까운 적대적 대상을 자동으로 공격합니다.
 \n요정 비비는 시간이 지나면 무형체로 되돌아가며 로열 비비는 영원꽃에 조금씩 동화됩니다.
 \n요정 비비의 공격은 매우 미약하지만 정신 감응도에 비례해 강해집니다.</VV_FairyMaterialize.description>
+<VV_FairyMaterialize.verbProperties.label>요정 실체화</VV_FairyMaterialize.verbProperties.label>
 
 <VV_FairyGuard.label>요정 - 경호</VV_FairyGuard.label>
 <VV_FairyGuard.description>대기 중인 요정 비비 1기를 아군 대상에게 배정해 따라다니게 합니다. 요정 비비는 대상을 주변을 돌면서 대기하며 근처의 가까운 적대적 대상을 자동으로 공격합니다.
 \n배정된 요정 비비는 자유롭게 다시 불러올 수 있습니다.</VV_FairyGuard.description>
+<VV_FairyGuard.verbProperties.label>요정 경호</VV_FairyGuard.verbProperties.label>
 
 <VV_FairyConcentration.label>요정 - 집중</VV_FairyConcentration.label>
 <VV_FairyConcentration.description>적대적인 대상에 집중 표식을 남깁니다. 집중 표식 대상이 로열 비비의 시야 일정 범위 안에 있는 동안 모든 대기중인 요정 비비가 대상을 집중 공격합니다.
 \n한번에 하나의 대상에만 집중 표식을 남길 수 있으며 대상이 무력화되면 사라집니다.</VV_FairyConcentration.description>
+<VV_FairyConcentration.verbProperties.label>요정 집중</VV_FairyConcentration.verbProperties.label>
 
 <VV_FairyExpansion.label>요정 - 전개</VV_FairyExpansion.label>
 <VV_FairyExpansion.description>현재 가용한 모든 요정 비비를 전개해 로열 비비 주위를 맴돌며 경계 상태로 전환합니다. 경계 상태의 요정 비비들은 로열 비비의 시야에 들어온 넓은 범위의 모든 적대 대상을 추적 공격합니다. 재사용하면 경계 상태가 해제됩니다.</VV_FairyExpansion.description>
+<VV_FairyExpansion.verbProperties.label>요정 전개</VV_FairyExpansion.verbProperties.label>
 
 </Defs>

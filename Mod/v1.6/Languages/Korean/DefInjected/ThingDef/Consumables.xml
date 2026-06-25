@@ -53,7 +53,7 @@
 \n비비들은 술을 선호하지 않지만 외지인들의 수요가 많아 남는 꿀을 비싸게 팔기 위해 만듭니다.</VV_Mead.description>
 <VV_Mead.ingestible.ingestCommandString>{0} 마시기</VV_Mead.ingestible.ingestCommandString>
 <VV_Mead.ingestible.ingestReportString>{0} 마시는 중.</VV_Mead.ingestible.ingestReportString>
-<VV_Mead.tools.li.bottle.label>병</VV_Mead.tools.li.bottle.label>
-<VV_Mead.tools.li.neck.label>병목</VV_Mead.tools.li.neck.label>
+<VV_Mead.tools.bottle.label>병</VV_Mead.tools.bottle.label>
+<VV_Mead.tools.neck.label>병목</VV_Mead.tools.neck.label>
 
 </LanguageData>

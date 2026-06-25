@@ -65,5 +65,5 @@
 <VV_RitualTarget_Everflower>영원꽃</VV_RitualTarget_Everflower>
 
 <VV_Hediff_AgingFactor>  - {0}의 속도로 나이를 먹습니다.</VV_Hediff_AgingFactor>
-<VV_BattleLog_FairyImpact>{COMMANDER_labelShort}의 명령으로 요정 비비가 {TARGET_labelShort}를 찔렀습니다.</VV_BattleLog_FairyImpact>
+<VV_BattleLog_FairyImpact>{COMMANDER_labelShort}의 명령으로 {FAIRY}가 {TARGET_labelShort}를 찔렀습니다.</VV_BattleLog_FairyImpact>
 </LanguageData>

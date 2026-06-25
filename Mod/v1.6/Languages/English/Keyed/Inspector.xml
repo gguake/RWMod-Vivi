@@ -25,7 +25,6 @@
 <VV_Inspector_GrowingArcanePlantReady>Prepare to grow {0}</VV_Inspector_GrowingArcanePlantReady>
 <VV_Inspector_GrowingArcanePlantProgress>Growing {1} progress: {0}</VV_Inspector_GrowingArcanePlantProgress>
 
-<VV_Inspector_AttunementReserved>{RITUAL} reserved: {PAWN_nameDef}</VV_Inspector_AttunementReserved>
 <VV_Inspector_EverflowerAttunementState>Attunement: Level {LEVEL} ({EXP})</VV_Inspector_EverflowerAttunementState>
 
 <VV_Inspector_ShockNetTrapCooldown>Time remaining until recharge: {0}</VV_Inspector_ShockNetTrapCooldown>
