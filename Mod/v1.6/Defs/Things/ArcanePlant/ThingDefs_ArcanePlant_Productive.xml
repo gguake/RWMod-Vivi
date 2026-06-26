@@ -278,7 +278,7 @@
 
       <li Class="VVRace.CompProperties_ManaFilthMaker">
         <filthDef>VV_FilthPollen</filthDef>
-        <makeAmountPerDays>1~2</makeAmountPerDays>
+        <makeAmountPerDays>2~4</makeAmountPerDays>
         <radius>1.9</radius>
         <exceptCenter>true</exceptCenter>
 
