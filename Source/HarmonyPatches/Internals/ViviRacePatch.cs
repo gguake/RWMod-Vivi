@@ -108,7 +108,7 @@ namespace VVRace.HarmonyPatches
 
         private static void RestUtility_CanUseBedNow_Postfix(ref bool __result, Thing bedThing)
         {
-            if (__result && bedThing is global::VVRace.ViviEggHatchery hatchery && hatchery.ViviEgg != null)
+            if (__result && bedThing is ViviEggHatchery hatchery && hatchery.ViviEgg != null)
             {
                 __result = false;
             }

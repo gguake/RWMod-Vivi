@@ -4,8 +4,8 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VV_ViviHatchery</defName>
     <label>vivi hatchery</label>
-    <description>a structure for incubating vivi eggs. If there is an empty hatchery, Royal vivi will go there to lay their eggs.
-\nIf the hatchery is placed indoors with a roof and kept at an appropriate temperature, it receives a bonus to hatching speed.</description>
+    <description>a dedicated hatchery for incubating Vivi eggs. It can also be used as a bed for baby Vivis.
+\nIf there is an empty hatchery in a suitable environment, Royal Vivis will go there to lay their eggs. If the hatchery is indoors with a roof and kept at an appropriate temperature, it receives a bonus to hatching speed.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_ViviEgg</ThingDef>
     </descriptionHyperlinks>
@@ -64,7 +64,7 @@
       <bed_emptyCountsForBarracks>false</bed_emptyCountsForBarracks>
       <bed_DisplayOwnerType>false</bed_DisplayOwnerType>
       <bed_canBeMedical>false</bed_canBeMedical>
-      <bed_pawnDrawOffset>-0.15</bed_pawnDrawOffset>
+      <bed_pawnDrawOffset>-0.2</bed_pawnDrawOffset>
       <bed_UseSheetColor>false</bed_UseSheetColor>
     </building>
     <designationCategory>VV_Bulidings</designationCategory>
