@@ -433,6 +433,7 @@
     </weaponClasses>
     <weaponTags Inherit="False">
       <li>VV_ViviWeaponMana</li>
+      <li>VV_ViviWeaponCaravan</li>
     </weaponTags>
 
     <verbs>
@@ -577,6 +578,7 @@
     <weaponTags Inherit="False">
       <li>VV_ViviWeaponMana</li>
       <li>VV_Froststing</li>
+      <li>VV_ViviWeaponCaravan</li>
     </weaponTags>
 
     <verbs>

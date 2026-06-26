@@ -13,6 +13,7 @@
       <li>VV_SettlerGrown</li>
 
       <li>VV_RoyalViviSettlerBackstory</li>
+      <li>VV_RoyalViviCaravanBackstory</li>
     </spawnCategories>
     <skillGains>
       <Plants>2</Plants>
@@ -34,6 +35,7 @@
       <li>VV_SettlerGrown</li>
 
       <li>VV_RoyalViviSettlerBackstory</li>
+      <li>VV_RoyalViviCaravanBackstory</li>
     </spawnCategories>
     <skillGains>
       <Shooting>2</Shooting>

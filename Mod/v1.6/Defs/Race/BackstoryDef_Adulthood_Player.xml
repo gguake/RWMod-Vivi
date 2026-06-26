@@ -4,7 +4,7 @@
     <defName>VV_ViviExiled</defName>
     <title>vivi exiled</title>
     <titleShort>exiled</titleShort>
-    <description>[PAWN_nameDef] was driven out of the hive because of [PAWN_possessive] unusual appearance. To survive, [PAWN_pronoun] learned various skills that ordinary royal vivis do not need.</description>
+    <description>[PAWN_nameDef] was driven out of the hive because of [PAWN_possessive] unusual appearance. To survive, [PAWN_pronoun] learned various skills that ordinary royal vivis would not need.</description>
     <spawnCategories>
       <li>VV_PlayerExiledBackstory</li>
     </spawnCategories>

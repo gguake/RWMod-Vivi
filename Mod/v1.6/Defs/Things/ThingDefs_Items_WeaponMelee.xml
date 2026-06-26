@@ -31,6 +31,7 @@
     </weaponClasses>
     <weaponTags Inherit="False">
       <li>VV_ViviWeapon</li>
+      <li>VV_ViviWeaponCaravan</li>
     </weaponTags>
 
     <tools>

@@ -144,6 +144,7 @@
     </weaponClasses>
     <weaponTags Inherit="False">
       <li>NoRelic</li>
+      <li>VV_ViviWeaponCaravan</li>
     </weaponTags>
 
     <verbs>
@@ -268,6 +269,7 @@
     <weaponTags Inherit="False">
       <li>VV_ViviWeapon</li>
       <li>VV_ViviWeaponRange</li>
+      <li>VV_ViviWeaponCaravan</li>
     </weaponTags>
 
     <verbs>
@@ -384,6 +386,7 @@
     </weaponClasses>
     <weaponTags Inherit="False">
       <li>VV_ViviWeaponRange</li>
+      <li>VV_ViviWeaponCaravan</li>
     </weaponTags>
 
     <verbs>

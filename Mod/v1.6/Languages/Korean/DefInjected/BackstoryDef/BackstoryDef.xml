@@ -45,23 +45,27 @@
 
 <VV_ViviScout.title>비비 정탐꾼</VV_ViviScout.title>
 <VV_ViviScout.titleShort>정탐꾼</VV_ViviScout.titleShort>
-<VV_ViviScout.description>[PAWN_nameDef]는 비비 둥지 주변을 순찰하며 외부의 적을 감지하거나 주변 정착지의 사건을 정찰해 보고하는 정탐꾼입니다. 둥지에 잘 돌아오지 않고 위험한 지역을 자주 다니기에 둥지에서도 이들의 존재를 잊어버리는 경우가 많습니다.</VV_ViviScout.description>
+<VV_ViviScout.description>[PAWN_nameDef]는 비비 둥지 주변을 순찰하며 외부의 적을 감지하거나 주변 정착지의 사건을 정찰해 보고하는 정탐꾼입니다. 이들은 주로 외근직으로 둥지에 잘 돌아오지 않고 위험한 지역을 자주 다니기에 둥지에서도 존재를 잊어버리는 경우가 많습니다.</VV_ViviScout.description>
 
 <VV_ViviFirefighter.title>비비 소방수</VV_ViviFirefighter.title>
 <VV_ViviFirefighter.titleShort>소방수</VV_ViviFirefighter.titleShort>
 <VV_ViviFirefighter.description>[PAWN_nameDef]는 비비 둥지나 인근 환경에 발생하는 화재를 진압하는 소방수입니다. 전투에 노련한 비비들이 주로 선발되기에 둥지 방어나 경호 임무도 수행합니다.
-\n화재 진압이라는 중요한 임무를 맡고있지만 불을 무서워하는건 어쩔 수 없습니다.</VV_ViviFirefighter.description>
+\n비비들이 가장 두려워하는 화재와 맞서 싸우기에 좋은 대우를 받지만 각종 스트레스로 예민한 비비들이 많습니다.</VV_ViviFirefighter.description>
 
 <VV_ViviSniper.title>비비 저격수</VV_ViviSniper.title>
 <VV_ViviSniper.titleShort>저격수</VV_ViviSniper.titleShort>
-<VV_ViviSniper.description>[PAWN_nameDef]는 비비 둥지에 찾아오는 여러 위협들을 사전에 제거하는 저격수입니다. 사격에 능숙한 비비들이 주로 선발됩니다.</VV_ViviSniper.description>
+<VV_ViviSniper.description>[PAWN_nameDef]는 비비 둥지에 찾아오는 여러 위협들을 사전에 제거하는 저격수입니다. 비비들의 방어 전략은 대체로 수동적이기에 특별히 위협적인 적을 선제 타격하는 별동대 임무를 주로 맡습니다.</VV_ViviSniper.description>
 
 <VV_ViviPrincess.title>비비 공주</VV_ViviPrincess.title>
 <VV_ViviPrincess.titleShort>공주</VV_ViviPrincess.titleShort>
-<VV_ViviPrincess.description>[PAWN_nameDef]는 비비 둥지에서 귀하게 자란 공주님입니다. 귀하게 자랐음에도 이들은 세력을 모아 새로운 둥지를 만들기 위해 멀리 떠나거나 둥지 구석에서 눈치를 보며 사는 혹독한 미래만 남아있습니다.</VV_ViviPrincess.description>
+<VV_ViviPrincess.description>[PAWN_nameDef]는 비비 둥지에서 귀하게 자란 공주님입니다. 귀하게 자랐지만 주류가 되지못한 로열 비비들은 세력을 모아 새로운 둥지를 만들기 위해 멀리 떠나거나 둥지 구석에서 눈치를 보며 사는 혹독한 미래가 기다리고 있습니다.</VV_ViviPrincess.description>
+
+<VV_ViviTrader.title>비비 상인</VV_ViviTrader.title>
+<VV_ViviTrader.titleShort>상인</VV_ViviTrader.titleShort>
+<VV_ViviTrader.description>[PAWN_nameDef]는 거래를 위해 다양한 지역을 떠도는 로열 비비입니다. 새로운 둥지를 세우는데에는 일반 비비들의 협력이 필요하기에 많은 로열 비비들은 자신들의 정치력을 위해 상단을 꾸려 경험을 쌓곤 합니다.</VV_ViviTrader.description>
 
 <!-- Adulthoods - Player -->
 <VV_ViviExiled.title>비비 추방자</VV_ViviExiled.title>
 <VV_ViviExiled.titleShort>추방자</VV_ViviExiled.titleShort>
-<VV_ViviExiled.description>[PAWN_nameDef]는 남다른 외형탓에 둥지에서 쫓겨났습니다. 살아남기 위해서 [PAWN_pronoun]는 보통의 로열 비비들에게는 필요 없는 여러 능력을 배웠습니다.</VV_ViviExiled.description>
+<VV_ViviExiled.description>[PAWN_nameDef]는 남다른 외형탓에 둥지에서 쫓겨났습니다. 살아남기 위해서 [PAWN_pronoun]는 보통의 로열 비비들에게는 필요 없을 여러 능력을 배웠습니다.</VV_ViviExiled.description>
 </LanguageData>

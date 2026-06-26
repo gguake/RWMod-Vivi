@@ -14,7 +14,6 @@
     </skillGains>
     <spawnCategories>
       <li>VV_SettlerBackstory</li>
-      <li>VV_RoyalViviSettlerBackstory</li>
       <li>AdultColonist</li>
       <li>AdultTribal</li>
       <li>VatGrown</li>
@@ -38,7 +37,6 @@
     </workDisables>
     <spawnCategories>
       <li>VV_SettlerBackstory</li>
-      <li>VV_RoyalViviSettlerBackstory</li>
     </spawnCategories>
   </BackstoryDef>
 
@@ -122,7 +120,6 @@
     </possessions>
     <spawnCategories>
       <li>VV_SettlerBackstory</li>
-      <li>VV_RoyalViviSettlerBackstory</li>
     </spawnCategories>
   </BackstoryDef>
 
@@ -136,6 +133,9 @@
       <Melee>5</Melee>
       <Shooting>3</Shooting>
     </skillGains>
+    <possessions>
+      <VV_CombatHormoneJelly>1</VV_CombatHormoneJelly>
+    </possessions>
     <workDisables>
       <li>Intellectual</li>
     </workDisables>
@@ -153,14 +153,13 @@
     <defName>VV_ViviScout</defName>
     <title>vivi scout</title>
     <titleShort>scout</titleShort>
-    <description>[PAWN_nameDef] is a scout who patrols around a vivi hive, detects outside enemies, or scouts and reports on events in nearby settlements. Because they rarely return to the hive and often travel through dangerous areas, even the hive often forgets they exist.</description>
+    <description>[PAWN_nameDef] is a scout who patrols around a vivi hive, detects outside enemies, or scouts and reports on events in nearby settlements. They mostly work in the field, rarely return to the hive, and often travel through dangerous areas, so even the hive often forgets they exist.</description>
     <skillGains>
       <Shooting>6</Shooting>
       <Medicine>4</Medicine>
+      <Artistic>-4</Artistic>
+      <Plants>-7</Plants>
     </skillGains>
-    <workDisables>
-      <li>PlantWork</li>
-    </workDisables>
     <forcedTraits>
       <SpeedOffset>2</SpeedOffset>
     </forcedTraits>
@@ -175,12 +174,15 @@
     <defName>VV_ViviFirefighter</defName>
     <title>vivi firefighter</title>
     <titleShort>firefighter</titleShort>
-    <description>[PAWN_nameDef] is a firefighter who extinguishes fires in a vivi hive or the nearby environment. Since experienced fighters are usually selected for this role, it also includes hive defense and escort duties.\nAlthough they hold the important duty of fighting fires, they still cannot help being afraid of fire.</description>
+    <description>[PAWN_nameDef] is a firefighter who extinguishes fires in a vivi hive or the nearby environment. Since experienced fighters are usually selected for this role, they also perform hive defense and escort duties.\nThey are treated well because they fight the fires vivis fear most, but many are irritable from all the stress.</description>
     <skillGains>
       <Melee>5</Melee>
       <Construction>5</Construction>
       <Medicine>5</Medicine>
     </skillGains>
+    <possessions>
+      <VV_CombatHormoneJelly>1</VV_CombatHormoneJelly>
+    </possessions>
     <spawnCategories>
       <li>VV_FirefighterBackstory</li>
     </spawnCategories>
@@ -191,11 +193,13 @@
     <defName>VV_ViviSniper</defName>
     <title>vivi sniper</title>
     <titleShort>sniper</titleShort>
-    <description>[PAWN_nameDef] is a sniper who eliminates various threats to a vivi hive before they arrive. Vivis skilled in shooting are usually selected for this role.</description>
+    <description>[PAWN_nameDef] is a sniper who eliminates various threats to a vivi hive before they arrive. Because vivi defense strategies are generally passive, they mainly serve in detached squads that preemptively strike especially dangerous enemies.</description>
     <skillGains>
-      <Shooting>10</Shooting>
+      <Shooting>12</Shooting>
       <Animals>3</Animals>
       <Medicine>3</Medicine>
+      <Melee>-6</Melee>
+      <Social>-6</Social>
     </skillGains>
     <disallowedTraits>
       <Brawler />
@@ -210,7 +214,7 @@
     <defName>VV_ViviPrincess</defName>
     <title>vivi princess</title>
     <titleShort>princess</titleShort>
-    <description>[PAWN_nameDef] is a cherished princess raised in a vivi hive. Despite being raised with care, they have only a harsh future ahead: either gathering followers and leaving far away to build a new hive, or living quietly in a corner of the hive while watching how others treat them.</description>
+    <description>[PAWN_nameDef] is a cherished princess raised in a vivi hive. Royal vivis who were raised with care but never became part of the hive's mainstream face a harsh future: either gathering followers and leaving far away to build a new hive, or living quietly in a corner of the hive while watching how others treat them.</description>
     <skillGains>
       <Social>12</Social>
       <Medicine>4</Medicine>
@@ -230,4 +234,21 @@
     </spawnCategories>
   </BackstoryDef>
 
+  <!-- VV_ViviTrader -->
+  <BackstoryDef ParentName="VV_ViviAdultBackstory">
+    <defName>VV_ViviTrader</defName>
+    <title>vivi trader</title>
+    <titleShort>trader</titleShort>
+    <description>[PAWN_nameDef] is a royal vivi who wanders through many regions for trade. Since building a new hive requires cooperation from ordinary vivis, many royal vivis organize caravans to build political influence and gain experience.</description>
+    <skillGains>
+      <Social>7</Social>
+      <Medicine>3</Medicine>
+      <Animals>2</Animals>
+      <Shooting>-4</Shooting>
+      <Melee>-4</Melee>
+    </skillGains>
+    <spawnCategories>
+      <li>VV_RoyalViviCaravanBackstory</li>
+    </spawnCategories>
+  </BackstoryDef>
 </Defs>

@@ -144,6 +144,9 @@
     <weaponTags>
       <li>VV_Firefighter</li>
     </weaponTags>
+    <disallowedTraits>
+      <li>Kind</li>
+    </disallowedTraits>
 
     <initialWillRange>9~14</initialWillRange>
     <initialResistanceRange>30~40</initialResistanceRange>
@@ -203,6 +206,36 @@
     <forcedBodyType>Thin</forcedBodyType>
   </PawnKindDef>
   
+  <!-- 비비 상단원 -->
+  <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
+    <defName>VV_ViviCaravanMember</defName>
+    <label>vivi caravan</label>
+    <combatPower>55</combatPower>
+    <isFighter>false</isFighter>
+    <itemQuality>Normal</itemQuality>
+
+    <gearHealthRange>0.7~1.0</gearHealthRange>
+    <apparelMoney>800~1400</apparelMoney>
+    <weaponMoney>900~1500</weaponMoney>
+    <weaponTags>
+      <li>VV_ViviWeapon</li>
+      <li>VV_ViviWeaponRange</li>
+    </weaponTags>
+
+    <initialWillRange>2~4</initialWillRange>
+    <initialResistanceRange>10~25</initialResistanceRange>
+
+    <forcedBodyType>Thin</forcedBodyType>
+    
+    <backstoryFiltersOverride>
+      <li>
+        <categories>
+          <li>VV_SettlerBackstory</li>
+        </categories>
+      </li>
+    </backstoryFiltersOverride>
+  </PawnKindDef>
+
   <!-- 비비 연방 대표 -->
   <PawnKindDef ParentName="ViviNPCBase" Class="VVRace.PawnKindDef_Vivi">
     <defName>VV_RoyalViviEmpress</defName>
@@ -374,7 +407,7 @@
     <backstoryFiltersOverride>
       <li>
         <categories>
-          <li>VV_RoyalViviSettlerBackstory</li>
+          <li>VV_RoyalViviCaravanBackstory</li>
         </categories>
       </li>
     </backstoryFiltersOverride>
