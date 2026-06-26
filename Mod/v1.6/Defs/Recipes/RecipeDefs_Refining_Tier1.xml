@@ -159,7 +159,7 @@
     <label>make fertilizer from bones</label>
     <description>Combine rotten corpse or bones with pollen to produce mana fertilizers.</description>
     <jobString>making fertilizer from bones.</jobString>
-    <workAmount>500</workAmount>
+    <workAmount>1600</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <workSkill>Plants</workSkill>
     <workSkillLearnFactor>0.05</workSkillLearnFactor>
@@ -184,7 +184,7 @@
             <li>VV_Pollen</li>
           </thingDefs>
         </filter>
-        <count>15</count>
+        <count>20</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
@@ -232,7 +232,7 @@
     <label>make fertilizer from organics</label>
     <description>Ferment organic matter and mix it with pollen or crops to produce mana fertilizers.</description>
     <jobString>making fertilizer from organics.</jobString>
-    <workAmount>2000</workAmount>
+    <workAmount>900</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <workSkill>Plants</workSkill>
     <workSkillLearnFactor>0.05</workSkillLearnFactor>
@@ -255,7 +255,7 @@
             <li>VV_Seed_Everflower</li>
           </disallowedThingDefs>
         </filter>
-        <count>2.0</count>
+        <count>1.5</count>
       </li>
       <li>
         <filter>
@@ -267,7 +267,7 @@
             <li>PlantFoodRaw</li>
           </categories>
         </filter>
-        <count>0.5</count>
+        <count>1.0</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
