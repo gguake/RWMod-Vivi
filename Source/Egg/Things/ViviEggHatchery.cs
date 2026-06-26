@@ -5,7 +5,7 @@ using Verse;
 
 namespace VVRace
 {
-    public class ViviEggHatchery : Building, IThingHolder, IThingHolderTickable
+    public class ViviEggHatchery : Building_Bed, IThingHolder, IThingHolderTickable
     {
         public AcceptanceReport HatchingDisabledReason
         {
@@ -44,6 +44,7 @@ namespace VVRace
             get
             {
                 if (ViviEgg != null) { return false; }
+                if (AnyOccupants) { return false; }
 
                 var compForbiddable = GetComp<CompForbiddable>();
                 if (compForbiddable != null && compForbiddable.Forbidden)

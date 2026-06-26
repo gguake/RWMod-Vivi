@@ -20,8 +20,9 @@ namespace VVRace
             this.FailOnDespawnedNullOrForbidden(HatcheryIdx);
             this.FailOn(() =>
             {
+                var hatchery = TargetA.Thing as ViviEggHatchery;
                 var eggSpawner = pawn.GetCompViviEggLayer();
-                return eggSpawner == null || !eggSpawner.CanLayEgg;
+                return eggSpawner == null || !eggSpawner.CanLayEgg || !hatchery.CanLayHere;
             });
 
             yield return Toils_Goto.GotoCell(HatcheryIdx, PathEndMode.OnCell);
@@ -35,13 +36,13 @@ namespace VVRace
                     if (egg != null)
                     {
                         var hatchery = Hatchery.Thing as ViviEggHatchery;
-                        if (hatchery == null || !hatchery.CanLayHere)
+                        if (hatchery != null && hatchery.CanLayHere)
                         {
-                            GenPlace.TryPlaceThing(egg, hatchery.PositionHeld, hatchery.MapHeld, ThingPlaceMode.Near);
+                            hatchery.ViviEgg = egg;
                         }
                         else
                         {
-                            hatchery.ViviEgg = egg;
+                            GenPlace.TryPlaceThing(egg, Hatchery.Cell, pawn.Map, ThingPlaceMode.Near);
                         }
 
                         return;

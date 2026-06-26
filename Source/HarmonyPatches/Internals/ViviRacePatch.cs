@@ -99,7 +99,19 @@ namespace VVRace.HarmonyPatches
                 original: AccessTools.Method(typeof(MoveColonyUtility), nameof(MoveColonyUtility.MoveColonyAndReset)),
                 transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(MoveColonyUtility_MoveColonyAndReset_Transpiler)));
 
+            harmony.Patch(
+                original: AccessTools.Method(typeof(RestUtility), nameof(RestUtility.CanUseBedNow)),
+                postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(RestUtility_CanUseBedNow_Postfix)));
+
             Log.Message("!! [ViViRace] race patch complete");
+        }
+
+        private static void RestUtility_CanUseBedNow_Postfix(ref bool __result, Thing bedThing)
+        {
+            if (__result && bedThing is global::VVRace.ViviEggHatchery hatchery && hatchery.ViviEgg != null)
+            {
+                __result = false;
+            }
         }
 
         private static void Pawn_NeedsTracker_ShouldHaveNeed_Postfix(ref bool __result, Pawn ___pawn, NeedDef nd)

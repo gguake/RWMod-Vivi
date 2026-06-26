@@ -31,11 +31,15 @@
     <passability>PassThroughOnly</passability>
     <fillPercent>0.4</fillPercent>
     <pathCost>50</pathCost>
+    <drawGUIOverlay>true</drawGUIOverlay>
     <statBases>
       <MaxHitPoints>200</MaxHitPoints>
       <Mass>8</Mass>
       <WorkToBuild>3800</WorkToBuild>
       <Flammability>1.0</Flammability>
+      <BedRestEffectiveness>1</BedRestEffectiveness>
+      <ImmunityGainSpeedFactor>1.07</ImmunityGainSpeedFactor>
+      <SurgerySuccessChanceFactor>1</SurgerySuccessChanceFactor>
     </statBases>
     <size>(1,1)</size>
     <rotatable>false</rotatable>
@@ -52,12 +56,26 @@
     <building>
       <preventDeteriorationOnTop>true</preventDeteriorationOnTop>
       <ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
+      <bed_healPerDay>4</bed_healPerDay>
+      <bed_humanlike>true</bed_humanlike>
+      <bed_maxBodySize>0.25</bed_maxBodySize>
+      <bed_crib>true</bed_crib>
+      <bed_showSleeperBody>true</bed_showSleeperBody>
+      <bed_emptyCountsForBarracks>false</bed_emptyCountsForBarracks>
+      <bed_DisplayOwnerType>false</bed_DisplayOwnerType>
+      <bed_canBeMedical>false</bed_canBeMedical>
+      <bed_pawnDrawOffset>-0.15</bed_pawnDrawOffset>
+      <bed_UseSheetColor>false</bed_UseSheetColor>
     </building>
     <designationCategory>VV_Bulidings</designationCategory>
 
     <surfaceType>Item</surfaceType>
     <canOverlapZones>false</canOverlapZones>
     <comps>
+      <li Class="CompProperties_AssignableToPawn">
+        <drawAssignmentOverlay>false</drawAssignmentOverlay>
+        <compClass>CompAssignableToPawn_Bed</compClass>
+      </li>
       <li Class="CompProperties_Forbiddable"/>
       <li Class="VVRace.CompProperties_ViviHatcheryEggDrawer">
         <graphicData>
