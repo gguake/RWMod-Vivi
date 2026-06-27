@@ -25,7 +25,7 @@ namespace VVRace
             return pawn.GetStatValue(bill.recipe.workSpeedStat) > 0f && pawn.GetStatValue(bill.recipe.efficiencyStat) > 0f;
         }
 
-        public abstract Thing FilterGatherableTarget(Pawn pawn, Thing billGiver, Bill bill, IEnumerable<Thing> candidates);
+        public abstract IEnumerable<Thing> FilterGatherableTarget(Thing billGiver, Bill bill, IEnumerable<Thing> candidates);
 
         public virtual Job MakeJob(Pawn pawn, Thing billGiver, Thing target, Bill bill)
         {

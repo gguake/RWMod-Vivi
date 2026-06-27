@@ -38,7 +38,7 @@
     <targetYieldStat>VV_PlantHoneyGatherYield</targetYieldStat>
     <maxPathDanger>Deadly</maxPathDanger>
 
-    <basePollenChance>0.6</basePollenChance>
+    <basePollenChance>0.7</basePollenChance>
     <baseArcaneSeedChance>0.03</baseArcaneSeedChance>
 
     <damageChanceBySkillLevel>

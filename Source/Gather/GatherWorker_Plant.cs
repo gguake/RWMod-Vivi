@@ -10,7 +10,7 @@ namespace VVRace
     {
         public override string JobFailReasonIfNoHarvestable => LocalizeString_Etc.VV_JobFailReasonNoHarvestablePlants.Translate();
 
-        public override Thing FilterGatherableTarget(Pawn pawn, Thing billGiver, Bill bill, IEnumerable<Thing> candidates)
+        public override IEnumerable<Thing> FilterGatherableTarget(Thing billGiver, Bill bill, IEnumerable<Thing> candidates)
         {
             foreach (var thing in candidates)
             {
@@ -23,19 +23,8 @@ namespace VVRace
                 // 식물이 병에 걸린 경우
                 if (thing is Plant plant && plant.Blighted) { continue; }
 
-                // 상호작용이 불가능한 경우
-                if (thing.IsForbidden(pawn) || thing.IsBurning()) { continue; }
-
-                // 특수 조건
-                if (thing is IGatherableTarget gatherableTarget && !gatherableTarget.CanGatherByPawn(pawn, recipeDef)) { continue; }
-
-                // 접근 불가능한 경우
-                if (!pawn.CanReserveAndReach(thing, PathEndMode.Touch, recipeDef.maxPathDanger)) { continue; }
-
-                return thing;
+                yield return thing;
             }
-
-            return null;
         }
     }
 }

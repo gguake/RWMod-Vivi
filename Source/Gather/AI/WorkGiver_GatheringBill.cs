@@ -1,4 +1,6 @@
 using RimWorld;
+using System.Collections.Generic;
+using System.Linq;
 using Verse;
 using Verse.AI;
 
@@ -8,6 +10,7 @@ namespace VVRace
     {
         public override PathEndMode PathEndMode => PathEndMode.InteractionCell;
 
+        private List<Thing> _tmpGatheringBillTargetList = new List<Thing>();
         public override Job JobOnThing(Pawn pawn, Thing thing, bool forced = false)
         {
             if (!(thing is IBillGiver billGiver) || !ThingIsUsableBillGiver(thing)) { return null; }
@@ -39,13 +42,8 @@ namespace VVRace
                     continue;
                 }
 
-                var target = recipeGathering.gatherWorker.FilterGatherableTarget(
-                    pawn, 
-                    thing, 
-                    bill, 
-                    candidates);
-
-                if (target == null)
+                recipeGathering.gatherWorker.FilterGatherableTarget(thing, bill, candidates).Where(v => !v.IsBurning()).CopyToList(_tmpGatheringBillTargetList);
+                if (_tmpGatheringBillTargetList.Count == 0)
                 {
                     bill.nextTickToSearchForIngredients = Find.TickManager.TicksGame + 600;
 
@@ -53,7 +51,19 @@ namespace VVRace
                     continue;
                 }
 
-                return recipeGathering.gatherWorker.MakeJob(pawn, thing, target, bill);
+                foreach (var target in _tmpGatheringBillTargetList)
+                {
+                    // 상호작용이 불가능한 경우
+                    if (target.IsForbidden(pawn)) { continue; }
+
+                    // 특수 조건
+                    if (target is IGatherableTarget gatherableTarget && !gatherableTarget.CanGatherByPawn(pawn, recipeGathering)) { continue; }
+
+                    // 접근 불가능한 경우
+                    if (!pawn.CanReserveAndReach(target, PathEndMode.Touch, recipeGathering.maxPathDanger)) { continue; }
+
+                    return recipeGathering.gatherWorker.MakeJob(pawn, thing, target, bill);
+                }
             }
 
             return null;
