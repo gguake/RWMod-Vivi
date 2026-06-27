@@ -8,6 +8,9 @@
       <li Class="RPEF.ConstraintModExtension">
         <def>VV_RaceConstraint</def>
       </li>
+      <li Class="RPEF.SleepFaceHeadHook">
+        <sleepGraphicPath>Things/Pawn/Vivi/Heads/HeadSleep</sleepGraphicPath>
+      </li>
     </modExtensions>
   </HeadTypeDef>
   

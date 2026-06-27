@@ -235,6 +235,13 @@
               <useSkinShader>true</useSkinShader>
               
               <children>
+                <li>
+                  <debugLabel>Sleep Face</debugLabel>
+                  <nodeClass>RPEF.PawnRenderNode_SleepFace</nodeClass>
+                  <workerClass>RPEF.PawnRenderNodeWorker_SleepFace</workerClass>
+                  <rotDrawMode>Fresh, Rotting</rotDrawMode>
+                  <baseLayer>51</baseLayer>
+                </li>
                 <li Class="PawnRenderNodeProperties_Tattoo" MayRequire="Ludeon.RimWorld.Ideology">
                   <debugLabel>Head tattoo</debugLabel>
                   <nodeClass>PawnRenderNode_Tattoo_Head</nodeClass>
