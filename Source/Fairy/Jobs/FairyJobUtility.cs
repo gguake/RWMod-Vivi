@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Verse;
 
 namespace VVRace
@@ -30,7 +30,7 @@ namespace VVRace
             }
 
             var orbit = center + OrbitOffset(angle, radiusX, radiusZ, tiltCos, tiltSin);
-            var tangent = OrbitTangent(angle, radiusX, radiusZ, tiltCos, tiltSin);
+            var tangent = OrbitTangent(angle, radiusX, radiusZ, tiltCos, tiltSin) * fairy.OrbitDirection;
             var centerDraw = centerPawn.DrawPos;
             float depthRadius = OrbitDepthRadius(radiusX, radiusZ, tiltCos, tiltSin);
             float rel = Mathf.Clamp((centerDraw.z - orbit.z) / depthRadius, -1f, 1f);
