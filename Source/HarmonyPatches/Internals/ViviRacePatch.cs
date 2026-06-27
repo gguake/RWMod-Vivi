@@ -265,18 +265,24 @@ namespace VVRace.HarmonyPatches
 
         private static void PawnGenerator_GenerateGenes_Postfix(Pawn pawn, XenotypeDef xenotype, ref PawnGenerationRequest request)
         {
-            if (xenotype == VVXenotypeDefOf.VV_Vivi && 
-                request.KindDef != null && 
+            if (xenotype == VVXenotypeDefOf.VV_Vivi &&
+                request.KindDef != null &&
                 request.KindDef.race == VVThingDefOf.VV_Vivi &&
-                request.KindDef.defaultFactionDef != null && 
+                request.KindDef.defaultFactionDef != null &&
                 request.KindDef.defaultFactionDef.allowedCultures.Contains(VVCultureDefOf.VV_ViviCulture) &&
-                !request.KindDef.defaultFactionDef.isPlayer &&
                 pawn.genes.Xenogenes.Count == 0)
             {
-                var genes = ViviUtility.SelectRandomGeneForVivi(Rand.Range(1, 2));
-                foreach (var gene in genes)
+                var isNPCVivi = !request.KindDef.defaultFactionDef.isPlayer;
+                var isStartingVivi = request.Context == PawnGenerationContext.PlayerStarter;
+                var allowStartingViviGenes = LoadedModManager.GetMod<VVRaceMod>().GetSettings<VVRaceModSettings>().randomGenesForStartingVivi;
+
+                if (isNPCVivi || (isStartingVivi && allowStartingViviGenes))
                 {
-                    pawn.genes.AddGene(gene, true);
+                    var genes = ViviUtility.SelectRandomGeneForVivi(Rand.Range(1, 2));
+                    foreach (var gene in genes)
+                    {
+                        pawn.genes.AddGene(gene, true);
+                    }
                 }
             }
         }

@@ -41,6 +41,9 @@
 <VV_ModSettings_UseVanillaHeadOnly>바닐라 헤드만 사용</VV_ModSettings_UseVanillaHeadOnly>
 <VV_ModSettings_UseVanillaHeadOnlyDesc>비비가 생성될 때 비비 고유의 머리 형태 대신 바닐라의 여성용 머리 형태로 대체합니다. 이미 존재하는 비비에게는 적용되지 않습니다.</VV_ModSettings_UseVanillaHeadOnlyDesc>
 
+<VV_ModSettings_RandomGenesForStartingVivi>스타팅 비비에게 무작위 유전자 부여</VV_ModSettings_RandomGenesForStartingVivi>
+<VV_ModSettings_RandomGenesForStartingViviDesc>게임 시작 시 플레이어의 비비에게도 NPC 비비처럼 무작위 유전자를 부여합니다. 이미 존재하는 비비에게는 적용되지 않습니다.</VV_ModSettings_RandomGenesForStartingViviDesc>
+
 <VV_Thing_Seed>{0} 씨앗</VV_Thing_Seed>
 <VV_Thing_SeedDesc>{0}의 씨앗입니다. 땅이나 마법 식물 화분에 심으면 모종이 되며, 모종이 완전히 자라면 {0}이(가) 됩니다.\n마법 식물이 성장하려면 마나와 양분이 모두 공급되야 합니다.
 \n마나는 환경 마나를 흡수하므로 주변에 마나 발생기를 설치하거나 마나를 생산하는 마법 식물로부터 공급할 수 있습니다.

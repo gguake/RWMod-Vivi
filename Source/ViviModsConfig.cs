@@ -11,6 +11,7 @@ namespace VVRace
         public bool alwaysShowManaIfSelected = true;
         public float manaGridOpacity = 0.5f;
         public bool useVanillaHeadOnly = false;
+        public bool randomGenesForStartingVivi = false;
 
         public override void ExposeData()
         {
@@ -21,6 +22,7 @@ namespace VVRace
             Scribe_Values.Look(ref alwaysShowManaIfSelected, "alwaysShowManaIfSelected", defaultValue: true);
             Scribe_Values.Look(ref manaGridOpacity, "manaGridOpacity", defaultValue: 0.5f);
             Scribe_Values.Look(ref useVanillaHeadOnly, "useVanillaHeadOnly", defaultValue: false);
+            Scribe_Values.Look(ref randomGenesForStartingVivi, "randomGenesForStartingVivi", defaultValue: false);
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
@@ -76,6 +78,11 @@ namespace VVRace
                 LocalizeString_Etc.VV_ModSettings_UseVanillaHeadOnly.Translate(),
                 ref _settings.useVanillaHeadOnly,
                 LocalizeString_Etc.VV_ModSettings_UseVanillaHeadOnlyDesc.Translate());
+
+            listing.CheckboxLabeled(
+                LocalizeString_Etc.VV_ModSettings_RandomGenesForStartingVivi.Translate(),
+                ref _settings.randomGenesForStartingVivi,
+                LocalizeString_Etc.VV_ModSettings_RandomGenesForStartingViviDesc.Translate());
 
 
             listing.End();
