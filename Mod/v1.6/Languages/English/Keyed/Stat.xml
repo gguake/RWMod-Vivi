@@ -42,4 +42,26 @@
 <VV_StatsReport_ManaFluxRule_InVaccum_Desc>{0} mana if in vaccum</VV_StatsReport_ManaFluxRule_InVaccum_Desc>
 
 <VV_StatReport_Mana_Multiplier>Multiplier for mana {0}</VV_StatReport_Mana_Multiplier>
+
+<VV_ManaFluxRuleLabel_AdjacentPlant>When plants are nearby</VV_ManaFluxRuleLabel_AdjacentPlant>
+<VV_ManaFluxRuleLabel_AdjacentWater>When water is nearby</VV_ManaFluxRuleLabel_AdjacentWater>
+<VV_ManaFluxRuleLabel_BatteryStored>When power is stored</VV_ManaFluxRuleLabel_BatteryStored>
+<VV_ManaFluxRuleLabel_Everflower>Proportional to resonance level</VV_ManaFluxRuleLabel_Everflower>
+<VV_ManaFluxRuleLabel_Fertility>On fertile soil</VV_ManaFluxRuleLabel_Fertility>
+<VV_ManaFluxRuleLabel_GlowerActive>While glowing</VV_ManaFluxRuleLabel_GlowerActive>
+<VV_ManaFluxRuleLabel_HasRoof>When under a roof</VV_ManaFluxRuleLabel_HasRoof>
+<VV_ManaFluxRuleLabel_InVaccum>When in vacuum</VV_ManaFluxRuleLabel_InVaccum>
+<VV_ManaFluxRuleLabel_PlantGrowth>Proportional to growth</VV_ManaFluxRuleLabel_PlantGrowth>
+<VV_ManaFluxRuleLabel_Power>When the power net has surplus power</VV_ManaFluxRuleLabel_Power>
+<VV_ManaFluxRuleLabel_RadialPollution>When surroundings are polluted</VV_ManaFluxRuleLabel_RadialPollution>
+<VV_ManaFluxRuleLabel_Refuelable>When {0} is present</VV_ManaFluxRuleLabel_Refuelable>
+<VV_ManaFluxRuleLabel_Sunlight>In sunlight</VV_ManaFluxRuleLabel_Sunlight>
+<VV_ManaFluxRuleLabel_TemperatureHigh>When the temperature is high</VV_ManaFluxRuleLabel_TemperatureHigh>
+<VV_ManaFluxRuleLabel_TemperatureLow>When the temperature is low</VV_ManaFluxRuleLabel_TemperatureLow>
+<VV_ManaFluxRuleLabel_TimeOfDayDay>During the day</VV_ManaFluxRuleLabel_TimeOfDayDay>
+<VV_ManaFluxRuleLabel_TimeOfDayNight>During the night</VV_ManaFluxRuleLabel_TimeOfDayNight>
+<VV_ManaFluxRuleLabel_Always>Always</VV_ManaFluxRuleLabel_Always>
+<VV_ManaFluxRuleLabel_WeatherRainy>When it rains</VV_ManaFluxRuleLabel_WeatherRainy>
+<VV_ManaFluxRuleLabel_WeatherSnowy>When it snows</VV_ManaFluxRuleLabel_WeatherSnowy>
+<VV_ManaFluxRuleLabel_Wind>When the wind blows</VV_ManaFluxRuleLabel_Wind>
 </LanguageData>

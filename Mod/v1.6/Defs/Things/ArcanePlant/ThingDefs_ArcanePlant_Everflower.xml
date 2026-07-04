@@ -79,8 +79,12 @@
     
     <tradeTags Inherit="False">
     </tradeTags>
-    
-    
+
+    <inspectorTabs>
+      <li>VVRace.ITab_ArcanePlant</li>
+    </inspectorTabs>
+
+
     <comps>
       <li Class="VVRace.CompProperties_Mana">
         <manaGenerateRule Class="VVRace.ManaFluxRule_Everflower">

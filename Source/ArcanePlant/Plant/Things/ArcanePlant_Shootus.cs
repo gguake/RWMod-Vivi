@@ -236,6 +236,12 @@ namespace VVRace
             }
         }
 
+        public override IEnumerable<string> GetUniqueFunctionDescriptions()
+        {
+            // 터렛 기본 설명(마나 소모 공격) 대신 무기 장착 방식의 설명을 사용한다.
+            yield return LocalizeString_PlantFunction.VV_PlantFunction_ShootusEquip.Translate();
+        }
+
         public override string GetInspectString()
         {
             var sb = new StringBuilder(base.GetInspectString());

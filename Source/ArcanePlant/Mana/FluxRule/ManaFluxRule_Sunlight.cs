@@ -12,6 +12,9 @@ namespace VVRace
             LocalizeString_Stat.VV_StatsReport_ManaFluxRule_Sunlight_Desc.Translate(
                 manaFromSunlightRange.TrueMax.ToString("+0;-#"));
 
+        public override string GetRuleLabel() =>
+            LocalizeString_Stat.VV_ManaFluxRuleLabel_Sunlight.Translate();
+
         public override int CalcManaFlux(Thing thing)
         {
             if (!thing.Spawned || thing.Destroyed) { return 0; }

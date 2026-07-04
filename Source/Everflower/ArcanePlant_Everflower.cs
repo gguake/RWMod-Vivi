@@ -78,6 +78,18 @@ namespace VVRace
             return 0;
         }
 
+        public override IEnumerable<string> GetUniqueFunctionDescriptions()
+        {
+            foreach (var description in base.GetUniqueFunctionDescriptions())
+            {
+                yield return description;
+            }
+
+            yield return LocalizeString_PlantFunction.VV_PlantFunction_Everflower.Translate();
+            yield return LocalizeString_PlantFunction.VV_PlantFunction_EverflowerTeleport.Translate(
+                EverflowerComp.Props.teleportRange.ToString("0.#"));
+        }
+
         private List<FloatMenuOption> _tmpFloatMenuOptions = new List<FloatMenuOption>();
         public override IEnumerable<Gizmo> GetGizmos()
         {

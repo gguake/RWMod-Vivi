@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Verse;
 
 namespace VVRace
@@ -12,9 +13,15 @@ namespace VVRace
         }
     }
 
-    public class CompSeedlingGrowthAccelerator : ThingComp
+    public class CompSeedlingGrowthAccelerator : ThingComp, IArcanePlantFunctionProvider
     {
         public CompProperties_SeedlingGrowthAccelerator Props => (CompProperties_SeedlingGrowthAccelerator)props;
+
+        public IEnumerable<string> GetFunctionDescriptions()
+        {
+            yield return LocalizeString_PlantFunction.VV_PlantFunction_SeedlingGrowthBonus.Translate(
+                (Props.growthBonus - 1f).ToStringPercent());
+        }
 
         public override void PostSpawnSetup(bool respawningAfterLoad)
         {

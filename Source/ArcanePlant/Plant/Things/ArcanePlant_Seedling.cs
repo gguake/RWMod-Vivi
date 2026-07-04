@@ -233,6 +233,23 @@ namespace VVRace
             }
         }
 
+        public override IEnumerable<string> GetUniqueFunctionDescriptions()
+        {
+            foreach (var description in base.GetUniqueFunctionDescriptions())
+            {
+                yield return description;
+            }
+
+            if (MaturePlantDef != null)
+            {
+                yield return LocalizeString_PlantFunction.VV_PlantFunction_SeedlingFixed.Translate(MaturePlantDef.label);
+            }
+            else
+            {
+                yield return LocalizeString_PlantFunction.VV_PlantFunction_SeedlingRandom.Translate();
+            }
+        }
+
         public override IEnumerable<Gizmo> GetGizmos()
         {
             foreach (var gizmo in base.GetGizmos())

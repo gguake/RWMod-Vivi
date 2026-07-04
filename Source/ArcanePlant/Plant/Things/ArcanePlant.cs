@@ -254,6 +254,12 @@ namespace VVRace
             }
         }
 
+        // 정보 탭(ITab_ArcanePlant)에 표시할 thingClass 고유 기능 설명. comp의 기능은 IArcanePlantFunctionProvider로 수집한다.
+        public virtual IEnumerable<string> GetUniqueFunctionDescriptions()
+        {
+            yield break;
+        }
+
         public virtual void Notify_ArcanePlantPotDespawned()
         {
             if (def.Minifiable)

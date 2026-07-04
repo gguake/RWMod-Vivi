@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Verse;
 
 namespace VVRace
@@ -12,8 +13,14 @@ namespace VVRace
         }
     }
 
-    public class CompManaLightningLod : ThingComp
+    public class CompManaLightningLod : ThingComp, IArcanePlantFunctionProvider
     {
+        public IEnumerable<string> GetFunctionDescriptions()
+        {
+            yield return LocalizeString_PlantFunction.VV_PlantFunction_LightningRod.Translate(
+                Props.mana.ToString());
+        }
+
         public CompMana ManaComp
         {
             get

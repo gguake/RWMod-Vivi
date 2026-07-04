@@ -231,6 +231,7 @@
     <Compile Include="Localize\LocalizeString_Gizmo.cs" />
     <Compile Include="Localize\LocalizeString_Inspector.cs" />
     <Compile Include="Localize\LocalizeString_ITab.cs" />
+    <Compile Include="Localize\LocalizeString_PlantFunction.cs" />
     <Compile Include="Localize\LocalizeString_Letter.cs" />
     <Compile Include="Localize\LocalizeString_Message.cs" />
     <Compile Include="Localize\LocalizeString_Stat.cs" />
@@ -259,6 +260,8 @@
     <Compile Include="ArcanePlant\Plant\ArcanePlantTurretTop.cs" />
     <Compile Include="ArcanePlant\Plant\Things\ArcanePlant_RadiantFlower.cs" />
     <Compile Include="ArcanePlant\Plant\Things\MinifiedArcanePlant.cs" />
+    <Compile Include="ArcanePlant\Plant\IArcanePlantFunctionProvider.cs" />
+    <Compile Include="ArcanePlant\Plant\UI\ITab_ArcanePlant.cs" />
     <Compile Include="ArcanePlant\Plant\UI\PlaceWorker_AllowArtificialPlantPot.cs" />
     <Compile Include="ArcanePlant\Plant\UI\PlaceWorker_ShowPlantTurretRadius.cs" />
     <Compile Include="ArcanePlant\Plant\UI\PlaceWorker_TurretPlantTop.cs" />

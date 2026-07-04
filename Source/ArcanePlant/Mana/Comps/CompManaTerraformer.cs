@@ -43,9 +43,23 @@ namespace VVRace
         }
     }
 
-    public class CompManaTerraformer : ThingComp
+    public class CompManaTerraformer : ThingComp, IArcanePlantFunctionProvider
     {
         public CompProperties_ManaTerraformer Props => (CompProperties_ManaTerraformer)props;
+
+        public IEnumerable<string> GetFunctionDescriptions()
+        {
+            var maxRadiusString = Props.radiusRange.max.ToString("0.#");
+            if (Props.terraforms.Count > 0)
+            {
+                yield return LocalizeString_PlantFunction.VV_PlantFunction_Terraform.Translate(maxRadiusString);
+            }
+
+            if (Props.removePollution)
+            {
+                yield return LocalizeString_PlantFunction.VV_PlantFunction_TerraformPollution.Translate(maxRadiusString);
+            }
+        }
 
         public CompMana ManaComp
         {

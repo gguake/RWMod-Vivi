@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Verse;
 
@@ -15,10 +16,23 @@ namespace VVRace
         }
     }
 
-    public class CompWaterdropFruit : ThingComp
+    public class CompWaterdropFruit : ThingComp, IArcanePlantFunctionProvider
     {
         public CompProperties_WaterdropFruit Props => (CompProperties_WaterdropFruit)props;
         public ArcanePlant Plant => (ArcanePlant)parent;
+
+        public IEnumerable<string> GetFunctionDescriptions()
+        {
+            var intervalString = $"{Props.intervalDays.min:0.#}~{Props.intervalDays.max:0.#}";
+            var countString = Props.count.min == Props.count.max ?
+                Props.count.min.ToString() :
+                $"{Props.count.min}~{Props.count.max}";
+
+            yield return LocalizeString_PlantFunction.VV_PlantFunction_Fruit.Translate(
+                Props.fruitDef.label,
+                intervalString,
+                countString);
+        }
 
         private int _remainingTicks;
         private int _nextMatureTicks;

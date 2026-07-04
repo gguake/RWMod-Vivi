@@ -1,4 +1,5 @@
 using RimWorld;
+using System.Collections.Generic;
 using Verse;
 
 namespace VVRace
@@ -25,6 +26,13 @@ namespace VVRace
 
                 return true;
             }
+        }
+
+        public override IEnumerable<string> GetFunctionDescriptions()
+        {
+            yield return LocalizeString_PlantFunction.VV_PlantFunction_GlowRadiant.Translate(
+                Props.glowRadius.ToString("0.#"),
+                Props.overlightRadius.ToString("0.#"));
         }
     }
 }

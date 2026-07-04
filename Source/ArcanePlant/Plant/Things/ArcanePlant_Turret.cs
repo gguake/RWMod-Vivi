@@ -56,9 +56,11 @@ namespace VVRace
         protected bool _hasAnyBulletOverrides;
 
         public IEnumerable<BulletReplacer> BulletReplacers => _bulletReplacers.Values;
+        public IEnumerable<KeyValuePair<Thing, BulletReplacer>> BulletReplacerPairs => _bulletReplacers;
         protected Dictionary<Thing, BulletReplacer> _bulletReplacers = new Dictionary<Thing, BulletReplacer>();
 
         public IEnumerable<BulletModifier> BulletModifiers => _bulletModifiers.Values;
+        public IEnumerable<KeyValuePair<Thing, BulletModifier>> BulletModifierPairs => _bulletModifiers;
         protected Dictionary<Thing, BulletModifier> _bulletModifiers = new Dictionary<Thing, BulletModifier>();
 
         public virtual bool Active
@@ -90,6 +92,24 @@ namespace VVRace
         }
 
         public virtual bool ThreatDisabled(IAttackTargetSearcher disabledFor) => !Active || (!AttackVerb.Available() && -ManaComp.ManaExternalChangeByDay < 30);
+
+        public override IEnumerable<string> GetUniqueFunctionDescriptions()
+        {
+            foreach (var description in base.GetUniqueFunctionDescriptions())
+            {
+                yield return description;
+            }
+
+            var manaCostPerBurst = Gun?.GetStatValue(VVStatDefOf.VV_RangedWeapon_ManaCost) ?? 0f;
+            if (manaCostPerBurst > 0f)
+            {
+                yield return LocalizeString_PlantFunction.VV_PlantFunction_TurretAttackMana.Translate(manaCostPerBurst.ToString("F0"));
+            }
+            else
+            {
+                yield return LocalizeString_PlantFunction.VV_PlantFunction_TurretAttack.Translate();
+            }
+        }
 
         public override void ExposeData()
         {

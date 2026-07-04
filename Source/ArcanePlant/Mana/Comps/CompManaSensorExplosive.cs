@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Verse;
 
@@ -60,9 +61,35 @@ namespace VVRace
         }
     }
 
-    public class CompManaSensorExplosive : ThingComp
+    public class CompManaSensorExplosive : ThingComp, IArcanePlantFunctionProvider
     {
         CompProperties_ManaSensorExplosive Props => (CompProperties_ManaSensorExplosive)props;
+
+        public IEnumerable<string> GetFunctionDescriptions()
+        {
+            var damageLabel = Props.explosiveDamageDef?.label ?? string.Empty;
+            var manaPctString = Props.requiredManaPct.ToStringPercent();
+            var explosiveRadiusString = Props.explosiveRadius.ToString("0.#");
+
+            if (Props.sensorWorkerClass != null)
+            {
+                yield return LocalizeString_PlantFunction.VV_PlantFunction_SensorExplosive.Translate(
+                    Props.sensorRadius.ToString("0.#"),
+                    Props.SensorWorker.TargetLabel,
+                    manaPctString,
+                    explosiveRadiusString,
+                    damageLabel);
+            }
+
+            if (Props.chanceToExplodeFromDamage > 0f)
+            {
+                yield return LocalizeString_PlantFunction.VV_PlantFunction_DamageTriggeredExplosive.Translate(
+                    Props.chanceToExplodeFromDamage.ToStringPercent(),
+                    manaPctString,
+                    explosiveRadiusString,
+                    damageLabel);
+            }
+        }
 
         public CompMana ManaComp
         {

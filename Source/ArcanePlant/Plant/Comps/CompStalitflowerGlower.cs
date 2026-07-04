@@ -1,4 +1,5 @@
 using RimWorld;
+using System.Collections.Generic;
 using Verse;
 
 namespace VVRace
@@ -29,6 +30,12 @@ namespace VVRace
                     return dayPct < 0.2f || dayPct > 0.7f;
                 }
             }
+        }
+
+        public override IEnumerable<string> GetFunctionDescriptions()
+        {
+            yield return LocalizeString_PlantFunction.VV_PlantFunction_GlowStarlit.Translate(
+                Props.glowRadius.ToString("0.#"));
         }
     }
 }

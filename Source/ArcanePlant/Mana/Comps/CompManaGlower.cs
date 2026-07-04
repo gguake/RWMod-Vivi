@@ -1,8 +1,9 @@
+using System.Collections.Generic;
 using Verse;
 
 namespace VVRace
 {
-    public class CompManaGlower : CompGlower, IManaChangeEventReceiver
+    public class CompManaGlower : CompGlower, IManaChangeEventReceiver, IArcanePlantFunctionProvider
     {
         public CompMana ManaComp
         {
@@ -22,6 +23,12 @@ namespace VVRace
 
                 return ManaComp.Active;
             }
+        }
+
+        public virtual IEnumerable<string> GetFunctionDescriptions()
+        {
+            yield return LocalizeString_PlantFunction.VV_PlantFunction_Glow.Translate(
+                Props.glowRadius.ToString("0.#"));
         }
 
         public void Notify_ManaActivateChanged(bool before, bool current)
