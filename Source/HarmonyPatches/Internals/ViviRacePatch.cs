@@ -256,7 +256,7 @@ namespace VVRace.HarmonyPatches
                         {
                             var cell = fire.PositionHeld;
                             var distance = cell.DistanceToSquared(positionHeld);
-                            if (distance > ViviPyrophobiaRadius * ViviPyrophobiaRadius * Mathf.PI) { continue; }
+                            if (distance > ViviPyrophobiaRadius * ViviPyrophobiaRadius) { continue; }
 
                             if (!cell.Fogged(mapHeld) && GenSight.LineOfSight(positionHeld, cell, mapHeld, skipFirstCell: true))
                             {
