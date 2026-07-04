@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Runtime.InteropServices;
+using UnityEngine;
 using Verse;
 using Verse.AI;
 
@@ -224,6 +225,7 @@ namespace VVRace.HarmonyPatches
             }
         }
 
+        private const float ViviPyrophobiaRadius = 6.7f;
         private static bool ThoughtWorker_Pyrophobia_NearFire_Prefix(ref bool __result, Pawn pawn)
         {
             if (pawn.MapHeld != null && pawn.IsVivi())
@@ -242,17 +244,42 @@ namespace VVRace.HarmonyPatches
                 {
                     var mapHeld = pawn.MapHeld;
                     var positionHeld = pawn.PositionHeld;
-                    var radiusCells = GenRadial.NumCellsInRadius(6.7f);
-                    for (int i = 1; i < radiusCells; i++)
+
+                    var fires = mapHeld.listerThings.ThingsOfDef(ThingDefOf.Fire);
+                    if (fires.Count == 0)
                     {
-                        var cell = pawn.Position + GenRadial.RadialPattern[i];
-                        if (cell.InBounds(mapHeld) && 
-                            !cell.Fogged(mapHeld) &&
-                            cell.ContainsStaticFire(mapHeld) &&
-                            GenSight.LineOfSight(positionHeld, cell, mapHeld, skipFirstCell: true))
+                        return false;
+                    }
+                    else if (fires.Count < 50)
+                    {
+                        foreach (var fire in fires)
                         {
-                            __result = true;
-                            break;
+                            var cell = fire.PositionHeld;
+                            var distance = cell.DistanceToSquared(positionHeld);
+                            if (distance > ViviPyrophobiaRadius * ViviPyrophobiaRadius * Mathf.PI) { continue; }
+
+                            if (!cell.Fogged(mapHeld) && GenSight.LineOfSight(positionHeld, cell, mapHeld, skipFirstCell: true))
+                            {
+                                __result = true;
+                                break;
+                            }
+                        }
+                        return false;
+                    }
+                    else
+                    {
+                        var radiusCells = GenRadial.NumCellsInRadius(ViviPyrophobiaRadius);
+                        for (int i = 1; i < radiusCells; i++)
+                        {
+                            var cell = pawn.Position + GenRadial.RadialPattern[i];
+                            if (cell.InBounds(mapHeld) &&
+                                !cell.Fogged(mapHeld) &&
+                                cell.ContainsStaticFire(mapHeld) &&
+                                GenSight.LineOfSight(positionHeld, cell, mapHeld, skipFirstCell: true))
+                            {
+                                __result = true;
+                                break;
+                            }
                         }
                     }
                 }
