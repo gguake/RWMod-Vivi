@@ -94,6 +94,7 @@ namespace VVRace
         private List<Building_GatherWorkTable> _tmpGatherWorkTables = new List<Building_GatherWorkTable>();
         public void Notify_CellRegionRebuilded(IntVec3 cell)
         {
+            _tmpGatherWorkTables.Clear();
             _tmpGatherWorkTables.AddRange(this[cell].gatherableWorkTables);
             foreach (var building in _tmpGatherWorkTables)
             {
