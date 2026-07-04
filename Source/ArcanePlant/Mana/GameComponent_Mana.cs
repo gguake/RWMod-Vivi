@@ -28,10 +28,11 @@ namespace VVRace
                     {
                         _manaCompCache.RemoveAt(i);
                         i--;
+
+                        continue;
                     }
 
                     yield return _manaCompCache[i];
-
                 }
             }
         }
@@ -46,6 +47,8 @@ namespace VVRace
                     {
                         _thingWithManaComps.RemoveAt(i);
                         i--;
+                        
+                        continue;
                     }
 
                     yield return _thingWithManaComps[i];

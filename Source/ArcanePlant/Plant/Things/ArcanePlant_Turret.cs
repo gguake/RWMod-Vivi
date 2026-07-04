@@ -45,7 +45,28 @@ namespace VVRace
 
         Verb IAttackTargetSearcher.CurrentEffectiveVerb => AttackVerb;
         public Verb AttackVerb => GunCompEq?.PrimaryVerb;
-        protected CompEquippable GunCompEq => Gun?.TryGetComp<CompEquippable>();
+
+        protected CompEquippable GunCompEq
+        {
+            get
+            {
+                var gun = Gun;
+                if (gun == null)
+                {
+                    _cachedGunForCompEq = null;
+                    _cachedGunCompEq = null;
+                }
+                else if (!ReferenceEquals(gun, _cachedGunForCompEq))
+                {
+                    _cachedGunForCompEq = gun;
+                    _cachedGunCompEq = gun.TryGetComp<CompEquippable>();
+                }
+
+                return _cachedGunCompEq;
+            }
+        }
+        private Thing _cachedGunForCompEq;
+        private CompEquippable _cachedGunCompEq;
 
         public bool WarmingUp => _burstWarmupTicksLeft > 0;
         protected bool _burstActivated;

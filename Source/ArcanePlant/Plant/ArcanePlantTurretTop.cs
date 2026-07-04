@@ -9,12 +9,18 @@ namespace VVRace
         private const int IdleTurnIntervalMin = 200;
         private const int IdleTurnIntervalMax = 400;
 
+        // 좌우 반전 경계 부근에서 조준각이 진동하면 맵 메시 재생성이 연발되므로 여유각을 넘어야만 반전한다.
+        private const float FlipHysteresisAngle = 15f;
+
         private ArcanePlant_Turret parent;
 
         private float curRotationInt = Rand.Range(0f, 360f);
         private int ticksUntilIdleTurn;
         private int idleTurnTicksLeft;
         private bool idleTurnClockwise = Rand.Bool;
+
+        private bool flipped;
+        public bool Flipped => flipped;
 
         public float CurRotation
         {
@@ -24,7 +30,6 @@ namespace VVRace
             }
             set
             {
-                var before = curRotationInt;
                 curRotationInt = value;
                 if (curRotationInt > 360f)
                 {
@@ -35,9 +40,17 @@ namespace VVRace
                     curRotationInt += 360f;
                 }
 
-                if ((before < 180 && curRotationInt >= 180) || (before >= 180 && curRotationInt < 180))
+                if (flipped
+                    ? (curRotationInt >= FlipHysteresisAngle && curRotationInt <= 180f - FlipHysteresisAngle)
+                    : (curRotationInt >= 180f + FlipHysteresisAngle && curRotationInt <= 360f - FlipHysteresisAngle))
                 {
-                    parent.DirtyMapMesh(parent.Map);
+                    flipped = !flipped;
+
+                    // 맵 메시 재생성은 실제로 베이스 그래픽이 반전되는 데프에만 필요하다.
+                    if (parent.ArcanePlantTurretExtension?.turretTopBaseFlippable == true && parent.Spawned)
+                    {
+                        parent.DirtyMapMesh(parent.Map);
+                    }
                 }
             }
         }
@@ -50,6 +63,7 @@ namespace VVRace
         public ArcanePlantTurretTop(ArcanePlant_Turret parent)
         {
             this.parent = parent;
+            flipped = curRotationInt >= 180f;
         }
 
         public void ForceFaceTarget(LocalTargetInfo targ)
