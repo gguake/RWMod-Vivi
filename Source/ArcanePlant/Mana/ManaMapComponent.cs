@@ -182,7 +182,7 @@ namespace VVRace
             var idx = map.cellIndices.CellToIndex(cell);
             if (_diffusionJobStart)
             {
-                _manaReserveGrid[idx] = flux;
+                _manaReserveGrid[idx] += flux;
                 _shouldUpdate = true;
             }
             else

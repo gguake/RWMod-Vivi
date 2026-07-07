@@ -29,7 +29,7 @@ namespace VVRace
         public void Execute(int i)
         {
             var x = i % w;
-            var y = i / h;
+            var y = i / w;
 
             var left = x > 0;
             var up = y > 0;

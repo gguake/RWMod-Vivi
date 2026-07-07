@@ -28,6 +28,8 @@ namespace VVRace
                     {
                         _manaCompCache.RemoveAt(i);
                         i--;
+
+                        continue;
                     }
 
                     yield return _manaCompCache[i];
@@ -46,6 +48,8 @@ namespace VVRace
                     {
                         _thingWithManaComps.RemoveAt(i);
                         i--;
+
+                        continue;
                     }
 
                     yield return _thingWithManaComps[i];
@@ -83,8 +87,9 @@ namespace VVRace
                 _manaCompCache.Clear();
 
                 _thingWithManaComps.RemoveAll(v => v.DestroyedOrNull());
-                foreach (var thing in _thingWithManaComps)
+                for (int i = 0; i < _thingWithManaComps.Count; ++i)
                 {
+                    var thing = _thingWithManaComps[i];
                     var compMana = thing.GetComp<CompMana>();
                     if (compMana != null)
                     {
@@ -93,7 +98,9 @@ namespace VVRace
                     else
                     {
                         Log.Warning($"failed to find CompMana for thing {thing}; it registered on GameComponent_Mana before save. it may cause bugs about updating mana.");
-                        _thingWithManaComps.Remove(thing);
+
+                        _thingWithManaComps.RemoveAt(i);
+                        i--;
                     }
                 }
 
