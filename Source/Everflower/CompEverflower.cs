@@ -2,7 +2,6 @@ using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Xml;
 using UnityEngine;
 using Verse;
 
@@ -371,7 +370,7 @@ namespace VVRace
                     var seedling = thing as ArcanePlant_Seedling;
                     if (seedling != null)
                     {
-                        seedling.Growth = Random.Range(0.05f, 0.6f);
+                        seedling.Growth = Rand.Range(0.05f, 0.6f);
                     }
 
                     spawnedCount++;

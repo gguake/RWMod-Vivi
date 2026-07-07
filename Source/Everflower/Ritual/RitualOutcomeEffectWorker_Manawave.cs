@@ -70,7 +70,7 @@ namespace VVRace
             if (Rand.Chance(0.1f))
             {
                 var factionMechanoid = Find.FactionManager.OfMechanoids;
-                if (!factionMechanoid.defeated && !factionMechanoid.deactivated)
+                if (factionMechanoid != null && !factionMechanoid.defeated && !factionMechanoid.deactivated)
                 {
                     var incidentParms = new IncidentParms();
                     incidentParms.target = map;

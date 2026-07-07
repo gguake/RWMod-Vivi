@@ -14,18 +14,18 @@ namespace VVRace
             var quality = GetQuality(jobRitual, progress);
             var attuner = jobRitual.PawnWithRole("resonator");
             var everflower = jobRitual.selectedTarget.Thing as ArcanePlant_Everflower;
-            var map = everflower.Map;
 
-            if (everflower != null)
+            if (attuner != null && everflower != null)
             {
+                var map = everflower.Map;
                 everflower.EverflowerComp.LinkAttunement(attuner, quality);
 
                 ApplyReverberation(attuner, everflower, map);
+
+                def.effecter.Spawn(everflower, map, everflower.EverflowerComp.RitualEffecterOffset).Cleanup();
+
+                everflower.Notify_RitualComplete(quality);
             }
-
-            def.effecter.Spawn(everflower, map, everflower.EverflowerComp.RitualEffecterOffset).Cleanup();
-
-            everflower.Notify_RitualComplete(quality);
         }
 
         private void ApplyReverberation(Pawn attuner, ArcanePlant_Everflower everflower, Map map)

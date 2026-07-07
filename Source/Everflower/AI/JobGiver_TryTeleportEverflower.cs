@@ -9,7 +9,12 @@ namespace VVRace
         public override float GetPriority(Pawn pawn)
         {
             var compVivi = pawn.GetCompVivi();
-            return compVivi != null && compVivi.isRoyal && compVivi.LinkedEverflower.ReservedTeleportCell.HasValue ? 10 : 0;
+            if (compVivi != null && compVivi.isRoyal && compVivi.LinkedEverflower != null)
+            {
+                return compVivi.LinkedEverflower.ReservedTeleportCell.HasValue ? 10 : 0;
+            }
+
+            return 0;
         }
 
         protected override Job TryGiveJob(Pawn pawn)

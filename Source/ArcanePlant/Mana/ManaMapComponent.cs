@@ -1,5 +1,5 @@
-using LudeonTK;
 using System;
+using System.Collections.Generic;
 using Unity.Collections;
 using Unity.Jobs;
 using UnityEngine;
@@ -22,7 +22,6 @@ namespace VVRace
         private NativeArray<float> _tmpGrid;
 
         private bool _checkFlowerCells;
-        private NativePriorityQueue<int, float, FloatMinComparer> _flowerCellQueue;
 
         private bool _shouldUpdate;
         private bool _updateJobStart;
@@ -50,7 +49,6 @@ namespace VVRace
             _manaReserveGrid = new NativeArray<float>(map.cellIndices.NumGridCells, Allocator.Persistent);
             _manaGrid = new NativeArray<float>(map.cellIndices.NumGridCells, Allocator.Persistent);
             _tmpGrid = new NativeArray<float>(map.cellIndices.NumGridCells, Allocator.Persistent);
-            _flowerCellQueue = new NativePriorityQueue<int, float, FloatMinComparer>(map.cellIndices.NumGridCells, default(FloatMinComparer), Allocator.Persistent);
 
             _cellBoolDrawer = new CellBoolDrawer(this, map.Size.x, map.Size.z, 3634, _modSettingCache.manaGridOpacity);
 
@@ -110,6 +108,7 @@ namespace VVRace
             }
         }
 
+        private List<(int idx, float mana)> _tmpFlowerCellCandidates = new List<(int idx, float mana)>();
         public override void MapComponentTick()
         {
             if (_diffusionJobStart)
@@ -118,19 +117,24 @@ namespace VVRace
 
                 if (_checkFlowerCells)
                 {
+                    _tmpFlowerCellCandidates.Clear();
+                    
                     var sum = 0f;
                     for (int i = 0; i < _manaGrid.Length; ++i)
                     {
-                        sum += _manaGrid[i];
+                        var v = _manaGrid[i];
+                        sum += v;
+                        if (v >= 100f) { _tmpFlowerCellCandidates.Add((i, v)); }
                     }
+
+                    // 마나 밀도가 높은 셀부터 스폰. 500 이상은 동순위 취급
+                    _tmpFlowerCellCandidates.Sort((x, y) => Mathf.Min(y.mana, 500f).CompareTo(Mathf.Min(x.mana, 500f)));
 
                     var thingDef = ArcanePlantUtility.ViviFlowerDefs.RandomElement();
                     int flowerCount = (int)Mathf.Clamp(sum / 50000f, 1, 20) + Rand.Range(1, 5);
-                    while (flowerCount > 0)
+                    foreach (var (cellIndex, _) in _tmpFlowerCellCandidates)
                     {
-                        if (_flowerCellQueue.Count == 0) { break; }
-
-                        _flowerCellQueue.Dequeue(out var cellIndex, out _);
+                        if (flowerCount <= 0) { break; }
 
                         var c = map.cellIndices.IndexToCell(cellIndex);
                         if (ArcanePlantUtility.TrySpawnViviFlower(map, c, out _, flowerDef: thingDef))
@@ -198,7 +202,6 @@ namespace VVRace
             if (!_updateJobHandle.IsCompleted) { _updateJobHandle.Complete(); }
             if (!_diffusionJobHandle.IsCompleted) { _diffusionJobHandle.Complete(); }
 
-            _flowerCellQueue.Dispose();
             _tmpGrid.Dispose();
             _manaGrid.Dispose();
             _manaReserveGrid.Dispose();
@@ -241,10 +244,6 @@ namespace VVRace
             if (_diffusionJobStart) { return; }
 
             _checkFlowerCells = Rand.Chance(ViviFlowerChance);
-            if (_checkFlowerCells)
-            {
-                _flowerCellQueue.Clear();
-            }
 
             var job = new ManaDiffusionJob()
             {
@@ -252,9 +251,6 @@ namespace VVRace
                 h = map.Size.z,
                 manaGrid = _manaGrid,
                 outputGrid = _tmpGrid,
-
-                checkFlowerCells = _checkFlowerCells,
-                flowerCellQueue = _flowerCellQueue,
             };
 
             _diffusionJobHandle = job.Schedule(map.cellIndices.NumGridCells, map.Size.x);
