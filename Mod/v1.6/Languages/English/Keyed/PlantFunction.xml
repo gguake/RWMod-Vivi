@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+<VV_PlantFunction_TurretAttack>Automatically attacks detected enemies.</VV_PlantFunction_TurretAttack>
+<VV_PlantFunction_TurretAttackMana>Automatically attacks detected enemies. Each attack consumes {0} mana.</VV_PlantFunction_TurretAttackMana>
+<VV_PlantFunction_ShootusEquip>Can be equipped with one ranged weapon and automatically attacks detected enemies with it. Melee or biocoded weapons cannot be equipped, and reloading is somewhat slower than when handled by a person.</VV_PlantFunction_ShootusEquip>
+
+<VV_PlantFunction_SensorExplosive>When {1} is detected within radius {0}, consumes {2} of stored mana to trigger a {4} explosion in radius {3}.</VV_PlantFunction_SensorExplosive>
+<VV_PlantFunction_DamageTriggeredExplosive>When damaged, has a {0} chance to consume {1} of stored mana and trigger a {3} explosion in radius {2}.</VV_PlantFunction_DamageTriggeredExplosive>
+<VV_PlantFunction_SensorTargetFire>fire</VV_PlantFunction_SensorTargetFire>
+
+<VV_PlantFunction_Terraform>Periodically improves terrain within a maximum radius of {0} into more fertile ground.</VV_PlantFunction_Terraform>
+<VV_PlantFunction_TerraformPollution>Periodically cleans pollution within a maximum radius of {0}.</VV_PlantFunction_TerraformPollution>
+<VV_PlantFunction_FilthMaker>Spreads {0} within radius {1}, {2} times per day.</VV_PlantFunction_FilthMaker>
+<VV_PlantFunction_SeedlingGrowthBonus>Increases the growth speed of adjacent arcane plant seedlings by {0}.</VV_PlantFunction_SeedlingGrowthBonus>
+<VV_PlantFunction_Fruit>Produces {2}x {0} every {1} days.</VV_PlantFunction_Fruit>
+
+<VV_PlantFunction_Glow>Emits light while mana is active. (radius {0})</VV_PlantFunction_Glow>
+<VV_PlantFunction_GlowRadiant>When under a roof, consumes mana to emit strong light during the day. (radius {0}) Within radius {1}, the light is bright enough for crops to grow.</VV_PlantFunction_GlowRadiant>
+<VV_PlantFunction_GlowStarlit>Blooms at night or in space, emitting light. (radius {0})</VV_PlantFunction_GlowStarlit>
+
+<VV_PlantFunction_HeatPush>Pushes {0} heat per second while mana is active. (up to {1})</VV_PlantFunction_HeatPush>
+<VV_PlantFunction_HeatAbsorb>Absorbs {0} heat per second while mana is active. (down to {1})</VV_PlantFunction_HeatAbsorb>
+<VV_PlantFunction_PowerPlant>When wired to a power network, generates up to {0}W of power proportional to the stored mana ratio.</VV_PlantFunction_PowerPlant>
+<VV_PlantFunction_Battery>When wired to a power network, stores up to {0}Wd of power. (charging efficiency {1})</VV_PlantFunction_Battery>
+<VV_PlantFunction_LightningRod>When unroofed and mana is active, attracts lightning strikes and increases nearby environment mana by {0}.</VV_PlantFunction_LightningRod>
+
+<VV_PlantFunction_SeedlingRandom>Grows into a random arcane plant when fully grown.</VV_PlantFunction_SeedlingRandom>
+<VV_PlantFunction_SeedlingFixed>Grows into {0} when fully grown.</VV_PlantFunction_SeedlingFixed>
+<VV_PlantFunction_Everflower>Vivis can perform attunement rituals to raise its resonance level, unlocking various rituals and abilities.</VV_PlantFunction_Everflower>
+<VV_PlantFunction_EverflowerTeleport>Can teleport to a designated location. (range {0})</VV_PlantFunction_EverflowerTeleport>
+</LanguageData>

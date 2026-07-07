@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+<VV_PlantFunction_TurretAttack>적을 감지하면 자동으로 공격합니다.</VV_PlantFunction_TurretAttack>
+<VV_PlantFunction_TurretAttackMana>적을 감지하면 자동으로 공격합니다. 한 번 공격할 때마다 마나를 {0} 소모합니다.</VV_PlantFunction_TurretAttackMana>
+<VV_PlantFunction_ShootusEquip>원거리 무기를 하나 장착할 수 있으며 적을 감지하면 장착한 무기로 자동으로 공격합니다. 근접 무기나 생체코드된 무기는 장착할 수 없고 재장전 속도는 사람이 다룰 때보다 다소 느립니다.</VV_PlantFunction_ShootusEquip>
+
+<VV_PlantFunction_SensorExplosive>반경 {0} 안에서 {1}(이)가 감지되면 저장된 마나의 {2}(을)를 소모해 반경 {3}에 {4} 폭발을 일으킵니다.</VV_PlantFunction_SensorExplosive>
+<VV_PlantFunction_DamageTriggeredExplosive>피해를 받으면 {0} 확률로 저장된 마나의 {1}(을)를 소모해 반경 {2}에 {3} 폭발을 일으킵니다.</VV_PlantFunction_DamageTriggeredExplosive>
+<VV_PlantFunction_SensorTargetFire>화재</VV_PlantFunction_SensorTargetFire>
+
+<VV_PlantFunction_Terraform>주기적으로 주변 지형을 더 비옥한 지형으로 개량합니다.</VV_PlantFunction_Terraform>
+<VV_PlantFunction_TerraformPollution>주기적으로 주변 지형의 오염을 정화합니다.</VV_PlantFunction_TerraformPollution>
+<VV_PlantFunction_FilthMaker>주기적으로 주변에 {0}(을)를 살포합니다.</VV_PlantFunction_FilthMaker>
+<VV_PlantFunction_SeedlingGrowthBonus>인접한 마법 식물 묘목의 성장 속도를 {0} 증가시킵니다.</VV_PlantFunction_SeedlingGrowthBonus>
+<VV_PlantFunction_Fruit>{1}일마다 {0} {2}개를 생산합니다.</VV_PlantFunction_Fruit>
+
+<VV_PlantFunction_Glow>마나가 활성 상태인 동안 주변을 밝힙니다.</VV_PlantFunction_Glow>
+<VV_PlantFunction_GlowRadiant>지붕 아래에 있으면 낮 시간 동안 마나를 소모해 작물이 자랄 수 있는 강한 빛을 냅니다.</VV_PlantFunction_GlowRadiant>
+<VV_PlantFunction_GlowStarlit>밤이나 우주 공간에서 꽃을 피워 주변을 밝힙니다. (반경 {0})</VV_PlantFunction_GlowStarlit>
+
+<VV_PlantFunction_HeatPush>마나가 활성 상태인 동안 열을 방출합니다. (최대 {1}까지)</VV_PlantFunction_HeatPush>
+<VV_PlantFunction_HeatAbsorb>마나가 활성 상태인 동안 열을 흡수합니다. (최소 {1}까지)</VV_PlantFunction_HeatAbsorb>
+<VV_PlantFunction_PowerPlant>전력망에 연결하면 저장된 마나 비율에 비례해 최대 {0}W의 전력을 생산합니다.</VV_PlantFunction_PowerPlant>
+<VV_PlantFunction_Battery>전력망에 연결하면 최대 {0}Wd의 전력을 저장할 수 있습니다.</VV_PlantFunction_Battery>
+<VV_PlantFunction_LightningRod>지붕이 없고 마나가 활성 상태라면 자연적인 번개를 끌어들여 주변의 환경 마나를 {0} 증가시킵니다.</VV_PlantFunction_LightningRod>
+
+<VV_PlantFunction_SeedlingRandom>다 자라면 무작위 마법 식물이 됩니다.</VV_PlantFunction_SeedlingRandom>
+<VV_PlantFunction_SeedlingFixed>다 자라면 {0}(이)가 됩니다.</VV_PlantFunction_SeedlingFixed>
+<VV_PlantFunction_Everflower>비비가 조율 의식을 수행하면 공명 단계가 오르며, 공명 단계에 따라 다양한 의식과 능력이 해금됩니다.</VV_PlantFunction_Everflower>
+<VV_PlantFunction_EverflowerTeleport>조율이 된 상태이면 지정한 위치로 순간이동할 수 있습니다.</VV_PlantFunction_EverflowerTeleport>
+</LanguageData>
