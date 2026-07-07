@@ -57,14 +57,17 @@ namespace VVRace
             Vector3 restPos = FairyJobUtility.IdleOrbitPositionAround(fairy, ally, 0, 1);
             move?.ConfigureStepTarget(restPos);
 
-            var target = ViviFairyTargeting.FindGuardTargetNear(
-                owner as IAttackTargetSearcher,
-                ally.Position,
-                ViviFairyTargeting.GuardScanRadius,
-                ally.Position,
-                owner.Position,
-                excludeDowned: true);
-            TryStartAttackOrReturn(target, move);
+            if (fairy.IsHashIntervalTick(FairyJobUtility.TargetScanIntervalTicks, delta))
+            {
+                var target = ViviFairyTargeting.FindGuardTargetNear(
+                    owner as IAttackTargetSearcher,
+                    ally.Position,
+                    ViviFairyTargeting.GuardScanRadius,
+                    ally.Position,
+                    ally.Position,
+                    excludeDowned: true);
+                TryStartAttackOrReturn(target, move);
+            }
         }
 
         protected override void OnInterrupted(FairyJobInterruptReason reason)
@@ -85,10 +88,17 @@ namespace VVRace
 
         protected override void OnEnded()
         {
-            if (ally != null)
+            if (ally?.health == null) { return; }
+
+            // 다른 로열 비비의 호위 hediff를 지우지 않도록 이 작업이 부여한 것만 제거한다.
+            var hediffs = ally.health.hediffSet.hediffs;
+            for (int i = 0; i < hediffs.Count; i++)
             {
-                var hediff = ally.health.hediffSet.GetFirstHediffOfDef(VVHediffDefOf.VV_FairyGuarded);
-                if (hediff != null) { ally.health.RemoveHediff(hediff); }
+                if (hediffs[i] is Hediff_FairyGuarded guarded && guarded.jobId == id && guarded.ownerVivi == owner)
+                {
+                    ally.health.RemoveHediff(guarded);
+                    return;
+                }
             }
         }
 

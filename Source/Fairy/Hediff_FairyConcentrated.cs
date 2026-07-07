@@ -107,7 +107,18 @@ namespace VVRace
         {
             base.Notify_PawnDied(dinfo, culprit);
 
-            pawn?.health?.RemoveHediff(this);
+            EndTargetMarkerEffect();
+
+            // Pawn.Kill이 hediff 목록을 정방향 순회하며 이 메서드를 호출하므로,
+            // 여기서 즉시 제거하면 목록이 당겨져 다음 hediff의 Notify_PawnDied가 건너뛰어진다.
+            var deadPawn = pawn;
+            LongEventHandler.ExecuteWhenFinished(() =>
+            {
+                if (deadPawn?.health != null && deadPawn.health.hediffSet.hediffs.Contains(this))
+                {
+                    deadPawn.health.RemoveHediff(this);
+                }
+            });
         }
 
         private void MaintainTargetMarkerEffect()

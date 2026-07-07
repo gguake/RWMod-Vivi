@@ -39,7 +39,6 @@ namespace VVRace
         private int _lifespanTicks = 30000;
 
         private FairyState _state = FairyState.Materializing;
-        private int _stateTicks;
         private FairyJob _job;
 
         private Vector3 _realPosition;
@@ -211,7 +210,6 @@ namespace VVRace
 
             _attackGraphicActive = false;
             _state = FairyState.Idle;
-            _stateTicks = 0;
         }
 
         public void BeginDematerialize(bool applyAssimilation)
@@ -225,6 +223,12 @@ namespace VVRace
                     _job.Interrupt(applyAssimilation ?
                         FairyJobInterruptReason.LifespanExpired :
                         FairyJobInterruptReason.DematerializeAll);
+
+                    // OnInterrupted가 이미 소멸 작업을 시작했다면 여기서 또 시작하면 페이즈 이펙트가 중복 재생된다.
+                    if (_job != null && !_job.Ended && _job.Kind == FairyJobKind.Dematerialize)
+                    {
+                        return;
+                    }
                 }
                 else
                 {
@@ -253,7 +257,6 @@ namespace VVRace
             PlayPhaseEffectAt(cell, map, VVSoundDefOf.VV_FairyTeleport);
 
             _state = FairyState.Teleporting;
-            _stateTicks = TeleportDurationTicks;
         }
 
         internal void FaceTowards(Vector3 targetPosition)
@@ -269,12 +272,11 @@ namespace VVRace
             Rotation = _facing;
         }
 
-        internal void StartTimedState(FairyState state, int durationTicks, bool playPhaseEffect)
+        internal void StartTimedState(FairyState state, bool playPhaseEffect)
         {
             _drawAltitude = null;
             _attackGraphicActive = state == FairyState.Attacking;
             _state = state;
-            _stateTicks = durationTicks;
 
             if (playPhaseEffect)
             {
@@ -283,11 +285,6 @@ namespace VVRace
 
                 PlayPhaseEffectAt(CurrentEffectCell(), map, PhaseSoundForState(state));
             }
-        }
-
-        internal void SetTimedStateTicks(int ticks)
-        {
-            _stateTicks = ticks;
         }
 
         internal void BeginToilMotion(FairyState state)
@@ -557,7 +554,6 @@ namespace VVRace
             Scribe_Values.Look(ref _lifespanTicks, "lifespanTicks", 30000);
 
             Scribe_Values.Look(ref _state, "state", FairyState.Idle);
-            Scribe_Values.Look(ref _stateTicks, "stateTicks");
             Scribe_Deep.Look(ref _job, "job");
 
             Scribe_Values.Look(ref _realPosition, "realPosition");
@@ -583,9 +579,10 @@ namespace VVRace
                 {
                     EnsureOrbitVariation();
                 }
-                if (_state == FairyState.Attacking || _state == FairyState.MovingToRest)
+                // 이동/공격 상태는 저장된 토일이 그대로 이어가므로 언세이브 필드인 공격 그래픽만 복원한다.
+                if (_state == FairyState.Attacking)
                 {
-                    EnterIdle();
+                    _attackGraphicActive = true;
                 }
                 EnsureJob();
             }

@@ -192,7 +192,8 @@ namespace VVRace
             DestroyAllActiveFairies();
 
             var gameCompMana = Current.Game.GetComponent<GameComponent_Mana>();
-            foreach (var fairyPawn in gameCompMana.GetFairyficatedPawns((Pawn)parent))
+            // Kill이 죽음 처리 훅을 통해 등록 목록을 건드릴 수 있으므로 지연 열거 상태로 순회하지 않는다.
+            foreach (var fairyPawn in gameCompMana.GetFairyficatedPawns((Pawn)parent).ToList())
             {
                 fairyPawn.Kill(dinfo);
             }
@@ -203,6 +204,9 @@ namespace VVRace
         public override void PostPreApplyDamage(ref DamageInfo dinfo, out bool absorbed)
         {
             base.PostPreApplyDamage(ref dinfo, out absorbed);
+
+            if (absorbed || !parent.Spawned || parent.Map == null) { return; }
+            if (dinfo.Def == null || !dinfo.Def.harmsHealth) { return; }
 
             if (Props.preventDamageChanceByInnerCount != null && Rand.Chance(Props.preventDamageChanceByInnerCount.Evaluate(FairyficatedPawnCount)))
             {

@@ -31,18 +31,13 @@ namespace VVRace
         {
             if (drivesState)
             {
-                Fairy?.StartTimedState(state, ticksLeft, playPhaseEffect);
+                Fairy?.StartTimedState(state, playPhaseEffect);
             }
         }
 
         protected override FairyToilStatus TickAction(int delta)
         {
             ticksLeft -= delta;
-            if (drivesState)
-            {
-                Fairy?.SetTimedStateTicks(Mathf.Max(0, ticksLeft));
-            }
-
             if (ticksLeft > 0)
             {
                 return FairyToilStatus.Running;

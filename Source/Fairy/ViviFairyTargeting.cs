@@ -82,8 +82,8 @@ namespace VVRace
             foreach (var potentialTarget in potentialTargets)
             {
                 var target = potentialTarget as Thing;
+                if (target == null || center.DistanceTo(target.Position) > radius) { continue; }
                 if (!IsValidHostileTarget(target, faction, map, losFrom, excludeDowned, exclude)) { continue; }
-                if (center.DistanceTo(target.Position) > radius) { continue; }
 
                 int distance = (int)priorityOrigin.DistanceTo(target.Position);
                 if (distance < selectedDistance)

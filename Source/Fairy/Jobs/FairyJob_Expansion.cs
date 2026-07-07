@@ -58,9 +58,12 @@ namespace VVRace
                 move.ConfigureStepTarget(restPos);
             }
 
-            var target = ViviFairyTargeting.FindHostileNear(
-                owner as IAttackTargetSearcher, owner.Position, ExpansionRadius, owner.Position, excludeDowned: false);
-            TryStartAttackOrReturn(target, move);
+            if (fairy.IsHashIntervalTick(FairyJobUtility.TargetScanIntervalTicks, delta))
+            {
+                var target = ViviFairyTargeting.FindHostileNear(
+                    owner as IAttackTargetSearcher, owner.Position, ExpansionRadius, owner.Position, excludeDowned: true);
+                TryStartAttackOrReturn(target, move);
+            }
         }
 
         protected override void OnInterrupted(FairyJobInterruptReason reason)

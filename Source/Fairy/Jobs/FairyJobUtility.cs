@@ -9,6 +9,7 @@ namespace VVRace
         public const float IdleOrbitRadiusZ = 0.3f;
         public const float IdleOrbitDepth = 0.06f;
         public const float IdleOrbitAngularSpeed = 0.008f;
+        public const int TargetScanIntervalTicks = 6;
 
         public static Vector3 OrbitPositionAround(ViviFairy fairy, Pawn centerPawn, int slot, int count)
         {
@@ -69,8 +70,9 @@ namespace VVRace
             }
 
             float slotOffset = slot * (Mathf.PI * 2f / Mathf.Max(1, count));
-            float motion = GenTicks.TicksGame * IdleOrbitAngularSpeed * fairy.OrbitSpeedFactor * fairy.OrbitDirection;
-            angle = motion + slotOffset + fairy.OrbitPhaseOffset;
+            // 틱 누적값이 커지면 float 유효자릿수가 틱당 회전량보다 커져 궤도가 끊기므로 double로 계산 후 2π로 접는다.
+            double motion = GenTicks.TicksGame * (double)IdleOrbitAngularSpeed * fairy.OrbitSpeedFactor * fairy.OrbitDirection;
+            angle = (float)((motion + slotOffset + fairy.OrbitPhaseOffset) % (System.Math.PI * 2.0));
             radiusX = IdleOrbitRadiusX * fairy.OrbitRadiusXFactor;
             radiusZ = IdleOrbitRadiusZ * fairy.OrbitRadiusZFactor;
             tiltCos = Mathf.Cos(fairy.OrbitTiltAngle);

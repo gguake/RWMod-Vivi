@@ -24,6 +24,11 @@ namespace VVRace
             var ally = target.Pawn;
             var ctrl = Controller;
             if (ally == null || ctrl == null) { return; }
+
+            // Valid는 시전 시점에만 검사되므로 warmup 동안 상태가 바뀌었을 수 있어 재검증한다.
+            if (ally.Dead || !ally.Spawned || ally.health == null) { return; }
+            if (ally.health.hediffSet.HasHediff(VVHediffDefOf.VV_FairyGuarded)) { return; }
+
             if (!ctrl.TryReserveIdleFairies(RequiredFairies, out var reserved)) { return; }
 
             int id = ctrl.NextFairyJobId();

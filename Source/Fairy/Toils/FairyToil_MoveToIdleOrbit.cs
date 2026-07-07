@@ -90,7 +90,6 @@ namespace VVRace
             if (teleportTicksLeft > 0)
             {
                 teleportTicksLeft -= delta;
-                fairy.SetTimedStateTicks(Mathf.Max(0, teleportTicksLeft));
                 if (teleportTicksLeft <= 0)
                 {
                     fairy.EnterIdle();

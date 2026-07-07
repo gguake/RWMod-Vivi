@@ -40,7 +40,6 @@ namespace VVRace
         protected override FairyToilStatus TickAction(int delta)
         {
             ticksLeft -= delta;
-            Fairy?.SetTimedStateTicks(Mathf.Max(0, ticksLeft));
             if (ticksLeft > 0)
             {
                 return FairyToilStatus.Running;
