@@ -266,12 +266,10 @@ namespace VVRace
             }
             else
             {
+                // manaChange <= 0 이면 흡수 가능량 전체가 이미 소비에 충당된 상태이므로 환경에서 전액 차감한다.
                 if (absorbableMana > 0f)
                 {
-                    var absorbed = Mathf.Clamp(-manaChange, 0f, absorbableMana);
-                    manaChange += absorbed;
-
-                    manaGrid.ChangeEnvironmentMana(pos, -absorbed);
+                    manaGrid.ChangeEnvironmentMana(pos, -absorbableMana);
                 }
 
                 if (_manaStored > 0f)
