@@ -67,7 +67,7 @@ namespace VVRace
                 .FailOn(() => IsBillDisabled);
 
             // 자원 채집
-            var gatherWorkAmount = Mathf.CeilToInt(GatheringRecipeDef.GatheringWorkAmount / (job.RecipeDef.efficiencyStat != null ? pawn.GetStatValue(job.RecipeDef.efficiencyStat) : 1f));
+            var gatherWorkAmount = Mathf.CeilToInt(GatheringRecipeDef.GatheringWorkAmount / (job.RecipeDef.workSpeedStat != null ? pawn.GetStatValue(job.RecipeDef.workSpeedStat) : 1f));
             yield return Toils_General.Wait(gatherWorkAmount, GatherTargetIdx)
                 .FailOnDespawnedNullOrForbidden(GatherTargetIdx)
                 .FailOnBurningImmobile(GatherTargetIdx)
@@ -244,6 +244,10 @@ namespace VVRace
                                 }
                             }
                         }
+                        else
+                        {
+                            actor.jobs.EndCurrentJob(JobCondition.Succeeded);
+                        }
                     });
 
                 yield return Toils_Reserve.Reserve(StorageCellTargetIdx);
@@ -301,8 +305,11 @@ namespace VVRace
                         var allProducts = new List<Thing>();
                         foreach (var productThingDefCount in curJob.RecipeDef.products)
                         {
-                            var productCount = productThingDefCount.count * efficiency;
-                            GatheringRecipeDef.gatherWorker.Notify_RecipeComplete(actor, BillGiverTargetInfo.Thing as Building_GatherWorkTable, productThingDefCount.thingDef, ref productCount);
+                            var actualProductCount = productThingDefCount.count * efficiency;
+                            GatheringRecipeDef.gatherWorker.Notify_RecipeComplete(actor, BillGiverTargetInfo.Thing as Building_GatherWorkTable, productThingDefCount.thingDef, ref actualProductCount);
+
+                            var minProductCount = (int)actualProductCount;
+                            var productCount = minProductCount + (Rand.Chance(actualProductCount - minProductCount) ? 1 : 0);
 
                             while (productCount > 0)
                             {
@@ -373,6 +380,10 @@ namespace VVRace
                                     actor.jobs.EndCurrentJob(JobCondition.Succeeded);
                                 }
                             }
+                        }
+                        else
+                        {
+                            actor.jobs.EndCurrentJob(JobCondition.Succeeded);
                         }
                     });
 

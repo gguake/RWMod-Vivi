@@ -60,16 +60,15 @@ namespace VVRace
         private List<Filth_Pollen> _tmpFilthPollens = new List<Filth_Pollen>();
         public override void Notify_RecipeComplete(Pawn pawn, Building_GatherWorkTable workTable, ThingDef productDef, ref float productCount)
         {
-            var gene = pawn.genes.GenesListForReading.FirstOrDefault(v => v is Gene_HoneyDependency) as Gene_HoneyDependency;
-            if (gene == null) { return; }
-
-            var hediff = gene.LinkedHediff;
-            if (hediff == null) { return; }
-
-            if (hediff.Severity > 0.8f && productCount > 1f)
+            var gene = pawn.genes?.GenesListForReading.FirstOrDefault(v => v is Gene_HoneyDependency) as Gene_HoneyDependency;
+            if (gene != null)
             {
-                gene.Reset();
-                productCount = Mathf.Clamp(productCount - 1f, 1f, productDef.stackLimit);
+                var hediff = gene.LinkedHediff;
+                if (hediff != null && hediff.Severity > 0.8f && productCount > 1f)
+                {
+                    gene.Reset();
+                    productCount = Mathf.Clamp(productCount - 1f, 1f, productDef.stackLimit);
+                }
             }
 
             _tmpFilthPollens.Clear();

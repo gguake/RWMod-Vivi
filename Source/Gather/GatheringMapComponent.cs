@@ -167,29 +167,31 @@ namespace VVRace
                     return (dx * dx + dz * dz) <= radiusSqr;
                 };
 
-                var centerCell = building.CenterCell;
-                var buildingRegion = centerCell.GetRegion(map);
-                RegionTraverser.BreadthFirstTraverse(buildingRegion, regionEntryPredicate, (r) =>
+                var buildingRegion = position.GetRegion(map);
+                if (buildingRegion != null)
                 {
-                    foreach (var cell in r.Cells)
+                    RegionTraverser.BreadthFirstTraverse(buildingRegion, regionEntryPredicate, (r) =>
                     {
-                        if (cell.DistanceToSquared(centerCell) > radiusSqr) { continue; }
-
-                        var cache = this[cell];
-                        cache.gatherableWorkTables.Add(building);
-                        gatherableList.AddRange(cache.gatherables);
-
-                        if (!_cacheByGatherWorkTables.TryGetValue(building, out var cacheSet))
+                        foreach (var cell in r.Cells)
                         {
-                            cacheSet = new HashSet<GatheringCellCache>();
-                            _cacheByGatherWorkTables.Add(building, cacheSet);
+                            if (cell.DistanceToSquared(position) > radiusSqr) { continue; }
+
+                            var cache = this[cell];
+                            cache.gatherableWorkTables.Add(building);
+                            gatherableList.AddRange(cache.gatherables);
+
+                            if (!_cacheByGatherWorkTables.TryGetValue(building, out var cacheSet))
+                            {
+                                cacheSet = new HashSet<GatheringCellCache>();
+                                _cacheByGatherWorkTables.Add(building, cacheSet);
+                            }
+                            cacheSet.Add(cache);
                         }
-                        cacheSet.Add(cache);
-                    }
 
-                    return false;
+                        return false;
 
-                }, maxRegions: 30);
+                    }, maxRegions: 30);
+                }
             }
 
             _dirtyGatherWorkTables.Clear();

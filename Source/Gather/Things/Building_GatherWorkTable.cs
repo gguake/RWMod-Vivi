@@ -38,8 +38,6 @@ namespace VVRace
 
         public bool CanGatherFilth => _canGatherFilth;
 
-        public IntVec3 CenterCell => (def.hasInteractionCell ? InteractionCell : Position);
-
         private float _gatherRadius = GatherDefaultRadius;
         private bool _canGatherFilth = true;
 
