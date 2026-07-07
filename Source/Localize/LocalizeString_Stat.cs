@@ -41,5 +41,28 @@ namespace VVRace
         public const string VV_StatsReport_ManaFluxRule_InVaccum_Desc = nameof(VV_StatsReport_ManaFluxRule_InVaccum_Desc);
 
         public const string VV_StatReport_Mana_Multiplier = nameof(VV_StatReport_Mana_Multiplier);
+
+        // 정보 탭용 간략한 마나 규칙 라벨
+        public const string VV_ManaFluxRuleLabel_AdjacentPlant = nameof(VV_ManaFluxRuleLabel_AdjacentPlant);
+        public const string VV_ManaFluxRuleLabel_AdjacentWater = nameof(VV_ManaFluxRuleLabel_AdjacentWater);
+        public const string VV_ManaFluxRuleLabel_BatteryStored = nameof(VV_ManaFluxRuleLabel_BatteryStored);
+        public const string VV_ManaFluxRuleLabel_Everflower = nameof(VV_ManaFluxRuleLabel_Everflower);
+        public const string VV_ManaFluxRuleLabel_Fertility = nameof(VV_ManaFluxRuleLabel_Fertility);
+        public const string VV_ManaFluxRuleLabel_GlowerActive = nameof(VV_ManaFluxRuleLabel_GlowerActive);
+        public const string VV_ManaFluxRuleLabel_HasRoof = nameof(VV_ManaFluxRuleLabel_HasRoof);
+        public const string VV_ManaFluxRuleLabel_InVaccum = nameof(VV_ManaFluxRuleLabel_InVaccum);
+        public const string VV_ManaFluxRuleLabel_PlantGrowth = nameof(VV_ManaFluxRuleLabel_PlantGrowth);
+        public const string VV_ManaFluxRuleLabel_Power = nameof(VV_ManaFluxRuleLabel_Power);
+        public const string VV_ManaFluxRuleLabel_RadialPollution = nameof(VV_ManaFluxRuleLabel_RadialPollution);
+        public const string VV_ManaFluxRuleLabel_Refuelable = nameof(VV_ManaFluxRuleLabel_Refuelable);
+        public const string VV_ManaFluxRuleLabel_Sunlight = nameof(VV_ManaFluxRuleLabel_Sunlight);
+        public const string VV_ManaFluxRuleLabel_TemperatureHigh = nameof(VV_ManaFluxRuleLabel_TemperatureHigh);
+        public const string VV_ManaFluxRuleLabel_TemperatureLow = nameof(VV_ManaFluxRuleLabel_TemperatureLow);
+        public const string VV_ManaFluxRuleLabel_TimeOfDayDay = nameof(VV_ManaFluxRuleLabel_TimeOfDayDay);
+        public const string VV_ManaFluxRuleLabel_TimeOfDayNight = nameof(VV_ManaFluxRuleLabel_TimeOfDayNight);
+        public const string VV_ManaFluxRuleLabel_Always = nameof(VV_ManaFluxRuleLabel_Always);
+        public const string VV_ManaFluxRuleLabel_WeatherRainy = nameof(VV_ManaFluxRuleLabel_WeatherRainy);
+        public const string VV_ManaFluxRuleLabel_WeatherSnowy = nameof(VV_ManaFluxRuleLabel_WeatherSnowy);
+        public const string VV_ManaFluxRuleLabel_Wind = nameof(VV_ManaFluxRuleLabel_Wind);
     }
 }

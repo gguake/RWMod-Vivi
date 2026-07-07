@@ -20,9 +20,21 @@ namespace VVRace
         }
     }
 
-    public class CompManaFilthMaker : ThingComp
+    public class CompManaFilthMaker : ThingComp, IArcanePlantFunctionProvider
     {
         public CompProperties_ManaFilthMaker Props => (CompProperties_ManaFilthMaker)props;
+
+        public IEnumerable<string> GetFunctionDescriptions()
+        {
+            var countString = Props.makeAmountPerDays.min == Props.makeAmountPerDays.max ?
+                Props.makeAmountPerDays.min.ToString("0.#") :
+                $"{Props.makeAmountPerDays.min:0.#}~{Props.makeAmountPerDays.max:0.#}";
+
+            yield return LocalizeString_PlantFunction.VV_PlantFunction_FilthMaker.Translate(
+                Props.filthDef.label,
+                Props.radius.ToString("0.#"),
+                countString);
+        }
 
         public CompMana ManaComp
         {

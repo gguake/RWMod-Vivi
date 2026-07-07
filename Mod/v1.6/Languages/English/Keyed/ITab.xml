@@ -3,4 +3,31 @@
 <VV_ITab_GatherWorkerTable_TabLabel>Gathering</VV_ITab_GatherWorkerTable_TabLabel>
 <VV_ITab_GatherWorkerTable_GatherRadiusSlider>Change Gathering Work Radius</VV_ITab_GatherWorkerTable_GatherRadiusSlider>
 
+<VV_ITab_ArcanePlant_TabLabel>Arcane plant</VV_ITab_ArcanePlant_TabLabel>
+<VV_ITab_ArcanePlant_SectionFunction>Unique functions</VV_ITab_ArcanePlant_SectionFunction>
+<VV_ITab_ArcanePlant_SectionMana>Mana</VV_ITab_ArcanePlant_SectionMana>
+<VV_ITab_ArcanePlant_SectionSynergy>Provided synergies (when adjacent)</VV_ITab_ArcanePlant_SectionSynergy>
+<VV_ITab_ArcanePlant_SectionAppliedOverrides>Active bullet enhancements</VV_ITab_ArcanePlant_SectionAppliedOverrides>
+<VV_ITab_ArcanePlant_SectionWeapon>Equipped weapon</VV_ITab_ArcanePlant_SectionWeapon>
+
+<VV_ITab_ArcanePlant_ManaStored>Stored mana</VV_ITab_ArcanePlant_ManaStored>
+<VV_ITab_ArcanePlant_ManaState>Mana state</VV_ITab_ArcanePlant_ManaState>
+<VV_ITab_ArcanePlant_ManaGenerate>Mana generation</VV_ITab_ArcanePlant_ManaGenerate>
+<VV_ITab_ArcanePlant_ManaConsume>Mana consumption</VV_ITab_ArcanePlant_ManaConsume>
+<VV_ITab_ArcanePlant_ManaGenerateDamaged>Mana generation is reduced to {0} due to damage.</VV_ITab_ArcanePlant_ManaGenerateDamaged>
+<VV_ITab_ArcanePlant_ManaAbsorbLimit>Environment mana absorption (max)</VV_ITab_ArcanePlant_ManaAbsorbLimit>
+<VV_ITab_ArcanePlant_EnvManaOutput>Environment mana output</VV_ITab_ArcanePlant_EnvManaOutput>
+<VV_ITab_ArcanePlant_EnvManaHere>Environment mana at this cell</VV_ITab_ArcanePlant_EnvManaHere>
+<VV_ITab_ArcanePlant_PerDay>{0}/day</VV_ITab_ArcanePlant_PerDay>
+
+<VV_ITab_ArcanePlant_SynergyReplace>When an adjacent {0} attacks, it has a {1} chance to fire {2} instead.</VV_ITab_ArcanePlant_SynergyReplace>
+<VV_ITab_ArcanePlant_SynergyModify>Enhances bullets of an adjacent {0}: {1}</VV_ITab_ArcanePlant_SynergyModify>
+<VV_ITab_ArcanePlant_AppliedReplace>{0}: {1} chance to fire {2} instead.</VV_ITab_ArcanePlant_AppliedReplace>
+<VV_ITab_ArcanePlant_AppliedModify>{0}: bullet enhancement ({1})</VV_ITab_ArcanePlant_AppliedModify>
+<VV_ITab_ArcanePlant_BulletDamageBonus>damage {0}</VV_ITab_ArcanePlant_BulletDamageBonus>
+<VV_ITab_ArcanePlant_BulletArmorPenetrationBonus>armor penetration {0}</VV_ITab_ArcanePlant_BulletArmorPenetrationBonus>
+
+<VV_ITab_ArcanePlant_WeaponNone>No weapon equipped.</VV_ITab_ArcanePlant_WeaponNone>
+<VV_ITab_ArcanePlant_WeaponReserved>Waiting for delivery: {0}</VV_ITab_ArcanePlant_WeaponReserved>
+
 </LanguageData>

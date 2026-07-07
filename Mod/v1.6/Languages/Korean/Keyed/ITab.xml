@@ -3,4 +3,31 @@
 <VV_ITab_GatherWorkerTable_TabLabel>채집</VV_ITab_GatherWorkerTable_TabLabel>
 <VV_ITab_GatherWorkerTable_GatherRadiusSlider>채집 작업 범위 변경</VV_ITab_GatherWorkerTable_GatherRadiusSlider>
 
+<VV_ITab_ArcanePlant_TabLabel>마법 식물</VV_ITab_ArcanePlant_TabLabel>
+<VV_ITab_ArcanePlant_SectionFunction>고유 기능</VV_ITab_ArcanePlant_SectionFunction>
+<VV_ITab_ArcanePlant_SectionMana>마나</VV_ITab_ArcanePlant_SectionMana>
+<VV_ITab_ArcanePlant_SectionSynergy>인접 배치 보너스</VV_ITab_ArcanePlant_SectionSynergy>
+<VV_ITab_ArcanePlant_SectionAppliedOverrides>적용중인 탄환 강화</VV_ITab_ArcanePlant_SectionAppliedOverrides>
+<VV_ITab_ArcanePlant_SectionWeapon>장착된 무기</VV_ITab_ArcanePlant_SectionWeapon>
+
+<VV_ITab_ArcanePlant_ManaStored>저장된 마나</VV_ITab_ArcanePlant_ManaStored>
+<VV_ITab_ArcanePlant_ManaState>마나 상태</VV_ITab_ArcanePlant_ManaState>
+<VV_ITab_ArcanePlant_ManaGenerate>마나 생산</VV_ITab_ArcanePlant_ManaGenerate>
+<VV_ITab_ArcanePlant_ManaConsume>마나 소비</VV_ITab_ArcanePlant_ManaConsume>
+<VV_ITab_ArcanePlant_ManaGenerateDamaged>체력 손상으로 인해 마나 생산량이 {0}만 적용되고 있습니다.</VV_ITab_ArcanePlant_ManaGenerateDamaged>
+<VV_ITab_ArcanePlant_ManaAbsorbLimit>환경 마나 흡수</VV_ITab_ArcanePlant_ManaAbsorbLimit>
+<VV_ITab_ArcanePlant_EnvManaOutput>환경 마나 출력</VV_ITab_ArcanePlant_EnvManaOutput>
+<VV_ITab_ArcanePlant_EnvManaHere>환경 마나</VV_ITab_ArcanePlant_EnvManaHere>
+<VV_ITab_ArcanePlant_PerDay>{0}/일</VV_ITab_ArcanePlant_PerDay>
+
+<VV_ITab_ArcanePlant_SynergyReplace>인접한 {0}(이)가 공격할 때 {1} 확률로 {2}(을)를 대신 발사하게 합니다.</VV_ITab_ArcanePlant_SynergyReplace>
+<VV_ITab_ArcanePlant_SynergyModify>인접한 {0}의 탄환을 강화합니다: {1}</VV_ITab_ArcanePlant_SynergyModify>
+<VV_ITab_ArcanePlant_AppliedReplace>{0}: {1} 확률로 {2}(을)를 대신 발사합니다.</VV_ITab_ArcanePlant_AppliedReplace>
+<VV_ITab_ArcanePlant_AppliedModify>{0}: 탄환 강화 ({1})</VV_ITab_ArcanePlant_AppliedModify>
+<VV_ITab_ArcanePlant_BulletDamageBonus>피해량 {0}</VV_ITab_ArcanePlant_BulletDamageBonus>
+<VV_ITab_ArcanePlant_BulletArmorPenetrationBonus>방어구 관통 {0}</VV_ITab_ArcanePlant_BulletArmorPenetrationBonus>
+
+<VV_ITab_ArcanePlant_WeaponNone>장착된 무기가 없습니다.</VV_ITab_ArcanePlant_WeaponNone>
+<VV_ITab_ArcanePlant_WeaponReserved>무기 운반 대기중: {0}</VV_ITab_ArcanePlant_WeaponReserved>
+
 </LanguageData>

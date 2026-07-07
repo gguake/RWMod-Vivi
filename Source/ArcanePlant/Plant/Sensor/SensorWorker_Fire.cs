@@ -6,6 +6,8 @@ namespace VVRace
 {
     public class SensorWorker_Fire : SensorWorker
     {
+        public override string TargetLabel => LocalizeString_PlantFunction.VV_PlantFunction_SensorTargetFire.Translate();
+
         public override bool Detected(Thing parent, float radius)
         {
             var cells = GenRadial.NumCellsInRadius(radius);

@@ -1,8 +1,9 @@
+using System.Collections.Generic;
 using Verse;
 
 namespace VVRace
 {
-    public class CompManaHeatPusher : CompHeatPusher
+    public class CompManaHeatPusher : CompHeatPusher, IArcanePlantFunctionProvider
     {
         public CompMana ManaComp
         {
@@ -26,6 +27,22 @@ namespace VVRace
                 if (!base.ShouldPushHeatNow) { return false; }
 
                 return ManaComp.Active;
+            }
+        }
+
+        public IEnumerable<string> GetFunctionDescriptions()
+        {
+            if (Props.heatPerSecond >= 0f)
+            {
+                yield return LocalizeString_PlantFunction.VV_PlantFunction_HeatPush.Translate(
+                    Props.heatPerSecond.ToString("0.#"),
+                    Props.heatPushMaxTemperature.ToStringTemperature("F0"));
+            }
+            else
+            {
+                yield return LocalizeString_PlantFunction.VV_PlantFunction_HeatAbsorb.Translate(
+                    (-Props.heatPerSecond).ToString("0.#"),
+                    Props.heatPushMinTemperature.ToStringTemperature("F0"));
             }
         }
     }
