@@ -40,7 +40,6 @@
       <BedRestEffectiveness>1</BedRestEffectiveness>
       <ImmunityGainSpeedFactor>1.07</ImmunityGainSpeedFactor>
       <SurgerySuccessChanceFactor>1</SurgerySuccessChanceFactor>
-      <bed_healPerDay>4</bed_healPerDay>
       <BedRestEffectiveness>1</BedRestEffectiveness>
       <Comfort>0.75</Comfort>
     </statBases>
