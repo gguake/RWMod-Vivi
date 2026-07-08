@@ -23,7 +23,7 @@ namespace VVRace
 
                 if (_manaComp == null)
                 {
-                    _manaComp = caster.TryGetComp<CompMana>();
+                    _manaComp = caster?.TryGetComp<CompMana>();
                 }
 
                 return _manaComp;
@@ -36,13 +36,16 @@ namespace VVRace
         {
             get
             {
+                var compMana = ManaComp;
+                if (compMana == null) { return false; }
+
                 if (Bursting)
                 {
-                    return ManaComp.Stored >= EquipmentSource?.GetStatValue(VVStatDefOf.VV_RangedWeapon_ManaCost) / BurstShotCount;
+                    return compMana.Stored >= EquipmentSource?.GetStatValue(VVStatDefOf.VV_RangedWeapon_ManaCost) / BurstShotCount;
                 }
                 else
                 {
-                    return ManaComp.Stored >= EquipmentSource?.GetStatValue(VVStatDefOf.VV_RangedWeapon_ManaCost);
+                    return compMana.Stored >= EquipmentSource?.GetStatValue(VVStatDefOf.VV_RangedWeapon_ManaCost);
                 }
             }
         }

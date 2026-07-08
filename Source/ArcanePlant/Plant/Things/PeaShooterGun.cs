@@ -10,8 +10,7 @@ namespace VVRace
             {
                 if (_turret == null)
                 {
-                    var compEquippable = GetComp<CompEquippable>();
-                    _turret = compEquippable.PrimaryVerb.Caster as ArcanePlant_Turret;
+                    _turret = GetComp<CompEquippable>()?.PrimaryVerb?.Caster as ArcanePlant_Turret;
                 }
 
                 return _turret;
@@ -19,6 +18,6 @@ namespace VVRace
         }
         private ArcanePlant_Turret _turret;
 
-        public override int? OverrideGraphicIndex => Turret.HasAnyBulletOverrides ? 1 : 0;
+        public override int? OverrideGraphicIndex => Turret != null && Turret.HasAnyBulletOverrides ? 1 : 0;
     }
 }
