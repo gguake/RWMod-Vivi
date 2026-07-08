@@ -37,7 +37,7 @@ namespace VVRace
 
             foreach (var pawn in map.mapPawns.AllPawnsSpawned)
             {
-                if (!pawn.IsVivi() || pawn.IsRoyalVivi()) { continue; }
+                if (!pawn.IsVivi() || pawn.IsRoyalVivi() || !pawn.ageTracker.Adult) { continue; }
 
                 var existing = pawn.health.hediffSet.GetFirstHediffOfDef(VVHediffDefOf.VV_EverflowerReverberation);
                 if (existing != null)
