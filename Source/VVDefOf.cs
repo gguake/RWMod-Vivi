@@ -59,7 +59,6 @@ namespace VVRace
         public static JobDef VV_DeliverToEverflower;
 
         public static JobDef VV_CollectPerfumeScent;
-        public static JobDef VV_SprayPerfume;
         public static JobDef VV_ReloadPerfumeBottle;
     }
 

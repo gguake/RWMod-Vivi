@@ -2,8 +2,10 @@
 <Defs>
   <ThingDef ParentName="VV_UtilityApparelBase">
     <defName>VV_PerfumeBottle</defName>
-    <label>perfume bottle</label>
-    <description>A waist-worn bottle used to collect and blend scents from flowers. Once three scents have been recorded, it can scatter enchanted pollen five times before requiring a refill.</description>
+    <label>vivi perfume bottle</label>
+    <description>A waist-worn bottle used to collect and blend the scents of flowers. After collecting scents from flowers or arcane flowers three times, it can create and spray an enchanted fragrance. The completed fragrance can be sprayed six times; once it has all been used, the bottle must be refilled with pollen and blended again.
+\nPollen from arcane flowers grants a unique effect that varies by flower, with denser pollen producing a stronger effect.\nPollen from ordinary flowers has no special effect, but improves mood and amplifies the effects of any arcane flower pollen mixed with it.
+\nThe art of handling fragrances is a longstanding tradition among the Vivis, but because it is a luxury that consumes a great deal of pollen, it has become uncommon in these recent hard times.</description>
     <thingClass>VVRace.Apparel_PerfumeBottle</thingClass>
     <graphicData>
       <texPath>Things/Item/VV_UnfermentedMead</texPath>
@@ -33,14 +35,36 @@
         <maxSprays>6</maxSprays>
         <reloadCost>200</reloadCost>
         <gatherTicks>1500</gatherTicks>
-        <sprayTicks>120</sprayTicks>
         <reloadTicks>500</reloadTicks>
-        <sprayRadius>2.7</sprayRadius>
         <arcaneWeightPerFlower>0.35</arcaneWeightPerFlower>
         <ordinaryFlowerWeightBonus>0.15</ordinaryFlowerWeightBonus>
         <pollenDef>VV_Pollen</pollenDef>
       </li>
+      <li Class="VVRace.CompProperties_PerfumeVerbOwner" />
     </comps>
+
+    <verbs>
+      <li Class="VVRace.VerbProperties_SprayPerfume">
+        <label>scatter perfume</label>
+        <violent>false</violent>
+        <range>2.7</range>
+        <warmupTime>2</warmupTime>
+        <defaultCooldownTime>0</defaultCooldownTime>
+        <hasStandardCommand>true</hasStandardCommand>
+        <targetable>false</targetable>
+        <nonInterruptingSelfCast>true</nonInterruptingSelfCast>
+        <onlyManualCast>true</onlyManualCast>
+        <requireLineOfSight>false</requireLineOfSight>
+        <ai_IsWeapon>false</ai_IsWeapon>
+        <targetParams>
+          <canTargetSelf>true</canTargetSelf>
+          <canTargetLocations>false</canTargetLocations>
+          <canTargetPawns>false</canTargetPawns>
+          <canTargetBuildings>false</canTargetBuildings>
+        </targetParams>
+        <commandIcon>Things/Mote/VV_PollenPuff</commandIcon>
+      </li>
+    </verbs>
 
     <recipeMaker>
       <recipeUsers>

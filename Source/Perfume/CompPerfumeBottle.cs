@@ -15,9 +15,7 @@ namespace VVRace
         public int maxSprays = 6;
         public int reloadCost = 200;
         public int gatherTicks = 1500;
-        public int sprayTicks = 120;
         public int reloadTicks = 300;
-        public float sprayRadius = 2.7f;
         public float arcaneWeightPerFlower = 0.35f;
         public float ordinaryFlowerWeightBonus = 0.15f;
         public ThingDef pollenDef;
@@ -32,7 +30,6 @@ namespace VVRace
     public class CompPerfumeBottle : ThingComp, IReloadableComp
     {
         private static readonly Texture2D CollectIcon = ContentFinder<Texture2D>.Get("Things/Mote/VV_GatherHoney");
-        private static readonly Texture2D SprayIcon = ContentFinder<Texture2D>.Get("Things/Mote/VV_PollenPuff");
         private static readonly Texture2D ReloadIcon = ContentFinder<Texture2D>.Get("Things/Item/VV_ViviDust");
 
         private List<ThingDef> ingredients = new List<ThingDef>();
@@ -131,20 +128,14 @@ namespace VVRace
                 yield break;
             }
 
+            if (Find.Selector.SelectedPawns.Count > 1)
+            {
+                yield break;
+            }
+
             if (CanCollect)
             {
                 yield return MakeCollectCommand(wearer);
-            }
-
-            if (IsComplete)
-            {
-                yield return new Command_Action
-                {
-                    defaultLabel = LocalizeString_Perfume.VV_Command_SprayPerfume.Translate(),
-                    defaultDesc = LocalizeString_Perfume.VV_Command_SprayPerfumeDesc.Translate(Props.sprayRadius, spraysRemaining),
-                    icon = SprayIcon,
-                    action = () => StartSprayJob(wearer)
-                };
             }
 
             if (NeedsRecharge)
@@ -218,7 +209,7 @@ namespace VVRace
             return true;
         }
 
-        public bool TrySpray(Pawn sprayer)
+        public bool TrySpray(Pawn sprayer, float radius)
         {
             if (!IsComplete || sprayer == null || WearingPawn != sprayer || !sprayer.Spawned)
             {
@@ -226,7 +217,7 @@ namespace VVRace
             }
 
             var blend = ingredients.ToList();
-            foreach (var target in GenRadial.RadialDistinctThingsAround(sprayer.Position, sprayer.Map, Props.sprayRadius, true).OfType<Pawn>())
+            foreach (var target in GenRadial.RadialDistinctThingsAround(sprayer.Position, sprayer.Map, radius, true).OfType<Pawn>())
             {
                 if (target.RaceProps?.IsFlesh != true || target.health == null)
                 {
@@ -288,7 +279,7 @@ namespace VVRace
             {
                 text += "\n\n" + LocalizeString_Perfume.VV_Perfume_BlendHeader.Translate(
                     PerfumeUtility.GetBlendName(ingredients, Props.arcaneWeightPerFlower, Props.ordinaryFlowerWeightBonus));
-                text += "\n" + PerfumeUtility.GetEffectDescription(
+                text += "\n\n" + PerfumeUtility.GetEffectDescription(
                     ingredients,
                     Props.arcaneWeightPerFlower,
                     Props.ordinaryFlowerWeightBonus);
@@ -333,14 +324,6 @@ namespace VVRace
                     }
                 }
             };
-        }
-
-        private void StartSprayJob(Pawn wearer)
-        {
-            if (IsComplete && WearingPawn == wearer)
-            {
-                wearer.jobs.TryTakeOrderedJob(JobMaker.MakeJob(VVJobDefOf.VV_SprayPerfume, parent));
-            }
         }
 
         private void StartReloadJob(Pawn wearer)

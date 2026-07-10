@@ -1,11 +1,15 @@
-﻿using UnityEngine;
+using UnityEngine;
 using Verse;
 
 namespace VVRace
 {
     public class PerfumeGizmo : Gizmo
     {
-        private const float Width = 180f;
+        private const float Width = 140f;
+        private const float HeaderHeight = 32f;
+        private const float SlotSize = 27f;
+        private const float SlotGap = 4f;
+        private const int LayoutHash = 126793481;
         private static readonly Color SlotColor = new Color(0.16f, 0.13f, 0.18f, 0.9f);
         private readonly CompPerfumeBottle comp;
 
@@ -27,22 +31,32 @@ namespace VVRace
             var outerRect = new Rect(topLeft.x, topLeft.y, GetWidth(maxWidth), Height);
             Widgets.DrawWindowBackground(outerRect);
 
-            var innerRect = outerRect.ContractedBy(6f);
-            using (new TextBlock(GameFont.Tiny, TextAnchor.UpperLeft))
+            var layout = new RectDivider(
+                outerRect.ContractedBy(6f),
+                LayoutHash,
+                margin: new Vector2(SlotGap, SlotGap));
+            var header = layout.NewRow(HeaderHeight);
+            var statusRect = header.Rect;
+            using (new TextBlock(GameFont.Small, TextAnchor.UpperLeft))
             {
-                Widgets.LabelEllipses(new Rect(innerRect.x, innerRect.y, innerRect.width, 18f), comp.parent.LabelCap);
-                Widgets.LabelEllipses(new Rect(innerRect.x, innerRect.y + 17f, innerRect.width, 18f), comp.GetStatusText());
+                Widgets.LabelEllipses(statusRect, comp.GetStatusText());
             }
 
-            const float slotSize = 27f;
-            const float slotGap = 4f;
-            var totalWidth = comp.Props.maxIngredients * slotSize + (comp.Props.maxIngredients - 1) * slotGap;
-            var slotX = innerRect.x + (innerRect.width - totalWidth) / 2f;
-            var slotY = innerRect.y + 37f;
+            var slotRow = layout.NewRow(SlotSize, marginOverride: 0f);
+            var totalWidth = comp.Props.maxIngredients * SlotSize + (comp.Props.maxIngredients - 1) * SlotGap;
+            var centeredSlots = slotRow;
+            centeredSlots.NewCol((slotRow.Rect.width - totalWidth) / 2f, marginOverride: 0f);
+            var slots = centeredSlots.NewCol(totalWidth, marginOverride: 0f);
+            var slotLayout = new RectDivider(
+                slots.Rect,
+                LayoutHash ^ 7919,
+                margin: new Vector2(SlotGap, 0f));
 
             for (var index = 0; index < comp.Props.maxIngredients; index++)
             {
-                var slotRect = new Rect(slotX + index * (slotSize + slotGap), slotY, slotSize, slotSize);
+                var slotRect = slotLayout.NewCol(
+                    SlotSize,
+                    marginOverride: index == comp.Props.maxIngredients - 1 ? 0f : SlotGap).Rect;
                 Widgets.DrawBoxSolid(slotRect, SlotColor);
                 Widgets.DrawBox(slotRect);
 

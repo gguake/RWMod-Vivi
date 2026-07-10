@@ -1,4 +1,4 @@
-﻿using RimWorld;
+using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -191,7 +191,7 @@ namespace VVRace
                 return LocalizeString_Perfume.VV_Perfume_NoArcaneEffect.Translate().Resolve();
             }
 
-            return string.Join("\n", descriptions.Select(description => "• " + description));
+            return string.Join("\n", descriptions.Select(description => "- " + description));
         }
 
         private static List<BlendEntry> MakeBlendEntries(

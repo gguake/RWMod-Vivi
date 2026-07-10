@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using Verse;
 
@@ -48,7 +48,7 @@ namespace VVRace
                 return base.Description + "\n\n" +
                     LocalizeString_Perfume.VV_Perfume_BlendHeader.Translate(
                         PerfumeUtility.GetBlendName(ingredients, arcaneWeightPerFlower, ordinaryFlowerWeightBonus)) +
-                    "\n" +
+                    "\n\n" +
                     PerfumeUtility.GetEffectDescription(ingredients, arcaneWeightPerFlower, ordinaryFlowerWeightBonus);
             }
         }

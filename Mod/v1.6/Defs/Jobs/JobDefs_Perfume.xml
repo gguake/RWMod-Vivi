@@ -9,14 +9,6 @@
   </JobDef>
 
   <JobDef>
-    <defName>VV_SprayPerfume</defName>
-    <driverClass>VVRace.JobDriver_SprayPerfume</driverClass>
-    <reportString>scattering perfume powder.</reportString>
-    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
-    <ifFlyingKeepFlying>true</ifFlyingKeepFlying>
-  </JobDef>
-
-  <JobDef>
     <defName>VV_ReloadPerfumeBottle</defName>
     <driverClass>VVRace.JobDriver_ReloadPerfumeBottle</driverClass>
     <reportString>refilling TargetA.</reportString>

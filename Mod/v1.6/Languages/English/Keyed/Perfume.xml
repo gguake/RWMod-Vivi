@@ -6,9 +6,9 @@
   <VV_Command_SprayPerfumeDesc>Scatter perfume powder over all near flesh creatures. {1} uses remain.</VV_Command_SprayPerfumeDesc>
   <VV_Command_ReloadPerfumeBottle>Refill perfume bottle</VV_Command_ReloadPerfumeBottle>
   <VV_Command_ReloadPerfumeBottleDesc>Spend {0} {1} to prepare the empty bottle for another blend.</VV_Command_ReloadPerfumeBottleDesc>
-  <VV_Perfume_StatusIngredients>Recorded scents: {0}/{1}</VV_Perfume_StatusIngredients>
+  <VV_Perfume_StatusIngredients>Collected flower: {0}/{1}</VV_Perfume_StatusIngredients>
   <VV_Perfume_StatusSprays>Perfume powder: {0}/{1}</VV_Perfume_StatusSprays>
-  <VV_Perfume_StatusNeedsReload>Requires {0} {1} before collecting scents.</VV_Perfume_StatusNeedsReload>
+  <VV_Perfume_StatusNeedsReload>Requires {1}x{0}</VV_Perfume_StatusNeedsReload>
   <VV_Perfume_StatusReloading>Pollen loaded: {0}/{1}</VV_Perfume_StatusReloading>
   <VV_Perfume_BlendHeader>Blend: {0}</VV_Perfume_BlendHeader>
   <VV_Perfume_NoArcaneEffect>Ordinary flowers add a pleasant fragrance but no arcane effect.</VV_Perfume_NoArcaneEffect>

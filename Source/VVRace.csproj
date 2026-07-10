@@ -89,10 +89,10 @@
     <Compile Include="Perfume\Hediff_ArcanePerfume.cs" />
     <Compile Include="Perfume\JobDriver_CollectPerfumeScent.cs" />
     <Compile Include="Perfume\JobDriver_ReloadPerfumeBottle.cs" />
-    <Compile Include="Perfume\JobDriver_SprayPerfume.cs" />
     <Compile Include="Perfume\PerfumeExtensions.cs" />
     <Compile Include="Perfume\PerfumeGizmo.cs" />
     <Compile Include="Perfume\PerfumeUtility.cs" />
+    <Compile Include="Perfume\Verb_SprayPerfume.cs" />
     <Compile Include="Localize\LocalizeString_Perfume.cs" />
     <Compile Include="Fairy\Abilities\CompAbilityEffect_FairyConcentration.cs" />
     <Compile Include="Fairy\Abilities\CompAbilityEffect_FairyExpansion.cs" />

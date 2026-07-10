@@ -53,5 +53,8 @@
 <VV_MultiuseBrushTool.description>꽃가루를 청소하거나 식물에서 재료를 정밀하게 채집할때 사용할 수 있는 커다란 붓입니다. 거친 표면을 다듬을때에도 큰 도움이 되며 인간들도 사용할 수 있습니다.</VV_MultiuseBrushTool.description>
 
 <VV_PerfumeBottle.label>비비 조향병</VV_PerfumeBottle.label>
-<VV_PerfumeBottle.description>꽃의 향을 채집하고 조합하기 위해 허리에 차는 병입니다. 향 세 가지를 기록하면 마법의 향가루를 다섯 번 뿌릴 수 있으며, 모두 사용한 뒤에는 다시 충전해야 합니다.</VV_PerfumeBottle.description>
+<VV_PerfumeBottle.description>꽃의 향을 채집하고 조합하기 위해 허리에 차는 병입니다. 꽃이나 마법 꽃에 세 번 향을 채집하면 마법의 향을 만들어 뿌릴 수 있습니다. 만들어진 향은 여섯 번 뿌릴 수 있으며 모두 사용한 뒤에는 꽃가루를 다시 충전하고 조향을 다시 진행해야 합니다.
+\n마법 꽃의 향가루는 꽃마다 고유한 효과를 부여하며 짙을수록 더 강한 효과를 발현합니다.\n일반 꽃의 향가루는 특별한 효과는 없지만 기분을 좋게 만들며 섞여있는 마법 꽃 향가루의 효과를 강화합니다.
+\n향을 다루는 기술은 비비들에게 오랜 전통을 가진 기술이지만 많은 꽃가루를 소비하는 사치품이기에 형편이 어려운 최근에는 보기 드뭅니다.</VV_PerfumeBottle.description>
+<VV_PerfumeBottle.verbs.scatter_perfume.label>향 뿌리기</VV_PerfumeBottle.verbs.scatter_perfume.label>
 </LanguageData>
