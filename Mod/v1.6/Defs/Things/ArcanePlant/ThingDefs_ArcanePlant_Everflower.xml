@@ -219,15 +219,13 @@
         <effects>
           <li>
             <minWeight>0</minWeight>
-            <statOffsets><PsychicSensitivity>0.4</PsychicSensitivity></statOffsets>
+            <statOffsets>
+              <PsychicSensitivity>0.5</PsychicSensitivity>
+            </statOffsets>
           </li>
           <li>
             <minWeight>0.7</minWeight>
-            <statFactors><GlobalLearningFactor>1.25</GlobalLearningFactor></statFactors>
-          </li>
-          <li>
-            <minWeight>1</minWeight>
-            <statFactors><IncomingDamageFactor>0.9</IncomingDamageFactor></statFactors>
+            <statOffsets><MoveSpeed>1.2</MoveSpeed></statOffsets>
           </li>
         </effects>
       </li>

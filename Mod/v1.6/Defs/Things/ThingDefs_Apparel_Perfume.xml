@@ -30,11 +30,11 @@
     <comps>
       <li Class="VVRace.CompProperties_PerfumeBottle">
         <maxIngredients>3</maxIngredients>
-        <maxSprays>5</maxSprays>
+        <maxSprays>6</maxSprays>
         <reloadCost>200</reloadCost>
         <gatherTicks>1500</gatherTicks>
         <sprayTicks>120</sprayTicks>
-        <reloadTicks>300</reloadTicks>
+        <reloadTicks>500</reloadTicks>
         <sprayRadius>2.7</sprayRadius>
         <arcaneWeightPerFlower>0.35</arcaneWeightPerFlower>
         <ordinaryFlowerWeightBonus>0.15</ordinaryFlowerWeightBonus>

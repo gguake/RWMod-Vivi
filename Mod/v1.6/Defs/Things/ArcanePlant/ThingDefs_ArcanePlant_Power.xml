@@ -101,11 +101,16 @@
         <effects>
           <li>
             <minWeight>0</minWeight>
-            <statOffsets><MeleeDodgeChance>0.08</MeleeDodgeChance></statOffsets>
+            <statOffsets>
+              <MeleeDodgeChance>10</MeleeDodgeChance>
+              <MeleeHitChance>4</MeleeHitChance>
+            </statOffsets>
           </li>
           <li>
             <minWeight>0.7</minWeight>
-            <statOffsets><MoveSpeed>0.4</MoveSpeed></statOffsets>
+            <statFactors>
+              <MeleeDamageFactor>1.25</MeleeDamageFactor>
+            </statFactors>
           </li>
         </effects>
       </li>
@@ -204,11 +209,16 @@
         <effects>
           <li>
             <minWeight>0</minWeight>
-            <statOffsets><WorkSpeedGlobal>0.15</WorkSpeedGlobal></statOffsets>
+            <statOffsets>
+              <ShootingAccuracyPawn>8</ShootingAccuracyPawn>
+              <RangedCooldownFactor>-0.1</RangedCooldownFactor>
+            </statOffsets>
           </li>
           <li>
             <minWeight>0.7</minWeight>
-            <statFactors><GlobalLearningFactor>1.15</GlobalLearningFactor></statFactors>
+            <statOffsets>
+              <AimingDelayFactor>-0.25</AimingDelayFactor>
+            </statOffsets>
           </li>
         </effects>
       </li>

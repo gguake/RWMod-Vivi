@@ -93,7 +93,7 @@
           </li>
           <li>
             <minWeight>0.7</minWeight>
-            <statOffsets><ImmunityGainSpeed>0.15</ImmunityGainSpeed></statOffsets>
+            <statOffsets><ImmunityGainSpeed>0.2</ImmunityGainSpeed></statOffsets>
           </li>
         </effects>
       </li>

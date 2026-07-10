@@ -1,4 +1,4 @@
-﻿using RimWorld;
+using RimWorld;
 using RimWorld.Utility;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +12,7 @@ namespace VVRace
     public class CompProperties_PerfumeBottle : CompProperties
     {
         public int maxIngredients = 3;
-        public int maxSprays = 5;
+        public int maxSprays = 6;
         public int reloadCost = 200;
         public int gatherTicks = 1500;
         public int sprayTicks = 120;

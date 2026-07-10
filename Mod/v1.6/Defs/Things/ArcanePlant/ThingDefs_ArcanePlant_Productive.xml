@@ -124,11 +124,11 @@
         <effects>
           <li>
             <minWeight>0</minWeight>
-            <statOffsets><ImmunityGainSpeed>0.25</ImmunityGainSpeed></statOffsets>
+            <statOffsets><ToxicResistance>1.0</ToxicResistance></statOffsets>
           </li>
           <li>
             <minWeight>0.7</minWeight>
-            <statFactors><RestFallRateFactor>0.85</RestFallRateFactor></statFactors>
+            <statFactors><Flammability>0</Flammability></statFactors>
           </li>
         </effects>
       </li>
@@ -222,11 +222,11 @@
         <effects>
           <li>
             <minWeight>0</minWeight>
-            <statFactors><GlobalLearningFactor>1.2</GlobalLearningFactor></statFactors>
+            <statOffsets><MentalBreakThreshold>-0.1</MentalBreakThreshold></statOffsets>
           </li>
           <li>
             <minWeight>0.7</minWeight>
-            <statOffsets><PsychicSensitivity>0.2</PsychicSensitivity></statOffsets>
+            <statFactors><InjuryHealingFactor>1.5</InjuryHealingFactor></statFactors>
           </li>
         </effects>
       </li>
@@ -349,11 +349,17 @@
         <effects>
           <li>
             <minWeight>0</minWeight>
-            <statOffsets><WorkSpeedGlobal>0.2</WorkSpeedGlobal></statOffsets>
+            <statOffsets><WorkSpeedGlobal>0.15</WorkSpeedGlobal></statOffsets>
           </li>
           <li>
             <minWeight>0.7</minWeight>
-            <statFactors><PlantWorkSpeed>1.25</PlantWorkSpeed></statFactors>
+            <statFactors>
+              <MiningYield>1.15</MiningYield>
+              <AnimalGatherYield>1.15</AnimalGatherYield>
+              <PlantHarvestYield>1.15</PlantHarvestYield>
+              <VV_HoneyGatherYield>1.15</VV_HoneyGatherYield>
+              <VV_PlantGatherYield>1.15</VV_PlantGatherYield>
+            </statFactors>
           </li>
         </effects>
       </li>
@@ -471,24 +477,6 @@
           </points>
         </leavingSeedCountCurve>
       </li>
-      <li Class="VVRace.ArcaneFlowerPerfumeExtension">
-        <effectDescriptionKey>VV_PerfumeEffect_Purifimint</effectDescriptionKey>
-        <names>
-          <li><minWeight>0</minWeight><labelKey>VV_PerfumeName_Purifimint_1</labelKey></li>
-          <li><minWeight>0.7</minWeight><labelKey>VV_PerfumeName_Purifimint_2</labelKey></li>
-          <li><minWeight>1</minWeight><labelKey>VV_PerfumeName_Purifimint_3</labelKey></li>
-        </names>
-        <effects>
-          <li>
-            <minWeight>0</minWeight>
-            <statOffsets><ToxicEnvironmentResistance>0.5</ToxicEnvironmentResistance></statOffsets>
-          </li>
-          <li>
-            <minWeight>0.7</minWeight>
-            <statOffsets><ToxicResistance>0.25</ToxicResistance></statOffsets>
-          </li>
-        </effects>
-      </li>
     </modExtensions>
   </ThingDef>
   
@@ -581,11 +569,14 @@
         <effects>
           <li>
             <minWeight>0</minWeight>
-            <statOffsets><PsychicSensitivity>0.25</PsychicSensitivity></statOffsets>
+            <statOffsets>
+              <PainShockThreshold>0.1</PainShockThreshold>
+              <VacuumResistance MayRequire="Ludeon.RimWorld.Odyssey">1</VacuumResistance>
+            </statOffsets>
           </li>
           <li>
             <minWeight>0.7</minWeight>
-            <statFactors><RestFallRateFactor>0.85</RestFallRateFactor></statFactors>
+            <statOffsets><GlobalLearningFactor>0.5</GlobalLearningFactor></statOffsets>
           </li>
         </effects>
       </li>
