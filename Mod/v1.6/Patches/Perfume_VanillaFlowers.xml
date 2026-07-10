@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+  <Operation Class="PatchOperationSequence">
+    <operations>
+      <li Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Plant_Rose"]/modExtensions</xpath>
+        <nomatch Class="PatchOperationAdd">
+          <xpath>Defs/ThingDef[defName="Plant_Rose"]</xpath>
+          <value><modExtensions /></value>
+        </nomatch>
+      </li>
+      <li Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Plant_Rose"]/modExtensions</xpath>
+        <value><li Class="VVRace.FlowerPerfumeExtension" /></value>
+      </li>
+
+      <li Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Plant_Daylily"]/modExtensions</xpath>
+        <nomatch Class="PatchOperationAdd">
+          <xpath>Defs/ThingDef[defName="Plant_Daylily"]</xpath>
+          <value><modExtensions /></value>
+        </nomatch>
+      </li>
+      <li Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Plant_Daylily"]/modExtensions</xpath>
+        <value><li Class="VVRace.FlowerPerfumeExtension" /></value>
+      </li>
+
+      <li Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Plant_Dandelion"]/modExtensions</xpath>
+        <nomatch Class="PatchOperationAdd">
+          <xpath>Defs/ThingDef[defName="Plant_Dandelion"]</xpath>
+          <value><modExtensions /></value>
+        </nomatch>
+      </li>
+      <li Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Plant_Dandelion"]/modExtensions</xpath>
+        <value><li Class="VVRace.FlowerPerfumeExtension" /></value>
+      </li>
+
+      <li Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Plant_Astragalus"]/modExtensions</xpath>
+        <nomatch Class="PatchOperationAdd">
+          <xpath>Defs/ThingDef[defName="Plant_Astragalus"]</xpath>
+          <value><modExtensions /></value>
+        </nomatch>
+      </li>
+      <li Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Plant_Astragalus"]/modExtensions</xpath>
+        <value><li Class="VVRace.FlowerPerfumeExtension" /></value>
+      </li>
+
+      <li Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Plant_Clivia"]/modExtensions</xpath>
+        <nomatch Class="PatchOperationAdd">
+          <xpath>Defs/ThingDef[defName="Plant_Clivia"]</xpath>
+          <value><modExtensions /></value>
+        </nomatch>
+      </li>
+      <li Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Plant_Clivia"]/modExtensions</xpath>
+        <value><li Class="VVRace.FlowerPerfumeExtension" /></value>
+      </li>
+    </operations>
+  </Operation>
+</Patch>

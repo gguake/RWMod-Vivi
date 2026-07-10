@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <VV_NamerPerfumeBottle.rulePack.rulesStrings.0>r_perfume_empty->빈 [bottle_label]</VV_NamerPerfumeBottle.rulePack.rulesStrings.0>
+  <VV_NamerPerfumeBottle.rulePack.rulesStrings.1>r_perfume_blending->조합 중인 [bottle_label]</VV_NamerPerfumeBottle.rulePack.rulesStrings.1>
+  <VV_NamerPerfumeBottle.rulePack.rulesStrings.2>r_perfume_complete->'[blend_name]' [bottle_label]</VV_NamerPerfumeBottle.rulePack.rulesStrings.2>
+  <VV_NamerPerfumeBottle.rulePack.rulesStrings.3>r_perfume_blend_1->[perfume_primary]의 여운</VV_NamerPerfumeBottle.rulePack.rulesStrings.3>
+  <VV_NamerPerfumeBottle.rulePack.rulesStrings.4>r_perfume_blend_1->[perfume_primary]의 속삭임</VV_NamerPerfumeBottle.rulePack.rulesStrings.4>
+  <VV_NamerPerfumeBottle.rulePack.rulesStrings.5>r_perfume_blend_1->[perfume_primary]의 몽상</VV_NamerPerfumeBottle.rulePack.rulesStrings.5>
+  <VV_NamerPerfumeBottle.rulePack.rulesStrings.6>r_perfume_blend_2->[perfume_primary](와)과 [perfume_secondary]의 조화</VV_NamerPerfumeBottle.rulePack.rulesStrings.6>
+  <VV_NamerPerfumeBottle.rulePack.rulesStrings.7>r_perfume_blend_2->[perfume_secondary]에 스민 [perfume_primary]</VV_NamerPerfumeBottle.rulePack.rulesStrings.7>
+  <VV_NamerPerfumeBottle.rulePack.rulesStrings.8>r_perfume_blend_2->[perfume_primary](와)과 [perfume_secondary]의 선율</VV_NamerPerfumeBottle.rulePack.rulesStrings.8>
+  <VV_NamerPerfumeBottle.rulePack.rulesStrings.9>r_perfume_blend_3->[perfume_primary], [perfume_secondary](와)과 [perfume_tertiary]의 향연</VV_NamerPerfumeBottle.rulePack.rulesStrings.9>
+  <VV_NamerPerfumeBottle.rulePack.rulesStrings.10>r_perfume_blend_3->[perfume_primary], [perfume_secondary](와)과 [perfume_tertiary]의 합일</VV_NamerPerfumeBottle.rulePack.rulesStrings.10>
+  <VV_NamerPerfumeBottle.rulePack.rulesStrings.11>r_perfume_blend_3->[perfume_tertiary] 위로 번지는 [perfume_primary](와)과 [perfume_secondary]</VV_NamerPerfumeBottle.rulePack.rulesStrings.11>
+</LanguageData>

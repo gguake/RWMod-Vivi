@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <ThingDef ParentName="VV_UtilityApparelBase">
+    <defName>VV_PerfumeBottle</defName>
+    <label>perfume bottle</label>
+    <description>A waist-worn bottle used to collect and blend scents from flowers. Once three scents have been recorded, it can scatter enchanted pollen five times before requiring a refill.</description>
+    <thingClass>VVRace.Apparel_PerfumeBottle</thingClass>
+    <graphicData>
+      <texPath>Things/Item/VV_UnfermentedMead</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <WorkToMake>1800</WorkToMake>
+      <Mass>0.5</Mass>
+      <Flammability>0.4</Flammability>
+      <EquipDelay>0.5</EquipDelay>
+    </statBases>
+
+    <costStuffCount>25</costStuffCount>
+    <costList>
+      <VV_Pollen>200</VV_Pollen>
+    </costList>
+    <stuffCategories>
+      <li>VV_Wax</li>
+      <li>Woody</li>
+    </stuffCategories>
+
+    <comps>
+      <li Class="VVRace.CompProperties_PerfumeBottle">
+        <maxIngredients>3</maxIngredients>
+        <maxSprays>5</maxSprays>
+        <reloadCost>200</reloadCost>
+        <gatherTicks>1500</gatherTicks>
+        <sprayTicks>120</sprayTicks>
+        <reloadTicks>300</reloadTicks>
+        <sprayRadius>2.7</sprayRadius>
+        <arcaneWeightPerFlower>0.35</arcaneWeightPerFlower>
+        <ordinaryFlowerWeightBonus>0.15</ordinaryFlowerWeightBonus>
+        <pollenDef>VV_Pollen</pollenDef>
+      </li>
+    </comps>
+
+    <recipeMaker>
+      <recipeUsers>
+        <li>CraftingSpot</li>
+        <li>ElectricSmithy</li>
+        <li>FueledSmithy</li>
+      </recipeUsers>
+      <researchPrerequisites>
+        <li>VV_Perfumery</li>
+      </researchPrerequisites>
+      <displayPriority>-502</displayPriority>
+    </recipeMaker>
+  </ThingDef>
+</Defs>

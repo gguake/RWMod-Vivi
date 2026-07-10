@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -84,6 +84,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Perfume\Apparel_PerfumeBottle.cs" />
+    <Compile Include="Perfume\CompPerfumeBottle.cs" />
+    <Compile Include="Perfume\Hediff_ArcanePerfume.cs" />
+    <Compile Include="Perfume\JobDriver_CollectPerfumeScent.cs" />
+    <Compile Include="Perfume\JobDriver_ReloadPerfumeBottle.cs" />
+    <Compile Include="Perfume\JobDriver_SprayPerfume.cs" />
+    <Compile Include="Perfume\PerfumeExtensions.cs" />
+    <Compile Include="Perfume\PerfumeGizmo.cs" />
+    <Compile Include="Perfume\PerfumeUtility.cs" />
+    <Compile Include="Localize\LocalizeString_Perfume.cs" />
     <Compile Include="Fairy\Abilities\CompAbilityEffect_FairyConcentration.cs" />
     <Compile Include="Fairy\Abilities\CompAbilityEffect_FairyExpansion.cs" />
     <Compile Include="Fairy\Abilities\CompAbilityEffect_FairyGuard.cs" />

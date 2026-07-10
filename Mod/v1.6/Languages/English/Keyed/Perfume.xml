@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <VV_Command_CollectScent>Collect scent</VV_Command_CollectScent>
+  <VV_Command_CollectScentDesc>Select a flower to record its scent. {0} slots remain.</VV_Command_CollectScentDesc>
+  <VV_Command_SprayPerfume>Scatter perfume</VV_Command_SprayPerfume>
+  <VV_Command_SprayPerfumeDesc>Scatter perfume powder over all flesh creatures within {0} tiles. {1} uses remain.</VV_Command_SprayPerfumeDesc>
+  <VV_Command_ReloadPerfumeBottle>Refill perfume bottle</VV_Command_ReloadPerfumeBottle>
+  <VV_Command_ReloadPerfumeBottleDesc>Spend {0} {1} to prepare the empty bottle for another blend.</VV_Command_ReloadPerfumeBottleDesc>
+  <VV_Perfume_StatusIngredients>Recorded scents: {0}/{1}</VV_Perfume_StatusIngredients>
+  <VV_Perfume_StatusSprays>Perfume powder: {0}/{1}</VV_Perfume_StatusSprays>
+  <VV_Perfume_StatusNeedsReload>Requires {0} {1} before collecting scents.</VV_Perfume_StatusNeedsReload>
+  <VV_Perfume_StatusReloading>Pollen loaded: {0}/{1}</VV_Perfume_StatusReloading>
+  <VV_Perfume_BlendHeader>Blend: {0}</VV_Perfume_BlendHeader>
+  <VV_Perfume_NoArcaneEffect>Ordinary flowers add a pleasant fragrance but no arcane effect.</VV_Perfume_NoArcaneEffect>
+  <VV_Perfume_CannotCollectState>This perfume bottle cannot collect another scent in its current state.</VV_Perfume_CannotCollectState>
+  <VV_Perfume_MustBeWorn>The perfume bottle must be worn to use it.</VV_Perfume_MustBeWorn>
+  <VV_Perfume_InvalidFlower>This target does not have a scent that the bottle can record.</VV_Perfume_InvalidFlower>
+  <VV_Perfume_FlowerTooYoung>This flower must reach 70% growth before its scent can be collected.</VV_Perfume_FlowerTooYoung>
+  <VV_Perfume_FlowerUnreachable>The flower is forbidden, reserved, or unreachable.</VV_Perfume_FlowerUnreachable>
+  <VV_Perfume_NotEnoughPollen>At least {0} {1} is required.</VV_Perfume_NotEnoughPollen>
+
+  <VV_PerfumeName_EmberBloom_1>ember</VV_PerfumeName_EmberBloom_1>
+  <VV_PerfumeName_EmberBloom_2>flame</VV_PerfumeName_EmberBloom_2>
+  <VV_PerfumeName_EmberBloom_3>inferno</VV_PerfumeName_EmberBloom_3>
+  <VV_PerfumeName_FrostBloom_1>frost</VV_PerfumeName_FrostBloom_1>
+  <VV_PerfumeName_FrostBloom_2>rime</VV_PerfumeName_FrostBloom_2>
+  <VV_PerfumeName_FrostBloom_3>blizzard</VV_PerfumeName_FrostBloom_3>
+  <VV_PerfumeName_Shockerbud_1>flash</VV_PerfumeName_Shockerbud_1>
+  <VV_PerfumeName_Shockerbud_2>shock</VV_PerfumeName_Shockerbud_2>
+  <VV_PerfumeName_Shockerbud_3>voltage</VV_PerfumeName_Shockerbud_3>
+  <VV_PerfumeName_Thunderpetals_1>charge</VV_PerfumeName_Thunderpetals_1>
+  <VV_PerfumeName_Thunderpetals_2>storm</VV_PerfumeName_Thunderpetals_2>
+  <VV_PerfumeName_Thunderpetals_3>thunder</VV_PerfumeName_Thunderpetals_3>
+  <VV_PerfumeName_Waterdrops_1>dew</VV_PerfumeName_Waterdrops_1>
+  <VV_PerfumeName_Waterdrops_2>spring</VV_PerfumeName_Waterdrops_2>
+  <VV_PerfumeName_Waterdrops_3>tide</VV_PerfumeName_Waterdrops_3>
+  <VV_PerfumeName_Radiantflower_1>sunbeam</VV_PerfumeName_Radiantflower_1>
+  <VV_PerfumeName_Radiantflower_2>radiance</VV_PerfumeName_Radiantflower_2>
+  <VV_PerfumeName_Radiantflower_3>dawn</VV_PerfumeName_Radiantflower_3>
+  <VV_PerfumeName_Richflower_1>nectar</VV_PerfumeName_Richflower_1>
+  <VV_PerfumeName_Richflower_2>gold</VV_PerfumeName_Richflower_2>
+  <VV_PerfumeName_Richflower_3>harvest</VV_PerfumeName_Richflower_3>
+  <VV_PerfumeName_Purifimint_1>mint</VV_PerfumeName_Purifimint_1>
+  <VV_PerfumeName_Purifimint_2>breeze</VV_PerfumeName_Purifimint_2>
+  <VV_PerfumeName_Purifimint_3>purity</VV_PerfumeName_Purifimint_3>
+  <VV_PerfumeName_Starlitflower_1>starlight</VV_PerfumeName_Starlitflower_1>
+  <VV_PerfumeName_Starlitflower_2>moonglow</VV_PerfumeName_Starlitflower_2>
+  <VV_PerfumeName_Starlitflower_3>starfall</VV_PerfumeName_Starlitflower_3>
+  <VV_PerfumeName_Skyweed_1>seed</VV_PerfumeName_Skyweed_1>
+  <VV_PerfumeName_Skyweed_2>breeze</VV_PerfumeName_Skyweed_2>
+  <VV_PerfumeName_Skyweed_3>gale</VV_PerfumeName_Skyweed_3>
+  <VV_PerfumeName_Everflower_1>echo</VV_PerfumeName_Everflower_1>
+  <VV_PerfumeName_Everflower_2>aeon</VV_PerfumeName_Everflower_2>
+  <VV_PerfumeName_Everflower_3>eternity</VV_PerfumeName_Everflower_3>
+
+  <VV_PerfumeEffect_EmberBloom>Emberbloom warmth improves cold tolerance; concentrated blends also aid immunity.</VV_PerfumeEffect_EmberBloom>
+  <VV_PerfumeEffect_FrostBloom>Frostbloom coolness improves heat tolerance; concentrated blends slow fatigue.</VV_PerfumeEffect_FrostBloom>
+  <VV_PerfumeEffect_Shockerbud>Flashbud sparks sharpen dodging; concentrated blends quicken movement.</VV_PerfumeEffect_Shockerbud>
+  <VV_PerfumeEffect_Thunderpetals>Thunderpetal energy improves work speed; concentrated blends accelerate learning.</VV_PerfumeEffect_Thunderpetals>
+  <VV_PerfumeEffect_Waterdrops>Waterdrop freshness aids immunity; concentrated blends slow fatigue.</VV_PerfumeEffect_Waterdrops>
+  <VV_PerfumeEffect_Radiantflower>Radiantflower light improves learning; concentrated blends heighten psychic sensitivity.</VV_PerfumeEffect_Radiantflower>
+  <VV_PerfumeEffect_Richflower>Richflower abundance improves work speed; concentrated blends especially aid plant work.</VV_PerfumeEffect_Richflower>
+  <VV_PerfumeEffect_Purifimint>Purifimint freshness resists toxic environments; concentrated blends also resist toxin buildup.</VV_PerfumeEffect_Purifimint>
+  <VV_PerfumeEffect_Starlitflower>Starlitflower fragrance heightens psychic sensitivity; concentrated blends slow fatigue.</VV_PerfumeEffect_Starlitflower>
+  <VV_PerfumeEffect_Skyweed>Skyweed fragrance quickens movement; concentrated blends shorten aiming time.</VV_PerfumeEffect_Skyweed>
+  <VV_PerfumeEffect_Everflower>Everflower resonance heightens psychic sensitivity, then improves learning and protection at high concentrations.</VV_PerfumeEffect_Everflower>
+</LanguageData>

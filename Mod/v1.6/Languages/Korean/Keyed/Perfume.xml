@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <VV_Command_CollectScent>향 채집</VV_Command_CollectScent>
+  <VV_Command_CollectScentDesc>향을 기록할 꽃을 선택합니다. 빈 슬롯이 {0}개 남았습니다.</VV_Command_CollectScentDesc>
+  <VV_Command_SprayPerfume>향 뿌리기</VV_Command_SprayPerfume>
+  <VV_Command_SprayPerfumeDesc>주변 반경 {0}칸 안의 모든 유기체에게 마법의 향가루를 뿌립니다. {1}회 남았습니다.</VV_Command_SprayPerfumeDesc>
+  <VV_Command_ReloadPerfumeBottle>조향병 충전</VV_Command_ReloadPerfumeBottle>
+  <VV_Command_ReloadPerfumeBottleDesc>{1} {0}개를 소모해 빈 병을 다시 조향할 수 있게 준비합니다.</VV_Command_ReloadPerfumeBottleDesc>
+  <VV_Perfume_StatusIngredients>채집한 향: {0}/{1}</VV_Perfume_StatusIngredients>
+  <VV_Perfume_StatusSprays>남은 향가루: {0}/{1}</VV_Perfume_StatusSprays>
+  <VV_Perfume_StatusNeedsReload>향을 채집하려면 {1} {0}개로 충전해야 합니다.</VV_Perfume_StatusNeedsReload>
+  <VV_Perfume_StatusReloading>넣은 꽃가루: {0}/{1}</VV_Perfume_StatusReloading>
+  <VV_Perfume_BlendHeader>조합: {0}</VV_Perfume_BlendHeader>
+  <VV_Perfume_NoArcaneEffect>일반 꽃은 기분 좋은 향기를 더하지만 마법적 효과는 없습니다.</VV_Perfume_NoArcaneEffect>
+  <VV_Perfume_CannotCollectState>현재 상태의 조향병에는 향을 더 채집할 수 없습니다.</VV_Perfume_CannotCollectState>
+  <VV_Perfume_MustBeWorn>조향병을 착용해야 사용할 수 있습니다.</VV_Perfume_MustBeWorn>
+  <VV_Perfume_InvalidFlower>이 대상에서는 조향병에 기록할 향을 채집할 수 없습니다.</VV_Perfume_InvalidFlower>
+  <VV_Perfume_FlowerTooYoung>향을 채집하려면 꽃이 70% 이상 자라야 합니다.</VV_Perfume_FlowerTooYoung>
+  <VV_Perfume_FlowerUnreachable>금지되었거나 예약되었거나 도달할 수 없는 꽃입니다.</VV_Perfume_FlowerUnreachable>
+  <VV_Perfume_NotEnoughPollen>{1}이(가) 최소 {0}개 필요합니다.</VV_Perfume_NotEnoughPollen>
+
+  <VV_PerfumeName_EmberBloom_1>불씨</VV_PerfumeName_EmberBloom_1>
+  <VV_PerfumeName_EmberBloom_2>화염</VV_PerfumeName_EmberBloom_2>
+  <VV_PerfumeName_EmberBloom_3>업화</VV_PerfumeName_EmberBloom_3>
+  <VV_PerfumeName_FrostBloom_1>서리</VV_PerfumeName_FrostBloom_1>
+  <VV_PerfumeName_FrostBloom_2>빙결</VV_PerfumeName_FrostBloom_2>
+  <VV_PerfumeName_FrostBloom_3>혹한</VV_PerfumeName_FrostBloom_3>
+  <VV_PerfumeName_Shockerbud_1>섬광</VV_PerfumeName_Shockerbud_1>
+  <VV_PerfumeName_Shockerbud_2>감전</VV_PerfumeName_Shockerbud_2>
+  <VV_PerfumeName_Shockerbud_3>전격</VV_PerfumeName_Shockerbud_3>
+  <VV_PerfumeName_Thunderpetals_1>전하</VV_PerfumeName_Thunderpetals_1>
+  <VV_PerfumeName_Thunderpetals_2>폭풍</VV_PerfumeName_Thunderpetals_2>
+  <VV_PerfumeName_Thunderpetals_3>천둥</VV_PerfumeName_Thunderpetals_3>
+  <VV_PerfumeName_Waterdrops_1>이슬</VV_PerfumeName_Waterdrops_1>
+  <VV_PerfumeName_Waterdrops_2>샘물</VV_PerfumeName_Waterdrops_2>
+  <VV_PerfumeName_Waterdrops_3>밀물</VV_PerfumeName_Waterdrops_3>
+  <VV_PerfumeName_Radiantflower_1>햇살</VV_PerfumeName_Radiantflower_1>
+  <VV_PerfumeName_Radiantflower_2>광휘</VV_PerfumeName_Radiantflower_2>
+  <VV_PerfumeName_Radiantflower_3>여명</VV_PerfumeName_Radiantflower_3>
+  <VV_PerfumeName_Richflower_1>화밀</VV_PerfumeName_Richflower_1>
+  <VV_PerfumeName_Richflower_2>황금</VV_PerfumeName_Richflower_2>
+  <VV_PerfumeName_Richflower_3>풍년</VV_PerfumeName_Richflower_3>
+  <VV_PerfumeName_Purifimint_1>박하</VV_PerfumeName_Purifimint_1>
+  <VV_PerfumeName_Purifimint_2>청풍</VV_PerfumeName_Purifimint_2>
+  <VV_PerfumeName_Purifimint_3>정화</VV_PerfumeName_Purifimint_3>
+  <VV_PerfumeName_Starlitflower_1>별빛</VV_PerfumeName_Starlitflower_1>
+  <VV_PerfumeName_Starlitflower_2>월광</VV_PerfumeName_Starlitflower_2>
+  <VV_PerfumeName_Starlitflower_3>성야</VV_PerfumeName_Starlitflower_3>
+  <VV_PerfumeName_Skyweed_1>홀씨</VV_PerfumeName_Skyweed_1>
+  <VV_PerfumeName_Skyweed_2>산들</VV_PerfumeName_Skyweed_2>
+  <VV_PerfumeName_Skyweed_3>질풍</VV_PerfumeName_Skyweed_3>
+  <VV_PerfumeName_Everflower_1>공명</VV_PerfumeName_Everflower_1>
+  <VV_PerfumeName_Everflower_2>영겁</VV_PerfumeName_Everflower_2>
+  <VV_PerfumeName_Everflower_3>영원</VV_PerfumeName_Everflower_3>
+
+  <VV_PerfumeEffect_EmberBloom>잔불꽃의 온기가 추위 내성을 높이며, 짙은 조합은 면역력도 돕습니다.</VV_PerfumeEffect_EmberBloom>
+  <VV_PerfumeEffect_FrostBloom>서리꽃의 냉기가 더위 내성을 높이며, 짙은 조합은 피로를 늦춥니다.</VV_PerfumeEffect_FrostBloom>
+  <VV_PerfumeEffect_Shockerbud>섬광꽃의 전기가 회피 감각을 날카롭게 하며, 짙은 조합은 이동을 빠르게 합니다.</VV_PerfumeEffect_Shockerbud>
+  <VV_PerfumeEffect_Thunderpetals>벼락꽃의 활력이 작업 속도를 높이며, 짙은 조합은 학습을 촉진합니다.</VV_PerfumeEffect_Thunderpetals>
+  <VV_PerfumeEffect_Waterdrops>물방울꽃의 청량함이 면역력을 돕고, 짙은 조합은 피로를 늦춥니다.</VV_PerfumeEffect_Waterdrops>
+  <VV_PerfumeEffect_Radiantflower>빛바라기의 햇살이 학습을 돕고, 짙은 조합은 정신 감응력을 높입니다.</VV_PerfumeEffect_Radiantflower>
+  <VV_PerfumeEffect_Richflower>풍년화의 풍요가 작업 속도를 높이며, 짙은 조합은 식물 작업을 특히 돕습니다.</VV_PerfumeEffect_Richflower>
+  <VV_PerfumeEffect_Purifimint>정화초의 상쾌함이 독성 환경을 견디게 하며, 짙은 조합은 독 축적에도 저항합니다.</VV_PerfumeEffect_Purifimint>
+  <VV_PerfumeEffect_Starlitflower>별맞이꽃의 향이 정신 감응력을 높이고, 짙은 조합은 피로를 늦춥니다.</VV_PerfumeEffect_Starlitflower>
+  <VV_PerfumeEffect_Skyweed>하늘풀의 향이 이동을 빠르게 하며, 짙은 조합은 조준 시간을 줄입니다.</VV_PerfumeEffect_Skyweed>
+  <VV_PerfumeEffect_Everflower>영원꽃의 공명이 정신 감응력을 높이고, 농도가 짙어질수록 학습과 방호 능력도 강화합니다.</VV_PerfumeEffect_Everflower>
+</LanguageData>

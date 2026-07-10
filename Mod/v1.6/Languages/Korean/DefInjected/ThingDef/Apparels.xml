@@ -52,4 +52,6 @@
 <VV_MultiuseBrushTool.label>비비 다용도 붓</VV_MultiuseBrushTool.label>
 <VV_MultiuseBrushTool.description>꽃가루를 청소하거나 식물에서 재료를 정밀하게 채집할때 사용할 수 있는 커다란 붓입니다. 거친 표면을 다듬을때에도 큰 도움이 되며 인간들도 사용할 수 있습니다.</VV_MultiuseBrushTool.description>
 
+<VV_PerfumeBottle.label>비비 조향병</VV_PerfumeBottle.label>
+<VV_PerfumeBottle.description>꽃의 향을 채집하고 조합하기 위해 허리에 차는 병입니다. 향 세 가지를 기록하면 마법의 향가루를 다섯 번 뿌릴 수 있으며, 모두 사용한 뒤에는 다시 충전해야 합니다.</VV_PerfumeBottle.description>
 </LanguageData>

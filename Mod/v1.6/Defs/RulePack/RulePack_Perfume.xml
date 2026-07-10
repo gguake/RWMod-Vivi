@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <RulePackDef>
+    <defName>VV_NamerPerfumeBottle</defName>
+    <rulePack>
+      <rulesStrings>
+        <li>r_perfume_empty->empty [bottle_label]</li>
+        <li>r_perfume_blending->[bottle_label] being blended</li>
+        <li>r_perfume_complete->'[blend_name]' [bottle_label]</li>
+        <li>r_perfume_blend_1->[perfume_primary] afterglow</li>
+        <li>r_perfume_blend_1->[perfume_primary] whisper</li>
+        <li>r_perfume_blend_1->[perfume_primary] reverie</li>
+        <li>r_perfume_blend_2->[perfume_primary]-[perfume_secondary] accord</li>
+        <li>r_perfume_blend_2->[perfume_secondary] touched by [perfume_primary]</li>
+        <li>r_perfume_blend_2->[perfume_primary]-[perfume_secondary] harmony</li>
+        <li>r_perfume_blend_3->[perfume_primary], [perfume_secondary], and [perfume_tertiary] bouquet</li>
+        <li>r_perfume_blend_3->[perfume_primary]-[perfume_secondary]-[perfume_tertiary] symphony</li>
+        <li>r_perfume_blend_3->[perfume_primary] and [perfume_secondary] over [perfume_tertiary]</li>
+      </rulesStrings>
+    </rulePack>
+  </RulePackDef>
+</Defs>

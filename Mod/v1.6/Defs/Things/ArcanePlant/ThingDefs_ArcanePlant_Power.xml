@@ -91,6 +91,24 @@
           </points>
         </leavingSeedCountCurve>
       </li>
+      <li Class="VVRace.ArcaneFlowerPerfumeExtension">
+        <effectDescriptionKey>VV_PerfumeEffect_Shockerbud</effectDescriptionKey>
+        <names>
+          <li><minWeight>0</minWeight><labelKey>VV_PerfumeName_Shockerbud_1</labelKey></li>
+          <li><minWeight>0.7</minWeight><labelKey>VV_PerfumeName_Shockerbud_2</labelKey></li>
+          <li><minWeight>1</minWeight><labelKey>VV_PerfumeName_Shockerbud_3</labelKey></li>
+        </names>
+        <effects>
+          <li>
+            <minWeight>0</minWeight>
+            <statOffsets><MeleeDodgeChance>0.08</MeleeDodgeChance></statOffsets>
+          </li>
+          <li>
+            <minWeight>0.7</minWeight>
+            <statOffsets><MoveSpeed>0.4</MoveSpeed></statOffsets>
+          </li>
+        </effects>
+      </li>
     </modExtensions>
   </ThingDef>
   
@@ -175,6 +193,24 @@
             <li>(1.0, 6)</li>
           </points>
         </leavingSeedCountCurve>
+      </li>
+      <li Class="VVRace.ArcaneFlowerPerfumeExtension">
+        <effectDescriptionKey>VV_PerfumeEffect_Thunderpetals</effectDescriptionKey>
+        <names>
+          <li><minWeight>0</minWeight><labelKey>VV_PerfumeName_Thunderpetals_1</labelKey></li>
+          <li><minWeight>0.7</minWeight><labelKey>VV_PerfumeName_Thunderpetals_2</labelKey></li>
+          <li><minWeight>1</minWeight><labelKey>VV_PerfumeName_Thunderpetals_3</labelKey></li>
+        </names>
+        <effects>
+          <li>
+            <minWeight>0</minWeight>
+            <statOffsets><WorkSpeedGlobal>0.15</WorkSpeedGlobal></statOffsets>
+          </li>
+          <li>
+            <minWeight>0.7</minWeight>
+            <statFactors><GlobalLearningFactor>1.15</GlobalLearningFactor></statFactors>
+          </li>
+        </effects>
       </li>
     </modExtensions>
   </ThingDef>

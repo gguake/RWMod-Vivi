@@ -114,6 +114,24 @@
           </points>
         </leavingSeedCountCurve>
       </li>
+      <li Class="VVRace.ArcaneFlowerPerfumeExtension">
+        <effectDescriptionKey>VV_PerfumeEffect_Waterdrops</effectDescriptionKey>
+        <names>
+          <li><minWeight>0</minWeight><labelKey>VV_PerfumeName_Waterdrops_1</labelKey></li>
+          <li><minWeight>0.7</minWeight><labelKey>VV_PerfumeName_Waterdrops_2</labelKey></li>
+          <li><minWeight>1</minWeight><labelKey>VV_PerfumeName_Waterdrops_3</labelKey></li>
+        </names>
+        <effects>
+          <li>
+            <minWeight>0</minWeight>
+            <statOffsets><ImmunityGainSpeed>0.25</ImmunityGainSpeed></statOffsets>
+          </li>
+          <li>
+            <minWeight>0.7</minWeight>
+            <statFactors><RestFallRateFactor>0.85</RestFallRateFactor></statFactors>
+          </li>
+        </effects>
+      </li>
     </modExtensions>
   </ThingDef>
 
@@ -193,6 +211,24 @@
             <li>(1.0, 6)</li>
           </points>
         </leavingSeedCountCurve>
+      </li>
+      <li Class="VVRace.ArcaneFlowerPerfumeExtension">
+        <effectDescriptionKey>VV_PerfumeEffect_Radiantflower</effectDescriptionKey>
+        <names>
+          <li><minWeight>0</minWeight><labelKey>VV_PerfumeName_Radiantflower_1</labelKey></li>
+          <li><minWeight>0.7</minWeight><labelKey>VV_PerfumeName_Radiantflower_2</labelKey></li>
+          <li><minWeight>1</minWeight><labelKey>VV_PerfumeName_Radiantflower_3</labelKey></li>
+        </names>
+        <effects>
+          <li>
+            <minWeight>0</minWeight>
+            <statFactors><GlobalLearningFactor>1.2</GlobalLearningFactor></statFactors>
+          </li>
+          <li>
+            <minWeight>0.7</minWeight>
+            <statOffsets><PsychicSensitivity>0.2</PsychicSensitivity></statOffsets>
+          </li>
+        </effects>
       </li>
     </modExtensions>
   </ThingDef>
@@ -302,6 +338,24 @@
             <li>(1.0, 6)</li>
           </points>
         </leavingSeedCountCurve>
+      </li>
+      <li Class="VVRace.ArcaneFlowerPerfumeExtension">
+        <effectDescriptionKey>VV_PerfumeEffect_Richflower</effectDescriptionKey>
+        <names>
+          <li><minWeight>0</minWeight><labelKey>VV_PerfumeName_Richflower_1</labelKey></li>
+          <li><minWeight>0.7</minWeight><labelKey>VV_PerfumeName_Richflower_2</labelKey></li>
+          <li><minWeight>1</minWeight><labelKey>VV_PerfumeName_Richflower_3</labelKey></li>
+        </names>
+        <effects>
+          <li>
+            <minWeight>0</minWeight>
+            <statOffsets><WorkSpeedGlobal>0.2</WorkSpeedGlobal></statOffsets>
+          </li>
+          <li>
+            <minWeight>0.7</minWeight>
+            <statFactors><PlantWorkSpeed>1.25</PlantWorkSpeed></statFactors>
+          </li>
+        </effects>
       </li>
     </modExtensions>
   </ThingDef>
@@ -417,6 +471,24 @@
           </points>
         </leavingSeedCountCurve>
       </li>
+      <li Class="VVRace.ArcaneFlowerPerfumeExtension">
+        <effectDescriptionKey>VV_PerfumeEffect_Purifimint</effectDescriptionKey>
+        <names>
+          <li><minWeight>0</minWeight><labelKey>VV_PerfumeName_Purifimint_1</labelKey></li>
+          <li><minWeight>0.7</minWeight><labelKey>VV_PerfumeName_Purifimint_2</labelKey></li>
+          <li><minWeight>1</minWeight><labelKey>VV_PerfumeName_Purifimint_3</labelKey></li>
+        </names>
+        <effects>
+          <li>
+            <minWeight>0</minWeight>
+            <statOffsets><ToxicEnvironmentResistance>0.5</ToxicEnvironmentResistance></statOffsets>
+          </li>
+          <li>
+            <minWeight>0.7</minWeight>
+            <statOffsets><ToxicResistance>0.25</ToxicResistance></statOffsets>
+          </li>
+        </effects>
+      </li>
     </modExtensions>
   </ThingDef>
   
@@ -498,6 +570,24 @@
             <li>(1.0, 6)</li>
           </points>
         </leavingSeedCountCurve>
+      </li>
+      <li Class="VVRace.ArcaneFlowerPerfumeExtension">
+        <effectDescriptionKey>VV_PerfumeEffect_Starlitflower</effectDescriptionKey>
+        <names>
+          <li><minWeight>0</minWeight><labelKey>VV_PerfumeName_Starlitflower_1</labelKey></li>
+          <li><minWeight>0.7</minWeight><labelKey>VV_PerfumeName_Starlitflower_2</labelKey></li>
+          <li><minWeight>1</minWeight><labelKey>VV_PerfumeName_Starlitflower_3</labelKey></li>
+        </names>
+        <effects>
+          <li>
+            <minWeight>0</minWeight>
+            <statOffsets><PsychicSensitivity>0.25</PsychicSensitivity></statOffsets>
+          </li>
+          <li>
+            <minWeight>0.7</minWeight>
+            <statFactors><RestFallRateFactor>0.85</RestFallRateFactor></statFactors>
+          </li>
+        </effects>
       </li>
     </modExtensions>
   </ThingDef>

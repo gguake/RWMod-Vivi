@@ -79,6 +79,24 @@
           </points>
         </leavingSeedCountCurve>
       </li>
+      <li Class="VVRace.ArcaneFlowerPerfumeExtension">
+        <effectDescriptionKey>VV_PerfumeEffect_EmberBloom</effectDescriptionKey>
+        <names>
+          <li><minWeight>0</minWeight><labelKey>VV_PerfumeName_EmberBloom_1</labelKey></li>
+          <li><minWeight>0.7</minWeight><labelKey>VV_PerfumeName_EmberBloom_2</labelKey></li>
+          <li><minWeight>1</minWeight><labelKey>VV_PerfumeName_EmberBloom_3</labelKey></li>
+        </names>
+        <effects>
+          <li>
+            <minWeight>0</minWeight>
+            <statOffsets><ComfyTemperatureMin>-20</ComfyTemperatureMin></statOffsets>
+          </li>
+          <li>
+            <minWeight>0.7</minWeight>
+            <statOffsets><ImmunityGainSpeed>0.15</ImmunityGainSpeed></statOffsets>
+          </li>
+        </effects>
+      </li>
     </modExtensions>
   </ThingDef>
 
@@ -163,6 +181,24 @@
             <li>(1.0, 6)</li>
           </points>
         </leavingSeedCountCurve>
+      </li>
+      <li Class="VVRace.ArcaneFlowerPerfumeExtension">
+        <effectDescriptionKey>VV_PerfumeEffect_FrostBloom</effectDescriptionKey>
+        <names>
+          <li><minWeight>0</minWeight><labelKey>VV_PerfumeName_FrostBloom_1</labelKey></li>
+          <li><minWeight>0.7</minWeight><labelKey>VV_PerfumeName_FrostBloom_2</labelKey></li>
+          <li><minWeight>1</minWeight><labelKey>VV_PerfumeName_FrostBloom_3</labelKey></li>
+        </names>
+        <effects>
+          <li>
+            <minWeight>0</minWeight>
+            <statOffsets><ComfyTemperatureMax>20</ComfyTemperatureMax></statOffsets>
+          </li>
+          <li>
+            <minWeight>0.7</minWeight>
+            <statFactors><RestFallRateFactor>0.9</RestFallRateFactor></statFactors>
+          </li>
+        </effects>
       </li>
     </modExtensions>
   </ThingDef>

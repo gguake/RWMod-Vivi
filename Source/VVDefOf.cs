@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using Verse;
 using Verse.AI;
 
@@ -57,6 +57,10 @@ namespace VVRace
 
         public static JobDef VV_MoveEverflower;
         public static JobDef VV_DeliverToEverflower;
+
+        public static JobDef VV_CollectPerfumeScent;
+        public static JobDef VV_SprayPerfume;
+        public static JobDef VV_ReloadPerfumeBottle;
     }
 
     [DefOf]
@@ -206,6 +210,7 @@ namespace VVRace
         public static HediffDef VV_EverflowerAssimilation;
         public static HediffDef VV_FairyGuarded;
         public static HediffDef VV_FairyConcentrated;
+        public static HediffDef VV_ArcanePerfume;
     }
 
     [DefOf]
@@ -218,6 +223,12 @@ namespace VVRace
     public static class VVCultureDefOf
     {
         public static CultureDef VV_ViviCulture;
+    }
+
+    [DefOf]
+    public static class VVRulePackDefOf
+    {
+        public static RulePackDef VV_NamerPerfumeBottle;
     }
 
     [DefOf]
@@ -254,6 +265,7 @@ namespace VVRace
     public static class VVEffecterDefOf
     {
         public static EffecterDef VV_PollenEmitting;
+        public static EffecterDef VV_Gather_Honey;
         public static EffecterDef VV_EverflowerLink;
         public static EffecterDef VV_StalitFlowerAura;
 

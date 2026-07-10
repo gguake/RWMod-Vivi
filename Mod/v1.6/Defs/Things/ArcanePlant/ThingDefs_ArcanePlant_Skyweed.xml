@@ -73,6 +73,24 @@
           </points>
         </leavingSeedCountCurve>
       </li>
+      <li Class="VVRace.ArcaneFlowerPerfumeExtension">
+        <effectDescriptionKey>VV_PerfumeEffect_Skyweed</effectDescriptionKey>
+        <names>
+          <li><minWeight>0</minWeight><labelKey>VV_PerfumeName_Skyweed_1</labelKey></li>
+          <li><minWeight>0.7</minWeight><labelKey>VV_PerfumeName_Skyweed_2</labelKey></li>
+          <li><minWeight>1</minWeight><labelKey>VV_PerfumeName_Skyweed_3</labelKey></li>
+        </names>
+        <effects>
+          <li>
+            <minWeight>0</minWeight>
+            <statOffsets><MoveSpeed>0.6</MoveSpeed></statOffsets>
+          </li>
+          <li>
+            <minWeight>0.7</minWeight>
+            <statFactors><AimingDelayFactor>0.85</AimingDelayFactor></statFactors>
+          </li>
+        </effects>
+      </li>
     </modExtensions>
   </ThingDef>
 

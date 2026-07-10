@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <ResearchProjectDef ParentName="ViviResearchProjectTier1Base">
+    <defName>VV_Perfumery</defName>
+    <label>perfumery</label>
+    <description>Craft perfume bottles that preserve floral scents and blend the properties of arcane flowers into enchanted pollen.</description>
+    <baseCost>400</baseCost>
+    <researchViewX>2</researchViewX>
+    <researchViewY>2.8</researchViewY>
+    <prerequisites>
+      <li>VV_Tools</li>
+    </prerequisites>
+    <tags>
+      <li>VV_ViviStart</li>
+    </tags>
+  </ResearchProjectDef>
+</Defs>
