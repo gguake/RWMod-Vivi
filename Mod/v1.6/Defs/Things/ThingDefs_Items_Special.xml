@@ -1,4 +1,4 @@
-<Defs>
+﻿<Defs>
   <!-- 거대 말벌 날개 -->
   <ThingDef ParentName="ResourceBase">
     <defName>VV_TitanicHornetWing</defName>
@@ -75,7 +75,7 @@
 
     <useHitPoints>true</useHitPoints>
     <statBases>
-      <MarketValue>1500</MarketValue>
+      <MarketValue>2000</MarketValue>
       <Mass>0.001</Mass>
       <MaxHitPoints>40</MaxHitPoints>
       <DeteriorationRate>0.5</DeteriorationRate>
