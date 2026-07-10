@@ -145,7 +145,6 @@
     <Compile Include="ArcanePlant\Mana\FluxRule\ManaFluxRule_Refuelable.cs" />
     <Compile Include="ArcanePlant\Mana\GameComponent_Mana.cs" />
     <Compile Include="ArcanePlant\Mana\Gizmo\ManaGizmo.cs" />
-    <Compile Include="ArcanePlant\Mana\Job\ManaUpdateJob.cs" />
     <Compile Include="ArcanePlant\Mana\Job\ManaDiffusionJob.cs" />
     <Compile Include="ArcanePlant\Mana\ManaMapComponent.cs" />
     <Compile Include="ArcanePlant\Plant\AI\JobDriver_PlantArcaneSeed.cs" />

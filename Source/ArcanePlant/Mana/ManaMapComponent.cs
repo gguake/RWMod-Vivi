@@ -1,4 +1,4 @@
-using LudeonTK;
+﻿using LudeonTK;
 using System;
 using System.Collections.Generic;
 using Unity.Collections;
@@ -21,13 +21,11 @@ namespace VVRace
         private NativeArray<float> _manaReserveGrid;
         private NativeArray<float> _manaGrid;
         private NativeArray<float> _tmpGrid;
+        private readonly HashSet<int> _dirtyManaCells = new HashSet<int>();
 
         private bool _checkFlowerCells;
 
-        private bool _shouldUpdate;
-        private bool _updateJobStart;
         private bool _diffusionJobStart;
-        private JobHandle _updateJobHandle;
         private JobHandle _diffusionJobHandle;
 
         private CellBoolDrawer _cellBoolDrawer;
@@ -41,7 +39,7 @@ namespace VVRace
             get
             {
                 var idx = map.cellIndices.CellToIndex(cell);
-                return _manaReserveGrid[idx] + _manaGrid[idx];
+                return Mathf.Clamp(_manaReserveGrid[idx] + _manaGrid[idx], 0f, EnvironmentManaMax);
             }
         }
 
@@ -58,13 +56,12 @@ namespace VVRace
 
         public override void ExposeData()
         {
-            if (_updateJobStart) { CompleteUpdateManaJob(); }
             if (_diffusionJobStart) { CompleteDiffuseManaJob(); }
+            if (_dirtyManaCells.Count > 0) { ApplyDirtyReservedMana(); }
 
             IOUtility.ScribeNativeFloatArray(ref _manaReserveGrid, "encodedManaReserveGrid");
             IOUtility.ScribeNativeFloatArray(ref _manaGrid, "encodedManaGrid");
 
-            Scribe_Values.Look(ref _shouldUpdate, "shouldUpdateMana");
             Scribe_Values.Look(ref manaOverlaySetting, "manaOverlaySetting");
         }
 
@@ -74,6 +71,8 @@ namespace VVRace
             _cellBoolDrawer.SetDirty();
 
             LoadedModManager.GetMod<VVRaceMod>().OnWriteSettings += Notify_ModSettingChanged;
+
+            ApplyAllReservedMana();
         }
 
         public override void MapComponentDraw()
@@ -93,11 +92,6 @@ namespace VVRace
 
         public void MapComponentPreTick()
         {
-            if (_updateJobStart)
-            {
-                CompleteUpdateManaJob();
-            }
-
             var ticksGame = GenTicks.TicksGame;
             var a = ticksGame % DiffuseInterval;
             var b = ticksGame % RefreshManaInterval;
@@ -119,7 +113,7 @@ namespace VVRace
                 if (_checkFlowerCells)
                 {
                     _tmpFlowerCellCandidates.Clear();
-                    
+
                     var sum = 0f;
                     for (int i = 0; i < _manaGrid.Length; ++i)
                     {
@@ -167,10 +161,9 @@ namespace VVRace
                 }
             }
 
-            if (_shouldUpdate)
+            if (_dirtyManaCells.Count > 0)
             {
-                ScheduleUpdateManaJob();
-                _shouldUpdate = false;
+                ApplyDirtyReservedMana();
             }
         }
 
@@ -188,19 +181,20 @@ namespace VVRace
             if (_diffusionJobStart)
             {
                 _manaReserveGrid[idx] += flux;
-                _shouldUpdate = true;
             }
             else
             {
-                _manaGrid[idx] = Mathf.Clamp(_manaGrid[idx] + flux, 0f, EnvironmentManaMax);
+                var currentMana = _manaGrid[idx] + _manaReserveGrid[idx];
+                var updatedMana = Mathf.Clamp(currentMana + flux, 0f, EnvironmentManaMax);
+                _manaReserveGrid[idx] = updatedMana - _manaGrid[idx];
             }
+            _dirtyManaCells.Add(idx);
         }
 
         public void Dispose()
         {
             LoadedModManager.GetMod<VVRaceMod>().OnWriteSettings -= Notify_ModSettingChanged;
 
-            if (!_updateJobHandle.IsCompleted) { _updateJobHandle.Complete(); }
             if (!_diffusionJobHandle.IsCompleted) { _diffusionJobHandle.Complete(); }
 
             _tmpGrid.Dispose();
@@ -225,21 +219,6 @@ namespace VVRace
             }
         }
 
-        private void ScheduleUpdateManaJob()
-        {
-            if (_updateJobStart) { return; }
-
-            var job = new ManaUpdateJob()
-            {
-                manaReserveGrid = _manaReserveGrid,
-                manaGrid = _manaGrid,
-                outputGrid = _tmpGrid,
-            };
-
-            _updateJobHandle = job.Schedule(map.cellIndices.NumGridCells, map.Size.x);
-            _updateJobStart = true;
-        }
-
         private void ScheduleDiffuseManaJob()
         {
             if (_diffusionJobStart) { return; }
@@ -258,21 +237,41 @@ namespace VVRace
             _diffusionJobStart = true;
         }
 
-        private void CompleteUpdateManaJob()
-        {
-            _updateJobHandle.Complete();
-
-            _tmpGrid.CopyTo(_manaGrid);
-            _manaReserveGrid.Clear();
-            _updateJobStart = false;
-        }
-
         private void CompleteDiffuseManaJob()
         {
             _diffusionJobHandle.Complete();
 
-            _tmpGrid.CopyTo(_manaGrid);
+            var previousManaGrid = _manaGrid;
+            _manaGrid = _tmpGrid;
+            _tmpGrid = previousManaGrid;
+
+            ApplyDirtyReservedMana();
             _diffusionJobStart = false;
+        }
+
+        private void ApplyDirtyReservedMana()
+        {
+            foreach (var idx in _dirtyManaCells)
+            {
+                _manaGrid[idx] = Mathf.Clamp(_manaGrid[idx] + _manaReserveGrid[idx], 0f, EnvironmentManaMax);
+                _manaReserveGrid[idx] = 0f;
+            }
+
+            _dirtyManaCells.Clear();
+        }
+
+        private void ApplyAllReservedMana()
+        {
+            for (int i = 0; i < _manaReserveGrid.Length; ++i)
+            {
+                var reservedMana = _manaReserveGrid[i];
+                if (reservedMana == 0f) { continue; }
+
+                _manaGrid[i] = Mathf.Clamp(_manaGrid[i] + reservedMana, 0f, EnvironmentManaMax);
+                _manaReserveGrid[i] = 0f;
+            }
+
+            _dirtyManaCells.Clear();
         }
 
         public bool GetCellBool(int index)
