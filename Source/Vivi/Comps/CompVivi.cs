@@ -1,4 +1,5 @@
-using RimWorld;
+﻿using RimWorld;
+using System.Collections.Generic;
 using UnityEngine;
 using Verse;
 
@@ -11,6 +12,7 @@ namespace VVRace
         public static Material ConcentrationLineMat = MaterialPool.MatFrom(GenDraw.LineTexPath, ShaderDatabase.Transparent, new Color(1f, 0.75f, 0.4f, 0.6f));
 
         public bool isRoyal = false;
+        private Dictionary<GeneDef, int> _geneInheritanceGenerations = new Dictionary<GeneDef, int>();
         private Color? _originalHairColor = null;
         [Unsaved]
         private bool _refreshEverflowerHediffsAfterLoad;
@@ -42,6 +44,12 @@ namespace VVRace
         {
             Scribe_Values.Look(ref isRoyal, "isRoyal");
             Scribe_Values.Look(ref _originalHairColor, "originalHairColor");
+            Scribe_Collections.Look(ref _geneInheritanceGenerations, "geneInheritanceGenerations", LookMode.Def, LookMode.Value);
+
+            if (_geneInheritanceGenerations == null)
+            {
+                _geneInheritanceGenerations = new Dictionary<GeneDef, int>();
+            }
 
             Scribe_References.Look(ref _linkedEverflower, "linkedEverflower");
 
@@ -175,7 +183,37 @@ namespace VVRace
             {
                 isRoyal = sourceComp.isRoyal;
                 _originalHairColor = sourceComp._originalHairColor;
+                _geneInheritanceGenerations = new Dictionary<GeneDef, int>(sourceComp._geneInheritanceGenerations);
             }
+        }
+
+        public int GetGeneInheritanceGeneration(GeneDef geneDef)
+        {
+            if (geneDef != null && _geneInheritanceGenerations.TryGetValue(geneDef, out var generation))
+            {
+                return Mathf.Clamp(generation, 1, 3);
+            }
+
+            return 1;
+        }
+
+        public void SetGeneInheritanceGenerations(Dictionary<GeneDef, int> generations)
+        {
+            _geneInheritanceGenerations.Clear();
+            if (generations == null) { return; }
+
+            foreach (var pair in generations)
+            {
+                if (pair.Key != null)
+                {
+                    _geneInheritanceGenerations[pair.Key] = Mathf.Clamp(pair.Value, 1, 3);
+                }
+            }
+        }
+
+        public void ResetGeneInheritanceGenerations()
+        {
+            _geneInheritanceGenerations.Clear();
         }
 
         public void SetRoyal()

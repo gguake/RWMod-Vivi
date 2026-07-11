@@ -1,6 +1,7 @@
-using RimWorld;
+﻿using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 using Verse;
 
 namespace VVRace
@@ -13,26 +14,32 @@ namespace VVRace
 
         public static bool IsRoyalVivi(this Pawn pawn) => pawn.TryGetComp<CompVivi>()?.isRoyal ?? false;
 
-        public static List<GeneDef> SelectRandomGeneForVivi(int count, List<GeneDef> parentXenogenes = null)
+        public static List<GeneDef> SelectRandomGeneForVivi(
+            int count,
+            List<GeneDef> parentXenogenes = null,
+            Dictionary<GeneDef, int> parentGeneInheritanceGenerations = null,
+            List<GeneDef> inheritedGenes = null)
         {
             var genes = new List<GeneDef>();
-            if (parentXenogenes != null)
+            var eligibleParentGenes = parentXenogenes?
+                .Where(CheckInvalidGenesForVivi)
+                .Distinct()
+                .ToList() ?? new List<GeneDef>();
+
+            foreach (var def in eligibleParentGenes)
             {
-                parentXenogenes.RemoveAll(def => !CheckInvalidGenesForVivi(def));
-
-                if (parentXenogenes.Count > 0)
+                var generation = 1;
+                if (parentGeneInheritanceGenerations != null &&
+                    parentGeneInheritanceGenerations.TryGetValue(def, out var savedGeneration))
                 {
-                    var element = parentXenogenes.RandomElement();
-                    parentXenogenes.Remove(element);
-                    genes.Add(element);
+                    generation = Mathf.Clamp(savedGeneration, 1, 3);
+                }
 
-                    foreach (var def in parentXenogenes)
-                    {
-                        if (Rand.Chance(0.5f))
-                        {
-                            genes.Add(def);
-                        }
-                    }
+                var inheritanceChance = generation >= 3 ? 1f : generation == 2 ? 0.8f : 0.5f;
+                if (Rand.Chance(inheritanceChance))
+                {
+                    genes.Add(def);
+                    inheritedGenes?.Add(def);
                 }
             }
 
@@ -40,7 +47,7 @@ namespace VVRace
 
             genes.AddRange(DefDatabase<GeneDef>.AllDefsListForReading.Where(def =>
             {
-                if (genes.Contains(def)) { return false; }
+                if (genes.Contains(def) || eligibleParentGenes.Contains(def)) { return false; }
 
                 return CheckInvalidGenesForVivi(def);
 

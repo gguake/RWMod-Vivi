@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using RimWorld.Planet;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,6 +54,7 @@ namespace VVRace
         public float hatchProgress = 0f;
         public Pawn hatcheeParent;
         public List<GeneDef> parentXenogenes;
+        public Dictionary<GeneDef, int> parentGeneInheritanceGenerations;
         public int randomSeed = Rand.Int;
 
         public override void PostPostMake()
@@ -69,7 +70,13 @@ namespace VVRace
             Scribe_Values.Look(ref hatchProgress, "hatchProgress", 0f);
             Scribe_References.Look(ref hatcheeParent, "hatcheeParent");
             Scribe_Collections.Look(ref parentXenogenes, "xenogenes", LookMode.Def);
+            Scribe_Collections.Look(ref parentGeneInheritanceGenerations, "geneInheritanceGenerations", LookMode.Def, LookMode.Value);
             Scribe_Values.Look(ref randomSeed, "randomSeed", 0);
+
+            if (parentGeneInheritanceGenerations == null)
+            {
+                parentGeneInheritanceGenerations = new Dictionary<GeneDef, int>();
+            }
         }
 
         public override string CompInspectStringExtra()
@@ -147,7 +154,9 @@ namespace VVRace
                 pieceComp.hatchDays = hatchDays;
                 pieceComp.hatchProgress = hatchProgress;
                 pieceComp.hatcheeParent = hatcheeParent;
-                pieceComp.parentXenogenes = parentXenogenes;
+                pieceComp.parentXenogenes = parentXenogenes != null ? new List<GeneDef>(parentXenogenes) : null;
+                pieceComp.parentGeneInheritanceGenerations = parentGeneInheritanceGenerations != null ?
+                    new Dictionary<GeneDef, int>(parentGeneInheritanceGenerations) : null;
                 pieceComp.randomSeed = randomSeed;
             }
         }
@@ -189,7 +198,12 @@ namespace VVRace
                         Rand.PushState(randomSeed);
 
                         var randomGeneCount = Mathf.FloorToInt(Props.geneCountCurve.Evaluate(Rand.Range(0, 10000)));
-                        var xenogenes = ViviUtility.SelectRandomGeneForVivi(randomGeneCount, parentXenogenes);
+                        var inheritedGenes = new List<GeneDef>();
+                        var xenogenes = ViviUtility.SelectRandomGeneForVivi(
+                            randomGeneCount,
+                            parentXenogenes,
+                            parentGeneInheritanceGenerations,
+                            inheritedGenes);
 
                         var request = new PawnGenerationRequest(
                             pawnKindDef,
@@ -205,6 +219,16 @@ namespace VVRace
                         }
 
                         var pawn = PawnGenerator.GeneratePawn(request);
+                        var compVivi = pawn.GetCompVivi();
+                        if (compVivi != null)
+                        {
+                            var childGeneInheritanceGenerations = xenogenes.ToDictionary(
+                                geneDef => geneDef,
+                                geneDef => inheritedGenes.Contains(geneDef) ?
+                                    Mathf.Min(3, GetParentGeneInheritanceGeneration(geneDef) + 1) : 1);
+                            compVivi.SetGeneInheritanceGenerations(childGeneInheritanceGenerations);
+                        }
+
                         if (GenSpawn.Spawn(pawn, hatchery.Position, hatchery.Map) != null)
                         {
                             if (pawn != null)
@@ -274,6 +298,17 @@ namespace VVRace
             {
                 parent.Destroy();
             }
+        }
+
+        private int GetParentGeneInheritanceGeneration(GeneDef geneDef)
+        {
+            if (parentGeneInheritanceGenerations != null &&
+                parentGeneInheritanceGenerations.TryGetValue(geneDef, out var generation))
+            {
+                return Mathf.Clamp(generation, 1, 3);
+            }
+
+            return 1;
         }
     }
 }

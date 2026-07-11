@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using System.Collections.Generic;
 using Verse;
 
@@ -38,6 +38,7 @@ namespace VVRace
 
             if (hasHediff && TryApply(pawn))
             {
+                pawn.GetCompVivi()?.ResetGeneInheritanceGenerations();
                 Find.LetterStack.ReceiveLetter(letterLabel, letter.Formatted(pawn.Named("PAWN")).AdjustedFor(pawn), LetterDefOf.NegativeEvent, pawn);
             }
         }

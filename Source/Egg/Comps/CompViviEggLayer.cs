@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -126,6 +126,9 @@ namespace VVRace
                     v.endogeneCategory == EndogeneCategory.HairColor ||
                     v.endogeneCategory == EndogeneCategory.Head ||
                     v.endogeneCategory == EndogeneCategory.Jaw);
+                hatcher.parentGeneInheritanceGenerations = hatcher.parentXenogenes.ToDictionary(
+                    geneDef => geneDef,
+                    geneDef => CompVivi.GetGeneInheritanceGeneration(geneDef));
 
                 return egg;
             }
