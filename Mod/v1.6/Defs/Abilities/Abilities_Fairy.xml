@@ -16,6 +16,7 @@
       <label>materialize fairy</label>
       <violent>false</violent>
       <warmupTime>8.8</warmupTime>
+      <drawAimPie>false</drawAimPie>
       <range>1.9</range>
       <requireLineOfSight>false</requireLineOfSight>
       <nonInterruptingSelfCast>true</nonInterruptingSelfCast>

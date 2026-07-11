@@ -72,6 +72,7 @@ namespace VVRace
         public VerbProperties_SprayPerfume()
         {
             verbClass = typeof(Verb_SprayPerfume);
+            drawAimPie = false;
         }
     }
 
@@ -80,6 +81,33 @@ namespace VVRace
         public VerbProperties_SprayPerfume VerbProps => (VerbProperties_SprayPerfume)verbProps;
 
         private CompPerfumeBottle BottleComp => (DirectOwner as CompPerfumeVerbOwner)?.BottleComp;
+
+        public override bool TryStartCastOn(
+            LocalTargetInfo castTarg,
+            LocalTargetInfo destTarg,
+            bool surpriseAttack = false,
+            bool canHitNonTargetPawns = true,
+            bool preventFriendlyFire = false,
+            bool nonInterruptingSelfCast = false)
+        {
+            if (!base.TryStartCastOn(
+                castTarg,
+                destTarg,
+                surpriseAttack,
+                canHitNonTargetPawns,
+                preventFriendlyFire,
+                nonInterruptingSelfCast))
+            {
+                return false;
+            }
+
+            if (WarmupStance != null)
+            {
+                WarmupStance.neverAimWeapon = true;
+            }
+
+            return true;
+        }
 
         public override bool Available()
         {
