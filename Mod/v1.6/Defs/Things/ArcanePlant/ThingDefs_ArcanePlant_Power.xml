@@ -93,6 +93,7 @@
       </li>
       <li Class="VVRace.ArcaneFlowerPerfumeExtension">
         <effectDescriptionKey>VV_PerfumeEffect_Shockerbud</effectDescriptionKey>
+        <colorSource>VV_SparklingPetal</colorSource>
         <names>
           <li><minWeight>0</minWeight><labelKey>VV_PerfumeName_Shockerbud_1</labelKey></li>
           <li><minWeight>0.7</minWeight><labelKey>VV_PerfumeName_Shockerbud_2</labelKey></li>
@@ -201,6 +202,7 @@
       </li>
       <li Class="VVRace.ArcaneFlowerPerfumeExtension">
         <effectDescriptionKey>VV_PerfumeEffect_Thunderpetals</effectDescriptionKey>
+        <colorSource>VV_SparklingPetal</colorSource>
         <names>
           <li><minWeight>0</minWeight><labelKey>VV_PerfumeName_Thunderpetals_1</labelKey></li>
           <li><minWeight>0.7</minWeight><labelKey>VV_PerfumeName_Thunderpetals_2</labelKey></li>

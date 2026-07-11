@@ -12,6 +12,7 @@ namespace VVRace
     public class ArcaneFlowerPerfumeExtension : DefModExtension
     {
         public string effectDescriptionKey;
+        public ThingDef colorSource;
         public List<PerfumeName> names = new List<PerfumeName>();
         public List<PerfumeEffect> effects = new List<PerfumeEffect>();
 

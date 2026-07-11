@@ -211,6 +211,7 @@
       </li>
       <li Class="VVRace.ArcaneFlowerPerfumeExtension">
         <effectDescriptionKey>VV_PerfumeEffect_Everflower</effectDescriptionKey>
+        <colorSource>VV_PerfumingPetal</colorSource>
         <names>
           <li><minWeight>0</minWeight><labelKey>VV_PerfumeName_Everflower_1</labelKey></li>
           <li><minWeight>0.7</minWeight><labelKey>VV_PerfumeName_Everflower_2</labelKey></li>

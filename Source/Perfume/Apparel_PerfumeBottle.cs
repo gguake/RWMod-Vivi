@@ -1,16 +1,19 @@
-﻿using RimWorld;
+﻿using UnityEngine;
+using RimWorld;
+using Verse;
 
 namespace VVRace
 {
     public class Apparel_PerfumeBottle : Apparel
     {
-        public override string LabelNoCount
+        public override Color DrawColor
         {
             get
             {
                 var comp = GetComp<CompPerfumeBottle>();
-                return comp?.DynamicLabel ?? base.LabelNoCount;
+                return comp?.IsComplete == true ? comp.BlendColor : base.DrawColor;
             }
+            set => base.DrawColor = value;
         }
     }
 }

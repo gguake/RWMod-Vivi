@@ -63,6 +63,7 @@
     </tradeTags>
   </ThingDef>
 
+  <!-- VV_StrawTool -->
   <ThingDef ParentName="VV_UtilityApparelBase">
     <defName>VV_StrawTool</defName>
     <label>vivi straw</label>
@@ -75,7 +76,7 @@
     <statBases>
       <MaxHitPoints>100</MaxHitPoints>
       <WorkToMake>1500</WorkToMake>
-      <Mass>0.4</Mass>
+      <Mass>0.1</Mass>
       <Flammability>0.4</Flammability>
       <EquipDelay>0.5</EquipDelay>
     </statBases>
@@ -107,6 +108,7 @@
     </recipeMaker>
   </ThingDef>
 
+  <!-- VV_MultiuseBrushTool -->
   <ThingDef ParentName="VV_UtilityApparelBase">
     <defName>VV_MultiuseBrushTool</defName>
     <label>vivi multiuse brush</label>
@@ -120,7 +122,7 @@
     <statBases>
       <MaxHitPoints>100</MaxHitPoints>
       <WorkToMake>1800</WorkToMake>
-      <Mass>0.4</Mass>
+      <Mass>0.3</Mass>
       <Flammability>0.4</Flammability>
       <EquipDelay>0.5</EquipDelay>
     </statBases>
@@ -151,6 +153,84 @@
         <li>VV_Tools</li>
       </researchPrerequisites>
       <displayPriority>-501</displayPriority>
+    </recipeMaker>
+  </ThingDef>
+
+  <!-- VV_PerfumeBottle -->
+  <ThingDef ParentName="VV_UtilityApparelBase">
+    <defName>VV_PerfumeBottle</defName>
+    <label>vivi perfume bottle</label>
+    <description>A waist-worn bottle used to collect and blend the scents of flowers. After collecting scents from flowers or arcane flowers three times, it can create and spray an enchanted fragrance. The completed fragrance can be sprayed six times; once it has all been used, the bottle must be refilled with pollen and blended again.
+\nPollen from arcane flowers grants a unique effect that varies by flower, with denser pollen producing a stronger effect.\nPollen from ordinary flowers has no special effect, but improves mood and amplifies the effects of any arcane flower pollen mixed with it.
+\nThe art of handling fragrances is a longstanding tradition among the Vivis, but because it is a luxury that consumes a great deal of pollen, it has become uncommon in these recent hard times.</description>
+    <thingClass>VVRace.Apparel_PerfumeBottle</thingClass>
+    <graphicData>
+      <texPath>Things/Item/VV_UnfermentedMead</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <WorkToMake>3300</WorkToMake>
+      <Mass>0.1</Mass>
+      <Flammability>0.25</Flammability>
+      <EquipDelay>0.5</EquipDelay>
+    </statBases>
+
+    <costList>
+      <VV_Pollen>200</VV_Pollen>
+      <VV_Viviwax>30</VV_Viviwax>
+    </costList>
+
+    <comps>
+      <li Class="VVRace.CompProperties_PerfumeBottle">
+        <maxIngredients>3</maxIngredients>
+        <maxSprays>6</maxSprays>
+
+        <reloadCost>200</reloadCost>
+        <reloadTicks>500</reloadTicks>
+        <pollenDef>VV_Pollen</pollenDef>
+
+        <gatherTicks>1500</gatherTicks>
+        <arcaneWeightPerFlower>0.35</arcaneWeightPerFlower>
+        <ordinaryFlowerWeightBonus>0.15</ordinaryFlowerWeightBonus>
+      </li>
+      <li Class="VVRace.CompProperties_PerfumeVerbOwner" />
+    </comps>
+
+    <verbs>
+      <li Class="VVRace.VerbProperties_SprayPerfume">
+        <label>scatter perfume powder</label>
+        <violent>false</violent>
+        <range>2.7</range>
+        <warmupTime>2</warmupTime>
+        <defaultCooldownTime>0</defaultCooldownTime>
+        <hasStandardCommand>true</hasStandardCommand>
+        <targetable>false</targetable>
+        <nonInterruptingSelfCast>true</nonInterruptingSelfCast>
+        <onlyManualCast>true</onlyManualCast>
+        <requireLineOfSight>false</requireLineOfSight>
+        <ai_IsWeapon>false</ai_IsWeapon>
+        <targetParams>
+          <canTargetSelf>true</canTargetSelf>
+          <canTargetLocations>false</canTargetLocations>
+          <canTargetPawns>false</canTargetPawns>
+          <canTargetBuildings>false</canTargetBuildings>
+        </targetParams>
+        <commandIcon>Things/Mote/VV_PollenPuff</commandIcon>
+      </li>
+    </verbs>
+
+    <recipeMaker>
+      <recipeUsers>
+        <li>CraftingSpot</li>
+        <li>ElectricSmithy</li>
+        <li>FueledSmithy</li>
+      </recipeUsers>
+      <researchPrerequisites>
+        <li>VV_Perfumery</li>
+      </researchPrerequisites>
+      <displayPriority>-502</displayPriority>
     </recipeMaker>
   </ThingDef>
 </Defs>

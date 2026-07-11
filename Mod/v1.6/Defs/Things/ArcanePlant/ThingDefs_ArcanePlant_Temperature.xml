@@ -81,6 +81,7 @@
       </li>
       <li Class="VVRace.ArcaneFlowerPerfumeExtension">
         <effectDescriptionKey>VV_PerfumeEffect_EmberBloom</effectDescriptionKey>
+        <colorSource>VV_HeatingPetal</colorSource>
         <names>
           <li><minWeight>0</minWeight><labelKey>VV_PerfumeName_EmberBloom_1</labelKey></li>
           <li><minWeight>0.7</minWeight><labelKey>VV_PerfumeName_EmberBloom_2</labelKey></li>
@@ -184,6 +185,7 @@
       </li>
       <li Class="VVRace.ArcaneFlowerPerfumeExtension">
         <effectDescriptionKey>VV_PerfumeEffect_FrostBloom</effectDescriptionKey>
+        <colorSource>VV_CoolingPetal</colorSource>
         <names>
           <li><minWeight>0</minWeight><labelKey>VV_PerfumeName_FrostBloom_1</labelKey></li>
           <li><minWeight>0.7</minWeight><labelKey>VV_PerfumeName_FrostBloom_2</labelKey></li>

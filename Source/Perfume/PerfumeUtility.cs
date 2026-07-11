@@ -1,7 +1,8 @@
-using RimWorld;
+﻿using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 using Verse;
 using Verse.Grammar;
 
@@ -9,6 +10,8 @@ namespace VVRace
 {
     public static class PerfumeUtility
     {
+        private static readonly Color OrdinaryFlowerColor = new Color(1f, 0.75f, 0.35f);
+
         private class BlendEntry
         {
             public ThingDef def;
@@ -34,6 +37,45 @@ namespace VVRace
         public static int OrdinaryFlowerCount(IEnumerable<ThingDef> ingredients)
         {
             return ingredients?.Count(IsOrdinaryFlower) ?? 0;
+        }
+
+        public static Color GetBlendColor(IEnumerable<ThingDef> ingredients)
+        {
+            var ingredientList = ingredients?.Where(def => def != null).ToList() ?? new List<ThingDef>();
+            if (ingredientList.Count == 0)
+            {
+                return Color.white;
+            }
+
+            var color = Color.clear;
+            foreach (var ingredient in ingredientList)
+            {
+                color += GetIngredientColor(ingredient);
+            }
+
+            color /= ingredientList.Count;
+            color.a = 1f;
+            return color;
+        }
+
+        private static Color GetIngredientColor(ThingDef ingredient)
+        {
+            var extension = ingredient.GetModExtension<ArcaneFlowerPerfumeExtension>();
+            var sourceColor = extension?.colorSource?.graphicData?.color;
+            if (sourceColor.HasValue)
+            {
+                var color = sourceColor.Value;
+                color.a = 1f;
+                return color;
+            }
+
+            if (extension == null)
+            {
+                return OrdinaryFlowerColor;
+            }
+
+            var hue = (GenText.StableStringHash(ingredient.defName) & 0x7fffffff) % 1000 / 1000f;
+            return Color.HSVToRGB(hue, 0.55f, 1f);
         }
 
         public static string GetBlendName(

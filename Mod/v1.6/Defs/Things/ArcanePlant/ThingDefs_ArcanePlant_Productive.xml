@@ -116,6 +116,7 @@
       </li>
       <li Class="VVRace.ArcaneFlowerPerfumeExtension">
         <effectDescriptionKey>VV_PerfumeEffect_Waterdrops</effectDescriptionKey>
+        <colorSource>VV_CoolingPetal</colorSource>
         <names>
           <li><minWeight>0</minWeight><labelKey>VV_PerfumeName_Waterdrops_1</labelKey></li>
           <li><minWeight>0.7</minWeight><labelKey>VV_PerfumeName_Waterdrops_2</labelKey></li>
@@ -214,6 +215,7 @@
       </li>
       <li Class="VVRace.ArcaneFlowerPerfumeExtension">
         <effectDescriptionKey>VV_PerfumeEffect_Radiantflower</effectDescriptionKey>
+        <colorSource>VV_HeatingPetal</colorSource>
         <names>
           <li><minWeight>0</minWeight><labelKey>VV_PerfumeName_Radiantflower_1</labelKey></li>
           <li><minWeight>0.7</minWeight><labelKey>VV_PerfumeName_Radiantflower_2</labelKey></li>
@@ -341,6 +343,7 @@
       </li>
       <li Class="VVRace.ArcaneFlowerPerfumeExtension">
         <effectDescriptionKey>VV_PerfumeEffect_Richflower</effectDescriptionKey>
+        <colorSource>VV_PerfumingPetal</colorSource>
         <names>
           <li><minWeight>0</minWeight><labelKey>VV_PerfumeName_Richflower_1</labelKey></li>
           <li><minWeight>0.7</minWeight><labelKey>VV_PerfumeName_Richflower_2</labelKey></li>
@@ -561,6 +564,7 @@
       </li>
       <li Class="VVRace.ArcaneFlowerPerfumeExtension">
         <effectDescriptionKey>VV_PerfumeEffect_Starlitflower</effectDescriptionKey>
+        <colorSource>VV_PerfumingPetal</colorSource>
         <names>
           <li><minWeight>0</minWeight><labelKey>VV_PerfumeName_Starlitflower_1</labelKey></li>
           <li><minWeight>0.7</minWeight><labelKey>VV_PerfumeName_Starlitflower_2</labelKey></li>

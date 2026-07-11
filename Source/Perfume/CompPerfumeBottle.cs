@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using RimWorld.Utility;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,27 +46,25 @@ namespace VVRace
         public bool CanCollect => charged && ingredients.Count < Props.maxIngredients && spraysRemaining == 0;
         public bool NeedsRecharge => !charged && ingredients.Count == 0 && spraysRemaining == 0;
         public int MinPollenNeeded => Mathf.Max(0, Props.reloadCost - pollenLoaded);
+        public Color BlendColor => PerfumeUtility.GetBlendColor(ingredients);
 
-        public string DynamicLabel
+        public override string TransformLabel(string label)
         {
-            get
+            if (ingredients.Count == 0)
             {
-                if (ingredients.Count == 0)
-                {
-                    return ResolveLabel("r_perfume_empty");
-                }
-
-                if (!IsComplete)
-                {
-                    return ResolveLabel("r_perfume_blending");
-                }
-
-                var blendName = PerfumeUtility.GetBlendName(
-                    ingredients,
-                    Props.arcaneWeightPerFlower,
-                    Props.ordinaryFlowerWeightBonus);
-                return ResolveLabel("r_perfume_complete", blendName);
+                return ResolveLabel("r_perfume_empty");
             }
+
+            if (!IsComplete)
+            {
+                return ResolveLabel("r_perfume_blending");
+            }
+
+            var blendName = PerfumeUtility.GetBlendName(
+                ingredients,
+                Props.arcaneWeightPerFlower,
+                Props.ordinaryFlowerWeightBonus);
+            return ResolveLabel("r_perfume_complete", blendName);
         }
 
         private string ResolveLabel(string rootKeyword, string blendName = null)
@@ -105,6 +103,8 @@ namespace VVRace
                 {
                     spraysRemaining = Props.maxSprays;
                 }
+
+                NotifyBlendColorChanged();
             }
         }
 
@@ -204,6 +204,7 @@ namespace VVRace
             if (ingredients.Count >= Props.maxIngredients)
             {
                 spraysRemaining = Props.maxSprays;
+                NotifyBlendColorChanged();
             }
 
             return true;
@@ -242,7 +243,7 @@ namespace VVRace
                 target.health.AddHediff(perfume);
             }
 
-            VVEffecterDefOf.VV_PollenEmitting.Spawn(sprayer.Position, sprayer.Map).Cleanup();
+            SpawnPerfumeEffect(sprayer);
             spraysRemaining--;
             if (spraysRemaining <= 0)
             {
@@ -250,9 +251,29 @@ namespace VVRace
                 spraysRemaining = 0;
                 pollenLoaded = 0;
                 charged = false;
+                NotifyBlendColorChanged();
             }
 
             return true;
+        }
+
+        private void SpawnPerfumeEffect(Pawn sprayer)
+        {
+            var effecter = new Effecter(VVEffecterDefOf.VV_PerfumeSpray);
+            foreach (var child in effecter.children)
+            {
+                child.colorOverride = BlendColor;
+            }
+
+            var target = new TargetInfo(sprayer);
+            effecter.Trigger(target, target);
+            effecter.Cleanup();
+        }
+
+        private void NotifyBlendColorChanged()
+        {
+            parent.Notify_ColorChanged();
+            WearingPawn?.Drawer?.renderer?.SetAllGraphicsDirty();
         }
 
         public string GetStatusText()
