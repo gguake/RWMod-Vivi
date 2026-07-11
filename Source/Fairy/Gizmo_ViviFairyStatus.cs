@@ -26,7 +26,7 @@ namespace VVRace
             Order = -90f;
         }
 
-        public override bool Visible => _comp != null && _comp.MaterializedCount > 0 && Find.Selector.NumSelected == 1;
+        public override bool Visible => _comp != null && _comp.parent is Pawn pawn && pawn.IsColonistPlayerControlled && _comp.MaterializedCount > 0 && Find.Selector.NumSelected == 1;
 
         public override float GetWidth(float maxWidth)
         {

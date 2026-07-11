@@ -5,21 +5,23 @@ namespace VVRace
 {
     public class PerfumeGizmo : Gizmo
     {
+        private static readonly Color SlotColor = new Color(0.16f, 0.13f, 0.18f, 0.9f);
+
         private const float Width = 140f;
         private const float HeaderHeight = 32f;
         private const float SlotSize = 27f;
         private const float SlotGap = 4f;
         private const int LayoutHash = 126793481;
-        private static readonly Color SlotColor = new Color(0.16f, 0.13f, 0.18f, 0.9f);
-        private readonly CompPerfumeBottle comp;
+
+        private readonly CompPerfumeBottle _comp;
 
         public PerfumeGizmo(CompPerfumeBottle comp)
         {
-            this.comp = comp;
+            this._comp = comp;
             Order = -99f;
         }
 
-        public override bool Visible => comp != null && Find.Selector.NumSelected == 1;
+        public override bool Visible => _comp != null && _comp != null && _comp.parent is Pawn pawn && pawn.IsColonistPlayerControlled && Find.Selector.NumSelected == 1;
 
         public override float GetWidth(float maxWidth)
         {
@@ -39,11 +41,11 @@ namespace VVRace
             var statusRect = header.Rect;
             using (new TextBlock(GameFont.Tiny, TextAnchor.UpperLeft))
             {
-                Widgets.LabelEllipses(statusRect, comp.GetStatusText());
+                Widgets.LabelEllipses(statusRect, _comp.GetStatusText());
             }
 
             var slotRow = layout.NewRow(SlotSize, marginOverride: 0f);
-            var totalWidth = comp.Props.maxIngredients * SlotSize + (comp.Props.maxIngredients - 1) * SlotGap;
+            var totalWidth = _comp.Props.maxIngredients * SlotSize + (_comp.Props.maxIngredients - 1) * SlotGap;
             var centeredSlots = slotRow;
             centeredSlots.NewCol((slotRow.Rect.width - totalWidth) / 2f, marginOverride: 0f);
             var slots = centeredSlots.NewCol(totalWidth, marginOverride: 0f);
@@ -52,23 +54,23 @@ namespace VVRace
                 LayoutHash ^ 7919,
                 margin: new Vector2(SlotGap, 0f));
 
-            for (var index = 0; index < comp.Props.maxIngredients; index++)
+            for (var index = 0; index < _comp.Props.maxIngredients; index++)
             {
                 var slotRect = slotLayout.NewCol(
                     SlotSize,
-                    marginOverride: index == comp.Props.maxIngredients - 1 ? 0f : SlotGap).Rect;
+                    marginOverride: index == _comp.Props.maxIngredients - 1 ? 0f : SlotGap).Rect;
                 Widgets.DrawBoxSolid(slotRect, SlotColor);
                 Widgets.DrawBox(slotRect);
 
-                if (index < comp.Ingredients.Count)
+                if (index < _comp.Ingredients.Count)
                 {
-                    var ingredient = comp.Ingredients[index];
+                    var ingredient = _comp.Ingredients[index];
                     Widgets.DrawTextureFitted(slotRect.ContractedBy(2f), ingredient.uiIcon, 1f);
                     TooltipHandler.TipRegion(slotRect, ingredient.LabelCap);
                 }
             }
 
-            TooltipHandler.TipRegion(outerRect, comp.GetTooltip());
+            TooltipHandler.TipRegion(outerRect, _comp.GetTooltip());
             return new GizmoResult(GizmoState.Clear);
         }
     }
