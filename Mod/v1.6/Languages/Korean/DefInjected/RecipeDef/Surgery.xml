@@ -3,4 +3,7 @@
   <VV_InjectPropolis.label>프로폴리스 투여</VV_InjectPropolis.label>
   <VV_InjectPropolis.description>프로폴리스를 항생제로 가공해 투여합니다. 이 항생제는 감염, 독감, 흑사병, 말라리아에 효과가 있으며 완전히 치료하지는 못하지만 진행도를 상당히 늦출 수 있습니다.</VV_InjectPropolis.description>
   <VV_InjectPropolis.jobString>프로폴리스 투여중.</VV_InjectPropolis.jobString>
+  <VV_ApplyArchiteGermlineImprint.label>초월 생식각인 시술</VV_ApplyArchiteGermlineImprint.label>
+  <VV_ApplyArchiteGermlineImprint.description>초월입자 캡슐을 소모하여 로열 비비의 생식세포에 일시적으로 초월입자를 각인합니다. 각인이 유지되는 동안 산란 주기가 대폭 줄어들고 산란하는 알에 무작위 초월인자 유전자가 부여됩니다. 각인은 산란마다 소실될 수 있습니다.</VV_ApplyArchiteGermlineImprint.description>
+  <VV_ApplyArchiteGermlineImprint.jobString>초월 생식각인 시술 중.</VV_ApplyArchiteGermlineImprint.jobString>
 </LanguageData>

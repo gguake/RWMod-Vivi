@@ -38,4 +38,57 @@
       <li>VV_AdvancedGathering</li>
     </researchPrerequisites>
   </RecipeDef>
+
+  <RecipeDef ParentName="SurgeryFlesh">
+    <defName>VV_ApplyArchiteGermlineImprint</defName>
+    <label>apply archite germline imprint</label>
+    <description>Consume an archite capsule to imprint archites into a Royal Vivi's germ cells. While the imprint remains, egg development is accelerated and each egg is granted random archite genes.</description>
+    <descriptionHyperlinks>
+      <ThingDef>ArchiteCapsule</ThingDef>
+      <HediffDef>VV_ArchiteGermlineImprint</HediffDef>
+    </descriptionHyperlinks>
+
+    <workerClass>VVRace.Recipe_ApplyArchiteGermlineImprint</workerClass>
+    <jobString>applying archite germline imprint.</jobString>
+    <workAmount>1500</workAmount>
+    <hideBodyPartNames>true</hideBodyPartNames>
+    <targetsBodyPart>false</targetsBodyPart>
+    <allowedForQuestLodgers>false</allowedForQuestLodgers>
+    <surgerySuccessChanceFactor>1</surgerySuccessChanceFactor>
+    <uiIconThing>ArchiteCapsule</uiIconThing>
+
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ArchiteCapsule</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+      <li>
+        <filter>
+          <categories>
+            <li>Medicine</li>
+          </categories>
+        </filter>
+        <count>2</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>ArchiteCapsule</li>
+      </thingDefs>
+      <categories>
+        <li>Medicine</li>
+      </categories>
+    </fixedIngredientFilter>
+
+    <recipeUsers>
+      <li>VV_Vivi</li>
+    </recipeUsers>
+    <researchPrerequisites>
+      <li>Archogenetics</li>
+    </researchPrerequisites>
+  </RecipeDef>
 </Defs>

@@ -1,4 +1,4 @@
-﻿using RimWorld;
+using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -13,6 +13,8 @@ namespace VVRace
         public static CompViviEggLayer GetCompViviEggLayer(this Pawn pawn) => pawn.TryGetComp<CompViviEggLayer>();
 
         public static bool IsRoyalVivi(this Pawn pawn) => pawn.TryGetComp<CompVivi>()?.isRoyal ?? false;
+
+        public static bool IsCompatibleWithVivi(GeneDef def) => def != GeneDefOf.XenogermReimplanter;
 
         public static List<GeneDef> SelectRandomGeneForVivi(
             int count,
@@ -56,8 +58,37 @@ namespace VVRace
             return genes;
         }
 
+        public static List<GeneDef> SelectRandomArchiteGenesForVivi(int count)
+        {
+            if (count <= 0)
+            {
+                return new List<GeneDef>();
+            }
+
+            var allowModGenes = LoadedModManager.GetMod<VVRaceMod>().GetSettings<VVRaceModSettings>().allowSelectModGenes;
+            var eligibleGenes = DefDatabase<GeneDef>.AllDefsListForReading.Where(def =>
+            {
+                if (!IsCompatibleWithVivi(def) || def.biostatArc <= 0 || !def.canGenerateInGeneSet || def.prerequisite != null)
+                {
+                    return false;
+                }
+
+                if (!allowModGenes && def.modContentPack != null &&
+                    !def.modContentPack.PackageId.StartsWith(ModContentPack.CoreModPackageId))
+                {
+                    return false;
+                }
+
+                return true;
+
+            }).ToList();
+
+            return eligibleGenes.TakeRandomDistinct(Mathf.Min(count, eligibleGenes.Count));
+        }
+
         private static bool CheckInvalidGenesForVivi(GeneDef def)
         {
+            if (!IsCompatibleWithVivi(def)) { return false; }
             if (VVXenotypeDefOf.VV_Vivi.genes.Contains(def)) { return false; }
             if (def == GeneDefOf.Inbred) { return false; }
             if (def.biostatArc > 0 || def.displayCategory == GeneCategoryDefOf.Archite) { return false; }

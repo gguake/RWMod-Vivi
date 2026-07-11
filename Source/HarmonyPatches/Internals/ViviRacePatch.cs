@@ -48,6 +48,10 @@ namespace VVRace.HarmonyPatches
                 original: AccessTools.PropertyGetter(typeof(Pawn_GeneTracker), nameof(Pawn_GeneTracker.BiologicalAgeTickFactor)),
                 transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(Pawn_GeneTracker_get_BiologicalAgeTickFactor_Transpiler)));
 
+            harmony.Patch(
+                original: AccessTools.Method(typeof(Pawn_GeneTracker), nameof(Pawn_GeneTracker.AddGene), new[] { typeof(GeneDef), typeof(bool) }),
+                prefix: new HarmonyMethod(typeof(ViviRacePatch), nameof(Pawn_GeneTracker_AddGene_Prefix)));
+
             // 이복형제 방지
             harmony.Patch(
                 original: AccessTools.Method(typeof(PawnRelationWorker_Sibling), nameof(PawnRelationWorker_Sibling.InRelation)),
@@ -121,6 +125,17 @@ namespace VVRace.HarmonyPatches
             {
                 __result = false;
             }
+        }
+
+        private static bool Pawn_GeneTracker_AddGene_Prefix(Pawn ___pawn, GeneDef geneDef, ref Gene __result)
+        {
+            if (___pawn?.IsVivi() == true && !ViviUtility.IsCompatibleWithVivi(geneDef))
+            {
+                __result = null;
+                return false;
+            }
+
+            return true;
         }
 
         private static void LifeStageWorker_HumanlikeChild_Notify_LifeStageStarted_Postfix(Pawn pawn, LifeStageDef previousLifeStage)

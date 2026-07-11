@@ -39,6 +39,10 @@ namespace VVRace
             {
                 var pawn = (Pawn)parent;
                 var speed = PawnUtility.BodyResourceGrowthSpeed(pawn) * pawn.health.capacities.GetLevel(PawnCapacityDefOf.BloodPumping);
+                if (pawn.health.hediffSet.HasHediff(VVHediffDefOf.VV_ArchiteGermlineImprint))
+                {
+                    speed *= Hediff_ArchiteGermlineImprint.EggProgressFactor;
+                }
                 return Mathf.Clamp01(speed / ((CompProperties_EggLayer)props).eggProgressDays);
             }
         }
@@ -129,6 +133,10 @@ namespace VVRace
                 hatcher.parentGeneInheritanceGenerations = hatcher.parentXenogenes.ToDictionary(
                     geneDef => geneDef,
                     geneDef => CompVivi.GetGeneInheritanceGeneration(geneDef));
+
+                var architeImprint = pawn.health.hediffSet
+                    .GetFirstHediffOfDef(VVHediffDefOf.VV_ArchiteGermlineImprint) as Hediff_ArchiteGermlineImprint;
+                architeImprint?.Notify_EggProduced(hatcher);
 
                 return egg;
             }

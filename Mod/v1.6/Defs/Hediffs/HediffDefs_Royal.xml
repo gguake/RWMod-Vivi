@@ -52,4 +52,17 @@
       </li>
     </modExtensions>
   </HediffDef>
+
+  <HediffDef>
+    <defName>VV_ArchiteGermlineImprint</defName>
+    <label>archite germline imprint</label>
+    <description>Archites have been imprinted into this Royal Vivi's germline. Egg development speed is increased by 2.5 times, and each egg receives one random archite gene. A second gene is granted with a 50% chance, and a third gene is granted with a 10% chance. After laying an egg, the imprint has a 10% chance to dissipate. This chance increases by 20 percentage points after each egg laid, up to a maximum of 90%.</description>
+    <hediffClass>VVRace.Hediff_ArchiteGermlineImprint</hediffClass>
+    <defaultLabelColor>(0.4,0.8,1)</defaultLabelColor>
+
+    <isBad>false</isBad>
+    <priceImpact>false</priceImpact>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <everCurableByItem>false</everCurableByItem>
+  </HediffDef>
 </Defs>

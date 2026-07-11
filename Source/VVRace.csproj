@@ -325,10 +325,12 @@
     <Compile Include="ViviModsConfig.cs" />
     <Compile Include="Vivi\HediffGiver_GeneticUnstablity.cs" />
     <Compile Include="Vivi\Hediff_GeneticUnstablity.cs" />
+    <Compile Include="Vivi\Hediff_ArchiteGermlineImprint.cs" />
     <Compile Include="Vivi\Hediff_HoneyDependency.cs" />
     <Compile Include="Vivi\PawnKindDef_Vivi.cs" />
     <Compile Include="Gather\RecipeDef_Gathering.cs" />
     <Compile Include="Recipe_InjectPropolis.cs" />
+    <Compile Include="Recipe_ApplyArchiteGermlineImprint.cs" />
     <Compile Include="Utility\ToilUtility.cs" />
     <Compile Include="Gather\AI\WorkGiver_GatheringBill.cs" />
     <Compile Include="Utility\ILUtility.cs" />

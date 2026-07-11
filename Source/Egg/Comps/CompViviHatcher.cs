@@ -55,6 +55,7 @@ namespace VVRace
         public Pawn hatcheeParent;
         public List<GeneDef> parentXenogenes;
         public Dictionary<GeneDef, int> parentGeneInheritanceGenerations;
+        public List<GeneDef> architeGenes;
         public int randomSeed = Rand.Int;
 
         public override void PostPostMake()
@@ -71,6 +72,7 @@ namespace VVRace
             Scribe_References.Look(ref hatcheeParent, "hatcheeParent");
             Scribe_Collections.Look(ref parentXenogenes, "xenogenes", LookMode.Def);
             Scribe_Collections.Look(ref parentGeneInheritanceGenerations, "geneInheritanceGenerations", LookMode.Def, LookMode.Value);
+            Scribe_Collections.Look(ref architeGenes, "architeGenes", LookMode.Def);
             Scribe_Values.Look(ref randomSeed, "randomSeed", 0);
 
             if (parentGeneInheritanceGenerations == null)
@@ -157,6 +159,7 @@ namespace VVRace
                 pieceComp.parentXenogenes = parentXenogenes != null ? new List<GeneDef>(parentXenogenes) : null;
                 pieceComp.parentGeneInheritanceGenerations = parentGeneInheritanceGenerations != null ?
                     new Dictionary<GeneDef, int>(parentGeneInheritanceGenerations) : null;
+                pieceComp.architeGenes = architeGenes != null ? new List<GeneDef>(architeGenes) : null;
                 pieceComp.randomSeed = randomSeed;
             }
         }
@@ -204,6 +207,10 @@ namespace VVRace
                             parentXenogenes,
                             parentGeneInheritanceGenerations,
                             inheritedGenes);
+                        if (!architeGenes.NullOrEmpty())
+                        {
+                            xenogenes.AddRange(architeGenes.Where(geneDef => !xenogenes.Contains(geneDef)));
+                        }
 
                         var request = new PawnGenerationRequest(
                             pawnKindDef,

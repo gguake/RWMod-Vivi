@@ -210,6 +210,7 @@ namespace VVRace
         public static HediffDef VV_FairyGuarded;
         public static HediffDef VV_FairyConcentrated;
         public static HediffDef VV_ArcanePerfume;
+        public static HediffDef VV_ArchiteGermlineImprint;
     }
 
     [DefOf]
