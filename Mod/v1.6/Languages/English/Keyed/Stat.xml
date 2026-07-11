@@ -42,6 +42,7 @@
 <VV_StatsReport_ManaFluxRule_InVaccum_Desc>{0} mana if in vaccum</VV_StatsReport_ManaFluxRule_InVaccum_Desc>
 
 <VV_StatReport_Mana_Multiplier>Multiplier for mana {0}</VV_StatReport_Mana_Multiplier>
+<VV_StatReport_ViviMetabolismMaxNutrition>Vivi genetic metabolism: x{0}</VV_StatReport_ViviMetabolismMaxNutrition>
 
 <VV_ManaFluxRuleLabel_AdjacentPlant>When plants are nearby</VV_ManaFluxRuleLabel_AdjacentPlant>
 <VV_ManaFluxRuleLabel_AdjacentWater>When water is nearby</VV_ManaFluxRuleLabel_AdjacentWater>

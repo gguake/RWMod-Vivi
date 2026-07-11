@@ -42,6 +42,7 @@
 <VV_StatsReport_ManaFluxRule_InVaccum_Desc>진공에 있으면 마나 {0}</VV_StatsReport_ManaFluxRule_InVaccum_Desc>
 
 <VV_StatReport_Mana_Multiplier>마나 {0}의 계수</VV_StatReport_Mana_Multiplier>
+<VV_StatReport_ViviMetabolismMaxNutrition>비비 유전자 대사율: x{0}</VV_StatReport_ViviMetabolismMaxNutrition>
 
 <VV_ManaFluxRuleLabel_AdjacentPlant>주변에 식물이 있을 때</VV_ManaFluxRuleLabel_AdjacentPlant>
 <VV_ManaFluxRuleLabel_AdjacentWater>주변에 물이 있을 때</VV_ManaFluxRuleLabel_AdjacentWater>

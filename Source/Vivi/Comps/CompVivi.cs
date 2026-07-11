@@ -1,5 +1,6 @@
 ﻿using RimWorld;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using Verse;
 
@@ -37,6 +38,45 @@ namespace VVRace
             get
             {
                 return isRoyal && parent.Spawned && LinkedEverflower != null && LinkedEverflower.Spawned && parent.Map == LinkedEverflower.Map;
+            }
+        }
+
+        public float MetabolismFoodConsumptionFactor
+        {
+            get
+            {
+                var pawn = parent as Pawn;
+                if (!ModsConfig.BiotechActive || pawn?.genes == null)
+                {
+                    return 1f;
+                }
+
+                var metabolism = 0;
+                foreach (var gene in pawn.genes.GenesListForReading)
+                {
+                    if (!gene.Overridden)
+                    {
+                        metabolism += gene.def.biostatMet;
+                    }
+                }
+
+                return Mathf.Max(1f, GeneTuning.MetabolismToFoodConsumptionFactorCurve.Evaluate(metabolism));
+            }
+        }
+
+        public override float GetStatFactor(StatDef stat)
+        {
+            return stat == StatDefOf.MaxNutrition ? MetabolismFoodConsumptionFactor : 1f;
+        }
+
+        public override void GetStatsExplanation(StatDef stat, StringBuilder sb, string whitespace = "")
+        {
+            base.GetStatsExplanation(stat, sb, whitespace);
+
+            if (stat == StatDefOf.MaxNutrition && MetabolismFoodConsumptionFactor > 1f)
+            {
+                sb.AppendLine(whitespace + LocalizeString_Stat.VV_StatReport_ViviMetabolismMaxNutrition.Translate(
+                    MetabolismFoodConsumptionFactor.ToStringPercent()));
             }
         }
 

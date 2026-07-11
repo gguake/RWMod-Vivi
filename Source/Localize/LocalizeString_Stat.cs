@@ -1,4 +1,4 @@
-namespace VVRace
+﻿namespace VVRace
 {
     public static class LocalizeString_Stat
     {
@@ -41,6 +41,7 @@ namespace VVRace
         public const string VV_StatsReport_ManaFluxRule_InVaccum_Desc = nameof(VV_StatsReport_ManaFluxRule_InVaccum_Desc);
 
         public const string VV_StatReport_Mana_Multiplier = nameof(VV_StatReport_Mana_Multiplier);
+        public const string VV_StatReport_ViviMetabolismMaxNutrition = nameof(VV_StatReport_ViviMetabolismMaxNutrition);
 
         // 정보 탭용 간략한 마나 규칙 라벨
         public const string VV_ManaFluxRuleLabel_AdjacentPlant = nameof(VV_ManaFluxRuleLabel_AdjacentPlant);
