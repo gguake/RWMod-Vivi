@@ -203,7 +203,7 @@
         <label>scatter perfume powder</label>
         <violent>false</violent>
         <range>2.7</range>
-        <warmupTime>2</warmupTime>
+        <warmupTime>1</warmupTime>
         <defaultCooldownTime>0</defaultCooldownTime>
         <hasStandardCommand>true</hasStandardCommand>
         <targetable>false</targetable>

@@ -265,6 +265,7 @@ namespace VVRace
     {
         public static EffecterDef VV_PollenEmitting;
         public static EffecterDef VV_PerfumeSpray;
+        public static EffecterDef VV_Gather_Perfume;
         public static EffecterDef VV_Gather_Honey;
         public static EffecterDef VV_EverflowerLink;
         public static EffecterDef VV_StalitFlowerAura;

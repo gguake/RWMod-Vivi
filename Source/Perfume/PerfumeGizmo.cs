@@ -37,7 +37,7 @@ namespace VVRace
                 margin: new Vector2(SlotGap, SlotGap));
             var header = layout.NewRow(HeaderHeight);
             var statusRect = header.Rect;
-            using (new TextBlock(GameFont.Small, TextAnchor.UpperLeft))
+            using (new TextBlock(GameFont.Tiny, TextAnchor.UpperLeft))
             {
                 Widgets.LabelEllipses(statusRect, comp.GetStatusText());
             }

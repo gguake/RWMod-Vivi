@@ -60,6 +60,40 @@
     </children>
   </EffecterDef>
 
+  <!-- Gather_Perfume -->
+  <ThingDef ParentName="MoteBase">
+    <defName>VV_Mote_GatherPerfumeBottle</defName>
+    <thingClass>MoteDualAttached</thingClass>
+    <altitudeLayer>MetaOverlays</altitudeLayer>
+    <mote>
+      <solidTime>600</solidTime>
+      <rotateTowardsTarget>true</rotateTowardsTarget>
+    </mote>
+    <graphicData>
+      <texPath>Things/Item/VV_UnfermentedMead</texPath>
+      <drawSize>0.65</drawSize>
+    </graphicData>
+  </ThingDef>
+  <EffecterDef>
+    <defName>VV_Gather_Perfume</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_InteractSymbol</subEffecterClass>
+        <moteDef>VV_Mote_GatherPerfumeBottle</moteDef>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <fleckDef>VV_Fleck_PollenPuff</fleckDef>
+        <spawnLocType>BetweenPositions</spawnLocType>
+        <ticksBetweenMotes>59</ticksBetweenMotes>
+        <speed>0.1~0.3</speed>
+        <scale>0.7~1.2</scale>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+      </li>
+    </children>
+  </EffecterDef>
+
 
   <!-- Perfume spray: a clockwise pollen ring followed by a radial mist burst. -->
   <FleckDef ParentName="FleckBase_Thrown">
@@ -79,7 +113,7 @@
   <FleckDef ParentName="FleckBase_Thrown">
     <defName>VV_Fleck_PerfumePollen</defName>
     <graphicData>
-      <texPath>Things/Mote/VV_PollenPuff</texPath>
+      <texPath>Things/Mote/VV_PerfumePollenPuff</texPath>
       <shaderType>MoteGlow</shaderType>
       <renderInstanced>true</renderInstanced>
       <color>(1, 1, 1, 1)</color>
@@ -92,63 +126,58 @@
   </FleckDef>
   <EffecterDef>
     <defName>VV_PerfumeSpray</defName>
+    <maintainTicks>61</maintainTicks>
     <children>
       <li>
-        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <subEffecterClass>VVRace.SubEffecter_PerfumeSpiral</subEffecterClass>
         <fleckDef>VV_Fleck_PerfumeMist</fleckDef>
         <spawnLocType>OnTarget</spawnLocType>
-        <burstCount>14~18</burstCount>
-        <positionRadiusMin>0.3</positionRadiusMin>
-        <positionRadius>0.85</positionRadius>
-        <angle>0~360</angle>
-        <speed>0.15~0.4</speed>
-        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
-        <orbitOrigin>true</orbitOrigin>
-        <orbitSpeed>4.8~6.5</orbitSpeed>
-        <orbitSnapStrength>0.55</orbitSnapStrength>
+        <ticksBetweenMotes>3</ticksBetweenMotes>
+        <burstCount>1</burstCount>
+        <positionRadiusMin>0.15</positionRadiusMin>
+        <positionRadius>1.0</positionRadius>
+        <angle>-15~15</angle>
+        <speed>0.2~0.45</speed>
         <rotationRate>-120~120</rotationRate>
-        <scale>0.25~0.55</scale>
+        <scale>0.35~1.05</scale>
       </li>
       <li>
-        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <subEffecterClass>VVRace.SubEffecter_PerfumeSpiral</subEffecterClass>
         <fleckDef>VV_Fleck_PerfumePollen</fleckDef>
         <spawnLocType>OnTarget</spawnLocType>
-        <burstCount>18~24</burstCount>
-        <positionRadiusMin>0.35</positionRadiusMin>
-        <positionRadius>0.95</positionRadius>
-        <angle>0~360</angle>
-        <speed>0.2~0.5</speed>
-        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
-        <orbitOrigin>true</orbitOrigin>
-        <orbitSpeed>5.5~7.5</orbitSpeed>
-        <orbitSnapStrength>0.65</orbitSnapStrength>
+        <ticksBetweenMotes>2</ticksBetweenMotes>
+        <burstCount>2~3</burstCount>
+        <positionRadiusMin>0.1</positionRadiusMin>
+        <positionRadius>1.2</positionRadius>
+        <angle>-20~20</angle>
+        <speed>0.4~0.9</speed>
         <rotationRate>-180~180</rotationRate>
-        <scale>0.08~0.18</scale>
+        <scale>0.07~0.16</scale>
       </li>
       <li>
         <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
         <fleckDef>VV_Fleck_PerfumeMist</fleckDef>
         <spawnLocType>OnTarget</spawnLocType>
-        <burstCount>18~24</burstCount>
+        <burstCount>24~32</burstCount>
         <positionRadius>0.35</positionRadius>
         <angle>0~360</angle>
-        <speed>1~2.1</speed>
+        <speed>1.2~2.4</speed>
         <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
         <rotationRate>-120~120</rotationRate>
-        <scale>0.35~0.75</scale>
+        <scale>0.5~1</scale>
       </li>
       <li>
         <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
         <fleckDef>VV_Fleck_PerfumePollen</fleckDef>
         <spawnLocType>OnTarget</spawnLocType>
-        <burstCount>20~30</burstCount>
+        <burstCount>28~38</burstCount>
         <positionRadiusMin>0.1</positionRadiusMin>
         <positionRadius>0.4</positionRadius>
         <angle>0~360</angle>
-        <speed>1.2~2.6</speed>
+        <speed>1.5~3</speed>
         <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
         <rotationRate>-240~240</rotationRate>
-        <scale>0.06~0.14</scale>
+        <scale>0.08~0.18</scale>
       </li>
     </children>
   </EffecterDef>

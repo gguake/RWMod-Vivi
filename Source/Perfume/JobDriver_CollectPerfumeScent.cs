@@ -30,7 +30,7 @@ namespace VVRace
                 .FailOnDespawnedNullOrForbidden(FlowerIndex)
                 .FailOnBurningImmobile(FlowerIndex)
                 .WithFailCondition(() => BottleComp == null || !BottleComp.CanCollectFrom(pawn, Flower, out _))
-                .WithEffect(VVEffecterDefOf.VV_Gather_Honey, FlowerIndex)
+                .WithEffect(VVEffecterDefOf.VV_Gather_Perfume, FlowerIndex)
                 .WithProgressBarToilDelay(FlowerIndex);
 
             yield return Toils_General.DoAtomic(() => BottleComp?.TryCollect(Flower));

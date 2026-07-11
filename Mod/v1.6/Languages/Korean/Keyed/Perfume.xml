@@ -8,7 +8,7 @@
   <VV_Command_ReloadPerfumeBottleDesc>{1} {0}개를 소모해 빈 병을 다시 조향할 수 있게 준비합니다.</VV_Command_ReloadPerfumeBottleDesc>
   <VV_Perfume_StatusIngredients>채집한 꽃: {0}/{1}</VV_Perfume_StatusIngredients>
   <VV_Perfume_StatusSprays>남은 향가루: {0}/{1}</VV_Perfume_StatusSprays>
-  <VV_Perfume_StatusNeedsReload>{1}x{0} 필요</VV_Perfume_StatusNeedsReload>
+  <VV_Perfume_StatusNeedsReload>{1} x{0} 필요</VV_Perfume_StatusNeedsReload>
   <VV_Perfume_StatusReloading>넣은 꽃가루: {0}/{1}</VV_Perfume_StatusReloading>
   <VV_Perfume_BlendHeader>조합: {0}</VV_Perfume_BlendHeader>
   <VV_Perfume_NoArcaneEffect>일반 꽃은 기분 좋은 향기를 더하지만 마법적 효과는 없습니다.</VV_Perfume_NoArcaneEffect>

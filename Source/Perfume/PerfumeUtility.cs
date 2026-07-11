@@ -1,4 +1,4 @@
-﻿using RimWorld;
+using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,7 @@ namespace VVRace
 {
     public static class PerfumeUtility
     {
-        private static readonly Color OrdinaryFlowerColor = new Color(1f, 0.75f, 0.35f);
+        private static readonly Color OrdinaryFlowerColor = new Color(0.9f, 0.9f, 0.9f);
 
         private class BlendEntry
         {

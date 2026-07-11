@@ -29,7 +29,7 @@ namespace VVRace
     [StaticConstructorOnStartup]
     public class CompPerfumeBottle : ThingComp, IReloadableComp
     {
-        private static readonly Texture2D CollectIcon = ContentFinder<Texture2D>.Get("Things/Mote/VV_GatherHoney");
+        private static readonly Texture2D CollectIcon = ContentFinder<Texture2D>.Get("Things/Item/VV_UnfermentedMead");
         private static readonly Texture2D ReloadIcon = ContentFinder<Texture2D>.Get("Things/Item/VV_ViviDust");
 
         private List<ThingDef> ingredients = new List<ThingDef>();
@@ -267,7 +267,11 @@ namespace VVRace
 
             var target = new TargetInfo(sprayer);
             effecter.Trigger(target, target);
-            effecter.Cleanup();
+            sprayer.Map.effecterMaintainer.AddEffecterToMaintain(
+                effecter,
+                target,
+                target,
+                VVEffecterDefOf.VV_PerfumeSpray.maintainTicks);
         }
 
         private void NotifyBlendColorChanged()

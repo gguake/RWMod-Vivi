@@ -92,6 +92,7 @@
     <Compile Include="Perfume\PerfumeExtensions.cs" />
     <Compile Include="Perfume\PerfumeGizmo.cs" />
     <Compile Include="Perfume\PerfumeUtility.cs" />
+    <Compile Include="Perfume\SubEffecter_PerfumeSpiral.cs" />
     <Compile Include="Perfume\Verb_SprayPerfume.cs" />
     <Compile Include="Localize\LocalizeString_Perfume.cs" />
     <Compile Include="Fairy\Abilities\CompAbilityEffect_FairyConcentration.cs" />
