@@ -23,15 +23,15 @@ namespace VVRace
         public static bool IsPerfumeFlower(ThingDef def)
         {
             return def != null &&
-                (def.GetModExtension<ArcaneFlowerPerfumeExtension>() != null ||
-                 def.GetModExtension<FlowerPerfumeExtension>() != null);
+                def.plant != null &&
+                def.StatBaseDefined(VVStatDefOf.VV_PlantHoneyGatherYield) &&
+                def.GetStatValueAbstract(VVStatDefOf.VV_PlantHoneyGatherYield) > 0f;
         }
 
         public static bool IsOrdinaryFlower(ThingDef def)
         {
-            return def != null &&
-                def.GetModExtension<ArcaneFlowerPerfumeExtension>() == null &&
-                def.GetModExtension<FlowerPerfumeExtension>() != null;
+            return IsPerfumeFlower(def) &&
+                def.GetModExtension<ArcaneFlowerPerfumeExtension>() == null;
         }
 
         public static int OrdinaryFlowerCount(IEnumerable<ThingDef> ingredients)

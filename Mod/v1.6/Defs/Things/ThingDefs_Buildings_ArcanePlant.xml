@@ -159,7 +159,7 @@
     <comps>
       <li Class="VVRace.CompProperties_Mana">
         <manaGenerateRule Class="VVRace.ManaFluxRule_Refuelable">
-          <mana>750</mana>
+          <mana>800</mana>
           <fuelDef>VV_Fertilizer</fuelDef>
         </manaGenerateRule>
       </li>
