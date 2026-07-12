@@ -108,10 +108,11 @@
             </statOffsets>
           </li>
           <li>
-            <minWeight>0.7</minWeight>
-            <statFactors>
-              <MeleeDamageFactor>1.25</MeleeDamageFactor>
-            </statFactors>
+            <minWeight>1</minWeight>
+            <scaleWithWeight>false</scaleWithWeight>
+            <capMods>
+              <li><capacity>Manipulation</capacity><postFactor>1.1</postFactor></li>
+            </capMods>
           </li>
         </effects>
       </li>
@@ -217,10 +218,11 @@
             </statOffsets>
           </li>
           <li>
-            <minWeight>0.7</minWeight>
-            <statOffsets>
-              <AimingDelayFactor>-0.25</AimingDelayFactor>
-            </statOffsets>
+            <minWeight>1</minWeight>
+            <scaleWithWeight>false</scaleWithWeight>
+            <capMods>
+              <li><capacity>Consciousness</capacity><postFactor>1.1</postFactor></li>
+            </capMods>
           </li>
         </effects>
       </li>

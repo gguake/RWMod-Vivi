@@ -47,13 +47,13 @@
   <VV_PerfumeName_Everflower_2>영겁</VV_PerfumeName_Everflower_2>
   <VV_PerfumeName_Everflower_3>영원</VV_PerfumeName_Everflower_3>
 
-  <VV_PerfumeEffect_EmberBloom>잔불꽃의 온기는 추위를 견디는 범위를 넓히며, 향이 짙어지면 면역 형성 속도를 높입니다.</VV_PerfumeEffect_EmberBloom>
-  <VV_PerfumeEffect_FrostBloom>서리꽃의 냉기는 더위를 견디는 범위를 넓히며, 향이 짙어지면 피로가 쌓이는 속도를 늦춥니다.</VV_PerfumeEffect_FrostBloom>
-  <VV_PerfumeEffect_Shockerbud>섬광꽃의 전기는 근접 공격의 명중과 회피를 돕고, 향이 짙어지면 근접 공격력을 높입니다.</VV_PerfumeEffect_Shockerbud>
-  <VV_PerfumeEffect_Thunderpetals>벼락꽃의 기운은 사격 정확도를 높이고 재장전 시간을 줄이며, 향이 짙어지면 조준 시간을 단축합니다.</VV_PerfumeEffect_Thunderpetals>
-  <VV_PerfumeEffect_Waterdrops>물방울꽃의 청량함은 독성에 대한 저항력을 높이며, 향이 짙어지면 불이 잘 붙지 않게 합니다.</VV_PerfumeEffect_Waterdrops>
-  <VV_PerfumeEffect_Radiantflower>빛바라기의 빛은 정신이 무너질 가능성을 낮추며, 향이 짙어지면 부상 회복 속도를 높입니다.</VV_PerfumeEffect_Radiantflower>
-  <VV_PerfumeEffect_Richflower>풍년화의 향기는 전반적인 작업 속도를 높이며, 향이 짙어지면 각종 채집의 산출량을 높입니다.</VV_PerfumeEffect_Richflower>
-  <VV_PerfumeEffect_Starlitflower>별맞이꽃의 향기는 고통 한계치와 진공 저항력을 높이며, 향이 짙어지면 학습 속도를 높입니다.</VV_PerfumeEffect_Starlitflower>
-  <VV_PerfumeEffect_Everflower>영원꽃의 기운은 정신 감응력을 높이며, 향이 짙어지면 이동 속도를 크게 높입니다.</VV_PerfumeEffect_Everflower>
+  <VV_PerfumeEffect_EmberBloom>꽃 무게에 비례하는 기본 효과는 최저 쾌적 온도에 -20°C 보정을 줍니다. 꽃 무게 1에서 고정 보너스가 활성화됩니다: 면역 형성 속도 +0.2, 고통 한계치 +0.1. 이 고정 보너스는 무게가 더 높아져도 커지지 않습니다.</VV_PerfumeEffect_EmberBloom>
+  <VV_PerfumeEffect_FrostBloom>꽃 무게에 비례하는 기본 효과는 최고 쾌적 온도에 +20°C 보정을 줍니다. 꽃 무게 1에서 고정 휴식 감소율 x0.8 보너스가 활성화됩니다. 이 고정 보너스는 무게가 더 높아져도 커지지 않습니다.</VV_PerfumeEffect_FrostBloom>
+  <VV_PerfumeEffect_Shockerbud>꽃 무게에 비례하는 기본 효과는 근접 회피 확률 +10과 근접 명중률 +4를 부여합니다. 꽃 무게 1에서 고정 조작 능력 x1.1 보너스가 활성화됩니다. 이 고정 보너스는 무게가 더 높아져도 커지지 않습니다.</VV_PerfumeEffect_Shockerbud>
+  <VV_PerfumeEffect_Thunderpetals>꽃 무게에 비례하는 기본 효과는 사격 정확도 +8과 원거리 재사용 대기시간 보정 -0.1을 부여합니다. 꽃 무게 1에서 고정 의식 능력 x1.1 보너스가 활성화됩니다. 이 고정 보너스는 무게가 더 높아져도 커지지 않습니다.</VV_PerfumeEffect_Thunderpetals>
+  <VV_PerfumeEffect_Waterdrops>꽃 무게에 비례하는 기본 효과는 독성 저항 +1.0을 부여합니다. 꽃 무게 1에서 고정 보너스가 활성화됩니다: 가연성 x0, 화염 및 화상 피해 x0. 이 고정 보너스는 무게가 더 높아져도 커지지 않습니다.</VV_PerfumeEffect_Waterdrops>
+  <VV_PerfumeEffect_Radiantflower>꽃 무게에 비례하는 기본 효과는 정신이상 한계치에 -0.1 보정을 줍니다. 꽃 무게 1에서 고정 보너스가 활성화됩니다: 부상 회복 x1.5, 총 출혈량 x0.8. 이 고정 보너스는 무게가 더 높아져도 커지지 않습니다.</VV_PerfumeEffect_Radiantflower>
+  <VV_PerfumeEffect_Richflower>꽃 무게에 비례하는 기본 효과는 전체 작업 속도 +0.15를 부여합니다. 꽃 무게 1에서 고정 허기율 x0.8 보너스가 활성화됩니다. 이 고정 보너스는 무게가 더 높아져도 커지지 않습니다.</VV_PerfumeEffect_Richflower>
+  <VV_PerfumeEffect_Starlitflower>꽃 무게에 비례하는 기본 효과는 고통 한계치 +0.1을 부여합니다. 꽃 무게 1에서 고정 보너스가 활성화됩니다: 진공 저항 +1(오디세이 전용), 시각 능력 x1.1. 이 고정 보너스는 무게가 더 높아져도 커지지 않습니다.</VV_PerfumeEffect_Starlitflower>
+  <VV_PerfumeEffect_Everflower>꽃 무게에 비례하는 기본 효과는 정신 감응력 +0.5를 부여합니다. 꽃 무게 0.7에서 무게 비례 이동 속도 보정 +1.2도 활성화됩니다. 꽃 무게 1에서 고정 이동 능력 x1.2 보너스가 활성화됩니다. 이 고정 보너스는 무게가 더 높아져도 커지지 않습니다.</VV_PerfumeEffect_Everflower>
 </LanguageData>

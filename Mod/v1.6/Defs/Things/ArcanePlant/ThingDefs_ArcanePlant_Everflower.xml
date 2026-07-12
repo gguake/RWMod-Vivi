@@ -228,6 +228,13 @@
             <minWeight>0.7</minWeight>
             <statOffsets><MoveSpeed>1.2</MoveSpeed></statOffsets>
           </li>
+          <li>
+            <minWeight>1</minWeight>
+            <scaleWithWeight>false</scaleWithWeight>
+            <capMods>
+              <li><capacity>Moving</capacity><postFactor>1.2</postFactor></li>
+            </capMods>
+          </li>
         </effects>
       </li>
     </modExtensions>

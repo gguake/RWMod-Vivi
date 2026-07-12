@@ -93,8 +93,12 @@
             <statOffsets><ComfyTemperatureMin>-20</ComfyTemperatureMin></statOffsets>
           </li>
           <li>
-            <minWeight>0.7</minWeight>
-            <statOffsets><ImmunityGainSpeed>0.2</ImmunityGainSpeed></statOffsets>
+            <minWeight>1</minWeight>
+            <scaleWithWeight>false</scaleWithWeight>
+            <statOffsets>
+              <ImmunityGainSpeed>0.2</ImmunityGainSpeed>
+              <PainShockThreshold>0.1</PainShockThreshold>
+            </statOffsets>
           </li>
         </effects>
       </li>
@@ -197,8 +201,11 @@
             <statOffsets><ComfyTemperatureMax>20</ComfyTemperatureMax></statOffsets>
           </li>
           <li>
-            <minWeight>0.7</minWeight>
-            <statFactors><RestFallRateFactor>0.9</RestFallRateFactor></statFactors>
+            <minWeight>1</minWeight>
+            <scaleWithWeight>false</scaleWithWeight>
+            <statFactors>
+              <RestFallRateFactor>0.8</RestFallRateFactor>
+            </statFactors>
           </li>
         </effects>
       </li>

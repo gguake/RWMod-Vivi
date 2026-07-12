@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -154,6 +154,11 @@ namespace VVRace
         {
             var offsets = new Dictionary<StatDef, float>();
             var factors = new Dictionary<StatDef, float>();
+            var capacityOffsets = new Dictionary<PawnCapacityDef, float>();
+            var capacityFactors = new Dictionary<PawnCapacityDef, float>();
+            var damageFactors = new Dictionary<DamageDef, float>();
+            var totalBleedFactor = 1f;
+            var hungerRateFactor = 1f;
 
             foreach (var entry in MakeBlendEntries(ingredients, arcaneWeightPerFlower, ordinaryFlowerWeightBonus))
             {
@@ -169,6 +174,8 @@ namespace VVRace
                         continue;
                     }
 
+                    var effectWeight = effect.scaleWithWeight ? entry.weight : 1f;
+
                     foreach (var modifier in effect.statOffsets ?? Enumerable.Empty<StatModifier>())
                     {
                         if (modifier.stat == null)
@@ -177,7 +184,7 @@ namespace VVRace
                         }
 
                         offsets.TryGetValue(modifier.stat, out var current);
-                        offsets[modifier.stat] = current + modifier.value * entry.weight;
+                        offsets[modifier.stat] = current + modifier.value * effectWeight;
                     }
 
                     foreach (var modifier in effect.statFactors ?? Enumerable.Empty<StatModifier>())
@@ -187,32 +194,110 @@ namespace VVRace
                             continue;
                         }
 
-                        factors.TryGetValue(modifier.stat, out var current);
-                        if (current == 0f)
+                        MultiplyFactor(factors, modifier.stat, ScaleFactor(modifier.value, effectWeight));
+                    }
+
+                    foreach (var modifier in effect.capMods ?? Enumerable.Empty<PawnCapacityModifier>())
+                    {
+                        if (modifier.capacity == null)
                         {
-                            current = 1f;
+                            continue;
                         }
 
-                        var weightedFactor = 1f + (modifier.value - 1f) * entry.weight;
-                        factors[modifier.stat] = current * weightedFactor;
+                        capacityOffsets.TryGetValue(modifier.capacity, out var current);
+                        capacityOffsets[modifier.capacity] = current + modifier.offset * effectWeight;
+                        MultiplyFactor(
+                            capacityFactors,
+                            modifier.capacity,
+                            ScaleFactor(modifier.postFactor, effectWeight));
                     }
+
+                    foreach (var modifier in effect.damageFactors ?? Enumerable.Empty<DamageFactor>())
+                    {
+                        if (modifier.damageDef == null)
+                        {
+                            continue;
+                        }
+
+                        MultiplyFactor(
+                            damageFactors,
+                            modifier.damageDef,
+                            ScaleFactor(modifier.factor, effectWeight));
+                    }
+
+                    totalBleedFactor *= ScaleFactor(effect.totalBleedFactor, effectWeight);
+                    hungerRateFactor *= ScaleFactor(effect.hungerRateFactor, effectWeight);
                 }
             }
 
             return new HediffStage
             {
                 becomeVisible = true,
-                statOffsets = offsets.Count == 0
-                    ? null
-                    : offsets.OrderBy(pair => pair.Key.defName, StringComparer.Ordinal)
-                        .Select(pair => new StatModifier { stat = pair.Key, value = pair.Value })
-                        .ToList(),
-                statFactors = factors.Count == 0
-                    ? null
-                    : factors.OrderBy(pair => pair.Key.defName, StringComparer.Ordinal)
-                        .Select(pair => new StatModifier { stat = pair.Key, value = pair.Value })
-                        .ToList()
+                statOffsets = MakeStatModifiers(offsets),
+                statFactors = MakeStatModifiers(factors),
+                capMods = MakeCapacityModifiers(capacityOffsets, capacityFactors),
+                damageFactors = MakeDamageFactors(damageFactors),
+                totalBleedFactor = totalBleedFactor,
+                hungerRateFactor = hungerRateFactor
             };
+        }
+
+        private static void MultiplyFactor<T>(Dictionary<T, float> factors, T key, float factor)
+        {
+            if (!factors.TryGetValue(key, out var current))
+            {
+                current = 1f;
+            }
+
+            factors[key] = current * factor;
+        }
+
+        private static float ScaleFactor(float factor, float weight)
+        {
+            return 1f + (factor - 1f) * weight;
+        }
+
+        private static List<StatModifier> MakeStatModifiers(Dictionary<StatDef, float> modifiers)
+        {
+            return modifiers.Count == 0
+                ? null
+                : modifiers.OrderBy(pair => pair.Key.defName, StringComparer.Ordinal)
+                    .Select(pair => new StatModifier { stat = pair.Key, value = pair.Value })
+                    .ToList();
+        }
+
+        private static List<PawnCapacityModifier> MakeCapacityModifiers(
+            Dictionary<PawnCapacityDef, float> offsets,
+            Dictionary<PawnCapacityDef, float> factors)
+        {
+            return offsets.Keys
+                .Concat(factors.Keys)
+                .Distinct()
+                .OrderBy(capacity => capacity.defName, StringComparer.Ordinal)
+                .Select(capacity =>
+                {
+                    offsets.TryGetValue(capacity, out var offset);
+                    if (!factors.TryGetValue(capacity, out var postFactor))
+                    {
+                        postFactor = 1f;
+                    }
+
+                    return new PawnCapacityModifier
+                    {
+                        capacity = capacity,
+                        offset = offset,
+                        postFactor = postFactor
+                    };
+                })
+                .ToList();
+        }
+
+        private static List<DamageFactor> MakeDamageFactors(Dictionary<DamageDef, float> factors)
+        {
+            return factors
+                .OrderBy(pair => pair.Key.defName, StringComparer.Ordinal)
+                .Select(pair => new DamageFactor { damageDef = pair.Key, factor = pair.Value })
+                .ToList();
         }
 
         public static string GetEffectDescription(

@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
 using Verse;
@@ -34,7 +34,12 @@ namespace VVRace
     public class PerfumeEffect
     {
         public float minWeight;
+        public bool scaleWithWeight = true;
         public List<StatModifier> statOffsets;
         public List<StatModifier> statFactors;
+        public List<PawnCapacityModifier> capMods;
+        public List<DamageFactor> damageFactors;
+        public float totalBleedFactor = 1f;
+        public float hungerRateFactor = 1f;
     }
 }

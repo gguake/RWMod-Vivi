@@ -128,8 +128,10 @@
             <statOffsets><ToxicResistance>1.0</ToxicResistance></statOffsets>
           </li>
           <li>
-            <minWeight>0.7</minWeight>
+            <minWeight>1</minWeight>
+            <scaleWithWeight>false</scaleWithWeight>
             <statFactors><Flammability>0</Flammability></statFactors>
+            <damageFactors><Flame>0</Flame><Burn>0</Burn></damageFactors>
           </li>
         </effects>
       </li>
@@ -227,8 +229,10 @@
             <statOffsets><MentalBreakThreshold>-0.1</MentalBreakThreshold></statOffsets>
           </li>
           <li>
-            <minWeight>0.7</minWeight>
+            <minWeight>1</minWeight>
+            <scaleWithWeight>false</scaleWithWeight>
             <statFactors><InjuryHealingFactor>1.5</InjuryHealingFactor></statFactors>
+            <totalBleedFactor>0.8</totalBleedFactor>
           </li>
         </effects>
       </li>
@@ -355,14 +359,9 @@
             <statOffsets><WorkSpeedGlobal>0.15</WorkSpeedGlobal></statOffsets>
           </li>
           <li>
-            <minWeight>0.7</minWeight>
-            <statFactors>
-              <MiningYield>1.15</MiningYield>
-              <AnimalGatherYield>1.15</AnimalGatherYield>
-              <PlantHarvestYield>1.15</PlantHarvestYield>
-              <VV_HoneyGatherYield>1.15</VV_HoneyGatherYield>
-              <VV_PlantGatherYield>1.15</VV_PlantGatherYield>
-            </statFactors>
+            <minWeight>1</minWeight>
+            <scaleWithWeight>false</scaleWithWeight>
+            <hungerRateFactor>0.8</hungerRateFactor>
           </li>
         </effects>
       </li>
@@ -575,12 +574,17 @@
             <minWeight>0</minWeight>
             <statOffsets>
               <PainShockThreshold>0.1</PainShockThreshold>
-              <VacuumResistance MayRequire="Ludeon.RimWorld.Odyssey">1</VacuumResistance>
             </statOffsets>
           </li>
           <li>
-            <minWeight>0.7</minWeight>
-            <statOffsets><GlobalLearningFactor>0.5</GlobalLearningFactor></statOffsets>
+            <minWeight>1</minWeight>
+            <scaleWithWeight>false</scaleWithWeight>
+            <statOffsets>
+              <VacuumResistance MayRequire="Ludeon.RimWorld.Odyssey">1</VacuumResistance>
+            </statOffsets>
+            <capMods>
+              <li><capacity>Sight</capacity><postFactor>1.1</postFactor></li>
+            </capMods>
           </li>
         </effects>
       </li>

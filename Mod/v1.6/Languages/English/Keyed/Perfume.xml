@@ -47,13 +47,13 @@
   <VV_PerfumeName_Everflower_2>aeon</VV_PerfumeName_Everflower_2>
   <VV_PerfumeName_Everflower_3>eternity</VV_PerfumeName_Everflower_3>
 
-  <VV_PerfumeEffect_EmberBloom>Emberbloom warmth improves cold tolerance; concentrated blends also accelerate immunity gain.</VV_PerfumeEffect_EmberBloom>
-  <VV_PerfumeEffect_FrostBloom>Frostbloom coolness improves heat tolerance; concentrated blends slow the buildup of fatigue.</VV_PerfumeEffect_FrostBloom>
-  <VV_PerfumeEffect_Shockerbud>Flashbud electricity improves melee skills; concentrated blends also increase melee damage.</VV_PerfumeEffect_Shockerbud>
-  <VV_PerfumeEffect_Thunderpetals>Thunderpetal energy improves shooting accuracy and shortens ranged cooldowns; concentrated blends also reduce aiming delay.</VV_PerfumeEffect_Thunderpetals>
-  <VV_PerfumeEffect_Waterdrops>Waterdrop freshness improves toxic resistance; concentrated blends also reduce flammability.</VV_PerfumeEffect_Waterdrops>
-  <VV_PerfumeEffect_Radiantflower>Radiantflower light lowers the mental break threshold; concentrated blends also speed injury healing.</VV_PerfumeEffect_Radiantflower>
-  <VV_PerfumeEffect_Richflower>Richflower abundance improves overall work speed; concentrated blends also increase yields from nature.</VV_PerfumeEffect_Richflower>
-  <VV_PerfumeEffect_Starlitflower>Starlitflower fragrance raises the pain shock threshold and improves vacuum resistance; concentrated blends also accelerate learning.</VV_PerfumeEffect_Starlitflower>
-  <VV_PerfumeEffect_Everflower>Everflower resonance heightens psychic sensitivity; concentrated blends also greatly increase movement speed.</VV_PerfumeEffect_Everflower>
+  <VV_PerfumeEffect_EmberBloom>The weight-scaled base effect applies -20°C to minimum comfortable temperature. At flower weight 1, fixed bonuses activate: immunity gain speed +0.2 and pain shock threshold +0.1. These fixed bonuses do not grow with higher weight.</VV_PerfumeEffect_EmberBloom>
+  <VV_PerfumeEffect_FrostBloom>The weight-scaled base effect applies +20°C to maximum comfortable temperature. At flower weight 1, a fixed rest fall rate x0.8 bonus activates. This fixed bonus does not grow with higher weight.</VV_PerfumeEffect_FrostBloom>
+  <VV_PerfumeEffect_Shockerbud>The weight-scaled base effect grants melee dodge chance +10 and melee hit chance +4. At flower weight 1, a fixed Manipulation capacity x1.1 bonus activates. This fixed bonus does not grow with higher weight.</VV_PerfumeEffect_Shockerbud>
+  <VV_PerfumeEffect_Thunderpetals>The weight-scaled base effect grants shooting accuracy +8 and ranged cooldown offset -0.1. At flower weight 1, a fixed Consciousness capacity x1.1 bonus activates. This fixed bonus does not grow with higher weight.</VV_PerfumeEffect_Thunderpetals>
+  <VV_PerfumeEffect_Waterdrops>The weight-scaled base effect grants toxic resistance +1.0. At flower weight 1, fixed bonuses activate: flammability x0 and Flame and Burn damage x0. These fixed bonuses do not grow with higher weight.</VV_PerfumeEffect_Waterdrops>
+  <VV_PerfumeEffect_Radiantflower>The weight-scaled base effect applies mental break threshold -0.1. At flower weight 1, fixed bonuses activate: injury healing x1.5 and total bleeding x0.8. These fixed bonuses do not grow with higher weight.</VV_PerfumeEffect_Radiantflower>
+  <VV_PerfumeEffect_Richflower>The weight-scaled base effect grants global work speed +0.15. At flower weight 1, a fixed hunger rate x0.8 bonus activates. This fixed bonus does not grow with higher weight.</VV_PerfumeEffect_Richflower>
+  <VV_PerfumeEffect_Starlitflower>The weight-scaled base effect grants pain shock threshold +0.1. At flower weight 1, fixed bonuses activate: Vacuum Resistance +1 (Odyssey only) and Sight capacity x1.1. These fixed bonuses do not grow with higher weight.</VV_PerfumeEffect_Starlitflower>
+  <VV_PerfumeEffect_Everflower>The weight-scaled base effect grants psychic sensitivity +0.5. At flower weight 0.7, the weight-scaled Move Speed offset +1.2 also activates. At flower weight 1, a fixed Moving capacity x1.2 bonus activates. This fixed bonus does not grow with higher weight.</VV_PerfumeEffect_Everflower>
 </LanguageData>
