@@ -44,6 +44,10 @@
 <VV_ModSettings_RandomGenesForStartingVivi>스타팅 비비에게 무작위 유전자 부여</VV_ModSettings_RandomGenesForStartingVivi>
 <VV_ModSettings_RandomGenesForStartingViviDesc>게임 시작 시 플레이어의 비비에게도 NPC 비비처럼 무작위 유전자를 부여합니다. 이미 존재하는 비비에게는 적용되지 않습니다.</VV_ModSettings_RandomGenesForStartingViviDesc>
 
+<VV_ModSettings_ViviMealContinuationNutritionGap>연속 식사 열량 기준</VV_ModSettings_ViviMealContinuationNutritionGap>
+<VV_ModSettings_ViviMealContinuationNutritionGapDesc>식사를 마친 비비가 아직 배고플때 추가로 식사하도록 설정하는 기능입니다. 식사 이후에도 설정된 값만큼의 음식을 더 먹을수 있다면 다른 작업보다 식사를 우선으로 지속합니다.
+\n비비는 유전자 대사 효율에 따라 최대 섭취 가능한 열량이 달라지므로 과도하게 많은 유전자를 보유한 비비가 수시로 식사를 위해 자리를 비우는 문제를 완화하기 위한 옵션입니다. 사용하지 않으려면 최대치로 설정하세요.</VV_ModSettings_ViviMealContinuationNutritionGapDesc>
+
 <VV_Thing_Seed>{0} 씨앗</VV_Thing_Seed>
 <VV_Thing_SeedDesc>{0}의 씨앗입니다. 땅이나 마법 식물 화분에 심으면 모종이 되며, 모종이 완전히 자라면 {0}이(가) 됩니다.\n마법 식물이 성장하려면 마나와 양분이 모두 공급되야 합니다.
 \n마나는 환경 마나를 흡수하므로 주변에 마나 발생기를 설치하거나 마나를 생산하는 마법 식물로부터 공급할 수 있습니다.

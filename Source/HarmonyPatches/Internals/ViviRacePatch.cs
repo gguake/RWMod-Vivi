@@ -1,6 +1,7 @@
 using HarmonyLib;
 using RimWorld;
 using RimWorld.BaseGen;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -14,6 +15,10 @@ namespace VVRace.HarmonyPatches
 {
     internal class ViviRacePatch
     {
+        private static readonly FieldInfo JobDriverFinalizerJobFactoryField = AccessTools.Field(typeof(JobDriver), "finalizerJobFactory");
+        private static readonly MethodInfo JobDriverSetFinalizerJobMethod = AccessTools.Method(typeof(JobDriver), "SetFinalizerJob");
+        private static readonly ViviFoodContinuationJobGiver ViviFoodJobGiver = new ViviFoodContinuationJobGiver();
+
         internal static void Patch(Harmony harmony)
         {
             harmony.Patch(
@@ -108,7 +113,81 @@ namespace VVRace.HarmonyPatches
                 original: AccessTools.Method(typeof(RestUtility), nameof(RestUtility.CanUseBedNow)),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(RestUtility_CanUseBedNow_Postfix)));
 
+            harmony.Patch(
+                original: AccessTools.Method(typeof(JobDriver_Ingest), "MakeNewToils"),
+                postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(JobDriver_Ingest_MakeNewToils_Postfix)));
+
             Log.Message("!! [ViViRace] race patch complete");
+        }
+
+        private static void JobDriver_Ingest_MakeNewToils_Postfix(JobDriver_Ingest __instance, ref IEnumerable<Toil> __result)
+        {
+            __result = InstallViviMealFinalizerAfterToils(__instance, __result);
+        }
+
+        private static IEnumerable<Toil> InstallViviMealFinalizerAfterToils(JobDriver_Ingest driver, IEnumerable<Toil> toils)
+        {
+            foreach (var toil in toils)
+            {
+                yield return toil;
+            }
+
+            var previousFinalizer = (Func<JobCondition, Job>)JobDriverFinalizerJobFactoryField.GetValue(driver);
+            Func<JobCondition, Job> finalizer = condition =>
+            {
+                var previousJob = previousFinalizer?.Invoke(condition);
+                if (previousJob != null) { return previousJob; }
+
+                var currentJob = driver?.job;
+                if (condition != JobCondition.Succeeded || 
+                    currentJob == null || 
+                    currentJob.def != JobDefOf.Ingest ||
+                    currentJob.playerForced || 
+                    (currentJob.jobGiver != null && !(currentJob.jobGiver is JobGiver_GetFood)))
+                {
+                    return null;
+                }
+
+                var ingestible = currentJob.targetA.Thing;
+                if (ingestible?.def == null || !ingestible.def.IsNutritionGivingIngestible || ingestible.def.IsDrug)
+                {
+                    return null;
+                }
+
+                var pawn = driver.pawn;
+                var foodNeed = pawn?.needs?.food;
+                if (pawn == null || 
+                    foodNeed == null || 
+                    !pawn.Spawned || 
+                    !pawn.IsVivi() || 
+                    !pawn.IsColonistPlayerControlled ||
+                    pawn.Drafted || 
+                    pawn.Downed || 
+                    pawn.InMentalState || 
+                    pawn.IsBurning() || 
+                    pawn.jobs.jobQueue.Count > 0)
+                {
+                    return null;
+                }
+
+                var settings = LoadedModManager.GetMod<VVRaceMod>().GetSettings<VVRaceModSettings>();
+                if (foodNeed.CurLevel > foodNeed.MaxLevel - settings.viviMealContinuationNutritionGap)
+                {
+                    return null;
+                }
+
+                return ViviFoodJobGiver.TryGiveContinuationJob(pawn);
+            };
+
+            JobDriverSetFinalizerJobMethod.Invoke(driver, new object[] { finalizer });
+        }
+
+        private sealed class ViviFoodContinuationJobGiver : JobGiver_GetFood
+        {
+            public Job TryGiveContinuationJob(Pawn pawn)
+            {
+                return TryGiveJob(pawn);
+            }
         }
 
         private static void RestUtility_CanUseBedNow_Postfix(ref bool __result, Thing bedThing)

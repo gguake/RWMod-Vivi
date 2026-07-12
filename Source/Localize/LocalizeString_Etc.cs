@@ -44,6 +44,9 @@
         public const string VV_ModSettings_RandomGenesForStartingVivi = nameof(VV_ModSettings_RandomGenesForStartingVivi);
         public const string VV_ModSettings_RandomGenesForStartingViviDesc = nameof(VV_ModSettings_RandomGenesForStartingViviDesc);
 
+        public const string VV_ModSettings_ViviMealContinuationNutritionGap = nameof(VV_ModSettings_ViviMealContinuationNutritionGap);
+        public const string VV_ModSettings_ViviMealContinuationNutritionGapDesc = nameof(VV_ModSettings_ViviMealContinuationNutritionGapDesc);
+
         public const string VV_Thing_Seed = nameof(VV_Thing_Seed);
         public const string VV_Thing_SeedDesc = nameof(VV_Thing_SeedDesc);
         public const string VV_Thing_Seedling = nameof(VV_Thing_Seedling);

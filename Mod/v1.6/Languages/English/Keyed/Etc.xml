@@ -44,6 +44,10 @@
 <VV_ModSettings_RandomGenesForStartingVivi>Random genes for starting Vivis</VV_ModSettings_RandomGenesForStartingVivi>
 <VV_ModSettings_RandomGenesForStartingViviDesc>Gives the player's starting Vivi colonists random genes, just like NPC Vivis. Does not affect Vivis that already exist.</VV_ModSettings_RandomGenesForStartingViviDesc>
 
+<VV_ModSettings_ViviMealContinuationNutritionGap>Continuous Eating Food Threshold</VV_ModSettings_ViviMealContinuationNutritionGap>
+<VV_ModSettings_ViviMealContinuationNutritionGapDesc>This option makes vivi continue prioritizing eating over other tasks after a meal if she is still hungry and can consume the configured additional amount of food.
+\nBecause Vivi's maximum caloric intake varies with genetic metabolism efficiency, this helps reduce how often vivi with many genes leaves work to eat. Set it to the maximum value to disable this option.</VV_ModSettings_ViviMealContinuationNutritionGapDesc>
+
 <VV_Thing_Seed>{0} seed</VV_Thing_Seed>
 <VV_Thing_SeedDesc>A seed of {0}. When planted in soil or an arcane plant pot, it becomes a seedling, which will eventually grow into {0}.\nArcane plants require both mana and nutrients to grow.
 \nMana is absorbed from the environment mana and can also be supplied by nearby mana emitter or other arcane plants that produce mana.

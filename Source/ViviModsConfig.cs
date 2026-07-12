@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 using Verse;
 
@@ -12,6 +12,7 @@ namespace VVRace
         public float manaGridOpacity = 0.5f;
         public bool useVanillaHeadOnly = false;
         public bool randomGenesForStartingVivi = false;
+        public float viviMealContinuationNutritionGap = 0.85f;
 
         public override void ExposeData()
         {
@@ -23,6 +24,7 @@ namespace VVRace
             Scribe_Values.Look(ref manaGridOpacity, "manaGridOpacity", defaultValue: 0.5f);
             Scribe_Values.Look(ref useVanillaHeadOnly, "useVanillaHeadOnly", defaultValue: false);
             Scribe_Values.Look(ref randomGenesForStartingVivi, "randomGenesForStartingVivi", defaultValue: false);
+            Scribe_Values.Look(ref viviMealContinuationNutritionGap, "viviMealContinuationNutritionGap", defaultValue: 0.85f);
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
@@ -30,6 +32,8 @@ namespace VVRace
                 {
                     royalJellyMultiplier = 1f;
                 }
+
+                viviMealContinuationNutritionGap = Mathf.Clamp(viviMealContinuationNutritionGap, 0.05f, 2f);
             }
         }
     }
@@ -84,6 +88,48 @@ namespace VVRace
                 ref _settings.randomGenesForStartingVivi,
                 LocalizeString_Etc.VV_ModSettings_RandomGenesForStartingViviDesc.Translate());
 
+            var mealContinuationRect = listing.GetRect(30f);
+            var mealContinuationLabelRect = mealContinuationRect.LeftPart(0.5f);
+            var mealContinuationControlRect = mealContinuationRect.RightPart(0.5f);
+            var mealContinuationInputRect = new Rect(
+                mealContinuationControlRect.xMax - 60f,
+                mealContinuationControlRect.y + 3f,
+                60f,
+                24f);
+            var mealContinuationSliderRect = mealContinuationControlRect;
+            mealContinuationSliderRect.xMax = mealContinuationInputRect.xMin - 6f;
+
+            var previousTextAnchor = Text.Anchor;
+            Text.Anchor = TextAnchor.MiddleLeft;
+            Widgets.Label(
+                mealContinuationLabelRect,
+                LocalizeString_Etc.VV_ModSettings_ViviMealContinuationNutritionGap.Translate());
+            Text.Anchor = previousTextAnchor;
+            TooltipHandler.TipRegion(
+                mealContinuationLabelRect,
+                LocalizeString_Etc.VV_ModSettings_ViviMealContinuationNutritionGapDesc.Translate());
+
+            var sliderValue = Widgets.HorizontalSlider(
+                mealContinuationSliderRect,
+                _settings.viviMealContinuationNutritionGap,
+                0.05f,
+                2f,
+                middleAlignment: true,
+                roundTo: 0.01f);
+            if (!Mathf.Approximately(sliderValue, _settings.viviMealContinuationNutritionGap))
+            {
+                _settings.viviMealContinuationNutritionGap = sliderValue;
+                _viviMealContinuationNutritionGapBuffer = sliderValue.ToString("0.##");
+            }
+
+            Widgets.TextFieldNumeric(
+                mealContinuationInputRect,
+                ref _settings.viviMealContinuationNutritionGap,
+                ref _viviMealContinuationNutritionGapBuffer,
+                0.05f,
+                2f);
+            listing.Gap(listing.verticalSpacing);
+
 
             listing.End();
 
@@ -106,5 +152,6 @@ namespace VVRace
         }
 
         private VVRaceModSettings _settings;
+        private string _viviMealContinuationNutritionGapBuffer;
     }
 }
