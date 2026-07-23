@@ -188,6 +188,7 @@
 
     <recipeMaker>
       <researchPrerequisite>VV_AdvancedApparels</researchPrerequisite>
+      <unfinishedThingDef>UnfinishedMetallicTechArmor</unfinishedThingDef>
       <displayPriority>3401</displayPriority>
       <skillRequirements>
         <Crafting>4</Crafting>
