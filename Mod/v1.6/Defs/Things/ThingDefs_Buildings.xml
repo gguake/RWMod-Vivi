@@ -4,7 +4,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VV_ViviHatchery</defName>
     <label>vivi hatchery</label>
-    <description>a dedicated hatchery for incubating Vivi eggs. It can also be used as a bed for baby Vivis.
+    <description>a dedicated hatchery for incubating Vivi eggs. It can also be used as a bed for baby and child Vivis.
 \nIf there is an empty hatchery in a suitable environment, Royal Vivis will go there to lay their eggs. If the hatchery is indoors with a roof and kept at an appropriate temperature, it receives a bonus to hatching speed.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_ViviEgg</ThingDef>
@@ -60,7 +60,7 @@
       <ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
       <bed_healPerDay>4</bed_healPerDay>
       <bed_humanlike>true</bed_humanlike>
-      <bed_maxBodySize>0.25</bed_maxBodySize>
+      <bed_maxBodySize>0.3</bed_maxBodySize>
       <bed_crib>true</bed_crib>
       <bed_showSleeperBody>true</bed_showSleeperBody>
       <bed_emptyCountsForBarracks>false</bed_emptyCountsForBarracks>
