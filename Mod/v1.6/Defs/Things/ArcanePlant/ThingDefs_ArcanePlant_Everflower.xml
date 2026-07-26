@@ -209,34 +209,6 @@
       <li Class="VVRace.ArcaneSeedExtension">
         <seedDef>VV_Seed_Everflower</seedDef>
       </li>
-      <li Class="VVRace.ArcaneFlowerPerfumeExtension">
-        <effectDescriptionKey>VV_PerfumeEffect_Everflower</effectDescriptionKey>
-        <colorSource>VV_PerfumingPetal</colorSource>
-        <names>
-          <li><minWeight>0</minWeight><labelKey>VV_PerfumeName_Everflower_1</labelKey></li>
-          <li><minWeight>0.7</minWeight><labelKey>VV_PerfumeName_Everflower_2</labelKey></li>
-          <li><minWeight>1</minWeight><labelKey>VV_PerfumeName_Everflower_3</labelKey></li>
-        </names>
-        <effects>
-          <li>
-            <minWeight>0</minWeight>
-            <statOffsets>
-              <PsychicSensitivity>0.5</PsychicSensitivity>
-            </statOffsets>
-          </li>
-          <li>
-            <minWeight>0.7</minWeight>
-            <statOffsets><MoveSpeed>1.2</MoveSpeed></statOffsets>
-          </li>
-          <li>
-            <minWeight>1</minWeight>
-            <scaleWithWeight>false</scaleWithWeight>
-            <capMods>
-              <li><capacity>Moving</capacity><postFactor>1.2</postFactor></li>
-            </capMods>
-          </li>
-        </effects>
-      </li>
     </modExtensions>
   </ThingDef>
 

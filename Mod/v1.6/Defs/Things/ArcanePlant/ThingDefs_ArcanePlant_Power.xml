@@ -91,31 +91,6 @@
           </points>
         </leavingSeedCountCurve>
       </li>
-      <li Class="VVRace.ArcaneFlowerPerfumeExtension">
-        <effectDescriptionKey>VV_PerfumeEffect_Shockerbud</effectDescriptionKey>
-        <colorSource>VV_SparklingPetal</colorSource>
-        <names>
-          <li><minWeight>0</minWeight><labelKey>VV_PerfumeName_Shockerbud_1</labelKey></li>
-          <li><minWeight>0.7</minWeight><labelKey>VV_PerfumeName_Shockerbud_2</labelKey></li>
-          <li><minWeight>1</minWeight><labelKey>VV_PerfumeName_Shockerbud_3</labelKey></li>
-        </names>
-        <effects>
-          <li>
-            <minWeight>0</minWeight>
-            <statOffsets>
-              <MeleeDodgeChance>10</MeleeDodgeChance>
-              <MeleeHitChance>4</MeleeHitChance>
-            </statOffsets>
-          </li>
-          <li>
-            <minWeight>1</minWeight>
-            <scaleWithWeight>false</scaleWithWeight>
-            <capMods>
-              <li><capacity>Manipulation</capacity><postFactor>1.1</postFactor></li>
-            </capMods>
-          </li>
-        </effects>
-      </li>
     </modExtensions>
   </ThingDef>
   
@@ -200,31 +175,6 @@
             <li>(1.0, 6)</li>
           </points>
         </leavingSeedCountCurve>
-      </li>
-      <li Class="VVRace.ArcaneFlowerPerfumeExtension">
-        <effectDescriptionKey>VV_PerfumeEffect_Thunderpetals</effectDescriptionKey>
-        <colorSource>VV_SparklingPetal</colorSource>
-        <names>
-          <li><minWeight>0</minWeight><labelKey>VV_PerfumeName_Thunderpetals_1</labelKey></li>
-          <li><minWeight>0.7</minWeight><labelKey>VV_PerfumeName_Thunderpetals_2</labelKey></li>
-          <li><minWeight>1</minWeight><labelKey>VV_PerfumeName_Thunderpetals_3</labelKey></li>
-        </names>
-        <effects>
-          <li>
-            <minWeight>0</minWeight>
-            <statOffsets>
-              <ShootingAccuracyPawn>8</ShootingAccuracyPawn>
-              <RangedCooldownFactor>-0.1</RangedCooldownFactor>
-            </statOffsets>
-          </li>
-          <li>
-            <minWeight>1</minWeight>
-            <scaleWithWeight>false</scaleWithWeight>
-            <capMods>
-              <li><capacity>Consciousness</capacity><postFactor>1.1</postFactor></li>
-            </capMods>
-          </li>
-        </effects>
       </li>
     </modExtensions>
   </ThingDef>

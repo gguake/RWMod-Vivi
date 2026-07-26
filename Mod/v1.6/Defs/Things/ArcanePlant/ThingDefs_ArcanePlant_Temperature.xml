@@ -79,29 +79,6 @@
           </points>
         </leavingSeedCountCurve>
       </li>
-      <li Class="VVRace.ArcaneFlowerPerfumeExtension">
-        <effectDescriptionKey>VV_PerfumeEffect_EmberBloom</effectDescriptionKey>
-        <colorSource>VV_HeatingPetal</colorSource>
-        <names>
-          <li><minWeight>0</minWeight><labelKey>VV_PerfumeName_EmberBloom_1</labelKey></li>
-          <li><minWeight>0.7</minWeight><labelKey>VV_PerfumeName_EmberBloom_2</labelKey></li>
-          <li><minWeight>1</minWeight><labelKey>VV_PerfumeName_EmberBloom_3</labelKey></li>
-        </names>
-        <effects>
-          <li>
-            <minWeight>0</minWeight>
-            <statOffsets><ComfyTemperatureMin>-20</ComfyTemperatureMin></statOffsets>
-          </li>
-          <li>
-            <minWeight>1</minWeight>
-            <scaleWithWeight>false</scaleWithWeight>
-            <statOffsets>
-              <ImmunityGainSpeed>0.2</ImmunityGainSpeed>
-              <PainShockThreshold>0.1</PainShockThreshold>
-            </statOffsets>
-          </li>
-        </effects>
-      </li>
     </modExtensions>
   </ThingDef>
 
@@ -186,28 +163,6 @@
             <li>(1.0, 6)</li>
           </points>
         </leavingSeedCountCurve>
-      </li>
-      <li Class="VVRace.ArcaneFlowerPerfumeExtension">
-        <effectDescriptionKey>VV_PerfumeEffect_FrostBloom</effectDescriptionKey>
-        <colorSource>VV_CoolingPetal</colorSource>
-        <names>
-          <li><minWeight>0</minWeight><labelKey>VV_PerfumeName_FrostBloom_1</labelKey></li>
-          <li><minWeight>0.7</minWeight><labelKey>VV_PerfumeName_FrostBloom_2</labelKey></li>
-          <li><minWeight>1</minWeight><labelKey>VV_PerfumeName_FrostBloom_3</labelKey></li>
-        </names>
-        <effects>
-          <li>
-            <minWeight>0</minWeight>
-            <statOffsets><ComfyTemperatureMax>20</ComfyTemperatureMax></statOffsets>
-          </li>
-          <li>
-            <minWeight>1</minWeight>
-            <scaleWithWeight>false</scaleWithWeight>
-            <statFactors>
-              <RestFallRateFactor>0.8</RestFallRateFactor>
-            </statFactors>
-          </li>
-        </effects>
       </li>
     </modExtensions>
   </ThingDef>

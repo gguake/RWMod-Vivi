@@ -114,27 +114,6 @@
           </points>
         </leavingSeedCountCurve>
       </li>
-      <li Class="VVRace.ArcaneFlowerPerfumeExtension">
-        <effectDescriptionKey>VV_PerfumeEffect_Waterdrops</effectDescriptionKey>
-        <colorSource>VV_CoolingPetal</colorSource>
-        <names>
-          <li><minWeight>0</minWeight><labelKey>VV_PerfumeName_Waterdrops_1</labelKey></li>
-          <li><minWeight>0.7</minWeight><labelKey>VV_PerfumeName_Waterdrops_2</labelKey></li>
-          <li><minWeight>1</minWeight><labelKey>VV_PerfumeName_Waterdrops_3</labelKey></li>
-        </names>
-        <effects>
-          <li>
-            <minWeight>0</minWeight>
-            <statOffsets><ToxicResistance>1.0</ToxicResistance></statOffsets>
-          </li>
-          <li>
-            <minWeight>1</minWeight>
-            <scaleWithWeight>false</scaleWithWeight>
-            <statFactors><Flammability>0</Flammability></statFactors>
-            <damageFactors><Flame>0</Flame><Burn>0</Burn></damageFactors>
-          </li>
-        </effects>
-      </li>
     </modExtensions>
   </ThingDef>
 
@@ -214,27 +193,6 @@
             <li>(1.0, 6)</li>
           </points>
         </leavingSeedCountCurve>
-      </li>
-      <li Class="VVRace.ArcaneFlowerPerfumeExtension">
-        <effectDescriptionKey>VV_PerfumeEffect_Radiantflower</effectDescriptionKey>
-        <colorSource>VV_HeatingPetal</colorSource>
-        <names>
-          <li><minWeight>0</minWeight><labelKey>VV_PerfumeName_Radiantflower_1</labelKey></li>
-          <li><minWeight>0.7</minWeight><labelKey>VV_PerfumeName_Radiantflower_2</labelKey></li>
-          <li><minWeight>1</minWeight><labelKey>VV_PerfumeName_Radiantflower_3</labelKey></li>
-        </names>
-        <effects>
-          <li>
-            <minWeight>0</minWeight>
-            <statOffsets><MentalBreakThreshold>-0.1</MentalBreakThreshold></statOffsets>
-          </li>
-          <li>
-            <minWeight>1</minWeight>
-            <scaleWithWeight>false</scaleWithWeight>
-            <statFactors><InjuryHealingFactor>1.5</InjuryHealingFactor></statFactors>
-            <totalBleedFactor>0.8</totalBleedFactor>
-          </li>
-        </effects>
       </li>
     </modExtensions>
   </ThingDef>
@@ -344,26 +302,6 @@
             <li>(1.0, 6)</li>
           </points>
         </leavingSeedCountCurve>
-      </li>
-      <li Class="VVRace.ArcaneFlowerPerfumeExtension">
-        <effectDescriptionKey>VV_PerfumeEffect_Richflower</effectDescriptionKey>
-        <colorSource>VV_PerfumingPetal</colorSource>
-        <names>
-          <li><minWeight>0</minWeight><labelKey>VV_PerfumeName_Richflower_1</labelKey></li>
-          <li><minWeight>0.7</minWeight><labelKey>VV_PerfumeName_Richflower_2</labelKey></li>
-          <li><minWeight>1</minWeight><labelKey>VV_PerfumeName_Richflower_3</labelKey></li>
-        </names>
-        <effects>
-          <li>
-            <minWeight>0</minWeight>
-            <statOffsets><WorkSpeedGlobal>0.15</WorkSpeedGlobal></statOffsets>
-          </li>
-          <li>
-            <minWeight>1</minWeight>
-            <scaleWithWeight>false</scaleWithWeight>
-            <hungerRateFactor>0.8</hungerRateFactor>
-          </li>
-        </effects>
       </li>
     </modExtensions>
   </ThingDef>
@@ -560,33 +498,6 @@
             <li>(1.0, 6)</li>
           </points>
         </leavingSeedCountCurve>
-      </li>
-      <li Class="VVRace.ArcaneFlowerPerfumeExtension">
-        <effectDescriptionKey>VV_PerfumeEffect_Starlitflower</effectDescriptionKey>
-        <colorSource>VV_PerfumingPetal</colorSource>
-        <names>
-          <li><minWeight>0</minWeight><labelKey>VV_PerfumeName_Starlitflower_1</labelKey></li>
-          <li><minWeight>0.7</minWeight><labelKey>VV_PerfumeName_Starlitflower_2</labelKey></li>
-          <li><minWeight>1</minWeight><labelKey>VV_PerfumeName_Starlitflower_3</labelKey></li>
-        </names>
-        <effects>
-          <li>
-            <minWeight>0</minWeight>
-            <statOffsets>
-              <PainShockThreshold>0.1</PainShockThreshold>
-            </statOffsets>
-          </li>
-          <li>
-            <minWeight>1</minWeight>
-            <scaleWithWeight>false</scaleWithWeight>
-            <statOffsets>
-              <VacuumResistance MayRequire="Ludeon.RimWorld.Odyssey">1</VacuumResistance>
-            </statOffsets>
-            <capMods>
-              <li><capacity>Sight</capacity><postFactor>1.1</postFactor></li>
-            </capMods>
-          </li>
-        </effects>
       </li>
     </modExtensions>
   </ThingDef>
