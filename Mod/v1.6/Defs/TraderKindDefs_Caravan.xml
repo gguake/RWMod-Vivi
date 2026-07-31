@@ -31,22 +31,27 @@
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_FilteredHoney</thingDef>
         <countRange>600~1800</countRange>
+        <price>Cheap</price>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_RoyalJelly</thingDef>
         <countRange>10~40</countRange>
+        <price>Cheap</price>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_Vivicream</thingDef>
         <countRange>80~150</countRange>
+        <price>Cheap</price>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_Viviwax</thingDef>
         <countRange>400~1500</countRange>
+        <price>Cheap</price>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_Propolis</thingDef>
         <countRange>40~90</countRange>
+        <price>Cheap</price>
       </li>
       <li Class="StockGenerator_Tag">
         <tradeTag>VV_Petal</tradeTag>
@@ -191,6 +196,7 @@
         <tradeTag>VV_Petal</tradeTag>
         <thingDefCountRange>1~3</thingDefCountRange>
         <countRange>80~200</countRange>
+        <price>Cheap</price>
       </li>
       <li Class="StockGenerator_Category">
         <categoryDef>VV_ArcaneSeed</categoryDef>
@@ -199,6 +205,7 @@
         <excludedThingDefs>
           <li>VV_Seed_Everflower</li>
         </excludedThingDefs>
+        <price>Cheap</price>
       </li>
       
       <!-- Drugs -->
@@ -206,6 +213,7 @@
         <tradeTag>VV_FloweringTea</tradeTag>
         <thingDefCountRange>1~3</thingDefCountRange>
         <countRange>70~150</countRange>
+        <price>Cheap</price>
       </li>
 
       <!-- Techprints -->
@@ -238,15 +246,18 @@
         <tradeTag>VV_ArcanePlantProductive</tradeTag>
         <thingDefCountRange>3~5</thingDefCountRange>
         <countRange>4~9</countRange>
+        <price>Cheap</price>
       </li>
       <li Class="StockGenerator_Tag">
         <tradeTag>VV_ArcanePlantCombat</tradeTag>
         <thingDefCountRange>0~3</thingDefCountRange>
         <countRange>-1~7</countRange>
+        <price>Cheap</price>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VV_Seed_Everflower</thingDef>
-        <countRange>-5~1</countRange>
+        <countRange>-4~1</countRange>
+        <price>Expensive</price>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>Telescope</thingDef>
