@@ -5,6 +5,12 @@ using Verse.AI;
 namespace VVRace
 {
     [DefOf]
+    public static class VVDamageDefOf
+    {
+        public static DamageDef VV_ManawaveStun;
+    }
+
+    [DefOf]
     public static class VVStatDefOf
     {
         public static StatDef VV_HoneyGatherSpeed;

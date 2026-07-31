@@ -25,7 +25,7 @@ namespace VVRace
         {
             var quality = GetQuality(jobRitual, progress);
             var baseMana = Def.manaByQuality.Evaluate(quality);
-            var stunDamage = Mathf.CeilToInt(Def.stunDamageByQuality.Evaluate(quality));
+            var stunRadius = Mathf.CeilToInt(Def.stunDamageByQuality.Evaluate(quality));
             var incidentScale = Def.incidentScaleByQuality.Evaluate(quality);
 
             var everflower = jobRitual.selectedTarget.Thing as ArcanePlant_Everflower;
@@ -48,8 +48,8 @@ namespace VVRace
             GenExplosion.DoExplosion(
                 everflower.Position,
                 everflower.Map,
-                stunDamage,
-                DamageDefOf.Stun,
+                stunRadius,
+                VVDamageDefOf.VV_ManawaveStun,
                 pawn,
                 propagationSpeed: 0.5f,
                 doSoundEffects: false);

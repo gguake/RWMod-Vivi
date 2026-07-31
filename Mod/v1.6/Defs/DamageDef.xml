@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
+  <DamageDef ParentName="Stun">
+    <defName>VV_ManawaveStun</defName>
+    <workerClass>VVRace.DamageWorker_ManawaveStun</workerClass>
+  </DamageDef>
+
   <DamageDef>
     <defName>VV_ToxicStab</defName>
     <label>stab</label>
