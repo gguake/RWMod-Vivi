@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <Defs>
   <!-- 섬광꽃 -->
   <ThingDef ParentName="VV_ArcanePlantProductive">
@@ -72,6 +72,7 @@
         <glowRadius>3</glowRadius>
         <glowColor>(213,110,248)</glowColor>
       </li>
+      <li Class="VVRace.CompProperties_ScentDiffusion" />
     </comps>
 
     <building>
@@ -91,9 +92,13 @@
           </points>
         </leavingSeedCountCurve>
       </li>
+      <li Class="VVRace.ScentExtension">
+        <scentHediff>VV_Scent_Shockerbud</scentHediff>
+        <scentColor>(0.8, 0.4, 0.8)</scentColor>
+      </li>
     </modExtensions>
   </ThingDef>
-  
+
   <!-- 번개꽃 -->
   <ThingDef ParentName="VV_ArcanePlantProductive">
     <defName>VV_Thunderpetals</defName>
@@ -157,6 +162,7 @@
       <li Class="VVRace.CompProperties_ManaLightningLod">
         <mana>600</mana>
       </li>
+      <li Class="VVRace.CompProperties_ScentDiffusion" />
     </comps>
 
     <building>
@@ -175,6 +181,10 @@
             <li>(1.0, 6)</li>
           </points>
         </leavingSeedCountCurve>
+      </li>
+      <li Class="VVRace.ScentExtension">
+        <scentHediff>VV_Scent_Thunderpetals</scentHediff>
+        <scentColor>(0.8, 0.1, 0.9)</scentColor>
       </li>
     </modExtensions>
   </ThingDef>

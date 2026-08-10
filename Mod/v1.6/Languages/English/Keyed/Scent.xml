@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <VV_Command_CollectScent>Collect arcane floral scent</VV_Command_CollectScent>
+  <VV_Command_CollectScentDesc>Target an arcane flower to collect its scent into the perfume bottle. Collecting consumes {0}x {1}, and the collected scent can be sprayed {2} times.</VV_Command_CollectScentDesc>
+  <VV_Command_SprayScent>Spray arcane floral scent</VV_Command_SprayScent>
+  <VV_Command_SprayScentDesc>Spray the scent of {0}, granting the arcane floral fragrance to every creature within {1} cells. {2} sprays remaining.</VV_Command_SprayScentDesc>
+  <VV_Scent_NotEnoughPollen>Requires at least {0}x {1} to collect an arcane floral scent.</VV_Scent_NotEnoughPollen>
+  <VV_Scent_InvalidFlower>Cannot collect from this target.</VV_Scent_InvalidFlower>
+  <VV_Scent_FlowerUnreachable>The flower is forbidden, reserved, or unreachable.</VV_Scent_FlowerUnreachable>
+  <VV_Scent_MustBeWorn>The perfume bottle must be worn to use it.</VV_Scent_MustBeWorn>
+  <VV_Scent_StatusEmpty>No scent collected</VV_Scent_StatusEmpty>
+  <VV_Scent_StatusCharged>Pollen charged</VV_Scent_StatusCharged>
+  <VV_Scent_StatusScent>Collected scent: {0} ({1}/{2} sprays left)</VV_Scent_StatusScent>
+  <VV_Scent_StatusLoading>Pollen loaded: {0}/{1}</VV_Scent_StatusLoading>
+  <VV_StatsReport_FloralScent>Floral scent</VV_StatsReport_FloralScent>
+  <VV_StatsReport_FloralScent_Desc>The scent granted by this arcane flower. Pawns gain it by gathering from the flower or staying in the same room, and it can also be collected into a perfume bottle and sprayed. Only one arcane floral scent can take effect at a time.</VV_StatsReport_FloralScent_Desc>
+</LanguageData>

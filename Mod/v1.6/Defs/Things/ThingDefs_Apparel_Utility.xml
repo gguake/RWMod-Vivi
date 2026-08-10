@@ -155,4 +155,124 @@
       <displayPriority>-501</displayPriority>
     </recipeMaker>
   </ThingDef>
+
+  <!-- VV_ArcaneFloralPerfume -->
+  <ThingDef ParentName="VV_UtilityApparelBase">
+    <defName>VV_ArcaneFloralPerfume</defName>
+    <label>arcane floral perfume</label>
+    <description>A perfume bottle that holds the scents of arcane flowers. Once charged with pollen, it can collect and store a scent from an arcane flower.
+\nA collected scent can be sprayed up to five times, granting its fragrance to everyone nearby. Only one arcane floral scent can take effect at a time.</description>
+    <thingClass>VVRace.Apparel_ScentBottle</thingClass>
+    <graphicData>
+      <texPath>Things/Item/Equipment/VV_PerfumeA</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+
+    <statBases>
+      <MaxHitPoints>80</MaxHitPoints>
+      <WorkToMake>3500</WorkToMake>
+      <Mass>0.1</Mass>
+      <Flammability>0.5</Flammability>
+      <EquipDelay>1.0</EquipDelay>
+    </statBases>
+
+    <costList>
+      <VV_Viviwax>40</VV_Viviwax>
+      <VV_LivingLeaf>20</VV_LivingLeaf>
+    </costList>
+
+    <comps>
+      <li Class="VVRace.CompProperties_ScentBottle">
+        <pollenDef>VV_Pollen</pollenDef>
+        <pollenCostPerCharge>200</pollenCostPerCharge>
+        <gatherTicks>1500</gatherTicks>
+        <loadTicks>150</loadTicks>
+        <maxSprays>5</maxSprays>
+
+        <filledGraphicPath>Things/Item/Equipment/VV_PerfumeB</filledGraphicPath>
+        <emptyWornGraphicPath>Things/Apparel/Perfume/VV_PerfumeA</emptyWornGraphicPath>
+        <filledWornGraphicPath>Things/Apparel/Perfume/VV_PerfumeB</filledWornGraphicPath>
+      </li>
+      <li Class="VVRace.CompProperties_ScentVerbOwner" />
+    </comps>
+
+    <verbs>
+      <li Class="VVRace.VerbProperties_SprayScent">
+        <label>spray scent</label>
+        <violent>false</violent>
+        <range>4.9</range>
+        <warmupTime>0.5</warmupTime>
+        <drawAimPie>false</drawAimPie>
+        <defaultCooldownTime>0</defaultCooldownTime>
+        <hasStandardCommand>true</hasStandardCommand>
+        <targetable>false</targetable>
+        <nonInterruptingSelfCast>true</nonInterruptingSelfCast>
+        <onlyManualCast>true</onlyManualCast>
+        <requireLineOfSight>false</requireLineOfSight>
+        <ai_IsWeapon>false</ai_IsWeapon>
+        <targetParams>
+          <canTargetSelf>true</canTargetSelf>
+          <canTargetLocations>false</canTargetLocations>
+          <canTargetPawns>false</canTargetPawns>
+          <canTargetBuildings>false</canTargetBuildings>
+        </targetParams>
+        <commandIcon>UI/Commands/VV_SprayScent</commandIcon>
+      </li>
+    </verbs>
+
+    <apparel>
+      <wornGraphicData Inherit="False">
+        <renderUtilityAsPack>false</renderUtilityAsPack>
+      </wornGraphicData>
+      <renderNodeProperties>
+        <li Class="RPEF.PawnRenderNodeProperties_BodyTypeDrawData">
+          <nodeClass>VVRace.PawnRenderNode_ScentBottle</nodeClass>
+          <workerClass>VVRace.PawnRenderNodeWorker_ScentBottle</workerClass>
+          <bodyTypeDrawData>
+            <Male>
+              <dataEast><offset>(0,0,0)</offset></dataEast>
+              <dataSouth><offset>(0,0,0)</offset></dataSouth>
+              <dataNorth><offset>(0,0,0)</offset></dataNorth>
+            </Male>
+            <Female>
+              <dataEast><offset>(0,0,0)</offset></dataEast>
+              <dataSouth><offset>(0,0,0)</offset></dataSouth>
+              <dataNorth><offset>(0,0,0)</offset></dataNorth>
+            </Female>
+            <Hulk>
+              <dataEast><offset>(0,0,-0.2)</offset></dataEast>
+              <dataSouth><offset>(-0.15,0,-0.2)</offset></dataSouth>
+              <dataNorth><offset>(0.15,0,-0.1)</offset></dataNorth>
+              <scale>1.2</scale>
+            </Hulk>
+            <Fat>
+              <dataEast><offset>(0,0,-0.2)</offset></dataEast>
+              <dataSouth><offset>(-0.2,0,-0.2)</offset></dataSouth>
+              <dataNorth><offset>(0.2,0,-0.1)</offset></dataNorth>
+              <scale>1.2</scale>
+            </Fat>
+          </bodyTypeDrawData>
+        </li>
+      </renderNodeProperties>
+    </apparel>
+
+    <recipeMaker>
+      <recipeUsers>
+        <li>CraftingSpot</li>
+        <li>ElectricSmithy</li>
+        <li>FueledSmithy</li>
+      </recipeUsers>
+      <researchPrerequisites>
+        <li>VV_Perfumery</li>
+      </researchPrerequisites>
+      <displayPriority>-502</displayPriority>
+    </recipeMaker>
+    
+    <modExtensions>
+      <li Class="RPEF.ApparelGraphicHook">
+        <defaultBodyTypeGraphicOverride>Thin</defaultBodyTypeGraphicOverride>
+      </li>
+    </modExtensions>
+  </ThingDef>
 </Defs>

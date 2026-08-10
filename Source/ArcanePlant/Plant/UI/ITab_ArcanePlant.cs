@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -55,6 +55,7 @@ namespace VVRace
             {
                 var curY = 0f;
                 DrawFunctionSection(viewRect.width, ref curY, plant);
+                DrawScentSection(viewRect.width, ref curY, plant);
                 DrawManaSection(viewRect.width, ref curY, plant);
                 DrawSynergySection(viewRect.width, ref curY, plant);
                 DrawAppliedOverrideSection(viewRect.width, ref curY, plant);
@@ -103,6 +104,52 @@ namespace VVRace
                     yield return LocalizeString_PlantFunction.VV_PlantFunction_Battery.Translate(
                         battery.Props.storedEnergyMax.ToString("F0"),
                         battery.Props.efficiency.ToStringPercent());
+                }
+            }
+        }
+
+        #endregion
+
+        #region 마법 꽃 향
+
+        private void DrawScentSection(float width, ref float curY, ArcanePlant plant)
+        {
+            var hediff = ScentUtility.GetScentExtension(plant.def)?.scentHediff;
+            if (hediff == null) { return; }
+
+            DrawSectionTitle(width, ref curY, LocalizeString_Scent.VV_StatsReport_FloralScent.Translate());
+
+            const float rowHeight = 24f;
+            var rowRect = new Rect(0f, curY, width, rowHeight);
+            Widgets.DrawLightHighlight(rowRect);
+
+            using (new TextBlock(TextAnchor.MiddleLeft))
+            {
+                Widgets.Label(new Rect(RowPadding, curY, width - RowPadding * 2f - 28f, rowHeight), hediff.LabelCap);
+            }
+
+            Widgets.InfoCardButton(width - 28f, curY, hediff);
+
+            if (Mouse.IsOver(rowRect))
+            {
+                TooltipHandler.TipRegion(rowRect, CompProperties_ScentDiffusion.BuildScentReport(hediff));
+            }
+
+            curY += rowHeight + RowGap;
+
+            var alternate = false;
+            var stage = hediff.stages != null && hediff.stages.Count > 0 ? hediff.stages[0] : null;
+            if (stage != null)
+            {
+                foreach (var entry in HediffStatsUtility.SpecialDisplayStats(stage, null))
+                {
+                    DrawValueRow(
+                        width, ref curY,
+                        entry.LabelCap,
+                        entry.ValueString,
+                        Color.white,
+                        ref alternate,
+                        indent: RuleIndent);
                 }
             }
         }

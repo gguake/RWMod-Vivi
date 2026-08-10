@@ -63,6 +63,8 @@ namespace VVRace
 
         public static JobDef VV_MoveEverflower;
         public static JobDef VV_DeliverToEverflower;
+
+        public static JobDef VV_CollectFloralScent;
     }
 
     [DefOf]
@@ -272,6 +274,9 @@ namespace VVRace
 
         public static EffecterDef VV_Effecter_FairyPhase;
         public static EffecterDef VV_Effecter_FairyTargetMarker;
+
+        public static EffecterDef VV_Gather_Scent;
+        public static EffecterDef VV_ScentSpray;
     }
 
     [DefOf]

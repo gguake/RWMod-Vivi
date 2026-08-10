@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+<VV_Command_CollectScent>마법 꽃 향 채집</VV_Command_CollectScent>
+<VV_Command_CollectScentDesc>마법 꽃을 지정해 향수병에 향을 채집합니다. 채집시 {1} {0}개를 소모하며, 채집된 향은 {2}회 뿌릴 수 있습니다.</VV_Command_CollectScentDesc>
+<VV_Command_SprayScent>마법 꽃 향 뿌리기</VV_Command_SprayScent>
+<VV_Command_SprayScentDesc>{0}의 향을 뿌려 주변 {1}칸 내의 모든 생명체에게 마법 꽃의 향기를 부여합니다. {2}회 남았습니다.</VV_Command_SprayScentDesc>
+<VV_Scent_NotEnoughPollen>마법 꽃의 향을 채집하려면 {1}이(가) 최소 {0}개 필요합니다.</VV_Scent_NotEnoughPollen>
+<VV_Scent_InvalidFlower>이 대상에서는 채집할 수 없습니다.</VV_Scent_InvalidFlower>
+<VV_Scent_FlowerUnreachable>금지되었거나 예약되었거나 도달할 수 없는 꽃입니다.</VV_Scent_FlowerUnreachable>
+<VV_Scent_MustBeWorn>향수병을 착용해야 사용할 수 있습니다.</VV_Scent_MustBeWorn>
+<VV_Scent_StatusEmpty>채집된 향 없음</VV_Scent_StatusEmpty>
+<VV_Scent_StatusCharged>꽃가루 충전됨</VV_Scent_StatusCharged>
+<VV_Scent_StatusScent>채집된 향: {0} (남은 횟수 {1}/{2})</VV_Scent_StatusScent>
+<VV_Scent_StatusLoading>충전된 꽃가루: {0}/{1}</VV_Scent_StatusLoading>
+<VV_StatsReport_FloralScent>마법 꽃 향</VV_StatsReport_FloralScent>
+<VV_StatsReport_FloralScent_Desc>이 마법 꽃이 부여하는 향입니다. 꽃에서 채집하거나 같은 방에 머무르면 향을 얻으며 향수병으로 채집해 뿌릴 수도 있습니다. 마법 꽃 향수의 효과는 하나만 적용됩니다.</VV_StatsReport_FloralScent_Desc>
+
+</LanguageData>

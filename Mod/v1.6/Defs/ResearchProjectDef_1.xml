@@ -170,4 +170,19 @@
       <li>VV_ExiledVivi</li>
     </tags>
   </ResearchProjectDef>
+  
+  <ResearchProjectDef ParentName="ViviResearchProjectTier1Base">
+    <defName>VV_Perfumery</defName>
+    <label>arcane perfumery</label>
+    <description>Craft perfume bottles that record the scents of arcane flowers and spray them to grant their effects to everyone nearby.</description>
+    <baseCost>900</baseCost>
+    <researchViewX>3</researchViewX>
+    <researchViewY>1.4</researchViewY>
+    <prerequisites>
+      <li>VV_ArcaneBotany</li>
+    </prerequisites>
+    <tags>
+      <li>VV_ViviStart</li>
+    </tags>
+  </ResearchProjectDef>
 </Defs>

@@ -16,4 +16,7 @@
 <!-- Hatchery -->
 <VV_LayViviEgg.reportString>알 낳는 중.</VV_LayViviEgg.reportString>
 
+<!-- Scent -->
+<VV_CollectFloralScent.reportString>TargetA의 향을 채집하는 중.</VV_CollectFloralScent.reportString>
+
 </LanguageData>

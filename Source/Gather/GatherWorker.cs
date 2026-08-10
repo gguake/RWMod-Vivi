@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -81,6 +81,8 @@ namespace VVRace
                     GenPlace.TryPlaceThing(seed, pawn.Position, pawn.Map, ThingPlaceMode.Near);
                 }
             }
+
+            ScentUtility.ApplyScent(pawn, target.def);
         }
 
         public virtual void Notify_ProcessStarted(Pawn pawn, Building_GatherWorkTable workTable)

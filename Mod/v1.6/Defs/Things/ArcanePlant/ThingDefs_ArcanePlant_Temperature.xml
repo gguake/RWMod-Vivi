@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <Defs>
   <!-- 잔불꽃 -->
   <ThingDef ParentName="VV_ArcanePlantProductive">
@@ -64,6 +64,7 @@
         <glowRadius>10</glowRadius>
         <glowColor>(255,247,138,0)</glowColor>
       </li>
+      <li Class="VVRace.CompProperties_ScentDiffusion" />
     </comps>
     
     <modExtensions>
@@ -78,6 +79,10 @@
             <li>(1.0, 6)</li>
           </points>
         </leavingSeedCountCurve>
+      </li>
+      <li Class="VVRace.ScentExtension">
+        <scentHediff>VV_Scent_EmberBloom</scentHediff>
+        <scentColor>(0.9, 0.4, 0.2)</scentColor>
       </li>
     </modExtensions>
   </ThingDef>
@@ -149,13 +154,14 @@
         <heatPerSecond>-10</heatPerSecond>
         <heatPushMinTemperature>-20</heatPushMinTemperature>
       </li>
+      <li Class="VVRace.CompProperties_ScentDiffusion" />
     </comps>
     
     <modExtensions>
       <li Class="VVRace.ArcaneSeedExtension">
         <seedMarketValueRatio>0.2</seedMarketValueRatio>
         <seedColor>(150,255,255)</seedColor>
-        
+
         <leavingSeedCountCurve>
           <points>
             <li>(0, 4)</li>
@@ -163,6 +169,10 @@
             <li>(1.0, 6)</li>
           </points>
         </leavingSeedCountCurve>
+      </li>
+      <li Class="VVRace.ScentExtension">
+        <scentHediff>VV_Scent_FrostBloom</scentHediff>
+        <scentColor>(0.6, 0.9, 1.0)</scentColor>
       </li>
     </modExtensions>
   </ThingDef>

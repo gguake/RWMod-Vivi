@@ -47,4 +47,7 @@
 <VV_ArcaneWeaponry.description>마법 식물의 소재를 사용해 마나를 응용하는 마법 무기를 제작할 수 있습니다. 마법 무기는 일반적으로 다루기 까다롭지만 강력한 위력을 가지고 있습니다.
 \n마법 무기는 환경 마나를 흡수해 충전되며 마나가 고갈된 마법 무기는 사용할 수 없거나 약화됩니다.</VV_ArcaneWeaponry.description>
 
+<VV_Perfumery.label>마법 꽃 향수</VV_Perfumery.label>
+<VV_Perfumery.description>다양한 효과를 가지는 마법 꽃의 향을 향수에 담아 주변에 뿌릴 수 있습니다.</VV_Perfumery.description>
+
 </LanguageData>

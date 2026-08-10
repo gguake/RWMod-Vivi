@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <Defs>
   <!-- 물방울꽃 -->
   <ThingDef ParentName="VV_ArcanePlantProductive">
@@ -99,6 +99,7 @@
         <intervalDays>3.5~8.5</intervalDays>
         <count>3~6</count>
       </li>
+      <li Class="VVRace.CompProperties_ScentDiffusion" />
     </comps>
     
     <modExtensions>
@@ -113,6 +114,10 @@
             <li>(1.0, 6)</li>
           </points>
         </leavingSeedCountCurve>
+      </li>
+      <li Class="VVRace.ScentExtension">
+        <scentHediff>VV_Scent_Waterdrops</scentHediff>
+        <scentColor>(0.5, 0.8, 1.0)</scentColor>
       </li>
     </modExtensions>
   </ThingDef>
@@ -177,6 +182,7 @@
         <glowColor>(370,370,370,0)</glowColor>
         <overlightRadius>7.7</overlightRadius>
       </li>
+      <li Class="VVRace.CompProperties_ScentDiffusion" />
     </comps>
 
     <specialDisplayRadius>6.2</specialDisplayRadius>
@@ -193,6 +199,10 @@
             <li>(1.0, 6)</li>
           </points>
         </leavingSeedCountCurve>
+      </li>
+      <li Class="VVRace.ScentExtension">
+        <scentHediff>VV_Scent_Radiantflower</scentHediff>
+        <scentColor>(1.0, 0.75, 0.4)</scentColor>
       </li>
     </modExtensions>
   </ThingDef>
@@ -288,6 +298,7 @@
       <li Class="VVRace.CompProperties_SeedlingGrowthAccelerator">
         <growthBonus>1.1</growthBonus>
       </li>
+      <li Class="VVRace.CompProperties_ScentDiffusion" />
     </comps>
 
     <modExtensions>
@@ -303,9 +314,13 @@
           </points>
         </leavingSeedCountCurve>
       </li>
+      <li Class="VVRace.ScentExtension">
+        <scentHediff>VV_Scent_Richflower</scentHediff>
+        <scentColor>(1.0, 1.0, 0.5)</scentColor>
+      </li>
     </modExtensions>
   </ThingDef>
-  
+
   <!-- 정화초 -->
   <ThingDef ParentName="VV_ArcanePlantProductive">
     <defName>VV_Purifimint</defName>
@@ -484,6 +499,7 @@
         <glowRadius>5.3</glowRadius>
         <glowColor>(120,180,280,0)</glowColor>
       </li>
+      <li Class="VVRace.CompProperties_ScentDiffusion" />
     </comps>
     
     <modExtensions>
@@ -498,6 +514,10 @@
             <li>(1.0, 6)</li>
           </points>
         </leavingSeedCountCurve>
+      </li>
+      <li Class="VVRace.ScentExtension">
+        <scentHediff>VV_Scent_Starlitflower</scentHediff>
+        <scentColor>(0.8, 0.7, 1.0)</scentColor>
       </li>
     </modExtensions>
   </ThingDef>

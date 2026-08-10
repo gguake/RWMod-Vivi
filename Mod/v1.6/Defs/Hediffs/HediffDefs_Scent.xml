@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <HediffDef Name="VV_ScentBase" Abstract="True">
+    <hediffClass>VVRace.Hediff_FloralScent</hediffClass>
+    <defaultLabelColor>(0.95, 0.75, 1)</defaultLabelColor>
+    <isBad>false</isBad>
+    <priceImpact>false</priceImpact>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <everCurableByItem>false</everCurableByItem>
+    <initialSeverity>1</initialSeverity>
+    <maxSeverity>1</maxSeverity>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>25000</disappearsAfterTicks>
+        <showRemainingTime>true</showRemainingTime>
+      </li>
+      <li Class="HediffCompProperties_DisappearsOnDeath" />
+    </comps>
+  </HediffDef>
+
+  <HediffDef ParentName="VV_ScentBase">
+    <defName>VV_Scent_Shockerbud</defName>
+    <label>scent: shockerbud</label>
+    <description>A tingling floral scent from a shockerbud. Sharpens reflexes in close quarters.</description>
+    <stages>
+      <li>
+        <statOffsets>
+          <MeleeDodgeChance>10</MeleeDodgeChance>
+          <MeleeHitChance>4</MeleeHitChance>
+        </statOffsets>
+        <capMods>
+          <li><capacity>Manipulation</capacity><postFactor>1.05</postFactor></li>
+        </capMods>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef ParentName="VV_ScentBase">
+    <defName>VV_Scent_Thunderpetals</defName>
+    <label>scent: thunderpetals</label>
+    <description>A crackling floral scent from thunderpetals. Heightens focus and steadies the aim.</description>
+    <stages>
+      <li>
+        <statOffsets>
+          <ShootingAccuracyPawn>8</ShootingAccuracyPawn>
+          <RangedCooldownFactor>-0.1</RangedCooldownFactor>
+        </statOffsets>
+        <capMods>
+          <li><capacity>Consciousness</capacity><postFactor>1.05</postFactor></li>
+        </capMods>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef ParentName="VV_ScentBase">
+    <defName>VV_Scent_Waterdrops</defName>
+    <label>scent: waterdrops</label>
+    <description>A clear watery scent from waterdrops. Purges toxins and dampens the body against fire.</description>
+    <stages>
+      <li>
+        <statOffsets>
+          <ToxicResistance>1.0</ToxicResistance>
+        </statOffsets>
+        <statFactors>
+          <Flammability>0</Flammability>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef ParentName="VV_ScentBase">
+    <defName>VV_Scent_Radiantflower</defName>
+    <label>scent: radiantflower</label>
+    <description>A warm sunlit scent from a radiantflower. Calms the mind and accelerates natural healing.</description>
+    <stages>
+      <li>
+        <statOffsets>
+          <MentalBreakThreshold>-0.1</MentalBreakThreshold>
+        </statOffsets>
+        <statFactors>
+          <InjuryHealingFactor>1.3</InjuryHealingFactor>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef ParentName="VV_ScentBase">
+    <defName>VV_Scent_Richflower</defName>
+    <label>scent: richflower</label>
+    <description>A rich, bountiful scent from a richflower. Invigorates work and slows the appetite.</description>
+    <stages>
+      <li>
+        <statOffsets>
+          <WorkSpeedGlobal>0.15</WorkSpeedGlobal>
+        </statOffsets>
+        <hungerRateFactor>0.9</hungerRateFactor>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef ParentName="VV_ScentBase">
+    <defName>VV_Scent_Starlitflower</defName>
+    <label>scent: starlitflower</label>
+    <description>A tranquil starlit scent from a starlitflower. Grants endurance against pain and the void.</description>
+    <stages>
+      <li>
+        <statOffsets>
+          <PainShockThreshold>0.1</PainShockThreshold>
+          <VacuumResistance MayRequire="Ludeon.RimWorld.Odyssey">1</VacuumResistance>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef ParentName="VV_ScentBase">
+    <defName>VV_Scent_EmberBloom</defName>
+    <label>scent: ember bloom</label>
+    <description>A smoldering warm scent from an ember bloom. Shields against cold and bolsters the immune system.</description>
+    <stages>
+      <li>
+        <statOffsets>
+          <ComfyTemperatureMin>-20</ComfyTemperatureMin>
+          <ImmunityGainSpeed>0.2</ImmunityGainSpeed>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef ParentName="VV_ScentBase">
+    <defName>VV_Scent_FrostBloom</defName>
+    <label>scent: frost bloom</label>
+    <description>A crisp frosty scent from a frost bloom. Shields against heat and grants restful sleep.</description>
+    <stages>
+      <li>
+        <statOffsets>
+          <ComfyTemperatureMax>20</ComfyTemperatureMax>
+        </statOffsets>
+        <statFactors>
+          <RestFallRateFactor>0.85</RestFallRateFactor>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+</Defs>
