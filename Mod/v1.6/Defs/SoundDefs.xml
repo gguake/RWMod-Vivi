@@ -253,4 +253,22 @@
       </li>
     </subSounds>
   </SoundDef>
+
+  <SoundDef>
+    <defName>VV_PerfumeSpray</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>2</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>SFX/VV_PerfumeSpray</clipPath>
+          </li>
+        </grains>
+        <distRange>5~25</distRange>
+        <volumeRange>30~40</volumeRange>
+        <pitchRange>0.95~1.08</pitchRange>
+      </li>
+    </subSounds>
+  </SoundDef>
 </Defs>

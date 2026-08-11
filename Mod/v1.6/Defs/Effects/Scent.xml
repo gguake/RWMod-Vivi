@@ -45,8 +45,8 @@
     </graphicData>
     <altitudeLayer>MoteOverhead</altitudeLayer>
     <fadeInTime>0.05</fadeInTime>
-    <solidTime>0.15</solidTime>
-    <fadeOutTime>1.25</fadeOutTime>
+    <solidTime>0.1</solidTime>
+    <fadeOutTime>0.3</fadeOutTime>
     <useAttachLink>true</useAttachLink>
   </FleckDef>
 
@@ -60,20 +60,38 @@
     </graphicData>
     <altitudeLayer>MoteOverhead</altitudeLayer>
     <fadeInTime>0.02</fadeInTime>
-    <solidTime>0.25</solidTime>
-    <fadeOutTime>0.8</fadeOutTime>
+    <solidTime>0.15</solidTime>
+    <fadeOutTime>0.25</fadeOutTime>
     <useAttachLink>true</useAttachLink>
+  </FleckDef>
+
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>VV_Fleck_PerfumePowderLinger</defName>
+    <graphicData>
+      <texPath>Things/Mote/VV_PerfumePollenPuff</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <renderInstanced>true</renderInstanced>
+      <color>(1, 1, 1, 1)</color>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0.15</fadeInTime>
+    <solidTime>0.8</solidTime>
+    <fadeOutTime>1.8</fadeOutTime>
   </FleckDef>
 
   <EffecterDef>
     <defName>VV_ScentSpray</defName>
-    <maintainTicks>61</maintainTicks>
+    <maintainTicks>31</maintainTicks>
     <children>
+      <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>VV_PerfumeSpray</soundDef>
+      </li>
       <li>
         <subEffecterClass>VVRace.SubEffecter_PerfumeSpiral</subEffecterClass>
         <fleckDef>VV_Fleck_PerfumeMist</fleckDef>
         <spawnLocType>OnTarget</spawnLocType>
-        <ticksBetweenMotes>3</ticksBetweenMotes>
+        <ticksBetweenMotes>1</ticksBetweenMotes>
         <burstCount>1</burstCount>
         <positionRadiusMin>0.15</positionRadiusMin>
         <positionRadius>2.2</positionRadius>
@@ -86,7 +104,7 @@
         <subEffecterClass>VVRace.SubEffecter_PerfumeSpiral</subEffecterClass>
         <fleckDef>VV_Fleck_PerfumePollen</fleckDef>
         <spawnLocType>OnTarget</spawnLocType>
-        <ticksBetweenMotes>2</ticksBetweenMotes>
+        <ticksBetweenMotes>1</ticksBetweenMotes>
         <burstCount>2~3</burstCount>
         <positionRadiusMin>0.1</positionRadiusMin>
         <positionRadius>2.6</positionRadius>
@@ -119,6 +137,20 @@
         <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
         <rotationRate>-240~240</rotationRate>
         <scale>0.08~0.18</scale>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <fleckDef>VV_Fleck_PerfumePowderLinger</fleckDef>
+        <spawnLocType>OnTarget</spawnLocType>
+        <ticksBetweenMotes>3</ticksBetweenMotes>
+        <burstCount>2~3</burstCount>
+        <positionRadiusMin>0.2</positionRadiusMin>
+        <positionRadius>1.4</positionRadius>
+        <angle>0~360</angle>
+        <speed>0.15~0.4</speed>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <rotationRate>-60~60</rotationRate>
+        <scale>0.6~0.9</scale>
       </li>
     </children>
   </EffecterDef>
