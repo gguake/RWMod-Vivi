@@ -113,9 +113,12 @@ namespace VVRace.HarmonyPatches
                 original: AccessTools.Method(typeof(RestUtility), nameof(RestUtility.CanUseBedNow)),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(RestUtility_CanUseBedNow_Postfix)));
 
-            harmony.Patch(
-                original: AccessTools.Method(typeof(JobDriver_Ingest), "MakeNewToils"),
-                postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(JobDriver_Ingest_MakeNewToils_Postfix)));
+            if (VVRaceMod.Settings?.enableViviMealContinuation ?? true)
+            {
+                harmony.Patch(
+                    original: AccessTools.Method(typeof(JobDriver_Ingest), "MakeNewToils"),
+                    postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(JobDriver_Ingest_MakeNewToils_Postfix)));
+            }
 
             Log.Message("!! [ViViRace] race patch complete");
         }
@@ -170,7 +173,12 @@ namespace VVRace.HarmonyPatches
                     return null;
                 }
 
-                var settings = LoadedModManager.GetMod<VVRaceMod>().GetSettings<VVRaceModSettings>();
+                var settings = VVRaceMod.Settings;
+                if (settings == null || !settings.enableViviMealContinuation)
+                {
+                    return null;
+                }
+
                 if (foodNeed.CurLevel > foodNeed.MaxLevel - settings.viviMealContinuationNutritionGap)
                 {
                     return null;
