@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+
+  <!-- ======================== Flecks ======================== -->
+  <!-- Shared base: overhead-low altitude, follows the pawn via attach link.
+       Textures VV_ScentAura / VV_ScentElectric / VV_ScentComet are grayscale
+       so the per-scent <color> tint below shows true. -->
+  <FleckDef ParentName="FleckBase_Thrown" Name="VV_ScentFleckBase" Abstract="True">
+    <altitudeLayer>MoteOverheadLow</altitudeLayer>
+    <useAttachLink>true</useAttachLink>
+  </FleckDef>
+
+  <!-- Common aura halo, tinted per scent. 120-tick lifetime, gentle swell. -->
+  <FleckDef ParentName="VV_ScentFleckBase">
+    <defName>VV_Fleck_ScentAura</defName>
+    <graphicData>
+      <texPath>VFX/VV_ScentAura</texPath>
+      <graphicClass>Graphic_Fleck</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <renderInstanced>true</renderInstanced>
+      <drawSize>1.35</drawSize>
+    </graphicData>
+    <fadeInTime>0.4</fadeInTime>
+    <solidTime>0.4</solidTime>
+    <fadeOutTime>1.2</fadeOutTime>
+    <growthRate>0.04</growthRate>
+  </FleckDef>
+
+  <!-- Ring variant of the halo: wispy magic circle for energy/frost scents -->
+  <FleckDef ParentName="VV_ScentFleckBase">
+    <defName>VV_Fleck_ScentAuraRing</defName>
+    <graphicData>
+      <texPath>VFX/VV_ScentAura2</texPath>
+      <graphicClass>Graphic_Fleck</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <renderInstanced>true</renderInstanced>
+      <drawSize>1.35</drawSize>
+    </graphicData>
+    <fadeInTime>0.4</fadeInTime>
+    <solidTime>0.4</solidTime>
+    <fadeOutTime>1.2</fadeOutTime>
+    <growthRate>0.04</growthRate>
+  </FleckDef>
+
+  <!-- Shockerbud: slow-drifting charge speck -->
+  <FleckDef ParentName="VV_ScentFleckBase">
+    <defName>VV_Fleck_ScentCharge</defName>
+    <graphicData>
+      <texPath>VFX/VV_ScentElectric</texPath>
+      <graphicClass>Graphic_Fleck</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+    <fadeInTime>0.25</fadeInTime>
+    <solidTime>0.6</solidTime>
+    <fadeOutTime>0.6</fadeOutTime>
+  </FleckDef>
+
+  <!-- Thunderpetals: near-instant lightning-arc flash -->
+  <FleckDef ParentName="VV_ScentFleckBase">
+    <defName>VV_Fleck_ScentSpark</defName>
+    <graphicData>
+      <texPath>VFX/VV_ScentSparkArc</texPath>
+      <graphicClass>Graphic_Fleck</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+    <fadeInTime>0.02</fadeInTime>
+    <solidTime>0.06</solidTime>
+    <fadeOutTime>0.15</fadeOutTime>
+  </FleckDef>
+
+  <!-- Waterdrops: rising bubble, grows slightly -->
+  <FleckDef ParentName="VV_ScentFleckBase">
+    <defName>VV_Fleck_ScentBubble</defName>
+    <graphicData>
+      <texPath>VFX/VV_ScentBubble</texPath>
+      <graphicClass>Graphic_Fleck</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+    <fadeInTime>0.2</fadeInTime>
+    <solidTime>0.7</solidTime>
+    <fadeOutTime>0.5</fadeOutTime>
+    <growthRate>0.05</growthRate>
+  </FleckDef>
+
+  <!-- Radiant/Rich/Ember: pollen-like light speck -->
+  <FleckDef ParentName="VV_ScentFleckBase">
+    <defName>VV_Fleck_ScentMote</defName>
+    <graphicData>
+      <texPath>VFX/VV_ScentMote</texPath>
+      <graphicClass>Graphic_Fleck</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+    <fadeInTime>0.3</fadeInTime>
+    <solidTime>0.5</solidTime>
+    <fadeOutTime>0.9</fadeOutTime>
+  </FleckDef>
+
+  <!-- Richflower: loose cluster of pollen specks -->
+  <FleckDef ParentName="VV_ScentFleckBase">
+    <defName>VV_Fleck_ScentPollen</defName>
+    <graphicData>
+      <texPath>VFX/VV_ScentPollen</texPath>
+      <graphicClass>Graphic_Fleck</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+    <fadeInTime>0.3</fadeInTime>
+    <solidTime>0.5</solidTime>
+    <fadeOutTime>0.9</fadeOutTime>
+  </FleckDef>
+
+  <!-- Starlitflower: soft four-point twinkle glint, fades in place -->
+  <FleckDef ParentName="VV_ScentFleckBase">
+    <defName>VV_Fleck_ScentTwinkle</defName>
+    <graphicData>
+      <texPath>VFX/VV_ScentTwinkle</texPath>
+      <graphicClass>Graphic_Fleck</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+    <fadeInTime>0.15</fadeInTime>
+    <solidTime>0.15</solidTime>
+    <fadeOutTime>0.3</fadeOutTime>
+  </FleckDef>
+
+  <!-- Starlitflower: shooting star. Texture tail points up, so trail the tail
+       behind the falling head with the 180-degree extra angle. -->
+  <FleckDef ParentName="VV_ScentFleckBase">
+    <defName>VV_Fleck_ScentComet</defName>
+    <graphicData>
+      <texPath>VFX/VV_ScentComet</texPath>
+      <graphicClass>Graphic_Fleck</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+    <fadeInTime>0.02</fadeInTime>
+    <solidTime>0.35</solidTime>
+    <fadeOutTime>0.45</fadeOutTime>
+    <rotateTowardsMoveDirection>true</rotateTowardsMoveDirection>
+    <rotateTowardsMoveDirectionExtraAngle>180</rotateTowardsMoveDirectionExtraAngle>
+  </FleckDef>
+
+  <!-- FrostBloom: slowly spinning snowflake crystal -->
+  <FleckDef ParentName="VV_ScentFleckBase">
+    <defName>VV_Fleck_ScentFrost</defName>
+    <graphicData>
+      <texPath>VFX/VV_ScentSnowflake</texPath>
+      <graphicClass>Graphic_Fleck</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+    <fadeInTime>0.25</fadeInTime>
+    <solidTime>0.7</solidTime>
+    <fadeOutTime>0.6</fadeOutTime>
+  </FleckDef>
+
+  <!-- ======================== Effecters ======================== -->
+  <!-- One per scent: shared halo tinted to the scent color + a signature
+       particle. Densities stay at 2-3 visible particles per pawn. -->
+
+  <!-- 전기봉오리: charge specks drift in a slow orbit close to the pawn -->
+  <EffecterDef>
+    <defName>VV_ScentAura_Shockerbud</defName>
+    <offsetMode>Free</offsetMode>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <fleckDef>VV_Fleck_ScentAuraRing</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <ticksBetweenMotes>90</ticksBetweenMotes>
+        <burstCount>1</burstCount>
+        <scale>1</scale>
+        <rotationRate>-10~10</rotationRate>
+        <color>(0.8, 0.4, 0.8, 0.17)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <fleckDef>VV_Fleck_ScentCharge</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <initialDelayTicks>20</initialDelayTicks>
+        <ticksBetweenMotes>40</ticksBetweenMotes>
+        <burstCount>1</burstCount>
+        <positionRadiusMin>0.25</positionRadiusMin>
+        <positionRadius>0.5</positionRadius>
+        <orbitOrigin>true</orbitOrigin>
+        <orbitSpeed>-1.5~1.5</orbitSpeed>
+        <orbitSnapStrength>0.5</orbitSnapStrength>
+        <scale>0.20~0.28</scale>
+        <color>(0.8, 0.4, 0.8, 0.7)</color>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <!-- 번개꽃: quiet, then an irregular quick spark or two -->
+  <EffecterDef>
+    <defName>VV_ScentAura_Thunderpetals</defName>
+    <offsetMode>Free</offsetMode>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <fleckDef>VV_Fleck_ScentAuraRing</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <ticksBetweenMotes>90</ticksBetweenMotes>
+        <burstCount>1</burstCount>
+        <scale>1</scale>
+        <rotationRate>-10~10</rotationRate>
+        <color>(0.78, 0.45, 0.95, 0.17)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerChance</subEffecterClass>
+        <fleckDef>VV_Fleck_ScentSpark</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <initialDelayTicks>40</initialDelayTicks>
+        <chancePeriodTicks>70</chancePeriodTicks>
+        <chancePerTick>0.018</chancePerTick>
+        <burstCount>1~2</burstCount>
+        <positionRadiusMin>0.15</positionRadiusMin>
+        <positionRadius>0.45</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>0~360</angle>
+        <speed>0.05~0.2</speed>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <rotation>0~360</rotation>
+        <scale>0.38~0.55</scale>
+        <color>(0.92, 0.7, 1.0, 0.95)</color>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <!-- 물방울꽃: translucent bubbles rise from below the pawn -->
+  <EffecterDef>
+    <defName>VV_ScentAura_Waterdrops</defName>
+    <offsetMode>Free</offsetMode>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <fleckDef>VV_Fleck_ScentAura</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <ticksBetweenMotes>90</ticksBetweenMotes>
+        <burstCount>1</burstCount>
+        <scale>1</scale>
+        <color>(0.5, 0.8, 1.0, 0.17)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <fleckDef>VV_Fleck_ScentBubble</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <initialDelayTicks>15</initialDelayTicks>
+        <ticksBetweenMotes>40</ticksBetweenMotes>
+        <burstCount>1</burstCount>
+        <positionOffset>(0, 0, -0.3)</positionOffset>
+        <positionRadiusMin>0.1</positionRadiusMin>
+        <positionRadius>0.3</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>-12~12</angle>
+        <speed>0.12~0.2</speed>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <scale>0.14~0.22</scale>
+        <color>(0.5, 0.8, 1.0, 0.7)</color>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <!-- 빛바라기: warm golden motes settle down from above -->
+  <EffecterDef>
+    <defName>VV_ScentAura_Radiantflower</defName>
+    <offsetMode>Free</offsetMode>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <fleckDef>VV_Fleck_ScentAura</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <ticksBetweenMotes>90</ticksBetweenMotes>
+        <burstCount>1</burstCount>
+        <scale>1</scale>
+        <color>(1.0, 0.75, 0.4, 0.17)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <fleckDef>VV_Fleck_ScentMote</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <initialDelayTicks>25</initialDelayTicks>
+        <ticksBetweenMotes>40</ticksBetweenMotes>
+        <burstCount>1</burstCount>
+        <positionOffset>(0, 0, 0.3)</positionOffset>
+        <positionRadiusMin>0.1</positionRadiusMin>
+        <positionRadius>0.35</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>170~190</angle>
+        <speed>0.07~0.13</speed>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <rotationRate>-20~20</rotationRate>
+        <scale>0.20~0.30</scale>
+        <color>(1.0, 0.66, 0.3, 0.85)</color>
+      </li>
+      <li>
+        <!-- soft steady halo of light at the head -->
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <fleckDef>VV_Fleck_ScentAura</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <ticksBetweenMotes>90</ticksBetweenMotes>
+        <burstCount>1</burstCount>
+        <positionOffset>(0, 0, 0.35)</positionOffset>
+        <scale>0.5</scale>
+        <color>(1.0, 0.8, 0.45, 0.28)</color>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <!-- 풍년화: yellow pollen spreads wide and slow around the pawn -->
+  <EffecterDef>
+    <defName>VV_ScentAura_Richflower</defName>
+    <offsetMode>Free</offsetMode>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <fleckDef>VV_Fleck_ScentAura</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <ticksBetweenMotes>90</ticksBetweenMotes>
+        <burstCount>1</burstCount>
+        <scale>1</scale>
+        <color>(1.0, 1.0, 0.5, 0.17)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <fleckDef>VV_Fleck_ScentPollen</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <initialDelayTicks>10</initialDelayTicks>
+        <ticksBetweenMotes>35</ticksBetweenMotes>
+        <burstCount>1</burstCount>
+        <positionRadiusMin>0.15</positionRadiusMin>
+        <positionRadius>0.45</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>0~360</angle>
+        <speed>0.04~0.09</speed>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <rotationRate>-40~40</rotationRate>
+        <scale>0.42~0.54</scale>
+        <color>(1.0, 1.0, 0.5, 0.75)</color>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <!-- 별맞이꽃: a tiny shooting star slants down past the pawn -->
+  <EffecterDef>
+    <defName>VV_ScentAura_Starlitflower</defName>
+    <offsetMode>Free</offsetMode>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <fleckDef>VV_Fleck_ScentAura</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <ticksBetweenMotes>90</ticksBetweenMotes>
+        <burstCount>1</burstCount>
+        <scale>1</scale>
+        <color>(0.8, 0.7, 1.0, 0.17)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <fleckDef>VV_Fleck_ScentComet</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <initialDelayTicks>35</initialDelayTicks>
+        <ticksBetweenMotes>75</ticksBetweenMotes>
+        <burstCount>1</burstCount>
+        <positionOffset>(0, 0, 0.7)</positionOffset>
+        <positionRadiusMin>0.1</positionRadiusMin>
+        <positionRadius>0.25</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>172~188</angle>
+        <speed>0.5~0.8</speed>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <scale>0.18~0.26</scale>
+        <color>(0.8, 0.7, 1.0, 0.9)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <fleckDef>VV_Fleck_ScentTwinkle</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <initialDelayTicks>10</initialDelayTicks>
+        <ticksBetweenMotes>30</ticksBetweenMotes>
+        <burstCount>1</burstCount>
+        <positionRadiusMin>0.1</positionRadiusMin>
+        <positionRadius>0.45</positionRadius>
+        <scale>0.28~0.42</scale>
+        <color>(0.9, 0.85, 1.0, 0.7)</color>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <!-- 잔불꽃: small orange embers float upward -->
+  <EffecterDef>
+    <defName>VV_ScentAura_EmberBloom</defName>
+    <offsetMode>Free</offsetMode>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <fleckDef>VV_Fleck_ScentAura</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <ticksBetweenMotes>90</ticksBetweenMotes>
+        <burstCount>1</burstCount>
+        <scale>1</scale>
+        <color>(0.9, 0.4, 0.2, 0.17)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <fleckDef>VV_Fleck_ScentMote</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <initialDelayTicks>20</initialDelayTicks>
+        <ticksBetweenMotes>40</ticksBetweenMotes>
+        <burstCount>1</burstCount>
+        <positionOffset>(0, 0, -0.3)</positionOffset>
+        <positionRadiusMin>0.1</positionRadiusMin>
+        <positionRadius>0.4</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>-15~15</angle>
+        <speed>0.12~0.22</speed>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <rotationRate>-30~30</rotationRate>
+        <scale>0.13~0.20</scale>
+        <color>(0.9, 0.4, 0.2, 0.9)</color>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <!-- 서리꽃: blue-white frost shards spin slowly as they settle -->
+  <EffecterDef>
+    <defName>VV_ScentAura_FrostBloom</defName>
+    <offsetMode>Free</offsetMode>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <fleckDef>VV_Fleck_ScentAuraRing</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <ticksBetweenMotes>90</ticksBetweenMotes>
+        <burstCount>1</burstCount>
+        <scale>1</scale>
+        <rotationRate>-10~10</rotationRate>
+        <color>(0.6, 0.9, 1.0, 0.17)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <fleckDef>VV_Fleck_ScentFrost</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <initialDelayTicks>30</initialDelayTicks>
+        <ticksBetweenMotes>45</ticksBetweenMotes>
+        <burstCount>1</burstCount>
+        <positionOffset>(0, 0, 0.3)</positionOffset>
+        <positionRadiusMin>0.15</positionRadiusMin>
+        <positionRadius>0.4</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>170~190</angle>
+        <speed>0.05~0.1</speed>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <rotationRate>-50~50</rotationRate>
+        <scale>0.12~0.18</scale>
+        <color>(0.6, 0.9, 1.0, 0.8)</color>
+      </li>
+    </children>
+  </EffecterDef>
+
+</Defs>

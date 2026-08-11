@@ -25,6 +25,11 @@
     <descriptionHyperlinks>
       <ThingDef>VV_Shockerbud</ThingDef>
     </descriptionHyperlinks>
+    <comps>
+      <li Class="HediffCompProperties_Effecter">
+        <stateEffecter>VV_ScentAura_Shockerbud</stateEffecter>
+      </li>
+    </comps>
     <stages>
       <li>
         <statOffsets>
@@ -45,6 +50,11 @@
     <descriptionHyperlinks>
       <ThingDef>VV_Thunderpetals</ThingDef>
     </descriptionHyperlinks>
+    <comps>
+      <li Class="HediffCompProperties_Effecter">
+        <stateEffecter>VV_ScentAura_Thunderpetals</stateEffecter>
+      </li>
+    </comps>
     <stages>
       <li>
         <statOffsets>
@@ -65,6 +75,11 @@
     <descriptionHyperlinks>
       <ThingDef>VV_Waterdrops</ThingDef>
     </descriptionHyperlinks>
+    <comps>
+      <li Class="HediffCompProperties_Effecter">
+        <stateEffecter>VV_ScentAura_Waterdrops</stateEffecter>
+      </li>
+    </comps>
     <stages>
       <li>
         <statOffsets>
@@ -84,6 +99,11 @@
     <descriptionHyperlinks>
       <ThingDef>VV_Radiantflower</ThingDef>
     </descriptionHyperlinks>
+    <comps>
+      <li Class="HediffCompProperties_Effecter">
+        <stateEffecter>VV_ScentAura_Radiantflower</stateEffecter>
+      </li>
+    </comps>
     <stages>
       <li>
         <statOffsets>
@@ -103,6 +123,11 @@
     <descriptionHyperlinks>
       <ThingDef>VV_Richflower</ThingDef>
     </descriptionHyperlinks>
+    <comps>
+      <li Class="HediffCompProperties_Effecter">
+        <stateEffecter>VV_ScentAura_Richflower</stateEffecter>
+      </li>
+    </comps>
     <stages>
       <li>
         <statOffsets>
@@ -120,6 +145,11 @@
     <descriptionHyperlinks>
       <ThingDef>VV_Starlitflower</ThingDef>
     </descriptionHyperlinks>
+    <comps>
+      <li Class="HediffCompProperties_Effecter">
+        <stateEffecter>VV_ScentAura_Starlitflower</stateEffecter>
+      </li>
+    </comps>
     <stages>
       <li>
         <statOffsets>
@@ -138,6 +168,11 @@
     <descriptionHyperlinks>
       <ThingDef>VV_EmberBloom</ThingDef>
     </descriptionHyperlinks>
+    <comps>
+      <li Class="HediffCompProperties_Effecter">
+        <stateEffecter>VV_ScentAura_EmberBloom</stateEffecter>
+      </li>
+    </comps>
     <stages>
       <li>
         <statOffsets>
@@ -155,6 +190,11 @@
     <descriptionHyperlinks>
       <ThingDef>VV_FrostBloom</ThingDef>
     </descriptionHyperlinks>
+    <comps>
+      <li Class="HediffCompProperties_Effecter">
+        <stateEffecter>VV_ScentAura_FrostBloom</stateEffecter>
+      </li>
+    </comps>
     <stages>
       <li>
         <statOffsets>
