@@ -1,9 +1,15 @@
-﻿using Verse;
+using Verse;
 
 namespace VVRace
 {
     public static class ScentUtility
     {
+        public const int DiffusionIntervalTicks = 1000;
+
+        // 향 hediff는 severity가 하루 -2.4로 감쇠
+        public const float FullScentSeverity = 1f;
+        public const float RoomScentSeverity = 0.1f;
+
         public static ScentExtension GetScentExtension(ThingDef def)
         {
             return def?.GetModExtension<ScentExtension>();
@@ -14,7 +20,7 @@ namespace VVRace
             return GetScentExtension(def)?.scentHediff != null;
         }
 
-        public static bool ApplyScent(Pawn pawn, ThingDef flowerDef, bool fromPerfume = false)
+        public static bool ApplyScent(Pawn pawn, ThingDef flowerDef, bool fromPerfume = false, float severity = FullScentSeverity)
         {
             var ext = GetScentExtension(flowerDef);
             if (ext?.scentHediff == null) { return false; }
@@ -41,12 +47,14 @@ namespace VVRace
 
             if (same != null)
             {
-                same.TryGetComp<HediffComp_Disappears>()?.ResetElapsedTicks();
+                if (same.Severity < severity)
+                {
+                    same.Severity = severity;
+                }
                 if (fromPerfume) { same.fromPerfume = true; }
                 return true;
             }
 
-            // 향수로 부여된 다른 향은 향수 분사로만 교체할 수 있다.
             if (!fromPerfume && protectedByPerfume) { return false; }
 
             for (int i = hediffs.Count - 1; i >= 0; --i)
@@ -60,9 +68,24 @@ namespace VVRace
             if (pawn.health.AddHediff(ext.scentHediff) is Hediff_FloralScent added)
             {
                 added.fromPerfume = fromPerfume;
+                added.Severity = severity;
             }
 
             return true;
+        }
+
+        public static void ApplyScentToRoom(Room room, ThingDef flowerDef)
+        {
+            foreach (var region in room.Regions)
+            {
+                foreach (var thing in region.ListerThings.ThingsInGroup(ThingRequestGroup.Pawn))
+                {
+                    if (thing is Pawn pawn)
+                    {
+                        ApplyScent(pawn, flowerDef, fromPerfume: false, severity: RoomScentSeverity);
+                    }
+                }
+            }
         }
     }
 }

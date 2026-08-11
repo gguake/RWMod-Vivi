@@ -13,5 +13,5 @@
   <VV_Scent_StatusScent>Collected scent: {0} ({1}/{2} sprays left)</VV_Scent_StatusScent>
   <VV_Scent_StatusLoading>Pollen loaded: {0}/{1}</VV_Scent_StatusLoading>
   <VV_StatsReport_FloralScent>Floral scent</VV_StatsReport_FloralScent>
-  <VV_StatsReport_FloralScent_Desc>The scent granted by this arcane flower. Pawns gain it by gathering from the flower or staying in the same room, and it can also be collected into a perfume bottle and sprayed. Only one arcane floral scent can take effect at a time.</VV_StatsReport_FloralScent_Desc>
+  <VV_StatsReport_FloralScent_Desc>The unique scent given off by this arcane flower. Staying in the room the flower is in, or gathering from it, grants the scent's effect. If different kinds of arcane flowers share the room, no scent takes effect.</VV_StatsReport_FloralScent_Desc>
 </LanguageData>

@@ -53,6 +53,9 @@ namespace VVRace
         public bool CheckVaccumResistance(IntVec3 cell) => _plantVaccumOverrideGrid[cell] > 0;
         private IntGrid _plantVaccumOverrideGrid;
 
+        private Dictionary<Room, ThingDef> _scentRooms;
+        private bool _scentRoomsDirty;
+
         public bool HasAnyArcanePlant => _arcanePlants.Count > 0;
 
         public ArcanePlantMapComponent(Map map) : base(map)
@@ -62,6 +65,11 @@ namespace VVRace
             _arcanePlantPots = new Dictionary<IntVec3, ArcanePlantPot>();
 
             _plantVaccumOverrideGrid = new IntGrid(map);
+
+            _scentRooms = new Dictionary<Room, ThingDef>();
+            _scentRoomsDirty = true;
+
+            map.events.RegionsRoomsChanged += () => _scentRoomsDirty = true;
 
             map.events.TerrainChanged += (cell) =>
             {
@@ -93,6 +101,63 @@ namespace VVRace
             Scribe_Collections.Look(ref _arcaneSeeds, "arcaneSeeds", LookMode.Reference);
         }
 
+        public override void MapComponentTick()
+        {
+            if (_scentRoomsDirty)
+            {
+                RebuildScentRooms();
+            }
+
+            if (_scentRooms.Count == 0) { return; }
+
+            var ticks = GenTicks.TicksGame;
+            foreach (var kv in _scentRooms)
+            {
+                if ((ticks + kv.Key.ID) % ScentUtility.DiffusionIntervalTicks != 0) { continue; }
+
+                if (kv.Key.Vacuum >= 0.5f) { continue; }
+
+                ScentUtility.ApplyScentToRoom(kv.Key, kv.Value);
+            }
+        }
+
+        private void RebuildScentRooms()
+        {
+            _scentRoomsDirty = false;
+            _scentRooms.Clear();
+
+            HashSet<Room> conflicted = null;
+            foreach (var plant in _arcanePlants.Values)
+            {
+                if (plant.Destroyed || !plant.Spawned) { continue; }
+                if (!ScentUtility.IsScentFlower(plant.def)) { continue; }
+
+                var room = plant.Position.GetRoom(map);
+                if (room == null || room.PsychologicallyOutdoors) { continue; }
+
+                if (_scentRooms.TryGetValue(room, out var existing))
+                {
+                    if (existing != plant.def)
+                    {
+                        if (conflicted == null) { conflicted = new HashSet<Room>(); }
+                        conflicted.Add(room);
+                    }
+                }
+                else
+                {
+                    _scentRooms.Add(room, plant.def);
+                }
+            }
+
+            if (conflicted != null)
+            {
+                foreach (var room in conflicted)
+                {
+                    _scentRooms.Remove(room);
+                }
+            }
+        }
+
         public void Notify_ArcaneSeedPlantReserved(ThingWithComps seed)
         {
             _arcaneSeeds.Add(seed);
@@ -106,6 +171,11 @@ namespace VVRace
         public void Notify_ArcanePlantSpawned(ArcanePlant plant)
         {
             _arcanePlants.Add(plant.Position, plant);
+
+            if (ScentUtility.IsScentFlower(plant.def))
+            {
+                _scentRoomsDirty = true;
+            }
         }
 
         public void Notify_StalitflowerSpawned(ArcanePlant plant)
@@ -121,6 +191,11 @@ namespace VVRace
         public void Notify_ArcanePlantDespawned(ArcanePlant plant)
         {
             _arcanePlants.Remove(plant.Position);
+
+            if (ScentUtility.IsScentFlower(plant.def))
+            {
+                _scentRoomsDirty = true;
+            }
         }
 
         public void Notify_StalitflowerDespawned(ArcanePlant plant)

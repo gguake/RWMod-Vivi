@@ -14,6 +14,6 @@
 <VV_Scent_StatusScent>채집된 향: {0} (남은 횟수 {1}/{2})</VV_Scent_StatusScent>
 <VV_Scent_StatusLoading>충전된 꽃가루: {0}/{1}</VV_Scent_StatusLoading>
 <VV_StatsReport_FloralScent>마법 꽃 향</VV_StatsReport_FloralScent>
-<VV_StatsReport_FloralScent_Desc>이 마법 꽃이 부여하는 향입니다. 꽃에서 채집하거나 같은 방에 머무르면 향을 얻으며 향수병으로 채집해 뿌릴 수도 있습니다. 마법 꽃 향수의 효과는 하나만 적용됩니다.</VV_StatsReport_FloralScent_Desc>
+<VV_StatsReport_FloralScent_Desc>이 마법 꽃이 내는 고유한 향입니다. 꽃이 있는 방에 머무르거나 채집을 하면 고유한 향의 효과를 받습니다. 방에 서로 다른 종류의 마법 꽃들이 있다면 향은 적용되지 않습니다.</VV_StatsReport_FloralScent_Desc>
 
 </LanguageData>

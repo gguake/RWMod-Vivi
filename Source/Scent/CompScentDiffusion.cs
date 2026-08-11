@@ -1,4 +1,4 @@
-﻿using RimWorld;
+using RimWorld;
 using System.Collections.Generic;
 using System.Text;
 using Verse;
@@ -7,8 +7,6 @@ namespace VVRace
 {
     public class CompProperties_ScentDiffusion : CompProperties
     {
-        public int intervalTicks = 250;
-
         public CompProperties_ScentDiffusion()
         {
             compClass = typeof(CompScentDiffusion);
@@ -67,47 +65,7 @@ namespace VVRace
         }
     }
 
-    // 마법 꽃이 자신이 있는 방 전체에 향을 퍼뜨린다. 마나 상태와 무관하게 동작하며
-    // 야외(PsychologicallyOutdoors)에서는 확산하지 않는다.
     public class CompScentDiffusion : ThingComp
     {
-        private int _nextDiffuseTick;
-
-        public CompProperties_ScentDiffusion Props => (CompProperties_ScentDiffusion)props;
-
-        public override void CompTick()
-        {
-            TryDiffuse();
-        }
-
-        public override void CompTickInterval(int delta)
-        {
-            TryDiffuse();
-        }
-
-        private void TryDiffuse()
-        {
-            if (GenTicks.TicksGame < _nextDiffuseTick) { return; }
-            _nextDiffuseTick = GenTicks.TicksGame + Props.intervalTicks;
-
-            if (!parent.Spawned) { return; }
-
-            var flowerDef = parent.def;
-            if (!ScentUtility.IsScentFlower(flowerDef)) { return; }
-
-            var room = parent.Position.GetRoom(parent.Map);
-            if (room == null || room.PsychologicallyOutdoors) { return; }
-
-            foreach (var region in room.Regions)
-            {
-                foreach (var thing in region.ListerThings.ThingsInGroup(ThingRequestGroup.Pawn))
-                {
-                    if (thing is Pawn pawn)
-                    {
-                        ScentUtility.ApplyScent(pawn, flowerDef);
-                    }
-                }
-            }
-        }
     }
 }

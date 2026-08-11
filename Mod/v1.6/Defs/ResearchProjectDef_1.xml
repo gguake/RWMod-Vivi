@@ -174,7 +174,7 @@
   <ResearchProjectDef ParentName="ViviResearchProjectTier1Base">
     <defName>VV_Perfumery</defName>
     <label>arcane perfumery</label>
-    <description>Craft perfume bottles that record the scents of arcane flowers and spray them to grant their effects to everyone nearby.</description>
+    <description>Bottle the unique scents of arcane flowers, each carrying its own effect, to carry with you and spray on those around you.</description>
     <baseCost>900</baseCost>
     <researchViewX>3</researchViewX>
     <researchViewY>1.4</researchViewY>
