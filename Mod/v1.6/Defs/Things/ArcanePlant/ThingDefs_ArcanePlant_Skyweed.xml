@@ -95,6 +95,10 @@
     <size>(1,1)</size>
     <rotatable>false</rotatable>
     <tickerType>Normal</tickerType>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <thingCategories>
+      <li>VV_BuildingsVivi</li>
+    </thingCategories>
     <altitudeLayer>BuildingOnTop</altitudeLayer>
     <passability>PassThroughOnly</passability>
     <castEdgeShadows>false</castEdgeShadows>
@@ -107,6 +111,7 @@
     <statBases>
       <MaxHitPoints>120</MaxHitPoints>
       <WorkToBuild>1500</WorkToBuild>
+      <Mass>1</Mass>
       <Flammability>1.0</Flammability>
     </statBases>
 
