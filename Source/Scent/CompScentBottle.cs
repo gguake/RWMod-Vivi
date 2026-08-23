@@ -28,7 +28,7 @@ namespace VVRace
     [StaticConstructorOnStartup]
     public class CompScentBottle : ThingComp
     {
-        private static readonly Texture2D CollectIcon = ContentFinder<Texture2D>.Get("Things/Item/Equipment/VV_PerfumeA");
+        private static readonly Texture2D CollectIcon = ContentFinder<Texture2D>.Get("UI/Commands/VV_GatherScent");
 
         private int pollenLoaded;
         private ThingDef scentFlower;
