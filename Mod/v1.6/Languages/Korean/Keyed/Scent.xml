@@ -14,6 +14,7 @@
 <VV_Scent_StatusScent>채집된 향: {0} (남은 횟수 {1}/{2})</VV_Scent_StatusScent>
 <VV_Scent_StatusLoading>충전된 꽃가루: {0}/{1}</VV_Scent_StatusLoading>
 <VV_StatsReport_FloralScent>마법 꽃 향</VV_StatsReport_FloralScent>
-<VV_StatsReport_FloralScent_Desc>이 마법 꽃이 내는 고유한 향입니다. 꽃이 있는 방에 머무르거나 채집을 하면 고유한 향의 효과를 받습니다. 방에 서로 다른 종류의 마법 꽃들이 있다면 향은 적용되지 않습니다.</VV_StatsReport_FloralScent_Desc>
+<VV_StatsReport_FloralScent_Desc>이 마법 꽃이 내는 고유한 향입니다. 더 강한 향은 항상 약한 향을 덮어씁니다. 방에 서로 다른 종류의 마법 꽃들이 있다면 향은 적용되지 않습니다.</VV_StatsReport_FloralScent_Desc>
+<VV_StatsReport_FloralScent_TierDesc>향의 농도에 따라 효과가 5단계로 강해집니다. 아래 수치는 최대 농도 기준입니다 — 꽃이 있는 방에 머무르면 1단계(희미함)가 유지되고, 채집하면 3단계(보통), 향수는 5단계(강렬함)를 부여합니다.</VV_StatsReport_FloralScent_TierDesc>
 
 </LanguageData>

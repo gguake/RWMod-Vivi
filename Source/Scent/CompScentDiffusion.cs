@@ -44,7 +44,7 @@ namespace VVRace
                 sb.Append(hediff.description);
             }
 
-            var stage = hediff.stages != null && hediff.stages.Count > 0 ? hediff.stages[0] : null;
+            var stage = MaxStage(hediff);
             if (stage != null)
             {
                 var lines = new StringBuilder();
@@ -57,11 +57,18 @@ namespace VVRace
                 {
                     sb.AppendLine();
                     sb.AppendLine();
+                    sb.Append(LocalizeString_Scent.VV_StatsReport_FloralScent_TierDesc.Translate());
+                    sb.AppendLine();
                     sb.Append(lines);
                 }
             }
 
             return sb.ToString();
+        }
+
+        public static HediffStage MaxStage(HediffDef hediff)
+        {
+            return hediff.stages != null && hediff.stages.Count > 0 ? hediff.stages[hediff.stages.Count - 1] : null;
         }
     }
 

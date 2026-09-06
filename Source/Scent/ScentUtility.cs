@@ -1,4 +1,4 @@
-using Verse;
+﻿using Verse;
 
 namespace VVRace
 {
@@ -6,9 +6,12 @@ namespace VVRace
     {
         public const int DiffusionIntervalTicks = 1000;
 
-        // 향 hediff는 severity가 하루 -2.4로 감쇠
+        // 향 hediff는 severity가 하루 -2.4로 감쇠하며, 0.2 간격 스테이지로 효과 단계가 결정된다.
+        // 소스 severity가 0.2의 배수에 정확히 걸치면 감쇠·재적용 사이에 단계가 진동하므로
+        // 경계에 걸치는 값은 피할 것 (방 확산이 0.2가 아니라 0.199인 이유).
         public const float FullScentSeverity = 1f;
-        public const float RoomScentSeverity = 0.1f;
+        public const float GatherScentSeverity = 0.5f;
+        public const float RoomScentSeverity = 0.199f;
 
         public static ScentExtension GetScentExtension(ThingDef def)
         {
@@ -20,7 +23,7 @@ namespace VVRace
             return GetScentExtension(def)?.scentHediff != null;
         }
 
-        public static bool ApplyScent(Pawn pawn, ThingDef flowerDef, bool fromPerfume = false, float severity = FullScentSeverity)
+        public static bool ApplyScent(Pawn pawn, ThingDef flowerDef, float severity = FullScentSeverity)
         {
             var ext = GetScentExtension(flowerDef);
             if (ext?.scentHediff == null) { return false; }
@@ -28,7 +31,7 @@ namespace VVRace
             if (pawn.RaceProps?.IsFlesh != true) { return false; }
 
             Hediff_FloralScent same = null;
-            var protectedByPerfume = false;
+            var maxOtherSeverity = 0f;
             var hediffs = pawn.health.hediffSet.hediffs;
             for (int i = 0; i < hediffs.Count; ++i)
             {
@@ -38,9 +41,9 @@ namespace VVRace
                     {
                         same = scent;
                     }
-                    else if (scent.fromPerfume)
+                    else if (scent.Severity > maxOtherSeverity)
                     {
-                        protectedByPerfume = true;
+                        maxOtherSeverity = scent.Severity;
                     }
                 }
             }
@@ -51,11 +54,11 @@ namespace VVRace
                 {
                     same.Severity = severity;
                 }
-                if (fromPerfume) { same.fromPerfume = true; }
                 return true;
             }
 
-            if (!fromPerfume && protectedByPerfume) { return false; }
+            // 다른 향은 severity가 엄격히 높은 쪽만 우선한다. 동률이면 기존 향 유지.
+            if (severity <= maxOtherSeverity) { return false; }
 
             for (int i = hediffs.Count - 1; i >= 0; --i)
             {
@@ -65,11 +68,10 @@ namespace VVRace
                 }
             }
 
-            if (pawn.health.AddHediff(ext.scentHediff) is Hediff_FloralScent added)
-            {
-                added.fromPerfume = fromPerfume;
-                added.Severity = severity;
-            }
+            // 건강 상태 판정 전에 농도를 설정해 최대 단계 효과가 일시적으로 적용되지 않게 한다.
+            var added = HediffMaker.MakeHediff(ext.scentHediff, pawn);
+            added.Severity = severity;
+            pawn.health.AddHediff(added);
 
             return true;
         }
@@ -82,7 +84,7 @@ namespace VVRace
                 {
                     if (thing is Pawn pawn)
                     {
-                        ApplyScent(pawn, flowerDef, fromPerfume: false, severity: RoomScentSeverity);
+                        ApplyScent(pawn, flowerDef, RoomScentSeverity);
                     }
                 }
             }

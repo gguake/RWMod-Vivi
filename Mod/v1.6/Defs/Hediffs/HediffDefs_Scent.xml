@@ -28,10 +28,44 @@
     <comps>
       <li Class="HediffCompProperties_Effecter">
         <stateEffecter>VV_ScentAura_Shockerbud</stateEffecter>
+        <severityIndices>2~4</severityIndices>
       </li>
     </comps>
     <stages>
       <li>
+        <label>faint</label>
+        <statOffsets>
+          <MeleeDodgeChance>2</MeleeDodgeChance>
+          <MeleeHitChance>0.8</MeleeHitChance>
+        </statOffsets>
+      </li>
+      <li>
+        <label>subtle</label>
+        <minSeverity>0.2</minSeverity>
+        <statOffsets>
+          <MeleeDodgeChance>4</MeleeDodgeChance>
+          <MeleeHitChance>1.6</MeleeHitChance>
+        </statOffsets>
+      </li>
+      <li>
+        <label>moderate</label>
+        <minSeverity>0.4</minSeverity>
+        <statOffsets>
+          <MeleeDodgeChance>6</MeleeDodgeChance>
+          <MeleeHitChance>2.4</MeleeHitChance>
+        </statOffsets>
+      </li>
+      <li>
+        <label>rich</label>
+        <minSeverity>0.6</minSeverity>
+        <statOffsets>
+          <MeleeDodgeChance>8</MeleeDodgeChance>
+          <MeleeHitChance>3.2</MeleeHitChance>
+        </statOffsets>
+      </li>
+      <li>
+        <label>intense</label>
+        <minSeverity>0.8</minSeverity>
         <statOffsets>
           <MeleeDodgeChance>10</MeleeDodgeChance>
           <MeleeHitChance>4</MeleeHitChance>
@@ -53,10 +87,44 @@
     <comps>
       <li Class="HediffCompProperties_Effecter">
         <stateEffecter>VV_ScentAura_Thunderpetals</stateEffecter>
+        <severityIndices>2~4</severityIndices>
       </li>
     </comps>
     <stages>
       <li>
+        <label>faint</label>
+        <statOffsets>
+          <ShootingAccuracyPawn>0.8</ShootingAccuracyPawn>
+          <RangedCooldownFactor>-0.02</RangedCooldownFactor>
+        </statOffsets>
+      </li>
+      <li>
+        <label>subtle</label>
+        <minSeverity>0.2</minSeverity>
+        <statOffsets>
+          <ShootingAccuracyPawn>1.6</ShootingAccuracyPawn>
+          <RangedCooldownFactor>-0.04</RangedCooldownFactor>
+        </statOffsets>
+      </li>
+      <li>
+        <label>moderate</label>
+        <minSeverity>0.4</minSeverity>
+        <statOffsets>
+          <ShootingAccuracyPawn>2.4</ShootingAccuracyPawn>
+          <RangedCooldownFactor>-0.06</RangedCooldownFactor>
+        </statOffsets>
+      </li>
+      <li>
+        <label>rich</label>
+        <minSeverity>0.6</minSeverity>
+        <statOffsets>
+          <ShootingAccuracyPawn>3.2</ShootingAccuracyPawn>
+          <RangedCooldownFactor>-0.08</RangedCooldownFactor>
+        </statOffsets>
+      </li>
+      <li>
+        <label>intense</label>
+        <minSeverity>0.8</minSeverity>
         <statOffsets>
           <ShootingAccuracyPawn>4</ShootingAccuracyPawn>
           <RangedCooldownFactor>-0.1</RangedCooldownFactor>
@@ -78,10 +146,52 @@
     <comps>
       <li Class="HediffCompProperties_Effecter">
         <stateEffecter>VV_ScentAura_Waterdrops</stateEffecter>
+        <severityIndices>2~4</severityIndices>
       </li>
     </comps>
     <stages>
       <li>
+        <label>faint</label>
+        <statOffsets>
+          <ToxicResistance>0.2</ToxicResistance>
+        </statOffsets>
+        <statFactors>
+          <Flammability>0.8</Flammability>
+        </statFactors>
+      </li>
+      <li>
+        <label>subtle</label>
+        <minSeverity>0.2</minSeverity>
+        <statOffsets>
+          <ToxicResistance>0.4</ToxicResistance>
+        </statOffsets>
+        <statFactors>
+          <Flammability>0.6</Flammability>
+        </statFactors>
+      </li>
+      <li>
+        <label>moderate</label>
+        <minSeverity>0.4</minSeverity>
+        <statOffsets>
+          <ToxicResistance>0.6</ToxicResistance>
+        </statOffsets>
+        <statFactors>
+          <Flammability>0.4</Flammability>
+        </statFactors>
+      </li>
+      <li>
+        <label>rich</label>
+        <minSeverity>0.6</minSeverity>
+        <statOffsets>
+          <ToxicResistance>0.8</ToxicResistance>
+        </statOffsets>
+        <statFactors>
+          <Flammability>0.2</Flammability>
+        </statFactors>
+      </li>
+      <li>
+        <label>intense</label>
+        <minSeverity>0.8</minSeverity>
         <statOffsets>
           <ToxicResistance>1.0</ToxicResistance>
         </statOffsets>
@@ -102,10 +212,52 @@
     <comps>
       <li Class="HediffCompProperties_Effecter">
         <stateEffecter>VV_ScentAura_Radiantflower</stateEffecter>
+        <severityIndices>2~4</severityIndices>
       </li>
     </comps>
     <stages>
       <li>
+        <label>faint</label>
+        <statOffsets>
+          <MentalBreakThreshold>-0.02</MentalBreakThreshold>
+        </statOffsets>
+        <statFactors>
+          <InjuryHealingFactor>1.06</InjuryHealingFactor>
+        </statFactors>
+      </li>
+      <li>
+        <label>subtle</label>
+        <minSeverity>0.2</minSeverity>
+        <statOffsets>
+          <MentalBreakThreshold>-0.04</MentalBreakThreshold>
+        </statOffsets>
+        <statFactors>
+          <InjuryHealingFactor>1.12</InjuryHealingFactor>
+        </statFactors>
+      </li>
+      <li>
+        <label>moderate</label>
+        <minSeverity>0.4</minSeverity>
+        <statOffsets>
+          <MentalBreakThreshold>-0.06</MentalBreakThreshold>
+        </statOffsets>
+        <statFactors>
+          <InjuryHealingFactor>1.18</InjuryHealingFactor>
+        </statFactors>
+      </li>
+      <li>
+        <label>rich</label>
+        <minSeverity>0.6</minSeverity>
+        <statOffsets>
+          <MentalBreakThreshold>-0.08</MentalBreakThreshold>
+        </statOffsets>
+        <statFactors>
+          <InjuryHealingFactor>1.24</InjuryHealingFactor>
+        </statFactors>
+      </li>
+      <li>
+        <label>intense</label>
+        <minSeverity>0.8</minSeverity>
         <statOffsets>
           <MentalBreakThreshold>-0.1</MentalBreakThreshold>
         </statOffsets>
@@ -126,10 +278,44 @@
     <comps>
       <li Class="HediffCompProperties_Effecter">
         <stateEffecter>VV_ScentAura_Richflower</stateEffecter>
+        <severityIndices>2~4</severityIndices>
       </li>
     </comps>
     <stages>
       <li>
+        <label>faint</label>
+        <statOffsets>
+          <WorkSpeedGlobal>0.02</WorkSpeedGlobal>
+        </statOffsets>
+        <hungerRateFactor>0.98</hungerRateFactor>
+      </li>
+      <li>
+        <label>subtle</label>
+        <minSeverity>0.2</minSeverity>
+        <statOffsets>
+          <WorkSpeedGlobal>0.04</WorkSpeedGlobal>
+        </statOffsets>
+        <hungerRateFactor>0.96</hungerRateFactor>
+      </li>
+      <li>
+        <label>moderate</label>
+        <minSeverity>0.4</minSeverity>
+        <statOffsets>
+          <WorkSpeedGlobal>0.06</WorkSpeedGlobal>
+        </statOffsets>
+        <hungerRateFactor>0.94</hungerRateFactor>
+      </li>
+      <li>
+        <label>rich</label>
+        <minSeverity>0.6</minSeverity>
+        <statOffsets>
+          <WorkSpeedGlobal>0.08</WorkSpeedGlobal>
+        </statOffsets>
+        <hungerRateFactor>0.92</hungerRateFactor>
+      </li>
+      <li>
+        <label>intense</label>
+        <minSeverity>0.8</minSeverity>
         <statOffsets>
           <WorkSpeedGlobal>0.1</WorkSpeedGlobal>
         </statOffsets>
@@ -148,10 +334,48 @@
     <comps>
       <li Class="HediffCompProperties_Effecter">
         <stateEffecter>VV_ScentAura_Starlitflower</stateEffecter>
+        <severityIndices>2~4</severityIndices>
       </li>
     </comps>
     <stages>
       <li>
+        <label>faint</label>
+        <statOffsets>
+          <PainShockThreshold>0.01</PainShockThreshold>
+          <RestRateMultiplier>0.03</RestRateMultiplier>
+          <VacuumResistance MayRequire="Ludeon.RimWorld.Odyssey">0.2</VacuumResistance>
+        </statOffsets>
+      </li>
+      <li>
+        <label>subtle</label>
+        <minSeverity>0.2</minSeverity>
+        <statOffsets>
+          <PainShockThreshold>0.02</PainShockThreshold>
+          <RestRateMultiplier>0.06</RestRateMultiplier>
+          <VacuumResistance MayRequire="Ludeon.RimWorld.Odyssey">0.4</VacuumResistance>
+        </statOffsets>
+      </li>
+      <li>
+        <label>moderate</label>
+        <minSeverity>0.4</minSeverity>
+        <statOffsets>
+          <PainShockThreshold>0.03</PainShockThreshold>
+          <RestRateMultiplier>0.09</RestRateMultiplier>
+          <VacuumResistance MayRequire="Ludeon.RimWorld.Odyssey">0.6</VacuumResistance>
+        </statOffsets>
+      </li>
+      <li>
+        <label>rich</label>
+        <minSeverity>0.6</minSeverity>
+        <statOffsets>
+          <PainShockThreshold>0.04</PainShockThreshold>
+          <RestRateMultiplier>0.12</RestRateMultiplier>
+          <VacuumResistance MayRequire="Ludeon.RimWorld.Odyssey">0.8</VacuumResistance>
+        </statOffsets>
+      </li>
+      <li>
+        <label>intense</label>
+        <minSeverity>0.8</minSeverity>
         <statOffsets>
           <PainShockThreshold>0.05</PainShockThreshold>
           <RestRateMultiplier>0.15</RestRateMultiplier>
@@ -171,10 +395,44 @@
     <comps>
       <li Class="HediffCompProperties_Effecter">
         <stateEffecter>VV_ScentAura_EmberBloom</stateEffecter>
+        <severityIndices>2~4</severityIndices>
       </li>
     </comps>
     <stages>
       <li>
+        <label>faint</label>
+        <statOffsets>
+          <ComfyTemperatureMin>-2</ComfyTemperatureMin>
+          <ImmunityGainSpeed>0.04</ImmunityGainSpeed>
+        </statOffsets>
+      </li>
+      <li>
+        <label>subtle</label>
+        <minSeverity>0.2</minSeverity>
+        <statOffsets>
+          <ComfyTemperatureMin>-4</ComfyTemperatureMin>
+          <ImmunityGainSpeed>0.08</ImmunityGainSpeed>
+        </statOffsets>
+      </li>
+      <li>
+        <label>moderate</label>
+        <minSeverity>0.4</minSeverity>
+        <statOffsets>
+          <ComfyTemperatureMin>-6</ComfyTemperatureMin>
+          <ImmunityGainSpeed>0.12</ImmunityGainSpeed>
+        </statOffsets>
+      </li>
+      <li>
+        <label>rich</label>
+        <minSeverity>0.6</minSeverity>
+        <statOffsets>
+          <ComfyTemperatureMin>-8</ComfyTemperatureMin>
+          <ImmunityGainSpeed>0.16</ImmunityGainSpeed>
+        </statOffsets>
+      </li>
+      <li>
+        <label>intense</label>
+        <minSeverity>0.8</minSeverity>
         <statOffsets>
           <ComfyTemperatureMin>-10</ComfyTemperatureMin>
           <ImmunityGainSpeed>0.2</ImmunityGainSpeed>
@@ -193,10 +451,52 @@
     <comps>
       <li Class="HediffCompProperties_Effecter">
         <stateEffecter>VV_ScentAura_FrostBloom</stateEffecter>
+        <severityIndices>2~4</severityIndices>
       </li>
     </comps>
     <stages>
       <li>
+        <label>faint</label>
+        <statOffsets>
+          <ComfyTemperatureMax>2</ComfyTemperatureMax>
+        </statOffsets>
+        <statFactors>
+          <RestFallRateFactor>0.97</RestFallRateFactor>
+        </statFactors>
+      </li>
+      <li>
+        <label>subtle</label>
+        <minSeverity>0.2</minSeverity>
+        <statOffsets>
+          <ComfyTemperatureMax>4</ComfyTemperatureMax>
+        </statOffsets>
+        <statFactors>
+          <RestFallRateFactor>0.94</RestFallRateFactor>
+        </statFactors>
+      </li>
+      <li>
+        <label>moderate</label>
+        <minSeverity>0.4</minSeverity>
+        <statOffsets>
+          <ComfyTemperatureMax>6</ComfyTemperatureMax>
+        </statOffsets>
+        <statFactors>
+          <RestFallRateFactor>0.91</RestFallRateFactor>
+        </statFactors>
+      </li>
+      <li>
+        <label>rich</label>
+        <minSeverity>0.6</minSeverity>
+        <statOffsets>
+          <ComfyTemperatureMax>8</ComfyTemperatureMax>
+        </statOffsets>
+        <statFactors>
+          <RestFallRateFactor>0.88</RestFallRateFactor>
+        </statFactors>
+      </li>
+      <li>
+        <label>intense</label>
+        <minSeverity>0.8</minSeverity>
         <statOffsets>
           <ComfyTemperatureMax>10</ComfyTemperatureMax>
         </statOffsets>

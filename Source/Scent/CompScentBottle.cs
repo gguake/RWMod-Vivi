@@ -113,7 +113,7 @@ namespace VVRace
                 .RadialDistinctThingsAround(sprayer.Position, sprayer.Map, radius, true)
                 .OfType<Pawn>())
             {
-                ScentUtility.ApplyScent(target, flowerDef, fromPerfume: true);
+                ScentUtility.ApplyScent(target, flowerDef);
             }
 
             SpawnSprayEffect(sprayer);

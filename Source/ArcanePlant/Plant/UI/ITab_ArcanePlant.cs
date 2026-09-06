@@ -138,7 +138,7 @@ namespace VVRace
             curY += rowHeight + RowGap;
 
             var alternate = false;
-            var stage = hediff.stages != null && hediff.stages.Count > 0 ? hediff.stages[0] : null;
+            var stage = CompProperties_ScentDiffusion.MaxStage(hediff);
             if (stage != null)
             {
                 foreach (var entry in HediffStatsUtility.SpecialDisplayStats(stage, null))

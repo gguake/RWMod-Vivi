@@ -82,7 +82,7 @@ namespace VVRace
                 }
             }
 
-            ScentUtility.ApplyScent(pawn, target.def);
+            ScentUtility.ApplyScent(pawn, target.def, ScentUtility.GatherScentSeverity);
         }
 
         public virtual void Notify_ProcessStarted(Pawn pawn, Building_GatherWorkTable workTable)

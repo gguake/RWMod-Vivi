@@ -3,26 +3,66 @@
 
 <VV_Scent_Shockerbud.label>향: 섬광꽃</VV_Scent_Shockerbud.label>
 <VV_Scent_Shockerbud.description>섬광꽃의 찌릿한 꽃 향. 근접전에서 반사신경을 예리하게 만듭니다.</VV_Scent_Shockerbud.description>
+<VV_Scent_Shockerbud.stages.0.label>희미함</VV_Scent_Shockerbud.stages.0.label>
+<VV_Scent_Shockerbud.stages.1.label>옅음</VV_Scent_Shockerbud.stages.1.label>
+<VV_Scent_Shockerbud.stages.2.label>보통</VV_Scent_Shockerbud.stages.2.label>
+<VV_Scent_Shockerbud.stages.3.label>짙음</VV_Scent_Shockerbud.stages.3.label>
+<VV_Scent_Shockerbud.stages.4.label>강렬함</VV_Scent_Shockerbud.stages.4.label>
 
 <VV_Scent_Thunderpetals.label>향: 벼락꽃</VV_Scent_Thunderpetals.label>
 <VV_Scent_Thunderpetals.description>벼락꽃의 짜릿한 꽃 향. 집중력을 높이고 조준을 안정시킵니다.</VV_Scent_Thunderpetals.description>
+<VV_Scent_Thunderpetals.stages.0.label>희미함</VV_Scent_Thunderpetals.stages.0.label>
+<VV_Scent_Thunderpetals.stages.1.label>옅음</VV_Scent_Thunderpetals.stages.1.label>
+<VV_Scent_Thunderpetals.stages.2.label>보통</VV_Scent_Thunderpetals.stages.2.label>
+<VV_Scent_Thunderpetals.stages.3.label>짙음</VV_Scent_Thunderpetals.stages.3.label>
+<VV_Scent_Thunderpetals.stages.4.label>강렬함</VV_Scent_Thunderpetals.stages.4.label>
 
 <VV_Scent_Waterdrops.label>향: 물방울꽃</VV_Scent_Waterdrops.label>
 <VV_Scent_Waterdrops.description>물방울꽃의 맑은 꽃 향. 독소를 씻어내고 몸을 불로부터 보호합니다.</VV_Scent_Waterdrops.description>
+<VV_Scent_Waterdrops.stages.0.label>희미함</VV_Scent_Waterdrops.stages.0.label>
+<VV_Scent_Waterdrops.stages.1.label>옅음</VV_Scent_Waterdrops.stages.1.label>
+<VV_Scent_Waterdrops.stages.2.label>보통</VV_Scent_Waterdrops.stages.2.label>
+<VV_Scent_Waterdrops.stages.3.label>짙음</VV_Scent_Waterdrops.stages.3.label>
+<VV_Scent_Waterdrops.stages.4.label>강렬함</VV_Scent_Waterdrops.stages.4.label>
 
 <VV_Scent_Radiantflower.label>향: 빛바라기</VV_Scent_Radiantflower.label>
 <VV_Scent_Radiantflower.description>빛바라기의 따스한 꽃 향. 마음을 안정시키고 자연 치유를 촉진합니다.</VV_Scent_Radiantflower.description>
+<VV_Scent_Radiantflower.stages.0.label>희미함</VV_Scent_Radiantflower.stages.0.label>
+<VV_Scent_Radiantflower.stages.1.label>옅음</VV_Scent_Radiantflower.stages.1.label>
+<VV_Scent_Radiantflower.stages.2.label>보통</VV_Scent_Radiantflower.stages.2.label>
+<VV_Scent_Radiantflower.stages.3.label>짙음</VV_Scent_Radiantflower.stages.3.label>
+<VV_Scent_Radiantflower.stages.4.label>강렬함</VV_Scent_Radiantflower.stages.4.label>
 
 <VV_Scent_Richflower.label>향: 풍년화</VV_Scent_Richflower.label>
 <VV_Scent_Richflower.description>풍년화의 풍요로운 꽃 향. 작업에 활력을 주고 허기를 더디게 합니다.</VV_Scent_Richflower.description>
+<VV_Scent_Richflower.stages.0.label>희미함</VV_Scent_Richflower.stages.0.label>
+<VV_Scent_Richflower.stages.1.label>옅음</VV_Scent_Richflower.stages.1.label>
+<VV_Scent_Richflower.stages.2.label>보통</VV_Scent_Richflower.stages.2.label>
+<VV_Scent_Richflower.stages.3.label>짙음</VV_Scent_Richflower.stages.3.label>
+<VV_Scent_Richflower.stages.4.label>강렬함</VV_Scent_Richflower.stages.4.label>
 
 <VV_Scent_Starlitflower.label>향: 별맞이꽃</VV_Scent_Starlitflower.label>
 <VV_Scent_Starlitflower.description>별맞이꽃의 고요한 꽃 향. 고통을 줄이고 편안한 잠을 선사하며 진공을 견디는 힘을 줍니다.</VV_Scent_Starlitflower.description>
+<VV_Scent_Starlitflower.stages.0.label>희미함</VV_Scent_Starlitflower.stages.0.label>
+<VV_Scent_Starlitflower.stages.1.label>옅음</VV_Scent_Starlitflower.stages.1.label>
+<VV_Scent_Starlitflower.stages.2.label>보통</VV_Scent_Starlitflower.stages.2.label>
+<VV_Scent_Starlitflower.stages.3.label>짙음</VV_Scent_Starlitflower.stages.3.label>
+<VV_Scent_Starlitflower.stages.4.label>강렬함</VV_Scent_Starlitflower.stages.4.label>
 
 <VV_Scent_EmberBloom.label>향: 잔불꽃</VV_Scent_EmberBloom.label>
 <VV_Scent_EmberBloom.description>잔불꽃의 은은하게 타오르는 꽃 향. 추위를 막고 면역 체계를 강화합니다.</VV_Scent_EmberBloom.description>
+<VV_Scent_EmberBloom.stages.0.label>희미함</VV_Scent_EmberBloom.stages.0.label>
+<VV_Scent_EmberBloom.stages.1.label>옅음</VV_Scent_EmberBloom.stages.1.label>
+<VV_Scent_EmberBloom.stages.2.label>보통</VV_Scent_EmberBloom.stages.2.label>
+<VV_Scent_EmberBloom.stages.3.label>짙음</VV_Scent_EmberBloom.stages.3.label>
+<VV_Scent_EmberBloom.stages.4.label>강렬함</VV_Scent_EmberBloom.stages.4.label>
 
 <VV_Scent_FrostBloom.label>향: 서리꽃</VV_Scent_FrostBloom.label>
 <VV_Scent_FrostBloom.description>서리꽃의 차가운 꽃 향. 더위를 막고 피로가 덜 쌓이게 합니다.</VV_Scent_FrostBloom.description>
+<VV_Scent_FrostBloom.stages.0.label>희미함</VV_Scent_FrostBloom.stages.0.label>
+<VV_Scent_FrostBloom.stages.1.label>옅음</VV_Scent_FrostBloom.stages.1.label>
+<VV_Scent_FrostBloom.stages.2.label>보통</VV_Scent_FrostBloom.stages.2.label>
+<VV_Scent_FrostBloom.stages.3.label>짙음</VV_Scent_FrostBloom.stages.3.label>
+<VV_Scent_FrostBloom.stages.4.label>강렬함</VV_Scent_FrostBloom.stages.4.label>
 
 </LanguageData>

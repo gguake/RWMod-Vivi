@@ -16,5 +16,6 @@
         public const string VV_Scent_StatusLoading = nameof(VV_Scent_StatusLoading);
         public const string VV_StatsReport_FloralScent = nameof(VV_StatsReport_FloralScent);
         public const string VV_StatsReport_FloralScent_Desc = nameof(VV_StatsReport_FloralScent_Desc);
+        public const string VV_StatsReport_FloralScent_TierDesc = nameof(VV_StatsReport_FloralScent_TierDesc);
     }
 }
