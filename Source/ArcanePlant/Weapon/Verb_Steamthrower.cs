@@ -28,8 +28,20 @@ namespace VVRace
         }
     }
 
-    public class Verb_Steamthrower : Verb
+    public class Verb_Steamthrower : Verb, IManaWeaponTiming
     {
+        private ManaWeaponCastState manaCastState = new ManaWeaponCastState();
+        public ManaWeaponCastState ManaCastState => manaCastState;
+        public override float WarmupTime => base.WarmupTime * manaCastState.Multiplier;
+
+        public override bool TryStartCastOn(LocalTargetInfo castTarg, LocalTargetInfo destTarg,
+            bool surpriseAttack = false, bool canHitNonTargetPawns = true,
+            bool preventFriendlyFire = false, bool nonInterruptingSelfCast = false)
+        {
+            return manaCastState.TryStartCast(this, () => base.TryStartCastOn(castTarg, destTarg,
+                surpriseAttack, canHitNonTargetPawns, preventFriendlyFire, nonInterruptingSelfCast));
+        }
+
         public VerbProperties_Steamthrower VerbProps => (VerbProperties_Steamthrower)verbProps;
 
         public CompMana ManaComp
@@ -38,7 +50,7 @@ namespace VVRace
             {
                 if (_manaComp == null)
                 {
-                    _manaComp = caster.TryGetComp<CompMana>();
+                    _manaComp = caster?.TryGetComp<CompMana>();
                 }
 
                 if (_manaComp == null)
@@ -56,6 +68,7 @@ namespace VVRace
         {
             get
             {
+                if (ManaComp == null) { return false; }
                 if (Bursting)
                 {
                     return ManaComp.Stored >= EquipmentSource?.GetStatValue(VVStatDefOf.VV_RangedWeapon_ManaCost) / BurstShotCount;
@@ -75,12 +88,14 @@ namespace VVRace
         {
             if (!base.Available()) { return false; }
 
-            return HasSufficientMana;
+            return ManaComp != null && (ManaWeaponCastState.AppliesTo(this) || HasSufficientMana);
         }
 
         public override void ExposeData()
         {
             base.ExposeData();
+            Scribe_Deep.Look(ref manaCastState, "manaCastState");
+            if (manaCastState == null) { manaCastState = new ManaWeaponCastState(); }
             Scribe_Values.Look(ref _targetCell, "targetCell");
         }
 
@@ -95,7 +110,7 @@ namespace VVRace
             if (compMana == null) { return false; }
 
             var manaPerShoot = EquipmentSource?.GetStatValue(VVStatDefOf.VV_RangedWeapon_ManaCost) / ShotsPerBurst ?? 0;
-            if (compMana.Stored < manaPerShoot) { return false; }
+            if (compMana.Stored < manaPerShoot && !ManaWeaponCastState.AppliesTo(this)) { return false; }
 
             lastShotTick = Find.TickManager.TicksGame;
 

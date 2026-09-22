@@ -16,7 +16,7 @@
 <VV_StatsReport_ManaAbsorb_Desc>매일 흡수 가능한 환경 마나의 양입니다. 마나가 부족하거나 비축이 가능한 상태라면 환경 마나를 흡수해 소비합니다.</VV_StatsReport_ManaAbsorb_Desc>
 
 <VV_StatsReport_ManaPerShoot>사격당 마나 소모량</VV_StatsReport_ManaPerShoot>
-<VV_StatsReport_ManaPerShootDesc>무기를 사격할때마다 소모되는 마나의 양입니다.</VV_StatsReport_ManaPerShootDesc>
+<VV_StatsReport_ManaPerShootDesc>사격에 소모되는 마나의 양입니다. 마나가 부족하면 조준 시간과 사격 후 대기 시간이 크게 증가합니다.</VV_StatsReport_ManaPerShootDesc>
 
 <VV_StatsReport_ManaFluxRule_AdjacentPlant_Desc>인접한 마법 식물마다 마나 {0}\n인접한 식물마다 마나 {0} (식물의 성장도에 비례)</VV_StatsReport_ManaFluxRule_AdjacentPlant_Desc>
 <VV_StatsReport_ManaFluxRule_AdjacentWater_Desc>물 위에 배치되어 있으면 마나 {0}\n인접한 물 1개당 마나 {1}</VV_StatsReport_ManaFluxRule_AdjacentWater_Desc>

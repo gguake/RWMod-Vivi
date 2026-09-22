@@ -53,11 +53,15 @@ namespace VVRace
                 Widgets.Label(progressRect, progressText);
             }
 
-            TooltipHandler.TipRegion(
-                backPanelRect, 
-                LocalizeString_Gizmo.VV_Gizmo_ManaStorageTooltip.Translate(
+            var tooltip = LocalizeString_Gizmo.VV_Gizmo_ManaStorageTooltip.Translate(
                     _comp.parent.LabelCap.Colorize(Color.yellow).Named("THING"),
-                    (-_comp.ManaExternalChangeByDay).ToString().Colorize(Color.yellow).Named("DAILYMANA")));
+                    (-_comp.ManaExternalChangeByDay).ToString().Colorize(Color.yellow).Named("DAILYMANA")).ToString();
+            if (_comp.parent.TryGetComp<CompEquippableManaWeapon>()?.PrimaryVerb is IManaWeaponTiming &&
+                ManaWeaponCastState.IsInsufficient(_comp.parent))
+            {
+                tooltip += "\n\n" + LocalizeString_Gizmo.VV_Gizmo_ManaWeaponInsufficientTooltip.Translate();
+            }
+            TooltipHandler.TipRegion(backPanelRect, tooltip);
 
             if (Mouse.IsOver(backPanelRect))
             {

@@ -14,4 +14,5 @@
 
 <VV_Gizmo_FairyStatusHeader>Fairy vivi</VV_Gizmo_FairyStatusHeader>
 <VV_Gizmo_FairyStatusTooltip>Materialized fairy vivi: {0} / {1}\n\nWhite squares are idle fairies; red squares are fairies currently in action. You can materialize as many fairies as the number of bound fairy vivi.</VV_Gizmo_FairyStatusTooltip>
+<VV_Gizmo_ManaWeaponInsufficientTooltip>When mana is insufficient, aiming time and post-fire cooldown increase significantly.</VV_Gizmo_ManaWeaponInsufficientTooltip>
 </LanguageData>

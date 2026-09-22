@@ -30,7 +30,7 @@
   <StatDef>
     <defName>VV_RangedWeapon_ManaCost</defName>
     <label>ranged mana cost</label>
-    <description>The amount of mana consumed each time the weapon is fired. If mana is insufficient, weapon can no longer shoot.</description>
+    <description>The amount of mana consumed when firing. When mana is insufficient, aiming time and post-fire cooldown increase significantly.</description>
     <category>Weapon_Ranged</category>
     <defaultBaseValue>0</defaultBaseValue>
     <minValue>0</minValue>

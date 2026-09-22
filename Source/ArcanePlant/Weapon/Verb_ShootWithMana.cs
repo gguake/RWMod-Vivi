@@ -10,8 +10,27 @@ using Verse;
 
 namespace VVRace
 {
-    public class Verb_ShootWithMana : Verb_ShootWithMode
+    public class Verb_ShootWithMana : Verb_ShootWithMode, IManaWeaponTiming
     {
+        private ManaWeaponCastState manaCastState = new ManaWeaponCastState();
+        public ManaWeaponCastState ManaCastState => manaCastState;
+        public override float WarmupTime => base.WarmupTime * manaCastState.Multiplier;
+
+        public override bool TryStartCastOn(LocalTargetInfo castTarg, LocalTargetInfo destTarg,
+            bool surpriseAttack = false, bool canHitNonTargetPawns = true,
+            bool preventFriendlyFire = false, bool nonInterruptingSelfCast = false)
+        {
+            return manaCastState.TryStartCast(this, () => base.TryStartCastOn(castTarg, destTarg,
+                surpriseAttack, canHitNonTargetPawns, preventFriendlyFire, nonInterruptingSelfCast));
+        }
+
+        public override void ExposeData()
+        {
+            base.ExposeData();
+            Scribe_Deep.Look(ref manaCastState, "manaCastState");
+            if (manaCastState == null) { manaCastState = new ManaWeaponCastState(); }
+        }
+
         public CompMana ManaComp
         {
             get
@@ -107,7 +126,7 @@ namespace VVRace
                 return false;
             }
 
-            if (!HasSufficientMana)
+            if (!HasSufficientMana && !ManaWeaponCastState.AppliesTo(this) && showMessages)
             {
                 var manaCost = (int)(EquipmentSource?.GetStatValue(VVStatDefOf.VV_RangedWeapon_ManaCost) ?? 0);
                 Messages.Message($"ManaNotEnough".Translate(manaCost.Named("MANACOST")), new LookTargets(caster), MessageTypeDefOf.RejectInput, historical: false);
@@ -120,7 +139,7 @@ namespace VVRace
         {
             if (!base.Available()) { return false; }
 
-            return HasSufficientMana;
+            return ManaComp != null && (ManaWeaponCastState.AppliesTo(this) || HasSufficientMana);
         }
 
         protected override bool TryCastShot()
@@ -129,7 +148,7 @@ namespace VVRace
             if (compMana == null) { return false; }
 
             var manaPerShoot = EquipmentSource?.GetStatValue(VVStatDefOf.VV_RangedWeapon_ManaCost) / BurstShotCount ?? 0;
-            if (compMana.Stored < manaPerShoot) { return false; }
+            if (compMana.Stored < manaPerShoot && !ManaWeaponCastState.AppliesTo(this)) { return false; }
 
             if (base.TryCastShot())
             {

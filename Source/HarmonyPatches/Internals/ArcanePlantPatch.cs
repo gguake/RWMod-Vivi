@@ -21,6 +21,11 @@ namespace VVRace
     {
         internal static void Patch(Harmony harmony)
         {
+            harmony.Patch(
+                original: AccessTools.Method(typeof(VerbProperties), nameof(VerbProperties.AdjustedCooldown),
+                    new Type[] { typeof(Verb), typeof(Pawn) }),
+                postfix: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(ManaWeapon_AdjustedCooldown_Postfix)));
+
             // Designator 관련
             harmony.Patch(
                 original: AccessTools.Method(typeof(GenSpawn), nameof(GenSpawn.SpawningWipes)),
@@ -102,6 +107,14 @@ namespace VVRace
                 prefix: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(Designator_Uninstall_CanDesignateThing_Prefix)));
 
             Log.Message("!! [ViViRace] arcane plant patch complete");
+        }
+
+        private static void ManaWeapon_AdjustedCooldown_Postfix(Verb ownerVerb, ref float __result)
+        {
+            if (ownerVerb is IManaWeaponTiming timing && ManaWeaponCastState.AppliesTo(ownerVerb))
+            {
+                __result *= timing.ManaCastState.Multiplier;
+            }
         }
 
         private static void GenSpawn_SpawningWipes_Postfix(ref bool __result, BuildableDef newEntDef, BuildableDef oldEntDef)

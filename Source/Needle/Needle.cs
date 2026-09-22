@@ -353,10 +353,11 @@ namespace VVRace
         private void ReturnNeedle()
         {
             var pawn = launcher as Pawn;
-            if (pawn.Spawned && !pawn.DeadOrDowned)
+            if (pawn != null && pawn.Spawned && !pawn.DeadOrDowned)
             {
                 var stance = pawn?.stances?.curStance as Stance_Cooldown;
-                if (stance != null && stance.verb is Verb_LaunchProjectile)
+                if (stance != null && stance.verb is Verb_LaunchProjectile &&
+                    !(stance.verb is IManaWeaponTiming timing && timing.ManaCastState.Multiplier > 1f))
                 {
                     pawn.stances.CancelBusyStanceHard();
                 }

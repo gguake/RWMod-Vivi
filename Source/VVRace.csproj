@@ -266,6 +266,7 @@
     <Compile Include="ArcanePlant\Plant\UI\PlaceWorker_ShowPlantTurretRadius.cs" />
     <Compile Include="ArcanePlant\Plant\UI\PlaceWorker_TurretPlantTop.cs" />
     <Compile Include="ArcanePlant\Weapon\Verb_ShootWithMana.cs" />
+    <Compile Include="ArcanePlant\Weapon\ManaWeaponCastState.cs" />
     <Compile Include="Egg\AI\WorkGiver_HaulViviEgg.cs" />
     <Compile Include="Egg\UI\Alert_DangerViviEgg.cs" />
     <Compile Include="Egg\Comps\CompTemperatureRuinableEgg.cs" />

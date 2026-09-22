@@ -14,4 +14,5 @@
 
 <VV_Gizmo_FairyStatusHeader>요정 비비</VV_Gizmo_FairyStatusHeader>
 <VV_Gizmo_FairyStatusTooltip>실체화된 요정 비비: {0} / {1}\n\n흰색 사각형은 대기중인 요정, 빨간색 사각형은 행동중인 요정입니다. 귀속된 요정 비비 수만큼 실체화할 수 있습니다.</VV_Gizmo_FairyStatusTooltip>
+<VV_Gizmo_ManaWeaponInsufficientTooltip>마나가 부족하면 조준 시간과 사격 후 대기 시간이 크게 증가합니다.</VV_Gizmo_ManaWeaponInsufficientTooltip>
 </LanguageData>

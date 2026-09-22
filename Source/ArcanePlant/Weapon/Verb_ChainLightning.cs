@@ -30,8 +30,22 @@ namespace VVRace
         }
     }
 
-    public class Verb_ChainLightning : Verb
+    public class Verb_ChainLightning : Verb, IManaWeaponTiming
     {
+        private ManaWeaponCastState manaCastState = new ManaWeaponCastState();
+        public ManaWeaponCastState ManaCastState => manaCastState;
+        public override float WarmupTime => base.WarmupTime * manaCastState.Multiplier;
+
+        public override bool Available() => base.Available() && ManaComp != null;
+
+        public override bool TryStartCastOn(LocalTargetInfo castTarg, LocalTargetInfo destTarg,
+            bool surpriseAttack = false, bool canHitNonTargetPawns = true,
+            bool preventFriendlyFire = false, bool nonInterruptingSelfCast = false)
+        {
+            return manaCastState.TryStartCast(this, () => base.TryStartCastOn(castTarg, destTarg,
+                surpriseAttack, canHitNonTargetPawns, preventFriendlyFire, nonInterruptingSelfCast));
+        }
+
         public class LightningEffect : IExposable
         {
             public IntVec3 targetCell;
@@ -85,7 +99,7 @@ namespace VVRace
             {
                 if (_manaComp == null)
                 {
-                    _manaComp = caster.TryGetComp<CompMana>();
+                    _manaComp = caster?.TryGetComp<CompMana>();
                 }
 
                 if (_manaComp == null)
@@ -108,6 +122,9 @@ namespace VVRace
         {
             base.ExposeData();
 
+            Scribe_Deep.Look(ref manaCastState, "manaCastState");
+            if (manaCastState == null) { manaCastState = new ManaWeaponCastState(); }
+
             Scribe_Collections.Look(ref _subTargets, "subTargets", LookMode.Reference);
             Scribe_Collections.Look(ref _effects, "effects", LookMode.Deep);
         }
@@ -123,7 +140,7 @@ namespace VVRace
             if (compMana == null) { return false; }
 
             var manaPerShoot = EquipmentSource?.GetStatValue(VVStatDefOf.VV_RangedWeapon_ManaCost) / ShotsPerBurst ?? 0;
-            if (compMana.Stored < manaPerShoot) { return false; }
+            if (compMana.Stored < manaPerShoot && !ManaWeaponCastState.AppliesTo(this)) { return false; }
 
             var los = TryFindShootLineFromTo(caster.Position, currentTarget, out var resultingLine);
             if (verbProps.stopBurstWithoutLos && !los)
