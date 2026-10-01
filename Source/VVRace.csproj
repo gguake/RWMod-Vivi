@@ -215,6 +215,7 @@
     <Compile Include="Gather\Things\Building_AutoExtractor.cs" />
     <Compile Include="GlideAbility\CompAbilityEffect_FoodCost.cs" />
     <Compile Include="GlideAbility\CompAbility_RequiresBodyPart.cs" />
+    <Compile Include="HarmonyPatches\Internals\BackCompatibilityPatch.cs" />
     <Compile Include="HarmonyPatches\Internals\GatherPatch.cs" />
     <Compile Include="HarmonyPatches\Internals\VanilaBugFixPatch.cs" />
     <Compile Include="Hornet\CompHornet.cs" />
