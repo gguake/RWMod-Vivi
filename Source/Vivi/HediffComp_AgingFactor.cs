@@ -16,7 +16,7 @@ namespace VVRace
 
     public class HediffComp_AgingFactor : HediffComp
     {
-        private static readonly HashSet<int> _cache = new HashSet<int>();
+        private static readonly Dictionary<int, bool> _cache = new Dictionary<int, bool>();
         private static Game _cachedGame;
 
         public HediffCompProperties_AgingFactor Props => (HediffCompProperties_AgingFactor)props;
@@ -26,12 +26,39 @@ namespace VVRace
 
         public override void CompPostPostAdd(DamageInfo? dinfo)
         {
-            _cache.Add(Pawn.thingIDNumber);
+            InvalidateCache();
         }
 
         public override void CompPostPostRemoved()
         {
-            _cache.Remove(Pawn.thingIDNumber);
+            InvalidateCache();
+        }
+
+        public override void CompExposeData()
+        {
+            base.CompExposeData();
+            if (Scribe.mode == LoadSaveMode.PostLoadInit)
+            {
+                InvalidateCache();
+            }
+        }
+
+        private void InvalidateCache()
+        {
+            EnsureCachedGame();
+            if (Pawn != null)
+            {
+                _cache.Remove(Pawn.thingIDNumber);
+            }
+        }
+
+        private static void EnsureCachedGame()
+        {
+            if (_cachedGame != Current.Game)
+            {
+                _cache.Clear();
+                _cachedGame = Current.Game;
+            }
         }
 
         public static float ApplyAgingFactor(float factor, Pawn_GeneTracker geneTracker)
@@ -39,40 +66,37 @@ namespace VVRace
             var pawn = geneTracker?.pawn;
             if (pawn == null) { return factor; }
 
-            if (_cachedGame != Current.Game)
+            EnsureCachedGame();
+            if (_cache.TryGetValue(pawn.thingIDNumber, out var hasAgingFactor) && !hasAgingFactor)
             {
-                _cache.Clear();
-                _cachedGame = Current.Game;
+                return factor;
             }
 
-            if (_cache.Contains(pawn.thingIDNumber))
+            // Cache misses must inspect loaded hediffs: loading does not call CompPostPostAdd.
+            hasAgingFactor = false;
+            var hediffFactor = 1f;
+            var hediffs = pawn.health?.hediffSet?.hediffs;
+            if (hediffs != null)
             {
-                var hediffFactor = 1f;
-                var hediffs = pawn.health?.hediffSet?.hediffs;
-                if (hediffs != null)
+                for (int i = 0; i < hediffs.Count; ++i)
                 {
-                    for (int i = 0; i < hediffs.Count; ++i)
+                    if (hediffs[i] is HediffWithComps hediffWithComps && hediffWithComps.comps != null)
                     {
-                        if (hediffs[i] is HediffWithComps hediffWithComps && hediffWithComps.comps != null)
+                        var comps = hediffWithComps.comps;
+                        for (int j = 0; j < comps.Count; ++j)
                         {
-                            var comps = hediffWithComps.comps;
-                            for (int j = 0; j < comps.Count; ++j)
+                            if (comps[j] is HediffComp_AgingFactor agingFactorComp)
                             {
-                                if (comps[j] is HediffComp_AgingFactor agingFactorComp)
-                                {
-                                    hediffFactor *= agingFactorComp.Props.factor;
-                                }
+                                hasAgingFactor = true;
+                                hediffFactor *= agingFactorComp.Props.factor;
                             }
                         }
                     }
                 }
+            }
 
-                return factor * hediffFactor;
-            }
-            else
-            {
-                return factor;
-            }
+            _cache[pawn.thingIDNumber] = hasAgingFactor;
+            return factor * hediffFactor;
         }
     }
 }
