@@ -150,6 +150,9 @@ namespace VVRace
 
         public override void PostSplitOff(Thing piece)
         {
+            // 스택 전체를 나누면 SplitOff가 자기 자신을 반환한다 (운반 시마다 발생)
+            if (piece == parent) { return; }
+
             var pieceComp = piece.TryGetComp<CompViviHatcher>();
             if (pieceComp != null)
             {
@@ -160,7 +163,7 @@ namespace VVRace
                 pieceComp.parentGeneInheritanceGenerations = parentGeneInheritanceGenerations != null ?
                     new Dictionary<GeneDef, int>(parentGeneInheritanceGenerations) : null;
                 pieceComp.architeGenes = architeGenes != null ? new List<GeneDef>(architeGenes) : null;
-                pieceComp.randomSeed = randomSeed;
+                pieceComp.randomSeed = Rand.Int;
             }
         }
 
