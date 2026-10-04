@@ -18,7 +18,7 @@ namespace VVRace
 
         public float breathStartOffset;
         public float breathAngleHalf;
-        public int breathFriendlyFireSafeDistance;
+        public float breathFriendlyFireSafeDistance;
 
         public float propagationSpeed;
 

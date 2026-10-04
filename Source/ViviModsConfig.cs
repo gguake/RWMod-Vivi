@@ -26,7 +26,7 @@ namespace VVRace
             Scribe_Values.Look(ref useVanillaHeadOnly, "useVanillaHeadOnly", defaultValue: false);
             Scribe_Values.Look(ref randomGenesForStartingVivi, "randomGenesForStartingVivi", defaultValue: false);
             Scribe_Values.Look(ref enableViviMealContinuation, "enableViviMealContinuation", defaultValue: true);
-            Scribe_Values.Look(ref viviMealContinuationNutritionGap, "viviMealContinuationNutritionGap", defaultValue: 1.2f);
+            Scribe_Values.Look(ref viviMealContinuationNutritionGap, "viviMealContinuationNutritionGap", defaultValue: 0.85f);
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
