@@ -356,8 +356,7 @@ namespace VVRace
             if (pawn != null && pawn.Spawned && !pawn.DeadOrDowned)
             {
                 var stance = pawn?.stances?.curStance as Stance_Cooldown;
-                if (stance != null && stance.verb is Verb_LaunchProjectile &&
-                    !(stance.verb is IManaWeaponTiming timing && timing.ManaCastState.Multiplier > 1f))
+                if (stance != null && stance.verb is Verb_LaunchProjectile)
                 {
                     pawn.stances.CancelBusyStanceHard();
                 }
