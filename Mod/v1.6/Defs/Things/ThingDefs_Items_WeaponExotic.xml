@@ -272,6 +272,7 @@
       <stoppingPower>0.5</stoppingPower>
       <armorPenetrationBase>0.12</armorPenetrationBase>
       <speed>90</speed>
+      <soundImpact>VV_NeedleImpact</soundImpact>
 
       <bonusSpeedByPsychicSensitivity>
         <points>

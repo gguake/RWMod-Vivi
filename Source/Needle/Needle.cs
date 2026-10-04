@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 using Verse;
 using Verse.AI;
+using Verse.Sound;
 
 namespace VVRace
 {
@@ -240,6 +241,7 @@ namespace VVRace
                 hitThing.TakeDamage(dinfo).AssociateWithLog(battleLogEntry_RangedImpact);
 
                 SpawnPierceEffect(hitThing);
+                def.projectile.soundImpact?.PlayOneShot(new TargetInfo(hitThing.Position, Map));
 
                 if (_attackedCounter.TryGetValue(hitThing.thingIDNumber, out var count))
                 {

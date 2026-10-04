@@ -271,4 +271,23 @@
       </li>
     </subSounds>
   </SoundDef>
+
+  <SoundDef>
+    <defName>VV_NeedleImpact</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>2</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Folder">
+            <clipFolderPath>SFX/VV_NeedleImpact</clipFolderPath>
+          </li>
+        </grains>
+        <distRange>5~40</distRange>
+        <volumeRange>13~17</volumeRange>
+        <pitchRange>0.95~1.05</pitchRange>
+        <repeatMode>NeverTwice</repeatMode>
+      </li>
+    </subSounds>
+  </SoundDef>
 </Defs>
