@@ -3,7 +3,7 @@
   <PreceptDef>
     <defName>VV_Manawave</defName>
     <label>emit manawave ritual</label>
-    <description>Instantly unleashes a massive wave of mana over a wide area, briefly stunning all targets and leaving behind a vast amount of environment mana. The mana wave may also draw the attention of hostile entities nearby.</description>
+    <description>Instantly unleashes a massive wave of mana over a wide area, briefly stunning all hostile creatures and leaving behind a vast amount of environment mana. The mana wave may also draw the attention of hostile entities nearby.</description>
     <issue>Ritual</issue>
     <preceptClass>Precept_Ritual</preceptClass>
     <visible>false</visible>
