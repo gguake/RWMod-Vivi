@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 using Verse;
 
@@ -13,7 +13,7 @@ namespace VVRace
         public bool useVanillaHeadOnly = false;
         public bool randomGenesForStartingVivi = false;
         public bool enableViviMealContinuation = true;
-        public float viviMealContinuationNutritionGap = 0.85f;
+        public float viviMealContinuationNutritionGap = 0.7f;
 
         public override void ExposeData()
         {
@@ -26,7 +26,7 @@ namespace VVRace
             Scribe_Values.Look(ref useVanillaHeadOnly, "useVanillaHeadOnly", defaultValue: false);
             Scribe_Values.Look(ref randomGenesForStartingVivi, "randomGenesForStartingVivi", defaultValue: false);
             Scribe_Values.Look(ref enableViviMealContinuation, "enableViviMealContinuation", defaultValue: true);
-            Scribe_Values.Look(ref viviMealContinuationNutritionGap, "viviMealContinuationNutritionGap", defaultValue: 0.85f);
+            Scribe_Values.Look(ref viviMealContinuationNutritionGap, "viviMealContinuationNutritionGap", defaultValue: 0.7f);
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
