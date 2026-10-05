@@ -90,7 +90,14 @@ namespace VVRace
                 {
                     if (!ArcanePlantUtility.CanPlaceArcanePlantToCell(map, cell, plant.def, plant))
                     {
-                        plant.MinifyAndDropDirect();
+                        if (plant.def.Minifiable)
+                        {
+                            plant.MinifyAndDropDirect();
+                        }
+                        else
+                        {
+                            plant.Destroy();
+                        }
                     }
                 }
             };

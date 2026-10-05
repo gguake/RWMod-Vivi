@@ -45,6 +45,7 @@ namespace VVRace
             {
                 if (ViviEgg != null) { return false; }
                 if (AnyOccupants) { return false; }
+                if (OwnersForReading.Count > 0) { return false; }
 
                 var compForbiddable = GetComp<CompForbiddable>();
                 if (compForbiddable != null && compForbiddable.Forbidden)
