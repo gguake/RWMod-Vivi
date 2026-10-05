@@ -54,7 +54,7 @@ namespace VVRace
                 if (targetYieldStat != null && ingredients.NullOrEmpty())
                 {
                     var allTargets = DefDatabase<ThingDef>.AllDefsListForReading
-                        .Where(thingDef => thingDef.StatBaseDefined(targetYieldStat) && thingDef.GetStatValueAbstract(targetYieldStat) > 0f)
+                        .Where(thingDef => thingDef.StatBaseDefined(targetYieldStat) && thingDef.GetStatValueAbstract(targetYieldStat) > 0f && gatherWorker.IsTargetDef(thingDef))
                         .ToList();
 
                     if (allTargets.Any())

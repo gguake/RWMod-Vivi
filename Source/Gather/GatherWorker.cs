@@ -20,6 +20,8 @@ namespace VVRace
 
         public abstract string JobFailReasonIfNoHarvestable { get; }
 
+        public virtual bool IsTargetDef(ThingDef def) => true;
+
         public virtual bool PawnCanDoBill(Pawn pawn, Bill bill)
         {
             return pawn.GetStatValue(bill.recipe.workSpeedStat) > 0f && pawn.GetStatValue(bill.recipe.efficiencyStat) > 0f;

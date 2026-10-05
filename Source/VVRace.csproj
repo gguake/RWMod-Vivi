@@ -278,6 +278,7 @@
     <Compile Include="Gather\Things\Building_GatherWorkTable.cs" />
     <Compile Include="Gather\GatherWorker_Honey.cs" />
     <Compile Include="Gather\GatherWorker_Plant.cs" />
+    <Compile Include="Gather\GatherWorker_Pollen.cs" />
     <Compile Include="Gather\AI\JobDriver_Gather.cs" />
     <Compile Include="ArcanePlant\Plant\Things\ArcanePlant.cs" />
     <Compile Include="HarmonyPatches\Internals\ArcanePlantPatch.cs" />

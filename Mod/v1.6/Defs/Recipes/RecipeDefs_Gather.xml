@@ -53,7 +53,60 @@
     </damageChanceBySkillLevel>
 
   </RecipeDef>
-  
+
+  <!-- 꽃가루 채집 -->
+  <RecipeDef Class="VVRace.RecipeDef_Gathering">
+    <defName>VV_GatherPollen</defName>
+    <label>gather pollen</label>
+    <description>Gather pollen from mature flowers or fruit trees. The speed and yield of honey gathering must be greater than 0 to perform the job. Shares the regrowth time with honey gathering, and the amount gathered scales with honey gather yield. Arcane plants do not produce pollen.
+\nIf the worker's plant skill is low, they may damage gathered plant.</description>
+    <jobString>Gathering pollen.</jobString>
+
+    <workAmount>1100</workAmount>
+    <workSkill>Plants</workSkill>
+    <workSkillLearnFactor>0.01</workSkillLearnFactor>
+    <workSpeedStat>VV_HoneyGatherSpeed</workSpeedStat>
+    <efficiencyStat>VV_HoneyGatherYield</efficiencyStat>
+
+    <effectWorking>VV_Gather_Pollen</effectWorking>
+    <soundWorking>Interact_CleanFilth</soundWorking>
+    <uiIconThing>VV_Pollen</uiIconThing>
+
+    <recipeUsers>
+      <li>VV_GatheringSpot</li>
+      <li>VV_GatheringBarrel</li>
+    </recipeUsers>
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <targetCountAdjustment>8</targetCountAdjustment>
+
+    <products>
+      <VV_Pollen>8</VV_Pollen>
+    </products>
+    <researchPrerequisite>VV_BasicGathering</researchPrerequisite>
+
+    <gatherWorkerType>VVRace.GatherWorker_Pollen</gatherWorkerType>
+    <gatheringJob>VV_GatherPollen</gatheringJob>
+    <gatheringWorkWeight>7</gatheringWorkWeight>
+    <processingWorkWeight>3</processingWorkWeight>
+    <targetCooldownStat>VV_PlantGatherCooldown</targetCooldownStat>
+    <targetYieldStat>VV_PlantHoneyGatherYield</targetYieldStat>
+    <maxPathDanger>Deadly</maxPathDanger>
+
+    <baseArcaneSeedChance>0.03</baseArcaneSeedChance>
+
+    <damageChanceBySkillLevel>
+      <points>
+        <li>(0,0.5)</li>
+        <li>(4,0.3)</li>
+        <li>(8,0.15)</li>
+        <li>(12,0.1)</li>
+        <li>(16,0.05)</li>
+        <li>(20,0)</li>
+      </points>
+    </damageChanceBySkillLevel>
+
+  </RecipeDef>
+
   <!-- 프로폴리스 채집 -->
   <RecipeDef Class="VVRace.RecipeDef_Gathering">
     <defName>VV_GatherPropolis</defName>

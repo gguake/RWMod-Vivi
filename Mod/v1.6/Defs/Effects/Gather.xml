@@ -60,4 +60,21 @@
     </children>
   </EffecterDef>
 
+  <!-- Gather_Pollen -->
+  <EffecterDef>
+    <defName>VV_Gather_Pollen</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <fleckDef>VV_Fleck_PollenPuff</fleckDef>
+        <spawnLocType>BetweenPositions</spawnLocType>
+        <ticksBetweenMotes>30</ticksBetweenMotes>
+        <speed>0.1~0.3</speed>
+        <scale>0.7~1.2</scale>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+      </li>
+    </children>
+  </EffecterDef>
+
 </Defs>
