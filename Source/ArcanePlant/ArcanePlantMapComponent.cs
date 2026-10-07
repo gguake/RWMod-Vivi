@@ -70,6 +70,7 @@ namespace VVRace
             _scentRoomsDirty = true;
 
             map.events.RegionsRoomsChanged += () => _scentRoomsDirty = true;
+            map.events.RoofChanged += (_) => _scentRoomsDirty = true;
 
             map.events.TerrainChanged += (cell) =>
             {
