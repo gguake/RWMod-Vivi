@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  
+  <MapGeneratorDef ParentName="MapCommonBase">
+    <defName>VV_Base_ViviFaction</defName>
+    <genSteps>
+      <li>RocksFromGrid</li>
+      <li>VV_ViviSettlement</li>
+      <li>VV_ViviSettlementTurretGarden</li>
+    </genSteps>
+  </MapGeneratorDef>
+  
+  <GenStepDef>
+    <defName>VV_ViviSettlement</defName>
+    <order>400</order>
+    <genStep Class="VVRace.GenStep_ViviSettlement">
+      <count>1</count>
+      <nearMapCenter>true</nearMapCenter>
+    </genStep>
+  </GenStepDef>
+
+  <GenStepDef>
+    <defName>VV_ViviSettlementTurretGarden</defName>
+    <order>401</order>
+    <genStep Class="VVRace.GenStep_ViviSettlementTurretGarden">
+      <count>10</count>
+      <nearMapCenter>true</nearMapCenter>
+      <spotMustBeStandable>true</spotMustBeStandable>
+      <minSpacing>20</minSpacing>
+    </genStep>
+  </GenStepDef>
+
+</Defs>

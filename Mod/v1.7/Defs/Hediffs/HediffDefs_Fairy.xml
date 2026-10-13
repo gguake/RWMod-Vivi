@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+
+  <HediffDef>
+    <defName>VV_FairyMastery</defName>
+    <label>fairy mastery</label>
+    <description>Through deep attunement with an everflower, this royal vivi can briefly materialize bound fairy vivi to wield various abilities.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(0.7, 1, 0.9)</defaultLabelColor>
+
+    <isBad>false</isBad>
+    <priceImpact>false</priceImpact>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <everCurableByItem>false</everCurableByItem>
+    <maxSeverity>1</maxSeverity>
+    <initialSeverity>1</initialSeverity>
+
+    <stages>
+      <li>
+        <becomeVisible>false</becomeVisible>
+      </li>
+    </stages>
+
+    <abilities>
+      <li>VV_FairyMaterialize</li>
+      <li>VV_FairyGuard</li>
+      <li>VV_FairyConcentration</li>
+      <li>VV_FairyExpansion</li>
+    </abilities>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>VV_FairyGuarded</defName>
+    <label>fairy escort</label>
+    <description>A Fairy vivi is following and protecting this target. While guarding, the fairy vivi automatically attacks nearby enemies.</description>
+    <hediffClass>VVRace.Hediff_FairyGuarded</hediffClass>
+    <defaultLabelColor>(0.7, 1, 0.9)</defaultLabelColor>
+    <isBad>false</isBad>
+    <priceImpact>false</priceImpact>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <everCurableByItem>false</everCurableByItem>
+    <maxSeverity>1</maxSeverity>
+    <initialSeverity>1</initialSeverity>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>VV_FairyConcentrated</defName>
+    <label>fairy concentration</label>
+    <description>They are marked as the focus target for fairy vivis. If they are within a royal vivi's line of sight, attacks will continue until the target is incapacitated.</description>
+    <hediffClass>VVRace.Hediff_FairyConcentrated</hediffClass>
+    <defaultLabelColor>(1, 0.4, 0.4)</defaultLabelColor>
+    <isBad>true</isBad>
+    <priceImpact>false</priceImpact>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <everCurableByItem>false</everCurableByItem>
+    <maxSeverity>1</maxSeverity>
+    <initialSeverity>1</initialSeverity>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>2000~2000</disappearsAfterTicks>
+        <showRemainingTime>true</showRemainingTime>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>VV_EverflowerAssimilation</defName>
+    <label>everflower assimilation</label>
+    <description>Lingering resonance from materialized fairy vivi. Heightens psychic sensitivity, but the mind grows more unstable. Fades over time.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(0.6, 1, 0.8)</defaultLabelColor>
+
+    <isBad>false</isBad>
+    <priceImpact>false</priceImpact>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <everCurableByItem>false</everCurableByItem>
+
+    <initialSeverity>1</initialSeverity>
+    <maxSeverity>10</maxSeverity>
+
+    <stages>
+      <li>
+        <minSeverity>1</minSeverity>
+        <label>I</label>
+        <statOffsets>
+          <PsychicSensitivity>0.05</PsychicSensitivity>
+          <MentalBreakThreshold>0.03</MentalBreakThreshold>
+        </statOffsets>
+      </li>
+      <li>
+        <minSeverity>2</minSeverity>
+        <label>II</label>
+        <statOffsets>
+          <PsychicSensitivity>0.1</PsychicSensitivity>
+          <MentalBreakThreshold>0.06</MentalBreakThreshold>
+        </statOffsets>
+      </li>
+      <li>
+        <minSeverity>4</minSeverity>
+        <label>III</label>
+        <statOffsets>
+          <PsychicSensitivity>0.15</PsychicSensitivity>
+          <MentalBreakThreshold>0.1</MentalBreakThreshold>
+        </statOffsets>
+      </li>
+      <li>
+        <minSeverity>6</minSeverity>
+        <label>IV</label>
+        <statOffsets>
+          <PsychicSensitivity>0.2</PsychicSensitivity>
+          <MentalBreakThreshold>0.15</MentalBreakThreshold>
+        </statOffsets>
+      </li>
+      <li>
+        <minSeverity>8</minSeverity>
+        <label>V</label>
+        <statOffsets>
+          <PsychicSensitivity>0.25</PsychicSensitivity>
+          <MentalBreakThreshold>0.2</MentalBreakThreshold>
+        </statOffsets>
+      </li>
+    </stages>
+
+    <comps>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-0.33</severityPerDay>
+        <showDaysToRecover>true</showDaysToRecover>
+        <showHoursToRecover>true</showHoursToRecover>
+      </li>
+    </comps>
+  </HediffDef>
+
+</Defs>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/TerrainDef/affordances[li="Light"]</xpath>
+    <value>
+      <li>VV_WaterOrLight</li>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/TerrainDef/affordances[li="ShallowWater"]</xpath>
+    <value>
+      <li>VV_WaterOrLight</li>
+    </value>
+  </Operation>
+</Patch>

@@ -1,0 +1,28 @@
+<Defs>
+  <PawnKindDef Abstract="True" Name="ViviBase">
+    <race>VV_Vivi</race>
+    <fixedGender>Female</fixedGender>
+    <chemicalAddictionChance>0</chemicalAddictionChance>
+    <backstoryCryptosleepCommonality>0</backstoryCryptosleepCommonality>
+    <apparelTags>
+      <li>VV_ViviApparel</li>
+    </apparelTags>
+    <maxGenerationAge>30</maxGenerationAge>
+    <nameMaker>VV_NamerPersonVivi</nameMaker>
+
+    <humanPregnancyChance>0</humanPregnancyChance>
+    <techHediffsChance>0</techHediffsChance>
+    <techHediffsMoney>0</techHediffsMoney>
+    <techHediffsTags>
+    </techHediffsTags>
+    
+    <xenotypeSet Inherit="False">
+      <xenotypeChances>
+        <VV_Vivi>999</VV_Vivi>
+      </xenotypeChances>
+    </xenotypeSet>
+
+    <skinColorOverride>(1,1,1)</skinColorOverride>
+
+  </PawnKindDef>
+</Defs>

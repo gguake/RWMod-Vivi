@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+<VV_Attunement.roles.0.label>조율사</VV_Attunement.roles.0.label>
+
+<VV_ChangeWeatherRitual.roles.0.label>공명자</VV_ChangeWeatherRitual.roles.0.label>
+
+<VV_Fairyfication.roles.0.label>공명자</VV_Fairyfication.roles.0.label>
+<VV_Fairyfication.roles.1.label>요정화될 비비</VV_Fairyfication.roles.1.label>
+<VV_Fairyfication.stages.0.failTriggers.0.desc>목표에 도달할 수 없음</VV_Fairyfication.stages.0.failTriggers.0.desc>
+<VV_Fairyfication.stages.0.failTriggers.1.desc>공명자 잠듦</VV_Fairyfication.stages.0.failTriggers.1.desc>
+
+<VV_Defairyfication.roles.0.label>공명자</VV_Defairyfication.roles.0.label>
+
+<VV_Manawave.roles.0.label>공명자</VV_Manawave.roles.0.label>
+</LanguageData>

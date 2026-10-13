@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <DamageDef ParentName="Stun">
+    <defName>VV_ManawaveStun</defName>
+    <workerClass>VVRace.DamageWorker_ManawaveStun</workerClass>
+  </DamageDef>
+
+  <DamageDef>
+    <defName>VV_ToxicStab</defName>
+    <label>stab</label>
+    <workerClass>DamageWorker_Stab</workerClass>
+    <externalViolence>true</externalViolence>
+    <deathMessage>{0} has been stabbed to death.</deathMessage>
+    <hediff>Stab</hediff>
+    <hediffSolid>Crack</hediffSolid>
+    <impactSoundType>Slice</impactSoundType>
+    <armorCategory>Sharp</armorCategory>
+    <stabChanceOfForcedInternal>0.6</stabChanceOfForcedInternal>
+    <overkillPctToDestroyPart>0.4~1.0</overkillPctToDestroyPart>
+    <additionalHediffs>
+      <li>
+        <hediff>ToxicBuildup</hediff>
+        <severityPerDamageDealt>0.012</severityPerDamageDealt>
+        <victimSeverityScaling>ToxicResistance</victimSeverityScaling>
+        <inverseStatScaling>true</inverseStatScaling>
+        <victimSeverityScalingByInvBodySize>true</victimSeverityScalingByInvBodySize>
+      </li>
+    </additionalHediffs>
+  </DamageDef>
+
+  <DamageDef ParentName="Arrow">
+    <defName>VV_ToxicArrow</defName>
+    <additionalHediffs>
+      <li>
+        <hediff>ToxicBuildup</hediff>
+        <severityPerDamageDealt>0.0065</severityPerDamageDealt>
+        <victimSeverityScaling>ToxicResistance</victimSeverityScaling>
+        <inverseStatScaling>true</inverseStatScaling>
+        <victimSeverityScalingByInvBodySize>true</victimSeverityScalingByInvBodySize>
+      </li>
+    </additionalHediffs>
+  </DamageDef>
+
+  <DamageDef>
+    <defName>VV_RangedToxicStab</defName>
+    <label>stab</label>
+    <workerClass>DamageWorker_AddInjury</workerClass>
+    <externalViolence>true</externalViolence>
+    <deathMessage>{0} has been stabbed to death.</deathMessage>
+    <hediff>Stab</hediff>
+    <hediffSolid>Crack</hediffSolid>
+    <impactSoundType>Slice</impactSoundType>
+    <armorCategory>Sharp</armorCategory>
+    <overkillPctToDestroyPart>0~0.7</overkillPctToDestroyPart>
+    <isRanged>true</isRanged>
+    <makesAnimalsFlee>true</makesAnimalsFlee>
+    
+    <additionalHediffs>
+      <li>
+        <hediff>ToxicBuildup</hediff>
+        <severityPerDamageDealt>0.012</severityPerDamageDealt>
+        <victimSeverityScaling>ToxicResistance</victimSeverityScaling>
+        <inverseStatScaling>true</inverseStatScaling>
+        <victimSeverityScalingByInvBodySize>true</victimSeverityScalingByInvBodySize>
+      </li>
+    </additionalHediffs>
+  </DamageDef>
+  
+  <DamageDef>
+    <defName>VV_ExtinguishWithWater</defName>
+    <label>extinguish</label>
+    <workerClass>DamageWorker_Extinguish</workerClass>
+    <canInterruptJobs>false</canInterruptJobs>
+    <makesBlood>false</makesBlood>
+    <defaultDamage>999999</defaultDamage>
+    <hediff>CoveredInFirefoam</hediff>
+    <explosionCellFleck>BlastExtinguisher</explosionCellFleck>
+    <explosionColorEdge>(0.94, 1, 1, 0.1)</explosionColorEdge>
+    <soundExplosion>EmergeFromWater</soundExplosion>
+    <harmsHealth>false</harmsHealth>
+    <combatLogRules>Damage_Extinguish</combatLogRules>
+    <consideredHelpful>true</consideredHelpful>
+  </DamageDef>
+  
+  <DamageDef>
+    <defName>VV_Frostbite</defName>
+    <workerClass>VVRace.DamageWorker_FrostbiteCustom</workerClass>
+    <label>frostbite</label>
+    <hasForcefulImpact>false</hasForcefulImpact>
+    <makesBlood>false</makesBlood>
+    <canInterruptJobs>false</canInterruptJobs>
+    <externalViolence>true</externalViolence>
+    <deathMessage>{0} has succumbed to frostbite.</deathMessage>
+    <hediff>Frostbite</hediff>
+    <armorCategory>Heat</armorCategory>
+    <minDamageToFragment>15</minDamageToFragment>
+    <defaultDamage>10</defaultDamage>
+    <defaultArmorPenetration>0</defaultArmorPenetration>
+    <explosionCellFleck>VV_Fleck_BlastFrost</explosionCellFleck>
+    <explosionColorCenter>(1, 1, 1)</explosionColorCenter>
+    <explosionColorEdge>(1, 1, 1)</explosionColorEdge>
+    <soundExplosion>VV_Explosion_Frostbite</soundExplosion>
+    <combatLogRules>VV_Damage_Frostbite</combatLogRules>
+    <canUseDeflectMetalEffect>false</canUseDeflectMetalEffect>
+    <scaleDamageToBuildingsBasedOnFlammability>true</scaleDamageToBuildingsBasedOnFlammability>
+    <explosionSnowMeltAmount>0</explosionSnowMeltAmount>
+    
+    <additionalHediffs>
+      <li>
+        <hediff>VV_Frozen</hediff>
+        <severityPerDamageDealt>0.015</severityPerDamageDealt>
+      </li>
+    </additionalHediffs>
+  </DamageDef>
+  
+  <DamageDef ParentName="Bullet">
+    <defName>VV_Bullet_Lava</defName>
+    <label>bullet</label>
+    <igniteChanceByTargetFlammability>
+      <points>
+        <li>(0, 0)</li>
+        <li>(1, 0.1)</li>
+        <li>(2, 1)</li>
+      </points>
+    </igniteChanceByTargetFlammability>
+    <impactSoundType>Bullet</impactSoundType>
+    <damageEffecter>VV_Impact_BulletLava</damageEffecter>
+  </DamageDef>
+</Defs>

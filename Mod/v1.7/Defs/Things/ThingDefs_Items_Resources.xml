@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 크림 -->
+  <ThingDef ParentName="ResourceBase">
+    <defName>VV_Vivicream</defName>
+    <label>vivi cream</label>
+    <description>a mixture created by the Vivi's body. Only Vivis can produce it, and it uses a bit of calorie during the process, so it can't be made when the Vivi is hungry.
+\nIt can be used as an adhesive and applied to various crafts of the Vivis, and is also used when extracting rare components to make Royal Jelly. If left outdoors, it quickly deteriorates, so careful handling is necessary.</description>
+    <descriptionHyperlinks>
+      <TerrainDef>VV_ViviCreamFloor</TerrainDef>
+      <ThingDef>VV_ViviCreamWall</ThingDef>
+      <ThingDef>VV_Viviwax</ThingDef>
+      <ThingDef>VV_RoyalJelly</ThingDef>
+    </descriptionHyperlinks>
+
+    <graphicData>
+      <texPath>Things/Item/VV_Cream</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+    <thingCategories>
+      <li>VV_ViviResource</li>
+    </thingCategories>
+
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Grain_Drop</soundInteract>
+    <soundDrop>Grain_Drop</soundDrop>
+    
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <Mass>0.1</Mass>
+      <MarketValue>0.15</MarketValue>
+      <MaxHitPoints>60</MaxHitPoints>
+      <Flammability>1.0</Flammability>
+      <DeteriorationRate>8</DeteriorationRate>
+    </statBases>
+    <stackLimit>150</stackLimit>
+
+    <comps>
+    </comps>
+    
+    <tradeability>Buyable</tradeability>
+    <tradeTags>
+      <li>VV_ViviResource</li>
+    </tradeTags>
+  </ThingDef>
+  
+  <!-- 밀랍 -->
+  <ThingDef ParentName="ResourceBase">
+    <defName>VV_Viviwax</defName>
+    <label>viviwax</label>
+    <description>a viviwax made by hardening Vivi cream. It is light and reasonably sturdy, but weak to fire. It can be used as a substitute in most cases where stone is needed.</description>
+    <graphicData>
+      <texPath>Things/Item/VV_Beeswax</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <color>(255,255,255)</color>
+    </graphicData>
+    <soundInteract>Wood_Drop</soundInteract>
+    <soundDrop>Wood_Drop</soundDrop>
+    <statBases>
+      <MarketValue>0.22</MarketValue>
+      <MaxHitPoints>100</MaxHitPoints>
+      <Mass>0.05</Mass>
+      <Flammability>0.7</Flammability>
+      <StuffPower_Armor_Sharp>0.36</StuffPower_Armor_Sharp>
+      <StuffPower_Armor_Blunt>0.5</StuffPower_Armor_Blunt>
+      <StuffPower_Armor_Heat>0.24</StuffPower_Armor_Heat>
+      <StuffPower_Insulation_Cold>3</StuffPower_Insulation_Cold>
+      <StuffPower_Insulation_Heat>0</StuffPower_Insulation_Heat>
+      <SharpDamageMultiplier>0.3</SharpDamageMultiplier>
+      <BluntDamageMultiplier>0.9</BluntDamageMultiplier>
+      <DeteriorationRate>2</DeteriorationRate>
+    </statBases>
+    <stackLimit>150</stackLimit>
+    
+    <healthAffectsPrice>false</healthAffectsPrice>
+    <thingCategories>
+      <li>VV_ViviResource</li>
+    </thingCategories>
+    <burnableByRecipe>true</burnableByRecipe>
+    <smeltable>true</smeltable>
+    <stuffProps>
+      <commonality>0</commonality>
+      <categories>
+        <li>VV_Wax</li>
+        <li>Stony</li>
+        <li>Metallic</li>
+      </categories>
+      <appearance>Planks</appearance>
+      <color>(255,240,180)</color>
+      <constructEffect>ConstructWood</constructEffect>
+      <soundImpactBullet>BulletImpact_Wood</soundImpactBullet>
+      <soundMeleeHitSharp>MeleeHit_Wood</soundMeleeHitSharp>
+      <soundMeleeHitBlunt>MeleeHit_Wood</soundMeleeHitBlunt>
+      <statFactors>
+        <MaxHitPoints>0.7</MaxHitPoints>
+        <Flammability>1</Flammability>
+        <WorkToMake>0.85</WorkToMake>
+        <WorkToBuild>0.85</WorkToBuild>
+        <DoorOpenSpeed>1.1</DoorOpenSpeed>
+      </statFactors>
+      <canSuggestUseDefaultStuff>true</canSuggestUseDefaultStuff>
+      <allowedInStuffGeneration>false</allowedInStuffGeneration>
+    </stuffProps>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <allowedArchonexusCount>80</allowedArchonexusCount>
+    
+    <tradeTags>
+      <li>VV_ViviProduct</li>
+    </tradeTags>
+  </ThingDef>
+
+  <!-- 프로폴리스 -->
+  <ThingDef ParentName="ResourceBase">
+    <defName>VV_Propolis</defName>
+    <label>vivi propolis</label>
+    <description>a rare resinous mixture collected by Vivis from trees. It has a strong antibacterial effect, so it is used as an ingredient where cleanliness is required.
+\nIt can also be used as a natural antibiotic to slow the progress of infections or some diseases.</description>
+    <descriptionHyperlinks>
+      <RecipeDef>VV_InjectPropolis</RecipeDef>
+    </descriptionHyperlinks>
+    
+    <graphicData>
+      <texPath>Things/Item/VV_RawPropolis</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <thingCategories>
+      <li>VV_ViviResource</li>
+    </thingCategories>
+
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Grain_Drop</soundInteract>
+    <soundDrop>Grain_Drop</soundDrop>
+    
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <Mass>0.05</Mass>
+      <MarketValue>5</MarketValue>
+      <MaxHitPoints>60</MaxHitPoints>
+      <Flammability>1.3</Flammability>
+      <DeteriorationRate>4</DeteriorationRate>
+    </statBases>
+    <stackLimit>75</stackLimit>
+    
+    <tradeTags>
+      <li>VV_ViviProduct</li>
+    </tradeTags>
+  </ThingDef>
+  
+  <!-- 생체 가닥 -->
+  <ThingDef ParentName="ResourceBase">
+    <defName>VV_Lifestrand</defName>
+    <label>lifestrand</label>
+    <description>a fabric that has been toughened by processing devilstrand with mana-infused materials. It is much more durable than regular devilstrand fabric, but it is also more difficult to process.
+\nThe fibers are called lifestrand because they seem to be alive, but they might indeed be living.</description>
+    <descriptionHyperlinks>
+      <ThingDef>DevilstrandCloth</ThingDef>
+      <ThingDef>VV_LivingLeaf</ThingDef>
+      <ThingDef>VV_HeatingPetal</ThingDef>
+      <ThingDef>VV_CoolingPetal</ThingDef>
+    </descriptionHyperlinks>
+
+    <graphicData>
+      <texPath>Things/Item/VV_Lifestrand</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <color>(255,255,255)</color>
+    </graphicData>
+    <thingCategories>
+      <li>Textiles</li>
+    </thingCategories>
+
+    <statBases>
+      <StuffPower_Armor_Sharp>1.76</StuffPower_Armor_Sharp>
+      <StuffPower_Armor_Blunt>0.74</StuffPower_Armor_Blunt>
+      <StuffPower_Armor_Heat>3.00</StuffPower_Armor_Heat>
+      <StuffPower_Insulation_Cold>30</StuffPower_Insulation_Cold>
+      <StuffPower_Insulation_Heat>36</StuffPower_Insulation_Heat>
+
+      <MaxHitPoints>100</MaxHitPoints>
+      <MarketValue>14</MarketValue>
+      <Mass>0.05</Mass>
+      <Flammability>0.1</Flammability>
+      <DeteriorationRate>2</DeteriorationRate>
+    </statBases>
+
+    <burnableByRecipe>true</burnableByRecipe>
+    <healthAffectsPrice>false</healthAffectsPrice>
+    <minRewardCount>30</minRewardCount>
+    <stuffProps>
+      <statFactors>
+        <MaxHitPoints>2.2</MaxHitPoints>
+        <Flammability>0.1</Flammability>
+        <Beauty>4.0</Beauty>
+        <WorkToMake>2.7</WorkToMake>
+        <WorkToBuild>2.7</WorkToBuild>
+      </statFactors>
+      <statOffsetsQuality>
+        <li>
+          <stat>PsychicSensitivityOffset</stat>
+          <awful>0</awful>
+          <poor>0</poor>
+          <normal>0.01</normal>
+          <good>0.03</good>
+          <excellent>0.06</excellent>
+          <masterwork>0.09</masterwork>
+          <legendary>0.12</legendary>
+        </li>
+      </statOffsetsQuality>
+      <categories>
+        <li>Fabric</li>
+      </categories>
+      <color>(19,17,17)</color>
+      <commonality>0.001</commonality>
+    </stuffProps>
+
+    <comps>
+    </comps>
+    <allowedArchonexusCount>80</allowedArchonexusCount>
+  </ThingDef>
+  
+  <!-- 꽃씨 -->
+  <ThingDef>
+    <defName>VV_Seed_UnknownPlant</defName>
+    <thingClass>ThingWithComps</thingClass>
+    <category>Item</category>
+    <label>unknown seed</label>
+    <description>An arcane seed of unknown species, occasionally found during gathering. Its plant type cannot be identified until it fully matures.\nArcane plants require both mana and nutrients to grow.
+\nMana is absorbed from the environment mana and can also be supplied by nearby mana emitter or other arcane plants that produce mana.
+\nutrients continuously decrease regardless of mana, so a person must regularly apply mana fertilizer. If left without sufficient nutrients for too long, the seedling will die.</description>
+
+    <tickerType>Never</tickerType>
+    <selectable>true</selectable>
+
+    <graphicData>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <texPath>Things/Item/VV_FlowerSeed</texPath>
+    </graphicData>
+
+    <drawerType>MapMeshOnly</drawerType>
+    <altitudeLayer>Item</altitudeLayer>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <rotatable>false</rotatable>
+
+    <useHitPoints>true</useHitPoints>
+    <stackLimit>25</stackLimit>
+    <pathCost>14</pathCost>
+    <alwaysHaulable>true</alwaysHaulable>
+
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <MarketValue>20</MarketValue>
+      <Mass>0.001</Mass>
+      <MaxHitPoints>20</MaxHitPoints>
+      <DeteriorationRate>0.5</DeteriorationRate>
+      <Flammability>1.0</Flammability>
+      <Nutrition>0.125</Nutrition>
+      <SellPriceFactor>0.5</SellPriceFactor>
+    </statBases>
+    
+    <ingestible>
+      <preferability>NeverForNutrition</preferability>
+      <foodType>Seed</foodType>
+    </ingestible>
+
+    <thingCategories>
+      <li>VV_ArcaneSeed</li>
+    </thingCategories>
+
+    <comps>
+      <li Class="CompProperties_Forbiddable" />
+      <li Class="VVRace.CompProperties_ArcaneSeed" />
+    </comps>
+
+    <socialPropernessMatters>true</socialPropernessMatters>
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Grain_Drop</soundInteract>
+    <soundDrop>Grain_Drop</soundDrop>
+
+    <thingSetMakerTags>
+      <li>NonStandardReward</li>
+    </thingSetMakerTags>
+  </ThingDef>
+
+  <!-- 마나 비료 -->
+  <ThingDef ParentName="ResourceBase">
+    <defName>VV_Fertilizer</defName>
+    <label>mana fertilizer</label>
+    <description>A special Vivi-made fertilizer blended with organic matter and pollen. It's mainly used for cultivating arcane plants, but it can also be fed into a mana emitter to extract the mana mixed in the fertilizer as environment mana.</description>
+
+    <graphicData>
+      <texPath>Things/Item/VV_Fertilizer</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <thingCategories>
+      <li>VV_ViviResource</li>
+    </thingCategories>
+
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Grain_Drop</soundInteract>
+    <soundDrop>Grain_Drop</soundDrop>
+    
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <Mass>0.15</Mass>
+      <MarketValue>3</MarketValue>
+      <MaxHitPoints>40</MaxHitPoints>
+      <Flammability>0.3</Flammability>
+      <DeteriorationRate>1</DeteriorationRate>
+    </statBases>
+    <stackLimit>150</stackLimit>
+    
+    <tradeTags>
+      <li>VV_ViviProduct</li>
+    </tradeTags>
+
+    <thingSetMakerTags>
+      <li>NonStandardReward</li>
+    </thingSetMakerTags>
+  </ThingDef>
+  
+</Defs>

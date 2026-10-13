@@ -1,0 +1,524 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 물방울꽃 -->
+  <ThingDef ParentName="VV_ArcanePlantProductive">
+    <defName>VV_Waterdrops</defName>
+    <label>waterdrops</label>
+    <description>a arcane flower shaped like a water droplet that absorbs surrounding water and converts it into mana. It can also be planted on water, and the more adjacent water tiles there are, the more mana it produces. When it detects a nearby fire, it converts stored mana into water and ejects it to extinguish the fire.
+\nHoneywater fruits periodically grow; once fully ripe, they fall to the ground and can be eaten or used as decorations.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_HoneyWaterFruit</ThingDef>
+      <ThingDef>VV_CoolingPetal</ThingDef>
+      <ThingDef>VV_PerfumingPetal</ThingDef>
+    </descriptionHyperlinks>
+
+    <graphicData>
+      <texPath>Things/Plants/VV_Waterdrops</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <uiIconOffset>(0,0.12)</uiIconOffset>
+
+    <terrainAffordanceNeeded>VV_WaterOrLight</terrainAffordanceNeeded>
+    <statBases>
+      <MaxHitPoints>50</MaxHitPoints>
+      <WorkToBuild>47500</WorkToBuild>
+      <Beauty>10</Beauty>
+      <BeautyOutdoors>10</BeautyOutdoors>
+      <Flammability>0</Flammability>
+      
+      <VV_PlantGatherCooldown>2.4</VV_PlantGatherCooldown>
+      <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
+    </statBases>
+
+    <damageMultipliers Inherit="False">
+      <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+      <li>
+        <damageDef>Burn</damageDef>
+        <multiplier>0</multiplier>
+      </li>
+    </damageMultipliers>
+
+    <costList>
+      <VV_CoolingPetal>20</VV_CoolingPetal>
+      <VV_PerfumingPetal>10</VV_PerfumingPetal>
+    </costList>
+
+    <comps>
+      <li Class="VVRace.CompProperties_Mana">
+        <manaCapacity>500</manaCapacity>
+        <manaGenerateRule Class="VVRace.ManaFluxRule_CompositeSum">
+          <rules>
+            <li Class="VVRace.ManaFluxRule_AdjacentWater">
+              <manaFromOccupiedWater>450</manaFromOccupiedWater>
+              <manaPerAdjacentWater>200</manaPerAdjacentWater>
+            </li>
+            <li Class="VVRace.ManaFluxRule_WeatherRainy">
+              <mana>750</mana>
+            </li>
+          </rules>
+        </manaGenerateRule>
+
+        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
+          <mana>100</mana>
+        </manaConsumeRule>
+        <manaAbsorbPerDay>1000</manaAbsorbPerDay>
+      </li>
+
+      <li Class="VVRace.CompProperties_RepeatGatherable" />
+
+      <li Class="VVRace.CompProperties_ManaSensorExplosive">
+        <requiredManaPct>0.1</requiredManaPct>
+        
+        <sensorRadius>3.7</sensorRadius>
+        <sensorWorkerClass>VVRace.SensorWorker_Fire</sensorWorkerClass>
+
+        <explosiveRadius>7.4</explosiveRadius>
+        <explosiveCooldownTicks>1000~1000</explosiveCooldownTicks>
+        <explosiveEffecterDef>ExtinguisherExplosion</explosiveEffecterDef>
+        <explosiveDamageDef>VV_ExtinguishWithWater</explosiveDamageDef>
+        <propagationSpeed>0.5</propagationSpeed>
+
+        <postExplosionSpawnThingDef>Filth_Water</postExplosionSpawnThingDef>
+        <postExplosionSpawnChance>0.15</postExplosionSpawnChance>
+        <postExplosionSpawnThingCount>1</postExplosionSpawnThingCount>
+
+        <applyDamageToExplosionCellsNeighbors>true</applyDamageToExplosionCellsNeighbors>
+      </li>
+
+      <li Class="CompProperties_Glower">
+        <compClass>VVRace.CompManaGlower</compClass>
+        <glowRadius>3</glowRadius>
+        <glowColor>(90,220,255)</glowColor>
+      </li>
+
+      <li Class="VVRace.CompProperties_WaterdropFruit">
+        <fruitDef>VV_HoneyWaterFruit</fruitDef>
+        <intervalDays>3.5~8.5</intervalDays>
+        <count>3~6</count>
+      </li>
+      <li Class="VVRace.CompProperties_ScentDiffusion" />
+    </comps>
+    
+    <modExtensions>
+      <li Class="VVRace.ArcaneSeedExtension">
+        <seedMarketValueRatio>0.2</seedMarketValueRatio>
+        <seedColor>(150,150,255)</seedColor>
+
+        <leavingSeedCountCurve>
+          <points>
+            <li>(0, 4)</li>
+            <li>(0.7, 5.5)</li>
+            <li>(1.0, 6)</li>
+          </points>
+        </leavingSeedCountCurve>
+      </li>
+      <li Class="VVRace.ScentExtension">
+        <scentHediff>VV_Scent_Waterdrops</scentHediff>
+        <scentColor>(0.5, 0.8, 1.0)</scentColor>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- 빛바라기 -->
+  <ThingDef ParentName="VV_ArcanePlantProductive">
+    <defName>VV_Radiantflower</defName>
+    <label>radiantflower</label>
+    <description>a arcane flower resembling a sunflower that converts sunlight into mana. In environments where sunlight is blocked by roofs and cannot be received, it consumes mana to emit strong light that allows crops to grow in the vicinity.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_HeatingPetal</ThingDef>
+      <ThingDef>VV_PerfumingPetal</ThingDef>
+    </descriptionHyperlinks>
+
+    <thingClass>VVRace.ArcanePlant_RadiantFlower</thingClass>
+
+    <graphicData>
+      <texPath>Things/Plants/VV_Radiantflower</texPath>
+      <graphicClass>Graphic_Random</graphicClass>
+    </graphicData>
+
+    <statBases>
+      <MaxHitPoints>50</MaxHitPoints>
+      <WorkToBuild>47500</WorkToBuild>
+      <Beauty>10</Beauty>
+      <BeautyOutdoors>10</BeautyOutdoors>
+      
+      <VV_PlantGatherCooldown>2.4</VV_PlantGatherCooldown>
+      <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
+    </statBases>
+
+    <costList>
+      <VV_HeatingPetal>20</VV_HeatingPetal>
+      <VV_PerfumingPetal>10</VV_PerfumingPetal>
+    </costList>
+
+    <comps>
+      <li Class="VVRace.CompProperties_Mana">
+        <manaCapacity>500</manaCapacity>
+
+        <manaGenerateRule Class="VVRace.ManaFluxRule_Sunlight">
+          <manaFromSunlightRange>0~1900</manaFromSunlightRange>
+        </manaGenerateRule>
+
+        <manaConsumeRule Class="VVRace.ManaFluxRule_CompositeSum">
+          <rules>
+            <li Class="VVRace.ManaFluxRule_GlowerActive">
+              <mana>1100</mana>
+            </li>
+            <li Class="VVRace.ManaFluxRule_Constant">
+              <mana>100</mana>
+            </li>
+          </rules>
+        </manaConsumeRule>
+        <manaAbsorbPerDay>1000</manaAbsorbPerDay>
+      </li>
+
+      <li Class="VVRace.CompProperties_RepeatGatherable" />
+
+      <li Class="VVRace.CompProperties_RadiantflowerGlower">
+        <glowRadius>16</glowRadius>
+        <glowColor>(370,370,370,0)</glowColor>
+        <overlightRadius>7.7</overlightRadius>
+      </li>
+      <li Class="VVRace.CompProperties_ScentDiffusion" />
+    </comps>
+
+    <specialDisplayRadius>6.2</specialDisplayRadius>
+
+    <modExtensions>
+      <li Class="VVRace.ArcaneSeedExtension">
+        <seedMarketValueRatio>0.2</seedMarketValueRatio>
+        <seedColor>(255,200,150)</seedColor>
+
+        <leavingSeedCountCurve>
+          <points>
+            <li>(0, 4)</li>
+            <li>(0.7, 5.5)</li>
+            <li>(1.0, 6)</li>
+          </points>
+        </leavingSeedCountCurve>
+      </li>
+      <li Class="VVRace.ScentExtension">
+        <scentHediff>VV_Scent_Radiantflower</scentHediff>
+        <scentColor>(1.0, 0.75, 0.4)</scentColor>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- 풍년화 -->
+  <ThingDef ParentName="VV_ArcanePlantProductive">
+    <defName>VV_Richflower</defName>
+    <label>richflower</label>
+    <description>a arcane flower with large petals that periodically spreads pollen on the surrounding ground and yields a lot of honey when harvested.
+\nGenerates mana proportional to the soil's fertility and slowly enriches nearby soil and increases the growth speed of adjacent arcane plant seedlings by 10%.
+\nIf placed adjacent to a peashooter, it slightly increases the power of its peas when fired. If multiple richflowers or purifimints are adjacent, the effect stacks.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_PerfumingPetal</ThingDef>
+    </descriptionHyperlinks>
+
+    <graphicData>
+      <texPath>Things/Plants/VV_Richflower</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+
+    <statBases>
+      <MaxHitPoints>50</MaxHitPoints>
+      <WorkToBuild>47500</WorkToBuild>
+      <Beauty>10</Beauty>
+      <BeautyOutdoors>10</BeautyOutdoors>
+      
+      <VV_PlantGatherCooldown>2.4</VV_PlantGatherCooldown>
+      <VV_PlantHoneyGatherYield>2.5</VV_PlantHoneyGatherYield>
+    </statBases>
+
+    <costList>
+      <VV_PerfumingPetal>30</VV_PerfumingPetal>
+    </costList>
+
+    <comps>
+      <li Class="VVRace.CompProperties_Mana">
+        <manaCapacity>300</manaCapacity>
+
+        <manaGenerateRule Class="VVRace.ManaFluxRule_Fertility">
+          <manaFromFertility>
+            <points>
+              <li>(0,0)</li>
+              <li>(0.5,0)</li>
+              <li>(1.0,150)</li>
+              <li>(1.2,750)</li>
+              <li>(1.4,1050)</li>
+            </points>
+          </manaFromFertility>
+        </manaGenerateRule>
+
+        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
+          <mana>300</mana>
+        </manaConsumeRule>
+        <manaAbsorbPerDay>450</manaAbsorbPerDay>
+      </li>
+
+      <li Class="VVRace.CompProperties_ArcanePlantBulletOverride">
+        <modifiers>
+          <VV_Peashooter>
+            <additionalDamage>2</additionalDamage>
+          </VV_Peashooter>
+        </modifiers>
+      </li>
+
+      <li Class="VVRace.CompProperties_RepeatGatherable" />
+
+      <li Class="VVRace.CompProperties_ManaTerraformer">
+        <cooldownTicks>90000~150000</cooldownTicks>
+        <radiusRange>0.3~3.9</radiusRange>
+        <radiusGrowth>0.3</radiusGrowth>
+        <terraforms>
+          <li><from>SoftSand</from><to>Sand</to></li>
+          <li><from>Sand</from><to>Gravel</to></li>
+          <li><from>Gravel</from><to>Soil</to></li>
+          <li><from>Soil</from><to>SoilRich</to></li>
+          <li><from>MossyTerrain</from><to>SoilRich</to></li>
+          <li><from>MarshyTerrain</from><to>SoilRich</to></li>
+          <li MayRequire="Ludeon.RimWorld.Odyssey"><from>AncientMegastructure</from><to>Sand</to></li>
+          <li MayRequire="Ludeon.RimWorld.Odyssey"><from>GlowforestSoil</from><to>SoilRich</to></li>
+          <li MayRequire="Ludeon.RimWorld.Odyssey"><from>GrasslandSoil</from><to>SoilRich</to></li>
+        </terraforms>
+      </li>
+
+      <li Class="VVRace.CompProperties_ManaFilthMaker">
+        <filthDef>VV_FilthPollen</filthDef>
+        <makeAmountPerDays>2~4</makeAmountPerDays>
+        <radius>1.9</radius>
+        <exceptCenter>true</exceptCenter>
+
+        <spawnEffecter>VV_PollenEmitting</spawnEffecter>
+      </li>
+
+      <li Class="VVRace.CompProperties_SeedlingGrowthAccelerator">
+        <growthBonus>1.1</growthBonus>
+      </li>
+      <li Class="VVRace.CompProperties_ScentDiffusion" />
+    </comps>
+
+    <modExtensions>
+      <li Class="VVRace.ArcaneSeedExtension">
+        <seedMarketValueRatio>0.2</seedMarketValueRatio>
+        <seedColor>(255,150,150)</seedColor>
+
+        <leavingSeedCountCurve>
+          <points>
+            <li>(0, 4)</li>
+            <li>(0.7, 5.5)</li>
+            <li>(1.0, 6)</li>
+          </points>
+        </leavingSeedCountCurve>
+      </li>
+      <li Class="VVRace.ScentExtension">
+        <scentHediff>VV_Scent_Richflower</scentHediff>
+        <scentColor>(1.0, 1.0, 0.5)</scentColor>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- 정화초 -->
+  <ThingDef ParentName="VV_ArcanePlantProductive">
+    <defName>VV_Purifimint</defName>
+    <label>purifimint</label>
+    <description>a arcane plant that emits a small glow around it will slowly absorb toxic wastepacks placed, producing mana and also purifying the surrounding pollutions. It is also aesthetically pleasing and used for decoration.
+\nIf placed adjacent to a peashooter, it slightly increases the power of its peas when fired. If multiple richflowers or purifimints are adjacent, the effect stacks.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_PerfumingPetal</ThingDef>
+    </descriptionHyperlinks>
+
+    <graphicData>
+      <texPath>Things/Plants/VV_Purifier</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+
+    <statBases>
+      <MaxHitPoints>50</MaxHitPoints>
+      <WorkToBuild>47500</WorkToBuild>
+      <Beauty>15</Beauty>
+      <BeautyOutdoors>15</BeautyOutdoors>
+    </statBases>
+
+    <costList>
+      <VV_PerfumingPetal>30</VV_PerfumingPetal>
+    </costList>
+
+    <comps>
+      <li Class="VVRace.CompProperties_Mana">
+        <manaCapacity>300</manaCapacity>
+
+        <manaGenerateRule Class="VVRace.ManaFluxRule_Refuelable">
+          <mana>1000</mana>
+          <fuelDef>Wastepack</fuelDef>
+        </manaGenerateRule>
+
+        <manaConsumeRule Class="VVRace.ManaFluxRule_CompositeSum">
+          <rules>
+            <li Class="VVRace.ManaFluxRule_RadialPollution">
+              <radius>1.9</radius>
+              <manaCurveFromDistanceSqr>
+                <points>
+                  <li>(0,250)</li>
+                  <li>(1,100)</li>
+                  <li>(2,50)</li>
+                </points>
+              </manaCurveFromDistanceSqr>
+            </li>
+            <li Class="VVRace.ManaFluxRule_Constant">
+              <mana>100</mana>
+            </li>
+          </rules>
+        </manaConsumeRule>
+
+        <manaAbsorbPerDay>600</manaAbsorbPerDay>
+      </li>
+
+      <li Class="VVRace.CompProperties_ArcanePlantBulletOverride">
+        <modifiers>
+          <VV_Peashooter>
+            <additionalDamage>2</additionalDamage>
+          </VV_Peashooter>
+        </modifiers>
+      </li>
+
+      <li Class="VVRace.CompProperties_RepeatGatherable" />
+      
+      <li Class="VVRace.CompProperties_ManaTerraformer">
+        <cooldownTicks>120000~180000</cooldownTicks>
+        <radiusRange>0.6~1.9</radiusRange>
+        <radiusGrowth>0.65</radiusGrowth>
+        <removePollution>true</removePollution>
+        <showRadius>true</showRadius>
+      </li>
+
+      <li Class="CompProperties_Refuelable">
+        <fuelLabel>Wastepack</fuelLabel>
+        <fuelGizmoLabel>Wastepack</fuelGizmoLabel>
+        <fuelConsumptionRate>1.5</fuelConsumptionRate>
+        <fuelCapacity>15</fuelCapacity>
+        <initialFuelPercent>0</initialFuelPercent>
+        <fuelMultiplier>1</fuelMultiplier>
+        <fuelFilter>
+          <thingDefs>
+            <li>Wastepack</li>
+          </thingDefs>
+        </fuelFilter>
+        <showFuelGizmo>true</showFuelGizmo>
+        <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+        <externalTicking>false</externalTicking>
+      </li>
+
+      <li Class="CompProperties_Glower">
+        <compClass>VVRace.CompManaGlower</compClass>
+        <glowRadius>10</glowRadius>
+        <glowColor>(255,255,255,0)</glowColor>
+      </li>
+    </comps>
+    
+    <modExtensions>
+      <li Class="VVRace.ArcaneSeedExtension">
+        <seedMarketValueRatio>0.2</seedMarketValueRatio>
+        <seedColor>(200,255,200)</seedColor>
+
+        <leavingSeedCountCurve>
+          <points>
+            <li>(0, 4)</li>
+            <li>(0.7, 5.5)</li>
+            <li>(1.0, 6)</li>
+          </points>
+        </leavingSeedCountCurve>
+      </li>
+    </modExtensions>
+  </ThingDef>
+  
+  <!-- 별맞이꽃 -->
+  <ThingDef ParentName="VV_ArcanePlantProductive">
+    <defName>VV_Starlitflower</defName>
+    <label>starlitflower</label>
+    <description>a arcane flower blooms exclusively at night, generating and emitting mana while radiating light. During the day, the flower wilts and absorbs a small amount of mana.
+\nIt always produces mana in space, but at a reduced rate. It also generates a field that grants nearby units vacuum resistance.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_PerfumingPetal</ThingDef>
+    </descriptionHyperlinks>
+
+    <thingClass>VVRace.ArcanePlant_Starlitflower</thingClass>
+
+    <graphicData>
+      <texPath>Things/Plants/VV_Starlitflower</texPath>
+      <graphicClass>Graphic_Random</graphicClass>
+    </graphicData>
+
+    <statBases>
+      <MaxHitPoints>50</MaxHitPoints>
+      <WorkToBuild>47500</WorkToBuild>
+      <Beauty>10</Beauty>
+      <BeautyOutdoors>10</BeautyOutdoors>
+      
+      <VV_PlantGatherCooldown>2.4</VV_PlantGatherCooldown>
+      <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
+    </statBases>
+
+    <costList>
+      <VV_HeatingPetal>6</VV_HeatingPetal>
+      <VV_CoolingPetal>6</VV_CoolingPetal>
+      <VV_PerfumingPetal>12</VV_PerfumingPetal>
+    </costList>
+
+    <comps>
+      <li Class="VVRace.CompProperties_Mana">
+        <manaCapacity>50</manaCapacity>
+
+        <manaGenerateRule Class="VVRace.ManaFluxRule_TimeOfDay">
+          <mana>1250</mana>
+          <timeOfDay>Night</timeOfDay>
+          <alwaysIfVaccumBiome>true</alwaysIfVaccumBiome>
+        </manaGenerateRule>
+        
+        <manaConsumeRule Class="VVRace.ManaFluxRule_CompositeSum">
+          <rules>
+            <li Class="VVRace.ManaFluxRule_TimeOfDay">
+              <mana>100</mana>
+              <timeOfDay>Day</timeOfDay>
+              <alwaysIfVaccumBiome>true</alwaysIfVaccumBiome>
+            </li>
+            <li Class="VVRace.ManaFluxRule_InVaccum">
+              <mana>550</mana>
+            </li>
+          </rules>
+        </manaConsumeRule>
+        <manaAbsorbPerDay>75</manaAbsorbPerDay>
+      </li>
+
+      <li Class="VVRace.CompProperties_RepeatGatherable" />
+
+      <li Class="VVRace.CompProperties_StalitflowerGlower">
+        <glowRadius>5.3</glowRadius>
+        <glowColor>(120,180,280,0)</glowColor>
+      </li>
+      <li Class="VVRace.CompProperties_ScentDiffusion" />
+    </comps>
+    
+    <modExtensions>
+      <li Class="VVRace.ArcaneSeedExtension">
+        <seedMarketValueRatio>0.2</seedMarketValueRatio>
+        <seedColor>(255,200,255)</seedColor>
+
+        <leavingSeedCountCurve>
+          <points>
+            <li>(0, 4)</li>
+            <li>(0.7, 5.5)</li>
+            <li>(1.0, 6)</li>
+          </points>
+        </leavingSeedCountCurve>
+      </li>
+      <li Class="VVRace.ScentExtension">
+        <scentHediff>VV_Scent_Starlitflower</scentHediff>
+        <scentColor>(0.8, 0.7, 1.0)</scentColor>
+      </li>
+    </modExtensions>
+  </ThingDef>
+</Defs>

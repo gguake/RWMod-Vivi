@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <ThingDef ParentName="MinifiedThing">
+    <defName>MinifiedArcanePlant</defName>
+    <label>minified arcane plant</label>
+    <thingClass>VVRace.MinifiedArcanePlant</thingClass>
+    
+    <statBases>
+      <Mass>3</Mass>
+      <Flammability>1</Flammability>
+    </statBases>
+  </ThingDef>
+
+  <ThingDef Abstract="True" Name="VV_ArcanePlantBase">
+    <category>Building</category>
+    <thingClass>VVRace.ArcanePlant</thingClass>
+    <tickerType>Normal</tickerType>
+    <selectable>true</selectable>
+
+    <drawerType>MapMeshOnly</drawerType>
+    <graphicData>
+      <shaderType>CutoutPlant</shaderType>
+      <drawSize>(1.2, 1.2)</drawSize>
+      <renderQueue>2901</renderQueue>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Metal_Drop</soundDrop>
+
+    <minifiedDef>MinifiedArcanePlant</minifiedDef>
+    <pathCost>14</pathCost>
+    <pathCostIgnoreRepeat>false</pathCostIgnoreRepeat>
+
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <Mass>3</Mass>
+      <Flammability>1</Flammability>
+      <WorkToBuild>1800</WorkToBuild>
+      <SellPriceFactor>0.25</SellPriceFactor>
+    </statBases>
+
+    <damageMultipliers>
+      <li>
+        <damageDef>Flame</damageDef>
+        <multiplier>2.5</multiplier>
+      </li>
+      <li>
+        <damageDef>Burn</damageDef>
+        <multiplier>2.5</multiplier>
+      </li>
+    </damageMultipliers>
+
+    <size>(1,1)</size>
+    <stackLimit>1</stackLimit>
+    <fillPercent>0.2</fillPercent>
+
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <thingCategories>
+      <li>VV_ArcanePlant</li>
+    </thingCategories>
+
+    <placeWorkers>
+      <li>VVRace.PlaceWorker_AllowArcanePlantPot</li>
+    </placeWorkers>
+    <rotatable>false</rotatable>
+    
+    <building>
+      <isInert>true</isInert>
+      <ai_neverTrashThis>true</ai_neverTrashThis>
+      <ai_chillDestination>false</ai_chillDestination>
+      <deconstructible>true</deconstructible>
+      <claimable>false</claimable>
+      <allowWireConnection>false</allowWireConnection>
+      <allowAutoroof>false</allowAutoroof>
+      <repairable>false</repairable>
+      <artificialForMeditationPurposes>false</artificialForMeditationPurposes>
+      <canPlaceOverWall>false</canPlaceOverWall>
+      <uninstallWork>250</uninstallWork>
+      <haulToContainerDuration>250</haulToContainerDuration>
+      <expandHomeArea>false</expandHomeArea>
+    </building>
+    <resourcesFractionWhenDeconstructed>1</resourcesFractionWhenDeconstructed>
+
+    <comps>
+    </comps>
+
+    <inspectorTabs>
+      <li>VVRace.ITab_ArcanePlant</li>
+    </inspectorTabs>
+
+    <tradeTags>
+      <li>VV_ArcanePlant</li>
+    </tradeTags>
+    <tradeability>All</tradeability>
+  </ThingDef>
+
+  <ThingDef Abstract="True" Name="VV_ArcanePlantProductive" ParentName="VV_ArcanePlantBase">
+    <tradeTags>
+      <li>VV_ArcanePlantProductive</li>
+    </tradeTags>
+    
+    <researchPrerequisites>
+      <li>VV_ArcanePlantSowing</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <ThingDef Abstract="True" Name="VV_ArcanePlantCombat" ParentName="VV_ArcanePlantBase">
+    <statBases>
+      <Mass>9</Mass>
+    </statBases>
+
+    <building>
+      <isInert>false</isInert>
+      <ai_combatDangerous>true</ai_combatDangerous>
+      <uninstallWork>500</uninstallWork>
+    </building>
+    
+    <tradeTags>
+      <li>VV_ArcanePlantCombat</li>
+    </tradeTags>
+    
+    <researchPrerequisites>
+      <li>VV_ArcanePlantSowing</li>
+    </researchPrerequisites>
+  </ThingDef>
+</Defs>

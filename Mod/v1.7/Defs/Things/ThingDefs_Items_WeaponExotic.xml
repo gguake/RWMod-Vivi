@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 예식용 창 -->
+  <ThingDef ParentName="BaseWeapon">
+    <defName>VV_RitualLance</defName>
+    <label>vivi ritual lance</label>
+    <description>a large spear with various decorations and a large blade given in a form of ceremony to Vivi who saved the hive from danger. Due to the abnormal size of the blade and decorations compared to the length of the handle, only Vivi can use it as it is optimized for them.
+\nLance can absorb environmental mana to recharge and the recharged lance becomes remarkably sharp, significantly increasing attack power and penetration.</description>
+    <graphicData>
+      <texPath>Things/Item/Equipment/VV_RitualLance</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.3</drawSize>
+    </graphicData>
+    <equippedAngleOffset>0</equippedAngleOffset>
+    
+    <techLevel>Medieval</techLevel>
+    <statBases>
+      <WorkToMake>40000</WorkToMake>
+      <Mass>4</Mass>
+      <VV_MeleeWeapon_ManaCost>40</VV_MeleeWeapon_ManaCost>
+    </statBases>
+    <equippedStatOffsets>
+      <MoveSpeed>-0.5</MoveSpeed>
+      <MeleeHitChance>-5</MeleeHitChance>
+    </equippedStatOffsets>
+    <tradeNeverStack>true</tradeNeverStack>
+    <relicChance>2</relicChance>
+
+    <thingSetMakerTags><li>RewardStandardMidFreq</li></thingSetMakerTags>
+    <thingCategories Inherit="False">
+      <li>VV_ViviWeapon</li>
+      <li>VV_ArcaneWeapon</li>
+    </thingCategories>
+    <weaponClasses>
+      <li>Melee</li>
+      <li>MeleePiercer</li>
+    </weaponClasses>
+    <weaponTags Inherit="False">
+      <li>VV_ViviExotic</li>
+    </weaponTags>
+    
+    <comps Inherit="False">
+      <li Class="VVRace.CompProperties_EquippableManaWeapon">
+        <meleeDamageFactorCurve>
+          <points>
+            <li>(0, 1)</li>
+            <li>(1, 1.5)</li>
+          </points>
+        </meleeDamageFactorCurve>
+      </li>
+      <li><compClass>CompQuality</compClass></li>
+      <li Class="CompProperties_Forbiddable"/>
+      <li Class="CompProperties_Styleable"/>
+      <li Class="CompProperties_Art">
+        <nameMaker>NamerArtWeaponMelee</nameMaker>
+        <descriptionMaker>ArtDescription_WeaponMelee</descriptionMaker>
+        <minQualityForArtistic>Excellent</minQualityForArtistic>
+      </li>
+      <li Class="CompProperties_Biocodable"/>
+      <li Class="VVRace.CompProperties_Mana">
+        <manaCapacity>900</manaCapacity>
+        <manaAbsorbPerDay>600</manaAbsorbPerDay>
+        <workOnlySpawned>false</workOnlySpawned>
+      </li>
+    </comps>
+    <smeltable>false</smeltable>
+    <burnableByRecipe>true</burnableByRecipe>
+    <notifyMapRemoved>true</notifyMapRemoved>
+
+    <tools>
+      <li>
+        <label>shaft</label>
+        <capacities>
+          <li>Blunt</li>
+          <li>Poke</li>
+        </capacities>
+        <power>11</power>
+        <cooldownTime>1.2</cooldownTime>
+        <chanceFactor>0.2</chanceFactor>
+      </li>
+      <li>
+        <label>point</label>
+        <capacities>
+          <li>Stab</li>
+        </capacities>
+        <power>36</power>
+        <armorPenetration>0.5</armorPenetration>
+        <cooldownTime>3.9</cooldownTime>
+      </li>
+    </tools>
+    
+    <costList>
+      <Plasteel>100</Plasteel>
+      <VV_Lifestrand>60</VV_Lifestrand>
+      <VV_TitanicHornetWing>2</VV_TitanicHornetWing>
+    </costList>
+    
+    <recipeMaker>
+      <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+      <workSkill>Crafting</workSkill>
+      <effectWorking>Smith</effectWorking>
+      <soundWorking>Recipe_Smith</soundWorking>
+      <recipeUsers>
+        <li>ElectricSmithy</li>
+        <li>FueledSmithy</li>
+      </recipeUsers>
+      <unfinishedThingDef>UnfinishedWeapon</unfinishedThingDef>
+
+      <researchPrerequisites>
+        <li>VV_Weaponry</li>
+        <li>VV_ArcaneWeaponry</li>
+      </researchPrerequisites>
+      <skillRequirements>
+        <Crafting>10</Crafting>
+      </skillRequirements>
+      <displayPriority>-540</displayPriority>
+    </recipeMaker>
+
+    <tradeTags>
+      <li>VV_ViviExotic</li>
+    </tradeTags>
+
+    <modExtensions>
+      <li Class="RPEF.ConstraintModExtension">
+        <def>VV_RaceConstraint</def>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- 비비 엘텍스 바늘 -->
+  <ThingDef ParentName="BaseWeapon">
+    <defName>VV_EltexNeedle</defName>
+    <label>vivi eltex needle</label>
+    <description>A specially processed sharp needles. Only vivi can handle them and once equipped they resonate with the wearer becoming bound so that no one else can use them.
+\Needle can absorb environmental mana to recharge, and by using the needles as a medium, you can summon psychic needles that resonate with mana ignoring physical laws and moving freely according to the users will.
+\nThe psychic needles pass through all obstacles and always hit their target. The higher the mental sensitivity, the faster the needles move, and the more attacks can be made at once.
+\nWhile summoning the psychic needles, vivi enter a state of deep concentration, making it impossible to move until the needles are retrieved.\nEach shot consumes mana, and the weapon automatically recharges by absorbing nearby environmental mana. When mana is insufficient, aiming time and post-fire cooldown increase significantly.</description>
+    <graphicData>
+      <texPath>Things/Item/Equipment/VV_Needle</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>1.0</drawSize>
+    </graphicData>
+    <equippedAngleOffset>-30</equippedAngleOffset>
+    <soundInteract>Interact_BeatFire</soundInteract>
+
+    <techLevel>Medieval</techLevel>
+    <statBases>
+      <WorkToMake>50000</WorkToMake>
+      <Mass>1</Mass>
+      <AccuracyTouch>1</AccuracyTouch>
+      <AccuracyShort>1</AccuracyShort>
+      <AccuracyMedium>1</AccuracyMedium>
+      <AccuracyLong>1</AccuracyLong>
+      <RangedWeapon_Cooldown>30.0</RangedWeapon_Cooldown>
+      <VV_RangedWeapon_ManaCost>20</VV_RangedWeapon_ManaCost>
+    </statBases>
+    <tradeNeverStack>true</tradeNeverStack>
+    <relicChance>3</relicChance>
+
+    <thingSetMakerTags><li>RewardStandardMidFreq</li></thingSetMakerTags>
+    <thingCategories Inherit="False">
+      <li>VV_ViviWeapon</li>
+      <li>VV_ArcaneWeapon</li>
+    </thingCategories>
+    <weaponTags Inherit="False">
+      <li>VV_ViviExotic</li>
+      <li>VV_ViviNeedle</li>
+    </weaponTags>
+
+    <comps Inherit="False">
+      <li Class="VVRace.CompProperties_EquippableManaWeapon" />
+      <li><compClass>CompQuality</compClass></li>
+      <li Class="CompProperties_Forbiddable"/>
+      <li Class="CompProperties_Styleable"/>
+      <li Class="CompProperties_Art">
+        <nameMaker>NamerArtWeaponMelee</nameMaker>
+        <descriptionMaker>ArtDescription_WeaponMelee</descriptionMaker>
+        <minQualityForArtistic>Excellent</minQualityForArtistic>
+      </li>
+      <li Class="CompProperties_Biocodable">
+        <biocodeOnEquip>true</biocodeOnEquip>
+      </li>
+      <li Class="VVRace.CompProperties_Mana">
+        <manaCapacity>900</manaCapacity>
+        <manaAbsorbPerDay>600</manaAbsorbPerDay>
+        <workOnlySpawned>false</workOnlySpawned>
+      </li>
+    </comps>
+    <smeltable>false</smeltable>
+    <burnableByRecipe>true</burnableByRecipe>
+    <notifyMapRemoved>true</notifyMapRemoved>
+
+    <verbs>
+      <li>
+        <verbClass>VVRace.Verb_ShootWithMana</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>VV_Projectile_EltexNeedle</defaultProjectile>
+        <warmupTime>2.2</warmupTime>
+        <range>35.6</range>
+        <soundCast>Interact_BeatFire</soundCast>
+        <rangedFireRulepack>Combat_RangedFire_Thrown</rangedFireRulepack>
+        <canGoWild>false</canGoWild>
+      </li>
+    </verbs>
+
+    <tools>
+      <li>
+        <label>point</label>
+        <capacities>
+          <li>Stab</li>
+        </capacities>
+        <power>6</power>
+        <armorPenetration>0.2</armorPenetration>
+        <cooldownTime>0.9</cooldownTime>
+      </li>
+    </tools>
+    
+    <costList>
+      <Plasteel>60</Plasteel>
+      <VV_Lifestrand>100</VV_Lifestrand>
+      <Jade>30</Jade>
+      <VV_Seed_Everflower>1</VV_Seed_Everflower>
+    </costList>
+    
+    <recipeMaker>
+      <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+      <workSkill>Crafting</workSkill>
+      <effectWorking>Smith</effectWorking>
+      <soundWorking>Recipe_Smith</soundWorking>
+      <recipeUsers>
+        <li>ElectricSmithy</li>
+        <li>FueledSmithy</li>
+      </recipeUsers>
+      <unfinishedThingDef>UnfinishedWeapon</unfinishedThingDef>
+
+      <researchPrerequisites>
+        <li>VV_Weaponry</li>
+        <li>VV_ArcaneWeaponry</li>
+      </researchPrerequisites>
+      <skillRequirements>
+        <Crafting>15</Crafting>
+      </skillRequirements>
+      <displayPriority>-541</displayPriority>
+    </recipeMaker>
+
+    <tradeTags>
+      <li>VV_ViviExotic</li>
+    </tradeTags>
+
+    <modExtensions>
+      <li Class="RPEF.ConstraintModExtension">
+        <def>VV_RaceConstraint</def>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseProjectileNeolithic">
+    <defName>VV_Projectile_EltexNeedle</defName>
+    <label>psychic needle</label>
+    <thingClass>VVRace.Needle</thingClass>
+    <graphicData>
+      <texPath>Things/Item/Equipment/VV_NeedleProjectile</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1.5</drawSize>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+
+    <projectile Class="VVRace.NeedleProperties">
+      <damageDef>Stab</damageDef>
+      <damageAmountBase>6</damageAmountBase>
+      <stoppingPower>0.5</stoppingPower>
+      <armorPenetrationBase>0.12</armorPenetrationBase>
+      <speed>90</speed>
+      <soundImpact>VV_NeedleImpact</soundImpact>
+
+      <bonusSpeedByPsychicSensitivity>
+        <points>
+          <li>(0.5,-50)</li>
+          <li>(1,0)</li>
+          <li>(1.5,10)</li>
+          <li>(2,30)</li>
+          <li>(2.5,50)</li>
+          <li>(3,70)</li>
+          <li>(3.5,90)</li>
+          <li>(4,110)</li>
+          <li>(4.5,130)</li>
+          <li>(5,150)</li>
+          <li>(6,160)</li>
+          <li>(7,170)</li>
+          <li>(8,180)</li>
+          <li>(9,190)</li>
+          <li>(10,200)</li>
+        </points>
+      </bonusSpeedByPsychicSensitivity>
+
+      <maxAttackCount>10</maxAttackCount>
+      <bonusAttackCountByPsychicSensitivity>
+        <points>
+          <li>(0.5,-5)</li>
+          <li>(1,0)</li>
+          <li>(1.5,1)</li>
+          <li>(2,4)</li>
+          <li>(2.5,7)</li>
+          <li>(3,10)</li>
+          <li>(3.5,12)</li>
+          <li>(4,14)</li>
+          <li>(4.5,16)</li>
+          <li>(5,18)</li>
+          <li>(6,20)</li>
+          <li>(7,22)</li>
+          <li>(8,24)</li>
+          <li>(9,26)</li>
+          <li>(10,27)</li>
+        </points>
+      </bonusAttackCountByPsychicSensitivity>
+
+      <targettingRadius>5.7</targettingRadius>
+    </projectile>
+
+    <comps>
+      <li Class="RPEF.CompProperties_TrailRenderer">
+        <texPath>VFX/VV_NeedleTrail</texPath>
+        <shader>AdditiveChangeHue</shader>
+        <color>(1.0, 0.8, 0.6)</color>
+        <widthCurve>
+          <points>
+            <li>(0, 0)</li>
+            <li>(1, 1)</li>
+          </points>
+        </widthCurve>
+        <lineTextureMode>DistributePerSegment</lineTextureMode>
+        
+        <maxTrailPoint>60</maxTrailPoint>
+        <refreshIntervalTicks>0</refreshIntervalTicks>
+      </li>
+    </comps>
+  </ThingDef>
+</Defs>

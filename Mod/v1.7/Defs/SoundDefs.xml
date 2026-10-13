@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <SoundDef>
+    <defName>VV_EverflowerRitualCast</defName>
+    <context>MapOnly</context>
+    <sustain>True</sustain>
+    <priorityMode>PrioritizeNearest</priorityMode>
+    <subSounds>
+      <li>
+        <muteWhenPaused>True</muteWhenPaused>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>SFX/VV_EverflowerRitualCast</clipPath>
+          </li>
+        </grains>
+        <volumeRange>60</volumeRange>
+        <pitchRange>0.5~1.5</pitchRange>
+        <distRange>5~25</distRange>
+        <repeatMode>NeverTwice</repeatMode>      
+        <sustainLoop>False</sustainLoop>
+        <sustainIntervalRange>-1</sustainIntervalRange>      
+        <sustainAttack>0.5</sustainAttack>
+        <sustainRelease>0.5</sustainRelease>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+  <SoundDef>
+    <defName>VV_Manawave</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>  
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>SFX/VV_Manawave</clipPath>
+          </li>
+        </grains>
+        <volumeRange>70</volumeRange>
+        <pitchRange>0.9~1.1</pitchRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+  <SoundDef>
+    <defName>VV_LightningboltShot</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>  
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>SFX/VV_Lightningbolt</clipPath>
+          </li>
+        </grains>
+        <distRange>20~60</distRange>
+        <volumeRange>50</volumeRange>
+        <pitchRange>0.8~1.2</pitchRange>
+        <sustainLoop>False</sustainLoop>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+  <SoundDef>
+    <defName>VV_Explosion_Frostbite</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>  
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>SFX/VV_Explosion_Frostbite</clipPath>
+          </li>
+        </grains>
+        <distRange>10~30</distRange>
+        <volumeRange>60</volumeRange>
+        <pitchRange>0.9~1.1</pitchRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+  <SoundDef>
+    <defName>VV_EverflowerRitualComplete</defName>
+    <context>MapOnly</context>
+    <priorityMode>PrioritizeNearest</priorityMode>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>SFX/VV_EverflowerRitualComplete</clipPath>
+          </li>
+        </grains>
+        <volumeRange>80</volumeRange>
+        <distRange>5~30</distRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+  <SoundDef>
+    <defName>VV_Fairyfication</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>  
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>SFX/VV_Fairyfication</clipPath>
+          </li>
+        </grains>
+        <volumeRange>80</volumeRange>
+        <pitchRange>0.9~1.1</pitchRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+  <SoundDef>
+    <defName>VV_FairyMaterialize</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>SFX/VV_FairyMaterialize</clipPath>
+          </li>
+        </grains>
+        <volumeRange>80</volumeRange>
+        <pitchRange>0.9~1.1</pitchRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+  <SoundDef>
+    <defName>VV_FairyDematerialize</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>SFX/VV_FairyDematerialize</clipPath>
+          </li>
+        </grains>
+        <volumeRange>80</volumeRange>
+        <pitchRange>0.9~1.1</pitchRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+  <SoundDef>
+    <defName>VV_FairyTeleport</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>SFX/VV_FairyTeleport</clipPath>
+          </li>
+        </grains>
+        <volumeRange>80</volumeRange>
+        <pitchRange>0.9~1.1</pitchRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+  <SoundDef>
+    <defName>VV_UndoFairyfication</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>  
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>SFX/VV_UndoFairyfication</clipPath>
+          </li>
+        </grains>
+        <volumeRange>80</volumeRange>
+        <pitchRange>0.9~1.1</pitchRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+  <SoundDef>
+    <defName>VV_Steamthrower</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>  
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>SFX/VV_Steamthrower</clipPath>
+          </li>
+        </grains>
+        <distRange>10~30</distRange>
+        <volumeRange>45</volumeRange>
+        <pitchRange>0.9~1.1</pitchRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+  <SoundDef>
+    <defName>VV_LavaShrudderShot</defName>
+    <context>MapOnly</context>
+    <maxVoices>8</maxVoices>  
+    <maxSimultaneous>4</maxSimultaneous>  
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>SFX/VV_LavaShrudderShot</clipPath>
+          </li>
+        </grains>
+        <distRange>30~60</distRange>
+        <volumeRange>50</volumeRange>
+        <pitchRange>0.9~1.1</pitchRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+  <SoundDef>
+    <defName>VV_FroststingShot</defName>
+    <context>MapOnly</context>
+    <maxVoices>8</maxVoices>  
+    <maxSimultaneous>4</maxSimultaneous>  
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>SFX/VV_FroststingShot</clipPath>
+          </li>
+        </grains>
+        <distRange>30~60</distRange>
+        <volumeRange>60</volumeRange>
+        <pitchRange>0.8~1.2</pitchRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+  <SoundDef>
+    <defName>VV_PeaShooter_Fire</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>SFX/VV_PeaShooterFire</clipPath>
+          </li>
+        </grains>
+        <pitchRange>0.91~1.05</pitchRange>
+        <volumeRange>30~40</volumeRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+  <SoundDef>
+    <defName>VV_PerfumeSpray</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>2</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>SFX/VV_PerfumeSpray</clipPath>
+          </li>
+        </grains>
+        <distRange>5~25</distRange>
+        <volumeRange>30~40</volumeRange>
+        <pitchRange>0.95~1.08</pitchRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+  <SoundDef>
+    <defName>VV_NeedleImpact</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>2</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Folder">
+            <clipFolderPath>SFX/VV_NeedleImpact</clipFolderPath>
+          </li>
+        </grains>
+        <distRange>5~40</distRange>
+        <volumeRange>13~17</volumeRange>
+        <pitchRange>0.95~1.05</pitchRange>
+        <repeatMode>NeverTwice</repeatMode>
+      </li>
+    </subSounds>
+  </SoundDef>
+</Defs>

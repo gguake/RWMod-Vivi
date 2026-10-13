@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <DesignationDef>
+    <defName>VV_FortifyHoneycombWall</defName>
+    <texturePath>Designations/SmoothSurface</texturePath>
+    <targetType>Thing</targetType>
+  </DesignationDef>
+
+  <DesignationCategoryDef>
+    <defName>VV_Bulidings</defName>
+    <label>vivi</label>
+    <order>650</order>
+    <specialDesignatorClasses>
+      <li>Designator_Cancel</li>
+      <li>Designator_Deconstruct</li>
+      <li>VVRace.Designator_FortifyHoneycombWall</li>
+    </specialDesignatorClasses>
+    <researchPrerequisites>
+      <li>VV_BasicInfra</li>
+    </researchPrerequisites>
+  </DesignationCategoryDef>
+</Defs>

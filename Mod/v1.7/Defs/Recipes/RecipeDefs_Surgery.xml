@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <RecipeDef ParentName="SurgeryFlesh">
+    <defName>VV_InjectPropolis</defName>
+    <label>inject propolis</label>
+    <description>Process propolis into antibiotics for administration. This antibiotic is effective against infections, flu, plague, and malaria, it won't completely cure the diseases but it can significantly delay their progression.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_Propolis</ThingDef>
+      <HediffDef>WoundInfection</HediffDef>
+      <HediffDef>Flu</HediffDef>
+      <HediffDef>Plague</HediffDef>
+      <HediffDef>Malaria</HediffDef>
+    </descriptionHyperlinks>
+    
+    <workerClass>VVRace.Recipe_InjectPropolis</workerClass>
+    <jobString>injecting propolis.</jobString>
+    <workAmount>600</workAmount>
+    <hideBodyPartNames>true</hideBodyPartNames>
+    <targetsBodyPart>false</targetsBodyPart>
+    <surgerySuccessChanceFactor>5</surgerySuccessChanceFactor>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_Propolis</li>
+          </thingDefs>
+        </filter>
+        <count>20</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>VV_Propolis</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+
+    <researchPrerequisites>
+      <li>VV_AdvancedGathering</li>
+    </researchPrerequisites>
+  </RecipeDef>
+
+  <RecipeDef ParentName="SurgeryFlesh">
+    <defName>VV_ApplyArchiteGermlineImprint</defName>
+    <label>apply archite germline imprint</label>
+    <description>Consume an archite capsule to temporarily imprint archites into a Royal Vivi's germ cells. While the imprint remains, the egg-laying cycle is greatly shortened and each egg laid is granted random archite genes. The imprint may dissipate each time an egg is laid.</description>
+    <descriptionHyperlinks>
+      <ThingDef>ArchiteCapsule</ThingDef>
+      <HediffDef>VV_ArchiteGermlineImprint</HediffDef>
+    </descriptionHyperlinks>
+
+    <workerClass>VVRace.Recipe_ApplyArchiteGermlineImprint</workerClass>
+    <jobString>applying archite germline imprint.</jobString>
+    <workAmount>1500</workAmount>
+    <hideBodyPartNames>true</hideBodyPartNames>
+    <targetsBodyPart>false</targetsBodyPart>
+    <allowedForQuestLodgers>false</allowedForQuestLodgers>
+    <surgerySuccessChanceFactor>1</surgerySuccessChanceFactor>
+    <uiIconThing>ArchiteCapsule</uiIconThing>
+
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ArchiteCapsule</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+      <li>
+        <filter>
+          <categories>
+            <li>Medicine</li>
+          </categories>
+        </filter>
+        <count>2</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>ArchiteCapsule</li>
+      </thingDefs>
+      <categories>
+        <li>Medicine</li>
+      </categories>
+    </fixedIngredientFilter>
+
+    <recipeUsers>
+      <li>VV_Vivi</li>
+    </recipeUsers>
+    <researchPrerequisites>
+      <li>Archogenetics</li>
+    </researchPrerequisites>
+  </RecipeDef>
+</Defs>

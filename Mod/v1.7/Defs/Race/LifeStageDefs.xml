@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  
+	<LifeStageDef ParentName="LifeStageHumanlikeChild">
+		<defName>HumanlikeChild_Vivi</defName>
+    <label>child</label>
+    <workerClass>LifeStageWorker_HumanlikeChild</workerClass>
+    <bodySizeFactor>0.35</bodySizeFactor>
+    <bodyWidth>0.975</bodyWidth>
+    <voxPitch>1.2</voxPitch>
+    <headSizeFactor>0.65</headSizeFactor>
+    <eyeSizeFactor>0.85</eyeSizeFactor>
+    <healthScaleFactor>0.5</healthScaleFactor>
+    <foodMaxFactor>2.286</foodMaxFactor> <!-- bodySizeFactor * foodMaxFactor = maxFood = 0.8 -->
+    <hungerRateFactor>0.8</hungerRateFactor>
+    <marketValueFactor>0.9</marketValueFactor>
+    <meleeDamageFactor>0.5</meleeDamageFactor>
+    <developmentalStage>Child</developmentalStage>
+    <equipmentDrawDistanceFactor>0.55</equipmentDrawDistanceFactor>
+    <sittingOffset>0.3</sittingOffset>
+    <statFactors>
+      <MoveSpeed>0.85</MoveSpeed>
+    </statFactors>
+	</LifeStageDef>
+	
+	<LifeStageDef ParentName="LifeStageHumanlikeChild">
+		<defName>HumanlikePreTeenager_Vivi</defName>
+		<label>preteen</label>
+    <bodySizeFactor>0.58</bodySizeFactor>
+    <healthScaleFactor>0.85</healthScaleFactor>
+    <foodMaxFactor>1.552</foodMaxFactor> <!-- bodySizeFactor * foodMaxFactor = maxFood = 0.9 -->
+    <hungerRateFactor>0.9</hungerRateFactor>
+    <marketValueFactor>0.95</marketValueFactor>
+    <meleeDamageFactor>0.85</meleeDamageFactor>
+    <statFactors>
+      <MoveSpeed>0.95</MoveSpeed>
+    </statFactors>
+	</LifeStageDef>
+	
+	<LifeStageDef ParentName="HumanlikeAdolescent">
+		<defName>HumanlikeTeenager_Vivi</defName>
+		<label>teenager</label>
+    <workerClass>LifeStageWorker_HumanlikeAdult</workerClass>
+    <adjective>teenage</adjective>
+    <reproductive>true</reproductive>
+    <bodySizeFactor>0.9</bodySizeFactor>
+    <foodMaxFactor>1.25</foodMaxFactor> <!-- bodySizeFactor * foodMaxFactor = maxFood = 1.0 -->
+    <equipmentDrawDistanceFactor>0.65</equipmentDrawDistanceFactor>
+    <sittingOffset>0.23</sittingOffset>
+    <silhouetteGraphicData>
+      <texPath>Things/Pawn/Humanlike/Silhouettes/Silhouette_HumanChild</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1</drawSize>
+    </silhouetteGraphicData>
+	</LifeStageDef>
+	
+	<LifeStageDef>
+		<defName>HumanlikeAdult_Vivi</defName>
+		<label>adult</label>
+		<workerClass>LifeStageWorker_HumanlikeAdult</workerClass>
+		<visible>false</visible>
+		<sittingOffset>0.18</sittingOffset>
+    <silhouetteGraphicData>
+      <texPath>Things/Pawn/Humanlike/Silhouettes/Silhouette_HumanAdult</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1</drawSize>
+    </silhouetteGraphicData>
+	</LifeStageDef>
+  
+  <LifeStageDef>
+    <defName>VV_TitanicHornetAdult</defName>
+    <label>adult</label>
+    <visible>false</visible>
+    <milkable>true</milkable>
+  </LifeStageDef>
+
+</Defs>

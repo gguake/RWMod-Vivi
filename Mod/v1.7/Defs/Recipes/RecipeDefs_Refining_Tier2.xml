@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 말벌 날개 정제 -->
+  <RecipeDef>
+    <defName>VV_RefineTitanicHornetWing</defName>
+    <label>refine titanic hornet wing</label>
+    <description>Refine lifestrand from titanic hornet wing.</description>
+
+    <jobString>refining hornet wing.</jobString>
+    <workAmount>800</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <workSkill>Crafting</workSkill>
+    <workSkillLearnFactor>0.03</workSkillLearnFactor>
+
+    <effectWorking>Smelt</effectWorking>
+    <soundWorking>Recipe_Brewing</soundWorking>
+    <uiIconThing>VV_Lifestrand</uiIconThing>
+
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_TitanicHornetWing</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>VV_TitanicHornetWing</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <VV_Lifestrand>15</VV_Lifestrand>
+    </products>
+    <researchPrerequisite>VV_Lifestrand</researchPrerequisite>
+  </RecipeDef>
+
+  <!-- 생체 가닥 직조 -->
+  <RecipeDef>
+    <defName>VV_MakeLifestrand</defName>
+    <label>weave lifestrand</label>
+    <description>Process devilstrand with mana-infused materials to weave lifestrand.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_LivingLeaf</ThingDef>
+    </descriptionHyperlinks>
+
+    <jobString>weaving lifestrand.</jobString>
+    <workAmount>2800</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <workSkill>Crafting</workSkill>
+
+    <effectWorking>Tailor</effectWorking>
+    <soundWorking>Recipe_Tailor</soundWorking>
+    <uiIconThing>VV_Lifestrand</uiIconThing>
+
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>DevilstrandCloth</li>
+          </thingDefs>
+        </filter>
+        <count>40</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_LivingLeaf</li>
+          </thingDefs>
+        </filter>
+        <count>30</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_HeatingPetal</li>
+          </thingDefs>
+        </filter>
+        <count>5</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>VV_CoolingPetal</li>
+          </thingDefs>
+        </filter>
+        <count>5</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>VV_HeatingPetal</li>
+        <li>VV_CoolingPetal</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <VV_Lifestrand>40</VV_Lifestrand>
+    </products>
+    <researchPrerequisite>VV_Lifestrand</researchPrerequisite>
+
+    <skillRequirements>
+      <Crafting>8</Crafting>
+    </skillRequirements>
+  </RecipeDef>
+</Defs>

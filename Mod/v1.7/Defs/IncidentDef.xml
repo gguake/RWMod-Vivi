@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <IncidentDef>
+    <defName>VV_TitanicHornetSwarm</defName>
+    <label>hornet swarm</label>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <workerClass>VVRace.IncidentWorker_HornetSwarm</workerClass>
+    <baseChance>0.6</baseChance>
+    <minRefireDays>15</minRefireDays>
+    <earliestDay>30</earliestDay>
+    <category>ThreatBig</category>
+    <pointsScaleable>true</pointsScaleable>
+    <tale>ManhunterPack</tale>
+    <letterHyperlinkHediffDefs>
+      <li>Scaria</li>
+    </letterHyperlinkHediffDefs>
+  </IncidentDef>
+  
+  <IncidentDef>
+    <defName>VV_TitanicHornetAssault</defName>
+    <label>hornet assault</label>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <workerClass>VVRace.IncidentWorker_HornetAssault</workerClass>
+    <baseChance>0</baseChance>
+    <category>ThreatBig</category>
+    <pointsScaleable>true</pointsScaleable>
+    <tale>ManhunterPack</tale>
+    <letterHyperlinkHediffDefs>
+      <li>Scaria</li>
+    </letterHyperlinkHediffDefs>
+  </IncidentDef>
+</Defs>

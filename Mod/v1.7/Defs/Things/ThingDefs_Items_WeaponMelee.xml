@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 비비 창 -->
+  <ThingDef ParentName="BaseMeleeWeapon_Sharp_Quality">
+    <defName>VV_ViviSpear</defName>
+    <label>vivi spear</label>
+    <description>a spear commonly used by vivis. Too small for ordinary humans, so only vivis can wield it.
+\nThe tip of the spear is coated with poison, which can intoxicate those it strikes. It possesses powerful impact, but it is difficult to handle.</description>
+    <graphicData>
+      <texPath>Things/Item/Equipment/VV_Spear</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+    <equippedAngleOffset>-5</equippedAngleOffset>
+
+    <techLevel>Medieval</techLevel>
+    <statBases>
+      <WorkToMake>13000</WorkToMake>
+      <Mass>1.5</Mass>
+    </statBases>
+    <equippedStatOffsets>
+      <MeleeHitChance>-5</MeleeHitChance>
+    </equippedStatOffsets>
+
+    <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
+    <thingCategories Inherit="False">
+      <li>VV_ViviWeapon</li>
+    </thingCategories>
+    <weaponClasses>
+      <li>MeleePiercer</li>
+    </weaponClasses>
+    <weaponTags Inherit="False">
+      <li>VV_ViviWeapon</li>
+      <li>VV_ViviWeaponCaravan</li>
+    </weaponTags>
+
+    <tools>
+      <li>
+        <label>shaft</label>
+        <capacities>
+          <li>Blunt</li>
+          <li>Poke</li>
+        </capacities>
+        <power>11</power>
+        <cooldownTime>1.2</cooldownTime>
+        <chanceFactor>0.2</chanceFactor>
+      </li>
+      <li>
+        <label>point</label>
+        <capacities>
+          <li>VV_ToxicStab</li>
+        </capacities>
+        <power>30</power>
+        <armorPenetration>0.5</armorPenetration>
+        <cooldownTime>3.5</cooldownTime>
+      </li>
+    </tools>
+    
+    <costList>
+      <VV_Viviwax>20</VV_Viviwax>
+    </costList>
+    <costStuffCount>60</costStuffCount>
+    <stuffCategories>
+      <li>Metallic</li>
+      <li>Woody</li>
+    </stuffCategories>
+    <recipeMaker>
+      <researchPrerequisites>
+        <li>VV_Weaponry</li>
+      </researchPrerequisites>
+      <skillRequirements>
+        <Crafting>4</Crafting>
+      </skillRequirements>
+      <displayPriority>-510</displayPriority>
+    </recipeMaker>
+    
+    <tradeTags>
+      <li>VV_ViviTool</li>
+    </tradeTags>
+    
+    <modExtensions>
+      <li Class="RPEF.ConstraintModExtension">
+        <def>VV_RaceConstraint</def>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+</Defs>

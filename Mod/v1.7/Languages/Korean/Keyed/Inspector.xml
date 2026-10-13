@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+<VV_Inspector_ProperTemperature>적정 온도: {0} ~ {1}</VV_Inspector_ProperTemperature>
+<VV_Inspector_HatcheryDisabled>부적합한 부화기</VV_Inspector_HatcheryDisabled>
+<VV_Inspector_HatcheryDisabledReasonNoRoof>지붕 없음</VV_Inspector_HatcheryDisabledReasonNoRoof>
+<VV_Inspector_HatcheryDisabledReasonOutdoor>실외</VV_Inspector_HatcheryDisabledReasonOutdoor>
+
+<VV_Inspector_Cooldown_PlantGatherCooldown>다음 채집까지 남은 시간: {0}</VV_Inspector_Cooldown_PlantGatherCooldown>
+
+<VV_Inspector_ViviWallReplaceCooldown>굳기까지 남은 시간: {0}</VV_Inspector_ViviWallReplaceCooldown>
+
+<VV_Inspector_PlantManaFlux>마나 흐름: {0}, {1}/일</VV_Inspector_PlantManaFlux>
+<VV_Inspector_PlantStoredMana>저장된 마나: {0}/{1}</VV_Inspector_PlantStoredMana>
+<VV_Inspector_PlantActive>활성</VV_Inspector_PlantActive>
+<VV_Inspector_PlantInactive>비활성</VV_Inspector_PlantInactive>
+<VV_Inspector_PlantEmitMana>환경 마나 방출중</VV_Inspector_PlantEmitMana>
+<VV_Inspector_PlantAbsorbMana>환경 마나 흡수중</VV_Inspector_PlantAbsorbMana>
+
+<VV_Inspector_ShootusWeaponReserved>예약됨: {0}</VV_Inspector_ShootusWeaponReserved>
+<VV_Inspector_ShootusWeaponEquipped>장착됨: {0}</VV_Inspector_ShootusWeaponEquipped>
+
+<VV_Inspector_ViviBroadShieldHitPoint>보호막 내구도: {0}/{1}</VV_Inspector_ViviBroadShieldHitPoint>
+<VV_Inspector_ViviBroadShieldDuration>남은 보호막 지속시간: {0}</VV_Inspector_ViviBroadShieldDuration>
+
+<VV_Inspector_GrowingArcanePlantReady>{0} 재배 준비중</VV_Inspector_GrowingArcanePlantReady>
+<VV_Inspector_GrowingArcanePlantProgress>{1} 재배 진행도: {0}</VV_Inspector_GrowingArcanePlantProgress>
+
+<VV_Inspector_EverflowerAttunementState>조율: {LEVEL}단계 ({EXP})</VV_Inspector_EverflowerAttunementState>
+
+<VV_Inspector_ShockNetTrapCooldown>재충전까지 남은 시간: {0}</VV_Inspector_ShockNetTrapCooldown>
+
+<VV_Inspector_SeedlingOutOfFertilzier>양분 부족</VV_Inspector_SeedlingOutOfFertilzier>
+<VV_Inspector_SeedlingOutOfMana>마나 부족</VV_Inspector_SeedlingOutOfMana>
+</LanguageData>

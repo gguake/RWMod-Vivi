@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <DutyDef>
+    <defName>VV_DefendViviBase</defName>
+    <alwaysShowWeapon>false</alwaysShowWeapon>
+    <thinkNode Class="ThinkNode_Priority">
+      <subNodes>
+        <li Class="JobGiver_TakeCombatEnhancingDrug">
+          <onlyIfInDanger>true</onlyIfInDanger>
+        </li>
+        <li Class="JobGiver_AIDefendPoint">
+          <targetAcquireRadius>28</targetAcquireRadius>
+          <targetKeepRadius>35</targetKeepRadius>
+        </li>
+
+        <li Class="ThinkNode_ForbidOutsideFlagRadius">
+          <maxDistToSquadFlag>20</maxDistToSquadFlag>
+          <subNodes>
+            <li Class="ThinkNode_Subtree">
+              <treeDef>SatisfyBasicNeeds</treeDef>
+            </li>
+          </subNodes>
+        </li>
+
+        <li Class="JobGiver_SeekSafeTemperature" />
+
+        <li Class="ThinkNode_ConditionalCloseToDutyTarget">
+          <maxDistToDutyTarget>28</maxDistToDutyTarget>
+          <subNodes>
+            <li Class="JobGiver_FightFiresNearPoint">
+              <maxDistFromPoint>28</maxDistFromPoint>
+            </li>
+    
+            <li Class="VVRace.JobGiver_FixDamagedNearPoint">
+              <maxDistFromPoint>28</maxDistFromPoint>
+            </li>
+            
+            <li Class="JobGiver_WanderAnywhere">
+              <wanderRadius>28</wanderRadius>
+            </li>
+          </subNodes>
+        </li>
+
+        <li Class="JobGiver_WanderNearDutyLocation">
+          <locomotionUrgencyOutsideRadius>Sprint</locomotionUrgencyOutsideRadius>
+        </li>
+      </subNodes>
+    </thinkNode>
+  </DutyDef>
+  
+  <DutyDef>
+    <defName>VV_TitanicHornetAssault</defName>
+    <thinkNode Class="ThinkNode_Priority">
+      <subNodes>
+        <li Class="ThinkNode_HarmedRecently">
+          <thresholdTicks>600</thresholdTicks>
+          <subNodes>
+            <li Class="JobGiver_AIFightEnemies"> <!-- respond if attacked -->
+              <targetAcquireRadius>65</targetAcquireRadius>
+              <targetKeepRadius>72</targetKeepRadius>
+              <needLOSToAcquireNonPawnTargets>true</needLOSToAcquireNonPawnTargets>
+            </li>
+          </subNodes>
+        </li>
+        <li Class="JobGiver_AIFightEnemies">
+          <targetAcquireRadius>12</targetAcquireRadius>
+          <targetKeepRadius>15</targetKeepRadius>
+        </li>
+        <li Class="JobGiver_AIBreaching" />
+        <li Class="JobGiver_AIFightEnemies">
+          <targetAcquireRadius>65</targetAcquireRadius>
+          <targetKeepRadius>72</targetKeepRadius>
+        </li>
+        <li Class="JobGiver_AITrashColonyClose" />
+        <li Class="JobGiver_AITrashBuildingsDistant" />
+        <li Class="JobGiver_AIGotoNearestHostile">
+          <overrideExpiryInterval>60</overrideExpiryInterval>
+        </li>
+        <li Class="JobGiver_AITrashBuildingsDistant">
+          <attackAllInert>true</attackAllInert>
+        </li>
+      </subNodes>
+    </thinkNode>
+  </DutyDef>
+  
+  <DutyDef>
+    <defName>VV_DeliverPawnToEverflower</defName>
+    <hook>HighPriority</hook>
+    <socialModeMax>Off</socialModeMax>
+    <thinkNode Class="ThinkNode_Priority">
+      <subNodes>
+        <!-- Goto pawn -->
+        <li Class="VVRace.JobGiver_DeliverPawnToEverflower">
+          <exactCell>true</exactCell>
+          <locomotionUrgency>Jog</locomotionUrgency>
+        </li>
+      </subNodes>
+    </thinkNode>
+  </DutyDef>
+
+  <DutyDef>
+    <defName>VV_TeleportEverflower</defName>
+    <hook>HighPriority</hook>
+    <socialModeMax>Off</socialModeMax>
+    <thinkNode Class="ThinkNode_Priority">
+      <subNodes>
+        <!-- Goto pawn -->
+        <li Class="VVRace.JobGiver_DeliverPawnToEverflower">
+          <exactCell>true</exactCell>
+          <locomotionUrgency>Jog</locomotionUrgency>
+        </li>
+      </subNodes>
+    </thinkNode>
+  </DutyDef>
+
+</Defs>

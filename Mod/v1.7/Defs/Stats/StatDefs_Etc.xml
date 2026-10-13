@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 성장 등급 획득 속도 -->
+  <StatDef>
+    <defName>VV_GrowthPointsFactor</defName>
+    <label>growth points multiplier</label>
+    <description>It shows how many growth points a child acquires.</description>
+    <category>BasicsPawn</category>
+    <toStringStyle>PercentZero</toStringStyle>
+    <showOnAnimals>false</showOnAnimals>
+    <defaultBaseValue>1</defaultBaseValue>
+    <hideAtValue>1</hideAtValue>
+    <minValue>0</minValue>
+    <displayPriorityInCategory>3501</displayPriorityInCategory>
+  </StatDef>
+
+  <StatDef>
+    <defName>VV_MeleeWeapon_ManaCost</defName>
+    <label>melee mana cost</label>
+    <description>The amount of mana consumed each time the weapon used in melee combat. Even if mana is insufficient, it can still be used but it won't perform at its full potential.</description>
+    <category>Weapon_Melee</category>
+    <defaultBaseValue>0</defaultBaseValue>
+    <minValue>0</minValue>
+    <toStringStyle>Integer</toStringStyle>
+    <showIfUndefined>false</showIfUndefined>
+    <hideAtValue>0</hideAtValue>
+    <displayPriorityInCategory>4503</displayPriorityInCategory>
+  </StatDef>
+  
+  <StatDef>
+    <defName>VV_RangedWeapon_ManaCost</defName>
+    <label>ranged mana cost</label>
+    <description>The amount of mana consumed when firing. When mana is insufficient, aiming time and post-fire cooldown increase significantly.</description>
+    <category>Weapon_Ranged</category>
+    <defaultBaseValue>0</defaultBaseValue>
+    <minValue>0</minValue>
+    <toStringStyle>Integer</toStringStyle>
+    <showIfUndefined>false</showIfUndefined>
+    <hideAtValue>0</hideAtValue>
+    <displayPriorityInCategory>5120</displayPriorityInCategory>
+  </StatDef>
+  
+  <StatDef>
+    <defName>VV_BulletPelletCount</defName>
+    <label>pellet count</label>
+    <description>The amount of bullet pellets each time the weapon is fired.</description>
+    <category>Weapon_Ranged</category>
+    <displayPriorityInCategory>5500</displayPriorityInCategory>
+    <defaultBaseValue>1</defaultBaseValue>
+    <minValue>0</minValue>
+    <alwaysHide>true</alwaysHide>
+    <toStringStyle>Integer</toStringStyle>
+    <showOnAnimals>false</showOnAnimals>
+    <showOnEntities>false</showOnEntities>
+    <showOnDrones>false</showOnDrones>
+    <showDevelopmentalStageFilter>Child, Adult</showDevelopmentalStageFilter>
+  </StatDef>
+</Defs>

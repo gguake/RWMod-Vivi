@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <BodyPartDef>
+    <defName>VV_HornetWing</defName>
+    <label>wing</label>
+    <hitPoints>15</hitPoints>
+    <frostbiteVulnerability>1</frostbiteVulnerability>
+    <skinCovered>false</skinCovered>
+    <tags>
+      <li>MovingLimbSegment</li>
+    </tags>
+  </BodyPartDef>
+
+  <BodyPartDef>
+    <defName>VV_HornetClaw</defName>
+    <label>claw</label>
+    <hitPoints>24</hitPoints>
+    <frostbiteVulnerability>0</frostbiteVulnerability>
+    <permanentInjuryChanceFactor>0</permanentInjuryChanceFactor>
+    <skinCovered>false</skinCovered>
+    <solid>true</solid>
+    <alive>false</alive>
+    <bleedRate>0</bleedRate>
+    <tags>
+      <li>MovingLimbDigit</li>
+      <li>ManipulationLimbDigit</li>
+    </tags>
+  </BodyPartDef>
+  
+  <BodyPartGroupDef>
+    <defName>VV_HornetWing</defName>
+    <label>hornet wing</label>
+    <labelShort>wing</labelShort>
+  </BodyPartGroupDef>
+
+  <BodyPartGroupDef>
+    <defName>VV_LeftClaw</defName>
+    <label>left claw</label>
+    <labelShort>claw</labelShort>
+  </BodyPartGroupDef>
+
+  <BodyPartGroupDef>
+    <defName>VV_RightClaw</defName>
+    <label>right claw</label>
+    <labelShort>claw</labelShort>
+  </BodyPartGroupDef>
+  
+  <BodyDef>
+    <defName>VV_TitanicHornet</defName>
+    <label>titanic hornet</label>
+    <corePart>
+      <def>Shell</def>
+      <height>Middle</height>
+      <depth>Outside</depth>
+      <parts>
+        <li>
+          <def>InsectLeg</def>
+          <customLabel>left leg</customLabel>
+          <coverage>0.24</coverage>
+          <height>Middle</height>
+          <parts>
+            <li>
+              <def>VV_HornetClaw</def>
+              <customLabel>left claw</customLabel>
+              <coverage>0.9</coverage>
+              <groups>
+                <li>VV_LeftClaw</li>
+              </groups>
+            </li>
+          </parts>
+        </li>
+        <li>
+          <def>InsectLeg</def>
+          <customLabel>right leg</customLabel>
+          <coverage>0.24</coverage>
+          <height>Middle</height>
+          <parts>
+            <li>
+              <def>VV_HornetClaw</def>
+              <customLabel>right claw</customLabel>
+              <coverage>0.9</coverage>
+              <groups>
+                <li>VV_RightClaw</li>
+              </groups>
+            </li>
+          </parts>
+        </li>
+        <li>
+          <def>VV_HornetWing</def>
+          <customLabel>left wing</customLabel>
+          <coverage>0.15</coverage>
+          <groups>
+            <li>VV_HornetWing</li>
+          </groups>
+        </li>
+        <li>
+          <def>VV_HornetWing</def>
+          <customLabel>right wing</customLabel>
+          <coverage>0.15</coverage>
+          <groups>
+            <li>VV_HornetWing</li>
+          </groups>
+        </li>
+        <li>
+          <def>Stomach</def>
+          <coverage>0.05</coverage>
+          <depth>Inside</depth>
+        </li>
+        <li>
+          <def>InsectHeart</def>
+          <coverage>0.03</coverage>
+          <depth>Inside</depth>
+        </li>
+        <li>
+          <def>Pronotum</def>
+          <coverage>0.12</coverage>
+          <height>Top</height>
+          <parts>
+            <li>
+              <def>InsectHead</def>
+              <coverage>0.65</coverage>
+              <groups>
+                <li>HeadAttackTool</li>
+              </groups>
+              <parts>
+                <li>
+                  <def>Brain</def>
+                  <coverage>0.2</coverage>
+                  <depth>Inside</depth>
+                </li>
+                <li>
+                  <def>Eye</def>
+                  <customLabel>left eye</customLabel>
+                  <coverage>0.12</coverage>
+                </li>
+                <li>
+                  <def>Eye</def>
+                  <customLabel>right eye</customLabel>
+                  <coverage>0.12</coverage>
+                </li>
+                <li>
+                  <def>Antenna</def>
+                  <customLabel>left antenna</customLabel>
+                  <coverage>0.08</coverage>
+                </li>
+                <li>
+                  <def>Antenna</def>
+                  <customLabel>right antenna</customLabel>
+                  <coverage>0.08</coverage>
+                </li>
+                <li>
+                  <def>InsectNostril</def>
+                  <coverage>0.06</coverage>
+                </li>
+                <li>
+                  <def>InsectMouth</def>
+                  <coverage>0.08</coverage>
+                  <groups>
+                    <li>Mouth</li>
+                  </groups>
+                </li>
+              </parts>
+            </li>
+          </parts>
+        </li>
+      </parts>
+    </corePart>
+  </BodyDef>
+</Defs>

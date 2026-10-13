@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <JobDef>
+    <defName>VV_MoveEverflower</defName>
+    <driverClass>VVRace.JobDriver_TeleportEverflower</driverClass>
+    <reportString>attuning TargetA to move position.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef>
+
+  <JobDef>
+    <defName>VV_DeliverToEverflower</defName>
+    <driverClass>VVRace.JobDriver_DeliverPawnToEverflower</driverClass>
+    <reportString>delivering TargetA to everflower.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
+</Defs>

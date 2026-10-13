@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+<VV_ViviHatchery.label>비비 부화기</VV_ViviHatchery.label>
+<VV_ViviHatchery.description>비비 알을 부화시키는 전용 부화기입니다. 아기와 어린이 비비들의 침대로도 사용할 수 있습니다.
+\n적절한 환경의 비어있는 부화기가 있다면 로열 비비들은 그곳에 가서 알을 낳습니다. 부화기가 지붕이 있는 실내에 있고 적절한 온도가 유지된다면 부화 속도에 보너스를 받습니다.</VV_ViviHatchery.description>
+
+<VV_GatheringSpot.label>간이 채집 장소</VV_GatheringSpot.label>
+<VV_GatheringSpot.description>주변의 식물에서 각종 채집 작업을 하기 위한 장소입니다.
+\n적당한 장비가 없기 때문에 원래 채집량의 절반만 얻을 수 있으며 채집 장소 근처에서만 채집이 가능합니다.</VV_GatheringSpot.description>
+
+<VV_GatheringBarrel.label>채집 작업대</VV_GatheringBarrel.label>
+<VV_GatheringBarrel.description>주변의 식물에서 각종 채집 작업을 하기 위한 작업대입니다.
+\n채집 작업은 작업대 근처에서만 할 수 있습니다.</VV_GatheringBarrel.description>
+
+<VV_RefiningWorkbench.label>비비 가공 작업대</VV_RefiningWorkbench.label>
+<VV_RefiningWorkbench.description>비비들에게 필요한 여러 자원을 수가공하는 작업대입니다.</VV_RefiningWorkbench.description>
+
+<VV_AutoExtractor.label>비비 꿀 자동 정제기</VV_AutoExtractor.label>
+<VV_AutoExtractor.description>전기와 원심력을 이용해 정제되지 않은 비비 꿀을 대량으로 정제하는 기계입니다. 꿀을 투입해 가동하면 주기적으로 정제된 비비 꿀을 배출하며 사람이 작업하는것보다 높은 효율로 꿀을 정제할 수 있습니다.</VV_AutoExtractor.description>
+<VV_AutoExtractor.comps.CompRefuelable.fuelLabel>정제되지 않은 비비 꿀</VV_AutoExtractor.comps.CompRefuelable.fuelLabel>
+<VV_AutoExtractor.comps.CompRefuelable.fuelGizmoLabel>비비 꿀</VV_AutoExtractor.comps.CompRefuelable.fuelGizmoLabel>
+
+</LanguageData>

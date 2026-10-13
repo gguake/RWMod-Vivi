@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+    
+<VV_Alert_ViviDangerousEggs>비비 알 손상중</VV_Alert_ViviDangerousEggs>
+<VV_Alert_ViviDangerousEggsDesc>방치되어 있거나 부화기 안에 있는 알이 적절하지 않은 온도에 의해 손상되고 있습니다.
+\n알이 완전히 손상되면 파괴되므로 알이 보관된 곳의 온도를 {MINTEMP}도 ~ {MAXTEMP}도 사이로 유지하도록 하세요.</VV_Alert_ViviDangerousEggsDesc>
+
+</LanguageData>

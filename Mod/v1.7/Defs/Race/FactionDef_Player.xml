@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <FactionDef Abstract="True" ParentName="PlayerFactionBase" Name="PlayerViviFactionBase">
+    <factionIconPath>UI/Icons/ViviFaction</factionIconPath>
+    <factionNameMaker>VV_NamerFactionVivi</factionNameMaker>
+    <settlementNameMaker>VV_NamerSettlementVivi</settlementNameMaker>
+    <pawnSingular>vivi</pawnSingular>
+    <pawnsPlural>vivis</pawnsPlural>
+    <techLevel>Medieval</techLevel>
+
+    <isPlayer>true</isPlayer>
+
+    <startingResearchTags>
+      <li>VV_ViviStart</li>
+    </startingResearchTags>
+    <startingTechprintsResearchTags>
+      <li>TribalStart</li>
+      <li>TribalStartTechprints</li>
+    </startingTechprintsResearchTags>
+
+    <allowedCultures Inherit="False">
+      <li>VV_ViviCulture</li>
+    </allowedCultures>
+    
+    <disallowedMemes>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Supremacist</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Raider</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">MaleSupremacy</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Cannibal</li>
+    </disallowedMemes>
+
+    <disallowedPrecepts>
+      <li>Cannibalism_Classic</li>
+      <li>Slavery_Classic</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">ApparelDesired_Strong_Subordinate</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">ApparelDesired_Soft_Subordinate</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Cannibalism_Preferred</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Cannibalism_RequiredStrong</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Cannibalism_RequiredRavenous</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">MeatEating_NonMeat_Disapproved</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">MeatEating_NonMeat_Horrible</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">MeatEating_NonMeat_Abhorrent</li>
+    </disallowedPrecepts>
+
+    <backstoryFilters Inherit="False">
+      <li>
+        <categories>
+          <li>Tribal</li>
+        </categories>
+      </li>
+    </backstoryFilters>
+    
+    <apparelStuffFilter>
+      <thingDefs>
+        <li>Cloth</li>
+      </thingDefs>
+    </apparelStuffFilter>
+
+    <xenotypeSet Inherit="False">
+      <xenotypeChances>
+        <VV_Vivi>999</VV_Vivi>
+      </xenotypeChances>
+    </xenotypeSet>
+
+    <melaninRange>0~0</melaninRange>
+  </FactionDef>
+
+  <FactionDef ParentName="PlayerViviFactionBase">
+    <defName>VV_PlayerVivi</defName>
+    <label>vivi</label>
+    <description>.</description>
+    <basicMemberKind>VV_PlayerVivi</basicMemberKind>
+    
+    <leaderTitle>representative</leaderTitle>
+  </FactionDef>
+  
+  <FactionDef ParentName="PlayerViviFactionBase">
+    <defName>VV_PlayerExiledVivi</defName>
+    <label>exiled vivi</label>
+    <description>.</description>
+    <basicMemberKind>VV_PlayerVivi</basicMemberKind>
+    
+    <startingResearchTags>
+      <li>VV_ExiledVivi</li>
+    </startingResearchTags>
+    
+    <leaderTitle>representative</leaderTitle>
+
+    <modExtensions>
+      <li Class="RPEF.FactionContinuePawnKindHook">
+        <continueMemberKindOverride>VV_PlayerRefugeeVivi</continueMemberKindOverride>
+      </li>
+    </modExtensions>
+  </FactionDef>
+
+  <FactionDef ParentName="PlayerViviFactionBase">
+    <defName>VV_PlayerViviRefugee</defName>
+    <label>vivi refugee</label>
+    <description>.</description>
+    <basicMemberKind>VV_PlayerRefugeeVivi</basicMemberKind>
+    
+    <startingResearchTags>
+      <li>VV_ViviRefugee</li>
+    </startingResearchTags>
+    
+    <leaderTitle>representative</leaderTitle>
+  </FactionDef>
+  
+</Defs>

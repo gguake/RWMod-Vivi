@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+<VV_Command_CancelReserveWeapon>Cancel Weapon Equip</VV_Command_CancelReserveWeapon>
+<VV_Command_CancelReserveWeaponDesc>Cancels the currently reserved weapon equip.</VV_Command_CancelReserveWeaponDesc>
+<VV_Command_EquipWeapon>Equip Weapon</VV_Command_EquipWeapon>
+<VV_Command_EquipWeaponDesc>Equips the selected weapon to the gunholder. Melee weapons or biocoded weapons cannot be equipped.</VV_Command_EquipWeaponDesc>
+<VV_Command_UnequipWeapon>Unequip Weapon</VV_Command_UnequipWeapon>
+
+<VV_Command_ToggleLayEgg>Activate spawn egg</VV_Command_ToggleLayEgg>
+<VV_Command_ToggleLayEggDesc>Sets whether or not this royal vivi spawns eggs.</VV_Command_ToggleLayEggDesc>
+
+<VV_Designator_FortifyHoneycombWall>fortify honeycomb wall</VV_Designator_FortifyHoneycombWall>
+<VV_Designator_FortifyHoneycombWallDesc>Fortify the honeycomb walls with lifestrands. The fortified walls are non-flammable but slightly less resistant to impacts.
+\nRequires one lifestrand for each wall.</VV_Designator_FortifyHoneycombWallDesc>
+
+<VV_Command_CancelReservationEverflower>Cancel teleport</VV_Command_CancelReservationEverflower>
+<VV_Command_CancelReservationEverflowerDesc>Cancel reserved teleport.</VV_Command_CancelReservationEverflowerDesc>
+
+<VV_Command_ReserveTeleportEverflower>Reserve teleport</VV_Command_ReserveTeleportEverflower>   
+<VV_Command_ReserveTeleportEverflowerDesc>Reserve teleporting the everflower to a specified location. Requires a resonating royal vivi.</VV_Command_ReserveTeleportEverflowerDesc>
+
+<VV_Command_CanGatherPollens>Allow gather pollens</VV_Command_CanGatherPollens>
+<VV_Command_CanGatherPollensDesc>When cleaning pollen within the gather range, gather it without throwing it away. Pollen yield is proportional to cleaning speed.</VV_Command_CanGatherPollensDesc>
+
+<VV_Command_EjectFilteredHoney>Eject filtered honey</VV_Command_EjectFilteredHoney>
+<VV_Command_EjectFilteredHoneyDesc>Ejects the currently filtered honey.</VV_Command_EjectFilteredHoneyDesc>
+</LanguageData>

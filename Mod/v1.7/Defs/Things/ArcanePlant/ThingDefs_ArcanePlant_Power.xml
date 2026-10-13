@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 섬광꽃 -->
+  <ThingDef ParentName="VV_ArcanePlantProductive">
+    <defName>VV_Shockerbud</defName>
+    <label>flashbud</label>
+    <description>a arcane flower that discharges electricity within its transparent petals. It can be wired to store a large amount of power, but consumes mana in proportion.
+\nIf it receives external shocks, the internal voltage becomes unstable, generating massive electromagnetic pulses in the vicinity and discharging mana.
+\nIf placed adjacent to a peashooter, it has a 50% chance to fire an electric pea instead when the peashooter attacks. Electric peas briefly stun targets instead of physical damage.\nIf multiple flashbud or thunderpetals are adjacent, the effect stacks.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_SparklingPetal</ThingDef>
+    </descriptionHyperlinks>
+    <thingClass>VVRace.ArcanePlant_Shockerbud</thingClass>
+
+    <graphicData>
+      <texPath>Things/Plants/VV_Shockerbud</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+
+    <statBases>
+      <MaxHitPoints>50</MaxHitPoints>
+      <WorkToBuild>47500</WorkToBuild>
+      <Beauty>10</Beauty>
+      <BeautyOutdoors>10</BeautyOutdoors>
+
+      <VV_PlantGatherCooldown>2.4</VV_PlantGatherCooldown>
+      <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
+    </statBases>
+
+    <costList>
+      <VV_SparklingPetal>30</VV_SparklingPetal>
+    </costList>
+
+    <comps>
+      <li Class="VVRace.CompProperties_Mana">
+        <manaCapacity>600</manaCapacity>
+        <manaConsumeRule Class="VVRace.ManaFluxRule_BatteryStored">
+          <manaFromStoredEnergy>0~150</manaFromStoredEnergy>
+        </manaConsumeRule>
+        <manaAbsorbPerDay>1200</manaAbsorbPerDay>
+      </li>
+
+      <li Class="VVRace.CompProperties_ArcanePlantBulletOverride">
+        <replacers>
+          <VV_Peashooter>
+            <bulletDef>VV_Bullet_PeaLightning</bulletDef>
+            <chance>0.5</chance>
+          </VV_Peashooter>
+        </replacers>
+      </li>
+
+      <li Class="VVRace.CompProperties_RepeatGatherable" />
+
+      <li Class="CompProperties_Battery">
+        <storedEnergyMax>1000</storedEnergyMax>
+        <efficiency>0.8</efficiency>
+        <shortCircuitInRain>false</shortCircuitInRain>
+        <transmitsPower>true</transmitsPower>
+      </li>
+
+      <li Class="VVRace.CompProperties_ManaSensorExplosive">
+        <requiredManaPct>0.5</requiredManaPct>
+        <chanceToExplodeFromDamage>1</chanceToExplodeFromDamage>
+        
+        <explosiveRadius>6.9</explosiveRadius>
+        <explosiveCooldownTicks>2500~2500</explosiveCooldownTicks>
+        <explosiveDamageDef>EMP</explosiveDamageDef>
+      </li>
+
+      <li Class="CompProperties_Glower">
+        <compClass>VVRace.CompManaGlower</compClass>
+        <glowRadius>3</glowRadius>
+        <glowColor>(213,110,248)</glowColor>
+      </li>
+      <li Class="VVRace.CompProperties_ScentDiffusion" />
+    </comps>
+
+    <building>
+      <allowWireConnection>true</allowWireConnection>
+    </building>
+    
+    <modExtensions>
+      <li Class="VVRace.ArcaneSeedExtension">
+        <seedMarketValueRatio>0.2</seedMarketValueRatio>
+        <seedColor>(200,150,255)</seedColor>
+
+        <leavingSeedCountCurve>
+          <points>
+            <li>(0, 4)</li>
+            <li>(0.7, 5.5)</li>
+            <li>(1.0, 6)</li>
+          </points>
+        </leavingSeedCountCurve>
+      </li>
+      <li Class="VVRace.ScentExtension">
+        <scentHediff>VV_Scent_Shockerbud</scentHediff>
+        <scentColor>(0.8, 0.4, 0.8)</scentColor>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- 번개꽃 -->
+  <ThingDef ParentName="VV_ArcanePlantProductive">
+    <defName>VV_Thunderpetals</defName>
+    <label>thunderpetals</label>
+    <description>a arcane flower with stamens that conduct electricity, capable of connecting to power lines to convert mana into electricity. When lightning strikes and the mana is sufficient, it attracts the lightning to itself and converts it into mana.
+\nIf placed adjacent to a peashooter, it has a 50% chance to fire an electric pea instead when the peashooter attacks. Electric peas briefly stun targets instead of physical damage.\nIf multiple flashbud or thunderpetals are adjacent, the effect stacks.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_SparklingPetal</ThingDef>
+    </descriptionHyperlinks>
+
+    <graphicData>
+      <texPath>Things/Plants/VV_Thunderpetals</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+
+    <statBases>
+      <MaxHitPoints>50</MaxHitPoints>
+      <WorkToBuild>47500</WorkToBuild>
+      <Beauty>10</Beauty>
+      <BeautyOutdoors>10</BeautyOutdoors>
+      
+      <VV_PlantGatherCooldown>2.4</VV_PlantGatherCooldown>
+      <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
+    </statBases>
+
+    <costList>
+      <VV_SparklingPetal>30</VV_SparklingPetal>
+    </costList>
+
+    <comps>
+      <li Class="VVRace.CompProperties_Mana">
+        <manaCapacity>1000</manaCapacity>
+        <manaGenerateRule Class="VVRace.ManaFluxRule_Power">
+          <powerManaRatio>0.1</powerManaRatio>
+          <min>0</min>
+          <max>400</max>
+        </manaGenerateRule>
+
+        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
+          <mana>800</mana>
+        </manaConsumeRule>
+        <manaAbsorbPerDay>1500</manaAbsorbPerDay>
+      </li>
+
+      <li Class="VVRace.CompProperties_ArcanePlantBulletOverride">
+        <replacers>
+          <VV_Peashooter>
+            <bulletDef>VV_Bullet_PeaLightning</bulletDef>
+            <chance>0.5</chance>
+          </VV_Peashooter>
+        </replacers>
+      </li>
+
+      <li Class="VVRace.CompProperties_RepeatGatherable" />
+
+      <li Class="CompProperties_Power">
+        <compClass>VVRace.CompManaPowerPlant</compClass>
+        <basePowerConsumption>-700</basePowerConsumption>
+        <transmitsPower>true</transmitsPower>
+      </li>
+      <li Class="VVRace.CompProperties_ManaLightningLod">
+        <mana>600</mana>
+      </li>
+      <li Class="VVRace.CompProperties_ScentDiffusion" />
+    </comps>
+
+    <building>
+      <allowWireConnection>true</allowWireConnection>
+    </building>
+    
+    <modExtensions>
+      <li Class="VVRace.ArcaneSeedExtension">
+        <seedMarketValueRatio>0.2</seedMarketValueRatio>
+        <seedColor>(255,150,255)</seedColor>
+
+        <leavingSeedCountCurve>
+          <points>
+            <li>(0, 4)</li>
+            <li>(0.7, 5.5)</li>
+            <li>(1.0, 6)</li>
+          </points>
+        </leavingSeedCountCurve>
+      </li>
+      <li Class="VVRace.ScentExtension">
+        <scentHediff>VV_Scent_Thunderpetals</scentHediff>
+        <scentColor>(0.8, 0.1, 0.9)</scentColor>
+      </li>
+    </modExtensions>
+  </ThingDef>
+</Defs>

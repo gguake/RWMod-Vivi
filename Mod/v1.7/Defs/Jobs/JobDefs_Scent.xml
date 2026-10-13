@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <JobDef>
+    <defName>VV_CollectFloralScent</defName>
+    <driverClass>VVRace.JobDriver_CollectFloralScent</driverClass>
+    <reportString>collecting scent from TargetA.</reportString>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+    <ifFlyingKeepFlying>true</ifFlyingKeepFlying>
+  </JobDef>
+</Defs>

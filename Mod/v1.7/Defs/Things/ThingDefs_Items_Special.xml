@@ -1,0 +1,107 @@
+﻿<Defs>
+  <!-- 거대 말벌 날개 -->
+  <ThingDef ParentName="ResourceBase">
+    <defName>VV_TitanicHornetWing</defName>
+    <label>titanic hornet wing</label>
+    <description>a piece of a titanic hornet's wing. It's difficult to obtain, but thanks to its special components, it's lightweight and durable, making it a high-quality equipment material. It will decompose at room temperature, so it is recommended to keep it in a freezer.</description>
+    <descriptionHyperlinks>
+      <RecipeDef>VV_InstallGliderWing</RecipeDef>
+      <HediffDef>VV_GliderWing</HediffDef>
+    </descriptionHyperlinks>
+    <tickerType>Rare</tickerType>
+
+    <graphicData>
+      <texPath>Things/Item/VV_HornetWing</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <thingCategories>
+      <li>VV_ViviResource</li>
+    </thingCategories>
+
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Standard_Drop</soundInteract>
+    <soundDrop>Standard_Drop</soundDrop>
+    
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <Mass>0.1</Mass>
+      <MarketValue>120</MarketValue>
+      <MaxHitPoints>50</MaxHitPoints>
+      <Flammability>1.0</Flammability>
+      <DeteriorationRate>10</DeteriorationRate>
+    </statBases>
+    <stackLimit>25</stackLimit>
+    
+    <comps>
+      <li Class="CompProperties_Rottable">
+        <daysToRotStart>10</daysToRotStart>
+        <rotDestroys>true</rotDestroys>
+      </li>
+    </comps>
+
+    <tradeTags>
+      <li>VV_ViviExotic</li>
+    </tradeTags>
+  </ThingDef>
+  
+  <!-- 영원꽃 씨앗 -->
+  <ThingDef>
+    <defName>VV_Seed_Everflower</defName>
+    <thingClass>ThingWithComps</thingClass>
+    <category>Item</category>
+    <label>everfloweer seed</label>
+    <description>A seed of everflower. When planted in soil or an arcane plant pot, it becomes a seedling, which will eventually grow into everflower. It's extremely rare and is obtained by dismantling an everflower. Arcane plants require both mana and nutrients to grow.
+\nMana is absorbed from the environment mana and can also be supplied by nearby mana emitter or other arcane plants that produce mana.
+\nutrients continuously decrease regardless of mana, so a person must regularly apply mana fertilizer. If left without sufficient nutrients for too long, the seedling will die.
+\nOnce planted, an everflower can't be moved until a royal vivi attunes to it, and once attuned it can no longer be dismantled.</description>
+
+    <tickerType>Never</tickerType>
+    <selectable>true</selectable>
+
+    <graphicData>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <texPath>Things/Item/VV_FlowerSeed</texPath>
+    </graphicData>
+
+    <drawerType>MapMeshOnly</drawerType>
+    <altitudeLayer>Item</altitudeLayer>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <rotatable>false</rotatable>
+
+    <useHitPoints>true</useHitPoints>
+    <stackLimit>1</stackLimit>
+    <pathCost>14</pathCost>
+    <alwaysHaulable>true</alwaysHaulable>
+
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <MarketValue>2000</MarketValue>
+      <Mass>0.001</Mass>
+      <MaxHitPoints>40</MaxHitPoints>
+      <DeteriorationRate>0.5</DeteriorationRate>
+      <Flammability>1.0</Flammability>
+      <SellPriceFactor>0.25</SellPriceFactor>
+    </statBases>
+    
+    <thingCategories>
+      <li>VV_ArcaneSeed</li>
+    </thingCategories>
+
+    <comps>
+      <li Class="CompProperties_Forbiddable" />
+      <li Class="VVRace.CompProperties_ArcaneSeed">
+        <targetPlantDef>VV_Everflower</targetPlantDef>
+      </li>
+    </comps>
+
+    <socialPropernessMatters>true</socialPropernessMatters>
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Grain_Drop</soundInteract>
+    <soundDrop>Grain_Drop</soundDrop>
+
+    <thingSetMakerTags>
+      <li>NonStandardReward</li>
+    </thingSetMakerTags>
+  </ThingDef>
+
+</Defs>

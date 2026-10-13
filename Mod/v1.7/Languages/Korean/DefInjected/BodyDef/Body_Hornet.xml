@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <VV_TitanicHornet.label>거대 말벌</VV_TitanicHornet.label>
+  <VV_TitanicHornet.corePart.parts.left_leg.customLabel>왼쪽 다리</VV_TitanicHornet.corePart.parts.left_leg.customLabel>
+  <VV_TitanicHornet.corePart.parts.left_leg.parts.left_claw.customLabel>왼쪽 발톱</VV_TitanicHornet.corePart.parts.left_leg.parts.left_claw.customLabel>
+  <VV_TitanicHornet.corePart.parts.right_leg.customLabel>오른쪽 다리</VV_TitanicHornet.corePart.parts.right_leg.customLabel>
+  <VV_TitanicHornet.corePart.parts.right_leg.parts.right_claw.customLabel>오른쪽 발톱</VV_TitanicHornet.corePart.parts.right_leg.parts.right_claw.customLabel>
+  
+  <VV_TitanicHornet.corePart.parts.left_wing.customLabel>왼쪽 날개</VV_TitanicHornet.corePart.parts.left_wing.customLabel>
+  <VV_TitanicHornet.corePart.parts.right_wing.customLabel>오른쪽 날개</VV_TitanicHornet.corePart.parts.right_wing.customLabel>
+
+  <VV_TitanicHornet.corePart.parts.Pronotum.parts.InsectHead.parts.left_eye.customLabel>왼쪽 눈</VV_TitanicHornet.corePart.parts.Pronotum.parts.InsectHead.parts.left_eye.customLabel>
+  <VV_TitanicHornet.corePart.parts.Pronotum.parts.InsectHead.parts.right_eye.customLabel>오른쪽 눈</VV_TitanicHornet.corePart.parts.Pronotum.parts.InsectHead.parts.right_eye.customLabel>
+  <VV_TitanicHornet.corePart.parts.Pronotum.parts.InsectHead.parts.left_antenna.customLabel>왼쪽 더듬이</VV_TitanicHornet.corePart.parts.Pronotum.parts.InsectHead.parts.left_antenna.customLabel>
+  <VV_TitanicHornet.corePart.parts.Pronotum.parts.InsectHead.parts.right_antenna.customLabel>오른쪽 더듬이</VV_TitanicHornet.corePart.parts.Pronotum.parts.InsectHead.parts.right_antenna.customLabel>
+</LanguageData>

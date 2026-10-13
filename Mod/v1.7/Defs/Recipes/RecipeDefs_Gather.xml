@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 꿀 채집 -->
+  <RecipeDef Class="VVRace.RecipeDef_Gathering">
+    <defName>VV_GatherHoney</defName>
+    <label>gather honey</label>
+    <description>Gather honey from mature flowers or fruit trees. The speed and yield of honey gathering must be greater than 0 to perform the job. Some arcane plants can also gather honey, but arcane plants do not produce pollen.
+\nIf the worker's plant skill is low, they may damage gathered plant.</description>
+    <jobString>Gathering honey.</jobString>
+    
+    <workAmount>1100</workAmount>
+    <workSkill>Plants</workSkill>
+    <workSkillLearnFactor>0.01</workSkillLearnFactor>
+    <workSpeedStat>VV_HoneyGatherSpeed</workSpeedStat>
+    <efficiencyStat>VV_HoneyGatherYield</efficiencyStat>
+
+    <effectWorking>VV_Gather_Honey</effectWorking>
+    <soundWorking>Recipe_Brewing</soundWorking>
+    <uiIconThing>VV_RawHoney</uiIconThing>
+
+    <recipeUsers>
+      <li>VV_GatheringSpot</li>
+      <li>VV_GatheringBarrel</li>
+    </recipeUsers>
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <targetCountAdjustment>4</targetCountAdjustment>
+
+    <products>
+      <VV_RawHoney>4</VV_RawHoney>
+    </products>
+    <researchPrerequisite>VV_BasicGathering</researchPrerequisite>
+
+    <gatherWorkerType>VVRace.GatherWorker_Honey</gatherWorkerType>
+    <gatheringJob>VV_GatherHoney</gatheringJob>
+    <gatheringWorkWeight>7</gatheringWorkWeight>
+    <processingWorkWeight>3</processingWorkWeight>
+    <targetCooldownStat>VV_PlantGatherCooldown</targetCooldownStat>
+    <targetYieldStat>VV_PlantHoneyGatherYield</targetYieldStat>
+    <maxPathDanger>Deadly</maxPathDanger>
+
+    <basePollenChance>0.7</basePollenChance>
+    <baseArcaneSeedChance>0.03</baseArcaneSeedChance>
+
+    <damageChanceBySkillLevel>
+      <points>
+        <li>(0,0.5)</li>
+        <li>(4,0.3)</li>
+        <li>(8,0.15)</li>
+        <li>(12,0.1)</li>
+        <li>(16,0.05)</li>
+        <li>(20,0)</li>
+      </points>
+    </damageChanceBySkillLevel>
+
+  </RecipeDef>
+
+  <!-- 꽃가루 채집 -->
+  <RecipeDef Class="VVRace.RecipeDef_Gathering">
+    <defName>VV_GatherPollen</defName>
+    <label>gather pollen</label>
+    <description>Gather pollen from mature flowers or fruit trees. The speed and yield of honey gathering must be greater than 0 to perform the job. Shares the regrowth time with honey gathering, and the amount gathered scales with honey gather yield. Arcane plants do not produce pollen.
+\nIf the worker's plant skill is low, they may damage gathered plant.</description>
+    <jobString>Gathering pollen.</jobString>
+
+    <workAmount>1100</workAmount>
+    <workSkill>Plants</workSkill>
+    <workSkillLearnFactor>0.01</workSkillLearnFactor>
+    <workSpeedStat>VV_HoneyGatherSpeed</workSpeedStat>
+    <efficiencyStat>VV_HoneyGatherYield</efficiencyStat>
+
+    <effectWorking>VV_Gather_Pollen</effectWorking>
+    <soundWorking>Interact_CleanFilth</soundWorking>
+    <uiIconThing>VV_Pollen</uiIconThing>
+
+    <recipeUsers>
+      <li>VV_GatheringSpot</li>
+      <li>VV_GatheringBarrel</li>
+    </recipeUsers>
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <targetCountAdjustment>8</targetCountAdjustment>
+
+    <products>
+      <VV_Pollen>8</VV_Pollen>
+    </products>
+    <researchPrerequisite>VV_BasicGathering</researchPrerequisite>
+
+    <gatherWorkerType>VVRace.GatherWorker_Pollen</gatherWorkerType>
+    <gatheringJob>VV_GatherPollen</gatheringJob>
+    <gatheringWorkWeight>7</gatheringWorkWeight>
+    <processingWorkWeight>3</processingWorkWeight>
+    <targetCooldownStat>VV_PlantGatherCooldown</targetCooldownStat>
+    <targetYieldStat>VV_PlantHoneyGatherYield</targetYieldStat>
+    <maxPathDanger>Deadly</maxPathDanger>
+
+    <baseArcaneSeedChance>0.03</baseArcaneSeedChance>
+
+    <damageChanceBySkillLevel>
+      <points>
+        <li>(0,0.5)</li>
+        <li>(4,0.3)</li>
+        <li>(8,0.15)</li>
+        <li>(12,0.1)</li>
+        <li>(16,0.05)</li>
+        <li>(20,0)</li>
+      </points>
+    </damageChanceBySkillLevel>
+
+  </RecipeDef>
+
+  <!-- 프로폴리스 채집 -->
+  <RecipeDef Class="VVRace.RecipeDef_Gathering">
+    <defName>VV_GatherPropolis</defName>
+    <label>gather propolis</label>
+    <description>Gather rare propolis from surrounding trees. The speed and yield of propolis gathering must be greater than 0 to perform the job, and it takes a significant amount of time to gather.
+\nIf the worker's plant skill is low, they may damage gathered plant.</description>
+
+    <jobString>Gathering propolis.</jobString>
+    
+    <workAmount>3600</workAmount>
+    <workSkill>Plants</workSkill>
+    <workSpeedStat>VV_PlantGatherSpeed</workSpeedStat>
+    <efficiencyStat>VV_PlantGatherYield</efficiencyStat>
+    <workSkillLearnFactor>0.1</workSkillLearnFactor>
+
+    <effectWorking>Clean</effectWorking>
+    <soundWorking>Interact_CleanFilth</soundWorking>
+    <uiIconThing>VV_Propolis</uiIconThing>
+
+    <recipeUsers>
+      <li>VV_GatheringSpot</li>
+      <li>VV_GatheringBarrel</li>
+    </recipeUsers>
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <targetCountAdjustment>2</targetCountAdjustment>
+    <products>
+      <VV_Propolis>2</VV_Propolis>
+    </products>
+    <researchPrerequisite>VV_AdvancedGathering</researchPrerequisite>
+
+    <gatherWorkerType>VVRace.GatherWorker_Plant</gatherWorkerType>
+    <gatheringJob>VV_GatherPropolis</gatheringJob>
+    <gatheringWorkWeight>1</gatheringWorkWeight>
+    <targetCooldownStat>VV_PlantGatherCooldown</targetCooldownStat>
+    <targetYieldStat>VV_TreeResinGatherYield</targetYieldStat>
+    <maxPathDanger>Some</maxPathDanger>
+
+    <baseArcaneSeedChance>0.045</baseArcaneSeedChance>
+
+    <damageChanceBySkillLevel>
+      <points>
+        <li>(8,0.75)</li>
+        <li>(12,0.5)</li>
+        <li>(16,0.3)</li>
+        <li>(20,0.1)</li>
+      </points>
+    </damageChanceBySkillLevel>
+
+    <skillRequirements>
+      <Plants>8</Plants>
+    </skillRequirements>
+  </RecipeDef>
+  
+  <!-- 살아있는 잎 채집 -->
+  <RecipeDef Class="VVRace.RecipeDef_Gathering">
+    <defName>VV_GatherLivingLeaf</defName>
+    <label>gather living leaf</label>
+    <description>Gather rare living leaves from arcane plants. The speed and yield of living leaf gathering must be greater than 0 to perform the job, and it takes a significant amount of time to gather.
+\nIf the worker's plant skill is low, they may damage gathered plant.</description>
+
+    <jobString>Gathering living leaves.</jobString>
+    
+    <workAmount>3000</workAmount>
+    <workSkill>Plants</workSkill>
+    <workSpeedStat>VV_PlantGatherSpeed</workSpeedStat>
+    <efficiencyStat>VV_PlantGatherYield</efficiencyStat>
+    <workSkillLearnFactor>0.15</workSkillLearnFactor>
+
+    <effectWorking>Clean</effectWorking>
+    <soundWorking>Interact_CleanFilth</soundWorking>
+    <uiIconThing>VV_LivingLeaf</uiIconThing>
+
+    <recipeUsers>
+      <li>VV_GatheringSpot</li>
+      <li>VV_GatheringBarrel</li>
+    </recipeUsers>
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <targetCountAdjustment>2</targetCountAdjustment>
+    <products>
+      <VV_LivingLeaf>2</VV_LivingLeaf>
+    </products>
+    <researchPrerequisite>VV_AdvancedGathering</researchPrerequisite>
+
+    <gatherWorkerType>VVRace.GatherWorker_Plant</gatherWorkerType>
+    <gatheringJob>VV_GatherLivingLeaf</gatheringJob>
+    <gatheringWorkWeight>1</gatheringWorkWeight>
+    <targetCooldownStat>VV_PlantGatherCooldown</targetCooldownStat>
+    <targetYieldStat>VV_LivingLeafGatherYield</targetYieldStat>
+    <maxPathDanger>Deadly</maxPathDanger>
+
+    <damageChanceBySkillLevel>
+      <points>
+        <li>(11,1)</li>
+        <li>(12,0.8)</li>
+        <li>(16,0.55)</li>
+        <li>(20,0.3)</li>
+      </points>
+    </damageChanceBySkillLevel>
+
+    <skillRequirements>
+      <Plants>12</Plants>
+    </skillRequirements>
+  </RecipeDef>
+</Defs>

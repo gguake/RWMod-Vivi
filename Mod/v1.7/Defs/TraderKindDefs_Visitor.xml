@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <TraderKindDef>
+    <defName>VV_Visitor_Vivi_Standard</defName>
+    <label>trader</label>
+    <stockGenerators>
+      
+      <!-- Resources -->
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Silver</thingDef>
+        <countRange>50~150</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>MedicineHerbal</thingDef>
+        <countRange>4~8</countRange>
+      </li>
+      <li Class="StockGenerator_MultiDef">
+        <thingDefs>
+          <li>Cloth</li>
+          <li>Chocolate</li>
+        </thingDefs>
+      </li>
+      
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>VV_FilteredHoney</thingDef>
+        <countRange>20~40</countRange>
+      </li>
+      
+      <!-- Drugs -->
+      <li Class="StockGenerator_Tag">
+        <tradeTag>VV_FloweringTea</tradeTag>
+        <thingDefCountRange>0~2</thingDefCountRange>
+        <countRange>5~10</countRange>
+      </li>
+
+      <!-- Techprints -->
+      
+      <!-- Books -->
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Novel</thingDef>
+        <countRange>0~1</countRange>
+      </li>
+
+      <!-- Weapons -->
+      <li Class="StockGenerator_MarketValue">
+        <tradeTag>VV_ViviTool</tradeTag>
+        <maxTechLevelGenerate>Medieval</maxTechLevelGenerate>
+        <countRange>0~1</countRange>
+      </li>
+      <li Class="StockGenerator_Category">
+        <maxTechLevelGenerate>Neolithic</maxTechLevelGenerate>
+        <categoryDef>WeaponsMelee</categoryDef>
+        <countRange>0~1</countRange>
+      </li>
+      
+      <!-- Apparel -->
+      <li Class="StockGenerator_MarketValue">
+        <tradeTag>VV_ViviApparel</tradeTag>
+        <countRange>0~1</countRange>
+      </li>
+      
+      <!-- Implants -->
+      <!-- none -->
+      
+      <!-- Buildings -->
+      <!-- none -->
+      
+      <!-- Exotic -->
+      <!-- none -->
+      
+      <!-- Slaves -->
+      <!-- none -->
+      
+      <!-- Animals -->
+      <!-- none -->
+      
+      <!-- Buying -->
+      <li Class="StockGenerator_BuyExpensiveSimple" />
+      <li Class="StockGenerator_BuyTradeTag"><tag>VV_ViviHoney</tag></li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>VV_FloweringTea</tag></li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>Art</tag></li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>MusicalInstrument</tag></li>
+      
+    </stockGenerators>
+  </TraderKindDef>
+</Defs>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+<VV_JobFailReasonNoHarvestablePlants>No harvestable plants nearby</VV_JobFailReasonNoHarvestablePlants>
+<VV_JobFailReasonNoHarvestablePollenFilths>No harvestable pollen filths nearby</VV_JobFailReasonNoHarvestablePollenFilths>
+<VV_JobFailReasonNotVivi>Not Vivi</VV_JobFailReasonNotVivi>
+<VV_JobFailReasonNoIngredients>No ingredients</VV_JobFailReasonNoIngredients>
+
+<VV_AbilityDisabledNoFood>{0_labelShort} cannot use this due to hunger</VV_AbilityDisabledNoFood>
+<VV_AbilityDisabledNoBodyPart>{0_labelShort} lacks {2} {1} body parts</VV_AbilityDisabledNoBodyPart>
+
+<VV_AbilityDisabledNoFairySlot>No available fairy vivi to materialize</VV_AbilityDisabledNoFairySlot>
+<VV_AbilityDisabledNoMaterializedFairies>No materialized fairy vivi</VV_AbilityDisabledNoMaterializedFairies>
+<VV_AbilityFailNoMana>Not enough environment mana at the target location</VV_AbilityFailNoMana>
+<VV_AbilityDisabledNotEnoughFairies>Not enough idle fairy vivi (needs {0})</VV_AbilityDisabledNotEnoughFairies>
+<VV_AbilityFailNotAlly>Must target an allied pawn</VV_AbilityFailNotAlly>
+<VV_AbilityFailAlreadyGuarded>Already escorted by a fairy</VV_AbilityFailAlreadyGuarded>
+<VV_AbilityFailNotHostile>Must target a hostile pawn</VV_AbilityFailNotHostile>
+<VV_AbilityFailAlreadyConcentrated>Already targeted by fairy concentration</VV_AbilityFailAlreadyConcentrated>
+<VV_Command_ReleaseGuard>Release fairy escort</VV_Command_ReleaseGuard>
+<VV_Command_ReleaseGuardDesc>Dismiss the fairy vivi escorting this pawn. The fairy returns to the royal vivi.</VV_Command_ReleaseGuardDesc>
+
+<VV_GeneDefHoneyNeedDurationDesc>{PAWN_nameDef} must consume honey regularly to survive. Suffering from deficiency worsens over time if {PAWN_nameDef} does not consume honey within {DEFICIENCYDURATION}.</VV_GeneDefHoneyNeedDurationDesc>
+<VV_LastHoneyIngestedDurationAgo>Last consumed honey {DURATION} ago.</VV_LastHoneyIngestedDurationAgo>
+
+<VV_ShowManaOverlayTooltip>Toggle environment mana overlay.
+\nEnvironmental mana is emitted or absorbed by rare plants or arcane plants, and it gradually spreads over time.
+\nWhen mana accumulates beyond a certain threshold, Vivia flowers may naturally appear, and some Vivi equipment can utilize environmental mana.</VV_ShowManaOverlayTooltip>
+
+<VV_ModSettings_AllowSelectModGenes>Allow added genes in mods</VV_ModSettings_AllowSelectModGenes>
+<VV_ModSettings_AllowSelectModGenesDesc>Sets whether Vivi can use genes added in other mods when given random genes.</VV_ModSettings_AllowSelectModGenesDesc>
+
+<VV_ModSettings_RoyalJellyNeedMultiplier>Royal jelly needs multiplier</VV_ModSettings_RoyalJellyNeedMultiplier>
+<VV_ModSettings_RoyalJellyNeedMultiplierDesc>Sets the rate at which a young Vivi's desire for royal jelly increases when consumed. The higher the rate, the less royal jelly is consumed to become a royal Vivi.</VV_ModSettings_RoyalJellyNeedMultiplierDesc>
+
+<VV_ModSettings_AlwaysShowManaGridOnSelect>Always show mana grid when selecting arcane plants</VV_ModSettings_AlwaysShowManaGridOnSelect>
+<VV_ModSettings_AlwaysShowManaGridOnSelectDesc>Sets whether to always display the environment mana grid when selecting arcane plants or mana-using structures. Applies only when the 'Arcane Botany' research is completed.</VV_ModSettings_AlwaysShowManaGridOnSelectDesc>
+
+<VV_ModSettings_ManaGridOpacity>Mana grid opacity</VV_ModSettings_ManaGridOpacity>
+<VV_ModSettings_ManaGridOpacityDesc>Sets the opacity of the environment mana grid when selecting arcane plants or mana-using structures. Applies only when the 'Arcane Botany' research is completed.</VV_ModSettings_ManaGridOpacityDesc>
+
+<VV_ModSettings_UseVanillaHeadOnly>Use vanilla head only</VV_ModSettings_UseVanillaHeadOnly>
+<VV_ModSettings_UseVanillaHeadOnlyDesc>When a Vivi is generated, replaces its unique head type with a vanilla female head type. Does not affect Vivis that already exist.</VV_ModSettings_UseVanillaHeadOnlyDesc>
+
+<VV_ModSettings_RandomGenesForStartingVivi>Random genes for starting Vivis</VV_ModSettings_RandomGenesForStartingVivi>
+<VV_ModSettings_RandomGenesForStartingViviDesc>Gives the player's starting Vivi colonists random genes, just like NPC Vivis. Does not affect Vivis that already exist.</VV_ModSettings_RandomGenesForStartingViviDesc>
+
+<VV_ModSettings_EnableViviMealContinuation>Enable Continuous Eating</VV_ModSettings_EnableViviMealContinuation>
+<VV_ModSettings_EnableViviMealContinuationDesc>Makes Vivis that are still hungry after a meal continue eating. Because a Vivi's maximum caloric intake varies with genetic metabolism efficiency, this helps reduce how often Vivis with many genes leave work to eat.</VV_ModSettings_EnableViviMealContinuationDesc>
+
+<VV_ModSettings_ViviMealContinuationNutritionGap>Continuous Eating Food Threshold</VV_ModSettings_ViviMealContinuationNutritionGap>
+<VV_ModSettings_ViviMealContinuationNutritionGapDesc>This option makes vivi continue prioritizing eating over other tasks after a meal if she is still hungry and can consume the configured additional amount of food.
+\nBecause Vivi's maximum caloric intake varies with genetic metabolism efficiency, this helps reduce how often vivi with many genes leaves work to eat.</VV_ModSettings_ViviMealContinuationNutritionGapDesc>
+
+<VV_ModSettings_RestartRequired>Restarting the game is required to apply this setting.</VV_ModSettings_RestartRequired>
+
+<VV_Thing_Seed>{0} seed</VV_Thing_Seed>
+<VV_Thing_SeedDesc>A seed of {0}. When planted in soil or an arcane plant pot, it becomes a seedling, which will eventually grow into {0}.\nArcane plants require both mana and nutrients to grow.
+\nMana is absorbed from the environment mana and can also be supplied by nearby mana emitter or other arcane plants that produce mana.
+\nNutrients continuously decrease regardless of mana, so a person must regularly apply mana fertilizer. If left without sufficient nutrients for too long, the seedling will die.</VV_Thing_SeedDesc>
+
+<VV_Thing_Seedling>{0} seedling</VV_Thing_Seedling>
+
+<VV_FailReason_EverflowerOnPot>Cannot deconstruct since everflower overhead.</VV_FailReason_EverflowerOnPot>
+<VV_FailReason_RitualCooldown>Ritual on cooldown. It will be available in {0}.</VV_FailReason_RitualCooldown>
+
+<VV_FailReason_HasNoFairyVivi>No fairy vivi following</VV_FailReason_HasNoFairyVivi>
+<VV_FailReason_HasMaterializedFairyVivi>Cannot restore a fairy vivi while any fairy vivi is materialized</VV_FailReason_HasMaterializedFairyVivi>
+<VV_FailReason_FairyViviFull>Fairy vivi limit reached</VV_FailReason_FairyViviFull>
+<VV_FailReason_NotRoyalVivi>Not royal vivi</VV_FailReason_NotRoyalVivi>
+<VV_FailReason_NotAttunedEverflower>Not resonant to everflower</VV_FailReason_NotAttunedEverflower>
+<VV_FailReason_AlreadyAttunedOther>Already resonant to another everflower</VV_FailReason_AlreadyAttunedOther>
+<VV_FailReason_FairyficationSickness>Fairyfication sickness present</VV_FailReason_FairyficationSickness>
+<VV_FailReason_NotVivi>Not vivi</VV_FailReason_NotVivi>
+<VV_FailReason_RoyalVivi>Cannot target royal vivi</VV_FailReason_RoyalVivi>
+<VV_FailReason_NotMyChild>Not a mother-daughter relationship</VV_FailReason_NotMyChild>
+
+
+<VV_TextMote_GatherFailed>Damaged due to gathering mistake</VV_TextMote_GatherFailed>
+<VV_TextMote_DamageBlockedByFairy>Protected by fairy</VV_TextMote_DamageBlockedByFairy>
+<VV_BattleLog_FairyImpact>{COMMANDER_labelShort}'s command sends {FAIRY} to stab {TARGET_labelShort}.</VV_BattleLog_FairyImpact>
+
+<VV_RitualTarget_Everflower>Everflower</VV_RitualTarget_Everflower>
+
+<VV_Hediff_AgingFactor>  - Ages at a rate of {0}.</VV_Hediff_AgingFactor>
+</LanguageData>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+<!-- Etc -->
+<VV_FortifyHoneycombWall.reportString>벌집 벽을 강화하는 중.</VV_FortifyHoneycombWall.reportString>
+<VV_PlantArcaneSeed.reportString>TargetA 심는 중.</VV_PlantArcaneSeed.reportString>
+
+<!-- EverflowerRitual -->
+<VV_MoveEverflower.reportString>TargetA를 옮기기 위해 공명 중.</VV_MoveEverflower.reportString>
+
+<!-- Gather -->
+<VV_GatherHoney.reportString>TargetA에서 꿀 채집 중.</VV_GatherHoney.reportString>
+<VV_GatherPollen.reportString>TargetA에서 꽃가루 채집 중.</VV_GatherPollen.reportString>
+<VV_GatherPropolis.reportString>TargetA에서 프로폴리스 채집 중.</VV_GatherPropolis.reportString>
+<VV_GatherLivingLeaf.reportString>TargetA에서 살아있는 잎 채집 중.</VV_GatherLivingLeaf.reportString>
+
+<!-- Hatchery -->
+<VV_LayViviEgg.reportString>알 낳는 중.</VV_LayViviEgg.reportString>
+
+<!-- Scent -->
+<VV_CollectFloralScent.reportString>TargetA의 향을 채집하는 중.</VV_CollectFloralScent.reportString>
+
+</LanguageData>

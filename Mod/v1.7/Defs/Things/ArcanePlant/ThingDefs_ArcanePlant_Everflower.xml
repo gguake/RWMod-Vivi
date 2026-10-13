@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- Everflower -->
+  <ThingDef>
+    <defName>VV_Everflower</defName>
+    <label>everflower</label>
+    <description>An everflower is an extremely rare bloom revered as sacred by vivis and endowed with a range of mysterious powers. It cannot be transplanted or cultivated by conventional means and may only be moved by a royal vivi in psychic resonance.
+\nOnly vivis can harvest its honey, and when they do, they convert their physical age into mana and absorb it.
+\nA royal vivi resonates with an everflower through psychic attunement, granting access to various mystical abilities. A royal vivi can resonate with only one everflower. An everflower that has been attuned even once can no longer be dismantled.
+\n\nIn vivi society, it's traditional to give each vivi who sets out to build a new hive a single everflower seed, and it's said that in the distant past an enormous everflower once existed.</description>
+    <descriptionHyperlinks>
+      <PreceptDef>VV_Attunement</PreceptDef>
+      <PreceptDef>VV_ChangeWeatherRitual</PreceptDef>
+      <PreceptDef>VV_Fairyfication</PreceptDef>
+      <PreceptDef>VV_Defairyfication</PreceptDef>
+      <PreceptDef>VV_Manawave</PreceptDef>
+    </descriptionHyperlinks>
+
+    <category>Building</category>
+    <thingClass>VVRace.ArcanePlant_Everflower</thingClass>
+    <tickerType>Normal</tickerType>
+    <selectable>true</selectable>
+
+    <drawerType>RealtimeOnly</drawerType>
+    <altitudeLayer>Pawn</altitudeLayer>
+    <graphicData>
+      <texPath>Things/Plants/VV_Everflower</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1.0, 1.0)</drawSize>
+    </graphicData>
+    
+    <minifiedDef>MinifiedArcanePlant</minifiedDef>
+    <pathCost>14</pathCost>
+    <pathCostIgnoreRepeat>false</pathCostIgnoreRepeat>
+
+    <statBases>
+      <Mass>3</Mass>
+      <MaxHitPoints>500</MaxHitPoints>
+      <WorkToBuild>250000</WorkToBuild>
+      <Flammability>0</Flammability>
+      <Beauty>30</Beauty>
+      <BeautyOutdoors>30</BeautyOutdoors>
+      <SellPriceFactor>0</SellPriceFactor>
+
+      <VV_PlantGatherCooldown>0.25</VV_PlantGatherCooldown>
+      <VV_PlantHoneyGatherYield>1.0</VV_PlantHoneyGatherYield>
+    </statBases>
+
+    <fillPercent>0.1</fillPercent>
+
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <thingCategories>
+      <li>VV_ArcanePlant</li>
+    </thingCategories>
+
+    <resourcesFractionWhenDeconstructed>1</resourcesFractionWhenDeconstructed>
+    <costList>
+      <VV_PerfumingPetal>100</VV_PerfumingPetal>
+      <VV_Seed_Everflower>1</VV_Seed_Everflower>
+    </costList>
+
+    <placeWorkers>
+      <li>VVRace.PlaceWorker_AllowArcanePlantPot</li>
+    </placeWorkers>
+
+    <building>
+      <isInert>true</isInert>
+      <ai_neverTrashThis>true</ai_neverTrashThis>
+      <ai_chillDestination>false</ai_chillDestination>
+      <deconstructible>false</deconstructible>
+      <claimable>false</claimable>
+      <allowWireConnection>false</allowWireConnection>
+      <allowAutoroof>false</allowAutoroof>
+      <repairable>false</repairable>
+      <artificialForMeditationPurposes>false</artificialForMeditationPurposes>
+      <canPlaceOverWall>false</canPlaceOverWall>
+      <expandHomeArea>true</expandHomeArea>
+    </building>
+    
+    <tradeTags Inherit="False">
+    </tradeTags>
+
+    <inspectorTabs>
+      <li>VVRace.ITab_ArcanePlant</li>
+    </inspectorTabs>
+
+
+    <comps>
+      <li Class="VVRace.CompProperties_Mana">
+        <manaGenerateRule Class="VVRace.ManaFluxRule_Everflower">
+          <ranges>
+            <li>0~800</li>
+            <li>200~1600</li>
+            <li>400~3200</li>
+            <li>800~4800</li>
+            <li>1600~6400</li>
+          </ranges>
+        </manaGenerateRule>
+      </li>
+
+      <li Class="VVRace.CompProperties_RepeatGatherable" />
+
+      <li Class="CompProperties_Forbiddable"/>
+      <li Class="CompProperties_Glower">
+        <compClass>VVRace.CompManaGlower</compClass>
+        <glowRadius>5</glowRadius>
+        <glowColor>(241,178,83,0)</glowColor>
+      </li>
+
+      <li Class="VVRace.CompProperties_Everflower">
+        <everflowerResonateRateCurve>
+          <points>
+            <li>(0,0)</li>
+            <li>(5,1)</li>
+            <li>(45,3.5)</li>
+            <li>(100,5)</li>
+            <li>(250,7)</li>
+            <li>(500,9)</li>
+          </points>
+        </everflowerResonateRateCurve>
+
+        <everflowerResonateLevelCurve>
+          <points>
+            <li>(0,1)</li>
+            <li>(60000,2)</li>
+            <li>(180000,3)</li>
+            <li>(450000,4)</li>
+          </points>
+        </everflowerResonateLevelCurve>
+
+        <everflowerResonateRitualCurve>
+          <points>
+            <li>(0,0)</li>
+            <li>(0.5,1500)</li>
+            <li>(1.5,3000)</li>
+            <li>(2.0,4500)</li>
+            <li>(4.0,6000)</li>
+            <li>(6.0,7500)</li>
+            <li>(8.0,8250)</li>
+            <li>(10.0,10000)</li>
+          </points>
+        </everflowerResonateRitualCurve>
+
+        <ritualCooldownCurve>
+          <points>
+            <li>(0,900000)</li>
+            <li>(1,600000)</li>
+            <li>(1.5,400000)</li>
+            <li>(3.0,300000)</li>
+            <li>(6.0,210000)</li>
+            <li>(10.0,150000)</li>
+          </points>
+        </ritualCooldownCurve>
+
+        <graphicsByLevel>
+          <li>
+              <texPath>Things/Plants/VV_Everflower/VV_EverflowerA</texPath>
+              <graphicClass>Graphic_Single</graphicClass>
+              <drawSize>(1.0, 1.0)</drawSize>
+              <renderQueue>2901</renderQueue>
+          </li>
+          <li>
+              <texPath>Things/Plants/VV_Everflower/VV_EverflowerA</texPath>
+              <graphicClass>Graphic_Single</graphicClass>
+              <drawSize>(1.2, 1.2)</drawSize>
+              <renderQueue>2901</renderQueue>
+          </li>
+          <li>
+              <texPath>Things/Plants/VV_Everflower/VV_EverflowerB</texPath>
+              <graphicClass>Graphic_Single</graphicClass>
+              <drawSize>(6, 6)</drawSize>
+              <drawOffset>(0, 0.2, 1.8)</drawOffset>
+              <renderQueue>2901</renderQueue>
+          </li>
+          <li>
+              <texPath>Things/Plants/VV_Everflower/VV_EverflowerC</texPath>
+              <graphicClass>Graphic_Single</graphicClass>
+              <drawSize>(6, 6)</drawSize>
+              <drawOffset>(0, 0.2, 1.8)</drawOffset>
+              <renderQueue>2901</renderQueue>
+          </li>
+          <li>
+              <texPath>Things/Plants/VV_Everflower/VV_EverflowerD</texPath>
+              <graphicClass>Graphic_Single</graphicClass>
+              <drawSize>(6, 12)</drawSize>
+              <drawOffset>(0, 0.2, 4.3)</drawOffset>
+              <renderQueue>2901</renderQueue>
+          </li>
+        </graphicsByLevel>
+        <effectsOnLevelAcquire>
+          <li>VV_EverflowerGrow_1_Level</li>
+          <li>VV_EverflowerGrow_2_Level</li>
+          <li>VV_EverflowerGrow_3_Level</li>
+          <li>VV_EverflowerGrow_4_Level</li>
+        </effectsOnLevelAcquire>
+
+        <!-- 의식 완료 이펙트(꽃잎 분출 등) 생성 위치. 각 단계 텍스처의 꽃봉오리 중심에 맞춰 세팅. -->
+        <ritualEffecterOffsetByLevel>
+          <li>(0, 0, 0.2)</li>    <!-- Lv0: VV_EverflowerA, drawSize 1.0 -->
+          <li>(0, 0, 0.25)</li>   <!-- Lv1: VV_EverflowerA, drawSize 1.2 -->
+          <li>(0, 0.2, 2.3)</li>  <!-- Lv2: VV_EverflowerB, drawSize 6 -->
+          <li>(0, 0.2, 3.0)</li>  <!-- Lv3: VV_EverflowerC, drawSize 6 -->
+          <li>(0, 0.2, 5.9)</li>  <!-- Lv4: VV_EverflowerD, drawSize 6x12 -->
+        </ritualEffecterOffsetByLevel>
+      </li>
+    </comps>
+
+    <modExtensions>
+      <li Class="VVRace.ArcaneSeedExtension">
+        <seedDef>VV_Seed_Everflower</seedDef>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+</Defs>

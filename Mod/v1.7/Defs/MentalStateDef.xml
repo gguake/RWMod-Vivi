@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <MentalBreakDef>
+    <defName>VV_HornetBerserk</defName>
+    <mentalState>VV_HornetBerserk</mentalState>
+    <baseCommonality>0</baseCommonality>
+    <intensity>Extreme</intensity>
+  </MentalBreakDef>
+  
+  <MentalStateDef ParentName="BaseMentalState">
+    <defName>VV_HornetBerserk</defName>
+    <stateClass>VVRace.MentalState_HornetBerserk</stateClass>
+    <label>berserk</label>
+    <category>Aggro</category>
+
+    <nameColor>(0.9,0.2,0.5)</nameColor>
+    
+    <recoveryMessage>{0}'s berserk rage has come to an end.</recoveryMessage>
+    <baseInspectLine>Maddened: Berserk</baseInspectLine>
+
+    <minTicksBeforeRecovery>999999999</minTicksBeforeRecovery>
+    <stateEffecter>Berserk</stateEffecter>
+    <inCaravanCanDo>true</inCaravanCanDo>
+    <recoverFromSleep>false</recoverFromSleep>
+    <recoverFromDowned>false</recoverFromDowned>
+    <recoverFromCollapsingExhausted>false</recoverFromCollapsingExhausted>
+  </MentalStateDef>
+</Defs>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+
+  <AbilityDef>
+    <defName>VV_FairyMaterialize</defName>
+    <label>fairy materialization</label>
+    <description>Materialize all currently bound fairy vivi that are not already outside. They appear one after another near the royal vivi, then fade after a time and leave behind everflower assimilation.</description>
+    <iconPath>UI/Commands/VV_FairyMaterialize</iconPath>
+    <cooldownTicksRange>300</cooldownTicksRange>
+    <hostile>false</hostile>
+    <aiCanUse>false</aiCanUse>
+    <targetRequired>false</targetRequired>
+
+    <verbProperties>
+      <verbClass>VVRace.Verb_CastAbilityMaterialize</verbClass>
+      <label>materialize fairy</label>
+      <violent>false</violent>
+      <warmupTime>8.8</warmupTime>
+      <drawAimPie>false</drawAimPie>
+      <range>1.9</range>
+      <requireLineOfSight>false</requireLineOfSight>
+      <nonInterruptingSelfCast>true</nonInterruptingSelfCast>
+      <targetable>false</targetable>
+      <targetParams>
+        <canTargetSelf>true</canTargetSelf>
+        <canTargetLocations>false</canTargetLocations>
+        <canTargetPawns>false</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+      </targetParams>
+    </verbProperties>
+
+    <comps>
+      <li Class="VVRace.CompProperties_AbilityFairyMaterialize" />
+    </comps>
+  </AbilityDef>
+
+  <AbilityDef>
+    <defName>VV_FairyGuard</defName>
+    <label>fairy - guard</label>
+    <description>Assign one idle fairy vivi to escort an allied pawn, using the same protection behavior idle fairy vivi use around the royal vivi. The fairy attacks nearby visible, non-downed hostiles within a 5x5 area.</description>
+    <iconPath>UI/Commands/VV_FairyGuard</iconPath>
+    <cooldownTicksRange>600</cooldownTicksRange>
+    <hostile>false</hostile>
+    <aiCanUse>false</aiCanUse>
+
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <label>fairy guard</label>
+      <violent>false</violent>
+      <warmupTime>1</warmupTime>
+      <range>24.9</range>
+      <requireLineOfSight>true</requireLineOfSight>
+      <targetParams>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetAnimals>true</canTargetAnimals>
+        <canTargetSelf>false</canTargetSelf>
+        <canTargetLocations>false</canTargetLocations>
+        <canTargetBuildings>false</canTargetBuildings>
+      </targetParams>
+    </verbProperties>
+
+    <comps>
+      <li Class="VVRace.CompProperties_AbilityRequireFairies">
+        <requiredIdle>1</requiredIdle>
+      </li>
+      <li Class="VVRace.CompProperties_AbilityFairyGuard" />
+    </comps>
+  </AbilityDef>
+
+  <AbilityDef>
+    <defName>VV_FairyConcentration</defName>
+    <label>fairy - concentration</label>
+    <description>Mark a hostile target for fairy concentration. While the marked target remains within the royal vivi's sight and range, every idle fairy vivi concentrates attacks on it.</description>
+    <iconPath>UI/Commands/VV_FairyConcentration</iconPath>
+    <cooldownTicksRange>1200</cooldownTicksRange>
+    <hostile>true</hostile>
+    <aiCanUse>false</aiCanUse>
+
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <label>fairy concentration</label>
+      <violent>true</violent>
+      <warmupTime>1.5</warmupTime>
+      <range>31.4</range>
+      <requireLineOfSight>true</requireLineOfSight>
+      <targetParams>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetAnimals>true</canTargetAnimals>
+        <canTargetSelf>false</canTargetSelf>
+        <canTargetLocations>false</canTargetLocations>
+        <canTargetBuildings>false</canTargetBuildings>
+      </targetParams>
+    </verbProperties>
+
+    <comps>
+      <li Class="VVRace.CompProperties_AbilityFairyConcentration" />
+    </comps>
+  </AbilityDef>
+
+  <AbilityDef>
+    <defName>VV_FairyExpansion</defName>
+    <label>fairy - expansion</label>
+    <description>All currently available idle fairy vivi orbit the royal vivi, tracking and attacking all hostiles within the royal vivi's sight. Toggle off by recasting; also ends after the duration or if the royal vivi dies.</description>
+    <iconPath>UI/Commands/VV_FairyExpansion</iconPath>
+    <cooldownTicksRange>600</cooldownTicksRange>
+    <hostile>false</hostile>
+    <aiCanUse>false</aiCanUse>
+    <targetRequired>false</targetRequired>
+
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <label>fairy expansion</label>
+      <violent>true</violent>
+      <warmupTime>1</warmupTime>
+      <range>1.9</range>
+      <requireLineOfSight>false</requireLineOfSight>
+      <nonInterruptingSelfCast>true</nonInterruptingSelfCast>
+      <targetable>false</targetable>
+      <targetParams>
+        <canTargetSelf>true</canTargetSelf>
+        <canTargetPawns>false</canTargetPawns>
+        <canTargetLocations>false</canTargetLocations>
+        <canTargetBuildings>false</canTargetBuildings>
+      </targetParams>
+    </verbProperties>
+
+    <comps>
+      <li Class="VVRace.CompProperties_AbilityFairyExpansion" />
+    </comps>
+  </AbilityDef>
+
+</Defs>

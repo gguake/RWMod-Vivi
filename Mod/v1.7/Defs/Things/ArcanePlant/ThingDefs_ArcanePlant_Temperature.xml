@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 잔불꽃 -->
+  <ThingDef ParentName="VV_ArcanePlantProductive">
+    <defName>VV_EmberBloom</defName>
+    <label>emberbloom</label>
+    <description>a arcane flower shaped like flames that converts mana into heat until the surrounding temperature reaches a certain level. In environments that are sufficiently hot, it produces and accumulates mana instead of emitting heat.
+\nIf placed adjacent to a peashooter, it has a 50% chance to fire a fire pea instead when the peashooter attacks. Fire peas deal flame damage instead of physical damage and set the target on fire.\nIf multiple emberblooms are adjacent, the effect stacks.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_HeatingPetal</ThingDef>
+    </descriptionHyperlinks>
+
+    <graphicData>
+      <texPath>Things/Plants/VV_EmberBloom</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+
+    <statBases>
+      <MaxHitPoints>50</MaxHitPoints>
+      <WorkToBuild>47500</WorkToBuild>
+      <Beauty>10</Beauty>
+      <BeautyOutdoors>10</BeautyOutdoors>
+
+      <VV_PlantGatherCooldown>2.4</VV_PlantGatherCooldown>
+      <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
+    </statBases>
+
+    <costList>
+      <VV_HeatingPetal>30</VV_HeatingPetal>
+    </costList>
+
+    <comps>
+      <li Class="VVRace.CompProperties_Mana">
+        <manaCapacity>700</manaCapacity>
+        <manaGenerateRule Class="VVRace.ManaFluxRule_Temperature">
+          <activeTemperatureRange>20~220</activeTemperatureRange>
+          <manaFromTemperatureRange>0~1500</manaFromTemperatureRange>
+        </manaGenerateRule>
+        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
+          <mana>200</mana>
+        </manaConsumeRule>
+        <manaAbsorbPerDay>400</manaAbsorbPerDay>
+      </li>
+
+      <li Class="VVRace.CompProperties_ArcanePlantBulletOverride">
+        <replacers>
+          <VV_Peashooter>
+            <bulletDef>VV_Bullet_PeaFlame</bulletDef>
+            <chance>0.5</chance>
+          </VV_Peashooter>
+        </replacers>
+      </li>
+
+      <li Class="VVRace.CompProperties_RepeatGatherable" />
+
+      <li Class="CompProperties_HeatPusher">
+        <compClass>VVRace.CompManaHeatPusher</compClass>
+        <heatPerSecond>19</heatPerSecond>
+        <heatPushMaxTemperature>29</heatPushMaxTemperature>
+      </li>
+
+      <li Class="CompProperties_Glower">
+        <compClass>VVRace.CompManaGlower</compClass>
+        <glowRadius>10</glowRadius>
+        <glowColor>(255,247,138,0)</glowColor>
+      </li>
+      <li Class="VVRace.CompProperties_ScentDiffusion" />
+    </comps>
+    
+    <modExtensions>
+      <li Class="VVRace.ArcaneSeedExtension">
+        <seedMarketValueRatio>0.2</seedMarketValueRatio>
+        <seedColor>(255,150,150)</seedColor>
+
+        <leavingSeedCountCurve>
+          <points>
+            <li>(0, 4)</li>
+            <li>(0.7, 5.5)</li>
+            <li>(1.0, 6)</li>
+          </points>
+        </leavingSeedCountCurve>
+      </li>
+      <li Class="VVRace.ScentExtension">
+        <scentHediff>VV_Scent_EmberBloom</scentHediff>
+        <scentColor>(0.9, 0.4, 0.2)</scentColor>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- 서리꽃 -->
+  <ThingDef ParentName="VV_ArcanePlantProductive">
+    <defName>VV_FrostBloom</defName>
+    <label>frostbloom</label>
+    <description>a arcane flower shaped like ice crystals that consumes mana to absorb heat until the surrounding temperature reaches a certain level. In environments that are sufficiently cold, it produces and accumulates mana instead of absorbing heat.
+\nIf placed adjacent to a peashooter, it has a 50% chance to fire an ice pea instead when the peashooter attacks. Ice peas deal frostbite damage instead of physical damage and temporarily slow the target's movement speed.\nIf multiple frostblooms are adjacent, the effect stacks.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_CoolingPetal</ThingDef>
+    </descriptionHyperlinks>
+
+    <graphicData>
+      <texPath>Things/Plants/VV_FrostBloom</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+
+    <statBases>
+      <MaxHitPoints>50</MaxHitPoints>
+      <WorkToBuild>47500</WorkToBuild>
+      <Beauty>10</Beauty>
+      <BeautyOutdoors>10</BeautyOutdoors>
+      
+      <VV_PlantGatherCooldown>2.4</VV_PlantGatherCooldown>
+      <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
+    </statBases>
+
+    <costList>
+      <VV_CoolingPetal>30</VV_CoolingPetal>
+    </costList>
+
+    <comps>
+      <li Class="VVRace.CompProperties_Mana">
+        <manaCapacity>600</manaCapacity>
+        <manaGenerateRule Class="VVRace.ManaFluxRule_CompositeSum">
+          <rules>
+            <li Class="VVRace.ManaFluxRule_Temperature">
+              <activeTemperatureRange>-115~-15</activeTemperatureRange>
+              <manaFromTemperatureRange>0~1000</manaFromTemperatureRange>
+              <manaLerpReversed>true</manaLerpReversed>
+            </li>
+            <li Class="VVRace.ManaFluxRule_WeatherSnowy">
+              <disableIfRoofed>true</disableIfRoofed>
+              <mana>800</mana>
+            </li>
+          </rules>
+        </manaGenerateRule>
+        <manaConsumeRule Class="VVRace.ManaFluxRule_Constant">
+          <mana>200</mana>
+        </manaConsumeRule>
+        <manaAbsorbPerDay>450</manaAbsorbPerDay>
+      </li>
+
+      <li Class="VVRace.CompProperties_ArcanePlantBulletOverride">
+        <replacers>
+          <VV_Peashooter>
+            <bulletDef>VV_Bullet_PeaIce</bulletDef>
+            <chance>0.5</chance>
+          </VV_Peashooter>
+        </replacers>
+      </li>
+
+      <li Class="VVRace.CompProperties_RepeatGatherable" />
+
+      <li Class="CompProperties_HeatPusher">
+        <compClass>VVRace.CompManaHeatPusher</compClass>
+        <heatPerSecond>-10</heatPerSecond>
+        <heatPushMinTemperature>-20</heatPushMinTemperature>
+      </li>
+      <li Class="VVRace.CompProperties_ScentDiffusion" />
+    </comps>
+    
+    <modExtensions>
+      <li Class="VVRace.ArcaneSeedExtension">
+        <seedMarketValueRatio>0.2</seedMarketValueRatio>
+        <seedColor>(150,255,255)</seedColor>
+
+        <leavingSeedCountCurve>
+          <points>
+            <li>(0, 4)</li>
+            <li>(0.7, 5.5)</li>
+            <li>(1.0, 6)</li>
+          </points>
+        </leavingSeedCountCurve>
+      </li>
+      <li Class="VVRace.ScentExtension">
+        <scentHediff>VV_Scent_FrostBloom</scentHediff>
+        <scentColor>(0.6, 0.9, 1.0)</scentColor>
+      </li>
+    </modExtensions>
+  </ThingDef>
+</Defs>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[@Name="TreeBase"]/statBases</xpath>
+    <value>
+      <VV_MinGrowthPlantGatherable>0.7</VV_MinGrowthPlantGatherable>
+      <VV_PlantGatherCooldown>1</VV_PlantGatherCooldown>
+      <VV_TreeResinGatherYield>1</VV_TreeResinGatherYield>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationSequence">
+    <operations>
+      <li Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[@Name="TreeBase"]/comps</xpath>
+        <nomatch Class="PatchOperationAdd">
+          <xpath>Defs/ThingDef[@Name="TreeBase"]</xpath>
+          <value><comps /></value>
+        </nomatch>
+      </li>
+      <li Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[@Name="TreeBase"]/comps</xpath>
+        <value>
+          <li Class="VVRace.CompProperties_RepeatGatherable" />
+        </value>
+      </li>
+    </operations>
+  </Operation>
+  
+  <Operation Class="PatchOperationSequence">
+    <operations>
+      <li Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[@Name="DeciduousTreeBase"]/statBases</xpath>
+        <nomatch Class="PatchOperationAdd">
+          <xpath>Defs/ThingDef[@Name="DeciduousTreeBase"]</xpath>
+          <value><statBases /></value>
+        </nomatch>
+      </li>
+      <li Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[@Name="DeciduousTreeBase"]/statBases</xpath>
+        <value>
+          <VV_MinGrowthPlantGatherable>0.7</VV_MinGrowthPlantGatherable>
+          <VV_PlantGatherCooldown>1</VV_PlantGatherCooldown>
+          <VV_TreeResinGatherYield>1</VV_TreeResinGatherYield>
+        </value>
+      </li>
+    </operations>
+  </Operation>
+</Patch>
