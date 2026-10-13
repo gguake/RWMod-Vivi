@@ -2,9 +2,9 @@
 using System;
 using System.Collections.Generic;
 using Unity.Collections;
-using Unity.Jobs;
 using UnityEngine;
 using Verse;
+using Waylith.Jobs;
 
 namespace VVRace
 {
@@ -26,7 +26,7 @@ namespace VVRace
         private bool _checkFlowerCells;
 
         private bool _diffusionJobStart;
-        private JobHandle _diffusionJobHandle;
+        private int _diffusionJobHandle;
 
         private CellBoolDrawer _cellBoolDrawer;
         private bool _drawManaOverlay;
@@ -195,7 +195,7 @@ namespace VVRace
         {
             LoadedModManager.GetMod<VVRaceMod>().OnWriteSettings -= Notify_ModSettingChanged;
 
-            if (!_diffusionJobHandle.IsCompleted) { _diffusionJobHandle.Complete(); }
+            if (!WaylithJobRuntime.IsCompleted(_diffusionJobHandle)) { WaylithJobRuntime.Complete(_diffusionJobHandle); }
 
             _tmpGrid.Dispose();
             _manaGrid.Dispose();
@@ -233,13 +233,13 @@ namespace VVRace
                 outputGrid = _tmpGrid,
             };
 
-            _diffusionJobHandle = job.Schedule(map.cellIndices.NumGridCells, map.Size.x);
+            _diffusionJobHandle = WaylithJobRuntime.ScheduleFor(job, map.Size.z, 1);
             _diffusionJobStart = true;
         }
 
         private void CompleteDiffuseManaJob()
         {
-            _diffusionJobHandle.Complete();
+            WaylithJobRuntime.Complete(_diffusionJobHandle);
 
             var previousManaGrid = _manaGrid;
             _manaGrid = _tmpGrid;

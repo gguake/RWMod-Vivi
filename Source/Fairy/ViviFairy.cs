@@ -1,6 +1,6 @@
 using RimWorld;
 using RPEF;
-using System.Reflection;
+using Waylith;
 using UnityEngine;
 using Verse;
 using Verse.Sound;
@@ -395,7 +395,7 @@ namespace VVRace
                 return target;
             }
 
-            int frame = Time.frameCount;
+            int frame = Waylith.Time.FrameCount;
             if (_lastVisualFrame == frame)
             {
                 return _visualPosition;
@@ -411,7 +411,7 @@ namespace VVRace
             }
 
             float tickRate = Find.TickManager != null ? Mathf.Max(1f, Find.TickManager.TickRateMultiplier) : 1f;
-            float maxStep = DrawCatchUpCellsPerSecond * tickRate * Time.deltaTime;
+            float maxStep = DrawCatchUpCellsPerSecond * tickRate * Waylith.Time.DeltaTime;
             if (maxStep > 0f)
             {
                 _visualPosition = Vector3.MoveTowards(_visualPosition, target, maxStep);
@@ -423,7 +423,7 @@ namespace VVRace
         {
             _visualPosition = _realPosition.Yto0();
             _visualPositionInitialized = true;
-            _lastVisualFrame = Time.frameCount;
+            _lastVisualFrame = Waylith.Time.FrameCount;
         }
 
         private static SoundDef PhaseSoundForState(FairyState state)
