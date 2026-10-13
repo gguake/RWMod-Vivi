@@ -13,6 +13,6 @@
   <VV_Scent_StatusScent>Collected scent: {0} ({1}/{2} sprays left)</VV_Scent_StatusScent>
   <VV_Scent_StatusLoading>Pollen loaded: {0}/{1}</VV_Scent_StatusLoading>
   <VV_StatsReport_FloralScent>Floral scent</VV_StatsReport_FloralScent>
-  <VV_StatsReport_FloralScent_Desc>The unique scent given off by this arcane flower. A stronger scent always overrides a weaker one. If different kinds of arcane flowers share the room, no scent takes effect.</VV_StatsReport_FloralScent_Desc>
-  <VV_StatsReport_FloralScent_TierDesc>The effect strengthens with scent concentration, across 5 tiers. The values below are at maximum concentration — staying in the flower's room maintains tier 1 (faint), gathering from it grants tier 3 (moderate), and perfume grants tier 5 (intense).</VV_StatsReport_FloralScent_TierDesc>
+  <VV_StatsReport_FloralScent_Desc>The unique scent given off by this arcane flower. Placing the flower in a room grants a faint scent to everyone in that room. If different kinds of arcane flowers share the room, no scent takes effect.</VV_StatsReport_FloralScent_Desc>
+  <VV_StatsReport_FloralScent_TierDesc>The effect grows stronger with scent concentration, and the values below are at maximum concentration. Placed flowers only ever grant a faint scent, no matter how many there are; craft arcane floral perfume to grant an intense scent.</VV_StatsReport_FloralScent_TierDesc>
 </LanguageData>

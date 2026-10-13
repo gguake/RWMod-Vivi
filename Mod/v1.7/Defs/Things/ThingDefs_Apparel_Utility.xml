@@ -161,7 +161,7 @@
     <defName>VV_ArcaneFloralPerfume</defName>
     <label>arcane floral perfume</label>
     <description>A perfume bottle that holds the scents of arcane flowers. Once charged with pollen, it can collect and store a scent from an arcane flower.
-\nA collected scent can be sprayed up to five times, granting its fragrance to everyone nearby. Only one arcane floral scent can take effect at a time.</description>
+\nA collected scent can be sprayed up to five times, granting an intense fragrance to everyone nearby. Only one arcane floral scent can take effect at a time.</description>
     <thingClass>VVRace.Apparel_ScentBottle</thingClass>
     <graphicData>
       <texPath>Things/Item/Equipment/VV_PerfumeA</texPath>

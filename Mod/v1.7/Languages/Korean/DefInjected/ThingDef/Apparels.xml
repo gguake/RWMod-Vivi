@@ -51,4 +51,9 @@
 
 <VV_MultiuseBrushTool.label>비비 다용도 붓</VV_MultiuseBrushTool.label>
 <VV_MultiuseBrushTool.description>꽃가루를 청소하거나 식물에서 재료를 정밀하게 채집할때 사용할 수 있는 커다란 붓입니다. 거친 표면을 다듬을때에도 큰 도움이 되며 인간들도 사용할 수 있습니다.</VV_MultiuseBrushTool.description>
+
+<VV_ArcaneFloralPerfume.label>마법 꽃 향수</VV_ArcaneFloralPerfume.label>
+<VV_ArcaneFloralPerfume.description>마법 꽃의 향을 담는 향수병입니다. 꽃가루를 채운 뒤 마법 꽃에서 향을 채집해 담을 수 있습니다.
+\n한번 채집한 향은 다섯 번까지 뿌릴 수 있으며 진한 향기를 주변 모두에게 부여할 수 있습니다. 마법 꽃 향수의 효과는 하나만 적용됩니다.</VV_ArcaneFloralPerfume.description>
+
 </LanguageData>
