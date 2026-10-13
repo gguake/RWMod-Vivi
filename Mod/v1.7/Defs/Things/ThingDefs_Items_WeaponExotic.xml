@@ -333,6 +333,7 @@
         
         <maxTrailPoint>60</maxTrailPoint>
         <refreshIntervalTicks>0</refreshIntervalTicks>
+        <fadeOutTicks>18</fadeOutTicks>
       </li>
     </comps>
   </ThingDef>

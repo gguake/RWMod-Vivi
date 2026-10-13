@@ -205,7 +205,7 @@ namespace VVRace
         {
             if (Scribe.mode == LoadSaveMode.Inactive)
             {
-                TrailRenderer?.ResetTrail();
+                TrailRenderer?.FinishTrail();
             }
 
             _attackGraphicActive = false;
