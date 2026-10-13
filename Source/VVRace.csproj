@@ -18,9 +18,10 @@
     <HarmonyPath Condition="'$(HarmonyPath)' == ''">$(RimWorldDir)\..\..\workshop\content\294100\2009463077\1.7\Assemblies\0Harmony.dll</HarmonyPath>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>none</DebugType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Build|AnyCPU' ">
-    <DebugType>none</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>..\Mod\v1.7\Assemblies\</OutputPath>
     <DefineConstants>
@@ -55,7 +56,8 @@
       <HintPath>..\Mod\v1.7\Assemblies\RPEF.dll</HintPath>
     </Reference>
     <Reference Include="UnityStubs">
-      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\RimWorld\UnityStubs.dll</HintPath>
+      <HintPath>$(RimWorldDir)\UnityStubs.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Waylith">
       <HintPath>$(RimWorldDir)\Waylith.dll</HintPath>
