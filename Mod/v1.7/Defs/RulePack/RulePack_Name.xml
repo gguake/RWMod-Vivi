@@ -1,18 +1,206 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
+  <!--
+    The first name is written again as an explicit nickname ("First 'First' Last"), so a Vivi is always shown by the first name.
+    Without it, NameTriple shows the first or last name by hash parity, and the last name pool is small.
+    Each vivi_name_* rule sets a tag that only the matching vivi_nick_* rule requires, so the nickname repeats the chosen words.
+  -->
   <RulePackDef>
     <defName>VV_NamerPersonVivi</defName>
     <rulePack>
       <rulesStrings>
-        <li>r_name->[first_name] [last_name]</li>
+        <li>r_name->[first_name] '[nick_name]' [last_name]</li>
 
         <li>first_name->[vivi_name_prefix][vivi_name_base]</li>
+        <li>nick_name->[vivi_nick_prefix][vivi_nick_base]</li>
         <li>last_name->[vivi_flower_nouns]</li>
+
+        <li>vivi_name_prefix(tag=p_sun)->Sun</li>
+        <li>vivi_nick_prefix(requiredTag=p_sun)->Sun</li>
+        <li>vivi_name_prefix(tag=p_frost)->Frost</li>
+        <li>vivi_nick_prefix(requiredTag=p_frost)->Frost</li>
+        <li>vivi_name_prefix(tag=p_glow)->Glow</li>
+        <li>vivi_nick_prefix(requiredTag=p_glow)->Glow</li>
+        <li>vivi_name_prefix(tag=p_white)->White</li>
+        <li>vivi_nick_prefix(requiredTag=p_white)->White</li>
+        <li>vivi_name_prefix(tag=p_sky)->Sky</li>
+        <li>vivi_nick_prefix(requiredTag=p_sky)->Sky</li>
+        <li>vivi_name_prefix(tag=p_cloud)->Cloud</li>
+        <li>vivi_nick_prefix(requiredTag=p_cloud)->Cloud</li>
+        <li>vivi_name_prefix(tag=p_violet)->Violet</li>
+        <li>vivi_nick_prefix(requiredTag=p_violet)->Violet</li>
+        <li>vivi_name_prefix(tag=p_ruby)->Ruby</li>
+        <li>vivi_nick_prefix(requiredTag=p_ruby)->Ruby</li>
+        <li>vivi_name_prefix(tag=p_sweet)->Sweet</li>
+        <li>vivi_nick_prefix(requiredTag=p_sweet)->Sweet</li>
+        <li>vivi_name_prefix(tag=p_gold)->Gold</li>
+        <li>vivi_nick_prefix(requiredTag=p_gold)->Gold</li>
+        <li>vivi_name_prefix(tag=p_silver)->Silver</li>
+        <li>vivi_nick_prefix(requiredTag=p_silver)->Silver</li>
+        <li>vivi_name_prefix(tag=p_amber)->Amber</li>
+        <li>vivi_nick_prefix(requiredTag=p_amber)->Amber</li>
+        <li>vivi_name_prefix(tag=p_butter)->Butter</li>
+        <li>vivi_nick_prefix(requiredTag=p_butter)->Butter</li>
+        <li>vivi_name_prefix(tag=p_rich)->Rich</li>
+        <li>vivi_nick_prefix(requiredTag=p_rich)->Rich</li>
+        <li>vivi_name_prefix(tag=p_water)->Water</li>
+        <li>vivi_nick_prefix(requiredTag=p_water)->Water</li>
+        <li>vivi_name_prefix(tag=p_peach)->Peach</li>
+        <li>vivi_nick_prefix(requiredTag=p_peach)->Peach</li>
+        <li>vivi_name_prefix(tag=p_star)->Star</li>
+        <li>vivi_nick_prefix(requiredTag=p_star)->Star</li>
+        <li>vivi_name_prefix(tag=p_lunar)->Lunar</li>
+        <li>vivi_nick_prefix(requiredTag=p_lunar)->Lunar</li>
+        <li>vivi_name_prefix(tag=p_clear)->Clear</li>
+        <li>vivi_nick_prefix(requiredTag=p_clear)->Clear</li>
+        <li>vivi_name_prefix(tag=p_ivory)->Ivory</li>
+        <li>vivi_nick_prefix(requiredTag=p_ivory)->Ivory</li>
+        <li>vivi_name_prefix(tag=p_jade)->Jade</li>
+        <li>vivi_nick_prefix(requiredTag=p_jade)->Jade</li>
+        <li>vivi_name_prefix(tag=p_ash)->Ash</li>
+        <li>vivi_nick_prefix(requiredTag=p_ash)->Ash</li>
+        <li>vivi_name_prefix(tag=p_snow)->Snow</li>
+        <li>vivi_nick_prefix(requiredTag=p_snow)->Snow</li>
+        <li>vivi_name_prefix(tag=p_mild)->Mild</li>
+        <li>vivi_nick_prefix(requiredTag=p_mild)->Mild</li>
+        <li>vivi_name_prefix(tag=p_blue)->Blue</li>
+        <li>vivi_nick_prefix(requiredTag=p_blue)->Blue</li>
+        <li>vivi_name_prefix(tag=p_photo)->Photo</li>
+        <li>vivi_nick_prefix(requiredTag=p_photo)->Photo</li>
+        <li>vivi_name_prefix(tag=p_aero)->Aero</li>
+        <li>vivi_nick_prefix(requiredTag=p_aero)->Aero</li>
+        <li>vivi_name_prefix(tag=p_ice)->Ice</li>
+        <li>vivi_nick_prefix(requiredTag=p_ice)->Ice</li>
+        <li>vivi_name_prefix(tag=p_cream)->Cream</li>
+        <li>vivi_nick_prefix(requiredTag=p_cream)->Cream</li>
+        <li>vivi_name_prefix(tag=p_aqua)->Aqua</li>
+        <li>vivi_nick_prefix(requiredTag=p_aqua)->Aqua</li>
+        <li>vivi_name_prefix(tag=p_purple)->Purple</li>
+        <li>vivi_nick_prefix(requiredTag=p_purple)->Purple</li>
+        <li>vivi_name_prefix(tag=p_brown)->Brown</li>
+        <li>vivi_nick_prefix(requiredTag=p_brown)->Brown</li>
+        <li>vivi_name_prefix(tag=p_solar)->Solar</li>
+        <li>vivi_nick_prefix(requiredTag=p_solar)->Solar</li>
+        <li>vivi_name_prefix(tag=p_gray)->Gray</li>
+        <li>vivi_nick_prefix(requiredTag=p_gray)->Gray</li>
+        <li>vivi_name_prefix(tag=p_moon)->Moon</li>
+        <li>vivi_nick_prefix(requiredTag=p_moon)->Moon</li>
+        <li>vivi_name_prefix(tag=p_sand)->Sand</li>
+        <li>vivi_nick_prefix(requiredTag=p_sand)->Sand</li>
+        <li>vivi_name_prefix(tag=p_mist)->Mist</li>
+        <li>vivi_nick_prefix(requiredTag=p_mist)->Mist</li>
+        <li>vivi_name_prefix(tag=p_red)->Red</li>
+        <li>vivi_nick_prefix(requiredTag=p_red)->Red</li>
+        <li>vivi_name_prefix(tag=p_green)->Green</li>
+        <li>vivi_nick_prefix(requiredTag=p_green)->Green</li>
+        <li>vivi_name_prefix(tag=p_milk)->Milk</li>
+        <li>vivi_nick_prefix(requiredTag=p_milk)->Milk</li>
+        <li>vivi_name_prefix(tag=p_candy)->Candy</li>
+        <li>vivi_nick_prefix(requiredTag=p_candy)->Candy</li>
+
+        <li>vivi_name_base(tag=b_lily)->lily</li>
+        <li>vivi_nick_base(requiredTag=b_lily)->lily</li>
+        <li>vivi_name_base(tag=b_rose)->rose</li>
+        <li>vivi_nick_base(requiredTag=b_rose)->rose</li>
+        <li>vivi_name_base(tag=b_mint)->mint</li>
+        <li>vivi_nick_base(requiredTag=b_mint)->mint</li>
+        <li>vivi_name_base(tag=b_tree)->tree</li>
+        <li>vivi_nick_base(requiredTag=b_tree)->tree</li>
+        <li>vivi_name_base(tag=b_flower)->flower</li>
+        <li>vivi_nick_base(requiredTag=b_flower)->flower</li>
+        <li>vivi_name_base(tag=b_daisy)->daisy</li>
+        <li>vivi_nick_base(requiredTag=b_daisy)->daisy</li>
+        <li>vivi_name_base(tag=b_fruit)->fruit</li>
+        <li>vivi_nick_base(requiredTag=b_fruit)->fruit</li>
+        <li>vivi_name_base(tag=b_grass)->grass</li>
+        <li>vivi_nick_base(requiredTag=b_grass)->grass</li>
+        <li>vivi_name_base(tag=b_ivy)->ivy</li>
+        <li>vivi_nick_base(requiredTag=b_ivy)->ivy</li>
+        <li>vivi_name_base(tag=b_pansy)->pansy</li>
+        <li>vivi_nick_base(requiredTag=b_pansy)->pansy</li>
+        <li>vivi_name_base(tag=b_tulip)->tulip</li>
+        <li>vivi_nick_base(requiredTag=b_tulip)->tulip</li>
+        <li>vivi_name_base(tag=b_lime)->lime</li>
+        <li>vivi_nick_base(requiredTag=b_lime)->lime</li>
+        <li>vivi_name_base(tag=b_sage)->sage</li>
+        <li>vivi_nick_base(requiredTag=b_sage)->sage</li>
+        <li>vivi_name_base(tag=b_lemon)->lemon</li>
+        <li>vivi_nick_base(requiredTag=b_lemon)->lemon</li>
+        <li>vivi_name_base(tag=b_honey)->honey</li>
+        <li>vivi_nick_base(requiredTag=b_honey)->honey</li>
+        <li>vivi_name_base(tag=b_olive)->olive</li>
+        <li>vivi_nick_base(requiredTag=b_olive)->olive</li>
+        <li>vivi_name_base(tag=b_lilac)->lilac</li>
+        <li>vivi_nick_base(requiredTag=b_lilac)->lilac</li>
+        <li>vivi_name_base(tag=b_glory)->glory</li>
+        <li>vivi_nick_base(requiredTag=b_glory)->glory</li>
+        <li>vivi_name_base(tag=b_leaf)->leaf</li>
+        <li>vivi_nick_base(requiredTag=b_leaf)->leaf</li>
+        <li>vivi_name_base(tag=b_maple)->maple</li>
+        <li>vivi_nick_base(requiredTag=b_maple)->maple</li>
+        <li>vivi_name_base(tag=b_blossom)->blossom</li>
+        <li>vivi_nick_base(requiredTag=b_blossom)->blossom</li>
+        <li>vivi_name_base(tag=b_flora)->flora</li>
+        <li>vivi_nick_base(requiredTag=b_flora)->flora</li>
+        <li>vivi_name_base(tag=b_root)->root</li>
+        <li>vivi_nick_base(requiredTag=b_root)->root</li>
+        <li>vivi_name_base(tag=b_light)->light</li>
+        <li>vivi_nick_base(requiredTag=b_light)->light</li>
+        <li>vivi_name_base(tag=b_wind)->wind</li>
+        <li>vivi_nick_base(requiredTag=b_wind)->wind</li>
+        <li>vivi_name_base(tag=b_seed)->seed</li>
+        <li>vivi_nick_base(requiredTag=b_seed)->seed</li>
+        <li>vivi_name_base(tag=b_herb)->herb</li>
+        <li>vivi_nick_base(requiredTag=b_herb)->herb</li>
+        <li>vivi_name_base(tag=b_grain)->grain</li>
+        <li>vivi_nick_base(requiredTag=b_grain)->grain</li>
+        <li>vivi_name_base(tag=b_apple)->apple</li>
+        <li>vivi_nick_base(requiredTag=b_apple)->apple</li>
+        <li>vivi_name_base(tag=b_berry)->berry</li>
+        <li>vivi_nick_base(requiredTag=b_berry)->berry</li>
+        <li>vivi_name_base(tag=b_bell)->bell</li>
+        <li>vivi_nick_base(requiredTag=b_bell)->bell</li>
+        <li>vivi_name_base(tag=b_cup)->cup</li>
+        <li>vivi_nick_base(requiredTag=b_cup)->cup</li>
+        <li>vivi_name_base(tag=b_orange)->orange</li>
+        <li>vivi_nick_base(requiredTag=b_orange)->orange</li>
+        <li>vivi_name_base(tag=b_jelly)->jelly</li>
+        <li>vivi_nick_base(requiredTag=b_jelly)->jelly</li>
+        <li>vivi_name_base(tag=b_river)->river</li>
+        <li>vivi_nick_base(requiredTag=b_river)->river</li>
+        <li>vivi_name_base(tag=b_hill)->hill</li>
+        <li>vivi_nick_base(requiredTag=b_hill)->hill</li>
+        <li>vivi_name_base(tag=b_lake)->lake</li>
+        <li>vivi_nick_base(requiredTag=b_lake)->lake</li>
+        <li>vivi_name_base(tag=b_rain)->rain</li>
+        <li>vivi_nick_base(requiredTag=b_rain)->rain</li>
+        <li>vivi_name_base(tag=b_stone)->stone</li>
+        <li>vivi_nick_base(requiredTag=b_stone)->stone</li>
+        <li>vivi_name_base(tag=b_spring)->spring</li>
+        <li>vivi_nick_base(requiredTag=b_spring)->spring</li>
+        <li>vivi_name_base(tag=b_cherry)->cherry</li>
+        <li>vivi_nick_base(requiredTag=b_cherry)->cherry</li>
+        <li>vivi_name_base(tag=b_cliff)->cliff</li>
+        <li>vivi_nick_base(requiredTag=b_cliff)->cliff</li>
+        <li>vivi_name_base(tag=b_vine)->vine</li>
+        <li>vivi_nick_base(requiredTag=b_vine)->vine</li>
+        <li>vivi_name_base(tag=b_moss)->moss</li>
+        <li>vivi_nick_base(requiredTag=b_moss)->moss</li>
+        <li>vivi_name_base(tag=b_clover)->clover</li>
+        <li>vivi_nick_base(requiredTag=b_clover)->clover</li>
+        <li>vivi_name_base(tag=b_melon)->melon</li>
+        <li>vivi_nick_base(requiredTag=b_melon)->melon</li>
+        <li>vivi_name_base(tag=b_nut)->nut</li>
+        <li>vivi_nick_base(requiredTag=b_nut)->nut</li>
+        <li>vivi_name_base(tag=b_bean)->bean</li>
+        <li>vivi_nick_base(requiredTag=b_bean)->bean</li>
+        <li>vivi_name_base(tag=b_tea)->tea</li>
+        <li>vivi_nick_base(requiredTag=b_tea)->tea</li>
+        <li>vivi_name_base(tag=b_cake)->cake</li>
+        <li>vivi_nick_base(requiredTag=b_cake)->cake</li>
       </rulesStrings>
       <rulesFiles>
         <li>vivi_flower_nouns->Words/VV_FlowerNouns</li>
-        <li>vivi_name_prefix->Words/VV_NamePrefix</li>
-        <li>vivi_name_base->Words/VV_NameBase</li>
         <li>colors->Words/Nouns/Colors</li>
       </rulesFiles>
     </rulePack>
