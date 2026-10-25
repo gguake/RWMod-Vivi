@@ -29,8 +29,7 @@
 <VV_ModSettings_TabGeneral>기본</VV_ModSettings_TabGeneral>
 <VV_ModSettings_TabGenes>유전자</VV_ModSettings_TabGenes>
 
-<VV_ModSettings_ModGenesDesc>비비에게 무작위 유전자가 주어질 때 다른 모드에서 추가된 유전자를 사용할지 유전자별로 설정합니다. 왼쪽은 비활성, 오른쪽은 활성 유전자이며 항목을 클릭하면 반대쪽으로 옮겨집니다.
-\n바닐라(코어 및 DLC) 유전자는 이 설정과 관계없이 항상 사용됩니다.</VV_ModSettings_ModGenesDesc>
+<VV_ModSettings_ModGenesDesc>비비에게 무작위 유전자가 주어질 때 다른 모드에서 추가된 유전자를 사용할지 유전자별로 설정합니다.</VV_ModSettings_ModGenesDesc>
 <VV_ModSettings_NoModGenes>현재 불러온 모드 중 비비에게 무작위로 부여될 수 있는 유전자가 없습니다.</VV_ModSettings_NoModGenes>
 <VV_ModSettings_DisabledModGenes>비활성 유전자 ({0})</VV_ModSettings_DisabledModGenes>
 <VV_ModSettings_EnabledModGenes>활성 유전자 ({0})</VV_ModSettings_EnabledModGenes>
