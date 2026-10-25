@@ -29,8 +29,7 @@
 <VV_ModSettings_TabGeneral>General</VV_ModSettings_TabGeneral>
 <VV_ModSettings_TabGenes>Genes</VV_ModSettings_TabGenes>
 
-<VV_ModSettings_ModGenesDesc>Choose, gene by gene, whether genes added by other mods can be given to Vivis as random genes. The left list shows disabled genes and the right list shows enabled genes. Click a gene to move it to the other list.
-\nVanilla (Core and DLC) genes are always used regardless of this setting.</VV_ModSettings_ModGenesDesc>
+<VV_ModSettings_ModGenesDesc>Choose, gene by gene, whether genes added by other mods can be given to Vivis as random genes.</VV_ModSettings_ModGenesDesc>
 <VV_ModSettings_NoModGenes>None of the loaded mods add genes that can be given to Vivis as random genes.</VV_ModSettings_NoModGenes>
 <VV_ModSettings_DisabledModGenes>Disabled genes ({0})</VV_ModSettings_DisabledModGenes>
 <VV_ModSettings_EnabledModGenes>Enabled genes ({0})</VV_ModSettings_EnabledModGenes>
