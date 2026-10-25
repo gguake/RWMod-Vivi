@@ -26,8 +26,22 @@
 \n환경 마나는 자연의 희귀한 식물이나 마법 식물들이 생산해 방출하거나 흡수하며 시간에 따라 천천히 퍼집니다.
 \n마나가 일정 이상 축적된 땅에는 비비아 꽃이 자연 발생하며 비비들의 일부 장비는 환경 마나를 활용할 수 있습니다.</VV_ShowManaOverlayTooltip>
 
-<VV_ModSettings_AllowSelectModGenes>모드에서 추가된 유전자 허용</VV_ModSettings_AllowSelectModGenes>
-<VV_ModSettings_AllowSelectModGenesDesc>비비에게 랜덤한 유전자가 주어질때 다른 모드에서 추가된 유전자를 사용가능한지 여부를 설정합니다.</VV_ModSettings_AllowSelectModGenesDesc>
+<VV_ModSettings_TabGeneral>기본</VV_ModSettings_TabGeneral>
+<VV_ModSettings_TabGenes>유전자</VV_ModSettings_TabGenes>
+
+<VV_ModSettings_ModGenesDesc>비비에게 무작위 유전자가 주어질 때 다른 모드에서 추가된 유전자를 사용할지 유전자별로 설정합니다. 왼쪽은 비활성, 오른쪽은 활성 유전자이며 항목을 클릭하면 반대쪽으로 옮겨집니다.
+\n바닐라(코어 및 DLC) 유전자는 이 설정과 관계없이 항상 사용됩니다.</VV_ModSettings_ModGenesDesc>
+<VV_ModSettings_NoModGenes>현재 불러온 모드 중 비비에게 무작위로 부여될 수 있는 유전자가 없습니다.</VV_ModSettings_NoModGenes>
+<VV_ModSettings_DisabledModGenes>비활성 유전자 ({0})</VV_ModSettings_DisabledModGenes>
+<VV_ModSettings_EnabledModGenes>활성 유전자 ({0})</VV_ModSettings_EnabledModGenes>
+<VV_ModSettings_EnableAllModGenes>모두 활성화</VV_ModSettings_EnableAllModGenes>
+<VV_ModSettings_EnableAllModGenesDesc>왼쪽 목록에 표시된 유전자를 모두 활성화합니다.</VV_ModSettings_EnableAllModGenesDesc>
+<VV_ModSettings_DisableAllModGenes>모두 비활성화</VV_ModSettings_DisableAllModGenes>
+<VV_ModSettings_DisableAllModGenesDesc>오른쪽 목록에 표시된 유전자를 모두 비활성화합니다.</VV_ModSettings_DisableAllModGenesDesc>
+<VV_ModSettings_ModGeneListEmpty>없음</VV_ModSettings_ModGeneListEmpty>
+<VV_ModSettings_ModGeneSource>추가한 모드: {0}</VV_ModSettings_ModGeneSource>
+<VV_ModSettings_ModGeneClickToEnable>클릭하면 활성화합니다.</VV_ModSettings_ModGeneClickToEnable>
+<VV_ModSettings_ModGeneClickToDisable>클릭하면 비활성화합니다.</VV_ModSettings_ModGeneClickToDisable>
 
 <VV_ModSettings_RoyalJellyNeedMultiplier>로열 젤리 충전량 배율</VV_ModSettings_RoyalJellyNeedMultiplier>
 <VV_ModSettings_RoyalJellyNeedMultiplierDesc>어린 비비가 로열 젤리를 섭취했을때 관련 욕구가 증가하는 비율을 설정합니다. 높을수록 로열 비비가 되는데 더 적은 로열 젤리가 소모됩니다.</VV_ModSettings_RoyalJellyNeedMultiplierDesc>

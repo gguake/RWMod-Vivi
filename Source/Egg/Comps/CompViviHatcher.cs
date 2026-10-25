@@ -212,7 +212,7 @@ namespace VVRace
                             inheritedGenes);
                         if (!architeGenes.NullOrEmpty())
                         {
-                            xenogenes.AddRange(architeGenes.Where(geneDef => !xenogenes.Contains(geneDef)));
+                            xenogenes.AddRange(architeGenes.Where(geneDef => geneDef != null && !xenogenes.Contains(geneDef)));
                         }
 
                         var request = new PawnGenerationRequest(

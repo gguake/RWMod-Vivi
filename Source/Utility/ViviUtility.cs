@@ -1,4 +1,5 @@
-using RimWorld;
+﻿using RimWorld;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -15,6 +16,11 @@ namespace VVRace
         public static bool IsRoyalVivi(this Pawn pawn) => pawn.TryGetComp<CompVivi>()?.isRoyal ?? false;
 
         public static bool IsCompatibleWithVivi(GeneDef def) => def != GeneDefOf.XenogermReimplanter;
+
+        // 코어/DLC가 아닌 모드에서 추가된 유전자 (모드 옵션에서 개별 설정 대상)
+        public static bool IsModGene(GeneDef def) =>
+            def.modContentPack != null &&
+            !def.modContentPack.PackageId.StartsWith(ModContentPack.CoreModPackageId, StringComparison.Ordinal);
 
         public static List<GeneDef> SelectRandomGeneForVivi(
             int count,
@@ -65,28 +71,36 @@ namespace VVRace
                 return new List<GeneDef>();
             }
 
-            var allowModGenes = LoadedModManager.GetMod<VVRaceMod>().GetSettings<VVRaceModSettings>().allowSelectModGenes;
-            var eligibleGenes = DefDatabase<GeneDef>.AllDefsListForReading.Where(def =>
-            {
-                if (!IsCompatibleWithVivi(def) || def.biostatArc <= 0 || !def.canGenerateInGeneSet || def.prerequisite != null)
-                {
-                    return false;
-                }
-
-                if (!allowModGenes && def.modContentPack != null &&
-                    !def.modContentPack.PackageId.StartsWith(ModContentPack.CoreModPackageId))
-                {
-                    return false;
-                }
-
-                return true;
-
-            }).ToList();
+            var settings = VVRaceMod.Settings;
+            var eligibleGenes = DefDatabase<GeneDef>.AllDefsListForReading
+                .Where(def => IsArchiteGeneCandidate(def) && settings.IsGeneAllowed(def))
+                .ToList();
 
             return eligibleGenes.TakeRandomDistinct(Mathf.Min(count, eligibleGenes.Count));
         }
 
+        // 모드 옵션의 유전자 탭에 표시할 모드 유전자 (일반 또는 아키테 무작위 유전자 후보)
+        public static List<GeneDef> GetModGeneCandidates()
+        {
+            return DefDatabase<GeneDef>.AllDefsListForReading
+                .Where(def => IsModGene(def) && (IsRandomGeneCandidate(def) || IsArchiteGeneCandidate(def)))
+                .OrderBy(def => def.modContentPack.loadOrder)
+                .ThenBy(def => def.label)
+                .ToList();
+        }
+
+        public static bool IsArchiteGeneCandidate(GeneDef def)
+        {
+            return IsCompatibleWithVivi(def) && def.biostatArc > 0 && def.canGenerateInGeneSet && def.prerequisite == null;
+        }
+
+        // 저장된 부모 유전자는 모드가 제거되면 null로 로드된다.
         private static bool CheckInvalidGenesForVivi(GeneDef def)
+        {
+            return def != null && IsRandomGeneCandidate(def) && VVRaceMod.Settings.IsGeneAllowed(def);
+        }
+
+        public static bool IsRandomGeneCandidate(GeneDef def)
         {
             if (!IsCompatibleWithVivi(def)) { return false; }
             if (VVXenotypeDefOf.VV_Vivi.genes.Contains(def)) { return false; }
@@ -97,14 +111,6 @@ namespace VVRace
             if (def.prerequisite != null) { return false; }
             if (def.statFactors != null && def.statFactors.Count == 1 && def.statFactors.Any(v => v.stat == StatDefOf.Fertility)) { return false; }
             if (def.statOffsets != null && def.statOffsets.Count == 1 && def.statOffsets.Any(v => v.stat == StatDefOf.Fertility)) { return false; }
-
-            if (!LoadedModManager.GetMod<VVRaceMod>().GetSettings<VVRaceModSettings>().allowSelectModGenes)
-            {
-                if (def.modContentPack != null && !def.modContentPack.PackageId.StartsWith(ModContentPack.CoreModPackageId))
-                {
-                    return false;
-                }
-            }
 
             if (def.exclusionTags != null)
             {

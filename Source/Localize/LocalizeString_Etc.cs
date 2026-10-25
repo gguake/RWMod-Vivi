@@ -26,8 +26,21 @@
 
         public const string VV_ShowManaOverlayTooltip = nameof(VV_ShowManaOverlayTooltip);
 
-        public const string VV_ModSettings_AllowSelectModGenes = nameof(VV_ModSettings_AllowSelectModGenes);
-        public const string VV_ModSettings_AllowSelectModGenesDesc = nameof(VV_ModSettings_AllowSelectModGenesDesc);
+        public const string VV_ModSettings_TabGeneral = nameof(VV_ModSettings_TabGeneral);
+        public const string VV_ModSettings_TabGenes = nameof(VV_ModSettings_TabGenes);
+
+        public const string VV_ModSettings_ModGenesDesc = nameof(VV_ModSettings_ModGenesDesc);
+        public const string VV_ModSettings_NoModGenes = nameof(VV_ModSettings_NoModGenes);
+        public const string VV_ModSettings_DisabledModGenes = nameof(VV_ModSettings_DisabledModGenes);
+        public const string VV_ModSettings_EnabledModGenes = nameof(VV_ModSettings_EnabledModGenes);
+        public const string VV_ModSettings_EnableAllModGenes = nameof(VV_ModSettings_EnableAllModGenes);
+        public const string VV_ModSettings_EnableAllModGenesDesc = nameof(VV_ModSettings_EnableAllModGenesDesc);
+        public const string VV_ModSettings_DisableAllModGenes = nameof(VV_ModSettings_DisableAllModGenes);
+        public const string VV_ModSettings_DisableAllModGenesDesc = nameof(VV_ModSettings_DisableAllModGenesDesc);
+        public const string VV_ModSettings_ModGeneListEmpty = nameof(VV_ModSettings_ModGeneListEmpty);
+        public const string VV_ModSettings_ModGeneSource = nameof(VV_ModSettings_ModGeneSource);
+        public const string VV_ModSettings_ModGeneClickToEnable = nameof(VV_ModSettings_ModGeneClickToEnable);
+        public const string VV_ModSettings_ModGeneClickToDisable = nameof(VV_ModSettings_ModGeneClickToDisable);
 
         public const string VV_ModSettings_RoyalJellyNeedMultiplier = nameof(VV_ModSettings_RoyalJellyNeedMultiplier);
         public const string VV_ModSettings_RoyalJellyNeedMultiplierDesc = nameof(VV_ModSettings_RoyalJellyNeedMultiplierDesc);
