@@ -65,4 +65,7 @@
 <VV_ManaFluxRuleLabel_WeatherRainy>비가 올 때</VV_ManaFluxRuleLabel_WeatherRainy>
 <VV_ManaFluxRuleLabel_WeatherSnowy>눈이 올 때</VV_ManaFluxRuleLabel_WeatherSnowy>
 <VV_ManaFluxRuleLabel_Wind>바람이 불 때</VV_ManaFluxRuleLabel_Wind>
+
+<VV_StatsReport_EverflowerAttunementLevel>영원꽃 공명 레벨</VV_StatsReport_EverflowerAttunementLevel>
+<VV_StatsReport_EverflowerResonator>영원꽃 공명자</VV_StatsReport_EverflowerResonator>
 </LanguageData>
