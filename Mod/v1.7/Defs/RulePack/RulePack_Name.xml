@@ -18,6 +18,30 @@
     </rulePack>
   </RulePackDef>
   
+  <!--
+    Ideo name maker of VV_ViviCulture. The meme that supplies the symbol pack (VV_Structure_Vivi, via symbolPackOverride)
+    is left out of the ideo name request, so only the culture namer can shape the ideo name.
+  -->
+  <RulePackDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>VV_NamerIdeoVivi</defName>
+    <include>
+      <li>NamerIdeoGlobal</li>
+    </include>
+    <rulePack>
+      <rulesStrings>
+        <!-- Structure meme packs are exposed as [packIdeoNameStructure]. priority=1 blocks NamerIdeoGlobal's fallbacks
+             (neo-/post- prefixes, [creed] of [packTheme]...), which still apply when the pack comes from a non-structure meme -->
+        <li>r_ideoName(priority=1)->[packIdeoNameStructure]</li>
+        <li>r_ideoName(priority=1)->[viviIdeoAdjective] [packIdeoNameStructure]</li>
+
+        <li>viviIdeoAdjective->simple</li>
+        <li>viviIdeoAdjective->warm</li>
+        <li>viviIdeoAdjective->gentle</li>
+        <li>viviIdeoAdjective->peaceful</li>
+      </rulesStrings>
+    </rulePack>
+  </RulePackDef>
+
   <RulePackDef>
     <defName>VV_NamerFactionVivi</defName>
     <rulePack>

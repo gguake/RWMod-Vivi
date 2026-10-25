@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <MemeDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>VV_Structure_Vivi</defName>
+    <label>vivi tradition</label>
+    <description>It's the simple tradition of the Vivis.</description>
+    <category>Structure</category>
+    <iconPath>UI/Icons/ViviFaction</iconPath>
+    <impact>0</impact>
+    <renderOrder>99</renderOrder>
+    <deityCount>0</deityCount>
+    <allowSymbolsFromDeity>false</allowSymbolsFromDeity>
+    <!-- Ideo name/adjective/member always come from this meme's symbol packs -->
+    <symbolPackOverride>true</symbolPackOverride>
+
+    <!-- Worship room name, also [altarRoomLabel] in descriptions. vanilla: temple / sanctuary / church -->
+    <worshipRoomLabel>gathering hall</worshipRoomLabel>
+
+    <factionWhitelist>
+      <li>VV_ViviFederation</li>
+      <li>VV_PlayerVivi</li>
+      <li>VV_PlayerExiledVivi</li>
+      <li>VV_PlayerViviRefugee</li>
+    </factionWhitelist>
+
+    <generalRules>
+      <rulesStrings>
+        <!-- No r_ideoName here: this meme supplies the symbol pack, and that meme is left out of the ideo name request.
+             The ideo name rules live in the culture namer (VV_NamerIdeoVivi) -->
+
+        <!-- Leader title (also used as the faction leader title). priority=1 blocks vanilla culture words (high, great, president...) -->
+        <li>r_leaderTitle(priority=1)->[memeLeaderAdjective] [memeLeaderNoun]</li>
+        <li>r_leaderTitle(priority=1)->[memeLeaderNoun]</li>
+
+        <!-- Leader title noun. priority=1: other memes' nouns are ignored. vanilla: bishop, pope / mind, decider, leader -->
+        <li>memeLeaderNoun(priority=1)->queen</li>
+        <li>memeLeaderNoun(priority=1)->representative</li>
+        <li>memeLeaderNoun(priority=1)->spokesperson</li>
+        <li>memeLeaderNoun(priority=1)->leader</li>
+
+        <!-- Leader title adjective. priority=1. vanilla: holy, divine / ethical, moral, awoken -->
+        <li>memeLeaderAdjective(priority=1)->hive</li>
+        <li>memeLeaderAdjective(priority=1)->vivi</li>
+
+        <!-- Moral guide role name, e.g. "[memeMoralist] of [chosenTheme]". priority=1. vanilla: priest, cleric / counselor, philosopher -->
+        <li>memeMoralist(priority=1)->advisor</li>
+        <li>memeMoralist(priority=1)->guide</li>
+        <li>memeMoralist(priority=1)->keeper</li>
+        <li>memeMoralist(priority=1)->mediator</li>
+
+        <!-- Creed noun in ideo names ("[memeAdjective] [creed]", "The [memeCreed]"). Mixed with other memes. vanilla: temple, sect, cult, faith -->
+        <li>memeCreed->hive</li>
+        <li>memeCreed->garden</li>
+        <li>memeCreed->gathering</li>
+
+        <!-- Hyphen prefix for ideo names ("[prefix]-[packIdeoName]"), descriptions, relics. Mixed. vanilla: theo / ideo -->
+        <li>memeHyphenPrefix->vivi</li>
+        <li>memeHyphenPrefix->hive</li>
+        <li>memeHyphenPrefix->floral</li>
+        <li>memeHyphenPrefix->honey</li>
+        <li>memeHyphenPrefix->mana</li>
+
+        <!-- Core concept noun; used widely (descriptions, rituals, relics, buildings, roles). Mixed. vanilla: creation, life / mankind -->
+        <li>memeConcept->the hive</li>
+        <li>memeConcept->honey</li>
+        <li>memeConcept->flowers</li>
+        <li>memeConcept->mana</li>
+        <li>memeConcept->harmony</li>
+
+        <!-- General adjective; ideo names, descriptions, rituals, relics, buildings, roles. Mixed. vanilla: natural / human, mortal -->
+        <li>memeAdjective(p=3)->simple</li>
+        <li>memeAdjective(p=3)->warm</li>
+        <li>memeAdjective(p=3)->gentle</li>
+        <li>memeAdjective(p=3)->peaceful</li>
+      </rulesStrings>
+    </generalRules>
+
+    <!-- Deity-free vanilla story patterns (no [deity0_*] tokens) -->
+    <descriptionMaker>
+      <patterns>
+        <li>
+          <def>IdeologicalFounder</def>
+          <weight>1</weight>
+        </li>
+        <li>
+          <def>IdeologicalLesson</def>
+          <weight>3</weight>
+        </li>
+      </patterns>
+      <constants>
+        <li><key>structure_ideological</key><value>true</value></li>
+      </constants>
+    </descriptionMaker>
+
+    <!--
+      Symbol packs: ideoName -> ideo name / [chosenIdeoName], theme -> [chosenTheme] / "creed of [packTheme]",
+      adjective -> ideo adjective / [chosenAdjective], member -> member name / [memberNamePlural].
+      Every ideoName must be unique (used as the "already used by another ideo" key).
+    -->
+    <symbolPacks>
+      <li>
+        <ideoName>Hive Tradition</ideoName>
+        <theme>the hive</theme>
+        <adjective>hive</adjective>
+        <member>hiver</member>
+      </li>
+      <li>
+        <ideoName>Floral Way</ideoName>
+        <theme>the garden</theme>
+        <adjective>floral</adjective>
+        <member>vivi</member>
+      </li>
+      <li>
+        <ideoName>Honeyed Way</ideoName>
+        <theme>honey</theme>
+        <adjective>honeyed</adjective>
+        <member>companion</member>
+      </li>
+      <li>
+        <ideoName>Vivi Way</ideoName>
+        <theme>community</theme>
+        <adjective>vivi</adjective>
+        <member>kin</member>
+      </li>
+      <li>
+        <ideoName>Mana Way</ideoName>
+        <theme>mana</theme>
+        <adjective>arcane</adjective>
+        <member>attuner</member>
+      </li>
+    </symbolPacks>
+
+    <thingStyleCategories>
+      <li>
+        <category>Animalist</category>
+        <priority>1</priority>
+      </li>
+    </thingStyleCategories>
+  </MemeDef>
+</Defs>

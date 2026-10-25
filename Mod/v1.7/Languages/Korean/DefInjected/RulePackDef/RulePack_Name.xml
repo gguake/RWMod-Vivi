@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
+  <VV_NamerIdeoVivi.rulePack.rulesStrings.0>r_ideoName(priority=1)->[packIdeoNameStructure]</VV_NamerIdeoVivi.rulePack.rulesStrings.0>
+  <VV_NamerIdeoVivi.rulePack.rulesStrings.1>r_ideoName(priority=1)->[viviIdeoAdjective] [packIdeoNameStructure]</VV_NamerIdeoVivi.rulePack.rulesStrings.1>
+  <VV_NamerIdeoVivi.rulePack.rulesStrings.2>viviIdeoAdjective->소박한</VV_NamerIdeoVivi.rulePack.rulesStrings.2>
+  <VV_NamerIdeoVivi.rulePack.rulesStrings.3>viviIdeoAdjective->따뜻한</VV_NamerIdeoVivi.rulePack.rulesStrings.3>
+  <VV_NamerIdeoVivi.rulePack.rulesStrings.4>viviIdeoAdjective->온화한</VV_NamerIdeoVivi.rulePack.rulesStrings.4>
+  <VV_NamerIdeoVivi.rulePack.rulesStrings.5>viviIdeoAdjective->평화로운</VV_NamerIdeoVivi.rulePack.rulesStrings.5>
+
   <VV_NamerFactionVivi.rulePack.rulesStrings.0>r_name->[colors] 독립 비비 왕국</VV_NamerFactionVivi.rulePack.rulesStrings.0>
   <VV_NamerFactionVivi.rulePack.rulesStrings.1>r_name->[vivi_adjective] 비비 왕국</VV_NamerFactionVivi.rulePack.rulesStrings.1>
 

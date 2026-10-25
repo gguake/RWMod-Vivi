@@ -29,9 +29,8 @@ Only a few traces of the former empire remain, in the form of certain traditions
       <li>VV_ViviCulture</li>
     </allowedCultures>
     
-    <structureMemeWeights>
-      <Structure_TheistAbstract MayRequire="Ludeon.RimWorld.Ideology">3</Structure_TheistAbstract>
-      <Structure_Ideological MayRequire="Ludeon.RimWorld.Ideology">1</Structure_Ideological>
+    <structureMemeWeights Inherit="False">
+      <VV_Structure_Vivi MayRequire="Ludeon.RimWorld.Ideology">1</VV_Structure_Vivi>
     </structureMemeWeights>
 
     <requiredMemes>

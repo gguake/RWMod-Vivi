@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <VV_Structure_Vivi.label>비비 전통</VV_Structure_Vivi.label>
+  <VV_Structure_Vivi.description>비비들의 소박한 전통입니다.</VV_Structure_Vivi.description>
+  <VV_Structure_Vivi.worshipRoomLabel>집회장</VV_Structure_Vivi.worshipRoomLabel>
+
+  <VV_Structure_Vivi.generalRules.rulesStrings>
+    <li>r_leaderTitle(priority=1)->[memeLeaderAdjective] [memeLeaderNoun]</li>
+    <li>r_leaderTitle(priority=1)->[memeLeaderNoun]</li>
+
+    <li>memeLeaderNoun(priority=1)->여왕</li>
+    <li>memeLeaderNoun(priority=1)->대표</li>
+    <li>memeLeaderNoun(priority=1)->대변인</li>
+    <li>memeLeaderNoun(priority=1)->지도자</li>
+
+    <li>memeLeaderAdjective(priority=1)->둥지</li>
+    <li>memeLeaderAdjective(priority=1)->비비</li>
+
+    <li>memeMoralist(priority=1)->조언자</li>
+    <li>memeMoralist(priority=1)->안내자</li>
+    <li>memeMoralist(priority=1)->돌보미</li>
+    <li>memeMoralist(priority=1)->중재자</li>
+
+    <li>memeCreed->둥지</li>
+    <li>memeCreed->정원</li>
+    <li>memeCreed->모임</li>
+
+    <li>memeHyphenPrefix->비비</li>
+    <li>memeHyphenPrefix->둥지</li>
+    <li>memeHyphenPrefix->꽃</li>
+    <li>memeHyphenPrefix->꿀</li>
+    <li>memeHyphenPrefix->마나</li>
+
+    <li>memeConcept->둥지</li>
+    <li>memeConcept->꿀</li>
+    <li>memeConcept->꽃</li>
+    <li>memeConcept->마나</li>
+    <li>memeConcept->협동</li>
+
+    <li>memeAdjective(p=3)->소박한</li>
+    <li>memeAdjective(p=3)->따뜻한</li>
+    <li>memeAdjective(p=3)->온화한</li>
+    <li>memeAdjective(p=3)->평화로운</li>
+  </VV_Structure_Vivi.generalRules.rulesStrings>
+
+  <VV_Structure_Vivi.symbolPacks.0.ideoName>둥지 전통</VV_Structure_Vivi.symbolPacks.0.ideoName>
+  <VV_Structure_Vivi.symbolPacks.0.theme>둥지</VV_Structure_Vivi.symbolPacks.0.theme>
+  <VV_Structure_Vivi.symbolPacks.0.adjective>둥지의</VV_Structure_Vivi.symbolPacks.0.adjective>
+  <VV_Structure_Vivi.symbolPacks.0.member>둥지민</VV_Structure_Vivi.symbolPacks.0.member>
+
+  <VV_Structure_Vivi.symbolPacks.1.ideoName>꽃밭의 길</VV_Structure_Vivi.symbolPacks.1.ideoName>
+  <VV_Structure_Vivi.symbolPacks.1.theme>꽃밭</VV_Structure_Vivi.symbolPacks.1.theme>
+  <VV_Structure_Vivi.symbolPacks.1.adjective>꽃밭의</VV_Structure_Vivi.symbolPacks.1.adjective>
+  <VV_Structure_Vivi.symbolPacks.1.member>비비</VV_Structure_Vivi.symbolPacks.1.member>
+
+  <VV_Structure_Vivi.symbolPacks.2.ideoName>꿀의 길</VV_Structure_Vivi.symbolPacks.2.ideoName>
+  <VV_Structure_Vivi.symbolPacks.2.theme>꿀</VV_Structure_Vivi.symbolPacks.2.theme>
+  <VV_Structure_Vivi.symbolPacks.2.adjective>꿀의</VV_Structure_Vivi.symbolPacks.2.adjective>
+  <VV_Structure_Vivi.symbolPacks.2.member>동료</VV_Structure_Vivi.symbolPacks.2.member>
+
+  <VV_Structure_Vivi.symbolPacks.3.ideoName>비비의 길</VV_Structure_Vivi.symbolPacks.3.ideoName>
+  <VV_Structure_Vivi.symbolPacks.3.theme>공동체</VV_Structure_Vivi.symbolPacks.3.theme>
+  <VV_Structure_Vivi.symbolPacks.3.adjective>비비의</VV_Structure_Vivi.symbolPacks.3.adjective>
+  <VV_Structure_Vivi.symbolPacks.3.member>식구</VV_Structure_Vivi.symbolPacks.3.member>
+
+  <VV_Structure_Vivi.symbolPacks.4.ideoName>마나의 길</VV_Structure_Vivi.symbolPacks.4.ideoName>
+  <VV_Structure_Vivi.symbolPacks.4.theme>마나</VV_Structure_Vivi.symbolPacks.4.theme>
+  <VV_Structure_Vivi.symbolPacks.4.adjective>마나의</VV_Structure_Vivi.symbolPacks.4.adjective>
+  <VV_Structure_Vivi.symbolPacks.4.member>조율자</VV_Structure_Vivi.symbolPacks.4.member>
+</LanguageData>
