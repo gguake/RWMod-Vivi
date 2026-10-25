@@ -4,11 +4,12 @@
     <defName>VV_ViviCulture</defName>
     <label>vivi culture</label>
     <description>It's the unique culture of the Vivis.</description>
-    <ideoNameMaker MayRequire="Ludeon.RimWorld.Ideology">NamerIdeoAstropolitan</ideoNameMaker>
+    <ideoNameMaker MayRequire="Ludeon.RimWorld.Ideology">VV_NamerIdeoVivi</ideoNameMaker>
     <deityNameMaker MayRequire="Ludeon.RimWorld.Ideology">NamerDeityAstropolitan</deityNameMaker>
     <deityTypeMaker MayRequire="Ludeon.RimWorld.Ideology">DeityTypeMakerAstropolitan</deityTypeMaker>
     <leaderTitleMaker MayRequire="Ludeon.RimWorld.Ideology">LeaderTitleMaker_Astropolitan</leaderTitleMaker>
     <festivalNameMaker MayRequire="Ludeon.RimWorld.Ideology">NamerFestivalAstropolitan</festivalNameMaker>
+    <pawnNameMaker MayRequire="Ludeon.RimWorld.Ideology">VV_NamerPersonVivi</pawnNameMaker>
     <allowedPlaceTags>
       <li>OriginTribal</li>
     </allowedPlaceTags>

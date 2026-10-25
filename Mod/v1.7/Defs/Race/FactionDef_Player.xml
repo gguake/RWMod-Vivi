@@ -21,7 +21,11 @@
     <allowedCultures Inherit="False">
       <li>VV_ViviCulture</li>
     </allowedCultures>
-    
+
+    <structureMemeWeights>
+      <VV_Structure_Vivi MayRequire="Ludeon.RimWorld.Ideology">1</VV_Structure_Vivi>
+    </structureMemeWeights>
+
     <disallowedMemes>
       <li MayRequire="Ludeon.RimWorld.Ideology">Supremacist</li>
       <li MayRequire="Ludeon.RimWorld.Ideology">Raider</li>
