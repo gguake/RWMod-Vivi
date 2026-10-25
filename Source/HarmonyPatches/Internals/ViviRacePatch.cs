@@ -120,6 +120,23 @@ namespace VVRace.HarmonyPatches
                     postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(JobDriver_Ingest_MakeNewToils_Postfix)));
             }
 
+            // allowedCultures가 없는 팩션(Ancients, HoraxCult 등)이 무작위 컬처나 클래식 공유 이념으로 비비 컬처를 받지 않게
+            harmony.Patch(
+                original: AccessTools.Method(typeof(IdeoFoundation), nameof(IdeoFoundation.RandomizeCulture)),
+                transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(RandomCulture_Transpiler)));
+
+            harmony.Patch(
+                original: AccessTools.Method(typeof(FactionIdeosTracker), nameof(FactionIdeosTracker.ChooseOrGenerateIdeo)),
+                transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(RandomCulture_Transpiler)));
+
+            harmony.Patch(
+                original: AccessTools.Method(typeof(IdeoUtility), nameof(IdeoUtility.CanUseIdeo)),
+                postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(IdeoUtility_CanUseIdeo_Postfix)));
+
+            harmony.Patch(
+                original: AccessTools.Method(typeof(IdeoGenerator), nameof(IdeoGenerator.GenerateClassicIdeo)),
+                prefix: new HarmonyMethod(typeof(ViviRacePatch), nameof(IdeoGenerator_GenerateClassicIdeo_Prefix)));
+
             Log.Message("!! [ViViRace] race patch complete");
         }
 
@@ -567,6 +584,48 @@ namespace VVRace.HarmonyPatches
             instructions.InsertRange(retIndex, injection);
 
             return instructions;
+        }
+
+        private static IEnumerable<CultureDef> ExcludeViviCulture(IEnumerable<CultureDef> cultures)
+        {
+            return cultures.Where(v => v != VVCultureDefOf.VV_ViviCulture);
+        }
+
+        // DefDatabase<CultureDef>.AllDefs / AllDefsListForReading 바로 뒤에 비비 컬처를 걸러내는 호출 삽입 (이후 RandomElement(IEnumerable<T>)로 고름)
+        private static IEnumerable<CodeInstruction> RandomCulture_Transpiler(IEnumerable<CodeInstruction> codeInstructions)
+        {
+            var allDefsGetter = AccessTools.PropertyGetter(typeof(DefDatabase<CultureDef>), nameof(DefDatabase<CultureDef>.AllDefs));
+            var allDefsListGetter = AccessTools.PropertyGetter(typeof(DefDatabase<CultureDef>), nameof(DefDatabase<CultureDef>.AllDefsListForReading));
+            var excludeMethod = AccessTools.Method(typeof(ViviRacePatch), nameof(ExcludeViviCulture));
+
+            foreach (var instruction in codeInstructions)
+            {
+                yield return instruction;
+
+                if (instruction.Calls(allDefsGetter) || instruction.Calls(allDefsListGetter))
+                {
+                    yield return new CodeInstruction(OpCodes.Call, excludeMethod);
+                }
+            }
+        }
+
+        // 클래식 플레이 시 모든 팩션이 공유하는 이념이 비비 컬처가 되지 않게
+        // noExpansionIdeo=true는 Ideology 없이 비비 팩션이 쓰는 이념이라 제외
+        private static void IdeoGenerator_GenerateClassicIdeo_Prefix(ref CultureDef culture, bool noExpansionIdeo)
+        {
+            if (!noExpansionIdeo && culture == VVCultureDefOf.VV_ViviCulture)
+            {
+                culture = VVCultureDefOf.Astropolitan;
+            }
+        }
+
+        private static void IdeoUtility_CanUseIdeo_Postfix(ref bool __result, FactionDef factionDef, Ideo ideo)
+        {
+            // allowedCultures가 있으면 바닐라가 이미 검사함
+            if (__result && factionDef.allowedCultures == null && ideo.culture == VVCultureDefOf.VV_ViviCulture)
+            {
+                __result = false;
+            }
         }
     }
 }

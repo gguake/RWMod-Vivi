@@ -227,6 +227,7 @@ namespace VVRace
     public static class VVCultureDefOf
     {
         public static CultureDef VV_ViviCulture;
+        public static CultureDef Astropolitan;
     }
 
     [DefOf]
