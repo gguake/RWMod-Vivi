@@ -65,5 +65,8 @@
         public const string VV_ManaFluxRuleLabel_WeatherRainy = nameof(VV_ManaFluxRuleLabel_WeatherRainy);
         public const string VV_ManaFluxRuleLabel_WeatherSnowy = nameof(VV_ManaFluxRuleLabel_WeatherSnowy);
         public const string VV_ManaFluxRuleLabel_Wind = nameof(VV_ManaFluxRuleLabel_Wind);
+
+        public const string VV_StatsReport_EverflowerAttunementLevel = nameof(VV_StatsReport_EverflowerAttunementLevel);
+        public const string VV_StatsReport_EverflowerResonator = nameof(VV_StatsReport_EverflowerResonator);
     }
 }

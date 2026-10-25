@@ -65,4 +65,7 @@
 <VV_ManaFluxRuleLabel_WeatherRainy>When it rains</VV_ManaFluxRuleLabel_WeatherRainy>
 <VV_ManaFluxRuleLabel_WeatherSnowy>When it snows</VV_ManaFluxRuleLabel_WeatherSnowy>
 <VV_ManaFluxRuleLabel_Wind>When the wind blows</VV_ManaFluxRuleLabel_Wind>
+
+<VV_StatsReport_EverflowerAttunementLevel>Everflower attunement level</VV_StatsReport_EverflowerAttunementLevel>
+<VV_StatsReport_EverflowerResonator>Everflower resonator</VV_StatsReport_EverflowerResonator>
 </LanguageData>
