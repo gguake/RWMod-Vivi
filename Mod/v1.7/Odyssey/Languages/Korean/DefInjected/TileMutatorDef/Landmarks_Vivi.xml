@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <VV_ManaVein.label>마나 영맥</VV_ManaVein.label>
+  <VV_ManaVein.description>알 수 없는 힘으로 환경 마나가 솟아오르는 곳입니다.</VV_ManaVein.description>
+
+  <VV_ArcanePlantHabitat.label>마법 식물 자생지</VV_ArcanePlantHabitat.label>
+  <VV_ArcanePlantHabitat.description>{0} 같은 마법 식물이 야생으로 자라는 곳입니다.</VV_ArcanePlantHabitat.description>
+</LanguageData>

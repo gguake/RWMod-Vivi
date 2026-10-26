@@ -18,6 +18,8 @@ namespace VVRace
         public const int DiffuseInterval = 1129;
         public const int RefreshManaInterval = 250;
 
+        public const float DefaultManaVeinPerDay = 10000f;
+
         private NativeArray<float> _manaReserveGrid;
         private NativeArray<float> _manaGrid;
         private NativeArray<float> _tmpGrid;
@@ -31,6 +33,10 @@ namespace VVRace
         private CellBoolDrawer _cellBoolDrawer;
         private bool _drawManaOverlay;
         public bool manaOverlaySetting;
+
+        // 마나 영맥(오디세이 랜드마크): 게임 내내 환경 마나를 방출하는 지점
+        private List<IntVec3> _manaVeins = new List<IntVec3>();
+        public IReadOnlyList<IntVec3> ManaVeins => _manaVeins;
 
         public Color Color => new Color(1f, 1f, 1f);
 
@@ -63,6 +69,12 @@ namespace VVRace
             IOUtility.ScribeNativeFloatArray(ref _manaGrid, "encodedManaGrid");
 
             Scribe_Values.Look(ref manaOverlaySetting, "manaOverlaySetting");
+
+            Scribe_Collections.Look(ref _manaVeins, "manaVeins", LookMode.Value);
+            if (Scribe.mode == LoadSaveMode.PostLoadInit && _manaVeins == null)
+            {
+                _manaVeins = new List<IntVec3>();
+            }
         }
 
         public override void FinalizeInit()
@@ -145,6 +157,8 @@ namespace VVRace
 
             if (GenTicks.TicksGame % RefreshManaInterval == 0)
             {
+                EmitManaVeins(RefreshManaInterval);
+
                 var gameComponentMana = Current.Game.GetComponent<GameComponent_Mana>();
                 if (gameComponentMana != null)
                 {
@@ -189,6 +203,34 @@ namespace VVRace
                 _manaReserveGrid[idx] = updatedMana - _manaGrid[idx];
             }
             _dirtyManaCells.Add(idx);
+        }
+
+        public void AddManaVein(IntVec3 cell)
+        {
+            if (!_manaVeins.Contains(cell))
+            {
+                _manaVeins.Add(cell);
+            }
+        }
+
+        private void EmitManaVeins(int ticks)
+        {
+            if (_manaVeins.Count == 0) { return; }
+
+            var manaPerDay = VVTileMutatorDefOf.VV_ManaVein?.GetModExtension<ManaVeinExtension>()?.manaPerDay ?? DefaultManaVeinPerDay;
+
+            // 칸당 상한(EnvironmentManaMax)에 막혀 버려지지 않도록 중심 3x3에 나눠 넣는다.
+            var manaPerCell = manaPerDay / 60000f * ticks / 9f;
+            foreach (var vein in _manaVeins)
+            {
+                foreach (var cell in CellRect.CenteredOn(vein, 1))
+                {
+                    if (cell.InBounds(map))
+                    {
+                        ChangeEnvironmentMana(cell, manaPerCell);
+                    }
+                }
+            }
         }
 
         public void Dispose()
