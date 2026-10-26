@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <RimPacts.RptRaceDiplomacyDef>
+    <defName>Rpt_RD_gguake_Vivi</defName>
+    <label>vivi</label>
+    <description>Independent vivi hives stand united for their common interest. They mainly produce apiary specialties, and honey-related goods trade at lower prices whether buying or selling.\n
+If the player faction is vivi, other vivi factions start with higher trust, build trust faster, and are much less likely to declare war on you.</description>
+
+    <factionDefs>
+      <li>VV_ViviFederation</li>
+    </factionDefs>
+    <races>
+      <li>VV_Vivi</li>
+    </races>
+    <playerFactionDefs>
+      <li>VV_PlayerVivi</li>
+      <li>VV_PlayerExiledVivi</li>
+      <li>VV_PlayerViviRefugee</li>
+    </playerFactionDefs>
+
+    <statMods>
+      <li><stat>WarAggression</stat><factor>0.2</factor></li>
+      <li><stat>DeclareWarOnPlayer</stat><factor>0.1</factor></li>
+      <li><stat>PeaceAccept</stat><factor>1.5</factor></li>
+      <li><stat>CoalitionJoin</stat><factor>1.5</factor></li>
+      <li><stat>TributeResist</stat><factor>1.3</factor></li>
+      <li><stat>GoodwillLoss</stat><factor>1.25</factor></li>
+      <li><stat>SpyDetect</stat><factor>2.0</factor></li>
+    </statMods>
+
+    <relations>
+      <li>
+        <target>SameRace</target>
+        <allyWeight>4</allyWeight>
+        <warWeight>0.2</warWeight>
+      </li>
+    </relations>
+    <hegemonBloc>
+      <againstOwnFactor>0.2</againstOwnFactor>
+    </hegemonBloc>
+
+    <playerPerks>
+      <statMods>
+        <li><stat>DoctrineMercantile</stat><factor>1.25</factor></li>
+      </statMods>
+      <relations>
+        <li><target>SameRace</target><startTrust>15</startTrust></li>
+      </relations>
+      <trustGainWithRelated>1.25</trustGainWithRelated>
+      <declareWarByRelated>0.3</declareWarByRelated>
+    </playerPerks>
+
+    <settlementSpecialty>
+      <li>VV_FilteredHoney</li>
+      <li>VV_RoyalJelly</li>
+      <li>VV_Viviwax</li>
+      <li>VV_Propolis</li>
+      <li>VV_Mead</li>
+    </settlementSpecialty>
+
+    <tradeGoods>
+      <li>
+        <things>
+          <li>VV_RawHoney</li>
+          <li>VV_FilteredHoney</li>
+          <li>VV_RoyalJelly</li>
+          <li>VV_HoneyPollenCake</li>
+          <li>VV_Mead</li>
+        </things>
+        <playerBuyFactor>0.8</playerBuyFactor>
+        <playerSellFactor>0.8</playerSellFactor>
+      </li>
+    </tradeGoods>
+  </RimPacts.RptRaceDiplomacyDef>
+</Defs>
