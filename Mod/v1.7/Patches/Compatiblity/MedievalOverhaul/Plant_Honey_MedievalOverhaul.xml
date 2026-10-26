@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+  <Operation Class="PatchOperationSequence">
+    <operations>
+      <li Class="PatchOperationSequence" MayRequireAnyOf="DankPyon.Medieval.Overhaul,DankPyon.Medieval.Overhaul_steam">
+        <operations>
+
+          <!-- DankPyon_Plant_Poppy, DankPyon_Plant_PoppyWild -->
+          <li Class="PatchOperationConditional">
+            <xpath>Defs/ThingDef[@Name="DankPyon_PoppyBase"]/comps</xpath>
+            <nomatch Class="PatchOperationAdd">
+              <xpath>Defs/ThingDef[@Name="DankPyon_PoppyBase"]</xpath>
+              <value><comps /></value>
+            </nomatch>
+          </li>
+          <li Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[@Name="DankPyon_PoppyBase"]/comps</xpath>
+            <value>
+              <li Class="VVRace.CompProperties_RepeatGatherable" />
+            </value>
+          </li>
+          <li Class="PatchOperationConditional">
+            <xpath>Defs/ThingDef[@Name="DankPyon_PoppyBase"]/statBases</xpath>
+            <nomatch Class="PatchOperationAdd">
+              <xpath>Defs/ThingDef[@Name="DankPyon_PoppyBase"]</xpath>
+              <value><statBases /></value>
+            </nomatch>
+          </li>
+          <li Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[@Name="DankPyon_PoppyBase"]/statBases</xpath>
+            <value>
+              <VV_MinGrowthPlantGatherable>0.7</VV_MinGrowthPlantGatherable>
+              <VV_PlantGatherCooldown>1</VV_PlantGatherCooldown>
+              <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
+            </value>
+          </li>
+
+          <!-- DankPyon_Plant_Mindwort, DankPyon_Plant_MindwortWild -->
+          <li Class="PatchOperationConditional">
+            <xpath>Defs/ThingDef[@Name="DankPyon_MindwortBase"]/comps</xpath>
+            <nomatch Class="PatchOperationAdd">
+              <xpath>Defs/ThingDef[@Name="DankPyon_MindwortBase"]</xpath>
+              <value><comps /></value>
+            </nomatch>
+          </li>
+          <li Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[@Name="DankPyon_MindwortBase"]/comps</xpath>
+            <value>
+              <li Class="VVRace.CompProperties_RepeatGatherable" />
+            </value>
+          </li>
+          <li Class="PatchOperationConditional">
+            <xpath>Defs/ThingDef[@Name="DankPyon_MindwortBase"]/statBases</xpath>
+            <nomatch Class="PatchOperationAdd">
+              <xpath>Defs/ThingDef[@Name="DankPyon_MindwortBase"]</xpath>
+              <value><statBases /></value>
+            </nomatch>
+          </li>
+          <li Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[@Name="DankPyon_MindwortBase"]/statBases</xpath>
+            <value>
+              <VV_MinGrowthPlantGatherable>0.7</VV_MinGrowthPlantGatherable>
+              <VV_PlantGatherCooldown>1</VV_PlantGatherCooldown>
+              <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
+            </value>
+          </li>
+
+        </operations>
+      </li>
+    </operations>
+  </Operation>
+</Patch>

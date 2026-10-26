@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+  <Operation Class="PatchOperationSequence">
+    <operations>
+      <li Class="PatchOperationSequence" MayRequireAnyOf="DankPyon.Medieval.Overhaul,DankPyon.Medieval.Overhaul_steam">
+        <operations>
+
+          <!-- 꿀 의존 유전자가 MO 꿀을 꿀로 인정 -->
+          <li Class="PatchOperationConditional">
+            <xpath>Defs/ThingDef[defName="DankPyon_Honey"]/comps</xpath>
+            <nomatch Class="PatchOperationAdd">
+              <xpath>Defs/ThingDef[defName="DankPyon_Honey"]</xpath>
+              <value><comps /></value>
+            </nomatch>
+          </li>
+          <li Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="DankPyon_Honey"]/comps</xpath>
+            <value>
+              <li Class="VVRace.CompProperties_Honey" />
+            </value>
+          </li>
+
+          <li Class="PatchOperationConditional">
+            <xpath>Defs/ThingDef[defName="DankPyon_Honeycomb"]/comps</xpath>
+            <nomatch Class="PatchOperationAdd">
+              <xpath>Defs/ThingDef[defName="DankPyon_Honeycomb"]</xpath>
+              <value><comps /></value>
+            </nomatch>
+          </li>
+          <li Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="DankPyon_Honeycomb"]/comps</xpath>
+            <value>
+              <li Class="VVRace.CompProperties_Honey" />
+            </value>
+          </li>
+
+          <!-- 산업 이전 단계 비용: MO는 강철/부품이 채굴되지 않으므로 MO 재화로 대체 -->
+          <li Class="PatchOperationConditional">
+            <xpath>Defs/ThingDef[defName="VV_RefiningWorkbench"]/costList/Steel</xpath>
+            <match Class="PatchOperationReplace">
+              <xpath>Defs/ThingDef[defName="VV_RefiningWorkbench"]/costList/Steel</xpath>
+              <value>
+                <DankPyon_Clay>25</DankPyon_Clay>
+              </value>
+            </match>
+          </li>
+          <li Class="PatchOperationConditional">
+            <xpath>Defs/ThingDef[defName="VV_ShockDart"]/costList/Steel</xpath>
+            <match Class="PatchOperationSetName">
+              <xpath>Defs/ThingDef[defName="VV_ShockDart"]/costList/Steel</xpath>
+              <name>DankPyon_IronIngot</name>
+            </match>
+          </li>
+
+          <!-- 연사 석궁: 부품 대신 판자 (MO 부품 대체 설정으로 기초 부품이 된 경우 포함) -->
+          <li Class="PatchOperationConditional">
+            <xpath>Defs/ThingDef[defName="VV_RepeatingCrossbow"]/costList/ComponentIndustrial</xpath>
+            <match Class="PatchOperationRemove">
+              <xpath>Defs/ThingDef[defName="VV_RepeatingCrossbow"]/costList/ComponentIndustrial</xpath>
+            </match>
+          </li>
+          <li Class="PatchOperationConditional">
+            <xpath>Defs/ThingDef[defName="VV_RepeatingCrossbow"]/costList/DankPyon_ComponentBasic</xpath>
+            <match Class="PatchOperationRemove">
+              <xpath>Defs/ThingDef[defName="VV_RepeatingCrossbow"]/costList/DankPyon_ComponentBasic</xpath>
+            </match>
+          </li>
+          <li Class="PatchOperationConditional">
+            <xpath>Defs/ThingDef[defName="VV_RepeatingCrossbow"]/costList/WoodLog</xpath>
+            <match Class="PatchOperationReplace">
+              <xpath>Defs/ThingDef[defName="VV_RepeatingCrossbow"]/costList/WoodLog</xpath>
+              <value>
+                <WoodLog>75</WoodLog>
+              </value>
+            </match>
+          </li>
+
+          <!-- 비비 전통 무기 연구: Smithing 선행 제거 -->
+          <li Class="PatchOperationConditional">
+            <xpath>Defs/ResearchProjectDef[defName="VV_Weaponry"]/prerequisites/li[.="Smithing"]</xpath>
+            <match Class="PatchOperationRemove">
+              <xpath>Defs/ResearchProjectDef[defName="VV_Weaponry"]/prerequisites/li[.="Smithing"]</xpath>
+            </match>
+          </li>
+
+          <!-- 제작 스팟/대장간 아이템을 MO 작업대에서도 제작 (MO가 바닐라 곤봉/단궁 등에 하는 방식) -->
+          <li Class="PatchOperationConditional">
+            <xpath>Defs/ThingDef[defName="VV_Slingshot" or defName="VV_ShockDart" or defName="VV_RepeatingCrossbow" or defName="VV_ViviSpear" or defName="VV_ViviLongJavelin" or defName="VV_StrawTool" or defName="VV_MultiuseBrushTool" or defName="VV_ArcaneFloralPerfume" or defName="VV_Childrenswear" or defName="VV_BasicRoyalCostume" or defName="VV_BasicWorkerCostume"]/recipeMaker/recipeUsers</xpath>
+            <match Class="PatchOperationAdd">
+              <xpath>Defs/ThingDef[defName="VV_Slingshot" or defName="VV_ShockDart" or defName="VV_RepeatingCrossbow" or defName="VV_ViviSpear" or defName="VV_ViviLongJavelin" or defName="VV_StrawTool" or defName="VV_MultiuseBrushTool" or defName="VV_ArcaneFloralPerfume" or defName="VV_Childrenswear" or defName="VV_BasicRoyalCostume" or defName="VV_BasicWorkerCostume"]/recipeMaker/recipeUsers</xpath>
+              <value>
+                <li>DankPyon_Workbench</li>
+              </value>
+            </match>
+          </li>
+          <li Class="PatchOperationConditional">
+            <xpath>Defs/ThingDef[defName="VV_Slingshot" or defName="VV_ShockDart" or defName="VV_RepeatingCrossbow" or defName="VV_ViviSpear" or defName="VV_ViviLongJavelin" or defName="VV_StrawTool" or defName="VV_MultiuseBrushTool" or defName="VV_ArcaneFloralPerfume" or defName="VV_Childrenswear" or defName="VV_BasicRoyalCostume" or defName="VV_BasicWorkerCostume"]/recipeMaker[not(recipeUsers)]</xpath>
+            <match Class="PatchOperationAdd">
+              <xpath>Defs/ThingDef[defName="VV_Slingshot" or defName="VV_ShockDart" or defName="VV_RepeatingCrossbow" or defName="VV_ViviSpear" or defName="VV_ViviLongJavelin" or defName="VV_StrawTool" or defName="VV_MultiuseBrushTool" or defName="VV_ArcaneFloralPerfume" or defName="VV_Childrenswear" or defName="VV_BasicRoyalCostume" or defName="VV_BasicWorkerCostume"]/recipeMaker[not(recipeUsers)]</xpath>
+              <value>
+                <recipeUsers>
+                  <li>DankPyon_Workbench</li>
+                </recipeUsers>
+              </value>
+            </match>
+          </li>
+
+          <!-- 가짜 더듬이/날개: 산업 연구(Prosthetics)와 가공 작업대 없이 MO 작업대에서 제작 -->
+          <li Class="PatchOperationConditional">
+            <xpath>Defs/ThingDef[defName="VV_FakeAntennae" or defName="VV_FakeWing"]/recipeMaker</xpath>
+            <nomatch Class="PatchOperationAdd">
+              <xpath>Defs/ThingDef[defName="VV_FakeAntennae" or defName="VV_FakeWing"]</xpath>
+              <value><recipeMaker /></value>
+            </nomatch>
+          </li>
+          <li Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="VV_FakeAntennae" or defName="VV_FakeWing"]/recipeMaker</xpath>
+            <value>
+              <recipeUsers>
+                <li>DankPyon_Workbench</li>
+              </recipeUsers>
+              <researchPrerequisite>VV_Apparels</researchPrerequisite>
+            </value>
+          </li>
+
+          <!-- 가짜 더듬이/날개: 천 대신 생가죽 (생가죽 건조대는 MO 가죽 체인이 켜져 있을 때만 존재) -->
+          <li Class="MedievalOverhaul.PatchOperation_ToggleSettings">
+            <settings>
+              <li>leatherChain</li>
+            </settings>
+            <active Class="PatchOperationConditional">
+              <xpath>Defs/ThingDef[defName="VV_FakeAntennae" or defName="VV_FakeWing"]/costList/Cloth</xpath>
+              <match Class="PatchOperationSetName">
+                <xpath>Defs/ThingDef[defName="VV_FakeAntennae" or defName="VV_FakeWing"]/costList/Cloth</xpath>
+                <name>DankPyon_Leather_Rawhide</name>
+              </match>
+            </active>
+          </li>
+
+        </operations>
+      </li>
+    </operations>
+  </Operation>
+</Patch>
