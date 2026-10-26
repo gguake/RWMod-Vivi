@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+
+  <!-- 마나 영맥 -->
+  <TileMutatorDef>
+    <defName>VV_ManaVein</defName>
+    <label>mana veins</label>
+    <description>Environment mana wells up here through some unknown power.</description>
+    <workerClass>VVRace.TileMutatorWorker_ManaVein</workerClass>
+    <pollutionRange>0~0</pollutionRange>
+    <extraGenSteps>
+      <li>VV_LandmarkManaVein</li>
+    </extraGenSteps>
+    <modExtensions>
+      <li Class="VVRace.ManaVeinExtension">
+        <manaPerDay>8000</manaPerDay>
+        <countRange>3~5</countRange>
+        <minCount>2</minCount>
+        <minSpacing>25</minSpacing>
+        <edgeMargin>15</edgeMargin>
+        <fieldRadiusRange>4~5</fieldRadiusRange>
+        <fieldDensity>0.85</fieldDensity>
+        <fieldColorCountRange>2~3</fieldColorCountRange>
+      </li>
+    </modExtensions>
+  </TileMutatorDef>
+
+  <GenStepDef>
+    <defName>VV_LandmarkManaVein</defName>
+    <order>990</order>
+    <genStep Class="VVRace.GenStep_ViviLandmark">
+      <mutator>VV_ManaVein</mutator>
+    </genStep>
+  </GenStepDef>
+
+  <LandmarkDef>
+    <defName>VV_ManaVein</defName>
+    <label>mana veins</label>
+    <!-- 월드맵에 아이콘을 그리지 않도록 투명 텍스처를 쓴다. -->
+    <iconTexturePath>World/Landmarks/VV_LandmarkHidden</iconTexturePath>
+    <commonality>0.3</commonality>
+    <nameMaker>VV_NamerLandmark_ManaVein</nameMaker>
+    <mutatorChances>
+      <VV_ManaVein Required="True" />
+      <Fertile>0.15</Fertile>
+      <PlantLife_Increased>0.1</PlantLife_Increased>
+      <AnimalLife_Increased>0.05</AnimalLife_Increased>
+      <FoggyMutator>0.05</FoggyMutator>
+      <WetClimate>0.05</WetClimate>
+    </mutatorChances>
+  </LandmarkDef>
+
+  <RulePackDef>
+    <defName>VV_NamerLandmark_ManaVein</defName>
+    <include>
+      <li>WorldFeatureNamerCommon</li>
+    </include>
+    <rulePack>
+      <rulesStrings>
+        <li>terrain_word(p=4)->ley lines</li>
+        <li>terrain_word(p=2)->mana veins</li>
+        <li>terrain_word->mana springs</li>
+        <li>terrain_word->wellspring</li>
+      </rulesStrings>
+    </rulePack>
+  </RulePackDef>
+
+  <!-- 마법 식물 자생지 -->
+  <TileMutatorDef>
+    <defName>VV_ArcanePlantHabitat</defName>
+    <label>arcane plant habitat</label>
+    <description>Arcane plants such as {0} grow wild here.</description>
+    <workerClass>VVRace.TileMutatorWorker_ArcanePlantHabitat</workerClass>
+    <pollutionRange>0~0</pollutionRange>
+    <extraGenSteps>
+      <li>VV_LandmarkArcanePlantHabitat</li>
+    </extraGenSteps>
+    <modExtensions>
+      <li Class="VVRace.ArcanePlantHabitatExtension">
+        <plantKinds>
+          <li>VV_Radiantflower</li>
+          <li>VV_Starlitflower</li>
+          <li>VV_Skyweed</li>
+          <li>VV_Thunderpetals</li>
+        </plantKinds>
+        <plantKindCount>3</plantKindCount>
+        <plantsPerClusterRange>2~4</plantsPerClusterRange>
+        <clusterRadius>3</clusterRadius>
+        <plantSpacing>2</plantSpacing>
+        <countRange>3~5</countRange>
+        <minCount>3</minCount>
+        <minSpacing>20</minSpacing>
+        <edgeMargin>12</edgeMargin>
+        <fieldRadiusRange>4~5</fieldRadiusRange>
+        <fieldDensity>0.75</fieldDensity>
+        <fieldColorCountRange>2~3</fieldColorCountRange>
+      </li>
+    </modExtensions>
+  </TileMutatorDef>
+
+  <GenStepDef>
+    <defName>VV_LandmarkArcanePlantHabitat</defName>
+    <order>990</order>
+    <genStep Class="VVRace.GenStep_ViviLandmark">
+      <mutator>VV_ArcanePlantHabitat</mutator>
+    </genStep>
+  </GenStepDef>
+
+  <LandmarkDef>
+    <defName>VV_ArcanePlantHabitat</defName>
+    <label>arcane plant habitat</label>
+    <iconTexturePath>World/Landmarks/VV_LandmarkHidden</iconTexturePath>
+    <commonality>0.3</commonality>
+    <nameMaker>VV_NamerLandmark_ArcanePlantHabitat</nameMaker>
+    <mutatorChances>
+      <VV_ArcanePlantHabitat Required="True" />
+      <Fertile>0.1</Fertile>
+      <PlantLife_Increased>0.15</PlantLife_Increased>
+      <SunnyMutator>0.1</SunnyMutator>
+      <WindyMutator>0.1</WindyMutator>
+      <WetClimate>0.05</WetClimate>
+    </mutatorChances>
+  </LandmarkDef>
+
+  <RulePackDef>
+    <defName>VV_NamerLandmark_ArcanePlantHabitat</defName>
+    <include>
+      <li>WorldFeatureNamerCommon</li>
+    </include>
+    <rulePack>
+      <rulesStrings>
+        <li>terrain_word(p=4)->garden</li>
+        <li>terrain_word(p=2)->meadow</li>
+        <li>terrain_word->bloom</li>
+        <li>terrain_word->flowerbed</li>
+      </rulesStrings>
+    </rulePack>
+  </RulePackDef>
+
+</Defs>

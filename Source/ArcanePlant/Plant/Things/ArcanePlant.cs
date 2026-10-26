@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -191,6 +191,27 @@ namespace VVRace
             }
         }
 
+        public override AcceptanceReport ClaimableBy(Faction by)
+        {
+            // 자생지에서 생긴 무소유 마법 식물은 def의 claimable=false와 관계없이 점유할 수 있다.
+            if (Faction == null && by != null)
+            {
+                for (int i = 0; i < AllComps.Count; ++i)
+                {
+                    if (AllComps[i].CompPreventClaimingBy(by)) { return false; }
+                }
+
+                if (FactionPreventsClaimingOrAdopting(Map?.ParentFaction, forClaim: true, out var reason))
+                {
+                    return reason;
+                }
+
+                return true;
+            }
+
+            return base.ClaimableBy(by);
+        }
+
         public override AcceptanceReport DeconstructibleBy(Faction faction)
         {
             if (DebugSettings.godMode)
@@ -198,7 +219,13 @@ namespace VVRace
                 return true;
             }
 
-            return Spawned ? Faction == faction : true;
+            if (!Spawned || Faction == faction)
+            {
+                return true;
+            }
+
+            // 무소유 식물은 점유할 수 있으면 해체할 수 있다.
+            return Faction == null ? ClaimableBy(faction) : false;
         }
 
         public override void PreApplyDamage(ref DamageInfo dinfo, out bool absorbed)

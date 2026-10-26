@@ -362,4 +362,11 @@ namespace VVRace
         public static SoundDef VV_FairyDematerialize;
         public static SoundDef VV_FairyTeleport;
     }
+
+    [DefOf]
+    public static class VVTileMutatorDefOf
+    {
+        [MayRequireOdyssey]
+        public static TileMutatorDef VV_ManaVein;
+    }
 }

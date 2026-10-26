@@ -271,6 +271,13 @@
     <Compile Include="Gather\Things\Filth_Pollen.cs" />
     <Compile Include="Gather\GatherUtility.cs" />
     <Compile Include="MapGeneration\GenSteps\GenStep_ViviSettlement.cs" />
+    <Compile Include="MapGeneration\Landmarks\GenStep_ViviLandmark.cs" />
+    <Compile Include="MapGeneration\Landmarks\TileMutatorWorker_ArcanePlantHabitat.cs" />
+    <Compile Include="MapGeneration\Landmarks\TileMutatorWorker_ManaVein.cs" />
+    <Compile Include="MapGeneration\Landmarks\TileMutatorWorker_ViviLandmark.cs" />
+    <Compile Include="MapGeneration\Landmarks\ViviaFieldGenerator.cs" />
+    <Compile Include="MapGeneration\Landmarks\ViviLandmarkExtension.cs" />
+    <Compile Include="MapGeneration\Landmarks\ViviLandmarkUtility.cs" />
     <Compile Include="MapGeneration\HexagonalRoomUtility.cs" />
     <Compile Include="MapGeneration\SymbolResolvers\Settlement\SymbolResolver_HexaClear.cs" />
     <Compile Include="MapGeneration\SymbolResolvers\Settlement\SymbolResolver_HexaFloor.cs" />

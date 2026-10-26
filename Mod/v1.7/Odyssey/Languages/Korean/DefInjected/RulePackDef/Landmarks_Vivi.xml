@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <VV_NamerLandmark_ManaVein.rulePack.rulesStrings>
+    <li>terrain_word(p=4)->영맥</li>
+    <li>terrain_word(p=2)->마나 샘</li>
+    <li>terrain_word->마력 수맥</li>
+    <li>terrain_word->샘터</li>
+  </VV_NamerLandmark_ManaVein.rulePack.rulesStrings>
+
+  <VV_NamerLandmark_ArcanePlantHabitat.rulePack.rulesStrings>
+    <li>terrain_word(p=4)->화원</li>
+    <li>terrain_word(p=2)->꽃동산</li>
+    <li>terrain_word->꽃밭</li>
+    <li>terrain_word->자생지</li>
+  </VV_NamerLandmark_ArcanePlantHabitat.rulePack.rulesStrings>
+</LanguageData>

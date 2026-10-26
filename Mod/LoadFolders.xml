@@ -10,6 +10,7 @@
   <v1.7>
     <li>Contents</li>
     <li>v1.7</li>
+    <li IfModActive="Ludeon.RimWorld.Odyssey">v1.7/Odyssey</li>
     <li IfModActive="wowgag.RimPacts">v1.7/Compatiblity/RimPacts</li>
   </v1.7>
 </loadFolders>
