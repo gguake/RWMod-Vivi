@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+  <Operation Class="PatchOperationSequence">
+    <operations>
+      <li Class="PatchOperationSequence" MayRequireAnyOf="VanillaExpanded.VPEFlowers,VanillaExpanded.VPEFlowers_steam">
+        <operations>
+          <li Class="PatchOperationConditional">
+            <xpath>Defs/ThingDef[@Name="VPEF_BloomingPlantBase"]/comps</xpath>
+            <nomatch Class="PatchOperationAdd">
+              <xpath>Defs/ThingDef[@Name="VPEF_BloomingPlantBase"]</xpath>
+              <value><comps /></value>
+            </nomatch>
+          </li>
+          <li Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[@Name="VPEF_BloomingPlantBase"]/comps</xpath>
+            <value>
+              <li Class="VVRace.CompProperties_RepeatGatherable" />
+            </value>
+          </li>
+          
+          <li Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[@Name="VPEF_BloomingPlantBase"]/statBases</xpath>
+            <value>
+              <VV_MinGrowthPlantGatherable>2</VV_MinGrowthPlantGatherable>
+              <VV_PlantGatherCooldown>30</VV_PlantGatherCooldown>
+              <VV_PlantHoneyGatherYield>1</VV_PlantHoneyGatherYield>
+            </value>
+          </li>
+
+          <li Class="PatchOperationConditional">
+            <xpath>Defs/StatDef[defName="VV_MinGrowthPlantGatherable"]/parts</xpath>
+            <nomatch Class="PatchOperationAdd">
+              <xpath>Defs/StatDef[defName="VV_MinGrowthPlantGatherable"]</xpath>
+              <value><parts /></value>
+            </nomatch>
+          </li>
+          <li Class="PatchOperationAdd">
+            <xpath>Defs/StatDef[defName="VV_MinGrowthPlantGatherable"]/parts</xpath>
+            <value>
+              <li Class="VEF.Plants.StatPart_BeautyByBlooming" />
+            </value>
+          </li>
+          <li Class="PatchOperationAdd">
+            <xpath>Defs/StatDef[defName="VV_MinGrowthPlantGatherable"]</xpath>
+            <value>
+              <postProcessCurve>
+                <points>
+                  <li>(0, 0)</li>
+                  <li>(2, 2)</li>
+                  <li>(3, 1)</li>
+                </points>
+              </postProcessCurve>
+            </value>
+          </li>
+        </operations>
+      </li>
+    </operations>
+  </Operation>
+</Patch>
