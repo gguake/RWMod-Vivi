@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 엔딩 의식 3종. 기존 영원꽃 의식과 같이 PreceptDef/RitualPatternDef/RitualBehaviorDef/RitualOutcomeEffectDef/
+       RitualObligationTargetFilterDef 다섯 개가 같은 defName을 쓴다. 숨김 의식은 세이브를 불러올 때 기존 이념에도 자동으로 추가된다. -->
+
+  <!-- ===== 5단계 대조율 의식: 제단에 안치된 4단계 영원꽃을 5단계로 개화시키고 장기 공성을 시작한다 ===== -->
+  <PreceptDef>
+    <defName>VV_GrandAttunement</defName>
+    <label>grand attunement</label>
+    <description>The resonator links the altar's ancient mana circuits to the everflower, awakening its fifth bloom. The everflower begins condensing mana for its final bloom, and enemies drawn by the mana waves will relentlessly raid the colony while the condensation continues.
+\nCan only be performed on a level 4 everflower enshrined on the everflower altar.</description>
+    <issue>Ritual</issue>
+    <preceptClass>Precept_Ritual</preceptClass>
+    <visible>false</visible>
+    <classic>true</classic>
+    <countsTowardsPreceptLimit>false</countsTowardsPreceptLimit>
+    <selectionWeight>0</selectionWeight>
+    <ritualPatternBase>VV_GrandAttunement</ritualPatternBase>
+    <iconPath>UI/Commands/VV_GrandAttunement</iconPath>
+    <usesIdeoVisualEffects>false</usesIdeoVisualEffects>
+    <mergeRitualGizmosFromAllIdeos>true</mergeRitualGizmosFromAllIdeos>
+    <useRepeatPenalty>false</useRepeatPenalty>
+    <showRitualFloatMenuOption>false</showRitualFloatMenuOption>
+    <displayOrderInImpact>1001</displayOrderInImpact>
+    <displayOrderInIssue>1001</displayOrderInIssue>
+  </PreceptDef>
+
+  <RitualPatternDef>
+    <defName>VV_GrandAttunement</defName>
+    <ritualOnlyForIdeoMembers>false</ritualOnlyForIdeoMembers>
+    <ritualBehavior>VV_GrandAttunement</ritualBehavior>
+    <ritualOutcomeEffect>VV_GrandAttunement</ritualOutcomeEffect>
+    <ritualObligationTargetFilter>VV_GrandAttunement</ritualObligationTargetFilter>
+    <playsIdeoMusic>false</playsIdeoMusic>
+    <alwaysStartAnytime>true</alwaysStartAnytime>
+    <iconPathOverride>UI/Commands/VV_GrandAttunement</iconPathOverride>
+    <showIdeoIconsInDialog>false</showIdeoIconsInDialog>
+  </RitualPatternDef>
+
+  <RitualBehaviorDef>
+    <defName>VV_GrandAttunement</defName>
+    <durationTicks>2500</durationTicks>
+    <workerClass>VVRace.RitualBehaviorWorker_GeneralEverflowerRitual</workerClass>
+    <displayCompletedMessage>true</displayCompletedMessage>
+    <roles>
+      <li Class="VVRace.RitualRoleEverflowerResonator">
+        <id>resonator</id>
+        <label>resonator</label>
+        <maxCount>1</maxCount>
+        <required>True</required>
+        <usedStat>PsychicSensitivity</usedStat>
+        <defaultForSelectedColonist>true</defaultForSelectedColonist>
+        <allowChild>false</allowChild>
+        <blocksSocialInteraction>true</blocksSocialInteraction>
+        <countsAsParticipant>false</countsAsParticipant>
+      </li>
+    </roles>
+    <stages>
+      <li>
+        <defaultDuty>Spectate</defaultDuty>
+        <showProgressBar>false</showProgressBar>
+        <endTriggers>
+          <li Class="StageEndTrigger_RolesArrived">
+            <roleIds>
+              <li>resonator</li>
+            </roleIds>
+          </li>
+        </endTriggers>
+        <roleBehaviors>
+          <li>
+            <roleId>resonator</roleId>
+            <dutyDef>ArriveToCell</dutyDef>
+            <customPositions>
+              <li Class="RitualPosition_PreferredAdjacentCellCardinal">
+                <faceThing>true</faceThing>
+              </li>
+            </customPositions>
+          </li>
+        </roleBehaviors>
+      </li>
+      <li>
+        <defaultDuty>SpectateCircle</defaultDuty>
+        <spectateDistanceOverride>4~6</spectateDistanceOverride>
+        <visualEffectDef>VV_EverflowerLink</visualEffectDef>
+        <endTriggers>
+          <li Class="StageEndTrigger_DurationPercentage">
+            <percentage>1</percentage>
+          </li>
+        </endTriggers>
+        <roleBehaviors>
+          <li>
+            <roleId>resonator</roleId>
+            <dutyDef>Idle</dutyDef>
+            <customPositions>
+              <li Class="RitualPosition_PreferredAdjacentCellCardinal">
+                <faceThing>true</faceThing>
+              </li>
+            </customPositions>
+          </li>
+        </roleBehaviors>
+      </li>
+    </stages>
+  </RitualBehaviorDef>
+
+  <RitualOutcomeEffectDef>
+    <defName>VV_GrandAttunement</defName>
+    <description>The better the ritual's result, the shorter the condensation period for the final bloom (8 to 10 days).
+\nWarning: completing this ritual will draw relentless raids driven by the massive mana waves until the bloom condensation is complete.
+\nAll everflower rituals share a cooldown.</description>
+    <workerClass>VVRace.RitualOutcomeEffectWorker_GrandAttunement</workerClass>
+    <allowAttachableOutcome>false</allowAttachableOutcome>
+    <givesDevelopmentPoints>false</givesDevelopmentPoints>
+    <allowOutcomeWithNoAttendance>true</allowOutcomeWithNoAttendance>
+    <effecter>VV_Effecter_GrandAttunementComplete</effecter>
+    <maxQuality>10</maxQuality>
+    <comps>
+      <li Class="RitualOutcomeComp_PawnStatScaled">
+        <label>{PAWN_labelShort}'s psychic sensitivity</label>
+        <labelAbstract>resonator's psychic sensitivity</labelAbstract>
+        <roleId>resonator</roleId>
+        <statDef>PsychicSensitivity</statDef>
+        <curve>
+          <points>
+            <li>(0.5, 0.0)</li>
+            <li>(1.5, 1.0)</li>
+            <li>(2.5, 2.0)</li>
+            <li>(4.0, 4.0)</li>
+            <li>(6.0, 6.0)</li>
+            <li>(9.0, 8.0)</li>
+          </points>
+        </curve>
+      </li>
+      <li Class="RitualOutcomeComp_ParticipantCount">
+        <label>participant count</label>
+        <curve>
+          <points>
+            <li>(0,  0.0)</li>
+            <li>(4,  0.5)</li>
+            <li>(10, 1.0)</li>
+            <li>(20, 2.0)</li>
+          </points>
+        </curve>
+      </li>
+    </comps>
+  </RitualOutcomeEffectDef>
+
+  <RitualObligationTargetFilterDef Class="VVRace.RitualObligationTargetFilterDef_EverflowerRitual">
+    <defName>VV_GrandAttunement</defName>
+    <workerClass>VVRace.RitualObligationTargetWorker_EverflowerRitual</workerClass>
+    <requiredAttunementLevel>4</requiredAttunementLevel>
+    <maxAttunementLevel>4</maxAttunementLevel>
+    <requiresAltar>true</requiresAltar>
+    <startsEndingQuest>true</startsEndingQuest>
+  </RitualObligationTargetFilterDef>
+
+  <!-- ===== 6단계 〈생명의 회귀〉: 아포크리파에게서 풀려난 고대 제국의 요정 비비 하나를 성체 비비로 되살려 정착민으로 맞이한다 ===== -->
+  <PreceptDef>
+    <defName>VV_ReturnOfLife</defName>
+    <label>return of life</label>
+    <description>Using the power of the fully bloomed everflower, restores a physical body to an ancient fairy vivi freed from Apocrypha's shackles. The revived ancient vivi joins the colony.
+\nAncient vivis carry more xenogenes than ordinary vivis and always possess at least one archite gene.</description>
+    <issue>Ritual</issue>
+    <preceptClass>Precept_Ritual</preceptClass>
+    <visible>false</visible>
+    <classic>true</classic>
+    <countsTowardsPreceptLimit>false</countsTowardsPreceptLimit>
+    <selectionWeight>0</selectionWeight>
+    <ritualPatternBase>VV_ReturnOfLife</ritualPatternBase>
+    <iconPath>UI/Commands/VV_ReturnOfLife</iconPath>
+    <usesIdeoVisualEffects>false</usesIdeoVisualEffects>
+    <mergeRitualGizmosFromAllIdeos>true</mergeRitualGizmosFromAllIdeos>
+    <useRepeatPenalty>false</useRepeatPenalty>
+    <showRitualFloatMenuOption>false</showRitualFloatMenuOption>
+    <displayOrderInImpact>995</displayOrderInImpact>
+    <displayOrderInIssue>995</displayOrderInIssue>
+  </PreceptDef>
+
+  <RitualPatternDef>
+    <defName>VV_ReturnOfLife</defName>
+    <ritualOnlyForIdeoMembers>false</ritualOnlyForIdeoMembers>
+    <ritualBehavior>VV_ReturnOfLife</ritualBehavior>
+    <ritualOutcomeEffect>VV_ReturnOfLife</ritualOutcomeEffect>
+    <ritualObligationTargetFilter>VV_ReturnOfLife</ritualObligationTargetFilter>
+    <playsIdeoMusic>false</playsIdeoMusic>
+    <alwaysStartAnytime>true</alwaysStartAnytime>
+    <iconPathOverride>UI/Commands/VV_ReturnOfLife</iconPathOverride>
+    <showIdeoIconsInDialog>false</showIdeoIconsInDialog>
+  </RitualPatternDef>
+
+  <RitualBehaviorDef>
+    <defName>VV_ReturnOfLife</defName>
+    <durationTicks>1500</durationTicks>
+    <workerClass>VVRace.RitualBehaviorWorker_GeneralEverflowerRitual</workerClass>
+    <displayCompletedMessage>true</displayCompletedMessage>
+    <roles>
+      <li Class="VVRace.RitualRoleEverflowerResonator">
+        <id>resonator</id>
+        <label>resonator</label>
+        <maxCount>1</maxCount>
+        <required>True</required>
+        <usedStat>PsychicSensitivity</usedStat>
+        <defaultForSelectedColonist>true</defaultForSelectedColonist>
+        <allowChild>false</allowChild>
+        <blocksSocialInteraction>true</blocksSocialInteraction>
+        <countsAsParticipant>false</countsAsParticipant>
+      </li>
+    </roles>
+    <stages>
+      <li>
+        <defaultDuty>Spectate</defaultDuty>
+        <showProgressBar>false</showProgressBar>
+        <endTriggers>
+          <li Class="StageEndTrigger_RolesArrived">
+            <roleIds>
+              <li>resonator</li>
+            </roleIds>
+          </li>
+        </endTriggers>
+        <roleBehaviors>
+          <li>
+            <roleId>resonator</roleId>
+            <dutyDef>ArriveToCell</dutyDef>
+            <customPositions>
+              <li Class="RitualPosition_PreferredAdjacentCellCardinal">
+                <faceThing>true</faceThing>
+              </li>
+            </customPositions>
+          </li>
+        </roleBehaviors>
+      </li>
+      <li>
+        <defaultDuty>SpectateCircle</defaultDuty>
+        <spectateDistanceOverride>4~6</spectateDistanceOverride>
+        <visualEffectDef>VV_Defairyfication</visualEffectDef>
+        <endTriggers>
+          <li Class="StageEndTrigger_DurationPercentage">
+            <percentage>1</percentage>
+          </li>
+        </endTriggers>
+        <roleBehaviors>
+          <li>
+            <roleId>resonator</roleId>
+            <dutyDef>Idle</dutyDef>
+            <customPositions>
+              <li Class="RitualPosition_PreferredAdjacentCellCardinal">
+                <faceThing>true</faceThing>
+              </li>
+            </customPositions>
+          </li>
+        </roleBehaviors>
+      </li>
+    </stages>
+  </RitualBehaviorDef>
+
+  <RitualOutcomeEffectDef>
+    <defName>VV_ReturnOfLife</defName>
+    <description>An ancient adult vivi carrying four to six random genes and one archite gene joins the colony. The better the ritual's result, the shorter the cooldown on the next everflower ritual.
+\nAll everflower rituals share a cooldown.</description>
+    <workerClass>VVRace.RitualOutcomeEffectWorker_ReturnOfLife</workerClass>
+    <allowAttachableOutcome>false</allowAttachableOutcome>
+    <givesDevelopmentPoints>false</givesDevelopmentPoints>
+    <allowOutcomeWithNoAttendance>true</allowOutcomeWithNoAttendance>
+    <effecter>VV_Effecter_ReturnOfLifeComplete</effecter>
+    <maxQuality>10</maxQuality>
+    <comps>
+      <li Class="RitualOutcomeComp_PawnStatScaled">
+        <label>{PAWN_labelShort}'s psychic sensitivity</label>
+        <labelAbstract>resonator's psychic sensitivity</labelAbstract>
+        <roleId>resonator</roleId>
+        <statDef>PsychicSensitivity</statDef>
+        <curve>
+          <points>
+            <li>(0.5, 0.0)</li>
+            <li>(1.5, 1.0)</li>
+            <li>(2.5, 1.5)</li>
+            <li>(4.0, 2.0)</li>
+            <li>(6.0, 2.5)</li>
+            <li>(8.5, 3.0)</li>
+          </points>
+        </curve>
+      </li>
+      <li Class="RitualOutcomeComp_ParticipantCount">
+        <label>participant count</label>
+        <curve>
+          <points>
+            <li>(0,  0.0)</li>
+            <li>(4,  0.5)</li>
+            <li>(10, 1.0)</li>
+            <li>(20, 2.0)</li>
+          </points>
+        </curve>
+      </li>
+    </comps>
+  </RitualOutcomeEffectDef>
+
+  <RitualObligationTargetFilterDef Class="VVRace.RitualObligationTargetFilterDef_EverflowerRitual">
+    <defName>VV_ReturnOfLife</defName>
+    <workerClass>VVRace.RitualObligationTargetWorker_EverflowerRitual</workerClass>
+    <requiredAttunementLevel>6</requiredAttunementLevel>
+  </RitualObligationTargetFilterDef>
+
+  <!-- ===== 〈여왕의 대관식〉: 아포크리파를 토벌해 응축이 100%가 된 앵커 영원꽃에서 공명자(로열 비비)가 여왕으로 즉위한다.
+       단 한 번만 가능하며, 완료하면 영원꽃이 6단계로 완전히 개화하고 곧이어 엔딩 크레딧이 흐른다 ===== -->
+  <PreceptDef>
+    <defName>VV_QueensCoronation</defName>
+    <label>queen's coronation</label>
+    <description>Before the everflower whose bloom condensation is complete, the resonator is crowned queen and leads its sixth and final bloom.
+\nCan only be performed by the royal vivi resonating with the everflower after Apocrypha is defeated. Completing this ritual reaches the ending.</description>
+    <issue>Ritual</issue>
+    <preceptClass>Precept_Ritual</preceptClass>
+    <visible>false</visible>
+    <classic>true</classic>
+    <countsTowardsPreceptLimit>false</countsTowardsPreceptLimit>
+    <selectionWeight>0</selectionWeight>
+    <ritualPatternBase>VV_QueensCoronation</ritualPatternBase>
+    <iconPath>UI/Commands/VV_QueensCoronation</iconPath>
+    <usesIdeoVisualEffects>false</usesIdeoVisualEffects>
+    <mergeRitualGizmosFromAllIdeos>true</mergeRitualGizmosFromAllIdeos>
+    <useRepeatPenalty>false</useRepeatPenalty>
+    <showRitualFloatMenuOption>false</showRitualFloatMenuOption>
+    <displayOrderInImpact>994</displayOrderInImpact>
+    <displayOrderInIssue>994</displayOrderInIssue>
+  </PreceptDef>
+
+  <RitualPatternDef>
+    <defName>VV_QueensCoronation</defName>
+    <ritualOnlyForIdeoMembers>false</ritualOnlyForIdeoMembers>
+    <ritualBehavior>VV_QueensCoronation</ritualBehavior>
+    <ritualOutcomeEffect>VV_QueensCoronation</ritualOutcomeEffect>
+    <ritualObligationTargetFilter>VV_QueensCoronation</ritualObligationTargetFilter>
+    <playsIdeoMusic>false</playsIdeoMusic>
+    <alwaysStartAnytime>true</alwaysStartAnytime>
+    <iconPathOverride>UI/Commands/VV_QueensCoronation</iconPathOverride>
+    <showIdeoIconsInDialog>false</showIdeoIconsInDialog>
+  </RitualPatternDef>
+
+  <RitualBehaviorDef>
+    <defName>VV_QueensCoronation</defName>
+    <durationTicks>1500</durationTicks>
+    <workerClass>VVRace.RitualBehaviorWorker_GeneralEverflowerRitual</workerClass>
+    <displayCompletedMessage>true</displayCompletedMessage>
+    <roles>
+      <li Class="VVRace.RitualRoleEverflowerResonator">
+        <id>resonator</id>
+        <label>resonator</label>
+        <maxCount>1</maxCount>
+        <required>True</required>
+        <usedStat>PsychicSensitivity</usedStat>
+        <defaultForSelectedColonist>true</defaultForSelectedColonist>
+        <allowChild>false</allowChild>
+        <blocksSocialInteraction>true</blocksSocialInteraction>
+        <countsAsParticipant>false</countsAsParticipant>
+      </li>
+    </roles>
+    <stages>
+      <li>
+        <defaultDuty>Spectate</defaultDuty>
+        <showProgressBar>false</showProgressBar>
+        <endTriggers>
+          <li Class="StageEndTrigger_RolesArrived">
+            <roleIds>
+              <li>resonator</li>
+            </roleIds>
+          </li>
+        </endTriggers>
+        <roleBehaviors>
+          <li>
+            <roleId>resonator</roleId>
+            <dutyDef>ArriveToCell</dutyDef>
+            <customPositions>
+              <li Class="RitualPosition_PreferredAdjacentCellCardinal">
+                <faceThing>true</faceThing>
+              </li>
+            </customPositions>
+          </li>
+        </roleBehaviors>
+      </li>
+      <li>
+        <defaultDuty>SpectateCircle</defaultDuty>
+        <spectateDistanceOverride>4~6</spectateDistanceOverride>
+        <visualEffectDef>VV_QueensCoronation</visualEffectDef>
+        <endTriggers>
+          <li Class="StageEndTrigger_DurationPercentage">
+            <percentage>1</percentage>
+          </li>
+        </endTriggers>
+        <roleBehaviors>
+          <li>
+            <roleId>resonator</roleId>
+            <dutyDef>Idle</dutyDef>
+            <customPositions>
+              <li Class="RitualPosition_PreferredAdjacentCellCardinal">
+                <faceThing>true</faceThing>
+              </li>
+            </customPositions>
+          </li>
+        </roleBehaviors>
+      </li>
+    </stages>
+  </RitualBehaviorDef>
+
+  <RitualOutcomeEffectDef>
+    <defName>VV_QueensCoronation</defName>
+    <description>Whatever the ritual's result, the resonator is crowned queen, the everflower fully blooms into its sixth form, and the ending credits follow soon after.
+\nThis ritual ignores the everflower ritual cooldown.</description>
+    <workerClass>VVRace.RitualOutcomeEffectWorker_QueensCoronation</workerClass>
+    <allowAttachableOutcome>false</allowAttachableOutcome>
+    <givesDevelopmentPoints>false</givesDevelopmentPoints>
+    <allowOutcomeWithNoAttendance>true</allowOutcomeWithNoAttendance>
+    <effecter>VV_Effecter_CoronationComplete</effecter>
+    <maxQuality>10</maxQuality>
+    <comps>
+      <li Class="RitualOutcomeComp_PawnStatScaled">
+        <label>{PAWN_labelShort}'s psychic sensitivity</label>
+        <labelAbstract>resonator's psychic sensitivity</labelAbstract>
+        <roleId>resonator</roleId>
+        <statDef>PsychicSensitivity</statDef>
+        <curve>
+          <points>
+            <li>(0.5, 0.0)</li>
+            <li>(1.5, 1.0)</li>
+            <li>(2.5, 1.5)</li>
+            <li>(4.0, 2.0)</li>
+            <li>(6.0, 2.5)</li>
+            <li>(8.5, 3.0)</li>
+          </points>
+        </curve>
+      </li>
+      <li Class="RitualOutcomeComp_ParticipantCount">
+        <label>participant count</label>
+        <curve>
+          <points>
+            <li>(0,  0.0)</li>
+            <li>(4,  0.5)</li>
+            <li>(10, 1.0)</li>
+            <li>(20, 2.0)</li>
+          </points>
+        </curve>
+      </li>
+    </comps>
+  </RitualOutcomeEffectDef>
+
+  <RitualObligationTargetFilterDef Class="VVRace.RitualObligationTargetFilterDef_EverflowerRitual">
+    <defName>VV_QueensCoronation</defName>
+    <workerClass>VVRace.RitualObligationTargetWorker_EverflowerRitual</workerClass>
+    <requiredAttunementLevel>5</requiredAttunementLevel>
+    <maxAttunementLevel>5</maxAttunementLevel>
+    <completesEndingQuest>true</completesEndingQuest>
+  </RitualObligationTargetFilterDef>
+</Defs>

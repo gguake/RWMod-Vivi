@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 엔딩 〈영원한 봄의 제국〉: 영원꽃 꽃봉오리에서 퍼지는 황금 파동 고리 (가산, 빠르게 거대화해 화면을 쓸고 지나간다).
+       첫 겹은 VV_Effecter_EndingGoldenWave가, 나머지 두 겹은 C#(ViviEndingQuest)이 20틱 간격으로 낸다. -->
+  <FleckDef ParentName="FleckBase">
+    <defName>VV_Fleck_GoldenWaveRing</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0.05</fadeInTime>
+    <solidTime>0.5</solidTime>
+    <fadeOutTime>1.3</fadeOutTime>
+    <growthRate>16</growthRate>
+    <drawOffscreen>true</drawOffscreen>
+    <graphicData>
+      <texPath>VFX/VV_GoldenWaveRing</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <color>(1, 0.95, 0.8, 1)</color>
+      <drawSize>(4, 4)</drawSize>
+    </graphicData>
+  </FleckDef>
+
+  <!-- 개화 순간 꽃봉오리의 거대한 금빛 섬광 -->
+  <FleckDef ParentName="FleckBase">
+    <defName>VV_Fleck_EndingGoldenFlash</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0.04</fadeInTime>
+    <solidTime>0.2</solidTime>
+    <fadeOutTime>1.6</fadeOutTime>
+    <growthRate>0.4</growthRate>
+    <drawOffscreen>true</drawOffscreen>
+    <graphicData>
+      <texPath>Things/Mote/BrightFlash</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <color>(1, 0.86, 0.5, 0.85)</color>
+      <drawSize>(36, 36)</drawSize>
+    </graphicData>
+  </FleckDef>
+
+  <!-- 꽃잎 폭풍: 카메라 시야 곳곳에서 떨어지며 회전하는 영원꽃 꽃잎 (C#에서 색·속도·회전을 정해 직접 생성) -->
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>VV_Fleck_EndingPetal</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0.3</fadeInTime>
+    <solidTime>1.5</solidTime>
+    <fadeOutTime>1.2</fadeOutTime>
+    <graphicData>
+      <texPath>VFX/VV_EverflowerPetal</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <renderInstanced>true</renderInstanced>
+      <drawSize>(0.7, 0.7)</drawSize>
+    </graphicData>
+  </FleckDef>
+
+  <!-- 엔딩 개화 순간: 소리 + 금빛 섬광 + 첫 황금 파동 + 왜곡 파동 + 사방으로 터지는 꽃잎 (꽃봉오리 오프셋에서 1회 Spawn) -->
+  <EffecterDef>
+    <defName>VV_Effecter_EndingGoldenWave</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>VV_Manawave</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>VV_EverflowerRitualComplete</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_EndingGoldenFlash</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>1</burstCount>
+        <absoluteAngle>true</absoluteAngle>
+        <rotation>0</rotation>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GoldenWaveRing</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>1</burstCount>
+        <absoluteAngle>true</absoluteAngle>
+        <rotation>0~360</rotation>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_ExpandingDistortionRing</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>1</burstCount>
+        <scale>3</scale>
+        <absoluteAngle>true</absoluteAngle>
+        <rotation>0</rotation>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_EverflowerPetal_Burst</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>50~70</burstCount>
+        <positionRadius>0.8</positionRadius>
+        <angle>0~360</angle>
+        <absoluteAngle>true</absoluteAngle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>3~8</speed>
+        <rotation>0~360</rotation>
+        <rotationRate>-300~300</rotationRate>
+        <scale>0.35~0.8</scale>
+      </li>
+    </children>
+  </EffecterDef>
+</Defs>

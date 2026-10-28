@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+<!-- 아포크리파 1페이즈 기믹: 투사체 -->
+<VV_Projectile_FairyShell.label>사출된 요정 비비</VV_Projectile_FairyShell.label>
+<VV_Projectile_DoomSeed.label>멸망꽃 씨앗</VV_Projectile_DoomSeed.label>
+<VV_Projectile_FairySeed.label>요정꽃 씨앗</VV_Projectile_FairySeed.label>
+
+<!-- 아포크리파 1페이즈 기믹: 꽃 -->
+<VV_DoomFlower.label>멸망꽃</VV_DoomFlower.label>
+<VV_DoomFlower.description>아포크리파의 일그러진 마나가 피워낸 저주받은 꽃입니다. 만개하면 지역 내 모든 정착민에게 무작위 저주를 내립니다.\n\n만개하기 전에 공격하여 파괴할 수 있으며, 이미 내려진 저주는 아포크리파의 결속을 해방할 때 모두 해제됩니다.</VV_DoomFlower.description>
+
+<VV_FairyFlower.label>요정꽃</VV_FairyFlower.label>
+<VV_FairyFlower.description>아포크리파에게 귀속된 고대 요정 비비들의 순수한 파장이 응집된 꽃입니다. 비비가 이 꽃과 교감하면 〈요정 간섭〉을 얻어 아포크리파의 결속을 끊어낼 수 있습니다.\n\n공격으로 파괴되지 않으며, 일정 시간이 지나면 스스로 시들어 사라집니다.</VV_FairyFlower.description>
+
+</LanguageData>

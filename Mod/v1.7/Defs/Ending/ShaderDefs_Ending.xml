@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 1.7(Waylith)은 각 로드 폴더의 Shaders 폴더에서 GLSL 원본을 읽어 실행 중에 컴파일한다(Verse.ShaderDefRegistry).
+       파일 이름은 모든 모드에서 공유되므로 VV_ 접두사를 붙인다. 정점 셰이더는 바닐라 Mote.vert.glsl을 재사용한다. -->
+
+  <!-- 아포크리파 소멸: 노이즈 디졸브 + 황금 불씨 테두리 (알파 혼합) -->
+  <ShaderDef>
+    <defName>VV_Dissolve</defName>
+    <shaderProgram>
+      <vertexShaderFileName>Mote.vert.glsl</vertexShaderFileName>
+      <fragmentShaderFileName>VV_Dissolve.frag.glsl</fragmentShaderFileName>
+      <transparent>true</transparent>
+      <depthWrite>false</depthWrite>
+      <cullMode>None</cullMode>
+      <renderQueue>3000</renderQueue>
+    </shaderProgram>
+  </ShaderDef>
+
+  <ShaderTypeDef>
+    <defName>VV_Dissolve</defName>
+    <shaderPath>Map/VV_Dissolve</shaderPath>
+  </ShaderTypeDef>
+
+  <!-- 영혼 연결 빔: 타일링 텍스처 두 겹 스크롤 + 맥동 (가산 혼합) -->
+  <ShaderDef>
+    <defName>VV_SoulLink</defName>
+    <shaderProgram>
+      <vertexShaderFileName>Mote.vert.glsl</vertexShaderFileName>
+      <fragmentShaderFileName>VV_SoulLink.frag.glsl</fragmentShaderFileName>
+      <flipTextureST>false</flipTextureST>
+      <blendMode>Additive</blendMode>
+      <depthWrite>false</depthWrite>
+      <cullMode>None</cullMode>
+      <renderQueue>3151</renderQueue>
+      <textureWrapOverrides>
+        <li>
+          <key>_MainTex</key>
+          <value>Repeat</value>
+        </li>
+      </textureWrapOverrides>
+    </shaderProgram>
+  </ShaderDef>
+
+  <ShaderTypeDef>
+    <defName>VV_SoulLink</defName>
+    <shaderPath>Map/VV_SoulLink</shaderPath>
+  </ShaderTypeDef>
+
+  <!-- 충격파: 텍스처 없이 수식으로 파면·잔광·전기 줄기를 그리고 장면 캡처를 굴절시킨다(크기와 무관하게 선명).
+       장면 캡처는 바닐라 왜곡 셰이더(MoteLargeDistortionWave)와 같은 이름·큐를 사용하므로 프레임당 한 번만 수행한다. -->
+  <ShaderDef>
+    <defName>VV_ShockWave</defName>
+    <shaderProgram>
+      <vertexShaderFileName>Mote.vert.glsl</vertexShaderFileName>
+      <fragmentShaderFileName>VV_ShockWave.frag.glsl</fragmentShaderFileName>
+      <flipTextureST>false</flipTextureST>
+      <transparent>true</transparent>
+      <depthWrite>false</depthWrite>
+      <cullMode>None</cullMode>
+      <renderQueue>3151</renderQueue>
+      <sceneGrab>
+        <name>DistortionBackground</name>
+        <queue>3151</queue>
+      </sceneGrab>
+    </shaderProgram>
+  </ShaderDef>
+
+  <ShaderTypeDef>
+    <defName>VV_ShockWave</defName>
+    <shaderPath>Map/VV_ShockWave</shaderPath>
+  </ShaderTypeDef>
+
+  <!-- 아포크리파 2페이즈 전환 모핑: 1페이즈 몸이 꿈틀거리며 2페이즈 몸으로 뒤바뀐다(알파 혼합, 몸통 렌더 노드의 재질을 대신한다) -->
+  <ShaderDef>
+    <defName>VV_Morph</defName>
+    <shaderProgram>
+      <vertexShaderFileName>Mote.vert.glsl</vertexShaderFileName>
+      <fragmentShaderFileName>VV_Morph.frag.glsl</fragmentShaderFileName>
+      <transparent>true</transparent>
+      <depthWrite>false</depthWrite>
+      <cullMode>None</cullMode>
+      <renderQueue>3000</renderQueue>
+    </shaderProgram>
+  </ShaderDef>
+
+  <ShaderTypeDef>
+    <defName>VV_Morph</defName>
+    <shaderPath>Map/VV_Morph</shaderPath>
+  </ShaderTypeDef>
+
+  <!-- 셰이더 파이프라인 검증 겸 실제 소멸 연출에 쓰는 플렉 (Graphic_FleckPulse가 _AgeSecs를 넣어 준다) -->
+  <FleckDef ParentName="FleckBase">
+    <defName>VV_Fleck_ApocryphaDissolve</defName>
+    <graphicData>
+      <texPath>Things/Pawn/Apocrypha/VV_ApocryphaUnbound_south</texPath>
+      <shaderType>VV_Dissolve</shaderType>
+      <graphicClass>Graphic_FleckPulse</graphicClass>
+      <renderInstanced>false</renderInstanced>
+      <color>(1, 1, 1, 1)</color>
+      <drawSize>(7, 7)</drawSize>
+      <shaderParameters>
+        <_DissolveTex>/VFX/VV_DissolveNoise</_DissolveTex>
+        <_EdgeColor>(1.0, 0.78, 0.35, 1)</_EdgeColor>
+        <_DissolveDelay>0.6</_DissolveDelay>
+        <_DissolveDuration>6.0</_DissolveDuration>
+      </shaderParameters>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0</fadeInTime>
+    <solidTime>7</solidTime>
+    <fadeOutTime>0.3</fadeOutTime>
+  </FleckDef>
+
+  <FleckDef ParentName="FleckBase">
+    <defName>VV_Fleck_SoulLinkTest</defName>
+    <graphicData>
+      <texPath>VFX/VV_SoulLinkBeam</texPath>
+      <shaderType>VV_SoulLink</shaderType>
+      <graphicClass>Graphic_FleckPulse</graphicClass>
+      <renderInstanced>false</renderInstanced>
+      <color>(1, 0.9, 0.6, 1)</color>
+      <drawSize>(1, 1)</drawSize>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0</fadeInTime>
+    <solidTime>30</solidTime>
+    <fadeOutTime>0.3</fadeOutTime>
+  </FleckDef>
+</Defs>

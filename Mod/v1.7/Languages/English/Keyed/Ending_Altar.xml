@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+<!-- 메시지 -->
+<VV_Message_EverflowerEnshrined>The everflower has been enshrined on the altar.</VV_Message_EverflowerEnshrined>
+<VV_Message_EverflowerAltarRequiresLevel>Only an everflower of attunement level {LEVEL} or higher can be enshrined on the altar.</VV_Message_EverflowerAltarRequiresLevel>
+<VV_Message_AnchorEverflowerLeftAltar>The altar is gone, and the blooming everflower has teleported off the altar.</VV_Message_AnchorEverflowerLeftAltar>
+
+<!-- 거부 사유 -->
+<VV_FailReason_AltarOnlyEverflowerCenter>Only an everflower can be enshrined at the center of the altar.</VV_FailReason_AltarOnlyEverflowerCenter>
+<VV_FailReason_AltarCenterOccupied>An everflower is already enshrined on this altar.</VV_FailReason_AltarCenterOccupied>
+<VV_FailReason_AltarOnePerMap>Only one everflower altar can be built on each map.</VV_FailReason_AltarOnePerMap>
+<VV_FailReason_AltarBlockedByArcanePlant>Cannot build over an arcane plant.</VV_FailReason_AltarBlockedByArcanePlant>
+<VV_FailReason_AltarUnderConstruction>Cannot place on an everflower altar under construction.</VV_FailReason_AltarUnderConstruction>
+<VV_FailReason_AltarHasEnshrinedEverflower>Cannot deconstruct while an everflower is enshrined</VV_FailReason_AltarHasEnshrinedEverflower>
+<VV_FailReason_AltarEndingInProgress>Cannot deconstruct while the everflower is blooming</VV_FailReason_AltarEndingInProgress>
+
+<!-- 5/6단계 레벨업 편지 머리말 -->
+<VV_Letter_EverflowerAttunementLevel5Preamble>The everflower has resonated with the altar's mana circuits and reached its fifth bloom.
+\nIt releases vast amounts of environment mana into its surroundings through the altar, and its resonator's everflower resonance strengthens to stage V.</VV_Letter_EverflowerAttunementLevel5Preamble>
+<VV_Letter_EverflowerAttunementLevel6Preamble>The legendary everflower has bloomed in its complete form. Dense environment mana now flows constantly across the whole map.
+\nThe resonator's everflower resonance strengthens to stage VI, removing the fatigue and movement penalties from bound fairy vivis. All vivis in the colony become immune to genetic instability, and adult vivis age much more slowly.</VV_Letter_EverflowerAttunementLevel6Preamble>
+
+<!-- 정보창 -->
+<VV_Inspector_AltarEnshrinedEverflower>Enshrined everflower: attunement level {LEVEL}</VV_Inspector_AltarEnshrinedEverflower>
+<VV_Inspector_AltarNoEverflower>No everflower enshrined</VV_Inspector_AltarNoEverflower>
+<VV_Inspector_EverflowerEnshrined>Enshrined on the everflower altar</VV_Inspector_EverflowerEnshrined>
+<VV_Inspector_EverflowerAttunementLevelOnly>Attunement: Level {LEVEL}</VV_Inspector_EverflowerAttunementLevelOnly>
+
+<!-- 기즈모 -->
+<VV_Command_ReserveTeleportEverflowerAltarDesc>Select the everflower altar to enshrine the everflower at its center, regardless of distance. Requires attunement level {LEVEL} or higher, and an enshrined everflower can never be moved again.</VV_Command_ReserveTeleportEverflowerAltarDesc>
+
+</LanguageData>

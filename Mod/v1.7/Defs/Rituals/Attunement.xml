@@ -49,6 +49,8 @@
         <allowChild>false</allowChild>
         <blocksSocialInteraction>true</blocksSocialInteraction>
         <countsAsParticipant>false</countsAsParticipant>
+        <!-- 아포크리파 2페이즈 전투 중 부상당한 공명자도 공명 파동 의식을 이어갈 수 있도록 -->
+        <ignoreBleeding>true</ignoreBleeding>
       </li>
     </roles>
     <stages>
@@ -144,5 +146,7 @@
     <defName>VV_Attunement</defName>
     <workerClass>VVRace.RitualObligationTargetWorker_EverflowerRitual</workerClass>
     <requiredAttunementLevel>0</requiredAttunementLevel>
+    <!-- 아포크리파 2페이즈 동안 앵커 영원꽃에서 유일하게 가능한 의식(공명 파동) -->
+    <allowedDuringApocryphaPhase2>true</allowedDuringApocryphaPhase2>
   </RitualObligationTargetFilterDef>
 </Defs>

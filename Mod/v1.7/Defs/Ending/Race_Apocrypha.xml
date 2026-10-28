@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 아포크리파 페이즈별 생애 단계: 0 = 1페이즈(결속), 1 = 2페이즈(해방). 나이와 무관하게 CompApocrypha가 LockCurrentLifeStageIndex로 고정한다. -->
+  <LifeStageDef>
+    <defName>VV_ApocryphaBound</defName>
+    <label>bound</label>
+    <visible>false</visible>
+    <canDoRandomMentalBreaks>false</canDoRandomMentalBreaks>
+    <bodySizeFactor>1</bodySizeFactor>
+  </LifeStageDef>
+
+  <LifeStageDef>
+    <defName>VV_ApocryphaUnbound</defName>
+    <label>unbound</label>
+    <visible>false</visible>
+    <canDoRandomMentalBreaks>false</canDoRandomMentalBreaks>
+    <bodySizeFactor>1.3</bodySizeFactor>
+    <healthScaleFactor>1.3</healthScaleFactor>
+  </LifeStageDef>
+
+  <!-- 코어 Animal 렌더 트리 복사본 + 2페이즈 전환 동안 몸통을 키우는 서브워커 -->
+  <PawnRenderTreeDef>
+    <defName>VV_Apocrypha</defName>
+    <root Class="PawnRenderNodeProperties_Parent">
+      <debugLabel>Root</debugLabel>
+      <tagDef>Root</tagDef>
+      <children>
+        <li>
+          <debugLabel>Body</debugLabel>
+          <tagDef>Body</tagDef>
+          <nodeClass>PawnRenderNode_AnimalPart_Body</nodeClass>
+          <workerClass>PawnRenderNodeWorker_AnimalBody</workerClass>
+          <useRottenColor>true</useRottenColor>
+          <subworkerClasses>
+            <li>VVRace.PawnRenderSubWorker_ApocryphaGrow</li>
+          </subworkerClasses>
+          <children>
+            <li>
+              <debugLabel>Wounds</debugLabel>
+              <nodeClass>PawnRenderNode_AnimalPart</nodeClass>
+              <workerClass>PawnRenderNodeWorker_OverlayWounds</workerClass>
+              <overlayLayer>Body</overlayLayer>
+              <useGraphic>false</useGraphic>
+              <baseLayer>3</baseLayer>
+            </li>
+            <li>
+              <debugLabel>Firefoam</debugLabel>
+              <nodeClass>PawnRenderNode_AnimalPart</nodeClass>
+              <workerClass>PawnRenderNodeWorker_OverlayFirefoam</workerClass>
+              <overlayLayer>Body</overlayLayer>
+              <useGraphic>false</useGraphic>
+              <baseLayer>10</baseLayer>
+            </li>
+          </children>
+        </li>
+      </children>
+    </root>
+  </PawnRenderTreeDef>
+
+  <ThingDef ParentName="AnimalThingBase">
+    <defName>VV_Apocrypha</defName>
+    <label>Apocrypha, the Crumbled Queen</label>
+    <description>The progenitor of every titanic hornet, and the calamity that brought down the ancient vivi empire.
+\nOn the day the empire fell, its last queen fairyfied billions of her scaria-stricken people and bound their souls to her own to save them. Overwhelmed by the astronomical weight of their souls, overloaded mana, and scaria, she lost her mind and mutated into this monstrous form.
+\nAwakened from her long slumber by the waves of the everflower, Apocrypha is drawn by instinct toward the altar. While bound fairy vivis remain, they absorb every blow in her place; once all bonds are released, she breaks free and reveals her true colossal form.</description>
+    <drawOffscreen>true</drawOffscreen>
+    <statBases>
+      <MoveSpeed>1.5</MoveSpeed>
+      <PsychicSensitivity>0</PsychicSensitivity>
+      <ArmorRating_Sharp>0</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0</ArmorRating_Blunt>
+      <ArmorRating_Heat>0</ArmorRating_Heat>
+      <Flammability>0</Flammability>
+      <ToxicResistance>1</ToxicResistance>
+      <ToxicEnvironmentResistance>1</ToxicEnvironmentResistance>
+      <ComfyTemperatureMin>-150</ComfyTemperatureMin>
+      <ComfyTemperatureMax>250</ComfyTemperatureMax>
+      <PainShockThreshold>1</PainShockThreshold>
+      <MarketValue>0</MarketValue>
+      <LeatherAmount>0</LeatherAmount>
+      <Wildness>1</Wildness>
+      <MinimumHandlingSkill>99</MinimumHandlingSkill>
+    </statBases>
+    <uiIconScale>1</uiIconScale>
+
+    <tools>
+      <li>
+        <label>left claw</label>
+        <capacities>
+          <li>Scratch</li>
+          <li>Stab</li>
+        </capacities>
+        <power>45</power>
+        <cooldownTime>2.2</cooldownTime>
+        <linkedBodyPartsGroup>VV_LeftClaw</linkedBodyPartsGroup>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+        <armorPenetration>0.7</armorPenetration>
+      </li>
+      <li>
+        <label>right claw</label>
+        <capacities>
+          <li>Scratch</li>
+          <li>Stab</li>
+        </capacities>
+        <power>45</power>
+        <cooldownTime>2.2</cooldownTime>
+        <linkedBodyPartsGroup>VV_RightClaw</linkedBodyPartsGroup>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+        <armorPenetration>0.7</armorPenetration>
+      </li>
+      <li>
+        <label>jaw</label>
+        <capacities>
+          <li>Bite</li>
+        </capacities>
+        <power>30</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>Mouth</linkedBodyPartsGroup>
+      </li>
+    </tools>
+
+    <race>
+      <body>VV_TitanicHornet</body>
+      <thinkTreeMain>VV_Apocrypha</thinkTreeMain>
+      <thinkTreeConstant>VV_ApocryphaConstant</thinkTreeConstant>
+      <renderTree>VV_Apocrypha</renderTree>
+      <baseBodySize>8</baseBodySize>
+      <baseHealthScale>30</baseHealthScale>
+
+      <foodType>None</foodType>
+      <needsRest>false</needsRest>
+      <alwaysAwake>true</alwaysAwake>
+      <hasGenders>false</hasGenders>
+      <hasCorpse>false</hasCorpse>
+      <hasMeat>false</hasMeat>
+      <canBecomeShambler>false</canBecomeShambler>
+      <isImmuneToInfections>true</isImmuneToInfections>
+
+      <manhunterOnDamageChance>0</manhunterOnDamageChance>
+      <manhunterOnTameFailChance>0</manhunterOnTameFailChance>
+      <canBePredatorPrey>false</canBePredatorPrey>
+      <herdMigrationAllowed>false</herdMigrationAllowed>
+      <canReleaseToWild>false</canReleaseToWild>
+      <allowedOnCaravan>false</allowedOnCaravan>
+      <neverIncludeInQuests>true</neverIncludeInQuests>
+      <trainability>None</trainability>
+      <showTrainables>false</showTrainables>
+      <hideTrainingTab>true</hideTrainingTab>
+      <petness>0</petness>
+      <bloodDef>Filth_BloodInsect</bloodDef>
+      <lifeExpectancy>1000</lifeExpectancy>
+
+      <lifeStageAges>
+        <li>
+          <def>VV_ApocryphaBound</def>
+          <minAge>0</minAge>
+          <soundWounded>Pawn_BigInsect_Pain</soundWounded>
+          <soundDeath>Pawn_BigInsect_Death</soundDeath>
+          <soundCall>Pawn_BigInsect_Call</soundCall>
+          <soundAngry>Pawn_BigInsect_Angry</soundAngry>
+        </li>
+        <li>
+          <def>VV_ApocryphaUnbound</def>
+          <minAge>999</minAge>
+          <soundWounded>Pawn_BigInsect_Pain</soundWounded>
+          <soundDeath>Pawn_BigInsect_Death</soundDeath>
+          <soundCall>Pawn_BigInsect_Call</soundCall>
+          <soundAngry>Pawn_BigInsect_Angry</soundAngry>
+        </li>
+      </lifeStageAges>
+      <soundMeleeHitPawn>Pawn_Melee_BigBash_HitPawn</soundMeleeHitPawn>
+      <soundMeleeHitBuilding>Pawn_Melee_BigBash_HitBuilding</soundMeleeHitBuilding>
+      <soundMeleeMiss>Pawn_Melee_BigBash_Miss</soundMeleeMiss>
+
+      <hediffGiverSets Inherit="False" />
+    </race>
+
+    <comps>
+      <li Class="VVRace.CompProperties_Apocrypha" />
+    </comps>
+  </ThingDef>
+
+  <PawnKindDef ParentName="AnimalKindBase">
+    <defName>VV_Apocrypha</defName>
+    <label>Apocrypha</label>
+    <race>VV_Apocrypha</race>
+    <combatPower>3000</combatPower>
+    <canArriveManhunter>false</canArriveManhunter>
+    <ecoSystemWeight>0</ecoSystemWeight>
+    <isBoss>true</isBoss>
+    <skipResistant>true</skipResistant>
+    <immuneToTraps>true</immuneToTraps>
+    <ignoresPainShock>true</ignoresPainShock>
+    <immuneToGameConditionEffects>true</immuneToGameConditionEffects>
+
+    <lifeStages>
+      <li>
+        <bodyGraphicData>
+          <texPath>Things/Pawn/Apocrypha/VV_Apocrypha</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>6.5</drawSize>
+          <shadowData>
+            <volume>(1.4, 1.0, 0.7)</volume>
+            <offset>(0, 0, -0.9)</offset>
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+      <li>
+        <bodyGraphicData>
+          <texPath>Things/Pawn/Apocrypha/VV_ApocryphaUnbound</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>8.5</drawSize>
+          <shadowData>
+            <volume>(1.8, 1.3, 0.9)</volume>
+            <offset>(0, 0, -1.2)</offset>
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+    </lifeStages>
+  </PawnKindDef>
+
+  <!-- 처치된 아포크리파의 소멸 연출(시체 대신). 저장 가능한 시퀀서이며 VV_Dissolve 셰이더로 직접 그린다. -->
+  <ThingDef ParentName="EtherealThingBase">
+    <defName>VV_DyingApocrypha</defName>
+    <label>crumbling Apocrypha</label>
+    <thingClass>VVRace.DyingApocrypha</thingClass>
+    <tickerType>Normal</tickerType>
+    <drawerType>RealtimeOnly</drawerType>
+    <drawOffscreen>true</drawOffscreen>
+    <altitudeLayer>Pawn</altitudeLayer>
+    <selectable>false</selectable>
+  </ThingDef>
+</Defs>

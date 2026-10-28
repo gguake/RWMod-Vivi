@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 영원꽃 제단: 5x5 화분(ArcanePlantPot 파생). 중앙 칸에 4단계 이상 영원꽃을 순간이동시켜 안치한다. -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>VV_DreamumAltar</defName>
+    <label>everflower altar</label>
+    <description>A grand altar restored from the designs of the ancient vivi empire. Its central amber core and mana circuits draw mana from the earth, sustaining an everflower so it can grow beyond its limits.
+\nAn everflower of attunement level 4 or higher can be teleported onto the center of the altar to be enshrined. Teleporting to the altar ignores the usual distance limit, and an enshrined everflower cannot be moved again.
+\nThe altar cannot be destroyed by attacks, and only one can be built on each map.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_Everflower</ThingDef>
+      <ThingDef>VV_AncientAmberCore</ThingDef>
+    </descriptionHyperlinks>
+
+    <thingClass>VVRace.Building_DreamumAltar</thingClass>
+
+    <graphicData>
+      <texPath>Things/Building/VV_DreamumAltar</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawRotated>false</drawRotated>
+      <drawSize>(10, 10)</drawSize>
+    </graphicData>
+
+    <uiOrder>2405</uiOrder>
+    <uiIconScale>1.9</uiIconScale>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>Standable</passability>
+    <!-- 의식 등으로 올라설 수는 있지만 지름길로 가로지르지 못하게 칸마다 큰 이동 비용을 매긴다.
+         여러 칸짜리 건물은 같은 건물 칸끼리 이동할 때 비용을 건너뛰므로(pathCostIgnoreRepeat) 이를 끈다. -->
+    <pathCost>100</pathCost>
+    <pathCostIgnoreRepeat>false</pathCostIgnoreRepeat>
+    <size>(5,5)</size>
+    <rotatable>false</rotatable>
+    <canOverlapZones>false</canOverlapZones>
+
+    <statBases>
+      <MaxHitPoints>3000</MaxHitPoints>
+      <WorkToBuild>30000</WorkToBuild>
+      <Beauty>50</Beauty>
+      <Flammability>0</Flammability>
+    </statBases>
+
+    <costList>
+      <VV_AncientAmberCore>1</VV_AncientAmberCore>
+      <VV_Viviwax>120</VV_Viviwax>
+      <VV_Lifestrand>60</VV_Lifestrand>
+      <VV_Propolis>50</VV_Propolis>
+      <VV_PerfumingPetal>200</VV_PerfumingPetal>
+    </costList>
+    <resourcesFractionWhenDeconstructed>1</resourcesFractionWhenDeconstructed>
+    <constructEffect>ConstructWood</constructEffect>
+    <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+
+    <building>
+      <isInert>true</isInert>
+      <ai_neverTrashThis>true</ai_neverTrashThis>
+      <!-- 영원꽃(자연 명상 초점)과 함께 쓰는 고대 제단이라 인공 구조물로 치지 않는다 -->
+      <artificialForMeditationPurposes>false</artificialForMeditationPurposes>
+      <!-- 습격·보스가 부수지 못한다. 꽃으로 향한 비화염 피해는 화분(제단)으로 넘어가므로 안치된 영원꽃도 사실상 보호된다. -->
+      <canBeDamagedByAttacks>false</canBeDamagedByAttacks>
+      <!-- 다시 구하기 어려운 코어는 어떤 경우에도 돌려준다. -->
+      <forcedCostLeavings>
+        <li>VV_AncientAmberCore</li>
+      </forcedCostLeavings>
+    </building>
+
+    <comps>
+      <li Class="CompProperties_Glower">
+        <glowRadius>5</glowRadius>
+        <glowColor>(255,186,96,0)</glowColor>
+      </li>
+    </comps>
+
+    <placeWorkers>
+      <li>VVRace.PlaceWorker_DreamumAltar</li>
+    </placeWorkers>
+
+    <designationCategory>VV_Bulidings</designationCategory>
+
+    <researchPrerequisites>
+      <li>VV_AncientAltarRestoration</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!-- 고대 호박 코어: 제단 건설에 필요한 유일 재료. 연구 완료 시 비비 연방이 보내 주며, 잃어버리면 연방 상인에게서 다시 살 수 있다. -->
+  <ThingDef ParentName="ResourceBase">
+    <defName>VV_AncientAmberCore</defName>
+    <label>ancient amber core</label>
+    <description>A great amber crystal once set at the heart of an everflower altar in the ancient vivi empire. Engraved inside with ancient mana circuits, it gives off a faint, warm glow.
+\nA core relic required to restore an everflower altar. Since the fall of the empire, the vivi federation has preserved only a few.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_DreamumAltar</ThingDef>
+    </descriptionHyperlinks>
+
+    <graphicData>
+      <texPath>Things/Item/VV_AncientAmberCore</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>ChunkRock_Drop</soundInteract>
+    <soundDrop>ChunkRock_Drop</soundDrop>
+    <stackLimit>1</stackLimit>
+    <drawGUIOverlay>false</drawGUIOverlay>
+    <useHitPoints>true</useHitPoints>
+    <healthAffectsPrice>false</healthAffectsPrice>
+
+    <statBases>
+      <MarketValue>2500</MarketValue>
+      <MaxHitPoints>200</MaxHitPoints>
+      <Mass>2</Mass>
+      <Flammability>0</Flammability>
+      <DeteriorationRate>0</DeteriorationRate>
+    </statBases>
+
+    <thingCategories>
+      <li>VV_ViviResource</li>
+    </thingCategories>
+
+    <!-- 상인은 팔 수 있지만 플레이어는 팔 수 없다. 일반 보상으로는 나오지 않는다. -->
+    <tradeability>Buyable</tradeability>
+    <thingSetMakerTags>
+      <li>NonStandardReward</li>
+    </thingSetMakerTags>
+  </ThingDef>
+</Defs>

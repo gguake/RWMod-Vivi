@@ -65,6 +65,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <!-- 엔딩 퀘스트 〈만개하는 여명〉: 폴더 단위로 포함 -->
+    <Compile Include="Ending\**\*.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Fairy\Abilities\CompAbilityEffect_FairyConcentration.cs" />
     <Compile Include="Fairy\Abilities\CompAbilityEffect_FairyExpansion.cs" />
     <Compile Include="Fairy\Abilities\CompAbilityEffect_FairyGuard.cs" />

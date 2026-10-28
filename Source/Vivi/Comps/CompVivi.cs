@@ -170,6 +170,12 @@ namespace VVRace
                     RefreshHairColor();
                 }
 
+                // 5/6단계 영원꽃의 비비 보상(잔향 상시 유지, 영원꽃의 축복)
+                if (parent.IsHashIntervalTick(EverflowerBlessingUtility.RefreshIntervalTicks, delta))
+                {
+                    EverflowerBlessingUtility.RefreshFor((Pawn)parent);
+                }
+
                 if (AttunementActive && parent.IsHashIntervalTick(GenTicks.TickRareInterval, delta))
                 {
                     var mapManaComp = parent.Map.GetManaComponent();
@@ -195,6 +201,46 @@ namespace VVRace
             _refreshEverflowerHediffsAfterLoad = false;
             RefreshEverflowerHediffs();
             return true;
+        }
+
+        public override IEnumerable<Gizmo> CompGetGizmosExtra()
+        {
+            foreach (var gizmo in base.CompGetGizmosExtra())
+            {
+                yield return gizmo;
+            }
+
+            if (!DebugSettings.godMode || !(parent is Pawn pawn) || !pawn.Spawned)
+            {
+                yield break;
+            }
+
+            yield return new Command_Action
+            {
+                defaultLabel = "DEV: Refresh everflower rewards",
+                action = () => EverflowerBlessingUtility.RefreshFor(pawn)
+            };
+
+            yield return new Command_Action
+            {
+                defaultLabel = "DEV: Add genetic instability",
+                action = () =>
+                {
+                    if (!pawn.health.hediffSet.HasHediff(EndingRitualDefOf.VV_GeneticUnstability))
+                    {
+                        pawn.health.AddHediff(EndingRitualDefOf.VV_GeneticUnstability, pawn.RaceProps.body.corePart);
+                    }
+                }
+            };
+
+            if (!isRoyal && pawn.DevelopmentalStage.Adult())
+            {
+                yield return new Command_Action
+                {
+                    defaultLabel = "DEV: Coronate",
+                    action = () => Coronate()
+                };
+            }
         }
 
         public override void PostDrawExtraSelectionOverlays()
@@ -267,6 +313,21 @@ namespace VVRace
             }
 
             RefreshEverflowerHediffs();
+        }
+
+        // 여왕의 대관식: 성체 일반 비비를 로열 비비로 승격한다.
+        // 자연 승격(Notify_AdultLifeStageStart)과 같은 순서로 체형·의류·그래픽을 갱신하며, 편지는 의식 결과에서 보낸다.
+        public bool Coronate()
+        {
+            var pawn = (Pawn)parent;
+            if (isRoyal || !pawn.DevelopmentalStage.Adult()) { return false; }
+
+            SetRoyal();
+
+            pawn.story.bodyType = BodyTypeDefOf.Female;
+            pawn.apparel?.DropAllOrMoveAllToInventory((Apparel apparel) => !apparel.def.apparel.PawnCanWear(pawn));
+            pawn.Drawer.renderer.SetAllGraphicsDirty();
+            return true;
         }
 
         public void RefreshHairColor()
@@ -360,6 +421,22 @@ namespace VVRace
 
             RefreshEverflowerLinkHediff(pawn);
             RefreshFairyMasteryHediff(pawn);
+            RefreshFairyBondHediff(pawn);
+        }
+
+        // 요정 비비 결속(VV_ViviFairyFollow): 구 세이브의 예전 클래스 인스턴스를 Hediff_ViviFairyFollow로 바꾸고(RefreshBondHediff),
+        // 6단계 영원꽃과의 연결 여부에 따라 단계가 바뀌었을 수 있으므로 스탯 캐시를 갱신한다(레벨 변경·스폰·불러오기 후 갱신 때마다).
+        private void RefreshFairyBondHediff(Pawn pawn)
+        {
+            if (pawn.Dead) { return; }
+
+            ViviHolder?.RefreshBondHediff();
+
+            var bond = pawn.health.hediffSet.GetFirstHediffOfDef(VVHediffDefOf.VV_ViviFairyFollow);
+            if (bond != null)
+            {
+                pawn.health.Notify_HediffChanged(bond);
+            }
         }
 
         private void RefreshEverflowerLinkHediff(Pawn pawn)

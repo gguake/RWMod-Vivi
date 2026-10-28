@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 엔딩 막간 〈불길한 정적〉: 평화 기간 동안 화면 상단에 남은 시간을 보여주는 표시용 컨디션.
+       실제 위협 억제는 VVRace.EndingCorePatch(IncidentWorker.CanFireNow 포스트픽스)가 한다.
+       preventIncidents는 상인·방문객 같은 긍정적 사건까지 막으므로 쓰지 않는다. -->
+  <GameConditionDef>
+    <defName>VV_OminousSilence</defName>
+    <conditionClass>GameCondition</conditionClass>
+    <label>ominous silence</label>
+    <description>An enormous psychic wave of unknown origin is interfering with the roots of the everflower, halting the bloom condensation. The enemies swarming toward the altar have stopped coming, but something vast and ominous is approaching the everflower.</description>
+    <natural>false</natural>
+    <displayOnUI>true</displayOnUI>
+    <preventIncidents>false</preventIncidents>
+    <canBePermanent>false</canBePermanent>
+  </GameConditionDef>
+</Defs>

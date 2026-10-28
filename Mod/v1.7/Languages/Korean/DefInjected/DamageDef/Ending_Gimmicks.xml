@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+<!-- 아포크리파 1페이즈 기믹: 요정 비비 사출탄 -->
+<VV_FairyBlast.label>요정 폭발</VV_FairyBlast.label>
+<VV_FairyBlast.deathMessage>{0}(이)가 사출된 요정 비비의 폭발에 휘말려 죽었습니다.</VV_FairyBlast.deathMessage>
+
+</LanguageData>

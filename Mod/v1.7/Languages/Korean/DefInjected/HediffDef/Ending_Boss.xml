@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+<VV_ApocryphaFairyBond.label>요정 비비 결속</VV_ApocryphaFairyBond.label>
+<VV_ApocryphaFairyBond.description>고대 제국의 마지막 여왕에게 강제로 귀속된 수십억 비비의 영혼이 아포크리파를 감싸고 있습니다. 결속된 요정 비비들이 모든 공격을 대신 받아내므로 일반 공격으로는 피해를 입힐 수 없습니다.
+\n〈요정 간섭〉을 얻은 비비가 아포크리파에게 접근하면 결속망에 마나 역류를 일으켜 대량의 요정을 해방시킬 수 있습니다.</VV_ApocryphaFairyBond.description>
+
+<VV_ApocryphaCarapace.label>시조의 외피</VV_ApocryphaCarapace.label>
+<VV_ApocryphaCarapace.description>수백 년간 응축된 마나로 단단하게 굳어진 시조 말벌의 외피입니다. 받는 피해를 99% 감소시킵니다.
+\n〈영원꽃 조율 의식〉을 완료할 때마다 공명 파동이 외피에 균열을 일으켜 피해 감소 효과를 단계적으로 약화시킵니다.</VV_ApocryphaCarapace.description>
+
+</LanguageData>

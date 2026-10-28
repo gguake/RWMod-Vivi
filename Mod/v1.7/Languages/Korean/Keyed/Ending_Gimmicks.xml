@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+<!-- 엔딩 퀘스트: 요정꽃 우클릭 메뉴 -->
+<VV_FloatMenu_BondFairyFlower>요정꽃과 결속</VV_FloatMenu_BondFairyFlower>
+<VV_FailReason_FairyFlowerNotVivi>비비가 아님</VV_FailReason_FairyFlowerNotVivi>
+<VV_FailReason_FairyFlowerNotAdult>아기는 결속할 수 없음</VV_FailReason_FairyFlowerNotAdult>
+<VV_FailReason_FairyFlowerCannotMove>움직일 수 없음</VV_FailReason_FairyFlowerCannotMove>
+<VV_FailReason_FairyFlowerAlreadyInterfered>이미 요정 간섭 상태임</VV_FailReason_FairyFlowerAlreadyInterfered>
+
+<!-- 엔딩 퀘스트: 아포크리파 1페이즈 기믹 메시지 -->
+<VV_Message_FairyFlowerBonded>{PAWN_labelShort}(이)가 요정꽃과 결속해 〈요정 간섭〉을 얻었습니다. 아포크리파에게 접근하면 결속을 끊어낼 수 있습니다.</VV_Message_FairyFlowerBonded>
+<VV_Message_FairyBondReleased>{PAWN_labelShort}(이)가 결속망에 마나 역류를 일으켜 모든 멸망꽃의 저주가 풀렸습니다.</VV_Message_FairyBondReleased>
+<VV_Message_DoomFlowerBloomed>멸망꽃이 만개하여 모든 정착민에게 〈{BLIGHT}〉 저주가 내려졌습니다.</VV_Message_DoomFlowerBloomed>
+<VV_Message_DoomFlowerBloomedToxin>멸망꽃이 만개해 독성 꽃가루를 퍼뜨렸습니다. 모든 정착민의 독성 축적이 증가했습니다.</VV_Message_DoomFlowerBloomedToxin>
+
+<!-- 엔딩 퀘스트: 정보창 -->
+<VV_Inspect_DoomFlowerBloomIn>만개까지: {0}</VV_Inspect_DoomFlowerBloomIn>
+<VV_Inspect_DoomFlowerHint>만개하기 전에 파괴해야 합니다.</VV_Inspect_DoomFlowerHint>
+<VV_Inspect_FairyFlowerFadeIn>시들기까지: {0}</VV_Inspect_FairyFlowerFadeIn>
+<VV_Inspect_FairyFlowerHint>비비를 선택해 우클릭으로 결속할 수 있습니다.</VV_Inspect_FairyFlowerHint>
+
+</LanguageData>

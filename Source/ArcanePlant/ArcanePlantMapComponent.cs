@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Verse;
 
@@ -179,6 +179,23 @@ namespace VVRace
         public void Notify_ArcanePlantSpawned(ArcanePlant plant)
         {
             _arcanePlants.Add(plant.Position, plant);
+
+            if (ScentUtility.IsScentFlower(plant.def))
+            {
+                _scentRoomsDirty = true;
+            }
+        }
+
+        // 디스폰 없이 Position만 바뀐 마법 식물(영원꽃 순간이동)의 칸 사전 항목을 새 위치에 맞게 갱신한다.
+        // 이전 칸의 키가 남아 있으면 해당 칸의 지형 변경 검사로 다른 위치의 영원꽃이 포장되고, 그 칸에 새 식물을 심을 때 키 중복 예외가 발생한다.
+        public void Notify_ArcanePlantMoved(ArcanePlant plant, IntVec3 oldCell)
+        {
+            if (_arcanePlants.TryGetValue(oldCell, out var existing) && existing == plant)
+            {
+                _arcanePlants.Remove(oldCell);
+            }
+
+            _arcanePlants[plant.Position] = plant;
 
             if (ScentUtility.IsScentFlower(plant.def))
             {

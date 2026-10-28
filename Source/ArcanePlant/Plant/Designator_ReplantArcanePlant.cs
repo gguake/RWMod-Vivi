@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using System.Collections.Generic;
 using UnityEngine;
 using Verse;
@@ -98,6 +98,15 @@ namespace VVRace
             }
 
             var thingToInstall = ThingToInstall;
+
+            // 영원꽃 제단 중앙에는 필요한 조율 단계에 도달한 영원꽃만 안치할 수 있다(순간이동과 같은 조건).
+            if (thingToInstall is ArcanePlant_Everflower everflower
+                && everflower.AttunementLevel < Building_DreamumAltar.RequiredAttunementLevel
+                && Map.GetComponent<ArcanePlantMapComponent>()?.GetArcanePlantPot(c) is Building_DreamumAltar)
+            {
+                return new AcceptanceReport(LocalizeString_EndingAltar.VV_Message_EverflowerAltarRequiresLevel.Translate(Building_DreamumAltar.RequiredAttunementLevel.Named("LEVEL")));
+            }
+
             foreach (Thing thing in c.GetThingList(Map))
             {
                 if (thing != thingToInstall)

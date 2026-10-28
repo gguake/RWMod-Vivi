@@ -34,9 +34,29 @@ namespace VVRace
         private bool _drawManaOverlay;
         public bool manaOverlaySetting;
 
+        // 6단계 마나 바닥 전용 오버레이: 맵 전체가 같은 색이므로 칸 오버레이(250틱마다 재생성)와 나눠 그리고,
+        // 바닥이 바뀔 때와 안개가 걷힌 칸을 반영할 때(2500틱마다)만 다시 만든다.
+        private CellBoolDrawer _manaFloorDrawer;
+        public const int ManaFloorOverlayRefreshInterval = 2500;
+
         // 마나 영맥(오디세이 랜드마크): 게임 내내 환경 마나를 방출하는 지점
         private List<IntVec3> _manaVeins = new List<IntVec3>();
         public IReadOnlyList<IntVec3> ManaVeins => _manaVeins;
+
+        // 영원꽃 제단(엔딩): 안치된 5/6단계 영원꽃은 제단 발판 전체에서 추가 마나를 방출하고,
+        // 6단계 영원꽃이 있는 맵은 모든 칸의 환경 마나가 바닥값 아래로 내려가지 않는다(조회 시 적용하는 바닥값이므로 흡수해도 줄지 않음).
+        // 이 상태는 저장하지 않는다: 불러오기에서는 1x1 영원꽃이 5x5 제단보다 먼저 스폰되므로, FinalizeInit과 250틱마다
+        // 맵의 제단·영원꽃 상태를 바탕으로 다시 계산한다(레벨이나 안치 상태가 바뀌면 CompEverflower도 즉시 갱신을 요청한다).
+        public const float EverflowerAltarManaPerDayLevel5 = 6000f;
+        public const float EverflowerAltarManaPerDayLevel6 = 12000f;
+        public const float EverflowerLevel6ManaFloor = 300f;
+        public const int EverflowerAltarEmitRadius = 2;
+
+        private float _altarManaPerDay;
+        private IntVec3 _altarCenter = IntVec3.Invalid;
+        private float _manaFloor;
+
+        public float ManaFloor => _manaFloor;
 
         public Color Color => new Color(1f, 1f, 1f);
 
@@ -45,7 +65,7 @@ namespace VVRace
             get
             {
                 var idx = map.cellIndices.CellToIndex(cell);
-                return Mathf.Clamp(_manaReserveGrid[idx] + _manaGrid[idx], 0f, EnvironmentManaMax);
+                return Mathf.Max(_manaFloor, Mathf.Clamp(_manaReserveGrid[idx] + _manaGrid[idx], 0f, EnvironmentManaMax));
             }
         }
 
@@ -56,6 +76,7 @@ namespace VVRace
             _tmpGrid = new NativeArray<float>(map.cellIndices.NumGridCells, Allocator.Persistent);
 
             _cellBoolDrawer = new CellBoolDrawer(this, map.Size.x, map.Size.z, 3634, _modSettingCache.manaGridOpacity);
+            _manaFloorDrawer = CreateManaFloorDrawer();
 
             map.events.RoofChanged += Notify_RoofChanged;
         }
@@ -75,16 +96,19 @@ namespace VVRace
             {
                 _manaVeins = new List<IntVec3>();
             }
+
         }
 
         public override void FinalizeInit()
         {
             _tmpGrid.Clear();
             _cellBoolDrawer.SetDirty();
+            _manaFloorDrawer.SetDirty();
 
             LoadedModManager.GetMod<VVRaceMod>().OnWriteSettings += Notify_ModSettingChanged;
 
             ApplyAllReservedMana();
+            RefreshEverflowerAltarState();
         }
 
         public override void MapComponentDraw()
@@ -94,11 +118,17 @@ namespace VVRace
                 _drawManaOverlay = _drawManaOverlay || manaOverlaySetting;
                 if (_drawManaOverlay)
                 {
+                    if (_manaFloor > 0f)
+                    {
+                        _manaFloorDrawer.MarkForDraw();
+                    }
+
                     _cellBoolDrawer.MarkForDraw();
                     _drawManaOverlay = false;
                 }
             }
 
+            _manaFloorDrawer.CellBoolDrawerUpdate();
             _cellBoolDrawer.CellBoolDrawerUpdate();
         }
 
@@ -158,6 +188,8 @@ namespace VVRace
             if (GenTicks.TicksGame % RefreshManaInterval == 0)
             {
                 EmitManaVeins(RefreshManaInterval);
+                RefreshEverflowerAltarState();
+                EmitEverflowerAltarMana(RefreshManaInterval);
 
                 var gameComponentMana = Current.Game.GetComponent<GameComponent_Mana>();
                 if (gameComponentMana != null)
@@ -172,6 +204,11 @@ namespace VVRace
                     }
 
                     _cellBoolDrawer.SetDirty();
+                }
+
+                if (GenTicks.TicksGame % ManaFloorOverlayRefreshInterval == 0)
+                {
+                    _manaFloorDrawer.SetDirty();
                 }
             }
 
@@ -233,6 +270,74 @@ namespace VVRace
             }
         }
 
+        // 영원꽃 제단 상태 갱신 진입점. 제단 중심(안치되지 않았으면 Invalid)과 영원꽃 조율 단계를 받는다.
+        public void SetEverflowerAltarState(IntVec3 center, int level)
+        {
+            SetEverflowerAltarState(center, level, level);
+        }
+
+        // 맵의 영원꽃을 훑어 제단 상태를 다시 계산한다. 영원꽃은 맵에 여러 송이 있을 수 있으므로 꽃이 직접 값을 넣으면
+        // 서로 덮어쓰게 된다. 그래서 CompEverflower는 레벨 변경·안치 변경·스폰/디스폰 때 이 함수만 부른다.
+        public void RefreshEverflowerAltarState()
+        {
+            var center = IntVec3.Invalid;
+            var altarLevel = 0;
+            var mapLevel = 0;
+
+            var everflowers = map.listerThings.ThingsOfDef(VVThingDefOf.VV_Everflower);
+            for (int i = 0; i < everflowers.Count; ++i)
+            {
+                if (!(everflowers[i] is ArcanePlant_Everflower everflower) || !everflower.Spawned || everflower.Map != map) { continue; }
+
+                var level = everflower.AttunementLevel;
+                mapLevel = Mathf.Max(mapLevel, level);
+
+                if (level > altarLevel && everflower.EverflowerComp.IsEnshrined)
+                {
+                    center = everflower.Position;
+                    altarLevel = level;
+                }
+            }
+
+            SetEverflowerAltarState(center, altarLevel, mapLevel);
+        }
+
+        private void SetEverflowerAltarState(IntVec3 center, int altarLevel, int mapLevel)
+        {
+            var manaPerDay = 0f;
+            if (center.IsValid && center.InBounds(map))
+            {
+                if (altarLevel >= 6) { manaPerDay = EverflowerAltarManaPerDayLevel6; }
+                else if (altarLevel >= 5) { manaPerDay = EverflowerAltarManaPerDayLevel5; }
+            }
+
+            _altarManaPerDay = manaPerDay;
+            _altarCenter = manaPerDay > 0f ? center : IntVec3.Invalid;
+
+            var manaFloor = mapLevel >= 6 ? EverflowerLevel6ManaFloor : 0f;
+            if (_manaFloor != manaFloor)
+            {
+                _manaFloor = manaFloor;
+                _cellBoolDrawer.SetDirty();
+                _manaFloorDrawer.SetDirty();
+            }
+        }
+
+        private void EmitEverflowerAltarMana(int ticks)
+        {
+            if (_altarManaPerDay <= 0f || !_altarCenter.IsValid) { return; }
+
+            // 한 점에 넣으면 칸당 상한에 막혀 버려지므로 제단 5x5 발판에 고르게 나눠 넣는다.
+            var rect = CellRect.CenteredOn(_altarCenter, EverflowerAltarEmitRadius).ClipInsideMap(map);
+            if (rect.Area <= 0) { return; }
+
+            var manaPerCell = _altarManaPerDay / 60000f * ticks / rect.Area;
+            foreach (var cell in rect)
+            {
+                ChangeEnvironmentMana(cell, manaPerCell);
+            }
+        }
+
         public void Dispose()
         {
             LoadedModManager.GetMod<VVRaceMod>().OnWriteSettings -= Notify_ModSettingChanged;
@@ -247,6 +352,13 @@ namespace VVRace
         private void Notify_ModSettingChanged()
         {
             _cellBoolDrawer = new CellBoolDrawer(this, map.Size.x, map.Size.z, 3634, _modSettingCache.manaGridOpacity);
+            _manaFloorDrawer = CreateManaFloorDrawer();
+        }
+
+        // 칸 오버레이보다 먼저(renderQueue 3633) 그려 마나가 바닥값을 넘는 칸의 오버레이가 그 위에 겹쳐 보이게 한다.
+        private CellBoolDrawer CreateManaFloorDrawer()
+        {
+            return new CellBoolDrawer(GetManaFloorCellBool, () => Color, GetManaFloorCellColor, map.Size.x, map.Size.z, 3633, _modSettingCache.manaGridOpacity);
         }
 
         private void Notify_RoofChanged(IntVec3 c)
@@ -316,17 +428,33 @@ namespace VVRace
             _dirtyManaCells.Clear();
         }
 
+        // 칸 오버레이는 6단계 마나 바닥을 넘는 칸만 그린다. 바닥(맵 전체 균일)은 _manaFloorDrawer가 따로 그린다.
+        // 바닥까지 여기서 칠하면 오버레이가 켜져 있는 동안 마나 갱신(250틱)마다 맵 전체 칸의 메시를 다시 만든다.
         public bool GetCellBool(int index)
         {
-            return _manaGrid[index] > 5f;
+            return _manaGrid[index] > Mathf.Max(5f, _manaFloor);
         }
 
         public Color GetCellExtraColor(int index)
         {
             if (map.fogGrid.IsFogged(index)) { return new Color(0f, 0f, 0f, 0f); }
 
+            return GetManaOverlayColor(Mathf.Max(_manaFloor, _manaGrid[index] + _manaReserveGrid[index]));
+        }
+
+        private bool GetManaFloorCellBool(int index)
+        {
+            return _manaFloor > 0f && !map.fogGrid.IsFogged(index);
+        }
+
+        private Color GetManaFloorCellColor(int index)
+        {
+            return GetManaOverlayColor(_manaFloor);
+        }
+
+        private static Color GetManaOverlayColor(float value)
+        {
             Color color;
-            var value = _manaGrid[index] + _manaReserveGrid[index];
             if (value <= 100)
             {
                 float normalized = value / 100.0f;

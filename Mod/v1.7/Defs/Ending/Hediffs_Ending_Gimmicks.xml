@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 아포크리파 1페이즈 기믹: 요정 간섭, 멸망꽃 저주 -->
+
+  <!-- 요정 간섭: 요정꽃과 결속한 비비. 6시간(15000틱) 안에 1페이즈 아포크리파에게 2.9칸 이내로 다가가면 결속 해방 -->
+  <HediffDef>
+    <defName>VV_FairyInterference</defName>
+    <label>fairy interference</label>
+    <description>Resonating with the pure wavelengths of the ancient fairy vivis through a fairy bloom. Approaching Apocrypha triggers a mana backflow in her bond network, freeing a large number of fairies and lifting all doom blights from the colony.</description>
+    <hediffClass>VVRace.Hediff_FairyInterference</hediffClass>
+    <defaultLabelColor>(1, 0.9, 0.55)</defaultLabelColor>
+    <isBad>false</isBad>
+    <priceImpact>false</priceImpact>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <everCurableByItem>false</everCurableByItem>
+    <initialSeverity>1</initialSeverity>
+    <maxSeverity>1</maxSeverity>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>15000~15000</disappearsAfterTicks>
+        <showRemainingTime>true</showRemainingTime>
+        <messageOnDisappear>{PAWN_labelShort}'s fairy interference has faded.</messageOnDisappear>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <!-- 멸망꽃 저주 공용: 3단계(severity 1/2/3), 결속 해방이나 엔딩 정리로만 풀린다 -->
+  <HediffDef Name="VV_DoomBlightBase" Abstract="True">
+    <hediffClass>VVRace.Hediff_DoomBlight</hediffClass>
+    <defaultLabelColor>(0.95, 0.45, 0.8)</defaultLabelColor>
+    <isBad>true</isBad>
+    <priceImpact>false</priceImpact>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <everCurableByItem>false</everCurableByItem>
+    <initialSeverity>1</initialSeverity>
+    <maxSeverity>3</maxSeverity>
+  </HediffDef>
+
+  <!-- 허기: 1.7에는 허기 StatDef가 없으므로 hungerRateFactor 사용 -->
+  <HediffDef ParentName="VV_DoomBlightBase">
+    <defName>VV_DoomBlight_Hunger</defName>
+    <label>doom blight: hunger</label>
+    <description>A curse from a doom bloom that causes severe hunger.\n\nLifted when Apocrypha's bond is released through fairy interference.</description>
+    <stages>
+      <li>
+        <minSeverity>1</minSeverity>
+        <label>I</label>
+        <hungerRateFactor>2</hungerRateFactor>
+      </li>
+      <li>
+        <minSeverity>2</minSeverity>
+        <label>II</label>
+        <hungerRateFactor>3</hungerRateFactor>
+      </li>
+      <li>
+        <minSeverity>3</minSeverity>
+        <label>III</label>
+        <hungerRateFactor>4</hungerRateFactor>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef ParentName="VV_DoomBlightBase">
+    <defName>VV_DoomBlight_Fatigue</defName>
+    <label>doom blight: fatigue</label>
+    <description>A curse from a doom bloom that causes severe fatigue.\n\nLifted when Apocrypha's bond is released through fairy interference.</description>
+    <stages>
+      <li>
+        <minSeverity>1</minSeverity>
+        <label>I</label>
+        <restFallFactor>2</restFallFactor>
+      </li>
+      <li>
+        <minSeverity>2</minSeverity>
+        <label>II</label>
+        <restFallFactor>3</restFallFactor>
+      </li>
+      <li>
+        <minSeverity>3</minSeverity>
+        <label>III</label>
+        <restFallFactor>4</restFallFactor>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef ParentName="VV_DoomBlightBase">
+    <defName>VV_DoomBlight_Pain</defName>
+    <label>doom blight: agony</label>
+    <description>A curse from a doom bloom that heightens sensitivity to pain.\n\nLifted when Apocrypha's bond is released through fairy interference.</description>
+    <stages>
+      <li>
+        <minSeverity>1</minSeverity>
+        <label>I</label>
+        <statOffsets>
+          <PainShockThreshold>-0.10</PainShockThreshold>
+        </statOffsets>
+      </li>
+      <li>
+        <minSeverity>2</minSeverity>
+        <label>II</label>
+        <statOffsets>
+          <PainShockThreshold>-0.15</PainShockThreshold>
+        </statOffsets>
+      </li>
+      <li>
+        <minSeverity>3</minSeverity>
+        <label>III</label>
+        <statOffsets>
+          <PainShockThreshold>-0.20</PainShockThreshold>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef ParentName="VV_DoomBlightBase">
+    <defName>VV_DoomBlight_Mind</defName>
+    <label>doom blight: despair</label>
+    <description>A curse from a doom bloom that destabilizes the mind.\n\nLifted when Apocrypha's bond is released through fairy interference.</description>
+    <stages>
+      <li>
+        <minSeverity>1</minSeverity>
+        <label>I</label>
+        <statOffsets>
+          <MentalBreakThreshold>0.10</MentalBreakThreshold>
+        </statOffsets>
+      </li>
+      <li>
+        <minSeverity>2</minSeverity>
+        <label>II</label>
+        <statOffsets>
+          <MentalBreakThreshold>0.15</MentalBreakThreshold>
+        </statOffsets>
+      </li>
+      <li>
+        <minSeverity>3</minSeverity>
+        <label>III</label>
+        <statOffsets>
+          <MentalBreakThreshold>0.20</MentalBreakThreshold>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <!-- 보이지 않는 표식: severity = 멸망꽃이 더한 독성 축적량. 결속 해방 때 그만큼 독성 축적을 되돌린다 -->
+  <HediffDef>
+    <defName>VV_DoomBlight_Toxin</defName>
+    <label>doom blight toxins</label>
+    <description>Toxic buildup accumulated from doom blooms. Cleansed when Apocrypha's bond is released.</description>
+    <hediffClass>VVRace.Hediff_DoomBlight</hediffClass>
+    <isBad>false</isBad>
+    <priceImpact>false</priceImpact>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <everCurableByItem>false</everCurableByItem>
+    <initialSeverity>0.3</initialSeverity>
+    <maxSeverity>10</maxSeverity>
+    <stages>
+      <li>
+        <becomeVisible>false</becomeVisible>
+      </li>
+    </stages>
+  </HediffDef>
+</Defs>

@@ -1,4 +1,4 @@
-using HarmonyLib;
+﻿using HarmonyLib;
 using VVRace.HarmonyPatches;
 
 namespace VVRace
@@ -15,6 +15,7 @@ namespace VVRace
                 VanilaBugFixPatch.Patch(harmony);
                 GatherPatch.Patch(harmony);
                 BackCompatibilityPatch.Patch(harmony);
+                EndingCorePatch.Patch(harmony);
 
                 harmony.PatchAll();
             }

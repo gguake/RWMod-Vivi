@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 1페이즈 〈요정 비비 결속〉: 플레이어 비비의 결속 헤디프와 같은 라벨. 수치(1,440,000,000)는 CompApocrypha가 보관하고 라벨에만 표시한다. -->
+  <HediffDef>
+    <defName>VV_ApocryphaFairyBond</defName>
+    <label>vivi fairy</label>
+    <description>The souls of billions of vivis forcibly bound to the last queen of the ancient empire surround Apocrypha. Because the bound fairy vivis absorb every blow in her place, ordinary attacks cannot harm her.
+\nA vivi with fairy interference can approach Apocrypha to trigger a mana backflow in the bond network, freeing a large number of fairies at once.</description>
+    <hediffClass>VVRace.Hediff_ApocryphaFairyBond</hediffClass>
+    <defaultLabelColor>(0, 1, 1)</defaultLabelColor>
+    <isBad>false</isBad>
+    <everCurableByItem>false</everCurableByItem>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <priceImpact>false</priceImpact>
+    <initialSeverity>1</initialSeverity>
+    <maxSeverity>1</maxSeverity>
+  </HediffDef>
+
+  <!-- 2페이즈 〈시조의 외피〉: 받는 피해 감소율 표시(실제 감소는 CompApocrypha)와 이동속도 보정(1.5 → 8.1). -->
+  <HediffDef>
+    <defName>VV_ApocryphaCarapace</defName>
+    <label>primordial carapace</label>
+    <description>The carapace of the progenitor hornet, hardened by mana condensed over centuries. Reduces incoming damage by 99%.
+\nEach completed everflower attunement ritual unleashes a resonance wave that cracks the carapace and progressively weakens its damage reduction.</description>
+    <hediffClass>VVRace.Hediff_ApocryphaCarapace</hediffClass>
+    <defaultLabelColor>(1, 0.42, 0.85)</defaultLabelColor>
+    <isBad>false</isBad>
+    <everCurableByItem>false</everCurableByItem>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <priceImpact>false</priceImpact>
+    <initialSeverity>1</initialSeverity>
+    <maxSeverity>1</maxSeverity>
+    <stages>
+      <li>
+        <statOffsets>
+          <MoveSpeed>6.6</MoveSpeed>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+</Defs>

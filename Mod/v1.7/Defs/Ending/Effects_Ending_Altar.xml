@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!--
+    영원꽃 제단 · 5/6단계 영원꽃 이펙트.
+    레벨업/순간이동 이펙트는 한 번만 Trigger되고 유지되지 않으므로(Chance형 자식은 실행되지 않음) 트리거형 자식만 쓴다.
+    5/6단계 이펙트의 위치는 제단 위 그래픽 기준이다. 제단 밖에서는 CompEverflower가 줄기 밑동 차이(+0.9)만큼 옮겨서 재생한다.
+  -->
+
+  <!-- 5/6단계 꽃 모양 발광: 제단 위 그래픽(VV_DreamumAltarFlower_e/f)과 같은 비율. 부모는 Effects/Everflower_Growth.xml -->
+  <ThingDef ParentName="VV_MoteEverflowerGrowthGlow">
+    <defName>VV_Mote_EverflowerGrowthGlow_5_Level</defName>
+    <graphicData>
+      <texPath>Things/Plants/VV_Everflower/VV_DreamumAltarFlower_e</texPath>
+      <drawSize>(0.58, 1)</drawSize>
+    </graphicData>
+  </ThingDef>
+  <ThingDef ParentName="VV_MoteEverflowerGrowthGlow">
+    <defName>VV_Mote_EverflowerGrowthGlow_6_Level</defName>
+    <graphicData>
+      <texPath>Things/Plants/VV_Everflower/VV_DreamumAltarFlower_f</texPath>
+      <drawSize>(0.6104, 1)</drawSize>
+    </graphicData>
+  </ThingDef>
+
+  <!-- 황금 고리(가산): 제단 안치·5/6단계 개화 때 퍼져 나간다 -->
+  <FleckDef ParentName="FleckBase">
+    <defName>VV_Fleck_AltarGoldenRing</defName>
+    <altitudeLayer>MoteOverheadLow</altitudeLayer>
+    <fadeInTime>0.08</fadeInTime>
+    <solidTime>0.35</solidTime>
+    <fadeOutTime>1.1</fadeOutTime>
+    <growthRate>0.7</growthRate>
+    <drawOffscreen>true</drawOffscreen>
+    <graphicData>
+      <texPath>VFX/VV_GoldenWaveRing</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <color>(1, 0.92, 0.7, 1)</color>
+      <drawSize>(10, 10)</drawSize>
+    </graphicData>
+  </FleckDef>
+
+  <!-- 5단계: 개화 직전의 거대한 꽃봉오리 -->
+  <EffecterDef>
+    <defName>VV_EverflowerGrow_5_Level</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>VV_Mote_EverflowerGrowthGlow_5_Level</moteDef>
+        <rotation>0~0</rotation>
+        <absoluteAngle>true</absoluteAngle>
+        <attachToSpawnThing>true</attachToSpawnThing>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>7.324</scale>
+        <positionOffset>(-0.330, 0.2, 2.537)</positionOffset>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>VV_EverflowerRitualComplete</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_CameraShakeSingle</subEffecterClass>
+        <cameraShake>0.6</cameraShake>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>VV_Mote_EverflowerCircle</moteDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>8</scale>
+        <positionOffset>(-0.31, 0.2, 4.38)</positionOffset>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>VV_Mote_EverflowerLinkDistortion</moteDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>8</scale>
+        <positionOffset>(-0.31, 0.2, 4.38)</positionOffset>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_AltarGoldenRing</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>1</burstCount>
+        <absoluteAngle>true</absoluteAngle>
+        <rotation>0~360</rotation>
+        <scale>0.8</scale>
+        <positionOffset>(-0.31, 0.2, 4.38)</positionOffset>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>VV_Mote_EverflowerRitualFlash</moteDef>
+        <burstCount>1</burstCount>
+        <spawnLocType>OnSource</spawnLocType>
+        <positionOffset>(-0.31, 0.2, 4.38)</positionOffset>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_EverflowerPetal_Burst</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>30~45</burstCount>
+        <positionRadius>0.8</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>1.5~3.5</speed>
+        <rotation>0~360</rotation>
+        <rotationRate>-260~260</rotationRate>
+        <scale>0.3~0.6</scale>
+        <positionOffset>(-0.31, 0.2, 4.38)</positionOffset>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>NewbornBecomeChildGlimmer</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>10~16</burstCount>
+        <positionRadius>1.8</positionRadius>
+        <speed>0.2~0.5</speed>
+        <rotation>-45</rotation>
+        <scale>3~5</scale>
+        <positionOffset>(-0.31, 0.2, 4.38)</positionOffset>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <!-- 6단계: 완전히 만개한 전설의 영원꽃 -->
+  <EffecterDef>
+    <defName>VV_EverflowerGrow_6_Level</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>VV_Mote_EverflowerGrowthGlow_6_Level</moteDef>
+        <rotation>0~0</rotation>
+        <absoluteAngle>true</absoluteAngle>
+        <attachToSpawnThing>true</attachToSpawnThing>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>9.926</scale>
+        <positionOffset>(-0.032, 0.2, 3.872)</positionOffset>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>VV_EverflowerRitualComplete</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_CameraShakeSingle</subEffecterClass>
+        <cameraShake>1.0</cameraShake>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>VV_Mote_EverflowerCircle</moteDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>9</scale>
+        <positionOffset>(-0.32, 0.2, 6.52)</positionOffset>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>VV_Mote_EverflowerLinkDistortion</moteDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>9</scale>
+        <positionOffset>(-0.32, 0.2, 6.52)</positionOffset>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_AltarGoldenRing</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>1</burstCount>
+        <absoluteAngle>true</absoluteAngle>
+        <rotation>0~360</rotation>
+        <scale>1.2</scale>
+        <positionOffset>(-0.32, 0.2, 6.52)</positionOffset>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>VV_Mote_EverflowerRitualFlash</moteDef>
+        <burstCount>1</burstCount>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>1.3</scale>
+        <positionOffset>(-0.32, 0.2, 6.52)</positionOffset>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_EverflowerPetal_Burst</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>50~70</burstCount>
+        <positionRadius>1.2</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>2~4.5</speed>
+        <rotation>0~360</rotation>
+        <rotationRate>-260~260</rotationRate>
+        <scale>0.35~0.7</scale>
+        <positionOffset>(-0.32, 0.2, 6.52)</positionOffset>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>NewbornBecomeChildGlimmer</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>18~26</burstCount>
+        <positionRadius>2.6</positionRadius>
+        <speed>0.2~0.5</speed>
+        <rotation>-45</rotation>
+        <scale>4~6</scale>
+        <positionOffset>(-0.32, 0.2, 6.52)</positionOffset>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <!-- 제단 안치: 제단 중심(영원꽃 칸)에서 재생. 꽃잎·섬광 위치는 제단 위 4단계 그래픽의 꽃봉오리 기준 -->
+  <EffecterDef>
+    <defName>VV_Effecter_AltarEnshrine</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>VV_EverflowerRitualComplete</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_CameraShakeSingle</subEffecterClass>
+        <cameraShake>0.5</cameraShake>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_AltarGoldenRing</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>1</burstCount>
+        <absoluteAngle>true</absoluteAngle>
+        <rotation>0~360</rotation>
+        <scale>1</scale>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_ExpandingDistortionRing</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>1</burstCount>
+        <scale>1</scale>
+        <rotation>0</rotation>
+        <rotationRate>0</rotationRate>
+        <angle>0~0</angle>
+        <speed>0</speed>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>VV_Mote_VV_EverflowerRitualCircle</moteDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>VV_Mote_EverflowerRitualFlash</moteDef>
+        <burstCount>1</burstCount>
+        <spawnLocType>OnSource</spawnLocType>
+        <positionOffset>(-0.12, 0.2, 3.48)</positionOffset>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_EverflowerPetal_Burst</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>25~35</burstCount>
+        <positionRadius>0.6</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>1.2~3</speed>
+        <rotation>0~360</rotation>
+        <rotationRate>-260~260</rotationRate>
+        <scale>0.25~0.55</scale>
+        <positionOffset>(-0.12, 0.2, 3.48)</positionOffset>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>NewbornBecomeChildGlimmer</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>16~24</burstCount>
+        <positionRadius>2.4</positionRadius>
+        <speed>0.2~0.5</speed>
+        <rotation>-45</rotation>
+        <scale>3~5</scale>
+      </li>
+    </children>
+  </EffecterDef>
+</Defs>

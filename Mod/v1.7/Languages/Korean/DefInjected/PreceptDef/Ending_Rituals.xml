@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+<VV_GrandAttunement.label>대조율 의식</VV_GrandAttunement.label>
+<VV_GrandAttunement.description>공명자가 제단의 고대 마나 회로와 영원꽃을 연결하여 다섯 번째 개화를 일깨웁니다. 영원꽃은 마지막 개화를 위한 마나 응축을 시작하며, 응축이 진행되는 동안 마나 파동에 이끌린 적들이 정착지를 지속적으로 습격합니다.
+\n영원꽃 제단에 안치된 조율 4단계 영원꽃에서만 진행할 수 있습니다.</VV_GrandAttunement.description>
+
+<VV_ReturnOfLife.label>생명의 회귀</VV_ReturnOfLife.label>
+<VV_ReturnOfLife.description>완전히 개화한 영원꽃의 힘으로, 아포크리파의 굴레에서 해방된 고대의 요정 비비에게 본래의 육체를 되찾아 줍니다. 되살아난 고대 비비는 정착지에 합류합니다.
+\n고대 비비는 일반 비비보다 많은 변형인자와 최소 하나 이상의 초월 유전자를 보유하고 있습니다.</VV_ReturnOfLife.description>
+
+<VV_QueensCoronation.label>여왕의 대관식</VV_QueensCoronation.label>
+<VV_QueensCoronation.description>개화 응축을 마친 영원꽃 앞에서 공명자가 여왕으로 즉위하여 마지막 여섯 번째 개화를 이끌어냅니다.
+\n아포크리파를 토벌한 뒤 공명자인 로열 비비만 진행할 수 있으며, 의식을 완료하면 엔딩에 도달합니다.</VV_QueensCoronation.description>
+</LanguageData>

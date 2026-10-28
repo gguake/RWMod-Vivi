@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+<!-- 아포크리파 1페이즈 기믹: 요정 간섭 -->
+<VV_FairyInterference.label>요정 간섭</VV_FairyInterference.label>
+<VV_FairyInterference.description>요정꽃을 통해 고대 요정 비비들의 순수한 파장과 공명한 상태입니다. 아포크리파에게 접근하면 결속망에 마나 역류를 일으켜 결속을 대량으로 해방하고, 정착민들에게 걸린 모든 멸망꽃의 저주를 정화합니다.</VV_FairyInterference.description>
+<VV_FairyInterference.comps.0.messageOnDisappear>{PAWN_labelShort}의 요정 간섭이 사라졌습니다.</VV_FairyInterference.comps.0.messageOnDisappear>
+
+<!-- 아포크리파 1페이즈 기믹: 멸망꽃 저주 -->
+<VV_DoomBlight_Hunger.label>멸망의 굶주림</VV_DoomBlight_Hunger.label>
+<VV_DoomBlight_Hunger.description>멸망꽃이 내린 저주로, 극심한 허기에 시달립니다.\n\n〈요정 간섭〉을 통해 아포크리파의 결속을 해방하면 해제됩니다.</VV_DoomBlight_Hunger.description>
+<VV_DoomBlight_Hunger.stages.0.label>I</VV_DoomBlight_Hunger.stages.0.label>
+<VV_DoomBlight_Hunger.stages.1.label>II</VV_DoomBlight_Hunger.stages.1.label>
+<VV_DoomBlight_Hunger.stages.2.label>III</VV_DoomBlight_Hunger.stages.2.label>
+
+<VV_DoomBlight_Fatigue.label>멸망의 피로</VV_DoomBlight_Fatigue.label>
+<VV_DoomBlight_Fatigue.description>멸망꽃이 내린 저주로, 극심한 피로에 시달립니다.\n\n〈요정 간섭〉을 통해 아포크리파의 결속을 해방하면 해제됩니다.</VV_DoomBlight_Fatigue.description>
+<VV_DoomBlight_Fatigue.stages.0.label>I</VV_DoomBlight_Fatigue.stages.0.label>
+<VV_DoomBlight_Fatigue.stages.1.label>II</VV_DoomBlight_Fatigue.stages.1.label>
+<VV_DoomBlight_Fatigue.stages.2.label>III</VV_DoomBlight_Fatigue.stages.2.label>
+
+<VV_DoomBlight_Pain.label>멸망의 고통</VV_DoomBlight_Pain.label>
+<VV_DoomBlight_Pain.description>멸망꽃이 내린 저주로, 고통에 더욱 민감해집니다.\n\n〈요정 간섭〉을 통해 아포크리파의 결속을 해방하면 해제됩니다.</VV_DoomBlight_Pain.description>
+<VV_DoomBlight_Pain.stages.0.label>I</VV_DoomBlight_Pain.stages.0.label>
+<VV_DoomBlight_Pain.stages.1.label>II</VV_DoomBlight_Pain.stages.1.label>
+<VV_DoomBlight_Pain.stages.2.label>III</VV_DoomBlight_Pain.stages.2.label>
+
+<VV_DoomBlight_Mind.label>멸망의 절망</VV_DoomBlight_Mind.label>
+<VV_DoomBlight_Mind.description>멸망꽃이 내린 저주로, 정신이 불안정해집니다.\n\n〈요정 간섭〉을 통해 아포크리파의 결속을 해방하면 해제됩니다.</VV_DoomBlight_Mind.description>
+<VV_DoomBlight_Mind.stages.0.label>I</VV_DoomBlight_Mind.stages.0.label>
+<VV_DoomBlight_Mind.stages.1.label>II</VV_DoomBlight_Mind.stages.1.label>
+<VV_DoomBlight_Mind.stages.2.label>III</VV_DoomBlight_Mind.stages.2.label>
+
+<VV_DoomBlight_Toxin.label>멸망의 독소</VV_DoomBlight_Toxin.label>
+<VV_DoomBlight_Toxin.description>멸망꽃으로 인해 누적된 독성 수치입니다. 결속 해방 시 함께 정화됩니다.</VV_DoomBlight_Toxin.description>
+
+</LanguageData>

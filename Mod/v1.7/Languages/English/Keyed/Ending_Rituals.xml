@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+<!-- Ritual fail reasons -->
+<VV_FailReason_ApocryphaInterference>Due to Apocrypha's interference, only the attunement ritual is possible.</VV_FailReason_ApocryphaInterference>
+<VV_FailReason_RequiresEverflowerAltar>Must be enshrined on the everflower altar.</VV_FailReason_RequiresEverflowerAltar>
+<VV_FailReason_GrandAttunementLocked>Can only be performed after receiving the vivi federation's missive.</VV_FailReason_GrandAttunementLocked>
+<VV_FailReason_GrandAttunementInProgress>The everflower is already condensing its final bloom.</VV_FailReason_GrandAttunementInProgress>
+<VV_FailReason_GrandAttunementCompleted>The everflower has already fully bloomed.</VV_FailReason_GrandAttunementCompleted>
+<VV_FailReason_GrandAttunementFailed>The everflower was usurped and can no longer be awakened.</VV_FailReason_GrandAttunementFailed>
+<VV_FailReason_CoronationNotAnchor>Can only be performed on the everflower condensing its final bloom.</VV_FailReason_CoronationNotAnchor>
+<VV_FailReason_CoronationLocked>Can only be performed once the bloom condensation is complete.</VV_FailReason_CoronationLocked>
+
+<!-- Messages -->
+<VV_Message_ResonanceWaveHit>The resonance wave strikes Apocrypha! (Resonance stacks: {STACKS}, incoming damage reduction: {REDUCTION})</VV_Message_ResonanceWaveHit>
+
+<!-- Letters -->
+<VV_Letter_ReturnOfLifeLabel>Return of life: {PAWN_labelShort}</VV_Letter_ReturnOfLifeLabel>
+<VV_Letter_ReturnOfLife>Answering the call of the fully bloomed everflower, an ancient vivi once bound to the last queen of the old empire has returned to life.\n\nAfter ages as a fairy, {PAWN_labelShort} has regained a physical body and joined the colony.</VV_Letter_ReturnOfLife>
+<VV_Letter_ReturnOfLifeGenes>Genes of the ancient empire:</VV_Letter_ReturnOfLifeGenes>
+</LanguageData>

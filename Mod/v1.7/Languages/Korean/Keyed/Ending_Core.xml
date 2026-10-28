@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+<!-- 엔딩 퀘스트: 비비 연방의 밀서 -->
+<VV_Letter_EndingFederationMissiveLabel>비비 연방의 밀서</VV_Letter_EndingFederationMissiveLabel>
+<VV_Letter_EndingFederationMissive>{PAWN_labelShort}(와)과 공명한 영원꽃이 한계까지 성장했으나, 평범한 땅 위에서는 더 이상 힘을 응축하지 못하고 마나가 흩어지고 있습니다.
+\n이 파동을 감지한 비비 연방의 대표로부터 긴급한 전갈이 도착했습니다.
+\n"오랜 세월 동안 그 어떤 둥지도 영원꽃을 이 경지까지 일구어내지 못했습니다. 전설에 따르면, 옛 제국의 거대한 영원꽃은 평범한 흙이 아닌 고대의 마나 회로가 새겨진 영원꽃 제단 위에서만 진정한 모습을 드러냈다고 합니다. 하지만 기억하십시오. 제단 위에서 다섯 번째 개화가 시작되는 순간, 행성 전역의 외지인들과 거대 말벌 무리가 그 파동을 감지하고 몰려들 것입니다."
+\n이제 〈고대 제단 복원〉 연구를 진행할 수 있습니다. 연구를 마치면 비비 연방이 제단의 핵심 재료인 고대 호박 코어를 보내올 것입니다.</VV_Letter_EndingFederationMissive>
+
+<!-- 엔딩 퀘스트: 고대 호박 코어 -->
+<VV_Letter_EndingAmberCoreLabel>고대 호박 코어 도착</VV_Letter_EndingAmberCoreLabel>
+<VV_Letter_EndingAmberCoreFromFederation>〈고대 제단 복원〉 연구가 완료되자, 비비 연방이 약속대로 옛 제국의 유물인 고대 호박 코어를 보내왔습니다.</VV_Letter_EndingAmberCoreFromFederation>
+<VV_Letter_EndingAmberCoreFromUnknown>고대 호박 코어를 실은 수송 포드가 정착지 근처에 떨어졌습니다. 옛 제국의 유산을 기억하는 누군가가 보내온 듯합니다.</VV_Letter_EndingAmberCoreFromUnknown>
+<VV_Letter_EndingAmberCoreGuide>고대 호박 코어로 영원꽃 제단을 건설한 뒤, 조율 4단계 영원꽃을 제단 중앙으로 순간이동시켜 안치하십시오.
+\n제단을 완성하기 전에 코어를 잃어버리면 비비 연방의 상인에게서 다시 구할 수 있습니다.</VV_Letter_EndingAmberCoreGuide>
+<VV_Letter_EndingAmberCoreRedelivered>새로운 고대 호박 코어를 실은 수송 포드가 정착지 근처에 떨어졌습니다. 옛 제국의 유산을 지키는 누군가가 여전히 이 둥지를 지켜보고 있는 듯합니다.</VV_Letter_EndingAmberCoreRedelivered>
+
+<!-- 엔딩 퀘스트: 여명의 맥동 (공성) -->
+<VV_Letter_EndingSiegeLabel>여명의 맥동</VV_Letter_EndingSiegeLabel>
+<VV_Letter_EndingSiege>제단 위의 영원꽃이 다섯 번째 개화를 맞이했습니다. 깨어난 고대 마나 회로에서 거대한 마나 기둥이 솟구치며 행성 전역으로 파동을 퍼뜨립니다.
+\n영원꽃은 이제 마지막 개화를 위한 마나 응축에 들어갔으며, 응축이 끝나기까지 약 {DAYS}일이 걸립니다.
+\n응축이 진행되는 동안 마나 파동에 이끌린 적들이 정착지를 끊임없이 습격할 것입니다. 마지막 개화가 이루어질 때까지 영원꽃 제단을 지켜내십시오.</VV_Letter_EndingSiege>
+<VV_Letter_EndingSiegeFederation>새로운 제국의 탄생을 지켜보는 비비 연방이 때때로 정예 지원군을 보내 힘을 보탤 것입니다.</VV_Letter_EndingSiegeFederation>
+
+<VV_Letter_EndingFederationAidLabel>비비 연방 지원군</VV_Letter_EndingFederationAidLabel>
+<VV_Letter_EndingFederationAid>비비 연방이 영원꽃 제단을 수호하기 위해 정예 지원군 {COUNT}명을 파견했습니다. 이들은 한동안 정착지에 머물며 함께 싸운 뒤 돌아갈 것입니다.</VV_Letter_EndingFederationAid>
+
+<!-- 엔딩 퀘스트: 폭풍 전의 고요 (평화 기간) -->
+<VV_Letter_EndingCalmLabel>폭풍 전의 고요</VV_Letter_EndingCalmLabel>
+<VV_Letter_EndingCalm>영원꽃이 마지막 개화를 눈앞에 둔 순간, 몰려들던 적들의 발길이 갑작스럽게 끊겼습니다. 기세를 올리던 거대 말벌 무리마저 무언가를 두려워하듯 자취를 감추었습니다.
+\n정체불명의 불길한 파장이 영원꽃의 뿌리에 간섭하며 개화 응축이 멈추어 섰습니다. {PAWN_labelShort}의 공명 연결 너머로, 무수한 동족의 원혼을 휘감은 거대한 존재가 영원꽃의 온기를 찾아 다가오는 것이 느껴집니다.</VV_Letter_EndingCalm>
+<VV_Letter_EndingCalmGuide>약 {DAYS}일 동안 습격이 멈춥니다. 무너진 방어선을 보수하고 부상자를 치료하며 최후의 결전에 대비하십시오.</VV_Letter_EndingCalmGuide>
+
+<!-- 엔딩 퀘스트: 바스러진 여왕, 아포크리파 -->
+<VV_Letter_EndingApocryphaLabel>바스러진 여왕, 아포크리파</VV_Letter_EndingApocryphaLabel>
+<VV_Letter_EndingApocrypha>거대 말벌 무리를 거느린 거대한 형체가 모습을 드러냈습니다. 옛 비비 제국이 멸망하던 날, 스카리아에 감염된 수십억의 백성을 구하려다 자아와 초정신 회로가 무너져 변이한 모든 거대 말벌의 시조, 〈바스러진 여왕, 아포크리파〉입니다.
+\n무수한 요정 비비 결속에 짓눌린 아포크리파는 느리게 배회하며 본능에 이끌려 영원꽃 제단으로 다가옵니다. 아포크리파가 살아 있는 동안에는 개화 응축이 멈추며, 영원꽃에 도달해 힘을 모두 빼앗기면 퀘스트는 실패합니다.
+\n결속된 요정 비비들이 모든 공격을 대신 받아내므로 일반 공격이나 기절 수단은 통하지 않습니다. 아포크리파가 피워내는 〈요정꽃〉에 비비를 결속시켜 〈요정 간섭〉을 얻은 뒤 아포크리파에게 다가가야 결속을 끊어낼 수 있습니다. 정착민에게 저주를 내리는 〈멸망꽃〉은 만개하기 전에 파괴하십시오.</VV_Letter_EndingApocrypha>
+
+<!-- 엔딩 퀘스트: 아포크리파 토벌, 여왕의 대관식 대기 -->
+<VV_Letter_EndingCoronationLabel>여왕을 기다리는 영원꽃</VV_Letter_EndingCoronationLabel>
+<VV_Letter_EndingCoronation>아포크리파의 형체가 한 줌의 먼지로 흩어지자, 가로막혀 있던 마나가 제단으로 일제히 환류하며 개화 응축이 마침내 100%에 도달했습니다.
+\n영원꽃은 이제 마지막 개화를 이끌 여왕을 기다리고 있습니다. 공명자인 {PAWN_labelShort}(이)가 영원꽃에서 〈여왕의 대관식〉을 치르면 영원꽃이 완전한 모습으로 피어납니다.
+\n이제 마나 기둥이 새로운 습격을 끌어들이지는 않지만, 남아 있는 거대 말벌들은 여전히 정착지를 노리고 있습니다.</VV_Letter_EndingCoronation>
+
+<!-- 엔딩 퀘스트: 영원한 봄의 제국 (엔딩 편지와 크레딧이 같은 본문을 쓴다. 바닐라 엔딩 크레딧 문체) -->
+<VV_Letter_EndingVictoryLabel>영원한 봄의 제국</VV_Letter_EndingVictoryLabel>
+<VV_Letter_EndingVictoryContinue>엔딩 이후에도 이 정착지에서 계속 플레이하며 6단계 영원꽃의 권능을 영구히 누릴 수 있습니다.</VV_Letter_EndingVictoryContinue>
+<VV_EndingCredits>{PAWN_nameDef}(이)가 제단 위의 영원꽃 앞에 무릎을 꿇습니다. 영원꽃에서 흘러나온 마나가 {PAWN_possessive} 머리 위로 모여들더니, 황금빛 꽃잎으로 엮인 왕관이 되어 내려앉습니다.\n\n그 순간 거대한 영원꽃이 마지막 맥동과 함께 활짝 피어납니다. 따스한 황금빛 파동이 대지를 휩쓸고, 하늘에서는 꽃잎이 비처럼 쏟아집니다. 둥지의 모든 비비들은 짧은 생을 짓누르던 굴레가 걷히는 것을 느낍니다.\n\n옛 제국이 무너진 지 수백 년 만에, 전설 속의 거대한 영원꽃이 다시 피어났습니다. {PAWN_nameDef}(은)는 비비들의 여왕으로 즉위했습니다.</VV_EndingCredits>
+<VV_EndingCreditsNoQueen>영원꽃에서 흘러나온 마나가 제단 위로 모여들더니, 황금빛 꽃잎으로 엮인 왕관이 되어 내려앉습니다.\n\n그 순간 거대한 영원꽃이 마지막 맥동과 함께 활짝 피어납니다. 따스한 황금빛 파동이 대지를 휩쓸고, 하늘에서는 꽃잎이 비처럼 쏟아집니다. 둥지의 모든 비비들은 짧은 생을 짓누르던 굴레가 걷히는 것을 느낍니다.\n\n옛 제국이 무너진 지 수백 년 만에, 전설 속의 거대한 영원꽃이 다시 피어났습니다.</VV_EndingCreditsNoQueen>
+<VV_EndingCreditsExiled>왜소한 체구 때문에 고향에서 쫓겨났던 로열 비비는, 이제 옛 제국의 영광을 잇는 가장 위대한 둥지를 일구어냈습니다.</VV_EndingCreditsExiled>
+<VV_EndingCreditsRefugee>거대 말벌의 습격에 모든 것을 잃고 쫓기던 피난민 무리는, 이제 그 어떤 재앙도 무너뜨릴 수 없는 둥지를 일구어냈습니다.</VV_EndingCreditsRefugee>
+<VV_EndingCreditsOutro>옛 제국의 봄은 이곳에서 다시 시작됩니다. 그리고 당신의 이야기는 계속됩니다...</VV_EndingCreditsOutro>
+
+<!-- 엔딩 퀘스트: 실패 -->
+<VV_Letter_EndingFailureLabel>영원꽃 찬탈</VV_Letter_EndingFailureLabel>
+<VV_Letter_EndingFailureStolen>아포크리파가 끝내 영원꽃의 힘을 모두 빼앗았습니다. 옛 여왕은 잃어버렸던 영원꽃을 품에 안은 채 흔적도 없이 사라졌습니다.
+\n제단 위에는 빛을 잃은 마나 회로만이 남았습니다. 영원한 봄을 되찾으려던 여정은 실패로 끝났습니다.</VV_Letter_EndingFailureStolen>
+<VV_Letter_EndingFailureLostLabel>영원꽃 소실</VV_Letter_EndingFailureLostLabel>
+<VV_Letter_EndingFailureLost>마지막 개화를 앞둔 영원꽃을 잃었습니다. 응축되던 마나는 갈 곳을 잃고 흩어졌으며, 옛 제국의 봄을 되살릴 기회도 함께 사라졌습니다.</VV_Letter_EndingFailureLost>
+
+<!-- 엔딩 퀘스트: 메시지 -->
+<VV_Message_EndingApocryphaDeferred>맵 외곽에서 제단으로 이어지는 길이 막혀 있어 아포크리파가 모습을 드러내지 못합니다. 길이 열릴 때까지 습격이 다시 발생할 수 있습니다.</VV_Message_EndingApocryphaDeferred>
+<VV_Message_EndingPawnReturned>{PAWN_labelShort}(이)가 영원꽃 제단 앞으로 돌아왔습니다.</VV_Message_EndingPawnReturned>
+
+<!-- 엔딩 퀘스트: 개화 응축 기즈모 / 정보창 -->
+<VV_Gizmo_EndingBloom>개화 응축</VV_Gizmo_EndingBloom>
+<VV_Gizmo_EndingBloomSiege>공성 중</VV_Gizmo_EndingBloomSiege>
+<VV_Gizmo_EndingBloomCalm>불길한 정적</VV_Gizmo_EndingBloomCalm>
+<VV_Gizmo_EndingBloomBlocked>가로막힘</VV_Gizmo_EndingBloomBlocked>
+<VV_Gizmo_EndingBloomCoronation>대관식 대기</VV_Gizmo_EndingBloomCoronation>
+<VV_Gizmo_EndingBloomDesc>영원꽃이 여섯 번째 개화를 위해 마나를 응축하고 있습니다. 응축이 100%에 이르면 공명자가 〈여왕의 대관식〉을 치러 영원꽃을 완전히 개화시킬 수 있습니다.</VV_Gizmo_EndingBloomDesc>
+<VV_Gizmo_EndingBloomDescSiege>응축이 끝날 때까지 마나 기둥에 이끌린 적들로부터 제단을 지켜내십시오.</VV_Gizmo_EndingBloomDescSiege>
+<VV_Gizmo_EndingBloomDescCalm>마지막 개화의 흐름이 완성 직전에 멈추어 섰습니다. 평화 기간 남은 시간: {TIME}</VV_Gizmo_EndingBloomDescCalm>
+<VV_Gizmo_EndingBloomDescBlocked>아포크리파가 응축을 가로막고 있습니다. 아포크리파를 토벌하면 즉시 응축이 완성됩니다.</VV_Gizmo_EndingBloomDescBlocked>
+<VV_Gizmo_EndingBloomDescCoronation>응축이 끝났습니다. 공명자가 영원꽃에서 〈여왕의 대관식〉을 치르면 영원꽃이 완전히 개화합니다.</VV_Gizmo_EndingBloomDescCoronation>
+
+<VV_Inspector_EndingBloom>개화 응축: {PERCENT}</VV_Inspector_EndingBloom>
+<VV_Inspector_EndingSiege>공성 중: 개화가 끝날 때까지 제단을 지켜내십시오.</VV_Inspector_EndingSiege>
+<VV_Inspector_EndingCalm>평화 기간 남은 시간: {TIME}</VV_Inspector_EndingCalm>
+<VV_Inspector_EndingCalmDeferred>아포크리파가 제단으로 다가올 길을 찾고 있습니다.</VV_Inspector_EndingCalmDeferred>
+<VV_Inspector_EndingBlocked>아포크리파가 응축을 가로막고 있습니다.</VV_Inspector_EndingBlocked>
+<VV_Inspector_EndingCoronation>대관식 대기: 공명자가 〈여왕의 대관식〉을 치르면 완전히 개화합니다.</VV_Inspector_EndingCoronation>
+<VV_Inspector_EndingFullBloom>완전 개화</VV_Inspector_EndingFullBloom>
+
+<VV_Ending_ResonatorFallback>공명자</VV_Ending_ResonatorFallback>
+
+</LanguageData>

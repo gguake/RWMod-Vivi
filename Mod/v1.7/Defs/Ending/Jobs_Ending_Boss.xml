@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 아포크리파 생각 트리: 판단은 하나의 작업 지급기(JobGiver_ApocryphaMain)가 CompApocrypha 상태를 보고 내린다. -->
+  <ThinkTreeDef>
+    <defName>VV_Apocrypha</defName>
+    <thinkRoot Class="ThinkNode_Priority">
+      <subNodes>
+        <li Class="ThinkNode_Subtree">
+          <treeDef>Despawned</treeDef>
+        </li>
+        <li Class="ThinkNode_Subtree">
+          <treeDef>Downed</treeDef>
+        </li>
+        <li Class="VVRace.JobGiver_ApocryphaMain" />
+        <li Class="JobGiver_IdleError" />
+      </subNodes>
+    </thinkRoot>
+  </ThinkTreeDef>
+
+  <ThinkTreeDef>
+    <defName>VV_ApocryphaConstant</defName>
+    <thinkRoot Class="ThinkNode_Priority">
+      <subNodes>
+        <li Class="ThinkNode_Subtree">
+          <treeDef>Despawned</treeDef>
+        </li>
+      </subNodes>
+    </thinkRoot>
+  </ThinkTreeDef>
+
+  <JobDef>
+    <defName>VV_ApocryphaWait</defName>
+    <driverClass>VVRace.JobDriver_ApocryphaWait</driverClass>
+    <reportString>staring blankly.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+    <suspendable>false</suspendable>
+  </JobDef>
+
+  <JobDef>
+    <defName>VV_ApocryphaWander</defName>
+    <driverClass>JobDriver_Goto</driverClass>
+    <reportString>wandering in a daze.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+    <suspendable>false</suspendable>
+  </JobDef>
+
+  <JobDef>
+    <defName>VV_ApocryphaApproach</defName>
+    <driverClass>JobDriver_Goto</driverClass>
+    <reportString>drawn toward the everflower.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+    <suspendable>false</suspendable>
+  </JobDef>
+
+  <JobDef>
+    <defName>VV_ApocryphaAim</defName>
+    <driverClass>VVRace.JobDriver_ApocryphaAim</driverClass>
+    <reportString>aiming a volley of vivi fairies.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+    <suspendable>false</suspendable>
+  </JobDef>
+
+  <JobDef>
+    <defName>VV_ApocryphaBreath</defName>
+    <driverClass>VVRace.JobDriver_ApocryphaAim</driverClass>
+    <reportString>gathering toxic breath.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+    <suspendable>false</suspendable>
+  </JobDef>
+
+  <JobDef>
+    <defName>VV_ApocryphaChannel</defName>
+    <driverClass>VVRace.JobDriver_ApocryphaChannel</driverClass>
+    <reportString>usurping the everflower.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+    <suspendable>false</suspendable>
+  </JobDef>
+
+  <JobDef>
+    <defName>VV_ApocryphaCharge</defName>
+    <driverClass>JobDriver_Goto</driverClass>
+    <reportString>charging toward the everflower.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+    <suspendable>false</suspendable>
+  </JobDef>
+
+  <JobDef>
+    <defName>VV_ApocryphaSmash</defName>
+    <driverClass>VVRace.JobDriver_ApocryphaSmash</driverClass>
+    <reportString>smashing through TargetA.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+    <suspendable>false</suspendable>
+  </JobDef>
+
+  <!-- 아포크리파 호위 거대 말벌: 바닐라 Escort에서 약물·욕구 노드를 뺀 형태(보스를 따라다니며 근처를 배회).
+       교전은 광폭 상태 분기의 JobGiver_HornetBerserk가 보스 반경 안에서 먼저 처리한다. -->
+  <DutyDef>
+    <defName>VV_TitanicHornetEscort</defName>
+    <thinkNode Class="ThinkNode_Priority">
+      <subNodes>
+        <li Class="JobGiver_AIFollowEscortee" />
+        <li Class="JobGiver_WanderNearDutyLocation">
+          <wanderRadius>8</wanderRadius>
+        </li>
+      </subNodes>
+    </thinkNode>
+  </DutyDef>
+</Defs>

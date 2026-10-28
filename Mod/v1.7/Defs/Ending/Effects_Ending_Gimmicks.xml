@@ -1,0 +1,1094 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 아포크리파 1페이즈 기믹 연출. VFX 텍스처는 검정 배경 RGB라 가산(MoteGlow) 셰이더로만 쓴다.
+       흰색 텍스처(VV_Scent*)는 스프레이어의 color로 금빛/자홍으로 물들인다.
+       다른 모듈과 이름이 겹치지 않도록 이 파일의 플렉은 모두 VV_Fleck_Gimmick 접두사를 쓴다. -->
+
+  <!-- ======================== Flecks ======================== -->
+
+  <!-- 네 갈래 반짝임 -->
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>VV_Fleck_GimmickTwinkle</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0.08</fadeInTime>
+    <solidTime>0.12</solidTime>
+    <fadeOutTime>0.4</fadeOutTime>
+    <graphicData>
+      <texPath>VFX/VV_ScentTwinkle</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+  </FleckDef>
+
+  <!-- 떠오르는 작은 빛 알갱이 -->
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>VV_Fleck_GimmickMote</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0.3</fadeInTime>
+    <solidTime>0.6</solidTime>
+    <fadeOutTime>0.9</fadeOutTime>
+    <graphicData>
+      <texPath>VFX/VV_ScentMote</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+  </FleckDef>
+
+  <!-- 꽃 주변의 은은한 후광 -->
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>VV_Fleck_GimmickHalo</defName>
+    <altitudeLayer>MoteOverheadLow</altitudeLayer>
+    <fadeInTime>0.5</fadeInTime>
+    <solidTime>0.4</solidTime>
+    <fadeOutTime>1.2</fadeOutTime>
+    <growthRate>0.08</growthRate>
+    <graphicData>
+      <texPath>VFX/VV_ScentAura</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+  </FleckDef>
+
+  <!-- 요정 간섭 비비를 따라다니는 후광 -->
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>VV_Fleck_GimmickHaloAttached</defName>
+    <altitudeLayer>MoteOverheadLow</altitudeLayer>
+    <useAttachLink>true</useAttachLink>
+    <fadeInTime>0.4</fadeInTime>
+    <solidTime>0.4</solidTime>
+    <fadeOutTime>1.0</fadeOutTime>
+    <growthRate>0.05</growthRate>
+    <graphicData>
+      <texPath>VFX/VV_ScentAura</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+  </FleckDef>
+
+  <!-- 멸망꽃 주변으로 천천히 퍼지는 연기 고리 -->
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>VV_Fleck_GimmickSmokeRing</defName>
+    <altitudeLayer>MoteOverheadLow</altitudeLayer>
+    <fadeInTime>0.4</fadeInTime>
+    <solidTime>0.3</solidTime>
+    <fadeOutTime>1.1</fadeOutTime>
+    <growthRate>0.6</growthRate>
+    <graphicData>
+      <texPath>VFX/VV_ScentAura2</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+  </FleckDef>
+
+  <!-- 꽃잎(금빛 원본, 멸망꽃은 자홍으로 물들임) -->
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>VV_Fleck_GimmickPetal</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0.08</fadeInTime>
+    <solidTime>0.25</solidTime>
+    <fadeOutTime>1.2</fadeOutTime>
+    <graphicData>
+      <texPath>VFX/VV_EverflowerPetal</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+  </FleckDef>
+
+  <!-- 짧은 섬광 -->
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>VV_Fleck_GimmickFlash</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0.02</fadeInTime>
+    <solidTime>0.06</solidTime>
+    <fadeOutTime>0.3</fadeOutTime>
+    <drawOffscreen>true</drawOffscreen>
+    <graphicData>
+      <texPath>Things/Mote/BrightFlash</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+  </FleckDef>
+
+  <!-- 요정 출현 고리(꽃잎 달린 금빛 고리), 빠르게 퍼진다 -->
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>VV_Fleck_GimmickPhaseRing</defName>
+    <altitudeLayer>MoteOverheadLow</altitudeLayer>
+    <fadeInTime>0.03</fadeInTime>
+    <solidTime>0.05</solidTime>
+    <fadeOutTime>0.35</fadeOutTime>
+    <growthRate>1.6</growthRate>
+    <graphicData>
+      <texPath>VFX/VV_FairyPhaseRing</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+  </FleckDef>
+
+  <!-- 사출탄 폭발 고리: 폭발 반경(2.4칸)만큼 퍼진다 -->
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>VV_Fleck_GimmickBlastRing</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0.02</fadeInTime>
+    <solidTime>0.08</solidTime>
+    <fadeOutTime>0.42</fadeOutTime>
+    <growthRate>9</growthRate>
+    <drawOffscreen>true</drawOffscreen>
+    <graphicData>
+      <texPath>VFX/VV_GoldenWaveRing</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+  </FleckDef>
+
+  <!-- 마나 역류 파동 고리: 크게 퍼진다 -->
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>VV_Fleck_GimmickWaveRing</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0.03</fadeInTime>
+    <solidTime>0.25</solidTime>
+    <fadeOutTime>0.6</fadeOutTime>
+    <growthRate>22</growthRate>
+    <drawOffscreen>true</drawOffscreen>
+    <graphicData>
+      <texPath>VFX/VV_GoldenWaveRing</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+  </FleckDef>
+
+  <!-- 멸망꽃 자홍 충격 고리(작은 것) -->
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>VV_Fleck_GimmickDoomRing</defName>
+    <altitudeLayer>MoteOverheadLow</altitudeLayer>
+    <fadeInTime>0.03</fadeInTime>
+    <solidTime>0.1</solidTime>
+    <fadeOutTime>0.5</fadeOutTime>
+    <growthRate>5</growthRate>
+    <graphicData>
+      <texPath>VFX/VV_MagentaShockRing</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+  </FleckDef>
+
+  <!-- 멸망꽃 만개: 맵 전체로 번지는 저주 파동(약 60칸). 텍스처를 키우면 깨져 보이므로 VV_ShockWave 셰이더로 그린다. -->
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>VV_Fleck_GimmickDoomWave</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0</fadeInTime>
+    <solidTime>1.4</solidTime>
+    <fadeOutTime>0.05</fadeOutTime>
+    <drawOffscreen>true</drawOffscreen>
+    <graphicData>
+      <graphicClass>Graphic_FleckPulse</graphicClass>
+      <texPath>Things/Mote/Black</texPath>
+      <shaderType>VV_ShockWave</shaderType>
+      <renderInstanced>false</renderInstanced>
+      <drawSize>(60, 60)</drawSize>
+      <shaderParameters>
+        <_Duration>1.4</_Duration>
+        <_Width>0.012</_Width>
+        <_Distortion>0.01</_Distortion>
+        <_Brightness>1.3</_Brightness>
+        <_ArcIntensity>0.7</_ArcIntensity>
+        <_CoreColor>(1.0, 0.7, 0.9, 1)</_CoreColor>
+        <_GlowColor>(0.9, 0.12, 0.55, 1)</_GlowColor>
+        <_FringeColor>(0.45, 0.05, 0.4, 1)</_FringeColor>
+      </shaderParameters>
+    </graphicData>
+  </FleckDef>
+
+  <!-- 마나 역류 거대 섬광 -->
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>VV_Fleck_GimmickBackflowBurst</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0.03</fadeInTime>
+    <solidTime>0.15</solidTime>
+    <fadeOutTime>0.85</fadeOutTime>
+    <growthRate>2.5</growthRate>
+    <drawOffscreen>true</drawOffscreen>
+    <graphicData>
+      <texPath>VFX/VV_ManaBackflowBurst</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+  </FleckDef>
+
+  <!-- 비비→보스 마나 역류 빔 플래시(FleckMaker.ConnectingLine: 텍스처 U가 선 방향) -->
+  <FleckDef ParentName="FleckBase">
+    <defName>VV_Fleck_GimmickBackflowBeam</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0.03</fadeInTime>
+    <solidTime>0.2</solidTime>
+    <fadeOutTime>0.6</fadeOutTime>
+    <drawOffscreen>true</drawOffscreen>
+    <graphicData>
+      <texPath>VFX/VV_SoulLinkBeam</texPath>
+      <shaderType>VV_SoulLink</shaderType>
+      <graphicClass>Graphic_FleckPulse</graphicClass>
+      <renderInstanced>false</renderInstanced>
+      <color>(0.85, 1, 1, 1)</color>
+      <drawSize>(1, 1)</drawSize>
+    </graphicData>
+  </FleckDef>
+
+  <!-- 멸망꽃 미아즈마(자홍빛 연기, 알파 혼합) -->
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>VV_Fleck_GimmickDoomMiasma</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0.6</fadeInTime>
+    <solidTime>0.8</solidTime>
+    <fadeOutTime>1.6</fadeOutTime>
+    <growthRate>0.25</growthRate>
+    <graphicData>
+      <texPath>Things/Mote/Smoke</texPath>
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+  </FleckDef>
+
+  <!-- ======================== 요정 비비 사출탄 ======================== -->
+
+  <!-- 발사: 보스 몸통에서 금빛 분출 -->
+  <EffecterDef>
+    <defName>VV_Effecter_FairyShellLaunch</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>VV_FairyMaterialize</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickFlash</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>3</scale>
+        <color>(1, 0.9, 0.6, 0.8)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickPhaseRing</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>1.6</scale>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickTwinkle</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>6~9</burstCount>
+        <positionRadius>0.3</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>1~2.5</speed>
+        <scale>0.3~0.5</scale>
+        <color>(1, 0.9, 0.55, 1)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickPetal</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>4~7</burstCount>
+        <positionRadius>0.3</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>0.8~1.8</speed>
+        <rotation>0~360</rotation>
+        <rotationRate>-200~200</rotationRate>
+        <scale>0.15~0.3</scale>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <!-- 착탄: 금빛 섬광 + 폭발 반경 고리 + 요정 출현 고리 + 꽃잎, 요정 소멸음 -->
+  <EffecterDef>
+    <defName>VV_Effecter_FairyShellImpact</defName>
+    <maintainTicks>20</maintainTicks>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>VV_FairyDematerialize</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickFlash</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>5.5</scale>
+        <color>(1, 0.92, 0.65, 0.85)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickBlastRing</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>0.8</scale>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickPhaseRing</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>2</scale>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_ExpandingDistortionRing</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>0.45</scale>
+        <absoluteAngle>true</absoluteAngle>
+        <rotation>0</rotation>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickPetal</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>12~18</burstCount>
+        <positionRadius>0.4</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>1.5~3.2</speed>
+        <rotation>0~360</rotation>
+        <rotationRate>-260~260</rotationRate>
+        <scale>0.2~0.42</scale>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickTwinkle</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>10~14</burstCount>
+        <positionRadius>1.2</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>0.5~2</speed>
+        <scale>0.3~0.6</scale>
+        <color>(1, 0.9, 0.55, 1)</color>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <!-- ======================== 씨앗 ======================== -->
+
+  <EffecterDef>
+    <defName>VV_Effecter_DoomSeedLaunch</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>PiercingSpine_Launch</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickFlash</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>2.5</scale>
+        <color>(1, 0.35, 0.8, 0.7)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickDoomRing</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>1</scale>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickDoomMiasma</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>3~5</burstCount>
+        <positionRadius>0.4</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>0.3~0.8</speed>
+        <rotation>0~360</rotation>
+        <rotationRate>-30~30</rotationRate>
+        <scale>0.8~1.3</scale>
+        <color>(0.5, 0.1, 0.42, 0.55)</color>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <EffecterDef>
+    <defName>VV_Effecter_FairySeedLaunch</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>VV_FairyTeleport</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickFlash</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>2.5</scale>
+        <color>(1, 0.95, 0.75, 0.75)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickPhaseRing</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>1.2</scale>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickTwinkle</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>5~8</burstCount>
+        <positionRadius>0.3</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>0.8~2</speed>
+        <scale>0.25~0.45</scale>
+        <color>(0.85, 1, 0.95, 1)</color>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <!-- 꽃을 피우지 못한 씨앗(방어막에 막힘·보스 결속 해제·빈 칸 없음) -->
+  <EffecterDef>
+    <defName>VV_Effecter_SeedFizzle</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickTwinkle</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>5~8</burstCount>
+        <positionRadius>0.3</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>0.5~1.5</speed>
+        <scale>0.2~0.4</scale>
+        <color>(1, 0.9, 0.9, 0.9)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>DustPuffThick</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>2</burstCount>
+        <positionRadius>0.3</positionRadius>
+        <scale>0.8~1.2</scale>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <!-- 멸망꽃이 피어남: 독성 포탄 착탄음 + 자홍 충격 고리 + 미아즈마 + 흙먼지 -->
+  <EffecterDef>
+    <defName>VV_Effecter_SeedBloomDoom</defName>
+    <maintainTicks>20</maintainTicks>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>ToxicShellLanded</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickFlash</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>3</scale>
+        <color>(1, 0.3, 0.75, 0.7)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickDoomRing</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>1.4</scale>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickDoomMiasma</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>5~7</burstCount>
+        <positionRadius>0.4</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>0.4~1</speed>
+        <rotation>0~360</rotation>
+        <rotationRate>-30~30</rotationRate>
+        <scale>0.9~1.4</scale>
+        <color>(0.5, 0.1, 0.42, 0.6)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickPetal</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>8~12</burstCount>
+        <positionRadius>0.3</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>0.8~2</speed>
+        <rotation>0~360</rotation>
+        <rotationRate>-220~220</rotationRate>
+        <scale>0.15~0.32</scale>
+        <color>(1, 0.3, 0.75, 1)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>DustPuffThick</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>3</burstCount>
+        <positionRadius>0.4</positionRadius>
+        <scale>1~1.5</scale>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <!-- 요정꽃이 피어남: 요정 출현음 + 금빛 고리 + 반짝임 + 꽃잎 -->
+  <EffecterDef>
+    <defName>VV_Effecter_SeedBloomFairy</defName>
+    <maintainTicks>20</maintainTicks>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>VV_FairyMaterialize</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickFlash</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>3</scale>
+        <color>(1, 0.95, 0.75, 0.8)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickPhaseRing</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>1.6</scale>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickTwinkle</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>10~14</burstCount>
+        <positionRadius>0.5</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>0.6~1.8</speed>
+        <scale>0.25~0.5</scale>
+        <color>(0.95, 1, 0.9, 1)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickPetal</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>8~12</burstCount>
+        <positionRadius>0.3</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>0.8~2</speed>
+        <rotation>0~360</rotation>
+        <rotationRate>-220~220</rotationRate>
+        <scale>0.15~0.32</scale>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <!-- ======================== 꽃 유지/소멸 ======================== -->
+
+  <!-- 멸망꽃 유지: 자홍 후광 + 피어오르는 미아즈마 + 자홍 빛 알갱이 + 이따금 퍼지는 연기 고리 -->
+  <EffecterDef>
+    <defName>VV_Effecter_DoomFlowerAura</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickHalo</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <ticksBetweenMotes>70</ticksBetweenMotes>
+        <positionOffset>(0, 0, 0.15)</positionOffset>
+        <scale>1.7</scale>
+        <color>(0.85, 0.2, 0.65, 0.35)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickDoomMiasma</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <initialDelayTicks>8</initialDelayTicks>
+        <ticksBetweenMotes>26</ticksBetweenMotes>
+        <positionOffset>(0, 0, 0.25)</positionOffset>
+        <positionRadius>0.3</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>-30~30</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>0.15~0.35</speed>
+        <rotation>0~360</rotation>
+        <rotationRate>-20~20</rotationRate>
+        <scale>0.5~0.9</scale>
+        <color>(0.5, 0.1, 0.42, 0.5)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickMote</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <initialDelayTicks>15</initialDelayTicks>
+        <ticksBetweenMotes>34</ticksBetweenMotes>
+        <positionRadius>0.5</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>-20~20</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>0.25~0.5</speed>
+        <rotation>0~360</rotation>
+        <rotationRate>-60~60</rotationRate>
+        <scale>0.18~0.3</scale>
+        <color>(1, 0.35, 0.8, 0.85)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickSmokeRing</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <initialDelayTicks>40</initialDelayTicks>
+        <ticksBetweenMotes>120</ticksBetweenMotes>
+        <scale>1.2</scale>
+        <color>(0.9, 0.25, 0.7, 0.4)</color>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <!-- 요정꽃 유지: 금빛 후광 + 주변 반짝임 + 피어오르는 청록 빛 알갱이 -->
+  <EffecterDef>
+    <defName>VV_Effecter_FairyFlowerAura</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickHalo</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <ticksBetweenMotes>80</ticksBetweenMotes>
+        <positionOffset>(0, 0, 0.2)</positionOffset>
+        <scale>1.8</scale>
+        <color>(1, 0.92, 0.6, 0.3)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickTwinkle</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <initialDelayTicks>5</initialDelayTicks>
+        <ticksBetweenMotes>14</ticksBetweenMotes>
+        <positionOffset>(0, 0, 0.2)</positionOffset>
+        <positionRadiusMin>0.15</positionRadiusMin>
+        <positionRadius>0.8</positionRadius>
+        <scale>0.25~0.45</scale>
+        <color>(1, 0.95, 0.75, 0.85)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickMote</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <initialDelayTicks>12</initialDelayTicks>
+        <ticksBetweenMotes>30</ticksBetweenMotes>
+        <positionRadius>0.5</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>-20~20</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>0.25~0.5</speed>
+        <rotation>0~360</rotation>
+        <rotationRate>-60~60</rotationRate>
+        <scale>0.18~0.3</scale>
+        <color>(0.75, 1, 0.95, 0.8)</color>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <!-- 멸망꽃이 시듦(만개 후·파괴·2페이즈 정리) -->
+  <EffecterDef>
+    <defName>VV_Effecter_DoomFlowerWither</defName>
+    <maintainTicks>15</maintainTicks>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>Explosion_Smoke</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickDoomRing</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>0.8</scale>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickDoomMiasma</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>6~9</burstCount>
+        <positionRadius>0.4</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>0.3~0.9</speed>
+        <rotation>0~360</rotation>
+        <rotationRate>-30~30</rotationRate>
+        <scale>0.8~1.3</scale>
+        <color>(0.45, 0.08, 0.38, 0.6)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickPetal</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>8~12</burstCount>
+        <positionOffset>(0, 0, 0.3)</positionOffset>
+        <positionRadius>0.4</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>135~225</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>0.4~1.1</speed>
+        <rotation>0~360</rotation>
+        <rotationRate>-160~160</rotationRate>
+        <scale>0.15~0.3</scale>
+        <color>(0.85, 0.25, 0.65, 0.9)</color>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <!-- 멸망꽃 만개: 맵 전체로 번지는 자홍 저주 파동 + 섬광 + 왜곡 + 카메라 흔들림 -->
+  <EffecterDef>
+    <defName>VV_Effecter_DoomBloomCurse</defName>
+    <maintainTicks>60</maintainTicks>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>PsychicPulseGlobal</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_CameraShakeChance</subEffecterClass>
+        <chancePerTick>1</chancePerTick>
+        <chancePeriodTicks>60</chancePeriodTicks>
+        <cameraShake>0.5</cameraShake>
+        <lifespanMaxTicks>3</lifespanMaxTicks>
+        <distanceAttenuationScale>0.5</distanceAttenuationScale>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickFlash</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>7</scale>
+        <color>(1, 0.3, 0.75, 0.8)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickDoomWave</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>1</scale>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggeredDelayed</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickDoomWave</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <initialDelayTicks>12</initialDelayTicks>
+        <scale>0.6</scale>
+        <color>(1, 1, 1, 0.6)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_ExpandingDistortionRing</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>0.8</scale>
+        <absoluteAngle>true</absoluteAngle>
+        <rotation>0</rotation>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickPetal</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>14~20</burstCount>
+        <positionRadius>0.4</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>1.5~3.5</speed>
+        <rotation>0~360</rotation>
+        <rotationRate>-260~260</rotationRate>
+        <scale>0.2~0.4</scale>
+        <color>(1, 0.3, 0.75, 1)</color>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <!-- 요정꽃이 사라짐(결속·수명 종료·정리) -->
+  <EffecterDef>
+    <defName>VV_Effecter_FairyFlowerVanish</defName>
+    <maintainTicks>15</maintainTicks>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>VV_FairyDematerialize</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickFlash</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>2.4</scale>
+        <color>(1, 0.95, 0.75, 0.75)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickPhaseRing</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>1.4</scale>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickTwinkle</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>10~14</burstCount>
+        <positionRadius>0.5</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>-60~60</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>0.6~1.8</speed>
+        <scale>0.25~0.45</scale>
+        <color>(0.95, 1, 0.9, 1)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickPetal</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>6~10</burstCount>
+        <positionRadius>0.3</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>0.6~1.6</speed>
+        <rotation>0~360</rotation>
+        <rotationRate>-200~200</rotationRate>
+        <scale>0.15~0.3</scale>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <!-- ======================== 요정꽃 결속 · 요정 간섭 ======================== -->
+
+  <!-- 결속 작업 중(A = 비비, B = 요정꽃): 공명음 + 꽃 반짝임 + 꽃에서 비비로 흐르는 빛 -->
+  <EffecterDef>
+    <defName>VV_Effecter_FairyFlowerBonding</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_Sustainer</subEffecterClass>
+        <soundDef>VV_EverflowerRitualCast</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickTwinkle</fleckDef>
+        <spawnLocType>OnTarget</spawnLocType>
+        <ticksBetweenMotes>6</ticksBetweenMotes>
+        <positionRadiusMin>0.1</positionRadiusMin>
+        <positionRadius>0.6</positionRadius>
+        <scale>0.25~0.45</scale>
+        <color>(1, 0.95, 0.75, 0.9)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickMote</fleckDef>
+        <spawnLocType>BetweenPositions</spawnLocType>
+        <positionLerpFactor>0.25</positionLerpFactor>
+        <ticksBetweenMotes>5</ticksBetweenMotes>
+        <positionRadius>0.15</positionRadius>
+        <scale>0.18~0.3</scale>
+        <color>(1, 0.92, 0.6, 0.9)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickMote</fleckDef>
+        <spawnLocType>BetweenPositions</spawnLocType>
+        <positionLerpFactor>0.5</positionLerpFactor>
+        <initialDelayTicks>2</initialDelayTicks>
+        <ticksBetweenMotes>5</ticksBetweenMotes>
+        <positionRadius>0.15</positionRadius>
+        <scale>0.18~0.3</scale>
+        <color>(0.85, 1, 0.95, 0.9)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickMote</fleckDef>
+        <spawnLocType>BetweenPositions</spawnLocType>
+        <positionLerpFactor>0.75</positionLerpFactor>
+        <initialDelayTicks>4</initialDelayTicks>
+        <ticksBetweenMotes>5</ticksBetweenMotes>
+        <positionRadius>0.15</positionRadius>
+        <scale>0.18~0.3</scale>
+        <color>(1, 0.92, 0.6, 0.9)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickHalo</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <ticksBetweenMotes>45</ticksBetweenMotes>
+        <scale>1.4</scale>
+        <color>(1, 0.92, 0.65, 0.3)</color>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <!-- 요정 간섭 비비를 따라다니는 금빛 후광과 반짝임 -->
+  <EffecterDef>
+    <defName>VV_Effecter_FairyInterferenceAura</defName>
+    <offsetMode>Free</offsetMode>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickHaloAttached</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <ticksBetweenMotes>60</ticksBetweenMotes>
+        <scale>1.3</scale>
+        <color>(1, 0.92, 0.65, 0.28)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickTwinkle</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <initialDelayTicks>10</initialDelayTicks>
+        <ticksBetweenMotes>22</ticksBetweenMotes>
+        <positionRadiusMin>0.15</positionRadiusMin>
+        <positionRadius>0.5</positionRadius>
+        <scale>0.2~0.32</scale>
+        <color>(1, 0.95, 0.75, 0.85)</color>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <!-- 결속 해방(마나 역류): 보스 몸통에서 거대한 섬광 + 금빛 파동 고리 + 왜곡 + 사방으로 터지는 빛 (빔 플래시·카메라 흔들림은 C#) -->
+  <EffecterDef>
+    <defName>VV_Effecter_ManaBackflow</defName>
+    <maintainTicks>40</maintainTicks>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>VV_Manawave</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickBackflowBurst</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>9</scale>
+        <absoluteAngle>true</absoluteAngle>
+        <rotation>0~360</rotation>
+        <rotationRate>-40~40</rotationRate>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickFlash</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>14</scale>
+        <color>(0.9, 0.97, 1, 0.8)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickWaveRing</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>2</scale>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggeredDelayed</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickWaveRing</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <initialDelayTicks>12</initialDelayTicks>
+        <scale>1.2</scale>
+        <color>(0.85, 1, 1, 0.8)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_ExpandingDistortionRing</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>1.2</scale>
+        <absoluteAngle>true</absoluteAngle>
+        <rotation>0</rotation>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickTwinkle</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>18~26</burstCount>
+        <positionRadius>0.8</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>3~7</speed>
+        <scale>0.35~0.7</scale>
+        <color>(0.85, 1, 1, 1)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickPetal</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>16~24</burstCount>
+        <positionRadius>0.6</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>2~5</speed>
+        <rotation>0~360</rotation>
+        <rotationRate>-300~300</rotationRate>
+        <scale>0.25~0.5</scale>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <!-- 결속을 해방한 비비가 제단 앞으로 돌아옴(ViviEndingQuest가 DefDatabase로 찾아 재생) -->
+  <EffecterDef>
+    <defName>VV_Effecter_FairyReturn</defName>
+    <maintainTicks>20</maintainTicks>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>VV_FairyTeleport</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickFlash</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>3.5</scale>
+        <color>(1, 0.95, 0.75, 0.8)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickPhaseRing</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>1.8</scale>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_ExpandingDistortionRing</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>0.5</scale>
+        <absoluteAngle>true</absoluteAngle>
+        <rotation>0</rotation>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickTwinkle</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>12~16</burstCount>
+        <positionRadius>0.5</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>0.8~2.2</speed>
+        <scale>0.25~0.5</scale>
+        <color>(1, 0.95, 0.75, 1)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickPetal</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>8~12</burstCount>
+        <positionRadius>0.3</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>0.8~2</speed>
+        <rotation>0~360</rotation>
+        <rotationRate>-220~220</rotationRate>
+        <scale>0.15~0.32</scale>
+      </li>
+    </children>
+  </EffecterDef>
+</Defs>

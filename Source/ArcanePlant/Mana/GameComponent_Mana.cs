@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Verse;
 
@@ -64,6 +64,10 @@ namespace VVRace
         public IEnumerable<Pawn> GetFairyficatedPawns(Pawn pawn) => _fairyficated.Where(v => v.linker == pawn).Select(v => v.fairy);
         private List<FairyficatedPawn> _fairyficated = new List<FairyficatedPawn>();
 
+        // 엔딩 퀘스트 〈만개하는 여명〉 상태. 새 게임 컴포넌트를 만들지 않고 이 컴포넌트에서 보관·저장하고 틱을 처리한다.
+        public ViviEndingQuest EndingQuest => _endingQuest;
+        private ViviEndingQuest _endingQuest = new ViviEndingQuest();
+
         public GameComponent_Mana(Game game)
         {
             _game = game;
@@ -81,6 +85,7 @@ namespace VVRace
 
             Scribe_Collections.Look(ref _thingWithManaComps, "_thingWithManaComps", LookMode.Reference);
             Scribe_Collections.Look(ref _fairyficated, "fairyficated", LookMode.Deep);
+            Scribe_Deep.Look(ref _endingQuest, "endingQuest");
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
@@ -108,7 +113,23 @@ namespace VVRace
                 {
                     _fairyficated = new List<FairyficatedPawn>();
                 }
+
+                if (_endingQuest == null)
+                {
+                    _endingQuest = new ViviEndingQuest();
+                }
             }
+        }
+
+        public override void GameComponentTick()
+        {
+            _endingQuest?.Tick();
+        }
+
+        // 화면 섬광 제거 등 엔딩 연출의 실시간 처리를 담당한다(일시정지와 무관).
+        public override void GameComponentUpdate()
+        {
+            _endingQuest?.Update();
         }
 
         public void RegisterCompMana(CompMana comp)

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+<!-- Inspector -->
+<VV_Inspector_ApocryphaPhase>State: {0}</VV_Inspector_ApocryphaPhase>
+<VV_Inspector_ApocryphaPhase_Bound>Shackles of Billions</VV_Inspector_ApocryphaPhase_Bound>
+<VV_Inspector_ApocryphaPhase_Transforming>Breaking free</VV_Inspector_ApocryphaPhase_Transforming>
+<VV_Inspector_ApocryphaPhase_Unbound>Rampage of the Unbound Progenitor</VV_Inspector_ApocryphaPhase_Unbound>
+<VV_Inspector_ApocryphaPhase_Dying>Crumbling away</VV_Inspector_ApocryphaPhase_Dying>
+<VV_Inspector_ApocryphaBond>Vivi fairy bond: {0}</VV_Inspector_ApocryphaBond>
+<VV_Inspector_ApocryphaVitality>Vitality: {0} / {1}</VV_Inspector_ApocryphaVitality>
+<VV_Inspector_ApocryphaDamageReduction>Incoming damage reduction: {0} (resonance x{1})</VV_Inspector_ApocryphaDamageReduction>
+<VV_Inspector_ApocryphaChanneling>Usurping the everflower: {0} ({1} left)</VV_Inspector_ApocryphaChanneling>
+
+<!-- Hediff -->
+<VV_Hediff_ApocryphaCarapaceReduction>damage reduction {0}</VV_Hediff_ApocryphaCarapaceReduction>
+<VV_Hediff_ApocryphaCarapaceTip>Resonance stacks: {0}\nIncoming damage reduction: {1}</VV_Hediff_ApocryphaCarapaceTip>
+<VV_Hediff_ApocryphaFairyBondTip>Bound vivi fairies: {0} / {1}</VV_Hediff_ApocryphaFairyBondTip>
+
+<!-- Alert -->
+<VV_Alert_ApocryphaChanneling>Everflower usurpation {0}</VV_Alert_ApocryphaChanneling>
+<VV_Alert_ApocryphaChannelingDesc>Apocrypha is draining the everflower's power ({PROGRESS}, {TIMELEFT} left).
+\nIf completed, Apocrypha will vanish with the everflower and the quest will fail.
+\nStunning Apocrypha interrupts the usurpation and resets its progress. She is immune to ordinary stuns and can only be stunned by the mana wave ritual, by releasing her fairy bond through fairy interference, or by the attunement ritual in her second phase.</VV_Alert_ApocryphaChannelingDesc>
+
+<!-- Letter -->
+<VV_Letter_ApocryphaUnboundLabel>Rampage of the Unbound Progenitor</VV_Letter_ApocryphaUnboundLabel>
+<VV_Letter_ApocryphaUnbound>The last vivi fairy bond has been released. Freed from the weight of billions of souls, Apocrypha has cast off her shackles and revealed her true form as the progenitor hornet.
+\nUnbound, Apocrypha charges straight toward the everflower, smashing through walls and structures in her path. Ordinary attacks can now harm her, though her hardened carapace reduces incoming damage by 99%.
+\nFrom now on, the everflower attunement ritual can be performed repeatedly without a cooldown. Each completed ritual unleashes a resonance wave that stuns Apocrypha and steadily weakens her carapace. Hold her back from the everflower while repeating the ritual.</VV_Letter_ApocryphaUnbound>
+
+<!-- Message -->
+<VV_Message_ApocryphaBondReleased>A large number of vivi fairies bound to Apocrypha have been freed. (Remaining bond: {COUNT})</VV_Message_ApocryphaBondReleased>
+<VV_Message_ApocryphaTransformStarted>The last fairy bond has shattered! Apocrypha unleashes a shockwave that stuns every living thing.</VV_Message_ApocryphaTransformStarted>
+<VV_Message_ApocryphaChannelInterrupted>Apocrypha's usurpation of the everflower was interrupted.</VV_Message_ApocryphaChannelInterrupted>
+
+<!-- Text mote -->
+<VV_TextMote_ApocryphaStunImmune>Stun immune</VV_TextMote_ApocryphaStunImmune>
+
+</LanguageData>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+<VV_DreamumAltar.label>영원꽃 제단</VV_DreamumAltar.label>
+<VV_DreamumAltar.description>고대 비비 제국의 설계를 바탕으로 복원한 거대한 제단입니다. 중심부의 고대 호박 코어와 마나 회로가 대지의 마나를 끌어올려 영원꽃이 한계를 넘어 성장할 수 있도록 지탱해 줍니다.
+\n조율 4단계 이상의 영원꽃을 순간이동시켜 제단 중앙에 안치할 수 있습니다. 제단으로 이동할 때는 거리 제한을 받지 않으며, 한번 안치된 영원꽃은 다른 곳으로 옮길 수 없습니다.
+\n제단은 공격으로 파괴되지 않으며, 지역마다 하나만 건설할 수 있습니다.</VV_DreamumAltar.description>
+
+<VV_AncientAmberCore.label>고대 호박 코어</VV_AncientAmberCore.label>
+<VV_AncientAmberCore.description>고대 비비 제국의 영원꽃 제단 중심부에 쓰이던 거대한 호박 결정입니다. 내부에 고대의 마나 회로가 새겨져 있어 은은하고 따뜻한 빛을 발산합니다.
+\n영원꽃 제단을 복원하는 데 필요한 핵심 유물로, 제국이 멸망한 뒤 비비 연방에서 극소수만 보관해 왔습니다.</VV_AncientAmberCore.description>
+
+</LanguageData>

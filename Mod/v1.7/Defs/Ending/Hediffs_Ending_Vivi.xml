@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 6단계 영원꽃의 영구 보상. 엔딩을 완료한 영원꽃이 있는 맵의 플레이어 성체 비비에게 주기적으로 갱신되며(EverflowerBlessingUtility),
+       맵을 떠나 갱신되지 않으면 하루 뒤 사라진다. 유전자 불안정 면역은 코드(HediffGiver/Hediff_GeneticUnstablity)에서 처리한다. -->
+  <HediffDef>
+    <defName>VV_EverflowerBlessing</defName>
+    <label>everflower's blessing</label>
+    <description>The blessing of the fully bloomed everflower washes away the curse of imperfect genes. While blessed, this vivi is completely immune to genetic instability, and its aging as an adult slows dramatically.
+\nThe blessing fades if the vivi stays away from the everflower for a day.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(1, 0.85, 0.4)</defaultLabelColor>
+
+    <isBad>false</isBad>
+    <priceImpact>false</priceImpact>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <everCurableByItem>false</everCurableByItem>
+
+    <comps>
+      <li Class="VVRace.HediffCompProperties_AgingFactor">
+        <factor>0.1</factor>
+      </li>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>60000~60000</disappearsAfterTicks>
+        <showRemainingTime>false</showRemainingTime>
+      </li>
+    </comps>
+  </HediffDef>
+</Defs>

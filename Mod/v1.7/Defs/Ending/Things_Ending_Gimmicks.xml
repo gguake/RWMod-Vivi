@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 아포크리파 1페이즈 기믹: 요정 비비 사출탄, 멸망꽃/요정꽃 씨앗, 멸망꽃·요정꽃 -->
+
+  <!-- ===== 피해 ===== -->
+
+  <!-- 요정 비비 사출탄 폭발: Bomb 계열, 피해 22, 건물에는 절반만 -->
+  <DamageDef ParentName="Bomb">
+    <defName>VV_FairyBlast</defName>
+    <label>fairy blast</label>
+    <deathMessage>{0} was caught in the blast of a hurled fairy vivi.</deathMessage>
+    <defaultDamage>22</defaultDamage>
+    <defaultArmorPenetration>0.15</defaultArmorPenetration>
+    <buildingDamageFactor>0.5</buildingDamageFactor>
+    <buildingDamageFactorImpassable>1</buildingDamageFactorImpassable>
+    <buildingDamageFactorPassable>1</buildingDamageFactorPassable>
+    <plantDamageFactor>1</plantDamageFactor>
+    <explosionHeatEnergyPerCell>0</explosionHeatEnergyPerCell>
+    <explosionCellFleck>Fleck_Vaporize</explosionCellFleck>
+    <explosionColorCenter>(1, 0.95, 0.72)</explosionColorCenter>
+    <explosionColorEdge>(1, 0.7, 0.28)</explosionColorEdge>
+    <soundExplosion>Explosion_Bomb</soundExplosion>
+  </DamageDef>
+
+  <!-- ===== 투사체 ===== -->
+
+  <!-- 요정 비비 사출탄: 머리가 오른쪽을 향한 혜성 텍스처를 진행 방향으로 돌려 그린다(Projectile_FairyShell.ExactRotation) -->
+  <ThingDef ParentName="BaseBullet">
+    <defName>VV_Projectile_FairyShell</defName>
+    <label>hurled fairy vivi</label>
+    <thingClass>VVRace.Projectile_FairyShell</thingClass>
+    <graphicData>
+      <texPath>VFX/VV_FairyComet</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>(2.4, 1.2)</drawSize>
+    </graphicData>
+    <projectile>
+      <damageDef>VV_FairyBlast</damageDef>
+      <explosionRadius>2.4</explosionRadius>
+      <speed>40</speed>
+      <flyOverhead>true</flyOverhead>
+      <arcHeightFactor>0.4</arcHeightFactor>
+      <shadowSize>0.6</shadowSize>
+      <screenShakeFactor>0.6</screenShakeFactor>
+    </projectile>
+    <modExtensions>
+      <li Class="VVRace.ApocryphaProjectileExtension">
+        <launchEffecter>VV_Effecter_FairyShellLaunch</launchEffecter>
+        <impactEffecter>VV_Effecter_FairyShellImpact</impactEffecter>
+        <trailFleck>VV_Fleck_GimmickTwinkle</trailFleck>
+        <trailColor>(1, 0.88, 0.5, 0.9)</trailColor>
+        <trailIntervalTicks>1</trailIntervalTicks>
+        <trailScale>0.22~0.42</trailScale>
+        <headOffset>0.72</headOffset>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- 꽃 씨앗 공용: 높은 포물선으로 날아가 착탄 칸에 projectile.spawnsThingDef의 꽃을 피운다.
+       damageDef는 방어막이 씨앗을 막을 때만 쓰이므로 피해가 없는 Smoke를 지정한다. -->
+  <ThingDef ParentName="BaseBullet" Name="VV_ApocryphaSeedBase" Abstract="True">
+    <thingClass>VVRace.Projectile_ApocryphaSeed</thingClass>
+    <graphicData>
+      <texPath>VFX/VV_FairySeed</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>(1.3, 1.3)</drawSize>
+    </graphicData>
+    <projectile>
+      <damageDef>Smoke</damageDef>
+      <speed>30</speed>
+      <flyOverhead>true</flyOverhead>
+      <arcHeightFactor>1</arcHeightFactor>
+      <shadowSize>0.5</shadowSize>
+      <spinRate>1</spinRate>
+    </projectile>
+  </ThingDef>
+
+  <ThingDef ParentName="VV_ApocryphaSeedBase">
+    <defName>VV_Projectile_DoomSeed</defName>
+    <label>doom bloom seed</label>
+    <graphicData>
+      <color>(1, 0.3, 0.75, 1)</color>
+    </graphicData>
+    <projectile>
+      <spawnsThingDef>VV_DoomFlower</spawnsThingDef>
+    </projectile>
+    <modExtensions>
+      <li Class="VVRace.ApocryphaProjectileExtension">
+        <launchEffecter>VV_Effecter_DoomSeedLaunch</launchEffecter>
+        <impactEffecter>VV_Effecter_SeedFizzle</impactEffecter>
+        <trailFleck>VV_Fleck_GimmickTwinkle</trailFleck>
+        <trailColor>(1, 0.35, 0.8, 0.85)</trailColor>
+        <trailIntervalTicks>2</trailIntervalTicks>
+        <trailScale>0.2~0.35</trailScale>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <ThingDef ParentName="VV_ApocryphaSeedBase">
+    <defName>VV_Projectile_FairySeed</defName>
+    <label>fairy bloom seed</label>
+    <projectile>
+      <spawnsThingDef>VV_FairyFlower</spawnsThingDef>
+    </projectile>
+    <modExtensions>
+      <li Class="VVRace.ApocryphaProjectileExtension">
+        <launchEffecter>VV_Effecter_FairySeedLaunch</launchEffecter>
+        <impactEffecter>VV_Effecter_SeedFizzle</impactEffecter>
+        <trailFleck>VV_Fleck_GimmickTwinkle</trailFleck>
+        <trailColor>(0.85, 1, 0.95, 0.85)</trailColor>
+        <trailIntervalTicks>2</trailIntervalTicks>
+        <trailScale>0.2~0.35</trailScale>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- ===== 꽃 ===== -->
+
+  <!-- 멸망꽃: 보스 세력 소속(적대 표시), 플레이어 포탑·징집된 정착민이 자동 공격, 12시간 뒤 만개해 저주 -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>VV_DoomFlower</defName>
+    <label>doom bloom</label>
+    <description>A cursed flower grown from Apocrypha's warped mana. If it fully blossoms, it inflicts a random curse upon every colonist on the map.\n\nCan be destroyed before it blooms, and any curses already inflicted are lifted when Apocrypha's bond is released.</description>
+    <thingClass>VVRace.Building_DoomFlower</thingClass>
+    <graphicData>
+      <texPath>Things/Building/VV_DoomFlower</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawRotated>false</drawRotated>
+      <shaderType>Transparent</shaderType>
+      <drawSize>(1.6, 1.6)</drawSize>
+    </graphicData>
+    <soundImpactDefault>BulletImpact_Wood</soundImpactDefault>
+    <filthLeaving>Filth_Ash</filthLeaving>
+    <drawerType>RealtimeOnly</drawerType>
+    <!-- 보스와 잇는 연결선·피어나는 연출이 화면 가장자리에서 끊기지 않게 -->
+    <drawOffscreen>true</drawOffscreen>
+    <tickerType>Normal</tickerType>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>30</pathCost>
+    <fillPercent>0.2</fillPercent>
+    <rotatable>false</rotatable>
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+    <statBases>
+      <MaxHitPoints>150</MaxHitPoints>
+      <Flammability>0.5</Flammability>
+      <Beauty>-15</Beauty>
+    </statBases>
+    <building>
+      <deconstructible>false</deconstructible>
+      <claimable>false</claimable>
+      <repairable>false</repairable>
+      <isInert>true</isInert>
+      <ai_neverTrashThis>true</ai_neverTrashThis>
+      <ai_chillDestination>false</ai_chillDestination>
+      <expandHomeArea>false</expandHomeArea>
+    </building>
+    <modExtensions>
+      <li Class="VVRace.ApocryphaFlowerExtension">
+        <bloomEffecter>VV_Effecter_SeedBloomDoom</bloomEffecter>
+        <auraEffecter>VV_Effecter_DoomFlowerAura</auraEffecter>
+        <witherEffecter>VV_Effecter_DoomFlowerWither</witherEffecter>
+        <linkColor>(1, 0.35, 0.8, 1)</linkColor>
+        <linkWidth>0.6</linkWidth>
+        <linkOffset>(0.15, 0, 0.25)</linkOffset>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- 요정꽃: 무소속, 피해 불가, 하루 뒤 시듦. 아기가 아닌 비비가 우클릭으로 결속하면 요정 간섭을 얻는다 -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>VV_FairyFlower</defName>
+    <label>fairy bloom</label>
+    <description>A flower condensed from the pure wavelengths of the ancient fairy vivis bound to Apocrypha. A vivi who bonds with it gains fairy interference and can sever Apocrypha's bond.\n\nCannot be destroyed by attacks, and fades on its own after some time.</description>
+    <thingClass>VVRace.Building_FairyFlower</thingClass>
+    <graphicData>
+      <texPath>Things/Building/VV_FairyFlower</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawRotated>false</drawRotated>
+      <shaderType>Transparent</shaderType>
+      <drawSize>(1.6, 1.6)</drawSize>
+    </graphicData>
+    <soundImpactDefault>BulletImpact_Wood</soundImpactDefault>
+    <drawerType>RealtimeOnly</drawerType>
+    <!-- 보스와 잇는 연결선·피어나는 연출이 화면 가장자리에서 끊기지 않게 -->
+    <drawOffscreen>true</drawOffscreen>
+    <tickerType>Normal</tickerType>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>Standable</passability>
+    <pathCost>0</pathCost>
+    <fillPercent>0</fillPercent>
+    <rotatable>false</rotatable>
+    <useHitPoints>false</useHitPoints>
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+    <statBases>
+      <Flammability>0</Flammability>
+      <Beauty>15</Beauty>
+    </statBases>
+    <building>
+      <deconstructible>false</deconstructible>
+      <claimable>false</claimable>
+      <repairable>false</repairable>
+      <isTargetable>false</isTargetable>
+      <canBeDamagedByAttacks>false</canBeDamagedByAttacks>
+      <isInert>true</isInert>
+      <ai_neverTrashThis>true</ai_neverTrashThis>
+      <ai_chillDestination>false</ai_chillDestination>
+      <expandHomeArea>false</expandHomeArea>
+    </building>
+    <modExtensions>
+      <li Class="VVRace.ApocryphaFlowerExtension">
+        <bloomEffecter>VV_Effecter_SeedBloomFairy</bloomEffecter>
+        <auraEffecter>VV_Effecter_FairyFlowerAura</auraEffecter>
+        <witherEffecter>VV_Effecter_FairyFlowerVanish</witherEffecter>
+        <linkColor>(1, 0.9, 0.6, 1)</linkColor>
+        <linkWidth>0.8</linkWidth>
+        <linkOffset>(0, 0, 0.3)</linkOffset>
+      </li>
+    </modExtensions>
+  </ThingDef>
+</Defs>

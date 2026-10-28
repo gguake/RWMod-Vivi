@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using Verse;
 
 namespace VVRace
@@ -10,6 +10,9 @@ namespace VVRace
         private const float TendSeverityReduction = 0.4f;
 
         private float _intervalFactor;
+
+        // 〈영원꽃의 축복〉을 받으면 이미 진행 중인 유전자 불안정도 씻겨 나간다.
+        public override bool ShouldRemove => base.ShouldRemove || EverflowerBlessingUtility.IsBlessed(pawn);
 
         public override void PostMake()
         {

@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 엔딩 의식 연출. 기존 영원꽃 의식 연출(Effects/Everflower.xml)의 모트·플렉을 재사용하고, 황금 파동·빛줄기만 새로 정의한다. -->
+
+  <!-- ===== 공명 파동 (아포크리파 2페이즈 조율 의식 완료) ===== -->
+
+  <!-- 영원꽃 꽃봉오리에서 맵으로 크게 퍼져 나가는 황금 파동 고리(가산). 수명 약 1.85초 동안 지름 약 60칸까지 커진다. -->
+  <FleckDef ParentName="FleckBase">
+    <defName>VV_Fleck_ResonanceWaveRing</defName>
+    <altitudeLayer>MoteOverheadLow</altitudeLayer>
+    <fadeInTime>0.05</fadeInTime>
+    <solidTime>0.7</solidTime>
+    <fadeOutTime>1.1</fadeOutTime>
+    <growthRate>14</growthRate>
+    <drawOffscreen>true</drawOffscreen>
+    <graphicData>
+      <texPath>VFX/VV_GoldenWaveRing</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>(4, 4)</drawSize>
+    </graphicData>
+  </FleckDef>
+
+  <!-- 뒤따르는 느린 잔향 고리 -->
+  <FleckDef ParentName="FleckBase">
+    <defName>VV_Fleck_ResonanceWaveRingSlow</defName>
+    <altitudeLayer>MoteOverheadLow</altitudeLayer>
+    <fadeInTime>0.1</fadeInTime>
+    <solidTime>0.8</solidTime>
+    <fadeOutTime>1.3</fadeOutTime>
+    <growthRate>6</growthRate>
+    <drawOffscreen>true</drawOffscreen>
+    <graphicData>
+      <texPath>VFX/VV_GoldenWaveRing</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <color>(1, 1, 1, 0.7)</color>
+      <drawSize>(4, 4)</drawSize>
+    </graphicData>
+  </FleckDef>
+
+  <!-- 꽃봉오리 → 아포크리파를 잇는 빛줄기(FleckMaker.ConnectingLine으로 길이 방향으로 늘리며, VV_SoulLink 가산 셰이더 사용) -->
+  <FleckDef ParentName="FleckBase">
+    <defName>VV_Fleck_ResonanceBeam</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0.05</fadeInTime>
+    <solidTime>0.35</solidTime>
+    <fadeOutTime>0.6</fadeOutTime>
+    <drawOffscreen>true</drawOffscreen>
+    <graphicData>
+      <texPath>VFX/VV_SoulLinkBeam</texPath>
+      <shaderType>VV_SoulLink</shaderType>
+      <graphicClass>Graphic_FleckPulse</graphicClass>
+      <renderInstanced>false</renderInstanced>
+      <color>(1, 0.88, 0.55, 1)</color>
+      <drawSize>(1, 1)</drawSize>
+      <shaderParameters>
+        <_ScrollSpeed>2.5</_ScrollSpeed>
+        <_Tiling>4</_Tiling>
+        <_PulseSpeed>14</_PulseSpeed>
+      </shaderParameters>
+    </graphicData>
+  </FleckDef>
+
+  <!-- 아포크리파 위치의 마나 섬광 -->
+  <FleckDef ParentName="FleckBase">
+    <defName>VV_Fleck_ResonanceBurst</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0.03</fadeInTime>
+    <solidTime>0.15</solidTime>
+    <fadeOutTime>0.8</fadeOutTime>
+    <growthRate>4</growthRate>
+    <drawOffscreen>true</drawOffscreen>
+    <graphicData>
+      <texPath>VFX/VV_ManaBackflowBurst</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>(10, 10)</drawSize>
+    </graphicData>
+  </FleckDef>
+
+  <!-- 아포크리파 몸에 부딪혀 퍼지는 작은 황금 고리 -->
+  <FleckDef ParentName="FleckBase">
+    <defName>VV_Fleck_ResonanceImpactRing</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0.03</fadeInTime>
+    <solidTime>0.2</solidTime>
+    <fadeOutTime>0.5</fadeOutTime>
+    <growthRate>10</growthRate>
+    <drawOffscreen>true</drawOffscreen>
+    <graphicData>
+      <texPath>VFX/VV_GoldenWaveRing</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>(5, 5)</drawSize>
+    </graphicData>
+  </FleckDef>
+
+  <!-- 영원꽃 쪽: 꽃봉오리 오프셋(Effecter.offset)을 주고 스폰한다 -->
+  <EffecterDef>
+    <defName>VV_Effecter_ResonanceWave</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>VV_Manawave</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_ResonanceWaveRing</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>1</burstCount>
+        <absoluteAngle>true</absoluteAngle>
+        <rotation>0~360</rotation>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_ResonanceWaveRingSlow</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>1</burstCount>
+        <absoluteAngle>true</absoluteAngle>
+        <rotation>0~360</rotation>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_ExpandingDistortionRing</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>1</burstCount>
+        <scale>2</scale>
+        <rotation>0</rotation>
+        <angle>0~0</angle>
+        <speed>0</speed>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>VV_Mote_EverflowerRitualFlash</moteDef>
+        <burstCount>1</burstCount>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>1.4</scale>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_EverflowerPetal_Burst</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>30~40</burstCount>
+        <positionRadius>0.6</positionRadius>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>2~5</speed>
+        <rotation>0~360</rotation>
+        <rotationRate>-260~260</rotationRate>
+        <scale>0.3~0.6</scale>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <!-- 아포크리파 쪽: 몸통 중심 오프셋을 주고 스폰한다 -->
+  <EffecterDef>
+    <defName>VV_Effecter_ResonanceWaveImpact</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_ResonanceBurst</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>1</burstCount>
+        <absoluteAngle>true</absoluteAngle>
+        <rotation>0~360</rotation>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_ResonanceImpactRing</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>1</burstCount>
+        <absoluteAngle>true</absoluteAngle>
+        <rotation>0~360</rotation>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_EverflowerPetal_Burst</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>16~24</burstCount>
+        <positionRadius>1.2</positionRadius>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>1.5~4</speed>
+        <rotation>0~360</rotation>
+        <rotationRate>-260~260</rotationRate>
+        <scale>0.3~0.55</scale>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <!-- ===== 대조율 의식 완료 (VV_EverflowerRitual_Complete 확대판) ===== -->
+  <ThingDef ParentName="MoteBase">
+    <defName>VV_Mote_GrandAttunementCircle</defName>
+    <thingClass>MoteAttached</thingClass>
+    <altitudeLayer>MoteOverheadLow</altitudeLayer>
+    <drawOffscreen>true</drawOffscreen>
+    <mote>
+      <fadeInTime>0.1</fadeInTime>
+      <fadeOutTime>1.4</fadeOutTime>
+      <solidTime>0.2</solidTime>
+      <growthRate>6</growthRate>
+    </mote>
+    <graphicData>
+      <texPath>Things/Mote/RadiationDistortion_B</texPath>
+      <graphicClass>Graphic_MoteWithAgeSecs</graphicClass>
+      <color>(1, 0.9, 0.6, 1)</color>
+      <shaderType>MoteMultiplyAddCircular</shaderType>
+      <shaderParameters>
+        <_MultiplyTex>/Things/Mote/RadiationDistortion_B</_MultiplyTex>
+        <_texAScale>0.3</_texAScale>
+        <_texBScale>0.3</_texBScale>
+        <_texAScrollSpeed>0.4</_texAScrollSpeed>
+        <_texBScrollSpeed>-0.3</_texBScrollSpeed>
+        <_texAScaleDist>0.5</_texAScaleDist>
+        <_DistortionScale>0.5</_DistortionScale>
+        <_Intensity>5</_Intensity>
+      </shaderParameters>
+      <drawSize>(14, 14)</drawSize>
+    </graphicData>
+  </ThingDef>
+
+  <ThingDef ParentName="MoteBase">
+    <defName>VV_Mote_GrandAttunementFlash</defName>
+    <thingClass>MoteAttached</thingClass>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <drawOffscreen>true</drawOffscreen>
+    <mote>
+      <fadeInTime>0.01</fadeInTime>
+      <fadeOutTime>1.2</fadeOutTime>
+      <solidTime>0.3</solidTime>
+    </mote>
+    <graphicData>
+      <texPath>Things/Mote/BrightFlash</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <color>(1.0, 0.92, 0.6, 0.85)</color>
+      <drawSize>(30, 30)</drawSize>
+    </graphicData>
+  </ThingDef>
+
+  <EffecterDef>
+    <defName>VV_Effecter_GrandAttunementComplete</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>VV_EverflowerRitualComplete</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>VV_Manawave</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>VV_Mote_GrandAttunementCircle</moteDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_ExpandingDistortionRing</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>1</burstCount>
+        <scale>2.5</scale>
+        <rotation>0</rotation>
+        <angle>0~0</angle>
+        <speed>0</speed>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>VV_Mote_GrandAttunementFlash</moteDef>
+        <burstCount>1</burstCount>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_ResonanceWaveRing</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>1</burstCount>
+        <absoluteAngle>true</absoluteAngle>
+        <rotation>0~360</rotation>
+      </li>
+      <!-- 꽃잎: 기존 의식 완료 연출보다 큰 꽃잎이 더 넓게 흩날린다 -->
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_EverflowerPetal_Burst</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>60~80</burstCount>
+        <positionRadius>1</positionRadius>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>1.5~4.5</speed>
+        <rotation>0~360</rotation>
+        <rotationRate>-260~260</rotationRate>
+        <scale>0.3~0.7</scale>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <!-- ===== 생명의 회귀 완료 (되돌아온 비비 위치) ===== -->
+  <EffecterDef>
+    <defName>VV_Effecter_ReturnOfLifeComplete</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>VV_UndoFairyfication</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>VV_Mote_VV_FairyficationCircle</moteDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>1.6</scale>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>VV_Mote_FairyficationFlash</moteDef>
+        <burstCount>1</burstCount>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>1.6</scale>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>NewbornBecomeChildGlimmer</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>8~12</burstCount>
+        <positionRadius>0.7</positionRadius>
+        <speed>0.2~0.5</speed>
+        <rotation>-45</rotation>
+        <angle>0</angle>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_EverflowerPetal_Burst</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>16~24</burstCount>
+        <positionRadius>0.4</positionRadius>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>1~2.5</speed>
+        <rotation>0~360</rotation>
+        <rotationRate>-260~260</rotationRate>
+        <scale>0.2~0.4</scale>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <!-- ===== 여왕의 대관식 완료 (왕관을 받은 비비 위치) ===== -->
+
+  <!-- 비비를 감싸는 작은 황금 고리 -->
+  <FleckDef ParentName="FleckBase">
+    <defName>VV_Fleck_CoronationRing</defName>
+    <altitudeLayer>MoteOverheadLow</altitudeLayer>
+    <fadeInTime>0.1</fadeInTime>
+    <solidTime>0.6</solidTime>
+    <fadeOutTime>0.8</fadeOutTime>
+    <growthRate>0.8</growthRate>
+    <graphicData>
+      <texPath>VFX/VV_GoldenWaveRing</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>(3, 3)</drawSize>
+    </graphicData>
+  </FleckDef>
+
+  <!-- 머리 위로 천천히 떠오르며 사라지는 왕관(대관식 의식 아이콘, 알파 텍스처) -->
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>VV_Fleck_CoronationCrown</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0.25</fadeInTime>
+    <solidTime>1.2</solidTime>
+    <fadeOutTime>0.8</fadeOutTime>
+    <graphicData>
+      <texPath>UI/Commands/VV_QueensCoronation</texPath>
+      <shaderType>Mote</shaderType>
+      <drawSize>(0.9, 0.9)</drawSize>
+    </graphicData>
+  </FleckDef>
+
+  <EffecterDef>
+    <defName>VV_Effecter_CoronationComplete</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>VV_EverflowerRitualComplete</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>VV_Mote_FairyficationFlash</moteDef>
+        <burstCount>1</burstCount>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>1.8</scale>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_CoronationRing</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>1</burstCount>
+        <absoluteAngle>true</absoluteAngle>
+        <rotation>0~360</rotation>
+      </li>
+      <!-- 속도 방향을 지정하지 않으면(fleckUsesAngleForVelocity false) 북쪽(화면 위)으로 떠오른다 -->
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_CoronationCrown</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>1</burstCount>
+        <positionOffset>(0, 0, 0.9)</positionOffset>
+        <absoluteAngle>true</absoluteAngle>
+        <rotation>0~0</rotation>
+        <speed>0.35</speed>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>NewbornBecomeChildGlimmer</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>8~12</burstCount>
+        <positionRadius>0.7</positionRadius>
+        <speed>0.2~0.5</speed>
+        <rotation>-45</rotation>
+        <angle>0</angle>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_EverflowerPetal_Burst</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>16~24</burstCount>
+        <positionRadius>0.4</positionRadius>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>1~2.5</speed>
+        <rotation>0~360</rotation>
+        <rotationRate>-260~260</rotationRate>
+        <scale>0.2~0.4</scale>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <!-- 대관식 진행 중 연출: 공명자는 기존 영원꽃 의식 고리, 대상 비비는 요정화 의식의 황금 고리 -->
+  <RitualVisualEffectDef>
+    <defName>VV_QueensCoronation</defName>
+    <comps>
+      <li Class="CompProperties_RitualEffectSpawnOnRole">
+        <roleId>resonator</roleId>
+        <moteDef>VV_Mote_EverflowerCircle</moteDef>
+        <spawnIntervalTicks>24</spawnIntervalTicks>
+      </li>
+      <li Class="CompProperties_RitualEffectSpawnOnRole">
+        <roleId>resonator</roleId>
+        <moteDef>VV_Mote_EverflowerLinkDistortion</moteDef>
+        <spawnIntervalTicks>24</spawnIntervalTicks>
+      </li>
+      <li Class="CompProperties_RitualEffectSpawnOnRole">
+        <roleId>target</roleId>
+        <moteDef>VV_Mote_VV_FairyficationCircle</moteDef>
+        <spawnIntervalTicks>24</spawnIntervalTicks>
+      </li>
+    </comps>
+  </RitualVisualEffectDef>
+</Defs>

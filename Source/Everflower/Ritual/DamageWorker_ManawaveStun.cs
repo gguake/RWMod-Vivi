@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using System.Collections.Generic;
 using Verse;
 
@@ -6,6 +6,9 @@ namespace VVRace
 {
     public class DamageWorker_ManawaveStun : DamageWorker_Stun
     {
+        // 마나 파동 의식의 기절 피해를 적용하는 동안만 true. 기믹 외의 기절에 면역인 아포크리파가 이 기절만 받아들인다.
+        public static bool Applying { get; private set; }
+
         protected override void ExplosionDamageThing(
             Explosion explosion,
             Thing thing,
@@ -34,7 +37,16 @@ namespace VVRace
 
             var logEntry = new BattleLogEntry_ExplosionImpact(explosion.instigator, pawn, explosion.weapon, explosion.projectile, DamageDefOf.Stun);
             Find.BattleLog.Add(logEntry);
-            pawn.TakeDamage(dinfo).AssociateWithLog(logEntry);
+
+            Applying = true;
+            try
+            {
+                pawn.TakeDamage(dinfo).AssociateWithLog(logEntry);
+            }
+            finally
+            {
+                Applying = false;
+            }
         }
 
         private static bool IsHostileTarget(Explosion explosion, Pawn pawn)

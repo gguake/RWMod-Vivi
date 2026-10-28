@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -270,6 +270,9 @@ namespace VVRace
             if (GenPlace.TryPlaceThing(vivi, parent.Position, parent.Map, ThingPlaceMode.Near))
             {
                 gameCompMana.UnregisterFairy(vivi);
+
+                // 결속 수가 줄었으므로 요정 비비 결속 헤디프 수치를 즉시 갱신한다.
+                Refresh();
                 return (Pawn)vivi;
             }
 
@@ -451,6 +454,12 @@ namespace VVRace
             Refresh();
         }
 
+        // 요정 비비 결속 헤디프(VV_ViviFairyFollow)를 현재 결속 수에 맞게 다시 계산한다.
+        public void RefreshBondHediff()
+        {
+            Refresh();
+        }
+
         private IEnumerable<FairyJob> ActiveJobs()
         {
             return _activeFairies
@@ -476,6 +485,15 @@ namespace VVRace
         {
             var pawn = (Pawn)parent;
             var hediff = pawn.health.hediffSet.GetFirstHediffOfDef(VVHediffDefOf.VV_ViviFairyFollow);
+
+            // 구 세이브에서 불러온 결속 헤디프는 예전 클래스(HediffWithComps)의 인스턴스라 6단계 페널티 제거(Hediff_ViviFairyFollow)가
+            // 적용되지 않으므로, def의 클래스와 다르면 떼어 내고 새로 붙인다.
+            if (hediff != null && hediff.GetType() != hediff.def.hediffClass)
+            {
+                pawn.health.RemoveHediff(hediff);
+                hediff = null;
+            }
+
             var severity = FairyficatedPawnCount;
             if (severity > 0)
             {

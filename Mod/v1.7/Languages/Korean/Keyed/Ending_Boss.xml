@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+<!-- Inspector -->
+<VV_Inspector_ApocryphaPhase>상태: {0}</VV_Inspector_ApocryphaPhase>
+<VV_Inspector_ApocryphaPhase_Bound>수십억의 굴레</VV_Inspector_ApocryphaPhase_Bound>
+<VV_Inspector_ApocryphaPhase_Transforming>해방 중</VV_Inspector_ApocryphaPhase_Transforming>
+<VV_Inspector_ApocryphaPhase_Unbound>해방된 시조의 폭주</VV_Inspector_ApocryphaPhase_Unbound>
+<VV_Inspector_ApocryphaPhase_Dying>소멸 중</VV_Inspector_ApocryphaPhase_Dying>
+<VV_Inspector_ApocryphaBond>요정 비비 결속: {0}</VV_Inspector_ApocryphaBond>
+<VV_Inspector_ApocryphaVitality>생명력: {0} / {1}</VV_Inspector_ApocryphaVitality>
+<VV_Inspector_ApocryphaDamageReduction>받는 피해 감소: {0} (공명 {1}중첩)</VV_Inspector_ApocryphaDamageReduction>
+<VV_Inspector_ApocryphaChanneling>영원꽃 찬탈 중: {0} (남은 시간 {1})</VV_Inspector_ApocryphaChanneling>
+
+<!-- Hediff -->
+<VV_Hediff_ApocryphaCarapaceReduction>피해 감소 {0}</VV_Hediff_ApocryphaCarapaceReduction>
+<VV_Hediff_ApocryphaCarapaceTip>공명 중첩: {0}\n받는 피해 감소: {1}</VV_Hediff_ApocryphaCarapaceTip>
+<VV_Hediff_ApocryphaFairyBondTip>결속된 요정 비비: {0} / {1}</VV_Hediff_ApocryphaFairyBondTip>
+
+<!-- Alert -->
+<VV_Alert_ApocryphaChanneling>영원꽃 찬탈 {0}</VV_Alert_ApocryphaChanneling>
+<VV_Alert_ApocryphaChannelingDesc>아포크리파가 영원꽃의 힘을 흡수하고 있습니다({PROGRESS}, 남은 시간 {TIMELEFT}).
+\n찬탈이 완료되면 아포크리파가 영원꽃을 품은 채 사라지며 퀘스트가 실패합니다.
+\n아포크리파를 기절시키면 찬탈이 중단되고 진행도가 초기화됩니다. 일반적인 기절에는 면역이며, 마나 파동 의식이나 요정 간섭을 통한 결속 해방, 또는 2페이즈의 조율 의식으로만 기절시킬 수 있습니다.</VV_Alert_ApocryphaChannelingDesc>
+
+<!-- Letter -->
+<VV_Letter_ApocryphaUnboundLabel>해방된 시조의 폭주</VV_Letter_ApocryphaUnboundLabel>
+<VV_Letter_ApocryphaUnbound>마지막 요정 비비 결속이 풀렸습니다. 수십억 영혼의 무게에서 벗어난 아포크리파가 굴레를 떨쳐내고 시조 말벌의 본래 모습을 드러냈습니다.
+\n구속에서 풀려난 아포크리파는 앞을 가로막는 벽과 구조물을 부수며 영원꽃을 향해 곧장 돌진합니다. 이제 일반 공격으로 피해를 입힐 수 있지만, 단단한 외피가 받는 피해를 99% 감소시킵니다.
+\n지금부터 영원꽃에서는 재사용 대기시간 없이 〈영원꽃 조율 의식〉을 반복할 수 있습니다. 의식을 마칠 때마다 공명 파동이 아포크리파를 기절시키고 외피를 점차 약화시킵니다. 아포크리파가 영원꽃에 닿지 못하게 막으며 조율 의식을 이어가십시오.</VV_Letter_ApocryphaUnbound>
+
+<!-- Message -->
+<VV_Message_ApocryphaBondReleased>아포크리파에게 결속된 요정 비비들이 대량으로 해방되었습니다. (남은 결속: {COUNT})</VV_Message_ApocryphaBondReleased>
+<VV_Message_ApocryphaTransformStarted>마지막 결속이 깨졌습니다! 아포크리파가 모든 생명체를 기절시키는 충격파를 내뿜습니다.</VV_Message_ApocryphaTransformStarted>
+<VV_Message_ApocryphaChannelInterrupted>아포크리파의 영원꽃 찬탈이 중단되었습니다.</VV_Message_ApocryphaChannelInterrupted>
+
+<!-- Text mote -->
+<VV_TextMote_ApocryphaStunImmune>기절 면역</VV_TextMote_ApocryphaStunImmune>
+
+</LanguageData>

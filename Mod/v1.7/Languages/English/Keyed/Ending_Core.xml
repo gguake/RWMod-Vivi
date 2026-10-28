@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+<!-- Ending quest: federation missive -->
+<VV_Letter_EndingFederationMissiveLabel>Vivi federation missive</VV_Letter_EndingFederationMissiveLabel>
+<VV_Letter_EndingFederationMissive>The everflower resonating with {PAWN_labelShort} has grown to its limit, but on ordinary soil it can no longer condense its power, and its mana is scattering away.
+\nSensing these waves, the representative of the vivi federation has sent an urgent message.
+\n"For ages, no hive has ever raised an everflower to such heights. Legend says the great everflower of the old empire revealed its true form only upon an everflower altar carved with ancient mana circuits, never upon common soil. But remember this: the moment the fifth bloom begins upon the altar, outlanders and titanic hornet swarms across the planet will sense its waves and converge upon you."
+\nYou can now research the restoration of the ancient altar. Once the research is complete, the federation will send an ancient amber core needed to build the altar.</VV_Letter_EndingFederationMissive>
+
+<!-- Ending quest: ancient amber core -->
+<VV_Letter_EndingAmberCoreLabel>Ancient amber core</VV_Letter_EndingAmberCoreLabel>
+<VV_Letter_EndingAmberCoreFromFederation>With the ancient altar research complete, the vivi federation has sent an ancient amber core, a relic of the old empire, as promised.</VV_Letter_EndingAmberCoreFromFederation>
+<VV_Letter_EndingAmberCoreFromUnknown>A drop pod carrying an ancient amber core has landed near your colony. Someone who remembers the legacy of the old empire seems to have sent it.</VV_Letter_EndingAmberCoreFromUnknown>
+<VV_Letter_EndingAmberCoreGuide>Build the everflower altar using the ancient amber core, then teleport a level 4 everflower onto the center of the altar to enshrine it.
+\nIf the core is lost before the altar is complete, you can obtain another from a vivi federation trader.</VV_Letter_EndingAmberCoreGuide>
+<VV_Letter_EndingAmberCoreRedelivered>A drop pod carrying a new ancient amber core has landed near your colony. Someone who guards the legacy of the old empire is still watching over your hive.</VV_Letter_EndingAmberCoreRedelivered>
+
+<!-- Ending quest: siege -->
+<VV_Letter_EndingSiegeLabel>Pulse of dawn</VV_Letter_EndingSiegeLabel>
+<VV_Letter_EndingSiege>The everflower on the altar has entered its fifth bloom. A colossal pillar of mana rises from the awakened circuits, sending waves across the planet.
+\nThe everflower has now begun condensing mana for its final bloom, which will take about {DAYS} days.
+\nWhile the condensation continues, enemies drawn by the mana waves will relentlessly raid your colony. Defend the everflower altar until the final bloom is complete.</VV_Letter_EndingSiege>
+<VV_Letter_EndingSiegeFederation>The vivi federation, watching over the birth of a new empire, will send elite reinforcements to aid you from time to time.</VV_Letter_EndingSiegeFederation>
+
+<VV_Letter_EndingFederationAidLabel>Federation reinforcements</VV_Letter_EndingFederationAidLabel>
+<VV_Letter_EndingFederationAid>The vivi federation has dispatched {COUNT} elite warriors to defend the everflower altar. They will stay for a while to fight alongside you before returning home.</VV_Letter_EndingFederationAid>
+
+<!-- Ending quest: calm before the storm -->
+<VV_Letter_EndingCalmLabel>Calm before the storm</VV_Letter_EndingCalmLabel>
+<VV_Letter_EndingCalm>Just as the everflower neared its final bloom, the enemies swarming toward the altar abruptly stopped coming. Even the raging titanic hornet swarms vanished, as if afraid of something.
+\nAn ominous psychic wave is interfering with the roots of the everflower, halting the bloom condensation. Beyond {PAWN_labelShort}'s resonance link, a vast presence wrapped in the souls of countless kin can be felt approaching the warmth of the everflower.</VV_Letter_EndingCalm>
+<VV_Letter_EndingCalmGuide>Raids will stop for about {DAYS} days. Repair your defenses, tend to the wounded, and prepare for the final battle.</VV_Letter_EndingCalmGuide>
+
+<!-- Ending quest: Apocrypha -->
+<VV_Letter_EndingApocryphaLabel>Apocrypha, the Crumbled Queen</VV_Letter_EndingApocryphaLabel>
+<VV_Letter_EndingApocrypha>A colossal figure leading a swarm of titanic hornets has appeared. It is Apocrypha, the Crumbled Queen—the progenitor of all titanic hornets, mutated when her mind and psychic circuits collapsed as she tried to save billions of scaria-infected subjects on the day the old vivi empire fell.
+\nWeighed down by countless bound fairy vivis, Apocrypha wanders slowly, drawn by instinct toward the everflower altar. While she lives, bloom condensation is halted, and if she reaches the everflower and drains all of its power, the quest will fail.
+\nThe bound fairy vivis absorb every blow in her place, making ordinary attacks and stuns ineffective. Bind a vivi to a fairy bloom raised by Apocrypha to gain fairy interference, then approach Apocrypha to sever her bond. Destroy doom blooms before they blossom, or they will curse your colonists.</VV_Letter_EndingApocrypha>
+
+<!-- Ending quest: Apocrypha defeated, awaiting the coronation -->
+<VV_Letter_EndingCoronationLabel>The everflower awaits its queen</VV_Letter_EndingCoronationLabel>
+<VV_Letter_EndingCoronation>As Apocrypha's form scattered into dust, the blocked mana surged back into the altar all at once, bringing the bloom condensation to 100%.
+\nThe everflower now awaits a queen to lead its final bloom. When {PAWN_labelShort}, its resonator, performs the queen's coronation at the everflower, it will bloom in its complete form.
+\nThe pillar of mana no longer draws new raids, though the remaining titanic hornets are still targeting the colony.</VV_Letter_EndingCoronation>
+
+<!-- Ending quest: ending (the letter and the credits share the same text, in the style of the vanilla ending credits) -->
+<VV_Letter_EndingVictoryLabel>Empire of eternal spring</VV_Letter_EndingVictoryLabel>
+<VV_Letter_EndingVictoryContinue>You may keep playing in this colony and enjoy the power of the rank 6 everflower forever.</VV_Letter_EndingVictoryContinue>
+<VV_EndingCredits>{PAWN_nameDef} kneels before the everflower upon the altar. The mana pouring from the everflower gathers above {PAWN_possessive} head and settles there as a crown woven of golden petals.\n\nIn that moment, the great everflower bursts into full bloom with one final pulse. A warm golden wave sweeps across the land, and petals fall from the sky like rain. Every vivi of the hive feels the shackles of a short life lift away.\n\nCenturies after the fall of the old empire, the legendary great everflower has bloomed again. {PAWN_nameDef} has been crowned queen of the vivis.</VV_EndingCredits>
+<VV_EndingCreditsNoQueen>The mana pouring from the everflower gathers above the altar and settles there as a crown woven of golden petals.\n\nIn that moment, the great everflower bursts into full bloom with one final pulse. A warm golden wave sweeps across the land, and petals fall from the sky like rain. Every vivi of the hive feels the shackles of a short life lift away.\n\nCenturies after the fall of the old empire, the legendary great everflower has bloomed again.</VV_EndingCreditsNoQueen>
+<VV_EndingCreditsExiled>The royal vivi once cast out of her home for her tiny frame has now built the greatest hive of all, heir to the glory of the old empire.</VV_EndingCreditsExiled>
+<VV_EndingCreditsRefugee>The band of refugees who lost everything to the titanic hornets has raised a hive that no calamity will ever bring down.</VV_EndingCreditsRefugee>
+<VV_EndingCreditsOutro>The spring of the old empire begins anew here. And your story continues...</VV_EndingCreditsOutro>
+
+<!-- Ending quest: failure -->
+<VV_Letter_EndingFailureLabel>Everflower usurped</VV_Letter_EndingFailureLabel>
+<VV_Letter_EndingFailureStolen>Apocrypha has drained the everflower of all its power. Embracing the everflower she had lost, the old queen vanished without a trace.
+\nOnly the faded mana circuits remain upon the altar. The journey to reclaim the eternal spring has ended in failure.</VV_Letter_EndingFailureStolen>
+<VV_Letter_EndingFailureLostLabel>Everflower lost</VV_Letter_EndingFailureLostLabel>
+<VV_Letter_EndingFailureLost>The everflower on the verge of its final bloom has been lost. The condensed mana scattered with nowhere to go, and with it vanished the chance to revive the spring of the old empire.</VV_Letter_EndingFailureLost>
+
+<!-- Ending quest: messages -->
+<VV_Message_EndingApocryphaDeferred>The path from the map edge to the altar is blocked, preventing Apocrypha from appearing. Raids may resume until a path opens.</VV_Message_EndingApocryphaDeferred>
+<VV_Message_EndingPawnReturned>{PAWN_labelShort} has returned in front of the everflower altar.</VV_Message_EndingPawnReturned>
+
+<!-- Ending quest: bloom condensation gizmo / inspector -->
+<VV_Gizmo_EndingBloom>Bloom condensation</VV_Gizmo_EndingBloom>
+<VV_Gizmo_EndingBloomSiege>Under siege</VV_Gizmo_EndingBloomSiege>
+<VV_Gizmo_EndingBloomCalm>Ominous silence</VV_Gizmo_EndingBloomCalm>
+<VV_Gizmo_EndingBloomBlocked>Blocked by Apocrypha</VV_Gizmo_EndingBloomBlocked>
+<VV_Gizmo_EndingBloomCoronation>Awaiting coronation</VV_Gizmo_EndingBloomCoronation>
+<VV_Gizmo_EndingBloomDesc>The everflower is condensing mana for its sixth bloom. Once the condensation reaches 100%, the resonator can perform the queen's coronation to make the everflower bloom fully.</VV_Gizmo_EndingBloomDesc>
+<VV_Gizmo_EndingBloomDescSiege>Defend the altar from the enemies drawn by the mana pillar until the condensation is complete.</VV_Gizmo_EndingBloomDescSiege>
+<VV_Gizmo_EndingBloomDescCalm>The flow of the final bloom has stopped just before completion. Calm remaining: {TIME}</VV_Gizmo_EndingBloomDescCalm>
+<VV_Gizmo_EndingBloomDescBlocked>Apocrypha is blocking the condensation. Defeat her to complete the condensation at once.</VV_Gizmo_EndingBloomDescBlocked>
+<VV_Gizmo_EndingBloomDescCoronation>The condensation is complete. Have the resonator perform the queen's coronation at the everflower to make it bloom fully.</VV_Gizmo_EndingBloomDescCoronation>
+
+<VV_Inspector_EndingBloom>Bloom condensation: {PERCENT}</VV_Inspector_EndingBloom>
+<VV_Inspector_EndingSiege>Under siege: defend the altar until the bloom is complete.</VV_Inspector_EndingSiege>
+<VV_Inspector_EndingCalm>Calm remaining: {TIME}</VV_Inspector_EndingCalm>
+<VV_Inspector_EndingCalmDeferred>Apocrypha is searching for a way to the altar.</VV_Inspector_EndingCalmDeferred>
+<VV_Inspector_EndingBlocked>Apocrypha is blocking the condensation.</VV_Inspector_EndingBlocked>
+<VV_Inspector_EndingCoronation>Awaiting coronation: the everflower will bloom fully once the resonator performs the queen's coronation.</VV_Inspector_EndingCoronation>
+<VV_Inspector_EndingFullBloom>Full bloom</VV_Inspector_EndingFullBloom>
+
+<VV_Ending_ResonatorFallback>the resonator</VV_Ending_ResonatorFallback>
+
+</LanguageData>

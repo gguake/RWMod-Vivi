@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using System.Collections.Generic;
 using Verse;
 
@@ -48,10 +48,34 @@ namespace VVRace
             }
 
             var arcanePlantPot = map.GetComponent<ArcanePlantMapComponent>()?.GetArcanePlantPot(cell);
+
+            // 영원꽃 제단은 중앙 칸에 영원꽃 하나만 안치할 수 있다(파종·옮겨심기·무작위 성장·순간이동 모두 여기를 지난다).
+            if (arcanePlantPot is Building_DreamumAltar altar)
+            {
+                if (def != VVThingDefOf.VV_Everflower || cell != altar.Position)
+                {
+                    return new AcceptanceReport(LocalizeString_EndingAltar.VV_FailReason_AltarOnlyEverflowerCenter.Translate());
+                }
+
+                var enshrined = altar.EnshrinedEverflower;
+                if (enshrined != null && enshrined != currentThing)
+                {
+                    return new AcceptanceReport(LocalizeString_EndingAltar.VV_FailReason_AltarCenterOccupied.Translate());
+                }
+            }
+
             var blockingThings = map.thingGrid.ThingsListAtFast(cell);
             foreach (var thing in blockingThings)
             {
                 if (thing == currentThing || thing == arcanePlantPot) { continue; }
+
+                // 영원꽃 제단 청사진·틀 위에는 마법 식물을 둘 수 없다(틀이 놓일 때 발판의 식물을 해체해 버린다).
+                // 영원꽃은 제단을 완공한 뒤 순간이동으로만 안치한다.
+                if ((thing.def.IsBlueprint || thing.def.IsFrame) && thing.def.entityDefToBuild is ThingDef builtDef
+                    && builtDef.thingClass != null && typeof(Building_DreamumAltar).IsAssignableFrom(builtDef.thingClass))
+                {
+                    return new AcceptanceReport(LocalizeString_EndingAltar.VV_FailReason_AltarUnderConstruction.Translate());
+                }
 
                 if (thing.def.category == ThingCategory.Building && thing.def.IsEdifice())
                 {

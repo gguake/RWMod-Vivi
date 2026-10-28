@@ -14,6 +14,10 @@
       <PreceptDef>VV_Fairyfication</PreceptDef>
       <PreceptDef>VV_Defairyfication</PreceptDef>
       <PreceptDef>VV_Manawave</PreceptDef>
+      <PreceptDef>VV_GrandAttunement</PreceptDef>
+      <PreceptDef>VV_ReturnOfLife</PreceptDef>
+      <PreceptDef>VV_QueensCoronation</PreceptDef>
+      <ThingDef>VV_DreamumAltar</ThingDef>
     </descriptionHyperlinks>
 
     <category>Building</category>
@@ -23,6 +27,8 @@
 
     <drawerType>RealtimeOnly</drawerType>
     <altitudeLayer>Pawn</altitudeLayer>
+    <!-- 4~6단계 그래픽은 1x1 칸보다 훨씬 커서 화면 가장자리에서 컬링되면 갑자기 사라지므로 항상 그린다. -->
+    <drawOffscreen>true</drawOffscreen>
     <graphicData>
       <texPath>Things/Plants/VV_Everflower</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -94,6 +100,8 @@
             <li>400~3200</li>
             <li>800~4800</li>
             <li>1600~6400</li>
+            <li>3200~9600</li>
+            <li>6400~12800</li>
           </ranges>
         </manaGenerateRule>
       </li>
@@ -186,12 +194,29 @@
               <drawOffset>(0, 0.2, 4.3)</drawOffset>
               <renderQueue>2901</renderQueue>
           </li>
+          <!-- 5/6단계(제단 밖): 제단 그래픽과 같은 텍스처·크기에 줄기 밑동이 칸 중심에 오도록 z +0.9 -->
+          <li>
+              <texPath>Things/Plants/VV_Everflower/VV_DreamumAltarFlower_e</texPath>
+              <graphicClass>Graphic_Single</graphicClass>
+              <drawSize>(4.248, 7.324)</drawSize>
+              <drawOffset>(-0.330, 0.2, 3.437)</drawOffset>
+              <renderQueue>2901</renderQueue>
+          </li>
+          <li>
+              <texPath>Things/Plants/VV_Everflower/VV_DreamumAltarFlower_f</texPath>
+              <graphicClass>Graphic_Single</graphicClass>
+              <drawSize>(6.059, 9.926)</drawSize>
+              <drawOffset>(-0.032, 0.2, 4.772)</drawOffset>
+              <renderQueue>2901</renderQueue>
+          </li>
         </graphicsByLevel>
         <effectsOnLevelAcquire>
           <li>VV_EverflowerGrow_1_Level</li>
           <li>VV_EverflowerGrow_2_Level</li>
           <li>VV_EverflowerGrow_3_Level</li>
           <li>VV_EverflowerGrow_4_Level</li>
+          <li>VV_EverflowerGrow_5_Level</li>
+          <li>VV_EverflowerGrow_6_Level</li>
         </effectsOnLevelAcquire>
 
         <!-- 의식 완료 이펙트(꽃잎 분출 등) 생성 위치. 각 단계 텍스처의 꽃봉오리 중심에 맞춰 세팅. -->
@@ -201,7 +226,46 @@
           <li>(0, 0.2, 2.3)</li>  <!-- Lv2: VV_EverflowerB, drawSize 6 -->
           <li>(0, 0.2, 3.0)</li>  <!-- Lv3: VV_EverflowerC, drawSize 6 -->
           <li>(0, 0.2, 5.9)</li>  <!-- Lv4: VV_EverflowerD, drawSize 6x12 -->
+          <li>(-0.31, 0.2, 5.28)</li>  <!-- Lv5: VV_DreamumAltarFlower_e(제단 밖) -->
+          <li>(-0.32, 0.2, 7.42)</li>  <!-- Lv6: VV_DreamumAltarFlower_f(제단 밖) -->
         </ritualEffecterOffsetByLevel>
+
+        <!-- 영원꽃 제단에 안치된 동안의 그래픽. 제단 중심(= 영원꽃 칸)에서 줄기 밑동이 제단 코어에 오도록 맞춘 값 -->
+        <altarGraphics>
+          <li>
+            <minLevel>4</minLevel>
+            <graphicData>
+              <texPath>Things/Plants/VV_Everflower/VV_DreamumAltarFlower_d</texPath>
+              <graphicClass>Graphic_Single</graphicClass>
+              <drawSize>(3.652, 6.475)</drawSize>
+              <drawOffset>(-0.033, 0.2, 2.083)</drawOffset>
+              <renderQueue>2901</renderQueue>
+            </graphicData>
+            <ritualEffecterOffset>(-0.12, 0.2, 3.48)</ritualEffecterOffset>
+          </li>
+          <li>
+            <minLevel>5</minLevel>
+            <graphicData>
+              <texPath>Things/Plants/VV_Everflower/VV_DreamumAltarFlower_e</texPath>
+              <graphicClass>Graphic_Single</graphicClass>
+              <drawSize>(4.248, 7.324)</drawSize>
+              <drawOffset>(-0.330, 0.2, 2.537)</drawOffset>
+              <renderQueue>2901</renderQueue>
+            </graphicData>
+            <ritualEffecterOffset>(-0.31, 0.2, 4.38)</ritualEffecterOffset>
+          </li>
+          <li>
+            <minLevel>6</minLevel>
+            <graphicData>
+              <texPath>Things/Plants/VV_Everflower/VV_DreamumAltarFlower_f</texPath>
+              <graphicClass>Graphic_Single</graphicClass>
+              <drawSize>(6.059, 9.926)</drawSize>
+              <drawOffset>(-0.032, 0.2, 3.872)</drawOffset>
+              <renderQueue>2901</renderQueue>
+            </graphicData>
+            <ritualEffecterOffset>(-0.32, 0.2, 6.52)</ritualEffecterOffset>
+          </li>
+        </altarGraphics>
       </li>
     </comps>
 

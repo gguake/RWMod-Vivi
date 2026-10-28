@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 요정꽃과 결속: 다가가 180틱 교감 후 요정 간섭 획득 (징집 여부와 무관하게 우클릭 메뉴로 지시) -->
+  <JobDef>
+    <defName>VV_BondFairyFlower</defName>
+    <driverClass>VVRace.JobDriver_BondFairyFlower</driverClass>
+    <reportString>bonding with TargetA.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
+</Defs>

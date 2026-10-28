@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+<VV_Apocrypha.label>바스러진 여왕, 아포크리파</VV_Apocrypha.label>
+<VV_Apocrypha.description>모든 거대 말벌의 시조이자 옛 비비 제국을 멸망에 이르게 한 재앙입니다.
+\n제국이 무너지던 날, 마지막 여왕은 스카리아에 감염된 수십억의 백성을 구하기 위해 그들 모두를 요정화하여 자신의 영혼에 귀속시켰습니다. 그러나 천문학적인 영혼의 무게와 과부하된 마나, 스카리아를 이기지 못한 여왕은 끝내 자아를 잃고 거대한 괴물로 변이했습니다.
+\n오랜 휴면 끝에 영원꽃의 파동을 느끼고 깨어난 아포크리파는 본능에 이끌려 제단으로 향합니다. 결속된 요정 비비들이 남아 있는 동안에는 모든 공격을 요정들이 대신 받아내며, 모든 결속이 풀리면 구속에서 벗어나 본래의 거대한 모습을 드러냅니다.</VV_Apocrypha.description>
+<VV_Apocrypha.tools.left_claw.label>왼쪽 발톱</VV_Apocrypha.tools.left_claw.label>
+<VV_Apocrypha.tools.right_claw.label>오른쪽 발톱</VV_Apocrypha.tools.right_claw.label>
+<VV_Apocrypha.tools.jaw.label>턱</VV_Apocrypha.tools.jaw.label>
+
+<VV_DyingApocrypha.label>바스러지는 아포크리파</VV_DyingApocrypha.label>
+
+</LanguageData>

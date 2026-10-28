@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+<VV_GrandAttunement.description>의식 결과가 좋을수록 마지막 개화까지 걸리는 응축 기간이 단축됩니다(8~10일).
+\n경고: 의식을 완료하면 개화 응축이 끝날 때까지 거대한 마나 파동에 이끌린 적들이 정착지를 끊임없이 습격합니다.
+\n모든 영원꽃 의식의 재사용 대기시간은 공유됩니다.</VV_GrandAttunement.description>
+<VV_GrandAttunement.comps.0.label>{PAWN_labelShort}의 정신 감응력</VV_GrandAttunement.comps.0.label>
+<VV_GrandAttunement.comps.0.labelAbstract>공명자의 정신 감응력</VV_GrandAttunement.comps.0.labelAbstract>
+<VV_GrandAttunement.comps.1.label>참여자 수</VV_GrandAttunement.comps.1.label>
+
+<VV_ReturnOfLife.description>무작위 유전자 4~6개와 초월 유전자 1개를 지닌 고대의 성체 비비가 정착지에 합류합니다. 의식 결과가 좋을수록 다음 영원꽃 의식의 재사용 대기시간이 줄어듭니다.
+\n모든 영원꽃 의식의 재사용 대기시간은 공유됩니다.</VV_ReturnOfLife.description>
+<VV_ReturnOfLife.comps.0.label>{PAWN_labelShort}의 정신 감응력</VV_ReturnOfLife.comps.0.label>
+<VV_ReturnOfLife.comps.0.labelAbstract>공명자의 정신 감응력</VV_ReturnOfLife.comps.0.labelAbstract>
+<VV_ReturnOfLife.comps.1.label>참여자 수</VV_ReturnOfLife.comps.1.label>
+
+<VV_QueensCoronation.description>의식 결과와 관계없이 공명자가 여왕으로 즉위하고, 영원꽃이 6단계로 완전히 개화하며 곧이어 엔딩 크레딧이 이어집니다.
+\n이 의식은 영원꽃 의식의 재사용 대기시간을 무시합니다.</VV_QueensCoronation.description>
+<VV_QueensCoronation.comps.0.label>{PAWN_labelShort}의 정신 감응력</VV_QueensCoronation.comps.0.label>
+<VV_QueensCoronation.comps.0.labelAbstract>공명자의 정신 감응력</VV_QueensCoronation.comps.0.labelAbstract>
+<VV_QueensCoronation.comps.1.label>참여자 수</VV_QueensCoronation.comps.1.label>
+</LanguageData>

@@ -16,7 +16,8 @@ namespace VVRace
 
         public override void OnIntervalPassed(Pawn pawn, Hediff cause)
         {
-            if (pawn.Dead || !pawn.IsNestedHashIntervalTick(60, CheckInterval))
+            // 〈영원꽃의 축복〉을 받은 비비는 유전자 불안정에 걸리지 않는다.
+            if (pawn.Dead || !pawn.IsNestedHashIntervalTick(60, CheckInterval) || EverflowerBlessingUtility.IsBlessed(pawn))
             {
                 return;
             }
