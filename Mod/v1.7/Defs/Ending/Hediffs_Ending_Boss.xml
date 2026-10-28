@@ -4,8 +4,8 @@
   <HediffDef>
     <defName>VV_ApocryphaFairyBond</defName>
     <label>vivi fairy</label>
-    <description>The souls of billions of vivis forcibly bound to the last queen of the ancient empire surround Apocrypha. Because the bound fairy vivis absorb every blow in her place, ordinary attacks cannot harm her.
-\nA vivi with fairy interference can approach Apocrypha to trigger a mana backflow in the bond network, freeing a large number of fairies at once.</description>
+    <description>The souls of 1,440,000,000 vivis, forcibly fairyfied and bound to the last queen of the ancient empire, are wrapped around Apocrypha like armor. The bound fairies take every blow in her place, so ordinary attacks cannot harm her.
+\nA vivi carrying the interference of a fairy bloom can draw close and cause a mana backflow in this bond network, releasing a vast number of fairies at once.</description>
     <hediffClass>VVRace.Hediff_ApocryphaFairyBond</hediffClass>
     <defaultLabelColor>(0, 1, 1)</defaultLabelColor>
     <isBad>false</isBad>
@@ -20,8 +20,8 @@
   <HediffDef>
     <defName>VV_ApocryphaCarapace</defName>
     <label>primordial carapace</label>
-    <description>The carapace of the progenitor hornet, hardened by mana condensed over centuries. Reduces incoming damage by 99%.
-\nEach completed everflower attunement ritual unleashes a resonance wave that cracks the carapace and progressively weakens its damage reduction.</description>
+    <description>Freed from the weight of billions of souls, the body of the progenitor hornet is sheathed in a carapace condensed over centuries. It reduces all incoming damage by 99%.
+\nEvery resonance wave released by an everflower attunement ritual stuns Apocrypha and cracks the carapace further, lowering the reduction to 50%, 30%, 15%, 5% and finally nothing.</description>
     <hediffClass>VVRace.Hediff_ApocryphaCarapace</hediffClass>
     <defaultLabelColor>(1, 0.42, 0.85)</defaultLabelColor>
     <isBad>false</isBad>

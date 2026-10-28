@@ -5,7 +5,7 @@
     <defName>VV_AncientAltarRestoration</defName>
     <label>ancient altar restoration</label>
     <description>Restore the everflower altar of the old vivi empire. Only on this ancient altar engraved with mana circuits can an everflower bloom beyond its fourth attunement rank.
-\nAvailable after receiving the missive from the vivi federation. Building the altar requires an ancient amber core.</description>
+\nThis research can only be started after receiving the missive from the vivi federation, which arrives some time after one of your everflowers reaches the fourth attunement rank. Building the altar requires an ancient amber core.</description>
     <baseCost>3000</baseCost>
     <techLevel>Medieval</techLevel>
     <researchViewX>4</researchViewX>

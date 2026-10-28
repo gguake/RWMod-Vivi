@@ -4,9 +4,9 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VV_DreamumAltar</defName>
     <label>everflower altar</label>
-    <description>A grand altar restored from the designs of the ancient vivi empire. Its central amber core and mana circuits draw mana from the earth, sustaining an everflower so it can grow beyond its limits.
-\nAn everflower of attunement level 4 or higher can be teleported onto the center of the altar to be enshrined. Teleporting to the altar ignores the usual distance limit, and an enshrined everflower cannot be moved again.
-\nThe altar cannot be destroyed by attacks, and only one can be built on each map.</description>
+    <description>An altar of the old vivi empire, restored from its ancient design. Hexagonal pillars of stone and wood surround a ring of glowing green mana circuits, and at its heart rests a great golden crystal of ancient amber.
+\nAn everflower of the fourth attunement rank or higher can be enshrined at the center of the altar by teleporting it there, regardless of the usual teleport distance. Legends say the colossal everflowers of the old empire revealed their true form only on altars like this one. Once enshrined, the everflower never leaves the altar again.
+\nThe altar cannot be damaged by attacks, and it cannot be deconstructed while an everflower is enshrined on it. Pawns can step onto the altar, but walking across it is slow. Only one altar can be built on each map.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_Everflower</ThingDef>
       <ThingDef>VV_AncientAmberCore</ThingDef>
@@ -86,8 +86,8 @@
   <ThingDef ParentName="ResourceBase">
     <defName>VV_AncientAmberCore</defName>
     <label>ancient amber core</label>
-    <description>A great amber crystal once set at the heart of an everflower altar in the ancient vivi empire. Engraved inside with ancient mana circuits, it gives off a faint, warm glow.
-\nA core relic required to restore an everflower altar. Since the fall of the empire, the vivi federation has preserved only a few.</description>
+    <description>A great crystal of golden amber that once lay at the heart of an everflower altar of the old vivi empire. Ancient mana circuits are still engraved deep inside it, and it gives off a faint, warm glow.
+\nIt is the core relic needed to restore an everflower altar. Since the fall of the empire, the vivi federation has kept only a few of them.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_DreamumAltar</ThingDef>
     </descriptionHyperlinks>

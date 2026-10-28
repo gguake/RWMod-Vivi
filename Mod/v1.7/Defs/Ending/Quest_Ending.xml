@@ -7,7 +7,7 @@
     <defName>VV_OminousSilence</defName>
     <conditionClass>GameCondition</conditionClass>
     <label>ominous silence</label>
-    <description>An enormous psychic wave of unknown origin is interfering with the roots of the everflower, halting the bloom condensation. The enemies swarming toward the altar have stopped coming, but something vast and ominous is approaching the everflower.</description>
+    <description>An enormous psychic wave of unknown origin is interfering with the roots of the everflower, and the flow of its final bloom has come to a halt. The enemies that were swarming toward the altar have suddenly stopped coming, but something vast and hollow is crawling toward the warmth of the everflower.</description>
     <natural>false</natural>
     <displayOnUI>true</displayOnUI>
     <preventIncidents>false</preventIncidents>

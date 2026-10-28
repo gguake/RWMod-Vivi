@@ -60,9 +60,10 @@
   <ThingDef ParentName="AnimalThingBase">
     <defName>VV_Apocrypha</defName>
     <label>Apocrypha, the Crumbled Queen</label>
-    <description>The progenitor of every titanic hornet, and the calamity that brought down the ancient vivi empire.
-\nOn the day the empire fell, its last queen fairyfied billions of her scaria-stricken people and bound their souls to her own to save them. Overwhelmed by the astronomical weight of their souls, overloaded mana, and scaria, she lost her mind and mutated into this monstrous form.
-\nAwakened from her long slumber by the waves of the everflower, Apocrypha is drawn by instinct toward the altar. While bound fairy vivis remain, they absorb every blow in her place; once all bonds are released, she breaks free and reveals her true colossal form.</description>
+    <description>The progenitor of every titanic hornet, and the calamity that ended the ancient vivi empire.
+\nOn the day the empire fell, its last queen forcibly fairyfied 1,440,000,000 of her scaria-stricken people at once and bound their souls to her own to save them. Under the weight of billions of souls, overloaded mana and mutated scaria, her mind shattered. She lost every trace of psychic sensitivity, her genes ran wild, and she became this crumbled queen, sleeping for centuries deep in the ruins with the souls of her people wrapped around her like armor.
+\nDrawn by the warmth of a reawakened everflower, she now creeps toward the altar to reclaim the bloom she lost. While the vivi fairy bond holds, the bound fairies absorb every blow she receives. Once released, her true form is a monstrous hornet queen guarded only by her primordial carapace.
+\nOrdinary stuns do not work on her. Only the mana wave ritual, a released fairy bond and the resonance wave of the attunement ritual can stun her.</description>
     <drawOffscreen>true</drawOffscreen>
     <statBases>
       <MoveSpeed>1.5</MoveSpeed>
