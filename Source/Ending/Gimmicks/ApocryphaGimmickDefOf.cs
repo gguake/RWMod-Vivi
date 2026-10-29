@@ -16,11 +16,9 @@ namespace VVRace
         public static ThingDef VV_FairyFlower;
 
         public static HediffDef VV_FairyInterference;
+        public static HediffDef VV_DoomBlight_Fear;
         public static HediffDef VV_DoomBlight_Hunger;
-        public static HediffDef VV_DoomBlight_Fatigue;
-        public static HediffDef VV_DoomBlight_Pain;
-        public static HediffDef VV_DoomBlight_Mind;
-        public static HediffDef VV_DoomBlight_Toxin;
+        public static HediffDef VV_DoomBlight_Plague;
 
         public static JobDef VV_BondFairyFlower;
 

@@ -34,16 +34,15 @@ namespace VVRace
         // 1페이즈: 포격 사거리 안 시야에 들어온 적을 감지하면 호위 말벌이 이 시간 동안 그 적을 노린다(계속 보이면 연장).
         public int escortFocusTicks = 600;
 
-        // 1페이즈: 멸망꽃/요정꽃 씨앗. 멸망꽃 씨앗은 한 번에 여러 개를 흩뿌리며, 사출 2회마다 1개씩 늘어난다(최대 10개).
-        // 요정꽃은 따로 쏘지 않는다: 요정꽃 사출 주기가 되면 다음 멸망꽃 사출의 씨앗 하나가 요정꽃 씨앗으로 바뀐다.
+        // 1페이즈: 멸망꽃/요정꽃 씨앗. 멸망꽃 씨앗은 한 번에 여러 개를 흩뿌리며, 3개에서 시작해 사출 2회마다 1개씩 늘어난다(3/3/4/4/5…, 최대 10개).
+        // 요정꽃은 따로 쏘지 않는다: 멸망꽃 사출 fairySeedEveryVolleys회마다 그 사출에 요정꽃 씨앗 1개가 더해진다.
         public int firstDoomSeedDelayTicks = 1500;
         public IntRange doomSeedIntervalTicks = new IntRange(6000, 9000);
-        public int doomSeedVolleyStart = 2;
+        public int doomSeedVolleyStart = 3;
         public int doomSeedVolleyGrowthEvery = 2;
         public int doomSeedVolleyMax = 10;
         public int maxDoomFlowers = 30;
-        public int doomSeedsBeforeFairySeed = 6;
-        public IntRange fairySeedIntervalTicks = new IntRange(7500, 10000);
+        public int fairySeedEveryVolleys = 3;
         public int maxFairyFlowers = 2;
 
         // 1페이즈: 배회와 주기적 접근
@@ -148,8 +147,6 @@ namespace VVRace
         private IntVec3 _breathCell = IntVec3.Invalid;
         private int _breathEndTick = -1;
         private int _nextDoomSeedTick = -1;
-        private int _nextFairySeedTick = -1;
-        private int _doomSeedsLaunched;
         private int _doomVolleysLaunched;
         private int _nextApproachTick;
         private int _nextEdgeHornetTick;
@@ -204,11 +201,11 @@ namespace VVRace
 
         public int DoomVolleysLaunched => _doomVolleysLaunched;
 
-        // 다음 멸망꽃 사출의 씨앗 수: 처음 doomSeedVolleyStart개에서 사출 doomSeedVolleyGrowthEvery회마다 1개씩 늘어난다(최대 doomSeedVolleyMax개).
+        // 다음 멸망꽃 사출의 멸망꽃 씨앗 수: 처음 doomSeedVolleyStart개에서 사출 doomSeedVolleyGrowthEvery회마다 1개씩 늘어난다(최대 doomSeedVolleyMax개).
         public int DoomSeedVolleySize => Mathf.Min(Props.doomSeedVolleyMax, Props.doomSeedVolleyStart + _doomVolleysLaunched / Mathf.Max(1, Props.doomSeedVolleyGrowthEvery));
 
-        // 요정꽃 사출 주기가 되어 다음 멸망꽃 사출에서 씨앗 하나가 요정꽃 씨앗으로 바뀌는지.
-        public bool FairySeedDue => _nextFairySeedTick >= 0 && GenTicks.TicksGame >= _nextFairySeedTick;
+        // 다음 멸망꽃 사출이 요정꽃 씨앗 1개를 더하는 차례(fairySeedEveryVolleys번째, 그 배수 번째 사출)인지.
+        public bool FairySeedDue => Props.fairySeedEveryVolleys > 0 && (_doomVolleysLaunched + 1) % Props.fairySeedEveryVolleys == 0;
 
         public bool IsActive => _phase == ApocryphaPhase.Bound || _phase == ApocryphaPhase.Unbound;
 
@@ -279,8 +276,6 @@ namespace VVRace
             _resonanceStacks = 0;
 
             _nextDoomSeedTick = now + Props.firstDoomSeedDelayTicks;
-            _nextFairySeedTick = -1;
-            _doomSeedsLaunched = 0;
             _nextApproachTick = now + Props.approachIntervalTicks.RandomInRange;
             _nextEdgeHornetTick = now + Props.edgeHornetIntervalTicks;
 
@@ -338,8 +333,6 @@ namespace VVRace
             Scribe_Values.Look(ref _breathCell, "breathCell", IntVec3.Invalid);
             Scribe_Values.Look(ref _breathEndTick, "breathEndTick", -1);
             Scribe_Values.Look(ref _nextDoomSeedTick, "nextDoomSeedTick", -1);
-            Scribe_Values.Look(ref _nextFairySeedTick, "nextFairySeedTick", -1);
-            Scribe_Values.Look(ref _doomSeedsLaunched, "doomSeedsLaunched", 0);
             Scribe_Values.Look(ref _doomVolleysLaunched, "doomVolleysLaunched", 0);
             Scribe_Values.Look(ref _nextApproachTick, "nextApproachTick", 0);
             Scribe_Values.Look(ref _nextMeleeTick, "nextMeleeTick", 0);
@@ -473,29 +466,17 @@ namespace VVRace
             _edgeHornets.AddRange(ApocryphaUtility.SpawnFlowerGuardHornets(Pawn, Mathf.Min(room, Props.edgeHornetGroupSize.RandomInRange)));
         }
 
-        // 멸망꽃 사출 차례마다 DoomSeedVolleySize개의 씨앗을 흩뿌린다. 요정꽃 사출 주기가 되어 있으면 그중 하나가 요정꽃 씨앗이 된다.
+        // 멸망꽃 사출 차례마다 DoomSeedVolleySize개의 멸망꽃 씨앗을 흩뿌리고, 요정꽃 차례(FairySeedDue)면 요정꽃 씨앗 1개를 더한다.
+        // 요정꽃 차례에 요정꽃이 이미 최대 개수면 그 차례의 요정꽃은 건너뛴다(다음 차례는 다시 fairySeedEveryVolleys회 뒤).
         private void TickSeeds(int now)
         {
-            // 요정꽃 사출 주기는 멸망꽃 씨앗을 일정 수 흩뿌린 뒤부터 돈다.
-            if (_nextFairySeedTick < 0 && _doomSeedsLaunched >= Props.doomSeedsBeforeFairySeed)
-            {
-                _nextFairySeedTick = now + Props.fairySeedIntervalTicks.RandomInRange;
-            }
-
             if (_nextDoomSeedTick < 0 || now < _nextDoomSeedTick) { return; }
 
             ApocryphaGimmicks.TryLaunchSeedVolley(Pawn, DoomSeedVolleySize, FairySeedDue, out var doomLaunched, out var fairyLaunched);
             if (doomLaunched + fairyLaunched > 0)
             {
-                _doomSeedsLaunched += doomLaunched;
                 _doomVolleysLaunched++;
                 _nextDoomSeedTick = now + Props.doomSeedIntervalTicks.RandomInRange;
-
-                // 요정꽃이 이미 최대 개수라 바꾸지 못했으면 요정꽃 차례는 다음 사출로 넘어간다.
-                if (fairyLaunched > 0)
-                {
-                    _nextFairySeedTick = now + Props.fairySeedIntervalTicks.RandomInRange;
-                }
             }
             else
             {
@@ -506,7 +487,7 @@ namespace VVRace
 
         // 포격 사거리 안 시야에 들어온 적을 감지하면 경호 중인 말벌의 공격 대상을 그 적으로 바꾼다.
         // 이미 노리게 한 적이 계속 보이면 대상을 바꾸지 않고 시간만 늘린다(가장 가까운 적이 바뀔 때마다 말벌이 오가지 않게).
-        // 단, 포탑은 보이는 플레이어 폰이 없을 때만 노리므로 포탑을 노리던 중 폰이 보이면 대상을 다시 고른다.
+        // 단, 포탑은 보이는 적 폰이 없을 때만 노리므로 포탑을 노리던 중 폰이 보이면 대상을 다시 고른다.
         private void TickEnemyDetection()
         {
             if (!parent.IsHashIntervalTick(EnemyDetectInterval)) { return; }
@@ -591,7 +572,8 @@ namespace VVRace
             _aimSustainer = null;
         }
 
-        // 헬스피어 캐논식 금빛 조준 경고: 조준마다 대상 칸의 표적 모트·불꽃과 보스 머리의 충전광, 그리고 조준이 하나라도 있는 동안의 지속음.
+        // 금빛 마법진 조준 경고: 조준마다 대상 칸의 표적 마법진(폭발 범위, 발사 시점을 알리는 좁혀 드는 고리)·꽃잎과 반짝임, 보스 몸통 앞의 시전 마법진,
+        // 그리고 조준이 하나라도 있는 동안의 지속음.
         // 모트·이펙터는 저장되지 않으므로 불러온 뒤에는 처음 틱에 다시 만든다.
         private void TickAimVisuals()
         {
@@ -607,7 +589,7 @@ namespace VVRace
             var bodyCenter = BodyCenter;
             for (int i = 0; i < _shellAims.Count; i++)
             {
-                _shellAims[i].TickVisuals(Pawn, map, bodyCenter);
+                _shellAims[i].TickVisuals(Pawn, map, bodyCenter, Props.shellAimTicks);
             }
 
             if (_aimSustainer == null)
@@ -619,7 +601,7 @@ namespace VVRace
             _aimSustainer.EffectTick(bossTarget, bossTarget);
         }
 
-        // 반경 20 안 시야에 들어온 플레이어 세력 폰을 우선 노리고, 없으면 플레이어 포탑을 노린다.
+        // 반경 20 안 시야에 들어온 적 폰을 우선 노리고, 없으면 적 포탑을 노린다(대상 조건은 IsShellTargetSide).
         // 이미 조준 중인 칸 근처의 대상은 다른 대상이 없을 때만 다시 고른다(포격이 한 곳에 몰리지 않게).
         private bool TryFindShellTarget(out IntVec3 cell)
         {
@@ -672,40 +654,53 @@ namespace VVRace
             return best;
         }
 
-        // 포격·감지 대상: 반경 20 안 시야에 들어온 플레이어 세력 폰. 폰이 하나도 없을 때만 플레이어 포탑.
+        // 포격·감지 대상: 반경 20 안 시야에 들어온 적 폰(플레이어 세력과 다른 적대 세력). 폰이 하나도 없을 때만 적 포탑.
         private void CollectShellTargets(List<Thing> outTargets)
         {
             outTargets.Clear();
 
             var map = parent.Map;
-            foreach (var target in map.mapPawns.SpawnedPawnsInFaction(Faction.OfPlayer))
+            var pawns = map.mapPawns.AllPawnsSpawned;
+            for (int i = 0; i < pawns.Count; i++)
             {
-                if (IsShellTargetPawn(target))
+                if (IsShellTargetPawn(pawns[i]))
                 {
-                    outTargets.Add(target);
+                    outTargets.Add(pawns[i]);
                 }
             }
 
             if (outTargets.Count > 0) { return; }
 
-            foreach (var building in map.listerBuildings.allBuildingsColonist)
+            var attackTargets = map.listerThings.ThingsInGroup(ThingRequestGroup.AttackTarget);
+            for (int i = 0; i < attackTargets.Count; i++)
             {
-                if (IsShellTargetTurret(building))
+                if (!(attackTargets[i] is Pawn) && IsShellTargetTurret(attackTargets[i]))
                 {
-                    outTargets.Add(building);
+                    outTargets.Add(attackTargets[i]);
                 }
             }
         }
 
-        // 반경 20 안 시야에 플레이어 세력 폰이 하나라도 있는지.
+        // 반경 20 안 시야에 적 폰이 하나라도 있는지.
         private bool AnyShellTargetPawn()
         {
-            foreach (var target in parent.Map.mapPawns.SpawnedPawnsInFaction(Faction.OfPlayer))
+            var pawns = parent.Map.mapPawns.AllPawnsSpawned;
+            for (int i = 0; i < pawns.Count; i++)
             {
-                if (IsShellTargetPawn(target)) { return true; }
+                if (IsShellTargetPawn(pawns[i])) { return true; }
             }
 
             return false;
+        }
+
+        // 포격할 편: 보스에게 적대적이면서 플레이어 세력이거나 플레이어에게도 적대적인 것(다른 세력의 습격자·기계체, 광포한 동물 등).
+        // 보스(곤충 세력)는 모든 세력과 적대이므로 플레이어와 우호·중립인 상인·손님·지원군은 따로 빼고,
+        // 플레이어의 포로도 플레이어에게 적대가 아니므로 빠진다. 같은 세력의 곤충·말벌은 보스와 적대가 아니라 빠진다.
+        private bool IsShellTargetSide(Thing target)
+        {
+            if (!Pawn.HostileTo(target)) { return false; }
+
+            return target.Faction == Faction.OfPlayer || target.HostileTo(Faction.OfPlayer);
         }
 
         private bool IsShellTarget(Thing thing)
@@ -715,19 +710,22 @@ namespace VVRace
             return thing is Pawn pawn ? IsShellTargetPawn(pawn) : IsShellTargetTurret(thing);
         }
 
+        // 싼 검사부터: 상태 → 거리 → 적대 여부 → 시야
         private bool IsShellTargetPawn(Pawn target)
         {
-            if (target.Faction != Faction.OfPlayer || target.Dead || target.Downed || target.IsPsychologicallyInvisible()) { return false; }
+            if (target == parent || target.Dead || target.Downed || target.IsPsychologicallyInvisible()) { return false; }
             if ((target.Position - parent.Position).LengthHorizontalSquared > Props.shellRange * Props.shellRange) { return false; }
+            if (!IsShellTargetSide(target)) { return false; }
 
             return GenSight.LineOfSight(parent.Position, target.Position, parent.Map, skipFirstCell: true);
         }
 
         private bool IsShellTargetTurret(Thing building)
         {
-            if (building.Faction != Faction.OfPlayer || building.Destroyed) { return false; }
+            if (building.Destroyed) { return false; }
             if (!(building is Building_Turret) && !(building is ArcanePlant_Turret)) { return false; }
             if ((building.Position - parent.Position).LengthHorizontalSquared > Props.shellRange * Props.shellRange) { return false; }
+            if (!IsShellTargetSide(building)) { return false; }
 
             return GenSight.LineOfSightToThing(parent.Position, building, parent.Map, skipFirstCell: true);
         }
@@ -1611,13 +1609,8 @@ namespace VVRace
             yield return DevCommand("DEV: Shell ready now", () => _shellReadyTick = 0);
             yield return DevCommand("DEV: Doom seed now", () => _nextDoomSeedTick = 0);
 
-            // 요정꽃 사출 주기를 당긴 뒤 바로 멸망꽃을 사출한다(씨앗 하나가 요정꽃 씨앗으로 바뀐다).
-            yield return DevCommand("DEV: Fairy seed now", () =>
-            {
-                _doomSeedsLaunched = Mathf.Max(_doomSeedsLaunched, Props.doomSeedsBeforeFairySeed);
-                _nextFairySeedTick = 0;
-                _nextDoomSeedTick = 0;
-            });
+            // 사출 차례와 상관없이 요정꽃 씨앗만 하나 쏜다.
+            yield return DevCommand("DEV: Fairy seed now", () => ApocryphaGimmicks.TryLaunchFairySeed(Pawn));
 
             yield return DevCommand("DEV: Flower guard hornets", () => _edgeHornets.AddRange(ApocryphaUtility.SpawnFlowerGuardHornets(Pawn, Props.edgeHornetGroupSize.max)));
             yield return DevCommand("DEV: Breath ready now", () => _breathReadyTick = 0);

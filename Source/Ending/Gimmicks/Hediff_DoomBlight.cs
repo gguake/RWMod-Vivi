@@ -2,10 +2,9 @@
 
 namespace VVRace
 {
-    // 멸망꽃 저주 헤디프(허기/피로/고통/정신 4종 + 보이지 않는 중독 표식).
+    // 멸망꽃 저주 헤디프(공포/허기/역병 3종).
     // 보통은 결속 해방(ClearDoomBlights)이나 엔딩 정리(CleanupAll)가 맵의 정착민에게서 제거하지만,
     // 그때 맵 밖(캐러밴 등)에 있던 정착민의 저주는 엔딩이 끝난 뒤(완료/실패) 스스로 사라지고, 죽은 정착민의 저주는 죽는 순간 사라진다.
-    // 중독 표식은 어느 경로로 사라지든 멸망꽃이 더했던 독성 축적을 함께 되돌린다.
     public class Hediff_DoomBlight : HediffWithComps
     {
         // ShouldRemove는 매 틱 모든 헤디프에 대해 불리므로 엔딩 종료 여부는 틱당 한 번만 계산한다.
@@ -33,16 +32,6 @@ namespace VVRace
         }
 
         public override bool ShouldRemove => base.ShouldRemove || EndingFinished;
-
-        public override void PostRemoved()
-        {
-            base.PostRemoved();
-
-            if (def == ApocryphaGimmickDefOf.VV_DoomBlight_Toxin)
-            {
-                DoomBlightUtility.RevertToxin(pawn, Severity);
-            }
-        }
 
         public override void Notify_PawnDied(DamageInfo? dinfo, Hediff culprit = null)
         {

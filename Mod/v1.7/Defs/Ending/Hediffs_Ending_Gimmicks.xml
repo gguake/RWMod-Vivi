@@ -24,7 +24,7 @@
     </comps>
   </HediffDef>
 
-  <!-- 멸망꽃 저주 공용: 3단계(severity 1/2/3), 결속 해방이나 엔딩 정리로만 풀린다(죽으면 함께 사라짐 — Hediff_DoomBlight) -->
+  <!-- 멸망꽃 저주 공용: 5단계(severity 1~5, DoomBlightUtility.MaxBlightLevel), 결속 해방이나 엔딩 정리로만 풀린다(죽으면 함께 사라짐 — Hediff_DoomBlight) -->
   <HediffDef Name="VV_DoomBlightBase" Abstract="True">
     <hediffClass>VVRace.Hediff_DoomBlight</hediffClass>
     <defaultLabelColor>(0.95, 0.45, 0.8)</defaultLabelColor>
@@ -33,130 +33,156 @@
     <scenarioCanAdd>false</scenarioCanAdd>
     <everCurableByItem>false</everCurableByItem>
     <initialSeverity>1</initialSeverity>
-    <maxSeverity>3</maxSeverity>
+    <maxSeverity>5</maxSeverity>
   </HediffDef>
 
-  <!-- 허기: 1.7에는 허기 StatDef가 없으므로 hungerRateFactor 사용 -->
+  <!-- 공포: 고통 한계 감소 + 정신 붕괴 기준 상승.
+       정신 붕괴 기준은 바닐라 최대값이 0.50(기본 0.35)이라 V단계 +0.15에서 상한에 닿도록 나눈다(그보다 크면 IV·V가 같아짐). -->
   <HediffDef ParentName="VV_DoomBlightBase">
-    <defName>VV_DoomBlight_Hunger</defName>
-    <label>doom blight: hunger</label>
-    <description>A curse from a doom bloom that causes severe hunger.\n\nLifted when Apocrypha's bond is released through fairy interference.</description>
-    <stages>
-      <li>
-        <minSeverity>1</minSeverity>
-        <label>I</label>
-        <hungerRateFactor>2</hungerRateFactor>
-      </li>
-      <li>
-        <minSeverity>2</minSeverity>
-        <label>II</label>
-        <hungerRateFactor>3</hungerRateFactor>
-      </li>
-      <li>
-        <minSeverity>3</minSeverity>
-        <label>III</label>
-        <hungerRateFactor>4</hungerRateFactor>
-      </li>
-    </stages>
-  </HediffDef>
-
-  <HediffDef ParentName="VV_DoomBlightBase">
-    <defName>VV_DoomBlight_Fatigue</defName>
-    <label>doom blight: fatigue</label>
-    <description>A curse from a doom bloom that causes severe fatigue.\n\nLifted when Apocrypha's bond is released through fairy interference.</description>
-    <stages>
-      <li>
-        <minSeverity>1</minSeverity>
-        <label>I</label>
-        <restFallFactor>2</restFallFactor>
-      </li>
-      <li>
-        <minSeverity>2</minSeverity>
-        <label>II</label>
-        <restFallFactor>3</restFallFactor>
-      </li>
-      <li>
-        <minSeverity>3</minSeverity>
-        <label>III</label>
-        <restFallFactor>4</restFallFactor>
-      </li>
-    </stages>
-  </HediffDef>
-
-  <HediffDef ParentName="VV_DoomBlightBase">
-    <defName>VV_DoomBlight_Pain</defName>
-    <label>doom blight: agony</label>
-    <description>A curse from a doom bloom that heightens sensitivity to pain.\n\nLifted when Apocrypha's bond is released through fairy interference.</description>
+    <defName>VV_DoomBlight_Fear</defName>
+    <label>doom blight: dread</label>
+    <description>A curse from a doom bloom that fills the mind with dread. The afflicted collapses from pain more easily and is more prone to mental breaks.\n\nLifted when Apocrypha's bond is released through fairy interference.</description>
     <stages>
       <li>
         <minSeverity>1</minSeverity>
         <label>I</label>
         <statOffsets>
-          <PainShockThreshold>-0.10</PainShockThreshold>
+          <PainShockThreshold>-0.04</PainShockThreshold>
+          <MentalBreakThreshold>0.03</MentalBreakThreshold>
         </statOffsets>
       </li>
       <li>
         <minSeverity>2</minSeverity>
         <label>II</label>
         <statOffsets>
-          <PainShockThreshold>-0.15</PainShockThreshold>
+          <PainShockThreshold>-0.08</PainShockThreshold>
+          <MentalBreakThreshold>0.06</MentalBreakThreshold>
         </statOffsets>
       </li>
       <li>
         <minSeverity>3</minSeverity>
         <label>III</label>
+        <statOffsets>
+          <PainShockThreshold>-0.12</PainShockThreshold>
+          <MentalBreakThreshold>0.09</MentalBreakThreshold>
+        </statOffsets>
+      </li>
+      <li>
+        <minSeverity>4</minSeverity>
+        <label>IV</label>
+        <statOffsets>
+          <PainShockThreshold>-0.16</PainShockThreshold>
+          <MentalBreakThreshold>0.12</MentalBreakThreshold>
+        </statOffsets>
+      </li>
+      <li>
+        <minSeverity>5</minSeverity>
+        <label>V</label>
         <statOffsets>
           <PainShockThreshold>-0.20</PainShockThreshold>
-        </statOffsets>
-      </li>
-    </stages>
-  </HediffDef>
-
-  <HediffDef ParentName="VV_DoomBlightBase">
-    <defName>VV_DoomBlight_Mind</defName>
-    <label>doom blight: despair</label>
-    <description>A curse from a doom bloom that destabilizes the mind.\n\nLifted when Apocrypha's bond is released through fairy interference.</description>
-    <stages>
-      <li>
-        <minSeverity>1</minSeverity>
-        <label>I</label>
-        <statOffsets>
-          <MentalBreakThreshold>0.10</MentalBreakThreshold>
-        </statOffsets>
-      </li>
-      <li>
-        <minSeverity>2</minSeverity>
-        <label>II</label>
-        <statOffsets>
           <MentalBreakThreshold>0.15</MentalBreakThreshold>
         </statOffsets>
       </li>
+    </stages>
+  </HediffDef>
+
+  <!-- 허기: 허기·피로 증가. 1.7에는 허기 StatDef가 없으므로 hungerRateFactor/restFallFactor 사용 -->
+  <HediffDef ParentName="VV_DoomBlightBase">
+    <defName>VV_DoomBlight_Hunger</defName>
+    <label>doom blight: famine</label>
+    <description>A curse from a doom bloom that gnaws at the body, causing severe hunger and fatigue.\n\nLifted when Apocrypha's bond is released through fairy interference.</description>
+    <stages>
+      <li>
+        <minSeverity>1</minSeverity>
+        <label>I</label>
+        <hungerRateFactor>1.5</hungerRateFactor>
+        <restFallFactor>1.5</restFallFactor>
+      </li>
+      <li>
+        <minSeverity>2</minSeverity>
+        <label>II</label>
+        <hungerRateFactor>2</hungerRateFactor>
+        <restFallFactor>2</restFallFactor>
+      </li>
       <li>
         <minSeverity>3</minSeverity>
         <label>III</label>
-        <statOffsets>
-          <MentalBreakThreshold>0.20</MentalBreakThreshold>
-        </statOffsets>
+        <hungerRateFactor>2.5</hungerRateFactor>
+        <restFallFactor>2.5</restFallFactor>
+      </li>
+      <li>
+        <minSeverity>4</minSeverity>
+        <label>IV</label>
+        <hungerRateFactor>3</hungerRateFactor>
+        <restFallFactor>3</restFallFactor>
+      </li>
+      <li>
+        <minSeverity>5</minSeverity>
+        <label>V</label>
+        <hungerRateFactor>3.5</hungerRateFactor>
+        <restFallFactor>3.5</restFallFactor>
       </li>
     </stages>
   </HediffDef>
 
-  <!-- 보이지 않는 표식: severity = 멸망꽃이 더한 독성 축적량(독성 저항 반영, 독성 축적 0.6까지만). 표식이 사라질 때 그만큼 독성 축적을 되돌린다 -->
-  <HediffDef>
-    <defName>VV_DoomBlight_Toxin</defName>
-    <label>doom blight toxins</label>
-    <description>Toxic buildup accumulated from doom blooms. Cleansed when Apocrypha's bond is released.</description>
-    <hediffClass>VVRace.Hediff_DoomBlight</hediffClass>
-    <isBad>false</isBad>
-    <priceImpact>false</priceImpact>
-    <scenarioCanAdd>false</scenarioCanAdd>
-    <everCurableByItem>false</everCurableByItem>
-    <initialSeverity>0.3</initialSeverity>
-    <maxSeverity>10</maxSeverity>
+  <!-- 역병: 면역 획득 속도(질병 회복)·혈액 손실 회복 속도 감소 + 받는 피해 증가.
+       혈액 손실 회복은 바닐라 StatDef가 없으므로 HediffComp_BloodLossRecoveryFactor가 단계별 배율(factorByStage)로 늦춘다. -->
+  <HediffDef ParentName="VV_DoomBlightBase">
+    <defName>VV_DoomBlight_Plague</defName>
+    <label>doom blight: plague</label>
+    <description>A curse from a doom bloom that festers within the body. The afflicted recovers more slowly from disease and blood loss, and takes more damage.\n\nLifted when Apocrypha's bond is released through fairy interference.</description>
     <stages>
       <li>
-        <becomeVisible>false</becomeVisible>
+        <minSeverity>1</minSeverity>
+        <label>I</label>
+        <statFactors>
+          <ImmunityGainSpeed>0.9</ImmunityGainSpeed>
+          <IncomingDamageFactor>1.05</IncomingDamageFactor>
+        </statFactors>
+      </li>
+      <li>
+        <minSeverity>2</minSeverity>
+        <label>II</label>
+        <statFactors>
+          <ImmunityGainSpeed>0.8</ImmunityGainSpeed>
+          <IncomingDamageFactor>1.1</IncomingDamageFactor>
+        </statFactors>
+      </li>
+      <li>
+        <minSeverity>3</minSeverity>
+        <label>III</label>
+        <statFactors>
+          <ImmunityGainSpeed>0.7</ImmunityGainSpeed>
+          <IncomingDamageFactor>1.15</IncomingDamageFactor>
+        </statFactors>
+      </li>
+      <li>
+        <minSeverity>4</minSeverity>
+        <label>IV</label>
+        <statFactors>
+          <ImmunityGainSpeed>0.6</ImmunityGainSpeed>
+          <IncomingDamageFactor>1.2</IncomingDamageFactor>
+        </statFactors>
+      </li>
+      <li>
+        <minSeverity>5</minSeverity>
+        <label>V</label>
+        <statFactors>
+          <ImmunityGainSpeed>0.5</ImmunityGainSpeed>
+          <IncomingDamageFactor>1.25</IncomingDamageFactor>
+        </statFactors>
       </li>
     </stages>
+    <comps>
+      <li Class="VVRace.HediffCompProperties_BloodLossRecoveryFactor">
+        <factorByStage>
+          <li>0.8</li>
+          <li>0.65</li>
+          <li>0.5</li>
+          <li>0.35</li>
+          <li>0.2</li>
+        </factorByStage>
+      </li>
+    </comps>
   </HediffDef>
 </Defs>

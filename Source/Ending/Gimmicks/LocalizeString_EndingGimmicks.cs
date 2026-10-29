@@ -14,7 +14,9 @@
         public const string VV_Message_FairyFlowerBonded = nameof(VV_Message_FairyFlowerBonded);
         public const string VV_Message_FairyBondReleased = nameof(VV_Message_FairyBondReleased);
         public const string VV_Message_DoomFlowerBloomed = nameof(VV_Message_DoomFlowerBloomed);
-        public const string VV_Message_DoomFlowerBloomedToxin = nameof(VV_Message_DoomFlowerBloomedToxin);
+
+        // 멸망꽃 저주(역병) 툴팁의 효과 이름
+        public const string VV_Hediff_BloodLossRecoveryFactor = nameof(VV_Hediff_BloodLossRecoveryFactor);
 
         // 정보창
         public const string VV_Inspect_DoomFlowerBloomIn = nameof(VV_Inspect_DoomFlowerBloomIn);

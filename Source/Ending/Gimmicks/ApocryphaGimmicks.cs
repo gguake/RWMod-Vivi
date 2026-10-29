@@ -62,23 +62,19 @@ namespace VVRace
         }
 
         // 맵의 무작위 빈 바닥으로 요정꽃 씨앗 투사체를 날린다. 착탄 시 요정꽃이 피어난다(요정꽃이 이미 최대 개수면 아무것도 쏘지 않는다).
-        // (요정꽃 자리가 없으면 TryLaunchSeedVolley가 멸망꽃 씨앗으로 바꿔 쏘므로, 여기서 먼저 걸러 요정꽃만 쏘게 한다)
         public static bool TryLaunchFairySeed(Pawn boss)
         {
-            if (!IsBoundBoss(boss, out var comp)) { return false; }
-            if (comp.Props.maxFairyFlowers - CountFlowersAndSeeds(boss.Map, ApocryphaGimmickDefOf.VV_FairyFlower, ApocryphaGimmickDefOf.VV_Projectile_FairySeed) <= 0) { return false; }
-
-            TryLaunchSeedVolley(boss, 1, true, out _, out var fairyLaunched);
+            TryLaunchSeedVolley(boss, 0, true, out _, out var fairyLaunched);
             return fairyLaunched > 0;
         }
 
-        // 보스의 멸망꽃 사출 1회: 씨앗 count개를 서로 떨어진 빈 바닥으로 흩뿌린다. withFairy면 그중 하나를 요정꽃 씨앗으로 바꾼다.
-        // 맵의 꽃과 날아가는 씨앗을 합친 수는 보스의 maxDoomFlowers/maxFairyFlowers를 넘지 않는다(요정꽃이 꽉 찼으면 바꾸지 않고 멸망꽃 씨앗을 쏜다).
-        public static void TryLaunchSeedVolley(Pawn boss, int count, bool withFairy, out int doomLaunched, out int fairyLaunched)
+        // 보스의 멸망꽃 사출 1회: 멸망꽃 씨앗 doomCount개를 서로 떨어진 빈 바닥으로 흩뿌린다. withFairy면 요정꽃 씨앗 1개를 더한다.
+        // 맵의 꽃과 날아가는 씨앗을 합친 수는 보스의 maxDoomFlowers/maxFairyFlowers를 넘지 않는다(요정꽃이 꽉 찼으면 요정꽃 씨앗은 쏘지 않는다).
+        public static void TryLaunchSeedVolley(Pawn boss, int doomCount, bool withFairy, out int doomLaunched, out int fairyLaunched)
         {
             doomLaunched = 0;
             fairyLaunched = 0;
-            if (!IsBoundBoss(boss, out var comp) || count <= 0) { return; }
+            if (!IsBoundBoss(boss, out var comp) || (doomCount <= 0 && !withFairy)) { return; }
 
             var map = boss.Map;
             var doomSeedDef = ApocryphaGimmickDefOf.VV_Projectile_DoomSeed;
@@ -87,7 +83,7 @@ namespace VVRace
             var fairyRoom = comp.Props.maxFairyFlowers - CountFlowersAndSeeds(map, ApocryphaGimmickDefOf.VV_FairyFlower, fairySeedDef);
 
             var fairyCount = withFairy && fairyRoom > 0 ? 1 : 0;
-            var doomCount = Mathf.Min(count - fairyCount, doomRoom);
+            doomCount = Mathf.Min(doomCount, doomRoom);
 
             var targets = new List<IntVec3>();
             if (fairyCount > 0 && TryLaunchSeedTo(boss, fairySeedDef, targets))

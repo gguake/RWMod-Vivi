@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using Verse;
 
 namespace VVRace
@@ -27,5 +28,9 @@ namespace VVRace
         public FloatRange trailScale = new FloatRange(0.3f, 0.5f);
 
         public float headOffset;                // 텍스처의 머리가 중심에서 진행 방향으로 떨어진 거리(칸)
+
+        // 실제 투사체 위치(포물선 높이 포함)에 차례로 겹쳐 그리는 그림(요정 비비 사출탄: 후광, 요정 비비).
+        // 오른쪽을 향한 그림을 진행 방향으로 기울이고, 왼쪽으로 날아가면 좌우를 뒤집는다(Projectile_FairyShell).
+        public List<GraphicData> headGraphics;
     }
 }

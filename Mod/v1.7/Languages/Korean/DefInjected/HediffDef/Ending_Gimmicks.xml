@@ -7,31 +7,28 @@
 <VV_FairyInterference.comps.0.messageOnDisappear>{PAWN_labelShort}의 요정 간섭이 사라졌습니다.</VV_FairyInterference.comps.0.messageOnDisappear>
 
 <!-- 아포크리파 1페이즈 기믹: 멸망꽃 저주 -->
-<VV_DoomBlight_Hunger.label>멸망의 굶주림</VV_DoomBlight_Hunger.label>
-<VV_DoomBlight_Hunger.description>멸망꽃이 내린 저주로, 극심한 허기에 시달립니다.\n\n〈요정 간섭〉을 통해 아포크리파의 결속을 해방하면 해제됩니다.</VV_DoomBlight_Hunger.description>
+<VV_DoomBlight_Fear.label>멸망의 공포</VV_DoomBlight_Fear.label>
+<VV_DoomBlight_Fear.description>멸망꽃이 내린 저주로, 공포에 사로잡혀 고통에 쉽게 쓰러지고 정신이 쉽게 무너집니다.\n\n〈요정 간섭〉을 통해 아포크리파의 결속을 해방하면 해제됩니다.</VV_DoomBlight_Fear.description>
+<VV_DoomBlight_Fear.stages.0.label>I</VV_DoomBlight_Fear.stages.0.label>
+<VV_DoomBlight_Fear.stages.1.label>II</VV_DoomBlight_Fear.stages.1.label>
+<VV_DoomBlight_Fear.stages.2.label>III</VV_DoomBlight_Fear.stages.2.label>
+<VV_DoomBlight_Fear.stages.3.label>IV</VV_DoomBlight_Fear.stages.3.label>
+<VV_DoomBlight_Fear.stages.4.label>V</VV_DoomBlight_Fear.stages.4.label>
+
+<VV_DoomBlight_Hunger.label>멸망의 허기</VV_DoomBlight_Hunger.label>
+<VV_DoomBlight_Hunger.description>멸망꽃이 내린 저주로, 극심한 허기와 피로에 시달립니다.\n\n〈요정 간섭〉을 통해 아포크리파의 결속을 해방하면 해제됩니다.</VV_DoomBlight_Hunger.description>
 <VV_DoomBlight_Hunger.stages.0.label>I</VV_DoomBlight_Hunger.stages.0.label>
 <VV_DoomBlight_Hunger.stages.1.label>II</VV_DoomBlight_Hunger.stages.1.label>
 <VV_DoomBlight_Hunger.stages.2.label>III</VV_DoomBlight_Hunger.stages.2.label>
+<VV_DoomBlight_Hunger.stages.3.label>IV</VV_DoomBlight_Hunger.stages.3.label>
+<VV_DoomBlight_Hunger.stages.4.label>V</VV_DoomBlight_Hunger.stages.4.label>
 
-<VV_DoomBlight_Fatigue.label>멸망의 피로</VV_DoomBlight_Fatigue.label>
-<VV_DoomBlight_Fatigue.description>멸망꽃이 내린 저주로, 극심한 피로에 시달립니다.\n\n〈요정 간섭〉을 통해 아포크리파의 결속을 해방하면 해제됩니다.</VV_DoomBlight_Fatigue.description>
-<VV_DoomBlight_Fatigue.stages.0.label>I</VV_DoomBlight_Fatigue.stages.0.label>
-<VV_DoomBlight_Fatigue.stages.1.label>II</VV_DoomBlight_Fatigue.stages.1.label>
-<VV_DoomBlight_Fatigue.stages.2.label>III</VV_DoomBlight_Fatigue.stages.2.label>
-
-<VV_DoomBlight_Pain.label>멸망의 고통</VV_DoomBlight_Pain.label>
-<VV_DoomBlight_Pain.description>멸망꽃이 내린 저주로, 고통에 더욱 민감해집니다.\n\n〈요정 간섭〉을 통해 아포크리파의 결속을 해방하면 해제됩니다.</VV_DoomBlight_Pain.description>
-<VV_DoomBlight_Pain.stages.0.label>I</VV_DoomBlight_Pain.stages.0.label>
-<VV_DoomBlight_Pain.stages.1.label>II</VV_DoomBlight_Pain.stages.1.label>
-<VV_DoomBlight_Pain.stages.2.label>III</VV_DoomBlight_Pain.stages.2.label>
-
-<VV_DoomBlight_Mind.label>멸망의 절망</VV_DoomBlight_Mind.label>
-<VV_DoomBlight_Mind.description>멸망꽃이 내린 저주로, 정신이 불안정해집니다.\n\n〈요정 간섭〉을 통해 아포크리파의 결속을 해방하면 해제됩니다.</VV_DoomBlight_Mind.description>
-<VV_DoomBlight_Mind.stages.0.label>I</VV_DoomBlight_Mind.stages.0.label>
-<VV_DoomBlight_Mind.stages.1.label>II</VV_DoomBlight_Mind.stages.1.label>
-<VV_DoomBlight_Mind.stages.2.label>III</VV_DoomBlight_Mind.stages.2.label>
-
-<VV_DoomBlight_Toxin.label>멸망의 독소</VV_DoomBlight_Toxin.label>
-<VV_DoomBlight_Toxin.description>멸망꽃으로 인해 누적된 독성 수치입니다. 결속 해방 시 함께 정화됩니다.</VV_DoomBlight_Toxin.description>
+<VV_DoomBlight_Plague.label>멸망의 역병</VV_DoomBlight_Plague.label>
+<VV_DoomBlight_Plague.description>멸망꽃이 내린 저주로, 몸이 안에서부터 병들어 질병과 혈액 손실에서 더디게 회복하고 더 큰 피해를 받습니다.\n\n〈요정 간섭〉을 통해 아포크리파의 결속을 해방하면 해제됩니다.</VV_DoomBlight_Plague.description>
+<VV_DoomBlight_Plague.stages.0.label>I</VV_DoomBlight_Plague.stages.0.label>
+<VV_DoomBlight_Plague.stages.1.label>II</VV_DoomBlight_Plague.stages.1.label>
+<VV_DoomBlight_Plague.stages.2.label>III</VV_DoomBlight_Plague.stages.2.label>
+<VV_DoomBlight_Plague.stages.3.label>IV</VV_DoomBlight_Plague.stages.3.label>
+<VV_DoomBlight_Plague.stages.4.label>V</VV_DoomBlight_Plague.stages.4.label>
 
 </LanguageData>

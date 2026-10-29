@@ -24,7 +24,10 @@
 
   <!-- ===== 투사체 ===== -->
 
-  <!-- 요정 비비 사출탄: 머리가 오른쪽을 향한 혜성 텍스처를 진행 방향으로 돌려 그린다(Projectile_FairyShell.ExactRotation) -->
+  <!-- 요정 비비 사출탄: 창을 앞세운 요정 비비가 금빛 혜성 꼬리를 끌며 날아간다.
+       혜성 텍스처(def 그림)는 머리가 오른쪽을 향하므로 진행 방향으로 돌려 그리고(Projectile_FairyShell.ExactRotation),
+       headOffset만큼 뒤로 물려 혜성 머리의 빛이 요정 등 뒤에 오게 한다. 요정 비비와 후광은 확장의 headGraphics로 실제 위치에 겹쳐 그린다.
+       요정 그림은 가산 원본(VV_FairyAttack_east)을 알파 그림으로 바꾼 것이라 가산 빛에 하얗게 묻히지 않도록 VV_TransparentOverGlow(가산 모트보다 늦게 그림)로 그린다. -->
   <ThingDef ParentName="BaseBullet">
     <defName>VV_Projectile_FairyShell</defName>
     <label>hurled fairy vivi</label>
@@ -33,6 +36,7 @@
       <texPath>VFX/VV_FairyComet</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <shaderType>MoteGlow</shaderType>
+      <color>(1, 0.92, 0.7, 0.75)</color>
       <drawSize>(2.4, 1.2)</drawSize>
     </graphicData>
     <projectile>
@@ -52,7 +56,24 @@
         <trailColor>(1, 0.88, 0.5, 0.9)</trailColor>
         <trailIntervalTicks>1</trailIntervalTicks>
         <trailScale>0.22~0.42</trailScale>
-        <headOffset>0.72</headOffset>
+        <headOffset>1.05</headOffset>
+        <headGraphics>
+          <!-- 요정 둘레의 은은한 금빛 후광 -->
+          <li>
+            <texPath>VFX/VV_ScentAura</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>MoteGlow</shaderType>
+            <color>(1, 0.86, 0.5, 0.5)</color>
+            <drawSize>(2, 2)</drawSize>
+          </li>
+          <!-- 창을 앞세운 요정 비비(오른쪽을 향함) -->
+          <li>
+            <texPath>VFX/VV_FairyShell</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>VV_TransparentOverGlow</shaderType>
+            <drawSize>(1.5, 1.5)</drawSize>
+          </li>
+        </headGraphics>
       </li>
     </modExtensions>
   </ThingDef>

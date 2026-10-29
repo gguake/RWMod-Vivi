@@ -88,4 +88,42 @@
     <defName>VV_Morph</defName>
     <shaderPath>Map/VV_Morph</shaderPath>
   </ShaderTypeDef>
+
+  <!-- 사출 포격 조준 마법진: 텍스처 없이 수식으로 고리·룬·육망성·좁혀 드는 고리를 그린다(가산 혼합).
+       영혼 연결 빔과 같은 이유로(멸망꽃 사출 충격파에 함께 굴절되도록) 큐를 장면 캡처(3151)보다 앞인 3150으로 둔다. -->
+  <ShaderDef>
+    <defName>VV_MagicCircle</defName>
+    <shaderProgram>
+      <vertexShaderFileName>Mote.vert.glsl</vertexShaderFileName>
+      <fragmentShaderFileName>VV_MagicCircle.frag.glsl</fragmentShaderFileName>
+      <flipTextureST>false</flipTextureST>
+      <blendMode>Additive</blendMode>
+      <depthWrite>false</depthWrite>
+      <cullMode>None</cullMode>
+      <renderQueue>3150</renderQueue>
+    </shaderProgram>
+  </ShaderDef>
+
+  <ShaderTypeDef>
+    <defName>VV_MagicCircle</defName>
+    <shaderPath>Map/VV_MagicCircle</shaderPath>
+  </ShaderTypeDef>
+
+  <!-- 가산 빛(MoteGlow, 큐 3151) 위에 그리는 알파 그림: 바닐라 TransparentPostLight와 같은 셰이더를 큐만 늦춘다.
+       요정 비비 사출탄의 요정이 혜성 꼬리·후광·반짝임에 덮여 하얗게 바래지 않게 한다. -->
+  <ShaderDef>
+    <defName>VV_TransparentOverGlow</defName>
+    <shaderProgram>
+      <vertexShaderFileName>Mote.vert.glsl</vertexShaderFileName>
+      <fragmentShaderFileName>TransparentPostLight.frag.glsl</fragmentShaderFileName>
+      <transparent>true</transparent>
+      <depthWrite>false</depthWrite>
+      <renderQueue>3152</renderQueue>
+    </shaderProgram>
+  </ShaderDef>
+
+  <ShaderTypeDef>
+    <defName>VV_TransparentOverGlow</defName>
+    <shaderPath>Map/VV_TransparentOverGlow</shaderPath>
+  </ShaderTypeDef>
 </Defs>
