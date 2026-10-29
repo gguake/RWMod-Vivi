@@ -176,7 +176,7 @@ namespace VVRace
 
         public override void PostDestroy(DestroyMode mode, Map previousMap)
         {
-            // 엔딩 앵커의 파괴 통지는 ArcanePlant_Everflower.Destroy가 base.Destroy 전에(맵이 유효할 때) 보낸다.
+            // 엔딩 앵커의 파괴는 앵커 퀘스트 태그("<태그>.Destroyed")로 바닐라가 엔딩 퀘스트에 알린다(여기서 따로 보내지 않는다).
             foreach (var pawn in LinkedPawns.ToList())
             {
                 UnlinkAttunement(pawn);
@@ -458,12 +458,14 @@ namespace VVRace
         private void SendLevelUpLetter(int level)
         {
             // 제단이 필요한 의식(대조율)은 4단계 도달 시점엔 아직 잠겨 있으므로 목록에서 빼고, 제단 해금 서신·안치 메시지로 따로 알린다.
+            // 엔딩을 끝내는 의식(여왕의 대관식)도 5단계 도달 시점엔 아포크리파 토벌 전이라 잠겨 있으므로 빼고, 대관식 대기 서신으로 따로 알린다.
             var rituals = new List<string>();
             foreach (var ritualDef in DefDatabase<PreceptDef>.AllDefsListForReading)
             {
                 var obligation = ritualDef.ritualPatternBase?.ritualObligationTargetFilter;
                 if (obligation != null && obligation is RitualObligationTargetFilterDef_EverflowerRitual everflowerRitualObligation
-                    && everflowerRitualObligation.requiredAttunementLevel == level && !everflowerRitualObligation.requiresAltar)
+                    && everflowerRitualObligation.requiredAttunementLevel == level && !everflowerRitualObligation.requiresAltar
+                    && !everflowerRitualObligation.completesEndingQuest)
                 {
                     rituals.Add($"- {ritualDef.LabelCap}");
                 }

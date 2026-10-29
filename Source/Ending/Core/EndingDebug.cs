@@ -32,7 +32,7 @@ namespace VVRace
 
             if (!finished)
             {
-                var next = NextStage(stage);
+                var next = stage + 1;
                 yield return DevCommand($"DEV: Ending stage → {next}", () => DebugSetStage(next, everflower));
             }
 
@@ -94,6 +94,13 @@ namespace VVRace
 
                 case ViviEndingStage.Failed:
                     // 본편 퀘스트를 앵커 소실로 실패시킨다(살아 있는 보스·호위는 퀘스트 종료 정리가 치운다).
+                    // 이미 끝난 엔딩(대관식 뒤 엔딩 연출 중 포함)은 실패로 바꾸지 않는다.
+                    if (IsFinished)
+                    {
+                        Log.Warning($"[ViViRace] ending debug: the ending already finished ({Stage}); not failing it.");
+                        break;
+                    }
+
                     if (DebugAdvanceTo(ViviEndingStage.Siege, context))
                     {
                         ViviEndingSignals.Send(_bloomQuest, ViviEndingSignals.AnchorLost);
@@ -121,7 +128,15 @@ namespace VVRace
                 CalmPart.DebugForceComplete();
             }
 
-            ApocryphaPart?.DebugSpawnNow();
+            // 토벌 뒤(대관식 대기·엔딩)에는 아포크리파 부품이 이미 끝나 다시 소환할 수 없다.
+            var apocrypha = ApocryphaPart;
+            if (apocrypha == null || apocrypha.State != QuestPartState.Enabled)
+            {
+                Messages.Message($"DEV: Apocrypha cannot be spawned at ending stage {Stage}.", MessageTypeDefOf.RejectInput, historical: false);
+                return;
+            }
+
+            apocrypha.DebugSpawnNow();
         }
 
         // DEV: 평화 기간을 곧바로 끝낸다(아포크리파는 다음 틱에 등장을 시도한다). 이미 보류 중이면 곧바로 다시 시도하게 한다.
@@ -139,27 +154,27 @@ namespace VVRace
             }
         }
 
+        // 밀서 퀘스트의 부품으로 보낸다. 밀서 퀘스트가 끝나 부품이 지워졌으면(바닐라는 끝난 퀘스트의 부품을 30일 뒤 지운다) 부품 없이 보낸다.
         private void DebugDeliverAmberCore(Map map)
         {
             var part = _missiveQuest?.GetFirstPartOfType<QuestPart_ViviAmberCore>();
-            if (part == null)
+            if (part != null)
             {
-                Log.Warning("[ViViRace] ending debug: no missive quest to deliver the amber core with.");
+                part.Deliver(map, redelivery: false);
                 return;
             }
 
-            part.Deliver(map, redelivery: false);
+            QuestPart_ViviAmberCore.DropCore(map, redelivery: false, _missiveQuest);
         }
 
         // 목표 단계(진행 순서 기준)에 이를 때까지 한 단계씩 넘긴다. 실패 상태에서는 넘기지 않는다.
         private bool DebugAdvanceTo(ViviEndingStage target, ArcanePlant_Everflower context)
         {
-            var targetOrder = ProgressOrder(target);
             for (int guard = 0; guard < 10; ++guard)
             {
                 var stage = Stage;
                 if (stage == ViviEndingStage.Failed) { return false; }
-                if (ProgressOrder(stage) >= targetOrder) { return true; }
+                if (stage >= target) { return true; }
 
                 bool advanced;
                 try
@@ -179,7 +194,7 @@ namespace VVRace
                 }
             }
 
-            return ProgressOrder(Stage) >= targetOrder;
+            return Stage >= target;
         }
 
         private bool DebugStep(ViviEndingStage stage, ViviEndingStage target, ArcanePlant_Everflower context)
@@ -259,6 +274,8 @@ namespace VVRace
                 {
                     Find.QuestManager.Remove(quest);
                 }
+
+                ClearQuestReferences(quest);
             }
 
             ViviEndingUtility.RunStep("debug reset: cleanup gimmicks", ViviEndingUtility.CleanupGimmicks);
@@ -273,35 +290,39 @@ namespace VVRace
             _cachedPartCount = -1;
         }
 
-        // 진행 순서상 위치(단계 값은 저장 호환 때문에 진행 순서와 다르다).
-        private static int ProgressOrder(ViviEndingStage stage)
+        // 목록에서 지운 퀘스트를 가리키는 편지·메시지(기록 보관함)와 컨디션의 참조를 끊는다.
+        // 남겨 두면 저장할 때 없는 퀘스트를 참조로 쓰고, 불러올 때 "Could not resolve reference" 경고가 난다.
+        private static void ClearQuestReferences(Quest quest)
         {
-            switch (stage)
+            foreach (var archivable in Find.Archive.ArchivablesListForReading)
             {
-                case ViviEndingStage.None: return 0;
-                case ViviEndingStage.LetterPending: return 1;
-                case ViviEndingStage.AltarUnlocked: return 2;
-                case ViviEndingStage.Siege: return 3;
-                case ViviEndingStage.Calm: return 4;
-                case ViviEndingStage.Boss: return 5;
-                case ViviEndingStage.Coronation: return 6;
-                case ViviEndingStage.Completed: return 7;
-                default: return 8;
+                if (archivable is ChoiceLetter letter && letter.quest == quest)
+                {
+                    letter.quest = null;
+                }
+                else if (archivable is Message message && message.quest == quest)
+                {
+                    message.quest = null;
+                }
             }
-        }
 
-        // 진행 순서상 다음 단계(개발자 기즈모용).
-        private static ViviEndingStage NextStage(ViviEndingStage stage)
-        {
-            switch (stage)
+            foreach (var letter in Find.LetterStack.LettersListForReading)
             {
-                case ViviEndingStage.None: return ViviEndingStage.LetterPending;
-                case ViviEndingStage.LetterPending: return ViviEndingStage.AltarUnlocked;
-                case ViviEndingStage.AltarUnlocked: return ViviEndingStage.Siege;
-                case ViviEndingStage.Siege: return ViviEndingStage.Calm;
-                case ViviEndingStage.Calm: return ViviEndingStage.Boss;
-                case ViviEndingStage.Boss: return ViviEndingStage.Coronation;
-                default: return ViviEndingStage.Completed;
+                if (letter is ChoiceLetter choiceLetter && choiceLetter.quest == quest)
+                {
+                    choiceLetter.quest = null;
+                }
+            }
+
+            foreach (var map in Find.Maps)
+            {
+                foreach (var condition in map.gameConditionManager.ActiveConditions)
+                {
+                    if (condition.quest == quest)
+                    {
+                        condition.quest = null;
+                    }
+                }
             }
         }
 

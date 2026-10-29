@@ -1,5 +1,7 @@
 ﻿using HarmonyLib;
 using RimWorld;
+using System.Collections.Generic;
+using System.Linq;
 using Verse;
 
 namespace VVRace
@@ -17,10 +19,27 @@ namespace VVRace
             if (stunFor == null)
             {
                 Log.Error("[ViViRace] Apocrypha patch: StunHandler.StunFor not found; Apocrypha is not immune to stuns.");
-                return;
+            }
+            else
+            {
+                harmony.Patch(stunFor, prefix: new HarmonyMethod(typeof(ApocryphaPatch), nameof(StunHandler_StunFor_Prefix)));
             }
 
-            harmony.Patch(stunFor, prefix: new HarmonyMethod(typeof(ApocryphaPatch), nameof(StunHandler_StunFor_Prefix)));
+            // 시나리오의 시작 동물 후보는 동물 종족이면 모두 들어가므로(무작위 시나리오 포함) 최종 보스는 뺀다.
+            var possibleAnimals = AccessTools.Method(typeof(ScenPart_StartingAnimal), "PossibleAnimals");
+            if (possibleAnimals == null)
+            {
+                Log.Warning("[ViViRace] Apocrypha patch: ScenPart_StartingAnimal.PossibleAnimals not found; Apocrypha may be offered as a starting animal.");
+            }
+            else
+            {
+                harmony.Patch(possibleAnimals, postfix: new HarmonyMethod(typeof(ApocryphaPatch), nameof(ScenPart_StartingAnimal_PossibleAnimals_Postfix)));
+            }
+        }
+
+        private static void ScenPart_StartingAnimal_PossibleAnimals_Postfix(ref IEnumerable<PawnKindDef> __result)
+        {
+            __result = __result?.Where(v => v.race != ApocryphaThingDefOf.VV_Apocrypha);
         }
 
         private static bool StunHandler_StunFor_Prefix(StunHandler __instance, int ticks)

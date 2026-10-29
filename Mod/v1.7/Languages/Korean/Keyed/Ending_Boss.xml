@@ -33,6 +33,7 @@
 <VV_Message_ApocryphaBondReleased>아포크리파에게 결속된 요정 비비들이 대량으로 해방되었습니다. (남은 결속: {COUNT})</VV_Message_ApocryphaBondReleased>
 <VV_Message_ApocryphaTransformStarted>마지막 결속이 깨졌습니다! 아포크리파가 모든 생명체를 기절시키는 충격파를 내뿜습니다.</VV_Message_ApocryphaTransformStarted>
 <VV_Message_ApocryphaChannelInterrupted>아포크리파의 영원꽃 찬탈이 중단되었습니다.</VV_Message_ApocryphaChannelInterrupted>
+<VV_Message_ApocryphaEscapedRoofCollapse>아포크리파가 무너지는 바위를 피해 순간이동했습니다.</VV_Message_ApocryphaEscapedRoofCollapse>
 
 <!-- Text mote -->
 <VV_TextMote_ApocryphaStunImmune>기절 면역</VV_TextMote_ApocryphaStunImmune>

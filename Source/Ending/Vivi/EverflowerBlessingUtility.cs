@@ -61,7 +61,6 @@ namespace VVRace
                 }
 
                 RemoveGeneticUnstability(pawn);
-                UpgradeLegacyFairyBond(pawn, anchor);
             }
         }
 
@@ -105,18 +104,6 @@ namespace VVRace
             if (hediff != null)
             {
                 pawn.health.RemoveHediff(hediff);
-            }
-        }
-
-        // 구 세이브에서 요정 비비 결속 헤디프를 불러오면 예전 클래스의 인스턴스로 생성되어 6단계 페널티 제거가 적용되지 않으므로 새로 부여한다.
-        private static void UpgradeLegacyFairyBond(Pawn pawn, ArcanePlant_Everflower anchor)
-        {
-            if (pawn.GetCompVivi()?.LinkedEverflower != anchor) { return; }
-
-            var bond = pawn.health.hediffSet.GetFirstHediffOfDef(VVHediffDefOf.VV_ViviFairyFollow);
-            if (bond != null && bond.GetType() != bond.def.hediffClass)
-            {
-                pawn.GetComp<CompViviHolder>()?.RefreshBondHediff();
             }
         }
     }

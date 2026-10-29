@@ -5,7 +5,7 @@ using Verse;
 namespace VVRace
 {
     // 엔딩 분위기 연출: 엔딩 동안 제단 영원꽃의 주기적 발광, 엔딩 순간의 금빛 섬광(실시간으로 걷어냄).
-    // 〈황금빛 꽃안개〉·〈불길한 정적〉 컨디션은 본편 퀘스트의 QuestPart_GameCondition이 건다.
+    // 〈황금빛 꽃안개〉·〈불길한 정적〉 컨디션은 본편 퀘스트의 앵커 감시(QuestPart_ViviAnchorWatch)가 앵커가 있는 맵에 건다.
     public partial class ViviEndingQuest
     {
         private static readonly IntRange AltarPulseIntervalTicks = new IntRange(420, 660);

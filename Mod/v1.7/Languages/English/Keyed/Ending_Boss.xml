@@ -33,6 +33,7 @@
 <VV_Message_ApocryphaBondReleased>A large number of vivi fairies bound to Apocrypha have been freed. (Remaining bond: {COUNT})</VV_Message_ApocryphaBondReleased>
 <VV_Message_ApocryphaTransformStarted>The last fairy bond has shattered! Apocrypha unleashes a shockwave that stuns every living thing.</VV_Message_ApocryphaTransformStarted>
 <VV_Message_ApocryphaChannelInterrupted>Apocrypha's usurpation of the everflower was interrupted.</VV_Message_ApocryphaChannelInterrupted>
+<VV_Message_ApocryphaEscapedRoofCollapse>Apocrypha warped away from the collapsing rock overhead.</VV_Message_ApocryphaEscapedRoofCollapse>
 
 <!-- Text mote -->
 <VV_TextMote_ApocryphaStunImmune>Stun immune</VV_TextMote_ApocryphaStunImmune>

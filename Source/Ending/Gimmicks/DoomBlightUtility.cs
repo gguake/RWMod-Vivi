@@ -1,5 +1,6 @@
 ﻿using RimWorld;
 using System.Collections.Generic;
+using UnityEngine;
 using Verse;
 
 namespace VVRace
@@ -10,6 +11,13 @@ namespace VVRace
     {
         public const int MaxBlightLevel = 3;
         public const float ToxinPerBloom = 0.30f;
+
+        // 멸망꽃 중독이 올릴 수 있는 독성 축적 상한(바닐라 '심각' 단계 시작값).
+        // 그 위 '극심'(0.8)은 의식이 10%로 묶여 쓰러지고 1.0이면 죽으므로, 결속 해방으로 풀리는 페널티가 정착민을 쓰러뜨리거나 죽이지 않게 여기서 멈춘다.
+        public const float MaxToxicBuildupFromBlight = 0.60f;
+
+        // 이보다 적게 더할 수 있으면(면역에 가깝거나 이미 상한) 중독 저주를 더 받을 수 없는 것으로 본다.
+        private const float MinToxinToAdd = 0.01f;
 
         private enum BlightKind
         {
@@ -33,7 +41,7 @@ namespace VVRace
         }
 
         // 멸망꽃 만개: 5가지 페널티 중 하나를 골라 맵의 모든 스폰된 정착민에게 적용하고 메시지로 알린다.
-        // 이미 모든 정착민이 최고 단계인 저주는 고르지 않는다(중독은 항상 후보).
+        // 이미 모든 정착민이 최고 단계인 저주는 고르지 않는다(중독은 모든 정착민이 상한이거나 면역일 때 최고 단계로 본다).
         public static void ApplyDoomBlight(Map map, IntVec3 sourceCell)
         {
             if (map == null) { return; }
@@ -44,11 +52,15 @@ namespace VVRace
             var candidates = new List<BlightKind>();
             foreach (BlightKind kind in System.Enum.GetValues(typeof(BlightKind)))
             {
-                if (kind == BlightKind.Toxin || AnyBelowMaxLevel(colonists, GetBlightDef(kind)))
+                var available = kind == BlightKind.Toxin ? AnyCanTakeToxin(colonists) : AnyBelowMaxLevel(colonists, GetBlightDef(kind));
+                if (available)
                 {
                     candidates.Add(kind);
                 }
             }
+
+            // 모든 저주가 이미 한계라 더 내릴 것이 없으면 시들기만 한다.
+            if (candidates.Count == 0) { return; }
 
             var chosen = candidates.RandomElement();
             var lookTargets = new LookTargets(new TargetInfo(sourceCell, map));
@@ -79,7 +91,7 @@ namespace VVRace
                 MessageTypeDefOf.NegativeEvent);
         }
 
-        // 결속 해방/엔딩 정리: 맵의 모든 폰에게서 저주 4종을 제거하고, 멸망꽃이 더했던 만큼 독성 축적을 되돌린다.
+        // 결속 해방/엔딩 정리: 맵의 모든 폰에게서 저주 4종과 중독 표식을 제거한다(표식이 제거되며 멸망꽃이 더했던 만큼 독성 축적을 되돌린다).
         public static bool ClearDoomBlights(Map map)
         {
             if (map == null) { return false; }
@@ -101,11 +113,10 @@ namespace VVRace
             var anyCleared = false;
             var hediffSet = pawn.health.hediffSet;
 
+            // 독성 축적은 표식이 제거될 때(Hediff_DoomBlight.PostRemoved) 되돌린다.
             var toxinMarker = hediffSet.GetFirstHediffOfDef(ApocryphaGimmickDefOf.VV_DoomBlight_Toxin);
             if (toxinMarker != null)
             {
-                // 그사이 자연적으로 감소했더라도 AdjustSeverity에서 수치가 0 아래로 내려가지 않도록 처리한다(0 이하가 되면 다음 틱에 제거).
-                HealthUtility.AdjustSeverity(pawn, HediffDefOf.ToxicBuildup, -toxinMarker.Severity);
                 pawn.health.RemoveHediff(toxinMarker);
                 anyCleared = true;
             }
@@ -164,13 +175,43 @@ namespace VVRace
             }
         }
 
-        // 독성 축적 +30%. 실제로 늘어난 양을 보이지 않는 표식 헤디프에 누적해 두었다가 해제 때 그만큼 되돌린다.
+        // 중독 표식이 제거될 때(결속 해방·엔딩 정리·엔딩 종료 뒤 자동 제거·사망) 멸망꽃이 더했던 만큼 독성 축적을 되돌린다.
+        // 그사이 자연적으로 감소했더라도 AdjustSeverity에서 수치가 0 아래로 내려가지 않도록 처리한다(0 이하가 되면 다음 틱에 제거).
+        internal static void RevertToxin(Pawn pawn, float amount)
+        {
+            if (pawn?.health == null || amount <= 0f) { return; }
+
+            HealthUtility.AdjustSeverity(pawn, HediffDefOf.ToxicBuildup, -amount);
+        }
+
+        private static bool AnyCanTakeToxin(List<Pawn> pawns)
+        {
+            for (int i = 0; i < pawns.Count; i++)
+            {
+                if (GetToxinToAdd(pawns[i]) >= MinToxinToAdd) { return true; }
+            }
+
+            return false;
+        }
+
+        // 이번 만개로 더할 독성 축적량: +30%를 독성 저항만큼 줄이고, 독성 축적이 MaxToxicBuildupFromBlight를 넘지 않게 자른다.
+        private static float GetToxinToAdd(Pawn pawn)
+        {
+            if (pawn.Dead) { return 0f; }
+
+            var amount = ToxinPerBloom * Mathf.Max(0f, 1f - pawn.GetStatValue(StatDefOf.ToxicResistance));
+            var current = pawn.health.hediffSet.GetFirstHediffOfDef(HediffDefOf.ToxicBuildup)?.Severity ?? 0f;
+            return Mathf.Max(0f, Mathf.Min(amount, MaxToxicBuildupFromBlight - current));
+        }
+
+        // 독성 축적 +30%(독성 저항 반영, 상한까지). 실제로 늘어난 양을 보이지 않는 표식 헤디프에 누적해 두었다가 표식이 사라질 때 그만큼 되돌린다.
         private static void AddToxin(Pawn pawn)
         {
-            if (pawn.Dead) { return; }
+            var amount = GetToxinToAdd(pawn);
+            if (amount < MinToxinToAdd) { return; }
 
             var before = pawn.health.hediffSet.GetFirstHediffOfDef(HediffDefOf.ToxicBuildup)?.Severity ?? 0f;
-            HealthUtility.AdjustSeverity(pawn, HediffDefOf.ToxicBuildup, ToxinPerBloom);
+            HealthUtility.AdjustSeverity(pawn, HediffDefOf.ToxicBuildup, amount);
             if (pawn.Dead) { return; }
 
             var after = pawn.health.hediffSet.GetFirstHediffOfDef(HediffDefOf.ToxicBuildup)?.Severity ?? 0f;

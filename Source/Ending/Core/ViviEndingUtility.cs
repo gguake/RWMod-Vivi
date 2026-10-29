@@ -124,9 +124,11 @@ namespace VVRace
             return raw.Formatted(args);
         }
 
+        // 평화 기간·보스전에 막는 위협 분류: 큰·작은 위협과 심층 드릴 감염(바닐라는 별도 분류라 따로 넣는다).
         public static bool IsThreatCategory(IncidentCategoryDef category)
         {
-            return category != null && (category == IncidentCategoryDefOf.ThreatBig || category == IncidentCategoryDefOf.ThreatSmall);
+            return category != null
+                && (category == IncidentCategoryDefOf.ThreatBig || category == IncidentCategoryDefOf.ThreatSmall || category == IncidentCategoryDefOf.DeepDrillInfestation);
         }
 
         // 해당 맵을 노리고 대기열에 올라 있던 위협 사건(마나 파동이 예약한 습격 등)을 지운다.
@@ -164,6 +166,7 @@ namespace VVRace
         }
 
         // 맵에서 공격 중인 적대 습격대(인간형·메카노이드)는 원래 로드에서 빠져 맵 밖으로 철수한다.
+        // 아직 착륙 중인 드롭포드에 탄 습격대원(스폰 전이지만 이미 습격 로드 소속)도 함께 옮겨, 포드가 열리면 곧바로 철수하게 한다.
         public static int MakeRaidersRetreat(Map map)
         {
             var retreated = 0;
@@ -176,7 +179,7 @@ namespace VVRace
                 var leavers = new List<Pawn>();
                 foreach (var pawn in lord.ownedPawns.ToList())
                 {
-                    if (!pawn.Spawned || pawn.Dead || pawn.Downed || pawn.Map != map) { continue; }
+                    if (pawn.Dead || pawn.Downed || (pawn.Spawned && pawn.Map != map)) { continue; }
 
                     lord.Notify_PawnLost(pawn, PawnLostCondition.ForcedToJoinOtherLord);
                     if (pawn.GetLord() == null)
@@ -207,26 +210,33 @@ namespace VVRace
         // 평화 기간 〈불길한 정적〉을 모든 맵에서 끝낸다(보스 등장·보류·엔딩 종료 시).
         public static void EndOminousSilence()
         {
-            var conditionDef = EndingCoreDefOf.VV_OminousSilence;
-            if (conditionDef == null) { return; }
-
             foreach (var map in Find.Maps)
             {
-                map.gameConditionManager.GetActiveCondition(conditionDef)?.End();
+                EndOminousSilence(map);
             }
         }
 
+        // 한 맵의 〈불길한 정적〉을 끝낸다(앵커가 다른 맵으로 옮겨졌을 때 등).
+        public static void EndOminousSilence(Map map)
+        {
+            var conditionDef = EndingCoreDefOf.VV_OminousSilence;
+            if (conditionDef == null || map == null) { return; }
+
+            map.gameConditionManager.GetActiveCondition(conditionDef)?.End();
+        }
+
         // 엔딩 완료: 엔딩이 건 꽃안개는 잠시 남았다가 걷힌다(이후로는 의식으로 부른 꽃안개처럼 다룬다).
+        // 맵의 첫 꽃안개가 엔딩 꽃안개가 아닐 수 있으므로(의식으로 부른 꽃안개 등) 첫 번째만 보지 않고 모두 확인한다.
         public static void FadeGoldenBloom()
         {
             foreach (var map in Find.Maps)
             {
-                var condition = GoldenBloomUtility.GetActiveCondition(map);
-                if (condition == null || !condition.fromEnding) { continue; }
-
-                condition.fromEnding = false;
-                condition.Permanent = false;
-                condition.Duration = condition.TicksPassed + GoldenBloomFadeTicks;
+                foreach (var condition in EndingGoldenBlooms(map))
+                {
+                    condition.fromEnding = false;
+                    condition.Permanent = false;
+                    condition.Duration = condition.TicksPassed + GoldenBloomFadeTicks;
+                }
             }
         }
 
@@ -235,12 +245,35 @@ namespace VVRace
         {
             foreach (var map in Find.Maps)
             {
-                var condition = GoldenBloomUtility.GetActiveCondition(map);
-                if (condition != null && condition.fromEnding)
+                EndGoldenBloom(map);
+            }
+        }
+
+        // 한 맵에서 엔딩이 건 꽃안개를 곧바로 걷는다(앵커가 다른 맵으로 옮겨졌을 때 등).
+        public static void EndGoldenBloom(Map map)
+        {
+            foreach (var condition in EndingGoldenBlooms(map))
+            {
+                condition.End();
+            }
+        }
+
+        // 맵에 걸린 꽃안개 중 엔딩이 건 것(걷는 동안 목록이 바뀌므로 복사본).
+        private static List<GameCondition_GoldenBloom> EndingGoldenBlooms(Map map)
+        {
+            var result = new List<GameCondition_GoldenBloom>();
+            var conditions = map?.gameConditionManager.ActiveConditions;
+            if (conditions == null) { return result; }
+
+            for (int i = 0; i < conditions.Count; ++i)
+            {
+                if (conditions[i] is GameCondition_GoldenBloom condition && condition.fromEnding)
                 {
-                    condition.End();
+                    result.Add(condition);
                 }
             }
+
+            return result;
         }
 
         // 멸망꽃·요정꽃·요정 간섭·멸망꽃 페널티를 모든 맵에서 정리한다(앵커가 이미 사라졌어도 빠짐없이).

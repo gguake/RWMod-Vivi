@@ -174,7 +174,7 @@
     <defName>VV_ViviFairyFollow</defName>
     <label>vivi fairy</label>
     <description>A fairy vivi is bound, aiding learning and focus and sometimes absorbing damage. too many bound fairies steadily increase fatigue.</description>
-    <!-- 영원꽃 6단계 공명자는 아래 modExtension의 페널티 없는 단계를 쓴다(Hediff_ViviFairyFollow.CurStage) -->
+    <!-- 영원꽃 6단계 공명자는 아래 modExtension의 페널티 스탯 배율을 뺀 단계를 쓴다(Hediff_ViviFairyFollow.CurStage) -->
     <hediffClass>VVRace.Hediff_ViviFairyFollow</hediffClass>
     <defaultLabelColor>(0,1,1)</defaultLabelColor>
     
@@ -320,122 +320,12 @@
     </comps>
 
     <modExtensions>
-      <!-- 영원꽃 6단계: 위 단계를 그대로 복사하되 결속 페널티(MoveSpeed·RestFallRateFactor)만 뺀 목록. 단계 인덱스가 같아야 한다. -->
-      <li Class="VVRace.FairyBondStagesExtension">
-        <stagesWithoutPenalty>
-          <li>
-            <label>I</label>
-            <minSeverity>1</minSeverity>
-            <statOffsets>
-              <PsychicSensitivity>0.1</PsychicSensitivity>
-            </statOffsets>
-            <statFactors>
-              <GlobalLearningFactor>1.05</GlobalLearningFactor>
-              <JoyFallRateFactor>0.8</JoyFallRateFactor>
-            </statFactors>
-          </li>
-          <li>
-            <label>II</label>
-            <minSeverity>2</minSeverity>
-            <statOffsets>
-              <PsychicSensitivity>0.2</PsychicSensitivity>
-            </statOffsets>
-            <statFactors>
-              <GlobalLearningFactor>1.1</GlobalLearningFactor>
-              <JoyFallRateFactor>0.8</JoyFallRateFactor>
-            </statFactors>
-          </li>
-          <li>
-            <label>III</label>
-            <minSeverity>3</minSeverity>
-            <statOffsets>
-              <PsychicSensitivity>0.3</PsychicSensitivity>
-            </statOffsets>
-            <statFactors>
-              <GlobalLearningFactor>1.15</GlobalLearningFactor>
-              <JoyFallRateFactor>0.8</JoyFallRateFactor>
-            </statFactors>
-          </li>
-          <li>
-            <label>IV</label>
-            <minSeverity>4</minSeverity>
-            <statOffsets>
-              <PsychicSensitivity>0.4</PsychicSensitivity>
-            </statOffsets>
-            <statFactors>
-              <GlobalLearningFactor>1.2</GlobalLearningFactor>
-              <RestRateMultiplier>1.2</RestRateMultiplier>
-              <JoyFallRateFactor>0.9</JoyFallRateFactor>
-            </statFactors>
-          </li>
-          <li>
-            <label>V</label>
-            <minSeverity>5</minSeverity>
-            <statOffsets>
-              <PsychicSensitivity>0.5</PsychicSensitivity>
-            </statOffsets>
-            <statFactors>
-              <GlobalLearningFactor>1.25</GlobalLearningFactor>
-              <RestRateMultiplier>1.3</RestRateMultiplier>
-              <JoyFallRateFactor>0.9</JoyFallRateFactor>
-            </statFactors>
-          </li>
-          <li>
-            <label>VI</label>
-            <minSeverity>6</minSeverity>
-            <statOffsets>
-              <PsychicSensitivity>0.6</PsychicSensitivity>
-            </statOffsets>
-            <statFactors>
-              <GlobalLearningFactor>1.3</GlobalLearningFactor>
-              <RestRateMultiplier>1.4</RestRateMultiplier>
-            </statFactors>
-          </li>
-          <li>
-            <label>VII</label>
-            <minSeverity>7</minSeverity>
-            <statOffsets>
-              <PsychicSensitivity>0.7</PsychicSensitivity>
-            </statOffsets>
-            <statFactors>
-              <GlobalLearningFactor>1.35</GlobalLearningFactor>
-              <RestRateMultiplier>1.55</RestRateMultiplier>
-            </statFactors>
-          </li>
-          <li>
-            <label>VIII</label>
-            <minSeverity>8</minSeverity>
-            <statOffsets>
-              <PsychicSensitivity>0.8</PsychicSensitivity>
-            </statOffsets>
-            <statFactors>
-              <GlobalLearningFactor>1.4</GlobalLearningFactor>
-              <RestRateMultiplier>1.7</RestRateMultiplier>
-            </statFactors>
-          </li>
-          <li>
-            <label>IX</label>
-            <minSeverity>9</minSeverity>
-            <statOffsets>
-              <PsychicSensitivity>0.9</PsychicSensitivity>
-            </statOffsets>
-            <statFactors>
-              <GlobalLearningFactor>1.45</GlobalLearningFactor>
-              <RestRateMultiplier>1.85</RestRateMultiplier>
-            </statFactors>
-          </li>
-          <li>
-            <label>X</label>
-            <minSeverity>10</minSeverity>
-            <statOffsets>
-              <PsychicSensitivity>1.0</PsychicSensitivity>
-            </statOffsets>
-            <statFactors>
-              <GlobalLearningFactor>1.5</GlobalLearningFactor>
-              <RestRateMultiplier>2</RestRateMultiplier>
-            </statFactors>
-          </li>
-        </stagesWithoutPenalty>
+      <!-- 영원꽃 6단계 공명자는 위 단계에서 결속 페널티 배율(아래 스탯)만 뺀 단계를 쓴다. 단계는 코드가 위 stages에서 만든다. -->
+      <li Class="VVRace.FairyBondPenaltyExtension">
+        <penaltyStatFactors>
+          <li>MoveSpeed</li>
+          <li>RestFallRateFactor</li>
+        </penaltyStatFactors>
       </li>
     </modExtensions>
   </HediffDef>

@@ -49,8 +49,8 @@
         <allowChild>false</allowChild>
         <blocksSocialInteraction>true</blocksSocialInteraction>
         <countsAsParticipant>false</countsAsParticipant>
-        <!-- 아포크리파 2페이즈 전투 중 부상당한 공명자도 공명 파동 의식을 이어갈 수 있도록 -->
-        <ignoreBleeding>true</ignoreBleeding>
+        <!-- 아포크리파 2페이즈 전투 중 부상당한 공명자도 공명 파동 의식을 시작하고 이어갈 수 있도록 하는 출혈 무시는
+             평소의 조율 의식에는 걸리지 않게 XML이 아니라 코드에서 그 경우에만 켠다(EverflowerRitualRules.ShouldIgnoreBleeding). -->
       </li>
     </roles>
     <stages>

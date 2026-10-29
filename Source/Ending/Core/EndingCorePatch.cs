@@ -2,26 +2,15 @@
 using RimWorld;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using Verse;
 
 namespace VVRace
 {
-    // 엔딩 퀘스트 Harmony 패치 진입점. HarmonyPatch.cs는 이 클래스만 부르고, 다른 엔딩 모듈의 패치 클래스는 이름으로 찾아 각자 호출한다.
+    // 엔딩 퀘스트 Harmony 패치 진입점. HarmonyPatch.cs는 이 클래스만 부르고, 다른 엔딩 모듈의 패치 클래스는 여기서 각자 호출한다.
     // 모드 생성자 단계에서 실행되므로 DefOf/DefDatabase를 읽지 않으며, 한 패치가 실패해도 나머지는 계속 적용한다.
     internal static class EndingCorePatch
     {
-        // 각 엔딩 모듈이 자기 폴더에 두는 패치 클래스(internal static class X { internal static void Patch(Harmony harmony) }).
-        // 이 어셈블리에서 단순 이름으로 찾는다(네임스페이스 무시). 없으면 경고 후 건너뛴다.
-        private static readonly string[] ModulePatchTypeNames =
-        {
-            "AltarPatch",
-            "EndingRitualPatch",
-            "ApocryphaPatch",
-            "ApocryphaGimmickPatch",
-        };
-
         internal static void Patch(Harmony harmony)
         {
             // 〈고대 제단 복원〉 연구는 연방의 서신을 받기 전까지 "선행 연구 미완료"로 잠근다.
@@ -39,10 +28,10 @@ namespace VVRace
                 AccessTools.Method(typeof(Map), nameof(Map.IncidentTargetTags)),
                 nameof(Map_IncidentTargetTags_Postfix));
 
-            foreach (var typeName in ModulePatchTypeNames)
-            {
-                PatchModule(harmony, typeName);
-            }
+            // 각 엔딩 모듈이 자기 폴더에 두는 패치 클래스(internal static class X { internal static void Patch(Harmony harmony) }).
+            // (제단·기믹 모듈은 자체 클래스만으로 동작해 바닐라 패치가 없다)
+            PatchModule(harmony, nameof(EndingRitualPatch), EndingRitualPatch.Patch);
+            PatchModule(harmony, nameof(ApocryphaPatch), ApocryphaPatch.Patch);
         }
 
         private static void TryPatch(Harmony harmony, string label, MethodBase original, string postfixName)
@@ -63,31 +52,16 @@ namespace VVRace
             }
         }
 
-        private static void PatchModule(Harmony harmony, string typeName)
+        // 모듈 하나의 패치가 실패해도(예외) 나머지 모듈과 모드 생성자는 계속 진행한다.
+        private static void PatchModule(Harmony harmony, string moduleName, Action<Harmony> patch)
         {
             try
             {
-                var type = AccessTools.TypeByName("VVRace." + typeName)
-                    ?? typeof(EndingCorePatch).Assembly.GetTypes().FirstOrDefault(t => t.Name == typeName);
-                if (type == null)
-                {
-                    Log.Warning($"[ViViRace] ending patch: module patch class {typeName} not found; skipped.");
-                    return;
-                }
-
-                var method = AccessTools.Method(type, "Patch", new[] { typeof(Harmony) });
-                if (method == null || !method.IsStatic)
-                {
-                    Log.Error($"[ViViRace] ending patch: {typeName} has no static Patch(Harmony) method.");
-                    return;
-                }
-
-                method.Invoke(null, new object[] { harmony });
+                patch(harmony);
             }
             catch (Exception ex)
             {
-                var inner = (ex as TargetInvocationException)?.InnerException ?? ex;
-                Log.Error($"[ViViRace] ending patch: {typeName}.Patch failed: {inner}");
+                Log.Error($"[ViViRace] ending patch: {moduleName}.Patch failed: {ex}");
             }
         }
 

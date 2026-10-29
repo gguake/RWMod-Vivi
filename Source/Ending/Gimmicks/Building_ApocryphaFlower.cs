@@ -5,7 +5,7 @@ using Verse;
 namespace VVRace
 {
     // 아포크리파가 씨앗으로 피워내는 꽃(멸망꽃/요정꽃) 공용 처리.
-    // 피어날 때 작게 시작해 커지고, 이후 은은하게 숨을 쉬듯 크기가 변하며, 유지 이펙트를 매 틱 갱신한다.
+    // 피어날 때 작게 시작해 커지고, 이후 은은하게 숨을 쉬듯 크기가 변한다. 유지 이펙트는 def의 바닐라 CompEffecter가 매 틱 갱신한다.
     // 보스와 잇는 영혼 연결선은 ApocryphaGimmicks.DrawLinks가 이 꽃의 LinkAnchor/LinkAlpha를 읽어 그린다.
     public abstract class Building_ApocryphaFlower : Building
     {
@@ -15,9 +15,6 @@ namespace VVRace
         private const float BreathSpeed = 0.05f;
 
         protected int spawnTick = -1;
-
-        [Unsaved]
-        private Effecter _auraEffecter;
 
         [Unsaved]
         private ApocryphaFlowerExtension _extension;
@@ -37,22 +34,6 @@ namespace VVRace
             {
                 spawnTick = Find.TickManager.TicksGame;
                 ApocryphaGimmicks.PlayEffect(Extension?.bloomEffecter, Position, map);
-            }
-        }
-
-        public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
-        {
-            EndAura();
-            base.DeSpawn(mode);
-        }
-
-        protected override void Tick()
-        {
-            base.Tick();
-
-            if (Spawned)
-            {
-                MaintainAura();
             }
         }
 
@@ -101,27 +82,6 @@ namespace VVRace
 
             Comps_DrawAt(drawLoc, flip);
             Comps_PostDraw();
-        }
-
-        private void MaintainAura()
-        {
-            var auraDef = Extension?.auraEffecter;
-            if (auraDef == null) { return; }
-
-            if (_auraEffecter == null)
-            {
-                _auraEffecter = auraDef.Spawn();
-            }
-
-            _auraEffecter.EffectTick(new TargetInfo(this), new TargetInfo(this));
-        }
-
-        private void EndAura()
-        {
-            if (_auraEffecter == null) { return; }
-
-            _auraEffecter.Cleanup();
-            _auraEffecter = null;
         }
 
         public override void ExposeData()

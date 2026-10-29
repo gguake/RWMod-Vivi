@@ -485,15 +485,6 @@ namespace VVRace
         {
             var pawn = (Pawn)parent;
             var hediff = pawn.health.hediffSet.GetFirstHediffOfDef(VVHediffDefOf.VV_ViviFairyFollow);
-
-            // 구 세이브에서 불러온 결속 헤디프는 예전 클래스(HediffWithComps)의 인스턴스라 6단계 페널티 제거(Hediff_ViviFairyFollow)가
-            // 적용되지 않으므로, def의 클래스와 다르면 떼어 내고 새로 붙인다.
-            if (hediff != null && hediff.GetType() != hediff.def.hediffClass)
-            {
-                pawn.health.RemoveHediff(hediff);
-                hediff = null;
-            }
-
             var severity = FairyficatedPawnCount;
             if (severity > 0)
             {

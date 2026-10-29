@@ -271,12 +271,25 @@ namespace VVRace
         {
             if (_reserveTeleportCell.HasValue)
             {
-                if (!Teleport(_reserveTeleportCell.Value))
+                var cell = ResolveTeleportCell(_reserveTeleportCell.Value, out var altar);
+                _reserveTeleportCell = null;
+
+                // 예약한 뒤 그 칸에 제단이 지어졌을 수 있으므로, 실제로 옮기는 시점에 제단의 단계 조건을 다시 확인한다.
+                // 조건을 채우지 못했으면 무작위로 순간이동시키지 않고 예약만 취소한다(낮은 단계 영원꽃이 제단에 안치되어 내릴 수 없게 되는 것을 막는다).
+                if (altar != null && EverflowerComp.AttunementLevel < Building_DreamumAltar.RequiredAttunementLevel)
+                {
+                    Messages.Message(
+                        LocalizeString_EndingAltar.VV_Message_EverflowerAltarRequiresLevel.Translate(Building_DreamumAltar.RequiredAttunementLevel.Named("LEVEL")),
+                        this,
+                        MessageTypeDefOf.RejectInput,
+                        historical: false);
+                    return;
+                }
+
+                if (!Teleport(cell))
                 {
                     TeleportRandomly();
                 }
-
-                _reserveTeleportCell = null;
             }
         }
 
@@ -349,7 +362,28 @@ namespace VVRace
                 return false;
             }
 
+            // 의식 중인 영원꽃은 채집하지 않는다. 의식 밖의 폰이 영원꽃을 예약하면 바닐라가 의식을 취소해 버린다.
+            if (IsTargetOfAnyRitual()) { return false; }
+
             return true;
+        }
+
+        // 이 영원꽃을 대상으로 하는 의식 로드가 있는지. 바닐라 IsRitualTarget은 참가자가 자리에 도착한 뒤에만 참이므로,
+        // 참가자가 모이는 동안에도 막을 수 있게 로드를 직접 확인한다.
+        private bool IsTargetOfAnyRitual()
+        {
+            if (!Spawned) { return false; }
+
+            var lords = Map.lordManager.lords;
+            for (int i = 0; i < lords.Count; ++i)
+            {
+                if (lords[i].LordJob is LordJob_Ritual ritual && ritual.selectedTarget.Thing == this)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         public void Notify_Gathered(Pawn pawn, RecipeDef_Gathering recipe)

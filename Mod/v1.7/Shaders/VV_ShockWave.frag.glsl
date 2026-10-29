@@ -74,7 +74,9 @@ void main()
 
     float t = clamp(u._AgeSecs / max(u._Duration, 0.001), 0.0, 1.0);
     float ease = 1.0 - pow(1.0 - t, 3.0);
-    float seed = u._RandomPerObject * 0.173;
+    // _RandomPerObject는 플렉의 경우 생성 틱 + 위치 해시라 int 전체 범위(~±2e9)의 값이다. 그대로 노이즈 좌표에 더하면
+    // float 정밀도(1e8 근처에서 칸 간격 8~32)에 묻혀 픽셀마다 같은 값이 되므로, 비트를 정수 해시에 넣어 작은 범위(0~64)로 줄여 쓴다.
+    float seed = hash(ivec2(floatBitsToInt(u._RandomPerObject), 0x5bd1e995)) * 64.0;
 
     // 파면: 처음엔 빠르게, 끝으로 갈수록 느려지며 퍼진다. 둘레를 따라 낮은 주파수로 일렁인다.
     vec2 dir = p / max(r, 1e-4);

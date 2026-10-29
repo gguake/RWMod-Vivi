@@ -107,8 +107,11 @@ namespace VVRace
     // 아포크리파 본체 컴프. 페이즈/결속 수치/생명력 풀/능력 타이머/채널링을 관리한다.
     // [계약] public 시그니처는 다른 모듈이 호출하므로 바꾸지 말 것.
     // 모든 타이머는 매 틱 도는 CompTick에서 처리한다(동물 폰의 CompTickInterval은 15틱 간격이라 쓰지 않는다).
-    public class CompApocrypha : ThingComp
+    public class CompApocrypha : ThingComp, IRoofCollapseAlert
     {
+        // 산 지붕 붕괴를 피해 순간이동할 칸을 찾는 반경(정사각형 반경)
+        private const int RoofCollapseEscapeRadius = 15;
+
         private static readonly Color AimBeamColor = new Color(1f, 0.86f, 0.45f, 0.85f);
         private static readonly Color ChannelBeamColor = new Color(1f, 0.32f, 0.82f, 1f);
         private static readonly Color DamageTextColor = new Color(1f, 0.72f, 0.4f);
@@ -199,7 +202,6 @@ namespace VVRace
         public float ChannelProgress => IsChanneling ? Mathf.Clamp01((float)_channelTicks / ChannelDurationTicks) : 0f;
         public int ChannelTicksLeft => Mathf.Max(0, ChannelDurationTicks - _channelTicks);
 
-        public int DoomSeedsLaunched => _doomSeedsLaunched;
         public int DoomVolleysLaunched => _doomVolleysLaunched;
 
         // 다음 멸망꽃 사출의 씨앗 수: 처음 doomSeedVolleyStart개에서 사출 doomSeedVolleyGrowthEvery회마다 1개씩 늘어난다(최대 doomSeedVolleyMax개).
@@ -224,19 +226,15 @@ namespace VVRace
                 return quest != null && quest.Stage == ViviEndingStage.Boss && quest.Boss == Pawn;
             }
         }
-        // 진행 중인 사출 포격 조준(여러 개가 겹칠 수 있다). AimCell은 가장 먼저 시작한 조준의 표적 칸.
+        // 진행 중인 사출 포격 조준(여러 개가 겹칠 수 있다).
         public bool IsAiming => _shellAims.Count > 0;
-        public IntVec3 AimCell => _shellAims.Count > 0 ? _shellAims[0].cell : IntVec3.Invalid;
         public IReadOnlyList<ApocryphaShellAim> ShellAims => _shellAims;
         public bool IsBreathing => _breathEndTick >= 0;
         public IntVec3 BreathCell => _breathCell;
         public int NextApproachTick => _nextApproachTick;
-        public bool DevForceChannel => _devForceChannel;
 
-        // 링크/조준선의 보스 쪽 끝. 몸통이 칸 중심보다 위쪽에 그려지므로 연결선 모듈(ApocryphaGimmicks)과 같은 높이로 올린다.
-        public Vector3 BodyCenter => Pawn.DrawPos + BodyCenterOffset;
-
-        private static readonly Vector3 BodyCenterOffset = new Vector3(0f, 0f, 1.5f);
+        // 링크/조준선의 보스 쪽 끝. 몸통이 칸 중심보다 위쪽에 그려지므로 연결선 모듈(ApocryphaGimmicks)과 같은 기준점을 쓴다.
+        public Vector3 BodyCenter => ApocryphaGimmicks.GetBossBodyPos(Pawn);
 
         #region 초기화/저장
         public override void PostSpawnSetup(bool respawningAfterLoad)
@@ -257,11 +255,16 @@ namespace VVRace
             }
         }
 
-        // 모핑 재질을 메인 스레드에서 준비하고 몸통 재질을 다시 고르게 한다(전환 시작·끝, 전환 중 불러오기).
+        // 모핑 재질을 메인 스레드에서 준비하고 몸통 재질을 다시 고르게 한다(전환 시작, 전환 중 불러오기).
+        // 세이브 불러오기는 별도 스레드에서 스폰하는데 텍스처(ContentFinder)는 메인 스레드에서만 읽을 수 있으므로,
+        // 바닐라 SetAllGraphicsDirty처럼 긴 작업이 끝난 뒤(평소에는 즉시) 메인 스레드에서 실행한다.
         private void PrepareMorph()
         {
-            ApocryphaMorphMaterials.EnsureInitialized(Props.transformTicks / 60f);
-            Pawn.Drawer?.renderer?.SetAllGraphicsDirty();
+            LongEventHandler.ExecuteWhenFinished(() =>
+            {
+                ApocryphaMorphMaterials.EnsureInitialized(Props.transformTicks / 60f);
+                Pawn.Drawer?.renderer?.SetAllGraphicsDirty();
+            });
         }
 
         private void InitializeState()
@@ -382,17 +385,18 @@ namespace VVRace
             if (!parent.Spawned) { return; }
 
             // 파괴를 동반하는 처리는 피해/작업 콜스택 밖인 다음 틱에서 한다.
-            if (_pendingSteal)
-            {
-                _pendingSteal = false;
-                StealEverflower();
-                return;
-            }
-
+            // 찬탈 완료와 치명타가 같은 틱 사이에 겹치면 처치를 먼저 한다(기절이 대기 중인 찬탈을 취소하는 것과 같게).
             if (_pendingDeath)
             {
                 _pendingDeath = false;
                 StartDying();
+                return;
+            }
+
+            if (_pendingSteal)
+            {
+                _pendingSteal = false;
+                StealEverflower();
                 return;
             }
 
@@ -502,13 +506,14 @@ namespace VVRace
 
         // 포격 사거리 안 시야에 들어온 적을 감지하면 경호 중인 말벌의 공격 대상을 그 적으로 바꾼다.
         // 이미 노리게 한 적이 계속 보이면 대상을 바꾸지 않고 시간만 늘린다(가장 가까운 적이 바뀔 때마다 말벌이 오가지 않게).
+        // 단, 포탑은 보이는 플레이어 폰이 없을 때만 노리므로 포탑을 노리던 중 폰이 보이면 대상을 다시 고른다.
         private void TickEnemyDetection()
         {
             if (!parent.IsHashIntervalTick(EnemyDetectInterval)) { return; }
             if (!(ApocryphaUtility.FindEscortLord(Pawn)?.LordJob is LordJob_ApocryphaEscort escortJob)) { return; }
 
             var target = escortJob.FocusTarget;
-            if (target == null || !IsShellTarget(target))
+            if (target == null || !IsShellTarget(target) || (!(target is Pawn) && AnyShellTargetPawn()))
             {
                 target = FindNearestShellTarget();
             }
@@ -557,7 +562,7 @@ namespace VVRace
                 }
             }
 
-            TickAimVisuals(stunned);
+            TickAimVisuals();
         }
 
         private void FireShell(IntVec3 cell)
@@ -588,7 +593,7 @@ namespace VVRace
 
         // 헬스피어 캐논식 금빛 조준 경고: 조준마다 대상 칸의 표적 모트·불꽃과 보스 머리의 충전광, 그리고 조준이 하나라도 있는 동안의 지속음.
         // 모트·이펙터는 저장되지 않으므로 불러온 뒤에는 처음 틱에 다시 만든다.
-        private void TickAimVisuals(bool stunned)
+        private void TickAimVisuals()
         {
             if (_shellAims.Count == 0)
             {
@@ -599,9 +604,10 @@ namespace VVRace
 
             var map = parent.Map;
             var bossTarget = new TargetInfo(parent);
+            var bodyCenter = BodyCenter;
             for (int i = 0; i < _shellAims.Count; i++)
             {
-                _shellAims[i].TickVisuals(Pawn, map, BodyCenter, stunned);
+                _shellAims[i].TickVisuals(Pawn, map, bodyCenter);
             }
 
             if (_aimSustainer == null)
@@ -691,6 +697,17 @@ namespace VVRace
             }
         }
 
+        // 반경 20 안 시야에 플레이어 세력 폰이 하나라도 있는지.
+        private bool AnyShellTargetPawn()
+        {
+            foreach (var target in parent.Map.mapPawns.SpawnedPawnsInFaction(Faction.OfPlayer))
+            {
+                if (IsShellTargetPawn(target)) { return true; }
+            }
+
+            return false;
+        }
+
         private bool IsShellTarget(Thing thing)
         {
             if (thing == null || !thing.Spawned || thing.Map != parent.Map) { return false; }
@@ -730,7 +747,7 @@ namespace VVRace
             var beatTicks = Mathf.RoundToInt(60f / ApocryphaMorphMaterials.BeatRate);
             if (elapsed > 0 && elapsed < Props.transformTicks && elapsed % beatTicks == 0)
             {
-                SpawnEffecter(ApocryphaEffecterDefOf.VV_Effecter_ApocryphaMorphPulse, BodyCenterOffset);
+                SpawnEffecter(ApocryphaEffecterDefOf.VV_Effecter_ApocryphaMorphPulse, ApocryphaGimmicks.BossBodyOffset);
                 ApocryphaUtility.ShakeCamera(parent.Map, 0.25f + 0.5f * Mathf.Sin(Mathf.PI * TransformProgress));
             }
 
@@ -1063,7 +1080,7 @@ namespace VVRace
             CancelAim();
             CancelBreath();
 
-            SpawnEffecter(ApocryphaEffecterDefOf.VV_Effecter_ApocryphaStaggered, BodyCenterOffset);
+            SpawnEffecter(ApocryphaEffecterDefOf.VV_Effecter_ApocryphaStaggered, ApocryphaGimmicks.BossBodyOffset);
             ApocryphaUtility.ShakeCamera(parent.Map, 1.2f);
         }
 
@@ -1220,12 +1237,14 @@ namespace VVRace
         }
 
         // [채널 작업] 작업이 어떤 이유로든 끝났을 때. 찬탈이 확정되지 않았다면 진행도는 0으로 돌아간다.
+        // 보스가 사라지는 중(퀘스트 종료·개발자 도구로 소실, 처치)에도 디스폰 직전에 작업이 끝나며 불리므로(아직 Spawned),
+        // 중단 메시지는 퀘스트 보스전이 이어지고 살아 있을 때만 띄운다(소실 경로는 보스를 퀘스트에서 먼저 떼어 낸 뒤 부른다).
         public void Notify_ChannelJobEnded()
         {
             if (_pendingSteal) { return; }
 
             var now = GenTicks.TicksGame;
-            if (_channelTicks >= ChannelInterruptMessageMinTicks && parent.Spawned && now - _lastChannelInterruptMessageTick > 600)
+            if (_channelTicks >= ChannelInterruptMessageMinTicks && parent.Spawned && !Pawn.Dead && IsQuestBossFight && now - _lastChannelInterruptMessageTick > 600)
             {
                 _lastChannelInterruptMessageTick = now;
                 Messages.Message(LocalizeString_EndingBoss.VV_Message_ApocryphaChannelInterrupted.Translate(), Pawn, MessageTypeDefOf.PositiveEvent);
@@ -1255,8 +1274,8 @@ namespace VVRace
             CancelAim();
             CancelBreath();
 
-            // 상태 전환(Failed)을 먼저 해서 영원꽃 파괴 통지(Notify_AnchorDestroyed)가 중복 처리되지 않게 한다.
-            ViviEndingQuest.Current?.Notify_EverflowerStolen(Pawn);
+            // 찬탈 신호로 퀘스트를 먼저 실패(Failed)로 넘겨, 뒤이은 영원꽃 파괴가 앵커 상실로 따로 처리되지 않게 한다.
+            ViviEndingQuest.Current?.Notify_EverflowerStolen();
 
             var effectCell = (target ?? everflower)?.Position ?? parent.Position;
             ApocryphaEffecterDefOf.VV_Effecter_ApocryphaSteal.Spawn(effectCell, map).Cleanup();
@@ -1267,24 +1286,11 @@ namespace VVRace
                 everflower.Destroy(DestroyMode.Vanish);
             }
 
-            foreach (var hornet in ApocryphaUtility.GetEscorts(Pawn))
-            {
-                if (hornet.Spawned)
-                {
-                    ApocryphaEffecterDefOf.VV_Effecter_ApocryphaVanish.Spawn(hornet.Position, map).Cleanup();
-                }
-
-                if (!hornet.Destroyed)
-                {
-                    hornet.Destroy(DestroyMode.Vanish);
-                }
-            }
-
             _phase = ApocryphaPhase.Dying;
             ApocryphaGimmicks.Notify_BossPhaseChanged(Pawn, ApocryphaPhase.Dying);
 
-            ApocryphaEffecterDefOf.VV_Effecter_ApocryphaVanish.Spawn(parent.Position, map, 2.5f).Cleanup();
-            Pawn.Destroy(DestroyMode.Vanish);
+            // 호위 말벌과 함께 순간 소실 연출로 사라진다(엔딩 정리와 같은 처리).
+            ViviEndingUtility.VanishBoss(Pawn);
         }
 
         public void DebugStartChannel()
@@ -1400,16 +1406,22 @@ namespace VVRace
 
         private void BeginDissolve(Map map, IntVec3 cell)
         {
+            // 소멸 연출은 죽기 직전의 모습(페이즈별 그리기 크기)을 기억하므로 페이즈를 바꾸기 전에 만든다.
+            DyingApocrypha dying = null;
+            if (map != null && cell.InBounds(map))
+            {
+                dying = (DyingApocrypha)ThingMaker.MakeThing(ApocryphaThingDefOf.VV_DyingApocrypha);
+                dying.InitFrom(Pawn);
+            }
+
             _phase = ApocryphaPhase.Dying;
             _channelTicks = 0;
             _pendingSteal = false;
             CancelAim();
             CancelBreath();
 
-            if (map != null && cell.InBounds(map))
+            if (dying != null)
             {
-                var dying = (DyingApocrypha)ThingMaker.MakeThing(ApocryphaThingDefOf.VV_DyingApocrypha);
-                dying.InitFrom(Pawn);
                 GenSpawn.Spawn(dying, cell, map);
             }
 
@@ -1435,6 +1447,48 @@ namespace VVRace
 
             BeginDissolve(prevMap, parent.Position);
         }
+
+        // 두꺼운(산) 지붕이 무너지면 바닐라는 피해 흡수와 관계없이 Kill로 압사시켜 보스전이 통째로 생략된다.
+        // 무너지기 직전 근처의 무너지지 않는 칸으로 순간이동해 피한다(바닐라 CompNociosphere와 같은 방식).
+        // RemoveThing을 돌려주면 바닐라는 이 칸의 압사 처리를 건너뛴다(갈 곳이 없어도 압사는 피한다).
+        public RoofCollapseResponse Notify_OnBeforeRoofCollapse()
+        {
+            if (_phase == ApocryphaPhase.Dying || !parent.Spawned) { return RoofCollapseResponse.None; }
+
+            var map = parent.Map;
+            var from = parent.Position;
+            if (TryFindRoofCollapseEscapeCell(map, from, out var cell))
+            {
+                ApocryphaEffecterDefOf.VV_Effecter_ApocryphaVanish.Spawn(from, map, 2.5f).Cleanup();
+                parent.Position = cell;
+                Pawn.Notify_Teleported(endCurrentJob: true, resetTweenedPos: true);
+                ApocryphaEffecterDefOf.VV_Effecter_ApocryphaArrive.Spawn(cell, map, 1.5f).Cleanup();
+                Messages.Message(LocalizeString_EndingBoss.VV_Message_ApocryphaEscapedRoofCollapse.Translate(), Pawn, MessageTypeDefOf.NeutralEvent);
+            }
+
+            return RoofCollapseResponse.RemoveThing;
+        }
+
+        // 무너지는 칸·산 지붕 아래·안개 속이 아니고 보스가 걸어서(벽을 부수며) 갈 수 있는 칸을 먼저 찾고,
+        // 근처가 모두 산 지붕 아래라면 이번에 무너지지 않는 칸 아무 곳으로 물러난다.
+        private bool TryFindRoofCollapseEscapeCell(Map map, IntVec3 from, out IntVec3 result)
+        {
+            var collapseBuffer = map.roofCollapseBuffer;
+            var traverseParms = TraverseParms.For(Pawn, Danger.Deadly, TraverseMode.PassAllDestroyableThings);
+            if (CellFinder.TryFindRandomCellNear(from, map, RoofCollapseEscapeRadius, c =>
+                c != from
+                && c.Standable(map)
+                && !c.Fogged(map)
+                && !collapseBuffer.IsMarkedToCollapse(c)
+                && !(c.GetRoof(map)?.isThickRoof ?? false)
+                && map.reachability.CanReach(from, c, PathEndMode.OnCell, traverseParms), out result))
+            {
+                return true;
+            }
+
+            return CellFinder.TryFindRandomCellNear(from, map, RoofCollapseEscapeRadius * 2, c =>
+                c != from && c.Standable(map) && !collapseBuffer.IsMarkedToCollapse(c), out result);
+        }
         #endregion
 
         #region 그리기/UI
@@ -1454,8 +1508,7 @@ namespace VVRace
                         return boundSize;
 
                     case ApocryphaPhase.Transforming:
-                        var t = Mathf.Clamp01((GenTicks.TicksGame - _transformStartTick) / (float)Mathf.Max(1, Props.transformTicks));
-                        return Mathf.Lerp(boundSize, unboundSize, t);
+                        return Mathf.Lerp(boundSize, unboundSize, TransformProgress);
 
                     default:
                         return unboundSize;
@@ -1549,80 +1602,40 @@ namespace VVRace
 
             if (!DebugSettings.godMode) { yield break; }
 
-            var command_reduceBond = new Command_Action();
-            command_reduceBond.defaultLabel = "DEV: Bond -25%";
-            command_reduceBond.action = () => DebugReduceBond(0.25f);
-            yield return command_reduceBond;
-
-            var command_forcePhase2 = new Command_Action();
-            command_forcePhase2.defaultLabel = "DEV: Force phase 2";
-            command_forcePhase2.action = () => DebugForcePhase2();
-            yield return command_forcePhase2;
-
-            var command_damageVitality = new Command_Action();
-            command_damageVitality.defaultLabel = "DEV: Vitality -25%";
-            command_damageVitality.action = () => DebugDamageVitality(0.25f);
-            yield return command_damageVitality;
-
-            var command_startChannel = new Command_Action();
-            command_startChannel.defaultLabel = "DEV: Start channel";
-            command_startChannel.action = () => DebugStartChannel();
-            yield return command_startChannel;
-
-            var command_finishChannel = new Command_Action();
-            command_finishChannel.defaultLabel = "DEV: Finish channel";
-            command_finishChannel.action = () => DebugFinishChannel();
-            yield return command_finishChannel;
-
-            var command_resonance = new Command_Action();
-            command_resonance.defaultLabel = "DEV: Resonance wave";
-            command_resonance.action = () => ApplyResonanceWave(null, 1200);
-            yield return command_resonance;
-
-            var command_fireShell = new Command_Action();
-            command_fireShell.defaultLabel = "DEV: Shell ready now";
-            command_fireShell.action = () => _shellReadyTick = 0;
-            yield return command_fireShell;
-
-            var command_doomSeed = new Command_Action();
-            command_doomSeed.defaultLabel = "DEV: Doom seed now";
-            command_doomSeed.action = () => _nextDoomSeedTick = 0;
-            yield return command_doomSeed;
+            yield return DevCommand("DEV: Bond -25%", () => DebugReduceBond(0.25f));
+            yield return DevCommand("DEV: Force phase 2", DebugForcePhase2);
+            yield return DevCommand("DEV: Vitality -25%", () => DebugDamageVitality(0.25f));
+            yield return DevCommand("DEV: Start channel", DebugStartChannel);
+            yield return DevCommand("DEV: Finish channel", DebugFinishChannel);
+            yield return DevCommand("DEV: Resonance wave", () => ApplyResonanceWave(null, 1200));
+            yield return DevCommand("DEV: Shell ready now", () => _shellReadyTick = 0);
+            yield return DevCommand("DEV: Doom seed now", () => _nextDoomSeedTick = 0);
 
             // 요정꽃 사출 주기를 당긴 뒤 바로 멸망꽃을 사출한다(씨앗 하나가 요정꽃 씨앗으로 바뀐다).
-            var command_fairySeed = new Command_Action();
-            command_fairySeed.defaultLabel = "DEV: Fairy seed now";
-            command_fairySeed.action = () =>
+            yield return DevCommand("DEV: Fairy seed now", () =>
             {
                 _doomSeedsLaunched = Mathf.Max(_doomSeedsLaunched, Props.doomSeedsBeforeFairySeed);
                 _nextFairySeedTick = 0;
                 _nextDoomSeedTick = 0;
-            };
-            yield return command_fairySeed;
+            });
 
-            var command_flowerGuards = new Command_Action();
-            command_flowerGuards.defaultLabel = "DEV: Flower guard hornets";
-            command_flowerGuards.action = () => _edgeHornets.AddRange(ApocryphaUtility.SpawnFlowerGuardHornets(Pawn, Props.edgeHornetGroupSize.max));
-            yield return command_flowerGuards;
-
-            var command_breath = new Command_Action();
-            command_breath.defaultLabel = "DEV: Breath ready now";
-            command_breath.action = () => _breathReadyTick = 0;
-            yield return command_breath;
-
-            var command_approach = new Command_Action();
-            command_approach.defaultLabel = "DEV: Approach altar now";
-            command_approach.action = () =>
+            yield return DevCommand("DEV: Flower guard hornets", () => _edgeHornets.AddRange(ApocryphaUtility.SpawnFlowerGuardHornets(Pawn, Props.edgeHornetGroupSize.max)));
+            yield return DevCommand("DEV: Breath ready now", () => _breathReadyTick = 0);
+            yield return DevCommand("DEV: Approach altar now", () =>
             {
                 _nextApproachTick = 0;
                 InterruptCurrentJob();
-            };
-            yield return command_approach;
+            });
+            yield return DevCommand("DEV: Reinforce escorts", () => ApocryphaUtility.SpawnHornetEscorts(Pawn, Props.escortReinforceCount.RandomInRange, fromMapEdge: true));
+        }
 
-            var command_escorts = new Command_Action();
-            command_escorts.defaultLabel = "DEV: Reinforce escorts";
-            command_escorts.action = () => ApocryphaUtility.SpawnHornetEscorts(Pawn, Props.escortReinforceCount.RandomInRange, fromMapEdge: true);
-            yield return command_escorts;
+        private static Command_Action DevCommand(string label, System.Action action)
+        {
+            return new Command_Action()
+            {
+                defaultLabel = label,
+                action = action,
+            };
         }
         #endregion
 
@@ -1641,12 +1654,12 @@ namespace VVRace
             }
         }
 
-        // 보스 몸통 위치(offset)에서 이펙터를 한 번 재생한다.
+        // 보스 몸통 위치(offset)에서 이펙터를 한 번 재생한다. maintainTicks가 있으면 지연 스프레이(충격파 메아리 등)까지 끝나도록 맵에 맡긴다.
         private void SpawnEffecter(EffecterDef effecterDef, Vector3 offset = default)
         {
             if (effecterDef == null || !parent.Spawned) { return; }
 
-            effecterDef.Spawn(parent, parent.Map, (Pawn.DrawPos - parent.Position.ToVector3Shifted()).WithY(0f) + offset).Cleanup();
+            ApocryphaGimmicks.PlayEffect(effecterDef, parent.Position, parent.Map, (Pawn.DrawPos - parent.Position.ToVector3Shifted()).WithY(0f) + offset);
         }
         #endregion
     }

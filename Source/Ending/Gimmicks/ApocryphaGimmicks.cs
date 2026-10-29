@@ -1,8 +1,8 @@
 ﻿using RimWorld;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using Verse;
+using Verse.AI;
 
 namespace VVRace
 {
@@ -10,8 +10,7 @@ namespace VVRace
     // 보스 쪽(Task D)이 타이머/조준을 관리하고 실제 발사·생성·연출은 이 모듈(Task E)이 담당한다.
     public static class ApocryphaGimmicks
     {
-        // 씨앗 착탄 칸: 맵 무작위 칸을 최대 200번 시도, 보스로부터 8칸 이상
-        private const int SeedCellSearchTries = 200;
+        // 씨앗 착탄 칸: 맵 무작위 칸, 보스로부터 8칸 이상
         private const float MinSeedDistanceFromBoss = 8f;
 
         // 한 번에 흩뿌린 씨앗끼리 떨어져야 하는 거리
@@ -52,20 +51,18 @@ namespace VVRace
             return true;
         }
 
+        // [시험용] 보스는 TryLaunchSeedVolley만 쓴다. 아래 두 메서드는 자동 테스트 스크립트가 리플렉션으로 부르는 진입점이므로
+        // 이름·시그니처를 바꿀 때는 스크립트도 함께 고친다.
+
         // 맵의 무작위 빈 바닥(물/깊은 물 제외)으로 멸망꽃 씨앗 투사체를 날린다. 착탄 시 멸망꽃이 피어난다.
         public static bool TryLaunchDoomSeed(Pawn boss)
         {
-            return TryLaunchDoomSeeds(boss, 1) > 0;
-        }
-
-        // 멸망꽃 씨앗을 한 번에 count개까지 서로 떨어진 빈 바닥으로 흩뿌린다. 실제로 날린 씨앗 수를 반환한다.
-        public static int TryLaunchDoomSeeds(Pawn boss, int count)
-        {
-            TryLaunchSeedVolley(boss, count, false, out var doomLaunched, out _);
-            return doomLaunched;
+            TryLaunchSeedVolley(boss, 1, false, out var doomLaunched, out _);
+            return doomLaunched > 0;
         }
 
         // 맵의 무작위 빈 바닥으로 요정꽃 씨앗 투사체를 날린다. 착탄 시 요정꽃이 피어난다(요정꽃이 이미 최대 개수면 아무것도 쏘지 않는다).
+        // (요정꽃 자리가 없으면 TryLaunchSeedVolley가 멸망꽃 씨앗으로 바꿔 쏘므로, 여기서 먼저 걸러 요정꽃만 쏘게 한다)
         public static bool TryLaunchFairySeed(Pawn boss)
         {
             if (!IsBoundBoss(boss, out var comp)) { return false; }
@@ -305,14 +302,16 @@ namespace VVRace
         // 씨앗이 떨어진 칸(또는 그 근처)에 꽃을 피울 칸을 다시 고른다.
         internal static bool TryFindBloomCellNear(IntVec3 cell, Map map, out IntVec3 result)
         {
-            var altarRect = GetAltarRect(map);
-            if (IsValidBloomCell(cell, map, altarRect))
+            var altar = Building_DreamumAltar.FindOnMap(map);
+            var altarRect = GetAltarRect(altar);
+            var colonyAnchor = GetColonyAnchor(map, altar);
+            if (IsValidBloomCell(cell, map, altarRect, colonyAnchor))
             {
                 result = cell;
                 return true;
             }
 
-            return CellFinder.TryFindRandomCellNear(cell, map, BloomCellFallbackRadius, c => IsValidBloomCell(c, map, altarRect), out result);
+            return CellFinder.TryFindRandomCellNear(cell, map, BloomCellFallbackRadius, c => IsValidBloomCell(c, map, altarRect, colonyAnchor), out result);
         }
 
         // 꽃을 피운다. 멸망꽃은 적대 표시(아군 자동 공격)를 위해 보스 세력에 속한다.
@@ -339,20 +338,22 @@ namespace VVRace
         #region 씨앗 발사
 
         // avoid: 같은 차례에 이미 고른 착탄 칸(이 칸들과 MinVolleySeedSpacing 이상 떨어진 곳만 고른다)
+        // 맵 무작위 칸을 고른다. 조건에 맞는 칸이 드물어 무작위 시도가 모두 빗나가면 바닐라 TryFindRandomCell이 맵 전체를 훑어 찾는다.
         private static bool TryFindSeedTargetCell(Pawn boss, List<IntVec3> avoid, out IntVec3 result)
         {
             var map = boss.Map;
-            var altarRect = GetAltarRect(map);
+            var bossCell = boss.Position;
+            var altar = Building_DreamumAltar.FindOnMap(map);
+            var altarRect = GetAltarRect(altar);
+            var colonyAnchor = GetColonyAnchor(map, altar);
             var minDistanceSquared = MinSeedDistanceFromBoss * MinSeedDistanceFromBoss;
 
-            for (int i = 0; i < SeedCellSearchTries; i++)
+            // 싼 검사부터: 보스와의 거리 → 같은 사출의 다른 착탄 칸과의 간격 → 칸 상태 → 정착지에서의 도달 여부
+            if (CellFinder.TryFindRandomCell(map, cell =>
+                cell.DistanceToSquared(bossCell) >= minDistanceSquared
+                && !IsNearAny(avoid, cell, MinVolleySeedSpacing)
+                && IsValidBloomCell(cell, map, altarRect, colonyAnchor), out result))
             {
-                var cell = CellFinder.RandomCell(map);
-                if (cell.DistanceToSquared(boss.Position) < minDistanceSquared) { continue; }
-                if (avoid != null && avoid.Any(v => v.InHorDistOf(cell, MinVolleySeedSpacing))) { continue; }
-                if (!IsValidBloomCell(cell, map, altarRect)) { continue; }
-
-                result = cell;
                 return true;
             }
 
@@ -360,10 +361,22 @@ namespace VVRace
             return false;
         }
 
+        private static bool IsNearAny(List<IntVec3> cells, IntVec3 cell, float radius)
+        {
+            if (cells == null) { return false; }
+
+            for (int i = 0; i < cells.Count; i++)
+            {
+                if (cells[i].InHorDistOf(cell, radius)) { return true; }
+            }
+
+            return false;
+        }
+
         // 꽃이 필 수 있는 빈 바닥: 서 있을 수 있고, 물(깊은 물 포함)이 아니며, 건물·아이템·폰·청사진이 없고,
         // 두꺼운 지붕 아래나 안개 속에 있지 않으며, 제단 발판이 아니고, 정착지에서 걸어갈 수 있는 칸.
         // 일반 흙·암석 바닥·인공 바닥은 모두 허용한다(야생 풀은 피어날 때 치우지만, 재배 구역의 작물은 건드리지 않는다).
-        private static bool IsValidBloomCell(IntVec3 cell, Map map, CellRect altarRect)
+        private static bool IsValidBloomCell(IntVec3 cell, Map map, CellRect altarRect, LocalTargetInfo colonyAnchor)
         {
             if (!cell.InBounds(map)) { return false; }
             if (!cell.Standable(map)) { return false; }
@@ -385,12 +398,32 @@ namespace VVRace
                 if (thing.def.IsBlueprint || thing.def.IsFrame) { return false; }
             }
 
-            return map.reachability.CanReachColony(cell);
+            return CanReachFromColony(cell, map, colonyAnchor);
         }
 
-        private static CellRect GetAltarRect(Map map)
+        // 정착지에서 이 칸까지 걸어갈 수 있는지. 바닐라 CanReachColony는 칸마다 모든 정착민·정착지 건물과의 도달을 따진 뒤
+        // 그래도 안 되면 '가장 큰 맵 가장자리 구역'에서 닿는지로 넘어가, 정착민이 못 가는 땅(물·용암 건너편 섬 등)도 통과시킨다.
+        // 대신 정착지 기준점 한 곳과의 도달만 본다(구역 쌍 단위로 캐시되므로 칸마다 불러도 싸다).
+        private static bool CanReachFromColony(IntVec3 cell, Map map, LocalTargetInfo colonyAnchor)
         {
-            var altar = Building_DreamumAltar.FindOnMap(map);
+            if (!colonyAnchor.IsValid) { return map.reachability.CanReachColony(cell); }
+
+            return map.reachability.CanReach(cell, colonyAnchor, PathEndMode.Touch, TraverseParms.For(TraverseMode.PassDoors));
+        }
+
+        // 정착지 기준점: 엔딩 제단(보스전이 벌어지는 곳). 제단이 없으면 아무 자유 정착민, 그마저 없으면 Invalid(바닐라 판정으로 대신).
+        private static LocalTargetInfo GetColonyAnchor(Map map, Building altar)
+        {
+            if (altar != null && altar.Spawned) { return altar; }
+
+            var colonists = map.mapPawns.FreeColonistsSpawned;
+            if (colonists.Count > 0) { return colonists[0]; }
+
+            return LocalTargetInfo.Invalid;
+        }
+
+        private static CellRect GetAltarRect(Building altar)
+        {
             return altar != null && altar.Spawned ? altar.OccupiedRect() : CellRect.Empty;
         }
 

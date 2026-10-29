@@ -424,7 +424,7 @@ namespace VVRace
             RefreshFairyBondHediff(pawn);
         }
 
-        // 요정 비비 결속(VV_ViviFairyFollow): 구 세이브의 예전 클래스 인스턴스를 Hediff_ViviFairyFollow로 바꾸고(RefreshBondHediff),
+        // 요정 비비 결속(VV_ViviFairyFollow): 수치를 현재 결속 수에 맞추고(RefreshBondHediff, 구 세이브에 남은 어긋난 수치 보정),
         // 6단계 영원꽃과의 연결 여부에 따라 단계가 바뀌었을 수 있으므로 스탯 캐시를 갱신한다(레벨 변경·스폰·불러오기 후 갱신 때마다).
         private void RefreshFairyBondHediff(Pawn pawn)
         {

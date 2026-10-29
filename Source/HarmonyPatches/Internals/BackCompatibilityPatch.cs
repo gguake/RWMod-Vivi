@@ -1,4 +1,4 @@
-using HarmonyLib;
+﻿using HarmonyLib;
 using RimWorld;
 using System;
 using System.Collections.Generic;
@@ -15,6 +15,9 @@ namespace VVRace
             "Make_VV_UniformHelmet",
         };
 
+        // 클래스가 나중에 HediffWithComps에서 Hediff_ViviFairyFollow로 바뀐 헤디프
+        private const string FairyBondHediffDefName = "VV_ViviFairyFollow";
+
         internal static void Patch(Harmony harmony)
         {
             harmony.Patch(original: AccessTools.Method(typeof(BackCompatibility), nameof(BackCompatibility.GetBackCompatibleType)),
@@ -23,6 +26,17 @@ namespace VVRace
 
         private static void BackCompatibility_GetBackCompatibleType_Postfix(ref Type __result, XmlNode node)
         {
+            if (__result == typeof(HediffWithComps))
+            {
+                // 구버전 세이브의 요정 비비 결속(HediffWithComps -> Hediff_ViviFairyFollow). 추가 저장 필드가 없어 그대로 읽힌다.
+                if (node?["def"]?.InnerText == FairyBondHediffDefName)
+                {
+                    __result = typeof(Hediff_ViviFairyFollow);
+                }
+
+                return;
+            }
+
             if (__result != typeof(Bill_Production)) { return; }
 
             var recipeName = node?["recipe"]?.InnerText;

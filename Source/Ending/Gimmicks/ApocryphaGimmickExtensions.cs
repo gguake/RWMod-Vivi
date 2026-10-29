@@ -4,10 +4,10 @@ using Verse;
 namespace VVRace
 {
     // 멸망꽃/요정꽃 공용 연출 데이터. 보스와 잇는 영혼 연결선의 색·폭·꽃 머리 위치도 여기서 읽는다.
+    // (꽃이 있는 동안의 유지 이펙트는 def의 CompProperties_Effecter로 지정한다)
     public class ApocryphaFlowerExtension : DefModExtension
     {
         public EffecterDef bloomEffecter;       // 씨앗이 착탄해 피어날 때(최초 스폰)
-        public EffecterDef auraEffecter;        // 꽃이 있는 동안 매 틱 유지
         public EffecterDef witherEffecter;      // 시들거나 사라질 때
 
         public Color linkColor = Color.white;

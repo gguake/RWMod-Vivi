@@ -31,6 +31,7 @@
         public const string VV_Message_ApocryphaBondReleased = nameof(VV_Message_ApocryphaBondReleased);
         public const string VV_Message_ApocryphaTransformStarted = nameof(VV_Message_ApocryphaTransformStarted);
         public const string VV_Message_ApocryphaChannelInterrupted = nameof(VV_Message_ApocryphaChannelInterrupted);
+        public const string VV_Message_ApocryphaEscapedRoofCollapse = nameof(VV_Message_ApocryphaEscapedRoofCollapse);
 
         // 텍스트 모트
         public const string VV_TextMote_ApocryphaStunImmune = nameof(VV_TextMote_ApocryphaStunImmune);

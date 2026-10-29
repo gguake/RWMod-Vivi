@@ -53,16 +53,8 @@
   </JobDef>
 
   <JobDef>
-    <defName>VV_ApocryphaAim</defName>
-    <driverClass>VVRace.JobDriver_ApocryphaAim</driverClass>
-    <reportString>aiming a volley of vivi fairies.</reportString>
-    <casualInterruptible>false</casualInterruptible>
-    <suspendable>false</suspendable>
-  </JobDef>
-
-  <JobDef>
     <defName>VV_ApocryphaBreath</defName>
-    <driverClass>VVRace.JobDriver_ApocryphaAim</driverClass>
+    <driverClass>VVRace.JobDriver_ApocryphaBreath</driverClass>
     <reportString>gathering toxic breath.</reportString>
     <casualInterruptible>false</casualInterruptible>
     <suspendable>false</suspendable>

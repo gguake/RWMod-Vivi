@@ -2,13 +2,14 @@
 using RimWorld.Planet;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Verse;
 
 namespace VVRace
 {
     // 〈바스러진 여왕, 아포크리파〉: 평화 기간이 끝나면 맵 외곽에서 호위 말벌과 함께 등장시킨다.
     // 외곽에서 제단으로 이어지는 길이 없으면 등장을 미루고(평화 기간 상태로 위협 억제를 풀어 둠) 2500틱마다 다시 시도한다.
-    // 등장한 뒤에는 보스를 감시하다가, 소멸 연출이 끝났다는 신호(창구가 보냄)나 아무 알림 없이 사라진 뒤 유예가 지나면 토벌로 처리한다.
+    // 등장한 뒤에는 보스를 감시하다가, 소멸 연출이 끝났다는 신호(창구가 보냄)나 아무 알림 없이 완전히 사라진 뒤(죽음·파괴·어느 맵에도 없음) 유예가 지나면 토벌로 처리한다.
     public class QuestPart_ViviApocrypha : QuestPartActivable
     {
         private const int RetryIntervalTicks = 2500;
@@ -27,7 +28,6 @@ namespace VVRace
         // 한 번이라도 등장했는지. 소멸 연출 중 저장하면 파괴된 보스 참조는 null로 저장되므로, 등장 여부를 따로 기억해 다시 소환하지 않는다.
         private bool _arrived;
         private bool _deferred;
-        private bool _deferredMessageSent;
         private int _nextAttemptTick = -1;
         private int _bossMissingSinceTick = -1;
 
@@ -109,27 +109,31 @@ namespace VVRace
             Pawn boss = null;
             if (ApocryphaUtility.TryFindEntryCell(map, target, out var entryCell) || (forceSpawn && TryFindAnyEdgeCell(map, out entryCell)))
             {
+                var bossesBefore = SpawnedBosses(map);
                 try
                 {
                     boss = ApocryphaUtility.SpawnApocrypha(map, entryCell, StorytellerUtility.DefaultThreatPointsNow(map) * BossPointsFactor);
                 }
                 catch (Exception ex)
                 {
-                    // 예외로 생성·스폰에 실패해도 보스 없이 보스 단계에 들어가지 않도록 등장을 미루고 재시도한다.
                     Log.Error($"[ViViRace] failed to spawn Apocrypha: {ex}");
-                    boss = null;
+
+                    // 보스 폰이 이미 스폰된 뒤의 단계(호위 말벌·연출)에서 실패했다면 그 보스로 보스 단계를 시작한다(재시도가 보스를 또 소환하지 않게).
+                    // 생성·스폰 자체가 실패했으면 보스 없이 보스 단계에 들어가지 않도록 등장을 미루고 재시도한다.
+                    boss = SpawnedBosses(map).FirstOrDefault(v => !bossesBefore.Contains(v) && !v.Dead && !v.Destroyed);
                 }
             }
 
             if (boss == null)
             {
-                _deferred = true;
                 _nextAttemptTick = Find.TickManager.TicksGame + RetryIntervalTicks;
                 ViviEndingUtility.EndOminousSilence();
 
-                if (!_deferredMessageSent)
+                // 처음 미뤄질 때만 알린다(등장하면 _deferred가 풀린다).
+                var firstDeferral = !_deferred;
+                _deferred = true;
+                if (firstDeferral)
                 {
-                    _deferredMessageSent = true;
                     Messages.Message(
                         LocalizeString_EndingCore.VV_Message_EndingApocryphaDeferred.Translate(),
                         new LookTargets(anchor),
@@ -142,7 +146,6 @@ namespace VVRace
             _boss = boss;
             _arrived = true;
             _deferred = false;
-            _deferredMessageSent = false;
             _bossMissingSinceTick = -1;
             ViviEndingUtility.EndOminousSilence();
 
@@ -156,18 +159,25 @@ namespace VVRace
             return CellFinder.TryFindRandomEdgeCellWith(c => c.Standable(map) && !c.Fogged(map), map, CellFinder.EdgeRoadChance_Ignore, out cell);
         }
 
-        // 250틱마다: 보스가 아무 알림 없이 사라졌으면(개발자 도구 등) 경고 후 토벌로 처리해 진행이 막히지 않게 한다.
+        private static List<Pawn> SpawnedBosses(Map map)
+        {
+            var bossDef = ApocryphaThingDefOf.VV_Apocrypha;
+            return bossDef != null ? map.listerThings.ThingsOfDef(bossDef).OfType<Pawn>().ToList() : new List<Pawn>();
+        }
+
+        // 250틱마다: 보스가 아무 알림 없이 완전히 사라졌으면(개발자 도구·다른 모드의 소멸 등) 경고 후 토벌로 처리해 진행이 막히지 않게 한다.
+        // 살아서 어느 맵에든 있으면(앵커가 중력선으로 다른 맵에 옮겨진 경우 등) 토벌로 치지 않고 계속 기다린다.
         private void WatchBoss(int now)
         {
-            var map = AnchorMap;
-            if (IsBossAlive && _boss.Map == map)
+            if (IsBossAlive)
             {
                 _bossMissingSinceTick = -1;
                 return;
             }
 
             // 소멸 연출 중이면(보스 폰은 즉시 파괴되고 VV_DyingApocrypha가 450틱 뒤 창구에 알린다) 기다린다.
-            if (_boss?.GetComp<CompApocrypha>()?.Phase == ApocryphaPhase.Dying || ApocryphaUtility.IsDefeatInProgress(map) || ApocryphaUtility.IsDefeatInProgress(_boss?.MapHeld))
+            // 저장·불러오기를 거치면 파괴된 보스 참조가 null이 되므로 연출이 진행 중인 맵을 모두 확인한다.
+            if (_boss?.GetComp<CompApocrypha>()?.Phase == ApocryphaPhase.Dying || Find.Maps.Any(ApocryphaUtility.IsDefeatInProgress))
             {
                 _bossMissingSinceTick = -1;
                 return;
@@ -263,7 +273,6 @@ namespace VVRace
             Scribe_References.Look(ref _boss, "boss");
             Scribe_Values.Look(ref _arrived, "arrived", false);
             Scribe_Values.Look(ref _deferred, "deferred", false);
-            Scribe_Values.Look(ref _deferredMessageSent, "deferredMessageSent", false);
             Scribe_Values.Look(ref _nextAttemptTick, "nextAttemptTick", -1);
             Scribe_Values.Look(ref _bossMissingSinceTick, "bossMissingSinceTick", -1);
         }

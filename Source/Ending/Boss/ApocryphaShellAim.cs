@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using UnityEngine;
 using Verse;
 
@@ -25,7 +25,8 @@ namespace VVRace
             this.fireTick = fireTick;
         }
 
-        public void TickVisuals(Pawn boss, Map map, Vector3 bodyCenter, bool stunned)
+        // 기절하면 CompApocrypha가 조준을 모두 취소하므로 연출은 기절 중에 돌지 않는다.
+        public void TickVisuals(Pawn boss, Map map, Vector3 bodyCenter)
         {
             var direction = cell.ToVector3Shifted() - boss.DrawPos;
             direction.y = 0f;
@@ -38,7 +39,6 @@ namespace VVRace
 
             if (_targetMote != null)
             {
-                _targetMote.paused = stunned;
                 _targetMote.exactRotation = direction.AngleFlat();
                 _targetMote.Maintain();
             }
@@ -51,7 +51,6 @@ namespace VVRace
 
             if (_chargeMote != null)
             {
-                _chargeMote.paused = stunned;
                 _chargeMote.exactPosition = chargePos;
                 _chargeMote.exactRotation = direction.AngleFlat();
                 _chargeMote.Maintain();

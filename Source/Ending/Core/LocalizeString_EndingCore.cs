@@ -61,6 +61,8 @@
         // 메시지
         public const string VV_Message_EndingApocryphaDeferred = nameof(VV_Message_EndingApocryphaDeferred);
         public const string VV_Message_EndingPawnReturned = nameof(VV_Message_EndingPawnReturned);
+        public const string VV_Message_EndingPawnReturnedToCaravan = nameof(VV_Message_EndingPawnReturnedToCaravan);
+        public const string VV_Message_EndingGrandAttunementNotStarted = nameof(VV_Message_EndingGrandAttunementNotStarted);
 
         // 개화 응축 진행 막대 기즈모
         public const string VV_Gizmo_EndingBloom = nameof(VV_Gizmo_EndingBloom);

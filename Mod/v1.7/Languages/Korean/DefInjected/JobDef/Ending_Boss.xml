@@ -4,10 +4,9 @@
 <VV_ApocryphaWait.reportString>멍하니 서 있는 중.</VV_ApocryphaWait.reportString>
 <VV_ApocryphaWander.reportString>정처 없이 배회하는 중.</VV_ApocryphaWander.reportString>
 <VV_ApocryphaApproach.reportString>영원꽃에 이끌려 다가가는 중.</VV_ApocryphaApproach.reportString>
-<VV_ApocryphaAim.reportString>요정 비비 사출을 준비하는 중.</VV_ApocryphaAim.reportString>
 <VV_ApocryphaBreath.reportString>독성 브레스를 머금는 중.</VV_ApocryphaBreath.reportString>
 <VV_ApocryphaChannel.reportString>영원꽃을 찬탈하는 중.</VV_ApocryphaChannel.reportString>
 <VV_ApocryphaCharge.reportString>영원꽃을 향해 돌진하는 중.</VV_ApocryphaCharge.reportString>
-<VV_ApocryphaSmash.reportString>TargetA(을)를 부수는 중.</VV_ApocryphaSmash.reportString>
+<VV_ApocryphaSmash.reportString>{TargetA}(을)를 부수는 중.</VV_ApocryphaSmash.reportString>
 
 </LanguageData>

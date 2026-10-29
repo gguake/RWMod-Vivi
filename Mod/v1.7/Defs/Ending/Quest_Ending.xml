@@ -2,12 +2,15 @@
 <Defs>
   <!-- 엔딩 퀘스트 1: 〈비비 연방의 밀서〉. 영원꽃 4단계 도달 후 서신이 도착할 때 만들어지고(ViviEndingQuest),
        제단 연구 해금·고대 호박 코어 전달을 맡는다. 5단계 대조율 의식이 끝나면 성공으로 끝난다.
-       이름·설명·편지는 루트 노드가 Keyed 번역으로 채우므로 문법 규칙이 없다. -->
+       이름·설명·편지는 루트 노드가 Keyed 번역으로 채우므로 문법 규칙이 없다.
+       두 퀘스트 모두 이념 DLC의 아르코넥서스 이주(MoveColonyAndReset)에도 끝나지 않는다(바닐라 아르코넥서스 퀘스트와 같은 endOnColonyMove=false).
+       밀서는 이주 뒤에도 제단 연구·호박 코어 전달이 이어지고, 본편은 앵커가 옛 정착지와 함께 사라지면 〈영원꽃 소실〉로 실패한다. -->
   <QuestScriptDef>
     <defName>VV_EndGame_ViviMissive</defName>
     <isRootSpecial>true</isRootSpecial>
     <autoAccept>true</autoAccept>
     <sendAvailableLetter>false</sendAvailableLetter>
+    <endOnColonyMove>false</endOnColonyMove>
     <root Class="VVRace.QuestNode_Root_ViviMissive" />
   </QuestScriptDef>
 
@@ -18,6 +21,7 @@
     <isRootSpecial>true</isRootSpecial>
     <autoAccept>true</autoAccept>
     <sendAvailableLetter>false</sendAvailableLetter>
+    <endOnColonyMove>false</endOnColonyMove>
     <defaultChallengeRating>4</defaultChallengeRating>
     <root Class="VVRace.QuestNode_Root_ViviBloom" />
   </QuestScriptDef>

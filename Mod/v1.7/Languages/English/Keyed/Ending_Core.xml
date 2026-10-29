@@ -50,7 +50,7 @@
 <!-- Ending quest: Apocrypha defeated, awaiting the coronation -->
 <VV_Letter_EndingCoronationLabel>The everflower awaits its queen</VV_Letter_EndingCoronationLabel>
 <VV_Letter_EndingCoronation>As Apocrypha's form scattered into dust, the blocked mana surged back into the altar all at once, bringing the bloom condensation to 100%.
-\nThe everflower now awaits a queen to lead its final bloom. When {PAWN_labelShort}, its resonator, performs the queen's coronation at the everflower, it will bloom in its complete form.
+\nThe everflower now awaits a queen to lead its final bloom. When {PAWN_labelShort} performs the queen's coronation at the everflower, it will bloom in its complete form.
 \nThe pillar of mana no longer draws new raids, though the remaining titanic hornets are still targeting the colony.</VV_Letter_EndingCoronation>
 
 <!-- Ending quest: ending (the letter and the credits share the same text, in the style of the vanilla ending credits) -->
@@ -72,6 +72,8 @@
 <!-- Ending quest: messages -->
 <VV_Message_EndingApocryphaDeferred>The path from the map edge to the altar is blocked, preventing Apocrypha from appearing. Raids may resume until a path opens.</VV_Message_EndingApocryphaDeferred>
 <VV_Message_EndingPawnReturned>{PAWN_labelShort} has returned in front of the everflower altar.</VV_Message_EndingPawnReturned>
+<VV_Message_EndingPawnReturnedToCaravan>{PAWN_labelShort} has returned and joined {CARAVAN_label}.</VV_Message_EndingPawnReturnedToCaravan>
+<VV_Message_EndingGrandAttunementNotStarted>The grand attunement has ended, but the everflower could not begin its fifth bloom.</VV_Message_EndingGrandAttunementNotStarted>
 
 <!-- Ending quest: bloom condensation gizmo / inspector -->
 <VV_Gizmo_EndingBloom>Bloom condensation</VV_Gizmo_EndingBloom>

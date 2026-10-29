@@ -7,7 +7,7 @@ namespace VVRace
 {
     // 〈만개하는 여명〉의 진행 단계. 퀘스트의 첫 부품이라 모든 신호를 가장 먼저 받고, 단계는 신호로만 바뀐다.
     // 앵커 퀘스트 태그의 자동 신호(파괴·맵 제거)를 받아 엔딩이 진행 중이면 AnchorLost를 보내고,
-    // 퀘스트가 성공 외의 이유로 끝나면(정리) 엔딩이 건 컨디션을 걷는다.
+    // 퀘스트가 성공 외의 이유로 끝나면(정리) 엔딩이 건 컨디션을 걷는다. 자동 신호가 오지 않는 앵커 소실은 QuestPart_ViviAnchorWatch가 잡는다.
     public class QuestPart_ViviEndingState : QuestPart
     {
         public ArcanePlant_Everflower anchor;
@@ -31,7 +31,7 @@ namespace VVRace
         public bool Stolen => _stolen;
 
         // 앵커를 잃으면 실패하는 단계(엔딩 연출이 시작된 뒤에는 앵커를 잃어도 실패하지 않는다).
-        private bool IsActive => _stage == ViviEndingStage.Siege || _stage == ViviEndingStage.Calm || _stage == ViviEndingStage.Boss || _stage == ViviEndingStage.Coronation;
+        public bool IsActive => _stage.IsActiveStage();
 
         public override IEnumerable<GlobalTargetInfo> QuestLookTargets
         {

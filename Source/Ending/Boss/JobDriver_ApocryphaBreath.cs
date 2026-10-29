@@ -8,13 +8,11 @@ using Verse.Sound;
 namespace VVRace
 {
     // 2페이즈 독성 브레스 준비(VV_ApocryphaBreath) 동안 제자리에서 대상 칸을 바라보는 작업. 시간 판정과 실제 방출은 CompApocrypha가 한다.
-    // 1페이즈 사출 포격 조준(VV_ApocryphaAim)은 이동을 멈추지 않도록 CompApocrypha가 작업 없이 처리하므로, 그 작업은 불러온 옛 세이브에서만 남아 있다가 바로 끝난다.
-    public class JobDriver_ApocryphaAim : JobDriver
+    // (1페이즈 사출 포격 조준은 이동을 멈추지 않도록 CompApocrypha가 작업 없이 처리한다)
+    public class JobDriver_ApocryphaBreath : JobDriver
     {
         private const TargetIndex CellIndex = TargetIndex.A;
         private const int BreathDroolInterval = 5;
-
-        private bool IsBreath => job.def == ApocryphaJobDefOf.VV_ApocryphaBreath;
 
         public override bool TryMakePreToilReservations(bool errorOnFailed)
         {
@@ -23,15 +21,9 @@ namespace VVRace
 
         protected override IEnumerable<Toil> MakeNewToils()
         {
-            var toil = ToilMaker.MakeToil("ApocryphaAim")
+            var toil = ToilMaker.MakeToil("ApocryphaBreath")
                 .WithInitAction(() =>
                 {
-                    if (!IsBreath)
-                    {
-                        EndJobWith(JobCondition.Succeeded);
-                        return;
-                    }
-
                     pawn.pather?.StopDead();
                     pawn.rotationTracker.FaceCell(job.GetTarget(CellIndex).Cell);
                     pawn.ageTracker.CurLifeStageRace?.soundAngry?.PlayOneShot(new TargetInfo(pawn));

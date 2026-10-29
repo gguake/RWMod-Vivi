@@ -7,7 +7,7 @@ using Verse.AI;
 namespace VVRace
 {
     // 멸망꽃. 피어난 지 12시간(30000틱)이 지나면 만개해 맵의 모든 정착민에게 멸망꽃 저주를 내리고 시든다.
-    // 보스 세력 소속이라 적대 표시가 되며, 플레이어 세력(포탑·징집된 정착민)만 자동 공격 대상으로 삼는다.
+    // 보스 세력 소속이라 적대 표시가 되며, 플레이어 세력(포탑·징집된 정착민)만 자동 공격 대상으로 삼는다(지붕 아래 꽃은 박격포류가 자동 조준하지 않음).
     public class Building_DoomFlower : Building_ApocryphaFlower, IAttackTarget
     {
         public const int BloomDelayTicks = 30000;
@@ -32,7 +32,11 @@ namespace VVRace
             if (!Spawned) { return true; }
 
             var searcherFaction = disabledFor?.Thing?.Faction;
-            return searcherFaction == null || searcherFaction.HostileTo(Faction.OfPlayer);
+            if (searcherFaction == null || searcherFaction.HostileTo(Faction.OfPlayer)) { return true; }
+
+            // 박격포처럼 머리 위로 쏘는 무기는 지붕 아래(실내)에 핀 꽃을 자동 조준하지 않는다.
+            // 포탄이 지붕을 무너뜨리고 방 안에서 터져 정착지를 스스로 포격하게 되기 때문(직접 지정한 공격은 그대로 허용).
+            return Position.Roofed(Map) && (disabledFor.CurrentEffectiveVerb?.ProjectileFliesOverhead() ?? false);
         }
 
         #endregion

@@ -1065,7 +1065,7 @@
     </children>
   </EffecterDef>
 
-  <!-- 결속을 해방한 비비가 제단 앞으로 돌아옴(ViviEndingQuest가 DefDatabase로 찾아 재생) -->
+  <!-- 결속을 해방한 비비가 제단 앞으로 돌아옴(ViviEndingQuest가 ApocryphaGimmickDefOf로 재생) -->
   <EffecterDef>
     <defName>VV_Effecter_FairyReturn</defName>
     <maintainTicks>20</maintainTicks>

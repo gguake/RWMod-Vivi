@@ -9,6 +9,7 @@ namespace VVRace
     // 단계는 신호로만 바뀐다: 시작 → BloomCondensed → CalmEnded → ApocryphaArrived → ApocryphaDefeated → CoronationCompleted → EndingFinished,
     // 실패는 EverflowerStolen / AnchorLost.
     // 같은 신호를 받는 부품은 "상태 → 처리 → 편지 → QuestEnd" 순서로 추가한다. QuestEnd가 먼저 처리되면 퀘스트가 끝나 뒤 부품이 신호를 받지 못한다.
+    // 마지막 부품(AnchorLost 실패 QuestEnd)까지 추가되어야 창구가 온전한 퀘스트로 본다(ViviEndingQuest.GenerateQuest).
     public class QuestNode_Root_ViviBloom : QuestNode
     {
         private const int SiegeMaxDurationTicks = 600000;   // 의식 품질 0 → 10일
@@ -106,7 +107,7 @@ namespace VVRace
                 anchor = anchor,
             });
 
-            // 2) 〈폭풍 전의 고요〉 평화 기간: 맵 정리, 편지, 타이머, 〈불길한 정적〉, 엔딩까지 이어지는 〈황금빛 꽃안개〉
+            // 2) 〈폭풍 전의 고요〉 평화 기간: 맵 정리, 편지, 타이머, 〈불길한 정적〉, 엔딩까지 이어지는 〈황금빛 꽃안개〉(두 컨디션은 앵커 감시가 건다)
             var calmTicks = CalmDurationTicks.RandomInRange;
             quest.AddPart(new QuestPart_ViviCalmBegin()
             {
@@ -136,32 +137,16 @@ namespace VVRace
             calm.outSignalsCompleted.Add(calmEnded);
             quest.AddPart(calm);
 
-            if (mapParent != null)
+            // 앵커 감시(공성 시작부터): 자동 신호가 오지 않는 앵커 소실을 잡고, 〈불길한 정적〉(평화 타이머 동안)과 엔딩까지 이어지는
+            // 〈황금빛 꽃안개〉를 앵커가 지금 있는 맵에 건다(생성 시점 맵에 묶이는 바닐라 QuestPart_GameCondition으로는 앵커를 따라가지 못한다).
+            // 평화 타이머가 켜진 뒤에 BloomCondensed를 받도록 평화 타이머 뒤에 둔다.
+            quest.AddPart(new QuestPart_ViviAnchorWatch()
             {
-                if (EndingCoreDefOf.VV_OminousSilence != null)
-                {
-                    quest.AddPart(new QuestPart_GameCondition()
-                    {
-                        inSignal = bloomCondensed,
-                        gameCondition = GameConditionMaker.MakeCondition(EndingCoreDefOf.VV_OminousSilence, calmTicks),
-                        mapParent = mapParent,
-                        sendStandardLetter = false,
-                    });
-                }
-
-                if (EndingCoreDefOf.VV_GoldenBloom != null && GameConditionMaker.MakeCondition(EndingCoreDefOf.VV_GoldenBloom) is GameCondition_GoldenBloom goldenBloom)
-                {
-                    goldenBloom.Permanent = true;
-                    goldenBloom.fromEnding = true;
-                    quest.AddPart(new QuestPart_GameCondition()
-                    {
-                        inSignal = bloomCondensed,
-                        gameCondition = goldenBloom,
-                        mapParent = mapParent,
-                        sendStandardLetter = false,
-                    });
-                }
-            }
+                inSignalEnable = initiate,
+                anchor = anchor,
+                inSignalBloomCondensed = bloomCondensed,
+                outSignalAnchorLost = anchorLost,
+            });
 
             // 3) 〈바스러진 여왕, 아포크리파〉: 등장(진입 칸이 없으면 보류·재시도), 소멸 연출이 끝나면 토벌
             var apocrypha = new QuestPart_ViviApocrypha()

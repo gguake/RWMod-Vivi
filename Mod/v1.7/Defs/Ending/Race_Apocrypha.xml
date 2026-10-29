@@ -65,6 +65,8 @@
 \nDrawn by the warmth of a reawakened everflower, she now creeps toward the altar to reclaim the bloom she lost. While the vivi fairy bond holds, the bound fairies absorb every blow she receives. Once released, her true form is a monstrous hornet queen guarded only by her primordial carapace.
 \nOrdinary stuns do not work on her. Only the mana wave ritual, a released fairy bond and the resonance wave of the attunement ritual can stun her.</description>
     <drawOffscreen>true</drawOffscreen>
+    <!-- 바닐라 동물 분류(Animals)에서 뺀다: 이념의 숭배 동물 후보(PreceptWorker_Animal)가 이 분류로 동물을 고른다. -->
+    <thingCategories Inherit="False" />
     <statBases>
       <MoveSpeed>1.5</MoveSpeed>
       <PsychicSensitivity>0</PsychicSensitivity>
@@ -193,6 +195,8 @@
     <immuneToTraps>true</immuneToTraps>
     <ignoresPainShock>true</ignoresPainShock>
     <immuneToGameConditionEffects>true</immuneToGameConditionEffects>
+    <!-- 수명이 1000년이라 생성 시 노화 흉터가 붙을 수 있는데, 모든 피해를 흡수하므로 전투 내내 남는다. -->
+    <allowOldAgeInjuries>false</allowOldAgeInjuries>
 
     <lifeStages>
       <li>

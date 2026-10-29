@@ -157,10 +157,15 @@
       <ai_chillDestination>false</ai_chillDestination>
       <expandHomeArea>false</expandHomeArea>
     </building>
+    <comps>
+      <!-- 꽃이 있는 동안 유지되는 이펙트 -->
+      <li Class="CompProperties_Effecter">
+        <effecterDef>VV_Effecter_DoomFlowerAura</effecterDef>
+      </li>
+    </comps>
     <modExtensions>
       <li Class="VVRace.ApocryphaFlowerExtension">
         <bloomEffecter>VV_Effecter_SeedBloomDoom</bloomEffecter>
-        <auraEffecter>VV_Effecter_DoomFlowerAura</auraEffecter>
         <witherEffecter>VV_Effecter_DoomFlowerWither</witherEffecter>
         <linkColor>(1, 0.35, 0.8, 1)</linkColor>
         <linkWidth>0.6</linkWidth>
@@ -209,10 +214,15 @@
       <ai_chillDestination>false</ai_chillDestination>
       <expandHomeArea>false</expandHomeArea>
     </building>
+    <comps>
+      <!-- 꽃이 있는 동안 유지되는 이펙트 -->
+      <li Class="CompProperties_Effecter">
+        <effecterDef>VV_Effecter_FairyFlowerAura</effecterDef>
+      </li>
+    </comps>
     <modExtensions>
       <li Class="VVRace.ApocryphaFlowerExtension">
         <bloomEffecter>VV_Effecter_SeedBloomFairy</bloomEffecter>
-        <auraEffecter>VV_Effecter_FairyFlowerAura</auraEffecter>
         <witherEffecter>VV_Effecter_FairyFlowerVanish</witherEffecter>
         <linkColor>(1, 0.9, 0.6, 1)</linkColor>
         <linkWidth>0.8</linkWidth>

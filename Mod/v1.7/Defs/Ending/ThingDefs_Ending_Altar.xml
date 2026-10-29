@@ -113,8 +113,11 @@
       <DeteriorationRate>0</DeteriorationRate>
     </statBases>
 
+    <!-- 원자재(ResourcesRaw) 아래 분류(비비 자원)에 두면 원자재 분류로 재고를 고르는 일반 상인(궤도 대량 상선 등)과
+         원자재 분류로 내용물을 고르는 일반 전리품(오디세이 고장 난 수송 포드 등)에 섞여 나온다.
+         코어는 비비 연방 상인의 조건부 재고(VVRace.StockGenerator_ViviEndingRelic)로만 팔리도록 그런 생성기가 쓰지 않는 기타 물품 분류에 둔다. -->
     <thingCategories>
-      <li>VV_ViviResource</li>
+      <li>ItemsMisc</li>
     </thingCategories>
 
     <!-- 상인은 팔 수 있지만 플레이어는 팔 수 없다. 일반 보상으로는 나오지 않는다. -->

@@ -7,7 +7,7 @@ namespace VVRace
 {
     // 처치된 아포크리파의 소멸 연출(DyingRevenant 패턴). 저장되므로 연출 도중 저장/불러오기를 해도 이어진다.
     // 마지막 방향·크기·2페이즈 그래픽을 기억해 VV_Dissolve 셰이더로 위에서부터 황금 테두리를 남기며 녹아내리는 모습을 그리고,
-    // 녹는 경계에서 재와 금빛 불씨를 피워 올린다. 끝나면 엔딩 컨트롤러에 토벌을 알리고 사라진다.
+    // 녹는 경계에서 재와 금빛 불씨를 피워 올린다. 끝나면 (엔딩 퀘스트의 보스였다면) 엔딩 컨트롤러에 토벌을 알리고 사라진다.
     [StaticConstructorOnStartup]
     public class DyingApocrypha : Thing
     {
@@ -30,6 +30,9 @@ namespace VVRace
         private int _startTick = -1;
         private bool _notified;
 
+        // 엔딩 퀘스트의 보스였는지. 퀘스트와 무관한 아포크리파(개발자 도구로 소환 등)의 소멸은 토벌로 알리지 않는다.
+        private bool _questBoss = true;
+
         private float AgeSecs => Mathf.Max(0, Find.TickManager.TicksGame - _startTick) / 60f;
 
         // 녹아내리는 정도(0~1). 노이즈가 위쪽부터 낮으므로 경계는 위에서 아래로 내려온다.
@@ -43,6 +46,7 @@ namespace VVRace
             _texPath = graphicData?.texPath;
             _rotation = boss.Rotation;
             _drawSize = comp?.CurrentVisualDrawSize ?? graphicData?.drawSize.x ?? 8.5f;
+            _questBoss = comp != null && comp.IsQuestBossFight;
 
             var offset = boss.DrawPos - boss.Position.ToVector3Shifted();
             _drawOffset = new Vector3(offset.x, 0f, offset.z);
@@ -70,6 +74,9 @@ namespace VVRace
             Scribe_Values.Look(ref _drawOffset, "drawOffset", Vector3.zero);
             Scribe_Values.Look(ref _startTick, "startTick", -1);
             Scribe_Values.Look(ref _notified, "notified", false);
+
+            // 기본값을 true로 두어 이 값이 없던 저장(소멸 도중 저장)도 예전처럼 퀘스트에 알린다.
+            Scribe_Values.Look(ref _questBoss, "questBoss", true);
         }
 
         protected override void Tick()
@@ -132,15 +139,29 @@ namespace VVRace
             FilthMaker.TryMakeFilth(Position, map, ThingDefOf.Filth_Ash, 3);
             ApocryphaEffecterDefOf.VV_Effecter_ApocryphaVanish.Spawn(Position, map, 2f).Cleanup();
 
-            if (!_notified)
-            {
-                _notified = true;
-                ViviEndingQuest.Current?.Notify_BossDefeated(null);
-            }
+            NotifyDefeated();
 
             if (!Destroyed)
             {
                 Destroy();
+            }
+        }
+
+        // 연출이 끝나기 전에 사라져도(산 지붕 붕괴에 깔림 등) 토벌 통지가 빠지지 않게 한다.
+        public override void Destroy(DestroyMode mode = DestroyMode.Vanish)
+        {
+            NotifyDefeated();
+            base.Destroy(mode);
+        }
+
+        private void NotifyDefeated()
+        {
+            if (_notified) { return; }
+
+            _notified = true;
+            if (_questBoss)
+            {
+                ViviEndingQuest.Current?.Notify_BossDefeated();
             }
         }
 

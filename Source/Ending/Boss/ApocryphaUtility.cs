@@ -10,8 +10,6 @@ namespace VVRace
     // [계약] 아포크리파 출현/호위 말벌 관련 정적 API.
     public static class ApocryphaUtility
     {
-        private static readonly List<Pawn> _tmpEscorts = new List<Pawn>();
-
         public static bool IsApocrypha(Pawn pawn)
         {
             return pawn != null && pawn.def == ApocryphaThingDefOf.VV_Apocrypha;
@@ -33,8 +31,9 @@ namespace VVRace
             }
 
             // 기지가 막혀 있어 일반 진입 칸이 없으면 서 있을 수 있는 지붕 없는 외곽 칸 중에서 찾는다.
+            // 안개 낀 칸은 빼서 탐사하지 않은 바위 골짜기에 갇힌 채 등장하지 않게 한다(없으면 등장을 미룬다).
             return CellFinder.TryFindRandomEdgeCellWith(
-                c => c.Standable(map) && !c.Roofed(map) && CanReachTarget(c),
+                c => c.Standable(map) && !c.Roofed(map) && !c.Fogged(map) && CanReachTarget(c),
                 map,
                 CellFinder.EdgeRoadChance_Ignore,
                 out cell);
@@ -139,18 +138,6 @@ namespace VVRace
             if (fromMapEdge)
             {
                 ApocryphaEffecterDefOf.VV_Effecter_ApocryphaArrive.Spawn(center, map).Cleanup();
-            }
-
-            return result;
-        }
-
-        // 맵 외곽에서 걸어 들어와 정착지를 습격하는 거대 말벌(일반 말벌 습격 로드). 진입 칸이 없으면 빈 목록.
-        public static List<Pawn> SpawnEdgeHornets(Map map, int count)
-        {
-            var result = WalkInHornets(map, count);
-            if (result.Count > 0)
-            {
-                LordMaker.MakeNewLord(null, new LordJob_HornetAssault(), map, result);
             }
 
             return result;

@@ -433,7 +433,7 @@
     </children>
   </EffecterDef>
 
-  <!-- 대관식 진행 중 연출: 공명자는 기존 영원꽃 의식 고리, 대상 비비는 요정화 의식의 황금 고리 -->
+  <!-- 대관식 진행 중 연출: 여왕이 되는 공명자에게 기존 영원꽃 의식 고리와 요정화 의식의 황금 고리를 함께 띄운다(대관식의 역할은 공명자 하나뿐이다) -->
   <RitualVisualEffectDef>
     <defName>VV_QueensCoronation</defName>
     <comps>
@@ -448,7 +448,7 @@
         <spawnIntervalTicks>24</spawnIntervalTicks>
       </li>
       <li Class="CompProperties_RitualEffectSpawnOnRole">
-        <roleId>target</roleId>
+        <roleId>resonator</roleId>
         <moteDef>VV_Mote_VV_FairyficationCircle</moteDef>
         <spawnIntervalTicks>24</spawnIntervalTicks>
       </li>

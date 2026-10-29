@@ -132,15 +132,7 @@ namespace VVRace
         // (경호/경비/반격 대상 선별은 각 로드의 ValidateAttackTarget). 그 외 말벌은 제한 없음.
         private static void GetSearchArea(Pawn pawn, out IntVec3 locus, out float maxTravelRadius)
         {
-            var lordJob = pawn.GetLord()?.LordJob;
-            if (lordJob is LordJob_ApocryphaEscort escortJob && escortJob.BossActive && escortJob.Boss.Map == pawn.Map)
-            {
-                locus = escortJob.Boss.Position;
-                maxTravelRadius = escortJob.SearchRadius;
-                return;
-            }
-
-            if (lordJob is LordJob_ApocryphaFlowerGuard guardJob && guardJob.BossActive && guardJob.Boss.Map == pawn.Map)
+            if (pawn.GetLord()?.LordJob is LordJob_ApocryphaHornetGuard guardJob && guardJob.BossActive && guardJob.Boss.Map == pawn.Map)
             {
                 locus = guardJob.GetGuardPoint(pawn);
                 maxTravelRadius = guardJob.SearchRadius;

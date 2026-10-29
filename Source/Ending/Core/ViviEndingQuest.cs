@@ -1,4 +1,5 @@
 ﻿using RimWorld;
+using RimWorld.Planet;
 using RimWorld.QuestGen;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,12 @@ namespace VVRace
 
             public void ExposeData()
             {
+                // 보류 중에 맵이 사라졌으면(정착지 포기 등) 없는 맵을 참조로 저장하지 않는다(귀환할 때 엔딩 맵·정착지로 대신 간다).
+                if (Scribe.mode == LoadSaveMode.Saving && map != null && !Find.Maps.Contains(map))
+                {
+                    map = null;
+                }
+
                 Scribe_Deep.Look(ref pawn, "pawn");
                 Scribe_Values.Look(ref returnTick, "returnTick", 0);
                 Scribe_References.Look(ref map, "map");
@@ -63,7 +70,7 @@ namespace VVRace
         public Quest BloomQuest => _bloomQuest;
 
         // 진행 단계: 본편 퀘스트가 있으면 그 상태(끝났으면 성공 → Completed, 그 외 → Failed), 밀서 퀘스트만 있으면 AltarUnlocked,
-        // 서신 예약 중이면 LetterPending, 그 외 None. 단계 값은 진행 순서와 다르므로(Coronation을 뒤에 추가) 대소 비교를 쓰지 않는다.
+        // 서신 예약 중이면 LetterPending, 그 외 None.
         public ViviEndingStage Stage
         {
             get
@@ -126,21 +133,14 @@ namespace VVRace
         public int SiegeDurationTicks => BloomPart?.DurationTicks ?? 0;
 
         public bool IsAltarUnlocked => Stage != ViviEndingStage.None && Stage != ViviEndingStage.LetterPending;
-        public bool IsEndingActive
-        {
-            get
-            {
-                var stage = Stage;
-                return stage == ViviEndingStage.Siege || stage == ViviEndingStage.Calm || stage == ViviEndingStage.Boss || stage == ViviEndingStage.Coronation;
-            }
-        }
+        public bool IsEndingActive => Stage.IsActiveStage();
         public bool IsCompleted => Stage == ViviEndingStage.Completed;
 
         // 아포크리파를 토벌해 응축이 100%가 되었고, 공명자의 〈여왕의 대관식〉만 남은 상태.
         public bool IsAwaitingCoronation => Stage == ViviEndingStage.Coronation;
 
         // 엔딩이 끝났는지(완료·실패).
-        private bool IsFinished => Stage == ViviEndingStage.Completed || Stage == ViviEndingStage.Failed;
+        private bool IsFinished => Stage.IsFinishedStage();
         public bool IsBossPhase2 => Stage == ViviEndingStage.Boss && BossComp != null && BossComp.Phase == ApocryphaPhase.Unbound;
 
         public bool IsAnchor(ArcanePlant_Everflower everflower) => everflower != null && everflower == _anchor;
@@ -224,7 +224,8 @@ namespace VVRace
             _calmPart = quest?.PartsListForReading.OfType<QuestPart_Delay>().FirstOrDefault(v => v.debugLabel == QuestNode_Root_ViviBloom.CalmDelayLabel);
         }
 
-        // GameComponent_Mana.GameComponentTick에서 매 틱 호출된다. 보류 중인 폰의 귀환과 제단 맥동은 매 틱, 서신 예약은 250틱 간격으로 처리한다.
+        // GameComponent_Mana.GameComponentTick에서 매 틱 호출된다. 보류 중인 폰의 귀환과 제단 맥동은 매 틱, 서신 예약은 250틱 간격으로,
+        // 4단계 감시와 밀서 퀘스트 확인은 2500틱 간격으로 처리한다.
         public void Tick()
         {
             var now = Find.TickManager.TicksGame;
@@ -274,6 +275,13 @@ namespace VVRace
                             SendFederationLetter(null);
                         }
                         break;
+
+                    case ViviEndingStage.AltarUnlocked:
+                        if (now % ScanIntervalTicks == 0)
+                        {
+                            ReissueEndedMissiveQuest();
+                        }
+                        break;
                 }
             }
             catch (Exception ex)
@@ -298,23 +306,24 @@ namespace VVRace
             ScheduleFederationLetter();
         }
 
-        // [B 호출] 5단계 대조율 의식이 완료되어 영원꽃이 5단계가 된 직후 → 밀서 퀘스트 성공, 〈만개하는 여명〉 시작.
-        public void Notify_GrandAttunementCompleted(ArcanePlant_Everflower everflower, float quality)
+        // [B 호출] 5단계 대조율 의식이 끝났을 때 → 밀서 퀘스트 성공, 〈만개하는 여명〉 시작. 시작했으면 true.
+        // 의식은 true일 때만 영원꽃을 5단계로 올린다(다른 제단의 의식이 먼저 엔딩을 시작했거나 퀘스트 생성에 실패하면 4단계로 남아 다시 치를 수 있다).
+        public bool Notify_GrandAttunementCompleted(ArcanePlant_Everflower everflower, float quality)
         {
-            if (everflower == null) { return; }
+            if (everflower == null || everflower.Destroyed) { return false; }
 
             var stage = Stage;
             if (stage != ViviEndingStage.AltarUnlocked)
             {
                 Log.Warning($"[ViViRace] grand attunement completed at ending stage {stage}; the siege only starts from {ViviEndingStage.AltarUnlocked}.");
-                return;
+                return false;
             }
 
-            StartBloomQuest(everflower, quality);
+            return StartBloomQuest(everflower, quality);
         }
 
         // [D 호출] 아포크리파 소멸 연출이 끝났을 때 → 응축 100%, 〈여왕의 대관식〉 해금. 소멸 연출 Thing이 저장/불러오기를 거치면 boss는 null일 수 있다.
-        public void Notify_BossDefeated(Pawn boss)
+        public void Notify_BossDefeated()
         {
             if (Stage != ViviEndingStage.Boss) { return; }
 
@@ -330,7 +339,7 @@ namespace VVRace
         }
 
         // [D 호출] 아포크리파가 영원꽃 채널링을 끝냈을 때 → 실패(편지·정리는 퀘스트). 영원꽃 파괴와 보스 퇴장은 D가 이 호출 뒤에 한다.
-        public void Notify_EverflowerStolen(Pawn boss)
+        public void Notify_EverflowerStolen()
         {
             if (!IsEndingActive) { return; }
 
@@ -432,7 +441,7 @@ namespace VVRace
             }
             SetPoints(slate, everflower?.MapHeld ?? Find.AnyPlayerHomeMap);
 
-            var quest = GenerateQuest(EndingCoreDefOf.VV_EndGame_ViviMissive, slate);
+            var quest = GenerateQuest(EndingCoreDefOf.VV_EndGame_ViviMissive, slate, ViviEndingSignals.GrandAttunementCompleted);
             if (quest == null)
             {
                 // 생성 오류(이미 기록됨): 잠시 뒤 다시 시도한다.
@@ -445,7 +454,36 @@ namespace VVRace
             Find.QuestManager.Add(quest);
         }
 
-        // 대조율 의식 완료: 〈만개하는 여명〉을 앵커와 함께 만들고 밀서 퀘스트를 성공으로 끝낸다.
+        // 밀서 퀘스트는 대조율 의식으로만 끝나야 한다. 다른 이유로 끝났으면(다른 모드·퀘스트 탭 개발자 도구 등) 호박 코어 전달이 멈추지 않도록
+        // 서신 편지 없이 다시 만든다. 이미 보낸 코어는 다시 보내지 않고, 잃어버렸을 때의 재전달만 이어 간다.
+        private void ReissueEndedMissiveQuest()
+        {
+            var ended = _missiveQuest;
+            if (ended == null || !ended.Historical) { return; }
+
+            var everflower = ViviEndingUtility.FindEndingCandidate();
+            var corePart = ended.GetFirstPartOfType<QuestPart_ViviAmberCore>();
+            var coreDelivered = corePart != null ? corePart.Delivered : EndingCoreDefOf.VV_AncientAltarRestoration?.IsFinished == true;
+
+            var slate = new Slate();
+            if (everflower != null)
+            {
+                slate.Set("everflower", everflower);
+            }
+            slate.Set("reissued", true);
+            slate.Set("coreDelivered", coreDelivered);
+            SetPoints(slate, everflower?.MapHeld ?? Find.AnyPlayerHomeMap);
+
+            // 생성 오류(이미 기록됨)면 다음 확인 때 다시 시도한다.
+            var quest = GenerateQuest(EndingCoreDefOf.VV_EndGame_ViviMissive, slate, ViviEndingSignals.GrandAttunementCompleted);
+            if (quest == null) { return; }
+
+            Log.Warning($"[ViViRace] the federation missive quest ended unexpectedly ({ended.State}); issued it again.");
+            _missiveQuest = quest;
+            Find.QuestManager.Add(quest);
+        }
+
+        // 대조율 의식 완료: 〈만개하는 여명〉을 앵커와 함께 만들고 밀서 퀘스트를 성공으로 끝낸다. 퀘스트를 만들지 못하면 false.
         private bool StartBloomQuest(ArcanePlant_Everflower everflower, float quality)
         {
             var map = everflower.MapHeld;
@@ -458,7 +496,7 @@ namespace VVRace
             slate.Set("quality", quality);
             SetPoints(slate, map);
 
-            var quest = GenerateQuest(EndingCoreDefOf.VV_EndGame_ViviBloom, slate);
+            var quest = GenerateQuest(EndingCoreDefOf.VV_EndGame_ViviBloom, slate, ViviEndingSignals.AnchorLost);
             if (quest == null) { return false; }
 
             // 퀘스트가 추가되는 순간 시작 신호가 처리되므로 창구 상태를 먼저 맞춘다.
@@ -479,8 +517,10 @@ namespace VVRace
             slate.Set("points", map != null ? StorytellerUtility.DefaultThreatPointsNow(map) : 0f);
         }
 
-        // 바닐라 QuestUtility.GenerateQuestAndMakeAvailable에서 퀘스트 추가만 뺀 것. 생성에 실패하면(QuestGen이 오류를 기록) null.
-        private static Quest GenerateQuest(QuestScriptDef def, Slate slate)
+        // 바닐라 QuestUtility.GenerateQuestAndMakeAvailable에서 퀘스트 추가만 뺀 것. 생성에 실패하면 null.
+        // 루트 노드에서 예외가 나면 바닐라 QuestNode.Run은 오류만 기록하고 부품이 빠진 퀘스트를 돌려주므로,
+        // 루트 노드가 맨 마지막에 추가하는 종료 부품(finalSignal을 받는 QuestEnd)까지 있어야 온전한 퀘스트로 본다.
+        private static Quest GenerateQuest(QuestScriptDef def, Slate slate, string finalSignal)
         {
             if (def == null)
             {
@@ -492,6 +532,14 @@ namespace VVRace
             if (quest == null)
             {
                 Log.Error($"[ViViRace] failed to generate ending quest {def.defName}.");
+                return null;
+            }
+
+            var endSignal = ViviEndingSignals.For(quest, finalSignal);
+            if (!quest.PartsListForReading.Any(v => v is QuestPart_QuestEnd end && end.inSignal == endSignal))
+            {
+                Log.Error($"[ViViRace] ending quest {def.defName} was generated without all of its parts; discarded it.");
+                return null;
             }
 
             return quest;
@@ -621,12 +669,28 @@ namespace VVRace
             var map = held.map;
             if (map == null || !Find.Maps.Contains(map))
             {
-                map = AnchorMap ?? Find.AnyPlayerHomeMap;
+                map = AnchorMap ?? Find.AnyPlayerHomeMap ?? FindMapWithFreeColonists();
             }
 
             if (map == null)
             {
-                // 돌아갈 맵이 모두 사라졌다면 폰을 잃지 않도록 월드 폰으로 넘긴다.
+                // 돌아갈 맵이 모두 사라졌다면 플레이어 캐러밴에 합류시키고, 캐러밴도 없으면 폰을 잃지 않도록 월드 폰으로 넘긴다.
+                var caravan = Find.WorldObjects.Caravans.FirstOrDefault(v => v.IsPlayerControlled);
+                if (caravan != null)
+                {
+                    caravan.AddPawn(pawn, addCarriedPawnToWorldPawnsIfAny: true);
+                    if (!pawn.IsWorldPawn())
+                    {
+                        Find.WorldPawns.PassToWorld(pawn);
+                    }
+
+                    Messages.Message(
+                        LocalizeString_EndingCore.VV_Message_EndingPawnReturnedToCaravan.Translate(pawn.Named("PAWN"), caravan.Named("CARAVAN")),
+                        caravan,
+                        MessageTypeDefOf.PositiveEvent);
+                    return;
+                }
+
                 Find.WorldPawns.PassToWorld(pawn);
                 return;
             }
@@ -650,9 +714,24 @@ namespace VVRace
                 MessageTypeDefOf.PositiveEvent);
         }
 
+        // 자유 정착민이 있는 아무 맵(엔딩 맵·정착지가 모두 사라졌을 때 돌아갈 곳).
+        private static Map FindMapWithFreeColonists()
+        {
+            var maps = Find.Maps;
+            for (int i = 0; i < maps.Count; ++i)
+            {
+                if (maps[i].mapPawns.FreeColonistsSpawnedCount > 0)
+                {
+                    return maps[i];
+                }
+            }
+
+            return null;
+        }
+
         private static void PlayReturnEffect(Pawn pawn, Map map)
         {
-            var returnEffect = DefDatabase<EffecterDef>.GetNamedSilentFail("VV_Effecter_FairyReturn") ?? EffecterDefOf.Skip_ExitNoDelay;
+            var returnEffect = ApocryphaGimmickDefOf.VV_Effecter_FairyReturn ?? EffecterDefOf.Skip_ExitNoDelay;
             returnEffect?.SpawnMaintained(pawn, map);
         }
 

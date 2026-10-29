@@ -35,9 +35,11 @@ namespace VVRace
         public bool manaOverlaySetting;
 
         // 6단계 마나 바닥 전용 오버레이: 맵 전체가 같은 색이므로 칸 오버레이(250틱마다 재생성)와 나눠 그리고,
-        // 바닥이 바뀔 때와 안개가 걷힌 칸을 반영할 때(2500틱마다)만 다시 만든다.
+        // 바닥이 바뀔 때와 그린 칸의 안개가 실제로 바뀔 때만 다시 만든다.
+        // 바닐라는 문을 지날 때마다 이미 걷힌 칸에도 안개 변경 이벤트를 보내므로, 마지막으로 그릴 때 칠한 칸을 기억해 두고 비교한다.
         private CellBoolDrawer _manaFloorDrawer;
-        public const int ManaFloorOverlayRefreshInterval = 2500;
+        private Color _manaFloorColor;
+        private bool[] _manaFloorDrawnCells;
 
         // 마나 영맥(오디세이 랜드마크): 게임 내내 환경 마나를 방출하는 지점
         private List<IntVec3> _manaVeins = new List<IntVec3>();
@@ -79,6 +81,8 @@ namespace VVRace
             _manaFloorDrawer = CreateManaFloorDrawer();
 
             map.events.RoofChanged += Notify_RoofChanged;
+            map.events.CellFogChanged += Notify_CellFogChanged;
+            map.events.MapFogged += Notify_MapFogged;
         }
 
         public override void ExposeData()
@@ -205,11 +209,6 @@ namespace VVRace
 
                     _cellBoolDrawer.SetDirty();
                 }
-
-                if (GenTicks.TicksGame % ManaFloorOverlayRefreshInterval == 0)
-                {
-                    _manaFloorDrawer.SetDirty();
-                }
             }
 
             if (_dirtyManaCells.Count > 0)
@@ -270,12 +269,6 @@ namespace VVRace
             }
         }
 
-        // 영원꽃 제단 상태 갱신 진입점. 제단 중심(안치되지 않았으면 Invalid)과 영원꽃 조율 단계를 받는다.
-        public void SetEverflowerAltarState(IntVec3 center, int level)
-        {
-            SetEverflowerAltarState(center, level, level);
-        }
-
         // 맵의 영원꽃을 훑어 제단 상태를 다시 계산한다. 영원꽃은 맵에 여러 송이 있을 수 있으므로 꽃이 직접 값을 넣으면
         // 서로 덮어쓰게 된다. 그래서 CompEverflower는 레벨 변경·안치 변경·스폰/디스폰 때 이 함수만 부른다.
         public void RefreshEverflowerAltarState()
@@ -318,6 +311,7 @@ namespace VVRace
             if (_manaFloor != manaFloor)
             {
                 _manaFloor = manaFloor;
+                _manaFloorColor = GetManaOverlayColor(manaFloor);
                 _cellBoolDrawer.SetDirty();
                 _manaFloorDrawer.SetDirty();
             }
@@ -442,14 +436,66 @@ namespace VVRace
             return GetManaOverlayColor(Mathf.Max(_manaFloor, _manaGrid[index] + _manaReserveGrid[index]));
         }
 
+        // 메시를 다시 만들 때 칸마다 한 번씩 불린다. 칠한 칸을 기억해 두었다가 안개 변경이 실제로 그림을 바꾸는지 비교한다.
+        // (바닥 오버레이는 바닥값이 있을 때만 그리므로 엔딩 전에는 배열을 만들지 않는다)
         private bool GetManaFloorCellBool(int index)
         {
-            return _manaFloor > 0f && !map.fogGrid.IsFogged(index);
+            var draw = _manaFloor > 0f && !map.fogGrid.IsFogged(index);
+            if (_manaFloorDrawnCells == null)
+            {
+                _manaFloorDrawnCells = new bool[map.cellIndices.NumGridCells];
+            }
+
+            _manaFloorDrawnCells[index] = draw;
+            return draw;
         }
 
+        // 바닥값이 바뀔 때 한 번만 계산해 둔 색을 쓴다(맵 전체 칸이 같은 색).
         private Color GetManaFloorCellColor(int index)
         {
-            return GetManaOverlayColor(_manaFloor);
+            return _manaFloorColor;
+        }
+
+        // 바닐라는 이미 걷힌 칸에도 안개 변경 이벤트를 보내므로(문을 지날 때 등), 마지막으로 그린 모습과 달라질 때만 바닥 오버레이를 다시 만든다.
+        private void Notify_CellFogChanged(IntVec3 c, bool fogged)
+        {
+            if (_manaFloor <= 0f || _manaFloorDrawnCells == null || !c.InBounds(map)) { return; }
+
+            if (IsManaFloorDrawnDifferently(c, fogged))
+            {
+                _manaFloorDrawer.SetDirty();
+                return;
+            }
+
+            // 칸을 꽉 채우는 여러 칸짜리 건물은 한 칸의 이벤트로 모든 칸의 안개가 함께 걷힌다.
+            if (!fogged)
+            {
+                var things = c.GetThingList(map);
+                for (int i = 0; i < things.Count; ++i)
+                {
+                    if (things[i].def.Fillage != FillCategory.Full) { continue; }
+
+                    foreach (var cell in things[i].OccupiedRect())
+                    {
+                        if (cell.InBounds(map) && IsManaFloorDrawnDifferently(cell, false))
+                        {
+                            _manaFloorDrawer.SetDirty();
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+
+        // 칠한 칸(안개 없음)이 안개로 덮였거나, 칠하지 않은 칸(안개)이 걷혔으면 그림이 바뀐다.
+        private bool IsManaFloorDrawnDifferently(IntVec3 cell, bool fogged)
+        {
+            return _manaFloorDrawnCells[map.cellIndices.CellToIndex(cell)] == fogged;
+        }
+
+        private void Notify_MapFogged()
+        {
+            _manaFloorDrawer.SetDirty();
         }
 
         private static Color GetManaOverlayColor(float value)

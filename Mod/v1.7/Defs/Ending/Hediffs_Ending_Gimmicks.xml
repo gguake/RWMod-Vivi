@@ -24,7 +24,7 @@
     </comps>
   </HediffDef>
 
-  <!-- 멸망꽃 저주 공용: 3단계(severity 1/2/3), 결속 해방이나 엔딩 정리로만 풀린다 -->
+  <!-- 멸망꽃 저주 공용: 3단계(severity 1/2/3), 결속 해방이나 엔딩 정리로만 풀린다(죽으면 함께 사라짐 — Hediff_DoomBlight) -->
   <HediffDef Name="VV_DoomBlightBase" Abstract="True">
     <hediffClass>VVRace.Hediff_DoomBlight</hediffClass>
     <defaultLabelColor>(0.95, 0.45, 0.8)</defaultLabelColor>
@@ -141,7 +141,7 @@
     </stages>
   </HediffDef>
 
-  <!-- 보이지 않는 표식: severity = 멸망꽃이 더한 독성 축적량. 결속 해방 때 그만큼 독성 축적을 되돌린다 -->
+  <!-- 보이지 않는 표식: severity = 멸망꽃이 더한 독성 축적량(독성 저항 반영, 독성 축적 0.6까지만). 표식이 사라질 때 그만큼 독성 축적을 되돌린다 -->
   <HediffDef>
     <defName>VV_DoomBlight_Toxin</defName>
     <label>doom blight toxins</label>

@@ -50,7 +50,7 @@
 <!-- 엔딩 퀘스트: 아포크리파 토벌, 여왕의 대관식 대기 -->
 <VV_Letter_EndingCoronationLabel>여왕을 기다리는 영원꽃</VV_Letter_EndingCoronationLabel>
 <VV_Letter_EndingCoronation>아포크리파의 형체가 한 줌의 먼지로 흩어지자, 가로막혀 있던 마나가 제단으로 일제히 환류하며 개화 응축이 마침내 100%에 도달했습니다.
-\n영원꽃은 이제 마지막 개화를 이끌 여왕을 기다리고 있습니다. 공명자인 {PAWN_labelShort}(이)가 영원꽃에서 〈여왕의 대관식〉을 치르면 영원꽃이 완전한 모습으로 피어납니다.
+\n영원꽃은 이제 마지막 개화를 이끌 여왕을 기다리고 있습니다. {PAWN_labelShort}(이)가 영원꽃에서 〈여왕의 대관식〉을 치르면 영원꽃이 완전한 모습으로 피어납니다.
 \n이제 마나 기둥이 새로운 습격을 끌어들이지는 않지만, 남아 있는 거대 말벌들은 여전히 정착지를 노리고 있습니다.</VV_Letter_EndingCoronation>
 
 <!-- 엔딩 퀘스트: 영원한 봄의 제국 (엔딩 편지와 크레딧이 같은 본문을 쓴다. 바닐라 엔딩 크레딧 문체) -->
@@ -72,6 +72,8 @@
 <!-- 엔딩 퀘스트: 메시지 -->
 <VV_Message_EndingApocryphaDeferred>맵 외곽에서 제단으로 이어지는 길이 막혀 있어 아포크리파가 모습을 드러내지 못합니다. 길이 열릴 때까지 습격이 다시 발생할 수 있습니다.</VV_Message_EndingApocryphaDeferred>
 <VV_Message_EndingPawnReturned>{PAWN_labelShort}(이)가 영원꽃 제단 앞으로 돌아왔습니다.</VV_Message_EndingPawnReturned>
+<VV_Message_EndingPawnReturnedToCaravan>{PAWN_labelShort}(이)가 돌아와 {CARAVAN_label}에 합류했습니다.</VV_Message_EndingPawnReturnedToCaravan>
+<VV_Message_EndingGrandAttunementNotStarted>〈대조율 의식〉이 끝났지만 영원꽃이 다섯 번째 개화를 시작하지 못했습니다.</VV_Message_EndingGrandAttunementNotStarted>
 
 <!-- 엔딩 퀘스트: 개화 응축 기즈모 / 정보창 -->
 <VV_Gizmo_EndingBloom>개화 응축</VV_Gizmo_EndingBloom>

@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
 using Verse;
@@ -21,10 +21,10 @@ namespace VVRace
                 var selectedWeather = everflower.ConsumeSelectedRitualWeather();
 
                 // 엔딩 직전에 시작한 의식이 평화 기간에 끝났다면, 엔딩이 건 황금빛 꽃안개가 날씨를 붙들고 있으므로 바꾸지 않는다.
+                // 아무 효과가 없으므로 다른 거부된 의식(요정화 해제)처럼 공유 재사용 대기도 걸지 않는다.
                 if (GoldenBloomUtility.IsHeldByEnding(map))
                 {
                     Messages.Message(LocalizeString_EndingCore.VV_FailReason_GoldenBloomHoldsWeather.Translate(), everflower, MessageTypeDefOf.RejectInput, false);
-                    FinishRitual(everflower, map, quality);
                     return;
                 }
 

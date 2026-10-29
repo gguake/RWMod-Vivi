@@ -21,9 +21,7 @@ namespace VVRace
         // 심장 박동 속도(초당 박동). 셰이더(_BeatRate)와 C#(몸통 맥동·박동 연출)이 같은 값을 쓴다.
         public const float BeatRate = 1.25f;
 
-        public static bool Ready => _materials != null;
-
-        // [메인 스레드] 전환이 시작되거나 전환 중 불러왔을 때 호출한다.
+        // [메인 스레드] 전환이 시작되거나 전환 중 불러왔을 때 호출한다(불러오기 스레드에서는 CompApocrypha가 메인 스레드로 미룬다).
         public static void EnsureInitialized(float durationSecs)
         {
             if (_materials == null)

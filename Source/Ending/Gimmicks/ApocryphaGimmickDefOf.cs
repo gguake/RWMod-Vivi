@@ -8,8 +8,6 @@ namespace VVRace
     [DefOf]
     public static class ApocryphaGimmickDefOf
     {
-        public static DamageDef VV_FairyBlast;
-
         public static ThingDef VV_Projectile_FairyShell;
         public static ThingDef VV_Projectile_DoomSeed;
         public static ThingDef VV_Projectile_FairySeed;

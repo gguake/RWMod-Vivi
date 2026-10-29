@@ -56,7 +56,8 @@
     <weatherDef>VV_GoldenBloomMist</weatherDef>
     <natural>false</natural>
     <displayOnUI>true</displayOnUI>
-    <canBePermanent>true</canBePermanent>
+    <!-- 엔딩 보상이므로 시나리오의 영구 컨디션으로 고를 수 없게 한다(엔딩 퀘스트는 GameCondition.Permanent로 직접 영구화한다). -->
+    <canBePermanent>false</canBePermanent>
     <showPermanentInTooltip>false</showPermanentInTooltip>
     <preventIncidents>false</preventIncidents>
   </GameConditionDef>

@@ -38,11 +38,8 @@ namespace VVRace
                 var pawn = lord.ownedPawns[i];
                 if (!pawn.IsHashIntervalTick(ReactionCheckIntervalTicks)) { continue; }
 
-                if (focus != null)
-                {
-                    TryEngageFocus(pawn, focus);
-                }
-                else
+                // 보스가 감지한 적에게 닿을 수 없는 말벌은 평소처럼 주변의 적에만 반응한다.
+                if (focus == null || !TryEngageFocus(pawn, focus))
                 {
                     TryEngageImmediately(pawn);
                 }
@@ -75,6 +72,9 @@ namespace VVRace
             var curJob = pawn.CurJob;
             if (curJob == null || curJob.jobGiver is JobGiver_HornetBerserk) { return; }
 
+            // 지키는 곳 근처에 노릴 만한 것이 하나도 없으면 비싼 대상 탐색(영역 탐색 두 번)을 건너뛴다.
+            if (pawn.GetLord()?.LordJob is LordJob_ApocryphaHornetGuard guardJob && !guardJob.AnyPotentialTargetNear(pawn)) { return; }
+
             if (JobGiver_HornetBerserk.HasAttackTarget(pawn))
             {
                 pawn.jobs.CheckForJobOverride();
@@ -83,14 +83,17 @@ namespace VVRace
 
         // 보스가 감지한 적이 있으면 그 적을 공격하고 있지 않은 말벌(다른 대상과 교전 중인 말벌 포함)을 곧바로 그 적에게 돌린다.
         // (근접 공격 작업은 대상이 다르면 이어지는 작업으로 보지 않으므로 다시 판단하면 새 대상으로 바뀐다)
-        internal static void TryEngageFocus(Pawn pawn, Thing focus)
+        // 그 적에게 닿을 수 없으면 작업 지급기도 고르지 않으므로 매번 다시 판단시키지 않고 false를 돌려준다.
+        internal static bool TryEngageFocus(Pawn pawn, Thing focus)
         {
-            if (!CanEngage(pawn) || focus == null) { return; }
+            if (!CanEngage(pawn) || focus == null) { return false; }
 
             var curJob = pawn.CurJob;
-            if (curJob == null || (curJob.def == JobDefOf.AttackMelee && curJob.targetA.Thing == focus)) { return; }
+            if (curJob == null || (curJob.def == JobDefOf.AttackMelee && curJob.targetA.Thing == focus)) { return true; }
+            if (!pawn.CanReach(focus, PathEndMode.Touch, Danger.Deadly, canBashDoors: false, canBashFences: pawn.def.race.FenceBlocked)) { return false; }
 
             pawn.jobs.CheckForJobOverride();
+            return true;
         }
 
         private static bool CanEngage(Pawn pawn)

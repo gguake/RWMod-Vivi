@@ -26,6 +26,14 @@ namespace VVRace
             return ritual != null && ritual.def == EndingRitualDefOf.VV_QueensCoronation;
         }
 
+        // 2페이즈 공명 파동(앵커 영원꽃의 조율 의식)에서 이 역할의 참가자가 출혈 중이어도 의식을 시작하고 이어갈 수 있게 해야 하는지.
+        // 역할 def의 ignoreBleeding을 켜면 평소의 모든 조율 의식에도 걸리므로, 해당 바닐라 판정 동안에만 잠시 켠다
+        // (배정: EndingRitualPatch, 계속 참석: LordJob_RitualResonance.VoluntaryJoinPriorityFor).
+        public static bool ShouldIgnoreBleeding(RitualRole role, Precept_Ritual ritual, ArcanePlant_Everflower everflower)
+        {
+            return role != null && !role.ignoreBleeding && IsResonanceRitual(ritual) && IsResonancePhase(everflower);
+        }
+
         // 엔딩이 묶인 앵커 영원꽃인지(단계 무관). 앵커의 의식은 LordJob_RitualResonance로 진행한다.
         public static bool IsAnchor(ArcanePlant_Everflower everflower)
         {
@@ -33,26 +41,19 @@ namespace VVRace
             return everflower != null && quest != null && quest.IsAnchor(everflower);
         }
 
-        // 보스전(1·2페이즈) 중인지. 이 동안 앵커 영원꽃의 의식은 적이 다가와도 취소되지 않고, 관람자를 모집하지 않으며,
-        // 다른 폰(채집자 등)이 영원꽃을 예약해도 취소되지 않는다.
-        public static bool IsBossFightActive
-        {
-            get
-            {
-                var quest = ViviEndingQuest.Current;
-                return quest != null && quest.Stage == ViviEndingStage.Boss;
-            }
-        }
-
+        // 엔딩 맵이 보스전(1·2페이즈) 중인지. 이 동안 엔딩 맵의 영원꽃 의식은 방어 인원을 관람자로 모집하지 않는다.
         public static bool IsBossFightOnMap(Map map)
         {
             var quest = ViviEndingQuest.Current;
             return map != null && quest != null && quest.Stage == ViviEndingStage.Boss && quest.AnchorMap == map;
         }
 
+        // 앵커 영원꽃이 보스전(1·2페이즈) 중인지. 이 동안 앵커의 의식은 적이 다가와도, 다른 폰(아포크리파·채집자 등)이 앵커를 예약해도
+        // 취소되지 않는다(LordJob_RitualResonance).
         public static bool IsAnchorUnderBossFight(ArcanePlant_Everflower everflower)
         {
-            return IsBossFightActive && IsAnchor(everflower);
+            var quest = ViviEndingQuest.Current;
+            return everflower != null && quest != null && quest.Stage == ViviEndingStage.Boss && quest.IsAnchor(everflower);
         }
 
         // 의식을 시작할 수 있으면 null을, 시작할 수 없으면 기즈모의 비활성 사유를 문자열로 반환한다.
@@ -137,12 +138,11 @@ namespace VVRace
         }
 
         // 엔딩의 평화 기간/보스전 동안에는 마나 파동 의식이 새 습격을 불러들이지 않는다(기절·마나 효과는 그대로).
+        // 엔딩의 위협 억제 규칙을 그대로 따르므로, 보스 등장이 미뤄져 억제가 풀린 동안에는 습격도 다시 부른다.
         public static bool ShouldBlockManawaveRaids(Map map)
         {
             var quest = ViviEndingQuest.Current;
-            if (quest == null || map == null || quest.AnchorMap != map) { return false; }
-
-            return quest.Stage == ViviEndingStage.Calm || quest.Stage == ViviEndingStage.Boss;
+            return quest != null && quest.ShouldSuppressThreats(map);
         }
     }
 }
