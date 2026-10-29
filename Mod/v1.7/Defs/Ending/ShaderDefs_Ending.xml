@@ -21,7 +21,8 @@
     <shaderPath>Map/VV_Dissolve</shaderPath>
   </ShaderTypeDef>
 
-  <!-- 영혼 연결 빔: 타일링 텍스처 두 겹 스크롤 + 맥동 (가산 혼합) -->
+  <!-- 영혼 연결 빔: 타일링 텍스처 두 겹 스크롤 + 맥동 (가산 혼합)
+       충격파(VV_ShockWave)의 장면 캡처(큐 3151) 전에 그려야 파면에 함께 굴절되고 덮여 지워지지 않으므로 큐를 3150으로 둔다. -->
   <ShaderDef>
     <defName>VV_SoulLink</defName>
     <shaderProgram>
@@ -31,7 +32,7 @@
       <blendMode>Additive</blendMode>
       <depthWrite>false</depthWrite>
       <cullMode>None</cullMode>
-      <renderQueue>3151</renderQueue>
+      <renderQueue>3150</renderQueue>
       <textureWrapOverrides>
         <li>
           <key>_MainTex</key>

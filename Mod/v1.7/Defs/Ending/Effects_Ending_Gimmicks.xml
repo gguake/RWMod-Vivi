@@ -171,6 +171,33 @@
     </graphicData>
   </FleckDef>
 
+  <!-- 멸망꽃 씨앗 사출: 보스 둘레로 번지는 굴절 충격파(VV_ShockWave 셰이더). 빛은 옅게 두고 장면 왜곡 위주로 보여 준다. -->
+  <FleckDef ParentName="FleckBase">
+    <defName>VV_Fleck_GimmickDoomLaunchWave</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0</fadeInTime>
+    <solidTime>0.9</solidTime>
+    <fadeOutTime>0.05</fadeOutTime>
+    <drawOffscreen>true</drawOffscreen>
+    <graphicData>
+      <graphicClass>Graphic_FleckPulse</graphicClass>
+      <texPath>Things/Mote/Black</texPath>
+      <shaderType>VV_ShockWave</shaderType>
+      <renderInstanced>false</renderInstanced>
+      <drawSize>(20, 20)</drawSize>
+      <shaderParameters>
+        <_Duration>0.9</_Duration>
+        <_Width>0.035</_Width>
+        <_Distortion>0.05</_Distortion>
+        <_Brightness>0.12</_Brightness>
+        <_ArcIntensity>0</_ArcIntensity>
+        <_CoreColor>(1.0, 0.6, 0.88, 1)</_CoreColor>
+        <_GlowColor>(0.85, 0.12, 0.6, 1)</_GlowColor>
+        <_FringeColor>(0.45, 0.05, 0.45, 1)</_FringeColor>
+      </shaderParameters>
+    </graphicData>
+  </FleckDef>
+
   <!-- 멸망꽃 만개: 맵 전체로 번지는 저주 파동(약 60칸). 텍스처를 키우면 깨져 보이므로 VV_ShockWave 셰이더로 그린다. -->
   <FleckDef ParentName="FleckBase_Thrown">
     <defName>VV_Fleck_GimmickDoomWave</defName>
@@ -389,6 +416,13 @@
         <fleckDef>VV_Fleck_GimmickDoomRing</fleckDef>
         <spawnLocType>OnSource</spawnLocType>
         <scale>1</scale>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickDoomLaunchWave</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <absoluteAngle>true</absoluteAngle>
+        <rotation>0~360</rotation>
       </li>
       <li>
         <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>

@@ -114,5 +114,8 @@ void main()
               + u._FringeColor.rgb * ahead * 0.6;
     glow *= flicker * u._Brightness * fade * u._Color.rgb;
 
-    outColor = vec4(bg + glow, 1.0);
+    // 장면 캡처 뒤에 그려진 것(영혼 연결선 등)을 지우지 않도록, 굴절·빛이 있는 만큼만 덮고 나머지는 비친다.
+    // 뒤따르는 잔광 쪽 굴절은 약하므로 덮지 않고(넓은 원판 안의 연결선이 사라져 보임) 파면 띠만 덮는다.
+    float cover = clamp(exp(-(d * d) / (4.0 * w * w)) * fade * 3.0 + max(glow.r, max(glow.g, glow.b)), 0.0, 1.0);
+    outColor = vec4(bg + glow, cover);
 }
