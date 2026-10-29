@@ -7,6 +7,8 @@ namespace VVRace
     // 2페이즈 전환 동안 아포크리파 몸통을 그리는 모핑 재질(VV_Morph 셰이더).
     // 방향별(남·동·북, 서쪽은 동쪽 메시를 좌우 반전하므로 동쪽 재질 사용)로 1페이즈 텍스처(_MainTex) 위에 2페이즈 텍스처(_MorphTex)를 얹는다.
     // 렌더 서브워커는 병렬로 실행되므로 재질은 메인 스레드(전환 시작·불러오기)에서 미리 만들어 두고, 서브워커는 읽기만 한다.
+    // 재질 필드가 있는 정적 클래스는 바닐라가 시작 시 경고하므로 StaticConstructorOnStartup을 붙인다(재질은 여전히 지연 생성).
+    [StaticConstructorOnStartup]
     public static class ApocryphaMorphMaterials
     {
         private const string ShaderPath = "Map/VV_Morph";
