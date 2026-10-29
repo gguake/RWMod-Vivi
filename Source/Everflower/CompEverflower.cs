@@ -534,7 +534,6 @@ namespace VVRace
                 {
                     AltarDefOf.VV_Effecter_AltarEnshrine?.Spawn(parent.Position, map).Cleanup();
                     Messages.Message(LocalizeString_EndingAltar.VV_Message_EverflowerEnshrined.Translate(), parent, MessageTypeDefOf.PositiveEvent);
-                    ViviEndingQuest.Current?.Notify_Enshrined(Everflower, altar);
                 }
             }
 

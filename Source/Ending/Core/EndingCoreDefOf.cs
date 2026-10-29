@@ -7,6 +7,10 @@ namespace VVRace
     [DefOf]
     public static class EndingCoreDefOf
     {
+        // 엔딩 퀘스트: 〈비비 연방의 밀서〉(제단 해금·호박 코어), 〈만개하는 여명〉(공성~엔딩)
+        public static QuestScriptDef VV_EndGame_ViviMissive;
+        public static QuestScriptDef VV_EndGame_ViviBloom;
+
         // 평화 기간 〈불길한 정적〉 표시용 게임 컨디션
         public static GameConditionDef VV_OminousSilence;
 

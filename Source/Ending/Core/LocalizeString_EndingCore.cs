@@ -3,6 +3,13 @@
     // 엔딩 퀘스트 코어(서신·공성·평화·보스 등장·엔딩/실패) Keyed 문자열. Languages/*/Keyed/Ending_Core.xml과 짝을 이룬다.
     public static class LocalizeString_EndingCore
     {
+        // 퀘스트 탭: 밀서 퀘스트 목표, 본편 퀘스트 이름·설명, 평화 기간 남은 시간({0})
+        public const string VV_Quest_EndingMissiveGoals = nameof(VV_Quest_EndingMissiveGoals);
+        public const string VV_Quest_EndingName = nameof(VV_Quest_EndingName);
+        public const string VV_Quest_EndingDesc = nameof(VV_Quest_EndingDesc);
+        public const string VV_Quest_EndingCalmExpiry = nameof(VV_Quest_EndingCalmExpiry);
+        public const string VV_Quest_EndingCalmExpiryTip = nameof(VV_Quest_EndingCalmExpiryTip);
+
         // 비비 연방의 밀서 (4단계 → 제단 해금)
         public const string VV_Letter_EndingFederationMissiveLabel = nameof(VV_Letter_EndingFederationMissiveLabel);
         public const string VV_Letter_EndingFederationMissive = nameof(VV_Letter_EndingFederationMissive);

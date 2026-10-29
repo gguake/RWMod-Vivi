@@ -1,6 +1,7 @@
 ﻿namespace VVRace
 {
-    // 엔딩 퀘스트 〈만개하는 여명〉 진행 단계. 세이브에 저장되므로 값을 바꾸거나 순서를 바꾸지 말 것.
+    // 엔딩 퀘스트 〈만개하는 여명〉 진행 단계. 본편 퀘스트의 상태 부품(QuestPart_ViviEndingState)이 저장하므로 값을 바꾸거나 순서를 바꾸지 말 것.
+    // None~AltarUnlocked는 창구(ViviEndingQuest)가 서신 예약·밀서 퀘스트 유무로, Completed/Failed는 본편 퀘스트의 종료 결과로도 판단한다.
     // 진행 순서: None → LetterPending → AltarUnlocked → Siege → Calm → Boss → Coronation → Completed (또는 Failed).
     // Coronation은 나중에 추가되어 값이 진행 순서와 다르므로 단계끼리 대소 비교를 하지 말 것.
     public enum ViviEndingStage : byte

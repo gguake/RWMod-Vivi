@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
 
+<!-- Ending quest: quests tab (the missive quest is named after the missive letter) -->
+<VV_Quest_EndingMissiveGoals>Complete the ancient altar restoration research and build the everflower altar with the ancient amber core sent by the Vivi federation. Enshrine an everflower of attunement level 4 at the center of the altar, then hold the grand attunement to begin its fifth bloom.</VV_Quest_EndingMissiveGoals>
+<VV_Quest_EndingName>Dawn in full bloom</VV_Quest_EndingName>
+<VV_Quest_EndingDesc>The everflower on the altar has entered its fifth bloom and is condensing mana for its final bloom.
+\nDefend the everflower altar from the enemies drawn by the mana pillar until the condensation is complete. Once it is complete, the resonator can hold the queen's coronation at the everflower to bring it into full bloom.
+\nIf the everflower on the altar is lost, the quest fails.</VV_Quest_EndingDesc>
+<VV_Quest_EndingCalmExpiry>Calm ends in {0}</VV_Quest_EndingCalmExpiry>
+<VV_Quest_EndingCalmExpiryTip>The calm ends on {0}</VV_Quest_EndingCalmExpiryTip>
+
 <!-- Ending quest: federation missive -->
 <VV_Letter_EndingFederationMissiveLabel>Vivi federation missive</VV_Letter_EndingFederationMissiveLabel>
 <VV_Letter_EndingFederationMissive>The everflower resonating with {PAWN_labelShort} has grown to its limit, but on ordinary soil it can no longer condense its power, and its mana is scattering away.

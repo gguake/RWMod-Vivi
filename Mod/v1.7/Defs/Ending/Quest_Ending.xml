@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
+  <!-- 엔딩 퀘스트 1: 〈비비 연방의 밀서〉. 영원꽃 4단계 도달 후 서신이 도착할 때 만들어지고(ViviEndingQuest),
+       제단 연구 해금·고대 호박 코어 전달을 맡는다. 5단계 대조율 의식이 끝나면 성공으로 끝난다.
+       이름·설명·편지는 루트 노드가 Keyed 번역으로 채우므로 문법 규칙이 없다. -->
+  <QuestScriptDef>
+    <defName>VV_EndGame_ViviMissive</defName>
+    <isRootSpecial>true</isRootSpecial>
+    <autoAccept>true</autoAccept>
+    <sendAvailableLetter>false</sendAvailableLetter>
+    <root Class="VVRace.QuestNode_Root_ViviMissive" />
+  </QuestScriptDef>
+
+  <!-- 엔딩 퀘스트 2: 〈만개하는 여명〉. 5단계 대조율 의식이 끝나는 순간 앵커 영원꽃과 함께 만들어진다.
+       공성 → 평화 기간 → 아포크리파 → 여왕의 대관식 → 엔딩, 영원꽃 찬탈·소실 시 실패. -->
+  <QuestScriptDef>
+    <defName>VV_EndGame_ViviBloom</defName>
+    <isRootSpecial>true</isRootSpecial>
+    <autoAccept>true</autoAccept>
+    <sendAvailableLetter>false</sendAvailableLetter>
+    <defaultChallengeRating>4</defaultChallengeRating>
+    <root Class="VVRace.QuestNode_Root_ViviBloom" />
+  </QuestScriptDef>
+
   <!-- 엔딩 막간 〈불길한 정적〉: 평화 기간 동안 화면 상단에 남은 시간을 보여주는 표시용 컨디션.
        실제 위협 억제는 VVRace.EndingCorePatch(IncidentWorker.CanFireNow 포스트픽스)가 한다.
        preventIncidents는 상인·방문객 같은 긍정적 사건까지 막으므로 쓰지 않는다. -->

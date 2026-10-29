@@ -1,18 +1,26 @@
-using RimWorld;
+﻿using RimWorld;
+using UnityEngine;
 using Verse;
 
 namespace VVRace
 {
-    // 엔딩 분위기 연출: 엔딩 동안 제단 영원꽃의 주기적 발광, 평화 기간부터 엔딩까지 이어지는 〈황금빛 꽃안개〉
+    // 엔딩 분위기 연출: 엔딩 동안 제단 영원꽃의 주기적 발광, 엔딩 순간의 금빛 섬광(실시간으로 걷어냄).
+    // 〈황금빛 꽃안개〉·〈불길한 정적〉 컨디션은 본편 퀘스트의 QuestPart_GameCondition이 건다.
     public partial class ViviEndingQuest
     {
         private static readonly IntRange AltarPulseIntervalTicks = new IntRange(420, 660);
 
-        // 엔딩(대관식 완료)이 끝나면 황금빛 꽃안개는 이 시간 동안 남았다가 걷힌다.
-        private const int GoldenBloomFadeTicks = 30000;
+        private const float EndingFlashFadeInSeconds = 0.6f;
+        private const float EndingFlashHoldSeconds = 0.67f;     // 40틱(1배속) 뒤 걷어낸다. 일시정지와 무관하게 실시간으로 처리한다.
+        private const float EndingFlashFadeOutSeconds = 3f;
+
+        private static readonly Color EndingFlashColor = new Color(1f, 0.85f, 0.45f, 0.55f);
 
         // 비저장: 다음 제단 발광 틱. 불러온 뒤에는 첫 틱에 다시 잡는다.
         private int _nextAltarPulseTick = -1;
+
+        // 비저장: 금빛 섬광을 걷어낼 실시간(Time.realtimeSinceStartup). 음수면 대기 중인 섬광 없음.
+        private float _fadeBackRealtime = -1f;
 
         // 매 틱: 엔딩이 진행되는 동안 제단에 안치된 앵커 영원꽃이 몇 초마다 은은하게 빛나며 꽃잎을 흩날린다(보고 있는 맵일 때만).
         private void TickAltarPulse(int now)
@@ -51,62 +59,19 @@ namespace VVRace
             effecterDef?.Spawn(anchor.Position, anchor.Map).Cleanup();
         }
 
-        // 평화 기간 시작: 앵커 맵에 〈황금빛 꽃안개〉를 엔딩이 끝날 때까지 건다.
-        private void StartGoldenBloom()
+        // [엔딩 연출 호출] 엔딩 순간 화면을 금빛으로 물들였다가 잠시 뒤 걷어낸다.
+        public void PlayEndingFlash()
         {
-            var map = AnchorMap;
-            if (map == null) { return; }
-
-            var condition = GoldenBloomUtility.GetActiveCondition(map);
-            if (condition == null)
-            {
-                condition = (GameCondition_GoldenBloom)GameConditionMaker.MakeCondition(EndingCoreDefOf.VV_GoldenBloom);
-                condition.Permanent = true;
-                condition.fromEnding = true;
-                map.gameConditionManager.RegisterCondition(condition);
-            }
-            else
-            {
-                condition.Permanent = true;
-                condition.fromEnding = true;
-            }
+            ScreenFader.StartFade(EndingFlashColor, EndingFlashFadeInSeconds);
+            _fadeBackRealtime = Time.realtimeSinceStartup + EndingFlashHoldSeconds;
         }
 
-        // 평화·보스·대관식 단계의 250틱 처리: 꽃안개가 (불러오기·다른 효과 등으로) 사라졌으면 다시 건다.
-        private void EnsureGoldenBloom()
+        private void UpdateEndingScreenFade()
         {
-            var map = AnchorMap;
-            if (map != null && GoldenBloomUtility.GetActiveCondition(map)?.fromEnding != true)
-            {
-                StartGoldenBloom();
-            }
-        }
+            if (_fadeBackRealtime < 0f || Time.realtimeSinceStartup < _fadeBackRealtime) { return; }
 
-        // 엔딩 완료: 꽃안개는 잠시 남았다가 걷힌다(이후로는 의식으로 부른 꽃안개처럼 다룬다).
-        private static void FadeGoldenBloom()
-        {
-            foreach (var map in Find.Maps)
-            {
-                var condition = GoldenBloomUtility.GetActiveCondition(map);
-                if (condition == null || !condition.fromEnding) { continue; }
-
-                condition.fromEnding = false;
-                condition.Permanent = false;
-                condition.Duration = condition.TicksPassed + GoldenBloomFadeTicks;
-            }
-        }
-
-        // 엔딩 실패·초기화: 엔딩이 건 꽃안개를 곧바로 걷는다.
-        private static void EndGoldenBloom()
-        {
-            foreach (var map in Find.Maps)
-            {
-                var condition = GoldenBloomUtility.GetActiveCondition(map);
-                if (condition != null && condition.fromEnding)
-                {
-                    condition.End();
-                }
-            }
+            _fadeBackRealtime = -1f;
+            ScreenFader.StartFade(Color.clear, EndingFlashFadeOutSeconds);
         }
     }
 }

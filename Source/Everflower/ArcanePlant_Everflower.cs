@@ -81,18 +81,10 @@ namespace VVRace
             map?.GetManaComponent()?.RefreshEverflowerAltarState();
         }
 
+        // 엔딩이 묶인 영원꽃의 파괴는 앵커 퀘스트 태그로 바닐라가 엔딩 퀘스트에 알린다("<태그>.Destroyed").
         public override void Destroy(DestroyMode mode = DestroyMode.Vanish)
         {
             Unreserve();
-
-            // 엔딩이 묶인 영원꽃이 파괴되면(맵이 아직 유효할 때) 퀘스트에 알린다.
-            // 보스가 찬탈할 때는 퀘스트 상태를 먼저 Failed로 바꾼 뒤 영원꽃을 파괴하므로, 퀘스트 쪽에서 중복 통지를 무시한다.
-            var quest = ViviEndingQuest.Current;
-            if (quest != null && !Destroyed && quest.IsAnchor(this))
-            {
-                quest.Notify_AnchorDestroyed(this);
-            }
-
             base.Destroy(mode);
         }
 
