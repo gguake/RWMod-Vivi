@@ -20,7 +20,8 @@ namespace VVRace
             }
 
             var fenceBlocked = pawn.def.race.FenceBlocked;
-            return FindPawnTarget(pawn, DefaultMaxTargetSearchDistance, fenceBlocked) != null
+            return GetReachableFocusTarget(pawn, fenceBlocked) != null
+                || FindPawnTarget(pawn, DefaultMaxTargetSearchDistance, fenceBlocked) != null
                 || FindTurretTarget(pawn, DefaultMaxTargetSearchDistance, fenceBlocked) != null;
         }
 
@@ -32,6 +33,14 @@ namespace VVRace
             }
 
             var fenceBlocked = pawn.def.race.FenceBlocked;
+
+            // 아포크리파 호위 말벌은 보스가 감지한 적을 가장 먼저 공격한다.
+            var focus = GetReachableFocusTarget(pawn, fenceBlocked);
+            if (focus != null)
+            {
+                return MeleeAttackJob(focus, fenceBlocked);
+            }
+
             var target = FindPawnTarget(pawn, maxTargetSearchDistance, fenceBlocked);
             if (target != null && pawn.CanReach(target, PathEndMode.Touch, Danger.Deadly, canBashDoors: false, fenceBlocked))
             {
@@ -108,13 +117,33 @@ namespace VVRace
                 canBashFences: canBashFences);
         }
 
-        // 아포크리파 호위 말벌은 보스 주변만 탐색해 보스 곁을 지킨다(경호/반격 대상 선별은 LordJob_ApocryphaEscort.ValidateAttackTarget). 그 외 말벌은 제한 없음.
+        // 아포크리파 호위 말벌에게 보스가 맡긴 공격 대상(닿을 수 없으면 null).
+        private static Thing GetReachableFocusTarget(Pawn pawn, bool fenceBlocked)
+        {
+            if (!(pawn.GetLord()?.LordJob is LordJob_ApocryphaEscort escortJob)) { return null; }
+
+            var focus = escortJob.FocusTarget;
+            if (focus == null || focus.Map != pawn.Map) { return null; }
+
+            return pawn.CanReach(focus, PathEndMode.Touch, Danger.Deadly, canBashDoors: false, fenceBlocked) ? focus : null;
+        }
+
+        // 아포크리파 호위 말벌은 보스 주변만, 꽃 경비 말벌은 지키는 꽃(꽃이 없으면 보스) 주변만 탐색한다
+        // (경호/경비/반격 대상 선별은 각 로드의 ValidateAttackTarget). 그 외 말벌은 제한 없음.
         private static void GetSearchArea(Pawn pawn, out IntVec3 locus, out float maxTravelRadius)
         {
-            if (pawn.GetLord()?.LordJob is LordJob_ApocryphaEscort escortJob && escortJob.BossActive && escortJob.Boss.Map == pawn.Map)
+            var lordJob = pawn.GetLord()?.LordJob;
+            if (lordJob is LordJob_ApocryphaEscort escortJob && escortJob.BossActive && escortJob.Boss.Map == pawn.Map)
             {
                 locus = escortJob.Boss.Position;
                 maxTravelRadius = escortJob.SearchRadius;
+                return;
+            }
+
+            if (lordJob is LordJob_ApocryphaFlowerGuard guardJob && guardJob.BossActive && guardJob.Boss.Map == pawn.Map)
+            {
+                locus = guardJob.GetGuardPoint(pawn);
+                maxTravelRadius = guardJob.SearchRadius;
                 return;
             }
 

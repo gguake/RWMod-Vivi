@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 〈황금빛 꽃안개〉: 평화 기간부터 엔딩까지 앵커 맵에 내려앉고, 엔딩 이후에는 날씨 변경 의식으로 부를 수 있다.
+       안개처럼 원거리 명중률을 낮추고(VV_GoldenBloomMist), 걸려 있는 동안 맵의 모든 마법 식물의 마나가 무제한이 된다(GameCondition_GoldenBloom).
+       화면이 누렇게 뜨지 않도록 하늘빛은 맑은 날에 아주 옅은 온기만 더하고, 금빛은 안개층(WeatherOverlay_GoldenMist)과 꽃잎에만 둔다.
+       overlay 색의 밝기는 안개층 농도로도 쓰인다(낮 1, 해 질 녘 0.85, 밤 0.55~0.6 → 밤에는 안개가 옅어진다). -->
+  <WeatherDef>
+    <defName>VV_GoldenBloomMist</defName>
+    <label>golden bloom mist</label>
+    <description>A faint golden mist drifts over the land while everflower petals dance on the wind. Like fog, it reduces the accuracy of ranged weapons.</description>
+    <isBad>false</isBad>
+    <canOccurAsRandomForcedEvent>false</canOccurAsRandomForcedEvent>
+    <repeatable>true</repeatable>
+    <windSpeedFactor>0.7</windSpeedFactor>
+    <accuracyMultiplier>0.5</accuracyMultiplier>
+    <favorability>Good</favorability>
+    <perceivePriority>1</perceivePriority>
+    <ambientSounds>
+      <li>Ambient_Wind_Fog</li>
+    </ambientSounds>
+    <overlayClasses>
+      <li>VVRace.WeatherOverlay_GoldenMist</li>
+      <li>VVRace.WeatherOverlay_GoldenPetals</li>
+    </overlayClasses>
+    <skyColorsDay>
+      <sky>(1,0.97,0.9)</sky>
+      <shadow>(0.8,0.77,0.74)</shadow>
+      <overlay>(1,0.92,0.75)</overlay>
+      <saturation>1.1</saturation>
+    </skyColorsDay>
+    <skyColorsDusk>
+      <sky>(0.9,0.77,0.62)</sky>
+      <shadow>(0.95,0.9,0.88)</shadow>
+      <overlay>(0.85,0.78,0.65)</overlay>
+      <saturation>1.1</saturation>
+    </skyColorsDusk>
+    <skyColorsNightEdge>
+      <sky>(0.5,0.56,0.62)</sky>
+      <shadow>(0.92,0.92,0.92)</shadow>
+      <overlay>(0.6,0.56,0.5)</overlay>
+      <saturation>1.1</saturation>
+    </skyColorsNightEdge>
+    <skyColorsNightMid>
+      <sky>(0.46,0.52,0.6)</sky>
+      <shadow>(0.85,0.85,0.85)</shadow>
+      <overlay>(0.55,0.52,0.48)</overlay>
+      <saturation>1.1</saturation>
+    </skyColorsNightMid>
+  </WeatherDef>
+
+  <GameConditionDef>
+    <defName>VV_GoldenBloom</defName>
+    <conditionClass>VVRace.GameCondition_GoldenBloom</conditionClass>
+    <label>golden bloom mist</label>
+    <description>The power of the everflower has spilled over the land as a golden mist and drifting petals. The mist lowers the accuracy of ranged weapons, and while it lasts, every arcane plant in the area has unlimited mana.</description>
+    <weatherDef>VV_GoldenBloomMist</weatherDef>
+    <natural>false</natural>
+    <displayOnUI>true</displayOnUI>
+    <canBePermanent>true</canBePermanent>
+    <showPermanentInTooltip>false</showPermanentInTooltip>
+    <preventIncidents>false</preventIncidents>
+  </GameConditionDef>
+</Defs>

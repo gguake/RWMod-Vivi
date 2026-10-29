@@ -145,6 +145,15 @@ namespace VVRace
                 }
             }
 
+            try
+            {
+                TickAltarPulse(now);
+            }
+            catch (Exception ex)
+            {
+                Log.ErrorOnce($"[ViViRace] altar everflower pulse failed: {ex}", 0x5645_4E20);
+            }
+
             if (_creditsTick >= 0 && now >= _creditsTick)
             {
                 _creditsTick = -1;
@@ -192,7 +201,10 @@ namespace VVRace
                         break;
 
                     case ViviEndingStage.Coronation:
-                        CheckAnchorAlive();
+                        if (CheckAnchorAlive())
+                        {
+                            EnsureGoldenBloom();
+                        }
                         break;
                 }
             }
@@ -783,6 +795,7 @@ namespace VVRace
             CleanupGimmicks();
             VanishBoss(_boss);
             EndOminousSilence();
+            EndGoldenBloom();
 
             _stage = ViviEndingStage.None;
             _bloomProgress = 0f;

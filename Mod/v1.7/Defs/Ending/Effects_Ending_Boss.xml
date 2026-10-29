@@ -313,14 +313,22 @@
     </graphicData>
   </ThingDef>
 
+  <!-- 사출 포격 조준: 조준이 여러 개 겹칠 수 있으므로 표적 칸의 불꽃은 조준마다(VV_Effecter_ApocryphaAim),
+       조준음은 조준이 하나라도 있는 동안 보스에게 하나만(VV_Effecter_ApocryphaAimSustain) 낸다. -->
   <EffecterDef>
-    <defName>VV_Effecter_ApocryphaAim</defName>
+    <defName>VV_Effecter_ApocryphaAimSustain</defName>
     <children>
       <li>
         <subEffecterClass>SubEffecter_Sustainer</subEffecterClass>
         <soundDef>HellsphereCannon_Aiming</soundDef>
         <spawnLocType>OnSource</spawnLocType>
       </li>
+    </children>
+  </EffecterDef>
+
+  <EffecterDef>
+    <defName>VV_Effecter_ApocryphaAim</defName>
+    <children>
       <li>
         <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
         <fleckDef>VV_Fleck_ApocryphaAimSpark</fleckDef>

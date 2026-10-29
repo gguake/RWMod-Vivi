@@ -68,6 +68,12 @@ namespace VVRace
                 return LocalizeString_EndingRituals.VV_FailReason_ApocryphaInterference.Translate();
             }
 
+            // 엔딩이 건 황금빛 꽃안개가 덮고 있는 동안(평화 기간~엔딩)에는 날씨 변경 의식으로 날씨를 바꿀 수 없다.
+            if (ritual?.def == VVPreceptDefOf.VV_ChangeWeatherRitual && GoldenBloomUtility.IsHeldByEnding(everflower.MapHeld))
+            {
+                return LocalizeString_EndingCore.VV_FailReason_GoldenBloomHoldsWeather.Translate();
+            }
+
             // 엔딩의 마지막 의식(여왕의 대관식)은 아포크리파 토벌 직후 바로 치를 수 있도록 재사용 대기를 무시한다(단계 조건은 대상 필터가 확인한다).
             if (IsCoronationRitual(ritual) && GetCoronationBlockReason(everflower) == null) { return null; }
 

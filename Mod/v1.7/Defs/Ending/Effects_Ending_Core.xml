@@ -50,6 +50,17 @@
     </graphicData>
   </FleckDef>
 
+  <!-- 〈황금빛 꽃안개〉 날씨의 꽃잎: 카메라 시야 곳곳에서 생겨 바람을 타고 비스듬히 흩날린다 (WeatherOverlay_GoldenPetals가 색·속도·회전을 정해 생성) -->
+  <FleckDef ParentName="VV_FleckEverflowerPetalBase">
+    <defName>VV_Fleck_GoldenBloomPetal</defName>
+    <fadeInTime>0.6</fadeInTime>
+    <solidTime>2.2</solidTime>
+    <fadeOutTime>1.4</fadeOutTime>
+    <graphicData>
+      <drawSize>(0.6, 0.6)</drawSize>
+    </graphicData>
+  </FleckDef>
+
   <!-- 엔딩 개화 순간: 소리 + 금빛 섬광 + 첫 황금 파동 + 왜곡 파동 + 사방으로 터지는 꽃잎 (꽃봉오리 오프셋에서 1회 Spawn) -->
   <EffecterDef>
     <defName>VV_Effecter_EndingGoldenWave</defName>

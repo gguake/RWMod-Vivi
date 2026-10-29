@@ -1,5 +1,6 @@
 using RimWorld;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Verse;
 
@@ -48,7 +49,8 @@ namespace VVRace
 
         public override void DoRightColumn(ref RectDivider layout)
         {
-            var totalHeight = HeaderHeight + RowHeight * EverflowerWeatherChoiceUtility.AllChoices.Length;
+            var choices = EverflowerWeatherChoiceUtility.AvailableChoices(target.Thing as ArcanePlant_Everflower).ToList();
+            var totalHeight = HeaderHeight + RowHeight * choices.Count;
             var rect = layout.NewRow(totalHeight).Rect;
 
             var headerRect = new Rect(rect.x, rect.y, rect.width, HeaderHeight);
@@ -58,7 +60,7 @@ namespace VVRace
             }
 
             var curY = rect.y + HeaderHeight;
-            foreach (var choice in EverflowerWeatherChoiceUtility.AllChoices)
+            foreach (var choice in choices)
             {
                 var rowRect = new Rect(rect.x + 8f, curY, Mathf.Min(rect.width - 8f, 360f), RowHeight);
                 if (Widgets.RadioButtonLabeled(rowRect, EverflowerWeatherChoiceUtility.Label(choice), selectedWeather == choice))
@@ -69,6 +71,10 @@ namespace VVRace
                 if (choice == EverflowerWeatherChoice.Rain)
                 {
                     TooltipHandler.TipRegion(rowRect, LocalizeString_Dialog.VV_DialogChangeWeatherRainDesc.Translate());
+                }
+                else if (choice == EverflowerWeatherChoice.GoldenBloom)
+                {
+                    TooltipHandler.TipRegion(rowRect, LocalizeString_EndingCore.VV_DialogChangeWeatherGoldenBloomDesc.Translate());
                 }
 
                 curY += RowHeight;

@@ -10,10 +10,6 @@ namespace VVRace
     // 보스 쪽(Task D)이 타이머/조준을 관리하고 실제 발사·생성·연출은 이 모듈(Task E)이 담당한다.
     public static class ApocryphaGimmicks
     {
-        // 동시에 맵에 있을 수 있는 꽃 수(날아가는 중인 씨앗 포함). 보스 타이머에서 개수 제한을 지키지 못하더라도 여기서 한 번 더 확인해 생성을 막는다.
-        public const int MaxDoomFlowers = 9;
-        public const int MaxFairyFlowers = 2;
-
         // 씨앗 착탄 칸: 맵 무작위 칸을 최대 200번 시도, 보스로부터 8칸 이상
         private const int SeedCellSearchTries = 200;
         private const float MinSeedDistanceFromBoss = 8f;
@@ -62,39 +58,77 @@ namespace VVRace
             return TryLaunchDoomSeeds(boss, 1) > 0;
         }
 
-        // 멸망꽃 씨앗을 한 번에 count개까지 서로 떨어진 빈 바닥으로 흩뿌린다(맵의 멸망꽃·날아가는 씨앗 합계는 최대 MaxDoomFlowers).
-        // 실제로 날린 씨앗 수를 반환한다.
+        // 멸망꽃 씨앗을 한 번에 count개까지 서로 떨어진 빈 바닥으로 흩뿌린다. 실제로 날린 씨앗 수를 반환한다.
         public static int TryLaunchDoomSeeds(Pawn boss, int count)
         {
-            if (!IsBoundBoss(boss, out _) || count <= 0) { return 0; }
-
-            var seedDef = ApocryphaGimmickDefOf.VV_Projectile_DoomSeed;
-            var flowerDef = ApocryphaGimmickDefOf.VV_DoomFlower;
-            var map = boss.Map;
-            var room = MaxDoomFlowers - map.listerThings.ThingsOfDef(flowerDef).Count - map.listerThings.ThingsOfDef(seedDef).Count;
-
-            var targets = new List<IntVec3>();
-            for (int i = 0; i < Mathf.Min(count, room); i++)
-            {
-                if (!TryFindSeedTargetCell(boss, targets, out var cell)) { break; }
-
-                targets.Add(cell);
-                var projectile = (Projectile)GenSpawn.Spawn(seedDef, boss.Position, map);
-                projectile.Launch(boss, GetBossBodyPos(boss), cell, cell, ProjectileHitFlags.None);
-            }
-
-            if (targets.Count > 0)
-            {
-                PlayLaunchEffect(seedDef, boss);
-            }
-
-            return targets.Count;
+            TryLaunchSeedVolley(boss, count, false, out var doomLaunched, out _);
+            return doomLaunched;
         }
 
-        // 맵의 무작위 빈 바닥으로 요정꽃 씨앗 투사체를 날린다. 착탄 시 요정꽃이 피어난다.
+        // 맵의 무작위 빈 바닥으로 요정꽃 씨앗 투사체를 날린다. 착탄 시 요정꽃이 피어난다(요정꽃이 이미 최대 개수면 아무것도 쏘지 않는다).
         public static bool TryLaunchFairySeed(Pawn boss)
         {
-            return TryLaunchSeed(boss, ApocryphaGimmickDefOf.VV_Projectile_FairySeed, ApocryphaGimmickDefOf.VV_FairyFlower, MaxFairyFlowers);
+            if (!IsBoundBoss(boss, out var comp)) { return false; }
+            if (comp.Props.maxFairyFlowers - CountFlowersAndSeeds(boss.Map, ApocryphaGimmickDefOf.VV_FairyFlower, ApocryphaGimmickDefOf.VV_Projectile_FairySeed) <= 0) { return false; }
+
+            TryLaunchSeedVolley(boss, 1, true, out _, out var fairyLaunched);
+            return fairyLaunched > 0;
+        }
+
+        // 보스의 멸망꽃 사출 1회: 씨앗 count개를 서로 떨어진 빈 바닥으로 흩뿌린다. withFairy면 그중 하나를 요정꽃 씨앗으로 바꾼다.
+        // 맵의 꽃과 날아가는 씨앗을 합친 수는 보스의 maxDoomFlowers/maxFairyFlowers를 넘지 않는다(요정꽃이 꽉 찼으면 바꾸지 않고 멸망꽃 씨앗을 쏜다).
+        public static void TryLaunchSeedVolley(Pawn boss, int count, bool withFairy, out int doomLaunched, out int fairyLaunched)
+        {
+            doomLaunched = 0;
+            fairyLaunched = 0;
+            if (!IsBoundBoss(boss, out var comp) || count <= 0) { return; }
+
+            var map = boss.Map;
+            var doomSeedDef = ApocryphaGimmickDefOf.VV_Projectile_DoomSeed;
+            var fairySeedDef = ApocryphaGimmickDefOf.VV_Projectile_FairySeed;
+            var doomRoom = comp.Props.maxDoomFlowers - CountFlowersAndSeeds(map, ApocryphaGimmickDefOf.VV_DoomFlower, doomSeedDef);
+            var fairyRoom = comp.Props.maxFairyFlowers - CountFlowersAndSeeds(map, ApocryphaGimmickDefOf.VV_FairyFlower, fairySeedDef);
+
+            var fairyCount = withFairy && fairyRoom > 0 ? 1 : 0;
+            var doomCount = Mathf.Min(count - fairyCount, doomRoom);
+
+            var targets = new List<IntVec3>();
+            if (fairyCount > 0 && TryLaunchSeedTo(boss, fairySeedDef, targets))
+            {
+                fairyLaunched = 1;
+            }
+
+            for (int i = 0; i < doomCount; i++)
+            {
+                if (!TryLaunchSeedTo(boss, doomSeedDef, targets)) { break; }
+                doomLaunched++;
+            }
+
+            if (fairyLaunched > 0)
+            {
+                PlayLaunchEffect(fairySeedDef, boss);
+            }
+
+            if (doomLaunched > 0)
+            {
+                PlayLaunchEffect(doomSeedDef, boss);
+            }
+        }
+
+        private static int CountFlowersAndSeeds(Map map, ThingDef flowerDef, ThingDef seedDef)
+        {
+            return map.listerThings.ThingsOfDef(flowerDef).Count + map.listerThings.ThingsOfDef(seedDef).Count;
+        }
+
+        // targets: 같은 사출에서 이미 고른 착탄 칸(새 칸은 이 칸들과 떨어진 곳에서 고르고, 고른 칸을 덧붙인다).
+        private static bool TryLaunchSeedTo(Pawn boss, ThingDef seedDef, List<IntVec3> targets)
+        {
+            if (!TryFindSeedTargetCell(boss, targets, out var cell)) { return false; }
+
+            targets.Add(cell);
+            var projectile = (Projectile)GenSpawn.Spawn(seedDef, boss.Position, boss.Map);
+            projectile.Launch(boss, GetBossBodyPos(boss), cell, cell, ProjectileHitFlags.None);
+            return true;
         }
 
         // 보스의 매 프레임 그리기 훅에서 호출: 보스↔꽃, 보스↔요정 간섭 비비 사이의 영혼 연결선을 그린다.
@@ -303,23 +337,6 @@ namespace VVRace
         #endregion
 
         #region 씨앗 발사
-
-        private static bool TryLaunchSeed(Pawn boss, ThingDef seedDef, ThingDef flowerDef, int maxCount)
-        {
-            if (!IsBoundBoss(boss, out _)) { return false; }
-
-            var map = boss.Map;
-            var count = map.listerThings.ThingsOfDef(flowerDef).Count + map.listerThings.ThingsOfDef(seedDef).Count;
-            if (count >= maxCount) { return false; }
-
-            if (!TryFindSeedTargetCell(boss, null, out var cell)) { return false; }
-
-            var projectile = (Projectile)GenSpawn.Spawn(seedDef, boss.Position, map);
-            projectile.Launch(boss, GetBossBodyPos(boss), cell, cell, ProjectileHitFlags.None);
-
-            PlayLaunchEffect(seedDef, boss);
-            return true;
-        }
 
         // avoid: 같은 차례에 이미 고른 착탄 칸(이 칸들과 MinVolleySeedSpacing 이상 떨어진 곳만 고른다)
         private static bool TryFindSeedTargetCell(Pawn boss, List<IntVec3> avoid, out IntVec3 result)

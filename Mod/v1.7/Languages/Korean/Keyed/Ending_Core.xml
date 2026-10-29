@@ -86,4 +86,9 @@
 
 <VV_Ending_ResonatorFallback>공명자</VV_Ending_ResonatorFallback>
 
+<!-- 황금빛 꽃안개 -->
+<VV_Inspector_PlantManaUnlimited>황금빛 꽃안개: 마나 무제한</VV_Inspector_PlantManaUnlimited>
+<VV_DialogChangeWeatherGoldenBloomDesc>완전히 개화한 영원꽃의 기운이 황금빛 안개와 꽃잎으로 지역을 뒤덮습니다. 안개가 원거리 명중률을 떨어뜨리지만, 그동안 모든 마법 식물의 마나가 무제한이 됩니다.</VV_DialogChangeWeatherGoldenBloomDesc>
+<VV_FailReason_GoldenBloomHoldsWeather>황금빛 꽃안개가 이 지역의 날씨를 붙들고 있습니다</VV_FailReason_GoldenBloomHoldsWeather>
+
 </LanguageData>

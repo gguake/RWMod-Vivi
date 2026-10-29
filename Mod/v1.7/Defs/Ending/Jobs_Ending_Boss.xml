@@ -105,4 +105,18 @@
       </subNodes>
     </thinkNode>
   </DutyDef>
+
+  <!-- 보스전 증원 거대 말벌의 꽃 경비: 지키는 멸망꽃·요정꽃(듀티 초점) 곁을 배회한다. 꽃이 없으면 위의 호위 듀티로 보스를 따라간다.
+       교전은 광폭 상태 분기의 JobGiver_HornetBerserk가 지키는 꽃 근처에서 먼저 처리한다. -->
+  <DutyDef>
+    <defName>VV_TitanicHornetFlowerGuard</defName>
+    <thinkNode Class="ThinkNode_Priority">
+      <subNodes>
+        <li Class="JobGiver_WanderNearDutyLocation">
+          <wanderRadius>4</wanderRadius>
+          <locomotionUrgencyOutsideRadius>Jog</locomotionUrgencyOutsideRadius>
+        </li>
+      </subNodes>
+    </thinkNode>
+  </DutyDef>
 </Defs>

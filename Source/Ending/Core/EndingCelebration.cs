@@ -97,6 +97,7 @@ namespace VVRace
             }
 
             EndOminousSilence();
+            RunEndingStep("golden bloom fade", FadeGoldenBloom);
 
             if (_anchor != null && !_anchor.Destroyed)
             {
@@ -394,6 +395,7 @@ namespace VVRace
             }
 
             EndOminousSilence();
+            RunEndingStep("golden bloom end", EndGoldenBloom);
 
             var stolen = reason == EndingFailReason.Stolen;
             Find.LetterStack.ReceiveLetter(

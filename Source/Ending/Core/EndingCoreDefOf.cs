@@ -15,6 +15,15 @@ namespace VVRace
         public static FleckDef VV_Fleck_GoldenWaveRing;
         public static FleckDef VV_Fleck_EndingPetal;
 
+        // 엔딩 동안 제단 영원꽃의 주기적 발광(제단 위 5/6단계 그래픽 기준)
+        public static EffecterDef VV_Effecter_AltarEverflowerPulse_5;
+        public static EffecterDef VV_Effecter_AltarEverflowerPulse_6;
+
+        // 〈황금빛 꽃안개〉: 평화 기간~엔딩, 엔딩 이후 날씨 변경 의식
+        public static GameConditionDef VV_GoldenBloom;
+        public static WeatherDef VV_GoldenBloomMist;
+        public static FleckDef VV_Fleck_GoldenBloomPetal;
+
         // 제단 모듈 소유 def (이름은 계획서에 고정)
         public static ThingDef VV_DreamumAltar;
         public static ThingDef VV_AncientAmberCore;

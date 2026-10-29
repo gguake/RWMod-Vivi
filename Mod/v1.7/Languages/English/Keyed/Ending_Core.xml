@@ -86,4 +86,9 @@
 
 <VV_Ending_ResonatorFallback>the resonator</VV_Ending_ResonatorFallback>
 
+<!-- Golden bloom mist -->
+<VV_Inspector_PlantManaUnlimited>Golden bloom mist: unlimited mana</VV_Inspector_PlantManaUnlimited>
+<VV_DialogChangeWeatherGoldenBloomDesc>The power of the fully bloomed everflower blankets the area in golden mist and drifting petals. The mist lowers ranged accuracy, but while it lasts, every arcane plant has unlimited mana.</VV_DialogChangeWeatherGoldenBloomDesc>
+<VV_FailReason_GoldenBloomHoldsWeather>The golden bloom mist is holding the weather in place</VV_FailReason_GoldenBloomHoldsWeather>
+
 </LanguageData>

@@ -206,6 +206,130 @@
     </children>
   </EffecterDef>
 
+  <!--
+    엔딩이 진행되는 동안(공성~대관식) 제단의 영원꽃이 몇 초마다 은은하게 빛나며 꽃잎을 흩날린다(ViviEndingQuest.PlayAltarPulse).
+    개화 이펙트보다 훨씬 약하게: 꽃 모양 빛이 천천히 차올랐다 스러지고, 꽃봉오리에서 꽃잎 몇 장과 반짝임이 느리게 퍼진다. 소리·화면 흔들림 없음.
+  -->
+  <ThingDef ParentName="VV_MoteEverflowerGrowthGlow">
+    <defName>VV_Mote_AltarEverflowerPulse_5_Level</defName>
+    <mote>
+      <fadeInTime>0.9</fadeInTime>
+      <solidTime>0.3</solidTime>
+      <fadeOutTime>1.6</fadeOutTime>
+    </mote>
+    <graphicData>
+      <texPath>Things/Plants/VV_Everflower/VV_DreamumAltarFlower_e</texPath>
+      <drawSize>(0.58, 1)</drawSize>
+      <color>(1, 0.96, 0.78, 0.4)</color>
+    </graphicData>
+  </ThingDef>
+  <ThingDef ParentName="VV_MoteEverflowerGrowthGlow">
+    <defName>VV_Mote_AltarEverflowerPulse_6_Level</defName>
+    <mote>
+      <fadeInTime>0.9</fadeInTime>
+      <solidTime>0.3</solidTime>
+      <fadeOutTime>1.6</fadeOutTime>
+    </mote>
+    <graphicData>
+      <texPath>Things/Plants/VV_Everflower/VV_DreamumAltarFlower_f</texPath>
+      <drawSize>(0.6104, 1)</drawSize>
+      <color>(1, 0.96, 0.78, 0.4)</color>
+    </graphicData>
+  </ThingDef>
+
+  <!-- 천천히 떠다니다 사라지는 꽃잎 -->
+  <FleckDef ParentName="VV_FleckEverflowerPetalBase">
+    <defName>VV_Fleck_EverflowerPetal_Drift</defName>
+    <fadeInTime>0.3</fadeInTime>
+    <solidTime>1.2</solidTime>
+    <fadeOutTime>1.6</fadeOutTime>
+    <graphicData>
+      <color>(1, 0.96, 0.82, 0.9)</color>
+    </graphicData>
+  </FleckDef>
+
+  <EffecterDef>
+    <defName>VV_Effecter_AltarEverflowerPulse_5</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>VV_Mote_AltarEverflowerPulse_5_Level</moteDef>
+        <rotation>0~0</rotation>
+        <absoluteAngle>true</absoluteAngle>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>7.324</scale>
+        <positionOffset>(-0.330, 0.2, 2.537)</positionOffset>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_EverflowerPetal_Drift</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>6~10</burstCount>
+        <positionRadius>1.0</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>0.5~1.4</speed>
+        <rotation>0~360</rotation>
+        <rotationRate>-140~140</rotationRate>
+        <scale>0.45~0.8</scale>
+        <positionOffset>(-0.31, 0.2, 4.38)</positionOffset>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>NewbornBecomeChildGlimmer</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>4~7</burstCount>
+        <positionRadius>1.8</positionRadius>
+        <speed>0.1~0.3</speed>
+        <rotation>-45</rotation>
+        <scale>2~3.5</scale>
+        <positionOffset>(-0.31, 0.2, 4.38)</positionOffset>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <EffecterDef>
+    <defName>VV_Effecter_AltarEverflowerPulse_6</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>VV_Mote_AltarEverflowerPulse_6_Level</moteDef>
+        <rotation>0~0</rotation>
+        <absoluteAngle>true</absoluteAngle>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>9.926</scale>
+        <positionOffset>(-0.032, 0.2, 3.872)</positionOffset>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_EverflowerPetal_Drift</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>8~12</burstCount>
+        <positionRadius>1.4</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>0.6~1.6</speed>
+        <rotation>0~360</rotation>
+        <rotationRate>-140~140</rotationRate>
+        <scale>0.5~0.85</scale>
+        <positionOffset>(-0.32, 0.2, 6.52)</positionOffset>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>NewbornBecomeChildGlimmer</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>5~8</burstCount>
+        <positionRadius>2.4</positionRadius>
+        <speed>0.1~0.3</speed>
+        <rotation>-45</rotation>
+        <scale>2.5~4</scale>
+        <positionOffset>(-0.32, 0.2, 6.52)</positionOffset>
+      </li>
+    </children>
+  </EffecterDef>
+
   <!-- 제단 안치: 제단 중심(영원꽃 칸)에서 재생. 꽃잎·섬광 위치는 제단 위 4단계 그래픽의 꽃봉오리 기준 -->
   <EffecterDef>
     <defName>VV_Effecter_AltarEnshrine</defName>

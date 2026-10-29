@@ -78,5 +78,10 @@
 
         // 공명자가 없을 때 {PAWN_labelShort} 자리에 쓰는 대체 문구
         public const string VV_Ending_ResonatorFallback = nameof(VV_Ending_ResonatorFallback);
+
+        // 〈황금빛 꽃안개〉
+        public const string VV_Inspector_PlantManaUnlimited = nameof(VV_Inspector_PlantManaUnlimited);
+        public const string VV_DialogChangeWeatherGoldenBloomDesc = nameof(VV_DialogChangeWeatherGoldenBloomDesc);
+        public const string VV_FailReason_GoldenBloomHoldsWeather = nameof(VV_FailReason_GoldenBloomHoldsWeather);
     }
 }

@@ -46,6 +46,7 @@ namespace VVRace
     public static class ApocryphaDutyDefOf
     {
         public static DutyDef VV_TitanicHornetEscort;
+        public static DutyDef VV_TitanicHornetFlowerGuard;
     }
 
     [DefOf]
@@ -53,6 +54,7 @@ namespace VVRace
     {
         public static EffecterDef VV_Effecter_ApocryphaArrive;
         public static EffecterDef VV_Effecter_ApocryphaAim;
+        public static EffecterDef VV_Effecter_ApocryphaAimSustain;
         public static EffecterDef VV_Effecter_ApocryphaShockwave;
         public static EffecterDef VV_Effecter_ApocryphaTransform;
         public static EffecterDef VV_Effecter_ApocryphaMorphPulse;

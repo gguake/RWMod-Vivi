@@ -37,6 +37,9 @@ namespace VVRace
                 RegisterOminousSilence(map, duration);
                 PurgeQueuedThreats(map);
 
+                // 폭풍 전의 고요부터 엔딩까지 앵커 맵에 황금빛 꽃안개가 내려앉는다.
+                RunEndingStep("calm: golden bloom", StartGoldenBloom);
+
                 // 설계서: "모든 일반 습격이 즉시 중단", "거대 말벌 무리조차 그림자 속으로 자취를 감추었습니다".
                 RunEndingStep("calm: hornets vanish", () => VanishWildTitanicHornets(map));
                 RunEndingStep("calm: raiders retreat", () => MakeRaidersRetreat(map));
@@ -57,6 +60,8 @@ namespace VVRace
         private void TickCalm(int now)
         {
             if (!CheckAnchorAlive()) { return; }
+
+            EnsureGoldenBloom();
 
             if (_bossDeferred)
             {
@@ -148,6 +153,7 @@ namespace VVRace
             if (!CheckAnchorAlive()) { return; }
 
             _bloomProgress = BloomLockedProgress;
+            EnsureGoldenBloom();
 
             if (IsBossAlive && _boss.Map == AnchorMap)
             {

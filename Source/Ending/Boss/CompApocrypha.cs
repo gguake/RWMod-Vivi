@@ -25,16 +25,23 @@ namespace VVRace
         public int releaseStunTicks = 300;
         public IntRange releaseEscortCount = new IntRange(3, 5);
 
-        // 1페이즈: 요정 비비 사출 포격
+        // 1페이즈: 요정 비비 사출 포격. 조준이 끝나기를 기다리지 않고 새 조준을 계속 겹쳐 시전한다(시전 중에도 이동은 멈추지 않는다).
         public float shellRange = 20f;
         public int shellAimTicks = 240;
-        public int shellCooldownTicks = 900;
+        public IntRange shellCastIntervalTicks = new IntRange(90, 150);
+        public int maxShellAims = 3;
 
-        // 1페이즈: 멸망꽃/요정꽃 씨앗. 멸망꽃 씨앗은 한 번에 여러 개를 흩뿌린다.
+        // 1페이즈: 포격 사거리 안 시야에 들어온 적을 감지하면 호위 말벌이 이 시간 동안 그 적을 노린다(계속 보이면 연장).
+        public int escortFocusTicks = 600;
+
+        // 1페이즈: 멸망꽃/요정꽃 씨앗. 멸망꽃 씨앗은 한 번에 여러 개를 흩뿌리며, 사출 2회마다 1개씩 늘어난다(최대 10개).
+        // 요정꽃은 따로 쏘지 않는다: 요정꽃 사출 주기가 되면 다음 멸망꽃 사출의 씨앗 하나가 요정꽃 씨앗으로 바뀐다.
         public int firstDoomSeedDelayTicks = 1500;
         public IntRange doomSeedIntervalTicks = new IntRange(6000, 9000);
-        public IntRange doomSeedVolley = new IntRange(2, 3);
-        public int maxDoomFlowers = 9;
+        public int doomSeedVolleyStart = 2;
+        public int doomSeedVolleyGrowthEvery = 2;
+        public int doomSeedVolleyMax = 10;
+        public int maxDoomFlowers = 30;
         public int doomSeedsBeforeFairySeed = 6;
         public IntRange fairySeedIntervalTicks = new IntRange(7500, 10000);
         public int maxFairyFlowers = 2;
@@ -52,16 +59,20 @@ namespace VVRace
         public float escortRetaliationRadius = 25f;
 
         // 보스전 내내 공허 노드 엔딩의 배회 존재처럼 맵 외곽에서 거대 말벌이 꾸준히 몰려온다.
-        // 한 시간마다 소규모로 들어오며, 살아 있는 말벌의 전투력 합이 위협 포인트에 따른 상한에 도달하면 증원을 멈춘다(바닐라 QuestPart_WanderingEntities와 같은 곡선).
-        public int edgeHornetIntervalTicks = 2500;
+        // 반 시간마다 소규모로 들어오며, 살아 있는 말벌의 전투력 합이 위협 포인트에 따른 상한에 도달하면 증원을 멈춘다(바닐라 QuestPart_WanderingEntities 곡선의 1.5배).
+        // 들어온 말벌은 정착지를 습격하지 않고 가까운 멸망꽃·요정꽃 곁을 지킨다(꽃이 없으면 아포크리파 곁으로 간다).
+        public int edgeHornetIntervalTicks = 1250;
         public IntRange edgeHornetGroupSize = new IntRange(1, 2);
         public SimpleCurve edgeHornetMaxPointsByThreatPoints = new SimpleCurve
         {
-            new CurvePoint(500f, 750f),
-            new CurvePoint(2500f, 1500f),
-            new CurvePoint(5000f, 2000f),
-            new CurvePoint(10000f, 3000f),
+            new CurvePoint(500f, 1125f),
+            new CurvePoint(2500f, 2250f),
+            new CurvePoint(5000f, 3000f),
+            new CurvePoint(10000f, 4500f),
         };
+        public float flowerGuardRadius = 6f;
+        // 이 반경(지키는 꽃·보스 기준) 안에서 최근 꽃·보스·같은 무리의 말벌을 공격한 적은 경비 반경 밖이어도 반격한다.
+        public float flowerGuardRetaliationRadius = 20f;
 
         // 2페이즈 전환 연출: 충격파로 모두 기절한 동안 몸이 VV_Morph 셰이더로 꿈틀거리며 2페이즈 몸으로 뒤바뀐다.
         public int transformTicks = 420;
@@ -104,6 +115,8 @@ namespace VVRace
 
         private const int ChannelContactCheckInterval = 10;
         private const int ShellTargetScanInterval = 30;
+        private const int EnemyDetectInterval = 30;
+        private const float ShellAimSpreadRadius = 2.5f;
         private const int BreathTargetScanInterval = 20;
         private const int BlockedTextMoteInterval = 60;
         private const int DamageTextInterval = 30;
@@ -113,11 +126,6 @@ namespace VVRace
 
         private static readonly List<Thing> _tmpTargets = new List<Thing>();
         private static readonly List<Thing> _tmpCellThings = new List<Thing>();
-
-        private static ThingDef _doomFlowerDef;
-        private static ThingDef _fairyFlowerDef;
-        private static ThingDef DoomFlowerDef => _doomFlowerDef ?? (_doomFlowerDef = DefDatabase<ThingDef>.GetNamedSilentFail("VV_DoomFlower"));
-        private static ThingDef FairyFlowerDef => _fairyFlowerDef ?? (_fairyFlowerDef = DefDatabase<ThingDef>.GetNamedSilentFail("VV_FairyFlower"));
 
         // 저장되는 상태
         private ApocryphaPhase _phase = ApocryphaPhase.Bound;
@@ -132,20 +140,21 @@ namespace VVRace
         private bool _pendingSteal;
         private bool _pendingDeath;
         private int _shellReadyTick;
-        private IntVec3 _aimCell = IntVec3.Invalid;
-        private int _aimEndTick = -1;
+        private List<ApocryphaShellAim> _shellAims = new List<ApocryphaShellAim>();
         private int _breathReadyTick;
         private IntVec3 _breathCell = IntVec3.Invalid;
         private int _breathEndTick = -1;
         private int _nextDoomSeedTick = -1;
         private int _nextFairySeedTick = -1;
         private int _doomSeedsLaunched;
+        private int _doomVolleysLaunched;
         private int _nextApproachTick;
         private int _nextEdgeHornetTick;
         private List<Pawn> _edgeHornets = new List<Pawn>();
         private int _nextMeleeTick;
 
         // 저장하지 않는 연출/디버그 상태
+        private Effecter _aimSustainer;
         private int _lastBlockedTextTick = -99999;
         private float _pendingDamageText;
         private int _lastDamageTextTick = -99999;
@@ -191,6 +200,13 @@ namespace VVRace
         public int ChannelTicksLeft => Mathf.Max(0, ChannelDurationTicks - _channelTicks);
 
         public int DoomSeedsLaunched => _doomSeedsLaunched;
+        public int DoomVolleysLaunched => _doomVolleysLaunched;
+
+        // 다음 멸망꽃 사출의 씨앗 수: 처음 doomSeedVolleyStart개에서 사출 doomSeedVolleyGrowthEvery회마다 1개씩 늘어난다(최대 doomSeedVolleyMax개).
+        public int DoomSeedVolleySize => Mathf.Min(Props.doomSeedVolleyMax, Props.doomSeedVolleyStart + _doomVolleysLaunched / Mathf.Max(1, Props.doomSeedVolleyGrowthEvery));
+
+        // 요정꽃 사출 주기가 되어 다음 멸망꽃 사출에서 씨앗 하나가 요정꽃 씨앗으로 바뀌는지.
+        public bool FairySeedDue => _nextFairySeedTick >= 0 && GenTicks.TicksGame >= _nextFairySeedTick;
 
         public bool IsActive => _phase == ApocryphaPhase.Bound || _phase == ApocryphaPhase.Unbound;
 
@@ -208,8 +224,10 @@ namespace VVRace
                 return quest != null && quest.Stage == ViviEndingStage.Boss && quest.Boss == Pawn;
             }
         }
-        public bool IsAiming => _aimEndTick >= 0;
-        public IntVec3 AimCell => _aimCell;
+        // 진행 중인 사출 포격 조준(여러 개가 겹칠 수 있다). AimCell은 가장 먼저 시작한 조준의 표적 칸.
+        public bool IsAiming => _shellAims.Count > 0;
+        public IntVec3 AimCell => _shellAims.Count > 0 ? _shellAims[0].cell : IntVec3.Invalid;
+        public IReadOnlyList<ApocryphaShellAim> ShellAims => _shellAims;
         public bool IsBreathing => _breathEndTick >= 0;
         public IntVec3 BreathCell => _breathCell;
         public int NextApproachTick => _nextApproachTick;
@@ -312,14 +330,14 @@ namespace VVRace
             Scribe_Values.Look(ref _pendingSteal, "pendingSteal", false);
             Scribe_Values.Look(ref _pendingDeath, "pendingDeath", false);
             Scribe_Values.Look(ref _shellReadyTick, "shellReadyTick", 0);
-            Scribe_Values.Look(ref _aimCell, "aimCell", IntVec3.Invalid);
-            Scribe_Values.Look(ref _aimEndTick, "aimEndTick", -1);
+            Scribe_Collections.Look(ref _shellAims, "shellAims", LookMode.Deep);
             Scribe_Values.Look(ref _breathReadyTick, "breathReadyTick", 0);
             Scribe_Values.Look(ref _breathCell, "breathCell", IntVec3.Invalid);
             Scribe_Values.Look(ref _breathEndTick, "breathEndTick", -1);
             Scribe_Values.Look(ref _nextDoomSeedTick, "nextDoomSeedTick", -1);
             Scribe_Values.Look(ref _nextFairySeedTick, "nextFairySeedTick", -1);
             Scribe_Values.Look(ref _doomSeedsLaunched, "doomSeedsLaunched", 0);
+            Scribe_Values.Look(ref _doomVolleysLaunched, "doomVolleysLaunched", 0);
             Scribe_Values.Look(ref _nextApproachTick, "nextApproachTick", 0);
             Scribe_Values.Look(ref _nextMeleeTick, "nextMeleeTick", 0);
 
@@ -340,7 +358,20 @@ namespace VVRace
                 }
 
                 _edgeHornets.RemoveAll(v => v == null);
+
+                if (_shellAims == null)
+                {
+                    _shellAims = new List<ApocryphaShellAim>();
+                }
+
+                _shellAims.RemoveAll(v => v == null || !v.cell.IsValid);
             }
+        }
+
+        public override void PostDeSpawn(Map map, DestroyMode mode = DestroyMode.Vanish)
+        {
+            base.PostDeSpawn(map, mode);
+            CleanupAimVisuals();
         }
         #endregion
 
@@ -416,150 +447,272 @@ namespace VVRace
             if (!stunned)
             {
                 TickSeeds(now);
+                TickEnemyDetection();
             }
 
             TickShell(now, stunned);
         }
 
-        // 공허 노드 엔딩처럼 맵 외곽에서 거대 말벌이 소규모로 꾸준히 들어와 정착지를 습격한다.
+        // 공허 노드 엔딩처럼 맵 외곽에서 거대 말벌이 소규모로 꾸준히 들어온다. 들어온 말벌은 가까운 멸망꽃·요정꽃(없으면 보스) 곁을 지킨다.
         // 이렇게 들어온 말벌 중 살아 있는 것의 전투력 합이 위협 포인트에 따른 상한 이상이면 이번 차례는 건너뛴다.
         private void TickEdgeHornets()
         {
             var map = parent.Map;
             _edgeHornets.RemoveAll(v => v == null || v.Dead || !v.Spawned || v.Map != map);
 
+            // 쓰러져 있는 말벌은 상한에 세지 않는다(쓰러진 말벌이 쌓여 증원이 멈추지 않게).
             var hornetPower = Mathf.Max(1f, VVPawnKindDefOf.VV_TitanicHornet.combatPower);
             var maxPoints = Props.edgeHornetMaxPointsByThreatPoints.Evaluate(StorytellerUtility.DefaultThreatPointsNow(map));
-            var room = Mathf.FloorToInt((maxPoints - _edgeHornets.Count * hornetPower) / hornetPower);
+            var room = Mathf.FloorToInt((maxPoints - _edgeHornets.Count(v => !v.Downed) * hornetPower) / hornetPower);
             if (room <= 0) { return; }
 
-            _edgeHornets.AddRange(ApocryphaUtility.SpawnEdgeHornets(map, Mathf.Min(room, Props.edgeHornetGroupSize.RandomInRange)));
+            _edgeHornets.AddRange(ApocryphaUtility.SpawnFlowerGuardHornets(Pawn, Mathf.Min(room, Props.edgeHornetGroupSize.RandomInRange)));
         }
 
+        // 멸망꽃 사출 차례마다 DoomSeedVolleySize개의 씨앗을 흩뿌린다. 요정꽃 사출 주기가 되어 있으면 그중 하나가 요정꽃 씨앗이 된다.
         private void TickSeeds(int now)
         {
-            if (_nextDoomSeedTick >= 0 && now >= _nextDoomSeedTick)
-            {
-                var room = Props.maxDoomFlowers - CountOnMap(DoomFlowerDef);
-                var launched = room > 0 ? ApocryphaGimmicks.TryLaunchDoomSeeds(Pawn, Mathf.Min(room, Props.doomSeedVolley.RandomInRange)) : 0;
-                if (launched > 0)
-                {
-                    _doomSeedsLaunched += launched;
-                    _nextDoomSeedTick = now + Props.doomSeedIntervalTicks.RandomInRange;
-                }
-                else
-                {
-                    // 착탄 칸이 없거나 이미 최대 개수면 잠시 뒤 다시 시도한다.
-                    _nextDoomSeedTick = now + SeedRetryTicks;
-                }
-            }
-
-            if (_doomSeedsLaunched < Props.doomSeedsBeforeFairySeed) { return; }
-
-            if (_nextFairySeedTick < 0)
+            // 요정꽃 사출 주기는 멸망꽃 씨앗을 일정 수 흩뿌린 뒤부터 돈다.
+            if (_nextFairySeedTick < 0 && _doomSeedsLaunched >= Props.doomSeedsBeforeFairySeed)
             {
                 _nextFairySeedTick = now + Props.fairySeedIntervalTicks.RandomInRange;
             }
-            else if (now >= _nextFairySeedTick)
+
+            if (_nextDoomSeedTick < 0 || now < _nextDoomSeedTick) { return; }
+
+            ApocryphaGimmicks.TryLaunchSeedVolley(Pawn, DoomSeedVolleySize, FairySeedDue, out var doomLaunched, out var fairyLaunched);
+            if (doomLaunched + fairyLaunched > 0)
             {
-                if (CountOnMap(FairyFlowerDef) < Props.maxFairyFlowers && ApocryphaGimmicks.TryLaunchFairySeed(Pawn))
+                _doomSeedsLaunched += doomLaunched;
+                _doomVolleysLaunched++;
+                _nextDoomSeedTick = now + Props.doomSeedIntervalTicks.RandomInRange;
+
+                // 요정꽃이 이미 최대 개수라 바꾸지 못했으면 요정꽃 차례는 다음 사출로 넘어간다.
+                if (fairyLaunched > 0)
                 {
                     _nextFairySeedTick = now + Props.fairySeedIntervalTicks.RandomInRange;
                 }
-                else
-                {
-                    _nextFairySeedTick = now + SeedRetryTicks;
-                }
+            }
+            else
+            {
+                // 착탄 칸이 없거나 이미 최대 개수면 잠시 뒤 다시 시도한다.
+                _nextDoomSeedTick = now + SeedRetryTicks;
             }
         }
 
+        // 포격 사거리 안 시야에 들어온 적을 감지하면 경호 중인 말벌의 공격 대상을 그 적으로 바꾼다.
+        // 이미 노리게 한 적이 계속 보이면 대상을 바꾸지 않고 시간만 늘린다(가장 가까운 적이 바뀔 때마다 말벌이 오가지 않게).
+        private void TickEnemyDetection()
+        {
+            if (!parent.IsHashIntervalTick(EnemyDetectInterval)) { return; }
+            if (!(ApocryphaUtility.FindEscortLord(Pawn)?.LordJob is LordJob_ApocryphaEscort escortJob)) { return; }
+
+            var target = escortJob.FocusTarget;
+            if (target == null || !IsShellTarget(target))
+            {
+                target = FindNearestShellTarget();
+            }
+
+            if (target != null)
+            {
+                escortJob.SetFocus(target, GenTicks.TicksGame + Props.escortFocusTicks);
+            }
+        }
+
+        // 사출 포격: 조준이 끝나기를 기다리지 않고 maxShellAims개까지 새 조준을 겹쳐 건다. 조준마다 shellAimTicks 뒤에 발사한다.
         private void TickShell(int now, bool stunned)
         {
-            if (IsAiming)
+            // 기절하면 진행 중인 조준이 모두 흐트러진다.
+            if (stunned)
             {
-                // 기절하면 조준이 흐트러진다.
-                if (stunned)
+                if (IsAiming)
                 {
                     CancelAim();
                     _shellReadyTick = now + 120;
-                    return;
-                }
-
-                if (now >= _aimEndTick)
-                {
-                    FireShell(now);
                 }
                 return;
             }
 
-            if (stunned || now < _shellReadyTick || IsChanneling || _pendingSteal) { return; }
-            if (!parent.IsHashIntervalTick(ShellTargetScanInterval)) { return; }
-
-            if (TryFindShellTarget(out var cell))
+            for (int i = _shellAims.Count - 1; i >= 0; i--)
             {
-                _aimCell = cell;
-                _aimEndTick = now + Props.shellAimTicks;
-                Pawn.rotationTracker.FaceCell(cell);
-                InterruptCurrentJob();
+                var aim = _shellAims[i];
+                if (now < aim.fireTick) { continue; }
+
+                _shellAims.RemoveAt(i);
+                aim.CleanupVisuals();
+                FireShell(aim.cell);
             }
+
+            if (_shellAims.Count < Props.maxShellAims && now >= _shellReadyTick && !IsChanneling && !_pendingSteal)
+            {
+                if (TryFindShellTarget(out var cell))
+                {
+                    _shellAims.Add(new ApocryphaShellAim(cell, now + Props.shellAimTicks));
+                    _shellReadyTick = now + Props.shellCastIntervalTicks.RandomInRange;
+                    Pawn.rotationTracker.FaceCell(cell);
+                }
+                else
+                {
+                    _shellReadyTick = now + ShellTargetScanInterval;
+                }
+            }
+
+            TickAimVisuals(stunned);
         }
 
-        private void FireShell(int now)
+        private void FireShell(IntVec3 cell)
         {
-            var cell = _aimCell;
-            CancelAim();
-            _shellReadyTick = now + Props.shellCooldownTicks;
-
             if (cell.IsValid && cell.InBounds(parent.Map))
             {
                 ApocryphaGimmicks.TryFireFairyShell(Pawn, cell);
             }
         }
 
+        // 진행 중인 조준을 모두 취소한다.
         private void CancelAim()
         {
-            _aimEndTick = -1;
-            _aimCell = IntVec3.Invalid;
+            CleanupAimVisuals();
+            _shellAims.Clear();
+        }
+
+        private void CleanupAimVisuals()
+        {
+            for (int i = 0; i < _shellAims.Count; i++)
+            {
+                _shellAims[i].CleanupVisuals();
+            }
+
+            _aimSustainer?.Cleanup();
+            _aimSustainer = null;
+        }
+
+        // 헬스피어 캐논식 금빛 조준 경고: 조준마다 대상 칸의 표적 모트·불꽃과 보스 머리의 충전광, 그리고 조준이 하나라도 있는 동안의 지속음.
+        // 모트·이펙터는 저장되지 않으므로 불러온 뒤에는 처음 틱에 다시 만든다.
+        private void TickAimVisuals(bool stunned)
+        {
+            if (_shellAims.Count == 0)
+            {
+                _aimSustainer?.Cleanup();
+                _aimSustainer = null;
+                return;
+            }
+
+            var map = parent.Map;
+            var bossTarget = new TargetInfo(parent);
+            for (int i = 0; i < _shellAims.Count; i++)
+            {
+                _shellAims[i].TickVisuals(Pawn, map, BodyCenter, stunned);
+            }
+
+            if (_aimSustainer == null)
+            {
+                _aimSustainer = ApocryphaEffecterDefOf.VV_Effecter_ApocryphaAimSustain.Spawn();
+                _aimSustainer.Trigger(bossTarget, bossTarget);
+            }
+
+            _aimSustainer.EffectTick(bossTarget, bossTarget);
         }
 
         // 반경 20 안 시야에 들어온 플레이어 세력 폰을 우선 노리고, 없으면 플레이어 포탑을 노린다.
+        // 이미 조준 중인 칸 근처의 대상은 다른 대상이 없을 때만 다시 고른다(포격이 한 곳에 몰리지 않게).
         private bool TryFindShellTarget(out IntVec3 cell)
         {
             cell = IntVec3.Invalid;
 
-            var map = parent.Map;
-            var origin = parent.Position;
-            var rangeSquared = Props.shellRange * Props.shellRange;
-
-            _tmpTargets.Clear();
-            foreach (var target in map.mapPawns.SpawnedPawnsInFaction(Faction.OfPlayer))
-            {
-                if (target.Dead || target.Downed || target.IsPsychologicallyInvisible()) { continue; }
-                if ((target.Position - origin).LengthHorizontalSquared > rangeSquared) { continue; }
-                if (!GenSight.LineOfSight(origin, target.Position, map, skipFirstCell: true)) { continue; }
-
-                _tmpTargets.Add(target);
-            }
-
-            if (_tmpTargets.Count == 0)
-            {
-                foreach (var building in map.listerBuildings.allBuildingsColonist)
-                {
-                    if (!(building is Building_Turret) && !(building is ArcanePlant_Turret)) { continue; }
-                    if ((building.Position - origin).LengthHorizontalSquared > rangeSquared) { continue; }
-                    if (!GenSight.LineOfSightToThing(origin, building, map, skipFirstCell: true)) { continue; }
-
-                    _tmpTargets.Add(building);
-                }
-            }
-
+            CollectShellTargets(_tmpTargets);
             if (_tmpTargets.Count > 0)
             {
-                cell = _tmpTargets.RandomElement().Position;
+                if (!_tmpTargets.Where(v => !IsNearAimedCell(v.Position)).TryRandomElement(out var target))
+                {
+                    target = _tmpTargets.RandomElement();
+                }
+
+                cell = target.Position;
             }
 
             _tmpTargets.Clear();
             return cell.IsValid;
+        }
+
+        private bool IsNearAimedCell(IntVec3 cell)
+        {
+            for (int i = 0; i < _shellAims.Count; i++)
+            {
+                if (_shellAims[i].cell.InHorDistOf(cell, ShellAimSpreadRadius)) { return true; }
+            }
+
+            return false;
+        }
+
+        // 감지한 적 중 보스에게 가장 가까운 대상(폰 우선, 없으면 포탑).
+        private Thing FindNearestShellTarget()
+        {
+            CollectShellTargets(_tmpTargets);
+
+            Thing best = null;
+            var bestDistance = int.MaxValue;
+            var origin = parent.Position;
+            for (int i = 0; i < _tmpTargets.Count; i++)
+            {
+                var distance = (_tmpTargets[i].Position - origin).LengthHorizontalSquared;
+                if (distance < bestDistance)
+                {
+                    best = _tmpTargets[i];
+                    bestDistance = distance;
+                }
+            }
+
+            _tmpTargets.Clear();
+            return best;
+        }
+
+        // 포격·감지 대상: 반경 20 안 시야에 들어온 플레이어 세력 폰. 폰이 하나도 없을 때만 플레이어 포탑.
+        private void CollectShellTargets(List<Thing> outTargets)
+        {
+            outTargets.Clear();
+
+            var map = parent.Map;
+            foreach (var target in map.mapPawns.SpawnedPawnsInFaction(Faction.OfPlayer))
+            {
+                if (IsShellTargetPawn(target))
+                {
+                    outTargets.Add(target);
+                }
+            }
+
+            if (outTargets.Count > 0) { return; }
+
+            foreach (var building in map.listerBuildings.allBuildingsColonist)
+            {
+                if (IsShellTargetTurret(building))
+                {
+                    outTargets.Add(building);
+                }
+            }
+        }
+
+        private bool IsShellTarget(Thing thing)
+        {
+            if (thing == null || !thing.Spawned || thing.Map != parent.Map) { return false; }
+
+            return thing is Pawn pawn ? IsShellTargetPawn(pawn) : IsShellTargetTurret(thing);
+        }
+
+        private bool IsShellTargetPawn(Pawn target)
+        {
+            if (target.Faction != Faction.OfPlayer || target.Dead || target.Downed || target.IsPsychologicallyInvisible()) { return false; }
+            if ((target.Position - parent.Position).LengthHorizontalSquared > Props.shellRange * Props.shellRange) { return false; }
+
+            return GenSight.LineOfSight(parent.Position, target.Position, parent.Map, skipFirstCell: true);
+        }
+
+        private bool IsShellTargetTurret(Thing building)
+        {
+            if (building.Faction != Faction.OfPlayer || building.Destroyed) { return false; }
+            if (!(building is Building_Turret) && !(building is ArcanePlant_Turret)) { return false; }
+            if ((building.Position - parent.Position).LengthHorizontalSquared > Props.shellRange * Props.shellRange) { return false; }
+
+            return GenSight.LineOfSightToThing(parent.Position, building, parent.Map, skipFirstCell: true);
         }
 
         private void TickTransforming(int now)
@@ -1044,10 +1197,10 @@ namespace VVRace
             return _devForceChannel || parent.Position.InHorDistOf(target.Position, range);
         }
 
-        // 제단 발판에 닿았는데 다른 일을 하고 있으면 즉시 채널링으로 넘어가게 한다.
+        // 제단 발판에 닿았는데 다른 일을 하고 있으면 즉시 채널링으로 넘어가게 한다(사출 포격 조준은 이동·채널링을 막지 않는다).
         private void CheckChannelContact()
         {
-            if (IsChanneling || IsAiming || IsBreathing || _pendingSteal) { return; }
+            if (IsChanneling || IsBreathing || _pendingSteal) { return; }
             if (Pawn.stances.stunner.Stunned) { return; }
             if (!InStealRange()) { return; }
 
@@ -1173,6 +1326,7 @@ namespace VVRace
             _pendingSteal = false;
             _devForceChannel = false;
             CancelAim();
+            ApocryphaUtility.ClearEscortFocus(Pawn);
 
             SyncPhaseHediffs();
 
@@ -1322,9 +1476,9 @@ namespace VVRace
                 ApocryphaShroudGlow.Draw(Pawn);
             }
 
-            if (IsAiming && _aimCell.IsValid)
+            for (int i = 0; i < _shellAims.Count; i++)
             {
-                ApocryphaGimmicks.DrawSoulLink(BodyCenter, _aimCell.ToVector3Shifted(), 0.35f, AimBeamColor);
+                ApocryphaGimmicks.DrawSoulLink(BodyCenter, _shellAims[i].cell.ToVector3Shifted(), 0.35f, AimBeamColor);
             }
 
             if (IsChanneling && TryGetStealTarget(out var target, out _, out var everflower))
@@ -1435,14 +1589,21 @@ namespace VVRace
             command_doomSeed.action = () => _nextDoomSeedTick = 0;
             yield return command_doomSeed;
 
+            // 요정꽃 사출 주기를 당긴 뒤 바로 멸망꽃을 사출한다(씨앗 하나가 요정꽃 씨앗으로 바뀐다).
             var command_fairySeed = new Command_Action();
             command_fairySeed.defaultLabel = "DEV: Fairy seed now";
             command_fairySeed.action = () =>
             {
                 _doomSeedsLaunched = Mathf.Max(_doomSeedsLaunched, Props.doomSeedsBeforeFairySeed);
                 _nextFairySeedTick = 0;
+                _nextDoomSeedTick = 0;
             };
             yield return command_fairySeed;
+
+            var command_flowerGuards = new Command_Action();
+            command_flowerGuards.defaultLabel = "DEV: Flower guard hornets";
+            command_flowerGuards.action = () => _edgeHornets.AddRange(ApocryphaUtility.SpawnFlowerGuardHornets(Pawn, Props.edgeHornetGroupSize.max));
+            yield return command_flowerGuards;
 
             var command_breath = new Command_Action();
             command_breath.defaultLabel = "DEV: Breath ready now";
@@ -1486,13 +1647,6 @@ namespace VVRace
             if (effecterDef == null || !parent.Spawned) { return; }
 
             effecterDef.Spawn(parent, parent.Map, (Pawn.DrawPos - parent.Position.ToVector3Shifted()).WithY(0f) + offset).Cleanup();
-        }
-
-        private int CountOnMap(ThingDef def)
-        {
-            if (def == null || !parent.Spawned) { return 0; }
-
-            return parent.Map.listerThings.ThingsOfDef(def).Count;
         }
         #endregion
     }

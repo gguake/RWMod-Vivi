@@ -38,11 +38,7 @@ namespace VVRace
                 return WaitJob(Mathf.Max(15, pawn.stances.stunner.StunTicksLeft + 1));
             }
 
-            if (comp.IsAiming)
-            {
-                return JobMaker.MakeJob(ApocryphaJobDefOf.VV_ApocryphaAim, comp.AimCell);
-            }
-
+            // 1페이즈 사출 포격 조준은 작업 없이 CompApocrypha가 처리한다(조준 중에도 계속 움직인다).
             if (comp.IsBreathing)
             {
                 return JobMaker.MakeJob(ApocryphaJobDefOf.VV_ApocryphaBreath, comp.BreathCell);

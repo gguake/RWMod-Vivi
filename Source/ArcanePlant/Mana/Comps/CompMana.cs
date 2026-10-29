@@ -44,22 +44,25 @@ namespace VVRace
 
         public bool Active => _manaActivated;
 
+        // 〈황금빛 꽃안개〉가 걸린 맵의 마법 식물은 마나가 늘 가득 차 있고 써도 줄지 않는다.
+        public bool IsUnlimited => GoldenBloomUtility.IsManaUnlimited(parent);
+
         public float Stored
         {
             get
             {
-                return _manaStored;
+                return IsUnlimited ? Props.manaCapacity : _manaStored;
             }
             set
             {
-                _manaStored = Mathf.Clamp(value, 0f, Props.manaCapacity);
+                _manaStored = IsUnlimited ? Props.manaCapacity : Mathf.Clamp(value, 0f, Props.manaCapacity);
             }
         }
         public float StoredPct
         {
             get
             {
-                return _manaStored / Props.manaCapacity;
+                return Stored / Props.manaCapacity;
             }
             set
             {
@@ -110,6 +113,11 @@ namespace VVRace
                 sb.Append(LocalizeString_Inspector.VV_Inspector_PlantManaFlux.Translate(
                     activeStr,
                     netChange.ToString("+0;-#")));
+            }
+
+            if (parent.Spawned && IsUnlimited)
+            {
+                sb.AppendInNewLine(LocalizeString_EndingCore.VV_Inspector_PlantManaUnlimited.Translate());
             }
 
             return sb.ToString();
@@ -246,6 +254,12 @@ namespace VVRace
             _manaGeneratesByDay = Props.manaGenerateRule?.CalcManaFlux(parent) * parent.HitPoints / (float)parent.MaxHitPoints ?? 0f;
             _manaConsumesByDay = Props.manaConsumeRule?.CalcManaFlux(parent) ?? 0f;
 
+            if (IsUnlimited)
+            {
+                RefreshManaUnlimited(manaGrid, pos, ticks);
+                return;
+            }
+
             var absorbableMana = Mathf.Clamp(manaGrid[pos], 0f, Props.manaAbsorbPerDay / 60000f * ticks);
             var generatedMana = _manaGeneratesByDay / 60000f * ticks;
             var consumedMana = _manaConsumesByDay / 60000f * ticks;
@@ -280,23 +294,42 @@ namespace VVRace
                 }
             }
 
-            var beforeActivated = _manaActivated;
-            _manaActivated = manaChange >= 0f;
             _manaExternalChange = manaGrid[pos] - beforeExternalMana;
+            SetActivated(manaChange >= 0f);
+        }
 
-            if (beforeActivated != _manaActivated)
+        // 〈황금빛 꽃안개〉: 저장 마나를 가득 채운 채 흡수·소비는 하지 않고, 생산한 마나만 그대로 환경으로 흘려보낸다.
+        private void RefreshManaUnlimited(ManaMapComponent manaGrid, IntVec3 pos, int ticks)
+        {
+            _manaStored = Props.manaCapacity;
+
+            var beforeExternalMana = manaGrid[pos];
+            var generatedMana = _manaGeneratesByDay / 60000f * ticks;
+            if (generatedMana > 0f)
             {
-                if (parent is IManaChangeEventReceiver manaChangeEventReceiver)
-                {
-                    manaChangeEventReceiver.Notify_ManaActivateChanged(beforeActivated, _manaActivated);
-                }
+                manaGrid.ChangeEnvironmentMana(pos, generatedMana);
+            }
 
-                foreach (var comp in parent.AllComps)
+            _manaExternalChange = manaGrid[pos] - beforeExternalMana;
+            SetActivated(true);
+        }
+
+        private void SetActivated(bool activated)
+        {
+            var beforeActivated = _manaActivated;
+            _manaActivated = activated;
+            if (beforeActivated == _manaActivated) { return; }
+
+            if (parent is IManaChangeEventReceiver manaChangeEventReceiver)
+            {
+                manaChangeEventReceiver.Notify_ManaActivateChanged(beforeActivated, _manaActivated);
+            }
+
+            foreach (var comp in parent.AllComps)
+            {
+                if (comp is IManaChangeEventReceiver manaChangeEventReceiverComp)
                 {
-                    if (comp is IManaChangeEventReceiver manaChangeEventReceiverComp)
-                    {
-                        manaChangeEventReceiverComp.Notify_ManaActivateChanged(beforeActivated, _manaActivated);
-                    }
+                    manaChangeEventReceiverComp.Notify_ManaActivateChanged(beforeActivated, _manaActivated);
                 }
             }
         }

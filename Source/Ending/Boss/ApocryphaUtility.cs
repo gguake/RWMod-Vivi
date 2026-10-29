@@ -144,8 +144,46 @@ namespace VVRace
             return result;
         }
 
-        // 보스전 동안 맵 외곽에서 걸어 들어와 정착지를 습격하는 거대 말벌(호위 로드가 아닌 일반 말벌 습격 로드). 진입 칸이 없으면 빈 목록.
+        // 맵 외곽에서 걸어 들어와 정착지를 습격하는 거대 말벌(일반 말벌 습격 로드). 진입 칸이 없으면 빈 목록.
         public static List<Pawn> SpawnEdgeHornets(Map map, int count)
+        {
+            var result = WalkInHornets(map, count);
+            if (result.Count > 0)
+            {
+                LordMaker.MakeNewLord(null, new LordJob_HornetAssault(), map, result);
+            }
+
+            return result;
+        }
+
+        // 보스전 동안 맵 외곽에서 걸어 들어와 가까운 멸망꽃·요정꽃(없으면 보스) 곁을 지키는 거대 말벌. 보스마다 하나인 꽃 경비 로드에 합류한다.
+        public static List<Pawn> SpawnFlowerGuardHornets(Pawn boss, int count)
+        {
+            if (boss == null || !boss.Spawned) { return new List<Pawn>(); }
+
+            var map = boss.Map;
+            var result = WalkInHornets(map, count);
+            if (result.Count == 0) { return result; }
+
+            var lord = FindFlowerGuardLord(boss);
+            if (lord == null)
+            {
+                var props = boss.TryGetComp<CompApocrypha>()?.Props;
+                LordMaker.MakeNewLord(null, new LordJob_ApocryphaFlowerGuard(
+                    boss,
+                    props?.flowerGuardRadius ?? 6f,
+                    props?.flowerGuardRetaliationRadius ?? 20f,
+                    props?.escortGuardRadius ?? 10f), map, result);
+            }
+            else
+            {
+                lord.AddPawns(result);
+            }
+
+            return result;
+        }
+
+        private static List<Pawn> WalkInHornets(Map map, int count)
         {
             var result = new List<Pawn>();
             if (map == null || count <= 0) { return result; }
@@ -169,11 +207,20 @@ namespace VVRace
                 hornet.mindState.mentalStateHandler.TryStartMentalState(VVMentalStateDefOf.VV_HornetBerserk, transitionSilently: true);
             }
 
-            LordMaker.MakeNewLord(null, new LordJob_HornetAssault(), map, result);
             return result;
         }
 
         public static Lord FindEscortLord(Pawn boss)
+        {
+            return FindBossLord(boss, lordJob => lordJob is LordJob_ApocryphaEscort escortJob && escortJob.Boss == boss);
+        }
+
+        public static Lord FindFlowerGuardLord(Pawn boss)
+        {
+            return FindBossLord(boss, lordJob => lordJob is LordJob_ApocryphaFlowerGuard guardJob && guardJob.Boss == boss);
+        }
+
+        private static Lord FindBossLord(Pawn boss, System.Predicate<LordJob> match)
         {
             if (boss == null) { return null; }
 
@@ -183,7 +230,7 @@ namespace VVRace
                 var lords = maps[i].lordManager.lords;
                 for (int j = 0; j < lords.Count; j++)
                 {
-                    if (lords[j].LordJob is LordJob_ApocryphaEscort escortJob && escortJob.Boss == boss)
+                    if (match(lords[j].LordJob))
                     {
                         return lords[j];
                     }
@@ -193,6 +240,12 @@ namespace VVRace
             return null;
         }
 
+        // 보스가 2페이즈로 넘어가면 1페이즈 감지로 맡긴 공격 대상을 거둔다.
+        public static void ClearEscortFocus(Pawn boss)
+        {
+            (FindEscortLord(boss)?.LordJob as LordJob_ApocryphaEscort)?.ClearFocus();
+        }
+
         // 보스를 경호 중인 거대 말벌 목록(복사본).
         public static List<Pawn> GetEscorts(Pawn boss)
         {
@@ -200,10 +253,15 @@ namespace VVRace
             return lord == null ? new List<Pawn>() : new List<Pawn>(lord.ownedPawns);
         }
 
-        // 보스가 쓰러지면 호위 로드를 즉시 일반 말벌 습격 토일로 넘긴다(초점이 null인 호위 듀티가 남지 않게).
+        // 보스가 쓰러지면 호위·꽃 경비 로드를 즉시 일반 말벌 습격 토일로 넘긴다(초점이 null인 호위 듀티가 남지 않게).
         public static void ReleaseEscorts(Pawn boss)
         {
-            var lord = FindEscortLord(boss);
+            GotoAssault(FindEscortLord(boss));
+            GotoAssault(FindFlowerGuardLord(boss));
+        }
+
+        private static void GotoAssault(Lord lord)
+        {
             if (lord?.Graph == null) { return; }
 
             foreach (var toil in lord.Graph.lordToils)
