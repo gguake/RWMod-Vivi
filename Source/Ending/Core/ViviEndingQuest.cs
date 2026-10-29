@@ -9,11 +9,11 @@ using Verse;
 namespace VVRace
 {
     // 엔딩 〈만개하는 여명〉의 창구. 진행은 바닐라 퀘스트 두 개가 맡는다.
-    //   〈비비 연방의 밀서〉(VV_EndGame_ViviMissive, QuestNode_Root_ViviMissive): 서신·제단 연구 해금·고대 호박 코어
+    //   〈비비 연방의 밀서〉(VV_EndGame_ViviMissive, QuestNode_Root_ViviMissive): 서신·제단 해금 (사건 IncidentWorker_ViviMissive가 발생시킴)
     //   〈만개하는 여명〉(VV_EndGame_ViviBloom, QuestNode_Root_ViviBloom): 공성 → 평화 기간 → 아포크리파 → 여왕의 대관식 → 엔딩
     // 새 게임 컴포넌트를 만들지 않고 GameComponent_Mana가 보관·저장·틱 처리한다. 다른 모듈이 쓰는 질의·통지 API를 두 퀘스트의 상태와 신호로 옮기고,
-    // 퀘스트 밖에서 이어져야 하는 일(4단계 감시와 서신 예약, 결속 해방 후 잠시 사라진 비비의 귀환, 제단 맥동·섬광 연출)을 맡는다.
-    // 연출은 EndingAmbience, 개발자 도구는 EndingDebug partial 파일에 있다.
+    // 퀘스트 밖에서 이어져야 하는 일(고대 호박 코어 의뢰, 결속 해방 후 잠시 사라진 비비의 귀환, 제단 맥동·섬광 연출)을 맡는다.
+    // 코어 의뢰는 EndingAmberCore, 연출은 EndingAmbience, 개발자 도구는 EndingDebug partial 파일에 있다.
     public partial class ViviEndingQuest : IExposable
     {
         // 결속 해방 후 잠시 맵에서 사라진 비비. 디스폰된 폰을 여기서만 Deep 저장하고(월드 폰에 넘기지 않음) 귀환 틱에 제단 앞에 다시 스폰한다.
@@ -39,13 +39,9 @@ namespace VVRace
 
         public static ViviEndingQuest Current => Verse.Current.Game?.GetComponent<GameComponent_Mana>()?.EndingQuest;
 
-        private const int StageTickInterval = 250;
         private const int ScanIntervalTicks = 2500;
-        private const int LetterTriggerLevel = 4;
-        private const int QuestRetryTicks = 2500;
         private const float ReturnCellSearchRadius = 8f;
         private const int HeldPawnRetryTicks = 2500;
-        private static readonly IntRange FederationLetterDelayTicks = new IntRange(60000, 120000);
 
         private Quest _missiveQuest;
         private Quest _bloomQuest;
@@ -54,8 +50,6 @@ namespace VVRace
         // 엔딩 이후에도 쓰는 앵커(축복·제단·날씨 의식)는 퀘스트 부품과 별도로 여기서 들고 있는다.
         private ArcanePlant_Everflower _anchor;
 
-        // 4단계 감지 후 서신(밀서 퀘스트 생성) 예정 틱. 예약이 없으면 -1.
-        private int _letterTick = -1;
         private List<HeldPawn> _heldPawns = new List<HeldPawn>();
 
         // 비저장: 본편 퀘스트 부품 캐시(퀘스트가 바뀌거나 부품 목록이 지워지면 다시 찾는다)
@@ -69,8 +63,7 @@ namespace VVRace
         public Quest MissiveQuest => _missiveQuest;
         public Quest BloomQuest => _bloomQuest;
 
-        // 진행 단계: 본편 퀘스트가 있으면 그 상태(끝났으면 성공 → Completed, 그 외 → Failed), 밀서 퀘스트만 있으면 AltarUnlocked,
-        // 서신 예약 중이면 LetterPending, 그 외 None.
+        // 진행 단계: 본편 퀘스트가 있으면 그 상태(끝났으면 성공 → Completed, 그 외 → Failed), 밀서 퀘스트만 있으면 AltarUnlocked, 그 외 None.
         public ViviEndingStage Stage
         {
             get
@@ -91,9 +84,7 @@ namespace VVRace
                     }
                 }
 
-                if (_missiveQuest != null) { return ViviEndingStage.AltarUnlocked; }
-
-                return _letterTick >= 0 ? ViviEndingStage.LetterPending : ViviEndingStage.None;
+                return _missiveQuest != null ? ViviEndingStage.AltarUnlocked : ViviEndingStage.None;
             }
         }
 
@@ -132,7 +123,7 @@ namespace VVRace
         // 공성 기간(의식 품질로 정한 8~10일). 본편 퀘스트 전에는 0.
         public int SiegeDurationTicks => BloomPart?.DurationTicks ?? 0;
 
-        public bool IsAltarUnlocked => Stage != ViviEndingStage.None && Stage != ViviEndingStage.LetterPending;
+        public bool IsAltarUnlocked => Stage != ViviEndingStage.None;
         public bool IsEndingActive => Stage.IsActiveStage();
         public bool IsCompleted => Stage == ViviEndingStage.Completed;
 
@@ -224,8 +215,7 @@ namespace VVRace
             _calmPart = quest?.PartsListForReading.OfType<QuestPart_Delay>().FirstOrDefault(v => v.debugLabel == QuestNode_Root_ViviBloom.CalmDelayLabel);
         }
 
-        // GameComponent_Mana.GameComponentTick에서 매 틱 호출된다. 보류 중인 폰의 귀환과 제단 맥동은 매 틱, 서신 예약은 250틱 간격으로,
-        // 4단계 감시와 밀서 퀘스트 확인은 2500틱 간격으로 처리한다.
+        // GameComponent_Mana.GameComponentTick에서 매 틱 호출된다. 보류 중인 폰의 귀환과 제단 맥동은 매 틱, 밀서 퀘스트 확인은 2500틱 간격으로 처리한다.
         public void Tick()
         {
             var now = Find.TickManager.TicksGame;
@@ -256,32 +246,13 @@ namespace VVRace
                 Log.ErrorOnce($"[ViViRace] altar everflower pulse failed: {ex}", 0x5645_4E20);
             }
 
-            if (now % StageTickInterval != 0) { return; }
+            if (now % ScanIntervalTicks != 0) { return; }
 
             try
             {
-                switch (Stage)
+                if (Stage == ViviEndingStage.AltarUnlocked)
                 {
-                    case ViviEndingStage.None:
-                        if (now % ScanIntervalTicks == 0)
-                        {
-                            ScanForAwakenedEverflower();
-                        }
-                        break;
-
-                    case ViviEndingStage.LetterPending:
-                        if (now >= _letterTick)
-                        {
-                            SendFederationLetter(null);
-                        }
-                        break;
-
-                    case ViviEndingStage.AltarUnlocked:
-                        if (now % ScanIntervalTicks == 0)
-                        {
-                            ReissueEndedMissiveQuest();
-                        }
-                        break;
+                    ReissueEndedMissiveQuest();
                 }
             }
             catch (Exception ex)
@@ -294,16 +265,6 @@ namespace VVRace
         public void Update()
         {
             UpdateEndingScreenFade();
-        }
-
-        // [A 호출] CompEverflower.ChangeAttunementLevel 직후. 플레이어 영원꽃이 4단계 이상이 되면 연방 서신을 예약한다.
-        public void Notify_EverflowerLevelChanged(ArcanePlant_Everflower everflower, int level)
-        {
-            if (everflower == null || level < LetterTriggerLevel) { return; }
-            if (Stage != ViviEndingStage.None) { return; }
-            if (everflower.Faction != Faction.OfPlayer) { return; }
-
-            ScheduleFederationLetter();
         }
 
         // [B 호출] 5단계 대조율 의식이 끝났을 때 → 밀서 퀘스트 성공, 〈만개하는 여명〉 시작. 시작했으면 true.
@@ -405,29 +366,11 @@ namespace VVRace
             }
         }
 
-        // 이미 4단계인 기존 세이브는 레벨 변경 알림이 다시 오지 않으므로 None 단계에서 주기적으로 맵을 훑는다.
-        private void ScanForAwakenedEverflower()
+        // [사건·DEV 호출] 〈비비 연방의 밀서〉 퀘스트를 만든다(서신 편지·제단 해금은 퀘스트가 맡는다). 만들었으면 true.
+        // 발생 조건은 사건(IncidentWorker_ViviMissive)이 검사하며, 여기서는 밀서나 본편 퀘스트가 이미 있는지만 본다.
+        public bool StartMissiveQuest(ArcanePlant_Everflower everflower)
         {
-            var everflower = ViviEndingUtility.FindEndingCandidate();
-            if (everflower != null && everflower.AttunementLevel >= LetterTriggerLevel)
-            {
-                ScheduleFederationLetter();
-            }
-        }
-
-        private void ScheduleFederationLetter()
-        {
-            _letterTick = Find.TickManager.TicksGame + FederationLetterDelayTicks.RandomInRange;
-        }
-
-        // 서신 도착: 〈비비 연방의 밀서〉 퀘스트를 만든다(서신 편지·제단 연구 해금·호박 코어 전달은 퀘스트가 맡는다).
-        private void SendFederationLetter(ArcanePlant_Everflower everflower)
-        {
-            if (_missiveQuest != null)
-            {
-                _letterTick = -1;
-                return;
-            }
+            if (_missiveQuest != null || _bloomQuest != null) { return false; }
 
             if (everflower == null || everflower.Destroyed)
             {
@@ -441,29 +384,23 @@ namespace VVRace
             }
             SetPoints(slate, everflower?.MapHeld ?? Find.AnyPlayerHomeMap);
 
+            // 생성 오류(이미 기록됨)면 밀서 없이 남아 사건이 다음 기회에 다시 일어날 수 있다.
             var quest = GenerateQuest(EndingCoreDefOf.VV_EndGame_ViviMissive, slate, ViviEndingSignals.GrandAttunementCompleted);
-            if (quest == null)
-            {
-                // 생성 오류(이미 기록됨): 잠시 뒤 다시 시도한다.
-                _letterTick = Find.TickManager.TicksGame + QuestRetryTicks;
-                return;
-            }
+            if (quest == null) { return false; }
 
             _missiveQuest = quest;
-            _letterTick = -1;
             Find.QuestManager.Add(quest);
+            return true;
         }
 
-        // 밀서 퀘스트는 대조율 의식으로만 끝나야 한다. 다른 이유로 끝났으면(다른 모드·퀘스트 탭 개발자 도구 등) 호박 코어 전달이 멈추지 않도록
-        // 서신 편지 없이 다시 만든다. 이미 보낸 코어는 다시 보내지 않고, 잃어버렸을 때의 재전달만 이어 간다.
+        // 밀서 퀘스트는 대조율 의식으로만 끝나야 한다. 다른 이유로 끝났으면(다른 모드·퀘스트 탭 개발자 도구 등) 고대 호박 코어 의뢰와
+        // 대조율 의식이 막히지 않도록 서신 편지 없이 다시 만든다.
         private void ReissueEndedMissiveQuest()
         {
             var ended = _missiveQuest;
             if (ended == null || !ended.Historical) { return; }
 
             var everflower = ViviEndingUtility.FindEndingCandidate();
-            var corePart = ended.GetFirstPartOfType<QuestPart_ViviAmberCore>();
-            var coreDelivered = corePart != null ? corePart.Delivered : EndingCoreDefOf.VV_AncientAltarRestoration?.IsFinished == true;
 
             var slate = new Slate();
             if (everflower != null)
@@ -471,7 +408,6 @@ namespace VVRace
                 slate.Set("everflower", everflower);
             }
             slate.Set("reissued", true);
-            slate.Set("coreDelivered", coreDelivered);
             SetPoints(slate, everflower?.MapHeld ?? Find.AnyPlayerHomeMap);
 
             // 생성 오류(이미 기록됨)면 다음 확인 때 다시 시도한다.
@@ -789,7 +725,7 @@ namespace VVRace
             Scribe_References.Look(ref _missiveQuest, "missiveQuest");
             Scribe_References.Look(ref _bloomQuest, "bloomQuest");
             Scribe_References.Look(ref _anchor, "anchorEverflower");
-            Scribe_Values.Look(ref _letterTick, "letterTick", -1);
+            Scribe_References.Look(ref _amberCoreQuest, "amberCoreQuest");
             Scribe_Collections.Look(ref _heldPawns, "heldPawns", LookMode.Deep);
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)

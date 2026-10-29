@@ -7,7 +7,7 @@ namespace VVRace
     [DefOf]
     public static class EndingCoreDefOf
     {
-        // 엔딩 퀘스트: 〈비비 연방의 밀서〉(제단 해금·호박 코어), 〈만개하는 여명〉(공성~엔딩)
+        // 엔딩 퀘스트: 〈비비 연방의 밀서〉(제단 해금·호박 코어 의뢰), 〈만개하는 여명〉(공성~엔딩)
         public static QuestScriptDef VV_EndGame_ViviMissive;
         public static QuestScriptDef VV_EndGame_ViviBloom;
 
@@ -31,7 +31,6 @@ namespace VVRace
         // 제단 모듈 소유 def (이름은 계획서에 고정)
         public static ThingDef VV_DreamumAltar;
         public static ThingDef VV_AncientAmberCore;
-        public static ResearchProjectDef VV_AncientAltarRestoration;
 
         // 비비 연방과 시나리오별 플레이어 세력
         public static FactionDef VV_ViviFederation;

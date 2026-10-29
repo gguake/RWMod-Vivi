@@ -78,21 +78,6 @@ namespace VVRace
             return requireNonHostile ? null : hostile;
         }
 
-        // 제단이 해금되면 연방 정착지의 기존 재고를 버려, 다음 방문 때 호박 코어 재고(StockGenerator_ViviEndingRelic)가 반영되게 한다.
-        public static void RefreshFederationTraderStock()
-        {
-            var federationDef = EndingCoreDefOf.VV_ViviFederation;
-            if (federationDef == null) { return; }
-
-            foreach (var settlement in Find.WorldObjects.Settlements)
-            {
-                if (settlement.Faction?.def == federationDef)
-                {
-                    settlement.trader?.TryDestroyStock();
-                }
-            }
-        }
-
         // 영원꽃의 공명자(첫 번째 연결 폰).
         public static Pawn ResonatorOf(ArcanePlant_Everflower everflower)
         {

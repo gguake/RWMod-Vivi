@@ -103,7 +103,6 @@ namespace VVRace
             switch (quest.Stage)
             {
                 case ViviEndingStage.None:
-                case ViviEndingStage.LetterPending:
                     return LocalizeString_EndingRituals.VV_FailReason_GrandAttunementLocked.Translate();
 
                 case ViviEndingStage.AltarUnlocked:

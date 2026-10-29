@@ -71,23 +71,22 @@
       </li>
     </comps>
 
+    <!-- 비비 연방의 밀서를 받기 전에는 건축 메뉴에 보이지 않는다(PlaceWorker_DreamumAltar.IsBuildDesignatorVisible). -->
     <placeWorkers>
       <li>VVRace.PlaceWorker_DreamumAltar</li>
     </placeWorkers>
 
     <designationCategory>VV_Bulidings</designationCategory>
-
-    <researchPrerequisites>
-      <li>VV_AncientAltarRestoration</li>
-    </researchPrerequisites>
   </ThingDef>
 
-  <!-- 고대 호박 코어: 제단 건설에 필요한 유일 재료. 연구 완료 시 비비 연방이 보내 주며, 잃어버리면 연방 상인에게서 다시 살 수 있다. -->
+  <!-- 고대 호박 코어: 제단 건설에 필요한 유일 재료. 밀서 퀘스트 동안 통신기로 비비 연방에 의뢰한 3성 무작위 퀘스트의 보상으로만 얻으며,
+       게임에 하나만 있을 수 있다(코어나 제단이 남아 있으면 다시 의뢰할 수 없다, VVRace.AmberCoreUtility). -->
   <ThingDef ParentName="ResourceBase">
     <defName>VV_AncientAmberCore</defName>
     <label>ancient amber core</label>
     <description>A great crystal of golden amber that once lay at the heart of an everflower altar of the old vivi empire. Ancient mana circuits are still engraved deep inside it, and it gives off a faint, warm glow.
-\nIt is the core relic needed to restore an everflower altar. Since the fall of the empire, the vivi federation has kept only a few of them.</description>
+\nIt is the core relic needed to restore an everflower altar. Since the fall of the empire, the vivi federation has kept only a few of them.
+\nIt can only be obtained by completing a task for the vivi federation, and only one can exist in the world.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_DreamumAltar</ThingDef>
     </descriptionHyperlinks>
@@ -115,13 +114,13 @@
 
     <!-- 원자재(ResourcesRaw) 아래 분류(비비 자원)에 두면 원자재 분류로 재고를 고르는 일반 상인(궤도 대량 상선 등)과
          원자재 분류로 내용물을 고르는 일반 전리품(오디세이 고장 난 수송 포드 등)에 섞여 나온다.
-         코어는 비비 연방 상인의 조건부 재고(VVRace.StockGenerator_ViviEndingRelic)로만 팔리도록 그런 생성기가 쓰지 않는 기타 물품 분류에 둔다. -->
+         코어는 의뢰 보상으로만 나오도록 그런 생성기가 쓰지 않는 기타 물품 분류에 둔다. -->
     <thingCategories>
       <li>ItemsMisc</li>
     </thingCategories>
 
-    <!-- 상인은 팔 수 있지만 플레이어는 팔 수 없다. 일반 보상으로는 나오지 않는다. -->
-    <tradeability>Buyable</tradeability>
+    <!-- 사고팔거나 선물할 수 없다. 일반 보상으로는 나오지 않는다. -->
+    <tradeability>None</tradeability>
     <thingSetMakerTags>
       <li>NonStandardReward</li>
     </thingSetMakerTags>

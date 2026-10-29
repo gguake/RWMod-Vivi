@@ -2,7 +2,8 @@
 <LanguageData>
 
 <!-- Ending quest: quests tab (the missive quest is named after the missive letter) -->
-<VV_Quest_EndingMissiveGoals>Complete the ancient altar restoration research and build the everflower altar with the ancient amber core sent by the Vivi federation. Enshrine an everflower of attunement level 4 at the center of the altar, then hold the grand attunement to begin its fifth bloom.</VV_Quest_EndingMissiveGoals>
+<VV_Quest_EndingMissiveGoals>Contact the vivi federation via comms console and request a task in exchange for an ancient amber core, then build the everflower altar with the core you receive for completing it. Enshrine an everflower of attunement level 4 at the center of the altar, then hold the grand attunement to begin its fifth bloom.
+\nOnly one ancient amber core can exist in the world. You cannot request another task until the core is destroyed.</VV_Quest_EndingMissiveGoals>
 <VV_Quest_EndingName>Dawn in full bloom</VV_Quest_EndingName>
 <VV_Quest_EndingDesc>The everflower on the altar has entered its fifth bloom and is condensing mana for its final bloom.
 \nDefend the everflower altar from the enemies drawn by the mana pillar until the condensation is complete. Once it is complete, the resonator can hold the queen's coronation at the everflower to bring it into full bloom.
@@ -15,15 +16,16 @@
 <VV_Letter_EndingFederationMissive>The everflower resonating with {PAWN_labelShort} has grown to its limit, but on ordinary soil it can no longer condense its power, and its mana is scattering away.
 \nSensing these waves, the representative of the vivi federation has sent an urgent message.
 \n"For ages, no hive has ever raised an everflower to such heights. Legend says the great everflower of the old empire revealed its true form only upon an everflower altar carved with ancient mana circuits, never upon common soil. But remember this: the moment the fifth bloom begins upon the altar, outlanders and titanic hornet swarms across the planet will sense its waves and converge upon you."
-\nYou can now research the restoration of the ancient altar. Once the research is complete, the federation will send an ancient amber core needed to build the altar.</VV_Letter_EndingFederationMissive>
+\nYou can now build the everflower altar. The vivi federation guards the ancient amber core at its heart; contact the federation via comms console and complete the task they entrust to you to obtain it.</VV_Letter_EndingFederationMissive>
 
-<!-- Ending quest: ancient amber core -->
-<VV_Letter_EndingAmberCoreLabel>Ancient amber core</VV_Letter_EndingAmberCoreLabel>
-<VV_Letter_EndingAmberCoreFromFederation>With the ancient altar research complete, the vivi federation has sent an ancient amber core, a relic of the old empire, as promised.</VV_Letter_EndingAmberCoreFromFederation>
-<VV_Letter_EndingAmberCoreFromUnknown>A drop pod carrying an ancient amber core has landed near your colony. Someone who remembers the legacy of the old empire seems to have sent it.</VV_Letter_EndingAmberCoreFromUnknown>
-<VV_Letter_EndingAmberCoreGuide>Build the everflower altar using the ancient amber core, then teleport a level 4 everflower onto the center of the altar to enshrine it.
-\nIf the core is lost before the altar is complete, you can obtain another from a vivi federation trader.</VV_Letter_EndingAmberCoreGuide>
-<VV_Letter_EndingAmberCoreRedelivered>A drop pod carrying a new ancient amber core has landed near your colony. Someone who guards the legacy of the old empire is still watching over your hive.</VV_Letter_EndingAmberCoreRedelivered>
+<!-- Ending quest: ancient amber core request (comms console, vivi federation) -->
+<VV_Comms_AmberCoreRequest>Request a task in exchange for an ancient amber core</VV_Comms_AmberCoreRequest>
+<VV_Comms_AmberCoreRequestHostile>hostile to the vivi federation</VV_Comms_AmberCoreRequestHostile>
+<VV_Comms_AmberCoreRequestActive>a task has already been given</VV_Comms_AmberCoreRequestActive>
+<VV_Comms_AmberCoreRequestCoreExists>an ancient amber core already exists</VV_Comms_AmberCoreRequestCoreExists>
+<VV_Comms_AmberCoreRequestResult>{LEADER} has entrusted you with a task in exchange for a relic of the old empire. Once it is done, the vivi federation will send an ancient amber core.
+\nCheck the quests tab for the task.</VV_Comms_AmberCoreRequestResult>
+<VV_Comms_AmberCoreRequestNoQuest>{LEADER}: "We have no task to entrust to you right now. Contact us again later."</VV_Comms_AmberCoreRequestNoQuest>
 
 <!-- Ending quest: siege -->
 <VV_Letter_EndingSiegeLabel>Pulse of dawn</VV_Letter_EndingSiegeLabel>

@@ -450,8 +450,6 @@ namespace VVRace
                 pawn.GetCompVivi()?.RefreshEverflowerHediffs();
             }
 
-            // 4단계 도달(연방 서신 예약)과 5/6단계 진행은 엔딩 퀘스트가 판단한다.
-            ViviEndingQuest.Current?.Notify_EverflowerLevelChanged(Everflower, level);
             RefreshAltarMana(parent.MapHeld);
         }
 

@@ -10,16 +10,17 @@
         public const string VV_Quest_EndingCalmExpiry = nameof(VV_Quest_EndingCalmExpiry);
         public const string VV_Quest_EndingCalmExpiryTip = nameof(VV_Quest_EndingCalmExpiryTip);
 
-        // 비비 연방의 밀서 (4단계 → 제단 해금)
+        // 비비 연방의 밀서 (사건 → 제단 해금)
         public const string VV_Letter_EndingFederationMissiveLabel = nameof(VV_Letter_EndingFederationMissiveLabel);
         public const string VV_Letter_EndingFederationMissive = nameof(VV_Letter_EndingFederationMissive);
 
-        // 고대 호박 코어 전달
-        public const string VV_Letter_EndingAmberCoreLabel = nameof(VV_Letter_EndingAmberCoreLabel);
-        public const string VV_Letter_EndingAmberCoreFromFederation = nameof(VV_Letter_EndingAmberCoreFromFederation);
-        public const string VV_Letter_EndingAmberCoreFromUnknown = nameof(VV_Letter_EndingAmberCoreFromUnknown);
-        public const string VV_Letter_EndingAmberCoreGuide = nameof(VV_Letter_EndingAmberCoreGuide);
-        public const string VV_Letter_EndingAmberCoreRedelivered = nameof(VV_Letter_EndingAmberCoreRedelivered);
+        // 고대 호박 코어 의뢰(통신기, 비비 연방): 선택지, 비활성 사유, 결과·실패 대화({LEADER})
+        public const string VV_Comms_AmberCoreRequest = nameof(VV_Comms_AmberCoreRequest);
+        public const string VV_Comms_AmberCoreRequestHostile = nameof(VV_Comms_AmberCoreRequestHostile);
+        public const string VV_Comms_AmberCoreRequestActive = nameof(VV_Comms_AmberCoreRequestActive);
+        public const string VV_Comms_AmberCoreRequestCoreExists = nameof(VV_Comms_AmberCoreRequestCoreExists);
+        public const string VV_Comms_AmberCoreRequestResult = nameof(VV_Comms_AmberCoreRequestResult);
+        public const string VV_Comms_AmberCoreRequestNoQuest = nameof(VV_Comms_AmberCoreRequestNoQuest);
 
         // 〈여명의 맥동〉 공성 시작
         public const string VV_Letter_EndingSiegeLabel = nameof(VV_Letter_EndingSiegeLabel);

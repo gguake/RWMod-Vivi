@@ -22,17 +22,18 @@ namespace VVRace
 
             if (!IsAltarUnlocked)
             {
-                yield return DevCommand("DEV: Send federation letter now", () => SendFederationLetter(everflower));
+                yield return DevCommand("DEV: Start missive quest now", () => StartMissiveQuest(everflower));
             }
 
             if (IsAltarUnlocked && !finished)
             {
-                yield return DevCommand("DEV: Deliver amber core now", () => DebugDeliverAmberCore(everflower.MapHeld));
+                yield return DevCommand("DEV: Request amber core quest now", DebugRequestAmberCoreQuest);
             }
 
             if (!finished)
             {
-                var next = stage + 1;
+                // 밀서 전(None) 다음은 AltarUnlocked다(enum 값 1은 비어 있음).
+                var next = stage == ViviEndingStage.None ? ViviEndingStage.AltarUnlocked : stage + 1;
                 yield return DevCommand($"DEV: Ending stage → {next}", () => DebugSetStage(next, everflower));
             }
 
@@ -85,11 +86,6 @@ namespace VVRace
             {
                 case ViviEndingStage.None:
                     DebugReset();
-                    break;
-
-                case ViviEndingStage.LetterPending:
-                    DebugReset();
-                    ScheduleFederationLetter();
                     break;
 
                 case ViviEndingStage.Failed:
@@ -154,17 +150,13 @@ namespace VVRace
             }
         }
 
-        // 밀서 퀘스트의 부품으로 보낸다. 밀서 퀘스트가 끝나 부품이 지워졌으면(바닐라는 끝난 퀘스트의 부품을 30일 뒤 지운다) 부품 없이 보낸다.
-        private void DebugDeliverAmberCore(Map map)
+        // DEV: 의뢰 가능 여부(진행 중인 의뢰·코어 존재·적대 연방)를 건너뛰고 고대 호박 코어 의뢰 퀘스트를 만든다. 연방이 없으면 의뢰인 없이 만든다.
+        private void DebugRequestAmberCoreQuest()
         {
-            var part = _missiveQuest?.GetFirstPartOfType<QuestPart_ViviAmberCore>();
-            if (part != null)
+            if (RequestAmberCoreQuest(ViviEndingUtility.FindFederation(requireNonHostile: false)) == null)
             {
-                part.Deliver(map, redelivery: false);
-                return;
+                Messages.Message("DEV: no quest could be generated for the ancient amber core.", MessageTypeDefOf.RejectInput, historical: false);
             }
-
-            QuestPart_ViviAmberCore.DropCore(map, redelivery: false, _missiveQuest);
         }
 
         // 목표 단계(진행 순서 기준)에 이를 때까지 한 단계씩 넘긴다. 실패 상태에서는 넘기지 않는다.
@@ -202,8 +194,7 @@ namespace VVRace
             switch (stage)
             {
                 case ViviEndingStage.None:
-                case ViviEndingStage.LetterPending:
-                    SendFederationLetter(context);
+                    StartMissiveQuest(context);
                     return _missiveQuest != null;
 
                 case ViviEndingStage.AltarUnlocked:
@@ -285,7 +276,6 @@ namespace VVRace
             _missiveQuest = null;
             _bloomQuest = null;
             _anchor = null;
-            _letterTick = -1;
             _cachedQuest = null;
             _cachedPartCount = -1;
         }

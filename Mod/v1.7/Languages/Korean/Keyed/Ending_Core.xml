@@ -2,7 +2,8 @@
 <LanguageData>
 
 <!-- 엔딩 퀘스트: 퀘스트 탭 (밀서 퀘스트 이름은 서신 편지 제목을 쓴다) -->
-<VV_Quest_EndingMissiveGoals>〈고대 제단 복원〉 연구를 마치고 비비 연방이 보내온 고대 호박 코어로 영원꽃 제단을 건설하십시오. 조율 4단계 영원꽃을 제단 중앙에 안치한 뒤 〈대조율 의식〉을 치르면 영원꽃의 다섯 번째 개화가 시작됩니다.</VV_Quest_EndingMissiveGoals>
+<VV_Quest_EndingMissiveGoals>통신기로 비비 연방에 연락해 고대 호박 코어를 대가로 일거리를 의뢰하고, 의뢰를 완수해 받은 코어로 영원꽃 제단을 건설하십시오. 조율 4단계 영원꽃을 제단 중앙에 안치한 뒤 〈대조율 의식〉을 치르면 영원꽃의 다섯 번째 개화가 시작됩니다.
+\n고대 호박 코어는 세상에 단 하나만 존재할 수 있어, 코어가 파괴되기 전까지는 다시 의뢰할 수 없습니다.</VV_Quest_EndingMissiveGoals>
 <VV_Quest_EndingName>만개하는 여명</VV_Quest_EndingName>
 <VV_Quest_EndingDesc>제단 위의 영원꽃이 다섯 번째 개화를 맞아 마지막 개화를 위한 마나를 응축하고 있습니다.
 \n응축이 끝날 때까지 마나 기둥에 이끌린 적들로부터 영원꽃 제단을 지켜내십시오. 응축이 완성되면 공명자가 영원꽃에서 〈여왕의 대관식〉을 치러 영원꽃을 완전히 개화시킬 수 있습니다.
@@ -15,15 +16,16 @@
 <VV_Letter_EndingFederationMissive>{PAWN_labelShort}(와)과 공명한 영원꽃이 한계까지 성장했으나, 평범한 땅 위에서는 더 이상 힘을 응축하지 못하고 마나가 흩어지고 있습니다.
 \n이 파동을 감지한 비비 연방의 대표로부터 긴급한 전갈이 도착했습니다.
 \n"오랜 세월 동안 그 어떤 둥지도 영원꽃을 이 경지까지 일구어내지 못했습니다. 전설에 따르면, 옛 제국의 거대한 영원꽃은 평범한 흙이 아닌 고대의 마나 회로가 새겨진 영원꽃 제단 위에서만 진정한 모습을 드러냈다고 합니다. 하지만 기억하십시오. 제단 위에서 다섯 번째 개화가 시작되는 순간, 행성 전역의 외지인들과 거대 말벌 무리가 그 파동을 감지하고 몰려들 것입니다."
-\n이제 〈고대 제단 복원〉 연구를 진행할 수 있습니다. 연구를 마치면 비비 연방이 제단의 핵심 재료인 고대 호박 코어를 보내올 것입니다.</VV_Letter_EndingFederationMissive>
+\n이제 영원꽃 제단을 건설할 수 있습니다. 제단의 핵심 재료인 고대 호박 코어는 비비 연방이 지키고 있으니, 통신기로 연방에 연락해 연방이 맡기는 일을 완수하면 얻을 수 있습니다.</VV_Letter_EndingFederationMissive>
 
-<!-- 엔딩 퀘스트: 고대 호박 코어 -->
-<VV_Letter_EndingAmberCoreLabel>고대 호박 코어 도착</VV_Letter_EndingAmberCoreLabel>
-<VV_Letter_EndingAmberCoreFromFederation>〈고대 제단 복원〉 연구가 완료되자, 비비 연방이 약속대로 옛 제국의 유물인 고대 호박 코어를 보내왔습니다.</VV_Letter_EndingAmberCoreFromFederation>
-<VV_Letter_EndingAmberCoreFromUnknown>고대 호박 코어를 실은 수송 포드가 정착지 근처에 떨어졌습니다. 옛 제국의 유산을 기억하는 누군가가 보내온 듯합니다.</VV_Letter_EndingAmberCoreFromUnknown>
-<VV_Letter_EndingAmberCoreGuide>고대 호박 코어로 영원꽃 제단을 건설한 뒤, 조율 4단계 영원꽃을 제단 중앙으로 순간이동시켜 안치하십시오.
-\n제단을 완성하기 전에 코어를 잃어버리면 비비 연방의 상인에게서 다시 구할 수 있습니다.</VV_Letter_EndingAmberCoreGuide>
-<VV_Letter_EndingAmberCoreRedelivered>새로운 고대 호박 코어를 실은 수송 포드가 정착지 근처에 떨어졌습니다. 옛 제국의 유산을 지키는 누군가가 여전히 이 둥지를 지켜보고 있는 듯합니다.</VV_Letter_EndingAmberCoreRedelivered>
+<!-- 엔딩 퀘스트: 고대 호박 코어 의뢰 (통신기, 비비 연방) -->
+<VV_Comms_AmberCoreRequest>고대 호박 코어를 대가로 일거리 의뢰하기</VV_Comms_AmberCoreRequest>
+<VV_Comms_AmberCoreRequestHostile>비비 연방과 적대 관계입니다</VV_Comms_AmberCoreRequestHostile>
+<VV_Comms_AmberCoreRequestActive>이미 의뢰를 받았습니다</VV_Comms_AmberCoreRequestActive>
+<VV_Comms_AmberCoreRequestCoreExists>고대 호박 코어가 이미 존재합니다</VV_Comms_AmberCoreRequestCoreExists>
+<VV_Comms_AmberCoreRequestResult>{LEADER}(이)가 옛 제국의 유물을 내어 줄 대가로 일을 맡겼습니다. 의뢰를 완수하면 비비 연방이 고대 호박 코어를 보내올 것입니다.
+\n퀘스트 탭에서 의뢰를 확인하십시오.</VV_Comms_AmberCoreRequestResult>
+<VV_Comms_AmberCoreRequestNoQuest>{LEADER}: "지금은 맡길 만한 일이 없습니다. 나중에 다시 연락해 주십시오."</VV_Comms_AmberCoreRequestNoQuest>
 
 <!-- 엔딩 퀘스트: 여명의 맥동 (공성) -->
 <VV_Letter_EndingSiegeLabel>여명의 맥동</VV_Letter_EndingSiegeLabel>

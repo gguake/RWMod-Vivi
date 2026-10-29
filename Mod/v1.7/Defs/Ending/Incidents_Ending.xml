@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 〈비비 연방의 밀서〉 퀘스트를 주는 사건. 바닐라 스토리텔러의 무작위 퀘스트 주기(StorytellerComp_RandomQuest, GiveQuest 범주)가
+       GiveQuest_Random(가중치 1)과 함께 고른다. 발생 조건(영원꽃 4단계·기지 가치·비비 수·비적대 연방)은 VVRace.IncidentWorker_ViviMissive가 검사한다.
+       서신 편지는 밀서 퀘스트가 직접 보내므로 사건 편지는 없다. -->
+  <IncidentDef ParentName="GiveQuestBase">
+    <defName>VV_GiveQuest_ViviMissive</defName>
+    <label>vivi federation missive</label>
+    <workerClass>VVRace.IncidentWorker_ViviMissive</workerClass>
+    <questScriptDef>VV_EndGame_ViviMissive</questScriptDef>
+    <baseChance>1</baseChance>
+  </IncidentDef>
+</Defs>
