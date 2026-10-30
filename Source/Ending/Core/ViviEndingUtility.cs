@@ -283,6 +283,16 @@ namespace VVRace
             if (boss == null || boss.Destroyed || !boss.Spawned) { return; }
 
             var map = boss.Map;
+            VanishEscorts(boss);
+
+            var vanishEffect = ApocryphaEffecterDefOf.VV_Effecter_ApocryphaVanish ?? EffecterDefOf.Skip_EntryNoDelay;
+            vanishEffect.Spawn(boss.Position, map, 2.5f).Cleanup();
+            boss.Destroy(DestroyMode.Vanish);
+        }
+
+        // 보스의 호위 거대 말벌만 순간 소실 연출로 없앤다.
+        public static void VanishEscorts(Pawn boss)
+        {
             var vanishEffect = ApocryphaEffecterDefOf.VV_Effecter_ApocryphaVanish ?? EffecterDefOf.Skip_EntryNoDelay;
             foreach (var hornet in ApocryphaUtility.GetEscorts(boss))
             {
@@ -295,9 +305,6 @@ namespace VVRace
 
                 hornet.Destroy(DestroyMode.Vanish);
             }
-
-            vanishEffect.Spawn(boss.Position, map, 2.5f).Cleanup();
-            boss.Destroy(DestroyMode.Vanish);
         }
 
         // 여러 단계를 잇는 처리에서 한 단계가 실패해도 나머지는 이어서 진행한다.

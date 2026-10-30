@@ -1279,6 +1279,11 @@ namespace VVRace
             ApocryphaEffecterDefOf.VV_Effecter_ApocryphaSteal.Spawn(effectCell, map).Cleanup();
             ApocryphaUtility.ShakeCamera(map, 2f);
 
+            // 영원꽃과 보스는 바로 없애고, 영원꽃이 꽃잎으로 흩어져 보스에게 빨려 든 뒤 보스도 꽃잎으로 흩날리며 떠나는 모습은
+            // 연출 시퀀서(찬탈 모드)가 그린다. 지금 모습을 기억해야 하므로 둘을 없애기 전에 만든다.
+            var stolen = (DyingApocrypha)ThingMaker.MakeThing(ApocryphaThingDefOf.VV_DyingApocrypha);
+            stolen.InitStolen(Pawn, everflower);
+
             if (everflower != null && !everflower.Destroyed)
             {
                 everflower.Destroy(DestroyMode.Vanish);
@@ -1287,8 +1292,10 @@ namespace VVRace
             _phase = ApocryphaPhase.Dying;
             ApocryphaGimmicks.Notify_BossPhaseChanged(Pawn, ApocryphaPhase.Dying);
 
-            // 호위 말벌과 함께 순간 소실 연출로 사라진다(엔딩 정리와 같은 처리).
-            ViviEndingUtility.VanishBoss(Pawn);
+            // 호위 말벌은 순간 소실 연출로 사라진다(엔딩 정리와 같은 처리).
+            ViviEndingUtility.VanishEscorts(Pawn);
+            GenSpawn.Spawn(stolen, parent.Position, map);
+            Pawn.Destroy(DestroyMode.Vanish);
         }
 
         public void DebugStartChannel()

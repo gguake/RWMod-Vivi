@@ -73,5 +73,6 @@ namespace VVRace
         public static FleckDef VV_Fleck_ApocryphaToxicGasViolet;
         public static FleckDef VV_Fleck_ApocryphaAsh;
         public static FleckDef VV_Fleck_ApocryphaEmber;
+        public static FleckDef VV_Fleck_ApocryphaStealPetal;
     }
 }
