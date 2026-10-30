@@ -19,8 +19,9 @@ namespace VVRace
         // 착탄 순간 칸이 막혀 있으면(비행 중 건물/폰이 들어온 경우) 주변에서 다시 찾는 범위
         private const int BloomCellFallbackRadius = 4;
 
-        // 보스 몸통 중심(연결선·사출탄의 기준점): DrawPos에서 화면 위쪽으로 약 1.5칸
-        public static readonly Vector3 BossBodyOffset = new Vector3(0f, 0f, 1.5f);
+        // 보스 몸통 중심(연결선·사출탄의 기준점): DrawPos에서 화면 위쪽으로. 1페이즈 여왕은 가슴 브로치, 2페이즈 말벌은 가슴께.
+        private static readonly Vector3 BoundBodyOffset = new Vector3(0f, 0f, 0.6f);
+        private static readonly Vector3 UnboundBodyOffset = new Vector3(0f, 0f, 1.5f);
 
         // 요정 간섭 비비 쪽 연결선 끝(가슴 높이)과 연결선 모양
         private static readonly Vector3 PawnLinkOffset = new Vector3(0f, 0f, 0.35f);
@@ -222,10 +223,16 @@ namespace VVRace
         }
 
         // 보스 몸통 중심(연결선·사출 기준). 맵 위쪽 가장자리라 기준점이 맵 밖이면 보스 위치를 그대로 쓴다.
+        // 지금 그려지는 몸(생애 단계 0 = 1페이즈 그림)에 맞춘 몸통 중심 오프셋
+        internal static Vector3 GetBossBodyOffset(Pawn boss)
+        {
+            return boss.ageTracker.CurLifeStageIndex == 0 ? BoundBodyOffset : UnboundBodyOffset;
+        }
+
         internal static Vector3 GetBossBodyPos(Pawn boss)
         {
             var drawPos = boss.DrawPos;
-            var bodyPos = drawPos + BossBodyOffset;
+            var bodyPos = drawPos + GetBossBodyOffset(boss);
             return boss.Map != null && bodyPos.ToIntVec3().InBounds(boss.Map) ? bodyPos : drawPos;
         }
 

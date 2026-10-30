@@ -4,7 +4,7 @@ using Verse;
 
 namespace VVRace
 {
-    // 아포크리파 1페이즈 사출 포격의 조준 하나. 표적 칸과 발사 틱만 저장하고, 경고 연출(표적 마법진·시전 마법진·꽃잎과 반짝임)은 CompApocrypha가 매 틱 유지한다.
+    // 아포크리파 1페이즈 사출 포격의 조준 하나. 표적 칸과 발사 틱만 저장하고, 경고 연출(표적 연꽃 표식·시전 연꽃·꽃잎과 반짝임)은 CompApocrypha가 매 틱 유지한다.
     public class ApocryphaShellAim : IExposable
     {
         public IntVec3 cell = IntVec3.Invalid;
@@ -26,7 +26,7 @@ namespace VVRace
         }
 
         // 기절하면 CompApocrypha가 조준을 모두 취소하므로 연출은 기절 중에 돌지 않는다.
-        // aimTicks: 조준 시간. 마법진 셰이더는 모트 나이로 좁혀 드는 고리·충전광을 그리므로, 모트를 (다시) 만들 때 나이를 조준 시작 틱에 맞춘다.
+        // aimTicks: 조준 시간. 표식 셰이더는 모트 나이로 피어나는 꽃·충전광을 그리므로, 모트를 (다시) 만들 때 나이를 조준 시작 틱에 맞춘다.
         public void TickVisuals(Pawn boss, Map map, Vector3 bodyCenter, int aimTicks)
         {
             var direction = cell.ToVector3Shifted() - boss.DrawPos;

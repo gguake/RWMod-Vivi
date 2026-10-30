@@ -261,9 +261,9 @@
   </EffecterDef>
 
   <!-- ===================== 1페이즈: 요정 비비 사출 포격 조준 ===================== -->
-  <!-- 표적 마법진: VV_MagicCircle 셰이더가 수식으로 그린다(텍스처는 쓰지 않음). 바깥 고리 반지름(0.95 × 2.6칸)이 사출탄 폭발 반경 2.4칸과 맞도록 크기 5.2.
-       좁혀 드는 고리가 _Duration(= CompProperties_Apocrypha.shellAimTicks / 60초) 동안 중심으로 줄어 발사 시점을 알린다.
-       모트 나이를 조준 시작 틱에 맞추므로(ApocryphaShellAim) 불러온 뒤 다시 만들어도 고리 위치가 남은 시간과 맞는다. -->
+  <!-- 표적 꽃 표식: VV_MagicCircle 셰이더가 수식으로 그린다(텍스처는 쓰지 않음). 바깥 고리 반지름(0.95 × 2.6칸)이 사출탄 폭발 반경 2.4칸과 맞도록 크기 5.2.
+       밝은 연꽃이 _Duration(= CompProperties_Apocrypha.shellAimTicks / 60초) 동안 중심에서 흐린 윤곽까지 피어나 발사 시점을 알린다.
+       모트 나이를 조준 시작 틱에 맞추므로(ApocryphaShellAim) 불러온 뒤 다시 만들어도 꽃 크기가 남은 시간과 맞는다. -->
   <ThingDef ParentName="MoteBase">
     <defName>VV_Mote_ApocryphaAimTarget</defName>
     <thingClass>MoteAttached</thingClass>
@@ -283,12 +283,11 @@
       <shaderParameters>
         <_CoreColor>(1, 0.94, 0.75, 1)</_CoreColor>
         <_Duration>4</_Duration>
-        <_ShrinkRing>1</_ShrinkRing>
-        <_RuneCount>28</_RuneCount>
-        <_RotSpeed>0.3</_RotSpeed>
-        <_StarAlpha>1</_StarAlpha>
+        <_PetalCount>8</_PetalCount>
+        <_RingAlpha>1</_RingAlpha>
+        <_GuideAlpha>1</_GuideAlpha>
         <_CoreGlow>0.15</_CoreGlow>
-        <_InscribeSecs>0.6</_InscribeSecs>
+        <_FadeInSecs>0.3</_FadeInSecs>
         <_LineScale>1</_LineScale>
         <_Brightness>0.75</_Brightness>
       </shaderParameters>
@@ -296,8 +295,8 @@
     </graphicData>
   </ThingDef>
 
-  <!-- 시전 마법진: 보스 몸통 앞(표적 쪽)에 뜨는 작은 마법진. 표적 마법진과 같은 셰이더로, 좁혀 드는 고리 대신 충전될수록 중심이 밝아진다.
-       작게 그리므로 선을 굵게(_LineScale) 하고 룬 수를 줄인다. -->
+  <!-- 시전 꽃 표식: 보스 몸통 앞(표적 쪽)에 뜨는 작은 연꽃. 표적 표식과 같은 셰이더로, 바깥 고리 없이 충전될수록 피어나며 중심이 밝아진다.
+       작게 그리므로 선을 굵게(_LineScale) 하고 꽃잎 수를 줄인다. -->
   <ThingDef ParentName="MoteBase">
     <defName>VV_Mote_ApocryphaAimCharge</defName>
     <thingClass>MoteAttached</thingClass>
@@ -317,12 +316,11 @@
       <shaderParameters>
         <_CoreColor>(1, 0.94, 0.75, 1)</_CoreColor>
         <_Duration>4</_Duration>
-        <_ShrinkRing>0</_ShrinkRing>
-        <_RuneCount>10</_RuneCount>
-        <_RotSpeed>0.9</_RotSpeed>
-        <_StarAlpha>1</_StarAlpha>
+        <_PetalCount>6</_PetalCount>
+        <_RingAlpha>0</_RingAlpha>
+        <_GuideAlpha>0.6</_GuideAlpha>
         <_CoreGlow>1</_CoreGlow>
-        <_InscribeSecs>0.4</_InscribeSecs>
+        <_FadeInSecs>0.25</_FadeInSecs>
         <_LineScale>1.8</_LineScale>
         <_Brightness>0.85</_Brightness>
       </shaderParameters>

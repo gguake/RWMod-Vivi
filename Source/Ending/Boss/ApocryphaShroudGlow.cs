@@ -4,9 +4,9 @@ using Verse;
 
 namespace VVRace
 {
-    // 1페이즈 아포크리파의 요정 영혼 수의 발광.
-    // 몸통이 맵 조명을 받아 밤에는 금빛 결속이 어둡게 바래 보이므로, 같은 몸통 텍스처를 가산 혼합(MoteGlow)으로
-    // 은은하게 맥동시키며 한 번 더 그린다. 밝은 금빛 부분만 두드러지고 어두운 외골격은 거의 더해지지 않는다.
+    // 1페이즈 아포크리파(여왕 모습)의 은은한 발광.
+    // 몸통이 맵 조명을 받아 밤에는 어둡게 바래 보이므로, 같은 몸통 텍스처를 가산 혼합(MoteGlow)으로
+    // 은은하게 맥동시키며 한 번 더 그린다. 낮에는 흰 모피·피부까지 금빛으로 바래므로 바닥 밝기만큼 줄인다.
     [StaticConstructorOnStartup]
     internal static class ApocryphaShroudGlow
     {
@@ -17,6 +17,7 @@ namespace VVRace
         private const float AlphaBase = 0.3f;
         private const float AlphaPulse = 0.12f;
         private const float PulseSpeed = 1.6f;
+        private const float DaylightAlphaFactor = 0.15f;   // 바닥 밝기 1(한낮)일 때 남기는 비율
 
         public static void Draw(Pawn pawn)
         {
@@ -34,7 +35,8 @@ namespace VVRace
             }
 
             var color = GlowColor;
-            color.a = AlphaBase + AlphaPulse * Mathf.Sin(Find.TickManager.TicksGame / 60f * PulseSpeed);
+            var light = pawn.Map.glowGrid.GroundGlowAt(pawn.Position);
+            color.a = (AlphaBase + AlphaPulse * Mathf.Sin(Find.TickManager.TicksGame / 60f * PulseSpeed)) * Mathf.Lerp(1f, DaylightAlphaFactor, light);
 
             PropertyBlock.Clear();
             PropertyBlock.SetColor(ShaderPropertyIDs.Color, color);

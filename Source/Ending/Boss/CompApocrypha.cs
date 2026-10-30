@@ -745,7 +745,7 @@ namespace VVRace
             var beatTicks = Mathf.RoundToInt(60f / ApocryphaMorphMaterials.BeatRate);
             if (elapsed > 0 && elapsed < Props.transformTicks && elapsed % beatTicks == 0)
             {
-                SpawnEffecter(ApocryphaEffecterDefOf.VV_Effecter_ApocryphaMorphPulse, ApocryphaGimmicks.BossBodyOffset);
+                SpawnEffecter(ApocryphaEffecterDefOf.VV_Effecter_ApocryphaMorphPulse, ApocryphaGimmicks.GetBossBodyOffset(Pawn));
                 ApocryphaUtility.ShakeCamera(parent.Map, 0.25f + 0.5f * Mathf.Sin(Mathf.PI * TransformProgress));
             }
 
@@ -1078,7 +1078,7 @@ namespace VVRace
             CancelAim();
             CancelBreath();
 
-            SpawnEffecter(ApocryphaEffecterDefOf.VV_Effecter_ApocryphaStaggered, ApocryphaGimmicks.BossBodyOffset);
+            SpawnEffecter(ApocryphaEffecterDefOf.VV_Effecter_ApocryphaStaggered, ApocryphaGimmicks.GetBossBodyOffset(Pawn));
             ApocryphaUtility.ShakeCamera(parent.Map, 1.2f);
         }
 

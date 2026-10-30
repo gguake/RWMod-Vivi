@@ -1,12 +1,12 @@
 #version 450
 
-// 아포크리파 1페이즈 사출 포격의 조준 마법진(가산 혼합)을 텍스처 없이 수식으로 그린다.
-// - 바깥 이중 고리, 천천히 도는 룬 띠(칸마다 정수 해시로 고른 획 몇 개로 만든 글자), 안쪽 고리, 반대로 도는 육망성, 중심 고리.
-// - 생성 직후 _InscribeSecs 동안 고리와 룬이 위쪽부터 시계 방향으로 새겨지듯 나타난다.
-// - _ShrinkRing > 0이면 조준 시간(_Duration) 동안 바깥 고리에서 중심으로 좁혀 드는 고리가 발사 시점을 알려 주고,
-//   끝나기 직전에 마법진 전체가 밝아진다. _CoreGlow는 중심의 빛(시전 마법진은 충전될수록 밝아진다).
+// 아포크리파 1페이즈 사출 포격의 조준 표식(가산 혼합)을 텍스처 없이 수식으로 그린다. 요정꽃처럼 끝이 뾰족한 연꽃 꽃잎 모양이다.
+// - 바깥 고리(폭발 범위)와 흐린 꽃 윤곽(다 핀 모양)이 먼저 나타나고, 밝은 꽃이 중심에서 피어나 _Duration 동안 윤곽까지 커진다.
+//   밝은 꽃이 윤곽과 겹치는 순간이 발사 시점이고, 피는 동안 꽃잎이 살짝 비틀려 있다가 다 피면 윤곽과 정확히 맞는다.
+// - 끝나기 직전에 전체가 밝아지고, _CoreGlow는 중심의 빛(시전 표식은 충전될수록 밝아진다).
+// 바닐라 예고 연출처럼 굵은 선 몇 개로만 그려 멀리서도 읽히게 한다(가는 장식은 기본 줌에서 1px 아래로 뭉개진다).
 // 모트는 Graphic_MoteWithAgeSecs가 _AgeSecs·_RandomPerObjectOffsetRandom을 넣어 주고, 모트 색과 페이드 투명도는 _Color로 온다.
-// (_RandomPerObject는 모트 위치가 섞여 있어 움직이는 모트에서 매 틱 바뀌므로 룬 무늬 시드로 쓰지 않는다)
+// (_RandomPerObject는 모트 위치가 섞여 있어 움직이는 모트에서 매 틱 바뀌므로 꽃 방향 시드로 쓰지 않는다)
 
 layout(location = 1) in vec2 vUv;
 
@@ -19,12 +19,11 @@ layout(set = 2, binding = 0) uniform MaterialUniforms
     float _AgeSecs;       // @default = 0.0
     float _RandomPerObjectOffsetRandom; // @default = 0.0
     float _Duration;      // @default = 4.0
-    float _ShrinkRing;    // @default = 1.0
-    float _RuneCount;     // @default = 24.0
-    float _RotSpeed;      // @default = 0.3
-    float _StarAlpha;     // @default = 1.0
+    float _PetalCount;    // @default = 8.0
+    float _RingAlpha;     // @default = 1.0
+    float _GuideAlpha;    // @default = 1.0
     float _CoreGlow;      // @default = 0.15
-    float _InscribeSecs;  // @default = 0.6
+    float _FadeInSecs;    // @default = 0.3
     float _LineScale;     // @default = 1.0
     float _Brightness;    // @default = 1.0
 } u;
@@ -39,17 +38,43 @@ uint hashU(ivec2 i)
     return (q.x ^ q.y) * 1597334673u;
 }
 
-float hash01(ivec2 i)
+// 세로 방향 렌즈(양 끝이 뾰족한 꽃잎) 거리장. 반지름 r인 두 원이 중심 간격 2d로 겹친 모양(iq sdVesica).
+float sdVesica(vec2 p, float r, float d)
 {
-    return float(hashU(i)) * (1.0 / 4294967295.0);
+    p = abs(p);
+    float b = sqrt(r * r - d * d);
+    return ((p.y - b) * d > p.x * b) ? length(p - vec2(0.0, b)) : length(p - vec2(-d, 0.0)) - r;
 }
 
-float sdSegment(vec2 p, vec2 a, vec2 b)
+// 중심에서 뻗는 꽃잎 count장의 합집합 거리장. 꽃잎 하나는 반지름 r0~r1, 반폭 w.
+// 가장 가까운 꽃잎과 양옆 꽃잎만 보면 겹치는 부분까지 정확하다.
+float sdPetals(vec2 p, float count, float angle, float r0, float r1, float w)
 {
-    vec2 pa = p - a;
-    vec2 ba = b - a;
-    float h = clamp(dot(pa, ba) / dot(ba, ba), 0.0, 1.0);
-    return length(pa - ba * h);
+    float h = (r1 - r0) * 0.5;
+    float vr = (h * h / w + w) * 0.5;
+    float vd = (h * h / w - w) * 0.5;
+    float sector = TAU / count;
+    float rr = length(p);
+    float a = atan(p.y, p.x) - angle;
+    a = mod(a + sector * 0.5, sector) - sector * 0.5;
+
+    float d = 1e3;
+    for (int k = -1; k <= 1; k++)
+    {
+        float ak = a + float(k) * sector;
+        vec2 q = vec2(rr * sin(ak), rr * cos(ak) - (r0 + h));
+        d = min(d, sdVesica(q, vr, vd));
+    }
+    return d;
+}
+
+// 연꽃 한 송이: 바깥 꽃잎 count장과 그 사이로 엇갈린 안쪽 꽃잎 count장. 크기 s로 줄여 그릴 수 있다.
+// outer/inner는 각 겹의 거리장(안쪽 겹이 위에 겹친다).
+void lotus(vec2 p, float s, float count, float angle, out float outer, out float inner)
+{
+    vec2 q = p / s;
+    outer = sdPetals(q, count, angle, 0.10, 0.86, 0.15) * s;
+    inner = sdPetals(q, count, angle + PI / count, 0.08, 0.56, 0.11) * s;
 }
 
 // 선의 선명한 심(픽셀 크기 px로 앤티에일리어싱)과 둘레의 빛
@@ -63,37 +88,6 @@ float lineGlow(float d, float width)
     return exp(-d / width);
 }
 
-// 위쪽(12시)에서 시계 방향으로 잰 각도 비율(0~1)
-float clockwiseFraction(vec2 p)
-{
-    return fract(0.25 - atan(p.y, p.x) / TAU);
-}
-
-// 룬 띠 칸 하나의 글자. local은 칸 중심 기준 물리 좌표, halfSize는 글자 반폭.
-// 등뼈 획 하나(세로 또는 대각선)에 나머지 획을 해시 비트로 골라 더한다.
-float runeGlyph(vec2 local, float halfSize, uint h, float halfWidth, float px, out float glowDist)
-{
-    vec2 s = vec2(halfSize);
-    float d = 1e3;
-
-    uint spine = h & 3u;
-    if (spine == 0u || spine == 3u) { d = min(d, sdSegment(local, vec2(0.0, -s.y), vec2(0.0, s.y))); }
-    else if (spine == 1u) { d = min(d, sdSegment(local, vec2(-s.x, -s.y), vec2(s.x, s.y))); }
-    else { d = min(d, sdSegment(local, vec2(-s.x, s.y), vec2(s.x, -s.y))); }
-
-    if (((h >> 2u) & 3u) == 0u) { d = min(d, sdSegment(local, vec2(-s.x, s.y), vec2(s.x, s.y))); }
-    if (((h >> 4u) & 3u) == 0u) { d = min(d, sdSegment(local, vec2(-s.x, 0.0), vec2(s.x, 0.0))); }
-    if (((h >> 6u) & 3u) == 0u) { d = min(d, sdSegment(local, vec2(-s.x, -s.y), vec2(s.x, -s.y))); }
-    if (((h >> 8u) & 3u) == 0u) { d = min(d, sdSegment(local, vec2(-s.x, -s.y), vec2(-s.x, s.y))); }
-    if (((h >> 10u) & 3u) == 0u) { d = min(d, sdSegment(local, vec2(s.x, -s.y), vec2(s.x, s.y))); }
-    if (((h >> 12u) & 3u) == 0u) { d = min(d, sdSegment(local, vec2(0.0, s.y), vec2(s.x, 0.0))); }
-    if (((h >> 14u) & 3u) == 0u) { d = min(d, sdSegment(local, vec2(-s.x, 0.0), vec2(0.0, -s.y))); }
-    if (((h >> 16u) & 7u) == 0u) { d = min(d, length(local - vec2(s.x * 0.55, s.y * 0.55)) - halfWidth * 0.6); }
-
-    glowDist = max(d, 0.0);
-    return lineCore(d, halfWidth, px);
-}
-
 void main()
 {
     vec2 p = vUv * 2.0 - 1.0;
@@ -102,106 +96,54 @@ void main()
 
     if (r > 1.0) { discard; }
 
-    float seed = float(hashU(ivec2(floatBitsToInt(u._RandomPerObjectOffsetRandom), 0x2c1b3c6d)) & 1023u);
+    float seed = float(hashU(ivec2(floatBitsToInt(u._RandomPerObjectOffsetRandom), 0x2c1b3c6d)) & 1023u) / 1023.0;
     float age = u._AgeSecs;
-    float inscribe = clamp(age / max(u._InscribeSecs, 0.001), 0.0, 1.0);
-    float sweep = clockwiseFraction(p);
-    float drawn = smoothstep(0.0, 0.04, inscribe * 1.04 - sweep);
-
-    float t = u._Duration > 0.0 ? clamp(age / u._Duration, 0.0, 1.0) : 0.0;
-    float rot = age * u._RotSpeed + seed * 0.37;
-    float lw = max(u._LineScale, 0.1);   // 선 굵기 배율(작게 그리는 시전 마법진은 굵게)
+    float fadeIn = smoothstep(0.0, 1.0, age / max(u._FadeInSecs, 0.001));
+    float t = u._Duration > 0.0 ? clamp(age / u._Duration, 0.0, 1.0) : 1.0;
+    float count = max(floor(u._PetalCount + 0.5), 3.0);
+    float angle = seed * TAU;
+    float lw = max(u._LineScale, 0.1);   // 선 굵기 배율(작게 그리는 시전 표식은 굵게)
 
     float core = 0.0;   // 흰금빛 심
     float glow = 0.0;   // 금빛 둘레 빛
 
-    // 바깥 이중 고리
-    float dOuter = abs(r - 0.95);
-    float dSecond = abs(r - 0.885);
-    core += lineCore(dOuter, 0.011 * lw, px) * drawn;
-    core += lineCore(dSecond, 0.005 * lw, px) * 0.8 * drawn;
-    glow += (lineGlow(dOuter, 0.025 * lw) * 0.55 + lineGlow(dSecond, 0.02 * lw) * 0.25) * drawn;
+    // 바깥 고리: 사출탄 폭발 범위
+    float dRing = abs(r - 0.95);
+    core += lineCore(dRing, 0.02 * lw, px) * u._RingAlpha * fadeIn;
+    glow += lineGlow(dRing, 0.035 * lw) * 0.5 * u._RingAlpha * fadeIn;
+    glow += 0.045 * smoothstep(0.96, 0.9, r) * u._RingAlpha * fadeIn;
 
-    // 바깥 고리 위 네 방향의 작은 보석 고리(마법진과 함께 돈다)
-    for (int k = 0; k < 4; k++)
-    {
-        float a = rot * 0.5 + float(k) * (PI * 0.5);
-        vec2 node = 0.9175 * vec2(cos(a), sin(a));
-        float dn = abs(length(p - node) - 0.03);
-        core += lineCore(dn, 0.006 * lw, px) * drawn;
-        glow += lineGlow(dn, 0.015 * lw) * 0.3 * drawn;
-    }
+    // 흐린 윤곽: 다 핀 꽃(발사 시점의 모양). 안쪽 겹에 가려진 바깥 꽃잎 선은 그리지 않는다.
+    float gOuter, gInner;
+    lotus(p, 1.0, count, angle, gOuter, gInner);
+    float guide = lineCore(abs(gOuter), 0.011 * lw, px) * step(0.0, gInner) + lineCore(abs(gInner), 0.011 * lw, px);
+    core += guide * 0.32 * u._GuideAlpha * fadeIn;
 
-    // 룬 띠: 반지름 0.755~0.845 사이를 _RuneCount칸으로 나눠 칸마다 글자 하나
-    float bandCenter = 0.80;
-    float bandHalf = 0.045;
-    if (abs(r - bandCenter) < bandHalf + 0.03)
-    {
-        float runeCount = max(u._RuneCount, 3.0);
-        float ang = atan(p.y, p.x) + rot;
-        float f = fract(ang / TAU) * runeCount;
-        float cell = floor(f);
-        float cellWidth = TAU * r / runeCount;
-        vec2 local = vec2((fract(f) - 0.5) * cellWidth, r - bandCenter);
-        uint h = hashU(ivec2(int(cell) + int(seed) * 131, 0x68e31da4));
+    // 피어나는 꽃: 중심에서 윤곽 크기까지 자라며, 덜 핀 동안은 꽃잎이 비틀려 있다.
+    float bloom = smoothstep(0.0, 1.0, t);
+    float s = mix(0.12, 1.0, bloom);
+    float twist = (1.0 - bloom) * (PI / count) * 0.6;
+    float bOuter, bInner;
+    lotus(p, s, count, angle + twist, bOuter, bInner);
+    float bloomAlpha = (0.55 + 0.45 * t) * fadeIn;
+    float petalLine = lineCore(abs(bOuter), 0.016 * lw, px) * step(0.0, bInner) + lineCore(abs(bInner), 0.016 * lw, px);
+    core += petalLine * 0.9 * bloomAlpha;
+    glow += (lineGlow(abs(bOuter), 0.03 * lw) * 0.35 * step(0.0, bInner) + lineGlow(abs(bInner), 0.03 * lw) * 0.25) * bloomAlpha;
+    // 꽃잎 안을 은은하게 채운다(안쪽 겹이 조금 더 밝다).
+    float fillOuter = 1.0 - smoothstep(-px, px, bOuter);
+    float fillInner = 1.0 - smoothstep(-px, px, bInner);
+    glow += (fillOuter * 0.1 + fillInner * 0.08) * bloomAlpha;
 
-        float glyphGlow;
-        float glyph = runeGlyph(local, min(bandHalf * 0.72, cellWidth * 0.3), h, 0.0055 * lw, px, glyphGlow);
-
-        // 글자는 칸 순서대로(시계 방향) 새겨진다.
-        float cellDrawn = smoothstep(0.0, 0.06, inscribe * 1.1 - sweep);
-        core += glyph * 0.85 * cellDrawn;
-        glow += lineGlow(glyphGlow, 0.012 * lw) * 0.22 * cellDrawn;
-
-        // 칸 사이의 작은 점
-        float dDot = length(vec2((fract(f) < 0.5 ? fract(f) : fract(f) - 1.0) * cellWidth, r - bandCenter));
-        core += lineCore(dDot, 0.006 * lw, px) * 0.6 * cellDrawn;
-    }
-
-    // 안쪽 고리
-    float dInner = abs(r - 0.715);
-    core += lineCore(dInner, 0.0065 * lw, px) * drawn;
-    glow += lineGlow(dInner, 0.02 * lw) * 0.3 * drawn;
-
-    // 육망성: 반지름 0.70 원에 내접한 정삼각형 두 개 = 중심에서 0.35 떨어진 현 여섯 개(원 안에서 잘린 직선이 곧 삼각형 변)
-    if (u._StarAlpha > 0.0 && r < 0.70)
-    {
-        float starRot = -rot * 0.6;
-        float dStar = 1e3;
-        for (int k = 0; k < 6; k++)
-        {
-            float a = starRot + float(k) * (PI / 3.0);
-            dStar = min(dStar, abs(dot(p, vec2(cos(a), sin(a))) - 0.35));
-        }
-        float starDrawn = smoothstep(0.0, 0.25, inscribe - 0.35) * u._StarAlpha;
-        core += lineCore(dStar, 0.005 * lw, px) * 0.65 * starDrawn;
-        glow += lineGlow(dStar, 0.018 * lw) * 0.25 * starDrawn;
-    }
-
-    // 중심 고리와 중심의 빛
-    float dCenter = abs(r - 0.16);
-    core += lineCore(dCenter, 0.006 * lw, px) * drawn;
-    glow += lineGlow(dCenter, 0.02 * lw) * 0.3 * drawn;
-    glow += exp(-r / 0.12) * u._CoreGlow * (0.35 + 0.65 * t) * inscribe;
-
-    // 마법진 안쪽을 은은하게 채워 범위를 알린다.
-    glow += 0.05 * smoothstep(0.96, 0.9, r) * drawn;
-
-    // 좁혀 드는 고리: 바깥 고리에서 중심으로 줄어들며 점점 밝아진다(발사 시점).
-    if (u._ShrinkRing > 0.0 && u._Duration > 0.0)
-    {
-        float shrinkR = mix(0.95, 0.12, t);
-        float dShrink = abs(r - shrinkR);
-        float shrinkAlpha = (0.45 + 0.55 * t) * smoothstep(0.0, 0.08, t) * smoothstep(0.6, 1.0, inscribe) * u._ShrinkRing;
-        core += lineCore(dShrink, 0.009 * lw, px) * shrinkAlpha;
-        glow += lineGlow(dShrink, 0.03 * lw) * 0.5 * shrinkAlpha;
-    }
+    // 꽃술과 중심의 빛
+    float dCenter = abs(r - 0.06 * lw);
+    core += lineCore(dCenter, 0.012 * lw, px) * fadeIn;
+    glow += exp(-r / 0.12) * u._CoreGlow * (0.35 + 0.65 * t) * fadeIn;
 
     // 발사 직전 전체가 밝아진다.
-    float charge = 1.0 + 0.6 * smoothstep(0.8, 1.0, t);
+    float charge = 1.0 + 0.6 * smoothstep(0.85, 1.0, t);
 
     // 아주 느린 맥동
-    float pulse = 0.88 + 0.12 * sin(age * 3.0 + seed);
+    float pulse = 0.9 + 0.1 * sin(age * 2.4 + seed * TAU);
 
     vec3 color = (u._CoreColor.rgb * min(core, 1.5) + u._Color.rgb * glow) * charge * pulse * u._Brightness * u._Color.a;
     outColor = vec4(clamp(color, 0.0, 1.0), 1.0);
