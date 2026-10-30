@@ -274,7 +274,8 @@
   <!-- ===================== 1페이즈: 요정 비비 사출 포격 조준 ===================== -->
   <!-- 표적 꽃 표식: VV_MagicCircle 셰이더가 수식으로 그린다(텍스처는 쓰지 않음). 바깥 고리 반지름(0.95 × 2.6칸)이 사출탄 폭발 반경 2.4칸과 맞도록 크기 5.2.
        밝은 연꽃이 _Duration(= CompProperties_Apocrypha.shellAimTicks / 60초) 동안 중심에서 흐린 윤곽까지 피어나 발사 시점을 알린다.
-       모트 나이를 조준 시작 틱에 맞추므로(ApocryphaShellAim) 불러온 뒤 다시 만들어도 꽃 크기가 남은 시간과 맞는다. -->
+       모트 나이를 조준 시작 틱에 맞추므로(ApocryphaShellAim) 불러온 뒤 다시 만들어도 꽃 크기가 남은 시간과 맞는다.
+       발사로 유지가 끊기면 다 핀 모양 그대로 fadeOutTime 동안 흐려진다(fadeOutUnmaintained). 사출탄이 12칸쯤 나는 시간(약 0.5초)과 맞춰 착탄 연꽃으로 이어지게 한다. -->
   <ThingDef ParentName="MoteBase">
     <defName>VV_Mote_ApocryphaAimTarget</defName>
     <thingClass>MoteAttached</thingClass>
@@ -282,9 +283,10 @@
     <drawOffscreen>true</drawOffscreen>
     <mote>
       <fadeInTime>0.15</fadeInTime>
-      <fadeOutTime>0.25</fadeOutTime>
+      <fadeOutTime>0.5</fadeOutTime>
       <solidTime>999999</solidTime>
       <needsMaintenance>True</needsMaintenance>
+      <fadeOutUnmaintained>true</fadeOutUnmaintained>
     </mote>
     <graphicData>
       <texPath>Things/Mote/Black</texPath>
@@ -307,7 +309,7 @@
   </ThingDef>
 
   <!-- 시전 꽃 표식: 보스 몸통 앞(표적 쪽)에 뜨는 작은 연꽃. 표적 표식과 같은 셰이더로, 바깥 고리 없이 충전될수록 피어나며 중심이 밝아진다.
-       작게 그리므로 선을 굵게(_LineScale) 하고 꽃잎 수를 줄인다. -->
+       작게 그리므로 선을 굵게(_LineScale) 하고 꽃잎 수를 줄인다. 발사로 유지가 끊기면 표적 표식처럼 흐려지며 사라진다. -->
   <ThingDef ParentName="MoteBase">
     <defName>VV_Mote_ApocryphaAimCharge</defName>
     <thingClass>MoteAttached</thingClass>
@@ -315,9 +317,10 @@
     <drawOffscreen>true</drawOffscreen>
     <mote>
       <fadeInTime>0.15</fadeInTime>
-      <fadeOutTime>0.3</fadeOutTime>
+      <fadeOutTime>0.35</fadeOutTime>
       <solidTime>999999</solidTime>
       <needsMaintenance>True</needsMaintenance>
+      <fadeOutUnmaintained>true</fadeOutUnmaintained>
     </mote>
     <graphicData>
       <texPath>Things/Mote/Black</texPath>

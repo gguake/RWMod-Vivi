@@ -275,6 +275,73 @@
 
   <!-- ======================== 요정 비비 사출탄 ======================== -->
 
+  <!-- 착탄 연꽃 문양: 조준 표식(VV_Mote_ApocryphaAimTarget)의 연꽃이 다 핀 모양으로 번쩍 켜져 돌며 퍼진다.
+       _Duration을 아주 짧게 두어 처음부터 만개·발사 직전 밝기로 그리고, 흐린 윤곽은 끈다.
+       바닐라는 MoteThrown만 rotationRate를 적용하므로 속도 0인 MoteThrown으로 둔다. 크기 = drawSize × (1 + growthRate × 초). -->
+  <ThingDef ParentName="MoteBase">
+    <defName>VV_Mote_GimmickLotusBurst</defName>
+    <thingClass>MoteThrown</thingClass>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <drawOffscreen>true</drawOffscreen>
+    <mote>
+      <fadeInTime>0.03</fadeInTime>
+      <solidTime>0.12</solidTime>
+      <fadeOutTime>0.55</fadeOutTime>
+      <growthRate>0.9</growthRate>
+    </mote>
+    <graphicData>
+      <texPath>Things/Mote/Black</texPath>
+      <graphicClass>Graphic_MoteWithAgeSecs</graphicClass>
+      <shaderType>VV_MagicCircle</shaderType>
+      <color>(1, 0.84, 0.45, 1)</color>
+      <shaderParameters>
+        <_CoreColor>(1, 0.94, 0.75, 1)</_CoreColor>
+        <_Duration>0.01</_Duration>
+        <_PetalCount>8</_PetalCount>
+        <_RingAlpha>0.7</_RingAlpha>
+        <_GuideAlpha>0</_GuideAlpha>
+        <_CoreGlow>0.6</_CoreGlow>
+        <_FadeInSecs>0.01</_FadeInSecs>
+        <_LineScale>1.3</_LineScale>
+        <_Brightness>0.85</_Brightness>
+      </shaderParameters>
+      <drawSize>(5.2, 5.2)</drawSize>
+    </graphicData>
+  </ThingDef>
+
+  <!-- 착탄 별빛: 번쩍였다가 돌며 줄어드는 네 갈래 별(두 장을 45° 엇갈려 겹치면 여덟 갈래).
+       폭발 빛(바닐라 폭발 칸 플렉은 약 1초 밝다)에 묻히지 않도록 폭발이 잦아들 때 마무리 반짝임으로 쓴다. -->
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>VV_Fleck_GimmickStarGlint</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0.03</fadeInTime>
+    <solidTime>0.06</solidTime>
+    <fadeOutTime>0.32</fadeOutTime>
+    <growthRate>-3</growthRate>
+    <drawOffscreen>true</drawOffscreen>
+    <graphicData>
+      <texPath>VFX/VV_ScentTwinkle</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+  </FleckDef>
+
+  <!-- 착탄 요정 가루: 사방으로 퍼진 뒤 위쪽 가속으로 휘어 떠오르는 빛 알갱이 무리(스프레이어 color로 파스텔 물들임).
+       반짝임(VV_ScentTwinkle)은 빛줄기가 가늘어 낮에는 점으로만 보이므로 알갱이 무리 텍스처를 쓴다. -->
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>VV_Fleck_GimmickFairyDust</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0.1</fadeInTime>
+    <solidTime>1.1</solidTime>
+    <fadeOutTime>1.0</fadeOutTime>
+    <acceleration>(0, 0, 1.0)</acceleration>
+    <graphicData>
+      <texPath>VFX/VV_ScentPollen</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+  </FleckDef>
+
   <!-- 발사: 보스 몸통에서 금빛 분출 -->
   <EffecterDef>
     <defName>VV_Effecter_FairyShellLaunch</defName>
@@ -327,10 +394,12 @@
     </children>
   </EffecterDef>
 
-  <!-- 착탄: 금빛 섬광 + 폭발 반경 고리 + 요정 출현 고리 + 꽃잎, 요정 소멸음 -->
+  <!-- 착탄: 금빛 섬광 + 폭발 반경 고리 + 요정 출현 고리 + 꽃잎, 요정 소멸음.
+       그 위에 요정다운 연출을 덧입힌다: 연꽃 문양 개화(0틱) + 파스텔 요정 가루(0틱) + 피어오르는 빛 알갱이(30·46틱)
+       + 폭발이 잦아들 때 남은 반짝임(40·50틱)과 마무리 별빛(62틱). 지연 자식이 모두 터지도록 66틱 유지한다. -->
   <EffecterDef>
     <defName>VV_Effecter_FairyShellImpact</defName>
-    <maintainTicks>20</maintainTicks>
+    <maintainTicks>66</maintainTicks>
     <children>
       <li>
         <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
@@ -390,6 +459,163 @@
         <speed>0.5~2</speed>
         <scale>0.3~0.6</scale>
         <color>(1, 0.9, 0.55, 1)</color>
+      </li>
+      <!-- 요정 연출: 연꽃 문양 개화 -->
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>VV_Mote_GimmickLotusBurst</moteDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <absoluteAngle>true</absoluteAngle>
+        <rotation>0</rotation>
+        <rotationRate>45~70</rotationRate>
+      </li>
+      <!-- 요정 연출: 파스텔 요정 가루(분홍·하늘·연보라) -->
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickFairyDust</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>3~4</burstCount>
+        <positionRadius>0.4</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>0.5~1.4</speed>
+        <rotation>0~360</rotation>
+        <rotationRate>-60~60</rotationRate>
+        <scale>0.9~1.4</scale>
+        <color>(1, 0.62, 0.86, 1)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickFairyDust</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>3~4</burstCount>
+        <positionRadius>0.4</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>0.5~1.4</speed>
+        <rotation>0~360</rotation>
+        <rotationRate>-60~60</rotationRate>
+        <scale>0.9~1.4</scale>
+        <color>(0.62, 0.9, 1, 1)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickFairyDust</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>3~4</burstCount>
+        <positionRadius>0.4</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>0.5~1.4</speed>
+        <rotation>0~360</rotation>
+        <rotationRate>-60~60</rotationRate>
+        <scale>0.9~1.4</scale>
+        <color>(0.8, 0.68, 1, 1)</color>
+      </li>
+      <!-- 요정 연출: 폭발이 잦아들 때 곳곳에 남은 반짝임(40·50틱) -->
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggeredDelayed</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickStarGlint</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <initialDelayTicks>40</initialDelayTicks>
+        <burstCount>2~3</burstCount>
+        <positionRadius>2</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <rotation>0~360</rotation>
+        <rotationRate>-90~90</rotationRate>
+        <scale>1.2~1.6</scale>
+        <color>(1, 0.95, 0.85, 1)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggeredDelayed</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickStarGlint</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <initialDelayTicks>50</initialDelayTicks>
+        <burstCount>2~3</burstCount>
+        <positionRadius>2</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <rotation>0~360</rotation>
+        <rotationRate>-90~90</rotationRate>
+        <scale>1.2~1.6</scale>
+        <color>(1, 0.95, 0.85, 1)</color>
+      </li>
+      <!-- 요정 연출: 마무리 별빛(섬광 심 + 두 장 겹친 큰 별 + 45° 엇갈린 작은 별). 같은 별을 겹쳐 가는 빛줄기를 밝힌다. -->
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggeredDelayed</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickFlash</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <initialDelayTicks>62</initialDelayTicks>
+        <scale>1.6</scale>
+        <color>(1, 0.97, 0.88, 0.9)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggeredDelayed</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickStarGlint</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <initialDelayTicks>62</initialDelayTicks>
+        <absoluteAngle>true</absoluteAngle>
+        <rotation>0</rotation>
+        <rotationRate>120</rotationRate>
+        <scale>3.2</scale>
+        <color>(1, 0.95, 0.8, 1)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggeredDelayed</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickStarGlint</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <initialDelayTicks>62</initialDelayTicks>
+        <absoluteAngle>true</absoluteAngle>
+        <rotation>0</rotation>
+        <rotationRate>120</rotationRate>
+        <scale>3.2</scale>
+        <color>(1, 0.95, 0.8, 1)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggeredDelayed</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickStarGlint</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <initialDelayTicks>62</initialDelayTicks>
+        <absoluteAngle>true</absoluteAngle>
+        <rotation>45</rotation>
+        <rotationRate>120</rotationRate>
+        <scale>1.8</scale>
+        <color>(1, 1, 1, 0.9)</color>
+      </li>
+      <!-- 요정 연출: 폭발 범위 곳곳에서 피어오르는 파스텔 빛 알갱이(30틱 분홍, 46틱 하늘) -->
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggeredDelayed</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickMote</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <initialDelayTicks>30</initialDelayTicks>
+        <burstCount>5~7</burstCount>
+        <positionRadius>2.2</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>-25~25</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>0.3~0.7</speed>
+        <rotation>0~360</rotation>
+        <rotationRate>-60~60</rotationRate>
+        <scale>0.35~0.55</scale>
+        <color>(1, 0.62, 0.86, 0.9)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggeredDelayed</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickMote</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <initialDelayTicks>46</initialDelayTicks>
+        <burstCount>5~7</burstCount>
+        <positionRadius>2.2</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>-25~25</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>0.3~0.7</speed>
+        <rotation>0~360</rotation>
+        <rotationRate>-60~60</rotationRate>
+        <scale>0.35~0.55</scale>
+        <color>(0.62, 0.9, 1, 0.9)</color>
       </li>
     </children>
   </EffecterDef>
