@@ -39,6 +39,7 @@
         public const string VV_Comms_AmberCoreRequestHostile = nameof(VV_Comms_AmberCoreRequestHostile);
         public const string VV_Comms_AmberCoreRequestActive = nameof(VV_Comms_AmberCoreRequestActive);
         public const string VV_Comms_AmberCoreRequestCoreExists = nameof(VV_Comms_AmberCoreRequestCoreExists);
+        public const string VV_Comms_AmberCoreRequestConditions = nameof(VV_Comms_AmberCoreRequestConditions);
         public const string VV_Comms_AmberCoreRequestResult = nameof(VV_Comms_AmberCoreRequestResult);
         public const string VV_Comms_AmberCoreRequestNoQuest = nameof(VV_Comms_AmberCoreRequestNoQuest);
 

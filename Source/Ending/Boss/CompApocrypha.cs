@@ -75,7 +75,7 @@ namespace VVRace
         public float needleTargetRange = 24f;
         public float needleRange = 32f;
         public float needleHalfWidth = 1.5f;
-        public float needleDamage = 40f;
+        public float needleDamage = 80f;
         public float needleArmorPenetration = 0.8f;
 
         // 1페이즈: 배회와 주기적 접근

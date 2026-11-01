@@ -90,6 +90,23 @@ namespace VVRace
 
         public override AcceptanceReport DeconstructibleBy(Faction faction) => EverflowerComp.AttunementLevel == 0;
 
+        // 제단에 보관된 〈영원꽃 완전 동화〉 공명자를 꽃 앞 공중에 그리고(성장 수조가 안의 폰을 그리는 방식), 꽃봉오리와 잇는 빛줄기를 더한다.
+        public override void DynamicDrawPhaseAt(DrawPhase phase, Vector3 drawLoc, bool flip = false)
+        {
+            var resonator = EverflowerComp.EnshrinedAltar?.HeldResonator;
+            var assimilation = Hediff_EverflowerAssimilation.Of(resonator);
+            if (assimilation != null && assimilation.everflower == this)
+            {
+                resonator.Drawer.renderer.DynamicDrawPhaseAt(phase, assimilation.PawnDrawPos, Rot4.South, neverAimWeapon: true);
+                if (phase == DrawPhase.Draw)
+                {
+                    assimilation.DrawLink();
+                }
+            }
+
+            base.DynamicDrawPhaseAt(phase, drawLoc, flip);
+        }
+
         public override ushort PathWalkCostFor(Pawn p)
         {
             if (EverflowerComp.AttunementLevel >= 3) { return 36; }

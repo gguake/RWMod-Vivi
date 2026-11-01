@@ -38,6 +38,13 @@ namespace VVRace
                 return new AcceptanceReport(LocalizeString_EndingCore.VV_Comms_AmberCoreRequestCoreExists.Translate());
             }
 
+            // 밀서에 적힌 진행 조건(비비 수·기지 가치)을 갖춰야 연방이 일을 맡긴다. 코어가 있어야 제단을 지을 수 있으므로 〈대조율 의식〉도 이 조건 뒤에 열린다.
+            var unmet = ViviEndingRequirements.GetUnmetReason();
+            if (unmet != null)
+            {
+                return new AcceptanceReport(unmet);
+            }
+
             return true;
         }
 

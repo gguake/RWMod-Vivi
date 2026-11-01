@@ -282,7 +282,8 @@
     </comps>
   </ThingDef>
 
-  <!-- 거대 엘텍스 바늘의 관통 피해(찌르기). 피해량·방어 관통은 CompProperties_Apocrypha의 needleDamage/needleArmorPenetration을 쓴다. -->
+  <!-- 거대 엘텍스 바늘의 관통 피해(찌르기). 피해량·방어 관통은 CompProperties_Apocrypha의 needleDamage/needleArmorPenetration을 쓴다.
+       구조물(세력 무관)은 폰이 받는 피해의 2배를 받는다. -->
   <DamageDef>
     <defName>VV_GiantNeedlePierce</defName>
     <label>giant needle</label>
@@ -295,7 +296,8 @@
     <armorCategory>Sharp</armorCategory>
     <stabChanceOfForcedInternal>0.6</stabChanceOfForcedInternal>
     <overkillPctToDestroyPart>0.4~1.0</overkillPctToDestroyPart>
-    <defaultDamage>40</defaultDamage>
+    <defaultDamage>80</defaultDamage>
     <defaultArmorPenetration>0.8</defaultArmorPenetration>
+    <buildingDamageFactor>2</buildingDamageFactor>
   </DamageDef>
 </Defs>

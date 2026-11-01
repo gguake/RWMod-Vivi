@@ -2,7 +2,7 @@
 <Defs>
   <!-- 〈비비 연방의 밀서〉 퀘스트를 주는 사건. 밀서는 도착 조건(1~4단계 잔향 편지 확인·정착지의 영원꽃 4단계·비적대 연방)을 갖추면
        창구(VVRace.ViviEndingQuest)가 1~2일 뒤 확정으로 보내므로 스토리텔러는 고르지 않는다(baseChance 0). 개발자 도구로 바로 보낼 때만 쓴다.
-       비비 수·기지 가치는 밀서에 적히는 진행 조건이며 〈대조율 의식〉을 시작할 때 확인한다(VVRace.ViviEndingRequirements).
+       비비 수·기지 가치는 밀서에 적히는 진행 조건이며 통신기로 고대 호박 코어 일거리를 의뢰할 때 확인한다(VVRace.ViviEndingRequirements).
        서신 편지는 밀서 퀘스트가 직접 보내므로 사건 편지는 없다. -->
   <IncidentDef ParentName="GiveQuestBase">
     <defName>VV_GiveQuest_ViviMissive</defName>

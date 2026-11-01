@@ -12,7 +12,7 @@ namespace VVRace
         public const int MaxEchoStage = 5;
 
         // 다음 편지가 지금 조율 단계의 편지일 때(밀린 편지가 아닐 때) 일반 의식 한 번에 나올 확률.
-        private const float CurrentLevelEchoChance = 0.5f;
+        private const float CurrentLevelEchoChance = 0.15f;
 
         private static readonly string[] EchoLetterLabelKeys =
         {

@@ -7,8 +7,8 @@
 <VV_Quest_EndingName>만개하는 여명</VV_Quest_EndingName>
 <VV_Quest_EndingDesc>제단 위의 영원꽃이 다섯 번째 개화를 맞아 마지막 개화를 위한 마나를 응축하고 있습니다.
 \n응축이 끝날 때까지 마나 기둥에 이끌린 적들로부터 영원꽃 제단을 지켜내십시오. 응축이 완성되면 공명자가 영원꽃에서 〈여왕의 대관식〉을 치러 영원꽃을 완전히 개화시킬 수 있습니다.
-\n〈대조율 의식〉을 치른 공명자는 아포크리파를 토벌할 때까지 〈영원꽃 완전 동화〉 상태로 영원꽃 앞에 떠 있습니다. 공명자도 함께 지켜내십시오.
-\n제단 위의 영원꽃을 잃거나, 동화 중인 공명자가 쓰러지거나 죽으면 퀘스트는 실패합니다.</VV_Quest_EndingDesc>
+\n〈대조율 의식〉을 치른 공명자는 아포크리파를 토벌할 때까지 〈영원꽃 완전 동화〉 상태로 제단 안에 정지된 채 영원꽃 앞에 떠 있습니다.
+\n제단 위의 영원꽃을 잃으면 퀘스트는 실패합니다.</VV_Quest_EndingDesc>
 <VV_Quest_EndingCalmExpiry>평화 기간 남은 시간: {0}</VV_Quest_EndingCalmExpiry>
 <VV_Quest_EndingCalmExpiryTip>평화 기간이 끝나는 때: {0}</VV_Quest_EndingCalmExpiryTip>
 
@@ -18,11 +18,11 @@
 \n이 파동을 감지한 비비 연방의 대표로부터 긴급한 전갈이 도착했습니다.
 \n"오랜 세월 동안 그 어떤 둥지도 영원꽃을 이 경지까지 일구어내지 못했습니다. 전설에 따르면, 옛 제국의 거대한 영원꽃은 평범한 흙이 아닌 고대의 마나 회로가 새겨진 영원꽃 제단 위에서만 진정한 모습을 드러냈다고 합니다. 하지만 기억하십시오. 제단 위에서 다섯 번째 개화가 시작되는 순간, 행성 전역의 외지인들과 거대 말벌 무리가 그 파동을 감지하고 몰려들 것입니다."
 \n이제 영원꽃 제단을 건설할 수 있습니다. 제단의 핵심 재료인 고대 호박 코어는 비비 연방이 지키고 있으니, 통신기로 연방에 연락해 연방이 맡기는 일을 완수하면 얻을 수 있습니다.</VV_Letter_EndingFederationMissive>
-<VV_Letter_EndingFederationMissiveConditions>밀서에는 연방이 다섯 번째 개화를 지지하기 위한 조건도 적혀 있습니다. 제단 위에서 〈대조율 의식〉을 치르려면 다음 조건을 모두 갖춰야 합니다.
+<VV_Letter_EndingFederationMissiveConditions>밀서에는 연방이 다섯 번째 개화를 지지하기 위한 조건도 적혀 있습니다. 통신기로 고대 호박 코어를 대가로 일거리를 의뢰하려면 정착지가 다음 조건을 모두 갖춰야 합니다.
 \n  - 정착지 소속 비비 {VIVI}명 이상
 \n  - 기지 가치 {WEALTH} 이상
 \n진행 상황은 퀘스트 탭의 〈비비 연방의 밀서〉에서 확인할 수 있습니다.</VV_Letter_EndingFederationMissiveConditions>
-<VV_Quest_EndingMissiveConditionsHeader>엔딩 진행 상황 (진행 조건을 모두 갖춰야 〈대조율 의식〉을 치를 수 있습니다)</VV_Quest_EndingMissiveConditionsHeader>
+<VV_Quest_EndingMissiveConditionsHeader>엔딩 진행 상황 (진행 조건을 모두 갖춰야 고대 호박 코어 일거리를 의뢰할 수 있습니다)</VV_Quest_EndingMissiveConditionsHeader>
 <VV_Quest_EndingMissiveConditionVivi>정착지 소속 비비: {0} / {1}명</VV_Quest_EndingMissiveConditionVivi>
 <VV_Quest_EndingMissiveConditionWealth>기지 가치: {0} / {1}</VV_Quest_EndingMissiveConditionWealth>
 <VV_Quest_EndingMissiveStepAltar>영원꽃 제단 건설</VV_Quest_EndingMissiveStepAltar>
@@ -68,6 +68,7 @@
 <VV_Comms_AmberCoreRequestHostile>비비 연방과 적대 관계입니다</VV_Comms_AmberCoreRequestHostile>
 <VV_Comms_AmberCoreRequestActive>이미 의뢰를 받았습니다</VV_Comms_AmberCoreRequestActive>
 <VV_Comms_AmberCoreRequestCoreExists>고대 호박 코어가 이미 존재합니다</VV_Comms_AmberCoreRequestCoreExists>
+<VV_Comms_AmberCoreRequestConditions>밀서의 진행 조건을 갖추지 못했습니다: {0}</VV_Comms_AmberCoreRequestConditions>
 <VV_Comms_AmberCoreRequestResult>{LEADER}(이)가 옛 제국의 유물을 내어 줄 대가로 일을 맡겼습니다. 의뢰를 완수하면 비비 연방이 고대 호박 코어를 보내올 것입니다.
 \n퀘스트 탭에서 의뢰를 확인하십시오.</VV_Comms_AmberCoreRequestResult>
 <VV_Comms_AmberCoreRequestNoQuest>{LEADER}: "지금은 맡길 만한 일이 없습니다. 나중에 다시 연락해 주십시오."</VV_Comms_AmberCoreRequestNoQuest>

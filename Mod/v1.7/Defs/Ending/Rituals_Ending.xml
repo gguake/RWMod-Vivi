@@ -8,8 +8,8 @@
     <defName>VV_GrandAttunement</defName>
     <label>grand attunement</label>
     <description>The resonator links the altar's ancient mana circuits to the everflower, awakening its fifth bloom. The everflower begins condensing mana for its final bloom, and enemies drawn by the mana waves will relentlessly raid the colony while the condensation continues.
-\nOnce the ritual begins, the resonator enters everflower full assimilation: she floats before the everflower until Apocrypha is defeated. Her needs do not decrease, but she can still be harmed. If she is downed or killed, the ritual is called off, or the ending fails once the condensation has begun.
-\nCan only be performed on a level 4 everflower enshrined on the everflower altar, once the conditions in the vivi federation's missive are met.</description>
+\nOnce the ritual begins, the resonator enters everflower full assimilation: she is held within the altar as if in cryptosleep and floats before the everflower until Apocrypha is defeated. Her needs and age are frozen and nothing can harm her.
+\nCan only be performed on a level 4 everflower enshrined on the everflower altar.</description>
     <issue>Ritual</issue>
     <preceptClass>Precept_Ritual</preceptClass>
     <visible>false</visible>

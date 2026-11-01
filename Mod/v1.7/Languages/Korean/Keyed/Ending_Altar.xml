@@ -26,6 +26,7 @@
 <!-- 정보창 -->
 <VV_Inspector_AltarEnshrinedEverflower>안치된 영원꽃: 조율 {LEVEL}단계</VV_Inspector_AltarEnshrinedEverflower>
 <VV_Inspector_AltarNoEverflower>안치된 영원꽃 없음</VV_Inspector_AltarNoEverflower>
+<VV_Inspector_AltarHeldResonator>영원꽃과 완전히 동화한 공명자: {PAWN_labelShort}</VV_Inspector_AltarHeldResonator>
 <VV_Inspector_EverflowerEnshrined>영원꽃 제단에 안치됨</VV_Inspector_EverflowerEnshrined>
 <VV_Inspector_EverflowerAttunementLevelOnly>조율: {LEVEL}단계</VV_Inspector_EverflowerAttunementLevelOnly>
 

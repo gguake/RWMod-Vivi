@@ -104,16 +104,6 @@ namespace VVRace
                 }
             }
 
-            // 엔딩을 시작하는 의식은 비비 연방의 밀서에 적힌 진행 조건(비비 수·기지 가치)을 모두 갖춰야 한다.
-            if (Def.startsEndingQuest)
-            {
-                var reason = ViviEndingRequirements.GetUnmetReason();
-                if (reason != null)
-                {
-                    return reason;
-                }
-            }
-
             return true;
         }
     }

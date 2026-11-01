@@ -10,8 +10,9 @@ namespace VVRace
     // 영원꽃 제단. ArcanePlantPot을 상속해 중앙 칸(Position)에만 영원꽃을 안치할 수 있다(5x5, Standable).
     // [계약] public 시그니처는 다른 모듈이 호출하므로 바꾸지 말 것.
     // 화분을 상속하므로 식물 대신 피해를 받고, 제단이 사라지면 영원꽃을 순간이동시키며, 식물과 제단이 서로를 제거하지 않도록 하는 처리를 그대로 이어받는다.
+    // 〈영원꽃 완전 동화〉 중인 대조율 공명자를 동면관처럼 안에 보관한다(보관된 폰은 정지되고, 모습은 영원꽃이 공중에 그린다).
     [StaticConstructorOnStartup]
-    public class Building_DreamumAltar : ArcanePlantPot
+    public class Building_DreamumAltar : ArcanePlantPot, IThingHolder, ISuspendableThingHolder
     {
         // 제단에 안치하려면 영원꽃 조율이 이 단계 이상이어야 한다.
         public const int RequiredAttunementLevel = 4;
@@ -26,6 +27,73 @@ namespace VVRace
             {
                 frameBuilding.canBeDamagedByAttacks = false;
                 frameBuilding.ai_neverTrashThis = true;
+            }
+        }
+
+        // 〈영원꽃 완전 동화〉 중인 공명자 보관함. 동면관처럼 내용물이 정지된다(욕구·나이가 멈추고 피해·지시를 받지 않음).
+        private ThingOwner<Pawn> _resonatorHolder;
+
+        public Building_DreamumAltar()
+        {
+            _resonatorHolder = new ThingOwner<Pawn>(this, oneStackOnly: true);
+        }
+
+        // 보관 중인 공명자(없으면 null).
+        public Pawn HeldResonator => _resonatorHolder.Count > 0 ? _resonatorHolder[0] : null;
+
+        public bool IsContentsSuspended => true;
+
+        public ThingOwner GetDirectlyHeldThings() => _resonatorHolder;
+
+        public void GetChildHolders(List<IThingHolder> outChildren)
+        {
+            ThingOwnerUtility.AppendThingHoldersFromThings(outChildren, GetDirectlyHeldThings());
+        }
+
+        // 공명자를 맵에서 꺼내 보관한다. 의식 로드에는 그대로 남는다(대조율 의식은 공명자가 보관된 채 끝까지 진행된다).
+        public bool HoldResonator(Pawn pawn)
+        {
+            if (pawn == null || HeldResonator != null) { return false; }
+
+            if (pawn.Spawned)
+            {
+                pawn.DeSpawnOrDeselect();
+            }
+
+            return _resonatorHolder.TryAdd(pawn);
+        }
+
+        // 보관한 공명자를 cell(영원꽃 앞 칸) 근처로 내보낸다.
+        public void EjectResonator(Pawn pawn, IntVec3 cell)
+        {
+            if (pawn == null || !_resonatorHolder.Contains(pawn) || !Spawned) { return; }
+
+            var target = cell.IsValid && cell.InBounds(Map) ? cell : FrontCell;
+            if (_resonatorHolder.TryDrop(pawn, target, Map, ThingPlaceMode.Near, out var dropped) && dropped != null)
+            {
+                dropped.Rotation = Rot4.South;
+            }
+        }
+
+        // 제단이 사라지면 보관 중인 공명자를 밖으로 내보낸다(동화는 창구 틱에서 풀린다).
+        public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
+        {
+            if (_resonatorHolder.Any && Spawned)
+            {
+                _resonatorHolder.TryDropAll(Position + IntVec3.South, Map, ThingPlaceMode.Near);
+            }
+
+            base.DeSpawn(mode);
+        }
+
+        public override void ExposeData()
+        {
+            base.ExposeData();
+            Scribe_Deep.Look(ref _resonatorHolder, "resonatorHolder", this);
+
+            if (Scribe.mode == LoadSaveMode.PostLoadInit && _resonatorHolder == null)
+            {
+                _resonatorHolder = new ThingOwner<Pawn>(this, oneStackOnly: true);
             }
         }
 
@@ -143,6 +211,12 @@ namespace VVRace
             if (everflower != null)
             {
                 sb.AppendInNewLine(LocalizeString_EndingAltar.VV_Inspector_AltarEnshrinedEverflower.Translate(everflower.AttunementLevel.Named("LEVEL")));
+            }
+
+            var resonator = HeldResonator;
+            if (resonator != null)
+            {
+                sb.AppendInNewLine(LocalizeString_EndingAltar.VV_Inspector_AltarHeldResonator.Translate(resonator.Named("PAWN")));
             }
             else
             {

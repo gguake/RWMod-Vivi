@@ -243,17 +243,6 @@ namespace VVRace
             }
         }
 
-        // 〈영원꽃 완전 동화〉 중이면 영원꽃 꽃봉오리와 잇는 빛줄기를 그린다.
-        public override void PostDraw()
-        {
-            base.PostDraw();
-
-            if (isRoyal)
-            {
-                Hediff_EverflowerAssimilation.Of((Pawn)parent)?.DrawLink();
-            }
-        }
-
         public override void PostDrawExtraSelectionOverlays()
         {
             if (AttunementActive)

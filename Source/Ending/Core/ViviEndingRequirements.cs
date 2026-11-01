@@ -6,7 +6,8 @@ using Verse;
 namespace VVRace
 {
     // 〈비비 연방의 밀서〉에 적힌 엔딩 진행 조건. 밀서 자체는 조율 4단계와 1~4단계 잔향 편지만 갖추면 잠시 뒤 확정으로 도착하고(ViviEndingQuest.TickMissiveArrival),
-    // 플레이어 소속 비비 수·기지 가치는 밀서 편지와 퀘스트 탭에 진행 조건으로 보여 준 뒤 〈대조율 의식〉을 시작할 때 확인한다.
+    // 플레이어 소속 비비 수·기지 가치는 밀서 편지와 퀘스트 탭에 진행 조건으로 보여 주고, 통신기로 고대 호박 코어 일거리를 의뢰할 때 확인한다
+    // (코어가 있어야 제단을 지을 수 있으므로 〈대조율 의식〉도 자연히 이 조건 뒤에 열린다).
     public static class ViviEndingRequirements
     {
         public const int MinViviCount = 10;
@@ -62,7 +63,7 @@ namespace VVRace
             return sb.ToString();
         }
 
-        // 〈대조율 의식〉 기즈모의 비활성 사유(조건을 모두 갖췄으면 null).
+        // 통신기 고대 호박 코어 의뢰 선택지의 비활성 사유(조건을 모두 갖췄으면 null).
         public static string GetUnmetReason()
         {
             var unmet = new List<string>();
@@ -82,7 +83,7 @@ namespace VVRace
 
             if (unmet.Count == 0) { return null; }
 
-            return LocalizeString_EndingRituals.VV_FailReason_GrandAttunementRequirements.Translate(unmet.ToCommaList()).Resolve();
+            return LocalizeString_EndingCore.VV_Comms_AmberCoreRequestConditions.Translate(unmet.ToCommaList()).Resolve();
         }
 
         private static void AppendLine(StringBuilder sb, bool met, string text)

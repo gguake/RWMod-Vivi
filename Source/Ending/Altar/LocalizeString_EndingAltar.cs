@@ -22,6 +22,7 @@
 
         public const string VV_Inspector_AltarEnshrinedEverflower = nameof(VV_Inspector_AltarEnshrinedEverflower);
         public const string VV_Inspector_AltarNoEverflower = nameof(VV_Inspector_AltarNoEverflower);
+        public const string VV_Inspector_AltarHeldResonator = nameof(VV_Inspector_AltarHeldResonator);
         public const string VV_Inspector_EverflowerEnshrined = nameof(VV_Inspector_EverflowerEnshrined);
         public const string VV_Inspector_EverflowerAttunementLevelOnly = nameof(VV_Inspector_EverflowerAttunementLevelOnly);
 

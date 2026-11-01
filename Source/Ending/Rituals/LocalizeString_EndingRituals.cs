@@ -8,7 +8,6 @@
         public const string VV_FailReason_GrandAttunementInProgress = nameof(VV_FailReason_GrandAttunementInProgress);
         public const string VV_FailReason_GrandAttunementCompleted = nameof(VV_FailReason_GrandAttunementCompleted);
         public const string VV_FailReason_GrandAttunementFailed = nameof(VV_FailReason_GrandAttunementFailed);
-        public const string VV_FailReason_GrandAttunementRequirements = nameof(VV_FailReason_GrandAttunementRequirements);
 
         // 〈영원꽃 완전 동화〉(대조율 의식 공명자, {PAWN}): 시작·풀림·의식 중 끊어짐 메시지, 다른 의식에 배정할 수 없는 사유
         public const string VV_Message_AssimilationBegan = nameof(VV_Message_AssimilationBegan);

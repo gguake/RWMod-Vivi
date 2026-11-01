@@ -302,7 +302,7 @@ namespace VVRace
                 if (!_questBoss) { return null; }
 
                 var pawn = ViviEndingQuest.Current?.AssimilatedPawn;
-                return pawn != null && pawn.Spawned && pawn.Map == Map ? pawn : null;
+                return pawn != null && pawn.MapHeld == Map ? pawn : null;
             }
         }
 
@@ -341,10 +341,12 @@ namespace VVRace
                 ApocryphaEffecterDefOf.VV_Effecter_ApocryphaVanish.Spawn(Position, map, 2f).Cleanup();
 
                 // 마지막 영혼까지 스며든 공명자가 크게 빛난다(이어서 풀려 내려온다).
-                var resonator = AbsorbingResonator;
-                if (resonator != null)
+                var assimilation = Hediff_EverflowerAssimilation.Of(AbsorbingResonator);
+                if (assimilation != null)
                 {
-                    EverflowerAssimilationDefOf.VV_Effecter_AssimilationAbsorb?.Spawn(resonator, map).Cleanup();
+                    var body = assimilation.BodyPoint;
+                    var cell = body.ToIntVec3().ClampInsideMap(map);
+                    EverflowerAssimilationDefOf.VV_Effecter_AssimilationAbsorb?.Spawn(cell, map, (body - cell.ToVector3Shifted()).WithY(0f)).Cleanup();
                 }
             }
 

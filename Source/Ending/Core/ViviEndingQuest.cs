@@ -54,7 +54,7 @@ namespace VVRace
         // 밀서 도착 예정 틱(-1: 아직 도착 조건을 갖춘 적 없음)
         private int _missiveDueTick = -1;
 
-        // 〈영원꽃 완전 동화〉 중인 공명자(대조율 의식을 시작한 로열 비비). 공성~보스전 동안 영원꽃 앞 공중에 고정되며, 쓰러지거나 죽으면 엔딩이 실패한다.
+        // 〈영원꽃 완전 동화〉 중인 공명자(대조율 의식을 시작한 로열 비비). 아포크리파 토벌까지 제단 안에 정지된 채 보관된다.
         private Pawn _assimilated;
 
         // 동화 등록부(Hediff_EverflowerAssimilation)는 게임마다 새로 채운다(새 게임·불러오기 모두 이 창구를 새로 만든다).
@@ -257,6 +257,19 @@ namespace VVRace
                 TickHeldPawns(now);
             }
 
+            // 제단에 보관된 공명자는 틱이 돌지 않으므로 동화의 판단·연출을 여기서 돌린다.
+            if (_assimilated != null)
+            {
+                try
+                {
+                    Hediff_EverflowerAssimilation.Of(_assimilated)?.TickHeld(now);
+                }
+                catch (Exception ex)
+                {
+                    Log.ErrorOnce($"[ViViRace] everflower assimilation tick failed: {ex}", 0x5645_4E30);
+                }
+            }
+
             try
             {
                 TickAltarPulse(now);
@@ -440,8 +453,13 @@ namespace VVRace
         {
             if (resonator == null || everflower == null || Stage != ViviEndingStage.AltarUnlocked) { return; }
 
-            _assimilated = resonator;
-            Hediff_EverflowerAssimilation.Begin(resonator, everflower);
+            var altar = everflower.EverflowerComp?.EnshrinedAltar;
+            if (altar == null) { return; }
+
+            if (Hediff_EverflowerAssimilation.Begin(resonator, everflower, altar) != null)
+            {
+                _assimilated = resonator;
+            }
         }
 
         // [동화 헤디프 호출] 공중에 그대로 있어야 하는지: 대조율 의식이 진행 중이거나(밀서 단계), 엔딩이 공성~보스전이고 그 영원꽃이 앵커일 때.

@@ -7,8 +7,8 @@
 <VV_Quest_EndingName>Dawn in full bloom</VV_Quest_EndingName>
 <VV_Quest_EndingDesc>The everflower on the altar has entered its fifth bloom and is condensing mana for its final bloom.
 \nDefend the everflower altar from the enemies drawn by the mana pillar until the condensation is complete. Once it is complete, the resonator can hold the queen's coronation at the everflower to bring it into full bloom.
-\nThe resonator who held the grand attunement floats before the everflower in full assimilation until Apocrypha is defeated. Protect her as well.
-\nIf the everflower on the altar is lost, or the assimilated resonator is downed or killed, the quest fails.</VV_Quest_EndingDesc>
+\nThe resonator who held the grand attunement remains suspended within the altar in full assimilation, floating before the everflower, until Apocrypha is defeated.
+\nIf the everflower on the altar is lost, the quest fails.</VV_Quest_EndingDesc>
 <VV_Quest_EndingCalmExpiry>Calm ends in {0}</VV_Quest_EndingCalmExpiry>
 <VV_Quest_EndingCalmExpiryTip>The calm ends on {0}</VV_Quest_EndingCalmExpiryTip>
 
@@ -18,11 +18,11 @@
 \nSensing these waves, the representative of the vivi federation has sent an urgent message.
 \n"For ages, no hive has ever raised an everflower to such heights. Legend says the great everflower of the old empire revealed its true form only upon an everflower altar carved with ancient mana circuits, never upon common soil. But remember this: the moment the fifth bloom begins upon the altar, outlanders and titanic hornet swarms across the planet will sense its waves and converge upon you."
 \nYou can now build the everflower altar. The vivi federation guards the ancient amber core at its heart; contact the federation via comms console and complete the task they entrust to you to obtain it.</VV_Letter_EndingFederationMissive>
-<VV_Letter_EndingFederationMissiveConditions>The missive also lists the federation's conditions for supporting the fifth bloom. To hold the grand attunement on the altar, your colony must meet all of the following:
+<VV_Letter_EndingFederationMissiveConditions>The missive also lists the federation's conditions for supporting the fifth bloom. Before you can request a task in exchange for an ancient amber core via comms console, your colony must meet all of the following:
 \n  - At least {VIVI} vivis in the colony
 \n  - Colony wealth of at least {WEALTH}
 \nYou can check your progress under the vivi federation missive in the quests tab.</VV_Letter_EndingFederationMissiveConditions>
-<VV_Quest_EndingMissiveConditionsHeader>Ending progress (all conditions must be met before the grand attunement can be held)</VV_Quest_EndingMissiveConditionsHeader>
+<VV_Quest_EndingMissiveConditionsHeader>Ending progress (all conditions must be met before you can request the ancient amber core task)</VV_Quest_EndingMissiveConditionsHeader>
 <VV_Quest_EndingMissiveConditionVivi>Vivis in the colony: {0} / {1}</VV_Quest_EndingMissiveConditionVivi>
 <VV_Quest_EndingMissiveConditionWealth>Colony wealth: {0} / {1}</VV_Quest_EndingMissiveConditionWealth>
 <VV_Quest_EndingMissiveStepAltar>Build the everflower altar</VV_Quest_EndingMissiveStepAltar>
@@ -68,6 +68,7 @@
 <VV_Comms_AmberCoreRequestHostile>hostile to the vivi federation</VV_Comms_AmberCoreRequestHostile>
 <VV_Comms_AmberCoreRequestActive>a task has already been given</VV_Comms_AmberCoreRequestActive>
 <VV_Comms_AmberCoreRequestCoreExists>an ancient amber core already exists</VV_Comms_AmberCoreRequestCoreExists>
+<VV_Comms_AmberCoreRequestConditions>the missive's conditions are not met: {0}</VV_Comms_AmberCoreRequestConditions>
 <VV_Comms_AmberCoreRequestResult>{LEADER} has entrusted you with a task in exchange for a relic of the old empire. Once it is done, the vivi federation will send an ancient amber core.
 \nCheck the quests tab for the task.</VV_Comms_AmberCoreRequestResult>
 <VV_Comms_AmberCoreRequestNoQuest>{LEADER}: "We have no task to entrust to you right now. Contact us again later."</VV_Comms_AmberCoreRequestNoQuest>
