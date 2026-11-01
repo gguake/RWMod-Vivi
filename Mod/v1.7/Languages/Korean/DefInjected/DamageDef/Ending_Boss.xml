@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
 
-<!-- 아포크리파 1페이즈: 거대 엘텍스 바늘 -->
+<!-- 아스포델 1페이즈: 거대 엘텍스 바늘 -->
 <VV_GiantNeedlePierce.label>거대 바늘</VV_GiantNeedlePierce.label>
 <VV_GiantNeedlePierce.deathMessage>{0}(이)가 거대 엘텍스 바늘에 꿰뚫려 죽었습니다.</VV_GiantNeedlePierce.deathMessage>
 

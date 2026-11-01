@@ -55,13 +55,13 @@
 <VV_Letter_EndingCalmLabel>Calm before the storm</VV_Letter_EndingCalmLabel>
 <VV_Letter_EndingCalm>The raids have stopped, and the titanic hornet swarms have withdrawn. The everflower's bloom condensation has halted.\n\nThrough the resonance, {PAWN_labelShort} senses countless souls approaching, with something at their center.</VV_Letter_EndingCalm>
 
-<!-- Ending quest: Apocrypha -->
-<VV_Letter_EndingApocryphaLabel>Apocrypha, the Crumbled Queen</VV_Letter_EndingApocryphaLabel>
-<VV_Letter_EndingApocrypha>Dark energy gathers above the everflower. Apocrypha, the last queen of the old empire, has appeared.\n\nDriven back by the everflower's waves, she approaches the altar with a swarm of titanic hornets. Billions of fairy vivis remain bound to her.</VV_Letter_EndingApocrypha>
+<!-- Ending quest: Asphodel -->
+<VV_Letter_EndingApocryphaLabel>Asphodel, the Crumbled Queen</VV_Letter_EndingApocryphaLabel>
+<VV_Letter_EndingApocrypha>Dark energy gathers above the everflower. Asphodel, the last queen of the old empire, has appeared.\n\nDriven back by the everflower's waves, she approaches the altar with a swarm of titanic hornets. Billions of fairy vivis remain bound to her.</VV_Letter_EndingApocrypha>
 
-<!-- Ending quest: Apocrypha defeated, awaiting the coronation -->
+<!-- Ending quest: Asphodel defeated, awaiting the coronation -->
 <VV_Letter_EndingCoronationLabel>The everflower awaits its queen</VV_Letter_EndingCoronationLabel>
-<VV_Letter_EndingCoronation>Apocrypha and the titanic hornets have vanished. Bloom condensation is complete, and the raids drawn by the everflower have ended.\n\n{PAWN_labelShort} can now perform the queen's coronation.</VV_Letter_EndingCoronation>
+<VV_Letter_EndingCoronation>Asphodel and the titanic hornets have vanished. Bloom condensation is complete, and the raids drawn by the everflower have ended.\n\n{PAWN_labelShort} can now perform the queen's coronation.</VV_Letter_EndingCoronation>
 
 <!-- Ending quest: ending (the letter and the credits share the same text, in the style of the vanilla ending credits) -->
 <VV_Letter_EndingVictoryLabel>Empire of eternal spring</VV_Letter_EndingVictoryLabel>
@@ -74,14 +74,14 @@
 
 <!-- Ending quest: failure -->
 <VV_Letter_EndingFailureLabel>Everflower usurped</VV_Letter_EndingFailureLabel>
-<VV_Letter_EndingFailureStolen>Apocrypha has drained the everflower's power and vanished. The final bloom has failed.</VV_Letter_EndingFailureStolen>
+<VV_Letter_EndingFailureStolen>Asphodel has drained the everflower's power and vanished. The final bloom has failed.</VV_Letter_EndingFailureStolen>
 <VV_Letter_EndingFailureLostLabel>Everflower lost</VV_Letter_EndingFailureLostLabel>
 <VV_Letter_EndingFailureLost>The everflower has been lost. The final bloom has failed.</VV_Letter_EndingFailureLost>
 <VV_Letter_EndingFailureResonatorLabel>Resonance severed</VV_Letter_EndingFailureResonatorLabel>
 <VV_Letter_EndingFailureResonator>{PAWN_labelShort} has fallen, severing the resonance with the everflower. The final bloom has failed.</VV_Letter_EndingFailureResonator>
 
 <!-- Ending quest: messages -->
-<VV_Message_EndingApocryphaLanded>Driven back by the everflower's wave, Apocrypha has landed at the edge of the map with a swarm of titanic hornets.</VV_Message_EndingApocryphaLanded>
+<VV_Message_EndingApocryphaLanded>Driven back by the everflower's wave, Asphodel has landed at the edge of the map with a swarm of titanic hornets.</VV_Message_EndingApocryphaLanded>
 <VV_Message_EndingPawnReturned>{PAWN_labelShort} has returned in front of the everflower altar.</VV_Message_EndingPawnReturned>
 <VV_Message_EndingPawnReturnedToCaravan>{PAWN_labelShort} has returned and joined {CARAVAN_label}.</VV_Message_EndingPawnReturnedToCaravan>
 <VV_Message_EndingGrandAttunementNotStarted>The full bloom ritual has ended, but the everflower could not begin its fifth bloom.</VV_Message_EndingGrandAttunementNotStarted>

@@ -143,7 +143,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VV_DoomFlower</defName>
     <label>doom bloom</label>
-    <description>A cursed flower grown from Apocrypha's warped mana. When it blooms, it inflicts a random curse on every colonist in the area.</description>
+    <description>A cursed flower grown from Asphodel's warped mana. When it blooms, it inflicts a random curse on every colonist in the area.</description>
     <thingClass>VVRace.Building_DoomFlower</thingClass>
     <graphicData>
       <texPath>Things/Building/VV_DoomFlower</texPath>
@@ -201,7 +201,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VV_FairyFlower</defName>
     <label>fairy bloom</label>
-    <description>A flower grown from the mana of fairy vivis bound to Apocrypha. Bonding with a vivi causes fairy interference. It soon withers.</description>
+    <description>A flower grown from the mana of fairy vivis bound to Asphodel. Bonding with a vivi causes fairy interference. It soon withers.</description>
     <thingClass>VVRace.Building_FairyFlower</thingClass>
     <graphicData>
       <texPath>Things/Building/VV_FairyFlower</texPath>

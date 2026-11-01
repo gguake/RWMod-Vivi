@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
 
-<!-- 아포크리파 1페이즈 기믹: 요정 간섭 -->
+<!-- 아스포델 1페이즈 기믹: 요정 간섭 -->
 <VV_FairyInterference.label>요정 간섭</VV_FairyInterference.label>
-<VV_FairyInterference.description>요정꽃과 공명하여 아포크리파의 결속에 간섭할 수 있습니다.</VV_FairyInterference.description>
+<VV_FairyInterference.description>요정꽃과 공명하여 아스포델의 결속에 간섭할 수 있습니다.</VV_FairyInterference.description>
 <VV_FairyInterference.comps.0.messageOnDisappear>{PAWN_labelShort}의 요정 간섭이 사라졌습니다.</VV_FairyInterference.comps.0.messageOnDisappear>
 
-<!-- 아포크리파 1페이즈 기믹: 멸망꽃 저주 -->
+<!-- 아스포델 1페이즈 기믹: 멸망꽃 저주 -->
 <VV_DoomBlight_Fear.label>멸망의 공포</VV_DoomBlight_Fear.label>
 <VV_DoomBlight_Fear.description>멸망꽃의 저주로 고통에 쉽게 쓰러지고 정신이상에 빠지기 쉬워집니다.</VV_DoomBlight_Fear.description>
 

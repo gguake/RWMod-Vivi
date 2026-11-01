@@ -155,7 +155,7 @@
   <PreceptDef>
     <defName>VV_ReturnOfLife</defName>
     <label>return of life</label>
-    <description>Restores a body to an ancient fairy vivi freed from Apocrypha. Requires a fully bloomed everflower.</description>
+    <description>Restores a body to an ancient fairy vivi freed from Asphodel. Requires a fully bloomed everflower.</description>
     <issue>Ritual</issue>
     <preceptClass>Precept_Ritual</preceptClass>
     <visible>false</visible>

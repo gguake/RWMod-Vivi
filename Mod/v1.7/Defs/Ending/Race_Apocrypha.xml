@@ -63,7 +63,7 @@
 
   <ThingDef ParentName="AnimalThingBase">
     <defName>VV_Apocrypha</defName>
-    <label>Apocrypha, the Crumbled Queen</label>
+    <label>Asphodel, the Crumbled Queen</label>
     <description>The last queen of the old vivi empire and the progenitor of all titanic hornets.\n\nTo save her scaria-infected subjects, she transformed 1,440,000,000 of them into fairy vivis and bound them to herself. Unable to bear them all, she lost her mind and became a monster.\n\nShe still seeks the everflower she lost.</description>
     <drawOffscreen>true</drawOffscreen>
     <!-- 바닐라 동물 분류(Animals)에서 뺀다: 이념의 숭배 동물 후보(PreceptWorker_Animal)가 이 분류로 동물을 고른다. -->
@@ -186,7 +186,7 @@
 
   <PawnKindDef ParentName="AnimalKindBase">
     <defName>VV_Apocrypha</defName>
-    <label>Apocrypha</label>
+    <label>Asphodel</label>
     <race>VV_Apocrypha</race>
     <combatPower>3000</combatPower>
     <canArriveManhunter>false</canArriveManhunter>
@@ -229,7 +229,7 @@
   <!-- 처치된 아포크리파의 소멸 연출(시체 대신). 저장 가능한 시퀀서이며 VV_Dissolve 셰이더로 직접 그린다. -->
   <ThingDef ParentName="EtherealThingBase">
     <defName>VV_DyingApocrypha</defName>
-    <label>crumbling Apocrypha</label>
+    <label>crumbling Asphodel</label>
     <thingClass>VVRace.DyingApocrypha</thingClass>
     <tickerType>Normal</tickerType>
     <drawerType>RealtimeOnly</drawerType>
@@ -242,7 +242,7 @@
        저장 가능한 시퀀서이며 VV_Manifest 셰이더로 직접 그린다. 형체가 영원꽃에서 멀리 날아가므로 화면 밖에서도 그린다. -->
   <ThingDef ParentName="EtherealThingBase">
     <defName>VV_ApocryphaManifestation</defName>
-    <label>manifesting Apocrypha</label>
+    <label>manifesting Asphodel</label>
     <thingClass>VVRace.ApocryphaManifestation</thingClass>
     <tickerType>Normal</tickerType>
     <drawerType>RealtimeOnly</drawerType>

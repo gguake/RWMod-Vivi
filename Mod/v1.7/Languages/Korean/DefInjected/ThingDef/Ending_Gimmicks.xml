@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
 
-<!-- 아포크리파 1페이즈 기믹: 투사체 -->
+<!-- 아스포델 1페이즈 기믹: 투사체 -->
 <VV_Projectile_FairyShell.label>사출된 요정 비비</VV_Projectile_FairyShell.label>
 <VV_Projectile_DoomSeed.label>멸망꽃 씨앗</VV_Projectile_DoomSeed.label>
 <VV_Projectile_FairySeed.label>요정꽃 씨앗</VV_Projectile_FairySeed.label>
 
-<!-- 아포크리파 1페이즈 기믹: 꽃 -->
+<!-- 아스포델 1페이즈 기믹: 꽃 -->
 <VV_DoomFlower.label>멸망꽃</VV_DoomFlower.label>
-<VV_DoomFlower.description>아포크리파의 일그러진 마나가 피워낸 저주받은 꽃입니다. 만개하면 지역 내 모든 정착민에게 무작위 저주를 내립니다.</VV_DoomFlower.description>
+<VV_DoomFlower.description>아스포델의 일그러진 마나가 피워낸 저주받은 꽃입니다. 만개하면 지역 내 모든 정착민에게 무작위 저주를 내립니다.</VV_DoomFlower.description>
 
 <VV_FairyFlower.label>요정꽃</VV_FairyFlower.label>
-<VV_FairyFlower.description>아포크리파에게 결속된 요정 비비의 마나가 피워낸 꽃입니다. 비비와 결속해 〈요정 간섭〉을 일으킵니다. 오래 피어 있지는 않습니다.</VV_FairyFlower.description>
+<VV_FairyFlower.description>아스포델에게 결속된 요정 비비의 마나가 피워낸 꽃입니다. 비비와 결속해 〈요정 간섭〉을 일으킵니다. 오래 피어 있지는 않습니다.</VV_FairyFlower.description>
 
 </LanguageData>

@@ -55,13 +55,13 @@
 <VV_Letter_EndingCalmLabel>폭풍 전의 고요</VV_Letter_EndingCalmLabel>
 <VV_Letter_EndingCalm>습격이 멎고 거대 말벌 무리도 물러났습니다. 영원꽃의 개화 응축이 멈췄습니다.\n\n{PAWN_labelShort}(은)는 공명 너머로 수많은 동족의 영혼과, 그 중심에 있는 무언가가 다가오는 것을 느낍니다.</VV_Letter_EndingCalm>
 
-<!-- 엔딩 퀘스트: 바스러진 여왕, 아포크리파 -->
-<VV_Letter_EndingApocryphaLabel>바스러진 여왕, 아포크리파</VV_Letter_EndingApocryphaLabel>
-<VV_Letter_EndingApocrypha>영원꽃 위로 검은 기운이 모여듭니다. 옛 제국의 마지막 여왕, 아포크리파가 모습을 드러냈습니다.\n\n영원꽃의 파동에 밀려난 여왕이 거대 말벌 무리를 이끌고 제단으로 다가옵니다. 그 몸에는 수십억 요정 비비가 결속되어 있습니다.</VV_Letter_EndingApocrypha>
+<!-- 엔딩 퀘스트: 바스러진 여왕, 아스포델 -->
+<VV_Letter_EndingApocryphaLabel>바스러진 여왕, 아스포델</VV_Letter_EndingApocryphaLabel>
+<VV_Letter_EndingApocrypha>영원꽃 위로 검은 기운이 모여듭니다. 옛 제국의 마지막 여왕, 아스포델이 모습을 드러냈습니다.\n\n영원꽃의 파동에 밀려난 여왕이 거대 말벌 무리를 이끌고 제단으로 다가옵니다. 그 몸에는 수십억 요정 비비가 결속되어 있습니다.</VV_Letter_EndingApocrypha>
 
-<!-- 엔딩 퀘스트: 아포크리파 토벌, 여왕의 대관식 대기 -->
+<!-- 엔딩 퀘스트: 아스포델 토벌, 여왕의 대관식 대기 -->
 <VV_Letter_EndingCoronationLabel>여왕을 기다리는 영원꽃</VV_Letter_EndingCoronationLabel>
-<VV_Letter_EndingCoronation>아포크리파와 거대 말벌들이 사라지고, 개화 응축이 끝났습니다. 영원꽃을 향한 습격도 멎었습니다.\n\n이제 {PAWN_labelShort}(이)가 〈여왕의 대관식〉을 치를 수 있습니다.</VV_Letter_EndingCoronation>
+<VV_Letter_EndingCoronation>아스포델과 거대 말벌들이 사라지고, 개화 응축이 끝났습니다. 영원꽃을 향한 습격도 멎었습니다.\n\n이제 {PAWN_labelShort}(이)가 〈여왕의 대관식〉을 치를 수 있습니다.</VV_Letter_EndingCoronation>
 
 <!-- 엔딩 퀘스트: 영원한 봄의 제국 (엔딩 편지와 크레딧이 같은 본문을 쓴다. 바닐라 엔딩 크레딧 문체) -->
 <VV_Letter_EndingVictoryLabel>영원한 봄의 제국</VV_Letter_EndingVictoryLabel>
@@ -74,14 +74,14 @@
 
 <!-- 엔딩 퀘스트: 실패 -->
 <VV_Letter_EndingFailureLabel>영원꽃 찬탈</VV_Letter_EndingFailureLabel>
-<VV_Letter_EndingFailureStolen>아포크리파가 영원꽃의 힘을 빼앗고 사라졌습니다. 마지막 개화는 실패했습니다.</VV_Letter_EndingFailureStolen>
+<VV_Letter_EndingFailureStolen>아스포델이 영원꽃의 힘을 빼앗고 사라졌습니다. 마지막 개화는 실패했습니다.</VV_Letter_EndingFailureStolen>
 <VV_Letter_EndingFailureLostLabel>영원꽃 소실</VV_Letter_EndingFailureLostLabel>
 <VV_Letter_EndingFailureLost>영원꽃을 잃었습니다. 마지막 개화는 실패했습니다.</VV_Letter_EndingFailureLost>
 <VV_Letter_EndingFailureResonatorLabel>끊어진 공명</VV_Letter_EndingFailureResonatorLabel>
 <VV_Letter_EndingFailureResonator>{PAWN_labelShort}(이)가 쓰러져 영원꽃과의 공명이 끊어졌습니다. 마지막 개화는 실패했습니다.</VV_Letter_EndingFailureResonator>
 
 <!-- 엔딩 퀘스트: 메시지 -->
-<VV_Message_EndingApocryphaLanded>영원꽃의 파동에 밀려난 아포크리파가 거대 말벌 무리를 이끌고 지역 외곽에 나타났습니다.</VV_Message_EndingApocryphaLanded>
+<VV_Message_EndingApocryphaLanded>영원꽃의 파동에 밀려난 아스포델이 거대 말벌 무리를 이끌고 지역 외곽에 나타났습니다.</VV_Message_EndingApocryphaLanded>
 <VV_Message_EndingPawnReturned>{PAWN_labelShort}(이)가 영원꽃 제단 앞으로 돌아왔습니다.</VV_Message_EndingPawnReturned>
 <VV_Message_EndingPawnReturnedToCaravan>{PAWN_labelShort}(이)가 돌아와 {CARAVAN_label}에 합류했습니다.</VV_Message_EndingPawnReturnedToCaravan>
 <VV_Message_EndingGrandAttunementNotStarted>〈만개 의식〉이 끝났지만 영원꽃이 다섯 번째 개화를 시작하지 못했습니다.</VV_Message_EndingGrandAttunementNotStarted>

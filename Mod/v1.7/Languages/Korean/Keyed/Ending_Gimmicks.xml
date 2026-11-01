@@ -8,7 +8,7 @@
 <VV_FailReason_FairyFlowerCannotMove>움직일 수 없음</VV_FailReason_FairyFlowerCannotMove>
 <VV_FailReason_FairyFlowerAlreadyInterfered>이미 요정 간섭 상태임</VV_FailReason_FairyFlowerAlreadyInterfered>
 
-<!-- 엔딩 퀘스트: 아포크리파 1페이즈 기믹 메시지 -->
+<!-- 엔딩 퀘스트: 아스포델 1페이즈 기믹 메시지 -->
 <VV_Message_FairyFlowerBonded>{PAWN_labelShort}(이)가 요정꽃과 결속해 〈요정 간섭〉을 얻었습니다.</VV_Message_FairyFlowerBonded>
 <VV_Message_FairyBondReleased>{PAWN_labelShort}(이)가 요정 비비들을 해방했습니다. 이 지역의 멸망꽃 저주가 모두 풀렸습니다.</VV_Message_FairyBondReleased>
 <VV_Message_DoomFlowerBloomed>멸망꽃이 만개하여 이 지역의 정착민에게 〈{BLIGHT}〉 저주가 내려졌습니다.</VV_Message_DoomFlowerBloomed>

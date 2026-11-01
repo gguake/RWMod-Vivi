@@ -20,23 +20,23 @@
 
 <!-- Alert -->
 <VV_Alert_ApocryphaChanneling>Everflower usurpation {0}</VV_Alert_ApocryphaChanneling>
-<VV_Alert_ApocryphaChannelingDesc>Apocrypha is draining the everflower's power ({PROGRESS}, {TIMELEFT} remaining).
+<VV_Alert_ApocryphaChannelingDesc>Asphodel is draining the everflower's power ({PROGRESS}, {TIMELEFT} remaining).
 \nIf she drains it all, the final bloom fails.</VV_Alert_ApocryphaChannelingDesc>
 
 <!-- Letter -->
 <VV_Letter_ApocryphaUnboundLabel>Rampage of the Unbound Progenitor</VV_Letter_ApocryphaUnboundLabel>
-<VV_Letter_ApocryphaUnbound>The last bond has broken. Apocrypha reveals her titanic hornet form and charges toward the everflower.</VV_Letter_ApocryphaUnbound>
+<VV_Letter_ApocryphaUnbound>The last bond has broken. Asphodel reveals her titanic hornet form and charges toward the everflower.</VV_Letter_ApocryphaUnbound>
 
 <!-- Message -->
-<VV_Message_ApocryphaBondReleased>A large number of vivi fairies bound to Apocrypha have been freed. (Remaining bond: {COUNT})</VV_Message_ApocryphaBondReleased>
-<VV_Message_ApocryphaTransformStarted>The last bond breaks as Apocrypha unleashes a shockwave.</VV_Message_ApocryphaTransformStarted>
-<VV_Message_ApocryphaChannelInterrupted>Apocrypha's usurpation of the everflower was interrupted.</VV_Message_ApocryphaChannelInterrupted>
-<VV_Message_ApocryphaEscapedRoofCollapse>Apocrypha teleported away from a roof collapse.</VV_Message_ApocryphaEscapedRoofCollapse>
-<VV_Message_ApocryphaShieldBroken>Apocrypha's mana shield has shattered, stunning her.</VV_Message_ApocryphaShieldBroken>
-<VV_Message_ApocryphaShieldRestored>Apocrypha's mana shield has been restored.</VV_Message_ApocryphaShieldRestored>
-<VV_Message_ApocryphaNeedleStuck>A giant needle lodged in Apocrypha's carapace. ({0} / {1} lodged, damage taken {2})</VV_Message_ApocryphaNeedleStuck>
-<VV_Message_ApocryphaAllNeedlesStuck>All the giant needles have lodged in Apocrypha, stunning her.</VV_Message_ApocryphaAllNeedlesStuck>
-<VV_Message_ApocryphaNeedlesPulled>Apocrypha tore the lodged needles out and scattered them across the ground.</VV_Message_ApocryphaNeedlesPulled>
+<VV_Message_ApocryphaBondReleased>A large number of vivi fairies bound to Asphodel have been freed. (Remaining bond: {COUNT})</VV_Message_ApocryphaBondReleased>
+<VV_Message_ApocryphaTransformStarted>The last bond breaks as Asphodel unleashes a shockwave.</VV_Message_ApocryphaTransformStarted>
+<VV_Message_ApocryphaChannelInterrupted>Asphodel's usurpation of the everflower was interrupted.</VV_Message_ApocryphaChannelInterrupted>
+<VV_Message_ApocryphaEscapedRoofCollapse>Asphodel teleported away from a roof collapse.</VV_Message_ApocryphaEscapedRoofCollapse>
+<VV_Message_ApocryphaShieldBroken>Asphodel's mana shield has shattered, stunning her.</VV_Message_ApocryphaShieldBroken>
+<VV_Message_ApocryphaShieldRestored>Asphodel's mana shield has been restored.</VV_Message_ApocryphaShieldRestored>
+<VV_Message_ApocryphaNeedleStuck>A giant needle lodged in Asphodel's carapace. ({0} / {1} lodged, damage taken {2})</VV_Message_ApocryphaNeedleStuck>
+<VV_Message_ApocryphaAllNeedlesStuck>All the giant needles have lodged in Asphodel, stunning her.</VV_Message_ApocryphaAllNeedlesStuck>
+<VV_Message_ApocryphaNeedlesPulled>Asphodel tore the lodged needles out and scattered them across the ground.</VV_Message_ApocryphaNeedlesPulled>
 <VV_Message_ApocryphaNeedleActivated>A giant needle awakens and aims at {PAWN_labelShort}!</VV_Message_ApocryphaNeedleActivated>
 
 <!-- Float menu -->
