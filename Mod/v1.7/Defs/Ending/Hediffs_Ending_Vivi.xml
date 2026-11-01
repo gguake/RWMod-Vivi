@@ -5,8 +5,8 @@
   <HediffDef>
     <defName>VV_EverflowerBlessing</defName>
     <label>everflower's blessing</label>
-    <description>The blessing of the fully bloomed everflower washes away the curse of imperfect genes. While blessed, this vivi is completely immune to genetic instability, and its aging as an adult slows dramatically.
-\nThe blessing fades if the vivi stays away from the everflower for a day.</description>
+    <description>The blessing of a fully bloomed everflower grants immunity to genetic instability and greatly slows aging in adult vivis.
+\nThe blessing fades after a day away from the everflower.</description>
     <hediffClass>HediffWithComps</hediffClass>
     <defaultLabelColor>(1, 0.85, 0.4)</defaultLabelColor>
 

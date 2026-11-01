@@ -6,7 +6,7 @@
   <HediffDef>
     <defName>VV_FairyInterference</defName>
     <label>fairy interference</label>
-    <description>Resonating with the pure wavelengths of the ancient fairy vivis through a fairy bloom. Approaching Apocrypha triggers a mana backflow in her bond network, freeing a large number of fairies and lifting all doom blights from the colony.</description>
+    <description>Resonating with a fairy bloom's mana. Approaching Apocrypha frees fairy vivis and lifts the doom blights.</description>
     <hediffClass>VVRace.Hediff_FairyInterference</hediffClass>
     <defaultLabelColor>(1, 0.9, 0.55)</defaultLabelColor>
     <isBad>false</isBad>
@@ -41,7 +41,7 @@
   <HediffDef ParentName="VV_DoomBlightBase">
     <defName>VV_DoomBlight_Fear</defName>
     <label>doom blight: dread</label>
-    <description>A curse from a doom bloom that fills the mind with dread. The afflicted collapses from pain more easily and is more prone to mental breaks.\n\nLifted when Apocrypha's bond is released through fairy interference.</description>
+    <description>A doom bloom curse that makes the afflicted collapse from pain more easily and become more prone to mental breaks.</description>
     <stages>
       <li>
         <minSeverity>1</minSeverity>
@@ -90,7 +90,7 @@
   <HediffDef ParentName="VV_DoomBlightBase">
     <defName>VV_DoomBlight_Hunger</defName>
     <label>doom blight: famine</label>
-    <description>A curse from a doom bloom that gnaws at the body, causing severe hunger and fatigue.\n\nLifted when Apocrypha's bond is released through fairy interference.</description>
+    <description>A doom bloom curse that causes severe hunger and fatigue.</description>
     <stages>
       <li>
         <minSeverity>1</minSeverity>
@@ -130,7 +130,7 @@
   <HediffDef ParentName="VV_DoomBlightBase">
     <defName>VV_DoomBlight_Plague</defName>
     <label>doom blight: plague</label>
-    <description>A curse from a doom bloom that festers within the body. The afflicted recovers more slowly from disease and blood loss, and takes more damage.\n\nLifted when Apocrypha's bond is released through fairy interference.</description>
+    <description>A doom bloom curse that slows recovery from disease and blood loss and increases damage taken.</description>
     <stages>
       <li>
         <minSeverity>1</minSeverity>

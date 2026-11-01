@@ -7,9 +7,9 @@
   <PreceptDef>
     <defName>VV_GrandAttunement</defName>
     <label>grand attunement</label>
-    <description>The resonator links the altar's ancient mana circuits to the everflower, awakening its fifth bloom. The everflower begins condensing mana for its final bloom, and enemies drawn by the mana waves will relentlessly raid the colony while the condensation continues.
-\nOnce the ritual begins, the resonator enters everflower full assimilation: she is held within the altar as if in cryptosleep and floats before the everflower until Apocrypha is defeated. Her needs and age are frozen and nothing can harm her.
-\nCan only be performed on a level 4 everflower enshrined on the everflower altar.</description>
+    <description>Connects the altar's mana circuits to the everflower to begin its fifth bloom.
+\nThe resonator enters full assimilation when the ritual begins and cannot move or take orders.
+\nRequires a level 4 everflower enshrined on the everflower altar.</description>
     <issue>Ritual</issue>
     <preceptClass>Precept_Ritual</preceptClass>
     <visible>false</visible>
@@ -107,7 +107,7 @@
   <RitualOutcomeEffectDef>
     <defName>VV_GrandAttunement</defName>
     <description>The better the ritual's result, the shorter the condensation period for the final bloom (8 to 10 days).
-\nWarning: completing this ritual will draw relentless raids driven by the massive mana waves until the bloom condensation is complete.
+\nEnemy raids continue throughout bloom condensation.
 \nAll everflower rituals share a cooldown.</description>
     <workerClass>VVRace.RitualOutcomeEffectWorker_GrandAttunement</workerClass>
     <allowAttachableOutcome>false</allowAttachableOutcome>
@@ -159,8 +159,7 @@
   <PreceptDef>
     <defName>VV_ReturnOfLife</defName>
     <label>return of life</label>
-    <description>Using the power of the fully bloomed everflower, restores a physical body to an ancient fairy vivi freed from Apocrypha's shackles. The revived ancient vivi joins the colony.
-\nAncient vivis carry more xenogenes than ordinary vivis and always possess at least one archite gene.</description>
+    <description>Uses a fully bloomed everflower to restore the body of an ancient fairy vivi freed from Apocrypha. The revived vivi joins the colony.</description>
     <issue>Ritual</issue>
     <preceptClass>Precept_Ritual</preceptClass>
     <visible>false</visible>
@@ -306,8 +305,8 @@
   <PreceptDef>
     <defName>VV_QueensCoronation</defName>
     <label>queen's coronation</label>
-    <description>Before the everflower whose bloom condensation is complete, the resonator is crowned queen and leads its sixth and final bloom.
-\nCan only be performed by the royal vivi resonating with the everflower after Apocrypha is defeated. Completing this ritual reaches the ending.</description>
+    <description>Crowns the resonator queen and completes the everflower's sixth bloom.
+\nRequires completed bloom condensation. Only the royal vivi resonating with the everflower can perform it.</description>
     <issue>Ritual</issue>
     <preceptClass>Precept_Ritual</preceptClass>
     <visible>false</visible>
@@ -403,7 +402,7 @@
 
   <RitualOutcomeEffectDef>
     <defName>VV_QueensCoronation</defName>
-    <description>Whatever the ritual's result, the resonator is crowned queen, the everflower fully blooms into its sixth form, and the ending credits follow soon after.
+    <description>Regardless of the ritual's result, the resonator is crowned queen and the everflower fully blooms at level 6.
 \nThis ritual ignores the everflower ritual cooldown.</description>
     <workerClass>VVRace.RitualOutcomeEffectWorker_QueensCoronation</workerClass>
     <allowAttachableOutcome>false</allowAttachableOutcome>

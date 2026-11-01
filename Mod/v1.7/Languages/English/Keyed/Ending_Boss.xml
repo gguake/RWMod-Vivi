@@ -21,27 +21,25 @@
 
 <!-- Alert -->
 <VV_Alert_ApocryphaChanneling>Everflower usurpation {0}</VV_Alert_ApocryphaChanneling>
-<VV_Alert_ApocryphaChannelingDesc>Apocrypha is draining the everflower's power ({PROGRESS}, {TIMELEFT} left).
-\nIf completed, Apocrypha will vanish with the everflower and the quest will fail.
-\nStunning Apocrypha interrupts the usurpation and resets its progress. She is immune to ordinary stuns and can only be stunned by the mana wave ritual, by releasing her fairy bond through fairy interference, by shattering her mana shield, or by the attunement ritual in her second phase.</VV_Alert_ApocryphaChannelingDesc>
+<VV_Alert_ApocryphaChannelingDesc>Apocrypha is draining the everflower's power ({PROGRESS}, {TIMELEFT} remaining).
+\nIf she drains it all, the final bloom fails.</VV_Alert_ApocryphaChannelingDesc>
 
 <!-- Letter -->
 <VV_Letter_ApocryphaUnboundLabel>Rampage of the Unbound Progenitor</VV_Letter_ApocryphaUnboundLabel>
-<VV_Letter_ApocryphaUnbound>The last vivi fairy bond has been released. Freed from the weight of billions of souls, Apocrypha has cast off her shackles and revealed her true form as the progenitor hornet.
-\nUnbound, Apocrypha charges straight toward the everflower, smashing through walls and structures in her path. Ordinary attacks can now harm her. The shock of her release has flung her three giant eltex needles into the ground around her. Any colonist, vivi or not, can approach a planted needle and touch it to awaken it: the needle briefly tracks the colonist who woke it, then locks its angle and flies to its full range, planting itself again where it lands. Anything standing in its path is skewered, allies included, so position yourself so that Apocrypha stands between the needle and your colonist, and step aside once the angle locks. A needle that strikes Apocrypha lodges in her carapace instead. Each lodged needle increases the damage she takes, and once all three are lodged she is stunned for a long time. When she recovers, she tears the needles out and scatters them across the ground again.
-\nFrom now on, the everflower attunement ritual can be performed every 6 hours. Each completed ritual unleashes a resonance wave that stuns Apocrypha. Hold her back from the everflower while you wear her down.</VV_Letter_ApocryphaUnbound>
+<VV_Letter_ApocryphaUnbound>The last fairy vivi bond has broken. Apocrypha has revealed her titanic hornet form and is charging toward the everflower, smashing walls and structures in her path. Her mana shield is gone, and the giant eltex needles lie scattered on the ground.
+\nThe everflower has begun responding to its resonator's attunement once more.</VV_Letter_ApocryphaUnbound>
 
 <!-- Message -->
 <VV_Message_ApocryphaBondReleased>A large number of vivi fairies bound to Apocrypha have been freed. (Remaining bond: {COUNT})</VV_Message_ApocryphaBondReleased>
 <VV_Message_ApocryphaTransformStarted>The last fairy bond has shattered! Apocrypha unleashes a shockwave that stuns every living thing.</VV_Message_ApocryphaTransformStarted>
 <VV_Message_ApocryphaChannelInterrupted>Apocrypha's usurpation of the everflower was interrupted.</VV_Message_ApocryphaChannelInterrupted>
 <VV_Message_ApocryphaEscapedRoofCollapse>Apocrypha warped away from the collapsing rock overhead.</VV_Message_ApocryphaEscapedRoofCollapse>
-<VV_Message_ApocryphaShieldBroken>Apocrypha's mana shield has shattered! She is stunned for a long time, and in her convulsions she scatters doom bloom seeds, along with a fairy bloom seed if she can raise one.</VV_Message_ApocryphaShieldBroken>
+<VV_Message_ApocryphaShieldBroken>Apocrypha's mana shield has shattered, stunning her.</VV_Message_ApocryphaShieldBroken>
 <VV_Message_ApocryphaShieldRestored>Apocrypha's mana shield has been restored.</VV_Message_ApocryphaShieldRestored>
 <VV_Message_ApocryphaNeedleStuck>A giant needle pierced Apocrypha and lodged in her carapace! ({0} / {1} lodged, damage taken {2})</VV_Message_ApocryphaNeedleStuck>
-<VV_Message_ApocryphaAllNeedlesStuck>All giant needles are lodged in Apocrypha! She is stunned for a long time and takes greatly increased damage.</VV_Message_ApocryphaAllNeedlesStuck>
+<VV_Message_ApocryphaAllNeedlesStuck>All the giant needles have lodged in Apocrypha, stunning her.</VV_Message_ApocryphaAllNeedlesStuck>
 <VV_Message_ApocryphaNeedlesPulled>Apocrypha tore the lodged needles out and scattered them across the ground.</VV_Message_ApocryphaNeedlesPulled>
-<VV_Message_ApocryphaNeedleActivated>A giant needle has awakened and is aiming at {PAWN_labelShort}! Put Apocrypha between the needle and {PAWN_labelShort}, and step out of its path once the angle locks.</VV_Message_ApocryphaNeedleActivated>
+<VV_Message_ApocryphaNeedleActivated>A giant needle awakens and aims at {PAWN_labelShort}!</VV_Message_ApocryphaNeedleActivated>
 
 <!-- Float menu -->
 <VV_FloatMenu_ActivateApocryphaNeedle>Awaken giant eltex needle</VV_FloatMenu_ActivateApocryphaNeedle>

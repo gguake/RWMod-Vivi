@@ -6,9 +6,8 @@
   <HediffDef>
     <defName>VV_EverflowerFullAssimilation</defName>
     <label>everflower full assimilation</label>
-    <description>This royal vivi has opened her psychic circuits completely to the everflower and become one with it. She floats in the air before the everflower on the altar, resonating with it and channelling the mana of its fifth bloom.
-\nHer body is held within the altar's mana circuits as if in cryptosleep. Her needs and age are frozen, nothing can harm her, and she cannot move or take orders until she is released.
-\nShe is released and descends once Apocrypha is defeated, or if the grand attunement ends without beginning the bloom.</description>
+    <description>A royal vivi who has become one with the everflower, channelling mana for its fifth bloom.
+\nUntil assimilation ends, her needs and age are suspended and she cannot be harmed. She cannot move or take orders.</description>
     <hediffClass>VVRace.Hediff_EverflowerAssimilation</hediffClass>
     <defaultLabelColor>(1, 0.85, 0.4)</defaultLabelColor>
     <isBad>false</isBad>

@@ -15,11 +15,11 @@
 
 <!-- Letters -->
 <VV_Letter_ReturnOfLifeLabel>Return of life: {PAWN_labelShort}</VV_Letter_ReturnOfLifeLabel>
-<VV_Letter_ReturnOfLife>Answering the call of the fully bloomed everflower, an ancient vivi once bound to the last queen of the old empire has returned to life.\n\nAfter ages as a fairy, {PAWN_labelShort} has regained a physical body and joined the colony.</VV_Letter_ReturnOfLife>
+<VV_Letter_ReturnOfLife>{PAWN_labelShort}, an ancient vivi once bound to Apocrypha, has regained a body through the everflower's power.\n\nAfter many years as a fairy, this vivi has joined the colony.</VV_Letter_ReturnOfLife>
 <VV_Letter_ReturnOfLifeGenes>Genes of the ancient empire:</VV_Letter_ReturnOfLifeGenes>
 
 <!-- Everflower full assimilation -->
-<VV_Message_AssimilationBegan>{PAWN_labelShort} has opened her psychic circuits completely to the everflower and entered everflower full assimilation. She will remain suspended within the altar, floating before the everflower, until Apocrypha is defeated.</VV_Message_AssimilationBegan>
+<VV_Message_AssimilationBegan>{PAWN_labelShort} has entered full assimilation with the everflower and risen into the air.</VV_Message_AssimilationBegan>
 <VV_Message_AssimilationReleased>The full assimilation with the everflower has ended, and {PAWN_labelShort} has descended to the ground.</VV_Message_AssimilationReleased>
 <VV_Message_AssimilationBrokenRitual>{PAWN_labelShort} has collapsed and her assimilation with the everflower is broken. The grand attunement has been called off.</VV_Message_AssimilationBrokenRitual>
 <VV_FailReason_PawnAssimilated>fully assimilated with the everflower</VV_FailReason_PawnAssimilated>

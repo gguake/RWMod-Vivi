@@ -11,7 +11,7 @@
 <VV_FailReason_AltarCenterOccupied>An everflower is already enshrined on this altar.</VV_FailReason_AltarCenterOccupied>
 <VV_FailReason_AltarOnePerMap>Only one everflower altar can be built on each map.</VV_FailReason_AltarOnePerMap>
 <VV_FailReason_AltarBlockedByArcanePlant>Cannot build over an arcane plant.</VV_FailReason_AltarBlockedByArcanePlant>
-<VV_FailReason_AltarNotHomeMap>An everflower altar can only be built in a settlement, not in a camp or a temporary map.</VV_FailReason_AltarNotHomeMap>
+<VV_FailReason_AltarNotHomeMap>An everflower altar can only be built in a settlement.</VV_FailReason_AltarNotHomeMap>
 <VV_FailReason_AltarOnSubstructure>An everflower altar cannot be built on a gravship.</VV_FailReason_AltarOnSubstructure>
 <VV_FailReason_AltarUnderConstruction>Cannot place on an everflower altar under construction.</VV_FailReason_AltarUnderConstruction>
 <VV_FailReason_AltarHasEnshrinedEverflower>Cannot deconstruct while an everflower is enshrined</VV_FailReason_AltarHasEnshrinedEverflower>
@@ -20,7 +20,7 @@
 <!-- 5/6단계 레벨업 편지 머리말 -->
 <VV_Letter_EverflowerAttunementLevel5Preamble>The everflower has resonated with the altar's mana circuits and reached its fifth bloom.
 \nIt releases vast amounts of environment mana into its surroundings through the altar, and its resonator's everflower resonance strengthens to stage V.</VV_Letter_EverflowerAttunementLevel5Preamble>
-<VV_Letter_EverflowerAttunementLevel6Preamble>The legendary everflower has bloomed in its complete form. Dense environment mana now flows constantly across the whole map.
+<VV_Letter_EverflowerAttunementLevel6Preamble>The everflower has fully bloomed. Dense environment mana now flows across the whole map.
 \nThe resonator's everflower resonance strengthens to stage VI, removing the fatigue and movement penalties from bound fairy vivis. All vivis in the colony become immune to genetic instability, and adult vivis age much more slowly.</VV_Letter_EverflowerAttunementLevel6Preamble>
 
 <!-- 정보창 -->

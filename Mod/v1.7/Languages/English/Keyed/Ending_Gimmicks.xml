@@ -9,7 +9,7 @@
 <VV_FailReason_FairyFlowerAlreadyInterfered>already has fairy interference</VV_FailReason_FairyFlowerAlreadyInterfered>
 
 <!-- Ending quest: Apocrypha phase 1 gimmick messages -->
-<VV_Message_FairyFlowerBonded>{PAWN_labelShort} has bonded with the fairy bloom and gained fairy interference. Approach Apocrypha to sever her bond.</VV_Message_FairyFlowerBonded>
+<VV_Message_FairyFlowerBonded>{PAWN_labelShort} has bonded with the fairy bloom and gained fairy interference.</VV_Message_FairyFlowerBonded>
 <VV_Message_FairyBondReleased>{PAWN_labelShort} triggered a mana backflow in the bond network, lifting all doom blights.</VV_Message_FairyBondReleased>
 <VV_Message_DoomFlowerBloomed>A doom bloom has blossomed, inflicting {BLIGHT} on all colonists.</VV_Message_DoomFlowerBloomed>
 
@@ -18,8 +18,8 @@
 
 <!-- Ending quest: inspect strings -->
 <VV_Inspect_DoomFlowerBloomIn>Blooms in: {0}</VV_Inspect_DoomFlowerBloomIn>
-<VV_Inspect_DoomFlowerHint>Destroy before it blooms.</VV_Inspect_DoomFlowerHint>
+<VV_Inspect_DoomFlowerHint>Inflicts a curse when it blooms.</VV_Inspect_DoomFlowerHint>
 <VV_Inspect_FairyFlowerFadeIn>Fades in: {0}</VV_Inspect_FairyFlowerFadeIn>
-<VV_Inspect_FairyFlowerHint>Select a vivi and right-click to bond. A bonded vivi who gets close to Apocrypha frees the fairy vivis bound to her.</VV_Inspect_FairyFlowerHint>
+<VV_Inspect_FairyFlowerHint>Select a vivi and right-click to bond.</VV_Inspect_FairyFlowerHint>
 
 </LanguageData>
