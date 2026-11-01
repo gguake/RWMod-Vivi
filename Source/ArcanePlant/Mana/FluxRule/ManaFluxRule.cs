@@ -1,4 +1,4 @@
-using Verse;
+﻿using Verse;
 
 namespace VVRace
 {
@@ -10,7 +10,6 @@ namespace VVRace
 
         public abstract string GetRuleString();
 
-        // 정보 탭 목록에 표시하는 간략한 조건 라벨. 상세 수치는 GetRuleString()이 담당한다.
         public virtual string GetRuleLabel() => GetRuleString();
     }
 

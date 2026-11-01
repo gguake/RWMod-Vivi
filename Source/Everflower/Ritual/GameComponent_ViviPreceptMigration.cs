@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using System;
 using System.Reflection;
 using Verse;
@@ -29,7 +29,6 @@ namespace VVRace
                     var precept = precepts[i];
                     if (precept == null) { continue; }
 
-                    // 날씨 변경 의식이 커스텀 서브클래스가 아닌 base Precept_Ritual로 로드된 경우 교체.
                     if (precept.def == VVPreceptDefOf.VV_ChangeWeatherRitual && !(precept is Precept_RitualChangeWeather))
                     {
                         try
@@ -55,7 +54,6 @@ namespace VVRace
 
         private static void CopyAllFields(Precept source, Precept dest)
         {
-            // Precept_Ritual 및 그 상위 타입(Precept)에 선언된 모든 인스턴스 필드를 복사한다.
             for (var type = typeof(Precept_Ritual); type != null && type != typeof(object); type = type.BaseType)
             {
                 var fields = type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly);

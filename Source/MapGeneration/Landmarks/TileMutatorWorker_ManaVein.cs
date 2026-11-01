@@ -3,7 +3,6 @@ using Verse;
 
 namespace VVRace
 {
-    // 마나 영맥: 맵의 무작위 지점 몇 곳을 영구 마나 방출 지점으로 등록하고 주변에 비비아 꽃밭을 만든다.
     public class TileMutatorWorker_ManaVein : TileMutatorWorker_ViviLandmark
     {
         private const float FieldCheckRadius = 4f;

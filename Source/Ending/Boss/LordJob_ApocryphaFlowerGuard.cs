@@ -6,17 +6,13 @@ using Verse.AI.Group;
 
 namespace VVRace
 {
-    // 보스전 동안 맵 외곽에서 증원되는 거대 말벌 로드(무소속). 정착지를 습격하는 대신 각 말벌이 가까운 멸망꽃·요정꽃 곁을 지키고,
-    // 꽃이 하나도 없으면 아포크리파 곁으로 간다. 지키는 곳(꽃 또는 보스) 근처의 적과, 꽃·보스·같은 무리를 공격한 적만 노린다.
-    // 보스가 사라지면(처치·찬탈·맵 이탈) 즉시 일반 말벌 습격 토일로 넘어간다.
     public class LordJob_ApocryphaFlowerGuard : LordJob_ApocryphaHornetGuard
     {
-        // 이미 지키는 말벌이 있는 꽃은 이 거리(칸)만큼 멀리 있는 것으로 쳐서, 같은 쪽에서 들어온 말벌이 한 송이에만 몰리지 않게 한다.
+        // 말벌이 한 꽃에 몰리지 않도록 경비 중인 말벌마다 이 거리(칸)를 탐색 거리에 더한다.
         private const float GuardCrowdPenalty = 6f;
 
         private float _bossFollowRadius = 10f;
 
-        // 말벌별로 지키는 꽃. 저장하지 않는다(불러오면 처음 판단할 때 다시 고른다).
         private readonly Dictionary<Pawn, Thing> _guardedFlowers = new Dictionary<Pawn, Thing>();
 
         protected override float DefaultGuardRadius => 6f;
@@ -45,14 +41,12 @@ namespace VVRace
             _guardedFlowers.Remove(p);
         }
 
-        // 말벌이 지금 지키는 꽃(꽃이 하나도 없으면 null → 보스 곁).
         public Thing GetGuardedFlower(Pawn pawn)
         {
             RestoreFromDuty(pawn);
             return _guardedFlowers.TryGetValue(pawn, out var flower) && IsGuardableFlower(flower) ? flower : null;
         }
 
-        // 지키던 꽃이 사라졌거나(파괴·만개·시듦) 보스 곁에 있다가 새 꽃이 피었으면 가까운 꽃을 다시 고른다. 바뀌었으면 true.
         public bool RefreshGuardedFlower(Pawn pawn)
         {
             RestoreFromDuty(pawn);
@@ -72,7 +66,7 @@ namespace VVRace
             return flower != previous;
         }
 
-        // 지키는 꽃 목록은 저장하지 않으므로, 불러온 뒤에는 저장된 경비 듀티의 초점에서 되살린다(불러올 때마다 지키는 꽃이 바뀌지 않게).
+        // 불러올 때마다 경비 대상이 바뀌지 않도록 저장되지 않는 꽃 목록을 경비 듀티의 대상에서 복원한다.
         private void RestoreFromDuty(Pawn pawn)
         {
             if (_guardedFlowers.ContainsKey(pawn)) { return; }
@@ -84,7 +78,6 @@ namespace VVRace
             }
         }
 
-        // 대상 탐색 기준점: 지키는 꽃, 꽃이 없으면 보스.
         public override IntVec3 GetGuardPoint(Pawn pawn)
         {
             var flower = GetGuardedFlower(pawn);
@@ -98,7 +91,6 @@ namespace VVRace
             return flower is Building_ApocryphaFlower && flower.Spawned && _boss != null && flower.Map == _boss.Map;
         }
 
-        // 가까운 멸망꽃·요정꽃. 이미 다른 말벌이 지키는 꽃은 그 수만큼 멀리 있는 것으로 친다.
         private Thing ChooseFlower(Pawn pawn)
         {
             if (!BossActive || pawn.Map != _boss.Map) { return null; }
@@ -144,7 +136,6 @@ namespace VVRace
             return base.ValidateAttackTarget(searcher, target);
         }
 
-        // 공격당하면 반격하는 대상: 보스, 같은 무리의 말벌, 보스가 피운 꽃.
         protected override bool IsProtected(Thing victim)
         {
             if (victim is Building_ApocryphaFlower) { return true; }

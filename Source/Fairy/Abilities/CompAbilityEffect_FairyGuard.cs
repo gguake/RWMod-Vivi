@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using Verse;
 
 namespace VVRace
@@ -25,7 +25,7 @@ namespace VVRace
             var ctrl = Controller;
             if (ally == null || ctrl == null) { return; }
 
-            // Valid는 시전 시점에만 검사되므로 warmup 동안 상태가 바뀌었을 수 있어 재검증한다.
+            // Valid 검사 후 준비 시간 중에 상태가 바뀔 수 있으므로 적용 직전에 다시 검증한다.
             if (ally.Dead || !ally.Spawned || ally.health == null) { return; }
             if (ally.health.hediffSet.HasHediff(VVHediffDefOf.VV_FairyGuarded)) { return; }
 

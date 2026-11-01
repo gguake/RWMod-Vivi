@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using RimWorld;
 using Verse;
 
@@ -9,7 +9,6 @@ namespace VVRace
         ManaWeaponCastState ManaCastState { get; }
     }
 
-    // 사격 시점의 마나 현황을 기록하기 위한 스냅샷
     public class ManaWeaponCastState : IExposable
     {
         private bool insufficientMana;

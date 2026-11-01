@@ -6,15 +6,11 @@ using Verse;
 
 namespace VVRace
 {
-    // 아포크리파 본체 모듈의 Harmony 등록 지점. EndingCorePatch가 이름으로 찾아 호출한다.
-    // 피해 흡수·사망 처리는 종족 컴프(CompApocrypha)와 전용 생각 트리로 해결한다.
-    // 거대 말벌이 보스에게 적대하지 않도록 하고 호위 반경을 제한하는 처리는 MentalState_HornetBerserk·JobGiver_HornetBerserk를 직접 수정해 구현한다.
     internal static class ApocryphaPatch
     {
         internal static void Patch(Harmony harmony)
         {
-            // 아포크리파는 기믹(결속 해방·공명 파동·마나 파동 의식)에 의한 기절 외의 모든 기절에 면역이다.
-            // 피해를 거치지 않고 StunFor를 직접 부르는 무기·능력·다른 모드도 있으므로 StunFor 자체를 막는다.
+            // 피해 없이 StunFor를 직접 호출하는 무기·능력·모드에도 기절 면역이 적용되도록 StunFor에서 차단한다.
             var stunFor = AccessTools.Method(typeof(StunHandler), nameof(StunHandler.StunFor));
             if (stunFor == null)
             {
@@ -25,7 +21,7 @@ namespace VVRace
                 harmony.Patch(stunFor, prefix: new HarmonyMethod(typeof(ApocryphaPatch), nameof(StunHandler_StunFor_Prefix)));
             }
 
-            // 시나리오의 시작 동물 후보는 동물 종족이면 모두 들어가므로(무작위 시나리오 포함) 최종 보스는 뺀다.
+            // 무작위 시나리오도 모든 동물 종족을 시작 동물 후보에 넣으므로 최종 보스는 명시적으로 제외한다.
             var possibleAnimals = AccessTools.Method(typeof(ScenPart_StartingAnimal), "PossibleAnimals");
             if (possibleAnimals == null)
             {

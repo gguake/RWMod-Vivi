@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Verse;
 
 namespace VVRace
@@ -9,7 +9,7 @@ namespace VVRace
         private const int IdleTurnIntervalMin = 200;
         private const int IdleTurnIntervalMax = 400;
 
-        // 좌우 반전 경계 부근에서 조준각이 진동하면 맵 메시 재생성이 연발되므로 여유각을 넘어야만 반전한다.
+        // 좌우 반전 경계에서 조준각이 흔들리면 메시 재생성이 반복되므로 여유각을 넘을 때만 반전한다.
         private const float FlipHysteresisAngle = 15f;
 
         private ArcanePlant_Turret parent;
@@ -46,7 +46,7 @@ namespace VVRace
                 {
                     flipped = !flipped;
 
-                    // 맵 메시 재생성은 실제로 베이스 그래픽이 반전되는 데프에만 필요하다.
+                    // 기반 그래픽이 실제로 반전되는 def만 맵 메시를 다시 생성한다.
                     if (parent.ArcanePlantTurretExtension?.turretTopBaseFlippable == true && parent.Spawned)
                     {
                         parent.DirtyMapMesh(parent.Map);

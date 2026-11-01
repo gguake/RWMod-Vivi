@@ -35,7 +35,6 @@ namespace VVRace
                 return;
             }
 
-            // 이펙트 지속시간(사운드 ~1초에 맞춤) 동안 2회전 — 회전 속도를 높게 유지한다.
             var angle = progress * 720f;
             var radius = Mathf.Lerp(def.positionRadiusMin, def.positionRadius, progress);
             var direction = Quaternion.AngleAxis(angle, Vector3.up) * Vector3.forward;

@@ -1,11 +1,9 @@
-using Verse;
+﻿using Verse;
 using Verse.AI;
 using Verse.AI.Group;
 
 namespace VVRace
 {
-    // 꽃 경비 듀티: 지키는 꽃이 있으면 그 곁을 배회하고(VV_TitanicHornetFlowerGuard), 꽃이 없으면 보스를 따라다닌다(VV_TitanicHornetEscort).
-    // 실제 교전은 광폭 상태의 JobGiver_HornetBerserk가 지키는 곳 근처에서 처리한다.
     public class LordToil_ApocryphaFlowerGuard : LordToil
     {
         private const int FeedIntervalTicks = 2500;
@@ -44,11 +42,11 @@ namespace VVRace
                 }
             }
 
-            // 1페이즈가 길게 이어져도 경비 말벌이 먹이를 찾아 흩어지거나 굶어 죽지 않게 한다.
+            // 장기전에서도 경비 말벌이 먹이를 찾아 이탈하거나 굶어 죽지 않게 한다.
             LordToil_ApocryphaEscort.KeepFed(lord, FeedIntervalTicks);
         }
 
-        // 지금 듀티가 지키는 곳(꽃 또는 보스)과 맞는지. 불러온 뒤 지키던 꽃이 이미 사라졌으면 듀티 초점이 낡은 채 남아 있을 수 있다.
+        // 불러온 뒤 지키던 꽃이 사라졌을 수 있으므로 듀티 대상이 현재 경비 대상과 일치하는지 확인한다.
         private static bool HasExpectedDuty(Pawn pawn, LordJob_ApocryphaFlowerGuard guardJob)
         {
             var duty = pawn.mindState.duty;
@@ -60,7 +58,7 @@ namespace VVRace
                 : duty.def == ApocryphaDutyDefOf.VV_TitanicHornetEscort && duty.focus.Thing == guardJob.Boss;
         }
 
-        // 초점이 비면 따라가기 작업 지급기가 오류를 내므로 보스가 없으면 습격 듀티로 둔다.
+        // 호위 대상이 없으면 따라가기 작업에서 오류가 나므로 보스 부재 시 습격 듀티를 사용한다.
         private void AssignDuty(Pawn pawn)
         {
             var guardJob = GuardJob;

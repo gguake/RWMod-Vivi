@@ -7,7 +7,6 @@ using Verse.AI.Group;
 
 namespace VVRace
 {
-    // [계약] 아포크리파 출현/호위 말벌 관련 정적 API.
     public static class ApocryphaUtility
     {
         public static bool IsApocrypha(Pawn pawn)
@@ -15,13 +14,12 @@ namespace VVRace
             return pawn != null && pawn.def == ApocryphaThingDefOf.VV_Apocrypha;
         }
 
-        // 맵 외곽에서 target(제단)까지 걸어 들어올 수 있는 진입 칸을 찾는다. 우주/궤도/포켓 맵 등 외곽 등장이 불가능하면 false.
         public static bool TryFindEntryCell(Map map, IntVec3 target, out IntVec3 cell)
         {
             cell = IntVec3.Invalid;
             if (!CanEnterFromEdge(map)) { return false; }
 
-            // 2페이즈 돌진처럼 구조물을 부수며 진입하므로, 파괴 가능한 장애물은 모두 통과할 수 있다고 보고 도달 가능성을 판단한다.
+            // 구조물을 부수며 진입할 수 있으므로 파괴 가능한 장애물은 통과 가능한 것으로 보고 경로를 검사한다.
             var reachParms = TraverseParms.For(TraverseMode.PassAllDestroyableThings);
             bool CanReachTarget(IntVec3 c) => !target.IsValid || !target.InBounds(map) || map.reachability.CanReach(c, target, PathEndMode.Touch, reachParms);
 
@@ -30,8 +28,7 @@ namespace VVRace
                 return true;
             }
 
-            // 기지가 막혀 있어 일반 진입 칸이 없으면 서 있을 수 있는 지붕 없는 외곽 칸 중에서 찾는다.
-            // 안개 낀 칸은 빼서 탐사하지 않은 바위 골짜기에 갇힌 채 등장하지 않게 한다(없으면 등장을 미룬다).
+            // 미탐사 바위 골짜기에 갇혀 등장하지 않도록 안개 칸을 제외한다. 유효한 칸이 없으면 등장을 미룬다.
             return CellFinder.TryFindRandomEdgeCellWith(
                 c => c.Standable(map) && !c.Roofed(map) && !c.Fogged(map) && CanReachTarget(c),
                 map,
@@ -48,7 +45,6 @@ namespace VVRace
             return PawnsArrivalModeDefOf.EdgeWalkIn.Worker.CanUseOnMap(map);
         }
 
-        // 진입 칸에 아포크리파와 호위 거대 말벌 무리를 스폰하고 보스 폰을 반환한다. 실패 시 null.
         public static Pawn SpawnApocrypha(Map map, IntVec3 entryCell, float points)
         {
             if (map == null || !entryCell.IsValid || !entryCell.InBounds(map)) { return null; }
@@ -61,12 +57,10 @@ namespace VVRace
                 map.Tile,
                 forceGenerateNewPawn: true));
 
-            // 첫 렌더 전에 1페이즈 생애 단계(그래픽)로 고정한다.
             boss.ageTracker.LockCurrentLifeStageIndex(0);
 
             GenSpawn.Spawn(boss, entryCell, map, EntryRotation(map, entryCell));
 
-            // 적대 세력을 하나도 찾지 못한 경우: 무소속 + 영구 광폭(무소속 동물인 거대 말벌에게는 적대하지 않는다).
             if (boss.Faction == null)
             {
                 boss.mindState.mentalStateHandler.TryStartMentalState(MentalStateDefOf.ManhunterPermanent, forced: true, transitionSilently: true);
@@ -81,13 +75,11 @@ namespace VVRace
             return boss;
         }
 
-        // 진입 칸에 스폰될 때의 방향(맵 중앙을 바라봄). 등장 연출의 형체도 이 방향으로 내려앉는다.
         public static Rot4 EntryRotation(Map map, IntVec3 entryCell)
         {
             return Rot4.FromAngleFlat((map.Center - entryCell).AngleFlat);
         }
 
-        // 보스 세력: 곤충 세력(모든 세력과 적대) → 아무 적대 세력 → 없음.
         private static Faction ResolveBossFaction()
         {
             var insects = Find.FactionManager.OfInsects;
@@ -99,7 +91,6 @@ namespace VVRace
             return Find.FactionManager.RandomEnemyFaction(allowHidden: true, allowDefeated: false, allowNonHumanlike: true);
         }
 
-        // 보스를 경호하는 거대 말벌을 count마리 증원한다(fromMapEdge=true면 맵 외곽에서, 아니면 보스 근처에서).
         public static List<Pawn> SpawnHornetEscorts(Pawn boss, int count, bool fromMapEdge)
         {
             var result = new List<Pawn>();
@@ -122,7 +113,7 @@ namespace VVRace
                 var cell = CellFinder.RandomClosewalkCellNear(center, map, fromMapEdge ? 6 : 8);
                 GenSpawn.Spawn(hornet, cell, map, Rot4.FromAngleFlat((boss.Position - cell).AngleFlat));
 
-                // 상시 스카리아 기버가 곧 광폭화시키지만, 등장 즉시 적대하도록 광폭 상태를 바로 시작한다.
+                // 상시 스카리아 기버의 다음 처리를 기다리지 않고 스폰 즉시 적대하도록 광폭 상태를 시작한다.
                 hornet.mindState.mentalStateHandler.TryStartMentalState(VVMentalStateDefOf.VV_HornetBerserk, transitionSilently: true);
                 result.Add(hornet);
             }
@@ -148,7 +139,6 @@ namespace VVRace
             return result;
         }
 
-        // 보스전 동안 맵 외곽에서 걸어 들어와 가까운 멸망꽃·요정꽃(없으면 보스) 곁을 지키는 거대 말벌. 보스마다 하나인 꽃 경비 로드에 합류한다.
         public static List<Pawn> SpawnFlowerGuardHornets(Pawn boss, int count)
         {
             if (boss == null || !boss.Spawned) { return new List<Pawn>(); }
@@ -232,20 +222,18 @@ namespace VVRace
             return null;
         }
 
-        // 보스가 2페이즈로 넘어가면 1페이즈 감지로 맡긴 공격 대상을 거둔다.
         public static void ClearEscortFocus(Pawn boss)
         {
             (FindEscortLord(boss)?.LordJob as LordJob_ApocryphaEscort)?.ClearFocus();
         }
 
-        // 보스를 경호 중인 거대 말벌 목록(복사본).
         public static List<Pawn> GetEscorts(Pawn boss)
         {
             var lord = FindEscortLord(boss);
             return lord == null ? new List<Pawn>() : new List<Pawn>(lord.ownedPawns);
         }
 
-        // 보스가 쓰러지면 호위·꽃 경비 로드를 즉시 일반 말벌 습격 토일로 넘긴다(초점이 null인 호위 듀티가 남지 않게).
+        // 대상이 null인 호위 듀티가 남지 않도록 보스 토벌 시 호위·꽃 경비 로드를 일반 습격 토일로 전환한다.
         public static void ReleaseEscorts(Pawn boss)
         {
             GotoAssault(FindEscortLord(boss));
@@ -266,13 +254,12 @@ namespace VVRace
             }
         }
 
-        // [C 참고] 보스가 처치되어 소멸 연출 중인지(보스 폰은 이미 파괴됨). 이 동안에는 "보스 증발" 감지로 엔딩을 끝내지 말 것.
+        // 소멸 연출 중에는 보스 폰이 이미 파괴되어 있으므로 보스 소실 감지로 엔딩을 종료하면 안 된다.
         public static bool IsDefeatInProgress(Map map)
         {
             return map != null && map.listerThings.ThingsOfDef(ApocryphaThingDefOf.VV_DyingApocrypha).Count > 0;
         }
 
-        // 지금 보고 있는 맵에서 일어난 일일 때만 화면을 흔든다.
         public static void ShakeCamera(Map map, float magnitude)
         {
             if (map != null && map == Find.CurrentMap)

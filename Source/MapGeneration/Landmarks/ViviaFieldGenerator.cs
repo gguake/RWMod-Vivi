@@ -6,10 +6,9 @@ using Verse.Noise;
 
 namespace VVRace
 {
-    // 맵 생성 시 비비아 꽃밭을 만든다. 가장자리는 노이즈로 불규칙하게, 색은 몇 개의 무리로 나눈다.
     public static class ViviaFieldGenerator
     {
-        // 자연 발생(ArcanePlantUtility.TrySpawnViviFlower)과 같은 비옥도 기준
+        // 자연 발생 경로인 ArcanePlantUtility.TrySpawnViviFlower와 같은 비옥도 기준을 사용한다.
         private const float MinFertility = 0.5f;
 
         private const float EdgeNoiseFrequency = 0.13f;
@@ -32,7 +31,6 @@ namespace VVRace
             var allColors = ArcanePlantUtility.ViviFlowerDefs.ToList();
             var palette = allColors.InRandomOrder().Take(Mathf.Clamp(colorCount, 1, allColors.Count)).ToList();
 
-            // 색 무리 중심마다 팔레트 색을 돌아가며 배정한다.
             var patchCenters = new List<IntVec3>();
             var patchColors = new List<ThingDef>();
             var patchCount = ColorPatchCountRange.RandomInRange;
@@ -76,7 +74,6 @@ namespace VVRace
             return flowerDef.CanEverPlantAt(c, map, canWipePlantsExceptTree: true);
         }
 
-        // 맵 생성 시 꽃밭/군락 자리에 이미 난 풀·덤불은 걷어 내고, 나무는 남긴다.
         public static bool IsReplaceableWildPlant(Plant plant)
         {
             return !plant.def.plant.IsTree;
@@ -120,7 +117,7 @@ namespace VVRace
             plant.Growth = GrowthRange.RandomInRange;
             if (flowerDef.plant.LimitedLifespan)
             {
-                // 같은 날 한꺼번에 시들지 않도록 나이를 흩어 놓는다.
+                // 한꺼번에 시들지 않도록 생성 시 나이를 분산한다.
                 plant.Age = Rand.Range(0, (int)(flowerDef.plant.LifespanTicks * MaxAgeLifespanRatio));
             }
 

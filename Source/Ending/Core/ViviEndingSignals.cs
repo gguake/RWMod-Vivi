@@ -3,14 +3,11 @@ using Verse;
 
 namespace VVRace
 {
-    // 엔딩 퀘스트 신호·퀘스트 태그 이름. 실제 신호는 바닐라 형식인 "Quest{id}.<이름>"이다.
-    // 퀘스트 생성 중(QuestGen)에는 QuestGenUtility.HardcodedSignalWithQuestID/HardcodedTargetQuestTagWithQuestID로, 그 밖에서는 For로 만든다.
+    // QuestGen 안에서는 HardcodedSignalWithQuestID/HardcodedTargetQuestTagWithQuestID로, 밖에서는 For로 신호 이름을 만든다.
     public static class ViviEndingSignals
     {
-        // 〈비비 연방의 밀서〉: 5단계 대조율 의식 완료(창구가 보낸다) → 밀서 퀘스트 성공
         public const string GrandAttunementCompleted = "GrandAttunementCompleted";
 
-        // 〈만개하는 여명〉 단계 신호
         public const string BloomCondensed = "BloomCondensed";
         public const string CalmEnded = "CalmEnded";
         public const string ApocryphaManifesting = "ApocryphaManifesting";
@@ -22,10 +19,8 @@ namespace VVRace
         public const string EverflowerStolen = "EverflowerStolen";
         public const string AnchorLost = "AnchorLost";
 
-        // 〈영원꽃 완전 동화〉 중인 공명자가 쓰러지거나 죽음(SUBJECT 대신 PAWN 인자) → 실패
         public const string ResonatorFallen = "ResonatorFallen";
 
-        // 퀘스트 태그: 대상에 붙여 두면 바닐라가 "<태그>.Destroyed", "<태그>.MapRemoved" 등을 보낸다.
         public const string AnchorTag = "anchor";
         public const string AnchorMapTag = "anchorMap";
 

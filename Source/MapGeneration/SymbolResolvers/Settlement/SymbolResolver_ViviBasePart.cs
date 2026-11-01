@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using RimWorld.BaseGen;
 using System;
 using System.Collections.Generic;
@@ -84,14 +84,12 @@ namespace VVRace
                 hexaRoomSystem.TryAddConnector(new IntVec2(0, 0), new IntVec2(1, 0));
                 hexaRoomSystem.TryAddConnector(new IntVec2(0, 0), new IntVec2(-1, 0));
 
-                // 안쪽 링 커넥터
                 for (int i = 0; i < innerRing.Length - 1; ++i)
                 {
                     hexaRoomSystem.TryAddConnector(innerRing[i], innerRing[i + 1]);
                 }
                 hexaRoomSystem.TryAddConnector(innerRing[innerRing.Length - 1], innerRing[0]);
 
-                // 바깥쪽 링 커넥터
                 foreach (var line in outerRingLines)
                 {
                     var connector = line.RandomElement();
@@ -221,7 +219,6 @@ namespace VVRace
                     }
                 }
 
-                // 중앙에는 항상 부화실
                 {
                     var p = resolveParams;
                     p.rect = centerRoom.cellRect;

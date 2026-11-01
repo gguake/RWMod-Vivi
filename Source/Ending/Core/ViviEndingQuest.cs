@@ -9,15 +9,9 @@ using Verse.AI.Group;
 
 namespace VVRace
 {
-    // 엔딩 〈만개하는 여명〉의 창구. 진행은 바닐라 퀘스트 두 개가 맡는다.
-    //   〈비비 연방의 밀서〉(VV_EndGame_ViviMissive, QuestNode_Root_ViviMissive): 서신·제단 해금 (도착 조건을 갖추면 창구가 1~2일 뒤 확정으로 발생시킴)
-    //   〈만개하는 여명〉(VV_EndGame_ViviBloom, QuestNode_Root_ViviBloom): 공성 → 평화 기간 → 아포크리파 → 여왕의 대관식 → 엔딩
-    // 새 게임 컴포넌트를 만들지 않고 GameComponent_Mana가 보관·저장·틱 처리한다. 다른 모듈이 쓰는 질의·통지 API를 두 퀘스트의 상태와 신호로 옮기고,
-    // 퀘스트 밖에서 이어져야 하는 일(고대 호박 코어 의뢰, 영원꽃의 잔향 편지, 결속 해방 후 잠시 사라진 비비의 귀환, 제단 맥동·섬광 연출)을 맡는다.
-    // 코어 의뢰는 EndingAmberCore, 잔향 편지는 EndingEchoLetters, 연출은 EndingAmbience, 개발자 도구는 EndingDebug partial 파일에 있다.
     public partial class ViviEndingQuest : IExposable
     {
-        // 결속 해방 후 잠시 맵에서 사라진 비비. 디스폰된 폰을 여기서만 Deep 저장하고(월드 폰에 넘기지 않음) 귀환 틱에 제단 앞에 다시 스폰한다.
+        // 결속 해방 후 귀환을 기다리는 비비. 월드 폰에 넘기지 않고 여기서만 Deep 저장해 귀환 틱에 제단 앞에 스폰한다.
         public class HeldPawn : IExposable
         {
             public Pawn pawn;
@@ -26,7 +20,7 @@ namespace VVRace
 
             public void ExposeData()
             {
-                // 보류 중에 맵이 사라졌으면(정착지 포기 등) 없는 맵을 참조로 저장하지 않는다(귀환할 때 엔딩 맵·정착지로 대신 간다).
+                // 대기 중 맵이 사라지면 유효하지 않은 참조를 저장하지 않는다. 귀환 시 엔딩 맵이나 다른 정착지로 대체한다.
                 if (Scribe.mode == LoadSaveMode.Saving && map != null && !Find.Maps.Contains(map))
                 {
                     map = null;
@@ -44,35 +38,29 @@ namespace VVRace
         private const float ReturnCellSearchRadius = 8f;
         private const int HeldPawnRetryTicks = 2500;
 
-        // 〈비비 연방의 밀서〉: 1~4단계 잔향 편지를 모두 보고 도착 조건을 갖춘 뒤 1~2일 뒤에 확정으로 도착한다.
         public const int MissiveMinEchoStage = 4;
         private static readonly IntRange MissiveDelayTicks = new IntRange(60000, 120000);
 
         private Quest _missiveQuest;
         private Quest _bloomQuest;
 
-        // 밀서 도착 예정 틱(-1: 아직 도착 조건을 갖춘 적 없음)
         private int _missiveDueTick = -1;
 
-        // 〈영원꽃 완전 동화〉 중인 공명자(대조율 의식을 시작한 로열 비비). 아포크리파 토벌까지 제단 안에 정지된 채 보관된다.
         private Pawn _assimilated;
 
-        // 동화 등록부(Hediff_EverflowerAssimilation)는 게임마다 새로 채운다(새 게임·불러오기 모두 이 창구를 새로 만든다).
         public ViviEndingQuest()
         {
             Hediff_EverflowerAssimilation.ResetRegistry();
         }
 
-        // 지금 〈영원꽃 완전 동화〉 중인 공명자(없으면 null).
         public Pawn AssimilatedPawn => _assimilated != null && Hediff_EverflowerAssimilation.IsAssimilated(_assimilated) ? _assimilated : null;
 
-        // 앵커 영원꽃(5단계 대조율을 치른 개체). 바닐라는 끝난 퀘스트의 부품을 정리 30일 뒤 지우므로,
-        // 엔딩 이후에도 쓰는 앵커(축복·제단·날씨 의식)는 퀘스트 부품과 별도로 여기서 들고 있는다.
+        // 바닐라는 종료된 퀘스트의 부품을 정리 후 30일이 지나면 삭제한다.
+        // 축복·제단·날씨 의식에 필요한 앵커는 엔딩 후에도 유지되도록 퀘스트 부품과 별도로 보관한다.
         private ArcanePlant_Everflower _anchor;
 
         private List<HeldPawn> _heldPawns = new List<HeldPawn>();
 
-        // 비저장: 본편 퀘스트 부품 캐시(퀘스트가 바뀌거나 부품 목록이 지워지면 다시 찾는다)
         private Quest _cachedQuest;
         private int _cachedPartCount = -1;
         private QuestPart_ViviEndingState _statePart;
@@ -83,7 +71,6 @@ namespace VVRace
         public Quest MissiveQuest => _missiveQuest;
         public Quest BloomQuest => _bloomQuest;
 
-        // 진행 단계: 본편 퀘스트가 있으면 그 상태(끝났으면 성공 → Completed, 그 외 → Failed), 밀서 퀘스트만 있으면 AltarUnlocked, 그 외 None.
         public ViviEndingStage Stage
         {
             get
@@ -108,7 +95,6 @@ namespace VVRace
             }
         }
 
-        // 6단계 개화 응축 진행도(0~1). Siege 이후에만 의미가 있으며 평화 기간·보스 단계에는 99%, 토벌 뒤에는 100%다.
         public float BloomProgress
         {
             get
@@ -133,31 +119,25 @@ namespace VVRace
             }
         }
 
-        // 엔딩이 묶인 제단 위 영원꽃(5단계 대조율을 완료한 개체). Siege 이전에는 null.
         public ArcanePlant_Everflower AnchorEverflower => _anchor;
         public Map AnchorMap => _anchor?.MapHeld;
 
         public Pawn Boss => _bloomQuest != null && _bloomQuest.State == QuestState.Ongoing ? ApocryphaPart?.Boss : null;
         public CompApocrypha BossComp => Boss?.GetComp<CompApocrypha>();
 
-        // 공성 기간(의식 품질로 정한 8~10일). 본편 퀘스트 전에는 0.
         public int SiegeDurationTicks => BloomPart?.DurationTicks ?? 0;
 
         public bool IsAltarUnlocked => Stage != ViviEndingStage.None;
         public bool IsEndingActive => Stage.IsActiveStage();
         public bool IsCompleted => Stage == ViviEndingStage.Completed;
 
-        // 아포크리파를 토벌해 응축이 100%가 되었고, 공명자의 〈여왕의 대관식〉만 남은 상태.
         public bool IsAwaitingCoronation => Stage == ViviEndingStage.Coronation;
 
-        // 엔딩이 끝났는지(완료·실패).
         private bool IsFinished => Stage.IsFinishedStage();
         public bool IsBossPhase2 => Stage == ViviEndingStage.Boss && BossComp != null && BossComp.Phase == ApocryphaPhase.Unbound;
 
         public bool IsAnchor(ArcanePlant_Everflower everflower) => everflower != null && everflower == _anchor;
 
-        // 평화 기간/보스전 동안 해당 맵의 일반 위협(습격 등) 발생을 막아야 하는지.
-        // 보스가 등장할 길을 찾지 못해 미뤄지는 동안에는 억제를 풀어 정상적인 위협이 다시 찾아오게 한다.
         public bool ShouldSuppressThreats(Map map)
         {
             if (map == null || map != AnchorMap || IsBossDeferred) { return false; }
@@ -166,8 +146,6 @@ namespace VVRace
             return stage == ViviEndingStage.Calm || stage == ViviEndingStage.Boss;
         }
 
-        // 앵커 맵에 습격 비콘(Map_RaidBeacon)을 붙일지. 바닐라 우주선 반응로 가동처럼 공성 시작부터 아포크리파 토벌까지 유지된다.
-        // 평화 기간·보스전에는 위협 억제(ShouldSuppressThreats)가 우선하므로 실제 습격은 공성 중이거나 보스 등장이 미뤄진 동안에만 발생한다.
         public bool IsRaidBeaconActive(Map map)
         {
             if (map == null || map != AnchorMap) { return false; }
@@ -176,13 +154,10 @@ namespace VVRace
             return stage == ViviEndingStage.Siege || stage == ViviEndingStage.Calm || stage == ViviEndingStage.Boss;
         }
 
-        // 평화 기간 남은 틱(평화 타이머가 돌고 있지 않으면 0).
         internal int CalmTicksLeft => Stage == ViviEndingStage.Calm && CalmPart != null && CalmPart.State == QuestPartState.Enabled ? Mathf.Max(0, CalmPart.TicksLeft) : 0;
 
-        // 평화 기간이 끝났는데 아포크리파가 등장할 길을 찾지 못해 미뤄지고 있는지.
         internal bool IsBossDeferred => ApocryphaPart != null && ApocryphaPart.State == QuestPartState.Enabled && ApocryphaPart.IsDeferred;
 
-        // 앵커가 안치된 제단(앵커가 제단 밖으로 밀려났으면 앵커 맵의 제단).
         internal Building_DreamumAltar AnchorAltar => ViviEndingUtility.AltarOf(_anchor);
 
         private QuestPart_ViviEndingState StatePart
@@ -235,7 +210,6 @@ namespace VVRace
             _calmPart = quest?.PartsListForReading.OfType<QuestPart_Delay>().FirstOrDefault(v => v.debugLabel == QuestNode_Root_ViviBloom.CalmDelayLabel);
         }
 
-        // GameComponent_Mana.GameComponentTick에서 매 틱 호출된다. 보류 중인 폰의 귀환과 제단 맥동은 매 틱, 밀서 퀘스트 확인은 2500틱 간격으로 처리한다.
         public void Tick()
         {
             var now = Find.TickManager.TicksGame;
@@ -257,7 +231,7 @@ namespace VVRace
                 TickHeldPawns(now);
             }
 
-            // 제단에 보관된 공명자는 틱이 돌지 않으므로 동화의 판단·연출을 여기서 돌린다.
+            // 보관된 공명자는 틱을 처리하지 않으므로 여기서 동화 상태 판정과 연출을 처리한다.
             if (_assimilated != null)
             {
                 try
@@ -300,14 +274,11 @@ namespace VVRace
             }
         }
 
-        // GameComponent_Mana.GameComponentUpdate에서 매 프레임 호출된다(일시정지 중에도). 실시간 연출만 처리한다.
         public void Update()
         {
             UpdateEndingScreenFade();
         }
 
-        // [B 호출] 5단계 대조율 의식이 끝났을 때 → 밀서 퀘스트 성공, 〈만개하는 여명〉 시작. 시작했으면 true.
-        // 의식은 true일 때만 영원꽃을 5단계로 올린다(다른 제단의 의식이 먼저 엔딩을 시작했거나 퀘스트 생성에 실패하면 4단계로 남아 다시 치를 수 있다).
         public bool Notify_GrandAttunementCompleted(ArcanePlant_Everflower everflower, float quality)
         {
             if (everflower == null || everflower.Destroyed) { return false; }
@@ -322,7 +293,7 @@ namespace VVRace
             return StartBloomQuest(everflower, quality);
         }
 
-        // [D 호출] 아포크리파 소멸 연출이 끝났을 때 → 응축 100%, 〈여왕의 대관식〉 해금. 소멸 연출 Thing이 저장/불러오기를 거치면 boss는 null일 수 있다.
+        // 소멸 연출 도중 저장·불러오기를 거치면 이미 파괴된 boss 참조는 null일 수 있다.
         public void Notify_BossDefeated()
         {
             if (Stage != ViviEndingStage.Boss) { return; }
@@ -330,7 +301,6 @@ namespace VVRace
             ViviEndingSignals.Send(_bloomQuest, ViviEndingSignals.ApocryphaDissolved);
         }
 
-        // [B 호출] 앵커 영원꽃에서 〈여왕의 대관식〉이 끝났을 때 → 6단계 개화 연출 후 곧이어 엔딩 크레딧.
         public void Notify_CoronationCompleted(ArcanePlant_Everflower everflower, Pawn queen)
         {
             if (Stage != ViviEndingStage.Coronation || !IsAnchor(everflower)) { return; }
@@ -338,7 +308,6 @@ namespace VVRace
             ViviEndingSignals.Send(_bloomQuest, ViviEndingSignals.CoronationCompleted, queen.Named("PAWN"));
         }
 
-        // [D 호출] 아포크리파가 영원꽃 채널링을 끝냈을 때 → 실패(편지·정리는 퀘스트). 영원꽃 파괴와 보스 퇴장은 D가 이 호출 뒤에 한다.
         public void Notify_EverflowerStolen()
         {
             if (!IsEndingActive) { return; }
@@ -346,7 +315,6 @@ namespace VVRace
             ViviEndingSignals.Send(_bloomQuest, ViviEndingSignals.EverflowerStolen);
         }
 
-        // [A 호출] 영원꽃의 CompGetGizmosExtra에서 그대로 yield한다(개화 응축 진행 막대, DEV 단계 조작 기즈모).
         public IEnumerable<Gizmo> GetEverflowerGizmos(ArcanePlant_Everflower everflower)
         {
             if (everflower == null) { yield break; }
@@ -362,7 +330,6 @@ namespace VVRace
             }
         }
 
-        // [A 호출] 영원꽃의 CompInspectStringExtra에 덧붙일 엔딩 진행 문구(없으면 null).
         public string GetEverflowerInspectString(ArcanePlant_Everflower everflower)
         {
             if (!IsAnchor(everflower)) { return null; }
@@ -374,8 +341,7 @@ namespace VVRace
             return bloom + "\n" + status;
         }
 
-        // 현재 단계 안내 문구(정보창·퀘스트 탭 설명). 엔딩이 진행 중이거나 완료됐을 때만.
-        // 퀘스트 탭에는 평화 타이머의 남은 시간 줄이 따로 있으므로 평화 기간 남은 시간은 넣지 않는다.
+        // 평화 기간의 남은 시간은 퀘스트 탭에 별도 표시되므로 이 문구에서는 생략한다.
         internal string GetStatusText(bool forQuestTab = false)
         {
             switch (Stage)
@@ -405,8 +371,6 @@ namespace VVRace
             }
         }
 
-        // 〈비비 연방의 밀서〉 도착 조건: 밀서가 아직 없고, 1~4단계 잔향 편지를 모두 봤고, 정착지(제단을 지을 수 있는 지역)에 조율 4단계 이상 영원꽃이 있고,
-        // 패망하지 않은 비적대 비비 연방이 있다. 비비 수·기지 가치는 도착 조건이 아니라 밀서에 적히는 진행 조건이다(ViviEndingRequirements).
         public static bool MissiveArrivalConditionsMet()
         {
             var quest = Current;
@@ -420,8 +384,6 @@ namespace VVRace
             return ViviEndingUtility.FindFederation(requireNonHostile: true) != null;
         }
 
-        // 도착 조건을 처음 갖춘 때부터 MissiveDelayTicks 뒤에 밀서가 확정으로 도착한다. 그 사이 조건이 깨지면(연방 적대 등) 다시 갖출 때까지 기다리며,
-        // 이미 정한 도착 시각은 유지한다(다시 갖추는 즉시 도착할 수 있다).
         private void TickMissiveArrival(int now)
         {
             if (!MissiveArrivalConditionsMet()) { return; }
@@ -438,7 +400,6 @@ namespace VVRace
             }
         }
 
-        // 진행 조건 부품이 생기기 전에 만든 밀서 퀘스트에도 퀘스트 탭 진행 상황을 붙인다.
         private void EnsureMissiveRequirementsPart()
         {
             var quest = _missiveQuest;
@@ -448,7 +409,6 @@ namespace VVRace
             quest.AddPart(new QuestPart_ViviMissiveRequirements());
         }
 
-        // [대조율 의식 호출] 의식이 진행되기 시작할 때(공명자가 영원꽃 곁에 도착) 공명자를 〈영원꽃 완전 동화〉 상태로 만든다.
         public void BeginAssimilation(Pawn resonator, ArcanePlant_Everflower everflower)
         {
             if (resonator == null || everflower == null || Stage != ViviEndingStage.AltarUnlocked) { return; }
@@ -462,8 +422,6 @@ namespace VVRace
             }
         }
 
-        // [동화 헤디프 호출] 공중에 그대로 있어야 하는지: 대조율 의식이 진행 중이거나(밀서 단계), 엔딩이 공성~보스전이고 그 영원꽃이 앵커일 때.
-        // 아포크리파를 토벌해 대관식만 남거나 엔딩이 끝나면 false(천천히 내려와 풀린다).
         public bool ShouldKeepAssimilation(Pawn pawn, ArcanePlant_Everflower everflower)
         {
             if (pawn == null || pawn != _assimilated) { return false; }
@@ -485,7 +443,6 @@ namespace VVRace
             }
         }
 
-        // [동화 헤디프 호출] 동화가 풀렸거나 끊어져 헤디프가 사라졌을 때.
         public void Notify_AssimilationEnded(Pawn pawn)
         {
             if (pawn != null && pawn == _assimilated)
@@ -494,8 +451,6 @@ namespace VVRace
             }
         }
 
-        // [동화 헤디프 호출] 공명자가 쓰러지거나 죽어 동화가 끊어졌을 때. 엔딩(공성~보스전) 중이면 엔딩이 실패하고(편지·정리는 퀘스트),
-        // 대조율 의식 중이면 의식이 취소된다(바닐라가 필수 역할을 잃은 의식을 취소한다).
         public void Notify_AssimilationBroken(Pawn pawn, bool died)
         {
             if (pawn == null || pawn != _assimilated) { return; }
@@ -515,8 +470,7 @@ namespace VVRace
                 MessageTypeDefOf.NegativeEvent);
         }
 
-        // [창구·DEV 호출] 〈비비 연방의 밀서〉 퀘스트를 만든다(서신 편지·제단 해금은 퀘스트가 맡는다). 만들었으면 true.
-        // 도착 조건은 창구의 도착 타이머(TickMissiveArrival)가 검사하며, 여기서는 밀서나 본편 퀘스트가 이미 있는지만 본다.
+        // 도착 조건은 TickMissiveArrival에서 검사하므로 여기서는 기존 밀서·본편 퀘스트 유무만 확인한다.
         public bool StartMissiveQuest(ArcanePlant_Everflower everflower)
         {
             if (_missiveQuest != null || _bloomQuest != null) { return false; }
@@ -533,7 +487,6 @@ namespace VVRace
             }
             SetPoints(slate, everflower?.MapHeld ?? Find.AnyPlayerHomeMap);
 
-            // 생성 오류(이미 기록됨)면 밀서 없이 남아 사건이 다음 기회에 다시 일어날 수 있다.
             var quest = GenerateQuest(EndingCoreDefOf.VV_EndGame_ViviMissive, slate, ViviEndingSignals.GrandAttunementCompleted);
             if (quest == null) { return false; }
 
@@ -542,8 +495,8 @@ namespace VVRace
             return true;
         }
 
-        // 밀서 퀘스트는 대조율 의식으로만 끝나야 한다. 다른 이유로 끝났으면(다른 모드·퀘스트 탭 개발자 도구 등) 고대 호박 코어 의뢰와
-        // 대조율 의식이 막히지 않도록 서신 편지 없이 다시 만든다.
+        // 대조율 외의 이유로 밀서 퀘스트가 종료되면 서신을 재발송하지 않고 퀘스트만 다시 만든다.
+        // 다른 모드나 개발자 도구의 종료로 코어 의뢰와 대조율이 막히는 일을 방지한다.
         private void ReissueEndedMissiveQuest()
         {
             var ended = _missiveQuest;
@@ -559,7 +512,6 @@ namespace VVRace
             slate.Set("reissued", true);
             SetPoints(slate, everflower?.MapHeld ?? Find.AnyPlayerHomeMap);
 
-            // 생성 오류(이미 기록됨)면 다음 확인 때 다시 시도한다.
             var quest = GenerateQuest(EndingCoreDefOf.VV_EndGame_ViviMissive, slate, ViviEndingSignals.GrandAttunementCompleted);
             if (quest == null) { return; }
 
@@ -568,7 +520,6 @@ namespace VVRace
             Find.QuestManager.Add(quest);
         }
 
-        // 대조율 의식 완료: 〈만개하는 여명〉을 앵커와 함께 만들고 밀서 퀘스트를 성공으로 끝낸다. 퀘스트를 만들지 못하면 false.
         private bool StartBloomQuest(ArcanePlant_Everflower everflower, float quality)
         {
             var map = everflower.MapHeld;
@@ -588,7 +539,7 @@ namespace VVRace
             var quest = GenerateQuest(EndingCoreDefOf.VV_EndGame_ViviBloom, slate, ViviEndingSignals.AnchorLost);
             if (quest == null) { return false; }
 
-            // 퀘스트가 추가되는 순간 시작 신호가 처리되므로 창구 상태를 먼저 맞춘다.
+            // 퀘스트를 추가하는 즉시 시작 신호가 처리되므로 상태를 먼저 갱신한다.
             _bloomQuest = quest;
             _anchor = everflower;
             Find.QuestManager.Add(quest);
@@ -606,9 +557,8 @@ namespace VVRace
             slate.Set("points", map != null ? StorytellerUtility.DefaultThreatPointsNow(map) : 0f);
         }
 
-        // 바닐라 QuestUtility.GenerateQuestAndMakeAvailable에서 퀘스트 추가만 뺀 것. 생성에 실패하면 null.
-        // 루트 노드에서 예외가 나면 바닐라 QuestNode.Run은 오류만 기록하고 부품이 빠진 퀘스트를 돌려주므로,
-        // 루트 노드가 맨 마지막에 추가하는 종료 부품(finalSignal을 받는 QuestEnd)까지 있어야 온전한 퀘스트로 본다.
+        // QuestNode.Run은 예외가 나도 오류만 기록하고 불완전한 퀘스트를 반환한다.
+        // 루트가 마지막에 추가하는 finalSignal 수신 QuestEnd까지 있어야 생성이 완료된 것으로 판단한다.
         private static Quest GenerateQuest(QuestScriptDef def, Slate slate, string finalSignal)
         {
             if (def == null)
@@ -634,27 +584,23 @@ namespace VVRace
             return quest;
         }
 
-        // [E 호출] 요정 간섭 비비가 결속을 해방한 뒤 맵에서 잠시 사라졌다가 제단 앞으로 돌아오게 한다.
-        // 스폰된 폰을 넘기면 여기서 스킵 연출과 함께 디스폰한다(이미 디스폰된 폰도 받는다). Scribe_Deep으로 보관하며,
-        // ticks 뒤 제단 앞(또는 맵의 교역 낙하 지점) 근처에 다시 스폰한다. 마지막 자유 정착민이면 보류하지 않고 바로 제단 앞으로 보낸다.
         public void HoldPawnUntilReturn(Pawn pawn, int ticks)
         {
             if (pawn == null || pawn.Destroyed) { return; }
             if (_heldPawns.Any(v => v?.pawn == pawn)) { return; }
 
-            // 돌아올 맵: 폰이 있던 맵(보통 보스·앵커 맵). 이미 디스폰된 폰이면 엔딩 맵(앵커 → 보스) 순으로 정한다.
             var map = pawn.MapHeld ?? AnchorMap ?? Boss?.MapHeld ?? Find.AnyPlayerHomeMap;
 
             if (pawn.Spawned)
             {
-                // 이 비비가 마지막 자유 정착민이면 잠시라도 사라졌을 때 게임 오버 판정이 날 수 있으므로 보류하지 않고 바로 제단 앞으로 보낸다.
+                // 마지막 자유 정착민이 잠시라도 사라지면 게임 오버로 판정될 수 있으므로 대기 없이 제단 앞으로 보낸다.
                 if (IsLastFreeColonist(pawn))
                 {
                     TeleportToAltarFront(pawn);
                     return;
                 }
 
-                // 요정 간섭 헤디프의 틱(폰 자신의 틱) 안에서 불리므로 실제 디스폰은 이번 틱의 게임 컴포넌트 틱(모든 Thing 틱 이후)으로 미룬다.
+                // 폰의 헤디프 틱에서 호출되므로 디스폰은 모든 Thing 틱이 끝난 뒤 게임 컴포넌트 틱으로 미룬다.
                 if (!_pendingHolds.Any(v => v.pawn == pawn))
                 {
                     _pendingHolds.Add(new PendingHold() { pawn = pawn, ticks = ticks, map = map });
@@ -665,7 +611,7 @@ namespace VVRace
             HoldDespawnedPawn(pawn, ticks, map);
         }
 
-        // 저장하지 않는 대기열: 같은 틱 안에 처리되므로 저장 시점에는 항상 비어 있다(일시정지 중 개발자 기즈모로 넣은 경우는 다음 틱).
+        // 같은 틱에 비우는 대기열이므로 저장하지 않는다. 일시정지 중 개발자 기즈모로 추가한 항목은 다음 틱에 처리한다.
         private class PendingHold
         {
             public Pawn pawn;
@@ -694,7 +640,6 @@ namespace VVRace
                         continue;
                     }
 
-                    // 스킵 연출과 함께 사라진다(SkipDeSpawn은 들고 있던 물건을 내려놓고 징집 상태를 기억한다).
                     SkipUtility.SkipDeSpawn(pawn);
                 }
 
@@ -718,8 +663,8 @@ namespace VVRace
 
         private void TickHeldPawns(int now)
         {
-            // 맵에 남은 정착민이 모두 쓰러져 바닐라 게임 오버 카운트다운(400틱)이 시작되면, 보류 중인 정착민은 판정 대상에 포함되지 않으므로
-            // 기다리지 않고 곧바로 돌려보낸다. 스폰되는 순간 바닐라가 다시 판정하므로 카운트다운이 취소된다.
+            // 보관 중인 정착민은 게임 오버 판정에서 제외되므로 남은 정착민이 모두 쓰러지면 귀환 대기를 생략한다.
+            // 즉시 스폰하면 바닐라가 재판정해 400틱의 게임 오버 카운트다운을 취소한다.
             var gameEnding = Find.GameEnder.gameEnding;
             for (int i = _heldPawns.Count - 1; i >= 0; --i)
             {
@@ -741,7 +686,6 @@ namespace VVRace
                 {
                     Log.Error($"[ViViRace] failed to return held pawn {held.pawn}: {ex}");
 
-                    // 스폰 전에 실패했다면 폰을 잃지 않도록 다시 보관하고 잠시 뒤 재시도한다.
                     var pawn = held.pawn;
                     if (!pawn.Spawned && !pawn.Destroyed && pawn.holdingOwner == null && !Find.WorldPawns.Contains(pawn))
                     {
@@ -763,7 +707,6 @@ namespace VVRace
 
             if (map == null)
             {
-                // 돌아갈 맵이 모두 사라졌다면 플레이어 캐러밴에 합류시키고, 캐러밴도 없으면 폰을 잃지 않도록 월드 폰으로 넘긴다.
                 var caravan = Find.WorldObjects.Caravans.FirstOrDefault(v => v.IsPlayerControlled);
                 if (caravan != null)
                 {
@@ -789,7 +732,6 @@ namespace VVRace
             GenSpawn.Spawn(pawn, cell, map);
             pawn.Notify_Teleported();
 
-            // SkipUtility.SkipDeSpawn이 기억해 둔 징집 상태를 되살린다(바닐라 SkipTo와 같은 처리).
             if (pawn.drafter != null && pawn.wasDraftedBeforeSkip)
             {
                 pawn.drafter.Drafted = true;
@@ -803,7 +745,6 @@ namespace VVRace
                 MessageTypeDefOf.PositiveEvent);
         }
 
-        // 자유 정착민이 있는 아무 맵(엔딩 맵·정착지가 모두 사라졌을 때 돌아갈 곳).
         private static Map FindMapWithFreeColonists()
         {
             var maps = Find.Maps;
@@ -824,7 +765,6 @@ namespace VVRace
             returnEffect?.SpawnMaintained(pawn, map);
         }
 
-        // 맵 위의 마지막 자유 정착민인지(그 폰이 잠시라도 사라지면 바닐라 게임 오버 판정이 시작될 수 있다).
         private static bool IsLastFreeColonist(Pawn pawn)
         {
             if (!pawn.IsFreeColonist) { return false; }
@@ -841,7 +781,6 @@ namespace VVRace
             return true;
         }
 
-        // 보류 없이 곧바로 제단 앞으로 순간이동시킨다(스킵 연출 포함).
         private void TeleportToAltarFront(Pawn pawn)
         {
             var map = pawn.Map;

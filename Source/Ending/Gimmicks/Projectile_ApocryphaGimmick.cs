@@ -4,9 +4,8 @@ using Verse;
 
 namespace VVRace
 {
-    // 아포크리파가 쏘는 기믹 투사체(요정 비비 사출탄·씨앗) 공용 처리.
-    // - 포물선을 따라 반짝임 꼬리를 남긴다(바닐라 DrawPos에는 포물선 높이가 없어 직접 계산).
-    // - 지붕/명중 판정 없이 목표 칸에 바로 착탄한다(두꺼운 지붕에 막히면 Impact 없이 사라지는 바닐라 동작을 피함).
+    // 바닐라 DrawPos에는 포물선 높이가 없어 꼬리 위치를 직접 계산한다.
+    // 두꺼운 지붕에 막혀 Impact 없이 사라지지 않도록 지붕·명중 판정을 우회한다.
     public abstract class Projectile_ApocryphaGimmick : Projectile
     {
         [Unsaved]
@@ -22,7 +21,7 @@ namespace VVRace
             }
         }
 
-        // 바닐라 Projectile.ArcHeightFactor(private)와 같은 계산: 짧게 날아가면 포물선 높이를 거리의 20%로 제한한다.
+        // 비공개 Projectile.ArcHeightFactor와 동일하게 짧은 비행의 포물선 높이를 거리의 20%로 제한한다.
         protected float CurrentArcHeight
         {
             get
@@ -38,7 +37,7 @@ namespace VVRace
             }
         }
 
-        // 텍스처의 머리가 중심보다 앞쪽에 그려져 있으면 그만큼 뒤로 당겨 그려, 머리가 실제 위치와 맞게 한다(그리기에만 영향).
+        // 텍스처의 머리가 실제 위치에 오도록 중심에서 앞선 거리만큼 그리기 위치를 뒤로 보정한다.
         public override Vector3 DrawPos
         {
             get

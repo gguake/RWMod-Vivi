@@ -17,7 +17,6 @@ namespace VVRace
 
         public static bool IsCompatibleWithVivi(GeneDef def) => def != GeneDefOf.XenogermReimplanter;
 
-        // 코어/DLC가 아닌 모드에서 추가된 유전자 (모드 옵션에서 개별 설정 대상)
         public static bool IsModGene(GeneDef def) =>
             def.modContentPack != null &&
             !def.modContentPack.PackageId.StartsWith(ModContentPack.CoreModPackageId, StringComparison.Ordinal);
@@ -79,7 +78,6 @@ namespace VVRace
             return eligibleGenes.TakeRandomDistinct(Mathf.Min(count, eligibleGenes.Count));
         }
 
-        // 모드 옵션의 유전자 탭에 표시할 모드 유전자 (일반 또는 아키테 무작위 유전자 후보)
         public static List<GeneDef> GetModGeneCandidates()
         {
             return DefDatabase<GeneDef>.AllDefsListForReading
@@ -134,7 +132,6 @@ namespace VVRace
 
         private static List<HeadTypeDef> _vanillaFemaleAverageHeadsCache;
 
-        // '바닐라 헤드만 사용' 옵션: Female_AverageNormal / Female_AveragePointy / Female_AverageWide 중 랜덤
         public static HeadTypeDef RandomVanillaFemaleAverageHead()
         {
             if (_vanillaFemaleAverageHeadsCache == null)

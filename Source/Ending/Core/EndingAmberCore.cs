@@ -3,24 +3,18 @@ using Verse;
 
 namespace VVRace
 {
-    // 고대 호박 코어 의뢰: 밀서 퀘스트가 진행 중인 동안 통신기로 비비 연방에 3성 무작위 퀘스트를 의뢰하고(AmberCoreCommsOption),
-    // 보상으로 코어를 받는다(ViviAmberCoreQuestGen). 코어는 게임에 하나만 있을 수 있어,
-    // 의뢰한 퀘스트가 끝나지 않았거나 코어(또는 제단)가 남아 있으면 다시 의뢰할 수 없다(AmberCoreUtility).
     public partial class ViviEndingQuest
     {
-        // 마지막으로 의뢰한 고대 호박 코어 퀘스트(없으면 null). 밀서가 다시 만들어져도 이어지도록 밀서 부품이 아닌 창구에 둔다.
+        // 밀서를 재생성해도 의뢰가 유지되도록 마지막 코어 퀘스트를 밀서 부품 대신 이 컨트롤러에 보관한다.
         private Quest _amberCoreQuest;
 
         public Quest AmberCoreQuest => _amberCoreQuest;
 
-        // 의뢰한 퀘스트가 아직 끝나지 않았는지. 퀘스트 탭에서 숨기기만 한 수락 대기 퀘스트도 만료될 때까지 포함한다.
         public bool IsAmberCoreQuestActive => _amberCoreQuest != null
             && (_amberCoreQuest.State == QuestState.NotYetAccepted || _amberCoreQuest.State == QuestState.Ongoing);
 
-        // 통신기 대화에 의뢰 선택지를 보일지: 밀서 퀘스트가 진행 중이고 엔딩이 시작되기 전.
         public bool CanOfferAmberCoreRequest => Stage == ViviEndingStage.AltarUnlocked;
 
-        // 지금 연방에 의뢰할 수 있는지. 안 되면 비활성 사유.
         public AcceptanceReport CanRequestAmberCoreQuest(Faction federation)
         {
             if (federation == null || federation.HostileTo(Faction.OfPlayer))
@@ -38,7 +32,6 @@ namespace VVRace
                 return new AcceptanceReport(LocalizeString_EndingCore.VV_Comms_AmberCoreRequestCoreExists.Translate());
             }
 
-            // 밀서에 적힌 진행 조건(비비 수·기지 가치)을 갖춰야 연방이 일을 맡긴다. 코어가 있어야 제단을 지을 수 있으므로 〈대조율 의식〉도 이 조건 뒤에 열린다.
             var unmet = ViviEndingRequirements.GetUnmetReason();
             if (unmet != null)
             {
@@ -48,8 +41,7 @@ namespace VVRace
             return true;
         }
 
-        // 의뢰 퀘스트를 만들어 퀘스트 목록에 넣고 바닐라 퀘스트 제안 편지를 보낸다. 맡길 퀘스트를 찾지 못하면 null.
-        // 의뢰할 수 있는지(CanRequestAmberCoreQuest)는 부르는 쪽이 확인한다(DEV 도구는 건너뛴다).
+        // 호출자가 CanRequestAmberCoreQuest로 의뢰 가능 여부를 확인해야 한다. 개발자 도구에서는 이 검사를 생략한다.
         public Quest RequestAmberCoreQuest(Faction federation)
         {
             var quest = ViviAmberCoreQuestGen.TryGenerate(federation);

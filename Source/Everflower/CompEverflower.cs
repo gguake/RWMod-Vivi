@@ -19,13 +19,11 @@ namespace VVRace
         }
     }
 
-    // 영원꽃 제단에 안치되었을 때의 그래픽. minLevel이 조율 단계 이하인 그래픽 중 minLevel이 가장 큰 것을 쓴다.
     public class EverflowerAltarGraphic
     {
         public int minLevel;
         public GraphicData graphicData;
 
-        // 의식 완료 이펙트 생성 위치(셀 중심 기준, 꽃봉오리). ritualEffecterOffsetByLevel의 제단 버전.
         public Vector3 ritualEffecterOffset;
     }
 
@@ -40,11 +38,11 @@ namespace VVRace
         public List<GraphicData> graphicsByLevel;
         public List<EffecterDef> effectsOnLevelAcquire;
 
-        // 레벨별 의식 완료 이펙트 생성 위치(셀 중심 기준 오프셋). 각 단계 텍스처의 꽃봉오리 위치에 맞춰 세팅한다.
-        // 비어 있으면 해당 레벨 그래픽의 drawOffset(= 텍스처 중심)을 사용한다.
+        // 단계별 꽃봉오리 위치에 맞춘 의식 완료 이펙트 오프셋(셀 중심 기준).
+        // 값이 없으면 해당 그래픽의 drawOffset, 즉 텍스처 중심을 사용한다.
         public List<Vector3> ritualEffecterOffsetByLevel;
 
-        // 영원꽃 제단에 안치된 동안의 그래픽(줄기 밑동이 제단 중심에 오도록 맞춘 별도 텍스처).
+        // 제단 안치용 별도 텍스처. 줄기 밑동이 제단 중심에 오도록 맞춘다.
         public List<EverflowerAltarGraphic> altarGraphics;
 
         public float teleportRange = 10.9f;
@@ -60,10 +58,9 @@ namespace VVRace
     {
         public static readonly Material AttunementLineMat = MaterialPool.MatFrom(GenDraw.LineTexPath, ShaderDatabase.Transparent, new Color(0.5f, 1f, 0.5f));
 
-        // 조율 단계 상한(엔딩 6단계). 레벨 곡선은 4에서 멈추며 5/6단계는 SetAttunementLevel로만 오른다.
+        // 조율 상한은 6단계다. 레벨 곡선은 4에서 끝나므로 5·6단계는 SetAttunementLevel로만 올린다.
         public const int MaxAttunementLevel = 6;
 
-        // 〈영원꽃 완전 동화〉 중인 공명자가 앞에 떠 있을 때 꽃을 그리는 높이(폰 높이에서 이만큼 아래, 투사체 층보다는 위)
         private const float BehindAssimilatedPawnAltitude = 0.1f;
 
         public CompProperties_Everflower Props => (CompProperties_Everflower)props;
@@ -73,7 +70,6 @@ namespace VVRace
         public float Attunement => _attunementInfo.attunement;
         public int AttunementLevel => _attunementInfo.attunementLevel;
 
-        // 지금 그려지는 그래픽. 제단에 안치되어 있으면 제단 그래픽, 아니면 레벨별 그래픽(목록을 넘는 레벨은 마지막 단계).
         public GraphicData CurrentGraphicData
         {
             get
@@ -88,11 +84,8 @@ namespace VVRace
             }
         }
 
-        // 현재 그래픽을 그릴 때 셀 중심을 기준으로 적용하는 오프셋.
-        // 이펙트를 thing 중심이 아니라 실제 꽃 그래픽 위치에서 재생할 때 사용한다. (DrawAt 참고)
         public Vector3 CurrentGraphicOffset => CurrentGraphicData.drawOffset;
 
-        // 의식 완료 이펙트는 텍스처 중심(drawOffset)이 아니라 각 성장 단계 꽃봉오리 위치에서 터지도록 보정한다.
         public Vector3 RitualEffecterOffset
         {
             get
@@ -112,8 +105,6 @@ namespace VVRace
             }
         }
 
-        // [계약] 제단 중앙 칸에 안치되어 있으면 그 제단, 아니면 null.
-        // 캐시는 RefreshEnshrinement가 갱신하고, 여기서는 제단이 아직 같은 자리에 스폰되어 있는지만 확인한다.
         public Building_DreamumAltar EnshrinedAltar
         {
             get
@@ -131,7 +122,6 @@ namespace VVRace
 
         public bool IsEnshrined => EnshrinedAltar != null;
 
-        // 안치된 동안 쓰는 제단 그래픽(안치되지 않았거나 해당 단계의 제단 그래픽이 없으면 null).
         public EverflowerAltarGraphic CurrentAltarGraphic => IsEnshrined ? GetAltarGraphic(_attunementInfo.attunementLevel) : null;
 
         private EverflowerAttunementInfo _attunementInfo;
@@ -173,13 +163,13 @@ namespace VVRace
         {
             base.PostDeSpawn(map, mode);
 
-            // 맵에서 빠지면(포장·파괴) 안치 캐시를 비워, 다시 제단에 놓일 때 새 안치로 판정되게 한다.
+            // 재안치를 새 안치로 판정하도록 포장·파괴로 맵을 떠날 때 안치 캐시를 비운다.
             _enshrinedAltar = null;
         }
 
         public override void PostDestroy(DestroyMode mode, Map previousMap)
         {
-            // 엔딩 앵커의 파괴는 앵커 퀘스트 태그("<태그>.Destroyed")로 바닐라가 엔딩 퀘스트에 알린다(여기서 따로 보내지 않는다).
+            // 앵커 파괴는 바닐라가 퀘스트 태그의 <태그>.Destroyed 신호로 알리므로 별도 통지를 보내지 않는다.
             foreach (var pawn in LinkedPawns.ToList())
             {
                 UnlinkAttunement(pawn);
@@ -198,7 +188,7 @@ namespace VVRace
             var mesh = graphic.Graphic.MeshAt(parent.Rotation);
             var drawPos = parent.DrawPos + graphic.drawOffset;
 
-            // 꽃은 폰보다 높게(앞에) 그려지므로, 〈영원꽃 완전 동화〉 중인 공명자가 꽃 앞 공중에 떠 있는 동안에는 폰 바로 뒤 높이로 내려 잎에 가려지지 않게 한다.
+            // 완전 동화 중인 공명자가 잎에 가려지지 않도록 꽃을 폰 바로 뒤 높이로 내린다.
             if (Hediff_EverflowerAssimilation.IsFloatingBefore(Everflower))
             {
                 drawPos.y = AltitudeLayer.Pawn.AltitudeFor() - BehindAssimilatedPawnAltitude;
@@ -238,7 +228,6 @@ namespace VVRace
                     };
                 }
 
-                // 레벨 곡선은 4단계에서 멈추므로 자동 테스트·개발용으로 4~6단계를 직접 지정한다.
                 for (int i = 4; i <= MaxAttunementLevel; ++i)
                 {
                     var targetLevel = i;
@@ -253,7 +242,6 @@ namespace VVRace
                 }
             }
 
-            // 엔딩 퀘스트의 개화 응축 진행 막대와 DEV 단계 조작 기즈모
             var endingGizmos = ViviEndingQuest.Current?.GetEverflowerGizmos(Everflower);
             if (endingGizmos != null)
             {
@@ -273,7 +261,7 @@ namespace VVRace
             {
                 if (level > 4)
                 {
-                    // 5/6단계는 레벨 곡선 밖이라 경험치 비율이 의미 없으므로 단계만 표시한다.
+                    // 5·6단계는 레벨 곡선 밖이므로 경험치 비율을 생략하고 단계만 표시한다.
                     sb.AppendInNewLine(LocalizeString_EndingAltar.VV_Inspector_EverflowerAttunementLevelOnly.Translate(level.Named("LEVEL")));
                 }
                 else
@@ -431,7 +419,6 @@ namespace VVRace
 
         }
 
-        // [계약] 엔딩 퀘스트용 강제 레벨 변경(5: 대조율 완료, 6: 아포크리파 토벌). 레벨 곡선은 4에서 멈추므로 5/6은 이 경로로만 오른다.
         public void SetAttunementLevel(int level)
         {
             ChangeAttunementLevel(Mathf.Clamp(level, 0, MaxAttunementLevel));
@@ -443,7 +430,6 @@ namespace VVRace
             if (previousLevel == level) { return; }
             _attunementInfo.attunementLevel = level;
 
-            // 레벨이 내려가는 경우(개발자 기즈모)에는 레벨업 편지와 성장 이펙트를 생략한다.
             var levelUp = level > previousLevel;
             if (levelUp && level > 1)
             {
@@ -465,8 +451,8 @@ namespace VVRace
 
         private void SendLevelUpLetter(int level)
         {
-            // 제단이 필요한 의식(대조율)은 4단계 도달 시점엔 아직 잠겨 있으므로 목록에서 빼고, 제단 해금 서신·안치 메시지로 따로 알린다.
-            // 엔딩을 끝내는 의식(여왕의 대관식)도 5단계 도달 시점엔 아포크리파 토벌 전이라 잠겨 있으므로 빼고, 대관식 대기 서신으로 따로 알린다.
+            // 대조율과 여왕의 대관식은 각각 4·5단계 도달 시점에 아직 잠겨 있으므로 해금 목록에서 제외한다.
+            // 대조율은 제단 해금 서신·안치 메시지로, 대관식은 토벌 후 대기 서신으로 안내한다.
             var rituals = new List<string>();
             foreach (var ritualDef in DefDatabase<PreceptDef>.AllDefsListForReading)
             {
@@ -481,7 +467,6 @@ namespace VVRace
 
             var sb = new StringBuilder();
 
-            // 5·6단계는 레벨 곡선 밖에서만 오르므로 전용 머리말을 앞에 붙이고, 새로 열리는 의식이 있을 때만 그 목록을 덧붙인다.
             string preamble = null;
             if (level == 5)
             {
@@ -519,8 +504,6 @@ namespace VVRace
                 parent);
         }
 
-        // 제단 안치 상태를 다시 계산한다. 순간이동 직후, 영원꽃·제단 스폰(재설치·완공·불러오기) 시 호출된다.
-        // 새로 안치되면 이펙트·메시지를 띄우고 엔딩 퀘스트에 알린다. silent가 true이면(불러오기) 상태만 갱신한다.
         internal void RefreshEnshrinement(bool silent = false)
         {
             var previousAltar = _enshrinedAltar;
@@ -531,13 +514,13 @@ namespace VVRace
             {
                 var map = parent.Map;
 
-                // 중앙 칸의 edifice는 영원꽃으로 맞춘다. (제단을 나중에 지었거나 불러오기에서 제단이 늦게 스폰되면 제단이 덮어쓴다)
+                // 제단의 늦은 스폰이나 후속 건설이 edifice를 덮어쓸 수 있으므로 중앙 칸을 영원꽃으로 복구한다.
                 if (map.edificeGrid[parent.Position] != parent)
                 {
                     map.edificeGrid.Register(Everflower);
                 }
 
-                // 안치된 영원꽃은 제단에서 내리지 않으므로 걸려 있던 순간이동 예약을 지운다.
+                // 안치 후에는 제단에서 옮길 수 없으므로 기존 순간이동 예약을 취소한다.
                 Everflower.Unreserve();
 
                 if (altar != previousAltar && !silent)
@@ -550,8 +533,7 @@ namespace VVRace
             RefreshAltarMana(parent.MapHeld);
         }
 
-        // 성장(레벨) 이펙트를 꽃 그래픽 위치에 맞춰 재생한다.
-        // 1~4단계 이펙트는 제단 밖 그래픽, 5/6단계 이펙트는 제단 위 그래픽 기준 오프셋으로 만들어져 있다.
+        // 이펙트 오프셋은 1~4단계는 제단 밖 그래픽, 5·6단계는 제단 위 그래픽을 기준으로 한다.
         internal void SpawnLevelEffect(IntVec3 cell, Map map, bool onAltar)
         {
             var level = _attunementInfo.attunementLevel;
@@ -563,12 +545,11 @@ namespace VVRace
 
             if (level >= 5)
             {
-                // 제단 밖이면 제단 그래픽과 제단 밖 그래픽의 오프셋 차이(줄기 밑동 보정)만큼 옮겨서 재생한다.
                 effecterDef.Spawn(cell, map, onAltar ? Vector3.zero : GetOffAltarEffectShift(level)).Cleanup();
             }
             else if (onAltar)
             {
-                // 1~4단계 이펙트의 꽃 모양 발광은 제단 밖 그래픽을 기준으로 하므로, 제단 위에서는 위치가 어긋나 생략한다.
+                // 1~4단계의 꽃 모양 발광은 제단 밖 그래픽 기준이라 제단 위에서는 위치가 맞지 않아 생략한다.
                 return;
             }
             else if (parent.Spawned && cell == parent.Position)
@@ -625,7 +606,6 @@ namespace VVRace
             return shift;
         }
 
-        // 5/6단계·안치 상태가 바뀌면 맵 마나(제단 발판 방출, 6단계 전역 바닥값)를 다시 계산하게 한다.
         private static void RefreshAltarMana(Map map)
         {
             map?.GetManaComponent()?.RefreshEverflowerAltarState();

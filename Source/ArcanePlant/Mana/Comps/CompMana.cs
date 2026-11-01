@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
@@ -44,7 +44,6 @@ namespace VVRace
 
         public bool Active => _manaActivated;
 
-        // 〈황금빛 꽃안개〉가 걸린 맵의 마법 식물은 마나가 늘 가득 차 있고 써도 줄지 않는다.
         public bool IsUnlimited => GoldenBloomUtility.IsManaUnlimited(parent);
 
         public float Stored
@@ -280,7 +279,7 @@ namespace VVRace
             }
             else
             {
-                // manaChange <= 0 이면 흡수 가능량 전체가 이미 소비에 충당된 상태이므로 환경에서 전액 차감한다.
+                // manaChange <= 0이면 흡수량이 이미 전부 소비에 쓰였으므로 환경 마나에서 전액 차감한다.
                 if (absorbableMana > 0f)
                 {
                     manaGrid.ChangeEnvironmentMana(pos, -absorbableMana);
@@ -298,7 +297,6 @@ namespace VVRace
             SetActivated(manaChange >= 0f);
         }
 
-        // 〈황금빛 꽃안개〉: 저장 마나를 가득 채운 채 흡수·소비는 하지 않고, 생산한 마나만 그대로 환경으로 흘려보낸다.
         private void RefreshManaUnlimited(ManaMapComponent manaGrid, IntVec3 pos, int ticks)
         {
             _manaStored = Props.manaCapacity;

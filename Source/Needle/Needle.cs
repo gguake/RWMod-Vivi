@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using RPEF;
 using System.Collections.Generic;
 using System.Linq;
@@ -390,9 +390,7 @@ namespace VVRace
             var c1 = p1 + w1 / 3f;
             var c2 = p2 - w2 / 3f;
 
-            /// p1, w1 : start coordinate, derivative
-            /// p2, w2 : dest coordinate, derivative
-            /// t : [0,1]
+            // p1/p2: 시작/끝 위치, w1/w2: 각 끝점의 미분값, t: [0, 1].
             return Mathf.Pow(tInv, 3) * p1 +
                 3 * tInv * tInv * t * c1 +
                 3 * tInv * t * t * c2 +
@@ -405,9 +403,7 @@ namespace VVRace
             var c1 = p1 + w1 / 3f;
             var c2 = p2 - w2 / 3f;
 
-            /// p1, w1 : start coordinate, derivative
-            /// p2, w2 : dest coordinate, derivative
-            /// t : [0,1]
+            // p1/p2: 시작/끝 위치, w1/w2: 각 끝점의 미분값, t: [0, 1].
             return -3 * tInv * tInv * p1 +
                 3 * tInv * (1 - 3 * t) * c1 + 
                 3 * t * (2 - 3 * t) * c2 + 

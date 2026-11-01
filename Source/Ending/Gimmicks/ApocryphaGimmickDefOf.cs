@@ -3,8 +3,6 @@ using Verse;
 
 namespace VVRace
 {
-    // 아포크리파 1페이즈 기믹(사출탄·멸망꽃/요정꽃·요정 간섭·연결선) 모듈 전용 DefOf.
-    // 병렬 작업 충돌을 피하기 위해 VVDefOf.cs 대신 이 폴더에 둔다.
     [DefOf]
     public static class ApocryphaGimmickDefOf
     {

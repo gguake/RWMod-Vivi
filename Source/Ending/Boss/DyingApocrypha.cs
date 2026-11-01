@@ -5,12 +5,6 @@ using Verse;
 
 namespace VVRace
 {
-    // 처치된 아포크리파의 소멸 연출(DyingRevenant 패턴). 저장되므로 연출 도중 저장/불러오기를 해도 이어진다.
-    // 마지막 방향·크기·2페이즈 그래픽을 기억해 VV_Dissolve 셰이더로 위에서부터 황금 테두리를 남기며 녹아내리는 모습을 그리고,
-    // 녹는 경계에서 재와 금빛 불씨를 피워 올린다. 〈영원꽃 완전 동화〉 중인 공명자가 같은 맵에 있으면 흩어지는 영혼 입자가 그 비비에게 날아가 스며든다.
-    // 끝나면 (엔딩 퀘스트의 보스였다면) 엔딩 컨트롤러에 토벌을 알리고 사라진다(공명자는 이어서 풀려 내려온다).
-    // 찬탈 모드(InitStolen): 영원꽃을 빼앗고 떠나는 모습. 영원꽃이 꽃잎으로 흩어져 보스에게 빨려 들고,
-    // 이어 보스도 바람이 부는 쪽 가장자리부터 꽃잎으로 흩날리며 떠오르듯 사라진다. 토벌이 아니므로 퀘스트에 알리지 않는다.
     [StaticConstructorOnStartup]
     public class DyingApocrypha : Thing
     {
@@ -23,13 +17,10 @@ namespace VVRace
         private const int EmberInterval = 3;
         private const int ShakeInterval = 60;
 
-        // 공명자에게 스며드는 영혼 입자: 녹는 경계에서 SoulInterval마다 나와 VV_Fleck_AssimilationSoul의 수명(SoulLifeSecs) 동안 공명자에게 닿는다.
-        // 공명자 몸에는 SoulAbsorbInterval마다 작은 흡수 빛이 번지고, 소멸이 끝나는 순간 크게 빛난다.
         private const int SoulInterval = 2;
         private const float SoulLifeSecs = 2.2f;
         private const int SoulAbsorbInterval = 40;
 
-        // 찬탈 모드: 영원꽃이 먼저 흩어지고, 꽃잎이 보스에게 닿을 무렵 보스가 흩날리기 시작한다.
         private const float FlowerDelaySecs = 0.15f;
         private const float FlowerDurationSecs = 2.2f;
         private const float StolenBossDelaySecs = 1.3f;
@@ -69,10 +60,8 @@ namespace VVRace
         private int _startTick = -1;
         private bool _notified;
 
-        // 엔딩 퀘스트의 보스였는지. 퀘스트와 무관한 아포크리파(개발자 도구로 소환 등)의 소멸은 토벌로 알리지 않는다.
         private bool _questBoss = true;
 
-        // 찬탈 모드: 영원꽃 그림(Graphic_Single 경로·그리는 중심·크기), 꽃봉오리 위치, 보스 몸통 중심 오프셋, 꽃잎이 날아가는 방향(평면 단위 벡터)
         private bool _stolen;
         private string _flowerTexPath;
         private Vector3 _flowerDrawPos;
@@ -83,13 +72,11 @@ namespace VVRace
 
         private float AgeSecs => Mathf.Max(0, Find.TickManager.TicksGame - _startTick) / 60f;
 
-        // 녹아내리는 정도(0~1). 노이즈가 위쪽부터 낮으므로 경계는 위에서 아래로 내려온다.
         private float DissolveProgress => Mathf.Clamp01((AgeSecs - DissolveDelaySecs) / DissolveDurationSecs);
 
         private float FlowerProgress => Mathf.Clamp01((AgeSecs - FlowerDelaySecs) / FlowerDurationSecs);
         private float StolenBossProgress => Mathf.Clamp01((AgeSecs - StolenBossDelaySecs) / StolenBossDurationSecs);
 
-        // 찬탈 모드에서 흩날리는 동안 보스가 떠오르며 바람 쪽으로 살짝 밀려나는 거리
         private Vector3 StolenDrift
         {
             get
@@ -114,7 +101,7 @@ namespace VVRace
             _drawOffset = new Vector3(offset.x, 0f, offset.z);
         }
 
-        // 찬탈 모드로 초기화한다. 영원꽃과 보스를 없애기 전에 불러 지금 모습을 기억한다.
+        // 찬탈 직전의 모습을 보존하도록 영원꽃과 보스를 제거하기 전에 연출을 초기화한다.
         public void InitStolen(Pawn boss, ArcanePlant_Everflower everflower)
         {
             InitFrom(boss);
@@ -135,7 +122,6 @@ namespace VVRace
             }
             _flowerBudPos = budPos;
 
-            // 꽃잎은 영원꽃에서 보스 쪽으로, 조금 위(화면 위쪽)로 치우쳐 날아간다.
             var away = bossCenter - budPos;
             away.y = 0f;
             away = away.sqrMagnitude > 0.25f ? away.normalized : Vector3.right;
@@ -150,7 +136,7 @@ namespace VVRace
             {
                 _startTick = Find.TickManager.TicksGame;
 
-                // 찬탈 모드는 찬탈 순간의 연출(CompApocrypha.StealEverflower)이 이미 터졌다.
+                // 찬탈 모드는 CompApocrypha.StealEverflower에서 시작 이펙트를 이미 재생했으므로 중복 재생하지 않는다.
                 if (!_stolen)
                 {
                     ApocryphaEffecterDefOf.VV_Effecter_ApocryphaDeath.Spawn(Position, map, _drawOffset).Cleanup();
@@ -169,7 +155,7 @@ namespace VVRace
             Scribe_Values.Look(ref _startTick, "startTick", -1);
             Scribe_Values.Look(ref _notified, "notified", false);
 
-            // 기본값을 true로 두어 이 값이 없던 저장(소멸 도중 저장)도 예전처럼 퀘스트에 알린다.
+            // 이 필드가 없는 구버전 세이브에서도 토벌을 통지하도록 기본값은 true로 둔다.
             Scribe_Values.Look(ref _questBoss, "questBoss", true);
 
             Scribe_Values.Look(ref _stolen, "stolen", false);
@@ -203,7 +189,6 @@ namespace VVRace
             }
         }
 
-        // 찬탈 모드: 영원꽃의 꽃잎은 보스에게 빨려 들고, 보스의 꽃잎은 흩날리는 경계에서 바람을 타고 날아간다.
         private void ThrowStolenPetals(int age)
         {
             var map = Map;
@@ -229,7 +214,7 @@ namespace VVRace
                 ApocryphaUtility.ShakeCamera(map, 0.2f);
             }
 
-            // 셰이더는 바람 쪽 가장자리부터 지우므로, 경계는 바람 축을 따라 바람 쪽 끝에서 반대쪽 끝으로 옮겨 간다.
+            // 셰이더가 바람 방향의 가장자리부터 지우므로 소멸 경계도 같은 축을 따라 반대편으로 이동시킨다.
             var center = DrawPos + _drawOffset + StolenDrift;
             var front = _drawSize * 0.8f * (0.5f - bossProgress);
             var side = new Vector3(_wind.z, 0f, -_wind.x);
@@ -253,7 +238,6 @@ namespace VVRace
             Map.flecks.CreateFleck(data);
         }
 
-        // 녹아내리는 경계 높이에서 재(먼지)와 금빛 불씨가 피어오른다.
         private void ThrowDissolveParticles(int age)
         {
             var progress = DissolveProgress;
@@ -294,7 +278,6 @@ namespace VVRace
             ThrowSoulsToResonator(age, center, frontZ, halfWidth);
         }
 
-        // 〈영원꽃 완전 동화〉 중인 공명자(같은 맵, 퀘스트 보스일 때만). 없으면 null.
         private Pawn AbsorbingResonator
         {
             get
@@ -306,7 +289,6 @@ namespace VVRace
             }
         }
 
-        // 녹는 경계에서 떨어져 나온 금빛 영혼 입자가 공명자에게 곧장 날아가 스며든다(입자 수명 동안 몸통에 닿도록 속도를 맞춘다).
         private void ThrowSoulsToResonator(int age, Vector3 center, float frontZ, float halfWidth)
         {
             if (age % SoulInterval != 0) { return; }
@@ -340,7 +322,6 @@ namespace VVRace
                 FilthMaker.TryMakeFilth(Position, map, ThingDefOf.Filth_Ash, 3);
                 ApocryphaEffecterDefOf.VV_Effecter_ApocryphaVanish.Spawn(Position, map, 2f).Cleanup();
 
-                // 마지막 영혼까지 스며든 공명자가 크게 빛난다(이어서 풀려 내려온다).
                 var assimilation = Hediff_EverflowerAssimilation.Of(AbsorbingResonator);
                 if (assimilation != null)
                 {
@@ -358,7 +339,7 @@ namespace VVRace
             }
         }
 
-        // 연출이 끝나기 전에 사라져도(산 지붕 붕괴에 깔림 등) 토벌 통지가 빠지지 않게 한다.
+        // 산 지붕 붕괴 등으로 연출이 조기 제거돼도 토벌 통지는 누락되지 않아야 한다.
         public override void Destroy(DestroyMode mode = DestroyMode.Vanish)
         {
             NotifyDefeated();
@@ -395,7 +376,7 @@ namespace VVRace
             PropertyBlock.Clear();
             PropertyBlock.SetFloat(ShaderPropertyIDs.AgeSecs, AgeSecs);
 
-            // 서쪽은 동쪽 텍스처를 좌우 반전해 그린다(Graphic_Multi와 같은 규칙). 반전 메시는 UV도 뒤집히므로 지우는 방향의 x도 뒤집는다.
+            // Graphic_Multi처럼 서쪽은 동쪽 텍스처를 좌우 반전한다. 메시의 UV도 반전되므로 소멸 방향의 x도 뒤집는다.
             var westFlip = _rotation == Rot4.West;
             if (_stolen)
             {
@@ -408,7 +389,6 @@ namespace VVRace
             Graphics.DrawMesh(mesh, matrix, material, 0, null, 0, PropertyBlock);
         }
 
-        // 찬탈 모드: 사라진 영원꽃 자리에 같은 그림을 그려, 바람 쪽 가장자리부터 꽃잎으로 흩어지게 한다.
         private void DrawStolenFlower()
         {
             if (_flowerTexPath.NullOrEmpty() || FlowerProgress >= 1f) { return; }
@@ -424,7 +404,7 @@ namespace VVRace
             Graphics.DrawMesh(MeshPool.plane10, matrix, material, 0, null, 0, PropertyBlock);
         }
 
-        // 공유 재질(죽음 연출 값)은 그대로 두고 이번 그리기에만 찬탈 연출 값을 덮어쓴다.
+        // 공유 재질의 죽음 연출 값은 유지하고 이번 그리기에만 찬탈 연출 값을 적용한다.
         private void SetStolenParams(float delay, float duration, Color edgeColor, float sweepX)
         {
             PropertyBlock.SetFloat(DissolveDelayId, delay);
@@ -447,7 +427,7 @@ namespace VVRace
             Material material = null;
             if (texture != null)
             {
-                // (텍스처, VV_Dissolve, 흰색) 요청은 이 연출만 쓰므로 공유 재질의 매개변수를 직접 바꿔도 다른 곳에 영향이 없다.
+                // 이 연출만 사용하는 (텍스처, VV_Dissolve, 흰색) 조합이므로 공유 재질을 수정해도 다른 연출에 영향이 없다.
                 material = MaterialPool.MatFrom(texture, ShaderDatabase.LoadShader("Map/VV_Dissolve"), Color.white);
                 if (noise != null)
                 {

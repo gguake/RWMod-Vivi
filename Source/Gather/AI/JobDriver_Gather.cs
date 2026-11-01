@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -60,13 +60,11 @@ namespace VVRace
 
         protected override IEnumerable<Toil> MakeNewToils()
         {
-            // 이동
             yield return Toils_Goto.GotoThing(GatherTargetIdx, PathEndMode.Touch)
                 .FailOnDespawnedNullOrForbidden(GatherTargetIdx)
                 .FailOnBurningImmobile(GatherTargetIdx)
                 .FailOn(() => IsBillDisabled);
 
-            // 자원 채집
             var gatherWorkAmount = Mathf.CeilToInt(GatheringRecipeDef.GatheringWorkAmount / (job.RecipeDef.workSpeedStat != null ? pawn.GetStatValue(job.RecipeDef.workSpeedStat) : 1f));
             yield return Toils_General.Wait(gatherWorkAmount, GatherTargetIdx)
                 .FailOnDespawnedNullOrForbidden(GatherTargetIdx)
@@ -81,7 +79,6 @@ namespace VVRace
                 .WithActiveSkill(() => job.bill.recipe.workSkill)
                 .WithProgressBarToilDelay(GatherTargetIdx);
 
-            // 채집 체크
             yield return new Toil()
                 .WithDefaultCompleteMode(ToilCompleteMode.Instant)
                 .WithInitAction(() =>
@@ -100,13 +97,11 @@ namespace VVRace
 
             if (GatheringRecipeDef.ProcessingWorkAmount > 0)
             {
-                // 가공이 필요한 경우 작업대로 이동
                 yield return Toils_Goto.GotoThing(BillGiverTargetIdx, PathEndMode.InteractionCell)
                     .FailOnDespawnedNullOrForbidden(BillGiverTargetIdx)
                     .FailOnBurningImmobile(BillGiverTargetIdx)
                     .FailOn(() => IsBillDisabled);
 
-                // 작업대에서 결과물을 가공
                 var processWorkAmount = Mathf.CeilToInt(GatheringRecipeDef.ProcessingWorkAmount / pawn.GetStatValue(StatDefOf.WorkSpeedGlobal));
                 yield return Toils_General.Wait(processWorkAmount, BillGiverTargetIdx)
                     .FailOnDespawnedNullOrForbidden(BillGiverTargetIdx)
@@ -132,7 +127,6 @@ namespace VVRace
                     .FailOnCannotTouch(BillGiverTargetIdx, PathEndMode.InteractionCell)
                     .PlaySustainerOrSound(() => GetActor().CurJob.bill.recipe.soundWorking);
 
-                // 작업대에서 결과물을 저장
                 yield return new Toil()
                     .WithDefaultCompleteMode(ToilCompleteMode.Instant)
                     .WithInitAction(() =>
@@ -143,14 +137,12 @@ namespace VVRace
 
                         job.bill.Notify_BillWorkFinished(pawn);
 
-                        // 스킬 레벨업 처리
                         if (curJob.RecipeDef.workSkill != null && !curJob.RecipeDef.UsesUnfinishedThing)
                         {
                             float xp = job.bill.recipe.workAmount * 0.1f * curJob.RecipeDef.workSkillLearnFactor;
                             actor.skills.GetSkill(curJob.RecipeDef.workSkill).Learn(xp);
                         }
 
-                        // 스탯 및 작업대 효율 보정 계산
                         var efficiency = curJob.RecipeDef.efficiencyStat != null ? actor.GetStatValue(curJob.RecipeDef.efficiencyStat) : 1f;
                         if (curJob.RecipeDef.workTableEfficiencyStat != null)
                         {
@@ -186,7 +178,6 @@ namespace VVRace
                             }
                         }
 
-                        // thing 생성 후 notification
                         curJob.bill.Notify_IterationCompleted(actor, new List<Thing>());
                         RecordsUtility.Notify_BillDone(actor, allProducts);
 
@@ -196,7 +187,6 @@ namespace VVRace
 
                             if (curJob.bill.GetStoreMode() == BillStoreModeDefOf.DropOnFloor)
                             {
-                                // 바닥에 놓는 경우
                                 for (int i = 0; i < allProducts.Count; ++i)
                                 {
                                     if (!GenPlace.TryPlaceThing(allProducts[i], actor.Position, actor.Map, ThingPlaceMode.Near))
@@ -208,7 +198,6 @@ namespace VVRace
                             }
                             else
                             {
-                                // 결과물이 여러개인 경우 맨 앞의 하나만 들고가고 나머지는 바닥에 둔다.
                                 for (int i = 1; i < allProducts.Count; ++i)
                                 {
                                     if (!GenPlace.TryPlaceThing(allProducts[i], actor.Position, actor.Map, ThingPlaceMode.Near))
@@ -280,14 +269,12 @@ namespace VVRace
 
                         job.bill.Notify_BillWorkFinished(pawn);
 
-                        // 스킬 레벨업 처리
                         if (curJob.RecipeDef.workSkill != null && !curJob.RecipeDef.UsesUnfinishedThing)
                         {
                             float xp = job.bill.recipe.workAmount * 0.1f * curJob.RecipeDef.workSkillLearnFactor;
                             actor.skills.GetSkill(curJob.RecipeDef.workSkill).Learn(xp);
                         }
 
-                        // 스탯 및 작업대 효율 보정 계산
                         var efficiency = curJob.RecipeDef.efficiencyStat != null ? actor.GetStatValue(curJob.RecipeDef.efficiencyStat) : 1f;
                         if (curJob.RecipeDef.workTableEfficiencyStat != null)
                         {
@@ -323,7 +310,6 @@ namespace VVRace
                             }
                         }
 
-                        // thing 생성 후 notification
                         curJob.bill.Notify_IterationCompleted(actor, new List<Thing>());
                         RecordsUtility.Notify_BillDone(actor, allProducts);
 
@@ -333,7 +319,6 @@ namespace VVRace
 
                             if (curJob.bill.GetStoreMode() == BillStoreModeDefOf.DropOnFloor)
                             {
-                                // 바닥에 놓는 경우
                                 for (int i = 0; i < allProducts.Count; ++i)
                                 {
                                     if (!GenPlace.TryPlaceThing(allProducts[i], actor.Position, actor.Map, ThingPlaceMode.Near))
@@ -345,7 +330,6 @@ namespace VVRace
                             }
                             else
                             {
-                                // 결과물이 여러개인 경우 맨 앞의 하나만 들고가고 나머지는 바닥에 둔다.
                                 for (int i = 1; i < allProducts.Count; ++i)
                                 {
                                     if (!GenPlace.TryPlaceThing(allProducts[i], actor.Position, actor.Map, ThingPlaceMode.Near))

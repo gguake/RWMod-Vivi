@@ -85,7 +85,7 @@ namespace VVRace
             DrawColumn(columnRect, settings, _enabledGenes, _candidates.Count - disabledCount, true, ref _enabledScrollPosition);
         }
 
-        // 설정 창을 새로 열 때마다 다시 계산한다. (언어 변경 등으로 def가 다시 로드될 수 있음)
+        // 언어 변경 등으로 def가 다시 로드될 수 있으므로 설정 창을 열 때마다 다시 계산한다.
         private void RefreshCandidates()
         {
             var window = Find.WindowStack.currentlyDrawnWindow;
@@ -181,7 +181,6 @@ namespace VVRace
 
             Widgets.DrawHighlightIfMouseover(rowRect);
 
-            // 화살표는 옮겨질 쪽(활성 목록은 왼쪽, 비활성 목록은 오른쪽)에 그린다.
             var arrowRect = new Rect(
                 enabled ? rowRect.x + RowPadding : rowRect.xMax - RowPadding - ArrowSize,
                 rowRect.y + (rowRect.height - ArrowSize) / 2f,
@@ -206,7 +205,7 @@ namespace VVRace
             var modName = def.modContentPack?.Name ?? string.Empty;
             using (new TextBlock(GameFont.Tiny, TextAnchor.MiddleRight, false, ColoredText.SubtleGrayColor))
             {
-                // LabelEllipses는 폭에서 여백을 더 빼고 자르므로 글자 폭에 맞춘 칸에는 Truncate를 쓴다.
+                // LabelEllipses는 추가 여백을 빼므로 글자 폭에 맞춘 칸에는 Truncate를 사용한다.
                 var modNameWidth = Mathf.Min(Text.CalcSize(modName).x, textRect.width * 0.4f);
                 Widgets.Label(new Rect(textRect.xMax - modNameWidth, textRect.y, modNameWidth, textRect.height), modName.Truncate(modNameWidth));
                 textRect.xMax -= modNameWidth + 6f;
@@ -232,7 +231,6 @@ namespace VVRace
             Widgets.DefIcon(rect, def, null, 0.9f, null, drawPlaceholder: false, color: def.IconColor);
         }
 
-        // 라벨이 없는 모드 유전자도 있을 수 있으므로 defName으로 대신한다.
         private static string GetGeneLabel(GeneDef def)
         {
             return def.label.NullOrEmpty() ? def.defName : def.LabelCap.Resolve();

@@ -6,10 +6,7 @@ using Verse;
 
 namespace VVRace
 {
-    // 향수병 착용 렌더 노드. 향 상태에 따라 빈 병/채워진 병 텍스처를 전환하고,
-    // 채워진 병에는 ScentColor 틴트를 적용한다.
-    // 부모 노드 연결과 레이어 배치는 RPEF의 ProcessApparel postfix
-    // (PawnRenderNode_ApparelBase 감지)가 처리한다.
+    // 부모 연결과 레이어 배치는 PawnRenderNode_ApparelBase를 감지하는 RPEF의 ProcessApparel 후처리가 맡는다.
     public class PawnRenderNode_ScentBottle : PawnRenderNode_ApparelBase
     {
         public PawnRenderNode_ScentBottle(Pawn pawn, PawnRenderNodeProperties props, PawnRenderTree tree)
@@ -34,9 +31,7 @@ namespace VVRace
                 filled ? apparel.DrawColor : Color.white);
         }
 
-        // 바닐라 착용 그래픽 경로(TryGetGraphicApparel)에 적용되는 RPEF.ApparelGraphicHook의
-        // 체형 오버라이드를 동일하게 재현한다. 커스텀 노드는 그 경로를 우회하므로
-        // 여기서 직접 적용하지 않으면 hook이 무시된다.
+        // 이 노드는 TryGetGraphicApparel 경로를 우회하므로 RPEF.ApparelGraphicHook의 체형 보정을 직접 적용한다.
         private BodyTypeDef ResolveBodyType(Pawn pawn)
         {
             var bodyType = pawn.story?.bodyType;
@@ -58,8 +53,6 @@ namespace VVRace
             return hook.defaultBodyTypeGraphicOverride ?? bodyType;
         }
 
-        // "{경로}_{체형}" 접미사 규칙을 재현하되, 해당 체형 텍스처가 없으면
-        // 루트 단일 텍스처로 폴백한다.
         private static string ResolveWornPath(string root, BodyTypeDef bodyType)
         {
             if (bodyType != null && HasWornTexture(root + "_" + bodyType.defName))

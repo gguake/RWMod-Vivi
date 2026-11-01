@@ -1,4 +1,4 @@
-using HarmonyLib;
+﻿using HarmonyLib;
 using RimWorld;
 using RimWorld.BaseGen;
 using System;
@@ -37,18 +37,14 @@ namespace VVRace.HarmonyPatches
                 original: AccessTools.Method(typeof(PawnGenerator), "GenerateBodyType"),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(PawnGenerator_GenerateBodyType_Postfix)));
 
-            // 게임 시작시 알 부모 설정 패치
             harmony.Patch(
                 original: AccessTools.Method(typeof(ScenPart_PlayerPawnsArriveMethod), nameof(ScenPart_PlayerPawnsArriveMethod.GenerateIntoMap)),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(ScenPart_PlayerPawnsArriveMethod_GenerateIntoMap_Postfix)));
 
-
-            // 성장 스탯 관련 패치
             harmony.Patch(
                 original: AccessTools.PropertyGetter(typeof(Pawn_AgeTracker), "GrowthPointsFactor"),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(Pawn_AgeTracker_get_GrowthPointsFactor_Postfix)));
 
-            // 노화 속도 조절 HediffComp(HediffComp_AgingFactor) 패치
             harmony.Patch(
                 original: AccessTools.PropertyGetter(typeof(Pawn_GeneTracker), nameof(Pawn_GeneTracker.BiologicalAgeTickFactor)),
                 transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(Pawn_GeneTracker_get_BiologicalAgeTickFactor_Transpiler)));
@@ -57,17 +53,14 @@ namespace VVRace.HarmonyPatches
                 original: AccessTools.Method(typeof(Pawn_GeneTracker), nameof(Pawn_GeneTracker.AddGene), new[] { typeof(GeneDef), typeof(bool) }),
                 prefix: new HarmonyMethod(typeof(ViviRacePatch), nameof(Pawn_GeneTracker_AddGene_Prefix)));
 
-            // 이복형제 방지
             harmony.Patch(
                 original: AccessTools.Method(typeof(PawnRelationWorker_Sibling), nameof(PawnRelationWorker_Sibling.InRelation)),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(PawnRelationWorker_Sibling_InRelation_Postfix)));
 
-            // 말벌 MentalState 고정
             harmony.Patch(
                 original: AccessTools.Method(typeof(MentalStateWorker), nameof(MentalStateWorker.StateCanOccur)),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(MentalStateWorker_StateCanOccur_Postfix)));
 
-            // 광분한 거대 말벌·아포크리파에게 죽은 우호 세력원은 호감도를 깎지 않음
             harmony.Patch(
                 original: AccessTools.Method(typeof(Faction), nameof(Faction.Notify_MemberDied)),
                 prefix: new HarmonyMethod(typeof(ViviRacePatch), nameof(Faction_Notify_MemberDied_Prefix)),
@@ -77,44 +70,36 @@ namespace VVRace.HarmonyPatches
                 original: AccessTools.Method(typeof(Faction), nameof(Faction.TryAffectGoodwillWith)),
                 prefix: new HarmonyMethod(typeof(ViviRacePatch), nameof(Faction_TryAffectGoodwillWith_Prefix)));
 
-            // 불 공포 오버라이드
             harmony.Patch(
                 original: AccessTools.Method(typeof(ThoughtWorker_Pyrophobia), nameof(ThoughtWorker_Pyrophobia.NearFire)),
                 prefix: new HarmonyMethod(typeof(ViviRacePatch), nameof(ThoughtWorker_Pyrophobia_NearFire_Prefix)));
 
-            // NPC 비비 유전자 생성
             harmony.Patch(
                 original: AccessTools.Method(typeof(PawnGenerator), "GenerateGenes"),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(PawnGenerator_GenerateGenes_Postfix)));
 
-            // 바닐라 헤어/헤드 대체 모드 옵션
             harmony.Patch(
                 original: AccessTools.Method(typeof(PawnGenerator), nameof(PawnGenerator.GeneratePawn), new[] { typeof(PawnGenerationRequest) }),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(PawnGenerator_GeneratePawn_Postfix)));
 
-            // 비비 바닥 폐허에 안나오게 수정
             {
                 var innerType = typeof(BaseGenUtility).GetNestedTypes(BindingFlags.NonPublic).FirstOrDefault(t => t.GetField("costCalculator") != null);
                 var innerMehtod = innerType.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault();
                 harmony.Patch(innerMehtod, postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(BaseGenUtility_TryRandomInexpensiveFloor_Where_Postfix)));
             }
 
-            // 벽 교체시 부착된 구조물 철거 방지
             harmony.Patch(
                 original: AccessTools.Method(typeof(Building), nameof(Building.DeSpawn)),
                 transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(Building_DeSpawn_Transpiler)));
 
-            // 벽 강화 Designator 패치
             harmony.Patch(
                 original: AccessTools.Method(typeof(Designator_Cancel), nameof(Designator_Cancel.DesignateThing)),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(Designator_Cancel_DesignateThing_Postfix)));
 
-            // 순수주의자 패치
             harmony.Patch(
                 original: AccessTools.Method(typeof(GeneUtility), nameof(GeneUtility.AddedAndImplantedPartsWithXenogenesCount)),
                 transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(GeneUtility_AddedAndImplantedPartsWithXenogenesCount_Transpiler)));
 
-            // 초월연결체 패치
             harmony.Patch(
                 original: AccessTools.Method(typeof(MoveColonyUtility), nameof(MoveColonyUtility.MoveColonyAndReset)),
                 transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(MoveColonyUtility_MoveColonyAndReset_Transpiler)));
@@ -130,7 +115,7 @@ namespace VVRace.HarmonyPatches
                     postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(JobDriver_Ingest_MakeNewToils_Postfix)));
             }
 
-            // allowedCultures가 없는 팩션(Ancients, HoraxCult 등)이 무작위 컬처나 클래식 공유 이념으로 비비 컬처를 받지 않게
+            // allowedCultures가 없는 팩션이 무작위 컬처나 클래식 공유 이념으로 비비 컬처를 받지 않게 한다.
             harmony.Patch(
                 original: AccessTools.Method(typeof(IdeoFoundation), nameof(IdeoFoundation.RandomizeCulture)),
                 transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(RandomCulture_Transpiler)));
@@ -354,9 +339,9 @@ namespace VVRace.HarmonyPatches
             }
         }
 
-        // 바닐라는 무소속 가해자에게 우호 세력원이 죽으면 호감도를 깎고(MemberNeutrallyDied), 영구 광폭 동물에게 죽은 경우만 뺀다.
-        // 광분한 거대 말벌과 아포크리파도 모두에게 적대하는 재앙이므로 같은 예외를 둔다.
-        // dinfo를 null로 바꾸면 factionHostileOnDeath 분기로 떨어져 연방 대표가 죽을 때 세력이 적대화되므로, 그 호감도 변경만 막는다.
+        // 바닐라는 무소속 가해자에 의한 우호 세력원 사망에서 영구 광폭 동물만 호감도 하락을 면제한다.
+        // 모두에게 적대하는 거대 말벌과 아포크리파도 같은 예외로 취급한다.
+        // dinfo를 null로 바꾸면 factionHostileOnDeath 분기로 넘어가 연방 대표 사망 시 적대화되므로 호감도 변경만 막는다.
         private static bool _blamelessMemberDeath;
 
         private static void Faction_Notify_MemberDied_Prefix(DamageInfo? dinfo)
@@ -628,7 +613,6 @@ namespace VVRace.HarmonyPatches
             return cultures.Where(v => v != VVCultureDefOf.VV_ViviCulture);
         }
 
-        // DefDatabase<CultureDef>.AllDefs / AllDefsListForReading 바로 뒤에 비비 컬처를 걸러내는 호출 삽입 (이후 RandomElement(IEnumerable<T>)로 고름)
         private static IEnumerable<CodeInstruction> RandomCulture_Transpiler(IEnumerable<CodeInstruction> codeInstructions)
         {
             var allDefsGetter = AccessTools.PropertyGetter(typeof(DefDatabase<CultureDef>), nameof(DefDatabase<CultureDef>.AllDefs));
@@ -646,8 +630,8 @@ namespace VVRace.HarmonyPatches
             }
         }
 
-        // 클래식 플레이 시 모든 팩션이 공유하는 이념이 비비 컬처가 되지 않게
-        // noExpansionIdeo=true는 Ideology 없이 비비 팩션이 쓰는 이념이라 제외
+        // 클래식 공유 이념에는 비비 컬처가 배정되지 않게 한다.
+        // noExpansionIdeo=true인 이념은 Ideology 없이 비비 팩션이 사용하므로 제외한다.
         private static void IdeoGenerator_GenerateClassicIdeo_Prefix(ref CultureDef culture, bool noExpansionIdeo)
         {
             if (!noExpansionIdeo && culture == VVCultureDefOf.VV_ViviCulture)
@@ -658,7 +642,7 @@ namespace VVRace.HarmonyPatches
 
         private static void IdeoUtility_CanUseIdeo_Postfix(ref bool __result, FactionDef factionDef, Ideo ideo)
         {
-            // allowedCultures가 있으면 바닐라가 이미 검사함
+            // allowedCultures가 있으면 바닐라가 이미 검사한다.
             if (__result && factionDef.allowedCultures == null && ideo.culture == VVCultureDefOf.VV_ViviCulture)
             {
                 __result = false;

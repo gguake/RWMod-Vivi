@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Verse;
 using Verse.AI;
 
@@ -34,7 +34,7 @@ namespace VVRace
 
         protected override void TickActiveBeforeToil(int delta)
         {
-            // 요정의 활성 시간이 지나도 끝날때까지 유지되야함
+            // 요정의 활성 시간이 지나도 전개 작업이 끝날 때까지 유지해야 한다.
             elapsed += delta;
             if (elapsed >= MaxDurationTicks)
             {

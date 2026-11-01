@@ -38,8 +38,7 @@ namespace VVRace
         public IntVec3? ReservedTeleportCell => _reserveTeleportCell;
         private IntVec3? _reserveTeleportCell;
 
-        // 날씨 변경 의식에서 선택한 날씨. 의식 시작 시 설정되고 의식 완료(Apply) 시 소비된다.
-        // null인 경우 (구버전 세이브 / 선택 없이 시작된 경우) 랜덤하게 결정된다.
+        // 구버전 세이브 등에서 선택값이 null이면 날씨를 무작위로 결정한다.
         public EverflowerWeatherChoice? SelectedRitualWeather
         {
             get => _selectedRitualWeather;
@@ -67,8 +66,7 @@ namespace VVRace
         {
             base.SpawnSetup(map, respawningAfterLoad);
 
-            // 재설치·불러오기 시 제단 안치 상태를 다시 계산한다.
-            // (불러오기에서는 제단이 영원꽃보다 늦게 스폰되므로 제단 쪽 SpawnSetup에서 한 번 더 갱신된다)
+            // 불러올 때 제단이 영원꽃보다 늦게 스폰되므로 제단의 SpawnSetup에서도 안치 캐시를 갱신한다.
             EverflowerComp.RefreshEnshrinement(silent: respawningAfterLoad);
         }
 
@@ -77,11 +75,9 @@ namespace VVRace
             var map = Map;
             base.DeSpawn(mode);
 
-            // 5/6단계 영원꽃이 맵에서 빠지면(포장·파괴) 제단 마나 상태를 다시 계산한다.
             map?.GetManaComponent()?.RefreshEverflowerAltarState();
         }
 
-        // 엔딩이 묶인 영원꽃의 파괴는 앵커 퀘스트 태그로 바닐라가 엔딩 퀘스트에 알린다("<태그>.Destroyed").
         public override void Destroy(DestroyMode mode = DestroyMode.Vanish)
         {
             Unreserve();
@@ -90,7 +86,6 @@ namespace VVRace
 
         public override AcceptanceReport DeconstructibleBy(Faction faction) => EverflowerComp.AttunementLevel == 0;
 
-        // 제단에 보관된 〈영원꽃 완전 동화〉 공명자를 꽃 앞 공중에 그리고(성장 수조가 안의 폰을 그리는 방식), 꽃봉오리와 잇는 빛줄기를 더한다.
         public override void DynamicDrawPhaseAt(DrawPhase phase, Vector3 drawLoc, bool flip = false)
         {
             var resonator = EverflowerComp.EnshrinedAltar?.HeldResonator;
@@ -138,7 +133,6 @@ namespace VVRace
 
             bool ValidateCell(LocalTargetInfo target)
             {
-                // 영원꽃 제단 발판을 지정하면 거리와 관계없이 제단 중앙으로 맞춘다.
                 var cell = ResolveTeleportCell(target.Cell, out var altar);
                 if (altar == null && cell.DistanceToSquared(Position) > Mathf.Pow(EverflowerComp.Props.teleportRange, 2f)) { return false; }
                 if (!ArcanePlantUtility.CanPlaceArcanePlantToCell(Map, cell, def)) { return false; }
@@ -146,7 +140,6 @@ namespace VVRace
                 return true;
             }
 
-            // 제단에 안치된 영원꽃은 다시 옮길 수 없다(엔딩 이후에도 제단에서 내리지 않는다).
             if (Spawned && (Faction?.IsPlayer ?? false) && EverflowerComp.AttunementLevel >= 1 && !EverflowerComp.IsEnshrined)
             {
                 if (!_reserveTeleportCell.HasValue)
@@ -170,7 +163,7 @@ namespace VVRace
                                 {
                                     var cell = ResolveTeleportCell(target.Cell, out var altar);
 
-                                    // 검증기를 통과하지 못한 클릭은 action을 호출하지 않으므로, 제단의 단계 조건을 충족하지 못한 경우에는 여기서 메시지를 표시하고 거부한다.
+                                    // 검증에 실패한 클릭은 action을 호출하지 않으므로 단계 조건 검증과 거부 메시지는 여기서 처리한다.
                                     if (altar != null && EverflowerComp.AttunementLevel < Building_DreamumAltar.RequiredAttunementLevel)
                                     {
                                         Messages.Message(
@@ -254,8 +247,7 @@ namespace VVRace
                 return;
             }
 
-            // 제단에 안치된 영원꽃은 화염 피해까지 모두 제단이 대신 받는다(제단은 공격으로 부서지지 않는다).
-            // 일반 화분처럼 화염만 꽃에 들어가면 소이탄 한 번에 엔딩이 실패할 수 있다.
+            // 화염 피해도 제단이 대신 받게 한다. 일반 화분처럼 꽃에 직접 적용하면 소이탄 하나로 엔딩이 실패할 수 있다.
             var altar = EverflowerComp.EnshrinedAltar;
             if (altar != null)
             {
@@ -272,7 +264,6 @@ namespace VVRace
             var wasEnshrined = EverflowerComp.IsEnshrined;
             if (TeleportRandomly())
             {
-                // 엔딩이 묶인 영원꽃이 제단을 잃으면 경고한다. 엔딩은 제단 밖 그래픽으로 계속된다.
                 if (wasEnshrined && (ViviEndingQuest.Current?.IsAnchor(this) ?? false))
                 {
                     Messages.Message(LocalizeString_EndingAltar.VV_Message_AnchorEverflowerLeftAltar.Translate(), this, MessageTypeDefOf.NegativeEvent);
@@ -291,8 +282,8 @@ namespace VVRace
                 var cell = ResolveTeleportCell(_reserveTeleportCell.Value, out var altar);
                 _reserveTeleportCell = null;
 
-                // 예약한 뒤 그 칸에 제단이 지어졌을 수 있으므로, 실제로 옮기는 시점에 제단의 단계 조건을 다시 확인한다.
-                // 조건을 채우지 못했으면 무작위로 순간이동시키지 않고 예약만 취소한다(낮은 단계 영원꽃이 제단에 안치되어 내릴 수 없게 되는 것을 막는다).
+                // 예약 후 제단이 건설됐을 수 있으므로 이동 직전에 단계 조건을 다시 검사한다.
+                // 미달이면 무작위 이동 없이 예약만 취소해 낮은 단계의 영원꽃이 제단에 갇히지 않게 한다.
                 if (altar != null && EverflowerComp.AttunementLevel < Building_DreamumAltar.RequiredAttunementLevel)
                 {
                     Messages.Message(
@@ -312,7 +303,6 @@ namespace VVRace
 
         public bool TeleportRandomly()
         {
-            // 무작위 순간이동으로는 영원꽃 제단에 안치되지 않게 제단 발판은 제외한다.
             var cells = Map.AllCells.Where(c => c != Position && !IsAltarCell(c) && ArcanePlantUtility.CanPlaceArcanePlantToCell(Map, c, def)).ToList();
             if (cells.Count > 0)
             {
@@ -338,8 +328,8 @@ namespace VVRace
             var wasEnshrined = EverflowerComp.IsEnshrined;
             var mapComponent = _mapComponent;
 
-            // 순간이동은 디스폰 없이 Position만 바꾸므로, 바닐라의 Position 대입으로 갱신되지 않는 관련 정보를 직접 갱신한다.
-            // (edifice 칸, 마법 식물 칸 사전, 체감 이동 비용, 빛 위치)
+            // 순간이동은 디스폰 없이 Position만 바꾸므로 자동 갱신되지 않는 정보를 직접 갱신한다.
+            // 대상은 edifice, 마법 식물의 칸 사전, 체감 이동 비용, 빛 위치다.
             map.edificeGrid.DeRegister(this);
             Position = cell;
             map.edificeGrid.Register(this);
@@ -357,10 +347,8 @@ namespace VVRace
                 glower.ForceRegister(map);
             }
 
-            // 떠난 자리에는 떠나기 전 모습(제단 위/밖)에 맞춘 이펙트를 남긴다.
             EverflowerComp.SpawnLevelEffect(previousPosition, map, wasEnshrined);
 
-            // 도착한 자리가 제단 중앙이면 안치 이펙트·메시지가 대신 재생된다.
             EverflowerComp.RefreshEnshrinement();
             if (!EverflowerComp.IsEnshrined)
             {
@@ -379,14 +367,13 @@ namespace VVRace
                 return false;
             }
 
-            // 의식 중인 영원꽃은 채집하지 않는다. 의식 밖의 폰이 영원꽃을 예약하면 바닐라가 의식을 취소해 버린다.
+            // 의식 밖의 폰이 영원꽃을 예약하면 의식이 취소되므로 의식 중에는 채집을 막는다.
             if (IsTargetOfAnyRitual()) { return false; }
 
             return true;
         }
 
-        // 이 영원꽃을 대상으로 하는 의식 로드가 있는지. 바닐라 IsRitualTarget은 참가자가 자리에 도착한 뒤에만 참이므로,
-        // 참가자가 모이는 동안에도 막을 수 있게 로드를 직접 확인한다.
+        // IsRitualTarget은 참가자가 도착한 뒤에만 참이므로 집결 중인 의식도 감지하도록 로드를 직접 확인한다.
         private bool IsTargetOfAnyRitual()
         {
             if (!Spawned) { return false; }
@@ -440,7 +427,6 @@ namespace VVRace
             _reserveTeleportCell = default;
         }
 
-        // 순간이동 지정 칸 보정: 영원꽃 제단 발판의 아무 칸이나 고르면 제단 중앙으로 맞춘다.
         private IntVec3 ResolveTeleportCell(IntVec3 cell, out Building_DreamumAltar altar)
         {
             altar = null;
@@ -455,8 +441,8 @@ namespace VVRace
             return _mapComponent?.GetArcanePlantPot(cell) is Building_DreamumAltar;
         }
 
-        // 화분 위 식물이 떠난 칸의 edifice를 화분으로 되돌린다(EdificeGrid.DeRegister는 칸을 비워 버린다).
-        // 다칸 화분은 통째로 등록되므로 다른 칸에 심긴 식물을 다시 등록해 덮어쓰지 않게 한다.
+        // EdificeGrid.DeRegister는 칸을 비우므로 식물이 떠난 자리에는 화분을 다시 등록한다.
+        // 다칸 화분이 다른 칸의 식물을 덮어쓰지 않도록 해당 식물도 다시 등록한다.
         private static void RestorePotEdifice(Map map, ArcanePlantMapComponent mapComponent, IntVec3 cell)
         {
             var pot = mapComponent?.GetArcanePlantPot(cell);

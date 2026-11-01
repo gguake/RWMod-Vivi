@@ -1,4 +1,4 @@
-using HarmonyLib;
+﻿using HarmonyLib;
 using RimWorld;
 using System;
 using System.Collections.Generic;
@@ -26,7 +26,6 @@ namespace VVRace
                     new Type[] { typeof(Verb), typeof(Pawn) }),
                 postfix: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(ManaWeapon_AdjustedCooldown_Postfix)));
 
-            // Designator 관련
             harmony.Patch(
                 original: AccessTools.Method(typeof(GenSpawn), nameof(GenSpawn.SpawningWipes)),
                 postfix: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(GenSpawn_SpawningWipes_Postfix)));
@@ -43,12 +42,10 @@ namespace VVRace
                 original: AccessTools.Method(typeof(Designator_Install), nameof(Designator_Install.SelectedUpdate)),
                 postfix: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(Designator_Install_SelectedUpdate_Postfix)));
 
-            // 축전지 알람 끄기
             harmony.Patch(
                 original: AccessTools.Method(typeof(Alert_NeedBatteries), "NeedBatteries"),
                 postfix: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(Alert_NeedBatteries_NeedBatteries_Postfix)));
 
-            // 번개 위치 재조정
             harmony.Patch(
                 original: AccessTools.Method(typeof(WeatherEvent_LightningStrike), nameof(WeatherEvent_LightningStrike.FireEvent)),
                 transpiler: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(WeatherEvent_LightningStrike_FireEvent_Transpiler)));
@@ -57,12 +54,10 @@ namespace VVRace
                 original: AccessTools.Method(typeof(WeatherEvent_LightningStrike), nameof(WeatherEvent_LightningStrike.DoStrike)),
                 transpiler: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(WeatherEvent_LightningStrike_DoStrike_Transpiler)));
 
-            // 터렛 식물 관련
             harmony.Patch(
                 original: AccessTools.Method(typeof(ThoughtWorker_Precept_HasAutomatedTurrets), nameof(ThoughtWorker_Precept_HasAutomatedTurrets.ResetStaticData)),
                 postfix: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(ThoughtWorker_Precept_HasAutomatedTurrets_ResetStaticData_Postfix)));
 
-            // 드랍포드 식물 관련
             harmony.Patch(
                 original: AccessTools.Method(typeof(CompLaunchable), nameof(CompLaunchable.TryLaunch)),
                 transpiler: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(CompLaunchable_TryLaunch_Transpiler)));
@@ -85,7 +80,6 @@ namespace VVRace
                 original: AccessTools.Method(typeof(PlaySettings), "DoMapControls"),
                 postfix: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(PlaySettings_DoMapControls_Postfix)));
 
-            // 씨앗
             harmony.Patch(
                 original: AccessTools.Method(typeof(DefGenerator), nameof(DefGenerator.GenerateImpliedDefs_PreResolve)),
                 postfix: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(DefGenerator_GenerateImpliedDefs_PreResolve_Postfix)));
@@ -94,7 +88,6 @@ namespace VVRace
                 original: AccessTools.Method(typeof(GenLeaving), nameof(GenLeaving.DoLeavingsFor), parameters: new Type[] { typeof(Thing), typeof(Map), typeof(DestroyMode), typeof(CellRect), typeof(Predicate<IntVec3>), typeof(List<Thing>) }),
                 transpiler: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(GenLeaving_DoLeavingsFor_Transpiler)));
 
-            // 진공
             if (ModsConfig.OdysseyActive)
             {
                 harmony.Patch(
@@ -288,7 +281,6 @@ namespace VVRace
             list.RemoveAll(v => typeof(ArcanePlant).IsAssignableFrom(v.thingClass));
         }
 
-
         private static IEnumerable<CodeInstruction> CompLaunchable_TryLaunch_Transpiler(IEnumerable<CodeInstruction> codeInstructions, ILGenerator il)
         {
             var instructions = codeInstructions.ToList();
@@ -321,7 +313,6 @@ namespace VVRace
         {
             var instructions = codeInstructions.ToList();
 
-            // ActiveDropPod Patch
             {
                 var index = instructions.FindIndex(
                     v =>
@@ -350,7 +341,6 @@ namespace VVRace
                 instructions.InsertRange(0, injections);
             }
 
-            // IncomingDropPod Patch
             {
                 var injectionIndex = instructions.FindIndex(
                     v =>

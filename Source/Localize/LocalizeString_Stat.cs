@@ -43,7 +43,6 @@
         public const string VV_StatReport_Mana_Multiplier = nameof(VV_StatReport_Mana_Multiplier);
         public const string VV_StatReport_ViviMetabolismMaxNutrition = nameof(VV_StatReport_ViviMetabolismMaxNutrition);
 
-        // 정보 탭용 간략한 마나 규칙 라벨
         public const string VV_ManaFluxRuleLabel_AdjacentPlant = nameof(VV_ManaFluxRuleLabel_AdjacentPlant);
         public const string VV_ManaFluxRuleLabel_AdjacentWater = nameof(VV_ManaFluxRuleLabel_AdjacentWater);
         public const string VV_ManaFluxRuleLabel_BatteryStored = nameof(VV_ManaFluxRuleLabel_BatteryStored);

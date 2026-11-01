@@ -4,8 +4,6 @@ using Verse;
 
 namespace VVRace
 {
-    // 앵커 영원꽃의 6단계 개화 응축 진행 막대. 공성/평화 단계 이름과 백분율을 보여주고, 보스 단계에는 "가로막힘",
-    // 토벌 뒤에는 "대관식 대기"로 표시한다.
     [StaticConstructorOnStartup]
     public class Gizmo_ViviEndingBloom : Gizmo
     {

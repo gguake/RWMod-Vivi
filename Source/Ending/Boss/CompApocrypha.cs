@@ -8,41 +8,33 @@ using Verse.AI;
 
 namespace VVRace
 {
-    // 아포크리파 전투 단계. 저장되므로 값을 바꾸지 말 것.
+    // 세이브에 기록되는 전투 단계 값이므로 기존 값을 변경하면 안 된다.
     public enum ApocryphaPhase : byte
     {
-        Bound = 1,          // 1페이즈 〈수십억의 굴레〉: 일반 피해 면역, 결속 수치 감소가 목표
-        Transforming = 2,   // 결속 0 → 충격파 기절 + 거대화 연출 중
-        Unbound = 3,        // 2페이즈 〈해방된 시조의 폭주〉: 피해 감소 99%(공명 중첩으로 완화)
-        Dying = 4,          // 토벌됨: 소멸 연출 중
+        Bound = 1,
+        Transforming = 2,
+        Unbound = 3,
+        Dying = 4,
     }
 
     public class CompProperties_Apocrypha : CompProperties
     {
-        // 1페이즈 〈수십억의 굴레〉: 요정 비비 결속
         public long initialBondCount = 1440000000L;
         public long bondReleaseAmount = 360000000L;
         public int releaseStunTicks = 300;
         public IntRange releaseEscortCount = new IntRange(3, 5);
 
-        // 1페이즈: 요정 비비 사출 포격. 조준이 끝나기를 기다리지 않고 새 조준을 계속 겹쳐 시전한다(시전 중에도 이동은 멈추지 않는다).
         public float shellRange = 20f;
-        // 최소 사거리: 사출탄 폭발 반경(2.4)에 보스가 휘말리지 않도록 이보다 가까운 적은 노리지 않고, 발사 순간 이 안에 들어와 있는 조준은 쏘지 않는다.
+        // 사출탄 폭발 반경 2.4칸에 보스가 휘말리지 않도록 최소 사거리 안의 대상은 조준과 발사에서 제외한다.
         public float shellMinRange = 2.9f;
         public int shellAimTicks = 240;
         public IntRange shellCastIntervalTicks = new IntRange(180, 300);
         public int maxShellAims = 3;
 
-        // 1페이즈: 포격 사거리 안 시야에 들어온 적을 감지하면 호위 말벌이 이 시간 동안 그 적을 노린다(계속 보이면 연장).
         public int escortFocusTicks = 600;
 
-        // 1페이즈: 포격 사거리 밖(또는 시야 밖)에서 공격해 온 적을 이 시간 동안 기억하고(맞을 때마다 연장) 포격할 수 있는 자리로 다가가며,
-        // 사거리 안에 들어오면 포격·바늘로 그 적을 먼저 노린다.
         public int rangedAttackerMemoryTicks = 1200;
 
-        // 1페이즈: 멸망꽃/요정꽃 씨앗. 멸망꽃 씨앗은 한 번에 여러 개를 흩뿌리며, 3개에서 시작해 사출 2회마다 1개씩 늘어난다(3/3/4/4/5…, 최대 10개).
-        // 요정꽃은 따로 쏘지 않는다: 멸망꽃 사출 fairySeedEveryVolleys회마다 그 사출에 요정꽃 씨앗 1개가 더해진다.
-        // 마나 보호장이 깨지면 다음 사출을 기다리지 않고 바로 한다(이때는 차례와 관계없이 요정꽃 씨앗도 더한다).
         public int firstDoomSeedDelayTicks = 1500;
         public IntRange doomSeedIntervalTicks = new IntRange(18000, 27000);
         public int doomSeedVolleyStart = 3;
@@ -52,20 +44,13 @@ namespace VVRace
         public int fairySeedEveryVolleys = 3;
         public int maxFairyFlowers = 2;
 
-        // 1페이즈: 마나 보호장. 받은 피해만큼 줄고 0이 되면 길게 기절하며 다음 멸망꽃 사출을 바로 한다. 기절이 풀리면 다시 가득 찬다.
-        // 1500 = 바닐라 초중량 보스(전쟁여왕·아포크리톤, 전투력 600) 1기를 쓰러뜨리는 데 드는 피해량 수준(센추리온 고출력 방어막 300의 5배).
-        // 후반 정착민 8명 안팎의 집중 사격(돌격소총·충전소총 실효 약 70 DPS)으로 20초 남짓, 호위와 싸우며 1분 안팎.
-        // 아포크리파 전투력 3000 ≈ 초중량 보스 5기라, 요정꽃이 필요한 횟수(4~5회)만큼 깨면 1페이즈 전체 분량이 맞는다.
+        // 보호장 1회는 바닐라 초중량 보스 1기 분량으로 잡아, 4~5회 파괴가 1페이즈 전투량이 되게 한다.
         public float manaShieldMax = 1500f;
         public int shieldBreakStunTicks = 1500;
 
-        // 1페이즈: 거대 엘텍스 바늘. 보스 둘레에 떠 있다가 주기마다 하나씩 떨어져 나와 적의 위치를 조준하고,
-        // 조준이 끝나면 그 방향으로 최대 사거리까지 순간적으로 날아가 넓은 직선 위의 모든 대상을 꿰뚫은 뒤 제자리로 돌아온다.
         public int needleCount = 3;
         public int needleFirstDelayTicks = 900;
         public IntRange needleCastIntervalTicks = new IntRange(480, 720);
-        // 한 번에 쏘는 바늘 수(쉬고 있는 바늘 수까지). 여러 개면 보스 몸통 둘레 반경 needleFanRadius의 부채꼴 자리(2개 ±50°, 3개 -65°/0°/+65°)에서
-        // 저마다 대상을 겨눠 직선들이 대상에서 교차한다. 대상이 needleFanMinTargetDistance보다 가까우면 부채꼴 자리가 대상을 지나치므로 1개만 쏜다.
         public IntRange needleVolleyCount = new IntRange(1, 3);
         public float needleFanRadius = 5f;
         public float needleFanHalfAngle2 = 50f;
@@ -78,21 +63,15 @@ namespace VVRace
         public float needleDamage = 80f;
         public float needleArmorPenetration = 0.8f;
 
-        // 1페이즈: 배회와 주기적 접근
         public IntRange approachIntervalTicks = new IntRange(9000, 13500);
         public float approachDistance = 9f;
         public float wanderRadius = 10f;
         public IntRange wanderWaitTicks = new IntRange(600, 1200);
 
-        // 호위 거대 말벌
         public IntRange escortReinforceCount = new IntRange(2, 4);
         public float escortGuardRadius = 10f;
-        // 이 반경(보스 기준) 안에서 최근 보스·호위 말벌을 공격한 적은 경호 반경 밖이어도 반격한다.
         public float escortRetaliationRadius = 25f;
 
-        // 보스전 내내 공허 노드 엔딩의 배회 존재처럼 맵 외곽에서 거대 말벌이 꾸준히 몰려온다.
-        // 반 시간마다 소규모로 들어오며, 살아 있는 말벌의 전투력 합이 위협 포인트에 따른 상한에 도달하면 증원을 멈춘다(바닐라 QuestPart_WanderingEntities 곡선의 1.5배).
-        // 들어온 말벌은 정착지를 습격하지 않고 가까운 멸망꽃·요정꽃 곁을 지킨다(꽃이 없으면 아포크리파 곁으로 간다).
         public int edgeHornetIntervalTicks = 1250;
         public IntRange edgeHornetGroupSize = new IntRange(1, 2);
         public SimpleCurve edgeHornetMaxPointsByThreatPoints = new SimpleCurve
@@ -103,22 +82,15 @@ namespace VVRace
             new CurvePoint(10000f, 4500f),
         };
         public float flowerGuardRadius = 6f;
-        // 이 반경(지키는 꽃·보스 기준) 안에서 최근 꽃·보스·같은 무리의 말벌을 공격한 적은 경비 반경 밖이어도 반격한다.
         public float flowerGuardRetaliationRadius = 20f;
 
-        // 2페이즈 전환 연출: 충격파로 모두 기절한 동안 몸이 VV_Morph 셰이더로 꿈틀거리며 2페이즈 몸으로 뒤바뀐다.
         public int transformTicks = 420;
         public int transformGraphicSwapTicks = 210;
         public int transformStunTicks = 420;
 
-        // 2페이즈 〈해방된 시조의 폭주〉. 받는 피해는 꽂힌 거대 바늘 수(0~3개)에 따라 늘어난다(+0%/+50%/+100%/+300%).
         public float maxVitality = 9000f;
         public List<float> damageFactorByStuckNeedles = new List<float> { 1f, 1.5f, 2f, 4f };
 
-        // 2페이즈: 거대 엘텍스 바늘 3개가 전환 충격파에 튕겨 나가 보스 둘레(반경 unboundNeedlePlantRadius) 바닥에 꽂힌다. 아무 폰이나 꽂힌 바늘에 다가가
-        // unboundNeedleActivateTicks 동안 손을 대면 바늘이 깨어나, 그 폰을 unboundNeedleLockOnTicks 동안 뒤쫓으며 겨누다가(발사각이 폰을 따라 돈다)
-        // 그 각도로 굳어 unboundNeedleLockedTicks 뒤 최대 사거리까지 날아가고, 날아간 끝에 다시 꽂힌다.
-        // 발사 직선 위에 보스가 있으면 피해를 주는 대신 보스에게 꽂혀 멈춘다. 모두 꽂히면 길게 기절하고, 기절이 풀리면 바늘이 뽑혀 보스 둘레 바닥으로 다시 튕겨 나간다.
         public int unboundNeedleCount = 3;
         public FloatRange unboundNeedlePlantRadius = new FloatRange(5f, 10f);
         public int unboundNeedleActivateTicks = 60;
@@ -126,7 +98,6 @@ namespace VVRace
         public int unboundNeedleLockedTicks = 75;
         public int allNeedlesStuckStunTicks = 3600;
 
-        // 2페이즈: 영원꽃 조율 의식(공명 파동)의 재사용 대기(6시간). 공명 파동은 기절만 시킨다.
         public int resonanceCooldownTicks = 15000;
 
         public int breathCooldownTicks = 1200;
@@ -139,9 +110,6 @@ namespace VVRace
         public int smashIntervalTicks = 30;
         public float smashDamage = 400f;
 
-        // 난이도(스토리텔러 위협 배율, 바닐라 평화 0.1·쉬움 0.3·보통 0.6·어려움 1·매우 어려움 1.55·극한 2.2)에 따른 배율.
-        // 체력: 1페이즈 마나 보호장과 2페이즈 생명력(어려움 기준 1500 / 9000).
-        // 멸망꽃 개화 시간: 피어나서 만개(저주)까지 걸리는 시간(어려움 기준 12시간). 난이도가 높을수록 짧다. 씨앗 수·최대 개수는 난이도와 무관하다.
         public SimpleCurve hitPointsFactorByThreatScale = new SimpleCurve
         {
             new CurvePoint(0.1f, 0.4f),
@@ -161,7 +129,6 @@ namespace VVRace
             new CurvePoint(2.2f, 0.65f),
         };
 
-        // 영원꽃 찬탈(채널링): 실패 조건
         public int channelTicksBound = 5000;
         public int channelTicksUnbound = 3600;
         public float channelRangeAltar = 3.9f;
@@ -173,12 +140,9 @@ namespace VVRace
         }
     }
 
-    // 아포크리파 본체 컴프. 페이즈/결속 수치/생명력 풀/능력 타이머/채널링을 관리한다.
-    // [계약] public 시그니처는 다른 모듈이 호출하므로 바꾸지 말 것.
-    // 모든 타이머는 매 틱 도는 CompTick에서 처리한다(동물 폰의 CompTickInterval은 15틱 간격이라 쓰지 않는다).
+    // 동물의 CompTickInterval은 15틱 간격이므로 타이머는 매 틱 호출되는 CompTick에서 처리한다.
     public class CompApocrypha : ThingComp, IRoofCollapseAlert
     {
-        // 산 지붕 붕괴를 피해 순간이동할 칸을 찾는 반경(정사각형 반경)
         private const int RoofCollapseEscapeRadius = 15;
 
         private static readonly Color AimBeamColor = new Color(1f, 0.86f, 0.45f, 0.85f);
@@ -203,7 +167,6 @@ namespace VVRace
         private static readonly List<Thing> _tmpTargets = new List<Thing>();
         private static readonly List<Thing> _tmpCellThings = new List<Thing>();
 
-        // 저장되는 상태
         private ApocryphaPhase _phase = ApocryphaPhase.Bound;
         private bool _initialized;
         private long _bondCount;
@@ -235,7 +198,6 @@ namespace VVRace
         private Thing _rangedAttacker;
         private int _rangedAttackerUntilTick = -1;
 
-        // 저장하지 않는 연출/디버그 상태
         private Effecter _aimSustainer;
         private int _lastBlockedTextTick = -99999;
         private float _pendingDamageText;
@@ -246,7 +208,7 @@ namespace VVRace
         private bool _pendingPursuitCheck;
         private int _lastPursuitInterruptTick = -99999;
 
-        // 기믹(결속 해방·공명 파동·마나 파동 의식)에 의한 기절을 적용하는 동안만 true. 그 외의 기절은 ApocryphaPatch가 StunFor에서 막는다.
+        // 기믹 기절을 적용하는 동안만 true로 둔다. 일반 기절은 ApocryphaPatch가 StunFor에서 차단한다.
         internal static bool ApplyingGimmickStun { get; private set; }
 
         public CompProperties_Apocrypha Props => (CompProperties_Apocrypha)props;
@@ -255,19 +217,15 @@ namespace VVRace
 
         public ApocryphaPhase Phase => _phase;
 
-        // 요정 비비 결속 수치(초기 1,440,000,000). Hediff_ApocryphaFairyBond 라벨에 표시된다.
         public long BondCount => _bondCount;
         public long InitialBondCount => Props.initialBondCount;
 
-        // 1페이즈 마나 보호장. 피해는 이 값에서 차감되고, 깨진 동안(기절 중)은 0이다.
         public float ManaShield => Mathf.Max(0f, _manaShield);
         public float MaxManaShield => Props.manaShieldMax * HitPointsDifficultyFactor;
 
-        // 지금 난이도의 위협 배율과 그에 따른 체력(보호장·생명력) 배율.
         public static float ThreatScale => Find.Storyteller?.difficulty?.threatScale ?? 1f;
         public float HitPointsDifficultyFactor => Mathf.Max(0.1f, Props.hitPointsFactorByThreatScale?.Evaluate(ThreatScale) ?? 1f);
 
-        // [Building_DoomFlower 호출] 지금 난이도에서 멸망꽃이 피어나 만개할 때까지 걸리는 시간 배율(어려움 1, 높을수록 짧다).
         // 꽃은 보스를 참조하지 않으므로 아포크리파 정의의 설정을 읽는다.
         public static float DoomBloomTimeFactor
         {
@@ -279,15 +237,12 @@ namespace VVRace
         }
         public bool ShieldBroken => _shieldBroken || _pendingShieldBreak;
 
-        // 보스 둘레에 떠 있는 거대 엘텍스 바늘(1페이즈 needleCount개, 2페이즈 unboundNeedleCount개).
         public IReadOnlyList<ApocryphaNeedle> Needles => _needles;
         public int NeedleCount => _phase == ApocryphaPhase.Unbound ? Props.unboundNeedleCount : Props.needleCount;
 
-        // 2페이즈 생명력 풀. 모든 피해는 신체 부위 대신 이 값에서 차감된다.
         public float Vitality => _vitality;
         public float MaxVitality => _maxVitality > 0f ? _maxVitality : Props.maxVitality * HitPointsDifficultyFactor;
 
-        // 2페이즈: 보스에게 꽂힌 바늘 수와 그에 따른 받는 피해 배율(1 = 기본).
         public int StuckNeedleCount
         {
             get
@@ -315,7 +270,6 @@ namespace VVRace
             }
         }
 
-        // 2페이즈 영원꽃 조율 의식(공명 파동)의 남은 재사용 대기.
         public int ResonanceCooldownTicksLeft => Mathf.Max(0, _resonanceReadyTick - GenTicks.TicksGame);
 
         public bool IsChanneling => parent.Spawned && Pawn.CurJobDef == ApocryphaJobDefOf.VV_ApocryphaChannel;
@@ -325,20 +279,16 @@ namespace VVRace
 
         public int DoomVolleysLaunched => _doomVolleysLaunched;
 
-        // 다음 멸망꽃 사출의 멸망꽃 씨앗 수: 처음 doomSeedVolleyStart개에서 사출 doomSeedVolleyGrowthEvery회마다 1개씩 늘어난다(최대 doomSeedVolleyMax개).
         public int DoomSeedVolleySize => Mathf.Min(Props.doomSeedVolleyMax, Props.doomSeedVolleyStart + _doomVolleysLaunched / Mathf.Max(1, Props.doomSeedVolleyGrowthEvery));
 
-        // 다음 멸망꽃 사출이 요정꽃 씨앗 1개를 더하는 차례(fairySeedEveryVolleys번째, 그 배수 번째 사출)인지.
         public bool FairySeedDue => Props.fairySeedEveryVolleys > 0 && (_doomVolleysLaunched + 1) % Props.fairySeedEveryVolleys == 0;
 
         public bool IsActive => _phase == ApocryphaPhase.Bound || _phase == ApocryphaPhase.Unbound;
 
-        // 2페이즈 전환(모핑) 시작부터 경과한 시간(초)과 진행도(0~1). 렌더 서브워커(병렬)도 읽으므로 저장 필드와 현재 틱만 쓴다.
+        // 병렬 렌더 서브워커에서도 조회하므로 모핑 경과 시간(초)과 진행도(0~1)는 저장 필드와 현재 틱으로만 계산한다.
         public float TransformAgeSecs => _transformStartTick < 0 ? 0f : Mathf.Max(0, GenTicks.TicksGame - _transformStartTick) / 60f;
         public float TransformProgress => _transformStartTick < 0 ? 0f : Mathf.Clamp01((GenTicks.TicksGame - _transformStartTick) / (float)Mathf.Max(1, Props.transformTicks));
 
-        // 엔딩 퀘스트가 지금 이 보스와 싸우는 중인지(보스 단계이고 퀘스트가 기억하는 보스가 이 폰).
-        // 증원·씨앗·사출 포격·채널링(찬탈)은 이때만 진행한다. 엔딩이 끝났거나 퀘스트와 무관하게 생성된 아포크리파는 배회만 한다.
         public bool IsQuestBossFight
         {
             get
@@ -347,14 +297,13 @@ namespace VVRace
                 return quest != null && quest.Stage == ViviEndingStage.Boss && quest.Boss == Pawn;
             }
         }
-        // 진행 중인 사출 포격 조준(여러 개가 겹칠 수 있다).
         public bool IsAiming => _shellAims.Count > 0;
         public IReadOnlyList<ApocryphaShellAim> ShellAims => _shellAims;
         public bool IsBreathing => _breathEndTick >= 0;
         public IntVec3 BreathCell => _breathCell;
         public int NextApproachTick => _nextApproachTick;
 
-        // 링크/조준선의 보스 쪽 끝. 몸통이 칸 중심보다 위쪽에 그려지므로 연결선 모듈(ApocryphaGimmicks)과 같은 기준점을 쓴다.
+        // 몸통이 칸 중심보다 위에 그려지므로 연결선·조준선도 ApocryphaGimmicks와 같은 몸통 기준점을 사용한다.
         public Vector3 BodyCenter => ApocryphaGimmicks.GetBossBodyPos(Pawn);
 
         #region 초기화/저장
@@ -376,9 +325,8 @@ namespace VVRace
             }
         }
 
-        // 모핑 재질을 메인 스레드에서 준비하고 몸통 재질을 다시 고르게 한다(전환 시작, 전환 중 불러오기).
-        // 세이브 불러오기는 별도 스레드에서 스폰하는데 텍스처(ContentFinder)는 메인 스레드에서만 읽을 수 있으므로,
-        // 바닐라 SetAllGraphicsDirty처럼 긴 작업이 끝난 뒤(평소에는 즉시) 메인 스레드에서 실행한다.
+        // 불러오기 중 스폰은 별도 스레드에서 실행되지만 ContentFinder의 텍스처 조회는 메인 스레드에서만 가능하다.
+        // SetAllGraphicsDirty처럼 긴 작업 완료 후 메인 스레드로 미루며 일반 실행 중에는 즉시 처리한다.
         private void PrepareMorph()
         {
             LongEventHandler.ExecuteWhenFinished(() =>
@@ -404,12 +352,10 @@ namespace VVRace
             _nextApproachTick = now + Props.approachIntervalTicks.RandomInRange;
             _nextEdgeHornetTick = now + Props.edgeHornetIntervalTicks;
 
-            // 등장 직후에는 잠시 숨을 고른 뒤 포격을 시작한다.
             _shellReadyTick = now + 600;
             _breathReadyTick = now;
         }
 
-        // 페이즈 그래픽은 생애 단계로 바꾼다(0: 1페이즈, 1: 2페이즈). 잠금은 저장되지만 불러온 뒤에도 한번 맞춰 둔다.
         private void SyncLifeStage()
         {
             var index = (_phase == ApocryphaPhase.Bound || (_phase == ApocryphaPhase.Transforming && !_transformSwapped)) ? 0 : 1;
@@ -417,7 +363,6 @@ namespace VVRace
             Pawn.ageTracker.LockCurrentLifeStageIndex(Mathf.Clamp(index, 0, maxIndex));
         }
 
-        // 1페이즈에는 결속 헤디프, 2페이즈에는 외피 헤디프만 붙어 있게 한다.
         private void SyncPhaseHediffs()
         {
             SyncHediff(ApocryphaHediffDefOf.VV_ApocryphaFairyBond, _phase == ApocryphaPhase.Bound);
@@ -481,7 +426,6 @@ namespace VVRace
 
             Scribe_Collections.Look(ref _needles, "needles", LookMode.Reference);
 
-            // 죽은(시체가 된) 말벌은 참조로 저장하지 않는다.
             if (Scribe.mode == LoadSaveMode.Saving)
             {
                 _edgeHornets.RemoveAll(v => v == null || v.Destroyed || v.Dead);
@@ -513,7 +457,7 @@ namespace VVRace
 
                 _needles.RemoveAll(v => v == null);
 
-                // 마나 보호장이 생기기 전의 세이브는 가득 찬 보호장으로 시작한다.
+                // 마나 보호장 필드가 없는 구버전 세이브는 보호장이 가득 찬 상태로 시작한다.
                 if (_manaShield < 0f)
                 {
                     _manaShield = MaxManaShield;
@@ -534,8 +478,8 @@ namespace VVRace
             base.CompTick();
             if (!parent.Spawned) { return; }
 
-            // 파괴를 동반하는 처리는 피해/작업 콜스택 밖인 다음 틱에서 한다.
-            // 찬탈 완료와 치명타가 같은 틱 사이에 겹치면 처치를 먼저 한다(기절이 대기 중인 찬탈을 취소하는 것과 같게).
+            // 파괴 처리는 피해·작업 호출 스택을 벗어난 다음 틱으로 미룬다.
+            // 찬탈 완료와 치명타가 겹치면 기절로 찬탈을 취소할 때처럼 처치를 우선한다.
             if (_pendingDeath)
             {
                 _pendingDeath = false;
@@ -607,13 +551,11 @@ namespace VVRace
         {
             var stunned = Pawn.stances.stunner.Stunned;
 
-            // 보호장이 깨져 생긴 기절(과 그동안 겹친 다른 기절)이 모두 풀리면 보호장이 다시 차오른다.
             if (_shieldBroken && !stunned)
             {
                 RestoreShield();
             }
 
-            // 엔딩 보스전이 아니면(엔딩 완료·실패 뒤, 퀘스트와 무관한 개체) 능력 타이머를 돌리지 않는다.
             if (!IsQuestBossFight)
             {
                 if (IsAiming)
@@ -635,14 +577,12 @@ namespace VVRace
             TickNeedles(now, stunned);
         }
 
-        // 공허 노드 엔딩처럼 맵 외곽에서 거대 말벌이 소규모로 꾸준히 들어온다. 들어온 말벌은 가까운 멸망꽃·요정꽃(없으면 보스) 곁을 지킨다.
-        // 이렇게 들어온 말벌 중 살아 있는 것의 전투력 합이 위협 포인트에 따른 상한 이상이면 이번 차례는 건너뛴다.
         private void TickEdgeHornets()
         {
             var map = parent.Map;
             _edgeHornets.RemoveAll(v => v == null || v.Dead || !v.Spawned || v.Map != map);
 
-            // 쓰러져 있는 말벌은 상한에 세지 않는다(쓰러진 말벌이 쌓여 증원이 멈추지 않게).
+            // 쓰러진 말벌이 누적돼 증원이 막히지 않도록 증원 상한에서는 제외한다.
             var hornetPower = Mathf.Max(1f, VVPawnKindDefOf.VV_TitanicHornet.combatPower);
             var maxPoints = Props.edgeHornetMaxPointsByThreatPoints.Evaluate(StorytellerUtility.DefaultThreatPointsNow(map));
             var room = Mathf.FloorToInt((maxPoints - _edgeHornets.Count(v => !v.Downed) * hornetPower) / hornetPower);
@@ -651,8 +591,6 @@ namespace VVRace
             _edgeHornets.AddRange(ApocryphaUtility.SpawnFlowerGuardHornets(Pawn, Mathf.Min(room, Props.edgeHornetGroupSize.RandomInRange)));
         }
 
-        // 멸망꽃 사출 차례마다 DoomSeedVolleySize개의 멸망꽃 씨앗을 흩뿌리고, 요정꽃 차례(FairySeedDue)면 요정꽃 씨앗 1개를 더한다.
-        // 요정꽃 차례에 요정꽃이 이미 최대 개수면 그 차례의 요정꽃은 건너뛴다(다음 차례는 다시 fairySeedEveryVolleys회 뒤).
         private void TickSeeds(int now)
         {
             if (_nextDoomSeedTick < 0 || now < _nextDoomSeedTick) { return; }
@@ -665,14 +603,11 @@ namespace VVRace
             }
             else
             {
-                // 착탄 칸이 없거나 이미 최대 개수면 잠시 뒤 다시 시도한다.
                 _nextDoomSeedTick = now + SeedRetryTicks;
             }
         }
 
-        // 포격 사거리 안 시야에 들어온 적을 감지하면 경호 중인 말벌의 공격 대상을 그 적으로 바꾼다.
-        // 이미 노리게 한 적이 계속 보이면 대상을 바꾸지 않고 시간만 늘린다(가장 가까운 적이 바뀔 때마다 말벌이 오가지 않게).
-        // 단, 포탑은 보이는 적 폰이 없을 때만 노리므로 포탑을 노리던 중 폰이 보이면 대상을 다시 고른다.
+        // 가장 가까운 적이 바뀔 때마다 호위가 오가지 않도록 현재 적이 계속 보이면 지정 시간만 연장한다.
         private void TickEnemyDetection()
         {
             if (!parent.IsHashIntervalTick(EnemyDetectInterval)) { return; }
@@ -690,10 +625,8 @@ namespace VVRace
             }
         }
 
-        // 사출 포격: 조준이 끝나기를 기다리지 않고 maxShellAims개까지 새 조준을 겹쳐 건다. 조준마다 shellAimTicks 뒤에 발사한다.
         private void TickShell(int now, bool stunned)
         {
-            // 기절하면 진행 중인 조준이 모두 흐트러진다.
             if (stunned)
             {
                 if (IsAiming)
@@ -712,7 +645,6 @@ namespace VVRace
                 _shellAims.RemoveAt(i);
                 aim.CleanupVisuals();
 
-                // 조준 동안 보스가 걸어 들어와 폭발 범위에 휘말릴 거리가 되었으면 쏘지 않는다.
                 if (!InShellMinRange(aim.cell))
                 {
                     FireShell(aim.cell);
@@ -744,7 +676,6 @@ namespace VVRace
             }
         }
 
-        // 진행 중인 조준을 모두 취소한다.
         private void CancelAim()
         {
             CleanupAimVisuals();
@@ -762,9 +693,7 @@ namespace VVRace
             _aimSustainer = null;
         }
 
-        // 금빛 마법진 조준 경고: 조준마다 대상 칸의 표적 마법진(폭발 범위, 발사 시점을 알리는 좁혀 드는 고리)·꽃잎과 반짝임, 보스 몸통 앞의 시전 마법진,
-        // 그리고 조준이 하나라도 있는 동안의 지속음.
-        // 모트·이펙터는 저장되지 않으므로 불러온 뒤에는 처음 틱에 다시 만든다.
+        // 모트·이펙터는 저장되지 않으므로 불러온 후 첫 틱에 다시 생성한다.
         private void TickAimVisuals()
         {
             if (_shellAims.Count == 0)
@@ -791,9 +720,7 @@ namespace VVRace
             _aimSustainer.EffectTick(bossTarget, bossTarget);
         }
 
-        // 반경 20 안 시야에 들어온 적 폰을 우선 노리고, 없으면 적 포탑을 노린다(대상 조건은 IsShellTargetSide). 최소 사거리(2.9) 안의 적은 빼고,
-        // 사거리 밖에서 공격해 왔던 적이 사거리 안에 들어와 있으면 그 적을 먼저 노린다.
-        // 이미 조준 중인 칸 근처의 대상은 다른 대상이 없을 때만 다시 고른다(포격이 한 곳에 몰리지 않게).
+        // 포격이 한곳에 몰리지 않도록 기존 조준 근처의 적은 다른 후보가 없을 때만 선택한다.
         private bool TryFindShellTarget(out IntVec3 cell)
         {
             cell = IntVec3.Invalid;
@@ -825,7 +752,6 @@ namespace VVRace
             return (cell - parent.Position).LengthHorizontalSquared < Props.shellMinRange * Props.shellMinRange;
         }
 
-        // 1페이즈: 사출 포격 사거리 밖이거나 시야 밖에서 공격해 온 적(폰·포탑)을 기억한다. 이미 기억한 적이면 사거리 안에서 맞아도 기억을 늘린다.
         private void NoteAttacker(Thing instigator)
         {
             if (instigator == null || instigator == parent || !instigator.Spawned || instigator.Map != parent.Map) { return; }
@@ -846,7 +772,6 @@ namespace VVRace
             _pendingPursuitCheck = true;
         }
 
-        // 공격받은 다음 틱: 배회·대기·영원꽃 접근 중이면 작업을 끊어 곧바로 공격자에게 다가가게 한다(작업이 계속 끊기지 않게 5초에 한 번까지).
         private void InterruptIdleJobForPursuit(int now)
         {
             if (now - _lastPursuitInterruptTick < PursuitInterruptIntervalTicks || Pawn.stances.stunner.Stunned) { return; }
@@ -859,7 +784,6 @@ namespace VVRace
             Pawn.jobs.EndCurrentJob(JobCondition.InterruptForced);
         }
 
-        // 기억 중인 사거리 밖 공격자(기억이 끝났거나, 쓰러졌거나, 사라졌거나, 더는 적이 아니면 null). 1페이즈에만 쓴다.
         public Thing RangedAttacker
         {
             get
@@ -874,9 +798,6 @@ namespace VVRace
             }
         }
 
-        // [JobGiver 호출] 기억 중인 공격자가 아직 포격 사거리 밖(또는 시야 밖)이면 그 적을 포격할 수 있는 칸을 찾는다.
-        // 공격자에게서 보스 쪽으로 (사거리 - 3)칸 떨어진 지점부터 2칸씩 다가가며, 갈 수 있고 그 적이 보이는 칸 중 보스에게 가장 가까운 칸을 고른다.
-        // 그런 칸이 없으면(벽 너머의 박격포 등) 갈 수 있는 데까지 공격자 쪽으로 다가간다.
         public bool TryFindPursuitCell(out IntVec3 cell)
         {
             cell = IntVec3.Invalid;
@@ -914,7 +835,6 @@ namespace VVRace
             return false;
         }
 
-        // 감지한 적 중 보스에게 가장 가까운 대상(폰 우선, 없으면 포탑).
         private Thing FindNearestShellTarget()
         {
             CollectShellTargets(_tmpTargets, Props.shellRange);
@@ -936,13 +856,11 @@ namespace VVRace
             return best;
         }
 
-        // 포격·바늘·감지 대상: 반경(포격·감지 20, 바늘 24) 안 시야에 들어온, 보스에게 적대적인 폰(IsShellTargetSide). 폰이 하나도 없을 때만 적 포탑.
         private void CollectShellTargets(List<Thing> outTargets, float range)
         {
             CollectShellTargets(outTargets, range, parent.Position);
         }
 
-        // origin: 거리·시야를 재는 기준 칸
         private void CollectShellTargets(List<Thing> outTargets, float range, IntVec3 origin)
         {
             outTargets.Clear();
@@ -969,7 +887,6 @@ namespace VVRace
             }
         }
 
-        // 반경 안 시야에 적 폰이 하나라도 있는지.
         private bool AnyShellTargetPawn(float range)
         {
             var pawns = parent.Map.mapPawns.AllPawnsSpawned;
@@ -981,9 +898,6 @@ namespace VVRace
             return false;
         }
 
-        // 포격할 편: 보스에게 적대적인 것 전부(2페이즈 근접·숨결과 같은 기준). 보스(곤충 세력)는 모든 세력과 적대이므로
-        // 플레이어 세력·다른 세력의 습격자·기계체뿐 아니라 우호 지원군·상인·방문객·정착지 포로도 노린다.
-        // 같은 세력의 곤충·말벌과 무소속 야생 동물은 보스와 적대가 아니라 빠진다.
         private bool IsShellTargetSide(Thing target)
         {
             return Pawn.HostileTo(target);
@@ -996,7 +910,6 @@ namespace VVRace
             return thing is Pawn pawn ? IsShellTargetPawn(pawn, range, parent.Position) : IsShellTargetTurret(thing, range, parent.Position);
         }
 
-        // 싼 검사부터: 상태 → 거리 → 적대 여부 → 시야
         private bool IsShellTargetPawn(Pawn target, float range, IntVec3 origin)
         {
             if (target == parent || target.Dead || target.Downed || target.IsPsychologicallyInvisible()) { return false; }
@@ -1016,9 +929,6 @@ namespace VVRace
             return GenSight.LineOfSightToThing(origin, building, parent.Map, skipFirstCell: true);
         }
 
-        // 거대 엘텍스 바늘: 보스 둘레에 needleCount개를 띄워 두고, 주기마다 쉬고 있는 바늘 1~3개(needleVolleyCount)로 한 적의 위치를 함께 조준한다
-        // (사출 포격과 따로 돈다). 여러 개면 보스 몸통 둘레의 부채꼴 자리에서 저마다 대상을 겨눠 직선들이 대상에서 교차한다.
-        // 기절하면 조준 중인 바늘은 모두 제자리로 돌아간다(이미 날아간 바늘은 그대로 꿰뚫고 돌아온다).
         private void TickNeedles(int now, bool stunned)
         {
             if (Props.needleCount <= 0) { return; }
@@ -1063,7 +973,6 @@ namespace VVRace
             _needleReadyTick = now + Props.needleCastIntervalTicks.RandomInRange;
         }
 
-        // 한 번에 count개를 쏠 때 i번째 바늘이 설 부채꼴 자리의 각도(보스→대상 방향 기준, 1개는 null로 기존 발사 지점, 2개 ±50°, 3개 -65°/0°/+65°).
         private float? NeedleFanAngle(int index, int count)
         {
             if (count <= 1) { return null; }
@@ -1072,8 +981,6 @@ namespace VVRace
             return Mathf.Lerp(-half, half, index / (float)(count - 1));
         }
 
-        // 2페이즈: 바늘은 보스 둘레 바닥에 꽂혀 폰이 깨우기를 기다린다(스스로 대상을 고르지 않는다). 깨운 바늘의 조준·발사·다시 꽂히기는 바늘이 맡고,
-        // 여기서는 빠진 바늘을 채우고, 바닥에 꽂히지 않은 채 쉬는 바늘(1페이즈 자리로 돌아온 바늘·옛 세이브의 맴도는 바늘)을 둘레 바닥으로 튕겨 보낸다.
         private void TickUnboundNeedles(int now, bool stunned)
         {
             if (!IsQuestBossFight)
@@ -1093,7 +1000,6 @@ namespace VVRace
             }
         }
 
-        // 바늘들을 보스 둘레 바닥(반경 unboundNeedlePlantRadius)의 서로 떨어진 칸으로 튕겨 보내 꽂는다. 바늘은 보스에서 바깥쪽으로 날아간다.
         private void ScatterNeedles(List<ApocryphaNeedle> needles)
         {
             var map = parent.Map;
@@ -1112,7 +1018,6 @@ namespace VVRace
             }
         }
 
-        // 보스 둘레 반경 안에서 설 수 있고 안개 속이 아니며 다른 바늘 자리와 3칸 넘게 떨어진 칸. 없으면 조건을 줄여 가며 찾는다.
         private IntVec3 FindNeedlePlantCell(Map map, IntVec3 center, List<IntVec3> chosen)
         {
             var radius = Props.unboundNeedlePlantRadius;
@@ -1136,7 +1041,6 @@ namespace VVRace
             return cell.IsValid ? cell : center;
         }
 
-        // [ApocryphaNeedle 호출] 2페이즈 바늘이 보스에게 꽂혔을 때. 모두 꽂히면 길게 기절한다(기절이 풀리면 PullOutNeedles).
         public void Notify_NeedleStuck(ApocryphaNeedle needle)
         {
             if (_phase != ApocryphaPhase.Unbound || !parent.Spawned) { return; }
@@ -1162,7 +1066,6 @@ namespace VVRace
             }
         }
 
-        // 꽂힌 바늘을 모두 뽑아 보스 둘레 바닥으로 튕겨 보낸다(받는 피해 배율도 원래대로).
         private void PullOutNeedles()
         {
             _needleStunned = false;
@@ -1190,13 +1093,12 @@ namespace VVRace
             }
         }
 
-        // 바늘 사거리 안 시야의 적 폰(없으면 포탑) 중 무작위. 다른 바늘이 이미 노리는 직선 위의 대상은 다른 대상이 없을 때만 고른다.
         private bool TryFindNeedleTarget(out IntVec3 cell)
         {
             return TryFindNeedleTarget(parent.Position, out cell);
         }
 
-        // origin: 거리·시야를 재는 기준(1페이즈는 보스, 2페이즈는 바늘이 떠 있는 칸).
+        // origin은 거리·시야 판정의 기준 칸이다. 1페이즈는 보스, 2페이즈는 바늘 위치를 사용한다.
         private bool TryFindNeedleTarget(IntVec3 origin, out IntVec3 cell)
         {
             cell = IntVec3.Invalid;
@@ -1204,7 +1106,6 @@ namespace VVRace
             CollectShellTargets(_tmpTargets, Props.needleTargetRange, origin);
             if (_tmpTargets.Count > 0)
             {
-                // 사거리 밖에서 공격해 왔던 적(1페이즈)이 바늘 사거리 안에 보이면 그 적을 먼저 노린다.
                 var attacker = RangedAttacker;
                 Thing target;
                 if (attacker != null && _tmpTargets.Contains(attacker) && !IsInAimedNeedleLane(attacker.Position))
@@ -1233,13 +1134,11 @@ namespace VVRace
             return false;
         }
 
-        // 빠진 자리(처음 등장, 사라진 바늘)의 바늘을 보스 곁에 새로 띄운다.
         private void EnsureNeedles()
         {
             _needles.RemoveAll(v => v == null || v.Destroyed);
             var count = NeedleCount;
 
-            // 바늘 수가 줄어든 뒤의 세이브: 없어진 자리의 바늘은 흩어진다.
             for (int i = _needles.Count - 1; i >= 0; i--)
             {
                 if (_needles[i].Slot >= count)
@@ -1260,11 +1159,9 @@ namespace VVRace
                 GenSpawn.Spawn(needle, parent.Position, parent.Map);
                 _needles.Add(needle);
 
-                // 2페이즈에 새로 생긴 바늘은 쉬는 바늘로 남았다가 다음 확인 때 둘레 바닥으로 튕겨 나간다(TickUnboundNeedles).
             }
         }
 
-        // 조준 중인 바늘을 모두 제자리로 돌려보낸다. 하나라도 취소했으면 true.
         private bool CancelNeedleAims()
         {
             var cancelled = false;
@@ -1279,7 +1176,6 @@ namespace VVRace
             return cancelled;
         }
 
-        // 바늘을 모두 거둔다(2페이즈 전환·찬탈·소멸·보스전 종료). 날아가던 바늘도 그 자리에서 흩어진다.
         private void DestroyNeedles()
         {
             if (_needles.Count == 0) { return; }
@@ -1299,14 +1195,12 @@ namespace VVRace
         {
             var elapsed = now - _transformStartTick;
 
-            // 전환 중간에 생애 단계(그래픽·그림자)를 2페이즈로 바꾼다. 몸통은 모핑 재질로 그리므로 화면에서는 자연스럽게 이어진다.
             if (!_transformSwapped && elapsed >= Props.transformGraphicSwapTicks)
             {
                 _transformSwapped = true;
                 SyncLifeStage();
             }
 
-            // 셰이더의 심장 박동(박동 순간)에 맞춰 몸에서 작은 굴절 파동과 핏빛 불씨가 번지고 화면이 울린다.
             var beatTicks = Mathf.RoundToInt(60f / ApocryphaMorphMaterials.BeatRate);
             if (elapsed > 0 && elapsed < Props.transformTicks && elapsed % beatTicks == 0)
             {
@@ -1324,7 +1218,6 @@ namespace VVRace
         {
             var stunned = Pawn.stances.stunner.Stunned;
 
-            // 바늘이 모두 꽂혀 생긴 기절(과 그동안 겹친 다른 기절)이 풀리면 바늘이 뽑혀 원래대로 돌아간다.
             if (_needleStunned && !stunned)
             {
                 PullOutNeedles();
@@ -1333,7 +1226,6 @@ namespace VVRace
             TickUnboundNeedles(now, stunned);
             TickBreath(now, stunned);
 
-            // 인접한 적 폰은 근접 공격한다(돌진 중에도).
             if (!stunned && !IsBreathing && !IsChanneling && now >= _nextMeleeTick)
             {
                 _nextMeleeTick = now + Props.meleeIntervalTicks;
@@ -1401,7 +1293,6 @@ namespace VVRace
             }
         }
 
-        // 바라보는 방향 앞쪽(반경 7) 시야 안에서 가장 가까운 적 폰을 노린다.
         private bool TryFindBreathTarget(out IntVec3 cell)
         {
             cell = IntVec3.Invalid;
@@ -1453,7 +1344,7 @@ namespace VVRace
             var halfAngle = Props.breathAngle * 0.5f;
             var hornetDef = VVThingDefOf.VV_TitanicHornet;
 
-            // 부채꼴 칸은 직접 계산한다(GenExplosion의 affectedAngle은 ±180° 경계에서 잘리는 버그가 있다).
+            // GenExplosion.affectedAngle은 ±180° 경계에서 잘리는 문제가 있어 부채꼴 칸을 직접 계산한다.
             foreach (var cell in GenRadial.RadialCellsAround(origin, Props.breathRange, useCenter: false))
             {
                 if (!cell.InBounds(map)) { continue; }
@@ -1487,7 +1378,6 @@ namespace VVRace
             ApocryphaUtility.ShakeCamera(map, 0.6f);
         }
 
-        // 녹자색 독가스를 입에서 부채꼴로 뿜는다.
         private void ThrowBreathFlecks(float baseAngle, float halfAngle)
         {
             var map = parent.Map;
@@ -1506,7 +1396,6 @@ namespace VVRace
             }
         }
 
-        // 바라보는 방향에 따른 입 위치(그래픽 크기 비례).
         public Vector3 MouthOffset()
         {
             var size = CurrentVisualDrawSize;
@@ -1524,15 +1413,14 @@ namespace VVRace
             base.PostPreApplyDamage(ref dinfo, out absorbed);
             if (!parent.Spawned) { return; }
 
-            // 모든 피해는 여기서 흡수하고 페이즈별로 직접 처리한다(신체 부위/출혈/고통 없음).
             absorbed = true;
 
             var damageDef = dinfo.Def;
             if (damageDef == null || _pendingDeath) { return; }
             if (_phase == ApocryphaPhase.Transforming || _phase == ApocryphaPhase.Dying) { return; }
 
-            // 아포크리파는 기믹 외의 기절에 면역이다. 기절 피해 중에서는 마나 파동 의식의 기절만 직접 적용한다
-            // (흡수하면 바닐라 기절 처리가 건너뛰어지므로). 그 밖의 기절 피해는 흡수만 하고 면역 표시를 띄운다.
+            // 피해를 흡수하면 바닐라 기절 처리가 생략되므로 허용된 마나 파동 기절은 직접 적용한다.
+            // 그 밖의 기절 피해는 흡수하고 면역 표시만 출력한다.
             if (damageDef == DamageDefOf.Stun || damageDef == DamageDefOf.NerveStun)
             {
                 var stunTicks = damageDef.constantStunDurationTicks ?? Mathf.RoundToInt(dinfo.Amount * StunHandler.StunDurationTicksPerDamage);
@@ -1553,7 +1441,6 @@ namespace VVRace
 
             if (!damageDef.harmsHealth) { return; }
 
-            // 1페이즈: 피해는 마나 보호장을 깎는다. 보호장이 깨져 있는 동안(기절 중)은 요정들이 대신 받아낸다.
             if (_phase == ApocryphaPhase.Bound)
             {
                 NoteAttacker(dinfo.Instigator);
@@ -1570,7 +1457,7 @@ namespace VVRace
                 _manaShield -= absorbedByShield;
                 _pendingDamageText += absorbedByShield;
 
-                // 기절·발사 같은 처리는 피해 콜스택 밖인 다음 틱에서 한다.
+                // 피해 처리 중 재진입하지 않도록 기절·발사는 다음 틱으로 미룬다.
                 if (_manaShield <= 0f)
                 {
                     _manaShield = 0f;
@@ -1604,8 +1491,6 @@ namespace VVRace
                 LocalizeString_Etc.VV_TextMote_DamageBlockedByFairy.Translate());
         }
 
-        // 마나 보호장이 깨짐: 길게 기절하며 조준 중이던 공격(사출 포격·거대 바늘)이 모두 흐트러지고(이미 발사된 것은 그대로 날아간다),
-        // 경련하듯 다음 멸망꽃 사출을 바로 한다. 이때 요정꽃을 더 피울 수 있으면 차례와 관계없이 요정꽃 씨앗도 함께 쏜다.
         private void BreakShield()
         {
             var now = GenTicks.TicksGame;
@@ -1644,7 +1529,7 @@ namespace VVRace
             Messages.Message(LocalizeString_EndingBoss.VV_Message_ApocryphaShieldRestored.Translate(), Pawn, MessageTypeDefOf.NeutralEvent);
         }
 
-        // 기믹에 의한 기절만 StunFor까지 통과시킨다(ApocryphaPatch의 StunFor 접두 패치가 이 플래그를 본다).
+        // ApocryphaPatch의 StunFor 접두 패치가 이 플래그를 검사해 기믹 기절만 허용한다.
         private void GimmickStun(int ticks, Thing instigator)
         {
             ApplyingGimmickStun = true;
@@ -1658,7 +1543,6 @@ namespace VVRace
             }
         }
 
-        // [ApocryphaPatch 호출] 기믹이 아닌 기절이 막혔을 때 "기절 면역" 표시(초당 최대 1회).
         internal void Notify_StunBlocked()
         {
             if (!parent.Spawned) { return; }
@@ -1691,7 +1575,6 @@ namespace VVRace
         #endregion
 
         #region 계약 API
-        // [B 호출] 2페이즈 조율 의식 완료 시: 장시간 기절. 다음 공명 파동(조율 의식)은 resonanceCooldownTicks 뒤에 가능하다.
         public void ApplyResonanceWave(Thing source, int stunTicks)
         {
             if (!parent.Spawned || (!IsActive && _phase != ApocryphaPhase.Transforming)) { return; }
@@ -1712,7 +1595,6 @@ namespace VVRace
             ApocryphaUtility.ShakeCamera(parent.Map, 1.2f);
         }
 
-        // [E 호출] 요정 간섭 비비가 완전히 근접했을 때: 결속 수치 대폭 감소, 채널링 중단, 기절, 호위 말벌 증원.
         public void ReleaseBond(Pawn releaser)
         {
             if (!parent.Spawned || _phase != ApocryphaPhase.Bound) { return; }
@@ -1724,7 +1606,6 @@ namespace VVRace
             CancelAim();
             CancelNeedleAims();
 
-            // 결속이 풀릴 때마다 방어 본능이 자극되어 호위 말벌이 외곽에서 증원된다.
             ApocryphaUtility.SpawnHornetEscorts(Pawn, Props.releaseEscortCount.RandomInRange, fromMapEdge: true);
 
             if (_bondCount <= 0)
@@ -1740,7 +1621,6 @@ namespace VVRace
             }
         }
 
-        // [E 호출] 요정 비비 사출 포격 1회마다: 결속 수치 -1.
         public void Notify_FairyShellFired()
         {
             if (_phase != ApocryphaPhase.Bound || _bondCount <= 0) { return; }
@@ -1758,14 +1638,13 @@ namespace VVRace
 
             if (parent.Spawned && Pawn.CurJobDef == ApocryphaJobDefOf.VV_ApocryphaChannel)
             {
-                // 작업 종료 처리(Notify_ChannelJobEnded)에서 진행도와 메시지를 정리한다.
+                // 진행도와 메시지 정리는 작업 종료 알림인 Notify_ChannelJobEnded에서 처리한다.
                 Pawn.jobs.EndCurrentJob(JobCondition.InterruptForced);
             }
 
             _channelTicks = 0;
         }
 
-        // DEV
         public void DebugReduceBond(float fractionOfInitial)
         {
             if (_phase != ApocryphaPhase.Bound) { return; }
@@ -1789,12 +1668,10 @@ namespace VVRace
             }
             else if (_phase == ApocryphaPhase.Transforming)
             {
-                // 다음 틱에 전환을 마친다.
                 _transformStartTick = GenTicks.TicksGame - Props.transformTicks;
             }
         }
 
-        // 2페이즈: 꽂히지 않은 바늘 하나를 바로 보스에게 꽂는다.
         public void DebugStickNeedle()
         {
             if (_phase != ApocryphaPhase.Unbound) { return; }
@@ -1833,7 +1710,6 @@ namespace VVRace
         #endregion
 
         #region 영원꽃 찬탈(채널링)
-        // 찬탈 대상: 엔딩 보스전 중인 앵커 영원꽃(같은 맵에 스폰되어 있을 때만). 접촉 판정은 제단 중심(3.9) 또는 영원꽃(1.9) 기준.
         public bool TryGetStealTarget(out Thing target, out float range, out ArcanePlant_Everflower everflower)
         {
             target = null;
@@ -1869,7 +1745,6 @@ namespace VVRace
             return _devForceChannel || parent.Position.InHorDistOf(target.Position, range);
         }
 
-        // 제단 발판에 닿았는데 다른 일을 하고 있으면 즉시 채널링으로 넘어가게 한다(사출 포격 조준은 이동·채널링을 막지 않는다).
         private void CheckChannelContact()
         {
             if (IsChanneling || IsBreathing || _pendingSteal) { return; }
@@ -1879,7 +1754,6 @@ namespace VVRace
             InterruptCurrentJob();
         }
 
-        // [채널 작업] 매 틱 진행. 완료되면 다음 틱에 찬탈한다.
         public void Notify_ChannelTick()
         {
             if (_pendingSteal || !IsQuestBossFight) { return; }
@@ -1891,9 +1765,8 @@ namespace VVRace
             }
         }
 
-        // [채널 작업] 작업이 어떤 이유로든 끝났을 때. 찬탈이 확정되지 않았다면 진행도는 0으로 돌아간다.
-        // 보스가 사라지는 중(퀘스트 종료·개발자 도구로 소실, 처치)에도 디스폰 직전에 작업이 끝나며 불리므로(아직 Spawned),
-        // 중단 메시지는 퀘스트 보스전이 이어지고 살아 있을 때만 띄운다(소실 경로는 보스를 퀘스트에서 먼저 떼어 낸 뒤 부른다).
+        // 보스가 사라질 때도 디스폰 직전에 작업 종료 알림이 오므로 Spawned만으로는 중단 메시지를 제어할 수 없다.
+        // 살아 있고 퀘스트 보스전이 계속되는 경우에만 표시한다. 소실 처리는 알림 전에 보스를 퀘스트에서 분리한다.
         public void Notify_ChannelJobEnded()
         {
             if (_pendingSteal) { return; }
@@ -1909,12 +1782,10 @@ namespace VVRace
             _devForceChannel = false;
         }
 
-        // 채널링 완료: 영원꽃을 품은 채 호위 말벌과 함께 사라진다(퀘스트 실패).
         private void StealEverflower()
         {
             if (!parent.Spawned) { return; }
 
-            // 찬탈은 엔딩 보스전 중 앵커 영원꽃이 스폰되어 있을 때만 일어난다(그 사이 엔딩이 끝났으면 취소).
             if (!TryGetStealTarget(out var target, out _, out var everflower))
             {
                 _channelTicks = 0;
@@ -1930,15 +1801,15 @@ namespace VVRace
             CancelBreath();
             DestroyNeedles();
 
-            // 찬탈 신호로 퀘스트를 먼저 실패(Failed)로 넘겨, 뒤이은 영원꽃 파괴가 앵커 상실로 따로 처리되지 않게 한다.
+            // 이후 꽃 파괴가 앵커 소실로 중복 처리되지 않도록 찬탈 신호로 퀘스트를 먼저 실패시킨다.
             ViviEndingQuest.Current?.Notify_EverflowerStolen();
 
             var effectCell = (target ?? everflower)?.Position ?? parent.Position;
             ApocryphaEffecterDefOf.VV_Effecter_ApocryphaSteal.Spawn(effectCell, map).Cleanup();
             ApocryphaUtility.ShakeCamera(map, 2f);
 
-            // 영원꽃과 보스는 바로 없애고, 영원꽃이 꽃잎으로 흩어져 보스에게 빨려 든 뒤 보스도 꽃잎으로 흩날리며 떠나는 모습은
-            // 연출 시퀀서(찬탈 모드)가 그린다. 지금 모습을 기억해야 하므로 둘을 없애기 전에 만든다.
+            // 실제 영원꽃과 보스는 즉시 제거하고 찬탈 시퀀서가 이후 모습을 그린다.
+            // 제거 전의 그래픽과 위치를 보존하도록 시퀀서를 먼저 생성한다.
             var stolen = (DyingApocrypha)ThingMaker.MakeThing(ApocryphaThingDefOf.VV_DyingApocrypha);
             stolen.InitStolen(Pawn, everflower);
 
@@ -1950,7 +1821,6 @@ namespace VVRace
             _phase = ApocryphaPhase.Dying;
             ApocryphaGimmicks.Notify_BossPhaseChanged(Pawn, ApocryphaPhase.Dying);
 
-            // 호위 말벌은 순간 소실 연출로 사라진다(엔딩 정리와 같은 처리).
             ViviEndingUtility.VanishEscorts(Pawn);
             GenSpawn.Spawn(stolen, parent.Position, map);
             Pawn.Destroy(DestroyMode.Vanish);
@@ -2000,13 +1870,11 @@ namespace VVRace
             CancelAim();
             ApocryphaUtility.ClearEscortFocus(Pawn);
 
-            // 충격파에 등 뒤의 바늘이 튕겨 나가 둘레 바닥에 꽂힌다(2페이즈에 폰이 깨워 쓸 바늘). 빠진 바늘은 2페이즈에 채운다.
             _needles.RemoveAll(v => v == null || v.Destroyed);
             ScatterNeedles(_needles.ToList());
 
             SyncPhaseHediffs();
 
-            // 충격파: 맵의 보스 외 모든 생명체가 잠시 기절한다.
             foreach (var pawn in map.mapPawns.AllPawnsSpawned.ToList())
             {
                 if (pawn == parent || pawn.Dead || pawn.Downed) { continue; }
@@ -2019,7 +1887,7 @@ namespace VVRace
             InterruptCurrentJob();
             PrepareMorph();
 
-            // 2페이즈 곡 도입부의 충격음이 충격파와 맞도록 60틱 주기를 기다리지 않고 바로 곡을 바꾼다.
+            // 곡 도입부의 충격음을 전환 충격파에 맞추도록 60틱 주기를 기다리지 않고 즉시 곡을 바꾼다.
             var music = Find.MusicManagerPlay;
             if (music != null && !music.disabled)
             {
@@ -2049,7 +1917,6 @@ namespace VVRace
             SyncPhaseHediffs();
             InterruptCurrentJob();
 
-            // 모핑을 끝내고 원래 몸통 재질(2페이즈 그래픽)로 돌아가며 섬광을 터뜨린다.
             Pawn.Drawer?.renderer?.SetAllGraphicsDirty();
             SpawnEffecter(ApocryphaEffecterDefOf.VV_Effecter_ApocryphaTransform);
             ApocryphaUtility.ShakeCamera(parent.Map, 1.5f);
@@ -2063,7 +1930,6 @@ namespace VVRace
             ApocryphaGimmicks.Notify_BossPhaseChanged(Pawn, ApocryphaPhase.Unbound);
         }
 
-        // 생명력이 0이 되면 시체를 남기지 않고 소멸 연출 Thing으로 처리를 넘긴 뒤 본체를 제거한다.
         private void StartDying()
         {
             if (_phase == ApocryphaPhase.Dying || !parent.Spawned) { return; }
@@ -2077,7 +1943,7 @@ namespace VVRace
 
         private void BeginDissolve(Map map, IntVec3 cell)
         {
-            // 소멸 연출은 죽기 직전의 모습(페이즈별 그리기 크기)을 기억하므로 페이즈를 바꾸기 전에 만든다.
+            // 소멸 연출에 사망 직전 그래픽 크기를 보존하도록 페이즈 변경 전에 연출을 생성한다.
             DyingApocrypha dying = null;
             if (map != null && cell.InBounds(map))
             {
@@ -2097,7 +1963,6 @@ namespace VVRace
                 GenSpawn.Spawn(dying, cell, map);
             }
 
-            // 호위 말벌은 일반 말벌 습격으로 전환된다.
             ApocryphaUtility.ReleaseEscorts(Pawn);
 
             if (parent.Spawned)
@@ -2106,12 +1971,11 @@ namespace VVRace
             }
             else if (map != null)
             {
-                // 이미 디스폰된 상태(예상 밖의 죽음)에서는 보스 맵을 알 수 없으므로 맵 단위 정리로 대신한다.
+                // 예상 밖의 죽음으로 이미 디스폰됐으면 보스의 맵을 알 수 없으므로 맵 단위 정리를 사용한다.
                 ApocryphaGimmicks.CleanupAll(map);
             }
         }
 
-        // 개발자 도구로 죽이는 등 예상 밖의 죽음도 같은 소멸 연출로 처리한다(종족 hasCorpse=false라 시체는 남지 않는다).
         public override void Notify_Killed(Map prevMap, DamageInfo? dinfo = null)
         {
             base.Notify_Killed(prevMap, dinfo);
@@ -2120,9 +1984,9 @@ namespace VVRace
             BeginDissolve(prevMap, parent.Position);
         }
 
-        // 두꺼운(산) 지붕이 무너지면 바닐라는 피해 흡수와 관계없이 Kill로 압사시켜 보스전이 통째로 생략된다.
-        // 무너지기 직전 근처의 무너지지 않는 칸으로 순간이동해 피한다(바닐라 CompNociosphere와 같은 방식).
-        // RemoveThing을 돌려주면 바닐라는 이 칸의 압사 처리를 건너뛴다(갈 곳이 없어도 압사는 피한다).
+        // 산 지붕 붕괴는 피해 흡수와 무관하게 Kill로 압사시켜 보스전을 건너뛸 수 있다.
+        // CompNociosphere처럼 붕괴 전에 안전한 칸으로 순간이동한다.
+        // 이동할 곳이 없어도 RemoveThing을 반환해 현재 칸의 압사 처리는 건너뛴다.
         public RoofCollapseResponse Notify_OnBeforeRoofCollapse()
         {
             if (_phase == ApocryphaPhase.Dying || !parent.Spawned) { return RoofCollapseResponse.None; }
@@ -2141,8 +2005,6 @@ namespace VVRace
             return RoofCollapseResponse.RemoveThing;
         }
 
-        // 무너지는 칸·산 지붕 아래·안개 속이 아니고 보스가 걸어서(벽을 부수며) 갈 수 있는 칸을 먼저 찾고,
-        // 근처가 모두 산 지붕 아래라면 이번에 무너지지 않는 칸 아무 곳으로 물러난다.
         private bool TryFindRoofCollapseEscapeCell(Map map, IntVec3 from, out IntVec3 result)
         {
             var collapseBuffer = map.roofCollapseBuffer;
@@ -2164,7 +2026,7 @@ namespace VVRace
         #endregion
 
         #region 그리기/UI
-        // 렌더 서브워커(병렬 실행)에서도 읽으므로 저장 필드·Def·현재 틱만 읽는다.
+        // 병렬 렌더 서브워커에서도 조회하므로 저장 필드·def·현재 틱만 읽는다.
         public float CurrentVisualDrawSize
         {
             get
@@ -2188,7 +2050,7 @@ namespace VVRace
             }
         }
 
-        // Pawn.DrawAt이 매 프레임 호출한다. 렌더 서브워커에서는 그리지 않는다(병렬).
+        // Pawn.DrawAt이 매 프레임 호출한다. 병렬 실행되는 렌더 서브워커에서는 그리지 않는다.
         public override void PostDraw()
         {
             base.PostDraw();
@@ -2299,7 +2161,6 @@ namespace VVRace
             yield return DevCommand("DEV: Mana shield -25%", () => DebugDamageShield(0.25f));
             yield return DevCommand("DEV: Doom seed now", () => _nextDoomSeedTick = 0);
 
-            // 사출 차례와 상관없이 요정꽃 씨앗만 하나 쏜다.
             yield return DevCommand("DEV: Fairy seed now", () => ApocryphaGimmicks.TryLaunchFairySeed(Pawn));
 
             yield return DevCommand("DEV: Flower guard hornets", () => _edgeHornets.AddRange(ApocryphaUtility.SpawnFlowerGuardHornets(Pawn, Props.edgeHornetGroupSize.max)));
@@ -2328,7 +2189,6 @@ namespace VVRace
             _nextApproachTick = GenTicks.TicksGame + Props.approachIntervalTicks.RandomInRange;
         }
 
-        // 다음 작업을 생각 트리가 즉시 다시 고르게 한다.
         private void InterruptCurrentJob()
         {
             if (parent.Spawned && Pawn.jobs?.curJob != null)
@@ -2337,7 +2197,6 @@ namespace VVRace
             }
         }
 
-        // 보스 몸통 위치(offset)에서 이펙터를 한 번 재생한다. maintainTicks가 있으면 지연 스프레이(충격파 메아리 등)까지 끝나도록 맵에 맡긴다.
         private void SpawnEffecter(EffecterDef effecterDef, Vector3 offset = default)
         {
             if (effecterDef == null || !parent.Spawned) { return; }

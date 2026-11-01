@@ -6,8 +6,6 @@ using Verse;
 
 namespace VVRace
 {
-    // 〈영원한 봄의 제국〉: 〈여왕의 대관식〉이 끝나면(신호 인자 PAWN=여왕) 영원꽃을 6단계로 완전히 개화시키고
-    // 기믹 정리·오염 정화·비비아 꽃·금빛 섬광과 황금 파동·꽃잎 폭풍 연출을 한 뒤, 360틱 뒤 엔딩 편지와 크레딧을 띄우고 완료한다(→ 퀘스트 성공).
     public class QuestPart_ViviEndingFinale : QuestPartActivable
     {
         private const int FinalAttunementLevel = 6;
@@ -37,7 +35,6 @@ namespace VVRace
 
         private Map AnchorMap => anchor != null && !anchor.Destroyed ? anchor.MapHeld : null;
 
-        // 꽃봉오리 위치 오프셋(제단 안치·단계별 의식 이펙트 오프셋). 황금 파동이 여기서 퍼진다.
         private Vector3 BudOffset => anchor?.EverflowerComp?.RitualEffecterOffset ?? Vector3.zero;
 
         protected override void Enable(SignalArgs receivedArgs)
@@ -53,14 +50,13 @@ namespace VVRace
             Begin();
         }
 
-        // 대관식 완료(또는 개발자 도구) → 기믹 정리, 6단계 개화, 정화·개화, 연출 시작. 크레딧 예약은 _startTick 기준이라 이후 단계가 실패해도 엔딩은 끝까지 진행된다.
+        // 크레딧 예약은 _startTick 기준이라 이후 연출이 실패해도 엔딩은 끝까지 진행된다.
         private void Begin()
         {
             var map = AnchorMap;
 
             ViviEndingUtility.RunStep("finale: cleanup gimmicks", ViviEndingUtility.CleanupGimmicks);
 
-            // 살아 있는 보스가 있으면(개발자 도구로 끝낸 경우) 호위 말벌과 함께 사라지게 한다.
             var boss = quest.GetFirstPartOfType<QuestPart_ViviApocrypha>()?.Boss;
             ViviEndingUtility.RunStep("finale: vanish boss", () => ViviEndingUtility.VanishBoss(boss));
 
@@ -81,7 +77,6 @@ namespace VVRace
             ViviEndingUtility.RunStep("finale: ending effects", () => StartEndingEffects(map));
         }
 
-        // 매 틱: 황금 파동 고리 3겹(20틱 간격, 첫 겹은 이펙터가 낸다)과 240틱 동안의 꽃잎 폭풍, 360틱에 엔딩 편지와 크레딧.
         public override void QuestPartTick()
         {
             base.QuestPartTick();
@@ -154,7 +149,6 @@ namespace VVRace
             });
         }
 
-        // 카메라 시야 사각형 곳곳에서 영원꽃 꽃잎이 떨어지며 회전한다(보고 있는 맵일 때만).
         private static void SpawnPetalStorm(Map map)
         {
             var petalDef = EndingCoreDefOf.VV_Fleck_EndingPetal;
@@ -182,7 +176,6 @@ namespace VVRace
             }
         }
 
-        // Biotech: 맵 전역의 오염을 정화한다(한 번만 실행).
         private static int PurifyPollution(Map map)
         {
             if (!ModsConfig.BiotechActive || map.pollutionGrid == null) { return 0; }
@@ -199,7 +192,6 @@ namespace VVRace
             return purified;
         }
 
-        // 제단 반경 45칸 안의 비옥한 토양에 비비아 꽃 약 150송이를 다 자란 상태로 피운다.
         private static int BloomViviFlowers(Map map, IntVec3 center)
         {
             var spawned = 0;
@@ -232,7 +224,6 @@ namespace VVRace
                 null,
                 quest);
 
-            // 바닐라 엔딩 크레딧처럼 제목 없이 이야기 본문으로 시작하고, 뒤에 '기억 속에 남겨짐' 명단을 붙인다.
             var credits = new StringBuilder(ending);
 
             var memory = GameVictoryUtility.InMemoryOfSection();
@@ -241,11 +232,9 @@ namespace VVRace
                 credits.Append("\n\n").Append(memory);
             }
 
-            // 크레딧이 닫힌 뒤에도 게임은 계속된다(메인 메뉴로 나가지 않음).
             GameVictoryUtility.ShowCredits(credits.ToString(), SongDefOf.EndCreditsSong, exitToMainMenu: false);
         }
 
-        // 즉위한 여왕: 대관식을 치른 공명자 → 앵커 공명자 → 아무 자유 정착민(개발자 도구로 끝낸 경우) 순.
         private Pawn ResolveQueen()
         {
             if (_queen != null && !_queen.Destroyed) { return _queen; }
@@ -260,8 +249,7 @@ namespace VVRace
             Refugee,
         }
 
-        // 시작 시나리오 판별: 플레이어 세력 → 시작 폰 구성 → 시나리오 이름 순.
-        // 시나리오 세력이 적용되지 않은 게임(빠른 테스트 게임 등)도 있어서 세력만으로는 부족하다.
+        // 빠른 테스트 게임 등에는 시나리오 세력이 적용되지 않아 세력만으로 시나리오를 판별할 수 없다.
         private static EndingScenarioKind DetectEndingScenario()
         {
             var playerFactionDef = Faction.OfPlayer?.def;
@@ -280,7 +268,7 @@ namespace VVRace
                 }
             }
 
-            // 세이브에는 시나리오 이름이 게임을 만든 시점의 언어로 남는다. 같은 언어로 플레이 중일 때만 유효한 최후의 판별 수단이다.
+            // 시나리오 이름은 게임 생성 당시 언어로 저장되므로 같은 언어로 플레이 중일 때만 유효한 최후의 판별 수단이다.
             if (!scenario.name.NullOrEmpty())
             {
                 if (scenario.name == DefDatabase<ScenarioDef>.GetNamedSilentFail("VV_ViviStart")?.scenario?.name) { return EndingScenarioKind.Exiled; }
@@ -290,8 +278,6 @@ namespace VVRace
             return EndingScenarioKind.None;
         }
 
-        // 바닐라 엔딩 크레딧(공허 노드·세레브렉스 코어)과 같은 짜임: 마지막 행위 → 세계의 변화 → "{PAWN}(은)는 ~했습니다."
-        // → 시나리오 문단(추방된 비비/비비 피난민) → "이야기는 계속됩니다..."
         private static string BuildEndingText(Pawn queen)
         {
             var sb = new StringBuilder();

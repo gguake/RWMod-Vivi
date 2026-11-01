@@ -9,7 +9,6 @@ namespace VVRace
         public RitualBehaviorWorker_Fairyfication() { }
         public RitualBehaviorWorker_Fairyfication(RitualBehaviorDef def) : base(def) { }
 
-        // 요정화 의식은 대상 비비를 데려와 눕히고 공명자가 자리를 잡을 때까지(0~1단계) 소리 없이 진행한다.
         protected override int LastSilentStageIndex => 1;
 
         public override bool PawnCanFillRole(Pawn pawn, RitualRole role, out string reason, TargetInfo ritualTarget)

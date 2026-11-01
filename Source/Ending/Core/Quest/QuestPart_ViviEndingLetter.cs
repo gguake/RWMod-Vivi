@@ -3,15 +3,14 @@ using Verse;
 
 namespace VVRace
 {
-    // 보내는 순간 번역하는 엔딩 편지(평화 기간·대관식 대기). 본문의 {PAWN_labelShort}은 그 순간 앵커의 공명자로 채우고,
-    // 공명자가 없으면 대체 문구를 쓴다. 생성 시점에 텍스트를 고정하는 바닐라 QuestPart_Letter로는 이 동작을 낼 수 없다.
+    // QuestPart_Letter는 생성 시 텍스트를 고정하므로 발송 시점에 번역하는 별도 부품을 사용한다.
+    // {PAWN_labelShort}에는 현재 앵커의 공명자를 넣고, 공명자가 없으면 대체 문구를 사용한다.
     public class QuestPart_ViviEndingLetter : QuestPart
     {
         public string inSignal;
         public string labelKey;
         public string textKey;
 
-        // 본문 뒤에 붙는 안내 문단과 그 {DAYS} 값(없으면 null)
         public string guideKey;
         public string guideDays;
 

@@ -6,14 +6,12 @@ using Verse;
 
 namespace VVRace
 {
-    // 6단계 〈생명의 회귀〉: 아포크리파에게 귀속되어 있다가 풀려난 고대 제국의 요정 비비 하나를 성체 비비의 육체로 되돌려 정착민으로 맞이한다.
-    // 고대 비비는 일반 비비보다 무작위 유전자를 더 많이 지니고, 초월 유전자를 반드시 하나 지닌다.
     public class RitualOutcomeEffectWorker_ReturnOfLife : RitualOutcomeEffectWorker_FromQuality
     {
         private static readonly IntRange AncientGeneCount = new IntRange(4, 6);
         private const int AncientArchiteGeneCount = 1;
 
-        // 제국이 무너진 날 요정화되어 수백 년을 보낸 비비이므로 달력상 나이만 그만큼 더한다(육체 나이는 그대로).
+        // 제국 멸망 후 요정으로 보낸 수백 년은 달력상 나이에만 더하고 육체 나이는 유지한다.
         private static readonly IntRange AncientYearsRange = new IntRange(300, 600);
         private const float SpawnRadius = 4.9f;
 

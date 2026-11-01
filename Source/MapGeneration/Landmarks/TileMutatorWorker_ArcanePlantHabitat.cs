@@ -6,7 +6,6 @@ using Verse;
 
 namespace VVRace
 {
-    // 마법 식물 자생지: 타일마다 정해진 마법 식물 몇 종을 무소유 군락으로 자생시키고 군락 둘레에 비비아 꽃밭을 만든다.
     public class TileMutatorWorker_ArcanePlantHabitat : TileMutatorWorker_ViviLandmark
     {
         private const float MinViviaPlantableRatio = 0.4f;
@@ -45,7 +44,6 @@ namespace VVRace
             var kinds = GetPlantKinds(map.Tile);
             if (kinds.Count == 0) { return; }
 
-            // 앞쪽 군락은 고른 종을 하나씩 맡고, 나머지는 무작위 종
             var clusterCount = Mathf.Max(kinds.Count, ViviLandmarkUtility.CountForMap(map, extension));
             var clusterKinds = new List<ThingDef>(kinds);
             while (clusterKinds.Count < clusterCount)
@@ -74,7 +72,6 @@ namespace VVRace
                 if (placed.Any(p => p.DistanceTo(cell) < extension.plantSpacing)) { continue; }
                 if (!CanSpawnArcanePlantAt(cell, map, kind)) { continue; }
 
-                // 무소유로 생성한다. 무소유 마법 식물은 점유/해체/옮겨심기가 가능하다(ArcanePlant.ClaimableBy).
                 ViviaFieldGenerator.ClearReplaceableWildPlant(cell, map);
                 GenSpawn.Spawn(ThingMaker.MakeThing(kind), cell, map);
                 placed.Add(cell);
@@ -99,7 +96,6 @@ namespace VVRace
             return ViviLandmarkUtility.IsClearOfStructures(c, fieldExtent, map);
         }
 
-        // 마법 식물을 심을 수 있는 땅(ArcanePlantUtility.CanPlaceArcanePlantToCell과 같은 비옥도/지반 기준)인지
         private static bool CanSpawnArcanePlantAt(IntVec3 c, Map map, ThingDef kind)
         {
             if (!c.InBounds(map) || c.Roofed(map) || !c.Standable(map)) { return false; }

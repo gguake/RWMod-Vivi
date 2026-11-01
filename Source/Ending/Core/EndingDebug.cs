@@ -6,7 +6,6 @@ using Verse;
 
 namespace VVRace
 {
-    // 개발자 도구: 영원꽃의 DEV 기즈모(갓 모드)와 자동 테스트용 단계 이동. 단계 이동은 퀘스트 신호·부품 완료로만 한다.
     public partial class ViviEndingQuest
     {
         private const float DebugRitualQuality = 5f;
@@ -15,7 +14,6 @@ namespace VVRace
         {
             if (!DebugSettings.godMode || everflower.Faction != Faction.OfPlayer) { yield break; }
 
-            // 엔딩이 영원꽃에 묶인 뒤에는 앵커에만 단계 조작 기즈모를 보여준다.
             if (_anchor != null && !_anchor.Destroyed && !IsAnchor(everflower)) { yield break; }
 
             var stage = Stage;
@@ -43,7 +41,7 @@ namespace VVRace
 
             if (!finished)
             {
-                // 밀서 전(None) 다음은 AltarUnlocked다(enum 값 1은 비어 있음).
+                // 열거형 값 1이 비어 있으므로 None 다음은 AltarUnlocked로 직접 지정한다.
                 var next = stage == ViviEndingStage.None ? ViviEndingStage.AltarUnlocked : stage + 1;
                 yield return DevCommand($"DEV: Ending stage → {next}", () => DebugSetStage(next, everflower));
             }
@@ -72,19 +70,16 @@ namespace VVRace
             }
         }
 
-        // DEV: 자동 테스트/개발자 기즈모용
         public void DebugSetStage(ViviEndingStage stage)
         {
             DebugSetStage(stage, null);
         }
 
-        // DEV: 마지막으로 본 잔향 편지 단계를 바꾼다(0: 처음부터). 편지는 보내지 않는다.
         public void DebugSetLastEchoStage(int stage)
         {
             _lastEchoStage = Mathf.Clamp(stage, 0, MaxEchoStage);
         }
 
-        // DEV: 발생 규칙(조율 단계·확률)과 무관하게 다음 잔향 편지를 보낸다. 주인공은 영원꽃과 링크된 로열 비비.
         internal void DebugSendNextEchoLetter(ArcanePlant_Everflower everflower)
         {
             if (_lastEchoStage >= MaxEchoStage) { return; }
@@ -99,7 +94,6 @@ namespace VVRace
             SendEchoLetter(_lastEchoStage + 1, everflower, resonator);
         }
 
-        // DEV: 공성 중 응축률을 바꾼다(99% 이상이면 곧바로 평화 기간으로).
         public void DebugSetBloom(float value)
         {
             if (Stage != ViviEndingStage.Siege) { return; }
@@ -112,7 +106,6 @@ namespace VVRace
             DebugSpawnBossNow(null);
         }
 
-        // 목표 단계로 옮긴다. context는 앵커가 아직 없을 때 엔딩을 묶을 영원꽃.
         internal void DebugSetStage(ViviEndingStage stage, ArcanePlant_Everflower context)
         {
             switch (stage)
@@ -122,8 +115,6 @@ namespace VVRace
                     break;
 
                 case ViviEndingStage.Failed:
-                    // 본편 퀘스트를 앵커 소실로 실패시킨다(살아 있는 보스·호위는 퀘스트 종료 정리가 치운다).
-                    // 이미 끝난 엔딩(대관식 뒤 엔딩 연출 중 포함)은 실패로 바꾸지 않는다.
                     if (IsFinished)
                     {
                         Log.Warning($"[ViViRace] ending debug: the ending already finished ({Stage}); not failing it.");
@@ -157,7 +148,6 @@ namespace VVRace
                 CalmPart.DebugForceComplete();
             }
 
-            // 토벌 뒤(대관식 대기·엔딩)에는 아포크리파 부품이 이미 끝나 다시 소환할 수 없다.
             var apocrypha = ApocryphaPart;
             if (apocrypha == null || apocrypha.State != QuestPartState.Enabled)
             {
@@ -165,11 +155,9 @@ namespace VVRace
                 return;
             }
 
-            // 영원꽃 위 등장 연출을 튼다(연출 중이면 건너뛰고 곧바로 스폰한다).
             apocrypha.DebugSpawnNow(skipIntro: false);
         }
 
-        // DEV: 평화 기간을 곧바로 끝낸다(아포크리파는 다음 틱에 등장을 시도한다). 이미 보류 중이면 곧바로 다시 시도하게 한다.
         private void DebugEndCalm()
         {
             if (Stage != ViviEndingStage.Calm) { return; }
@@ -184,7 +172,6 @@ namespace VVRace
             }
         }
 
-        // DEV: 의뢰 가능 여부(진행 중인 의뢰·코어 존재·적대 연방)를 건너뛰고 고대 호박 코어 의뢰 퀘스트를 만든다. 연방이 없으면 의뢰인 없이 만든다.
         private void DebugRequestAmberCoreQuest()
         {
             if (RequestAmberCoreQuest(ViviEndingUtility.FindFederation(requireNonHostile: false)) == null)
@@ -193,7 +180,6 @@ namespace VVRace
             }
         }
 
-        // 목표 단계(진행 순서 기준)에 이를 때까지 한 단계씩 넘긴다. 실패 상태에서는 넘기지 않는다.
         private bool DebugAdvanceTo(ViviEndingStage target, ArcanePlant_Everflower context)
         {
             for (int guard = 0; guard < 10; ++guard)
@@ -249,7 +235,6 @@ namespace VVRace
 
                 case ViviEndingStage.Calm:
                     {
-                        // 평화 타이머를 끝내 아포크리파 부품을 켠다. 보스 단계가 목표면 등장시키고, 그 너머가 목표면 토벌된 것으로 친다.
                         if (CalmPart != null && CalmPart.State == QuestPartState.Enabled)
                         {
                             CalmPart.DebugForceComplete();
@@ -284,7 +269,6 @@ namespace VVRace
             }
         }
 
-        // DEV: 엔딩을 처음 상태로 되돌린다. 진행 중인 퀘스트는 결과 없이 끝내(종료 정리로 보스·기믹·컨디션을 걷음) 퀘스트 목록에서 지운다.
         private void DebugReset()
         {
             foreach (var quest in new[] { _bloomQuest, _missiveQuest })
@@ -315,8 +299,7 @@ namespace VVRace
             _cachedPartCount = -1;
         }
 
-        // 목록에서 지운 퀘스트를 가리키는 편지·메시지(기록 보관함)와 컨디션의 참조를 끊는다.
-        // 남겨 두면 저장할 때 없는 퀘스트를 참조로 쓰고, 불러올 때 "Could not resolve reference" 경고가 난다.
+        // 삭제한 퀘스트의 참조를 편지·메시지·컨디션에 남겨 두면 불러올 때 "Could not resolve reference" 경고가 난다.
         private static void ClearQuestReferences(Quest quest)
         {
             foreach (var archivable in Find.Archive.ArchivablesListForReading)

@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,7 +49,6 @@ namespace VVRace
             Scribe_Values.Look(ref _canGatherFilth, "canGatherFilth");
         }
 
-        // 맵별로 모든 채집 건물은 캐시를 공유한다
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);

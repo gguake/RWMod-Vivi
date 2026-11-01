@@ -2,13 +2,11 @@
 
 namespace VVRace
 {
-    // 아포크리파의 〈요정 비비 결속〉. 플레이어 비비의 결속 헤디프와 표기만 같으며, 수치는 보스 컴프에서만 관리한다.
-    // 14억이 넘는 값은 float 심각도로 표현할 수 없으므로(1 감소가 반영되지 않음) 심각도는 1로 고정하고 라벨만 덮어쓴다.
+    // 14억 이상의 float 값에는 1 감소가 반영되지 않으므로 severity는 1로 고정하고 실제 결속 수는 라벨에만 표시한다.
     public class Hediff_ApocryphaFairyBond : HediffWithComps
     {
         private CompApocrypha BossComp => pawn?.TryGetComp<CompApocrypha>();
 
-        // 다른 괄호 문구(단계/컴프)가 붙지 않도록 완전히 덮어쓴다.
         public override string LabelInBrackets
         {
             get

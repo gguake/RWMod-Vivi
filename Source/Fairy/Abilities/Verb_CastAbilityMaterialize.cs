@@ -4,7 +4,6 @@ using Verse;
 
 namespace VVRace
 {
-    // 정신 감응력이 높을수록 시전(준비) 시간이 짧아진다.
     public class Verb_CastAbilityMaterialize : Verb_CastAbility
     {
         public override bool TryStartCastOn(

@@ -192,7 +192,7 @@ namespace VVRace
             DestroyAllActiveFairies();
 
             var gameCompMana = Current.Game.GetComponent<GameComponent_Mana>();
-            // Kill이 죽음 처리 훅을 통해 등록 목록을 건드릴 수 있으므로 지연 열거 상태로 순회하지 않는다.
+            // Kill의 사망 처리 훅이 등록 목록을 바꿀 수 있으므로 지연 열거로 순회하지 않는다.
             foreach (var fairyPawn in gameCompMana.GetFairyficatedPawns((Pawn)parent).ToList())
             {
                 fairyPawn.Kill(dinfo);
@@ -271,7 +271,6 @@ namespace VVRace
             {
                 gameCompMana.UnregisterFairy(vivi);
 
-                // 결속 수가 줄었으므로 요정 비비 결속 헤디프 수치를 즉시 갱신한다.
                 Refresh();
                 return (Pawn)vivi;
             }
@@ -454,7 +453,6 @@ namespace VVRace
             Refresh();
         }
 
-        // 요정 비비 결속 헤디프(VV_ViviFairyFollow)를 현재 결속 수에 맞게 다시 계산한다.
         public void RefreshBondHediff()
         {
             Refresh();

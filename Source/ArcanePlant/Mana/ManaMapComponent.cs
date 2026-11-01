@@ -34,21 +34,18 @@ namespace VVRace
         private bool _drawManaOverlay;
         public bool manaOverlaySetting;
 
-        // 6단계 마나 바닥 전용 오버레이: 맵 전체가 같은 색이므로 칸 오버레이(250틱마다 재생성)와 나눠 그리고,
-        // 바닥이 바뀔 때와 그린 칸의 안개가 실제로 바뀔 때만 다시 만든다.
-        // 바닐라는 문을 지날 때마다 이미 걷힌 칸에도 안개 변경 이벤트를 보내므로, 마지막으로 그릴 때 칠한 칸을 기억해 두고 비교한다.
+        // 6단계 마나 하한은 맵 전체가 같은 색이므로 250틱마다 갱신하는 칸 오버레이와 분리한다.
+        // 문을 지날 때 이미 걷힌 칸에도 안개 변경 이벤트가 오므로 마지막으로 그린 상태와 다를 때만 다시 만든다.
         private CellBoolDrawer _manaFloorDrawer;
         private Color _manaFloorColor;
         private bool[] _manaFloorDrawnCells;
 
-        // 마나 영맥(오디세이 랜드마크): 게임 내내 환경 마나를 방출하는 지점
         private List<IntVec3> _manaVeins = new List<IntVec3>();
         public IReadOnlyList<IntVec3> ManaVeins => _manaVeins;
 
-        // 영원꽃 제단(엔딩): 안치된 5/6단계 영원꽃은 제단 발판 전체에서 추가 마나를 방출하고,
-        // 6단계 영원꽃이 있는 맵은 모든 칸의 환경 마나가 바닥값 아래로 내려가지 않는다(조회 시 적용하는 바닥값이므로 흡수해도 줄지 않음).
-        // 이 상태는 저장하지 않는다: 불러오기에서는 1x1 영원꽃이 5x5 제단보다 먼저 스폰되므로, FinalizeInit과 250틱마다
-        // 맵의 제단·영원꽃 상태를 바탕으로 다시 계산한다(레벨이나 안치 상태가 바뀌면 CompEverflower도 즉시 갱신을 요청한다).
+        // 안치된 5·6단계 영원꽃은 제단 발판에 마나를 방출하고, 6단계는 맵 전체에 흡수로 줄지 않는 마나 하한을 제공한다.
+        // 불러올 때 꽃이 제단보다 먼저 스폰되므로 이 상태는 저장하지 않고 FinalizeInit과 250틱 간격으로 재계산한다.
+        // 레벨이나 안치 상태가 바뀌면 CompEverflower가 즉시 갱신을 요청한다.
         public const float EverflowerAltarManaPerDayLevel5 = 6000f;
         public const float EverflowerAltarManaPerDayLevel6 = 12000f;
         public const float EverflowerLevel6ManaFloor = 300f;
@@ -168,7 +165,6 @@ namespace VVRace
                         if (v >= 100f) { _tmpFlowerCellCandidates.Add((i, v)); }
                     }
 
-                    // 마나 밀도가 높은 셀부터 스폰. 500 이상은 동순위 취급
                     _tmpFlowerCellCandidates.Sort((x, y) => Mathf.Min(y.mana, 500f).CompareTo(Mathf.Min(x.mana, 500f)));
 
                     var thingDef = ArcanePlantUtility.ViviFlowerDefs.RandomElement();
@@ -255,7 +251,7 @@ namespace VVRace
 
             var manaPerDay = VVTileMutatorDefOf.VV_ManaVein?.GetModExtension<ManaVeinExtension>()?.manaPerDay ?? DefaultManaVeinPerDay;
 
-            // 칸당 상한(EnvironmentManaMax)에 막혀 버려지지 않도록 중심 3x3에 나눠 넣는다.
+            // 칸당 상한(EnvironmentManaMax)을 넘어 버려지지 않도록 중심 3×3칸에 나눠 넣는다.
             var manaPerCell = manaPerDay / 60000f * ticks / 9f;
             foreach (var vein in _manaVeins)
             {
@@ -269,8 +265,8 @@ namespace VVRace
             }
         }
 
-        // 맵의 영원꽃을 훑어 제단 상태를 다시 계산한다. 영원꽃은 맵에 여러 송이 있을 수 있으므로 꽃이 직접 값을 넣으면
-        // 서로 덮어쓰게 된다. 그래서 CompEverflower는 레벨 변경·안치 변경·스폰/디스폰 때 이 함수만 부른다.
+        // 여러 영원꽃이 값을 덮어쓰지 않도록 맵 전체를 조사해 제단 상태를 계산한다.
+        // CompEverflower는 레벨·안치 상태나 스폰 여부가 바뀔 때 재계산만 요청한다.
         public void RefreshEverflowerAltarState()
         {
             var center = IntVec3.Invalid;
@@ -321,7 +317,7 @@ namespace VVRace
         {
             if (_altarManaPerDay <= 0f || !_altarCenter.IsValid) { return; }
 
-            // 한 점에 넣으면 칸당 상한에 막혀 버려지므로 제단 5x5 발판에 고르게 나눠 넣는다.
+            // 한 칸의 마나 상한에 막혀 버려지지 않도록 제단의 5×5칸에 고르게 분배한다.
             var rect = CellRect.CenteredOn(_altarCenter, EverflowerAltarEmitRadius).ClipInsideMap(map);
             if (rect.Area <= 0) { return; }
 
@@ -349,7 +345,7 @@ namespace VVRace
             _manaFloorDrawer = CreateManaFloorDrawer();
         }
 
-        // 칸 오버레이보다 먼저(renderQueue 3633) 그려 마나가 바닥값을 넘는 칸의 오버레이가 그 위에 겹쳐 보이게 한다.
+        // renderQueue 3633으로 칸 오버레이보다 먼저 그려 하한을 넘는 마나 표시가 위에 겹치게 한다.
         private CellBoolDrawer CreateManaFloorDrawer()
         {
             return new CellBoolDrawer(GetManaFloorCellBool, () => Color, GetManaFloorCellColor, map.Size.x, map.Size.z, 3633, _modSettingCache.manaGridOpacity);
@@ -422,8 +418,8 @@ namespace VVRace
             _dirtyManaCells.Clear();
         }
 
-        // 칸 오버레이는 6단계 마나 바닥을 넘는 칸만 그린다. 바닥(맵 전체 균일)은 _manaFloorDrawer가 따로 그린다.
-        // 바닥까지 여기서 칠하면 오버레이가 켜져 있는 동안 마나 갱신(250틱)마다 맵 전체 칸의 메시를 다시 만든다.
+        // 하한까지 칸별로 그리면 마나 갱신마다 맵 전체 메시를 다시 만들게 된다.
+        // 균일한 하한은 _manaFloorDrawer로 그리고 칸 오버레이는 하한을 초과한 부분만 그린다.
         public bool GetCellBool(int index)
         {
             return _manaGrid[index] > Mathf.Max(5f, _manaFloor);
@@ -436,8 +432,8 @@ namespace VVRace
             return GetManaOverlayColor(Mathf.Max(_manaFloor, _manaGrid[index] + _manaReserveGrid[index]));
         }
 
-        // 메시를 다시 만들 때 칸마다 한 번씩 불린다. 칠한 칸을 기억해 두었다가 안개 변경이 실제로 그림을 바꾸는지 비교한다.
-        // (바닥 오버레이는 바닥값이 있을 때만 그리므로 엔딩 전에는 배열을 만들지 않는다)
+        // 안개 변경이 화면에 영향을 주는지 비교할 수 있도록 메시 생성 시 그린 칸을 기록한다.
+        // 하한 오버레이가 필요 없는 엔딩 전에는 배열을 할당하지 않는다.
         private bool GetManaFloorCellBool(int index)
         {
             var draw = _manaFloor > 0f && !map.fogGrid.IsFogged(index);
@@ -450,13 +446,13 @@ namespace VVRace
             return draw;
         }
 
-        // 바닥값이 바뀔 때 한 번만 계산해 둔 색을 쓴다(맵 전체 칸이 같은 색).
+        // 맵 전체가 같은 색이므로 하한이 바뀔 때만 색을 계산한다.
         private Color GetManaFloorCellColor(int index)
         {
             return _manaFloorColor;
         }
 
-        // 바닐라는 이미 걷힌 칸에도 안개 변경 이벤트를 보내므로(문을 지날 때 등), 마지막으로 그린 모습과 달라질 때만 바닥 오버레이를 다시 만든다.
+        // 이미 걷힌 칸에도 안개 변경 이벤트가 오므로 마지막으로 그린 상태와 다를 때만 오버레이를 다시 만든다.
         private void Notify_CellFogChanged(IntVec3 c, bool fogged)
         {
             if (_manaFloor <= 0f || _manaFloorDrawnCells == null || !c.InBounds(map)) { return; }
@@ -467,7 +463,7 @@ namespace VVRace
                 return;
             }
 
-            // 칸을 꽉 채우는 여러 칸짜리 건물은 한 칸의 이벤트로 모든 칸의 안개가 함께 걷힌다.
+            // 칸을 꽉 채우는 다칸 건물은 한 칸의 이벤트로 전체 칸의 안개가 걷힌다.
             if (!fogged)
             {
                 var things = c.GetThingList(map);
@@ -487,7 +483,6 @@ namespace VVRace
             }
         }
 
-        // 칠한 칸(안개 없음)이 안개로 덮였거나, 칠하지 않은 칸(안개)이 걷혔으면 그림이 바뀐다.
         private bool IsManaFloorDrawnDifferently(IntVec3 cell, bool fogged)
         {
             return _manaFloorDrawnCells[map.cellIndices.CellToIndex(cell)] == fogged;

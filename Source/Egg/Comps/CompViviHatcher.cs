@@ -150,7 +150,7 @@ namespace VVRace
 
         public override void PostSplitOff(Thing piece)
         {
-            // 스택 전체를 나누면 SplitOff가 자기 자신을 반환한다 (운반 시마다 발생)
+            // 운반 시 스택 전체를 SplitOff하면 새 스택 대신 자기 자신을 반환한다.
             if (piece == parent) { return; }
 
             var pieceComp = piece.TryGetComp<CompViviHatcher>();

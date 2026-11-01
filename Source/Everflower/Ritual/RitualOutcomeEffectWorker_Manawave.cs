@@ -54,7 +54,6 @@ namespace VVRace
                 propagationSpeed: 0.5f,
                 doSoundEffects: false);
 
-            // 엔딩의 평화 기간/보스전 동안에는 마나 파동이 새 습격을 불러들이지 않는다(마나·기절 효과는 그대로).
             var blockRaids = EverflowerRitualRules.ShouldBlockManawaveRaids(map);
 
             if (!blockRaids && Rand.Chance(0.2f))

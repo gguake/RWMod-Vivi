@@ -3,7 +3,6 @@ using Verse;
 
 namespace VVRace
 {
-    // 비비 랜드마크(TileMutatorDef) 설정. 월드 생성 조건과 맵 배치, 비비아 꽃밭 모양을 XML에서 조정한다.
     public class ViviLandmarkExtension : DefModExtension
     {
         public float minPlantDensity = 0.1f;

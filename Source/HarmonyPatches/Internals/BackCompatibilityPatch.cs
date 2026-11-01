@@ -9,13 +9,13 @@ namespace VVRace
 {
     internal class BackCompatibilityPatch
     {
-        // 미완성품이 나중에 추가된 레시피 목록 (구버전 세이브의 Bill_Production -> Bill_ProductionWithUft)
+        // 미완성품 지원이 뒤늦게 추가되어 구버전 Bill_Production을 Bill_ProductionWithUft로 변환해야 하는 레시피.
         private static readonly HashSet<string> UftAddedRecipeDefNames = new HashSet<string>
         {
             "Make_VV_UniformHelmet",
         };
 
-        // 클래스가 나중에 HediffWithComps에서 Hediff_ViviFairyFollow로 바뀐 헤디프
+        // 구버전 HediffWithComps를 Hediff_ViviFairyFollow로 변환해야 하는 헤디프.
         private const string FairyBondHediffDefName = "VV_ViviFairyFollow";
 
         internal static void Patch(Harmony harmony)
@@ -28,7 +28,7 @@ namespace VVRace
         {
             if (__result == typeof(HediffWithComps))
             {
-                // 구버전 세이브의 요정 비비 결속(HediffWithComps -> Hediff_ViviFairyFollow). 추가 저장 필드가 없어 그대로 읽힌다.
+                // 추가 저장 필드가 없어 구버전 HediffWithComps 데이터를 Hediff_ViviFairyFollow로 그대로 읽을 수 있다.
                 if (node?["def"]?.InnerText == FairyBondHediffDefName)
                 {
                     __result = typeof(Hediff_ViviFairyFollow);

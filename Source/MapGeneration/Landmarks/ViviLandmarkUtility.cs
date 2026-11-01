@@ -11,7 +11,7 @@ namespace VVRace
     {
         private const float BaselineMapArea = 250f * 250f;
 
-        // 비비아 꽃이 자라는 환경인지 본다. 모드 바이옴에도 맞도록 바이옴 목록 대신 바이옴 성질과 기온으로 판정한다.
+        // 모드 바이옴도 지원하도록 고정 목록 대신 바이옴 속성과 기온으로 비비아 꽃의 생장 조건을 판정한다.
         public static bool IsViviaGrowableTile(PlanetTile tile, PlanetLayer layer, ViviLandmarkExtension extension)
         {
             if (extension == null) { return false; }
@@ -31,7 +31,6 @@ namespace VVRace
             return Mathf.Max(extension.minCount, GenMath.RoundRandom(extension.countRange.RandomInRange * scale));
         }
 
-        // 서로 minSpacing 이상 떨어진 칸을 count개까지 찾는다. 맞는 칸이 모자라면 찾은 만큼만 돌려준다.
         public static List<IntVec3> FindSpacedCells(Map map, int count, float minSpacing, Predicate<IntVec3> validator)
         {
             var result = new List<IntVec3>();
@@ -54,14 +53,12 @@ namespace VVRace
             return c.x < margin || c.z < margin || c.x >= map.Size.x - margin || c.z >= map.Size.z - margin;
         }
 
-        // 다른 생성 단계가 예약한 영역(UsedRects)과 겹치지 않는지
         public static bool IsAreaUnused(IntVec3 center, float radius)
         {
             var area = CellRect.CenteredOn(center, Mathf.CeilToInt(radius));
             return !MapGenerator.UsedRects.Any(rect => rect.Overlaps(area));
         }
 
-        // 꽃밭 자리에 유적 잔해(돌무더기, 잔해 오물, 벽 등)가 없는지 본다. 자연 암벽은 괜찮다.
         public static bool IsClearOfStructures(IntVec3 center, float radius, Map map)
         {
             foreach (var cell in GenRadial.RadialCellsAround(center, radius, true))
@@ -94,7 +91,7 @@ namespace VVRace
             return total == 0 ? 0f : (float)plantable / total;
         }
 
-        // 뒤에 실행되는 구조물 생성기(유적 등)가 꽃밭을 덮어쓰지 않게 영역을 등록한다.
+        // 나중에 실행되는 유적 생성기 등이 꽃밭을 덮어쓰지 못하도록 영역을 예약한다.
         public static void MarkUsed(IntVec3 center, float radius)
         {
             MapGenerator.UsedRects.Add(CellRect.CenteredOn(center, Mathf.CeilToInt(radius)));

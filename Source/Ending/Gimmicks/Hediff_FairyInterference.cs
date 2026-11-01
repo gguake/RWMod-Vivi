@@ -4,15 +4,12 @@ using Verse;
 
 namespace VVRace
 {
-    // 〈요정 간섭〉: 요정꽃과 결속한 비비. 6시간 안에 1페이즈 아포크리파에게 2.9칸 이내로 다가가면
-    // 결속망에 마나 역류를 일으켜 결속을 크게 해방하고(보스 쪽 ReleaseBond), 멸망꽃 저주를 모두 풀며,
-    // 비비 자신은 잠시 사라졌다가 제단 앞으로 돌아온다(ViviEndingQuest.HoldPawnUntilReturn).
     public class Hediff_FairyInterference : HediffWithComps
     {
         public const float ReleaseRadius = 2.9f;
         public static readonly IntRange ReturnDelayTicks = new IntRange(1500, 2500);
 
-        // 보스 탐색은 퀘스트 기준이면 바로 끝나지만, 맵을 훑어야 할 때는 자주 하지 않는다.
+        // 퀘스트에 보스 참조가 없으면 맵을 순회해야 하므로 탐색 주기를 제한한다.
         private const int BossSearchIntervalTicks = 30;
 
         [Unsaved]
@@ -45,13 +42,12 @@ namespace VVRace
             }
         }
 
-        // 결속 해방: 마나 역류 연출 → 보스 결속 해방 → 멸망꽃 저주 해제 → 비비는 잠시 사라졌다가 제단 앞으로 귀환
         private void TriggerManaBackflow(Pawn boss, CompApocrypha comp)
         {
             var vivi = pawn;
             var map = vivi.Map;
 
-            // 결속 해방이 2페이즈 전환을 일으키면 간섭 헤디프 일괄 정리가 다시 불리므로, 자기 자신부터 먼저 제거한다.
+            // 결속 해방이 2페이즈 전환과 간섭 일괄 정리를 다시 호출할 수 있으므로 자기 자신을 먼저 제거한다.
             EndAura();
             vivi.health.RemoveHediff(this);
 
@@ -64,8 +60,7 @@ namespace VVRace
                 new LookTargets(boss),
                 MessageTypeDefOf.PositiveEvent);
 
-            // 퀘스트가 스킵 연출과 함께 디스폰해 잠시 보관한 뒤 제단 앞으로 돌려보낸다.
-            // (마지막 자유 정착민이면 게임 오버를 피하려고 보류 없이 바로 제단 앞으로 순간이동시킨다)
+            // 마지막 자유 정착민이면 게임 오버를 피하려고 보류 없이 바로 제단 앞으로 순간이동시킨다.
             var quest = ViviEndingQuest.Current;
             if (quest != null && vivi.Spawned && !vivi.Dead)
             {
@@ -127,8 +122,8 @@ namespace VVRace
 
             EndAura();
 
-            // 죽은 폰의 헤디프는 틱이 처리되지 않으므로 여기서 정리한다.
-            // Pawn.Kill이 헤디프 목록을 정방향 순회하며 이 메서드를 부르므로, 즉시 제거하면 다음 헤디프가 건너뛰어진다.
+            // 죽은 폰은 헤디프 틱이 없어 사망 알림에서 정리한다.
+            // Pawn.Kill이 정방향으로 순회하므로 다음 헤디프의 알림이 누락되지 않게 제거를 미룬다.
             var deadPawn = pawn;
             LongEventHandler.ExecuteWhenFinished(() =>
             {

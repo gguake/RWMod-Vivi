@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.IO.Compression;
 using System.Runtime.InteropServices;
@@ -77,7 +77,7 @@ namespace VVRace
             }
             else if (Scribe.mode == LoadSaveMode.Saving)
             {
-                // size 4bytes + float array
+                // 저장 형식: 원소 수(4바이트) + float 배열.
                 var bytes = new byte[sizeof(int) + arr.Length * 4];
                 Array.Copy(BitConverter.GetBytes(arr.Length), 0, bytes, 0, 4);
 

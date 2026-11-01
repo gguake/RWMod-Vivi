@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -8,7 +8,6 @@ namespace VVRace
 {
     public class Dialog_BeginRitual_ChangeWeather : Dialog_BeginRitual
     {
-        // 플레이어가 선택한 날씨. 선택 전에는 null.
         public EverflowerWeatherChoice? selectedWeather;
 
         private const float HeaderHeight = 28f;
@@ -40,7 +39,6 @@ namespace VVRace
                 yield return issue;
             }
 
-            // 날씨를 선택하지 않으면 진행 불가.
             if (!selectedWeather.HasValue)
             {
                 yield return LocalizeString_Dialog.VV_DialogChangeWeatherMustSelect.Translate();

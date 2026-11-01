@@ -4,9 +4,6 @@ using Verse;
 
 namespace VVRace
 {
-    // 아포크리파가 씨앗으로 피워내는 꽃(멸망꽃/요정꽃) 공용 처리.
-    // 피어날 때 작게 시작해 커지고, 이후 은은하게 숨을 쉬듯 크기가 변한다. 유지 이펙트는 def의 바닐라 CompEffecter가 매 틱 갱신한다.
-    // 보스와 잇는 영혼 연결선은 ApocryphaGimmicks.DrawLinks가 이 꽃의 LinkAnchor/LinkAlpha를 읽어 그린다.
     public abstract class Building_ApocryphaFlower : Building
     {
         private const int BloomInTicks = 40;
@@ -20,10 +17,8 @@ namespace VVRace
         private ApocryphaFlowerExtension _extension;
         public ApocryphaFlowerExtension Extension => _extension ?? (_extension = def.GetModExtension<ApocryphaFlowerExtension>());
 
-        // 보스와 잇는 연결선의 꽃 쪽 끝(꽃 머리)
         public Vector3 LinkAnchor => DrawPos + (Extension?.linkOffset ?? Vector3.zero);
 
-        // 피어난 직후 연결선이 서서히 나타나도록
         public float LinkAlpha => spawnTick < 0 ? 1f : Mathf.Clamp01((Find.TickManager.TicksGame - spawnTick) / LinkFadeInTicks);
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
@@ -37,7 +32,6 @@ namespace VVRace
             }
         }
 
-        // 시들어 사라진다(이펙트와 함께). 멸망꽃의 만개·2페이즈 정리·요정꽃 결속/수명 종료 시 모두 이 메서드를 호출한다.
         public void Wither()
         {
             if (Destroyed) { return; }
@@ -50,7 +44,6 @@ namespace VVRace
             Destroy(DestroyMode.Vanish);
         }
 
-        // 공격으로 파괴될 때도 시드는 이펙트를 보여 준다.
         public override void Kill(DamageInfo? dinfo = null, Hediff exactCulprit = null)
         {
             if (Spawned)
@@ -66,7 +59,6 @@ namespace VVRace
             var ticksGame = Find.TickManager.TicksGame;
             var age = spawnTick < 0 ? BloomInTicks : ticksGame - spawnTick;
 
-            // 피어나기: 0.3 → 1.0, 끝부분에서 살짝 부풀었다 돌아온다.
             var bloom = 1f;
             if (age < BloomInTicks)
             {

@@ -4,20 +4,17 @@ using Verse;
 
 namespace VVRace
 {
-    // 〈만개하는 여명〉 퀘스트 생성. 5단계 대조율 의식이 끝나는 순간 창구(ViviEndingQuest)가 만든다.
-    // 슬레이트: anchor(의식을 치른 영원꽃), map(앵커 맵), quality(의식 품질 0~10), resonator(〈영원꽃 완전 동화〉 중인 공명자, 없을 수 있음).
-    // 단계는 신호로만 바뀐다: 시작 → BloomCondensed → CalmEnded → (ApocryphaManifesting: 등장 연출, 단계는 그대로) → ApocryphaArrived → ApocryphaDefeated → CoronationCompleted → EndingFinished,
-    // 실패는 EverflowerStolen / AnchorLost / ResonatorFallen(동화 중인 공명자가 쓰러지거나 죽음).
-    // 같은 신호를 받는 부품은 "상태 → 처리 → 편지 → QuestEnd" 순서로 추가한다. QuestEnd가 먼저 처리되면 퀘스트가 끝나 뒤 부품이 신호를 받지 못한다.
-    // 마지막 부품(AnchorLost 실패 QuestEnd)까지 추가되어야 창구가 온전한 퀘스트로 본다(ViviEndingQuest.GenerateQuest).
+    // 슬레이트 입력: anchor(영원꽃), map(앵커 맵), quality(의식 품질 0~10), resonator(동화 중인 공명자, 없을 수 있음).
+    // 같은 신호를 받는 부품은 상태 → 처리 → 편지 → QuestEnd 순서로 추가한다. 퀘스트가 먼저 끝나면 뒤 부품은 신호를 받지 못한다.
+    // ViviEndingQuest.GenerateQuest는 마지막 AnchorLost 실패 QuestEnd의 존재로 생성 완료를 확인한다.
     public class QuestNode_Root_ViviBloom : QuestNode
     {
-        private const int SiegeMaxDurationTicks = 600000;   // 의식 품질 0 → 10일
-        private const int SiegeMinDurationTicks = 480000;   // 의식 최대 품질 → 8일
+        private const int SiegeMaxDurationTicks = 600000;
+        private const int SiegeMinDurationTicks = 480000;
         private const float RitualMaxQuality = 10f;
         private static readonly IntRange CalmDurationTicks = new IntRange(90000, 120000);
 
-        // 평화 타이머(바닐라 QuestPart_Delay)를 창구가 찾는 표식
+        // ViviEndingQuest에서 평화 타이머(QuestPart_Delay)를 식별하는 표식.
         public const string CalmDelayLabel = "VV_EndingCalm";
 
         protected override bool TestRunInt(Slate slate)
@@ -40,7 +37,6 @@ namespace VVRace
             slate.Set("resolvedQuestName", LocalizeString_EndingCore.VV_Quest_EndingName.Translate().Resolve());
             slate.Set("resolvedQuestDescription", LocalizeString_EndingCore.VV_Quest_EndingDesc.Translate().Resolve());
 
-            // 앵커와 앵커 맵에 퀘스트 태그를 붙이면 바닐라가 "<태그>.Destroyed", "<태그>.MapRemoved"를 보낸다.
             var anchorTag = QuestGenUtility.HardcodedTargetQuestTagWithQuestID(ViviEndingSignals.AnchorTag);
             QuestUtility.AddQuestTag(ref anchor.questTags, anchorTag);
 
@@ -64,7 +60,7 @@ namespace VVRace
             var anchorLost = QuestGenUtility.HardcodedSignalWithQuestID(ViviEndingSignals.AnchorLost);
             var resonatorFallen = QuestGenUtility.HardcodedSignalWithQuestID(ViviEndingSignals.ResonatorFallen);
 
-            // 0) 진행 단계·앵커 소실 감지. 모든 신호를 가장 먼저 받도록 첫 부품으로 둔다.
+            // 상태 부품이 모든 신호를 가장 먼저 받도록 첫 부품으로 둔다.
             quest.AddPart(new QuestPart_ViviEndingState()
             {
                 anchor = anchor,
@@ -80,7 +76,6 @@ namespace VVRace
                 outSignalAnchorLost = anchorLost,
             });
 
-            // 1) 〈여명의 맥동〉 공성: 응축 0→99%(8~10일), 연방 지원군. 습격은 습격 비콘(EndingCorePatch)으로 스토리텔러가 보낸다.
             var siegeTicks = Mathf.RoundToInt(Mathf.Lerp(SiegeMaxDurationTicks, SiegeMinDurationTicks, Mathf.Clamp01(quality / RitualMaxQuality)));
             var siegeDays = (siegeTicks / (float)GenDate.TicksPerDay).ToString("0.#");
             var siegeText = LocalizeString_EndingCore.VV_Letter_EndingSiege.Translate(siegeDays.Named("DAYS")).Resolve();
@@ -111,7 +106,6 @@ namespace VVRace
                 anchor = anchor,
             });
 
-            // 2) 〈폭풍 전의 고요〉 평화 기간: 맵 정리, 편지, 타이머, 〈불길한 정적〉, 엔딩까지 이어지는 〈황금빛 꽃안개〉(두 컨디션은 앵커 감시가 건다)
             var calmTicks = CalmDurationTicks.RandomInRange;
             quest.AddPart(new QuestPart_ViviCalmBegin()
             {
@@ -141,9 +135,8 @@ namespace VVRace
             calm.outSignalsCompleted.Add(calmEnded);
             quest.AddPart(calm);
 
-            // 앵커 감시(공성 시작부터): 자동 신호가 오지 않는 앵커 소실을 잡고, 〈불길한 정적〉(평화 타이머 동안)과 엔딩까지 이어지는
-            // 〈황금빛 꽃안개〉를 앵커가 지금 있는 맵에 건다(생성 시점 맵에 묶이는 바닐라 QuestPart_GameCondition으로는 앵커를 따라가지 못한다).
-            // 평화 타이머가 켜진 뒤에 BloomCondensed를 받도록 평화 타이머 뒤에 둔다.
+            // 생성 시점의 맵에 고정되는 QuestPart_GameCondition 대신 감시 부품이 현재 앵커 맵의 컨디션을 관리한다.
+            // 평화 타이머가 먼저 활성화된 뒤 BloomCondensed를 받도록 타이머 다음에 추가한다.
             quest.AddPart(new QuestPart_ViviAnchorWatch()
             {
                 inSignalEnable = initiate,
@@ -152,7 +145,6 @@ namespace VVRace
                 outSignalAnchorLost = anchorLost,
             });
 
-            // 3) 〈바스러진 여왕, 아포크리파〉: 영원꽃 위 등장 연출 → 외곽에 등장(진입 칸이 없으면 보류·재시도), 소멸 연출이 끝나면 토벌
             var apocrypha = new QuestPart_ViviApocrypha()
             {
                 inSignalEnable = calmEnded,
@@ -164,14 +156,12 @@ namespace VVRace
             apocrypha.outSignalsCompleted.Add(apocryphaDefeated);
             quest.AddPart(apocrypha);
 
-            // 등장 편지는 등장 연출이 시작될 때 신호의 SUBJECT(영원꽃)를 바라본다. 외곽에 내려선 보스는 메시지로 알린다.
             quest.AddPart(new QuestPart_Letter()
             {
                 inSignal = apocryphaManifesting,
                 letter = LetterMaker.MakeLetter(LocalizeString_EndingCore.VV_Letter_EndingApocryphaLabel.Translate(), LocalizeString_EndingCore.VV_Letter_EndingApocrypha.Translate(), LetterDefOf.ThreatBig, LookTargets.Invalid, null, quest),
             });
 
-            // 4) 토벌 → 응축 100%, 〈여왕의 대관식〉 대기
             quest.AddPart(new QuestPart_ViviEndingLetter()
             {
                 inSignal = apocryphaDefeated,
@@ -181,7 +171,6 @@ namespace VVRace
                 anchor = anchor,
             });
 
-            // 5) 〈영원한 봄의 제국〉: 대관식 → 6단계 개화·연출 → 엔딩 편지와 크레딧 → 성공(엔딩 편지가 있으므로 표준 완료 편지는 보내지 않는다)
             var finale = new QuestPart_ViviEndingFinale()
             {
                 inSignalEnable = coronationCompleted,
@@ -191,7 +180,6 @@ namespace VVRace
             quest.AddPart(finale);
             quest.End(QuestEndOutcome.Success, inSignal: endingFinished);
 
-            // 6) 실패: 정리는 상태·아포크리파 부품이 퀘스트 종료 정리(Cleanup)에서 한다.
             var failureTargets = altar != null ? new LookTargets(altar) : LookTargets.Invalid;
             quest.AddPart(new QuestPart_Letter()
             {

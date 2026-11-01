@@ -3,7 +3,6 @@ using Verse;
 
 namespace VVRace
 {
-    // 〈영원꽃 완전 동화〉(대조율 의식 공명자) 전용 DefOf.
     [DefOf]
     public static class EverflowerAssimilationDefOf
     {

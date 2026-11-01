@@ -70,7 +70,7 @@ namespace VVRace
             }
 
             float slotOffset = slot * (Mathf.PI * 2f / Mathf.Max(1, count));
-            // 틱 누적값이 커지면 float 유효자릿수가 틱당 회전량보다 커져 궤도가 끊기므로 double로 계산 후 2π로 접는다.
+            // 누적 틱이 커지면 float 정밀도가 부족해 궤도가 끊기므로 double로 계산하고 각도를 2π 범위로 줄인다.
             double motion = GenTicks.TicksGame * (double)IdleOrbitAngularSpeed * fairy.OrbitSpeedFactor * fairy.OrbitDirection;
             angle = (float)((motion + slotOffset + fairy.OrbitPhaseOffset) % (System.Math.PI * 2.0));
             radiusX = IdleOrbitRadiusX * fairy.OrbitRadiusXFactor;

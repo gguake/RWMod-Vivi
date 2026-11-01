@@ -1,11 +1,10 @@
-using RimWorld;
+﻿using RimWorld;
 using System.Linq;
 using UnityEngine;
 using Verse;
 
 namespace VVRace
 {
-    // 영원꽃 공명 레벨에 따라 명상 초점 강도를 더한다.
     public class FocusStrengthOffset_EverflowerLevel : FocusStrengthOffset_Curve
     {
         protected override string ExplanationKey => LocalizeString_Stat.VV_StatsReport_EverflowerAttunementLevel;
@@ -16,7 +15,6 @@ namespace VVRace
         }
     }
 
-    // 명상하는 폰이 이 영원꽃과 공명 중이면 공명 레벨에 따른 보너스를 더한다.
     public class FocusStrengthOffset_EverflowerResonator : FocusStrengthOffset
     {
         public SimpleCurve curve;

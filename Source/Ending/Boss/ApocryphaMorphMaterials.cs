@@ -4,10 +4,8 @@ using Verse;
 
 namespace VVRace
 {
-    // 2페이즈 전환 동안 아포크리파 몸통을 그리는 모핑 재질(VV_Morph 셰이더).
-    // 방향별(남·동·북, 서쪽은 동쪽 메시를 좌우 반전하므로 동쪽 재질 사용)로 1페이즈 텍스처(_MainTex) 위에 2페이즈 텍스처(_MorphTex)를 얹는다.
-    // 렌더 서브워커는 병렬로 실행되므로 재질은 메인 스레드(전환 시작·불러오기)에서 미리 만들어 두고, 서브워커는 읽기만 한다.
-    // 재질 필드가 있는 정적 클래스는 바닐라가 시작 시 경고하므로 StaticConstructorOnStartup을 붙인다(재질은 여전히 지연 생성).
+    // 렌더 서브워커는 병렬 실행되므로 재질은 전환 시작·불러오기 시 메인 스레드에서 준비하고 서브워커는 읽기만 한다.
+    // 재질을 가진 정적 클래스의 시작 경고를 피하도록 StaticConstructorOnStartup을 붙이되 재질 생성은 지연한다.
     [StaticConstructorOnStartup]
     public static class ApocryphaMorphMaterials
     {
@@ -18,10 +16,9 @@ namespace VVRace
         // 0: 남, 1: 동(서), 2: 북
         private static Material[] _materials;
 
-        // 심장 박동 속도(초당 박동). 셰이더(_BeatRate)와 C#(몸통 맥동·박동 연출)이 같은 값을 쓴다.
+        // 초당 박동 수. 셰이더의 _BeatRate와 C#의 몸통 맥동·박동 연출이 공유한다.
         public const float BeatRate = 1.25f;
 
-        // [메인 스레드] 전환이 시작되거나 전환 중 불러왔을 때 호출한다(불러오기 스레드에서는 CompApocrypha가 메인 스레드로 미룬다).
         public static void EnsureInitialized(float durationSecs)
         {
             if (_materials == null)
@@ -42,7 +39,7 @@ namespace VVRace
                     var to = ContentFinder<Texture2D>.Get(unboundPath + suffixes[i], reportFailure: false);
                     if (from == null || to == null) { return; }
 
-                    // (텍스처, VV_Morph, 흰색) 요청은 이 연출만 쓰므로 공유 재질의 매개변수를 직접 바꿔도 다른 곳에 영향이 없다.
+                    // 이 연출만 사용하는 (텍스처, VV_Morph, 흰색) 조합이므로 공유 재질의 매개변수를 바꿔도 다른 연출에 영향이 없다.
                     var material = MaterialPool.MatFrom(from, shader, Color.white);
                     material.SetTexture("_MorphTex", to);
                     material.SetColor("_VeinColor", VeinColor);
@@ -70,7 +67,7 @@ namespace VVRace
             return materials[1];
         }
 
-        // 셰이더와 같은 박동 곡선(박동 순간에 1). ageSecs는 전환 시작부터 경과한 시간(초).
+        // 셰이더와 같은 박동 곡선으로 박동 순간에 1이다. ageSecs는 전환 시작 후 경과 시간(초)이다.
         public static float Beat(float ageSecs)
         {
             return Mathf.Pow(0.5f + 0.5f * Mathf.Cos(2f * Mathf.PI * ageSecs * BeatRate), 8f);

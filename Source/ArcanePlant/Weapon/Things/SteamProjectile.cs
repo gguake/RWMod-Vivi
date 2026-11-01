@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -98,7 +98,7 @@ namespace VVRace
                             var log = new BattleLogEntry_RangedImpact(caster, thing, thing, weaponDef, null, null);
                             var angleFlat = (cell - _initalPosition).AngleFlat;
 
-                            // 의도 대상은 조준한 적이어야 바닐라 교차사격 면제(적을 노리다 우호 세력원을 맞힘)가 적용됨
+                            // 조준한 적을 intendedTarget으로 지정해야 아군 오발 시 바닐라의 호감도 하락 면제가 적용된다.
                             var dinfo = new DamageInfo(
                                 damageDef,
                                 damageAmount,

@@ -7,16 +7,12 @@ using Verse.AI;
 
 namespace VVRace
 {
-    // 멸망꽃. 피어난 지 12시간(30000틱, 어려움 기준)이 지나면 만개해 맵의 모든 정착민에게 멸망꽃 저주를 내리고 시든다.
-    // 만개까지 걸리는 시간은 피어날 때의 난이도에 따라 달라진다(CompApocrypha.DoomBloomTimeFactor, 평화 24시간 ~ 극한 7.8시간).
-    // 보스 세력 소속이라 적대 표시가 되며, 플레이어 세력(포탑·징집된 정착민)만 자동 공격 대상으로 삼는다(지붕 아래 꽃은 박격포류가 자동 조준하지 않음).
     public class Building_DoomFlower : Building_ApocryphaFlower, IAttackTarget
     {
         public const int BloomDelayTicks = 30000;
 
         private int _bloomTick = -1;
 
-        // 지금 난이도에서 피어나 만개할 때까지 걸리는 시간.
         public static int ScaledBloomDelayTicks => Mathf.Max(1, Mathf.RoundToInt(BloomDelayTicks * CompApocrypha.DoomBloomTimeFactor));
 
         public int TicksUntilBloom => _bloomTick < 0 ? ScaledBloomDelayTicks : System.Math.Max(0, _bloomTick - Find.TickManager.TicksGame);
@@ -27,11 +23,10 @@ namespace VVRace
 
         public LocalTargetInfo TargetCurrentlyAimingAt => LocalTargetInfo.Invalid;
 
-        // 실제로 공격해 오는 적보다는 덜 우선한다.
         public float TargetPriorityFactor => 0.5f;
 
-        // 플레이어·우호 세력의 포탑/폰만 자동 공격한다. 무소속(호위 거대 말벌)·적대 세력(보스)은 노리지 않아,
-        // 말벌이 보스가 피운 꽃을 부수는 일이 없다. (null 검색자는 위협으로 세지 않는다 — 드롭 위치 계산 등)
+        // 호위 말벌과 보스가 꽃을 공격하지 않도록 플레이어·우호 세력의 검색자에게만 위협으로 취급한다.
+        // 검색자가 null인 드롭 위치 계산 등에서는 위협으로 취급하지 않는다.
         public bool ThreatDisabled(IAttackTargetSearcher disabledFor)
         {
             if (!Spawned) { return true; }
@@ -39,8 +34,8 @@ namespace VVRace
             var searcherFaction = disabledFor?.Thing?.Faction;
             if (searcherFaction == null || searcherFaction.HostileTo(Faction.OfPlayer)) { return true; }
 
-            // 박격포처럼 머리 위로 쏘는 무기는 지붕 아래(실내)에 핀 꽃을 자동 조준하지 않는다.
-            // 포탄이 지붕을 무너뜨리고 방 안에서 터져 정착지를 스스로 포격하게 되기 때문(직접 지정한 공격은 그대로 허용).
+            // 지붕 붕괴와 실내 폭발로 정착지를 스스로 포격하지 않도록 지붕 아래 꽃은 박격포류의 자동 조준에서 제외한다.
+            // 플레이어가 직접 지정한 공격은 허용한다.
             return Position.Roofed(Map) && (disabledFor.CurrentEffectiveVerb?.ProjectileFliesOverhead() ?? false);
         }
 
@@ -66,8 +61,6 @@ namespace VVRace
             }
         }
 
-        // 만개: 옛 제국의 멸망을 재현하는 저주를 내리고 시든다.
-        // 보스 단계가 아니거나 이 맵의 아포크리파가 1페이즈(결속 상태)가 아니면 저주 없이 시들기만 한다.
         public void Bloom()
         {
             if (!Spawned) { return; }

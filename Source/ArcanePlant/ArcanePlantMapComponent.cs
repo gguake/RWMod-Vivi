@@ -186,8 +186,8 @@ namespace VVRace
             }
         }
 
-        // 디스폰 없이 Position만 바뀐 마법 식물(영원꽃 순간이동)의 칸 사전 항목을 새 위치에 맞게 갱신한다.
-        // 이전 칸의 키가 남아 있으면 해당 칸의 지형 변경 검사로 다른 위치의 영원꽃이 포장되고, 그 칸에 새 식물을 심을 때 키 중복 예외가 발생한다.
+        // 디스폰 없이 Position만 바꾸면 이전 칸의 사전 항목이 남으므로 직접 갱신한다.
+        // 이전 키가 남으면 지형 검사에서 엉뚱한 영원꽃이 포장되거나 새 식물을 심을 때 키가 중복된다.
         public void Notify_ArcanePlantMoved(ArcanePlant plant, IntVec3 oldCell)
         {
             if (_arcanePlants.TryGetValue(oldCell, out var existing) && existing == plant)

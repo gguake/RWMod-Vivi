@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Verse;
 using Verse.AI;
 
@@ -90,7 +90,7 @@ namespace VVRace
         {
             if (ally?.health == null) { return; }
 
-            // 다른 로열 비비의 호위 hediff를 지우지 않도록 이 작업이 부여한 것만 제거한다.
+            // 다른 로열 비비가 부여한 호위 헤디프를 지우지 않도록 이 작업이 부여한 것만 제거한다.
             var hediffs = ally.health.hediffSet.hediffs;
             for (int i = 0; i < hediffs.Count; i++)
             {

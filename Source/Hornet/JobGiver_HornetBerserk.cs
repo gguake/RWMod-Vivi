@@ -11,7 +11,6 @@ namespace VVRace
 
         private float maxTargetSearchDistance = DefaultMaxTargetSearchDistance;
 
-        // 이 작업 지급기가 지금 공격(또는 접근) 작업을 줄 대상이 있는지. 호위 로드가 대기 중인 말벌을 바로 교전시킬 때 쓴다.
         public static bool HasAttackTarget(Pawn pawn)
         {
             if (pawn.TryGetAttackVerb(null) == null)
@@ -34,7 +33,6 @@ namespace VVRace
 
             var fenceBlocked = pawn.def.race.FenceBlocked;
 
-            // 아포크리파 호위 말벌은 보스가 감지한 적을 가장 먼저 공격한다.
             var focus = GetReachableFocusTarget(pawn, fenceBlocked);
             if (focus != null)
             {
@@ -117,7 +115,6 @@ namespace VVRace
                 canBashFences: canBashFences);
         }
 
-        // 아포크리파 호위 말벌에게 보스가 맡긴 공격 대상(닿을 수 없으면 null).
         private static Thing GetReachableFocusTarget(Pawn pawn, bool fenceBlocked)
         {
             if (!(pawn.GetLord()?.LordJob is LordJob_ApocryphaEscort escortJob)) { return null; }
@@ -128,8 +125,6 @@ namespace VVRace
             return pawn.CanReach(focus, PathEndMode.Touch, Danger.Deadly, canBashDoors: false, fenceBlocked) ? focus : null;
         }
 
-        // 아포크리파 호위 말벌은 보스 주변만, 꽃 경비 말벌은 지키는 꽃(꽃이 없으면 보스) 주변만 탐색한다
-        // (경호/경비/반격 대상 선별은 각 로드의 ValidateAttackTarget). 그 외 말벌은 제한 없음.
         private static void GetSearchArea(Pawn pawn, out IntVec3 locus, out float maxTravelRadius)
         {
             if (pawn.GetLord()?.LordJob is LordJob_ApocryphaHornetGuard guardJob && guardJob.BossActive && guardJob.Boss.Map == pawn.Map)

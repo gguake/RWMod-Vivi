@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,7 +49,6 @@ namespace VVRace
 
             Dialog_BeginRitual.ActionCallback action = (assignments) =>
             {
-                // 의식 시작 시점에 선택한 날씨를 영원꽃에 기록한다. 결과(Apply)에서 소비된다.
                 if (targetInfo.Thing is ArcanePlant_Everflower everflower)
                 {
                     everflower.SelectedRitualWeather = dialog?.selectedWeather;

@@ -5,11 +5,9 @@ using Verse.AI;
 
 namespace VVRace
 {
-    // 아포크리파의 유일한 작업 지급기. 판단의 근거(타이머/조준/채널링 상태)는 CompApocrypha에 있고 여기서는 알맞은 작업만 고른다.
     public class JobGiver_ApocryphaMain : ThinkNode_JobGiver
     {
-        // 2페이즈 돌진 경로: 부술 수 있는 벽·문에 추가 비용을 주지 않아 우회하지 않고 직선으로 뚫고 가는 경로를 얻는다.
-        // (비용을 조금이라도 주면 짧은 벽은 몇 칸 우회하는 쪽의 비용이 더 낮아져, 의도한 "직선 돌파"가 이루어지지 않는다)
+        // 짧은 벽도 우회하지 않고 직선으로 돌파하도록 파괴 가능한 벽·문의 추가 경로 비용을 0으로 둔다.
         private static readonly PathFinderCostTuning ChargeTuning = new PathFinderCostTuning
         {
             costBlockedDoor = 0,
@@ -19,7 +17,7 @@ namespace VVRace
             costBlockedWallExtraPerHitPoint = 0f,
         };
 
-        // 돌진 중 앞에 새 벽이 세워지면 일반 경로로 돌아가지 않고 곧바로 부수도록 자주(약 1초마다) 경로를 다시 본다.
+        // 돌진 중 새로 생긴 벽도 즉시 부수도록 약 1초마다 경로를 다시 검사한다.
         private static readonly IntRange ChargeRepathTicks = new IntRange(45, 90);
 
         protected override Job TryGiveJob(Pawn pawn)
@@ -27,7 +25,6 @@ namespace VVRace
             var comp = pawn.TryGetComp<CompApocrypha>();
             if (comp == null) { return null; }
 
-            // 전환/소멸 중이거나 기절해 있으면 제자리에서 기다린다(기절 중에 채널링을 다시 잡지 않게).
             if (!comp.IsActive)
             {
                 return WaitJob(60);
@@ -38,7 +35,6 @@ namespace VVRace
                 return WaitJob(Mathf.Max(15, pawn.stances.stunner.StunTicksLeft + 1));
             }
 
-            // 1페이즈 사출 포격 조준은 작업 없이 CompApocrypha가 처리한다(조준 중에도 계속 움직인다).
             if (comp.IsBreathing)
             {
                 return JobMaker.MakeJob(ApocryphaJobDefOf.VV_ApocryphaBreath, comp.BreathCell);
@@ -55,7 +51,6 @@ namespace VVRace
                 return ChargeJob(pawn, target, range);
             }
 
-            // 1페이즈: 포격 사거리 밖에서 공격해 온 적이 있으면 그 적을 포격할 수 있는 자리로 다가간다(영원꽃 접근·배회보다 먼저).
             if (comp.Phase == ApocryphaPhase.Bound && comp.TryFindPursuitCell(out var pursuitCell))
             {
                 return PursueJob(pursuitCell);
@@ -82,7 +77,6 @@ namespace VVRace
             return job;
         }
 
-        // 1페이즈: 영원꽃(제단) 쪽으로 최대 12칸 다가간다. 가까우면 제단 발판 가장자리까지, 막혀 있으면 갈 수 있는 데까지만.
         private static Job ApproachJob(Pawn pawn, CompApocrypha comp, Thing target, float range)
         {
             var map = pawn.Map;
@@ -116,7 +110,7 @@ namespace VVRace
             return job;
         }
 
-        // 공격자가 움직일 수 있으므로 5초마다 자리를 다시 고른다.
+        // 공격자의 이동에 대응하도록 5초마다 접근 위치를 다시 고른다.
         private static Job PursueJob(IntVec3 cell)
         {
             var job = JobMaker.MakeJob(ApocryphaJobDefOf.VV_ApocryphaPursue, cell);
@@ -126,8 +120,8 @@ namespace VVRace
             return job;
         }
 
-        // 찬탈 대상(제단 5x5 또는 영원꽃)의 둘레에서 채널링 거리 안에 있고 서 있을 수 있는 칸 중 보스에게 가장 가까운 칸. 발판 중앙의 영원꽃 위로 올라서지 않게 한다.
-        // (제단 대각 모서리 칸은 둘레지만 중심에서 4.24칸이라 채널링 거리 3.9 밖이다. 거기 멈춰 서면 채널링을 못 하고 계속 같은 칸만 고르게 된다)
+        // 영원꽃 위에 올라서지 않도록 찬탈 대상의 둘레에서 채널링 거리 안의 칸을 고른다.
+        // 제단의 대각 모서리는 중심에서 4.24칸으로 사거리 3.9칸 밖이다. 이를 제외하지 않으면 이동만 반복한다.
         private static IntVec3 EdgeCellToward(Pawn pawn, Thing target, float range)
         {
             var map = pawn.Map;
@@ -149,7 +143,6 @@ namespace VVRace
             return best.IsValid ? best : target.Position;
         }
 
-        // 1페이즈 평상시: 현재 위치 반경 10 안을 배회하고 600~1200틱씩 멈춰 선다.
         private static Job WanderOrWaitJob(Pawn pawn, CompApocrypha comp)
         {
             var mindState = pawn.mindState;
@@ -174,7 +167,6 @@ namespace VVRace
             return job;
         }
 
-        // 2페이즈: 제단으로 직선 돌진하며 가로막는 구조물(제단·영원꽃 제외)은 부수고 지나간다.
         private static Job ChargeJob(Pawn pawn, Thing target, float range)
         {
             var map = pawn.Map;
@@ -211,7 +203,6 @@ namespace VVRace
             return job;
         }
 
-        // 제단·영원꽃·찬탈 대상은 절대 부수지 않는다. 공격으로 피해를 입지 않는 구조물도 대상에서 뺀다.
         public static bool CanSmash(Thing blocker, Thing stealTarget)
         {
             if (blocker == null || blocker.Destroyed || !blocker.Spawned) { return false; }

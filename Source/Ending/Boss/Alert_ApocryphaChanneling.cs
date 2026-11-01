@@ -4,7 +4,7 @@ using Verse;
 
 namespace VVRace
 {
-    // 아포크리파가 영원꽃 찬탈 채널링 중일 때의 치명 경고(Alert 파생 클래스는 자동 등록된다).
+    // Alert 파생 클래스는 바닐라가 자동 등록한다.
     public class Alert_ApocryphaChanneling : Alert_Critical
     {
         private readonly List<Pawn> _channelingBosses = new List<Pawn>();

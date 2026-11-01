@@ -6,19 +6,12 @@ using Verse.Sound;
 
 namespace VVRace
 {
-    // 아포크리파 1페이즈 등장 연출(저장 가능한 시퀀서). 보스 폰은 연출이 끝날 때 퀘스트(QuestPart_ViviApocrypha)가 따로 스폰한다.
-    // 1) 모임(0~5초): 영원꽃 꽃봉오리 위 허공으로 검은 에너지 입자가 모여들며 VV_Manifest 셰이더로 여왕의 형체가 몸 중심부터 빚어진다.
-    // 2) 완성(5~5.7초): 형체가 다 빚어져 어둡게 본래 색이 배어 나오고, 영원꽃 꽃봉오리에 금빛이 모인다.
-    // 3) 파장(5.7초~): 영원꽃에서 맵 전체로 금빛 파장이 퍼지고, 형체가 그 파장에 밀려 실제 등장 칸(맵 외곽)까지 날아가 내려앉는다.
-    //    내려앉는 틱(SpawnTick)에 퀘스트가 실제 보스를 같은 자리·방향·크기로 스폰하고 이 연출을 지운다.
     [StaticConstructorOnStartup]
     public class ApocryphaManifestation : Thing
     {
-        // 단계 시점(연출 시작부터의 틱)
         private const int CompleteTick = 300;
         private const int WaveTick = 342;
 
-        // 형체가 빚어지는 구간(초, 처음에 빠르게 채워지다 끝으로 갈수록 느려짐)과 입자가 모여드는 구간
         private const float FormStartSecs = 0.3f;
         private const float FormEndSecs = 4.6f;
         private const float WispEndSecs = 4.5f;
@@ -26,34 +19,29 @@ namespace VVRace
         private const float HoldReveal = 0.3f;
         private const float PushRevealSecs = 0.35f;
 
-        // 형체는 꽃봉오리 위 허공에 떠서 천천히 오르내린다.
         private const float FormHeight = 2.6f;
         private const float BobAmplitude = 0.15f;
         private const float BobSpeed = 2.2f;
         private const float GatherStartScale = 0.92f;
 
-        // 검은 입자: 초당 생성 수가 66에서 216으로 늘고, 반경 4.5~10.5칸에서 0.82초 만에 몸에 닿는다(플렉 수명 0.95초).
         private const float WispRateStart = 1.1f;
         private const float WispRateEnd = 3.6f;
         private static readonly FloatRange WispRadius = new FloatRange(4.5f, 10.5f);
         private const float WispTravelSecs = 0.82f;
         private const float SparkChance = 0.2f;
 
-        // 꽃봉오리로 모이는 금빛 입자
         private static readonly FloatRange ChargeRadius = new FloatRange(2.5f, 6f);
 
-        // 맵 전체 파장: 꽃봉오리에서 가장 먼 맵 모서리를 덮도록 키운다. 파면 반지름은 VV_ShockWave 셰이더와 같은 식으로 계산한다
-        // (쿼드 반지름 × mix(0.02, 0.96, 1-(1-t)³), t = 경과 / _Duration). WaveDurationSecs는 XML VV_Fleck_ApocryphaRepelWave의 _Duration과 같게 둔다.
+        // 맵 끝까지 퍼지는 파면의 반지름은 VV_ShockWave와 동일하게 쿼드 반지름 × mix(0.02, 0.96, 1-(1-t)³)로 계산한다.
+        // t는 경과 시간 / _Duration이며 WaveDurationSecs는 XML의 VV_Fleck_ApocryphaRepelWave._Duration과 맞춘다.
         private const float WaveDurationSecs = 2.6f;
         private const float WaveFrontStart = 0.02f;
         private const float WaveFrontReach = 0.96f;
         private const float WaveCoverMargin = 1.05f;
 
-        // 파장 플렉은 만든 틱에 이미 한 틱만큼 나이를 먹고 그려진다(실측: 파면이 식보다 한 틱 앞섬).
+        // 생성된 플렉은 같은 틱에 나이가 1틱 증가하므로 파면이 계산식보다 1틱 앞선다.
         private const int WaveAgeLeadTicks = 1;
 
-        // 형체는 꽃봉오리 위 허공(높이 FormHeight)에서 파면에 등을 떠밀려(몸 중심이 파면보다 몸 크기의 30%만큼 앞) 꽃봉오리에서 곧장 바깥으로
-        // 등장 칸까지 날아가며 높이를 잃고, 거리에 비례해 살짝 떠올랐다 내려앉는다.
         private const float PushLeadFactor = 0.3f;
         private const float PushArcFactor = 0.06f;
         private const float PushArcMax = 5f;
@@ -76,17 +64,14 @@ namespace VVRace
         private int _pushTicks = 60;
         private bool _completed;
 
-        // 저장하지 않는 연출 상태
         private Sustainer _gatherSustainer;
 
         private int Age => _startTick < 0 ? 0 : Mathf.Max(0, Find.TickManager.TicksGame - _startTick);
         private float AgeSecs => Age / 60f;
         private int LandTick => WaveTick + _pushTicks;
 
-        // 실제 보스를 스폰할 틱(형체가 외곽에 내려앉는 순간).
         public int SpawnTick => _startTick + LandTick;
 
-        // 영원꽃 위에서 연출을 시작한다. landCell은 보스가 실제로 스폰될 칸(맵 외곽), landRot은 그때의 방향.
         public static ApocryphaManifestation Begin(ArcanePlant_Everflower everflower, IntVec3 landCell, Rot4 landRot)
         {
             var map = everflower?.Map;
@@ -119,7 +104,7 @@ namespace VVRace
             }
             _waveHalfSize = farthest * WaveCoverMargin / WaveFrontReach;
 
-            // 파면이 (착지 거리 - 앞섬)에 닿는 시간을 파면 식에서 거꾸로 구해 착지 틱을 정한다.
+            // 파면이 착지 거리에서 선행 거리를 뺀 지점에 도달하는 시간을 역산해 착지 틱을 정한다.
             var front = Vector3.Distance(_budPos, _landPos) - PushLead;
             var u = Mathf.Clamp01((front / _waveHalfSize - WaveFrontStart) / (WaveFrontReach - WaveFrontStart));
             var t = 1f - Mathf.Pow(1f - u, 1f / 3f);
@@ -188,13 +173,13 @@ namespace VVRace
             }
             else
             {
-                // 보스는 같은 틱에 퀘스트가 이 자리에 스폰한다(퀘스트가 먼저 돌았으면 이미 지워져 여기 오지 않는다).
+                // 실제 보스는 같은 틱에 퀘스트가 스폰한다. 퀘스트가 먼저 실행됐으면 이 연출은 이미 제거된 상태다.
                 Land();
                 Destroy();
             }
         }
 
-        // 착지 연출(한 번만). 같은 틱에 퀘스트가 이 연출보다 먼저 돌며 보스를 스폰할 수 있으므로 퀘스트도 지우기 전에 부른다.
+        // 퀘스트가 먼저 보스를 스폰할 수 있으므로 연출을 제거하기 전에 착지 효과를 호출한다. 중복 호출은 무시한다.
         public void Land()
         {
             if (_completed || !Spawned) { return; }
@@ -203,7 +188,6 @@ namespace VVRace
             OnLanded();
         }
 
-        // 1) 모임: 검은 입자가 형체 쪽으로 모여든다(점점 빨라짐). 소리는 형체가 다 빚어질 때까지 이어진다.
         private void TickGather(int age)
         {
             var map = Map;
@@ -221,7 +205,6 @@ namespace VVRace
             var count = Mathf.FloorToInt(rate) + (Rand.Value < rate - Mathf.Floor(rate) ? 1 : 0);
             for (int i = 0; i < count; i++)
             {
-                // 몸 둘레(타원) 안의 한 점을 노리고, 그 점에서 사방 4.5~10.5칸 떨어진 곳에서 출발한다.
                 var target = _formPos + new Vector3(Rand.Range(-0.22f, 0.22f) * _drawSize, 0f, Rand.Range(-0.3f, 0.32f) * _drawSize);
                 var offset = Quaternion.AngleAxis(Rand.Range(0f, 360f), Vector3.up) * Vector3.forward * WispRadius.RandomInRange;
                 ThrowConverging(ApocryphaFleckDefOf.VV_Fleck_ApocryphaDarkWisp, target + offset, target, WispTravelSecs, Rand.Range(0.7f, 1.3f), null, alignToVelocity: true);
@@ -233,7 +216,6 @@ namespace VVRace
             }
         }
 
-        // 2) 형체가 다 빚어지는 순간: 자홍 섬광·굴절 맥동, 꽃봉오리에 금빛이 차오르기 시작한다.
         private void OnFormed()
         {
             var map = Map;
@@ -253,7 +235,6 @@ namespace VVRace
             }
         }
 
-        // 3) 파장: 꽃봉오리의 금빛 폭발 + 맵 전체로 퍼지는 금빛 파장. 형체는 이 순간부터 외곽으로 밀려난다.
         private void OnRepel()
         {
             var map = Map;
@@ -268,7 +249,6 @@ namespace VVRace
             Find.TickManager.slower.SignalForceNormalSpeedShort();
         }
 
-        // 밀려나는 형체 뒤로 검은 입자가 흩날린다(형체가 화면에 있을 때만).
         private void ThrowPushTrail(int age)
         {
             var map = Map;
@@ -287,7 +267,6 @@ namespace VVRace
             }
         }
 
-        // 4) 착지: 흙먼지와 함께 검은 입자가 사방으로 튄다. 같은 틱에 퀘스트가 실제 보스를 스폰한다.
         private void OnLanded()
         {
             var map = Map;
@@ -311,7 +290,6 @@ namespace VVRace
             ApocryphaUtility.ShakeCamera(map, 1.5f);
         }
 
-        // start에서 target으로 travelSecs 만에 닿도록 날린다. alignToVelocity면 혜성 머리가 진행 방향을 향한다.
         private void ThrowConverging(FleckDef def, Vector3 start, Vector3 target, float travelSecs, float scale, Color? color, bool alignToVelocity)
         {
             var delta = target - start;
@@ -337,7 +315,6 @@ namespace VVRace
         }
 
         #region 그리기
-        // 몸통이 그려지는 중심(평면 좌표). 모임·완성 동안 허공에서 오르내리고, 파장 뒤에는 파면에 떠밀려(점점 느려지며) 외곽으로 날아가 살짝 떠올랐다 내려앉는다.
         private Vector3 BodyPosAt(float age)
         {
             if (age < WaveTick)
@@ -345,7 +322,6 @@ namespace VVRace
                 return _formPos + new Vector3(0f, 0f, BobAmplitude * Mathf.Sin(age / 60f * BobSpeed));
             }
 
-            // 땅 위 위치는 꽃봉오리에서 등장 칸 쪽으로 파면을 따라가고, 떠 있던 높이(화면 위쪽 오프셋)는 내려앉으며 사라진다.
             var toLand = _landPos - _budPos;
             var landDist = toLand.magnitude;
             var s = 1f;
@@ -359,7 +335,6 @@ namespace VVRace
             return _budPos + toLand * s + new Vector3(0f, 0f, height);
         }
 
-        // 파장이 터진 지 secs초 뒤 파면의 반지름(칸)
         private float WaveFrontAt(float secs)
         {
             var t = Mathf.Clamp01(secs / WaveDurationSecs);
@@ -406,7 +381,6 @@ namespace VVRace
             PropertyBlock.SetFloat(ProgressId, progress);
             PropertyBlock.SetFloat(RevealId, Reveal(age));
 
-            // 서쪽은 동쪽 텍스처를 좌우 반전해 그린다(Graphic_Multi와 같은 규칙).
             var mesh = rot == Rot4.West ? MeshPool.plane10Flip : MeshPool.plane10;
             var matrix = Matrix4x4.TRS(pos, Quaternion.identity, new Vector3(scale, 1f, scale));
             Graphics.DrawMesh(mesh, matrix, material, 0, null, 0, PropertyBlock);

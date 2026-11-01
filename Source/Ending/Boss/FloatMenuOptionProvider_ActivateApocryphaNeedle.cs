@@ -5,8 +5,7 @@ using Verse.AI;
 
 namespace VVRace
 {
-    // 2페이즈 바닥에 꽂힌 거대 엘텍스 바늘 깨우기(우클릭 메뉴). 비비가 아니어도, 징집 여부와 관계없이 지시할 수 있다.
-    // 바늘은 공격 대상이 아닌 Thing(Ethereal)이라 바닐라 우클릭 메뉴가 고르지 않으므로, 우클릭 위치 가까이 꽂힌 바늘을 직접 찾는다.
+    // 바늘은 Ethereal Thing이라 바닐라 우클릭 메뉴의 선택 대상이 아니므로 클릭 위치 주변에서 직접 찾는다.
     public class FloatMenuOptionProvider_ActivateApocryphaNeedle : FloatMenuOptionProvider
     {
         protected override bool Drafted => true;

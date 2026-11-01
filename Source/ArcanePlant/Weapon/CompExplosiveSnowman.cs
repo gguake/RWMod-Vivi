@@ -1,11 +1,10 @@
-using RimWorld;
+﻿using RimWorld;
 using Verse;
 
 namespace VVRace
 {
-    // 발사된 눈사람의 2차 폭발을 쏜 폰 명의로 일으킨다.
-    // 바닐라 CompExplosive는 무소속인 눈사람 자신을 가해자로 삼아, 우호 세력원이 죽으면 호감도가 깎이고(MemberNeutrallyDied)
-    // 플레이어가 적을 노리고 쐈을 때의 교차사격 면제도 받지 못한다.
+    // 바닐라 CompExplosive는 무소속 눈사람을 가해자로 삼아 우호 세력원 사망 시 호감도를 깎는다.
+    // 발사자를 가해자로 지정해야 적을 노린 사격의 아군 오발 면제도 적용된다.
     public class CompExplosiveSnowman : CompExplosive
     {
         private Thing _launcher;
@@ -34,7 +33,7 @@ namespace VVRace
 
         public override void CompTick()
         {
-            // 심지가 다 타는 틱에 바닐라 Detonate 대신 터뜨린다. 그 전에 맞아서 터지면 바닐라대로 때린 쪽 명의
+            // 심지가 끝날 때는 발사자 명의로 폭발시킨다. 그전에 공격받아 터지면 바닐라처럼 공격자를 가해자로 삼는다.
             if (_launcher != null && wickStarted && wickTicksLeft <= 1)
             {
                 DetonateByLauncher();

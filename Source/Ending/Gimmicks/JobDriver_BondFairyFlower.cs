@@ -4,7 +4,6 @@ using Verse.AI;
 
 namespace VVRace
 {
-    // 비비가 요정꽃에 다가가 3초(180틱) 동안 교감한 뒤 〈요정 간섭〉을 얻는다.
     public class JobDriver_BondFairyFlower : JobDriver
     {
         public const int BondTicks = 180;

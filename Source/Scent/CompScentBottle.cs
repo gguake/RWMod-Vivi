@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using RimWorld;
 using UnityEngine;
@@ -163,9 +163,8 @@ namespace VVRace
                 defaultDesc = LocalizeString_Scent.VV_Command_CollectScentDesc.Translate(
                     Props.pollenCostPerCharge, Props.pollenDef.LabelCap, Props.maxSprays),
                 icon = CollectIcon,
-                // validator를 두면 무효 대상 클릭이 action에 도달하지 못해 거부 메시지를
-                // 출력할 수 없다 (Targeter.ProcessInputEvents는 invalid 타겟이면 action을
-                // 호출하지 않음). 검증과 메시지는 action 내부의 CanCollectFrom이 담당한다.
+                // Targeter.ProcessInputEvents는 무효 대상에 action을 호출하지 않아 거부 메시지를 표시할 수 없다.
+                // validator 대신 action 내부의 CanCollectFrom에서 검증하고 메시지를 표시한다.
                 targetingParams = new TargetingParameters
                 {
                     canTargetLocations = false,

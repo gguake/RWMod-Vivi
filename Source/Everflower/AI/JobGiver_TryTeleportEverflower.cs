@@ -29,7 +29,6 @@ namespace VVRace
 
             if (!targetEverflower.ReservedTeleportCell.HasValue) { return null; }
 
-            // 제단에 안치된 영원꽃은 다시 옮기지 않는다.
             if (targetEverflower.EverflowerComp.IsEnshrined) { return null; }
 
             if (targetEverflower.IsForbidden(pawn)) { return null; }

@@ -3,10 +3,6 @@ using Verse;
 
 namespace VVRace
 {
-    // 엔딩 이후 비비 쪽 영구 보상.
-    // - 5단계 이상(공성 이후) 앵커 영원꽃이 있는 맵: 성인 일반 비비의 영원꽃 잔향 상시 유지
-    // - 6단계(엔딩 완료) 앵커 영원꽃이 있는 맵: 플레이어 비비에게 〈영원꽃의 축복〉(유전자 불안정 면역, 성체 노화 감속)
-    // CompVivi의 주기 틱에서 RefreshFor를 호출해 유지하며, 맵을 떠나면 축복은 하루 뒤 사라진다.
     public static class EverflowerBlessingUtility
     {
         public const int RefreshIntervalTicks = 2000;
@@ -20,11 +16,10 @@ namespace VVRace
 
             if (pawn.health.hediffSet.HasHediff(EndingRitualDefOf.VV_EverflowerBlessing)) { return true; }
 
-            // 아이 비비는 성장이 멈추지 않도록 노화 감속 헤디프를 받지 않지만, 축복받은 땅에 있는 동안에는 유전자 불안정에 면역이다.
+            // 아이 비비는 성장이 멈추지 않도록 노화 감속 헤디프를 제외하되, 축복받은 땅에서는 유전자 불안정 면역을 적용한다.
             return pawn.Faction != null && pawn.Faction.IsPlayer && pawn.IsVivi() && IsBlessedMap(pawn.MapHeld);
         }
 
-        // 엔딩을 완료한 6단계 앵커 영원꽃이 있는 맵인지.
         public static bool IsBlessedMap(Map map)
         {
             var quest = ViviEndingQuest.Current;
@@ -72,7 +67,6 @@ namespace VVRace
             return anchor;
         }
 
-        // 잔향의 노화 배율(0.5)은 고정이고 수치(=지속 시간)만 영원꽃 조율 수치 이상으로 끌어올린다.
         private static void MaintainReverberation(Pawn pawn, float severity)
         {
             if (severity <= 0f) { return; }

@@ -5,13 +5,9 @@ using Verse.AI.Group;
 
 namespace VVRace
 {
-    // 앵커 영원꽃에서 시작한 의식(조율·마나 파동·요정화 등)의 로드. 세 행동 워커가 앵커 대상일 때 이 로드를 만든다.
-    // 보스전(1·2페이즈) 동안에는 아포크리파가 코앞까지 다가와도 참가자가 의식을 포기하지 않도록, 바닐라 취소 조건에서 도주 판정과
-    // 다른 폰(아포크리파·채집자 등)의 영원꽃 예약 판정을 뺀다.
-    // 보스전 여부는 생성 시점이 아니라 매 판정마다 확인한다(평화 기간에 시작한 의식도 보스가 등장하면 취소되지 않는다).
+    // 평화 기간에 시작한 의식도 보스 등장 후 보호되도록 보스전 여부를 판정할 때마다 확인한다.
     public class LordJob_RitualResonance : LordJob_Ritual
     {
-        // 저장/불러오기용(Lord가 LordJob을 Deep 저장한다). 추가 저장 필드는 없다.
         public LordJob_RitualResonance() { }
 
         public LordJob_RitualResonance(TargetInfo selectedTarget, Precept_Ritual ritual, RitualObligation obligation, List<RitualStage> allStages, RitualRoleAssignments assignments, Pawn organizer = null, IntVec3? spotOverride = null)
@@ -26,8 +22,8 @@ namespace VVRace
                 return base.ShouldBeCalledOff();
             }
 
-            // 아래는 LordJob_Ritual.ShouldBeCalledOff와 같고, 마지막의 SelfDefenseUtility.ShouldStartFleeing 검사만 없다.
-            // 대상 검사는 바닐라 TargetStillAllowed()에서 다른 폰의 예약 검사(ChecksReservations)만 뺀 것이다.
+            // 바닐라 LordJob_Ritual.ShouldBeCalledOff에서 도주 판정(SelfDefenseUtility.ShouldStartFleeing)만 제외한다.
+            // 대상 검사도 TargetStillAllowed의 다른 폰 예약 검사(ChecksReservations)만 제외한다.
             if (lord.ownedPawns.Count == 0) { return true; }
             if (selectedTarget.ThingDestroyed) { return true; }
             if (!Ritual.behavior.TargetStillAllowed(selectedTarget, this)) { return true; }
@@ -65,8 +61,7 @@ namespace VVRace
             return false;
         }
 
-        // 2페이즈 공명 파동(조율 의식)의 역할 참가자는 출혈 중에도 의식 자리를 떠나지 않는다.
-        // 역할 def의 출혈 무시는 모든 조율 의식에 걸리므로 XML에 두지 않고, 바닐라 판정 동안만 잠시 켠다.
+        // 일반 조율에도 영향을 주는 XML 설정 대신 바닐라 판정 중에만 출혈 무시를 임시로 켠다.
         public override float VoluntaryJoinPriorityFor(Pawn p)
         {
             var role = RoleFor(p, includeForced: true);

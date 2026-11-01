@@ -16,13 +16,11 @@ namespace VVRace
         public bool enableViviMealContinuation = true;
         public float viviMealContinuationNutritionGap = 0.7f;
 
-        // 비비 무작위 유전자에서 제외할 모드 유전자의 defName (블랙리스트: 목록에 없는 모드 유전자는 활성)
+        // 무작위 유전자에서 제외할 모드 유전자의 defName. 목록에 없는 유전자는 허용한다.
         public HashSet<string> disabledModGenes = new HashSet<string>();
 
-        // 구버전 '모드에서 추가된 유전자 허용'이 꺼진 설정(새 설치 포함)은 def 로드 후 모드 유전자를 모두 비활성화한다.
         private bool _disableAllModGenesPending = true;
 
-        // 목록이 없는 구버전 설정(새 설치 포함)은 이전 결과를 바로 저장해서 구버전 옵션이 더 이상 쓰이지 않게 한다.
         private bool _modGeneMigrationUnsaved = true;
 
         public override void ExposeData()
@@ -73,7 +71,6 @@ namespace VVRace
             }
         }
 
-        // def 로드가 끝난 직후 한 번 호출: 구버전 옵션 값으로 이전한 결과를 새 형식으로 저장한다.
         public void MigrateLegacyModGeneSettings()
         {
             ResolvePendingModGenes();
@@ -83,7 +80,7 @@ namespace VVRace
             }
         }
 
-        // 설정은 def 로드 전에 읽히므로 구버전 설정의 이전은 def가 로드된 뒤로 미룬다.
+        // 설정은 def보다 먼저 로드되므로 구버전 설정의 변환은 def 로드 후에 수행한다.
         public void ResolvePendingModGenes()
         {
             if (!_disableAllModGenesPending || !PlayDataLoader.Loaded) { return; }
@@ -104,7 +101,6 @@ namespace VVRace
                     ResolvePendingModGenes();
                     if (_disableAllModGenesPending)
                     {
-                        // def 로드 전이라 이전할 수 없으면 구버전 상태(목록 없음)를 그대로 둔다.
                         return;
                     }
 
@@ -114,7 +110,7 @@ namespace VVRace
                     break;
 
                 case LoadSaveMode.LoadingVars:
-                    // 지금 없는 유전자(제거된 모드)도 그대로 보존해서 모드를 다시 켜면 설정이 돌아오게 한다.
+                    // 제거된 모드의 유전자도 보존해 모드를 다시 활성화하면 기존 설정이 복원되게 한다.
                     Scribe_Collections.Look(ref disabledModGeneList, "disabledModGenes", LookMode.Value);
                     _modGeneMigrationUnsaved = disabledModGeneList == null;
                     if (disabledModGeneList != null)

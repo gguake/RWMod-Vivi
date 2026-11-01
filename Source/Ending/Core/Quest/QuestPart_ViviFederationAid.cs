@@ -7,8 +7,6 @@ using Verse.AI.Group;
 
 namespace VVRace
 {
-    // 공성 동안 패망하지 않은 비적대 비비 연방이 있으면 1.5~2.5일마다 경비원·소방수·저격수 3~6명을
-    // 스카이위드 상자로 제단 근처에 보내 한동안 함께 싸우게 한다.
     public class QuestPart_ViviFederationAid : QuestPartActivable
     {
         private const int TickInterval = 250;

@@ -4,7 +4,6 @@ using Verse.AI;
 
 namespace VVRace
 {
-    // 아포크리파 본체 모듈(Task D) 전용 DefOf. 공용 VVDefOf.cs는 건드리지 않는다.
     [DefOf]
     public static class ApocryphaThingDefOf
     {

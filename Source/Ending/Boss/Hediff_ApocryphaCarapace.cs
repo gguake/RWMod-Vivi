@@ -2,7 +2,7 @@
 
 namespace VVRace
 {
-    // 2페이즈 〈시조의 외피〉. 실제 피해 배율은 CompApocrypha가 처리하고, 이 헤디프는 꽂힌 바늘에 따른 받는 피해 배율 표시와 이동속도 보정만 맡는다.
+    // 실제 피해 배율은 CompApocrypha가 적용한다. 이 헤디프는 꽂힌 바늘에 따른 배율 표시와 이동 속도 보정만 담당한다.
     public class Hediff_ApocryphaCarapace : HediffWithComps
     {
         private CompApocrypha BossComp => pawn?.TryGetComp<CompApocrypha>();

@@ -15,8 +15,7 @@ namespace VVRace
             var attuner = jobRitual.PawnWithRole("resonator");
             var everflower = jobRitual.selectedTarget.Thing as ArcanePlant_Everflower;
 
-            // 아포크리파 2페이즈: 조율(링크·잔향) 대신 제단의 공명 파동이 아포크리파를 강타한다.
-            // 이 동안에는 의식 재사용 대기가 없으므로 Notify_RitualComplete 대신 순간이동 예약 해제만 한다.
+            // 이때는 공유 재사용 대기를 적용하지 않으므로 Notify_RitualComplete 대신 순간이동 예약만 해제한다.
             if (everflower != null && EverflowerRitualRules.IsResonancePhase(everflower))
             {
                 ResonanceWaveUtility.Trigger(attuner, everflower);

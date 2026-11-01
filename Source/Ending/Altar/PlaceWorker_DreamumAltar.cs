@@ -4,13 +4,10 @@ using Verse;
 
 namespace VVRace
 {
-    // 영원꽃 제단 배치 규칙: 플레이어 정착지에만(야영지·임시 지역 금지), 중력선 기반 위 금지, 지역마다 하나(완성 건물·청사진·틀 모두),
-    // 발판 안 마법 식물 금지(중앙의 영원꽃 포함).
-    // 제단 틀은 발판의 건물(마법 식물 포함)을 해체해 버리므로 영원꽃 둘레에 제단을 지을 수 없다.
-    // 영원꽃은 제단을 완공한 뒤 순간이동으로만 안치한다. 비비 연방의 밀서를 받기 전에는 건축 메뉴에 보이지 않는다.
+    // 제단 틀이 발판의 건물과 마법 식물을 해체하므로 영원꽃 둘레에는 제단을 건설할 수 없다.
     public class PlaceWorker_DreamumAltar : PlaceWorker
     {
-        // 갓 모드에서는 바닐라 Designator_Build.Visible이 이 검사 전에 보여 준다.
+        // 갓 모드의 표시 여부는 이 검사에 앞서 Designator_Build.Visible에서 결정한다.
         public override bool IsBuildDesignatorVisible(BuildableDef def)
         {
             return ViviEndingQuest.Current?.IsAltarUnlocked == true;
@@ -48,7 +45,6 @@ namespace VVRace
                     var other = thingList[i];
                     if (other == thingToIgnore || other == thing) { continue; }
 
-                    // 이미 심긴 마법 식물이 있거나 옮겨 심기(설치) 청사진으로 마법 식물이 예약되어 있으면 배치를 막는다.
                     var isArcanePlant = other is ArcanePlant
                         || (other is Blueprint_Install installBlueprint && installBlueprint.ThingToInstall is ArcanePlant);
                     if (isArcanePlant)

@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using System.Collections.Generic;
 using Verse;
 
@@ -72,7 +72,7 @@ namespace VVRace
                 return factor;
             }
 
-            // Cache misses must inspect loaded hediffs: loading does not call CompPostPostAdd.
+            // 불러올 때는 CompPostPostAdd가 호출되지 않으므로 해당 폰의 캐시 항목이 없어도 헤디프를 직접 확인한다.
             hasAgingFactor = false;
             var hediffFactor = 1f;
             var hediffs = pawn.health?.hediffSet?.hediffs;

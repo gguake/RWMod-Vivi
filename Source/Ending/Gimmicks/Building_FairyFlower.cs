@@ -6,8 +6,6 @@ using Verse.AI;
 
 namespace VVRace
 {
-    // 요정꽃. 아포크리파에게 결속된 고대 요정 비비들의 파장이 응집된 꽃으로, 피해를 받지 않고 하루(60000틱) 뒤 시든다.
-    // 아기가 아닌 플레이어 비비가 우클릭 메뉴로 결속하면 〈요정 간섭〉을 얻고 꽃은 사라진다(연결선이 비비에게 옮겨 감).
     public class Building_FairyFlower : Building_ApocryphaFlower
     {
         public const int LifespanTicks = 60000;
@@ -16,7 +14,6 @@ namespace VVRace
 
         public int TicksUntilExpire => _expireTick < 0 ? LifespanTicks : System.Math.Max(0, _expireTick - Find.TickManager.TicksGame);
 
-        // 요정꽃과 결속할 수 있는 폰인지(아기가 아니고 움직일 수 있는 플레이어 비비). 거부 사유가 있으면 우클릭 메뉴에 비활성 항목으로 보여 준다.
         public static AcceptanceReport CanBond(Pawn pawn)
         {
             if (pawn == null || pawn.Dead || pawn.Downed) { return false; }
@@ -56,7 +53,6 @@ namespace VVRace
             }
         }
 
-        // 결속 작업이 끝났을 때(JobDriver_BondFairyFlower): 비비에게 요정 간섭을 주고 꽃은 사라진다.
         public void Notify_BondedBy(Pawn pawn)
         {
             if (!Spawned || pawn == null || pawn.Dead) { return; }

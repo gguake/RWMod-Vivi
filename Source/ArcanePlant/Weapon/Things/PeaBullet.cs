@@ -1,4 +1,4 @@
-using HarmonyLib;
+﻿using HarmonyLib;
 using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,25 +62,6 @@ namespace VVRace
 
         protected override void ImpactSomething()
         {
-            //if (_overrideData != null)
-            //{
-            //    foreach (var data in _overrideData)
-            //    {
-            //        if (data.damageDef == DamageDefOf.Flame)
-            //        {
-            //            FleckMaker.Static(DrawPos, Map, VVFleckDefOf.HeatGlow_Intense, 0.75f);
-            //        }
-            //        else if (data.damageDef == DamageDefOf.Stun)
-            //        {
-            //            FleckMaker.Static(DrawPos, Map, VVFleckDefOf.ElectricalSpark, 0.75f);
-            //        }
-            //        else if (data.damageDef == DamageDefOf.Burn)
-            //        {
-            //            FleckMaker.Static(DrawPos, Map, VVFleckDefOf.Fleck_VaporizeCenterFlash, 0.25f);
-            //        }
-            //    }
-            //}
-
             base.ImpactSomething();
         }
 
@@ -91,43 +72,6 @@ namespace VVRace
 
         public static void Impact_TakeDamageOverride(DamageWorker.DamageResult damageResult, BattleLogEntry_RangedImpact log, PeaBullet bullet)
         {
-            //hitThing.TakeDamage(dinfo);
-            //var hitThing = damageResult?.hitThing;
-            //var lastHitPart = damageResult?.LastHitPart;
-
-            //hitThing.TakeDamage(new DamageInfo(
-            //    .damageDef,
-            //    data.amount,
-            //    data.armorPenetration,
-            //    bullet.ExactRotation.eulerAngles.y,
-            //    bullet.launcher,
-            //    lastHitPart,
-            //    bullet.equipmentDef,
-            //    DamageInfo.SourceCategory.ThingOrUnknown,
-            //    bullet.intendedTarget.Thing,
-            //    instigatorGuilty: false))?.AssociateWithLog(log);
-
-
-            //if (hitThing != null && overrideData != null)
-            //{
-            //    foreach (var data in overrideData)
-            //    {
-            //        if (data.chance >= 1f || Rand.Chance(data.chance))
-            //        {
-            //            hitThing.TakeDamage(new DamageInfo(
-            //                data.damageDef,
-            //                data.amount,
-            //                data.armorPenetration,
-            //                bullet.ExactRotation.eulerAngles.y,
-            //                bullet.launcher,
-            //                lastHitPart,
-            //                bullet.equipmentDef,
-            //                DamageInfo.SourceCategory.ThingOrUnknown,
-            //                bullet.intendedTarget.Thing,
-            //                instigatorGuilty: false))?.AssociateWithLog(log);
-            //        }
-            //    }
-            //}
         }
     }
 

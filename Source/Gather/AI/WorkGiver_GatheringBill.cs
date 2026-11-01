@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
 using Verse;
@@ -24,7 +24,6 @@ namespace VVRace
             {
                 if (!(bill.recipe is RecipeDef_Gathering recipeGathering) || recipeGathering.gatherWorker == null) { continue; }
 
-                // early-exit
                 if (Find.TickManager.TicksGame < bill.nextTickToSearchForIngredients && FloatMenuMakerMap.makingFor != pawn && !forced) { continue; }
 
                 if (!bill.ShouldDoNow() || !bill.PawnAllowedToStartAnew(pawn) || !recipeGathering.gatherWorker.PawnCanDoBill(pawn, bill)) { continue; }
@@ -53,13 +52,10 @@ namespace VVRace
 
                 foreach (var target in _tmpGatheringBillTargetList)
                 {
-                    // 상호작용이 불가능한 경우
                     if (target.IsForbidden(pawn)) { continue; }
 
-                    // 특수 조건
                     if (target is IGatherableTarget gatherableTarget && !gatherableTarget.CanGatherByPawn(pawn, recipeGathering)) { continue; }
 
-                    // 접근 불가능한 경우
                     if (!pawn.CanReserveAndReach(target, PathEndMode.Touch, recipeGathering.maxPathDanger)) { continue; }
 
                     return recipeGathering.gatherWorker.MakeJob(pawn, thing, target, bill);

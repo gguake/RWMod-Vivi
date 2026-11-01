@@ -6,15 +6,6 @@ using Verse;
 
 namespace VVRace
 {
-    // 아포크리파의 거대 엘텍스 바늘. 보스 둘레에 핀 판넬처럼 떠다니다가(Idle) 적의 위치를 조준하고(Aiming),
-    // 조준이 끝나면 그 방향으로 최대 사거리까지 순간적으로 날아가며 넓은 직선 위의 모든 대상을 꿰뚫은 뒤(Firing), 끝에 잠시 박혀 떨다가(Lodged)
-    // 엘텍스 바늘처럼 곡선을 그리며 제자리로 돌아온다(Returning).
-    // 1페이즈: 보스의 왼쪽 어깨 뒤에 핀 판넬처럼 나란히 꽂혀 있다가, 보스 컴프가 시킬 때 보스 앞의 발사 지점으로 떨어져 나와 쏜다.
-    // 2페이즈: 전환 충격파에 튕겨 나가 보스 둘레 바닥에 꽂힌다(Scattering → Planted). 꽂힌 바늘은 아무 폰이나 우클릭으로 깨울 수 있고(Activate),
-    // 깨운 폰을 잠시 뒤쫓아 발사각이 돌다가(LockOn) 그 각도로 굳어(Aiming) 최대 사거리까지 날아간 뒤 그 자리에 다시 꽂힌다.
-    // 발사 직선 위에 보스가 있으면 피해를 주는 대신 보스에게 꽂혀(Stuck) 멈추고, 보스 컴프가 뽑을 때(PullOut)까지 보스 몸에 붙어 다니다가
-    // 뽑히면 보스 둘레 바닥으로 다시 튕겨 나가 꽂힌다.
-    // 발사 주기·대상 선정·꽂힐 자리는 보스 컴프(CompApocrypha)가, 움직임·피해·연출은 이 Thing이 맡는다. 보스가 전투 페이즈가 아니게 되면 스스로 흩어진다.
     public class ApocryphaNeedle : ThingWithComps
     {
         private enum NeedleState : byte
@@ -30,10 +21,6 @@ namespace VVRace
             Scattering = 8,
         }
 
-        // 1페이즈 자리: 건담의 핀 판넬처럼 보스의 왼쪽 어깨 뒤에 바늘을 나란히 겹쳐 세워 한쪽 날개 모양을 이룬다.
-        // 안쪽 바늘일수록 곧게 서고 바깥쪽일수록 더 기울며(부채꼴), 밑동은 바깥쪽으로 갈수록 조금씩 아래로 물러난다.
-        // 보스가 정면(남)·옆을 보면 몸 뒤에 가려 그리고, 등을 보이면(북) 몸 앞에 그린다.
-        // 밑동 자리는 1페이즈 몸 크기(그림 3칸)에 맞추고, 바늘 길이(약 4칸)는 그대로 둔다(밑동에서 바늘 중심까지 FinCenterFromRoot).
         private const float FinRootX = 0.46f;
         private const float FinRootZ = 0.41f;
         private const float FinStepX = 0.32f;
@@ -48,19 +35,15 @@ namespace VVRace
         private const float SlotBobHeight = 0.14f;
         private const float IdleFollow = 0.16f;
 
-        // 2페이즈: 몸통 중심 둘레의 타원 궤도를 고르게 나눠 맴돈다(한 바퀴 24초).
         private const float OrbitRadiusX = 5.4f;
         private const float OrbitRadiusZ = 4.4f;
         private const float OrbitDegreesPerTick = 0.25f;
 
-        // 2페이즈: 보스 몸의 맞는 범위(발밑과 몸통 중심 두 점에서 이 반경)와 꽂힌 모양(몸통 중심에서 발사 반대쪽으로 물러난 거리, 바늘끼리 옆으로 벌린 간격)
         private const float BossHitRadius = 1.6f;
         private const float StuckDepth = 1.4f;
         private const float StuckSpread = 0.45f;
         private const int StuckShakeTicks = 14;
 
-        // 조준: 몸통 중심에서 LaunchOffset칸 떨어진 발사 지점으로 DetachTicks 동안 옮겨 가 대상을 겨누고, 조준 끝 무렵 WindupDistance만큼 물러나 떤다.
-        // 1페이즈에서 대상이 발사 지점보다 CloseTargetMargin칸 넘게 앞에 있지 않으면(보스에 바짝 붙은 적) 몸통 옆 부채꼴 자리(CloseTargetFanAngle)에서 겨눈다.
         private const float LaunchOffset = 3.2f;
         private const float CloseTargetMargin = 2f;
         private const float CloseTargetFanAngle = 75f;
@@ -69,16 +52,14 @@ namespace VVRace
         private const int ShakeTicks = 24;
         private const float ShakeAmplitude = 0.08f;
 
-        // 발사: 바늘 끝(촉)이 틱당 FireSpeed칸으로 날아가며(32칸 ≈ 5틱) TrailPointSpacing칸마다 궤적 점을 남긴다. 촉이 경고 띠 끝에 닿으면 LodgedTicks 동안 박혀 떤다.
-        // NeedleTipOffset: 바늘 그림 중심에서 촉까지(그림 높이의 36% × 5.5칸). 날아가는 동안 촉이 띠 밖으로 나가지 않게 몸통은 그만큼 뒤에 그린다.
-        // 피해: 폰은 그려지는 자리(DrawPos)를 중심으로 반경 PawnHitRadius가 띠에 걸치면, 건물은 차지한 칸이 띠에 걸치면 꿰뚫는다(경고 띠와 같은 범위).
+        // NeedleTipOffset은 그림 중심에서 촉까지의 거리로 높이 5.5칸의 36%다.
+        // 촉이 경고 띠를 벗어나지 않도록 몸통은 이 거리만큼 뒤에 그린다.
         private const float FireSpeed = 7f;
         private const float NeedleTipOffset = 1.98f;
         private const float PawnHitRadius = 0.35f;
         private const float TrailPointSpacing = 1f;
         private const int LodgedTicks = 16;
 
-        // 귀환: 엘텍스 바늘처럼 3차 베지어 곡선을 따라 돌아온다(발사 방향으로 조금 더 나아갔다가 자리 바깥쪽에서 들어온다).
         private const float ReturnSpeed = 0.9f;
         private const float ReturnOutWeight = 7f;
         private const float ReturnInWeight = 4f;
@@ -86,7 +67,6 @@ namespace VVRace
 
         private const int AimPetalInterval = 4;
 
-        // 2페이즈 튕겨 나가 꽂히기: 출발 방향으로 조금 솟았다가 휘어 내리꽂힌다(속도 ScatterSpeed칸/틱, 걸리는 시간 ScatterMinTicks~ScatterMaxTicks).
         private const float ScatterSpeed = 0.55f;
         private const int ScatterMinTicks = 24;
         private const int ScatterMaxTicks = 50;
@@ -94,13 +74,11 @@ namespace VVRace
         private const float ScatterInWeight = 2.5f;
         private const float ScatterLift = 1.6f;
 
-        // 2페이즈 깨우기: 꽂힌 자리에서 LiftTicks 동안 뽑혀 올라와 깨운 폰을 겨눈다. 꽂혀 있는 동안은 PlantedGlintInterval마다 반짝인다.
         private const int LiftTicks = 30;
         private const int PlantedGlintInterval = 45;
-        // 우클릭 위치가 꽂힌 자리(촉) 또는 바늘 몸통 그림에서 이 거리 안이면 그 바늘을 고른다.
         private const float ClickRadius = 1.4f;
 
-        // 발사 왜곡을 그리는 시간(VV_NeedleWarp의 _Duration 0.55초와 같게)
+        // 발사 왜곡의 재생 시간. VV_NeedleWarp의 _Duration(0.55초)과 맞춘다.
         private const int WarpTicks = 33;
 
         private const int FadeInTicks = 40;
@@ -108,7 +86,6 @@ namespace VVRace
 
         private static readonly List<Thing> _tmpCellThings = new List<Thing>();
 
-        // 저장되는 상태
         private Pawn _boss;
         private int _slot;
         private NeedleState _state;
@@ -142,7 +119,6 @@ namespace VVRace
         private float _scatterAngle;
         private int _scatterTicks;
 
-        // 저장하지 않는 상태
         private int _spawnTick;
         private CompApocrypha _bossComp;
         private CompTrailRenderer _trail;
@@ -156,19 +132,14 @@ namespace VVRace
         public bool IsPlanted => _state == NeedleState.Planted;
         public bool IsScattering => _state == NeedleState.Scattering;
 
-        // 2페이즈: 바닥에 꽂혀 있어 폰이 깨울 수 있는지(보스가 2페이즈일 때만).
         public bool CanActivate => Spawned && IsPlanted && IsUnbound;
 
-        // 2페이즈: 깨우는 폰이 바늘에 손을 대고 있어야 하는 시간.
         public int ActivateTicks => BossComp?.Props.unboundNeedleActivateTicks ?? 60;
 
-        // 2페이즈: 꽂힌 자리(촉이 박힌 칸). 깨우는 폰은 이 칸에 다가간다.
         public IntVec3 GroundCell => _groundCell;
 
-        // 2페이즈: 깨운 폰을 뒤쫓는 중이거나 각도가 굳어 발사를 기다리는 중이면 그 폰.
         public Pawn LockTarget => _state == NeedleState.LockOn || (_state == NeedleState.Aiming && IsUnbound) ? _lockTarget : null;
 
-        // 조준 진행도(0~1). 조준 중이 아니면 0.
         public float AimProgress => IsAiming ? Mathf.Clamp01((GenTicks.TicksGame - _stateStartTick) / (float)Mathf.Max(1, _aimTicks)) : 0f;
 
         public Vector3 LaneStart => _laneStart;
@@ -177,10 +148,9 @@ namespace VVRace
 
         public override Vector3 DrawPos => new Vector3(_pos.x, DrawAltitude, _pos.z);
 
-        // 1페이즈 핀 판넬 자리에 꽂혀 있는지(쉬는 중이거나 자리에 거의 돌아온 귀환 막바지).
         private bool IsRacked => !IsUnbound && (_state == NeedleState.Idle || (_state == NeedleState.Returning && _returnProgress >= FinRackReturnProgress));
 
-        // 등 뒤 핀 판넬은 보스 몸에 가려지도록 보스보다 살짝 낮게 그린다(등을 보일 때와 날아다닐 때는 위에).
+        // 등 뒤 바늘이 몸에 가려지도록 보스보다 낮게 그린다. 보스가 등을 보이거나 바늘이 비행 중이면 높게 그린다.
         private float DrawAltitude
         {
             get
@@ -191,7 +161,7 @@ namespace VVRace
             }
         }
 
-        // 핀 판넬이 달린 쪽(보스의 왼쪽 어깨 뒤)이 화면의 어느 쪽인지: 정면·서향이면 오른쪽(+1), 등·동향이면 왼쪽(-1).
+        // 보스의 왼쪽 어깨는 정면·서향에서 화면 오른쪽(+1), 후면·동향에서 화면 왼쪽(-1)에 해당한다.
         private float FinSide => _boss != null && (_boss.Rotation == Rot4.South || _boss.Rotation == Rot4.West) ? 1f : -1f;
 
         private bool FinBehindBody => _boss != null && _boss.Rotation != Rot4.North;
@@ -236,7 +206,6 @@ namespace VVRace
                 return;
             }
 
-            // 처음 나타날 때는 자리에서 흐릿하게 떠오른다.
             _spawnTick = GenTicks.TicksGame;
 
             if (_boss != null && _boss.Spawned)
@@ -291,10 +260,6 @@ namespace VVRace
         }
 
         #region 보스가 부르는 API
-        // 보스 컴프가 고른 대상 칸을 겨눈다. 발사 직선(시작점·방향·길이)은 지금 정하고 조준 동안 바뀌지 않는다.
-        // 1페이즈는 보스 몸통 앞의 발사 지점에서, 2페이즈는 바늘이 떠 있는 자리에서 쏜다(그동안 보스는 따로 움직인다).
-        // fanAngle(1페이즈 여러 바늘 동시 발사): 보스→대상 방향에서 이만큼 돌린 몸통 둘레 반경 needleFanRadius의 부채꼴 자리에서 대상을 겨눠 쏜다
-        // (함께 쏘는 바늘들의 직선이 대상에서 교차한다). null이면 몸통 앞의 기존 발사 지점에서 쏜다.
         public void StartAim(IntVec3 targetCell, int aimTicks, float? fanAngle = null)
         {
             if (!Spawned || _boss == null || !_boss.Spawned) { return; }
@@ -312,8 +277,7 @@ namespace VVRace
 
             var start = IsUnbound ? origin : origin + direction * LaunchOffset;
 
-            // 1페이즈: 대상이 발사 지점 앞으로 충분히 떨어져 있지 않으면(보스에 바짝 붙은 적) 띠가 대상을 덮지 못하므로,
-            // 몸통 옆 부채꼴 자리(바늘이 있는 쪽)에서 대상을 겨눈다.
+            // 대상이 발사 지점보다 충분히 앞에 있지 않으면 경고 띠가 대상을 덮지 못하므로 몸통 옆 부채꼴 위치에서 겨눈다.
             if (!IsUnbound && !fanAngle.HasValue && Vector3.Distance(origin, target) < LaunchOffset + CloseTargetMargin)
             {
                 var radius = BossComp?.Props.needleFanRadius ?? 5f;
@@ -346,8 +310,7 @@ namespace VVRace
             PlayEffectAt(ApocryphaEffecterDefOf.VV_Effecter_ApocryphaNeedleAim, _pos);
         }
 
-        // 1페이즈: 조준 중이면 발사를 취소하고 제자리로 돌아간다(이미 날아간 바늘은 그대로 둔다). 취소했으면 true.
-        // 2페이즈의 조준은 폰이 깨운 것이라 보스가 기절해도 취소하지 않는다.
+        // 2페이즈는 폰이 바늘을 깨워 조준하므로 보스가 기절해도 취소하지 않는다.
         public bool CancelAim()
         {
             if (_state != NeedleState.Aiming || IsUnbound) { return false; }
@@ -357,7 +320,6 @@ namespace VVRace
             return true;
         }
 
-        // 2페이즈: 꽂혀 있으면 발사 반대 방향으로 뽑혀 나와 cell(보스 둘레 바닥)로 튕겨 나가 꽂힌다. 뽑았으면 true.
         public bool PullOut(IntVec3 cell)
         {
             if (_state != NeedleState.Stuck || !Spawned) { return false; }
@@ -367,7 +329,6 @@ namespace VVRace
             return true;
         }
 
-        // 2페이즈: 지금 자리에서 outDir 쪽으로 솟았다가 휘어 cell 바닥에 촉이 박히도록 날아간다(전환 충격파·뽑힘·막힌 사거리 끝).
         public void ScatterTo(IntVec3 cell, Vector3 outDir)
         {
             if (!Spawned || !cell.IsValid) { return; }
@@ -393,8 +354,6 @@ namespace VVRace
             RegisterTrail(_pos);
         }
 
-        // [깨우기 작업 호출] 2페이즈: 꽂힌 바늘이 뽑혀 올라와 깨운 폰을 잠시 뒤쫓으며 겨누다가(발사각이 폰을 따라 돈다), 그 각도로 굳은 뒤 발사한다.
-        // 발사 직선은 꽂혀 있던 자리(촉)에서 시작해 최대 사거리까지 이어진다.
         public void Activate(Pawn activator)
         {
             if (!CanActivate || activator == null) { return; }
@@ -418,7 +377,6 @@ namespace VVRace
             Messages.Message(LocalizeString_EndingBoss.VV_Message_ApocryphaNeedleActivated.Translate(activator.Named("PAWN")), this, MessageTypeDefOf.CautionInput, historical: false);
         }
 
-        // [우클릭 메뉴 호출] 2페이즈: clickPos(월드 좌표) 가까이에 꽂혀 있는 바늘(촉이 박힌 자리 또는 그려진 몸통 기준). 없으면 null.
         public static ApocryphaNeedle FindPlantedNear(Map map, Vector3 clickPos)
         {
             var def = ApocryphaThingDefOf.VV_ApocryphaNeedle;
@@ -442,7 +400,6 @@ namespace VVRace
             return best;
         }
 
-        // DEV: 꽂히지 않은 바늘을 바로 보스에게 꽂는다.
         public void DebugStick()
         {
             if (!Spawned || !IsUnbound || _state == NeedleState.Stuck || IsFlying) { return; }
@@ -452,7 +409,6 @@ namespace VVRace
             Stick(GenTicks.TicksGame);
         }
 
-        // 그 자리에서 꽃잎으로 흩어지며 사라진다.
         public void Vanish()
         {
             if (Destroyed) { return; }
@@ -465,7 +421,6 @@ namespace VVRace
             Destroy(DestroyMode.Vanish);
         }
 
-        // point(월드 좌표)가 이 바늘의 발사 직선(넓은 띠) 안에 있는지.
         public bool LaneContains(Vector3 point)
         {
             var rel = (point - _laneStart).Yto0();
@@ -482,7 +437,6 @@ namespace VVRace
             base.Tick();
             if (!Spawned) { return; }
 
-            // 2페이즈 전환 중에는 튕겨 나간 바늘이 바닥에 꽂힌 채 기다린다.
             var comp = BossComp;
             if (comp == null || !_boss.Spawned || _boss.Map != Map
                 || (comp.Phase != ApocryphaPhase.Bound && comp.Phase != ApocryphaPhase.Unbound && comp.Phase != ApocryphaPhase.Transforming))
@@ -537,7 +491,6 @@ namespace VVRace
             }
         }
 
-        // 자리를 부드럽게 따라간다(보스가 움직이면 살짝 늦게 따라와 떠 있는 느낌을 준다).
         private void TickIdle(int now)
         {
             _pos = Vector3.Lerp(_pos, SlotPos(now), IdleFollow);
@@ -571,7 +524,6 @@ namespace VVRace
             }
         }
 
-        // 조준 중: 요정 비비 사출탄 조준처럼 차오른 띠 위에서 금빛 꽃잎·반짝임이 발사 방향으로 흩날린다.
         private void ThrowAimPetals()
         {
             var map = Map;
@@ -593,7 +545,6 @@ namespace VVRace
             }
         }
 
-        // 물러난 자리에서 바로 튀어 나간다. 궤적은 새로 시작한다.
         private void Fire(int now)
         {
             _state = NeedleState.Firing;
@@ -603,7 +554,6 @@ namespace VVRace
             _hitIds.Clear();
             _ignored = null;
 
-            // 2페이즈: 쏘는 순간 직선 위에 보스가 있으면 아무에게도 피해를 주지 않고 보스에게 꽂힌다.
             _stickAlong = IsUnbound ? BossContactAlong() : -1f;
 
             _pos = BodyOnLane(_travelled);
@@ -613,7 +563,6 @@ namespace VVRace
             PlayEffectAt(ApocryphaEffecterDefOf.VV_Effecter_ApocryphaNeedleFire, _pos);
             ApocryphaUtility.ShakeCamera(Map, 0.5f);
 
-            // 쏘는 순간 바늘 몸이 이미 덮고 있는 띠 앞머리(시작점~촉)부터 꿰뚫는다.
             if (_stickAlong < 0f)
             {
                 DamageAlong(0f, Mathf.Clamp(_travelled, 0f, _laneLength));
@@ -623,12 +572,11 @@ namespace VVRace
             TickFiring(now);
         }
 
-        // _travelled: 촉이 시작점에서 나아간 거리. 몸통(그림 중심)은 촉보다 NeedleTipOffset만큼 뒤에 있다.
+        // _travelled는 시작점에서 촉까지의 거리다. 그림 중심은 촉보다 NeedleTipOffset만큼 뒤에 있다.
         private void TickFiring(int now)
         {
             var from = _travelled;
 
-            // 날아가는 사이에 보스가 직선으로 들어와도 거기서 꽂힌다(이미 지나온 구간의 피해는 그대로).
             if (_stickAlong < 0f && IsUnbound)
             {
                 var contact = BossContactAlong();
@@ -670,7 +618,6 @@ namespace VVRace
             }
         }
 
-        // 사거리 끝에 박혀 잠시 떤다.
         private void TickLodged(int now)
         {
             var elapsed = now - _stateStartTick;
@@ -691,7 +638,6 @@ namespace VVRace
             }
         }
 
-        // 2페이즈: 사거리 끝에 박힌 그 자리에 그대로 꽂힌다. 끝 칸이 벽·물처럼 설 수 없는 칸이면 발사 직선을 거슬러 가장 가까운 설 수 있는 칸으로 튕겨 꽂힌다.
         private void PlantAtLaneEnd(int now)
         {
             var map = Map;
@@ -721,7 +667,6 @@ namespace VVRace
             ScatterTo(near.IsValid ? near : _boss.Position, -_laneDir);
         }
 
-        // 2페이즈: 바닥에 꽂힌다(흙먼지·파편과 찌르는 소리).
         private void Plant(int now)
         {
             _state = NeedleState.Planted;
@@ -735,7 +680,6 @@ namespace VVRace
             ApocryphaUtility.ShakeCamera(Map, 0.3f);
         }
 
-        // 2페이즈: 튕겨 나가 바닥으로 날아가는 중. 출발 방향으로 솟았다가 휘어 내리꽂힌다.
         private void TickScattering(int now)
         {
             var t = Mathf.Clamp01((now - _stateStartTick) / (float)Mathf.Max(1, _scatterTicks));
@@ -768,7 +712,6 @@ namespace VVRace
             c2 = p3 - inDir * ScatterInWeight + new Vector3(0f, 0f, ScatterLift * 0.5f);
         }
 
-        // 2페이즈: 꽂혀 있는 동안 깨울 수 있다는 듯 이따금 금빛으로 반짝인다.
         private void TickPlanted(int now)
         {
             if ((now + thingIDNumber) % PlantedGlintInterval != 0) { return; }
@@ -783,7 +726,6 @@ namespace VVRace
             map.flecks.CreateFleck(data);
         }
 
-        // 2페이즈: 깨운 폰을 뒤쫓으며 겨눈다. 시간이 다 되면 그 각도로 굳어(Aiming) 잠시 떨다가 쏜다.
         private void TickLockOn(int now)
         {
             UpdateLockDirection();
@@ -811,7 +753,6 @@ namespace VVRace
             PlayEffectAt(ApocryphaEffecterDefOf.VV_Effecter_ApocryphaNeedleAim, _pos);
         }
 
-        // 깨운 폰이 맵에 있으면 발사 방향을 그 폰(그려지는 자리) 쪽으로 돌린다. 폰이 사라졌으면 마지막 방향을 유지한다.
         private void UpdateLockDirection()
         {
             var target = _lockTarget;
@@ -832,7 +773,6 @@ namespace VVRace
             _laneLength = LaneLengthInsideMap(_laneStart, _laneDir, BossComp?.Props.needleRange ?? 32f);
         }
 
-        // 2페이즈: 보스에게 꽂힌다. 꽂힌 자리(몸통 중심 기준)와 각도를 기억해 보스를 따라 붙어 다닌다.
         private void Stick(int now)
         {
             _state = NeedleState.Stuck;
@@ -852,7 +792,6 @@ namespace VVRace
             BossComp?.Notify_NeedleStuck(this);
         }
 
-        // 꽂힌 채 보스를 따라간다. 꽂힌 직후 잠시 떤다.
         private void TickStuck(int now)
         {
             var elapsed = now - _stateStartTick;
@@ -866,7 +805,6 @@ namespace VVRace
             }
         }
 
-        // from에서 outDir 쪽으로 조금 더 나아갔다가 휘어 자리로 돌아온다.
         private void StartReturn(int now, Vector3 from, Vector3 outDir)
         {
             _state = NeedleState.Returning;
@@ -875,7 +813,7 @@ namespace VVRace
             _returnOutDir = outDir;
             _returnProgress = 0f;
 
-            // 베지어 곡선 길이의 근삿값(현과 조절점 다각형 길이의 평균). 일정한 속도로 돌아오는 데 쓴다.
+            // 귀환 속도를 일정하게 맞추기 위해 현 길이와 제어점 다각형 길이의 평균으로 베지어 곡선 길이를 근사한다.
             GetReturnCurve(now, out var p0, out var c1, out var c2, out var p3);
             var chord = Vector3.Distance(p0, p3);
             var polygon = Vector3.Distance(p0, c1) + Vector3.Distance(c1, c2) + Vector3.Distance(c2, p3);
@@ -904,8 +842,6 @@ namespace VVRace
             }
         }
 
-        // 귀환 곡선: 출발점에서 _returnOutDir(사거리 끝에서는 발사 방향, 뽑힐 때는 그 반대) 쪽으로 더 나아가다 휘어 들어,
-        // 자리 바깥쪽에서 자리로 들어온다(자리는 보스를 따라 움직인다).
         private void GetReturnCurve(int now, out Vector3 p0, out Vector3 c1, out Vector3 c2, out Vector3 p3)
         {
             p0 = _returnFrom;
@@ -923,11 +859,6 @@ namespace VVRace
         #endregion
 
         #region 피해
-        // 촉이 시작점으로부터 from~to칸 사이를 지나는 동안 경고 띠에 걸친 폰·건물에 한 번씩 관통 피해를 준다(경고 띠와 같은 범위):
-        // 폰은 그려지는 자리(DrawPos)를 중심으로 반경 PawnHitRadius가 띠에 걸치면, 건물은 차지한 칸(정사각형)이 띠에 걸치면 맞는다.
-        // 띠의 양 끝(시작점·사거리 끝)에서도 같은 만큼 걸치면 맞는다.
-        // 구조물은 세력과 관계없이(자연 암벽·폐허 포함) 폰이 받는 피해의 2배를 받는다(VV_GiantNeedlePierce의 buildingDamageFactor).
-        // 보스·거대 말벌·보스가 피운 꽃·엔딩 제단과 영원꽃(사출탄 폭발 제외 목록), 보스 세력, 쓰러진 폰, 내구도가 없는 건물은 뺀다.
         private void DamageAlong(float from, float to)
         {
             var map = Map;
@@ -975,8 +906,8 @@ namespace VVRace
             _tmpCellThings.Clear();
         }
 
-        // point를 중심으로 띠 폭 방향 extentAcross, 길이 방향 extentAlong만큼 퍼진 몸이 촉이 지나는 구간(from~to) 안의 띠에 걸치는지.
-        // 띠의 양 끝에서는 몸이 걸치기만 해도 들고, 그 사이에서는 몸 중심이 구간 안에 있어야 한다(틱마다 이어지는 구간이 겹쳐 세지 않게).
+        // point에서 폭 방향으로 extentAcross, 길이 방향으로 extentAlong만큼 퍼진 대상이 촉의 이동 구간(from~to)에 걸치는지 판정한다.
+        // 틱 사이의 중복 판정을 피하도록 띠 양 끝에서는 일부만 걸쳐도 허용하고 중간 구간에서는 중심이 포함돼야 한다.
         private bool OverlapsLane(Vector3 point, float extentAcross, float extentAlong, float from, float to)
         {
             var rel = (point - _laneStart).Yto0();
@@ -1028,7 +959,6 @@ namespace VVRace
             SpawnPierceEffect(map, cell, drawPos);
         }
 
-        // 엘텍스 바늘의 꿰뚫음 연출(VV_Fleck_NeedlePierce + 파편)을 발사 방향으로 크게 낸다.
         private void SpawnPierceEffect(Map map, IntVec3 cell, Vector3 drawPos)
         {
             if (map == null || !cell.InBounds(map)) { return; }
@@ -1064,8 +994,6 @@ namespace VVRace
             var alpha = Mathf.Clamp01((GenTicks.TicksGame - _spawnTick) / (float)FadeInTicks);
             if (alpha <= 0f) { return; }
 
-            // 2페이즈에서 보스가 띠 안에 들어와 있으면 띠를 자홍빛으로 바꿔 '이대로 쏘면 보스에게 꽂힌다'는 것을 알린다.
-            // 2페이즈의 띠는 깨운 순간부터 발사까지 한 번에 차오른다(폰을 뒤쫓는 동안 절반, 각도가 굳은 뒤 나머지).
             if (_state == NeedleState.Aiming || _state == NeedleState.LockOn)
             {
                 var unbound = IsUnbound;
@@ -1092,15 +1020,12 @@ namespace VVRace
                 ApocryphaNeedleRenderer.DrawLane(_laneStart, _laneDir, _laneLength, HalfWidth * 2f, progress, alpha, bossInLane, aimSecs, aimDuration, thingIDNumber);
             }
 
-            // 발사 직후: 촉이 지나간 직선 위의 공간이 순간 일그러진다(_travelled = 촉이 나아간 거리, 꽂혔으면 꽂힌 자리까지).
             var warpAge = GenTicks.TicksGame - _fireTick;
             if ((IsFlying || IsStuck) && warpAge >= 0 && warpAge < WarpTicks)
             {
                 ApocryphaNeedleRenderer.DrawWarp(_laneStart, _laneDir, _laneLength, Mathf.Max(0f, _travelled), warpAge / 60f, alpha);
             }
 
-            // 보스에게 꽂혀 있으면 촉이 몸속에 묻히고 꽂힌 자리의 외피가 금 간 그림으로 바꿔 그린다. 바닥에 꽂혀 있을 때도 같은 그림(촉이 땅에 묻힘)에
-            // 깨울 수 있음을 알리는 작은 연꽃 표식을 더한다.
             if (IsStuck || IsPlanted)
             {
                 var stuckSecs = (GenTicks.TicksGame - _stateStartTick) / 60f;
@@ -1122,7 +1047,6 @@ namespace VVRace
         #endregion
 
         #region 도우미
-        // 보스 몸(발밑과 몸통 중심 두 점, 반경 BossHitRadius)이 발사 직선 띠에 처음 닿는 지점(시작점에서의 거리). 닿지 않으면 -1.
         private float BossContactAlong()
         {
             if (_boss == null || !_boss.Spawned || _laneLength <= 0f) { return -1f; }
@@ -1147,7 +1071,6 @@ namespace VVRace
             return best;
         }
 
-        // 자리 위치: 1페이즈는 등 뒤 핀 판넬의 slot번째 바늘(안쪽부터), 2페이즈는 몸통 중심 둘레 궤도를 고르게 나눈 slot번째 자리.
         private Vector3 SlotPos(int now)
         {
             if (IsUnbound)
@@ -1157,13 +1080,11 @@ namespace VVRace
                 return BodyCenter + new Vector3(Mathf.Cos(orbit) * OrbitRadiusX, 0f, Mathf.Sin(orbit) * OrbitRadiusZ + bob);
             }
 
-            // 판넬 전체가 한 몸처럼 함께 오르내린다.
             var side = FinSide;
             var root = new Vector3((FinRootX + _slot * FinStepX) * side, 0f, FinRootZ + _slot * FinStepZ + FinBobHeight * Mathf.Sin(now * 0.04f));
             return BodyCenter + root + FinDirection(now, side) * FinCenterFromRoot;
         }
 
-        // 핀 판넬 바늘이 가리키는 방향(위에서 바깥쪽으로 기움).
         private Vector3 FinDirection(int now, float side)
         {
             var tilt = (FinTiltInner + _slot * FinTiltStep + FinSwayDegrees * Mathf.Sin(now * 0.02f + _slot * 0.9f)) * Mathf.Deg2Rad;
@@ -1176,7 +1097,6 @@ namespace VVRace
             return _slot * 360f / count + (now % 1440) * OrbitDegreesPerTick;
         }
 
-        // 자리에서의 바늘 끝 방향: 1페이즈는 핀 판넬 방향, 2페이즈는 몸통 중심의 바깥쪽.
         private float SlotAngle(int now)
         {
             if (!IsUnbound)
@@ -1193,13 +1113,11 @@ namespace VVRace
             return _laneStart + _laneDir * distance;
         }
 
-        // 촉이 tipDistance에 있을 때 바늘 몸통(그림 중심)의 자리
         private Vector3 BodyOnLane(float tipDistance)
         {
             return PointOnLane(tipDistance - NeedleTipOffset);
         }
 
-        // 맵 밖으로 나가지 않는 발사 직선 길이(최대 range).
         private float LaneLengthInsideMap(Vector3 start, Vector3 direction, float range)
         {
             var size = Map.Size;
@@ -1242,7 +1160,6 @@ namespace VVRace
             Trail?.RegisterNewTrail(point);
         }
 
-        // 정확한 월드 위치에서 이펙트를 한 번 재생한다(칸 중심에서의 차이를 이펙터 오프셋으로 넘긴다).
         private void PlayEffectAt(EffecterDef effecterDef, Vector3 point)
         {
             var cell = point.ToIntVec3().ClampInsideMap(Map);
@@ -1259,7 +1176,7 @@ namespace VVRace
             return t * t * (3f - 2f * t);
         }
 
-        // 1.7 Mathf에는 LerpAngle이 없다. 짧은 쪽으로 돌아가며 보간한다.
+        // 1.7 Mathf에는 LerpAngle이 없으므로 짧은 회전 방향으로 직접 보간한다.
         private static float LerpAngle(float from, float to, float t)
         {
             return from + Mathf.DeltaAngle(from, to) * Mathf.Clamp01(t);

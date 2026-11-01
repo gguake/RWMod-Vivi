@@ -190,7 +190,7 @@ namespace VVRace
 
             if (props.manaGenerateRule != null)
             {
-                // CompMana의 캐시(250틱 주기 갱신) 대신 실시간 계산값을 사용해 규칙별 행과 일치시킨다.
+                // 규칙별 표시와 합계가 일치하도록 250틱 주기의 CompMana 캐시 대신 실시간 계산값을 사용한다.
                 var healthPct = (float)plant.HitPoints / plant.MaxHitPoints;
                 var generatesByDay = plant.Spawned ?
                     Mathf.RoundToInt(props.manaGenerateRule.CalcManaFlux(plant) * healthPct) : 0;
@@ -283,7 +283,7 @@ namespace VVRace
             }
         }
 
-        // 상수 규칙은 기본 수치로 취급해 목록에 표시하지 않는다. (합계에는 포함)
+        // 상수 규칙은 기본 수치로 취급해 합계에만 포함하고 목록에서는 숨긴다.
         private IEnumerable<ManaFluxRule> EnumerateLeafRules(ManaFluxRule rule)
         {
             if (rule is ManaFluxRule_CompositeSum composite)

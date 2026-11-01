@@ -193,7 +193,6 @@ namespace VVRace
 
         public override AcceptanceReport ClaimableBy(Faction by)
         {
-            // 자생지에서 생긴 무소유 마법 식물은 def의 claimable=false와 관계없이 점유할 수 있다.
             if (Faction == null && by != null)
             {
                 for (int i = 0; i < AllComps.Count; ++i)
@@ -224,7 +223,6 @@ namespace VVRace
                 return true;
             }
 
-            // 무소유 식물은 점유할 수 있으면 해체할 수 있다.
             return Faction == null ? ClaimableBy(faction) : false;
         }
 
@@ -281,7 +279,6 @@ namespace VVRace
             }
         }
 
-        // 정보 탭(ITab_ArcanePlant)에 표시할 thingClass 고유 기능 설명. comp의 기능은 IArcanePlantFunctionProvider로 수집한다.
         public virtual IEnumerable<string> GetUniqueFunctionDescriptions()
         {
             yield break;

@@ -7,8 +7,6 @@ using Verse.Sound;
 
 namespace VVRace
 {
-    // 2페이즈 독성 브레스 준비(VV_ApocryphaBreath) 동안 제자리에서 대상 칸을 바라보는 작업. 시간 판정과 실제 방출은 CompApocrypha가 한다.
-    // (1페이즈 사출 포격 조준은 이동을 멈추지 않도록 CompApocrypha가 작업 없이 처리한다)
     public class JobDriver_ApocryphaBreath : JobDriver
     {
         private const TargetIndex CellIndex = TargetIndex.A;
@@ -46,7 +44,6 @@ namespace VVRace
             yield return toil;
         }
 
-        // 브레스 준비: 입에서 독액 섞인 가스가 흘러내린다.
         private void TickBreathVisuals(CompApocrypha comp)
         {
             if (!pawn.IsHashIntervalTick(BreathDroolInterval)) { return; }

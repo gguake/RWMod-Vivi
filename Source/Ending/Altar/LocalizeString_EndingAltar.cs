@@ -1,6 +1,5 @@
 ﻿namespace VVRace
 {
-    // 엔딩 퀘스트 — 영원꽃 제단·5/6단계 영원꽃 문구 (Keyed/Ending_Altar.xml)
     public static class LocalizeString_EndingAltar
     {
         public const string VV_Message_EverflowerEnshrined = nameof(VV_Message_EverflowerEnshrined);

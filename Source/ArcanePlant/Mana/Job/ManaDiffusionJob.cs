@@ -1,4 +1,4 @@
-using System.Numerics;
+﻿using System.Numerics;
 using Unity.Collections;
 using Unity.Collections.LowLevel.Unsafe;
 using Waylith.Jobs;
@@ -19,7 +19,7 @@ namespace VVRace
         [WriteOnly]
         public NativeArray<float> outputGrid;
 
-        // Each invocation owns one output row; the input grid is never modified.
+        // 각 호출은 출력 행 하나만 갱신하며 입력 그리드는 수정하지 않는다.
         public unsafe void Execute(int y)
         {
             var input = (float*)manaGrid.GetUnsafeReadOnlyPtr();
@@ -42,7 +42,7 @@ namespace VVRace
             {
                 var threshold = new Vector<float>(0.01f);
                 var maximum = new Vector<float>(1000f);
-                // Include the right neighbor of the last lane without crossing a row.
+                // 오른쪽 이웃을 읽어도 행 경계를 넘지 않도록 SIMD 처리 범위를 제한한다.
                 var lastVectorColumn = w - 1 - Vector<float>.Count;
                 for (; column <= lastVectorColumn; column += Vector<float>.Count)
                 {

@@ -64,7 +64,6 @@ namespace VVRace
         public IEnumerable<Pawn> GetFairyficatedPawns(Pawn pawn) => _fairyficated.Where(v => v.linker == pawn).Select(v => v.fairy);
         private List<FairyficatedPawn> _fairyficated = new List<FairyficatedPawn>();
 
-        // 엔딩 퀘스트 〈만개하는 여명〉 상태. 새 게임 컴포넌트를 만들지 않고 이 컴포넌트에서 보관·저장하고 틱을 처리한다.
         public ViviEndingQuest EndingQuest => _endingQuest;
         private ViviEndingQuest _endingQuest = new ViviEndingQuest();
 
@@ -126,7 +125,7 @@ namespace VVRace
             _endingQuest?.Tick();
         }
 
-        // 화면 섬광 제거 등 엔딩 연출의 실시간 처리를 담당한다(일시정지와 무관).
+        // 화면 섬광 제거 등 실시간 연출은 일시정지 중에도 처리한다.
         public override void GameComponentUpdate()
         {
             _endingQuest?.Update();

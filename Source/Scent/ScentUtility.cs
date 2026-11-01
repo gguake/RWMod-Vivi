@@ -6,9 +6,8 @@ namespace VVRace
     {
         public const int DiffusionIntervalTicks = 1000;
 
-        // 향 hediff는 severity가 하루 -2.4로 감쇠하며, 0.2 간격 스테이지로 효과 단계가 결정된다.
-        // 소스 severity가 0.2의 배수에 정확히 걸치면 감쇠·재적용 사이에 단계가 진동하므로
-        // 경계에 걸치는 값은 피할 것 (방 확산이 0.2가 아니라 0.199인 이유).
+        // 향 헤디프의 severity는 하루에 2.4씩 줄고 효과 단계는 0.2 간격으로 바뀐다.
+        // 0.2의 배수에서는 감쇠와 재적용으로 단계가 오르내리므로 확산 농도를 0.199로 둔다.
         public const float FullScentSeverity = 1f;
         public const float GatherScentSeverity = 0.5f;
         public const float RoomScentSeverity = 0.199f;
@@ -57,7 +56,6 @@ namespace VVRace
                 return true;
             }
 
-            // 다른 향은 severity가 엄격히 높은 쪽만 우선한다. 동률이면 기존 향 유지.
             if (severity <= maxOtherSeverity) { return false; }
 
             for (int i = hediffs.Count - 1; i >= 0; --i)

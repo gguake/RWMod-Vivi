@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using RPEF;
 using Waylith;
 using UnityEngine;
@@ -62,7 +62,6 @@ namespace VVRace
         [Unsaved]
         private float? _drawAltitude;
 
-        // 돌진 공격 상태.
         [Unsaved]
         private bool _attackGraphicActive;
         [Unsaved]
@@ -86,7 +85,6 @@ namespace VVRace
         public bool InAction => Role != FairyRole.None;
         public bool IsAvailable => _state == FairyState.Idle && CurrentJob.Kind == FairyJobKind.Idle;
         public bool LifespanExpired => GenTicks.TicksGame - _spawnTick >= _lifespanTicks;
-
 
         public CompViviHolder Controller => _owner != null ? _owner.GetComp<CompViviHolder>() : null;
         public FairyJob CurrentJob
@@ -171,7 +169,6 @@ namespace VVRace
         {
             get
             {
-                // 그 외(행동중/순간이동/생성·소멸/세션 배정 등)는 _realPosition + MoteOverhead 수준으로.
                 var p = SmoothedDrawPosition();
                 p.y = _drawAltitude ?? AltitudeLayer.MoteOverhead.AltitudeFor();
                 return p;
@@ -224,7 +221,7 @@ namespace VVRace
                         FairyJobInterruptReason.LifespanExpired :
                         FairyJobInterruptReason.DematerializeAll);
 
-                    // OnInterrupted가 이미 소멸 작업을 시작했다면 여기서 또 시작하면 페이즈 이펙트가 중복 재생된다.
+                    // OnInterrupted가 소멸 작업을 시작한 경우 다시 시작하면 페이즈 이펙트가 중복 재생된다.
                     if (_job != null && !_job.Ended && _job.Kind == FairyJobKind.Dematerialize)
                     {
                         return;
@@ -527,7 +524,6 @@ namespace VVRace
 
         private void UpdateFacing()
         {
-            // 이동/공격 중에는 진행 방향을 향한다. 대기 궤도 중의 방향은 OrbitIdleStep이 접선 방향으로 갱신한다.
             if (_state == FairyState.Attacking || _state == FairyState.MovingToRest)
             {
                 if (_realDirection.sqrMagnitude > 0.0001f)
@@ -579,7 +575,7 @@ namespace VVRace
                 {
                     EnsureOrbitVariation();
                 }
-                // 이동/공격 상태는 저장된 토일이 그대로 이어가므로 언세이브 필드인 공격 그래픽만 복원한다.
+                // 이동·공격은 저장된 토일이 이어서 처리하므로 저장되지 않는 공격 그래픽만 복원한다.
                 if (_state == FairyState.Attacking)
                 {
                     _attackGraphicActive = true;

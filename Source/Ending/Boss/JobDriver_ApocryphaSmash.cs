@@ -7,8 +7,6 @@ using Verse.Sound;
 
 namespace VVRace
 {
-    // 2페이즈 돌진 경로를 가로막는 구조물을 일반 근접 공격 대신 30틱마다 400 피해로 부순다.
-    // 대상 선정(제단·영원꽃 제외)은 JobGiver_ApocryphaMain.CanSmash가 하고, 여기서도 한 번 더 확인한다.
     public class JobDriver_ApocryphaSmash : JobDriver
     {
         private const TargetIndex BlockerIndex = TargetIndex.A;

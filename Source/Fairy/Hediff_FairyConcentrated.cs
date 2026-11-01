@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using System.Collections.Generic;
 using Verse;
 
@@ -109,8 +109,8 @@ namespace VVRace
 
             EndTargetMarkerEffect();
 
-            // Pawn.Kill이 hediff 목록을 정방향 순회하며 이 메서드를 호출하므로,
-            // 여기서 즉시 제거하면 목록이 당겨져 다음 hediff의 Notify_PawnDied가 건너뛰어진다.
+            // Pawn.Kill은 헤디프 목록을 정방향으로 순회한다.
+            // 여기서 즉시 제거하면 목록이 당겨져 다음 헤디프의 Notify_PawnDied가 누락된다.
             var deadPawn = pawn;
             LongEventHandler.ExecuteWhenFinished(() =>
             {

@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using System.Linq;
 using Verse;
 
@@ -48,7 +48,7 @@ namespace VVRace
         public override bool GizmoDisabled(out string reason)
         {
             var ctrl = Controller;
-            // 이미 전개 중이면 토글 해제 가능하므로 활성.
+            // 전개 중에도 해제할 수 있도록 활성 상태를 유지한다.
             if (ctrl != null && ctrl.GetActiveJob<FairyJob_Expansion>() != null)
             {
                 reason = null;

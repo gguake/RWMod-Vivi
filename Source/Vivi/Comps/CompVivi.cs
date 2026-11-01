@@ -170,7 +170,6 @@ namespace VVRace
                     RefreshHairColor();
                 }
 
-                // 5/6단계 영원꽃의 비비 보상(잔향 상시 유지, 영원꽃의 축복)
                 if (parent.IsHashIntervalTick(EverflowerBlessingUtility.RefreshIntervalTicks, delta))
                 {
                     EverflowerBlessingUtility.RefreshFor((Pawn)parent);
@@ -315,8 +314,6 @@ namespace VVRace
             RefreshEverflowerHediffs();
         }
 
-        // 여왕의 대관식: 성체 일반 비비를 로열 비비로 승격한다.
-        // 자연 승격(Notify_AdultLifeStageStart)과 같은 순서로 체형·의류·그래픽을 갱신하며, 편지는 의식 결과에서 보낸다.
         public bool Coronate()
         {
             var pawn = (Pawn)parent;
@@ -424,8 +421,8 @@ namespace VVRace
             RefreshFairyBondHediff(pawn);
         }
 
-        // 요정 비비 결속(VV_ViviFairyFollow): 수치를 현재 결속 수에 맞추고(RefreshBondHediff, 구 세이브에 남은 어긋난 수치 보정),
-        // 6단계 영원꽃과의 연결 여부에 따라 단계가 바뀌었을 수 있으므로 스탯 캐시를 갱신한다(레벨 변경·스폰·불러오기 후 갱신 때마다).
+        // RefreshBondHediff로 구버전 세이브에 남은 결속 수치 오차를 보정한다.
+        // 6단계 영원꽃과의 연결로 효과 단계도 바뀔 수 있으므로 스탯 캐시를 갱신한다.
         private void RefreshFairyBondHediff(Pawn pawn)
         {
             if (pawn.Dead) { return; }
