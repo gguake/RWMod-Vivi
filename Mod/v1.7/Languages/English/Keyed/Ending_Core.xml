@@ -2,7 +2,7 @@
 <LanguageData>
 
 <!-- Ending quest: quests tab (the missive quest is named after the missive letter) -->
-<VV_Quest_EndingMissiveGoals>Contact the vivi federation via comms console and complete a task to earn an ancient amber core. Use it to build the everflower altar, enshrine a level 4 everflower at its center, and perform the grand attunement to begin the fifth bloom.
+<VV_Quest_EndingMissiveGoals>Contact the vivi federation via comms console and complete a task to earn an ancient amber core. Use it to build the everflower altar, enshrine a level 4 everflower at its center, and perform the full bloom ritual to begin the fifth bloom.
 \nYou cannot request another task while an ancient amber core or an altar built with one still exists.</VV_Quest_EndingMissiveGoals>
 <VV_Quest_EndingName>Dawn in full bloom</VV_Quest_EndingName>
 <VV_Quest_EndingDesc>The everflower on the altar has entered its fifth bloom and is condensing mana for its final bloom.
@@ -116,7 +116,7 @@
 <VV_Message_EndingApocryphaLanded>Driven back by the everflower's wave, Apocrypha has landed at the edge of the map with a swarm of titanic hornets.</VV_Message_EndingApocryphaLanded>
 <VV_Message_EndingPawnReturned>{PAWN_labelShort} has returned in front of the everflower altar.</VV_Message_EndingPawnReturned>
 <VV_Message_EndingPawnReturnedToCaravan>{PAWN_labelShort} has returned and joined {CARAVAN_label}.</VV_Message_EndingPawnReturnedToCaravan>
-<VV_Message_EndingGrandAttunementNotStarted>The grand attunement has ended, but the everflower could not begin its fifth bloom.</VV_Message_EndingGrandAttunementNotStarted>
+<VV_Message_EndingGrandAttunementNotStarted>The full bloom ritual has ended, but the everflower could not begin its fifth bloom.</VV_Message_EndingGrandAttunementNotStarted>
 
 <!-- Ending quest: bloom condensation gizmo / inspector -->
 <VV_Gizmo_EndingBloom>Bloom condensation</VV_Gizmo_EndingBloom>

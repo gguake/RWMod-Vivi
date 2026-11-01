@@ -7,7 +7,7 @@
 <VV_FailReason_GrandAttunementInProgress>마지막 개화가 이미 진행 중입니다.</VV_FailReason_GrandAttunementInProgress>
 <VV_FailReason_GrandAttunementCompleted>마지막 개화가 이미 완료되었습니다.</VV_FailReason_GrandAttunementCompleted>
 <VV_FailReason_GrandAttunementFailed>마지막 개화가 실패해 더 진행할 수 없습니다.</VV_FailReason_GrandAttunementFailed>
-<VV_FailReason_CoronationNotAnchor>대조율 의식으로 개화를 시작한 영원꽃에서만 진행할 수 있습니다.</VV_FailReason_CoronationNotAnchor>
+<VV_FailReason_CoronationNotAnchor>만개 의식으로 개화를 시작한 영원꽃에서만 진행할 수 있습니다.</VV_FailReason_CoronationNotAnchor>
 <VV_FailReason_CoronationLocked>개화 응축이 완료된 뒤에만 진행할 수 있습니다.</VV_FailReason_CoronationLocked>
 
 <!-- 메시지 -->
@@ -20,6 +20,6 @@
 <!-- 영원꽃 완전 동화 -->
 <VV_Message_AssimilationBegan>{PAWN_labelShort}(이)가 영원꽃과 완전히 동화되어 공중으로 떠올랐습니다.</VV_Message_AssimilationBegan>
 <VV_Message_AssimilationReleased>영원꽃과의 완전 동화가 풀려 {PAWN_labelShort}(이)가 땅으로 내려왔습니다.</VV_Message_AssimilationReleased>
-<VV_Message_AssimilationBrokenRitual>{PAWN_labelShort}(이)가 쓰러져 영원꽃과의 동화가 끊어졌습니다. 〈대조율 의식〉이 취소되었습니다.</VV_Message_AssimilationBrokenRitual>
+<VV_Message_AssimilationBrokenRitual>{PAWN_labelShort}(이)가 쓰러져 영원꽃과의 동화가 끊어졌습니다. 〈만개 의식〉이 취소되었습니다.</VV_Message_AssimilationBrokenRitual>
 <VV_FailReason_PawnAssimilated>영원꽃과 완전히 동화되어 있음</VV_FailReason_PawnAssimilated>
 </LanguageData>

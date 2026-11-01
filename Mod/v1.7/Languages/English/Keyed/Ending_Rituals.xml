@@ -7,7 +7,7 @@
 <VV_FailReason_GrandAttunementInProgress>The final bloom is already underway.</VV_FailReason_GrandAttunementInProgress>
 <VV_FailReason_GrandAttunementCompleted>The final bloom is already complete.</VV_FailReason_GrandAttunementCompleted>
 <VV_FailReason_GrandAttunementFailed>The final bloom has failed and cannot continue.</VV_FailReason_GrandAttunementFailed>
-<VV_FailReason_CoronationNotAnchor>Requires the everflower awakened by the grand attunement.</VV_FailReason_CoronationNotAnchor>
+<VV_FailReason_CoronationNotAnchor>Requires the everflower awakened by the full bloom ritual.</VV_FailReason_CoronationNotAnchor>
 <VV_FailReason_CoronationLocked>Can only be performed once the bloom condensation is complete.</VV_FailReason_CoronationLocked>
 
 <!-- Messages -->
@@ -20,6 +20,6 @@
 <!-- Everflower full assimilation -->
 <VV_Message_AssimilationBegan>{PAWN_labelShort} has entered full assimilation with the everflower and risen into the air.</VV_Message_AssimilationBegan>
 <VV_Message_AssimilationReleased>The full assimilation with the everflower has ended, and {PAWN_labelShort} has descended to the ground.</VV_Message_AssimilationReleased>
-<VV_Message_AssimilationBrokenRitual>{PAWN_labelShort} has collapsed and her assimilation with the everflower is broken. The grand attunement has been called off.</VV_Message_AssimilationBrokenRitual>
+<VV_Message_AssimilationBrokenRitual>{PAWN_labelShort} has collapsed and her assimilation with the everflower is broken. The full bloom ritual has been called off.</VV_Message_AssimilationBrokenRitual>
 <VV_FailReason_PawnAssimilated>fully assimilated with the everflower</VV_FailReason_PawnAssimilated>
 </LanguageData>

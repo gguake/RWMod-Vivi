@@ -284,7 +284,7 @@ namespace VVRace
             var stage = Stage;
             if (stage != ViviEndingStage.AltarUnlocked)
             {
-                Log.Warning($"[ViViRace] grand attunement completed at ending stage {stage}; the siege only starts from {ViviEndingStage.AltarUnlocked}.");
+                Log.Warning($"[ViViRace] full bloom ritual completed at ending stage {stage}; the siege only starts from {ViviEndingStage.AltarUnlocked}.");
                 return false;
             }
 
@@ -459,8 +459,8 @@ namespace VVRace
             return true;
         }
 
-        // 대조율 외의 이유로 밀서 퀘스트가 종료되면 서신을 재발송하지 않고 퀘스트만 다시 만든다.
-        // 다른 모드나 개발자 도구의 종료로 코어 의뢰와 대조율이 막히는 일을 방지한다.
+        // 만개 의식 외의 이유로 밀서 퀘스트가 종료되면 서신을 재발송하지 않고 퀘스트만 다시 만든다.
+        // 다른 모드나 개발자 도구의 종료로 코어 의뢰와 만개 의식이 막히는 일을 방지한다.
         private void ReissueEndedMissiveQuest()
         {
             var ended = _missiveQuest;

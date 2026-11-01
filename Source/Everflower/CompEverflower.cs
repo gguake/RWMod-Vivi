@@ -451,8 +451,8 @@ namespace VVRace
 
         private void SendLevelUpLetter(int level)
         {
-            // 대조율과 여왕의 대관식은 각각 4·5단계 도달 시점에 아직 잠겨 있으므로 해금 목록에서 제외한다.
-            // 대조율은 제단 해금 서신·안치 메시지로, 대관식은 토벌 후 대기 서신으로 안내한다.
+            // 만개 의식과 여왕의 대관식은 각각 4·5단계 도달 시점에 아직 잠겨 있으므로 해금 목록에서 제외한다.
+            // 만개 의식은 제단 해금 서신·안치 메시지로, 대관식은 토벌 후 대기 서신으로 안내한다.
             var rituals = new List<string>();
             foreach (var ritualDef in DefDatabase<PreceptDef>.AllDefsListForReading)
             {

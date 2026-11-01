@@ -2,7 +2,7 @@
 <LanguageData>
 
 <!-- 엔딩 퀘스트: 퀘스트 탭 (밀서 퀘스트 이름은 서신 편지 제목을 쓴다) -->
-<VV_Quest_EndingMissiveGoals>통신기로 비비 연방의 의뢰를 받아 고대 호박 코어를 얻고, 영원꽃 제단을 건설하십시오. 조율 4단계 영원꽃을 제단 중앙에 안치한 뒤 〈대조율 의식〉을 치르면 다섯 번째 개화가 시작됩니다.
+<VV_Quest_EndingMissiveGoals>통신기로 비비 연방의 의뢰를 받아 고대 호박 코어를 얻고, 영원꽃 제단을 건설하십시오. 조율 4단계 영원꽃을 제단 중앙에 안치한 뒤 〈만개 의식〉을 치르면 다섯 번째 개화가 시작됩니다.
 \n고대 호박 코어나 이를 사용한 제단이 남아 있으면 추가 의뢰를 받을 수 없습니다.</VV_Quest_EndingMissiveGoals>
 <VV_Quest_EndingName>만개하는 여명</VV_Quest_EndingName>
 <VV_Quest_EndingDesc>제단 위의 영원꽃이 다섯 번째 개화를 맞아 마지막 개화에 필요한 마나를 응축하고 있습니다.
@@ -116,7 +116,7 @@
 <VV_Message_EndingApocryphaLanded>영원꽃의 파동에 밀려난 아포크리파가 거대 말벌 무리를 이끌고 지역 외곽에 나타났습니다.</VV_Message_EndingApocryphaLanded>
 <VV_Message_EndingPawnReturned>{PAWN_labelShort}(이)가 영원꽃 제단 앞으로 돌아왔습니다.</VV_Message_EndingPawnReturned>
 <VV_Message_EndingPawnReturnedToCaravan>{PAWN_labelShort}(이)가 돌아와 {CARAVAN_label}에 합류했습니다.</VV_Message_EndingPawnReturnedToCaravan>
-<VV_Message_EndingGrandAttunementNotStarted>〈대조율 의식〉이 끝났지만 영원꽃이 다섯 번째 개화를 시작하지 못했습니다.</VV_Message_EndingGrandAttunementNotStarted>
+<VV_Message_EndingGrandAttunementNotStarted>〈만개 의식〉이 끝났지만 영원꽃이 다섯 번째 개화를 시작하지 못했습니다.</VV_Message_EndingGrandAttunementNotStarted>
 
 <!-- 엔딩 퀘스트: 개화 응축 기즈모 / 정보창 -->
 <VV_Gizmo_EndingBloom>개화 응축</VV_Gizmo_EndingBloom>

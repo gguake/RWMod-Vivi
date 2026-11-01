@@ -5,14 +5,14 @@ namespace VVRace
 {
     public static class EverflowerRitualRules
     {
-        // 〈만개하는 여명〉이 진행되는 동안 앵커 영원꽃에서는 엔딩 의식(대조율·대관식) 외의 의식을 치를 수 없다.
+        // 〈만개하는 여명〉이 진행되는 동안 앵커 영원꽃에서는 엔딩 의식(만개 의식·대관식) 외의 의식을 치를 수 없다.
         public static bool IsBlockedByEnding(ArcanePlant_Everflower everflower)
         {
             var quest = ViviEndingQuest.Current;
             return everflower != null && quest != null && quest.IsEndingActive && quest.IsAnchor(everflower);
         }
 
-        // 대조율은 엔딩을 시작하고 대관식은 끝낸다. 각자 대상 필터에서 엔딩 단계를 따로 검사한다.
+        // 만개 의식은 엔딩을 시작하고 대관식은 끝낸다. 각자 대상 필터에서 엔딩 단계를 따로 검사한다.
         public static bool IsEndingRitual(Precept_Ritual ritual)
         {
             return ritual != null && (ritual.def == EndingRitualDefOf.VV_GrandAttunement || ritual.def == EndingRitualDefOf.VV_QueensCoronation);

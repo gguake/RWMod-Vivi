@@ -44,7 +44,7 @@ namespace VVRace
             ThingOwnerUtility.AppendThingHoldersFromThings(outChildren, GetDirectlyHeldThings());
         }
 
-        // 공명자를 보관해도 의식 로드에는 남겨 대조율 의식이 끝까지 진행되게 한다.
+        // 공명자를 보관해도 의식 로드에는 남겨 만개 의식이 끝까지 진행되게 한다.
         public bool HoldResonator(Pawn pawn)
         {
             if (pawn == null || HeldResonator != null) { return false; }
