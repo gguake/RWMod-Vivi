@@ -34,13 +34,12 @@ namespace VVRace
                 EndingRitualDefOf.VV_Effecter_ResonanceWaveImpact.Spawn(boss, map, bossPos - boss.Position.ToVector3Shifted()).Cleanup();
             }
 
-            // 기절·피해 감소 완화 중첩·채널링 중단은 보스 컴프가 처리한다.
+            // 기절·채널링 중단·다음 조율 의식까지의 재사용 대기는 보스 컴프가 처리한다.
             bossComp.ApplyResonanceWave((Thing)attuner ?? everflower, StunTicks);
 
             Messages.Message(
                 LocalizeString_EndingRituals.VV_Message_ResonanceWaveHit.Translate(
-                    bossComp.ResonanceStacks.Named("STACKS"),
-                    bossComp.DamageReduction.ToStringPercent().Named("REDUCTION")),
+                    bossComp.Props.resonanceCooldownTicks.ToStringTicksToPeriod().Named("COOLDOWN")),
                 boss,
                 MessageTypeDefOf.PositiveEvent);
         }

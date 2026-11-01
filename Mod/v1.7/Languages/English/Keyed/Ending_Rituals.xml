@@ -11,7 +11,7 @@
 <VV_FailReason_CoronationLocked>Can only be performed once the bloom condensation is complete.</VV_FailReason_CoronationLocked>
 
 <!-- Messages -->
-<VV_Message_ResonanceWaveHit>The resonance wave strikes Apocrypha! (Resonance stacks: {STACKS}, incoming damage reduction: {REDUCTION})</VV_Message_ResonanceWaveHit>
+<VV_Message_ResonanceWaveHit>The resonance wave strikes Apocrypha and stuns her! (Next attunement ritual in {COOLDOWN})</VV_Message_ResonanceWaveHit>
 
 <!-- Letters -->
 <VV_Letter_ReturnOfLifeLabel>Return of life: {PAWN_labelShort}</VV_Letter_ReturnOfLifeLabel>

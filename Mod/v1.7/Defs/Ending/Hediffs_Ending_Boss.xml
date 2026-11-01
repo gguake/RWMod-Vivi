@@ -4,7 +4,7 @@
   <HediffDef>
     <defName>VV_ApocryphaFairyBond</defName>
     <label>vivi fairy</label>
-    <description>The souls of 1,440,000,000 vivis, forcibly fairyfied and bound to the last queen of the ancient empire, are wrapped around Apocrypha like armor. The bound fairies take every blow in her place, so ordinary attacks cannot harm her.
+    <description>The souls of 1,440,000,000 vivis, forcibly fairyfied and bound to the last queen of the ancient empire, are wrapped around Apocrypha like armor. The bound fairies weave a mana shield around her that takes every blow in her place. Once the shield shatters, she is stunned for a long time and scatters doom bloom seeds (and a fairy bloom seed) in her convulsions; the shield is restored when she recovers.
 \nA vivi carrying the interference of a fairy bloom can draw close and cause a mana backflow in this bond network, releasing a vast number of fairies at once.</description>
     <hediffClass>VVRace.Hediff_ApocryphaFairyBond</hediffClass>
     <defaultLabelColor>(0, 1, 1)</defaultLabelColor>
@@ -16,12 +16,13 @@
     <maxSeverity>1</maxSeverity>
   </HediffDef>
 
-  <!-- 2페이즈 〈시조의 외피〉: 받는 피해 감소율 표시(실제 감소는 CompApocrypha)와 이동속도 보정(1.5 → 8.1). -->
+  <!-- 2페이즈 〈시조의 외피〉: 꽂힌 바늘에 따른 받는 피해 배율 표시(실제 배율은 CompApocrypha)와 이동속도 보정(1.5 → 5.0). -->
   <HediffDef>
     <defName>VV_ApocryphaCarapace</defName>
     <label>primordial carapace</label>
-    <description>Freed from the weight of billions of souls, the body of the progenitor hornet is sheathed in a carapace condensed over centuries. It reduces all incoming damage by 99%.
-\nEvery resonance wave released by an everflower attunement ritual stuns Apocrypha and cracks the carapace further, lowering the reduction to 50%, 30%, 15%, 5% and finally nothing.</description>
+    <description>Freed from the weight of billions of souls, the progenitor hornet is sheathed in a carapace condensed over centuries, and three giant eltex needles circle her, striking on their own.
+\nA needle that fires while Apocrypha stands in its path pierces her instead and stays lodged in her carapace. Each lodged needle increases the damage she takes (+50%, +100%, +300%). Once all three are lodged she is stunned for a long time, and when she recovers she tears the needles out.
+\nThe resonance wave of an everflower attunement ritual still stuns her.</description>
     <hediffClass>VVRace.Hediff_ApocryphaCarapace</hediffClass>
     <defaultLabelColor>(1, 0.42, 0.85)</defaultLabelColor>
     <isBad>false</isBad>
@@ -33,7 +34,7 @@
     <stages>
       <li>
         <statOffsets>
-          <MoveSpeed>6.6</MoveSpeed>
+          <MoveSpeed>3.5</MoveSpeed>
         </statOffsets>
       </li>
     </stages>

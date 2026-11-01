@@ -11,7 +11,7 @@
 <VV_FailReason_CoronationLocked>개화 응축이 완료된 뒤에만 진행할 수 있습니다.</VV_FailReason_CoronationLocked>
 
 <!-- 메시지 -->
-<VV_Message_ResonanceWaveHit>공명 파동이 아포크리파를 강타했습니다! (공명 중첩 {STACKS}, 받는 피해 감소 {REDUCTION})</VV_Message_ResonanceWaveHit>
+<VV_Message_ResonanceWaveHit>공명 파동이 아포크리파를 강타해 기절시켰습니다! (다음 조율 의식까지 {COOLDOWN})</VV_Message_ResonanceWaveHit>
 
 <!-- 편지 -->
 <VV_Letter_ReturnOfLifeLabel>생명의 회귀: {PAWN_labelShort}</VV_Letter_ReturnOfLifeLabel>

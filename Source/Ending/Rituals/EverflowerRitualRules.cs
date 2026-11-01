@@ -7,7 +7,7 @@ namespace VVRace
     // 세 행동 워커(조율/일반/요정화)의 CanStartRitualNow와 대상 필터가 이 규칙을 공유한다.
     public static class EverflowerRitualRules
     {
-        // 앵커 영원꽃이 아포크리파 2페이즈 전투 중인지. 이때는 조율 의식(공명 파동)만 재사용 대기 없이 허용된다.
+        // 앵커 영원꽃이 아포크리파 2페이즈 전투 중인지. 이때는 조율 의식(공명 파동)만 공유 재사용 대기 대신 짧은 공명 재사용 대기로 허용된다.
         public static bool IsResonancePhase(ArcanePlant_Everflower everflower)
         {
             if (everflower == null) { return false; }
@@ -63,8 +63,12 @@ namespace VVRace
 
             if (IsResonancePhase(everflower))
             {
-                // 2페이즈: 조율 의식은 재사용 대기를 무시하고, 나머지 의식은 모두 막는다.
-                if (IsResonanceRitual(ritual)) { return null; }
+                // 2페이즈: 조율 의식은 영원꽃의 공유 재사용 대기 대신 공명 파동의 짧은 재사용 대기(6시간)만 따르고, 나머지 의식은 모두 막는다.
+                if (IsResonanceRitual(ritual))
+                {
+                    var resonanceTicksLeft = ViviEndingQuest.Current?.BossComp?.ResonanceCooldownTicksLeft ?? 0;
+                    return resonanceTicksLeft > 0 ? (string)LocalizeString_Etc.VV_FailReason_RitualCooldown.Translate(resonanceTicksLeft.ToStringTicksToPeriod()) : null;
+                }
 
                 return LocalizeString_EndingRituals.VV_FailReason_ApocryphaInterference.Translate();
             }

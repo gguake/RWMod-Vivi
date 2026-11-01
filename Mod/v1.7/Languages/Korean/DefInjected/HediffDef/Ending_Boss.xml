@@ -2,11 +2,12 @@
 <LanguageData>
 
 <VV_ApocryphaFairyBond.label>요정 비비 결속</VV_ApocryphaFairyBond.label>
-<VV_ApocryphaFairyBond.description>고대 제국의 마지막 여왕에게 강제로 귀속된 수십억 비비의 영혼이 아포크리파를 감싸고 있습니다. 결속된 요정 비비들이 모든 공격을 대신 받아내므로 일반 공격으로는 피해를 입힐 수 없습니다.
+<VV_ApocryphaFairyBond.description>고대 제국의 마지막 여왕에게 강제로 귀속된 수십억 비비의 영혼이 아포크리파를 감싸고 있습니다. 결속된 요정 비비들이 아포크리파를 감싸는 〈마나 보호장〉이 되어 모든 공격을 대신 받아냅니다. 보호장이 깨지면 아포크리파가 오랫동안 기절하며 경련하듯 멸망꽃 씨앗(과 요정꽃 씨앗)을 흩뿌리고, 기절에서 깨어나면 보호장이 다시 차오릅니다.
 \n〈요정 간섭〉을 얻은 비비가 아포크리파에게 접근하면 결속망에 마나 역류를 일으켜 대량의 요정을 해방시킬 수 있습니다.</VV_ApocryphaFairyBond.description>
 
 <VV_ApocryphaCarapace.label>시조의 외피</VV_ApocryphaCarapace.label>
-<VV_ApocryphaCarapace.description>수백 년간 응축된 마나로 단단하게 굳어진 시조 말벌의 외피입니다. 받는 피해를 99% 감소시킵니다.
-\n〈영원꽃 조율 의식〉을 완료할 때마다 공명 파동이 외피에 균열을 일으켜 피해 감소 효과를 단계적으로 약화시킵니다.</VV_ApocryphaCarapace.description>
+<VV_ApocryphaCarapace.description>수백 년간 응축된 마나로 단단하게 굳어진 시조 말벌의 외피입니다. 둘레에는 거대 엘텍스 바늘 세 자루가 맴돌며 스스로 적을 노립니다.
+\n발사 경로에 아포크리파가 있으면 바늘이 아포크리파를 꿰뚫어 외피에 꽂힙니다. 꽂힌 바늘 하나마다 받는 피해가 늘어나며(+50%, +100%, +300%), 세 자루가 모두 꽂히면 아포크리파가 오랫동안 기절합니다. 기절에서 깨어나면 꽂힌 바늘을 뽑아냅니다.
+\n〈영원꽃 조율 의식〉의 공명 파동으로도 아포크리파를 기절시킬 수 있습니다.</VV_ApocryphaCarapace.description>
 
 </LanguageData>

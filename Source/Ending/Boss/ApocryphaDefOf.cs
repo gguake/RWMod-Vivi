@@ -16,6 +16,14 @@ namespace VVRace
         public static ThingDef VV_Mote_ApocryphaAimCharge;
         public static ThingDef VV_Mote_ApocryphaDrainVortex;
         public static ThingDef VV_Mote_ApocryphaRepelCharge;
+
+        public static ThingDef VV_ApocryphaNeedle;
+    }
+
+    [DefOf]
+    public static class ApocryphaDamageDefOf
+    {
+        public static DamageDef VV_GiantNeedlePierce;
     }
 
     [DefOf]
@@ -66,6 +74,14 @@ namespace VVRace
         public static EffecterDef VV_Effecter_ApocryphaVanish;
         public static EffecterDef VV_Effecter_ApocryphaSmash;
         public static EffecterDef VV_Effecter_ApocryphaStaggered;
+        public static EffecterDef VV_Effecter_ApocryphaShieldBreak;
+        public static EffecterDef VV_Effecter_ApocryphaShieldRestore;
+        public static EffecterDef VV_Effecter_ApocryphaNeedleAim;
+        public static EffecterDef VV_Effecter_ApocryphaNeedleFire;
+        public static EffecterDef VV_Effecter_ApocryphaNeedleHit;
+        public static EffecterDef VV_Effecter_ApocryphaNeedleEnd;
+        public static EffecterDef VV_Effecter_ApocryphaNeedleVanish;
+        public static EffecterDef VV_Effecter_ApocryphaNeedleStick;
         public static EffecterDef VV_Effecter_ApocryphaManifestComplete;
         public static EffecterDef VV_Effecter_ApocryphaRepel;
         public static EffecterDef VV_Effecter_ApocryphaManifestLand;

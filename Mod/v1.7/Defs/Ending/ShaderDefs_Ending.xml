@@ -127,6 +127,26 @@
     <shaderPath>Map/VV_MagicCircle</shaderPath>
   </ShaderTypeDef>
 
+  <!-- 거대 엘텍스 바늘 조준 경고 띠: 텍스처 없이 수식으로 발사 직선 전체·차오르는 진행도·흐르는 갈매기 무늬를 그린다(가산 혼합).
+       조준 연꽃 표식과 같은 이유로 큐를 장면 캡처(3151)보다 앞인 3150으로 둔다. -->
+  <ShaderDef>
+    <defName>VV_NeedleLane</defName>
+    <shaderProgram>
+      <vertexShaderFileName>Mote.vert.glsl</vertexShaderFileName>
+      <fragmentShaderFileName>VV_NeedleLane.frag.glsl</fragmentShaderFileName>
+      <flipTextureST>false</flipTextureST>
+      <blendMode>Additive</blendMode>
+      <depthWrite>false</depthWrite>
+      <cullMode>None</cullMode>
+      <renderQueue>3150</renderQueue>
+    </shaderProgram>
+  </ShaderDef>
+
+  <ShaderTypeDef>
+    <defName>VV_NeedleLane</defName>
+    <shaderPath>Map/VV_NeedleLane</shaderPath>
+  </ShaderTypeDef>
+
   <!-- 가산 빛(MoteGlow, 큐 3151) 위에 그리는 알파 그림: 바닐라 TransparentPostLight와 같은 셰이더를 큐만 늦춘다.
        요정 비비 사출탄의 요정이 혜성 꼬리·후광·반짝임에 덮여 하얗게 바래지 않게 한다. -->
   <ShaderDef>

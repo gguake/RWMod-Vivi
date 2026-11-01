@@ -62,8 +62,8 @@
     <label>Apocrypha, the Crumbled Queen</label>
     <description>The progenitor of every titanic hornet, and the calamity that ended the ancient vivi empire.
 \nOn the day the empire fell, its last queen forcibly fairyfied 1,440,000,000 of her scaria-stricken people at once and bound their souls to her own to save them. Under the weight of billions of souls, overloaded mana and mutated scaria, her mind shattered. She lost every trace of psychic sensitivity, her genes ran wild, and she became this crumbled queen, sleeping for centuries deep in the ruins with the souls of her people wrapped around her like armor.
-\nDrawn by the warmth of a reawakened everflower, she now creeps toward the altar to reclaim the bloom she lost. While the vivi fairy bond holds, the bound fairies absorb every blow she receives. Once released, her true form is a monstrous hornet queen guarded only by her primordial carapace.
-\nOrdinary stuns do not work on her. Only the mana wave ritual, a released fairy bond and the resonance wave of the attunement ritual can stun her.</description>
+\nDrawn by the warmth of a reawakened everflower, she now creeps toward the altar to reclaim the bloom she lost. While the vivi fairy bond holds, the bound fairies weave a mana shield that absorbs every blow she receives, and giant eltex needles hover around her, piercing everything along a wide line. Once released, her true form is a monstrous hornet queen guarded by her primordial carapace, with giant needles circling her that can be lured into piercing her own carapace.
+\nOrdinary stuns do not work on her. Only the mana wave ritual, a released fairy bond, a shattered mana shield and the resonance wave of the attunement ritual can stun her.</description>
     <drawOffscreen>true</drawOffscreen>
     <!-- 바닐라 동물 분류(Animals)에서 뺀다: 이념의 숭배 동물 후보(PreceptWorker_Animal)가 이 분류로 동물을 고른다. -->
     <thingCategories Inherit="False" />
@@ -249,4 +249,52 @@
     <altitudeLayer>MoteOverheadLow</altitudeLayer>
     <selectable>false</selectable>
   </ThingDef>
+
+  <!-- 1페이즈 거대 엘텍스 바늘: 보스 둘레에 떠 있다가 넓은 직선을 꿰뚫고 돌아온다. 몸체·경고 띠는 ApocryphaNeedleRenderer가 직접 그리고,
+       발사·귀환 궤적은 엘텍스 바늘과 같은 RPEF 궤적(점은 코드에서 직접 남긴다)으로 그린다. -->
+  <ThingDef ParentName="EtherealThingBase">
+    <defName>VV_ApocryphaNeedle</defName>
+    <label>giant eltex needle</label>
+    <thingClass>VVRace.ApocryphaNeedle</thingClass>
+    <tickerType>Normal</tickerType>
+    <drawerType>RealtimeOnly</drawerType>
+    <drawOffscreen>true</drawOffscreen>
+    <seeThroughFog>true</seeThroughFog>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <selectable>false</selectable>
+    <comps>
+      <li Class="RPEF.CompProperties_TrailRenderer">
+        <texPath>VFX/VV_GiantNeedleTrail</texPath>
+        <shader>AdditiveChangeHue</shader>
+        <color>(1.0, 0.72, 0.5)</color>
+        <widthCurve>
+          <points>
+            <li>(0, 0.3)</li>
+            <li>(1, 2.8)</li>
+          </points>
+        </widthCurve>
+        <lineTextureMode>Stretch</lineTextureMode>
+        <maxTrailPoint>60</maxTrailPoint>
+        <refreshIntervalTicks>0</refreshIntervalTicks>
+        <fadeOutTicks>24</fadeOutTicks>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- 거대 엘텍스 바늘의 관통 피해(찌르기). 피해량·방어 관통은 CompProperties_Apocrypha의 needleDamage/needleArmorPenetration을 쓴다. -->
+  <DamageDef>
+    <defName>VV_GiantNeedlePierce</defName>
+    <label>giant needle</label>
+    <workerClass>DamageWorker_Stab</workerClass>
+    <externalViolence>true</externalViolence>
+    <deathMessage>{0} was skewered by a giant eltex needle.</deathMessage>
+    <hediff>Stab</hediff>
+    <hediffSolid>Crack</hediffSolid>
+    <impactSoundType>Slice</impactSoundType>
+    <armorCategory>Sharp</armorCategory>
+    <stabChanceOfForcedInternal>0.6</stabChanceOfForcedInternal>
+    <overkillPctToDestroyPart>0.4~1.0</overkillPctToDestroyPart>
+    <defaultDamage>40</defaultDamage>
+    <defaultArmorPenetration>0.8</defaultArmorPenetration>
+  </DamageDef>
 </Defs>

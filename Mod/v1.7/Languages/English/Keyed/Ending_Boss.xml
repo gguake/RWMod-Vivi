@@ -9,31 +9,38 @@
 <VV_Inspector_ApocryphaPhase_Dying>Crumbling away</VV_Inspector_ApocryphaPhase_Dying>
 <VV_Inspector_ApocryphaBond>Vivi fairy bond: {0}</VV_Inspector_ApocryphaBond>
 <VV_Inspector_ApocryphaVitality>Vitality: {0} / {1}</VV_Inspector_ApocryphaVitality>
-<VV_Inspector_ApocryphaDamageReduction>Incoming damage reduction: {0} (resonance x{1})</VV_Inspector_ApocryphaDamageReduction>
+<VV_Inspector_ApocryphaShield>Mana shield: {0} / {1}</VV_Inspector_ApocryphaShield>
+<VV_Inspector_ApocryphaShieldBroken>Mana shield: shattered (restores in {0})</VV_Inspector_ApocryphaShieldBroken>
+<VV_Inspector_ApocryphaStuckNeedles>Lodged needles: {0} / {1} (damage taken {2})</VV_Inspector_ApocryphaStuckNeedles>
 <VV_Inspector_ApocryphaChanneling>Usurping the everflower: {0} ({1} left)</VV_Inspector_ApocryphaChanneling>
 
 <!-- Hediff -->
-<VV_Hediff_ApocryphaCarapaceReduction>damage reduction {0}</VV_Hediff_ApocryphaCarapaceReduction>
-<VV_Hediff_ApocryphaCarapaceTip>Resonance stacks: {0}\nIncoming damage reduction: {1}</VV_Hediff_ApocryphaCarapaceTip>
+<VV_Hediff_ApocryphaCarapaceDamageFactor>damage taken {0}</VV_Hediff_ApocryphaCarapaceDamageFactor>
+<VV_Hediff_ApocryphaCarapaceTip>Lodged needles: {0} / {1}\nDamage taken: {2}</VV_Hediff_ApocryphaCarapaceTip>
 <VV_Hediff_ApocryphaFairyBondTip>Bound vivi fairies: {0} / {1}</VV_Hediff_ApocryphaFairyBondTip>
 
 <!-- Alert -->
 <VV_Alert_ApocryphaChanneling>Everflower usurpation {0}</VV_Alert_ApocryphaChanneling>
 <VV_Alert_ApocryphaChannelingDesc>Apocrypha is draining the everflower's power ({PROGRESS}, {TIMELEFT} left).
 \nIf completed, Apocrypha will vanish with the everflower and the quest will fail.
-\nStunning Apocrypha interrupts the usurpation and resets its progress. She is immune to ordinary stuns and can only be stunned by the mana wave ritual, by releasing her fairy bond through fairy interference, or by the attunement ritual in her second phase.</VV_Alert_ApocryphaChannelingDesc>
+\nStunning Apocrypha interrupts the usurpation and resets its progress. She is immune to ordinary stuns and can only be stunned by the mana wave ritual, by releasing her fairy bond through fairy interference, by shattering her mana shield, or by the attunement ritual in her second phase.</VV_Alert_ApocryphaChannelingDesc>
 
 <!-- Letter -->
 <VV_Letter_ApocryphaUnboundLabel>Rampage of the Unbound Progenitor</VV_Letter_ApocryphaUnboundLabel>
 <VV_Letter_ApocryphaUnbound>The last vivi fairy bond has been released. Freed from the weight of billions of souls, Apocrypha has cast off her shackles and revealed her true form as the progenitor hornet.
-\nUnbound, Apocrypha charges straight toward the everflower, smashing through walls and structures in her path. Ordinary attacks can now harm her, though her hardened carapace reduces incoming damage by 99%.
-\nFrom now on, the everflower attunement ritual can be performed repeatedly without a cooldown. Each completed ritual unleashes a resonance wave that stuns Apocrypha and steadily weakens her carapace. Hold her back from the everflower while repeating the ritual.</VV_Letter_ApocryphaUnbound>
+\nUnbound, Apocrypha charges straight toward the everflower, smashing through walls and structures in her path. Ordinary attacks can now harm her. Three giant eltex needles circle her and strike on their own; lure them so that she stands in their path, and they will lodge in her carapace instead. Each lodged needle increases the damage she takes, and once all three are lodged she is stunned for a long time.
+\nFrom now on, the everflower attunement ritual can be performed every 6 hours. Each completed ritual unleashes a resonance wave that stuns Apocrypha. Hold her back from the everflower while you wear her down.</VV_Letter_ApocryphaUnbound>
 
 <!-- Message -->
 <VV_Message_ApocryphaBondReleased>A large number of vivi fairies bound to Apocrypha have been freed. (Remaining bond: {COUNT})</VV_Message_ApocryphaBondReleased>
 <VV_Message_ApocryphaTransformStarted>The last fairy bond has shattered! Apocrypha unleashes a shockwave that stuns every living thing.</VV_Message_ApocryphaTransformStarted>
 <VV_Message_ApocryphaChannelInterrupted>Apocrypha's usurpation of the everflower was interrupted.</VV_Message_ApocryphaChannelInterrupted>
 <VV_Message_ApocryphaEscapedRoofCollapse>Apocrypha warped away from the collapsing rock overhead.</VV_Message_ApocryphaEscapedRoofCollapse>
+<VV_Message_ApocryphaShieldBroken>Apocrypha's mana shield has shattered! She is stunned for a long time, and in her convulsions she scatters doom bloom seeds, along with a fairy bloom seed if she can raise one.</VV_Message_ApocryphaShieldBroken>
+<VV_Message_ApocryphaShieldRestored>Apocrypha's mana shield has been restored.</VV_Message_ApocryphaShieldRestored>
+<VV_Message_ApocryphaNeedleStuck>A giant needle pierced Apocrypha and lodged in her carapace! ({0} / {1} lodged, damage taken {2})</VV_Message_ApocryphaNeedleStuck>
+<VV_Message_ApocryphaAllNeedlesStuck>All giant needles are lodged in Apocrypha! She is stunned for a long time and takes greatly increased damage.</VV_Message_ApocryphaAllNeedlesStuck>
+<VV_Message_ApocryphaNeedlesPulled>Apocrypha tore the lodged needles out.</VV_Message_ApocryphaNeedlesPulled>
 
 <!-- Text mote -->
 <VV_TextMote_ApocryphaStunImmune>Stun immune</VV_TextMote_ApocryphaStunImmune>
