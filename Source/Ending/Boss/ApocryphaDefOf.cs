@@ -83,6 +83,7 @@ namespace VVRace
         public static EffecterDef VV_Effecter_ApocryphaNeedleEnd;
         public static EffecterDef VV_Effecter_ApocryphaNeedleVanish;
         public static EffecterDef VV_Effecter_ApocryphaNeedleStick;
+        public static EffecterDef VV_Effecter_ApocryphaNeedlePullOut;
         public static EffecterDef VV_Effecter_ApocryphaManifestComplete;
         public static EffecterDef VV_Effecter_ApocryphaRepel;
         public static EffecterDef VV_Effecter_ApocryphaManifestLand;

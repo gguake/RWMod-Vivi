@@ -1129,7 +1129,32 @@
     <children>
       <li>
         <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
-        <soundDef>Interact_ChargeLance</soundDef>
+        <soundDef>VV_ApocryphaNeedleCharge</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickTwinkle</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>6~9</burstCount>
+        <positionRadius>1.2</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>0.6~1.6</speed>
+        <scale>0.3~0.55</scale>
+        <color>(1, 0.8, 0.6, 1)</color>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <!-- 2페이즈: 보스 몸에서 뽑혀 나옴(바늘 위치). 반짝임은 조준과 같고 소리만 짧다. -->
+  <EffecterDef>
+    <defName>VV_Effecter_ApocryphaNeedlePullOut</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>VV_ApocryphaNeedlePullOut</soundDef>
         <spawnLocType>OnSource</spawnLocType>
       </li>
       <li>
@@ -1155,7 +1180,7 @@
     <children>
       <li>
         <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
-        <soundDef>ChargeLance_Fire</soundDef>
+        <soundDef>VV_ApocryphaNeedleFire</soundDef>
         <spawnLocType>OnSource</spawnLocType>
       </li>
       <li>

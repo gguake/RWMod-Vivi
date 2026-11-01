@@ -32,6 +32,11 @@ namespace VVRace
         private static readonly Material GlowMat = MaterialPool.MatFrom(NeedleTexPath, ShaderDatabase.MoteGlow);
         private static readonly Material AuraMat = MaterialPool.MatFrom("VFX/VV_ScentAura", ShaderDatabase.MoteGlow);
         private static readonly Material LaneMat = MaterialPool.MatFrom(BaseContent.WhiteTex, ShaderDatabase.LoadShader("Map/VV_NeedleLane"), Color.white);
+        private static readonly Material WarpMat = MaterialPool.MatFrom(BaseContent.WhiteTex, ShaderDatabase.LoadShader("Map/VV_NeedleWarp"), Color.white);
+
+        // 발사 왜곡: 양옆으로 퍼지는 파면(최대 약 2.7칸)까지 덮도록 경고 띠(3칸)보다 넓게 그린다.
+        private const float WarpDrawWidth = 7f;
+        private static readonly Color WarpColor = new Color(1f, 0.9f, 0.7f, 1f);
         private static readonly Material LotusMat = MakeLotusMaterial();
 
         private static readonly MaterialPropertyBlock PropertyBlock = new MaterialPropertyBlock();
@@ -41,6 +46,7 @@ namespace VVRace
         private static readonly int CoreColorPropertyId = Shader.PropertyToID("_CoreColor");
         private static readonly int DurationPropertyId = Shader.PropertyToID("_Duration");
         private static readonly int SeedPropertyId = Shader.PropertyToID("_RandomPerObjectOffsetRandom");
+        private static readonly int FrontPropertyId = Shader.PropertyToID("_Front");
 
         // 사출탄 시전 연꽃(VV_Mote_ApocryphaAimCharge)과 같은 값: 바깥 고리 없이 꽃잎 6장이 피어나며 중심이 밝아진다.
         private static Material MakeLotusMaterial()
@@ -120,6 +126,29 @@ namespace VVRace
             PropertyBlock.SetColor(ShaderPropertyIDs.Color, color);
             PropertyBlock.SetColor(CoreColorPropertyId, coreColor);
             Graphics.DrawMesh(MeshPool.plane10, Matrix4x4.TRS(lotusPos, Quaternion.identity, new Vector3(LotusDrawSize, 1f, LotusDrawSize)), LotusMat, 0, null, 0, PropertyBlock);
+        }
+
+        // 발사 직후 촉이 지나간 직선(start에서 direction으로 front칸까지, 쿼드는 length칸 전체) 위의 공간이 순간 일그러진다(VV_NeedleWarp 셰이더).
+        // ageSecs: 발사 뒤 경과(초). 셰이더가 _Duration(0.55초) 동안 퍼지며 잦아들게 한다.
+        public static void DrawWarp(Vector3 start, Vector3 direction, float length, float front, float ageSecs, float alpha)
+        {
+            if (length < 0.1f || alpha <= 0f) { return; }
+
+            var angle = Mathf.Atan2(-direction.z, direction.x) * Mathf.Rad2Deg;
+            var center = start + direction * (length * 0.5f);
+            center.y = AltitudeLayer.MoteOverhead.AltitudeFor();
+            var matrix = Matrix4x4.TRS(center, Quaternion.AngleAxis(angle, Vector3.up), new Vector3(length, 1f, WarpDrawWidth));
+
+            var color = WarpColor;
+            color.a *= alpha;
+
+            PropertyBlock.Clear();
+            PropertyBlock.SetFloat(ShaderPropertyIDs.AgeSecs, ageSecs);
+            PropertyBlock.SetColor(ShaderPropertyIDs.Color, color);
+            PropertyBlock.SetFloat(LengthPropertyId, length);
+            PropertyBlock.SetFloat(WidthPropertyId, WarpDrawWidth);
+            PropertyBlock.SetFloat(FrontPropertyId, front);
+            Graphics.DrawMesh(MeshPool.plane10, matrix, WarpMat, 0, null, 0, PropertyBlock);
         }
 
         private static void DrawQuad(Material mat, Vector3 pos, Quaternion rotation, Vector2 size, Color color)

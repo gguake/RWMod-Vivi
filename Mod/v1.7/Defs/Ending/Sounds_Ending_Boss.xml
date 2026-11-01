@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 아포크리파 바늘 조준음. 조준(2.5초) 동안 차오르다 발사 순간에 맞춰 사라지도록 잘라 두었고, 게임 배속에 맞춰 빨라지게 한다. -->
+  <SoundDef>
+    <defName>VV_ApocryphaNeedleCharge</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>SFX/VV_ApocryphaNeedleCharge</clipPath>
+          </li>
+        </grains>
+        <volumeRange>17</volumeRange>
+        <pitchRange>0.97~1.03</pitchRange>
+        <tempoAffectedByGameSpeed>true</tempoAffectedByGameSpeed>
+        <sustainLoop>False</sustainLoop>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+  <!-- 2페이즈 기절이 풀려 꽂힌 바늘을 뽑아낼 때. 조준음의 가장 밝은 구간을 짧게 잘라 낮은 웅웅거림을 걷어냈다. 여러 바늘을 한꺼번에 뽑아도 한 번만 낸다. -->
+  <SoundDef>
+    <defName>VV_ApocryphaNeedlePullOut</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>SFX/VV_ApocryphaNeedlePullOut</clipPath>
+          </li>
+        </grains>
+        <volumeRange>16</volumeRange>
+        <pitchRange>0.95~1.05</pitchRange>
+        <sustainLoop>False</sustainLoop>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+  <!-- 아포크리파 바늘 발사음. 같은 틱에 여러 바늘이 함께 쏘면 한 번만 낸다. -->
+  <SoundDef>
+    <defName>VV_ApocryphaNeedleFire</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>SFX/VV_ApocryphaNeedleFire</clipPath>
+          </li>
+        </grains>
+        <volumeRange>55</volumeRange>
+        <pitchRange>0.95~1.05</pitchRange>
+        <sustainLoop>False</sustainLoop>
+      </li>
+    </subSounds>
+  </SoundDef>
+</Defs>

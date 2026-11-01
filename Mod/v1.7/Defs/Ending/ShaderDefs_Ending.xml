@@ -147,6 +147,29 @@
     <shaderPath>Map/VV_NeedleLane</shaderPath>
   </ShaderTypeDef>
 
+  <!-- 거대 엘텍스 바늘 발사 왜곡: 촉이 지나간 직선 위의 장면 캡처를 순간 일그러뜨린다(충격파와 같은 장면 캡처 이름·큐를 써서 프레임당 한 번만 캡처). -->
+  <ShaderDef>
+    <defName>VV_NeedleWarp</defName>
+    <shaderProgram>
+      <vertexShaderFileName>Mote.vert.glsl</vertexShaderFileName>
+      <fragmentShaderFileName>VV_NeedleWarp.frag.glsl</fragmentShaderFileName>
+      <flipTextureST>false</flipTextureST>
+      <transparent>true</transparent>
+      <depthWrite>false</depthWrite>
+      <cullMode>None</cullMode>
+      <renderQueue>3151</renderQueue>
+      <sceneGrab>
+        <name>DistortionBackground</name>
+        <queue>3151</queue>
+      </sceneGrab>
+    </shaderProgram>
+  </ShaderDef>
+
+  <ShaderTypeDef>
+    <defName>VV_NeedleWarp</defName>
+    <shaderPath>Map/VV_NeedleWarp</shaderPath>
+  </ShaderTypeDef>
+
   <!-- 가산 빛(MoteGlow, 큐 3151) 위에 그리는 알파 그림: 바닐라 TransparentPostLight와 같은 셰이더를 큐만 늦춘다.
        요정 비비 사출탄의 요정이 혜성 꼬리·후광·반짝임에 덮여 하얗게 바래지 않게 한다. -->
   <ShaderDef>

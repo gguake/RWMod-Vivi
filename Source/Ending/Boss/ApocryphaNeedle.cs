@@ -79,6 +79,10 @@ namespace VVRace
         private const float ReturnBlendStart = 0.75f;
 
         private const int AimPetalInterval = 4;
+
+        // 발사 왜곡을 그리는 시간(VV_NeedleWarp의 _Duration 0.55초와 같게)
+        private const int WarpTicks = 33;
+
         private const int FadeInTicks = 40;
         private const float MapEdgeMargin = 0.05f;
 
@@ -310,7 +314,7 @@ namespace VVRace
             if (_state != NeedleState.Stuck || !Spawned) { return false; }
 
             var now = GenTicks.TicksGame;
-            PlayEffectAt(ApocryphaEffecterDefOf.VV_Effecter_ApocryphaNeedleAim, _pos);
+            PlayEffectAt(ApocryphaEffecterDefOf.VV_Effecter_ApocryphaNeedlePullOut, _pos);
             Trail?.ResetTrail();
             RegisterTrail(_pos);
             StartReturn(now, _pos, -_laneDir);
@@ -787,6 +791,13 @@ namespace VVRace
                 var bossInLane = IsUnbound && BossContactAlong() >= 0f;
                 var aimSecs = (GenTicks.TicksGame - _stateStartTick) / 60f;
                 ApocryphaNeedleRenderer.DrawLane(_laneStart, _laneDir, _laneLength, HalfWidth * 2f, AimProgress, alpha, bossInLane, aimSecs, _aimTicks / 60f, thingIDNumber);
+            }
+
+            // 발사 직후: 촉이 지나간 직선 위의 공간이 순간 일그러진다(_travelled = 촉이 나아간 거리, 꽂혔으면 꽂힌 자리까지).
+            var warpAge = GenTicks.TicksGame - _fireTick;
+            if ((IsFlying || IsStuck) && warpAge >= 0 && warpAge < WarpTicks)
+            {
+                ApocryphaNeedleRenderer.DrawWarp(_laneStart, _laneDir, _laneLength, Mathf.Max(0f, _travelled), warpAge / 60f, alpha);
             }
 
             var glow = _state == NeedleState.Idle || _state == NeedleState.Stuck ? 0f : _state == NeedleState.Aiming ? AimProgress : 1f;
