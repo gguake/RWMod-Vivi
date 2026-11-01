@@ -67,7 +67,7 @@ namespace VVRace
 
         private int _startTick = -1;
         private string _texPath;
-        private float _drawSize = 6.5f;
+        private float _drawSize = 3f;
         private Vector3 _budPos;
         private Vector3 _formPos;
         private Vector3 _landPos;
@@ -149,7 +149,7 @@ namespace VVRace
             base.ExposeData();
             Scribe_Values.Look(ref _startTick, "startTick", -1);
             Scribe_Values.Look(ref _texPath, "texPath");
-            Scribe_Values.Look(ref _drawSize, "drawSize", 6.5f);
+            Scribe_Values.Look(ref _drawSize, "drawSize", 3f);
             Scribe_Values.Look(ref _budPos, "budPos", Vector3.zero);
             Scribe_Values.Look(ref _formPos, "formPos", Vector3.zero);
             Scribe_Values.Look(ref _landPos, "landPos", Vector3.zero);

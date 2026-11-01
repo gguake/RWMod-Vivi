@@ -28,10 +28,11 @@ namespace VVRace
         // 1페이즈 자리: 건담의 핀 판넬처럼 보스의 왼쪽 어깨 뒤에 바늘을 나란히 겹쳐 세워 한쪽 날개 모양을 이룬다.
         // 안쪽 바늘일수록 곧게 서고 바깥쪽일수록 더 기울며(부채꼴), 밑동은 바깥쪽으로 갈수록 조금씩 아래로 물러난다.
         // 보스가 정면(남)·옆을 보면 몸 뒤에 가려 그리고, 등을 보이면(북) 몸 앞에 그린다.
-        private const float FinRootX = 1f;
-        private const float FinRootZ = 0.9f;
-        private const float FinStepX = 0.7f;
-        private const float FinStepZ = -0.3f;
+        // 밑동 자리는 1페이즈 몸 크기(그림 3칸)에 맞추고, 바늘 길이(약 4칸)는 그대로 둔다(밑동에서 바늘 중심까지 FinCenterFromRoot).
+        private const float FinRootX = 0.46f;
+        private const float FinRootZ = 0.41f;
+        private const float FinStepX = 0.32f;
+        private const float FinStepZ = -0.14f;
         private const float FinTiltInner = 16f;
         private const float FinTiltStep = 11f;
         private const float FinCenterFromRoot = 2f;

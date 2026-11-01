@@ -203,10 +203,11 @@
         <bodyGraphicData>
           <texPath>Things/Pawn/Apocrypha/VV_Apocrypha</texPath>
           <graphicClass>Graphic_Multi</graphicClass>
-          <drawSize>6.5</drawSize>
+          <!-- 형체 높이 약 2.8칸(그림 높이의 93%) = 로열 비비(약 1.14칸)의 약 2.5배 -->
+          <drawSize>3</drawSize>
           <shadowData>
-            <volume>(1.4, 1.0, 0.7)</volume>
-            <offset>(0, 0, -0.9)</offset>
+            <volume>(0.65, 0.46, 0.32)</volume>
+            <offset>(0, 0, -0.42)</offset>
           </shadowData>
         </bodyGraphicData>
       </li>

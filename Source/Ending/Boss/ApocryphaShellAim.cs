@@ -46,7 +46,7 @@ namespace VVRace
                 _targetMote.Maintain();
             }
 
-            var chargePos = bodyCenter + direction * 1.4f;
+            var chargePos = bodyCenter + direction * 0.7f;
             if (_chargeMote == null || _chargeMote.Destroyed)
             {
                 _chargeMote = MoteMaker.MakeStaticMote(chargePos, map, ApocryphaThingDefOf.VV_Mote_ApocryphaAimCharge, 1f, makeOffscreen: true);
