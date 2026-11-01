@@ -728,14 +728,14 @@
     </children>
   </EffecterDef>
 
-  <!-- 멸망꽃이 피어남: 독성 포탄 착탄음 + 자홍 충격 고리 + 미아즈마 + 흙먼지 -->
+  <!-- 멸망꽃이 피어남: 착탄·피어남 소리 + 자홍 충격 고리 + 미아즈마 + 흙먼지 -->
   <EffecterDef>
     <defName>VV_Effecter_SeedBloomDoom</defName>
     <maintainTicks>20</maintainTicks>
     <children>
       <li>
         <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
-        <soundDef>ToxicShellLanded</soundDef>
+        <soundDef>VV_DoomFlowerBloom</soundDef>
         <spawnLocType>OnSource</spawnLocType>
       </li>
       <li>
@@ -949,16 +949,12 @@
     </children>
   </EffecterDef>
 
-  <!-- 멸망꽃이 시듦(만개 후·파괴·2페이즈 정리) -->
+  <!-- 멸망꽃이 시듦(만개 후·파괴·2페이즈 정리). 소리는 내지 않는다: 만개는 저주 소리가, 정리는 전환 연출이 덮고,
+       공격으로 부서질 때는 건물의 destroyEffecter(VV_Effecter_DoomFlowerDestroy)가 따로 낸다. -->
   <EffecterDef>
     <defName>VV_Effecter_DoomFlowerWither</defName>
     <maintainTicks>15</maintainTicks>
     <children>
-      <li>
-        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
-        <soundDef>Explosion_Smoke</soundDef>
-        <spawnLocType>OnSource</spawnLocType>
-      </li>
       <li>
         <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
         <fleckDef>VV_Fleck_GimmickDoomRing</fleckDef>
@@ -999,6 +995,27 @@
     </children>
   </EffecterDef>
 
+  <!-- 멸망꽃이 공격으로 부서짐: 부서지는 소리 + 흙먼지(destroyEffecter를 두면 바닐라 파괴 흙먼지가 빠지므로 대신 낸다).
+       꽃잎·미아즈마는 Building_ApocryphaFlower.Kill이 시듦 이펙트로 낸다. -->
+  <EffecterDef>
+    <defName>VV_Effecter_DoomFlowerDestroy</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>VV_DoomFlowerDestroy</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>DustPuffThick</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>3~5</burstCount>
+        <positionRadius>0.4</positionRadius>
+        <scale>1.5~2</scale>
+      </li>
+    </children>
+  </EffecterDef>
+
   <!-- 멸망꽃 만개: 맵 전체로 번지는 자홍 저주 파동 + 섬광 + 왜곡 + 카메라 흔들림 -->
   <EffecterDef>
     <defName>VV_Effecter_DoomBloomCurse</defName>
@@ -1006,7 +1023,7 @@
     <children>
       <li>
         <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
-        <soundDef>PsychicPulseGlobal</soundDef>
+        <soundDef>VV_DoomFlowerCurse</soundDef>
         <spawnLocType>OnSource</spawnLocType>
       </li>
       <li>
@@ -1215,7 +1232,7 @@
     <children>
       <li>
         <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
-        <soundDef>VV_Manawave</soundDef>
+        <soundDef>VV_ApocryphaBondRelease</soundDef>
         <spawnLocType>OnSource</spawnLocType>
       </li>
       <li>

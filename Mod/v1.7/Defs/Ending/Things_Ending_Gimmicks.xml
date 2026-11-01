@@ -177,6 +177,8 @@
       <ai_neverTrashThis>true</ai_neverTrashThis>
       <ai_chillDestination>false</ai_chillDestination>
       <expandHomeArea>false</expandHomeArea>
+      <!-- 공격으로 부서질 때만 재생(시듦에는 쓰이지 않는다) -->
+      <destroyEffecter>VV_Effecter_DoomFlowerDestroy</destroyEffecter>
     </building>
     <comps>
       <!-- 꽃이 있는 동안 유지되는 이펙트 -->

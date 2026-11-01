@@ -1084,7 +1084,7 @@
     <children>
       <li>
         <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
-        <soundDef>EnergyShield_Reset</soundDef>
+        <soundDef>VV_ApocryphaShieldRestore</soundDef>
         <spawnLocType>OnSource</spawnLocType>
       </li>
       <li>
