@@ -7,7 +7,7 @@ namespace VVRace
     [DefOf]
     public static class EverflowerAssimilationDefOf
     {
-        public static HediffDef VV_EverflowerAssimilation;
+        public static HediffDef VV_EverflowerFullAssimilation;
         public static JobDef VV_EverflowerAssimilationHold;
 
         public static ThingDef VV_Mote_EverflowerCircle;

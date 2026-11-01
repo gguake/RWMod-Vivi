@@ -2,9 +2,10 @@
 <Defs>
   <!-- 〈영원꽃 완전 동화〉: 〈대조율 의식〉의 공명자(로열 비비)가 의식이 진행되기 시작하면 걸린다(VVRace.RitualBehaviorWorker_GrandAttunement).
        제단 위 영원꽃 앞 공중에 고정되어(VV_EverflowerAssimilationHold) 아포크리파를 토벌할 때까지 영원꽃과 공명하며, 쓰러지거나 죽으면 엔딩이 실패한다.
-       욕구 동결·지시 불가·서 있는 채 치료는 VVRace.EverflowerAssimilationPatch가 맡는다. -->
+       욕구 동결·지시 불가·서 있는 채 치료는 VVRace.EverflowerAssimilationPatch가 맡는다.
+       (요정 실체화의 여파 헤디프 VV_EverflowerAssimilation〈영원꽃 동화〉와는 다른 헤디프다) -->
   <HediffDef>
-    <defName>VV_EverflowerAssimilation</defName>
+    <defName>VV_EverflowerFullAssimilation</defName>
     <label>everflower full assimilation</label>
     <description>This royal vivi has opened her psychic circuits completely to the everflower and become one with it. She floats in the air before the everflower on the altar, resonating with it and channelling the mana of its fifth bloom.
 \nLike a creature in hibernation, none of her needs decrease and she suffers no mental breaks, but she cannot move or take orders until she is released. She can still be harmed, and colonists can tend her wounds where she floats.

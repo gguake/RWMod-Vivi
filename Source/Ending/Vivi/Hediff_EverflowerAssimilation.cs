@@ -79,7 +79,7 @@ namespace VVRace
             var existing = Of(pawn);
             if (existing != null) { return existing; }
 
-            var hediff = (Hediff_EverflowerAssimilation)HediffMaker.MakeHediff(EverflowerAssimilationDefOf.VV_EverflowerAssimilation, pawn);
+            var hediff = (Hediff_EverflowerAssimilation)HediffMaker.MakeHediff(EverflowerAssimilationDefOf.VV_EverflowerFullAssimilation, pawn);
             hediff.everflower = everflower;
             pawn.health.AddHediff(hediff);
             return hediff;
