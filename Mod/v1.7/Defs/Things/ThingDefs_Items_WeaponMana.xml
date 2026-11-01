@@ -270,6 +270,7 @@
     </statBases>
     <comps>
       <li Class="CompProperties_Explosive">
+        <compClass>VVRace.CompExplosiveSnowman</compClass>
         <wickTicks>120</wickTicks>
         <drawWick>false</drawWick>
         <explosiveDamageType>VV_Frostbite</explosiveDamageType>

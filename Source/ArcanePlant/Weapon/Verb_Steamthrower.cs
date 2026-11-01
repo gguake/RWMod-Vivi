@@ -117,6 +117,7 @@ namespace VVRace
             var damageAmount = VerbProps.steamDamageAmount * (EquipmentSource?.GetStatValue(StatDefOf.RangedWeapon_DamageMultiplier) ?? 1f);
             var steam = GenSpawn.Spawn(VVThingDefOf.VV_SteamProjectile, caster.Position, caster.Map) as SteamProjectile;
             steam.caster = caster;
+            steam.intendedTarget = currentTarget.Thing;
             steam.weaponDef = EquipmentSource?.def;
             steam.damageDef = VerbProps.steamDamageDef;
             steam.damageAmount = damageAmount;
