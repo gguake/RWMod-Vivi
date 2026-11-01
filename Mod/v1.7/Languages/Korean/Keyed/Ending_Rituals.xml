@@ -4,10 +4,10 @@
 <VV_FailReason_ApocryphaInterference>아포크리파의 간섭으로 조율 의식만 가능합니다.</VV_FailReason_ApocryphaInterference>
 <VV_FailReason_RequiresEverflowerAltar>영원꽃 제단에 안치되어 있어야 합니다.</VV_FailReason_RequiresEverflowerAltar>
 <VV_FailReason_GrandAttunementLocked>비비 연방의 서신을 받은 뒤에만 진행할 수 있습니다.</VV_FailReason_GrandAttunementLocked>
-<VV_FailReason_GrandAttunementInProgress>영원꽃이 이미 마지막 개화를 응축하고 있습니다.</VV_FailReason_GrandAttunementInProgress>
-<VV_FailReason_GrandAttunementCompleted>영원꽃이 이미 완전히 개화했습니다.</VV_FailReason_GrandAttunementCompleted>
-<VV_FailReason_GrandAttunementFailed>영원꽃을 빼앗겨 더 이상 진행할 수 없습니다.</VV_FailReason_GrandAttunementFailed>
-<VV_FailReason_CoronationNotAnchor>마지막 개화를 응축 중인 영원꽃에서만 진행할 수 있습니다.</VV_FailReason_CoronationNotAnchor>
+<VV_FailReason_GrandAttunementInProgress>마지막 개화가 이미 진행 중입니다.</VV_FailReason_GrandAttunementInProgress>
+<VV_FailReason_GrandAttunementCompleted>마지막 개화가 이미 완료되었습니다.</VV_FailReason_GrandAttunementCompleted>
+<VV_FailReason_GrandAttunementFailed>마지막 개화가 실패해 더 진행할 수 없습니다.</VV_FailReason_GrandAttunementFailed>
+<VV_FailReason_CoronationNotAnchor>대조율 의식으로 개화를 시작한 영원꽃에서만 진행할 수 있습니다.</VV_FailReason_CoronationNotAnchor>
 <VV_FailReason_CoronationLocked>개화 응축이 완료된 뒤에만 진행할 수 있습니다.</VV_FailReason_CoronationLocked>
 
 <!-- 메시지 -->

@@ -10,8 +10,8 @@
 
 <!-- 엔딩 퀘스트: 아포크리파 1페이즈 기믹 메시지 -->
 <VV_Message_FairyFlowerBonded>{PAWN_labelShort}(이)가 요정꽃과 결속해 〈요정 간섭〉을 얻었습니다.</VV_Message_FairyFlowerBonded>
-<VV_Message_FairyBondReleased>{PAWN_labelShort}(이)가 결속망에 마나 역류를 일으켜 모든 멸망꽃의 저주가 풀렸습니다.</VV_Message_FairyBondReleased>
-<VV_Message_DoomFlowerBloomed>멸망꽃이 만개하여 모든 정착민에게 〈{BLIGHT}〉 저주가 내려졌습니다.</VV_Message_DoomFlowerBloomed>
+<VV_Message_FairyBondReleased>{PAWN_labelShort}(이)가 결속망에 마나 역류를 일으켜 이 지역의 멸망꽃 저주가 모두 풀렸습니다.</VV_Message_FairyBondReleased>
+<VV_Message_DoomFlowerBloomed>멸망꽃이 만개하여 이 지역의 정착민에게 〈{BLIGHT}〉 저주가 내려졌습니다.</VV_Message_DoomFlowerBloomed>
 
 <!-- 엔딩 퀘스트: 멸망꽃 저주(역병) 툴팁 -->
 <VV_Hediff_BloodLossRecoveryFactor>혈액 손실 회복 속도</VV_Hediff_BloodLossRecoveryFactor>

@@ -4,10 +4,10 @@
 <VV_FailReason_ApocryphaInterference>Due to Apocrypha's interference, only the attunement ritual is possible.</VV_FailReason_ApocryphaInterference>
 <VV_FailReason_RequiresEverflowerAltar>Must be enshrined on the everflower altar.</VV_FailReason_RequiresEverflowerAltar>
 <VV_FailReason_GrandAttunementLocked>Can only be performed after receiving the vivi federation's missive.</VV_FailReason_GrandAttunementLocked>
-<VV_FailReason_GrandAttunementInProgress>The everflower is already condensing its final bloom.</VV_FailReason_GrandAttunementInProgress>
-<VV_FailReason_GrandAttunementCompleted>The everflower has already fully bloomed.</VV_FailReason_GrandAttunementCompleted>
-<VV_FailReason_GrandAttunementFailed>The everflower was usurped and can no longer be awakened.</VV_FailReason_GrandAttunementFailed>
-<VV_FailReason_CoronationNotAnchor>Can only be performed on the everflower condensing its final bloom.</VV_FailReason_CoronationNotAnchor>
+<VV_FailReason_GrandAttunementInProgress>The final bloom is already underway.</VV_FailReason_GrandAttunementInProgress>
+<VV_FailReason_GrandAttunementCompleted>The final bloom is already complete.</VV_FailReason_GrandAttunementCompleted>
+<VV_FailReason_GrandAttunementFailed>The final bloom has failed and cannot continue.</VV_FailReason_GrandAttunementFailed>
+<VV_FailReason_CoronationNotAnchor>Requires the everflower awakened by the grand attunement.</VV_FailReason_CoronationNotAnchor>
 <VV_FailReason_CoronationLocked>Can only be performed once the bloom condensation is complete.</VV_FailReason_CoronationLocked>
 
 <!-- Messages -->

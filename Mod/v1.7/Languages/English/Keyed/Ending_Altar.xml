@@ -4,7 +4,7 @@
 <!-- 메시지 -->
 <VV_Message_EverflowerEnshrined>The everflower has been enshrined on the altar.</VV_Message_EverflowerEnshrined>
 <VV_Message_EverflowerAltarRequiresLevel>Only an everflower of attunement level {LEVEL} or higher can be enshrined on the altar.</VV_Message_EverflowerAltarRequiresLevel>
-<VV_Message_AnchorEverflowerLeftAltar>The altar is gone, and the blooming everflower has teleported off the altar.</VV_Message_AnchorEverflowerLeftAltar>
+<VV_Message_AnchorEverflowerLeftAltar>The altar is gone, and the everflower has teleported off it.</VV_Message_AnchorEverflowerLeftAltar>
 
 <!-- 거부 사유 -->
 <VV_FailReason_AltarOnlyEverflowerCenter>Only an everflower can be enshrined at the center of the altar.</VV_FailReason_AltarOnlyEverflowerCenter>
@@ -15,12 +15,12 @@
 <VV_FailReason_AltarOnSubstructure>An everflower altar cannot be built on a gravship.</VV_FailReason_AltarOnSubstructure>
 <VV_FailReason_AltarUnderConstruction>Cannot place on an everflower altar under construction.</VV_FailReason_AltarUnderConstruction>
 <VV_FailReason_AltarHasEnshrinedEverflower>Cannot deconstruct while an everflower is enshrined</VV_FailReason_AltarHasEnshrinedEverflower>
-<VV_FailReason_AltarEndingInProgress>Cannot deconstruct while the everflower is blooming</VV_FailReason_AltarEndingInProgress>
+<VV_FailReason_AltarEndingInProgress>Cannot deconstruct while an everflower is enshrined</VV_FailReason_AltarEndingInProgress>
 
 <!-- 5/6단계 레벨업 편지 머리말 -->
 <VV_Letter_EverflowerAttunementLevel5Preamble>The everflower has resonated with the altar's mana circuits and reached its fifth bloom.
 \nIt releases vast amounts of environment mana into its surroundings through the altar, and its resonator's everflower resonance strengthens to stage V.</VV_Letter_EverflowerAttunementLevel5Preamble>
-<VV_Letter_EverflowerAttunementLevel6Preamble>The everflower has fully bloomed. Dense environment mana now flows across the whole map.
+<VV_Letter_EverflowerAttunementLevel6Preamble>The everflower has fully bloomed. It now sustains environment mana across the whole map.
 \nThe resonator's everflower resonance strengthens to stage VI, removing the fatigue and movement penalties from bound fairy vivis. All vivis in the colony become immune to genetic instability, and adult vivis age much more slowly.</VV_Letter_EverflowerAttunementLevel6Preamble>
 
 <!-- 정보창 -->

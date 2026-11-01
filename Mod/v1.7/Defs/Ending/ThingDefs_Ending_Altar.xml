@@ -87,7 +87,7 @@
     <label>ancient amber core</label>
     <description>An amber crystal once used in an everflower altar of the old vivi empire. The mana circuits inside give off a faint light.
 \nA key material for the everflower altar. The vivi federation has kept the few remaining cores since the empire fell.
-\nObtained by completing a task for the vivi federation. Only one can exist in the world.</description>
+\nObtained as a reward for completing a task for the vivi federation.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_DreamumAltar</ThingDef>
     </descriptionHyperlinks>

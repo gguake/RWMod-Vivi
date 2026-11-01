@@ -6,7 +6,7 @@
     <defName>VV_EverflowerBlessing</defName>
     <label>everflower's blessing</label>
     <description>The blessing of a fully bloomed everflower grants immunity to genetic instability and greatly slows aging in adult vivis.
-\nThe blessing fades after a day away from the everflower.</description>
+\nThe blessing fades about a day after leaving the everflower's map.</description>
     <hediffClass>HediffWithComps</hediffClass>
     <defaultLabelColor>(1, 0.85, 0.4)</defaultLabelColor>
 

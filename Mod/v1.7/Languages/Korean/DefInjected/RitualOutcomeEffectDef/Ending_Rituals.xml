@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-<VV_GrandAttunement.description>의식 결과가 좋을수록 마지막 개화까지 걸리는 응축 기간이 단축됩니다(8~10일).
+<VV_GrandAttunement.description>의식 결과가 좋을수록 마나 응축 기간이 짧아집니다(8~10일).
 \n개화 응축 중에는 적들의 습격이 이어집니다.
 \n모든 영원꽃 의식의 재사용 대기시간은 공유됩니다.</VV_GrandAttunement.description>
 <VV_GrandAttunement.comps.0.label>{PAWN_labelShort}의 정신 감응력</VV_GrandAttunement.comps.0.label>

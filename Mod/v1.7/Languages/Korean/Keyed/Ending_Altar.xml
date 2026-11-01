@@ -4,7 +4,7 @@
 <!-- 메시지 -->
 <VV_Message_EverflowerEnshrined>영원꽃이 제단에 안치되었습니다.</VV_Message_EverflowerEnshrined>
 <VV_Message_EverflowerAltarRequiresLevel>조율 {LEVEL}단계 이상인 영원꽃만 제단에 안치할 수 있습니다.</VV_Message_EverflowerAltarRequiresLevel>
-<VV_Message_AnchorEverflowerLeftAltar>제단이 사라져 개화 중인 영원꽃이 밖으로 순간이동했습니다.</VV_Message_AnchorEverflowerLeftAltar>
+<VV_Message_AnchorEverflowerLeftAltar>제단이 사라져 영원꽃이 밖으로 순간이동했습니다.</VV_Message_AnchorEverflowerLeftAltar>
 
 <!-- 거부 사유 -->
 <VV_FailReason_AltarOnlyEverflowerCenter>제단 중앙에는 영원꽃만 안치할 수 있습니다.</VV_FailReason_AltarOnlyEverflowerCenter>
@@ -15,12 +15,12 @@
 <VV_FailReason_AltarOnSubstructure>중력선 위에는 영원꽃 제단을 건설할 수 없습니다.</VV_FailReason_AltarOnSubstructure>
 <VV_FailReason_AltarUnderConstruction>건설 중인 영원꽃 제단 위에는 배치할 수 없습니다.</VV_FailReason_AltarUnderConstruction>
 <VV_FailReason_AltarHasEnshrinedEverflower>영원꽃이 안치되어 있어 해체할 수 없음</VV_FailReason_AltarHasEnshrinedEverflower>
-<VV_FailReason_AltarEndingInProgress>영원꽃이 개화 중이라 해체할 수 없음</VV_FailReason_AltarEndingInProgress>
+<VV_FailReason_AltarEndingInProgress>영원꽃이 안치되어 있어 해체할 수 없음</VV_FailReason_AltarEndingInProgress>
 
 <!-- 5/6단계 레벨업 편지 머리말 -->
 <VV_Letter_EverflowerAttunementLevel5Preamble>영원꽃이 제단의 마나 회로와 공명하며 다섯 번째 개화에 도달했습니다.
 \n제단을 통해 주변에 막대한 환경 마나를 방출하며, 공명자의 영원꽃 공명이 V단계로 강화됩니다.</VV_Letter_EverflowerAttunementLevel5Preamble>
-<VV_Letter_EverflowerAttunementLevel6Preamble>영원꽃이 완전히 개화했습니다. 이제 지역 전체에 고농도의 환경 마나가 흐릅니다.
+<VV_Letter_EverflowerAttunementLevel6Preamble>영원꽃이 완전히 개화했습니다. 이제 지역 전체에 환경 마나가 유지됩니다.
 \n공명자의 영원꽃 공명이 VI단계로 강화되어 요정 비비 결속에 따른 피로와 이동 속도 저하가 사라집니다. 정착지의 모든 비비는 유전자 불안정에 면역이 되며, 성체의 노화가 크게 느려집니다.</VV_Letter_EverflowerAttunementLevel6Preamble>
 
 <!-- 정보창 -->

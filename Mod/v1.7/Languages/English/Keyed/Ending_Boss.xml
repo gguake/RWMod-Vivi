@@ -31,9 +31,9 @@
 
 <!-- Message -->
 <VV_Message_ApocryphaBondReleased>A large number of vivi fairies bound to Apocrypha have been freed. (Remaining bond: {COUNT})</VV_Message_ApocryphaBondReleased>
-<VV_Message_ApocryphaTransformStarted>The last fairy bond has shattered! Apocrypha unleashes a shockwave that stuns every living thing.</VV_Message_ApocryphaTransformStarted>
+<VV_Message_ApocryphaTransformStarted>The last fairy bond has shattered! Apocrypha unleashes a powerful shockwave.</VV_Message_ApocryphaTransformStarted>
 <VV_Message_ApocryphaChannelInterrupted>Apocrypha's usurpation of the everflower was interrupted.</VV_Message_ApocryphaChannelInterrupted>
-<VV_Message_ApocryphaEscapedRoofCollapse>Apocrypha warped away from the collapsing rock overhead.</VV_Message_ApocryphaEscapedRoofCollapse>
+<VV_Message_ApocryphaEscapedRoofCollapse>Apocrypha teleported away from a roof collapse.</VV_Message_ApocryphaEscapedRoofCollapse>
 <VV_Message_ApocryphaShieldBroken>Apocrypha's mana shield has shattered, stunning her.</VV_Message_ApocryphaShieldBroken>
 <VV_Message_ApocryphaShieldRestored>Apocrypha's mana shield has been restored.</VV_Message_ApocryphaShieldRestored>
 <VV_Message_ApocryphaNeedleStuck>A giant needle pierced Apocrypha and lodged in her carapace! ({0} / {1} lodged, damage taken {2})</VV_Message_ApocryphaNeedleStuck>

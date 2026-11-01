@@ -106,7 +106,7 @@
 
   <RitualOutcomeEffectDef>
     <defName>VV_GrandAttunement</defName>
-    <description>The better the ritual's result, the shorter the condensation period for the final bloom (8 to 10 days).
+    <description>The better the ritual's result, the shorter the mana condensation period (8 to 10 days).
 \nEnemy raids continue throughout bloom condensation.
 \nAll everflower rituals share a cooldown.</description>
     <workerClass>VVRace.RitualOutcomeEffectWorker_GrandAttunement</workerClass>
