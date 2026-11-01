@@ -895,7 +895,7 @@ namespace VVRace
             return best;
         }
 
-        // 포격·바늘·감지 대상: 반경(포격·감지 20, 바늘 24) 안 시야에 들어온 적 폰(플레이어 세력과 다른 적대 세력). 폰이 하나도 없을 때만 적 포탑.
+        // 포격·바늘·감지 대상: 반경(포격·감지 20, 바늘 24) 안 시야에 들어온, 보스에게 적대적인 폰(IsShellTargetSide). 폰이 하나도 없을 때만 적 포탑.
         private void CollectShellTargets(List<Thing> outTargets, float range)
         {
             CollectShellTargets(outTargets, range, parent.Position);
@@ -940,14 +940,12 @@ namespace VVRace
             return false;
         }
 
-        // 포격할 편: 보스에게 적대적이면서 플레이어 세력이거나 플레이어에게도 적대적인 것(다른 세력의 습격자·기계체, 광포한 동물 등).
-        // 보스(곤충 세력)는 모든 세력과 적대이므로 플레이어와 우호·중립인 상인·손님·지원군은 따로 빼고,
-        // 플레이어의 포로도 플레이어에게 적대가 아니므로 빠진다. 같은 세력의 곤충·말벌은 보스와 적대가 아니라 빠진다.
+        // 포격할 편: 보스에게 적대적인 것 전부(2페이즈 근접·숨결과 같은 기준). 보스(곤충 세력)는 모든 세력과 적대이므로
+        // 플레이어 세력·다른 세력의 습격자·기계체뿐 아니라 우호 지원군·상인·방문객·정착지 포로도 노린다.
+        // 같은 세력의 곤충·말벌과 무소속 야생 동물은 보스와 적대가 아니라 빠진다.
         private bool IsShellTargetSide(Thing target)
         {
-            if (!Pawn.HostileTo(target)) { return false; }
-
-            return target.Faction == Faction.OfPlayer || target.HostileTo(Faction.OfPlayer);
+            return Pawn.HostileTo(target);
         }
 
         private bool IsShellTarget(Thing thing, float range)
