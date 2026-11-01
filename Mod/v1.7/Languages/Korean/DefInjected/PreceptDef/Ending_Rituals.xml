@@ -11,4 +11,10 @@
 <VV_QueensCoronation.label>여왕의 대관식</VV_QueensCoronation.label>
 <VV_QueensCoronation.description>공명자가 여왕으로 즉위하며 영원꽃의 여섯 번째 개화를 완성합니다.
 \n개화 응축을 마친 영원꽃에서, 공명자인 로열 비비만 진행할 수 있습니다.</VV_QueensCoronation.description>
+
+<VV_WindOfRest.label>안식의 바람</VV_WindOfRest.label>
+<VV_WindOfRest.description>완전히 개화한 영원꽃에서 지역 전체로 잔잔한 바람을 보냅니다. 바람이 닿은 모든 생명체의 유전자 불안정과 스카리아가 사라집니다. 거대 말벌은 가루가 되어 흩어지고 날개만 남습니다.</VV_WindOfRest.description>
+
+<VV_SkyShield.label>하늘 방패</VV_SkyShield.label>
+<VV_SkyShield.description>완전히 개화한 영원꽃 주변에 거대한 고각 보호막을 일정 시간 펼칩니다. 하늘에서 떨어지는 적의 박격포탄 등의 투사체를 막습니다.</VV_SkyShield.description>
 </LanguageData>

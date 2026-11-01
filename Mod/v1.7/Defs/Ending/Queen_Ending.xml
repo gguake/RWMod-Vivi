@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 엔딩 이후 보상: 〈여왕의 대관식〉을 마친 비비의 권능과 6단계 영원꽃 의식(안식의 바람·하늘 방패)이 쓰는 Thing.
+       의식 Def는 Rituals_Ending.xml, 연출은 Effects_Ending_Queen.xml에 있다. -->
+
+  <!-- ===== 여왕의 권능: 능력 두 개를 주고, 생명 공명은 Hediff_EverflowerQueen의 사망 통지로 처리한다 ===== -->
+  <HediffDef>
+    <defName>VV_EverflowerQueen</defName>
+    <label>everflower queen</label>
+    <description>This vivi was crowned queen before a fully bloomed everflower.
+\nLife resonance: If the queen dies while the fully bloomed everflower still stands, her body scatters into golden petals and she awakens before the everflower a day later with all her wounds healed. If the everflower is gone, she dies like anyone else.
+\nThe queen can also pass sentence with a giant eltex needle and raise a shield from the surrounding environment mana.</description>
+    <hediffClass>VVRace.Hediff_EverflowerQueen</hediffClass>
+    <defaultLabelColor>(1, 0.85, 0.4)</defaultLabelColor>
+    <isBad>false</isBad>
+    <priceImpact>false</priceImpact>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <everCurableByItem>false</everCurableByItem>
+    <keepOnBodyPartRestoration>true</keepOnBodyPartRestoration>
+    <maxSeverity>1</maxSeverity>
+    <initialSeverity>1</initialSeverity>
+    <abilities>
+      <li>VV_QueenVerdict</li>
+      <li>VV_QueenManaBarrier</li>
+    </abilities>
+  </HediffDef>
+
+  <!-- ===== 선고: 등 뒤 허공에 맺힌 거대 엘텍스 바늘이 한 번 날아가 경로의 적대 대상을 꿰뚫고 사라진다 ===== -->
+  <AbilityDef>
+    <defName>VV_QueenVerdict</defName>
+    <label>verdict</label>
+    <description>Summons a giant eltex needle in the air behind the queen and hurls it at the target. The needle pierces every hostile creature and structure along a 3-cell-wide, 35-cell-long path, then scatters into petals. Allies are not harmed.</description>
+    <iconPath>UI/Commands/VV_QueenVerdict</iconPath>
+    <cooldownTicksRange>2500</cooldownTicksRange>
+    <hostile>true</hostile>
+    <aiCanUse>false</aiCanUse>
+    <displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
+    <disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
+
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <label>verdict</label>
+      <violent>true</violent>
+      <warmupTime>0.5</warmupTime>
+      <range>34.9</range>
+      <requireLineOfSight>true</requireLineOfSight>
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetBuildings>true</canTargetBuildings>
+        <canTargetSelf>false</canTargetSelf>
+      </targetParams>
+    </verbProperties>
+
+    <comps>
+      <li Class="VVRace.CompProperties_AbilityQueenVerdict">
+        <needleDef>VV_QueenVerdictNeedle</needleDef>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <!-- 아포크리파의 거대 엘텍스 바늘과 같은 그림·궤적을 쓴다. 피해는 VV_GiantNeedlePierce(구조물 2배) -->
+  <ThingDef ParentName="EtherealThingBase">
+    <defName>VV_QueenVerdictNeedle</defName>
+    <label>verdict needle</label>
+    <thingClass>VVRace.QueenVerdictNeedle</thingClass>
+    <tickerType>Normal</tickerType>
+    <drawerType>RealtimeOnly</drawerType>
+    <drawOffscreen>true</drawOffscreen>
+    <seeThroughFog>true</seeThroughFog>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <selectable>false</selectable>
+    <comps>
+      <li Class="RPEF.CompProperties_TrailRenderer">
+        <texPath>VFX/VV_GiantNeedleTrail</texPath>
+        <shader>AdditiveChangeHue</shader>
+        <color>(1.0, 0.82, 0.5)</color>
+        <widthCurve>
+          <points>
+            <li>(0, 0.3)</li>
+            <li>(1, 2.8)</li>
+          </points>
+        </widthCurve>
+        <lineTextureMode>Stretch</lineTextureMode>
+        <maxTrailPoint>60</maxTrailPoint>
+        <refreshIntervalTicks>0</refreshIntervalTicks>
+        <fadeOutTicks>24</fadeOutTicks>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- ===== 마나 보호막: 보호막 반경 안 환경 마나의 합계가 1000 이상이면 그만큼을 칸별 마나에 비례해 소모하고 저각 보호막을 세운다 ===== -->
+  <AbilityDef>
+    <defName>VV_QueenManaBarrier</defName>
+    <label>mana barrier</label>
+    <description>Gathers environment mana around the target point into a low-angle shield that lasts 2 hours. The shield stops hostile bullets and other ground projectiles, while allies inside can still fire out. The environment mana within the shield's radius must total at least 1000, and that much is drawn from those cells in proportion to the mana each holds.</description>
+    <iconPath>UI/Commands/VV_QueenManaBarrier</iconPath>
+    <cooldownTicksRange>2500</cooldownTicksRange>
+    <hostile>false</hostile>
+    <aiCanUse>false</aiCanUse>
+    <displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
+    <disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
+
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <label>mana barrier</label>
+      <violent>false</violent>
+      <warmupTime>1</warmupTime>
+      <range>29.9</range>
+      <requireLineOfSight>false</requireLineOfSight>
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+        <canTargetPawns>false</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetSelf>false</canTargetSelf>
+      </targetParams>
+    </verbProperties>
+
+    <comps>
+      <li Class="VVRace.CompProperties_AbilityQueenManaBarrier">
+        <shieldDef>VV_QueenManaBarrierShield</shieldDef>
+        <requiredTotalMana>1000</requiredTotalMana>
+        <durationTicks>5000</durationTicks>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <!-- ===== 보호막 공통: 바닐라 투사체 차단기는 부모 세력으로 적대 판정을 하므로 플레이어 세력을 가질 수 있는 건물 범주로 만든다.
+       선택·건설·해체·수리·공격 대상이 되지 않고 칸을 차지하지 않으며, 다른 건물을 지을 때 지워지지 않도록 파괴 불가로 둔다 ===== -->
+  <ThingDef Name="VV_ShieldDomeBase" Abstract="True">
+    <category>Building</category>
+    <thingClass>VVRace.ViviShieldDome</thingClass>
+    <tickerType>Normal</tickerType>
+    <drawerType>RealtimeOnly</drawerType>
+    <drawOffscreen>true</drawOffscreen>
+    <seeThroughFog>true</seeThroughFog>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <selectable>false</selectable>
+    <useHitPoints>false</useHitPoints>
+    <destroyable>false</destroyable>
+    <rotatable>false</rotatable>
+    <passability>Standable</passability>
+    <clearBuildingArea>false</clearBuildingArea>
+    <statBases>
+      <MarketValue>0</MarketValue>
+    </statBases>
+    <building>
+      <isEdifice>false</isEdifice>
+      <deconstructible>false</deconstructible>
+      <claimable>false</claimable>
+      <isInert>true</isInert>
+      <isTargetable>false</isTargetable>
+      <expandHomeArea>false</expandHomeArea>
+      <allowAutoroof>false</allowAutoroof>
+      <repairable>false</repairable>
+      <canBeDamagedByAttacks>false</canBeDamagedByAttacks>
+      <ai_neverTrashThis>true</ai_neverTrashThis>
+    </building>
+  </ThingDef>
+
+  <!-- 〈하늘 방패〉 의식의 고각 보호막(박격포탄 등 머리 위로 날아오는 투사체와 궤도 폭격). 평소에는 금빛 벌집 무늬만 희미하게 보인다 -->
+  <ThingDef ParentName="VV_ShieldDomeBase">
+    <defName>VV_SkyShield</defName>
+    <label>sky shield</label>
+    <comps>
+      <li Class="CompProperties_ProjectileInterceptor">
+        <radius>44.9</radius>
+        <interceptAirProjectiles>true</interceptAirProjectiles>
+        <color>(1, 0.82, 0.45)</color>
+        <activeSound>MortarShield_Ambience</activeSound>
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="VVRace.ShieldDomeExtension">
+        <color>(1, 0.84, 0.5)</color>
+        <idleAlpha>0.07</idleAlpha>
+        <pulseAlpha>0.03</pulseAlpha>
+        <pulseSpeed>0.8</pulseSpeed>
+        <fadeSecs>1.5</fadeSecs>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- 〈마나 보호막〉 능력의 저각 보호막(총탄 등 지상 투사체). 안에서 밖으로는 쏠 수 있다 -->
+  <ThingDef ParentName="VV_ShieldDomeBase">
+    <defName>VV_QueenManaBarrierShield</defName>
+    <label>mana barrier</label>
+    <comps>
+      <li Class="CompProperties_ProjectileInterceptor">
+        <radius>4.9</radius>
+        <interceptGroundProjectiles>true</interceptGroundProjectiles>
+        <color>(0.45, 0.85, 1)</color>
+        <minAlpha>0.15</minAlpha>
+        <activeSound>BulletShield_Ambience</activeSound>
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="VVRace.ShieldDomeExtension">
+        <color>(0.5, 0.88, 1)</color>
+        <idleAlpha>0.35</idleAlpha>
+        <pulseAlpha>0.1</pulseAlpha>
+        <pulseSpeed>1.6</pulseSpeed>
+        <fadeSecs>0.6</fadeSecs>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- ===== 〈안식의 바람〉: 파면이 맵 끝까지 넓어지며 닿은 폰을 정화하는 진행 Thing과 거대 말벌 가루 소멸 연출 ===== -->
+  <ThingDef ParentName="EtherealThingBase">
+    <defName>VV_WindOfRest</defName>
+    <label>wind of rest</label>
+    <thingClass>VVRace.WindOfRest</thingClass>
+    <tickerType>Normal</tickerType>
+    <drawerType>None</drawerType>
+    <selectable>false</selectable>
+  </ThingDef>
+
+  <ThingDef ParentName="EtherealThingBase">
+    <defName>VV_DissolvingHornet</defName>
+    <label>dissolving titanic hornet</label>
+    <thingClass>VVRace.DissolvingHornet</thingClass>
+    <tickerType>Normal</tickerType>
+    <drawerType>RealtimeOnly</drawerType>
+    <drawOffscreen>true</drawOffscreen>
+    <altitudeLayer>Pawn</altitudeLayer>
+    <selectable>false</selectable>
+  </ThingDef>
+</Defs>

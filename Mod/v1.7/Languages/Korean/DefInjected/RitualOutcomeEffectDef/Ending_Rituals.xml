@@ -18,4 +18,16 @@
 <VV_QueensCoronation.comps.0.label>{PAWN_labelShort}의 정신 감응력</VV_QueensCoronation.comps.0.label>
 <VV_QueensCoronation.comps.0.labelAbstract>공명자의 정신 감응력</VV_QueensCoronation.comps.0.labelAbstract>
 <VV_QueensCoronation.comps.1.label>참여자 수</VV_QueensCoronation.comps.1.label>
+
+<VV_WindOfRest.description>영원꽃에서 일어난 바람이 몇 초에 걸쳐 지역 전체로 퍼집니다. 바람이 닿은 모든 생명체의 유전자 불안정과 스카리아를 세력과 관계없이 없앱니다. 거대 말벌은 가루가 되어 흩어지고 날개 1~2개를 남깁니다. 의식 결과가 좋을수록 다음 영원꽃 의식의 재사용 대기시간이 줄어듭니다.
+\n모든 영원꽃 의식의 재사용 대기시간은 공유됩니다.</VV_WindOfRest.description>
+<VV_WindOfRest.comps.0.label>{PAWN_labelShort}의 정신 감응력</VV_WindOfRest.comps.0.label>
+<VV_WindOfRest.comps.0.labelAbstract>공명자의 정신 감응력</VV_WindOfRest.comps.0.labelAbstract>
+<VV_WindOfRest.comps.1.label>참여자 수</VV_WindOfRest.comps.1.label>
+
+<VV_SkyShield.description>영원꽃 주변 반경 45칸에 고각 보호막을 펼칩니다. 적의 박격포탄 등 머리 위로 날아오는 투사체와 궤도 폭격을 막고, 아군의 포격은 통과시킵니다. 의식 결과가 좋을수록 보호막이 오래 유지되고(1~3일) 다음 영원꽃 의식의 재사용 대기시간이 줄어듭니다. 보호막이 남아 있을 때 다시 진행하면 지속시간이 늘어납니다.
+\n모든 영원꽃 의식의 재사용 대기시간은 공유됩니다.</VV_SkyShield.description>
+<VV_SkyShield.comps.0.label>{PAWN_labelShort}의 정신 감응력</VV_SkyShield.comps.0.label>
+<VV_SkyShield.comps.0.labelAbstract>공명자의 정신 감응력</VV_SkyShield.comps.0.labelAbstract>
+<VV_SkyShield.comps.1.label>참여자 수</VV_SkyShield.comps.1.label>
 </LanguageData>

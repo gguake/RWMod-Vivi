@@ -20,8 +20,8 @@
 <!-- 5/6단계 레벨업 편지 머리말 -->
 <VV_Letter_EverflowerAttunementLevel5Preamble>영원꽃이 제단의 마나 회로와 공명하며 다섯 번째 개화에 도달했습니다.
 \n제단을 통해 주변에 막대한 환경 마나를 방출하며, 공명자의 영원꽃 공명이 V단계로 강화됩니다.</VV_Letter_EverflowerAttunementLevel5Preamble>
-<VV_Letter_EverflowerAttunementLevel6Preamble>영원꽃이 완전히 개화했습니다. 이제 지역 전체에 환경 마나가 유지됩니다.
-\n공명자의 영원꽃 공명이 VI단계로 강화되어 요정 비비 결속에 따른 피로와 이동 속도 저하가 사라집니다. 정착지의 모든 비비는 유전자 불안정에 면역이 되며, 성체의 노화가 크게 느려집니다.</VV_Letter_EverflowerAttunementLevel6Preamble>
+<VV_Letter_EverflowerAttunementLevel6Preamble>영원꽃이 완전히 개화했습니다.
+\n공명자의 영원꽃 공명이 VI단계로 강화되어 요정 비비 결속에 따른 피로와 이동 속도 저하가 사라집니다. 정착지 성체 비비의 노화가 크게 느려집니다.</VV_Letter_EverflowerAttunementLevel6Preamble>
 
 <!-- 정보창 -->
 <VV_Inspector_AltarEnshrinedEverflower>안치된 영원꽃: 조율 {LEVEL}단계</VV_Inspector_AltarEnshrinedEverflower>

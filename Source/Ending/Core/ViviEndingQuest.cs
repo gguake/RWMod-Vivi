@@ -18,6 +18,9 @@ namespace VVRace
             public int returnTick;
             public Map map;
 
+            // 〈생명 공명〉으로 영원꽃 안에서 되살아나는 여왕이다. 귀환 위치와 연출이 다르다.
+            public bool rebirth;
+
             public void ExposeData()
             {
                 // 대기 중 맵이 사라지면 유효하지 않은 참조를 저장하지 않는다. 귀환 시 엔딩 맵이나 다른 정착지로 대체한다.
@@ -29,6 +32,7 @@ namespace VVRace
                 Scribe_Deep.Look(ref pawn, "pawn");
                 Scribe_Values.Look(ref returnTick, "returnTick", 0);
                 Scribe_References.Look(ref map, "map");
+                Scribe_Values.Look(ref rebirth, "rebirth", false);
             }
         }
 
@@ -224,6 +228,11 @@ namespace VVRace
                 }
             }
 
+            if (_pendingRebirths.Count > 0)
+            {
+                ProcessPendingRebirths();
+            }
+
             if (_heldPawns.Count > 0)
             {
                 TickHeldPawns(now);
@@ -330,6 +339,11 @@ namespace VVRace
 
         public string GetEverflowerInspectString(ArcanePlant_Everflower everflower)
         {
+            if (IsAnchor(everflower) && IsCompleted)
+            {
+                return GetQueenRebirthInspectString();
+            }
+
             if (!IsAnchor(everflower) || !IsEndingActive) { return null; }
 
             return LocalizeString_EndingCore.VV_Inspector_EndingBloom.Translate(BloomProgress.ToStringPercent().Named("PERCENT")).Resolve();
@@ -691,10 +705,16 @@ namespace VVRace
                 return;
             }
 
-            var cell = FindReturnCell(map);
+            var cell = held.rebirth ? FindRebirthCell(map) : FindReturnCell(map);
             pawn.holdingOwner?.Remove(pawn);
             GenSpawn.Spawn(pawn, cell, map);
             pawn.Notify_Teleported();
+
+            if (held.rebirth)
+            {
+                PlayRebirthEffect(pawn, map);
+                return;
+            }
 
             if (pawn.drafter != null && pawn.wasDraftedBeforeSkip)
             {

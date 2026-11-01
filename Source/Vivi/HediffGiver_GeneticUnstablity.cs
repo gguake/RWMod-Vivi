@@ -16,7 +16,7 @@ namespace VVRace
 
         public override void OnIntervalPassed(Pawn pawn, Hediff cause)
         {
-            if (pawn.Dead || !pawn.IsNestedHashIntervalTick(60, CheckInterval) || EverflowerBlessingUtility.IsBlessed(pawn))
+            if (pawn.Dead || !pawn.IsNestedHashIntervalTick(60, CheckInterval))
             {
                 return;
             }

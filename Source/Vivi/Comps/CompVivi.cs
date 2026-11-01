@@ -240,6 +240,15 @@ namespace VVRace
                     action = () => Coronate()
                 };
             }
+
+            if (!pawn.health.hediffSet.HasHediff(QueenDefOf.VV_EverflowerQueen))
+            {
+                yield return new Command_Action
+                {
+                    defaultLabel = "DEV: Grant queen powers",
+                    action = () => ViviEndingQuest.GrantQueenPowers(pawn)
+                };
+            }
         }
 
         public override void PostDrawExtraSelectionOverlays()

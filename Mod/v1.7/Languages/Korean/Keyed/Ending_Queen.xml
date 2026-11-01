@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+<!-- 하늘 방패 -->
+<VV_Message_SkyShieldRaised>영원꽃 위로 하늘 방패가 펼쳐졌습니다. {0} 동안 유지됩니다.</VV_Message_SkyShieldRaised>
+<VV_Inspector_SkyShieldRemaining>하늘 방패: {0} 남음</VV_Inspector_SkyShieldRemaining>
+
+<!-- 안식의 바람 -->
+<VV_Message_WindOfRestResult>안식의 바람이 지나갔습니다. 유전자 불안정 치유 {INSTABILITY}, 스카리아 치유 {SCARIA}, 흩어진 거대 말벌 {HORNETS}</VV_Message_WindOfRestResult>
+<VV_Message_WindOfRestNothing>안식의 바람이 지나갔습니다. 정화할 대상이 없었습니다.</VV_Message_WindOfRestNothing>
+<!-- 여왕의 권능: 생명 공명 -->
+<VV_Letter_QueenLifeResonanceLabel>생명 공명: {PAWN_labelShort}</VV_Letter_QueenLifeResonanceLabel>
+<VV_Letter_QueenLifeResonance>{PAWN_nameDef}의 몸이 금빛 꽃잎으로 흩어져 영원꽃으로 스며들었습니다.
+\n여왕의 생명은 완전히 개화한 영원꽃과 공명하고 있습니다. {TIME} 뒤 영원꽃 앞에서 다시 깨어납니다.</VV_Letter_QueenLifeResonance>
+<VV_Message_QueenReborn>{PAWN_labelShort}(이)가 영원꽃 앞에서 다시 깨어났습니다.</VV_Message_QueenReborn>
+<VV_Inspector_QueenRebirth>{PAWN_labelShort} 깨어나기까지: {TIME}</VV_Inspector_QueenRebirth>
+
+<!-- 여왕의 권능: 마나 보호막 -->
+<VV_Message_ManaBarrierNotEnoughMana>보호막 범위 안의 환경 마나가 부족합니다. ({0}/{1})</VV_Message_ManaBarrierNotEnoughMana>
+<VV_ManaBarrierTargetMana>범위 안 환경 마나: {0}/{1}</VV_ManaBarrierTargetMana>
+</LanguageData>

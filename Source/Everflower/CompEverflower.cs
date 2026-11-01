@@ -277,6 +277,12 @@ namespace VVRace
                 sb.AppendInNewLine(LocalizeString_EndingAltar.VV_Inspector_EverflowerEnshrined.Translate());
             }
 
+            var skyShield = parent.Spawned ? ViviShieldDome.FindFor(parent.Map, QueenDefOf.VV_SkyShield, parent) : null;
+            if (skyShield != null)
+            {
+                sb.AppendInNewLine(LocalizeString_EndingQueen.VV_Inspector_SkyShieldRemaining.Translate(skyShield.TicksLeft.ToStringTicksToPeriod()));
+            }
+
             var endingText = ViviEndingQuest.Current?.GetEverflowerInspectString(Everflower);
             if (!endingText.NullOrEmpty())
             {

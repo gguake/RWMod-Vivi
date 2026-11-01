@@ -448,4 +448,302 @@
     <maxAttunementLevel>5</maxAttunementLevel>
     <completesEndingQuest>true</completesEndingQuest>
   </RitualObligationTargetFilterDef>
+
+  <!-- ===== 6단계 〈안식의 바람〉: 영원꽃에서 맵 전체로 바람을 보내 유전자 불안정과 스카리아를 걷어 낸다.
+       스카리아와 공생하는 거대 말벌은 가루가 되어 흩어지고 날개만 남는다(WindOfRest) ===== -->
+  <PreceptDef>
+    <defName>VV_WindOfRest</defName>
+    <label>wind of rest</label>
+    <description>Sends a gentle wind from a fully bloomed everflower across the whole region. It removes genetic instability and scaria from every creature it touches. Titanic hornets crumble to dust, leaving only their wings behind.</description>
+    <issue>Ritual</issue>
+    <preceptClass>Precept_Ritual</preceptClass>
+    <visible>false</visible>
+    <classic>true</classic>
+    <countsTowardsPreceptLimit>false</countsTowardsPreceptLimit>
+    <selectionWeight>0</selectionWeight>
+    <ritualPatternBase>VV_WindOfRest</ritualPatternBase>
+    <iconPath>UI/Commands/VV_WindOfRest</iconPath>
+    <usesIdeoVisualEffects>false</usesIdeoVisualEffects>
+    <mergeRitualGizmosFromAllIdeos>true</mergeRitualGizmosFromAllIdeos>
+    <useRepeatPenalty>false</useRepeatPenalty>
+    <showRitualFloatMenuOption>false</showRitualFloatMenuOption>
+    <displayOrderInImpact>993</displayOrderInImpact>
+    <displayOrderInIssue>993</displayOrderInIssue>
+  </PreceptDef>
+
+  <RitualPatternDef>
+    <defName>VV_WindOfRest</defName>
+    <ritualOnlyForIdeoMembers>false</ritualOnlyForIdeoMembers>
+    <ritualBehavior>VV_WindOfRest</ritualBehavior>
+    <ritualOutcomeEffect>VV_WindOfRest</ritualOutcomeEffect>
+    <ritualObligationTargetFilter>VV_WindOfRest</ritualObligationTargetFilter>
+    <playsIdeoMusic>false</playsIdeoMusic>
+    <alwaysStartAnytime>true</alwaysStartAnytime>
+    <iconPathOverride>UI/Commands/VV_WindOfRest</iconPathOverride>
+    <showIdeoIconsInDialog>false</showIdeoIconsInDialog>
+  </RitualPatternDef>
+
+  <RitualBehaviorDef>
+    <defName>VV_WindOfRest</defName>
+    <durationTicks>1500</durationTicks>
+    <workerClass>VVRace.RitualBehaviorWorker_GeneralEverflowerRitual</workerClass>
+    <displayCompletedMessage>true</displayCompletedMessage>
+    <roles>
+      <li Class="VVRace.RitualRoleEverflowerResonator">
+        <id>resonator</id>
+        <label>resonator</label>
+        <maxCount>1</maxCount>
+        <required>True</required>
+        <usedStat>PsychicSensitivity</usedStat>
+        <defaultForSelectedColonist>true</defaultForSelectedColonist>
+        <allowChild>false</allowChild>
+        <blocksSocialInteraction>true</blocksSocialInteraction>
+        <countsAsParticipant>false</countsAsParticipant>
+      </li>
+    </roles>
+    <stages>
+      <li>
+        <defaultDuty>Spectate</defaultDuty>
+        <showProgressBar>false</showProgressBar>
+        <endTriggers>
+          <li Class="StageEndTrigger_RolesArrived">
+            <roleIds>
+              <li>resonator</li>
+            </roleIds>
+          </li>
+        </endTriggers>
+        <roleBehaviors>
+          <li>
+            <roleId>resonator</roleId>
+            <dutyDef>ArriveToCell</dutyDef>
+            <customPositions>
+              <li Class="RitualPosition_PreferredAdjacentCellCardinal">
+                <faceThing>true</faceThing>
+              </li>
+            </customPositions>
+          </li>
+        </roleBehaviors>
+      </li>
+      <li>
+        <defaultDuty>SpectateCircle</defaultDuty>
+        <spectateDistanceOverride>4~6</spectateDistanceOverride>
+        <visualEffectDef>VV_EverflowerLink</visualEffectDef>
+        <endTriggers>
+          <li Class="StageEndTrigger_DurationPercentage">
+            <percentage>1</percentage>
+          </li>
+        </endTriggers>
+        <roleBehaviors>
+          <li>
+            <roleId>resonator</roleId>
+            <dutyDef>Idle</dutyDef>
+            <customPositions>
+              <li Class="RitualPosition_PreferredAdjacentCellCardinal">
+                <faceThing>true</faceThing>
+              </li>
+            </customPositions>
+          </li>
+        </roleBehaviors>
+      </li>
+    </stages>
+  </RitualBehaviorDef>
+
+  <RitualOutcomeEffectDef>
+    <defName>VV_WindOfRest</defName>
+    <description>A wind spreads from the everflower across the whole region over a few seconds. It removes genetic instability and scaria from every creature it reaches, regardless of faction. Titanic hornets crumble to dust and leave one or two wings behind. The better the ritual's result, the shorter the cooldown on the next everflower ritual.
+\nAll everflower rituals share a cooldown.</description>
+    <workerClass>VVRace.RitualOutcomeEffectWorker_WindOfRest</workerClass>
+    <allowAttachableOutcome>false</allowAttachableOutcome>
+    <givesDevelopmentPoints>false</givesDevelopmentPoints>
+    <allowOutcomeWithNoAttendance>true</allowOutcomeWithNoAttendance>
+    <effecter>VV_Effecter_WindOfRestComplete</effecter>
+    <maxQuality>10</maxQuality>
+    <comps>
+      <li Class="RitualOutcomeComp_PawnStatScaled">
+        <label>{PAWN_labelShort}'s psychic sensitivity</label>
+        <labelAbstract>resonator's psychic sensitivity</labelAbstract>
+        <roleId>resonator</roleId>
+        <statDef>PsychicSensitivity</statDef>
+        <curve>
+          <points>
+            <li>(0.5, 0.0)</li>
+            <li>(1.5, 1.0)</li>
+            <li>(2.5, 1.5)</li>
+            <li>(4.0, 2.0)</li>
+            <li>(6.0, 2.5)</li>
+            <li>(8.5, 3.0)</li>
+          </points>
+        </curve>
+      </li>
+      <li Class="RitualOutcomeComp_ParticipantCount">
+        <label>participant count</label>
+        <curve>
+          <points>
+            <li>(0,  0.0)</li>
+            <li>(4,  0.5)</li>
+            <li>(10, 1.0)</li>
+            <li>(20, 2.0)</li>
+          </points>
+        </curve>
+      </li>
+    </comps>
+  </RitualOutcomeEffectDef>
+
+  <RitualObligationTargetFilterDef Class="VVRace.RitualObligationTargetFilterDef_EverflowerRitual">
+    <defName>VV_WindOfRest</defName>
+    <workerClass>VVRace.RitualObligationTargetWorker_EverflowerRitual</workerClass>
+    <requiredAttunementLevel>6</requiredAttunementLevel>
+  </RitualObligationTargetFilterDef>
+
+  <!-- ===== 6단계 〈하늘 방패〉: 영원꽃 주변 넓은 범위에 적대 투사체만 막는 고각 보호막(ViviShieldDome)을 일정 시간 펼친다 ===== -->
+  <PreceptDef>
+    <defName>VV_SkyShield</defName>
+    <label>sky shield</label>
+    <description>Raises a vast high-angle shield around a fully bloomed everflower for a time. It stops hostile mortar shells and other projectiles falling from the sky.</description>
+    <issue>Ritual</issue>
+    <preceptClass>Precept_Ritual</preceptClass>
+    <visible>false</visible>
+    <classic>true</classic>
+    <countsTowardsPreceptLimit>false</countsTowardsPreceptLimit>
+    <selectionWeight>0</selectionWeight>
+    <ritualPatternBase>VV_SkyShield</ritualPatternBase>
+    <iconPath>UI/Commands/VV_SkyShield</iconPath>
+    <usesIdeoVisualEffects>false</usesIdeoVisualEffects>
+    <mergeRitualGizmosFromAllIdeos>true</mergeRitualGizmosFromAllIdeos>
+    <useRepeatPenalty>false</useRepeatPenalty>
+    <showRitualFloatMenuOption>false</showRitualFloatMenuOption>
+    <displayOrderInImpact>992</displayOrderInImpact>
+    <displayOrderInIssue>992</displayOrderInIssue>
+  </PreceptDef>
+
+  <RitualPatternDef>
+    <defName>VV_SkyShield</defName>
+    <ritualOnlyForIdeoMembers>false</ritualOnlyForIdeoMembers>
+    <ritualBehavior>VV_SkyShield</ritualBehavior>
+    <ritualOutcomeEffect>VV_SkyShield</ritualOutcomeEffect>
+    <ritualObligationTargetFilter>VV_SkyShield</ritualObligationTargetFilter>
+    <playsIdeoMusic>false</playsIdeoMusic>
+    <alwaysStartAnytime>true</alwaysStartAnytime>
+    <iconPathOverride>UI/Commands/VV_SkyShield</iconPathOverride>
+    <showIdeoIconsInDialog>false</showIdeoIconsInDialog>
+  </RitualPatternDef>
+
+  <RitualBehaviorDef>
+    <defName>VV_SkyShield</defName>
+    <durationTicks>1500</durationTicks>
+    <workerClass>VVRace.RitualBehaviorWorker_GeneralEverflowerRitual</workerClass>
+    <displayCompletedMessage>true</displayCompletedMessage>
+    <roles>
+      <li Class="VVRace.RitualRoleEverflowerResonator">
+        <id>resonator</id>
+        <label>resonator</label>
+        <maxCount>1</maxCount>
+        <required>True</required>
+        <usedStat>PsychicSensitivity</usedStat>
+        <defaultForSelectedColonist>true</defaultForSelectedColonist>
+        <allowChild>false</allowChild>
+        <blocksSocialInteraction>true</blocksSocialInteraction>
+        <countsAsParticipant>false</countsAsParticipant>
+      </li>
+    </roles>
+    <stages>
+      <li>
+        <defaultDuty>Spectate</defaultDuty>
+        <showProgressBar>false</showProgressBar>
+        <endTriggers>
+          <li Class="StageEndTrigger_RolesArrived">
+            <roleIds>
+              <li>resonator</li>
+            </roleIds>
+          </li>
+        </endTriggers>
+        <roleBehaviors>
+          <li>
+            <roleId>resonator</roleId>
+            <dutyDef>ArriveToCell</dutyDef>
+            <customPositions>
+              <li Class="RitualPosition_PreferredAdjacentCellCardinal">
+                <faceThing>true</faceThing>
+              </li>
+            </customPositions>
+          </li>
+        </roleBehaviors>
+      </li>
+      <li>
+        <defaultDuty>SpectateCircle</defaultDuty>
+        <spectateDistanceOverride>4~6</spectateDistanceOverride>
+        <visualEffectDef>VV_EverflowerLink</visualEffectDef>
+        <endTriggers>
+          <li Class="StageEndTrigger_DurationPercentage">
+            <percentage>1</percentage>
+          </li>
+        </endTriggers>
+        <roleBehaviors>
+          <li>
+            <roleId>resonator</roleId>
+            <dutyDef>Idle</dutyDef>
+            <customPositions>
+              <li Class="RitualPosition_PreferredAdjacentCellCardinal">
+                <faceThing>true</faceThing>
+              </li>
+            </customPositions>
+          </li>
+        </roleBehaviors>
+      </li>
+    </stages>
+  </RitualBehaviorDef>
+
+  <RitualOutcomeEffectDef Class="VVRace.RitualOutcomeEffectDef_SkyShield">
+    <defName>VV_SkyShield</defName>
+    <description>Raises a high-angle shield with a radius of 45 cells around the everflower. It stops hostile mortar shells, other overhead projectiles and orbital strikes, while allied fire passes through. The better the ritual's result, the longer it lasts (1 to 3 days) and the shorter the cooldown on the next everflower ritual. Performing it again while the shield is up extends the shield.
+\nAll everflower rituals share a cooldown.</description>
+    <workerClass>VVRace.RitualOutcomeEffectWorker_SkyShield</workerClass>
+    <allowAttachableOutcome>false</allowAttachableOutcome>
+    <givesDevelopmentPoints>false</givesDevelopmentPoints>
+    <allowOutcomeWithNoAttendance>true</allowOutcomeWithNoAttendance>
+    <effecter>VV_Effecter_SkyShieldComplete</effecter>
+    <maxQuality>10</maxQuality>
+    <shieldDef>VV_SkyShield</shieldDef>
+    <durationTicksByQuality>
+      <points>
+        <li>(0, 60000)</li>
+        <li>(3, 180000)</li>
+      </points>
+    </durationTicksByQuality>
+    <comps>
+      <li Class="RitualOutcomeComp_PawnStatScaled">
+        <label>{PAWN_labelShort}'s psychic sensitivity</label>
+        <labelAbstract>resonator's psychic sensitivity</labelAbstract>
+        <roleId>resonator</roleId>
+        <statDef>PsychicSensitivity</statDef>
+        <curve>
+          <points>
+            <li>(0.5, 0.0)</li>
+            <li>(1.5, 1.0)</li>
+            <li>(2.5, 1.5)</li>
+            <li>(4.0, 2.0)</li>
+            <li>(6.0, 2.5)</li>
+            <li>(8.5, 3.0)</li>
+          </points>
+        </curve>
+      </li>
+      <li Class="RitualOutcomeComp_ParticipantCount">
+        <label>participant count</label>
+        <curve>
+          <points>
+            <li>(0,  0.0)</li>
+            <li>(4,  0.5)</li>
+            <li>(10, 1.0)</li>
+            <li>(20, 2.0)</li>
+          </points>
+        </curve>
+      </li>
+    </comps>
+  </RitualOutcomeEffectDef>
+
+  <RitualObligationTargetFilterDef Class="VVRace.RitualObligationTargetFilterDef_EverflowerRitual">
+    <defName>VV_SkyShield</defName>
+    <workerClass>VVRace.RitualObligationTargetWorker_EverflowerRitual</workerClass>
+    <requiredAttunementLevel>6</requiredAttunementLevel>
+  </RitualObligationTargetFilterDef>
 </Defs>

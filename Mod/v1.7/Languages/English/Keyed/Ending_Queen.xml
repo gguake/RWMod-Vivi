@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+<!-- 하늘 방패 -->
+<VV_Message_SkyShieldRaised>A sky shield spreads over the everflower. It will hold for {0}.</VV_Message_SkyShieldRaised>
+<VV_Inspector_SkyShieldRemaining>Sky shield: {0} left</VV_Inspector_SkyShieldRemaining>
+
+<!-- 안식의 바람 -->
+<VV_Message_WindOfRestResult>The wind of rest has passed. Genetic instability cured: {INSTABILITY}, scaria cured: {SCARIA}, titanic hornets crumbled: {HORNETS}.</VV_Message_WindOfRestResult>
+<VV_Message_WindOfRestNothing>The wind of rest has passed. There was nothing left to cleanse.</VV_Message_WindOfRestNothing>
+<!-- 여왕의 권능: 생명 공명 -->
+<VV_Letter_QueenLifeResonanceLabel>Life resonance: {PAWN_labelShort}</VV_Letter_QueenLifeResonanceLabel>
+<VV_Letter_QueenLifeResonance>{PAWN_nameDef}'s body scattered into golden petals and was drawn into the everflower.
+\nThe queen's life resonates with the fully bloomed everflower. She will awaken before the everflower in {TIME}.</VV_Letter_QueenLifeResonance>
+<VV_Message_QueenReborn>{PAWN_labelShort} has awakened before the everflower.</VV_Message_QueenReborn>
+<VV_Inspector_QueenRebirth>{PAWN_labelShort} awakens in: {TIME}</VV_Inspector_QueenRebirth>
+
+<!-- 여왕의 권능: 마나 보호막 -->
+<VV_Message_ManaBarrierNotEnoughMana>Not enough environment mana within the shield's radius ({0}/{1}).</VV_Message_ManaBarrierNotEnoughMana>
+<VV_ManaBarrierTargetMana>Environment mana in radius: {0}/{1}</VV_ManaBarrierTargetMana>
+</LanguageData>

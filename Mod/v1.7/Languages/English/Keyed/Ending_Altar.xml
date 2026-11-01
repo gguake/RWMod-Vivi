@@ -20,8 +20,8 @@
 <!-- 5/6단계 레벨업 편지 머리말 -->
 <VV_Letter_EverflowerAttunementLevel5Preamble>The everflower has resonated with the altar's mana circuits and reached its fifth bloom.
 \nIt releases vast amounts of environment mana into its surroundings through the altar, and its resonator's everflower resonance strengthens to stage V.</VV_Letter_EverflowerAttunementLevel5Preamble>
-<VV_Letter_EverflowerAttunementLevel6Preamble>The everflower has fully bloomed. It now sustains environment mana across the whole map.
-\nThe resonator's everflower resonance strengthens to stage VI, removing the fatigue and movement penalties from bound fairy vivis. All vivis in the colony become immune to genetic instability, and adult vivis age much more slowly.</VV_Letter_EverflowerAttunementLevel6Preamble>
+<VV_Letter_EverflowerAttunementLevel6Preamble>The everflower has fully bloomed.
+\nThe resonator's everflower resonance strengthens to stage VI, removing the fatigue and movement penalties from bound fairy vivis. Adult vivis in the colony age much more slowly.</VV_Letter_EverflowerAttunementLevel6Preamble>
 
 <!-- 정보창 -->
 <VV_Inspector_AltarEnshrinedEverflower>Enshrined everflower: attunement level {LEVEL}</VV_Inspector_AltarEnshrinedEverflower>

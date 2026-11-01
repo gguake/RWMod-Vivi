@@ -21,6 +21,11 @@ namespace VVRace
                 def.effecter?.Spawn(queen, queen.Map).Cleanup();
             }
 
+            if (queen != null && !queen.Dead)
+            {
+                ViviEndingQuest.GrantQueenPowers(queen);
+            }
+
             everflower.Notify_RitualComplete(quality);
             ViviEndingQuest.Current?.Notify_CoronationCompleted(everflower, queen);
         }

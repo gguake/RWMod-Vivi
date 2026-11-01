@@ -10,25 +10,6 @@ namespace VVRace
         private const int ReverberationAttunementLevel = 5;
         private const int BlessingAttunementLevel = 6;
 
-        public static bool IsBlessed(Pawn pawn)
-        {
-            if (pawn?.health?.hediffSet == null) { return false; }
-
-            if (pawn.health.hediffSet.HasHediff(EndingRitualDefOf.VV_EverflowerBlessing)) { return true; }
-
-            // 아이 비비는 성장이 멈추지 않도록 노화 감속 헤디프를 제외하되, 축복받은 땅에서는 유전자 불안정 면역을 적용한다.
-            return pawn.Faction != null && pawn.Faction.IsPlayer && pawn.IsVivi() && IsBlessedMap(pawn.MapHeld);
-        }
-
-        public static bool IsBlessedMap(Map map)
-        {
-            var quest = ViviEndingQuest.Current;
-            if (quest == null || !quest.IsCompleted) { return false; }
-
-            var anchor = GetSpawnedAnchor(quest, map);
-            return anchor != null && anchor.AttunementLevel >= BlessingAttunementLevel;
-        }
-
         public static void RefreshFor(Pawn pawn)
         {
             if (pawn == null || !pawn.Spawned || pawn.Dead || pawn.health == null || !pawn.IsVivi()) { return; }
@@ -48,14 +29,10 @@ namespace VVRace
                 MaintainReverberation(pawn, compEverflower.AttunementHediffSeverity);
             }
 
-            if (quest.IsCompleted && level >= BlessingAttunementLevel && pawn.Faction != null && pawn.Faction.IsPlayer)
+            // 아이 비비는 성장이 멈추지 않도록 노화 감속 축복을 주지 않는다.
+            if (quest.IsCompleted && level >= BlessingAttunementLevel && pawn.Faction != null && pawn.Faction.IsPlayer && pawn.ageTracker.Adult)
             {
-                if (pawn.ageTracker.Adult)
-                {
-                    GiveOrRefreshBlessing(pawn);
-                }
-
-                RemoveGeneticUnstability(pawn);
+                GiveOrRefreshBlessing(pawn);
             }
         }
 
@@ -90,15 +67,6 @@ namespace VVRace
             }
 
             blessing.TryGetComp<HediffComp_Disappears>()?.ResetElapsedTicks();
-        }
-
-        private static void RemoveGeneticUnstability(Pawn pawn)
-        {
-            var hediff = pawn.health.hediffSet.GetFirstHediffOfDef(EndingRitualDefOf.VV_GeneticUnstability);
-            if (hediff != null)
-            {
-                pawn.health.RemoveHediff(hediff);
-            }
         }
     }
 }

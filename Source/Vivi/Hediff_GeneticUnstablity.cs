@@ -11,30 +11,6 @@ namespace VVRace
 
         private float _intervalFactor;
 
-        // ShouldRemove는 매 틱 모든 헤디프에서 호출되므로 엔딩 완료 여부는 틱당 한 번만 계산한다.
-        // 엔딩을 시작하지 않은 게임에서는 축복 판정도 생략한다.
-        private static int _endingCheckedTick = -1;
-        private static bool _endingCompleted;
-
-        private static bool EndingCompleted
-        {
-            get
-            {
-                if (Current.Game == null) { return false; }
-
-                var ticksGame = Find.TickManager.TicksGame;
-                if (ticksGame != _endingCheckedTick)
-                {
-                    _endingCheckedTick = ticksGame;
-                    _endingCompleted = ViviEndingQuest.Current?.IsCompleted ?? false;
-                }
-
-                return _endingCompleted;
-            }
-        }
-
-        public override bool ShouldRemove => base.ShouldRemove || (EndingCompleted && EverflowerBlessingUtility.IsBlessed(pawn));
-
         public override void PostMake()
         {
             base.PostMake();
