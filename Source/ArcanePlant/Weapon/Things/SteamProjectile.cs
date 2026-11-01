@@ -10,6 +10,7 @@ namespace VVRace
     public class SteamProjectile : Thing
     {
         public Thing caster;
+        public Thing intendedTarget;
         public ThingDef weaponDef;
         public DamageDef damageDef;
         public float damageAmount;
@@ -34,6 +35,7 @@ namespace VVRace
             base.ExposeData();
 
             Scribe_References.Look(ref caster, "caster");
+            Scribe_References.Look(ref intendedTarget, "intendedTarget");
             Scribe_Defs.Look(ref weaponDef, "weaponDef");
             Scribe_Defs.Look(ref damageDef, "damageDef");
             Scribe_Values.Look(ref damageAmount, "damageAmount");
@@ -96,6 +98,7 @@ namespace VVRace
                             var log = new BattleLogEntry_RangedImpact(caster, thing, thing, weaponDef, null, null);
                             var angleFlat = (cell - _initalPosition).AngleFlat;
 
+                            // 의도 대상은 조준한 적이어야 바닐라 교차사격 면제(적을 노리다 우호 세력원을 맞힘)가 적용됨
                             var dinfo = new DamageInfo(
                                 damageDef,
                                 damageAmount,
@@ -105,7 +108,7 @@ namespace VVRace
                                 null,
                                 weaponDef,
                                 DamageInfo.SourceCategory.ThingOrUnknown,
-                                thing);
+                                intendedTarget);
 
                             thing.TakeDamage(dinfo).AssociateWithLog(log);
                             if (thing.Destroyed) { j--; }

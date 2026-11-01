@@ -12,12 +12,13 @@ namespace VVRace
 
             base.Explode();
 
-            if (!GenSpawn.TrySpawn(VVThingDefOf.VV_ExplosiveSnowman, position, map, out var snowman, canWipeEdifices: false))
+            if (GenSpawn.TrySpawn(VVThingDefOf.VV_ExplosiveSnowman, position, map, out var snowman, canWipeEdifices: false))
             {
-                if (snowman != null)
-                {
-                    snowman.Destroy();
-                }
+                snowman.TryGetComp<CompExplosiveSnowman>()?.Arm(launcher, equipmentDef, def, intendedTarget.Thing);
+            }
+            else if (snowman != null)
+            {
+                snowman.Destroy();
             }
 
             foreach (var cell in GenRadial.RadialCellsAround(position, def.projectile.explosionRadius, true))
