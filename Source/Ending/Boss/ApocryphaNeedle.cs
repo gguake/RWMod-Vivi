@@ -801,7 +801,14 @@ namespace VVRace
                 ApocryphaNeedleRenderer.DrawWarp(_laneStart, _laneDir, _laneLength, Mathf.Max(0f, _travelled), warpAge / 60f, alpha);
             }
 
-            var glow = _state == NeedleState.Idle || _state == NeedleState.Stuck ? 0f : _state == NeedleState.Aiming ? AimProgress : 1f;
+            // 보스에게 꽂혀 있으면 촉이 몸속에 묻히고 꽂힌 자리의 외피가 금 간 그림으로 바꿔 그린다.
+            if (IsStuck)
+            {
+                ApocryphaNeedleRenderer.DrawStuckNeedle(DrawPos, _angle, alpha, (GenTicks.TicksGame - _stateStartTick) / 60f);
+                return;
+            }
+
+            var glow = _state == NeedleState.Idle ? 0f : _state == NeedleState.Aiming ? AimProgress : 1f;
             ApocryphaNeedleRenderer.DrawNeedle(DrawPos, _angle, alpha, glow);
         }
         #endregion

@@ -4,7 +4,8 @@ using Verse;
 
 namespace VVRace
 {
-    // 거대 엘텍스 바늘(ApocryphaNeedle) 그리기: 바늘 몸체(엘텍스 바늘 그림을 크게) + 은은한 후광, 조준 중의 발사 직선 경고 띠(VV_NeedleLane 셰이더)와
+    // 거대 엘텍스 바늘(ApocryphaNeedle) 그리기: 바늘 몸체(엘텍스 바늘 그림을 크게) + 은은한 후광, 보스에게 꽂힌 바늘(촉이 묻히고 외피가 금 간 그림),
+    // 조준 중의 발사 직선 경고 띠(VV_NeedleLane 셰이더)와
     // 발사 지점의 작은 연꽃(요정 비비 사출탄의 시전 연꽃과 같은 VV_MagicCircle 셰이더, 조준 시간 동안 피어난다).
     // 머티리얼은 시작 시 한 번만 만들고, 바늘·띠마다 다른 값(투명도·진행도·길이)은 MaterialPropertyBlock으로 넘긴다.
     [StaticConstructorOnStartup]
@@ -28,9 +29,24 @@ namespace VVRace
         // 발사 지점 연꽃(바늘이 떠 있는 띠 시작점, 크기 LotusDrawSize칸)
         private const float LotusDrawSize = 2.6f;
 
+        // 2페이즈 보스에게 꽂힌 바늘: 촉 쪽(약 1.2칸)을 잘라 내고 꽂힌 자리에 금 간 외피(구멍·파편·금빛 균열)를 그려 넣은 그림.
+        // 바늘 그림과 중심·높이가 같고, 폭은 상처까지 덮도록 넓다. 균열의 금빛만 따로 뽑은 그림을 가산으로 겹쳐 맥동시킨다.
+        // (원본·합성 스크립트: docs/art/apocrypha_stuck_needle/, 로컬 전용)
+        private const string StuckTexPath = "VFX/VV_GiantNeedleStuck";
+        private const string StuckGlowTexPath = "VFX/VV_GiantNeedleStuckGlow";
+        private static readonly Vector2 StuckDrawSize = new Vector2(2.75f, NeedleDrawSize);
+        private static readonly Color CrackGlowColor = new Color(1f, 0.8f, 0.5f, 0.85f);
+
+        // 꽂힌 직후 균열이 환하게 번졌다가(CrackFlareSecs 동안 잦아듦) 이후 천천히 맥동한다.
+        private const float CrackFlareSecs = 1.2f;
+        private const float CrackPulseSpeed = 2.4f;
+
         private static readonly Material BodyMat = MaterialPool.MatFrom(NeedleTexPath, ShaderDatabase.Transparent);
         private static readonly Material GlowMat = MaterialPool.MatFrom(NeedleTexPath, ShaderDatabase.MoteGlow);
         private static readonly Material AuraMat = MaterialPool.MatFrom("VFX/VV_ScentAura", ShaderDatabase.MoteGlow);
+        private static readonly Material StuckBodyMat = MaterialPool.MatFrom(StuckTexPath, ShaderDatabase.Transparent);
+        private static readonly Material StuckGlowMat = MaterialPool.MatFrom(StuckTexPath, ShaderDatabase.MoteGlow);
+        private static readonly Material CrackGlowMat = MaterialPool.MatFrom(StuckGlowTexPath, ShaderDatabase.MoteGlow);
         private static readonly Material LaneMat = MaterialPool.MatFrom(BaseContent.WhiteTex, ShaderDatabase.LoadShader("Map/VV_NeedleLane"), Color.white);
         private static readonly Material WarpMat = MakeWarpMaterial();
 
@@ -96,6 +112,29 @@ namespace VVRace
             var glowColor = GlowColor;
             glowColor.a *= alpha * (0.5f + 0.5f * glow);
             DrawQuad(GlowMat, pos, rotation, new Vector2(NeedleDrawSize, NeedleDrawSize), glowColor);
+        }
+
+        // 보스에게 꽂힌 바늘(pos·angle은 바늘 그림 중심·방향 그대로). 후광은 몸속까지 번지므로 그리지 않고, 몸통은 떠 있을 때와 같은 은은한 빛을 두른다.
+        // stuckSecs: 꽂힌 뒤 경과(초).
+        public static void DrawStuckNeedle(Vector3 pos, float angle, float alpha, float stuckSecs)
+        {
+            var rotation = Quaternion.AngleAxis(angle, Vector3.up);
+
+            var bodyColor = BodyColor;
+            bodyColor.a *= alpha;
+            DrawQuad(StuckBodyMat, pos, rotation, StuckDrawSize, bodyColor);
+
+            pos.y += LayerAltitudeStep;
+            var glowColor = GlowColor;
+            glowColor.a *= alpha * 0.5f;
+            DrawQuad(StuckGlowMat, pos, rotation, StuckDrawSize, glowColor);
+
+            pos.y += LayerAltitudeStep;
+            var flare = Mathf.Clamp01(1f - stuckSecs / CrackFlareSecs);
+            var pulse = 0.6f + 0.25f * Mathf.Sin(stuckSecs * CrackPulseSpeed);
+            var crackColor = CrackGlowColor;
+            crackColor.a *= alpha * Mathf.Lerp(pulse, 1f, flare * flare);
+            DrawQuad(CrackGlowMat, pos, rotation, StuckDrawSize, crackColor);
         }
 
         // 발사 직선 전체(start에서 direction으로 length칸, 폭 width칸)를 경고 띠로 그리고, 시작점에 연꽃을 피운다. progress는 조준 진행도(0~1),
