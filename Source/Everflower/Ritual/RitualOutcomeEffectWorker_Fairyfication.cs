@@ -26,6 +26,7 @@ namespace VVRace
             }
 
             everflower.Notify_RitualComplete(quality);
+            ViviEndingQuest.Current?.Notify_EverflowerRitualEcho(everflower, resonator);
         }
     }
 }

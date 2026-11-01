@@ -43,6 +43,7 @@ namespace VVRace
             }
 
             FinishRitual(everflower, map, quality);
+            ViviEndingQuest.Current?.Notify_EverflowerRitualEcho(everflower, jobRitual.PawnWithRole("resonator"));
         }
 
         private static GameCondition MakeWeatherCondition(ArcanePlant_Everflower everflower, Map map, EverflowerWeatherChoice? selectedWeather)

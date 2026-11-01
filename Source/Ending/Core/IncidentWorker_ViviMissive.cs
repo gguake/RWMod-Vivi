@@ -4,10 +4,12 @@ using Verse;
 namespace VVRace
 {
     // 〈비비 연방의 밀서〉 사건(Incidents_Ending.xml). 스토리텔러의 무작위 퀘스트 주기가 고르며,
-    // 플레이어 영원꽃 4단계·기지 가치 350,000·플레이어 소속 비비 10명 이상·패망하지 않은 비적대 비비 연방을 모두 갖춰야 발생한다.
+    // 1~4단계 영원꽃의 잔향 편지 확인·플레이어 영원꽃 4단계·기지 가치 350,000·플레이어 소속 비비 10명 이상·패망하지 않은 비적대 비비 연방을 모두 갖춰야 발생한다.
+    // 잔향 편지 조건은 제단을 짓고 〈대조율 의식〉을 치르기 전에 1~4단계 서사를 모두 보게 한다(대조율 때는 밀린 편지 없이 5단계 편지가 나온다).
     // 퀘스트는 바닐라 GiveQuest 대신 창구(ViviEndingQuest)가 만들어 참조를 보관한다.
     public class IncidentWorker_ViviMissive : IncidentWorker_GiveQuest
     {
+        public const int MinEchoStage = 4;
         public const int MinAttunementLevel = 4;
         public const float MinColonyWealth = 350000f;
         public const int MinViviCount = 10;
@@ -28,6 +30,7 @@ namespace VVRace
         {
             var quest = ViviEndingQuest.Current;
             if (quest == null || quest.Stage != ViviEndingStage.None) { return false; }
+            if (quest.LastEchoStage < MinEchoStage) { return false; }
 
             var everflower = ViviEndingUtility.FindEndingCandidate();
             if (everflower == null || everflower.AttunementLevel < MinAttunementLevel) { return false; }

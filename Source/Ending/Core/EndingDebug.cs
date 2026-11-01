@@ -1,6 +1,7 @@
 ﻿using RimWorld;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Verse;
 
 namespace VVRace
@@ -23,6 +24,16 @@ namespace VVRace
             if (!IsAltarUnlocked)
             {
                 yield return DevCommand("DEV: Start missive quest now", () => StartMissiveQuest(everflower));
+            }
+
+            if (_lastEchoStage < MaxEchoStage)
+            {
+                yield return DevCommand($"DEV: Send echo letter {_lastEchoStage + 1}", () => DebugSendNextEchoLetter(everflower));
+            }
+
+            if (_lastEchoStage > 0)
+            {
+                yield return DevCommand("DEV: Reset echo letters", () => DebugSetLastEchoStage(0));
             }
 
             if (IsAltarUnlocked && !finished)
@@ -65,6 +76,27 @@ namespace VVRace
         public void DebugSetStage(ViviEndingStage stage)
         {
             DebugSetStage(stage, null);
+        }
+
+        // DEV: 마지막으로 본 잔향 편지 단계를 바꾼다(0: 처음부터). 편지는 보내지 않는다.
+        public void DebugSetLastEchoStage(int stage)
+        {
+            _lastEchoStage = Mathf.Clamp(stage, 0, MaxEchoStage);
+        }
+
+        // DEV: 발생 규칙(조율 단계·확률)과 무관하게 다음 잔향 편지를 보낸다. 주인공은 영원꽃과 링크된 로열 비비.
+        internal void DebugSendNextEchoLetter(ArcanePlant_Everflower everflower)
+        {
+            if (_lastEchoStage >= MaxEchoStage) { return; }
+
+            var resonator = everflower?.EverflowerComp.LinkedPawns.FirstOrDefault(v => v.Spawned && v.IsRoyalVivi());
+            if (resonator == null)
+            {
+                Messages.Message("DEV: no linked royal vivi on the map to receive the echo letter.", everflower, MessageTypeDefOf.RejectInput, historical: false);
+                return;
+            }
+
+            SendEchoLetter(_lastEchoStage + 1, everflower, resonator);
         }
 
         // DEV: 공성 중 응축률을 바꾼다(99% 이상이면 곧바로 평화 기간으로).

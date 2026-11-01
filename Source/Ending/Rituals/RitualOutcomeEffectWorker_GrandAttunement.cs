@@ -39,6 +39,9 @@ namespace VVRace
 
             everflower.Notify_RitualComplete(quality);
 
+            // 5단계 잔향 편지(밀서가 1~4단계 편지를 모두 본 뒤에만 오므로 보통 확정). 엔딩이 시작되지 않아 4단계로 남은 위의 경우에는 보내지 않는다.
+            ending.Notify_EverflowerRitualEcho(everflower, jobRitual.PawnWithRole("resonator"));
+
             if (map != null && map == Find.CurrentMap)
             {
                 Find.CameraDriver.shaker.DoShake(CameraShakeMagnitude);

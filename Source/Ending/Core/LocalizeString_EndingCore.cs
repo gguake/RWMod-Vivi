@@ -14,6 +14,18 @@
         public const string VV_Letter_EndingFederationMissiveLabel = nameof(VV_Letter_EndingFederationMissiveLabel);
         public const string VV_Letter_EndingFederationMissive = nameof(VV_Letter_EndingFederationMissive);
 
+        // 영원꽃의 잔향 (조율 1~5단계 서사 편지, {PAWN}: 의식의 공명자)
+        public const string VV_Letter_EverflowerEcho1Label = nameof(VV_Letter_EverflowerEcho1Label);
+        public const string VV_Letter_EverflowerEcho1 = nameof(VV_Letter_EverflowerEcho1);
+        public const string VV_Letter_EverflowerEcho2Label = nameof(VV_Letter_EverflowerEcho2Label);
+        public const string VV_Letter_EverflowerEcho2 = nameof(VV_Letter_EverflowerEcho2);
+        public const string VV_Letter_EverflowerEcho3Label = nameof(VV_Letter_EverflowerEcho3Label);
+        public const string VV_Letter_EverflowerEcho3 = nameof(VV_Letter_EverflowerEcho3);
+        public const string VV_Letter_EverflowerEcho4Label = nameof(VV_Letter_EverflowerEcho4Label);
+        public const string VV_Letter_EverflowerEcho4 = nameof(VV_Letter_EverflowerEcho4);
+        public const string VV_Letter_EverflowerEcho5Label = nameof(VV_Letter_EverflowerEcho5Label);
+        public const string VV_Letter_EverflowerEcho5 = nameof(VV_Letter_EverflowerEcho5);
+
         // 고대 호박 코어 의뢰(통신기, 비비 연방): 선택지, 비활성 사유, 결과·실패 대화({LEADER})
         public const string VV_Comms_AmberCoreRequest = nameof(VV_Comms_AmberCoreRequest);
         public const string VV_Comms_AmberCoreRequestHostile = nameof(VV_Comms_AmberCoreRequestHostile);

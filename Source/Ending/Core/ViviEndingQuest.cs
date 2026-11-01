@@ -12,8 +12,8 @@ namespace VVRace
     //   〈비비 연방의 밀서〉(VV_EndGame_ViviMissive, QuestNode_Root_ViviMissive): 서신·제단 해금 (사건 IncidentWorker_ViviMissive가 발생시킴)
     //   〈만개하는 여명〉(VV_EndGame_ViviBloom, QuestNode_Root_ViviBloom): 공성 → 평화 기간 → 아포크리파 → 여왕의 대관식 → 엔딩
     // 새 게임 컴포넌트를 만들지 않고 GameComponent_Mana가 보관·저장·틱 처리한다. 다른 모듈이 쓰는 질의·통지 API를 두 퀘스트의 상태와 신호로 옮기고,
-    // 퀘스트 밖에서 이어져야 하는 일(고대 호박 코어 의뢰, 결속 해방 후 잠시 사라진 비비의 귀환, 제단 맥동·섬광 연출)을 맡는다.
-    // 코어 의뢰는 EndingAmberCore, 연출은 EndingAmbience, 개발자 도구는 EndingDebug partial 파일에 있다.
+    // 퀘스트 밖에서 이어져야 하는 일(고대 호박 코어 의뢰, 영원꽃의 잔향 편지, 결속 해방 후 잠시 사라진 비비의 귀환, 제단 맥동·섬광 연출)을 맡는다.
+    // 코어 의뢰는 EndingAmberCore, 잔향 편지는 EndingEchoLetters, 연출은 EndingAmbience, 개발자 도구는 EndingDebug partial 파일에 있다.
     public partial class ViviEndingQuest : IExposable
     {
         // 결속 해방 후 잠시 맵에서 사라진 비비. 디스폰된 폰을 여기서만 Deep 저장하고(월드 폰에 넘기지 않음) 귀환 틱에 제단 앞에 다시 스폰한다.
@@ -726,6 +726,7 @@ namespace VVRace
             Scribe_References.Look(ref _bloomQuest, "bloomQuest");
             Scribe_References.Look(ref _anchor, "anchorEverflower");
             Scribe_References.Look(ref _amberCoreQuest, "amberCoreQuest");
+            Scribe_Values.Look(ref _lastEchoStage, "lastEchoStage", 0);
             Scribe_Collections.Look(ref _heldPawns, "heldPawns", LookMode.Deep);
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)

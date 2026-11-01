@@ -18,6 +18,41 @@
 \n"For ages, no hive has ever raised an everflower to such heights. Legend says the great everflower of the old empire revealed its true form only upon an everflower altar carved with ancient mana circuits, never upon common soil. But remember this: the moment the fifth bloom begins upon the altar, outlanders and titanic hornet swarms across the planet will sense its waves and converge upon you."
 \nYou can now build the everflower altar. The vivi federation guards the ancient amber core at its heart; contact the federation via comms console and complete the task they entrust to you to obtain it.</VV_Letter_EndingFederationMissive>
 
+<!-- Everflower echoes: narrative letters for attunement levels 1-5 ({PAWN}: the ritual's resonator) -->
+<VV_Letter_EverflowerEcho1Label>Faint golden echo</VV_Letter_EverflowerEcho1Label>
+<VV_Letter_EverflowerEcho1>Along {PAWN_labelShort}'s psychic circuits, still open after the everflower ritual, a crackling white noise seeped in with the lingering echo of mana.
+\nA hazy vision flickered: an altar vast enough to veil the sky, and the shade of golden blossoms unfurling in six branches. Within that warm mist lived countless shadows who knew nothing of the twisting tremor in the blood, nor of lives that fade far too soon.
+\n"...Beneath this shade... no one withers..."
+\nSomeone's soft whisper sank into the grating static and broke off. {PAWN_labelShort} dimly sensed that deep in the everflower's roots lay the pooled memory of a season erased long, long ago.</VV_Letter_EverflowerEcho1>
+
+<VV_Letter_EverflowerEcho2Label>Memory of a scorched blossom wind</VV_Letter_EverflowerEcho2Label>
+<VV_Letter_EverflowerEcho2>As the ritual ended, a sharp ringing filled the head of {PAWN_labelShort}, now deeply in tune with the everflower, and a wave that felt charred black swept across {PAWN_possessive} psychic circuits.
+\nOver the memory of the fragrant blossom wind, strange shadows and a sickening stench of rot crept in. The noise of those who had lost their minds tearing at one another's wings, black wounds that neither herbs nor the light of magic could heal, and the afterimages of great hives collapsing in flames all flickered like static.
+\n"...It's in the wind... mixed in..."
+"...Before the altar... only I remain..."
+\nThe moment the ragged breathing stopped, {PAWN_labelShort} came to, drenched in cold sweat. The petals of the everflower, its ritual complete, were trembling faintly.</VV_Letter_EverflowerEcho2>
+
+<VV_Letter_EverflowerEcho3Label>Souls bound by light</VV_Letter_EverflowerEcho3Label>
+<VV_Letter_EverflowerEcho3>As the ritual's wave reached the everflower's deepest roots, the fiercest and most perilous lingering thoughts yet came flooding into {PAWN_labelShort}'s mind.
+\nThe sensation of someone forcing open their own crumbling circuits to the very end pressed down on {PAWN_labelShort}'s nerves as if it were {PAWN_possessive} own. From every corner of a burning land, countless fading lives turned into small forms of light and were drawn endlessly into a single soul.
+\n"...If I do not die... they will not die..."
+"...All of you... into me... not a single one..."
+\nThe weight of the swarms of light, swelling beyond counting, tightened around {PAWN_possessive} breath. Though it was only an echo from across distant ages, the crushing pressure of a bond no single being could bear kept {PAWN_labelShort} from rising for a long while.</VV_Letter_EverflowerEcho3>
+
+<VV_Letter_EverflowerEcho4Label>The shattered crown</VV_Letter_EverflowerEcho4Label>
+<VV_Letter_EverflowerEcho4>Just as the ritual drew to a close, an ominous backflow surged from deep within the everflower, and a bursting noise that no longer formed any language poured into {PAWN_labelShort}'s mind, along with the agony of searing nerves.
+\n"...So heavy... too..."
+\nBeyond static loud enough to tear the ears flashed the sensation of overloaded circuits shattering to pieces, and of a fragile body twisting into a hard shell and enormous mandibles. In a vision of the day the first great wings burst forth from that ruined form, someone's voice was swallowed by a hideous grinding.
+\n"...Who was I... the children..."
+\nWith the image of a vast shadow, wrapped in countless small lights like armor, sinking to the bottom of dark ruins, every sound went black.</VV_Letter_EverflowerEcho4>
+
+<VV_Letter_EverflowerEcho5Label>A breath seeking the flower's shade</VV_Letter_EverflowerEcho5Label>
+<VV_Letter_EverflowerEcho5>As a vast wave of mana spread from the everflower at the end of the ritual, a crackling wave once again flowed along its current into {PAWN_labelShort}'s psychic circuits. But this time, it was no memory pooled within the flower.
+\nThe clatter of hard shells striking together and the heavy breath of hundreds of millions of tangled shadows were tracing the trail of the released mana back, groping directly for {PAWN_labelShort}'s mind.
+\n"...So warm..."
+"...Back... to the flower's shade..."
+\nThe moment the circuit cut off, {PAWN_labelShort} felt a chill run down {PAWN_possessive} spine. Something that had slept deep in the ruins, erased even from the records, was slowly rising toward the everflower upon the altar.</VV_Letter_EverflowerEcho5>
+
 <!-- Ending quest: ancient amber core request (comms console, vivi federation) -->
 <VV_Comms_AmberCoreRequest>Request a task in exchange for an ancient amber core</VV_Comms_AmberCoreRequest>
 <VV_Comms_AmberCoreRequestHostile>hostile to the vivi federation</VV_Comms_AmberCoreRequestHostile>
