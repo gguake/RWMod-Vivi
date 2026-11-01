@@ -15,25 +15,20 @@
     <maxSeverity>1</maxSeverity>
   </HediffDef>
 
-  <!-- 2페이즈 〈시조의 외피〉: 꽂힌 바늘에 따른 받는 피해 배율 표시(실제 배율은 CompApocrypha)와 이동속도 보정(1.5 → 5.0). -->
+  <!-- 2페이즈 〈꽂힌 거대 바늘〉: 바늘이 꽂힐 때마다 한 겹씩 쌓인다(최대 3, 심각도 = 꽂힌 바늘 수). CompApocrypha가 겹 수를 맞추고
+       받는 피해 배율도 적용하며, 헤디프는 겹 수와 배율을 표시한다. 2페이즈 이동속도 보정은 생애 단계 VV_ApocryphaUnbound로 옮겼다. -->
   <HediffDef>
-    <defName>VV_ApocryphaCarapace</defName>
-    <label>primordial carapace</label>
-    <description>The progenitor hornet's carapace has hardened over centuries of condensed mana. Her own giant eltex needles can pierce and weaken it.</description>
-    <hediffClass>VVRace.Hediff_ApocryphaCarapace</hediffClass>
+    <defName>VV_ApocryphaStuckNeedle</defName>
+    <label>lodged giant needle</label>
+    <description>A giant eltex needle driven through the progenitor hornet's carapace. The more needles are lodged, the more damage it takes; once all three are lodged, it staggers for a while and then tears them out.</description>
+    <hediffClass>VVRace.Hediff_ApocryphaStuckNeedle</hediffClass>
     <defaultLabelColor>(1, 0.42, 0.85)</defaultLabelColor>
-    <isBad>false</isBad>
+    <isBad>true</isBad>
     <everCurableByItem>false</everCurableByItem>
     <scenarioCanAdd>false</scenarioCanAdd>
     <priceImpact>false</priceImpact>
     <initialSeverity>1</initialSeverity>
-    <maxSeverity>1</maxSeverity>
-    <stages>
-      <li>
-        <statOffsets>
-          <MoveSpeed>2.5</MoveSpeed>
-        </statOffsets>
-      </li>
-    </stages>
+    <minSeverity>0</minSeverity>
+    <maxSeverity>3</maxSeverity>
   </HediffDef>
 </Defs>

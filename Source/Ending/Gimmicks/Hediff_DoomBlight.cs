@@ -29,6 +29,17 @@ namespace VVRace
 
         public override bool ShouldRemove => base.ShouldRemove || EndingFinished;
 
+        // 라벨은 저주 이름만 두고 단계는 툴팁에 표시한다.
+        public override string TipStringExtra
+        {
+            get
+            {
+                var level = LocalizeString_EndingGimmicks.VV_Hediff_DoomBlightLevel.Translate(CurStageIndex + 1, DoomBlightUtility.MaxBlightLevel).Resolve();
+                var tip = base.TipStringExtra;
+                return tip.NullOrEmpty() ? level : level + "\n" + tip;
+            }
+        }
+
         public override void Notify_PawnDied(DamageInfo? dinfo, Hediff culprit = null)
         {
             base.Notify_PawnDied(dinfo, culprit);

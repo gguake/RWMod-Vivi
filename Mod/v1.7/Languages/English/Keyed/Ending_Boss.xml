@@ -15,8 +15,7 @@
 <VV_Inspector_ApocryphaChanneling>Usurping the everflower: {0} ({1} left)</VV_Inspector_ApocryphaChanneling>
 
 <!-- Hediff -->
-<VV_Hediff_ApocryphaCarapaceDamageFactor>damage taken {0}</VV_Hediff_ApocryphaCarapaceDamageFactor>
-<VV_Hediff_ApocryphaCarapaceTip>Lodged needles: {0} / {1}\nDamage taken: {2}</VV_Hediff_ApocryphaCarapaceTip>
+<VV_Hediff_ApocryphaStuckNeedleTip>Lodged needles: {0} / {1}\nDamage taken: {2}</VV_Hediff_ApocryphaStuckNeedleTip>
 <VV_Hediff_ApocryphaFairyBondTip>Bound vivi fairies: {0} / {1}</VV_Hediff_ApocryphaFairyBondTip>
 
 <!-- Alert -->

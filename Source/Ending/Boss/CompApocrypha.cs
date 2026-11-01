@@ -161,6 +161,7 @@ namespace VVRace
         private const int ChannelInterruptMessageMinTicks = 120;
         private const float BreathFrontSearchAngle = 45f;
         private const int NeedleSpawnCheckInterval = 60;
+        private const int StuckNeedleSyncInterval = 30;
         private const int NeedleStunRecoverTicks = 120;
         private const int PursuitInterruptIntervalTicks = 300;
         // 돌파 계획은 작업을 줄 때마다 갱신된다. 갱신이 끊기면(길이 열림·추격 등) 이 시간 뒤 바늘이 평소 대상으로 돌아간다.
@@ -371,7 +372,32 @@ namespace VVRace
         private void SyncPhaseHediffs()
         {
             SyncHediff(ApocryphaHediffDefOf.VV_ApocryphaFairyBond, _phase == ApocryphaPhase.Bound);
-            SyncHediff(ApocryphaHediffDefOf.VV_ApocryphaCarapace, _phase == ApocryphaPhase.Unbound);
+            SyncStuckNeedleHediff();
+        }
+
+        // 〈꽂힌 거대 바늘〉은 꽂힌 바늘 수만큼 겹치고(최대 3), 바늘이 뽑히거나 사라지면 함께 줄어든다.
+        private void SyncStuckNeedleHediff()
+        {
+            var count = _phase == ApocryphaPhase.Unbound ? StuckNeedleCount : 0;
+            var hediff = Pawn.health.hediffSet.GetFirstHediffOfDef(ApocryphaHediffDefOf.VV_ApocryphaStuckNeedle);
+            if (count <= 0)
+            {
+                if (hediff != null)
+                {
+                    Pawn.health.RemoveHediff(hediff);
+                }
+                return;
+            }
+
+            if (hediff == null)
+            {
+                hediff = Pawn.health.AddHediff(ApocryphaHediffDefOf.VV_ApocryphaStuckNeedle);
+            }
+
+            if (hediff.Severity != count)
+            {
+                hediff.Severity = count;
+            }
         }
 
         private void SyncHediff(HediffDef def, bool shouldHave)
@@ -1113,6 +1139,8 @@ namespace VVRace
         {
             if (_phase != ApocryphaPhase.Unbound || !parent.Spawned) { return; }
 
+            SyncStuckNeedleHediff();
+
             var stuck = StuckNeedleCount;
             if (stuck >= Props.unboundNeedleCount && !_needleStunned)
             {
@@ -1159,6 +1187,8 @@ namespace VVRace
                 ApocryphaUtility.ShakeCamera(parent.Map, 0.8f);
                 Messages.Message(LocalizeString_EndingBoss.VV_Message_ApocryphaNeedlesPulled.Translate(), Pawn, MessageTypeDefOf.NeutralEvent);
             }
+
+            SyncStuckNeedleHediff();
         }
 
         private bool TryFindNeedleTarget(out IntVec3 cell)
@@ -1285,6 +1315,12 @@ namespace VVRace
         private void TickUnbound(int now)
         {
             var stunned = Pawn.stances.stunner.Stunned;
+
+            // 바늘이 뽑기 외의 경로(소멸 등)로 사라져도 겹 수가 맞도록 주기적으로 맞춘다.
+            if (parent.IsHashIntervalTick(StuckNeedleSyncInterval))
+            {
+                SyncStuckNeedleHediff();
+            }
 
             if (_needleStunned && !stunned)
             {

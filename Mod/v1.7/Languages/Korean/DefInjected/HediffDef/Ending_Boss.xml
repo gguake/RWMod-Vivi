@@ -4,7 +4,7 @@
 <VV_ApocryphaFairyBond.label>요정 비비 결속</VV_ApocryphaFairyBond.label>
 <VV_ApocryphaFairyBond.description>옛 제국의 마지막 여왕에게 귀속된 수십억 요정 비비가 마나 보호장을 이루어 모든 공격을 대신 받아냅니다.</VV_ApocryphaFairyBond.description>
 
-<VV_ApocryphaCarapace.label>시조의 외피</VV_ApocryphaCarapace.label>
-<VV_ApocryphaCarapace.description>수백 년간 마나가 응축되어 굳어진 시조 말벌의 외피입니다. 자신의 거대 엘텍스 바늘에 꿰뚫리면 외피가 약해집니다.</VV_ApocryphaCarapace.description>
+<VV_ApocryphaStuckNeedle.label>꽂힌 거대 바늘</VV_ApocryphaStuckNeedle.label>
+<VV_ApocryphaStuckNeedle.description>시조 말벌의 외피를 꿰뚫고 박힌 거대 엘텍스 바늘입니다. 꽂힌 바늘이 많을수록 받는 피해가 커지며, 세 개가 모두 꽂히면 한동안 비틀거리다 바늘을 뽑아냅니다.</VV_ApocryphaStuckNeedle.description>
 
 </LanguageData>

@@ -35,7 +35,7 @@ namespace VVRace
     public static class ApocryphaHediffDefOf
     {
         public static HediffDef VV_ApocryphaFairyBond;
-        public static HediffDef VV_ApocryphaCarapace;
+        public static HediffDef VV_ApocryphaStuckNeedle;
     }
 
     [DefOf]

@@ -13,6 +13,8 @@
         public const string VV_Message_DoomFlowerBloomed = nameof(VV_Message_DoomFlowerBloomed);
 
         public const string VV_Hediff_BloodLossRecoveryFactor = nameof(VV_Hediff_BloodLossRecoveryFactor);
+        public const string VV_Hediff_DoomBlightLevel = nameof(VV_Hediff_DoomBlightLevel);
+        public const string VV_Hediff_FairyInterferenceRemaining = nameof(VV_Hediff_FairyInterferenceRemaining);
 
         public const string VV_Inspect_DoomFlowerBloomIn = nameof(VV_Inspect_DoomFlowerBloomIn);
         public const string VV_Inspect_DoomFlowerHint = nameof(VV_Inspect_DoomFlowerHint);

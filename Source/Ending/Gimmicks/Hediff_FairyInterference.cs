@@ -18,6 +18,20 @@ namespace VVRace
         [Unsaved]
         private Pawn _boss;
 
+        // 남은 시간은 라벨 대신 툴팁에 표시한다.
+        public override string TipStringExtra
+        {
+            get
+            {
+                var tip = base.TipStringExtra;
+                var disappears = GetComp<HediffComp_Disappears>();
+                if (disappears == null || disappears.ticksToDisappear <= 0) { return tip; }
+
+                var remaining = LocalizeString_EndingGimmicks.VV_Hediff_FairyInterferenceRemaining.Translate(disappears.ticksToDisappear.ToStringTicksToPeriod()).Resolve();
+                return tip.NullOrEmpty() ? remaining : tip + "\n" + remaining;
+            }
+        }
+
         public override void Tick()
         {
             base.Tick();

@@ -15,8 +15,7 @@
 <VV_Inspector_ApocryphaChanneling>영원꽃 찬탈 중: {0} (남은 시간 {1})</VV_Inspector_ApocryphaChanneling>
 
 <!-- Hediff -->
-<VV_Hediff_ApocryphaCarapaceDamageFactor>받는 피해 {0}</VV_Hediff_ApocryphaCarapaceDamageFactor>
-<VV_Hediff_ApocryphaCarapaceTip>꽂힌 바늘: {0} / {1}\n받는 피해: {2}</VV_Hediff_ApocryphaCarapaceTip>
+<VV_Hediff_ApocryphaStuckNeedleTip>꽂힌 바늘: {0} / {1}\n받는 피해: {2}</VV_Hediff_ApocryphaStuckNeedleTip>
 <VV_Hediff_ApocryphaFairyBondTip>결속된 요정 비비: {0} / {1}</VV_Hediff_ApocryphaFairyBondTip>
 
 <!-- Alert -->

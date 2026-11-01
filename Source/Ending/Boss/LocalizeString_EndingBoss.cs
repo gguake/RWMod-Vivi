@@ -14,8 +14,7 @@
         public const string VV_Inspector_ApocryphaStuckNeedles = nameof(VV_Inspector_ApocryphaStuckNeedles);
         public const string VV_Inspector_ApocryphaChanneling = nameof(VV_Inspector_ApocryphaChanneling);
 
-        public const string VV_Hediff_ApocryphaCarapaceDamageFactor = nameof(VV_Hediff_ApocryphaCarapaceDamageFactor);
-        public const string VV_Hediff_ApocryphaCarapaceTip = nameof(VV_Hediff_ApocryphaCarapaceTip);
+        public const string VV_Hediff_ApocryphaStuckNeedleTip = nameof(VV_Hediff_ApocryphaStuckNeedleTip);
         public const string VV_Hediff_ApocryphaFairyBondTip = nameof(VV_Hediff_ApocryphaFairyBondTip);
 
         public const string VV_Alert_ApocryphaChanneling = nameof(VV_Alert_ApocryphaChanneling);

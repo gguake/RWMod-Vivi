@@ -18,7 +18,7 @@
     <comps>
       <li Class="HediffCompProperties_Disappears">
         <disappearsAfterTicks>15000~15000</disappearsAfterTicks>
-        <showRemainingTime>true</showRemainingTime>
+        <showRemainingTime>false</showRemainingTime>
         <messageOnDisappear>{PAWN_labelShort}'s fairy interference has faded.</messageOnDisappear>
       </li>
     </comps>
@@ -45,7 +45,6 @@
     <stages>
       <li>
         <minSeverity>1</minSeverity>
-        <label>I</label>
         <statOffsets>
           <PainShockThreshold>-0.04</PainShockThreshold>
           <MentalBreakThreshold>0.03</MentalBreakThreshold>
@@ -53,7 +52,6 @@
       </li>
       <li>
         <minSeverity>2</minSeverity>
-        <label>II</label>
         <statOffsets>
           <PainShockThreshold>-0.08</PainShockThreshold>
           <MentalBreakThreshold>0.06</MentalBreakThreshold>
@@ -61,7 +59,6 @@
       </li>
       <li>
         <minSeverity>3</minSeverity>
-        <label>III</label>
         <statOffsets>
           <PainShockThreshold>-0.12</PainShockThreshold>
           <MentalBreakThreshold>0.09</MentalBreakThreshold>
@@ -69,7 +66,6 @@
       </li>
       <li>
         <minSeverity>4</minSeverity>
-        <label>IV</label>
         <statOffsets>
           <PainShockThreshold>-0.16</PainShockThreshold>
           <MentalBreakThreshold>0.12</MentalBreakThreshold>
@@ -77,7 +73,6 @@
       </li>
       <li>
         <minSeverity>5</minSeverity>
-        <label>V</label>
         <statOffsets>
           <PainShockThreshold>-0.20</PainShockThreshold>
           <MentalBreakThreshold>0.15</MentalBreakThreshold>
@@ -94,31 +89,26 @@
     <stages>
       <li>
         <minSeverity>1</minSeverity>
-        <label>I</label>
         <hungerRateFactor>1.5</hungerRateFactor>
         <restFallFactor>1.5</restFallFactor>
       </li>
       <li>
         <minSeverity>2</minSeverity>
-        <label>II</label>
         <hungerRateFactor>2</hungerRateFactor>
         <restFallFactor>2</restFallFactor>
       </li>
       <li>
         <minSeverity>3</minSeverity>
-        <label>III</label>
         <hungerRateFactor>2.5</hungerRateFactor>
         <restFallFactor>2.5</restFallFactor>
       </li>
       <li>
         <minSeverity>4</minSeverity>
-        <label>IV</label>
         <hungerRateFactor>3</hungerRateFactor>
         <restFallFactor>3</restFallFactor>
       </li>
       <li>
         <minSeverity>5</minSeverity>
-        <label>V</label>
         <hungerRateFactor>3.5</hungerRateFactor>
         <restFallFactor>3.5</restFallFactor>
       </li>
@@ -134,7 +124,6 @@
     <stages>
       <li>
         <minSeverity>1</minSeverity>
-        <label>I</label>
         <statFactors>
           <ImmunityGainSpeed>0.9</ImmunityGainSpeed>
           <IncomingDamageFactor>1.05</IncomingDamageFactor>
@@ -142,7 +131,6 @@
       </li>
       <li>
         <minSeverity>2</minSeverity>
-        <label>II</label>
         <statFactors>
           <ImmunityGainSpeed>0.8</ImmunityGainSpeed>
           <IncomingDamageFactor>1.1</IncomingDamageFactor>
@@ -150,7 +138,6 @@
       </li>
       <li>
         <minSeverity>3</minSeverity>
-        <label>III</label>
         <statFactors>
           <ImmunityGainSpeed>0.7</ImmunityGainSpeed>
           <IncomingDamageFactor>1.15</IncomingDamageFactor>
@@ -158,7 +145,6 @@
       </li>
       <li>
         <minSeverity>4</minSeverity>
-        <label>IV</label>
         <statFactors>
           <ImmunityGainSpeed>0.6</ImmunityGainSpeed>
           <IncomingDamageFactor>1.2</IncomingDamageFactor>
@@ -166,7 +152,6 @@
       </li>
       <li>
         <minSeverity>5</minSeverity>
-        <label>V</label>
         <statFactors>
           <ImmunityGainSpeed>0.5</ImmunityGainSpeed>
           <IncomingDamageFactor>1.25</IncomingDamageFactor>

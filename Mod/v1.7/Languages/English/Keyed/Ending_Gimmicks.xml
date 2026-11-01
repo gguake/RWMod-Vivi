@@ -15,6 +15,8 @@
 
 <!-- Ending quest: doom blight (plague) tooltip -->
 <VV_Hediff_BloodLossRecoveryFactor>blood loss recovery speed</VV_Hediff_BloodLossRecoveryFactor>
+<VV_Hediff_DoomBlightLevel>Curse level: {0} / {1}</VV_Hediff_DoomBlightLevel>
+<VV_Hediff_FairyInterferenceRemaining>Time left: {0}</VV_Hediff_FairyInterferenceRemaining>
 
 <!-- Ending quest: inspect strings -->
 <VV_Inspect_DoomFlowerBloomIn>Blooms in: {0}</VV_Inspect_DoomFlowerBloomIn>
