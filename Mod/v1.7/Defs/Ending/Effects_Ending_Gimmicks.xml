@@ -394,18 +394,13 @@
     </children>
   </EffecterDef>
 
-  <!-- 착탄: 금빛 섬광 + 폭발 반경 고리 + 요정 출현 고리 + 꽃잎, 요정 소멸음.
+  <!-- 착탄: 금빛 섬광 + 폭발 반경 고리 + 요정 출현 고리 + 꽃잎. 소리는 폭발 피해(VV_FairyBlast)의 폭발음에 요정 반짝임까지 담겨 있어 따로 내지 않는다.
        그 위에 요정다운 연출을 덧입힌다: 연꽃 문양 개화(0틱) + 파스텔 요정 가루(0틱) + 피어오르는 빛 알갱이(30·46틱)
        + 폭발이 잦아들 때 남은 반짝임(40·50틱)과 마무리 별빛(62틱). 지연 자식이 모두 터지도록 66틱 유지한다. -->
   <EffecterDef>
     <defName>VV_Effecter_FairyShellImpact</defName>
     <maintainTicks>66</maintainTicks>
     <children>
-      <li>
-        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
-        <soundDef>VV_FairyDematerialize</soundDef>
-        <spawnLocType>OnSource</spawnLocType>
-      </li>
       <li>
         <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
         <fleckDef>VV_Fleck_GimmickFlash</fleckDef>

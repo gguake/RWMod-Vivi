@@ -19,7 +19,7 @@
     <explosionCellFleck>Fleck_Vaporize</explosionCellFleck>
     <explosionColorCenter>(1, 0.95, 0.72)</explosionColorCenter>
     <explosionColorEdge>(1, 0.7, 0.28)</explosionColorEdge>
-    <soundExplosion>Explosion_Bomb</soundExplosion>
+    <soundExplosion>VV_ApocryphaFairyBlast</soundExplosion>
   </DamageDef>
 
   <!-- ===== 투사체 ===== -->
