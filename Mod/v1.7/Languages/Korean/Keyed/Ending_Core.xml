@@ -94,7 +94,7 @@
 <VV_Letter_EndingCoronationLabel>여왕을 기다리는 영원꽃</VV_Letter_EndingCoronationLabel>
 <VV_Letter_EndingCoronation>아포크리파가 사라지자 막혀 있던 마나가 제단으로 흐르며 개화 응축이 끝났습니다.
 \n영원꽃이 {PAWN_labelShort}의 〈여왕의 대관식〉을 기다립니다.
-\n마나 기둥은 더 이상 습격을 끌어들이지 않습니다. 남아 있는 거대 말벌들은 여전히 정착지를 공격합니다.</VV_Letter_EndingCoronation>
+\n영원꽃의 파동에 이끌린 습격은 끝났고, 거대 말벌들도 아포크리파와 함께 모두 사라졌습니다.</VV_Letter_EndingCoronation>
 
 <!-- 엔딩 퀘스트: 영원한 봄의 제국 (엔딩 편지와 크레딧이 같은 본문을 쓴다. 바닐라 엔딩 크레딧 문체) -->
 <VV_Letter_EndingVictoryLabel>영원한 봄의 제국</VV_Letter_EndingVictoryLabel>

@@ -1963,7 +1963,9 @@ namespace VVRace
                 GenSpawn.Spawn(dying, cell, map);
             }
 
+            // 맵 밖에 남은 호위가 대상 없는 듀티로 남지 않도록 습격으로 돌리고, 맵의 거대 말벌은 모두 보스와 함께 소멸시킨다.
             ApocryphaUtility.ReleaseEscorts(Pawn);
+            ViviEndingUtility.VanishAllTitanicHornets(map);
 
             if (parent.Spawned)
             {

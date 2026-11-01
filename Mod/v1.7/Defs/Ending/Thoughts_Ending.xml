@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 〈만개하는 여명〉 완료(크레딧) 때 모든 플레이어 세력 폰이 받는다. 바닐라 공허 봉인 엔딩(ClosedTheVoid)처럼 1년(60일) 지속, +14. -->
+  <ThoughtDef>
+    <defName>VV_EverflowerFullBloom</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <durationDays>60</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>everflower in full bloom</label>
+        <description>The everflower has finally bloomed. The long fight is over, and a new spring is beginning.</description>
+        <baseMoodEffect>14</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+</Defs>

@@ -11,6 +11,8 @@ namespace VVRace
 
         public static GameConditionDef VV_OminousSilence;
 
+        public static ThoughtDef VV_EverflowerFullBloom;
+
         public static EffecterDef VV_Effecter_EndingGoldenWave;
         public static FleckDef VV_Fleck_GoldenWaveRing;
         public static FleckDef VV_Fleck_EndingPetal;

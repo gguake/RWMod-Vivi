@@ -124,16 +124,27 @@ namespace VVRace
 
         public static int VanishWildTitanicHornets(Map map)
         {
+            return VanishTitanicHornets(map, EffecterDefOf.Skip_EntryNoDelay, pawn => !(pawn.GetLord()?.LordJob is LordJob_ApocryphaEscort));
+        }
+
+        // 아포크리파가 토벌되면 호위·꽃 경비·야생을 가리지 않고 플레이어 것이 아닌 거대 말벌이 모두 보스와 함께 사라진다.
+        public static int VanishAllTitanicHornets(Map map)
+        {
+            return VanishTitanicHornets(map, ApocryphaEffecterDefOf.VV_Effecter_ApocryphaVanish ?? EffecterDefOf.Skip_EntryNoDelay, null);
+        }
+
+        private static int VanishTitanicHornets(Map map, EffecterDef vanishEffect, Predicate<Pawn> filter)
+        {
             var hornetDef = VVThingDefOf.VV_TitanicHornet;
-            if (hornetDef == null) { return 0; }
+            if (hornetDef == null || map == null) { return 0; }
 
             var vanished = 0;
             foreach (var pawn in map.mapPawns.AllPawnsSpawned.ToList())
             {
                 if (pawn.def != hornetDef || pawn.Destroyed || pawn.Faction == Faction.OfPlayer) { continue; }
-                if (pawn.GetLord()?.LordJob is LordJob_ApocryphaEscort) { continue; }
+                if (filter != null && !filter(pawn)) { continue; }
 
-                EffecterDefOf.Skip_EntryNoDelay.Spawn(pawn, map).Cleanup();
+                vanishEffect.Spawn(pawn.Position, map).Cleanup();
                 pawn.Destroy(DestroyMode.Vanish);
                 vanished++;
             }

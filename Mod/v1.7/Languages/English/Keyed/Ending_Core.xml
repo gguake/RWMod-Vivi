@@ -94,7 +94,7 @@
 <VV_Letter_EndingCoronationLabel>The everflower awaits its queen</VV_Letter_EndingCoronationLabel>
 <VV_Letter_EndingCoronation>With Apocrypha gone, mana flows back into the altar and bloom condensation is complete.
 \nThe everflower awaits {PAWN_labelShort}'s coronation as queen.
-\nThe mana pillar no longer draws raids. Any remaining titanic hornets will still attack the colony.</VV_Letter_EndingCoronation>
+\nThe raids drawn by the everflower's mana waves have ended, and every titanic hornet vanished along with Apocrypha.</VV_Letter_EndingCoronation>
 
 <!-- Ending quest: ending (the letter and the credits share the same text, in the style of the vanilla ending credits) -->
 <VV_Letter_EndingVictoryLabel>Empire of eternal spring</VV_Letter_EndingVictoryLabel>
