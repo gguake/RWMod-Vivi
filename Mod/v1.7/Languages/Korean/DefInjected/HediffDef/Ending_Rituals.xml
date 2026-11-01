@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
 <VV_EverflowerBlessing.label>영원꽃의 축복</VV_EverflowerBlessing.label>
-<VV_EverflowerBlessing.description>완전히 개화한 영원꽃의 축복입니다. 성체의 노화 속도가 크게 느려집니다.
-\n영원꽃이 있는 지역을 떠나면 약 하루 뒤 축복이 사라집니다.</VV_EverflowerBlessing.description>
+<VV_EverflowerBlessing.description>만개한 영원꽃의 축복으로 성체의 노화가 크게 느려집니다. 영원꽃이 있는 지역을 떠나면 약 하루 뒤 사라집니다.</VV_EverflowerBlessing.description>
 
 <VV_EverflowerFullAssimilation.label>영원꽃 완전 동화</VV_EverflowerFullAssimilation.label>
-<VV_EverflowerFullAssimilation.description>영원꽃과 하나가 되어 다섯 번째 개화의 마나를 이끄는 로열 비비입니다.
-\n동화가 풀릴 때까지 욕구와 나이가 멈추고 어떤 피해도 받지 않습니다. 움직이거나 지시를 따를 수 없습니다.</VV_EverflowerFullAssimilation.description>
+<VV_EverflowerFullAssimilation.description>영원꽃과 하나가 되어 개화를 이끌고 있습니다. 동화 중에는 욕구와 노화가 멈추고 피해를 받지 않지만, 움직이거나 지시를 따를 수 없습니다.</VV_EverflowerFullAssimilation.description>
 </LanguageData>

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
 <VV_EverflowerQueen.label>영원꽃의 여왕</VV_EverflowerQueen.label>
-<VV_EverflowerQueen.description>완전히 개화한 영원꽃 앞에서 여왕으로 즉위한 비비입니다.
-\n생명 공명: 완전히 개화한 영원꽃이 남아 있는 동안 여왕이 죽으면, 시체가 금빛 꽃잎으로 흩어지고 하루 뒤 영원꽃 앞에서 상처가 모두 나은 채 다시 깨어납니다. 영원꽃이 사라졌다면 평범하게 죽습니다.
-\n여왕은 거대한 엘텍스 바늘로 선고를 내리고, 주변의 환경 마나로 보호막을 세울 수 있습니다.</VV_EverflowerQueen.description>
+<VV_EverflowerQueen.description>만개한 영원꽃의 여왕입니다.\n\n영원꽃이 남아 있는 한 죽어도 하루 뒤 상처를 모두 회복하고 돌아옵니다. 선고와 마나 보호막을 사용할 수 있습니다.</VV_EverflowerQueen.description>
 </LanguageData>

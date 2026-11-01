@@ -6,7 +6,7 @@
   <HediffDef>
     <defName>VV_FairyInterference</defName>
     <label>fairy interference</label>
-    <description>Resonating with a fairy bloom's mana. Approaching Apocrypha frees fairy vivis and lifts the doom blights.</description>
+    <description>Resonating with the fairy bloom allows interference with Apocrypha's bonds.</description>
     <hediffClass>VVRace.Hediff_FairyInterference</hediffClass>
     <defaultLabelColor>(1, 0.9, 0.55)</defaultLabelColor>
     <isBad>false</isBad>

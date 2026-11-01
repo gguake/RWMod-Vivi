@@ -64,9 +64,7 @@
   <ThingDef ParentName="AnimalThingBase">
     <defName>VV_Apocrypha</defName>
     <label>Apocrypha, the Crumbled Queen</label>
-    <description>The progenitor of all titanic hornets and the last queen of the old vivi empire.
-\nOn the day the empire fell, she fairyfied 1,440,000,000 scaria-infected subjects and bound them to herself to save them. Unable to bear their souls and mana, and affected by scaria, she lost her mind and became a monster.
-\nAwakened from her long sleep, the queen approaches the altar in search of the everflower she lost.</description>
+    <description>The last queen of the old vivi empire and the progenitor of all titanic hornets.\n\nTo save her scaria-infected subjects, she transformed 1,440,000,000 of them into fairy vivis and bound them to herself. Unable to bear them all, she lost her mind and became a monster.\n\nShe still seeks the everflower she lost.</description>
     <drawOffscreen>true</drawOffscreen>
     <!-- 바닐라 동물 분류(Animals)에서 뺀다: 이념의 숭배 동물 후보(PreceptWorker_Animal)가 이 분류로 동물을 고른다. -->
     <thingCategories Inherit="False" />

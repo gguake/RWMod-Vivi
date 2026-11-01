@@ -7,7 +7,7 @@
   <WeatherDef>
     <defName>VV_GoldenBloomMist</defName>
     <label>golden bloom mist</label>
-    <description>A faint golden mist drifts over the land while everflower petals dance on the wind. Like fog, it reduces the accuracy of ranged weapons.</description>
+    <description>Everflower petals drift through golden mist, reducing ranged accuracy.</description>
     <isBad>false</isBad>
     <canOccurAsRandomForcedEvent>false</canOccurAsRandomForcedEvent>
     <repeatable>true</repeatable>
@@ -52,7 +52,7 @@
     <defName>VV_GoldenBloom</defName>
     <conditionClass>VVRace.GameCondition_GoldenBloom</conditionClass>
     <label>golden bloom mist</label>
-    <description>The power of the everflower has spilled over the land as a golden mist and drifting petals. The mist lowers the accuracy of ranged weapons, and while it lasts, every arcane plant in the area has unlimited mana.</description>
+    <description>The everflower's golden mist covers the area, reducing ranged accuracy and granting unlimited mana to all arcane plants.</description>
     <weatherDef>VV_GoldenBloomMist</weatherDef>
     <natural>false</natural>
     <displayOnUI>true</displayOnUI>

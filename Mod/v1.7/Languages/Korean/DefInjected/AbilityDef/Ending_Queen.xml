@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
 <VV_QueenVerdict.label>선고</VV_QueenVerdict.label>
-<VV_QueenVerdict.description>여왕의 등 뒤 허공에 거대한 엘텍스 바늘을 불러내 대상 쪽으로 날립니다. 바늘은 폭 3칸, 길이 35칸의 경로에 있는 모든 적대적인 생명체와 구조물을 꿰뚫은 뒤 꽃잎으로 흩어집니다. 아군은 피해를 입지 않습니다.</VV_QueenVerdict.description>
+<VV_QueenVerdict.description>거대한 엘텍스 바늘을 날려 폭 3칸, 길이 35칸 안의 적과 구조물을 꿰뚫습니다. 아군은 피해를 입지 않습니다.</VV_QueenVerdict.description>
 <VV_QueenVerdict.verbProperties.label>선고</VV_QueenVerdict.verbProperties.label>
 
 <VV_QueenManaBarrier.label>마나 보호막</VV_QueenManaBarrier.label>
-<VV_QueenManaBarrier.description>대상 지점 주변의 환경 마나를 끌어모아 2시간 동안 유지되는 저각 보호막을 세웁니다. 보호막은 적의 총탄 등 지상으로 날아오는 투사체를 막고, 안에 있는 아군은 밖으로 사격할 수 있습니다. 보호막 범위 안 환경 마나의 합계가 1000 이상이어야 하며, 범위 안 각 칸의 마나에 비례해 합계 1000을 소모합니다.</VV_QueenManaBarrier.description>
+<VV_QueenManaBarrier.description>주변의 환경 마나 1000을 소모해 2시간 동안 적의 총탄을 막는 보호막을 펼칩니다. 아군의 사격은 통과합니다.</VV_QueenManaBarrier.description>
 <VV_QueenManaBarrier.verbProperties.label>마나 보호막</VV_QueenManaBarrier.verbProperties.label>
 </LanguageData>

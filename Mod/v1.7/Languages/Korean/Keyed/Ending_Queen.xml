@@ -6,16 +6,15 @@
 
 <!-- 안식의 바람 -->
 <VV_Message_WindOfRestResult>안식의 바람이 지나갔습니다. 유전자 불안정 치유 {INSTABILITY}, 스카리아 치유 {SCARIA}, 흩어진 거대 말벌 {HORNETS}</VV_Message_WindOfRestResult>
-<VV_Message_WindOfRestNothing>안식의 바람이 지나갔습니다. 정화할 대상이 없었습니다.</VV_Message_WindOfRestNothing>
+<VV_Message_WindOfRestNothing>안식의 바람이 지나갔습니다.</VV_Message_WindOfRestNothing>
 
 <!-- 꽃의 대지 -->
 <VV_Message_FlowerLandNoGround>이 범위에는 꽃밭으로 바꿀 땅이 없습니다.</VV_Message_FlowerLandNoGround>
-<VV_Message_FlowerLandBloomed>땅이 기름진 흙으로 바뀌고 비비아 꽃밭이 피어났습니다. (꽃 {COUNT}송이)</VV_Message_FlowerLandBloomed>
+<VV_Message_FlowerLandBloomed>기름진 땅에 비비아 꽃 {COUNT}송이가 피어났습니다.</VV_Message_FlowerLandBloomed>
 
 <!-- 여왕의 권능: 생명 공명 -->
 <VV_Letter_QueenLifeResonanceLabel>생명 공명: {PAWN_labelShort}</VV_Letter_QueenLifeResonanceLabel>
-<VV_Letter_QueenLifeResonance>{PAWN_nameDef}의 몸이 금빛 꽃잎으로 흩어져 영원꽃으로 스며들었습니다.
-\n여왕의 생명은 완전히 개화한 영원꽃과 공명하고 있습니다. {TIME} 뒤 영원꽃 앞에서 다시 깨어납니다.</VV_Letter_QueenLifeResonance>
+<VV_Letter_QueenLifeResonance>{PAWN_nameDef}(이)가 금빛 꽃잎으로 흩어져 영원꽃에 깃들었습니다. {TIME} 뒤 다시 깨어납니다.</VV_Letter_QueenLifeResonance>
 <VV_Message_QueenReborn>{PAWN_labelShort}(이)가 영원꽃 앞에서 다시 깨어났습니다.</VV_Message_QueenReborn>
 <VV_Inspector_QueenRebirth>{PAWN_labelShort} 깨어나기까지: {TIME}</VV_Inspector_QueenRebirth>
 

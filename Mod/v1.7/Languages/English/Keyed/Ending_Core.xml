@@ -2,19 +2,13 @@
 <LanguageData>
 
 <!-- Ending quest: quests tab (the missive quest is named after the missive letter) -->
-<VV_Quest_EndingMissiveGoals>Contact the vivi federation via comms console and complete a task to earn an ancient amber core. Use it to build the everflower altar, enshrine a level 4 everflower at its center, and perform the full bloom ritual to begin the fifth bloom.
-\nYou cannot request another task while an ancient amber core or an altar built with one still exists.</VV_Quest_EndingMissiveGoals>
+<VV_Quest_EndingMissiveGoals>Complete a task for the vivi federation to obtain an ancient amber core and build an everflower altar. Enshrine a level 4 everflower and perform the full bloom ritual to begin its fifth bloom.\n\nYou cannot request another task while an ancient amber core or altar remains.</VV_Quest_EndingMissiveGoals>
 <VV_Quest_EndingName>Dawn in full bloom</VV_Quest_EndingName>
-<VV_Quest_EndingDesc>The everflower on the altar has entered its fifth bloom and is condensing mana for its final bloom.
-\nDefend the altar until condensation is complete. The resonator can then perform the queen's coronation to complete the final bloom.
-\nIf the everflower on the altar is lost, the quest fails.</VV_Quest_EndingDesc>
+<VV_Quest_EndingDesc>The everflower is condensing mana for its final bloom.\n\nDefend the altar until it is ready, then have the resonator perform the queen's coronation. If the everflower is lost, the final bloom fails.</VV_Quest_EndingDesc>
 
 <!-- Ending quest: federation missive -->
 <VV_Letter_EndingFederationMissiveLabel>Vivi federation missive</VV_Letter_EndingFederationMissiveLabel>
-<VV_Letter_EndingFederationMissive>The everflower resonating with {PAWN_labelShort} has reached its limit. It cannot condense any more mana on ordinary soil.
-\nThe vivi federation's representative has sensed these waves and sent a message.
-\n"It has been a long time since we saw an everflower grow this far. The great everflowers of the old empire are said to have bloomed on altars carved with ancient mana circuits. But once the fifth bloom begins, its waves will draw outlanders and titanic hornet swarms to you."
-\nYou can now build the everflower altar. To obtain its ancient amber core, contact the vivi federation via comms console and complete a task for them.</VV_Letter_EndingFederationMissive>
+<VV_Letter_EndingFederationMissive>The everflower resonating with {PAWN_labelShort} has reached its limit. Sensing this, the vivi federation has sent a message.\n\n"The everflowers of the old empire bloomed on altars carved with ancient mana circuits. Once the fifth bloom begins, outlanders and titanic hornets will sense its waves too."\n\nYou can now build the everflower altar. Contact the vivi federation via comms console to obtain an ancient amber core.</VV_Letter_EndingFederationMissive>
 <VV_Letter_EndingFederationMissiveConditions>Your colony must meet all of the following conditions before you can request an ancient amber core task:
 \n  - At least {VIVI} vivis in the colony
 \n  - Colony wealth of at least {WEALTH}</VV_Letter_EndingFederationMissiveConditions>
@@ -26,91 +20,65 @@
 
 <!-- Everflower echoes: narrative letters for attunement levels 1-5 ({PAWN}: the ritual's resonator) -->
 <VV_Letter_EverflowerEcho1Label>Faint golden echo</VV_Letter_EverflowerEcho1Label>
-<VV_Letter_EverflowerEcho1>After the ritual, faint static entered {PAWN_labelShort}'s psychic circuits.
-\nA golden flower with six branches bloomed on a vast altar. The vivis living in its shade knew neither unstable genes nor short lives.
-\n"...Beneath this shade... no one withers..."
-\nThe whisper faded into static. {PAWN_labelShort} seemed to have glimpsed an old memory within the everflower.</VV_Letter_EverflowerEcho1>
+<VV_Letter_EverflowerEcho1>After the ritual, a faint memory entered {PAWN_labelShort}'s psychic circuits.\n\nA golden flower with six branches bloomed on a vast altar. The vivis beneath it knew neither unstable genes nor short lives.\n\n"...Beneath this shade... no one withers..."\n\nThe voice faded into static.</VV_Letter_EverflowerEcho1>
 
-<VV_Letter_EverflowerEcho2Label>Memory of a scorched blossom wind</VV_Letter_EverflowerEcho2Label>
-<VV_Letter_EverflowerEcho2>As the ritual ended, a sharp ringing filled {PAWN_labelShort}'s head.
-\nThe smell of rot spread through a hive in bloom. Vivis lost their minds and tore at one another's wings. Neither herbs nor magic could heal their blackened wounds. The hives were burning.
-\n"...It's in the wind... mixed in..."
-"...Before the altar... only I remain..."
-\n{PAWN_labelShort} came to in a cold sweat. The everflower's petals were trembling.</VV_Letter_EverflowerEcho2>
+<VV_Letter_EverflowerEcho2Label>Memory of a burning hive</VV_Letter_EverflowerEcho2Label>
+<VV_Letter_EverflowerEcho2>As the ritual ended, a ringing filled {PAWN_labelShort}'s head.\n\nIn a burning hive, vivis tore at one another's wings. Neither herbs nor magic could heal their blackened wounds.\n\n"...It's in the wind... mixed in..."\n"...Before the altar... only I remain..."\n\n{PAWN_labelShort} came to in a cold sweat.</VV_Letter_EverflowerEcho2>
 
 <VV_Letter_EverflowerEcho3Label>Souls bound by light</VV_Letter_EverflowerEcho3Label>
-<VV_Letter_EverflowerEcho3>While resonating with the everflower, {PAWN_labelShort} was caught in an unfamiliar memory.
-\nSomeone was opening their circuits to the limit. Across the burning land, dying vivis turned into small lights and gathered endlessly within a single soul.
-\n"...If I do not die... they will not die..."
-"...All of you... into me... not a single one..."
-\nAs the lights multiplied, it grew harder to breathe. Even after the memory faded, {PAWN_labelShort} could not get up for a while.</VV_Letter_EverflowerEcho3>
+<VV_Letter_EverflowerEcho3>While resonating with the everflower, {PAWN_labelShort} saw an unfamiliar memory.\n\nSomeone was opening their circuits to the limit. Dying vivis turned into small lights and gathered within a single soul.\n\n"...If I do not die... they will not die..."\n"...All of you... into me... not a single one..."\n\nEven after the memory faded, {PAWN_labelShort} struggled to catch a breath.</VV_Letter_EverflowerEcho3>
 
 <VV_Letter_EverflowerEcho4Label>The shattered crown</VV_Letter_EverflowerEcho4Label>
-<VV_Letter_EverflowerEcho4>As {PAWN_labelShort} finished the ritual, a broken voice came through with a surge of pain.
-\n"...So heavy... too..."
-\nOverloaded circuits collapsed. A body grew a hard shell and enormous mandibles. Wings emerged from its back. The voice grew harder to understand.
-\n"...Who was I... the children..."
-\nA vast shadow surrounded by small lights sank into the ruins. Then there was silence.</VV_Letter_EverflowerEcho4>
+<VV_Letter_EverflowerEcho4>As {PAWN_labelShort} finished the ritual, a broken voice came through with a surge of pain.\n\n"...So heavy... too..."\n\nCircuits collapsed, and a hard shell covered the body. A voice escaped between enormous mandibles.\n\n"...Who was I... the children..."\n\nA shadow surrounded by small lights sank into the ruins.</VV_Letter_EverflowerEcho4>
 
-<VV_Letter_EverflowerEcho5Label>A breath seeking the flower's shade</VV_Letter_EverflowerEcho5Label>
-<VV_Letter_EverflowerEcho5>As mana waves spread from the everflower, static returned to {PAWN_labelShort}'s psychic circuits. This time it was no memory.
-\nHard shells clattered together. There was a sound of labored breathing. Something was following the mana back toward {PAWN_labelShort}.
-\n"...So warm..."
-"...Back... to the flower's shade..."
-\nThe connection broke. Something sleeping in the ruins had sensed the everflower's waves and awakened.</VV_Letter_EverflowerEcho5>
+<VV_Letter_EverflowerEcho5Label>A waking breath</VV_Letter_EverflowerEcho5Label>
+<VV_Letter_EverflowerEcho5>As mana waves spread from the everflower, static entered {PAWN_labelShort}'s psychic circuits. This time it was no memory.\n\nClattering shells and labored breathing. Something was approaching along the flow of mana.\n\n"...So warm..."\n"...Back... to the flower's shade..."\n\nThe connection broke.</VV_Letter_EverflowerEcho5>
 
 <!-- Ending quest: ancient amber core request (comms console, vivi federation) -->
-<VV_Comms_AmberCoreRequest>Request a task in exchange for an ancient amber core</VV_Comms_AmberCoreRequest>
+<VV_Comms_AmberCoreRequest>Request an ancient amber core task</VV_Comms_AmberCoreRequest>
 <VV_Comms_AmberCoreRequestHostile>hostile to the vivi federation</VV_Comms_AmberCoreRequestHostile>
 <VV_Comms_AmberCoreRequestActive>a task has already been given</VV_Comms_AmberCoreRequestActive>
 <VV_Comms_AmberCoreRequestCoreExists>an ancient amber core or altar already exists</VV_Comms_AmberCoreRequestCoreExists>
 <VV_Comms_AmberCoreRequestConditions>the missive's conditions are not met: {0}</VV_Comms_AmberCoreRequestConditions>
-<VV_Comms_AmberCoreRequestResult>{LEADER} has entrusted you with a task in exchange for a relic of the old empire. Once it is done, the vivi federation will send an ancient amber core.</VV_Comms_AmberCoreRequestResult>
+<VV_Comms_AmberCoreRequestResult>{LEADER} has offered a task with an ancient amber core as its reward.</VV_Comms_AmberCoreRequestResult>
 <VV_Comms_AmberCoreRequestNoQuest>{LEADER}: "We have no task to entrust to you right now. Contact us again later."</VV_Comms_AmberCoreRequestNoQuest>
 
 <!-- Ending quest: siege -->
 <VV_Letter_EndingSiegeLabel>Pulse of dawn</VV_Letter_EndingSiegeLabel>
-<VV_Letter_EndingSiege>The everflower on the altar has entered its fifth bloom. The everflower resonates with the altar's mana circuits, sending mana waves across the planet.
-\nEnemies drawn by these waves are converging on the colony.</VV_Letter_EndingSiege>
+<VV_Letter_EndingSiege>The everflower has entered its fifth bloom. Enemies drawn by the altar's mana waves are converging on the colony.</VV_Letter_EndingSiege>
 <VV_Letter_EndingSiegeFederation>The vivi federation will send elite reinforcements from time to time.</VV_Letter_EndingSiegeFederation>
 
 <VV_Letter_EndingFederationAidLabel>Federation reinforcements</VV_Letter_EndingFederationAidLabel>
-<VV_Letter_EndingFederationAid>The vivi federation has dispatched {COUNT} elite warriors to defend the everflower altar. They will stay for a while to fight alongside you before returning home.</VV_Letter_EndingFederationAid>
+<VV_Letter_EndingFederationAid>The vivi federation has sent {COUNT} elite warriors to defend the everflower altar. They will fight alongside you for a time before returning home.</VV_Letter_EndingFederationAid>
 
 <!-- Ending quest: calm before the storm -->
 <VV_Letter_EndingCalmLabel>Calm before the storm</VV_Letter_EndingCalmLabel>
-<VV_Letter_EndingCalm>The approaching enemies have suddenly vanished. Even the titanic hornet swarms have withdrawn.
-\nAn unknown psychic wave is interfering with the everflower's roots, halting bloom condensation. Through the resonance link, {PAWN_labelShort} can feel something approaching, surrounded by the souls of countless kin.</VV_Letter_EndingCalm>
+<VV_Letter_EndingCalm>The raids have stopped, and the titanic hornet swarms have withdrawn. The everflower's bloom condensation has halted.\n\nThrough the resonance, {PAWN_labelShort} senses countless souls approaching, with something at their center.</VV_Letter_EndingCalm>
 
 <!-- Ending quest: Apocrypha -->
 <VV_Letter_EndingApocryphaLabel>Apocrypha, the Crumbled Queen</VV_Letter_EndingApocryphaLabel>
-<VV_Letter_EndingApocrypha>Dark energy is gathering above the everflower, forming a vast shape: Apocrypha, the Crumbled Queen. The last queen of the old empire lost her mind while trying to save her scaria-infected people and became the progenitor of all titanic hornets. Driven back by the everflower's waves, she is approaching the altar with a swarm of titanic hornets.
-\nBillions of bound fairy vivis surround her body. The everflower's bloom remains halted. The altar must be defended before she can claim the everflower.</VV_Letter_EndingApocrypha>
+<VV_Letter_EndingApocrypha>Dark energy gathers above the everflower. Apocrypha, the last queen of the old empire, has appeared.\n\nDriven back by the everflower's waves, she approaches the altar with a swarm of titanic hornets. Billions of fairy vivis remain bound to her.</VV_Letter_EndingApocrypha>
 
 <!-- Ending quest: Apocrypha defeated, awaiting the coronation -->
 <VV_Letter_EndingCoronationLabel>The everflower awaits its queen</VV_Letter_EndingCoronationLabel>
-<VV_Letter_EndingCoronation>With Apocrypha gone, mana flows back into the altar and bloom condensation is complete.
-\nThe everflower awaits {PAWN_labelShort}'s coronation as queen.
-\nThe raids drawn by the everflower's mana waves have ended, and every titanic hornet vanished along with Apocrypha.</VV_Letter_EndingCoronation>
+<VV_Letter_EndingCoronation>Apocrypha and the titanic hornets have vanished. Bloom condensation is complete, and the raids drawn by the everflower have ended.\n\n{PAWN_labelShort} can now perform the queen's coronation.</VV_Letter_EndingCoronation>
 
 <!-- Ending quest: ending (the letter and the credits share the same text, in the style of the vanilla ending credits) -->
 <VV_Letter_EndingVictoryLabel>Empire of eternal spring</VV_Letter_EndingVictoryLabel>
 <VV_Letter_EndingVictoryContinue>You can continue playing in this colony with the benefits of the level 6 everflower.</VV_Letter_EndingVictoryContinue>
-<VV_EndingCredits>{PAWN_nameDef} completes the coronation before the everflower on the altar. A crown of golden petals rises above {PAWN_possessive} head and fades.\n\nThe everflower opens into full bloom. A warm wave spreads across the land as petals drift through the air. Longer lives now await the vivis of the hive.\n\nCenturies after the old empire fell, the great everflower has bloomed again. {PAWN_nameDef} has become queen of the vivis.</VV_EndingCredits>
-<VV_EndingCreditsNoQueen>The everflower on the altar opens into full bloom. A warm wave spreads across the land as petals drift through the air. Longer lives now await the vivis of the hive.\n\nCenturies after the old empire fell, the great everflower has bloomed again.</VV_EndingCreditsNoQueen>
+<VV_EndingCredits>{PAWN_nameDef} completes the coronation. Golden petals form a crown above {PAWN_possessive} head.\n\nCenturies after the old empire fell, the everflower has bloomed again. The vivis beneath it will live longer lives.\n\n{PAWN_nameDef} has become queen of the vivis.</VV_EndingCredits>
+<VV_EndingCreditsNoQueen>Centuries after the old empire fell, the everflower has bloomed again. The vivis beneath it will live longer lives.</VV_EndingCreditsNoQueen>
 <VV_EndingCreditsExiled>The royal vivi once cast out for her small stature has built a hive to succeed the old empire.</VV_EndingCreditsExiled>
 <VV_EndingCreditsRefugee>The refugees who lost everything to the titanic hornets now have the strength to defend their hive.</VV_EndingCreditsRefugee>
 <VV_EndingCreditsOutro>The spring of the old empire begins anew here. And your story continues...</VV_EndingCreditsOutro>
 
 <!-- Ending quest: failure -->
 <VV_Letter_EndingFailureLabel>Everflower usurped</VV_Letter_EndingFailureLabel>
-<VV_Letter_EndingFailureStolen>Apocrypha has drained all the everflower's power and vanished.
-\nOnly the altar remains, without its everflower. The final bloom has failed.</VV_Letter_EndingFailureStolen>
+<VV_Letter_EndingFailureStolen>Apocrypha has drained the everflower's power and vanished. The final bloom has failed.</VV_Letter_EndingFailureStolen>
 <VV_Letter_EndingFailureLostLabel>Everflower lost</VV_Letter_EndingFailureLostLabel>
-<VV_Letter_EndingFailureLost>The everflower has been lost. Its condensed mana has scattered, and the final bloom has failed.</VV_Letter_EndingFailureLost>
+<VV_Letter_EndingFailureLost>The everflower has been lost. The final bloom has failed.</VV_Letter_EndingFailureLost>
 <VV_Letter_EndingFailureResonatorLabel>Resonance severed</VV_Letter_EndingFailureResonatorLabel>
-<VV_Letter_EndingFailureResonator>{PAWN_labelShort} has fallen while in full assimilation, severing the resonance with the everflower.
-\nThe condensed mana has scattered, and the final bloom has failed.</VV_Letter_EndingFailureResonator>
+<VV_Letter_EndingFailureResonator>{PAWN_labelShort} has fallen, severing the resonance with the everflower. The final bloom has failed.</VV_Letter_EndingFailureResonator>
 
 <!-- Ending quest: messages -->
 <VV_Message_EndingApocryphaLanded>Driven back by the everflower's wave, Apocrypha has landed at the edge of the map with a swarm of titanic hornets.</VV_Message_EndingApocryphaLanded>
@@ -128,7 +96,7 @@
 
 <!-- Golden bloom mist -->
 <VV_Inspector_PlantManaUnlimited>Golden bloom mist: unlimited mana</VV_Inspector_PlantManaUnlimited>
-<VV_DialogChangeWeatherGoldenBloomDesc>The power of the fully bloomed everflower blankets the area in golden mist and drifting petals. The mist lowers ranged accuracy, but while it lasts, every arcane plant has unlimited mana.</VV_DialogChangeWeatherGoldenBloomDesc>
+<VV_DialogChangeWeatherGoldenBloomDesc>Golden mist and petals cover the area, reducing ranged accuracy and granting unlimited mana to all arcane plants.</VV_DialogChangeWeatherGoldenBloomDesc>
 <VV_FailReason_GoldenBloomHoldsWeather>The blooming everflower is sustaining the golden mist, preventing weather changes</VV_FailReason_GoldenBloomHoldsWeather>
 
 </LanguageData>

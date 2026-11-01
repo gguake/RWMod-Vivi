@@ -1,38 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
-<VV_GrandAttunement.description>의식 결과가 좋을수록 마나 응축 기간이 짧아집니다(8~10일).
-\n개화 응축 중에는 적들의 습격이 이어집니다.
-\n모든 영원꽃 의식의 재사용 대기시간은 공유됩니다.</VV_GrandAttunement.description>
+<VV_GrandAttunement.description>의식 결과에 따라 마나 응축에 8~10일이 걸리며, 그동안 습격이 이어집니다.\n\n모든 영원꽃 의식은 재사용 대기시간을 공유합니다.</VV_GrandAttunement.description>
 <VV_GrandAttunement.comps.0.label>{PAWN_labelShort}의 정신 감응력</VV_GrandAttunement.comps.0.label>
 <VV_GrandAttunement.comps.0.labelAbstract>공명자의 정신 감응력</VV_GrandAttunement.comps.0.labelAbstract>
 <VV_GrandAttunement.comps.1.label>참여자 수</VV_GrandAttunement.comps.1.label>
 
-<VV_ReturnOfLife.description>무작위 유전자 4~6개와 초월 유전자 1개를 지닌 고대의 성체 비비가 정착지에 합류합니다. 의식 결과가 좋을수록 다음 영원꽃 의식의 재사용 대기시간이 줄어듭니다.
-\n모든 영원꽃 의식의 재사용 대기시간은 공유됩니다.</VV_ReturnOfLife.description>
+<VV_ReturnOfLife.description>무작위 유전자 4~6개와 초월 유전자 1개를 지닌 고대 성체 비비가 합류합니다.\n\n모든 영원꽃 의식은 재사용 대기시간을 공유하며, 의식 결과가 좋을수록 대기시간이 짧아집니다.</VV_ReturnOfLife.description>
 <VV_ReturnOfLife.comps.0.label>{PAWN_labelShort}의 정신 감응력</VV_ReturnOfLife.comps.0.label>
 <VV_ReturnOfLife.comps.0.labelAbstract>공명자의 정신 감응력</VV_ReturnOfLife.comps.0.labelAbstract>
 <VV_ReturnOfLife.comps.1.label>참여자 수</VV_ReturnOfLife.comps.1.label>
 
-<VV_QueensCoronation.description>의식 결과와 관계없이 공명자가 여왕으로 즉위하고, 영원꽃이 6단계로 완전히 개화합니다.
-\n이 의식은 영원꽃 의식의 재사용 대기시간을 무시합니다.</VV_QueensCoronation.description>
+<VV_QueensCoronation.description>공명자가 여왕으로 즉위하고 영원꽃이 6단계로 개화합니다. 의식 결과에 영향을 받지 않으며 재사용 대기시간을 무시합니다.</VV_QueensCoronation.description>
 <VV_QueensCoronation.comps.0.label>{PAWN_labelShort}의 정신 감응력</VV_QueensCoronation.comps.0.label>
 <VV_QueensCoronation.comps.0.labelAbstract>공명자의 정신 감응력</VV_QueensCoronation.comps.0.labelAbstract>
 <VV_QueensCoronation.comps.1.label>참여자 수</VV_QueensCoronation.comps.1.label>
 
-<VV_WindOfRest.description>영원꽃에서 일어난 바람이 몇 초에 걸쳐 지역 전체로 퍼집니다. 바람이 닿은 모든 생명체의 유전자 불안정과 스카리아를 세력과 관계없이 없앱니다. 거대 말벌은 가루가 되어 흩어지고 날개 1~2개를 남깁니다. 의식 결과가 좋을수록 다음 영원꽃 의식의 재사용 대기시간이 줄어듭니다.
-\n모든 영원꽃 의식의 재사용 대기시간은 공유됩니다.</VV_WindOfRest.description>
+<VV_WindOfRest.description>지역 전체의 유전자 불안정과 스카리아를 치유합니다. 거대 말벌은 사라지고 날개 1~2개를 남깁니다.\n\n모든 영원꽃 의식은 재사용 대기시간을 공유하며, 의식 결과가 좋을수록 대기시간이 짧아집니다.</VV_WindOfRest.description>
 <VV_WindOfRest.comps.0.label>{PAWN_labelShort}의 정신 감응력</VV_WindOfRest.comps.0.label>
 <VV_WindOfRest.comps.0.labelAbstract>공명자의 정신 감응력</VV_WindOfRest.comps.0.labelAbstract>
 <VV_WindOfRest.comps.1.label>참여자 수</VV_WindOfRest.comps.1.label>
 
-<VV_SkyShield.description>영원꽃 주변 반경 45칸에 고각 보호막을 펼칩니다. 적의 박격포탄 등 머리 위로 날아오는 투사체와 궤도 폭격을 막고, 아군의 포격은 통과시킵니다. 의식 결과가 좋을수록 보호막이 오래 유지되고(1~3일) 다음 영원꽃 의식의 재사용 대기시간이 줄어듭니다. 보호막이 남아 있을 때 다시 진행하면 지속시간이 늘어납니다.
-\n모든 영원꽃 의식의 재사용 대기시간은 공유됩니다.</VV_SkyShield.description>
+<VV_SkyShield.description>영원꽃 주변 반경 45칸에서 적의 포격과 궤도 폭격을 막습니다. 의식 결과에 따라 1~3일간 유지되며, 다시 치르면 지속시간이 늘어납니다.\n\n모든 영원꽃 의식은 재사용 대기시간을 공유하며, 의식 결과가 좋을수록 대기시간이 짧아집니다.</VV_SkyShield.description>
 <VV_SkyShield.comps.0.label>{PAWN_labelShort}의 정신 감응력</VV_SkyShield.comps.0.label>
 <VV_SkyShield.comps.0.labelAbstract>공명자의 정신 감응력</VV_SkyShield.comps.0.labelAbstract>
 <VV_SkyShield.comps.1.label>참여자 수</VV_SkyShield.comps.1.label>
 
-<VV_FlowerLand.description>고른 지점 반경 6.6칸의 땅이 기름진 토양으로 바뀌고 만개한 비비아 꽃밭이 생깁니다. 물, 우주선 기반, 산 암석은 그대로 두고, 돌 지형과 바닥재는 흙으로 덮으며 그곳의 오염을 걷어 냅니다. 들풀과 덤불은 꽃에게 자리를 내주지만, 나무·심은 작물이 있거나 지붕이 덮였거나 물건이 놓인 칸에는 꽃이 피지 않습니다. 의식 결과가 좋을수록 다음 영원꽃 의식의 재사용 대기시간이 줄어듭니다.
-\n모든 영원꽃 의식의 재사용 대기시간은 공유됩니다.</VV_FlowerLand.description>
+<VV_FlowerLand.description>지정한 지점 반경 6.6칸의 땅을 기름진 토양으로 바꾸고 오염을 정화합니다. 빈 땅에는 만개한 비비아 꽃이 피어납니다.\n\n모든 영원꽃 의식은 재사용 대기시간을 공유하며, 의식 결과가 좋을수록 대기시간이 짧아집니다.</VV_FlowerLand.description>
 <VV_FlowerLand.comps.0.label>{PAWN_labelShort}의 정신 감응력</VV_FlowerLand.comps.0.label>
 <VV_FlowerLand.comps.0.labelAbstract>공명자의 정신 감응력</VV_FlowerLand.comps.0.labelAbstract>
 <VV_FlowerLand.comps.1.label>참여자 수</VV_FlowerLand.comps.1.label>

@@ -25,16 +25,16 @@
 
 <!-- Letter -->
 <VV_Letter_ApocryphaUnboundLabel>해방된 시조의 폭주</VV_Letter_ApocryphaUnboundLabel>
-<VV_Letter_ApocryphaUnbound>마지막 요정 비비 결속이 풀렸습니다. 아포크리파가 거대한 시조 말벌의 모습을 드러내고, 벽과 구조물을 부수며 영원꽃을 향해 돌진합니다. 몸을 감싸던 보호장은 사라졌고, 거대 엘텍스 바늘은 주변 땅으로 흩어졌습니다.</VV_Letter_ApocryphaUnbound>
+<VV_Letter_ApocryphaUnbound>마지막 결속이 풀렸습니다. 거대한 시조 말벌의 모습을 드러낸 아포크리파가 영원꽃을 향해 돌진합니다.</VV_Letter_ApocryphaUnbound>
 
 <!-- Message -->
 <VV_Message_ApocryphaBondReleased>아포크리파에게 결속된 요정 비비들이 대량으로 해방되었습니다. (남은 결속: {COUNT})</VV_Message_ApocryphaBondReleased>
-<VV_Message_ApocryphaTransformStarted>마지막 결속이 깨졌습니다! 아포크리파가 거센 충격파를 내뿜습니다.</VV_Message_ApocryphaTransformStarted>
+<VV_Message_ApocryphaTransformStarted>마지막 결속이 깨지며 아포크리파가 충격파를 내뿜습니다.</VV_Message_ApocryphaTransformStarted>
 <VV_Message_ApocryphaChannelInterrupted>아포크리파의 영원꽃 찬탈이 중단되었습니다.</VV_Message_ApocryphaChannelInterrupted>
 <VV_Message_ApocryphaEscapedRoofCollapse>아포크리파가 붕괴를 피해 순간이동했습니다.</VV_Message_ApocryphaEscapedRoofCollapse>
 <VV_Message_ApocryphaShieldBroken>마나 보호장이 깨지며 아포크리파가 기절했습니다.</VV_Message_ApocryphaShieldBroken>
 <VV_Message_ApocryphaShieldRestored>아포크리파의 마나 보호장이 복구되었습니다.</VV_Message_ApocryphaShieldRestored>
-<VV_Message_ApocryphaNeedleStuck>거대 바늘이 아포크리파를 꿰뚫고 외피에 꽂혔습니다! (꽂힌 바늘 {0} / {1}, 받는 피해 {2})</VV_Message_ApocryphaNeedleStuck>
+<VV_Message_ApocryphaNeedleStuck>거대 바늘이 아포크리파의 외피에 꽂혔습니다. (꽂힌 바늘 {0} / {1}, 받는 피해 {2})</VV_Message_ApocryphaNeedleStuck>
 <VV_Message_ApocryphaAllNeedlesStuck>거대 바늘이 모두 꽂혀 아포크리파가 기절했습니다.</VV_Message_ApocryphaAllNeedlesStuck>
 <VV_Message_ApocryphaNeedlesPulled>아포크리파가 꽂힌 바늘을 뽑아 주변 바닥으로 흩뿌렸습니다.</VV_Message_ApocryphaNeedlesPulled>
 <VV_Message_ApocryphaNeedleActivated>거대 바늘이 깨어나 {PAWN_labelShort}(을)를 겨눕니다!</VV_Message_ApocryphaNeedleActivated>

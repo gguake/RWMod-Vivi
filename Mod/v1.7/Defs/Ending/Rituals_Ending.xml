@@ -7,9 +7,7 @@
   <PreceptDef>
     <defName>VV_GrandAttunement</defName>
     <label>full bloom ritual</label>
-    <description>Connects the altar's mana circuits to the everflower to begin its fifth bloom.
-\nThe resonator enters full assimilation when the ritual begins and cannot move or take orders.
-\nRequires a level 4 everflower enshrined on the everflower altar.</description>
+    <description>Begins the fifth bloom of a level 4 everflower enshrined on the altar. The resonator becomes fully assimilated with the everflower and cannot move.</description>
     <issue>Ritual</issue>
     <preceptClass>Precept_Ritual</preceptClass>
     <visible>false</visible>
@@ -106,9 +104,7 @@
 
   <RitualOutcomeEffectDef>
     <defName>VV_GrandAttunement</defName>
-    <description>The better the ritual's result, the shorter the mana condensation period (8 to 10 days).
-\nEnemy raids continue throughout bloom condensation.
-\nAll everflower rituals share a cooldown.</description>
+    <description>Mana condensation takes 8 to 10 days depending on ritual quality. Raids continue during this time.\n\nAll everflower rituals share a cooldown.</description>
     <workerClass>VVRace.RitualOutcomeEffectWorker_GrandAttunement</workerClass>
     <allowAttachableOutcome>false</allowAttachableOutcome>
     <givesDevelopmentPoints>false</givesDevelopmentPoints>
@@ -159,7 +155,7 @@
   <PreceptDef>
     <defName>VV_ReturnOfLife</defName>
     <label>return of life</label>
-    <description>Uses a fully bloomed everflower to restore the body of an ancient fairy vivi freed from Apocrypha. The revived vivi joins the colony.</description>
+    <description>Restores a body to an ancient fairy vivi freed from Apocrypha. Requires a fully bloomed everflower.</description>
     <issue>Ritual</issue>
     <preceptClass>Precept_Ritual</preceptClass>
     <visible>false</visible>
@@ -255,8 +251,7 @@
 
   <RitualOutcomeEffectDef>
     <defName>VV_ReturnOfLife</defName>
-    <description>An ancient adult vivi carrying four to six random genes and one archite gene joins the colony. The better the ritual's result, the shorter the cooldown on the next everflower ritual.
-\nAll everflower rituals share a cooldown.</description>
+    <description>An ancient adult vivi with four to six random genes and one archite gene joins the colony.\n\nAll everflower rituals share a cooldown, which is shorter with better ritual quality.</description>
     <workerClass>VVRace.RitualOutcomeEffectWorker_ReturnOfLife</workerClass>
     <allowAttachableOutcome>false</allowAttachableOutcome>
     <givesDevelopmentPoints>false</givesDevelopmentPoints>
@@ -305,8 +300,7 @@
   <PreceptDef>
     <defName>VV_QueensCoronation</defName>
     <label>queen's coronation</label>
-    <description>Crowns the resonator queen and completes the everflower's sixth bloom.
-\nRequires completed bloom condensation. Only the royal vivi resonating with the everflower can perform it.</description>
+    <description>Crowns the resonator queen and completes the everflower's final bloom. Requires completed bloom condensation.</description>
     <issue>Ritual</issue>
     <preceptClass>Precept_Ritual</preceptClass>
     <visible>false</visible>
@@ -402,8 +396,7 @@
 
   <RitualOutcomeEffectDef>
     <defName>VV_QueensCoronation</defName>
-    <description>Regardless of the ritual's result, the resonator is crowned queen and the everflower fully blooms at level 6.
-\nThis ritual ignores the everflower ritual cooldown.</description>
+    <description>The resonator becomes queen and the everflower reaches level 6. Ritual quality does not affect the outcome, and the ritual ignores the shared cooldown.</description>
     <workerClass>VVRace.RitualOutcomeEffectWorker_QueensCoronation</workerClass>
     <allowAttachableOutcome>false</allowAttachableOutcome>
     <givesDevelopmentPoints>false</givesDevelopmentPoints>
@@ -454,7 +447,7 @@
   <PreceptDef>
     <defName>VV_WindOfRest</defName>
     <label>wind of rest</label>
-    <description>Sends a gentle wind from a fully bloomed everflower across the whole region. It removes genetic instability and scaria from every creature it touches. Titanic hornets crumble to dust, leaving only their wings behind.</description>
+    <description>A wind from the fully bloomed everflower cleanses genetic instability and scaria, and scatters titanic hornets to dust.</description>
     <issue>Ritual</issue>
     <preceptClass>Precept_Ritual</preceptClass>
     <visible>false</visible>
@@ -550,8 +543,7 @@
 
   <RitualOutcomeEffectDef>
     <defName>VV_WindOfRest</defName>
-    <description>A wind spreads from the everflower across the whole region over a few seconds. It removes genetic instability and scaria from every creature it reaches, regardless of faction. Titanic hornets crumble to dust and leave one or two wings behind. The better the ritual's result, the shorter the cooldown on the next everflower ritual.
-\nAll everflower rituals share a cooldown.</description>
+    <description>Cures genetic instability and scaria throughout the area. Titanic hornets vanish, leaving one or two wings each.\n\nAll everflower rituals share a cooldown, which is shorter with better ritual quality.</description>
     <workerClass>VVRace.RitualOutcomeEffectWorker_WindOfRest</workerClass>
     <allowAttachableOutcome>false</allowAttachableOutcome>
     <givesDevelopmentPoints>false</givesDevelopmentPoints>
@@ -599,7 +591,7 @@
   <PreceptDef>
     <defName>VV_SkyShield</defName>
     <label>sky shield</label>
-    <description>Raises a vast high-angle shield around a fully bloomed everflower for a time. It stops hostile mortar shells and other projectiles falling from the sky.</description>
+    <description>Raises a shield over the fully bloomed everflower to block enemy bombardment.</description>
     <issue>Ritual</issue>
     <preceptClass>Precept_Ritual</preceptClass>
     <visible>false</visible>
@@ -695,8 +687,7 @@
 
   <RitualOutcomeEffectDef Class="VVRace.RitualOutcomeEffectDef_SkyShield">
     <defName>VV_SkyShield</defName>
-    <description>Raises a high-angle shield with a radius of 45 cells around the everflower. It stops hostile mortar shells, other overhead projectiles and orbital strikes, while allied fire passes through. The better the ritual's result, the longer it lasts (1 to 3 days) and the shorter the cooldown on the next everflower ritual. Performing it again while the shield is up extends the shield.
-\nAll everflower rituals share a cooldown.</description>
+    <description>Blocks enemy artillery and orbital strikes within 45 cells of the everflower. Lasts 1 to 3 days depending on ritual quality; repeating the ritual extends its duration.\n\nAll everflower rituals share a cooldown, which is shorter with better ritual quality.</description>
     <workerClass>VVRace.RitualOutcomeEffectWorker_SkyShield</workerClass>
     <allowAttachableOutcome>false</allowAttachableOutcome>
     <givesDevelopmentPoints>false</givesDevelopmentPoints>
@@ -752,7 +743,7 @@
   <PreceptDef>
     <defName>VV_FlowerLand</defName>
     <label>land of flowers</label>
-    <description>Choose a spot on the map and turn the ground around it into rich soil covered with fully bloomed vivia flowers. Water is left untouched, while stone ground and floors are covered with soil.</description>
+    <description>Enriches the chosen ground and brings vivia flowers into bloom.</description>
     <issue>Ritual</issue>
     <preceptClass>VVRace.Precept_RitualFlowerLand</preceptClass>
     <visible>false</visible>
@@ -848,8 +839,7 @@
 
   <RitualOutcomeEffectDef Class="VVRace.RitualOutcomeEffectDef_FlowerLand">
     <defName>VV_FlowerLand</defName>
-    <description>The ground within 6.6 cells of the chosen spot becomes rich soil and a field of fully bloomed vivia flowers appears. Water cells, gravship substructure and mountain rock are left as they are; stone ground and floors are covered with soil and pollution there is cleared. Wild grass and bushes give way to the flowers, but trees, sown crops, roofed cells and cells with items get no flowers. The better the ritual's result, the shorter the cooldown on the next everflower ritual.
-\nAll everflower rituals share a cooldown.</description>
+    <description>Turns the ground within 6.6 cells of the chosen spot into rich soil and clears pollution. Vivia flowers bloom on open ground.\n\nAll everflower rituals share a cooldown, which is shorter with better ritual quality.</description>
     <workerClass>VVRace.RitualOutcomeEffectWorker_FlowerLand</workerClass>
     <allowAttachableOutcome>false</allowAttachableOutcome>
     <givesDevelopmentPoints>false</givesDevelopmentPoints>

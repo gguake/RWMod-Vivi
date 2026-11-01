@@ -1,23 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
 <VV_GrandAttunement.label>만개 의식</VV_GrandAttunement.label>
-<VV_GrandAttunement.description>제단의 마나 회로와 영원꽃을 연결해 다섯 번째 개화를 시작합니다.
-\n공명자는 의식과 함께 〈영원꽃 완전 동화〉에 들어가 스스로 움직일 수 없게 됩니다.
-\n영원꽃 제단에 안치된 조율 4단계 영원꽃에서만 진행할 수 있습니다.</VV_GrandAttunement.description>
+<VV_GrandAttunement.description>영원꽃 제단에 안치된 조율 4단계 영원꽃의 다섯 번째 개화를 시작합니다. 공명자는 영원꽃과 완전히 동화되어 움직일 수 없게 됩니다.</VV_GrandAttunement.description>
 
 <VV_ReturnOfLife.label>생명의 회귀</VV_ReturnOfLife.label>
-<VV_ReturnOfLife.description>완전히 개화한 영원꽃의 힘으로 아포크리파에게서 해방된 고대 요정 비비의 육체를 되살립니다. 되살아난 비비는 정착지에 합류합니다.</VV_ReturnOfLife.description>
+<VV_ReturnOfLife.description>아포크리파에게서 해방된 고대 요정 비비에게 육체를 되돌려 줍니다. 만개한 영원꽃에서 치를 수 있습니다.</VV_ReturnOfLife.description>
 
 <VV_QueensCoronation.label>여왕의 대관식</VV_QueensCoronation.label>
-<VV_QueensCoronation.description>공명자가 여왕으로 즉위하며 영원꽃의 여섯 번째 개화를 완성합니다.
-\n개화 응축을 마친 영원꽃에서, 공명자인 로열 비비만 진행할 수 있습니다.</VV_QueensCoronation.description>
+<VV_QueensCoronation.description>공명자가 여왕으로 즉위하며 영원꽃의 마지막 개화를 완성합니다. 개화 응축이 끝나면 치를 수 있습니다.</VV_QueensCoronation.description>
 
 <VV_WindOfRest.label>안식의 바람</VV_WindOfRest.label>
-<VV_WindOfRest.description>완전히 개화한 영원꽃에서 지역 전체로 잔잔한 바람을 보냅니다. 바람이 닿은 모든 생명체의 유전자 불안정과 스카리아가 사라집니다. 거대 말벌은 가루가 되어 흩어지고 날개만 남습니다.</VV_WindOfRest.description>
+<VV_WindOfRest.description>만개한 영원꽃에서 바람이 불어와 유전자 불안정과 스카리아를 씻어내고 거대 말벌을 흩어 버립니다.</VV_WindOfRest.description>
 
 <VV_SkyShield.label>하늘 방패</VV_SkyShield.label>
-<VV_SkyShield.description>완전히 개화한 영원꽃 주변에 거대한 고각 보호막을 일정 시간 펼칩니다. 하늘에서 떨어지는 적의 박격포탄 등의 투사체를 막습니다.</VV_SkyShield.description>
+<VV_SkyShield.description>만개한 영원꽃 주변에 하늘을 덮는 보호막을 펼쳐 적의 포격을 막습니다.</VV_SkyShield.description>
 
 <VV_FlowerLand.label>꽃의 대지</VV_FlowerLand.label>
-<VV_FlowerLand.description>지도에서 지점을 골라 그 주변 땅을 만개한 비비아 꽃이 가득한 기름진 토양으로 바꿉니다. 물은 그대로 두며, 돌 지형과 바닥재도 흙으로 덮습니다.</VV_FlowerLand.description>
+<VV_FlowerLand.description>지정한 땅을 기름지게 하고 비비아 꽃을 피웁니다.</VV_FlowerLand.description>
 </LanguageData>

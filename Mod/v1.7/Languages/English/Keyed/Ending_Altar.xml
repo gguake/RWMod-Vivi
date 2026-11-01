@@ -25,12 +25,12 @@
 
 <!-- 정보창 -->
 <VV_Inspector_AltarEnshrinedEverflower>Enshrined everflower: attunement level {LEVEL}</VV_Inspector_AltarEnshrinedEverflower>
-<VV_Inspector_AltarHeldResonator>Resonator in full assimilation with the everflower: {PAWN_labelShort}</VV_Inspector_AltarHeldResonator>
+<VV_Inspector_AltarHeldResonator>Assimilated resonator: {PAWN_labelShort}</VV_Inspector_AltarHeldResonator>
 <VV_Inspector_AltarNoEverflower>No everflower enshrined</VV_Inspector_AltarNoEverflower>
 <VV_Inspector_EverflowerEnshrined>Enshrined on the everflower altar</VV_Inspector_EverflowerEnshrined>
 <VV_Inspector_EverflowerAttunementLevelOnly>Attunement: Level {LEVEL}</VV_Inspector_EverflowerAttunementLevelOnly>
 
 <!-- 기즈모 -->
-<VV_Command_ReserveTeleportEverflowerAltarDesc>Select the everflower altar to enshrine the everflower at its center, regardless of distance. Requires attunement level {LEVEL} or higher, and an enshrined everflower can never be moved again.</VV_Command_ReserveTeleportEverflowerAltarDesc>
+<VV_Command_ReserveTeleportEverflowerAltarDesc>Teleports an everflower of attunement level {LEVEL} or higher onto the altar. Once enshrined, it cannot be moved.</VV_Command_ReserveTeleportEverflowerAltarDesc>
 
 </LanguageData>

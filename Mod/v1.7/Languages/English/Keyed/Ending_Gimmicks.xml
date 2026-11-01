@@ -10,7 +10,7 @@
 
 <!-- Ending quest: Apocrypha phase 1 gimmick messages -->
 <VV_Message_FairyFlowerBonded>{PAWN_labelShort} has bonded with the fairy bloom and gained fairy interference.</VV_Message_FairyFlowerBonded>
-<VV_Message_FairyBondReleased>{PAWN_labelShort} triggered a mana backflow in the bond network, lifting all doom blights in this area.</VV_Message_FairyBondReleased>
+<VV_Message_FairyBondReleased>{PAWN_labelShort} has freed the fairy vivis. All doom blights in this area have been lifted.</VV_Message_FairyBondReleased>
 <VV_Message_DoomFlowerBloomed>A doom bloom has blossomed, inflicting {BLIGHT} on colonists in this area.</VV_Message_DoomFlowerBloomed>
 
 <!-- Ending quest: doom blight (plague) tooltip -->
@@ -22,6 +22,6 @@
 <VV_Inspect_DoomFlowerBloomIn>Blooms in: {0}</VV_Inspect_DoomFlowerBloomIn>
 <VV_Inspect_DoomFlowerHint>Inflicts a curse when it blooms.</VV_Inspect_DoomFlowerHint>
 <VV_Inspect_FairyFlowerFadeIn>Fades in: {0}</VV_Inspect_FairyFlowerFadeIn>
-<VV_Inspect_FairyFlowerHint>Select a vivi and right-click to bond.</VV_Inspect_FairyFlowerHint>
+<VV_Inspect_FairyFlowerHint>Can bond with a vivi.</VV_Inspect_FairyFlowerHint>
 
 </LanguageData>

@@ -6,16 +6,15 @@
 
 <!-- 안식의 바람 -->
 <VV_Message_WindOfRestResult>The wind of rest has passed. Genetic instability cured: {INSTABILITY}, scaria cured: {SCARIA}, titanic hornets crumbled: {HORNETS}.</VV_Message_WindOfRestResult>
-<VV_Message_WindOfRestNothing>The wind of rest has passed. There was nothing left to cleanse.</VV_Message_WindOfRestNothing>
+<VV_Message_WindOfRestNothing>The wind of rest has passed.</VV_Message_WindOfRestNothing>
 
 <!-- 꽃의 대지 -->
 <VV_Message_FlowerLandNoGround>There is no ground here that can become a flower field.</VV_Message_FlowerLandNoGround>
-<VV_Message_FlowerLandBloomed>The ground has turned into rich soil and a field of vivia flowers has bloomed ({COUNT} flowers).</VV_Message_FlowerLandBloomed>
+<VV_Message_FlowerLandBloomed>{COUNT} vivia flowers have bloomed on the enriched soil.</VV_Message_FlowerLandBloomed>
 
 <!-- 여왕의 권능: 생명 공명 -->
 <VV_Letter_QueenLifeResonanceLabel>Life resonance: {PAWN_labelShort}</VV_Letter_QueenLifeResonanceLabel>
-<VV_Letter_QueenLifeResonance>{PAWN_nameDef}'s body scattered into golden petals and was drawn into the everflower.
-\nThe queen's life resonates with the fully bloomed everflower. She will awaken before the everflower in {TIME}.</VV_Letter_QueenLifeResonance>
+<VV_Letter_QueenLifeResonance>{PAWN_nameDef} scattered into golden petals and returned to the everflower. She will awaken in {TIME}.</VV_Letter_QueenLifeResonance>
 <VV_Message_QueenReborn>{PAWN_labelShort} has awakened before the everflower.</VV_Message_QueenReborn>
 <VV_Inspector_QueenRebirth>{PAWN_labelShort} awakens in: {TIME}</VV_Inspector_QueenRebirth>
 

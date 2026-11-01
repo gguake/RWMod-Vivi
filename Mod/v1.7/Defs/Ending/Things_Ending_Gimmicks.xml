@@ -201,7 +201,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VV_FairyFlower</defName>
     <label>fairy bloom</label>
-    <description>A flower formed from the mana of ancient fairy vivis bound to Apocrypha. Any vivi who is not a baby can bond with it to gain fairy interference.\n\nIt cannot be destroyed by attacks and withers after some time.</description>
+    <description>A flower grown from the mana of fairy vivis bound to Apocrypha. Bonding with a vivi causes fairy interference. It soon withers.</description>
     <thingClass>VVRace.Building_FairyFlower</thingClass>
     <graphicData>
       <texPath>Things/Building/VV_FairyFlower</texPath>

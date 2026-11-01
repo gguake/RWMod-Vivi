@@ -14,7 +14,7 @@
 
 <!-- Letters -->
 <VV_Letter_ReturnOfLifeLabel>Return of life: {PAWN_labelShort}</VV_Letter_ReturnOfLifeLabel>
-<VV_Letter_ReturnOfLife>{PAWN_labelShort}, an ancient vivi once bound to Apocrypha, has regained a body through the everflower's power.\n\nAfter many years as a fairy, this vivi has joined the colony.</VV_Letter_ReturnOfLife>
+<VV_Letter_ReturnOfLife>{PAWN_labelShort}, an ancient vivi once bound to Apocrypha, has regained a body through the everflower's power and joined the colony.</VV_Letter_ReturnOfLife>
 <VV_Letter_ReturnOfLifeGenes>Genes of the ancient empire:</VV_Letter_ReturnOfLifeGenes>
 
 <!-- Everflower full assimilation -->

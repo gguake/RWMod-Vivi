@@ -4,9 +4,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VV_DreamumAltar</defName>
     <label>everflower altar</label>
-    <description>An altar restored from the designs of the old vivi empire. An ancient amber core and mana circuits support the everflower's growth.
-\nAn everflower of attunement level 4 or higher can teleport to its center regardless of distance. Once enshrined, the everflower cannot be moved.
-\nThe altar cannot be damaged by attacks. It cannot be deconstructed while an everflower is enshrined. Pawns can walk across it slowly. Only one can be built on each map.</description>
+    <description>An altar restored from the designs of the old vivi empire. Its amber core and mana circuits support the everflower's growth.\n\nAn everflower of attunement level 4 or higher can be enshrined here and cannot be moved afterward. The altar cannot be destroyed by attacks. Only one can be built per map.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_Everflower</ThingDef>
       <ThingDef>VV_AncientAmberCore</ThingDef>
@@ -85,9 +83,7 @@
   <ThingDef ParentName="ResourceBase">
     <defName>VV_AncientAmberCore</defName>
     <label>ancient amber core</label>
-    <description>An amber crystal once used in an everflower altar of the old vivi empire. The mana circuits inside give off a faint light.
-\nA key material for the everflower altar. The vivi federation has kept the few remaining cores since the empire fell.
-\nObtained as a reward for completing a task for the vivi federation.</description>
+    <description>An amber crystal used in the everflower altars of the old vivi empire. The vivi federation holds the surviving cores.\n\nObtained by completing a task for the federation.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_DreamumAltar</ThingDef>
     </descriptionHyperlinks>

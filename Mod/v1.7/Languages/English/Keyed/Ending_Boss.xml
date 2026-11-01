@@ -25,16 +25,16 @@
 
 <!-- Letter -->
 <VV_Letter_ApocryphaUnboundLabel>Rampage of the Unbound Progenitor</VV_Letter_ApocryphaUnboundLabel>
-<VV_Letter_ApocryphaUnbound>The last fairy vivi bond has broken. Apocrypha has revealed her titanic hornet form and is charging toward the everflower, smashing walls and structures in her path. Her mana shield is gone, and the giant eltex needles lie scattered on the ground.</VV_Letter_ApocryphaUnbound>
+<VV_Letter_ApocryphaUnbound>The last bond has broken. Apocrypha reveals her titanic hornet form and charges toward the everflower.</VV_Letter_ApocryphaUnbound>
 
 <!-- Message -->
 <VV_Message_ApocryphaBondReleased>A large number of vivi fairies bound to Apocrypha have been freed. (Remaining bond: {COUNT})</VV_Message_ApocryphaBondReleased>
-<VV_Message_ApocryphaTransformStarted>The last fairy bond has shattered! Apocrypha unleashes a powerful shockwave.</VV_Message_ApocryphaTransformStarted>
+<VV_Message_ApocryphaTransformStarted>The last bond breaks as Apocrypha unleashes a shockwave.</VV_Message_ApocryphaTransformStarted>
 <VV_Message_ApocryphaChannelInterrupted>Apocrypha's usurpation of the everflower was interrupted.</VV_Message_ApocryphaChannelInterrupted>
 <VV_Message_ApocryphaEscapedRoofCollapse>Apocrypha teleported away from a roof collapse.</VV_Message_ApocryphaEscapedRoofCollapse>
 <VV_Message_ApocryphaShieldBroken>Apocrypha's mana shield has shattered, stunning her.</VV_Message_ApocryphaShieldBroken>
 <VV_Message_ApocryphaShieldRestored>Apocrypha's mana shield has been restored.</VV_Message_ApocryphaShieldRestored>
-<VV_Message_ApocryphaNeedleStuck>A giant needle pierced Apocrypha and lodged in her carapace! ({0} / {1} lodged, damage taken {2})</VV_Message_ApocryphaNeedleStuck>
+<VV_Message_ApocryphaNeedleStuck>A giant needle lodged in Apocrypha's carapace. ({0} / {1} lodged, damage taken {2})</VV_Message_ApocryphaNeedleStuck>
 <VV_Message_ApocryphaAllNeedlesStuck>All the giant needles have lodged in Apocrypha, stunning her.</VV_Message_ApocryphaAllNeedlesStuck>
 <VV_Message_ApocryphaNeedlesPulled>Apocrypha tore the lodged needles out and scattered them across the ground.</VV_Message_ApocryphaNeedlesPulled>
 <VV_Message_ApocryphaNeedleActivated>A giant needle awakens and aims at {PAWN_labelShort}!</VV_Message_ApocryphaNeedleActivated>
