@@ -30,7 +30,7 @@ namespace VVRace
         // 최소 사거리: 사출탄 폭발 반경(2.4)에 보스가 휘말리지 않도록 이보다 가까운 적은 노리지 않고, 발사 순간 이 안에 들어와 있는 조준은 쏘지 않는다.
         public float shellMinRange = 2.9f;
         public int shellAimTicks = 240;
-        public IntRange shellCastIntervalTicks = new IntRange(90, 150);
+        public IntRange shellCastIntervalTicks = new IntRange(180, 300);
         public int maxShellAims = 3;
 
         // 1페이즈: 포격 사거리 안 시야에 들어온 적을 감지하면 호위 말벌이 이 시간 동안 그 적을 노린다(계속 보이면 연장).
