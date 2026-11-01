@@ -67,6 +67,16 @@ namespace VVRace.HarmonyPatches
                 original: AccessTools.Method(typeof(MentalStateWorker), nameof(MentalStateWorker.StateCanOccur)),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(MentalStateWorker_StateCanOccur_Postfix)));
 
+            // 광분한 거대 말벌·아포크리파에게 죽은 우호 세력원은 호감도를 깎지 않음
+            harmony.Patch(
+                original: AccessTools.Method(typeof(Faction), nameof(Faction.Notify_MemberDied)),
+                prefix: new HarmonyMethod(typeof(ViviRacePatch), nameof(Faction_Notify_MemberDied_Prefix)),
+                postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(Faction_Notify_MemberDied_Postfix)));
+
+            harmony.Patch(
+                original: AccessTools.Method(typeof(Faction), nameof(Faction.TryAffectGoodwillWith)),
+                prefix: new HarmonyMethod(typeof(ViviRacePatch), nameof(Faction_TryAffectGoodwillWith_Prefix)));
+
             // 불 공포 오버라이드
             harmony.Patch(
                 original: AccessTools.Method(typeof(ThoughtWorker_Pyrophobia), nameof(ThoughtWorker_Pyrophobia.NearFire)),
@@ -342,6 +352,33 @@ namespace VVRace.HarmonyPatches
                     }
                 }
             }
+        }
+
+        // 바닐라는 무소속 가해자에게 우호 세력원이 죽으면 호감도를 깎고(MemberNeutrallyDied), 영구 광폭 동물에게 죽은 경우만 뺀다.
+        // 광분한 거대 말벌과 아포크리파도 모두에게 적대하는 재앙이므로 같은 예외를 둔다.
+        // dinfo를 null로 바꾸면 factionHostileOnDeath 분기로 떨어져 연방 대표가 죽을 때 세력이 적대화되므로, 그 호감도 변경만 막는다.
+        private static bool _blamelessMemberDeath;
+
+        private static void Faction_Notify_MemberDied_Prefix(DamageInfo? dinfo)
+        {
+            _blamelessMemberDeath = dinfo?.Instigator is Pawn killer &&
+                (killer.MentalStateDef == VVMentalStateDefOf.VV_HornetBerserk || ApocryphaUtility.IsApocrypha(killer));
+        }
+
+        private static void Faction_Notify_MemberDied_Postfix()
+        {
+            _blamelessMemberDeath = false;
+        }
+
+        private static bool Faction_TryAffectGoodwillWith_Prefix(HistoryEventDef reason, ref bool __result)
+        {
+            if (_blamelessMemberDeath && reason == HistoryEventDefOf.MemberNeutrallyDied)
+            {
+                __result = false;
+                return false;
+            }
+
+            return true;
         }
 
         private const float ViviPyrophobiaRadius = 6.7f;
