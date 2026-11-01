@@ -205,7 +205,7 @@ namespace VVRace
             {
                 sb.AppendInNewLine(LocalizeString_EndingAltar.VV_Inspector_AltarHeldResonator.Translate(resonator.Named("PAWN")));
             }
-            else
+            else if (everflower == null)
             {
                 sb.AppendInNewLine(LocalizeString_EndingAltar.VV_Inspector_AltarNoEverflower.Translate(RequiredAttunementLevel.Named("LEVEL")));
             }
@@ -216,6 +216,11 @@ namespace VVRace
         public override IEnumerable<Gizmo> GetGizmos()
         {
             foreach (var gizmo in base.GetGizmos())
+            {
+                yield return gizmo;
+            }
+
+            foreach (var gizmo in GetEnshrinedEverflowerGizmos())
             {
                 yield return gizmo;
             }
@@ -236,6 +241,23 @@ namespace VVRace
                         everflower?.Teleport(Position);
                     }
                 };
+            }
+        }
+
+        // 안치된 영원꽃은 제단 가운데 한 칸뿐이라 고르기 어려우므로 제단을 선택해도 꽃의 기즈모(의식·개화 진행·마나 등)를 함께 보여 준다.
+        // 의식 기즈모는 꽃을 대상으로 만들어지므로 그대로 꽃에 적용된다. 해체(제단의 해체와 겹침)와
+        // 금지 토글(상호작용 허용, 제단의 설정처럼 보임)은 빼고, 꽃도 함께 선택돼 있으면 중복을 피한다.
+        private IEnumerable<Gizmo> GetEnshrinedEverflowerGizmos()
+        {
+            var everflower = EnshrinedEverflower;
+            if (everflower == null || !everflower.Spawned || Find.Selector.IsSelected(everflower)) { yield break; }
+
+            foreach (var gizmo in everflower.GetGizmos())
+            {
+                if (gizmo is Designator) { continue; }
+                if (gizmo is Command command && (command.hotKey == KeyBindingDefOf.Designator_Deconstruct || command.hotKey == KeyBindingDefOf.Command_ItemForbid)) { continue; }
+
+                yield return gizmo;
             }
         }
     }
