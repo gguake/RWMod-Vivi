@@ -26,8 +26,7 @@
 
 <!-- Letter -->
 <VV_Letter_ApocryphaUnboundLabel>Rampage of the Unbound Progenitor</VV_Letter_ApocryphaUnboundLabel>
-<VV_Letter_ApocryphaUnbound>The last fairy vivi bond has broken. Apocrypha has revealed her titanic hornet form and is charging toward the everflower, smashing walls and structures in her path. Her mana shield is gone, and the giant eltex needles lie scattered on the ground.
-\nThe everflower has begun responding to its resonator's attunement once more.</VV_Letter_ApocryphaUnbound>
+<VV_Letter_ApocryphaUnbound>The last fairy vivi bond has broken. Apocrypha has revealed her titanic hornet form and is charging toward the everflower, smashing walls and structures in her path. Her mana shield is gone, and the giant eltex needles lie scattered on the ground.</VV_Letter_ApocryphaUnbound>
 
 <!-- Message -->
 <VV_Message_ApocryphaBondReleased>A large number of vivi fairies bound to Apocrypha have been freed. (Remaining bond: {COUNT})</VV_Message_ApocryphaBondReleased>

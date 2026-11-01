@@ -15,14 +15,6 @@ namespace VVRace
             var attuner = jobRitual.PawnWithRole("resonator");
             var everflower = jobRitual.selectedTarget.Thing as ArcanePlant_Everflower;
 
-            // 이때는 공유 재사용 대기를 적용하지 않으므로 Notify_RitualComplete 대신 순간이동 예약만 해제한다.
-            if (everflower != null && EverflowerRitualRules.IsResonancePhase(everflower))
-            {
-                ResonanceWaveUtility.Trigger(attuner, everflower);
-                everflower.Unreserve();
-                return;
-            }
-
             if (attuner != null && everflower != null)
             {
                 var map = everflower.Map;

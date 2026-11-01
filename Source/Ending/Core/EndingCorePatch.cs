@@ -30,7 +30,6 @@ namespace VVRace
                 AccessTools.Method(typeof(Map), nameof(Map.IncidentTargetTags)),
                 nameof(Map_IncidentTargetTags_Postfix));
 
-            PatchModule(harmony, nameof(EndingRitualPatch), EndingRitualPatch.Patch);
             PatchModule(harmony, nameof(ApocryphaPatch), ApocryphaPatch.Patch);
         }
 

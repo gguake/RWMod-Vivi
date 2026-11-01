@@ -5,17 +5,17 @@ namespace VVRace
 {
     public static class EverflowerRitualRules
     {
-        public static bool IsResonancePhase(ArcanePlant_Everflower everflower)
+        // 〈만개하는 여명〉이 진행되는 동안 앵커 영원꽃에서는 엔딩 의식(대조율·대관식) 외의 의식을 치를 수 없다.
+        public static bool IsBlockedByEnding(ArcanePlant_Everflower everflower)
         {
-            if (everflower == null) { return false; }
-
             var quest = ViviEndingQuest.Current;
-            return quest != null && quest.IsBossPhase2 && quest.IsAnchor(everflower);
+            return everflower != null && quest != null && quest.IsEndingActive && quest.IsAnchor(everflower);
         }
 
-        public static bool IsResonanceRitual(Precept_Ritual ritual)
+        // 대조율은 엔딩을 시작하고 대관식은 끝낸다. 각자 대상 필터에서 엔딩 단계를 따로 검사한다.
+        public static bool IsEndingRitual(Precept_Ritual ritual)
         {
-            return ritual != null && ritual.def == EndingRitualDefOf.VV_Attunement;
+            return ritual != null && (ritual.def == EndingRitualDefOf.VV_GrandAttunement || ritual.def == EndingRitualDefOf.VV_QueensCoronation);
         }
 
         public static bool IsCoronationRitual(Precept_Ritual ritual)
@@ -23,45 +23,14 @@ namespace VVRace
             return ritual != null && ritual.def == EndingRitualDefOf.VV_QueensCoronation;
         }
 
-        // ignoreBleeding을 상시 켜면 일반 조율에도 적용되므로 배정과 참석 유지 판정 중에만 임시로 켠다.
-        // 배정은 EndingRitualPatch, 참석 유지는 LordJob_RitualResonance.VoluntaryJoinPriorityFor에서 처리한다.
-        public static bool ShouldIgnoreBleeding(RitualRole role, Precept_Ritual ritual, ArcanePlant_Everflower everflower)
-        {
-            return role != null && !role.ignoreBleeding && IsResonanceRitual(ritual) && IsResonancePhase(everflower);
-        }
-
-        public static bool IsAnchor(ArcanePlant_Everflower everflower)
-        {
-            var quest = ViviEndingQuest.Current;
-            return everflower != null && quest != null && quest.IsAnchor(everflower);
-        }
-
-        public static bool IsBossFightOnMap(Map map)
-        {
-            var quest = ViviEndingQuest.Current;
-            return map != null && quest != null && quest.Stage == ViviEndingStage.Boss && quest.AnchorMap == map;
-        }
-
-        public static bool IsAnchorUnderBossFight(ArcanePlant_Everflower everflower)
-        {
-            var quest = ViviEndingQuest.Current;
-            return everflower != null && quest != null && quest.Stage == ViviEndingStage.Boss && quest.IsAnchor(everflower);
-        }
-
         // 시작 가능하면 null, 불가능하면 기즈모에 표시할 비활성 사유를 반환한다.
         public static string GetBlockReason(ArcanePlant_Everflower everflower, Precept_Ritual ritual)
         {
             if (everflower == null) { return null; }
 
-            if (IsResonancePhase(everflower))
+            if (IsBlockedByEnding(everflower) && !IsEndingRitual(ritual))
             {
-                if (IsResonanceRitual(ritual))
-                {
-                    var resonanceTicksLeft = ViviEndingQuest.Current?.BossComp?.ResonanceCooldownTicksLeft ?? 0;
-                    return resonanceTicksLeft > 0 ? (string)LocalizeString_Etc.VV_FailReason_RitualCooldown.Translate(resonanceTicksLeft.ToStringTicksToPeriod()) : null;
-                }
-
-                return LocalizeString_EndingRituals.VV_FailReason_ApocryphaInterference.Translate();
+                return LocalizeString_EndingRituals.VV_FailReason_EndingInProgress.Translate();
             }
 
             if (ritual?.def == VVPreceptDefOf.VV_ChangeWeatherRitual && GoldenBloomUtility.IsHeldByEnding(everflower.MapHeld))
@@ -81,9 +50,10 @@ namespace VVRace
             return null;
         }
 
+        // 엔딩이 시작되면 앵커에서 진행 중이던 다른 의식은 취소된다.
         public static bool CanContinueRitual(ArcanePlant_Everflower everflower, Precept_Ritual ritual)
         {
-            return !IsResonancePhase(everflower) || IsResonanceRitual(ritual);
+            return !IsBlockedByEnding(everflower) || IsEndingRitual(ritual);
         }
 
         public static string GetEndingStartBlockReason()

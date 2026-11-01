@@ -936,7 +936,7 @@
     </children>
   </EffecterDef>
 
-  <!-- 2페이즈 무력화: 공명 파동에 맞거나 바늘이 모두 꽂혀 기절할 때(보스 위치 금빛 섬광) -->
+  <!-- 2페이즈 무력화: 바늘이 모두 꽂혀 기절할 때(보스 위치 금빛 섬광) -->
   <EffecterDef>
     <defName>VV_Effecter_ApocryphaStaggered</defName>
     <children>

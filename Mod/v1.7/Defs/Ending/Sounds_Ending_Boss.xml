@@ -100,7 +100,7 @@
     </subSounds>
   </SoundDef>
 
-  <!-- 2페이즈 무력화(바늘이 모두 꽂힘·공명 파동): 거대한 몸이 무너지는 소리. 바닐라 기절 폭발음을 대신하며 첫 타격이 약 3dB 작다. -->
+  <!-- 2페이즈 무력화(바늘이 모두 꽂힘): 거대한 몸이 무너지는 소리. 바닐라 기절 폭발음을 대신하며 첫 타격이 약 3dB 작다. -->
   <SoundDef>
     <defName>VV_ApocryphaGroggyPhase2</defName>
     <context>MapOnly</context>

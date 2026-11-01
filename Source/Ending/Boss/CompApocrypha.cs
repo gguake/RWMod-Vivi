@@ -100,8 +100,6 @@ namespace VVRace
         public int unboundNeedleLockedTicks = 75;
         public int allNeedlesStuckStunTicks = 3600;
 
-        public int resonanceCooldownTicks = 15000;
-
         public int breathCooldownTicks = 1200;
         public int breathWarmupTicks = 90;
         public float breathRange = 7f;
@@ -178,7 +176,6 @@ namespace VVRace
         private long _bondCount;
         private float _vitality;
         private float _maxVitality;
-        private int _resonanceReadyTick;
         private int _transformStartTick = -1;
         private bool _transformSwapped;
         private int _channelTicks;
@@ -279,7 +276,6 @@ namespace VVRace
             }
         }
 
-        public int ResonanceCooldownTicksLeft => Mathf.Max(0, _resonanceReadyTick - GenTicks.TicksGame);
 
         public bool IsChanneling => parent.Spawned && Pawn.CurJobDef == ApocryphaJobDefOf.VV_ApocryphaChannel;
         public int ChannelDurationTicks => _phase == ApocryphaPhase.Unbound ? Props.channelTicksUnbound : Props.channelTicksBound;
@@ -400,7 +396,6 @@ namespace VVRace
             Scribe_Values.Look(ref _bondCount, "bondCount", 0L);
             Scribe_Values.Look(ref _vitality, "vitality", 0f);
             Scribe_Values.Look(ref _maxVitality, "maxVitality", 0f);
-            Scribe_Values.Look(ref _resonanceReadyTick, "resonanceReadyTick", 0);
             Scribe_Values.Look(ref _transformStartTick, "transformStartTick", -1);
             Scribe_Values.Look(ref _transformSwapped, "transformSwapped", false);
             Scribe_Values.Look(ref _channelTicks, "channelTicks", 0);
@@ -1648,26 +1643,6 @@ namespace VVRace
         #endregion
 
         #region 계약 API
-        public void ApplyResonanceWave(Thing source, int stunTicks)
-        {
-            if (!parent.Spawned || (!IsActive && _phase != ApocryphaPhase.Transforming)) { return; }
-
-            _resonanceReadyTick = GenTicks.TicksGame + Props.resonanceCooldownTicks;
-
-            if (stunTicks > 0)
-            {
-                GimmickStun(stunTicks, source);
-            }
-
-            InterruptChannel();
-            CancelAim();
-            CancelNeedleAims();
-            CancelBreath();
-
-            SpawnEffecter(ApocryphaEffecterDefOf.VV_Effecter_ApocryphaStaggered, ApocryphaGimmicks.GetBossBodyOffset(Pawn));
-            ApocryphaUtility.ShakeCamera(parent.Map, 1.2f);
-        }
-
         public void ReleaseBond(Pawn releaser)
         {
             if (!parent.Spawned || _phase != ApocryphaPhase.Bound) { return; }
@@ -1981,7 +1956,6 @@ namespace VVRace
             _transformSwapped = true;
             _maxVitality = Props.maxVitality * HitPointsDifficultyFactor;
             _vitality = _maxVitality;
-            _resonanceReadyTick = 0;
             _needleStunned = false;
             _breathReadyTick = now + 600;
             _nextMeleeTick = now;
@@ -2229,7 +2203,6 @@ namespace VVRace
             yield return DevCommand("DEV: Vitality -25%", () => DebugDamageVitality(0.25f));
             yield return DevCommand("DEV: Start channel", DebugStartChannel);
             yield return DevCommand("DEV: Finish channel", DebugFinishChannel);
-            yield return DevCommand("DEV: Resonance wave", () => ApplyResonanceWave(null, 1200));
             yield return DevCommand("DEV: Stick a needle", DebugStickNeedle);
             yield return DevCommand("DEV: Shell ready now", () => _shellReadyTick = 0);
             yield return DevCommand("DEV: Needle ready now", () => _needleReadyTick = 0);

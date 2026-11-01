@@ -12,8 +12,6 @@ namespace VVRace
 
         public bool requiresAltar;
 
-        public bool allowedDuringApocryphaPhase2;
-
         public bool startsEndingQuest;
 
         public bool completesEndingQuest;
@@ -60,9 +58,9 @@ namespace VVRace
                 return false;
             }
 
-            if (!Def.allowedDuringApocryphaPhase2 && EverflowerRitualRules.IsResonancePhase(compEverflower.Everflower))
+            if (!Def.startsEndingQuest && !Def.completesEndingQuest && EverflowerRitualRules.IsBlockedByEnding(compEverflower.Everflower))
             {
-                return LocalizeString_EndingRituals.VV_FailReason_ApocryphaInterference.Translate();
+                return LocalizeString_EndingRituals.VV_FailReason_EndingInProgress.Translate();
             }
 
             // 서신 전에는 제단을 건설할 수 없으므로 제단 안치 요구보다 엔딩 단계의 거부 사유를 먼저 표시한다.

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
 <!-- Ritual fail reasons -->
-<VV_FailReason_ApocryphaInterference>Due to Apocrypha's interference, only the attunement ritual is possible.</VV_FailReason_ApocryphaInterference>
+<VV_FailReason_EndingInProgress>No other rituals can be performed on this everflower while Dawn in full bloom is underway.</VV_FailReason_EndingInProgress>
 <VV_FailReason_RequiresEverflowerAltar>Must be enshrined on the everflower altar.</VV_FailReason_RequiresEverflowerAltar>
 <VV_FailReason_GrandAttunementLocked>Can only be performed after receiving the vivi federation's missive.</VV_FailReason_GrandAttunementLocked>
 <VV_FailReason_GrandAttunementInProgress>The final bloom is already underway.</VV_FailReason_GrandAttunementInProgress>
@@ -11,7 +11,6 @@
 <VV_FailReason_CoronationLocked>Can only be performed once the bloom condensation is complete.</VV_FailReason_CoronationLocked>
 
 <!-- Messages -->
-<VV_Message_ResonanceWaveHit>The resonance wave strikes Apocrypha and stuns her! (Next attunement ritual in {COOLDOWN})</VV_Message_ResonanceWaveHit>
 
 <!-- Letters -->
 <VV_Letter_ReturnOfLifeLabel>Return of life: {PAWN_labelShort}</VV_Letter_ReturnOfLifeLabel>
