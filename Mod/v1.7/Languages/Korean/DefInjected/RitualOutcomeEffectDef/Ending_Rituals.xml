@@ -30,4 +30,10 @@
 <VV_SkyShield.comps.0.label>{PAWN_labelShort}의 정신 감응력</VV_SkyShield.comps.0.label>
 <VV_SkyShield.comps.0.labelAbstract>공명자의 정신 감응력</VV_SkyShield.comps.0.labelAbstract>
 <VV_SkyShield.comps.1.label>참여자 수</VV_SkyShield.comps.1.label>
+
+<VV_FlowerLand.description>고른 지점 반경 6.6칸의 땅이 기름진 토양으로 바뀌고 만개한 비비아 꽃밭이 생깁니다. 물, 우주선 기반, 산 암석은 그대로 두고, 돌 지형과 바닥재는 흙으로 덮으며 그곳의 오염을 걷어 냅니다. 들풀과 덤불은 꽃에게 자리를 내주지만, 나무·심은 작물이 있거나 지붕이 덮였거나 물건이 놓인 칸에는 꽃이 피지 않습니다. 의식 결과가 좋을수록 다음 영원꽃 의식의 재사용 대기시간이 줄어듭니다.
+\n모든 영원꽃 의식의 재사용 대기시간은 공유됩니다.</VV_FlowerLand.description>
+<VV_FlowerLand.comps.0.label>{PAWN_labelShort}의 정신 감응력</VV_FlowerLand.comps.0.label>
+<VV_FlowerLand.comps.0.labelAbstract>공명자의 정신 감응력</VV_FlowerLand.comps.0.labelAbstract>
+<VV_FlowerLand.comps.1.label>참여자 수</VV_FlowerLand.comps.1.label>
 </LanguageData>

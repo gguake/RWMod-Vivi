@@ -319,4 +319,97 @@
       </li>
     </children>
   </EffecterDef>
+
+  <!-- ===== 〈꽃의 대지〉 ===== -->
+
+  <!-- 의식 완료(영원꽃): 섬광 + 사방으로 터지는 꽃잎 -->
+  <EffecterDef>
+    <defName>VV_Effecter_FlowerLandComplete</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>VV_EverflowerRitualComplete</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>VV_Mote_FairyficationFlash</moteDef>
+        <burstCount>1</burstCount>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>1.6</scale>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_EverflowerPetal_Burst</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>16~24</burstCount>
+        <positionRadius>0.4</positionRadius>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>1~2.5</speed>
+        <rotation>0~360</rotation>
+        <rotationRate>-260~260</rotationRate>
+        <scale>0.2~0.4</scale>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <!-- 꽃밭이 생긴 자리: 반경(6.6칸)까지 퍼지는 금빛 고리. 크기 = (1 + 1.8×초) × 4칸이라 약 1.4초에 지름 14칸에 닿는다 -->
+  <FleckDef ParentName="FleckBase">
+    <defName>VV_Fleck_FlowerLandRing</defName>
+    <altitudeLayer>MoteOverheadLow</altitudeLayer>
+    <fadeInTime>0.05</fadeInTime>
+    <solidTime>0.6</solidTime>
+    <fadeOutTime>0.8</fadeOutTime>
+    <growthRate>1.8</growthRate>
+    <drawOffscreen>true</drawOffscreen>
+    <graphicData>
+      <texPath>VFX/VV_GoldenWaveRing</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>(4, 4)</drawSize>
+    </graphicData>
+  </FleckDef>
+
+  <!-- 꽃밭이 생긴 자리: 맑은 소리 + 금빛 고리 + 범위 전체에서 피어오르는 꽃잎·반짝임 -->
+  <EffecterDef>
+    <defName>VV_Effecter_FlowerLandBloom</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>VV_FairyMaterialize</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_FlowerLandRing</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>1</burstCount>
+        <absoluteAngle>true</absoluteAngle>
+        <rotation>0~360</rotation>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_EverflowerPetal_Burst</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>50~70</burstCount>
+        <positionRadius>6</positionRadius>
+        <angle>-40~40</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>0.6~1.6</speed>
+        <rotation>0~360</rotation>
+        <rotationRate>-260~260</rotationRate>
+        <scale>0.2~0.45</scale>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>NewbornBecomeChildGlimmer</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>24~32</burstCount>
+        <positionRadius>6</positionRadius>
+        <speed>0.2~0.5</speed>
+        <rotation>-45</rotation>
+        <angle>0</angle>
+      </li>
+    </children>
+  </EffecterDef>
 </Defs>

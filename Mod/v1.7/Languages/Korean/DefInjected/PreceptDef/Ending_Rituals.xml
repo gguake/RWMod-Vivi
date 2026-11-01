@@ -17,4 +17,7 @@
 
 <VV_SkyShield.label>하늘 방패</VV_SkyShield.label>
 <VV_SkyShield.description>완전히 개화한 영원꽃 주변에 거대한 고각 보호막을 일정 시간 펼칩니다. 하늘에서 떨어지는 적의 박격포탄 등의 투사체를 막습니다.</VV_SkyShield.description>
+
+<VV_FlowerLand.label>꽃의 대지</VV_FlowerLand.label>
+<VV_FlowerLand.description>지도에서 지점을 골라 그 주변 땅을 만개한 비비아 꽃이 가득한 기름진 토양으로 바꿉니다. 물은 그대로 두며, 돌 지형과 바닥재도 흙으로 덮습니다.</VV_FlowerLand.description>
 </LanguageData>

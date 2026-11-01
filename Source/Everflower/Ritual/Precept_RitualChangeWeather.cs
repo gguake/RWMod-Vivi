@@ -1,9 +1,7 @@
 ﻿using RimWorld;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Verse;
-using Verse.AI.Group;
 
 namespace VVRace
 {
@@ -17,33 +15,7 @@ namespace VVRace
             Dictionary<string, Pawn> forcedForRole = null,
             Pawn selectedPawn = null)
         {
-            var cannotStartReason = behavior.CanStartRitualNow(targetInfo, this, selectedPawn, forcedForRole);
-            if (!string.IsNullOrEmpty(cannotStartReason))
-            {
-                Messages.Message(cannotStartReason, targetInfo, MessageTypeDefOf.RejectInput, false);
-            }
-
-            var extraInfoText = new List<string>();
-            if (outcomeEffect != null)
-            {
-                if (!outcomeEffect.def.extraInfoLines.NullOrEmpty())
-                {
-                    extraInfoText.AddRange(outcomeEffect.def.extraInfoLines);
-                }
-
-                if (!outcomeEffect.def.extraPredictedOutcomeDescriptions.NullOrEmpty())
-                {
-                    foreach (var outcomeDescription in outcomeEffect.def.extraPredictedOutcomeDescriptions)
-                    {
-                        extraInfoText.Add(outcomeDescription.Formatted(shortDescOverride ?? def.label));
-                    }
-                }
-
-                if (attachableOutcomeEffect != null)
-                {
-                    extraInfoText.Add(attachableOutcomeEffect.DescriptionForRitualValidated(this, targetInfo.Map));
-                }
-            }
+            EverflowerRitualDialogUtility.NotifyCannotStart(this, targetInfo, selectedPawn, forcedForRole);
 
             Dialog_BeginRitual_ChangeWeather dialog = null;
 
@@ -59,30 +31,6 @@ namespace VVRace
                 return true;
             };
 
-            Dialog_BeginRitual.PawnFilter filter = (Pawn pawn, bool voluntary, bool allowOtherIdeos) =>
-            {
-                if (pawn.GetLord() != null ||
-                    (pawn.RaceProps.Animal && !behavior.def.roles.Any(r => r.AppliesToPawn(pawn, out string _, targetInfo, skipReason: true))) ||
-                    pawn.IsSubhuman)
-                {
-                    return false;
-                }
-
-                if (!ritualOnlyForIdeoMembers || def.allowSpectatorsFromOtherIdeos || pawn.Ideo == ideo || !voluntary || allowOtherIdeos || pawn.IsPrisonerOfColony || pawn.RaceProps.Animal)
-                {
-                    return true;
-                }
-
-                return !forcedForRole.NullOrEmpty() && forcedForRole.ContainsValue(pawn);
-            };
-
-            var okButtonText = "Begin".Translate();
-            List<Pawn> requiredPawns = null;
-            if (organizer != null)
-            {
-                requiredPawns = new List<Pawn> { organizer };
-            }
-
             dialog = new Dialog_BeginRitual_ChangeWeather(
                 Label.CapitalizeFirst(),
                 this,
@@ -91,11 +39,11 @@ namespace VVRace
                 action,
                 organizer,
                 obligation,
-                filter,
-                okButtonText,
-                requiredPawns,
+                EverflowerRitualDialogUtility.PawnFilter(this, targetInfo, forcedForRole),
+                "Begin".Translate(),
+                EverflowerRitualDialogUtility.RequiredPawns(organizer),
                 forcedForRole,
-                extraInfoText: extraInfoText,
+                extraInfoText: EverflowerRitualDialogUtility.ExtraInfoText(this, targetInfo),
                 selectedPawn: selectedPawn);
 
             return dialog;

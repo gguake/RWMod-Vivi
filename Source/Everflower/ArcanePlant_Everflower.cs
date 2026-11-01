@@ -53,6 +53,21 @@ namespace VVRace
             return selected;
         }
 
+        // 〈꽃의 대지〉 의식을 시작할 때 고른 지점. 의식이 끝나면 결과 워커가 꺼내 쓴다.
+        public IntVec3? SelectedFlowerLandCell
+        {
+            get => _selectedFlowerLandCell;
+            set => _selectedFlowerLandCell = value;
+        }
+        private IntVec3? _selectedFlowerLandCell;
+
+        public IntVec3? ConsumeSelectedFlowerLandCell()
+        {
+            var selected = _selectedFlowerLandCell;
+            _selectedFlowerLandCell = null;
+            return selected;
+        }
+
         public override void ExposeData()
         {
             base.ExposeData();
@@ -60,6 +75,7 @@ namespace VVRace
             Scribe_Values.Look(ref _lastRitualTick, "lastRitualTick");
             Scribe_Values.Look(ref _reserveTeleportCell, "reserveTeleportCell");
             Scribe_Values.Look(ref _selectedRitualWeather, "selectedRitualWeather");
+            Scribe_Values.Look(ref _selectedFlowerLandCell, "selectedFlowerLandCell");
         }
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)

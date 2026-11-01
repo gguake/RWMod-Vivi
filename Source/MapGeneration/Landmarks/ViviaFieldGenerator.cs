@@ -26,7 +26,8 @@ namespace VVRace
         // 가장자리 노이즈 때문에 꽃밭은 반경보다 조금 더 넓게 퍼질 수 있다.
         public static float FieldExtent(float radius) => radius * (1f + EdgeNoiseStrength);
 
-        public static int Generate(Map map, IntVec3 center, float radius, float density, int colorCount)
+        // fullBloom: 모두 다 자란 꽃으로 만든다. clipToRadius: 가장자리 노이즈로 반경 밖까지 번지지 않게 한다(〈꽃의 대지〉 의식).
+        public static int Generate(Map map, IntVec3 center, float radius, float density, int colorCount, bool fullBloom = false, bool clipToRadius = false)
         {
             var allColors = ArcanePlantUtility.ViviFlowerDefs.ToList();
             var palette = allColors.InRandomOrder().Take(Mathf.Clamp(colorCount, 1, allColors.Count)).ToList();
@@ -44,7 +45,7 @@ namespace VVRace
             var edgeSeed = Rand.Int;
             var warpSeed = Rand.Int;
             var spawned = 0;
-            foreach (var cell in GenRadial.RadialCellsAround(center, FieldExtent(radius), true))
+            foreach (var cell in GenRadial.RadialCellsAround(center, clipToRadius ? radius : FieldExtent(radius), true))
             {
                 var edgeNoise = Mathf.Clamp((float)Perlin.GetValue(cell.x, 0.0, cell.z, EdgeNoiseFrequency, edgeSeed, octaveCount: 2), -1f, 1f);
                 var t = cell.DistanceTo(center) / radius + edgeNoise * EdgeNoiseStrength;
@@ -54,7 +55,7 @@ namespace VVRace
                 var flowerDef = Rand.Chance(StrayColorChance) ? allColors.RandomElement() : PickPatchColor(cell, patchCenters, patchColors, warpSeed);
                 if (!CanSpawnViviaAt(cell, map, flowerDef)) { continue; }
 
-                SpawnVivia(flowerDef, cell, map);
+                SpawnVivia(flowerDef, cell, map, fullBloom);
                 spawned++;
             }
 
@@ -74,9 +75,10 @@ namespace VVRace
             return flowerDef.CanEverPlantAt(c, map, canWipePlantsExceptTree: true);
         }
 
+        // 나무와 정착민이 심은 작물은 남긴다.
         public static bool IsReplaceableWildPlant(Plant plant)
         {
-            return !plant.def.plant.IsTree;
+            return !plant.def.plant.IsTree && !plant.sown;
         }
 
         public static void ClearReplaceableWildPlant(IntVec3 c, Map map)
@@ -111,10 +113,10 @@ namespace VVRace
             return patchColors[nearest];
         }
 
-        private static void SpawnVivia(ThingDef flowerDef, IntVec3 cell, Map map)
+        private static void SpawnVivia(ThingDef flowerDef, IntVec3 cell, Map map, bool fullBloom)
         {
             var plant = (Plant)ThingMaker.MakeThing(flowerDef);
-            plant.Growth = GrowthRange.RandomInRange;
+            plant.Growth = fullBloom ? 1f : GrowthRange.RandomInRange;
             if (flowerDef.plant.LimitedLifespan)
             {
                 // 한꺼번에 시들지 않도록 생성 시 나이를 분산한다.
