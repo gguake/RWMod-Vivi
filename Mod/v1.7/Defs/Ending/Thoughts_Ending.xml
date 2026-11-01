@@ -10,7 +10,7 @@
       <li>
         <label>everflower in full bloom</label>
         <description>The everflower has finally bloomed. The long fight is over, and a new spring is beginning.</description>
-        <baseMoodEffect>14</baseMoodEffect>
+        <baseMoodEffect>20</baseMoodEffect>
       </li>
     </stages>
   </ThoughtDef>
