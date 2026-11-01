@@ -154,8 +154,6 @@ namespace VVRace
             return stage == ViviEndingStage.Siege || stage == ViviEndingStage.Calm || stage == ViviEndingStage.Boss;
         }
 
-        internal int CalmTicksLeft => Stage == ViviEndingStage.Calm && CalmPart != null && CalmPart.State == QuestPartState.Enabled ? Mathf.Max(0, CalmPart.TicksLeft) : 0;
-
         internal bool IsBossDeferred => ApocryphaPart != null && ApocryphaPart.State == QuestPartState.Enabled && ApocryphaPart.IsDeferred;
 
         internal Building_DreamumAltar AnchorAltar => ViviEndingUtility.AltarOf(_anchor);
@@ -332,38 +330,9 @@ namespace VVRace
 
         public string GetEverflowerInspectString(ArcanePlant_Everflower everflower)
         {
-            if (!IsAnchor(everflower)) { return null; }
+            if (!IsAnchor(everflower) || !IsEndingActive) { return null; }
 
-            var status = GetStatusText();
-            if (status == null) { return null; }
-
-            var bloom = LocalizeString_EndingCore.VV_Inspector_EndingBloom.Translate(BloomProgress.ToStringPercent().Named("PERCENT")).Resolve();
-            return bloom + "\n" + status;
-        }
-
-        // 평화 기간의 남은 시간은 퀘스트 탭에 별도 표시되므로 이 문구에서는 생략한다.
-        internal string GetStatusText(bool forQuestTab = false)
-        {
-            switch (Stage)
-            {
-                case ViviEndingStage.Siege:
-                    return LocalizeString_EndingCore.VV_Inspector_EndingSiege.Translate();
-
-                case ViviEndingStage.Calm:
-                    return forQuestTab ? null : LocalizeString_EndingCore.VV_Inspector_EndingCalm.Translate(CalmTicksLeft.ToStringTicksToPeriod().Named("TIME")).Resolve();
-
-                case ViviEndingStage.Boss:
-                    return LocalizeString_EndingCore.VV_Inspector_EndingBlocked.Translate();
-
-                case ViviEndingStage.Coronation:
-                    return LocalizeString_EndingCore.VV_Inspector_EndingCoronation.Translate();
-
-                case ViviEndingStage.Completed:
-                    return LocalizeString_EndingCore.VV_Inspector_EndingFullBloom.Translate();
-
-                default:
-                    return null;
-            }
+            return LocalizeString_EndingCore.VV_Inspector_EndingBloom.Translate(BloomProgress.ToStringPercent().Named("PERCENT")).Resolve();
         }
 
         public static bool MissiveArrivalConditionsMet()

@@ -77,8 +77,7 @@ namespace VVRace
             });
 
             var siegeTicks = Mathf.RoundToInt(Mathf.Lerp(SiegeMaxDurationTicks, SiegeMinDurationTicks, Mathf.Clamp01(quality / RitualMaxQuality)));
-            var siegeDays = (siegeTicks / (float)GenDate.TicksPerDay).ToString("0.#");
-            var siegeText = LocalizeString_EndingCore.VV_Letter_EndingSiege.Translate(siegeDays.Named("DAYS")).Resolve();
+            var siegeText = LocalizeString_EndingCore.VV_Letter_EndingSiege.Translate().Resolve();
             if (ViviEndingUtility.FindFederation(requireNonHostile: true) != null)
             {
                 siegeText += "\n\n" + LocalizeString_EndingCore.VV_Letter_EndingSiegeFederation.Translate().Resolve();
@@ -118,8 +117,6 @@ namespace VVRace
                 inSignal = bloomCondensed,
                 labelKey = LocalizeString_EndingCore.VV_Letter_EndingCalmLabel,
                 textKey = LocalizeString_EndingCore.VV_Letter_EndingCalm,
-                guideKey = LocalizeString_EndingCore.VV_Letter_EndingCalmGuide,
-                guideDays = (calmTicks / (float)GenDate.TicksPerDay).ToString("0.#"),
                 letterDef = LetterDefOf.NeutralEvent,
                 anchor = anchor,
             });
@@ -128,8 +125,6 @@ namespace VVRace
             {
                 inSignalEnable = bloomCondensed,
                 delayTicks = calmTicks,
-                expiryInfoPart = LocalizeString_EndingCore.VV_Quest_EndingCalmExpiry.Translate(),
-                expiryInfoPartTip = LocalizeString_EndingCore.VV_Quest_EndingCalmExpiryTip.Translate(),
                 debugLabel = CalmDelayLabel,
             };
             calm.outSignalsCompleted.Add(calmEnded);

@@ -8,8 +8,6 @@
 <VV_Quest_EndingDesc>The everflower on the altar has entered its fifth bloom and is condensing mana for its final bloom.
 \nDefend the altar until condensation is complete. The resonator can then perform the queen's coronation to complete the final bloom.
 \nIf the everflower on the altar is lost, the quest fails.</VV_Quest_EndingDesc>
-<VV_Quest_EndingCalmExpiry>Calm ends in {0}</VV_Quest_EndingCalmExpiry>
-<VV_Quest_EndingCalmExpiryTip>The calm ends on {0}</VV_Quest_EndingCalmExpiryTip>
 
 <!-- Ending quest: federation missive -->
 <VV_Letter_EndingFederationMissiveLabel>Vivi federation missive</VV_Letter_EndingFederationMissiveLabel>
@@ -73,7 +71,7 @@
 <!-- Ending quest: siege -->
 <VV_Letter_EndingSiegeLabel>Pulse of dawn</VV_Letter_EndingSiegeLabel>
 <VV_Letter_EndingSiege>The everflower on the altar has entered its fifth bloom. The everflower resonates with the altar's mana circuits, sending mana waves across the planet.
-\nThe everflower will condense mana for about {DAYS} days. Enemies drawn by these waves are converging on the colony.</VV_Letter_EndingSiege>
+\nEnemies drawn by these waves are converging on the colony.</VV_Letter_EndingSiege>
 <VV_Letter_EndingSiegeFederation>The vivi federation will send elite reinforcements from time to time.</VV_Letter_EndingSiegeFederation>
 
 <VV_Letter_EndingFederationAidLabel>Federation reinforcements</VV_Letter_EndingFederationAidLabel>
@@ -83,7 +81,6 @@
 <VV_Letter_EndingCalmLabel>Calm before the storm</VV_Letter_EndingCalmLabel>
 <VV_Letter_EndingCalm>The approaching enemies have suddenly vanished. Even the titanic hornet swarms have withdrawn.
 \nAn unknown psychic wave is interfering with the everflower's roots, halting bloom condensation. Through the resonance link, {PAWN_labelShort} can feel something approaching, surrounded by the souls of countless kin.</VV_Letter_EndingCalm>
-<VV_Letter_EndingCalmGuide>Raids will stop for about {DAYS} days.</VV_Letter_EndingCalmGuide>
 
 <!-- Ending quest: Apocrypha -->
 <VV_Letter_EndingApocryphaLabel>Apocrypha, the Crumbled Queen</VV_Letter_EndingApocryphaLabel>
@@ -123,22 +120,9 @@
 
 <!-- Ending quest: bloom condensation gizmo / inspector -->
 <VV_Gizmo_EndingBloom>Bloom condensation</VV_Gizmo_EndingBloom>
-<VV_Gizmo_EndingBloomSiege>Under siege</VV_Gizmo_EndingBloomSiege>
-<VV_Gizmo_EndingBloomCalm>Ominous silence</VV_Gizmo_EndingBloomCalm>
-<VV_Gizmo_EndingBloomBlocked>Blocked by Apocrypha</VV_Gizmo_EndingBloomBlocked>
-<VV_Gizmo_EndingBloomCoronation>Awaiting coronation</VV_Gizmo_EndingBloomCoronation>
 <VV_Gizmo_EndingBloomDesc>The everflower is condensing mana for its final bloom.</VV_Gizmo_EndingBloomDesc>
-<VV_Gizmo_EndingBloomDescSiege>Enemies drawn by the everflower's mana waves are targeting the altar.</VV_Gizmo_EndingBloomDescSiege>
-<VV_Gizmo_EndingBloomDescCalm>Bloom condensation has stopped just before completion. Calm remaining: {TIME}</VV_Gizmo_EndingBloomDescCalm>
-<VV_Gizmo_EndingBloomDescBlocked>Apocrypha's interference has halted bloom condensation.</VV_Gizmo_EndingBloomDescBlocked>
-<VV_Gizmo_EndingBloomDescCoronation>The queen's coronation is ready to begin.</VV_Gizmo_EndingBloomDescCoronation>
 
 <VV_Inspector_EndingBloom>Bloom condensation: {PERCENT}</VV_Inspector_EndingBloom>
-<VV_Inspector_EndingSiege>Under siege</VV_Inspector_EndingSiege>
-<VV_Inspector_EndingCalm>Calm remaining: {TIME}</VV_Inspector_EndingCalm>
-<VV_Inspector_EndingBlocked>Apocrypha is blocking the condensation.</VV_Inspector_EndingBlocked>
-<VV_Inspector_EndingCoronation>Ready for coronation</VV_Inspector_EndingCoronation>
-<VV_Inspector_EndingFullBloom>Full bloom</VV_Inspector_EndingFullBloom>
 
 <VV_Ending_ResonatorFallback>the resonator</VV_Ending_ResonatorFallback>
 

@@ -45,15 +45,6 @@ namespace VVRace
             }
         }
 
-        public override string DescriptionPart
-        {
-            get
-            {
-                var ending = ViviEndingQuest.Current;
-                return ending != null && ending.BloomQuest == quest ? ending.GetStatusText(forQuestTab: true) : null;
-            }
-        }
-
         public override void Notify_QuestSignalReceived(Signal signal)
         {
             base.Notify_QuestSignalReceived(signal);

@@ -8,8 +8,6 @@
 <VV_Quest_EndingDesc>제단 위의 영원꽃이 다섯 번째 개화를 맞아 마지막 개화에 필요한 마나를 응축하고 있습니다.
 \n응축이 끝날 때까지 제단을 지켜내십시오. 응축이 완료되면 공명자가 〈여왕의 대관식〉을 치러 마지막 개화를 완성할 수 있습니다.
 \n제단 위의 영원꽃을 잃으면 퀘스트는 실패합니다.</VV_Quest_EndingDesc>
-<VV_Quest_EndingCalmExpiry>평화 기간 남은 시간: {0}</VV_Quest_EndingCalmExpiry>
-<VV_Quest_EndingCalmExpiryTip>평화 기간이 끝나는 때: {0}</VV_Quest_EndingCalmExpiryTip>
 
 <!-- 엔딩 퀘스트: 비비 연방의 밀서 -->
 <VV_Letter_EndingFederationMissiveLabel>비비 연방의 밀서</VV_Letter_EndingFederationMissiveLabel>
@@ -73,7 +71,7 @@
 <!-- 엔딩 퀘스트: 여명의 맥동 (공성) -->
 <VV_Letter_EndingSiegeLabel>여명의 맥동</VV_Letter_EndingSiegeLabel>
 <VV_Letter_EndingSiege>제단 위의 영원꽃이 다섯 번째 개화를 맞이했습니다. 영원꽃이 제단의 마나 회로와 공명하며 행성 전역으로 마나 파동을 퍼뜨립니다.
-\n영원꽃은 약 {DAYS}일 동안 마나를 응축합니다. 그 파동에 이끌린 적들이 정착지로 몰려들고 있습니다.</VV_Letter_EndingSiege>
+\n그 파동에 이끌린 적들이 정착지로 몰려들고 있습니다.</VV_Letter_EndingSiege>
 <VV_Letter_EndingSiegeFederation>비비 연방이 때때로 정예 지원군을 보내올 것입니다.</VV_Letter_EndingSiegeFederation>
 
 <VV_Letter_EndingFederationAidLabel>비비 연방 지원군</VV_Letter_EndingFederationAidLabel>
@@ -83,7 +81,6 @@
 <VV_Letter_EndingCalmLabel>폭풍 전의 고요</VV_Letter_EndingCalmLabel>
 <VV_Letter_EndingCalm>몰려들던 적들이 갑자기 자취를 감추었습니다. 거대 말벌 무리마저 물러났습니다.
 \n정체불명의 파장이 영원꽃의 뿌리에 간섭해 개화 응축이 멈췄습니다. {PAWN_labelShort}(은)는 공명 너머로 수많은 동족의 영혼에 둘러싸인 무언가가 다가오는 것을 느낍니다.</VV_Letter_EndingCalm>
-<VV_Letter_EndingCalmGuide>약 {DAYS}일 동안 습격이 멈춥니다.</VV_Letter_EndingCalmGuide>
 
 <!-- 엔딩 퀘스트: 바스러진 여왕, 아포크리파 -->
 <VV_Letter_EndingApocryphaLabel>바스러진 여왕, 아포크리파</VV_Letter_EndingApocryphaLabel>
@@ -123,22 +120,9 @@
 
 <!-- 엔딩 퀘스트: 개화 응축 기즈모 / 정보창 -->
 <VV_Gizmo_EndingBloom>개화 응축</VV_Gizmo_EndingBloom>
-<VV_Gizmo_EndingBloomSiege>공성 중</VV_Gizmo_EndingBloomSiege>
-<VV_Gizmo_EndingBloomCalm>불길한 정적</VV_Gizmo_EndingBloomCalm>
-<VV_Gizmo_EndingBloomBlocked>가로막힘</VV_Gizmo_EndingBloomBlocked>
-<VV_Gizmo_EndingBloomCoronation>대관식 대기</VV_Gizmo_EndingBloomCoronation>
 <VV_Gizmo_EndingBloomDesc>영원꽃이 마지막 개화에 필요한 마나를 응축하고 있습니다.</VV_Gizmo_EndingBloomDesc>
-<VV_Gizmo_EndingBloomDescSiege>영원꽃의 마나 파동에 이끌린 적들이 제단을 노리고 있습니다.</VV_Gizmo_EndingBloomDescSiege>
-<VV_Gizmo_EndingBloomDescCalm>개화 응축이 완료 직전에 멈췄습니다. 평화 기간 남은 시간: {TIME}</VV_Gizmo_EndingBloomDescCalm>
-<VV_Gizmo_EndingBloomDescBlocked>아포크리파의 간섭으로 개화 응축이 멈췄습니다.</VV_Gizmo_EndingBloomDescBlocked>
-<VV_Gizmo_EndingBloomDescCoronation>〈여왕의 대관식〉을 치를 준비가 되었습니다.</VV_Gizmo_EndingBloomDescCoronation>
 
 <VV_Inspector_EndingBloom>개화 응축: {PERCENT}</VV_Inspector_EndingBloom>
-<VV_Inspector_EndingSiege>공성 중</VV_Inspector_EndingSiege>
-<VV_Inspector_EndingCalm>평화 기간 남은 시간: {TIME}</VV_Inspector_EndingCalm>
-<VV_Inspector_EndingBlocked>아포크리파가 응축을 가로막고 있습니다.</VV_Inspector_EndingBlocked>
-<VV_Inspector_EndingCoronation>대관식 준비됨</VV_Inspector_EndingCoronation>
-<VV_Inspector_EndingFullBloom>완전 개화</VV_Inspector_EndingFullBloom>
 
 <VV_Ending_ResonatorFallback>공명자</VV_Ending_ResonatorFallback>
 

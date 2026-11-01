@@ -5,8 +5,6 @@
         public const string VV_Quest_EndingMissiveGoals = nameof(VV_Quest_EndingMissiveGoals);
         public const string VV_Quest_EndingName = nameof(VV_Quest_EndingName);
         public const string VV_Quest_EndingDesc = nameof(VV_Quest_EndingDesc);
-        public const string VV_Quest_EndingCalmExpiry = nameof(VV_Quest_EndingCalmExpiry);
-        public const string VV_Quest_EndingCalmExpiryTip = nameof(VV_Quest_EndingCalmExpiryTip);
 
         public const string VV_Letter_EndingFederationMissiveLabel = nameof(VV_Letter_EndingFederationMissiveLabel);
         public const string VV_Letter_EndingFederationMissive = nameof(VV_Letter_EndingFederationMissive);
@@ -46,7 +44,6 @@
 
         public const string VV_Letter_EndingCalmLabel = nameof(VV_Letter_EndingCalmLabel);
         public const string VV_Letter_EndingCalm = nameof(VV_Letter_EndingCalm);
-        public const string VV_Letter_EndingCalmGuide = nameof(VV_Letter_EndingCalmGuide);
 
         public const string VV_Letter_EndingApocryphaLabel = nameof(VV_Letter_EndingApocryphaLabel);
         public const string VV_Letter_EndingApocrypha = nameof(VV_Letter_EndingApocrypha);
@@ -75,22 +72,9 @@
         public const string VV_Message_EndingGrandAttunementNotStarted = nameof(VV_Message_EndingGrandAttunementNotStarted);
 
         public const string VV_Gizmo_EndingBloom = nameof(VV_Gizmo_EndingBloom);
-        public const string VV_Gizmo_EndingBloomSiege = nameof(VV_Gizmo_EndingBloomSiege);
-        public const string VV_Gizmo_EndingBloomCalm = nameof(VV_Gizmo_EndingBloomCalm);
-        public const string VV_Gizmo_EndingBloomBlocked = nameof(VV_Gizmo_EndingBloomBlocked);
-        public const string VV_Gizmo_EndingBloomCoronation = nameof(VV_Gizmo_EndingBloomCoronation);
         public const string VV_Gizmo_EndingBloomDesc = nameof(VV_Gizmo_EndingBloomDesc);
-        public const string VV_Gizmo_EndingBloomDescSiege = nameof(VV_Gizmo_EndingBloomDescSiege);
-        public const string VV_Gizmo_EndingBloomDescCalm = nameof(VV_Gizmo_EndingBloomDescCalm);
-        public const string VV_Gizmo_EndingBloomDescBlocked = nameof(VV_Gizmo_EndingBloomDescBlocked);
-        public const string VV_Gizmo_EndingBloomDescCoronation = nameof(VV_Gizmo_EndingBloomDescCoronation);
 
         public const string VV_Inspector_EndingBloom = nameof(VV_Inspector_EndingBloom);
-        public const string VV_Inspector_EndingSiege = nameof(VV_Inspector_EndingSiege);
-        public const string VV_Inspector_EndingCalm = nameof(VV_Inspector_EndingCalm);
-        public const string VV_Inspector_EndingBlocked = nameof(VV_Inspector_EndingBlocked);
-        public const string VV_Inspector_EndingCoronation = nameof(VV_Inspector_EndingCoronation);
-        public const string VV_Inspector_EndingFullBloom = nameof(VV_Inspector_EndingFullBloom);
 
         public const string VV_Ending_ResonatorFallback = nameof(VV_Ending_ResonatorFallback);
 

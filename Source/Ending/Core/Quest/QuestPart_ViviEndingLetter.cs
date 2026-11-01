@@ -11,9 +11,6 @@ namespace VVRace
         public string labelKey;
         public string textKey;
 
-        public string guideKey;
-        public string guideDays;
-
         public LetterDef letterDef;
         public ArcanePlant_Everflower anchor;
 
@@ -23,10 +20,6 @@ namespace VVRace
             if (signal.tag != inSignal) { return; }
 
             var text = ViviEndingUtility.TranslateWithResonator(textKey, ViviEndingUtility.ResonatorOf(anchor)).Resolve();
-            if (!guideKey.NullOrEmpty())
-            {
-                text += "\n\n" + guideKey.Translate((guideDays ?? string.Empty).Named("DAYS")).Resolve();
-            }
 
             Find.LetterStack.ReceiveLetter(
                 labelKey.Translate(),
@@ -43,8 +36,6 @@ namespace VVRace
             Scribe_Values.Look(ref inSignal, "inSignal");
             Scribe_Values.Look(ref labelKey, "labelKey");
             Scribe_Values.Look(ref textKey, "textKey");
-            Scribe_Values.Look(ref guideKey, "guideKey");
-            Scribe_Values.Look(ref guideDays, "guideDays");
             Scribe_Defs.Look(ref letterDef, "letterDef");
             Scribe_References.Look(ref anchor, "anchor");
         }

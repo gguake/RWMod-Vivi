@@ -40,33 +40,24 @@ namespace VVRace
             var inner = rect.ContractedBy(Padding);
             var progress = _quest.BloomProgress;
 
+            // 진행 상황은 응축 %만 알려 준다. 단계 설명·남은 시간 같은 안내는 표시하지 않는다.
             Texture2D barTex;
-            string status;
-            string stageDesc;
             switch (_quest.Stage)
             {
                 case ViviEndingStage.Calm:
                     barTex = CalmBarTex;
-                    status = LocalizeString_EndingCore.VV_Gizmo_EndingBloomCalm.Translate();
-                    stageDesc = LocalizeString_EndingCore.VV_Gizmo_EndingBloomDescCalm.Translate(_quest.CalmTicksLeft.ToStringTicksToPeriod().Named("TIME")).Resolve();
                     break;
 
                 case ViviEndingStage.Boss:
                     barTex = BlockedBarTex;
-                    status = LocalizeString_EndingCore.VV_Gizmo_EndingBloomBlocked.Translate();
-                    stageDesc = LocalizeString_EndingCore.VV_Gizmo_EndingBloomDescBlocked.Translate();
                     break;
 
                 case ViviEndingStage.Coronation:
                     barTex = CoronationBarTex;
-                    status = LocalizeString_EndingCore.VV_Gizmo_EndingBloomCoronation.Translate();
-                    stageDesc = LocalizeString_EndingCore.VV_Gizmo_EndingBloomDescCoronation.Translate();
                     break;
 
                 default:
                     barTex = SiegeBarTex;
-                    status = LocalizeString_EndingCore.VV_Gizmo_EndingBloomSiege.Translate();
-                    stageDesc = LocalizeString_EndingCore.VV_Gizmo_EndingBloomDescSiege.Translate();
                     break;
             }
 
@@ -76,20 +67,14 @@ namespace VVRace
                 Widgets.Label(labelRect, LocalizeString_EndingCore.VV_Gizmo_EndingBloom.Translate().Resolve());
             }
 
-            var barRect = new Rect(inner.x, labelRect.yMax + Spacing, inner.width, BarHeight);
+            var barRect = new Rect(inner.x, labelRect.yMax + Spacing, inner.width, Mathf.Max(BarHeight, inner.yMax - labelRect.yMax - Spacing));
             Widgets.FillableBar(barRect, progress, barTex, EmptyBarTex, doBorder: false);
             using (new TextBlock(GameFont.Small, TextAnchor.MiddleCenter))
             {
                 Widgets.Label(barRect, progress.ToStringPercent());
             }
 
-            var statusRect = new Rect(inner.x, barRect.yMax + Spacing, inner.width, Mathf.Max(0f, inner.yMax - barRect.yMax - Spacing));
-            using (new TextBlock(GameFont.Tiny, TextAnchor.UpperLeft))
-            {
-                Widgets.Label(statusRect, status);
-            }
-
-            TooltipHandler.TipRegion(rect, LocalizeString_EndingCore.VV_Gizmo_EndingBloomDesc.Translate().Resolve() + "\n\n" + stageDesc);
+            TooltipHandler.TipRegion(rect, LocalizeString_EndingCore.VV_Gizmo_EndingBloomDesc.Translate().Resolve());
             return new GizmoResult(GizmoState.Clear);
         }
     }
