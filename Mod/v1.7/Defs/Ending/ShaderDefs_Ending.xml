@@ -147,7 +147,8 @@
     <shaderPath>Map/VV_NeedleLane</shaderPath>
   </ShaderTypeDef>
 
-  <!-- 거대 엘텍스 바늘 발사 왜곡: 촉이 지나간 직선 위의 장면 캡처를 순간 일그러뜨린다(충격파와 같은 장면 캡처 이름·큐를 써서 프레임당 한 번만 캡처). -->
+  <!-- 거대 엘텍스 바늘 발사 왜곡: 촉이 지나간 직선 위의 장면 캡처를 순간 일그러뜨린다. 바닐라 사이캐스트 사이킥 선의 마스크·노이즈·그림을 써서
+       바닐라 왜곡과 같은 질감으로 일그러진다(텍스처는 ApocryphaNeedleRenderer가 넣는다). 바닐라 큰 왜곡 파동과 같은 장면 캡처 이름·큐를 써서 프레임당 한 번만 캡처. -->
   <ShaderDef>
     <defName>VV_NeedleWarp</defName>
     <shaderProgram>
@@ -162,6 +163,12 @@
         <name>DistortionBackground</name>
         <queue>3151</queue>
       </sceneGrab>
+      <textureWrapOverrides>
+        <li>
+          <key>_NoiseTex</key>
+          <value>Repeat</value>
+        </li>
+      </textureWrapOverrides>
     </shaderProgram>
   </ShaderDef>
 

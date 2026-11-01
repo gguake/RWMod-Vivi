@@ -32,11 +32,21 @@ namespace VVRace
         private static readonly Material GlowMat = MaterialPool.MatFrom(NeedleTexPath, ShaderDatabase.MoteGlow);
         private static readonly Material AuraMat = MaterialPool.MatFrom("VFX/VV_ScentAura", ShaderDatabase.MoteGlow);
         private static readonly Material LaneMat = MaterialPool.MatFrom(BaseContent.WhiteTex, ShaderDatabase.LoadShader("Map/VV_NeedleLane"), Color.white);
-        private static readonly Material WarpMat = MaterialPool.MatFrom(BaseContent.WhiteTex, ShaderDatabase.LoadShader("Map/VV_NeedleWarp"), Color.white);
+        private static readonly Material WarpMat = MakeWarpMaterial();
 
-        // 발사 왜곡: 양옆으로 퍼지는 파면(최대 약 2.7칸)까지 덮도록 경고 띠(3칸)보다 넓게 그린다.
+        // 발사 왜곡: 양옆으로 퍼지는 일그러짐(최대 반폭 2.8칸)까지 덮도록 경고 띠(3칸)보다 넓게 그린다.
         private const float WarpDrawWidth = 7f;
-        private static readonly Color WarpColor = new Color(1f, 0.9f, 0.7f, 1f);
+        private static readonly Color WarpColor = new Color(1f, 0.95f, 0.85f, 1f);
+
+        // 바닐라 사이캐스트 사이킥 선(PsycastPsychicLine)과 같은 그림·왜곡 마스크·노이즈로 일그러지게 한다.
+        private static Material MakeWarpMaterial()
+        {
+            var line = ContentFinder<Texture2D>.Get("Things/Mote/PsycastPsychicLine", reportFailure: false) ?? BaseContent.ClearTex;
+            var material = MaterialPool.MatFrom(line, ShaderDatabase.LoadShader("Map/VV_NeedleWarp"), Color.white);
+            material.SetTexture("_DistortionTex", ContentFinder<Texture2D>.Get("Things/Mote/PsycastPsychicLineMask", reportFailure: false) ?? BaseContent.BlackTex);
+            material.SetTexture("_NoiseTex", ContentFinder<Texture2D>.Get("Things/Mote/PsycastNoise", reportFailure: false) ?? BaseContent.BlackTex);
+            return material;
+        }
         private static readonly Material LotusMat = MakeLotusMaterial();
 
         private static readonly MaterialPropertyBlock PropertyBlock = new MaterialPropertyBlock();
