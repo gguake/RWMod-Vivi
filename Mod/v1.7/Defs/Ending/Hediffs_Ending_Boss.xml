@@ -20,8 +20,8 @@
   <HediffDef>
     <defName>VV_ApocryphaCarapace</defName>
     <label>primordial carapace</label>
-    <description>Freed from the weight of billions of souls, the progenitor hornet is sheathed in a carapace condensed over centuries, and three giant eltex needles circle her, striking on their own.
-\nA needle that fires while Apocrypha stands in its path pierces her instead and stays lodged in her carapace. Each lodged needle increases the damage she takes (+50%, +100%, +300%). Once all three are lodged she is stunned for a long time, and when she recovers she tears the needles out.
+    <description>Freed from the weight of billions of souls, the progenitor hornet is sheathed in a carapace condensed over centuries. Her three giant eltex needles lie planted in the ground around her.
+\nAny colonist can touch a planted needle to awaken it. The needle tracks that colonist for a moment, locks its angle, then flies to its full range and plants itself where it lands. A needle that strikes Apocrypha stays lodged in her carapace. Each lodged needle increases the damage she takes (+50%, +100%, +300%). Once all three are lodged she is stunned for a long time, and when she recovers she tears the needles out and scatters them across the ground.
 \nThe resonance wave of an everflower attunement ritual still stuns her.</description>
     <hediffClass>VVRace.Hediff_ApocryphaCarapace</hediffClass>
     <defaultLabelColor>(1, 0.42, 0.85)</defaultLabelColor>

@@ -1253,6 +1253,57 @@
     </children>
   </EffecterDef>
 
+  <!-- 2페이즈: 바늘이 바닥에 꽂힘(전환 충격파·뽑힘으로 튕겨 나감, 사거리 끝). 찌르는 소리와 흙먼지·파편, 금빛 반짝임 -->
+  <EffecterDef>
+    <defName>VV_Effecter_ApocryphaNeedlePlant</defName>
+    <maintainTicks>10</maintainTicks>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>VV_ApocryphaNeedleStick</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>DustPuffThick</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>4~6</burstCount>
+        <positionRadius>0.6</positionRadius>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>0.4~1.2</speed>
+        <scale>1.2~2</scale>
+        <rotationRate>-60~60</rotationRate>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>ThrownDebris</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>6~10</burstCount>
+        <positionRadius>0.4</positionRadius>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>1.5~3.5</speed>
+        <scale>0.5~0.9</scale>
+        <rotation>0~360</rotation>
+        <rotationRate>-300~300</rotationRate>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickTwinkle</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>8~12</burstCount>
+        <positionRadius>0.5</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>2~5</speed>
+        <scale>0.35~0.65</scale>
+        <color>(1, 0.8, 0.6, 1)</color>
+      </li>
+    </children>
+  </EffecterDef>
+
   <!-- 2페이즈: 바늘이 보스에게 꽂힘(몸통 중심). 찌르는 소리와 둔탁한 타격, 금빛 섬광과 핏빛 불씨 -->
   <EffecterDef>
     <defName>VV_Effecter_ApocryphaNeedleStick</defName>

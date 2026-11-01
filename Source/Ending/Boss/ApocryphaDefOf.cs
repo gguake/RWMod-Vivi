@@ -50,6 +50,7 @@ namespace VVRace
         public static JobDef VV_ApocryphaChannel;
         public static JobDef VV_ApocryphaCharge;
         public static JobDef VV_ApocryphaSmash;
+        public static JobDef VV_ActivateApocryphaNeedle;
     }
 
     [DefOf]
@@ -84,6 +85,7 @@ namespace VVRace
         public static EffecterDef VV_Effecter_ApocryphaNeedleVanish;
         public static EffecterDef VV_Effecter_ApocryphaNeedleStick;
         public static EffecterDef VV_Effecter_ApocryphaNeedlePullOut;
+        public static EffecterDef VV_Effecter_ApocryphaNeedlePlant;
         public static EffecterDef VV_Effecter_ApocryphaManifestComplete;
         public static EffecterDef VV_Effecter_ApocryphaRepel;
         public static EffecterDef VV_Effecter_ApocryphaManifestLand;

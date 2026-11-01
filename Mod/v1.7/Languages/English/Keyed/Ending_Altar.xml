@@ -11,6 +11,8 @@
 <VV_FailReason_AltarCenterOccupied>An everflower is already enshrined on this altar.</VV_FailReason_AltarCenterOccupied>
 <VV_FailReason_AltarOnePerMap>Only one everflower altar can be built on each map.</VV_FailReason_AltarOnePerMap>
 <VV_FailReason_AltarBlockedByArcanePlant>Cannot build over an arcane plant.</VV_FailReason_AltarBlockedByArcanePlant>
+<VV_FailReason_AltarNotHomeMap>An everflower altar can only be built in a settlement, not in a camp or a temporary map.</VV_FailReason_AltarNotHomeMap>
+<VV_FailReason_AltarOnSubstructure>An everflower altar cannot be built on a gravship.</VV_FailReason_AltarOnSubstructure>
 <VV_FailReason_AltarUnderConstruction>Cannot place on an everflower altar under construction.</VV_FailReason_AltarUnderConstruction>
 <VV_FailReason_AltarHasEnshrinedEverflower>Cannot deconstruct while an everflower is enshrined</VV_FailReason_AltarHasEnshrinedEverflower>
 <VV_FailReason_AltarEndingInProgress>Cannot deconstruct while the everflower is blooming</VV_FailReason_AltarEndingInProgress>

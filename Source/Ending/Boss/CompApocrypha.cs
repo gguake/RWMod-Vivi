@@ -115,11 +115,15 @@ namespace VVRace
         public float maxVitality = 9000f;
         public List<float> damageFactorByStuckNeedles = new List<float> { 1f, 1.5f, 2f, 4f };
 
-        // 2페이즈: 거대 엘텍스 바늘 3개가 보스를 따라 맴돌며 저마다 대상을 골라 공격한다(보스는 바늘과 상관없이 움직인다).
-        // 발사 직선 위에 보스가 있으면 피해를 주는 대신 보스에게 꽂혀 멈춘다. 모두 꽂히면 길게 기절하고, 기절이 풀리면 바늘이 뽑혀 돌아간다.
+        // 2페이즈: 거대 엘텍스 바늘 3개가 전환 충격파에 튕겨 나가 보스 둘레(반경 unboundNeedlePlantRadius) 바닥에 꽂힌다. 아무 폰이나 꽂힌 바늘에 다가가
+        // unboundNeedleActivateTicks 동안 손을 대면 바늘이 깨어나, 그 폰을 unboundNeedleLockOnTicks 동안 뒤쫓으며 겨누다가(발사각이 폰을 따라 돈다)
+        // 그 각도로 굳어 unboundNeedleLockedTicks 뒤 최대 사거리까지 날아가고, 날아간 끝에 다시 꽂힌다.
+        // 발사 직선 위에 보스가 있으면 피해를 주는 대신 보스에게 꽂혀 멈춘다. 모두 꽂히면 길게 기절하고, 기절이 풀리면 바늘이 뽑혀 보스 둘레 바닥으로 다시 튕겨 나간다.
         public int unboundNeedleCount = 3;
-        public IntRange unboundNeedleFirstDelayTicks = new IntRange(240, 480);
-        public IntRange unboundNeedleIntervalTicks = new IntRange(360, 600);
+        public FloatRange unboundNeedlePlantRadius = new FloatRange(5f, 10f);
+        public int unboundNeedleActivateTicks = 60;
+        public int unboundNeedleLockOnTicks = 150;
+        public int unboundNeedleLockedTicks = 75;
         public int allNeedlesStuckStunTicks = 3600;
 
         // 2페이즈: 영원꽃 조율 의식(공명 파동)의 재사용 대기(6시간). 공명 파동은 기절만 시킨다.
@@ -134,6 +138,28 @@ namespace VVRace
         public int meleeIntervalTicks = 60;
         public int smashIntervalTicks = 30;
         public float smashDamage = 400f;
+
+        // 난이도(스토리텔러 위협 배율, 바닐라 평화 0.1·쉬움 0.3·보통 0.6·어려움 1·매우 어려움 1.55·극한 2.2)에 따른 배율.
+        // 체력: 1페이즈 마나 보호장과 2페이즈 생명력(어려움 기준 1500 / 9000).
+        // 멸망꽃 개화 시간: 피어나서 만개(저주)까지 걸리는 시간(어려움 기준 12시간). 난이도가 높을수록 짧다. 씨앗 수·최대 개수는 난이도와 무관하다.
+        public SimpleCurve hitPointsFactorByThreatScale = new SimpleCurve
+        {
+            new CurvePoint(0.1f, 0.4f),
+            new CurvePoint(0.3f, 0.55f),
+            new CurvePoint(0.6f, 0.75f),
+            new CurvePoint(1f, 1f),
+            new CurvePoint(1.55f, 1.3f),
+            new CurvePoint(2.2f, 1.6f),
+        };
+        public SimpleCurve doomBloomTimeFactorByThreatScale = new SimpleCurve
+        {
+            new CurvePoint(0.1f, 2f),
+            new CurvePoint(0.3f, 1.6f),
+            new CurvePoint(0.6f, 1.25f),
+            new CurvePoint(1f, 1f),
+            new CurvePoint(1.55f, 0.8f),
+            new CurvePoint(2.2f, 0.65f),
+        };
 
         // 영원꽃 찬탈(채널링): 실패 조건
         public int channelTicksBound = 5000;
@@ -235,7 +261,22 @@ namespace VVRace
 
         // 1페이즈 마나 보호장. 피해는 이 값에서 차감되고, 깨진 동안(기절 중)은 0이다.
         public float ManaShield => Mathf.Max(0f, _manaShield);
-        public float MaxManaShield => Props.manaShieldMax;
+        public float MaxManaShield => Props.manaShieldMax * HitPointsDifficultyFactor;
+
+        // 지금 난이도의 위협 배율과 그에 따른 체력(보호장·생명력) 배율.
+        public static float ThreatScale => Find.Storyteller?.difficulty?.threatScale ?? 1f;
+        public float HitPointsDifficultyFactor => Mathf.Max(0.1f, Props.hitPointsFactorByThreatScale?.Evaluate(ThreatScale) ?? 1f);
+
+        // [Building_DoomFlower 호출] 지금 난이도에서 멸망꽃이 피어나 만개할 때까지 걸리는 시간 배율(어려움 1, 높을수록 짧다).
+        // 꽃은 보스를 참조하지 않으므로 아포크리파 정의의 설정을 읽는다.
+        public static float DoomBloomTimeFactor
+        {
+            get
+            {
+                var props = ApocryphaThingDefOf.VV_Apocrypha?.GetCompProperties<CompProperties_Apocrypha>();
+                return Mathf.Max(0.1f, props?.doomBloomTimeFactorByThreatScale?.Evaluate(ThreatScale) ?? 1f);
+            }
+        }
         public bool ShieldBroken => _shieldBroken || _pendingShieldBreak;
 
         // 보스 둘레에 떠 있는 거대 엘텍스 바늘(1페이즈 needleCount개, 2페이즈 unboundNeedleCount개).
@@ -244,7 +285,7 @@ namespace VVRace
 
         // 2페이즈 생명력 풀. 모든 피해는 신체 부위 대신 이 값에서 차감된다.
         public float Vitality => _vitality;
-        public float MaxVitality => _maxVitality > 0f ? _maxVitality : Props.maxVitality;
+        public float MaxVitality => _maxVitality > 0f ? _maxVitality : Props.maxVitality * HitPointsDifficultyFactor;
 
         // 2페이즈: 보스에게 꽂힌 바늘 수와 그에 따른 받는 피해 배율(1 = 기본).
         public int StuckNeedleCount
@@ -354,9 +395,9 @@ namespace VVRace
             _initialized = true;
             _phase = ApocryphaPhase.Bound;
             _bondCount = Props.initialBondCount;
-            _maxVitality = Props.maxVitality;
+            _maxVitality = Props.maxVitality * HitPointsDifficultyFactor;
             _vitality = _maxVitality;
-            _manaShield = Props.manaShieldMax;
+            _manaShield = MaxManaShield;
 
             _nextDoomSeedTick = now + Props.firstDoomSeedDelayTicks;
             _needleReadyTick = now + Props.needleFirstDelayTicks;
@@ -475,7 +516,7 @@ namespace VVRace
                 // 마나 보호장이 생기기 전의 세이브는 가득 찬 보호장으로 시작한다.
                 if (_manaShield < 0f)
                 {
-                    _manaShield = Props.manaShieldMax;
+                    _manaShield = MaxManaShield;
                 }
             }
         }
@@ -1031,8 +1072,8 @@ namespace VVRace
             return Mathf.Lerp(-half, half, index / (float)(count - 1));
         }
 
-        // 2페이즈: 바늘마다 따로 쉬는 시간이 끝나면 바늘이 있는 자리에서 보이는 적을 스스로 골라 조준한다(보스의 이동·기절 여부와 따로 돈다,
-        // 단 보스가 기절해 있는 동안은 새로 조준하지 않고 조준 중인 바늘은 제자리로 돌아간다).
+        // 2페이즈: 바늘은 보스 둘레 바닥에 꽂혀 폰이 깨우기를 기다린다(스스로 대상을 고르지 않는다). 깨운 바늘의 조준·발사·다시 꽂히기는 바늘이 맡고,
+        // 여기서는 빠진 바늘을 채우고, 바닥에 꽂히지 않은 채 쉬는 바늘(1페이즈 자리로 돌아온 바늘·옛 세이브의 맴도는 바늘)을 둘레 바닥으로 튕겨 보낸다.
         private void TickUnboundNeedles(int now, bool stunned)
         {
             if (!IsQuestBossFight)
@@ -1041,35 +1082,58 @@ namespace VVRace
                 return;
             }
 
-            if (Props.unboundNeedleCount <= 0) { return; }
+            if (Props.unboundNeedleCount <= 0 || !parent.IsHashIntervalTick(NeedleSpawnCheckInterval)) { return; }
 
-            if (parent.IsHashIntervalTick(NeedleSpawnCheckInterval))
+            EnsureNeedles();
+
+            var idle = _needles.Where(v => v != null && v.Spawned && v.IsIdle).ToList();
+            if (idle.Count > 0)
             {
-                EnsureNeedles();
+                ScatterNeedles(idle);
+            }
+        }
+
+        // 바늘들을 보스 둘레 바닥(반경 unboundNeedlePlantRadius)의 서로 떨어진 칸으로 튕겨 보내 꽂는다. 바늘은 보스에서 바깥쪽으로 날아간다.
+        private void ScatterNeedles(List<ApocryphaNeedle> needles)
+        {
+            var map = parent.Map;
+            var center = parent.Position;
+            var chosen = new List<IntVec3>();
+            for (int i = 0; i < needles.Count; i++)
+            {
+                var needle = needles[i];
+                if (needle == null || !needle.Spawned) { continue; }
+
+                var cell = FindNeedlePlantCell(map, center, chosen);
+                chosen.Add(cell);
+
+                var outDir = (cell.ToVector3Shifted() - BodyCenter).Yto0();
+                needle.ScatterTo(cell, outDir.sqrMagnitude > 0.01f ? outDir.normalized : Vector3.forward);
+            }
+        }
+
+        // 보스 둘레 반경 안에서 설 수 있고 안개 속이 아니며 다른 바늘 자리와 3칸 넘게 떨어진 칸. 없으면 조건을 줄여 가며 찾는다.
+        private IntVec3 FindNeedlePlantCell(Map map, IntVec3 center, List<IntVec3> chosen)
+        {
+            var radius = Props.unboundNeedlePlantRadius;
+            bool Valid(IntVec3 c, bool spaced)
+            {
+                if (!c.InBounds(map) || !c.Standable(map) || c.Fogged(map)) { return false; }
+
+                var distance = c.DistanceTo(center);
+                if (distance < radius.min || distance > radius.max) { return false; }
+
+                return !spaced || !chosen.Any(v => v.InHorDistOf(c, 3f));
             }
 
-            if (stunned)
+            if (CellFinder.TryFindRandomCellNear(center, map, Mathf.CeilToInt(radius.max), c => Valid(c, true), out var cell)
+                || CellFinder.TryFindRandomCellNear(center, map, Mathf.CeilToInt(radius.max), c => Valid(c, false), out cell))
             {
-                CancelNeedleAims();
-                return;
+                return cell;
             }
 
-            if (IsChanneling || _pendingSteal) { return; }
-
-            for (int i = 0; i < _needles.Count; i++)
-            {
-                var needle = _needles[i];
-                if (needle == null || !needle.Spawned || !needle.IsIdle || now < needle.ReadyTick) { continue; }
-
-                if (TryFindNeedleTarget(needle.DrawPos.ToIntVec3(), out var cell))
-                {
-                    needle.StartAim(cell, Props.needleAimTicks);
-                }
-                else
-                {
-                    needle.ReadyTick = now + ShellTargetScanInterval;
-                }
-            }
+            cell = CellFinder.StandableCellNear(center, map, radius.max + 5f);
+            return cell.IsValid ? cell : center;
         }
 
         // [ApocryphaNeedle 호출] 2페이즈 바늘이 보스에게 꽂혔을 때. 모두 꽂히면 길게 기절한다(기절이 풀리면 PullOutNeedles).
@@ -1098,15 +1162,22 @@ namespace VVRace
             }
         }
 
-        // 꽂힌 바늘을 모두 뽑아 제자리로 돌려보낸다(받는 피해 배율도 원래대로).
+        // 꽂힌 바늘을 모두 뽑아 보스 둘레 바닥으로 튕겨 보낸다(받는 피해 배율도 원래대로).
         private void PullOutNeedles()
         {
             _needleStunned = false;
 
+            var map = parent.Map;
+            var chosen = new List<IntVec3>();
             var pulled = false;
             for (int i = 0; i < _needles.Count; i++)
             {
-                if (_needles[i] != null && !_needles[i].Destroyed && _needles[i].PullOut())
+                var needle = _needles[i];
+                if (needle == null || needle.Destroyed || !needle.IsStuck) { continue; }
+
+                var cell = FindNeedlePlantCell(map, parent.Position, chosen);
+                chosen.Add(cell);
+                if (needle.PullOut(cell))
                 {
                     pulled = true;
                 }
@@ -1188,6 +1259,8 @@ namespace VVRace
                 needle.Init(Pawn, slot);
                 GenSpawn.Spawn(needle, parent.Position, parent.Map);
                 _needles.Add(needle);
+
+                // 2페이즈에 새로 생긴 바늘은 쉬는 바늘로 남았다가 다음 확인 때 둘레 바닥으로 튕겨 나간다(TickUnboundNeedles).
             }
         }
 
@@ -1565,7 +1638,7 @@ namespace VVRace
         private void RestoreShield()
         {
             _shieldBroken = false;
-            _manaShield = Props.manaShieldMax;
+            _manaShield = MaxManaShield;
 
             SpawnEffecter(ApocryphaEffecterDefOf.VV_Effecter_ApocryphaShieldRestore, ApocryphaGimmicks.GetBossBodyOffset(Pawn));
             Messages.Message(LocalizeString_EndingBoss.VV_Message_ApocryphaShieldRestored.Translate(), Pawn, MessageTypeDefOf.NeutralEvent);
@@ -1728,7 +1801,7 @@ namespace VVRace
 
             for (int i = 0; i < _needles.Count; i++)
             {
-                if (_needles[i] != null && !_needles[i].Destroyed && (_needles[i].IsIdle || _needles[i].IsAiming))
+                if (_needles[i] != null && !_needles[i].Destroyed && !_needles[i].IsStuck && !_needles[i].IsFlying)
                 {
                     _needles[i].DebugStick();
                     return;
@@ -1740,7 +1813,7 @@ namespace VVRace
         {
             if (_phase != ApocryphaPhase.Bound || ShieldBroken) { return; }
 
-            _manaShield = Mathf.Max(0f, _manaShield - Props.manaShieldMax * fractionOfMax);
+            _manaShield = Mathf.Max(0f, _manaShield - MaxManaShield * fractionOfMax);
             if (_manaShield <= 0f)
             {
                 _pendingShieldBreak = true;
@@ -1925,8 +1998,11 @@ namespace VVRace
             _pendingShieldBreak = false;
             _shieldBroken = false;
             CancelAim();
-            DestroyNeedles();
             ApocryphaUtility.ClearEscortFocus(Pawn);
+
+            // 충격파에 등 뒤의 바늘이 튕겨 나가 둘레 바닥에 꽂힌다(2페이즈에 폰이 깨워 쓸 바늘). 빠진 바늘은 2페이즈에 채운다.
+            _needles.RemoveAll(v => v == null || v.Destroyed);
+            ScatterNeedles(_needles.ToList());
 
             SyncPhaseHediffs();
 
@@ -1962,7 +2038,7 @@ namespace VVRace
 
             _phase = ApocryphaPhase.Unbound;
             _transformSwapped = true;
-            _maxVitality = Props.maxVitality;
+            _maxVitality = Props.maxVitality * HitPointsDifficultyFactor;
             _vitality = _maxVitality;
             _resonanceReadyTick = 0;
             _needleStunned = false;

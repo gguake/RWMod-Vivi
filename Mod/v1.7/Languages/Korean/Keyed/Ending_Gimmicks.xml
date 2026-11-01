@@ -20,6 +20,6 @@
 <VV_Inspect_DoomFlowerBloomIn>만개까지: {0}</VV_Inspect_DoomFlowerBloomIn>
 <VV_Inspect_DoomFlowerHint>만개하기 전에 파괴해야 합니다.</VV_Inspect_DoomFlowerHint>
 <VV_Inspect_FairyFlowerFadeIn>시들기까지: {0}</VV_Inspect_FairyFlowerFadeIn>
-<VV_Inspect_FairyFlowerHint>비비를 선택해 우클릭으로 결속할 수 있습니다.</VV_Inspect_FairyFlowerHint>
+<VV_Inspect_FairyFlowerHint>비비를 선택해 우클릭으로 결속할 수 있습니다. 결속한 비비가 아포크리파에게 다가가면 아포크리파에게 귀속된 요정 비비들을 해방합니다.</VV_Inspect_FairyFlowerHint>
 
 </LanguageData>

@@ -5,11 +5,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Verse;
+using Verse.AI.Group;
 
 namespace VVRace
 {
     // 엔딩 〈만개하는 여명〉의 창구. 진행은 바닐라 퀘스트 두 개가 맡는다.
-    //   〈비비 연방의 밀서〉(VV_EndGame_ViviMissive, QuestNode_Root_ViviMissive): 서신·제단 해금 (사건 IncidentWorker_ViviMissive가 발생시킴)
+    //   〈비비 연방의 밀서〉(VV_EndGame_ViviMissive, QuestNode_Root_ViviMissive): 서신·제단 해금 (도착 조건을 갖추면 창구가 1~2일 뒤 확정으로 발생시킴)
     //   〈만개하는 여명〉(VV_EndGame_ViviBloom, QuestNode_Root_ViviBloom): 공성 → 평화 기간 → 아포크리파 → 여왕의 대관식 → 엔딩
     // 새 게임 컴포넌트를 만들지 않고 GameComponent_Mana가 보관·저장·틱 처리한다. 다른 모듈이 쓰는 질의·통지 API를 두 퀘스트의 상태와 신호로 옮기고,
     // 퀘스트 밖에서 이어져야 하는 일(고대 호박 코어 의뢰, 영원꽃의 잔향 편지, 결속 해방 후 잠시 사라진 비비의 귀환, 제단 맥동·섬광 연출)을 맡는다.
@@ -43,8 +44,27 @@ namespace VVRace
         private const float ReturnCellSearchRadius = 8f;
         private const int HeldPawnRetryTicks = 2500;
 
+        // 〈비비 연방의 밀서〉: 1~4단계 잔향 편지를 모두 보고 도착 조건을 갖춘 뒤 1~2일 뒤에 확정으로 도착한다.
+        public const int MissiveMinEchoStage = 4;
+        private static readonly IntRange MissiveDelayTicks = new IntRange(60000, 120000);
+
         private Quest _missiveQuest;
         private Quest _bloomQuest;
+
+        // 밀서 도착 예정 틱(-1: 아직 도착 조건을 갖춘 적 없음)
+        private int _missiveDueTick = -1;
+
+        // 〈영원꽃 완전 동화〉 중인 공명자(대조율 의식을 시작한 로열 비비). 공성~보스전 동안 영원꽃 앞 공중에 고정되며, 쓰러지거나 죽으면 엔딩이 실패한다.
+        private Pawn _assimilated;
+
+        // 동화 등록부(Hediff_EverflowerAssimilation)는 게임마다 새로 채운다(새 게임·불러오기 모두 이 창구를 새로 만든다).
+        public ViviEndingQuest()
+        {
+            Hediff_EverflowerAssimilation.ResetRegistry();
+        }
+
+        // 지금 〈영원꽃 완전 동화〉 중인 공명자(없으면 null).
+        public Pawn AssimilatedPawn => _assimilated != null && Hediff_EverflowerAssimilation.IsAssimilated(_assimilated) ? _assimilated : null;
 
         // 앵커 영원꽃(5단계 대조율을 치른 개체). 바닐라는 끝난 퀘스트의 부품을 정리 30일 뒤 지우므로,
         // 엔딩 이후에도 쓰는 앵커(축복·제단·날씨 의식)는 퀘스트 부품과 별도로 여기서 들고 있는다.
@@ -250,9 +270,15 @@ namespace VVRace
 
             try
             {
-                if (Stage == ViviEndingStage.AltarUnlocked)
+                var stage = Stage;
+                if (stage == ViviEndingStage.None)
+                {
+                    TickMissiveArrival(now);
+                }
+                else if (stage == ViviEndingStage.AltarUnlocked)
                 {
                     ReissueEndedMissiveQuest();
+                    EnsureMissiveRequirementsPart();
                 }
             }
             catch (Exception ex)
@@ -366,8 +392,113 @@ namespace VVRace
             }
         }
 
-        // [사건·DEV 호출] 〈비비 연방의 밀서〉 퀘스트를 만든다(서신 편지·제단 해금은 퀘스트가 맡는다). 만들었으면 true.
-        // 발생 조건은 사건(IncidentWorker_ViviMissive)이 검사하며, 여기서는 밀서나 본편 퀘스트가 이미 있는지만 본다.
+        // 〈비비 연방의 밀서〉 도착 조건: 밀서가 아직 없고, 1~4단계 잔향 편지를 모두 봤고, 정착지(제단을 지을 수 있는 지역)에 조율 4단계 이상 영원꽃이 있고,
+        // 패망하지 않은 비적대 비비 연방이 있다. 비비 수·기지 가치는 도착 조건이 아니라 밀서에 적히는 진행 조건이다(ViviEndingRequirements).
+        public static bool MissiveArrivalConditionsMet()
+        {
+            var quest = Current;
+            if (quest == null || quest.Stage != ViviEndingStage.None) { return false; }
+            if (quest.LastEchoStage < MissiveMinEchoStage) { return false; }
+
+            var everflower = ViviEndingUtility.FindEndingCandidate();
+            if (everflower == null || everflower.AttunementLevel < Building_DreamumAltar.RequiredAttunementLevel) { return false; }
+            if (!Building_DreamumAltar.IsValidAltarMap(everflower.MapHeld)) { return false; }
+
+            return ViviEndingUtility.FindFederation(requireNonHostile: true) != null;
+        }
+
+        // 도착 조건을 처음 갖춘 때부터 MissiveDelayTicks 뒤에 밀서가 확정으로 도착한다. 그 사이 조건이 깨지면(연방 적대 등) 다시 갖출 때까지 기다리며,
+        // 이미 정한 도착 시각은 유지한다(다시 갖추는 즉시 도착할 수 있다).
+        private void TickMissiveArrival(int now)
+        {
+            if (!MissiveArrivalConditionsMet()) { return; }
+
+            if (_missiveDueTick < 0)
+            {
+                _missiveDueTick = now + MissiveDelayTicks.RandomInRange;
+                return;
+            }
+
+            if (now >= _missiveDueTick)
+            {
+                StartMissiveQuest(null);
+            }
+        }
+
+        // 진행 조건 부품이 생기기 전에 만든 밀서 퀘스트에도 퀘스트 탭 진행 상황을 붙인다.
+        private void EnsureMissiveRequirementsPart()
+        {
+            var quest = _missiveQuest;
+            if (quest == null || quest.State != QuestState.Ongoing) { return; }
+            if (quest.GetFirstPartOfType<QuestPart_ViviMissiveRequirements>() != null) { return; }
+
+            quest.AddPart(new QuestPart_ViviMissiveRequirements());
+        }
+
+        // [대조율 의식 호출] 의식이 진행되기 시작할 때(공명자가 영원꽃 곁에 도착) 공명자를 〈영원꽃 완전 동화〉 상태로 만든다.
+        public void BeginAssimilation(Pawn resonator, ArcanePlant_Everflower everflower)
+        {
+            if (resonator == null || everflower == null || Stage != ViviEndingStage.AltarUnlocked) { return; }
+
+            _assimilated = resonator;
+            Hediff_EverflowerAssimilation.Begin(resonator, everflower);
+        }
+
+        // [동화 헤디프 호출] 공중에 그대로 있어야 하는지: 대조율 의식이 진행 중이거나(밀서 단계), 엔딩이 공성~보스전이고 그 영원꽃이 앵커일 때.
+        // 아포크리파를 토벌해 대관식만 남거나 엔딩이 끝나면 false(천천히 내려와 풀린다).
+        public bool ShouldKeepAssimilation(Pawn pawn, ArcanePlant_Everflower everflower)
+        {
+            if (pawn == null || pawn != _assimilated) { return false; }
+
+            switch (Stage)
+            {
+                case ViviEndingStage.AltarUnlocked:
+                    return pawn.GetLord()?.LordJob is LordJob_Ritual ritual
+                        && ritual.Ritual?.def == EndingRitualDefOf.VV_GrandAttunement
+                        && ritual.selectedTarget.Thing == everflower;
+
+                case ViviEndingStage.Siege:
+                case ViviEndingStage.Calm:
+                case ViviEndingStage.Boss:
+                    return IsAnchor(everflower);
+
+                default:
+                    return false;
+            }
+        }
+
+        // [동화 헤디프 호출] 동화가 풀렸거나 끊어져 헤디프가 사라졌을 때.
+        public void Notify_AssimilationEnded(Pawn pawn)
+        {
+            if (pawn != null && pawn == _assimilated)
+            {
+                _assimilated = null;
+            }
+        }
+
+        // [동화 헤디프 호출] 공명자가 쓰러지거나 죽어 동화가 끊어졌을 때. 엔딩(공성~보스전) 중이면 엔딩이 실패하고(편지·정리는 퀘스트),
+        // 대조율 의식 중이면 의식이 취소된다(바닐라가 필수 역할을 잃은 의식을 취소한다).
+        public void Notify_AssimilationBroken(Pawn pawn, bool died)
+        {
+            if (pawn == null || pawn != _assimilated) { return; }
+
+            var stage = Stage;
+            if (stage == ViviEndingStage.Siege || stage == ViviEndingStage.Calm || stage == ViviEndingStage.Boss)
+            {
+                ViviEndingSignals.Send(_bloomQuest, ViviEndingSignals.ResonatorFallen, pawn.Named("PAWN"));
+                return;
+            }
+
+            if (stage != ViviEndingStage.AltarUnlocked) { return; }
+
+            Messages.Message(
+                LocalizeString_EndingRituals.VV_Message_AssimilationBrokenRitual.Translate(pawn.Named("PAWN")),
+                new LookTargets(pawn.PositionHeld, pawn.MapHeld),
+                MessageTypeDefOf.NegativeEvent);
+        }
+
+        // [창구·DEV 호출] 〈비비 연방의 밀서〉 퀘스트를 만든다(서신 편지·제단 해금은 퀘스트가 맡는다). 만들었으면 true.
+        // 도착 조건은 창구의 도착 타이머(TickMissiveArrival)가 검사하며, 여기서는 밀서나 본편 퀘스트가 이미 있는지만 본다.
         public bool StartMissiveQuest(ArcanePlant_Everflower everflower)
         {
             if (_missiveQuest != null || _bloomQuest != null) { return false; }
@@ -430,6 +561,10 @@ namespace VVRace
                 slate.Set("map", map);
             }
             slate.Set("quality", quality);
+            if (_assimilated != null)
+            {
+                slate.Set("resonator", _assimilated);
+            }
             SetPoints(slate, map);
 
             var quest = GenerateQuest(EndingCoreDefOf.VV_EndGame_ViviBloom, slate, ViviEndingSignals.AnchorLost);
@@ -727,6 +862,8 @@ namespace VVRace
             Scribe_References.Look(ref _anchor, "anchorEverflower");
             Scribe_References.Look(ref _amberCoreQuest, "amberCoreQuest");
             Scribe_Values.Look(ref _lastEchoStage, "lastEchoStage", 0);
+            Scribe_Values.Look(ref _missiveDueTick, "missiveDueTick", -1);
+            Scribe_References.Look(ref _assimilated, "assimilatedPawn");
             Scribe_Collections.Look(ref _heldPawns, "heldPawns", LookMode.Deep);
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)

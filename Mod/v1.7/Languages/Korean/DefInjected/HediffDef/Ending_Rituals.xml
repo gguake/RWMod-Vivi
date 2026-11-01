@@ -3,4 +3,9 @@
 <VV_EverflowerBlessing.label>영원꽃의 축복</VV_EverflowerBlessing.label>
 <VV_EverflowerBlessing.description>완전히 개화한 영원꽃의 축복이 불완전한 유전자의 굴레를 씻어냅니다. 축복을 받는 동안 이 비비는 유전자 불안정에 완전히 면역이 되며, 성체의 노화 속도가 크게 느려집니다.
 \n영원꽃 곁을 하루 이상 떠나 있으면 축복이 사라집니다.</VV_EverflowerBlessing.description>
+
+<VV_EverflowerAssimilation.label>영원꽃 완전 동화</VV_EverflowerAssimilation.label>
+<VV_EverflowerAssimilation.description>초정신 회로를 영원꽃에 모두 열어 영원꽃과 하나가 된 로열 비비입니다. 제단 위 영원꽃 앞의 공중에 떠올라 영원꽃과 공명하며 다섯 번째 개화의 마나를 이끌고 있습니다.
+\n동면한 것처럼 모든 욕구가 줄지 않고 정신 붕괴도 일으키지 않지만, 풀려날 때까지 움직이거나 지시를 받을 수 없습니다. 피해는 그대로 받으며, 정착민이 떠 있는 자리에서 치료할 수 있습니다.
+\n쓰러지거나 죽으면 동화가 끊어집니다. 〈대조율 의식〉 중이면 의식이 취소되고, 개화 응축이 시작된 뒤라면 엔딩이 실패합니다. 아포크리파를 토벌하면 동화가 풀려 땅으로 내려옵니다.</VV_EverflowerAssimilation.description>
 </LanguageData>

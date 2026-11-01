@@ -5,9 +5,9 @@ using Verse;
 namespace VVRace
 {
     // 〈만개하는 여명〉 퀘스트 생성. 5단계 대조율 의식이 끝나는 순간 창구(ViviEndingQuest)가 만든다.
-    // 슬레이트: anchor(의식을 치른 영원꽃), map(앵커 맵), quality(의식 품질 0~10).
+    // 슬레이트: anchor(의식을 치른 영원꽃), map(앵커 맵), quality(의식 품질 0~10), resonator(〈영원꽃 완전 동화〉 중인 공명자, 없을 수 있음).
     // 단계는 신호로만 바뀐다: 시작 → BloomCondensed → CalmEnded → (ApocryphaManifesting: 등장 연출, 단계는 그대로) → ApocryphaArrived → ApocryphaDefeated → CoronationCompleted → EndingFinished,
-    // 실패는 EverflowerStolen / AnchorLost.
+    // 실패는 EverflowerStolen / AnchorLost / ResonatorFallen(동화 중인 공명자가 쓰러지거나 죽음).
     // 같은 신호를 받는 부품은 "상태 → 처리 → 편지 → QuestEnd" 순서로 추가한다. QuestEnd가 먼저 처리되면 퀘스트가 끝나 뒤 부품이 신호를 받지 못한다.
     // 마지막 부품(AnchorLost 실패 QuestEnd)까지 추가되어야 창구가 온전한 퀘스트로 본다(ViviEndingQuest.GenerateQuest).
     public class QuestNode_Root_ViviBloom : QuestNode
@@ -34,6 +34,7 @@ namespace VVRace
             var map = slate.Get<Map>("map") ?? anchor.MapHeld;
             var mapParent = map?.Parent;
             var quality = slate.Get<float>("quality");
+            var resonator = slate.Get<Pawn>("resonator");
             var altar = ViviEndingUtility.AltarOf(anchor);
 
             slate.Set("resolvedQuestName", LocalizeString_EndingCore.VV_Quest_EndingName.Translate().Resolve());
@@ -61,6 +62,7 @@ namespace VVRace
             var endingFinished = QuestGenUtility.HardcodedSignalWithQuestID(ViviEndingSignals.EndingFinished);
             var stolen = QuestGenUtility.HardcodedSignalWithQuestID(ViviEndingSignals.EverflowerStolen);
             var anchorLost = QuestGenUtility.HardcodedSignalWithQuestID(ViviEndingSignals.AnchorLost);
+            var resonatorFallen = QuestGenUtility.HardcodedSignalWithQuestID(ViviEndingSignals.ResonatorFallen);
 
             // 0) 진행 단계·앵커 소실 감지. 모든 신호를 가장 먼저 받도록 첫 부품으로 둔다.
             quest.AddPart(new QuestPart_ViviEndingState()
@@ -72,6 +74,7 @@ namespace VVRace
                 inSignalCoronationCompleted = coronationCompleted,
                 inSignalStolen = stolen,
                 inSignalAnchorLost = anchorLost,
+                inSignalResonatorFallen = resonatorFallen,
                 inSignalAnchorDestroyed = anchorTag + ".Destroyed",
                 inSignalAnchorMapRemoved = anchorMapTag != null ? anchorMapTag + ".MapRemoved" : null,
                 outSignalAnchorLost = anchorLost,
@@ -196,6 +199,14 @@ namespace VVRace
                 letter = LetterMaker.MakeLetter(LocalizeString_EndingCore.VV_Letter_EndingFailureLabel.Translate(), LocalizeString_EndingCore.VV_Letter_EndingFailureStolen.Translate(), LetterDefOf.NegativeEvent, failureTargets, null, quest),
             });
             quest.End(QuestEndOutcome.Fail, inSignal: stolen);
+
+            var fallenText = ViviEndingUtility.TranslateWithResonator(LocalizeString_EndingCore.VV_Letter_EndingFailureResonator, resonator).Resolve();
+            quest.AddPart(new QuestPart_Letter()
+            {
+                inSignal = resonatorFallen,
+                letter = LetterMaker.MakeLetter(LocalizeString_EndingCore.VV_Letter_EndingFailureResonatorLabel.Translate(), fallenText, LetterDefOf.NegativeEvent, failureTargets, null, quest),
+            });
+            quest.End(QuestEndOutcome.Fail, inSignal: resonatorFallen);
 
             quest.AddPart(new QuestPart_Letter()
             {

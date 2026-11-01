@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 〈영원꽃 완전 동화〉: 〈대조율 의식〉의 공명자(로열 비비)가 의식이 진행되기 시작하면 걸린다(VVRace.RitualBehaviorWorker_GrandAttunement).
+       제단 위 영원꽃 앞 공중에 고정되어(VV_EverflowerAssimilationHold) 아포크리파를 토벌할 때까지 영원꽃과 공명하며, 쓰러지거나 죽으면 엔딩이 실패한다.
+       욕구 동결·지시 불가·서 있는 채 치료는 VVRace.EverflowerAssimilationPatch가 맡는다. -->
+  <HediffDef>
+    <defName>VV_EverflowerAssimilation</defName>
+    <label>everflower full assimilation</label>
+    <description>This royal vivi has opened her psychic circuits completely to the everflower and become one with it. She floats in the air before the everflower on the altar, resonating with it and channelling the mana of its fifth bloom.
+\nLike a creature in hibernation, none of her needs decrease and she suffers no mental breaks, but she cannot move or take orders until she is released. She can still be harmed, and colonists can tend her wounds where she floats.
+\nIf she is downed or killed, the assimilation breaks: the grand attunement is called off, or, once the bloom condensation has begun, the ending fails. She is released and descends once Apocrypha is defeated.</description>
+    <hediffClass>VVRace.Hediff_EverflowerAssimilation</hediffClass>
+    <defaultLabelColor>(1, 0.85, 0.4)</defaultLabelColor>
+    <isBad>false</isBad>
+    <priceImpact>false</priceImpact>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <everCurableByItem>false</everCurableByItem>
+    <stages>
+      <li>
+        <blocksMentalBreaks>true</blocksMentalBreaks>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <!-- 동화 중 영원꽃 앞 칸에 고정: 플레이어가 끊을 수 없고 피해를 받아도 다른 일로 바꾸지 않는다 -->
+  <JobDef>
+    <defName>VV_EverflowerAssimilationHold</defName>
+    <driverClass>VVRace.JobDriver_EverflowerAssimilation</driverClass>
+    <reportString>resonating with the everflower.</reportString>
+    <playerInterruptible>false</playerInterruptible>
+    <suspendable>false</suspendable>
+    <casualInterruptible>false</casualInterruptible>
+    <checkOverrideOnDamage>Never</checkOverrideOnDamage>
+    <neverShowWeapon>true</neverShowWeapon>
+  </JobDef>
+
+  <!-- 인간형 생각 트리: 정신 상태 다음, 지시·의식 임무·작업보다 앞에서 동화 고정 작업을 준다 -->
+  <ThinkTreeDef>
+    <defName>VV_EverflowerAssimilationHook</defName>
+    <insertTag>Humanlike_PostMentalState</insertTag>
+    <insertPriority>100</insertPriority>
+    <thinkRoot Class="VVRace.JobGiver_EverflowerAssimilation" />
+  </ThinkTreeDef>
+
+  <!-- 영원꽃 꽃봉오리 ↔ 공명자 사이를 흐르는 금빛 입자(Hediff_EverflowerAssimilation이 속도·방향을 정해 생성) -->
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>VV_Fleck_AssimilationMote</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0.15</fadeInTime>
+    <solidTime>0.75</solidTime>
+    <fadeOutTime>0.3</fadeOutTime>
+    <graphicData>
+      <texPath>Things/Mote/SparkFlash</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <renderInstanced>true</renderInstanced>
+      <color>(1, 0.92, 0.62, 1)</color>
+    </graphicData>
+  </FleckDef>
+
+  <!-- 소멸하는 아포크리파에게서 흩어져 공명자에게 스며드는 영혼 입자(DyingApocrypha가 공명자 쪽으로 날린다) -->
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>VV_Fleck_AssimilationSoul</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0.1</fadeInTime>
+    <solidTime>1.9</solidTime>
+    <fadeOutTime>0.4</fadeOutTime>
+    <growthRate>-0.1</growthRate>
+    <graphicData>
+      <texPath>VFX/VV_ScentTwinkle</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <renderInstanced>true</renderInstanced>
+      <color>(1, 0.86, 0.5, 1)</color>
+    </graphicData>
+  </FleckDef>
+
+  <!-- 동화 시작: 공명자 둘레에 금빛 섬광과 반짝임 -->
+  <EffecterDef>
+    <defName>VV_Effecter_AssimilationBegin</defName>
+    <maintainTicks>10</maintainTicks>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickFlash</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>3</scale>
+        <color>(1, 0.88, 0.55, 0.8)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickTwinkle</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>10~14</burstCount>
+        <positionRadius>0.6</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>-30~30</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>0.8~2</speed>
+        <scale>0.35~0.6</scale>
+        <color>(1, 0.9, 0.62, 1)</color>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <!-- 아포크리파의 마지막 영혼까지 스며든 공명자가 크게 빛남 -->
+  <EffecterDef>
+    <defName>VV_Effecter_AssimilationAbsorb</defName>
+    <maintainTicks>12</maintainTicks>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickFlash</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>6</scale>
+        <color>(1, 0.86, 0.5, 0.9)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickBlastRing</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>0.6</scale>
+        <color>(1, 0.86, 0.5, 0.9)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickTwinkle</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>16~22</burstCount>
+        <positionRadius>0.4</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>1.5~4</speed>
+        <scale>0.4~0.7</scale>
+        <color>(1, 0.9, 0.62, 1)</color>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <!-- 동화가 끊어짐(공명자가 쓰러지거나 죽음): 금빛 입자가 사방으로 흩어지고 재가 인다 -->
+  <EffecterDef>
+    <defName>VV_Effecter_AssimilationBroken</defName>
+    <maintainTicks>10</maintainTicks>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_GimmickTwinkle</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>18~24</burstCount>
+        <positionRadius>0.5</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>2~5</speed>
+        <scale>0.35~0.6</scale>
+        <color>(1, 0.75, 0.5, 1)</color>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_ApocryphaAsh</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>3~5</burstCount>
+        <positionRadius>0.6</positionRadius>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>0.3~0.8</speed>
+        <scale>0.8~1.4</scale>
+      </li>
+    </children>
+  </EffecterDef>
+</Defs>

@@ -39,6 +39,11 @@
         public const string VV_Message_ApocryphaNeedleStuck = nameof(VV_Message_ApocryphaNeedleStuck);
         public const string VV_Message_ApocryphaAllNeedlesStuck = nameof(VV_Message_ApocryphaAllNeedlesStuck);
         public const string VV_Message_ApocryphaNeedlesPulled = nameof(VV_Message_ApocryphaNeedlesPulled);
+        public const string VV_Message_ApocryphaNeedleActivated = nameof(VV_Message_ApocryphaNeedleActivated);
+
+        // 우클릭 메뉴: 2페이즈 꽂힌 바늘 깨우기
+        public const string VV_FloatMenu_ActivateApocryphaNeedle = nameof(VV_FloatMenu_ActivateApocryphaNeedle);
+        public const string VV_FailReason_ApocryphaNeedleDormant = nameof(VV_FailReason_ApocryphaNeedleDormant);
 
         // 텍스트 모트
         public const string VV_TextMote_ApocryphaStunImmune = nameof(VV_TextMote_ApocryphaStunImmune);

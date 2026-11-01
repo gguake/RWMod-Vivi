@@ -5,10 +5,11 @@ using Verse;
 
 namespace VVRace
 {
-    // 〈비비 연방의 밀서〉 퀘스트 생성. 〈비비 연방의 밀서〉 사건(IncidentWorker_ViviMissive)이 일어나는 순간 창구(ViviEndingQuest)가 만든다.
+    // 〈비비 연방의 밀서〉 퀘스트 생성. 조율 4단계·1~4단계 잔향 편지를 갖추고 잠시 뒤 창구(ViviEndingQuest.TickMissiveArrival)가 만든다.
     // 슬레이트: everflower(서신 본문의 공명자·편지 대상, 없을 수 있음),
     // reissued(앞선 밀서 퀘스트가 뜻밖에 끝나 창구가 다시 만들 때: 서신 편지를 다시 보내지 않는다).
-    // 서신 편지를 보내고, 진행 중인 동안 제단 건설과 통신기 고대 호박 코어 의뢰(창구 EndingAmberCore)가 열린다.
+    // 서신 편지(끝에 엔딩 진행 조건 안내)를 보내고, 진행 중인 동안 제단 건설과 통신기 고대 호박 코어 의뢰(창구 EndingAmberCore)가 열린다.
+    // 퀘스트 탭에는 진행 조건(비비 수·기지 가치)과 준비 단계의 현재 상황이 붙는다(QuestPart_ViviMissiveRequirements).
     // 5단계 대조율 의식이 끝나면(창구가 보내는 신호) 성공으로 끝난다.
     // 마지막 부품(성공 QuestEnd)까지 추가되어야 창구가 온전한 퀘스트로 본다(ViviEndingQuest.GenerateQuest).
     public class QuestNode_Root_ViviMissive : QuestNode
@@ -26,7 +27,8 @@ namespace VVRace
             var everflower = slate.Get<ArcanePlant_Everflower>("everflower");
             var resonator = ViviEndingUtility.ResonatorOf(everflower);
             var missiveLabel = LocalizeString_EndingCore.VV_Letter_EndingFederationMissiveLabel.Translate();
-            var missiveText = ViviEndingUtility.TranslateWithResonator(LocalizeString_EndingCore.VV_Letter_EndingFederationMissive, resonator).Resolve();
+            var missiveText = ViviEndingUtility.TranslateWithResonator(LocalizeString_EndingCore.VV_Letter_EndingFederationMissive, resonator).Resolve()
+                + "\n\n" + ViviEndingRequirements.LetterText();
 
             // 이름·설명은 Keyed 번역으로 정한다(문법 규칙을 거치지 않음).
             slate.Set("resolvedQuestName", missiveLabel.Resolve());
@@ -52,6 +54,9 @@ namespace VVRace
                     letter = LetterMaker.MakeLetter(missiveLabel, missiveText, LetterDefOf.PositiveEvent, lookTargets, ViviEndingUtility.FindFederation(requireNonHostile: false), quest, hyperlinks),
                 });
             }
+
+            // 퀘스트 탭: 엔딩 진행 조건과 준비 단계의 현재 상황
+            quest.AddPart(new QuestPart_ViviMissiveRequirements());
 
             // 5단계 대조율 의식 완료 → 성공. 곧바로 〈만개하는 여명〉이 이어지므로 표준 완료 편지는 보내지 않는다.
             quest.End(QuestEndOutcome.Success, inSignal: QuestGenUtility.HardcodedSignalWithQuestID(ViviEndingSignals.GrandAttunementCompleted));

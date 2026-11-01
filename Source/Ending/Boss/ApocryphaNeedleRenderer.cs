@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using UnityEngine;
 using Verse;
 
@@ -28,6 +28,11 @@ namespace VVRace
 
         // 발사 지점 연꽃(바늘이 떠 있는 띠 시작점, 크기 LotusDrawSize칸)
         private const float LotusDrawSize = 2.6f;
+
+        // 2페이즈 바닥에 꽂힌 바늘의 깨우기 표식(촉이 박힌 자리의 작은 연꽃)
+        private const float PlantedMarkerDrawSize = 1.8f;
+        private const float PlantedMarkerBloomSecs = 0.8f;
+        private const float PlantedMarkerPulseSpeed = 2f;
 
         // 2페이즈 보스에게 꽂힌 바늘: 촉 쪽(약 1.2칸)을 잘라 내고 꽂힌 자리에 금 간 외피(구멍·파편·금빛 균열)를 그려 넣은 그림.
         // 바늘 그림과 중심·높이가 같고, 폭은 상처까지 덮도록 넓다. 균열의 금빛만 따로 뽑은 그림을 가산으로 겹쳐 맥동시킨다.
@@ -175,6 +180,24 @@ namespace VVRace
             PropertyBlock.SetColor(ShaderPropertyIDs.Color, color);
             PropertyBlock.SetColor(CoreColorPropertyId, coreColor);
             Graphics.DrawMesh(MeshPool.plane10, Matrix4x4.TRS(lotusPos, Quaternion.identity, new Vector3(LotusDrawSize, 1f, LotusDrawSize)), LotusMat, 0, null, 0, PropertyBlock);
+        }
+
+        // 2페이즈 바닥에 꽂힌 바늘의 깨우기 표식: 촉이 박힌 자리에 작은 금빛 연꽃이 피어나 천천히 맥동한다(경고 띠의 시작점 연꽃과 같은 그림).
+        // ageSecs: 꽂힌 뒤 경과(초), seed: 연꽃 방향(바늘마다 다르게).
+        public static void DrawPlantedMarker(Vector3 pos, float ageSecs, float alpha, int seed)
+        {
+            var pulse = 0.55f + 0.2f * Mathf.Sin(ageSecs * PlantedMarkerPulseSpeed);
+            var color = LaneColor;
+            color.a *= alpha * pulse;
+
+            pos.y = AltitudeLayer.MoteLow.AltitudeFor();
+            PropertyBlock.Clear();
+            PropertyBlock.SetFloat(ShaderPropertyIDs.AgeSecs, ageSecs);
+            PropertyBlock.SetFloat(DurationPropertyId, PlantedMarkerBloomSecs);
+            PropertyBlock.SetFloat(SeedPropertyId, seed);
+            PropertyBlock.SetColor(ShaderPropertyIDs.Color, color);
+            PropertyBlock.SetColor(CoreColorPropertyId, LaneCoreColor);
+            Graphics.DrawMesh(MeshPool.plane10, Matrix4x4.TRS(pos, Quaternion.identity, new Vector3(PlantedMarkerDrawSize, 1f, PlantedMarkerDrawSize)), LotusMat, 0, null, 0, PropertyBlock);
         }
 
         // 발사 직후 촉이 지나간 직선(start에서 direction으로 front칸까지, 쿼드는 length칸 전체) 위의 공간이 순간 일그러진다(VV_NeedleWarp 셰이더).

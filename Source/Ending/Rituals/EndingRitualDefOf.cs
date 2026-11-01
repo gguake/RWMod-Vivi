@@ -13,6 +13,9 @@ namespace VVRace
         // 아포크리파 토벌 뒤 엔딩을 끝내는 의식(재사용 대기 무시)
         public static PreceptDef VV_QueensCoronation;
 
+        // 엔딩을 시작하는 5단계 대조율 의식(공명자가 〈영원꽃 완전 동화〉 상태가 된다)
+        public static PreceptDef VV_GrandAttunement;
+
         public static HediffDef VV_EverflowerBlessing;
         public static HediffDef VV_GeneticUnstability;
 

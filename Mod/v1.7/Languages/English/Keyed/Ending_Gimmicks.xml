@@ -20,6 +20,6 @@
 <VV_Inspect_DoomFlowerBloomIn>Blooms in: {0}</VV_Inspect_DoomFlowerBloomIn>
 <VV_Inspect_DoomFlowerHint>Destroy before it blooms.</VV_Inspect_DoomFlowerHint>
 <VV_Inspect_FairyFlowerFadeIn>Fades in: {0}</VV_Inspect_FairyFlowerFadeIn>
-<VV_Inspect_FairyFlowerHint>Select a vivi and right-click to bond.</VV_Inspect_FairyFlowerHint>
+<VV_Inspect_FairyFlowerHint>Select a vivi and right-click to bond. A bonded vivi who gets close to Apocrypha frees the fairy vivis bound to her.</VV_Inspect_FairyFlowerHint>
 
 </LanguageData>

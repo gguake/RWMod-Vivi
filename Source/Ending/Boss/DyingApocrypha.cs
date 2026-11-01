@@ -7,7 +7,8 @@ namespace VVRace
 {
     // 처치된 아포크리파의 소멸 연출(DyingRevenant 패턴). 저장되므로 연출 도중 저장/불러오기를 해도 이어진다.
     // 마지막 방향·크기·2페이즈 그래픽을 기억해 VV_Dissolve 셰이더로 위에서부터 황금 테두리를 남기며 녹아내리는 모습을 그리고,
-    // 녹는 경계에서 재와 금빛 불씨를 피워 올린다. 끝나면 (엔딩 퀘스트의 보스였다면) 엔딩 컨트롤러에 토벌을 알리고 사라진다.
+    // 녹는 경계에서 재와 금빛 불씨를 피워 올린다. 〈영원꽃 완전 동화〉 중인 공명자가 같은 맵에 있으면 흩어지는 영혼 입자가 그 비비에게 날아가 스며든다.
+    // 끝나면 (엔딩 퀘스트의 보스였다면) 엔딩 컨트롤러에 토벌을 알리고 사라진다(공명자는 이어서 풀려 내려온다).
     // 찬탈 모드(InitStolen): 영원꽃을 빼앗고 떠나는 모습. 영원꽃이 꽃잎으로 흩어져 보스에게 빨려 들고,
     // 이어 보스도 바람이 부는 쪽 가장자리부터 꽃잎으로 흩날리며 떠오르듯 사라진다. 토벌이 아니므로 퀘스트에 알리지 않는다.
     [StaticConstructorOnStartup]
@@ -21,6 +22,12 @@ namespace VVRace
         private const int AshInterval = 2;
         private const int EmberInterval = 3;
         private const int ShakeInterval = 60;
+
+        // 공명자에게 스며드는 영혼 입자: 녹는 경계에서 SoulInterval마다 나와 VV_Fleck_AssimilationSoul의 수명(SoulLifeSecs) 동안 공명자에게 닿는다.
+        // 공명자 몸에는 SoulAbsorbInterval마다 작은 흡수 빛이 번지고, 소멸이 끝나는 순간 크게 빛난다.
+        private const int SoulInterval = 2;
+        private const float SoulLifeSecs = 2.2f;
+        private const int SoulAbsorbInterval = 40;
 
         // 찬탈 모드: 영원꽃이 먼저 흩어지고, 꽃잎이 보스에게 닿을 무렵 보스가 흩날리기 시작한다.
         private const float FlowerDelaySecs = 0.15f;
@@ -283,6 +290,46 @@ namespace VVRace
                 data.rotation = Rand.Range(0f, 360f);
                 Map.flecks.CreateFleck(data);
             }
+
+            ThrowSoulsToResonator(age, center, frontZ, halfWidth);
+        }
+
+        // 〈영원꽃 완전 동화〉 중인 공명자(같은 맵, 퀘스트 보스일 때만). 없으면 null.
+        private Pawn AbsorbingResonator
+        {
+            get
+            {
+                if (!_questBoss) { return null; }
+
+                var pawn = ViviEndingQuest.Current?.AssimilatedPawn;
+                return pawn != null && pawn.Spawned && pawn.Map == Map ? pawn : null;
+            }
+        }
+
+        // 녹는 경계에서 떨어져 나온 금빛 영혼 입자가 공명자에게 곧장 날아가 스며든다(입자 수명 동안 몸통에 닿도록 속도를 맞춘다).
+        private void ThrowSoulsToResonator(int age, Vector3 center, float frontZ, float halfWidth)
+        {
+            if (age % SoulInterval != 0) { return; }
+
+            var resonator = AbsorbingResonator;
+            var assimilation = Hediff_EverflowerAssimilation.Of(resonator);
+            if (assimilation == null) { return; }
+
+            var target = assimilation.BodyPoint;
+            var pos = new Vector3(center.x + Rand.Range(-halfWidth, halfWidth), center.y, frontZ + Rand.Range(-0.3f, 0.3f));
+            var travel = (target - pos).Yto0();
+
+            var data = FleckMaker.GetDataStatic(pos, Map, EverflowerAssimilationDefOf.VV_Fleck_AssimilationSoul, Rand.Range(0.45f, 0.8f));
+            data.velocityAngle = travel.AngleFlat();
+            data.velocitySpeed = travel.magnitude / SoulLifeSecs;
+            data.rotation = Rand.Range(0f, 360f);
+            Map.flecks.CreateFleck(data);
+
+            if (age % SoulAbsorbInterval == 0 && age >= SoulLifeSecs * 60f)
+            {
+                var pulse = FleckMaker.GetDataStatic(target, Map, EverflowerAssimilationDefOf.VV_Fleck_AssimilationMote, Rand.Range(1.2f, 1.6f));
+                Map.flecks.CreateFleck(pulse);
+            }
         }
 
         private void Complete()
@@ -292,6 +339,13 @@ namespace VVRace
             {
                 FilthMaker.TryMakeFilth(Position, map, ThingDefOf.Filth_Ash, 3);
                 ApocryphaEffecterDefOf.VV_Effecter_ApocryphaVanish.Spawn(Position, map, 2f).Cleanup();
+
+                // 마지막 영혼까지 스며든 공명자가 크게 빛난다(이어서 풀려 내려온다).
+                var resonator = AbsorbingResonator;
+                if (resonator != null)
+                {
+                    EverflowerAssimilationDefOf.VV_Effecter_AssimilationAbsorb?.Spawn(resonator, map).Cleanup();
+                }
             }
 
             NotifyDefeated();

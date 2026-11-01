@@ -4,6 +4,7 @@
 <VV_FailReason_ApocryphaInterference>Due to Apocrypha's interference, only the attunement ritual is possible.</VV_FailReason_ApocryphaInterference>
 <VV_FailReason_RequiresEverflowerAltar>Must be enshrined on the everflower altar.</VV_FailReason_RequiresEverflowerAltar>
 <VV_FailReason_GrandAttunementLocked>Can only be performed after receiving the vivi federation's missive.</VV_FailReason_GrandAttunementLocked>
+<VV_FailReason_GrandAttunementRequirements>The conditions in the vivi federation's missive are not met: {0}</VV_FailReason_GrandAttunementRequirements>
 <VV_FailReason_GrandAttunementInProgress>The everflower is already condensing its final bloom.</VV_FailReason_GrandAttunementInProgress>
 <VV_FailReason_GrandAttunementCompleted>The everflower has already fully bloomed.</VV_FailReason_GrandAttunementCompleted>
 <VV_FailReason_GrandAttunementFailed>The everflower was usurped and can no longer be awakened.</VV_FailReason_GrandAttunementFailed>
@@ -17,4 +18,10 @@
 <VV_Letter_ReturnOfLifeLabel>Return of life: {PAWN_labelShort}</VV_Letter_ReturnOfLifeLabel>
 <VV_Letter_ReturnOfLife>Answering the call of the fully bloomed everflower, an ancient vivi once bound to the last queen of the old empire has returned to life.\n\nAfter ages as a fairy, {PAWN_labelShort} has regained a physical body and joined the colony.</VV_Letter_ReturnOfLife>
 <VV_Letter_ReturnOfLifeGenes>Genes of the ancient empire:</VV_Letter_ReturnOfLifeGenes>
+
+<!-- Everflower full assimilation -->
+<VV_Message_AssimilationBegan>{PAWN_labelShort} has opened her psychic circuits completely to the everflower and entered everflower full assimilation. She will float before the everflower until Apocrypha is defeated; if she is downed or killed, the attunement will collapse.</VV_Message_AssimilationBegan>
+<VV_Message_AssimilationReleased>The full assimilation with the everflower has ended, and {PAWN_labelShort} has descended to the ground.</VV_Message_AssimilationReleased>
+<VV_Message_AssimilationBrokenRitual>{PAWN_labelShort} has collapsed and her assimilation with the everflower is broken. The grand attunement has been called off.</VV_Message_AssimilationBrokenRitual>
+<VV_FailReason_PawnAssimilated>fully assimilated with the everflower</VV_FailReason_PawnAssimilated>
 </LanguageData>

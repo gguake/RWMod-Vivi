@@ -89,9 +89,29 @@ namespace VVRace
                 }
             }
 
-            if (Def.requiresAltar && !compEverflower.IsEnshrined)
+            if (Def.requiresAltar)
             {
-                return LocalizeString_EndingRituals.VV_FailReason_RequiresEverflowerAltar.Translate();
+                if (!compEverflower.IsEnshrined)
+                {
+                    return LocalizeString_EndingRituals.VV_FailReason_RequiresEverflowerAltar.Translate();
+                }
+
+                // 배치 규칙이 생기기 전에 중력선 위·임시 지역에 지은 제단에서는 엔딩을 시작하지 않는다.
+                var location = compEverflower.EnshrinedAltar?.LocationReport ?? true;
+                if (!location.Accepted)
+                {
+                    return location.Reason;
+                }
+            }
+
+            // 엔딩을 시작하는 의식은 비비 연방의 밀서에 적힌 진행 조건(비비 수·기지 가치)을 모두 갖춰야 한다.
+            if (Def.startsEndingQuest)
+            {
+                var reason = ViviEndingRequirements.GetUnmetReason();
+                if (reason != null)
+                {
+                    return reason;
+                }
             }
 
             return true;

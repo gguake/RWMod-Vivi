@@ -59,6 +59,40 @@ namespace VVRace
             }
         }
 
+        // 제단을 지을 수 있고 엔딩을 치를 수 있는 지역: 플레이어 정착지. 야영지·임시 사건 지역·포켓 지역은 뺀다.
+        public static bool IsValidAltarMap(Map map)
+        {
+            if (map == null || !map.IsPlayerHome || map.IsPocketMap) { return false; }
+
+            return map.Parent == null || !map.IsTempIncidentMap;
+        }
+
+        // 중력선 기반(오디세이 서브스트럭처) 위의 칸인지. 중력선이 떠나면 함께 실려 가므로 제단을 둘 수 없다.
+        public static bool IsOnSubstructure(IntVec3 cell, Map map)
+        {
+            return map.terrainGrid.FoundationAt(cell)?.IsSubstructure == true;
+        }
+
+        // 이 제단이 엔딩을 치를 수 있는 자리에 있는지(배치 규칙이 생기기 전의 세이브에서 중력선 위·임시 지역에 지은 제단은 쓸 수 없다).
+        public AcceptanceReport LocationReport
+        {
+            get
+            {
+                if (!Spawned) { return false; }
+                if (!IsValidAltarMap(Map)) { return LocalizeString_EndingAltar.VV_FailReason_AltarNotHomeMap.Translate(); }
+
+                foreach (var cell in this.OccupiedRect())
+                {
+                    if (IsOnSubstructure(cell, Map))
+                    {
+                        return LocalizeString_EndingAltar.VV_FailReason_AltarOnSubstructure.Translate();
+                    }
+                }
+
+                return true;
+            }
+        }
+
         public static Building_DreamumAltar FindOnMap(Map map)
         {
             if (map == null || AltarDefOf.VV_DreamumAltar == null) { return null; }

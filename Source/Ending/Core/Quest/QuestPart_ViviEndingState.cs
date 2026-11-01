@@ -18,6 +18,7 @@ namespace VVRace
         public string inSignalCoronationCompleted;
         public string inSignalStolen;
         public string inSignalAnchorLost;
+        public string inSignalResonatorFallen;
         public string inSignalAnchorDestroyed;
         public string inSignalAnchorMapRemoved;
         public string outSignalAnchorLost;
@@ -91,6 +92,13 @@ namespace VVRace
             {
                 _stage = ViviEndingStage.Failed;
             }
+            else if (tag == inSignalResonatorFallen)
+            {
+                if (IsActive)
+                {
+                    _stage = ViviEndingStage.Failed;
+                }
+            }
             else if (tag == inSignalAnchorDestroyed)
             {
                 if (IsActive)
@@ -132,6 +140,7 @@ namespace VVRace
             Scribe_Values.Look(ref inSignalCoronationCompleted, "inSignalCoronationCompleted");
             Scribe_Values.Look(ref inSignalStolen, "inSignalStolen");
             Scribe_Values.Look(ref inSignalAnchorLost, "inSignalAnchorLost");
+            Scribe_Values.Look(ref inSignalResonatorFallen, "inSignalResonatorFallen");
             Scribe_Values.Look(ref inSignalAnchorDestroyed, "inSignalAnchorDestroyed");
             Scribe_Values.Look(ref inSignalAnchorMapRemoved, "inSignalAnchorMapRemoved");
             Scribe_Values.Look(ref outSignalAnchorLost, "outSignalAnchorLost");

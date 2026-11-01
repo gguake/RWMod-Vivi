@@ -14,6 +14,14 @@
         public const string VV_Letter_EndingFederationMissiveLabel = nameof(VV_Letter_EndingFederationMissiveLabel);
         public const string VV_Letter_EndingFederationMissive = nameof(VV_Letter_EndingFederationMissive);
 
+        // 밀서의 엔딩 진행 조건: 편지 끝 안내({VIVI}, {WEALTH}), 퀘스트 탭 진행 상황(머리말, 비비 수 {0}/{1}, 기지 가치 {0}/{1}, 제단 건설, 영원꽃 안치 {0}단계)
+        public const string VV_Letter_EndingFederationMissiveConditions = nameof(VV_Letter_EndingFederationMissiveConditions);
+        public const string VV_Quest_EndingMissiveConditionsHeader = nameof(VV_Quest_EndingMissiveConditionsHeader);
+        public const string VV_Quest_EndingMissiveConditionVivi = nameof(VV_Quest_EndingMissiveConditionVivi);
+        public const string VV_Quest_EndingMissiveConditionWealth = nameof(VV_Quest_EndingMissiveConditionWealth);
+        public const string VV_Quest_EndingMissiveStepAltar = nameof(VV_Quest_EndingMissiveStepAltar);
+        public const string VV_Quest_EndingMissiveStepEnshrine = nameof(VV_Quest_EndingMissiveStepEnshrine);
+
         // 영원꽃의 잔향 (조율 1~5단계 서사 편지, {PAWN}: 의식의 공명자)
         public const string VV_Letter_EverflowerEcho1Label = nameof(VV_Letter_EverflowerEcho1Label);
         public const string VV_Letter_EverflowerEcho1 = nameof(VV_Letter_EverflowerEcho1);
@@ -70,6 +78,8 @@
         public const string VV_Letter_EndingFailureStolen = nameof(VV_Letter_EndingFailureStolen);
         public const string VV_Letter_EndingFailureLostLabel = nameof(VV_Letter_EndingFailureLostLabel);
         public const string VV_Letter_EndingFailureLost = nameof(VV_Letter_EndingFailureLost);
+        public const string VV_Letter_EndingFailureResonatorLabel = nameof(VV_Letter_EndingFailureResonatorLabel);
+        public const string VV_Letter_EndingFailureResonator = nameof(VV_Letter_EndingFailureResonator);
 
         // 메시지
         public const string VV_Message_EndingApocryphaDeferred = nameof(VV_Message_EndingApocryphaDeferred);

@@ -1,12 +1,14 @@
 ﻿using RimWorld;
 using System.Collections.Generic;
 using System.Text;
+using UnityEngine;
 using Verse;
 using Verse.AI;
 
 namespace VVRace
 {
-    // 멸망꽃. 피어난 지 12시간(30000틱)이 지나면 만개해 맵의 모든 정착민에게 멸망꽃 저주를 내리고 시든다.
+    // 멸망꽃. 피어난 지 12시간(30000틱, 어려움 기준)이 지나면 만개해 맵의 모든 정착민에게 멸망꽃 저주를 내리고 시든다.
+    // 만개까지 걸리는 시간은 피어날 때의 난이도에 따라 달라진다(CompApocrypha.DoomBloomTimeFactor, 평화 24시간 ~ 극한 7.8시간).
     // 보스 세력 소속이라 적대 표시가 되며, 플레이어 세력(포탑·징집된 정착민)만 자동 공격 대상으로 삼는다(지붕 아래 꽃은 박격포류가 자동 조준하지 않음).
     public class Building_DoomFlower : Building_ApocryphaFlower, IAttackTarget
     {
@@ -14,7 +16,10 @@ namespace VVRace
 
         private int _bloomTick = -1;
 
-        public int TicksUntilBloom => _bloomTick < 0 ? BloomDelayTicks : System.Math.Max(0, _bloomTick - Find.TickManager.TicksGame);
+        // 지금 난이도에서 피어나 만개할 때까지 걸리는 시간.
+        public static int ScaledBloomDelayTicks => Mathf.Max(1, Mathf.RoundToInt(BloomDelayTicks * CompApocrypha.DoomBloomTimeFactor));
+
+        public int TicksUntilBloom => _bloomTick < 0 ? ScaledBloomDelayTicks : System.Math.Max(0, _bloomTick - Find.TickManager.TicksGame);
 
         #region IAttackTarget
 
@@ -47,7 +52,7 @@ namespace VVRace
 
             if (_bloomTick < 0)
             {
-                _bloomTick = Find.TickManager.TicksGame + BloomDelayTicks;
+                _bloomTick = Find.TickManager.TicksGame + ScaledBloomDelayTicks;
             }
         }
 

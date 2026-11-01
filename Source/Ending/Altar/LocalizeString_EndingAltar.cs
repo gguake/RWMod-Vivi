@@ -11,6 +11,8 @@
         public const string VV_FailReason_AltarCenterOccupied = nameof(VV_FailReason_AltarCenterOccupied);
         public const string VV_FailReason_AltarOnePerMap = nameof(VV_FailReason_AltarOnePerMap);
         public const string VV_FailReason_AltarBlockedByArcanePlant = nameof(VV_FailReason_AltarBlockedByArcanePlant);
+        public const string VV_FailReason_AltarNotHomeMap = nameof(VV_FailReason_AltarNotHomeMap);
+        public const string VV_FailReason_AltarOnSubstructure = nameof(VV_FailReason_AltarOnSubstructure);
         public const string VV_FailReason_AltarUnderConstruction = nameof(VV_FailReason_AltarUnderConstruction);
         public const string VV_FailReason_AltarHasEnshrinedEverflower = nameof(VV_FailReason_AltarHasEnshrinedEverflower);
         public const string VV_FailReason_AltarEndingInProgress = nameof(VV_FailReason_AltarEndingInProgress);

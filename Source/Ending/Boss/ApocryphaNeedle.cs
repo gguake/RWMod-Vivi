@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using RPEF;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,9 +10,11 @@ namespace VVRace
     // 조준이 끝나면 그 방향으로 최대 사거리까지 순간적으로 날아가며 넓은 직선 위의 모든 대상을 꿰뚫은 뒤(Firing), 끝에 잠시 박혀 떨다가(Lodged)
     // 엘텍스 바늘처럼 곡선을 그리며 제자리로 돌아온다(Returning).
     // 1페이즈: 보스의 왼쪽 어깨 뒤에 핀 판넬처럼 나란히 꽂혀 있다가, 보스 컴프가 시킬 때 보스 앞의 발사 지점으로 떨어져 나와 쏜다.
-    // 2페이즈: 보스를 따라 둘레를 맴돌며 바늘마다 쉬는 시간(ReadyTick)이 끝나면 떠 있는 자리에서 바로 쏜다. 발사 직선 위에 보스가 있으면
-    // 피해를 주는 대신 보스에게 꽂혀(Stuck) 멈추고, 보스 컴프가 뽑을 때(PullOut)까지 보스 몸에 붙어 다닌다.
-    // 발사 주기·대상 선정은 보스 컴프(CompApocrypha)가, 움직임·피해·연출은 이 Thing이 맡는다. 보스가 전투 페이즈가 아니게 되면 스스로 흩어진다.
+    // 2페이즈: 전환 충격파에 튕겨 나가 보스 둘레 바닥에 꽂힌다(Scattering → Planted). 꽂힌 바늘은 아무 폰이나 우클릭으로 깨울 수 있고(Activate),
+    // 깨운 폰을 잠시 뒤쫓아 발사각이 돌다가(LockOn) 그 각도로 굳어(Aiming) 최대 사거리까지 날아간 뒤 그 자리에 다시 꽂힌다.
+    // 발사 직선 위에 보스가 있으면 피해를 주는 대신 보스에게 꽂혀(Stuck) 멈추고, 보스 컴프가 뽑을 때(PullOut)까지 보스 몸에 붙어 다니다가
+    // 뽑히면 보스 둘레 바닥으로 다시 튕겨 나가 꽂힌다.
+    // 발사 주기·대상 선정·꽂힐 자리는 보스 컴프(CompApocrypha)가, 움직임·피해·연출은 이 Thing이 맡는다. 보스가 전투 페이즈가 아니게 되면 스스로 흩어진다.
     public class ApocryphaNeedle : ThingWithComps
     {
         private enum NeedleState : byte
@@ -23,6 +25,9 @@ namespace VVRace
             Lodged = 3,
             Returning = 4,
             Stuck = 5,
+            Planted = 6,
+            LockOn = 7,
+            Scattering = 8,
         }
 
         // 1페이즈 자리: 건담의 핀 판넬처럼 보스의 왼쪽 어깨 뒤에 바늘을 나란히 겹쳐 세워 한쪽 날개 모양을 이룬다.
@@ -81,6 +86,20 @@ namespace VVRace
 
         private const int AimPetalInterval = 4;
 
+        // 2페이즈 튕겨 나가 꽂히기: 출발 방향으로 조금 솟았다가 휘어 내리꽂힌다(속도 ScatterSpeed칸/틱, 걸리는 시간 ScatterMinTicks~ScatterMaxTicks).
+        private const float ScatterSpeed = 0.55f;
+        private const int ScatterMinTicks = 24;
+        private const int ScatterMaxTicks = 50;
+        private const float ScatterOutWeight = 3f;
+        private const float ScatterInWeight = 2.5f;
+        private const float ScatterLift = 1.6f;
+
+        // 2페이즈 깨우기: 꽂힌 자리에서 LiftTicks 동안 뽑혀 올라와 깨운 폰을 겨눈다. 꽂혀 있는 동안은 PlantedGlintInterval마다 반짝인다.
+        private const int LiftTicks = 30;
+        private const int PlantedGlintInterval = 45;
+        // 우클릭 위치가 꽂힌 자리(촉) 또는 바늘 몸통 그림에서 이 거리 안이면 그 바늘을 고른다.
+        private const float ClickRadius = 1.4f;
+
         // 발사 왜곡을 그리는 시간(VV_NeedleWarp의 _Duration 0.55초와 같게)
         private const int WarpTicks = 33;
 
@@ -112,7 +131,16 @@ namespace VVRace
         private float _stickAlong = -1f;
         private Vector3 _stuckOffset;
         private float _stuckAngle;
-        private int _readyTick;
+        private Pawn _lockTarget;
+        private int _activateTick;
+        private int _lockEndTick;
+        private IntVec3 _groundCell = IntVec3.Invalid;
+        private Vector3 _plantTip;
+        private Vector3 _scatterFrom;
+        private Vector3 _scatterTo;
+        private Vector3 _scatterOut;
+        private float _scatterAngle;
+        private int _scatterTicks;
 
         // 저장하지 않는 상태
         private int _spawnTick;
@@ -125,13 +153,20 @@ namespace VVRace
         public bool IsAiming => _state == NeedleState.Aiming;
         public bool IsFlying => _state == NeedleState.Firing || _state == NeedleState.Lodged || _state == NeedleState.Returning;
         public bool IsStuck => _state == NeedleState.Stuck;
+        public bool IsPlanted => _state == NeedleState.Planted;
+        public bool IsScattering => _state == NeedleState.Scattering;
 
-        // 2페이즈: 이 틱이 지나야 다음 조준을 할 수 있다(보스 컴프가 읽고, 대상이 없으면 미룬다).
-        public int ReadyTick
-        {
-            get => _readyTick;
-            set => _readyTick = value;
-        }
+        // 2페이즈: 바닥에 꽂혀 있어 폰이 깨울 수 있는지(보스가 2페이즈일 때만).
+        public bool CanActivate => Spawned && IsPlanted && IsUnbound;
+
+        // 2페이즈: 깨우는 폰이 바늘에 손을 대고 있어야 하는 시간.
+        public int ActivateTicks => BossComp?.Props.unboundNeedleActivateTicks ?? 60;
+
+        // 2페이즈: 꽂힌 자리(촉이 박힌 칸). 깨우는 폰은 이 칸에 다가간다.
+        public IntVec3 GroundCell => _groundCell;
+
+        // 2페이즈: 깨운 폰을 뒤쫓는 중이거나 각도가 굳어 발사를 기다리는 중이면 그 폰.
+        public Pawn LockTarget => _state == NeedleState.LockOn || (_state == NeedleState.Aiming && IsUnbound) ? _lockTarget : null;
 
         // 조준 진행도(0~1). 조준 중이 아니면 0.
         public float AimProgress => IsAiming ? Mathf.Clamp01((GenTicks.TicksGame - _stateStartTick) / (float)Mathf.Max(1, _aimTicks)) : 0f;
@@ -146,7 +181,15 @@ namespace VVRace
         private bool IsRacked => !IsUnbound && (_state == NeedleState.Idle || (_state == NeedleState.Returning && _returnProgress >= FinRackReturnProgress));
 
         // 등 뒤 핀 판넬은 보스 몸에 가려지도록 보스보다 살짝 낮게 그린다(등을 보일 때와 날아다닐 때는 위에).
-        private float DrawAltitude => IsRacked && FinBehindBody ? AltitudeLayer.Pawn.AltitudeFor() - FinBehindAltitude : AltitudeLayer.MoteOverhead.AltitudeFor();
+        private float DrawAltitude
+        {
+            get
+            {
+                if (_state == NeedleState.Planted) { return AltitudeLayer.BuildingOnTop.AltitudeFor(); }
+
+                return IsRacked && FinBehindBody ? AltitudeLayer.Pawn.AltitudeFor() - FinBehindAltitude : AltitudeLayer.MoteOverhead.AltitudeFor();
+            }
+        }
 
         // 핀 판넬이 달린 쪽(보스의 왼쪽 어깨 뒤)이 화면의 어느 쪽인지: 정면·서향이면 오른쪽(+1), 등·동향이면 왼쪽(-1).
         private float FinSide => _boss != null && (_boss.Rotation == Rot4.South || _boss.Rotation == Rot4.West) ? 1f : -1f;
@@ -195,10 +238,6 @@ namespace VVRace
 
             // 처음 나타날 때는 자리에서 흐릿하게 떠오른다.
             _spawnTick = GenTicks.TicksGame;
-            if (IsUnbound)
-            {
-                _readyTick = GenTicks.TicksGame + BossComp.Props.unboundNeedleFirstDelayTicks.RandomInRange;
-            }
 
             if (_boss != null && _boss.Spawned)
             {
@@ -234,7 +273,16 @@ namespace VVRace
             Scribe_Values.Look(ref _stickAlong, "stickAlong", -1f);
             Scribe_Values.Look(ref _stuckOffset, "stuckOffset");
             Scribe_Values.Look(ref _stuckAngle, "stuckAngle", 0f);
-            Scribe_Values.Look(ref _readyTick, "readyTick", 0);
+            Scribe_References.Look(ref _lockTarget, "lockTarget");
+            Scribe_Values.Look(ref _activateTick, "activateTick", 0);
+            Scribe_Values.Look(ref _lockEndTick, "lockEndTick", 0);
+            Scribe_Values.Look(ref _groundCell, "groundCell", IntVec3.Invalid);
+            Scribe_Values.Look(ref _plantTip, "plantTip");
+            Scribe_Values.Look(ref _scatterFrom, "scatterFrom");
+            Scribe_Values.Look(ref _scatterTo, "scatterTo");
+            Scribe_Values.Look(ref _scatterOut, "scatterOut");
+            Scribe_Values.Look(ref _scatterAngle, "scatterAngle", 0f);
+            Scribe_Values.Look(ref _scatterTicks, "scatterTicks", 0);
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit && _hitIds == null)
             {
@@ -298,34 +346,106 @@ namespace VVRace
             PlayEffectAt(ApocryphaEffecterDefOf.VV_Effecter_ApocryphaNeedleAim, _pos);
         }
 
-        // 조준 중이면 발사를 취소하고 제자리로 돌아간다(이미 날아간 바늘은 그대로 둔다). 취소했으면 true.
+        // 1페이즈: 조준 중이면 발사를 취소하고 제자리로 돌아간다(이미 날아간 바늘은 그대로 둔다). 취소했으면 true.
+        // 2페이즈의 조준은 폰이 깨운 것이라 보스가 기절해도 취소하지 않는다.
         public bool CancelAim()
         {
-            if (_state != NeedleState.Aiming) { return false; }
+            if (_state != NeedleState.Aiming || IsUnbound) { return false; }
 
             _state = NeedleState.Idle;
             _stateStartTick = GenTicks.TicksGame;
-            _readyTick = Mathf.Max(_readyTick, GenTicks.TicksGame + 120);
             return true;
         }
 
-        // 2페이즈: 꽂혀 있으면 발사 반대 방향으로 뽑혀 나와 자리로 돌아간다. 뽑았으면 true.
-        public bool PullOut()
+        // 2페이즈: 꽂혀 있으면 발사 반대 방향으로 뽑혀 나와 cell(보스 둘레 바닥)로 튕겨 나가 꽂힌다. 뽑았으면 true.
+        public bool PullOut(IntVec3 cell)
         {
             if (_state != NeedleState.Stuck || !Spawned) { return false; }
 
-            var now = GenTicks.TicksGame;
             PlayEffectAt(ApocryphaEffecterDefOf.VV_Effecter_ApocryphaNeedlePullOut, _pos);
-            Trail?.ResetTrail();
-            RegisterTrail(_pos);
-            StartReturn(now, _pos, -_laneDir);
+            ScatterTo(cell, -_laneDir);
             return true;
         }
 
-        // DEV: 쉬고 있는(또는 조준 중인) 바늘을 바로 보스에게 꽂는다.
+        // 2페이즈: 지금 자리에서 outDir 쪽으로 솟았다가 휘어 cell 바닥에 촉이 박히도록 날아간다(전환 충격파·뽑힘·막힌 사거리 끝).
+        public void ScatterTo(IntVec3 cell, Vector3 outDir)
+        {
+            if (!Spawned || !cell.IsValid) { return; }
+
+            var now = GenTicks.TicksGame;
+            var tip = cell.ToVector3Shifted().Yto0();
+            var from = _pos.Yto0();
+            var travel = (tip - from).Yto0();
+            var direction = travel.sqrMagnitude > 0.01f ? travel.normalized : (outDir.sqrMagnitude > 0.01f ? outDir.normalized : Vector3.forward);
+
+            _groundCell = cell;
+            _plantTip = tip;
+            _scatterFrom = _pos;
+            _scatterOut = outDir.sqrMagnitude > 0.01f ? outDir.Yto0().normalized : direction;
+            _scatterAngle = direction.AngleFlat();
+            _scatterTo = tip - direction * NeedleTipOffset;
+            _scatterTicks = Mathf.Clamp(Mathf.RoundToInt(travel.magnitude / ScatterSpeed), ScatterMinTicks, ScatterMaxTicks);
+            _lockTarget = null;
+            _state = NeedleState.Scattering;
+            _stateStartTick = now;
+
+            Trail?.ResetTrail();
+            RegisterTrail(_pos);
+        }
+
+        // [깨우기 작업 호출] 2페이즈: 꽂힌 바늘이 뽑혀 올라와 깨운 폰을 잠시 뒤쫓으며 겨누다가(발사각이 폰을 따라 돈다), 그 각도로 굳은 뒤 발사한다.
+        // 발사 직선은 꽂혀 있던 자리(촉)에서 시작해 최대 사거리까지 이어진다.
+        public void Activate(Pawn activator)
+        {
+            if (!CanActivate || activator == null) { return; }
+
+            var now = GenTicks.TicksGame;
+            var props = BossComp.Props;
+
+            _lockTarget = activator;
+            _laneStart = ClampInsideMap(_plantTip);
+            _laneDir = (_pos - _plantTip).Yto0().sqrMagnitude > 0.01f ? -(_pos - _plantTip).Yto0().normalized : Vector3.forward;
+            UpdateLockDirection();
+
+            _moveFrom = _pos;
+            _moveFromAngle = _angle;
+            _activateTick = now;
+            _lockEndTick = now + Mathf.Max(1, props.unboundNeedleLockOnTicks);
+            _state = NeedleState.LockOn;
+            _stateStartTick = now;
+
+            PlayEffectAt(ApocryphaEffecterDefOf.VV_Effecter_ApocryphaNeedleAim, _plantTip);
+            Messages.Message(LocalizeString_EndingBoss.VV_Message_ApocryphaNeedleActivated.Translate(activator.Named("PAWN")), this, MessageTypeDefOf.CautionInput, historical: false);
+        }
+
+        // [우클릭 메뉴 호출] 2페이즈: clickPos(월드 좌표) 가까이에 꽂혀 있는 바늘(촉이 박힌 자리 또는 그려진 몸통 기준). 없으면 null.
+        public static ApocryphaNeedle FindPlantedNear(Map map, Vector3 clickPos)
+        {
+            var def = ApocryphaThingDefOf.VV_ApocryphaNeedle;
+            if (map == null || def == null) { return null; }
+
+            ApocryphaNeedle best = null;
+            var bestDistance = ClickRadius;
+            var things = map.listerThings.ThingsOfDef(def);
+            for (int i = 0; i < things.Count; i++)
+            {
+                if (!(things[i] is ApocryphaNeedle needle) || !needle.IsPlanted) { continue; }
+
+                var distance = Mathf.Min((needle._plantTip - clickPos).MagnitudeHorizontal(), (needle._pos - clickPos).MagnitudeHorizontal());
+                if (distance < bestDistance)
+                {
+                    best = needle;
+                    bestDistance = distance;
+                }
+            }
+
+            return best;
+        }
+
+        // DEV: 꽂히지 않은 바늘을 바로 보스에게 꽂는다.
         public void DebugStick()
         {
-            if (!Spawned || !IsUnbound || (_state != NeedleState.Idle && _state != NeedleState.Aiming)) { return; }
+            if (!Spawned || !IsUnbound || _state == NeedleState.Stuck || IsFlying) { return; }
 
             var direction = (BodyCenter - _pos.Yto0()).Yto0();
             _laneDir = direction.sqrMagnitude > 0.01f ? direction.normalized : Vector3.forward;
@@ -362,8 +482,10 @@ namespace VVRace
             base.Tick();
             if (!Spawned) { return; }
 
+            // 2페이즈 전환 중에는 튕겨 나간 바늘이 바닥에 꽂힌 채 기다린다.
             var comp = BossComp;
-            if (comp == null || !_boss.Spawned || _boss.Map != Map || (comp.Phase != ApocryphaPhase.Bound && comp.Phase != ApocryphaPhase.Unbound))
+            if (comp == null || !_boss.Spawned || _boss.Map != Map
+                || (comp.Phase != ApocryphaPhase.Bound && comp.Phase != ApocryphaPhase.Unbound && comp.Phase != ApocryphaPhase.Transforming))
             {
                 Vanish();
                 return;
@@ -394,6 +516,18 @@ namespace VVRace
 
                 case NeedleState.Stuck:
                     TickStuck(now);
+                    break;
+
+                case NeedleState.Planted:
+                    TickPlanted(now);
+                    break;
+
+                case NeedleState.LockOn:
+                    TickLockOn(now);
+                    break;
+
+                case NeedleState.Scattering:
+                    TickScattering(now);
                     break;
             }
 
@@ -546,8 +680,156 @@ namespace VVRace
 
             if (elapsed >= LodgedTicks)
             {
-                StartReturn(now, BodyOnLane(_laneLength), _laneDir);
+                if (IsUnbound)
+                {
+                    PlantAtLaneEnd(now);
+                }
+                else
+                {
+                    StartReturn(now, BodyOnLane(_laneLength), _laneDir);
+                }
             }
+        }
+
+        // 2페이즈: 사거리 끝에 박힌 그 자리에 그대로 꽂힌다. 끝 칸이 벽·물처럼 설 수 없는 칸이면 발사 직선을 거슬러 가장 가까운 설 수 있는 칸으로 튕겨 꽂힌다.
+        private void PlantAtLaneEnd(int now)
+        {
+            var map = Map;
+            var tip = PointOnLane(_laneLength);
+            var cell = tip.ToIntVec3().ClampInsideMap(map);
+            if (cell.Standable(map))
+            {
+                _groundCell = cell;
+                _plantTip = tip.Yto0();
+                _scatterTo = BodyOnLane(_laneLength);
+                _scatterAngle = LaneAngle;
+                Plant(now);
+                return;
+            }
+
+            for (var d = _laneLength - 1f; d > 0f; d -= 1f)
+            {
+                var back = PointOnLane(d).ToIntVec3();
+                if (back.InBounds(map) && back.Standable(map))
+                {
+                    ScatterTo(back, -_laneDir);
+                    return;
+                }
+            }
+
+            var near = CellFinder.StandableCellNear(cell, map, 6f);
+            ScatterTo(near.IsValid ? near : _boss.Position, -_laneDir);
+        }
+
+        // 2페이즈: 바닥에 꽂힌다(흙먼지·파편과 찌르는 소리).
+        private void Plant(int now)
+        {
+            _state = NeedleState.Planted;
+            _stateStartTick = now;
+            _pos = _scatterTo;
+            _angle = _scatterAngle;
+            _lockTarget = null;
+
+            Trail?.FinishTrail();
+            PlayEffectAt(ApocryphaEffecterDefOf.VV_Effecter_ApocryphaNeedlePlant, _plantTip);
+            ApocryphaUtility.ShakeCamera(Map, 0.3f);
+        }
+
+        // 2페이즈: 튕겨 나가 바닥으로 날아가는 중. 출발 방향으로 솟았다가 휘어 내리꽂힌다.
+        private void TickScattering(int now)
+        {
+            var t = Mathf.Clamp01((now - _stateStartTick) / (float)Mathf.Max(1, _scatterTicks));
+            var eased = t * t * (3f - 2f * t);
+
+            GetScatterCurve(out var p0, out var c1, out var c2, out var p3);
+            _pos = Bezier(p0, c1, c2, p3, eased);
+
+            var travel = BezierDerivative(p0, c1, c2, p3, eased).Yto0();
+            var travelAngle = travel.sqrMagnitude > 0.0001f ? travel.AngleFlat() : _angle;
+            _angle = LerpAngle(travelAngle, _scatterAngle, Mathf.SmoothStep(0f, 1f, Mathf.InverseLerp(0.7f, 1f, t)));
+
+            RegisterTrail(_pos);
+
+            if (t >= 1f)
+            {
+                Plant(now);
+            }
+        }
+
+        private void GetScatterCurve(out Vector3 p0, out Vector3 c1, out Vector3 c2, out Vector3 p3)
+        {
+            p0 = _scatterFrom;
+            p3 = _scatterTo;
+
+            var inDir = (_plantTip - _scatterTo).Yto0();
+            inDir = inDir.sqrMagnitude > 0.0001f ? inDir.normalized : Vector3.forward;
+
+            c1 = p0 + _scatterOut * ScatterOutWeight + new Vector3(0f, 0f, ScatterLift);
+            c2 = p3 - inDir * ScatterInWeight + new Vector3(0f, 0f, ScatterLift * 0.5f);
+        }
+
+        // 2페이즈: 꽂혀 있는 동안 깨울 수 있다는 듯 이따금 금빛으로 반짝인다.
+        private void TickPlanted(int now)
+        {
+            if ((now + thingIDNumber) % PlantedGlintInterval != 0) { return; }
+
+            var map = Map;
+            if (!_plantTip.ShouldSpawnMotesAt(map)) { return; }
+
+            var data = FleckMaker.GetDataStatic(_plantTip + new Vector3(Rand.Range(-0.4f, 0.4f), 0f, Rand.Range(-0.2f, 0.5f)), map, ApocryphaFleckDefOf.VV_Fleck_ApocryphaAimTwinkle, Rand.Range(0.3f, 0.5f));
+            data.velocityAngle = Rand.Range(-30f, 30f);
+            data.velocitySpeed = Rand.Range(0.2f, 0.6f);
+            data.rotation = Rand.Range(0f, 360f);
+            map.flecks.CreateFleck(data);
+        }
+
+        // 2페이즈: 깨운 폰을 뒤쫓으며 겨눈다. 시간이 다 되면 그 각도로 굳어(Aiming) 잠시 떨다가 쏜다.
+        private void TickLockOn(int now)
+        {
+            UpdateLockDirection();
+
+            var elapsed = now - _stateStartTick;
+            var lift = EaseInOut(Mathf.Clamp01(elapsed / (float)LiftTicks));
+            var hold = _laneStart - _laneDir * (WindupDistance * 0.5f);
+            _pos = Vector3.Lerp(_moveFrom, hold, lift);
+            _angle = LerpAngle(_moveFromAngle, LaneAngle, lift);
+
+            if (elapsed % AimPetalInterval == 0)
+            {
+                ThrowAimPetals();
+            }
+
+            if (now < _lockEndTick) { return; }
+
+            _moveFrom = _pos;
+            _moveFromAngle = _angle;
+            _aimTicks = Mathf.Max(1, BossComp?.Props.unboundNeedleLockedTicks ?? 75);
+            _fireTick = now + _aimTicks;
+            _state = NeedleState.Aiming;
+            _stateStartTick = now;
+
+            PlayEffectAt(ApocryphaEffecterDefOf.VV_Effecter_ApocryphaNeedleAim, _pos);
+        }
+
+        // 깨운 폰이 맵에 있으면 발사 방향을 그 폰(그려지는 자리) 쪽으로 돌린다. 폰이 사라졌으면 마지막 방향을 유지한다.
+        private void UpdateLockDirection()
+        {
+            var target = _lockTarget;
+            if (target != null && target.Spawned && target.Map == Map)
+            {
+                var toTarget = (target.DrawPos - _laneStart).Yto0();
+                if (toTarget.sqrMagnitude > 0.04f)
+                {
+                    _laneDir = toTarget.normalized;
+                }
+            }
+
+            if (_laneDir.sqrMagnitude < 0.01f)
+            {
+                _laneDir = Vector3.forward;
+            }
+
+            _laneLength = LaneLengthInsideMap(_laneStart, _laneDir, BossComp?.Props.needleRange ?? 32f);
         }
 
         // 2페이즈: 보스에게 꽂힌다. 꽂힌 자리(몸통 중심 기준)와 각도를 기억해 보스를 따라 붙어 다닌다.
@@ -619,11 +901,6 @@ namespace VVRace
                 _state = NeedleState.Idle;
                 _stateStartTick = now;
                 Trail?.FinishTrail();
-
-                if (IsUnbound)
-                {
-                    _readyTick = now + BossComp.Props.unboundNeedleIntervalTicks.RandomInRange;
-                }
             }
         }
 
@@ -649,7 +926,8 @@ namespace VVRace
         // 촉이 시작점으로부터 from~to칸 사이를 지나는 동안 경고 띠에 걸친 폰·건물에 한 번씩 관통 피해를 준다(경고 띠와 같은 범위):
         // 폰은 그려지는 자리(DrawPos)를 중심으로 반경 PawnHitRadius가 띠에 걸치면, 건물은 차지한 칸(정사각형)이 띠에 걸치면 맞는다.
         // 띠의 양 끝(시작점·사거리 끝)에서도 같은 만큼 걸치면 맞는다.
-        // 보스·거대 말벌·보스가 피운 꽃·엔딩 제단과 영원꽃(사출탄 폭발 제외 목록), 보스 세력, 쓰러진 폰, 세력 없는 건물(자연 암벽·폐허)은 뺀다.
+        // 구조물은 세력과 관계없이(자연 암벽·폐허 포함) 폰과 같은 피해를 받는다.
+        // 보스·거대 말벌·보스가 피운 꽃·엔딩 제단과 영원꽃(사출탄 폭발 제외 목록), 보스 세력, 쓰러진 폰, 내구도가 없는 건물은 뺀다.
         private void DamageAlong(float from, float to)
         {
             var map = Map;
@@ -720,7 +998,7 @@ namespace VVRace
             }
             else if (thing is Building building)
             {
-                if (!building.def.useHitPoints || building.Faction == null) { return false; }
+                if (!building.def.useHitPoints) { return false; }
             }
             else
             {
@@ -786,12 +1064,32 @@ namespace VVRace
             var alpha = Mathf.Clamp01((GenTicks.TicksGame - _spawnTick) / (float)FadeInTicks);
             if (alpha <= 0f) { return; }
 
-            // 2페이즈에서 보스가 띠 안에 들어와 있으면 띠를 금빛으로 바꿔 '이대로 쏘면 보스에게 꽂힌다'는 것을 알린다.
-            if (_state == NeedleState.Aiming)
+            // 2페이즈에서 보스가 띠 안에 들어와 있으면 띠를 자홍빛으로 바꿔 '이대로 쏘면 보스에게 꽂힌다'는 것을 알린다.
+            // 2페이즈의 띠는 깨운 순간부터 발사까지 한 번에 차오른다(폰을 뒤쫓는 동안 절반, 각도가 굳은 뒤 나머지).
+            if (_state == NeedleState.Aiming || _state == NeedleState.LockOn)
             {
-                var bossInLane = IsUnbound && BossContactAlong() >= 0f;
-                var aimSecs = (GenTicks.TicksGame - _stateStartTick) / 60f;
-                ApocryphaNeedleRenderer.DrawLane(_laneStart, _laneDir, _laneLength, HalfWidth * 2f, AimProgress, alpha, bossInLane, aimSecs, _aimTicks / 60f, thingIDNumber);
+                var unbound = IsUnbound;
+                var bossInLane = unbound && BossContactAlong() >= 0f;
+                float progress;
+                float aimSecs;
+                float aimDuration;
+                if (unbound)
+                {
+                    var lockTicks = Mathf.Max(1, _lockEndTick - _activateTick);
+                    progress = _state == NeedleState.LockOn
+                        ? 0.5f * Mathf.Clamp01((GenTicks.TicksGame - _activateTick) / (float)lockTicks)
+                        : 0.5f + 0.5f * AimProgress;
+                    aimSecs = (GenTicks.TicksGame - _activateTick) / 60f;
+                    aimDuration = (lockTicks + (BossComp?.Props.unboundNeedleLockedTicks ?? 75)) / 60f;
+                }
+                else
+                {
+                    progress = AimProgress;
+                    aimSecs = (GenTicks.TicksGame - _stateStartTick) / 60f;
+                    aimDuration = _aimTicks / 60f;
+                }
+
+                ApocryphaNeedleRenderer.DrawLane(_laneStart, _laneDir, _laneLength, HalfWidth * 2f, progress, alpha, bossInLane, aimSecs, aimDuration, thingIDNumber);
             }
 
             // 발사 직후: 촉이 지나간 직선 위의 공간이 순간 일그러진다(_travelled = 촉이 나아간 거리, 꽂혔으면 꽂힌 자리까지).
@@ -801,14 +1099,24 @@ namespace VVRace
                 ApocryphaNeedleRenderer.DrawWarp(_laneStart, _laneDir, _laneLength, Mathf.Max(0f, _travelled), warpAge / 60f, alpha);
             }
 
-            // 보스에게 꽂혀 있으면 촉이 몸속에 묻히고 꽂힌 자리의 외피가 금 간 그림으로 바꿔 그린다.
-            if (IsStuck)
+            // 보스에게 꽂혀 있으면 촉이 몸속에 묻히고 꽂힌 자리의 외피가 금 간 그림으로 바꿔 그린다. 바닥에 꽂혀 있을 때도 같은 그림(촉이 땅에 묻힘)에
+            // 깨울 수 있음을 알리는 작은 연꽃 표식을 더한다.
+            if (IsStuck || IsPlanted)
             {
-                ApocryphaNeedleRenderer.DrawStuckNeedle(DrawPos, _angle, alpha, (GenTicks.TicksGame - _stateStartTick) / 60f);
+                var stuckSecs = (GenTicks.TicksGame - _stateStartTick) / 60f;
+                if (IsPlanted)
+                {
+                    ApocryphaNeedleRenderer.DrawPlantedMarker(_plantTip, stuckSecs, alpha, thingIDNumber);
+                }
+
+                ApocryphaNeedleRenderer.DrawStuckNeedle(DrawPos, _angle, alpha, stuckSecs);
                 return;
             }
 
-            var glow = _state == NeedleState.Idle ? 0f : _state == NeedleState.Aiming ? AimProgress : 1f;
+            var glow = _state == NeedleState.Idle ? 0f
+                : _state == NeedleState.Aiming ? AimProgress
+                : _state == NeedleState.LockOn ? 0.5f * Mathf.Clamp01((GenTicks.TicksGame - _activateTick) / (float)Mathf.Max(1, _lockEndTick - _activateTick))
+                : 1f;
             ApocryphaNeedleRenderer.DrawNeedle(DrawPos, _angle, alpha, glow);
         }
         #endregion
@@ -919,7 +1227,9 @@ namespace VVRace
 
         private void SyncPosition()
         {
-            var cell = _pos.ToIntVec3().ClampInsideMap(Map);
+            var cell = (_state == NeedleState.Planted || _state == NeedleState.LockOn) && _groundCell.IsValid
+                ? _groundCell
+                : _pos.ToIntVec3().ClampInsideMap(Map);
             if (cell != Position)
             {
                 Position = cell;

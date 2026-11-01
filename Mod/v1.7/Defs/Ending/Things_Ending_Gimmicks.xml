@@ -199,7 +199,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VV_FairyFlower</defName>
     <label>fairy bloom</label>
-    <description>A flower condensed from the pure wavelengths of the ancient fairy vivis bound to Apocrypha. A vivi who bonds with it gains fairy interference and can sever Apocrypha's bond.\n\nCannot be destroyed by attacks, and fades on its own after some time.</description>
+    <description>A flower condensed from the pure wavelengths of the ancient fairy vivis bound to Apocrypha.\n\nA vivi who bonds with this flower gains fairy interference. If that vivi then gets close to Apocrypha, she sets off a mana backflow in Apocrypha's bond network and frees a great number of the fairy vivis bound to Apocrypha. Every release greatly weakens Apocrypha's bond and lifts all doom blights from the colonists.\n\nOnly vivis who are not babies can bond with it. Cannot be destroyed by attacks, and fades on its own after some time.</description>
     <thingClass>VVRace.Building_FairyFlower</thingClass>
     <graphicData>
       <texPath>Things/Building/VV_FairyFlower</texPath>

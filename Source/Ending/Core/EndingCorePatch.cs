@@ -39,6 +39,7 @@ namespace VVRace
             // (제단·기믹 모듈은 자체 클래스만으로 동작해 바닐라 패치가 없다)
             PatchModule(harmony, nameof(EndingRitualPatch), EndingRitualPatch.Patch);
             PatchModule(harmony, nameof(ApocryphaPatch), ApocryphaPatch.Patch);
+            PatchModule(harmony, nameof(EverflowerAssimilationPatch), EverflowerAssimilationPatch.Patch);
         }
 
         private static void TryPatch(Harmony harmony, string label, MethodBase original, string postfixName = null, string prefixName = null)

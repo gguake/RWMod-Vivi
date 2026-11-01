@@ -63,6 +63,9 @@ namespace VVRace
         // 조율 단계 상한(엔딩 6단계). 레벨 곡선은 4에서 멈추며 5/6단계는 SetAttunementLevel로만 오른다.
         public const int MaxAttunementLevel = 6;
 
+        // 〈영원꽃 완전 동화〉 중인 공명자가 앞에 떠 있을 때 꽃을 그리는 높이(폰 높이에서 이만큼 아래, 투사체 층보다는 위)
+        private const float BehindAssimilatedPawnAltitude = 0.1f;
+
         public CompProperties_Everflower Props => (CompProperties_Everflower)props;
 
         public ArcanePlant_Everflower Everflower => (ArcanePlant_Everflower)parent;
@@ -193,11 +196,18 @@ namespace VVRace
             var graphic = CurrentGraphicData;
 
             var mesh = graphic.Graphic.MeshAt(parent.Rotation);
-            var drawPos = parent.DrawPos;
+            var drawPos = parent.DrawPos + graphic.drawOffset;
+
+            // 꽃은 폰보다 높게(앞에) 그려지므로, 〈영원꽃 완전 동화〉 중인 공명자가 꽃 앞 공중에 떠 있는 동안에는 폰 바로 뒤 높이로 내려 잎에 가려지지 않게 한다.
+            if (Hediff_EverflowerAssimilation.IsFloatingBefore(Everflower))
+            {
+                drawPos.y = AltitudeLayer.Pawn.AltitudeFor() - BehindAssimilatedPawnAltitude;
+            }
+
             Graphics.DrawMesh(
-                mesh, 
-                drawPos + graphic.drawOffset, 
-                Quaternion.identity, 
+                mesh,
+                drawPos,
+                Quaternion.identity,
                 graphic.Graphic.MatAt(parent.Rotation), 0);
         }
 

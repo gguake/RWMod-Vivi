@@ -22,7 +22,8 @@
     </graphicData>
 
     <uiOrder>2405</uiOrder>
-    <uiIconScale>1.9</uiIconScale>
+    <!-- 바닐라 아이콘 배율은 uiIconScale × (drawSize / size) = 이 값 × 2다. 그림은 텍스처 가운데 약 49%만 차지하므로 0.9면 아이콘의 약 88%를 채운다. -->
+    <uiIconScale>0.9</uiIconScale>
     <altitudeLayer>Building</altitudeLayer>
     <passability>Standable</passability>
     <!-- 의식 등으로 올라설 수는 있지만 지름길로 가로지르지 못하게 칸마다 큰 이동 비용을 매긴다.

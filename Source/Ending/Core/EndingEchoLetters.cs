@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using Verse;
 
 namespace VVRace
@@ -6,7 +6,7 @@ namespace VVRace
     // 〈영원꽃의 잔향〉: 영원꽃 조율 1~5단계에 대응하는 서사 편지. 한 게임에서 단계마다 한 번씩, 1 → 5 순서로만 나온다.
     // 일반 영원꽃 의식(조율·날씨 변경·요정화·요정화 해제·마나 파동)과 5단계에 진입한 〈대조율 의식〉이 끝날 때 의식의 공명자(로열 비비)를 주인공으로 보낸다.
     // 2페이즈 공명 파동·〈여왕의 대관식〉·〈생명의 회귀〉와 효과 없이 끝난 의식은 부르지 않는다.
-    // 〈비비 연방의 밀서〉는 1~4단계 편지를 모두 본 뒤에만 발생하므로(IncidentWorker_ViviMissive) 정상 진행이면 대조율 때 곧바로 5단계 편지가 나온다.
+    // 〈비비 연방의 밀서〉는 1~4단계 편지를 모두 본 뒤에만 도착하므로(ViviEndingQuest.MissiveArrivalConditionsMet) 정상 진행이면 대조율 때 곧바로 5단계 편지가 나온다.
     public partial class ViviEndingQuest
     {
         public const int MaxEchoStage = 5;

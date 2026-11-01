@@ -22,6 +22,9 @@ namespace VVRace
         public const string EverflowerStolen = "EverflowerStolen";
         public const string AnchorLost = "AnchorLost";
 
+        // 〈영원꽃 완전 동화〉 중인 공명자가 쓰러지거나 죽음(SUBJECT 대신 PAWN 인자) → 실패
+        public const string ResonatorFallen = "ResonatorFallen";
+
         // 퀘스트 태그: 대상에 붙여 두면 바닐라가 "<태그>.Destroyed", "<태그>.MapRemoved" 등을 보낸다.
         public const string AnchorTag = "anchor";
         public const string AnchorMapTag = "anchorMap";

@@ -85,6 +85,14 @@
     <suspendable>false</suspendable>
   </JobDef>
 
+  <!-- 2페이즈 바닥에 꽂힌 거대 엘텍스 바늘 깨우기: 아무 정착민이나 우클릭 메뉴로 지시(징집 여부 무관) -->
+  <JobDef>
+    <defName>VV_ActivateApocryphaNeedle</defName>
+    <driverClass>VVRace.JobDriver_ActivateApocryphaNeedle</driverClass>
+    <reportString>awakening a giant eltex needle.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
+
   <JobDef>
     <defName>VV_ApocryphaSmash</defName>
     <driverClass>VVRace.JobDriver_ApocryphaSmash</driverClass>

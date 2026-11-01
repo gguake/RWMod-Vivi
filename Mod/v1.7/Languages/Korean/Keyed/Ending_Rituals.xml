@@ -4,6 +4,7 @@
 <VV_FailReason_ApocryphaInterference>아포크리파의 간섭으로 조율 의식만 가능합니다.</VV_FailReason_ApocryphaInterference>
 <VV_FailReason_RequiresEverflowerAltar>영원꽃 제단에 안치되어 있어야 합니다.</VV_FailReason_RequiresEverflowerAltar>
 <VV_FailReason_GrandAttunementLocked>비비 연방의 서신을 받은 뒤에만 진행할 수 있습니다.</VV_FailReason_GrandAttunementLocked>
+<VV_FailReason_GrandAttunementRequirements>비비 연방의 밀서에 적힌 진행 조건을 갖추지 못했습니다: {0}</VV_FailReason_GrandAttunementRequirements>
 <VV_FailReason_GrandAttunementInProgress>영원꽃이 이미 마지막 개화를 응축하고 있습니다.</VV_FailReason_GrandAttunementInProgress>
 <VV_FailReason_GrandAttunementCompleted>영원꽃이 이미 완전히 개화했습니다.</VV_FailReason_GrandAttunementCompleted>
 <VV_FailReason_GrandAttunementFailed>영원꽃을 빼앗겨 더 이상 진행할 수 없습니다.</VV_FailReason_GrandAttunementFailed>
@@ -17,4 +18,10 @@
 <VV_Letter_ReturnOfLifeLabel>생명의 회귀: {PAWN_labelShort}</VV_Letter_ReturnOfLifeLabel>
 <VV_Letter_ReturnOfLife>완전히 개화한 영원꽃의 부름에 응답하여, 옛 제국의 마지막 여왕에게 귀속되어 있던 고대 비비가 생명을 되찾았습니다.\n\n오랜 세월을 요정으로 지내 온 {PAWN_labelShort}(이)가 본래의 육체를 되찾아 정착지에 합류했습니다.</VV_Letter_ReturnOfLife>
 <VV_Letter_ReturnOfLifeGenes>고대 제국의 유전자:</VV_Letter_ReturnOfLifeGenes>
+
+<!-- 영원꽃 완전 동화 -->
+<VV_Message_AssimilationBegan>{PAWN_labelShort}(이)가 초정신 회로를 영원꽃에 모두 열어 〈영원꽃 완전 동화〉 상태가 되었습니다. 아포크리파를 토벌할 때까지 영원꽃 앞에 떠 있으며, 쓰러지거나 죽으면 조율이 무너집니다.</VV_Message_AssimilationBegan>
+<VV_Message_AssimilationReleased>영원꽃과의 완전 동화가 풀려 {PAWN_labelShort}(이)가 땅으로 내려왔습니다.</VV_Message_AssimilationReleased>
+<VV_Message_AssimilationBrokenRitual>{PAWN_labelShort}(이)가 쓰러져 영원꽃과의 동화가 끊어졌습니다. 〈대조율 의식〉이 취소되었습니다.</VV_Message_AssimilationBrokenRitual>
+<VV_FailReason_PawnAssimilated>영원꽃과 완전히 동화되어 있음</VV_FailReason_PawnAssimilated>
 </LanguageData>

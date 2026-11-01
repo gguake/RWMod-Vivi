@@ -28,7 +28,7 @@
 <!-- Letter -->
 <VV_Letter_ApocryphaUnboundLabel>해방된 시조의 폭주</VV_Letter_ApocryphaUnboundLabel>
 <VV_Letter_ApocryphaUnbound>마지막 요정 비비 결속이 풀렸습니다. 수십억 영혼의 무게에서 벗어난 아포크리파가 굴레를 떨쳐내고 시조 말벌의 본래 모습을 드러냈습니다.
-\n구속에서 풀려난 아포크리파는 앞을 가로막는 벽과 구조물을 부수며 영원꽃을 향해 곧장 돌진합니다. 이제 일반 공격으로 피해를 입힐 수 있습니다. 둘레를 맴도는 거대 엘텍스 바늘 세 자루가 스스로 적을 노리는데, 바늘의 발사 경로에 아포크리파가 서도록 유인하면 바늘이 아포크리파의 외피에 꽂힙니다. 꽂힌 바늘 하나마다 아포크리파가 받는 피해가 늘어나고, 세 자루가 모두 꽂히면 오랫동안 기절합니다.
+\n구속에서 풀려난 아포크리파는 앞을 가로막는 벽과 구조물을 부수며 영원꽃을 향해 곧장 돌진합니다. 이제 일반 공격으로 피해를 입힐 수 있습니다. 결속이 풀리는 충격에 아포크리파의 거대 엘텍스 바늘 세 자루가 튕겨 나가 주변 바닥에 꽂혔습니다. 꽂힌 바늘에 다가가 손을 대면(비비가 아니어도 됩니다) 바늘이 깨어나 손을 댄 정착민을 잠시 뒤쫓으며 겨누다가, 그 각도로 굳은 뒤 최대 사거리까지 날아가 날아간 끝에 다시 꽂힙니다. 바늘의 발사 경로에 서 있는 것은 아군도 꿰뚫리니, 아포크리파가 바늘과 정착민 사이에 오도록 자리를 잡았다가 각도가 굳으면 피하십시오. 발사 경로에 아포크리파가 있으면 바늘이 아포크리파의 외피에 꽂힙니다. 꽂힌 바늘 하나마다 아포크리파가 받는 피해가 늘어나고, 세 자루가 모두 꽂히면 오랫동안 기절합니다. 기절에서 깨어나면 바늘을 뽑아 다시 주변 바닥으로 흩뿌립니다.
 \n지금부터 영원꽃에서는 6시간마다 〈영원꽃 조율 의식〉을 치를 수 있습니다. 의식을 마칠 때마다 공명 파동이 아포크리파를 기절시킵니다. 아포크리파가 영원꽃에 닿지 못하게 막으며 공격을 이어가십시오.</VV_Letter_ApocryphaUnbound>
 
 <!-- Message -->
@@ -40,7 +40,12 @@
 <VV_Message_ApocryphaShieldRestored>아포크리파의 마나 보호장이 다시 차올랐습니다.</VV_Message_ApocryphaShieldRestored>
 <VV_Message_ApocryphaNeedleStuck>거대 바늘이 아포크리파를 꿰뚫고 외피에 꽂혔습니다! (꽂힌 바늘 {0} / {1}, 받는 피해 {2})</VV_Message_ApocryphaNeedleStuck>
 <VV_Message_ApocryphaAllNeedlesStuck>거대 바늘이 모두 아포크리파에게 꽂혔습니다! 아포크리파가 오랫동안 기절하며 받는 피해가 크게 늘어납니다.</VV_Message_ApocryphaAllNeedlesStuck>
-<VV_Message_ApocryphaNeedlesPulled>아포크리파가 꽂힌 바늘을 뽑아냈습니다.</VV_Message_ApocryphaNeedlesPulled>
+<VV_Message_ApocryphaNeedlesPulled>아포크리파가 꽂힌 바늘을 뽑아 주변 바닥으로 흩뿌렸습니다.</VV_Message_ApocryphaNeedlesPulled>
+<VV_Message_ApocryphaNeedleActivated>거대 바늘이 깨어나 {PAWN_labelShort}(을)를 겨눕니다! 아포크리파가 바늘과 {PAWN_labelShort} 사이에 오게 하고, 각도가 굳으면 발사 경로에서 벗어나십시오.</VV_Message_ApocryphaNeedleActivated>
+
+<!-- 우클릭 메뉴 -->
+<VV_FloatMenu_ActivateApocryphaNeedle>거대 엘텍스 바늘 깨우기</VV_FloatMenu_ActivateApocryphaNeedle>
+<VV_FailReason_ApocryphaNeedleDormant>아직 깨울 수 없음</VV_FailReason_ApocryphaNeedleDormant>
 
 <!-- Text mote -->
 <VV_TextMote_ApocryphaStunImmune>기절 면역</VV_TextMote_ApocryphaStunImmune>
