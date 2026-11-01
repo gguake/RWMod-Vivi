@@ -6,7 +6,7 @@ namespace VVRace
 {
     // 〈만개하는 여명〉 퀘스트 생성. 5단계 대조율 의식이 끝나는 순간 창구(ViviEndingQuest)가 만든다.
     // 슬레이트: anchor(의식을 치른 영원꽃), map(앵커 맵), quality(의식 품질 0~10).
-    // 단계는 신호로만 바뀐다: 시작 → BloomCondensed → CalmEnded → ApocryphaArrived → ApocryphaDefeated → CoronationCompleted → EndingFinished,
+    // 단계는 신호로만 바뀐다: 시작 → BloomCondensed → CalmEnded → (ApocryphaManifesting: 등장 연출, 단계는 그대로) → ApocryphaArrived → ApocryphaDefeated → CoronationCompleted → EndingFinished,
     // 실패는 EverflowerStolen / AnchorLost.
     // 같은 신호를 받는 부품은 "상태 → 처리 → 편지 → QuestEnd" 순서로 추가한다. QuestEnd가 먼저 처리되면 퀘스트가 끝나 뒤 부품이 신호를 받지 못한다.
     // 마지막 부품(AnchorLost 실패 QuestEnd)까지 추가되어야 창구가 온전한 퀘스트로 본다(ViviEndingQuest.GenerateQuest).
@@ -53,6 +53,7 @@ namespace VVRace
             var initiate = quest.InitiateSignal;
             var bloomCondensed = QuestGenUtility.HardcodedSignalWithQuestID(ViviEndingSignals.BloomCondensed);
             var calmEnded = QuestGenUtility.HardcodedSignalWithQuestID(ViviEndingSignals.CalmEnded);
+            var apocryphaManifesting = QuestGenUtility.HardcodedSignalWithQuestID(ViviEndingSignals.ApocryphaManifesting);
             var apocryphaArrived = QuestGenUtility.HardcodedSignalWithQuestID(ViviEndingSignals.ApocryphaArrived);
             var apocryphaDissolved = QuestGenUtility.HardcodedSignalWithQuestID(ViviEndingSignals.ApocryphaDissolved);
             var apocryphaDefeated = QuestGenUtility.HardcodedSignalWithQuestID(ViviEndingSignals.ApocryphaDefeated);
@@ -148,21 +149,22 @@ namespace VVRace
                 outSignalAnchorLost = anchorLost,
             });
 
-            // 3) 〈바스러진 여왕, 아포크리파〉: 등장(진입 칸이 없으면 보류·재시도), 소멸 연출이 끝나면 토벌
+            // 3) 〈바스러진 여왕, 아포크리파〉: 영원꽃 위 등장 연출 → 외곽에 등장(진입 칸이 없으면 보류·재시도), 소멸 연출이 끝나면 토벌
             var apocrypha = new QuestPart_ViviApocrypha()
             {
                 inSignalEnable = calmEnded,
                 anchor = anchor,
                 inSignalDissolved = apocryphaDissolved,
+                outSignalManifesting = apocryphaManifesting,
                 outSignalArrived = apocryphaArrived,
             };
             apocrypha.outSignalsCompleted.Add(apocryphaDefeated);
             quest.AddPart(apocrypha);
 
-            // 등장 편지는 신호의 SUBJECT(보스)를 바라본다.
+            // 등장 편지는 등장 연출이 시작될 때 신호의 SUBJECT(영원꽃)를 바라본다. 외곽에 내려선 보스는 메시지로 알린다.
             quest.AddPart(new QuestPart_Letter()
             {
-                inSignal = apocryphaArrived,
+                inSignal = apocryphaManifesting,
                 letter = LetterMaker.MakeLetter(LocalizeString_EndingCore.VV_Letter_EndingApocryphaLabel.Translate(), LocalizeString_EndingCore.VV_Letter_EndingApocrypha.Translate(), LetterDefOf.ThreatBig, LookTargets.Invalid, null, quest),
             });
 

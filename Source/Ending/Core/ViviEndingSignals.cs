@@ -13,6 +13,7 @@ namespace VVRace
         // 〈만개하는 여명〉 단계 신호
         public const string BloomCondensed = "BloomCondensed";
         public const string CalmEnded = "CalmEnded";
+        public const string ApocryphaManifesting = "ApocryphaManifesting";
         public const string ApocryphaArrived = "ApocryphaArrived";
         public const string ApocryphaDissolved = "ApocryphaDissolved";
         public const string ApocryphaDefeated = "ApocryphaDefeated";

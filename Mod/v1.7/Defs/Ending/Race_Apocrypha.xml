@@ -235,4 +235,18 @@
     <altitudeLayer>Pawn</altitudeLayer>
     <selectable>false</selectable>
   </ThingDef>
+
+  <!-- 1페이즈 등장 연출: 영원꽃 위에 검은 에너지가 모여 형체를 빚고, 영원꽃의 파장에 맵 외곽으로 밀려난다(실제 보스는 밀려난 자리에 스폰).
+       저장 가능한 시퀀서이며 VV_Manifest 셰이더로 직접 그린다. 형체가 영원꽃에서 멀리 날아가므로 화면 밖에서도 그린다. -->
+  <ThingDef ParentName="EtherealThingBase">
+    <defName>VV_ApocryphaManifestation</defName>
+    <label>manifesting Apocrypha</label>
+    <thingClass>VVRace.ApocryphaManifestation</thingClass>
+    <tickerType>Normal</tickerType>
+    <drawerType>RealtimeOnly</drawerType>
+    <drawOffscreen>true</drawOffscreen>
+    <seeThroughFog>true</seeThroughFog>
+    <altitudeLayer>MoteOverheadLow</altitudeLayer>
+    <selectable>false</selectable>
+  </ThingDef>
 </Defs>

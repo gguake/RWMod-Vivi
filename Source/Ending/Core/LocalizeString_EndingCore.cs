@@ -61,6 +61,7 @@
 
         // 메시지
         public const string VV_Message_EndingApocryphaDeferred = nameof(VV_Message_EndingApocryphaDeferred);
+        public const string VV_Message_EndingApocryphaLanded = nameof(VV_Message_EndingApocryphaLanded);
         public const string VV_Message_EndingPawnReturned = nameof(VV_Message_EndingPawnReturned);
         public const string VV_Message_EndingPawnReturnedToCaravan = nameof(VV_Message_EndingPawnReturnedToCaravan);
         public const string VV_Message_EndingGrandAttunementNotStarted = nameof(VV_Message_EndingGrandAttunementNotStarted);

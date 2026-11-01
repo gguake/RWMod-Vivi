@@ -45,7 +45,7 @@
 
 <!-- 엔딩 퀘스트: 바스러진 여왕, 아포크리파 -->
 <VV_Letter_EndingApocryphaLabel>바스러진 여왕, 아포크리파</VV_Letter_EndingApocryphaLabel>
-<VV_Letter_EndingApocrypha>거대 말벌 무리를 거느린 거대한 형체가 모습을 드러냈습니다. 옛 비비 제국이 멸망하던 날, 스카리아에 감염된 수십억의 백성을 구하려다 자아와 초정신 회로가 무너져 변이한 모든 거대 말벌의 시조, 〈바스러진 여왕, 아포크리파〉입니다.
+<VV_Letter_EndingApocrypha>영원꽃 위 허공으로 검은 기운이 모여들며 거대한 형체가 빚어지고 있습니다. 옛 비비 제국이 멸망하던 날, 스카리아에 감염된 수십억의 백성을 구하려다 자아와 초정신 회로가 무너져 변이한 모든 거대 말벌의 시조, 〈바스러진 여왕, 아포크리파〉입니다. 영원꽃이 파장을 일으켜 그 형체를 맵 외곽으로 밀어내겠지만, 여왕은 곧 거대 말벌 무리를 거느리고 다시 모습을 드러낼 것입니다.
 \n무수한 요정 비비 결속에 짓눌린 아포크리파는 느리게 배회하며 본능에 이끌려 영원꽃 제단으로 다가옵니다. 아포크리파가 살아 있는 동안에는 개화 응축이 멈추며, 영원꽃에 도달해 힘을 모두 빼앗기면 퀘스트는 실패합니다.
 \n결속된 요정 비비들이 모든 공격을 대신 받아내므로 일반 공격이나 기절 수단은 통하지 않습니다. 아포크리파가 피워내는 〈요정꽃〉에 비비를 결속시켜 〈요정 간섭〉을 얻은 뒤 아포크리파에게 다가가야 결속을 끊어낼 수 있습니다. 정착민에게 저주를 내리는 〈멸망꽃〉은 만개하기 전에 파괴하십시오.</VV_Letter_EndingApocrypha>
 
@@ -73,6 +73,7 @@
 
 <!-- 엔딩 퀘스트: 메시지 -->
 <VV_Message_EndingApocryphaDeferred>맵 외곽에서 제단으로 이어지는 길이 막혀 있어 아포크리파가 모습을 드러내지 못합니다. 길이 열릴 때까지 습격이 다시 발생할 수 있습니다.</VV_Message_EndingApocryphaDeferred>
+<VV_Message_EndingApocryphaLanded>영원꽃의 파장에 밀려난 아포크리파가 거대 말벌 무리를 거느리고 맵 외곽에 내려섰습니다.</VV_Message_EndingApocryphaLanded>
 <VV_Message_EndingPawnReturned>{PAWN_labelShort}(이)가 영원꽃 제단 앞으로 돌아왔습니다.</VV_Message_EndingPawnReturned>
 <VV_Message_EndingPawnReturnedToCaravan>{PAWN_labelShort}(이)가 돌아와 {CARAVAN_label}에 합류했습니다.</VV_Message_EndingPawnReturnedToCaravan>
 <VV_Message_EndingGrandAttunementNotStarted>〈대조율 의식〉이 끝났지만 영원꽃이 다섯 번째 개화를 시작하지 못했습니다.</VV_Message_EndingGrandAttunementNotStarted>

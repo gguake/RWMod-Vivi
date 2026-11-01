@@ -64,8 +64,7 @@ namespace VVRace
             // 첫 렌더 전에 1페이즈 생애 단계(그래픽)로 고정한다.
             boss.ageTracker.LockCurrentLifeStageIndex(0);
 
-            var rotation = Rot4.FromAngleFlat((map.Center - entryCell).AngleFlat);
-            GenSpawn.Spawn(boss, entryCell, map, rotation);
+            GenSpawn.Spawn(boss, entryCell, map, EntryRotation(map, entryCell));
 
             // 적대 세력을 하나도 찾지 못한 경우: 무소속 + 영구 광폭(무소속 동물인 거대 말벌에게는 적대하지 않는다).
             if (boss.Faction == null)
@@ -80,6 +79,12 @@ namespace VVRace
             Find.TickManager.slower.SignalForceNormalSpeedShort();
 
             return boss;
+        }
+
+        // 진입 칸에 스폰될 때의 방향(맵 중앙을 바라봄). 등장 연출의 형체도 이 방향으로 내려앉는다.
+        public static Rot4 EntryRotation(Map map, IntVec3 entryCell)
+        {
+            return Rot4.FromAngleFlat((map.Center - entryCell).AngleFlat);
         }
 
         // 보스 세력: 곤충 세력(모든 세력과 적대) → 아무 적대 세력 → 없음.

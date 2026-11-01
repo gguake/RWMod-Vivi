@@ -45,7 +45,7 @@
 
 <!-- Ending quest: Apocrypha -->
 <VV_Letter_EndingApocryphaLabel>Apocrypha, the Crumbled Queen</VV_Letter_EndingApocryphaLabel>
-<VV_Letter_EndingApocrypha>A colossal figure leading a swarm of titanic hornets has appeared. It is Apocrypha, the Crumbled Queen—the progenitor of all titanic hornets, mutated when her mind and psychic circuits collapsed as she tried to save billions of scaria-infected subjects on the day the old vivi empire fell.
+<VV_Letter_EndingApocrypha>Dark energy is gathering in the air above the everflower, shaping a colossal figure. It is Apocrypha, the Crumbled Queen—the progenitor of all titanic hornets, mutated when her mind and psychic circuits collapsed as she tried to save billions of scaria-infected subjects on the day the old vivi empire fell. The everflower's wave will drive her form back to the edge of the map, but the queen will soon reappear at the head of a swarm of titanic hornets.
 \nWeighed down by countless bound fairy vivis, Apocrypha wanders slowly, drawn by instinct toward the everflower altar. While she lives, bloom condensation is halted, and if she reaches the everflower and drains all of its power, the quest will fail.
 \nThe bound fairy vivis absorb every blow in her place, making ordinary attacks and stuns ineffective. Bind a vivi to a fairy bloom raised by Apocrypha to gain fairy interference, then approach Apocrypha to sever her bond. Destroy doom blooms before they blossom, or they will curse your colonists.</VV_Letter_EndingApocrypha>
 
@@ -73,6 +73,7 @@
 
 <!-- Ending quest: messages -->
 <VV_Message_EndingApocryphaDeferred>The path from the map edge to the altar is blocked, preventing Apocrypha from appearing. Raids may resume until a path opens.</VV_Message_EndingApocryphaDeferred>
+<VV_Message_EndingApocryphaLanded>Driven back by the everflower's wave, Apocrypha has landed at the edge of the map with a swarm of titanic hornets.</VV_Message_EndingApocryphaLanded>
 <VV_Message_EndingPawnReturned>{PAWN_labelShort} has returned in front of the everflower altar.</VV_Message_EndingPawnReturned>
 <VV_Message_EndingPawnReturnedToCaravan>{PAWN_labelShort} has returned and joined {CARAVAN_label}.</VV_Message_EndingPawnReturnedToCaravan>
 <VV_Message_EndingGrandAttunementNotStarted>The grand attunement has ended, but the everflower could not begin its fifth bloom.</VV_Message_EndingGrandAttunementNotStarted>

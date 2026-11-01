@@ -50,7 +50,8 @@ namespace VVRace
 
             if (!finished && stage != ViviEndingStage.Coronation && Boss == null)
             {
-                yield return DevCommand("DEV: Spawn Apocrypha now", () => DebugSpawnBossNow(everflower));
+                var manifesting = ApocryphaPart != null && ApocryphaPart.IsManifesting;
+                yield return DevCommand(manifesting ? "DEV: Skip Apocrypha intro" : "DEV: Spawn Apocrypha now", () => DebugSpawnBossNow(everflower));
             }
 
             if (!finished)
@@ -132,7 +133,8 @@ namespace VVRace
                 return;
             }
 
-            apocrypha.DebugSpawnNow();
+            // 영원꽃 위 등장 연출을 튼다(연출 중이면 건너뛰고 곧바로 스폰한다).
+            apocrypha.DebugSpawnNow(skipIntro: false);
         }
 
         // DEV: 평화 기간을 곧바로 끝낸다(아포크리파는 다음 틱에 등장을 시도한다). 이미 보류 중이면 곧바로 다시 시도하게 한다.
@@ -226,7 +228,8 @@ namespace VVRace
 
                         if (target == ViviEndingStage.Boss)
                         {
-                            apocrypha.DebugSpawnNow();
+                            // 단계가 곧바로 바뀌어야 하므로 등장 연출 없이 스폰한다.
+                            apocrypha.DebugSpawnNow(skipIntro: true);
                         }
                         else
                         {

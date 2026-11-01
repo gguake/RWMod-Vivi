@@ -10,10 +10,12 @@ namespace VVRace
     {
         public static ThingDef VV_Apocrypha;
         public static ThingDef VV_DyingApocrypha;
+        public static ThingDef VV_ApocryphaManifestation;
 
         public static ThingDef VV_Mote_ApocryphaAimTarget;
         public static ThingDef VV_Mote_ApocryphaAimCharge;
         public static ThingDef VV_Mote_ApocryphaDrainVortex;
+        public static ThingDef VV_Mote_ApocryphaRepelCharge;
     }
 
     [DefOf]
@@ -64,6 +66,9 @@ namespace VVRace
         public static EffecterDef VV_Effecter_ApocryphaVanish;
         public static EffecterDef VV_Effecter_ApocryphaSmash;
         public static EffecterDef VV_Effecter_ApocryphaStaggered;
+        public static EffecterDef VV_Effecter_ApocryphaManifestComplete;
+        public static EffecterDef VV_Effecter_ApocryphaRepel;
+        public static EffecterDef VV_Effecter_ApocryphaManifestLand;
     }
 
     [DefOf]
@@ -74,5 +79,14 @@ namespace VVRace
         public static FleckDef VV_Fleck_ApocryphaAsh;
         public static FleckDef VV_Fleck_ApocryphaEmber;
         public static FleckDef VV_Fleck_ApocryphaStealPetal;
+        public static FleckDef VV_Fleck_ApocryphaDarkWisp;
+        public static FleckDef VV_Fleck_ApocryphaManifestSpark;
+        public static FleckDef VV_Fleck_ApocryphaRepelWave;
+    }
+
+    [DefOf]
+    public static class ApocryphaSoundDefOf
+    {
+        public static SoundDef PsychicArtifactWarmupSustained;
     }
 }

@@ -271,6 +271,213 @@
     </children>
   </EffecterDef>
 
+  <!-- ===================== 등장 연출 (ApocryphaManifestation) ===================== -->
+  <!-- 영원꽃 위로 모여드는 검은 에너지 입자(알파 혼합). 꼬리가 아래로 끌리는 혜성 모양이라 회전을 속도 방향에 맞춰 날린다.
+       수명(0.95초)과 속도는 코드가 맞춰 꼬리가 사라질 무렵 형체에 닿게 한다. -->
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>VV_Fleck_ApocryphaDarkWisp</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <drawOffscreen>true</drawOffscreen>
+    <fadeInTime>0.12</fadeInTime>
+    <solidTime>0.53</solidTime>
+    <fadeOutTime>0.3</fadeOutTime>
+    <growthRate>-0.3</growthRate>
+    <graphicData>
+      <texPath>VFX/VV_DarkWisp</texPath>
+      <shaderType>Mote</shaderType>
+      <renderInstanced>true</renderInstanced>
+      <color>(0.05, 0.01, 0.08, 0.95)</color>
+      <drawSize>(0.75, 1.5)</drawSize>
+    </graphicData>
+  </FleckDef>
+
+  <!-- 등장 연출의 반짝이는 기운(가산). 색은 코드·스프레이어가 정한다(검은 입자 사이의 자홍 기운, 꽃봉오리로 모이는 금빛). -->
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>VV_Fleck_ApocryphaManifestSpark</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <drawOffscreen>true</drawOffscreen>
+    <fadeInTime>0.12</fadeInTime>
+    <solidTime>0.53</solidTime>
+    <fadeOutTime>0.3</fadeOutTime>
+    <growthRate>-0.2</growthRate>
+    <graphicData>
+      <texPath>Things/Mote/SparkFlash</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+  </FleckDef>
+
+  <!-- 형체가 다 빚어진 뒤 영원꽃 꽃봉오리에 모이는 금빛(파장 직전까지 차오른다) -->
+  <ThingDef ParentName="MoteBase">
+    <defName>VV_Mote_ApocryphaRepelCharge</defName>
+    <thingClass>MoteThrown</thingClass>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <drawOffscreen>true</drawOffscreen>
+    <mote>
+      <fadeInTime>0.65</fadeInTime>
+      <solidTime>0.05</solidTime>
+      <fadeOutTime>0.35</fadeOutTime>
+      <growthRate>3</growthRate>
+    </mote>
+    <graphicData>
+      <texPath>Things/Mote/BrightFlash</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <color>(1, 0.86, 0.5, 0.8)</color>
+      <drawSize>(5, 5)</drawSize>
+    </graphicData>
+  </ThingDef>
+
+  <!-- 영원꽃에서 맵 전체로 퍼지는 금빛 파장(VV_ShockWave 셰이더). 코드가 맵 끝 모서리까지 덮도록 크기(scale)를 정한다.
+       크기가 맵마다 달라지므로 굴절·파면 폭은 반지름 약 190칸(250 맵 중앙)일 때 2페이즈 전환 충격파와 비슷해지도록 작게 둔다. -->
+  <FleckDef ParentName="FleckBase">
+    <defName>VV_Fleck_ApocryphaRepelWave</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <drawOffscreen>true</drawOffscreen>
+    <fadeInTime>0</fadeInTime>
+    <solidTime>2.6</solidTime>
+    <fadeOutTime>0.05</fadeOutTime>
+    <graphicData>
+      <graphicClass>Graphic_FleckPulse</graphicClass>
+      <texPath>Things/Mote/Black</texPath>
+      <shaderType>VV_ShockWave</shaderType>
+      <renderInstanced>false</renderInstanced>
+      <drawSize>(100, 100)</drawSize>
+      <shaderParameters>
+        <_Duration>2.6</_Duration>
+        <_Width>0.0035</_Width>
+        <_Distortion>0.003</_Distortion>
+        <_Brightness>1.7</_Brightness>
+        <_ArcIntensity>0.6</_ArcIntensity>
+        <_CoreColor>(1.0, 0.96, 0.78, 1)</_CoreColor>
+        <_GlowColor>(1.0, 0.76, 0.3, 1)</_GlowColor>
+        <_FringeColor>(1.0, 0.55, 0.2, 1)</_FringeColor>
+      </shaderParameters>
+    </graphicData>
+  </FleckDef>
+
+  <!-- 형체가 다 빚어지는 순간: 작은 굴절 맥동과 사방으로 튀는 자홍 기운(섬광은 검은 몸을 분홍으로 바래게 하므로 쓰지 않는다) -->
+  <EffecterDef>
+    <defName>VV_Effecter_ApocryphaManifestComplete</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>PsychicPulseGlobal</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_ApocryphaMorphPulse</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>1</burstCount>
+        <absoluteAngle>true</absoluteAngle>
+        <rotation>0~360</rotation>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_ApocryphaManifestSpark</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>18~24</burstCount>
+        <positionRadius>1.8</positionRadius>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>2~4.5</speed>
+        <scale>0.3~0.6</scale>
+        <color>(0.9, 0.18, 0.7, 1)</color>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <!-- 영원꽃 꽃봉오리에서 파장이 터지는 순간(맵 전체 파장 플렉은 코드가 맵 크기에 맞춰 따로 띄운다) -->
+  <EffecterDef>
+    <defName>VV_Effecter_ApocryphaRepel</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>VV_Manawave</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+        <soundDef>Explosion_MechBandShockwave</soundDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>VV_Mote_EverflowerRitualFlash</moteDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>1</burstCount>
+        <scale>1.6</scale>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_ResonanceWaveRing</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>1</burstCount>
+        <absoluteAngle>true</absoluteAngle>
+        <rotation>0~360</rotation>
+        <scale>1.4</scale>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_ResonanceWaveRingSlow</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>1</burstCount>
+        <absoluteAngle>true</absoluteAngle>
+        <rotation>0~360</rotation>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_ExpandingDistortionRing</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>1</burstCount>
+        <scale>2</scale>
+        <rotation>0</rotation>
+        <angle>0~0</angle>
+        <speed>0</speed>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_EverflowerPetal_Burst</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>36~46</burstCount>
+        <positionRadius>0.6</positionRadius>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>3~7</speed>
+        <rotation>0~360</rotation>
+        <rotationRate>-260~260</rotationRate>
+        <scale>0.3~0.6</scale>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <!-- 밀려난 형체가 외곽에 내려앉는 순간(실제 보스 등장 이펙트 VV_Effecter_ApocryphaArrive와 겹쳐 터진다).
+       사방으로 튀는 검은 입자는 회전을 속도 방향에 맞춰야 하므로 코드가 따로 날린다. -->
+  <EffecterDef>
+    <defName>VV_Effecter_ApocryphaManifestLand</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>VV_Mote_ApocryphaMagentaFlash</moteDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>1</burstCount>
+        <scale>0.4</scale>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>DustPuffThick</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>8~12</burstCount>
+        <positionRadius>2.2</positionRadius>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>1~2.4</speed>
+        <scale>2~3.2</scale>
+        <rotationRate>-60~60</rotationRate>
+      </li>
+    </children>
+  </EffecterDef>
+
   <!-- ===================== 1페이즈: 요정 비비 사출 포격 조준 ===================== -->
   <!-- 표적 꽃 표식: VV_MagicCircle 셰이더가 수식으로 그린다(텍스처는 쓰지 않음). 바깥 고리 반지름(0.95 × 2.6칸)이 사출탄 폭발 반경 2.4칸과 맞도록 크기 5.2.
        밝은 연꽃이 _Duration(= CompProperties_Apocrypha.shellAimTicks / 60초) 동안 중심에서 흐린 윤곽까지 피어나 발사 시점을 알린다.

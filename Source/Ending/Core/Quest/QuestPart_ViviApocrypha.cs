@@ -7,7 +7,8 @@ using Verse;
 
 namespace VVRace
 {
-    // 〈바스러진 여왕, 아포크리파〉: 평화 기간이 끝나면 맵 외곽에서 호위 말벌과 함께 등장시킨다.
+    // 〈바스러진 여왕, 아포크리파〉: 평화 기간이 끝나면 등장 연출(ApocryphaManifestation)을 거쳐 맵 외곽에서 호위 말벌과 함께 등장시킨다.
+    // 등장 칸을 먼저 정한 뒤 영원꽃 위에서 형체가 빚어지고 파장에 밀려나는 연출을 틀고(편지 신호), 형체가 그 칸에 내려앉는 틱에 실제 보스를 스폰한다.
     // 외곽에서 제단으로 이어지는 길이 없으면 등장을 미루고(평화 기간 상태로 위협 억제를 풀어 둠) 2500틱마다 다시 시도한다.
     // 등장한 뒤에는 보스를 감시하다가, 소멸 연출이 끝났다는 신호(창구가 보냄)나 아무 알림 없이 완전히 사라진 뒤(죽음·파괴·어느 맵에도 없음) 유예가 지나면 토벌로 처리한다.
     public class QuestPart_ViviApocrypha : QuestPartActivable
@@ -21,6 +22,7 @@ namespace VVRace
 
         public ArcanePlant_Everflower anchor;
         public string inSignalDissolved;
+        public string outSignalManifesting;
         public string outSignalArrived;
 
         private Pawn _boss;
@@ -31,10 +33,21 @@ namespace VVRace
         private int _nextAttemptTick = -1;
         private int _bossMissingSinceTick = -1;
 
+        // 등장 연출 중: 실제 보스를 스폰할 틱(-1이면 연출 중이 아님)과 칸, 연출 시퀀서
+        private int _manifestSpawnTick = -1;
+        private IntVec3 _manifestCell = IntVec3.Invalid;
+        private ApocryphaManifestation _manifestation;
+
+        // 등장 편지 신호를 보냈는지(스폰 실패로 연출을 다시 틀어도 편지는 한 번만).
+        private bool _manifestAnnounced;
+
         public Pawn Boss => _boss;
 
         // 등장할 길을 찾지 못해 미뤄진 상태인지(이 동안에는 평화 기간이 이어지되 위협 억제가 풀린다).
         public bool IsDeferred => _deferred;
+
+        // 등장 연출이 진행 중인지(보스는 아직 없다).
+        public bool IsManifesting => _manifestSpawnTick >= 0;
 
         public bool IsBossAlive => _boss != null && !_boss.Destroyed && !_boss.Dead && _boss.Spawned;
 
@@ -70,9 +83,16 @@ namespace VVRace
             var now = Find.TickManager.TicksGame;
             if (!_arrived)
             {
-                if (now >= _nextAttemptTick)
+                if (IsManifesting)
                 {
-                    TrySpawn(forceSpawn: false);
+                    if (now >= _manifestSpawnTick)
+                    {
+                        FinishManifestation();
+                    }
+                }
+                else if (now >= _nextAttemptTick)
+                {
+                    TrySpawn(forceSpawn: false, skipIntro: false);
                 }
                 return;
             }
@@ -93,8 +113,8 @@ namespace VVRace
             }
         }
 
-        // 맵 외곽에서 아포크리파와 호위 말벌을 등장시킨다. 실패하면 위협 억제를 풀고 2500틱 뒤 다시 시도한다.
-        private bool TrySpawn(bool forceSpawn)
+        // 등장 칸(맵 외곽)을 정하고 영원꽃 위에서 등장 연출을 시작한다(skipIntro면 곧바로 스폰). 칸을 찾지 못하면 위협 억제를 풀고 2500틱 뒤 다시 시도한다.
+        private bool TrySpawn(bool forceSpawn, bool skipIntro)
         {
             var map = AnchorMap;
             if (map == null)
@@ -103,43 +123,98 @@ namespace VVRace
                 return false;
             }
 
+            if (!TryFindSpawnCell(map, forceSpawn, out var entryCell))
+            {
+                Defer();
+                return false;
+            }
+
+            // 연출이 없으면(skipIntro, 영원꽃이 맵에 없음) 곧바로 스폰한다.
+            BeginManifestation(map, entryCell, skipIntro);
+            return FinishManifestationIfDue();
+        }
+
+        private bool TryFindSpawnCell(Map map, bool forceSpawn, out IntVec3 cell)
+        {
             var altar = ViviEndingUtility.AltarOf(anchor);
             var target = altar != null && altar.Spawned && altar.Map == map ? altar.Position : anchor.PositionHeld;
+            return ApocryphaUtility.TryFindEntryCell(map, target, out cell) || (forceSpawn && TryFindAnyEdgeCell(map, out cell));
+        }
 
-            Pawn boss = null;
-            if (ApocryphaUtility.TryFindEntryCell(map, target, out var entryCell) || (forceSpawn && TryFindAnyEdgeCell(map, out entryCell)))
+        // 등장 연출 시작: 〈불길한 정적〉을 끝내고 등장 편지 신호(SUBJECT = 영원꽃)를 한 번만 보낸 뒤, 영원꽃 위에서 형체가 빚어지고 밀려나는 연출을 튼다.
+        // 영원꽃이 맵에 서 있지 않으면 연출 없이 다음 확인(곧바로)에 스폰한다.
+        private void BeginManifestation(Map map, IntVec3 cell, bool skipIntro)
+        {
+            _manifestCell = cell;
+            _manifestSpawnTick = Find.TickManager.TicksGame;
+            _deferred = false;
+            ViviEndingUtility.EndOminousSilence();
+
+            if (!skipIntro && anchor.Spawned && anchor.Map == map)
             {
-                var bossesBefore = SpawnedBosses(map);
-                try
+                _manifestation = ApocryphaManifestation.Begin(anchor, cell, ApocryphaUtility.EntryRotation(map, cell));
+                if (_manifestation != null)
                 {
-                    boss = ApocryphaUtility.SpawnApocrypha(map, entryCell, StorytellerUtility.DefaultThreatPointsNow(map) * BossPointsFactor);
+                    _manifestSpawnTick = _manifestation.SpawnTick;
                 }
-                catch (Exception ex)
-                {
-                    Log.Error($"[ViViRace] failed to spawn Apocrypha: {ex}");
+            }
 
-                    // 보스 폰이 이미 스폰된 뒤의 단계(호위 말벌·연출)에서 실패했다면 그 보스로 보스 단계를 시작한다(재시도가 보스를 또 소환하지 않게).
-                    // 생성·스폰 자체가 실패했으면 보스 없이 보스 단계에 들어가지 않도록 등장을 미루고 재시도한다.
-                    boss = SpawnedBosses(map).FirstOrDefault(v => !bossesBefore.Contains(v) && !v.Dead && !v.Destroyed);
-                }
+            Find.TickManager.slower.SignalForceNormalSpeedShort();
+
+            if (!_manifestAnnounced && !outSignalManifesting.NullOrEmpty())
+            {
+                _manifestAnnounced = true;
+                Find.SignalManager.SendSignal(new Signal(outSignalManifesting, anchor.Named("SUBJECT")));
+            }
+        }
+
+        private bool FinishManifestationIfDue()
+        {
+            return Find.TickManager.TicksGame >= _manifestSpawnTick && FinishManifestation();
+        }
+
+        // 형체가 외곽에 내려앉는 틱: 연출을 지우고 그 칸에 실제 아포크리파와 호위 말벌을 스폰한다.
+        // 연출 동안 그 칸에 설 수 없게 되었으면 다시 찾고(없으면 아무 외곽 칸), 앵커 맵을 잃었거나 스폰에 실패하면 등장을 미룬다.
+        private bool FinishManifestation()
+        {
+            var cell = _manifestCell;
+            if (_manifestation != null && !_manifestation.Destroyed)
+            {
+                _manifestation.Land();
+            }
+            ClearManifestation();
+
+            var map = AnchorMap;
+            if (map == null)
+            {
+                _nextAttemptTick = Find.TickManager.TicksGame + RetryIntervalTicks;
+                return false;
+            }
+
+            if ((!cell.IsValid || !cell.InBounds(map) || !cell.Standable(map)) && !TryFindSpawnCell(map, forceSpawn: true, out cell))
+            {
+                Defer();
+                return false;
+            }
+
+            var bossesBefore = SpawnedBosses(map);
+            Pawn boss;
+            try
+            {
+                boss = ApocryphaUtility.SpawnApocrypha(map, cell, StorytellerUtility.DefaultThreatPointsNow(map) * BossPointsFactor);
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"[ViViRace] failed to spawn Apocrypha: {ex}");
+
+                // 보스 폰이 이미 스폰된 뒤의 단계(호위 말벌·연출)에서 실패했다면 그 보스로 보스 단계를 시작한다(재시도가 보스를 또 소환하지 않게).
+                // 생성·스폰 자체가 실패했으면 보스 없이 보스 단계에 들어가지 않도록 등장을 미루고 재시도한다.
+                boss = SpawnedBosses(map).FirstOrDefault(v => !bossesBefore.Contains(v) && !v.Dead && !v.Destroyed);
             }
 
             if (boss == null)
             {
-                _nextAttemptTick = Find.TickManager.TicksGame + RetryIntervalTicks;
-                ViviEndingUtility.EndOminousSilence();
-
-                // 처음 미뤄질 때만 알린다(등장하면 _deferred가 풀린다).
-                var firstDeferral = !_deferred;
-                _deferred = true;
-                if (firstDeferral)
-                {
-                    Messages.Message(
-                        LocalizeString_EndingCore.VV_Message_EndingApocryphaDeferred.Translate(),
-                        new LookTargets(anchor),
-                        MessageTypeDefOf.NeutralEvent);
-                }
-
+                Defer();
                 return false;
             }
 
@@ -149,8 +224,38 @@ namespace VVRace
             _bossMissingSinceTick = -1;
             ViviEndingUtility.EndOminousSilence();
 
+            Messages.Message(LocalizeString_EndingCore.VV_Message_EndingApocryphaLanded.Translate(), boss, MessageTypeDefOf.ThreatBig);
             Find.SignalManager.SendSignal(new Signal(outSignalArrived, boss.Named("SUBJECT")));
             return true;
+        }
+
+        // 등장을 미룬다: 위협 억제를 풀고 2500틱 뒤 다시 시도한다. 처음 미뤄질 때만 알린다(등장하면 _deferred가 풀린다).
+        private void Defer()
+        {
+            _nextAttemptTick = Find.TickManager.TicksGame + RetryIntervalTicks;
+            ViviEndingUtility.EndOminousSilence();
+
+            var firstDeferral = !_deferred;
+            _deferred = true;
+            if (firstDeferral)
+            {
+                Messages.Message(
+                    LocalizeString_EndingCore.VV_Message_EndingApocryphaDeferred.Translate(),
+                    new LookTargets(anchor),
+                    MessageTypeDefOf.NeutralEvent);
+            }
+        }
+
+        // 진행 중인 등장 연출을 멈추고 지운다.
+        private void ClearManifestation()
+        {
+            _manifestSpawnTick = -1;
+            _manifestCell = IntVec3.Invalid;
+            if (_manifestation != null && !_manifestation.Destroyed)
+            {
+                _manifestation.Destroy();
+            }
+            _manifestation = null;
         }
 
         // 개발자 도구 전용: 정식 진입 칸을 못 찾아도 설 수 있는 아무 외곽 칸에 등장시킨다.
@@ -201,6 +306,7 @@ namespace VVRace
             _boss = null;
             _deferred = false;
             _bossMissingSinceTick = -1;
+            ClearManifestation();
 
             ViviEndingUtility.RunStep("defeat: cleanup gimmicks", ViviEndingUtility.CleanupGimmicks);
             ViviEndingUtility.RunStep("defeat: end ominous silence", ViviEndingUtility.EndOminousSilence);
@@ -209,7 +315,8 @@ namespace VVRace
         }
 
         // DEV: 정식 진입 칸이 없어도 등장시킨다. 이미 있거나 소멸 연출 중이면 거절한다.
-        public void DebugSpawnNow()
+        // skipIntro면 등장 연출 없이 곧바로 스폰한다(단계 이동·자동 테스트). 등장 연출 중이면 연출을 건너뛰고 곧바로 스폰한다.
+        public void DebugSpawnNow(bool skipIntro)
         {
             if (State != QuestPartState.Enabled) { return; }
 
@@ -225,14 +332,20 @@ namespace VVRace
                 return;
             }
 
+            if (IsManifesting)
+            {
+                FinishManifestation();
+                return;
+            }
+
             _boss = null;
-            TrySpawn(forceSpawn: true);
+            TrySpawn(forceSpawn: true, skipIntro);
         }
 
         // DEV: 등장이 미뤄진 상태면 다음 틱에 곧바로 다시 시도한다.
         public void DebugRetryNow()
         {
-            if (State != QuestPartState.Enabled || _arrived) { return; }
+            if (State != QuestPartState.Enabled || _arrived || IsManifesting) { return; }
 
             _nextAttemptTick = Find.TickManager.TicksGame;
         }
@@ -253,6 +366,7 @@ namespace VVRace
         public override void Cleanup()
         {
             base.Cleanup();
+            ClearManifestation();
 
             if (quest.State == QuestState.EndedSuccess || !IsBossAlive) { return; }
 
@@ -269,12 +383,17 @@ namespace VVRace
             base.ExposeData();
             Scribe_References.Look(ref anchor, "anchor");
             Scribe_Values.Look(ref inSignalDissolved, "inSignalDissolved");
+            Scribe_Values.Look(ref outSignalManifesting, "outSignalManifesting");
             Scribe_Values.Look(ref outSignalArrived, "outSignalArrived");
             Scribe_References.Look(ref _boss, "boss");
             Scribe_Values.Look(ref _arrived, "arrived", false);
             Scribe_Values.Look(ref _deferred, "deferred", false);
             Scribe_Values.Look(ref _nextAttemptTick, "nextAttemptTick", -1);
             Scribe_Values.Look(ref _bossMissingSinceTick, "bossMissingSinceTick", -1);
+            Scribe_Values.Look(ref _manifestSpawnTick, "manifestSpawnTick", -1);
+            Scribe_Values.Look(ref _manifestCell, "manifestCell", IntVec3.Invalid);
+            Scribe_References.Look(ref _manifestation, "manifestation");
+            Scribe_Values.Look(ref _manifestAnnounced, "manifestAnnounced", false);
         }
     }
 }
