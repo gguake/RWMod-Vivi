@@ -6,7 +6,7 @@
   <HediffDef>
     <defName>VV_FairyInterference</defName>
     <label>fairy interference</label>
-    <description>Resonating with the fairy bloom allows interference with Asphodel's bonds.</description>
+    <description>Can interfere with the bonds between Asphodel and the fairy vivis, severing them to set the fairy vivis free.</description>
     <hediffClass>VVRace.Hediff_FairyInterference</hediffClass>
     <defaultLabelColor>(1, 0.9, 0.55)</defaultLabelColor>
     <isBad>false</isBad>
@@ -41,7 +41,7 @@
   <HediffDef ParentName="VV_DoomBlightBase">
     <defName>VV_DoomBlight_Fear</defName>
     <label>doom blight: dread</label>
-    <description>A doom bloom curse that makes the afflicted collapse from pain more easily and become more prone to mental breaks.</description>
+    <description>In the visions conjured by the doom bloom, the old nests burn and the screaming never stops. The afflicted collapse from pain more easily and become more prone to mental breaks.</description>
     <stages>
       <li>
         <minSeverity>1</minSeverity>
@@ -85,7 +85,7 @@
   <HediffDef ParentName="VV_DoomBlightBase">
     <defName>VV_DoomBlight_Hunger</defName>
     <label>doom blight: famine</label>
-    <description>A doom bloom curse that causes severe hunger and fatigue.</description>
+    <description>Haunted by visions of living through the empire's last days, when every flower withered and the honey ran dry. Severe hunger and fatigue set in.</description>
     <stages>
       <li>
         <minSeverity>1</minSeverity>
@@ -115,17 +115,17 @@
     </stages>
   </HediffDef>
 
-  <!-- 역병: 면역 획득 속도(질병 회복)·혈액 손실 회복 속도 감소 + 받는 피해 증가.
-       혈액 손실 회복은 바닐라 StatDef가 없으므로 HediffComp_BloodLossRecoveryFactor가 단계별 배율(factorByStage)로 늦춘다. -->
+  <!-- 역병: 면역 획득 속도(질병 회복)·부상 회복 속도 감소 + 받는 피해 증가. -->
   <HediffDef ParentName="VV_DoomBlightBase">
     <defName>VV_DoomBlight_Plague</defName>
     <label>doom blight: plague</label>
-    <description>A doom bloom curse that slows recovery from disease and blood loss and increases damage taken.</description>
+    <description>The old empire's plague, which no medicine could cure, seeps into the body through hallucinations. Recovery from disease and injuries is slower, and damage taken is increased.</description>
     <stages>
       <li>
         <minSeverity>1</minSeverity>
         <statFactors>
           <ImmunityGainSpeed>0.9</ImmunityGainSpeed>
+          <InjuryHealingFactor>0.8</InjuryHealingFactor>
           <IncomingDamageFactor>1.05</IncomingDamageFactor>
         </statFactors>
       </li>
@@ -133,6 +133,7 @@
         <minSeverity>2</minSeverity>
         <statFactors>
           <ImmunityGainSpeed>0.8</ImmunityGainSpeed>
+          <InjuryHealingFactor>0.7</InjuryHealingFactor>
           <IncomingDamageFactor>1.1</IncomingDamageFactor>
         </statFactors>
       </li>
@@ -140,6 +141,7 @@
         <minSeverity>3</minSeverity>
         <statFactors>
           <ImmunityGainSpeed>0.7</ImmunityGainSpeed>
+          <InjuryHealingFactor>0.6</InjuryHealingFactor>
           <IncomingDamageFactor>1.15</IncomingDamageFactor>
         </statFactors>
       </li>
@@ -147,6 +149,7 @@
         <minSeverity>4</minSeverity>
         <statFactors>
           <ImmunityGainSpeed>0.6</ImmunityGainSpeed>
+          <InjuryHealingFactor>0.45</InjuryHealingFactor>
           <IncomingDamageFactor>1.2</IncomingDamageFactor>
         </statFactors>
       </li>
@@ -154,20 +157,10 @@
         <minSeverity>5</minSeverity>
         <statFactors>
           <ImmunityGainSpeed>0.5</ImmunityGainSpeed>
+          <InjuryHealingFactor>0.3</InjuryHealingFactor>
           <IncomingDamageFactor>1.25</IncomingDamageFactor>
         </statFactors>
       </li>
     </stages>
-    <comps>
-      <li Class="VVRace.HediffCompProperties_BloodLossRecoveryFactor">
-        <factorByStage>
-          <li>0.8</li>
-          <li>0.65</li>
-          <li>0.5</li>
-          <li>0.35</li>
-          <li>0.2</li>
-        </factorByStage>
-      </li>
-    </comps>
   </HediffDef>
 </Defs>

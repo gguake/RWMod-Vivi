@@ -7,6 +7,12 @@
 <VV_EverflowerLink.label>영원꽃 공명</VV_EverflowerLink.label>
 <VV_EverflowerLink.description>영원꽃과 초정신 공명이 형성된 상태입니다. 영원꽃과 다른 지역으로 이동하거나 격리된 상태가 되면 연결이 일시적으로 해제됩니다.
 \n영원꽃의 조율 등급이 높아질수록 다양한 효과를 받습니다.</VV_EverflowerLink.description>
+<VV_EverflowerLink.stages.0.label>I</VV_EverflowerLink.stages.0.label>
+<VV_EverflowerLink.stages.1.label>II</VV_EverflowerLink.stages.1.label>
+<VV_EverflowerLink.stages.2.label>III</VV_EverflowerLink.stages.2.label>
+<VV_EverflowerLink.stages.3.label>IV</VV_EverflowerLink.stages.3.label>
+<VV_EverflowerLink.stages.4.label>V</VV_EverflowerLink.stages.4.label>
+<VV_EverflowerLink.stages.5.label>VI</VV_EverflowerLink.stages.5.label>
 
 <VV_EverflowerReverberation.label>영원꽃 잔향</VV_EverflowerReverberation.label>
 <VV_EverflowerReverberation.description>영원꽃 조율 이후 남은 잔향에 영향을 받았습니다. 신체의 시간 흐름이 다소 느려집니다.</VV_EverflowerReverberation.description>
@@ -18,4 +24,12 @@
 <VV_FairyficationSickness.label>요정화 후유증</VV_FairyficationSickness.label>
 <VV_FairyficationSickness.description>요정화가 해제되어 원래의 신체로 돌아오면서 발생하는 후유증입니다. 후유증을 겪는중에는 다시 요정화를 할 수 없습니다.</VV_FairyficationSickness.description>
 
+<VV_EverflowerBlessing.label>영원꽃의 축복</VV_EverflowerBlessing.label>
+<VV_EverflowerBlessing.description>만개한 영원꽃의 축복으로 성체의 노화가 크게 느려집니다. 영원꽃이 있는 지역을 떠나면 약 하루 뒤 사라집니다.</VV_EverflowerBlessing.description>
+
+<VV_EverflowerFullAssimilation.label>영원꽃 완전 동화</VV_EverflowerFullAssimilation.label>
+<VV_EverflowerFullAssimilation.description>영원꽃과 하나가 되어 개화를 이끌고 있습니다. 동화 중에는 욕구와 노화가 멈추고 피해를 받지 않지만, 움직이거나 지시를 따를 수 없습니다.</VV_EverflowerFullAssimilation.description>
+
+<VV_EverflowerQueen.label>영원의 여제</VV_EverflowerQueen.label>
+<VV_EverflowerQueen.description>만개한 영원꽃의 여왕입니다.\n\n영원꽃이 남아 있는 한 죽어도 하루 뒤 상처를 모두 회복하고 영원꽃에서 다시 돌아옵니다.</VV_EverflowerQueen.description>
 </Defs>

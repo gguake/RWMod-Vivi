@@ -31,7 +31,7 @@
   <JobDef>
     <defName>VV_ApocryphaWait</defName>
     <driverClass>VVRace.JobDriver_ApocryphaWait</driverClass>
-    <reportString>staring blankly.</reportString>
+    <reportString>standing.</reportString>
     <casualInterruptible>false</casualInterruptible>
     <suspendable>false</suspendable>
   </JobDef>
@@ -39,7 +39,7 @@
   <JobDef>
     <defName>VV_ApocryphaWander</defName>
     <driverClass>JobDriver_Goto</driverClass>
-    <reportString>wandering in a daze.</reportString>
+    <reportString>wandering.</reportString>
     <casualInterruptible>false</casualInterruptible>
     <suspendable>false</suspendable>
   </JobDef>
@@ -89,7 +89,7 @@
   <JobDef>
     <defName>VV_ActivateApocryphaNeedle</defName>
     <driverClass>VVRace.JobDriver_ActivateApocryphaNeedle</driverClass>
-    <reportString>awakening a giant eltex needle.</reportString>
+    <reportString>awakening an ancient eltex needle.</reportString>
     <casualInterruptible>false</casualInterruptible>
   </JobDef>
 

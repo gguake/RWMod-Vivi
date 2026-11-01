@@ -11,7 +11,6 @@
         public const string VV_Inspector_ApocryphaVitality = nameof(VV_Inspector_ApocryphaVitality);
         public const string VV_Inspector_ApocryphaShield = nameof(VV_Inspector_ApocryphaShield);
         public const string VV_Inspector_ApocryphaShieldBroken = nameof(VV_Inspector_ApocryphaShieldBroken);
-        public const string VV_Inspector_ApocryphaStuckNeedles = nameof(VV_Inspector_ApocryphaStuckNeedles);
         public const string VV_Inspector_ApocryphaChanneling = nameof(VV_Inspector_ApocryphaChanneling);
 
         public const string VV_Hediff_ApocryphaStuckNeedleTip = nameof(VV_Hediff_ApocryphaStuckNeedleTip);

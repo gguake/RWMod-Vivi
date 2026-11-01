@@ -30,7 +30,7 @@
        요정 그림은 가산 원본(VV_FairyAttack_east)을 알파 그림으로 바꾼 것이라 가산 빛에 하얗게 묻히지 않도록 VV_TransparentOverGlow(가산 모트보다 늦게 그림)로 그린다. -->
   <ThingDef ParentName="BaseBullet">
     <defName>VV_Projectile_FairyShell</defName>
-    <label>hurled fairy vivi</label>
+    <label>fairy vivi</label>
     <thingClass>VVRace.Projectile_FairyShell</thingClass>
     <graphicData>
       <texPath>VFX/VV_FairyComet</texPath>
@@ -143,7 +143,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VV_DoomFlower</defName>
     <label>doom bloom</label>
-    <description>A cursed flower grown from Asphodel's warped mana. When it blooms, it inflicts a random curse on every colonist in the area.</description>
+    <description>A cursed flower grown from Asphodel's warped mana. When it blooms, it inflicts a deadly curse on every colonist in the area, so it is best destroyed.</description>
     <thingClass>VVRace.Building_DoomFlower</thingClass>
     <graphicData>
       <texPath>Things/Building/VV_DoomFlower</texPath>
@@ -201,7 +201,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VV_FairyFlower</defName>
     <label>fairy bloom</label>
-    <description>A flower grown from the mana of fairy vivis bound to Asphodel. Bonding with a vivi causes fairy interference. It soon withers.</description>
+    <description>A flower grown from the mana of the fairy vivis bound to Asphodel. When a vivi bonded with the fairy bloom draws close to Asphodel, the two manas collide and cause interference, freeing the fairy vivis bound to Asphodel en masse.</description>
     <thingClass>VVRace.Building_FairyFlower</thingClass>
     <graphicData>
       <texPath>Things/Building/VV_FairyFlower</texPath>

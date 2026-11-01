@@ -2,4 +2,10 @@
 <LanguageData>
 <VV_EverflowerWeatherControl.label>날씨 조작</VV_EverflowerWeatherControl.label>
 <VV_EverflowerWeatherControl.description>영원꽃이 이 지역의 날씨를 변화시키고 있습니다.</VV_EverflowerWeatherControl.description>
+
+<VV_OminousSilence.label>불길한 정적</VV_OminousSilence.label>
+<VV_OminousSilence.description>멀리서부터 느껴지는 초정신 파장이 영원꽃의 개화를 가로막고 있습니다. 무언가가 영원꽃을 향해 다가오고 있습니다..</VV_OminousSilence.description>
+
+<VV_GoldenBloom.label>금빛 꽃가루 안개</VV_GoldenBloom.label>
+<VV_GoldenBloom.description>영원꽃의 금빛 안개가 지역을 뒤덮었습니다. 원거리 명중률이 소폭 낮아지지만 모든 마법 식물의 마나가 무제한이 됩니다.</VV_GoldenBloom.description>
 </LanguageData>

@@ -6,8 +6,8 @@
   <!-- ===== 여왕의 권능: 능력 두 개를 주고, 생명 공명은 Hediff_EverflowerQueen의 사망 통지로 처리한다 ===== -->
   <HediffDef>
     <defName>VV_EverflowerQueen</defName>
-    <label>everflower queen</label>
-    <description>The queen of a fully bloomed everflower.\n\nAs long as the everflower remains, she returns a day after death with all wounds healed. She can use verdict and mana barrier.</description>
+    <label>eternal empress</label>
+    <description>The queen of a fully bloomed everflower.\n\nAs long as the everflower remains, she returns from it a day after death with all wounds healed.</description>
     <hediffClass>VVRace.Hediff_EverflowerQueen</hediffClass>
     <defaultLabelColor>(1, 0.85, 0.4)</defaultLabelColor>
     <isBad>false</isBad>
@@ -27,7 +27,7 @@
   <AbilityDef>
     <defName>VV_QueenVerdict</defName>
     <label>verdict</label>
-    <description>Hurls a giant eltex needle through enemies and structures along a path 3 cells wide and 35 cells long. Allies are unharmed.</description>
+    <description>Hurls a giant eltex needle that pierces every enemy and structure along a wide straight line. Allies are unharmed.</description>
     <iconPath>UI/Commands/VV_QueenVerdict</iconPath>
     <cooldownTicksRange>2500</cooldownTicksRange>
     <hostile>true</hostile>
@@ -91,7 +91,7 @@
   <AbilityDef>
     <defName>VV_QueenManaBarrier</defName>
     <label>mana barrier</label>
-    <description>Consumes 1000 environment mana from the surrounding area to raise a barrier against enemy gunfire for 2 hours. Allied fire passes through.</description>
+    <description>Consumes environment mana from the surrounding area to raise a barrier that blocks enemy gunfire for 2 hours. Allied fire passes through.</description>
     <iconPath>UI/Commands/VV_QueenManaBarrier</iconPath>
     <cooldownTicksRange>2500</cooldownTicksRange>
     <hostile>false</hostile>
@@ -215,7 +215,7 @@
 
   <ThingDef ParentName="EtherealThingBase">
     <defName>VV_DissolvingHornet</defName>
-    <label>dissolving titanic hornet</label>
+    <label>titanic hornet</label>
     <thingClass>VVRace.DissolvingHornet</thingClass>
     <tickerType>Normal</tickerType>
     <drawerType>RealtimeOnly</drawerType>

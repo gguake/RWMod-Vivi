@@ -33,7 +33,7 @@
     <defName>VV_OminousSilence</defName>
     <conditionClass>GameCondition</conditionClass>
     <label>ominous silence</label>
-    <description>An unknown psychic wave is blocking the everflower's bloom condensation. Raids have stopped, but something is approaching the everflower.</description>
+    <description>A psychic wave felt from afar is blocking the everflower's bloom. Something is approaching the everflower.</description>
     <natural>false</natural>
     <displayOnUI>true</displayOnUI>
     <preventIncidents>false</preventIncidents>

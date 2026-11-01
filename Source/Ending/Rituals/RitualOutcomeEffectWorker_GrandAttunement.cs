@@ -21,12 +21,11 @@ namespace VVRace
             var map = everflower.Map;
             var compEverflower = everflower.EverflowerComp;
 
-            // 다른 제단이 먼저 엔딩을 시작했거나 퀘스트 생성에 실패하면 4단계를 유지한다.
+            // 퀘스트 생성에 실패하면 4단계를 유지한다.
             // 앵커가 아닌 5단계 영원꽃이 남거나 의식을 재시도할 수 없게 되는 일을 막는다.
             var ending = ViviEndingQuest.Current;
             if (ending == null || !ending.Notify_GrandAttunementCompleted(everflower, quality))
             {
-                Messages.Message(LocalizeString_EndingCore.VV_Message_EndingGrandAttunementNotStarted.Translate(), everflower, MessageTypeDefOf.NegativeEvent);
                 everflower.Notify_RitualComplete(quality);
                 return;
             }

@@ -69,7 +69,6 @@
         public const string VV_Message_EndingApocryphaLanded = nameof(VV_Message_EndingApocryphaLanded);
         public const string VV_Message_EndingPawnReturned = nameof(VV_Message_EndingPawnReturned);
         public const string VV_Message_EndingPawnReturnedToCaravan = nameof(VV_Message_EndingPawnReturnedToCaravan);
-        public const string VV_Message_EndingGrandAttunementNotStarted = nameof(VV_Message_EndingGrandAttunementNotStarted);
 
         public const string VV_Gizmo_EndingBloom = nameof(VV_Gizmo_EndingBloom);
         public const string VV_Gizmo_EndingBloomDesc = nameof(VV_Gizmo_EndingBloomDesc);

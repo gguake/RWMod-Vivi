@@ -4,7 +4,7 @@
   <HediffDef>
     <defName>VV_ApocryphaFairyBond</defName>
     <label>vivi fairy</label>
-    <description>The souls of 1,440,000,000 fairy vivis bound to the old empire's last queen form a mana shield that absorbs all attacks.</description>
+    <description>The souls of 1,440,000,000 fairy vivis bound to the old empire's last queen form a shield that absorbs all attacks.</description>
     <hediffClass>VVRace.Hediff_ApocryphaFairyBond</hediffClass>
     <defaultLabelColor>(0, 1, 1)</defaultLabelColor>
     <isBad>false</isBad>
@@ -19,8 +19,8 @@
        받는 피해 배율도 적용하며, 헤디프는 겹 수와 배율을 표시한다. 2페이즈 이동속도 보정은 생애 단계 VV_ApocryphaUnbound로 옮겼다. -->
   <HediffDef>
     <defName>VV_ApocryphaStuckNeedle</defName>
-    <label>lodged giant needle</label>
-    <description>A giant eltex needle driven through the progenitor hornet's carapace. The more needles are lodged, the more damage it takes; once all three are lodged, it staggers for a while and then tears them out.</description>
+    <label>ancient eltex needle</label>
+    <description>An ancient eltex needle lodged in the body. The more needles are lodged, the more damage it takes; once all three are lodged, it staggers for a while and then tears them out.</description>
     <hediffClass>VVRace.Hediff_ApocryphaStuckNeedle</hediffClass>
     <defaultLabelColor>(1, 0.42, 0.85)</defaultLabelColor>
     <isBad>true</isBad>

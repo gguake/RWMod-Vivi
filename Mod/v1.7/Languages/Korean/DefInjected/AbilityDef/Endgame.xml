@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+<VV_QueenVerdict.label>선고</VV_QueenVerdict.label>
+<VV_QueenVerdict.description>거대한 엘텍스 바늘을 날려 넓은 직선상의 모든 적과 구조물을 꿰뚫습니다. 아군은 피해를 입지 않습니다.</VV_QueenVerdict.description>
+<VV_QueenVerdict.verbProperties.label>선고</VV_QueenVerdict.verbProperties.label>
+
+<VV_QueenManaBarrier.label>마나 보호막</VV_QueenManaBarrier.label>
+<VV_QueenManaBarrier.description>주변 범위의 환경 마나를 소모해 2시간 동안 적의 총탄을 차단하는 보호막을 펼칩니다. 아군의 사격은 통과합니다.</VV_QueenManaBarrier.description>
+<VV_QueenManaBarrier.verbProperties.label>마나 보호막</VV_QueenManaBarrier.verbProperties.label>
+</LanguageData>

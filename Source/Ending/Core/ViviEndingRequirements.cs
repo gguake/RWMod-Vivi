@@ -31,9 +31,7 @@ namespace VVRace
 
         public static string LetterText()
         {
-            return LocalizeString_EndingCore.VV_Letter_EndingFederationMissiveConditions.Translate(
-                MinViviCount.Named("VIVI"),
-                MinColonyWealth.ToString("N0").Named("WEALTH")).Resolve();
+            return LocalizeString_EndingCore.VV_Letter_EndingFederationMissiveConditions.Translate().Resolve();
         }
 
         public static string ProgressText()

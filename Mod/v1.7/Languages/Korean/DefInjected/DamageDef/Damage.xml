@@ -13,4 +13,11 @@
 <VV_Frostbite.deathMessage>{0}(이)가 동사했습니다.</VV_Frostbite.deathMessage>
 
 <VV_Bullet_Lava.label>총상</VV_Bullet_Lava.label>
+
+<VV_GiantNeedlePierce.label>거대 바늘</VV_GiantNeedlePierce.label>
+<VV_GiantNeedlePierce.deathMessage>{0}(이)가 고대 엘텍스 바늘에 꿰뚫려 죽었습니다.</VV_GiantNeedlePierce.deathMessage>
+
+<VV_FairyBlast.label>요정 폭발</VV_FairyBlast.label>
+<VV_FairyBlast.deathMessage>{0}(이)가 사출된 요정 비비의 폭발에 휘말려 죽었습니다.</VV_FairyBlast.deathMessage>
+
 </LanguageData>

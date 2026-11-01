@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+<VV_ApocryphaFairyBond.label>요정 비비 결속</VV_ApocryphaFairyBond.label>
+<VV_ApocryphaFairyBond.description>옛 제국의 마지막 여왕에게 귀속된 수십억 요정 비비가 보호장을 이루어 모든 공격을 대신 받아냅니다.</VV_ApocryphaFairyBond.description>
+
+<VV_ApocryphaStuckNeedle.label>고대 엘텍스 바늘</VV_ApocryphaStuckNeedle.label>
+<VV_ApocryphaStuckNeedle.description>몸에 꽂힌 고대 엘텍스 바늘입니다. 꽂힌 바늘이 많을수록 받는 피해가 커지며 세 개가 모두 꽂히면 한동안 비틀거리다 바늘을 뽑아냅니다.</VV_ApocryphaStuckNeedle.description>
+
+<VV_FairyInterference.label>요정 간섭</VV_FairyInterference.label>
+<VV_FairyInterference.description>아스포델과 요정 비비들의 결속에 간섭해 끊어내어 요정 비비들을 해방시킬 수 있습니다.</VV_FairyInterference.description>
+<VV_FairyInterference.comps.0.messageOnDisappear>{PAWN_labelShort}의 요정 간섭이 사라졌습니다.</VV_FairyInterference.comps.0.messageOnDisappear>
+
+<VV_DoomBlight_Fear.label>멸망의 공포</VV_DoomBlight_Fear.label>
+<VV_DoomBlight_Fear.description>멸망꽃이 피워낸 환영 속에서 불타는 옛 둥지와 비명이 끊이지 않습니다. 고통에 쉽게 쓰러지고 정신이상에 빠지기 쉬워집니다.</VV_DoomBlight_Fear.description>
+
+<VV_DoomBlight_Hunger.label>멸망의 허기</VV_DoomBlight_Hunger.label>
+<VV_DoomBlight_Hunger.description>모든 꽃이 시들고 꿀이 메말라 가던 제국의 마지막 날들을 몸소 겪는 듯한 환영에 시달립니다. 극심한 허기와 피로가 몰려옵니다.</VV_DoomBlight_Hunger.description>
+
+<VV_DoomBlight_Plague.label>멸망의 역병</VV_DoomBlight_Plague.label>
+<VV_DoomBlight_Plague.description>어떠한 약도 듣지 않던 옛 제국의 역병이 환각을 타고 몸을 잠식합니다. 질병과 부상에서 더디게 회복하고 더 큰 피해를 받습니다.</VV_DoomBlight_Plague.description>
+
+</LanguageData>

@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <!-- 〈황금빛 꽃안개〉: 평화 기간부터 엔딩까지 앵커 맵에 내려앉고, 엔딩 이후에는 날씨 변경 의식으로 부를 수 있다.
-       안개처럼 원거리 명중률을 낮추고(VV_GoldenBloomMist), 걸려 있는 동안 맵의 모든 마법 식물의 마나가 무제한이 된다(GameCondition_GoldenBloom).
-       화면이 누렇게 뜨지 않도록 하늘빛은 맑은 날에 아주 옅은 온기만 더하고, 금빛은 안개층(WeatherOverlay_GoldenMist)과 꽃잎에만 둔다.
-       overlay 색의 밝기는 안개층 농도로도 쓰인다(낮 1, 해 질 녘 0.85, 밤 0.55~0.6 → 밤에는 안개가 옅어진다). -->
   <WeatherDef>
     <defName>VV_GoldenBloomMist</defName>
-    <label>golden bloom mist</label>
-    <description>Everflower petals drift through golden mist, reducing ranged accuracy.</description>
+    <label>golden pollen mist</label>
+    <description>A mist of drifting golden pollen and everflower petals. Ranged accuracy is slightly reduced, and all arcane plants gain unlimited mana.</description>
     <isBad>false</isBad>
     <canOccurAsRandomForcedEvent>false</canOccurAsRandomForcedEvent>
     <repeatable>true</repeatable>
     <windSpeedFactor>0.7</windSpeedFactor>
-    <accuracyMultiplier>0.5</accuracyMultiplier>
+    <accuracyMultiplier>0.75</accuracyMultiplier>
     <favorability>Good</favorability>
     <perceivePriority>1</perceivePriority>
     <ambientSounds>
@@ -51,11 +47,12 @@
   <GameConditionDef>
     <defName>VV_GoldenBloom</defName>
     <conditionClass>VVRace.GameCondition_GoldenBloom</conditionClass>
-    <label>golden bloom mist</label>
-    <description>The everflower's golden mist covers the area, reducing ranged accuracy and granting unlimited mana to all arcane plants.</description>
+    <label>golden pollen mist</label>
+    <description>The everflower's golden mist covers the area. Ranged accuracy is slightly reduced, but all arcane plants gain unlimited mana.</description>
     <weatherDef>VV_GoldenBloomMist</weatherDef>
     <natural>false</natural>
     <displayOnUI>true</displayOnUI>
+    
     <!-- 엔딩 보상이므로 시나리오의 영구 컨디션으로 고를 수 없게 한다(엔딩 퀘스트는 GameCondition.Permanent로 직접 영구화한다). -->
     <canBePermanent>false</canBePermanent>
     <showPermanentInTooltip>false</showPermanentInTooltip>

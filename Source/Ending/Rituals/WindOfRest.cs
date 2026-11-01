@@ -200,10 +200,7 @@ namespace VVRace
             if (_instabilityRemoved + _scariaRemoved + _hornetsDissolved > 0)
             {
                 Messages.Message(
-                    LocalizeString_EndingQueen.VV_Message_WindOfRestResult.Translate(
-                        _instabilityRemoved.Named("INSTABILITY"),
-                        _scariaRemoved.Named("SCARIA"),
-                        _hornetsDissolved.Named("HORNETS")),
+                    LocalizeString_EndingQueen.VV_Message_WindOfRestResult.Translate(),
                     MessageTypeDefOf.PositiveEvent);
             }
             else

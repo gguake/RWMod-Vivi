@@ -63,8 +63,8 @@
 
   <ThingDef ParentName="AnimalThingBase">
     <defName>VV_Apocrypha</defName>
-    <label>Asphodel, the Crumbled Queen</label>
-    <description>The last queen of the old vivi empire and the progenitor of all titanic hornets.\n\nTo save her scaria-infected subjects, she transformed 1,440,000,000 of them into fairy vivis and bound them to herself. Unable to bear them all, she lost her mind and became a monster.\n\nShe still seeks the everflower she lost.</description>
+    <label>Asphodel</label>
+    <description>The last queen of the ancient vivi empire, and its destroyer.\n\nWhen the empire stood on the brink of ruin, the queen performed a grand ritual to save her billions of subjects, turning every vivi in the empire into a fairy at once and binding them all to herself. But unable to bear their weight, she lost her mind and became a monster, and the emptied empire fell in an instant.\n\nThe vivis who survived the catastrophe erased every record of the queen and her ritual so that no one could ever repeat it. Yet even now, countless ages later, the maddened queen has found no rest; she drifts through subspace, searching only for the everflower that lingers in her memory.\n\nThe fairy vivis bound to the fallen queen remember her final kindness. They are her last guardians, and at the same time, her seal.</description>
     <drawOffscreen>true</drawOffscreen>
     <!-- 바닐라 동물 분류(Animals)에서 뺀다: 이념의 숭배 동물 후보(PreceptWorker_Animal)가 이 분류로 동물을 고른다. -->
     <thingCategories Inherit="False" />
@@ -229,7 +229,7 @@
   <!-- 처치된 아포크리파의 소멸 연출(시체 대신). 저장 가능한 시퀀서이며 VV_Dissolve 셰이더로 직접 그린다. -->
   <ThingDef ParentName="EtherealThingBase">
     <defName>VV_DyingApocrypha</defName>
-    <label>crumbling Asphodel</label>
+    <label>Asphodel</label>
     <thingClass>VVRace.DyingApocrypha</thingClass>
     <tickerType>Normal</tickerType>
     <drawerType>RealtimeOnly</drawerType>
@@ -242,7 +242,7 @@
        저장 가능한 시퀀서이며 VV_Manifest 셰이더로 직접 그린다. 형체가 영원꽃에서 멀리 날아가므로 화면 밖에서도 그린다. -->
   <ThingDef ParentName="EtherealThingBase">
     <defName>VV_ApocryphaManifestation</defName>
-    <label>manifesting Asphodel</label>
+    <label>???</label>
     <thingClass>VVRace.ApocryphaManifestation</thingClass>
     <tickerType>Normal</tickerType>
     <drawerType>RealtimeOnly</drawerType>
@@ -256,7 +256,7 @@
        발사·귀환 궤적은 엘텍스 바늘과 같은 RPEF 궤적(점은 코드에서 직접 남긴다)으로 그린다. -->
   <ThingDef ParentName="EtherealThingBase">
     <defName>VV_ApocryphaNeedle</defName>
-    <label>giant eltex needle</label>
+    <label>ancient eltex needle</label>
     <thingClass>VVRace.ApocryphaNeedle</thingClass>
     <tickerType>Normal</tickerType>
     <drawerType>RealtimeOnly</drawerType>
@@ -290,7 +290,7 @@
     <label>giant needle</label>
     <workerClass>DamageWorker_Stab</workerClass>
     <externalViolence>true</externalViolence>
-    <deathMessage>{0} was skewered by a giant eltex needle.</deathMessage>
+    <deathMessage>{0} was skewered by an ancient eltex needle.</deathMessage>
     <hediff>Stab</hediff>
     <hediffSolid>Crack</hediffSolid>
     <impactSoundType>Slice</impactSoundType>

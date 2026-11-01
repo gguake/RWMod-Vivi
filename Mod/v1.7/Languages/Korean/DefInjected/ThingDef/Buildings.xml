@@ -21,4 +21,11 @@
 <VV_AutoExtractor.comps.CompRefuelable.fuelLabel>정제되지 않은 비비 꿀</VV_AutoExtractor.comps.CompRefuelable.fuelLabel>
 <VV_AutoExtractor.comps.CompRefuelable.fuelGizmoLabel>비비 꿀</VV_AutoExtractor.comps.CompRefuelable.fuelGizmoLabel>
 
+
+<VV_DreamumAltar.label>영원꽃 제단</VV_DreamumAltar.label>
+<VV_DreamumAltar.description>고대 비비 제국의 설계로 복원한 제단입니다. 호박 코어와 마나 회로가 영원꽃의 성장을 돕습니다.\n\n조율 4단계 이상의 영원꽃을 안치할 수 있으며, 한번 안치하면 옮길 수 없습니다. 제단은 공격으로 파괴되지 않으며 지역마다 하나만 건설할 수 있습니다.</VV_DreamumAltar.description>
+
+<VV_AncientAmberCore.label>고대 호박 코어</VV_AncientAmberCore.label>
+<VV_AncientAmberCore.description>옛 비비 제국의 영원꽃 제단에 쓰이던 호박 결정입니다. 제국이 멸망한 뒤 남은 코어는 비비 연방이 보관하고 있습니다.\n\n비비 연방의 의뢰 보상으로 얻을 수 있습니다.</VV_AncientAmberCore.description>
+
 </LanguageData>

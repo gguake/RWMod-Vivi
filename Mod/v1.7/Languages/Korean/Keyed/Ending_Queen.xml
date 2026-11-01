@@ -5,7 +5,7 @@
 <VV_Inspector_SkyShieldRemaining>하늘 방패: {0} 남음</VV_Inspector_SkyShieldRemaining>
 
 <!-- 안식의 바람 -->
-<VV_Message_WindOfRestResult>안식의 바람이 지나갔습니다. 유전자 불안정 치유 {INSTABILITY}, 스카리아 치유 {SCARIA}, 흩어진 거대 말벌 {HORNETS}</VV_Message_WindOfRestResult>
+<VV_Message_WindOfRestResult>안식의 바람이 지나갔습니다.</VV_Message_WindOfRestResult>
 <VV_Message_WindOfRestNothing>안식의 바람이 지나갔습니다.</VV_Message_WindOfRestNothing>
 
 <!-- 꽃의 대지 -->

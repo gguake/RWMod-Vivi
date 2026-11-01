@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+<VV_Apocrypha.label>아스포델</VV_Apocrypha.label>
+<VV_Apocrypha.description>고대 비비 제국의 마지막 여왕이자 파멸자입니다.
+\n제국이 멸망의 위기에 놓여있던 시기에 여왕은 수십억 백성을 구하기 위해 제국의 모든 비비를 단번에 요정화해 자신에게 귀속시키는 대규모 의식을 치렀습니다. 하지만 그 무게를 견디지 못한 여왕은 자아를 잃고 괴물이 되었고 텅 비어버린 제국은 순식간에 멸망했습니다.
+\n끔찍한 파국에서 살아남은 비비들은 누구도 따라하지 못하도록 여왕과 의식에 대한 기록을 없애버렸습니다. 하지만 수많은 시간이 지난 지금까지도 안식을 취하지 못하고 미쳐버린 여왕은 아공간을 떠돌며 자신의 기억속에 남아있는 영원꽃만을 찾고 있습니다.
+\n이미 타락해버린 여왕에게 결속되어있는 요정 비비들은 여왕의 마지막 호의를 기억하고 지키는 마지막 수호자이자 동시에 봉인입니다.</VV_Apocrypha.description>
+<VV_Apocrypha.tools.left_claw.label>왼쪽 발톱</VV_Apocrypha.tools.left_claw.label>
+<VV_Apocrypha.tools.right_claw.label>오른쪽 발톱</VV_Apocrypha.tools.right_claw.label>
+<VV_Apocrypha.tools.jaw.label>턱</VV_Apocrypha.tools.jaw.label>
+
+<VV_DyingApocrypha.label>아스포델</VV_DyingApocrypha.label>
+<VV_ApocryphaManifestation.label>???</VV_ApocryphaManifestation.label>
+<VV_ApocryphaNeedle.label>고대 엘텍스 바늘</VV_ApocryphaNeedle.label>
+
+<VV_Projectile_FairyShell.label>요정 비비</VV_Projectile_FairyShell.label>
+<VV_Projectile_DoomSeed.label>멸망꽃 씨앗</VV_Projectile_DoomSeed.label>
+<VV_Projectile_FairySeed.label>요정꽃 씨앗</VV_Projectile_FairySeed.label>
+
+<VV_DoomFlower.label>멸망꽃</VV_DoomFlower.label>
+<VV_DoomFlower.description>아스포델의 일그러진 마나가 피워낸 저주받은 꽃입니다. 만개하면 지역 내 모든 정착민에게 치명적인 저주를 내리므로 파괴하는게 좋습니다.</VV_DoomFlower.description>
+
+<VV_FairyFlower.label>요정꽃</VV_FairyFlower.label>
+<VV_FairyFlower.description>아스포델에게 결속된 요정 비비들의 마나가 피워낸 꽃입니다. 비비가 요정꽃과 결속한뒤 아스포델에게 가까이 접근하면 두 마나가 충돌해 간섭이 발생하며, 아스포델에게 결속된 요정 비비를 대규모로 해방시킬 수 있습니다.</VV_FairyFlower.description>
+
+</LanguageData>

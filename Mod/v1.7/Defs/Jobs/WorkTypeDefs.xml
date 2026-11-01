@@ -5,7 +5,7 @@
     <labelShort>gather</labelShort>
     <pawnLabel>Gather</pawnLabel>
     <gerundLabel>gathering</gerundLabel>
-    <description>Harvest useful resources without completely depleting them. Low skill can damage the target.</description>
+    <description>Harvest useful resources from plants without completely depleting them. Low skill can damage the target.</description>
     <verb>Gather</verb>
     <naturalPriority>690</naturalPriority>
     <requireCapableColonist>true</requireCapableColonist>

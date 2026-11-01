@@ -1149,7 +1149,7 @@ namespace VVRace
             else
             {
                 Messages.Message(
-                    LocalizeString_EndingBoss.VV_Message_ApocryphaNeedleStuck.Translate(stuck, Props.unboundNeedleCount, IncomingDamageFactor.ToStringPercent()),
+                    LocalizeString_EndingBoss.VV_Message_ApocryphaNeedleStuck.Translate(),
                     Pawn,
                     MessageTypeDefOf.PositiveEvent);
             }
@@ -2177,11 +2177,6 @@ namespace VVRace
                 sb.Append(LocalizeString_EndingBoss.VV_Inspector_ApocryphaVitality.Translate(
                     Mathf.CeilToInt(_vitality).ToString("N0"),
                     Mathf.CeilToInt(MaxVitality).ToString("N0")));
-                sb.AppendLine();
-                sb.Append(LocalizeString_EndingBoss.VV_Inspector_ApocryphaStuckNeedles.Translate(
-                    StuckNeedleCount,
-                    Props.unboundNeedleCount,
-                    IncomingDamageFactor.ToStringPercent()));
             }
 
             if (IsChanneling)

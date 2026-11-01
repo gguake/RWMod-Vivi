@@ -3,15 +3,14 @@
 
 <!-- Inspector -->
 <VV_Inspector_ApocryphaPhase>State: {0}</VV_Inspector_ApocryphaPhase>
-<VV_Inspector_ApocryphaPhase_Bound>Shackles of Billions</VV_Inspector_ApocryphaPhase_Bound>
+<VV_Inspector_ApocryphaPhase_Bound>Burden of the Past</VV_Inspector_ApocryphaPhase_Bound>
 <VV_Inspector_ApocryphaPhase_Transforming>Breaking free</VV_Inspector_ApocryphaPhase_Transforming>
-<VV_Inspector_ApocryphaPhase_Unbound>Rampage of the Unbound Progenitor</VV_Inspector_ApocryphaPhase_Unbound>
-<VV_Inspector_ApocryphaPhase_Dying>Crumbling away</VV_Inspector_ApocryphaPhase_Dying>
+<VV_Inspector_ApocryphaPhase_Unbound>Rampage</VV_Inspector_ApocryphaPhase_Unbound>
+<VV_Inspector_ApocryphaPhase_Dying>Fading</VV_Inspector_ApocryphaPhase_Dying>
 <VV_Inspector_ApocryphaBond>Vivi fairy bond: {0}</VV_Inspector_ApocryphaBond>
 <VV_Inspector_ApocryphaVitality>Vitality: {0} / {1}</VV_Inspector_ApocryphaVitality>
 <VV_Inspector_ApocryphaShield>Mana shield: {0} / {1}</VV_Inspector_ApocryphaShield>
 <VV_Inspector_ApocryphaShieldBroken>Mana shield: shattered (restores in {0})</VV_Inspector_ApocryphaShieldBroken>
-<VV_Inspector_ApocryphaStuckNeedles>Lodged needles: {0} / {1} (damage taken {2})</VV_Inspector_ApocryphaStuckNeedles>
 <VV_Inspector_ApocryphaChanneling>Usurping the everflower: {0} ({1} left)</VV_Inspector_ApocryphaChanneling>
 
 <!-- Hediff -->
@@ -20,28 +19,28 @@
 
 <!-- Alert -->
 <VV_Alert_ApocryphaChanneling>Everflower usurpation {0}</VV_Alert_ApocryphaChanneling>
-<VV_Alert_ApocryphaChannelingDesc>Asphodel is draining the everflower's power ({PROGRESS}, {TIMELEFT} remaining).
-\nIf she drains it all, the final bloom fails.</VV_Alert_ApocryphaChannelingDesc>
+<VV_Alert_ApocryphaChannelingDesc>Asphodel is draining the everflower's mana ({PROGRESS}, {TIMELEFT} remaining).
+\nIf she drains all of it, the bloom ritual fails.</VV_Alert_ApocryphaChannelingDesc>
 
 <!-- Letter -->
-<VV_Letter_ApocryphaUnboundLabel>Rampage of the Unbound Progenitor</VV_Letter_ApocryphaUnboundLabel>
-<VV_Letter_ApocryphaUnbound>The last bond has broken. Asphodel reveals her titanic hornet form and charges toward the everflower.</VV_Letter_ApocryphaUnbound>
+<VV_Letter_ApocryphaUnboundLabel>Rampage</VV_Letter_ApocryphaUnboundLabel>
+<VV_Letter_ApocryphaUnbound>The last bond has broken. Revealing her titanic hornet form, Asphodel loses all reason and charges toward the everflower.</VV_Letter_ApocryphaUnbound>
 
 <!-- Message -->
-<VV_Message_ApocryphaBondReleased>A large number of vivi fairies bound to Asphodel have been freed. (Remaining bond: {COUNT})</VV_Message_ApocryphaBondReleased>
-<VV_Message_ApocryphaTransformStarted>The last bond breaks as Asphodel unleashes a shockwave.</VV_Message_ApocryphaTransformStarted>
+<VV_Message_ApocryphaBondReleased>A large number of fairy vivis bound to Asphodel have been freed.</VV_Message_ApocryphaBondReleased>
+<VV_Message_ApocryphaTransformStarted>As the last remaining fairy vivis are freed, Asphodel transforms into her true form.</VV_Message_ApocryphaTransformStarted>
 <VV_Message_ApocryphaChannelInterrupted>Asphodel's usurpation of the everflower was interrupted.</VV_Message_ApocryphaChannelInterrupted>
 <VV_Message_ApocryphaEscapedRoofCollapse>Asphodel teleported away from a roof collapse.</VV_Message_ApocryphaEscapedRoofCollapse>
 <VV_Message_ApocryphaShieldBroken>Asphodel's mana shield has shattered, stunning her.</VV_Message_ApocryphaShieldBroken>
 <VV_Message_ApocryphaShieldRestored>Asphodel's mana shield has been restored.</VV_Message_ApocryphaShieldRestored>
-<VV_Message_ApocryphaNeedleStuck>A giant needle lodged in Asphodel's carapace. ({0} / {1} lodged, damage taken {2})</VV_Message_ApocryphaNeedleStuck>
-<VV_Message_ApocryphaAllNeedlesStuck>All the giant needles have lodged in Asphodel, stunning her.</VV_Message_ApocryphaAllNeedlesStuck>
+<VV_Message_ApocryphaNeedleStuck>An ancient needle lodged in Asphodel's carapace.</VV_Message_ApocryphaNeedleStuck>
+<VV_Message_ApocryphaAllNeedlesStuck>All the ancient needles have lodged in Asphodel, stunning her.</VV_Message_ApocryphaAllNeedlesStuck>
 <VV_Message_ApocryphaNeedlesPulled>Asphodel tore the lodged needles out and scattered them across the ground.</VV_Message_ApocryphaNeedlesPulled>
-<VV_Message_ApocryphaNeedleActivated>A giant needle awakens and aims at {PAWN_labelShort}!</VV_Message_ApocryphaNeedleActivated>
+<VV_Message_ApocryphaNeedleActivated>An ancient needle activates and aims at {PAWN_labelShort}.</VV_Message_ApocryphaNeedleActivated>
 
 <!-- Float menu -->
-<VV_FloatMenu_ActivateApocryphaNeedle>Awaken giant eltex needle</VV_FloatMenu_ActivateApocryphaNeedle>
-<VV_FailReason_ApocryphaNeedleDormant>cannot be awakened yet</VV_FailReason_ApocryphaNeedleDormant>
+<VV_FloatMenu_ActivateApocryphaNeedle>Activate ancient eltex needle</VV_FloatMenu_ActivateApocryphaNeedle>
+<VV_FailReason_ApocryphaNeedleDormant>cannot be activated yet</VV_FailReason_ApocryphaNeedleDormant>
 
 <!-- Text mote -->
 <VV_TextMote_ApocryphaStunImmune>Stun immune</VV_TextMote_ApocryphaStunImmune>

@@ -13,8 +13,7 @@
 <VV_Message_FairyBondReleased>{PAWN_labelShort}(이)가 요정 비비들을 해방했습니다. 이 지역의 멸망꽃 저주가 모두 풀렸습니다.</VV_Message_FairyBondReleased>
 <VV_Message_DoomFlowerBloomed>멸망꽃이 만개하여 이 지역의 정착민에게 〈{BLIGHT}〉 저주가 내려졌습니다.</VV_Message_DoomFlowerBloomed>
 
-<!-- 엔딩 퀘스트: 멸망꽃 저주(역병) 툴팁 -->
-<VV_Hediff_BloodLossRecoveryFactor>혈액 손실 회복 속도</VV_Hediff_BloodLossRecoveryFactor>
+<!-- 엔딩 퀘스트: 헤디프 툴팁 -->
 <VV_Hediff_DoomBlightLevel>저주 단계: {0} / {1}</VV_Hediff_DoomBlightLevel>
 <VV_Hediff_FairyInterferenceRemaining>남은 시간: {0}</VV_Hediff_FairyInterferenceRemaining>
 
@@ -22,6 +21,6 @@
 <VV_Inspect_DoomFlowerBloomIn>만개까지: {0}</VV_Inspect_DoomFlowerBloomIn>
 <VV_Inspect_DoomFlowerHint>만개하면 저주를 내립니다.</VV_Inspect_DoomFlowerHint>
 <VV_Inspect_FairyFlowerFadeIn>시들기까지: {0}</VV_Inspect_FairyFlowerFadeIn>
-<VV_Inspect_FairyFlowerHint>비비와 결속할 수 있습니다.</VV_Inspect_FairyFlowerHint>
+<VV_Inspect_FairyFlowerHint>비비가 결속하면 요정 비비의 결속에 간섭할 수 있습니다.</VV_Inspect_FairyFlowerHint>
 
 </LanguageData>
