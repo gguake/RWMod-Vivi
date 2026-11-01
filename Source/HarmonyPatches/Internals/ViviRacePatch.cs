@@ -630,7 +630,6 @@ namespace VVRace.HarmonyPatches
             }
         }
 
-        // 클래식 공유 이념에는 비비 컬처가 배정되지 않게 한다.
         // noExpansionIdeo=true인 이념은 Ideology 없이 비비 팩션이 사용하므로 제외한다.
         private static void IdeoGenerator_GenerateClassicIdeo_Prefix(ref CultureDef culture, bool noExpansionIdeo)
         {

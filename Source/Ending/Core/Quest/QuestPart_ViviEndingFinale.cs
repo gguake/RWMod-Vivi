@@ -213,7 +213,6 @@ namespace VVRace
             return spawned;
         }
 
-        // 바닐라 공허 봉인 엔딩처럼 맵·캐러밴·이동 중인 플레이어 세력 폰이 모두 받는다. 기분이 없는 동물·기계체는 건너뛴다.
         private static void GiveVictoryMemory()
         {
             foreach (var pawn in PawnsFinder.AllMapsCaravansAndTravellingTransporters_Alive_OfPlayerFaction)

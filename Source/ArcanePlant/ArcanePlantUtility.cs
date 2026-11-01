@@ -49,7 +49,6 @@ namespace VVRace
 
             var arcanePlantPot = map.GetComponent<ArcanePlantMapComponent>()?.GetArcanePlantPot(cell);
 
-            // 파종·옮겨심기·무작위 성장·순간이동 모두 이 검사를 거친다. 제단 중앙에는 영원꽃 하나만 허용한다.
             if (arcanePlantPot is Building_DreamumAltar altar)
             {
                 if (def != VVThingDefOf.VV_Everflower || cell != altar.Position)
@@ -70,7 +69,6 @@ namespace VVRace
                 if (thing == currentThing || thing == arcanePlantPot) { continue; }
 
                 // 제단 틀은 발판의 식물을 해체하므로 청사진·틀 위에는 식물을 놓지 못하게 한다.
-                // 영원꽃은 제단 완공 후 순간이동으로 안치한다.
                 if ((thing.def.IsBlueprint || thing.def.IsFrame) && thing.def.entityDefToBuild is ThingDef builtDef
                     && builtDef.thingClass != null && typeof(Building_DreamumAltar).IsAssignableFrom(builtDef.thingClass))
                 {

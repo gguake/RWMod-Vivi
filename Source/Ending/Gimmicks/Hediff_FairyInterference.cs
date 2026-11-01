@@ -18,7 +18,6 @@ namespace VVRace
         [Unsaved]
         private Pawn _boss;
 
-        // 남은 시간은 라벨 대신 툴팁에 표시한다.
         public override string TipStringExtra
         {
             get

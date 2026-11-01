@@ -4,7 +4,6 @@ using Verse;
 
 namespace VVRace
 {
-    // 슬레이트 입력: anchor(영원꽃), map(앵커 맵), quality(의식 품질 0~10), resonator(동화 중인 공명자, 없을 수 있음).
     // 같은 신호를 받는 부품은 상태 → 처리 → 편지 → QuestEnd 순서로 추가한다. 퀘스트가 먼저 끝나면 뒤 부품은 신호를 받지 못한다.
     // ViviEndingQuest.GenerateQuest는 마지막 AnchorLost 실패 QuestEnd의 존재로 생성 완료를 확인한다.
     public class QuestNode_Root_ViviBloom : QuestNode
@@ -60,7 +59,6 @@ namespace VVRace
             var anchorLost = QuestGenUtility.HardcodedSignalWithQuestID(ViviEndingSignals.AnchorLost);
             var resonatorFallen = QuestGenUtility.HardcodedSignalWithQuestID(ViviEndingSignals.ResonatorFallen);
 
-            // 상태 부품이 모든 신호를 가장 먼저 받도록 첫 부품으로 둔다.
             quest.AddPart(new QuestPart_ViviEndingState()
             {
                 anchor = anchor,

@@ -13,7 +13,6 @@ namespace VVRace
         private Sustainer _soundPlaying;
         public override Sustainer SoundPlaying => _soundPlaying;
 
-        // 이 단계까지는 무음으로 진행하고 다음 단계부터 의식 소리를 재생한다.
         protected virtual int LastSilentStageIndex => 0;
 
         public override string CanStartRitualNow(TargetInfo target, Precept_Ritual ritual, Pawn selectedPawn = null, Dictionary<string, Pawn> forcedForRole = null)

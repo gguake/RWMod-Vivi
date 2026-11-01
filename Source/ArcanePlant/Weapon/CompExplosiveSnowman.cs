@@ -33,7 +33,6 @@ namespace VVRace
 
         public override void CompTick()
         {
-            // 심지가 끝날 때는 발사자 명의로 폭발시킨다. 그전에 공격받아 터지면 바닐라처럼 공격자를 가해자로 삼는다.
             if (_launcher != null && wickStarted && wickTicksLeft <= 1)
             {
                 DetonateByLauncher();

@@ -5,7 +5,6 @@ using Verse;
 namespace VVRace
 {
     // FogOverlay는 안개 텍스처 두 장을 곱해 낮에 잘 보이지 않으므로 _ColorScale로 밝기를 높인다.
-    // 화면이 누렇게 뜨지 않도록 흰빛에 가까운 금빛을 사용한다. 맑은 날 대비 황색 지수 증가는 5 이내로 맞춘다.
     // 해 질 녘과 밤에는 조명으로 안개가 칙칙해지므로 하늘빛 밝기의 제곱에 비례해 옅게 만든다.
     [StaticConstructorOnStartup]
     public class WeatherOverlay_GoldenMist : WeatherOverlayDualPanner
@@ -31,7 +30,6 @@ namespace VVRace
             worldPanDir2 = new Vector2(1f, -0.3f).normalized;
         }
 
-        // color는 하늘빛을 반영한 오버레이 색이며 a는 날씨 전환 비율이다.
         public override void SetOverlayColor(Color color)
         {
             var brightness = Mathf.Max(color.r, Mathf.Max(color.g, color.b));
@@ -39,7 +37,7 @@ namespace VVRace
         }
     }
 
-    // 날씨 전환 비율(lerpFactor)에 맞춰 꽃잎 수를 조절한다. 렌더링은 플렉이 담당하므로 이 오버레이는 직접 그리지 않는다.
+    // 렌더링은 플렉이 담당하므로 이 오버레이는 직접 그리지 않는다.
     public class WeatherOverlay_GoldenPetals : SkyOverlay
     {
         private const float PetalsPerCellPerTick = 0.00014f;

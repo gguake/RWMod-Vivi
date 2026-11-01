@@ -104,7 +104,6 @@ namespace VVRace
             }
             _waveHalfSize = farthest * WaveCoverMargin / WaveFrontReach;
 
-            // 파면이 착지 거리에서 선행 거리를 뺀 지점에 도달하는 시간을 역산해 착지 틱을 정한다.
             var front = Vector3.Distance(_budPos, _landPos) - PushLead;
             var u = Mathf.Clamp01((front / _waveHalfSize - WaveFrontStart) / (WaveFrontReach - WaveFrontStart));
             var t = 1f - Mathf.Pow(1f - u, 1f / 3f);
@@ -173,7 +172,6 @@ namespace VVRace
             }
             else
             {
-                // 실제 보스는 같은 틱에 퀘스트가 스폰한다. 퀘스트가 먼저 실행됐으면 이 연출은 이미 제거된 상태다.
                 Land();
                 Destroy();
             }

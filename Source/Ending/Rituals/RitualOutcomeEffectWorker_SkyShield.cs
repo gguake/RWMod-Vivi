@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using System.Collections.Generic;
 using UnityEngine;
 using Verse;
@@ -33,7 +33,6 @@ namespace VVRace
             everflower.Notify_RitualComplete(quality);
         }
 
-        // 이미 펼쳐진 하늘 방패가 있으면 새로 만들지 않고 남은 시간이 더 긴 쪽으로 늘린다.
         public void RaiseShield(ArcanePlant_Everflower everflower, int durationTicks)
         {
             var map = everflower.Map;

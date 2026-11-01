@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using UnityEngine;
 using Verse;
 
@@ -16,8 +16,6 @@ namespace VVRace
         }
     }
 
-    // 〈마나 보호막〉: 보호막 반경 안 환경 마나의 합계가 충분하면 그만큼을 끌어모아 저각 보호막을 세운다.
-    // 소모량은 각 칸의 마나에 비례해 나눠 빼므로 마나가 많은 칸일수록 많이 줄어든다.
     public class CompAbilityEffect_QueenManaBarrier : CompAbilityEffect
     {
         public new CompProperties_AbilityQueenManaBarrier Props => (CompProperties_AbilityQueenManaBarrier)props;

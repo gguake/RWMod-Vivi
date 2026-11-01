@@ -42,7 +42,6 @@ namespace VVRace
                 }
             }
 
-            // 장기전에서도 경비 말벌이 먹이를 찾아 이탈하거나 굶어 죽지 않게 한다.
             LordToil_ApocryphaEscort.KeepFed(lord, FeedIntervalTicks);
         }
 

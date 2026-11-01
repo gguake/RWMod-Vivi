@@ -18,7 +18,6 @@ namespace VVRace
             public int returnTick;
             public Map map;
 
-            // 〈생명 공명〉으로 영원꽃 안에서 되살아나는 여왕이다. 귀환 위치와 연출이 다르다.
             public bool rebirth;
 
             public void ExposeData()
@@ -238,7 +237,6 @@ namespace VVRace
                 TickHeldPawns(now);
             }
 
-            // 보관된 공명자는 틱을 처리하지 않으므로 여기서 동화 상태 판정과 연출을 처리한다.
             if (_assimilated != null)
             {
                 try
@@ -448,7 +446,6 @@ namespace VVRace
                 MessageTypeDefOf.NegativeEvent);
         }
 
-        // 도착 조건은 TickMissiveArrival에서 검사하므로 여기서는 기존 밀서·본편 퀘스트 유무만 확인한다.
         public bool StartMissiveQuest(ArcanePlant_Everflower everflower)
         {
             if (_missiveQuest != null || _bloomQuest != null) { return false; }

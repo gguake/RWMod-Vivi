@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
 using Verse;
@@ -6,8 +6,6 @@ using Verse.AI.Group;
 
 namespace VVRace
 {
-    // 선택 항목이 있는 영원꽃 의식(날씨 변화, 꽃의 대지)이 전용 의식 창을 만들 때 바닐라 Precept_Ritual.GetRitualBeginWindow와
-    // 같은 안내 문구·참여자 필터를 쓰도록 공통 부분을 모은다.
     public static class EverflowerRitualDialogUtility
     {
         public static void NotifyCannotStart(Precept_Ritual ritual, TargetInfo target, Pawn selectedPawn, Dictionary<string, Pawn> forcedForRole)

@@ -79,7 +79,6 @@ namespace VVRace
             }
         }
 
-        // 보스가 지정한 적으로 호위를 즉시 전환한다. 다른 적과 교전 중인 말벌도 포함한다.
         // 근접 공격은 대상이 다르면 기존 작업을 이어가지 않으므로 재평가 시 새 적을 선택한다.
         // 도달 불가한 적은 작업 지급기도 선택하지 않으므로 재평가 없이 false를 반환한다.
         internal static bool TryEngageFocus(Pawn pawn, Thing focus)

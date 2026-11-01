@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,6 @@ using Verse;
 
 namespace VVRace
 {
-    // 〈생명 공명〉: 대관식을 마친 여왕은 앵커 영원꽃이 남아 있는 한 죽어도 영원꽃 앞에서 다시 깨어난다.
     // 되살린 여왕은 기존 귀환 대기(HeldPawn)에 맡겨 저장·게임 오버 예외 처리를 그대로 쓴다.
     public partial class ViviEndingQuest
     {

@@ -26,7 +26,6 @@ namespace VVRace
         public float TargetPriorityFactor => 0.5f;
 
         // 호위 말벌과 보스가 꽃을 공격하지 않도록 플레이어·우호 세력의 검색자에게만 위협으로 취급한다.
-        // 검색자가 null인 드롭 위치 계산 등에서는 위협으로 취급하지 않는다.
         public bool ThreatDisabled(IAttackTargetSearcher disabledFor)
         {
             if (!Spawned) { return true; }
@@ -35,7 +34,6 @@ namespace VVRace
             if (searcherFaction == null || searcherFaction.HostileTo(Faction.OfPlayer)) { return true; }
 
             // 지붕 붕괴와 실내 폭발로 정착지를 스스로 포격하지 않도록 지붕 아래 꽃은 박격포류의 자동 조준에서 제외한다.
-            // 플레이어가 직접 지정한 공격은 허용한다.
             return Position.Roofed(Map) && (disabledFor.CurrentEffectiveVerb?.ProjectileFliesOverhead() ?? false);
         }
 

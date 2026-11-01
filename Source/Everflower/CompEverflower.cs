@@ -261,7 +261,6 @@ namespace VVRace
             {
                 if (level > 4)
                 {
-                    // 5·6단계는 레벨 곡선 밖이므로 경험치 비율을 생략하고 단계만 표시한다.
                     sb.AppendInNewLine(LocalizeString_EndingAltar.VV_Inspector_EverflowerAttunementLevelOnly.Translate(level.Named("LEVEL")));
                 }
                 else
@@ -526,7 +525,6 @@ namespace VVRace
                     map.edificeGrid.Register(Everflower);
                 }
 
-                // 안치 후에는 제단에서 옮길 수 없으므로 기존 순간이동 예약을 취소한다.
                 Everflower.Unreserve();
 
                 if (altar != previousAltar && !silent)

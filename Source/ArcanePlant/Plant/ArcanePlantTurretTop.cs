@@ -46,7 +46,6 @@ namespace VVRace
                 {
                     flipped = !flipped;
 
-                    // 기반 그래픽이 실제로 반전되는 def만 맵 메시를 다시 생성한다.
                     if (parent.ArcanePlantTurretExtension?.turretTopBaseFlippable == true && parent.Spawned)
                     {
                         parent.DirtyMapMesh(parent.Map);

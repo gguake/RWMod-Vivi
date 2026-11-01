@@ -16,7 +16,6 @@ namespace VVRace
         public bool enableViviMealContinuation = true;
         public float viviMealContinuationNutritionGap = 0.7f;
 
-        // 무작위 유전자에서 제외할 모드 유전자의 defName. 목록에 없는 유전자는 허용한다.
         public HashSet<string> disabledModGenes = new HashSet<string>();
 
         private bool _disableAllModGenesPending = true;

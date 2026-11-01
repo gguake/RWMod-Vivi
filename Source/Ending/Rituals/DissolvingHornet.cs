@@ -1,12 +1,10 @@
-using RimWorld;
+﻿using RimWorld;
 using System.Collections.Generic;
 using UnityEngine;
 using Verse;
 
 namespace VVRace
 {
-    // 〈안식의 바람〉에 닿은 거대 말벌의 몸이 바람이 부는 쪽 가장자리부터 가루가 되어 흩날리는 연출.
-    // 아포크리파 소멸에 쓴 VV_Dissolve 셰이더의 바람 쓸기 모드를 말벌 몸 텍스처에 적용한다.
     [StaticConstructorOnStartup]
     public class DissolvingHornet : Thing
     {

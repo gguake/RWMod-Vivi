@@ -29,7 +29,6 @@ namespace VVRace
 
         public override bool ShouldRemove => base.ShouldRemove || EndingFinished;
 
-        // 라벨은 저주 이름만 두고 단계는 툴팁에 표시한다.
         public override string TipStringExtra
         {
             get

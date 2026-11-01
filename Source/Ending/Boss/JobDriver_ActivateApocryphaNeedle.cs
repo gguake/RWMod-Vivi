@@ -4,7 +4,6 @@ using Verse.AI;
 
 namespace VVRace
 {
-    // 예약 없이 먼저 깨운 폰이 바늘을 사용한다. 나머지 작업은 바늘이 꽂힌 상태가 아니면 중단된다.
     public class JobDriver_ActivateApocryphaNeedle : JobDriver
     {
         private const TargetIndex NeedleIndex = TargetIndex.A;

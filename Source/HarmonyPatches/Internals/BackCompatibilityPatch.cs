@@ -15,7 +15,6 @@ namespace VVRace
             "Make_VV_UniformHelmet",
         };
 
-        // 구버전 HediffWithComps를 Hediff_ViviFairyFollow로 변환해야 하는 헤디프.
         private const string FairyBondHediffDefName = "VV_ViviFairyFollow";
 
         internal static void Patch(Harmony harmony)

@@ -44,7 +44,6 @@ namespace VVRace
         public int fairySeedEveryVolleys = 3;
         public int maxFairyFlowers = 2;
 
-        // 보호장 1회는 바닐라 초중량 보스 1기 분량으로 잡아, 4~5회 파괴가 1페이즈 전투량이 되게 한다.
         public float manaShieldMax = 1500f;
         public int shieldBreakStunTicks = 1500;
 
@@ -62,7 +61,6 @@ namespace VVRace
         public float needleHalfWidth = 1.5f;
         public float needleDamage = 80f;
         public float needleArmorPenetration = 0.8f;
-        // 길이 막혀 직선으로 돌파할 때 쏜 바늘은 길을 막는 벽·문·자연석에 이 배율만큼 큰 피해를 준다(피해 정의의 건물 배율 2와 곱해져 800).
         public float needleBreachDamageFactor = 5f;
 
         public IntRange approachIntervalTicks = new IntRange(9000, 13500);
@@ -166,7 +164,6 @@ namespace VVRace
         private const int PursuitInterruptIntervalTicks = 300;
         // 돌파 계획은 작업을 줄 때마다 갱신된다. 갱신이 끊기면(길이 열림·추격 등) 이 시간 뒤 바늘이 평소 대상으로 돌아간다.
         private const int BreachHoldTicks = 600;
-        // 막히기 직전 칸에 도착한 뒤에만 돌파 바늘을 쏜다.
         private const float BreachStandRadius = 2f;
 
         private static readonly List<Thing> _tmpTargets = new List<Thing>();
@@ -233,7 +230,6 @@ namespace VVRace
         public static float ThreatScale => Find.Storyteller?.difficulty?.threatScale ?? 1f;
         public float HitPointsDifficultyFactor => Mathf.Max(0.1f, Props.hitPointsFactorByThreatScale?.Evaluate(ThreatScale) ?? 1f);
 
-        // 꽃은 보스를 참조하지 않으므로 아포크리파 정의의 설정을 읽는다.
         public static float DoomBloomTimeFactor
         {
             get
@@ -375,7 +371,6 @@ namespace VVRace
             SyncStuckNeedleHediff();
         }
 
-        // 〈꽂힌 거대 바늘〉은 꽂힌 바늘 수만큼 겹치고(최대 3), 바늘이 뽑히거나 사라지면 함께 줄어든다.
         private void SyncStuckNeedleHediff()
         {
             var count = _phase == ApocryphaPhase.Unbound ? StuckNeedleCount : 0;
@@ -1013,8 +1008,6 @@ namespace VVRace
             }
         }
 
-        // 1페이즈에 찬탈 대상까지 길이 막혀 있으면 대상까지 그은 직선에서 막히기 직전 칸(standCell)을 찾아 돌파를 시작한다.
-        // 막힌 원인이 깊은 물·용암 같은 지형이나 부술 수 없는 건물이면 돌파하지 않고 평소처럼 맴돈다.
         public bool TryStartBreach(Thing target, out IntVec3 standCell)
         {
             standCell = IntVec3.Invalid;
@@ -1196,7 +1189,6 @@ namespace VVRace
             return TryFindNeedleTarget(parent.Position, out cell);
         }
 
-        // origin은 거리·시야 판정의 기준 칸이다. 1페이즈는 보스, 2페이즈는 바늘 위치를 사용한다.
         private bool TryFindNeedleTarget(IntVec3 origin, out IntVec3 cell)
         {
             cell = IntVec3.Invalid;
@@ -1524,7 +1516,6 @@ namespace VVRace
             if (_phase == ApocryphaPhase.Transforming || _phase == ApocryphaPhase.Dying) { return; }
 
             // 피해를 흡수하면 바닐라 기절 처리가 생략되므로 허용된 마나 파동 기절은 직접 적용한다.
-            // 그 밖의 기절 피해는 흡수하고 면역 표시만 출력한다.
             if (damageDef == DamageDefOf.Stun || damageDef == DamageDefOf.NerveStun)
             {
                 var stunTicks = damageDef.constantStunDurationTicks ?? Mathf.RoundToInt(dinfo.Amount * StunHandler.StunDurationTicksPerDamage);
@@ -1633,7 +1624,6 @@ namespace VVRace
             Messages.Message(LocalizeString_EndingBoss.VV_Message_ApocryphaShieldRestored.Translate(), Pawn, MessageTypeDefOf.NeutralEvent);
         }
 
-        // ApocryphaPatch의 StunFor 접두 패치가 이 플래그를 검사해 기믹 기절만 허용한다.
         private void GimmickStun(int ticks, Thing instigator)
         {
             ApplyingGimmickStun = true;
@@ -1722,7 +1712,6 @@ namespace VVRace
 
             if (parent.Spawned && Pawn.CurJobDef == ApocryphaJobDefOf.VV_ApocryphaChannel)
             {
-                // 진행도와 메시지 정리는 작업 종료 알림인 Notify_ChannelJobEnded에서 처리한다.
                 Pawn.jobs.EndCurrentJob(JobCondition.InterruptForced);
             }
 
@@ -1892,7 +1881,6 @@ namespace VVRace
             ApocryphaEffecterDefOf.VV_Effecter_ApocryphaSteal.Spawn(effectCell, map).Cleanup();
             ApocryphaUtility.ShakeCamera(map, 2f);
 
-            // 실제 영원꽃과 보스는 즉시 제거하고 찬탈 시퀀서가 이후 모습을 그린다.
             // 제거 전의 그래픽과 위치를 보존하도록 시퀀서를 먼저 생성한다.
             var stolen = (DyingApocrypha)ThingMaker.MakeThing(ApocryphaThingDefOf.VV_DyingApocrypha);
             stolen.InitStolen(Pawn, everflower);

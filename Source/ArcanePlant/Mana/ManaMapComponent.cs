@@ -37,13 +37,11 @@ namespace VVRace
         private List<IntVec3> _manaVeins = new List<IntVec3>();
         public IReadOnlyList<IntVec3> ManaVeins => _manaVeins;
 
-        // 안치된 5·6단계 영원꽃은 제단 발판에 마나를 방출한다.
-        // 불러올 때 꽃이 제단보다 먼저 스폰되므로 이 상태는 저장하지 않고 FinalizeInit과 250틱 간격으로 재계산한다.
-        // 레벨이나 안치 상태가 바뀌면 CompEverflower가 즉시 갱신을 요청한다.
         public const float EverflowerAltarManaPerDayLevel5 = 6000f;
         public const float EverflowerAltarManaPerDayLevel6 = 12000f;
         public const int EverflowerAltarEmitRadius = 2;
 
+        // 불러올 때 꽃이 제단보다 먼저 스폰되므로 제단 마나 상태는 저장하지 않고 재계산한다.
         private float _altarManaPerDay;
         private IntVec3 _altarCenter = IntVec3.Invalid;
 
@@ -246,7 +244,6 @@ namespace VVRace
         }
 
         // 여러 영원꽃이 값을 덮어쓰지 않도록 맵 전체를 조사해 제단 상태를 계산한다.
-        // CompEverflower는 레벨·안치 상태나 스폰 여부가 바뀔 때 재계산만 요청한다.
         public void RefreshEverflowerAltarState()
         {
             var center = IntVec3.Invalid;

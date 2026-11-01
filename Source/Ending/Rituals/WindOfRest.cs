@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -6,7 +6,6 @@ using Verse;
 
 namespace VVRace
 {
-    // 〈안식의 바람〉: 영원꽃에서 퍼지는 바람의 파면이 맵 끝까지 넓어지며 닿은 폰을 차례로 정화한다.
     // 파면이 진행되는 동안 저장·불러오기가 가능하도록 처리한 폰을 기록해 둔다.
     public class WindOfRest : Thing
     {
@@ -240,7 +239,6 @@ namespace VVRace
             return removed;
         }
 
-        // 스카리아와 공생하는 거대 말벌은 스카리아가 걷히면 몸이 가루가 되어 흩어지고 날개만 남는다.
         public static void DissolveHornet(Pawn hornet, Vector3 wind)
         {
             var map = hornet.Map;

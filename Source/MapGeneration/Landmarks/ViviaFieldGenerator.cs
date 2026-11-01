@@ -26,7 +26,6 @@ namespace VVRace
         // 가장자리 노이즈 때문에 꽃밭은 반경보다 조금 더 넓게 퍼질 수 있다.
         public static float FieldExtent(float radius) => radius * (1f + EdgeNoiseStrength);
 
-        // fullBloom: 모두 다 자란 꽃으로 만든다. clipToRadius: 가장자리 노이즈로 반경 밖까지 번지지 않게 한다(〈꽃의 대지〉 의식).
         public static int Generate(Map map, IntVec3 center, float radius, float density, int colorCount, bool fullBloom = false, bool clipToRadius = false)
         {
             var allColors = ArcanePlantUtility.ViviFlowerDefs.ToList();
@@ -75,7 +74,6 @@ namespace VVRace
             return flowerDef.CanEverPlantAt(c, map, canWipePlantsExceptTree: true);
         }
 
-        // 나무와 정착민이 심은 작물은 남긴다.
         public static bool IsReplaceableWildPlant(Plant plant)
         {
             return !plant.def.plant.IsTree && !plant.sown;

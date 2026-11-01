@@ -4,7 +4,6 @@ using Verse;
 namespace VVRace
 {
     // RockChunks(970)는 UsedRects를 무시하므로 TileMutatorDef.extraGenSteps로 그 뒤에 실행한다.
-    // 꽃밭과 군락 자리의 기존 야생 풀은 제거한다.
     public class GenStep_ViviLandmark : GenStep
     {
         public TileMutatorDef mutator;

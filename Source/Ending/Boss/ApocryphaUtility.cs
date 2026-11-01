@@ -36,8 +36,6 @@ namespace VVRace
                 out cell);
         }
 
-        // 경로가 있는 칸이 없으면, 1페이즈는 직선으로 바늘을 쏴 길을 열며 다가오므로 대상까지 직선으로 뚫을 수 있는 가장자리를 고른다.
-        // 직선으로 뚫을 수 있는 칸 → 안개 속에서 뚫을 수 있는 칸 → 아무 칸 → 안개 속 아무 칸 순서로, 같은 순위에서는 대상에 가까운 칸을 쓴다.
         public static bool TryFindBreachEntryCell(Map map, Thing target, out IntVec3 cell)
         {
             cell = IntVec3.Invalid;
@@ -71,7 +69,6 @@ namespace VVRace
             return target.Spawned && target.Map == map ? target.OccupiedRect() : CellRect.SingleCell(target.PositionHeld);
         }
 
-        // 대상 칸에 닿기 전까지 깊은 물·용암 같은 지형이나 부술 수 없는 건물이 없으면 직선으로 뚫을 수 있다.
         public static bool IsBreachableLine(Map map, IntVec3 from, CellRect targetRect)
         {
             foreach (var c in GenSight.PointsOnLineOfSight(from, targetRect.CenterCell))
@@ -91,7 +88,6 @@ namespace VVRace
             return edifice == null || !BlocksPath(edifice) || JobGiver_ApocryphaMain.CanSmash(edifice, null);
         }
 
-        // 보스가 지나갈 수 없게 막는 건물(벽·자연석·문). 모래주머니처럼 넘어갈 수 있는 건물은 제외한다.
         public static bool BlocksPath(Thing thing)
         {
             return thing is Building && (thing.def.passability == Traversability.Impassable || thing is Building_Door);

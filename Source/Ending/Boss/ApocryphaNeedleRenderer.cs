@@ -27,7 +27,6 @@ namespace VVRace
         private const float PlantedMarkerBloomSecs = 0.8f;
         private const float PlantedMarkerPulseSpeed = 2f;
 
-        // 원본·합성 스크립트: docs/art/apocrypha_stuck_needle/ (로컬 전용).
         private const string StuckTexPath = "VFX/VV_GiantNeedleStuck";
         private const string StuckGlowTexPath = "VFX/VV_GiantNeedleStuckGlow";
         private static readonly Vector2 StuckDrawSize = new Vector2(2.75f, NeedleDrawSize);
@@ -87,7 +86,6 @@ namespace VVRace
         // 셰이더 무늬 좌표의 float 정밀도를 유지하도록 1배속 기준 1시간마다 시간을 되감는다.
         private const int AgeWrapTicks = 216000;
 
-        // glow는 대기 시 0, 발사·귀환 시 1이다. 조준이 진행될수록 발광이 강해진다.
         public static void DrawNeedle(Vector3 pos, float angle, float alpha, float glow)
         {
             var rotation = Quaternion.AngleAxis(angle, Vector3.up);

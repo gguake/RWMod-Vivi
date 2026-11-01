@@ -101,7 +101,6 @@ namespace VVRace
             return map.listerThings.ThingsOfDef(flowerDef).Count + map.listerThings.ThingsOfDef(seedDef).Count;
         }
 
-        // targets에는 이번 사출에서 선택한 착탄 칸을 누적해 새 착탄 지점과의 간격을 확보한다.
         private static bool TryLaunchSeedTo(Pawn boss, ThingDef seedDef, List<IntVec3> targets)
         {
             if (!TryFindSeedTargetCell(boss, targets, out var cell)) { return false; }
@@ -112,7 +111,6 @@ namespace VVRace
             return true;
         }
 
-        // 목록이 짧으므로 화면 밖에서도 순회 비용이 작아 별도 가시성 검사를 하지 않는다.
         public static void DrawLinks(Pawn boss)
         {
             if (boss == null || !boss.Spawned) { return; }
@@ -309,7 +307,6 @@ namespace VVRace
 
         #region 씨앗 발사
 
-        // avoid는 이번 사출의 기존 착탄 칸이다. 새 칸은 여기서 MinVolleySeedSpacing 이상 떨어져야 한다.
         private static bool TryFindSeedTargetCell(Pawn boss, List<IntVec3> avoid, out IntVec3 result)
         {
             var map = boss.Map;

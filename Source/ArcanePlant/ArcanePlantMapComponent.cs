@@ -187,7 +187,6 @@ namespace VVRace
         }
 
         // 디스폰 없이 Position만 바꾸면 이전 칸의 사전 항목이 남으므로 직접 갱신한다.
-        // 이전 키가 남으면 지형 검사에서 엉뚱한 영원꽃이 포장되거나 새 식물을 심을 때 키가 중복된다.
         public void Notify_ArcanePlantMoved(ArcanePlant plant, IntVec3 oldCell)
         {
             if (_arcanePlants.TryGetValue(oldCell, out var existing) && existing == plant)

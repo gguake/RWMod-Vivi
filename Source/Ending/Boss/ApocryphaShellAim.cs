@@ -68,7 +68,6 @@ namespace VVRace
             _effecter.EffectTick(source, target);
         }
 
-        // 모트는 유지가 끊기면 스스로 사라지므로 이펙터만 정리한다.
         public void CleanupVisuals()
         {
             _effecter?.Cleanup();

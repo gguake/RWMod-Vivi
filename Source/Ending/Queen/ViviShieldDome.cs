@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using UnityEngine;
 using Verse;
 
@@ -14,7 +14,6 @@ namespace VVRace
     }
 
     // 바닐라 투사체 차단기는 부모의 세력으로 적대 판정을 하므로 플레이어 세력을 가질 수 있는 건물 범주로 만든다.
-    // 선택·파괴·해체할 수 없고 칸을 차지하지 않으며, 지속시간이 끝나거나 고정 대상이 사라지면 사라진다.
     [StaticConstructorOnStartup]
     public class ViviShieldDome : Building
     {

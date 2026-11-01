@@ -1,12 +1,6 @@
 #version 450
 
-// 아포크리파 2페이즈 전환: 1페이즈 몸(_MainTex)이 꿈틀거리며 2페이즈 몸(_MorphTex)으로 뒤바뀌는 기괴한 모핑.
-// - 살갗이 기어 다니듯 흐르는 왜곡과, 심장 박동에 맞춰 부풀었다 꺼지는 혹
-// - 몸 중심에서 바깥으로 들쭉날쭉 번지는 변이 전선. 전선 앞의 옛 몸에는 핏빛 혈관이 기어오르며 썩어 들어가고,
-//   전선에는 젖은 자홍빛 막이 박동하며, 전선 뒤에서는 새 몸이 기존 몸을 찢고 나온다
-// - 절정에서 가로로 찢기는 글리치와 새 몸의 색수차
-// 진행도는 _AgeSecs(전환 시작부터 경과한 시간(초)) / _Duration. 시작(0)과 끝(1)에서는 왜곡이 모두 0이 되어
-// 원래 1페이즈·2페이즈 그림과 정확히 이어진다. C#(PawnRenderSubWorker_ApocryphaGrow)이 _AgeSecs를 매 프레임 넣는다.
+// _AgeSecs는 PawnRenderSubWorker_ApocryphaGrow가 갱신한다. 전환 양 끝에서는 원본 그림과 이어지도록 왜곡을 없앤다.
 
 layout(location = 0) in vec4 vColor;
 layout(location = 1) in vec2 vUv;
@@ -66,14 +60,12 @@ void main()
     vec2 uv = vUv * u._MainTex_ST.zw + u._MainTex_ST.xy;
     float time = u._AgeSecs;
     float t = clamp(time / max(u._Duration, 0.001), 0.0, 1.0);
-    float env = sin(3.14159265 * t);                                        // 0 → 1 → 0
-    float beat = pow(0.5 + 0.5 * cos(6.2831853 * time * u._BeatRate), 8.0); // 박동 순간에 1
+    float env = sin(3.14159265 * t);
+    float beat = pow(0.5 + 0.5 * cos(6.2831853 * time * u._BeatRate), 8.0);
 
-    // 1) 살갗이 기어 다니는 흐름
     vec2 flow = vec2(fbm(uv * 3.2 + vec2(0.0, time * 0.9)), fbm(uv * 3.2 + vec2(time * 0.7, 4.3))) - 0.5;
     vec2 warp = flow * u._Warp * env * (1.0 + 0.5 * beat);
 
-    // 2) 박동에 맞춰 부푸는 혹(부푼 곳은 가운데를 끌어와 그려 확대되어 보인다)
     vec2 bulge = vec2(0.0);
     for (int i = 0; i < 4; i++)
     {
@@ -85,7 +77,6 @@ void main()
         bulge += dv * exp(-dot(dv, dv) / (rad * rad)) * swell * 0.6;
     }
 
-    // 3) 절정에서 가로로 찢기는 줄
     int row = int(floor(uv.y * 56.0));
     float g = hash(ivec2(row, int(floor(time * 15.0))));
     float tear = step(0.9, g) * (g - 0.9) * 10.0 * env * 0.04 * (hash(ivec2(row, 3)) * 2.0 - 1.0);
@@ -99,7 +90,6 @@ void main()
     newC.r = texture(_MorphTex, uvNew + vec2(ca, 0.0)).r;
     newC.b = texture(_MorphTex, uvNew - vec2(ca, 0.0)).b;
 
-    // 4) 변이 전선: 몸 중심에서 바깥으로 번진다(노이즈로 들쭉날쭉)
     float n = fbm(uv * 5.0 + 11.0);
     float radial = length((uv - vec2(0.5, 0.47)) * vec2(1.0, 1.15));
     float m = radial * 1.1 + n * 0.5;
@@ -107,7 +97,6 @@ void main()
     float reveal = 1.0 - smoothstep(front - 0.05, front + 0.05, m);
     float seam = 1.0 - abs(reveal * 2.0 - 1.0);
 
-    // 5) 전선 앞 옛 몸을 기어오르는 핏빛 혈관과 썩어 들어가는 빛깔
     float vn = fbm(uv * 9.0 + flow * 3.0 + 23.0);
     float vein = pow(1.0 - abs(vn * 2.0 - 1.0), 12.0);
     vein *= smoothstep(front + 0.45, front + 0.05, m) * (1.0 - reveal) * smoothstep(0.02, 0.2, t);
@@ -119,7 +108,6 @@ void main()
     float alpha = mix(oldC.a, newC.a, reveal);
     vec3 col = mix(oldCol, newCol, reveal);
 
-    // 6) 전선의 젖은 막(몸이 있는 곳에서만)
     float body = max(oldC.a, newC.a);
     float membrane = clamp(seam * body * (0.75 + 0.5 * beat), 0.0, 1.0);
     col = mix(col, u._MembraneColor.rgb * 1.3, membrane);

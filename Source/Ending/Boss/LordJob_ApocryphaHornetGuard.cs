@@ -129,7 +129,6 @@ namespace VVRace
         }
 
         // 탐색 반경과 공격 사거리를 합친 범위를 검사해 비싼 영역 BFS 전에 후보를 거른다.
-        // JobGiver_HornetBerserk보다 넓게 검사하므로 여기서 후보가 없으면 정식 탐색도 생략할 수 있다.
         public bool AnyPotentialTargetNear(Pawn searcher)
         {
             if (!BossActive || searcher.Map != _boss.Map) { return true; }

@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -6,8 +6,6 @@ using Verse;
 
 namespace VVRace
 {
-    // 〈꽃의 대지〉: 선택한 지점 반경 안의 땅을 기름진 토양으로 바꾸고 만개한 비비아 꽃밭을 만든다.
-    // 물(다리 아래 포함)·우주선 기반·지나갈 수 없는 지형·산 암석은 바꾸지 않으며, 바닥재와 돌 지형은 흙으로 덮는다.
     public static class FlowerLandUtility
     {
         private const float FieldDensity = 1f;
@@ -71,7 +69,6 @@ namespace VVRace
             return BloomViviaAround(map, center, radius);
         }
 
-        // 범위 안에 원래 자라던 비비아 꽃도 함께 만개시키고, 꽃밭의 비비아 꽃 수를 돌려준다.
         private static int BloomViviaAround(Map map, IntVec3 center, float radius)
         {
             var count = 0;

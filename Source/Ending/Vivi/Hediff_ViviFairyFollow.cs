@@ -10,7 +10,6 @@ namespace VVRace
         public List<StatDef> penaltyStatFactors;
     }
 
-    // 스탯·툴팁·라벨은 모두 CurStage를 읽으므로 단계 교체만으로 갱신된다.
     // 구버전 HediffWithComps는 불러올 때 BackCompatibilityPatch가 이 클래스로 변환한다.
     public class Hediff_ViviFairyFollow : HediffWithComps
     {

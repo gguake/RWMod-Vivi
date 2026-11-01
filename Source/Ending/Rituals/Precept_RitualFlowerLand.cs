@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +7,6 @@ using Verse;
 
 namespace VVRace
 {
-    // 〈꽃의 대지〉는 의식 창을 열기 전에 꽃밭을 만들 지점을 먼저 고른다. 고른 지점은 의식을 시작할 때 영원꽃에 저장하고
-    // 결과 워커가 꺼내 쓴다(날씨 변화 의식의 선택 날씨와 같은 방식).
     public class Precept_RitualFlowerLand : Precept_Ritual
     {
         private float Radius => (outcomeEffect?.def as RitualOutcomeEffectDef_FlowerLand)?.radius ?? 0f;
@@ -80,7 +78,6 @@ namespace VVRace
         }
     }
 
-    // 의식 창이 떠 있는 동안에도 고른 범위가 보이도록 맵에 범위를 그린다.
     public class Dialog_BeginRitual_FlowerLand : Dialog_BeginRitual
     {
         private readonly IntVec3 _cell;

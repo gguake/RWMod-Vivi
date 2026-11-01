@@ -14,7 +14,6 @@ namespace VVRace
 
         // 자동 생성되는 Frame_VV_DreamumAltar는 제단의 building 설정을 상속하지 않는다.
         // 틀이 파괴되면 KillFinalize가 재료의 25%만 남기고 forcedCostLeavings도 무시해 코어를 잃을 수 있다.
-        // 모든 def 로드 후 틀이 생성되면 공격으로 파괴되지 않고 습격 대상에서도 제외되도록 설정한다.
         static Building_DreamumAltar()
         {
             var frameBuilding = AltarDefOf.VV_DreamumAltar?.frameDef?.building;
@@ -25,7 +24,6 @@ namespace VVRace
             }
         }
 
-        // 동화 중인 공명자 보관함. 동면관처럼 욕구·나이·피해·지시 처리가 정지된다.
         private ThingOwner<Pawn> _resonatorHolder;
 
         public Building_DreamumAltar()
@@ -100,7 +98,6 @@ namespace VVRace
                 var map = Map;
                 var rect = this.OccupiedRect();
 
-                // 벽 너머에 배치되지 않도록 제단 남쪽 가장자리에서 걸어갈 수 있는 칸만 고른다.
                 var origin = new IntVec3(Position.x, 0, rect.minZ);
                 var traverseParms = TraverseParms.For(TraverseMode.PassDoors);
                 bool Reachable(IntVec3 c) => c.InBounds(map) && map.reachability.CanReach(origin, c, PathEndMode.OnCell, traverseParms);
@@ -169,7 +166,6 @@ namespace VVRace
             base.SpawnSetup(map, respawningAfterLoad);
 
             // 불러올 때 영원꽃이 제단보다 먼저 스폰되므로 제단에서도 꽃의 안치 캐시를 알림 없이 갱신한다.
-            // 식물이 있는 발판에는 제단을 건설할 수 없어 신규 완공 시에는 중앙에 꽃이 없으며, 완공 후 순간이동으로만 안치한다.
             EnshrinedEverflower?.EverflowerComp.RefreshEnshrinement(silent: true);
         }
 
@@ -244,9 +240,7 @@ namespace VVRace
             }
         }
 
-        // 안치된 영원꽃은 제단 가운데 한 칸뿐이라 고르기 어려우므로 제단을 선택해도 꽃의 기즈모(의식·개화 진행·마나 등)를 함께 보여 준다.
-        // 의식 기즈모는 꽃을 대상으로 만들어지므로 그대로 꽃에 적용된다. 해체(제단의 해체와 겹침)와
-        // 금지 토글(상호작용 허용, 제단의 설정처럼 보임)은 빼고, 꽃도 함께 선택돼 있으면 중복을 피한다.
+        // 중앙 한 칸의 영원꽃을 고르기 어려워 제단에서도 꽃의 기즈모를 표시한다.
         private IEnumerable<Gizmo> GetEnshrinedEverflowerGizmos()
         {
             var everflower = EnshrinedEverflower;

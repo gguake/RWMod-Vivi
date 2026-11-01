@@ -102,7 +102,6 @@ namespace VVRace
             return raw.Formatted(args);
         }
 
-        // 큰·작은 위협 외에 별도 분류인 심층 드릴 감염도 평화 기간과 보스전의 억제 대상에 포함한다.
         public static bool IsThreatCategory(IncidentCategoryDef category)
         {
             return category != null
@@ -127,7 +126,6 @@ namespace VVRace
             return VanishTitanicHornets(map, EffecterDefOf.Skip_EntryNoDelay, pawn => !(pawn.GetLord()?.LordJob is LordJob_ApocryphaEscort));
         }
 
-        // 아포크리파가 토벌되면 호위·꽃 경비·야생을 가리지 않고 플레이어 것이 아닌 거대 말벌이 모두 보스와 함께 사라진다.
         public static int VanishAllTitanicHornets(Map map)
         {
             return VanishTitanicHornets(map, ApocryphaEffecterDefOf.VV_Effecter_ApocryphaVanish ?? EffecterDefOf.Skip_EntryNoDelay, null);

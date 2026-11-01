@@ -1,11 +1,7 @@
 #version 450
 
-// 맵 전체로 퍼지는 충격파(아포크리파 2페이즈 전환, 멸망꽃 만개)를 텍스처 없이 수식으로 그린다.
-// 쿼드를 growthRate로 키우면 텍스처가 확대·압축되어 깨져 보이므로, 쿼드는 최종 크기로 고정하고
-// 파면 반지름을 _AgeSecs로 넓힌다. 모든 무늬를 픽셀마다 계산하므로 아무리 커져도 선명하다.
-// - 파면: 장면 캡처(_GrabDistortionBackground)를 바깥으로 밀어내 굴절시키고(채널별로 살짝 어긋나게),
-//   그 위에 빛나는 파면·뒤따르는 잔광·파면을 가로지르는 전기 줄기를 더한다.
-// - 굴절 폭은 쿼드 크기에 비례하도록 화면 미분으로 픽셀 단위로 바꾼다(확대/축소와 무관하게 같은 모양).
+// 쿼드는 최종 크기로 고정하고 _AgeSecs로 파면만 넓혀 텍스처 확대·압축을 피한다.
+// 굴절 폭은 쿼드 크기에 비례하도록 화면 미분으로 픽셀 단위로 바꾼다.
 // 플렉의 경우 Graphic_FleckPulse가 _AgeSecs·_RandomPerObject를 넣어 주고, 플렉 색과 페이드 투명도는 _Color로 전달한다.
 
 layout(location = 1) in vec2 vUv;
@@ -74,11 +70,9 @@ void main()
 
     float t = clamp(u._AgeSecs / max(u._Duration, 0.001), 0.0, 1.0);
     float ease = 1.0 - pow(1.0 - t, 3.0);
-    // _RandomPerObject는 플렉의 경우 생성 틱 + 위치 해시라 int 전체 범위(~±2e9)의 값이다. 그대로 노이즈 좌표에 더하면
-    // float 정밀도(1e8 근처에서 칸 간격 8~32)에 묻혀 픽셀마다 같은 값이 되므로, 비트를 정수 해시에 넣어 작은 범위(0~64)로 줄여 쓴다.
+    // 큰 위치 해시인 _RandomPerObject는 float 정밀도 손실을 피하도록 정수 해시로 0~64 범위에 줄인다.
     float seed = hash(ivec2(floatBitsToInt(u._RandomPerObject), 0x5bd1e995)) * 64.0;
 
-    // 파면: 처음엔 빠르게, 끝으로 갈수록 느려지며 퍼진다. 둘레를 따라 낮은 주파수로 일렁인다.
     vec2 dir = p / max(r, 1e-4);
     float front = mix(0.02, 0.96, ease) * (1.0 + 0.03 * (vnoise(dir * 2.5 + seed) - 0.5));
     float w = u._Width * (0.7 + 1.3 * ease);
@@ -94,13 +88,10 @@ void main()
     float wake = d < 0.0 ? exp(-(d * d) / (wakeLen * wakeLen)) : 0.0;
     float ahead = smoothstep(0.0, 3.0 * w, d) * halo;
 
-    // 파면을 따라 이동하는 밝기의 일렁임과 전기 줄기. 줄기는 노이즈 등고선인데, 노이즈를 둘레보다 반지름 방향으로
-    // 훨씬 빨리 변하게 해서 고리를 따라 뻗고 반지름 방향으로 꿈틀거리게 한다.
     float flicker = 0.75 + 0.5 * vnoise(dir * 7.0 + vec2(u._AgeSecs * 3.0, seed));
     float n = fbm(dir * (8.0 + 0.5 * d / w) + vec2(seed, u._AgeSecs * 2.5));
     float arcs = pow(1.0 - abs(2.0 * n - 1.0), 14.0) * exp(-(d * d) / (9.0 * w * w)) * u._ArcIntensity;
 
-    // 굴절: 파면 주변의 장면을 바깥으로 밀어내고(안쪽을 끌어와 그림), 채널마다 조금씩 다르게 어긋나게 한다.
     float bump = exp(-(d * d) / (4.0 * w * w)) + 0.35 * wake;
     float dispPx = u._Distortion * pxPerUnit * bump * fade;
     vec2 texSize = vec2(textureSize(_GrabDistortionBackground, 0));
@@ -116,8 +107,7 @@ void main()
               + u._FringeColor.rgb * ahead * 0.6;
     glow *= flicker * u._Brightness * fade * u._Color.rgb;
 
-    // 장면 캡처 뒤에 그려진 것(영혼 연결선 등)을 지우지 않도록, 굴절·빛이 있는 만큼만 덮고 나머지는 비친다.
-    // 뒤따르는 잔광 쪽 굴절은 약하므로 덮지 않고(넓은 원판 안의 연결선이 사라져 보임) 파면 띠만 덮는다.
+    // 캡처 이후에 그린 연결선이 사라지지 않도록 파면 띠와 빛이 있는 부분만 덮는다.
     float cover = clamp(exp(-(d * d) / (4.0 * w * w)) * fade * 3.0 + max(glow.r, max(glow.g, glow.b)), 0.0, 1.0);
     outColor = vec4(bg + glow, cover);
 }

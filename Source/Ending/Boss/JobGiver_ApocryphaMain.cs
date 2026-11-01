@@ -60,7 +60,6 @@ namespace VVRace
 
             if (target != null && GenTicks.TicksGame >= comp.NextApproachTick)
             {
-                // 찬탈 대상까지 길이 막혀 있으면 접근 주기를 쓰지 않고, 길이 열릴 때까지 직선으로 다가가 바늘로 길을 연다.
                 if (comp.TryStartBreach(target, out var breachCell))
                 {
                     return BreachJob(pawn, breachCell);
@@ -118,7 +117,6 @@ namespace VVRace
             return job;
         }
 
-        // 막히기 직전 칸까지 가서 기다리면 바늘이 길을 연다. 벽이 무너지면 바로 다음 칸을 고르도록 짧게 다시 검사한다.
         private static Job BreachJob(Pawn pawn, IntVec3 standCell)
         {
             if (pawn.Position.InHorDistOf(standCell, 1.5f))
@@ -133,7 +131,6 @@ namespace VVRace
             return job;
         }
 
-        // 공격자의 이동에 대응하도록 5초마다 접근 위치를 다시 고른다.
         private static Job PursueJob(IntVec3 cell)
         {
             var job = JobMaker.MakeJob(ApocryphaJobDefOf.VV_ApocryphaPursue, cell);
@@ -143,7 +140,6 @@ namespace VVRace
             return job;
         }
 
-        // 영원꽃 위에 올라서지 않도록 찬탈 대상의 둘레에서 채널링 거리 안의 칸을 고른다.
         // 제단의 대각 모서리는 중심에서 4.24칸으로 사거리 3.9칸 밖이다. 이를 제외하지 않으면 이동만 반복한다.
         private static IntVec3 EdgeCellToward(Pawn pawn, Thing target, float range)
         {

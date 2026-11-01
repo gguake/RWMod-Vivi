@@ -262,7 +262,6 @@ namespace VVRace
         }
 
         #region 보스가 부르는 API
-        // breach: 길이 막혀 직선으로 돌파할 때 쏘는 바늘이다. 길을 막는 건물에 큰 피해를 준다.
         public void StartAim(IntVec3 targetCell, int aimTicks, float? fanAngle = null, bool breach = false)
         {
             if (!Spawned || _boss == null || !_boss.Spawned) { return; }
@@ -912,7 +911,6 @@ namespace VVRace
             _tmpCellThings.Clear();
         }
 
-        // point에서 폭 방향으로 extentAcross, 길이 방향으로 extentAlong만큼 퍼진 대상이 촉의 이동 구간(from~to)에 걸치는지 판정한다.
         // 틱 사이의 중복 판정을 피하도록 띠 양 끝에서는 일부만 걸쳐도 허용하고 중간 구간에서는 중심이 포함돼야 한다.
         private bool OverlapsLane(Vector3 point, float extentAcross, float extentAlong, float from, float to)
         {

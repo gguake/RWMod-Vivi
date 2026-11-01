@@ -67,7 +67,6 @@ namespace VVRace
             return materials[1];
         }
 
-        // 셰이더와 같은 박동 곡선으로 박동 순간에 1이다. ageSecs는 전환 시작 후 경과 시간(초)이다.
         public static float Beat(float ageSecs)
         {
             return Mathf.Pow(0.5f + 0.5f * Mathf.Cos(2f * Mathf.PI * ageSecs * BeatRate), 8f);

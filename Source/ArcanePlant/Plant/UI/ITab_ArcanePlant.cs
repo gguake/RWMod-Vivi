@@ -283,7 +283,6 @@ namespace VVRace
             }
         }
 
-        // 상수 규칙은 기본 수치로 취급해 합계에만 포함하고 목록에서는 숨긴다.
         private IEnumerable<ManaFluxRule> EnumerateLeafRules(ManaFluxRule rule)
         {
             if (rule is ManaFluxRule_CompositeSum composite)

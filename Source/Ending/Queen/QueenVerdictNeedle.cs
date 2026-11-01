@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using RPEF;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,8 +6,7 @@ using Verse;
 
 namespace VVRace
 {
-    // 〈선고〉: 여왕 등 뒤 허공에 맺힌 거대 엘텍스 바늘이 대상 쪽으로 한 번 날아가 경로의 적대 대상을 꿰뚫고 사라진다.
-    // 아포크리파 바늘은 보스 상태에 묶여 있어 그리기·연출만 공유하고 동작은 소환 → 조준 → 발사 → 소멸로 단순화한다.
+    // 아포크리파 바늘은 보스 상태에 묶여 있으므로 그리기·연출만 공유한다.
     public class QueenVerdictNeedle : ThingWithComps
     {
         private enum VerdictState : byte
@@ -74,7 +73,6 @@ namespace VVRace
             _pos = _hover;
         }
 
-        // 바늘은 시전자 등 뒤 허공에 맺혀 대상 칸을 지나도록 겨눈다. 경로는 맵 가장자리에서 끝난다.
         public static void ComputeLane(Pawn caster, IntVec3 targetCell, out Vector3 hover, out Vector3 laneStart, out Vector3 direction, out float length)
         {
             var map = caster.Map;
@@ -335,7 +333,6 @@ namespace VVRace
             return Mathf.Abs(rel.x * _laneDir.z - rel.z * _laneDir.x) <= HalfWidth + extentAcross;
         }
 
-        // 여왕의 심판이므로 시전자 세력에 적대적인 폰·구조물만 꿰뚫는다.
         private bool CanPierce(Thing thing)
         {
             if (thing.Destroyed || !thing.Spawned || thing == _caster || _hitIds.Contains(thing.thingIDNumber)) { return false; }

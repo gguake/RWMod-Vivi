@@ -53,7 +53,6 @@ namespace VVRace
             return selected;
         }
 
-        // 〈꽃의 대지〉 의식을 시작할 때 고른 지점. 의식이 끝나면 결과 워커가 꺼내 쓴다.
         public IntVec3? SelectedFlowerLandCell
         {
             get => _selectedFlowerLandCell;
@@ -345,7 +344,6 @@ namespace VVRace
             var mapComponent = _mapComponent;
 
             // 순간이동은 디스폰 없이 Position만 바꾸므로 자동 갱신되지 않는 정보를 직접 갱신한다.
-            // 대상은 edifice, 마법 식물의 칸 사전, 체감 이동 비용, 빛 위치다.
             map.edificeGrid.DeRegister(this);
             Position = cell;
             map.edificeGrid.Register(this);

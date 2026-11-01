@@ -4,7 +4,6 @@ using Verse;
 namespace VVRace
 {
     // QuestPart_Letter는 생성 시 텍스트를 고정하므로 발송 시점에 번역하는 별도 부품을 사용한다.
-    // {PAWN_labelShort}에는 현재 앵커의 공명자를 넣고, 공명자가 없으면 대체 문구를 사용한다.
     public class QuestPart_ViviEndingLetter : QuestPart
     {
         public string inSignal;

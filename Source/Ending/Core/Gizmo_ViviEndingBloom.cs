@@ -40,7 +40,6 @@ namespace VVRace
             var inner = rect.ContractedBy(Padding);
             var progress = _quest.BloomProgress;
 
-            // 진행 상황은 응축 %만 알려 준다. 단계 설명·남은 시간 같은 안내는 표시하지 않는다.
             Texture2D barTex;
             switch (_quest.Stage)
             {

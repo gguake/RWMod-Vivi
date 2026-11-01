@@ -4,7 +4,6 @@ using Verse;
 
 namespace VVRace
 {
-    // Alert 파생 클래스는 바닐라가 자동 등록한다.
     public class Alert_ApocryphaChanneling : Alert_Critical
     {
         private readonly List<Pawn> _channelingBosses = new List<Pawn>();

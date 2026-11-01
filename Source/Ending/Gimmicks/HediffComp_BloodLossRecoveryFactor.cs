@@ -7,7 +7,6 @@ namespace VVRace
 {
     public class HediffCompProperties_BloodLossRecoveryFactor : HediffCompProperties
     {
-        // 단계별 혈액 손실 회복 배율: 1은 정상 회복, 0은 회복 중단. 목록이 짧으면 마지막 값을 사용한다.
         public List<float> factorByStage = new List<float>();
 
         public HediffCompProperties_BloodLossRecoveryFactor()

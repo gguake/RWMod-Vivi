@@ -4,7 +4,6 @@ using Verse;
 
 namespace VVRace
 {
-    // 밤에도 몸통이 빛나도록 같은 텍스처를 MoteGlow 가산 혼합으로 한 번 더 그린다.
     // 낮에는 흰 모피와 피부가 금빛으로 바래지 않도록 바닥 밝기에 따라 발광을 줄인다.
     [StaticConstructorOnStartup]
     internal static class ApocryphaShroudGlow
@@ -16,7 +15,7 @@ namespace VVRace
         private const float AlphaBase = 0.3f;
         private const float AlphaPulse = 0.12f;
         private const float PulseSpeed = 1.6f;
-        private const float DaylightAlphaFactor = 0.15f;   // 바닥 밝기 1(한낮)일 때 남기는 비율
+        private const float DaylightAlphaFactor = 0.15f;
 
         public static void Draw(Pawn pawn)
         {

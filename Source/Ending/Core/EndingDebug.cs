@@ -245,7 +245,6 @@ namespace VVRace
 
                         if (target == ViviEndingStage.Boss)
                         {
-                            // 단계가 곧바로 바뀌어야 하므로 등장 연출 없이 스폰한다.
                             apocrypha.DebugSpawnNow(skipIntro: true);
                         }
                         else

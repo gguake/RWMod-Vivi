@@ -7,7 +7,6 @@ namespace VVRace
     // 제단 틀이 발판의 건물과 마법 식물을 해체하므로 영원꽃 둘레에는 제단을 건설할 수 없다.
     public class PlaceWorker_DreamumAltar : PlaceWorker
     {
-        // 갓 모드의 표시 여부는 이 검사에 앞서 Designator_Build.Visible에서 결정한다.
         public override bool IsBuildDesignatorVisible(BuildableDef def)
         {
             return ViviEndingQuest.Current?.IsAltarUnlocked == true;
