@@ -100,6 +100,7 @@ namespace VVRace
         private int _aimTicks;
         private int _fireTick;
         private float _travelled;
+        private bool _breach;
         private Vector3 _returnFrom;
         private float _returnLength;
         private float _returnProgress;
@@ -234,6 +235,7 @@ namespace VVRace
             Scribe_Values.Look(ref _aimTicks, "aimTicks", 0);
             Scribe_Values.Look(ref _fireTick, "fireTick", 0);
             Scribe_Values.Look(ref _travelled, "travelled", 0f);
+            Scribe_Values.Look(ref _breach, "breach", false);
             Scribe_Values.Look(ref _returnFrom, "returnFrom");
             Scribe_Values.Look(ref _returnLength, "returnLength", 0f);
             Scribe_Values.Look(ref _returnProgress, "returnProgress", 0f);
@@ -260,9 +262,12 @@ namespace VVRace
         }
 
         #region 보스가 부르는 API
-        public void StartAim(IntVec3 targetCell, int aimTicks, float? fanAngle = null)
+        // breach: 길이 막혀 직선으로 돌파할 때 쏘는 바늘이다. 길을 막는 건물에 큰 피해를 준다.
+        public void StartAim(IntVec3 targetCell, int aimTicks, float? fanAngle = null, bool breach = false)
         {
             if (!Spawned || _boss == null || !_boss.Spawned) { return; }
+
+            _breach = breach;
 
             var now = GenTicks.TicksGame;
             var origin = IsUnbound ? _pos.Yto0() : BodyCenter;
@@ -362,6 +367,7 @@ namespace VVRace
             var props = BossComp.Props;
 
             _lockTarget = activator;
+            _breach = false;
             _laneStart = ClampInsideMap(_plantTip);
             _laneDir = (_pos - _plantTip).Yto0().sqrMagnitude > 0.01f ? -(_pos - _plantTip).Yto0().normalized : Vector3.forward;
             UpdateLockDirection();
@@ -948,9 +954,15 @@ namespace VVRace
             var cell = thing.Position;
             var drawPos = thing.DrawPos;
 
+            var damage = comp.Props.needleDamage;
+            if (_breach && ApocryphaUtility.BlocksPath(thing))
+            {
+                damage *= comp.Props.needleBreachDamageFactor;
+            }
+
             var dinfo = new DamageInfo(
                 ApocryphaDamageDefOf.VV_GiantNeedlePierce,
-                comp.Props.needleDamage,
+                damage,
                 comp.Props.needleArmorPenetration,
                 LaneAngle,
                 _boss);

@@ -20,6 +20,8 @@ namespace VVRace
         // 돌진 중 새로 생긴 벽도 즉시 부수도록 약 1초마다 경로를 다시 검사한다.
         private static readonly IntRange ChargeRepathTicks = new IntRange(45, 90);
 
+        private const int BreachRecheckTicks = 60;
+
         protected override Job TryGiveJob(Pawn pawn)
         {
             var comp = pawn.TryGetComp<CompApocrypha>();
@@ -58,6 +60,12 @@ namespace VVRace
 
             if (target != null && GenTicks.TicksGame >= comp.NextApproachTick)
             {
+                // 찬탈 대상까지 길이 막혀 있으면 접근 주기를 쓰지 않고, 길이 열릴 때까지 직선으로 다가가 바늘로 길을 연다.
+                if (comp.TryStartBreach(target, out var breachCell))
+                {
+                    return BreachJob(pawn, breachCell);
+                }
+
                 comp.Notify_Approached();
 
                 var approachJob = ApproachJob(pawn, comp, target, range);
@@ -106,6 +114,21 @@ namespace VVRace
             var job = JobMaker.MakeJob(ApocryphaJobDefOf.VV_ApocryphaApproach, cell);
             job.locomotionUrgency = LocomotionUrgency.Jog;
             job.expiryInterval = 2500;
+            job.checkOverrideOnExpire = true;
+            return job;
+        }
+
+        // 막히기 직전 칸까지 가서 기다리면 바늘이 길을 연다. 벽이 무너지면 바로 다음 칸을 고르도록 짧게 다시 검사한다.
+        private static Job BreachJob(Pawn pawn, IntVec3 standCell)
+        {
+            if (pawn.Position.InHorDistOf(standCell, 1.5f))
+            {
+                return WaitJob(BreachRecheckTicks);
+            }
+
+            var job = JobMaker.MakeJob(ApocryphaJobDefOf.VV_ApocryphaApproach, standCell);
+            job.locomotionUrgency = LocomotionUrgency.Jog;
+            job.expiryInterval = BreachRecheckTicks * 5;
             job.checkOverrideOnExpire = true;
             return job;
         }

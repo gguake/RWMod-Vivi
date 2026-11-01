@@ -62,6 +62,8 @@ namespace VVRace
         public float needleHalfWidth = 1.5f;
         public float needleDamage = 80f;
         public float needleArmorPenetration = 0.8f;
+        // 길이 막혀 직선으로 돌파할 때 쏜 바늘은 길을 막는 벽·문·자연석에 이 배율만큼 큰 피해를 준다(피해 정의의 건물 배율 2와 곱해져 800).
+        public float needleBreachDamageFactor = 5f;
 
         public IntRange approachIntervalTicks = new IntRange(9000, 13500);
         public float approachDistance = 9f;
@@ -163,6 +165,10 @@ namespace VVRace
         private const int NeedleSpawnCheckInterval = 60;
         private const int NeedleStunRecoverTicks = 120;
         private const int PursuitInterruptIntervalTicks = 300;
+        // 돌파 계획은 작업을 줄 때마다 갱신된다. 갱신이 끊기면(길이 열림·추격 등) 이 시간 뒤 바늘이 평소 대상으로 돌아간다.
+        private const int BreachHoldTicks = 600;
+        // 막히기 직전 칸에 도착한 뒤에만 돌파 바늘을 쏜다.
+        private const float BreachStandRadius = 2f;
 
         private static readonly List<Thing> _tmpTargets = new List<Thing>();
         private static readonly List<Thing> _tmpCellThings = new List<Thing>();
@@ -207,6 +213,9 @@ namespace VVRace
         private bool _devForceChannel;
         private bool _pendingPursuitCheck;
         private int _lastPursuitInterruptTick = -99999;
+        private IntVec3 _breachTarget = IntVec3.Invalid;
+        private IntVec3 _breachStandCell = IntVec3.Invalid;
+        private int _breachUntilTick = -1;
 
         // 기믹 기절을 적용하는 동안만 true로 둔다. 일반 기절은 ApocryphaPatch가 StunFor에서 차단한다.
         internal static bool ApplyingGimmickStun { get; private set; }
@@ -950,6 +959,13 @@ namespace VVRace
             if (now < _needleReadyTick || IsChanneling || _pendingSteal) { return; }
 
             var idle = _needles.Where(v => v.Spawned && v.IsIdle).ToList();
+            if (idle.Count > 0 && TryGetBreachAim(now, out var breachCell))
+            {
+                AimNeedleVolley(idle, breachCell, idle.Count, breach: true);
+                _needleReadyTick = now + Props.needleCastIntervalTicks.RandomInRange;
+                return;
+            }
+
             if (idle.Count == 0 || !TryFindNeedleTarget(out var cell))
             {
                 _needleReadyTick = now + ShellTargetScanInterval;
@@ -957,20 +973,77 @@ namespace VVRace
             }
 
             idle.Shuffle();
-            var count = Mathf.Clamp(Props.needleVolleyCount.RandomInRange, 1, idle.Count);
+            AimNeedleVolley(idle, cell, Mathf.Clamp(Props.needleVolleyCount.RandomInRange, 1, idle.Count), breach: false);
+            _needleReadyTick = now + Props.needleCastIntervalTicks.RandomInRange;
+        }
+
+        private void AimNeedleVolley(List<ApocryphaNeedle> idle, IntVec3 cell, int count, bool breach)
+        {
             if (!cell.InHorDistOf(parent.Position, Props.needleFanMinTargetDistance))
             {
                 for (int i = 0; i < count; i++)
                 {
-                    idle[i].StartAim(cell, Props.needleAimTicks, NeedleFanAngle(i, count));
+                    idle[i].StartAim(cell, Props.needleAimTicks, NeedleFanAngle(i, count), breach);
                 }
             }
             else
             {
-                idle[0].StartAim(cell, Props.needleAimTicks);
+                idle[0].StartAim(cell, Props.needleAimTicks, breach: breach);
+            }
+        }
+
+        // 1페이즈에 찬탈 대상까지 길이 막혀 있으면 대상까지 그은 직선에서 막히기 직전 칸(standCell)을 찾아 돌파를 시작한다.
+        // 막힌 원인이 깊은 물·용암 같은 지형이나 부술 수 없는 건물이면 돌파하지 않고 평소처럼 맴돈다.
+        public bool TryStartBreach(Thing target, out IntVec3 standCell)
+        {
+            standCell = IntVec3.Invalid;
+            if (_phase != ApocryphaPhase.Bound || target == null || !target.Spawned || target.Map != parent.Map) { return false; }
+            if (Pawn.CanReach(target, PathEndMode.Touch, Danger.Deadly)) { return false; }
+
+            var map = parent.Map;
+            var origin = parent.Position;
+            var targetRect = target.OccupiedRect();
+            var blocked = IntVec3.Invalid;
+            standCell = origin;
+            foreach (var c in GenSight.PointsOnLineOfSight(origin, target.Position))
+            {
+                if (c == origin) { continue; }
+                if (targetRect.Contains(c)) { break; }
+                if (!ApocryphaUtility.IsBreachableCell(map, c)) { return false; }
+
+                // 벽·문은 막힌 칸이다. 설 수 있는데 갈 수 없는 칸은 갇힌 구역이다. 나무·모래주머니처럼 지나갈 수만 있는 칸은 건너뛴다.
+                var edifice = c.GetEdifice(map);
+                if (edifice != null && ApocryphaUtility.BlocksPath(edifice))
+                {
+                    blocked = c;
+                    break;
+                }
+
+                if (!c.Standable(map)) { continue; }
+
+                if (!Pawn.CanReach(c, PathEndMode.OnCell, Danger.Deadly))
+                {
+                    blocked = c;
+                    break;
+                }
+
+                standCell = c;
             }
 
-            _needleReadyTick = now + Props.needleCastIntervalTicks.RandomInRange;
+            if (!blocked.IsValid) { return false; }
+
+            _breachTarget = target.Position;
+            _breachStandCell = standCell;
+            _breachUntilTick = GenTicks.TicksGame + BreachHoldTicks;
+            return true;
+        }
+
+        private bool TryGetBreachAim(int now, out IntVec3 cell)
+        {
+            cell = _breachTarget;
+            if (_phase != ApocryphaPhase.Bound || now > _breachUntilTick || !_breachTarget.IsValid || !_breachStandCell.IsValid) { return false; }
+
+            return parent.Position.InHorDistOf(_breachStandCell, BreachStandRadius);
         }
 
         private float? NeedleFanAngle(int index, int count)

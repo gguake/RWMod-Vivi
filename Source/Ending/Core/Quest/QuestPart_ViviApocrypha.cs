@@ -127,8 +127,10 @@ namespace VVRace
         private bool TryFindSpawnCell(Map map, bool forceSpawn, out IntVec3 cell)
         {
             var altar = ViviEndingUtility.AltarOf(anchor);
-            var target = altar != null && altar.Spawned && altar.Map == map ? altar.Position : anchor.PositionHeld;
-            return ApocryphaUtility.TryFindEntryCell(map, target, out cell) || (forceSpawn && TryFindAnyEdgeCell(map, out cell));
+            var target = altar != null && altar.Spawned && altar.Map == map ? (Thing)altar : anchor;
+            return ApocryphaUtility.TryFindEntryCell(map, target.PositionHeld, out cell)
+                || ApocryphaUtility.TryFindBreachEntryCell(map, target, out cell)
+                || (forceSpawn && TryFindAnyEdgeCell(map, out cell));
         }
 
         private void BeginManifestation(Map map, IntVec3 cell, bool skipIntro)
