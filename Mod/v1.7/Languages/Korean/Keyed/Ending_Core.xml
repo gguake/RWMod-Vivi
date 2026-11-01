@@ -116,7 +116,6 @@
 \n응축하던 마나가 흩어지며 마지막 개화는 실패했습니다.</VV_Letter_EndingFailureResonator>
 
 <!-- 엔딩 퀘스트: 메시지 -->
-<VV_Message_EndingApocryphaDeferred>지역 외곽에서 제단으로 이어지는 길이 막혀 있어 아포크리파가 나타나지 못합니다. 길이 열릴 때까지 습격이 다시 발생할 수 있습니다.</VV_Message_EndingApocryphaDeferred>
 <VV_Message_EndingApocryphaLanded>영원꽃의 파동에 밀려난 아포크리파가 거대 말벌 무리를 이끌고 지역 외곽에 나타났습니다.</VV_Message_EndingApocryphaLanded>
 <VV_Message_EndingPawnReturned>{PAWN_labelShort}(이)가 영원꽃 제단 앞으로 돌아왔습니다.</VV_Message_EndingPawnReturned>
 <VV_Message_EndingPawnReturnedToCaravan>{PAWN_labelShort}(이)가 돌아와 {CARAVAN_label}에 합류했습니다.</VV_Message_EndingPawnReturnedToCaravan>

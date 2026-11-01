@@ -221,16 +221,7 @@ namespace VVRace
         {
             _nextAttemptTick = Find.TickManager.TicksGame + RetryIntervalTicks;
             ViviEndingUtility.EndOminousSilence();
-
-            var firstDeferral = !_deferred;
             _deferred = true;
-            if (firstDeferral)
-            {
-                Messages.Message(
-                    LocalizeString_EndingCore.VV_Message_EndingApocryphaDeferred.Translate(),
-                    new LookTargets(anchor),
-                    MessageTypeDefOf.NeutralEvent);
-            }
         }
 
         private void ClearManifestation()

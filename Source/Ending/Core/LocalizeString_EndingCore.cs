@@ -69,7 +69,6 @@
         public const string VV_Letter_EndingFailureResonatorLabel = nameof(VV_Letter_EndingFailureResonatorLabel);
         public const string VV_Letter_EndingFailureResonator = nameof(VV_Letter_EndingFailureResonator);
 
-        public const string VV_Message_EndingApocryphaDeferred = nameof(VV_Message_EndingApocryphaDeferred);
         public const string VV_Message_EndingApocryphaLanded = nameof(VV_Message_EndingApocryphaLanded);
         public const string VV_Message_EndingPawnReturned = nameof(VV_Message_EndingPawnReturned);
         public const string VV_Message_EndingPawnReturnedToCaravan = nameof(VV_Message_EndingPawnReturnedToCaravan);

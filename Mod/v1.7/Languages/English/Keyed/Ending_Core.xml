@@ -116,7 +116,6 @@
 \nThe condensed mana has scattered, and the final bloom has failed.</VV_Letter_EndingFailureResonator>
 
 <!-- Ending quest: messages -->
-<VV_Message_EndingApocryphaDeferred>The path from the map edge to the altar is blocked, preventing Apocrypha from appearing. Raids may resume until a path opens.</VV_Message_EndingApocryphaDeferred>
 <VV_Message_EndingApocryphaLanded>Driven back by the everflower's wave, Apocrypha has landed at the edge of the map with a swarm of titanic hornets.</VV_Message_EndingApocryphaLanded>
 <VV_Message_EndingPawnReturned>{PAWN_labelShort} has returned in front of the everflower altar.</VV_Message_EndingPawnReturned>
 <VV_Message_EndingPawnReturnedToCaravan>{PAWN_labelShort} has returned and joined {CARAVAN_label}.</VV_Message_EndingPawnReturnedToCaravan>
