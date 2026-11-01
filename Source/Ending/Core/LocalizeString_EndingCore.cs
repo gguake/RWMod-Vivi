@@ -88,7 +88,6 @@
         public const string VV_Inspector_EndingBloom = nameof(VV_Inspector_EndingBloom);
         public const string VV_Inspector_EndingSiege = nameof(VV_Inspector_EndingSiege);
         public const string VV_Inspector_EndingCalm = nameof(VV_Inspector_EndingCalm);
-        public const string VV_Inspector_EndingCalmDeferred = nameof(VV_Inspector_EndingCalmDeferred);
         public const string VV_Inspector_EndingBlocked = nameof(VV_Inspector_EndingBlocked);
         public const string VV_Inspector_EndingCoronation = nameof(VV_Inspector_EndingCoronation);
         public const string VV_Inspector_EndingFullBloom = nameof(VV_Inspector_EndingFullBloom);

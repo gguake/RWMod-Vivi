@@ -350,11 +350,6 @@ namespace VVRace
                     return LocalizeString_EndingCore.VV_Inspector_EndingSiege.Translate();
 
                 case ViviEndingStage.Calm:
-                    if (IsBossDeferred)
-                    {
-                        return LocalizeString_EndingCore.VV_Inspector_EndingCalmDeferred.Translate().Resolve();
-                    }
-
                     return forQuestTab ? null : LocalizeString_EndingCore.VV_Inspector_EndingCalm.Translate(CalmTicksLeft.ToStringTicksToPeriod().Named("TIME")).Resolve();
 
                 case ViviEndingStage.Boss:

@@ -136,7 +136,6 @@
 <VV_Inspector_EndingBloom>개화 응축: {PERCENT}</VV_Inspector_EndingBloom>
 <VV_Inspector_EndingSiege>공성 중</VV_Inspector_EndingSiege>
 <VV_Inspector_EndingCalm>평화 기간 남은 시간: {TIME}</VV_Inspector_EndingCalm>
-<VV_Inspector_EndingCalmDeferred>아포크리파가 제단으로 다가올 길을 찾고 있습니다.</VV_Inspector_EndingCalmDeferred>
 <VV_Inspector_EndingBlocked>아포크리파가 응축을 가로막고 있습니다.</VV_Inspector_EndingBlocked>
 <VV_Inspector_EndingCoronation>대관식 준비됨</VV_Inspector_EndingCoronation>
 <VV_Inspector_EndingFullBloom>완전 개화</VV_Inspector_EndingFullBloom>

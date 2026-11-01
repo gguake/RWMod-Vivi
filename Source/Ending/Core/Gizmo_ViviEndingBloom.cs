@@ -48,9 +48,7 @@ namespace VVRace
                 case ViviEndingStage.Calm:
                     barTex = CalmBarTex;
                     status = LocalizeString_EndingCore.VV_Gizmo_EndingBloomCalm.Translate();
-                    stageDesc = _quest.IsBossDeferred
-                        ? LocalizeString_EndingCore.VV_Inspector_EndingCalmDeferred.Translate().Resolve()
-                        : LocalizeString_EndingCore.VV_Gizmo_EndingBloomDescCalm.Translate(_quest.CalmTicksLeft.ToStringTicksToPeriod().Named("TIME")).Resolve();
+                    stageDesc = LocalizeString_EndingCore.VV_Gizmo_EndingBloomDescCalm.Translate(_quest.CalmTicksLeft.ToStringTicksToPeriod().Named("TIME")).Resolve();
                     break;
 
                 case ViviEndingStage.Boss:

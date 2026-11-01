@@ -136,7 +136,6 @@
 <VV_Inspector_EndingBloom>Bloom condensation: {PERCENT}</VV_Inspector_EndingBloom>
 <VV_Inspector_EndingSiege>Under siege</VV_Inspector_EndingSiege>
 <VV_Inspector_EndingCalm>Calm remaining: {TIME}</VV_Inspector_EndingCalm>
-<VV_Inspector_EndingCalmDeferred>Apocrypha is searching for a way to the altar.</VV_Inspector_EndingCalmDeferred>
 <VV_Inspector_EndingBlocked>Apocrypha is blocking the condensation.</VV_Inspector_EndingBlocked>
 <VV_Inspector_EndingCoronation>Ready for coronation</VV_Inspector_EndingCoronation>
 <VV_Inspector_EndingFullBloom>Full bloom</VV_Inspector_EndingFullBloom>
