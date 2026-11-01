@@ -54,14 +54,21 @@ namespace VVRace
         private const int StuckShakeTicks = 14;
 
         // 조준: 몸통 중심에서 LaunchOffset칸 떨어진 발사 지점으로 DetachTicks 동안 옮겨 가 대상을 겨누고, 조준 끝 무렵 WindupDistance만큼 물러나 떤다.
+        // 1페이즈에서 대상이 발사 지점보다 CloseTargetMargin칸 넘게 앞에 있지 않으면(보스에 바짝 붙은 적) 몸통 옆 부채꼴 자리(CloseTargetFanAngle)에서 겨눈다.
         private const float LaunchOffset = 3.2f;
+        private const float CloseTargetMargin = 2f;
+        private const float CloseTargetFanAngle = 75f;
         private const int DetachTicks = 24;
         private const float WindupDistance = 0.8f;
         private const int ShakeTicks = 24;
         private const float ShakeAmplitude = 0.08f;
 
-        // 발사: 틱당 FireSpeed칸으로 날아가며(32칸 ≈ 5틱) TrailPointSpacing칸마다 궤적 점을 남긴다. 끝에서 LodgedTicks 동안 박혀 떤다.
+        // 발사: 바늘 끝(촉)이 틱당 FireSpeed칸으로 날아가며(32칸 ≈ 5틱) TrailPointSpacing칸마다 궤적 점을 남긴다. 촉이 경고 띠 끝에 닿으면 LodgedTicks 동안 박혀 떤다.
+        // NeedleTipOffset: 바늘 그림 중심에서 촉까지(그림 높이의 36% × 5.5칸). 날아가는 동안 촉이 띠 밖으로 나가지 않게 몸통은 그만큼 뒤에 그린다.
+        // 피해: 폰은 그려지는 자리(DrawPos)를 중심으로 반경 PawnHitRadius가 띠에 걸치면, 건물은 차지한 칸이 띠에 걸치면 꿰뚫는다(경고 띠와 같은 범위).
         private const float FireSpeed = 7f;
+        private const float NeedleTipOffset = 1.98f;
+        private const float PawnHitRadius = 0.35f;
         private const float TrailPointSpacing = 1f;
         private const int LodgedTicks = 16;
 
@@ -71,6 +78,7 @@ namespace VVRace
         private const float ReturnInWeight = 4f;
         private const float ReturnBlendStart = 0.75f;
 
+        private const int AimPetalInterval = 4;
         private const int FadeInTicks = 40;
         private const float MapEdgeMargin = 0.05f;
 
@@ -250,6 +258,17 @@ namespace VVRace
             direction.Normalize();
 
             var start = IsUnbound ? origin : origin + direction * LaunchOffset;
+
+            // 1페이즈: 대상이 발사 지점 앞으로 충분히 떨어져 있지 않으면(보스에 바짝 붙은 적) 띠가 대상을 덮지 못하므로,
+            // 몸통 옆 부채꼴 자리(바늘이 있는 쪽)에서 대상을 겨눈다.
+            if (!IsUnbound && !fanAngle.HasValue && Vector3.Distance(origin, target) < LaunchOffset + CloseTargetMargin)
+            {
+                var radius = BossComp?.Props.needleFanRadius ?? 5f;
+                var left = origin + Quaternion.AngleAxis(-CloseTargetFanAngle, Vector3.up) * direction * radius;
+                var right = origin + Quaternion.AngleAxis(CloseTargetFanAngle, Vector3.up) * direction * radius;
+                fanAngle = (left - _pos.Yto0()).sqrMagnitude <= (right - _pos.Yto0()).sqrMagnitude ? -CloseTargetFanAngle : CloseTargetFanAngle;
+            }
+
             if (fanAngle.HasValue && !IsUnbound)
             {
                 start = origin + Quaternion.AngleAxis(fanAngle.Value, Vector3.up) * direction * (BossComp?.Props.needleFanRadius ?? 5f);
@@ -402,9 +421,36 @@ namespace VVRace
             _pos = Vector3.Lerp(_moveFrom, hold, detach);
             _angle = LerpAngle(_moveFromAngle, LaneAngle, detach);
 
+            if (elapsed % AimPetalInterval == 0)
+            {
+                ThrowAimPetals();
+            }
+
             if (now >= _fireTick)
             {
                 Fire(now);
+            }
+        }
+
+        // 조준 중: 요정 비비 사출탄 조준처럼 차오른 띠 위에서 금빛 꽃잎·반짝임이 발사 방향으로 흩날린다.
+        private void ThrowAimPetals()
+        {
+            var map = Map;
+            var filled = _laneLength * Mathf.Max(0.15f, AimProgress);
+            var mid = PointOnLane(filled * 0.5f);
+            if (!mid.ShouldSpawnMotesAt(map)) { return; }
+
+            var perpendicular = new Vector3(_laneDir.z, 0f, -_laneDir.x);
+            for (int i = 0; i < 2; i++)
+            {
+                var pos = PointOnLane(Rand.Range(0f, filled)) + perpendicular * Rand.Range(-HalfWidth, HalfWidth) * 0.85f;
+                var def = i == 0 ? ApocryphaFleckDefOf.VV_Fleck_ApocryphaAimSpark : ApocryphaFleckDefOf.VV_Fleck_ApocryphaAimTwinkle;
+                var data = FleckMaker.GetDataStatic(pos, map, def, i == 0 ? Rand.Range(0.25f, 0.45f) : Rand.Range(0.2f, 0.35f));
+                data.velocityAngle = LaneAngle + Rand.Range(-20f, 20f);
+                data.velocitySpeed = Rand.Range(0.5f, 1.3f);
+                data.rotation = Rand.Range(0f, 360f);
+                data.rotationRate = Rand.Range(-120f, 120f);
+                map.flecks.CreateFleck(data);
             }
         }
 
@@ -413,7 +459,7 @@ namespace VVRace
         {
             _state = NeedleState.Firing;
             _stateStartTick = now;
-            _travelled = -WindupDistance;
+            _travelled = NeedleTipOffset - WindupDistance;
             _angle = LaneAngle;
             _hitIds.Clear();
             _ignored = null;
@@ -421,16 +467,24 @@ namespace VVRace
             // 2페이즈: 쏘는 순간 직선 위에 보스가 있으면 아무에게도 피해를 주지 않고 보스에게 꽂힌다.
             _stickAlong = IsUnbound ? BossContactAlong() : -1f;
 
-            _pos = PointOnLane(_travelled);
+            _pos = BodyOnLane(_travelled);
             Trail?.ResetTrail();
             RegisterTrail(_pos);
 
             PlayEffectAt(ApocryphaEffecterDefOf.VV_Effecter_ApocryphaNeedleFire, _pos);
             ApocryphaUtility.ShakeCamera(Map, 0.5f);
 
+            // 쏘는 순간 바늘 몸이 이미 덮고 있는 띠 앞머리(시작점~촉)부터 꿰뚫는다.
+            if (_stickAlong < 0f)
+            {
+                DamageAlong(0f, Mathf.Clamp(_travelled, 0f, _laneLength));
+                if (Destroyed) { return; }
+            }
+
             TickFiring(now);
         }
 
+        // _travelled: 촉이 시작점에서 나아간 거리. 몸통(그림 중심)은 촉보다 NeedleTipOffset만큼 뒤에 있다.
         private void TickFiring(int now)
         {
             var from = _travelled;
@@ -450,11 +504,11 @@ namespace VVRace
 
             for (var d = from + TrailPointSpacing; d < to; d += TrailPointSpacing)
             {
-                RegisterTrail(PointOnLane(d));
+                RegisterTrail(BodyOnLane(d));
             }
 
             _travelled = to;
-            _pos = PointOnLane(to);
+            _pos = BodyOnLane(to);
             RegisterTrail(_pos);
 
             if (_stickAlong >= 0f)
@@ -473,7 +527,7 @@ namespace VVRace
             {
                 _state = NeedleState.Lodged;
                 _stateStartTick = now;
-                PlayEffectAt(ApocryphaEffecterDefOf.VV_Effecter_ApocryphaNeedleEnd, _pos);
+                PlayEffectAt(ApocryphaEffecterDefOf.VV_Effecter_ApocryphaNeedleEnd, PointOnLane(_laneLength));
             }
         }
 
@@ -483,11 +537,11 @@ namespace VVRace
             var elapsed = now - _stateStartTick;
             var shake = ShakeAmplitude * (1f - elapsed / (float)LodgedTicks);
             var perpendicular = new Vector3(_laneDir.z, 0f, -_laneDir.x);
-            _pos = PointOnLane(_laneLength) + perpendicular * (shake * Rand.Range(-1f, 1f));
+            _pos = BodyOnLane(_laneLength) + perpendicular * (shake * Rand.Range(-1f, 1f));
 
             if (elapsed >= LodgedTicks)
             {
-                StartReturn(now, PointOnLane(_laneLength), _laneDir);
+                StartReturn(now, BodyOnLane(_laneLength), _laneDir);
             }
         }
 
@@ -587,7 +641,9 @@ namespace VVRace
         #endregion
 
         #region 피해
-        // 발사 직선에서 시작점으로부터 from~to칸 사이, 폭 안에 중심이 든 칸의 폰·건물에 한 번씩 관통 피해를 준다.
+        // 촉이 시작점으로부터 from~to칸 사이를 지나는 동안 경고 띠에 걸친 폰·건물에 한 번씩 관통 피해를 준다(경고 띠와 같은 범위):
+        // 폰은 그려지는 자리(DrawPos)를 중심으로 반경 PawnHitRadius가 띠에 걸치면, 건물은 차지한 칸(정사각형)이 띠에 걸치면 맞는다.
+        // 띠의 양 끝(시작점·사거리 끝)에서도 같은 만큼 걸치면 맞는다.
         // 보스·거대 말벌·보스가 피운 꽃·엔딩 제단과 영원꽃(사출탄 폭발 제외 목록), 보스 세력, 쓰러진 폰, 세력 없는 건물(자연 암벽·폐허)은 뺀다.
         private void DamageAlong(float from, float to)
         {
@@ -601,27 +657,29 @@ namespace VVRace
             }
 
             var halfWidth = comp.Props.needleHalfWidth;
+            var cellExtent = 0.5f * (Mathf.Abs(_laneDir.x) + Mathf.Abs(_laneDir.z));
+            var margin = halfWidth + 2f;
             var a = PointOnLane(from);
             var b = PointOnLane(to);
             var rect = CellRect.FromLimits(
-                Mathf.FloorToInt(Mathf.Min(a.x, b.x) - halfWidth - 1f),
-                Mathf.FloorToInt(Mathf.Min(a.z, b.z) - halfWidth - 1f),
-                Mathf.CeilToInt(Mathf.Max(a.x, b.x) + halfWidth + 1f),
-                Mathf.CeilToInt(Mathf.Max(a.z, b.z) + halfWidth + 1f)).ClipInsideMap(map);
+                Mathf.FloorToInt(Mathf.Min(a.x, b.x) - margin),
+                Mathf.FloorToInt(Mathf.Min(a.z, b.z) - margin),
+                Mathf.CeilToInt(Mathf.Max(a.x, b.x) + margin),
+                Mathf.CeilToInt(Mathf.Max(a.z, b.z) + margin)).ClipInsideMap(map);
 
             foreach (var cell in rect)
             {
-                var rel = (cell.ToVector3Shifted() - _laneStart).Yto0();
-                var along = rel.x * _laneDir.x + rel.z * _laneDir.z;
-                if (along < from || along > to) { continue; }
-                if (Mathf.Abs(rel.x * _laneDir.z - rel.z * _laneDir.x) > halfWidth) { continue; }
-
                 _tmpCellThings.Clear();
                 _tmpCellThings.AddRange(cell.GetThingList(map));
                 for (int i = 0; i < _tmpCellThings.Count; i++)
                 {
                     var thing = _tmpCellThings[i];
                     if (!CanPierce(thing)) { continue; }
+
+                    var hit = thing is Pawn
+                        ? OverlapsLane(thing.DrawPos, PawnHitRadius, PawnHitRadius, from, to)
+                        : OverlapsLane(cell.ToVector3Shifted(), cellExtent, cellExtent, from, to);
+                    if (!hit) { continue; }
 
                     _hitIds.Add(thing.thingIDNumber);
                     Pierce(thing, comp);
@@ -632,6 +690,19 @@ namespace VVRace
             }
 
             _tmpCellThings.Clear();
+        }
+
+        // point를 중심으로 띠 폭 방향 extentAcross, 길이 방향 extentAlong만큼 퍼진 몸이 촉이 지나는 구간(from~to) 안의 띠에 걸치는지.
+        // 띠의 양 끝에서는 몸이 걸치기만 해도 들고, 그 사이에서는 몸 중심이 구간 안에 있어야 한다(틱마다 이어지는 구간이 겹쳐 세지 않게).
+        private bool OverlapsLane(Vector3 point, float extentAcross, float extentAlong, float from, float to)
+        {
+            var rel = (point - _laneStart).Yto0();
+            var along = rel.x * _laneDir.x + rel.z * _laneDir.z;
+            var lo = from <= 0f ? -extentAlong : from;
+            var hi = to >= _laneLength ? _laneLength + extentAlong : to;
+            if (along < lo || along > hi) { return false; }
+
+            return Mathf.Abs(rel.x * _laneDir.z - rel.z * _laneDir.x) <= HalfWidth + extentAcross;
         }
 
         private bool CanPierce(Thing thing)
@@ -714,7 +785,8 @@ namespace VVRace
             if (_state == NeedleState.Aiming)
             {
                 var bossInLane = IsUnbound && BossContactAlong() >= 0f;
-                ApocryphaNeedleRenderer.DrawLane(_laneStart, _laneDir, _laneLength, HalfWidth * 2f, AimProgress, alpha, bossInLane);
+                var aimSecs = (GenTicks.TicksGame - _stateStartTick) / 60f;
+                ApocryphaNeedleRenderer.DrawLane(_laneStart, _laneDir, _laneLength, HalfWidth * 2f, AimProgress, alpha, bossInLane, aimSecs, _aimTicks / 60f, thingIDNumber);
             }
 
             var glow = _state == NeedleState.Idle || _state == NeedleState.Stuck ? 0f : _state == NeedleState.Aiming ? AimProgress : 1f;
@@ -792,6 +864,12 @@ namespace VVRace
         private Vector3 PointOnLane(float distance)
         {
             return _laneStart + _laneDir * distance;
+        }
+
+        // 촉이 tipDistance에 있을 때 바늘 몸통(그림 중심)의 자리
+        private Vector3 BodyOnLane(float tipDistance)
+        {
+            return PointOnLane(tipDistance - NeedleTipOffset);
         }
 
         // 맵 밖으로 나가지 않는 발사 직선 길이(최대 range).

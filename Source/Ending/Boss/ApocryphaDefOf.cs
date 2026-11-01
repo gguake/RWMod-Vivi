@@ -99,6 +99,8 @@ namespace VVRace
         public static FleckDef VV_Fleck_ApocryphaDarkWisp;
         public static FleckDef VV_Fleck_ApocryphaManifestSpark;
         public static FleckDef VV_Fleck_ApocryphaRepelWave;
+        public static FleckDef VV_Fleck_ApocryphaAimSpark;
+        public static FleckDef VV_Fleck_ApocryphaAimTwinkle;
     }
 
     [DefOf]

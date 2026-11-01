@@ -4,7 +4,8 @@ using Verse;
 
 namespace VVRace
 {
-    // 거대 엘텍스 바늘(ApocryphaNeedle) 그리기: 바늘 몸체(엘텍스 바늘 그림을 크게) + 은은한 후광, 조준 중의 발사 직선 경고 띠(VV_NeedleLane 셰이더).
+    // 거대 엘텍스 바늘(ApocryphaNeedle) 그리기: 바늘 몸체(엘텍스 바늘 그림을 크게) + 은은한 후광, 조준 중의 발사 직선 경고 띠(VV_NeedleLane 셰이더)와
+    // 발사 지점의 작은 연꽃(요정 비비 사출탄의 시전 연꽃과 같은 VV_MagicCircle 셰이더, 조준 시간 동안 피어난다).
     // 머티리얼은 시작 시 한 번만 만들고, 바늘·띠마다 다른 값(투명도·진행도·길이)은 MaterialPropertyBlock으로 넘긴다.
     [StaticConstructorOnStartup]
     internal static class ApocryphaNeedleRenderer
@@ -18,18 +19,42 @@ namespace VVRace
         private static readonly Color BodyColor = Color.white;
         private static readonly Color GlowColor = new Color(1f, 0.82f, 0.6f, 0.55f);
         private static readonly Color AuraColor = new Color(1f, 0.7f, 0.45f, 0.35f);
-        private static readonly Color LaneColor = new Color(1f, 0.42f, 0.5f, 1f);
-        private static readonly Color LaneColorBossInside = new Color(1f, 0.82f, 0.35f, 1f);
+        // 띠: 요정 비비 사출탄 조준 연꽃과 같은 금빛(2페이즈에서 보스가 띠 안에 있으면 자홍빛 — 이대로 쏘면 보스에게 꽂힌다)
+        private static readonly Color LaneColor = new Color(1f, 0.84f, 0.45f, 1f);
+        private static readonly Color LaneCoreColor = new Color(1f, 0.94f, 0.75f, 1f);
+        private static readonly Color LaneColorBossInside = new Color(1f, 0.36f, 0.82f, 1f);
+        private static readonly Color LaneCoreColorBossInside = new Color(1f, 0.8f, 0.95f, 1f);
+
+        // 발사 지점 연꽃(바늘이 떠 있는 띠 시작점, 크기 LotusDrawSize칸)
+        private const float LotusDrawSize = 2.6f;
 
         private static readonly Material BodyMat = MaterialPool.MatFrom(NeedleTexPath, ShaderDatabase.Transparent);
         private static readonly Material GlowMat = MaterialPool.MatFrom(NeedleTexPath, ShaderDatabase.MoteGlow);
         private static readonly Material AuraMat = MaterialPool.MatFrom("VFX/VV_ScentAura", ShaderDatabase.MoteGlow);
         private static readonly Material LaneMat = MaterialPool.MatFrom(BaseContent.WhiteTex, ShaderDatabase.LoadShader("Map/VV_NeedleLane"), Color.white);
+        private static readonly Material LotusMat = MakeLotusMaterial();
 
         private static readonly MaterialPropertyBlock PropertyBlock = new MaterialPropertyBlock();
         private static readonly int ProgressPropertyId = Shader.PropertyToID("_Progress");
         private static readonly int LengthPropertyId = Shader.PropertyToID("_Length");
         private static readonly int WidthPropertyId = Shader.PropertyToID("_Width");
+        private static readonly int CoreColorPropertyId = Shader.PropertyToID("_CoreColor");
+        private static readonly int DurationPropertyId = Shader.PropertyToID("_Duration");
+        private static readonly int SeedPropertyId = Shader.PropertyToID("_RandomPerObjectOffsetRandom");
+
+        // 사출탄 시전 연꽃(VV_Mote_ApocryphaAimCharge)과 같은 값: 바깥 고리 없이 꽃잎 6장이 피어나며 중심이 밝아진다.
+        private static Material MakeLotusMaterial()
+        {
+            var material = MaterialPool.MatFrom(BaseContent.WhiteTex, ShaderDatabase.LoadShader("Map/VV_MagicCircle"), Color.white);
+            material.SetFloat("_PetalCount", 6f);
+            material.SetFloat("_RingAlpha", 0.45f);
+            material.SetFloat("_GuideAlpha", 0.6f);
+            material.SetFloat("_CoreGlow", 1f);
+            material.SetFloat("_FadeInSecs", 0.25f);
+            material.SetFloat("_LineScale", 1.8f);
+            material.SetFloat("_Brightness", 0.85f);
+            return material;
+        }
 
         // 같은 셰이더 안에서 뒤의 그림이 위에 오도록 겹쳐 그리는 높이 차이
         private const float LayerAltitudeStep = 0.002f;
@@ -57,9 +82,10 @@ namespace VVRace
             DrawQuad(GlowMat, pos, rotation, new Vector2(NeedleDrawSize, NeedleDrawSize), glowColor);
         }
 
-        // 발사 직선 전체(start에서 direction으로 length칸, 폭 width칸)를 경고 띠로 그린다. progress는 조준 진행도(0~1).
-        // bossInside: 2페이즈에서 보스가 띠 안에 있음(이대로 쏘면 보스에게 꽂힌다) → 금빛 띠.
-        public static void DrawLane(Vector3 start, Vector3 direction, float length, float width, float progress, float alpha, bool bossInside = false)
+        // 발사 직선 전체(start에서 direction으로 length칸, 폭 width칸)를 경고 띠로 그리고, 시작점에 연꽃을 피운다. progress는 조준 진행도(0~1),
+        // aimSecs/aimDuration은 조준 경과·전체 시간(초, 연꽃이 피는 정도), seed는 연꽃 방향(바늘마다 다르게).
+        // bossInside: 2페이즈에서 보스가 띠 안에 있음(이대로 쏘면 보스에게 꽂힌다) → 자홍빛.
+        public static void DrawLane(Vector3 start, Vector3 direction, float length, float width, float progress, float alpha, bool bossInside, float aimSecs, float aimDuration, int seed)
         {
             if (length < 0.1f || width <= 0f) { return; }
 
@@ -72,15 +98,28 @@ namespace VVRace
 
             var color = bossInside ? LaneColorBossInside : LaneColor;
             color.a *= alpha;
+            var coreColor = bossInside ? LaneCoreColorBossInside : LaneCoreColor;
 
             PropertyBlock.Clear();
             PropertyBlock.SetFloat(ShaderPropertyIDs.AgeSecs, (Find.TickManager.TicksGame % AgeWrapTicks) / 60f);
             PropertyBlock.SetColor(ShaderPropertyIDs.Color, color);
+            PropertyBlock.SetColor(CoreColorPropertyId, coreColor);
             PropertyBlock.SetFloat(ProgressPropertyId, progress);
             PropertyBlock.SetFloat(LengthPropertyId, length);
             PropertyBlock.SetFloat(WidthPropertyId, width);
 
             Graphics.DrawMesh(MeshPool.plane10, matrix, LaneMat, 0, null, 0, PropertyBlock);
+
+            // 발사 지점 연꽃: 띠보다 살짝 위에, 조준 시간 동안 피어난다.
+            var lotusPos = start;
+            lotusPos.y = AltitudeLayer.MoteLow.AltitudeFor() + LayerAltitudeStep;
+            PropertyBlock.Clear();
+            PropertyBlock.SetFloat(ShaderPropertyIDs.AgeSecs, aimSecs);
+            PropertyBlock.SetFloat(DurationPropertyId, Mathf.Max(0.1f, aimDuration));
+            PropertyBlock.SetFloat(SeedPropertyId, seed);
+            PropertyBlock.SetColor(ShaderPropertyIDs.Color, color);
+            PropertyBlock.SetColor(CoreColorPropertyId, coreColor);
+            Graphics.DrawMesh(MeshPool.plane10, Matrix4x4.TRS(lotusPos, Quaternion.identity, new Vector3(LotusDrawSize, 1f, LotusDrawSize)), LotusMat, 0, null, 0, PropertyBlock);
         }
 
         private static void DrawQuad(Material mat, Vector3 pos, Quaternion rotation, Vector2 size, Color color)
