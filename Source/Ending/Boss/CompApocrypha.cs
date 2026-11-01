@@ -27,12 +27,18 @@ namespace VVRace
 
         // 1페이즈: 요정 비비 사출 포격. 조준이 끝나기를 기다리지 않고 새 조준을 계속 겹쳐 시전한다(시전 중에도 이동은 멈추지 않는다).
         public float shellRange = 20f;
+        // 최소 사거리: 사출탄 폭발 반경(2.4)에 보스가 휘말리지 않도록 이보다 가까운 적은 노리지 않고, 발사 순간 이 안에 들어와 있는 조준은 쏘지 않는다.
+        public float shellMinRange = 2.9f;
         public int shellAimTicks = 240;
         public IntRange shellCastIntervalTicks = new IntRange(90, 150);
         public int maxShellAims = 3;
 
         // 1페이즈: 포격 사거리 안 시야에 들어온 적을 감지하면 호위 말벌이 이 시간 동안 그 적을 노린다(계속 보이면 연장).
         public int escortFocusTicks = 600;
+
+        // 1페이즈: 포격 사거리 밖(또는 시야 밖)에서 공격해 온 적을 이 시간 동안 기억하고(맞을 때마다 연장) 포격할 수 있는 자리로 다가가며,
+        // 사거리 안에 들어오면 포격·바늘로 그 적을 먼저 노린다.
+        public int rangedAttackerMemoryTicks = 1200;
 
         // 1페이즈: 멸망꽃/요정꽃 씨앗. 멸망꽃 씨앗은 한 번에 여러 개를 흩뿌리며, 3개에서 시작해 사출 2회마다 1개씩 늘어난다(3/3/4/4/5…, 최대 10개).
         // 요정꽃은 따로 쏘지 않는다: 멸망꽃 사출 fairySeedEveryVolleys회마다 그 사출에 요정꽃 씨앗 1개가 더해진다.
@@ -58,6 +64,13 @@ namespace VVRace
         public int needleCount = 3;
         public int needleFirstDelayTicks = 900;
         public IntRange needleCastIntervalTicks = new IntRange(480, 720);
+        // 한 번에 쏘는 바늘 수(쉬고 있는 바늘 수까지). 여러 개면 보스 몸통 둘레 반경 needleFanRadius의 부채꼴 자리(2개 ±50°, 3개 -65°/0°/+65°)에서
+        // 저마다 대상을 겨눠 직선들이 대상에서 교차한다. 대상이 needleFanMinTargetDistance보다 가까우면 부채꼴 자리가 대상을 지나치므로 1개만 쏜다.
+        public IntRange needleVolleyCount = new IntRange(1, 3);
+        public float needleFanRadius = 5f;
+        public float needleFanHalfAngle2 = 50f;
+        public float needleFanHalfAngle3 = 65f;
+        public float needleFanMinTargetDistance = 9f;
         public int needleAimTicks = 150;
         public float needleTargetRange = 24f;
         public float needleRange = 32f;
@@ -159,6 +172,7 @@ namespace VVRace
         private const float BreathFrontSearchAngle = 45f;
         private const int NeedleSpawnCheckInterval = 60;
         private const int NeedleStunRecoverTicks = 120;
+        private const int PursuitInterruptIntervalTicks = 300;
 
         private static readonly List<Thing> _tmpTargets = new List<Thing>();
         private static readonly List<Thing> _tmpCellThings = new List<Thing>();
@@ -192,6 +206,8 @@ namespace VVRace
         private int _needleReadyTick;
         private List<ApocryphaNeedle> _needles = new List<ApocryphaNeedle>();
         private bool _needleStunned;
+        private Thing _rangedAttacker;
+        private int _rangedAttackerUntilTick = -1;
 
         // 저장하지 않는 연출/디버그 상태
         private Effecter _aimSustainer;
@@ -201,6 +217,8 @@ namespace VVRace
         private int _lastChannelInterruptMessageTick = -99999;
         private int _lastStunImmuneTextTick = -99999;
         private bool _devForceChannel;
+        private bool _pendingPursuitCheck;
+        private int _lastPursuitInterruptTick = -99999;
 
         // 기믹(결속 해방·공명 파동·마나 파동 의식)에 의한 기절을 적용하는 동안만 true. 그 외의 기절은 ApocryphaPatch가 StunFor에서 막는다.
         internal static bool ApplyingGimmickStun { get; private set; }
@@ -407,6 +425,13 @@ namespace VVRace
             Scribe_Values.Look(ref _pendingShieldBreak, "pendingShieldBreak", false);
             Scribe_Values.Look(ref _needleReadyTick, "needleReadyTick", 0);
             Scribe_Values.Look(ref _needleStunned, "needleStunned", false);
+            if (Scribe.mode == LoadSaveMode.Saving && (_rangedAttacker == null || _rangedAttacker.Destroyed || !_rangedAttacker.Spawned))
+            {
+                _rangedAttacker = null;
+            }
+
+            Scribe_References.Look(ref _rangedAttacker, "rangedAttacker");
+            Scribe_Values.Look(ref _rangedAttackerUntilTick, "rangedAttackerUntilTick", -1);
 
             if (Scribe.mode == LoadSaveMode.Saving)
             {
@@ -494,6 +519,15 @@ namespace VVRace
             }
 
             var now = GenTicks.TicksGame;
+            if (_pendingPursuitCheck)
+            {
+                _pendingPursuitCheck = false;
+                if (_phase == ApocryphaPhase.Bound)
+                {
+                    InterruptIdleJobForPursuit(now);
+                }
+            }
+
             switch (_phase)
             {
                 case ApocryphaPhase.Bound:
@@ -636,7 +670,12 @@ namespace VVRace
 
                 _shellAims.RemoveAt(i);
                 aim.CleanupVisuals();
-                FireShell(aim.cell);
+
+                // 조준 동안 보스가 걸어 들어와 폭발 범위에 휘말릴 거리가 되었으면 쏘지 않는다.
+                if (!InShellMinRange(aim.cell))
+                {
+                    FireShell(aim.cell);
+                }
             }
 
             if (_shellAims.Count < Props.maxShellAims && now >= _shellReadyTick && !IsChanneling && !_pendingSteal)
@@ -711,16 +750,24 @@ namespace VVRace
             _aimSustainer.EffectTick(bossTarget, bossTarget);
         }
 
-        // 반경 20 안 시야에 들어온 적 폰을 우선 노리고, 없으면 적 포탑을 노린다(대상 조건은 IsShellTargetSide).
+        // 반경 20 안 시야에 들어온 적 폰을 우선 노리고, 없으면 적 포탑을 노린다(대상 조건은 IsShellTargetSide). 최소 사거리(2.9) 안의 적은 빼고,
+        // 사거리 밖에서 공격해 왔던 적이 사거리 안에 들어와 있으면 그 적을 먼저 노린다.
         // 이미 조준 중인 칸 근처의 대상은 다른 대상이 없을 때만 다시 고른다(포격이 한 곳에 몰리지 않게).
         private bool TryFindShellTarget(out IntVec3 cell)
         {
             cell = IntVec3.Invalid;
 
             CollectShellTargets(_tmpTargets, Props.shellRange);
+            _tmpTargets.RemoveAll(v => InShellMinRange(v.Position));
             if (_tmpTargets.Count > 0)
             {
-                if (!_tmpTargets.Where(v => !IsNearAimedCell(v.Position)).TryRandomElement(out var target))
+                var attacker = RangedAttacker;
+                Thing target;
+                if (attacker != null && _tmpTargets.Contains(attacker) && !IsNearAimedCell(attacker.Position))
+                {
+                    target = attacker;
+                }
+                else if (!_tmpTargets.Where(v => !IsNearAimedCell(v.Position)).TryRandomElement(out target))
                 {
                     target = _tmpTargets.RandomElement();
                 }
@@ -729,6 +776,90 @@ namespace VVRace
             }
 
             _tmpTargets.Clear();
+            return cell.IsValid;
+        }
+
+        private bool InShellMinRange(IntVec3 cell)
+        {
+            return (cell - parent.Position).LengthHorizontalSquared < Props.shellMinRange * Props.shellMinRange;
+        }
+
+        // 1페이즈: 사출 포격 사거리 밖이거나 시야 밖에서 공격해 온 적(폰·포탑)을 기억한다. 이미 기억한 적이면 사거리 안에서 맞아도 기억을 늘린다.
+        private void NoteAttacker(Thing instigator)
+        {
+            if (instigator == null || instigator == parent || !instigator.Spawned || instigator.Map != parent.Map) { return; }
+            if (instigator is Pawn pawn)
+            {
+                if (pawn.Dead || pawn.Downed || pawn.IsPsychologicallyInvisible()) { return; }
+            }
+            else if (!(instigator is Building_Turret) && !(instigator is ArcanePlant_Turret))
+            {
+                return;
+            }
+
+            if (!IsShellTargetSide(instigator)) { return; }
+            if (instigator != _rangedAttacker && IsShellTarget(instigator, Props.shellRange)) { return; }
+
+            _rangedAttacker = instigator;
+            _rangedAttackerUntilTick = GenTicks.TicksGame + Props.rangedAttackerMemoryTicks;
+            _pendingPursuitCheck = true;
+        }
+
+        // 공격받은 다음 틱: 배회·대기·영원꽃 접근 중이면 작업을 끊어 곧바로 공격자에게 다가가게 한다(작업이 계속 끊기지 않게 5초에 한 번까지).
+        private void InterruptIdleJobForPursuit(int now)
+        {
+            if (now - _lastPursuitInterruptTick < PursuitInterruptIntervalTicks || Pawn.stances.stunner.Stunned) { return; }
+
+            var jobDef = Pawn.CurJobDef;
+            if (jobDef != ApocryphaJobDefOf.VV_ApocryphaWait && jobDef != ApocryphaJobDefOf.VV_ApocryphaWander && jobDef != ApocryphaJobDefOf.VV_ApocryphaApproach) { return; }
+            if (!TryFindPursuitCell(out _)) { return; }
+
+            _lastPursuitInterruptTick = now;
+            Pawn.jobs.EndCurrentJob(JobCondition.InterruptForced);
+        }
+
+        // 기억 중인 사거리 밖 공격자(기억이 끝났거나, 쓰러졌거나, 사라졌거나, 더는 적이 아니면 null). 1페이즈에만 쓴다.
+        public Thing RangedAttacker
+        {
+            get
+            {
+                var attacker = _rangedAttacker;
+                if (attacker == null || _phase != ApocryphaPhase.Bound || GenTicks.TicksGame > _rangedAttackerUntilTick) { return null; }
+                if (attacker.Destroyed || !attacker.Spawned || attacker.Map != parent.Map) { return null; }
+                if (attacker is Pawn pawn && (pawn.Dead || pawn.Downed)) { return null; }
+                if (!IsShellTargetSide(attacker)) { return null; }
+
+                return attacker;
+            }
+        }
+
+        // [JobGiver 호출] 기억 중인 공격자가 아직 포격 사거리 밖(또는 시야 밖)이면 그 적을 포격할 수 있는 칸을 찾는다.
+        // 공격자에게서 보스 쪽으로 (사거리 - 3)칸 떨어진 지점부터 2칸씩 다가가며, 갈 수 있고 그 적이 보이는 칸 중 보스에게 가장 가까운 칸을 고른다.
+        // 그런 칸이 없으면(벽 너머의 박격포 등) 갈 수 있는 데까지 공격자 쪽으로 다가간다.
+        public bool TryFindPursuitCell(out IntVec3 cell)
+        {
+            cell = IntVec3.Invalid;
+            var attacker = RangedAttacker;
+            if (attacker == null || IsShellTarget(attacker, Props.shellRange)) { return false; }
+
+            var map = parent.Map;
+            var origin = parent.Position;
+            var toBoss = (origin - attacker.Position).ToVector3();
+            toBoss.y = 0f;
+            toBoss = toBoss.sqrMagnitude > 0.01f ? toBoss.normalized : Vector3.forward;
+
+            bool Reachable(IntVec3 c) => c.InBounds(map) && c != origin && Pawn.CanReach(c, PathEndMode.OnCell, Danger.Deadly);
+            bool CanShellFrom(IntVec3 c) => Reachable(c) && (attacker is Pawn p ? IsShellTargetPawn(p, Props.shellRange, c) : IsShellTargetTurret(attacker, Props.shellRange, c));
+
+            var maxDistance = Mathf.Min(Props.shellRange - 3f, origin.DistanceTo(attacker.Position));
+            for (var distance = maxDistance; distance >= Props.shellMinRange + 1f; distance -= 2f)
+            {
+                var point = (attacker.Position.ToVector3Shifted() + toBoss * distance).ToIntVec3();
+                cell = CellFinder.StandableCellNear(point, map, 3f, CanShellFrom);
+                if (cell.IsValid) { return true; }
+            }
+
+            cell = CellFinder.StandableCellNear(attacker.Position, map, 6f, Reachable);
             return cell.IsValid;
         }
 
@@ -846,7 +977,8 @@ namespace VVRace
             return GenSight.LineOfSightToThing(origin, building, parent.Map, skipFirstCell: true);
         }
 
-        // 거대 엘텍스 바늘: 보스 둘레에 needleCount개를 띄워 두고, 주기마다 쉬고 있는 바늘 하나로 적의 위치를 조준한다(사출 포격과 따로 돈다).
+        // 거대 엘텍스 바늘: 보스 둘레에 needleCount개를 띄워 두고, 주기마다 쉬고 있는 바늘 1~3개(needleVolleyCount)로 한 적의 위치를 함께 조준한다
+        // (사출 포격과 따로 돈다). 여러 개면 보스 몸통 둘레의 부채꼴 자리에서 저마다 대상을 겨눠 직선들이 대상에서 교차한다.
         // 기절하면 조준 중인 바늘은 모두 제자리로 돌아간다(이미 날아간 바늘은 그대로 꿰뚫고 돌아온다).
         private void TickNeedles(int now, bool stunned)
         {
@@ -868,21 +1000,37 @@ namespace VVRace
 
             if (now < _needleReadyTick || IsChanneling || _pendingSteal) { return; }
 
-            if (!_needles.Where(v => v.Spawned && v.IsIdle).TryRandomElement(out var needle))
+            var idle = _needles.Where(v => v.Spawned && v.IsIdle).ToList();
+            if (idle.Count == 0 || !TryFindNeedleTarget(out var cell))
             {
                 _needleReadyTick = now + ShellTargetScanInterval;
                 return;
             }
 
-            if (TryFindNeedleTarget(out var cell))
+            idle.Shuffle();
+            var count = Mathf.Clamp(Props.needleVolleyCount.RandomInRange, 1, idle.Count);
+            if (!cell.InHorDistOf(parent.Position, Props.needleFanMinTargetDistance))
             {
-                needle.StartAim(cell, Props.needleAimTicks);
-                _needleReadyTick = now + Props.needleCastIntervalTicks.RandomInRange;
+                for (int i = 0; i < count; i++)
+                {
+                    idle[i].StartAim(cell, Props.needleAimTicks, NeedleFanAngle(i, count));
+                }
             }
             else
             {
-                _needleReadyTick = now + ShellTargetScanInterval;
+                idle[0].StartAim(cell, Props.needleAimTicks);
             }
+
+            _needleReadyTick = now + Props.needleCastIntervalTicks.RandomInRange;
+        }
+
+        // 한 번에 count개를 쏠 때 i번째 바늘이 설 부채꼴 자리의 각도(보스→대상 방향 기준, 1개는 null로 기존 발사 지점, 2개 ±50°, 3개 -65°/0°/+65°).
+        private float? NeedleFanAngle(int index, int count)
+        {
+            if (count <= 1) { return null; }
+
+            var half = count == 2 ? Props.needleFanHalfAngle2 : Props.needleFanHalfAngle3;
+            return Mathf.Lerp(-half, half, index / (float)(count - 1));
         }
 
         // 2페이즈: 바늘마다 따로 쉬는 시간이 끝나면 바늘이 있는 자리에서 보이는 적을 스스로 골라 조준한다(보스의 이동·기절 여부와 따로 돈다,
@@ -987,7 +1135,14 @@ namespace VVRace
             CollectShellTargets(_tmpTargets, Props.needleTargetRange, origin);
             if (_tmpTargets.Count > 0)
             {
-                if (!_tmpTargets.Where(v => !IsInAimedNeedleLane(v.Position)).TryRandomElement(out var target))
+                // 사거리 밖에서 공격해 왔던 적(1페이즈)이 바늘 사거리 안에 보이면 그 적을 먼저 노린다.
+                var attacker = RangedAttacker;
+                Thing target;
+                if (attacker != null && _tmpTargets.Contains(attacker) && !IsInAimedNeedleLane(attacker.Position))
+                {
+                    target = attacker;
+                }
+                else if (!_tmpTargets.Where(v => !IsInAimedNeedleLane(v.Position)).TryRandomElement(out target))
                 {
                     target = _tmpTargets.RandomElement();
                 }
@@ -1330,6 +1485,8 @@ namespace VVRace
             // 1페이즈: 피해는 마나 보호장을 깎는다. 보호장이 깨져 있는 동안(기절 중)은 요정들이 대신 받아낸다.
             if (_phase == ApocryphaPhase.Bound)
             {
+                NoteAttacker(dinfo.Instigator);
+
                 if (ShieldBroken || _manaShield <= 0f)
                 {
                     ThrowBlockedText();

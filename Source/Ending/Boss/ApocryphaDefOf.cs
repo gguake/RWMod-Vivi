@@ -45,6 +45,7 @@ namespace VVRace
         public static JobDef VV_ApocryphaWait;
         public static JobDef VV_ApocryphaWander;
         public static JobDef VV_ApocryphaApproach;
+        public static JobDef VV_ApocryphaPursue;
         public static JobDef VV_ApocryphaBreath;
         public static JobDef VV_ApocryphaChannel;
         public static JobDef VV_ApocryphaCharge;

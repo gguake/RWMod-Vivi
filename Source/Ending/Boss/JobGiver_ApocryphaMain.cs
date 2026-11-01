@@ -55,6 +55,12 @@ namespace VVRace
                 return ChargeJob(pawn, target, range);
             }
 
+            // 1페이즈: 포격 사거리 밖에서 공격해 온 적이 있으면 그 적을 포격할 수 있는 자리로 다가간다(영원꽃 접근·배회보다 먼저).
+            if (comp.Phase == ApocryphaPhase.Bound && comp.TryFindPursuitCell(out var pursuitCell))
+            {
+                return PursueJob(pursuitCell);
+            }
+
             if (target != null && GenTicks.TicksGame >= comp.NextApproachTick)
             {
                 comp.Notify_Approached();
@@ -106,6 +112,16 @@ namespace VVRace
             var job = JobMaker.MakeJob(ApocryphaJobDefOf.VV_ApocryphaApproach, cell);
             job.locomotionUrgency = LocomotionUrgency.Jog;
             job.expiryInterval = 2500;
+            job.checkOverrideOnExpire = true;
+            return job;
+        }
+
+        // 공격자가 움직일 수 있으므로 5초마다 자리를 다시 고른다.
+        private static Job PursueJob(IntVec3 cell)
+        {
+            var job = JobMaker.MakeJob(ApocryphaJobDefOf.VV_ApocryphaPursue, cell);
+            job.locomotionUrgency = LocomotionUrgency.Jog;
+            job.expiryInterval = 300;
             job.checkOverrideOnExpire = true;
             return job;
         }

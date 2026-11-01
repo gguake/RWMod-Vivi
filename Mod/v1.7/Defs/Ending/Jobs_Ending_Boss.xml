@@ -52,6 +52,15 @@
     <suspendable>false</suspendable>
   </JobDef>
 
+  <!-- 1페이즈: 사출 포격 사거리 밖(또는 시야 밖)에서 공격해 온 적을 포격할 수 있는 자리로 다가간다. -->
+  <JobDef>
+    <defName>VV_ApocryphaPursue</defName>
+    <driverClass>JobDriver_Goto</driverClass>
+    <reportString>closing in on an attacker.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+    <suspendable>false</suspendable>
+  </JobDef>
+
   <JobDef>
     <defName>VV_ApocryphaBreath</defName>
     <driverClass>VVRace.JobDriver_ApocryphaBreath</driverClass>

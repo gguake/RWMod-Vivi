@@ -6,14 +6,14 @@
   <SongDef>
     <defName>VV_TheFallenQueen</defName>
     <clipPath>Songs/VV_TheFallenQueen</clipPath>
-    <volume>1.00</volume>
+    <volume>1.25</volume>
     <commonality>0</commonality>
   </SongDef>
 
   <SongDef>
     <defName>VV_TheFallenQueen_Phase2</defName>
     <clipPath>Songs/VV_TheFallenQueen_Phase2</clipPath>
-    <volume>1.00</volume>
+    <volume>1.25</volume>
     <commonality>0</commonality>
   </SongDef>
 

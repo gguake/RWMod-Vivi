@@ -232,13 +232,16 @@ namespace VVRace
         #region 보스가 부르는 API
         // 보스 컴프가 고른 대상 칸을 겨눈다. 발사 직선(시작점·방향·길이)은 지금 정하고 조준 동안 바뀌지 않는다.
         // 1페이즈는 보스 몸통 앞의 발사 지점에서, 2페이즈는 바늘이 떠 있는 자리에서 쏜다(그동안 보스는 따로 움직인다).
-        public void StartAim(IntVec3 targetCell, int aimTicks)
+        // fanAngle(1페이즈 여러 바늘 동시 발사): 보스→대상 방향에서 이만큼 돌린 몸통 둘레 반경 needleFanRadius의 부채꼴 자리에서 대상을 겨눠 쏜다
+        // (함께 쏘는 바늘들의 직선이 대상에서 교차한다). null이면 몸통 앞의 기존 발사 지점에서 쏜다.
+        public void StartAim(IntVec3 targetCell, int aimTicks, float? fanAngle = null)
         {
             if (!Spawned || _boss == null || !_boss.Spawned) { return; }
 
             var now = GenTicks.TicksGame;
             var origin = IsUnbound ? _pos.Yto0() : BodyCenter;
-            var direction = (targetCell.ToVector3Shifted() - origin).Yto0();
+            var target = targetCell.ToVector3Shifted().Yto0();
+            var direction = (target - origin).Yto0();
             if (direction.sqrMagnitude < 0.01f)
             {
                 direction = (_pos - BodyCenter).Yto0();
@@ -246,8 +249,19 @@ namespace VVRace
 
             direction.Normalize();
 
+            var start = IsUnbound ? origin : origin + direction * LaunchOffset;
+            if (fanAngle.HasValue && !IsUnbound)
+            {
+                start = origin + Quaternion.AngleAxis(fanAngle.Value, Vector3.up) * direction * (BossComp?.Props.needleFanRadius ?? 5f);
+                var toTarget = (target - start).Yto0();
+                if (toTarget.sqrMagnitude > 0.01f)
+                {
+                    direction = toTarget.normalized;
+                }
+            }
+
             _laneDir = direction;
-            _laneStart = ClampInsideMap(IsUnbound ? origin : origin + direction * LaunchOffset);
+            _laneStart = ClampInsideMap(start);
             _laneLength = LaneLengthInsideMap(_laneStart, direction, BossComp?.Props.needleRange ?? 32f);
 
             _moveFrom = _pos;
