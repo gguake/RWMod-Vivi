@@ -18,6 +18,9 @@ namespace VVRace
         private const float TrailPointSpacing = 1f;
         private const float MapEdgeMargin = 0.05f;
 
+        // 바닐라 Pawn_DrawTracker.FlyingOffset이 나는 폰을 그리는 높이(z칸).
+        private const float FlightDrawLift = 0.6f;
+
         private static readonly List<Thing> _tmpCellThings = new List<Thing>();
 
         public static Vector3 BodyOnLane(Vector3 start, Vector3 direction, float tipDistance)
@@ -80,8 +83,8 @@ namespace VVRace
                     var thing = _tmpCellThings[i];
                     if (hitIds.Contains(thing.thingIDNumber) || !IsPierceable(thing) || !canPierce(thing)) { continue; }
 
-                    var hit = thing is Pawn
-                        ? Overlaps(start, direction, length, halfWidth, thing.DrawPos, PawnHitRadius, PawnHitRadius, from, to)
+                    var hit = thing is Pawn pawn
+                        ? Overlaps(start, direction, length, halfWidth, GroundPos(pawn), PawnHitRadius, PawnHitRadius, from, to)
                         : Overlaps(start, direction, length, halfWidth, cell.ToVector3Shifted(), cellExtent, cellExtent, from, to);
                     if (!hit) { continue; }
 
@@ -94,6 +97,18 @@ namespace VVRace
             }
 
             _tmpCellThings.Clear();
+        }
+
+        // 경고 띠는 땅에 그리므로 움직이는 폰은 그려지는 자리로, 나는 폰은 그 높이를 뺀 땅 위치로 판정한다.
+        private static Vector3 GroundPos(Pawn pawn)
+        {
+            var pos = pawn.DrawPos;
+            if (pawn.flight != null)
+            {
+                pos.z -= FlightDrawLift * pawn.flight.PositionOffsetFactor;
+            }
+
+            return pos;
         }
 
         private static bool IsPierceable(Thing thing)
