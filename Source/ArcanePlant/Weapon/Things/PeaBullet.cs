@@ -1,8 +1,5 @@
-﻿using HarmonyLib;
-using RimWorld;
+﻿using RimWorld;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
 using UnityEngine;
 using Verse;
 
@@ -58,47 +55,6 @@ namespace VVRace
                     _modifiers.Add(mod);
                 }
             }
-        }
-
-        protected override void ImpactSomething()
-        {
-            base.ImpactSomething();
-        }
-
-        protected override void Impact(Thing hitThing, bool blockedByShield = false)
-        {
-            PeaBulletReversePatch.Impact(this, hitThing, blockedByShield);
-        }
-
-        public static void Impact_TakeDamageOverride(DamageWorker.DamageResult damageResult, BattleLogEntry_RangedImpact log, PeaBullet bullet)
-        {
-        }
-    }
-
-    [HarmonyPatch]
-    public class PeaBulletReversePatch
-    {
-        [HarmonyReversePatch]
-        [HarmonyPatch(typeof(Bullet), "Impact")]
-        public static void Impact(Bullet __instance, Thing hitThing, bool blockedByShield)
-        {
-            IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> codeInstructions)
-            {
-                var instructions = codeInstructions.ToList();
-                var index = instructions.FirstIndexOf(v => v.opcode == OpCodes.Callvirt && v.OperandIs(AccessTools.Method(typeof(Thing), nameof(Thing.TakeDamage)))) + 1;
-
-                instructions.InsertRange(index, new CodeInstruction[]
-                {
-                    new CodeInstruction(OpCodes.Dup),
-                    new CodeInstruction(OpCodes.Ldloc_2),
-                    new CodeInstruction(OpCodes.Ldarg_0),
-                    new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(PeaBullet), nameof(PeaBullet.Impact_TakeDamageOverride))),
-                });
-
-                return instructions;
-            }
-
-            _ = Transpiler(null);
         }
     }
 }
