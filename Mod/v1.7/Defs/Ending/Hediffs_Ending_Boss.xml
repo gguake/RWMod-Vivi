@@ -4,7 +4,7 @@
   <HediffDef>
     <defName>VV_ApocryphaFairyBond</defName>
     <label>vivi fairy</label>
-    <description>The souls of 1,440,000,000 fairy vivis bound to the old empire's last queen form a shield that absorbs all attacks.</description>
+    <description>The souls of 1,440,000,000 fairy vivis bound to the old empire's last empress form a shield that absorbs all attacks.</description>
     <hediffClass>VVRace.Hediff_ApocryphaFairyBond</hediffClass>
     <defaultLabelColor>(0, 1, 1)</defaultLabelColor>
     <isBad>false</isBad>
