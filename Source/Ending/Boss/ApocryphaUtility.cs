@@ -126,10 +126,11 @@ namespace VVRace
         }
 
         // 보스 스폰과 분리해 호위·연출이 실패해도 이미 스폰된 보스로 전투를 시작할 수 있게 한다.
-        public static void SpawnArrival(Pawn boss, float points)
+        // 파장에 밀려 외곽에 내려앉은 보스 둘레에서 호위 말벌이 검은 기운으로 빚어진다.
+        public static void SpawnArrival(Pawn boss)
         {
-            var count = Mathf.Clamp(Mathf.RoundToInt(points / VVPawnKindDefOf.VV_TitanicHornet.combatPower), 4, 12);
-            SpawnHornetEscorts(boss, count, fromMapEdge: false);
+            var count = boss.TryGetComp<CompApocrypha>()?.ArrivalHornetCount ?? 0;
+            HornetManifestation.SummonAround(boss, count, HornetSummonRole.Escort);
 
             VVEffecterDefOf.VV_Effecter_ApocryphaArrive.Spawn(boss.Position, boss.Map, 1.5f).Cleanup();
             Find.TickManager.slower.SignalForceNormalSpeedShort();
@@ -151,105 +152,75 @@ namespace VVRace
             return Find.FactionManager.RandomEnemyFaction(allowHidden: true, allowDefeated: false, allowNonHumanlike: true);
         }
 
-        public static List<Pawn> SpawnHornetEscorts(Pawn boss, int count, bool fromMapEdge)
+        // 보스전 말벌은 모두 오염된 영원꽃 동화를 지닌 채 스폰 즉시 적대하도록 광폭 상태로 시작한다.
+        public static Pawn SpawnBossFightHornet(Map map, IntVec3 cell, Rot4 rotation)
         {
-            var result = new List<Pawn>();
-            if (boss == null || !boss.Spawned || count <= 0) { return result; }
+            var hornet = PawnGenerator.GeneratePawn(new PawnGenerationRequest(VVPawnKindDefOf.VV_TitanicHornet, null, PawnGenerationContext.NonPlayer, map.Tile));
+            hornet.health.AddHediff(VVHediffDefOf.VV_CorruptedEverflowerAssimilation);
+            GenSpawn.Spawn(hornet, cell, map, rotation);
 
-            var map = boss.Map;
-            var center = boss.Position;
-            if (fromMapEdge)
-            {
-                if (!RCellFinder.TryFindClosestEdgeCellTo(boss.Position, map, out center) &&
-                    !RCellFinder.TryFindRandomPawnEntryCell(out center, map, CellFinder.EdgeRoadChance_Animal))
-                {
-                    center = boss.Position;
-                }
-            }
+            hornet.mindState.mentalStateHandler.TryStartMentalState(VVMentalStateDefOf.VV_HornetBerserk, transitionSilently: true);
+            return hornet;
+        }
 
-            var hornets = AggressiveAnimalIncidentUtility.GenerateAnimals(VVPawnKindDefOf.VV_TitanicHornet, map.Tile, 0f, count);
-            foreach (var hornet in hornets)
-            {
-                var cell = CellFinder.RandomClosewalkCellNear(center, map, fromMapEdge ? 6 : 8);
-                GenSpawn.Spawn(hornet, cell, map, Rot4.FromAngleFlat((boss.Position - cell).AngleFlat));
-
-                // 상시 스카리아 기버의 다음 처리를 기다리지 않고 스폰 즉시 적대하도록 광폭 상태를 시작한다.
-                hornet.mindState.mentalStateHandler.TryStartMentalState(VVMentalStateDefOf.VV_HornetBerserk, transitionSilently: true);
-                result.Add(hornet);
-            }
-
-            if (result.Count == 0) { return result; }
-
+        public static void JoinEscort(Pawn boss, Pawn hornet)
+        {
             var lord = FindEscortLord(boss);
             if (lord == null)
             {
                 var props = boss.TryGetComp<CompApocrypha>()?.Props;
-                LordMaker.MakeNewLord(null, new LordJob_ApocryphaEscort(boss, props?.escortGuardRadius ?? 10f, props?.escortRetaliationRadius ?? 25f), map, result);
-            }
-            else
-            {
-                lord.AddPawns(result);
+                LordMaker.MakeNewLord(null, new LordJob_ApocryphaEscort(boss, props?.escortGuardRadius ?? 10f, props?.escortRetaliationRadius ?? 25f), hornet.Map, new List<Pawn> { hornet });
+                return;
             }
 
-            if (fromMapEdge)
-            {
-                VVEffecterDefOf.VV_Effecter_ApocryphaArrive.Spawn(center, map).Cleanup();
-            }
-
-            return result;
+            lord.AddPawn(hornet);
         }
 
-        public static List<Pawn> SpawnFlowerGuardHornets(Pawn boss, int count)
+        public static void JoinFlowerGuard(Pawn boss, Thing flower, Pawn hornet)
         {
-            if (boss == null || !boss.Spawned) { return new List<Pawn>(); }
-
-            var map = boss.Map;
-            var result = WalkInHornets(map, count);
-            if (result.Count == 0) { return result; }
-
             var lord = FindFlowerGuardLord(boss);
             if (lord == null)
             {
                 var props = boss.TryGetComp<CompApocrypha>()?.Props;
-                LordMaker.MakeNewLord(null, new LordJob_ApocryphaFlowerGuard(
-                    boss,
-                    props?.flowerGuardRadius ?? 6f,
-                    props?.flowerGuardRetaliationRadius ?? 20f,
-                    props?.escortGuardRadius ?? 10f), map, result);
-            }
-            else
-            {
-                lord.AddPawns(result);
+                var guardJob = new LordJob_ApocryphaFlowerGuard(boss, props?.flowerGuardRadius ?? 6f, props?.flowerGuardRetaliationRadius ?? 20f);
+                guardJob.AssignFlower(hornet, flower);
+                LordMaker.MakeNewLord(null, guardJob, hornet.Map, new List<Pawn> { hornet });
+                return;
             }
 
-            return result;
+            ((LordJob_ApocryphaFlowerGuard)lord.LordJob).AssignFlower(hornet, flower);
+            lord.AddPawn(hornet);
         }
 
-        private static List<Pawn> WalkInHornets(Map map, int count)
+        // 정착지 습격은 일반 거대 말벌 강습과 같은 로드를 쓰므로 맵에 있는 강습 로드에 함께 넣는다.
+        public static void JoinHornetAssault(Map map, List<Pawn> hornets)
         {
-            var result = new List<Pawn>();
-            if (map == null || count <= 0) { return result; }
+            if (map == null || hornets.NullOrEmpty()) { return; }
 
-            if (!RCellFinder.TryFindRandomPawnEntryCell(out var entryCell, map, CellFinder.EdgeRoadChance_Animal)) { return result; }
-
-            var parms = new IncidentParms()
+            var joining = new List<Pawn>();
+            foreach (var hornet in hornets)
             {
-                target = map,
-                raidArrivalMode = PawnsArrivalModeDefOf.EdgeWalkIn,
-                spawnCenter = entryCell,
-                sendLetter = false,
-            };
-
-            result.AddRange(AggressiveAnimalIncidentUtility.GenerateAnimals(VVPawnKindDefOf.VV_TitanicHornet, map.Tile, 0f, count));
-            if (result.Count == 0) { return result; }
-
-            parms.raidArrivalMode.Worker.Arrive(result, parms);
-            foreach (var hornet in result)
-            {
-                hornet.mindState.mentalStateHandler.TryStartMentalState(VVMentalStateDefOf.VV_HornetBerserk, transitionSilently: true);
+                var previous = hornet.GetLord();
+                previous?.Notify_PawnLost(hornet, PawnLostCondition.ForcedToJoinOtherLord);
+                if (hornet.GetLord() == null)
+                {
+                    joining.Add(hornet);
+                }
             }
 
-            return result;
+            if (joining.Count == 0) { return; }
+
+            var lords = map.lordManager.lords;
+            for (int i = 0; i < lords.Count; i++)
+            {
+                if (lords[i].LordJob is LordJob_HornetAssault)
+                {
+                    lords[i].AddPawns(joining);
+                    return;
+                }
+            }
+
+            LordMaker.MakeNewLord(null, new LordJob_HornetAssault(), map, joining);
         }
 
         public static Lord FindEscortLord(Pawn boss)

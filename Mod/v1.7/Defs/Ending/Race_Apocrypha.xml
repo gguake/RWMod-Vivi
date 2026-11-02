@@ -252,6 +252,18 @@
     <selectable>false</selectable>
   </ThingDef>
 
+  <!-- 보스전 거대 말벌 소환: 땅(멸망꽃이면 꽃)에서 검은 기운이 피어올라 VV_Manifest 셰이더로 말벌 형체를 빚고, 다 빚어지면 실제 말벌이 스폰된다.
+       말벌의 역할(호위·멸망꽃 경비·정착지 습격)과 지킬 대상을 저장하는 시퀀서다. -->
+  <ThingDef ParentName="EtherealThingBase">
+    <defName>VV_HornetManifestation</defName>
+    <label>???</label>
+    <thingClass>VVRace.HornetManifestation</thingClass>
+    <tickerType>Normal</tickerType>
+    <drawerType>RealtimeOnly</drawerType>
+    <altitudeLayer>Pawn</altitudeLayer>
+    <selectable>false</selectable>
+  </ThingDef>
+
   <!-- 1페이즈 거대 엘텍스 바늘: 보스 둘레에 떠 있다가 넓은 직선을 꿰뚫고 돌아온다. 몸체·경고 띠는 ApocryphaNeedleRenderer가 직접 그리고,
        발사·귀환 궤적은 엘텍스 바늘과 같은 RPEF 궤적(점은 코드에서 직접 남긴다)으로 그린다. -->
   <ThingDef ParentName="EtherealThingBase">

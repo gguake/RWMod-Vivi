@@ -38,7 +38,16 @@ namespace VVRace
         {
             if (_nextTick < 0 || now < _nextTick) { return; }
 
-            _nextTick = now + (Launch(FairySeedDue) ? Props.doomSeedIntervalTicks.RandomInRange : RetryTicks);
+            if (Launch(FairySeedDue))
+            {
+                // 호위 증원은 정기 발사 주기에만 따라온다. 보호장 파괴 때의 추가 발사에는 붙이지 않는다.
+                HornetManifestation.SummonAround(_comp.Pawn, Props.volleyEscortCount, HornetSummonRole.Escort);
+                _nextTick = now + Props.doomSeedIntervalTicks.RandomInRange;
+            }
+            else
+            {
+                _nextTick = now + RetryTicks;
+            }
         }
 
         public void Notify_ShieldBroken(int now)

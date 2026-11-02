@@ -163,6 +163,12 @@ namespace VVRace
             }
             _tmpCellThings.Clear();
 
+            // 브레스가 닿은 대상 자리에 짙은 독성 가스를 남긴다. 말벌은 오염된 영원꽃 동화로 독성 환경에 면역이다.
+            if (ModsConfig.BiotechActive && Props.breathGasRadius > 0f)
+            {
+                GasUtility.AddGas(target, map, GasType.ToxGas, Props.breathGasRadius);
+            }
+
             ThrowFlecks(baseAngle, halfAngle);
             _comp.SpawnEffecter(VVEffecterDefOf.VV_Effecter_ApocryphaBreath, MouthOffset());
             ApocryphaUtility.ShakeCamera(map, 0.6f);

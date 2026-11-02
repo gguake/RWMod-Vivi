@@ -58,7 +58,6 @@ namespace VVRace
         private void TriggerManaBackflow(Pawn boss, CompApocrypha comp)
         {
             var vivi = pawn;
-            var map = vivi.Map;
 
             // 결속 해방이 2페이즈 전환과 간섭 일괄 정리를 다시 호출할 수 있으므로 자기 자신을 먼저 제거한다.
             EndAura();
@@ -67,7 +66,7 @@ namespace VVRace
             ApocryphaGimmicks.PlayManaBackflow(vivi, boss);
             comp.ReleaseBond(vivi);
 
-            DoomBlightUtility.ClearDoomBlights(map);
+            DoomBlightUtility.ClearDoomBlights(vivi);
             Messages.Message(
                 LocalizeString_Message.VV_Message_FairyBondReleased.Translate(vivi.Named("PAWN")),
                 new LookTargets(boss),

@@ -160,6 +160,7 @@ namespace VVRace
         public static ThingDef VV_Apocrypha;
         public static ThingDef VV_DyingApocrypha;
         public static ThingDef VV_ApocryphaManifestation;
+        public static ThingDef VV_HornetManifestation;
 
         public static ThingDef VV_Mote_ApocryphaAimTarget;
         public static ThingDef VV_Mote_ApocryphaAimCharge;
@@ -272,6 +273,7 @@ namespace VVRace
 
         public static HediffDef VV_ApocryphaFairyBond;
         public static HediffDef VV_ApocryphaStuckNeedle;
+        public static HediffDef VV_CorruptedEverflowerAssimilation;
 
         public static HediffDef VV_FairyInterference;
         public static HediffDef VV_DoomBlight_Fear;
@@ -394,6 +396,9 @@ namespace VVRace
         public static EffecterDef VV_Effecter_QueenManaBarrier;
         public static EffecterDef VV_Effecter_WindOfRestCleanse;
         public static EffecterDef VV_Effecter_HornetDissolve;
+        public static EffecterDef VV_Effecter_HornetAshen;
+        public static EffecterDef VV_Effecter_HornetManifestBegin;
+        public static EffecterDef VV_Effecter_HornetManifestComplete;
 
         public static EffecterDef VV_Effecter_AssimilationBegin;
         public static EffecterDef VV_Effecter_AssimilationAbsorb;

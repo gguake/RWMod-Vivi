@@ -384,7 +384,8 @@ namespace VVRace
             Graphics.DrawMesh(mesh, matrix, material, 0, null, 0, PropertyBlock);
         }
 
-        private static Material GetMaterial(string fullPath)
+        // HornetManifestation도 같은 VV_Manifest 재질로 말벌을 빚는다.
+        internal static Material GetMaterial(string fullPath)
         {
             if (MaterialCache.TryGetValue(fullPath, out var cached))
             {

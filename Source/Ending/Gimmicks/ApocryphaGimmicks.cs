@@ -142,6 +142,7 @@ namespace VVRace
 
             ClearGimmickThings(map);
             RemoveFairyInterference(map);
+            DoomBlightUtility.ClearDoomBlights(map);
         }
 
         public static void CleanupAll(Map map)

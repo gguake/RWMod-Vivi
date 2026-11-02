@@ -33,7 +33,7 @@
 <VV_Message_ApocryphaEscapedRoofCollapse>Asphodel teleported away from a roof collapse.</VV_Message_ApocryphaEscapedRoofCollapse>
 <VV_Message_ApocryphaShieldBroken>Asphodel's mana shield has shattered, stunning her.</VV_Message_ApocryphaShieldBroken>
 <VV_Message_ApocryphaShieldRestored>Asphodel's mana shield has been restored.</VV_Message_ApocryphaShieldRestored>
-<VV_Message_ApocryphaNeedleStuck>An ancient needle lodged in Asphodel's carapace.</VV_Message_ApocryphaNeedleStuck>
+<VV_Message_ApocryphaNeedleStuck>An ancient needle lodged in Asphodel's carapace, briefly stunning her.</VV_Message_ApocryphaNeedleStuck>
 <VV_Message_ApocryphaAllNeedlesStuck>All the ancient needles have lodged in Asphodel, stunning her.</VV_Message_ApocryphaAllNeedlesStuck>
 <VV_Message_ApocryphaNeedlesPulled>Asphodel tore the lodged needles out and scattered them across the ground.</VV_Message_ApocryphaNeedlesPulled>
 <VV_Message_ApocryphaNeedleActivated>An ancient needle activates and aims at {PAWN_labelShort}.</VV_Message_ApocryphaNeedleActivated>

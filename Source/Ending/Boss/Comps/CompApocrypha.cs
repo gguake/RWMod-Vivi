@@ -22,7 +22,6 @@ namespace VVRace
         public long initialBondCount = 1440000000L;
         public long bondReleaseAmount = 360000000L;
         public int releaseStunTicks = 300;
-        public IntRange releaseEscortCount = new IntRange(3, 5);
 
         public float shellRange = 20f;
         // 사출탄 폭발 반경 2.4칸에 보스가 휘말리지 않도록 최소 사거리 안의 대상은 조준과 발사에서 제외한다.
@@ -45,7 +44,7 @@ namespace VVRace
         public int maxFairyFlowers = 2;
 
         public float manaShieldMax = 1500f;
-        public int shieldBreakStunTicks = 1500;
+        public int shieldBreakStunTicks = 3000;
 
         public int needleCount = 3;
         public int needleFirstDelayTicks = 900;
@@ -68,21 +67,28 @@ namespace VVRace
         public float wanderRadius = 10f;
         public IntRange wanderWaitTicks = new IntRange(600, 1200);
 
-        public IntRange escortReinforceCount = new IntRange(2, 4);
         public float escortGuardRadius = 10f;
         public float escortRetaliationRadius = 25f;
-
-        public int edgeHornetIntervalTicks = 1250;
-        public IntRange edgeHornetGroupSize = new IntRange(1, 2);
-        public SimpleCurve edgeHornetMaxPointsByThreatPoints = new SimpleCurve
-        {
-            new CurvePoint(500f, 1125f),
-            new CurvePoint(2500f, 2250f),
-            new CurvePoint(5000f, 3000f),
-            new CurvePoint(10000f, 4500f),
-        };
         public float flowerGuardRadius = 6f;
         public float flowerGuardRetaliationRadius = 20f;
+
+        // 보스전 거대 말벌은 모두 검은 기운에서 빚어진다(HornetManifestation). 난이도 배율은 등장·간섭 소환 수에만 곱한다.
+        public int arrivalHornetCount = 3;
+        public int interferenceHornetCount = 2;
+        public int interferenceHornetGrowth = 1;
+        public int volleyEscortCount = 2;
+        public int doomFlowerHornetIntervalTicks = 10000;
+        public int doomFlowerHornetCount = 1;
+        public FloatRange summonRadiusAroundBoss = new FloatRange(3.5f, 7f);
+        public SimpleCurve hornetCountFactorByThreatScale = new SimpleCurve
+        {
+            new CurvePoint(0.1f, 0.4f),
+            new CurvePoint(0.3f, 0.55f),
+            new CurvePoint(0.6f, 0.75f),
+            new CurvePoint(1f, 1f),
+            new CurvePoint(1.55f, 1.3f),
+            new CurvePoint(2.2f, 1.6f),
+        };
 
         public int transformTicks = 420;
         public int transformGraphicSwapTicks = 210;
@@ -96,6 +102,8 @@ namespace VVRace
         public int unboundNeedleActivateTicks = 60;
         public int unboundNeedleLockOnTicks = 150;
         public int unboundNeedleLockedTicks = 75;
+        public float needleStickVitalityDamage = 0.1f;
+        public int needleStickStunTicks = 420;
         public int allNeedlesStuckStunTicks = 3600;
 
         public int breathCooldownTicks = 1200;
@@ -104,6 +112,7 @@ namespace VVRace
         public float breathAngle = 50f;
         public float breathToxicSeverity = 0.25f;
         public float breathAcidBurnDamage = 8f;
+        public float breathGasRadius = 3.9f;
         public int meleeIntervalTicks = 60;
         public int smashIntervalTicks = 30;
         public float smashDamage = 400f;
@@ -158,8 +167,7 @@ namespace VVRace
         private bool _transformSwapped;
         private bool _pendingDeath;
         private int _nextApproachTick;
-        private int _nextEdgeHornetTick;
-        private List<Pawn> _edgeHornets = new List<Pawn>();
+        private int _releaseCount;
         private int _nextMeleeTick;
         private float _manaShield;
         private bool _shieldBroken;
@@ -200,6 +208,20 @@ namespace VVRace
 
         public static float ThreatScale => Find.Storyteller?.difficulty?.threatScale ?? 1f;
         public float HitPointsDifficultyFactor => Mathf.Max(0.1f, Props.hitPointsFactorByThreatScale?.Evaluate(ThreatScale) ?? 1f);
+
+        public int ArrivalHornetCount => ScaledHornetCount(Props.arrivalHornetCount);
+
+        // 간섭할 때마다 증원이 늘어나므로 이번 간섭이 몇 번째인지(0부터)로 계산한다.
+        public int InterferenceHornetCount(int releaseIndex)
+        {
+            return ScaledHornetCount(Props.interferenceHornetCount + Props.interferenceHornetGrowth * releaseIndex);
+        }
+
+        private int ScaledHornetCount(int baseCount)
+        {
+            var factor = Props.hornetCountFactorByThreatScale?.Evaluate(ThreatScale) ?? 1f;
+            return Mathf.Max(1, Mathf.RoundToInt(baseCount * factor));
+        }
 
         public static float DoomBloomTimeFactor
         {
@@ -298,7 +320,6 @@ namespace VVRace
             _manaShield = MaxManaShield;
 
             _nextApproachTick = now + Props.approachIntervalTicks.RandomInRange;
-            _nextEdgeHornetTick = now + Props.edgeHornetIntervalTicks;
 
             _seeds.SetReadyTick(now + Props.firstDoomSeedDelayTicks);
             _needleAttack.SetReadyTick(now + Props.needleFirstDelayTicks);
@@ -349,14 +370,7 @@ namespace VVRace
             Scribe_Values.Look(ref _manaShield, "manaShield", 0f);
             Scribe_Values.Look(ref _shieldBroken, "shieldBroken", false);
             Scribe_Values.Look(ref _pendingShieldBreak, "pendingShieldBreak", false);
-
-            if (Scribe.mode == LoadSaveMode.Saving)
-            {
-                _edgeHornets.RemoveAll(v => v == null || v.Destroyed || v.Dead);
-            }
-
-            Scribe_Values.Look(ref _nextEdgeHornetTick, "nextEdgeHornetTick", 0);
-            Scribe_Collections.Look(ref _edgeHornets, "edgeHornets", LookMode.Reference);
+            Scribe_Values.Look(ref _releaseCount, "releaseCount", 0);
 
             Scribe_Deep.Look(ref _targeting, "targeting", this);
             Scribe_Deep.Look(ref _shell, "shell", this);
@@ -364,11 +378,6 @@ namespace VVRace
             Scribe_Deep.Look(ref _breath, "breath", this);
             Scribe_Deep.Look(ref _channel, "channel", this);
             Scribe_Deep.Look(ref _seeds, "seeds", this);
-
-            if (Scribe.mode == LoadSaveMode.PostLoadInit)
-            {
-                _edgeHornets.RemoveAll(v => v == null);
-            }
         }
 
         public override void PostDeSpawn(Map map, DestroyMode mode = DestroyMode.Vanish)
@@ -433,12 +442,6 @@ namespace VVRace
                 _channel.TickContactCheck();
             }
 
-            if (IsActive && now >= _nextEdgeHornetTick && IsQuestBossFight)
-            {
-                _nextEdgeHornetTick = now + Props.edgeHornetIntervalTicks;
-                TickEdgeHornets();
-            }
-
             if (_pendingDamageText > 0f && now - _lastDamageTextTick >= DamageTextInterval)
             {
                 FlushDamageText(now);
@@ -473,20 +476,6 @@ namespace VVRace
 
             _shell.Tick(now, stunned);
             _needleAttack.TickBound(now, stunned);
-        }
-
-        private void TickEdgeHornets()
-        {
-            var map = parent.Map;
-            _edgeHornets.RemoveAll(v => v == null || v.Dead || !v.Spawned || v.Map != map);
-
-            // 쓰러진 말벌이 누적돼 증원이 막히지 않도록 증원 상한에서는 제외한다.
-            var hornetPower = Mathf.Max(1f, VVPawnKindDefOf.VV_TitanicHornet.combatPower);
-            var maxPoints = Props.edgeHornetMaxPointsByThreatPoints.Evaluate(StorytellerUtility.DefaultThreatPointsNow(map));
-            var room = Mathf.FloorToInt((maxPoints - _edgeHornets.Count(v => !v.Downed) * hornetPower) / hornetPower);
-            if (room <= 0) { return; }
-
-            _edgeHornets.AddRange(ApocryphaUtility.SpawnFlowerGuardHornets(Pawn, Mathf.Min(room, Props.edgeHornetGroupSize.RandomInRange)));
         }
 
         private void TickTransforming(int now)
@@ -669,11 +658,17 @@ namespace VVRace
             Messages.Message(LocalizeString_Message.VV_Message_ApocryphaShieldRestored.Translate(), Pawn, MessageTypeDefOf.NeutralEvent);
         }
 
-        internal void GimmickStun(int ticks, Thing instigator)
+        // StunFor는 남은 기절과 새 기절 중 긴 쪽을 쓰므로, 정해진 시간만큼만 기절시키려면 replaceExisting으로 남은 기절을 먼저 지운다.
+        internal void GimmickStun(int ticks, Thing instigator, bool replaceExisting = false)
         {
             ApplyingGimmickStun = true;
             try
             {
+                if (replaceExisting)
+                {
+                    Pawn.stances.stunner.StopStun();
+                }
+
                 Pawn.stances.stunner.StunFor(ticks, instigator, addBattleLog: false);
             }
             finally
@@ -720,12 +715,16 @@ namespace VVRace
 
             _bondCount = System.Math.Max(0L, _bondCount - Props.bondReleaseAmount);
 
-            GimmickStun(Props.releaseStunTicks, releaser);
+            GimmickStun(Props.releaseStunTicks, releaser, replaceExisting: true);
             _channel.Interrupt();
             _shell.Cancel();
             _needleAttack.CancelAims();
 
-            ApocryphaUtility.SpawnHornetEscorts(Pawn, Props.releaseEscortCount.RandomInRange, fromMapEdge: true);
+            if (IsQuestBossFight)
+            {
+                HornetManifestation.SummonAround(Pawn, InterferenceHornetCount(_releaseCount), HornetSummonRole.Assault);
+            }
+            _releaseCount++;
 
             if (_bondCount <= 0)
             {
@@ -737,6 +736,19 @@ namespace VVRace
                     LocalizeString_Message.VV_Message_ApocryphaBondReleased.Translate(_bondCount.ToString("N0").Named("COUNT")),
                     Pawn,
                     MessageTypeDefOf.PositiveEvent);
+            }
+        }
+
+        // 2페이즈 바늘처럼 피해 처리를 거치지 않는 기믹 피해. 처치는 다음 틱으로 미룬다.
+        internal void TakeVitalityDamage(float amount)
+        {
+            if (_phase != ApocryphaPhase.Unbound || _pendingDeath || amount <= 0f) { return; }
+
+            _vitality = Mathf.Max(0f, _vitality - amount);
+            _pendingDamageText += amount;
+            if (_vitality <= 0f)
+            {
+                _pendingDeath = true;
             }
         }
 
@@ -838,6 +850,7 @@ namespace VVRace
             ApocryphaGimmicks.Notify_BossPhaseChanged(Pawn, ApocryphaPhase.Dying);
 
             ViviEndingUtility.VanishEscorts(Pawn);
+            HornetManifestation.CancelAll(map);
             GenSpawn.Spawn(stolen, parent.Position, map);
             Pawn.Destroy(DestroyMode.Vanish);
         }
@@ -951,6 +964,7 @@ namespace VVRace
             // 맵 밖에 남은 호위가 대상 없는 듀티로 남지 않도록 습격으로 돌리고, 맵의 거대 말벌은 모두 보스와 함께 소멸시킨다.
             ApocryphaUtility.ReleaseEscorts(Pawn);
             ViviEndingUtility.VanishAllTitanicHornets(map);
+            HornetManifestation.CancelAll(map);
 
             if (parent.Spawned)
             {
@@ -1136,14 +1150,14 @@ namespace VVRace
 
             yield return DevCommand("DEV: Fairy seed now", () => ApocryphaGimmicks.TryLaunchFairySeed(Pawn));
 
-            yield return DevCommand("DEV: Flower guard hornets", () => _edgeHornets.AddRange(ApocryphaUtility.SpawnFlowerGuardHornets(Pawn, Props.edgeHornetGroupSize.max)));
+            yield return DevCommand("DEV: Summon assault hornets", () => HornetManifestation.SummonAround(Pawn, InterferenceHornetCount(_releaseCount), HornetSummonRole.Assault));
             yield return DevCommand("DEV: Breath ready now", () => _breath.SetReadyTick(0));
             yield return DevCommand("DEV: Approach altar now", () =>
             {
                 _nextApproachTick = 0;
                 InterruptCurrentJob();
             });
-            yield return DevCommand("DEV: Reinforce escorts", () => ApocryphaUtility.SpawnHornetEscorts(Pawn, Props.escortReinforceCount.RandomInRange, fromMapEdge: true));
+            yield return DevCommand("DEV: Summon escort hornets", () => HornetManifestation.SummonAround(Pawn, Props.volleyEscortCount, HornetSummonRole.Escort));
         }
 
         private static Command_Action DevCommand(string label, System.Action action)

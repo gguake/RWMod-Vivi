@@ -31,4 +31,26 @@
     <minSeverity>0</minSeverity>
     <maxSeverity>3</maxSeverity>
   </HediffDef>
+
+  <!-- 〈오염된 영원꽃 동화〉: 보스전에서 검은 기운으로 빚어진 거대 말벌(HornetManifestation)이 모두 지닌다.
+       아스포델의 독성 브레스가 남긴 가스에 호위 말벌이 쓰러지지 않도록 독성 환경에 면역이며,
+       죽으면 시체 없이 잿가루로 흩어진다(VVRace.Hediff_CorruptedEverflowerAssimilation → DissolvingHornet). -->
+  <HediffDef>
+    <defName>VV_CorruptedEverflowerAssimilation</defName>
+    <label>corrupted everflower assimilation</label>
+    <description>Assimilated into everflower mana twisted by Asphodel. Unaffected by toxic environments. On death, the body crumbles into ash and leaves no corpse.</description>
+    <hediffClass>VVRace.Hediff_CorruptedEverflowerAssimilation</hediffClass>
+    <defaultLabelColor>(0.85, 0.35, 0.75)</defaultLabelColor>
+    <isBad>false</isBad>
+    <everCurableByItem>false</everCurableByItem>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <priceImpact>false</priceImpact>
+    <stages>
+      <li>
+        <statOffsets>
+          <ToxicEnvironmentResistance>1</ToxicEnvironmentResistance>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
 </Defs>

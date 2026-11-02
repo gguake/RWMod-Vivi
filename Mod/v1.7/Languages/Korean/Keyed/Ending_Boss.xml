@@ -35,7 +35,7 @@
 <VV_Message_ApocryphaEscapedRoofCollapse>아스포델이 붕괴를 피해 순간이동했습니다.</VV_Message_ApocryphaEscapedRoofCollapse>
 <VV_Message_ApocryphaShieldBroken>마나 보호장이 깨지며 아스포델이 기절했습니다.</VV_Message_ApocryphaShieldBroken>
 <VV_Message_ApocryphaShieldRestored>아스포델의 마나 보호장이 복구되었습니다.</VV_Message_ApocryphaShieldRestored>
-<VV_Message_ApocryphaNeedleStuck>고대 바늘이 아스포델의 외피에 꽂혔습니다.</VV_Message_ApocryphaNeedleStuck>
+<VV_Message_ApocryphaNeedleStuck>고대 바늘이 아스포델의 외피에 꽂혀 아스포델이 잠시 기절했습니다.</VV_Message_ApocryphaNeedleStuck>
 <VV_Message_ApocryphaAllNeedlesStuck>고대 바늘이 모두 꽂혀 아스포델이 기절했습니다.</VV_Message_ApocryphaAllNeedlesStuck>
 <VV_Message_ApocryphaNeedlesPulled>아스포델이 꽂힌 바늘을 뽑아 주변 바닥으로 흩뿌렸습니다.</VV_Message_ApocryphaNeedlesPulled>
 <VV_Message_ApocryphaNeedleActivated>고대 바늘이 활성화되어 {PAWN_labelShort}(을)를 겨눕니다.</VV_Message_ApocryphaNeedleActivated>

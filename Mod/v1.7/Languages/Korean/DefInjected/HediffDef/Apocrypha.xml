@@ -7,6 +7,9 @@
 <VV_ApocryphaStuckNeedle.label>고대 엘텍스 바늘</VV_ApocryphaStuckNeedle.label>
 <VV_ApocryphaStuckNeedle.description>몸에 꽂힌 고대 엘텍스 바늘입니다. 꽂힌 바늘이 많을수록 받는 피해가 커지며 세 개가 모두 꽂히면 한동안 비틀거리다 바늘을 뽑아냅니다.</VV_ApocryphaStuckNeedle.description>
 
+<VV_CorruptedEverflowerAssimilation.label>오염된 영원꽃 동화</VV_CorruptedEverflowerAssimilation.label>
+<VV_CorruptedEverflowerAssimilation.description>아스포델이 일그러뜨린 영원꽃의 마나에 동화되어 있습니다. 독성 환경에 영향을 받지 않으며, 죽으면 시체를 남기지 않고 잿가루로 흩어집니다.</VV_CorruptedEverflowerAssimilation.description>
+
 <VV_FairyInterference.label>요정 간섭</VV_FairyInterference.label>
 <VV_FairyInterference.description>아스포델과 요정 비비들의 결속에 간섭해 끊어내어 요정 비비들을 해방시킬 수 있습니다.</VV_FairyInterference.description>
 <VV_FairyInterference.comps.0.messageOnDisappear>{PAWN_labelShort}의 요정 간섭이 사라졌습니다.</VV_FairyInterference.comps.0.messageOnDisappear>

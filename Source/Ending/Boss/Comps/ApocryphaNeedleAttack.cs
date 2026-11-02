@@ -197,6 +197,7 @@ namespace VVRace
             if (_comp.Phase != ApocryphaPhase.Unbound || !Pawn.Spawned) { return; }
 
             SyncStuckNeedleHediff();
+            _comp.TakeVitalityDamage(_comp.MaxVitality * Props.needleStickVitalityDamage);
 
             var stuck = StuckNeedleCount;
             if (stuck >= Props.unboundNeedleCount && !_stunned)
@@ -212,6 +213,10 @@ namespace VVRace
             }
             else
             {
+                _comp.GimmickStun(Props.needleStickStunTicks, null);
+                _comp.Channel.Interrupt();
+                _comp.Breath.Cancel();
+
                 Messages.Message(
                     LocalizeString_Message.VV_Message_ApocryphaNeedleStuck.Translate(),
                     Pawn,

@@ -12,8 +12,19 @@ namespace VVRace
         public const int BloomDelayTicks = 30000;
 
         private int _bloomTick = -1;
+        private int _nextHornetTick = -1;
 
         public static int ScaledBloomDelayTicks => Mathf.Max(1, Mathf.RoundToInt(BloomDelayTicks * CompApocrypha.DoomBloomTimeFactor));
+
+        // 만개 지연과 같은 난이도 배율을 쓴다.
+        private static int ScaledHornetIntervalTicks
+        {
+            get
+            {
+                var props = VVThingDefOf.VV_Apocrypha?.GetCompProperties<CompProperties_Apocrypha>();
+                return Mathf.Max(1, Mathf.RoundToInt((props?.doomFlowerHornetIntervalTicks ?? 10000) * CompApocrypha.DoomBloomTimeFactor));
+            }
+        }
 
         public int TicksUntilBloom => _bloomTick < 0 ? ScaledBloomDelayTicks : System.Math.Max(0, _bloomTick - Find.TickManager.TicksGame);
 
@@ -47,16 +58,48 @@ namespace VVRace
             {
                 _bloomTick = Find.TickManager.TicksGame + ScaledBloomDelayTicks;
             }
+
+            if (_nextHornetTick < 0)
+            {
+                _nextHornetTick = Find.TickManager.TicksGame + ScaledHornetIntervalTicks;
+            }
         }
 
         protected override void Tick()
         {
             base.Tick();
 
-            if (Spawned && _bloomTick >= 0 && Find.TickManager.TicksGame >= _bloomTick)
+            if (!Spawned) { return; }
+
+            var now = Find.TickManager.TicksGame;
+            if (_bloomTick >= 0 && now >= _bloomTick)
             {
                 Bloom();
+                return;
             }
+
+            if (_nextHornetTick >= 0 && now >= _nextHornetTick)
+            {
+                _nextHornetTick = now + ScaledHornetIntervalTicks;
+
+                // 말벌이 빚어지는 사이 꽃이 만개해 사라지면 지킬 꽃 없이 나오므로 만개 직전 주기는 건너뛴다.
+                if (_bloomTick < 0 || now + HornetManifestation.DurationTicks < _bloomTick)
+                {
+                    TrySummonHornets();
+                }
+            }
+        }
+
+        // 상처 입은 꽃은 소환 주기를 건너뛴다.
+        public void TrySummonHornets()
+        {
+            if (!Spawned || HitPoints < MaxHitPoints) { return; }
+
+            var boss = ApocryphaGimmicks.FindBoss(Map);
+            if (!ApocryphaGimmicks.IsGimmickActive(boss)) { return; }
+
+            var count = boss.TryGetComp<CompApocrypha>()?.Props.doomFlowerHornetCount ?? 1;
+            HornetManifestation.SummonFromFlower(this, boss, count);
         }
 
         public void Bloom()
@@ -108,6 +151,12 @@ namespace VVRace
                     defaultLabel = "DEV: Wither now",
                     action = Wither,
                 };
+
+                yield return new Command_Action()
+                {
+                    defaultLabel = "DEV: Summon hornet now",
+                    action = TrySummonHornets,
+                };
             }
         }
 
@@ -115,6 +164,7 @@ namespace VVRace
         {
             base.ExposeData();
             Scribe_Values.Look(ref _bloomTick, "bloomTick", -1);
+            Scribe_Values.Look(ref _nextHornetTick, "nextHornetTick", -1);
         }
     }
 }

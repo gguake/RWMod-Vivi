@@ -11,7 +11,6 @@ namespace VVRace
     {
         private const int RetryIntervalTicks = 2500;
         private const int WatchIntervalTicks = 250;
-        private const float BossPointsFactor = 1.5f;
 
         // 보스 소실 후 통지가 없을 때의 토벌 판정 유예. 7.5초인 소멸 연출보다 길게 둔다.
         private const int BossMissingGraceTicks = 1500;
@@ -204,7 +203,7 @@ namespace VVRace
                 return false;
             }
 
-            ViviEndingUtility.RunStep("boss arrival", () => ApocryphaUtility.SpawnArrival(boss, StorytellerUtility.DefaultThreatPointsNow(map) * BossPointsFactor));
+            ViviEndingUtility.RunStep("boss arrival", () => ApocryphaUtility.SpawnArrival(boss));
 
             _boss = boss;
             _arrived = true;

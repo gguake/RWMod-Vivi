@@ -4,12 +4,12 @@
 
   <!-- ===== 피해 ===== -->
 
-  <!-- 요정 비비 사출탄 폭발: Bomb 계열, 피해 22, 건물에는 절반만 -->
+  <!-- 요정 비비 사출탄 폭발: Bomb 계열, 피해 24, 건물에는 절반만 -->
   <DamageDef ParentName="Bomb">
     <defName>VV_FairyBlast</defName>
     <label>fairy blast</label>
     <deathMessage>{0} was caught in the blast of a hurled fairy vivi.</deathMessage>
-    <defaultDamage>22</defaultDamage>
+    <defaultDamage>24</defaultDamage>
     <defaultArmorPenetration>0.15</defaultArmorPenetration>
     <buildingDamageFactor>0.5</buildingDamageFactor>
     <buildingDamageFactorImpassable>1</buildingDamageFactorImpassable>
