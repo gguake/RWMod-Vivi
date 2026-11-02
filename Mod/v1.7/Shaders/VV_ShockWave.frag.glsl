@@ -21,6 +21,7 @@ layout(set = 2, binding = 0) uniform MaterialUniforms
     float _Distortion;    // @default = 0.012
     float _Brightness;    // @default = 1.4
     float _ArcIntensity;  // @default = 1.0
+    float _Darken;        // @default = 0.0
 } u;
 
 layout(set = 2, binding = 1) uniform sampler2D _GrabDistortionBackground;
@@ -92,6 +93,10 @@ void main()
     float n = fbm(dir * (8.0 + 0.5 * d / w) + vec2(seed, u._AgeSecs * 2.5));
     float arcs = pow(1.0 - abs(2.0 * n - 1.0), 14.0) * exp(-(d * d) / (9.0 * w * w)) * u._ArcIntensity;
 
+    // 어두운 파동(_Darken > 0): 파면 둘레와 지나간 자리를 연기처럼 얼룩진 그림자로 덮는다. 0이면 기존 파동과 같다.
+    float smoke = 0.55 + 0.45 * fbm(dir * 5.0 + vec2(seed + 3.7, u._AgeSecs * 1.2) + vec2(d * 6.0));
+    float shade = clamp((wake * 1.3 + halo * 1.2 + ahead * 0.6) * smoke * fade * u._Darken, 0.0, 0.85);
+
     float bump = exp(-(d * d) / (4.0 * w * w)) + 0.35 * wake;
     float dispPx = u._Distortion * pxPerUnit * bump * fade;
     vec2 texSize = vec2(textureSize(_GrabDistortionBackground, 0));
@@ -101,13 +106,14 @@ void main()
     bg.r = texture(_GrabDistortionBackground, grabUv - shift * 1.18).r;
     bg.g = texture(_GrabDistortionBackground, grabUv - shift).g;
     bg.b = texture(_GrabDistortionBackground, grabUv - shift * 0.82).b;
+    bg *= 1.0 - shade;
 
     vec3 glow = u._CoreColor.rgb * (core * 1.1 + arcs * 1.3)
               + u._GlowColor.rgb * (halo * 0.45 + wake * 0.28)
               + u._FringeColor.rgb * ahead * 0.6;
     glow *= flicker * u._Brightness * fade * u._Color.rgb;
 
-    // 캡처 이후에 그린 연결선이 사라지지 않도록 파면 띠와 빛이 있는 부분만 덮는다.
-    float cover = clamp(exp(-(d * d) / (4.0 * w * w)) * fade * 3.0 + max(glow.r, max(glow.g, glow.b)), 0.0, 1.0);
+    // 캡처 이후에 그린 연결선이 사라지지 않도록 파면 띠와 빛, 그림자가 있는 부분만 덮는다.
+    float cover = clamp(exp(-(d * d) / (4.0 * w * w)) * fade * 3.0 + max(glow.r, max(glow.g, glow.b)) + shade * 2.0, 0.0, 1.0);
     outColor = vec4(bg + glow, cover);
 }

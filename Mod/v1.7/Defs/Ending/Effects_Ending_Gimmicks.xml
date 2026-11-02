@@ -182,7 +182,8 @@
     </graphicData>
   </FleckDef>
 
-  <!-- 멸망꽃 만개: 맵 전체로 번지는 저주 파동(약 60칸). 텍스처를 키우면 깨져 보이므로 VV_ShockWave 셰이더로 그린다. -->
+  <!-- 멸망꽃 만개: 맵 전체로 번지는 저주 파동(약 60칸). 텍스처를 키우면 깨져 보이므로 VV_ShockWave 셰이더로 그린다.
+       불길하게 보이도록 빛은 어두운 자홍·포도주색으로 낮추고 _Darken으로 파면 둘레·뒤를 연기 같은 그림자로 덮는다. -->
   <FleckDef ParentName="FleckBase_Thrown">
     <defName>VV_Fleck_GimmickDoomWave</defName>
     <altitudeLayer>MoteOverhead</altitudeLayer>
@@ -200,11 +201,12 @@
         <_Duration>1.4</_Duration>
         <_Width>0.012</_Width>
         <_Distortion>0.01</_Distortion>
-        <_Brightness>1.3</_Brightness>
-        <_ArcIntensity>0.7</_ArcIntensity>
-        <_CoreColor>(1.0, 0.7, 0.9, 1)</_CoreColor>
-        <_GlowColor>(0.9, 0.12, 0.55, 1)</_GlowColor>
-        <_FringeColor>(0.45, 0.05, 0.4, 1)</_FringeColor>
+        <_Brightness>1.0</_Brightness>
+        <_ArcIntensity>1.0</_ArcIntensity>
+        <_Darken>1.0</_Darken>
+        <_CoreColor>(0.55, 0.04, 0.26, 1)</_CoreColor>
+        <_GlowColor>(0.22, 0.0, 0.13, 1)</_GlowColor>
+        <_FringeColor>(0.07, 0.0, 0.14, 1)</_FringeColor>
       </shaderParameters>
     </graphicData>
   </FleckDef>
