@@ -185,26 +185,26 @@ namespace VVRace
                 return false;
             }
 
-            var bossesBefore = SpawnedBosses(map);
-            Pawn boss;
+            Pawn boss = null;
             try
             {
-                boss = ApocryphaUtility.SpawnApocrypha(map, cell, StorytellerUtility.DefaultThreatPointsNow(map) * BossPointsFactor);
+                boss = ApocryphaUtility.GenerateApocrypha(map);
+                ApocryphaUtility.SpawnApocrypha(boss, map, cell);
             }
             catch (Exception ex)
             {
                 Log.Error($"[ViViRace] failed to spawn Apocrypha: {ex}");
-
-                // 호위·연출 단계에서 실패했어도 보스가 스폰됐다면 해당 개체로 전투를 시작해 중복 소환을 막는다.
-                // 보스 생성이나 스폰 자체가 실패한 경우에만 등장을 미루고 재시도한다.
-                boss = SpawnedBosses(map).FirstOrDefault(v => !bossesBefore.Contains(v) && !v.Dead && !v.Destroyed);
             }
 
-            if (boss == null)
+            // 스폰 도중 실패했어도 보스가 맵에 있으면 해당 개체로 전투를 시작해 중복 소환을 막는다.
+            // 보스 생성이나 스폰 자체가 실패한 경우에만 등장을 미루고 재시도한다.
+            if (boss == null || !boss.Spawned || boss.Dead)
             {
                 Defer();
                 return false;
             }
+
+            ViviEndingUtility.RunStep("boss arrival", () => ApocryphaUtility.SpawnArrival(boss, StorytellerUtility.DefaultThreatPointsNow(map) * BossPointsFactor));
 
             _boss = boss;
             _arrived = true;
@@ -238,12 +238,6 @@ namespace VVRace
         private static bool TryFindAnyEdgeCell(Map map, out IntVec3 cell)
         {
             return CellFinder.TryFindRandomEdgeCellWith(c => c.Standable(map) && !c.Fogged(map), map, CellFinder.EdgeRoadChance_Ignore, out cell);
-        }
-
-        private static List<Pawn> SpawnedBosses(Map map)
-        {
-            var bossDef = ApocryphaThingDefOf.VV_Apocrypha;
-            return bossDef != null ? map.listerThings.ThingsOfDef(bossDef).OfType<Pawn>().ToList() : new List<Pawn>();
         }
 
         private void WatchBoss(int now)

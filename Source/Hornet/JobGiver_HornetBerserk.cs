@@ -9,22 +9,38 @@ namespace VVRace
     {
         private const float DefaultMaxTargetSearchDistance = 90f;
 
+        // 즉시 교전 검사가 만든 작업을 같은 틱의 작업 재선택에서 다시 탐색하지 않고 지급한다.
+        private static Pawn _preparedPawn;
+        private static Job _preparedJob;
+        private static int _preparedTick = -1;
+
         private float maxTargetSearchDistance = DefaultMaxTargetSearchDistance;
 
-        public static bool HasAttackTarget(Pawn pawn)
+        public static bool TryPrepareAttackJob(Pawn pawn)
         {
-            if (pawn.TryGetAttackVerb(null) == null)
-            {
-                return false;
-            }
+            var job = MakeAttackJob(pawn, DefaultMaxTargetSearchDistance);
+            if (job == null) { return false; }
 
-            var fenceBlocked = pawn.def.race.FenceBlocked;
-            return GetReachableFocusTarget(pawn, fenceBlocked) != null
-                || FindPawnTarget(pawn, DefaultMaxTargetSearchDistance, fenceBlocked) != null
-                || FindTurretTarget(pawn, DefaultMaxTargetSearchDistance, fenceBlocked) != null;
+            _preparedPawn = pawn;
+            _preparedJob = job;
+            _preparedTick = Find.TickManager.TicksGame;
+            return true;
         }
 
         protected override Job TryGiveJob(Pawn pawn)
+        {
+            if (_preparedPawn == pawn && _preparedTick == Find.TickManager.TicksGame && maxTargetSearchDistance == DefaultMaxTargetSearchDistance)
+            {
+                var job = _preparedJob;
+                _preparedPawn = null;
+                _preparedJob = null;
+                return job;
+            }
+
+            return MakeAttackJob(pawn, maxTargetSearchDistance);
+        }
+
+        private static Job MakeAttackJob(Pawn pawn, float maxDist)
         {
             if (pawn.TryGetAttackVerb(null) == null)
             {
@@ -39,13 +55,13 @@ namespace VVRace
                 return MeleeAttackJob(focus, fenceBlocked);
             }
 
-            var target = FindPawnTarget(pawn, maxTargetSearchDistance, fenceBlocked);
+            var target = FindPawnTarget(pawn, maxDist, fenceBlocked);
             if (target != null && pawn.CanReach(target, PathEndMode.Touch, Danger.Deadly, canBashDoors: false, fenceBlocked))
             {
                 return MeleeAttackJob(target, fenceBlocked);
             }
 
-            var building = FindTurretTarget(pawn, maxTargetSearchDistance, fenceBlocked);
+            var building = FindTurretTarget(pawn, maxDist, fenceBlocked);
             if (building != null)
             {
                 return MeleeAttackJob(building, fenceBlocked);
@@ -78,7 +94,7 @@ namespace VVRace
             return null;
         }
 
-        private Job MeleeAttackJob(Thing target, bool canBashFences)
+        private static Job MeleeAttackJob(Thing target, bool canBashFences)
         {
             var job = JobMaker.MakeJob(JobDefOf.AttackMelee, target);
             job.maxNumMeleeAttacks = 1;

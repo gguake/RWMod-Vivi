@@ -102,34 +102,37 @@ namespace VVRace
             return PawnsArrivalModeDefOf.EdgeWalkIn.Worker.CanUseOnMap(map);
         }
 
-        public static Pawn SpawnApocrypha(Map map, IntVec3 entryCell, float points)
+        public static Pawn GenerateApocrypha(Map map)
         {
-            if (map == null || !entryCell.IsValid || !entryCell.InBounds(map)) { return null; }
-
-            var faction = ResolveBossFaction();
             var boss = PawnGenerator.GeneratePawn(new PawnGenerationRequest(
                 ApocryphaPawnKindDefOf.VV_Apocrypha,
-                faction,
+                ResolveBossFaction(),
                 PawnGenerationContext.NonPlayer,
                 map.Tile,
                 forceGenerateNewPawn: true));
 
             boss.ageTracker.LockCurrentLifeStageIndex(0);
+            return boss;
+        }
 
+        public static void SpawnApocrypha(Pawn boss, Map map, IntVec3 entryCell)
+        {
             GenSpawn.Spawn(boss, entryCell, map, EntryRotation(map, entryCell));
 
             if (boss.Faction == null)
             {
                 boss.mindState.mentalStateHandler.TryStartMentalState(MentalStateDefOf.ManhunterPermanent, forced: true, transitionSilently: true);
             }
+        }
 
+        // 보스 스폰과 분리해 호위·연출이 실패해도 이미 스폰된 보스로 전투를 시작할 수 있게 한다.
+        public static void SpawnArrival(Pawn boss, float points)
+        {
             var count = Mathf.Clamp(Mathf.RoundToInt(points / VVPawnKindDefOf.VV_TitanicHornet.combatPower), 4, 12);
             SpawnHornetEscorts(boss, count, fromMapEdge: false);
 
-            ApocryphaEffecterDefOf.VV_Effecter_ApocryphaArrive.Spawn(boss.Position, map, 1.5f).Cleanup();
+            ApocryphaEffecterDefOf.VV_Effecter_ApocryphaArrive.Spawn(boss.Position, boss.Map, 1.5f).Cleanup();
             Find.TickManager.slower.SignalForceNormalSpeedShort();
-
-            return boss;
         }
 
         public static Rot4 EntryRotation(Map map, IntVec3 entryCell)

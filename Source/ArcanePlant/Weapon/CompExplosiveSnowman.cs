@@ -5,6 +5,7 @@ namespace VVRace
 {
     // 바닐라 CompExplosive는 무소속 눈사람을 가해자로 삼아 우호 세력원 사망 시 호감도를 깎는다.
     // 발사자를 가해자로 지정해야 적을 노린 사격의 아군 오발 면제도 적용된다.
+    // 바닐라의 피격 조기 기폭은 맞힌 쪽을 가해자로 삼고 무기·조준 대상을 버리므로 장전된 눈사람은 심지와 피격 모두 발사자 명의로 터뜨린다.
     public class CompExplosiveSnowman : CompExplosive
     {
         private Thing _launcher;
@@ -40,6 +41,28 @@ namespace VVRace
             }
 
             base.CompTick();
+        }
+
+        public override void PostPreApplyDamage(ref DamageInfo dinfo, out bool absorbed)
+        {
+            if (_launcher == null || !DetonatesFromDamage(dinfo))
+            {
+                base.PostPreApplyDamage(ref dinfo, out absorbed);
+                return;
+            }
+
+            DetonateByLauncher();
+            absorbed = parent.Destroyed;
+        }
+
+        // 바닐라 PostPreApplyDamage의 즉시 기폭 조건
+        private bool DetonatesFromDamage(DamageInfo dinfo)
+        {
+            return CanEverExplodeFromDamage
+                && dinfo.Def.ExternalViolenceFor(parent)
+                && dinfo.Amount >= parent.HitPoints
+                && (Props.requiredDamageTypeToExplode == null || Props.requiredDamageTypeToExplode == dinfo.Def)
+                && parent.MapHeld != null;
         }
 
         private void DetonateByLauncher()

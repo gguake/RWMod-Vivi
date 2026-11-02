@@ -745,31 +745,26 @@ namespace VVRace
             _aimSustainer.EffectTick(bossTarget, bossTarget);
         }
 
-        // 포격이 한곳에 몰리지 않도록 기존 조준 근처의 적은 다른 후보가 없을 때만 선택한다.
         private bool TryFindShellTarget(out IntVec3 cell)
         {
-            cell = IntVec3.Invalid;
-
             CollectShellTargets(_tmpTargets, Props.shellRange);
             _tmpTargets.RemoveAll(v => InShellMinRange(v.Position));
-            if (_tmpTargets.Count > 0)
-            {
-                var attacker = RangedAttacker;
-                Thing target;
-                if (attacker != null && _tmpTargets.Contains(attacker) && !IsNearAimedCell(attacker.Position))
-                {
-                    target = attacker;
-                }
-                else if (!_tmpTargets.Where(v => !IsNearAimedCell(v.Position)).TryRandomElement(out target))
-                {
-                    target = _tmpTargets.RandomElement();
-                }
-
-                cell = target.Position;
-            }
+            cell = _tmpTargets.Count > 0 ? PickAttackTarget(_tmpTargets, IsNearAimedCell).Position : IntVec3.Invalid;
 
             _tmpTargets.Clear();
             return cell.IsValid;
+        }
+
+        // 공격이 한곳에 몰리지 않도록 기존 조준에 걸린 적은 다른 후보가 없을 때만 선택한다. 최근 원거리 공격자를 우선한다.
+        private Thing PickAttackTarget(List<Thing> candidates, System.Predicate<IntVec3> isAimed)
+        {
+            var attacker = RangedAttacker;
+            if (attacker != null && candidates.Contains(attacker) && !isAimed(attacker.Position))
+            {
+                return attacker;
+            }
+
+            return candidates.Where(v => !isAimed(v.Position)).TryRandomElement(out var target) ? target : candidates.RandomElement();
         }
 
         private bool InShellMinRange(IntVec3 cell)
@@ -1191,24 +1186,8 @@ namespace VVRace
 
         private bool TryFindNeedleTarget(IntVec3 origin, out IntVec3 cell)
         {
-            cell = IntVec3.Invalid;
-
             CollectShellTargets(_tmpTargets, Props.needleTargetRange, origin);
-            if (_tmpTargets.Count > 0)
-            {
-                var attacker = RangedAttacker;
-                Thing target;
-                if (attacker != null && _tmpTargets.Contains(attacker) && !IsInAimedNeedleLane(attacker.Position))
-                {
-                    target = attacker;
-                }
-                else if (!_tmpTargets.Where(v => !IsInAimedNeedleLane(v.Position)).TryRandomElement(out target))
-                {
-                    target = _tmpTargets.RandomElement();
-                }
-
-                cell = target.Position;
-            }
+            cell = _tmpTargets.Count > 0 ? PickAttackTarget(_tmpTargets, IsInAimedNeedleLane).Position : IntVec3.Invalid;
 
             _tmpTargets.Clear();
             return cell.IsValid;

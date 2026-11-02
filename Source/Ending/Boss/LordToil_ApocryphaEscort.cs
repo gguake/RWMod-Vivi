@@ -73,7 +73,7 @@ namespace VVRace
             // 주변에 공격 후보가 없으면 영역을 두 번 탐색하는 정식 대상 탐색은 생략한다.
             if (pawn.GetLord()?.LordJob is LordJob_ApocryphaHornetGuard guardJob && !guardJob.AnyPotentialTargetNear(pawn)) { return; }
 
-            if (JobGiver_HornetBerserk.HasAttackTarget(pawn))
+            if (JobGiver_HornetBerserk.TryPrepareAttackJob(pawn))
             {
                 pawn.jobs.CheckForJobOverride();
             }
