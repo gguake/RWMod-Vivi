@@ -33,7 +33,7 @@ namespace VVRace
             var aimStartTick = Mathf.Min(fireTick - aimTicks, Find.TickManager.TicksGame);
             if (_targetMote == null || _targetMote.Destroyed)
             {
-                _targetMote = MoteMaker.MakeStaticMote(cell.ToVector3Shifted(), map, ApocryphaThingDefOf.VV_Mote_ApocryphaAimTarget, 1f, makeOffscreen: true);
+                _targetMote = MoteMaker.MakeStaticMote(cell.ToVector3Shifted(), map, VVThingDefOf.VV_Mote_ApocryphaAimTarget, 1f, makeOffscreen: true);
                 _targetMote?.ForceSpawnTick(aimStartTick);
             }
 
@@ -46,7 +46,7 @@ namespace VVRace
             var chargePos = bodyCenter + direction * 0.7f;
             if (_chargeMote == null || _chargeMote.Destroyed)
             {
-                _chargeMote = MoteMaker.MakeStaticMote(chargePos, map, ApocryphaThingDefOf.VV_Mote_ApocryphaAimCharge, 1f, makeOffscreen: true);
+                _chargeMote = MoteMaker.MakeStaticMote(chargePos, map, VVThingDefOf.VV_Mote_ApocryphaAimCharge, 1f, makeOffscreen: true);
                 _chargeMote?.ForceSpawnTick(aimStartTick);
             }
 
@@ -61,7 +61,7 @@ namespace VVRace
             var target = new TargetInfo(cell, map);
             if (_effecter == null)
             {
-                _effecter = ApocryphaEffecterDefOf.VV_Effecter_ApocryphaAim.Spawn();
+                _effecter = VVEffecterDefOf.VV_Effecter_ApocryphaAim.Spawn();
                 _effecter.Trigger(source, target);
             }
 

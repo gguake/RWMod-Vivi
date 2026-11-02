@@ -206,6 +206,8 @@
     <Compile Include="HarmonyPatches\Internals\BackCompatibilityPatch.cs" />
     <Compile Include="HarmonyPatches\Internals\GatherPatch.cs" />
     <Compile Include="HarmonyPatches\Internals\VanilaBugFixPatch.cs" />
+    <Compile Include="HarmonyPatches\Internals\EndingCorePatch.cs" />
+    <Compile Include="HarmonyPatches\Internals\ApocryphaPatch.cs" />
     <Compile Include="Hornet\CompHornet.cs" />
     <Compile Include="Hornet\HediffGiver_ConstantScaria.cs" />
     <Compile Include="Hornet\IncidentWorker_HornetAssault.cs" />

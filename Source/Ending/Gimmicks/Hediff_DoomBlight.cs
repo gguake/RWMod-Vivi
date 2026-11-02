@@ -33,7 +33,7 @@ namespace VVRace
         {
             get
             {
-                var level = LocalizeString_EndingGimmicks.VV_Hediff_DoomBlightLevel.Translate(CurStageIndex + 1, DoomBlightUtility.MaxBlightLevel).Resolve();
+                var level = LocalizeString_Etc.VV_Hediff_DoomBlightLevel.Translate(CurStageIndex + 1, DoomBlightUtility.MaxBlightLevel).Resolve();
                 var tip = base.TipStringExtra;
                 return tip.NullOrEmpty() ? level : level + "\n" + tip;
             }

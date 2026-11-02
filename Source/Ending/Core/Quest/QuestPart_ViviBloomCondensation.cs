@@ -23,7 +23,7 @@ namespace VVRace
             {
                 if (quest == null || quest.Historical) { return null; }
 
-                return LocalizeString_EndingCore.VV_Inspector_EndingBloom.Translate(_progress.ToStringPercent().Named("PERCENT")).Resolve();
+                return LocalizeString_Inspector.VV_Inspector_EndingBloom.Translate(_progress.ToStringPercent().Named("PERCENT")).Resolve();
             }
         }
 

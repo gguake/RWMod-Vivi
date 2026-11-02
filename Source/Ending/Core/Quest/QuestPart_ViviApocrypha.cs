@@ -212,7 +212,7 @@ namespace VVRace
             _bossMissingSinceTick = -1;
             ViviEndingUtility.EndOminousSilence();
 
-            Messages.Message(LocalizeString_EndingCore.VV_Message_EndingApocryphaLanded.Translate(), boss, MessageTypeDefOf.ThreatBig);
+            Messages.Message(LocalizeString_Message.VV_Message_EndingApocryphaLanded.Translate(), boss, MessageTypeDefOf.ThreatBig);
             Find.SignalManager.SendSignal(new Signal(outSignalArrived, boss.Named("SUBJECT")));
             return true;
         }

@@ -1,4 +1,4 @@
-namespace VVRace
+﻿namespace VVRace
 {
     public static class LocalizeString_Command
     {
@@ -29,5 +29,7 @@ namespace VVRace
 
         public const string VV_Command_EjectFilteredHoney = nameof(VV_Command_EjectFilteredHoney);
         public const string VV_Command_EjectFilteredHoneyDesc = nameof(VV_Command_EjectFilteredHoneyDesc);
+
+        public const string VV_Command_ReserveTeleportEverflowerAltarDesc = nameof(VV_Command_ReserveTeleportEverflowerAltarDesc);
     }
 }

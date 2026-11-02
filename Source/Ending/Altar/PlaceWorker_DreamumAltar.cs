@@ -16,7 +16,7 @@ namespace VVRace
         {
             if (!Building_DreamumAltar.IsValidAltarMap(map))
             {
-                return new AcceptanceReport(LocalizeString_EndingAltar.VV_FailReason_AltarNotHomeMap.Translate());
+                return new AcceptanceReport(LocalizeString_Etc.VV_FailReason_AltarNotHomeMap.Translate());
             }
 
             if (checkingDef is ThingDef altarDef)
@@ -25,7 +25,7 @@ namespace VVRace
                     || AnyOtherOfDef(map, altarDef.blueprintDef, thingToIgnore, thing)
                     || AnyOtherOfDef(map, altarDef.frameDef, thingToIgnore, thing))
                 {
-                    return new AcceptanceReport(LocalizeString_EndingAltar.VV_FailReason_AltarOnePerMap.Translate());
+                    return new AcceptanceReport(LocalizeString_Etc.VV_FailReason_AltarOnePerMap.Translate());
                 }
             }
 
@@ -35,7 +35,7 @@ namespace VVRace
 
                 if (Building_DreamumAltar.IsOnSubstructure(cell, map))
                 {
-                    return new AcceptanceReport(LocalizeString_EndingAltar.VV_FailReason_AltarOnSubstructure.Translate());
+                    return new AcceptanceReport(LocalizeString_Etc.VV_FailReason_AltarOnSubstructure.Translate());
                 }
 
                 var thingList = cell.GetThingList(map);
@@ -48,7 +48,7 @@ namespace VVRace
                         || (other is Blueprint_Install installBlueprint && installBlueprint.ThingToInstall is ArcanePlant);
                     if (isArcanePlant)
                     {
-                        return new AcceptanceReport(LocalizeString_EndingAltar.VV_FailReason_AltarBlockedByArcanePlant.Translate());
+                        return new AcceptanceReport(LocalizeString_Etc.VV_FailReason_AltarBlockedByArcanePlant.Translate());
                     }
                 }
             }

@@ -16,7 +16,7 @@ namespace VVRace
         // 틀이 파괴되면 KillFinalize가 재료의 25%만 남기고 forcedCostLeavings도 무시해 코어를 잃을 수 있다.
         static Building_DreamumAltar()
         {
-            var frameBuilding = AltarDefOf.VV_DreamumAltar?.frameDef?.building;
+            var frameBuilding = VVThingDefOf.VV_DreamumAltar?.frameDef?.building;
             if (frameBuilding != null)
             {
                 frameBuilding.canBeDamagedByAttacks = false;
@@ -80,11 +80,6 @@ namespace VVRace
         {
             base.ExposeData();
             Scribe_Deep.Look(ref _resonatorHolder, "resonatorHolder", this);
-
-            if (Scribe.mode == LoadSaveMode.PostLoadInit && _resonatorHolder == null)
-            {
-                _resonatorHolder = new ThingOwner<Pawn>(this, oneStackOnly: true);
-            }
         }
 
         public ArcanePlant_Everflower EnshrinedEverflower => Spawned ? Position.GetFirstThing<ArcanePlant_Everflower>(Map) : null;
@@ -131,13 +126,13 @@ namespace VVRace
             get
             {
                 if (!Spawned) { return false; }
-                if (!IsValidAltarMap(Map)) { return LocalizeString_EndingAltar.VV_FailReason_AltarNotHomeMap.Translate(); }
+                if (!IsValidAltarMap(Map)) { return LocalizeString_Etc.VV_FailReason_AltarNotHomeMap.Translate(); }
 
                 foreach (var cell in this.OccupiedRect())
                 {
                     if (IsOnSubstructure(cell, Map))
                     {
-                        return LocalizeString_EndingAltar.VV_FailReason_AltarOnSubstructure.Translate();
+                        return LocalizeString_Etc.VV_FailReason_AltarOnSubstructure.Translate();
                     }
                 }
 
@@ -147,9 +142,9 @@ namespace VVRace
 
         public static Building_DreamumAltar FindOnMap(Map map)
         {
-            if (map == null || AltarDefOf.VV_DreamumAltar == null) { return null; }
+            if (map == null || VVThingDefOf.VV_DreamumAltar == null) { return null; }
 
-            var altars = map.listerThings.ThingsOfDef(AltarDefOf.VV_DreamumAltar);
+            var altars = map.listerThings.ThingsOfDef(VVThingDefOf.VV_DreamumAltar);
             for (int i = 0; i < altars.Count; ++i)
             {
                 if (altars[i] is Building_DreamumAltar altar && altar.Spawned)
@@ -177,10 +172,10 @@ namespace VVRace
                 var quest = ViviEndingQuest.Current;
                 if (quest != null && (quest.IsEndingActive || quest.IsCompleted) && quest.IsAnchor(everflower))
                 {
-                    return new AcceptanceReport(LocalizeString_EndingAltar.VV_FailReason_AltarEndingInProgress.Translate());
+                    return new AcceptanceReport(LocalizeString_Etc.VV_FailReason_AltarEndingInProgress.Translate());
                 }
 
-                return new AcceptanceReport(LocalizeString_EndingAltar.VV_FailReason_AltarHasEnshrinedEverflower.Translate());
+                return new AcceptanceReport(LocalizeString_Etc.VV_FailReason_AltarHasEnshrinedEverflower.Translate());
             }
 
             return base.DeconstructibleBy(faction);
@@ -193,17 +188,17 @@ namespace VVRace
             var everflower = EnshrinedEverflower;
             if (everflower != null)
             {
-                sb.AppendInNewLine(LocalizeString_EndingAltar.VV_Inspector_AltarEnshrinedEverflower.Translate(everflower.AttunementLevel.Named("LEVEL")));
+                sb.AppendInNewLine(LocalizeString_Inspector.VV_Inspector_AltarEnshrinedEverflower.Translate(everflower.AttunementLevel.Named("LEVEL")));
             }
 
             var resonator = HeldResonator;
             if (resonator != null)
             {
-                sb.AppendInNewLine(LocalizeString_EndingAltar.VV_Inspector_AltarHeldResonator.Translate(resonator.Named("PAWN")));
+                sb.AppendInNewLine(LocalizeString_Inspector.VV_Inspector_AltarHeldResonator.Translate(resonator.Named("PAWN")));
             }
             else if (everflower == null)
             {
-                sb.AppendInNewLine(LocalizeString_EndingAltar.VV_Inspector_AltarNoEverflower.Translate(RequiredAttunementLevel.Named("LEVEL")));
+                sb.AppendInNewLine(LocalizeString_Inspector.VV_Inspector_AltarNoEverflower.Translate(RequiredAttunementLevel.Named("LEVEL")));
             }
 
             return sb.ToString();

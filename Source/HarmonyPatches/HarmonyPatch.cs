@@ -16,6 +16,7 @@ namespace VVRace
                 GatherPatch.Patch(harmony);
                 BackCompatibilityPatch.Patch(harmony);
                 EndingCorePatch.Patch(harmony);
+                ApocryphaPatch.Patch(harmony);
 
                 harmony.PatchAll();
             }

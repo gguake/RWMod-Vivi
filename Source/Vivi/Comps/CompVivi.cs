@@ -225,9 +225,9 @@ namespace VVRace
                 defaultLabel = "DEV: Add genetic instability",
                 action = () =>
                 {
-                    if (!pawn.health.hediffSet.HasHediff(EndingRitualDefOf.VV_GeneticUnstability))
+                    if (!pawn.health.hediffSet.HasHediff(VVHediffDefOf.VV_GeneticUnstability))
                     {
-                        pawn.health.AddHediff(EndingRitualDefOf.VV_GeneticUnstability, pawn.RaceProps.body.corePart);
+                        pawn.health.AddHediff(VVHediffDefOf.VV_GeneticUnstability, pawn.RaceProps.body.corePart);
                     }
                 }
             };
@@ -241,12 +241,12 @@ namespace VVRace
                 };
             }
 
-            if (!pawn.health.hediffSet.HasHediff(QueenDefOf.VV_EverflowerQueen))
+            if (!pawn.health.hediffSet.HasHediff(VVHediffDefOf.VV_EverflowerQueen))
             {
                 yield return new Command_Action
                 {
                     defaultLabel = "DEV: Grant queen powers",
-                    action = () => ViviEndingQuest.GrantQueenPowers(pawn)
+                    action = () => ViviEndingUtility.GrantQueenPowers(pawn)
                 };
             }
         }

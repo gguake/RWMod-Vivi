@@ -13,9 +13,9 @@ namespace VVRace
         {
             get
             {
-                yield return ApocryphaGimmickDefOf.VV_DoomBlight_Fear;
-                yield return ApocryphaGimmickDefOf.VV_DoomBlight_Hunger;
-                yield return ApocryphaGimmickDefOf.VV_DoomBlight_Plague;
+                yield return VVHediffDefOf.VV_DoomBlight_Fear;
+                yield return VVHediffDefOf.VV_DoomBlight_Hunger;
+                yield return VVHediffDefOf.VV_DoomBlight_Plague;
             }
         }
 
@@ -34,7 +34,7 @@ namespace VVRace
             }
 
             Messages.Message(
-                LocalizeString_EndingGimmicks.VV_Message_DoomFlowerBloomed.Translate(blightDef.label.Named("BLIGHT")),
+                LocalizeString_Message.VV_Message_DoomFlowerBloomed.Translate(blightDef.label.Named("BLIGHT")),
                 new LookTargets(new TargetInfo(sourceCell, map)),
                 MessageTypeDefOf.NegativeEvent);
         }

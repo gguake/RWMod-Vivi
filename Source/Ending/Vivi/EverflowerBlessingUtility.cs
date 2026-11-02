@@ -59,10 +59,10 @@ namespace VVRace
 
         private static void GiveOrRefreshBlessing(Pawn pawn)
         {
-            var blessing = pawn.health.hediffSet.GetFirstHediffOfDef(EndingRitualDefOf.VV_EverflowerBlessing);
+            var blessing = pawn.health.hediffSet.GetFirstHediffOfDef(VVHediffDefOf.VV_EverflowerBlessing);
             if (blessing == null)
             {
-                pawn.health.AddHediff(EndingRitualDefOf.VV_EverflowerBlessing);
+                pawn.health.AddHediff(VVHediffDefOf.VV_EverflowerBlessing);
                 return;
             }
 

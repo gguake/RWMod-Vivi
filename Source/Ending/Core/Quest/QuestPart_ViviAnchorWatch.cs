@@ -59,7 +59,7 @@ namespace VVRace
 
         private void EnsureGoldenBloom(Map map)
         {
-            var conditionDef = EndingCoreDefOf.VV_GoldenBloom;
+            var conditionDef = VVGameConditionDefOf.VV_GoldenBloom;
             if (conditionDef == null) { return; }
 
             foreach (var other in Find.Maps)
@@ -96,7 +96,7 @@ namespace VVRace
 
         private void EnsureOminousSilence(Map map)
         {
-            var conditionDef = EndingCoreDefOf.VV_OminousSilence;
+            var conditionDef = VVGameConditionDefOf.VV_OminousSilence;
             if (conditionDef == null) { return; }
 
             var calm = quest.PartsListForReading.OfType<QuestPart_Delay>().FirstOrDefault(v => v.debugLabel == QuestNode_Root_ViviBloom.CalmDelayLabel);

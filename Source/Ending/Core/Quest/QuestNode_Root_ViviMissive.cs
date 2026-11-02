@@ -20,21 +20,21 @@ namespace VVRace
 
             var everflower = slate.Get<ArcanePlant_Everflower>("everflower");
             var resonator = ViviEndingUtility.ResonatorOf(everflower);
-            var missiveLabel = LocalizeString_EndingCore.VV_Letter_EndingFederationMissiveLabel.Translate();
-            var missiveText = ViviEndingUtility.TranslateWithResonator(LocalizeString_EndingCore.VV_Letter_EndingFederationMissive, resonator).Resolve()
+            var missiveLabel = LocalizeString_Letter.VV_Letter_EndingFederationMissiveLabel.Translate();
+            var missiveText = ViviEndingUtility.TranslateWithResonator(LocalizeString_Letter.VV_Letter_EndingFederationMissive, resonator).Resolve()
                 + "\n\n" + ViviEndingRequirements.LetterText();
 
             slate.Set("resolvedQuestName", missiveLabel.Resolve());
-            slate.Set("resolvedQuestDescription", missiveText + "\n\n" + LocalizeString_EndingCore.VV_Quest_EndingMissiveGoals.Translate().Resolve());
+            slate.Set("resolvedQuestDescription", missiveText + "\n\n" + LocalizeString_Etc.VV_Quest_EndingMissiveGoals.Translate().Resolve());
 
             var hyperlinks = new List<ThingDef>();
-            if (EndingCoreDefOf.VV_DreamumAltar != null)
+            if (VVThingDefOf.VV_DreamumAltar != null)
             {
-                hyperlinks.Add(EndingCoreDefOf.VV_DreamumAltar);
+                hyperlinks.Add(VVThingDefOf.VV_DreamumAltar);
             }
-            if (EndingCoreDefOf.VV_AncientAmberCore != null)
+            if (VVThingDefOf.VV_AncientAmberCore != null)
             {
-                hyperlinks.Add(EndingCoreDefOf.VV_AncientAmberCore);
+                hyperlinks.Add(VVThingDefOf.VV_AncientAmberCore);
             }
 
             if (!slate.Get<bool>("reissued"))

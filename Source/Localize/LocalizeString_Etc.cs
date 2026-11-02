@@ -91,5 +91,66 @@
         public const string VV_RitualTarget_Everflower = nameof(VV_RitualTarget_Everflower);
 
         public const string VV_Hediff_AgingFactor = nameof(VV_Hediff_AgingFactor);
+
+        public const string VV_Quest_EndingMissiveGoals = nameof(VV_Quest_EndingMissiveGoals);
+        public const string VV_Quest_EndingName = nameof(VV_Quest_EndingName);
+        public const string VV_Quest_EndingDesc = nameof(VV_Quest_EndingDesc);
+
+        public const string VV_Quest_EndingMissiveConditionsHeader = nameof(VV_Quest_EndingMissiveConditionsHeader);
+        public const string VV_Quest_EndingMissiveConditionVivi = nameof(VV_Quest_EndingMissiveConditionVivi);
+        public const string VV_Quest_EndingMissiveConditionWealth = nameof(VV_Quest_EndingMissiveConditionWealth);
+        public const string VV_Quest_EndingMissiveStepAltar = nameof(VV_Quest_EndingMissiveStepAltar);
+        public const string VV_Quest_EndingMissiveStepEnshrine = nameof(VV_Quest_EndingMissiveStepEnshrine);
+
+        public const string VV_EndingCredits = nameof(VV_EndingCredits);
+        public const string VV_EndingCreditsNoQueen = nameof(VV_EndingCreditsNoQueen);
+        public const string VV_EndingCreditsExiled = nameof(VV_EndingCreditsExiled);
+        public const string VV_EndingCreditsRefugee = nameof(VV_EndingCreditsRefugee);
+        public const string VV_EndingCreditsOutro = nameof(VV_EndingCreditsOutro);
+
+        public const string VV_Ending_ResonatorFallback = nameof(VV_Ending_ResonatorFallback);
+
+        public const string VV_DialogChangeWeatherGoldenBloomDesc = nameof(VV_DialogChangeWeatherGoldenBloomDesc);
+        public const string VV_FailReason_GoldenBloomHoldsWeather = nameof(VV_FailReason_GoldenBloomHoldsWeather);
+
+        public const string VV_FailReason_AltarOnlyEverflowerCenter = nameof(VV_FailReason_AltarOnlyEverflowerCenter);
+        public const string VV_FailReason_AltarCenterOccupied = nameof(VV_FailReason_AltarCenterOccupied);
+        public const string VV_FailReason_AltarOnePerMap = nameof(VV_FailReason_AltarOnePerMap);
+        public const string VV_FailReason_AltarBlockedByArcanePlant = nameof(VV_FailReason_AltarBlockedByArcanePlant);
+        public const string VV_FailReason_AltarNotHomeMap = nameof(VV_FailReason_AltarNotHomeMap);
+        public const string VV_FailReason_AltarOnSubstructure = nameof(VV_FailReason_AltarOnSubstructure);
+        public const string VV_FailReason_AltarUnderConstruction = nameof(VV_FailReason_AltarUnderConstruction);
+        public const string VV_FailReason_AltarHasEnshrinedEverflower = nameof(VV_FailReason_AltarHasEnshrinedEverflower);
+        public const string VV_FailReason_AltarEndingInProgress = nameof(VV_FailReason_AltarEndingInProgress);
+
+        public const string VV_Hediff_ApocryphaStuckNeedleTip = nameof(VV_Hediff_ApocryphaStuckNeedleTip);
+        public const string VV_Hediff_ApocryphaFairyBondTip = nameof(VV_Hediff_ApocryphaFairyBondTip);
+
+        public const string VV_FloatMenu_ActivateApocryphaNeedle = nameof(VV_FloatMenu_ActivateApocryphaNeedle);
+        public const string VV_FailReason_ApocryphaNeedleDormant = nameof(VV_FailReason_ApocryphaNeedleDormant);
+
+        public const string VV_TextMote_ApocryphaStunImmune = nameof(VV_TextMote_ApocryphaStunImmune);
+
+        public const string VV_FloatMenu_BondFairyFlower = nameof(VV_FloatMenu_BondFairyFlower);
+        public const string VV_FailReason_FairyFlowerNotVivi = nameof(VV_FailReason_FairyFlowerNotVivi);
+        public const string VV_FailReason_FairyFlowerNotAdult = nameof(VV_FailReason_FairyFlowerNotAdult);
+        public const string VV_FailReason_FairyFlowerCannotMove = nameof(VV_FailReason_FairyFlowerCannotMove);
+        public const string VV_FailReason_FairyFlowerAlreadyInterfered = nameof(VV_FailReason_FairyFlowerAlreadyInterfered);
+
+        public const string VV_Hediff_DoomBlightLevel = nameof(VV_Hediff_DoomBlightLevel);
+        public const string VV_Hediff_FairyInterferenceRemaining = nameof(VV_Hediff_FairyInterferenceRemaining);
+
+        public const string VV_ManaBarrierTargetMana = nameof(VV_ManaBarrierTargetMana);
+
+        public const string VV_FailReason_EndingInProgress = nameof(VV_FailReason_EndingInProgress);
+        public const string VV_FailReason_RequiresEverflowerAltar = nameof(VV_FailReason_RequiresEverflowerAltar);
+        public const string VV_FailReason_GrandAttunementLocked = nameof(VV_FailReason_GrandAttunementLocked);
+        public const string VV_FailReason_GrandAttunementInProgress = nameof(VV_FailReason_GrandAttunementInProgress);
+        public const string VV_FailReason_GrandAttunementCompleted = nameof(VV_FailReason_GrandAttunementCompleted);
+        public const string VV_FailReason_GrandAttunementFailed = nameof(VV_FailReason_GrandAttunementFailed);
+
+        public const string VV_FailReason_PawnAssimilated = nameof(VV_FailReason_PawnAssimilated);
+        public const string VV_FailReason_CoronationNotAnchor = nameof(VV_FailReason_CoronationNotAnchor);
+        public const string VV_FailReason_CoronationLocked = nameof(VV_FailReason_CoronationLocked);
     }
 }

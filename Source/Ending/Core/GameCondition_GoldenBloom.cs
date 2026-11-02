@@ -43,12 +43,12 @@ namespace VVRace
     {
         public static GameCondition_GoldenBloom GetActiveCondition(Map map)
         {
-            return map?.gameConditionManager.GetActiveCondition(EndingCoreDefOf.VV_GoldenBloom) as GameCondition_GoldenBloom;
+            return map?.gameConditionManager.GetActiveCondition(VVGameConditionDefOf.VV_GoldenBloom) as GameCondition_GoldenBloom;
         }
 
         public static bool IsActive(Map map)
         {
-            return map != null && map.gameConditionManager.ConditionIsActive(EndingCoreDefOf.VV_GoldenBloom);
+            return map != null && map.gameConditionManager.ConditionIsActive(VVGameConditionDefOf.VV_GoldenBloom);
         }
 
         public static bool IsManaUnlimited(Thing thing)

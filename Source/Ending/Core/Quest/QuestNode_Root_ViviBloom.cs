@@ -33,8 +33,8 @@ namespace VVRace
             var resonator = slate.Get<Pawn>("resonator");
             var altar = ViviEndingUtility.AltarOf(anchor);
 
-            slate.Set("resolvedQuestName", LocalizeString_EndingCore.VV_Quest_EndingName.Translate().Resolve());
-            slate.Set("resolvedQuestDescription", LocalizeString_EndingCore.VV_Quest_EndingDesc.Translate().Resolve());
+            slate.Set("resolvedQuestName", LocalizeString_Etc.VV_Quest_EndingName.Translate().Resolve());
+            slate.Set("resolvedQuestDescription", LocalizeString_Etc.VV_Quest_EndingDesc.Translate().Resolve());
 
             var anchorTag = QuestGenUtility.HardcodedTargetQuestTagWithQuestID(ViviEndingSignals.AnchorTag);
             QuestUtility.AddQuestTag(ref anchor.questTags, anchorTag);
@@ -75,16 +75,16 @@ namespace VVRace
             });
 
             var siegeTicks = Mathf.RoundToInt(Mathf.Lerp(SiegeMaxDurationTicks, SiegeMinDurationTicks, Mathf.Clamp01(quality / RitualMaxQuality)));
-            var siegeText = LocalizeString_EndingCore.VV_Letter_EndingSiege.Translate().Resolve();
+            var siegeText = LocalizeString_Letter.VV_Letter_EndingSiege.Translate().Resolve();
             if (ViviEndingUtility.FindFederation(requireNonHostile: true) != null)
             {
-                siegeText += "\n\n" + LocalizeString_EndingCore.VV_Letter_EndingSiegeFederation.Translate().Resolve();
+                siegeText += "\n\n" + LocalizeString_Letter.VV_Letter_EndingSiegeFederation.Translate().Resolve();
             }
 
             quest.AddPart(new QuestPart_Letter()
             {
                 inSignal = initiate,
-                letter = LetterMaker.MakeLetter(LocalizeString_EndingCore.VV_Letter_EndingSiegeLabel.Translate(), siegeText, LetterDefOf.ThreatBig, new LookTargets(anchor), null, quest),
+                letter = LetterMaker.MakeLetter(LocalizeString_Letter.VV_Letter_EndingSiegeLabel.Translate(), siegeText, LetterDefOf.ThreatBig, new LookTargets(anchor), null, quest),
             });
 
             var bloom = new QuestPart_ViviBloomCondensation()
@@ -113,8 +113,8 @@ namespace VVRace
             quest.AddPart(new QuestPart_ViviEndingLetter()
             {
                 inSignal = bloomCondensed,
-                labelKey = LocalizeString_EndingCore.VV_Letter_EndingCalmLabel,
-                textKey = LocalizeString_EndingCore.VV_Letter_EndingCalm,
+                labelKey = LocalizeString_Letter.VV_Letter_EndingCalmLabel,
+                textKey = LocalizeString_Letter.VV_Letter_EndingCalm,
                 letterDef = LetterDefOf.NeutralEvent,
                 anchor = anchor,
             });
@@ -152,14 +152,14 @@ namespace VVRace
             quest.AddPart(new QuestPart_Letter()
             {
                 inSignal = apocryphaManifesting,
-                letter = LetterMaker.MakeLetter(LocalizeString_EndingCore.VV_Letter_EndingApocryphaLabel.Translate(), LocalizeString_EndingCore.VV_Letter_EndingApocrypha.Translate(), LetterDefOf.ThreatBig, LookTargets.Invalid, null, quest),
+                letter = LetterMaker.MakeLetter(LocalizeString_Letter.VV_Letter_EndingApocryphaLabel.Translate(), LocalizeString_Letter.VV_Letter_EndingApocrypha.Translate(), LetterDefOf.ThreatBig, LookTargets.Invalid, null, quest),
             });
 
             quest.AddPart(new QuestPart_ViviEndingLetter()
             {
                 inSignal = apocryphaDefeated,
-                labelKey = LocalizeString_EndingCore.VV_Letter_EndingCoronationLabel,
-                textKey = LocalizeString_EndingCore.VV_Letter_EndingCoronation,
+                labelKey = LocalizeString_Letter.VV_Letter_EndingCoronationLabel,
+                textKey = LocalizeString_Letter.VV_Letter_EndingCoronation,
                 letterDef = LetterDefOf.PositiveEvent,
                 anchor = anchor,
             });
@@ -177,22 +177,22 @@ namespace VVRace
             quest.AddPart(new QuestPart_Letter()
             {
                 inSignal = stolen,
-                letter = LetterMaker.MakeLetter(LocalizeString_EndingCore.VV_Letter_EndingFailureLabel.Translate(), LocalizeString_EndingCore.VV_Letter_EndingFailureStolen.Translate(), LetterDefOf.NegativeEvent, failureTargets, null, quest),
+                letter = LetterMaker.MakeLetter(LocalizeString_Letter.VV_Letter_EndingFailureLabel.Translate(), LocalizeString_Letter.VV_Letter_EndingFailureStolen.Translate(), LetterDefOf.NegativeEvent, failureTargets, null, quest),
             });
             quest.End(QuestEndOutcome.Fail, inSignal: stolen);
 
-            var fallenText = ViviEndingUtility.TranslateWithResonator(LocalizeString_EndingCore.VV_Letter_EndingFailureResonator, resonator).Resolve();
+            var fallenText = ViviEndingUtility.TranslateWithResonator(LocalizeString_Letter.VV_Letter_EndingFailureResonator, resonator).Resolve();
             quest.AddPart(new QuestPart_Letter()
             {
                 inSignal = resonatorFallen,
-                letter = LetterMaker.MakeLetter(LocalizeString_EndingCore.VV_Letter_EndingFailureResonatorLabel.Translate(), fallenText, LetterDefOf.NegativeEvent, failureTargets, null, quest),
+                letter = LetterMaker.MakeLetter(LocalizeString_Letter.VV_Letter_EndingFailureResonatorLabel.Translate(), fallenText, LetterDefOf.NegativeEvent, failureTargets, null, quest),
             });
             quest.End(QuestEndOutcome.Fail, inSignal: resonatorFallen);
 
             quest.AddPart(new QuestPart_Letter()
             {
                 inSignal = anchorLost,
-                letter = LetterMaker.MakeLetter(LocalizeString_EndingCore.VV_Letter_EndingFailureLostLabel.Translate(), LocalizeString_EndingCore.VV_Letter_EndingFailureLost.Translate(), LetterDefOf.NegativeEvent, failureTargets, null, quest),
+                letter = LetterMaker.MakeLetter(LocalizeString_Letter.VV_Letter_EndingFailureLostLabel.Translate(), LocalizeString_Letter.VV_Letter_EndingFailureLost.Translate(), LetterDefOf.NegativeEvent, failureTargets, null, quest),
             });
             quest.End(QuestEndOutcome.Fail, inSignal: anchorLost);
         }

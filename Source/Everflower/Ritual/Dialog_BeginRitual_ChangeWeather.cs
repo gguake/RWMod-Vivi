@@ -72,7 +72,7 @@ namespace VVRace
                 }
                 else if (choice == EverflowerWeatherChoice.GoldenBloom)
                 {
-                    TooltipHandler.TipRegion(rowRect, LocalizeString_EndingCore.VV_DialogChangeWeatherGoldenBloomDesc.Translate());
+                    TooltipHandler.TipRegion(rowRect, LocalizeString_Etc.VV_DialogChangeWeatherGoldenBloomDesc.Translate());
                 }
 
                 curY += RowHeight;

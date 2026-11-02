@@ -1,0 +1,183 @@
+﻿using RimWorld;
+using System.Collections.Generic;
+using System.Text;
+using Verse;
+using Verse.AI;
+
+namespace VVRace
+{
+    public class Building_FairyFlower : Building_ApocryphaFlower
+    {
+        public const int LifespanTicks = 60000;
+
+        private int _expireTick = -1;
+
+        public int TicksUntilExpire => _expireTick < 0 ? LifespanTicks : System.Math.Max(0, _expireTick - Find.TickManager.TicksGame);
+
+        public static AcceptanceReport CanBond(Pawn pawn)
+        {
+            if (pawn == null || pawn.Dead || pawn.Downed) { return false; }
+            if (pawn.Faction != Faction.OfPlayer) { return false; }
+
+            if (!pawn.IsVivi()) { return LocalizeString_Etc.VV_FailReason_FairyFlowerNotVivi.Translate().Resolve(); }
+            if (pawn.DevelopmentalStage.Baby()) { return LocalizeString_Etc.VV_FailReason_FairyFlowerNotAdult.Translate().Resolve(); }
+            if (!pawn.health.capacities.CapableOf(PawnCapacityDefOf.Moving))
+            {
+                return LocalizeString_Etc.VV_FailReason_FairyFlowerCannotMove.Translate().Resolve();
+            }
+            if (pawn.health.hediffSet.HasHediff(VVHediffDefOf.VV_FairyInterference))
+            {
+                return LocalizeString_Etc.VV_FailReason_FairyFlowerAlreadyInterfered.Translate().Resolve();
+            }
+
+            return true;
+        }
+
+        public override void SpawnSetup(Map map, bool respawningAfterLoad)
+        {
+            base.SpawnSetup(map, respawningAfterLoad);
+
+            if (_expireTick < 0)
+            {
+                _expireTick = Find.TickManager.TicksGame + LifespanTicks;
+            }
+        }
+
+        protected override void Tick()
+        {
+            base.Tick();
+
+            if (Spawned && _expireTick >= 0 && Find.TickManager.TicksGame >= _expireTick)
+            {
+                Wither();
+            }
+        }
+
+        public void Notify_BondedBy(Pawn pawn)
+        {
+            if (!Spawned || pawn == null || pawn.Dead) { return; }
+
+            if (!pawn.health.hediffSet.HasHediff(VVHediffDefOf.VV_FairyInterference))
+            {
+                pawn.health.AddHediff(VVHediffDefOf.VV_FairyInterference);
+            }
+
+            Wither();
+
+            Messages.Message(
+                LocalizeString_Message.VV_Message_FairyFlowerBonded.Translate(pawn.Named("PAWN")),
+                pawn,
+                MessageTypeDefOf.PositiveEvent);
+        }
+
+        public override IEnumerable<FloatMenuOption> GetFloatMenuOptions(Pawn selPawn)
+        {
+            foreach (var option in base.GetFloatMenuOptions(selPawn))
+            {
+                yield return option;
+            }
+
+            var label = LocalizeString_Etc.VV_FloatMenu_BondFairyFlower.Translate();
+
+            var report = CanBond(selPawn);
+            if (!report.Accepted)
+            {
+                if (!report.Reason.NullOrEmpty())
+                {
+                    yield return new FloatMenuOption($"{label} ({report.Reason})", null);
+                }
+                yield break;
+            }
+
+            if (!selPawn.CanReach(this, PathEndMode.Touch, Danger.Deadly))
+            {
+                yield return new FloatMenuOption($"{label} ({"NoPath".Translate()})", null);
+                yield break;
+            }
+
+            yield return FloatMenuUtility.DecoratePrioritizedTask(
+                new FloatMenuOption(label, () =>
+                {
+                    var job = JobMaker.MakeJob(VVJobDefOf.VV_BondFairyFlower, this);
+                    selPawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
+                }),
+                selPawn,
+                this);
+        }
+
+        public override string GetInspectString()
+        {
+            var sb = new StringBuilder(base.GetInspectString());
+            if (sb.Length > 0) { sb.AppendLine(); }
+
+            sb.Append(LocalizeString_Inspector.VV_Inspect_FairyFlowerFadeIn.Translate(TicksUntilExpire.ToStringTicksToPeriod()));
+            sb.AppendLine();
+            sb.Append(LocalizeString_Inspector.VV_Inspect_FairyFlowerHint.Translate());
+            return sb.ToString();
+        }
+
+        public override IEnumerable<Gizmo> GetGizmos()
+        {
+            foreach (var gizmo in base.GetGizmos())
+            {
+                yield return gizmo;
+            }
+
+            if (DebugSettings.godMode)
+            {
+                var vivi = FindNearestBondableVivi();
+                var commandBond = new Command_Action()
+                {
+                    defaultLabel = "DEV: Bond nearest vivi",
+                    action = () =>
+                    {
+                        var target = FindNearestBondableVivi();
+                        if (target != null)
+                        {
+                            Notify_BondedBy(target);
+                        }
+                    },
+                };
+                if (vivi == null)
+                {
+                    commandBond.Disable("No bondable player vivi without fairy interference on this map.");
+                }
+                yield return commandBond;
+
+                yield return new Command_Action()
+                {
+                    defaultLabel = "DEV: Expire now",
+                    action = Wither,
+                };
+            }
+        }
+
+        private Pawn FindNearestBondableVivi()
+        {
+            if (!Spawned) { return null; }
+
+            Pawn nearest = null;
+            var nearestDistance = float.MaxValue;
+            var pawns = Map.mapPawns.SpawnedPawnsInFaction(Faction.OfPlayer);
+            for (int i = 0; i < pawns.Count; i++)
+            {
+                if (!CanBond(pawns[i]).Accepted) { continue; }
+
+                var distance = pawns[i].Position.DistanceToSquared(Position);
+                if (distance < nearestDistance)
+                {
+                    nearest = pawns[i];
+                    nearestDistance = distance;
+                }
+            }
+
+            return nearest;
+        }
+
+        public override void ExposeData()
+        {
+            base.ExposeData();
+            Scribe_Values.Look(ref _expireTick, "expireTick", -1);
+        }
+    }
+}

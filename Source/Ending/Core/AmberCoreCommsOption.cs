@@ -8,13 +8,13 @@ namespace VVRace
         public static DiaOption Make(Pawn negotiator, Faction faction)
         {
             var ending = ViviEndingQuest.Current;
-            if (ending == null || !ending.CanOfferAmberCoreRequest) { return null; }
-            if (faction == null || faction.def != EndingCoreDefOf.VV_ViviFederation) { return null; }
+            if (ending == null || !ending.AmberCoreRequest.CanOffer) { return null; }
+            if (faction == null || faction.def != VVFactionDefOf.VV_ViviFederation) { return null; }
 
             var map = negotiator?.Map;
             if (map == null || !map.IsPlayerHome) { return null; }
 
-            var option = new DiaOption(LocalizeString_EndingCore.VV_Comms_AmberCoreRequest.Translate());
+            var option = new DiaOption(LocalizeString_Dialog.VV_Comms_AmberCoreRequest.Translate());
 
             var social = negotiator.skills?.GetSkill(SkillDefOf.Social);
             if (social == null || social.TotallyDisabled)
@@ -23,7 +23,7 @@ namespace VVRace
                 return option;
             }
 
-            var report = ending.CanRequestAmberCoreQuest(faction);
+            var report = ending.AmberCoreRequest.CanRequest(faction);
             if (!report.Accepted)
             {
                 option.Disable(report.Reason);
@@ -34,8 +34,8 @@ namespace VVRace
             option.linkLateBind = () =>
             {
                 var leader = faction.leader?.LabelShort ?? faction.Name;
-                var quest = ending.RequestAmberCoreQuest(faction);
-                var key = quest != null ? LocalizeString_EndingCore.VV_Comms_AmberCoreRequestResult : LocalizeString_EndingCore.VV_Comms_AmberCoreRequestNoQuest;
+                var quest = ending.AmberCoreRequest.Request(faction);
+                var key = quest != null ? LocalizeString_Dialog.VV_Comms_AmberCoreRequestResult : LocalizeString_Dialog.VV_Comms_AmberCoreRequestNoQuest;
                 var node = new DiaNode(key.Translate(leader.Named("LEADER")).CapitalizeFirst());
                 node.options.Add(new DiaOption("OK".Translate())
                 {

@@ -50,7 +50,7 @@ namespace VVRace
                 case EverflowerWeatherChoice.Rain:
                     return map.mapTemperature.OutdoorTemp < 0f ? VVWeatherDefOf.SnowGentle : VVWeatherDefOf.Rain;
                 case EverflowerWeatherChoice.GoldenBloom:
-                    return EndingCoreDefOf.VV_GoldenBloomMist;
+                    return VVWeatherDefOf.VV_GoldenBloomMist;
                 default:
                     return null;
             }
@@ -67,7 +67,7 @@ namespace VVRace
                 case EverflowerWeatherChoice.Rain:
                     return VVWeatherDefOf.Rain.LabelCap;
                 case EverflowerWeatherChoice.GoldenBloom:
-                    return EndingCoreDefOf.VV_GoldenBloomMist.LabelCap;
+                    return VVWeatherDefOf.VV_GoldenBloomMist.LabelCap;
                 default:
                     return string.Empty;
             }

@@ -59,7 +59,7 @@ namespace VVRace
         {
             if (map != Find.CurrentMap || lerpFactor <= 0f) { return; }
 
-            var fleckDef = EndingCoreDefOf.VV_Fleck_GoldenBloomPetal;
+            var fleckDef = VVFleckDefOf.VV_Fleck_GoldenBloomPetal;
             if (fleckDef == null) { return; }
 
             var view = Find.CameraDriver.CurrentViewRect.ExpandedBy(ViewMargin).ClipInsideMap(map);

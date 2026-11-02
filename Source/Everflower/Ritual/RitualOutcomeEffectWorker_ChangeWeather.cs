@@ -22,7 +22,7 @@ namespace VVRace
                 // 의식 도중 평화 기간에 진입하면 엔딩의 황금빛 꽃안개가 날씨를 고정하므로 변경을 취소한다.
                 if (GoldenBloomUtility.IsHeldByEnding(map))
                 {
-                    Messages.Message(LocalizeString_EndingCore.VV_FailReason_GoldenBloomHoldsWeather.Translate(), everflower, MessageTypeDefOf.RejectInput, false);
+                    Messages.Message(LocalizeString_Etc.VV_FailReason_GoldenBloomHoldsWeather.Translate(), everflower, MessageTypeDefOf.RejectInput, false);
                     return;
                 }
 
@@ -47,7 +47,7 @@ namespace VVRace
         {
             if (selectedWeather == EverflowerWeatherChoice.GoldenBloom)
             {
-                var goldenBloom = GameConditionMaker.MakeCondition(EndingCoreDefOf.VV_GoldenBloom, Rand.Range(60000, 120000));
+                var goldenBloom = GameConditionMaker.MakeCondition(VVGameConditionDefOf.VV_GoldenBloom, Rand.Range(60000, 120000));
                 goldenBloom.conditionCauser = everflower;
                 return goldenBloom;
             }

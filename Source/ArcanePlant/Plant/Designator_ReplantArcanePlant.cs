@@ -103,7 +103,7 @@ namespace VVRace
                 && everflower.AttunementLevel < Building_DreamumAltar.RequiredAttunementLevel
                 && Map.GetComponent<ArcanePlantMapComponent>()?.GetArcanePlantPot(c) is Building_DreamumAltar)
             {
-                return new AcceptanceReport(LocalizeString_EndingAltar.VV_Message_EverflowerAltarRequiresLevel.Translate(Building_DreamumAltar.RequiredAttunementLevel.Named("LEVEL")));
+                return new AcceptanceReport(LocalizeString_Message.VV_Message_EverflowerAltarRequiresLevel.Translate(Building_DreamumAltar.RequiredAttunementLevel.Named("LEVEL")));
             }
 
             foreach (Thing thing in c.GetThingList(Map))

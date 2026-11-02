@@ -141,7 +141,7 @@ namespace VVRace
             var cell = thing.Position;
             var drawPos = thing.DrawPos;
 
-            thing.TakeDamage(new DamageInfo(ApocryphaDamageDefOf.VV_GiantNeedlePierce, damage, armorPenetration, angle, instigator));
+            thing.TakeDamage(new DamageInfo(VVDamageDefOf.VV_GiantNeedlePierce, damage, armorPenetration, angle, instigator));
 
             SpawnPierceEffect(map, cell, drawPos, angle);
         }
@@ -150,7 +150,7 @@ namespace VVRace
         {
             if (map == null || !cell.InBounds(map)) { return; }
 
-            ApocryphaGimmicks.PlayEffect(ApocryphaEffecterDefOf.VV_Effecter_ApocryphaNeedleHit, cell, map, OffsetFromCell(drawPos, cell));
+            ApocryphaGimmicks.PlayEffect(VVEffecterDefOf.VV_Effecter_ApocryphaNeedleHit, cell, map, OffsetFromCell(drawPos, cell));
             if (!cell.ShouldSpawnMotesAt(map)) { return; }
 
             var basePos = drawPos.Yto0();
@@ -185,7 +185,7 @@ namespace VVRace
             for (int i = 0; i < 2; i++)
             {
                 var pos = start + direction * Rand.Range(0f, filled) + perpendicular * Rand.Range(-halfWidth, halfWidth) * 0.85f;
-                var def = i == 0 ? ApocryphaFleckDefOf.VV_Fleck_ApocryphaAimSpark : ApocryphaFleckDefOf.VV_Fleck_ApocryphaAimTwinkle;
+                var def = i == 0 ? VVFleckDefOf.VV_Fleck_ApocryphaAimSpark : VVFleckDefOf.VV_Fleck_ApocryphaAimTwinkle;
                 var data = FleckMaker.GetDataStatic(pos, map, def, i == 0 ? Rand.Range(0.25f, 0.45f) : Rand.Range(0.2f, 0.35f));
                 data.velocityAngle = angle + Rand.Range(-20f, 20f);
                 data.velocitySpeed = Rand.Range(0.5f, 1.3f);

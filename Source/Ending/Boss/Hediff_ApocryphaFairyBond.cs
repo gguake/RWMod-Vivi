@@ -16,7 +16,7 @@ namespace VVRace
                 var comp = BossComp;
                 if (comp == null) { return base.TipStringExtra; }
 
-                return LocalizeString_EndingBoss.VV_Hediff_ApocryphaFairyBondTip.Translate(
+                return LocalizeString_Etc.VV_Hediff_ApocryphaFairyBondTip.Translate(
                     comp.BondCount.ToString("N0"),
                     comp.InitialBondCount.ToString("N0"));
             }

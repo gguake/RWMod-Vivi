@@ -60,7 +60,7 @@ namespace VVRace
 
             if (!Def.startsEndingQuest && !Def.completesEndingQuest && EverflowerRitualRules.IsBlockedByEnding(compEverflower.Everflower))
             {
-                return LocalizeString_EndingRituals.VV_FailReason_EndingInProgress.Translate();
+                return LocalizeString_Etc.VV_FailReason_EndingInProgress.Translate();
             }
 
             // 서신 전에는 제단을 건설할 수 없으므로 제단 안치 요구보다 엔딩 단계의 거부 사유를 먼저 표시한다.
@@ -86,7 +86,7 @@ namespace VVRace
             {
                 if (!compEverflower.IsEnshrined)
                 {
-                    return LocalizeString_EndingRituals.VV_FailReason_RequiresEverflowerAltar.Translate();
+                    return LocalizeString_Etc.VV_FailReason_RequiresEverflowerAltar.Translate();
                 }
 
                 var location = compEverflower.EnshrinedAltar?.LocationReport ?? true;

@@ -76,7 +76,7 @@ namespace VVRace
             if (pawn == null || everflower == null || altar == null || !pawn.Spawned) { return null; }
 
             var map = pawn.Map;
-            var hediff = (Hediff_EverflowerAssimilation)HediffMaker.MakeHediff(EverflowerAssimilationDefOf.VV_EverflowerFullAssimilation, pawn);
+            var hediff = (Hediff_EverflowerAssimilation)HediffMaker.MakeHediff(VVHediffDefOf.VV_EverflowerFullAssimilation, pawn);
             hediff.everflower = everflower;
             hediff._holdCell = everflower.Position + IntVec3.South;
             hediff._glideFrom = (pawn.Position.ToVector3Shifted() - hediff._holdCell.ToVector3Shifted()).WithY(0f);
@@ -88,8 +88,8 @@ namespace VVRace
                 return null;
             }
 
-            EverflowerAssimilationDefOf.VV_Effecter_AssimilationBegin?.Spawn(hediff._holdCell, map).Cleanup();
-            Messages.Message(LocalizeString_EndingRituals.VV_Message_AssimilationBegan.Translate(pawn.Named("PAWN")), new LookTargets(everflower), MessageTypeDefOf.NeutralEvent);
+            VVEffecterDefOf.VV_Effecter_AssimilationBegin?.Spawn(hediff._holdCell, map).Cleanup();
+            Messages.Message(LocalizeString_Message.VV_Message_AssimilationBegan.Translate(pawn.Named("PAWN")), new LookTargets(everflower), MessageTypeDefOf.NeutralEvent);
             return hediff;
         }
 
@@ -157,7 +157,7 @@ namespace VVRace
 
             if (!_broken && pawn.Spawned && !pawn.Dead)
             {
-                Messages.Message(LocalizeString_EndingRituals.VV_Message_AssimilationReleased.Translate(pawn.Named("PAWN")), pawn, MessageTypeDefOf.PositiveEvent);
+                Messages.Message(LocalizeString_Message.VV_Message_AssimilationReleased.Translate(pawn.Named("PAWN")), pawn, MessageTypeDefOf.PositiveEvent);
             }
         }
 
@@ -239,7 +239,7 @@ namespace VVRace
                 var start = from + side * Rand.Range(-0.35f, 0.35f);
                 var travel = (to - start).Yto0();
 
-                var data = FleckMaker.GetDataStatic(start, map, EverflowerAssimilationDefOf.VV_Fleck_AssimilationMote, Rand.Range(0.3f, 0.55f) * strength);
+                var data = FleckMaker.GetDataStatic(start, map, VVFleckDefOf.VV_Fleck_AssimilationMote, Rand.Range(0.3f, 0.55f) * strength);
                 data.velocityAngle = travel.AngleFlat();
                 data.velocitySpeed = travel.magnitude / ParticleLifeSecs;
                 data.rotation = Rand.Range(0f, 360f);
@@ -248,7 +248,7 @@ namespace VVRace
 
             if ((now + pawn.thingIDNumber) % CircleInterval == 0 && !IsReleasing)
             {
-                MoteMaker.MakeStaticMote(body, map, EverflowerAssimilationDefOf.VV_Mote_EverflowerCircle, CircleScale);
+                MoteMaker.MakeStaticMote(body, map, VVThingDefOf.VV_Mote_EverflowerCircle, CircleScale);
             }
         }
 

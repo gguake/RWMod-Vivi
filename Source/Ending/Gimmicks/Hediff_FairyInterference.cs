@@ -26,7 +26,7 @@ namespace VVRace
                 var disappears = GetComp<HediffComp_Disappears>();
                 if (disappears == null || disappears.ticksToDisappear <= 0) { return tip; }
 
-                var remaining = LocalizeString_EndingGimmicks.VV_Hediff_FairyInterferenceRemaining.Translate(disappears.ticksToDisappear.ToStringTicksToPeriod()).Resolve();
+                var remaining = LocalizeString_Etc.VV_Hediff_FairyInterferenceRemaining.Translate(disappears.ticksToDisappear.ToStringTicksToPeriod()).Resolve();
                 return tip.NullOrEmpty() ? remaining : tip + "\n" + remaining;
             }
         }
@@ -69,7 +69,7 @@ namespace VVRace
 
             DoomBlightUtility.ClearDoomBlights(map);
             Messages.Message(
-                LocalizeString_EndingGimmicks.VV_Message_FairyBondReleased.Translate(vivi.Named("PAWN")),
+                LocalizeString_Message.VV_Message_FairyBondReleased.Translate(vivi.Named("PAWN")),
                 new LookTargets(boss),
                 MessageTypeDefOf.PositiveEvent);
 
@@ -77,7 +77,7 @@ namespace VVRace
             var quest = ViviEndingQuest.Current;
             if (quest != null && vivi.Spawned && !vivi.Dead)
             {
-                quest.HoldPawnUntilReturn(vivi, ReturnDelayTicks.RandomInRange);
+                quest.PawnHolder.HoldPawnUntilReturn(vivi, ReturnDelayTicks.RandomInRange);
             }
         }
 
@@ -104,7 +104,7 @@ namespace VVRace
 
         private void MaintainAura()
         {
-            var auraDef = ApocryphaGimmickDefOf.VV_Effecter_FairyInterferenceAura;
+            var auraDef = VVEffecterDefOf.VV_Effecter_FairyInterferenceAura;
             if (auraDef == null) { return; }
 
             if (_auraEffecter == null)

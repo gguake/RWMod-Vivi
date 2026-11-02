@@ -31,26 +31,26 @@ namespace VVRace
 
         public static string LetterText()
         {
-            return LocalizeString_EndingCore.VV_Letter_EndingFederationMissiveConditions.Translate().Resolve();
+            return LocalizeString_Letter.VV_Letter_EndingFederationMissiveConditions.Translate().Resolve();
         }
 
         public static string ProgressText()
         {
             var sb = new StringBuilder();
-            sb.Append(LocalizeString_EndingCore.VV_Quest_EndingMissiveConditionsHeader.Translate().Resolve());
+            sb.Append(LocalizeString_Etc.VV_Quest_EndingMissiveConditionsHeader.Translate().Resolve());
 
             var viviCount = CountPlayerVivi();
-            AppendLine(sb, viviCount >= MinViviCount, LocalizeString_EndingCore.VV_Quest_EndingMissiveConditionVivi.Translate(viviCount, MinViviCount).Resolve());
+            AppendLine(sb, viviCount >= MinViviCount, LocalizeString_Etc.VV_Quest_EndingMissiveConditionVivi.Translate(viviCount, MinViviCount).Resolve());
 
             var wealth = WealthUtility.PlayerWealth;
-            AppendLine(sb, wealth >= MinColonyWealth, LocalizeString_EndingCore.VV_Quest_EndingMissiveConditionWealth.Translate(
+            AppendLine(sb, wealth >= MinColonyWealth, LocalizeString_Etc.VV_Quest_EndingMissiveConditionWealth.Translate(
                 wealth.ToString("N0"), MinColonyWealth.ToString("N0")).Resolve());
 
             var everflower = ViviEndingUtility.FindEndingCandidate();
             var altar = ViviEndingUtility.AltarOf(everflower);
-            AppendLine(sb, altar != null, LocalizeString_EndingCore.VV_Quest_EndingMissiveStepAltar.Translate().Resolve());
+            AppendLine(sb, altar != null, LocalizeString_Etc.VV_Quest_EndingMissiveStepAltar.Translate().Resolve());
             AppendLine(sb, everflower != null && everflower.EverflowerComp.IsEnshrined && everflower.AttunementLevel >= Building_DreamumAltar.RequiredAttunementLevel,
-                LocalizeString_EndingCore.VV_Quest_EndingMissiveStepEnshrine.Translate(Building_DreamumAltar.RequiredAttunementLevel).Resolve());
+                LocalizeString_Etc.VV_Quest_EndingMissiveStepEnshrine.Translate(Building_DreamumAltar.RequiredAttunementLevel).Resolve());
 
             return sb.ToString();
         }
@@ -62,19 +62,19 @@ namespace VVRace
             var viviCount = CountPlayerVivi();
             if (viviCount < MinViviCount)
             {
-                unmet.Add(LocalizeString_EndingCore.VV_Quest_EndingMissiveConditionVivi.Translate(viviCount, MinViviCount).Resolve());
+                unmet.Add(LocalizeString_Etc.VV_Quest_EndingMissiveConditionVivi.Translate(viviCount, MinViviCount).Resolve());
             }
 
             var wealth = WealthUtility.PlayerWealth;
             if (wealth < MinColonyWealth)
             {
-                unmet.Add(LocalizeString_EndingCore.VV_Quest_EndingMissiveConditionWealth.Translate(
+                unmet.Add(LocalizeString_Etc.VV_Quest_EndingMissiveConditionWealth.Translate(
                     wealth.ToString("N0"), MinColonyWealth.ToString("N0")).Resolve());
             }
 
             if (unmet.Count == 0) { return null; }
 
-            return LocalizeString_EndingCore.VV_Comms_AmberCoreRequestConditions.Translate(unmet.ToCommaList()).Resolve();
+            return LocalizeString_Dialog.VV_Comms_AmberCoreRequestConditions.Translate(unmet.ToCommaList()).Resolve();
         }
 
         private static void AppendLine(StringBuilder sb, bool met, string text)

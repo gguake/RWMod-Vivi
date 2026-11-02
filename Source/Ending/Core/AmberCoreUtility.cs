@@ -14,8 +14,8 @@ namespace VVRace
         // 진행 중인 의뢰만으로 재의뢰가 차단되므로 퀘스트 부품에서 보상 대기 중인 코어는 세지 않는다.
         public static bool AnyAmberCoreExists()
         {
-            var coreDef = EndingCoreDefOf.VV_AncientAmberCore;
-            var altarDef = EndingCoreDefOf.VV_DreamumAltar;
+            var coreDef = VVThingDefOf.VV_AncientAmberCore;
+            var altarDef = VVThingDefOf.VV_DreamumAltar;
 
             try
             {

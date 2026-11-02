@@ -11,7 +11,7 @@ namespace VVRace
     {
         public static bool IsApocrypha(Pawn pawn)
         {
-            return pawn != null && pawn.def == ApocryphaThingDefOf.VV_Apocrypha;
+            return pawn != null && pawn.def == VVThingDefOf.VV_Apocrypha;
         }
 
         public static bool TryFindEntryCell(Map map, IntVec3 target, out IntVec3 cell)
@@ -105,7 +105,7 @@ namespace VVRace
         public static Pawn GenerateApocrypha(Map map)
         {
             var boss = PawnGenerator.GeneratePawn(new PawnGenerationRequest(
-                ApocryphaPawnKindDefOf.VV_Apocrypha,
+                VVPawnKindDefOf.VV_Apocrypha,
                 ResolveBossFaction(),
                 PawnGenerationContext.NonPlayer,
                 map.Tile,
@@ -131,7 +131,7 @@ namespace VVRace
             var count = Mathf.Clamp(Mathf.RoundToInt(points / VVPawnKindDefOf.VV_TitanicHornet.combatPower), 4, 12);
             SpawnHornetEscorts(boss, count, fromMapEdge: false);
 
-            ApocryphaEffecterDefOf.VV_Effecter_ApocryphaArrive.Spawn(boss.Position, boss.Map, 1.5f).Cleanup();
+            VVEffecterDefOf.VV_Effecter_ApocryphaArrive.Spawn(boss.Position, boss.Map, 1.5f).Cleanup();
             Find.TickManager.slower.SignalForceNormalSpeedShort();
         }
 
@@ -193,7 +193,7 @@ namespace VVRace
 
             if (fromMapEdge)
             {
-                ApocryphaEffecterDefOf.VV_Effecter_ApocryphaArrive.Spawn(center, map).Cleanup();
+                VVEffecterDefOf.VV_Effecter_ApocryphaArrive.Spawn(center, map).Cleanup();
             }
 
             return result;
@@ -317,7 +317,7 @@ namespace VVRace
         // 소멸 연출 중에는 보스 폰이 이미 파괴되어 있으므로 보스 소실 감지로 엔딩을 종료하면 안 된다.
         public static bool IsDefeatInProgress(Map map)
         {
-            return map != null && map.listerThings.ThingsOfDef(ApocryphaThingDefOf.VV_DyingApocrypha).Count > 0;
+            return map != null && map.listerThings.ThingsOfDef(VVThingDefOf.VV_DyingApocrypha).Count > 0;
         }
 
         public static void ShakeCamera(Map map, float magnitude)

@@ -123,7 +123,7 @@ namespace VVRace
 
         private void StartEndingEffects(Map map)
         {
-            ViviEndingQuest.Current?.PlayEndingFlash();
+            ViviEndingQuest.Current?.Ambience.PlayEndingFlash();
 
             if (map == null || anchor == null || !anchor.Spawned) { return; }
 
@@ -132,12 +132,12 @@ namespace VVRace
                 Find.CameraDriver.shaker.DoShake(EndingCameraShake);
             }
 
-            EndingCoreDefOf.VV_Effecter_EndingGoldenWave?.Spawn(anchor.Position, map, BudOffset).Cleanup();
+            VVEffecterDefOf.VV_Effecter_EndingGoldenWave?.Spawn(anchor.Position, map, BudOffset).Cleanup();
         }
 
         private void SpawnGoldenWaveRing(Map map)
         {
-            var ringDef = EndingCoreDefOf.VV_Fleck_GoldenWaveRing;
+            var ringDef = VVFleckDefOf.VV_Fleck_GoldenWaveRing;
             if (ringDef == null) { return; }
 
             map.flecks.CreateFleck(new FleckCreationData()
@@ -152,7 +152,7 @@ namespace VVRace
 
         private static void SpawnPetalStorm(Map map)
         {
-            var petalDef = EndingCoreDefOf.VV_Fleck_EndingPetal;
+            var petalDef = VVFleckDefOf.VV_Fleck_EndingPetal;
             if (petalDef == null || Find.CurrentMap != map) { return; }
 
             var view = Find.CameraDriver.CurrentViewRect.ExpandedBy(2).ClipInsideMap(map);
@@ -217,7 +217,7 @@ namespace VVRace
         {
             foreach (var pawn in PawnsFinder.AllMapsCaravansAndTravellingTransporters_Alive_OfPlayerFaction)
             {
-                pawn.needs?.mood?.thoughts?.memories?.TryGainMemory(EndingCoreDefOf.VV_EverflowerFullBloom);
+                pawn.needs?.mood?.thoughts?.memories?.TryGainMemory(VVThoughtDefOf.VV_EverflowerFullBloom);
             }
         }
 
@@ -226,8 +226,8 @@ namespace VVRace
             var ending = BuildEndingText(ResolveQueen());
 
             Find.LetterStack.ReceiveLetter(
-                LocalizeString_EndingCore.VV_Letter_EndingVictoryLabel.Translate(),
-                ending + "\n\n" + LocalizeString_EndingCore.VV_Letter_EndingVictoryContinue.Translate().Resolve(),
+                LocalizeString_Letter.VV_Letter_EndingVictoryLabel.Translate(),
+                ending + "\n\n" + LocalizeString_Letter.VV_Letter_EndingVictoryContinue.Translate().Resolve(),
                 LetterDefOf.PositiveEvent,
                 anchor != null && anchor.Spawned ? new LookTargets(anchor) : LookTargets.Invalid,
                 null,
@@ -262,8 +262,8 @@ namespace VVRace
         private static EndingScenarioKind DetectEndingScenario()
         {
             var playerFactionDef = Faction.OfPlayer?.def;
-            if (playerFactionDef != null && playerFactionDef == EndingCoreDefOf.VV_PlayerExiledVivi) { return EndingScenarioKind.Exiled; }
-            if (playerFactionDef != null && playerFactionDef == EndingCoreDefOf.VV_PlayerViviRefugee) { return EndingScenarioKind.Refugee; }
+            if (playerFactionDef != null && playerFactionDef == VVFactionDefOf.VV_PlayerExiledVivi) { return EndingScenarioKind.Exiled; }
+            if (playerFactionDef != null && playerFactionDef == VVFactionDefOf.VV_PlayerViviRefugee) { return EndingScenarioKind.Refugee; }
 
             var scenario = Find.Scenario;
             if (scenario == null) { return EndingScenarioKind.None; }
@@ -291,17 +291,17 @@ namespace VVRace
         {
             var sb = new StringBuilder();
             sb.Append(queen != null
-                ? LocalizeString_EndingCore.VV_EndingCredits.Translate(queen.Named("PAWN")).Resolve()
-                : LocalizeString_EndingCore.VV_EndingCreditsNoQueen.Translate().Resolve());
+                ? LocalizeString_Etc.VV_EndingCredits.Translate(queen.Named("PAWN")).Resolve()
+                : LocalizeString_Etc.VV_EndingCreditsNoQueen.Translate().Resolve());
 
             string scenarioKey = null;
             switch (DetectEndingScenario())
             {
                 case EndingScenarioKind.Exiled:
-                    scenarioKey = LocalizeString_EndingCore.VV_EndingCreditsExiled;
+                    scenarioKey = LocalizeString_Etc.VV_EndingCreditsExiled;
                     break;
                 case EndingScenarioKind.Refugee:
-                    scenarioKey = LocalizeString_EndingCore.VV_EndingCreditsRefugee;
+                    scenarioKey = LocalizeString_Etc.VV_EndingCreditsRefugee;
                     break;
             }
 
@@ -310,7 +310,7 @@ namespace VVRace
                 sb.Append("\n\n").Append(scenarioKey.Translate().Resolve());
             }
 
-            sb.Append("\n\n").Append(LocalizeString_EndingCore.VV_EndingCreditsOutro.Translate().Resolve());
+            sb.Append("\n\n").Append(LocalizeString_Etc.VV_EndingCreditsOutro.Translate().Resolve());
             return sb.ToString();
         }
 

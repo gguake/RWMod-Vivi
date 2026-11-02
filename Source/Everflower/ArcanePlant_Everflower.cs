@@ -154,7 +154,7 @@ namespace VVRace
                     string desc = LocalizeString_Command.VV_Command_ReserveTeleportEverflowerDesc.Translate();
                     if (Building_DreamumAltar.FindOnMap(Map) != null)
                     {
-                        desc += "\n\n" + LocalizeString_EndingAltar.VV_Command_ReserveTeleportEverflowerAltarDesc.Translate(Building_DreamumAltar.RequiredAttunementLevel.Named("LEVEL")).Resolve();
+                        desc += "\n\n" + LocalizeString_Command.VV_Command_ReserveTeleportEverflowerAltarDesc.Translate(Building_DreamumAltar.RequiredAttunementLevel.Named("LEVEL")).Resolve();
                     }
 
                     yield return new Command_Action()
@@ -174,7 +174,7 @@ namespace VVRace
                                     if (altar != null && EverflowerComp.AttunementLevel < Building_DreamumAltar.RequiredAttunementLevel)
                                     {
                                         Messages.Message(
-                                            LocalizeString_EndingAltar.VV_Message_EverflowerAltarRequiresLevel.Translate(Building_DreamumAltar.RequiredAttunementLevel.Named("LEVEL")),
+                                            LocalizeString_Message.VV_Message_EverflowerAltarRequiresLevel.Translate(Building_DreamumAltar.RequiredAttunementLevel.Named("LEVEL")),
                                             this,
                                             MessageTypeDefOf.RejectInput,
                                             historical: false);
@@ -273,7 +273,7 @@ namespace VVRace
             {
                 if (wasEnshrined && (ViviEndingQuest.Current?.IsAnchor(this) ?? false))
                 {
-                    Messages.Message(LocalizeString_EndingAltar.VV_Message_AnchorEverflowerLeftAltar.Translate(), this, MessageTypeDefOf.NegativeEvent);
+                    Messages.Message(LocalizeString_Message.VV_Message_AnchorEverflowerLeftAltar.Translate(), this, MessageTypeDefOf.NegativeEvent);
                 }
 
                 return;
@@ -294,7 +294,7 @@ namespace VVRace
                 if (altar != null && EverflowerComp.AttunementLevel < Building_DreamumAltar.RequiredAttunementLevel)
                 {
                     Messages.Message(
-                        LocalizeString_EndingAltar.VV_Message_EverflowerAltarRequiresLevel.Translate(Building_DreamumAltar.RequiredAttunementLevel.Named("LEVEL")),
+                        LocalizeString_Message.VV_Message_EverflowerAltarRequiresLevel.Translate(Building_DreamumAltar.RequiredAttunementLevel.Named("LEVEL")),
                         this,
                         MessageTypeDefOf.RejectInput,
                         historical: false);

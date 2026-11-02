@@ -113,7 +113,7 @@ namespace VVRace
             _stateStartTick = GenTicks.TicksGame;
             SyncPosition();
 
-            PlayEffectAt(QueenDefOf.VV_Effecter_QueenVerdictSummon, _hover);
+            PlayEffectAt(VVEffecterDefOf.VV_Effecter_QueenVerdictSummon, _hover);
         }
 
         public override void ExposeData()
@@ -131,11 +131,6 @@ namespace VVRace
             Scribe_Values.Look(ref _laneLength, "laneLength", 0f);
             Scribe_Values.Look(ref _travelled, "travelled", 0f);
             Scribe_Collections.Look(ref _hitIds, "hitIds", LookMode.Value);
-
-            if (Scribe.mode == LoadSaveMode.PostLoadInit && _hitIds == null)
-            {
-                _hitIds = new List<int>();
-            }
         }
 
         protected override void Tick()
@@ -153,7 +148,7 @@ namespace VVRace
                     {
                         _state = VerdictState.Aim;
                         _stateStartTick = now;
-                        PlayEffectAt(ApocryphaEffecterDefOf.VV_Effecter_ApocryphaNeedleAim, _pos);
+                        PlayEffectAt(VVEffecterDefOf.VV_Effecter_ApocryphaNeedleAim, _pos);
                     }
                     break;
 
@@ -211,7 +206,7 @@ namespace VVRace
             Trail?.ResetTrail();
             RegisterTrail(_pos);
 
-            PlayEffectAt(ApocryphaEffecterDefOf.VV_Effecter_ApocryphaNeedleFire, _pos);
+            PlayEffectAt(VVEffecterDefOf.VV_Effecter_ApocryphaNeedleFire, _pos);
             ApocryphaUtility.ShakeCamera(Map, 0.5f);
 
             TickFire(now);
@@ -234,7 +229,7 @@ namespace VVRace
             {
                 _state = VerdictState.End;
                 _stateStartTick = now;
-                PlayEffectAt(ApocryphaEffecterDefOf.VV_Effecter_ApocryphaNeedleEnd, PointOnLane(_laneLength));
+                PlayEffectAt(VVEffecterDefOf.VV_Effecter_ApocryphaNeedleEnd, PointOnLane(_laneLength));
             }
         }
 
@@ -247,7 +242,7 @@ namespace VVRace
             if (elapsed >= EndTicks)
             {
                 Trail?.FinishTrail();
-                PlayEffectAt(ApocryphaEffecterDefOf.VV_Effecter_ApocryphaNeedleVanish, _pos);
+                PlayEffectAt(VVEffecterDefOf.VV_Effecter_ApocryphaNeedleVanish, _pos);
                 Destroy();
             }
         }

@@ -1,4 +1,4 @@
-namespace VVRace
+﻿namespace VVRace
 {
     public static class LocalizeString_Gizmo
     {
@@ -15,5 +15,8 @@ namespace VVRace
 
         public const string VV_Gizmo_FairyStatusHeader = nameof(VV_Gizmo_FairyStatusHeader);
         public const string VV_Gizmo_FairyStatusTooltip = nameof(VV_Gizmo_FairyStatusTooltip);
+
+        public const string VV_Gizmo_EndingBloom = nameof(VV_Gizmo_EndingBloom);
+        public const string VV_Gizmo_EndingBloomDesc = nameof(VV_Gizmo_EndingBloomDesc);
     }
 }

@@ -261,7 +261,7 @@ namespace VVRace
             {
                 if (level > 4)
                 {
-                    sb.AppendInNewLine(LocalizeString_EndingAltar.VV_Inspector_EverflowerAttunementLevelOnly.Translate(level.Named("LEVEL")));
+                    sb.AppendInNewLine(LocalizeString_Inspector.VV_Inspector_EverflowerAttunementLevelOnly.Translate(level.Named("LEVEL")));
                 }
                 else
                 {
@@ -273,13 +273,13 @@ namespace VVRace
 
             if (IsEnshrined)
             {
-                sb.AppendInNewLine(LocalizeString_EndingAltar.VV_Inspector_EverflowerEnshrined.Translate());
+                sb.AppendInNewLine(LocalizeString_Inspector.VV_Inspector_EverflowerEnshrined.Translate());
             }
 
-            var skyShield = parent.Spawned ? ViviShieldDome.FindFor(parent.Map, QueenDefOf.VV_SkyShield, parent) : null;
+            var skyShield = parent.Spawned ? ViviShieldDome.FindFor(parent.Map, VVThingDefOf.VV_SkyShield, parent) : null;
             if (skyShield != null)
             {
-                sb.AppendInNewLine(LocalizeString_EndingQueen.VV_Inspector_SkyShieldRemaining.Translate(skyShield.TicksLeft.ToStringTicksToPeriod()));
+                sb.AppendInNewLine(LocalizeString_Inspector.VV_Inspector_SkyShieldRemaining.Translate(skyShield.TicksLeft.ToStringTicksToPeriod()));
             }
 
             var endingText = ViviEndingQuest.Current?.GetEverflowerInspectString(Everflower);
@@ -473,11 +473,11 @@ namespace VVRace
             string preamble = null;
             if (level == 5)
             {
-                preamble = LocalizeString_EndingAltar.VV_Letter_EverflowerAttunementLevel5Preamble.Translate();
+                preamble = LocalizeString_Letter.VV_Letter_EverflowerAttunementLevel5Preamble.Translate();
             }
             else if (level >= 6)
             {
-                preamble = LocalizeString_EndingAltar.VV_Letter_EverflowerAttunementLevel6Preamble.Translate();
+                preamble = LocalizeString_Letter.VV_Letter_EverflowerAttunementLevel6Preamble.Translate();
             }
 
             if (preamble != null)
@@ -527,8 +527,8 @@ namespace VVRace
 
                 if (altar != previousAltar && !silent)
                 {
-                    AltarDefOf.VV_Effecter_AltarEnshrine?.Spawn(parent.Position, map).Cleanup();
-                    Messages.Message(LocalizeString_EndingAltar.VV_Message_EverflowerEnshrined.Translate(), parent, MessageTypeDefOf.PositiveEvent);
+                    VVEffecterDefOf.VV_Effecter_AltarEnshrine?.Spawn(parent.Position, map).Cleanup();
+                    Messages.Message(LocalizeString_Message.VV_Message_EverflowerEnshrined.Translate(), parent, MessageTypeDefOf.PositiveEvent);
                 }
             }
         }

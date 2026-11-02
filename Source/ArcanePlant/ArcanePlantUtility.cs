@@ -53,13 +53,13 @@ namespace VVRace
             {
                 if (def != VVThingDefOf.VV_Everflower || cell != altar.Position)
                 {
-                    return new AcceptanceReport(LocalizeString_EndingAltar.VV_FailReason_AltarOnlyEverflowerCenter.Translate());
+                    return new AcceptanceReport(LocalizeString_Etc.VV_FailReason_AltarOnlyEverflowerCenter.Translate());
                 }
 
                 var enshrined = altar.EnshrinedEverflower;
                 if (enshrined != null && enshrined != currentThing)
                 {
-                    return new AcceptanceReport(LocalizeString_EndingAltar.VV_FailReason_AltarCenterOccupied.Translate());
+                    return new AcceptanceReport(LocalizeString_Etc.VV_FailReason_AltarCenterOccupied.Translate());
                 }
             }
 
@@ -72,7 +72,7 @@ namespace VVRace
                 if ((thing.def.IsBlueprint || thing.def.IsFrame) && thing.def.entityDefToBuild is ThingDef builtDef
                     && builtDef.thingClass != null && typeof(Building_DreamumAltar).IsAssignableFrom(builtDef.thingClass))
                 {
-                    return new AcceptanceReport(LocalizeString_EndingAltar.VV_FailReason_AltarUnderConstruction.Translate());
+                    return new AcceptanceReport(LocalizeString_Etc.VV_FailReason_AltarUnderConstruction.Translate());
                 }
 
                 if (thing.def.category == ThingCategory.Building && thing.def.IsEdifice())

@@ -23,7 +23,7 @@ namespace VVRace
         {
             if (_materials == null)
             {
-                var stages = ApocryphaPawnKindDefOf.VV_Apocrypha?.lifeStages;
+                var stages = VVPawnKindDefOf.VV_Apocrypha?.lifeStages;
                 var boundPath = stages.NullOrEmpty() ? null : stages[0].bodyGraphicData?.texPath;
                 var unboundPath = stages.NullOrEmpty() ? null : stages[stages.Count - 1].bodyGraphicData?.texPath;
                 if (boundPath.NullOrEmpty() || unboundPath.NullOrEmpty()) { return; }

@@ -45,17 +45,17 @@ namespace VVRace
             if (federation == null) { return; }
 
             var kinds = new List<PawnKindDef>(3);
-            if (EndingCoreDefOf.VV_ViviGuard != null)
+            if (VVPawnKindDefOf.VV_ViviGuard != null)
             {
-                kinds.Add(EndingCoreDefOf.VV_ViviGuard);
+                kinds.Add(VVPawnKindDefOf.VV_ViviGuard);
             }
-            if (EndingCoreDefOf.VV_ViviFirefighter != null)
+            if (VVPawnKindDefOf.VV_ViviFirefighter != null)
             {
-                kinds.Add(EndingCoreDefOf.VV_ViviFirefighter);
+                kinds.Add(VVPawnKindDefOf.VV_ViviFirefighter);
             }
-            if (EndingCoreDefOf.VV_ViviSniper != null)
+            if (VVPawnKindDefOf.VV_ViviSniper != null)
             {
-                kinds.Add(EndingCoreDefOf.VV_ViviSniper);
+                kinds.Add(VVPawnKindDefOf.VV_ViviSniper);
             }
             if (kinds.Count == 0) { return; }
 
@@ -83,8 +83,8 @@ namespace VVRace
             LordMaker.MakeNewLord(federation, new LordJob_AssistColony(federation, center), map, pawns);
 
             Find.LetterStack.ReceiveLetter(
-                LocalizeString_EndingCore.VV_Letter_EndingFederationAidLabel.Translate(),
-                LocalizeString_EndingCore.VV_Letter_EndingFederationAid.Translate(pawns.Count.Named("COUNT")),
+                LocalizeString_Letter.VV_Letter_EndingFederationAidLabel.Translate(),
+                LocalizeString_Letter.VV_Letter_EndingFederationAid.Translate(pawns.Count.Named("COUNT")),
                 LetterDefOf.PositiveEvent,
                 new LookTargets(pawns),
                 federation,

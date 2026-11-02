@@ -50,7 +50,7 @@ namespace VVRace
 
         public static Faction FindFederation(bool requireNonHostile)
         {
-            var federationDef = EndingCoreDefOf.VV_ViviFederation;
+            var federationDef = VVFactionDefOf.VV_ViviFederation;
             if (federationDef == null) { return null; }
 
             Faction hostile = null;
@@ -88,6 +88,13 @@ namespace VVRace
             return map != null ? Building_DreamumAltar.FindOnMap(map) : null;
         }
 
+        public static void GrantQueenPowers(Pawn pawn)
+        {
+            if (pawn?.health?.hediffSet == null || pawn.health.hediffSet.HasHediff(VVHediffDefOf.VV_EverflowerQueen)) { return; }
+
+            pawn.health.AddHediff(VVHediffDefOf.VV_EverflowerQueen);
+        }
+
         public static TaggedString TranslateWithResonator(string key, Pawn resonator, params NamedArgument[] args)
         {
             if (resonator != null)
@@ -98,7 +105,7 @@ namespace VVRace
                 return key.Translate(allArgs);
             }
 
-            var raw = key.Translate().RawText.Replace("{PAWN_labelShort}", LocalizeString_EndingCore.VV_Ending_ResonatorFallback.Translate().RawText);
+            var raw = key.Translate().RawText.Replace("{PAWN_labelShort}", LocalizeString_Etc.VV_Ending_ResonatorFallback.Translate().RawText);
             return raw.Formatted(args);
         }
 
@@ -128,7 +135,7 @@ namespace VVRace
 
         public static int VanishAllTitanicHornets(Map map)
         {
-            return VanishTitanicHornets(map, ApocryphaEffecterDefOf.VV_Effecter_ApocryphaVanish ?? EffecterDefOf.Skip_EntryNoDelay, null);
+            return VanishTitanicHornets(map, VVEffecterDefOf.VV_Effecter_ApocryphaVanish ?? EffecterDefOf.Skip_EntryNoDelay, null);
         }
 
         private static int VanishTitanicHornets(Map map, EffecterDef vanishEffect, Predicate<Pawn> filter)
@@ -201,7 +208,7 @@ namespace VVRace
 
         public static void EndOminousSilence(Map map)
         {
-            var conditionDef = EndingCoreDefOf.VV_OminousSilence;
+            var conditionDef = VVGameConditionDefOf.VV_OminousSilence;
             if (conditionDef == null || map == null) { return; }
 
             map.gameConditionManager.GetActiveCondition(conditionDef)?.End();
@@ -277,14 +284,14 @@ namespace VVRace
             var map = boss.Map;
             VanishEscorts(boss);
 
-            var vanishEffect = ApocryphaEffecterDefOf.VV_Effecter_ApocryphaVanish ?? EffecterDefOf.Skip_EntryNoDelay;
+            var vanishEffect = VVEffecterDefOf.VV_Effecter_ApocryphaVanish ?? EffecterDefOf.Skip_EntryNoDelay;
             vanishEffect.Spawn(boss.Position, map, 2.5f).Cleanup();
             boss.Destroy(DestroyMode.Vanish);
         }
 
         public static void VanishEscorts(Pawn boss)
         {
-            var vanishEffect = ApocryphaEffecterDefOf.VV_Effecter_ApocryphaVanish ?? EffecterDefOf.Skip_EntryNoDelay;
+            var vanishEffect = VVEffecterDefOf.VV_Effecter_ApocryphaVanish ?? EffecterDefOf.Skip_EntryNoDelay;
             foreach (var hornet in ApocryphaUtility.GetEscorts(boss))
             {
                 if (hornet == null || hornet.Destroyed) { continue; }

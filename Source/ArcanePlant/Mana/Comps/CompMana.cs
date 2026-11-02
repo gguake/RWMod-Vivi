@@ -116,7 +116,7 @@ namespace VVRace
 
             if (parent.Spawned && IsUnlimited)
             {
-                sb.AppendInNewLine(LocalizeString_EndingCore.VV_Inspector_PlantManaUnlimited.Translate());
+                sb.AppendInNewLine(LocalizeString_Inspector.VV_Inspector_PlantManaUnlimited.Translate());
             }
 
             return sb.ToString();

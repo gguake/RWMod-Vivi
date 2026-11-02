@@ -34,7 +34,7 @@ namespace VVRace
             var cell = target.Cell;
             if (!cell.InBounds(map)) { return false; }
 
-            var shellDef = ApocryphaGimmickDefOf.VV_Projectile_FairyShell;
+            var shellDef = VVThingDefOf.VV_Projectile_FairyShell;
             var projectile = (Projectile)GenSpawn.Spawn(shellDef, boss.Position, map);
             projectile.Launch(boss, GetBossBodyPos(boss), target, target, ProjectileHitFlags.IntendedTarget);
 
@@ -65,10 +65,10 @@ namespace VVRace
             if (!IsBoundBoss(boss, out var comp) || (doomCount <= 0 && !withFairy)) { return; }
 
             var map = boss.Map;
-            var doomSeedDef = ApocryphaGimmickDefOf.VV_Projectile_DoomSeed;
-            var fairySeedDef = ApocryphaGimmickDefOf.VV_Projectile_FairySeed;
-            var doomRoom = comp.Props.maxDoomFlowers - CountFlowersAndSeeds(map, ApocryphaGimmickDefOf.VV_DoomFlower, doomSeedDef);
-            var fairyRoom = comp.Props.maxFairyFlowers - CountFlowersAndSeeds(map, ApocryphaGimmickDefOf.VV_FairyFlower, fairySeedDef);
+            var doomSeedDef = VVThingDefOf.VV_Projectile_DoomSeed;
+            var fairySeedDef = VVThingDefOf.VV_Projectile_FairySeed;
+            var doomRoom = comp.Props.maxDoomFlowers - CountFlowersAndSeeds(map, VVThingDefOf.VV_DoomFlower, doomSeedDef);
+            var fairyRoom = comp.Props.maxFairyFlowers - CountFlowersAndSeeds(map, VVThingDefOf.VV_FairyFlower, fairySeedDef);
 
             var fairyCount = withFairy && fairyRoom > 0 ? 1 : 0;
             doomCount = Mathf.Min(doomCount, doomRoom);
@@ -118,13 +118,13 @@ namespace VVRace
             var map = boss.Map;
             var bossPos = GetBossBodyPos(boss);
 
-            DrawFlowerLinks(bossPos, map.listerThings.ThingsOfDef(ApocryphaGimmickDefOf.VV_DoomFlower));
-            DrawFlowerLinks(bossPos, map.listerThings.ThingsOfDef(ApocryphaGimmickDefOf.VV_FairyFlower));
+            DrawFlowerLinks(bossPos, map.listerThings.ThingsOfDef(VVThingDefOf.VV_DoomFlower));
+            DrawFlowerLinks(bossPos, map.listerThings.ThingsOfDef(VVThingDefOf.VV_FairyFlower));
 
             var pawns = map.mapPawns.SpawnedPawnsInFaction(Faction.OfPlayer);
             for (int i = 0; i < pawns.Count; i++)
             {
-                var hediff = pawns[i].health?.hediffSet.GetFirstHediffOfDef(ApocryphaGimmickDefOf.VV_FairyInterference);
+                var hediff = pawns[i].health?.hediffSet.GetFirstHediffOfDef(VVHediffDefOf.VV_FairyInterference);
                 if (hediff == null) { continue; }
 
                 var color = InterferenceLinkColor;
@@ -232,11 +232,11 @@ namespace VVRace
             var offset = bossPos - boss.Position.ToVector3Shifted();
             offset.y = 0f;
 
-            PlayEffect(ApocryphaGimmickDefOf.VV_Effecter_ManaBackflow, boss.Position, map, offset);
+            PlayEffect(VVEffecterDefOf.VV_Effecter_ManaBackflow, boss.Position, map, offset);
 
             if (vivi != null && vivi.Spawned && vivi.Map == map && bossPos.ShouldSpawnMotesAt(map))
             {
-                FleckMaker.ConnectingLine(vivi.DrawPos, bossPos, ApocryphaGimmickDefOf.VV_Fleck_GimmickBackflowBeam, map, ManaBackflowBeamWidth);
+                FleckMaker.ConnectingLine(vivi.DrawPos, bossPos, VVFleckDefOf.VV_Fleck_GimmickBackflowBeam, map, ManaBackflowBeamWidth);
             }
 
             if (map == Find.CurrentMap)
@@ -267,8 +267,8 @@ namespace VVRace
                 }
             }
 
-            ignored.AddRange(map.listerThings.ThingsOfDef(ApocryphaGimmickDefOf.VV_DoomFlower));
-            ignored.AddRange(map.listerThings.ThingsOfDef(ApocryphaGimmickDefOf.VV_FairyFlower));
+            ignored.AddRange(map.listerThings.ThingsOfDef(VVThingDefOf.VV_DoomFlower));
+            ignored.AddRange(map.listerThings.ThingsOfDef(VVThingDefOf.VV_FairyFlower));
             return ignored;
         }
 
@@ -295,7 +295,7 @@ namespace VVRace
             }
 
             var flower = ThingMaker.MakeThing(flowerDef);
-            if (flowerDef == ApocryphaGimmickDefOf.VV_DoomFlower)
+            if (flowerDef == VVThingDefOf.VV_DoomFlower)
             {
                 flower.SetFaction(boss?.Faction ?? Faction.OfInsects);
             }
@@ -424,11 +424,11 @@ namespace VVRace
 
         private static void ClearGimmickThings(Map map)
         {
-            DestroyAll(map, ApocryphaGimmickDefOf.VV_Projectile_DoomSeed);
-            DestroyAll(map, ApocryphaGimmickDefOf.VV_Projectile_FairySeed);
+            DestroyAll(map, VVThingDefOf.VV_Projectile_DoomSeed);
+            DestroyAll(map, VVThingDefOf.VV_Projectile_FairySeed);
 
-            WitherAll(map, ApocryphaGimmickDefOf.VV_FairyFlower);
-            WitherAll(map, ApocryphaGimmickDefOf.VV_DoomFlower);
+            WitherAll(map, VVThingDefOf.VV_FairyFlower);
+            WitherAll(map, VVThingDefOf.VV_DoomFlower);
         }
 
         private static void DestroyAll(Map map, ThingDef def)
@@ -464,7 +464,7 @@ namespace VVRace
             var pawns = new List<Pawn>(map.mapPawns.AllPawnsSpawned);
             for (int i = 0; i < pawns.Count; i++)
             {
-                var hediff = pawns[i].health?.hediffSet.GetFirstHediffOfDef(ApocryphaGimmickDefOf.VV_FairyInterference);
+                var hediff = pawns[i].health?.hediffSet.GetFirstHediffOfDef(VVHediffDefOf.VV_FairyInterference);
                 if (hediff != null)
                 {
                     pawns[i].health.RemoveHediff(hediff);

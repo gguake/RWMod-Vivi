@@ -28,7 +28,7 @@ namespace VVRace
 
         public static Quest TryGenerate(Faction askerFaction)
         {
-            if (EndingCoreDefOf.VV_AncientAmberCore == null) { return null; }
+            if (VVThingDefOf.VV_AncientAmberCore == null) { return null; }
 
             var points = StorytellerUtility.DefaultThreatPointsNow(Find.World);
             var asker = askerFaction?.leader;
@@ -142,7 +142,7 @@ namespace VVRace
             try
             {
                 var reward = new Reward_Items();
-                reward.items.Add(ThingMaker.MakeThing(EndingCoreDefOf.VV_AncientAmberCore));
+                reward.items.Add(ThingMaker.MakeThing(VVThingDefOf.VV_AncientAmberCore));
 
                 var choice = new QuestPart_Choice.Choice();
                 choice.rewards.Add(reward);
