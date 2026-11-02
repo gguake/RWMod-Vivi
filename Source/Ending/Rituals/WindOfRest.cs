@@ -29,9 +29,7 @@ namespace VVRace
         private float _speed;
         private HashSet<int> _processed = new HashSet<int>();
 
-        private int _instabilityRemoved;
-        private int _scariaRemoved;
-        private int _hornetsDissolved;
+        private bool _anyEffect;
 
         public void Init(Vector3 center)
         {
@@ -75,9 +73,7 @@ namespace VVRace
             Scribe_Values.Look(ref _maxRadius, "maxRadius", 0f);
             Scribe_Values.Look(ref _speed, "speed", MinSpeed);
             Scribe_Collections.Look(ref _processed, "processed", LookMode.Value);
-            Scribe_Values.Look(ref _instabilityRemoved, "instabilityRemoved", 0);
-            Scribe_Values.Look(ref _scariaRemoved, "scariaRemoved", 0);
-            Scribe_Values.Look(ref _hornetsDissolved, "hornetsDissolved", 0);
+            Scribe_Values.Look(ref _anyEffect, "anyEffect", false);
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit && _processed == null)
             {
@@ -133,15 +129,13 @@ namespace VVRace
             if (pawn.def == VVThingDefOf.VV_TitanicHornet)
             {
                 WindOfRestUtility.DissolveHornet(pawn, WindAt(pawn.DrawPos));
-                _hornetsDissolved++;
+                _anyEffect = true;
                 return;
             }
 
-            if (WindOfRestUtility.Cleanse(pawn, out var removedInstability, out var removedScaria))
+            if (WindOfRestUtility.Cleanse(pawn))
             {
-                if (removedInstability) { _instabilityRemoved++; }
-                if (removedScaria) { _scariaRemoved++; }
-
+                _anyEffect = true;
                 QueenDefOf.VV_Effecter_WindOfRestCleanse?.SpawnAttached(pawn, pawn.Map).Cleanup();
             }
         }
@@ -197,7 +191,7 @@ namespace VVRace
 
         private void Finish()
         {
-            if (_instabilityRemoved + _scariaRemoved + _hornetsDissolved > 0)
+            if (_anyEffect)
             {
                 Messages.Message(
                     LocalizeString_EndingQueen.VV_Message_WindOfRestResult.Translate(),
@@ -214,10 +208,10 @@ namespace VVRace
 
     public static class WindOfRestUtility
     {
-        public static bool Cleanse(Pawn pawn, out bool removedInstability, out bool removedScaria)
+        public static bool Cleanse(Pawn pawn)
         {
-            removedInstability = RemoveAll(pawn, EndingRitualDefOf.VV_GeneticUnstability);
-            removedScaria = RemoveAll(pawn, HediffDefOf.Scaria);
+            var removedInstability = RemoveAll(pawn, EndingRitualDefOf.VV_GeneticUnstability);
+            var removedScaria = RemoveAll(pawn, HediffDefOf.Scaria);
             return removedInstability || removedScaria;
         }
 

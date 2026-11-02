@@ -1,5 +1,4 @@
 ﻿using RimWorld;
-using System.Collections.Generic;
 using UnityEngine;
 using Verse;
 
@@ -13,25 +12,14 @@ namespace VVRace
         private const int LifeTicks = 150;
         private const int DustInterval = 2;
         private const int PetalInterval = 5;
-        private const float SweepWeight = 0.85f;
-        private const float AshAmount = 0.45f;
 
-        private static readonly Color EdgeColor = new Color(1f, 0.86f, 0.5f, 1f);
+        private static readonly DissolveStyle Style = new DissolveStyle(DissolveDelaySecs, DissolveDurationSecs, new Color(1f, 0.86f, 0.5f, 1f), 0.85f, 0.45f);
         private static readonly Color[] DustColors =
         {
             new Color(0.62f, 0.58f, 0.52f, 0.8f),
             new Color(0.78f, 0.72f, 0.6f, 0.75f),
             new Color(1f, 0.9f, 0.66f, 0.7f),
         };
-
-        private static readonly int SweepDirId = Shader.PropertyToID("_SweepDir");
-        private static readonly int SweepWeightId = Shader.PropertyToID("_SweepWeight");
-        private static readonly int AshAmountId = Shader.PropertyToID("_AshAmount");
-        private static readonly int EdgeColorId = Shader.PropertyToID("_EdgeColor");
-        private static readonly int DissolveDelayId = Shader.PropertyToID("_DissolveDelay");
-        private static readonly int DissolveDurationId = Shader.PropertyToID("_DissolveDuration");
-        private static readonly MaterialPropertyBlock PropertyBlock = new MaterialPropertyBlock();
-        private static readonly Dictionary<string, Material> MaterialCache = new Dictionary<string, Material>();
 
         private string _texPath;
         private Rot4 _rotation = Rot4.South;
@@ -142,52 +130,17 @@ namespace VVRace
         {
             if (_texPath.NullOrEmpty()) { return; }
 
-            var suffix = _rotation == Rot4.North ? "_north" : (_rotation == Rot4.South ? "_south" : "_east");
-            var material = GetMaterial(_texPath + suffix);
-            if (material == null) { return; }
-
             var pos = drawLoc + _drawOffset;
             pos.y = AltitudeLayer.Pawn.AltitudeFor();
 
-            // Graphic_Multi처럼 서쪽은 동쪽 텍스처를 좌우 반전한다. 메시의 UV도 반전되므로 쓸기 방향의 x도 뒤집는다.
-            var westFlip = _rotation == Rot4.West;
-
-            PropertyBlock.Clear();
-            PropertyBlock.SetFloat(ShaderPropertyIDs.AgeSecs, AgeSecs);
-            PropertyBlock.SetFloat(DissolveDelayId, DissolveDelaySecs);
-            PropertyBlock.SetFloat(DissolveDurationId, DissolveDurationSecs);
-            PropertyBlock.SetColor(EdgeColorId, EdgeColor);
-            PropertyBlock.SetVector(SweepDirId, new Vector4(westFlip ? -_wind.x : _wind.x, _wind.z, 0f, 0f));
-            PropertyBlock.SetFloat(SweepWeightId, SweepWeight);
-            PropertyBlock.SetFloat(AshAmountId, AshAmount);
-
-            var mesh = westFlip ? MeshPool.plane10Flip : MeshPool.plane10;
-            var matrix = Matrix4x4.TRS(pos, Quaternion.identity, new Vector3(_drawSize, 1f, _drawSize));
-            Graphics.DrawMesh(mesh, matrix, material, 0, null, 0, PropertyBlock);
-        }
-
-        private static Material GetMaterial(string fullPath)
-        {
-            if (MaterialCache.TryGetValue(fullPath, out var cached))
-            {
-                return cached;
-            }
-
-            var texture = ContentFinder<Texture2D>.Get(fullPath, reportFailure: false);
-            var noise = ContentFinder<Texture2D>.Get("VFX/VV_DissolveNoise", reportFailure: false);
-            Material material = null;
-            if (texture != null)
-            {
-                // 연출 값은 그릴 때 MaterialPropertyBlock으로 넣으므로 공유 재질에는 노이즈 텍스처만 지정한다.
-                material = MaterialPool.MatFrom(texture, ShaderDatabase.LoadShader("Map/VV_Dissolve"), Color.white);
-                if (noise != null)
-                {
-                    material.SetTexture("_DissolveTex", noise);
-                }
-            }
-
-            MaterialCache[fullPath] = material;
-            return material;
+            DissolveRenderer.Draw(
+                DissolveRenderer.GetMaterial(_texPath, _rotation),
+                pos,
+                new Vector2(_drawSize, _drawSize),
+                _rotation == Rot4.West,
+                AgeSecs,
+                Style,
+                new Vector2(_wind.x, _wind.z));
         }
     }
 }

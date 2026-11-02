@@ -270,7 +270,6 @@ namespace VVRace
                 else if (stage == ViviEndingStage.AltarUnlocked)
                 {
                     ReissueEndedMissiveQuest();
-                    EnsureMissiveRequirementsPart();
                 }
             }
             catch (Exception ex)
@@ -376,6 +375,7 @@ namespace VVRace
             }
         }
 
+        // 새 밀서 퀘스트는 생성 시 이 부품을 갖고 있으므로 이 부품이 생기기 전의 세이브만 불러올 때 한 번 보정한다.
         private void EnsureMissiveRequirementsPart()
         {
             var quest = _missiveQuest;
@@ -427,7 +427,7 @@ namespace VVRace
             }
         }
 
-        public void Notify_AssimilationBroken(Pawn pawn, bool died)
+        public void Notify_AssimilationBroken(Pawn pawn)
         {
             if (pawn == null || pawn != _assimilated) { return; }
 
@@ -812,6 +812,7 @@ namespace VVRace
                 }
 
                 _heldPawns.RemoveAll(v => v?.pawn == null);
+                EnsureMissiveRequirementsPart();
             }
         }
     }

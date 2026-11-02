@@ -14,7 +14,6 @@ namespace VVRace
         public static FleckDef VV_Fleck_AssimilationSoul;
 
         public static EffecterDef VV_Effecter_AssimilationBegin;
-        public static EffecterDef VV_Effecter_AssimilationBroken;
         public static EffecterDef VV_Effecter_AssimilationAbsorb;
     }
 }

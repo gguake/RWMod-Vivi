@@ -8,62 +8,52 @@ namespace VVRace
     {
         private readonly List<Pawn> _channelingBosses = new List<Pawn>();
 
-        private List<Pawn> ChannelingBosses
-        {
-            get
-            {
-                _channelingBosses.Clear();
-
-                var maps = Find.Maps;
-                for (int i = 0; i < maps.Count; i++)
-                {
-                    foreach (var thing in maps[i].listerThings.ThingsOfDef(ApocryphaThingDefOf.VV_Apocrypha))
-                    {
-                        if (thing is Pawn boss && boss.TryGetComp<CompApocrypha>() is CompApocrypha comp && comp.IsChanneling)
-                        {
-                            _channelingBosses.Add(boss);
-                        }
-                    }
-                }
-
-                return _channelingBosses;
-            }
-        }
-
-        private CompApocrypha FirstChannelingComp
-        {
-            get
-            {
-                var bosses = ChannelingBosses;
-                return bosses.Count > 0 ? bosses[0].TryGetComp<CompApocrypha>() : null;
-            }
-        }
+        // 제목·설명은 GetReport가 모은 보스를 재사용하고 진행률만 그 컴포넌트에서 새로 읽는다.
+        private CompApocrypha _firstChannelingComp;
 
         public Alert_ApocryphaChanneling()
         {
             defaultPriority = AlertPriority.Critical;
         }
 
+        private void CollectChannelingBosses()
+        {
+            _channelingBosses.Clear();
+            _firstChannelingComp = null;
+
+            var maps = Find.Maps;
+            for (int i = 0; i < maps.Count; i++)
+            {
+                foreach (var thing in maps[i].listerThings.ThingsOfDef(ApocryphaThingDefOf.VV_Apocrypha))
+                {
+                    if (thing is Pawn boss && boss.TryGetComp<CompApocrypha>() is CompApocrypha comp && comp.IsChanneling)
+                    {
+                        _channelingBosses.Add(boss);
+                        _firstChannelingComp ??= comp;
+                    }
+                }
+            }
+        }
+
         public override AlertReport GetReport()
         {
-            var bosses = ChannelingBosses;
-            if (bosses.Count == 0)
+            CollectChannelingBosses();
+            if (_channelingBosses.Count == 0)
             {
                 return false;
             }
 
-            return AlertReport.CulpritsAre(bosses);
+            return AlertReport.CulpritsAre(_channelingBosses);
         }
 
         public override string GetLabel()
         {
-            var comp = FirstChannelingComp;
-            return LocalizeString_EndingBoss.VV_Alert_ApocryphaChanneling.Translate((comp?.ChannelProgress ?? 0f).ToStringPercent());
+            return LocalizeString_EndingBoss.VV_Alert_ApocryphaChanneling.Translate((_firstChannelingComp?.ChannelProgress ?? 0f).ToStringPercent());
         }
 
         public override TaggedString GetExplanation()
         {
-            var comp = FirstChannelingComp;
+            var comp = _firstChannelingComp;
             return LocalizeString_EndingBoss.VV_Alert_ApocryphaChannelingDesc.Translate(
                 (comp?.ChannelProgress ?? 0f).ToStringPercent().Named("PROGRESS"),
                 (comp?.ChannelTicksLeft ?? 0).ToStringTicksToPeriod().Named("TIMELEFT"));

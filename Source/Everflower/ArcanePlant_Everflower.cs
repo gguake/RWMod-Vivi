@@ -85,14 +85,6 @@ namespace VVRace
             EverflowerComp.RefreshEnshrinement(silent: respawningAfterLoad);
         }
 
-        public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
-        {
-            var map = Map;
-            base.DeSpawn(mode);
-
-            map?.GetManaComponent()?.RefreshEverflowerAltarState();
-        }
-
         public override void Destroy(DestroyMode mode = DestroyMode.Vanish)
         {
             Unreserve();

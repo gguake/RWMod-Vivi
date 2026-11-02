@@ -168,7 +168,7 @@ namespace VVRace
             if (_broken) { return; }
 
             _broken = true;
-            ViviEndingQuest.Current?.Notify_AssimilationBroken(pawn, died: true);
+            ViviEndingQuest.Current?.Notify_AssimilationBroken(pawn);
             if (pawn.health.hediffSet.hediffs.Contains(this))
             {
                 pawn.health.RemoveHediff(this);

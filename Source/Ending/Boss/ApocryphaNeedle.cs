@@ -52,12 +52,7 @@ namespace VVRace
         private const int ShakeTicks = 24;
         private const float ShakeAmplitude = 0.08f;
 
-        // NeedleTipOffset은 그림 중심에서 촉까지의 거리로 높이 5.5칸의 36%다.
-        // 촉이 경고 띠를 벗어나지 않도록 몸통은 이 거리만큼 뒤에 그린다.
         private const float FireSpeed = 7f;
-        private const float NeedleTipOffset = 1.98f;
-        private const float PawnHitRadius = 0.35f;
-        private const float TrailPointSpacing = 1f;
         private const int LodgedTicks = 16;
 
         private const float ReturnSpeed = 0.9f;
@@ -82,9 +77,6 @@ namespace VVRace
         private const int WarpTicks = 33;
 
         private const int FadeInTicks = 40;
-        private const float MapEdgeMargin = 0.05f;
-
-        private static readonly List<Thing> _tmpCellThings = new List<Thing>();
 
         private Pawn _boss;
         private int _slot;
@@ -301,8 +293,8 @@ namespace VVRace
             }
 
             _laneDir = direction;
-            _laneStart = ClampInsideMap(start);
-            _laneLength = LaneLengthInsideMap(_laneStart, direction, BossComp?.Props.needleRange ?? 32f);
+            _laneStart = ApocryphaNeedleLane.ClampInsideMap(Map, start);
+            _laneLength = ApocryphaNeedleLane.LengthInsideMap(Map, _laneStart, direction, BossComp?.Props.needleRange ?? 32f);
 
             _moveFrom = _pos;
             _moveFromAngle = _angle;
@@ -348,7 +340,7 @@ namespace VVRace
             _scatterFrom = _pos;
             _scatterOut = outDir.sqrMagnitude > 0.01f ? outDir.Yto0().normalized : direction;
             _scatterAngle = direction.AngleFlat();
-            _scatterTo = tip - direction * NeedleTipOffset;
+            _scatterTo = tip - direction * ApocryphaNeedleLane.TipOffset;
             _scatterTicks = Mathf.Clamp(Mathf.RoundToInt(travel.magnitude / ScatterSpeed), ScatterMinTicks, ScatterMaxTicks);
             _lockTarget = null;
             _state = NeedleState.Scattering;
@@ -367,7 +359,7 @@ namespace VVRace
 
             _lockTarget = activator;
             _breach = false;
-            _laneStart = ClampInsideMap(_plantTip);
+            _laneStart = ApocryphaNeedleLane.ClampInsideMap(Map, _plantTip);
             _laneDir = (_pos - _plantTip).Yto0().sqrMagnitude > 0.01f ? -(_pos - _plantTip).Yto0().normalized : Vector3.forward;
             UpdateLockDirection();
 
@@ -531,30 +523,14 @@ namespace VVRace
 
         private void ThrowAimPetals()
         {
-            var map = Map;
-            var filled = _laneLength * Mathf.Max(0.15f, AimProgress);
-            var mid = PointOnLane(filled * 0.5f);
-            if (!mid.ShouldSpawnMotesAt(map)) { return; }
-
-            var perpendicular = new Vector3(_laneDir.z, 0f, -_laneDir.x);
-            for (int i = 0; i < 2; i++)
-            {
-                var pos = PointOnLane(Rand.Range(0f, filled)) + perpendicular * Rand.Range(-HalfWidth, HalfWidth) * 0.85f;
-                var def = i == 0 ? ApocryphaFleckDefOf.VV_Fleck_ApocryphaAimSpark : ApocryphaFleckDefOf.VV_Fleck_ApocryphaAimTwinkle;
-                var data = FleckMaker.GetDataStatic(pos, map, def, i == 0 ? Rand.Range(0.25f, 0.45f) : Rand.Range(0.2f, 0.35f));
-                data.velocityAngle = LaneAngle + Rand.Range(-20f, 20f);
-                data.velocitySpeed = Rand.Range(0.5f, 1.3f);
-                data.rotation = Rand.Range(0f, 360f);
-                data.rotationRate = Rand.Range(-120f, 120f);
-                map.flecks.CreateFleck(data);
-            }
+            ApocryphaNeedleLane.ThrowAimPetals(Map, _laneStart, _laneDir, _laneLength, HalfWidth, AimProgress);
         }
 
         private void Fire(int now)
         {
             _state = NeedleState.Firing;
             _stateStartTick = now;
-            _travelled = NeedleTipOffset - WindupDistance;
+            _travelled = ApocryphaNeedleLane.TipOffset - WindupDistance;
             _angle = LaneAngle;
             _hitIds.Clear();
             _ignored = null;
@@ -577,7 +553,7 @@ namespace VVRace
             TickFiring(now);
         }
 
-        // _travelled는 시작점에서 촉까지의 거리다. 그림 중심은 촉보다 NeedleTipOffset만큼 뒤에 있다.
+        // _travelled는 시작점에서 촉까지의 거리다. 그림 중심은 촉보다 TipOffset만큼 뒤에 있다.
         private void TickFiring(int now)
         {
             var from = _travelled;
@@ -594,14 +570,9 @@ namespace VVRace
             var end = _stickAlong >= 0f ? Mathf.Max(from, Mathf.Min(_stickAlong, _laneLength)) : _laneLength;
             var to = Mathf.Min(end, _travelled + FireSpeed);
 
-            for (var d = from + TrailPointSpacing; d < to; d += TrailPointSpacing)
-            {
-                RegisterTrail(BodyOnLane(d));
-            }
-
+            ApocryphaNeedleLane.RegisterTrailAlong(Trail, _laneStart, _laneDir, from, to);
             _travelled = to;
             _pos = BodyOnLane(to);
-            RegisterTrail(_pos);
 
             if (_stickAlong >= 0f)
             {
@@ -775,7 +746,7 @@ namespace VVRace
                 _laneDir = Vector3.forward;
             }
 
-            _laneLength = LaneLengthInsideMap(_laneStart, _laneDir, BossComp?.Props.needleRange ?? 32f);
+            _laneLength = ApocryphaNeedleLane.LengthInsideMap(Map, _laneStart, _laneDir, BossComp?.Props.needleRange ?? 32f);
         }
 
         private void Stick(int now)
@@ -875,126 +846,25 @@ namespace VVRace
                 _ignored = ApocryphaGimmicks.GetBlastIgnoredThings(map, _boss);
             }
 
-            var halfWidth = comp.Props.needleHalfWidth;
-            var cellExtent = 0.5f * (Mathf.Abs(_laneDir.x) + Mathf.Abs(_laneDir.z));
-            var margin = halfWidth + 2f;
-            var a = PointOnLane(from);
-            var b = PointOnLane(to);
-            var rect = CellRect.FromLimits(
-                Mathf.FloorToInt(Mathf.Min(a.x, b.x) - margin),
-                Mathf.FloorToInt(Mathf.Min(a.z, b.z) - margin),
-                Mathf.CeilToInt(Mathf.Max(a.x, b.x) + margin),
-                Mathf.CeilToInt(Mathf.Max(a.z, b.z) + margin)).ClipInsideMap(map);
-
-            foreach (var cell in rect)
-            {
-                _tmpCellThings.Clear();
-                _tmpCellThings.AddRange(cell.GetThingList(map));
-                for (int i = 0; i < _tmpCellThings.Count; i++)
-                {
-                    var thing = _tmpCellThings[i];
-                    if (!CanPierce(thing)) { continue; }
-
-                    var hit = thing is Pawn
-                        ? OverlapsLane(thing.DrawPos, PawnHitRadius, PawnHitRadius, from, to)
-                        : OverlapsLane(cell.ToVector3Shifted(), cellExtent, cellExtent, from, to);
-                    if (!hit) { continue; }
-
-                    _hitIds.Add(thing.thingIDNumber);
-                    Pierce(thing, comp);
-                    if (Destroyed) { break; }
-                }
-
-                if (Destroyed) { break; }
-            }
-
-            _tmpCellThings.Clear();
-        }
-
-        // 틱 사이의 중복 판정을 피하도록 띠 양 끝에서는 일부만 걸쳐도 허용하고 중간 구간에서는 중심이 포함돼야 한다.
-        private bool OverlapsLane(Vector3 point, float extentAcross, float extentAlong, float from, float to)
-        {
-            var rel = (point - _laneStart).Yto0();
-            var along = rel.x * _laneDir.x + rel.z * _laneDir.z;
-            var lo = from <= 0f ? -extentAlong : from;
-            var hi = to >= _laneLength ? _laneLength + extentAlong : to;
-            if (along < lo || along > hi) { return false; }
-
-            return Mathf.Abs(rel.x * _laneDir.z - rel.z * _laneDir.x) <= HalfWidth + extentAcross;
+            ApocryphaNeedleLane.PierceAlong(this, _laneStart, _laneDir, _laneLength, comp.Props.needleHalfWidth, from, to, _hitIds, CanPierce, thing => Pierce(thing, comp));
         }
 
         private bool CanPierce(Thing thing)
         {
-            if (thing.Destroyed || !thing.Spawned) { return false; }
-
-            if (thing is Pawn pawn)
-            {
-                if (pawn.Dead || pawn.Downed) { return false; }
-            }
-            else if (thing is Building building)
-            {
-                if (!building.def.useHitPoints) { return false; }
-            }
-            else
-            {
-                return false;
-            }
-
             if (_boss != null && thing.Faction != null && thing.Faction == _boss.Faction) { return false; }
-            if (_hitIds.Contains(thing.thingIDNumber)) { return false; }
 
             return !_ignored.Contains(thing);
         }
 
         private void Pierce(Thing thing, CompApocrypha comp)
         {
-            var map = thing.Map;
-            var cell = thing.Position;
-            var drawPos = thing.DrawPos;
-
             var damage = comp.Props.needleDamage;
             if (_breach && ApocryphaUtility.BlocksPath(thing))
             {
                 damage *= comp.Props.needleBreachDamageFactor;
             }
 
-            var dinfo = new DamageInfo(
-                ApocryphaDamageDefOf.VV_GiantNeedlePierce,
-                damage,
-                comp.Props.needleArmorPenetration,
-                LaneAngle,
-                _boss);
-            thing.TakeDamage(dinfo);
-
-            SpawnPierceEffect(map, cell, drawPos);
-        }
-
-        private void SpawnPierceEffect(Map map, IntVec3 cell, Vector3 drawPos)
-        {
-            if (map == null || !cell.InBounds(map)) { return; }
-
-            ApocryphaGimmicks.PlayEffect(ApocryphaEffecterDefOf.VV_Effecter_ApocryphaNeedleHit, cell, map, OffsetFromCell(drawPos, cell));
-
-            var basePos = drawPos.Yto0();
-            basePos.y = AltitudeLayer.MoteOverhead.AltitudeFor();
-            if (!cell.ShouldSpawnMotesAt(map)) { return; }
-
-            var angle = LaneAngle;
-            var pierce = FleckMaker.GetDataStatic(basePos, map, VVFleckDefOf.VV_Fleck_NeedlePierce, Rand.Range(2.2f, 2.6f));
-            pierce.rotation = angle;
-            map.flecks.CreateFleck(pierce);
-
-            var shardCount = Rand.RangeInclusive(6, 9);
-            for (int i = 0; i < shardCount; i++)
-            {
-                var offset = new Vector3(Rand.Range(-0.2f, 0.2f), 0f, Rand.Range(-0.2f, 0.2f));
-                var shard = FleckMaker.GetDataStatic(basePos + offset, map, VVFleckDefOf.VV_Fleck_NeedleShard, Rand.Range(0.45f, 0.8f));
-                shard.velocityAngle = angle + Rand.Range(-55f, 55f);
-                shard.velocitySpeed = Rand.Range(2f, 4.5f);
-                shard.rotation = shard.velocityAngle + Rand.Range(-25f, 25f);
-                shard.rotationRate = Rand.Range(-360f, 360f);
-                map.flecks.CreateFleck(shard);
-            }
+            ApocryphaNeedleLane.Pierce(thing, damage, comp.Props.needleArmorPenetration, LaneAngle, _boss);
         }
         #endregion
 
@@ -1125,32 +995,7 @@ namespace VVRace
 
         private Vector3 BodyOnLane(float tipDistance)
         {
-            return PointOnLane(tipDistance - NeedleTipOffset);
-        }
-
-        private float LaneLengthInsideMap(Vector3 start, Vector3 direction, float range)
-        {
-            var size = Map.Size;
-            var length = range;
-            length = Mathf.Min(length, DistanceToBound(start.x, direction.x, size.x));
-            length = Mathf.Min(length, DistanceToBound(start.z, direction.z, size.z));
-            return Mathf.Max(0f, length);
-        }
-
-        private static float DistanceToBound(float start, float direction, int size)
-        {
-            if (direction > 0.0001f) { return (size - MapEdgeMargin - start) / direction; }
-            if (direction < -0.0001f) { return (MapEdgeMargin - start) / direction; }
-
-            return float.MaxValue;
-        }
-
-        private Vector3 ClampInsideMap(Vector3 point)
-        {
-            var size = Map.Size;
-            point.x = Mathf.Clamp(point.x, MapEdgeMargin, size.x - MapEdgeMargin);
-            point.z = Mathf.Clamp(point.z, MapEdgeMargin, size.z - MapEdgeMargin);
-            return point;
+            return ApocryphaNeedleLane.BodyOnLane(_laneStart, _laneDir, tipDistance);
         }
 
         private void SyncPosition()
@@ -1166,19 +1011,12 @@ namespace VVRace
 
         private void RegisterTrail(Vector3 point)
         {
-            point.y = AltitudeLayer.MoteOverhead.AltitudeFor() - 0.01f;
-            Trail?.RegisterNewTrail(point);
+            ApocryphaNeedleLane.RegisterTrail(Trail, point);
         }
 
         private void PlayEffectAt(EffecterDef effecterDef, Vector3 point)
         {
-            var cell = point.ToIntVec3().ClampInsideMap(Map);
-            ApocryphaGimmicks.PlayEffect(effecterDef, cell, Map, OffsetFromCell(point, cell));
-        }
-
-        private static Vector3 OffsetFromCell(Vector3 point, IntVec3 cell)
-        {
-            return (point - cell.ToVector3Shifted()).WithY(0f);
+            ApocryphaNeedleLane.PlayEffectAt(Map, effecterDef, point);
         }
 
         private static float EaseInOut(float t)

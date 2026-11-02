@@ -450,8 +450,6 @@ namespace VVRace
             {
                 pawn.GetCompVivi()?.RefreshEverflowerHediffs();
             }
-
-            RefreshAltarMana(parent.MapHeld);
         }
 
         private void SendLevelUpLetter(int level)
@@ -533,8 +531,6 @@ namespace VVRace
                     Messages.Message(LocalizeString_EndingAltar.VV_Message_EverflowerEnshrined.Translate(), parent, MessageTypeDefOf.PositiveEvent);
                 }
             }
-
-            RefreshAltarMana(parent.MapHeld);
         }
 
         // 이펙트 오프셋은 1~4단계는 제단 밖 그래픽, 5·6단계는 제단 위 그래픽을 기준으로 한다.
@@ -608,11 +604,6 @@ namespace VVRace
             var shift = GetLevelGraphic(level).drawOffset - altarGraphic.graphicData.drawOffset;
             shift.y = 0f;
             return shift;
-        }
-
-        private static void RefreshAltarMana(Map map)
-        {
-            map?.GetManaComponent()?.RefreshEverflowerAltarState();
         }
 
         private int GrowArcanePlantRandomly()

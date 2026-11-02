@@ -41,10 +41,6 @@ namespace VVRace
         public const float EverflowerAltarManaPerDayLevel6 = 12000f;
         public const int EverflowerAltarEmitRadius = 2;
 
-        // 불러올 때 꽃이 제단보다 먼저 스폰되므로 제단 마나 상태는 저장하지 않고 재계산한다.
-        private float _altarManaPerDay;
-        private IntVec3 _altarCenter = IntVec3.Invalid;
-
         public Color Color => new Color(1f, 1f, 1f);
 
         public float this[IntVec3 cell]
@@ -93,7 +89,6 @@ namespace VVRace
             LoadedModManager.GetMod<VVRaceMod>().OnWriteSettings += Notify_ModSettingChanged;
 
             ApplyAllReservedMana();
-            RefreshEverflowerAltarState();
         }
 
         public override void MapComponentDraw()
@@ -166,7 +161,6 @@ namespace VVRace
             if (GenTicks.TicksGame % RefreshManaInterval == 0)
             {
                 EmitManaVeins(RefreshManaInterval);
-                RefreshEverflowerAltarState();
                 EmitEverflowerAltarMana(RefreshManaInterval);
 
                 var gameComponentMana = Current.Game.GetComponent<GameComponent_Mana>();
@@ -243,8 +237,8 @@ namespace VVRace
             }
         }
 
-        // 여러 영원꽃이 값을 덮어쓰지 않도록 맵 전체를 조사해 제단 상태를 계산한다.
-        public void RefreshEverflowerAltarState()
+        // 제단 상태는 방출에만 쓰이므로 방출할 때마다 맵 전체를 조사해 가장 높은 단계의 안치된 영원꽃 하나만 방출한다.
+        private void EmitEverflowerAltarMana(int ticks)
         {
             var center = IntVec3.Invalid;
             var altarLevel = 0;
@@ -262,31 +256,17 @@ namespace VVRace
                 }
             }
 
-            SetEverflowerAltarState(center, altarLevel);
-        }
-
-        private void SetEverflowerAltarState(IntVec3 center, int altarLevel)
-        {
             var manaPerDay = 0f;
-            if (center.IsValid && center.InBounds(map))
-            {
-                if (altarLevel >= 6) { manaPerDay = EverflowerAltarManaPerDayLevel6; }
-                else if (altarLevel >= 5) { manaPerDay = EverflowerAltarManaPerDayLevel5; }
-            }
+            if (altarLevel >= 6) { manaPerDay = EverflowerAltarManaPerDayLevel6; }
+            else if (altarLevel >= 5) { manaPerDay = EverflowerAltarManaPerDayLevel5; }
 
-            _altarManaPerDay = manaPerDay;
-            _altarCenter = manaPerDay > 0f ? center : IntVec3.Invalid;
-        }
-
-        private void EmitEverflowerAltarMana(int ticks)
-        {
-            if (_altarManaPerDay <= 0f || !_altarCenter.IsValid) { return; }
+            if (manaPerDay <= 0f || !center.IsValid) { return; }
 
             // 한 칸의 마나 상한에 막혀 버려지지 않도록 제단의 5×5칸에 고르게 분배한다.
-            var rect = CellRect.CenteredOn(_altarCenter, EverflowerAltarEmitRadius).ClipInsideMap(map);
+            var rect = CellRect.CenteredOn(center, EverflowerAltarEmitRadius).ClipInsideMap(map);
             if (rect.Area <= 0) { return; }
 
-            var manaPerCell = _altarManaPerDay / 60000f * ticks / rect.Area;
+            var manaPerCell = manaPerDay / 60000f * ticks / rect.Area;
             foreach (var cell in rect)
             {
                 ChangeEnvironmentMana(cell, manaPerCell);

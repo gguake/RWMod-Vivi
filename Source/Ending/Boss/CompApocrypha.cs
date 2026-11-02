@@ -1063,7 +1063,7 @@ namespace VVRace
             return Mathf.Lerp(-half, half, index / (float)(count - 1));
         }
 
-        private void TickUnboundNeedles(int now, bool stunned)
+        private void TickUnboundNeedles()
         {
             if (!IsQuestBossFight)
             {
@@ -1298,7 +1298,7 @@ namespace VVRace
                 PullOutNeedles();
             }
 
-            TickUnboundNeedles(now, stunned);
+            TickUnboundNeedles();
             TickBreath(now, stunned);
 
             if (!stunned && !IsBreathing && !IsChanneling && now >= _nextMeleeTick)

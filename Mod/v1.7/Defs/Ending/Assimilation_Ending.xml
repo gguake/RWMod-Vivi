@@ -108,36 +108,4 @@
       </li>
     </children>
   </EffecterDef>
-
-  <!-- 동화가 끊어짐(공명자가 쓰러지거나 죽음): 금빛 입자가 사방으로 흩어지고 재가 인다 -->
-  <EffecterDef>
-    <defName>VV_Effecter_AssimilationBroken</defName>
-    <maintainTicks>10</maintainTicks>
-    <children>
-      <li>
-        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
-        <fleckDef>VV_Fleck_GimmickTwinkle</fleckDef>
-        <spawnLocType>OnSource</spawnLocType>
-        <burstCount>18~24</burstCount>
-        <positionRadius>0.5</positionRadius>
-        <absoluteAngle>true</absoluteAngle>
-        <angle>0~360</angle>
-        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
-        <speed>2~5</speed>
-        <scale>0.35~0.6</scale>
-        <color>(1, 0.75, 0.5, 1)</color>
-      </li>
-      <li>
-        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
-        <fleckDef>VV_Fleck_ApocryphaAsh</fleckDef>
-        <spawnLocType>OnSource</spawnLocType>
-        <burstCount>3~5</burstCount>
-        <positionRadius>0.6</positionRadius>
-        <angle>0~360</angle>
-        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
-        <speed>0.3~0.8</speed>
-        <scale>0.8~1.4</scale>
-      </li>
-    </children>
-  </EffecterDef>
 </Defs>

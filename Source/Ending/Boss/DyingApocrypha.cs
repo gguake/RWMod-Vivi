@@ -1,5 +1,4 @@
 ﻿using RimWorld;
-using System.Collections.Generic;
 using UnityEngine;
 using Verse;
 
@@ -27,10 +26,11 @@ namespace VVRace
         private const float StolenBossDurationSecs = 3.8f;
         private const float StolenSweepWeight = 0.85f;
         private const float StolenRiseCells = 0.9f;
+        private const float DeathAshAmount = 0.75f;
 
-        private static readonly Color EdgeColor = new Color(1f, 0.78f, 0.35f, 1f);
-        private static readonly Color FlowerEdgeColor = new Color(1f, 0.93f, 0.72f, 1f);
-        private static readonly Color StolenEdgeColor = new Color(1f, 0.62f, 0.88f, 1f);
+        private static readonly DissolveStyle DeathStyle = new DissolveStyle(DissolveDelaySecs, DissolveDurationSecs, new Color(1f, 0.78f, 0.35f, 1f), 0f, DeathAshAmount);
+        private static readonly DissolveStyle FlowerStyle = new DissolveStyle(FlowerDelaySecs, FlowerDurationSecs, new Color(1f, 0.93f, 0.72f, 1f), StolenSweepWeight, 0f);
+        private static readonly DissolveStyle StolenBossStyle = new DissolveStyle(StolenBossDelaySecs, StolenBossDurationSecs, new Color(1f, 0.62f, 0.88f, 1f), StolenSweepWeight, 0f);
         private static readonly Color[] FlowerPetalColors =
         {
             new Color(1f, 0.97f, 0.86f, 0.9f),
@@ -44,14 +44,6 @@ namespace VVRace
             new Color(1f, 0.72f, 0.9f, 0.85f),
             new Color(1f, 0.5f, 0.84f, 0.8f),
         };
-        private static readonly int SweepDirId = Shader.PropertyToID("_SweepDir");
-        private static readonly int SweepWeightId = Shader.PropertyToID("_SweepWeight");
-        private static readonly int AshAmountId = Shader.PropertyToID("_AshAmount");
-        private static readonly int EdgeColorId = Shader.PropertyToID("_EdgeColor");
-        private static readonly int DissolveDelayId = Shader.PropertyToID("_DissolveDelay");
-        private static readonly int DissolveDurationId = Shader.PropertyToID("_DissolveDuration");
-        private static readonly MaterialPropertyBlock PropertyBlock = new MaterialPropertyBlock();
-        private static readonly Dictionary<string, Material> MaterialCache = new Dictionary<string, Material>();
 
         private string _texPath;
         private Rot4 _rotation = Rot4.South;
@@ -366,80 +358,29 @@ namespace VVRace
 
             if (_texPath.NullOrEmpty()) { return; }
 
-            var suffix = _rotation == Rot4.North ? "_north" : (_rotation == Rot4.South ? "_south" : "_east");
-            var material = GetMaterial(_texPath + suffix);
-            if (material == null) { return; }
-
             var pos = drawLoc + _drawOffset;
             pos.y = AltitudeLayer.Pawn.AltitudeFor();
 
-            PropertyBlock.Clear();
-            PropertyBlock.SetFloat(ShaderPropertyIDs.AgeSecs, AgeSecs);
-
-            // Graphic_Multi처럼 서쪽은 동쪽 텍스처를 좌우 반전한다. 메시의 UV도 반전되므로 소멸 방향의 x도 뒤집는다.
+            var material = DissolveRenderer.GetMaterial(_texPath, _rotation);
+            var size = new Vector2(_drawSize, _drawSize);
             var westFlip = _rotation == Rot4.West;
             if (_stolen)
             {
-                pos += StolenDrift;
-                SetStolenParams(StolenBossDelaySecs, StolenBossDurationSecs, StolenEdgeColor, westFlip ? -_wind.x : _wind.x);
+                DissolveRenderer.Draw(material, pos + StolenDrift, size, westFlip, AgeSecs, StolenBossStyle, WindSweep);
             }
-
-            var mesh = westFlip ? MeshPool.plane10Flip : MeshPool.plane10;
-            var matrix = Matrix4x4.TRS(pos, Quaternion.identity, new Vector3(_drawSize, 1f, _drawSize));
-            Graphics.DrawMesh(mesh, matrix, material, 0, null, 0, PropertyBlock);
+            else
+            {
+                DissolveRenderer.Draw(material, pos, size, westFlip, AgeSecs, DeathStyle, Vector2.right);
+            }
         }
 
         private void DrawStolenFlower()
         {
             if (_flowerTexPath.NullOrEmpty() || FlowerProgress >= 1f) { return; }
 
-            var material = GetMaterial(_flowerTexPath);
-            if (material == null) { return; }
-
-            PropertyBlock.Clear();
-            PropertyBlock.SetFloat(ShaderPropertyIDs.AgeSecs, AgeSecs);
-            SetStolenParams(FlowerDelaySecs, FlowerDurationSecs, FlowerEdgeColor, _wind.x);
-
-            var matrix = Matrix4x4.TRS(_flowerDrawPos, Quaternion.identity, new Vector3(_flowerDrawSize.x, 1f, _flowerDrawSize.y));
-            Graphics.DrawMesh(MeshPool.plane10, matrix, material, 0, null, 0, PropertyBlock);
+            DissolveRenderer.Draw(DissolveRenderer.GetMaterial(_flowerTexPath), _flowerDrawPos, _flowerDrawSize, false, AgeSecs, FlowerStyle, WindSweep);
         }
 
-        // 공유 재질의 죽음 연출 값은 유지하고 이번 그리기에만 찬탈 연출 값을 적용한다.
-        private void SetStolenParams(float delay, float duration, Color edgeColor, float sweepX)
-        {
-            PropertyBlock.SetFloat(DissolveDelayId, delay);
-            PropertyBlock.SetFloat(DissolveDurationId, duration);
-            PropertyBlock.SetColor(EdgeColorId, edgeColor);
-            PropertyBlock.SetVector(SweepDirId, new Vector4(sweepX, _wind.z, 0f, 0f));
-            PropertyBlock.SetFloat(SweepWeightId, StolenSweepWeight);
-            PropertyBlock.SetFloat(AshAmountId, 0f);
-        }
-
-        private static Material GetMaterial(string fullPath)
-        {
-            if (MaterialCache.TryGetValue(fullPath, out var cached))
-            {
-                return cached;
-            }
-
-            var texture = ContentFinder<Texture2D>.Get(fullPath, reportFailure: false);
-            var noise = ContentFinder<Texture2D>.Get("VFX/VV_DissolveNoise", reportFailure: false);
-            Material material = null;
-            if (texture != null)
-            {
-                // 이 연출만 사용하는 (텍스처, VV_Dissolve, 흰색) 조합이므로 공유 재질을 수정해도 다른 연출에 영향이 없다.
-                material = MaterialPool.MatFrom(texture, ShaderDatabase.LoadShader("Map/VV_Dissolve"), Color.white);
-                if (noise != null)
-                {
-                    material.SetTexture("_DissolveTex", noise);
-                }
-                material.SetColor("_EdgeColor", EdgeColor);
-                material.SetFloat("_DissolveDelay", DissolveDelaySecs);
-                material.SetFloat("_DissolveDuration", DissolveDurationSecs);
-            }
-
-            MaterialCache[fullPath] = material;
-            return material;
-        }
+        private Vector2 WindSweep => new Vector2(_wind.x, _wind.z);
     }
 }
