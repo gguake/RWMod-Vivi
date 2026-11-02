@@ -72,22 +72,22 @@ namespace VVRace
         public float flowerGuardRadius = 6f;
         public float flowerGuardRetaliationRadius = 20f;
 
-        // 보스전 거대 말벌은 모두 검은 기운에서 빚어진다(HornetManifestation). 난이도 배율은 등장·간섭 소환 수에만 곱한다.
-        public int arrivalHornetCount = 3;
-        public int interferenceHornetCount = 2;
-        public int interferenceHornetGrowth = 1;
-        public int volleyEscortCount = 2;
+        // 보스전 거대 말벌은 모두 검은 기운에서 빚어진다(HornetManifestation).
+        // 등장·간섭 소환 수에는 현재 습격 포인트 배율을 곱한다. 습격 포인트에 난이도·기지 가치·정착민 전력이 이미 들어 있다.
+        public int arrivalHornetCount = 9;
+        public int interferenceHornetCount = 6;
+        public int interferenceHornetGrowth = 2;
+        public int volleyEscortCount = 4;
         public int doomFlowerHornetIntervalTicks = 10000;
         public int doomFlowerHornetCount = 1;
         public FloatRange summonRadiusAroundBoss = new FloatRange(3.5f, 7f);
-        public SimpleCurve hornetCountFactorByThreatScale = new SimpleCurve
+        public SimpleCurve hornetCountFactorByThreatPoints = new SimpleCurve
         {
-            new CurvePoint(0.1f, 0.4f),
-            new CurvePoint(0.3f, 0.55f),
-            new CurvePoint(0.6f, 0.75f),
-            new CurvePoint(1f, 1f),
-            new CurvePoint(1.55f, 1.3f),
-            new CurvePoint(2.2f, 1.6f),
+            new CurvePoint(500f, 0.5f),
+            new CurvePoint(1500f, 0.75f),
+            new CurvePoint(2500f, 1f),
+            new CurvePoint(5000f, 1.5f),
+            new CurvePoint(10000f, 2.2f),
         };
 
         public int transformTicks = 420;
@@ -219,7 +219,8 @@ namespace VVRace
 
         private int ScaledHornetCount(int baseCount)
         {
-            var factor = Props.hornetCountFactorByThreatScale?.Evaluate(ThreatScale) ?? 1f;
+            var map = parent.MapHeld;
+            var factor = map != null ? Props.hornetCountFactorByThreatPoints?.Evaluate(StorytellerUtility.DefaultThreatPointsNow(map)) ?? 1f : 1f;
             return Mathf.Max(1, Mathf.RoundToInt(baseCount * factor));
         }
 
@@ -894,7 +895,6 @@ namespace VVRace
                 music.CheckTransitions();
             }
 
-            Messages.Message(LocalizeString_Message.VV_Message_ApocryphaTransformStarted.Translate(), Pawn, MessageTypeDefOf.ThreatBig);
             Find.TickManager.slower.SignalForceNormalSpeedShort();
 
             ApocryphaGimmicks.Notify_BossPhaseChanged(Pawn, ApocryphaPhase.Transforming);

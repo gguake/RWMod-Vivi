@@ -40,6 +40,7 @@ namespace VVRace
 
         private const int StaggerTicks = 14;
         private const float MinSpacing = 2.2f;
+        private const float WideningCells = 4f;
 
         private static readonly Color DarkSparkColor = new Color(0.9f, 0.18f, 0.7f, 1f);
         private static readonly int ProgressId = Shader.PropertyToID("_Progress");
@@ -124,22 +125,26 @@ namespace VVRace
             return cell == center ? Rot4.South : Rot4.FromAngleFlat((cell - center).AngleFlat);
         }
 
+        // 같은 칸에 연출을 다시 스폰하면 바닐라 스폰 규칙이 앞 연출을 지워 말벌이 사라지므로, 고른 칸과 연출이 있는 칸은 제외한다.
+        // 맵 가장자리처럼 둘레가 좁아 칸이 모자라면 간격을 포기하고, 그래도 모자라면 반경을 넓힌다.
         private static bool TryFindSummonCell(Map map, IntVec3 center, FloatRange radius, List<IntVec3> chosen, out IntVec3 result)
         {
             var traverse = TraverseParms.For(TraverseMode.PassDoors);
-            bool Valid(IntVec3 c, bool spaced)
+            bool Valid(IntVec3 c, float maxRadius, bool spaced)
             {
                 if (!c.InBounds(map) || !c.Standable(map) || c.Fogged(map)) { return false; }
-                if (!c.InHorDistOf(center, radius.max) || c.InHorDistOf(center, radius.min)) { return false; }
-                if (c.GetFirstPawn(map) != null) { return false; }
-                if (spaced && chosen.Any(v => v.InHorDistOf(c, MinSpacing))) { return false; }
+                if (!c.InHorDistOf(center, maxRadius) || c.InHorDistOf(center, radius.min)) { return false; }
+                if (c.GetFirstPawn(map) != null || c.GetFirstThing(map, VVThingDefOf.VV_HornetManifestation) != null) { return false; }
+                if (chosen.Contains(c) || (spaced && chosen.Any(v => v.InHorDistOf(c, MinSpacing)))) { return false; }
 
                 return map.reachability.CanReach(center, c, PathEndMode.OnCell, traverse);
             }
 
             var range = Mathf.CeilToInt(radius.max);
-            return CellFinder.TryFindRandomCellNear(center, map, range, c => Valid(c, true), out result)
-                || CellFinder.TryFindRandomCellNear(center, map, range, c => Valid(c, false), out result);
+            var wideRadius = radius.max + WideningCells;
+            return CellFinder.TryFindRandomCellNear(center, map, range, c => Valid(c, radius.max, true), out result)
+                || CellFinder.TryFindRandomCellNear(center, map, range, c => Valid(c, radius.max, false), out result)
+                || CellFinder.TryFindRandomCellNear(center, map, Mathf.CeilToInt(wideRadius), c => Valid(c, wideRadius, false), out result);
         }
 
         #endregion
