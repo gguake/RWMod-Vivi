@@ -65,6 +65,45 @@
     <shaderPath>Map/VV_SoulLink</shaderPath>
   </ShaderTypeDef>
 
+  <!-- 아스포델 연결선(멸망꽃·요정꽃·요정 간섭): 두 가닥 나선을 따라 꽃잎이 흩날리며 흐른다(가산 혼합).
+       꽃잎 그림 한 장(_MainTex)을 셰이더가 돌려 가며 찍는다. 영혼 연결 빔과 같은 이유로 큐를 장면 캡처(3151)보다 앞인 3150으로 둔다. -->
+  <ShaderDef>
+    <defName>VV_PetalLink</defName>
+    <shaderProgram>
+      <vertexShaderFileName>Mote.vert.glsl</vertexShaderFileName>
+      <fragmentShaderFileName>VV_PetalLink.frag.glsl</fragmentShaderFileName>
+      <flipTextureST>false</flipTextureST>
+      <blendMode>Additive</blendMode>
+      <depthWrite>false</depthWrite>
+      <cullMode>None</cullMode>
+      <renderQueue>3150</renderQueue>
+    </shaderProgram>
+  </ShaderDef>
+
+  <ShaderTypeDef>
+    <defName>VV_PetalLink</defName>
+    <shaderPath>Map/VV_PetalLink</shaderPath>
+  </ShaderTypeDef>
+
+  <!-- 요정 간섭 비비의 일렁이는 빛: 텍스처 없이 수식으로 몸을 감싸 피어오르는 빛 자락과 물결 같은 반짝임을 그린다(가산 혼합, 유지형 부착 모트). -->
+  <ShaderDef>
+    <defName>VV_LightShimmer</defName>
+    <shaderProgram>
+      <vertexShaderFileName>Mote.vert.glsl</vertexShaderFileName>
+      <fragmentShaderFileName>VV_LightShimmer.frag.glsl</fragmentShaderFileName>
+      <flipTextureST>false</flipTextureST>
+      <blendMode>Additive</blendMode>
+      <depthWrite>false</depthWrite>
+      <cullMode>None</cullMode>
+      <renderQueue>3150</renderQueue>
+    </shaderProgram>
+  </ShaderDef>
+
+  <ShaderTypeDef>
+    <defName>VV_LightShimmer</defName>
+    <shaderPath>Map/VV_LightShimmer</shaderPath>
+  </ShaderTypeDef>
+
   <!-- 충격파: 텍스처 없이 수식으로 파면·잔광·전기 줄기를 그리고 장면 캡처를 굴절시킨다(크기와 무관하게 선명).
        장면 캡처는 바닐라 왜곡 셰이더(MoteLargeDistortionWave)와 같은 이름·큐를 사용하므로 프레임당 한 번만 수행한다. -->
   <ShaderDef>

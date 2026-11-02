@@ -1,5 +1,6 @@
 ﻿using RimWorld;
 using System.Collections.Generic;
+using UnityEngine;
 using Verse;
 
 namespace VVRace
@@ -12,8 +13,14 @@ namespace VVRace
         // 퀘스트에 보스 참조가 없으면 맵을 순회해야 하므로 탐색 주기를 제한한다.
         private const int BossSearchIntervalTicks = 30;
 
+        // 일렁이는 빛 모트를 몸통 쪽으로 조금 올려 붙인다.
+        private static readonly Vector3 ShimmerOffset = new Vector3(0f, 0f, 0.12f);
+
         [Unsaved]
         private Effecter _auraEffecter;
+
+        [Unsaved]
+        private Mote _shimmerMote;
 
         [Unsaved]
         private Pawn _boss;
@@ -112,10 +119,20 @@ namespace VVRace
             }
 
             _auraEffecter.EffectTick(new TargetInfo(pawn), TargetInfo.Invalid);
+
+            if (_shimmerMote == null || _shimmerMote.Destroyed)
+            {
+                _shimmerMote = MoteMaker.MakeAttachedOverlay(pawn, VVThingDefOf.VV_Mote_FairyInterferenceShimmer, ShimmerOffset);
+            }
+
+            _shimmerMote.Maintain();
         }
 
+        // 빛 모트는 유지가 끊기면 스스로 흐려지며 사라진다.
         private void EndAura()
         {
+            _shimmerMote = null;
+
             if (_auraEffecter == null) { return; }
 
             _auraEffecter.Cleanup();

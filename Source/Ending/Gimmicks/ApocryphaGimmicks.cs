@@ -19,7 +19,7 @@ namespace VVRace
 
         private static readonly Vector3 PawnLinkOffset = new Vector3(0f, 0f, 0.35f);
         private static readonly Color InterferenceLinkColor = new Color(1f, 0.9f, 0.6f);
-        private const float InterferenceLinkWidth = 0.9f;
+        private const float InterferenceLinkWidth = 1f;
         private const float InterferenceLinkFadeInTicks = 45f;
 
         private const float ManaBackflowBeamWidth = 1.6f;
@@ -129,7 +129,7 @@ namespace VVRace
 
                 var color = InterferenceLinkColor;
                 color.a *= Mathf.Clamp01(hediff.ageTicks / InterferenceLinkFadeInTicks);
-                DrawSoulLink(bossPos, pawns[i].DrawPos + PawnLinkOffset, InterferenceLinkWidth, color);
+                PetalLinkRenderer.Draw(bossPos, pawns[i].DrawPos + PawnLinkOffset, InterferenceLinkWidth, color, pawns[i].thingIDNumber);
             }
         }
 
@@ -415,7 +415,7 @@ namespace VVRace
 
                 var color = extension.linkColor;
                 color.a *= flower.LinkAlpha;
-                DrawSoulLink(bossPos, flower.LinkAnchor, extension.linkWidth, color);
+                PetalLinkRenderer.Draw(bossPos, flower.LinkAnchor, extension.linkWidth, color, flower.thingIDNumber);
             }
         }
 

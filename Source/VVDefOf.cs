@@ -166,6 +166,7 @@ namespace VVRace
         public static ThingDef VV_Mote_ApocryphaAimCharge;
         public static ThingDef VV_Mote_ApocryphaDrainVortex;
         public static ThingDef VV_Mote_ApocryphaRepelCharge;
+        public static ThingDef VV_Mote_FairyInterferenceShimmer;
 
         public static ThingDef VV_ApocryphaNeedle;
 

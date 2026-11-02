@@ -49,22 +49,6 @@
     </graphicData>
   </FleckDef>
 
-  <!-- 요정 간섭 비비를 따라다니는 후광 -->
-  <FleckDef ParentName="FleckBase_Thrown">
-    <defName>VV_Fleck_GimmickHaloAttached</defName>
-    <altitudeLayer>MoteOverheadLow</altitudeLayer>
-    <useAttachLink>true</useAttachLink>
-    <fadeInTime>0.4</fadeInTime>
-    <solidTime>0.4</solidTime>
-    <fadeOutTime>1.0</fadeOutTime>
-    <growthRate>0.05</growthRate>
-    <graphicData>
-      <texPath>VFX/VV_ScentAura</texPath>
-      <shaderType>MoteGlow</shaderType>
-      <renderInstanced>true</renderInstanced>
-    </graphicData>
-  </FleckDef>
-
   <!-- 멸망꽃 주변으로 천천히 퍼지는 연기 고리 -->
   <FleckDef ParentName="FleckBase_Thrown">
     <defName>VV_Fleck_GimmickSmokeRing</defName>
@@ -1198,19 +1182,36 @@
     </children>
   </EffecterDef>
 
-  <!-- 요정 간섭 비비를 따라다니는 금빛 후광과 반짝임 -->
+  <!-- 요정 간섭 비비를 감싸 일렁이는 빛(Hediff_FairyInterference가 유지한다) -->
+  <ThingDef ParentName="MoteBase">
+    <defName>VV_Mote_FairyInterferenceShimmer</defName>
+    <thingClass>MoteAttached</thingClass>
+    <altitudeLayer>MoteOverheadLow</altitudeLayer>
+    <mote>
+      <fadeInTime>0.5</fadeInTime>
+      <fadeOutTime>0.6</fadeOutTime>
+      <solidTime>999999</solidTime>
+      <needsMaintenance>True</needsMaintenance>
+      <fadeOutUnmaintained>true</fadeOutUnmaintained>
+    </mote>
+    <graphicData>
+      <texPath>Things/Mote/Black</texPath>
+      <graphicClass>Graphic_MoteWithAgeSecs</graphicClass>
+      <shaderType>VV_LightShimmer</shaderType>
+      <color>(1, 0.9, 0.6, 1)</color>
+      <shaderParameters>
+        <_CoreColor>(1, 0.97, 0.86, 1)</_CoreColor>
+        <_Brightness>1</_Brightness>
+      </shaderParameters>
+      <drawSize>(1.8, 1.8)</drawSize>
+    </graphicData>
+  </ThingDef>
+
+  <!-- 요정 간섭 비비 주변의 반짝임(몸을 감싸는 빛은 VV_Mote_FairyInterferenceShimmer) -->
   <EffecterDef>
     <defName>VV_Effecter_FairyInterferenceAura</defName>
     <offsetMode>Free</offsetMode>
     <children>
-      <li>
-        <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
-        <fleckDef>VV_Fleck_GimmickHaloAttached</fleckDef>
-        <spawnLocType>OnSource</spawnLocType>
-        <ticksBetweenMotes>60</ticksBetweenMotes>
-        <scale>1.3</scale>
-        <color>(1, 0.92, 0.65, 0.28)</color>
-      </li>
       <li>
         <subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
         <fleckDef>VV_Fleck_GimmickTwinkle</fleckDef>

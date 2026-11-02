@@ -191,7 +191,7 @@
         <bloomEffecter>VV_Effecter_SeedBloomDoom</bloomEffecter>
         <witherEffecter>VV_Effecter_DoomFlowerWither</witherEffecter>
         <linkColor>(1, 0.35, 0.8, 1)</linkColor>
-        <linkWidth>0.6</linkWidth>
+        <linkWidth>0.85</linkWidth>
         <linkOffset>(0.15, 0, 0.25)</linkOffset>
       </li>
     </modExtensions>
@@ -248,7 +248,7 @@
         <bloomEffecter>VV_Effecter_SeedBloomFairy</bloomEffecter>
         <witherEffecter>VV_Effecter_FairyFlowerVanish</witherEffecter>
         <linkColor>(1, 0.9, 0.6, 1)</linkColor>
-        <linkWidth>0.8</linkWidth>
+        <linkWidth>1</linkWidth>
         <linkOffset>(0, 0, 0.3)</linkOffset>
       </li>
     </modExtensions>
