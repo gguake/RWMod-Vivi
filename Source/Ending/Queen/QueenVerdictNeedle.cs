@@ -6,7 +6,7 @@ using Verse;
 
 namespace VVRace
 {
-    // 아포크리파 바늘은 보스 상태에 묶여 있으므로 상태 진행은 따로 두고 경로 계산·관통 판정·그리기·연출만 공유한다.
+    // 아스포델 바늘은 보스 상태에 묶여 있으므로 상태 진행은 따로 두고 경로 계산·관통 판정·그리기·연출만 공유한다.
     public class QueenVerdictNeedle : ThingWithComps
     {
         private enum VerdictState : byte

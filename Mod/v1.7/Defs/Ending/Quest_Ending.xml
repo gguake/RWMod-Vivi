@@ -15,7 +15,7 @@
   </QuestScriptDef>
 
   <!-- 엔딩 퀘스트 2: 〈만개하는 여명〉. 5단계 만개 의식이 끝나는 순간 앵커 영원꽃과 함께 만들어진다.
-       공성 → 평화 기간 → 아포크리파 → 여왕의 대관식 → 엔딩, 영원꽃 찬탈·소실 시 실패. -->
+       공성 → 평화 기간 → 아스포델 → 여왕의 대관식 → 엔딩, 영원꽃 찬탈·소실 시 실패. -->
   <QuestScriptDef>
     <defName>VV_EndGame_ViviBloom</defName>
     <isRootSpecial>true</isRootSpecial>

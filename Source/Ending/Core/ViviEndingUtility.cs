@@ -272,7 +272,7 @@ namespace VVRace
                 }
                 catch (Exception ex)
                 {
-                    Log.Error($"[ViViRace] failed to clean up Apocrypha gimmicks on {map}: {ex}");
+                    Log.Error($"[ViViRace] failed to clean up Asphodel gimmicks on {map}: {ex}");
                 }
             }
         }

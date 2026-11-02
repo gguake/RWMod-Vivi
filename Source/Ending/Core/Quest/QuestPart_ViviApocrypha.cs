@@ -193,7 +193,7 @@ namespace VVRace
             }
             catch (Exception ex)
             {
-                Log.Error($"[ViViRace] failed to spawn Apocrypha: {ex}");
+                Log.Error($"[ViViRace] failed to spawn Asphodel: {ex}");
             }
 
             // 스폰 도중 실패했어도 보스가 맵에 있으면 해당 개체로 전투를 시작해 중복 소환을 막는다.
@@ -263,7 +263,7 @@ namespace VVRace
 
             if (now - _bossMissingSinceTick < BossMissingGraceTicks) { return; }
 
-            Log.Warning("[ViViRace] Apocrypha disappeared during the boss stage without notifying the ending quest; unlocking the coronation.");
+            Log.Warning("[ViViRace] Asphodel disappeared during the boss stage without notifying the ending quest; unlocking the coronation.");
             Defeat();
         }
 
@@ -286,13 +286,13 @@ namespace VVRace
 
             if (IsBossAlive)
             {
-                Messages.Message("DEV: Apocrypha is already on the map.", _boss, MessageTypeDefOf.RejectInput, historical: false);
+                Messages.Message("DEV: Asphodel is already on the map.", _boss, MessageTypeDefOf.RejectInput, historical: false);
                 return;
             }
 
             if (ApocryphaUtility.IsDefeatInProgress(AnchorMap))
             {
-                Messages.Message("DEV: Apocrypha is still dissolving.", MessageTypeDefOf.RejectInput, historical: false);
+                Messages.Message("DEV: Asphodel is still dissolving.", MessageTypeDefOf.RejectInput, historical: false);
                 return;
             }
 

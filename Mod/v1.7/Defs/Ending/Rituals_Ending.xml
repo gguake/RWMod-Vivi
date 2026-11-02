@@ -151,7 +151,7 @@
     <startsEndingQuest>true</startsEndingQuest>
   </RitualObligationTargetFilterDef>
 
-  <!-- ===== 6단계 〈생명의 회귀〉: 아포크리파에게서 풀려난 고대 제국의 요정 비비 하나를 성체 비비로 되살려 정착민으로 맞이한다 ===== -->
+  <!-- ===== 6단계 〈생명의 회귀〉: 아스포델에게서 풀려난 고대 제국의 요정 비비 하나를 성체 비비로 되살려 정착민으로 맞이한다 ===== -->
   <PreceptDef>
     <defName>VV_ReturnOfLife</defName>
     <label>return of life</label>
@@ -295,7 +295,7 @@
     <requiredAttunementLevel>6</requiredAttunementLevel>
   </RitualObligationTargetFilterDef>
 
-  <!-- ===== 〈여왕의 대관식〉: 아포크리파를 토벌해 응축이 100%가 된 앵커 영원꽃에서 공명자(로열 비비)가 여왕으로 즉위한다.
+  <!-- ===== 〈여왕의 대관식〉: 아스포델을 토벌해 응축이 100%가 된 앵커 영원꽃에서 공명자(로열 비비)가 여왕으로 즉위한다.
        단 한 번만 가능하며, 완료하면 영원꽃이 6단계로 완전히 개화하고 곧이어 엔딩 크레딧이 흐른다 ===== -->
   <PreceptDef>
     <defName>VV_QueensCoronation</defName>

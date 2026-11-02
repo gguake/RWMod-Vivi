@@ -7,7 +7,7 @@ using Verse;
 
 namespace VVRace
 {
-    // 아포크리파 바늘과 여왕의 심판 바늘이 공유하는 경로 계산·관통 판정·연출.
+    // 아스포델 바늘과 여왕의 심판 바늘이 공유하는 경로 계산·관통 판정·연출.
     internal static class ApocryphaNeedleLane
     {
         // 그림 중심에서 촉까지의 거리로 높이 5.5칸의 36%다.

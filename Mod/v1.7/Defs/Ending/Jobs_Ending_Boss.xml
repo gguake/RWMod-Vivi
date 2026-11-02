@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <!-- 아포크리파 생각 트리: 판단은 하나의 작업 지급기(JobGiver_ApocryphaMain)가 CompApocrypha 상태를 보고 내린다. -->
+  <!-- 아스포델 생각 트리: 판단은 하나의 작업 지급기(JobGiver_ApocryphaMain)가 CompApocrypha 상태를 보고 내린다. -->
   <ThinkTreeDef>
     <defName>VV_Apocrypha</defName>
     <thinkRoot Class="ThinkNode_Priority">
@@ -101,7 +101,7 @@
     <suspendable>false</suspendable>
   </JobDef>
 
-  <!-- 아포크리파 호위 거대 말벌: 바닐라 Escort에서 약물·욕구 노드를 뺀 형태(보스를 따라다니며 근처를 배회).
+  <!-- 아스포델 호위 거대 말벌: 바닐라 Escort에서 약물·욕구 노드를 뺀 형태(보스를 따라다니며 근처를 배회).
        교전은 광폭 상태 분기의 JobGiver_HornetBerserk가 보스 반경 안에서 먼저 처리한다. -->
   <DutyDef>
     <defName>VV_TitanicHornetEscort</defName>

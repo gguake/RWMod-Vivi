@@ -340,7 +340,7 @@ namespace VVRace.HarmonyPatches
         }
 
         // 바닐라는 무소속 가해자에 의한 우호 세력원 사망에서 영구 광폭 동물만 호감도 하락을 면제한다.
-        // 모두에게 적대하는 거대 말벌과 아포크리파도 같은 예외로 취급한다.
+        // 모두에게 적대하는 거대 말벌과 아스포델도 같은 예외로 취급한다.
         // dinfo를 null로 바꾸면 factionHostileOnDeath 분기로 넘어가 연방 대표 사망 시 적대화되므로 호감도 변경만 막는다.
         private static bool _blamelessMemberDeath;
 

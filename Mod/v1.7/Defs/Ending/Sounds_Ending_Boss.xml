@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <!-- 아포크리파 바늘 조준음. 조준(2.5초) 동안 차오르다 발사 순간에 맞춰 사라지도록 잘라 두었고, 게임 배속에 맞춰 빨라지게 한다. -->
+  <!-- 아스포델 바늘 조준음. 조준(2.5초) 동안 차오르다 발사 순간에 맞춰 사라지도록 잘라 두었고, 게임 배속에 맞춰 빨라지게 한다. -->
   <SoundDef>
     <defName>VV_ApocryphaNeedleCharge</defName>
     <context>MapOnly</context>
@@ -230,7 +230,7 @@
     </subSounds>
   </SoundDef>
 
-  <!-- 아포크리파 바늘 발사음. 같은 틱에 여러 바늘이 함께 쏘면 한 번만 낸다. -->
+  <!-- 아스포델 바늘 발사음. 같은 틱에 여러 바늘이 함께 쏘면 한 번만 낸다. -->
   <SoundDef>
     <defName>VV_ApocryphaNeedleFire</defName>
     <context>MapOnly</context>

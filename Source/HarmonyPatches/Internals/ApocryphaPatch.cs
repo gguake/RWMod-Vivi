@@ -14,7 +14,7 @@ namespace VVRace
             var stunFor = AccessTools.Method(typeof(StunHandler), nameof(StunHandler.StunFor));
             if (stunFor == null)
             {
-                Log.Error("[ViViRace] Apocrypha patch: StunHandler.StunFor not found; Apocrypha is not immune to stuns.");
+                Log.Error("[ViViRace] Asphodel patch: StunHandler.StunFor not found; Asphodel is not immune to stuns.");
             }
             else
             {
@@ -25,7 +25,7 @@ namespace VVRace
             var possibleAnimals = AccessTools.Method(typeof(ScenPart_StartingAnimal), "PossibleAnimals");
             if (possibleAnimals == null)
             {
-                Log.Warning("[ViViRace] Apocrypha patch: ScenPart_StartingAnimal.PossibleAnimals not found; Apocrypha may be offered as a starting animal.");
+                Log.Warning("[ViViRace] Asphodel patch: ScenPart_StartingAnimal.PossibleAnimals not found; Asphodel may be offered as a starting animal.");
             }
             else
             {

@@ -57,7 +57,7 @@
     </comps>
   </AbilityDef>
 
-  <!-- 아포크리파의 거대 엘텍스 바늘과 같은 그림·궤적을 쓴다. 피해는 VV_GiantNeedlePierce(구조물 2배) -->
+  <!-- 아스포델의 거대 엘텍스 바늘과 같은 그림·궤적을 쓴다. 피해는 VV_GiantNeedlePierce(구조물 2배) -->
   <ThingDef ParentName="EtherealThingBase">
     <defName>VV_QueenVerdictNeedle</defName>
     <label>verdict needle</label>

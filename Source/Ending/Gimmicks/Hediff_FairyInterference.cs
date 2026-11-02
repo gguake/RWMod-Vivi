@@ -173,13 +173,13 @@ namespace VVRace
             };
             if (!bossBound)
             {
-                commandRelease.Disable("No bound Apocrypha on this map.");
+                commandRelease.Disable("No bound Asphodel on this map.");
             }
             yield return commandRelease;
 
             var commandTeleport = new Command_Action()
             {
-                defaultLabel = "DEV: Teleport next to Apocrypha",
+                defaultLabel = "DEV: Teleport next to Asphodel",
                 action = () =>
                 {
                     var target = ApocryphaGimmicks.FindBoss(pawn.Map);
@@ -195,7 +195,7 @@ namespace VVRace
             };
             if (boss == null)
             {
-                commandTeleport.Disable("No Apocrypha on this map.");
+                commandTeleport.Disable("No Asphodel on this map.");
             }
             yield return commandTeleport;
         }

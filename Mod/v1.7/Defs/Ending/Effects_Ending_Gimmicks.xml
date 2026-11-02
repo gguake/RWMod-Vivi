@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-  <!-- 아포크리파 1페이즈 기믹 연출. VFX 텍스처는 검정 배경 RGB라 가산(MoteGlow) 셰이더로만 쓴다.
+  <!-- 아스포델 1페이즈 기믹 연출. VFX 텍스처는 검정 배경 RGB라 가산(MoteGlow) 셰이더로만 쓴다.
        흰색 텍스처(VV_Scent*)는 스프레이어의 color로 금빛/자홍으로 물들인다.
        다른 모듈과 이름이 겹치지 않도록 이 파일의 플렉은 모두 VV_Fleck_Gimmick 접두사를 쓴다. -->
 

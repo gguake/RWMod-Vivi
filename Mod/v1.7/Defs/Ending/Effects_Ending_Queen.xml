@@ -258,7 +258,7 @@
     </children>
   </EffecterDef>
 
-  <!-- ===== 선고: 허공에 바늘이 맺히는 순간의 금빛 고리와 반짝임(조준음은 아포크리파 바늘 조준 연출이 낸다) ===== -->
+  <!-- ===== 선고: 허공에 바늘이 맺히는 순간의 금빛 고리와 반짝임(조준음은 아스포델 바늘 조준 연출이 낸다) ===== -->
   <EffecterDef>
     <defName>VV_Effecter_QueenVerdictSummon</defName>
     <children>

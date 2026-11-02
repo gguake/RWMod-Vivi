@@ -41,29 +41,24 @@
 <VV_Comms_AmberCoreRequestResult>{LEADER} has offered a task with an ancient amber core as its reward.</VV_Comms_AmberCoreRequestResult>
 <VV_Comms_AmberCoreRequestNoQuest>{LEADER}: "We have no task to entrust to you right now. Contact us again later."</VV_Comms_AmberCoreRequestNoQuest>
 
-<!-- Ending quest: siege -->
-<VV_Letter_EndingSiegeLabel>Pulse</VV_Letter_EndingSiegeLabel>
+<VV_Letter_EndingSiegeLabel>Pulsing everflower</VV_Letter_EndingSiegeLabel>
 <VV_Letter_EndingSiege>The everflower has begun to attune successfully and has entered a new stage of growth. But drawn by the mana waves spreading from the altar and by the towering everflower visible from afar, enemies are converging on the colony.</VV_Letter_EndingSiege>
 <VV_Letter_EndingSiegeFederation>The vivi federation will send elite reinforcements from time to time.</VV_Letter_EndingSiegeFederation>
 
 <VV_Letter_EndingFederationAidLabel>Federation reinforcements</VV_Letter_EndingFederationAidLabel>
 <VV_Letter_EndingFederationAid>The vivi federation has sent {COUNT} elite warriors to defend the everflower altar. They will fight alongside you for a time before returning home.</VV_Letter_EndingFederationAid>
 
-<!-- Ending quest: calm before the storm -->
-<VV_Letter_EndingCalmLabel>Calm before the storm</VV_Letter_EndingCalmLabel>
-<VV_Letter_EndingCalm>The raids have stopped, and the titanic hornet swarms have withdrawn. The everflower's bloom condensation has halted.\n\nThrough the resonance, {PAWN_labelShort} senses countless souls approaching, with something at their center.</VV_Letter_EndingCalm>
+<VV_Letter_EndingCalmLabel>Stillness</VV_Letter_EndingCalmLabel>
+<VV_Letter_EndingCalm>The everflower is finally on the verge of full bloom. However, an unknown psychic wave has halted its blooming.\n\nThrough the resonance, {PAWN_labelShort} senses countless souls approaching, with something at their center.</VV_Letter_EndingCalm>
 
-<!-- Ending quest: Asphodel -->
 <VV_Letter_EndingApocryphaLabel>The Crumbled Queen</VV_Letter_EndingApocryphaLabel>
 <VV_Letter_EndingApocrypha>Dark energy gathers above the everflower. Asphodel, the last queen of the old empire, has appeared.
 \nDriven back by the everflower's waves, she approaches the altar with a swarm of titanic hornets. Countless fairy vivis remain bound to her.
 \nTo bring the queen rest, you must first interfere with the fairy vivis' bonds and set them free. Breaking the shield that protects her may offer a clue.</VV_Letter_EndingApocrypha>
 
-<!-- Ending quest: Asphodel defeated, awaiting the coronation -->
 <VV_Letter_EndingCoronationLabel>Coronation</VV_Letter_EndingCoronationLabel>
-<VV_Letter_EndingCoronation>The ancient queen has found her rest, and the everflower is ready to fully bloom.\n\nAll that remains is for {PAWN_labelShort} to perform the coronation and usher in a new age of vivis.</VV_Letter_EndingCoronation>
+<VV_Letter_EndingCoronation>The ancient queen has finally found her rest, and the everflower is ready to fully bloom.\n\nAll that remains is for {PAWN_labelShort} to perform the coronation and usher in a new age of vivis.</VV_Letter_EndingCoronation>
 
-<!-- Ending quest: ending (the letter and the credits share the same text, in the style of the vanilla ending credits) -->
 <VV_Letter_EndingVictoryLabel>Empire of eternal spring</VV_Letter_EndingVictoryLabel>
 <VV_Letter_EndingVictoryContinue>You can continue playing in this colony with the benefits of the fully bloomed everflower.</VV_Letter_EndingVictoryContinue>
 <VV_EndingCredits>{PAWN_nameDef} completes the coronation. Golden petals form a crown above {PAWN_possessive} head.\n\nCenturies after the old empire fell, the everflower has bloomed again. The vivis beneath it will live longer lives.\n\n{PAWN_nameDef} has become queen of the vivis.</VV_EndingCredits>

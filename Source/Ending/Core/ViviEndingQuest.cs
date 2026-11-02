@@ -603,7 +603,7 @@ namespace VVRace
             if (!finished && stage != ViviEndingStage.Coronation && Boss == null)
             {
                 var manifesting = ApocryphaPart != null && ApocryphaPart.IsManifesting;
-                yield return DevCommand(manifesting ? "DEV: Skip Apocrypha intro" : "DEV: Spawn Apocrypha now", () => DebugSpawnBossNow(everflower));
+                yield return DevCommand(manifesting ? "DEV: Skip Asphodel intro" : "DEV: Spawn Asphodel now", () => DebugSpawnBossNow(everflower));
             }
 
             if (!finished)
@@ -661,7 +661,7 @@ namespace VVRace
         {
             if (Boss != null)
             {
-                Messages.Message("DEV: Apocrypha is already on the map.", Boss, MessageTypeDefOf.RejectInput, historical: false);
+                Messages.Message("DEV: Asphodel is already on the map.", Boss, MessageTypeDefOf.RejectInput, historical: false);
                 return;
             }
 
@@ -675,7 +675,7 @@ namespace VVRace
             var apocrypha = ApocryphaPart;
             if (apocrypha == null || apocrypha.State != QuestPartState.Enabled)
             {
-                Messages.Message($"DEV: Apocrypha cannot be spawned at ending stage {Stage}.", MessageTypeDefOf.RejectInput, historical: false);
+                Messages.Message($"DEV: Asphodel cannot be spawned at ending stage {Stage}.", MessageTypeDefOf.RejectInput, historical: false);
                 return;
             }
 

@@ -126,7 +126,7 @@
     </graphicData>
   </FleckDef>
 
-  <!-- 찬탈 후 흩날리는 영원꽃·아포크리파 꽃잎 (DyingApocrypha 찬탈 모드가 색·속도·회전을 정해 생성) -->
+  <!-- 찬탈 후 흩날리는 영원꽃·아스포델 꽃잎 (DyingApocrypha 찬탈 모드가 색·속도·회전을 정해 생성) -->
   <FleckDef ParentName="VV_FleckEverflowerPetalBase">
     <defName>VV_Fleck_ApocryphaStealPetal</defName>
     <fadeInTime>0.1</fadeInTime>

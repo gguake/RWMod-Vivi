@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
   <!-- 〈영원꽃 완전 동화〉: 〈만개 의식〉의 공명자(로열 비비)가 의식이 진행되기 시작하면 걸린다(VVRace.RitualBehaviorWorker_GrandAttunement).
-       공명자는 아포크리파를 토벌할 때까지 제단 안에 동면관처럼 정지된 채 보관되고(VVRace.Building_DreamumAltar), 영원꽃이 그 모습을 꽃 앞 공중에 그린다.
+       공명자는 아스포델을 토벌할 때까지 제단 안에 동면관처럼 정지된 채 보관되고(VVRace.Building_DreamumAltar), 영원꽃이 그 모습을 꽃 앞 공중에 그린다.
        (요정 실체화의 여파 헤디프 VV_EverflowerAssimilation〈영원꽃 동화〉와는 다른 헤디프다) -->
   <HediffDef>
     <defName>VV_EverflowerFullAssimilation</defName>
@@ -30,7 +30,7 @@
     </graphicData>
   </FleckDef>
 
-  <!-- 소멸하는 아포크리파에게서 흩어져 공명자에게 스며드는 영혼 입자(DyingApocrypha가 공명자 쪽으로 날린다) -->
+  <!-- 소멸하는 아스포델에게서 흩어져 공명자에게 스며드는 영혼 입자(DyingApocrypha가 공명자 쪽으로 날린다) -->
   <FleckDef ParentName="FleckBase_Thrown">
     <defName>VV_Fleck_AssimilationSoul</defName>
     <altitudeLayer>MoteOverhead</altitudeLayer>
@@ -74,7 +74,7 @@
     </children>
   </EffecterDef>
 
-  <!-- 아포크리파의 마지막 영혼까지 스며든 공명자가 크게 빛남 -->
+  <!-- 아스포델의 마지막 영혼까지 스며든 공명자가 크게 빛남 -->
   <EffecterDef>
     <defName>VV_Effecter_AssimilationAbsorb</defName>
     <maintainTicks>12</maintainTicks>

@@ -6,7 +6,7 @@ namespace VVRace
 {
     public class DamageWorker_ManawaveStun : DamageWorker_Stun
     {
-        // 마나 파동의 기절 피해를 적용하는 동안만 true로 둔다. 일반 기절에 면역인 아포크리파가 이 기절은 받도록 한다.
+        // 마나 파동의 기절 피해를 적용하는 동안만 true로 둔다. 일반 기절에 면역인 아스포델이 이 기절은 받도록 한다.
         public static bool Applying { get; private set; }
 
         protected override void ExplosionDamageThing(

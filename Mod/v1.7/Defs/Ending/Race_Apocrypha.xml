@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <!-- 아포크리파 페이즈별 생애 단계: 0 = 1페이즈(결속), 1 = 2페이즈(해방). 나이와 무관하게 CompApocrypha가 LockCurrentLifeStageIndex로 고정한다. -->
+  <!-- 아스포델 페이즈별 생애 단계: 0 = 1페이즈(결속), 1 = 2페이즈(해방). 나이와 무관하게 CompApocrypha가 LockCurrentLifeStageIndex로 고정한다. -->
   <LifeStageDef>
     <defName>VV_ApocryphaBound</defName>
     <label>bound</label>
@@ -226,7 +226,7 @@
     </lifeStages>
   </PawnKindDef>
 
-  <!-- 처치된 아포크리파의 소멸 연출(시체 대신). 저장 가능한 시퀀서이며 VV_Dissolve 셰이더로 직접 그린다. -->
+  <!-- 처치된 아스포델의 소멸 연출(시체 대신). 저장 가능한 시퀀서이며 VV_Dissolve 셰이더로 직접 그린다. -->
   <ThingDef ParentName="EtherealThingBase">
     <defName>VV_DyingApocrypha</defName>
     <label>Asphodel</label>
