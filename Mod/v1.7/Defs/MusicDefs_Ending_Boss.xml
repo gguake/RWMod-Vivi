@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <!-- 아스포델 보스전 배경음. 페이즈 판정은 MusicTransition_Apocrypha 워커가 하고, 보스가 사라지면(토벌·찬탈) 조건이 풀려 곡이 페이드아웃된다. -->
-  <!-- 바닐라 최고 우선순위(MetalHell 999)보다 높게 두고, 2페이즈가 1페이즈를 덮어쓸 수 있도록 2페이즈를 더 높게 둔다. -->
 
+  <!-- 몰락한 여제 1페이즈 음악 -->
   <SongDef>
     <defName>VV_TheFallenQueen</defName>
     <clipPath>Songs/VV_TheFallenQueen</clipPath>
@@ -10,6 +9,7 @@
     <commonality>0</commonality>
   </SongDef>
 
+  <!-- 몰락한 여제 2페이즈 음악 -->
   <SongDef>
     <defName>VV_TheFallenQueen_Phase2</defName>
     <clipPath>Songs/VV_TheFallenQueen_Phase2</clipPath>
@@ -17,6 +17,7 @@
     <commonality>0</commonality>
   </SongDef>
 
+  <!-- 아스포델 1페이즈 음악 재생 -->
   <MusicSequenceDef>
     <defName>VV_ApocryphaBound</defName>
     <song>VV_TheFallenQueen</song>
@@ -27,7 +28,7 @@
     <pausedVolumeFactor>0.5</pausedVolumeFactor>
   </MusicSequenceDef>
 
-  <!-- 곡 도입부의 충격음이 변신 충격파와 맞물리도록 1페이즈 곡은 짧게 끊는다. -->
+  <!-- 아스포델 2페이즈 음악 재생 -->
   <MusicSequenceDef>
     <defName>VV_ApocryphaUnbound</defName>
     <song>VV_TheFallenQueen_Phase2</song>
@@ -38,6 +39,7 @@
     <pausedVolumeFactor>0.5</pausedVolumeFactor>
   </MusicSequenceDef>
 
+  <!-- 아스포델 1페이즈 음악 전환 -->
   <MusicTransitionDef>
     <defName>VV_ApocryphaBound</defName>
     <workerType>VVRace.MusicTransition_ApocryphaBound</workerType>
@@ -46,6 +48,7 @@
     <priority>1100</priority>
   </MusicTransitionDef>
 
+  <!-- 아스포델 2페이즈 음악 전환 -->
   <MusicTransitionDef>
     <defName>VV_ApocryphaUnbound</defName>
     <workerType>VVRace.MusicTransition_ApocryphaUnbound</workerType>

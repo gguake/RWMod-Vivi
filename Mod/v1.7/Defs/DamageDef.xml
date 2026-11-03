@@ -127,8 +127,7 @@
     <damageEffecter>VV_Impact_BulletLava</damageEffecter>
   </DamageDef>
 
-  <!-- 거대 엘텍스 바늘의 관통 피해(찌르기). 피해량·방어 관통은 CompProperties_Apocrypha의 needleDamage/needleArmorPenetration을 쓴다.
-       구조물(세력 무관)은 폰이 받는 피해의 2배를 받는다. -->
+  <!-- 고대 엘텍스 바늘 관통 피해 -->
   <DamageDef>
     <defName>VV_GiantNeedlePierce</defName>
     <label>giant needle</label>
@@ -146,11 +145,9 @@
     <buildingDamageFactor>2</buildingDamageFactor>
   </DamageDef>
 
-  <!-- 아스포델 1페이즈 기믹: 요정 비비 사출탄, 멸망꽃/요정꽃 씨앗, 멸망꽃·요정꽃 -->
 
-  <!-- ===== 피해 ===== -->
 
-  <!-- 요정 비비 사출탄 폭발: Bomb 계열, 피해 24, 건물에는 절반만 -->
+  <!-- 요정 비비 사출탄 폭발 피해 -->
   <DamageDef ParentName="Bomb">
     <defName>VV_FairyBlast</defName>
     <label>fairy blast</label>

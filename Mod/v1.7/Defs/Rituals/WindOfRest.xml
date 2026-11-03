@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <!-- ===== 6단계 〈안식의 바람〉: 영원꽃에서 맵 전체로 바람을 보내 유전자 불안정과 스카리아를 걷어 낸다.
-       스카리아와 공생하는 거대 말벌은 가루가 되어 흩어지고 날개만 남는다(WindOfRest) ===== -->
+  <!-- 안식의 바람 의식 -->
   <PreceptDef>
     <defName>VV_WindOfRest</defName>
     <label>wind of rest ritual</label>
@@ -22,6 +21,7 @@
     <displayOrderInIssue>993</displayOrderInIssue>
   </PreceptDef>
 
+  <!-- 안식의 바람 의식 구성 -->
   <RitualPatternDef>
     <defName>VV_WindOfRest</defName>
     <ritualOnlyForIdeoMembers>false</ritualOnlyForIdeoMembers>
@@ -34,6 +34,7 @@
     <showIdeoIconsInDialog>false</showIdeoIconsInDialog>
   </RitualPatternDef>
 
+  <!-- 안식의 바람 의식 진행 -->
   <RitualBehaviorDef>
     <defName>VV_WindOfRest</defName>
     <durationTicks>1500</durationTicks>
@@ -99,6 +100,7 @@
     </stages>
   </RitualBehaviorDef>
 
+  <!-- 안식의 바람 의식 결과 -->
   <RitualOutcomeEffectDef>
     <defName>VV_WindOfRest</defName>
     <description>When the ritual completes, genetic instability and scaria are cured throughout the area. Titanic hornets are purified and vanish.\n\nAll everflower rituals share a cooldown.</description>
@@ -139,6 +141,7 @@
     </comps>
   </RitualOutcomeEffectDef>
 
+  <!-- 안식의 바람 의식 대상 -->
   <RitualObligationTargetFilterDef Class="VVRace.RitualObligationTargetFilterDef_EverflowerRitual">
     <defName>VV_WindOfRest</defName>
     <workerClass>VVRace.RitualObligationTargetWorker_EverflowerRitual</workerClass>

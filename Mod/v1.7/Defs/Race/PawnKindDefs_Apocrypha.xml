@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
+  <!-- 아스포델 폰 종류 -->
   <PawnKindDef ParentName="AnimalKindBase">
     <defName>VV_Apocrypha</defName>
     <label>Asphodel</label>
@@ -12,7 +13,6 @@
     <immuneToTraps>true</immuneToTraps>
     <ignoresPainShock>true</ignoresPainShock>
     <immuneToGameConditionEffects>true</immuneToGameConditionEffects>
-    <!-- 수명이 1000년이라 생성 시 노화 흉터가 붙을 수 있는데, 모든 피해를 흡수하므로 전투 내내 남는다. -->
     <allowOldAgeInjuries>false</allowOldAgeInjuries>
 
     <lifeStages>
@@ -20,7 +20,6 @@
         <bodyGraphicData>
           <texPath>Things/Pawn/Apocrypha/VV_Apocrypha</texPath>
           <graphicClass>Graphic_Multi</graphicClass>
-          <!-- 형체 높이 약 2.8칸(그림 높이의 93%) = 로열 비비(약 1.14칸)의 약 2.5배 -->
           <drawSize>3</drawSize>
           <shadowData>
             <volume>(0.65, 0.46, 0.32)</volume>

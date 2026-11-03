@@ -12,13 +12,13 @@
 <VV_Message_FlowerLandNoGround>이 범위에는 꽃밭으로 바꿀 땅이 없습니다.</VV_Message_FlowerLandNoGround>
 <VV_Message_FlowerLandBloomed>기름진 땅에 비비아 꽃 {COUNT}송이가 피어났습니다.</VV_Message_FlowerLandBloomed>
 
-<!-- 여왕의 권능: 생명 공명 -->
+<!-- 생명 공명 -->
 <VV_Letter_QueenLifeResonanceLabel>생명 공명: {PAWN_labelShort}</VV_Letter_QueenLifeResonanceLabel>
 <VV_Letter_QueenLifeResonance>{PAWN_nameDef}(이)가 금빛 꽃잎으로 흩어져 영원꽃에 깃들었습니다. {TIME} 뒤 다시 깨어납니다.</VV_Letter_QueenLifeResonance>
 <VV_Message_QueenReborn>{PAWN_labelShort}(이)가 영원꽃 앞에서 다시 깨어났습니다.</VV_Message_QueenReborn>
 <VV_Inspector_QueenRebirth>{PAWN_labelShort} 깨어나기까지: {TIME}</VV_Inspector_QueenRebirth>
 
-<!-- 여왕의 권능: 마나 보호막 -->
+<!-- 마나 보호막 -->
 <VV_Message_ManaBarrierNotEnoughMana>보호막 범위 안의 환경 마나가 부족합니다. ({0}/{1})</VV_Message_ManaBarrierNotEnoughMana>
 <VV_ManaBarrierTargetMana>범위 안 환경 마나: {0}/{1}</VV_ManaBarrierTargetMana>
 </LanguageData>

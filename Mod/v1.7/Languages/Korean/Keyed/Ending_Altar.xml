@@ -17,7 +17,7 @@
 <VV_FailReason_AltarHasEnshrinedEverflower>영원꽃이 안치되어 있어 해체할 수 없음</VV_FailReason_AltarHasEnshrinedEverflower>
 <VV_FailReason_AltarEndingInProgress>영원꽃이 안치되어 있어 해체할 수 없음</VV_FailReason_AltarEndingInProgress>
 
-<!-- 5/6단계 레벨업 편지 머리말 -->
+<!-- 레벨업 편지 -->
 <VV_Letter_EverflowerAttunementLevel5Preamble>영원꽃이 제단의 마나 회로와 공명하며 다섯 번째 개화에 도달했습니다.
 \n제단을 통해 주변에 막대한 환경 마나를 방출하며, 공명자의 영원꽃 공명이 V단계로 강화됩니다.</VV_Letter_EverflowerAttunementLevel5Preamble>
 <VV_Letter_EverflowerAttunementLevel6Preamble>영원꽃이 완전히 개화했습니다.

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
+  <!-- 비비 연방의 밀서 퀘스트 -->
   <QuestScriptDef>
     <defName>VV_EndGame_ViviMissive</defName>
     <isRootSpecial>true</isRootSpecial>
@@ -9,6 +10,7 @@
     <root Class="VVRace.QuestNode_Root_ViviMissive" />
   </QuestScriptDef>
 
+  <!-- 만개하는 여명 퀘스트 -->
   <QuestScriptDef>
     <defName>VV_EndGame_ViviBloom</defName>
     <isRootSpecial>true</isRootSpecial>

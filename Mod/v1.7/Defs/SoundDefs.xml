@@ -291,7 +291,7 @@
     </subSounds>
   </SoundDef>
 
-  <!-- 아스포델 바늘 조준음. 조준(2.5초) 동안 차오르다 발사 순간에 맞춰 사라지도록 잘라 두었고, 게임 배속에 맞춰 빨라지게 한다. -->
+  <!-- 고대 엘텍스 바늘 조준음 -->
   <SoundDef>
     <defName>VV_ApocryphaNeedleCharge</defName>
     <context>MapOnly</context>
@@ -311,7 +311,7 @@
     </subSounds>
   </SoundDef>
 
-  <!-- 2페이즈 기절이 풀려 꽂힌 바늘을 뽑아낼 때. 조준음의 가장 밝은 구간을 짧게 잘라 낮은 웅웅거림을 걷어냈다. 여러 바늘을 한꺼번에 뽑아도 한 번만 낸다. -->
+  <!-- 고대 엘텍스 바늘 추출음 -->
   <SoundDef>
     <defName>VV_ApocryphaNeedlePullOut</defName>
     <context>MapOnly</context>
@@ -330,8 +330,7 @@
     </subSounds>
   </SoundDef>
 
-  <!-- 요정 비비 사출 조준음: 조준이 하나라도 있는 동안 보스에게 이어지는 지속음. 줄어들던 원본을 평평하게 펴 4초 반복으로 이었고,
-       바닐라 헬스피어 캐논 조준음과 같은 크기로 맞췄다. 조준이 끝나면 0.4초에 걸쳐 흐려진다. -->
+  <!-- 요정 비비 사출 조준음 -->
   <SoundDef>
     <defName>VV_ApocryphaFairyCharge</defName>
     <sustain>True</sustain>
@@ -353,7 +352,7 @@
     </subSounds>
   </SoundDef>
 
-  <!-- 요정 비비 사출탄 폭발음(VV_FairyBlast). 최대 볼륨에서 바닐라 폭탄음보다 첫 타격이 약 3dB 작다. -->
+  <!-- 요정 비비 사출탄 폭발음 -->
   <SoundDef>
     <defName>VV_ApocryphaFairyBlast</defName>
     <context>MapOnly</context>
@@ -372,8 +371,7 @@
     </subSounds>
   </SoundDef>
 
-  <!-- 1페이즈 무력화(마나 보호장이 깨짐): 보호막이 깨지고 힘이 빠져나가는 소리.
-       바닐라 보호막 파괴음과 기절 폭발음 두 겹을 대신하며, 최대 볼륨에서도 이전 두 겹보다 첫 타격이 약 4dB 작다. -->
+  <!-- 아스포델 1페이즈 무력화음 -->
   <SoundDef>
     <defName>VV_ApocryphaGroggyPhase1</defName>
     <context>MapOnly</context>
@@ -391,7 +389,7 @@
     </subSounds>
   </SoundDef>
 
-  <!-- 2페이즈 무력화(바늘이 모두 꽂힘): 거대한 몸이 무너지는 소리. 바닐라 기절 폭발음을 대신하며 첫 타격이 약 3dB 작다. -->
+  <!-- 아스포델 2페이즈 무력화음 -->
   <SoundDef>
     <defName>VV_ApocryphaGroggyPhase2</defName>
     <context>MapOnly</context>
@@ -409,7 +407,7 @@
     </subSounds>
   </SoundDef>
 
-  <!-- 2페이즈 바늘이 보스에게 꽂힘. 바늘 발사음보다 조금 크게 두어 맞혔다는 손맛을 준다. -->
+  <!-- 고대 엘텍스 바늘 보스 적중음 -->
   <SoundDef>
     <defName>VV_ApocryphaNeedleStick</defName>
     <context>MapOnly</context>
@@ -428,7 +426,7 @@
     </subSounds>
   </SoundDef>
 
-  <!-- 1페이즈 마나 보호장이 다시 차오름: 공격할 틈이 닫혔다는 신호. 보호장 파괴음(1페이즈 무력화)보다 약 6dB 작다. -->
+  <!-- 아스포델 마나 보호장 회복음 -->
   <SoundDef>
     <defName>VV_ApocryphaShieldRestore</defName>
     <context>MapOnly</context>
@@ -446,7 +444,7 @@
     </subSounds>
   </SoundDef>
 
-  <!-- 요정 간섭 성공(결속 해방·마나 역류): 1페이즈 무력화와 비슷한 크기의 큰 반격음. 다른 곳에서 쓰는 VV_Manawave와 따로 둔다. -->
+  <!-- 요정 비비 결속 해방음 -->
   <SoundDef>
     <defName>VV_ApocryphaBondRelease</defName>
     <context>MapOnly</context>
@@ -464,7 +462,7 @@
     </subSounds>
   </SoundDef>
 
-  <!-- 멸망꽃이 피어남(씨앗 착탄). 이전 바닐라 독성 포탄 착탄음과 같은 크기. -->
+  <!-- 멸망꽃 발아음 -->
   <SoundDef>
     <defName>VV_DoomFlowerBloom</defName>
     <context>MapOnly</context>
@@ -483,7 +481,7 @@
     </subSounds>
   </SoundDef>
 
-  <!-- 멸망꽃이 공격으로 부서짐(건물 destroyEffecter). 시들 때(만개·정리)는 소리를 내지 않는다. -->
+  <!-- 멸망꽃 파괴음 -->
   <SoundDef>
     <defName>VV_DoomFlowerDestroy</defName>
     <context>MapOnly</context>
@@ -502,7 +500,7 @@
     </subSounds>
   </SoundDef>
 
-  <!-- 멸망꽃 만개: 맵 전체로 퍼지는 저주. 바닐라 사이킥 파동처럼 카메라 위치와 관계없이 들리게(onCamera) 하고, 그래서 스테레오로 둔다. -->
+  <!-- 멸망꽃 만개 저주음 -->
   <SoundDef>
     <defName>VV_DoomFlowerCurse</defName>
     <context>MapOnly</context>
@@ -521,7 +519,7 @@
     </subSounds>
   </SoundDef>
 
-  <!-- 아스포델 바늘 발사음. 같은 틱에 여러 바늘이 함께 쏘면 한 번만 낸다. -->
+  <!-- 고대 엘텍스 바늘 발사음 -->
   <SoundDef>
     <defName>VV_ApocryphaNeedleFire</defName>
     <context>MapOnly</context>

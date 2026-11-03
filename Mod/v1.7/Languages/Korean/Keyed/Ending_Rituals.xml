@@ -10,7 +10,6 @@
 <VV_FailReason_CoronationNotAnchor>만개 의식으로 개화를 시작한 영원꽃에서만 진행할 수 있습니다.</VV_FailReason_CoronationNotAnchor>
 <VV_FailReason_CoronationLocked>개화 응축이 완료된 뒤에만 진행할 수 있습니다.</VV_FailReason_CoronationLocked>
 
-<!-- 메시지 -->
 
 <!-- 편지 -->
 <VV_Letter_ReturnOfLifeLabel>생명의 회귀: {PAWN_labelShort}</VV_Letter_ReturnOfLifeLabel>

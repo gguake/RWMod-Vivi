@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <!-- 1페이즈 〈요정 비비 결속〉: 플레이어 비비의 결속 헤디프와 같은 라벨. 수치(1,440,000,000)는 CompApocrypha가 보관하고 라벨에만 표시한다. -->
+  <!-- 요정 비비 결속 -->
   <HediffDef>
     <defName>VV_ApocryphaFairyBond</defName>
     <label>vivi fairy</label>
@@ -15,8 +15,7 @@
     <maxSeverity>1</maxSeverity>
   </HediffDef>
 
-  <!-- 2페이즈 〈꽂힌 거대 바늘〉: 바늘이 꽂힐 때마다 한 겹씩 쌓인다(최대 3, 심각도 = 꽂힌 바늘 수). CompApocrypha가 겹 수를 맞추고
-       받는 피해 배율도 적용하며, 헤디프는 겹 수와 배율을 표시한다. 2페이즈 이동속도 보정은 생애 단계 VV_ApocryphaUnbound로 옮겼다. -->
+  <!-- 고대 엘텍스 바늘 -->
   <HediffDef>
     <defName>VV_ApocryphaStuckNeedle</defName>
     <label>ancient eltex needle</label>
@@ -32,9 +31,7 @@
     <maxSeverity>3</maxSeverity>
   </HediffDef>
 
-  <!-- 〈오염된 영원꽃 동화〉: 보스전에서 검은 기운으로 빚어진 거대 말벌(HornetManifestation)이 모두 지닌다.
-       아스포델의 독성 브레스가 남긴 가스에 호위 말벌이 쓰러지지 않도록 독성 환경에 면역이며,
-       죽으면 시체 없이 잿가루로 흩어진다(VVRace.Hediff_CorruptedEverflowerAssimilation → DissolvingHornet). -->
+  <!-- 오염된 영원꽃 동화 -->
   <HediffDef>
     <defName>VV_CorruptedEverflowerAssimilation</defName>
     <label>corrupted everflower assimilation</label>

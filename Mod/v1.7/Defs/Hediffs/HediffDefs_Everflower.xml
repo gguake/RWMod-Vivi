@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
+  <!-- 영원꽃 피로 -->
   <HediffDef>
     <defName>VV_EverflowerImpact</defName>
     <label>everflower fatigue</label>
@@ -30,6 +31,7 @@
     </comps>
   </HediffDef>
   
+  <!-- 영원꽃 공명 -->
   <HediffDef>
     <defName>VV_EverflowerLink</defName>
     <label>everflower resonance</label>
@@ -44,7 +46,6 @@
     <everCurableByItem>false</everCurableByItem>
 
     <initialSeverity>1</initialSeverity>
-    <!-- 5/6단계는 엔딩(영원꽃 제단)에서만 오른다 -->
     <maxSeverity>6</maxSeverity>
 
     <stages>
@@ -145,6 +146,7 @@
     </comps>
   </HediffDef>
 
+  <!-- 영원꽃 잔향 -->
   <HediffDef>
     <defName>VV_EverflowerReverberation</defName>
     <label>everflower reverberation</label>
@@ -170,11 +172,11 @@
     </comps>
   </HediffDef>
 
+  <!-- 요정 비비 결속 -->
   <HediffDef>
     <defName>VV_ViviFairyFollow</defName>
     <label>vivi fairy</label>
     <description>A fairy vivi is bound, aiding learning and focus and sometimes absorbing damage. too many bound fairies steadily increase fatigue.</description>
-    <!-- 영원꽃 6단계 공명자는 아래 modExtension의 페널티 스탯 배율을 뺀 단계를 쓴다(Hediff_ViviFairyFollow.CurStage) -->
     <hediffClass>VVRace.Hediff_ViviFairyFollow</hediffClass>
     <defaultLabelColor>(0,1,1)</defaultLabelColor>
     
@@ -320,7 +322,6 @@
     </comps>
 
     <modExtensions>
-      <!-- 영원꽃 6단계 공명자는 위 단계에서 결속 페널티 배율(아래 스탯)만 뺀 단계를 쓴다. 단계는 코드가 위 stages에서 만든다. -->
       <li Class="VVRace.FairyBondPenaltyExtension">
         <penaltyStatFactors>
           <li>MoveSpeed</li>
@@ -330,6 +331,7 @@
     </modExtensions>
   </HediffDef>
   
+  <!-- 요정화 후유증 -->
   <HediffDef ParentName="DiseaseBase">
     <defName>VV_FairyficationSickness</defName>
     <label>fairyfication sickness</label>

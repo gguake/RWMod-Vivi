@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
 
-<!-- Inspector -->
+<!-- 정보창 -->
 <VV_Inspector_ApocryphaPhase>State: {0}</VV_Inspector_ApocryphaPhase>
 <VV_Inspector_ApocryphaPhase_Bound>Burden of the Past</VV_Inspector_ApocryphaPhase_Bound>
 <VV_Inspector_ApocryphaPhase_Transforming>Breaking free</VV_Inspector_ApocryphaPhase_Transforming>
@@ -13,21 +13,21 @@
 <VV_Inspector_ApocryphaShieldBroken>Mana shield: shattered (restores in {0})</VV_Inspector_ApocryphaShieldBroken>
 <VV_Inspector_ApocryphaChanneling>Usurping the everflower: {0} ({1} left)</VV_Inspector_ApocryphaChanneling>
 
-<!-- Hediff -->
+<!-- 헤디프 -->
 <VV_Hediff_ApocryphaStuckNeedleTip>Lodged needles: {0} / {1}\nDamage taken: {2}</VV_Hediff_ApocryphaStuckNeedleTip>
 <VV_Hediff_ApocryphaFairyBondTip>Bound vivi fairies: {0} / {1}</VV_Hediff_ApocryphaFairyBondTip>
 
-<!-- Alert -->
+<!-- 경고 -->
 <VV_Alert_ApocryphaChanneling>Everflower usurpation {0}</VV_Alert_ApocryphaChanneling>
 <VV_Alert_ApocryphaChannelingDesc>Asphodel is draining the everflower's mana ({PROGRESS}, {TIMELEFT} remaining).
 \nIf she drains all of it, the bloom ritual fails.</VV_Alert_ApocryphaChannelingDesc>
 
-<!-- Letter -->
+<!-- 편지 -->
 <VV_Letter_ApocryphaUnboundLabel>Rampage</VV_Letter_ApocryphaUnboundLabel>
 <VV_Letter_ApocryphaUnbound>The last of the bound fairy vivis have been freed. Having lost all reason and transformed into a titanic hornet, Asphodel charges toward the everflower. Lay the empress bound to the past to rest, and usher in a new era.
 \nThe ancient eltex needles wielded by Asphodel have lodged in the ground. They can be reactivated and fired. Though dangerous to handle, they can deal heavy damage and incapacitate Asphodel if they hit her.</VV_Letter_ApocryphaUnbound>
 
-<!-- Message -->
+<!-- 메시지 -->
 <VV_Message_ApocryphaBondReleased>A large number of fairy vivis bound to Asphodel have been freed.</VV_Message_ApocryphaBondReleased>
 <VV_Message_ApocryphaChannelInterrupted>Asphodel's usurpation of the everflower was interrupted.</VV_Message_ApocryphaChannelInterrupted>
 <VV_Message_ApocryphaEscapedRoofCollapse>Asphodel teleported away from a roof collapse.</VV_Message_ApocryphaEscapedRoofCollapse>
@@ -38,11 +38,11 @@
 <VV_Message_ApocryphaNeedlesPulled>Asphodel tore the lodged needles out and scattered them across the ground.</VV_Message_ApocryphaNeedlesPulled>
 <VV_Message_ApocryphaNeedleActivated>An ancient needle activates and aims at {PAWN_labelShort}.</VV_Message_ApocryphaNeedleActivated>
 
-<!-- Float menu -->
+<!-- 우클릭 메뉴 -->
 <VV_FloatMenu_ActivateApocryphaNeedle>Activate ancient eltex needle</VV_FloatMenu_ActivateApocryphaNeedle>
 <VV_FailReason_ApocryphaNeedleDormant>cannot be activated yet</VV_FailReason_ApocryphaNeedleDormant>
 
-<!-- Text mote -->
+<!-- 텍스트 모트 -->
 <VV_TextMote_ApocryphaStunImmune>Stun immune</VV_TextMote_ApocryphaStunImmune>
 
 </LanguageData>

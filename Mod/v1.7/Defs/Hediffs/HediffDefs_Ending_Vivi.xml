@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <!-- 6단계 영원꽃의 영구 보상. 엔딩을 완료한 영원꽃이 있는 맵의 플레이어 성체 비비에게 주기적으로 갱신되며(EverflowerBlessingUtility),
-       맵을 떠나 갱신되지 않으면 하루 뒤 사라진다. -->
+  <!-- 영원꽃의 축복 -->
   <HediffDef>
     <defName>VV_EverflowerBlessing</defName>
     <label>everflower's blessing</label>
@@ -25,9 +24,7 @@
     </comps>
   </HediffDef>
 
-  <!-- 〈영원꽃 완전 동화〉: 〈만개 의식〉의 공명자(로열 비비)가 의식이 진행되기 시작하면 걸린다(VVRace.RitualBehaviorWorker_GrandAttunement).
-       공명자는 아스포델을 토벌할 때까지 제단 안에 동면관처럼 정지된 채 보관되고(VVRace.Building_EverflowerAltar), 영원꽃이 그 모습을 꽃 앞 공중에 그린다.
-       (요정 실체화의 여파 헤디프 VV_EverflowerAssimilation〈영원꽃 동화〉와는 다른 헤디프다) -->
+  <!-- 영원꽃 완전 동화 -->
   <HediffDef>
     <defName>VV_EverflowerFullAssimilation</defName>
     <label>everflower full assimilation</label>
@@ -40,10 +37,8 @@
     <everCurableByItem>false</everCurableByItem>
   </HediffDef>
 
-  <!-- 엔딩 이후 보상: 〈여왕의 대관식〉을 마친 비비의 권능.
-       능력 Def는 Abilities/Abilities_Queen.xml, 연출은 Effects/Ending_Queen.xml에 있다. -->
 
-  <!-- ===== 여왕의 권능: 능력 두 개를 주고, 생명 공명은 Hediff_EverflowerQueen의 사망 통지로 처리한다 ===== -->
+  <!-- 영원의 여제 -->
   <HediffDef>
     <defName>VV_EverflowerQueen</defName>
     <label>eternal empress</label>

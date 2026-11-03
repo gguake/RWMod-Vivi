@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
+  <!-- 선고의 바늘 -->
   <ThingDef ParentName="EtherealThingBase">
     <defName>VV_QueenVerdictNeedle</defName>
     <label>verdict needle</label>
@@ -29,6 +30,7 @@
     </comps>
   </ThingDef>
 
+  <!-- 보호막 기본형 -->
   <ThingDef Name="VV_ShieldDomeBase" Abstract="True">
     <category>Building</category>
     <thingClass>VVRace.ViviShieldDome</thingClass>
@@ -60,6 +62,7 @@
     </building>
   </ThingDef>
 
+  <!-- 하늘 방패 -->
   <ThingDef ParentName="VV_ShieldDomeBase">
     <defName>VV_SkyShield</defName>
     <label>sky shield</label>
@@ -82,6 +85,7 @@
     </modExtensions>
   </ThingDef>
 
+  <!-- 마나 보호막 -->
   <ThingDef ParentName="VV_ShieldDomeBase">
     <defName>VV_QueenManaBarrierShield</defName>
     <label>mana barrier</label>
@@ -105,6 +109,7 @@
     </modExtensions>
   </ThingDef>
 
+  <!-- 안식의 바람 -->
   <ThingDef ParentName="EtherealThingBase">
     <defName>VV_WindOfRest</defName>
     <label>wind of rest</label>
@@ -114,6 +119,7 @@
     <selectable>false</selectable>
   </ThingDef>
 
+  <!-- 소멸하는 거대 말벌 -->
   <ThingDef ParentName="EtherealThingBase">
     <defName>VV_DissolvingHornet</defName>
     <label>titanic hornet</label>

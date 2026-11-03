@@ -9,6 +9,7 @@
     <natural>false</natural>
   </GameConditionDef>
 
+  <!-- 불길한 정적 -->
   <GameConditionDef>
     <defName>VV_OminousSilence</defName>
     <conditionClass>GameCondition</conditionClass>
@@ -20,6 +21,7 @@
     <canBePermanent>false</canBePermanent>
   </GameConditionDef>
 
+  <!-- 금빛 꽃가루 안개 -->
   <GameConditionDef>
     <defName>VV_GoldenBloom</defName>
     <conditionClass>VVRace.GameCondition_GoldenBloom</conditionClass>
@@ -29,7 +31,6 @@
     <natural>false</natural>
     <displayOnUI>true</displayOnUI>
 
-    <!-- 엔딩 보상이므로 시나리오의 영구 컨디션으로 고를 수 없게 한다(엔딩 퀘스트는 GameCondition.Permanent로 직접 영구화한다). -->
     <canBePermanent>false</canBePermanent>
     <showPermanentInTooltip>false</showPermanentInTooltip>
     <preventIncidents>false</preventIncidents>

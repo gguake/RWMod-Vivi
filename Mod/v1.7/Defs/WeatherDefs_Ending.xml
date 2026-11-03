@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
+  <!-- 금빛 꽃가루 안개 -->
   <WeatherDef>
     <defName>VV_GoldenBloomMist</defName>
     <label>golden pollen mist</label>

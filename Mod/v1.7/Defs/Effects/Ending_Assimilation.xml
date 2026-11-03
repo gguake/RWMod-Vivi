@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <!-- 영원꽃 꽃봉오리 ↔ 공명자 사이를 흐르는 금빛 입자(Hediff_EverflowerAssimilation이 속도·방향을 정해 생성) -->
+  <!-- 영원꽃 동화 입자 -->
   <FleckDef ParentName="FleckBase_Thrown">
     <defName>VV_Fleck_AssimilationMote</defName>
     <altitudeLayer>MoteOverhead</altitudeLayer>
@@ -15,7 +15,7 @@
     </graphicData>
   </FleckDef>
 
-  <!-- 소멸하는 아스포델에게서 흩어져 공명자에게 스며드는 영혼 입자(DyingApocrypha가 공명자 쪽으로 날린다) -->
+  <!-- 아스포델 영혼 입자 -->
   <FleckDef ParentName="FleckBase_Thrown">
     <defName>VV_Fleck_AssimilationSoul</defName>
     <altitudeLayer>MoteOverhead</altitudeLayer>
@@ -31,7 +31,7 @@
     </graphicData>
   </FleckDef>
 
-  <!-- 동화 시작: 공명자 둘레에 금빛 섬광과 반짝임 -->
+  <!-- 영원꽃 동화 시작 효과 -->
   <EffecterDef>
     <defName>VV_Effecter_AssimilationBegin</defName>
     <maintainTicks>10</maintainTicks>
@@ -59,7 +59,7 @@
     </children>
   </EffecterDef>
 
-  <!-- 아스포델의 마지막 영혼까지 스며든 공명자가 크게 빛남 -->
+  <!-- 영원꽃 동화 흡수 효과 -->
   <EffecterDef>
     <defName>VV_Effecter_AssimilationAbsorb</defName>
     <maintainTicks>12</maintainTicks>

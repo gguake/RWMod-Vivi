@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
 
-<!-- Inspector -->
+<!-- 정보창 -->
 <VV_Inspector_ApocryphaPhase>상태: {0}</VV_Inspector_ApocryphaPhase>
 <VV_Inspector_ApocryphaPhase_Bound>과거의 짐</VV_Inspector_ApocryphaPhase_Bound>
 <VV_Inspector_ApocryphaPhase_Transforming>해방 중</VV_Inspector_ApocryphaPhase_Transforming>
@@ -14,21 +14,21 @@
 <VV_Inspector_ApocryphaShieldBroken>마나 보호장: 파괴됨 (복구까지 {0})</VV_Inspector_ApocryphaShieldBroken>
 <VV_Inspector_ApocryphaChanneling>영원꽃 찬탈 중: {0} (남은 시간 {1})</VV_Inspector_ApocryphaChanneling>
 
-<!-- Hediff -->
+<!-- 헤디프 -->
 <VV_Hediff_ApocryphaStuckNeedleTip>꽂힌 바늘: {0} / {1}\n받는 피해: {2}</VV_Hediff_ApocryphaStuckNeedleTip>
 <VV_Hediff_ApocryphaFairyBondTip>결속된 요정 비비: {0} / {1}</VV_Hediff_ApocryphaFairyBondTip>
 
-<!-- Alert -->
+<!-- 경고 -->
 <VV_Alert_ApocryphaChanneling>영원꽃 찬탈 {0}</VV_Alert_ApocryphaChanneling>
 <VV_Alert_ApocryphaChannelingDesc>아스포델이 영원꽃의 마나를 흡수하고 있습니다({PROGRESS}, 남은 시간 {TIMELEFT}).
 \n마나를 모두 빼앗기면 개화 의식이 실패합니다.</VV_Alert_ApocryphaChannelingDesc>
 
-<!-- Letter -->
+<!-- 편지 -->
 <VV_Letter_ApocryphaUnboundLabel>폭주</VV_Letter_ApocryphaUnboundLabel>
 <VV_Letter_ApocryphaUnbound>마지막으로 결속되어있던 요정 비비들이 해방되었습니다. 완전히 이성을 잃고 거대한 말벌의 모습으로 변한 아스포델이 영원꽃을 향해 돌진합니다. 과거에 묶인 여제에게 안식을 주고 새로운 시대로 나아가세요.
 \n아스포델이 다루던 고대 엘텍스 바늘이 바닥에 꽂혔습니다. 이 바늘은 다시 활성화해 발사할 수 있으며 다루기 위험하지만 아스포델에게 적중시키면 큰 피해를 입히고 무력화 할 수 있습니다.</VV_Letter_ApocryphaUnbound>
 
-<!-- Message -->
+<!-- 메시지 -->
 <VV_Message_ApocryphaBondReleased>아스포델에게 결속된 요정 비비들이 대량으로 해방되었습니다.</VV_Message_ApocryphaBondReleased>
 <VV_Message_ApocryphaChannelInterrupted>아스포델의 영원꽃 찬탈이 중단되었습니다.</VV_Message_ApocryphaChannelInterrupted>
 <VV_Message_ApocryphaEscapedRoofCollapse>아스포델이 붕괴를 피해 순간이동했습니다.</VV_Message_ApocryphaEscapedRoofCollapse>
@@ -43,7 +43,7 @@
 <VV_FloatMenu_ActivateApocryphaNeedle>고대 엘텍스 바늘 활성화</VV_FloatMenu_ActivateApocryphaNeedle>
 <VV_FailReason_ApocryphaNeedleDormant>아직 활성화 할 수 없음</VV_FailReason_ApocryphaNeedleDormant>
 
-<!-- Text mote -->
+<!-- 텍스트 모트 -->
 <VV_TextMote_ApocryphaStunImmune>기절 면역</VV_TextMote_ApocryphaStunImmune>
 
 </LanguageData>

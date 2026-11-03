@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
+  <!-- 영원꽃 제단 -->
   <ThingDef ParentName="BuildingBase">
     <defName>VV_EverflowerAltar</defName>
     <label>everflower altar</label>
@@ -19,12 +20,9 @@
     </graphicData>
 
     <uiOrder>2405</uiOrder>
-    <!-- 바닐라 아이콘 배율은 uiIconScale × (drawSize / size) = 이 값 × 2다. 그림은 텍스처 가운데 약 49%만 차지하므로 0.9면 아이콘의 약 88%를 채운다. -->
     <uiIconScale>0.9</uiIconScale>
     <altitudeLayer>Building</altitudeLayer>
     <passability>Standable</passability>
-    <!-- 의식 등으로 올라설 수는 있지만 지름길로 가로지르지 못하게 칸마다 큰 이동 비용을 매긴다.
-         여러 칸짜리 건물은 같은 건물 칸끼리 이동할 때 비용을 건너뛰므로(pathCostIgnoreRepeat) 이를 끈다. -->
     <pathCost>100</pathCost>
     <pathCostIgnoreRepeat>false</pathCostIgnoreRepeat>
     <size>(5,5)</size>
@@ -52,11 +50,8 @@
     <building>
       <isInert>true</isInert>
       <ai_neverTrashThis>true</ai_neverTrashThis>
-      <!-- 영원꽃(자연 명상 초점)과 함께 쓰는 고대 제단이라 인공 구조물로 치지 않는다 -->
       <artificialForMeditationPurposes>false</artificialForMeditationPurposes>
-      <!-- 습격·보스가 부수지 못한다. 꽃으로 향한 비화염 피해는 화분(제단)으로 넘어가므로 안치된 영원꽃도 사실상 보호된다. -->
       <canBeDamagedByAttacks>false</canBeDamagedByAttacks>
-      <!-- 다시 구하기 어려운 코어는 어떤 경우에도 돌려준다. -->
       <forcedCostLeavings>
         <li>VV_AncientAmberCore</li>
       </forcedCostLeavings>
@@ -69,7 +64,6 @@
       </li>
     </comps>
 
-    <!-- 비비 연방의 밀서를 받기 전에는 건축 메뉴에 보이지 않는다(PlaceWorker_EverflowerAltar.IsBuildDesignatorVisible). -->
     <placeWorkers>
       <li>VVRace.PlaceWorker_EverflowerAltar</li>
     </placeWorkers>
@@ -77,8 +71,7 @@
     <designationCategory>VV_Bulidings</designationCategory>
   </ThingDef>
 
-  <!-- 고대 호박 코어: 제단 건설에 필요한 유일 재료. 밀서 퀘스트 동안 통신기로 비비 연방에 의뢰한 3성 무작위 퀘스트의 보상으로만 얻으며,
-       게임에 하나만 있을 수 있다(코어나 제단이 남아 있으면 다시 의뢰할 수 없다, VVRace.AmberCoreUtility). -->
+  <!-- 고대 호박 코어 -->
   <ThingDef ParentName="ResourceBase">
     <defName>VV_AncientAmberCore</defName>
     <label>ancient amber core</label>
@@ -108,14 +101,10 @@
       <DeteriorationRate>0</DeteriorationRate>
     </statBases>
 
-    <!-- 원자재(ResourcesRaw) 아래 분류(비비 자원)에 두면 원자재 분류로 재고를 고르는 일반 상인(궤도 대량 상선 등)과
-         원자재 분류로 내용물을 고르는 일반 전리품(오디세이 고장 난 수송 포드 등)에 섞여 나온다.
-         코어는 의뢰 보상으로만 나오도록 그런 생성기가 쓰지 않는 기타 물품 분류에 둔다. -->
     <thingCategories>
       <li>ItemsMisc</li>
     </thingCategories>
 
-    <!-- 사고팔거나 선물할 수 없다. 일반 보상으로는 나오지 않는다. -->
     <tradeability>None</tradeability>
     <thingSetMakerTags>
       <li>NonStandardReward</li>

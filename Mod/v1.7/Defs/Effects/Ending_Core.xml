@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <!-- 엔딩 〈영원한 봄의 제국〉: 영원꽃 꽃봉오리에서 퍼지는 황금 파동 고리 (가산, 빠르게 거대화해 화면을 쓸고 지나간다).
-       첫 겹은 VV_Effecter_EndingGoldenWave가, 나머지 두 겹은 C#(ViviEndingQuest)이 20틱 간격으로 낸다. -->
+  <!-- 엔딩 황금 파동 고리 -->
   <FleckDef ParentName="FleckBase">
     <defName>VV_Fleck_GoldenWaveRing</defName>
     <altitudeLayer>MoteOverhead</altitudeLayer>
@@ -18,7 +17,7 @@
     </graphicData>
   </FleckDef>
 
-  <!-- 개화 순간 꽃봉오리의 거대한 금빛 섬광 -->
+  <!-- 엔딩 금빛 섬광 -->
   <FleckDef ParentName="FleckBase">
     <defName>VV_Fleck_EndingGoldenFlash</defName>
     <altitudeLayer>MoteOverhead</altitudeLayer>
@@ -35,7 +34,7 @@
     </graphicData>
   </FleckDef>
 
-  <!-- 꽃잎 폭풍: 카메라 시야 곳곳에서 떨어지며 회전하는 영원꽃 꽃잎 (C#에서 색·속도·회전을 정해 직접 생성) -->
+  <!-- 엔딩 꽃잎 폭풍 -->
   <FleckDef ParentName="FleckBase_Thrown">
     <defName>VV_Fleck_EndingPetal</defName>
     <altitudeLayer>MoteOverhead</altitudeLayer>
@@ -50,7 +49,7 @@
     </graphicData>
   </FleckDef>
 
-  <!-- 〈황금빛 꽃안개〉 날씨의 꽃잎: 카메라 시야 곳곳에서 생겨 바람을 타고 비스듬히 흩날린다 (WeatherOverlay_GoldenPetals가 색·속도·회전을 정해 생성) -->
+  <!-- 황금빛 꽃안개 꽃잎 -->
   <FleckDef ParentName="VV_FleckEverflowerPetalBase">
     <defName>VV_Fleck_GoldenBloomPetal</defName>
     <fadeInTime>0.6</fadeInTime>
@@ -61,7 +60,7 @@
     </graphicData>
   </FleckDef>
 
-  <!-- 엔딩 개화 순간: 소리 + 금빛 섬광 + 첫 황금 파동 + 왜곡 파동 + 사방으로 터지는 꽃잎 (꽃봉오리 오프셋에서 1회 Spawn) -->
+  <!-- 영원꽃 최종 개화 효과 -->
   <EffecterDef>
     <defName>VV_Effecter_EndingGoldenWave</defName>
     <children>

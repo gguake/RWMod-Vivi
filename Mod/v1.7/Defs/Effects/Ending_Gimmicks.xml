@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-  <!-- 아스포델 1페이즈 기믹 연출. VFX 텍스처는 검정 배경 RGB라 가산(MoteGlow) 셰이더로만 쓴다.
-       흰색 텍스처(VV_Scent*)는 스프레이어의 color로 금빛/자홍으로 물들인다.
-       다른 모듈과 이름이 겹치지 않도록 이 파일의 플렉은 모두 VV_Fleck_Gimmick 접두사를 쓴다. -->
 
-  <!-- ======================== Flecks ======================== -->
 
-  <!-- 네 갈래 반짝임 -->
+  <!-- 요정꽃 반짝임 -->
   <FleckDef ParentName="FleckBase_Thrown">
     <defName>VV_Fleck_GimmickTwinkle</defName>
     <altitudeLayer>MoteOverhead</altitudeLayer>
@@ -20,7 +16,7 @@
     </graphicData>
   </FleckDef>
 
-  <!-- 떠오르는 작은 빛 알갱이 -->
+  <!-- 요정꽃 빛 입자 -->
   <FleckDef ParentName="FleckBase_Thrown">
     <defName>VV_Fleck_GimmickMote</defName>
     <altitudeLayer>MoteOverhead</altitudeLayer>
@@ -34,7 +30,7 @@
     </graphicData>
   </FleckDef>
 
-  <!-- 꽃 주변의 은은한 후광 -->
+  <!-- 요정꽃 후광 -->
   <FleckDef ParentName="FleckBase_Thrown">
     <defName>VV_Fleck_GimmickHalo</defName>
     <altitudeLayer>MoteOverheadLow</altitudeLayer>
@@ -49,7 +45,7 @@
     </graphicData>
   </FleckDef>
 
-  <!-- 멸망꽃 주변으로 천천히 퍼지는 연기 고리 -->
+  <!-- 멸망꽃 연기 고리 -->
   <FleckDef ParentName="FleckBase_Thrown">
     <defName>VV_Fleck_GimmickSmokeRing</defName>
     <altitudeLayer>MoteOverheadLow</altitudeLayer>
@@ -64,7 +60,7 @@
     </graphicData>
   </FleckDef>
 
-  <!-- 꽃잎(금빛 원본, 멸망꽃은 자홍으로 물들임) -->
+  <!-- 기믹 꽃잎 -->
   <FleckDef ParentName="FleckBase_Thrown">
     <defName>VV_Fleck_GimmickPetal</defName>
     <altitudeLayer>MoteOverhead</altitudeLayer>
@@ -78,7 +74,7 @@
     </graphicData>
   </FleckDef>
 
-  <!-- 짧은 섬광 -->
+  <!-- 기믹 섬광 -->
   <FleckDef ParentName="FleckBase_Thrown">
     <defName>VV_Fleck_GimmickFlash</defName>
     <altitudeLayer>MoteOverhead</altitudeLayer>
@@ -93,7 +89,7 @@
     </graphicData>
   </FleckDef>
 
-  <!-- 요정 출현 고리(꽃잎 달린 금빛 고리), 빠르게 퍼진다 -->
+  <!-- 요정 출현 고리 -->
   <FleckDef ParentName="FleckBase_Thrown">
     <defName>VV_Fleck_GimmickPhaseRing</defName>
     <altitudeLayer>MoteOverheadLow</altitudeLayer>
@@ -108,7 +104,7 @@
     </graphicData>
   </FleckDef>
 
-  <!-- 사출탄 폭발 고리: 폭발 반경(2.4칸)만큼 퍼진다 -->
+  <!-- 요정 비비 사출탄 폭발 고리 -->
   <FleckDef ParentName="FleckBase_Thrown">
     <defName>VV_Fleck_GimmickBlastRing</defName>
     <altitudeLayer>MoteOverhead</altitudeLayer>
@@ -124,7 +120,7 @@
     </graphicData>
   </FleckDef>
 
-  <!-- 마나 역류 파동 고리: 크게 퍼진다 -->
+  <!-- 마나 역류 파동 고리 -->
   <FleckDef ParentName="FleckBase_Thrown">
     <defName>VV_Fleck_GimmickWaveRing</defName>
     <altitudeLayer>MoteOverhead</altitudeLayer>
@@ -140,7 +136,7 @@
     </graphicData>
   </FleckDef>
 
-  <!-- 멸망꽃 자홍 충격 고리(작은 것) -->
+  <!-- 멸망꽃 자홍 고리 -->
   <FleckDef ParentName="FleckBase_Thrown">
     <defName>VV_Fleck_GimmickDoomRing</defName>
     <altitudeLayer>MoteOverheadLow</altitudeLayer>
@@ -155,7 +151,7 @@
     </graphicData>
   </FleckDef>
 
-  <!-- 멸망꽃 씨앗 사출: 보스 둘레로 번지는 굴절 충격파(VV_ShockWave 셰이더). 빛은 옅게 두고 장면 왜곡 위주로 보여 준다. -->
+  <!-- 멸망꽃 씨앗 사출 충격파 -->
   <FleckDef ParentName="FleckBase">
     <defName>VV_Fleck_GimmickDoomLaunchWave</defName>
     <altitudeLayer>MoteOverhead</altitudeLayer>
@@ -182,8 +178,7 @@
     </graphicData>
   </FleckDef>
 
-  <!-- 멸망꽃 만개: 맵 전체로 번지는 저주 파동(약 60칸). 텍스처를 키우면 깨져 보이므로 VV_ShockWave 셰이더로 그린다.
-       불길하게 보이도록 빛은 어두운 자홍·포도주색으로 낮추고 _Darken으로 파면 둘레·뒤를 연기 같은 그림자로 덮는다. -->
+  <!-- 멸망꽃 만개 파동 -->
   <FleckDef ParentName="FleckBase_Thrown">
     <defName>VV_Fleck_GimmickDoomWave</defName>
     <altitudeLayer>MoteOverhead</altitudeLayer>
@@ -211,7 +206,7 @@
     </graphicData>
   </FleckDef>
 
-  <!-- 마나 역류 거대 섬광 -->
+  <!-- 마나 역류 섬광 -->
   <FleckDef ParentName="FleckBase_Thrown">
     <defName>VV_Fleck_GimmickBackflowBurst</defName>
     <altitudeLayer>MoteOverhead</altitudeLayer>
@@ -227,7 +222,7 @@
     </graphicData>
   </FleckDef>
 
-  <!-- 비비→보스 마나 역류 빔 플래시(FleckMaker.ConnectingLine: 텍스처 U가 선 방향) -->
+  <!-- 마나 역류 광선 -->
   <FleckDef ParentName="FleckBase">
     <defName>VV_Fleck_GimmickBackflowBeam</defName>
     <altitudeLayer>MoteOverhead</altitudeLayer>
@@ -245,7 +240,7 @@
     </graphicData>
   </FleckDef>
 
-  <!-- 멸망꽃 미아즈마(자홍빛 연기, 알파 혼합) -->
+  <!-- 멸망꽃 독기 -->
   <FleckDef ParentName="FleckBase_Thrown">
     <defName>VV_Fleck_GimmickDoomMiasma</defName>
     <altitudeLayer>MoteOverhead</altitudeLayer>
@@ -259,11 +254,8 @@
     </graphicData>
   </FleckDef>
 
-  <!-- ======================== 요정 비비 사출탄 ======================== -->
 
-  <!-- 착탄 연꽃 문양: 조준 표식(VV_Mote_ApocryphaAimTarget)의 연꽃이 다 핀 모양으로 번쩍 켜져 돌며 퍼진다.
-       _Duration을 아주 짧게 두어 처음부터 만개·발사 직전 밝기로 그리고, 흐린 윤곽은 끈다.
-       바닐라는 MoteThrown만 rotationRate를 적용하므로 속도 0인 MoteThrown으로 둔다. 크기 = drawSize × (1 + growthRate × 초). -->
+  <!-- 요정 비비 사출탄 착탄 연꽃 -->
   <ThingDef ParentName="MoteBase">
     <defName>VV_Mote_GimmickLotusBurst</defName>
     <thingClass>MoteThrown</thingClass>
@@ -295,8 +287,7 @@
     </graphicData>
   </ThingDef>
 
-  <!-- 착탄 별빛: 번쩍였다가 돌며 줄어드는 네 갈래 별(두 장을 45° 엇갈려 겹치면 여덟 갈래).
-       폭발 빛(바닐라 폭발 칸 플렉은 약 1초 밝다)에 묻히지 않도록 폭발이 잦아들 때 마무리 반짝임으로 쓴다. -->
+  <!-- 별빛 반짝임 -->
   <FleckDef ParentName="FleckBase_Thrown">
     <defName>VV_Fleck_GimmickStarGlint</defName>
     <altitudeLayer>MoteOverhead</altitudeLayer>
@@ -312,8 +303,7 @@
     </graphicData>
   </FleckDef>
 
-  <!-- 착탄 요정 가루: 사방으로 퍼진 뒤 위쪽 가속으로 휘어 떠오르는 빛 알갱이 무리(스프레이어 color로 파스텔 물들임).
-       반짝임(VV_ScentTwinkle)은 빛줄기가 가늘어 낮에는 점으로만 보이므로 알갱이 무리 텍스처를 쓴다. -->
+  <!-- 요정 가루 -->
   <FleckDef ParentName="FleckBase_Thrown">
     <defName>VV_Fleck_GimmickFairyDust</defName>
     <altitudeLayer>MoteOverhead</altitudeLayer>
@@ -328,7 +318,7 @@
     </graphicData>
   </FleckDef>
 
-  <!-- 발사: 보스 몸통에서 금빛 분출 -->
+  <!-- 요정 비비 사출탄 발사 효과 -->
   <EffecterDef>
     <defName>VV_Effecter_FairyShellLaunch</defName>
     <children>
@@ -380,9 +370,7 @@
     </children>
   </EffecterDef>
 
-  <!-- 착탄: 금빛 섬광 + 폭발 반경 고리 + 요정 출현 고리 + 꽃잎. 소리는 폭발 피해(VV_FairyBlast)의 폭발음에 요정 반짝임까지 담겨 있어 따로 내지 않는다.
-       그 위에 요정다운 연출을 덧입힌다: 연꽃 문양 개화(0틱) + 파스텔 요정 가루(0틱) + 피어오르는 빛 알갱이(30·46틱)
-       + 폭발이 잦아들 때 남은 반짝임(40·50틱)과 마무리 별빛(62틱). 지연 자식이 모두 터지도록 66틱 유지한다. -->
+  <!-- 요정 비비 사출탄 착탄 효과 -->
   <EffecterDef>
     <defName>VV_Effecter_FairyShellImpact</defName>
     <maintainTicks>66</maintainTicks>
@@ -441,7 +429,6 @@
         <scale>0.3~0.6</scale>
         <color>(1, 0.9, 0.55, 1)</color>
       </li>
-      <!-- 요정 연출: 연꽃 문양 개화 -->
       <li>
         <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
         <moteDef>VV_Mote_GimmickLotusBurst</moteDef>
@@ -450,7 +437,6 @@
         <rotation>0</rotation>
         <rotationRate>45~70</rotationRate>
       </li>
-      <!-- 요정 연출: 파스텔 요정 가루(분홍·하늘·연보라) -->
       <li>
         <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
         <fleckDef>VV_Fleck_GimmickFairyDust</fleckDef>
@@ -496,7 +482,6 @@
         <scale>0.9~1.4</scale>
         <color>(0.8, 0.68, 1, 1)</color>
       </li>
-      <!-- 요정 연출: 폭발이 잦아들 때 곳곳에 남은 반짝임(40·50틱) -->
       <li>
         <subEffecterClass>SubEffecter_SprayerTriggeredDelayed</subEffecterClass>
         <fleckDef>VV_Fleck_GimmickStarGlint</fleckDef>
@@ -523,7 +508,6 @@
         <scale>1.2~1.6</scale>
         <color>(1, 0.95, 0.85, 1)</color>
       </li>
-      <!-- 요정 연출: 마무리 별빛(섬광 심 + 두 장 겹친 큰 별 + 45° 엇갈린 작은 별). 같은 별을 겹쳐 가는 빛줄기를 밝힌다. -->
       <li>
         <subEffecterClass>SubEffecter_SprayerTriggeredDelayed</subEffecterClass>
         <fleckDef>VV_Fleck_GimmickFlash</fleckDef>
@@ -565,7 +549,6 @@
         <scale>1.8</scale>
         <color>(1, 1, 1, 0.9)</color>
       </li>
-      <!-- 요정 연출: 폭발 범위 곳곳에서 피어오르는 파스텔 빛 알갱이(30틱 분홍, 46틱 하늘) -->
       <li>
         <subEffecterClass>SubEffecter_SprayerTriggeredDelayed</subEffecterClass>
         <fleckDef>VV_Fleck_GimmickMote</fleckDef>
@@ -601,8 +584,8 @@
     </children>
   </EffecterDef>
 
-  <!-- ======================== 씨앗 ======================== -->
 
+  <!-- 멸망꽃 씨앗 발사 효과 -->
   <EffecterDef>
     <defName>VV_Effecter_DoomSeedLaunch</defName>
     <children>
@@ -649,6 +632,7 @@
     </children>
   </EffecterDef>
 
+  <!-- 요정꽃 씨앗 발사 효과 -->
   <EffecterDef>
     <defName>VV_Effecter_FairySeedLaunch</defName>
     <children>
@@ -686,7 +670,7 @@
     </children>
   </EffecterDef>
 
-  <!-- 꽃을 피우지 못한 씨앗(방어막에 막힘·보스 결속 해제·빈 칸 없음) -->
+  <!-- 꽃 씨앗 소멸 효과 -->
   <EffecterDef>
     <defName>VV_Effecter_SeedFizzle</defName>
     <children>
@@ -714,7 +698,7 @@
     </children>
   </EffecterDef>
 
-  <!-- 멸망꽃이 피어남: 착탄·피어남 소리 + 자홍 충격 고리 + 미아즈마 + 흙먼지 -->
+  <!-- 멸망꽃 발아 효과 -->
   <EffecterDef>
     <defName>VV_Effecter_SeedBloomDoom</defName>
     <maintainTicks>20</maintainTicks>
@@ -778,7 +762,7 @@
     </children>
   </EffecterDef>
 
-  <!-- 요정꽃이 피어남: 요정 출현음 + 금빛 고리 + 반짝임 + 꽃잎 -->
+  <!-- 요정꽃 발아 효과 -->
   <EffecterDef>
     <defName>VV_Effecter_SeedBloomFairy</defName>
     <maintainTicks>20</maintainTicks>
@@ -831,9 +815,8 @@
     </children>
   </EffecterDef>
 
-  <!-- ======================== 꽃 유지/소멸 ======================== -->
 
-  <!-- 멸망꽃 유지: 자홍 후광 + 피어오르는 미아즈마 + 자홍 빛 알갱이 + 이따금 퍼지는 연기 고리 -->
+  <!-- 멸망꽃 기운 효과 -->
   <EffecterDef>
     <defName>VV_Effecter_DoomFlowerAura</defName>
     <children>
@@ -891,7 +874,7 @@
     </children>
   </EffecterDef>
 
-  <!-- 요정꽃 유지: 금빛 후광 + 주변 반짝임 + 피어오르는 청록 빛 알갱이 -->
+  <!-- 요정꽃 기운 효과 -->
   <EffecterDef>
     <defName>VV_Effecter_FairyFlowerAura</defName>
     <children>
@@ -935,8 +918,7 @@
     </children>
   </EffecterDef>
 
-  <!-- 멸망꽃이 시듦(만개 후·파괴·2페이즈 정리). 소리는 내지 않는다: 만개는 저주 소리가, 정리는 전환 연출이 덮고,
-       공격으로 부서질 때는 건물의 destroyEffecter(VV_Effecter_DoomFlowerDestroy)가 따로 낸다. -->
+  <!-- 멸망꽃 시듦 효과 -->
   <EffecterDef>
     <defName>VV_Effecter_DoomFlowerWither</defName>
     <maintainTicks>15</maintainTicks>
@@ -981,8 +963,7 @@
     </children>
   </EffecterDef>
 
-  <!-- 멸망꽃이 공격으로 부서짐: 부서지는 소리 + 흙먼지(destroyEffecter를 두면 바닐라 파괴 흙먼지가 빠지므로 대신 낸다).
-       꽃잎·미아즈마는 Building_ApocryphaFlower.Kill이 시듦 이펙트로 낸다. -->
+  <!-- 멸망꽃 파괴 효과 -->
   <EffecterDef>
     <defName>VV_Effecter_DoomFlowerDestroy</defName>
     <children>
@@ -1002,7 +983,7 @@
     </children>
   </EffecterDef>
 
-  <!-- 멸망꽃 만개: 맵 전체로 번지는 자홍 저주 파동 + 섬광 + 왜곡 + 카메라 흔들림 -->
+  <!-- 멸망꽃 만개 저주 효과 -->
   <EffecterDef>
     <defName>VV_Effecter_DoomBloomCurse</defName>
     <maintainTicks>60</maintainTicks>
@@ -1067,7 +1048,7 @@
     </children>
   </EffecterDef>
 
-  <!-- 요정꽃이 사라짐(결속·수명 종료·정리) -->
+  <!-- 요정꽃 소멸 효과 -->
   <EffecterDef>
     <defName>VV_Effecter_FairyFlowerVanish</defName>
     <maintainTicks>15</maintainTicks>
@@ -1120,9 +1101,8 @@
     </children>
   </EffecterDef>
 
-  <!-- ======================== 요정꽃 결속 · 요정 간섭 ======================== -->
 
-  <!-- 결속 작업 중(A = 비비, B = 요정꽃): 공명음 + 꽃 반짝임 + 꽃에서 비비로 흐르는 빛 -->
+  <!-- 요정꽃 결속 효과 -->
   <EffecterDef>
     <defName>VV_Effecter_FairyFlowerBonding</defName>
     <children>
@@ -1184,7 +1164,7 @@
     </children>
   </EffecterDef>
 
-  <!-- 요정 간섭 비비를 감싸 일렁이는 빛(Hediff_FairyInterference가 유지한다) -->
+  <!-- 요정 간섭 빛무리 -->
   <ThingDef ParentName="MoteBase">
     <defName>VV_Mote_FairyInterferenceShimmer</defName>
     <thingClass>MoteAttached</thingClass>
@@ -1209,7 +1189,7 @@
     </graphicData>
   </ThingDef>
 
-  <!-- 요정 간섭 비비 주변의 반짝임(몸을 감싸는 빛은 VV_Mote_FairyInterferenceShimmer) -->
+  <!-- 요정 간섭 기운 효과 -->
   <EffecterDef>
     <defName>VV_Effecter_FairyInterferenceAura</defName>
     <offsetMode>Free</offsetMode>
@@ -1228,7 +1208,7 @@
     </children>
   </EffecterDef>
 
-  <!-- 결속 해방(마나 역류): 보스 몸통에서 거대한 섬광 + 금빛 파동 고리 + 왜곡 + 사방으로 터지는 빛 (빔 플래시·카메라 흔들림은 C#) -->
+  <!-- 마나 역류 효과 -->
   <EffecterDef>
     <defName>VV_Effecter_ManaBackflow</defName>
     <maintainTicks>40</maintainTicks>
@@ -1306,7 +1286,7 @@
     </children>
   </EffecterDef>
 
-  <!-- 결속을 해방한 비비가 제단 앞으로 돌아옴(ViviEndingQuest가 ApocryphaGimmickDefOf로 재생) -->
+  <!-- 요정 비비 귀환 효과 -->
   <EffecterDef>
     <defName>VV_Effecter_FairyReturn</defName>
     <maintainTicks>20</maintainTicks>

@@ -346,7 +346,7 @@
     </root>
   </PawnRenderTreeDef>
 
-  <!-- 코어 Animal 렌더 트리 복사본 + 2페이즈 전환 동안 몸통을 키우는 서브워커 -->
+  <!-- 아스포델 렌더 트리 -->
   <PawnRenderTreeDef>
     <defName>VV_Apocrypha</defName>
     <root Class="PawnRenderNodeProperties_Parent">

@@ -17,7 +17,7 @@
 <VV_FailReason_AltarHasEnshrinedEverflower>Cannot deconstruct while an everflower is enshrined</VV_FailReason_AltarHasEnshrinedEverflower>
 <VV_FailReason_AltarEndingInProgress>Cannot deconstruct while an everflower is enshrined</VV_FailReason_AltarEndingInProgress>
 
-<!-- 5/6단계 레벨업 편지 머리말 -->
+<!-- 레벨업 편지 -->
 <VV_Letter_EverflowerAttunementLevel5Preamble>The everflower has resonated with the altar's mana circuits and reached its fifth bloom.
 \nIt releases vast amounts of environment mana into its surroundings through the altar, and its resonator's everflower resonance strengthens to stage V.</VV_Letter_EverflowerAttunementLevel5Preamble>
 <VV_Letter_EverflowerAttunementLevel6Preamble>The everflower has fully bloomed.

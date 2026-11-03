@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <!--
-    영원꽃 제단 · 5/6단계 영원꽃 이펙트.
-    레벨업/순간이동 이펙트는 한 번만 Trigger되고 유지되지 않으므로(Chance형 자식은 실행되지 않음) 트리거형 자식만 쓴다.
-    5/6단계 이펙트의 위치는 제단 위 그래픽 기준이다. 제단 밖에서는 CompEverflower가 줄기 밑동 차이(+0.9)만큼 옮겨서 재생한다.
-  -->
-
-  <!-- 5/6단계 꽃 모양 발광: 제단 위 그래픽(VV_EverflowerAltarFlower_e/f)과 같은 비율. 부모는 Effects/Everflower_Growth.xml -->
+  <!-- 5단계 영원꽃 발광 -->
   <ThingDef ParentName="VV_MoteEverflowerGrowthGlow">
     <defName>VV_Mote_EverflowerGrowthGlow_5_Level</defName>
     <graphicData>
@@ -14,6 +8,7 @@
       <drawSize>(0.58, 1)</drawSize>
     </graphicData>
   </ThingDef>
+  <!-- 6단계 영원꽃 발광 -->
   <ThingDef ParentName="VV_MoteEverflowerGrowthGlow">
     <defName>VV_Mote_EverflowerGrowthGlow_6_Level</defName>
     <graphicData>
@@ -22,7 +17,7 @@
     </graphicData>
   </ThingDef>
 
-  <!-- 황금 고리(가산): 제단 안치·5/6단계 개화 때 퍼져 나간다 -->
+  <!-- 제단 황금 고리 -->
   <FleckDef ParentName="FleckBase">
     <defName>VV_Fleck_AltarGoldenRing</defName>
     <altitudeLayer>MoteOverheadLow</altitudeLayer>
@@ -39,7 +34,7 @@
     </graphicData>
   </FleckDef>
 
-  <!-- 5단계: 개화 직전의 거대한 꽃봉오리 -->
+  <!-- 5단계 영원꽃 개화 효과 -->
   <EffecterDef>
     <defName>VV_EverflowerGrow_5_Level</defName>
     <children>
@@ -122,7 +117,7 @@
     </children>
   </EffecterDef>
 
-  <!-- 6단계: 완전히 만개한 전설의 영원꽃 -->
+  <!-- 6단계 영원꽃 개화 효과 -->
   <EffecterDef>
     <defName>VV_EverflowerGrow_6_Level</defName>
     <children>
@@ -206,10 +201,7 @@
     </children>
   </EffecterDef>
 
-  <!--
-    엔딩이 진행되는 동안(공성~대관식) 제단의 영원꽃이 몇 초마다 은은하게 빛나며 꽃잎을 흩날린다(ViviEndingQuest.PlayAltarPulse).
-    개화 이펙트보다 훨씬 약하게: 꽃 모양 빛이 천천히 차올랐다 스러지고, 꽃봉오리에서 꽃잎 몇 장과 반짝임이 느리게 퍼진다. 소리·화면 흔들림 없음.
-  -->
+  <!-- 5단계 영원꽃 맥동 발광 -->
   <ThingDef ParentName="VV_MoteEverflowerGrowthGlow">
     <defName>VV_Mote_AltarEverflowerPulse_5_Level</defName>
     <mote>
@@ -223,6 +215,7 @@
       <color>(1, 0.96, 0.78, 0.4)</color>
     </graphicData>
   </ThingDef>
+  <!-- 6단계 영원꽃 맥동 발광 -->
   <ThingDef ParentName="VV_MoteEverflowerGrowthGlow">
     <defName>VV_Mote_AltarEverflowerPulse_6_Level</defName>
     <mote>
@@ -237,7 +230,7 @@
     </graphicData>
   </ThingDef>
 
-  <!-- 천천히 떠다니다 사라지는 꽃잎 -->
+  <!-- 떠다니는 영원꽃 꽃잎 -->
   <FleckDef ParentName="VV_FleckEverflowerPetalBase">
     <defName>VV_Fleck_EverflowerPetal_Drift</defName>
     <fadeInTime>0.3</fadeInTime>
@@ -248,6 +241,7 @@
     </graphicData>
   </FleckDef>
 
+  <!-- 5단계 영원꽃 맥동 효과 -->
   <EffecterDef>
     <defName>VV_Effecter_AltarEverflowerPulse_5</defName>
     <children>
@@ -288,7 +282,7 @@
       </li>
     </children>
   </EffecterDef>
-
+  <!-- 6단계 영원꽃 맥동 효과 -->
   <EffecterDef>
     <defName>VV_Effecter_AltarEverflowerPulse_6</defName>
     <children>
@@ -330,7 +324,7 @@
     </children>
   </EffecterDef>
 
-  <!-- 제단 안치: 제단 중심(영원꽃 칸)에서 재생. 꽃잎·섬광 위치는 제단 위 4단계 그래픽의 꽃봉오리 기준 -->
+  <!-- 영원꽃 제단 안치 효과 -->
   <EffecterDef>
     <defName>VV_Effecter_AltarEnshrine</defName>
     <children>

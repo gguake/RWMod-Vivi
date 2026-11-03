@@ -12,13 +12,13 @@
 <VV_Message_FlowerLandNoGround>There is no ground here that can become a flower field.</VV_Message_FlowerLandNoGround>
 <VV_Message_FlowerLandBloomed>{COUNT} vivia flowers have bloomed on the enriched soil.</VV_Message_FlowerLandBloomed>
 
-<!-- 여왕의 권능: 생명 공명 -->
+<!-- 생명 공명 -->
 <VV_Letter_QueenLifeResonanceLabel>Life resonance: {PAWN_labelShort}</VV_Letter_QueenLifeResonanceLabel>
 <VV_Letter_QueenLifeResonance>{PAWN_nameDef} scattered into golden petals and returned to the everflower. She will awaken in {TIME}.</VV_Letter_QueenLifeResonance>
 <VV_Message_QueenReborn>{PAWN_labelShort} has awakened before the everflower.</VV_Message_QueenReborn>
 <VV_Inspector_QueenRebirth>{PAWN_labelShort} awakens in: {TIME}</VV_Inspector_QueenRebirth>
 
-<!-- 여왕의 권능: 마나 보호막 -->
+<!-- 마나 보호막 -->
 <VV_Message_ManaBarrierNotEnoughMana>Not enough environment mana within the shield's radius ({0}/{1}).</VV_Message_ManaBarrierNotEnoughMana>
 <VV_ManaBarrierTargetMana>Environment mana in radius: {0}/{1}</VV_ManaBarrierTargetMana>
 </LanguageData>

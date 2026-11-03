@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <!-- ===== 선고: 등 뒤 허공에 맺힌 거대 엘텍스 바늘이 한 번 날아가 경로의 적대 대상을 꿰뚫고 사라진다 ===== -->
+  <!-- 선고 -->
   <AbilityDef>
     <defName>VV_QueenVerdict</defName>
     <label>verdict</label>
@@ -34,7 +34,7 @@
     </comps>
   </AbilityDef>
 
-  <!-- ===== 마나 보호막: 보호막 반경 안 환경 마나의 합계가 1000 이상이면 그만큼을 칸별 마나에 비례해 소모하고 저각 보호막을 세운다 ===== -->
+  <!-- 마나 보호막 -->
   <AbilityDef>
     <defName>VV_QueenManaBarrier</defName>
     <label>mana barrier</label>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <!-- ===== 6단계 〈하늘 방패〉: 영원꽃 주변 넓은 범위에 적대 투사체만 막는 고각 보호막(ViviShieldDome)을 일정 시간 펼친다 ===== -->
+  <!-- 하늘 방패 의식 -->
   <PreceptDef>
     <defName>VV_SkyShield</defName>
     <label>sky shield ritual</label>
@@ -21,6 +21,7 @@
     <displayOrderInIssue>992</displayOrderInIssue>
   </PreceptDef>
 
+  <!-- 하늘 방패 의식 구성 -->
   <RitualPatternDef>
     <defName>VV_SkyShield</defName>
     <ritualOnlyForIdeoMembers>false</ritualOnlyForIdeoMembers>
@@ -33,6 +34,7 @@
     <showIdeoIconsInDialog>false</showIdeoIconsInDialog>
   </RitualPatternDef>
 
+  <!-- 하늘 방패 의식 진행 -->
   <RitualBehaviorDef>
     <defName>VV_SkyShield</defName>
     <durationTicks>1500</durationTicks>
@@ -98,6 +100,7 @@
     </stages>
   </RitualBehaviorDef>
 
+  <!-- 하늘 방패 의식 결과 -->
   <RitualOutcomeEffectDef Class="VVRace.RitualOutcomeEffectDef_SkyShield">
     <defName>VV_SkyShield</defName>
     <description>The better the ritual quality, the longer the shield lasts.\n\nAll everflower rituals share a cooldown.</description>
@@ -145,6 +148,7 @@
     </comps>
   </RitualOutcomeEffectDef>
 
+  <!-- 하늘 방패 의식 대상 -->
   <RitualObligationTargetFilterDef Class="VVRace.RitualObligationTargetFilterDef_EverflowerRitual">
     <defName>VV_SkyShield</defName>
     <workerClass>VVRace.RitualObligationTargetWorker_EverflowerRitual</workerClass>

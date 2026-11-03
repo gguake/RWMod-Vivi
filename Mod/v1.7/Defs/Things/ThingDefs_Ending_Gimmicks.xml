@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <!-- ===== 투사체 ===== -->
+  <!-- 요정 비비 사출탄 -->
   <ThingDef ParentName="BaseBullet">
     <defName>VV_Projectile_FairyShell</defName>
     <label>fairy vivi</label>
@@ -31,7 +31,6 @@
         <trailScale>0.22~0.42</trailScale>
         <headOffset>1.05</headOffset>
         <headGraphics>
-          <!-- 요정 둘레의 은은한 금빛 후광 -->
           <li>
             <texPath>VFX/VV_ScentAura</texPath>
             <graphicClass>Graphic_Single</graphicClass>
@@ -39,7 +38,6 @@
             <color>(1, 0.86, 0.5, 0.5)</color>
             <drawSize>(2, 2)</drawSize>
           </li>
-          <!-- 창을 앞세운 요정 비비(오른쪽을 향함) -->
           <li>
             <texPath>VFX/VV_FairyShell</texPath>
             <graphicClass>Graphic_Single</graphicClass>
@@ -51,6 +49,7 @@
     </modExtensions>
   </ThingDef>
 
+  <!-- 아스포델 꽃 씨앗 기본형 -->
   <ThingDef ParentName="BaseBullet" Name="VV_ApocryphaSeedBase" Abstract="True">
     <thingClass>VVRace.Projectile_ApocryphaSeed</thingClass>
     <graphicData>
@@ -69,6 +68,7 @@
     </projectile>
   </ThingDef>
 
+  <!-- 멸망꽃 씨앗 -->
   <ThingDef ParentName="VV_ApocryphaSeedBase">
     <defName>VV_Projectile_DoomSeed</defName>
     <label>doom bloom seed</label>
@@ -90,6 +90,7 @@
     </modExtensions>
   </ThingDef>
 
+  <!-- 요정꽃 씨앗 -->
   <ThingDef ParentName="VV_ApocryphaSeedBase">
     <defName>VV_Projectile_FairySeed</defName>
     <label>fairy bloom seed</label>
@@ -108,7 +109,7 @@
     </modExtensions>
   </ThingDef>
 
-  <!-- ===== 꽃 ===== -->
+  <!-- 멸망꽃 -->
   <ThingDef ParentName="BuildingBase">
     <defName>VV_DoomFlower</defName>
     <label>doom bloom</label>
@@ -125,7 +126,6 @@
     <filthLeaving>Filth_Ash</filthLeaving>
     <drawerType>RealtimeOnly</drawerType>
     
-    <!-- 보스와 잇는 연결선, 피어나는 연출이 화면 가장자리에서 끊기지 않게 -->
     <drawOffscreen>true</drawOffscreen>
     <tickerType>Normal</tickerType>
     <altitudeLayer>Building</altitudeLayer>
@@ -165,6 +165,7 @@
     </modExtensions>
   </ThingDef>
 
+  <!-- 요정꽃 -->
   <ThingDef ParentName="BuildingBase">
     <defName>VV_FairyFlower</defName>
     <label>fairy bloom</label>
@@ -180,7 +181,6 @@
     <soundImpactDefault>BulletImpact_Wood</soundImpactDefault>
     <drawerType>RealtimeOnly</drawerType>
 
-    <!-- 보스와 잇는 연결선, 피어나는 연출이 화면 가장자리에서 끊기지 않게 -->
     <drawOffscreen>true</drawOffscreen>
     <tickerType>Normal</tickerType>
     <altitudeLayer>Building</altitudeLayer>

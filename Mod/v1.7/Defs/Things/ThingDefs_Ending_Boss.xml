@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <!-- 1페이즈 거대 엘텍스 바늘: 보스 둘레에 떠 있다가 넓은 직선을 꿰뚫고 돌아온다. 몸체·경고 띠는 ApocryphaNeedleRenderer가 직접 그리고,
-       발사·귀환 궤적은 엘텍스 바늘과 같은 RPEF 궤적(점은 코드에서 직접 남긴다)으로 그린다. -->
+  <!-- 고대 엘텍스 바늘 -->
   <ThingDef ParentName="EtherealThingBase">
     <defName>VV_ApocryphaNeedle</defName>
     <label>ancient eltex needle</label>

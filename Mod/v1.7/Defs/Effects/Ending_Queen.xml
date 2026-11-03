@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-  <!-- 엔딩 이후 보상 연출: 〈안식의 바람〉, 〈하늘 방패〉, 여왕의 권능(생명 공명·선고·마나 보호막).
-       기존 영원꽃·엔딩 연출의 플렉을 재사용하고 바람 줄기와 말벌 가루만 새로 정의한다. -->
 
-  <!-- ===== 〈안식의 바람〉 ===== -->
 
-  <!-- 파면을 따라 바깥으로 흐르는 옅은 바람 줄기(가산). WindOfRest가 파면 방향으로 회전·속도를 정해 생성한다 -->
   <FleckDef ParentName="FleckBase_Thrown">
     <defName>VV_Fleck_WindOfRestGust</defName>
     <altitudeLayer>MoteOverhead</altitudeLayer>
@@ -21,7 +17,6 @@
     </graphicData>
   </FleckDef>
 
-  <!-- 거대 말벌의 몸이 부서진 가루. DissolvingHornet이 바람 방향으로 색·속도를 정해 생성한다 -->
   <FleckDef ParentName="FleckBase_Thrown">
     <defName>VV_Fleck_HornetDust</defName>
     <altitudeLayer>MoteOverhead</altitudeLayer>
@@ -35,7 +30,7 @@
     </graphicData>
   </FleckDef>
 
-  <!-- 의식 완료(영원꽃): 섬광 + 퍼지는 금빛 고리 + 사방으로 터지는 꽃잎. 바람의 파면은 WindOfRest가 그린다 -->
+  <!-- 안식의 바람 완료 효과 -->
   <EffecterDef>
     <defName>VV_Effecter_WindOfRestComplete</defName>
     <children>
@@ -75,7 +70,7 @@
     </children>
   </EffecterDef>
 
-  <!-- 바람에 닿아 불안정·스카리아가 걷힌 폰: 작은 반짝임과 꽃잎. 동시에 여럿이 정화되므로 소리는 넣지 않는다 -->
+  <!-- 안식의 바람 정화 효과 -->
   <EffecterDef>
     <defName>VV_Effecter_WindOfRestCleanse</defName>
     <children>
@@ -105,7 +100,7 @@
     </children>
   </EffecterDef>
 
-  <!-- 거대 말벌이 가루가 되기 시작하는 순간: 흙먼지와 반짝임. 이후 가루는 DissolvingHornet이 날린다 -->
+  <!-- 거대 말벌 소멸 효과 -->
   <EffecterDef>
     <defName>VV_Effecter_HornetDissolve</defName>
     <children>
@@ -131,7 +126,7 @@
     </children>
   </EffecterDef>
 
-  <!-- ===== 〈하늘 방패〉 의식 완료: 고각 보호막 기동음 + 금빛 고리 + 하늘로 오르는 반짝임 ===== -->
+  <!-- 하늘 방패 완료 효과 -->
   <EffecterDef>
     <defName>VV_Effecter_SkyShieldComplete</defName>
     <children>
@@ -173,9 +168,8 @@
     </children>
   </EffecterDef>
 
-  <!-- ===== 생명 공명 ===== -->
 
-  <!-- 여왕의 시체가 금빛 꽃잎으로 흩어진다 -->
+  <!-- 여제 시체 소멸 효과 -->
   <EffecterDef>
     <defName>VV_Effecter_QueenCorpseBloom</defName>
     <children>
@@ -218,7 +212,7 @@
     </children>
   </EffecterDef>
 
-  <!-- 영원꽃 앞에서 여왕이 다시 깨어난다: 대관식 완료 연출과 같은 고리·꽃잎 -->
+  <!-- 여제 부활 효과 -->
   <EffecterDef>
     <defName>VV_Effecter_QueenRebirth</defName>
     <children>
@@ -258,7 +252,7 @@
     </children>
   </EffecterDef>
 
-  <!-- ===== 선고: 허공에 바늘이 맺히는 순간의 금빛 고리와 반짝임(조준음은 아스포델 바늘 조준 연출이 낸다) ===== -->
+  <!-- 선고의 바늘 소환 효과 -->
   <EffecterDef>
     <defName>VV_Effecter_QueenVerdictSummon</defName>
     <children>
@@ -290,7 +284,7 @@
     </children>
   </EffecterDef>
 
-  <!-- ===== 마나 보호막: 주변 마나가 모여드는 파동 + 저각 보호막 기동음 ===== -->
+  <!-- 마나 보호막 생성 효과 -->
   <EffecterDef>
     <defName>VV_Effecter_QueenManaBarrier</defName>
     <children>
@@ -320,9 +314,8 @@
     </children>
   </EffecterDef>
 
-  <!-- ===== 〈꽃의 대지〉 ===== -->
 
-  <!-- 의식 완료(영원꽃): 섬광 + 사방으로 터지는 꽃잎 -->
+  <!-- 꽃의 대지 완료 효과 -->
   <EffecterDef>
     <defName>VV_Effecter_FlowerLandComplete</defName>
     <children>
@@ -354,7 +347,7 @@
     </children>
   </EffecterDef>
 
-  <!-- 꽃밭이 생긴 자리: 반경(6.6칸)까지 퍼지는 금빛 고리. 크기 = (1 + 1.8×초) × 4칸이라 약 1.4초에 지름 14칸에 닿는다 -->
+  <!-- 꽃의 대지 황금 고리 -->
   <FleckDef ParentName="FleckBase">
     <defName>VV_Fleck_FlowerLandRing</defName>
     <altitudeLayer>MoteOverheadLow</altitudeLayer>
@@ -370,7 +363,7 @@
     </graphicData>
   </FleckDef>
 
-  <!-- 꽃밭이 생긴 자리: 맑은 소리 + 금빛 고리 + 범위 전체에서 피어오르는 꽃잎·반짝임 -->
+  <!-- 꽃의 대지 개화 효과 -->
   <EffecterDef>
     <defName>VV_Effecter_FlowerLandBloom</defName>
     <children>

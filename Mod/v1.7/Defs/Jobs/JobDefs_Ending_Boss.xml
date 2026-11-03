@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
+  <!-- 아스포델 대기 -->
   <JobDef>
     <defName>VV_ApocryphaWait</defName>
     <driverClass>VVRace.JobDriver_ApocryphaWait</driverClass>
@@ -8,6 +9,7 @@
     <suspendable>false</suspendable>
   </JobDef>
 
+  <!-- 아스포델 배회 -->
   <JobDef>
     <defName>VV_ApocryphaWander</defName>
     <driverClass>JobDriver_Goto</driverClass>
@@ -16,6 +18,7 @@
     <suspendable>false</suspendable>
   </JobDef>
 
+  <!-- 아스포델 영원꽃 접근 -->
   <JobDef>
     <defName>VV_ApocryphaApproach</defName>
     <driverClass>JobDriver_Goto</driverClass>
@@ -24,7 +27,7 @@
     <suspendable>false</suspendable>
   </JobDef>
 
-  <!-- 1페이즈: 사출 포격 사거리 밖(또는 시야 밖)에서 공격해 온 적을 포격할 수 있는 자리로 다가간다. -->
+  <!-- 아스포델 공격자 추격 -->
   <JobDef>
     <defName>VV_ApocryphaPursue</defName>
     <driverClass>JobDriver_Goto</driverClass>
@@ -33,6 +36,7 @@
     <suspendable>false</suspendable>
   </JobDef>
 
+  <!-- 아스포델 독성 브레스 -->
   <JobDef>
     <defName>VV_ApocryphaBreath</defName>
     <driverClass>VVRace.JobDriver_ApocryphaBreath</driverClass>
@@ -41,6 +45,7 @@
     <suspendable>false</suspendable>
   </JobDef>
 
+  <!-- 아스포델 영원꽃 찬탈 -->
   <JobDef>
     <defName>VV_ApocryphaChannel</defName>
     <driverClass>VVRace.JobDriver_ApocryphaChannel</driverClass>
@@ -49,6 +54,7 @@
     <suspendable>false</suspendable>
   </JobDef>
 
+  <!-- 아스포델 돌진 -->
   <JobDef>
     <defName>VV_ApocryphaCharge</defName>
     <driverClass>JobDriver_Goto</driverClass>
@@ -57,7 +63,7 @@
     <suspendable>false</suspendable>
   </JobDef>
 
-  <!-- 2페이즈 바닥에 꽂힌 거대 엘텍스 바늘 깨우기: 아무 정착민이나 우클릭 메뉴로 지시(징집 여부 무관) -->
+  <!-- 고대 엘텍스 바늘 깨우기 -->
   <JobDef>
     <defName>VV_ActivateApocryphaNeedle</defName>
     <driverClass>VVRace.JobDriver_ActivateApocryphaNeedle</driverClass>
@@ -65,6 +71,7 @@
     <casualInterruptible>false</casualInterruptible>
   </JobDef>
 
+  <!-- 아스포델 장애물 파괴 -->
   <JobDef>
     <defName>VV_ApocryphaSmash</defName>
     <driverClass>VVRace.JobDriver_ApocryphaSmash</driverClass>

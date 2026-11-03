@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
 
-<!-- Ending quest: fairy bloom float menu -->
+<!-- 요정꽃 우클릭 메뉴 -->
 <VV_FloatMenu_BondFairyFlower>Bond with fairy bloom</VV_FloatMenu_BondFairyFlower>
 <VV_FailReason_FairyFlowerNotVivi>not a vivi</VV_FailReason_FairyFlowerNotVivi>
 <VV_FailReason_FairyFlowerNotAdult>babies cannot bond</VV_FailReason_FairyFlowerNotAdult>
 <VV_FailReason_FairyFlowerCannotMove>cannot move</VV_FailReason_FairyFlowerCannotMove>
 <VV_FailReason_FairyFlowerAlreadyInterfered>already has fairy interference</VV_FailReason_FairyFlowerAlreadyInterfered>
 
-<!-- Ending quest: Asphodel phase 1 gimmick messages -->
+<!-- 메시지 -->
 <VV_Message_FairyFlowerBonded>{PAWN_labelShort} has bonded with the fairy bloom and gained fairy interference.</VV_Message_FairyFlowerBonded>
 <VV_Message_FairyBondReleased>{PAWN_labelShort} has freed the fairy vivis. The doom blights on {PAWN_labelShort} have been lifted.</VV_Message_FairyBondReleased>
 <VV_Message_DoomFlowerBloomed>A doom bloom has blossomed, inflicting {BLIGHT} on colonists in this area.</VV_Message_DoomFlowerBloomed>
 
-<!-- Ending quest: hediff tooltips -->
+<!-- 헤디프 -->
 <VV_Hediff_DoomBlightLevel>Curse level: {0} / {1}</VV_Hediff_DoomBlightLevel>
 <VV_Hediff_FairyInterferenceRemaining>Time left: {0}</VV_Hediff_FairyInterferenceRemaining>
 
-<!-- Ending quest: inspect strings -->
+<!-- 정보창 -->
 <VV_Inspect_DoomFlowerBloomIn>Blooms in: {0}</VV_Inspect_DoomFlowerBloomIn>
 <VV_Inspect_DoomFlowerHint>Inflicts a curse when it blooms.</VV_Inspect_DoomFlowerHint>
 <VV_Inspect_FairyFlowerFadeIn>Fades in: {0}</VV_Inspect_FairyFlowerFadeIn>

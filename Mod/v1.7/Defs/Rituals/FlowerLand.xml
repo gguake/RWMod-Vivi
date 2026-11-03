@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <!-- ===== 6단계 〈꽃의 대지〉: 의식 창을 열기 전에 지점을 고르고(Precept_RitualFlowerLand), 의식이 끝나면 그 지점 반경 6.6칸의 땅을
-       기름진 토양으로 바꾼 뒤 만개한 비비아 꽃밭을 만든다(FlowerLandUtility). 물·우주선 기반·산 암석은 바꾸지 않는다 ===== -->
+  <!-- 꽃의 대지 의식 -->
   <PreceptDef>
     <defName>VV_FlowerLand</defName>
     <label>land of flowers ritual</label>
@@ -22,6 +21,7 @@
     <displayOrderInIssue>991</displayOrderInIssue>
   </PreceptDef>
 
+  <!-- 꽃의 대지 의식 구성 -->
   <RitualPatternDef>
     <defName>VV_FlowerLand</defName>
     <ritualOnlyForIdeoMembers>false</ritualOnlyForIdeoMembers>
@@ -34,6 +34,7 @@
     <showIdeoIconsInDialog>false</showIdeoIconsInDialog>
   </RitualPatternDef>
 
+  <!-- 꽃의 대지 의식 진행 -->
   <RitualBehaviorDef>
     <defName>VV_FlowerLand</defName>
     <durationTicks>1500</durationTicks>
@@ -99,6 +100,7 @@
     </stages>
   </RitualBehaviorDef>
 
+  <!-- 꽃의 대지 의식 결과 -->
   <RitualOutcomeEffectDef Class="VVRace.RitualOutcomeEffectDef_FlowerLand">
     <defName>VV_FlowerLand</defName>
     <description>When the ritual completes, the ground around the chosen spot turns into rich soil and fully bloomed vivia flowers spring up.\n\nAll everflower rituals share a cooldown.</description>
@@ -142,6 +144,7 @@
     </comps>
   </RitualOutcomeEffectDef>
 
+  <!-- 꽃의 대지 의식 대상 -->
   <RitualObligationTargetFilterDef Class="VVRace.RitualObligationTargetFilterDef_EverflowerRitual">
     <defName>VV_FlowerLand</defName>
     <workerClass>VVRace.RitualObligationTargetWorker_EverflowerRitual</workerClass>

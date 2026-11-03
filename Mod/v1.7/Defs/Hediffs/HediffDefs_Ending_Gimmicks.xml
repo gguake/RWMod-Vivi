@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <!-- 아스포델 1페이즈 기믹: 요정 간섭, 멸망꽃 저주 -->
 
-  <!-- 요정 간섭: 요정꽃과 결속한 비비. 6시간(15000틱) 안에 1페이즈 아스포델에게 2.9칸 이내로 다가가면 결속 해방 -->
+  <!-- 요정 간섭 -->
   <HediffDef>
     <defName>VV_FairyInterference</defName>
     <label>fairy interference</label>
@@ -24,7 +23,7 @@
     </comps>
   </HediffDef>
 
-  <!-- 멸망꽃 저주 공용: 5단계(severity 1~5, DoomBlightUtility.MaxBlightLevel), 결속 해방이나 엔딩 정리로만 풀린다(죽으면 함께 사라짐 — Hediff_DoomBlight) -->
+  <!-- 멸망꽃 저주 기본형 -->
   <HediffDef Name="VV_DoomBlightBase" Abstract="True">
     <hediffClass>VVRace.Hediff_DoomBlight</hediffClass>
     <defaultLabelColor>(0.95, 0.45, 0.8)</defaultLabelColor>
@@ -36,8 +35,7 @@
     <maxSeverity>5</maxSeverity>
   </HediffDef>
 
-  <!-- 공포: 고통 한계 감소 + 정신 붕괴 기준 상승.
-       정신 붕괴 기준은 바닐라 최대값이 0.50(기본 0.35)이라 V단계 +0.15에서 상한에 닿도록 나눈다(그보다 크면 IV·V가 같아짐). -->
+  <!-- 멸망의 공포 -->
   <HediffDef ParentName="VV_DoomBlightBase">
     <defName>VV_DoomBlight_Fear</defName>
     <label>doom blight: dread</label>
@@ -81,7 +79,7 @@
     </stages>
   </HediffDef>
 
-  <!-- 허기: 허기·피로 증가. 1.7에는 허기 StatDef가 없으므로 hungerRateFactor/restFallFactor 사용 -->
+  <!-- 멸망의 허기 -->
   <HediffDef ParentName="VV_DoomBlightBase">
     <defName>VV_DoomBlight_Hunger</defName>
     <label>doom blight: famine</label>
@@ -115,7 +113,7 @@
     </stages>
   </HediffDef>
 
-  <!-- 역병: 면역 획득 속도(질병 회복)·부상 회복 속도 감소 + 받는 피해 증가. -->
+  <!-- 멸망의 역병 -->
   <HediffDef ParentName="VV_DoomBlightBase">
     <defName>VV_DoomBlight_Plague</defName>
     <label>doom blight: plague</label>

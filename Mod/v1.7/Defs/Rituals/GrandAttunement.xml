@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <!-- 만개 의식. 기존 영원꽃 의식과 같이 PreceptDef/RitualPatternDef/RitualBehaviorDef/RitualOutcomeEffectDef/
-       RitualObligationTargetFilterDef 다섯 개가 같은 defName을 쓴다. 숨김 의식은 세이브를 불러올 때 기존 이념에도 자동으로 추가된다. -->
 
-  <!-- ===== 5단계 만개 의식: 제단에 안치된 4단계 영원꽃을 5단계로 개화시키고 장기 공성을 시작한다 ===== -->
+  <!-- 영원꽃 만개 의식 -->
   <PreceptDef>
     <defName>VV_GrandAttunement</defName>
     <label>everflower full bloom ritual</label>
@@ -24,6 +22,7 @@
     <displayOrderInIssue>1001</displayOrderInIssue>
   </PreceptDef>
 
+  <!-- 영원꽃 만개 의식 구성 -->
   <RitualPatternDef>
     <defName>VV_GrandAttunement</defName>
     <ritualOnlyForIdeoMembers>false</ritualOnlyForIdeoMembers>
@@ -36,10 +35,10 @@
     <showIdeoIconsInDialog>false</showIdeoIconsInDialog>
   </RitualPatternDef>
 
+  <!-- 영원꽃 만개 의식 진행 -->
   <RitualBehaviorDef>
     <defName>VV_GrandAttunement</defName>
     <durationTicks>2500</durationTicks>
-    <!-- 공명자가 도착해 의식이 진행되기 시작하면 공명자를 〈영원꽃 완전 동화〉 상태로 만든다 -->
     <workerClass>VVRace.RitualBehaviorWorker_GrandAttunement</workerClass>
     <displayCompletedMessage>true</displayCompletedMessage>
     <roles>
@@ -102,6 +101,7 @@
     </stages>
   </RitualBehaviorDef>
 
+  <!-- 영원꽃 만개 의식 결과 -->
   <RitualOutcomeEffectDef>
     <defName>VV_GrandAttunement</defName>
     <description>The better the ritual quality, the shorter the condensation period. Everflower rituals cannot be performed during mana condensation.\n\nAll everflower rituals share a cooldown.</description>
@@ -142,6 +142,7 @@
     </comps>
   </RitualOutcomeEffectDef>
 
+  <!-- 영원꽃 만개 의식 대상 -->
   <RitualObligationTargetFilterDef Class="VVRace.RitualObligationTargetFilterDef_EverflowerRitual">
     <defName>VV_GrandAttunement</defName>
     <workerClass>VVRace.RitualObligationTargetWorker_EverflowerRitual</workerClass>

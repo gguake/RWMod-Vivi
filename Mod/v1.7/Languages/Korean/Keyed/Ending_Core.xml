@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
 
-<!-- 엔딩 퀘스트: 퀘스트 탭 (밀서 퀘스트 이름은 서신 편지 제목을 쓴다) -->
+<!-- 엔딩 퀘스트 -->
 <VV_Quest_EndingMissiveGoals>비비 연방의 의뢰로 고대 호박 코어를 얻어 영원꽃 제단을 건설하십시오. 조율 4단계 영원꽃을 안치하고 〈만개 의식〉을 치르면 다섯 번째 개화가 시작됩니다.\n\n고대 호박 코어나 제단이 남아 있으면 추가 의뢰를 받을 수 없습니다.</VV_Quest_EndingMissiveGoals>
 <VV_Quest_EndingName>만개하는 여명</VV_Quest_EndingName>
 <VV_Quest_EndingDesc>영원꽃이 마지막 개화에 필요한 마나를 응축하고 있습니다.\n\n응축이 끝날 때까지 제단을 지킨 뒤, 공명자에게 〈여왕의 대관식〉을 치르게 하십시오. 영원꽃을 잃으면 마지막 개화는 실패합니다.</VV_Quest_EndingDesc>
 
-<!-- 엔딩 퀘스트: 비비 연방의 밀서 -->
+<!-- 비비 연방의 밀서 -->
 <VV_Letter_EndingFederationMissiveLabel>비비 연방의 밀서</VV_Letter_EndingFederationMissiveLabel>
 <VV_Letter_EndingFederationMissive>{PAWN_labelShort}(와)과 공명한 영원꽃이 성장의 한계에 이르렀습니다. 이를 감지한 비비 연방에서 전갈을 보내왔습니다.\n\n"옛 제국의 영원꽃은 고대 마나 회로가 새겨진 제단 위에서 피어났습니다. 다섯 번째 개화가 시작되면 외지인들과 거대 말벌도 그 파동을 느낄 것입니다."\n\n이제 영원꽃 제단을 건설할 수 있습니다. 고대 호박 코어가 필요하다면 통신기로 비비 연방에 연락하십시오.</VV_Letter_EndingFederationMissive>
 <VV_Letter_EndingFederationMissiveConditions>고대 호박 코어 의뢰를 받으려면 정착지에 충분한 수의 비비와 자원을 가지고 자격을 증명해야합니다.</VV_Letter_EndingFederationMissiveConditions>
@@ -16,7 +16,7 @@
 <VV_Quest_EndingMissiveStepAltar>영원꽃 제단 건설</VV_Quest_EndingMissiveStepAltar>
 <VV_Quest_EndingMissiveStepEnshrine>조율 {0}단계 영원꽃을 제단 중앙에 안치</VV_Quest_EndingMissiveStepEnshrine>
 
-<!-- 영원꽃의 잔향: 조율 1~5단계 서사 편지 ({PAWN}: 의식의 공명자) -->
+<!-- 영원꽃의 잔향 -->
 <VV_Letter_EverflowerEcho1Label>희미한 황금빛 잔향</VV_Letter_EverflowerEcho1Label>
 <VV_Letter_EverflowerEcho1>의식을 마친 {PAWN_labelShort}의 초정신 회로에 희미한 기억이 스며들었습니다.\n\n거대한 제단 위에 여섯 갈래의 황금빛 꽃이 피어 있었습니다. 그 그늘 아래의 비비들은 유전자 불안정도, 짧은 수명도 모르고 살았습니다.\n\n"……이 그늘 아래에서는…… 아무도 시들지……"\n\n목소리가 잡음에 묻혔습니다.</VV_Letter_EverflowerEcho1>
 
@@ -32,7 +32,7 @@
 <VV_Letter_EverflowerEcho5Label>깨어나는 숨결</VV_Letter_EverflowerEcho5Label>
 <VV_Letter_EverflowerEcho5>영원꽃에서 마나 파동이 퍼지자 {PAWN_labelShort}의 초정신 회로에 잡음이 흘러들었습니다. 이번에는 과거의 기억이 아니었습니다.\n\n단단한 외피가 부딪히는 소리와 거친 숨소리. 무언가가 마나의 흐름을 따라 다가오고 있었습니다.\n\n"……따스해……"\n"……다시…… 꽃그늘로……"\n\n연결이 끊어졌습니다.</VV_Letter_EverflowerEcho5>
 
-<!-- 엔딩 퀘스트: 고대 호박 코어 의뢰 (통신기, 비비 연방) -->
+<!-- 고대 호박 코어 의뢰 -->
 <VV_Comms_AmberCoreRequest>고대 호박 코어 의뢰 받기</VV_Comms_AmberCoreRequest>
 <VV_Comms_AmberCoreRequestHostile>비비 연방과 적대 관계입니다</VV_Comms_AmberCoreRequestHostile>
 <VV_Comms_AmberCoreRequestActive>이미 의뢰를 받았습니다</VV_Comms_AmberCoreRequestActive>
@@ -67,7 +67,7 @@
 <VV_EndingCreditsRefugee>거대 말벌에게 모든 것을 잃고 쫓기던 피난민들은 이제 스스로 둥지를 지킬 힘을 갖추었습니다.</VV_EndingCreditsRefugee>
 <VV_EndingCreditsOutro>옛 제국의 봄은 이곳에서 다시 시작됩니다. 그리고 당신의 이야기는 계속됩니다...</VV_EndingCreditsOutro>
 
-<!-- 엔딩 퀘스트: 실패 -->
+<!-- 엔딩 실패 -->
 <VV_Letter_EndingFailureLabel>영원꽃 찬탈</VV_Letter_EndingFailureLabel>
 <VV_Letter_EndingFailureStolen>아스포델이 영원꽃의 힘을 빼앗고 사라졌습니다. 마지막 개화는 실패했습니다.</VV_Letter_EndingFailureStolen>
 <VV_Letter_EndingFailureLostLabel>영원꽃 소실</VV_Letter_EndingFailureLostLabel>
@@ -75,12 +75,12 @@
 <VV_Letter_EndingFailureResonatorLabel>끊어진 공명</VV_Letter_EndingFailureResonatorLabel>
 <VV_Letter_EndingFailureResonator>{PAWN_labelShort}(이)가 쓰러져 영원꽃과의 공명이 끊어졌습니다. 마지막 개화는 실패했습니다.</VV_Letter_EndingFailureResonator>
 
-<!-- 엔딩 퀘스트: 메시지 -->
+<!-- 메시지 -->
 <VV_Message_EndingApocryphaLanded>영원꽃의 파동에 밀려난 아스포델이 거대 말벌 무리를 이끌고 지역 외곽에 나타났습니다.</VV_Message_EndingApocryphaLanded>
 <VV_Message_EndingPawnReturned>{PAWN_labelShort}(이)가 영원꽃 제단 앞으로 돌아왔습니다.</VV_Message_EndingPawnReturned>
 <VV_Message_EndingPawnReturnedToCaravan>{PAWN_labelShort}(이)가 돌아와 {CARAVAN_label}에 합류했습니다.</VV_Message_EndingPawnReturnedToCaravan>
 
-<!-- 엔딩 퀘스트: 개화 응축 기즈모 / 정보창 -->
+<!-- 개화 응축 -->
 <VV_Gizmo_EndingBloom>개화 응축</VV_Gizmo_EndingBloom>
 <VV_Gizmo_EndingBloomDesc>영원꽃이 마지막 개화에 필요한 마나를 응축하고 있습니다.</VV_Gizmo_EndingBloomDesc>
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <!-- 아스포델 생각 트리: 판단은 하나의 작업 지급기(JobGiver_ApocryphaMain)가 CompApocrypha 상태를 보고 내린다. -->
+  <!-- 아스포델 행동 판단 -->
   <ThinkTreeDef>
     <defName>VV_Apocrypha</defName>
     <thinkRoot Class="ThinkNode_Priority">
@@ -17,6 +17,7 @@
     </thinkRoot>
   </ThinkTreeDef>
 
+  <!-- 아스포델 상시 행동 판단 -->
   <ThinkTreeDef>
     <defName>VV_ApocryphaConstant</defName>
     <thinkRoot Class="ThinkNode_Priority">

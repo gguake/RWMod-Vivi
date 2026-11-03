@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <!-- 엔딩 의식 연출. 기존 영원꽃 의식 연출(Effects/Everflower.xml)의 모트·플렉을 재사용하고, 황금 파동 고리와 엔딩 의식 전용 연출만 새로 정의한다. -->
 
-  <!-- ===== 황금 파동 고리 (만개 의식 완료·아스포델 연출에서 함께 쓴다) ===== -->
 
-  <!-- 영원꽃 꽃봉오리에서 맵으로 크게 퍼져 나가는 황금 파동 고리(가산). 수명 약 1.85초 동안 지름 약 60칸까지 커진다. -->
+  <!-- 만개 의식 황금 파동 고리 -->
   <FleckDef ParentName="FleckBase">
     <defName>VV_Fleck_ResonanceWaveRing</defName>
     <altitudeLayer>MoteOverheadLow</altitudeLayer>
@@ -20,7 +18,7 @@
     </graphicData>
   </FleckDef>
 
-  <!-- 뒤따르는 느린 잔향 고리 -->
+  <!-- 만개 의식 잔향 고리 -->
   <FleckDef ParentName="FleckBase">
     <defName>VV_Fleck_ResonanceWaveRingSlow</defName>
     <altitudeLayer>MoteOverheadLow</altitudeLayer>
@@ -37,7 +35,7 @@
     </graphicData>
   </FleckDef>
 
-  <!-- ===== 만개 의식 완료 (VV_EverflowerRitual_Complete 확대판) ===== -->
+  <!-- 만개 의식 마법진 -->
   <ThingDef ParentName="MoteBase">
     <defName>VV_Mote_GrandAttunementCircle</defName>
     <thingClass>MoteAttached</thingClass>
@@ -68,6 +66,7 @@
     </graphicData>
   </ThingDef>
 
+  <!-- 만개 의식 섬광 -->
   <ThingDef ParentName="MoteBase">
     <defName>VV_Mote_GrandAttunementFlash</defName>
     <thingClass>MoteAttached</thingClass>
@@ -86,6 +85,7 @@
     </graphicData>
   </ThingDef>
 
+  <!-- 만개 의식 완료 효과 -->
   <EffecterDef>
     <defName>VV_Effecter_GrandAttunementComplete</defName>
     <children>
@@ -128,7 +128,6 @@
         <absoluteAngle>true</absoluteAngle>
         <rotation>0~360</rotation>
       </li>
-      <!-- 꽃잎: 기존 의식 완료 연출보다 큰 꽃잎이 더 넓게 흩날린다 -->
       <li>
         <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
         <fleckDef>VV_Fleck_EverflowerPetal_Burst</fleckDef>
@@ -145,7 +144,7 @@
     </children>
   </EffecterDef>
 
-  <!-- ===== 생명의 회귀 완료 (되돌아온 비비 위치) ===== -->
+  <!-- 생명의 회귀 완료 효과 -->
   <EffecterDef>
     <defName>VV_Effecter_ReturnOfLifeComplete</defName>
     <children>
@@ -193,9 +192,8 @@
     </children>
   </EffecterDef>
 
-  <!-- ===== 여왕의 대관식 완료 (왕관을 받은 비비 위치) ===== -->
 
-  <!-- 비비를 감싸는 작은 황금 고리 -->
+  <!-- 대관식 황금 고리 -->
   <FleckDef ParentName="FleckBase">
     <defName>VV_Fleck_CoronationRing</defName>
     <altitudeLayer>MoteOverheadLow</altitudeLayer>
@@ -210,7 +208,7 @@
     </graphicData>
   </FleckDef>
 
-  <!-- 머리 위로 천천히 떠오르며 사라지는 왕관(대관식 의식 아이콘, 알파 텍스처) -->
+  <!-- 대관식 왕관 -->
   <FleckDef ParentName="FleckBase_Thrown">
     <defName>VV_Fleck_CoronationCrown</defName>
     <altitudeLayer>MoteOverhead</altitudeLayer>
@@ -224,6 +222,7 @@
     </graphicData>
   </FleckDef>
 
+  <!-- 대관식 완료 효과 -->
   <EffecterDef>
     <defName>VV_Effecter_CoronationComplete</defName>
     <children>
@@ -247,7 +246,6 @@
         <absoluteAngle>true</absoluteAngle>
         <rotation>0~360</rotation>
       </li>
-      <!-- 속도 방향을 지정하지 않으면(fleckUsesAngleForVelocity false) 북쪽(화면 위)으로 떠오른다 -->
       <li>
         <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
         <fleckDef>VV_Fleck_CoronationCrown</fleckDef>
