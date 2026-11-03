@@ -7,10 +7,6 @@
         public const string VV_Command_EquipWeapon = nameof(VV_Command_EquipWeapon);
         public const string VV_Command_EquipWeaponDesc = nameof(VV_Command_EquipWeaponDesc);
         public const string VV_Command_UnequipWeapon = nameof(VV_Command_UnequipWeapon);
-        public const string VV_Command_ActivateShield = nameof(VV_Command_ActivateShield);
-        public const string VV_Command_ActivateShieldDesc = nameof(VV_Command_ActivateShieldDesc);
-        public const string VV_Command_ActivateShieldAlreadyActivated = nameof(VV_Command_ActivateShieldAlreadyActivated);
-        public const string VV_Command_ActivateShieldNotEnoughEnergy = nameof(VV_Command_ActivateShieldNotEnoughEnergy);
 
         public const string VV_Command_ToggleLayEgg = nameof(VV_Command_ToggleLayEgg);
         public const string VV_Command_ToggleLayEggDesc = nameof(VV_Command_ToggleLayEggDesc);

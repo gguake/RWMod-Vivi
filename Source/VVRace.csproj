@@ -138,7 +138,6 @@
     <Compile Include="ArcanePlant\Plant\AI\WorkGiver_EquipShootus.cs" />
     <Compile Include="ArcanePlant\ArcanePlantUtility.cs" />
     <Compile Include="ArcanePlant\Mana\Comps\CompManaFilthMaker.cs" />
-    <Compile Include="ArcanePlant\Mana\Comps\CompManaShieldProjector.cs" />
     <Compile Include="ArcanePlant\Buildings\Comps\CompLaunchableCustom.cs" />
     <Compile Include="ArcanePlant\Mana\FluxRule\ManaFluxRule_RadialPollution.cs" />
     <Compile Include="ArcanePlant\Mana\FluxRule\ManaFluxRule_Wind.cs" />
@@ -255,7 +254,6 @@
     <Compile Include="ArcanePlant\Plant\UI\ITab_ArcanePlant.cs" />
     <Compile Include="ArcanePlant\Plant\UI\PlaceWorker_AllowArtificialPlantPot.cs" />
     <Compile Include="ArcanePlant\Plant\UI\PlaceWorker_ShowPlantTurretRadius.cs" />
-    <Compile Include="ArcanePlant\Plant\UI\PlaceWorker_TurretPlantTop.cs" />
     <Compile Include="ArcanePlant\Weapon\Verb_ShootWithMana.cs" />
     <Compile Include="ArcanePlant\Weapon\ManaWeaponCastState.cs" />
     <Compile Include="Egg\AI\WorkGiver_HaulViviEgg.cs" />

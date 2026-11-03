@@ -4,8 +4,6 @@ namespace VVRace
 {
     public class ArcanePlant_RadiantFlower : ArcanePlant
     {
-        public int GraphicIndex => CompGlower.Glows ? 1 : 0;
-
         private CompManaGlower _compGlower;
         public CompManaGlower CompGlower
         {

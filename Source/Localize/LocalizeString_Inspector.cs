@@ -18,8 +18,6 @@
 
         public const string VV_Inspector_ShootusWeaponReserved = nameof(VV_Inspector_ShootusWeaponReserved);
         public const string VV_Inspector_ShootusWeaponEquipped = nameof(VV_Inspector_ShootusWeaponEquipped);
-        public const string VV_Inspector_ViviBroadShieldHitPoint = nameof(VV_Inspector_ViviBroadShieldHitPoint);
-        public const string VV_Inspector_ViviBroadShieldDuration = nameof(VV_Inspector_ViviBroadShieldDuration);
         public const string VV_Inspector_GrowingArcanePlantReady = nameof(VV_Inspector_GrowingArcanePlantReady);
         public const string VV_Inspector_GrowingArcanePlantProgress = nameof(VV_Inspector_GrowingArcanePlantProgress);
 
