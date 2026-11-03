@@ -168,7 +168,10 @@ namespace VVRace
 
         public void Notify_ArcaneSeedPlantReserved(ThingWithComps seed)
         {
-            _arcaneSeeds.Add(seed);
+            if (!_arcaneSeeds.Contains(seed))
+            {
+                _arcaneSeeds.Add(seed);
+            }
         }
 
         public void Notify_ArcaneSeedPlantCanceled(ThingWithComps seed)

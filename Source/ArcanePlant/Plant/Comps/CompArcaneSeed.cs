@@ -104,7 +104,18 @@ namespace VVRace
                 return;
             }
 
-            _seedlingCells.AddRange(otherComp.SeedlingCells);
+            foreach (var cell in otherComp.SeedlingCells)
+            {
+                if (!_seedlingCells.Contains(cell))
+                {
+                    _seedlingCells.Add(cell);
+                }
+            }
+
+            if (_seedlingCells.Count > 0)
+            {
+                parent.MapHeld?.GetComponent<ArcanePlantMapComponent>()?.Notify_ArcaneSeedPlantReserved(parent);
+            }
         }
 
         public override void PostSplitOff(Thing piece)
@@ -121,6 +132,11 @@ namespace VVRace
                 {
                     otherComp.SeedlingCells.Add(SeedlingCells[i]);
                 }
+            }
+
+            if (otherComp.SeedlingCells.Count > 0)
+            {
+                parent.MapHeld?.GetComponent<ArcanePlantMapComponent>()?.Notify_ArcaneSeedPlantReserved(otherComp.parent);
             }
         }
 
