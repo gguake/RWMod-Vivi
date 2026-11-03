@@ -57,9 +57,39 @@ namespace VVRace
             }
         }
 
+        public List<CompMana> GetManaCompsOn(Map map)
+        {
+            var ticksGame = GenTicks.TicksGame;
+            if (_manaCompsByMapTick != ticksGame)
+            {
+                _manaCompsByMapTick = ticksGame;
+                _manaCompsByMap.Clear();
+
+                foreach (var comp in AllManaComps)
+                {
+                    var rootMap = comp.parent.SpawnedParentOrMe?.Map;
+                    if (rootMap == null) { continue; }
+
+                    if (!_manaCompsByMap.TryGetValue(rootMap, out var comps))
+                    {
+                        comps = new List<CompMana>();
+                        _manaCompsByMap.Add(rootMap, comps);
+                    }
+
+                    comps.Add(comp);
+                }
+            }
+
+            return _manaCompsByMap.TryGetValue(map, out var result) ? result : EmptyManaComps;
+        }
+
+        private static readonly List<CompMana> EmptyManaComps = new List<CompMana>();
+
         private Game _game;
         private List<ThingWithComps> _thingWithManaComps;
         private List<CompMana> _manaCompCache;
+        private readonly Dictionary<Map, List<CompMana>> _manaCompsByMap = new Dictionary<Map, List<CompMana>>();
+        private int _manaCompsByMapTick = -1;
 
         public IEnumerable<Pawn> GetFairyficatedPawns(Pawn pawn) => _fairyficated.Where(v => v.linker == pawn).Select(v => v.fairy);
         private List<FairyficatedPawn> _fairyficated = new List<FairyficatedPawn>();

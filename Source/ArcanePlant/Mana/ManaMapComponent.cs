@@ -163,10 +163,10 @@ namespace VVRace
                 EmitManaVeins(RefreshManaInterval);
                 EmitEverflowerAltarMana(RefreshManaInterval);
 
-                var gameComponentMana = Current.Game.GetComponent<GameComponent_Mana>();
+                var gameComponentMana = GameComponent_Mana.Of(Current.Game);
                 if (gameComponentMana != null)
                 {
-                    foreach (var comp in gameComponentMana.AllManaComps)
+                    foreach (var comp in gameComponentMana.GetManaCompsOn(map))
                     {
                         var root = comp.parent.SpawnedParentOrMe;
                         if (root != null && root.Map == map)

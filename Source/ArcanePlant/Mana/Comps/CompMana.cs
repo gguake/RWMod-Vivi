@@ -73,12 +73,12 @@ namespace VVRace
         {
             _manaStored = Props.manaCapacity;
 
-            Current.Game.GetComponent<GameComponent_Mana>().RegisterCompMana(this);
+            GameComponent_Mana.Of(Current.Game).RegisterCompMana(this);
         }
 
         public override void PostDestroy(DestroyMode mode, Map previousMap)
         {
-            Current.Game.GetComponent<GameComponent_Mana>().UnregisterCompMana(this);
+            GameComponent_Mana.Of(Current.Game).UnregisterCompMana(this);
         }
 
         public override void PostExposeData()
