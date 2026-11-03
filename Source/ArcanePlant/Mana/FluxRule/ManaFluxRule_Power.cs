@@ -13,7 +13,7 @@ namespace VVRace
         public override IntRange FluxRangeForDisplay => new IntRange(min, max);
 
         public override string GetRuleString() =>
-            LocalizeString_Stat.VV_StatsReport_ManaFluxRule_Wind_Desc.Translate(max.ToString("+0;-#"));
+            LocalizeString_Stat.VV_StatsReport_ManaFluxRule_Power_Desc.Translate(max.ToString("+0;-#"));
 
         public override string GetRuleLabel() =>
             LocalizeString_Stat.VV_ManaFluxRuleLabel_Power.Translate();

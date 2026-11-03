@@ -31,6 +31,7 @@
 <VV_StatsReport_ManaFluxRule_WeatherSnowyNoRoof_Desc>눈을 맞으면 마나 {0}</VV_StatsReport_ManaFluxRule_WeatherSnowyNoRoof_Desc>
 <VV_StatsReport_ManaFluxRule_WeatherSnowy_Desc>눈이 오는 날씨에 마나 {0}</VV_StatsReport_ManaFluxRule_WeatherSnowy_Desc>
 <VV_StatsReport_ManaFluxRule_Wind_Desc>주변 바람의 세기에 비례해 마나 {0}</VV_StatsReport_ManaFluxRule_Wind_Desc>
+<VV_StatsReport_ManaFluxRule_Power_Desc>전력망의 여유 전력에 비례해 마나 {0}</VV_StatsReport_ManaFluxRule_Power_Desc>
 <VV_StatsReport_ManaFluxRule_RadialPollution_Desc>주변의 오염된 토양 마다 마나 {0}~{1}</VV_StatsReport_ManaFluxRule_RadialPollution_Desc>
 <VV_StatsReport_ManaFluxRule_PlantGrowth_Desc>식물의 생장도에 비례해 마나 {0}</VV_StatsReport_ManaFluxRule_PlantGrowth_Desc>
 <VV_StatsReport_ManaFluxRule_Fertility_Desc>토질에 비례해 마나 {0}
