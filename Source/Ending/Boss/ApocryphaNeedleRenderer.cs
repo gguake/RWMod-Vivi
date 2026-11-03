@@ -21,7 +21,9 @@ namespace VVRace
         private static readonly Color LaneColorBossInside = new Color(1f, 0.36f, 0.82f, 1f);
         private static readonly Color LaneCoreColorBossInside = new Color(1f, 0.8f, 0.95f, 1f);
 
-        private const float LotusDrawSize = 2.6f;
+        // 마법진 바깥 고리(VV_MagicCircle r=0.95)가 경고 띠 테두리선(VV_NeedleLane 가장자리에서 0.07칸 안쪽)에 맞닿도록 띠 폭으로 크기를 정한다.
+        private const float LotusRingRadius = 0.95f;
+        private const float LaneEdgeInset = 0.07f;
 
         private const float PlantedMarkerDrawSize = 1.8f;
         private const float PlantedMarkerBloomSecs = 0.8f;
@@ -153,13 +155,14 @@ namespace VVRace
 
             var lotusPos = start;
             lotusPos.y = AltitudeLayer.MoteLow.AltitudeFor() + LayerAltitudeStep;
+            var lotusSize = (width * 0.5f - LaneEdgeInset) * 2f / LotusRingRadius;
             PropertyBlock.Clear();
             PropertyBlock.SetFloat(ShaderPropertyIDs.AgeSecs, aimSecs);
             PropertyBlock.SetFloat(DurationPropertyId, Mathf.Max(0.1f, aimDuration));
             PropertyBlock.SetFloat(SeedPropertyId, seed);
             PropertyBlock.SetColor(ShaderPropertyIDs.Color, color);
             PropertyBlock.SetColor(CoreColorPropertyId, coreColor);
-            Graphics.DrawMesh(MeshPool.plane10, Matrix4x4.TRS(lotusPos, Quaternion.identity, new Vector3(LotusDrawSize, 1f, LotusDrawSize)), LotusMat, 0, null, 0, PropertyBlock);
+            Graphics.DrawMesh(MeshPool.plane10, Matrix4x4.TRS(lotusPos, Quaternion.identity, new Vector3(lotusSize, 1f, lotusSize)), LotusMat, 0, null, 0, PropertyBlock);
         }
 
         public static void DrawPlantedMarker(Vector3 pos, float ageSecs, float alpha, int seed)
