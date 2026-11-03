@@ -279,7 +279,7 @@
     <children>
       <li>
         <subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
-        <soundDef>Hive_Spawn</soundDef>
+        <soundDef>VV_HornetSummon</soundDef>
         <spawnLocType>OnSource</spawnLocType>
       </li>
       <li>

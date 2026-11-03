@@ -521,8 +521,7 @@ namespace VVRace
         public static SoundDef VV_FairyMaterialize;
         public static SoundDef VV_FairyDematerialize;
         public static SoundDef VV_FairyTeleport;
-
-        public static SoundDef PsychicArtifactWarmupSustained;
+        public static SoundDef VV_ApocryphaSummon;
     }
 
     [DefOf]

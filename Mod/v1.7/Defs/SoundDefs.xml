@@ -519,6 +519,46 @@
     </subSounds>
   </SoundDef>
 
+  <!-- 아스포델 소환음: 등장 연출이 시작될 때 한 번 재생해 형체가 완성되는 5초에 절정, 카메라 위치와 관계없이 -->
+  <SoundDef>
+    <defName>VV_ApocryphaSummon</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <onCamera>True</onCamera>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>SFX/VV_ApocryphaSummon</clipPath>
+          </li>
+        </grains>
+        <volumeRange>38</volumeRange>
+        <tempoAffectedByGameSpeed>true</tempoAffectedByGameSpeed>
+        <sustainLoop>False</sustainLoop>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+  <!-- 거대 말벌 소환음: 형체가 빚어지기 시작할 때 재생해 실제 말벌이 되는 2.5초에 절정 -->
+  <SoundDef>
+    <defName>VV_HornetSummon</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>SFX/VV_HornetSummon</clipPath>
+          </li>
+        </grains>
+        <volumeRange>31</volumeRange>
+        <pitchRange>0.98~1.02</pitchRange>
+        <tempoAffectedByGameSpeed>true</tempoAffectedByGameSpeed>
+        <sustainLoop>False</sustainLoop>
+      </li>
+    </subSounds>
+  </SoundDef>
+
   <!-- 고대 엘텍스 바늘 발사음 -->
   <SoundDef>
     <defName>VV_ApocryphaNeedleFire</defName>

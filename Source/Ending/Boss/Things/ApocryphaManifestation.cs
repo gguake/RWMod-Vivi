@@ -64,8 +64,6 @@ namespace VVRace
         private int _pushTicks = 60;
         private bool _completed;
 
-        private Sustainer _gatherSustainer;
-
         private int Age => _startTick < 0 ? 0 : Mathf.Max(0, Find.TickManager.TicksGame - _startTick);
         private float AgeSecs => Age / 60f;
         private int LandTick => WaveTick + _pushTicks;
@@ -119,13 +117,10 @@ namespace VVRace
             if (!respawningAfterLoad && _startTick < 0)
             {
                 _startTick = Find.TickManager.TicksGame;
-            }
-        }
 
-        public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
-        {
-            EndSustainer();
-            base.DeSpawn(mode);
+                // 소환음은 형체가 빚어지는 동안 차올라 형체가 완성되는 순간(CompleteTick) 절정에 이른다(게임 속도를 따라 재생돼 연출과 어긋나지 않는다).
+                VVSoundDefOf.VV_ApocryphaSummon.PlayOneShotOnCamera(map);
+            }
         }
 
         public override void ExposeData()
@@ -155,7 +150,6 @@ namespace VVRace
             }
             else if (age < WaveTick)
             {
-                EndSustainer();
                 if (age == CompleteTick)
                 {
                     OnFormed();
@@ -189,13 +183,6 @@ namespace VVRace
         private void TickGather(int age)
         {
             var map = Map;
-            if (_gatherSustainer == null || _gatherSustainer.Ended)
-            {
-                _gatherSustainer = VVSoundDefOf.PsychicArtifactWarmupSustained.TrySpawnSustainer(
-                    SoundInfo.InMap(new TargetInfo(_formPos.ToIntVec3().ClampInsideMap(map), map), MaintenanceType.PerTick));
-            }
-            _gatherSustainer?.Maintain();
-
             var secs = age / 60f;
             if (secs >= WispEndSecs || !_formPos.ShouldSpawnMotesAt(map)) { return; }
 
@@ -301,15 +288,6 @@ namespace VVRace
                 data.instanceColor = color;
             }
             Map.flecks.CreateFleck(data);
-        }
-
-        private void EndSustainer()
-        {
-            if (_gatherSustainer != null && !_gatherSustainer.Ended)
-            {
-                _gatherSustainer.End();
-            }
-            _gatherSustainer = null;
         }
 
         #region 그리기
