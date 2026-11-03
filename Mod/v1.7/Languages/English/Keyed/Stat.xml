@@ -31,6 +31,7 @@
 <VV_StatsReport_ManaFluxRule_WeatherSnowyNoRoof_Desc>{0} mana if snowy and no roofed</VV_StatsReport_ManaFluxRule_WeatherSnowyNoRoof_Desc>
 <VV_StatsReport_ManaFluxRule_WeatherSnowy_Desc>{0} mana if snowy</VV_StatsReport_ManaFluxRule_WeatherSnowy_Desc>
 <VV_StatsReport_ManaFluxRule_Wind_Desc>{0} mana propotional to the wind speed</VV_StatsReport_ManaFluxRule_Wind_Desc>
+<VV_StatsReport_ManaFluxRule_Power_Desc>{0} mana proportional to the surplus power of the power net</VV_StatsReport_ManaFluxRule_Power_Desc>
 <VV_StatsReport_ManaFluxRule_RadialPollution_Desc>{0}~{1} mana from each near pollutions</VV_StatsReport_ManaFluxRule_RadialPollution_Desc>
 <VV_StatsReport_ManaFluxRule_PlantGrowth_Desc>{0} mana propotional to the growth</VV_StatsReport_ManaFluxRule_PlantGrowth_Desc>
 <VV_StatsReport_ManaFluxRule_Fertility_Desc>{0} mana propotional to the fertility
