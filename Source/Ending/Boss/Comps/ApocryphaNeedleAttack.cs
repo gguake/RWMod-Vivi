@@ -13,8 +13,10 @@ namespace VVRace
         private const int SpawnCheckInterval = 60;
         private const int StuckSyncInterval = 30;
         private const int StunRecoverTicks = 120;
-        // 돌파 계획은 작업을 줄 때마다 갱신된다. 갱신이 끊기면(길이 열림·추격 등) 이 시간 뒤 바늘이 평소 대상으로 돌아간다.
+        // 돌파는 접근 차례마다 한 번이다. 막히기 직전 칸에 도착한 뒤 이 시간 동안만 돌파 바늘을 쏘고, 길이 열리거나 시간이 다하면 평소 맴돌기로 돌아간다.
         private const int BreachHoldTicks = 600;
+        // 도착하지 못해도 이 시간이 지나면 돌파를 접는다.
+        private const int BreachDeadlineTicks = 5000;
         private const float BreachStandRadius = 2f;
 
         private CompApocrypha _comp;
@@ -24,12 +26,15 @@ namespace VVRace
         private bool _stunned;
         private IntVec3 _breachTarget = IntVec3.Invalid;
         private IntVec3 _breachStandCell = IntVec3.Invalid;
+        private IntVec3 _breachBlockedCell = IntVec3.Invalid;
+        private int _breachDeadlineTick = -1;
         private int _breachUntilTick = -1;
 
         private Pawn Pawn => _comp.Pawn;
         private CompProperties_Apocrypha Props => _comp.Props;
 
         public IReadOnlyList<ApocryphaNeedle> Needles => _needles;
+        public bool BreachInProgress => _breachBlockedCell.IsValid;
         public int NeedleCount => _comp.Phase == ApocryphaPhase.Unbound ? Props.unboundNeedleCount : Props.needleCount;
 
         public int StuckNeedleCount
@@ -55,6 +60,11 @@ namespace VVRace
         {
             Scribe_Values.Look(ref _readyTick, "readyTick", 0);
             Scribe_Values.Look(ref _stunned, "stunned", false);
+            Scribe_Values.Look(ref _breachTarget, "breachTarget", IntVec3.Invalid);
+            Scribe_Values.Look(ref _breachStandCell, "breachStandCell", IntVec3.Invalid);
+            Scribe_Values.Look(ref _breachBlockedCell, "breachBlockedCell", IntVec3.Invalid);
+            Scribe_Values.Look(ref _breachDeadlineTick, "breachDeadlineTick", -1);
+            Scribe_Values.Look(ref _breachUntilTick, "breachUntilTick", -1);
 
             if (Scribe.mode == LoadSaveMode.Saving)
             {
@@ -148,9 +158,12 @@ namespace VVRace
             }
         }
 
+        // 접근 차례에 찬탈 대상까지 길이 막혀 있으면 대상까지 그은 직선에서 막히기 직전 칸(standCell)을 찾아 돌파를 시작한다.
+        // 막힌 원인이 깊은 물·용암 같은 지형이나 부술 수 없는 건물이면 돌파하지 않는다.
         public bool TryStartBreach(Thing target, out IntVec3 standCell)
         {
             standCell = IntVec3.Invalid;
+            EndBreach();
             if (_comp.Phase != ApocryphaPhase.Bound || target == null || !target.Spawned || target.Map != Pawn.Map) { return false; }
             if (Pawn.CanReach(target, PathEndMode.Touch, Danger.Deadly)) { return false; }
 
@@ -188,8 +201,41 @@ namespace VVRace
 
             _breachTarget = target.Position;
             _breachStandCell = standCell;
-            _breachUntilTick = GenTicks.TicksGame + BreachHoldTicks;
+            _breachBlockedCell = blocked;
+            _breachDeadlineTick = GenTicks.TicksGame + BreachDeadlineTicks;
+            _breachUntilTick = -1;
             return true;
+        }
+
+        // 진행 중인 돌파를 이어 간다. 막힌 칸이 열렸거나 사격 시간·기한이 다하면 돌파를 접고 false를 돌려준다.
+        public bool TryContinueBreach(out IntVec3 standCell)
+        {
+            standCell = _breachStandCell;
+            if (!BreachInProgress) { return false; }
+
+            var now = GenTicks.TicksGame;
+            if (_comp.Phase != ApocryphaPhase.Bound || now > _breachDeadlineTick || (_breachUntilTick >= 0 && now > _breachUntilTick)
+                || Pawn.CanReach(_breachBlockedCell, PathEndMode.OnCell, Danger.Deadly))
+            {
+                EndBreach();
+                return false;
+            }
+
+            if (_breachUntilTick < 0 && Pawn.Position.InHorDistOf(_breachStandCell, BreachStandRadius))
+            {
+                _breachUntilTick = now + BreachHoldTicks;
+            }
+
+            return true;
+        }
+
+        public void EndBreach()
+        {
+            _breachTarget = IntVec3.Invalid;
+            _breachStandCell = IntVec3.Invalid;
+            _breachBlockedCell = IntVec3.Invalid;
+            _breachDeadlineTick = -1;
+            _breachUntilTick = -1;
         }
 
         public void Notify_NeedleStuck(ApocryphaNeedle needle)
@@ -315,7 +361,7 @@ namespace VVRace
         private bool TryGetBreachAim(int now, out IntVec3 cell)
         {
             cell = _breachTarget;
-            if (_comp.Phase != ApocryphaPhase.Bound || now > _breachUntilTick || !_breachTarget.IsValid || !_breachStandCell.IsValid) { return false; }
+            if (_comp.Phase != ApocryphaPhase.Bound || !BreachInProgress || _breachUntilTick < 0 || now > _breachUntilTick) { return false; }
 
             return Pawn.Position.InHorDistOf(_breachStandCell, BreachStandRadius);
         }

@@ -58,19 +58,31 @@ namespace VVRace
                 return PursueJob(pursuitCell);
             }
 
-            if (target != null && GenTicks.TicksGame >= comp.NextApproachTick)
+            if (target != null)
             {
-                if (comp.NeedleAttack.TryStartBreach(target, out var breachCell))
+                // 접근 차례에 길이 막혀 있으면 그 차례는 직선에서 막히기 직전 칸까지 가서 바늘로 벽을 뚫는 데 쓴다.
+                // 돌파가 끝나면(길이 열림·시간 소진) 평소처럼 맴돌다가 다음 접근 차례에 다시 전진하거나 다음 벽을 뚫는다.
+                if (comp.NeedleAttack.BreachInProgress)
                 {
-                    return BreachJob(pawn, breachCell);
+                    if (comp.NeedleAttack.TryContinueBreach(out var standCell))
+                    {
+                        return BreachJob(pawn, standCell);
+                    }
                 }
-
-                comp.Notify_Approached();
-
-                var approachJob = ApproachJob(pawn, comp, target, range);
-                if (approachJob != null)
+                else if (GenTicks.TicksGame >= comp.NextApproachTick)
                 {
-                    return approachJob;
+                    comp.Notify_Approached();
+
+                    if (comp.NeedleAttack.TryStartBreach(target, out var breachCell))
+                    {
+                        return BreachJob(pawn, breachCell);
+                    }
+
+                    var approachJob = ApproachJob(pawn, comp, target, range);
+                    if (approachJob != null)
+                    {
+                        return approachJob;
+                    }
                 }
             }
 
