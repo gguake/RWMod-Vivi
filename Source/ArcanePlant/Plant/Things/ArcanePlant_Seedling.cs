@@ -142,6 +142,7 @@ namespace VVRace
             base.ExposeData();
 
             Scribe_Defs.Look(ref _maturePlantDef, "maturePlantDef");
+            Scribe_Defs.Look(ref _seedDef, "seedDef");
 
             Scribe_Values.Look(ref _growth, "growth");
             Scribe_Values.Look(ref _lastZeroNutritionTick, "lastZeroNutritionTick");
