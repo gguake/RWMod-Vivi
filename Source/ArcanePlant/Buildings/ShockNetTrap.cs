@@ -89,6 +89,7 @@ namespace VVRace
 
         protected override void ReceiveCompSignal(string signal)
         {
+            var powered = _powered;
             if (signal == CompPowerPlant.PowerTurnedOnSignal)
             {
                 _powered = true;
@@ -96,6 +97,11 @@ namespace VVRace
             if (signal == CompPowerPlant.PowerTurnedOffSignal)
             {
                 _powered = false;
+            }
+
+            if (powered != _powered && Spawned)
+            {
+                DirtyMapMesh(Map);
             }
         }
 
