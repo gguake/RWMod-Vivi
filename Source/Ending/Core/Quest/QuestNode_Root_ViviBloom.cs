@@ -75,10 +75,28 @@ namespace VVRace
             });
 
             var siegeTicks = Mathf.RoundToInt(Mathf.Lerp(SiegeMaxDurationTicks, SiegeMinDurationTicks, Mathf.Clamp01(quality / RitualMaxQuality)));
+            var federation = ViviEndingUtility.FindFederation(requireNonHostile: true);
             var siegeText = LocalizeString_Letter.VV_Letter_EndingSiege.Translate().Resolve();
-            if (ViviEndingUtility.FindFederation(requireNonHostile: true) != null)
+            if (federation != null)
             {
                 siegeText += "\n\n" + LocalizeString_Letter.VV_Letter_EndingSiegeFederation.Translate().Resolve();
+            }
+
+            // 개화 시작 시 연방을 동맹으로 올리고 퀘스트가 끝날 때까지 우호도를 잠근다(지원군 사망 등으로 깎이지 않도록).
+            if (federation != null)
+            {
+                quest.AddPart(new QuestPart_ViviFederationAlliance()
+                {
+                    inSignal = initiate,
+                    faction = federation,
+                });
+
+                quest.AddPart(new QuestPart_FactionGoodwillLocked()
+                {
+                    inSignalEnable = initiate,
+                    faction1 = Faction.OfPlayer,
+                    faction2 = federation,
+                });
             }
 
             quest.AddPart(new QuestPart_Letter()
