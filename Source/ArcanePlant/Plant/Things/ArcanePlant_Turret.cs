@@ -219,6 +219,8 @@ namespace VVRace
 
         protected override void Tick()
         {
+            base.Tick();
+
             if (Active && Spawned && !Destroyed)
             {
                 GunCompEq.verbTracker.VerbsTick();
