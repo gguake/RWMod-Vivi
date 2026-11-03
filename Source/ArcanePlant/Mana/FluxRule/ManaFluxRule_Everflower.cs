@@ -10,6 +10,8 @@ namespace VVRace
 
         public override IntRange FluxRangeForDisplay => new IntRange(-1, -1);
 
+        public override bool IsFluxHidden => true;
+
         public override string GetRuleString() => $"+???";
 
         public override string GetRuleLabel() =>

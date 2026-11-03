@@ -6,6 +6,8 @@ namespace VVRace
     {
         public abstract IntRange FluxRangeForDisplay { get; }
 
+        public virtual bool IsFluxHidden => false;
+
         public abstract int CalcManaFlux(Thing thing);
 
         public abstract string GetRuleString();

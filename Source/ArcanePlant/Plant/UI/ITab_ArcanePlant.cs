@@ -13,6 +13,7 @@ namespace VVRace
         private const float RowPadding = 6f;
         private const float RuleIndent = 14f;
         private const float ValueColumnWidth = 104f;
+        private const string HiddenFluxString = "???";
 
         private static readonly Vector2 WinSize = new Vector2(460f, 450f);
         private static readonly Color PositiveValueColor = new Color(0.5f, 1f, 0.5f);
@@ -192,24 +193,25 @@ namespace VVRace
             {
                 // 규칙별 표시와 합계가 일치하도록 250틱 주기의 CompMana 캐시 대신 실시간 계산값을 사용한다.
                 var healthPct = (float)plant.HitPoints / plant.MaxHitPoints;
-                var generatesByDay = plant.Spawned ?
+                var generateHidden = EnumerateLeafRules(props.manaGenerateRule).Any(v => v.IsFluxHidden);
+                var generatesByDay = plant.Spawned && !generateHidden ?
                     Mathf.RoundToInt(props.manaGenerateRule.CalcManaFlux(plant) * healthPct) : 0;
 
                 DrawValueRow(
                     width, ref curY,
                     LocalizeString_ITab.VV_ITab_ArcanePlant_ManaGenerate.Translate(),
-                    PerDay(FormatSigned(generatesByDay)),
-                    generatesByDay > 0 ? PositiveValueColor : Color.gray,
+                    PerDay(generateHidden ? HiddenFluxString : FormatSigned(generatesByDay)),
+                    generateHidden || generatesByDay > 0 ? PositiveValueColor : Color.gray,
                     ref alternate);
 
                 foreach (var rule in EnumerateLeafRules(props.manaGenerateRule))
                 {
-                    var flux = plant.Spawned ? rule.CalcManaFlux(plant) : 0;
+                    var flux = plant.Spawned && !rule.IsFluxHidden ? rule.CalcManaFlux(plant) : 0;
                     DrawValueRow(
                         width, ref curY,
                         rule.GetRuleLabel(),
-                        PerDay(FormatSigned(flux)),
-                        flux > 0 ? PositiveValueColor : Color.gray,
+                        PerDay(rule.IsFluxHidden ? HiddenFluxString : FormatSigned(flux)),
+                        rule.IsFluxHidden || flux > 0 ? PositiveValueColor : Color.gray,
                         ref alternate,
                         indent: RuleIndent,
                         tooltip: rule.GetRuleString());
@@ -227,23 +229,24 @@ namespace VVRace
 
             if (props.manaConsumeRule != null)
             {
-                var consumesByDay = plant.Spawned ? props.manaConsumeRule.CalcManaFlux(plant) : 0;
+                var consumeHidden = EnumerateLeafRules(props.manaConsumeRule).Any(v => v.IsFluxHidden);
+                var consumesByDay = plant.Spawned && !consumeHidden ? props.manaConsumeRule.CalcManaFlux(plant) : 0;
 
                 DrawValueRow(
                     width, ref curY,
                     LocalizeString_ITab.VV_ITab_ArcanePlant_ManaConsume.Translate(),
-                    PerDay(FormatSigned(-consumesByDay)),
-                    consumesByDay > 0 ? NegativeValueColor : Color.gray,
+                    PerDay(consumeHidden ? HiddenFluxString : FormatSigned(-consumesByDay)),
+                    consumeHidden || consumesByDay > 0 ? NegativeValueColor : Color.gray,
                     ref alternate);
 
                 foreach (var rule in EnumerateLeafRules(props.manaConsumeRule))
                 {
-                    var flux = plant.Spawned ? rule.CalcManaFlux(plant) : 0;
+                    var flux = plant.Spawned && !rule.IsFluxHidden ? rule.CalcManaFlux(plant) : 0;
                     DrawValueRow(
                         width, ref curY,
                         rule.GetRuleLabel(),
-                        PerDay(FormatSigned(-flux)),
-                        flux > 0 ? NegativeValueColor : Color.gray,
+                        PerDay(rule.IsFluxHidden ? HiddenFluxString : FormatSigned(-flux)),
+                        rule.IsFluxHidden || flux > 0 ? NegativeValueColor : Color.gray,
                         ref alternate,
                         indent: RuleIndent,
                         tooltip: rule.GetRuleString());
