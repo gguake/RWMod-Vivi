@@ -35,39 +35,45 @@
       <li>
         <label>faint</label>
         <statOffsets>
-          <MeleeDodgeChance>2</MeleeDodgeChance>
-          <MeleeHitChance>0.8</MeleeHitChance>
+          <MeleeDodgeChance>3</MeleeDodgeChance>
+          <MeleeHitChance>1.2</MeleeHitChance>
         </statOffsets>
       </li>
       <li>
         <label>subtle</label>
         <minSeverity>0.2</minSeverity>
         <statOffsets>
-          <MeleeDodgeChance>4</MeleeDodgeChance>
-          <MeleeHitChance>1.6</MeleeHitChance>
+          <MeleeDodgeChance>3</MeleeDodgeChance>
+          <MeleeHitChance>1.2</MeleeHitChance>
         </statOffsets>
       </li>
       <li>
         <label>moderate</label>
         <minSeverity>0.4</minSeverity>
         <statOffsets>
-          <MeleeDodgeChance>6</MeleeDodgeChance>
+          <MeleeDodgeChance>9</MeleeDodgeChance>
           <MeleeHitChance>2.4</MeleeHitChance>
         </statOffsets>
+        <capMods>
+          <li><capacity>Manipulation</capacity><postFactor>1.05</postFactor></li>
+        </capMods>
       </li>
       <li>
         <label>rich</label>
         <minSeverity>0.6</minSeverity>
         <statOffsets>
-          <MeleeDodgeChance>8</MeleeDodgeChance>
+          <MeleeDodgeChance>9</MeleeDodgeChance>
           <MeleeHitChance>3.2</MeleeHitChance>
         </statOffsets>
+        <capMods>
+          <li><capacity>Manipulation</capacity><postFactor>1.05</postFactor></li>
+        </capMods>
       </li>
       <li>
         <label>intense</label>
         <minSeverity>0.8</minSeverity>
         <statOffsets>
-          <MeleeDodgeChance>10</MeleeDodgeChance>
+          <MeleeDodgeChance>9</MeleeDodgeChance>
           <MeleeHitChance>4</MeleeHitChance>
         </statOffsets>
         <capMods>
@@ -94,16 +100,16 @@
       <li>
         <label>faint</label>
         <statOffsets>
-          <ShootingAccuracyPawn>0.8</ShootingAccuracyPawn>
-          <RangedCooldownFactor>-0.02</RangedCooldownFactor>
+          <ShootingAccuracyPawn>1.2</ShootingAccuracyPawn>
+          <RangedCooldownFactor>-0.03</RangedCooldownFactor>
         </statOffsets>
       </li>
       <li>
         <label>subtle</label>
         <minSeverity>0.2</minSeverity>
         <statOffsets>
-          <ShootingAccuracyPawn>1.6</ShootingAccuracyPawn>
-          <RangedCooldownFactor>-0.04</RangedCooldownFactor>
+          <ShootingAccuracyPawn>1.2</ShootingAccuracyPawn>
+          <RangedCooldownFactor>-0.03</RangedCooldownFactor>
         </statOffsets>
       </li>
       <li>
@@ -113,6 +119,9 @@
           <ShootingAccuracyPawn>2.4</ShootingAccuracyPawn>
           <RangedCooldownFactor>-0.06</RangedCooldownFactor>
         </statOffsets>
+        <capMods>
+          <li><capacity>Consciousness</capacity><postFactor>1.05</postFactor></li>
+        </capMods>
       </li>
       <li>
         <label>rich</label>
@@ -121,6 +130,9 @@
           <ShootingAccuracyPawn>3.2</ShootingAccuracyPawn>
           <RangedCooldownFactor>-0.08</RangedCooldownFactor>
         </statOffsets>
+        <capMods>
+          <li><capacity>Consciousness</capacity><postFactor>1.05</postFactor></li>
+        </capMods>
       </li>
       <li>
         <label>intense</label>
@@ -156,7 +168,7 @@
           <ToxicResistance>0.2</ToxicResistance>
         </statOffsets>
         <statFactors>
-          <Flammability>0.7</Flammability>
+          <Flammability>0.5</Flammability>
         </statFactors>
       </li>
       <li>
@@ -166,7 +178,7 @@
           <ToxicResistance>0.4</ToxicResistance>
         </statOffsets>
         <statFactors>
-          <Flammability>0.4</Flammability>
+          <Flammability>0.5</Flammability>
         </statFactors>
       </li>
       <li>
@@ -219,10 +231,10 @@
       <li>
         <label>faint</label>
         <statOffsets>
-          <MentalBreakThreshold>-0.01</MentalBreakThreshold>
+          <MentalBreakThreshold>-0.02</MentalBreakThreshold>
         </statOffsets>
         <statFactors>
-          <InjuryHealingFactor>1.06</InjuryHealingFactor>
+          <InjuryHealingFactor>1.1</InjuryHealingFactor>
         </statFactors>
       </li>
       <li>
@@ -232,27 +244,27 @@
           <MentalBreakThreshold>-0.02</MentalBreakThreshold>
         </statOffsets>
         <statFactors>
-          <InjuryHealingFactor>1.12</InjuryHealingFactor>
+          <InjuryHealingFactor>1.1</InjuryHealingFactor>
         </statFactors>
       </li>
       <li>
         <label>moderate</label>
         <minSeverity>0.4</minSeverity>
         <statOffsets>
-          <MentalBreakThreshold>-0.03</MentalBreakThreshold>
+          <MentalBreakThreshold>-0.05</MentalBreakThreshold>
         </statOffsets>
         <statFactors>
-          <InjuryHealingFactor>1.18</InjuryHealingFactor>
+          <InjuryHealingFactor>1.25</InjuryHealingFactor>
         </statFactors>
       </li>
       <li>
         <label>rich</label>
         <minSeverity>0.6</minSeverity>
         <statOffsets>
-          <MentalBreakThreshold>-0.04</MentalBreakThreshold>
+          <MentalBreakThreshold>-0.05</MentalBreakThreshold>
         </statOffsets>
         <statFactors>
-          <InjuryHealingFactor>1.24</InjuryHealingFactor>
+          <InjuryHealingFactor>1.25</InjuryHealingFactor>
         </statFactors>
       </li>
       <li>
@@ -262,7 +274,7 @@
           <MentalBreakThreshold>-0.05</MentalBreakThreshold>
         </statOffsets>
         <statFactors>
-          <InjuryHealingFactor>1.3</InjuryHealingFactor>
+          <InjuryHealingFactor>1.25</InjuryHealingFactor>
         </statFactors>
       </li>
     </stages>
@@ -285,33 +297,33 @@
       <li>
         <label>faint</label>
         <statOffsets>
-          <WorkSpeedGlobal>0.02</WorkSpeedGlobal>
+          <WorkSpeedGlobal>0.03</WorkSpeedGlobal>
         </statOffsets>
-        <hungerRateFactor>0.98</hungerRateFactor>
+        <hungerRateFactor>0.95</hungerRateFactor>
       </li>
       <li>
         <label>subtle</label>
         <minSeverity>0.2</minSeverity>
         <statOffsets>
-          <WorkSpeedGlobal>0.04</WorkSpeedGlobal>
+          <WorkSpeedGlobal>0.03</WorkSpeedGlobal>
         </statOffsets>
-        <hungerRateFactor>0.96</hungerRateFactor>
+        <hungerRateFactor>0.95</hungerRateFactor>
       </li>
       <li>
         <label>moderate</label>
         <minSeverity>0.4</minSeverity>
         <statOffsets>
-          <WorkSpeedGlobal>0.06</WorkSpeedGlobal>
+          <WorkSpeedGlobal>0.1</WorkSpeedGlobal>
         </statOffsets>
-        <hungerRateFactor>0.94</hungerRateFactor>
+        <hungerRateFactor>0.9</hungerRateFactor>
       </li>
       <li>
         <label>rich</label>
         <minSeverity>0.6</minSeverity>
         <statOffsets>
-          <WorkSpeedGlobal>0.08</WorkSpeedGlobal>
+          <WorkSpeedGlobal>0.1</WorkSpeedGlobal>
         </statOffsets>
-        <hungerRateFactor>0.92</hungerRateFactor>
+        <hungerRateFactor>0.9</hungerRateFactor>
       </li>
       <li>
         <label>intense</label>
@@ -342,8 +354,8 @@
         <label>faint</label>
         <statOffsets>
           <PainShockThreshold>0.01</PainShockThreshold>
-          <RestRateMultiplier>0.03</RestRateMultiplier>
-          <VacuumResistance MayRequire="Ludeon.RimWorld.Odyssey">0.2</VacuumResistance>
+          <RestRateMultiplier>0.05</RestRateMultiplier>
+          <VacuumResistance MayRequire="Ludeon.RimWorld.Odyssey">0.5</VacuumResistance>
         </statOffsets>
       </li>
       <li>
@@ -351,8 +363,8 @@
         <minSeverity>0.2</minSeverity>
         <statOffsets>
           <PainShockThreshold>0.02</PainShockThreshold>
-          <RestRateMultiplier>0.06</RestRateMultiplier>
-          <VacuumResistance MayRequire="Ludeon.RimWorld.Odyssey">0.4</VacuumResistance>
+          <RestRateMultiplier>0.05</RestRateMultiplier>
+          <VacuumResistance MayRequire="Ludeon.RimWorld.Odyssey">0.5</VacuumResistance>
         </statOffsets>
       </li>
       <li>
@@ -360,8 +372,8 @@
         <minSeverity>0.4</minSeverity>
         <statOffsets>
           <PainShockThreshold>0.03</PainShockThreshold>
-          <RestRateMultiplier>0.09</RestRateMultiplier>
-          <VacuumResistance MayRequire="Ludeon.RimWorld.Odyssey">0.6</VacuumResistance>
+          <RestRateMultiplier>0.12</RestRateMultiplier>
+          <VacuumResistance MayRequire="Ludeon.RimWorld.Odyssey">0.95</VacuumResistance>
         </statOffsets>
       </li>
       <li>
@@ -370,7 +382,7 @@
         <statOffsets>
           <PainShockThreshold>0.04</PainShockThreshold>
           <RestRateMultiplier>0.12</RestRateMultiplier>
-          <VacuumResistance MayRequire="Ludeon.RimWorld.Odyssey">0.8</VacuumResistance>
+          <VacuumResistance MayRequire="Ludeon.RimWorld.Odyssey">0.95</VacuumResistance>
         </statOffsets>
       </li>
       <li>
@@ -378,7 +390,7 @@
         <minSeverity>0.8</minSeverity>
         <statOffsets>
           <PainShockThreshold>0.05</PainShockThreshold>
-          <RestRateMultiplier>0.15</RestRateMultiplier>
+          <RestRateMultiplier>0.12</RestRateMultiplier>
           <VacuumResistance MayRequire="Ludeon.RimWorld.Odyssey">0.95</VacuumResistance>
         </statOffsets>
       </li>
@@ -402,7 +414,7 @@
       <li>
         <label>faint</label>
         <statOffsets>
-          <ComfyTemperatureMin>-2</ComfyTemperatureMin>
+          <ComfyTemperatureMin>-3</ComfyTemperatureMin>
           <ImmunityGainSpeed>0.03</ImmunityGainSpeed>
         </statOffsets>
       </li>
@@ -410,7 +422,7 @@
         <label>subtle</label>
         <minSeverity>0.2</minSeverity>
         <statOffsets>
-          <ComfyTemperatureMin>-4</ComfyTemperatureMin>
+          <ComfyTemperatureMin>-6</ComfyTemperatureMin>
           <ImmunityGainSpeed>0.06</ImmunityGainSpeed>
         </statOffsets>
       </li>
@@ -418,7 +430,7 @@
         <label>moderate</label>
         <minSeverity>0.4</minSeverity>
         <statOffsets>
-          <ComfyTemperatureMin>-6</ComfyTemperatureMin>
+          <ComfyTemperatureMin>-9</ComfyTemperatureMin>
           <ImmunityGainSpeed>0.09</ImmunityGainSpeed>
         </statOffsets>
       </li>
@@ -426,7 +438,7 @@
         <label>rich</label>
         <minSeverity>0.6</minSeverity>
         <statOffsets>
-          <ComfyTemperatureMin>-8</ComfyTemperatureMin>
+          <ComfyTemperatureMin>-12</ComfyTemperatureMin>
           <ImmunityGainSpeed>0.12</ImmunityGainSpeed>
         </statOffsets>
       </li>
@@ -434,7 +446,7 @@
         <label>intense</label>
         <minSeverity>0.8</minSeverity>
         <statOffsets>
-          <ComfyTemperatureMin>-10</ComfyTemperatureMin>
+          <ComfyTemperatureMin>-15</ComfyTemperatureMin>
           <ImmunityGainSpeed>0.15</ImmunityGainSpeed>
         </statOffsets>
       </li>
@@ -458,47 +470,47 @@
       <li>
         <label>faint</label>
         <statOffsets>
-          <ComfyTemperatureMax>2</ComfyTemperatureMax>
+          <ComfyTemperatureMax>3</ComfyTemperatureMax>
         </statOffsets>
         <statFactors>
-          <RestFallRateFactor>0.97</RestFallRateFactor>
+          <RestFallRateFactor>0.95</RestFallRateFactor>
         </statFactors>
       </li>
       <li>
         <label>subtle</label>
         <minSeverity>0.2</minSeverity>
         <statOffsets>
-          <ComfyTemperatureMax>4</ComfyTemperatureMax>
+          <ComfyTemperatureMax>6</ComfyTemperatureMax>
         </statOffsets>
         <statFactors>
-          <RestFallRateFactor>0.94</RestFallRateFactor>
+          <RestFallRateFactor>0.95</RestFallRateFactor>
         </statFactors>
       </li>
       <li>
         <label>moderate</label>
         <minSeverity>0.4</minSeverity>
         <statOffsets>
-          <ComfyTemperatureMax>6</ComfyTemperatureMax>
+          <ComfyTemperatureMax>9</ComfyTemperatureMax>
         </statOffsets>
         <statFactors>
-          <RestFallRateFactor>0.91</RestFallRateFactor>
+          <RestFallRateFactor>0.85</RestFallRateFactor>
         </statFactors>
       </li>
       <li>
         <label>rich</label>
         <minSeverity>0.6</minSeverity>
         <statOffsets>
-          <ComfyTemperatureMax>8</ComfyTemperatureMax>
+          <ComfyTemperatureMax>12</ComfyTemperatureMax>
         </statOffsets>
         <statFactors>
-          <RestFallRateFactor>0.88</RestFallRateFactor>
+          <RestFallRateFactor>0.85</RestFallRateFactor>
         </statFactors>
       </li>
       <li>
         <label>intense</label>
         <minSeverity>0.8</minSeverity>
         <statOffsets>
-          <ComfyTemperatureMax>10</ComfyTemperatureMax>
+          <ComfyTemperatureMax>15</ComfyTemperatureMax>
         </statOffsets>
         <statFactors>
           <RestFallRateFactor>0.85</RestFallRateFactor>
