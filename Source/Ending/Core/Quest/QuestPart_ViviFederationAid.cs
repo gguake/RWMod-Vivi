@@ -1,101 +1,90 @@
 ﻿using RimWorld;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using Verse;
-using Verse.AI.Group;
 
 namespace VVRace
 {
+    // 바닐라 스토리텔러의 동맹 지원(StorytellerComp_FactionInteraction + RaidFriendly)과 같은 구조로 동작한다.
+    // 앵커 맵의 위험도가 높을 때만 연방 지원군을 부르고, 구성과 규모는 RaidFriendly가 연방 전투 그룹으로 현재 위협 포인트만큼 생성한다.
     public class QuestPart_ViviFederationAid : QuestPartActivable
     {
-        private const int TickInterval = 250;
-        private static readonly IntRange IntervalTicks = new IntRange(90000, 150000);
-        private static readonly IntRange CountRange = new IntRange(3, 6);
+        // 지원은 위협이 있으면 반드시 오므로 위협 검사를 드물게 해서 도착 시점이 들쭉날쭉하게 한다.
+        // 위협을 발견하면 요청이 연방에 닿아 출발하기까지 1~2시간 뒤 도착하고, 그때 위협이 사라졌으면 오지 않는다.
+        private const int CheckIntervalTicks = 10000;
+        private const int MinSpacingTicks = 24000;
+        private const float MinActiveThreatCombatPower = 120f;
+        private static readonly IntRange ArrivalDelayTicks = new IntRange(2500, 5000);
 
         public ArcanePlant_Everflower anchor;
 
-        private int _nextTick = -1;
+        private int _arrivalTick = -1;
+        private int _cooldownUntilTick = -1;
 
-        protected override void Enable(SignalArgs receivedArgs)
-        {
-            base.Enable(receivedArgs);
-            _nextTick = Find.TickManager.TicksGame + IntervalTicks.RandomInRange;
-        }
+        private Map AnchorMap => anchor != null && !anchor.Destroyed ? anchor.MapHeld : null;
 
         public override void QuestPartTick()
         {
             base.QuestPartTick();
 
             var now = Find.TickManager.TicksGame;
-            if (now % TickInterval != 0 || now < _nextTick) { return; }
-
-            _nextTick = now + IntervalTicks.RandomInRange;
-
-            var map = anchor != null && !anchor.Destroyed ? anchor.MapHeld : null;
-            if (map != null)
+            if (_arrivalTick >= 0)
             {
-                TrySendReinforcements(map);
+                if (now < _arrivalTick) { return; }
+
+                _arrivalTick = -1;
+                var arrivalMap = AnchorMap;
+                if (arrivalMap != null && IsUnderThreat(arrivalMap) && TrySendReinforcements(arrivalMap))
+                {
+                    _cooldownUntilTick = now + MinSpacingTicks;
+                }
+                return;
+            }
+
+            if (now % CheckIntervalTicks != 0 || now < _cooldownUntilTick) { return; }
+
+            var map = AnchorMap;
+            if (map != null && IsUnderThreat(map))
+            {
+                _arrivalTick = now + ArrivalDelayTicks.RandomInRange;
             }
         }
 
-        private void TrySendReinforcements(Map map)
+        // DangerWatcher의 High 판정과 RaidFriendly.CanFireNowSub의 활성 위협 전투력 조건을 함께 본다.
+        private static bool IsUnderThreat(Map map)
+        {
+            if (map.dangerWatcher.DangerRating != StoryDanger.High) { return false; }
+
+            var combatPower = map.attackTargetsCache.TargetsHostileToColony
+                .Where(t => GenHostility.IsActiveThreatToPlayer(t))
+                .Sum(t => t is Pawn pawn ? pawn.kindDef.combatPower : 0f);
+            return combatPower > MinActiveThreatCombatPower;
+        }
+
+        private bool TrySendReinforcements(Map map)
         {
             var federation = ViviEndingUtility.FindFederation(requireNonHostile: true);
-            if (federation == null) { return; }
+            if (federation == null) { return false; }
 
-            var kinds = new List<PawnKindDef>(3);
-            if (VVPawnKindDefOf.VV_ViviGuard != null)
+            // 도착 방식은 스토리텔러 지원처럼 습격 전략이 고르게 둔다(중앙 드롭포드는 포인트가 0.3~0.5배로 깎인다).
+            var parms = new IncidentParms
             {
-                kinds.Add(VVPawnKindDefOf.VV_ViviGuard);
-            }
-            if (VVPawnKindDefOf.VV_ViviFirefighter != null)
-            {
-                kinds.Add(VVPawnKindDefOf.VV_ViviFirefighter);
-            }
-            if (VVPawnKindDefOf.VV_ViviSniper != null)
-            {
-                kinds.Add(VVPawnKindDefOf.VV_ViviSniper);
-            }
-            if (kinds.Count == 0) { return; }
+                target = map,
+                faction = federation,
+                points = StorytellerUtility.DefaultThreatPointsNow(map),
+                quest = quest,
+                customLetterLabel = LocalizeString_Letter.VV_Letter_EndingFederationAidLabel.Translate(),
+                customLetterText = LocalizeString_Letter.VV_Letter_EndingFederationAid.Translate(),
+            };
 
-            var altar = ViviEndingUtility.AltarOf(anchor);
-            var center = altar != null && altar.Spawned && altar.Map == map ? altar.Position : anchor.PositionHeld;
-
-            var count = CountRange.RandomInRange;
-            var pawns = new List<Pawn>(count);
-            try
-            {
-                for (int i = 0; i < count; ++i)
-                {
-                    var request = new PawnGenerationRequest(kinds.RandomElement(), federation, PawnGenerationContext.NonPlayer, map.Tile, mustBeCapableOfViolence: true);
-                    pawns.Add(PawnGenerator.GeneratePawn(request));
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.Error($"[ViViRace] failed to generate federation reinforcements: {ex}");
-            }
-
-            if (pawns.Count == 0) { return; }
-
-            DropPodUtility.DropThingsNear(center, map, pawns.Cast<Thing>(), canRoofPunch: false, forbid: false, allowFogged: false, faction: federation);
-            LordMaker.MakeNewLord(federation, new LordJob_AssistColony(federation, center), map, pawns);
-
-            Find.LetterStack.ReceiveLetter(
-                LocalizeString_Letter.VV_Letter_EndingFederationAidLabel.Translate(),
-                LocalizeString_Letter.VV_Letter_EndingFederationAid.Translate(pawns.Count.Named("COUNT")),
-                LetterDefOf.PositiveEvent,
-                new LookTargets(pawns),
-                federation,
-                quest);
+            return IncidentDefOf.RaidFriendly.Worker.TryExecute(parms);
         }
 
         public override void ExposeData()
         {
             base.ExposeData();
             Scribe_References.Look(ref anchor, "anchor");
-            Scribe_Values.Look(ref _nextTick, "nextTick", -1);
+            Scribe_Values.Look(ref _arrivalTick, "arrivalTick", -1);
+            Scribe_Values.Look(ref _cooldownUntilTick, "cooldownUntilTick", -1);
         }
     }
 }

@@ -43,10 +43,10 @@
 
 <VV_Letter_EndingSiegeLabel>Pulsing everflower</VV_Letter_EndingSiegeLabel>
 <VV_Letter_EndingSiege>The everflower has begun to attune successfully and has entered a new stage of growth. But drawn by the mana waves spreading from the altar and by the towering everflower visible from afar, enemies are converging on the colony.</VV_Letter_EndingSiege>
-<VV_Letter_EndingSiegeFederation>The vivi federation will send elite reinforcements from time to time.</VV_Letter_EndingSiegeFederation>
+<VV_Letter_EndingSiegeFederation>The vivi federation will send reinforcements when enemies attack.</VV_Letter_EndingSiegeFederation>
 
 <VV_Letter_EndingFederationAidLabel>Federation reinforcements</VV_Letter_EndingFederationAidLabel>
-<VV_Letter_EndingFederationAid>The vivi federation has sent {COUNT} elite warriors to defend the everflower altar. They will fight alongside you for a time before returning home.</VV_Letter_EndingFederationAid>
+<VV_Letter_EndingFederationAid>The vivi federation has sent warriors to defend the everflower altar. They will fight alongside you for a time before returning home.</VV_Letter_EndingFederationAid>
 
 <VV_Letter_EndingCalmLabel>Stillness</VV_Letter_EndingCalmLabel>
 <VV_Letter_EndingCalm>The everflower is finally on the verge of full bloom. However, an unknown psychic wave has halted its blooming.\n\nThrough the resonance, {PAWN_labelShort} senses countless souls approaching, with something at their center.</VV_Letter_EndingCalm>

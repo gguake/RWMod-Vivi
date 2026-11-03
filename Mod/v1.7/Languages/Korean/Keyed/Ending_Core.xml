@@ -43,10 +43,10 @@
 
 <VV_Letter_EndingSiegeLabel>맥동하는 영원꽃</VV_Letter_EndingSiegeLabel>
 <VV_Letter_EndingSiege>영원꽃이 성공적으로 조율되기 시작했고 새로운 성장을 맞이했습니다. 하지만 제단에서 퍼져 나간 마나 파동과 멀리서도 식별되는 거대한 영원꽃에 이끌려 적들이 정착지로 몰려들고 있습니다.</VV_Letter_EndingSiege>
-<VV_Letter_EndingSiegeFederation>비비 연방이 때때로 정예 지원군을 보내올 것입니다.</VV_Letter_EndingSiegeFederation>
+<VV_Letter_EndingSiegeFederation>적이 쳐들어오면 비비 연방이 지원군을 보내올 것입니다.</VV_Letter_EndingSiegeFederation>
 
 <VV_Letter_EndingFederationAidLabel>비비 연방 지원군</VV_Letter_EndingFederationAidLabel>
-<VV_Letter_EndingFederationAid>비비 연방이 영원꽃 제단을 지키기 위해 정예 지원군 {COUNT}명을 파견했습니다. 이들은 한동안 함께 싸운 뒤 돌아갈 것입니다.</VV_Letter_EndingFederationAid>
+<VV_Letter_EndingFederationAid>비비 연방이 영원꽃 제단을 지키기 위해 지원군을 파견했습니다. 이들은 한동안 함께 싸운 뒤 돌아갈 것입니다.</VV_Letter_EndingFederationAid>
 
 <VV_Letter_EndingCalmLabel>고요함</VV_Letter_EndingCalmLabel>
 <VV_Letter_EndingCalm>영원꽃이 마침내 만개하기 직전에 도달했습니다. 하지만 알 수 없는 초정신 파장에 의해 영원꽃의 개화가 멈췄습니다.\n\n{PAWN_labelShort}(은)는 공명 너머로 수많은 동족의 영혼과, 그 중심에 있는 무언가가 다가오는 것을 느낍니다.</VV_Letter_EndingCalm>
