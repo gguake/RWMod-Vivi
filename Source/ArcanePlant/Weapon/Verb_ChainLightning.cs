@@ -99,12 +99,7 @@ namespace VVRace
             {
                 if (_manaComp == null)
                 {
-                    _manaComp = caster?.TryGetComp<CompMana>();
-                }
-
-                if (_manaComp == null)
-                {
-                    _manaComp = EquipmentSource?.TryGetComp<CompMana>();
+                    _manaComp = ManaWeaponCastState.FindManaComp(this);
                 }
 
                 return _manaComp;
@@ -139,8 +134,8 @@ namespace VVRace
             var compMana = ManaComp;
             if (compMana == null) { return false; }
 
-            var manaPerShoot = EquipmentSource?.GetStatValue(VVStatDefOf.VV_RangedWeapon_ManaCost) / ShotsPerBurst ?? 0;
-            if (compMana.Stored < manaPerShoot && !ManaWeaponCastState.AppliesTo(this)) { return false; }
+            var manaPerShoot = ManaWeaponCastState.ManaCostPerShot(this);
+            if (!ManaWeaponCastState.CanPayShot(this, compMana, manaPerShoot)) { return false; }
 
             var los = TryFindShootLineFromTo(caster.Position, currentTarget, out var resultingLine);
             if (verbProps.stopBurstWithoutLos && !los)
