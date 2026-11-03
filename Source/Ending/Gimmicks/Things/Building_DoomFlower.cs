@@ -14,15 +14,18 @@ namespace VVRace
         private int _bloomTick = -1;
         private int _nextHornetTick = -1;
 
-        public static int ScaledBloomDelayTicks => Mathf.Max(1, Mathf.RoundToInt(BloomDelayTicks * CompApocrypha.DoomBloomTimeFactor));
+        // 난이도 배율은 보스전 시작 시점에 보스가 고정한 값을 쓴다.
+        private CompApocrypha BossComp => ApocryphaGimmicks.FindBoss(Map)?.TryGetComp<CompApocrypha>();
+
+        private int ScaledBloomDelayTicks => Mathf.Max(1, Mathf.RoundToInt(BloomDelayTicks * (BossComp?.DoomBloomTimeFactor ?? 1f)));
 
         // 만개 지연과 같은 난이도 배율을 쓴다.
-        private static int ScaledHornetIntervalTicks
+        private int ScaledHornetIntervalTicks
         {
             get
             {
-                var props = VVThingDefOf.VV_Apocrypha?.GetCompProperties<CompProperties_Apocrypha>();
-                return Mathf.Max(1, Mathf.RoundToInt((props?.doomFlowerHornetIntervalTicks ?? 10000) * CompApocrypha.DoomBloomTimeFactor));
+                var comp = BossComp;
+                return Mathf.Max(1, Mathf.RoundToInt((comp?.Props.doomFlowerHornetIntervalTicks ?? 10000) * (comp?.DoomBloomTimeFactor ?? 1f)));
             }
         }
 

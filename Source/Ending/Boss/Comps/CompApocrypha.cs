@@ -163,6 +163,9 @@ namespace VVRace
         private long _bondCount;
         private float _vitality;
         private float _maxVitality;
+        // 보스전 도중 난이도 설정을 바꿔도 보정치가 흔들리지 않도록 시작 시점의 위협 척도·위협 점수를 고정한다.
+        private float _threatScale = 1f;
+        private float _threatPoints;
         private int _transformStartTick = -1;
         private bool _transformSwapped;
         private bool _pendingDeath;
@@ -206,8 +209,10 @@ namespace VVRace
         public float ManaShield => _manaShield;
         public float MaxManaShield => Props.manaShieldMax * HitPointsDifficultyFactor;
 
-        public static float ThreatScale => Find.Storyteller?.difficulty?.threatScale ?? 1f;
-        public float HitPointsDifficultyFactor => Mathf.Max(0.1f, Props.hitPointsFactorByThreatScale?.Evaluate(ThreatScale) ?? 1f);
+        public float ThreatScale => _threatScale;
+        public float ThreatPoints => _threatPoints;
+        public float HitPointsDifficultyFactor => Mathf.Max(0.1f, Props.hitPointsFactorByThreatScale?.Evaluate(_threatScale) ?? 1f);
+        public float DoomBloomTimeFactor => Mathf.Max(0.1f, Props.doomBloomTimeFactorByThreatScale?.Evaluate(_threatScale) ?? 1f);
 
         public int ArrivalHornetCount => ScaledHornetCount(Props.arrivalHornetCount);
 
@@ -219,18 +224,8 @@ namespace VVRace
 
         private int ScaledHornetCount(int baseCount)
         {
-            var map = parent.MapHeld;
-            var factor = map != null ? Props.hornetCountFactorByThreatPoints?.Evaluate(StorytellerUtility.DefaultThreatPointsNow(map)) ?? 1f : 1f;
+            var factor = Props.hornetCountFactorByThreatPoints?.Evaluate(_threatPoints) ?? 1f;
             return Mathf.Max(1, Mathf.RoundToInt(baseCount * factor));
-        }
-
-        public static float DoomBloomTimeFactor
-        {
-            get
-            {
-                var props = VVThingDefOf.VV_Apocrypha?.GetCompProperties<CompProperties_Apocrypha>();
-                return Mathf.Max(0.1f, props?.doomBloomTimeFactorByThreatScale?.Evaluate(ThreatScale) ?? 1f);
-            }
         }
         public bool ShieldBroken => _shieldBroken || _pendingShieldBreak;
 
@@ -315,6 +310,8 @@ namespace VVRace
 
             _initialized = true;
             _phase = ApocryphaPhase.Bound;
+            _threatScale = Find.Storyteller?.difficulty?.threatScale ?? 1f;
+            _threatPoints = parent.MapHeld != null ? StorytellerUtility.DefaultThreatPointsNow(parent.MapHeld) : 0f;
             _bondCount = Props.initialBondCount;
             _maxVitality = Props.maxVitality * HitPointsDifficultyFactor;
             _vitality = _maxVitality;
@@ -363,6 +360,8 @@ namespace VVRace
             Scribe_Values.Look(ref _bondCount, "bondCount", 0L);
             Scribe_Values.Look(ref _vitality, "vitality", 0f);
             Scribe_Values.Look(ref _maxVitality, "maxVitality", 0f);
+            Scribe_Values.Look(ref _threatScale, "threatScale", 1f);
+            Scribe_Values.Look(ref _threatPoints, "threatPoints", 0f);
             Scribe_Values.Look(ref _transformStartTick, "transformStartTick", -1);
             Scribe_Values.Look(ref _transformSwapped, "transformSwapped", false);
             Scribe_Values.Look(ref _pendingDeath, "pendingDeath", false);
