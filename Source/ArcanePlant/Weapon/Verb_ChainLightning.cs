@@ -267,8 +267,6 @@ namespace VVRace
                 targetPosition = currentTarget.CenterVector3
             });
 
-            TryCastNextBurstShot();
-
             var chainSourceCell = currentTarget.Cell;
             for (int i = 0; i < VerbProps.chainCount; ++i)
             {
@@ -309,6 +307,7 @@ namespace VVRace
                 }
             }
 
+            TryCastNextBurstShot();
             RebuildLightningVisuals();
         }
 
