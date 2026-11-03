@@ -93,6 +93,7 @@ namespace VVRace
         private int _fireTick;
         private float _travelled;
         private bool _breach;
+        private Vector3 _breachOrigin;
         private Vector3 _returnFrom;
         private float _returnLength;
         private float _returnProgress;
@@ -228,6 +229,7 @@ namespace VVRace
             Scribe_Values.Look(ref _fireTick, "fireTick", 0);
             Scribe_Values.Look(ref _travelled, "travelled", 0f);
             Scribe_Values.Look(ref _breach, "breach", false);
+            Scribe_Values.Look(ref _breachOrigin, "breachOrigin");
             Scribe_Values.Look(ref _returnFrom, "returnFrom");
             Scribe_Values.Look(ref _returnLength, "returnLength", 0f);
             Scribe_Values.Look(ref _returnProgress, "returnProgress", 0f);
@@ -253,10 +255,10 @@ namespace VVRace
         {
             if (!Spawned || _boss == null || !_boss.Spawned) { return; }
 
-            _breach = breach;
-
             var now = GenTicks.TicksGame;
             var origin = IsUnbound ? _pos.Yto0() : BodyCenter;
+            _breach = breach;
+            _breachOrigin = origin;
             var target = targetCell.ToVector3Shifted().Yto0();
             var direction = (target - origin).Yto0();
             if (direction.sqrMagnitude < 0.01f)
@@ -541,6 +543,12 @@ namespace VVRace
 
             if (_stickAlong < 0f)
             {
+                if (_breach)
+                {
+                    DamageBeforeLane();
+                    if (Destroyed) { return; }
+                }
+
                 DamageAlong(0f, Mathf.Clamp(_travelled, 0f, _laneLength));
                 if (Destroyed) { return; }
             }
@@ -842,6 +850,27 @@ namespace VVRace
             }
 
             ApocryphaNeedleLane.PierceAlong(this, _laneStart, _laneDir, _laneLength, comp.Props.needleHalfWidth, from, to, _hitIds, CanPierce, thing => Pierce(thing, comp));
+        }
+
+        // 띠는 몸통에서 LaunchOffset만큼 떨어진 곳에서 시작하므로 돌파 때는 몸통과 띠 시작점 사이에 선 건물도 꿰뚫는다.
+        // 그러지 않으면 바로 앞 벽은 영영 뚫리지 않아 보스가 그 자리에서 바늘만 되풀이한다. 경고 띠 밖이라 폰은 맞히지 않는다.
+        private void DamageBeforeLane()
+        {
+            var map = Map;
+            var comp = BossComp;
+            if (map == null || comp == null) { return; }
+
+            var segment = (_laneStart - _breachOrigin).Yto0();
+            var length = segment.magnitude;
+            if (length < 0.01f) { return; }
+
+            if (_ignored == null)
+            {
+                _ignored = ApocryphaGimmicks.GetBlastIgnoredThings(map, _boss);
+            }
+
+            ApocryphaNeedleLane.PierceAlong(this, _breachOrigin, segment / length, length, comp.Props.needleHalfWidth, 0f, length, _hitIds,
+                thing => thing is Building && CanPierce(thing), thing => Pierce(thing, comp));
         }
 
         private bool CanPierce(Thing thing)

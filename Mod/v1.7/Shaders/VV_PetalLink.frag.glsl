@@ -1,6 +1,6 @@
 #version 450
 
-// 아스포델 연결선: 두 가닥 나선을 따라 꽃잎이 흩날리며 흘러간다(가산 혼합).
+// 아스포델 연결선: 두 가닥 나선을 따라 낱개 꽃잎이 흩날리며 흘러간다(가산 혼합). 가닥 자체는 그리지 않는다.
 // U는 길이 방향(a→b), V는 폭 방향이며 _Length·_Width는 칸 단위다. 꽃잎 그림은 _MainTex 한 장을 돌려 가며 찍는다.
 // 나선은 위에서 내려다본 투영이라 앞쪽(cos θ > 0) 꽃잎은 크고 밝게, 뒤쪽은 작고 어둡게 그려 입체감을 낸다.
 
@@ -48,29 +48,16 @@ void main()
     // 화면 미분은 분기 전에 구한다. 꽃잎 UV는 이 좌표의 회전·축척이라 같은 변환으로 텍스처 기울기를 얻는다.
     vec2 dpdx = vec2(dFdx(x), dFdx(y));
     vec2 dpdy = vec2(dFdy(x), dFdy(y));
-    float px = max(max(length(vec2(dpdx.x, dpdy.x)), length(vec2(dpdx.y, dpdy.y))), 1e-4);
 
     // 연한 연결선 색은 가산 혼합에서 흰색으로 바래므로 채도를 올려 쓴다(색상은 그대로).
     vec3 tint = pow(u._Color.rgb, vec3(1.7));
     float k = TAU / u._Wavelength;
     float radius = W * 0.22;
 
-    // 나선 가닥 자국: 꽃잎이 지나는 길을 희미하게 이어 나선으로 읽히게 한다(앞쪽 반바퀴만 조금 더 밝다).
-    vec3 col = vec3(0.0);
-    float pinchX = smoothstep(0.0, 1.0, x) * smoothstep(0.0, 1.0, L - x);
-    for (int s = 0; s < 2; s++)
-    {
-        float th = k * x + float(s) * PI;
-        float yc = radius * pinchX * sin(th);
-        float slope = radius * pinchX * k * cos(th);
-        float dist = abs(y - yc) / sqrt(1.0 + slope * slope);
-        float lineW = max(W * 0.012, px * 0.6);
-        float front = cos(th) * 0.5 + 0.5;
-        col += tint * exp(-(dist * dist) / (lineW * lineW)) * mix(0.04, 0.15, front);
-    }
-
     // 꽃잎: 가닥마다 간격 d로 늘어선 꽃잎이 흐름 속도로 a→b를 따라 움직이며 자기 자리의 나선 위상을 탄다.
-    float d = 0.28;
+    // 가닥을 잇는 자국은 그리지 않고 간격도 꽃잎 크기보다 넓게 둬 낱개 꽃잎으로 읽히게 한다(겹치면 한 줄로 이어져 보인다).
+    vec3 col = vec3(0.0);
+    float d = 0.55;
     float spriteSize = W * 0.38;
     int seed = int(u._Seed);
     float xs = x - t * u._FlowSpeed;
@@ -86,7 +73,7 @@ void main()
             float r2 = hashF(h, 10);
             float r3 = hashF(h, 20);
 
-            float xc = (float(i) + 0.5 + (r1 - 0.5) * 0.3) * d + t * u._FlowSpeed;
+            float xc = (float(i) + 0.5 + (r1 - 0.5) * 0.45) * d + t * u._FlowSpeed;
             if (xc < 0.0 || xc > L) { continue; }
 
             // 바람결: 꽃잎보다 조금 빠르게 a→b로 지나가는 완만한 물결이 이웃 꽃잎을 함께 흔든다(꽃잎마다 따로 흔들지 않는다).
