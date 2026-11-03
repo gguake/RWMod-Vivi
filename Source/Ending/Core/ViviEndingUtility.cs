@@ -88,11 +88,14 @@ namespace VVRace
             return map != null ? Building_EverflowerAltar.FindOnMap(map) : null;
         }
 
-        public static void GrantQueenPowers(Pawn pawn)
+        // 여제는 대관식을 치른 영원꽃에서 되살아나므로 그 꽃을 헤디프에 묶어 둔다.
+        public static void GrantQueenPowers(Pawn pawn, ArcanePlant_Everflower everflower)
         {
             if (pawn?.health?.hediffSet == null || pawn.health.hediffSet.HasHediff(VVHediffDefOf.VV_EverflowerQueen)) { return; }
 
-            pawn.health.AddHediff(VVHediffDefOf.VV_EverflowerQueen);
+            var hediff = (Hediff_EverflowerQueen)HediffMaker.MakeHediff(VVHediffDefOf.VV_EverflowerQueen, pawn);
+            hediff.everflower = everflower;
+            pawn.health.AddHediff(hediff);
         }
 
         public static TaggedString TranslateWithResonator(string key, Pawn resonator, params NamedArgument[] args)

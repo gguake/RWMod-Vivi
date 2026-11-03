@@ -105,6 +105,7 @@
     <Compile Include="Everflower\AI\JobDriver_DeliverPawnToEverflower.cs" />
     <Compile Include="Everflower\AI\JobGiver_DeliverPawnToEverflower.cs" />
     <Compile Include="Everflower\CompEverflower.cs" />
+    <Compile Include="Everflower\EverflowerPawnHolder.cs" />
     <Compile Include="Everflower\FocusStrengthOffset_Everflower.cs" />
     <Compile Include="Everflower\AI\JobGiver_TryTeleportEverflower.cs" />
     <Compile Include="Everflower\Ritual\RitualBehaviorWorker_Fairyfication.cs" />

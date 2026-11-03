@@ -18,7 +18,6 @@
 
         public const string VV_Message_EndingApocryphaLanded = nameof(VV_Message_EndingApocryphaLanded);
         public const string VV_Message_EndingPawnReturned = nameof(VV_Message_EndingPawnReturned);
-        public const string VV_Message_EndingPawnReturnedToCaravan = nameof(VV_Message_EndingPawnReturnedToCaravan);
 
         public const string VV_Message_EverflowerEnshrined = nameof(VV_Message_EverflowerEnshrined);
         public const string VV_Message_EverflowerAltarRequiresLevel = nameof(VV_Message_EverflowerAltarRequiresLevel);

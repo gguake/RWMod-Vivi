@@ -30,8 +30,6 @@ namespace VVRace
         public ViviEndingQuest()
         {
             _amberCoreRequest = new ViviAmberCoreRequest(this);
-            _pawnHolder = new ViviEndingPawnHolder(this);
-            _queenRebirth = new ViviQueenRebirth(this);
             _ambience = new ViviEndingAmbience(this);
 
             Hediff_EverflowerAssimilation.ResetRegistry();
@@ -45,8 +43,6 @@ namespace VVRace
 
         private ViviEndingEchoLetters _echoLetters = new ViviEndingEchoLetters();
         private ViviAmberCoreRequest _amberCoreRequest;
-        private ViviEndingPawnHolder _pawnHolder;
-        private ViviQueenRebirth _queenRebirth;
         private ViviEndingAmbience _ambience;
 
         private Quest _cachedQuest;
@@ -61,8 +57,6 @@ namespace VVRace
 
         public ViviEndingEchoLetters EchoLetters => _echoLetters;
         public ViviAmberCoreRequest AmberCoreRequest => _amberCoreRequest;
-        public ViviEndingPawnHolder PawnHolder => _pawnHolder;
-        public ViviQueenRebirth QueenRebirth => _queenRebirth;
         public ViviEndingAmbience Ambience => _ambience;
 
         public ViviEndingStage Stage
@@ -206,18 +200,6 @@ namespace VVRace
         {
             var now = Find.TickManager.TicksGame;
 
-            try
-            {
-                _pawnHolder.TickPendingHolds();
-            }
-            catch (Exception ex)
-            {
-                Log.Error($"[ViViRace] failed to hold returning pawns: {ex}");
-            }
-
-            _queenRebirth.Tick();
-            _pawnHolder.TickHeldPawns(now);
-
             if (_assimilated != null)
             {
                 try
@@ -305,11 +287,6 @@ namespace VVRace
             _echoLetters.Notify_EverflowerRitualEcho(everflower, resonator);
         }
 
-        public void Notify_QueenDied(Pawn queen)
-        {
-            _queenRebirth.Notify_QueenDied(queen);
-        }
-
         public IEnumerable<Gizmo> GetEverflowerGizmos(ArcanePlant_Everflower everflower)
         {
             if (everflower == null) { yield break; }
@@ -327,11 +304,6 @@ namespace VVRace
 
         public string GetEverflowerInspectString(ArcanePlant_Everflower everflower)
         {
-            if (IsAnchor(everflower) && IsCompleted)
-            {
-                return _queenRebirth.GetInspectString();
-            }
-
             if (!IsAnchor(everflower) || !IsEndingActive) { return null; }
 
             return LocalizeString_Inspector.VV_Inspector_EndingBloom.Translate(BloomProgress.ToStringPercent().Named("PERCENT")).Resolve();
@@ -549,7 +521,6 @@ namespace VVRace
             Scribe_References.Look(ref _assimilated, "assimilatedPawn");
             Scribe_Deep.Look(ref _echoLetters, "echoLetters");
             Scribe_Deep.Look(ref _amberCoreRequest, "amberCoreRequest", this);
-            Scribe_Deep.Look(ref _pawnHolder, "pawnHolder", this);
         }
 
         #region 개발자 도구

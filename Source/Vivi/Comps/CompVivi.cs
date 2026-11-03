@@ -246,7 +246,7 @@ namespace VVRace
                 yield return new Command_Action
                 {
                     defaultLabel = "DEV: Grant queen powers",
-                    action = () => ViviEndingUtility.GrantQueenPowers(pawn)
+                    action = () => ViviEndingUtility.GrantQueenPowers(pawn, ViviEndingQuest.Current?.AnchorEverflower ?? LinkedEverflower)
                 };
             }
         }

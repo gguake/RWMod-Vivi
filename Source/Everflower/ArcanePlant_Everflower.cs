@@ -7,7 +7,7 @@ using Verse;
 namespace VVRace
 {
     [StaticConstructorOnStartup]
-    public class ArcanePlant_Everflower : ArcanePlant, IGatherableTarget
+    public class ArcanePlant_Everflower : ArcanePlant, IGatherableTarget, IThingHolder, ISuspendableThingHolder
     {
         public static readonly Material TeleportLineMat = MaterialPool.MatFrom(GenDraw.LineTexPath, ShaderDatabase.Transparent, new Color(1f, 1f, 1f));
 
@@ -67,6 +67,23 @@ namespace VVRace
             return selected;
         }
 
+        public EverflowerPawnHolder PawnHolder => _pawnHolder;
+        private EverflowerPawnHolder _pawnHolder;
+
+        public bool IsContentsSuspended => true;
+
+        public ArcanePlant_Everflower()
+        {
+            _pawnHolder = new EverflowerPawnHolder(this);
+        }
+
+        public ThingOwner GetDirectlyHeldThings() => _pawnHolder.Container;
+
+        public void GetChildHolders(List<IThingHolder> outChildren)
+        {
+            ThingOwnerUtility.AppendThingHoldersFromThings(outChildren, GetDirectlyHeldThings());
+        }
+
         public override void ExposeData()
         {
             base.ExposeData();
@@ -75,6 +92,13 @@ namespace VVRace
             Scribe_Values.Look(ref _reserveTeleportCell, "reserveTeleportCell");
             Scribe_Values.Look(ref _selectedRitualWeather, "selectedRitualWeather");
             Scribe_Values.Look(ref _selectedFlowerLandCell, "selectedFlowerLandCell");
+            Scribe_Deep.Look(ref _pawnHolder, "pawnHolder", this);
+
+            // 이전 버전 세이브에는 보관 노드가 없다.
+            if (Scribe.mode == LoadSaveMode.PostLoadInit && _pawnHolder == null)
+            {
+                _pawnHolder = new EverflowerPawnHolder(this);
+            }
         }
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
@@ -85,10 +109,18 @@ namespace VVRace
             EverflowerComp.RefreshEnshrinement(silent: respawningAfterLoad);
         }
 
+        protected override void Tick()
+        {
+            base.Tick();
+            _pawnHolder.Tick();
+        }
+
         public override void Destroy(DestroyMode mode = DestroyMode.Vanish)
         {
             Unreserve();
             base.Destroy(mode);
+
+            _pawnHolder.Notify_EverflowerDestroyed();
         }
 
         public override AcceptanceReport DeconstructibleBy(Faction faction) => EverflowerComp.AttunementLevel == 0;

@@ -78,7 +78,6 @@
 <!-- 메시지 -->
 <VV_Message_EndingApocryphaLanded>Driven back by the everflower's wave, Asphodel has landed at the edge of the map with a swarm of titanic hornets.</VV_Message_EndingApocryphaLanded>
 <VV_Message_EndingPawnReturned>{PAWN_labelShort} has returned in front of the everflower altar.</VV_Message_EndingPawnReturned>
-<VV_Message_EndingPawnReturnedToCaravan>{PAWN_labelShort} has returned and joined {CARAVAN_label}.</VV_Message_EndingPawnReturnedToCaravan>
 
 <!-- 개화 응축 -->
 <VV_Gizmo_EndingBloom>Bloom condensation</VV_Gizmo_EndingBloom>

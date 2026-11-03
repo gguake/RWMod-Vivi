@@ -288,6 +288,12 @@ namespace VVRace
                 sb.AppendInNewLine(endingText);
             }
 
+            var rebirthText = Everflower.PawnHolder.GetInspectString();
+            if (!rebirthText.NullOrEmpty())
+            {
+                sb.AppendInNewLine(rebirthText);
+            }
+
             return sb.ToString();
         }
 

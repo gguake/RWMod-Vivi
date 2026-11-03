@@ -23,7 +23,7 @@ namespace VVRace
 
             if (queen != null && !queen.Dead)
             {
-                ViviEndingUtility.GrantQueenPowers(queen);
+                ViviEndingUtility.GrantQueenPowers(queen, everflower);
             }
 
             everflower.Notify_RitualComplete(quality);

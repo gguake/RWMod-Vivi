@@ -80,10 +80,10 @@ namespace VVRace
                 MessageTypeDefOf.PositiveEvent);
 
             // 마지막 자유 정착민이면 게임 오버를 피하려고 보류 없이 바로 제단 앞으로 순간이동시킨다.
-            var quest = ViviEndingQuest.Current;
-            if (quest != null && vivi.Spawned && !vivi.Dead)
+            var anchor = ViviEndingQuest.Current?.AnchorEverflower;
+            if (anchor != null && !anchor.Destroyed && vivi.Spawned && !vivi.Dead)
             {
-                quest.PawnHolder.HoldPawnUntilReturn(vivi, ReturnDelayTicks.RandomInRange);
+                anchor.PawnHolder.HoldUntilReturn(vivi, ReturnDelayTicks.RandomInRange);
             }
         }
 
