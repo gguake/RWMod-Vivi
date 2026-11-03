@@ -6,6 +6,11 @@ namespace VVRace
     public class ArcanePlant_Starlitflower : ArcanePlant
     {
         public const float VaccumResistRange = 5.7f;
+        public const int AuraIntervalTicks = 450;
+
+        public override int UpdateRateTicks => AuraIntervalTicks;
+        protected override int MinTickIntervalRate => AuraIntervalTicks;
+        protected override int MaxTickIntervalRate => AuraIntervalTicks;
 
         public int GraphicIndex => CompGlower.Glows ? 1 : 0;
 
@@ -54,12 +59,9 @@ namespace VVRace
 
             CompGlower.UpdateLit(Map);
 
-            if (this.IsHashIntervalTick(450, delta))
+            if (Map.Tile.LayerDef == PlanetLayerDefOf.Orbit)
             {
-                if (Map.Tile.LayerDef == PlanetLayerDefOf.Orbit)
-                {
-                    _curEffecter = VVEffecterDefOf.VV_StalitFlowerAura.SpawnMaintained(Position, Map, VaccumResistRange);
-                }
+                _curEffecter = VVEffecterDefOf.VV_StalitFlowerAura.SpawnMaintained(Position, Map, VaccumResistRange);
             }
         }
 
