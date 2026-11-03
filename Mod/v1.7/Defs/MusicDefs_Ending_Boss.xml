@@ -17,6 +17,35 @@
     <commonality>0</commonality>
   </SongDef>
 
+  <!-- 무음 곡: 불길한 정적 동안 배경음악 대신 되풀이한다(볼륨 0이라 음악 재생 중 환경음을 줄이는 처리도 걸리지 않는다) -->
+  <SongDef>
+    <defName>VV_Silence</defName>
+    <clipPath>Songs/VV_Silence</clipPath>
+    <volume>0</volume>
+    <playOnMap>false</playOnMap>
+    <commonality>0</commonality>
+  </SongDef>
+
+  <!-- 불길한 정적 동안 배경음악 끄기: 흐르던 곡은 5초에 걸쳐 잦아들고, 정적이 풀리면 끝난다 -->
+  <MusicSequenceDef>
+    <defName>VV_OminousSilence</defName>
+    <song>VV_Silence</song>
+    <loop>true</loop>
+    <canBeInterrupted>false</canBeInterrupted>
+    <useTransitionForLifetime>true</useTransitionForLifetime>
+    <fadeoutLastSongDuration>5</fadeoutLastSongDuration>
+    <overrideFadeout>1</overrideFadeout>
+  </MusicSequenceDef>
+
+  <!-- 불길한 정적 음악 전환: 바닐라 상황 음악(최고 999)보다 높고 아스포델 음악보다 낮다 -->
+  <MusicTransitionDef>
+    <defName>VV_OminousSilence</defName>
+    <workerType>VVRace.MusicTransition_OminousSilence</workerType>
+    <sequence>VV_OminousSilence</sequence>
+    <overridesInterruptions>true</overridesInterruptions>
+    <priority>1050</priority>
+  </MusicTransitionDef>
+
   <!-- 아스포델 1페이즈 음악 재생 -->
   <MusicSequenceDef>
     <defName>VV_ApocryphaBound</defName>
