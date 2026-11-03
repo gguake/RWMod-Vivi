@@ -78,8 +78,14 @@ namespace VVRace
 
                     if (!pawnPath.TryFindLastCellBeforeBlockingDoor(pawn, out var result))
                     {
-                        Log.Error(string.Concat(pawn, " did TryFindLastCellBeforeDoor but found none when it should have been one. Target: ", target.LabelCap));
-                        return null;
+                        // 대상이 문 칸에 서 있으면 경로 끝 칸이 그 문이라 막는 문으로 검색되지 않는다(바닐라 JobGiver_Manhunter와 같은 처리).
+                        if (target.Position.GetDoor(target.Map) == null)
+                        {
+                            Log.Error(string.Concat(pawn, " did TryFindLastCellBeforeDoor but found none when it should have been one. Target: ", target.LabelCap));
+                            return null;
+                        }
+
+                        result = pawnPath.NodesReversed[1];
                     }
 
                     var randomCell = CellFinder.RandomRegionNear(result.GetRegion(pawn.Map), 9, TraverseParms.For(pawn)).RandomCell;
