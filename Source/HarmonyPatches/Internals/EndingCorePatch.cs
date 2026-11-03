@@ -29,6 +29,10 @@ namespace VVRace
             TryPatch(harmony, "Map.IncidentTargetTags",
                 AccessTools.Method(typeof(Map), nameof(Map.IncidentTargetTags)),
                 nameof(Map_IncidentTargetTags_Postfix));
+
+            TryPatch(harmony, "Fire.TrySpread",
+                AccessTools.Method(typeof(Fire), "TrySpread"),
+                prefixName: nameof(Fire_TrySpread_Prefix));
         }
 
         private static void TryPatch(Harmony harmony, string label, MethodBase original, string postfixName = null, string prefixName = null)
@@ -107,6 +111,12 @@ namespace VVRace
             {
                 yield return IncidentTargetTagDefOf.Map_RaidBeacon;
             }
+        }
+
+        // 황금빛 꽃안개 중에는 불이 제자리에서만 타고 옆 칸이나 불똥으로 번지지 않는다.
+        private static bool Fire_TrySpread_Prefix(Fire __instance)
+        {
+            return !GoldenBloomUtility.IsActive(__instance.Map);
         }
 
         private static void IncidentWorker_CanFireNow_Postfix(IncidentWorker __instance, IncidentParms parms, ref bool __result)
