@@ -61,14 +61,15 @@ namespace VVRace.HarmonyPatches
                 original: AccessTools.Method(typeof(MentalStateWorker), nameof(MentalStateWorker.StateCanOccur)),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(MentalStateWorker_StateCanOccur_Postfix)));
 
-            harmony.Patch(
-                original: AccessTools.Method(typeof(Faction), nameof(Faction.Notify_MemberDied)),
+            ViviHarmonyPatcher.TryPatch(harmony, "Faction.Notify_MemberDied",
+                AccessTools.Method(typeof(Faction), nameof(Faction.Notify_MemberDied)),
                 prefix: new HarmonyMethod(typeof(ViviRacePatch), nameof(Faction_Notify_MemberDied_Prefix)),
-                postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(Faction_Notify_MemberDied_Postfix)));
+                finalizer: new HarmonyMethod(typeof(ViviRacePatch), nameof(Faction_Notify_MemberDied_Finalizer)));
 
-            harmony.Patch(
-                original: AccessTools.Method(typeof(Faction), nameof(Faction.TryAffectGoodwillWith)),
-                prefix: new HarmonyMethod(typeof(ViviRacePatch), nameof(Faction_TryAffectGoodwillWith_Prefix)));
+            // 다른 모드의 호감도 prefix보다 먼저 판정해야 로드 순서와 관계없이 면제가 적용된다.
+            ViviHarmonyPatcher.TryPatch(harmony, "Faction.TryAffectGoodwillWith",
+                AccessTools.Method(typeof(Faction), nameof(Faction.TryAffectGoodwillWith)),
+                prefix: new HarmonyMethod(typeof(ViviRacePatch), nameof(Faction_TryAffectGoodwillWith_Prefix)) { priority = Priority.First });
 
             harmony.Patch(
                 original: AccessTools.Method(typeof(ThoughtWorker_Pyrophobia), nameof(ThoughtWorker_Pyrophobia.NearFire)),
@@ -350,7 +351,8 @@ namespace VVRace.HarmonyPatches
                 (killer.MentalStateDef == VVMentalStateDefOf.VV_HornetBerserk || ApocryphaUtility.IsApocrypha(killer));
         }
 
-        private static void Faction_Notify_MemberDied_Postfix()
+        // postfix는 원본이 예외로 끝나면 실행되지 않아 표시가 남으므로 finalizer에서 지운다.
+        private static void Faction_Notify_MemberDied_Finalizer()
         {
             _blamelessMemberDeath = false;
         }

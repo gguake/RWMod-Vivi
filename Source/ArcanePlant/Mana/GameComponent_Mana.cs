@@ -67,6 +67,33 @@ namespace VVRace
         public ViviEndingQuest EndingQuest => _endingQuest;
         private ViviEndingQuest _endingQuest = new ViviEndingQuest();
 
+        // 스토리텔러·보스전에서 자주 찾으므로 GetComponent처럼 목록을 앞에서부터 형식 검사하지 않고 마지막으로 찾은 위치를 먼저 본다.
+        // 이전 게임을 붙잡지 않도록 컴포넌트가 아니라 위치만 기억하고, 그 위치에 없으면 다시 찾는다.
+        private static int _cachedIndex = -1;
+
+        public static GameComponent_Mana Of(Game game)
+        {
+            if (game == null) { return null; }
+
+            var components = game.components;
+            var index = _cachedIndex;
+            if ((uint)index < (uint)components.Count && components[index] is GameComponent_Mana cached)
+            {
+                return cached;
+            }
+
+            for (int i = 0; i < components.Count; ++i)
+            {
+                if (components[i] is GameComponent_Mana found)
+                {
+                    _cachedIndex = i;
+                    return found;
+                }
+            }
+
+            return null;
+        }
+
         public GameComponent_Mana(Game game)
         {
             _game = game;

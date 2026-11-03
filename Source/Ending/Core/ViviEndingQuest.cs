@@ -11,7 +11,7 @@ namespace VVRace
 {
     public class ViviEndingQuest : IExposable
     {
-        public static ViviEndingQuest Current => Verse.Current.Game?.GetComponent<GameComponent_Mana>()?.EndingQuest;
+        public static ViviEndingQuest Current => GameComponent_Mana.Of(Verse.Current.Game)?.EndingQuest;
 
         private const int ScanIntervalTicks = 2500;
 

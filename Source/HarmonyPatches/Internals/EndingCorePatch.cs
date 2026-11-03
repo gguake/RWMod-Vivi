@@ -3,7 +3,6 @@ using RimWorld;
 using RimWorld.QuestGen;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using Verse;
 using Verse.Grammar;
 
@@ -14,45 +13,25 @@ namespace VVRace
     {
         internal static void Patch(Harmony harmony)
         {
-            TryPatch(harmony, "FactionDialogMaker.FactionDialogFor",
+            ViviHarmonyPatcher.TryPatch(harmony, "FactionDialogMaker.FactionDialogFor",
                 AccessTools.Method(typeof(FactionDialogMaker), nameof(FactionDialogMaker.FactionDialogFor)),
-                postfixName: nameof(FactionDialogMaker_FactionDialogFor_Postfix));
+                postfix: new HarmonyMethod(typeof(EndingCorePatch), nameof(FactionDialogMaker_FactionDialogFor_Postfix)));
 
-            TryPatch(harmony, "QuestGen_Rewards.GiveRewards",
+            ViviHarmonyPatcher.TryPatch(harmony, "QuestGen_Rewards.GiveRewards",
                 AccessTools.Method(typeof(QuestGen_Rewards), nameof(QuestGen_Rewards.GiveRewards)),
-                prefixName: nameof(QuestGen_Rewards_GiveRewards_Prefix));
+                prefix: new HarmonyMethod(typeof(EndingCorePatch), nameof(QuestGen_Rewards_GiveRewards_Prefix)));
 
-            TryPatch(harmony, "IncidentWorker.CanFireNow",
+            ViviHarmonyPatcher.TryPatch(harmony, "IncidentWorker.CanFireNow",
                 AccessTools.Method(typeof(IncidentWorker), nameof(IncidentWorker.CanFireNow)),
-                nameof(IncidentWorker_CanFireNow_Postfix));
+                postfix: new HarmonyMethod(typeof(EndingCorePatch), nameof(IncidentWorker_CanFireNow_Postfix)));
 
-            TryPatch(harmony, "Map.IncidentTargetTags",
+            ViviHarmonyPatcher.TryPatch(harmony, "Map.IncidentTargetTags",
                 AccessTools.Method(typeof(Map), nameof(Map.IncidentTargetTags)),
-                nameof(Map_IncidentTargetTags_Postfix));
+                postfix: new HarmonyMethod(typeof(EndingCorePatch), nameof(Map_IncidentTargetTags_Postfix)));
 
-            TryPatch(harmony, "Fire.TrySpread",
+            ViviHarmonyPatcher.TryPatch(harmony, "Fire.TrySpread",
                 AccessTools.Method(typeof(Fire), "TrySpread"),
-                prefixName: nameof(Fire_TrySpread_Prefix));
-        }
-
-        private static void TryPatch(Harmony harmony, string label, MethodBase original, string postfixName = null, string prefixName = null)
-        {
-            if (original == null)
-            {
-                Log.Error($"[ViViRace] ending patch: failed to find {label}; this patch is skipped.");
-                return;
-            }
-
-            try
-            {
-                harmony.Patch(original,
-                    prefix: prefixName != null ? new HarmonyMethod(typeof(EndingCorePatch), prefixName) : null,
-                    postfix: postfixName != null ? new HarmonyMethod(typeof(EndingCorePatch), postfixName) : null);
-            }
-            catch (Exception ex)
-            {
-                Log.Error($"[ViViRace] ending patch: failed to patch {label}: {ex}");
-            }
+                prefix: new HarmonyMethod(typeof(EndingCorePatch), nameof(Fire_TrySpread_Prefix)));
         }
 
         private static void FactionDialogMaker_FactionDialogFor_Postfix(Pawn negotiator, Faction faction, DiaNode __result)
