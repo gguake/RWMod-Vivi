@@ -13,6 +13,7 @@ namespace VVRace
             var flowerDef = def.projectile.spawnsThingDef;
             var boss = launcher as Pawn;
             var fizzleEffecter = Extension?.impactEffecter;
+            var linkSeed = thingIDNumber;
 
             base.Impact(hitThing, blockedByShield);
 
@@ -24,7 +25,8 @@ namespace VVRace
                 return;
             }
 
-            ApocryphaGimmicks.SpawnFlower(flowerDef, bloomCell, map, boss);
+            // 날아오는 동안 이어져 있던 연결선을 꽃이 같은 꽃잎 배치로 이어받는다.
+            ApocryphaGimmicks.SpawnFlower(flowerDef, bloomCell, map, boss, linkSeed);
         }
     }
 }

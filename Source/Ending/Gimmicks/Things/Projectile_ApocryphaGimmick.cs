@@ -37,6 +37,9 @@ namespace VVRace
             }
         }
 
+        // 포물선 높이를 더한 실제로 보이는 위치
+        public Vector3 ArcDrawPos => ExactPosition + Vector3.forward * CurrentArcHeight;
+
         // 텍스처의 머리가 실제 위치에 오도록 중심에서 앞선 거리만큼 그리기 위치를 뒤로 보정한다.
         public override Vector3 DrawPos
         {
@@ -68,7 +71,7 @@ namespace VVRace
             if (extension?.trailFleck == null) { return; }
             if (!this.IsHashIntervalTick(Mathf.Max(1, extension.trailIntervalTicks))) { return; }
 
-            var position = ExactPosition + Vector3.forward * CurrentArcHeight;
+            var position = ArcDrawPos;
             if (!position.ShouldSpawnMotesAt(Map, drawOffscreen: false)) { return; }
 
             var data = FleckMaker.GetDataStatic(position + Gen.RandomHorizontalVector(0.12f), Map, extension.trailFleck, extension.trailScale.RandomInRange);

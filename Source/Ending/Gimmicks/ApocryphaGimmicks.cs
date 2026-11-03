@@ -120,6 +120,8 @@ namespace VVRace
 
             DrawFlowerLinks(bossPos, map.listerThings.ThingsOfDef(VVThingDefOf.VV_DoomFlower));
             DrawFlowerLinks(bossPos, map.listerThings.ThingsOfDef(VVThingDefOf.VV_FairyFlower));
+            DrawSeedLinks(bossPos, map.listerThings.ThingsOfDef(VVThingDefOf.VV_Projectile_DoomSeed));
+            DrawSeedLinks(bossPos, map.listerThings.ThingsOfDef(VVThingDefOf.VV_Projectile_FairySeed));
 
             var pawns = map.mapPawns.SpawnedPawnsInFaction(Faction.OfPlayer);
             for (int i = 0; i < pawns.Count; i++)
@@ -287,7 +289,8 @@ namespace VVRace
             return CellFinder.TryFindRandomCellNear(cell, map, BloomCellFallbackRadius, c => IsValidBloomCell(c, map, altarRect, colonyAnchor), out result);
         }
 
-        internal static Thing SpawnFlower(ThingDef flowerDef, IntVec3 cell, Map map, Pawn boss)
+        // linkSeed는 씨앗에서 이어받을 연결선 무늬다(-1이면 꽃 자신의 무늬로 새로 나타난다).
+        internal static Thing SpawnFlower(ThingDef flowerDef, IntVec3 cell, Map map, Pawn boss, int linkSeed = -1)
         {
             var plant = cell.GetPlant(map);
             if (plant != null && !plant.Destroyed)
@@ -299,6 +302,11 @@ namespace VVRace
             if (flowerDef == VVThingDefOf.VV_DoomFlower)
             {
                 flower.SetFaction(boss?.Faction ?? Faction.OfInsects);
+            }
+
+            if (linkSeed >= 0 && flower is Building_ApocryphaFlower apocryphaFlower)
+            {
+                apocryphaFlower.InheritLink(linkSeed);
             }
 
             return GenSpawn.Spawn(flower, cell, map, WipeMode.Vanish);
@@ -415,7 +423,21 @@ namespace VVRace
 
                 var color = extension.linkColor;
                 color.a *= flower.LinkAlpha;
-                PetalLinkRenderer.Draw(bossPos, flower.LinkAnchor, extension.linkWidth, color, flower.thingIDNumber);
+                PetalLinkRenderer.Draw(bossPos, flower.LinkAnchor, extension.linkWidth, color, flower.LinkSeed);
+            }
+        }
+
+        // 날아가는 씨앗까지 피워 낼 꽃의 연결선을 미리 이어 투사체가 잘 보이게 한다. 착탄하면 꽃이 같은 무늬로 이어받는다.
+        private static void DrawSeedLinks(Vector3 bossPos, List<Thing> seeds)
+        {
+            for (int i = 0; i < seeds.Count; i++)
+            {
+                if (!(seeds[i] is Projectile_ApocryphaSeed seed) || !seed.Spawned) { continue; }
+
+                var extension = seed.def.projectile.spawnsThingDef?.GetModExtension<ApocryphaFlowerExtension>();
+                if (extension == null) { continue; }
+
+                PetalLinkRenderer.Draw(bossPos, seed.ArcDrawPos, extension.linkWidth, extension.linkColor, seed.thingIDNumber);
             }
         }
 

@@ -13,13 +13,23 @@ namespace VVRace
 
         protected int spawnTick = -1;
 
+        // 씨앗에서 피어난 꽃은 씨앗을 따라 이어져 있던 연결선을 그대로 이어받는다(-1이면 꽃 자신의 무늬로 새로 나타난다).
+        private int _inheritedLinkSeed = -1;
+
         [Unsaved]
         private ApocryphaFlowerExtension _extension;
         public ApocryphaFlowerExtension Extension => _extension ?? (_extension = def.GetModExtension<ApocryphaFlowerExtension>());
 
         public Vector3 LinkAnchor => DrawPos + (Extension?.linkOffset ?? Vector3.zero);
 
-        public float LinkAlpha => spawnTick < 0 ? 1f : Mathf.Clamp01((Find.TickManager.TicksGame - spawnTick) / LinkFadeInTicks);
+        public int LinkSeed => _inheritedLinkSeed >= 0 ? _inheritedLinkSeed : thingIDNumber;
+
+        public float LinkAlpha => spawnTick < 0 || _inheritedLinkSeed >= 0 ? 1f : Mathf.Clamp01((Find.TickManager.TicksGame - spawnTick) / LinkFadeInTicks);
+
+        public void InheritLink(int linkSeed)
+        {
+            _inheritedLinkSeed = linkSeed;
+        }
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
@@ -80,6 +90,7 @@ namespace VVRace
         {
             base.ExposeData();
             Scribe_Values.Look(ref spawnTick, "spawnTick", -1);
+            Scribe_Values.Look(ref _inheritedLinkSeed, "inheritedLinkSeed", -1);
         }
     }
 }
