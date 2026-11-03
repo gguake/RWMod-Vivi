@@ -64,6 +64,10 @@ namespace VVRace
         private int _pushTicks = 60;
         private bool _completed;
 
+        // 소환음은 연출 맨 처음 틱들 안에서만 시작한다(불러온 뒤 중간부터 다시 시작하면 절정이 어긋난다).
+        private const int SummonSoundStartTicks = 10;
+        private Sustainer _summonSustainer;
+
         private int Age => _startTick < 0 ? 0 : Mathf.Max(0, Find.TickManager.TicksGame - _startTick);
         private float AgeSecs => Age / 60f;
         private int LandTick => WaveTick + _pushTicks;
@@ -117,10 +121,13 @@ namespace VVRace
             if (!respawningAfterLoad && _startTick < 0)
             {
                 _startTick = Find.TickManager.TicksGame;
-
-                // 소환음은 형체가 빚어지는 동안 차올라 형체가 완성되는 순간(CompleteTick) 절정에 이른다(게임 속도를 따라 재생돼 연출과 어긋나지 않는다).
-                VVSoundDefOf.VV_ApocryphaSummon.PlayOneShotOnCamera(map);
             }
+        }
+
+        public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
+        {
+            EndSummonSound();
+            base.DeSpawn(mode);
         }
 
         public override void ExposeData()
@@ -144,6 +151,8 @@ namespace VVRace
             if (!Spawned) { return; }
 
             var age = Age;
+            TickSummonSound(age);
+
             if (age < CompleteTick)
             {
                 TickGather(age);
@@ -169,6 +178,36 @@ namespace VVRace
                 Land();
                 Destroy();
             }
+        }
+
+        // 소환음은 형체가 빚어지는 동안 차올라 형체가 완성되는 순간(CompleteTick) 절정에 이르고, 파장이 형체를 밀어낼 때(WaveTick) 끝난다.
+        // 단발음은 일시정지로 멈춰 있는 동안 '재생 중이 아닌' 채널로 취급돼 다른 소리에 빼앗기므로, 전용 채널을 쓰는 지속음으로 낸다.
+        private void TickSummonSound(int age)
+        {
+            if (age >= WaveTick)
+            {
+                EndSummonSound();
+                return;
+            }
+
+            if (_summonSustainer == null && age <= SummonSoundStartTicks)
+            {
+                _summonSustainer = VVSoundDefOf.VV_ApocryphaSummon.TrySpawnSustainer(SoundInfo.OnCamera(MaintenanceType.PerTick));
+            }
+
+            if (_summonSustainer != null && !_summonSustainer.Ended)
+            {
+                _summonSustainer.Maintain();
+            }
+        }
+
+        private void EndSummonSound()
+        {
+            if (_summonSustainer != null && !_summonSustainer.Ended)
+            {
+                _summonSustainer.End();
+            }
+            _summonSustainer = null;
         }
 
         // 퀘스트가 먼저 보스를 스폰할 수 있으므로 연출을 제거하기 전에 착지 효과를 호출한다. 중복 호출은 무시한다.

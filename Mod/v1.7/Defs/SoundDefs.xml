@@ -519,11 +519,14 @@
     </subSounds>
   </SoundDef>
 
-  <!-- 아스포델 소환음: 등장 연출이 시작될 때 한 번 재생해 형체가 완성되는 5초에 절정, 카메라 위치와 관계없이 -->
+  <!-- 아스포델 소환음: 등장 연출 동안 유지하는 지속음(전용 채널이라 일시정지 중 다른 소리에 빼앗기지 않음), 형체가 완성되는 5초에 절정, 카메라 위치와 관계없이.
+       반복 재생은 실제 시간으로 끝을 잡지 않게 하려는 것으로, 소리 길이(5.8초)보다 먼저 연출이 지속음을 끝낸다. -->
   <SoundDef>
     <defName>VV_ApocryphaSummon</defName>
+    <sustain>True</sustain>
     <context>MapOnly</context>
-    <maxSimultaneous>1</maxSimultaneous>
+    <priorityMode>PrioritizeNearest</priorityMode>
+    <sustainFadeoutTime>0.15</sustainFadeoutTime>
     <subSounds>
       <li>
         <onCamera>True</onCamera>
@@ -534,7 +537,6 @@
         </grains>
         <volumeRange>38</volumeRange>
         <tempoAffectedByGameSpeed>true</tempoAffectedByGameSpeed>
-        <sustainLoop>False</sustainLoop>
       </li>
     </subSounds>
   </SoundDef>
