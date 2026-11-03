@@ -8,8 +8,6 @@ namespace VVRace
 {
     public abstract class ArcanePlant_Turret : ArcanePlant, IAttackTarget, IAttackTargetSearcher, ILoadReferenceable
     {
-        public virtual float ManaPerVerbShoot => Gun.GetStatValue(VVStatDefOf.VV_RangedWeapon_ManaCost) / AttackVerb.BurstShotCount;
-
         private ArcanePlantTurretExtension _arcanePlantTurretExtension;
         public ArcanePlantTurretExtension ArcanePlantTurretExtension
         {

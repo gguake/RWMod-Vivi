@@ -9,7 +9,6 @@ namespace VVRace
     [StaticConstructorOnStartup]
     public class ArcanePlant_Shootus : ArcanePlant_Turret, IThingHolder, IThingHolderTickable, INotifyHauledTo
     {
-        public override float ManaPerVerbShoot => 0;
         public override Thing Gun => _innerContainer.Count > 0 ? _innerContainer[0] : null;
         private ThingOwner _innerContainer;
 

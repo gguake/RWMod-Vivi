@@ -12,8 +12,6 @@ namespace VVRace
         protected override int MinTickIntervalRate => AuraIntervalTicks;
         protected override int MaxTickIntervalRate => AuraIntervalTicks;
 
-        public int GraphicIndex => CompGlower.Glows ? 1 : 0;
-
         private CompManaGlower _compGlower;
         public CompManaGlower CompGlower
         {
