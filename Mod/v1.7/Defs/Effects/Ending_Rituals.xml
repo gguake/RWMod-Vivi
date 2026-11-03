@@ -2,19 +2,23 @@
 <Defs>
 
 
-  <!-- 만개 의식 황금 파동 고리 -->
+  <!-- 만개 의식 황금 파동 고리: 그림을 키우지 않고 고정 크기 쿼드에서 셰이더가 고리를 넓힌다(잎 그림은 _MainTex). -->
   <FleckDef ParentName="FleckBase">
     <defName>VV_Fleck_ResonanceWaveRing</defName>
     <altitudeLayer>MoteOverheadLow</altitudeLayer>
-    <fadeInTime>0.05</fadeInTime>
-    <solidTime>0.7</solidTime>
-    <fadeOutTime>1.1</fadeOutTime>
-    <growthRate>14</growthRate>
+    <fadeInTime>0</fadeInTime>
+    <solidTime>1.85</solidTime>
+    <fadeOutTime>0.05</fadeOutTime>
     <drawOffscreen>true</drawOffscreen>
     <graphicData>
-      <texPath>VFX/VV_GoldenWaveRing</texPath>
-      <shaderType>MoteGlow</shaderType>
-      <drawSize>(4, 4)</drawSize>
+      <graphicClass>Graphic_FleckPulse</graphicClass>
+      <texPath>VFX/VV_EverflowerPetal</texPath>
+      <shaderType>VV_GoldenRing</shaderType>
+      <renderInstanced>false</renderInstanced>
+      <drawSize>(64, 64)</drawSize>
+      <shaderParameters>
+        <_Duration>1.85</_Duration>
+      </shaderParameters>
     </graphicData>
   </FleckDef>
 
@@ -22,16 +26,20 @@
   <FleckDef ParentName="FleckBase">
     <defName>VV_Fleck_ResonanceWaveRingSlow</defName>
     <altitudeLayer>MoteOverheadLow</altitudeLayer>
-    <fadeInTime>0.1</fadeInTime>
-    <solidTime>0.8</solidTime>
-    <fadeOutTime>1.3</fadeOutTime>
-    <growthRate>6</growthRate>
+    <fadeInTime>0</fadeInTime>
+    <solidTime>2.2</solidTime>
+    <fadeOutTime>0.05</fadeOutTime>
     <drawOffscreen>true</drawOffscreen>
     <graphicData>
-      <texPath>VFX/VV_GoldenWaveRing</texPath>
-      <shaderType>MoteGlow</shaderType>
+      <graphicClass>Graphic_FleckPulse</graphicClass>
+      <texPath>VFX/VV_EverflowerPetal</texPath>
+      <shaderType>VV_GoldenRing</shaderType>
+      <renderInstanced>false</renderInstanced>
       <color>(1, 1, 1, 0.7)</color>
-      <drawSize>(4, 4)</drawSize>
+      <drawSize>(34, 34)</drawSize>
+      <shaderParameters>
+        <_Duration>2.2</_Duration>
+      </shaderParameters>
     </graphicData>
   </FleckDef>
 

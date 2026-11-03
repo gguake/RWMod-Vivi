@@ -510,7 +510,6 @@
         <burstCount>1</burstCount>
         <absoluteAngle>true</absoluteAngle>
         <rotation>0~360</rotation>
-        <scale>1.4</scale>
       </li>
       <li>
         <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>

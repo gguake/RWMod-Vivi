@@ -168,6 +168,27 @@
     <shaderPath>Map/VV_MagicCircle</shaderPath>
   </ShaderTypeDef>
 
+  <!-- 황금 파동 고리 셰이더 -->
+  <ShaderDef>
+    <defName>VV_GoldenRing</defName>
+    <shaderProgram>
+      <vertexShaderFileName>Mote.vert.glsl</vertexShaderFileName>
+      <fragmentShaderFileName>VV_GoldenRing.frag.glsl</fragmentShaderFileName>
+      <flipTextureST>false</flipTextureST>
+      <blendMode>Additive</blendMode>
+      <depthWrite>false</depthWrite>
+      <cullMode>None</cullMode>
+      <!-- 함께 쓰는 굴절 파동(화면 캡처 3151)에 휘말려 톱니처럼 보이지 않도록 MoteGlow와 같은 큐에 그린다. -->
+      <renderQueue>3151</renderQueue>
+    </shaderProgram>
+  </ShaderDef>
+
+  <!-- 황금 파동 고리 셰이더 유형 -->
+  <ShaderTypeDef>
+    <defName>VV_GoldenRing</defName>
+    <shaderPath>Map/VV_GoldenRing</shaderPath>
+  </ShaderTypeDef>
+
   <!-- 고대 엘텍스 바늘 조준 경고 셰이더 -->
   <ShaderDef>
     <defName>VV_NeedleLane</defName>
