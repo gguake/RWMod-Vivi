@@ -15,6 +15,7 @@ namespace VVRace
     public class ArcanePlant : Building, INotifyBuildingDeconstruct
     {
         public const int RequiredTicksForRecoveryFromDamaged = 30000;
+        public const int TicksPerHitPointRecovery = 3000;
 
         private static List<ThingDef> _allArcanePlantDefs;
         public static List<ThingDef> AllArcanePlantDefs
@@ -184,7 +185,7 @@ namespace VVRace
 
             if (HitPoints < MaxHitPoints && ManaComp.Active && GenTicks.TicksGame >= _lastDamagedTick + RequiredTicksForRecoveryFromDamaged)
             {
-                if (GenTicks.TicksGame % 3 == 0)
+                if (this.IsHashIntervalTick(TicksPerHitPointRecovery, delta))
                 {
                     HitPoints++;
                 }

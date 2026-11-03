@@ -8,6 +8,8 @@ namespace VVRace
 {
     public class ArcanePlant_Seedling : ArcanePlant
     {
+        public const int TicksPerStarvationDamage = 7000;
+
         public SeedlingExtension Extension
         {
             get
@@ -212,7 +214,7 @@ namespace VVRace
                     }
                     else if (GenTicks.TicksGame - _lastZeroNutritionTick > Extension.ticksToDamageFromZeroNutrition)
                     {
-                        if (GenTicks.TicksGame % 7 == 0)
+                        if (this.IsHashIntervalTick(TicksPerStarvationDamage, delta))
                         {
                             if (HitPoints == 1)
                             {
