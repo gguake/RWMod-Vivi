@@ -15,7 +15,7 @@ namespace VVRace
         public static bool AnyAmberCoreExists()
         {
             var coreDef = VVThingDefOf.VV_AncientAmberCore;
-            var altarDef = VVThingDefOf.VV_DreamumAltar;
+            var altarDef = VVThingDefOf.VV_EverflowerAltar;
 
             try
             {

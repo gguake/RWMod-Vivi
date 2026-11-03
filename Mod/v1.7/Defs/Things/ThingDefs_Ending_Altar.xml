@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <!-- 영원꽃 제단: 5x5 화분(ArcanePlantPot 파생). 중앙 칸에 4단계 이상 영원꽃을 순간이동시켜 안치한다. -->
   <ThingDef ParentName="BuildingBase">
-    <defName>VV_DreamumAltar</defName>
+    <defName>VV_EverflowerAltar</defName>
     <label>everflower altar</label>
     <description>An altar restored from the designs of the old vivi empire. Its amber core and mana circuits support the everflower's growth.\n\nAn everflower of attunement level 4 or higher can be enshrined here and cannot be moved afterward. The altar cannot be destroyed by attacks. Only one can be built per map.</description>
     <descriptionHyperlinks>
@@ -10,10 +9,10 @@
       <ThingDef>VV_AncientAmberCore</ThingDef>
     </descriptionHyperlinks>
 
-    <thingClass>VVRace.Building_DreamumAltar</thingClass>
+    <thingClass>VVRace.Building_EverflowerAltar</thingClass>
 
     <graphicData>
-      <texPath>Things/Building/VV_DreamumAltar</texPath>
+      <texPath>Things/Building/VV_EverflowerAltar</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <drawRotated>false</drawRotated>
       <drawSize>(10, 10)</drawSize>
@@ -70,9 +69,9 @@
       </li>
     </comps>
 
-    <!-- 비비 연방의 밀서를 받기 전에는 건축 메뉴에 보이지 않는다(PlaceWorker_DreamumAltar.IsBuildDesignatorVisible). -->
+    <!-- 비비 연방의 밀서를 받기 전에는 건축 메뉴에 보이지 않는다(PlaceWorker_EverflowerAltar.IsBuildDesignatorVisible). -->
     <placeWorkers>
-      <li>VVRace.PlaceWorker_DreamumAltar</li>
+      <li>VVRace.PlaceWorker_EverflowerAltar</li>
     </placeWorkers>
 
     <designationCategory>VV_Bulidings</designationCategory>
@@ -85,7 +84,7 @@
     <label>ancient amber core</label>
     <description>An amber crystal used in the everflower altars of the old vivi empire. The vivi federation holds the surviving cores.\n\nObtained by completing a task for the federation.</description>
     <descriptionHyperlinks>
-      <ThingDef>VV_DreamumAltar</ThingDef>
+      <ThingDef>VV_EverflowerAltar</ThingDef>
     </descriptionHyperlinks>
 
     <graphicData>

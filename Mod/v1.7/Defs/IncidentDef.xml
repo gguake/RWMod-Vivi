@@ -33,4 +33,12 @@
       <li>Scaria</li>
     </letterHyperlinkHediffDefs>
   </IncidentDef>
+
+  <IncidentDef ParentName="GiveQuestBase">
+    <defName>VV_GiveQuest_ViviMissive</defName>
+    <label>vivi federation missive</label>
+    <workerClass>VVRace.IncidentWorker_ViviMissive</workerClass>
+    <questScriptDef>VV_EndGame_ViviMissive</questScriptDef>
+    <baseChance>0</baseChance>
+  </IncidentDef>
 </Defs>

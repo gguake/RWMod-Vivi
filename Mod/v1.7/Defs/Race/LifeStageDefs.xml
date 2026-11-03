@@ -74,4 +74,25 @@
     <milkable>true</milkable>
   </LifeStageDef>
 
+  <!-- 아스포델 페이즈별 생애 단계: 0 = 1페이즈(결속), 1 = 2페이즈(해방). 나이와 무관하게 CompApocrypha가 LockCurrentLifeStageIndex로 고정한다. -->
+  <LifeStageDef>
+    <defName>VV_ApocryphaBound</defName>
+    <label>bound</label>
+    <visible>false</visible>
+    <canDoRandomMentalBreaks>false</canDoRandomMentalBreaks>
+    <bodySizeFactor>1</bodySizeFactor>
+  </LifeStageDef>
+
+  <!-- 2페이즈는 이동속도가 1.5 → 4.0으로 빨라진다. -->
+  <LifeStageDef>
+    <defName>VV_ApocryphaUnbound</defName>
+    <label>unbound</label>
+    <visible>false</visible>
+    <canDoRandomMentalBreaks>false</canDoRandomMentalBreaks>
+    <bodySizeFactor>1.3</bodySizeFactor>
+    <healthScaleFactor>1.3</healthScaleFactor>
+    <statOffsets>
+      <MoveSpeed>2.5</MoveSpeed>
+    </statOffsets>
+  </LifeStageDef>
 </Defs>

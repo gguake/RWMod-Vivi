@@ -346,4 +346,42 @@
     </root>
   </PawnRenderTreeDef>
 
+  <!-- 코어 Animal 렌더 트리 복사본 + 2페이즈 전환 동안 몸통을 키우는 서브워커 -->
+  <PawnRenderTreeDef>
+    <defName>VV_Apocrypha</defName>
+    <root Class="PawnRenderNodeProperties_Parent">
+      <debugLabel>Root</debugLabel>
+      <tagDef>Root</tagDef>
+      <children>
+        <li>
+          <debugLabel>Body</debugLabel>
+          <tagDef>Body</tagDef>
+          <nodeClass>PawnRenderNode_AnimalPart_Body</nodeClass>
+          <workerClass>PawnRenderNodeWorker_AnimalBody</workerClass>
+          <useRottenColor>true</useRottenColor>
+          <subworkerClasses>
+            <li>VVRace.PawnRenderSubWorker_ApocryphaGrow</li>
+          </subworkerClasses>
+          <children>
+            <li>
+              <debugLabel>Wounds</debugLabel>
+              <nodeClass>PawnRenderNode_AnimalPart</nodeClass>
+              <workerClass>PawnRenderNodeWorker_OverlayWounds</workerClass>
+              <overlayLayer>Body</overlayLayer>
+              <useGraphic>false</useGraphic>
+              <baseLayer>3</baseLayer>
+            </li>
+            <li>
+              <debugLabel>Firefoam</debugLabel>
+              <nodeClass>PawnRenderNode_AnimalPart</nodeClass>
+              <workerClass>PawnRenderNodeWorker_OverlayFirefoam</workerClass>
+              <overlayLayer>Body</overlayLayer>
+              <useGraphic>false</useGraphic>
+              <baseLayer>10</baseLayer>
+            </li>
+          </children>
+        </li>
+      </children>
+    </root>
+  </PawnRenderTreeDef>
 </Defs>

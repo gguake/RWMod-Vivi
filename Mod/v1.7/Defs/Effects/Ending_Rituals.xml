@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <Defs>
   <!-- 엔딩 의식 연출. 기존 영원꽃 의식 연출(Effects/Everflower.xml)의 모트·플렉을 재사용하고, 황금 파동 고리와 엔딩 의식 전용 연출만 새로 정의한다. -->
 
@@ -283,26 +283,4 @@
       </li>
     </children>
   </EffecterDef>
-
-  <!-- 대관식 진행 중 연출: 여왕이 되는 공명자에게 기존 영원꽃 의식 고리와 요정화 의식의 황금 고리를 함께 띄운다(대관식의 역할은 공명자 하나뿐이다) -->
-  <RitualVisualEffectDef>
-    <defName>VV_QueensCoronation</defName>
-    <comps>
-      <li Class="CompProperties_RitualEffectSpawnOnRole">
-        <roleId>resonator</roleId>
-        <moteDef>VV_Mote_EverflowerCircle</moteDef>
-        <spawnIntervalTicks>24</spawnIntervalTicks>
-      </li>
-      <li Class="CompProperties_RitualEffectSpawnOnRole">
-        <roleId>resonator</roleId>
-        <moteDef>VV_Mote_EverflowerLinkDistortion</moteDef>
-        <spawnIntervalTicks>24</spawnIntervalTicks>
-      </li>
-      <li Class="CompProperties_RitualEffectSpawnOnRole">
-        <roleId>resonator</roleId>
-        <moteDef>VV_Mote_VV_FairyficationCircle</moteDef>
-        <spawnIntervalTicks>24</spawnIntervalTicks>
-      </li>
-    </comps>
-  </RitualVisualEffectDef>
 </Defs>

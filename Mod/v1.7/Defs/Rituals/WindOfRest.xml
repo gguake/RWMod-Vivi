@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- ===== 6단계 〈안식의 바람〉: 영원꽃에서 맵 전체로 바람을 보내 유전자 불안정과 스카리아를 걷어 낸다.
+       스카리아와 공생하는 거대 말벌은 가루가 되어 흩어지고 날개만 남는다(WindOfRest) ===== -->
+  <PreceptDef>
+    <defName>VV_WindOfRest</defName>
+    <label>wind of rest ritual</label>
+    <description>Calls up a mystical wind that purifies pollution and chaos, cleansing genetic instability and scaria from every creature in the area and purifying titanic hornets.</description>
+    <issue>Ritual</issue>
+    <preceptClass>Precept_Ritual</preceptClass>
+    <visible>false</visible>
+    <classic>true</classic>
+    <countsTowardsPreceptLimit>false</countsTowardsPreceptLimit>
+    <selectionWeight>0</selectionWeight>
+    <ritualPatternBase>VV_WindOfRest</ritualPatternBase>
+    <iconPath>UI/Commands/VV_WindOfRest</iconPath>
+    <usesIdeoVisualEffects>false</usesIdeoVisualEffects>
+    <mergeRitualGizmosFromAllIdeos>true</mergeRitualGizmosFromAllIdeos>
+    <useRepeatPenalty>false</useRepeatPenalty>
+    <showRitualFloatMenuOption>false</showRitualFloatMenuOption>
+    <displayOrderInImpact>993</displayOrderInImpact>
+    <displayOrderInIssue>993</displayOrderInIssue>
+  </PreceptDef>
+
+  <RitualPatternDef>
+    <defName>VV_WindOfRest</defName>
+    <ritualOnlyForIdeoMembers>false</ritualOnlyForIdeoMembers>
+    <ritualBehavior>VV_WindOfRest</ritualBehavior>
+    <ritualOutcomeEffect>VV_WindOfRest</ritualOutcomeEffect>
+    <ritualObligationTargetFilter>VV_WindOfRest</ritualObligationTargetFilter>
+    <playsIdeoMusic>false</playsIdeoMusic>
+    <alwaysStartAnytime>true</alwaysStartAnytime>
+    <iconPathOverride>UI/Commands/VV_WindOfRest</iconPathOverride>
+    <showIdeoIconsInDialog>false</showIdeoIconsInDialog>
+  </RitualPatternDef>
+
+  <RitualBehaviorDef>
+    <defName>VV_WindOfRest</defName>
+    <durationTicks>1500</durationTicks>
+    <workerClass>VVRace.RitualBehaviorWorker_GeneralEverflowerRitual</workerClass>
+    <displayCompletedMessage>true</displayCompletedMessage>
+    <roles>
+      <li Class="VVRace.RitualRoleEverflowerResonator">
+        <id>resonator</id>
+        <label>resonator</label>
+        <maxCount>1</maxCount>
+        <required>True</required>
+        <usedStat>PsychicSensitivity</usedStat>
+        <defaultForSelectedColonist>true</defaultForSelectedColonist>
+        <allowChild>false</allowChild>
+        <blocksSocialInteraction>true</blocksSocialInteraction>
+        <countsAsParticipant>false</countsAsParticipant>
+      </li>
+    </roles>
+    <stages>
+      <li>
+        <defaultDuty>Spectate</defaultDuty>
+        <showProgressBar>false</showProgressBar>
+        <endTriggers>
+          <li Class="StageEndTrigger_RolesArrived">
+            <roleIds>
+              <li>resonator</li>
+            </roleIds>
+          </li>
+        </endTriggers>
+        <roleBehaviors>
+          <li>
+            <roleId>resonator</roleId>
+            <dutyDef>ArriveToCell</dutyDef>
+            <customPositions>
+              <li Class="RitualPosition_PreferredAdjacentCellCardinal">
+                <faceThing>true</faceThing>
+              </li>
+            </customPositions>
+          </li>
+        </roleBehaviors>
+      </li>
+      <li>
+        <defaultDuty>SpectateCircle</defaultDuty>
+        <spectateDistanceOverride>4~6</spectateDistanceOverride>
+        <visualEffectDef>VV_EverflowerLink</visualEffectDef>
+        <endTriggers>
+          <li Class="StageEndTrigger_DurationPercentage">
+            <percentage>1</percentage>
+          </li>
+        </endTriggers>
+        <roleBehaviors>
+          <li>
+            <roleId>resonator</roleId>
+            <dutyDef>Idle</dutyDef>
+            <customPositions>
+              <li Class="RitualPosition_PreferredAdjacentCellCardinal">
+                <faceThing>true</faceThing>
+              </li>
+            </customPositions>
+          </li>
+        </roleBehaviors>
+      </li>
+    </stages>
+  </RitualBehaviorDef>
+
+  <RitualOutcomeEffectDef>
+    <defName>VV_WindOfRest</defName>
+    <description>When the ritual completes, genetic instability and scaria are cured throughout the area. Titanic hornets are purified and vanish.\n\nAll everflower rituals share a cooldown.</description>
+    <workerClass>VVRace.RitualOutcomeEffectWorker_WindOfRest</workerClass>
+    <allowAttachableOutcome>false</allowAttachableOutcome>
+    <givesDevelopmentPoints>false</givesDevelopmentPoints>
+    <allowOutcomeWithNoAttendance>true</allowOutcomeWithNoAttendance>
+    <effecter>VV_Effecter_WindOfRestComplete</effecter>
+    <maxQuality>10</maxQuality>
+    <comps>
+      <li Class="RitualOutcomeComp_PawnStatScaled">
+        <label>{PAWN_labelShort}'s psychic sensitivity</label>
+        <labelAbstract>resonator's psychic sensitivity</labelAbstract>
+        <roleId>resonator</roleId>
+        <statDef>PsychicSensitivity</statDef>
+        <curve>
+          <points>
+            <li>(0.5, 0.0)</li>
+            <li>(1.5, 1.0)</li>
+            <li>(2.5, 1.5)</li>
+            <li>(4.0, 2.0)</li>
+            <li>(6.0, 2.5)</li>
+            <li>(8.5, 3.0)</li>
+          </points>
+        </curve>
+      </li>
+      <li Class="RitualOutcomeComp_ParticipantCount">
+        <label>participant count</label>
+        <curve>
+          <points>
+            <li>(0,  0.0)</li>
+            <li>(4,  0.5)</li>
+            <li>(10, 1.0)</li>
+            <li>(20, 2.0)</li>
+          </points>
+        </curve>
+      </li>
+    </comps>
+  </RitualOutcomeEffectDef>
+
+  <RitualObligationTargetFilterDef Class="VVRace.RitualObligationTargetFilterDef_EverflowerRitual">
+    <defName>VV_WindOfRest</defName>
+    <workerClass>VVRace.RitualObligationTargetWorker_EverflowerRitual</workerClass>
+    <requiredAttunementLevel>6</requiredAttunementLevel>
+  </RitualObligationTargetFilterDef>
+</Defs>

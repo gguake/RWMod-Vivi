@@ -28,9 +28,9 @@ namespace VVRace
             slate.Set("resolvedQuestDescription", missiveText + "\n\n" + LocalizeString_Etc.VV_Quest_EndingMissiveGoals.Translate().Resolve());
 
             var hyperlinks = new List<ThingDef>();
-            if (VVThingDefOf.VV_DreamumAltar != null)
+            if (VVThingDefOf.VV_EverflowerAltar != null)
             {
-                hyperlinks.Add(VVThingDefOf.VV_DreamumAltar);
+                hyperlinks.Add(VVThingDefOf.VV_EverflowerAltar);
             }
             if (VVThingDefOf.VV_AncientAmberCore != null)
             {

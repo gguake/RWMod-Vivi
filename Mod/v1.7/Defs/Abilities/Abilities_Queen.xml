@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- ===== 선고: 등 뒤 허공에 맺힌 거대 엘텍스 바늘이 한 번 날아가 경로의 적대 대상을 꿰뚫고 사라진다 ===== -->
+  <AbilityDef>
+    <defName>VV_QueenVerdict</defName>
+    <label>verdict</label>
+    <description>Hurls a giant eltex needle that pierces every enemy and structure along a wide straight line. Allies are unharmed.</description>
+    <iconPath>UI/Commands/VV_QueenVerdict</iconPath>
+    <cooldownTicksRange>2500</cooldownTicksRange>
+    <hostile>true</hostile>
+    <aiCanUse>false</aiCanUse>
+    <displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
+    <disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
+
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <label>verdict</label>
+      <violent>true</violent>
+      <warmupTime>0.5</warmupTime>
+      <range>34.9</range>
+      <requireLineOfSight>true</requireLineOfSight>
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetBuildings>true</canTargetBuildings>
+        <canTargetSelf>false</canTargetSelf>
+      </targetParams>
+    </verbProperties>
+
+    <comps>
+      <li Class="VVRace.CompProperties_AbilityQueenVerdict">
+        <needleDef>VV_QueenVerdictNeedle</needleDef>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <!-- ===== 마나 보호막: 보호막 반경 안 환경 마나의 합계가 1000 이상이면 그만큼을 칸별 마나에 비례해 소모하고 저각 보호막을 세운다 ===== -->
+  <AbilityDef>
+    <defName>VV_QueenManaBarrier</defName>
+    <label>mana barrier</label>
+    <description>Consumes environment mana from the surrounding area to raise a barrier that blocks enemy gunfire for 2 hours. Allied fire passes through.</description>
+    <iconPath>UI/Commands/VV_QueenManaBarrier</iconPath>
+    <cooldownTicksRange>2500</cooldownTicksRange>
+    <hostile>false</hostile>
+    <aiCanUse>false</aiCanUse>
+    <displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
+    <disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
+
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <label>mana barrier</label>
+      <violent>false</violent>
+      <warmupTime>1</warmupTime>
+      <range>29.9</range>
+      <requireLineOfSight>false</requireLineOfSight>
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+        <canTargetPawns>false</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetSelf>false</canTargetSelf>
+      </targetParams>
+    </verbProperties>
+
+    <comps>
+      <li Class="VVRace.CompProperties_AbilityQueenManaBarrier">
+        <shieldDef>VV_QueenManaBarrierShield</shieldDef>
+        <requiredTotalMana>1000</requiredTotalMana>
+        <durationTicks>5000</durationTicks>
+      </li>
+    </comps>
+  </AbilityDef>
+</Defs>

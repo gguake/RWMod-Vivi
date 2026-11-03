@@ -49,7 +49,7 @@ namespace VVRace
 
             var arcanePlantPot = map.GetComponent<ArcanePlantMapComponent>()?.GetArcanePlantPot(cell);
 
-            if (arcanePlantPot is Building_DreamumAltar altar)
+            if (arcanePlantPot is Building_EverflowerAltar altar)
             {
                 if (def != VVThingDefOf.VV_Everflower || cell != altar.Position)
                 {
@@ -70,7 +70,7 @@ namespace VVRace
 
                 // 제단 틀은 발판의 식물을 해체하므로 청사진·틀 위에는 식물을 놓지 못하게 한다.
                 if ((thing.def.IsBlueprint || thing.def.IsFrame) && thing.def.entityDefToBuild is ThingDef builtDef
-                    && builtDef.thingClass != null && typeof(Building_DreamumAltar).IsAssignableFrom(builtDef.thingClass))
+                    && builtDef.thingClass != null && typeof(Building_EverflowerAltar).IsAssignableFrom(builtDef.thingClass))
                 {
                     return new AcceptanceReport(LocalizeString_Etc.VV_FailReason_AltarUnderConstruction.Translate());
                 }

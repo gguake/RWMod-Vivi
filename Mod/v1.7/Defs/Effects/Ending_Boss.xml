@@ -1472,4 +1472,42 @@
       </li>
     </children>
   </EffecterDef>
+
+  <!-- 처치된 아스포델의 소멸 연출(시체 대신). 저장 가능한 시퀀서이며 VV_Dissolve 셰이더로 직접 그린다. -->
+  <ThingDef ParentName="EtherealThingBase">
+    <defName>VV_DyingApocrypha</defName>
+    <label>Asphodel</label>
+    <thingClass>VVRace.DyingApocrypha</thingClass>
+    <tickerType>Normal</tickerType>
+    <drawerType>RealtimeOnly</drawerType>
+    <drawOffscreen>true</drawOffscreen>
+    <altitudeLayer>Pawn</altitudeLayer>
+    <selectable>false</selectable>
+  </ThingDef>
+
+  <!-- 1페이즈 등장 연출: 영원꽃 위에 검은 에너지가 모여 형체를 빚고, 영원꽃의 파장에 맵 외곽으로 밀려난다(실제 보스는 밀려난 자리에 스폰).
+       저장 가능한 시퀀서이며 VV_Manifest 셰이더로 직접 그린다. 형체가 영원꽃에서 멀리 날아가므로 화면 밖에서도 그린다. -->
+  <ThingDef ParentName="EtherealThingBase">
+    <defName>VV_ApocryphaManifestation</defName>
+    <label>???</label>
+    <thingClass>VVRace.ApocryphaManifestation</thingClass>
+    <tickerType>Normal</tickerType>
+    <drawerType>RealtimeOnly</drawerType>
+    <drawOffscreen>true</drawOffscreen>
+    <seeThroughFog>true</seeThroughFog>
+    <altitudeLayer>MoteOverheadLow</altitudeLayer>
+    <selectable>false</selectable>
+  </ThingDef>
+
+  <!-- 보스전 거대 말벌 소환: 땅(멸망꽃이면 꽃)에서 검은 기운이 피어올라 VV_Manifest 셰이더로 말벌 형체를 빚고, 다 빚어지면 실제 말벌이 스폰된다.
+       말벌의 역할(호위·멸망꽃 경비·정착지 습격)과 지킬 대상을 저장하는 시퀀서다. -->
+  <ThingDef ParentName="EtherealThingBase">
+    <defName>VV_HornetManifestation</defName>
+    <label>???</label>
+    <thingClass>VVRace.HornetManifestation</thingClass>
+    <tickerType>Normal</tickerType>
+    <drawerType>RealtimeOnly</drawerType>
+    <altitudeLayer>Pawn</altitudeLayer>
+    <selectable>false</selectable>
+  </ThingDef>
 </Defs>

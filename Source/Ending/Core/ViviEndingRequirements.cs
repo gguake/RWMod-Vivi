@@ -49,8 +49,8 @@ namespace VVRace
             var everflower = ViviEndingUtility.FindEndingCandidate();
             var altar = ViviEndingUtility.AltarOf(everflower);
             AppendLine(sb, altar != null, LocalizeString_Etc.VV_Quest_EndingMissiveStepAltar.Translate().Resolve());
-            AppendLine(sb, everflower != null && everflower.EverflowerComp.IsEnshrined && everflower.AttunementLevel >= Building_DreamumAltar.RequiredAttunementLevel,
-                LocalizeString_Etc.VV_Quest_EndingMissiveStepEnshrine.Translate(Building_DreamumAltar.RequiredAttunementLevel).Resolve());
+            AppendLine(sb, everflower != null && everflower.EverflowerComp.IsEnshrined && everflower.AttunementLevel >= Building_EverflowerAltar.RequiredAttunementLevel,
+                LocalizeString_Etc.VV_Quest_EndingMissiveStepEnshrine.Translate(Building_EverflowerAltar.RequiredAttunementLevel).Resolve());
 
             return sb.ToString();
         }

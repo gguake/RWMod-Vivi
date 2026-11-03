@@ -226,7 +226,7 @@ namespace VVRace
         {
             if (blocker == null || blocker.Destroyed || !blocker.Spawned) { return false; }
             if (blocker == stealTarget) { return false; }
-            if (blocker is Building_DreamumAltar || blocker is ArcanePlant_Everflower) { return false; }
+            if (blocker is Building_EverflowerAltar || blocker is ArcanePlant_Everflower) { return false; }
             if (!blocker.def.useHitPoints) { return false; }
             if (blocker.def.building != null && !blocker.def.building.canBeDamagedByAttacks) { return false; }
 

@@ -79,13 +79,13 @@ namespace VVRace
             return everflower?.EverflowerComp?.LinkedPawns?.FirstOrDefault();
         }
 
-        public static Building_DreamumAltar AltarOf(ArcanePlant_Everflower everflower)
+        public static Building_EverflowerAltar AltarOf(ArcanePlant_Everflower everflower)
         {
             var altar = everflower != null && !everflower.Destroyed ? everflower.EverflowerComp?.EnshrinedAltar : null;
             if (altar != null) { return altar; }
 
             var map = everflower?.MapHeld;
-            return map != null ? Building_DreamumAltar.FindOnMap(map) : null;
+            return map != null ? Building_EverflowerAltar.FindOnMap(map) : null;
         }
 
         public static void GrantQueenPowers(Pawn pawn)

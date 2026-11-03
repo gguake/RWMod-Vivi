@@ -6,18 +6,18 @@
     5/6단계 이펙트의 위치는 제단 위 그래픽 기준이다. 제단 밖에서는 CompEverflower가 줄기 밑동 차이(+0.9)만큼 옮겨서 재생한다.
   -->
 
-  <!-- 5/6단계 꽃 모양 발광: 제단 위 그래픽(VV_DreamumAltarFlower_e/f)과 같은 비율. 부모는 Effects/Everflower_Growth.xml -->
+  <!-- 5/6단계 꽃 모양 발광: 제단 위 그래픽(VV_EverflowerAltarFlower_e/f)과 같은 비율. 부모는 Effects/Everflower_Growth.xml -->
   <ThingDef ParentName="VV_MoteEverflowerGrowthGlow">
     <defName>VV_Mote_EverflowerGrowthGlow_5_Level</defName>
     <graphicData>
-      <texPath>Things/Plants/VV_Everflower/VV_DreamumAltarFlower_e</texPath>
+      <texPath>Things/Plants/VV_Everflower/VV_EverflowerAltarFlower_e</texPath>
       <drawSize>(0.58, 1)</drawSize>
     </graphicData>
   </ThingDef>
   <ThingDef ParentName="VV_MoteEverflowerGrowthGlow">
     <defName>VV_Mote_EverflowerGrowthGlow_6_Level</defName>
     <graphicData>
-      <texPath>Things/Plants/VV_Everflower/VV_DreamumAltarFlower_f</texPath>
+      <texPath>Things/Plants/VV_Everflower/VV_EverflowerAltarFlower_f</texPath>
       <drawSize>(0.6104, 1)</drawSize>
     </graphicData>
   </ThingDef>
@@ -218,7 +218,7 @@
       <fadeOutTime>1.6</fadeOutTime>
     </mote>
     <graphicData>
-      <texPath>Things/Plants/VV_Everflower/VV_DreamumAltarFlower_e</texPath>
+      <texPath>Things/Plants/VV_Everflower/VV_EverflowerAltarFlower_e</texPath>
       <drawSize>(0.58, 1)</drawSize>
       <color>(1, 0.96, 0.78, 0.4)</color>
     </graphicData>
@@ -231,7 +231,7 @@
       <fadeOutTime>1.6</fadeOutTime>
     </mote>
     <graphicData>
-      <texPath>Things/Plants/VV_Everflower/VV_DreamumAltarFlower_f</texPath>
+      <texPath>Things/Plants/VV_Everflower/VV_EverflowerAltarFlower_f</texPath>
       <drawSize>(0.6104, 1)</drawSize>
       <color>(1, 0.96, 0.78, 0.4)</color>
     </graphicData>

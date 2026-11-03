@@ -256,7 +256,7 @@ namespace VVRace
             var anchor = ViviEndingQuest.Current?.AnchorEverflower;
             if (anchor != null && anchor.Spawned && anchor.Map == map) { ignored.Add(anchor); }
 
-            var altar = Building_DreamumAltar.FindOnMap(map);
+            var altar = Building_EverflowerAltar.FindOnMap(map);
             if (altar != null) { ignored.Add(altar); }
 
             var pawns = map.mapPawns.AllPawnsSpawned;
@@ -277,7 +277,7 @@ namespace VVRace
 
         internal static bool TryFindBloomCellNear(IntVec3 cell, Map map, out IntVec3 result)
         {
-            var altar = Building_DreamumAltar.FindOnMap(map);
+            var altar = Building_EverflowerAltar.FindOnMap(map);
             var altarRect = GetAltarRect(altar);
             var colonyAnchor = GetColonyAnchor(map, altar);
             if (IsValidBloomCell(cell, map, altarRect, colonyAnchor))
@@ -320,7 +320,7 @@ namespace VVRace
         {
             var map = boss.Map;
             var bossCell = boss.Position;
-            var altar = Building_DreamumAltar.FindOnMap(map);
+            var altar = Building_EverflowerAltar.FindOnMap(map);
             var altarRect = GetAltarRect(altar);
             var colonyAnchor = GetColonyAnchor(map, altar);
             var minDistanceSquared = MinSeedDistanceFromBoss * MinSeedDistanceFromBoss;

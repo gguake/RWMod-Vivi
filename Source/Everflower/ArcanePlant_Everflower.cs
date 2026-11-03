@@ -152,9 +152,9 @@ namespace VVRace
                 if (!_reserveTeleportCell.HasValue)
                 {
                     string desc = LocalizeString_Command.VV_Command_ReserveTeleportEverflowerDesc.Translate();
-                    if (Building_DreamumAltar.FindOnMap(Map) != null)
+                    if (Building_EverflowerAltar.FindOnMap(Map) != null)
                     {
-                        desc += "\n\n" + LocalizeString_Command.VV_Command_ReserveTeleportEverflowerAltarDesc.Translate(Building_DreamumAltar.RequiredAttunementLevel.Named("LEVEL")).Resolve();
+                        desc += "\n\n" + LocalizeString_Command.VV_Command_ReserveTeleportEverflowerAltarDesc.Translate(Building_EverflowerAltar.RequiredAttunementLevel.Named("LEVEL")).Resolve();
                     }
 
                     yield return new Command_Action()
@@ -171,10 +171,10 @@ namespace VVRace
                                     var cell = ResolveTeleportCell(target.Cell, out var altar);
 
                                     // 검증에 실패한 클릭은 action을 호출하지 않으므로 단계 조건 검증과 거부 메시지는 여기서 처리한다.
-                                    if (altar != null && EverflowerComp.AttunementLevel < Building_DreamumAltar.RequiredAttunementLevel)
+                                    if (altar != null && EverflowerComp.AttunementLevel < Building_EverflowerAltar.RequiredAttunementLevel)
                                     {
                                         Messages.Message(
-                                            LocalizeString_Message.VV_Message_EverflowerAltarRequiresLevel.Translate(Building_DreamumAltar.RequiredAttunementLevel.Named("LEVEL")),
+                                            LocalizeString_Message.VV_Message_EverflowerAltarRequiresLevel.Translate(Building_EverflowerAltar.RequiredAttunementLevel.Named("LEVEL")),
                                             this,
                                             MessageTypeDefOf.RejectInput,
                                             historical: false);
@@ -291,10 +291,10 @@ namespace VVRace
 
                 // 예약 후 제단이 건설됐을 수 있으므로 이동 직전에 단계 조건을 다시 검사한다.
                 // 미달이면 무작위 이동 없이 예약만 취소해 낮은 단계의 영원꽃이 제단에 갇히지 않게 한다.
-                if (altar != null && EverflowerComp.AttunementLevel < Building_DreamumAltar.RequiredAttunementLevel)
+                if (altar != null && EverflowerComp.AttunementLevel < Building_EverflowerAltar.RequiredAttunementLevel)
                 {
                     Messages.Message(
-                        LocalizeString_Message.VV_Message_EverflowerAltarRequiresLevel.Translate(Building_DreamumAltar.RequiredAttunementLevel.Named("LEVEL")),
+                        LocalizeString_Message.VV_Message_EverflowerAltarRequiresLevel.Translate(Building_EverflowerAltar.RequiredAttunementLevel.Named("LEVEL")),
                         this,
                         MessageTypeDefOf.RejectInput,
                         historical: false);
@@ -433,18 +433,18 @@ namespace VVRace
             _reserveTeleportCell = default;
         }
 
-        private IntVec3 ResolveTeleportCell(IntVec3 cell, out Building_DreamumAltar altar)
+        private IntVec3 ResolveTeleportCell(IntVec3 cell, out Building_EverflowerAltar altar)
         {
             altar = null;
             if (!cell.IsValid || Map == null || !cell.InBounds(Map)) { return cell; }
 
-            altar = _mapComponent?.GetArcanePlantPot(cell) as Building_DreamumAltar;
+            altar = _mapComponent?.GetArcanePlantPot(cell) as Building_EverflowerAltar;
             return altar != null ? altar.Position : cell;
         }
 
         private bool IsAltarCell(IntVec3 cell)
         {
-            return _mapComponent?.GetArcanePlantPot(cell) is Building_DreamumAltar;
+            return _mapComponent?.GetArcanePlantPot(cell) is Building_EverflowerAltar;
         }
 
         // EdificeGrid.DeRegister는 칸을 비우므로 식물이 떠난 자리에는 화분을 다시 등록한다.

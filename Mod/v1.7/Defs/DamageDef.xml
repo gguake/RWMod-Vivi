@@ -126,4 +126,45 @@
     <impactSoundType>Bullet</impactSoundType>
     <damageEffecter>VV_Impact_BulletLava</damageEffecter>
   </DamageDef>
+
+  <!-- 거대 엘텍스 바늘의 관통 피해(찌르기). 피해량·방어 관통은 CompProperties_Apocrypha의 needleDamage/needleArmorPenetration을 쓴다.
+       구조물(세력 무관)은 폰이 받는 피해의 2배를 받는다. -->
+  <DamageDef>
+    <defName>VV_GiantNeedlePierce</defName>
+    <label>giant needle</label>
+    <workerClass>DamageWorker_Stab</workerClass>
+    <externalViolence>true</externalViolence>
+    <deathMessage>{0} was skewered by an ancient eltex needle.</deathMessage>
+    <hediff>Stab</hediff>
+    <hediffSolid>Crack</hediffSolid>
+    <impactSoundType>Slice</impactSoundType>
+    <armorCategory>Sharp</armorCategory>
+    <stabChanceOfForcedInternal>0.6</stabChanceOfForcedInternal>
+    <overkillPctToDestroyPart>0.4~1.0</overkillPctToDestroyPart>
+    <defaultDamage>80</defaultDamage>
+    <defaultArmorPenetration>0.8</defaultArmorPenetration>
+    <buildingDamageFactor>2</buildingDamageFactor>
+  </DamageDef>
+
+  <!-- 아스포델 1페이즈 기믹: 요정 비비 사출탄, 멸망꽃/요정꽃 씨앗, 멸망꽃·요정꽃 -->
+
+  <!-- ===== 피해 ===== -->
+
+  <!-- 요정 비비 사출탄 폭발: Bomb 계열, 피해 24, 건물에는 절반만 -->
+  <DamageDef ParentName="Bomb">
+    <defName>VV_FairyBlast</defName>
+    <label>fairy blast</label>
+    <deathMessage>{0} was caught in the blast of a hurled fairy vivi.</deathMessage>
+    <defaultDamage>24</defaultDamage>
+    <defaultArmorPenetration>0.15</defaultArmorPenetration>
+    <buildingDamageFactor>0.5</buildingDamageFactor>
+    <buildingDamageFactorImpassable>1</buildingDamageFactorImpassable>
+    <buildingDamageFactorPassable>1</buildingDamageFactorPassable>
+    <plantDamageFactor>1</plantDamageFactor>
+    <explosionHeatEnergyPerCell>0</explosionHeatEnergyPerCell>
+    <explosionCellFleck>Fleck_Vaporize</explosionCellFleck>
+    <explosionColorCenter>(1, 0.95, 0.72)</explosionColorCenter>
+    <explosionColorEdge>(1, 0.7, 0.28)</explosionColorEdge>
+    <soundExplosion>VV_ApocryphaFairyBlast</soundExplosion>
+  </DamageDef>
 </Defs>

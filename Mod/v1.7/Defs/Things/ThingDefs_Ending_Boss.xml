@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 1페이즈 거대 엘텍스 바늘: 보스 둘레에 떠 있다가 넓은 직선을 꿰뚫고 돌아온다. 몸체·경고 띠는 ApocryphaNeedleRenderer가 직접 그리고,
+       발사·귀환 궤적은 엘텍스 바늘과 같은 RPEF 궤적(점은 코드에서 직접 남긴다)으로 그린다. -->
+  <ThingDef ParentName="EtherealThingBase">
+    <defName>VV_ApocryphaNeedle</defName>
+    <label>ancient eltex needle</label>
+    <thingClass>VVRace.ApocryphaNeedle</thingClass>
+    <tickerType>Normal</tickerType>
+    <drawerType>RealtimeOnly</drawerType>
+    <drawOffscreen>true</drawOffscreen>
+    <seeThroughFog>true</seeThroughFog>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <selectable>false</selectable>
+    <comps>
+      <li Class="RPEF.CompProperties_TrailRenderer">
+        <texPath>VFX/VV_GiantNeedleTrail</texPath>
+        <shader>AdditiveChangeHue</shader>
+        <color>(1.0, 0.72, 0.5)</color>
+        <widthCurve>
+          <points>
+            <li>(0, 0.3)</li>
+            <li>(1, 2.8)</li>
+          </points>
+        </widthCurve>
+        <lineTextureMode>Stretch</lineTextureMode>
+        <maxTrailPoint>60</maxTrailPoint>
+        <refreshIntervalTicks>0</refreshIntervalTicks>
+        <fadeOutTicks>24</fadeOutTicks>
+      </li>
+    </comps>
+  </ThingDef>
+</Defs>

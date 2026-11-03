@@ -100,10 +100,10 @@ namespace VVRace
             var thingToInstall = ThingToInstall;
 
             if (thingToInstall is ArcanePlant_Everflower everflower
-                && everflower.AttunementLevel < Building_DreamumAltar.RequiredAttunementLevel
-                && Map.GetComponent<ArcanePlantMapComponent>()?.GetArcanePlantPot(c) is Building_DreamumAltar)
+                && everflower.AttunementLevel < Building_EverflowerAltar.RequiredAttunementLevel
+                && Map.GetComponent<ArcanePlantMapComponent>()?.GetArcanePlantPot(c) is Building_EverflowerAltar)
             {
-                return new AcceptanceReport(LocalizeString_Message.VV_Message_EverflowerAltarRequiresLevel.Translate(Building_DreamumAltar.RequiredAttunementLevel.Named("LEVEL")));
+                return new AcceptanceReport(LocalizeString_Message.VV_Message_EverflowerAltarRequiresLevel.Translate(Building_EverflowerAltar.RequiredAttunementLevel.Named("LEVEL")));
             }
 
             foreach (Thing thing in c.GetThingList(Map))

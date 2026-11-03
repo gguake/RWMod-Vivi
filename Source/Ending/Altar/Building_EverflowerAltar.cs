@@ -8,15 +8,15 @@ using Verse.AI;
 namespace VVRace
 {
     [StaticConstructorOnStartup]
-    public class Building_DreamumAltar : ArcanePlantPot, IThingHolder, ISuspendableThingHolder
+    public class Building_EverflowerAltar : ArcanePlantPot, IThingHolder, ISuspendableThingHolder
     {
         public const int RequiredAttunementLevel = 4;
 
-        // 자동 생성되는 Frame_VV_DreamumAltar는 제단의 building 설정을 상속하지 않는다.
+        // 자동 생성되는 Frame_VV_EverflowerAltar는 제단의 building 설정을 상속하지 않는다.
         // 틀이 파괴되면 KillFinalize가 재료의 25%만 남기고 forcedCostLeavings도 무시해 코어를 잃을 수 있다.
-        static Building_DreamumAltar()
+        static Building_EverflowerAltar()
         {
-            var frameBuilding = VVThingDefOf.VV_DreamumAltar?.frameDef?.building;
+            var frameBuilding = VVThingDefOf.VV_EverflowerAltar?.frameDef?.building;
             if (frameBuilding != null)
             {
                 frameBuilding.canBeDamagedByAttacks = false;
@@ -26,7 +26,7 @@ namespace VVRace
 
         private ThingOwner<Pawn> _resonatorHolder;
 
-        public Building_DreamumAltar()
+        public Building_EverflowerAltar()
         {
             _resonatorHolder = new ThingOwner<Pawn>(this, oneStackOnly: true);
         }
@@ -140,14 +140,14 @@ namespace VVRace
             }
         }
 
-        public static Building_DreamumAltar FindOnMap(Map map)
+        public static Building_EverflowerAltar FindOnMap(Map map)
         {
-            if (map == null || VVThingDefOf.VV_DreamumAltar == null) { return null; }
+            if (map == null || VVThingDefOf.VV_EverflowerAltar == null) { return null; }
 
-            var altars = map.listerThings.ThingsOfDef(VVThingDefOf.VV_DreamumAltar);
+            var altars = map.listerThings.ThingsOfDef(VVThingDefOf.VV_EverflowerAltar);
             for (int i = 0; i < altars.Count; ++i)
             {
-                if (altars[i] is Building_DreamumAltar altar && altar.Spawned)
+                if (altars[i] is Building_EverflowerAltar altar && altar.Spawned)
                 {
                     return altar;
                 }

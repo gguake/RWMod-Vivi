@@ -105,7 +105,7 @@ namespace VVRace
             }
         }
 
-        public Building_DreamumAltar EnshrinedAltar
+        public Building_EverflowerAltar EnshrinedAltar
         {
             get
             {
@@ -118,7 +118,7 @@ namespace VVRace
                 return altar;
             }
         }
-        private Building_DreamumAltar _enshrinedAltar;
+        private Building_EverflowerAltar _enshrinedAltar;
 
         public bool IsEnshrined => EnshrinedAltar != null;
 
@@ -562,11 +562,11 @@ namespace VVRace
             }
         }
 
-        private Building_DreamumAltar FindAltarAtCenter()
+        private Building_EverflowerAltar FindAltarAtCenter()
         {
             if (!parent.Spawned) { return null; }
 
-            var altar = parent.Map.GetComponent<ArcanePlantMapComponent>()?.GetArcanePlantPot(parent.Position) as Building_DreamumAltar;
+            var altar = parent.Map.GetComponent<ArcanePlantMapComponent>()?.GetArcanePlantPot(parent.Position) as Building_EverflowerAltar;
             if (altar == null || altar.Position != parent.Position) { return null; }
 
             return altar;

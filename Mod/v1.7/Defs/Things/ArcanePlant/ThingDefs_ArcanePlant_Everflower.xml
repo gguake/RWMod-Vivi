@@ -17,7 +17,7 @@
       <PreceptDef>VV_GrandAttunement</PreceptDef>
       <PreceptDef>VV_ReturnOfLife</PreceptDef>
       <PreceptDef>VV_QueensCoronation</PreceptDef>
-      <ThingDef>VV_DreamumAltar</ThingDef>
+      <ThingDef>VV_EverflowerAltar</ThingDef>
     </descriptionHyperlinks>
 
     <category>Building</category>
@@ -196,14 +196,14 @@
           </li>
           <!-- 5/6단계(제단 밖): 제단 그래픽과 같은 텍스처·크기에 줄기 밑동이 칸 중심에 오도록 z +0.9 -->
           <li>
-              <texPath>Things/Plants/VV_Everflower/VV_DreamumAltarFlower_e</texPath>
+              <texPath>Things/Plants/VV_Everflower/VV_EverflowerAltarFlower_e</texPath>
               <graphicClass>Graphic_Single</graphicClass>
               <drawSize>(4.248, 7.324)</drawSize>
               <drawOffset>(-0.330, 0.2, 3.437)</drawOffset>
               <renderQueue>2901</renderQueue>
           </li>
           <li>
-              <texPath>Things/Plants/VV_Everflower/VV_DreamumAltarFlower_f</texPath>
+              <texPath>Things/Plants/VV_Everflower/VV_EverflowerAltarFlower_f</texPath>
               <graphicClass>Graphic_Single</graphicClass>
               <drawSize>(6.059, 9.926)</drawSize>
               <drawOffset>(-0.032, 0.2, 4.772)</drawOffset>
@@ -226,8 +226,8 @@
           <li>(0, 0.2, 2.3)</li>  <!-- Lv2: VV_EverflowerB, drawSize 6 -->
           <li>(0, 0.2, 3.0)</li>  <!-- Lv3: VV_EverflowerC, drawSize 6 -->
           <li>(0, 0.2, 5.9)</li>  <!-- Lv4: VV_EverflowerD, drawSize 6x12 -->
-          <li>(-0.31, 0.2, 5.28)</li>  <!-- Lv5: VV_DreamumAltarFlower_e(제단 밖) -->
-          <li>(-0.32, 0.2, 7.42)</li>  <!-- Lv6: VV_DreamumAltarFlower_f(제단 밖) -->
+          <li>(-0.31, 0.2, 5.28)</li>  <!-- Lv5: VV_EverflowerAltarFlower_e(제단 밖) -->
+          <li>(-0.32, 0.2, 7.42)</li>  <!-- Lv6: VV_EverflowerAltarFlower_f(제단 밖) -->
         </ritualEffecterOffsetByLevel>
 
         <!-- 영원꽃 제단에 안치된 동안의 그래픽. 제단 중심(= 영원꽃 칸)에서 줄기 밑동이 제단 코어에 오도록 맞춘 값 -->
@@ -235,7 +235,7 @@
           <li>
             <minLevel>4</minLevel>
             <graphicData>
-              <texPath>Things/Plants/VV_Everflower/VV_DreamumAltarFlower_d</texPath>
+              <texPath>Things/Plants/VV_Everflower/VV_EverflowerAltarFlower_d</texPath>
               <graphicClass>Graphic_Single</graphicClass>
               <drawSize>(3.652, 6.475)</drawSize>
               <drawOffset>(-0.033, 0.2, 2.083)</drawOffset>
@@ -246,7 +246,7 @@
           <li>
             <minLevel>5</minLevel>
             <graphicData>
-              <texPath>Things/Plants/VV_Everflower/VV_DreamumAltarFlower_e</texPath>
+              <texPath>Things/Plants/VV_Everflower/VV_EverflowerAltarFlower_e</texPath>
               <graphicClass>Graphic_Single</graphicClass>
               <drawSize>(4.248, 7.324)</drawSize>
               <drawOffset>(-0.330, 0.2, 2.537)</drawOffset>
@@ -257,7 +257,7 @@
           <li>
             <minLevel>6</minLevel>
             <graphicData>
-              <texPath>Things/Plants/VV_Everflower/VV_DreamumAltarFlower_f</texPath>
+              <texPath>Things/Plants/VV_Everflower/VV_EverflowerAltarFlower_f</texPath>
               <graphicClass>Graphic_Single</graphicClass>
               <drawSize>(6.059, 9.926)</drawSize>
               <drawOffset>(-0.032, 0.2, 3.872)</drawOffset>

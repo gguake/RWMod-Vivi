@@ -5,7 +5,7 @@ using Verse;
 namespace VVRace
 {
     // 제단 틀이 발판의 건물과 마법 식물을 해체하므로 영원꽃 둘레에는 제단을 건설할 수 없다.
-    public class PlaceWorker_DreamumAltar : PlaceWorker
+    public class PlaceWorker_EverflowerAltar : PlaceWorker
     {
         public override bool IsBuildDesignatorVisible(BuildableDef def)
         {
@@ -14,7 +14,7 @@ namespace VVRace
 
         public override AcceptanceReport AllowsPlacing(BuildableDef checkingDef, IntVec3 loc, Rot4 rot, Map map, Thing thingToIgnore = null, Thing thing = null)
         {
-            if (!Building_DreamumAltar.IsValidAltarMap(map))
+            if (!Building_EverflowerAltar.IsValidAltarMap(map))
             {
                 return new AcceptanceReport(LocalizeString_Etc.VV_FailReason_AltarNotHomeMap.Translate());
             }
@@ -33,7 +33,7 @@ namespace VVRace
             {
                 if (!cell.InBounds(map)) { continue; }
 
-                if (Building_DreamumAltar.IsOnSubstructure(cell, map))
+                if (Building_EverflowerAltar.IsOnSubstructure(cell, map))
                 {
                     return new AcceptanceReport(LocalizeString_Etc.VV_FailReason_AltarOnSubstructure.Translate());
                 }

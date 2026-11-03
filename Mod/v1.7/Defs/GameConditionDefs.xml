@@ -8,4 +8,30 @@
     <canBePermanent>false</canBePermanent>
     <natural>false</natural>
   </GameConditionDef>
+
+  <GameConditionDef>
+    <defName>VV_OminousSilence</defName>
+    <conditionClass>GameCondition</conditionClass>
+    <label>ominous silence</label>
+    <description>A psychic wave felt from afar is blocking the everflower's bloom. Something is approaching the everflower.</description>
+    <natural>false</natural>
+    <displayOnUI>true</displayOnUI>
+    <preventIncidents>false</preventIncidents>
+    <canBePermanent>false</canBePermanent>
+  </GameConditionDef>
+
+  <GameConditionDef>
+    <defName>VV_GoldenBloom</defName>
+    <conditionClass>VVRace.GameCondition_GoldenBloom</conditionClass>
+    <label>golden pollen mist</label>
+    <description>The everflower's golden mist covers the area. Ranged accuracy is slightly reduced, but all arcane plants gain unlimited mana.</description>
+    <weatherDef>VV_GoldenBloomMist</weatherDef>
+    <natural>false</natural>
+    <displayOnUI>true</displayOnUI>
+
+    <!-- 엔딩 보상이므로 시나리오의 영구 컨디션으로 고를 수 없게 한다(엔딩 퀘스트는 GameCondition.Permanent로 직접 영구화한다). -->
+    <canBePermanent>false</canBePermanent>
+    <showPermanentInTooltip>false</showPermanentInTooltip>
+    <preventIncidents>false</preventIncidents>
+  </GameConditionDef>
 </Defs>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <QuestScriptDef>
+    <defName>VV_EndGame_ViviMissive</defName>
+    <isRootSpecial>true</isRootSpecial>
+    <autoAccept>true</autoAccept>
+    <sendAvailableLetter>false</sendAvailableLetter>
+    <endOnColonyMove>false</endOnColonyMove>
+    <root Class="VVRace.QuestNode_Root_ViviMissive" />
+  </QuestScriptDef>
+
+  <QuestScriptDef>
+    <defName>VV_EndGame_ViviBloom</defName>
+    <isRootSpecial>true</isRootSpecial>
+    <autoAccept>true</autoAccept>
+    <sendAvailableLetter>false</sendAvailableLetter>
+    <endOnColonyMove>false</endOnColonyMove>
+    <defaultChallengeRating>4</defaultChallengeRating>
+    <root Class="VVRace.QuestNode_Root_ViviBloom" />
+  </QuestScriptDef>
+</Defs>

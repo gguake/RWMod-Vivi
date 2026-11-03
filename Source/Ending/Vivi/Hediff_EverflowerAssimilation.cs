@@ -69,7 +69,7 @@ namespace VVRace
             return false;
         }
 
-        public static Hediff_EverflowerAssimilation Begin(Pawn pawn, ArcanePlant_Everflower everflower, Building_DreamumAltar altar)
+        public static Hediff_EverflowerAssimilation Begin(Pawn pawn, ArcanePlant_Everflower everflower, Building_EverflowerAltar altar)
         {
             var existing = Of(pawn);
             if (existing != null) { return existing; }
@@ -179,7 +179,7 @@ namespace VVRace
         {
             if (pawn == null || pawn.Dead || _broken) { return; }
 
-            if (!(pawn.ParentHolder is Building_DreamumAltar altar))
+            if (!(pawn.ParentHolder is Building_EverflowerAltar altar))
             {
                 pawn.health.RemoveHediff(this);
                 return;

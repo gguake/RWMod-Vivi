@@ -1,33 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <!-- 아스포델 1페이즈 기믹: 요정 비비 사출탄, 멸망꽃/요정꽃 씨앗, 멸망꽃·요정꽃 -->
-
-  <!-- ===== 피해 ===== -->
-
-  <!-- 요정 비비 사출탄 폭발: Bomb 계열, 피해 24, 건물에는 절반만 -->
-  <DamageDef ParentName="Bomb">
-    <defName>VV_FairyBlast</defName>
-    <label>fairy blast</label>
-    <deathMessage>{0} was caught in the blast of a hurled fairy vivi.</deathMessage>
-    <defaultDamage>24</defaultDamage>
-    <defaultArmorPenetration>0.15</defaultArmorPenetration>
-    <buildingDamageFactor>0.5</buildingDamageFactor>
-    <buildingDamageFactorImpassable>1</buildingDamageFactorImpassable>
-    <buildingDamageFactorPassable>1</buildingDamageFactorPassable>
-    <plantDamageFactor>1</plantDamageFactor>
-    <explosionHeatEnergyPerCell>0</explosionHeatEnergyPerCell>
-    <explosionCellFleck>Fleck_Vaporize</explosionCellFleck>
-    <explosionColorCenter>(1, 0.95, 0.72)</explosionColorCenter>
-    <explosionColorEdge>(1, 0.7, 0.28)</explosionColorEdge>
-    <soundExplosion>VV_ApocryphaFairyBlast</soundExplosion>
-  </DamageDef>
-
   <!-- ===== 투사체 ===== -->
-
-  <!-- 요정 비비 사출탄: 창을 앞세운 요정 비비가 금빛 혜성 꼬리를 끌며 날아간다.
-       혜성 텍스처(def 그림)는 머리가 오른쪽을 향하므로 진행 방향으로 돌려 그리고(Projectile_FairyShell.ExactRotation),
-       headOffset만큼 뒤로 물려 혜성 머리의 빛이 요정 등 뒤에 오게 한다. 요정 비비와 후광은 확장의 headGraphics로 실제 위치에 겹쳐 그린다.
-       요정 그림은 가산 원본(VV_FairyAttack_east)을 알파 그림으로 바꾼 것이라 가산 빛에 하얗게 묻히지 않도록 VV_TransparentOverGlow(가산 모트보다 늦게 그림)로 그린다. -->
   <ThingDef ParentName="BaseBullet">
     <defName>VV_Projectile_FairyShell</defName>
     <label>fairy vivi</label>
@@ -78,8 +51,6 @@
     </modExtensions>
   </ThingDef>
 
-  <!-- 꽃 씨앗 공용: 높은 포물선으로 날아가 착탄 칸에 projectile.spawnsThingDef의 꽃을 피운다.
-       damageDef는 방어막이 씨앗을 막을 때만 쓰이므로 피해가 없는 Smoke를 지정한다. -->
   <ThingDef ParentName="BaseBullet" Name="VV_ApocryphaSeedBase" Abstract="True">
     <thingClass>VVRace.Projectile_ApocryphaSeed</thingClass>
     <graphicData>
@@ -138,8 +109,6 @@
   </ThingDef>
 
   <!-- ===== 꽃 ===== -->
-
-  <!-- 멸망꽃: 보스 세력 소속(적대 표시), 플레이어 포탑·징집된 정착민이 자동 공격, 12시간 뒤 만개해 저주 -->
   <ThingDef ParentName="BuildingBase">
     <defName>VV_DoomFlower</defName>
     <label>doom bloom</label>
@@ -155,7 +124,8 @@
     <soundImpactDefault>BulletImpact_Wood</soundImpactDefault>
     <filthLeaving>Filth_Ash</filthLeaving>
     <drawerType>RealtimeOnly</drawerType>
-    <!-- 보스와 잇는 연결선·피어나는 연출이 화면 가장자리에서 끊기지 않게 -->
+    
+    <!-- 보스와 잇는 연결선, 피어나는 연출이 화면 가장자리에서 끊기지 않게 -->
     <drawOffscreen>true</drawOffscreen>
     <tickerType>Normal</tickerType>
     <altitudeLayer>Building</altitudeLayer>
@@ -177,11 +147,9 @@
       <ai_neverTrashThis>true</ai_neverTrashThis>
       <ai_chillDestination>false</ai_chillDestination>
       <expandHomeArea>false</expandHomeArea>
-      <!-- 공격으로 부서질 때만 재생(시듦에는 쓰이지 않는다) -->
       <destroyEffecter>VV_Effecter_DoomFlowerDestroy</destroyEffecter>
     </building>
     <comps>
-      <!-- 꽃이 있는 동안 유지되는 이펙트 -->
       <li Class="CompProperties_Effecter">
         <effecterDef>VV_Effecter_DoomFlowerAura</effecterDef>
       </li>
@@ -197,7 +165,6 @@
     </modExtensions>
   </ThingDef>
 
-  <!-- 요정꽃: 무소속, 피해 불가, 하루 뒤 시듦. 아기가 아닌 비비가 우클릭으로 결속하면 요정 간섭을 얻는다 -->
   <ThingDef ParentName="BuildingBase">
     <defName>VV_FairyFlower</defName>
     <label>fairy bloom</label>
@@ -212,7 +179,8 @@
     </graphicData>
     <soundImpactDefault>BulletImpact_Wood</soundImpactDefault>
     <drawerType>RealtimeOnly</drawerType>
-    <!-- 보스와 잇는 연결선·피어나는 연출이 화면 가장자리에서 끊기지 않게 -->
+
+    <!-- 보스와 잇는 연결선, 피어나는 연출이 화면 가장자리에서 끊기지 않게 -->
     <drawOffscreen>true</drawOffscreen>
     <tickerType>Normal</tickerType>
     <altitudeLayer>Building</altitudeLayer>
@@ -238,7 +206,6 @@
       <expandHomeArea>false</expandHomeArea>
     </building>
     <comps>
-      <!-- 꽃이 있는 동안 유지되는 이펙트 -->
       <li Class="CompProperties_Effecter">
         <effecterDef>VV_Effecter_FairyFlowerAura</effecterDef>
       </li>

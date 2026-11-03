@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- ===== 〈여왕의 대관식〉: 아스포델을 토벌해 응축이 100%가 된 앵커 영원꽃에서 공명자(로열 비비)가 여왕으로 즉위한다.
+       단 한 번만 가능하며, 완료하면 영원꽃이 6단계로 완전히 개화하고 곧이어 엔딩 크레딧이 흐른다 ===== -->
+  <PreceptDef>
+    <defName>VV_QueensCoronation</defName>
+    <label>coronation</label>
+    <description>Crowns the resonator queen and completes the everflower's final bloom.</description>
+    <issue>Ritual</issue>
+    <preceptClass>Precept_Ritual</preceptClass>
+    <visible>false</visible>
+    <classic>true</classic>
+    <countsTowardsPreceptLimit>false</countsTowardsPreceptLimit>
+    <selectionWeight>0</selectionWeight>
+    <ritualPatternBase>VV_QueensCoronation</ritualPatternBase>
+    <iconPath>UI/Commands/VV_QueensCoronation</iconPath>
+    <usesIdeoVisualEffects>false</usesIdeoVisualEffects>
+    <mergeRitualGizmosFromAllIdeos>true</mergeRitualGizmosFromAllIdeos>
+    <useRepeatPenalty>false</useRepeatPenalty>
+    <showRitualFloatMenuOption>false</showRitualFloatMenuOption>
+    <displayOrderInImpact>994</displayOrderInImpact>
+    <displayOrderInIssue>994</displayOrderInIssue>
+  </PreceptDef>
+
+  <RitualPatternDef>
+    <defName>VV_QueensCoronation</defName>
+    <ritualOnlyForIdeoMembers>false</ritualOnlyForIdeoMembers>
+    <ritualBehavior>VV_QueensCoronation</ritualBehavior>
+    <ritualOutcomeEffect>VV_QueensCoronation</ritualOutcomeEffect>
+    <ritualObligationTargetFilter>VV_QueensCoronation</ritualObligationTargetFilter>
+    <playsIdeoMusic>false</playsIdeoMusic>
+    <alwaysStartAnytime>true</alwaysStartAnytime>
+    <iconPathOverride>UI/Commands/VV_QueensCoronation</iconPathOverride>
+    <showIdeoIconsInDialog>false</showIdeoIconsInDialog>
+  </RitualPatternDef>
+
+  <RitualBehaviorDef>
+    <defName>VV_QueensCoronation</defName>
+    <durationTicks>1500</durationTicks>
+    <workerClass>VVRace.RitualBehaviorWorker_GeneralEverflowerRitual</workerClass>
+    <displayCompletedMessage>true</displayCompletedMessage>
+    <roles>
+      <li Class="VVRace.RitualRoleEverflowerResonator">
+        <id>resonator</id>
+        <label>resonator</label>
+        <maxCount>1</maxCount>
+        <required>True</required>
+        <usedStat>PsychicSensitivity</usedStat>
+        <defaultForSelectedColonist>true</defaultForSelectedColonist>
+        <allowChild>false</allowChild>
+        <blocksSocialInteraction>true</blocksSocialInteraction>
+        <countsAsParticipant>false</countsAsParticipant>
+      </li>
+    </roles>
+    <stages>
+      <li>
+        <defaultDuty>Spectate</defaultDuty>
+        <showProgressBar>false</showProgressBar>
+        <endTriggers>
+          <li Class="StageEndTrigger_RolesArrived">
+            <roleIds>
+              <li>resonator</li>
+            </roleIds>
+          </li>
+        </endTriggers>
+        <roleBehaviors>
+          <li>
+            <roleId>resonator</roleId>
+            <dutyDef>ArriveToCell</dutyDef>
+            <customPositions>
+              <li Class="RitualPosition_PreferredAdjacentCellCardinal">
+                <faceThing>true</faceThing>
+              </li>
+            </customPositions>
+          </li>
+        </roleBehaviors>
+      </li>
+      <li>
+        <defaultDuty>SpectateCircle</defaultDuty>
+        <spectateDistanceOverride>4~6</spectateDistanceOverride>
+        <visualEffectDef>VV_QueensCoronation</visualEffectDef>
+        <endTriggers>
+          <li Class="StageEndTrigger_DurationPercentage">
+            <percentage>1</percentage>
+          </li>
+        </endTriggers>
+        <roleBehaviors>
+          <li>
+            <roleId>resonator</roleId>
+            <dutyDef>Idle</dutyDef>
+            <customPositions>
+              <li Class="RitualPosition_PreferredAdjacentCellCardinal">
+                <faceThing>true</faceThing>
+              </li>
+            </customPositions>
+          </li>
+        </roleBehaviors>
+      </li>
+    </stages>
+  </RitualBehaviorDef>
+
+  <RitualOutcomeEffectDef>
+    <defName>VV_QueensCoronation</defName>
+    <description>When the ritual completes, the resonator is crowned queen and the everflower fully blooms.</description>
+    <workerClass>VVRace.RitualOutcomeEffectWorker_QueensCoronation</workerClass>
+    <allowAttachableOutcome>false</allowAttachableOutcome>
+    <givesDevelopmentPoints>false</givesDevelopmentPoints>
+    <allowOutcomeWithNoAttendance>true</allowOutcomeWithNoAttendance>
+    <effecter>VV_Effecter_CoronationComplete</effecter>
+    <maxQuality>10</maxQuality>
+    <comps>
+      <li Class="RitualOutcomeComp_PawnStatScaled">
+        <label>{PAWN_labelShort}'s psychic sensitivity</label>
+        <labelAbstract>resonator's psychic sensitivity</labelAbstract>
+        <roleId>resonator</roleId>
+        <statDef>PsychicSensitivity</statDef>
+        <curve>
+          <points>
+            <li>(0.5, 0.0)</li>
+            <li>(1.5, 1.0)</li>
+            <li>(2.5, 1.5)</li>
+            <li>(4.0, 2.0)</li>
+            <li>(6.0, 2.5)</li>
+            <li>(8.5, 3.0)</li>
+          </points>
+        </curve>
+      </li>
+      <li Class="RitualOutcomeComp_ParticipantCount">
+        <label>participant count</label>
+        <curve>
+          <points>
+            <li>(0,  0.0)</li>
+            <li>(4,  0.5)</li>
+            <li>(10, 1.0)</li>
+            <li>(20, 2.0)</li>
+          </points>
+        </curve>
+      </li>
+    </comps>
+  </RitualOutcomeEffectDef>
+
+  <RitualObligationTargetFilterDef Class="VVRace.RitualObligationTargetFilterDef_EverflowerRitual">
+    <defName>VV_QueensCoronation</defName>
+    <workerClass>VVRace.RitualObligationTargetWorker_EverflowerRitual</workerClass>
+    <requiredAttunementLevel>5</requiredAttunementLevel>
+    <maxAttunementLevel>5</maxAttunementLevel>
+    <completesEndingQuest>true</completesEndingQuest>
+  </RitualObligationTargetFilterDef>
+</Defs>

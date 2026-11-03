@@ -150,7 +150,7 @@ namespace VVRace
 
         internal bool IsBossDeferred => ApocryphaPart != null && ApocryphaPart.State == QuestPartState.Enabled && ApocryphaPart.IsDeferred;
 
-        internal Building_DreamumAltar AnchorAltar => ViviEndingUtility.AltarOf(_anchor);
+        internal Building_EverflowerAltar AnchorAltar => ViviEndingUtility.AltarOf(_anchor);
 
         private QuestPart_ViviEndingState StatePart
         {
@@ -344,8 +344,8 @@ namespace VVRace
             if (quest.EchoLetters.LastStage < MissiveMinEchoStage) { return false; }
 
             var everflower = ViviEndingUtility.FindEndingCandidate();
-            if (everflower == null || everflower.AttunementLevel < Building_DreamumAltar.RequiredAttunementLevel) { return false; }
-            if (!Building_DreamumAltar.IsValidAltarMap(everflower.MapHeld)) { return false; }
+            if (everflower == null || everflower.AttunementLevel < Building_EverflowerAltar.RequiredAttunementLevel) { return false; }
+            if (!Building_EverflowerAltar.IsValidAltarMap(everflower.MapHeld)) { return false; }
 
             return ViviEndingUtility.FindFederation(requireNonHostile: true) != null;
         }

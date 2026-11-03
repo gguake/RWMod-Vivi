@@ -153,7 +153,7 @@ namespace VVRace
 
         public static ThingDef VV_ViviFairy;
 
-        public static ThingDef VV_DreamumAltar;
+        public static ThingDef VV_EverflowerAltar;
 
         public static ThingDef VV_AncientAmberCore;
 
