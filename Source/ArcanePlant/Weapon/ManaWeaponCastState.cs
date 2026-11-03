@@ -27,6 +27,34 @@ namespace VVRace
             return mana != null && mana.Stored < weapon.GetStatValue(VVStatDefOf.VV_RangedWeapon_ManaCost);
         }
 
+        public static CompMana FindManaComp(Verb verb)
+        {
+            return verb.EquipmentSource?.TryGetComp<CompMana>() ?? verb.caster?.TryGetComp<CompMana>();
+        }
+
+        public static float ManaCostPerShot(Verb verb)
+        {
+            return verb.EquipmentSource?.GetStatValue(VVStatDefOf.VV_RangedWeapon_ManaCost) / verb.BurstShotCount ?? 0f;
+        }
+
+        public static bool HasSufficientMana(Verb verb, CompMana compMana)
+        {
+            if (compMana == null) { return false; }
+
+            var cost = verb.EquipmentSource?.GetStatValue(VVStatDefOf.VV_RangedWeapon_ManaCost);
+            if (verb.Bursting)
+            {
+                cost /= verb.BurstShotCount;
+            }
+
+            return compMana.Stored >= cost;
+        }
+
+        public static bool CanPayShot(Verb verb, CompMana compMana, float manaPerShot)
+        {
+            return compMana.Stored >= manaPerShot || AppliesTo(verb);
+        }
+
         public bool TryStartCast(Verb verb, Func<bool> startCast)
         {
             if (verb.Bursting) { return false; }

@@ -37,12 +37,7 @@ namespace VVRace
             {
                 if (_manaComp == null)
                 {
-                    _manaComp = EquipmentSource?.TryGetComp<CompMana>();
-                }
-
-                if (_manaComp == null)
-                {
-                    _manaComp = caster?.TryGetComp<CompMana>();
+                    _manaComp = ManaWeaponCastState.FindManaComp(this);
                 }
 
                 return _manaComp;
@@ -51,23 +46,7 @@ namespace VVRace
         [Unsaved]
         private CompMana _manaComp;
 
-        public bool HasSufficientMana
-        {
-            get
-            {
-                var compMana = ManaComp;
-                if (compMana == null) { return false; }
-
-                if (Bursting)
-                {
-                    return compMana.Stored >= EquipmentSource?.GetStatValue(VVStatDefOf.VV_RangedWeapon_ManaCost) / BurstShotCount;
-                }
-                else
-                {
-                    return compMana.Stored >= EquipmentSource?.GetStatValue(VVStatDefOf.VV_RangedWeapon_ManaCost);
-                }
-            }
-        }
+        public bool HasSufficientMana => ManaWeaponCastState.HasSufficientMana(this, ManaComp);
 
         [Unsaved]
         private Dictionary<ThingDef, float> _tmpProjectileSelector = new Dictionary<ThingDef, float>();
@@ -147,8 +126,8 @@ namespace VVRace
             var compMana = ManaComp;
             if (compMana == null) { return false; }
 
-            var manaPerShoot = EquipmentSource?.GetStatValue(VVStatDefOf.VV_RangedWeapon_ManaCost) / BurstShotCount ?? 0;
-            if (compMana.Stored < manaPerShoot && !ManaWeaponCastState.AppliesTo(this)) { return false; }
+            var manaPerShoot = ManaWeaponCastState.ManaCostPerShot(this);
+            if (!ManaWeaponCastState.CanPayShot(this, compMana, manaPerShoot)) { return false; }
 
             if (base.TryCastShot())
             {
