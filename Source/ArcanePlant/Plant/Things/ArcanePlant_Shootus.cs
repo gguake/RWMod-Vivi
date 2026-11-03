@@ -293,8 +293,6 @@ namespace VVRace
                     _innerContainer.TryDropAll(PositionHeld, MapHeld, ThingPlaceMode.Near);
                     _innerContainer.Clear();
                 }
-
-                return;
             }
             else if (CanEquipWeapon(gun))
             {
