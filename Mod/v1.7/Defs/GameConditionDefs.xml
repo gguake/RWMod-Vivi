@@ -29,7 +29,7 @@
     <description>The everflower's golden mist covers the area. Ranged accuracy is slightly reduced, but all arcane plants gain unlimited mana.</description>
     <weatherDef>VV_GoldenBloomMist</weatherDef>
     <natural>false</natural>
-    <displayOnUI>true</displayOnUI>
+    <displayOnUI>false</displayOnUI>
 
     <canBePermanent>false</canBePermanent>
     <showPermanentInTooltip>false</showPermanentInTooltip>
