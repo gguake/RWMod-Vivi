@@ -298,7 +298,11 @@ namespace VVRace
             switch (DetectEndingScenario())
             {
                 case EndingScenarioKind.Exiled:
-                    scenarioKey = LocalizeString_Etc.VV_EndingCreditsExiled;
+                    // 추방 문구는 추방된 로열 비비 본인이 대관식을 받았을 때만 이어진다.
+                    if (queen != null && queen.kindDef == VVPawnKindDefOf.VV_PlayerExiledRoyalVivi)
+                    {
+                        scenarioKey = LocalizeString_Etc.VV_EndingCreditsExiled;
+                    }
                     break;
                 case EndingScenarioKind.Refugee:
                     scenarioKey = LocalizeString_Etc.VV_EndingCreditsRefugee;
