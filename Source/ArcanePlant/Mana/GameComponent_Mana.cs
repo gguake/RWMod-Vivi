@@ -57,12 +57,69 @@ namespace VVRace
             }
         }
 
+        public List<CompMana> GetManaCompsOn(Map map)
+        {
+            var ticksGame = GenTicks.TicksGame;
+            if (_manaCompsByMapTick != ticksGame)
+            {
+                _manaCompsByMapTick = ticksGame;
+                _manaCompsByMap.Clear();
+
+                foreach (var comp in AllManaComps)
+                {
+                    var rootMap = comp.parent.SpawnedParentOrMe?.Map;
+                    if (rootMap == null) { continue; }
+
+                    if (!_manaCompsByMap.TryGetValue(rootMap, out var comps))
+                    {
+                        comps = new List<CompMana>();
+                        _manaCompsByMap.Add(rootMap, comps);
+                    }
+
+                    comps.Add(comp);
+                }
+            }
+
+            return _manaCompsByMap.TryGetValue(map, out var result) ? result : EmptyManaComps;
+        }
+
+        private static readonly List<CompMana> EmptyManaComps = new List<CompMana>();
+
         private Game _game;
         private List<ThingWithComps> _thingWithManaComps;
         private List<CompMana> _manaCompCache;
+        private readonly Dictionary<Map, List<CompMana>> _manaCompsByMap = new Dictionary<Map, List<CompMana>>();
+        private int _manaCompsByMapTick = -1;
 
         public IEnumerable<Pawn> GetFairyficatedPawns(Pawn pawn) => _fairyficated.Where(v => v.linker == pawn).Select(v => v.fairy);
         private List<FairyficatedPawn> _fairyficated = new List<FairyficatedPawn>();
+
+        // 마나 갱신·요정 처리에서 자주 찾으므로 GetComponent처럼 목록을 앞에서부터 형식 검사하지 않고 마지막으로 찾은 위치를 먼저 본다.
+        // 이전 게임을 붙잡지 않도록 컴포넌트가 아니라 위치만 기억하고, 그 위치에 없으면 다시 찾는다.
+        private static int _cachedIndex = -1;
+
+        public static GameComponent_Mana Of(Game game)
+        {
+            if (game == null) { return null; }
+
+            var components = game.components;
+            var index = _cachedIndex;
+            if ((uint)index < (uint)components.Count && components[index] is GameComponent_Mana cached)
+            {
+                return cached;
+            }
+
+            for (int i = 0; i < components.Count; ++i)
+            {
+                if (components[i] is GameComponent_Mana found)
+                {
+                    _cachedIndex = i;
+                    return found;
+                }
+            }
+
+            return null;
+        }
 
         public GameComponent_Mana(Game game)
         {
