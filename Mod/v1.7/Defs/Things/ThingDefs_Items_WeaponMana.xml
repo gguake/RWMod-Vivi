@@ -441,7 +441,7 @@
       <li>
         <verbClass>VVRace.Verb_ShootWithMana</verbClass>
         <hasStandardCommand>true</hasStandardCommand>
-        <defaultProjectile>VV_Bullet_LavaShredder</defaultProjectile>
+        <defaultProjectile>VV_Bullet_LavaShredderSplit</defaultProjectile>
         <warmupTime>2.0</warmupTime>
         <range>27.9</range>
         <ticksBetweenBurstShots>9</ticksBetweenBurstShots>
@@ -502,7 +502,7 @@
       </li>
     </comps>
   </ThingDef>
-  <ThingDef ParentName="BaseBullet">
+  <ThingDef Name="VV_BulletLavaShredderBase" ParentName="BaseBullet">
     <defName>VV_Bullet_LavaShredder</defName>
     <label>lava fragment</label>
     <graphicData>
@@ -544,6 +544,18 @@
         </rotationRate>
       </li>
     </comps>
+  </ThingDef>
+  <!-- 발사 즉시 화산탄 3발로 분열 -->
+  <ThingDef ParentName="VV_BulletLavaShredderBase">
+    <defName>VV_Bullet_LavaShredderSplit</defName>
+    <thingClass>RPEF.Bullet_Split</thingClass>
+    <comps Inherit="False" />
+    <modExtensions>
+      <li Class="RPEF.SplitProjectileExtension">
+        <projectileDef>VV_Bullet_LavaShredder</projectileDef>
+        <count>3</count>
+      </li>
+    </modExtensions>
   </ThingDef>
 
   <!-- 서리침 석궁 -->

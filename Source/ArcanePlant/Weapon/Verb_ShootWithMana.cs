@@ -94,8 +94,6 @@ namespace VVRace
             }
         }
 
-        public override int ProjectileCount => (int)EquipmentSource.GetStatValue(VVStatDefOf.VV_BulletPelletCount);
-
         public override string ReportLabel => base.ReportLabel;
 
         public override bool ValidateTarget(LocalTargetInfo target, bool showMessages = true)
