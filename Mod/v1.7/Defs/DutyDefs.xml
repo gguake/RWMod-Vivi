@@ -166,6 +166,7 @@
               <subNodes>
                 <li Class="JobGiver_GetFood" />
                 <li Class="VVRace.JobGiver_ViviNestRest" />
+                <li Class="VVRace.JobGiver_LayViviEgg" />
               </subNodes>
             </li>
           </subNodes>
@@ -174,6 +175,9 @@
         <li Class="ThinkNode_ForbidOutsideFlagRadius">
           <maxDistToSquadFlag>24</maxDistToSquadFlag>
           <subNodes>
+            <li Class="VVRace.JobGiver_ViviNestChildcare">
+              <royal>true</royal>
+            </li>
             <li Class="VVRace.JobGiver_ViviNestHaul" />
             <li Class="VVRace.JobGiver_ViviNestDress" />
             <li Class="VVRace.JobGiver_ViviNestBuild" />
@@ -184,6 +188,7 @@
             <li Class="VVRace.JobGiver_ViviNestDigFertilizer" />
             <li Class="VVRace.JobGiver_ViviNestCraft" />
             <li Class="VVRace.JobGiver_ViviNestGarden" />
+            <li Class="VVRace.JobGiver_ViviNestChildcare" />
             <li Class="VVRace.JobGiver_ViviNestSmoothWall" />
             <li Class="VVRace.JobGiver_ViviNestPlay" />
           </subNodes>

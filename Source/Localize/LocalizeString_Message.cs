@@ -59,5 +59,6 @@
         public const string VV_Message_ViviLureScoutsSatisfied = nameof(VV_Message_ViviLureScoutsSatisfied);
         public const string VV_Message_ViviNestSettlersNoLure = nameof(VV_Message_ViviNestSettlersNoLure);
         public const string VV_Message_ViviNestSettlersCanceled = nameof(VV_Message_ViviNestSettlersCanceled);
+        public const string VV_Message_ViviNestBabyHatched = nameof(VV_Message_ViviNestBabyHatched);
     }
 }

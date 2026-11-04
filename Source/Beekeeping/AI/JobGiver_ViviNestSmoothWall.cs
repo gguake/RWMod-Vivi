@@ -10,7 +10,7 @@ namespace VVRace
         protected override Job TryGiveJob(Pawn pawn)
         {
             var nest = pawn.GetNestLordJob();
-            if (nest == null || !nest.Settled || !pawn.DevelopmentalStage.Adult()) { return null; }
+            if (nest == null || !nest.Settled || pawn.DevelopmentalStage.Baby()) { return null; }
             if (pawn.WorkTypeIsDisabled(WorkTypeDefOf.Construction)) { return null; }
 
             var map = pawn.Map;

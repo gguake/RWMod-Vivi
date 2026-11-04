@@ -462,6 +462,17 @@
     <weaponMoney>0~0</weaponMoney>
   </PawnKindDef>
 
+  <!-- 양봉 둥지 부화기에서 태어난 아기. 갓난아기는 일을 못 하므로 필수 기술이 없다(있으면 생성이 실패한다) -->
+  <PawnKindDef ParentName="VV_WanderingViviBase" Class="VVRace.PawnKindDef_Vivi">
+    <defName>VV_WanderingViviNestborn</defName>
+    <label>wandering vivi</label>
+    <combatPower>20</combatPower>
+    <isFighter>false</isFighter>
+    <skills Inherit="False" />
+    <apparelMoney>0~0</apparelMoney>
+    <weaponMoney>0~0</weaponMoney>
+  </PawnKindDef>
+
   <PawnKindDef ParentName="VV_WanderingViviBase" Class="VVRace.PawnKindDef_Vivi">
     <defName>VV_WanderingViviSlinger</defName>
     <label>wandering vivi slinger</label>

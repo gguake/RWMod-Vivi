@@ -229,6 +229,7 @@ namespace VVRace
         public static PawnKindDef VV_ViviSniper;
 
         public static PawnKindDef VV_WanderingViviWorker;
+        public static PawnKindDef VV_WanderingViviNestborn;
         public static PawnKindDef VV_WanderingViviSlinger;
         public static PawnKindDef VV_WanderingRoyalVivi;
         public static PawnKindDef Bear_Grizzly;

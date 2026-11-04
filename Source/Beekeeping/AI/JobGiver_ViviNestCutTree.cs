@@ -12,7 +12,7 @@ namespace VVRace
         protected override Job TryGiveJob(Pawn pawn)
         {
             var nest = pawn.GetNestLordJob();
-            if (nest == null || !nest.Settled || !pawn.DevelopmentalStage.Adult()) { return null; }
+            if (nest == null || !nest.Settled || pawn.DevelopmentalStage.Baby() || pawn.WorkTypeIsDisabled(WorkTypeDefOf.PlantCutting)) { return null; }
             if (JobGiver_ViviNestRest.IsNight(pawn) || BeekeepingUtility.OutdoorDangerous(pawn.Map)) { return null; }
             if (nest.Stock.CountOf(ThingDefOf.WoodLog) >= nest.Production.Target(ThingDefOf.WoodLog, ViviNestProduction.WoodTarget)) { return null; }
 
