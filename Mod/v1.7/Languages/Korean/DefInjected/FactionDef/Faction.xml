@@ -26,4 +26,10 @@
 <VV_ViviFederation.pawnSingular>비비</VV_ViviFederation.pawnSingular>
 <VV_ViviFederation.pawnsPlural>비비</VV_ViviFederation.pawnsPlural>
 <VV_ViviFederation.leaderTitle>연방 대표</VV_ViviFederation.leaderTitle>
+
+<VV_WanderingVivi.label>떠돌이 비비 무리</VV_WanderingVivi.label>
+<VV_WanderingVivi.description>영원꽃 씨앗과 함께 둥지를 잃고 떠도는 작은 비비 무리입니다. 꿀 냄새를 따라 왔다가 조용한 빈 방을 찾으면 그곳에 들어가 크림과 밀랍으로 채우고 주변 꽃에 기대어 살아갑니다. 정착지를 따로 두지 않습니다.</VV_WanderingVivi.description>
+<VV_WanderingVivi.pawnSingular>비비</VV_WanderingVivi.pawnSingular>
+<VV_WanderingVivi.pawnsPlural>비비</VV_WanderingVivi.pawnsPlural>
+<VV_WanderingVivi.leaderTitle>원로</VV_WanderingVivi.leaderTitle>
 </LanguageData>

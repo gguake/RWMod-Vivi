@@ -115,6 +115,53 @@
     </thinkNode>
   </DutyDef>
 
+  <!-- 비비 양봉: 정찰 비비 둘러보기 -->
+  <DutyDef>
+    <defName>VV_ViviLureScout</defName>
+    <thinkNode Class="ThinkNode_Priority">
+      <subNodes>
+        <li Class="ThinkNode_Subtree">
+          <treeDef>SatisfyVeryUrgentNeeds</treeDef>
+        </li>
+        <li Class="VVRace.JobGiver_ViviLureInspect" />
+        <li Class="JobGiver_WanderNearDutyLocation">
+          <wanderRadius>8</wanderRadius>
+        </li>
+      </subNodes>
+    </thinkNode>
+  </DutyDef>
+
+  <!-- 비비 양봉: 곰·말벌이 미끼를 먹어 치움 -->
+  <DutyDef>
+    <defName>VV_ViviBaitThief</defName>
+    <thinkNode Class="ThinkNode_Priority">
+      <subNodes>
+        <li Class="VVRace.JobGiver_DevourBait" />
+        <li Class="JobGiver_WanderNearDutyLocation">
+          <wanderRadius>4</wanderRadius>
+        </li>
+      </subNodes>
+    </thinkNode>
+  </DutyDef>
+
+  <!-- 비비 양봉: 둥지 생활 -->
+  <DutyDef>
+    <defName>VV_ViviNestLife</defName>
+    <thinkNode Class="ThinkNode_Priority">
+      <subNodes>
+        <li Class="JobGiver_FightFiresNearPoint">
+          <maxDistFromPoint>24</maxDistFromPoint>
+        </li>
+        <li Class="ThinkNode_Subtree">
+          <treeDef>SatisfyBasicNeeds</treeDef>
+        </li>
+        <li Class="JobGiver_WanderNearDutyLocation">
+          <wanderRadius>4</wanderRadius>
+        </li>
+      </subNodes>
+    </thinkNode>
+  </DutyDef>
+
   <!-- 거대 말벌 아스포델 호위 -->
   <DutyDef>
     <defName>VV_TitanicHornetEscort</defName>

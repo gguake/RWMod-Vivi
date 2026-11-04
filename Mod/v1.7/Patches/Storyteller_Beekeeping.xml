@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+  <!-- 비비 양봉: 유인통 방문 인시던트를 모든 바닐라 스토리텔러에서 평균 2.5일마다 시도한다(발동 조건은 인시던트가 검사) -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/StorytellerDef[@Name="BaseStoryteller"]/comps</xpath>
+    <value>
+      <li Class="StorytellerCompProperties_SingleMTB">
+        <incident>VV_ViviLureVisit</incident>
+        <mtbDays>2.5</mtbDays>
+      </li>
+    </value>
+  </Operation>
+</Patch>

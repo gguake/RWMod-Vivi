@@ -394,4 +394,59 @@
     <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
   </ThingDef>
 
+  <!-- 비비 유인통: 꿀 음식을 올려 두면 떠돌이 비비를 부른다(연구 불필요) -->
+  <ThingDef ParentName="ShelfBase">
+    <defName>VV_ViviLure</defName>
+    <label>vivi lure</label>
+    <description>A little censer-shelf that wafts the scent of the honey food set on it. Wandering vivis who catch the scent may come to look around, and if they like the place - honey flowers nearby, an empty roofed room with a door, a little mana in the air - a small band may come back and live in that room.\n\nBears and the odd titanic hornet like honey too.\n\nOnce vivis have settled, the lure has done its job and can be removed.</description>
+    <thingClass>VVRace.Building_ViviLure</thingClass>
+    <tickerType>Rare</tickerType>
+    <graphicData>
+      <texPath>Things/Building/Furniture/ShelfSmall</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(2,2)</drawSize>
+    </graphicData>
+    <uiIconScale>0.5</uiIconScale>
+    <costStuffCount>15</costStuffCount>
+    <statBases>
+      <MaxHitPoints>60</MaxHitPoints>
+      <Mass>4</Mass>
+      <WorkToBuild>400</WorkToBuild>
+      <Beauty>1</Beauty>
+    </statBases>
+    <size>(1,1)</size>
+    <designationCategory>Misc</designationCategory>
+    <researchPrerequisites Inherit="False" />
+    <building>
+      <maxItemsInCell>2</maxItemsInCell>
+      <fixedStorageSettings>
+        <filter>
+          <thingDefs>
+            <li>VV_RawHoney</li>
+            <li>VV_FilteredHoney</li>
+            <li>VV_HoneyPollenCake</li>
+            <li>VV_RoyalJelly</li>
+            <li>VV_FloralHotTea</li>
+            <li>VV_FloralIceTea</li>
+            <li>VV_FloralMilkTea</li>
+            <li>VV_HoneyWaterFruit</li>
+            <li>Ambrosia</li>
+            <li>RawBerries</li>
+          </thingDefs>
+        </filter>
+      </fixedStorageSettings>
+      <defaultStorageSettings>
+        <priority>Important</priority>
+        <filter>
+          <thingDefs>
+            <li>VV_RawHoney</li>
+            <li>VV_FilteredHoney</li>
+            <li>Ambrosia</li>
+            <li>RawBerries</li>
+          </thingDefs>
+        </filter>
+      </defaultStorageSettings>
+    </building>
+  </ThingDef>
+
 </Defs>

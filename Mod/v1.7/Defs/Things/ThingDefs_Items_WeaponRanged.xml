@@ -36,6 +36,8 @@
     </weaponClasses>
     <weaponTags Inherit="False">
       <li>NoRelic</li>
+      <!-- 떠돌이 비비(양봉) 새총잡이 전용 -->
+      <li>VV_WanderingViviWeapon</li>
     </weaponTags>
 
     <verbs>

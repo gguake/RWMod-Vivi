@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+<!-- Lure inspector -->
+<VV_Inspector_LureBaitReady>Honey scent: wafting</VV_Inspector_LureBaitReady>
+<VV_Inspector_LureNoBait>Honey scent: none (place honey, ambrosia or berries on it)</VV_Inspector_LureNoBait>
+<VV_Inspector_LureScouting>Vivi scouts are looking around.</VV_Inspector_LureScouting>
+<VV_Inspector_LureThief>Something is after the bait.</VV_Inspector_LureThief>
+<VV_Inspector_LureAwaitingSettlers>A band of vivis is expected in about {0}.</VV_Inspector_LureAwaitingSettlers>
+<VV_Inspector_LureConditionMap>Vivis do not come to this map.</VV_Inspector_LureConditionMap>
+<VV_Inspector_LureConditionRoyal>A royal vivi is already on this map.</VV_Inspector_LureConditionRoyal>
+<VV_Inspector_LureConditionViviCount>Too many colony vivis ({0}/{1}).</VV_Inspector_LureConditionViviCount>
+<VV_Inspector_LureConditionHostile>Hostiles are on the map.</VV_Inspector_LureConditionHostile>
+<VV_Inspector_LureConditionTemperature>It is too hot or too cold outside for vivis.</VV_Inspector_LureConditionTemperature>
+<VV_Inspector_LureConditionSeason>Flowers are not growing now.</VV_Inspector_LureConditionSeason>
+<VV_Inspector_LureConditionWeather>It is dangerous to be outside now.</VV_Inspector_LureConditionWeather>
+<VV_Inspector_LureConditionUnreachable>The vivis cannot reach the room from the map edge.</VV_Inspector_LureConditionUnreachable>
+<VV_Inspector_LureMissingFlowers>Not enough honey flowers nearby ({0}/{1}).</VV_Inspector_LureMissingFlowers>
+<VV_Inspector_LureMissingRoom>No empty room nearby with a door and a full roof.</VV_Inspector_LureMissingRoom>
+<VV_Inspector_LureScoreFlowers>Honey flowers: {0} (need {1}) - {2}</VV_Inspector_LureScoreFlowers>
+<VV_Inspector_LureScoreRoom>Best room: {0} cells, {1} buildings inside - {2}</VV_Inspector_LureScoreRoom>
+<VV_Inspector_LureScoreMana>Environment mana: {0} - {1}</VV_Inspector_LureScoreMana>
+<VV_Inspector_LureScoreTotal>Nest score: {0}</VV_Inspector_LureScoreTotal>
+
+<!-- Lure letters and messages -->
+<VV_Letter_ViviLureScoutsLabel>Vivi scouts</VV_Letter_ViviLureScoutsLabel>
+<VV_Letter_ViviLureScouts>{1} vivi(s) of {0} followed the honey scent of your lure.\n\nThey will look around the lure, the flowers and the rooms nearby. If they like what they see, a small band may come back to live here.</VV_Letter_ViviLureScouts>
+<VV_Letter_ViviLureHornetLabel>Hornet at the lure</VV_Letter_ViviLureHornetLabel>
+<VV_Letter_ViviLureHornet>A titanic hornet has caught the honey scent of your lure and is coming for it. Hornets are in a frenzy and attack anything nearby.</VV_Letter_ViviLureHornet>
+<VV_Message_ViviLureBear>{PAWN_definite} has caught the honey scent and is coming for the lure.</VV_Message_ViviLureBear>
+<VV_Message_ViviLureScoutsFled>The vivi scouts left in a hurry. They will not report this place.</VV_Message_ViviLureScoutsFled>
+<VV_Message_ViviLureScoutsDisappointed>The vivi scouts left without much interest.\n{0}</VV_Message_ViviLureScoutsDisappointed>
+<VV_Message_ViviLureScoutsSatisfied>The vivi scouts liked this place (nest score {0}). A band of vivis may come soon.</VV_Message_ViviLureScoutsSatisfied>
+
+<!-- Settlers -->
+<VV_Letter_ViviNestSettlersLabel>Vivis move in</VV_Letter_ViviNestSettlersLabel>
+<VV_Letter_ViviNestSettlers>A band of {1} vivis from {0} has come to live in the empty room near your lure.\n\nThey gather honey, pollen and propolis from the flowers and trees around, make cream and wax, and build what they need on their own. Their stores are marked forbidden; you may take them freely.\n\nThe vivis do not mind your colonists nearby, but they grow wary quickly when your people step inside their rooms. If they become too wary, they will turn hostile and leave. The doors of their room have been forbidden to your colonists.</VV_Letter_ViviNestSettlers>
+<VV_Message_ViviNestSettlersNoLure>The vivi band that was expected did not come: the lure is gone.</VV_Message_ViviNestSettlersNoLure>
+<VV_Message_ViviNestSettlersCanceled>The vivi band that was expected did not come.\n{0}</VV_Message_ViviNestSettlersCanceled>
+
+</LanguageData>

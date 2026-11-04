@@ -21,6 +21,7 @@
       <li>VV_PlayerVivi</li>
       <li>VV_PlayerExiledVivi</li>
       <li>VV_PlayerViviRefugee</li>
+      <li>VV_WanderingVivi</li>
     </factionWhitelist>
 
     <generalRules>

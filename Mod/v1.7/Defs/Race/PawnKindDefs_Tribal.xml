@@ -414,4 +414,97 @@
     <isRoyal>true</isRoyal>
     <forcedBodyType>Female</forcedBodyType>
   </PawnKindDef>
+
+  <!-- 떠돌이 비비 (양봉): 둥지 일을 하려면 식물·건설·제작 숙련이 어느 정도 있어야 한다 -->
+  <PawnKindDef ParentName="ViviNPCBase" Name="VV_WanderingViviBase" Abstract="True" Class="VVRace.PawnKindDef_Vivi">
+    <defaultFactionDef>VV_WanderingVivi</defaultFactionDef>
+    <itemQuality>Poor</itemQuality>
+    <gearHealthRange>0.5~1.0</gearHealthRange>
+
+    <initialWillRange>1~2</initialWillRange>
+    <initialResistanceRange>10~17</initialResistanceRange>
+
+    <skills>
+      <li>
+        <skill>Plants</skill>
+        <range>6~12</range>
+      </li>
+      <li>
+        <skill>Construction</skill>
+        <range>4~10</range>
+      </li>
+      <li>
+        <skill>Crafting</skill>
+        <range>4~10</range>
+      </li>
+    </skills>
+
+    <backstoryFiltersOverride>
+      <li>
+        <categories>
+          <li>VV_SettlerBackstory</li>
+        </categories>
+      </li>
+    </backstoryFiltersOverride>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="VV_WanderingViviBase" Class="VVRace.PawnKindDef_Vivi">
+    <defName>VV_WanderingViviWorker</defName>
+    <label>wandering vivi</label>
+    <combatPower>40</combatPower>
+    <isFighter>false</isFighter>
+    <forcedBodyType>Thin</forcedBodyType>
+
+    <apparelMoney>0~0</apparelMoney>
+    <apparelRequired>
+      <li>VV_BasicWorkerCostume</li>
+    </apparelRequired>
+    <weaponMoney>0~0</weaponMoney>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="VV_WanderingViviBase" Class="VVRace.PawnKindDef_Vivi">
+    <defName>VV_WanderingViviSlinger</defName>
+    <label>wandering vivi slinger</label>
+    <combatPower>55</combatPower>
+    <isFighter>true</isFighter>
+    <forcedBodyType>Thin</forcedBodyType>
+
+    <apparelMoney>0~0</apparelMoney>
+    <apparelRequired>
+      <li>VV_BasicWorkerCostume</li>
+    </apparelRequired>
+    <weaponMoney>50~500</weaponMoney>
+    <weaponTags>
+      <li>VV_WanderingViviWeapon</li>
+    </weaponTags>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="VV_WanderingViviBase" Class="VVRace.PawnKindDef_Vivi">
+    <defName>VV_WanderingRoyalVivi</defName>
+    <label>wandering royal vivi</label>
+    <combatPower>50</combatPower>
+    <isFighter>false</isFighter>
+    <itemQuality>Normal</itemQuality>
+    <isRoyal>true</isRoyal>
+    <forcedBodyType>Female</forcedBodyType>
+
+    <apparelMoney>0~0</apparelMoney>
+    <apparelRequired>
+      <li>VV_BasicRoyalCostume</li>
+    </apparelRequired>
+    <nakedChance>0</nakedChance>
+    <weaponMoney>0~0</weaponMoney>
+
+    <acceptArrestChanceFactor>0.25</acceptArrestChanceFactor>
+    <initialWillRange>16~19</initialWillRange>
+    <initialResistanceRange>38~58</initialResistanceRange>
+
+    <backstoryFiltersOverride Inherit="False">
+      <li>
+        <categories>
+          <li>VV_RoyalViviSettlerBackstory</li>
+        </categories>
+      </li>
+    </backstoryFiltersOverride>
+  </PawnKindDef>
 </Defs>

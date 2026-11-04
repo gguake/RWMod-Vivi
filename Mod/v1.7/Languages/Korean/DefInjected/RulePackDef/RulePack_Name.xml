@@ -205,6 +205,9 @@
   <VV_NamerNPCFactionVivi.rulePack.rulesStrings.0>r_name->[vivi_flower_nouns] 비비 연합</VV_NamerNPCFactionVivi.rulePack.rulesStrings.0>
   <VV_NamerNPCFactionVivi.rulePack.rulesStrings.1>r_name->[colors] [vivi_flower_nouns] 비비 연합</VV_NamerNPCFactionVivi.rulePack.rulesStrings.1>
 
+  <VV_NamerWanderingViviFaction.rulePack.rulesStrings.0>r_name->떠돌이 [vivi_flower_nouns] 비비 무리</VV_NamerWanderingViviFaction.rulePack.rulesStrings.0>
+  <VV_NamerWanderingViviFaction.rulePack.rulesStrings.1>r_name->[colors] [vivi_flower_nouns] 무리</VV_NamerWanderingViviFaction.rulePack.rulesStrings.1>
+
   <VV_NamerSettlementVivi.rulePack.rulesStrings.0>r_name->[colors] 둥지</VV_NamerSettlementVivi.rulePack.rulesStrings.0>
   <VV_NamerSettlementVivi.rulePack.rulesStrings.1>r_name->[nature] [position] 둥지</VV_NamerSettlementVivi.rulePack.rulesStrings.1>
   <VV_NamerSettlementVivi.rulePack.rulesStrings.2>r_name->[nature] [position] 꿀 저장고</VV_NamerSettlementVivi.rulePack.rulesStrings.2>

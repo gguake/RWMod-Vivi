@@ -52,5 +52,12 @@
         public const string VV_Message_AssimilationBegan = nameof(VV_Message_AssimilationBegan);
         public const string VV_Message_AssimilationReleased = nameof(VV_Message_AssimilationReleased);
         public const string VV_Message_AssimilationBrokenRitual = nameof(VV_Message_AssimilationBrokenRitual);
+
+        public const string VV_Message_ViviLureBear = nameof(VV_Message_ViviLureBear);
+        public const string VV_Message_ViviLureScoutsFled = nameof(VV_Message_ViviLureScoutsFled);
+        public const string VV_Message_ViviLureScoutsDisappointed = nameof(VV_Message_ViviLureScoutsDisappointed);
+        public const string VV_Message_ViviLureScoutsSatisfied = nameof(VV_Message_ViviLureScoutsSatisfied);
+        public const string VV_Message_ViviNestSettlersNoLure = nameof(VV_Message_ViviNestSettlersNoLure);
+        public const string VV_Message_ViviNestSettlersCanceled = nameof(VV_Message_ViviNestSettlersCanceled);
     }
 }

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+<!-- 유인통 점검 창 -->
+<VV_Inspector_LureBaitReady>꿀 향: 퍼지는 중</VV_Inspector_LureBaitReady>
+<VV_Inspector_LureNoBait>꿀 향: 없음 (꿀, 암브로시아, 산딸기 등을 올려 두세요)</VV_Inspector_LureNoBait>
+<VV_Inspector_LureScouting>비비 정찰대가 주변을 둘러보는 중입니다.</VV_Inspector_LureScouting>
+<VV_Inspector_LureThief>무언가가 미끼를 노리고 있습니다.</VV_Inspector_LureThief>
+<VV_Inspector_LureAwaitingSettlers>약 {0} 뒤 비비 무리가 올 것 같습니다.</VV_Inspector_LureAwaitingSettlers>
+<VV_Inspector_LureConditionMap>이 맵에는 비비가 찾아오지 않습니다.</VV_Inspector_LureConditionMap>
+<VV_Inspector_LureConditionRoyal>맵에 이미 로열 비비가 있습니다.</VV_Inspector_LureConditionRoyal>
+<VV_Inspector_LureConditionViviCount>정착지의 비비가 너무 많습니다 ({0}/{1}).</VV_Inspector_LureConditionViviCount>
+<VV_Inspector_LureConditionHostile>맵에 적대 생물이 있습니다.</VV_Inspector_LureConditionHostile>
+<VV_Inspector_LureConditionTemperature>바깥이 비비에게 너무 덥거나 춥습니다.</VV_Inspector_LureConditionTemperature>
+<VV_Inspector_LureConditionSeason>지금은 꽃이 자라는 철이 아닙니다.</VV_Inspector_LureConditionSeason>
+<VV_Inspector_LureConditionWeather>지금은 바깥에 있기 위험합니다.</VV_Inspector_LureConditionWeather>
+<VV_Inspector_LureConditionUnreachable>맵 가장자리에서 그 방까지 갈 길이 없습니다.</VV_Inspector_LureConditionUnreachable>
+<VV_Inspector_LureMissingFlowers>주변에 꿀이 나는 꽃이 부족합니다 ({0}/{1}).</VV_Inspector_LureMissingFlowers>
+<VV_Inspector_LureMissingRoom>주변에 문이 있고 지붕이 다 덮인 빈 방이 없습니다.</VV_Inspector_LureMissingRoom>
+<VV_Inspector_LureScoreFlowers>꿀 꽃: {0}송이 (최소 {1}) - {2}</VV_Inspector_LureScoreFlowers>
+<VV_Inspector_LureScoreRoom>가장 좋은 방: {0}칸, 안의 건물 {1}개 - {2}</VV_Inspector_LureScoreRoom>
+<VV_Inspector_LureScoreMana>환경 마나: {0} - {1}</VV_Inspector_LureScoreMana>
+<VV_Inspector_LureScoreTotal>둥지 점수: {0}</VV_Inspector_LureScoreTotal>
+
+<!-- 유인 편지·메시지 -->
+<VV_Letter_ViviLureScoutsLabel>비비 정찰대</VV_Letter_ViviLureScoutsLabel>
+<VV_Letter_ViviLureScouts>{0}의 비비 {1}마리가 유인통의 꿀 냄새를 따라왔습니다.\n\n정찰 비비들은 유인통과 꽃밭, 근처의 방을 둘러봅니다. 마음에 들면 작은 비비 무리가 이곳에 살러 올지도 모릅니다.</VV_Letter_ViviLureScouts>
+<VV_Letter_ViviLureHornetLabel>유인통의 말벌</VV_Letter_ViviLureHornetLabel>
+<VV_Letter_ViviLureHornet>거대 말벌이 유인통의 꿀 냄새를 맡고 날아오고 있습니다. 말벌은 광폭해져 있어 가까이 있는 모든 것을 공격합니다.</VV_Letter_ViviLureHornet>
+<VV_Message_ViviLureBear>{PAWN_label}(이)가 꿀 냄새를 맡고 유인통으로 오고 있습니다.</VV_Message_ViviLureBear>
+<VV_Message_ViviLureScoutsFled>비비 정찰대가 서둘러 떠났습니다. 이곳을 무리에 알리지 않을 것입니다.</VV_Message_ViviLureScoutsFled>
+<VV_Message_ViviLureScoutsDisappointed>비비 정찰대가 별 관심 없이 떠났습니다.\n{0}</VV_Message_ViviLureScoutsDisappointed>
+<VV_Message_ViviLureScoutsSatisfied>비비 정찰대가 이곳을 마음에 들어 합니다 (둥지 점수 {0}). 곧 비비 무리가 올지도 모릅니다.</VV_Message_ViviLureScoutsSatisfied>
+
+<!-- 정착대 -->
+<VV_Letter_ViviNestSettlersLabel>비비 무리 정착</VV_Letter_ViviNestSettlersLabel>
+<VV_Letter_ViviNestSettlers>{0}의 비비 {1}마리가 유인통 근처의 빈 방에 살러 왔습니다.\n\n비비들은 주변의 꽃과 나무에서 꿀·꽃가루·프로폴리스를 모으고, 크림과 밀랍을 만들고, 필요한 것을 스스로 짓습니다. 비비들이 모은 물건은 금지 표시가 되어 있으며 마음대로 가져가도 됩니다.\n\n비비들은 정착민이 근처에 오는 것은 신경 쓰지 않지만, 방 안에 들어오면 빠르게 경계합니다. 경계심이 가득 차면 적대하며 떠나 버립니다. 비비들의 방 문은 정착민이 드나들지 못하게 금지해 두었습니다.</VV_Letter_ViviNestSettlers>
+<VV_Message_ViviNestSettlersNoLure>오기로 한 비비 무리가 오지 않았습니다. 유인통이 사라졌습니다.</VV_Message_ViviNestSettlersNoLure>
+<VV_Message_ViviNestSettlersCanceled>오기로 한 비비 무리가 오지 않았습니다.\n{0}</VV_Message_ViviNestSettlersCanceled>
+
+</LanguageData>

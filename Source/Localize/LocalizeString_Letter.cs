@@ -78,5 +78,12 @@
         public const string VV_Letter_ReturnOfLifeLabel = nameof(VV_Letter_ReturnOfLifeLabel);
         public const string VV_Letter_ReturnOfLife = nameof(VV_Letter_ReturnOfLife);
         public const string VV_Letter_ReturnOfLifeGenes = nameof(VV_Letter_ReturnOfLifeGenes);
+
+        public const string VV_Letter_ViviLureScoutsLabel = nameof(VV_Letter_ViviLureScoutsLabel);
+        public const string VV_Letter_ViviLureScouts = nameof(VV_Letter_ViviLureScouts);
+        public const string VV_Letter_ViviLureHornetLabel = nameof(VV_Letter_ViviLureHornetLabel);
+        public const string VV_Letter_ViviLureHornet = nameof(VV_Letter_ViviLureHornet);
+        public const string VV_Letter_ViviNestSettlersLabel = nameof(VV_Letter_ViviNestSettlersLabel);
+        public const string VV_Letter_ViviNestSettlers = nameof(VV_Letter_ViviNestSettlers);
     }
 }

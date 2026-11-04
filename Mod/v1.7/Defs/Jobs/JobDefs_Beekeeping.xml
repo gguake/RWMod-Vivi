@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 정찰 비비가 유인통 냄새를 맡는다 -->
+  <JobDef>
+    <defName>VV_ViviInspectLure</defName>
+    <driverClass>VVRace.JobDriver_ViviInspectLure</driverClass>
+    <reportString>sniffing TargetA.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
+
+  <!-- 곰·말벌이 유인통 미끼를 먹어 치운다 -->
+  <JobDef>
+    <defName>VV_DevourBait</defName>
+    <driverClass>VVRace.JobDriver_DevourBait</driverClass>
+    <reportString>devouring the bait on TargetA.</reportString>
+  </JobDef>
+</Defs>

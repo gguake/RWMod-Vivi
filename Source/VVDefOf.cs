@@ -77,6 +77,9 @@ namespace VVRace
         public static JobDef VV_ActivateApocryphaNeedle;
 
         public static JobDef VV_BondFairyFlower;
+
+        public static JobDef VV_ViviInspectLure;
+        public static JobDef VV_DevourBait;
     }
 
     [DefOf]
@@ -183,6 +186,10 @@ namespace VVRace
         public static ThingDef VV_TitanicHornetWing;
 
         public static ThingDef VV_Mote_EverflowerCircle;
+
+        public static ThingDef VV_ViviLure;
+        public static ThingDef VV_BasicWorkerCostume;
+        public static ThingDef RawBerries;
     }
 
     [DefOf]
@@ -207,6 +214,12 @@ namespace VVRace
         public static PawnKindDef VV_ViviGuard;
         public static PawnKindDef VV_ViviFirefighter;
         public static PawnKindDef VV_ViviSniper;
+
+        public static PawnKindDef VV_WanderingViviWorker;
+        public static PawnKindDef VV_WanderingViviSlinger;
+        public static PawnKindDef VV_WanderingRoyalVivi;
+        public static PawnKindDef Bear_Grizzly;
+        public static PawnKindDef Bear_Polar;
 
         public static PawnKindDef VV_Apocrypha;
     }
@@ -455,6 +468,10 @@ namespace VVRace
 
         public static DutyDef VV_TitanicHornetEscort;
         public static DutyDef VV_TitanicHornetFlowerGuard;
+
+        public static DutyDef VV_ViviLureScout;
+        public static DutyDef VV_ViviBaitThief;
+        public static DutyDef VV_ViviNestLife;
     }
 
     [DefOf]
@@ -480,6 +497,9 @@ namespace VVRace
     {
         public static IncidentDef VV_TitanicHornetSwarm;
         public static IncidentDef VV_TitanicHornetAssault;
+
+        public static IncidentDef VV_ViviLureVisit;
+        public static IncidentDef VV_ViviNestSettlers;
     }
 
     [DefOf]
@@ -544,5 +564,7 @@ namespace VVRace
         public static FactionDef VV_ViviFederation;
         public static FactionDef VV_PlayerExiledVivi;
         public static FactionDef VV_PlayerViviRefugee;
+
+        public static FactionDef VV_WanderingVivi;
     }
 }

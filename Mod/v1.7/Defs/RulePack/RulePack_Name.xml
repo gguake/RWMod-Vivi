@@ -258,6 +258,21 @@
     </rulePack>
   </RulePackDef>
 
+  <!-- 떠돌이 비비 무리(양봉 임시 세력) 이름 -->
+  <RulePackDef>
+    <defName>VV_NamerWanderingViviFaction</defName>
+    <rulePack>
+      <rulesStrings>
+        <li>r_name->wandering [vivi_flower_nouns] vivis</li>
+        <li>r_name->[colors] [vivi_flower_nouns] band</li>
+      </rulesStrings>
+      <rulesFiles>
+        <li>vivi_flower_nouns->Words/VV_FlowerNouns</li>
+        <li>colors->Words/Nouns/Colors</li>
+      </rulesFiles>
+    </rulePack>
+  </RulePackDef>
+
   <RulePackDef>
     <defName>VV_NamerSettlementVivi</defName>
     <rulePack>

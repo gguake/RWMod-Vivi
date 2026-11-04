@@ -5,6 +5,10 @@
 <VV_FortifyHoneycombWall.reportString>벌집 벽을 강화하는 중.</VV_FortifyHoneycombWall.reportString>
 <VV_PlantArcaneSeed.reportString>TargetA 심는 중.</VV_PlantArcaneSeed.reportString>
 
+<!-- Beekeeping -->
+<VV_ViviInspectLure.reportString>TargetA의 냄새를 맡는 중.</VV_ViviInspectLure.reportString>
+<VV_DevourBait.reportString>TargetA의 미끼를 먹어 치우는 중.</VV_DevourBait.reportString>
+
 <!-- EverflowerRitual -->
 <VV_MoveEverflower.reportString>TargetA를 옮기기 위해 공명 중.</VV_MoveEverflower.reportString>
 
