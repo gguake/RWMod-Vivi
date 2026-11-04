@@ -19,10 +19,11 @@ namespace VVRace
         {
             base.Apply(target, dest);
 
+            // 준비 시간 중에 실체화할 수 없게 되면 아무 효과가 없으므로 재사용 대기를 돌리지 않는다.
             var ctrl = Controller;
-            if (ctrl != null)
+            if (ctrl == null || !ctrl.TryQueueMaterializeAllAvailable())
             {
-                ctrl.TryQueueMaterializeAllAvailable();
+                parent.ResetCooldown();
             }
         }
 

@@ -85,7 +85,6 @@
     <Compile Include="Fairy\Toils\FairyToil.cs" />
     <Compile Include="Fairy\Toils\FairyToil_Wait.cs" />
     <Compile Include="Fairy\Toils\FairyToil_IdleOrbit.cs" />
-    <Compile Include="Fairy\Toils\FairyToil_Teleport.cs" />
     <Compile Include="Fairy\Toils\FairyToil_CurvedMove.cs" />
     <Compile Include="Fairy\Toils\FairyToil_Attack.cs" />
     <Compile Include="Fairy\Toils\FairyToil_MoveToIdleOrbit.cs" />

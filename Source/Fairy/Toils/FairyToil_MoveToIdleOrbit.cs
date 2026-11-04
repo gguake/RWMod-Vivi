@@ -3,7 +3,7 @@ using Verse;
 
 namespace VVRace
 {
-    public class FairyToil_MoveToIdleOrbit : FairyToil_CurvedMove
+    public class FairyToil_MoveToIdleOrbit : FairyToil
     {
         private const float MinCompletionDistance = 0.02f;
         private const float TeleportDistance = 9f;
@@ -11,21 +11,11 @@ namespace VVRace
 
         private Vector3 targetPosition;
         private int teleportTicksLeft;
-        private bool curvedReturn;
         private bool targetConfigured;
         private bool completeWhenNear;
-        private float speed = DefaultSpeed;
         private float completionDistance = 0.08f;
 
         public FairyToil_MoveToIdleOrbit() { }
-
-        public FairyToil_MoveToIdleOrbit(Vector3 targetPosition, float speed = DefaultSpeed)
-        {
-            this.targetPosition = targetPosition.Yto0();
-            this.speed = speed > 0f ? speed : DefaultSpeed;
-            curvedReturn = true;
-            targetConfigured = true;
-        }
 
         public FairyToil_MoveToIdleOrbit(bool completeWhenNear, float completionDistance = 0.08f)
         {
@@ -51,39 +41,13 @@ namespace VVRace
             return (targetPosition.Yto0() - fairy.RealPosition.Yto0()).magnitude <= maxDistance;
         }
 
-        protected override void OnStarted()
-        {
-            if (!curvedReturn) { return; }
-
-            var fairy = Fairy;
-            if (fairy == null || fairy.Destroyed || fairy.Map == null) { return; }
-
-            SetMoveTarget(targetPosition, speed);
-            fairy.BeginToilMotion(FairyState.MovingToRest);
-        }
-
         protected override FairyToilStatus TickAction(int delta)
         {
-            if (curvedReturn)
-            {
-                var result = AdvanceMove(delta, registerTrail: false);
-                if (result == FairyToilStatus.Complete)
-                {
-                    Fairy?.EnterIdle();
-                }
-                return result;
-            }
-
             if (!targetConfigured || delta <= 0)
             {
                 return FairyToilStatus.Running;
             }
 
-            return TickFollowStep(delta);
-        }
-
-        private FairyToilStatus TickFollowStep(int delta)
-        {
             var fairy = Fairy;
             if (fairy == null || fairy.Destroyed || fairy.Map == null) { return FairyToilStatus.Complete; }
 
@@ -97,7 +61,7 @@ namespace VVRace
                 return FairyToilStatus.Running;
             }
 
-            if (fairy.State == FairyState.Attacking || fairy.State == FairyState.MovingToRest)
+            if (fairy.State == FairyState.Attacking)
             {
                 fairy.EnterIdle();
             }
@@ -137,9 +101,14 @@ namespace VVRace
             return FairyToilStatus.Running;
         }
 
-        protected override FairyToilStatus OnArrived(Vector3 previousPosition)
+        public override void Cancel()
         {
-            return FairyToilStatus.Complete;
+            // 공격 토일이 끝난 같은 틱에는 아직 공격 상태이므로 취소될 때 대기 상태로 되돌린다.
+            var fairy = Fairy;
+            if (fairy != null && fairy.State == FairyState.Attacking)
+            {
+                fairy.EnterIdle();
+            }
         }
 
         public override void ExposeData()
@@ -147,10 +116,8 @@ namespace VVRace
             base.ExposeData();
             Scribe_Values.Look(ref targetPosition, "targetPosition");
             Scribe_Values.Look(ref teleportTicksLeft, "teleportTicksLeft");
-            Scribe_Values.Look(ref curvedReturn, "curvedReturn");
             Scribe_Values.Look(ref targetConfigured, "targetConfigured");
             Scribe_Values.Look(ref completeWhenNear, "completeWhenNear");
-            Scribe_Values.Look(ref speed, "speed", DefaultSpeed);
             Scribe_Values.Look(ref completionDistance, "completionDistance", 0.08f);
         }
     }

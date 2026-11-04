@@ -139,7 +139,7 @@ namespace VVRace
         public override void Cancel()
         {
             var fairy = Fairy;
-            if (fairy != null && (fairy.State == FairyState.Attacking || fairy.State == FairyState.MovingToRest))
+            if (fairy != null && fairy.State == FairyState.Attacking)
             {
                 fairy.EnterIdle();
             }

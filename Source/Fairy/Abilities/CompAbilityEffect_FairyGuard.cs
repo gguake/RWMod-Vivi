@@ -21,15 +21,23 @@ namespace VVRace
         {
             base.Apply(target, dest);
 
-            var ally = target.Pawn;
+            // 효과를 내지 못했으면 재사용 대기를 돌리지 않는다.
+            if (!TryStartGuard(target.Pawn))
+            {
+                parent.ResetCooldown();
+            }
+        }
+
+        private bool TryStartGuard(Pawn ally)
+        {
             var ctrl = Controller;
-            if (ally == null || ctrl == null) { return; }
+            if (ally == null || ctrl == null) { return false; }
 
             // Valid는 시전 시점에만 검사되므로 warmup 동안 상태가 바뀌었을 수 있어 재검증한다.
-            if (ally.Dead || !ally.Spawned || ally.health == null) { return; }
-            if (ally.health.hediffSet.HasHediff(VVHediffDefOf.VV_FairyGuarded)) { return; }
+            if (ally.Dead || !ally.Spawned || ally.health == null) { return false; }
+            if (ally.health.hediffSet.HasHediff(VVHediffDefOf.VV_FairyGuarded)) { return false; }
 
-            if (!ctrl.TryReserveIdleFairies(RequiredFairies, out var reserved)) { return; }
+            if (!ctrl.TryReserveIdleFairies(RequiredFairies, out var reserved)) { return false; }
 
             int id = ctrl.NextFairyJobId();
             reserved[0].StartJob(new FairyJob_Guard(id, parent.pawn, ally));
@@ -37,6 +45,7 @@ namespace VVRace
             var hediff = (Hediff_FairyGuarded)ally.health.AddHediff(VVHediffDefOf.VV_FairyGuarded);
             hediff.ownerVivi = parent.pawn;
             hediff.jobId = id;
+            return true;
         }
 
         public override bool Valid(LocalTargetInfo target, bool throwMessages = false)
