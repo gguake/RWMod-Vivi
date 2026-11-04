@@ -38,4 +38,6 @@
 <VV_Message_ViviNestSettlersNoLure>오기로 한 비비 무리가 오지 않았습니다. 유인통이 사라졌습니다.</VV_Message_ViviNestSettlersNoLure>
 <VV_Message_ViviNestSettlersCanceled>오기로 한 비비 무리가 오지 않았습니다.\n{0}</VV_Message_ViviNestSettlersCanceled>
 
+<VV_StatReport_NestForager>떠돌이 무리 채집꾼: {0}</VV_StatReport_NestForager>
+
 </LanguageData>

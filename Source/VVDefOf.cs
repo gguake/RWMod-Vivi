@@ -35,6 +35,7 @@ namespace VVRace
     {
         public static WorkTypeDef Patient;
         public static WorkTypeDef PatientBedRest;
+        public static WorkTypeDef Cooking;
     }
 
     [DefOf]
@@ -81,7 +82,7 @@ namespace VVRace
         public static JobDef VV_ViviInspectLure;
         public static JobDef VV_DevourBait;
         public static JobDef VV_ViviNestUnload;
-        public static JobDef VV_ViviNestHaulToCell;
+        public static JobDef VV_ViviNestDigFertilizer;
     }
 
     [DefOf]
@@ -192,6 +193,12 @@ namespace VVRace
         public static ThingDef VV_ViviLure;
         public static ThingDef VV_BasicWorkerCostume;
         public static ThingDef RawBerries;
+        public static ThingDef VV_ViviNestWorkSpot;
+        public static ThingDef VV_GatheringSpot;
+        public static ThingDef VV_Pollen;
+        public static ThingDef VV_Propolis;
+        public static ThingDef VV_HoneyPollenCake;
+        public static ThingDef VV_Slingshot;
     }
 
     [DefOf]
@@ -234,6 +241,18 @@ namespace VVRace
 
         public static RecipeDef VV_MakeVivicream;
         public static RecipeDef VV_FilteringHoney;
+
+        public static RecipeDef VV_GatherPollen;
+        public static RecipeDef VV_MakeViviwax;
+        public static RecipeDef VV_Make_HoneyPollenCake;
+        public static RecipeDef Make_VV_BasicWorkerCostume;
+        public static RecipeDef Make_VV_Slingshot;
+    }
+
+    [DefOf]
+    public static class VVWorkGiverDefOf
+    {
+        public static WorkGiverDef VV_DoBillsGathering;
     }
 
     [DefOf]

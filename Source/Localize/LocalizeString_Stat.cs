@@ -68,5 +68,7 @@
 
         public const string VV_StatsReport_EverflowerAttunementLevel = nameof(VV_StatsReport_EverflowerAttunementLevel);
         public const string VV_StatsReport_EverflowerResonator = nameof(VV_StatsReport_EverflowerResonator);
+
+        public const string VV_StatReport_NestForager = nameof(VV_StatReport_NestForager);
     }
 }

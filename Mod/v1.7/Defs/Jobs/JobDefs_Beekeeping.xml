@@ -15,12 +15,11 @@
     <reportString>unloading supplies.</reportString>
   </JobDef>
 
-  <!-- 둥지 비비가 둥지 물건을 둥지 보관 칸으로 옮긴다 -->
+  <!-- 둥지 비비가 비옥한 흙을 파서 마나 비료를 만든다 -->
   <JobDef>
-    <defName>VV_ViviNestHaulToCell</defName>
-    <driverClass>VVRace.JobDriver_ViviNestHaulToCell</driverClass>
-    <reportString>storing TargetA.</reportString>
-    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+    <defName>VV_ViviNestDigFertilizer</defName>
+    <driverClass>VVRace.JobDriver_ViviNestDigFertilizer</driverClass>
+    <reportString>digging soil for mana fertilizer.</reportString>
   </JobDef>
 
   <!-- 곰·말벌이 유인통 미끼를 먹어 치운다 -->

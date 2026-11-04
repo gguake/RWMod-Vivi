@@ -294,8 +294,15 @@
     <Compile Include="Beekeeping\AI\JobGiver_ViviNestUnload.cs" />
     <Compile Include="Beekeeping\AI\JobDriver_ViviNestUnload.cs" />
     <Compile Include="Beekeeping\AI\JobGiver_ViviNestHaul.cs" />
-    <Compile Include="Beekeeping\AI\JobDriver_ViviNestHaulToCell.cs" />
     <Compile Include="Beekeeping\AI\JobGiver_ViviNestWander.cs" />
+    <Compile Include="Beekeeping\Nest\ViviNestProduction.cs" />
+    <Compile Include="Beekeeping\AI\JobGiver_ViviNestGather.cs" />
+    <Compile Include="Beekeeping\AI\JobGiver_ViviNestCraft.cs" />
+    <Compile Include="Beekeeping\AI\JobGiver_ViviNestCutTree.cs" />
+    <Compile Include="Beekeeping\AI\JobGiver_ViviNestDress.cs" />
+    <Compile Include="Beekeeping\AI\JobGiver_ViviNestDigFertilizer.cs" />
+    <Compile Include="Beekeeping\AI\JobDriver_ViviNestDigFertilizer.cs" />
+    <Compile Include="Beekeeping\StatPart_ViviNestForager.cs" />
     <Compile Include="Gather\Comps\CompRepeatGatherable.cs" />
     <Compile Include="Gather\GatherWorker.cs" />
     <Compile Include="Gather\Things\Filth_Pollen.cs" />

@@ -89,6 +89,12 @@
         <max>1</max>
       </li>
     </capacityFactors>
+    <parts>
+      <!-- 양봉 둥지의 떠돌이 비비는 꽃꿀만으로 무리를 먹여 살린다 -->
+      <li Class="VVRace.StatPart_ViviNestForager">
+        <factor>3</factor>
+      </li>
+    </parts>
     <displayPriorityInCategory>4554</displayPriorityInCategory>
   </StatDef>
 

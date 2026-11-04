@@ -12,7 +12,8 @@ namespace VVRace
     // 정찰이 끝날 때 예약되는 정착대. 예약 인시던트는 한 번만 시도되므로 불발도 '발동'으로 처리해 이유를 알리고 유인을 되돌린다.
     public class IncidentWorker_ViviNestSettlers : IncidentWorker
     {
-        private const int HoneyPerSettler = 25;
+        // 꽃 재채집을 기다리는 첫 며칠을 버틸 만큼(약 4일 치) 가져온다.
+        private const int HoneyPerSettler = 35;
         private const int InitialVivicream = 60;
         private const int InitialViviwax = 80;
         private const int InitialWood = 40;

@@ -21,7 +21,7 @@ namespace VVRace
                 var rank = stock.RankOf(thing.Position);
                 if (!stock.TryFindStorageCellFor(thing, pawn, rank, out var cell)) { continue; }
 
-                var job = JobMaker.MakeJob(VVJobDefOf.VV_ViviNestHaulToCell, thing, cell);
+                var job = JobMaker.MakeJob(JobDefOf.HaulToCell, thing, cell);
                 job.count = thing.stackCount;
                 job.haulMode = stock.RankOf(cell) == ViviNestStorageRank.Shelf ? HaulMode.ToCellStorage : HaulMode.ToCellNonStorage;
                 return job;

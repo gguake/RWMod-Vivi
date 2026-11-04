@@ -39,6 +39,8 @@ namespace VVRace
                         var thing = ThingMaker.MakeThing(extension.thingDef);
                         thing.stackCount = actualStackCount;
 
+                        // 둥지 비비가 털어 낸 꽃가루는 둥지 몫이다.
+                        gatherer.GetNestLordJob()?.MarkOwned(thing);
                         var placed = GenPlace.TryPlaceThing(thing, position, map, ThingPlaceMode.Near);
                         if (!placed)
                         {

@@ -394,6 +394,45 @@
     <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
   </ThingDef>
 
+  <!-- 떠돌이 비비 둥지의 바닥 작업 자리: 작업대 없이 바닥에서 만들어 느리다. 둥지가 스스로 깔며 플레이어는 지을 수 없다 -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>VV_ViviNestWorkSpot</defName>
+    <label>vivi nest work spot</label>
+    <description>A patch of floor where wandering vivis knead cream, shape wax and stitch simple clothes by hand. Without proper tools the work goes slowly.</description>
+    <thingClass>Building_WorkTable</thingClass>
+    <graphicData>
+      <texPath>Things/Building/Production/CraftingSpot</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1,1)</drawSize>
+      <color>(1.0, 0.85, 0.55)</color>
+    </graphicData>
+    <altitudeLayer>FloorEmplacement</altitudeLayer>
+    <statBases>
+      <WorkToBuild>0</WorkToBuild>
+      <WorkTableWorkSpeedFactor>0.5</WorkTableWorkSpeedFactor>
+    </statBases>
+    <scatterableOnMapGen>false</scatterableOnMapGen>
+    <useHitPoints>false</useHitPoints>
+    <size>(1,1)</size>
+    <passability>Standable</passability>
+    <hasInteractionCell>True</hasInteractionCell>
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+    <surfaceType>Item</surfaceType>
+    <recipes>
+      <li>VV_MakeVivicream</li>
+      <li>VV_MakeViviwax</li>
+      <li>Make_VV_BasicWorkerCostume</li>
+      <li>Make_VV_Slingshot</li>
+      <li>VV_FilteringHoney</li>
+      <li>VV_Make_HoneyPollenCake</li>
+    </recipes>
+    <building>
+      <ai_chillDestination>false</ai_chillDestination>
+      <wakeDormantPawnsOnConstruction>false</wakeDormantPawnsOnConstruction>
+      <artificialForMeditationPurposes>false</artificialForMeditationPurposes>
+    </building>
+  </ThingDef>
+
   <!-- 비비 유인통: 꿀 음식을 올려 두면 떠돌이 비비를 부른다(연구 불필요) -->
   <ThingDef ParentName="ShelfBase">
     <defName>VV_ViviLure</defName>

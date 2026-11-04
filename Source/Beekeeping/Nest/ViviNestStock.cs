@@ -82,6 +82,13 @@ namespace VVRace
                 CountCell(map, cell);
             }
 
+            // 둥지 칸 밖에 둔 둥지 몫(옮기기 전 수확물 등)도 둥지 비비가 바로 쓸 수 있다.
+            PruneClaimed();
+            for (int i = 0; i < _claimed.Count; ++i)
+            {
+                if (_claimed[i].Spawned) { Count(_claimed[i]); }
+            }
+
             var pawns = _owner.lord?.ownedPawns;
             if (pawns != null)
             {
@@ -136,7 +143,26 @@ namespace VVRace
 
         private void PruneClaimed()
         {
-            _claimed.RemoveAll(t => t == null || t.Destroyed || !t.Spawned || t.Map != Map || Territory.IsTerritoryCell(t.Position));
+            _claimed.RemoveAll(t => !KeepClaim(t, saving: false));
+        }
+
+        // 둥지 비비가 들고 있는 동안에도 장부에 남겨 두어야 일이 끊겨 땅에 내려놓아도 둥지 몫으로 남는다.
+        // 둥지 칸에 놓이면 장부 없이도 둥지 몫이고, 정착민 손에 들어가면 더는 둥지 몫이 아니다.
+        private bool KeepClaim(Thing thing, bool saving)
+        {
+            if (thing == null || thing.Destroyed) { return false; }
+            if (thing.Spawned) { return thing.Map == Map && !Territory.IsTerritoryCell(thing.Position); }
+
+            var holder = thing.ParentHolder;
+            if (holder == null) { return !saving; } // 막 만들어 아직 놓기 전인 산출물
+            return HeldByMember(holder);
+        }
+
+        private bool HeldByMember(IThingHolder holder)
+        {
+            if (holder is Pawn_InventoryTracker inventory) { return inventory.pawn.GetLord() == _owner.lord; }
+            if (holder is Pawn_CarryTracker carry) { return carry.pawn.GetLord() == _owner.lord; }
+            return false;
         }
 
         // 옮길 만한 둥지 물건: 바깥에 둔 둥지 몫, 바깥 보관 칸·방 바닥의 물건(더 좋은 칸이 있으면 옮긴다)
@@ -145,7 +171,7 @@ namespace VVRace
             PruneClaimed();
             for (int i = 0; i < _claimed.Count; ++i)
             {
-                yield return _claimed[i];
+                if (_claimed[i].Spawned) { yield return _claimed[i]; }
             }
 
             var map = Map;
@@ -195,17 +221,7 @@ namespace VVRace
                 return thing.Map == Map && (Territory.IsTerritoryCell(thing.Position) || _claimed.Contains(thing));
             }
 
-            var holder = thing.ParentHolder;
-            if (holder is Pawn_InventoryTracker inventory)
-            {
-                return inventory.pawn.GetLord() == _owner.lord;
-            }
-            if (holder is Pawn_CarryTracker carry)
-            {
-                return carry.pawn.GetLord() == _owner.lord;
-            }
-
-            return false;
+            return thing.ParentHolder != null && HeldByMember(thing.ParentHolder);
         }
 
         public ViviNestStorageRank RankOf(IntVec3 cell)
@@ -329,7 +345,7 @@ namespace VVRace
         {
             if (Scribe.mode == LoadSaveMode.Saving)
             {
-                _claimed.RemoveAll(t => t == null || t.Destroyed || !t.Spawned);
+                _claimed.RemoveAll(t => !KeepClaim(t, saving: true));
             }
 
             Scribe_Collections.Look(ref _claimed, "claimed", LookMode.Reference);

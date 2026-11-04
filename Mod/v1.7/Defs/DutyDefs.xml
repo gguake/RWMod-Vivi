@@ -168,6 +168,11 @@
           <maxDistToSquadFlag>24</maxDistToSquadFlag>
           <subNodes>
             <li Class="VVRace.JobGiver_ViviNestHaul" />
+            <li Class="VVRace.JobGiver_ViviNestDress" />
+            <li Class="VVRace.JobGiver_ViviNestGather" />
+            <li Class="VVRace.JobGiver_ViviNestCutTree" />
+            <li Class="VVRace.JobGiver_ViviNestCraft" />
+            <li Class="VVRace.JobGiver_ViviNestDigFertilizer" />
           </subNodes>
         </li>
         <li Class="VVRace.JobGiver_ViviNestWander" />

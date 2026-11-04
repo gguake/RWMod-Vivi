@@ -18,19 +18,28 @@ namespace VVRace
 
         private ViviNestTerritory _territory;
         private ViviNestStock _stock;
+        private ViviNestProduction _production;
 
         public Faction Faction => _faction;
         public IntVec3 NestCell => _nestCell;
         public bool Settled => _settled;
         public ViviNestTerritory Territory => _territory;
         public ViviNestStock Stock => _stock;
+        public ViviNestProduction Production => _production;
 
         public override bool AddFleeToil => false;
+
+        // 습격 등으로 모두 쓰러져도 둥지가 흩어지지 않게 쓰러진 비비도 남긴다(바닐라 벌레 둥지와 같은 방식).
+        public override bool ShouldRemovePawn(Pawn p, PawnLostCondition reason)
+        {
+            return reason != PawnLostCondition.Incapped;
+        }
 
         public LordJob_ViviNest()
         {
             _territory = new ViviNestTerritory(this);
             _stock = new ViviNestStock(this);
+            _production = new ViviNestProduction(this);
         }
 
         public LordJob_ViviNest(Faction faction, IntVec3 nestCell) : this()
@@ -113,6 +122,17 @@ namespace VVRace
             _stock.MarkDirty();
         }
 
+        public override void LordJobTick()
+        {
+            base.LordJobTick();
+            if (!_settled) { return; }
+
+            if (Find.TickManager.TicksGame % ViviNestProduction.RefreshInterval == 0)
+            {
+                _production.Tick();
+            }
+        }
+
         // 둥지 비비가 쓸 수 있는 것: 둥지 물건, 둥지 세력·무소속 건물, 그 밖의 식물·폰 등. 플레이어 건물·물건은 쓰지 않는다.
         public bool CanUse(Thing thing)
         {
@@ -127,7 +147,8 @@ namespace VVRace
             if (thing == null || thing.Destroyed) { return; }
 
             thing.SetForbidden(true, warnOnFail: false);
-            if (thing.Spawned && !_territory.IsTerritoryCell(thing.Position))
+            // 놓기 직전의 산출물도 잡아 두면 둥지 밖에 놓여도 둥지 몫으로 남는다(둥지 칸에 놓이면 장부가 알아서 뺀다).
+            if (!thing.Spawned || !_territory.IsTerritoryCell(thing.Position))
             {
                 _stock.Claim(thing);
             }
@@ -169,6 +190,7 @@ namespace VVRace
             Scribe_Values.Look(ref _settled, "settled");
             Scribe_Deep.Look(ref _territory, "territory", this);
             Scribe_Deep.Look(ref _stock, "stock", this);
+            Scribe_Deep.Look(ref _production, "production", this);
         }
     }
 }
