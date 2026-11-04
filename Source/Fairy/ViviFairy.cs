@@ -12,7 +12,6 @@ namespace VVRace
         Materializing,
         Idle,
         Teleporting,
-        MovingToRest,
         Attacking,
         Dematerializing,
     }
@@ -50,14 +49,23 @@ namespace VVRace
         [Unsaved]
         private int _lastVisualFrame = -1;
         private Rot4 _facing = Rot4.South;
+
+        // 궤도 변주는 thingIDNumber를 시드로 매번 같은 값이 나오므로 저장하지 않는다.
+        [Unsaved]
         private bool _orbitVariationInitialized;
+        [Unsaved]
         private int _orbitDirection = 1;
+        [Unsaved]
         private float _orbitPhaseOffset;
+        [Unsaved]
         private float _orbitSpeedFactor = 1f;
+        [Unsaved]
         private float _orbitRadiusXFactor = 1f;
+        [Unsaved]
         private float _orbitRadiusZFactor = 1f;
-        private bool _orbitShapeVariationInitialized;
+        [Unsaved]
         private float _orbitTiltAngle;
+        [Unsaved]
         private float _motionCurveOffsetFactor;
         [Unsaved]
         private float? _drawAltitude;
@@ -72,7 +80,7 @@ namespace VVRace
 
         public Pawn Owner => _owner;
         public FairyState State => _state;
-        public FairyRole Role => CurrentJob.Role;
+        public FairyRole Role => CurrentJob?.Role ?? FairyRole.None;
         internal Vector3 RealPosition => _realPosition.Yto0();
         internal Vector3 RealDirection => _realDirection;
         internal int OrbitDirection { get { EnsureOrbitVariation(); return _orbitDirection; } }
@@ -84,31 +92,22 @@ namespace VVRace
         internal float MotionCurveOffsetFactor { get { EnsureOrbitVariation(); return _motionCurveOffsetFactor; } }
 
         public bool InAction => Role != FairyRole.None;
-        public bool IsAvailable => _state == FairyState.Idle && CurrentJob.Kind == FairyJobKind.Idle;
+        // 작업이 끝난 요정은 다음 틱에 대기 작업을 받으므로 대기 중으로 본다.
+        public bool IsAvailable => _state == FairyState.Idle && (CurrentJob == null || CurrentJob.Kind == FairyJobKind.Idle);
         public bool LifespanExpired => GenTicks.TicksGame - _spawnTick >= _lifespanTicks;
 
 
         public CompViviHolder Controller => _owner != null ? _owner.GetComp<CompViviHolder>() : null;
-        public FairyJob CurrentJob
-        {
-            get
-            {
-                EnsureJob();
-                return _job;
-            }
-        }
+        public FairyJob CurrentJob => _job != null && !_job.Ended ? _job : null;
 
         public override int UpdateRateTicks => 1;
 
-        internal void EnsureJob()
+        private void EnsureJob()
         {
             if (_job == null || _job.Ended)
             {
                 StartJob(new FairyJob_Idle(_owner));
-                return;
             }
-
-            _job.Notify_AssignedToFairy(this);
         }
 
         public void StartJob(FairyJob job)
@@ -259,19 +258,6 @@ namespace VVRace
             _state = FairyState.Teleporting;
         }
 
-        internal void FaceTowards(Vector3 targetPosition)
-        {
-            var direction = (targetPosition - _realPosition).Yto0();
-            if (direction.sqrMagnitude <= 0.0001f)
-            {
-                return;
-            }
-
-            _realDirection = direction.normalized;
-            _facing = Rot4.FromAngleFlat(_realDirection.AngleFlat());
-            Rotation = _facing;
-        }
-
         internal void StartTimedState(FairyState state, bool playPhaseEffect)
         {
             _drawAltitude = null;
@@ -287,16 +273,11 @@ namespace VVRace
             }
         }
 
-        internal void BeginToilMotion(FairyState state)
+        internal void BeginAttackMotion()
         {
-            if (state != FairyState.Attacking && state != FairyState.MovingToRest) { return; }
-
             _drawAltitude = null;
-            _state = state;
-            if (state == FairyState.Attacking)
-            {
-                _attackGraphicActive = true;
-            }
+            _state = FairyState.Attacking;
+            _attackGraphicActive = true;
         }
 
         internal void SetToilPosition(Vector3 position, Vector3 direction, float? drawAltitude = null)
@@ -463,47 +444,41 @@ namespace VVRace
 
         private void EnsureOrbitVariation()
         {
-            if (_orbitVariationInitialized && _orbitShapeVariationInitialized)
+            if (_orbitVariationInitialized)
             {
                 return;
             }
 
-            if (!_orbitVariationInitialized)
+            Rand.PushState(Gen.HashCombineInt(thingIDNumber, 7919));
+            try
             {
-                Rand.PushState(Gen.HashCombineInt(thingIDNumber, 7919));
-                try
-                {
-                    _orbitDirection = Rand.Value < 0.5f ? -1 : 1;
-                    _orbitPhaseOffset = Rand.Range(0f, Mathf.PI * 2f);
-                    _orbitSpeedFactor = Rand.Range(0.72f, 1.28f);
-                    _orbitRadiusXFactor = Rand.Range(0.82f, 1.18f);
-                    _orbitRadiusZFactor = Rand.Range(0.82f, 1.18f);
-                    _orbitVariationInitialized = true;
-                }
-                finally
-                {
-                    Rand.PopState();
-                }
+                _orbitDirection = Rand.Value < 0.5f ? -1 : 1;
+                _orbitPhaseOffset = Rand.Range(0f, Mathf.PI * 2f);
+                _orbitSpeedFactor = Rand.Range(0.72f, 1.28f);
+                _orbitRadiusXFactor = Rand.Range(0.82f, 1.18f);
+                _orbitRadiusZFactor = Rand.Range(0.82f, 1.18f);
+            }
+            finally
+            {
+                Rand.PopState();
             }
 
-            if (!_orbitShapeVariationInitialized)
+            Rand.PushState(Gen.HashCombineInt(thingIDNumber, 104729));
+            try
             {
-                Rand.PushState(Gen.HashCombineInt(thingIDNumber, 104729));
-                try
+                _orbitTiltAngle = Rand.Range(0f, Mathf.PI);
+                _motionCurveOffsetFactor = Rand.Range(-0.85f, 0.85f);
+                if (Mathf.Abs(_motionCurveOffsetFactor) < 0.25f)
                 {
-                    _orbitTiltAngle = Rand.Range(0f, Mathf.PI);
-                    _motionCurveOffsetFactor = Rand.Range(-0.85f, 0.85f);
-                    if (Mathf.Abs(_motionCurveOffsetFactor) < 0.25f)
-                    {
-                        _motionCurveOffsetFactor += _motionCurveOffsetFactor < 0f ? -0.25f : 0.25f;
-                    }
-                    _orbitShapeVariationInitialized = true;
-                }
-                finally
-                {
-                    Rand.PopState();
+                    _motionCurveOffsetFactor += _motionCurveOffsetFactor < 0f ? -0.25f : 0.25f;
                 }
             }
+            finally
+            {
+                Rand.PopState();
+            }
+
+            _orbitVariationInitialized = true;
         }
 
         protected override void TickInterval(int delta)
@@ -521,14 +496,15 @@ namespace VVRace
                 BeginDematerialize(true);
             }
 
-            CurrentJob.Tick(delta);
+            EnsureJob();
+            _job.Tick(delta);
             UpdateFacing();
         }
 
         private void UpdateFacing()
         {
             // 이동/공격 중에는 진행 방향을 향한다. 대기 궤도 중의 방향은 OrbitIdleStep이 접선 방향으로 갱신한다.
-            if (_state == FairyState.Attacking || _state == FairyState.MovingToRest)
+            if (_state == FairyState.Attacking)
             {
                 if (_realDirection.sqrMagnitude > 0.0001f)
                 {
@@ -559,32 +535,16 @@ namespace VVRace
             Scribe_Values.Look(ref _realPosition, "realPosition");
             Scribe_Values.Look(ref _realDirection, "realDirection", Vector3.forward);
             Scribe_Values.Look(ref _facing, "facing");
-            Scribe_Values.Look(ref _orbitVariationInitialized, "orbitVariationInitialized");
-            Scribe_Values.Look(ref _orbitDirection, "orbitDirection", 1);
-            Scribe_Values.Look(ref _orbitPhaseOffset, "orbitPhaseOffset");
-            Scribe_Values.Look(ref _orbitSpeedFactor, "orbitSpeedFactor", 1f);
-            Scribe_Values.Look(ref _orbitRadiusXFactor, "orbitRadiusXFactor", 1f);
-            Scribe_Values.Look(ref _orbitRadiusZFactor, "orbitRadiusZFactor", 1f);
-            Scribe_Values.Look(ref _orbitShapeVariationInitialized, "orbitShapeVariationInitialized");
-            Scribe_Values.Look(ref _orbitTiltAngle, "orbitTiltAngle");
-            Scribe_Values.Look(ref _motionCurveOffsetFactor, "motionCurveOffsetFactor");
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
-                if (_orbitDirection == 0)
-                {
-                    _orbitVariationInitialized = false;
-                }
-                if (!_orbitVariationInitialized || !_orbitShapeVariationInitialized)
-                {
-                    EnsureOrbitVariation();
-                }
                 // 이동/공격 상태는 저장된 토일이 그대로 이어가므로 언세이브 필드인 공격 그래픽만 복원한다.
                 if (_state == FairyState.Attacking)
                 {
                     _attackGraphicActive = true;
                 }
-                EnsureJob();
+                // 작업과 토일의 요정 참조는 저장되지 않으므로 다시 연결한다. 끝난 작업은 다음 틱에 교체된다.
+                CurrentJob?.Notify_AssignedToFairy(this);
             }
         }
     }

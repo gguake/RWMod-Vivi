@@ -109,16 +109,9 @@ namespace VVRace
 
             EndTargetMarkerEffect();
 
-            // Pawn.Kill이 hediff 목록을 정방향 순회하며 이 메서드를 호출하므로,
-            // 여기서 즉시 제거하면 목록이 당겨져 다음 hediff의 Notify_PawnDied가 건너뛰어진다.
-            var deadPawn = pawn;
-            LongEventHandler.ExecuteWhenFinished(() =>
-            {
-                if (deadPawn?.health != null && deadPawn.health.hediffSet.hediffs.Contains(this))
-                {
-                    deadPawn.health.RemoveHediff(this);
-                }
-            });
+            // 죽은 폰은 헤디프가 틱되지 않아 ShouldRemove로 정리되지 않으므로 여기서 지운다.
+            // HediffSet.Notify_PawnDied는 목록을 역방향으로 순회하므로 즉시 제거해도 다른 헤디프의 알림이 누락되지 않는다.
+            pawn.health.RemoveHediff(this);
         }
 
         private void MaintainTargetMarkerEffect()

@@ -23,7 +23,11 @@ namespace VVRace
             base.Apply(target, dest);
 
             var ctrl = Controller;
-            if (ctrl == null) { return; }
+            if (ctrl == null)
+            {
+                parent.ResetCooldown();
+                return;
+            }
 
             var active = ctrl.GetActiveJob<FairyJob_Expansion>();
             if (active != null)
@@ -36,7 +40,12 @@ namespace VVRace
                 .Where(f => f != null && !f.Destroyed && f.IsAvailable)
                 .OrderBy(f => f.thingIDNumber)
                 .ToList();
-            if (reserved.Count < RequiredFairies) { return; }
+            // 준비 시간 중에 요정이 다른 일을 맡아 부족해지면 아무 효과가 없으므로 재사용 대기를 돌리지 않는다.
+            if (reserved.Count < RequiredFairies)
+            {
+                parent.ResetCooldown();
+                return;
+            }
 
             int id = ctrl.NextFairyJobId();
             for (int i = 0; i < reserved.Count; i++)

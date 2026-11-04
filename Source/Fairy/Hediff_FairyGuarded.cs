@@ -7,10 +7,35 @@ namespace VVRace
 {
     public class Hediff_FairyGuarded : HediffWithComps
     {
+        private const int JobCheckIntervalTicks = 60;
+
         public Pawn ownerVivi;
         public int jobId;
 
-        public override bool ShouldRemove => ownerVivi == null || ownerVivi.Dead || !ownerVivi.Spawned;
+        [Unsaved]
+        private bool _jobLost;
+
+        public override bool ShouldRemove => _jobLost || ownerVivi == null || ownerVivi.Dead || !ownerVivi.Spawned;
+
+        private bool HasGuardJob
+        {
+            get
+            {
+                var ctrl = ownerVivi?.GetComp<CompViviHolder>();
+                return ctrl != null && ctrl.HasActiveJob(jobId);
+            }
+        }
+
+        public override void TickInterval(int delta)
+        {
+            base.TickInterval(delta);
+
+            // 호위 요정이 작업을 마치지 못하고 사라지면 작업의 OnEnded가 이 헤디프를 지우지 못하므로 주기적으로 확인한다.
+            if (pawn.IsHashIntervalTick(JobCheckIntervalTicks, delta) && !HasGuardJob)
+            {
+                _jobLost = true;
+            }
+        }
 
         public override IEnumerable<Gizmo> GetGizmos()
         {
@@ -31,10 +56,9 @@ namespace VVRace
                 icon = ContentFinder<Texture2D>.Get("UI/Commands/VV_FairyReleaseGuard", reportFailure: false),
                 action = () =>
                 {
-                    var ctrl = ownerVivi != null ? ownerVivi.GetComp<CompViviHolder>() : null;
-                    if (ctrl != null)
+                    if (HasGuardJob)
                     {
-                        ctrl.InterruptJob(jobId, FairyJobInterruptReason.ExternalCancel);
+                        ownerVivi.GetComp<CompViviHolder>().InterruptJob(jobId, FairyJobInterruptReason.ExternalCancel);
                     }
                     else if (pawn?.health != null)
                     {

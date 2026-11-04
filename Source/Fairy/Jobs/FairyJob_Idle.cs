@@ -17,7 +17,6 @@ namespace VVRace
         private bool slotCacheInitialized;
 
         public override FairyJobKind Kind => FairyJobKind.Idle;
-        protected override bool RebuildLegacyMoveOnlyToils => true;
 
         public FairyJob_Idle() { }
 
@@ -45,7 +44,7 @@ namespace VVRace
                 RefreshSlotCache();
             }
 
-            move?.ConfigureStepTarget(FairyJobUtility.IdleOrbitPositionAround(fairy, owner, cachedSlot, cachedCount));
+            move?.ConfigureStepTarget(FairyJobUtility.OrbitPositionAround(fairy, owner, cachedSlot, cachedCount));
             orbit?.Configure(owner, cachedSlot, cachedCount);
 
             if (fairy.IsHashIntervalTick(FairyJobUtility.TargetScanIntervalTicks, delta))
@@ -72,7 +71,7 @@ namespace VVRace
             if (ctrl == null) { return; }
 
             var idleFairies = ctrl.ActiveFairies
-                .Where(f => f != null && !f.Destroyed && f.Spawned && f.CurrentJob.Kind == FairyJobKind.Idle)
+                .Where(f => f != null && !f.Destroyed && f.Spawned && f.CurrentJob?.Kind == FairyJobKind.Idle)
                 .OrderBy(f => f.thingIDNumber)
                 .ToList();
             cachedCount = Mathf.Max(1, idleFairies.Count);

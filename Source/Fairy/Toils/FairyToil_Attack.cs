@@ -14,10 +14,6 @@ namespace VVRace
 
         private Thing target;
         private bool invalid;
-        private bool attackCurveInitialized;
-        private float attackCurveOffset;
-        private bool attackSpeedInitialized;
-        private float attackSpeedFactor = 1f;
 
         public FairyToil_Attack() { }
 
@@ -35,24 +31,16 @@ namespace VVRace
                 return;
             }
 
-            if (!attackCurveInitialized)
+            // 이동 경로는 시작할 때 한 번 정해 저장되므로 곡률과 속도도 여기서만 뽑는다.
+            float attackCurveOffset = Rand.Range(AttackCurveOffsetMin, AttackCurveOffsetMax);
+            if (Rand.Value < 0.5f)
             {
-                attackCurveOffset = Rand.Range(AttackCurveOffsetMin, AttackCurveOffsetMax);
-                if (Rand.Value < 0.5f)
-                {
-                    attackCurveOffset *= -1f;
-                }
-                attackCurveInitialized = true;
+                attackCurveOffset *= -1f;
             }
-
-            if (!attackSpeedInitialized)
-            {
-                attackSpeedFactor = Rand.Range(AttackSpeedFactorMin, AttackSpeedFactorMax);
-                attackSpeedInitialized = true;
-            }
+            float attackSpeedFactor = Rand.Range(AttackSpeedFactorMin, AttackSpeedFactorMax);
 
             SetMoveTarget(target.TrueCenter().Yto0(), DefaultSpeed * AttackSpeedGlobalFactor * attackSpeedFactor, attackCurveOffset);
-            fairy.BeginToilMotion(FairyState.Attacking);
+            fairy.BeginAttackMotion();
         }
 
         protected override FairyToilStatus TickAction(int delta)
@@ -101,10 +89,6 @@ namespace VVRace
             base.ExposeData();
             Scribe_References.Look(ref target, "target");
             Scribe_Values.Look(ref invalid, "invalid");
-            Scribe_Values.Look(ref attackCurveInitialized, "attackCurveInitialized");
-            Scribe_Values.Look(ref attackCurveOffset, "attackCurveOffset");
-            Scribe_Values.Look(ref attackSpeedInitialized, "attackSpeedInitialized");
-            Scribe_Values.Look(ref attackSpeedFactor, "attackSpeedFactor", 1f);
         }
     }
 }

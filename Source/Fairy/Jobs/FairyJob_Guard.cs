@@ -10,7 +10,6 @@ namespace VVRace
 
         public override FairyJobKind Kind => FairyJobKind.Guard;
         public override FairyRole Role => FairyRole.Guard;
-        protected override bool RebuildLegacyMoveOnlyToils => true;
 
         public FairyJob_Guard() { }
 
@@ -54,7 +53,7 @@ namespace VVRace
 
             if (fairy == null) { return; }
 
-            Vector3 restPos = FairyJobUtility.IdleOrbitPositionAround(fairy, ally, 0, 1);
+            Vector3 restPos = FairyJobUtility.OrbitPositionAround(fairy, ally, 0, 1);
             move?.ConfigureStepTarget(restPos);
 
             if (fairy.IsHashIntervalTick(FairyJobUtility.TargetScanIntervalTicks, delta))

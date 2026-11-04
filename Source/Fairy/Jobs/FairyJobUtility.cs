@@ -40,11 +40,6 @@ namespace VVRace
             fairy.SetToilPosition(orbit, tangent, drawAltitude);
         }
 
-        public static Vector3 IdleOrbitPositionAround(ViviFairy fairy, Pawn centerPawn, int slot, int count)
-        {
-            return OrbitPositionAround(fairy, centerPawn, slot, count);
-        }
-
         private static bool TryGetOrbitParameters(
             ViviFairy fairy,
             Pawn centerPawn,
