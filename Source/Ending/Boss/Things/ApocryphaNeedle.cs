@@ -921,7 +921,7 @@ namespace VVRace
                     aimDuration = _aimTicks / 60f;
                 }
 
-                ApocryphaNeedleRenderer.DrawLane(_laneStart, _laneDir, _laneLength, HalfWidth * 2f, progress, alpha, bossInLane, aimSecs, aimDuration, thingIDNumber);
+                ApocryphaNeedleRenderer.DrawLane(_laneStart, _laneDir, _laneLength, HalfWidth * 2f, progress, alpha, bossInLane, _breach, aimSecs, aimDuration, thingIDNumber);
             }
 
             var warpAge = GenTicks.TicksGame - _fireTick;

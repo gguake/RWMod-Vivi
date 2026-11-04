@@ -266,7 +266,7 @@ namespace VVRace
             if (_state == VerdictState.Aim)
             {
                 var progress = Mathf.Clamp01((now - _stateStartTick) / (float)AimTicks);
-                ApocryphaNeedleRenderer.DrawLane(_laneStart, _laneDir, _laneLength, HalfWidth * 2f, progress, 1f, false, elapsedSecs, AimTicks / 60f, thingIDNumber);
+                ApocryphaNeedleRenderer.DrawLane(_laneStart, _laneDir, _laneLength, HalfWidth * 2f, progress, 1f, false, false, elapsedSecs, AimTicks / 60f, thingIDNumber);
             }
 
             var warpAge = now - _fireTick;

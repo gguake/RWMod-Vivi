@@ -20,6 +20,8 @@ namespace VVRace
         private static readonly Color LaneCoreColor = new Color(1f, 0.94f, 0.75f, 1f);
         private static readonly Color LaneColorBossInside = new Color(1f, 0.36f, 0.82f, 1f);
         private static readonly Color LaneCoreColorBossInside = new Color(1f, 0.8f, 0.95f, 1f);
+        private static readonly Color LaneColorBreach = new Color(1f, 0.22f, 0.18f, 1f);
+        private static readonly Color LaneCoreColorBreach = new Color(1f, 0.7f, 0.62f, 1f);
 
         // 마법진 바깥 고리(VV_MagicCircle r=0.95)가 경고 띠 테두리선(VV_NeedleLane 가장자리에서 0.07칸 안쪽)에 맞닿도록 띠 폭으로 크기를 정한다.
         private const float LotusRingRadius = 0.95f;
@@ -128,7 +130,7 @@ namespace VVRace
             DrawQuad(CrackGlowMat, pos, rotation, StuckDrawSize, crackColor);
         }
 
-        public static void DrawLane(Vector3 start, Vector3 direction, float length, float width, float progress, float alpha, bool bossInside, float aimSecs, float aimDuration, int seed)
+        public static void DrawLane(Vector3 start, Vector3 direction, float length, float width, float progress, float alpha, bool bossInside, bool breach, float aimSecs, float aimDuration, int seed)
         {
             if (length < 0.1f || width <= 0f) { return; }
 
@@ -139,9 +141,9 @@ namespace VVRace
 
             var matrix = Matrix4x4.TRS(center, Quaternion.AngleAxis(angle, Vector3.up), new Vector3(length, 1f, width));
 
-            var color = bossInside ? LaneColorBossInside : LaneColor;
+            var color = breach ? LaneColorBreach : bossInside ? LaneColorBossInside : LaneColor;
             color.a *= alpha;
-            var coreColor = bossInside ? LaneCoreColorBossInside : LaneCoreColor;
+            var coreColor = breach ? LaneCoreColorBreach : bossInside ? LaneCoreColorBossInside : LaneCoreColor;
 
             PropertyBlock.Clear();
             PropertyBlock.SetFloat(ShaderPropertyIDs.AgeSecs, (Find.TickManager.TicksGame % AgeWrapTicks) / 60f);
