@@ -103,10 +103,10 @@ namespace VVRace
             flee.AddPostAction(new TransitionAction_EndAllJobs());
             graph.transitions.Insert(0, flee);
 
-            // 플레이어가 구성원을 죽이거나 붙잡으려 하면 경계심과 상관없이 바로 적대해 달아난다.
+            // 플레이어가 구성원을 노려 죽이거나 붙잡으려 하면 경계심과 상관없이 바로 적대해 달아난다(빗나간 공격에 죽은 것·바닐라 호감도가 봐주는 살해는 뺀다).
             var outrage = new Transition(liveToil, fleeToil);
             outrage.AddTrigger(new Trigger_Custom(signal => signal.type == TriggerSignalType.PawnArrestAttempted
-                || (signal.type == TriggerSignalType.PawnLost && signal.condition == PawnLostCondition.Killed && signal.dinfo.Instigator?.Faction == Faction.OfPlayer)));
+                || (signal.type == TriggerSignalType.PawnLost && signal.condition == PawnLostCondition.Killed && IsOutrageousKill(signal.thing, signal.dinfo))));
             outrage.AddPreAction(new TransitionAction_Custom(() => _hostility.TurnHostile()));
             outrage.AddPostAction(new TransitionAction_WakeAll());
             outrage.AddPostAction(new TransitionAction_EndAllJobs());
@@ -128,7 +128,7 @@ namespace VVRace
             _territory.Establish(_nestCell);
             _planner.Notify_Established();
 
-            // 정착할 때 방 안에 있던 정착민은 나갈 때까지 경계하지 않는다. 문은 방이 비면 설계자가 금지한다(안에 가두지 않게).
+            // 정착할 때 방 안에 있던 정착민은 나갈 때까지 경계하지 않고 문도 지나 나갈 수 있다. 문은 바로 금지한다.
             _hostility.Notify_Settled();
             _planner.ForbidNestDoors();
 
@@ -246,7 +246,44 @@ namespace VVRace
             }
         }
 
-        // 둥지가 끝나면(떠남·전멸) 남은 둥지 청사진·골조를 치운다. 건물은 임시 세력이 사라질 때 바닐라가 무소속으로 돌린다.
+        // 플레이어 탓으로 치는 피해. 바닐라 호감도 판정(Faction.Notify_MemberTookDamage)처럼 날뛰는(공격적 정신 이상) 구성원을 친 것,
+        // 날뛰는 폰(인간 사냥 중인 정착지 동물 등)·반란 중인 노예가 가한 것, 둘 다의 적을 노리다 빗맞은 것은 치지 않는다.
+        public static bool IsPlayerHarm(Pawn victim, DamageInfo dinfo)
+        {
+            var instigator = dinfo.Instigator;
+            if (instigator == null || instigator.Faction != Faction.OfPlayer) { return false; }
+            if (victim.InAggroMentalState) { return false; }
+            if (instigator is Pawn pawn && (pawn.InAggroMentalState || SlaveRebellionUtility.IsRebelling(pawn))) { return false; }
+
+            return !IsMutuallyHostileCrossfire(dinfo, victim.Faction);
+        }
+
+        // 바닐라 Faction.IsMutuallyHostileCrossfire와 같다(비공개라 옮겨 둔다).
+        private static bool IsMutuallyHostileCrossfire(DamageInfo dinfo, Faction victimFaction)
+        {
+            var target = dinfo.IntendedTarget;
+            if (dinfo.Instigator == null || target == null) { return false; }
+            if (target.HostileTo(dinfo.Instigator) && target.HostileTo(victimFaction)) { return true; }
+
+            return target.Faction.HostileTo(dinfo.Instigator.Faction) && target.Faction.HostileTo(victimFaction);
+        }
+
+        // 그 구성원을 노린 공격(빗맞은 것이 아님). 폭발처럼 노린 대상이 없는 공격은 노린 것으로 친다.
+        public static bool IsIntended(DamageInfo dinfo, Thing victim)
+        {
+            return dinfo.IntendedTarget == null || dinfo.IntendedTarget == victim;
+        }
+
+        // 바로 적대할 살해. 바닐라처럼 정착민을 먼저 해쳐 죄가 있던 구성원은 뺀다(죽은 뒤에는 정신 상태가 풀려 날뛰던 것은 죄로만 남는다).
+        private static bool IsOutrageousKill(Thing victim, DamageInfo dinfo)
+        {
+            return victim is Pawn pawn && !(pawn.guilt?.IsGuilty ?? false) && IsPlayerHarm(pawn, dinfo) && IsIntended(dinfo, pawn);
+        }
+
+        // 둥지가 끝나면(떠남·전멸) 남은 둥지 청사진·골조를 치우고 둥지 건물은 무소속으로 돌린다.
+        // 하나를 치울 때 같은 칸의 다른 골조가 함께 사라질 수 있어 이미 사라진 것은 건너뛴다.
+        // 바닐라도 임시 세력을 지울 때 건물을 무소속으로 돌리지만(ListerBuildings.Notify_FactionRemoved), 돌리는 동안 목록이 바뀌어
+        // 하나씩 건너뛰므로 지워진 세력을 든 문이 남아 길찾기마다 관계 오류가 난다.
         public override void Cleanup()
         {
             base.Cleanup();
@@ -254,7 +291,19 @@ namespace VVRace
 
             foreach (var thing in _planner.NestConstructions().ToList())
             {
-                thing.Destroy(DestroyMode.Cancel);
+                if (!thing.Destroyed)
+                {
+                    thing.Destroy(DestroyMode.Cancel);
+                }
+            }
+
+            if (_faction == null) { return; }
+            foreach (var building in Map.listerBuildings.allBuildingsNonColonist.ToList())
+            {
+                if (building.Faction == _faction)
+                {
+                    building.SetFaction(null);
+                }
             }
         }
 

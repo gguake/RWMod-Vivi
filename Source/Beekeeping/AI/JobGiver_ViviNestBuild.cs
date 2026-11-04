@@ -1,5 +1,5 @@
 ﻿using RimWorld;
-using System.Linq;
+using System.Collections.Generic;
 using Verse;
 using Verse.AI;
 
@@ -13,6 +13,7 @@ namespace VVRace
         private static WorkGiver_Scanner _deliverFrames;
         private static WorkGiver_Scanner _deliverBlueprints;
         private static WorkGiver_Scanner _repair;
+        private static readonly List<Thing> _candidates = new List<Thing>();
 
         private static WorkGiver_Scanner Worker(ref WorkGiver_Scanner cache, string defName)
         {
@@ -38,8 +39,16 @@ namespace VVRace
             var deliverFrames = Worker(ref _deliverFrames, "ConstructDeliverResourcesToFrames");
             var deliverBlueprints = Worker(ref _deliverBlueprints, "ConstructDeliverResourcesToBlueprints");
 
+            // 가까운 것부터 본다. 후보 목록을 재사용해 생각할 때마다 할당하지 않는다.
             var position = pawn.Position;
-            foreach (var thing in nest.Planner.NestConstructions().OrderBy(t => t.Position.DistanceToSquared(position)))
+            _candidates.Clear();
+            foreach (var thing in nest.Planner.CachedNestConstructions())
+            {
+                if (thing.Spawned) { _candidates.Add(thing); }
+            }
+            _candidates.SortBy(t => t.Position.DistanceToSquared(position));
+
+            foreach (var thing in _candidates)
             {
                 var job = thing is Frame
                     ? finish.JobOnThing(pawn, thing) ?? deliverFrames.JobOnThing(pawn, thing)

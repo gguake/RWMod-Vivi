@@ -36,6 +36,10 @@ namespace VVRace
         private readonly Dictionary<ThingDef, int> _resourceNeed = new Dictionary<ThingDef, int>();
         private int _resourceNeedTick = -99999;
 
+        private const int ConstructionCacheInterval = 60;
+        private readonly List<Thing> _constructionCache = new List<Thing>();
+        private int _constructionCacheTick = -99999;
+
         public ViviNestPlanner(LordJob_ViviNest owner)
         {
             _owner = owner;
@@ -101,14 +105,10 @@ namespace VVRace
             }
         }
 
-        // 둥지 방 문(플레이어 문·둥지가 지은 문)을 정착민이 드나들지 않게 금지한다. 방 안에 정착민이 있으면 가두지 않게 나갈 때까지 미룬다.
+        // 둥지 방 문(플레이어 문·둥지가 지은 문)을 정착민이 드나들지 않게 금지한다.
+        // 정착 때 방 안에 있던 정착민은 문 통과 후처리가 나갈 수 있게 해 준다(가두지 않는다).
         public void ForbidNestDoors()
         {
-            foreach (var pawn in Map.mapPawns.SpawnedPawnsInFaction(Faction.OfPlayer))
-            {
-                if (!pawn.RaceProps.Animal && Territory.IsNestRoomCell(pawn.Position)) { return; }
-            }
-
             foreach (var door in Territory.BorderDoors)
             {
                 if ((door.Faction == Faction || door.Faction == Faction.OfPlayer) && !door.IsForbidden(Faction.OfPlayer))
@@ -551,6 +551,7 @@ namespace VVRace
             }
 
             _resourceNeedTick = -99999;
+            _constructionCacheTick = -99999;
             return GenConstruct.PlaceBlueprintForBuild(def, cell, map, rot, Faction, stuff);
         }
 
@@ -574,6 +575,19 @@ namespace VVRace
             {
                 if (thing.Faction == Faction) { yield return thing; }
             }
+        }
+
+        // 건설 잡용: 잠깐(60틱) 묶어 둔 둥지 골조·청사진. 그사이 사라진 것은 쓰는 쪽이 거른다.
+        public List<Thing> CachedNestConstructions()
+        {
+            var ticks = Find.TickManager.TicksGame;
+            if (ticks - _constructionCacheTick >= ConstructionCacheInterval)
+            {
+                _constructionCacheTick = ticks;
+                _constructionCache.Clear();
+                _constructionCache.AddRange(NestConstructions());
+            }
+            return _constructionCache;
         }
 
         private bool AnyPendingProject() => NestConstructions().Any();

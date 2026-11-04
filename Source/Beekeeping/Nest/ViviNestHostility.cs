@@ -23,7 +23,7 @@ namespace VVRace
 
         private float _level;
         private int _warned;
-        // 정착할 때 이미 방 안에 있던 정착민(나갈 때까지 세지 않는다)
+        // 정착할 때 이미 방 안에 있던 정착민과 벽이 뚫린 동안 스스로 들어온 정착민(나갈 때까지 세지 않고, 둥지 방 문을 지나 나갈 수 있다)
         private List<Pawn> _grace = new List<Pawn>();
 
         public ViviNestHostility(LordJob_ViviNest owner)
@@ -33,13 +33,22 @@ namespace VVRace
 
         public float Level => _level;
 
+        public bool IsInGrace(Pawn pawn) => _grace.Contains(pawn);
+
         public void Notify_Settled()
         {
             _grace.Clear();
             foreach (var pawn in _owner.Map.mapPawns.SpawnedPawnsInFaction(Faction.OfPlayer))
             {
-                if (!pawn.RaceProps.Animal && _owner.Territory.IsNestRoomCell(pawn.Position)) { _grace.Add(pawn); }
+                if (!pawn.RaceProps.Animal && IsInsideOrInDoorway(pawn)) { _grace.Add(pawn); }
             }
+        }
+
+        // 둥지 방 칸이나 그 문 칸에 있다. 문 칸에서 방으로 되돌아 들어가는 것은 문 통과가 아니라서 막히지 않으므로, 유예는 문 칸까지는 나가지 않은 것으로 본다.
+        private bool IsInsideOrInDoorway(Pawn pawn)
+        {
+            var cell = pawn.Position;
+            return _owner.Territory.IsNestRoomCell(cell) || (cell.GetDoor(pawn.Map) is Building_Door door && _owner.Territory.IsBorderDoor(door));
         }
 
         public void Tick()
@@ -58,29 +67,38 @@ namespace VVRace
             UpdateWarnings();
         }
 
-        // 정착민·노예·기계체(동물 제외)가 둥지 방 칸에 들어와 있는 수
+        // 정착민·노예·기계체(동물 제외)가 둥지 방 칸에 들어와 있는 수.
+        // 벽이 뚫린 방(지금은 바깥과 이어진 원래 방 칸)에는 정착민이 산책·청소하다 스스로 들어오므로, 그곳에서는 플레이어가 보낸(소집·직접 지시) 정착민만 센다.
+        // 스스로 들어온 정착민은 유예 목록에 넣어, 그사이 구멍이 메워져 금지 문 안에 갇혀도 세지 않고 문을 지나 나갈 수 있게 한다.
         private int CountIntruders()
         {
             var map = _owner.Map;
             var territory = _owner.Territory;
             var count = 0;
-            _grace.RemoveAll(p => p == null || !p.Spawned || p.Map != map || !territory.IsNestRoomCell(p.Position));
+            _grace.RemoveAll(p => p == null || !p.Spawned || p.Map != map || !IsInsideOrInDoorway(p));
             foreach (var pawn in map.mapPawns.SpawnedPawnsInFaction(Faction.OfPlayer))
             {
                 if (pawn.RaceProps.Animal || pawn.Dead || _grace.Contains(pawn)) { continue; }
-                if (territory.IsNestRoomCell(pawn.Position)) { count++; }
+
+                var cell = pawn.Position;
+                if (!territory.IsNestRoomCell(cell)) { continue; }
+                if (!territory.IsRoomCell(cell) && !pawn.Drafted && !(pawn.CurJob?.playerForced ?? false))
+                {
+                    _grace.Add(pawn);
+                    continue;
+                }
+
+                count++;
             }
             return count;
         }
 
-        // 플레이어가 구성원을 다치게 하면 크게, 빗나간 공격에 맞으면 조금 오른다.
+        // 플레이어가 구성원을 노려 다치게 하면 크게, 빗나간 공격에 맞으면 피해만큼(최대 15) 오른다. 바닐라 호감도가 봐주는 피해는 치지 않는다.
         public void Notify_MemberDamaged(Pawn victim, DamageInfo dinfo)
         {
-            var instigator = dinfo.Instigator;
-            if (instigator == null || instigator.Faction != Faction.OfPlayer || !dinfo.Def.ExternalViolenceFor(victim)) { return; }
+            if (!dinfo.Def.ExternalViolenceFor(victim) || !LordJob_ViviNest.IsPlayerHarm(victim, dinfo)) { return; }
 
-            var accidental = dinfo.IntendedTarget != null && dinfo.IntendedTarget != victim;
-            Add(accidental ? AccidentalHarmGain : HarmGain);
+            Add(LordJob_ViviNest.IsIntended(dinfo, victim) ? HarmGain : UnityEngine.Mathf.Min(AccidentalHarmGain, dinfo.Amount));
         }
 
         // 쓰러진 구성원을 정착민이 구해 주면, 나아서 둥지로 돌아올 때 손님 신분을 풀고 경계심을 누그러뜨린다.

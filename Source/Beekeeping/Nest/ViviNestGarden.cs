@@ -20,6 +20,7 @@ namespace VVRace
 
         private int _flowerCount;
         private int _flowerCountTick = -99999;
+        private int _noFlowerSpotUntil = -99999;
 
         public ViviNestGarden(LordJob_ViviNest owner)
         {
@@ -48,6 +49,10 @@ namespace VVRace
         }
 
         public void Notify_FlowerSown() => _flowerCount++;
+
+        public bool FlowerSpotSearchPaused => Find.TickManager.TicksGame < _noFlowerSpotUntil;
+
+        public void Notify_NoFlowerSpot() => _noFlowerSpotUntil = Find.TickManager.TicksGame + FlowerCountInterval;
 
         private int CountFlowers()
         {

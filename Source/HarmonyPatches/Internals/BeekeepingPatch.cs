@@ -38,6 +38,11 @@ namespace VVRace
                     new[] { typeof(IntVec3), typeof(int), typeof(ThingPlaceMode), typeof(Thing).MakeByRefType(), typeof(System.Action<Thing, int>) }),
                 postfix: new HarmonyMethod(typeof(BeekeepingPatch), nameof(Pawn_CarryTracker_TryDropCarriedThing_Postfix)));
 
+            // 정착 때 둥지 방 안에 있던 정착민과 벽이 뚫린 동안 스스로 들어온 정착민은 갇히지 않게 둥지 방 문을 지나 나갈 수 있다(바닐라 문 통과 판정은 세력 기준 금지를 본다).
+            ViviHarmonyPatcher.TryPatch(harmony, "ForbidUtility.IsForbiddenToPass (vivi nest grace)",
+                AccessTools.Method(typeof(ForbidUtility), nameof(ForbidUtility.IsForbiddenToPass), new[] { typeof(Building_Door), typeof(Pawn) }),
+                postfix: new HarmonyMethod(typeof(BeekeepingPatch), nameof(ForbidUtility_IsForbiddenToPass_Postfix)));
+
             // 바닐라는 플레이어 폰에게만 로드 보고를 보여 주므로 둥지 비비 정보창에 경계심 줄을 붙인다.
             ViviHarmonyPatcher.TryPatch(harmony, "Pawn.GetInspectString (vivi nest wariness)",
                 AccessTools.Method(typeof(Pawn), nameof(Pawn.GetInspectString)),
@@ -51,6 +56,17 @@ namespace VVRace
             ViviHarmonyPatcher.TryPatch(harmony, "Building.ClaimableBy (vivi nest)",
                 AccessTools.Method(typeof(Building), nameof(Building.ClaimableBy)),
                 postfix: new HarmonyMethod(typeof(BeekeepingPatch), nameof(Building_ClaimableBy_Postfix)));
+        }
+
+        private static void ForbidUtility_IsForbiddenToPass_Postfix(Building_Door t, Pawn pawn, ref bool __result)
+        {
+            if (!__result || pawn?.Faction == null || !pawn.Faction.IsPlayer || t?.Map == null) { return; }
+
+            if (BeekeepingUtility.GetNestLord(t.Map)?.LordJob is LordJob_ViviNest nest && nest.Settled
+                && nest.Hostility.IsInGrace(pawn) && nest.Territory.IsBorderDoor(t))
+            {
+                __result = false;
+            }
         }
 
         private static void Pawn_GetInspectString_Postfix(Pawn __instance, ref string __result)

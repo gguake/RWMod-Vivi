@@ -48,7 +48,7 @@ namespace VVRace
         private static Job SowFlowerJob(Pawn pawn, LordJob_ViviNest nest)
         {
             var spot = nest.Production.GatherSpot;
-            if (spot == null || nest.Garden.FlowerCount >= ViviNestGarden.FlowerTarget) { return null; }
+            if (spot == null || nest.Garden.FlowerCount >= ViviNestGarden.FlowerTarget || nest.Garden.FlowerSpotSearchPaused) { return null; }
 
             var map = pawn.Map;
             var cellCount = GenRadial.NumCellsInRadius(Building_GatherWorkTable.GatherMaxRadius);
@@ -65,6 +65,8 @@ namespace VVRace
                     return job;
                 }
             }
+
+            nest.Garden.Notify_NoFlowerSpot();
             return null;
         }
 
