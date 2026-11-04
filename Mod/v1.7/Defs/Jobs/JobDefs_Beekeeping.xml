@@ -8,6 +8,21 @@
     <casualInterruptible>false</casualInterruptible>
   </JobDef>
 
+  <!-- 둥지 비비가 들고 온 짐을 둥지 보관 칸에 푼다 -->
+  <JobDef>
+    <defName>VV_ViviNestUnload</defName>
+    <driverClass>VVRace.JobDriver_ViviNestUnload</driverClass>
+    <reportString>unloading supplies.</reportString>
+  </JobDef>
+
+  <!-- 둥지 비비가 둥지 물건을 둥지 보관 칸으로 옮긴다 -->
+  <JobDef>
+    <defName>VV_ViviNestHaulToCell</defName>
+    <driverClass>VVRace.JobDriver_ViviNestHaulToCell</driverClass>
+    <reportString>storing TargetA.</reportString>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef>
+
   <!-- 곰·말벌이 유인통 미끼를 먹어 치운다 -->
   <JobDef>
     <defName>VV_DevourBait</defName>

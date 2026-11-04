@@ -80,6 +80,8 @@ namespace VVRace
 
         public static JobDef VV_ViviInspectLure;
         public static JobDef VV_DevourBait;
+        public static JobDef VV_ViviNestUnload;
+        public static JobDef VV_ViviNestHaulToCell;
     }
 
     [DefOf]

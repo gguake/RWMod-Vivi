@@ -8,6 +8,8 @@
 <!-- Beekeeping -->
 <VV_ViviInspectLure.reportString>TargetA의 냄새를 맡는 중.</VV_ViviInspectLure.reportString>
 <VV_DevourBait.reportString>TargetA의 미끼를 먹어 치우는 중.</VV_DevourBait.reportString>
+<VV_ViviNestUnload.reportString>짐을 푸는 중.</VV_ViviNestUnload.reportString>
+<VV_ViviNestHaulToCell.reportString>TargetA 보관하는 중.</VV_ViviNestHaulToCell.reportString>
 
 <!-- EverflowerRitual -->
 <VV_MoveEverflower.reportString>TargetA를 옮기기 위해 공명 중.</VV_MoveEverflower.reportString>

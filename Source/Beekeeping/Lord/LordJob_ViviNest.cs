@@ -10,19 +10,30 @@ namespace VVRace
     {
         public const string MemoAbandon = "VV_NestAbandon";
 
+        private const int SleepSpotTries = 30;
+
         private Faction _faction;
         private IntVec3 _nestCell;
+        private bool _settled;
+
+        private ViviNestTerritory _territory;
+        private ViviNestStock _stock;
 
         public Faction Faction => _faction;
         public IntVec3 NestCell => _nestCell;
+        public bool Settled => _settled;
+        public ViviNestTerritory Territory => _territory;
+        public ViviNestStock Stock => _stock;
 
         public override bool AddFleeToil => false;
 
         public LordJob_ViviNest()
         {
+            _territory = new ViviNestTerritory(this);
+            _stock = new ViviNestStock(this);
         }
 
-        public LordJob_ViviNest(Faction faction, IntVec3 nestCell)
+        public LordJob_ViviNest(Faction faction, IntVec3 nestCell) : this()
         {
             _faction = faction;
             _nestCell = nestCell;
@@ -47,6 +58,7 @@ namespace VVRace
 
             var arrived = new Transition(travelToil, liveToil);
             arrived.AddTrigger(new Trigger_Memo("TravelArrived"));
+            arrived.AddPreAction(new TransitionAction_Custom(Settle));
             graph.AddTransition(arrived);
 
             var abandon = new Transition(liveToil, leaveToil);
@@ -73,10 +85,90 @@ namespace VVRace
             return graph;
         }
 
+        // 방에 들어오면 영역을 잡고, 정착민이 드나들지 않게 플레이어 문을 금지하고, 방 안의 플레이어 구역을 지운다.
+        private void Settle()
+        {
+            if (_settled) { return; }
+            _settled = true;
+
+            _territory.Establish(_nestCell);
+
+            foreach (var door in _territory.BorderDoors)
+            {
+                if (door.Faction == Faction.OfPlayer)
+                {
+                    door.SetForbidden(true, warnOnFail: false);
+                }
+            }
+
+            var zoneManager = Map.zoneManager;
+            foreach (var room in _territory.Rooms)
+            {
+                foreach (var cell in room.Cells)
+                {
+                    zoneManager.ZoneAt(cell)?.RemoveCell(cell);
+                }
+            }
+
+            _stock.MarkDirty();
+        }
+
+        // 둥지 비비가 쓸 수 있는 것: 둥지 물건, 둥지 세력·무소속 건물, 그 밖의 식물·폰 등. 플레이어 건물·물건은 쓰지 않는다.
+        public bool CanUse(Thing thing)
+        {
+            if (thing is Pawn) { return true; }
+            if (thing.def.category == ThingCategory.Item) { return _stock.IsNestOwned(thing); }
+            if (thing is Building building) { return building.Faction != Faction.OfPlayer || building is Building_Door; }
+            return true;
+        }
+
+        public void MarkOwned(Thing thing)
+        {
+            if (thing == null || thing.Destroyed) { return; }
+
+            thing.SetForbidden(true, warnOnFail: false);
+            if (thing.Spawned && !_territory.IsTerritoryCell(thing.Position))
+            {
+                _stock.Claim(thing);
+            }
+            _stock.MarkDirty();
+        }
+
+        public bool TryFindSleepSpot(Pawn pawn, out IntVec3 cell)
+        {
+            var map = Map;
+            var rooms = _territory.Rooms;
+            for (int i = 0; i < SleepSpotTries && rooms.Count > 0; ++i)
+            {
+                if (!rooms.RandomElement().Cells.TryRandomElement(out cell)) { continue; }
+                if (!cell.Standable(map) || cell.GetTerrain(map).avoidWander || cell.GetEdifice(map) != null) { continue; }
+                if (!pawn.CanReserve(cell) || !pawn.CanReach(cell, PathEndMode.OnCell, Danger.Some)) { continue; }
+                return true;
+            }
+
+            cell = IntVec3.Invalid;
+            return false;
+        }
+
+        public bool TryGetRandomRoomCell(out IntVec3 cell)
+        {
+            var rooms = _territory.Rooms;
+            if (rooms.Count > 0 && rooms.RandomElement().Cells.TryRandomElement(out cell))
+            {
+                return true;
+            }
+
+            cell = IntVec3.Invalid;
+            return false;
+        }
+
         public override void ExposeData()
         {
             Scribe_References.Look(ref _faction, "faction");
             Scribe_Values.Look(ref _nestCell, "nestCell");
+            Scribe_Values.Look(ref _settled, "settled");
+            Scribe_Deep.Look(ref _territory, "territory", this);
+            Scribe_Deep.Look(ref _stock, "stock", this);
         }
     }
 }

@@ -144,7 +144,7 @@
     </thinkNode>
   </DutyDef>
 
-  <!-- 비비 양봉: 둥지 생활 -->
+  <!-- 비비 양봉: 둥지 생활. 식사는 바닐라 그대로(금지 패치로 둥지 음식만 보인다), 잠은 밤에 둥지 방에서 -->
   <DutyDef>
     <defName>VV_ViviNestLife</defName>
     <thinkNode Class="ThinkNode_Priority">
@@ -152,12 +152,25 @@
         <li Class="JobGiver_FightFiresNearPoint">
           <maxDistFromPoint>24</maxDistFromPoint>
         </li>
-        <li Class="ThinkNode_Subtree">
-          <treeDef>SatisfyBasicNeeds</treeDef>
+        <li Class="ThinkNode_Tagger">
+          <tagToGive>SatisfyingNeeds</tagToGive>
+          <subNodes>
+            <li Class="ThinkNode_PrioritySorter">
+              <subNodes>
+                <li Class="JobGiver_GetFood" />
+                <li Class="VVRace.JobGiver_ViviNestRest" />
+              </subNodes>
+            </li>
+          </subNodes>
         </li>
-        <li Class="JobGiver_WanderNearDutyLocation">
-          <wanderRadius>4</wanderRadius>
+        <li Class="VVRace.JobGiver_ViviNestUnload" />
+        <li Class="ThinkNode_ForbidOutsideFlagRadius">
+          <maxDistToSquadFlag>24</maxDistToSquadFlag>
+          <subNodes>
+            <li Class="VVRace.JobGiver_ViviNestHaul" />
+          </subNodes>
         </li>
+        <li Class="VVRace.JobGiver_ViviNestWander" />
       </subNodes>
     </thinkNode>
   </DutyDef>

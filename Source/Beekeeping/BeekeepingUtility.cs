@@ -232,6 +232,8 @@ namespace VVRace
             return ClimateSuitable(map, out reason);
         }
 
+        public static LordJob_ViviNest GetNestLordJob(this Pawn pawn) => pawn.GetLord()?.LordJob as LordJob_ViviNest;
+
         // 하위 그래프 토일을 출발점에 더할 때 이미 넣은 토일이 겹치면 바닐라가 오류를 남긴다.
         public static void AddSourcesDistinct(Transition transition, IEnumerable<LordToil> toils)
         {

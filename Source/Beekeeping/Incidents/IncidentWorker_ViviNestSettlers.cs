@@ -47,17 +47,28 @@ namespace VVRace
                 return true;
             }
 
+            if (!TrySpawnSettlers(lure, faction, out reason))
+            {
+                Fail(lure, reason);
+            }
+
+            return true;
+        }
+
+        public static bool TrySpawnSettlers(Building_ViviLure lure, Faction faction, out string reason)
+        {
+            var map = lure.Map;
             var report = lure.EvaluateSiteNow();
             if (!report.Acceptable)
             {
-                Fail(lure, report.MissingReasons);
-                return true;
+                reason = report.MissingReasons;
+                return false;
             }
 
             if (!BeekeepingUtility.TryFindEntryCellReaching(map, report.bestRoomCell, out var entryCell))
             {
-                Fail(lure, LocalizeString_Inspector.VV_Inspector_LureConditionUnreachable.Translate());
-                return true;
+                reason = LocalizeString_Inspector.VV_Inspector_LureConditionUnreachable.Translate();
+                return false;
             }
 
             var pawns = GenerateSettlers(faction, map, report.SettlerCount);
@@ -75,7 +86,21 @@ namespace VVRace
                 LocalizeString_Letter.VV_Letter_ViviNestSettlers.Translate(faction.Name, pawns.Count),
                 LetterDefOf.PositiveEvent,
                 new LookTargets(pawns));
+
+            reason = null;
             return true;
+        }
+
+        // 정찰을 건너뛰고 바로 정착대를 부른다(개발 모드 시험용).
+        public static void DebugSettleNow(Building_ViviLure lure)
+        {
+            var faction = BeekeepingUtility.CreateWanderingFaction();
+            lure.Notify_ScoutVisitStarted(faction);
+            if (!TrySpawnSettlers(lure, faction, out var reason))
+            {
+                lure.ResetAttraction(releaseFaction: true);
+                Messages.Message(reason, lure, MessageTypeDefOf.RejectInput, historical: false);
+            }
         }
 
         private static Building_ViviLure FindLure(Map map, Faction faction)

@@ -249,6 +249,11 @@ namespace VVRace
                     defaultLabel = "DEV: Lure hornet",
                     action = () => IncidentWorker_ViviLureVisit.TryStartVisit(this, ViviLureVisitor.Hornet),
                 };
+                yield return new Command_Action
+                {
+                    defaultLabel = "DEV: Settle now",
+                    action = () => IncidentWorker_ViviNestSettlers.DebugSettleNow(this),
+                };
             }
 
             if (_phase == ViviLurePhase.AwaitingSettlers)

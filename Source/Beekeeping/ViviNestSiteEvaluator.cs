@@ -172,7 +172,7 @@ namespace VVRace
 
             if (report.bestRoom != null)
             {
-                report.bestRoomCell = FirstCell(report.bestRoom);
+                report.bestRoomCell = CentralCell(report.bestRoom, map);
             }
 
             report.averageMana = AverageMana(map, center);
@@ -252,13 +252,36 @@ namespace VVRace
             return count > 0 ? sum / count : 0f;
         }
 
-        private static IntVec3 FirstCell(Room room)
+        // 둥지 이동·산책의 기준이 되므로 방 한가운데에 가장 가까운 설 수 있는 칸을 고른다.
+        private static IntVec3 CentralCell(Room room, Map map)
         {
+            var sumX = 0;
+            var sumZ = 0;
+            var count = 0;
             foreach (var cell in room.Cells)
             {
-                return cell;
+                sumX += cell.x;
+                sumZ += cell.z;
+                count++;
             }
-            return IntVec3.Invalid;
+            if (count == 0) { return IntVec3.Invalid; }
+
+            var center = new IntVec3(sumX / count, 0, sumZ / count);
+            var best = IntVec3.Invalid;
+            var bestDist = int.MaxValue;
+            foreach (var cell in room.Cells)
+            {
+                if (!cell.Standable(map)) { continue; }
+
+                var dist = (cell - center).LengthHorizontalSquared;
+                if (dist < bestDist)
+                {
+                    bestDist = dist;
+                    best = cell;
+                }
+            }
+
+            return best;
         }
     }
 }
