@@ -10,6 +10,7 @@
 <VV_DevourBait.reportString>TargetA의 미끼를 먹어 치우는 중.</VV_DevourBait.reportString>
 <VV_ViviNestUnload.reportString>짐을 푸는 중.</VV_ViviNestUnload.reportString>
 <VV_ViviNestDigFertilizer.reportString>흙을 파서 마나 비료를 만드는 중.</VV_ViviNestDigFertilizer.reportString>
+<VV_ViviNestBuildRoof.reportString>지붕을 짓는 중.</VV_ViviNestBuildRoof.reportString>
 
 <!-- EverflowerRitual -->
 <VV_MoveEverflower.reportString>TargetA를 옮기기 위해 공명 중.</VV_MoveEverflower.reportString>

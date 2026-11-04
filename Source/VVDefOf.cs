@@ -83,6 +83,8 @@ namespace VVRace
         public static JobDef VV_DevourBait;
         public static JobDef VV_ViviNestUnload;
         public static JobDef VV_ViviNestDigFertilizer;
+        public static JobDef VV_ViviNestBuildRoof;
+        public static JobDef Play_Horseshoes;
     }
 
     [DefOf]
@@ -108,6 +110,7 @@ namespace VVRace
         public static ThingDef VV_GatheringBarrel;
         public static ThingDef VV_RefiningWorkbench;
         public static ThingDef VV_ArcanePlantPot;
+        public static ThingDef VV_ManaEmitter;
 
         public static ThingDef VV_EmberBloom;
         public static ThingDef VV_FrostBloom;
@@ -138,6 +141,7 @@ namespace VVRace
 
         public static ThingDef Shelf;
         public static ThingDef ShelfSmall;
+        public static ThingDef HorseshoesPin;
         public static ThingDef Crib;
         public static ThingDef Table3x3c;
         public static ThingDef PlantPot;

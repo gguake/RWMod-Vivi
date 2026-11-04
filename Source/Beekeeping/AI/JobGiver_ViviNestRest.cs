@@ -53,6 +53,9 @@ namespace VVRace
                 return JobMaker.MakeJob(JobDefOf.LayDown, cell);
             }
 
+            // 막 완성된 벽 칸처럼 영역이 없는 칸에 서 있으면 바닐라 땅바닥 잠자리 찾기가 예외를 내므로, 이동 복구를 기다린다.
+            if (pawn.GetRegion() == null) { return null; }
+
             return base.TryGiveJob(pawn);
         }
     }

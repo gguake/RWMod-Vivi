@@ -19,6 +19,8 @@ namespace VVRace
         private ViviNestTerritory _territory;
         private ViviNestStock _stock;
         private ViviNestProduction _production;
+        private ViviNestPlanner _planner;
+        private ViviNestGarden _garden;
 
         public Faction Faction => _faction;
         public IntVec3 NestCell => _nestCell;
@@ -26,6 +28,8 @@ namespace VVRace
         public ViviNestTerritory Territory => _territory;
         public ViviNestStock Stock => _stock;
         public ViviNestProduction Production => _production;
+        public ViviNestPlanner Planner => _planner;
+        public ViviNestGarden Garden => _garden;
 
         public override bool AddFleeToil => false;
 
@@ -40,6 +44,8 @@ namespace VVRace
             _territory = new ViviNestTerritory(this);
             _stock = new ViviNestStock(this);
             _production = new ViviNestProduction(this);
+            _planner = new ViviNestPlanner(this);
+            _garden = new ViviNestGarden(this);
         }
 
         public LordJob_ViviNest(Faction faction, IntVec3 nestCell) : this()
@@ -101,6 +107,7 @@ namespace VVRace
             _settled = true;
 
             _territory.Establish(_nestCell);
+            _planner.Notify_Established();
 
             foreach (var door in _territory.BorderDoors)
             {
@@ -119,7 +126,21 @@ namespace VVRace
                 }
             }
 
+            foreach (var pawn in lord.ownedPawns)
+            {
+                JobGiver_ViviNestBuild.EnsureBuilderWorkSettings(pawn);
+            }
+
             _stock.MarkDirty();
+        }
+
+        public override void Notify_PawnAdded(Pawn p)
+        {
+            base.Notify_PawnAdded(p);
+            if (_settled)
+            {
+                JobGiver_ViviNestBuild.EnsureBuilderWorkSettings(p);
+            }
         }
 
         public override void LordJobTick()
@@ -127,9 +148,15 @@ namespace VVRace
             base.LordJobTick();
             if (!_settled) { return; }
 
-            if (Find.TickManager.TicksGame % ViviNestProduction.RefreshInterval == 0)
+            var ticks = Find.TickManager.TicksGame;
+            if (ticks % ViviNestProduction.RefreshInterval == 0)
             {
                 _production.Tick();
+            }
+            // 생산 갱신과 같은 틱에 몰리지 않게 반 주기 어긋나게 계획한다.
+            if ((ticks + ViviNestPlanner.PlanInterval / 2) % ViviNestPlanner.PlanInterval == 0)
+            {
+                _planner.Tick();
             }
         }
 
@@ -191,6 +218,8 @@ namespace VVRace
             Scribe_Deep.Look(ref _territory, "territory", this);
             Scribe_Deep.Look(ref _stock, "stock", this);
             Scribe_Deep.Look(ref _production, "production", this);
+            Scribe_Deep.Look(ref _planner, "planner", this);
+            Scribe_Deep.Look(ref _garden, "garden", this);
         }
     }
 }

@@ -17,13 +17,25 @@ namespace VVRace
         private List<IntVec3> _roomCells = new List<IntVec3>();
         private List<IntVec3> _boundaryCells = new List<IntVec3>();
         private List<IntVec3> _outdoorStorageCells = new List<IntVec3>();
+        // 마지막으로 온전했던 둥지 방 칸. 벽이 뚫려 방이 바깥과 이어진 동안에도 이 칸의 물건은 둥지 몫으로 둔다.
+        private List<IntVec3> _ownedRoomCells = new List<IntVec3>();
 
         private readonly HashSet<IntVec3> _cachedRoomCells = new HashSet<IntVec3>();
+        private readonly HashSet<IntVec3> _ownedRoomCellSet = new HashSet<IntVec3>();
         private readonly List<Room> _cachedRooms = new List<Room>();
         private int _cachedTick = -99999;
 
         public IReadOnlyList<IntVec3> BoundaryCells => _boundaryCells;
         public IReadOnlyList<IntVec3> OutdoorStorageCells => _outdoorStorageCells;
+
+        public IReadOnlyList<IntVec3> OwnedRoomCells
+        {
+            get
+            {
+                RefreshIfNeeded();
+                return _ownedRoomCells;
+            }
+        }
 
         public ViviNestTerritory(LordJob_ViviNest owner)
         {
@@ -49,10 +61,11 @@ namespace VVRace
 
         public bool IsOutdoorStorageCell(IntVec3 cell) => _outdoorStorageCells.Contains(cell);
 
-        // 둥지 물건으로 치는 칸: 둥지 방 안과 바깥 보관 칸
+        // 둥지 물건으로 치는 칸: 둥지 방 안(벽이 뚫린 동안은 원래 방 칸)과 바깥 보관 칸
         public bool IsTerritoryCell(IntVec3 cell)
         {
-            return IsRoomCell(cell) || _outdoorStorageCells.Contains(cell);
+            RefreshIfNeeded();
+            return _ownedRoomCellSet.Contains(cell) || _outdoorStorageCells.Contains(cell);
         }
 
         public bool HasAnyRoom => Rooms.Count > 0;
@@ -153,10 +166,16 @@ namespace VVRace
 
             _cachedRooms.Clear();
             _cachedRoomCells.Clear();
+            var anyBreached = false;
             for (int i = 0; i < _roomCells.Count; ++i)
             {
                 var room = _roomCells[i].GetRoom(map);
-                if (room == null || room.PsychologicallyOutdoors || room.IsDoorway || _cachedRooms.Contains(room)) { continue; }
+                if (room == null || room.PsychologicallyOutdoors || room.IsDoorway)
+                {
+                    anyBreached = true;
+                    continue;
+                }
+                if (_cachedRooms.Contains(room)) { continue; }
 
                 _cachedRooms.Add(room);
                 foreach (var cell in room.Cells)
@@ -164,6 +183,15 @@ namespace VVRace
                     _cachedRoomCells.Add(cell);
                 }
             }
+
+            // 모든 방이 온전하면 지금 방 칸으로 바꾸고, 뚫린 방이 있으면 원래 칸을 남긴 채 온전한 방 칸만 더한다.
+            if (!anyBreached)
+            {
+                _ownedRoomCellSet.Clear();
+            }
+            _ownedRoomCellSet.UnionWith(_cachedRoomCells);
+            _ownedRoomCells.Clear();
+            _ownedRoomCells.AddRange(_ownedRoomCellSet);
         }
 
         public void MarkDirty()
@@ -176,6 +204,13 @@ namespace VVRace
             Scribe_Collections.Look(ref _roomCells, "roomCells", LookMode.Value);
             Scribe_Collections.Look(ref _boundaryCells, "boundaryCells", LookMode.Value);
             Scribe_Collections.Look(ref _outdoorStorageCells, "outdoorStorageCells", LookMode.Value);
+            Scribe_Collections.Look(ref _ownedRoomCells, "ownedRoomCells", LookMode.Value);
+
+            if (Scribe.mode == LoadSaveMode.PostLoadInit)
+            {
+                _ownedRoomCellSet.Clear();
+                _ownedRoomCellSet.UnionWith(_ownedRoomCells);
+            }
         }
     }
 }

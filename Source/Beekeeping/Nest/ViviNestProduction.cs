@@ -112,11 +112,11 @@ namespace VVRace
                     spot.SetFaction(_owner.Faction);
                     GenSpawn.Spawn(spot, cell, Map, Rot4.South);
 
-                    // 위에서부터 고르므로 필요한 것부터 둔다.
-                    AddBill(spot, VVRecipeDefOf.VV_MakeVivicream);
-                    AddBill(spot, VVRecipeDefOf.VV_MakeViviwax);
+                    // 위에서부터 고르므로 필요한 것부터 둔다. 옷·새총은 드물고 빨리 끝나는 장비라 공사 재료(크림·밀랍)보다 먼저.
                     AddBill(spot, VVRecipeDefOf.Make_VV_BasicWorkerCostume);
                     AddBill(spot, VVRecipeDefOf.Make_VV_Slingshot);
+                    AddBill(spot, VVRecipeDefOf.VV_MakeVivicream);
+                    AddBill(spot, VVRecipeDefOf.VV_MakeViviwax);
                     AddBill(spot, VVRecipeDefOf.VV_FilteringHoney);
                     AddBill(spot, VVRecipeDefOf.VV_Make_HoneyPollenCake);
 
@@ -202,13 +202,16 @@ namespace VVRace
             SetActive(gather, VVRecipeDefOf.VV_GatherPropolis, propolis < PropolisTarget);
 
             var work = WorkSpot;
-            SetActive(work, VVRecipeDefOf.VV_MakeVivicream, cream < CreamTarget && FoodReserveDays() >= MinFoodDaysForCream);
-            SetActive(work, VVRecipeDefOf.VV_MakeViviwax, wax < WaxTarget && cream >= CreamReserveForWax);
+            SetActive(work, VVRecipeDefOf.VV_MakeVivicream, cream < Target(VVThingDefOf.VV_Vivicream, CreamTarget) && FoodReserveDays() >= MinFoodDaysForCream);
+            SetActive(work, VVRecipeDefOf.VV_MakeViviwax, wax < Target(VVThingDefOf.VV_Viviwax, WaxTarget) && cream >= CreamReserveForWax);
             SetActive(work, VVRecipeDefOf.Make_VV_BasicWorkerCostume, cloth >= ClothForCostume && AnyMemberNeedsCostume());
             SetActive(work, VVRecipeDefOf.Make_VV_Slingshot, wood >= 20 && wax >= 10 && AnySlingerNeedsWeapon());
             SetActive(work, VVRecipeDefOf.VV_FilteringHoney, rawHoney >= 20);
             SetActive(work, VVRecipeDefOf.VV_Make_HoneyPollenCake, cakes < CakeTarget && filteredHoney >= 3 && pollen >= 6);
         }
+
+        // 비축 목표: 기본 목표에 둥지 청사진·골조에 아직 들어가야 할 양을 더한다.
+        public int Target(ThingDef def, int baseTarget) => baseTarget + _owner.Planner.ResourceNeeded(def);
 
         // 둥지 식량이 며칠 치인지(구성원이 배부를 때 배고파지는 속도 기준)
         public float FoodReserveDays()

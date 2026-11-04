@@ -22,6 +22,14 @@
     <reportString>digging soil for mana fertilizer.</reportString>
   </JobDef>
 
+  <!-- 둥지 비비가 둥지 방의 빈 지붕을 얹는다(바닐라 지붕 짓기는 플레이어 지붕 구역만 본다) -->
+  <JobDef>
+    <defName>VV_ViviNestBuildRoof</defName>
+    <driverClass>VVRace.JobDriver_ViviNestBuildRoof</driverClass>
+    <reportString>building roof.</reportString>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef>
+
   <!-- 곰·말벌이 유인통 미끼를 먹어 치운다 -->
   <JobDef>
     <defName>VV_DevourBait</defName>

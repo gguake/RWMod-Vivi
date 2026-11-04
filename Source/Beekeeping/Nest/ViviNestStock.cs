@@ -69,12 +69,9 @@ namespace VVRace
             _counts.Clear();
             _foodNutrition = 0f;
 
-            foreach (var room in Territory.Rooms)
+            foreach (var cell in Territory.OwnedRoomCells)
             {
-                foreach (var cell in room.Cells)
-                {
-                    CountCell(map, cell);
-                }
+                CountCell(map, cell);
             }
 
             foreach (var cell in Territory.OutdoorStorageCells)
@@ -86,7 +83,7 @@ namespace VVRace
             PruneClaimed();
             for (int i = 0; i < _claimed.Count; ++i)
             {
-                if (_claimed[i].Spawned) { Count(_claimed[i]); }
+                if (_claimed[i].Spawned && IsOwnedMark(_claimed[i])) { Count(_claimed[i]); }
             }
 
             var pawns = _owner.lord?.ownedPawns;
@@ -117,7 +114,7 @@ namespace VVRace
             var things = map.thingGrid.ThingsListAtFast(cell);
             for (int i = 0; i < things.Count; ++i)
             {
-                if (things[i].def.category == ThingCategory.Item)
+                if (IsOwnedMark(things[i]))
                 {
                     Count(things[i]);
                 }
@@ -171,7 +168,7 @@ namespace VVRace
             PruneClaimed();
             for (int i = 0; i < _claimed.Count; ++i)
             {
-                if (_claimed[i].Spawned) { yield return _claimed[i]; }
+                if (_claimed[i].Spawned && IsOwnedMark(_claimed[i])) { yield return _claimed[i]; }
             }
 
             var map = Map;
@@ -179,7 +176,7 @@ namespace VVRace
             {
                 foreach (var thing in map.thingGrid.ThingsListAtFast(cell))
                 {
-                    if (thing.def.category == ThingCategory.Item) { yield return thing; }
+                    if (IsOwnedMark(thing)) { yield return thing; }
                 }
             }
 
@@ -192,7 +189,7 @@ namespace VVRace
                     if (RankOf(cell) != ViviNestStorageRank.RoomFloor) { continue; }
                     foreach (var thing in map.thingGrid.ThingsListAtFast(cell))
                     {
-                        if (thing.def.category == ThingCategory.Item) { yield return thing; }
+                        if (IsOwnedMark(thing)) { yield return thing; }
                     }
                 }
             }
@@ -214,11 +211,17 @@ namespace VVRace
         }
 
         // 둥지 비비가 쓸 수 있는 물건: 둥지 칸 위에 있거나 구성원이 지녔거나 둥지 몫으로 표시한 물건
+        // 둥지 몫은 언제나 금지 표시를 단다. 둥지 칸 위라도 금지되지 않은 물건(플레이어가 놓았거나 금지를 풀어 가져가려는 것)은 둥지 몫이 아니다.
+        private static bool IsOwnedMark(Thing thing)
+        {
+            return thing.def.category == ThingCategory.Item && thing.IsForbidden(Faction.OfPlayer);
+        }
+
         public bool IsNestOwned(Thing thing)
         {
             if (thing.Spawned)
             {
-                return thing.Map == Map && (Territory.IsTerritoryCell(thing.Position) || _claimed.Contains(thing));
+                return thing.Map == Map && IsOwnedMark(thing) && (Territory.IsTerritoryCell(thing.Position) || _claimed.Contains(thing));
             }
 
             return thing.ParentHolder != null && HeldByMember(thing.ParentHolder);
@@ -333,7 +336,8 @@ namespace VVRace
                     if (other.def.category != ThingCategory.Item) { continue; }
                     items++;
                     if (other == thing) { return false; }
-                    if (!other.CanStackWith(thing) || other.stackCount >= other.def.stackLimit) { return false; }
+                    // 플레이어 물건(금지되지 않은 것)에 합치면 둥지 몫이 플레이어 것이 되므로 피한다.
+                    if (!IsOwnedMark(other) || !other.CanStackWith(thing) || other.stackCount >= other.def.stackLimit) { return false; }
                 }
                 if (items > 1) { return false; }
             }

@@ -147,6 +147,13 @@
   <!-- 비비 양봉: 둥지 생활. 식사는 바닐라 그대로(금지 패치로 둥지 음식만 보인다), 잠은 밤에 둥지 방에서 -->
   <DutyDef>
     <defName>VV_ViviNestLife</defName>
+    <!-- 위협: 하던 일을 끊고 바로 반응하도록 상시 노드에 둔다. 무장 비비는 둥지 둘레(듀티 반경)의 적과 싸우고, 나머지는 둥지 방으로 피한다 -->
+    <constantThinkNode Class="ThinkNode_Priority">
+      <subNodes>
+        <li Class="VVRace.JobGiver_ViviNestDefend" />
+        <li Class="VVRace.JobGiver_ViviNestTakeShelter" />
+      </subNodes>
+    </constantThinkNode>
     <thinkNode Class="ThinkNode_Priority">
       <subNodes>
         <li Class="JobGiver_FightFiresNearPoint">
@@ -169,10 +176,16 @@
           <subNodes>
             <li Class="VVRace.JobGiver_ViviNestHaul" />
             <li Class="VVRace.JobGiver_ViviNestDress" />
+            <li Class="VVRace.JobGiver_ViviNestBuild" />
+            <li Class="VVRace.JobGiver_ViviNestRefuel" />
+            <li Class="VVRace.JobGiver_ViviNestPlantSeed" />
             <li Class="VVRace.JobGiver_ViviNestGather" />
             <li Class="VVRace.JobGiver_ViviNestCutTree" />
-            <li Class="VVRace.JobGiver_ViviNestCraft" />
             <li Class="VVRace.JobGiver_ViviNestDigFertilizer" />
+            <li Class="VVRace.JobGiver_ViviNestCraft" />
+            <li Class="VVRace.JobGiver_ViviNestGarden" />
+            <li Class="VVRace.JobGiver_ViviNestSmoothWall" />
+            <li Class="VVRace.JobGiver_ViviNestPlay" />
           </subNodes>
         </li>
         <li Class="VVRace.JobGiver_ViviNestWander" />

@@ -14,7 +14,7 @@ namespace VVRace
             var nest = pawn.GetNestLordJob();
             if (nest == null || !nest.Settled || !pawn.DevelopmentalStage.Adult()) { return null; }
             if (JobGiver_ViviNestRest.IsNight(pawn) || BeekeepingUtility.OutdoorDangerous(pawn.Map)) { return null; }
-            if (nest.Stock.CountOf(ThingDefOf.WoodLog) >= ViviNestProduction.WoodTarget) { return null; }
+            if (nest.Stock.CountOf(ThingDefOf.WoodLog) >= nest.Production.Target(ThingDefOf.WoodLog, ViviNestProduction.WoodTarget)) { return null; }
 
             var map = pawn.Map;
             var tree = GenClosest.ClosestThingReachable(

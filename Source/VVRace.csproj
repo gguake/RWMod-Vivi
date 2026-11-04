@@ -303,6 +303,17 @@
     <Compile Include="Beekeeping\AI\JobGiver_ViviNestDigFertilizer.cs" />
     <Compile Include="Beekeeping\AI\JobDriver_ViviNestDigFertilizer.cs" />
     <Compile Include="Beekeeping\StatPart_ViviNestForager.cs" />
+    <Compile Include="Beekeeping\Nest\ViviNestPlanner.cs" />
+    <Compile Include="Beekeeping\Nest\ViviNestGarden.cs" />
+    <Compile Include="Beekeeping\AI\JobGiver_ViviNestBuild.cs" />
+    <Compile Include="Beekeeping\AI\JobDriver_ViviNestBuildRoof.cs" />
+    <Compile Include="Beekeeping\AI\JobGiver_ViviNestSmoothWall.cs" />
+    <Compile Include="Beekeeping\AI\JobGiver_ViviNestRefuel.cs" />
+    <Compile Include="Beekeeping\AI\JobGiver_ViviNestPlantSeed.cs" />
+    <Compile Include="Beekeeping\AI\JobGiver_ViviNestGarden.cs" />
+    <Compile Include="Beekeeping\AI\JobGiver_ViviNestPlay.cs" />
+    <Compile Include="Beekeeping\AI\JobGiver_ViviNestDefend.cs" />
+    <Compile Include="Beekeeping\AI\JobGiver_ViviNestTakeShelter.cs" />
     <Compile Include="Gather\Comps\CompRepeatGatherable.cs" />
     <Compile Include="Gather\GatherWorker.cs" />
     <Compile Include="Gather\Things\Filth_Pollen.cs" />
