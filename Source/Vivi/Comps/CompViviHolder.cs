@@ -52,8 +52,6 @@ namespace VVRace
         {
             base.PostExposeData();
 
-            ThingOwner<Pawn> innerContainer = null;
-            Scribe_Deep.Look(ref innerContainer, "innerViviContainer", new object[] { this });
             Scribe_Collections.Look(ref _activeFairies, "activeFairies", LookMode.Reference);
             Scribe_Values.Look(ref _nextFairyJobId, "nextFairyJobId", 1);
             Scribe_Values.Look(ref _pendingMaterializeCount, "pendingMaterializeCount");
@@ -68,11 +66,6 @@ namespace VVRace
                 else
                 {
                     _activeFairies.RemoveAll(f => f == null || f.Destroyed);
-                }
-
-                foreach (var fairy in _activeFairies)
-                {
-                    fairy?.EnsureJob();
                 }
             }
         }
@@ -138,13 +131,7 @@ namespace VVRace
         {
             base.PostDestroy(mode, previousMap);
 
-            CancelMaterializeQueue();
-            foreach (var job in ActiveJobs().ToList())
-            {
-                job.Interrupt(FairyJobInterruptReason.OwnerUnavailable);
-            }
-
-            DestroyAllActiveFairies();
+            DestroyAllFairies();
 
             if (mode != DestroyMode.WillReplace)
             {
@@ -157,13 +144,7 @@ namespace VVRace
             base.PostDeSpawn(map, mode);
             if (mode != DestroyMode.WillReplace)
             {
-                CancelMaterializeQueue();
-                foreach (var job in ActiveJobs().ToList())
-                {
-                    job.Interrupt(FairyJobInterruptReason.OwnerUnavailable);
-                }
-
-                DestroyAllActiveFairies();
+                DestroyAllFairies();
             }
         }
 
@@ -171,25 +152,14 @@ namespace VVRace
         {
             base.Notify_Downed();
 
-            CancelMaterializeQueue();
-            foreach (var job in ActiveJobs().ToList())
-            {
-                job.Interrupt(FairyJobInterruptReason.OwnerUnavailable);
-            }
-
-            DestroyAllActiveFairies();
+            DestroyAllFairies();
         }
 
         public override void Notify_Killed(Map prevMap, DamageInfo? dinfo = null)
         {
             base.Notify_Killed(prevMap, dinfo);
 
-            CancelMaterializeQueue();
-            foreach (var job in ActiveJobs().ToList())
-            {
-                job.Interrupt(FairyJobInterruptReason.OwnerUnavailable);
-            }
-            DestroyAllActiveFairies();
+            DestroyAllFairies();
 
             var gameCompMana = Current.Game.GetComponent<GameComponent_Mana>();
             // Kill의 사망 처리 훅이 등록 목록을 바꿀 수 있으므로 지연 열거로 순회하지 않는다.
@@ -387,9 +357,6 @@ namespace VVRace
             {
                 _activeFairies.Add(fairy);
             }
-
-            fairy.EnsureJob();
-            _nextFairyJobId = Mathf.Max(_nextFairyJobId, fairy.CurrentJob.id + 1);
         }
 
         public void Notify_FairyDestroyed(ViviFairy fairy)
@@ -405,9 +372,14 @@ namespace VVRace
             }
         }
 
+        public bool HasActiveJob(int id)
+        {
+            return ActiveJobs().Any(j => j.id == id);
+        }
+
         public T GetActiveJob<T>() where T : FairyJob
         {
-            return ActiveJobs().OfType<T>().FirstOrDefault(j => !j.Ended);
+            return ActiveJobs().OfType<T>().FirstOrDefault();
         }
 
         public bool TryReserveIdleFairies(int count, out List<ViviFairy> reserved)
@@ -436,7 +408,7 @@ namespace VVRace
             }
             foreach (var f in _activeFairies.ToList())
             {
-                if (f != null && !f.Destroyed && f.CurrentJob.Kind != FairyJobKind.Dematerialize)
+                if (f != null && !f.Destroyed && f.CurrentJob?.Kind != FairyJobKind.Dematerialize)
                 {
                     f.BeginDematerialize(false);
                 }
@@ -463,12 +435,18 @@ namespace VVRace
             return _activeFairies
                 .Where(f => f != null && !f.Destroyed)
                 .Select(f => f.CurrentJob)
-                .Where(j => j != null && !j.Ended);
+                .Where(j => j != null);
         }
 
-        private void DestroyAllActiveFairies()
+        private void DestroyAllFairies()
         {
             CancelMaterializeQueue();
+            // 작업을 먼저 끝내야 호위 헤디프처럼 작업이 남긴 상태가 정리된다.
+            foreach (var job in ActiveJobs().ToList())
+            {
+                job.Interrupt(FairyJobInterruptReason.OwnerUnavailable);
+            }
+
             foreach (var f in _activeFairies.ToList())
             {
                 if (f != null && !f.Destroyed)

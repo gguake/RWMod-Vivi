@@ -45,7 +45,6 @@ namespace VVRace
         public bool Ended => ended;
         public abstract FairyJobKind Kind { get; }
         public virtual FairyRole Role => FairyRole.None;
-        protected virtual bool RebuildLegacyMoveOnlyToils => false;
 
         public FairyToil CurrentToil
         {
@@ -76,10 +75,6 @@ namespace VVRace
                 owner = fairy?.Owner;
             }
             EnsureToils();
-            if (RebuildLegacyMoveOnlyToils && HasLegacyMoveOnlyToils())
-            {
-                ResetToils(MakeReturnToRestToils());
-            }
         }
 
         public void Notify_ReplacedToAnotherJob()
@@ -230,11 +225,6 @@ namespace VVRace
         {
             var returnToils = MakeReturnToRestToils() ?? new FairyToil[0];
             return new FairyToil[] { new FairyToil_Attack(target) }.Concat(returnToils).ToArray();
-        }
-
-        private bool HasLegacyMoveOnlyToils()
-        {
-            return toils != null && toils.Count == 1 && toils[0] is FairyToil_MoveToIdleOrbit;
         }
 
         public virtual void End()
