@@ -60,5 +60,12 @@
         public const string VV_Message_ViviNestSettlersNoLure = nameof(VV_Message_ViviNestSettlersNoLure);
         public const string VV_Message_ViviNestSettlersCanceled = nameof(VV_Message_ViviNestSettlersCanceled);
         public const string VV_Message_ViviNestBabyHatched = nameof(VV_Message_ViviNestBabyHatched);
+        public const string VV_Message_ViviNestWary = nameof(VV_Message_ViviNestWary);
+        public const string VV_Message_ViviNestVeryWary = nameof(VV_Message_ViviNestVeryWary);
+        public const string VV_Message_ViviNestRescuedReturned = nameof(VV_Message_ViviNestRescuedReturned);
+        public const string VV_Message_ViviNestLeavingFew = nameof(VV_Message_ViviNestLeavingFew);
+        public const string VV_Message_ViviNestLeavingStarving = nameof(VV_Message_ViviNestLeavingStarving);
+        public const string VV_Message_ViviNestLeavingRoomLost = nameof(VV_Message_ViviNestLeavingRoomLost);
+        public const string VV_Message_CannotClaimViviNest = nameof(VV_Message_CannotClaimViviNest);
     }
 }

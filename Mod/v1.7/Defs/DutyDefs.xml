@@ -198,6 +198,20 @@
     </thinkNode>
   </DutyDef>
 
+  <!-- 둥지를 떠나는 비비: 어른은 아기를 안고 나가고, 나머지는 맵 가장자리로 나간다 -->
+  <DutyDef>
+    <defName>VV_ViviNestExit</defName>
+    <thinkNode Class="ThinkNode_Priority">
+      <subNodes>
+        <li Class="VVRace.JobGiver_ViviNestCarryBabyOut" />
+        <li Class="JobGiver_ExitMapBest">
+          <defaultLocomotion>Walk</defaultLocomotion>
+          <canFlyOutOfMap>false</canFlyOutOfMap>
+        </li>
+      </subNodes>
+    </thinkNode>
+  </DutyDef>
+
   <!-- 거대 말벌 아스포델 호위 -->
   <DutyDef>
     <defName>VV_TitanicHornetEscort</defName>

@@ -38,6 +38,18 @@
 <VV_Message_ViviNestSettlersNoLure>오기로 한 비비 무리가 오지 않았습니다. 유인통이 사라졌습니다.</VV_Message_ViviNestSettlersNoLure>
 <VV_Message_ViviNestSettlersCanceled>오기로 한 비비 무리가 오지 않았습니다.\n{0}</VV_Message_ViviNestSettlersCanceled>
 <VV_Message_ViviNestBabyHatched>{0}의 둥지에서 아기 비비가 깨어났습니다.</VV_Message_ViviNestBabyHatched>
+<VV_Message_ViviNestWary>{0}의 비비들이 방에 들어온 정착민을 경계하기 시작했습니다.</VV_Message_ViviNestWary>
+<VV_Message_ViviNestVeryWary>{0}의 비비들이 크게 경계하고 있습니다. 정착민이 비비들의 방에 들어가지 않게 하세요.</VV_Message_ViviNestVeryWary>
+<VV_Message_ViviNestRescuedReturned>{PAWN_label}(이)가 구해 준 데 고마워하며 둥지로 돌아갔습니다.</VV_Message_ViviNestRescuedReturned>
+<VV_Message_ViviNestLeavingFew>{0}의 비비들이 떠납니다. 남은 비비가 너무 적습니다.</VV_Message_ViviNestLeavingFew>
+<VV_Message_ViviNestLeavingStarving>{0}의 비비들이 떠납니다. 너무 오래 굶주렸습니다.</VV_Message_ViviNestLeavingStarving>
+<VV_Message_ViviNestLeavingRoomLost>{0}의 비비들이 떠납니다. 둥지 방을 잃었습니다.</VV_Message_ViviNestLeavingRoomLost>
+<VV_Message_CannotClaimViviNest>비비들이 아직 살고 있습니다.</VV_Message_CannotClaimViviNest>
+<VV_Letter_ViviNestAlmostHostileLabel>비비들의 경계</VV_Letter_ViviNestAlmostHostileLabel>
+<VV_Letter_ViviNestAlmostHostile>{0}의 비비들이 참을성을 잃기 직전입니다. 정착민이 계속 방에 들어가거나 비비를 해치면 적대하며 떠나 버립니다.</VV_Letter_ViviNestAlmostHostile>
+<VV_Letter_ViviNestHostileLabel>비비들의 적대</VV_Letter_ViviNestHostileLabel>
+<VV_Letter_ViviNestHostile>{0}의 비비들이 적대하며 둥지를 버리고 달아납니다.</VV_Letter_ViviNestHostile>
+<VV_Inspector_ViviNestWariness>둥지 경계심: {0}</VV_Inspector_ViviNestWariness>
 
 <VV_StatReport_NestForager>떠돌이 무리 채집꾼: {0}</VV_StatReport_NestForager>
 

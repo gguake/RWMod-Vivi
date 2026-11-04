@@ -1,4 +1,5 @@
 ﻿using RimWorld;
+using System.Linq;
 using Verse;
 using Verse.AI;
 using Verse.AI.Group;
@@ -21,6 +22,10 @@ namespace VVRace
         private ViviNestProduction _production;
         private ViviNestPlanner _planner;
         private ViviNestGarden _garden;
+        private ViviNestHostility _hostility;
+
+        private int _starvingSince = -1;
+        private int _roomLostSince = -1;
 
         public Faction Faction => _faction;
         public IntVec3 NestCell => _nestCell;
@@ -30,6 +35,10 @@ namespace VVRace
         public ViviNestProduction Production => _production;
         public ViviNestPlanner Planner => _planner;
         public ViviNestGarden Garden => _garden;
+        public ViviNestHostility Hostility => _hostility;
+
+        public const float StarvingDaysToLeave = 2f;
+        public const float RoomLostDaysToLeave = 1f;
 
         public override bool AddFleeToil => false;
 
@@ -46,6 +55,7 @@ namespace VVRace
             _production = new ViviNestProduction(this);
             _planner = new ViviNestPlanner(this);
             _garden = new ViviNestGarden(this);
+            _hostility = new ViviNestHostility(this);
         }
 
         public LordJob_ViviNest(Faction faction, IntVec3 nestCell) : this()
@@ -65,10 +75,11 @@ namespace VVRace
             var liveToil = new LordToil_ViviNestLive(_nestCell);
             graph.AddToil(liveToil);
 
-            var leaveSubgraph = new LordJob_TravelAndExit(IntVec3.Invalid).CreateGraph();
-            var leaveToil = graph.AttachSubgraph(leaveSubgraph).StartingToil;
+            // 떠날 때는 어른이 아기를 안고 나가도록 둥지 나가기 토일을 쓴다(평화 이주는 걷고, 적대 도주는 뛰며 막히면 판다).
+            var leaveToil = new LordToil_ViviNestExit(LocomotionUrgency.Walk, canDig: false);
+            graph.AddToil(leaveToil);
 
-            var fleeToil = new LordToil_ExitMap(LocomotionUrgency.Jog, canDig: true, interruptCurrentJob: true);
+            var fleeToil = new LordToil_ViviNestExit(LocomotionUrgency.Jog, canDig: true);
             graph.AddToil(fleeToil);
 
             var arrived = new Transition(travelToil, liveToil);
@@ -79,7 +90,6 @@ namespace VVRace
             var abandon = new Transition(liveToil, leaveToil);
             BeekeepingUtility.AddSourcesDistinct(abandon, travelSubgraph.lordToils);
             abandon.AddTrigger(new Trigger_Memo(MemoAbandon));
-            abandon.AddPreAction(new TransitionAction_EnsureHaveExitDestination());
             abandon.AddPostAction(new TransitionAction_WakeAll());
             abandon.AddPostAction(new TransitionAction_EndAllJobs());
             graph.AddTransition(abandon);
@@ -87,13 +97,22 @@ namespace VVRace
             // 적대가 되면 무엇을 하던 바로 달아난다. 하위 그래프의 전이보다 먼저 검사되게 맨 앞에 둔다.
             var flee = new Transition(liveToil, fleeToil);
             BeekeepingUtility.AddSourcesDistinct(flee, travelSubgraph.lordToils);
-            BeekeepingUtility.AddSourcesDistinct(flee, leaveSubgraph.lordToils);
+            flee.AddSource(leaveToil);
             flee.AddTrigger(new Trigger_BecamePlayerEnemy());
             flee.AddPostAction(new TransitionAction_WakeAll());
+            flee.AddPostAction(new TransitionAction_EndAllJobs());
             graph.transitions.Insert(0, flee);
 
+            // 플레이어가 구성원을 죽이거나 붙잡으려 하면 경계심과 상관없이 바로 적대해 달아난다.
+            var outrage = new Transition(liveToil, fleeToil);
+            outrage.AddTrigger(new Trigger_Custom(signal => signal.type == TriggerSignalType.PawnArrestAttempted
+                || (signal.type == TriggerSignalType.PawnLost && signal.condition == PawnLostCondition.Killed && signal.dinfo.Instigator?.Faction == Faction.OfPlayer)));
+            outrage.AddPreAction(new TransitionAction_Custom(() => _hostility.TurnHostile()));
+            outrage.AddPostAction(new TransitionAction_WakeAll());
+            outrage.AddPostAction(new TransitionAction_EndAllJobs());
+            graph.transitions.Insert(0, outrage);
+
             var trapped = new Transition(leaveToil, fleeToil);
-            BeekeepingUtility.AddSourcesDistinct(trapped, leaveSubgraph.lordToils);
             trapped.AddTrigger(new Trigger_PawnCannotReachMapEdge());
             graph.AddTransition(trapped);
 
@@ -109,13 +128,9 @@ namespace VVRace
             _territory.Establish(_nestCell);
             _planner.Notify_Established();
 
-            foreach (var door in _territory.BorderDoors)
-            {
-                if (door.Faction == Faction.OfPlayer)
-                {
-                    door.SetForbidden(true, warnOnFail: false);
-                }
-            }
+            // 정착할 때 방 안에 있던 정착민은 나갈 때까지 경계하지 않는다. 문은 방이 비면 설계자가 금지한다(안에 가두지 않게).
+            _hostility.Notify_Settled();
+            _planner.ForbidNestDoors();
 
             var zoneManager = Map.zoneManager;
             foreach (var room in _territory.Rooms)
@@ -157,6 +172,89 @@ namespace VVRace
             if ((ticks + ViviNestPlanner.PlanInterval / 2) % ViviNestPlanner.PlanInterval == 0)
             {
                 _planner.Tick();
+                CheckDeparture();
+            }
+            if ((ticks + ViviNestHostility.CheckInterval / 2) % ViviNestHostility.CheckInterval == 0 && lord.CurLordToil is LordToil_ViviNestLive)
+            {
+                _hostility.Tick();
+            }
+        }
+
+        // 평화 이주: 굶주림이 이틀, 둥지 방을 잃은 채 하루가 이어지거나, 어른이 한 명 이하로 남으면 걸어 나간다.
+        private void CheckDeparture()
+        {
+            if (!(lord.CurLordToil is LordToil_ViviNestLive)) { return; }
+
+            var ticks = Find.TickManager.TicksGame;
+            var pawns = lord.ownedPawns;
+
+            var adults = 0;
+            var foodSum = 0f;
+            var fed = 0;
+            for (int i = 0; i < pawns.Count; ++i)
+            {
+                if (pawns[i].DevelopmentalStage.Adult()) { adults++; }
+                if (pawns[i].needs?.food != null)
+                {
+                    foodSum += pawns[i].needs.food.CurLevelPercentage;
+                    fed++;
+                }
+            }
+
+            var starving = _stock.FoodNutrition <= 0.01f && fed > 0 && foodSum / fed < 0.1f;
+            _starvingSince = starving ? (_starvingSince < 0 ? ticks : _starvingSince) : -1;
+
+            var roomCells = _territory.OwnedRoomCells.Count;
+            var unroofed = 0;
+            foreach (var _ in _planner.CellsNeedingRoof()) { unroofed++; }
+            var roomLost = !_territory.HasAnyRoom || (roomCells > 0 && unroofed * 2 >= roomCells);
+            _roomLostSince = roomLost ? (_roomLostSince < 0 ? ticks : _roomLostSince) : -1;
+
+            string reason = null;
+            if (adults <= 1)
+            {
+                reason = LocalizeString_Message.VV_Message_ViviNestLeavingFew;
+            }
+            else if (_starvingSince >= 0 && ticks - _starvingSince >= StarvingDaysToLeave * GenDate.TicksPerDay)
+            {
+                reason = LocalizeString_Message.VV_Message_ViviNestLeavingStarving;
+            }
+            else if (_roomLostSince >= 0 && ticks - _roomLostSince >= RoomLostDaysToLeave * GenDate.TicksPerDay)
+            {
+                reason = LocalizeString_Message.VV_Message_ViviNestLeavingRoomLost;
+            }
+
+            if (reason != null)
+            {
+                Messages.Message(reason.Translate(_faction.Name), new LookTargets(pawns), MessageTypeDefOf.NeutralEvent);
+                lord.ReceiveMemo(MemoAbandon);
+            }
+        }
+
+        public override string GetReport(Pawn pawn)
+        {
+            return _settled ? LocalizeString_Inspector.VV_Inspector_ViviNestWariness.Translate((_hostility.Level / ViviNestHostility.Max).ToStringPercent()).ToString() : null;
+        }
+
+        // 구성원을 가두면 바로 적대한다.
+        public override void Notify_PawnLost(Pawn p, PawnLostCondition condition)
+        {
+            base.Notify_PawnLost(p, condition);
+            if (_settled && condition == PawnLostCondition.MadePrisoner)
+            {
+                _hostility.TurnHostile();
+            }
+        }
+
+        // 둥지가 끝나면(떠남·전멸) 남은 둥지 청사진·골조를 치운다. 건물은 임시 세력이 사라질 때 바닐라가 무소속으로 돌린다.
+        public override void Cleanup()
+        {
+            base.Cleanup();
+            if (Map == null) { return; }
+
+            foreach (var thing in _planner.NestConstructions().ToList())
+            {
+                thing.Destroy(DestroyMode.Cancel);
             }
         }
 
@@ -220,6 +318,9 @@ namespace VVRace
             Scribe_Deep.Look(ref _production, "production", this);
             Scribe_Deep.Look(ref _planner, "planner", this);
             Scribe_Deep.Look(ref _garden, "garden", this);
+            Scribe_Deep.Look(ref _hostility, "hostility", this);
+            Scribe_Values.Look(ref _starvingSince, "starvingSince", -1);
+            Scribe_Values.Look(ref _roomLostSince, "roomLostSince", -1);
         }
     }
 }

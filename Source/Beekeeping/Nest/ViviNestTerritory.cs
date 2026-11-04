@@ -28,6 +28,16 @@ namespace VVRace
         public IReadOnlyList<IntVec3> BoundaryCells => _boundaryCells;
         public IReadOnlyList<IntVec3> OutdoorStorageCells => _outdoorStorageCells;
 
+        // 테두리 그리기(GenDraw)가 List를 받으므로 그대로 넘긴다. 고치지 말 것.
+        public List<IntVec3> OwnedRoomCellsForDrawing
+        {
+            get
+            {
+                RefreshIfNeeded();
+                return _ownedRoomCells;
+            }
+        }
+
         public IReadOnlyList<IntVec3> OwnedRoomCells
         {
             get
@@ -60,6 +70,13 @@ namespace VVRace
         }
 
         public bool IsOutdoorStorageCell(IntVec3 cell) => _outdoorStorageCells.Contains(cell);
+
+        // 둥지 방 칸(벽이 뚫린 동안은 원래 방 칸). 정착민이 여기 들어오면 경계한다.
+        public bool IsNestRoomCell(IntVec3 cell)
+        {
+            RefreshIfNeeded();
+            return _ownedRoomCellSet.Contains(cell);
+        }
 
         // 둥지 물건으로 치는 칸: 둥지 방 안(벽이 뚫린 동안은 원래 방 칸)과 바깥 보관 칸
         public bool IsTerritoryCell(IntVec3 cell)

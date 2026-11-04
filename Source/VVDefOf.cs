@@ -498,6 +498,7 @@ namespace VVRace
         public static DutyDef VV_ViviLureScout;
         public static DutyDef VV_ViviBaitThief;
         public static DutyDef VV_ViviNestLife;
+        public static DutyDef VV_ViviNestExit;
     }
 
     [DefOf]

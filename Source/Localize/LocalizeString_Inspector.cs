@@ -77,5 +77,6 @@
         public const string VV_Inspector_LureScoreRoom = nameof(VV_Inspector_LureScoreRoom);
         public const string VV_Inspector_LureScoreMana = nameof(VV_Inspector_LureScoreMana);
         public const string VV_Inspector_LureScoreTotal = nameof(VV_Inspector_LureScoreTotal);
+        public const string VV_Inspector_ViviNestWariness = nameof(VV_Inspector_ViviNestWariness);
     }
 }

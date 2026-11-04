@@ -1,6 +1,7 @@
 ﻿using HarmonyLib;
 using RimWorld;
 using System.Collections.Generic;
+using UnityEngine;
 using Verse;
 
 namespace VVRace
@@ -36,6 +37,49 @@ namespace VVRace
                 AccessTools.Method(typeof(Pawn_CarryTracker), nameof(Pawn_CarryTracker.TryDropCarriedThing),
                     new[] { typeof(IntVec3), typeof(int), typeof(ThingPlaceMode), typeof(Thing).MakeByRefType(), typeof(System.Action<Thing, int>) }),
                 postfix: new HarmonyMethod(typeof(BeekeepingPatch), nameof(Pawn_CarryTracker_TryDropCarriedThing_Postfix)));
+
+            // 바닐라는 플레이어 폰에게만 로드 보고를 보여 주므로 둥지 비비 정보창에 경계심 줄을 붙인다.
+            ViviHarmonyPatcher.TryPatch(harmony, "Pawn.GetInspectString (vivi nest wariness)",
+                AccessTools.Method(typeof(Pawn), nameof(Pawn.GetInspectString)),
+                postfix: new HarmonyMethod(typeof(BeekeepingPatch), nameof(Pawn_GetInspectString_Postfix)));
+
+            // 둥지 비비를 고르면 정착민이 들어가면 경계하는 둥지 방 테두리를 그린다.
+            ViviHarmonyPatcher.TryPatch(harmony, "Pawn.DrawExtraSelectionOverlays (vivi nest rooms)",
+                AccessTools.Method(typeof(Pawn), nameof(Pawn.DrawExtraSelectionOverlays)),
+                postfix: new HarmonyMethod(typeof(BeekeepingPatch), nameof(Pawn_DrawExtraSelectionOverlays_Postfix)));
+
+            ViviHarmonyPatcher.TryPatch(harmony, "Building.ClaimableBy (vivi nest)",
+                AccessTools.Method(typeof(Building), nameof(Building.ClaimableBy)),
+                postfix: new HarmonyMethod(typeof(BeekeepingPatch), nameof(Building_ClaimableBy_Postfix)));
+        }
+
+        private static void Pawn_GetInspectString_Postfix(Pawn __instance, ref string __result)
+        {
+            var report = __instance.GetNestLordJob()?.GetReport(__instance);
+            if (report.NullOrEmpty()) { return; }
+
+            __result = __result.NullOrEmpty() ? report : __result + "\n" + report;
+        }
+
+        private static readonly Color NestRoomEdgeColor = new Color(1f, 0.8f, 0.35f);
+
+        private static void Pawn_DrawExtraSelectionOverlays_Postfix(Pawn __instance)
+        {
+            var nest = __instance.GetNestLordJob();
+            if (nest == null || !nest.Settled || __instance.Map != Find.CurrentMap) { return; }
+
+            GenDraw.DrawFieldEdges(nest.Territory.OwnedRoomCellsForDrawing, NestRoomEdgeColor);
+        }
+
+        // 비비들이 사는 동안 둥지 건물은 차지할 수 없다(해체 가능 여부도 바닐라가 차지 가능 여부를 따른다).
+        private static void Building_ClaimableBy_Postfix(Building __instance, Faction by, ref AcceptanceReport __result)
+        {
+            if (!__result.Accepted || by == null || !by.IsPlayer || !__instance.Faction.IsWanderingViviFaction()) { return; }
+
+            if (__instance.Spawned && BeekeepingUtility.GetNestLord(__instance.Map) != null)
+            {
+                __result = LocalizeString_Message.VV_Message_CannotClaimViviNest.Translate().ToString();
+            }
         }
 
         private static void Pawn_CarryTracker_TryDropCarriedThing_Postfix(Pawn_CarryTracker __instance, bool __result, ref Thing resultingThing)

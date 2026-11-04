@@ -101,12 +101,17 @@ namespace VVRace
             }
         }
 
-        // 둥지가 지은 문도 정착민이 드나들지 않게 금지한다(새로 지은 문은 금지 표시가 없다).
-        private void ForbidNestDoors()
+        // 둥지 방 문(플레이어 문·둥지가 지은 문)을 정착민이 드나들지 않게 금지한다. 방 안에 정착민이 있으면 가두지 않게 나갈 때까지 미룬다.
+        public void ForbidNestDoors()
         {
+            foreach (var pawn in Map.mapPawns.SpawnedPawnsInFaction(Faction.OfPlayer))
+            {
+                if (!pawn.RaceProps.Animal && Territory.IsNestRoomCell(pawn.Position)) { return; }
+            }
+
             foreach (var door in Territory.BorderDoors)
             {
-                if (door.Faction == Faction && !door.IsForbidden(Faction.OfPlayer))
+                if ((door.Faction == Faction || door.Faction == Faction.OfPlayer) && !door.IsForbidden(Faction.OfPlayer))
                 {
                     door.SetForbidden(true, warnOnFail: false);
                 }

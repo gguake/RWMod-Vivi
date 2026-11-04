@@ -20,6 +20,12 @@ namespace VVRace
             _nestCell = nestCell;
         }
 
+        public override void Notify_PawnDamaged(Pawn victim, DamageInfo dinfo)
+        {
+            base.Notify_PawnDamaged(victim, dinfo);
+            (lord.LordJob as LordJob_ViviNest)?.Hostility.Notify_MemberDamaged(victim, dinfo);
+        }
+
         public override void UpdateAllDuties()
         {
             for (int i = 0; i < lord.ownedPawns.Count; ++i)
