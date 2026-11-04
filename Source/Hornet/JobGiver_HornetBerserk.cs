@@ -69,35 +69,41 @@ namespace VVRace
 
             if (target != null)
             {
-                using (var pawnPath = pawn.Map.pathFinder.FindPathNow(pawn.Position, target.Position, TraverseParms.For(pawn, Danger.Deadly, TraverseMode.PassDoors)))
+                return ApproachBlockedTargetJob(pawn, target);
+            }
+            return null;
+        }
+
+        // 문에 막혀 닿지 못하는 대상은 막는 문 앞까지 다가가 문을 부술 기회를 만든다.
+        internal static Job ApproachBlockedTargetJob(Pawn pawn, Thing target)
+        {
+            using (var pawnPath = pawn.Map.pathFinder.FindPathNow(pawn.Position, target.Position, TraverseParms.For(pawn, Danger.Deadly, TraverseMode.PassDoors)))
+            {
+                if (!pawnPath.Found)
                 {
-                    if (!pawnPath.Found)
+                    return null;
+                }
+
+                if (!pawnPath.TryFindLastCellBeforeBlockingDoor(pawn, out var result))
+                {
+                    // 대상이 문 칸에 서 있으면 경로 끝 칸이 그 문이라 막는 문으로 검색되지 않는다(바닐라 JobGiver_Manhunter와 같은 처리).
+                    if (target.Position.GetDoor(target.Map) == null)
                     {
+                        Log.Error(string.Concat(pawn, " did TryFindLastCellBeforeDoor but found none when it should have been one. Target: ", target.LabelCap));
                         return null;
                     }
 
-                    if (!pawnPath.TryFindLastCellBeforeBlockingDoor(pawn, out var result))
-                    {
-                        // 대상이 문 칸에 서 있으면 경로 끝 칸이 그 문이라 막는 문으로 검색되지 않는다(바닐라 JobGiver_Manhunter와 같은 처리).
-                        if (target.Position.GetDoor(target.Map) == null)
-                        {
-                            Log.Error(string.Concat(pawn, " did TryFindLastCellBeforeDoor but found none when it should have been one. Target: ", target.LabelCap));
-                            return null;
-                        }
-
-                        result = pawnPath.NodesReversed[1];
-                    }
-
-                    var randomCell = CellFinder.RandomRegionNear(result.GetRegion(pawn.Map), 9, TraverseParms.For(pawn)).RandomCell;
-                    if (randomCell == pawn.Position)
-                    {
-                        return JobMaker.MakeJob(JobDefOf.Wait, 500);
-                    }
-
-                    return JobMaker.MakeJob(JobDefOf.Goto, randomCell);
+                    result = pawnPath.NodesReversed[1];
                 }
+
+                var randomCell = CellFinder.RandomRegionNear(result.GetRegion(pawn.Map), 9, TraverseParms.For(pawn)).RandomCell;
+                if (randomCell == pawn.Position)
+                {
+                    return JobMaker.MakeJob(JobDefOf.Wait, 500);
+                }
+
+                return JobMaker.MakeJob(JobDefOf.Goto, randomCell);
             }
-            return null;
         }
 
         private static Job MeleeAttackJob(Thing target, bool canBashFences)

@@ -76,6 +76,8 @@
         <li Class="JobGiver_AIGotoNearestHostile">
           <overrideExpiryInterval>60</overrideExpiryInterval>
         </li>
+        <!-- 광폭 상태의 세력 없는 말벌은 위 노드가 정착민을 찾지 못한다 -->
+        <li Class="VVRace.JobGiver_HornetGotoColony" />
         <li Class="JobGiver_AITrashBuildingsDistant">
           <attackAllInert>true</attackAllInert>
         </li>
