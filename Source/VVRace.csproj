@@ -320,7 +320,10 @@
     <Compile Include="Beekeeping\AI\JobGiver_ViviNestHarvestHealroot.cs" />
     <Compile Include="Beekeeping\AI\JobGiver_ViviNestPlantSeed.cs" />
     <Compile Include="Beekeeping\AI\JobGiver_ViviNestGarden.cs" />
-    <Compile Include="Beekeeping\AI\JobGiver_ViviNestPlay.cs" />
+    <Compile Include="Beekeeping\AI\ThinkNode_ViviNestPlay.cs" />
+    <Compile Include="Beekeeping\AI\JobGiver_ViviNestHorseshoes.cs" />
+    <Compile Include="Beekeeping\AI\JobGiver_ViviNestNap.cs" />
+    <Compile Include="Beekeeping\AI\JobGiver_ViviNestLoaf.cs" />
     <Compile Include="Beekeeping\AI\JobGiver_ViviNestDefend.cs" />
     <Compile Include="Beekeeping\AI\JobGiver_ViviNestTakeShelter.cs" />
     <Compile Include="Beekeeping\AI\JobGiver_ViviNestChildcare.cs" />

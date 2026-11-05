@@ -206,7 +206,14 @@
             <li Class="VVRace.JobGiver_ViviNestGarden" />
             <li Class="VVRace.JobGiver_ViviNestChildcare" />
             <li Class="VVRace.JobGiver_ViviNestSmoothWall" />
-            <li Class="VVRace.JobGiver_ViviNestPlay" />
+            <!-- 놀이(한가할 때, 낮에만): 편자 막대 놀이(바깥이 편할 때)·낮잠(졸릴 때)·빈둥거리기 중 하나를 섞어 고른다. 하던 놀이는 놀이 시간 동안 이어 하고 600틱마다 다시 생각해 일이 생기면 넘어간다 -->
+            <li Class="VVRace.ThinkNode_ViviNestPlay">
+              <subNodes>
+                <li Class="VVRace.JobGiver_ViviNestHorseshoes" />
+                <li Class="VVRace.JobGiver_ViviNestNap" />
+                <li Class="VVRace.JobGiver_ViviNestLoaf" />
+              </subNodes>
+            </li>
           </subNodes>
         </li>
         <li Class="VVRace.JobGiver_ViviNestWander" />

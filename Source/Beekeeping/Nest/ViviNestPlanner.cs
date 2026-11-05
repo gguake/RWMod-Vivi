@@ -77,6 +77,8 @@ namespace VVRace
                 if (PlanInitialFacilities()) { return; }
             }
 
+            // 잔불꽃은 구조물(둥지 방)에 먼저 둔다: 둘 잔불꽃이 있는데 잔불꽃 없는 방에 빈 화분이 없으면 다른 공사보다 먼저 화분을 짓는다.
+            if (TryPlanEmberPot()) { return; }
             if (TryPlanExpansion()) { return; }
             if (TryPlanShelf()) { return; }
             if (TryPlanHatchery()) { return; }
@@ -109,11 +111,13 @@ namespace VVRace
         }
         #endregion
 
-        #region 포장 식물 설치
+        #region 포장 식물 설치·잔불꽃 배치
         // 둥지 몫 포장 마법식물(정착대가 가져온 잔불꽃·풍년화)은 바닐라 설치 청사진(플레이어의 다시 심기와 같은 것)을 놓아 다 자란 채로 세운다.
         // 포장을 가져가 그 자리에 세우는 일은 바닐라 건설 워크기버가 한다(설치 청사진의 자재 운반이 곧 설치다). 화분 위 설치도 기존 마법식물 시스템이 받는다.
         // 경계 수리처럼 다른 공사를 기다리지 않고, 설치 청사진은 다른 공사를 막지 않는다(AnyPendingProject).
-        // 생존용 꽃(잔불꽃)은 방 안 둥지 화분에, 나머지는 비옥한 바깥 땅에 둔다. 둘 곳이 없으면 포장한 채 둥지에 남겨 둔다(씨앗과 같다).
+        // 생존용 꽃(잔불꽃)은 둥지 방 화분에(잔불꽃이 없는 방부터, FindEmberPotCell), 나머지는 비옥한 바깥 땅에 둔다. 둘 곳이 없으면 포장한 채 둥지에 남겨 둔다(씨앗과 같다).
+        // 바깥에서 자란 둥지 잔불꽃(미지의 씨앗은 기존 마법식물 시스템대로 무작위 마법식물로 자란다)은 잔불꽃이 없는 방이 있으면
+        // 바닐라 다시 설치 청사진(플레이어의 다시 심기와 같다)으로 그 방 화분에 옮긴다. 뽑아 든 포장은 둥지 몫이다(BeekeepingPatch, MakeMinified).
         private void PlanInstalls()
         {
             var map = Map;
@@ -123,30 +127,198 @@ namespace VVRace
                 if (!(minis[i] is MinifiedThing mini) || !(mini.InnerThing is ArcanePlant plant)) { continue; }
                 if (!_owner.Stock.IsNestOwned(mini) || InstallBlueprintUtility.ExistingBlueprintFor(mini) != null) { continue; }
 
-                var cell = JobGiver_ViviNestPlantSeed.IsPotPlant(plant.def) ? FindPotInstallCell(plant.def) : FindOutdoorInstallCell(plant.def);
+                var def = plant.def;
+                var cell = JobGiver_ViviNestPlantSeed.IsPotPlant(def)
+                    ? FindEmberPotCell(c => ArcanePlantUtility.CanPlaceArcanePlantToCell(map, c, def).Accepted, emberlessOnly: false)
+                    : FindOutdoorInstallCell(def);
                 if (!cell.IsValid) { continue; }
 
-                _resourceNeedTick = -99999;
-                _constructionCacheTick = -99999;
+                MarkConstructionsDirty();
                 GenConstruct.PlaceBlueprintForInstall(mini, cell, map, Rot4.North, Faction);
+            }
+
+            foreach (var plant in OutdoorEmbersToMove())
+            {
+                var cell = FindEmberPotCell(c => ArcanePlantUtility.CanPlaceArcanePlantToCell(map, c, plant.def, plant).Accepted, emberlessOnly: true);
+                if (!cell.IsValid) { break; }
+
+                MarkConstructionsDirty();
+                GenConstruct.PlaceBlueprintForReinstall(plant, cell, map, Rot4.North, Faction);
             }
         }
 
-        // 방 안 둥지 화분 중 식물·새싹·설치 청사진이 없는 칸(기존 마법식물 놓기 판정, 씨앗 심기의 화분 고르기와 같다)
-        private IntVec3 FindPotInstallCell(ThingDef plantDef)
+        // 잔불꽃은 구조물(둥지 방)마다 먼저 둔다(사용자 요구 "구조물에 잔불꽃을 우선 배치"). 잔불꽃의 열은 제 방만 데우므로
+        // 증축 방에 잔불꽃이 없으면 겨울에 영하로 내려간다(장기 계측: 온대 겨울 증축 방 -17°C). 화분은 잔불꽃만 쓰고(씨앗 심기·설치 모두)
+        // 다른 마법식물(미지의 씨앗·전투·장식 식물)은 바깥 땅에 둔다.
+        // 증축 방에는 방출기를 두지 않는다: 방 안 마법식물은 저장 마나가 절반 아래면 예비분 제한 없이 비료를 받으므로(JobGiver_ViviNestFertilizePlant)
+        // 잔불꽃은 마나 소모(하루 200)만큼 비료 하루 2개로 지내지만, 방출기는 하루 8개를 태워 마나 대부분을 둘레로 흩는다.
+        private readonly HashSet<Room> _emberRooms = new HashSet<Room>();
+        private readonly List<ArcanePlant> _tmpOutdoorEmbers = new List<ArcanePlant>();
+
+        private static ThingDef EmberSeedDef => VVThingDefOf.VV_EmberBloom.GetModExtension<ArcaneSeedExtension>()?.seedDef;
+
+        // 잔불꽃을 둘 둥지 화분 칸: 잔불꽃이 없는 둥지 방의 빈 화분을 먼저, emberlessOnly가 아니면 그다음 다른 둥지 방의 빈 화분(추운 방부터).
+        // 빈 화분은 식물·새싹이 없는 둥지 세력 화분이고, 설치 청사진이 놓인 칸 등은 validator(기존 마법식물 놓기·씨앗 심기 판정)가 거른다.
+        public IntVec3 FindEmberPotCell(System.Predicate<IntVec3> validator, bool emberlessOnly)
         {
             var map = Map;
+            var emberRooms = EmberRooms();
+            var best = IntVec3.Invalid;
+            var bestEmberless = false;
+            var bestTemperature = float.MaxValue;
             foreach (var building in map.listerBuildings.allBuildingsNonColonist)
             {
                 if (!(building is ArcanePlantPot pot) || pot.Faction != Faction || !Territory.IsRoomCell(pot.Position)) { continue; }
 
                 var cell = pot.Position;
-                if (cell.GetFirstThing<ArcanePlant>(map) != null || cell.GetFirstThing<ArcanePlant_Seedling>(map) != null) { continue; }
-                if (!ArcanePlantUtility.CanPlaceArcanePlantToCell(map, cell, plantDef).Accepted) { continue; }
+                if (cell.GetFirstThing<ArcanePlant>(map) != null) { continue; }
 
-                return cell;
+                var room = cell.GetRoom(map);
+                var emberless = room != null && !emberRooms.Contains(room);
+                if (emberlessOnly && !emberless) { continue; }
+
+                var temperature = room?.Temperature ?? 0f;
+                if (best.IsValid && ((bestEmberless && !emberless) || (bestEmberless == emberless && temperature >= bestTemperature))) { continue; }
+                if (!validator(cell)) { continue; }
+
+                best = cell;
+                bestEmberless = emberless;
+                bestTemperature = temperature;
             }
-            return IntVec3.Invalid;
+            return best;
+        }
+
+        // 잔불꽃이 있거나 곧 들어갈 둥지 방: 다 자란 잔불꽃, 잔불꽃 새싹(화분에 심은 잔불꽃 씨앗), 잔불꽃 설치·다시 설치 청사진, 구성원이 심으러 가는 잔불꽃 씨앗의 자리
+        private HashSet<Room> EmberRooms()
+        {
+            var map = Map;
+            _emberRooms.Clear();
+            foreach (var building in map.listerBuildings.allBuildingsNonColonist)
+            {
+                if (building.Faction != Faction) { continue; }
+                if (building.def == VVThingDefOf.VV_EmberBloom || (building is ArcanePlant_Seedling seedling && seedling.MaturePlantDef == VVThingDefOf.VV_EmberBloom))
+                {
+                    AddEmberRoom(building.Position);
+                }
+            }
+
+            foreach (var thing in map.listerThings.ThingsInGroup(ThingRequestGroup.Blueprint))
+            {
+                if (thing.Faction == Faction && thing is Blueprint_Install install && install.ThingToInstall?.def == VVThingDefOf.VV_EmberBloom)
+                {
+                    AddEmberRoom(thing.Position);
+                }
+            }
+
+            var pawns = _owner.lord?.ownedPawns;
+            if (pawns != null)
+            {
+                for (int i = 0; i < pawns.Count; ++i)
+                {
+                    if (IsPlantingEmberSeed(pawns[i].CurJob)) { AddEmberRoom(pawns[i].CurJob.targetB.Cell); }
+                }
+            }
+            return _emberRooms;
+        }
+
+        private void AddEmberRoom(IntVec3 cell)
+        {
+            var room = cell.GetRoom(Map);
+            if (room != null && Territory.Rooms.Contains(room)) { _emberRooms.Add(room); }
+        }
+
+        private static bool IsPlantingEmberSeed(Job job)
+        {
+            return job?.def == VVJobDefOf.VV_PlantArcaneSeed && JobGiver_ViviNestPlantSeed.IsPotPlant(job.targetA.Thing?.TryGetComp<CompArcaneSeed>()?.Props.targetPlantDef);
+        }
+
+        // 둥지 방 밖에 선 둥지 잔불꽃 중 아직 옮기기로 하지 않은 것(다시 설치 청사진이 없는 것)
+        private List<ArcanePlant> OutdoorEmbersToMove()
+        {
+            var map = Map;
+            _tmpOutdoorEmbers.Clear();
+            foreach (var building in map.listerBuildings.allBuildingsNonColonist)
+            {
+                if (building.def != VVThingDefOf.VV_EmberBloom || building.Faction != Faction || !(building is ArcanePlant plant)) { continue; }
+                if (Territory.IsNestRoomCell(plant.Position) || map.listerBuildings.TryGetReinstallBlueprint(plant, out _)) { continue; }
+
+                _tmpOutdoorEmbers.Add(plant);
+            }
+            return _tmpOutdoorEmbers;
+        }
+
+        // 아직 자리를 받지 않은 둥지 잔불꽃 수: 둥지 몫 잔불꽃 씨앗(심으러 가는 것 제외), 설치 청사진이 없는 둥지 몫 포장 잔불꽃, 옮기지 않은 바깥 둥지 잔불꽃
+        private int EmbersToPlace()
+        {
+            var map = Map;
+            var count = 0;
+            var seedDef = EmberSeedDef;
+            if (seedDef != null)
+            {
+                foreach (var seed in map.listerThings.ThingsOfDef(seedDef))
+                {
+                    if (_owner.Stock.IsNestOwned(seed)) { count += seed.stackCount; }
+                }
+
+                var pawns = _owner.lord?.ownedPawns;
+                if (pawns != null)
+                {
+                    for (int i = 0; i < pawns.Count; ++i)
+                    {
+                        if (IsPlantingEmberSeed(pawns[i].CurJob) && pawns[i].CurJob.targetA.Thing.Spawned) { count--; }
+                    }
+                }
+            }
+
+            foreach (var thing in map.listerThings.ThingsInGroup(ThingRequestGroup.MinifiedThing))
+            {
+                if (thing is MinifiedThing mini && mini.InnerThing?.def == VVThingDefOf.VV_EmberBloom && _owner.Stock.IsNestOwned(mini)
+                    && InstallBlueprintUtility.ExistingBlueprintFor(mini) == null)
+                {
+                    count++;
+                }
+            }
+
+            return count + OutdoorEmbersToMove().Count;
+        }
+
+        // 둥지가 둘 잔불꽃보다 빈 화분이 있는 잔불꽃 없는 방이 적으면, 빈 화분이 없는 잔불꽃 없는 방(증축 방 등)의 벽 쪽 칸에 밀랍 화분을 하나 짓는다
+        // (초기 설비의 첫 화분과 같다). 둘 잔불꽃이 없으면 짓지 않는다.
+        private bool TryPlanEmberPot()
+        {
+            var waiting = EmbersToPlace();
+            if (waiting <= 0) { return false; }
+
+            var emberRooms = EmberRooms();
+            Room target = null;
+            foreach (var room in Territory.Rooms)
+            {
+                if (emberRooms.Contains(room)) { continue; }
+                if (HasFreeNestPot(room))
+                {
+                    waiting--;
+                    continue;
+                }
+                if (target == null) { target = room; }
+            }
+            if (waiting <= 0 || target == null) { return false; }
+
+            foreach (var cell in WallSideRoomCells(target))
+            {
+                if (TryPlace(VVThingDefOf.VV_ArcanePlantPot, cell, Rot4.North, VVThingDefOf.VV_Viviwax) != null) { return true; }
+            }
+            return false;
+        }
+
+        private bool HasFreeNestPot(Room room)
+        {
+            var map = Map;
+            foreach (var building in map.listerBuildings.allBuildingsNonColonist)
+            {
+                if (!(building is ArcanePlantPot pot) || pot.Faction != Faction || pot.Position.GetRoom(map) != room) { continue; }
+                if (pot.Position.GetFirstThing<ArcanePlant>(map) == null) { return true; }
+            }
+            return false;
         }
 
         // 바깥 마법식물(풍년화 등)을 둘 칸: 바깥 씨앗 자리(JobGiver_ViviNestPlantSeed)처럼 둥지 반경 12칸 안 바깥 빈 땅 중 비옥도가 가장 높은 칸
@@ -340,6 +512,7 @@ namespace VVRace
             return false;
         }
 
+        // 한가한 어른: 산책·낮잠·빈둥거리기 중인 구성원(편자 막대가 없을 때 놀이 묶음은 낮잠·빈둥거리기만 고른다)
         private int IdleMemberCount()
         {
             var count = 0;
@@ -349,7 +522,7 @@ namespace VVRace
             foreach (var pawn in pawns)
             {
                 var job = pawn.CurJobDef;
-                if (pawn.DevelopmentalStage.Adult() && (job == JobDefOf.GotoWander || job == JobDefOf.Wait_Wander))
+                if (pawn.DevelopmentalStage.Adult() && (job == JobDefOf.GotoWander || job == JobDefOf.Wait_Wander || job == VVJobDefOf.VV_ViviNestNap || job == VVJobDefOf.VV_ViviNestLoaf))
                 {
                     count++;
                 }
@@ -572,25 +745,33 @@ namespace VVRace
         // 방 안에서 벽에 붙은 칸(가구 자리). 문 옆과 방 한가운데 통로는 비운다.
         private IEnumerable<IntVec3> WallSideRoomCells()
         {
-            var map = Map;
             foreach (var room in Territory.Rooms)
             {
-                foreach (var cell in room.Cells)
+                foreach (var cell in WallSideRoomCells(room))
                 {
-                    if (!IsFreeCell(cell, allowPlants: false)) { continue; }
-
-                    var touchesWall = false;
-                    foreach (var adj in GenAdj.CardinalDirections)
-                    {
-                        var edifice = (cell + adj).GetEdifice(map);
-                        if (edifice != null && edifice.def.passability == Traversability.Impassable)
-                        {
-                            touchesWall = true;
-                            break;
-                        }
-                    }
-                    if (touchesWall) { yield return cell; }
+                    yield return cell;
                 }
+            }
+        }
+
+        private IEnumerable<IntVec3> WallSideRoomCells(Room room)
+        {
+            var map = Map;
+            foreach (var cell in room.Cells)
+            {
+                if (!IsFreeCell(cell, allowPlants: false)) { continue; }
+
+                var touchesWall = false;
+                foreach (var adj in GenAdj.CardinalDirections)
+                {
+                    var edifice = (cell + adj).GetEdifice(map);
+                    if (edifice != null && edifice.def.passability == Traversability.Impassable)
+                    {
+                        touchesWall = true;
+                        break;
+                    }
+                }
+                if (touchesWall) { yield return cell; }
             }
         }
 
@@ -688,9 +869,14 @@ namespace VVRace
                 }
             }
 
+            MarkConstructionsDirty();
+            return GenConstruct.PlaceBlueprintForBuild(def, cell, map, rot, Faction, stuff);
+        }
+
+        private void MarkConstructionsDirty()
+        {
             _resourceNeedTick = -99999;
             _constructionCacheTick = -99999;
-            return GenConstruct.PlaceBlueprintForBuild(def, cell, map, rot, Faction, stuff);
         }
 
         private bool HasNestConstructionAt(IntVec3 cell)

@@ -64,6 +64,22 @@
     <ifFlyingKeepFlying>true</ifFlyingKeepFlying>
   </JobDef>
 
+  <!-- 둥지 놀이: 낮에 졸리면 편한 기온의 둥지 방 바닥에서 잠깐 잔다(바닐라 눕기 잡, 보고 문자열은 잡 기버가 덮어 쓴다) -->
+  <JobDef>
+    <defName>VV_ViviNestNap</defName>
+    <driverClass>JobDriver_LayDown</driverClass>
+    <reportString>taking a nap.</reportString>
+    <casualInterruptible>true</casualInterruptible>
+  </JobDef>
+
+  <!-- 둥지 놀이: 둥지 방이나 그 둘레의 한 자리에서 멍하니 서 있거나 곁의 구성원과 어울린다(바닐라 모임의 서 있기 잡) -->
+  <JobDef>
+    <defName>VV_ViviNestLoaf</defName>
+    <driverClass>JobDriver_GotoAndStandSociallyActive</driverClass>
+    <reportString>lazing around.</reportString>
+    <casualInterruptible>true</casualInterruptible>
+  </JobDef>
+
   <!-- 곰·말벌이 유인통 미끼를 먹어 치운다 -->
   <JobDef>
     <defName>VV_DevourBait</defName>

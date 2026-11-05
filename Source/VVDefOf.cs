@@ -89,6 +89,8 @@ namespace VVRace
         public static JobDef VV_ViviNestGatherHoney;
         public static JobDef VV_ViviNestGatherPollen;
         public static JobDef VV_ViviNestGatherPropolis;
+        public static JobDef VV_ViviNestNap;
+        public static JobDef VV_ViviNestLoaf;
         public static JobDef Play_Horseshoes;
     }
 

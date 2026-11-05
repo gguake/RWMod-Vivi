@@ -39,6 +39,20 @@ namespace VVRace
                     new[] { typeof(IntVec3), typeof(int), typeof(ThingPlaceMode), typeof(Thing).MakeByRefType(), typeof(System.Action<Thing, int>) }),
                 postfix: new HarmonyMethod(typeof(BeekeepingPatch), nameof(Pawn_CarryTracker_TryDropCarriedThing_Postfix)));
 
+            // 둥지 비비가 만들기 시작한 미완성품(바닐라가 만든 비비를 정하고 작업 자리 칸에 바로 놓는다)을 둥지 몫으로 잡는다.
+            // 잡지 않으면 금지 패치가 둥지 비비에게 감춰, 오래 걸리는 제작(새총)이 바닐라 재검토(작업 3000틱 뒤 1000틱마다)에서 끊기면
+            // 시작한 비비도 이어 만들지 못한 채 놀았다(자동 테스트 p2b W8: 미완성품이 금지된 채 남은 작업 463에서 하루 넘게 멈춤).
+            ViviHarmonyPatcher.TryPatch(harmony, "UnfinishedThing.Creator (vivi nest ownership)",
+                AccessTools.PropertySetter(typeof(UnfinishedThing), nameof(UnfinishedThing.Creator)),
+                postfix: new HarmonyMethod(typeof(BeekeepingPatch), nameof(UnfinishedThing_SetCreator_Postfix)));
+
+            // 둥지 세력 건물을 포장하면(바깥에서 자란 잔불꽃을 다시 설치 청사진으로 방 화분에 옮길 때 등) 그 포장을 둥지 몫으로 잡는다.
+            // 바닐라는 포장을 그 칸에 그냥 놓으므로 잡지 않으면 둥지 비비에게 금지되고 정착민이 옮겨 간다.
+            ViviHarmonyPatcher.TryPatch(harmony, "MinifyUtility.MakeMinified (vivi nest ownership)",
+                AccessTools.Method(typeof(MinifyUtility), nameof(MinifyUtility.MakeMinified)),
+                prefix: new HarmonyMethod(typeof(BeekeepingPatch), nameof(MinifyUtility_MakeMinified_Prefix)),
+                postfix: new HarmonyMethod(typeof(BeekeepingPatch), nameof(MinifyUtility_MakeMinified_Postfix)));
+
             // 바닐라는 플레이어 폰에게만 로드 보고를 보여 주므로 둥지 비비 정보창에 경계심 줄을 붙인다.
             ViviHarmonyPatcher.TryPatch(harmony, "Pawn.GetInspectString (vivi nest wariness)",
                 AccessTools.Method(typeof(Pawn), nameof(Pawn.GetInspectString)),
@@ -88,6 +102,28 @@ namespace VVRace
             if (__result && resultingThing != null)
             {
                 __instance.pawn?.GetNestLordJob()?.MarkDropped(resultingThing);
+            }
+        }
+
+        private static void UnfinishedThing_SetCreator_Postfix(UnfinishedThing __instance, Pawn value)
+        {
+            value?.GetNestLordJob()?.MarkOwned(__instance);
+        }
+
+        // 포장하면 건물이 맵에서 빠지므로 포장 전에 맵을 기억해 둔다.
+        private static void MinifyUtility_MakeMinified_Prefix(Thing thing, out Map __state)
+        {
+            __state = thing?.MapHeld;
+        }
+
+        private static void MinifyUtility_MakeMinified_Postfix(MinifiedThing __result, Map __state)
+        {
+            var faction = __result?.InnerThing?.Faction;
+            if (__state == null || !faction.IsWanderingViviFaction()) { return; }
+
+            if (BeekeepingUtility.GetNestLord(__state)?.LordJob is LordJob_ViviNest nest && nest.Faction == faction)
+            {
+                nest.MarkOwned(__result);
             }
         }
 

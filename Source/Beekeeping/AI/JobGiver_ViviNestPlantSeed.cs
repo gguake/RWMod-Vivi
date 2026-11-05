@@ -6,8 +6,10 @@ using Verse.AI;
 namespace VVRace
 {
     // 둥지 몫 마법식물 씨앗을 기존 씨앗 심기 잡으로 심는다.
-    // 생존용 꽃(잔불꽃)은 방 안 둥지 화분에, 나머지(미지의 씨앗 등)는 둥지 가까이 새싹이 자랄 만큼 마나가 있는 바깥 땅에 심는다.
+    // 생존용 꽃(잔불꽃)은 둥지 방 화분에(잔불꽃이 없는 방부터, ViviNestPlanner.FindEmberPotCell), 나머지(미지의 씨앗 등)는 둥지 가까이 새싹이 자랄 만큼 마나가 있는 바깥 땅에 심는다.
+    // 화분은 잔불꽃만 쓴다(미지의 씨앗은 전투·장식 식물로도 자라므로 방 화분을 차지하지 않게 바깥에 심는다).
     // 서리꽃은 방을 얼리므로 화분에 심지 않는다(바깥에 심는다). 정착대가 가져오는 잔불꽃·풍년화는 씨앗이 아니라 포장된 식물이라 설계자가 설치한다(ViviNestPlanner).
+    // 잔불꽃 없는 방에 빈 화분이 없으면 설계자가 화분을 지으므로 씨앗은 그때까지 둥지에 남는다.
     public class JobGiver_ViviNestPlantSeed : ThinkNode_JobGiver
     {
         // 포장 식물을 바깥에 설치할 자리도 같은 반경·비옥도 하한을 쓴다(ViviNestPlanner.FindOutdoorInstallCell).
@@ -89,17 +91,7 @@ namespace VVRace
         private static IntVec3 FindPotCell(LordJob_ViviNest nest, CompArcaneSeed comp, Pawn pawn)
         {
             var map = pawn.Map;
-            foreach (var building in map.listerBuildings.allBuildingsNonColonist)
-            {
-                if (!(building is ArcanePlantPot pot) || pot.Faction != nest.Faction || !nest.Territory.IsRoomCell(pot.Position)) { continue; }
-
-                var cell = pot.Position;
-                if (cell.GetFirstThing<ArcanePlant>(map) != null || cell.GetFirstThing<ArcanePlant_Seedling>(map) != null) { continue; }
-                if (!comp.CanSowAt(cell, map).Accepted || !pawn.CanReserveAndReach(cell, PathEndMode.Touch, Danger.Some)) { continue; }
-
-                return cell;
-            }
-            return IntVec3.Invalid;
+            return nest.Planner.FindEmberPotCell(cell => comp.CanSowAt(cell, map).Accepted && pawn.CanReserveAndReach(cell, PathEndMode.Touch, Danger.Some), emberlessOnly: false);
         }
 
         // 새싹이 자랄 만큼 환경 마나가 있는 칸 중 비옥도가 가장 높은 칸(같으면 마나가 많은 칸). 그런 칸이 없으면 씨앗은 둥지에 남겨 둔다.
