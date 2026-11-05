@@ -317,6 +317,8 @@
     <Compile Include="Beekeeping\AI\JobGiver_ViviNestTend.cs" />
     <Compile Include="Beekeeping\AI\JobGiver_ViviNestSeekSafeTemperature.cs" />
     <Compile Include="Beekeeping\AI\JobGiver_ViviNestRescue.cs" />
+    <Compile Include="Beekeeping\AI\JobGiver_ViviNestFeedPatient.cs" />
+    <Compile Include="Beekeeping\AI\JobGiver_ViviNestLayEgg.cs" />
     <Compile Include="Beekeeping\AI\JobGiver_ViviNestHarvestHealroot.cs" />
     <Compile Include="Beekeeping\AI\JobGiver_ViviNestPlantSeed.cs" />
     <Compile Include="Beekeeping\AI\JobGiver_ViviNestGarden.cs" />

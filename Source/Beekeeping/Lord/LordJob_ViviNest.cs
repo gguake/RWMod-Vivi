@@ -369,6 +369,16 @@ namespace VVRace
             return false;
         }
 
+        // 둥지 비비의 침대: 자기 세력 침대(바닐라 FindBedFor). 둥지 부화기는 알과 아기(아기 침대)만 쓰고 어린이는 둥지 방 바닥에서 잔다.
+        // 비비 어린이(몸 크기 0.28)는 부화기(아기 침대, 0.3 이하)에 들어가 계측(probe_growth)에서 낮잠·밤잠마다 부화기를 다시 차지했다
+        // (바닐라는 생일마다 소유를 풀 뿐이다). 어린이 시기(12살까지, 약 45일) 내내 하나뿐인 부화기를 쥐어 로열이 알을 못 낳았다
+        // (장기 계측: 온대 60일 내내 6명, 로열 알 게이지가 40일 동안 가득 찬 채).
+        public Building_Bed FindBedFor(Pawn pawn)
+        {
+            var bed = RestUtility.FindBedFor(pawn);
+            return bed is ViviEggHatchery && !pawn.DevelopmentalStage.Baby() ? null : bed;
+        }
+
         // 잠자리는 편한 기온의 둥지 방에서 고른다. 증축 방에는 잔불꽃이 없어 겨울에 영하로 내려가는데 방을 가리지 않고 골랐더니,
         // 그 방에서 자던 아이가 동상으로 죽었다(장기 계측: 온대림 겨울, 증축 방 -12°C).
         public bool TryFindSleepSpot(Pawn pawn, out IntVec3 cell) => TryFindRoomCell(pawn, ComfortableRooms(pawn), out cell);

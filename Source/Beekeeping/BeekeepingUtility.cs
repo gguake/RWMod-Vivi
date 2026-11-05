@@ -288,6 +288,13 @@ namespace VVRace
 
         public static LordJob_ViviNest GetNestLordJob(this Pawn pawn) => pawn.GetLord()?.LordJob as LordJob_ViviNest;
 
+        // 누군가 먹여 줘야 하는 둥지 구성원: 쓰러진 둥지 비비(아기 제외, 아기는 육아의 젖병 먹이기가 맡는다).
+        // 둥지 먹이기 잡 기버가 대상을 고르고, 바닐라 환자 먹이기 잡은 이 판정이 참인 동안 이어 간다(BeekeepingPatch).
+        public static bool NeedsNestFeeding(Pawn pawn)
+        {
+            return pawn.Downed && pawn.needs?.food != null && !pawn.DevelopmentalStage.Baby() && pawn.Faction.IsWanderingViviFaction() && pawn.GetNestLordJob() != null;
+        }
+
         // 하위 그래프 토일을 출발점에 더할 때 이미 넣은 토일이 겹치면 바닐라가 오류를 남긴다.
         public static void AddSourcesDistinct(Transition transition, IEnumerable<LordToil> toils)
         {

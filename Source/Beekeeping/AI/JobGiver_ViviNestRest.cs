@@ -41,8 +41,8 @@ namespace VVRace
             var rest = pawn.needs?.rest;
             if (rest == null || RestUtility.DisturbancePreventsLyingDown(pawn)) { return null; }
 
-            // 아기·어린이는 둥지 부화기(아기 침대)를 쓴다. 침대는 자기 세력 것만 고른다.
-            var bed = RestUtility.FindBedFor(pawn);
+            // 침대는 자기 세력 것만 고르고, 둥지 부화기(아기 침대)는 알과 아기 몫이라 어린이는 둥지 방 바닥에서 잔다(LordJob_ViviNest.FindBedFor).
+            var bed = nest.FindBedFor(pawn);
             if (bed != null)
             {
                 return JobMaker.MakeJob(JobDefOf.LayDown, bed);

@@ -4,7 +4,7 @@ using Verse.AI;
 
 namespace VVRace
 {
-    // 놀이 묶음의 낮잠: 졸리면(바닐라 잠들기 조건, 휴식 75% 미만) 밤잠과 같은 자리 고르기(편한 기온의 둥지 방 바닥, 자기 세력 침대가 있으면 침대)로
+    // 놀이 묶음의 낮잠: 졸리면(바닐라 잠들기 조건, 휴식 75% 미만) 밤잠과 같은 자리 고르기(편한 기온의 둥지 방 바닥, 자기 세력 침대가 있으면 침대, 부화기는 빼고)로
     // 낮에 잠깐 잔다(바닐라 눕기 잡). 깨거나 낮잠 시간이 지나면 끝나고, 눕기 잡은 211틱마다 다시 생각하므로 일이 생기면 바로 일어난다.
     public class JobGiver_ViviNestNap : ThinkNode_JobGiver
     {
@@ -27,7 +27,7 @@ namespace VVRace
             if (!RestUtility.CanFallAsleep(pawn) || RestUtility.DisturbancePreventsLyingDown(pawn)) { return null; }
 
             Job job;
-            var bed = RestUtility.FindBedFor(pawn);
+            var bed = nest.FindBedFor(pawn);
             if (bed != null)
             {
                 job = JobMaker.MakeJob(VVJobDefOf.VV_ViviNestNap, bed);

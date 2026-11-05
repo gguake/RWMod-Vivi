@@ -166,7 +166,8 @@
               <subNodes>
                 <li Class="JobGiver_GetFood" />
                 <li Class="VVRace.JobGiver_ViviNestRest" />
-                <li Class="VVRace.JobGiver_LayViviEgg" />
+                <!-- 알 낳기(기존 잡 기버): 식량이 넉넉하고 새 알까지 방 수용량 안이거나 증축할 자리가 있을 때만 -->
+                <li Class="VVRace.JobGiver_ViviNestLayEgg" />
               </subNodes>
             </li>
           </subNodes>
@@ -183,6 +184,8 @@
             <li Class="VVRace.JobGiver_ViviNestRemoveCorpse" />
             <!-- 다친 구성원 치료(쓰러졌거나 누운 환자, 둥지 몫 약이 있으면 쓴다) -->
             <li Class="VVRace.JobGiver_ViviNestTend" />
+            <!-- 쓰러진 배고픈 구성원(아기 제외)에게 둥지 몫 음식을 먹인다(바닐라 환자 먹이기 잡) -->
+            <li Class="VVRace.JobGiver_ViviNestFeedPatient" />
             <li Class="VVRace.JobGiver_ViviNestChildcare">
               <royal>true</royal>
             </li>

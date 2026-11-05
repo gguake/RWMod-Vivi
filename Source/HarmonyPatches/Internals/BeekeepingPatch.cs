@@ -66,6 +66,21 @@ namespace VVRace
             ViviHarmonyPatcher.TryPatch(harmony, "Building.ClaimableBy (vivi nest)",
                 AccessTools.Method(typeof(Building), nameof(Building.ClaimableBy)),
                 postfix: new HarmonyMethod(typeof(BeekeepingPatch), nameof(Building_ClaimableBy_Postfix)));
+
+            // 바닐라 환자 먹이기 잡(JobDriver_FoodFeedPatient)은 환자가 누군가 먹여야 하는 상태가 아니면 바로 끝나는데, 바닐라 판정은 플레이어 세력·손님이
+            // 침대에 누운 경우만 본다. 쓰러진 둥지 구성원(아기 제외)도 그 상태로 쳐 둥지 먹이기 잡(JobGiver_ViviNestFeedPatient)이 끝까지 먹이게 한다.
+            // 1.7에서 이 판정은 그 잡과 바닐라 식사 잡 기버의 우선도(스스로 먹으러 가지 않음, 쓰러진 폰은 어차피 못 간다)에만 쓰인다.
+            ViviHarmonyPatcher.TryPatch(harmony, "FoodUtility.ShouldBeFedBySomeone (vivi nest patient)",
+                AccessTools.Method(typeof(FoodUtility), nameof(FoodUtility.ShouldBeFedBySomeone)),
+                postfix: new HarmonyMethod(typeof(BeekeepingPatch), nameof(FoodUtility_ShouldBeFedBySomeone_Postfix)));
+        }
+
+        private static void FoodUtility_ShouldBeFedBySomeone_Postfix(Pawn pawn, ref bool __result)
+        {
+            if (!__result && pawn != null && BeekeepingUtility.NeedsNestFeeding(pawn))
+            {
+                __result = true;
+            }
         }
 
         private static void Pawn_GetInspectString_Postfix(Pawn __instance, ref string __result)

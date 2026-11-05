@@ -13,12 +13,26 @@ namespace VVRace
         public const int PlanInterval = 2500;
 
         public const int CellsPerShelf = 12;
+        // 성장(사용자 요구 "확장하는지"): 목표 성장 속도는 로열의 알 속도(알 게이지 하루 0.125, 8일에 하나)다.
+        // 알은 7~13일(따뜻한 실내 보너스로 장기 계측 6~8일)에 깨고, 아기는 아기 시기 내내 부화기를 아기 침대로 쓴다
+        // (어린이 노화 4배 × 비비 유전자 2~3배로 약 18~22일). 부화기 하나는 알·아기로 25~30일 쓰이므로 8일마다 낳으려면 부화기가 3~4개 든다.
+        // 방 크기 제한(20칸당 하나)으로 처음 방(36칸)에는 하나뿐이지만, 증축은 앞으로 깰 구성원까지 세어(ExpectedMembers) 아기가 깨기 전에 하므로
+        // 첫 아기가 부화기를 쓰는 동안 다음 알 게이지가 차면 증축 방(47칸)이 서서 넷까지 짓는다.
+        // 어린이(몸 크기 0.28)도 부화기(아기 침대, 0.3 이하)에 들어가지만 쓰지 않는다(LordJob_ViviNest.FindBedFor): 계측(probe_growth)에서 어린이가 된 첫 아기가
+        // 낮잠·밤잠마다 부화기를 다시 차지했고(바닐라는 생일마다 소유를 풀 뿐이다), 어린이 시기(12살까지, 약 45일) 동안 로열이 알을 못 낳았다.
         public const int CellsPerHatchery = 20;
         public const int MaxHatcheries = 4;
         public const int FloorTilesPerProject = 4;
         public const int WaxForFloor = 40;
         public const int IdleForHorseshoes = 2;
+        // 방 수용량: 방 6칸당 1명(앞으로 깰 구성원 포함). 넘으면 증축하고, 증축할 자리가 없으면 수용량을 넘겨 알을 낳지 않는다(EggAllowed).
         public const int RoomCellsPerMember = 6;
+        // 알 낳기 식량 하한: 남은 둥지 식량이 이만큼(일)보다 적으면 알을 낳지 않는다. 알은 7일 넘게 지나야 깨고 깬 아기도 둥지 꿀을 먹으므로
+        // 식량이 바닥나 가는 둥지가 식구를 늘려 굶주림 이주(1일 미만)에 몰리지 않게 한다. 장기 계측에서 정착 5일 뒤 둥지 식량은 대개 6~25일 치였다(한랭 겨울 끝 6일).
+        // 알은 꿀 꽃이 자라는 철(FlowerSeason)에만 낳는다. 꽃이 자라지 않는 겨울에는 둥지 식량이 비축 꿀로만 줄어든다.
+        // 장기 계측(final_cold60 북방림, 겨울 바깥 -48°C): 가을·겨울(16~42일)에도 알을 낳아 6→10명이 됐고, 비축 꿀(걸러낸 꿀 831·경단 1012)이
+        // 겨울 동안 바닥나 50일째 굶주림으로 떠났다(식량 하한 5일은 알을 낳을 때 넘었다). 예전 한랭 계측은 겨울 내내 5~7명으로 식량 7.7일 치 이상을 지켰다.
+        public const float MinFoodDaysForEgg = 5f;
 
         private const float OutdoorBuildRadius = 8f;
         // 시체를 버릴 거리(둥지 중심에서). 무리가 오가는 반경(24칸) 안에서 둥지와 떨어진 곳
@@ -35,6 +49,9 @@ namespace VVRace
         private bool _initialFacilitiesPlanned;
         private List<IntVec3> _expansionInterior = new List<IntVec3>();
         private IntVec3 _expansionDoor = IntVec3.Invalid;
+        // 계획 주기마다 다시 잰다(저장하지 않는다): 로열이 알을 낳아도 되는지, 마지막 증축 자리 찾기가 실패했는지
+        private bool _eggAllowed = true;
+        private bool _noExpansionSite;
 
         private readonly Dictionary<ThingDef, int> _resourceNeed = new Dictionary<ThingDef, int>();
         private int _resourceNeedTick = -99999;
@@ -62,8 +79,12 @@ namespace VVRace
             }
         }
 
+        public bool EggAllowed => _eggAllowed;
+
         public void Tick()
         {
+            _eggAllowed = ComputeEggAllowed();
+            ReleaseHatcheryOwners();
             RepairBoundary();
             PlanInstalls();
             _owner.Garden.EnsureCottonCells();
@@ -77,11 +98,12 @@ namespace VVRace
                 if (PlanInitialFacilities()) { return; }
             }
 
-            // 잔불꽃은 구조물(둥지 방)에 먼저 둔다: 둘 잔불꽃이 있는데 잔불꽃 없는 방에 빈 화분이 없으면 다른 공사보다 먼저 화분을 짓는다.
+            // 잔불꽃은 구조물(둥지 방)에 먼저 둔다: 둘 잔불꽃이 받아 줄 빈 화분(방마다 상한까지)보다 많으면 다른 공사보다 먼저 화분을 짓는다.
             if (TryPlanEmberPot()) { return; }
             if (TryPlanExpansion()) { return; }
-            if (TryPlanShelf()) { return; }
+            // 알 게이지가 찬 로열이 낳을 부화기는 선반보다 먼저 짓는다(증축 뒤 늘어난 선반 몫을 다 지을 때까지 기다리지 않게).
             if (TryPlanHatchery()) { return; }
+            if (TryPlanShelf()) { return; }
             if (TryPlanFloor()) { return; }
             if (TryPlanHorseshoesPin()) { return; }
         }
@@ -115,8 +137,8 @@ namespace VVRace
         // 둥지 몫 포장 마법식물(정착대가 가져온 잔불꽃·풍년화)은 바닐라 설치 청사진(플레이어의 다시 심기와 같은 것)을 놓아 다 자란 채로 세운다.
         // 포장을 가져가 그 자리에 세우는 일은 바닐라 건설 워크기버가 한다(설치 청사진의 자재 운반이 곧 설치다). 화분 위 설치도 기존 마법식물 시스템이 받는다.
         // 경계 수리처럼 다른 공사를 기다리지 않고, 설치 청사진은 다른 공사를 막지 않는다(AnyPendingProject).
-        // 생존용 꽃(잔불꽃)은 둥지 방 화분에(잔불꽃이 없는 방부터, FindEmberPotCell), 나머지는 비옥한 바깥 땅에 둔다. 둘 곳이 없으면 포장한 채 둥지에 남겨 둔다(씨앗과 같다).
-        // 바깥에서 자란 둥지 잔불꽃(미지의 씨앗은 기존 마법식물 시스템대로 무작위 마법식물로 자란다)은 잔불꽃이 없는 방이 있으면
+        // 생존용 꽃(잔불꽃)은 둥지 방 화분에(잔불꽃이 없는 방부터, 그다음 추운 방부터, FindEmberPotCell), 나머지는 비옥한 바깥 땅에 둔다. 둘 곳이 없으면 포장한 채 둥지에 남겨 둔다(씨앗과 같다).
+        // 바깥에서 자란 둥지 잔불꽃(미지의 씨앗은 기존 마법식물 시스템대로 무작위 마법식물로 자란다)은 방마다 상한(MaxEmberPots)까지 빈 화분이 있으면
         // 바닐라 다시 설치 청사진(플레이어의 다시 심기와 같다)으로 그 방 화분에 옮긴다. 뽑아 든 포장은 둥지 몫이다(BeekeepingPatch, MakeMinified).
         private void PlanInstalls()
         {
@@ -129,7 +151,7 @@ namespace VVRace
 
                 var def = plant.def;
                 var cell = JobGiver_ViviNestPlantSeed.IsPotPlant(def)
-                    ? FindEmberPotCell(c => ArcanePlantUtility.CanPlaceArcanePlantToCell(map, c, def).Accepted, emberlessOnly: false)
+                    ? FindEmberPotCell(c => ArcanePlantUtility.CanPlaceArcanePlantToCell(map, c, def).Accepted)
                     : FindOutdoorInstallCell(def);
                 if (!cell.IsValid) { continue; }
 
@@ -139,7 +161,7 @@ namespace VVRace
 
             foreach (var plant in OutdoorEmbersToMove())
             {
-                var cell = FindEmberPotCell(c => ArcanePlantUtility.CanPlaceArcanePlantToCell(map, c, plant.def, plant).Accepted, emberlessOnly: true);
+                var cell = FindEmberPotCell(c => ArcanePlantUtility.CanPlaceArcanePlantToCell(map, c, plant.def, plant).Accepted);
                 if (!cell.IsValid) { break; }
 
                 MarkConstructionsDirty();
@@ -147,22 +169,36 @@ namespace VVRace
             }
         }
 
-        // 잔불꽃은 구조물(둥지 방)마다 먼저 둔다(사용자 요구 "구조물에 잔불꽃을 우선 배치"). 잔불꽃의 열은 제 방만 데우므로
-        // 증축 방에 잔불꽃이 없으면 겨울에 영하로 내려간다(장기 계측: 온대 겨울 증축 방 -17°C). 화분은 잔불꽃만 쓰고(씨앗 심기·설치 모두)
+        // 잔불꽃은 구조물(둥지 방)에 먼저 둔다(사용자 요구 "구조물에 잔불꽃을 우선 배치"). 잔불꽃의 열은 제 방만 데우므로
+        // 증축 방에 잔불꽃이 없으면 겨울에 영하로 내려간다(장기 계측: 온대 겨울 증축 방 -17°C). 잔불꽃이 없는 방부터 하나씩 두고, 남는 잔불꽃
+        // (바깥에서 자란 것·씨앗·포장)도 방마다 상한(MaxEmberPots)까지 가장 추운 방부터 둔다. 화분은 잔불꽃만 쓰고(씨앗 심기·설치 모두)
         // 다른 마법식물(미지의 씨앗·전투·장식 식물)은 바깥 땅에 둔다.
         // 증축 방에는 방출기를 두지 않는다: 방 안 마법식물은 저장 마나가 절반 아래면 예비분 제한 없이 비료를 받으므로(JobGiver_ViviNestFertilizePlant)
         // 잔불꽃은 마나 소모(하루 200)만큼 비료 하루 2개로 지내지만, 방출기는 하루 8개를 태워 마나 대부분을 둘레로 흩는다.
-        private readonly HashSet<Room> _emberRooms = new HashSet<Room>();
+        // 방마다 잔불꽃(화분) 상한은 방 18칸당 하나(최소 하나)다. 잔불꽃 하나의 열(초당 19)은 방 칸 수로 나뉘어 오르고 바닐라 방 기온은 지붕·벽·열린 문으로
+        // 바깥과 섞인다. 장기 계측(한랭 60일): 잔불꽃 하나인 처음 방(36칸)·육각 증축 방(47칸)이 바깥 -24~-27°C에 12°C까지 내려갔다(바깥보다 35~37°C 높음).
+        // 잔불꽃이 둘이면 열이 두 배라 잔불꽃이 데우는 상한(29°C)을 지키므로 두 방은 둘, 사각 증축 방(25칸)은 하나까지 둔다.
+        public const int CellsPerEmberPot = 18;
+
+        private readonly Dictionary<Room, int> _emberCounts = new Dictionary<Room, int>();
         private readonly List<ArcanePlant> _tmpOutdoorEmbers = new List<ArcanePlant>();
+        private readonly List<Room> _tmpPotRooms = new List<Room>();
+        // 화분 청사진을 놓을 벽 쪽 칸이 없던 잔불꽃 없는 방(저장하지 않는다, 계획 주기마다 다시 해 본다). 이런 방은 다른 방의 빈 화분을 막지 않는다.
+        private readonly HashSet<Room> _noPotRooms = new HashSet<Room>();
 
         private static ThingDef EmberSeedDef => VVThingDefOf.VV_EmberBloom.GetModExtension<ArcaneSeedExtension>()?.seedDef;
 
-        // 잔불꽃을 둘 둥지 화분 칸: 잔불꽃이 없는 둥지 방의 빈 화분을 먼저, emberlessOnly가 아니면 그다음 다른 둥지 방의 빈 화분(추운 방부터).
+        public static int MaxEmberPots(Room room) => System.Math.Max(1, room.CellCount / CellsPerEmberPot);
+
+        // 잔불꽃을 둘 둥지 화분 칸: 잔불꽃이 없는 둥지 방이 있으면 그 방들의 빈 화분만 쓰고, 그 방에 빈 화분이 없으면 설계자가 화분을 지을 때까지 기다린다.
+        // 그다음(잔불꽃 없는 방이 없거나 화분을 지을 자리가 없으면) 잔불꽃이 상한보다 적은 다른 방의 빈 화분을 쓴다. 같은 쪽에서는 추운 방부터.
+        // 자동 테스트(final_full3 p3 B12): 잔불꽃이 이미 있는 처음 방의 빈 화분이 바깥 잔불꽃을 먼저 받아 가 잔불꽃 없는 증축 방에는 끝내 화분을 짓지 않았다.
         // 빈 화분은 식물·새싹이 없는 둥지 세력 화분이고, 설치 청사진이 놓인 칸 등은 validator(기존 마법식물 놓기·씨앗 심기 판정)가 거른다.
-        public IntVec3 FindEmberPotCell(System.Predicate<IntVec3> validator, bool emberlessOnly)
+        public IntVec3 FindEmberPotCell(System.Predicate<IntVec3> validator)
         {
             var map = Map;
-            var emberRooms = EmberRooms();
+            var counts = EmberCounts();
+            var emberlessFirst = AnyOpenEmberlessRoom(counts);
             var best = IntVec3.Invalid;
             var bestEmberless = false;
             var bestTemperature = float.MaxValue;
@@ -174,10 +210,13 @@ namespace VVRace
                 if (cell.GetFirstThing<ArcanePlant>(map) != null) { continue; }
 
                 var room = cell.GetRoom(map);
-                var emberless = room != null && !emberRooms.Contains(room);
-                if (emberlessOnly && !emberless) { continue; }
+                if (room == null) { continue; }
+                var embers = EmberCount(counts, room);
+                if (embers >= MaxEmberPots(room)) { continue; }
 
-                var temperature = room?.Temperature ?? 0f;
+                var emberless = embers == 0;
+                if (emberlessFirst && !emberless) { continue; }
+                var temperature = room.Temperature;
                 if (best.IsValid && ((bestEmberless && !emberless) || (bestEmberless == emberless && temperature >= bestTemperature))) { continue; }
                 if (!validator(cell)) { continue; }
 
@@ -188,17 +227,28 @@ namespace VVRace
             return best;
         }
 
-        // 잔불꽃이 있거나 곧 들어갈 둥지 방: 다 자란 잔불꽃, 잔불꽃 새싹(화분에 심은 잔불꽃 씨앗), 잔불꽃 설치·다시 설치 청사진, 구성원이 심으러 가는 잔불꽃 씨앗의 자리
-        private HashSet<Room> EmberRooms()
+        // 잔불꽃을 받을 수 있는 잔불꽃 없는 둥지 방이 있는지(화분을 지을 자리가 없던 방은 빼되, 그 방에 빈 화분이 있으면 FindEmberPotCell이 먼저 고른다)
+        private bool AnyOpenEmberlessRoom(Dictionary<Room, int> counts)
+        {
+            var rooms = Territory.Rooms;
+            for (int i = 0; i < rooms.Count; ++i)
+            {
+                if (EmberCount(counts, rooms[i]) == 0 && !_noPotRooms.Contains(rooms[i])) { return true; }
+            }
+            return false;
+        }
+
+        // 둥지 방마다 잔불꽃 수: 다 자란 잔불꽃, 잔불꽃 새싹(화분에 심은 잔불꽃 씨앗), 잔불꽃 설치·다시 설치 청사진, 구성원이 심으러 가는 잔불꽃 씨앗의 자리
+        private Dictionary<Room, int> EmberCounts()
         {
             var map = Map;
-            _emberRooms.Clear();
+            _emberCounts.Clear();
             foreach (var building in map.listerBuildings.allBuildingsNonColonist)
             {
                 if (building.Faction != Faction) { continue; }
                 if (building.def == VVThingDefOf.VV_EmberBloom || (building is ArcanePlant_Seedling seedling && seedling.MaturePlantDef == VVThingDefOf.VV_EmberBloom))
                 {
-                    AddEmberRoom(building.Position);
+                    AddEmber(building.Position);
                 }
             }
 
@@ -206,7 +256,7 @@ namespace VVRace
             {
                 if (thing.Faction == Faction && thing is Blueprint_Install install && install.ThingToInstall?.def == VVThingDefOf.VV_EmberBloom)
                 {
-                    AddEmberRoom(thing.Position);
+                    AddEmber(thing.Position);
                 }
             }
 
@@ -215,17 +265,22 @@ namespace VVRace
             {
                 for (int i = 0; i < pawns.Count; ++i)
                 {
-                    if (IsPlantingEmberSeed(pawns[i].CurJob)) { AddEmberRoom(pawns[i].CurJob.targetB.Cell); }
+                    if (IsPlantingEmberSeed(pawns[i].CurJob)) { AddEmber(pawns[i].CurJob.targetB.Cell); }
                 }
             }
-            return _emberRooms;
+            return _emberCounts;
         }
 
-        private void AddEmberRoom(IntVec3 cell)
+        private void AddEmber(IntVec3 cell)
         {
             var room = cell.GetRoom(Map);
-            if (room != null && Territory.Rooms.Contains(room)) { _emberRooms.Add(room); }
+            if (room != null && Territory.Rooms.Contains(room))
+            {
+                _emberCounts[room] = EmberCount(_emberCounts, room) + 1;
+            }
         }
+
+        private static int EmberCount(Dictionary<Room, int> counts, Room room) => counts.TryGetValue(room, out var count) ? count : 0;
 
         private static bool IsPlantingEmberSeed(Job job)
         {
@@ -282,43 +337,62 @@ namespace VVRace
             return count + OutdoorEmbersToMove().Count;
         }
 
-        // 둥지가 둘 잔불꽃보다 빈 화분이 있는 잔불꽃 없는 방이 적으면, 빈 화분이 없는 잔불꽃 없는 방(증축 방 등)의 벽 쪽 칸에 밀랍 화분을 하나 짓는다
-        // (초기 설비의 첫 화분과 같다). 둘 잔불꽃이 없으면 짓지 않는다.
+        // 둘 잔불꽃이 받아 줄 빈 화분보다 많으면 밀랍 화분을 하나 짓는다(초기 설비의 첫 화분과 같다). 잔불꽃이 없는 방부터: 그 방들의 빈 화분이 받고 남는
+        // 잔불꽃이 있으면 빈 화분이 없는 잔불꽃 없는 방(추운 방부터)에 짓는다. 그래도 남으면 잔불꽃·화분이 상한보다 적은 다른 방(추운 방부터)에 짓는다.
+        // 둘 잔불꽃이 없거나 모든 방이 상한이면 짓지 않는다(씨앗·포장·바깥 잔불꽃으로 남는다). 벽 쪽 칸이 없어 못 지은 잔불꽃 없는 방은 기억해 두고
+        // 그동안은 다른 방의 빈 화분을 막지 않는다(FindEmberPotCell).
         private bool TryPlanEmberPot()
         {
             var waiting = EmbersToPlace();
             if (waiting <= 0) { return false; }
 
-            var emberRooms = EmberRooms();
-            Room target = null;
-            foreach (var room in Territory.Rooms)
+            var counts = EmberCounts();
+            foreach (var emberless in new[] { true, false })
             {
-                if (emberRooms.Contains(room)) { continue; }
-                if (HasFreeNestPot(room))
+                _tmpPotRooms.Clear();
+                foreach (var room in Territory.Rooms)
                 {
-                    waiting--;
-                    continue;
-                }
-                if (target == null) { target = room; }
-            }
-            if (waiting <= 0 || target == null) { return false; }
+                    var cap = MaxEmberPots(room);
+                    var embers = EmberCount(counts, room);
+                    if (embers >= cap || (embers == 0) != emberless) { continue; }
 
-            foreach (var cell in WallSideRoomCells(target))
-            {
-                if (TryPlace(VVThingDefOf.VV_ArcanePlantPot, cell, Rot4.North, VVThingDefOf.VV_Viviwax) != null) { return true; }
+                    var pots = CountNestPots(room, out var freePots);
+                    waiting -= System.Math.Min(freePots, cap - embers);
+                    if (pots < cap && freePots == 0) { _tmpPotRooms.Add(room); }
+                }
+                if (waiting <= 0) { return false; }
+
+                _tmpPotRooms.SortBy(r => r.Temperature);
+                foreach (var room in _tmpPotRooms)
+                {
+                    foreach (var cell in WallSideRoomCells(room))
+                    {
+                        if (TryPlace(VVThingDefOf.VV_ArcanePlantPot, cell, Rot4.North, VVThingDefOf.VV_Viviwax) != null)
+                        {
+                            _noPotRooms.Remove(room);
+                            return true;
+                        }
+                    }
+                    if (emberless) { _noPotRooms.Add(room); }
+                }
             }
             return false;
         }
 
-        private bool HasFreeNestPot(Room room)
+        // 그 방의 둥지 화분 수와 그중 빈 화분(식물·새싹이 없는 것) 수
+        private int CountNestPots(Room room, out int free)
         {
             var map = Map;
+            var count = 0;
+            free = 0;
             foreach (var building in map.listerBuildings.allBuildingsNonColonist)
             {
                 if (!(building is ArcanePlantPot pot) || pot.Faction != Faction || pot.Position.GetRoom(map) != room) { continue; }
-                if (pot.Position.GetFirstThing<ArcanePlant>(map) == null) { return true; }
+
+                count++;
+                if (pot.Position.GetFirstThing<ArcanePlant>(map) == null) { free++; }
             }
-            return false;
+            return count;
         }
 
         // 바깥 마법식물(풍년화 등)을 둘 칸: 바깥 씨앗 자리(JobGiver_ViviNestPlantSeed)처럼 둥지 반경 12칸 안 바깥 빈 땅 중 비옥도가 가장 높은 칸
@@ -443,22 +517,86 @@ namespace VVRace
             return false;
         }
 
-        // 로열의 알 게이지가 다 찼는데 알을 낳을 부화기가 없으면 방 안에 부화기를 짓는다(방 크기에 맞춰 개수 제한).
+        // 로열의 알 게이지가 다 찼는데 알을 낳을 부화기가 없으면 방 안에 부화기를 짓는다(방 크기에 맞춰 개수 제한, 알을 낳아도 될 때만).
+        // 알은 19~39°C(가운데에 가까울수록 빨리 깬다)를 벗어나면 상하므로 기온이 그 가운데에 가까운 방(잔불꽃이 데우는 방)부터 고른다.
         private bool TryPlanHatchery()
         {
-            if (!AnyRoyalReadyToLay()) { return false; }
+            if (!_eggAllowed || !AnyRoyalReadyToLay()) { return false; }
 
-            var hatcheries = Map.listerBuildings.allBuildingsNonColonist.OfType<ViviEggHatchery>().Where(h => h.Faction == Faction).ToList();
+            var hatcheries = NestHatcheries();
             if (hatcheries.Any(h => h.CanLayHere)) { return false; }
 
             var roomCells = Territory.Rooms.Sum(r => r.CellCount);
             if (hatcheries.Count >= System.Math.Min(MaxHatcheries, roomCells / CellsPerHatchery)) { return false; }
 
-            foreach (var cell in WallSideRoomCells())
+            var ideal = EggIdealTemperature();
+            foreach (var room in Territory.Rooms.OrderBy(r => System.Math.Abs(r.Temperature - ideal)))
             {
-                if (TryPlace(VVThingDefOf.VV_ViviHatchery, cell, Rot4.South, null) != null) { return true; }
+                foreach (var cell in WallSideRoomCells(room))
+                {
+                    if (TryPlace(VVThingDefOf.VV_ViviHatchery, cell, Rot4.South, null) != null) { return true; }
+                }
             }
             return false;
+        }
+
+        // 부화기(아기 침대)는 알과 아기 몫이라 아기가 아닌 소유자(어린이가 된 아기)는 풀어 준다(어린이는 둥지 방 바닥에서 잔다, LordJob_ViviNest.FindBedFor).
+        // 바닐라는 생애 단계의 몸 크기 계수가 침대 한도를 넘는 생일에만 소유를 푸는데, 비비 아기가 어린이가 되는 3살 생일에는 생애 단계가 바뀌기 전에 판정해
+        // 풀리지 않았다(계측 probe_growth: 어린이가 된 뒤에도 소유, 다음 생일까지 약 5일).
+        private void ReleaseHatcheryOwners()
+        {
+            foreach (var hatchery in NestHatcheries())
+            {
+                var owners = hatchery.OwnersForReading;
+                for (int i = owners.Count - 1; i >= 0; --i)
+                {
+                    if (!owners[i].DevelopmentalStage.Baby()) { owners[i].ownership?.UnclaimBed(); }
+                }
+            }
+        }
+
+        private List<ViviEggHatchery> NestHatcheries()
+        {
+            return Map.listerBuildings.allBuildingsNonColonist.OfType<ViviEggHatchery>().Where(h => h.Faction == Faction).ToList();
+        }
+
+        // 알이 상하지 않는 기온 범위(기존 알 정의)의 가운데
+        private static float EggIdealTemperature()
+        {
+            var props = VVThingDefOf.VV_ViviEgg.GetCompProperties<CompProperties_TemperatureRuinable>();
+            return props != null ? (props.minSafeTemperature + props.maxSafeTemperature) / 2f : 29f;
+        }
+
+        // 앞으로 늘 구성원까지 센 수: 지금 구성원 + 둥지 부화기의 알 + 알 게이지가 찬 로열이 곧 낳을 알(낳아도 될 때만)
+        public int ExpectedMembers() => PendingMembers() + (_eggAllowed && AnyRoyalReadyToLay() ? 1 : 0);
+
+        // 지금 구성원 + 둥지 부화기의 알
+        private int PendingMembers()
+        {
+            var count = _owner.lord?.ownedPawns.Count ?? 0;
+            foreach (var hatchery in NestHatcheries())
+            {
+                if (hatchery.ViviEgg != null) { count++; }
+            }
+            return count;
+        }
+
+        // 로열이 알을 낳아도 되는지(JobGiver_ViviNestLayEgg): 꿀 꽃이 자라는 철이고, 둥지 식량이 MinFoodDaysForEgg 이상이며, 새 알까지 센 구성원이
+        // 방 수용량 안이거나 증축할 자리가 있을 것(마지막 증축 자리 찾기가 실패하지 않았을 것). 증축 자리가 없으면 수용량을 넘겨 낳지 않는다.
+        private bool ComputeEggAllowed()
+        {
+            if (!FlowerSeason(Map) || _owner.Production.FoodReserveDays() < MinFoodDaysForEgg) { return false; }
+
+            return (PendingMembers() + 1) * RoomCellsPerMember <= Territory.Rooms.Sum(r => r.CellCount) || !_noExpansionSite;
+        }
+
+        // 꿀 꽃이 자라는 철: 계절 기온(바닐라 SeasonalTemp, 하루 기온 출렁임을 뺀 값)이 꿀 꽃(민들레)이 자라는 기온 범위 안.
+        // 바닐라 성장 계절 판정(PlantUtility.GrowthSeasonNow)은 지금 바깥 기온을 봐서 봄·가을 밤마다 바뀌므로 계절 기온으로 본다.
+        public static bool FlowerSeason(Map map)
+        {
+            var plant = ThingDefOf.Plant_Dandelion.plant;
+            var seasonal = map.mapTemperature.SeasonalTemp;
+            return seasonal > plant.minGrowthTemperature && seasonal < plant.maxGrowthTemperature;
         }
 
         private bool AnyRoyalReadyToLay()
@@ -532,15 +670,18 @@ namespace VVRace
         #endregion
 
         #region 증축
-        // 구성원에 비해 방이 좁으면 둥지 가까운 빈터에 육각 방(안 되면 사각 방)을 크림 벽·밀랍 문으로 짓는다.
+        // 앞으로 늘 구성원(부화기의 알·곧 낳을 알 포함, ExpectedMembers)에 비해 방이 좁으면 둥지 가까운 빈터에 육각 방(안 되면 사각 방)을 크림 벽·밀랍 문으로 짓는다.
+        // 깰 아기까지 세어 미리 짓는다: 예전에는 지금 구성원만 세어 방 하나(36칸)에 6명이면 짓지 않았는데, 그때 하나뿐인 부화기를 아기가 쓰고 있어
+        // 7번째가 깨지 못했다(장기 계측: 온대 60일 내내 6명, 다른 계측 6→7에 30일).
         // 채굴이 필요한 자리(바위·광맥)와 산 지붕 아래는 후보에서 뺀다. 지붕은 방이 닫히면 둥지 지붕 잡이 얹는다.
         private bool TryPlanExpansion()
         {
             var pawns = _owner.lord?.ownedPawns;
             if (pawns == null || pawns.Count == 0) { return false; }
-            if (Territory.Rooms.Sum(r => r.CellCount) >= pawns.Count * RoomCellsPerMember) { return false; }
+            if (Territory.Rooms.Sum(r => r.CellCount) >= ExpectedMembers() * RoomCellsPerMember) { return false; }
 
-            if (!TryFindExpansionSite(out var walls, out var interior, out var door)) { return false; }
+            _noExpansionSite = !TryFindExpansionSite(out var walls, out var interior, out var door);
+            if (_noExpansionSite) { return false; }
 
             foreach (var cell in walls)
             {
