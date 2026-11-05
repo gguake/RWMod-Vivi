@@ -12,6 +12,9 @@
 <VV_ViviNestDigFertilizer.reportString>흙을 파서 마나 비료를 만드는 중.</VV_ViviNestDigFertilizer.reportString>
 <VV_ViviNestBuildRoof.reportString>지붕을 짓는 중.</VV_ViviNestBuildRoof.reportString>
 <VV_ViviNestFertilizePlant.reportString>TargetA에 마나 비료를 주는 중.</VV_ViviNestFertilizePlant.reportString>
+<VV_ViviNestGatherHoney.reportString>TargetA에서 꿀 채집 중.</VV_ViviNestGatherHoney.reportString>
+<VV_ViviNestGatherPollen.reportString>TargetA에서 꽃가루 채집 중.</VV_ViviNestGatherPollen.reportString>
+<VV_ViviNestGatherPropolis.reportString>TargetA에서 프로폴리스 채집 중.</VV_ViviNestGatherPropolis.reportString>
 
 <!-- EverflowerRitual -->
 <VV_MoveEverflower.reportString>TargetA를 옮기기 위해 공명 중.</VV_MoveEverflower.reportString>

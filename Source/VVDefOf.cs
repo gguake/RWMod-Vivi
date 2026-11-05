@@ -86,6 +86,9 @@ namespace VVRace
         public static JobDef VV_ViviNestDigFertilizer;
         public static JobDef VV_ViviNestBuildRoof;
         public static JobDef VV_ViviNestFertilizePlant;
+        public static JobDef VV_ViviNestGatherHoney;
+        public static JobDef VV_ViviNestGatherPollen;
+        public static JobDef VV_ViviNestGatherPropolis;
         public static JobDef Play_Horseshoes;
     }
 
@@ -200,7 +203,6 @@ namespace VVRace
         public static ThingDef VV_BasicWorkerCostume;
         public static ThingDef RawBerries;
         public static ThingDef VV_ViviNestWorkSpot;
-        public static ThingDef VV_ViviNestGatherSpot;
         public static ThingDef VV_Pollen;
         public static ThingDef VV_Propolis;
         public static ThingDef VV_HoneyPollenCake;

@@ -152,12 +152,12 @@ namespace VVRace
         // 바깥 마법식물(풍년화 등)을 둘 칸: 바깥 씨앗 자리(JobGiver_ViviNestPlantSeed)처럼 둥지 반경 12칸 안 바깥 빈 땅 중 비옥도가 가장 높은 칸
         // (같으면 환경 마나가 많은 칸, 비옥도 0.7 미만 제외). 다 자란 식물은 새싹처럼 제 칸 마나를 하루 80씩 받아야 자라는 것이 아니라 마나 하한은 두지 않는다.
         // 풍년화는 흙 비옥도로 마나를 만들고(비옥도 1 → 하루 150, 1.4 → 1050, 소모 300, 남는 마나는 둘레에 내놓고 제 칸 흙도 차츰 기름지게 한다)
-        // 꿀이 많이 나는 꽃이라 둥지가 거둘 수 있게 채집 자리 반경 안 칸만 쓴다. 설치하면 그 칸 식물이 지워지므로 꿀 꽃이 자라는 칸은 피한다.
+        // 꿀이 많이 나는 꽃이라 둥지가 거둘 수 있게 둥지 채집 범위 안 칸만 쓴다. 설치하면 그 칸 식물이 지워지므로 꿀 꽃이 자라는 칸은 피한다.
         private IntVec3 FindOutdoorInstallCell(ThingDef plantDef)
         {
             var map = Map;
             var mana = map.GetManaComponent();
-            var spot = _owner.Production.GatherSpot;
+            var production = _owner.Production;
             var best = IntVec3.Invalid;
             var bestFertility = 0f;
             var bestMana = -1f;
@@ -170,7 +170,7 @@ namespace VVRace
                 var fertility = map.fertilityGrid.FertilityAt(cell);
                 var cellMana = mana != null ? mana[cell] : 0f;
                 if (fertility < JobGiver_ViviNestPlantSeed.MinFertility || fertility < bestFertility || (fertility == bestFertility && cellMana <= bestMana)) { continue; }
-                if (spot != null && !spot.Position.InHorDistOf(cell, spot.GatherRadius)) { continue; }
+                if (!production.InGatherRange(cell)) { continue; }
                 if (!IsFreeOutdoorCell(cell, allowPlants: true)) { continue; }
 
                 var plant = cell.GetPlant(map);
@@ -594,7 +594,7 @@ namespace VVRace
             }
         }
 
-        // 문 밖 가까운 빈 땅(바깥 보관 칸·채집 장소·통로 제외)
+        // 문 밖 가까운 빈 땅(바깥 보관 칸·통로 제외)
         private IEnumerable<IntVec3> OutdoorBuildCells()
         {
             var origin = _doorCells.Count > 0 ? _doorCells[0] : _owner.NestCell;
@@ -662,9 +662,7 @@ namespace VVRace
             }
 
             // 다른 둥지 건물의 상호작용 칸을 막지 않는다.
-            var production = _owner.Production;
-            if (production.GatherSpot != null && production.GatherSpot.InteractionCell == cell) { return false; }
-            var workSpots = production.WorkSpots;
+            var workSpots = _owner.Production.WorkSpots;
             for (int i = 0; i < workSpots.Count; ++i)
             {
                 if (workSpots[i].Spawned && workSpots[i].InteractionCell == cell) { return false; }

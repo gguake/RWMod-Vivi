@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Verse;
+using Verse.AI;
 
 namespace VVRace
 {
@@ -11,6 +12,8 @@ namespace VVRace
         public const int RefreshInterval = 250;
         private const int OutdoorStorageCellCount = 12;
         private const float OutdoorStorageSearchRadius = 6f;
+
+        private static float _workRadius = -1f;
 
         private readonly LordJob_ViviNest _owner;
 
@@ -86,6 +89,34 @@ namespace VVRace
         }
 
         public bool HasAnyRoom => Rooms.Count > 0;
+
+        // 정착 범위: 무리가 오가는 반경. 둥지 생활 듀티가 일을 둥지 중심에서 이 반경 안으로 묶는다(ThinkNode_ForbidOutsideFlagRadius, 24칸).
+        public static float WorkRadius
+        {
+            get
+            {
+                if (_workRadius < 0f)
+                {
+                    _workRadius = FlagRadius(VVDutyDefOf.VV_ViviNestLife.thinkNode);
+                }
+                return _workRadius;
+            }
+        }
+
+        public bool InWorkRange(IntVec3 cell) => cell.InHorDistOf(_owner.NestCell, WorkRadius);
+
+        private static float FlagRadius(ThinkNode node)
+        {
+            if (node is ThinkNode_ForbidOutsideFlagRadius flag) { return flag.maxDistToSquadFlag; }
+            if (node?.subNodes == null) { return 0f; }
+
+            foreach (var sub in node.subNodes)
+            {
+                var radius = FlagRadius(sub);
+                if (radius > 0f) { return radius; }
+            }
+            return 0f;
+        }
 
         // 정착할 때 방의 경계(벽·문)를 기억해 두고, 방 밖 가까운 빈 땅에 보관 칸을 잡는다.
         public void Establish(IntVec3 nestCell)

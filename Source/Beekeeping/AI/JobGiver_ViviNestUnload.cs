@@ -18,7 +18,7 @@ namespace VVRace
             if (!nest.Stock.TryFindStorageCellFor(thing, pawn, ViviNestStorageRank.None, out var cell)) { return null; }
 
             var job = JobMaker.MakeJob(VVJobDefOf.VV_ViviNestUnload, cell, thing);
-            job.count = thing.stackCount;
+            job.count = Mathf.Min(thing.stackCount, nest.Stock.StorableCount(cell, thing));
             return job;
         }
 

@@ -5,8 +5,8 @@ using Verse.AI;
 
 namespace VVRace
 {
-    // 둥지의 채집 자리와 바닥 작업 자리들을 두고, 비축 목표에 맞춰 지시서를 멈추고 푼다.
-    // 채집·제작 자체는 기존 채집 지시서와 바닐라 작업 지시서를 그대로 쓴다.
+    // 둥지의 바닥 작업 자리들을 두고, 비축 목표에 맞춰 지시서를 멈추고 푼다. 제작 자체는 바닐라 작업 지시서를 그대로 쓴다.
+    // 채집은 채집 장소·지시서 없이 채집 잡 기버가 둥지 채집 범위의 꽃·나무에서 그 자리에서 한다(JobGiver_ViviNestGather).
     // 무엇을 먼저 할지는 보유량이 목표에 비해 모자란 정도(1 - 보유/목표)로 정한다: 지시서는 모자란 것부터 오게 다시 늘어놓고,
     // 채집·나무 베기·땅 비료·제작 일은 바닐라 우선도 정렬 노드가 이 값으로 고른다.
     public class ViviNestProduction : IExposable
@@ -38,14 +38,19 @@ namespace VVRace
         public const float ProcessingWeight = 0.3f;
         // 일하는 구성원(아기 제외) 이만큼마다 바닥 작업 자리를 하나 둔다(올림, 사용자 요구).
         public const int WorkersPerWorkSpot = 2;
-        // 채집 자리 둘레에서 플레이어 집 구역을 지우는 반경(바닐라 놓기가 같은 더미를 찾아 합치는 범위보다 넉넉히)
-        private const float GatherSpotClearHomeRadius = 4f;
+        // 둥지 채집 범위: 둥지 중심에서 기존 채집 장소의 최대 채집 반경까지. 꽃 세기·꽃 심기·바깥 마법식물 자리도 이 범위를 쓴다.
+        public const float GatherRadius = Building_GatherWorkTable.GatherMaxRadius;
+        // 그 자리에서 채취할 때의 채집량 배율. 예전 둥지 채집 자리(간이 채집 장소와 같은 WorkTableEfficiencyFactor 0.5)와 같게 둔다.
+        // 채집 자리를 오가는 걸음이 없어져 일손은 덜 들지만, 둥지 식량은 일손이 아니라 꿀 꽃 수와 재채집 대기로 정해진다
+        // (자동 테스트: 민들레 재채집 대기 약 4.2일, 다섯 마리에 22송이는 하루 −2, 40송이가 본전; 장기 계측에서 채집 자리 채집은 일과의 5%이고 편자 놀이·산책이 30%를 넘었다).
+        // 그 자리 채집으로 바꾼 뒤 장기 계측(온대·한랭 60일)에서 채집은 일과의 2~4%였고, 둥지 식량은 정착 5일 뒤로 7.7일 치 아래로 내려가지 않았다.
+        // 배율을 올리면 꽃 목표(ViviNestGarden)와 겨울 비축을 다시 재야 한다.
+        public const float GatherYieldFactor = 0.5f;
         // 생산 주기마다 최근 마법식물에 준 비료에 곱해 비축 일수 동안의 지수 평균으로 만든다.
         private static readonly float RecentPlantFertilizerDecay = UnityEngine.Mathf.Exp(-RefreshInterval / (FertilizerReserveDays * GenDate.TicksPerDay));
 
         private readonly LordJob_ViviNest _owner;
 
-        private Building_GatherWorkTable _gatherSpot;
         private List<Building_WorkTable> _workSpots = new List<Building_WorkTable>();
 
         private static List<RecipeDef> _workRecipes;
@@ -53,7 +58,7 @@ namespace VVRace
         private static readonly List<int> _tmpSpotLoad = new List<int>();
         private static readonly List<int> _tmpChosen = new List<int>();
 
-        // 생산 주기마다 다시 잰 모자란 정도(0~1)
+        // 생산 주기마다 다시 잰 레시피별 모자란 정도(0~1). 작업 지시서와 채집 잡 기버(채집 레시피, 지시서 없음)가 쓴다.
         private readonly Dictionary<RecipeDef, float> _billNeed = new Dictionary<RecipeDef, float>();
         private float _woodNeed;
         private float _fertilizerNeed;
@@ -72,7 +77,9 @@ namespace VVRace
         private Map Map => _owner.Map;
         private ViviNestStock Stock => _owner.Stock;
 
-        public Building_GatherWorkTable GatherSpot => _gatherSpot != null && _gatherSpot.Spawned ? _gatherSpot : null;
+        // 둥지 채집 범위의 중심(둥지 방 한가운데 칸)
+        public IntVec3 GatherCenter => _owner.NestCell;
+        public bool InGatherRange(IntVec3 cell) => cell.InHorDistOf(GatherCenter, GatherRadius);
         // 바닥 작업 자리들. 사라진 자리는 생산 주기마다 빼므로 그사이에는 Spawned를 보고 쓴다.
         public IReadOnlyList<Building_WorkTable> WorkSpots => _workSpots;
 
@@ -104,78 +111,9 @@ namespace VVRace
 
         public void Tick()
         {
-            EnsureGatherSpot();
             EnsureWorkSpots();
             UpdateFertilizerTarget();
             UpdateBills();
-        }
-
-        // 둥지 채집 자리(작업량 0, 간이 채집 장소처럼 채집량 절반·채집 반경 안만)는 바닐라 설계자처럼 바로 세운다.
-        // 문 밖 가까운 빈 땅 중 채집 반경 안 꿀 꽃이 가장 많은 칸. 플레이어가 짓는 간이 채집 장소와 따로 둔 둥지 전용 정의다(사용자 요구).
-        private void EnsureGatherSpot()
-        {
-            if (GatherSpot != null) { return; }
-
-            var best = IntVec3.Invalid;
-            var bestFlowers = -1;
-            foreach (var cell in _owner.Territory.OutdoorStorageCells)
-            {
-                if (!CanPlaceSpot(VVThingDefOf.VV_ViviNestGatherSpot, cell, requireRoom: false)) { continue; }
-
-                var flowers = CountHoneyFlowers(cell, Building_GatherWorkTable.GatherMaxRadius);
-                if (flowers > bestFlowers)
-                {
-                    best = cell;
-                    bestFlowers = flowers;
-                }
-            }
-
-            if (best.IsValid)
-            {
-                var cell = best;
-                var spot = (Building_GatherWorkTable)ThingMaker.MakeThing(VVThingDefOf.VV_ViviNestGatherSpot);
-                spot.SetFaction(_owner.Faction);
-                GenSpawn.Spawn(spot, cell, Map, Rot4.South);
-                spot.GatherRadius = Building_GatherWorkTable.GatherMaxRadius;
-
-                AddBill(spot, VVRecipeDefOf.VV_GatherHoney);
-                AddBill(spot, VVRecipeDefOf.VV_GatherPollen);
-                AddBill(spot, VVRecipeDefOf.VV_GatherPropolis);
-
-                _gatherSpot = spot;
-                ClearHomeAreaAround(cell);
-            }
-        }
-
-        // 정착민은 집 구역의 오물만 치운다. 채집 자리 둘레에서 정착민이 꽃가루 오물을 치우면 금지 없는 꽃가루 더미가 생기고,
-        // 바닐라 놓기는 산출물을 근처 같은 더미에 합치며 합친 더미는 그 더미의 금지 상태를 따르므로 둥지 꽃가루가 계속 사라졌다(자동 테스트, 475개 더미).
-        // 그래서 정착 때 방 안 플레이어 구역을 지우듯 채집 자리 둘레의 집 구역을 지운다.
-        private void ClearHomeAreaAround(IntVec3 center)
-        {
-            var map = Map;
-            var home = map.areaManager.Home;
-            var cellCount = GenRadial.NumCellsInRadius(GatherSpotClearHomeRadius);
-            for (int i = 0; i < cellCount; ++i)
-            {
-                var cell = center + GenRadial.RadialPattern[i];
-                if (cell.InBounds(map) && home[cell]) { home[cell] = false; }
-            }
-        }
-
-        private int CountHoneyFlowers(IntVec3 center, float radius)
-        {
-            var map = Map;
-            var count = 0;
-            var cellCount = GenRadial.NumCellsInRadius(radius);
-            for (int i = 0; i < cellCount; ++i)
-            {
-                var cell = center + GenRadial.RadialPattern[i];
-                if (cell.InBounds(map) && ViviNestSiteEvaluator.IsHoneyFlower(cell.GetPlant(map)))
-                {
-                    count++;
-                }
-            }
-            return count;
         }
 
         // 바닥 작업 자리는 일하는 구성원(아기 제외) 두 마리당 하나(올림)를 둔다(사용자 요구). 한 자리에서는 한 마리만 일하므로(바닐라 지시서 워크기버가 자리를 예약한다)
@@ -233,7 +171,7 @@ namespace VVRace
             {
                 foreach (var cell in room.Cells)
                 {
-                    if (!CanPlaceSpot(def, cell, requireRoom: true)) { continue; }
+                    if (!CanPlaceSpot(def, cell)) { continue; }
 
                     var interaction = ThingUtility.InteractionCellWhenAt(def, cell, Rot4.South, Map);
                     if (IsSpotInteractionCell(cell) || IsSpotInteractionCell(interaction)) { continue; }
@@ -254,7 +192,6 @@ namespace VVRace
 
         private bool IsSpotInteractionCell(IntVec3 cell)
         {
-            if (GatherSpot != null && GatherSpot.InteractionCell == cell) { return true; }
             for (int i = 0; i < _workSpots.Count; ++i)
             {
                 if (_workSpots[i].Spawned && _workSpots[i].InteractionCell == cell) { return true; }
@@ -287,14 +224,14 @@ namespace VVRace
             _workSpots.Add(spot);
         }
 
-        private bool CanPlaceSpot(ThingDef def, IntVec3 cell, bool requireRoom)
+        private bool CanPlaceSpot(ThingDef def, IntVec3 cell)
         {
             var map = Map;
             var interaction = ThingUtility.InteractionCellWhenAt(def, cell, Rot4.South, map);
             foreach (var c in new[] { cell, interaction })
             {
                 if (!c.InBounds(map) || !c.Standable(map)) { return false; }
-                if (requireRoom ? !_owner.Territory.IsRoomCell(c) : _owner.Territory.IsRoomCell(c)) { return false; }
+                if (!_owner.Territory.IsRoomCell(c)) { return false; }
                 if (c.GetEdifice(map) != null) { return false; }
                 foreach (var thing in c.GetThingList(map))
                 {
@@ -334,16 +271,6 @@ namespace VVRace
             return null;
         }
 
-        private static void SetActive(Building_WorkTable table, RecipeDef recipe, bool active)
-        {
-            var bill = FindBill(table, recipe);
-            if (bill != null)
-            {
-                // 재료가 미완성품에 들어가 재고가 줄어도, 만들던 비비가 끝낼 수 있게 그동안은 멈추지 않는다.
-                bill.suspended = !active && !(bill is Bill_ProductionWithUft uftBill && uftBill.BoundWorker != null);
-            }
-        }
-
         private void UpdateBills()
         {
             var stock = Stock;
@@ -356,15 +283,11 @@ namespace VVRace
             var wood = stock.CountOf(ThingDefOf.WoodLog);
             var cakes = stock.CountOf(VVThingDefOf.VV_HoneyPollenCake);
 
-            var gather = GatherSpot;
+            // 채집 레시피의 모자란 정도는 채집 잡 기버가 고를 때 쓴다(목표에 닿은 자원은 0). 꿀은 둥지 식량이 모자라면 가장 먼저 하고,
+            // 장비(옷·새총)는 필요하면 가장 먼저 한다.
             var honeyTarget = HoneyTarget();
-            SetActive(gather, VVRecipeDefOf.VV_GatherHoney, rawHoney + filteredHoney < honeyTarget);
-            SetActive(gather, VVRecipeDefOf.VV_GatherPollen, pollen < PollenTarget);
-            SetActive(gather, VVRecipeDefOf.VV_GatherPropolis, propolis < PropolisTarget);
-
-            // 장비(옷·새총)는 필요하면 가장 먼저, 꿀은 둥지 식량이 모자라면 가장 먼저 한다.
             var honey = rawHoney + filteredHoney;
-            _billNeed[VVRecipeDefOf.VV_GatherHoney] = FoodReserveDays() < MinFoodDaysForCream ? 1f : Shortage(honey, honeyTarget);
+            _billNeed[VVRecipeDefOf.VV_GatherHoney] = honey >= honeyTarget ? 0f : (FoodReserveDays() < MinFoodDaysForCream ? 1f : Shortage(honey, honeyTarget));
             _billNeed[VVRecipeDefOf.VV_GatherPollen] = Shortage(pollen, PollenTarget);
             _billNeed[VVRecipeDefOf.VV_GatherPropolis] = Shortage(propolis, PropolisTarget);
             _billNeed[VVRecipeDefOf.Make_VV_BasicWorkerCostume] = 1f;
@@ -379,7 +302,6 @@ namespace VVRace
 
             AllocateWorkBills();
 
-            SortBills(gather);
             for (int i = 0; i < _workSpots.Count; ++i)
             {
                 SortBills(_workSpots[i]);
@@ -446,7 +368,7 @@ namespace VVRace
             }
         }
 
-        private float Need(RecipeDef recipe) => _billNeed.TryGetValue(recipe, out var need) ? need : 0f;
+        public float Need(RecipeDef recipe) => _billNeed.TryGetValue(recipe, out var need) ? need : 0f;
 
         // 그 지시로 지금 만들어야 할 묶음 수(0이면 멈춘다): 목표까지 모자란 양을 한 번에 나오는 양으로 나눠 올리고, 둥지 몫 재료로 만들 수 있는 묶음 수를 넘지 않는다.
         // 켜는 조건은 자리가 하나일 때와 같다(크림은 식량이 이틀 치 넘을 때, 밀랍은 크림 30마다, 옷·새총은 필요한 비비 수만큼, 꿀 거르기는 날꿀 20마다).
@@ -550,17 +472,10 @@ namespace VVRace
             table?.BillStack.Bills.InsertionSort((a, b) => NeedOf(b).CompareTo(NeedOf(a)));
         }
 
+        // 채집 잡 기버의 우선도: 채집 자원(꿀·꽃가루·프로폴리스) 중 가장 모자란 것의 모자란 정도
         public float GatherPriority()
         {
-            var spot = GatherSpot;
-            if (spot == null) { return 0f; }
-
-            var best = 0f;
-            foreach (var bill in spot.BillStack)
-            {
-                best = UnityEngine.Mathf.Max(best, NeedOf(bill));
-            }
-            return best;
+            return UnityEngine.Mathf.Max(Need(VVRecipeDefOf.VV_GatherHoney), UnityEngine.Mathf.Max(Need(VVRecipeDefOf.VV_GatherPollen), Need(VVRecipeDefOf.VV_GatherPropolis)));
         }
 
         // 만들다 만 것은 시작한 비비만 이어서 만들 수 있으므로(바닐라), 그 비비에게는 가장 먼저 할 일이고 다른 비비에게는 없는 일이다.
@@ -734,7 +649,6 @@ namespace VVRace
 
         public void ExposeData()
         {
-            Scribe_References.Look(ref _gatherSpot, "gatherSpot");
             Scribe_Collections.Look(ref _workSpots, "workSpots", LookMode.Reference);
             Scribe_Values.Look(ref _recentPlantFertilizer, "recentPlantFertilizer");
 

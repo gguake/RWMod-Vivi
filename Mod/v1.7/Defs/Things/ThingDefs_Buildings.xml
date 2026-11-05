@@ -433,48 +433,6 @@
     </building>
   </ThingDef>
 
-  <!-- 떠돌이 비비 둥지의 채집 자리: 간이 채집 장소처럼 채집량이 절반(WorkTableEfficiencyFactor 0.5)이고 채집 반경 안에서만 채집한다. 둥지가 스스로 깔며 플레이어는 지을 수 없다 -->
-  <ThingDef ParentName="BuildingBase">
-    <defName>VV_ViviNestGatherSpot</defName>
-    <label>vivi nest gathering spot</label>
-    <description>A patch of ground where wandering vivis gather honey, pollen and propolis from the plants around. Without proper tools they get only half of the usual yield, and only from plants near the spot.</description>
-    <thingClass>VVRace.Building_GatherWorkTable</thingClass>
-    <graphicData>
-      <texPath>Things/Building/VV_GatheringSpot</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
-      <drawSize>(1,1)</drawSize>
-      <color>(1.0, 0.85, 0.55)</color>
-    </graphicData>
-    <altitudeLayer>FloorEmplacement</altitudeLayer>
-    <statBases>
-      <WorkToBuild>0</WorkToBuild>
-      <WorkTableEfficiencyFactor>0.5</WorkTableEfficiencyFactor>
-    </statBases>
-    <scatterableOnMapGen>false</scatterableOnMapGen>
-    <useHitPoints>false</useHitPoints>
-    <size>(1,1)</size>
-    <passability>Standable</passability>
-    <hasInteractionCell>True</hasInteractionCell>
-    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
-    <surfaceType>Item</surfaceType>
-    <recipes>
-      <li>VV_GatherHoney</li>
-      <li>VV_GatherPollen</li>
-      <li>VV_GatherPropolis</li>
-    </recipes>
-    <building>
-      <canPlaceOverImpassablePlant>false</canPlaceOverImpassablePlant>
-      <ai_chillDestination>false</ai_chillDestination>
-      <wakeDormantPawnsOnConstruction>false</wakeDormantPawnsOnConstruction>
-      <artificialForMeditationPurposes>false</artificialForMeditationPurposes>
-    </building>
-    <comps>
-      <li Class="CompProperties_ReportWorkSpeed">
-        <workSpeedStat>WorkTableWorkSpeedFactor</workSpeedStat>
-      </li>
-    </comps>
-  </ThingDef>
-
   <!-- 비비 유인통: 꿀 음식을 올려 두면 떠돌이 비비를 부른다(연구 불필요) -->
   <ThingDef ParentName="ShelfBase">
     <defName>VV_ViviLure</defName>

@@ -5,7 +5,8 @@ using Verse.AI.Group;
 
 namespace VVRace
 {
-    // 둥지 물건을 더 좋은 보관 칸(선반 > 방 바닥 > 바깥)으로 옮기고, 둥지 몫으로 표시한 바깥 물건(수확물 등)을 들여온다.
+    // 둥지 몫으로 표시한 바깥 물건(채취물·수확물 등)과 방 바닥 물건을 더 좋은 보관 칸(둥지 방 밖 정착 범위의 선반 > 방 안 선반 > 방 바닥)으로 옮긴다.
+    // 옮길 곳이 없으면 그 자리에 둔다.
     public class JobGiver_ViviNestHaul : ThinkNode_JobGiver
     {
         protected override Job TryGiveJob(Pawn pawn)
@@ -22,8 +23,8 @@ namespace VVRace
                 if (!stock.TryFindStorageCellFor(thing, pawn, rank, out var cell)) { continue; }
 
                 var job = JobMaker.MakeJob(JobDefOf.HaulToCell, thing, cell);
-                job.count = thing.stackCount;
-                job.haulMode = stock.RankOf(cell) == ViviNestStorageRank.Shelf ? HaulMode.ToCellStorage : HaulMode.ToCellNonStorage;
+                job.count = Mathf.Min(thing.stackCount, stock.StorableCount(cell, thing));
+                job.haulMode = ViviNestStock.IsShelfRank(stock.RankOf(cell)) ? HaulMode.ToCellStorage : HaulMode.ToCellNonStorage;
                 return job;
             }
 

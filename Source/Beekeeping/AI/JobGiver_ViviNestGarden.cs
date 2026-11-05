@@ -4,7 +4,7 @@ using Verse.AI;
 
 namespace VVRace
 {
-    // 둥지 정원 일: 다 자란 목화 수확, 옷감이 모자라면 목화 심기, 채집할 꽃이 모자라면 채집 장소 둘레에 꽃 심기.
+    // 둥지 정원 일: 다 자란 목화 수확, 옷감이 모자라면 목화 심기, 채집할 꽃이 모자라면 둥지 채집 범위에 꽃 심기(둥지 가까운 칸부터).
     // 바닐라 재배처럼 자리를 막는 풀은 먼저 베고, 심기·수확은 바닐라 잡(Sow·Harvest)을 구역 없이 쓴다.
     public class JobGiver_ViviNestGarden : ThinkNode_JobGiver
     {
@@ -47,14 +47,14 @@ namespace VVRace
         // 꽃이 모자라면 재채집 대기가 짧은 장미를 먼저, 장미가 못 자라는 곳이면 민들레를 심는다.
         private static Job SowFlowerJob(Pawn pawn, LordJob_ViviNest nest)
         {
-            var spot = nest.Production.GatherSpot;
-            if (spot == null || nest.Garden.FlowerCount >= nest.Garden.FlowerTarget() || nest.Garden.FlowerSpotSearchPaused) { return null; }
+            if (nest.Garden.FlowerCount >= nest.Garden.FlowerTarget() || nest.Garden.FlowerSpotSearchPaused) { return null; }
 
             var map = pawn.Map;
-            var cellCount = GenRadial.NumCellsInRadius(Building_GatherWorkTable.GatherMaxRadius);
+            var center = nest.Production.GatherCenter;
+            var cellCount = GenRadial.NumCellsInRadius(ViviNestProduction.GatherRadius);
             for (int i = 0; i < cellCount; ++i)
             {
-                var cell = spot.Position + GenRadial.RadialPattern[i];
+                var cell = center + GenRadial.RadialPattern[i];
                 if (!nest.Planner.IsFreeOutdoorCell(cell, allowPlants: true)) { continue; }
 
                 var flowerDef = PlantUtility.GrowthSeasonNow(cell, map, VVThingDefOf.Plant_Rose) ? VVThingDefOf.Plant_Rose : ThingDefOf.Plant_Dandelion;

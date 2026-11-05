@@ -4,7 +4,7 @@ using Verse;
 
 namespace VVRace
 {
-    // 둥지 정원: 채집할 꽃이 모자라면 채집 장소 둘레에 꽃을 심고, 옷감이 모자라면 바깥 보관 칸 옆 작은 목화밭을 가꾼다.
+    // 둥지 정원: 채집할 꽃이 모자라면 둥지 채집 범위에 꽃을 심고, 옷감이 모자라면 바깥 보관 칸 옆 작은 목화밭을 가꾼다.
     // 심기·수확은 바닐라 재배 잡을 그대로 쓴다(구역 없이).
     public class ViviNestGarden : IExposable
     {
@@ -37,7 +37,7 @@ namespace VVRace
 
         public bool IsCottonCell(IntVec3 cell) => _cottonCells.Contains(cell);
 
-        // 채집 반경 안의 꿀 꽃(덜 자란 것 포함, 심어 둔 것을 다시 심지 않게)
+        // 둥지 채집 범위 안의 꿀 꽃(덜 자란 것 포함, 심어 둔 것을 다시 심지 않게)
         public int FlowerCount
         {
             get
@@ -84,14 +84,13 @@ namespace VVRace
         {
             _flowerCount = 0;
             _gatherableFlowerCount = 0;
-            var spot = _owner.Production.GatherSpot;
-            if (spot == null) { return; }
 
             var map = Map;
-            var cellCount = GenRadial.NumCellsInRadius(Building_GatherWorkTable.GatherMaxRadius);
+            var center = _owner.Production.GatherCenter;
+            var cellCount = GenRadial.NumCellsInRadius(ViviNestProduction.GatherRadius);
             for (int i = 0; i < cellCount; ++i)
             {
-                var cell = spot.Position + GenRadial.RadialPattern[i];
+                var cell = center + GenRadial.RadialPattern[i];
                 if (!cell.InBounds(map)) { continue; }
 
                 var plant = cell.GetPlant(map);

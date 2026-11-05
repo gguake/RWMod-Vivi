@@ -39,6 +39,31 @@
     <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
   </JobDef>
 
+  <!-- 둥지 비비가 꽃·나무 곁에서 그 자리에서 꿀·꽃가루·프로폴리스를 채취한다(기존 채집 레시피 규칙, 채집 장소 없음). 채취물은 바닥에 둥지 몫으로 떨어뜨린다 -->
+  <JobDef>
+    <defName>VV_ViviNestGatherHoney</defName>
+    <driverClass>VVRace.JobDriver_ViviNestGather</driverClass>
+    <reportString>gathering honey from TargetA.</reportString>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+    <ifFlyingKeepFlying>true</ifFlyingKeepFlying>
+  </JobDef>
+
+  <JobDef>
+    <defName>VV_ViviNestGatherPollen</defName>
+    <driverClass>VVRace.JobDriver_ViviNestGather</driverClass>
+    <reportString>gathering pollen from TargetA.</reportString>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+    <ifFlyingKeepFlying>true</ifFlyingKeepFlying>
+  </JobDef>
+
+  <JobDef>
+    <defName>VV_ViviNestGatherPropolis</defName>
+    <driverClass>VVRace.JobDriver_ViviNestGather</driverClass>
+    <reportString>gathering propolis from TargetA.</reportString>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+    <ifFlyingKeepFlying>true</ifFlyingKeepFlying>
+  </JobDef>
+
   <!-- 곰·말벌이 유인통 미끼를 먹어 치운다 -->
   <JobDef>
     <defName>VV_DevourBait</defName>

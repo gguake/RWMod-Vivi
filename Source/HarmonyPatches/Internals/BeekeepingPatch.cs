@@ -20,7 +20,7 @@ namespace VVRace
                 AccessTools.Method(typeof(ForbidUtility), nameof(ForbidUtility.IsForbidden), new[] { typeof(Thing), typeof(Pawn) }),
                 postfix: new HarmonyMethod(typeof(BeekeepingPatch), nameof(ForbidUtility_IsForbidden_Postfix)));
 
-            // 바닐라가 산출물을 놓기 직전에 알리는 지점: 작업·채집 지시서 산출물, 베기·수확 산출물을 둥지 몫으로 잡는다.
+            // 바닐라가 산출물을 놓기 직전에 알리는 지점: 작업 지시서 산출물, 베기·수확 산출물을 둥지 몫으로 잡는다.
             ViviHarmonyPatcher.TryPatch(harmony, "QuestManager.Notify_ThingsProduced (vivi nest products)",
                 AccessTools.Method(typeof(QuestManager), nameof(QuestManager.Notify_ThingsProduced)),
                 postfix: new HarmonyMethod(typeof(BeekeepingPatch), nameof(QuestManager_Notify_ThingsProduced_Postfix)));
@@ -29,6 +29,7 @@ namespace VVRace
                 postfix: new HarmonyMethod(typeof(BeekeepingPatch), nameof(QuestManager_Notify_PlantHarvested_Postfix)));
 
             // 바닐라가 적대 세력이 내려놓은 물건을 금지하는 지점: 둥지 비비가 내려놓은 물건(운반이 끊긴 것, 나눠 든 조각 포함)을 둥지 몫으로 남긴다.
+            // 플레이어 더미에 합쳐졌으면 그 더미는 잡지 않는다(LordJob_ViviNest.MarkDropped).
             ViviHarmonyPatcher.TryPatch(harmony, "Pawn_CarryTracker.TryDropCarriedThing (vivi nest ownership)",
                 AccessTools.Method(typeof(Pawn_CarryTracker), nameof(Pawn_CarryTracker.TryDropCarriedThing),
                     new[] { typeof(IntVec3), typeof(ThingPlaceMode), typeof(Thing).MakeByRefType(), typeof(System.Action<Thing, int>) }),
@@ -86,7 +87,7 @@ namespace VVRace
         {
             if (__result && resultingThing != null)
             {
-                __instance.pawn?.GetNestLordJob()?.MarkOwned(resultingThing);
+                __instance.pawn?.GetNestLordJob()?.MarkDropped(resultingThing);
             }
         }
 
@@ -113,7 +114,7 @@ namespace VVRace
             var faction = pawn.Faction;
             if (faction == null) { return; }
 
-            // 정착민은 둥지 세력의 작업 자리·채집 장소 같은 건물을 쓰지 않는다(바닐라 지시서 워크기버는 세력을 보지 않는다).
+            // 정착민은 둥지 세력의 작업 자리 같은 건물을 쓰지 않는다(바닐라 지시서 워크기버는 세력을 보지 않는다).
             if (faction.IsPlayer)
             {
                 if (t is Building nestBuilding && !(t is Building_Door) && nestBuilding.Faction != null && nestBuilding.Faction.def == VVFactionDefOf.VV_WanderingVivi)

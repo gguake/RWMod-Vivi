@@ -333,6 +333,42 @@ namespace VVRace
             _stock.MarkDirty();
         }
 
+        // 구성원이 내려놓은 물건(운반이 끊긴 것, 나눠 든 조각, 짐 풀기)을 둥지 몫으로 남긴다. 내려놓은 물건이 그 칸에 먼저 있던
+        // 둥지 몫이 아닌 같은 더미(플레이어 더미)에 합쳐졌으면 그 더미는 잡지 않는다(플레이어 물건을 가져가지 않는다). 막 생긴 더미는 이번 틱에 놓인 것이다.
+        public void MarkDropped(Thing thing)
+        {
+            if (thing == null) { return; }
+            if (thing.Spawned && thing.TickSpawned != Find.TickManager.TicksGame && !_stock.IsNestOwned(thing)) { return; }
+
+            MarkOwned(thing);
+        }
+
+        // 둥지 몫으로 표시해 center 둘레 바닥에 놓는다. 바닐라 놓기는 그 칸의 같은 더미에 합치고 합친 더미는 그 더미의 금지 상태를 따르므로
+        // 플레이어 더미에 합쳐지면 둥지 몫이 사라진다. 그래서 둥지 몫이 아닌 같은 물건이 놓인 칸은 피한다.
+        public bool TryPlaceOwned(Thing thing, IntVec3 center)
+        {
+            var map = Map;
+            var def = thing.def;
+            MarkOwned(thing);
+            if (!GenPlace.TryPlaceThing(thing, center, map, ThingPlaceMode.Near, out var placed, extraValidator: c => !HasForeignStack(map, c, def)))
+            {
+                return false;
+            }
+
+            MarkOwned(placed);
+            return true;
+        }
+
+        private bool HasForeignStack(Map map, IntVec3 cell, ThingDef def)
+        {
+            var things = map.thingGrid.ThingsListAtFast(cell);
+            for (int i = 0; i < things.Count; ++i)
+            {
+                if (things[i].def == def && !_stock.IsNestOwned(things[i])) { return true; }
+            }
+            return false;
+        }
+
         // 잠자리는 편한 기온의 둥지 방에서 고른다. 증축 방에는 잔불꽃이 없어 겨울에 영하로 내려가는데 방을 가리지 않고 골랐더니,
         // 그 방에서 자던 아이가 동상으로 죽었다(장기 계측: 온대림 겨울, 증축 방 -12°C).
         public bool TryFindSleepSpot(Pawn pawn, out IntVec3 cell) => TryFindRoomCell(pawn, ComfortableRooms(pawn), out cell);

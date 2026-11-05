@@ -298,6 +298,7 @@
     <Compile Include="Beekeeping\AI\JobGiver_ViviNestWander.cs" />
     <Compile Include="Beekeeping\Nest\ViviNestProduction.cs" />
     <Compile Include="Beekeeping\AI\JobGiver_ViviNestGather.cs" />
+    <Compile Include="Beekeeping\AI\JobDriver_ViviNestGather.cs" />
     <Compile Include="Beekeeping\AI\JobGiver_ViviNestCraft.cs" />
     <Compile Include="Beekeeping\AI\JobGiver_ViviNestCutTree.cs" />
     <Compile Include="Beekeeping\AI\JobGiver_ViviNestDress.cs" />
