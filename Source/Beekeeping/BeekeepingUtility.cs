@@ -111,6 +111,17 @@ namespace VVRace
             return null;
         }
 
+        // 채집·털기로 얻은 물건을 놓는다. 둥지 비비가 얻은 둥지 몫은 둥지 몫이 아닌 같은 물건 더미가 있는 칸을 피해 놓는다(합쳐지면 둥지 몫이 사라진다).
+        public static bool TryPlaceProduct(Thing thing, Pawn producer, IntVec3 center, Map map)
+        {
+            System.Predicate<IntVec3> validator = null;
+            if (producer?.GetNestLordJob() != null)
+            {
+                validator = cell => ViviNestStock.CanPlaceNestItemAt(cell, map, thing.def);
+            }
+            return GenPlace.TryPlaceThing(thing, center, map, ThingPlaceMode.Near, null, validator);
+        }
+
         public static bool IsBeekeepingMap(Map map)
         {
             if (map == null || !map.IsPlayerHome || map.IsPocketMap || map.IsTempIncidentMap) { return false; }

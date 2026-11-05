@@ -39,6 +39,16 @@ namespace VVRace
             return (WorkGiver_DoBill)def.Worker;
         }
 
+        // 작업 지시서 중 이 비비가 할 수 있는 가장 모자란 것의 모자란 정도(만들다 만 자기 것은 가장 먼저)
+        public override float GetPriority(Pawn pawn)
+        {
+            var nest = pawn.GetNestLordJob();
+            if (nest == null || !nest.Settled || pawn.DevelopmentalStage.Baby()) { return 0f; }
+
+            return nest.Production.CraftPriority(pawn);
+        }
+
+        // 워크기버는 자기 작업 종류(제작·요리)의 지시서 중 위의 것을 고르므로, 둘이 고른 것 중 더 모자란 쪽을 한다.
         protected override Job TryGiveJob(Pawn pawn)
         {
             var nest = pawn.GetNestLordJob();
@@ -47,13 +57,22 @@ namespace VVRace
             var spot = nest.Production.WorkSpot;
             if (spot == null) { return null; }
 
+            Job best = null;
+            var bestPriority = -1f;
             foreach (var worker in Workers)
             {
                 var job = worker.JobOnThing(pawn, spot);
-                if (job != null) { return job; }
+                if (job == null) { continue; }
+
+                var priority = nest.Production.CraftJobPriority(pawn, job);
+                if (priority > bestPriority)
+                {
+                    best = job;
+                    bestPriority = priority;
+                }
             }
 
-            return null;
+            return best;
         }
     }
 }

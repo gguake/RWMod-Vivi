@@ -11,6 +11,16 @@ namespace VVRace
         private const float MinFertility = 0.7f;
         private const int CellTries = 20;
 
+        // 마나 비료가 목표에 비해 모자란 정도
+        public override float GetPriority(Pawn pawn)
+        {
+            var nest = pawn.GetNestLordJob();
+            if (nest == null || !nest.Settled || !pawn.DevelopmentalStage.Adult()) { return 0f; }
+            if (JobGiver_ViviNestRest.IsNight(pawn) || BeekeepingUtility.OutdoorDangerous(pawn.Map)) { return 0f; }
+
+            return nest.Production.FertilizerNeed;
+        }
+
         protected override Job TryGiveJob(Pawn pawn)
         {
             var nest = pawn.GetNestLordJob();

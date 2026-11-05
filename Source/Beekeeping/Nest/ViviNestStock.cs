@@ -217,6 +217,18 @@ namespace VVRace
             return thing.def.category == ThingCategory.Item && thing.IsForbidden(Faction.OfPlayer);
         }
 
+        // 둥지 몫을 놓아도 되는 칸: 둥지 몫이 아닌 같은 물건 더미가 없는 칸. 바닐라는 놓을 때 그 칸의 같은 더미에 합치고
+        // 합친 더미는 그 더미의 금지 상태를 따르므로, 정착민이 꽃가루 오물을 치워 생긴 꽃가루 더미 같은 데 합쳐지면 둥지 몫이 사라진다.
+        public static bool CanPlaceNestItemAt(IntVec3 cell, Map map, ThingDef def)
+        {
+            var things = cell.GetThingList(map);
+            for (int i = 0; i < things.Count; ++i)
+            {
+                if (things[i].def == def && !IsOwnedMark(things[i])) { return false; }
+            }
+            return true;
+        }
+
         public bool IsNestOwned(Thing thing)
         {
             if (thing.Spawned)

@@ -183,10 +183,15 @@
             <li Class="VVRace.JobGiver_ViviNestBuild" />
             <li Class="VVRace.JobGiver_ViviNestRefuel" />
             <li Class="VVRace.JobGiver_ViviNestPlantSeed" />
-            <li Class="VVRace.JobGiver_ViviNestGather" />
-            <li Class="VVRace.JobGiver_ViviNestCutTree" />
-            <li Class="VVRace.JobGiver_ViviNestDigFertilizer" />
-            <li Class="VVRace.JobGiver_ViviNestCraft" />
+            <!-- 채집·나무 베기·땅 비료·제작은 보유량이 목표에 비해 가장 모자란 일부터(각 잡 기버의 우선도), 못 하면 다음 것 -->
+            <li Class="ThinkNode_PrioritySorter">
+              <subNodes>
+                <li Class="VVRace.JobGiver_ViviNestGather" />
+                <li Class="VVRace.JobGiver_ViviNestCutTree" />
+                <li Class="VVRace.JobGiver_ViviNestDigFertilizer" />
+                <li Class="VVRace.JobGiver_ViviNestCraft" />
+              </subNodes>
+            </li>
             <li Class="VVRace.JobGiver_ViviNestGarden" />
             <li Class="VVRace.JobGiver_ViviNestChildcare" />
             <li Class="VVRace.JobGiver_ViviNestSmoothWall" />

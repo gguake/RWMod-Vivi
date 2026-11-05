@@ -189,7 +189,7 @@ namespace VVRace
                             {
                                 for (int i = 0; i < allProducts.Count; ++i)
                                 {
-                                    if (!GenPlace.TryPlaceThing(allProducts[i], actor.Position, actor.Map, ThingPlaceMode.Near))
+                                    if (!BeekeepingUtility.TryPlaceProduct(allProducts[i], actor, actor.Position, actor.Map))
                                     {
                                         Log.Error(string.Concat(actor, " could not drop recipe product ", allProducts[i], " near ", actor.Position));
                                     }
@@ -200,7 +200,7 @@ namespace VVRace
                             {
                                 for (int i = 1; i < allProducts.Count; ++i)
                                 {
-                                    if (!GenPlace.TryPlaceThing(allProducts[i], actor.Position, actor.Map, ThingPlaceMode.Near))
+                                    if (!BeekeepingUtility.TryPlaceProduct(allProducts[i], actor, actor.Position, actor.Map))
                                     {
                                         Log.Error(string.Concat(actor, " could not drop recipe product ", allProducts[i], " near ", actor.Position));
                                     }
@@ -224,7 +224,7 @@ namespace VVRace
                                 }
                                 else
                                 {
-                                    if (!GenPlace.TryPlaceThing(allProducts[0], actor.Position, actor.Map, ThingPlaceMode.Near))
+                                    if (!BeekeepingUtility.TryPlaceProduct(allProducts[0], actor, actor.Position, actor.Map))
                                     {
                                         Log.Error($"Bill doer could not drop product {allProducts[0]} near {actor.Position}");
                                     }
@@ -321,7 +321,7 @@ namespace VVRace
                             {
                                 for (int i = 0; i < allProducts.Count; ++i)
                                 {
-                                    if (!GenPlace.TryPlaceThing(allProducts[i], actor.Position, actor.Map, ThingPlaceMode.Near))
+                                    if (!BeekeepingUtility.TryPlaceProduct(allProducts[i], actor, actor.Position, actor.Map))
                                     {
                                         Log.Error(string.Concat(actor, " could not drop recipe product ", allProducts[i], " near ", actor.Position));
                                     }
@@ -332,7 +332,7 @@ namespace VVRace
                             {
                                 for (int i = 1; i < allProducts.Count; ++i)
                                 {
-                                    if (!GenPlace.TryPlaceThing(allProducts[i], actor.Position, actor.Map, ThingPlaceMode.Near))
+                                    if (!BeekeepingUtility.TryPlaceProduct(allProducts[i], actor, actor.Position, actor.Map))
                                     {
                                         Log.Error(string.Concat(actor, " could not drop recipe product ", allProducts[i], " near ", actor.Position));
                                     }
@@ -356,7 +356,7 @@ namespace VVRace
                                 }
                                 else
                                 {
-                                    if (!GenPlace.TryPlaceThing(allProducts[0], actor.Position, actor.Map, ThingPlaceMode.Near))
+                                    if (!BeekeepingUtility.TryPlaceProduct(allProducts[0], actor, actor.Position, actor.Map))
                                     {
                                         Log.Error($"Bill doer could not drop product {allProducts[0]} near {actor.Position}");
                                     }

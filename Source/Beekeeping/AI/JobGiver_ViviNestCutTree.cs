@@ -9,6 +9,16 @@ namespace VVRace
     {
         private const float SearchRadius = 24f;
 
+        // 원목이 목표에 비해 모자란 정도
+        public override float GetPriority(Pawn pawn)
+        {
+            var nest = pawn.GetNestLordJob();
+            if (nest == null || !nest.Settled || pawn.DevelopmentalStage.Baby() || pawn.WorkTypeIsDisabled(WorkTypeDefOf.PlantCutting)) { return 0f; }
+            if (JobGiver_ViviNestRest.IsNight(pawn) || BeekeepingUtility.OutdoorDangerous(pawn.Map)) { return 0f; }
+
+            return nest.Production.WoodNeed;
+        }
+
         protected override Job TryGiveJob(Pawn pawn)
         {
             var nest = pawn.GetNestLordJob();
