@@ -27,16 +27,6 @@ namespace VVRace
             (lord.LordJob as LordJob_ViviNest)?.Hostility.Notify_MemberDamaged(victim, dinfo);
         }
 
-        // 둥지 비비가 지은 문은 다 지은 순간 정착민에게 금지한다(설계자 주기에 맞춰 금지하면 그사이 정착민이 드나든다).
-        public override void Notify_ConstructionCompleted(Pawn pawn, Building building)
-        {
-            base.Notify_ConstructionCompleted(pawn, building);
-            if (building is Building_Door door && door.Faction == lord.faction)
-            {
-                door.SetForbidden(true, warnOnFail: false);
-            }
-        }
-
         public override void UpdateAllDuties()
         {
             for (int i = 0; i < lord.ownedPawns.Count; ++i)

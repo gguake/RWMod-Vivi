@@ -34,7 +34,7 @@
 
 <!-- 정착대 -->
 <VV_Letter_ViviNestSettlersLabel>비비 무리 정착</VV_Letter_ViviNestSettlersLabel>
-<VV_Letter_ViviNestSettlers>{0}의 비비 {1}마리가 유인통 근처의 빈 방에 살러 왔습니다.\n\n비비들은 주변의 꽃과 나무에서 꿀·꽃가루·프로폴리스를 모으고, 크림과 밀랍을 만들고, 필요한 것을 스스로 짓습니다. 비비들이 모은 물건은 금지 표시가 되어 있으며 마음대로 가져가도 됩니다.\n\n비비들은 정착민이 근처에 오는 것은 신경 쓰지 않지만, 방 안에 들어오면 빠르게 경계합니다. 경계심이 가득 차면 적대하며 떠나 버립니다. 비비들의 방 문은 정착민이 드나들지 못하게 금지해 두었습니다.</VV_Letter_ViviNestSettlers>
+<VV_Letter_ViviNestSettlers>{0}의 비비 {1}마리가 유인통 근처의 빈 방에 살러 왔습니다.\n\n비비들은 주변의 꽃과 나무에서 꿀·꽃가루·프로폴리스를 모으고, 크림과 밀랍을 만들고, 필요한 것을 스스로 짓습니다. 비비들이 모은 물건은 금지 표시가 되어 있으며 마음대로 가져가도 됩니다.\n\n비비들은 정착민이 근처에 오는 것은 신경 쓰지 않지만, 방 안에 들어오면 빠르게 경계합니다. 경계심이 가득 차면 적대하며 떠나 버립니다. 정착민이 들어가지 않게 비비들의 방 문을 금지하거나 허가구역을 정해 두세요.</VV_Letter_ViviNestSettlers>
 <VV_Message_ViviNestSettlersNoLure>오기로 한 비비 무리가 오지 않았습니다. 유인통이 사라졌습니다.</VV_Message_ViviNestSettlersNoLure>
 <VV_Message_ViviNestSettlersCanceled>오기로 한 비비 무리가 오지 않았습니다.\n{0}</VV_Message_ViviNestSettlersCanceled>
 <VV_Message_ViviNestBabyHatched>{0}의 둥지에서 아기 비비가 깨어났습니다.</VV_Message_ViviNestBabyHatched>

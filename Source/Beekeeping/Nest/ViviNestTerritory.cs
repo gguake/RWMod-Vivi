@@ -115,8 +115,6 @@ namespace VVRace
             _cachedTick = -99999;
         }
 
-        public bool IsBorderDoor(Building_Door door) => door.Spawned && _boundaryCells.Contains(door.Position);
-
         public IEnumerable<Building_Door> BorderDoors
         {
             get

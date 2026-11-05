@@ -66,7 +66,6 @@ namespace VVRace
         public void Tick()
         {
             RepairBoundary();
-            ForbidNestDoors();
             _owner.Garden.EnsureCottonCells();
 
             if (AnyPendingProject()) { return; }
@@ -105,19 +104,6 @@ namespace VVRace
                 else
                 {
                     TryPlace(VVThingDefOf.VV_ViviCreamWall, cell, Rot4.North, null);
-                }
-            }
-        }
-
-        // 둥지 방 문(플레이어 문·둥지가 지은 문)을 정착민이 드나들지 않게 금지한다.
-        // 정착 때 방 안에 있던 정착민은 문 통과 후처리가 나갈 수 있게 해 준다(가두지 않는다).
-        public void ForbidNestDoors()
-        {
-            foreach (var door in Territory.BorderDoors)
-            {
-                if ((door.Faction == Faction || door.Faction == Faction.OfPlayer) && !door.IsForbidden(Faction.OfPlayer))
-                {
-                    door.SetForbidden(true, warnOnFail: false);
                 }
             }
         }
@@ -339,9 +325,6 @@ namespace VVRace
                 {
                     _doorCells.Add(_expansionDoor);
                 }
-                ForbidNestDoors();
-                // 벽이 닫힐 때 증축 방 안에 있던 정착민은 갇히지 않게 유예한다(둥지 문은 다 짓는 순간 금지된다).
-                _owner.Hostility.Notify_RoomAdded(room);
             }
 
             _expansionInterior.Clear();

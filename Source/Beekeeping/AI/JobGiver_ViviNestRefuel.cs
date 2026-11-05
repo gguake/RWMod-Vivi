@@ -7,6 +7,11 @@ namespace VVRace
     // 둥지 새싹 등 연료(마나 비료)를 먹는 둥지 것을 바닐라 연료 보충으로 채운다(연료는 둥지 몫만 쓴다).
     public class JobGiver_ViviNestRefuel : ThinkNode_JobGiver
     {
+        // 마나가 없어 자라지 못하는 새싹(마나 비활성)은 채우지 않는다. 새싹은 마나와 상관없이 비료를 하루 10개씩 태우므로 채워 봐야 비료만 먹는다
+        // (장기 계측: 마나 0 칸의 새싹 14그루가 28~60일 동안 자라지 못한 채 비료를 먹어 땅 파기 비중이 3%→11%로 늘었다).
+        // 마나가 돌아오면 다시 채운다. 연료가 떨어진 뒤로도 4일 가까이 버티므로 방출기 연료가 잠깐 떨어진 동안에는 죽지 않는다.
+        public static bool IsStarvedSeedling(Thing thing) => thing is ArcanePlant_Seedling seedling && !seedling.ManaComp.Active;
+
         protected override Job TryGiveJob(Pawn pawn)
         {
             var nest = pawn.GetNestLordJob();
@@ -16,7 +21,7 @@ namespace VVRace
             for (int i = 0; i < refuelables.Count; ++i)
             {
                 var thing = refuelables[i];
-                if (thing.Faction != nest.Faction || !pawn.CanReach(thing, PathEndMode.Touch, Danger.Some)) { continue; }
+                if (thing.Faction != nest.Faction || IsStarvedSeedling(thing) || !pawn.CanReach(thing, PathEndMode.Touch, Danger.Some)) { continue; }
                 if (!RefuelWorkGiverUtility.CanRefuel(pawn, thing)) { continue; }
 
                 return RefuelWorkGiverUtility.RefuelJob(pawn, thing);

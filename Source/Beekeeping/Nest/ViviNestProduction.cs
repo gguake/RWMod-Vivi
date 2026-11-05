@@ -345,6 +345,7 @@ namespace VVRace
         }
 
         // 둥지가 하루에 쓰는 마나 비료: 비료를 태우는 둥지 것(마나 방출기·새싹)의 연료 소모(바닐라 연료 소모율) + 최근 마법식물에 준 양의 하루 평균.
+        // 마나가 없어 채우지 않는 새싹은 뺀다.
         // 마법식물의 마나 소모 규칙 값은 환경 마나 흡수와 스스로 내는 마나를 빼지 않아 실제로 주는 비료보다 몇 배 크고 시각·기온에 따라 출렁이므로,
         // 둥지 비비가 실제로 준 양을 잰다.
         public float FertilizerPerDay()
@@ -353,7 +354,7 @@ namespace VVRace
             var refuelables = Map.listerThings.ThingsInGroup(ThingRequestGroup.Refuelable);
             for (int i = 0; i < refuelables.Count; ++i)
             {
-                if (refuelables[i].Faction != _owner.Faction) { continue; }
+                if (refuelables[i].Faction != _owner.Faction || JobGiver_ViviNestRefuel.IsStarvedSeedling(refuelables[i])) { continue; }
 
                 // 쓸 때만 태우는 것(대형 화분 등)은 하루 소모량을 알 수 없어 뺀다.
                 var props = refuelables[i].TryGetComp<CompRefuelable>()?.Props;

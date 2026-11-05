@@ -125,7 +125,7 @@ namespace VVRace
             return graph;
         }
 
-        // 방에 들어오면 영역을 잡고, 정착민이 드나들지 않게 플레이어 문을 금지하고, 방 안의 플레이어 구역을 지운다.
+        // 방에 들어오면 영역을 잡고 방 안의 플레이어 구역을 지운다. 방 문은 금지하지 않는다(정착민이 들어가지 않게 막는 것은 플레이어 몫, 경계심 참고).
         private void Settle()
         {
             if (_settled) { return; }
@@ -133,10 +133,6 @@ namespace VVRace
 
             _territory.Establish(_nestCell);
             _planner.Notify_Established();
-
-            // 정착할 때 방 안에 있던 정착민은 나갈 때까지 경계하지 않고 문도 지나 나갈 수 있다. 문은 바로 금지한다.
-            _hostility.Notify_Settled();
-            _planner.ForbidNestDoors();
 
             var zoneManager = Map.zoneManager;
             foreach (var room in _territory.Rooms)
