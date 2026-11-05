@@ -21,7 +21,13 @@ namespace VVRace
         public const int CreamTarget = 60;
         public const int WaxTarget = 80;
         public const int WoodTarget = 60;
-        public const int FertilizerTarget = 60;
+        // 마나 비료 비축 목표 = 둥지가 하루에 쓰는 비료 × 비축 일수(최소·최대 사이) + 둥지 청사진·골조에 들어갈 양.
+        // 장기 계측(툰드라 60일, 목표 60 고정): 바깥 새싹(하루 10개)이 9~12그루로 늘어 방출기(하루 8개)와 함께 하루 100개 넘게 쓰는 동안 둥지 비료가 세 번 0이 됐다.
+        // 비축 일수 5일은 새싹이 다 자라는 날 수(5~6.5일)라, 땅을 못 파는 독성 낙진(2.5~10.5일)·유독 연무(1~2일) 동안(바깥에 새 씨앗도 심지 않는다) 남은 새싹을 거의 끝까지 키운다.
+        // 최소 120은 방출기만으로 15일(독성 낙진 최장보다 길다), 최대 300은 비료 두 더미(150개씩)라 보관 칸을 크게 차지하지 않고 땅 파기(한 번에 10개)가 다른 일을 오래 밀어내지 않을 만큼이다.
+        public const int MinFertilizerTarget = 120;
+        public const int MaxFertilizerTarget = 300;
+        public const float FertilizerReserveDays = 5f;
         public const int CakeTarget = 40;
         public const int MedicineTarget = 10;
         public const int ClothForCostume = 50;
@@ -32,6 +38,8 @@ namespace VVRace
         public const float ProcessingWeight = 0.3f;
         // 채집 장소 둘레에서 플레이어 집 구역을 지우는 반경(바닐라 놓기가 같은 더미를 찾아 합치는 범위보다 넉넉히)
         private const float GatherSpotClearHomeRadius = 4f;
+        // 생산 주기마다 최근 마법식물에 준 비료에 곱해 비축 일수 동안의 지수 평균으로 만든다.
+        private static readonly float RecentPlantFertilizerDecay = UnityEngine.Mathf.Exp(-RefreshInterval / (FertilizerReserveDays * GenDate.TicksPerDay));
 
         private readonly LordJob_ViviNest _owner;
 
@@ -43,6 +51,9 @@ namespace VVRace
         private float _woodNeed;
         private float _fertilizerNeed;
         private float _medicineNeed;
+        private int _fertilizerTarget = MinFertilizerTarget;
+        // 최근 마법식물에 준 비료(지수 감쇠 합). 지난 비축 일수 동안 준 양이 남으므로 앞으로 비축 일수 동안 줄 양으로 본다.
+        private float _recentPlantFertilizer;
         // 타일 기후로 정해지므로 저장하지 않고 처음 쓸 때 잰다.
         private int _winterDays = -1;
 
@@ -60,11 +71,13 @@ namespace VVRace
         public float WoodNeed => _woodNeed;
         public float FertilizerNeed => _fertilizerNeed;
         public float MedicineNeed => _medicineNeed;
+        public int FertilizerTarget => _fertilizerTarget;
 
         public void Tick()
         {
             EnsureGatherSpot();
             EnsureWorkSpot();
+            UpdateFertilizerTarget();
             UpdateBills();
         }
 
@@ -260,7 +273,7 @@ namespace VVRace
             _billNeed[VVRecipeDefOf.VV_FilteringHoney] = ProcessingWeight * (honey > 0 ? (float)rawHoney / honey : 0f);
             _billNeed[VVRecipeDefOf.VV_Make_HoneyPollenCake] = ProcessingWeight * Shortage(cakes, CakeTarget);
             _woodNeed = Shortage(wood, Target(ThingDefOf.WoodLog, WoodTarget));
-            _fertilizerNeed = Shortage(stock.CountOf(VVThingDefOf.VV_Fertilizer), FertilizerTarget);
+            _fertilizerNeed = Shortage(stock.CountOf(VVThingDefOf.VV_Fertilizer), _fertilizerTarget);
             _medicineNeed = Shortage(stock.CountOf(ThingDefOf.MedicineHerbal) + stock.CountOf(ThingDefOf.MedicineIndustrial) + stock.CountOf(ThingDefOf.MedicineUltratech), MedicineTarget);
 
             SortBills(gather);
@@ -322,6 +335,39 @@ namespace VVRace
 
         // 비축 목표: 기본 목표에 둥지 청사진·골조에 아직 들어가야 할 양을 더한다.
         public int Target(ThingDef def, int baseTarget) => baseTarget + _owner.Planner.ResourceNeeded(def);
+
+        // 마나 비료 비축 목표를 생산 주기마다 다시 잰다(땅 비료·비료 주기 잡은 이 값을 쓴다).
+        private void UpdateFertilizerTarget()
+        {
+            _recentPlantFertilizer *= RecentPlantFertilizerDecay;
+            var target = UnityEngine.Mathf.CeilToInt(FertilizerPerDay() * FertilizerReserveDays);
+            _fertilizerTarget = Target(VVThingDefOf.VV_Fertilizer, UnityEngine.Mathf.Clamp(target, MinFertilizerTarget, MaxFertilizerTarget));
+        }
+
+        // 둥지가 하루에 쓰는 마나 비료: 비료를 태우는 둥지 것(마나 방출기·새싹)의 연료 소모(바닐라 연료 소모율) + 최근 마법식물에 준 양의 하루 평균.
+        // 마법식물의 마나 소모 규칙 값은 환경 마나 흡수와 스스로 내는 마나를 빼지 않아 실제로 주는 비료보다 몇 배 크고 시각·기온에 따라 출렁이므로,
+        // 둥지 비비가 실제로 준 양을 잰다.
+        public float FertilizerPerDay()
+        {
+            var perDay = _recentPlantFertilizer / FertilizerReserveDays;
+            var refuelables = Map.listerThings.ThingsInGroup(ThingRequestGroup.Refuelable);
+            for (int i = 0; i < refuelables.Count; ++i)
+            {
+                if (refuelables[i].Faction != _owner.Faction) { continue; }
+
+                // 쓸 때만 태우는 것(대형 화분 등)은 하루 소모량을 알 수 없어 뺀다.
+                var props = refuelables[i].TryGetComp<CompRefuelable>()?.Props;
+                if (props == null || props.consumeFuelOnlyWhenUsed || props.externalTicking || !props.fuelFilter.Allows(VVThingDefOf.VV_Fertilizer)) { continue; }
+
+                perDay += props.fuelConsumptionRate / props.FuelMultiplierCurrentDifficulty;
+            }
+            return perDay;
+        }
+
+        public void Notify_PlantFertilized(int count)
+        {
+            _recentPlantFertilizer += count;
+        }
 
         // 둥지 식량이 며칠 치인지(구성원이 배부를 때 배고파지는 속도 기준)
         public float FoodReserveDays()
@@ -426,6 +472,7 @@ namespace VVRace
         {
             Scribe_References.Look(ref _gatherSpot, "gatherSpot");
             Scribe_References.Look(ref _workSpot, "workSpot");
+            Scribe_Values.Look(ref _recentPlantFertilizer, "recentPlantFertilizer");
         }
     }
 }

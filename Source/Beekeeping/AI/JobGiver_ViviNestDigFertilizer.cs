@@ -26,7 +26,7 @@ namespace VVRace
             var nest = pawn.GetNestLordJob();
             if (nest == null || !nest.Settled || !pawn.DevelopmentalStage.Adult()) { return null; }
             if (JobGiver_ViviNestRest.IsNight(pawn) || BeekeepingUtility.OutdoorDangerous(pawn.Map)) { return null; }
-            if (nest.Stock.CountOf(VVThingDefOf.VV_Fertilizer) >= ViviNestProduction.FertilizerTarget) { return null; }
+            if (nest.Stock.CountOf(VVThingDefOf.VV_Fertilizer) >= nest.Production.FertilizerTarget) { return null; }
 
             return TryFindDigCell(pawn, nest, out var cell) ? JobMaker.MakeJob(VVJobDefOf.VV_ViviNestDigFertilizer, cell) : null;
         }

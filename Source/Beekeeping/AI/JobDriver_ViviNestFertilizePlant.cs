@@ -60,7 +60,13 @@ namespace VVRace
             var count = Mathf.Min(FertilizerCountToFill(mana), fertilizer.stackCount);
             mana.Stored += count * ManaPerFertilizer;
             fertilizer.SplitOff(count).Destroy();
-            pawn.GetNestLordJob()?.Stock.MarkDirty();
+
+            var nest = pawn.GetNestLordJob();
+            if (nest != null)
+            {
+                nest.Stock.MarkDirty();
+                nest.Production.Notify_PlantFertilized(count);
+            }
         }
 
         // 바닐라 연료 보충(CompRefuelable.GetFuelCountToFullyRefuel)처럼 가득 찰 만큼 올림으로 센다.
