@@ -277,6 +277,7 @@
     <Compile Include="Beekeeping\BeekeepingUtility.cs" />
     <Compile Include="Beekeeping\ViviNestSiteEvaluator.cs" />
     <Compile Include="Beekeeping\Things\Building_ViviLure.cs" />
+    <Compile Include="Beekeeping\UI\ITab_ViviLureConditions.cs" />
     <Compile Include="Beekeeping\Incidents\IncidentWorker_ViviLureVisit.cs" />
     <Compile Include="Beekeeping\Incidents\IncidentWorker_ViviNestSettlers.cs" />
     <Compile Include="Beekeeping\Lord\LordToil_ViviDuty.cs" />

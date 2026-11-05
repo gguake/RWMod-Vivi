@@ -59,6 +59,7 @@
         public const string VV_Inspector_QueenRebirth = nameof(VV_Inspector_QueenRebirth);
 
         public const string VV_Inspector_LureBaitReady = nameof(VV_Inspector_LureBaitReady);
+        public const string VV_Inspector_LureBaitReadyUnmet = nameof(VV_Inspector_LureBaitReadyUnmet);
         public const string VV_Inspector_LureNoBait = nameof(VV_Inspector_LureNoBait);
         public const string VV_Inspector_LureScouting = nameof(VV_Inspector_LureScouting);
         public const string VV_Inspector_LureThief = nameof(VV_Inspector_LureThief);
@@ -73,10 +74,7 @@
         public const string VV_Inspector_LureConditionUnreachable = nameof(VV_Inspector_LureConditionUnreachable);
         public const string VV_Inspector_LureMissingFlowers = nameof(VV_Inspector_LureMissingFlowers);
         public const string VV_Inspector_LureMissingRoom = nameof(VV_Inspector_LureMissingRoom);
-        public const string VV_Inspector_LureScoreFlowers = nameof(VV_Inspector_LureScoreFlowers);
-        public const string VV_Inspector_LureScoreRoom = nameof(VV_Inspector_LureScoreRoom);
-        public const string VV_Inspector_LureScoreMana = nameof(VV_Inspector_LureScoreMana);
-        public const string VV_Inspector_LureScoreTotal = nameof(VV_Inspector_LureScoreTotal);
+        public const string VV_Inspector_LureMissingFertileSoil = nameof(VV_Inspector_LureMissingFertileSoil);
         public const string VV_Inspector_ViviNestWariness = nameof(VV_Inspector_ViviNestWariness);
     }
 }

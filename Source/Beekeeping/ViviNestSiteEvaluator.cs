@@ -20,9 +20,12 @@ namespace VVRace
         public float averageMana;
         public float manaScore;
 
+        public int fertileCellCount;
+
         public bool HasEnoughFlowers => flowerCount >= ViviNestSiteEvaluator.MinFlowerCount;
         public bool HasRoom => bestRoom != null;
-        public bool Acceptable => HasEnoughFlowers && HasRoom;
+        public bool HasEnoughFertileSoil => fertileCellCount >= ViviNestSiteEvaluator.MinFertileCells;
+        public bool Acceptable => HasEnoughFlowers && HasRoom && HasEnoughFertileSoil;
 
         public float TotalScore => Acceptable
             ? ViviNestSiteEvaluator.FlowerWeight * flowerScore + ViviNestSiteEvaluator.RoomWeight * roomScore + ViviNestSiteEvaluator.ManaWeight * manaScore
@@ -45,32 +48,16 @@ namespace VVRace
                 {
                     sb.AppendInNewLine(LocalizeString_Inspector.VV_Inspector_LureMissingRoom.Translate());
                 }
+                if (!HasEnoughFertileSoil)
+                {
+                    sb.AppendInNewLine(LocalizeString_Inspector.VV_Inspector_LureMissingFertileSoil.Translate(fertileCellCount, ViviNestSiteEvaluator.MinFertileCells));
+                }
                 return sb.ToString();
             }
         }
-
-        public string ToInspectString()
-        {
-            var sb = new StringBuilder();
-            sb.Append(LocalizeString_Inspector.VV_Inspector_LureScoreFlowers.Translate(flowerCount, ViviNestSiteEvaluator.MinFlowerCount, flowerScore.ToStringPercent()));
-            if (HasRoom)
-            {
-                sb.AppendInNewLine(LocalizeString_Inspector.VV_Inspector_LureScoreRoom.Translate(roomCellCount, roomBuildingCount, roomScore.ToStringPercent()));
-            }
-            else
-            {
-                sb.AppendInNewLine(LocalizeString_Inspector.VV_Inspector_LureMissingRoom.Translate());
-            }
-            sb.AppendInNewLine(LocalizeString_Inspector.VV_Inspector_LureScoreMana.Translate(averageMana.ToString("0"), manaScore.ToStringPercent()));
-            if (Acceptable)
-            {
-                sb.AppendInNewLine(LocalizeString_Inspector.VV_Inspector_LureScoreTotal.Translate(TotalScore.ToStringPercent()));
-            }
-            return sb.ToString();
-        }
     }
 
-    // 유인통 주변이 비비가 살 만한 곳인지 꽃·빈 방·환경 마나로 매긴다.
+    // 유인통 주변이 비비가 살 만한 곳인지 꽃·빈 방·비옥한 땅·환경 마나로 매긴다. 비옥한 땅은 최소 요건만 보고 점수에는 넣지 않는다.
     public static class ViviNestSiteEvaluator
     {
         public const float Radius = 16f;
@@ -84,6 +71,14 @@ namespace VVRace
         public const float BuildingPenalty = 0.15f;
 
         public const float FullMana = 300f;
+
+        // 비옥한 땅: 둥지가 땅에 기대는 일은 모두 비옥도 0.7 이상 칸에서 한다(씨앗·풍년화 자리 JobGiver_ViviNestPlantSeed.MinFertility, 땅 비료 파기,
+        // 바닐라 목화·장미 심기 하한 fertilityMin 0.7). 그런 바깥 칸에 목화밭 6칸(ViviNestGarden.CottonCellCount), 풍년화 1칸,
+        // 바깥 마법식물(장기 계측 온대 60일: 다 자란 마법식물이 35일에 20그루), 꽃 목표 40송이(ViviNestGarden.MinFlowerTarget)의 장미 밭을 두면 70칸 남짓이고,
+        // 땅 비료는 바깥 보관 칸 둘레 10칸(317칸)에서 무작위 20칸을 골라 비옥한 빈 칸을 파므로 그 원의 10%(32칸)가 비옥하면 한 번에 찾을 확률이 88%다.
+        // 그래서 유인통 반경 16칸(약 800칸)의 10%인 80칸을 최소로 둔다. 지붕·건물·구역이 있는 칸은 둥지가 쓰지 못하므로 세지 않는다.
+        public const float MinFertility = JobGiver_ViviNestPlantSeed.MinFertility;
+        public const int MinFertileCells = 80;
 
         public const float FlowerWeight = 0.45f;
         public const float RoomWeight = 0.35f;
@@ -153,6 +148,11 @@ namespace VVRace
                 {
                     _tmpRooms.Add(room);
                 }
+
+                if (IsUsableFertileCell(map, cell))
+                {
+                    report.fertileCellCount++;
+                }
             }
 
             report.flowerScore = Mathf.InverseLerp(MinFlowerCount, FullFlowerCount, report.flowerCount);
@@ -179,6 +179,13 @@ namespace VVRace
             report.manaScore = Mathf.Clamp01(report.averageMana / FullMana);
 
             return report;
+        }
+
+        // 둥지가 꽃·목화·마법식물을 심고 땅 비료를 팔 수 있는 바깥 칸. 둥지 바깥 자리 고르기처럼 지붕·건물·구역이 있는 칸은 뺀다(ViviNestPlanner.IsFreeOutdoorCell).
+        public static bool IsUsableFertileCell(Map map, IntVec3 cell)
+        {
+            if (cell.Roofed(map) || cell.GetEdifice(map) != null || map.zoneManager.ZoneAt(cell) != null) { return false; }
+            return map.fertilityGrid.FertilityAt(cell) >= MinFertility;
         }
 
         // 0이면 둥지로 쓸 수 없는 방이다.

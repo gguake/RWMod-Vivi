@@ -3,6 +3,7 @@
 
 <!-- Lure inspector -->
 <VV_Inspector_LureBaitReady>Honey scent: wafting</VV_Inspector_LureBaitReady>
+<VV_Inspector_LureBaitReadyUnmet>Honey scent: wafting ({0} conditions not met, see the Conditions tab)</VV_Inspector_LureBaitReadyUnmet>
 <VV_Inspector_LureNoBait>Honey scent: none (place honey, ambrosia or berries on it)</VV_Inspector_LureNoBait>
 <VV_Inspector_LureScouting>Vivi scouts are looking around.</VV_Inspector_LureScouting>
 <VV_Inspector_LureThief>Something is after the bait.</VV_Inspector_LureThief>
@@ -17,10 +18,47 @@
 <VV_Inspector_LureConditionUnreachable>The vivis cannot reach the room from the map edge.</VV_Inspector_LureConditionUnreachable>
 <VV_Inspector_LureMissingFlowers>Not enough honey flowers nearby ({0}/{1}).</VV_Inspector_LureMissingFlowers>
 <VV_Inspector_LureMissingRoom>No empty room nearby with a door and a full roof.</VV_Inspector_LureMissingRoom>
-<VV_Inspector_LureScoreFlowers>Honey flowers: {0} (need {1}) - {2}</VV_Inspector_LureScoreFlowers>
-<VV_Inspector_LureScoreRoom>Best room: {0} cells, {1} buildings inside - {2}</VV_Inspector_LureScoreRoom>
-<VV_Inspector_LureScoreMana>Environment mana: {0} - {1}</VV_Inspector_LureScoreMana>
-<VV_Inspector_LureScoreTotal>Nest score: {0}</VV_Inspector_LureScoreTotal>
+<VV_Inspector_LureMissingFertileSoil>Not enough fertile land nearby ({0}/{1}).</VV_Inspector_LureMissingFertileSoil>
+
+<!-- Lure conditions tab -->
+<VV_ITab_ViviLure_TabLabel>Conditions</VV_ITab_ViviLure_TabLabel>
+<VV_ITab_ViviLure_SectionStatus>Status</VV_ITab_ViviLure_SectionStatus>
+<VV_ITab_ViviLure_SectionVisit>Visit conditions</VV_ITab_ViviLure_SectionVisit>
+<VV_ITab_ViviLure_SectionSite>Nest site conditions</VV_ITab_ViviLure_SectionSite>
+<VV_ITab_ViviLure_Idle>Waiting for visitors. When all visit conditions are met, visitors following the honey scent come now and then; if the nest site conditions are met too, a band of vivis may follow the scouts and move in.</VV_ITab_ViviLure_Idle>
+<VV_ITab_ViviLure_Map>Home map on the ground</VV_ITab_ViviLure_Map>
+<VV_ITab_ViviLure_NoRoyal>No royal vivi on the map</VV_ITab_ViviLure_NoRoyal>
+<VV_ITab_ViviLure_ViviCount>At most {0} colony vivis</VV_ITab_ViviLure_ViviCount>
+<VV_ITab_ViviLure_ViviCountValue>{0}</VV_ITab_ViviLure_ViviCountValue>
+<VV_ITab_ViviLure_NoHostile>No hostiles on the map</VV_ITab_ViviLure_NoHostile>
+<VV_ITab_ViviLure_Temperature>Comfortable temperature for vivis</VV_ITab_ViviLure_Temperature>
+<VV_ITab_ViviLure_TemperatureValue>{0} (season {1})</VV_ITab_ViviLure_TemperatureValue>
+<VV_ITab_ViviLure_TemperatureTip>Vivis in basic clothes are safe from {0} to {1}. Both the outdoor and the seasonal temperature must be in this range.</VV_ITab_ViviLure_TemperatureTip>
+<VV_ITab_ViviLure_Season>Flowers are growing</VV_ITab_ViviLure_Season>
+<VV_ITab_ViviLure_Weather>Safe to be outside</VV_ITab_ViviLure_Weather>
+<VV_ITab_ViviLure_WeatherTip>Vivis do not come during toxic fallout, noxious haze or other conditions that make it dangerous to be outside.</VV_ITab_ViviLure_WeatherTip>
+<VV_ITab_ViviLure_Bait>Honey food bait</VV_ITab_ViviLure_Bait>
+<VV_ITab_ViviLure_BaitValue>{0}</VV_ITab_ViviLure_BaitValue>
+<VV_ITab_ViviLure_BaitTip>Place honey, ambrosia, honey dishes or berries on the lure to spread the scent. Visiting scouts eat one each while sniffing; bears eat it all.</VV_ITab_ViviLure_BaitTip>
+<VV_ITab_ViviLure_NoOtherLure>No other lure in progress and no nest</VV_ITab_ViviLure_NoOtherLure>
+<VV_ITab_ViviLure_Reachable>Path from the map edge</VV_ITab_ViviLure_Reachable>
+<VV_ITab_ViviLure_Flowers>At least {0} honey flowers</VV_ITab_ViviLure_Flowers>
+<VV_ITab_ViviLure_FlowersValue>{0} (score {1})</VV_ITab_ViviLure_FlowersValue>
+<VV_ITab_ViviLure_FlowersTip>Honey flowers within {0} cells of the lure. {1} flowers give a full flower score.</VV_ITab_ViviLure_FlowersTip>
+<VV_ITab_ViviLure_Room>Empty roofed room with a door</VV_ITab_ViviLure_Room>
+<VV_ITab_ViviLure_RoomValue>{0} cells, {1} buildings (score {2})</VV_ITab_ViviLure_RoomValue>
+<VV_ITab_ViviLure_RoomTip>The best room within {0} cells of the lure: {1}-{2} cells with a door and a full roof, not someone's bedroom, a prison or on a gravship. Each building inside (except arcane plants, pots and lures) lowers the room score by {3}.</VV_ITab_ViviLure_RoomTip>
+<VV_ITab_ViviLure_RoomReachable>Path from the map edge to the room</VV_ITab_ViviLure_RoomReachable>
+<VV_ITab_ViviLure_None>none</VV_ITab_ViviLure_None>
+<VV_ITab_ViviLure_FertileSoil>At least {0} fertile cells</VV_ITab_ViviLure_FertileSoil>
+<VV_ITab_ViviLure_FertileSoilValue>{0} cells</VV_ITab_ViviLure_FertileSoilValue>
+<VV_ITab_ViviLure_FertileSoilTip>Cells within {0} cells of the lure with no roof, building or zone and at least {1} fertility. A vivi nest plants cotton, roses and arcane plants there and digs mana fertilizer out of the soil.</VV_ITab_ViviLure_FertileSoilTip>
+<VV_ITab_ViviLure_Mana>Environment mana</VV_ITab_ViviLure_Mana>
+<VV_ITab_ViviLure_ManaValue>{0} (score {1})</VV_ITab_ViviLure_ManaValue>
+<VV_ITab_ViviLure_ManaTip>Average environment mana within {0} cells of the lure. Not required; {1} gives a full mana score.</VV_ITab_ViviLure_ManaTip>
+<VV_ITab_ViviLure_Score>Nest score</VV_ITab_ViviLure_Score>
+<VV_ITab_ViviLure_ScoreValue>{0} ({1} settlers)</VV_ITab_ViviLure_ScoreValue>
+<VV_ITab_ViviLure_ScoreTip>Nest score = flower score × {0} + room score × {1} + mana score × {2}. The higher it is, the sooner ({3} to {4}) and the more ({5}-{6}) vivis come.</VV_ITab_ViviLure_ScoreTip>
 
 <!-- Lure letters and messages -->
 <VV_Letter_ViviLureScoutsLabel>Vivi scouts</VV_Letter_ViviLureScoutsLabel>

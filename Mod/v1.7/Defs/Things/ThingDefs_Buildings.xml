@@ -479,7 +479,7 @@
   <ThingDef ParentName="ShelfBase">
     <defName>VV_ViviLure</defName>
     <label>vivi lure</label>
-    <description>A little censer-shelf that wafts the scent of the honey food set on it. Wandering vivis who catch the scent may come to look around, and if they like the place - honey flowers nearby, an empty roofed room with a door, a little mana in the air - a small band may come back and live in that room.\n\nBears and the odd titanic hornet like honey too.\n\nOnce vivis have settled, the lure has done its job and can be removed.</description>
+    <description>A little censer-shelf that wafts the scent of the honey food set on it. Wandering vivis who catch the scent may come to look around, and if they like the place - honey flowers and fertile soil nearby, an empty roofed room with a door, a little mana in the air - a small band may come back and live in that room. The conditions tab shows what they look for.\n\nBears and the odd titanic hornet like honey too.\n\nOnce vivis have settled, the lure has done its job and can be removed.</description>
     <thingClass>VVRace.Building_ViviLure</thingClass>
     <tickerType>Rare</tickerType>
     <graphicData>
@@ -498,6 +498,10 @@
     <size>(1,1)</size>
     <designationCategory>Misc</designationCategory>
     <researchPrerequisites Inherit="False" />
+    <!-- 선반의 저장 탭 뒤에 방문·둥지 자리 조건 탭을 더한다 -->
+    <inspectorTabs>
+      <li>VVRace.ITab_ViviLureConditions</li>
+    </inspectorTabs>
     <building>
       <maxItemsInCell>2</maxItemsInCell>
       <fixedStorageSettings>

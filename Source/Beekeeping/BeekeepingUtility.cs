@@ -72,13 +72,13 @@ namespace VVRace
             Find.FactionManager.Notify_PawnLeftFaction(faction);
         }
 
-        // 맵마다 유인(방문·정착대 대기)이나 둥지는 하나만 둔다.
-        public static bool AnyNestOrAttraction(Map map)
+        // 맵마다 유인(방문·정착대 대기)이나 둥지는 하나만 둔다. except는 묻는 유인통 자신(유인 조건 탭)이라 세지 않는다.
+        public static bool AnyNestOrAttraction(Map map, Building_ViviLure except = null)
         {
             var lures = map.listerBuildings.AllBuildingsColonistOfDef(VVThingDefOf.VV_ViviLure);
             for (int i = 0; i < lures.Count; ++i)
             {
-                if (lures[i] is Building_ViviLure lure && lure.InProgress)
+                if (lures[i] is Building_ViviLure lure && lure != except && lure.InProgress)
                 {
                     return true;
                 }
@@ -219,17 +219,27 @@ namespace VVRace
             }
         }
 
-        public static bool ClimateSuitable(Map map, out string reason)
+        // 아래 조건 하나하나는 판정(CheckArrivalConditions)과 유인 조건 탭(Building_ViviLure.ConditionRows)이 함께 쓴다.
+        public static bool TemperatureSuitable(Map map)
         {
             var safe = WanderingViviSafeTemperature;
-            if (!safe.Includes(map.mapTemperature.OutdoorTemp) || !safe.Includes(map.mapTemperature.SeasonalTemp))
+            return safe.Includes(map.mapTemperature.OutdoorTemp) && safe.Includes(map.mapTemperature.SeasonalTemp);
+        }
+
+        // 꿀을 딸 꽃이 자라는 철이어야 한다.
+        public static bool FlowerSeasonNow(Map map) => PlantUtility.GrowthSeasonNow(map, ThingDefOf.Plant_Dandelion);
+
+        public static bool AnyHostileThreat(Map map) => GenHostility.AnyHostileActiveThreatTo(map, Faction.OfPlayer);
+
+        public static bool ClimateSuitable(Map map, out string reason)
+        {
+            if (!TemperatureSuitable(map))
             {
                 reason = LocalizeString_Inspector.VV_Inspector_LureConditionTemperature.Translate();
                 return false;
             }
 
-            // 꿀을 딸 꽃이 자라는 철이어야 한다.
-            if (!PlantUtility.GrowthSeasonNow(map, ThingDefOf.Plant_Dandelion))
+            if (!FlowerSeasonNow(map))
             {
                 reason = LocalizeString_Inspector.VV_Inspector_LureConditionSeason.Translate();
                 return false;
@@ -267,7 +277,7 @@ namespace VVRace
                 return false;
             }
 
-            if (GenHostility.AnyHostileActiveThreatTo(map, Faction.OfPlayer))
+            if (AnyHostileThreat(map))
             {
                 reason = LocalizeString_Inspector.VV_Inspector_LureConditionHostile.Translate();
                 return false;
