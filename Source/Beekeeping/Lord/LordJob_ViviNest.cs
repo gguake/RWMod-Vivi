@@ -1,4 +1,5 @@
 ﻿using RimWorld;
+using System.Collections.Generic;
 using System.Linq;
 using Verse;
 using Verse.AI;
@@ -37,7 +38,12 @@ namespace VVRace
         public ViviNestGarden Garden => _garden;
         public ViviNestHostility Hostility => _hostility;
 
-        public const float StarvingDaysToLeave = 2f;
+        // 남은 식량이 이만큼(일)보다 적고 모을 꽃도 없는 채로 이만큼(일) 지나면 굶어 죽기 전에 떠난다.
+        // 예전 조건(식량 0 + 평균 배고픔 0.1 미만 2일)은 평균이 그만큼 떨어지기 전에 하나씩 굶어 죽어 둥지가 전멸했다(장기 계측: 북방림 겨울).
+        // 꽃은 채집할 만큼 자란 것만 센다. 겨울에 갓 심어 자라지 못하는 꽃까지 셌더니 식량이 바닥난 채 떠나지 않아 아기가 굶어 죽었다(장기 계측: 온대림 겨울).
+        public const float LowFoodDaysToLeave = 1f;
+        public const int MinFlowersToStay = 10;
+        public const float StarvingDaysToLeave = 0.5f;
         public const float RoomLostDaysToLeave = 1f;
 
         public override bool AddFleeToil => false;
@@ -201,7 +207,8 @@ namespace VVRace
                 }
             }
 
-            var starving = _stock.FoodNutrition <= 0.01f && fed > 0 && foodSum / fed < 0.1f;
+            var starving = fed > 0 && ((_production.FoodReserveDays() < LowFoodDaysToLeave && _garden.GatherableFlowerCount < MinFlowersToStay)
+                || (_stock.FoodNutrition <= 0.01f && foodSum / fed < 0.1f));
             _starvingSince = starving ? (_starvingSince < 0 ? ticks : _starvingSince) : -1;
 
             var roomCells = _territory.OwnedRoomCells.Count;
@@ -318,7 +325,8 @@ namespace VVRace
 
         public void MarkOwned(Thing thing)
         {
-            if (thing == null || thing.Destroyed) { return; }
+            // 시체는 둥지 몫이 아니다(둥지 밖에 버린 시체를 운반이 다시 들여오지 않게). 옮기다 내려놓은 폰(쓰러진 구성원·아기)도 물건이 아니다.
+            if (thing == null || thing.Destroyed || thing is Corpse || thing is Pawn) { return; }
 
             thing.SetForbidden(true, warnOnFail: false);
             // 놓기 직전의 산출물도 잡아 두면 둥지 밖에 놓여도 둥지 몫으로 남는다(둥지 칸에 놓이면 장부가 알아서 뺀다).
@@ -329,10 +337,14 @@ namespace VVRace
             _stock.MarkDirty();
         }
 
-        public bool TryFindSleepSpot(Pawn pawn, out IntVec3 cell)
+        // 잠자리는 편한 기온의 둥지 방에서 고른다. 증축 방에는 잔불꽃이 없어 겨울에 영하로 내려가는데 방을 가리지 않고 골랐더니,
+        // 그 방에서 자던 아이가 동상으로 죽었다(장기 계측: 온대림 겨울, 증축 방 -12°C).
+        public bool TryFindSleepSpot(Pawn pawn, out IntVec3 cell) => TryFindRoomCell(pawn, ComfortableRooms(pawn), out cell);
+
+        // 고른 둥지 방들 중 설 수 있고 건물이 없는 칸
+        public bool TryFindRoomCell(Pawn pawn, IReadOnlyList<Room> rooms, out IntVec3 cell)
         {
             var map = Map;
-            var rooms = _territory.Rooms;
             for (int i = 0; i < SleepSpotTries && rooms.Count > 0; ++i)
             {
                 if (!rooms.RandomElement().Cells.TryRandomElement(out cell)) { continue; }
@@ -343,6 +355,35 @@ namespace VVRace
 
             cell = IntVec3.Invalid;
             return false;
+        }
+
+        private static readonly List<Room> _tmpComfortableRooms = new List<Room>();
+
+        // 그 비비에게 편한 기온의 둥지 방들. 그런 방이 없으면 기온이 편한 범위에서 가장 덜 벗어난 방 하나.
+        public List<Room> ComfortableRooms(Pawn pawn)
+        {
+            _tmpComfortableRooms.Clear();
+            var range = pawn.ComfortableTemperatureRange();
+            Room best = null;
+            var bestGap = float.MaxValue;
+            var rooms = _territory.Rooms;
+            for (int i = 0; i < rooms.Count; ++i)
+            {
+                var temperature = rooms[i].Temperature;
+                var gap = temperature < range.min ? range.min - temperature : (temperature > range.max ? temperature - range.max : 0f);
+                if (gap <= 0f)
+                {
+                    _tmpComfortableRooms.Add(rooms[i]);
+                }
+                else if (gap < bestGap)
+                {
+                    best = rooms[i];
+                    bestGap = gap;
+                }
+            }
+
+            if (_tmpComfortableRooms.Count == 0 && best != null) { _tmpComfortableRooms.Add(best); }
+            return _tmpComfortableRooms;
         }
 
         public bool TryGetRandomRoomCell(out IntVec3 cell)

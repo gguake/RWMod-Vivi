@@ -30,6 +30,15 @@
     <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
   </JobDef>
 
+  <!-- 둥지 비비가 저장 마나가 낮은 둥지 마법식물에 둥지 몫 마나 비료를 준다(바닐라 연료 보충과 같은 설정) -->
+  <JobDef>
+    <defName>VV_ViviNestFertilizePlant</defName>
+    <driverClass>VVRace.JobDriver_ViviNestFertilizePlant</driverClass>
+    <reportString>fertilizing TargetA.</reportString>
+    <suspendable>false</suspendable>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef>
+
   <!-- 곰·말벌이 유인통 미끼를 먹어 치운다 -->
   <JobDef>
     <defName>VV_DevourBait</defName>

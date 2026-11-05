@@ -41,7 +41,7 @@ namespace VVRace
 
                         // 둥지 비비가 털어 낸 꽃가루는 둥지 몫이다.
                         gatherer.GetNestLordJob()?.MarkOwned(thing);
-                        var placed = BeekeepingUtility.TryPlaceProduct(thing, gatherer, position, map);
+                        var placed = GenPlace.TryPlaceThing(thing, position, map, ThingPlaceMode.Near);
                         if (!placed)
                         {
                             thing.Destroy();

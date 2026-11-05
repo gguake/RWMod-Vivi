@@ -4,7 +4,7 @@ using Verse;
 
 namespace VVRace
 {
-    // 둥지 경계심(0~100). 정착민이 둥지 방 안에 들어오면 빠르게 오르고, 아무도 없으면 천천히 내려간다.
+    // 둥지 경계심(0~100). 플레이어가 정착민을 둥지 방 안에 들여보내면(소집·직접 지시) 빠르게 오르고, 아무도 없으면 천천히 내려간다.
     // 물건을 가져가는 것은 상관없다. 가득 차면 임시 세력이 플레이어와 적대가 되고 둥지 로드의 적대 전이로 달아난다.
     public class ViviNestHostility : IExposable
     {
@@ -23,8 +23,10 @@ namespace VVRace
 
         private float _level;
         private int _warned;
-        // 정착할 때 이미 방 안에 있던 정착민과 벽이 뚫린 동안 스스로 들어온 정착민(나갈 때까지 세지 않고, 둥지 방 문을 지나 나갈 수 있다)
+        // 정착할 때 이미 방 안에 있던 정착민과 스스로 들어와 있는 정착민(나갈 때까지 세지 않고, 둥지 방 문을 지나 나갈 수 있다)
         private List<Pawn> _grace = new List<Pawn>();
+        // 플레이어가 들여보낸 정착민(둥지 방 칸에서 소집·직접 지시된 적이 있다). 나갈 때까지는 소집을 풀거나 지시가 끝나도 센다.
+        private List<Pawn> _intruders = new List<Pawn>();
 
         public ViviNestHostility(LordJob_ViviNest owner)
         {
@@ -42,6 +44,36 @@ namespace VVRace
             {
                 if (!pawn.RaceProps.Animal && IsInsideOrInDoorway(pawn)) { _grace.Add(pawn); }
             }
+        }
+
+        // 증축 방이 둥지 방으로 들어올 때 그 안(문 칸 포함)에 있던 정착민도 정착 때처럼 나갈 때까지 세지 않고 둥지 방 문을 지나 나갈 수 있다.
+        // 증축 공사 중 벽이 덜 선 자리에 산책하다 들어간 정착민이 벽이 닫히며 금지된 둥지 문 안에 갇힌 채 침입자로 세어져,
+        // 250틱마다 경계심이 10씩 올라 적대가 되었다(자동 테스트 p3 B8 뒤, p5 H10으로 재현).
+        public void Notify_RoomAdded(Room room)
+        {
+            if (room == null) { return; }
+
+            var map = _owner.Map;
+            foreach (var pawn in map.mapPawns.SpawnedPawnsInFaction(Faction.OfPlayer))
+            {
+                if (pawn.RaceProps.Animal || _grace.Contains(pawn)) { continue; }
+
+                var cell = pawn.Position;
+                if (cell.GetRoom(map) == room || (cell.GetDoor(map) != null && IsNextToRoom(cell, room, map)))
+                {
+                    _grace.Add(pawn);
+                }
+            }
+        }
+
+        private static bool IsNextToRoom(IntVec3 cell, Room room, Map map)
+        {
+            foreach (var dir in GenAdj.CardinalDirections)
+            {
+                var adj = cell + dir;
+                if (adj.InBounds(map) && adj.GetRoom(map) == room) { return true; }
+            }
+            return false;
         }
 
         // 둥지 방 칸이나 그 문 칸에 있다. 문 칸에서 방으로 되돌아 들어가는 것은 문 통과가 아니라서 막히지 않으므로, 유예는 문 칸까지는 나가지 않은 것으로 본다.
@@ -67,22 +99,27 @@ namespace VVRace
             UpdateWarnings();
         }
 
-        // 정착민·노예·기계체(동물 제외)가 둥지 방 칸에 들어와 있는 수.
-        // 벽이 뚫린 방(지금은 바깥과 이어진 원래 방 칸)에는 정착민이 산책·청소하다 스스로 들어오므로, 그곳에서는 플레이어가 보낸(소집·직접 지시) 정착민만 센다.
-        // 스스로 들어온 정착민은 유예 목록에 넣어, 그사이 구멍이 메워져 금지 문 안에 갇혀도 세지 않고 문을 지나 나갈 수 있게 한다.
+        // 정착민·노예·기계체(동물 제외) 중 플레이어가 둥지 방 칸에 들여보낸(소집·직접 지시) 수. 한 번 들여보낸 폰은 나갈 때까지 센다.
+        // 금지된 둥지 문은 스스로 지나지 못하므로, 스스로 들어와 있는 정착민은 플레이어가 보낸 것이 아니다(벽이 뚫린 동안 산책·청소, 증축 방이 닫힘, 정신 이상,
+        // 문 칸에 들어서던 중 정착 등). 그런 정착민은 유예 목록에 넣어, 그사이 구멍이 메워져 금지 문 안에 갇혀도 세지 않고 문을 지나 나갈 수 있게 한다.
+        // 자동 테스트에서 정착 직후·구멍을 메운 직후 스스로 들어와 있던 정착민이 세어져 적대가 되는 일이 간헐적으로 있었다(들어온 경로는 끝내 재현하지 못했다).
         private int CountIntruders()
         {
             var map = _owner.Map;
             var territory = _owner.Territory;
             var count = 0;
             _grace.RemoveAll(p => p == null || !p.Spawned || p.Map != map || !IsInsideOrInDoorway(p));
+            _intruders.RemoveAll(p => p == null || !p.Spawned || p.Map != map || !IsInsideOrInDoorway(p));
             foreach (var pawn in map.mapPawns.SpawnedPawnsInFaction(Faction.OfPlayer))
             {
                 if (pawn.RaceProps.Animal || pawn.Dead || _grace.Contains(pawn)) { continue; }
+                if (!territory.IsNestRoomCell(pawn.Position)) { continue; }
 
-                var cell = pawn.Position;
-                if (!territory.IsNestRoomCell(cell)) { continue; }
-                if (!territory.IsRoomCell(cell) && !pawn.Drafted && !(pawn.CurJob?.playerForced ?? false))
+                if (pawn.Drafted || (pawn.CurJob?.playerForced ?? false))
+                {
+                    if (!_intruders.Contains(pawn)) { _intruders.Add(pawn); }
+                }
+                else if (!_intruders.Contains(pawn))
                 {
                     _grace.Add(pawn);
                     continue;
@@ -176,10 +213,12 @@ namespace VVRace
             Scribe_Values.Look(ref _level, "level");
             Scribe_Values.Look(ref _warned, "warned");
             Scribe_Collections.Look(ref _grace, "grace", LookMode.Reference);
+            Scribe_Collections.Look(ref _intruders, "intruders", LookMode.Reference);
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
                 _grace.RemoveAll(p => p == null);
+                _intruders.RemoveAll(p => p == null);
             }
         }
     }

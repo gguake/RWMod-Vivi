@@ -309,6 +309,13 @@
     <Compile Include="Beekeeping\AI\JobDriver_ViviNestBuildRoof.cs" />
     <Compile Include="Beekeeping\AI\JobGiver_ViviNestSmoothWall.cs" />
     <Compile Include="Beekeeping\AI\JobGiver_ViviNestRefuel.cs" />
+    <Compile Include="Beekeeping\AI\JobGiver_ViviNestFertilizePlant.cs" />
+    <Compile Include="Beekeeping\AI\JobDriver_ViviNestFertilizePlant.cs" />
+    <Compile Include="Beekeeping\AI\JobGiver_ViviNestRemoveCorpse.cs" />
+    <Compile Include="Beekeeping\AI\JobGiver_ViviNestTend.cs" />
+    <Compile Include="Beekeeping\AI\JobGiver_ViviNestSeekSafeTemperature.cs" />
+    <Compile Include="Beekeeping\AI\JobGiver_ViviNestRescue.cs" />
+    <Compile Include="Beekeeping\AI\JobGiver_ViviNestHarvestHealroot.cs" />
     <Compile Include="Beekeeping\AI\JobGiver_ViviNestPlantSeed.cs" />
     <Compile Include="Beekeeping\AI\JobGiver_ViviNestGarden.cs" />
     <Compile Include="Beekeeping\AI\JobGiver_ViviNestPlay.cs" />

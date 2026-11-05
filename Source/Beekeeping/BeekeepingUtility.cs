@@ -93,6 +93,7 @@ namespace VVRace
             var lord = GetNestLord(hatchery.Map);
             if (lord == null || ((LordJob_ViviNest)lord.LordJob).Faction != baby.Faction) { return; }
 
+            RemoveChemicalDependencies(baby);
             lord.AddPawn(baby);
             Messages.Message(LocalizeString_Message.VV_Message_ViviNestBabyHatched.Translate(baby.Faction.Name), baby, MessageTypeDefOf.PositiveEvent);
         }
@@ -111,15 +112,22 @@ namespace VVRace
             return null;
         }
 
-        // 채집·털기로 얻은 물건을 놓는다. 둥지 비비가 얻은 둥지 몫은 둥지 몫이 아닌 같은 물건 더미가 있는 칸을 피해 놓는다(합쳐지면 둥지 몫이 사라진다).
-        public static bool TryPlaceProduct(Thing thing, Pawn producer, IntVec3 center, Map map)
+        // 둥지에는 약이 없으므로 화학 의존 유전자(비비 무작위 유전자로 붙는다)를 지니면 금단으로 쓰러져 굶어 죽는다(장기 계측). 둥지 비비에게서는 뺀다.
+        public static bool IsChemicalDependency(GeneDef def)
         {
-            System.Predicate<IntVec3> validator = null;
-            if (producer?.GetNestLordJob() != null)
+            return def?.geneClass != null && typeof(Gene_ChemicalDependency).IsAssignableFrom(def.geneClass);
+        }
+
+        public static void RemoveChemicalDependencies(Pawn pawn)
+        {
+            var genes = pawn?.genes;
+            if (genes == null) { return; }
+
+            var list = genes.GenesListForReading;
+            for (int i = list.Count - 1; i >= 0; --i)
             {
-                validator = cell => ViviNestStock.CanPlaceNestItemAt(cell, map, thing.def);
+                if (IsChemicalDependency(list[i].def)) { genes.RemoveGene(list[i]); }
             }
-            return GenPlace.TryPlaceThing(thing, center, map, ThingPlaceMode.Near, null, validator);
         }
 
         public static bool IsBeekeepingMap(Map map)

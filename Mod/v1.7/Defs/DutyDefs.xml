@@ -172,12 +172,22 @@
           </subNodes>
         </li>
         <li Class="VVRace.JobGiver_ViviNestUnload" />
+        <!-- 저체온·열사병이면 일보다 먼저 편한 기온의 둥지 방으로 피한다(잠은 편한 기온의 방에서 자고, 배고프면 먼저 먹는다) -->
+        <li Class="VVRace.JobGiver_ViviNestSeekSafeTemperature" />
         <li Class="ThinkNode_ForbidOutsideFlagRadius">
           <maxDistToSquadFlag>24</maxDistToSquadFlag>
           <subNodes>
+            <!-- 쓰러진 구성원은 다른 일보다 먼저 편한 기온의 둥지 방으로 옮긴다(바깥에 두면 겨울에 얼어 죽는다) -->
+            <li Class="VVRace.JobGiver_ViviNestRescue" />
+            <!-- 시체는 썩으면 악취 가스로 폐부패를 일으키므로 다른 일보다 먼저 둥지 밖으로 옮긴다 -->
+            <li Class="VVRace.JobGiver_ViviNestRemoveCorpse" />
+            <!-- 다친 구성원 치료(쓰러졌거나 누운 환자, 둥지 몫 약이 있으면 쓴다) -->
+            <li Class="VVRace.JobGiver_ViviNestTend" />
             <li Class="VVRace.JobGiver_ViviNestChildcare">
               <royal>true</royal>
             </li>
+            <!-- 저장 마나가 절반 아래인 둥지 마법식물에 둥지 몫 비료를 준다. 겨울 잔불꽃처럼 생존이 걸린 일이라 운반·건설·생산보다 먼저 한다 -->
+            <li Class="VVRace.JobGiver_ViviNestFertilizePlant" />
             <li Class="VVRace.JobGiver_ViviNestHaul" />
             <li Class="VVRace.JobGiver_ViviNestDress" />
             <li Class="VVRace.JobGiver_ViviNestBuild" />
@@ -190,6 +200,7 @@
                 <li Class="VVRace.JobGiver_ViviNestCutTree" />
                 <li Class="VVRace.JobGiver_ViviNestDigFertilizer" />
                 <li Class="VVRace.JobGiver_ViviNestCraft" />
+                <li Class="VVRace.JobGiver_ViviNestHarvestHealroot" />
               </subNodes>
             </li>
             <li Class="VVRace.JobGiver_ViviNestGarden" />

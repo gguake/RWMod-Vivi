@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Verse;
+using Verse.AI;
 
 namespace VVRace
 {
@@ -21,6 +22,9 @@ namespace VVRace
         public const int RoomCellsPerMember = 6;
 
         private const float OutdoorBuildRadius = 8f;
+        // 시체를 버릴 거리(둥지 중심에서). 무리가 오가는 반경(24칸) 안에서 둥지와 떨어진 곳
+        private const float CorpseDumpMinDistance = 14f;
+        private const float CorpseDumpMaxDistance = 22f;
         private const float ExpansionSearchRadius = 16f;
         private const float ExpansionMinDistance = 7f;
         private const int ExpansionSearchStep = 3;
@@ -121,20 +125,33 @@ namespace VVRace
 
         #region 초기 설비
         // 정착 직후: 마나 방출기(바깥)와 씨앗을 심을 밀랍 화분(방 안)
+        // 화분은 방 안 벽 쪽 칸에, 마나 방출기는 그 바로 옆 벽 쪽 방 칸에 나란히 둔다.
+        // 잔불꽃의 열은 마나가 있을 때만 나오고 방이 20°C 미만이면 스스로 마나를 못 만들어, 방출기와 붙어 있어야 겨울을 난다.
+        // 장기 계측: 방출기를 벽 바깥에 세운 둥지는 실제로는 화분과 떨어져 화분 칸 마나가 0~2였고 잔불꽃 저장이 겨울 동안 700→50으로 줄었다.
+        // 실험(한파 속 8×8 방): 방출기가 화분 옆이면 저장 700을 유지하며 방을 28.5°C로 지켰다. 나란히 둘 자리가 없으면 벽 바깥에 세운다.
         private bool PlanInitialFacilities()
         {
-            var placed = false;
+            if (TryPlacePotWithEmitter()) { return true; }
 
-            foreach (var cell in OutdoorBuildCells())
+            var placed = false;
+            var emitterCell = IntVec3.Invalid;
+
+            foreach (var cell in OutdoorBuildCells().OrderByDescending(TouchesBoundaryWall))
             {
                 if (TryPlace(VVThingDefOf.VV_ManaEmitter, cell, Rot4.North, null) != null)
                 {
+                    emitterCell = cell;
                     placed = true;
                     break;
                 }
             }
 
-            foreach (var cell in WallSideRoomCells())
+            var potCells = WallSideRoomCells().ToList();
+            if (emitterCell.IsValid)
+            {
+                potCells.SortBy(c => c.DistanceToSquared(emitterCell));
+            }
+            foreach (var cell in potCells)
             {
                 if (TryPlace(VVThingDefOf.VV_ArcanePlantPot, cell, Rot4.North, VVThingDefOf.VV_Viviwax) != null)
                 {
@@ -144,6 +161,37 @@ namespace VVRace
             }
 
             return placed;
+        }
+
+        private bool TryPlacePotWithEmitter()
+        {
+            var wallSide = new HashSet<IntVec3>(WallSideRoomCells());
+            foreach (var potCell in wallSide)
+            {
+                foreach (var dir in GenAdj.CardinalDirections)
+                {
+                    var emitterCell = potCell + dir;
+                    if (!wallSide.Contains(emitterCell)) { continue; }
+
+                    var pot = TryPlace(VVThingDefOf.VV_ArcanePlantPot, potCell, Rot4.North, VVThingDefOf.VV_Viviwax);
+                    if (pot == null) { break; }
+                    if (TryPlace(VVThingDefOf.VV_ManaEmitter, emitterCell, Rot4.North, null) != null) { return true; }
+
+                    pot.Destroy(DestroyMode.Cancel);
+                }
+            }
+            return false;
+        }
+
+        private bool TouchesBoundaryWall(IntVec3 cell)
+        {
+            foreach (var adj in GenAdj.CardinalDirections)
+            {
+                var c = cell + adj;
+                var edifice = c.InBounds(Map) ? c.GetEdifice(Map) : null;
+                if (edifice != null && edifice.def.passability == Traversability.Impassable && Territory.BoundaryCells.Contains(c)) { return true; }
+            }
+            return false;
         }
         #endregion
 
@@ -292,6 +340,8 @@ namespace VVRace
                     _doorCells.Add(_expansionDoor);
                 }
                 ForbidNestDoors();
+                // 벽이 닫힐 때 증축 방 안에 있던 정착민은 갇히지 않게 유예한다(둥지 문은 다 짓는 순간 금지된다).
+                _owner.Hostility.Notify_RoomAdded(room);
             }
 
             _expansionInterior.Clear();
@@ -495,6 +545,33 @@ namespace VVRace
                 var cell = origin + GenRadial.RadialPattern[i];
                 if (IsFreeOutdoorCell(cell, allowPlants: false)) { yield return cell; }
             }
+        }
+
+        // 시체를 둘 바깥 칸: 둥지에서 떨어진 지붕 없는 빈 땅. 정착민 집 구역은 되도록 피한다.
+        public bool TryFindCorpseDumpCell(Pawn pawn, out IntVec3 result)
+        {
+            var map = Map;
+            var center = _owner.NestCell;
+            var start = GenRadial.NumCellsInRadius(CorpseDumpMinDistance);
+            var end = GenRadial.NumCellsInRadius(CorpseDumpMaxDistance);
+            var fallback = IntVec3.Invalid;
+            var offset = Rand.Range(0, end - start);
+            for (int i = 0; i < end - start; ++i)
+            {
+                var cell = center + GenRadial.RadialPattern[start + (i + offset) % (end - start)];
+                // 바닐라 운반 잡(HaulToCell)은 놓을 칸을 예약하므로 다른 폰이 예약해 둔 칸은 피한다(보관 칸 찾기와 같다).
+                if (!IsFreeOutdoorCell(cell, allowPlants: true) || !pawn.CanReserve(cell) || !pawn.CanReach(cell, PathEndMode.OnCell, Danger.Some)) { continue; }
+
+                if (!map.areaManager.Home[cell])
+                {
+                    result = cell;
+                    return true;
+                }
+                if (!fallback.IsValid) { fallback = cell; }
+            }
+
+            result = fallback;
+            return fallback.IsValid;
         }
 
         // 둥지 바깥 빈 땅: 지붕·구역·둥지 칸·목화밭이 아니고, 둥지 건물의 통로를 막지 않는 칸

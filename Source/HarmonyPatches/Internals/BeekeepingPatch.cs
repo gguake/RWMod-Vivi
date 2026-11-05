@@ -38,7 +38,7 @@ namespace VVRace
                     new[] { typeof(IntVec3), typeof(int), typeof(ThingPlaceMode), typeof(Thing).MakeByRefType(), typeof(System.Action<Thing, int>) }),
                 postfix: new HarmonyMethod(typeof(BeekeepingPatch), nameof(Pawn_CarryTracker_TryDropCarriedThing_Postfix)));
 
-            // 정착 때 둥지 방 안에 있던 정착민과 벽이 뚫린 동안 스스로 들어온 정착민은 갇히지 않게 둥지 방 문을 지나 나갈 수 있다(바닐라 문 통과 판정은 세력 기준 금지를 본다).
+            // 정착 때 둥지 방 안에 있던 정착민과 스스로 들어와 있는 정착민(벽이 뚫린 동안 산책·청소, 증축 방이 닫힘 등)은 갇히지 않게 둥지 방 문을 지나 나갈 수 있다(바닐라 문 통과 판정은 세력 기준 금지를 본다).
             ViviHarmonyPatcher.TryPatch(harmony, "ForbidUtility.IsForbiddenToPass (vivi nest grace)",
                 AccessTools.Method(typeof(ForbidUtility), nameof(ForbidUtility.IsForbiddenToPass), new[] { typeof(Building_Door), typeof(Pawn) }),
                 postfix: new HarmonyMethod(typeof(BeekeepingPatch), nameof(ForbidUtility_IsForbiddenToPass_Postfix)));

@@ -84,6 +84,7 @@ namespace VVRace
         public static JobDef VV_ViviNestUnload;
         public static JobDef VV_ViviNestDigFertilizer;
         public static JobDef VV_ViviNestBuildRoof;
+        public static JobDef VV_ViviNestFertilizePlant;
         public static JobDef Play_Horseshoes;
     }
 

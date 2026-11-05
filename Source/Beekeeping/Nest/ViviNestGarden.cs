@@ -8,7 +8,10 @@ namespace VVRace
     // 심기·수확은 바닐라 재배 잡을 그대로 쓴다(구역 없이).
     public class ViviNestGarden : IExposable
     {
-        public const int FlowerTarget = 40;
+        // 꿀 꽃 목표: 40송이가 다섯 마리 본전이므로(자동 테스트) 구성원당 8송이(최소 40), 겨울이 있는 땅에서는 겨울 비축을 위해 1.5배.
+        public const int MinFlowerTarget = 40;
+        public const int FlowersPerMember = 8;
+        public const float WinterFlowerFactor = 1.5f;
         public const int CottonCellCount = 6;
         public const int ClothTarget = 100;
         private const int FlowerCountInterval = 2500;
@@ -19,6 +22,7 @@ namespace VVRace
         private List<IntVec3> _cottonCells = new List<IntVec3>();
 
         private int _flowerCount;
+        private int _gatherableFlowerCount;
         private int _flowerCountTick = -99999;
         private int _noFlowerSpotUntil = -99999;
 
@@ -38,39 +42,64 @@ namespace VVRace
         {
             get
             {
-                var ticks = Find.TickManager.TicksGame;
-                if (ticks - _flowerCountTick >= FlowerCountInterval)
-                {
-                    _flowerCountTick = ticks;
-                    _flowerCount = CountFlowers();
-                }
+                RefreshFlowerCounts();
                 return _flowerCount;
+            }
+        }
+
+        // 그중 채집할 만큼 자란 꽃(재채집 대기 중인 것 포함). 겨울에 갓 심어 자라지 못하는 꽃은 먹이가 되지 않는다.
+        public int GatherableFlowerCount
+        {
+            get
+            {
+                RefreshFlowerCounts();
+                return _gatherableFlowerCount;
+            }
+        }
+
+        private void RefreshFlowerCounts()
+        {
+            var ticks = Find.TickManager.TicksGame;
+            if (ticks - _flowerCountTick >= FlowerCountInterval)
+            {
+                _flowerCountTick = ticks;
+                CountFlowers();
             }
         }
 
         public void Notify_FlowerSown() => _flowerCount++;
 
+        public int FlowerTarget()
+        {
+            var members = _owner.lord?.ownedPawns.Count ?? 0;
+            var target = UnityEngine.Mathf.Max(MinFlowerTarget, FlowersPerMember * members);
+            return _owner.Production.WinterDays() > 0 ? UnityEngine.Mathf.CeilToInt(target * WinterFlowerFactor) : target;
+        }
+
         public bool FlowerSpotSearchPaused => Find.TickManager.TicksGame < _noFlowerSpotUntil;
 
         public void Notify_NoFlowerSpot() => _noFlowerSpotUntil = Find.TickManager.TicksGame + FlowerCountInterval;
 
-        private int CountFlowers()
+        private void CountFlowers()
         {
+            _flowerCount = 0;
+            _gatherableFlowerCount = 0;
             var spot = _owner.Production.GatherSpot;
-            if (spot == null) { return 0; }
+            if (spot == null) { return; }
 
             var map = Map;
-            var count = 0;
             var cellCount = GenRadial.NumCellsInRadius(Building_GatherWorkTable.GatherMaxRadius);
             for (int i = 0; i < cellCount; ++i)
             {
                 var cell = spot.Position + GenRadial.RadialPattern[i];
-                if (cell.InBounds(map) && IsHoneyFlowerDef(cell.GetPlant(map)?.def))
-                {
-                    count++;
-                }
+                if (!cell.InBounds(map)) { continue; }
+
+                var plant = cell.GetPlant(map);
+                if (plant == null || !IsHoneyFlowerDef(plant.def)) { continue; }
+
+                _flowerCount++;
+                if (plant.CanGatherable(VVStatDefOf.VV_PlantHoneyGatherYield)) { _gatherableFlowerCount++; }
             }
-            return count;
         }
 
         public static bool IsHoneyFlowerDef(ThingDef def)
@@ -94,6 +123,7 @@ namespace VVRace
                 if (_cottonCells.Contains(cell) || !cell.InBounds(map)) { continue; }
                 if (!_owner.Planner.IsFreeOutdoorCell(cell, allowPlants: true, ignoreCotton: true)) { continue; }
                 if (!VVThingDefOf.Plant_Cotton.CanEverPlantAt(cell, map, out _, canWipePlantsExceptTree: true, checkMapTemperature: false).Accepted) { continue; }
+                if (!IsSowable(cell)) { continue; }
 
                 _cottonCells.Add(cell);
             }
@@ -111,7 +141,19 @@ namespace VVRace
                 if (thing is Building || thing.def.IsBlueprint || thing.def.IsFrame) { return false; }
             }
 
-            return VVThingDefOf.Plant_Cotton.CanEverPlantAt(cell, map, out _, canWipePlantsExceptTree: true, checkMapTemperature: false).Accepted;
+            return VVThingDefOf.Plant_Cotton.CanEverPlantAt(cell, map, out _, canWipePlantsExceptTree: true, checkMapTemperature: false).Accepted && IsSowable(cell);
+        }
+
+        // 둥지 씨 뿌리기(JobGiver_ViviNestGarden.SowJob)가 심을 수 있는 칸: 꿀 꽃이 자라는 칸은 베지 않고, 둘레에 나무처럼 옆 칸 심기를 막는 식물이 있으면
+        // 바닐라 씨 뿌리기 판정(PlantUtility.AdjacentSowBlocker)이 막는다. 그런 칸을 밭으로 두면 끝내 심지 못하므로 고르지 않고, 생기면 다른 칸으로 옮긴다.
+        // 이미 목화가 자라는 칸은 거둘 때까지 둔다. (자동 테스트 p3 B6: 습지 맵에서 버드나무 옆 밭 3칸이 며칠째 비어 있었다)
+        private bool IsSowable(IntVec3 cell)
+        {
+            var map = Map;
+            var plant = cell.GetPlant(map);
+            if (plant != null && plant.def == VVThingDefOf.Plant_Cotton) { return true; }
+            if (plant != null && IsHoneyFlowerDef(plant.def)) { return false; }
+            return PlantUtility.AdjacentSowBlocker(VVThingDefOf.Plant_Cotton, cell, map) == null;
         }
 
         public void ExposeData()

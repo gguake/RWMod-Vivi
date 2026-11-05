@@ -14,6 +14,8 @@ namespace VVRace
         public const int RefreshInterval = 600;
 
         public const int HoneyCapacity = 600;
+        // 겨울(바깥 평균 기온이 이보다 낮은 1/12년)에는 꿀 꽃이 얼어 죽어 모은 식량으로만 버틴다.
+        public const float WinterTemperature = 0f;
         public const int PollenTarget = 60;
         public const int PropolisTarget = 20;
         public const int CreamTarget = 60;
@@ -21,12 +23,15 @@ namespace VVRace
         public const int WoodTarget = 60;
         public const int FertilizerTarget = 60;
         public const int CakeTarget = 40;
+        public const int MedicineTarget = 10;
         public const int ClothForCostume = 50;
         public const int CreamReserveForWax = 30;
         // 크림은 비비의 열량을 쓰므로 둥지 식량이 이만큼(일) 남았을 때만 만든다.
         public const float MinFoodDaysForCream = 2f;
         // 가공(꿀 거르기·경단)은 남는 시간 일이라 모자란 정도에 이만큼만 친다(목표의 70% 넘게 찬 자원보다만 앞선다).
         public const float ProcessingWeight = 0.3f;
+        // 채집 장소 둘레에서 플레이어 집 구역을 지우는 반경(바닐라 놓기가 같은 더미를 찾아 합치는 범위보다 넉넉히)
+        private const float GatherSpotClearHomeRadius = 4f;
 
         private readonly LordJob_ViviNest _owner;
 
@@ -37,6 +42,9 @@ namespace VVRace
         private readonly Dictionary<RecipeDef, float> _billNeed = new Dictionary<RecipeDef, float>();
         private float _woodNeed;
         private float _fertilizerNeed;
+        private float _medicineNeed;
+        // 타일 기후로 정해지므로 저장하지 않고 처음 쓸 때 잰다.
+        private int _winterDays = -1;
 
         public ViviNestProduction(LordJob_ViviNest owner)
         {
@@ -51,6 +59,7 @@ namespace VVRace
 
         public float WoodNeed => _woodNeed;
         public float FertilizerNeed => _fertilizerNeed;
+        public float MedicineNeed => _medicineNeed;
 
         public void Tick()
         {
@@ -91,6 +100,22 @@ namespace VVRace
                 AddBill(spot, VVRecipeDefOf.VV_GatherPropolis);
 
                 _gatherSpot = spot;
+                ClearHomeAreaAround(cell);
+            }
+        }
+
+        // 정착민은 집 구역의 오물만 치운다. 채집 장소 둘레에서 정착민이 꽃가루 오물을 치우면 금지 없는 꽃가루 더미가 생기고,
+        // 바닐라 놓기는 산출물을 근처 같은 더미에 합치며 합친 더미는 그 더미의 금지 상태를 따르므로 둥지 꽃가루가 계속 사라졌다(자동 테스트, 475개 더미).
+        // 그래서 정착 때 방 안 플레이어 구역을 지우듯 채집 장소 둘레의 집 구역을 지운다.
+        private void ClearHomeAreaAround(IntVec3 center)
+        {
+            var map = Map;
+            var home = map.areaManager.Home;
+            var cellCount = GenRadial.NumCellsInRadius(GatherSpotClearHomeRadius);
+            for (int i = 0; i < cellCount; ++i)
+            {
+                var cell = center + GenRadial.RadialPattern[i];
+                if (cell.InBounds(map) && home[cell]) { home[cell] = false; }
             }
         }
 
@@ -210,7 +235,8 @@ namespace VVRace
             var cakes = stock.CountOf(VVThingDefOf.VV_HoneyPollenCake);
 
             var gather = GatherSpot;
-            SetActive(gather, VVRecipeDefOf.VV_GatherHoney, rawHoney + filteredHoney < HoneyCapacity);
+            var honeyTarget = HoneyTarget();
+            SetActive(gather, VVRecipeDefOf.VV_GatherHoney, rawHoney + filteredHoney < honeyTarget);
             SetActive(gather, VVRecipeDefOf.VV_GatherPollen, pollen < PollenTarget);
             SetActive(gather, VVRecipeDefOf.VV_GatherPropolis, propolis < PropolisTarget);
 
@@ -224,7 +250,7 @@ namespace VVRace
 
             // 장비(옷·새총)는 필요하면 가장 먼저, 꿀은 둥지 식량이 모자라면 가장 먼저 한다.
             var honey = rawHoney + filteredHoney;
-            _billNeed[VVRecipeDefOf.VV_GatherHoney] = FoodReserveDays() < MinFoodDaysForCream ? 1f : Shortage(honey, HoneyCapacity);
+            _billNeed[VVRecipeDefOf.VV_GatherHoney] = FoodReserveDays() < MinFoodDaysForCream ? 1f : Shortage(honey, honeyTarget);
             _billNeed[VVRecipeDefOf.VV_GatherPollen] = Shortage(pollen, PollenTarget);
             _billNeed[VVRecipeDefOf.VV_GatherPropolis] = Shortage(propolis, PropolisTarget);
             _billNeed[VVRecipeDefOf.Make_VV_BasicWorkerCostume] = 1f;
@@ -235,6 +261,7 @@ namespace VVRace
             _billNeed[VVRecipeDefOf.VV_Make_HoneyPollenCake] = ProcessingWeight * Shortage(cakes, CakeTarget);
             _woodNeed = Shortage(wood, Target(ThingDefOf.WoodLog, WoodTarget));
             _fertilizerNeed = Shortage(stock.CountOf(VVThingDefOf.VV_Fertilizer), FertilizerTarget);
+            _medicineNeed = Shortage(stock.CountOf(ThingDefOf.MedicineHerbal) + stock.CountOf(ThingDefOf.MedicineIndustrial) + stock.CountOf(ThingDefOf.MedicineUltratech), MedicineTarget);
 
             SortBills(gather);
             SortBills(work);
@@ -299,6 +326,13 @@ namespace VVRace
         // 둥지 식량이 며칠 치인지(구성원이 배부를 때 배고파지는 속도 기준)
         public float FoodReserveDays()
         {
+            var perDay = FoodPerDay();
+            return perDay > 0f ? Stock.FoodNutrition / perDay : float.MaxValue;
+        }
+
+        // 구성원이 배부를 때 하루에 먹는 영양
+        public float FoodPerDay()
+        {
             var pawns = _owner.lord?.ownedPawns;
             var perDay = 0f;
             if (pawns != null)
@@ -312,7 +346,35 @@ namespace VVRace
                     }
                 }
             }
-            return perDay > 0f ? Stock.FoodNutrition / perDay : float.MaxValue;
+            return perDay;
+        }
+
+        // 겨울 날 수: 이 타일에서 바깥 평균 기온이 영하인 1/12년(5일)을 모두 센다.
+        public int WinterDays()
+        {
+            if (_winterDays < 0)
+            {
+                _winterDays = 0;
+                for (int i = 0; i < GenDate.TwelfthsPerYear; ++i)
+                {
+                    if (GenTemperature.AverageTemperatureAtTileForTwelfth(Map.Tile, (Twelfth)i) < WinterTemperature)
+                    {
+                        _winterDays += GenDate.DaysPerTwelfth;
+                    }
+                }
+            }
+            return _winterDays;
+        }
+
+        // 꿀(날꿀+걸러낸 꿀) 비축 목표: 평소 600개, 겨울이 있는 땅에서는 겨울 날 수만큼 먹을 걸러낸 꿀.
+        // 장기 계측(온대림, 겨울 약 20일): 600개 상한·꽃 40송이로는 겨울 열흘쯤 만에 식량이 떨어져 봄 직전에 아기가 굶어 죽었다.
+        public int HoneyTarget()
+        {
+            var winterDays = WinterDays();
+            if (winterDays <= 0) { return HoneyCapacity; }
+
+            var perUnit = VVThingDefOf.VV_FilteredHoney.GetStatValueAbstract(StatDefOf.Nutrition);
+            return perUnit > 0f ? UnityEngine.Mathf.Max(HoneyCapacity, UnityEngine.Mathf.CeilToInt(FoodPerDay() * winterDays / perUnit)) : HoneyCapacity;
         }
 
         public bool AnyMemberNeedsCostume()
