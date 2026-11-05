@@ -6,7 +6,7 @@ using Verse.AI;
 namespace VVRace
 {
     // 둥지 청사진·골조는 바닐라 건설 워크기버로 짓고, 손상된 둥지 건물은 바닐라 수리 워크기버로 고치며, 빈 지붕은 둥지 지붕 잡으로 얹는다.
-    // 맵 전체 청사진을 훑는 JobGiver_Work 대신 둥지 것만 넘긴다.
+    // 포장 식물의 설치 청사진도 같은 청사진 워크기버가 설치한다(포장을 가져가 세우는 운반 잡). 맵 전체 청사진을 훑는 JobGiver_Work 대신 둥지 것만 넘긴다.
     public class JobGiver_ViviNestBuild : ThinkNode_JobGiver
     {
         private static WorkGiver_Scanner _finishFrames;

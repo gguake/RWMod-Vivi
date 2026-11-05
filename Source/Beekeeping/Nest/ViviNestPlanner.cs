@@ -6,8 +6,8 @@ using Verse.AI;
 
 namespace VVRace
 {
-    // 둥지의 공사 계획: 경계 구멍은 늘 메우고, 그 밖의 공사는 하나가 끝나야 다음 것을 놓는다.
-    // 청사진만 놓고 실제 건설은 바닐라 건설 워크기버가 한다(공성과 같은 방식). 빈 지붕은 둥지 지붕 잡이 얹는다.
+    // 둥지의 공사 계획: 경계 구멍은 늘 메우고 포장 식물은 늘 설치하며, 그 밖의 공사는 하나가 끝나야 다음 것을 놓는다.
+    // 청사진만 놓고 실제 건설·설치는 바닐라 건설 워크기버가 한다(공성과 같은 방식). 빈 지붕은 둥지 지붕 잡이 얹는다.
     public class ViviNestPlanner : IExposable
     {
         public const int PlanInterval = 2500;
@@ -17,7 +17,6 @@ namespace VVRace
         public const int MaxHatcheries = 4;
         public const int FloorTilesPerProject = 4;
         public const int WaxForFloor = 40;
-        public const int MinFreeFloorStorageCells = 4;
         public const int IdleForHorseshoes = 2;
         public const int RoomCellsPerMember = 6;
 
@@ -66,6 +65,7 @@ namespace VVRace
         public void Tick()
         {
             RepairBoundary();
+            PlanInstalls();
             _owner.Garden.EnsureCottonCells();
 
             if (AnyPendingProject()) { return; }
@@ -109,8 +109,84 @@ namespace VVRace
         }
         #endregion
 
+        #region 포장 식물 설치
+        // 둥지 몫 포장 마법식물(정착대가 가져온 잔불꽃·풍년화)은 바닐라 설치 청사진(플레이어의 다시 심기와 같은 것)을 놓아 다 자란 채로 세운다.
+        // 포장을 가져가 그 자리에 세우는 일은 바닐라 건설 워크기버가 한다(설치 청사진의 자재 운반이 곧 설치다). 화분 위 설치도 기존 마법식물 시스템이 받는다.
+        // 경계 수리처럼 다른 공사를 기다리지 않고, 설치 청사진은 다른 공사를 막지 않는다(AnyPendingProject).
+        // 생존용 꽃(잔불꽃)은 방 안 둥지 화분에, 나머지는 비옥한 바깥 땅에 둔다. 둘 곳이 없으면 포장한 채 둥지에 남겨 둔다(씨앗과 같다).
+        private void PlanInstalls()
+        {
+            var map = Map;
+            var minis = map.listerThings.ThingsInGroup(ThingRequestGroup.MinifiedThing);
+            for (int i = 0; i < minis.Count; ++i)
+            {
+                if (!(minis[i] is MinifiedThing mini) || !(mini.InnerThing is ArcanePlant plant)) { continue; }
+                if (!_owner.Stock.IsNestOwned(mini) || InstallBlueprintUtility.ExistingBlueprintFor(mini) != null) { continue; }
+
+                var cell = JobGiver_ViviNestPlantSeed.IsPotPlant(plant.def) ? FindPotInstallCell(plant.def) : FindOutdoorInstallCell(plant.def);
+                if (!cell.IsValid) { continue; }
+
+                _resourceNeedTick = -99999;
+                _constructionCacheTick = -99999;
+                GenConstruct.PlaceBlueprintForInstall(mini, cell, map, Rot4.North, Faction);
+            }
+        }
+
+        // 방 안 둥지 화분 중 식물·새싹·설치 청사진이 없는 칸(기존 마법식물 놓기 판정, 씨앗 심기의 화분 고르기와 같다)
+        private IntVec3 FindPotInstallCell(ThingDef plantDef)
+        {
+            var map = Map;
+            foreach (var building in map.listerBuildings.allBuildingsNonColonist)
+            {
+                if (!(building is ArcanePlantPot pot) || pot.Faction != Faction || !Territory.IsRoomCell(pot.Position)) { continue; }
+
+                var cell = pot.Position;
+                if (cell.GetFirstThing<ArcanePlant>(map) != null || cell.GetFirstThing<ArcanePlant_Seedling>(map) != null) { continue; }
+                if (!ArcanePlantUtility.CanPlaceArcanePlantToCell(map, cell, plantDef).Accepted) { continue; }
+
+                return cell;
+            }
+            return IntVec3.Invalid;
+        }
+
+        // 바깥 마법식물(풍년화 등)을 둘 칸: 바깥 씨앗 자리(JobGiver_ViviNestPlantSeed)처럼 둥지 반경 12칸 안 바깥 빈 땅 중 비옥도가 가장 높은 칸
+        // (같으면 환경 마나가 많은 칸, 비옥도 0.7 미만 제외). 다 자란 식물은 새싹처럼 제 칸 마나를 하루 80씩 받아야 자라는 것이 아니라 마나 하한은 두지 않는다.
+        // 풍년화는 흙 비옥도로 마나를 만들고(비옥도 1 → 하루 150, 1.4 → 1050, 소모 300, 남는 마나는 둘레에 내놓고 제 칸 흙도 차츰 기름지게 한다)
+        // 꿀이 많이 나는 꽃이라 둥지가 거둘 수 있게 채집 자리 반경 안 칸만 쓴다. 설치하면 그 칸 식물이 지워지므로 꿀 꽃이 자라는 칸은 피한다.
+        private IntVec3 FindOutdoorInstallCell(ThingDef plantDef)
+        {
+            var map = Map;
+            var mana = map.GetManaComponent();
+            var spot = _owner.Production.GatherSpot;
+            var best = IntVec3.Invalid;
+            var bestFertility = 0f;
+            var bestMana = -1f;
+            var cellCount = GenRadial.NumCellsInRadius(JobGiver_ViviNestPlantSeed.OutdoorSearchRadius);
+            for (int i = 0; i < cellCount; ++i)
+            {
+                var cell = _owner.NestCell + GenRadial.RadialPattern[i];
+                if (!cell.InBounds(map)) { continue; }
+
+                var fertility = map.fertilityGrid.FertilityAt(cell);
+                var cellMana = mana != null ? mana[cell] : 0f;
+                if (fertility < JobGiver_ViviNestPlantSeed.MinFertility || fertility < bestFertility || (fertility == bestFertility && cellMana <= bestMana)) { continue; }
+                if (spot != null && !spot.Position.InHorDistOf(cell, spot.GatherRadius)) { continue; }
+                if (!IsFreeOutdoorCell(cell, allowPlants: true)) { continue; }
+
+                var plant = cell.GetPlant(map);
+                if (plant != null && ViviNestGarden.IsHoneyFlowerDef(plant.def)) { continue; }
+                if (!ArcanePlantUtility.CanPlaceArcanePlantToCell(map, cell, plantDef).Accepted) { continue; }
+
+                best = cell;
+                bestFertility = fertility;
+                bestMana = cellMana;
+            }
+            return best;
+        }
+        #endregion
+
         #region 초기 설비
-        // 정착 직후: 마나 방출기(바깥)와 씨앗을 심을 밀랍 화분(방 안)
+        // 정착 직후: 마나 방출기(바깥)와 정착대가 가져온 잔불꽃을 둘 밀랍 화분(방 안)
         // 화분은 방 안 벽 쪽 칸에, 마나 방출기는 그 바로 옆 벽 쪽 방 칸에 나란히 둔다.
         // 잔불꽃의 열은 마나가 있을 때만 나오고 방이 20°C 미만이면 스스로 마나를 못 만들어, 방출기와 붙어 있어야 겨울을 난다.
         // 장기 계측: 방출기를 벽 바깥에 세운 둥지는 실제로는 화분과 떨어져 화분 칸 마나가 0~2였고 잔불꽃 저장이 겨울 동안 700→50으로 줄었다.
@@ -182,11 +258,11 @@ namespace VVRace
         #endregion
 
         #region 선반·부화기·바닥·편자 막대
+        // 선반은 방 크기에 맞춰(12칸당 하나) 짓는다. 바닥 보관 칸이 남아 있어도 짓는다(사용자 요구).
         private bool TryPlanShelf()
         {
             var roomCells = Territory.Rooms.Sum(r => r.CellCount);
             if (CountNestBuildings(ThingDefOf.ShelfSmall) >= roomCells / CellsPerShelf) { return false; }
-            if (FreeFloorStorageCells() >= MinFreeFloorStorageCells) { return false; }
 
             foreach (var cell in WallSideRoomCells())
             {
@@ -588,7 +664,11 @@ namespace VVRace
             // 다른 둥지 건물의 상호작용 칸을 막지 않는다.
             var production = _owner.Production;
             if (production.GatherSpot != null && production.GatherSpot.InteractionCell == cell) { return false; }
-            if (production.WorkSpot != null && production.WorkSpot.InteractionCell == cell) { return false; }
+            var workSpots = production.WorkSpots;
+            for (int i = 0; i < workSpots.Count; ++i)
+            {
+                if (workSpots[i].Spawned && workSpots[i].InteractionCell == cell) { return false; }
+            }
 
             return true;
         }
@@ -650,7 +730,8 @@ namespace VVRace
             return _constructionCache;
         }
 
-        private bool AnyPendingProject() => NestConstructions().Any();
+        // 설치 청사진(포장 식물)은 재료 없이 가져가 세우기만 하므로 다른 공사를 막지 않는다.
+        private bool AnyPendingProject() => NestConstructions().Any(t => !(t is Blueprint_Install));
 
         // 둥지 청사진·골조에 아직 들어가야 할 재료 수(생산 목표에 더한다)
         public int ResourceNeeded(ThingDef def)
@@ -662,7 +743,8 @@ namespace VVRace
                 _resourceNeed.Clear();
                 foreach (var thing in NestConstructions())
                 {
-                    if (!(thing is IConstructible constructible)) { continue; }
+                    // 설치 청사진은 재료가 없다(바닐라는 재료를 물으면 오류를 낸다).
+                    if (!(thing is IConstructible constructible) || thing is Blueprint_Install) { continue; }
                     foreach (var cost in constructible.TotalMaterialCost())
                     {
                         var needed = constructible.ThingCountNeeded(cost.thingDef);
@@ -684,25 +766,6 @@ namespace VVRace
                 if (building.def == def && building.Faction == Faction) { count++; }
             }
             return count;
-        }
-
-        private int FreeFloorStorageCells()
-        {
-            var map = Map;
-            var free = 0;
-            foreach (var room in Territory.Rooms)
-            {
-                foreach (var cell in room.Cells)
-                {
-                    if (_owner.Stock.RankOf(cell) != ViviNestStorageRank.RoomFloor) { continue; }
-                    if (cell.GetEdifice(map) != null) { continue; }
-                    if (!cell.GetThingList(map).Any(t => t.def.category == ThingCategory.Item || t is Building))
-                    {
-                        free++;
-                    }
-                }
-            }
-            return free;
         }
         #endregion
 

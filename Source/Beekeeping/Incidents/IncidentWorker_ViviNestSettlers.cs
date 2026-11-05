@@ -139,6 +139,7 @@ namespace VVRace
                 // 전투원(새총잡이)은 폭력이 가능한 폰으로 만든다. 폭력 불가 성장기로 나오면 새총을 들지 못해 둥지를 지키지 못한다(자동 테스트에서 새총잡이 8/60).
                 var request = new PawnGenerationRequest(kind, faction, PawnGenerationContext.NonPlayer, tile: map.Tile, forceGenerateNewPawn: true, mustBeCapableOfViolence: kind.isFighter);
                 var pawn = PawnGenerator.GeneratePawn(request);
+                BeekeepingUtility.RemoveRandomGenes(pawn);
                 BeekeepingUtility.RemoveChemicalDependencies(pawn);
                 pawns.Add(pawn);
             }
@@ -156,9 +157,10 @@ namespace VVRace
             AddStock(stock, ThingDefOf.WoodLog, InitialWood);
             AddStock(stock, VVThingDefOf.VV_Fertilizer, InitialFertilizer);
 
-            foreach (var seedDef in InitialSeedDefs(map))
+            // 씨앗은 새싹으로 며칠 자라야 하므로 다 자란 마법식물을 포장해 가져온다. 정착하면 둥지가 설치 청사진을 놓아 세운다(ViviNestPlanner).
+            foreach (var plantDef in InitialPlantDefs(map))
             {
-                AddStock(stock, seedDef, 1);
+                stock.Add(ThingMaker.MakeThing(plantDef).MakeMinified());
             }
 
             var index = 0;
@@ -185,18 +187,18 @@ namespace VVRace
             }
         }
 
-        // 정착과 생존에 도움되는 마법식물 씨앗: 겨울이 추우면 잔불꽃(29°C까지 데운다), 그리고 풍년화.
+        // 정착과 생존에 도움되는 마법식물: 겨울이 추우면 잔불꽃(29°C까지 데운다, 첫 화분에 둔다), 그리고 풍년화(흙 비옥도로 마나를 만든다, 비옥한 바깥 칸에 둔다).
         // 도착한 계절이 아니라 그 타일의 한 해 기온으로 고른다(봄에 온 둥지가 겨울에 아기를 얼려 죽였다, 장기 계측).
         // 서리꽃은 -20°C까지 식히는 냉동용이라 방에 두면 더운 땅에서도 방을 얼린다(장기 계측: 바깥 10~30°C에 방 -8°C, 아이 동사).
         // 비비는 36°C까지 편하므로 더운 땅에서는 식힐 꽃 없이 지낸다.
-        private static IEnumerable<ThingDef> InitialSeedDefs(Map map)
+        private static IEnumerable<ThingDef> InitialPlantDefs(Map map)
         {
             if (GenTemperature.MinTemperatureAtTile(map.Tile) < ColdSeasonTemp)
             {
-                yield return DefDatabase<ThingDef>.GetNamedSilentFail("VV_Seed_EmberBloom");
+                yield return VVThingDefOf.VV_EmberBloom;
             }
 
-            yield return DefDatabase<ThingDef>.GetNamedSilentFail("VV_Seed_Richflower");
+            yield return VVThingDefOf.VV_Richflower;
         }
 
         public static void DebugFireNow(Building_ViviLure lure)

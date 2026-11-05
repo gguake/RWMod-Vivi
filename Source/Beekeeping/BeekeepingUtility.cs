@@ -130,6 +130,21 @@ namespace VVRace
             }
         }
 
+        // 처음 합류하는 정착대는 비비 무작위 유전자 없이 온다(사용자 요구). 무작위 유전자는 생성 때 이종 유전자가 하나도 없는 NPC 비비에게
+        // 무작위 후보(ViviUtility.IsRandomGeneCandidate)에서 골라 이종 유전자로 붙고(ViviRacePatch.PawnGenerator_GenerateGenes_Postfix), 생성 요청에는 이를 끌 옵션이 없다.
+        // 그래서 생성한 뒤 무작위 후보인 이종 유전자만 지운다. 비비 제노타입 유전자는 생식 유전자(내생)이고 무작위 후보에서도 빠지므로 남는다.
+        public static void RemoveRandomGenes(Pawn pawn)
+        {
+            var genes = pawn?.genes;
+            if (genes == null) { return; }
+
+            var xenogenes = genes.Xenogenes;
+            for (int i = xenogenes.Count - 1; i >= 0; --i)
+            {
+                if (ViviUtility.IsRandomGeneCandidate(xenogenes[i].def)) { genes.RemoveGene(xenogenes[i]); }
+            }
+        }
+
         public static bool IsBeekeepingMap(Map map)
         {
             if (map == null || !map.IsPlayerHome || map.IsPocketMap || map.IsTempIncidentMap) { return false; }

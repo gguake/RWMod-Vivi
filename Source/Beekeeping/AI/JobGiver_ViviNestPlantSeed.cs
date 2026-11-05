@@ -6,18 +6,19 @@ using Verse.AI;
 namespace VVRace
 {
     // 둥지 몫 마법식물 씨앗을 기존 씨앗 심기 잡으로 심는다.
-    // 생존용 꽃(잔불꽃)은 방 안 둥지 화분에, 나머지(풍년화·미지의 씨앗)는 둥지 가까이 새싹이 자랄 만큼 마나가 있는 바깥 땅에 심는다.
-    // 서리꽃은 방을 얼리므로 화분에 심지 않는다(바깥에 심는다).
+    // 생존용 꽃(잔불꽃)은 방 안 둥지 화분에, 나머지(미지의 씨앗 등)는 둥지 가까이 새싹이 자랄 만큼 마나가 있는 바깥 땅에 심는다.
+    // 서리꽃은 방을 얼리므로 화분에 심지 않는다(바깥에 심는다). 정착대가 가져오는 잔불꽃·풍년화는 씨앗이 아니라 포장된 식물이라 설계자가 설치한다(ViviNestPlanner).
     public class JobGiver_ViviNestPlantSeed : ThinkNode_JobGiver
     {
-        private const float OutdoorSearchRadius = 12f;
+        // 포장 식물을 바깥에 설치할 자리도 같은 반경·비옥도 하한을 쓴다(ViviNestPlanner.FindOutdoorInstallCell).
+        public const float OutdoorSearchRadius = 12f;
         // 바깥 자리는 환경 마나가 이만큼 있는 칸만 쓴다. 새싹은 종류와 상관없이 제 칸 환경 마나를 하루 80 흡수해 그대로 쓰고(저장 0)
         // 모자라면 자라지 않는데, 비료는 마나와 상관없이 하루 10개씩 태운다. 새싹은 제 칸 마나를 3.5~3.8 끌어내린다.
         // 게임 안 계측(방출기 하나): 둘레 마나는 1칸 19·3칸 11·5칸 7·7칸 5·9칸 3이고, 7칸(4.8)에 둔 새싹은 늘 자랐지만 9칸(3.3)은 88%만 자랐다.
         // 5면 나중에 곁에 심긴 새싹 몫도 남는다. 예전 기준(마나 30 이상)은 방출기 칸(26 남짓)보다 높아 아무 데도 못 심었고, 그 뒤 쓴 점수(마나 + 비옥도×60)는
         // 비옥한 먼 칸을 골라 장기 계측(온대 60일)에서 새싹 14그루가 방출기에서 8~10칸 떨어진 마나 0 칸에서 자라지 못한 채 비료만 먹었다.
         private const float MinSeedlingMana = 5f;
-        private const float MinFertility = 0.7f;
+        public const float MinFertility = 0.7f;
 
         private static List<ThingDef> _seedDefs;
 
