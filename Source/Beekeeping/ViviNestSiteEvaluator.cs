@@ -190,7 +190,7 @@ namespace VVRace
                 var score = StructureScore(_tmpStructure, map, out var structureCells, out var buildingCount);
                 if (score > report.roomScore)
                 {
-                    report.bestRoom = LargestRoom(_tmpStructure);
+                    report.bestRoom = _tmpStructure.MaxByWithFallback(r => r.CellCount);
                     report.roomScore = score;
                     report.roomCellCount = structureCells;
                     report.roomBuildingCount = buildingCount;
@@ -284,16 +284,6 @@ namespace VVRace
                 }
                 VisitLinkedDoors(door, result);
             }
-        }
-
-        private static Room LargestRoom(List<Room> rooms)
-        {
-            Room best = null;
-            for (int i = 0; i < rooms.Count; ++i)
-            {
-                if (best == null || rooms[i].CellCount > best.CellCount) { best = rooms[i]; }
-            }
-            return best;
         }
 
         // 구조물 점수. 0이면 둥지로 쓸 수 없다. 방 하나라도 쓸 수 없거나 칸 수 합이 범위를 벗어나면 구조물째 쓰지 않는다(사용자 결정 "구조물 전체 판정":
