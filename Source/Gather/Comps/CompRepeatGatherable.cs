@@ -48,17 +48,14 @@ namespace VVRace
             }
         }
 
-        public bool IsCooldown(StatDef cooldownStat)
+        public bool IsCooldown(StatDef cooldownStat) => CooldownEndTick(cooldownStat) > Find.TickManager.TicksGame;
+
+        // 재채집 대기가 끝나는 틱(대기 중이면 지금보다 크다). 채집한 적이 없으면 -1.
+        public int CooldownEndTick(StatDef cooldownStat)
         {
-            if (lastGatheredTicks == null) { return false; }
-            if (lastGatheredTicks.TryGetValue(cooldownStat, out var ticks))
-            {
-                return ticks > 0 && Find.TickManager.TicksGame < ticks + (int)(parent.GetStatValue(cooldownStat, cacheStaleAfterTicks: 2000) * 60000f);
-            }
-            else
-            {
-                return false;
-            }
+            if (lastGatheredTicks == null || !lastGatheredTicks.TryGetValue(cooldownStat, out var ticks) || ticks <= 0) { return -1; }
+
+            return ticks + (int)(parent.GetStatValue(cooldownStat, cacheStaleAfterTicks: 2000) * 60000f);
         }
 
         public override string CompInspectStringExtra()

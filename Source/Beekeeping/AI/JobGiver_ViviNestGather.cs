@@ -174,7 +174,7 @@ namespace VVRace
 
                 if (cooldownStat != null)
                 {
-                    var cooldownEnd = CooldownEndTick(_tmpGatherableComps[i], cooldownStat);
+                    var cooldownEnd = _tmpGatherableComps[i].CooldownEndTick(cooldownStat);
                     if (cooldownEnd > ticks)
                     {
                         readyTick = BeekeepingUtility.EarlierTick(readyTick, cooldownEnd);
@@ -206,15 +206,6 @@ namespace VVRace
             _tmpCandidates.SortBy(t => t.Position.DistanceToSquared(position));
             return GenClosest.ClosestThing_Global_Reachable(position, pawn.Map, _tmpCandidates, PathEndMode.Touch, TraverseParms.For(pawn, recipe.maxPathDanger),
                 validator: t => !t.IsForbidden(pawn) && pawn.CanReserve(t) && !(t is IGatherableTarget target && !target.CanGatherByPawn(pawn, recipe)));
-        }
-
-        // 재채집 대기가 끝나는 틱(기존 CompRepeatGatherable.IsCooldown과 같은 식: 대기 중이면 지금보다 크다). 채집한 적이 없으면 -1.
-        private static int CooldownEndTick(CompRepeatGatherable comp, StatDef cooldownStat)
-        {
-            var gathered = comp.lastGatheredTicks;
-            if (gathered == null || !gathered.TryGetValue(cooldownStat, out var gatheredTick) || gatheredTick <= 0) { return -1; }
-
-            return gatheredTick + (int)(comp.parent.GetStatValue(cooldownStat, cacheStaleAfterTicks: 2000) * 60000f);
         }
     }
 }
