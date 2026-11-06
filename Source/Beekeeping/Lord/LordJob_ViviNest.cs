@@ -392,11 +392,7 @@ namespace VVRace
             return bed is ViviEggHatchery && !pawn.DevelopmentalStage.Baby() ? null : bed;
         }
 
-        // 잠자리는 편한 기온의 둥지 방에서 고른다. 증축 방에는 잔불꽃이 없어 겨울에 영하로 내려가는데 방을 가리지 않고 골랐더니,
-        // 그 방에서 자던 아이가 동상으로 죽었다(장기 계측: 온대림 겨울, 증축 방 -12°C).
-        public bool TryFindSleepSpot(Pawn pawn, out IntVec3 cell) => TryFindRoomCell(pawn, ComfortableRooms(pawn), out cell);
-
-        // 잠자리(밤잠·낮잠): 자기 세력 침대가 있으면 그 침대(FindBedFor), 없으면 편한 기온의 둥지 방 바닥 칸(TryFindSleepSpot)
+        // 잠자리(밤잠·낮잠): 자기 세력 침대가 있으면 그 침대(FindBedFor), 없으면 편한 기온의 둥지 방 바닥 칸(ComfortableRooms)
         public bool TryFindSleepTarget(Pawn pawn, out LocalTargetInfo target)
         {
             var bed = FindBedFor(pawn);
@@ -406,7 +402,9 @@ namespace VVRace
                 return true;
             }
 
-            if (TryFindSleepSpot(pawn, out var cell))
+            // 바닥 잠자리는 편한 기온의 둥지 방에서 고른다. 증축 방에는 잔불꽃이 없어 겨울에 영하로 내려가는데 방을 가리지 않고 골랐더니,
+            // 그 방에서 자던 아이가 동상으로 죽었다(장기 계측: 온대림 겨울, 증축 방 -12°C).
+            if (TryFindRoomCell(pawn, ComfortableRooms(pawn), out var cell))
             {
                 target = cell;
                 return true;
