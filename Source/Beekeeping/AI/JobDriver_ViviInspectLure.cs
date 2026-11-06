@@ -11,8 +11,6 @@ namespace VVRace
     {
         private const int SniffTicks = 240;
 
-        private Building_ViviLure Lure => job.GetTarget(TargetIndex.A).Thing as Building_ViviLure;
-
         public override bool TryMakePreToilReservations(bool errorOnFailed) => true;
 
         protected override IEnumerable<Toil> MakeNewToils()
@@ -33,7 +31,7 @@ namespace VVRace
 
             yield return Toils_General.Do(() =>
             {
-                var lure = Lure;
+                var lure = job.GetTarget(TargetIndex.A).Thing as Building_ViviLure;
                 if (lure == null) { return; }
 
                 foreach (var bait in lure.BaitThings)
