@@ -80,7 +80,7 @@ namespace VVRace
                 var count = product.count * efficiency;
                 if (honey)
                 {
-                    count = EatIfHoneyNeedy(product.thingDef, count);
+                    count = GatherWorker_Honey.EatIfHoneyNeedy(pawn, product.thingDef, count);
                 }
                 BeekeepingUtility.MakeStacks(product.thingDef, GenMath.RoundRandom(count), _tmpProducts);
             }
@@ -94,27 +94,6 @@ namespace VVRace
                 BeekeepingUtility.PlaceProduct(pawn, _tmpProducts[i], cell);
             }
             _tmpProducts.Clear();
-        }
-
-        // 기존 꿀 채집(GatherWorker_Honey.Notify_RecipeComplete)처럼 꿀 의존이 심한(0.8 넘음) 비비는 거둔 꿀 하나를 그 자리에서 먹는다.
-        private float EatIfHoneyNeedy(ThingDef productDef, float count)
-        {
-            var genes = pawn.genes?.GenesListForReading;
-            if (genes == null) { return count; }
-
-            for (int i = 0; i < genes.Count; ++i)
-            {
-                if (!(genes[i] is Gene_HoneyDependency gene)) { continue; }
-
-                var hediff = gene.LinkedHediff;
-                if (hediff != null && hediff.Severity > 0.8f && count > 1f)
-                {
-                    gene.Reset();
-                    return Mathf.Clamp(count - 1f, 1f, productDef.stackLimit);
-                }
-                break;
-            }
-            return count;
         }
 
         // 기존 꿀 채집은 묻힌 꽃가루 오물을 채집 장소에서 꽃가루로 털어 냈다(GatherWorker_Honey.Notify_RecipeComplete → Filth_Pollen.GatherPollen:

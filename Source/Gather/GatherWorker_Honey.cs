@@ -60,16 +60,7 @@ namespace VVRace
         private List<Filth_Pollen> _tmpFilthPollens = new List<Filth_Pollen>();
         public override void Notify_RecipeComplete(Pawn pawn, Building_GatherWorkTable workTable, ThingDef productDef, ref float productCount)
         {
-            var gene = pawn.genes?.GenesListForReading.FirstOrDefault(v => v is Gene_HoneyDependency) as Gene_HoneyDependency;
-            if (gene != null)
-            {
-                var hediff = gene.LinkedHediff;
-                if (hediff != null && hediff.Severity > 0.8f && productCount > 1f)
-                {
-                    gene.Reset();
-                    productCount = Mathf.Clamp(productCount - 1f, 1f, productDef.stackLimit);
-                }
-            }
+            productCount = EatIfHoneyNeedy(pawn, productDef, productCount);
 
             _tmpFilthPollens.Clear();
             _tmpFilthPollens.AddRange(pawn.filth.CarriedFilthListForReading.OfType<Filth_Pollen>());
@@ -98,6 +89,22 @@ namespace VVRace
                     }
                 }
             }
+        }
+
+        // 꿀 의존이 심한(0.8 넘음) 비비는 거둔 꿀 하나를 그 자리에서 먹는다(둥지 채집도 같은 규칙, JobDriver_ViviNestGather).
+        public static float EatIfHoneyNeedy(Pawn pawn, ThingDef productDef, float productCount)
+        {
+            var gene = pawn.genes?.GenesListForReading.FirstOrDefault(v => v is Gene_HoneyDependency) as Gene_HoneyDependency;
+            if (gene != null)
+            {
+                var hediff = gene.LinkedHediff;
+                if (hediff != null && hediff.Severity > 0.8f && productCount > 1f)
+                {
+                    gene.Reset();
+                    return Mathf.Clamp(productCount - 1f, 1f, productDef.stackLimit);
+                }
+            }
+            return productCount;
         }
     }
 }
