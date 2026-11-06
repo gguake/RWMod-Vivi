@@ -40,19 +40,26 @@ namespace VVRace
 
         // 어른은 아기를 하나씩만 안으므로 안아 줄 어른이 더 없으면 남은 아기는 두고 간다(들고 갈 수 있는 만큼만 데려간다).
         // 남은 아기를 로드에 두면 아기가 죽을 때까지 로드가 끝나지 않아 새 유인과 둥지 정리(Cleanup)가 막혔다.
+        // 떠나기 전에 쓰러진 어른·어린이도 두고 간다(LordJob_ViviNest.ShouldRemovePawn, 떠나는 동안 쓰러진 구성원은 바닐라가 바로 뺀다).
         public override void LordToilTick()
         {
             base.LordToilTick();
-            if (Find.TickManager.TicksGame % LeftBehindCheckInterval != 0 || AnyFreeCarrier()) { return; }
+            if (Find.TickManager.TicksGame % LeftBehindCheckInterval != 0) { return; }
 
+            var noCarrier = !AnyFreeCarrier();
             var pawns = lord.ownedPawns;
             for (int i = 0; i < pawns.Count; ++i)
             {
-                if (pawns[i].Spawned && pawns[i].DevelopmentalStage.Baby() && !IsBeingFetched(pawns[i])) { _tmpLeftBehind.Add(pawns[i]); }
+                var pawn = pawns[i];
+                if (pawn.DevelopmentalStage.Baby() ? noCarrier && pawn.Spawned && !IsBeingFetched(pawn) : pawn.Downed)
+                {
+                    _tmpLeftBehind.Add(pawn);
+                }
             }
             for (int i = 0; i < _tmpLeftBehind.Count; ++i)
             {
-                lord.Notify_PawnLost(_tmpLeftBehind[i], PawnLostCondition.Undefined);
+                var pawn = _tmpLeftBehind[i];
+                lord.Notify_PawnLost(pawn, pawn.DevelopmentalStage.Baby() ? PawnLostCondition.Undefined : PawnLostCondition.Incapped);
             }
             _tmpLeftBehind.Clear();
         }

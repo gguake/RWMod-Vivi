@@ -13,6 +13,9 @@ namespace VVRace
         public const string MemoAbandon = "VV_NestAbandon";
 
         private const int SleepSpotTries = 30;
+        // 바닐라 LordToil_Travel의 도착 판정 주기·반경
+        private const int TravelArrivedCheckInterval = 205;
+        private const float TravelArrivedRadius = 10f;
 
         private Faction _faction;
         private IntVec3 _nestCell;
@@ -49,9 +52,11 @@ namespace VVRace
         public override bool AddFleeToil => false;
 
         // 습격 등으로 모두 쓰러져도 둥지가 흩어지지 않게 쓰러진 비비도 남긴다(바닐라 벌레 둥지와 같은 방식).
+        // 떠날 때(LordToil_ViviNestExit)는 쓰러진 어른·어린이를 두고 간다: 나가기 듀티는 아기만 안고 나가므로 쓰러진 구성원이 남아 로드가 끝나지 않았다.
+        // 쓰러진 아기는 다른 아기처럼 안아 줄 어른이 있으면 안고 나간다.
         public override bool ShouldRemovePawn(Pawn p, PawnLostCondition reason)
         {
-            return reason != PawnLostCondition.Incapped;
+            return reason != PawnLostCondition.Incapped || (lord.CurLordToil is LordToil_ViviNestExit && !p.DevelopmentalStage.Baby());
         }
 
         public LordJob_ViviNest()
@@ -90,6 +95,7 @@ namespace VVRace
 
             var arrived = new Transition(travelToil, liveToil);
             arrived.AddTrigger(new Trigger_Memo("TravelArrived"));
+            arrived.AddTrigger(new Trigger_TickCondition(StandingMembersArrived, TravelArrivedCheckInterval));
             arrived.AddPreAction(new TransitionAction_Custom(Settle));
             graph.AddTransition(arrived);
 
@@ -123,6 +129,22 @@ namespace VVRace
             graph.AddTransition(trapped);
 
             return graph;
+        }
+
+        // 쓰러지지 않은 구성원이 모두 둥지 자리에 왔는지(바닐라 LordToil_Travel 도착 판정에서 쓰러진 구성원을 뺀 것). 바닐라 판정은 모든 구성원이 와야 해서
+        // 오는 길에 쓰러진 정착대원이 있으면 그 비비가 회복하거나 죽을 때까지(영구히 쓰러지면 끝없이) 정착하지 않았다. 쓰러진 구성원은 정착 뒤 구조 잡이 둥지 방으로 옮긴다.
+        private bool StandingMembersArrived()
+        {
+            var any = false;
+            var pawns = lord.ownedPawns;
+            for (int i = 0; i < pawns.Count; ++i)
+            {
+                var pawn = pawns[i];
+                if (pawn.Downed) { continue; }
+                if (!pawn.Position.InHorDistOf(_nestCell, TravelArrivedRadius) || !pawn.CanReach(_nestCell, PathEndMode.ClosestTouch, Danger.Deadly)) { return false; }
+                any = true;
+            }
+            return any;
         }
 
         // 방에 들어오면 영역을 잡고 방 안의 플레이어 구역을 지운다. 방 문은 금지하지 않는다(정착민이 들어가지 않게 막는 것은 플레이어 몫, 경계심 참고).
