@@ -50,15 +50,45 @@ namespace VVRace
             }
             _candidates.SortBy(t => t.Position.DistanceToSquared(position));
 
+            var stock = nest.Stock;
             foreach (var thing in _candidates)
             {
-                var job = thing is Frame
-                    ? finish.JobOnThing(pawn, thing) ?? deliverFrames.JobOnThing(pawn, thing)
-                    : deliverBlueprints.JobOnThing(pawn, thing);
+                Job job;
+                if (thing is Frame)
+                {
+                    job = finish.JobOnThing(pawn, thing);
+                    if (job == null && !LacksMaterials(thing, stock, pawn)) { job = deliverFrames.JobOnThing(pawn, thing); }
+                }
+                else
+                {
+                    job = LacksMaterials(thing, stock, pawn) ? null : deliverBlueprints.JobOnThing(pawn, thing);
+                }
 
                 if (job != null) { return job; }
             }
             return null;
+        }
+
+        // 바닐라 배달 판정이 잡을 줄 수 없는 청사진·골조: 아직 들어가야 할 재료가 있는데 그중 어느 것도 둥지에 없고(둥지 비비는 둥지 몫만 쓴다,
+        // 장부는 둥지 칸·둥지 몫·구성원이 지닌 것을 센다), 재료와 상관없이 주는 잡(자리를 막는 것 치우기, 바닥 걷어내기, 재료 없는 골조 놓기, 설치)도 없는 것.
+        // 바닐라 배달 판정은 청사진 하나에 130 µs라(실측, 크림이 없는 크림 벽 청사진 20개) 재료를 기다리는 동안 사고 1회가 최대 4.8 ms였다.
+        private static bool LacksMaterials(Thing thing, ViviNestStock stock, Pawn pawn)
+        {
+            if (thing is Blueprint_Install || !(thing is IConstructible constructible)) { return false; }
+            // 바닐라 바닥 걷어내기(WorkGiver_ConstructDeliverResources.ShouldRemoveExistingFloorFirst)
+            if (thing is Blueprint && thing.def.entityDefToBuild is TerrainDef && thing.Map.terrainGrid.CanRemoveTopLayerAt(thing.Position)) { return false; }
+
+            var needed = false;
+            var costs = constructible.TotalMaterialCost();
+            for (int i = 0; i < costs.Count; ++i)
+            {
+                var def = costs[i].thingDef;
+                if (constructible.ThingCountNeeded(def) <= 0) { continue; }
+                if (stock.CountOf(def) > 0) { return false; }
+                needed = true;
+            }
+
+            return needed && GenConstruct.FirstBlockingThing(thing, pawn) == null;
         }
 
         private static Job RepairJob(Pawn pawn, LordJob_ViviNest nest)

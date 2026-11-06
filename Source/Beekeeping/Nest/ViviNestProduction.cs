@@ -67,10 +67,34 @@ namespace VVRace
         private float _fertilizerNeed;
         private float _medicineNeed;
         private int _fertilizerTarget = MinFertilizerTarget;
+        // 원목 비축 목표(생산 주기마다 잰다, -1이면 아직 재지 않음). 나무 베기 잡 기버가 사고마다 다시 재면 맵 전체 연료 칸을 훑었다.
+        private int _woodStockTarget = -1;
         // 최근 마법식물에 준 비료(지수 감쇠 합). 지난 비축 일수 동안 준 양이 남으므로 앞으로 비축 일수 동안 줄 양으로 본다.
         private float _recentPlantFertilizer;
         // 타일 기후로 정해지므로 저장하지 않고 처음 쓸 때 잰다.
         private int _winterDays = -1;
+
+        // 작업 자리의 상호작용 칸(저장하지 않는다). 바깥 빈 땅·가구 자리 검사가 칸마다 자리 목록을 훑고 상호작용 칸을 다시 계산하던 것을 묶어 둔다.
+        // 자리를 두거나 치울 때와 맵의 둥지 작업 자리가 없어질 때(둥지 토일 알림) 다시 만든다.
+        private readonly HashSet<IntVec3> _spotInteractionCells = new HashSet<IntVec3>();
+        private bool _spotInteractionCellsDirty = true;
+
+        // "지금 할 수 없음" 기억(저장하지 않는다): 대상을 못 찾은 생산 일은 대상이 생길 수 있는 다음 틱까지 우선도 0으로 둔다.
+        // 바닐라 우선도 정렬은 우선도가 0보다 크면 실패해도 사고마다 TryGiveJob을 부르므로(실측, 온대 11명: 약뿌리 탐색은 늘 실패하며 1회 17~30 µs,
+        // 건조 맵 채집 실패 39 µs, 나무 베기 13.7 µs) 늘 실패하는 탐색이 사고마다 되풀이됐다.
+        // 둥지 단위로는 그 비비와 상관없이 대상이 없을 때만 기억한다(예약·도달·기술처럼 그 비비 탓인 실패는 기억하지 않는다).
+        // 다음 틱은 대상 데이터에서 구하고(재채집 대기 끝, 지금 성장 속도로 거둘 만큼 자랄 때), 구할 수 없는 경우를 위해 상한을 둔다.
+        public const int HealrootRetryMaxTicks = 1250;
+        public const int TreeRetryMaxTicks = 1250;
+        public const int GatherRetryMaxTicks = 600;
+        private int _healrootRetryTick = -1;
+        private int _treeRetryTick = -1;
+        private readonly Dictionary<RecipeDef, int> _gatherRetryTicks = new Dictionary<RecipeDef, int>();
+
+        // 구성원별 채집 스탯 판정(레시피의 작업 속도·채집량 스탯 > 0, 저장하지 않는다). 폰 스탯은 캐시 없이 계산하면 레시피 하나에 2~20 µs였다.
+        public const int GatherStatsCacheTicks = 2500;
+        private readonly Dictionary<(Pawn, RecipeDef), (int tick, bool ok)> _gatherStats = new Dictionary<(Pawn, RecipeDef), (int tick, bool ok)>();
+        private static readonly List<(Pawn, RecipeDef)> _tmpStaleGatherStats = new List<(Pawn, RecipeDef)>();
 
         public ViviNestProduction(LordJob_ViviNest owner)
         {
@@ -112,17 +136,87 @@ namespace VVRace
         public float MedicineNeed => _medicineNeed;
         public int FertilizerTarget => _fertilizerTarget;
 
+        // 나무 베기 잡 기버가 쓰는 원목 비축 목표: 생산 주기마다 잰 값(아직 재지 않았으면 지금 잰다)
+        public int CachedWoodStockTarget => _woodStockTarget >= 0 ? _woodStockTarget : WoodStockTarget();
+
+        public bool HealrootWaiting => Find.TickManager.TicksGame < _healrootRetryTick;
+        public bool TreeWaiting => Find.TickManager.TicksGame < _treeRetryTick;
+        public bool GatherWaiting(RecipeDef recipe) => _gatherRetryTicks.TryGetValue(recipe, out var tick) && Find.TickManager.TicksGame < tick;
+
+        // 대상이 없을 때 다음에 볼 틱을 기억한다. readyTick은 대상 데이터로 구한 가장 이른 준비 틱(모르면 -1)이고 상한을 넘지 않는다.
+        public void Notify_NoHealroot(int readyTick) => _healrootRetryTick = RetryTick(readyTick, HealrootRetryMaxTicks);
+        public void Notify_NoTree(int readyTick) => _treeRetryTick = RetryTick(readyTick, TreeRetryMaxTicks);
+        public void Notify_NoGatherTarget(RecipeDef recipe, int readyTick) => _gatherRetryTicks[recipe] = RetryTick(readyTick, GatherRetryMaxTicks);
+
+        private static int RetryTick(int readyTick, int maxTicks)
+        {
+            var max = Find.TickManager.TicksGame + maxTicks;
+            return readyTick >= 0 && readyTick < max ? readyTick : max;
+        }
+
+        public bool TryGetGatherStats(Pawn pawn, RecipeDef recipe, out bool ok)
+        {
+            if (_gatherStats.TryGetValue((pawn, recipe), out var entry) && Find.TickManager.TicksGame - entry.tick < GatherStatsCacheTicks)
+            {
+                ok = entry.ok;
+                return true;
+            }
+
+            ok = false;
+            return false;
+        }
+
+        public void SetGatherStats(Pawn pawn, RecipeDef recipe, bool ok) => _gatherStats[(pawn, recipe)] = (Find.TickManager.TicksGame, ok);
+
+        private void PruneGatherStats()
+        {
+            var ticks = Find.TickManager.TicksGame;
+            _tmpStaleGatherStats.Clear();
+            foreach (var entry in _gatherStats)
+            {
+                if (ticks - entry.Value.tick >= GatherStatsCacheTicks) { _tmpStaleGatherStats.Add(entry.Key); }
+            }
+            for (int i = 0; i < _tmpStaleGatherStats.Count; ++i)
+            {
+                _gatherStats.Remove(_tmpStaleGatherStats[i]);
+            }
+            _tmpStaleGatherStats.Clear();
+        }
+
+        // 작업 자리의 상호작용 칸인지(바깥 빈 땅·가구 자리를 고를 때 피한다)
+        public bool IsWorkSpotInteractionCell(IntVec3 cell)
+        {
+            if (_spotInteractionCellsDirty)
+            {
+                _spotInteractionCellsDirty = false;
+                _spotInteractionCells.Clear();
+                for (int i = 0; i < _workSpots.Count; ++i)
+                {
+                    if (_workSpots[i].Spawned) { _spotInteractionCells.Add(_workSpots[i].InteractionCell); }
+                }
+            }
+            return _spotInteractionCells.Contains(cell);
+        }
+
+        // 맵의 건물이 서거나 없어졌다(둥지 토일 알림). 작업 자리면 상호작용 칸을 다시 만든다.
+        public void Notify_BuildingChanged(Building building)
+        {
+            if (building.def == VVThingDefOf.VV_ViviNestWorkSpot) { _spotInteractionCellsDirty = true; }
+        }
+
         public void Tick()
         {
             EnsureWorkSpots();
             UpdateFertilizerTarget();
             UpdateBills();
+            PruneGatherStats();
         }
 
         // 바닥 작업 자리는 일하는 구성원(아기 제외) 두 마리당 하나(올림)를 둔다(사용자 요구). 한 자리에서는 한 마리만 일하므로(바닐라 지시서 워크기버가 자리를 예약한다)
         // 자리가 하나면 구성원이 늘어도 제작은 한 번에 하나뿐이다. 구성원이 줄면 쓰고 있지 않은(예약·만들다 만 것이 없는) 나중 자리부터 치운다.
         private void EnsureWorkSpots()
         {
+            _spotInteractionCellsDirty = true;
             _workSpots.RemoveAll(s => s == null || !s.Spawned);
 
             var target = WorkSpotTarget();
@@ -135,6 +229,7 @@ namespace VVRace
 
                 _workSpots.RemoveAt(i);
                 spot.Destroy();
+                _spotInteractionCellsDirty = true;
             }
         }
 
@@ -177,7 +272,7 @@ namespace VVRace
                     if (!CanPlaceSpot(def, cell)) { continue; }
 
                     var interaction = ThingUtility.InteractionCellWhenAt(def, cell, Rot4.South, Map);
-                    if (IsSpotInteractionCell(cell) || IsSpotInteractionCell(interaction)) { continue; }
+                    if (IsWorkSpotInteractionCell(cell) || IsWorkSpotInteractionCell(interaction)) { continue; }
 
                     if (!TouchesWall(cell) && !TouchesWall(interaction))
                     {
@@ -191,15 +286,6 @@ namespace VVRace
             if (!fallback.IsValid) { return false; }
             PlaceWorkSpot(fallback);
             return true;
-        }
-
-        private bool IsSpotInteractionCell(IntVec3 cell)
-        {
-            for (int i = 0; i < _workSpots.Count; ++i)
-            {
-                if (_workSpots[i].Spawned && _workSpots[i].InteractionCell == cell) { return true; }
-            }
-            return false;
         }
 
         private bool TouchesWall(IntVec3 cell)
@@ -225,29 +311,28 @@ namespace VVRace
                 AddBill(spot, recipe);
             }
             _workSpots.Add(spot);
+            _spotInteractionCellsDirty = true;
         }
 
+        // 자리 칸과 상호작용 칸이 모두 쓸 수 있는 방 칸
         private bool CanPlaceSpot(ThingDef def, IntVec3 cell)
         {
-            var map = Map;
-            var interaction = ThingUtility.InteractionCellWhenAt(def, cell, Rot4.South, map);
-            foreach (var c in new[] { cell, interaction })
-            {
-                if (!c.InBounds(map) || !c.Standable(map)) { return false; }
-                if (!_owner.Territory.IsRoomCell(c)) { return false; }
-                if (c.GetEdifice(map) != null) { return false; }
-                foreach (var thing in c.GetThingList(map))
-                {
-                    if (thing is Building || thing is Pawn || thing.def.IsBlueprint || thing.def.IsFrame) { return false; }
-                    if (thing.def.category == ThingCategory.Item) { return false; }
-                }
-                foreach (var door in _owner.Territory.BorderDoors)
-                {
-                    if (c.AdjacentTo8WayOrInside(door.Position)) { return false; }
-                }
-            }
+            var interaction = ThingUtility.InteractionCellWhenAt(def, cell, Rot4.South, Map);
+            return CanPlaceSpotCell(cell) && CanPlaceSpotCell(interaction);
+        }
 
-            return true;
+        private bool CanPlaceSpotCell(IntVec3 c)
+        {
+            var map = Map;
+            if (!c.InBounds(map) || !c.Standable(map)) { return false; }
+            if (!_owner.Territory.IsRoomCell(c)) { return false; }
+            if (c.GetEdifice(map) != null) { return false; }
+            foreach (var thing in c.GetThingList(map))
+            {
+                if (thing is Building || thing is Pawn || thing.def.IsBlueprint || thing.def.IsFrame) { return false; }
+                if (thing.def.category == ThingCategory.Item) { return false; }
+            }
+            return !_owner.Territory.IsBesideBorderDoor(c);
         }
 
         private static void AddBill(Building_WorkTable table, RecipeDef recipe)
@@ -299,7 +384,8 @@ namespace VVRace
             _billNeed[VVRecipeDefOf.VV_MakeViviwax] = Shortage(wax, Target(VVThingDefOf.VV_Viviwax, WaxTarget));
             _billNeed[VVRecipeDefOf.VV_FilteringHoney] = ProcessingWeight * (honey > 0 ? (float)rawHoney / honey : 0f);
             _billNeed[VVRecipeDefOf.VV_Make_HoneyPollenCake] = ProcessingWeight * Shortage(cakes, CakeTarget);
-            _woodNeed = Shortage(wood, WoodStockTarget());
+            _woodStockTarget = WoodStockTarget();
+            _woodNeed = Shortage(wood, _woodStockTarget);
             _fertilizerNeed = Shortage(stock.CountOf(VVThingDefOf.VV_Fertilizer), _fertilizerTarget);
             _medicineNeed = Shortage(stock.CountOf(ThingDefOf.MedicineHerbal) + stock.CountOf(ThingDefOf.MedicineIndustrial) + stock.CountOf(ThingDefOf.MedicineUltratech), MedicineTarget);
 

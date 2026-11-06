@@ -62,6 +62,21 @@ namespace VVRace
             return pawn.ComfortableTemperatureRange().Includes(GenTemperature.GetTemperatureForCell(cell, map));
         }
 
+        // 바깥 놀이 칸을 찾기 전에 보는 조건: OutdoorPlayOk에서 칸 기온을 바깥 기온으로 바꾼 것(지붕 없는 바깥 칸은 바깥 기온을 따른다).
+        // 예전에는 빈둥거리기가 둥지 중심(방 안) 기온으로 미리 보고 한파에도 둘레 바깥 칸 289칸을 모두 검사해 1회 최대 0.4 ms였다(실측).
+        // 참이면 그 비비의 편한 기온 범위를 넘겨 준다: 칸을 고르는 동안 바깥 위험·몸 상태는 바뀌지 않으므로 칸마다 OutdoorPlayOk 대신
+        // 이 범위로 칸 기온만 보면 같은 판정이다(편한 기온은 옷·유전자 스탯이라 칸마다 다시 재지 않는다).
+        public static bool OutdoorPlayWeatherOk(Pawn pawn, out FloatRange comfortable)
+        {
+            comfortable = default;
+            var map = pawn.Map;
+            if (map == null || BeekeepingUtility.OutdoorDangerous(map)) { return false; }
+            if (pawn.health.hediffSet.HasTemperatureInjury(TemperatureInjuryStage.Initial)) { return false; }
+
+            comfortable = pawn.ComfortableTemperatureRange();
+            return comfortable.Includes(map.mapTemperature.OutdoorTemp);
+        }
+
         private static bool HasBaby(LordJob_ViviNest nest)
         {
             var pawns = nest.lord.ownedPawns;

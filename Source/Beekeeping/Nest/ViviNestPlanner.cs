@@ -54,7 +54,7 @@ namespace VVRace
         private bool _initialFacilitiesPlanned;
         private List<IntVec3> _expansionInterior = new List<IntVec3>();
         private IntVec3 _expansionDoor = IntVec3.Invalid;
-        // 계획 주기마다 다시 잰다(저장하지 않는다): 로열이 알을 낳아도 되는지, 마지막 증축 자리 찾기가 실패했는지
+        // 계획 주기마다 다시 잰다(저장하지 않는다): 로열이 알을 낳아도 되는지, 마지막 증축 자리 찾기가 실패했는지(실패는 _expansionRetryTick까지 기억한다)
         private bool _eggAllowed = true;
         private bool _noExpansionSite;
 
@@ -78,9 +78,10 @@ namespace VVRace
         public void Notify_Established()
         {
             _doorCells.Clear();
-            foreach (var door in Territory.BorderDoors)
+            var doors = Territory.BorderDoors;
+            for (int i = 0; i < doors.Count; ++i)
             {
-                _doorCells.Add(door.Position);
+                _doorCells.Add(doors[i].Position);
             }
         }
 
@@ -673,7 +674,7 @@ namespace VVRace
             {
                 var c = cell + adj;
                 var edifice = c.InBounds(Map) ? c.GetEdifice(Map) : null;
-                if (edifice != null && edifice.def.passability == Traversability.Impassable && Territory.BoundaryCells.Contains(c)) { return true; }
+                if (edifice != null && edifice.def.passability == Traversability.Impassable && Territory.IsBoundaryCell(c)) { return true; }
             }
             return false;
         }
@@ -859,8 +860,17 @@ namespace VVRace
             if (pawns == null || pawns.Count == 0) { return false; }
             if (Territory.Rooms.Sum(r => r.CellCount) >= ExpectedMembers() * RoomCellsPerMember) { return false; }
 
+            // 자리를 못 찾았으면 둥지 둘레에 건물이 서거나 없어질 때(Notify_BuildingChanged, 벽·문이 바뀌면 바닐라 방·지역도 바뀐다)나
+            // 하루가 지날 때까지 다시 찾지 않는다. 자리 찾기는 1회 1.4~2.8 ms(실측, 첫 호출 8~23 ms)라 계획 주기(2500틱)마다 되풀이하면 그때마다 끊겼다.
+            var ticks = Find.TickManager.TicksGame;
+            if (_noExpansionSite && ticks < _expansionRetryTick) { return false; }
+
             _noExpansionSite = !TryFindExpansionSite(out var walls, out var interior, out var door);
-            if (_noExpansionSite) { return false; }
+            if (_noExpansionSite)
+            {
+                _expansionRetryTick = ticks + ExpansionRetryTicks;
+                return false;
+            }
 
             foreach (var cell in walls)
             {
@@ -901,6 +911,21 @@ namespace VVRace
             return true;
         }
 
+        // 증축 자리 찾기 실패 기억(저장하지 않는다, TryPlanExpansion). 둥지 둘레(자리 찾기가 보는 칸과 그 이웃)에 건물이 서거나 없어지면 푼다.
+        private const int ExpansionRetryTicks = GenDate.TicksPerDay;
+        private const float ExpansionChangeRadius = ExpansionSearchRadius + ExpansionGridMargin + 5f;
+        private int _expansionRetryTick = -1;
+
+        public void Notify_BuildingChanged(Building building)
+        {
+            if (_expansionRetryTick >= 0 && building.Position.InHorDistOf(_owner.NestCell, ExpansionChangeRadius))
+            {
+                _expansionRetryTick = -1;
+            }
+        }
+
+        private static readonly bool[] ExpansionShapeOrder = { true, false };
+
         private bool TryFindExpansionSite(out List<IntVec3> walls, out List<IntVec3> interior, out IntVec3 door)
         {
             walls = null;
@@ -910,39 +935,109 @@ namespace VVRace
             var origin = _doorCells.Count > 0 ? _doorCells[0] : _owner.NestCell;
             var bestScore = float.MinValue;
             var cellCount = GenRadial.NumCellsInRadius(ExpansionSearchRadius);
+            ResetExpansionGrid();
 
-            foreach (var hexagonal in new[] { true, false })
+            foreach (var hexagonal in ExpansionShapeOrder)
             {
+                var bestCenter = IntVec3.Invalid;
                 for (int i = 0; i < cellCount; i += ExpansionSearchStep)
                 {
                     var center = _owner.NestCell + GenRadial.RadialPattern[i];
                     if (center.DistanceTo(_owner.NestCell) < ExpansionMinDistance) { continue; }
-                    if (!TryMakeShape(center, hexagonal, origin, out var shapeWalls, out var shapeInterior, out var shapeDoor, out var score)) { continue; }
+                    if (!TryMakeShape(center, hexagonal, origin, out var shapeDoor, out var score)) { continue; }
 
                     if (score > bestScore)
                     {
                         bestScore = score;
-                        walls = shapeWalls;
-                        interior = shapeInterior;
+                        bestCenter = center;
                         door = shapeDoor;
                     }
                 }
 
                 // 육각 방 자리가 있으면 사각 방은 보지 않는다.
-                if (walls != null) { return true; }
+                if (bestCenter.IsValid)
+                {
+                    var shape = ExpansionShapeOf(hexagonal);
+                    walls = ShapeCells(shape.walls, bestCenter);
+                    interior = ShapeCells(shape.interior, bestCenter);
+                    return true;
+                }
             }
 
             return false;
         }
 
-        private bool TryMakeShape(IntVec3 center, bool hexagonal, IntVec3 origin, out List<IntVec3> walls, out List<IntVec3> interior, out IntVec3 door, out float score)
+        private bool TryMakeShape(IntVec3 center, bool hexagonal, IntVec3 origin, out IntVec3 door, out float score)
         {
             var map = Map;
-            walls = new List<IntVec3>();
-            interior = new List<IntVec3>();
+            var shape = ExpansionShapeOf(hexagonal);
             door = IntVec3.Invalid;
             score = 0f;
 
+            var trees = 0;
+            var interior = shape.interior;
+            for (int i = 0; i < interior.Length; ++i)
+            {
+                if (!IsExpansionCellCached(center + interior[i], ref trees)) { return false; }
+            }
+            var walls = shape.walls;
+            for (int i = 0; i < walls.Length; ++i)
+            {
+                var cell = center + walls[i];
+                if (!IsExpansionCellCached(cell, ref trees)) { return false; }
+                if (!CanPlaceCached(cell, ExpansionWallChecked, ExpansionWallOk, VVThingDefOf.VV_ViviCreamWall, null)) { return false; }
+            }
+
+            // 문은 둥지 입구에 가까운 쪽, 바깥 칸으로 드나들 수 있어야 한다.
+            var bestDoorDistance = float.MaxValue;
+            for (int i = 0; i < shape.doors.Length; ++i)
+            {
+                var candidate = center + shape.doors[i];
+                var outside = shape.doorOutsides[i].IsValid ? center + shape.doorOutsides[i] : IntVec3.Invalid;
+                if (!outside.IsValid || !outside.InBounds(map) || !outside.Standable(map)) { continue; }
+                if (!CanPlaceCached(candidate, ExpansionDoorChecked, ExpansionDoorOk, ThingDefOf.Door, VVThingDefOf.VV_Viviwax)) { continue; }
+
+                var distance = candidate.DistanceToSquared(origin);
+                if (distance < bestDoorDistance)
+                {
+                    bestDoorDistance = distance;
+                    door = candidate;
+                }
+            }
+            if (!door.IsValid) { return false; }
+
+            score = -center.DistanceTo(origin) - trees * 2f;
+            return true;
+        }
+
+        // 증축 방 모양(중심에서의 칸 차이). 바닐라 칸 사각형·육각 모서리 계산은 중심을 옮겨도 모양이 같으므로 모양마다 한 번만 만들고 중심을 더해 쓴다
+        // (예전에는 중심마다 칸 목록 셋을 새로 만들고 안쪽 칸마다 벽 목록을 훑었다). 칸 순서(벽을 놓는 순서, 첫 안쪽 칸)는 예전과 같다.
+        private sealed class ExpansionShape
+        {
+            public IntVec3[] walls;
+            public IntVec3[] interior;
+            // 벽 칸인 문 후보와 그 문으로 드나들 바깥 칸(없으면 Invalid)
+            public IntVec3[] doors;
+            public IntVec3[] doorOutsides;
+        }
+
+        private static ExpansionShape _hexagonalShape;
+        private static ExpansionShape _squareShape;
+
+        private static ExpansionShape ExpansionShapeOf(bool hexagonal)
+        {
+            if (hexagonal)
+            {
+                return _hexagonalShape ?? (_hexagonalShape = MakeExpansionShape(true));
+            }
+            return _squareShape ?? (_squareShape = MakeExpansionShape(false));
+        }
+
+        private static ExpansionShape MakeExpansionShape(bool hexagonal)
+        {
+            var center = IntVec3.Zero;
+            var walls = new List<IntVec3>();
+            var interior = new List<IntVec3>();
             var doorCandidates = new List<IntVec3>();
             if (hexagonal)
             {
@@ -970,19 +1065,8 @@ namespace VVRace
                 doorCandidates.Add(new IntVec3(rect.maxX, 0, rect.CenterCell.z));
             }
 
-            var trees = 0;
-            foreach (var cell in interior)
-            {
-                if (!IsExpansionCell(cell, ref trees)) { return false; }
-            }
-            foreach (var cell in walls)
-            {
-                if (!IsExpansionCell(cell, ref trees)) { return false; }
-                if (!GenConstruct.CanPlaceBlueprintAt(VVThingDefOf.VV_ViviCreamWall, cell, Rot4.North, map).Accepted) { return false; }
-            }
-
-            // 문은 둥지 입구에 가까운 쪽, 바깥 칸으로 드나들 수 있어야 한다.
-            var bestDoorDistance = float.MaxValue;
+            var doors = new List<IntVec3>();
+            var doorOutsides = new List<IntVec3>();
             foreach (var candidate in doorCandidates)
             {
                 if (!walls.Contains(candidate)) { continue; }
@@ -993,20 +1077,97 @@ namespace VVRace
                     var adj = candidate + dir;
                     if (!walls.Contains(adj) && !interior.Contains(adj)) { outside = adj; break; }
                 }
-                if (!outside.IsValid || !outside.InBounds(map) || !outside.Standable(map)) { continue; }
-                if (!GenConstruct.CanPlaceBlueprintAt(ThingDefOf.Door, candidate, Rot4.North, map, stuffDef: VVThingDefOf.VV_Viviwax).Accepted) { continue; }
-
-                var distance = candidate.DistanceToSquared(origin);
-                if (distance < bestDoorDistance)
-                {
-                    bestDoorDistance = distance;
-                    door = candidate;
-                }
+                doors.Add(candidate);
+                doorOutsides.Add(outside);
             }
-            if (!door.IsValid) { return false; }
 
-            score = -center.DistanceTo(origin) - trees * 2f;
+            return new ExpansionShape
+            {
+                walls = walls.ToArray(),
+                interior = interior.ToArray(),
+                doors = doors.ToArray(),
+                doorOutsides = doorOutsides.ToArray(),
+            };
+        }
+
+        private static List<IntVec3> ShapeCells(IntVec3[] offsets, IntVec3 center)
+        {
+            var cells = new List<IntVec3>(offsets.Length);
+            for (int i = 0; i < offsets.Length; ++i)
+            {
+                cells.Add(center + offsets[i]);
+            }
+            return cells;
+        }
+
+        // 자리 찾기 한 번 동안의 칸 판정 기억(저장하지 않는다): 중심이 3칸 간격이라 이웃한 중심의 방 모양이 칸 대부분을 함께 쓰므로
+        // 증축 칸 판정과 벽·문 청사진 판정을 칸마다 한 번만 한다(찾는 동안 맵은 바뀌지 않는다). 격자는 둥지 중심 둘레 반경에 방 모양 반 폭을 더한 사각형이다.
+        private const int ExpansionGridMargin = 7;
+        private const byte ExpansionCellChecked = 1, ExpansionCellOk = 2, ExpansionCellTree = 4, ExpansionWallChecked = 8, ExpansionWallOk = 16,
+            ExpansionDoorChecked = 32, ExpansionDoorOk = 64;
+        private byte[] _expansionGrid;
+        private IntVec3 _expansionGridMin;
+        private int _expansionGridSize;
+
+        private void ResetExpansionGrid()
+        {
+            var half = (int)ExpansionSearchRadius + ExpansionGridMargin;
+            _expansionGridSize = half * 2 + 1;
+            var length = _expansionGridSize * _expansionGridSize;
+            if (_expansionGrid == null || _expansionGrid.Length != length)
+            {
+                _expansionGrid = new byte[length];
+            }
+            else
+            {
+                System.Array.Clear(_expansionGrid, 0, length);
+            }
+            _expansionGridMin = new IntVec3(_owner.NestCell.x - half, 0, _owner.NestCell.z - half);
+        }
+
+        private int ExpansionGridIndex(IntVec3 cell)
+        {
+            var x = cell.x - _expansionGridMin.x;
+            var z = cell.z - _expansionGridMin.z;
+            return x >= 0 && z >= 0 && x < _expansionGridSize && z < _expansionGridSize ? x + z * _expansionGridSize : -1;
+        }
+
+        private bool IsExpansionCellCached(IntVec3 cell, ref int trees)
+        {
+            var index = ExpansionGridIndex(cell);
+            if (index < 0) { return IsExpansionCell(cell, ref trees); }
+
+            var flags = _expansionGrid[index];
+            if ((flags & ExpansionCellChecked) == 0)
+            {
+                var cellTrees = 0;
+                flags |= ExpansionCellChecked;
+                if (IsExpansionCell(cell, ref cellTrees))
+                {
+                    flags |= ExpansionCellOk;
+                    if (cellTrees > 0) { flags |= ExpansionCellTree; }
+                }
+                _expansionGrid[index] = flags;
+            }
+            if ((flags & ExpansionCellOk) == 0) { return false; }
+
+            if ((flags & ExpansionCellTree) != 0) { trees++; }
             return true;
+        }
+
+        private bool CanPlaceCached(IntVec3 cell, byte checkedFlag, byte okFlag, BuildableDef def, ThingDef stuff)
+        {
+            var index = ExpansionGridIndex(cell);
+            if (index < 0) { return GenConstruct.CanPlaceBlueprintAt(def, cell, Rot4.North, Map, stuffDef: stuff).Accepted; }
+
+            var flags = _expansionGrid[index];
+            if ((flags & checkedFlag) == 0)
+            {
+                flags |= checkedFlag;
+                if (GenConstruct.CanPlaceBlueprintAt(def, cell, Rot4.North, Map, stuffDef: stuff).Accepted) { flags |= okFlag; }
+                _expansionGrid[index] = flags;
+            }
+            return (flags & okFlag) != 0;
         }
 
         // 증축 자리: 채굴·산 지붕·물·구역·다른 건물이 없고 플레이어 건물과 붙지 않은 칸
@@ -1016,7 +1177,7 @@ namespace VVRace
             if (!cell.InBounds(map) || cell.InNoBuildEdgeArea(map) || cell.Fogged(map) || cell.Roofed(map)) { return false; }
             if (cell.GetEdifice(map) != null || cell.GetTerrain(map).IsWater) { return false; }
             if (map.zoneManager.ZoneAt(cell) != null) { return false; }
-            if (Territory.IsTerritoryCell(cell) || Territory.BoundaryCells.Contains(cell) || _owner.Garden.IsCottonCell(cell)) { return false; }
+            if (Territory.IsTerritoryCell(cell) || Territory.IsBoundaryCell(cell) || _owner.Garden.IsCottonCell(cell)) { return false; }
 
             foreach (var thing in cell.GetThingList(map))
             {
@@ -1139,7 +1300,7 @@ namespace VVRace
         {
             var map = Map;
             if (!cell.InBounds(map) || cell.Roofed(map) || cell.InNoBuildEdgeArea(map)) { return false; }
-            if (Territory.IsTerritoryCell(cell) || Territory.BoundaryCells.Contains(cell)) { return false; }
+            if (Territory.IsTerritoryCell(cell) || Territory.IsBoundaryCell(cell)) { return false; }
             if (!ignoreCotton && _owner.Garden.IsCottonCell(cell)) { return false; }
             if (map.zoneManager.ZoneAt(cell) != null) { return false; }
             return IsFreeCell(cell, allowPlants);
@@ -1157,19 +1318,8 @@ namespace VVRace
                 if (thing is Plant plant && (!allowPlants || plant.def.plant.IsTree)) { return false; }
             }
 
-            foreach (var door in Territory.BorderDoors)
-            {
-                if (cell.AdjacentTo8WayOrInside(door.Position)) { return false; }
-            }
-
-            // 다른 둥지 건물의 상호작용 칸을 막지 않는다.
-            var workSpots = _owner.Production.WorkSpots;
-            for (int i = 0; i < workSpots.Count; ++i)
-            {
-                if (workSpots[i].Spawned && workSpots[i].InteractionCell == cell) { return false; }
-            }
-
-            return true;
+            // 문 옆(통로)과 다른 둥지 건물의 상호작용 칸을 막지 않는다.
+            return !Territory.IsBesideBorderDoor(cell) && !_owner.Production.IsWorkSpotInteractionCell(cell);
         }
         #endregion
 

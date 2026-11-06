@@ -160,6 +160,16 @@ namespace VVRace
             }
         }
 
+        // 맵의 건물이 서거나 없어졌다(바닐라 맵 사건을 둥지 토일이 넘긴다). 미리 만들어 둔 칸 집합(경계 문·작업 자리)과 증축 자리 실패 기억을 다시 본다.
+        public void Notify_BuildingChanged(Building building)
+        {
+            if (!_settled || building == null) { return; }
+
+            _territory.Notify_BuildingChanged(building);
+            _production.Notify_BuildingChanged(building);
+            _planner.Notify_BuildingChanged(building);
+        }
+
         public override void LordJobTick()
         {
             base.LordJobTick();

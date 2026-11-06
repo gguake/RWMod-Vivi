@@ -183,6 +183,27 @@ namespace VVRace
             return false;
         }
 
+        // 식물 성장 속도 상한(비옥한 땅의 비옥도 배율 등): 이 속도로도 기한 안에 자라지 못하는 식물은 성장 속도를 재지 않는다.
+        private const float MaxPlantGrowthRate = 4f;
+
+        // 식물의 성장도가 threshold에 닿을 틱(지금 성장 속도로 셈, 밤에 쉬는 시간을 빼지 않아 실제보다 이르다). within틱 안에 닿지 않거나 자라지 않으면 -1.
+        // 둥지의 "지금 할 수 없음" 기억이 다음에 볼 틱을 정할 때 쓴다(ViviNestProduction).
+        public static int GrowthReadyTick(Plant plant, float threshold, int within)
+        {
+            var now = Find.TickManager.TicksGame;
+            var remaining = threshold - plant.Growth;
+            if (remaining <= 0f) { return now + 1; }
+
+            var growDays = plant.def.plant?.growDays ?? 0f;
+            if (growDays <= 0f || remaining * GenDate.TicksPerDay * growDays / MaxPlantGrowthRate > within) { return -1; }
+
+            var rate = plant.GrowthRate;
+            if (rate <= 0f) { return -1; }
+
+            var ticks = remaining * GenDate.TicksPerDay * growDays / rate;
+            return ticks <= within ? now + UnityEngine.Mathf.Max(1, UnityEngine.Mathf.CeilToInt(ticks)) : -1;
+        }
+
         // 바깥 활동이 위험한 날씨·상태(독성 낙진, 유독 연무, 혈우 등)인지
         public static bool OutdoorDangerous(Map map)
         {

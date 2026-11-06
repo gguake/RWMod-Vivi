@@ -28,6 +28,14 @@ namespace VVRace
         private readonly List<Room> _cachedRooms = new List<Room>();
         private int _cachedTick = -99999;
 
+        // 칸 검사(바깥 빈 땅·바닥 보관 칸·작업 자리 칸)가 쓰는 경계 칸·경계 문·문 둘레 칸(저장하지 않는다). 예전에는 칸 하나를 볼 때마다
+        // 경계 칸 전체에서 문을 다시 찾아(반복기 할당 포함) 바깥 빈 땅 검사가 칸당 0.6~0.95 µs였다(실측, 경계 칸 약 50).
+        // 경계 칸은 방을 더할 때만 바뀌고, 문 목록은 영역 갱신·방 추가 때와 맵의 문이 서거나 없어질 때(둥지 토일 알림) 다시 만든다.
+        private readonly HashSet<IntVec3> _boundaryCellSet = new HashSet<IntVec3>();
+        private readonly List<Building_Door> _borderDoors = new List<Building_Door>();
+        private readonly HashSet<IntVec3> _borderDoorAdjacentCells = new HashSet<IntVec3>();
+        private bool _borderDoorsDirty = true;
+
         public IReadOnlyList<IntVec3> BoundaryCells => _boundaryCells;
         public IReadOnlyList<IntVec3> OutdoorStorageCells => _outdoorStorageCells;
 
@@ -137,26 +145,61 @@ namespace VVRace
 
             foreach (var border in room.BorderCells)
             {
-                if (border.InBounds(Map) && !_boundaryCells.Contains(border))
+                if (border.InBounds(Map) && _boundaryCellSet.Add(border))
                 {
                     _boundaryCells.Add(border);
                 }
             }
 
             _cachedTick = -99999;
+            _borderDoorsDirty = true;
         }
 
-        public IEnumerable<Building_Door> BorderDoors
+        public bool IsBoundaryCell(IntVec3 cell) => _boundaryCellSet.Contains(cell);
+
+        // 경계 칸 위의 문(경계 칸 순서, 여러 칸 문은 칸마다 한 번씩)
+        public IReadOnlyList<Building_Door> BorderDoors
         {
             get
             {
-                foreach (var cell in _boundaryCells)
+                EnsureBorderDoors();
+                return _borderDoors;
+            }
+        }
+
+        // 경계 문 칸이거나 그 8방향 이웃(통로)
+        public bool IsBesideBorderDoor(IntVec3 cell)
+        {
+            EnsureBorderDoors();
+            return _borderDoorAdjacentCells.Contains(cell);
+        }
+
+        // 맵의 건물이 서거나 없어졌다(둥지 토일 알림). 문이면 다음 칸 검사 때 문 목록을 다시 만든다.
+        public void Notify_BuildingChanged(Building building)
+        {
+            if (building is Building_Door) { _borderDoorsDirty = true; }
+        }
+
+        private void EnsureBorderDoors()
+        {
+            RefreshIfNeeded();
+            if (!_borderDoorsDirty) { return; }
+
+            var map = Map;
+            if (map == null) { return; }
+
+            _borderDoorsDirty = false;
+            _borderDoors.Clear();
+            _borderDoorAdjacentCells.Clear();
+            for (int i = 0; i < _boundaryCells.Count; ++i)
+            {
+                var door = _boundaryCells[i].GetDoor(map);
+                if (door == null) { continue; }
+
+                _borderDoors.Add(door);
+                foreach (var offset in GenAdj.AdjacentCellsAndInside)
                 {
-                    var door = cell.GetDoor(Map);
-                    if (door != null)
-                    {
-                        yield return door;
-                    }
+                    _borderDoorAdjacentCells.Add(door.Position + offset);
                 }
             }
         }
@@ -165,7 +208,7 @@ namespace VVRace
         {
             _outdoorStorageCells.Clear();
 
-            var doors = BorderDoors.ToList();
+            var doors = BorderDoors;
             var origin = doors.Count > 0 ? doors[0].Position : _roomCells.FirstOrDefault();
             var cellCount = GenRadial.NumCellsInRadius(OutdoorStorageSearchRadius);
             for (int i = 0; i < cellCount && _outdoorStorageCells.Count < OutdoorStorageCellCount; ++i)
@@ -183,7 +226,7 @@ namespace VVRace
         {
             var map = Map;
             if (!cell.InBounds(map) || !cell.Standable(map) || cell.Fogged(map)) { return false; }
-            if (_boundaryCells.Contains(cell) || IsRoomCell(cell)) { return false; }
+            if (_boundaryCellSet.Contains(cell) || IsRoomCell(cell)) { return false; }
 
             var room = cell.GetRoom(map);
             if (room == null || !room.PsychologicallyOutdoors) { return false; }
@@ -195,12 +238,7 @@ namespace VVRace
                 if (thing.def.IsBlueprint || thing.def.IsFrame || thing is Building) { return false; }
             }
 
-            foreach (var door in BorderDoors)
-            {
-                if (cell.AdjacentTo8WayOrInside(door.Position)) { return false; }
-            }
-
-            return true;
+            return !IsBesideBorderDoor(cell);
         }
 
         private void RefreshIfNeeded()
@@ -211,6 +249,7 @@ namespace VVRace
             var ticks = Find.TickManager.TicksGame;
             if (ticks - _cachedTick < RefreshInterval) { return; }
             _cachedTick = ticks;
+            _borderDoorsDirty = true;
 
             _cachedRooms.Clear();
             _cachedRoomCells.Clear();
@@ -258,6 +297,8 @@ namespace VVRace
             {
                 _ownedRoomCellSet.Clear();
                 _ownedRoomCellSet.UnionWith(_ownedRoomCells);
+                _boundaryCellSet.Clear();
+                _boundaryCellSet.UnionWith(_boundaryCells);
             }
         }
     }

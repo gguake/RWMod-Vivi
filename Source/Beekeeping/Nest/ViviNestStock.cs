@@ -327,11 +327,7 @@ namespace VVRace
             {
                 if (thing is Building || thing.def.IsBlueprint || thing.def.IsFrame) { return false; }
             }
-            foreach (var door in Territory.BorderDoors)
-            {
-                if (cell.AdjacentTo8WayOrInside(door.Position)) { return false; }
-            }
-            return true;
+            return !Territory.IsBesideBorderDoor(cell);
         }
 
         private bool IsValidStorageCell(IntVec3 cell, Map map, Thing thing, Pawn carrier, ViviNestStorageRank rank)

@@ -23,13 +23,17 @@ namespace VVRace
                 return pin != null && pin.Spawned && ThinkNode_ViviNestPlay.Elapsed(current) < PlayTicks && ThinkNode_ViviNestPlay.OutdoorPlayOk(pawn, current.targetB.Cell) ? current : null;
             }
 
+            // 관람 칸을 찾기 전에 바깥 조건(바깥 위험·몸 상태·바깥 기온)부터 본다. 고른 칸의 기온은 아래에서 같은 편한 기온 범위로 다시 본다.
+            if (!ThinkNode_ViviNestPlay.OutdoorPlayWeatherOk(pawn, out var comfortable)) { return null; }
+
+            var map = pawn.Map;
             var jobDef = VVJobDefOf.Play_Horseshoes;
-            foreach (var building in pawn.Map.listerBuildings.allBuildingsNonColonist)
+            foreach (var building in map.listerBuildings.allBuildingsNonColonist)
             {
                 if (building.def != VVThingDefOf.HorseshoesPin || building.Faction != nest.Faction) { continue; }
                 if (building.IsForbidden(pawn) || !pawn.CanReserve(building, jobDef.joyMaxParticipants)) { continue; }
                 if (!WatchBuildingUtility.TryFindBestWatchCell(building, pawn, desireSit: false, out var cell, out var chair)) { continue; }
-                if (!ThinkNode_ViviNestPlay.OutdoorPlayOk(pawn, cell)) { continue; }
+                if (!comfortable.Includes(GenTemperature.GetTemperatureForCell(cell, map))) { continue; }
 
                 var job = JobMaker.MakeJob(jobDef, building, cell, chair);
                 job.doUntilGatheringEnded = true;

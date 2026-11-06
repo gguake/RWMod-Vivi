@@ -19,6 +19,19 @@ namespace VVRace
             _canDig = canDig;
         }
 
+        // 떠나는 동안에도 둥지 계획(경계 수리 등)이 칸 집합을 쓰므로 맵의 건물 변화를 알린다(LordToil_ViviNestLive와 같다).
+        public override void Notify_BuildingSpawnedOnMap(Building b)
+        {
+            base.Notify_BuildingSpawnedOnMap(b);
+            (lord?.LordJob as LordJob_ViviNest)?.Notify_BuildingChanged(b);
+        }
+
+        public override void Notify_BuildingDespawnedOnMap(Building b)
+        {
+            base.Notify_BuildingDespawnedOnMap(b);
+            (lord?.LordJob as LordJob_ViviNest)?.Notify_BuildingChanged(b);
+        }
+
         public override void UpdateAllDuties()
         {
             for (int i = 0; i < lord.ownedPawns.Count; ++i)
