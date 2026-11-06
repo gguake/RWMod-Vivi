@@ -243,19 +243,7 @@ namespace VVRace
         }
 
         // 조건에 맞는 구성원 수
-        private int CountMembers(System.Predicate<Pawn> match)
-        {
-            var pawns = _owner.lord?.ownedPawns;
-            var count = 0;
-            if (pawns != null)
-            {
-                for (int i = 0; i < pawns.Count; ++i)
-                {
-                    if (match(pawns[i])) { count++; }
-                }
-            }
-            return count;
-        }
+        private int CountMembers(System.Predicate<Pawn> match) => _owner.lord?.ownedPawns.Count(match) ?? 0;
 
         // 누가 쓰고 있거나(바닐라 지시서 잡은 자리를 예약한다) 만들다 만 것이 걸린 자리
         private bool IsWorkSpotInUse(Building_WorkTable spot)
