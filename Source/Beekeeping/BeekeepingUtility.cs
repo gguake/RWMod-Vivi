@@ -107,11 +107,18 @@ namespace VVRace
         // 둥지 부화기에서 깬 아기는 둥지 무리에 든다. 둥지 안 일이라 플레이어에게 알리지 않는다.
         public static void Notify_NestBabyHatched(Pawn baby, Thing hatchery)
         {
-            var lord = GetNestLord(hatchery.Map);
-            if (lord == null || ((LordJob_ViviNest)lord.LordJob).Faction != baby.Faction) { return; }
+            var nest = GetNestLordJob(hatchery.Map, baby.Faction);
+            if (nest == null) { return; }
 
             RemoveChemicalDependencies(baby);
-            lord.AddPawn(baby);
+            nest.lord.AddPawn(baby);
+        }
+
+        // 맵의 둥지가 그 세력의 것일 때만 돌려준다.
+        public static LordJob_ViviNest GetNestLordJob(Map map, Faction faction)
+        {
+            var nest = GetNestLord(map)?.LordJob as LordJob_ViviNest;
+            return nest != null && nest.Faction == faction ? nest : null;
         }
 
         public static Lord GetNestLord(Map map)

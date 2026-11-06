@@ -136,10 +136,7 @@ namespace VVRace
             var faction = __result?.InnerThing?.Faction;
             if (__state == null || !faction.IsWanderingViviFaction()) { return; }
 
-            if (BeekeepingUtility.GetNestLord(__state)?.LordJob is LordJob_ViviNest nest && nest.Faction == faction)
-            {
-                nest.MarkOwned(__result);
-            }
+            BeekeepingUtility.GetNestLordJob(__state, faction)?.MarkOwned(__result);
         }
 
         private static void QuestManager_Notify_ThingsProduced_Postfix(Pawn worker, List<Thing> things)

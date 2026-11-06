@@ -83,7 +83,8 @@ namespace VVRace
                 return GenPlace.TryPlaceThing(fruit, parent.Position, map, ThingPlaceMode.Near);
             }
 
-            if (BeekeepingUtility.GetNestLord(map)?.LordJob is LordJob_ViviNest nest && nest.Faction == faction)
+            var nest = BeekeepingUtility.GetNestLordJob(map, faction);
+            if (nest != null)
             {
                 return nest.TryPlaceOwned(fruit, parent.Position);
             }
