@@ -1057,11 +1057,13 @@ namespace VVRace
                 if (!CanPlaceCached(candidate, ExpansionDoorChecked, ExpansionDoorOk, ThingDefOf.Door, VVThingDefOf.VV_Viviwax)) { continue; }
 
                 var distance = candidate.DistanceToSquared(origin);
-                if (distance < bestDoorDistance)
-                {
-                    bestDoorDistance = distance;
-                    door = candidate;
-                }
+                if (distance >= bestDoorDistance) { continue; }
+                // 둥지 입구에서 문 바깥 칸으로 갈 수 있어야 한다. 깊은 물에 둘러싸인 섬처럼 갈 수 없는 자리에 놓은 청사진은 짓지 못한 채 남아
+                // 다른 공사(AnyPendingProject)를 영구히 막고, 증축 자리가 있다고 보아 알 낳기 수용량 제한도 풀었다.
+                if (!map.reachability.CanReach(origin, outside, PathEndMode.OnCell, TraverseParms.For(TraverseMode.PassDoors))) { continue; }
+
+                bestDoorDistance = distance;
+                door = candidate;
             }
             if (!door.IsValid) { return false; }
 
