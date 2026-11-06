@@ -55,11 +55,7 @@ namespace VVRace
         // 장기 계측(한랭 60일): 바깥 -30~-40°C에서 편자 놀이를 하던 아이가 저체온으로 쓰러져 죽었다(추정). 피신은 저체온이 가벼운 단계부터라 그 전에 막는다.
         public static bool OutdoorPlayOk(Pawn pawn, IntVec3 cell)
         {
-            var map = pawn.Map;
-            if (map == null || BeekeepingUtility.OutdoorDangerous(map)) { return false; }
-            if (pawn.health.hediffSet.HasTemperatureInjury(TemperatureInjuryStage.Initial)) { return false; }
-
-            return pawn.ComfortableTemperatureRange().Includes(GenTemperature.GetTemperatureForCell(cell, map));
+            return TryGetOutdoorPlayRange(pawn, out var comfortable) && comfortable.Includes(GenTemperature.GetTemperatureForCell(cell, pawn.Map));
         }
 
         // 바깥 놀이 칸을 찾기 전에 보는 조건: OutdoorPlayOk에서 칸 기온을 바깥 기온으로 바꾼 것(지붕 없는 바깥 칸은 바깥 기온을 따른다).
@@ -68,13 +64,19 @@ namespace VVRace
         // 이 범위로 칸 기온만 보면 같은 판정이다(편한 기온은 옷·유전자 스탯이라 칸마다 다시 재지 않는다).
         public static bool OutdoorPlayWeatherOk(Pawn pawn, out FloatRange comfortable)
         {
+            return TryGetOutdoorPlayRange(pawn, out comfortable) && comfortable.Includes(pawn.Map.mapTemperature.OutdoorTemp);
+        }
+
+        // 바깥 놀이의 기온 외 조건(바깥 위험·몸 상태)을 보고, 통과하면 그 비비의 편한 기온 범위를 넘겨 준다.
+        private static bool TryGetOutdoorPlayRange(Pawn pawn, out FloatRange comfortable)
+        {
             comfortable = default;
             var map = pawn.Map;
             if (map == null || BeekeepingUtility.OutdoorDangerous(map)) { return false; }
             if (pawn.health.hediffSet.HasTemperatureInjury(TemperatureInjuryStage.Initial)) { return false; }
 
             comfortable = pawn.ComfortableTemperatureRange();
-            return comfortable.Includes(map.mapTemperature.OutdoorTemp);
+            return true;
         }
 
         private static bool HasBaby(LordJob_ViviNest nest)
