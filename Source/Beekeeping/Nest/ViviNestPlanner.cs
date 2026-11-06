@@ -43,6 +43,8 @@ namespace VVRace
         // 시체를 버릴 거리(둥지 중심에서). 무리가 오가는 반경(24칸) 안에서 둥지와 떨어진 곳
         private const float CorpseDumpMinDistance = 14f;
         private const float CorpseDumpMaxDistance = 22f;
+        // 시체를 둘 칸이 하나도 없으면 이만큼(틱) 다시 찾지 않는다(찾기 한 번에 링 904칸을 다 본다).
+        private const int CorpseDumpRetryTicks = 600;
         private const float ExpansionSearchRadius = 16f;
         private const float ExpansionMinDistance = 7f;
         private const int ExpansionSearchStep = 3;
@@ -54,6 +56,8 @@ namespace VVRace
         private bool _initialFacilitiesPlanned;
         private List<IntVec3> _expansionInterior = new List<IntVec3>();
         private IntVec3 _expansionDoor = IntVec3.Invalid;
+        // 시체를 둘 칸 찾기가 실패한 뒤 다시 찾을 틱(저장하지 않는다)
+        private int _corpseDumpRetryTick = -99999;
         // 계획 주기마다 다시 잰다(저장하지 않는다): 로열이 알을 낳아도 되는지, 마지막 증축 자리 찾기가 실패했는지(실패는 _expansionRetryTick까지 기억한다)
         private bool _eggAllowed = true;
         private bool _noExpansionSite;
@@ -682,10 +686,11 @@ namespace VVRace
 
         #region 선반·부화기·바닥·편자 막대
         // 선반은 방 크기에 맞춰(12칸당 하나) 짓는다. 바닥 보관 칸이 남아 있어도 짓는다(사용자 요구).
+        // 대기 중인 선반 청사진·골조도 센다. 계획 주기는 대기 공사가 있으면 여기까지 오지 않지만, 바로 불렀을 때(자동 시험 p3 B1c) 지은 선반만 세어 하나를 더 놓았다.
         private bool TryPlanShelf()
         {
             var roomCells = Territory.Rooms.Sum(r => r.CellCount);
-            if (CountNestBuildings(ThingDefOf.ShelfSmall) >= roomCells / CellsPerShelf) { return false; }
+            if (CountNestBuildings(ThingDefOf.ShelfSmall) + CountNestConstructions(ThingDefOf.ShelfSmall) >= roomCells / CellsPerShelf) { return false; }
 
             foreach (var cell in WallSideRoomCells())
             {
@@ -1269,30 +1274,48 @@ namespace VVRace
         }
 
         // 시체를 둘 바깥 칸: 둥지에서 떨어진 지붕 없는 빈 땅. 정착민 집 구역은 되도록 피한다.
+        // 집 구역 밖 칸을 먼저 한 바퀴 보고 없을 때만 집 구역 칸을 본다(고르는 칸은 한 바퀴에서 집 구역 칸을 예비로 두던 예전과 같다).
+        // 예전에는 집 구역 칸에도 예약·길을 물어 링(14~22칸, 904칸)이 집 구역에 많이 걸리면 시체 하나에 0.3~1.2 ms였다(정적 분석 F11).
         public bool TryFindCorpseDumpCell(Pawn pawn, out IntVec3 result)
+        {
+            var ticks = Find.TickManager.TicksGame;
+            if (ticks < _corpseDumpRetryTick)
+            {
+                result = IntVec3.Invalid;
+                return false;
+            }
+
+            var start = GenRadial.NumCellsInRadius(CorpseDumpMinDistance);
+            var count = GenRadial.NumCellsInRadius(CorpseDumpMaxDistance) - start;
+            var offset = Rand.Range(0, count);
+            if (TryFindCorpseDumpCell(pawn, start, count, offset, home: false, out result)
+                || TryFindCorpseDumpCell(pawn, start, count, offset, home: true, out result))
+            {
+                return true;
+            }
+
+            _corpseDumpRetryTick = ticks + CorpseDumpRetryTicks;
+            return false;
+        }
+
+        private bool TryFindCorpseDumpCell(Pawn pawn, int start, int count, int offset, bool home, out IntVec3 result)
         {
             var map = Map;
             var center = _owner.NestCell;
-            var start = GenRadial.NumCellsInRadius(CorpseDumpMinDistance);
-            var end = GenRadial.NumCellsInRadius(CorpseDumpMaxDistance);
-            var fallback = IntVec3.Invalid;
-            var offset = Rand.Range(0, end - start);
-            for (int i = 0; i < end - start; ++i)
+            var homeArea = map.areaManager.Home;
+            for (int i = 0; i < count; ++i)
             {
-                var cell = center + GenRadial.RadialPattern[start + (i + offset) % (end - start)];
+                var cell = center + GenRadial.RadialPattern[start + (i + offset) % count];
+                if (!cell.InBounds(map) || homeArea[cell] != home) { continue; }
                 // 바닐라 운반 잡(HaulToCell)은 놓을 칸을 예약하므로 다른 폰이 예약해 둔 칸은 피한다(보관 칸 찾기와 같다).
                 if (!IsFreeOutdoorCell(cell, allowPlants: true) || !pawn.CanReserve(cell) || !pawn.CanReach(cell, PathEndMode.OnCell, Danger.Some)) { continue; }
 
-                if (!map.areaManager.Home[cell])
-                {
-                    result = cell;
-                    return true;
-                }
-                if (!fallback.IsValid) { fallback = cell; }
+                result = cell;
+                return true;
             }
 
-            result = fallback;
-            return fallback.IsValid;
+            result = IntVec3.Invalid;
+            return false;
         }
 
         // 둥지 바깥 빈 땅: 지붕·구역·둥지 칸·목화밭이 아니고, 둥지 건물의 통로를 막지 않는 칸
@@ -1418,6 +1441,17 @@ namespace VVRace
             foreach (var building in Map.listerBuildings.allBuildingsNonColonist)
             {
                 if (building.def == def && building.Faction == Faction) { count++; }
+            }
+            return count;
+        }
+
+        // 그 건물을 지을 둥지 청사진·골조 수
+        private int CountNestConstructions(ThingDef def)
+        {
+            var count = 0;
+            foreach (var thing in NestConstructions())
+            {
+                if (thing.def.entityDefToBuild == def) { count++; }
             }
             return count;
         }

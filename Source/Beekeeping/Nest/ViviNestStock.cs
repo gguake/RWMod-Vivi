@@ -48,6 +48,17 @@ namespace VVRace
             return def != null && _counts.TryGetValue(def, out var count) ? count : 0;
         }
 
+        // 그 필터가 받는 물건이 장부에 하나라도 있는지(연료 보충: 연료 필터)
+        public bool AnyAllowedBy(ThingFilter filter)
+        {
+            RefreshIfNeeded();
+            foreach (var pair in _counts)
+            {
+                if (pair.Value > 0 && filter.Allows(pair.Key)) { return true; }
+            }
+            return false;
+        }
+
         // 둥지 비비가 먹을 수 있는 음식의 영양 합(식량 여유 계산용)
         public float FoodNutrition
         {
@@ -232,9 +243,11 @@ namespace VVRace
 
         // 둥지 비비가 쓸 수 있는 물건: 둥지 칸 위에 있거나 구성원이 지녔거나 둥지 몫으로 표시한 물건
         // 둥지 몫은 언제나 금지 표시를 단다. 둥지 칸 위라도 금지되지 않은 물건(플레이어가 놓았거나 금지를 풀어 가져가려는 것)은 둥지 몫이 아니다.
+        // 시체는 둥지 몫이 아니다(MarkOwned와 같다). 바닐라는 집 구역 밖에서 죽은 폰의 시체를 금지하므로, 둥지 몫으로 치면 바깥 보관 칸의 시체를
+        // 운반이 둥지 방으로 들여 시체 치우기가 둥지 방 밖 시체를 건드리지 않는다는 규칙(사용자 지시)이 깨진다.
         private static bool IsOwnedMark(Thing thing)
         {
-            return thing.def.category == ThingCategory.Item && thing.IsForbidden(Faction.OfPlayer);
+            return thing.def.category == ThingCategory.Item && !(thing is Corpse) && thing.IsForbidden(Faction.OfPlayer);
         }
 
         public bool IsNestOwned(Thing thing)
