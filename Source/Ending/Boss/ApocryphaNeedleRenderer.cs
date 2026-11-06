@@ -87,9 +87,6 @@ namespace VVRace
         // 같은 셰이더에서 나중에 그린 그림이 위에 오도록 적용하는 높이 차이.
         private const float LayerAltitudeStep = 0.002f;
 
-        // 셰이더 무늬 좌표의 float 정밀도를 유지하도록 1배속 기준 1시간마다 시간을 되감는다.
-        private const int AgeWrapTicks = 216000;
-
         public static void DrawNeedle(Vector3 pos, float angle, float alpha, float glow)
         {
             var rotation = Quaternion.AngleAxis(angle, Vector3.up);
@@ -146,7 +143,7 @@ namespace VVRace
             var coreColor = breach ? LaneCoreColorBreach : bossInside ? LaneCoreColorBossInside : LaneCoreColor;
 
             PropertyBlock.Clear();
-            PropertyBlock.SetFloat(ShaderPropertyIDs.AgeSecs, (Find.TickManager.TicksGame % AgeWrapTicks) / 60f);
+            PropertyBlock.SetFloat(ShaderPropertyIDs.AgeSecs, LinkRenderUtility.WrappedAgeSecs);
             PropertyBlock.SetColor(ShaderPropertyIDs.Color, color);
             PropertyBlock.SetColor(CoreColorPropertyId, coreColor);
             PropertyBlock.SetFloat(ProgressPropertyId, progress);
