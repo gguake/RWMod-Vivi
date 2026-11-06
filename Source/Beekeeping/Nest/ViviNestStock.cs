@@ -367,6 +367,10 @@ namespace VVRace
 
         private bool IsValidStorageCell(IntVec3 cell, Map map, Thing thing, Pawn carrier, ViviNestStorageRank rank)
         {
+            // 불타는 칸은 쓰지 않는다(바닐라 IsGoodStoreCell과 같다). 바닐라 Accepts는 불을 보지 않는데 운반 잡(HaulToCell)은 불타는 목적지에서 바로 실패해,
+            // 다른 구성원이 불을 끄는 동안 같은 칸을 골라 실패하기를 되풀이하고 짐 풀기는 불길 속에 물건을 놓았다.
+            if (cell.ContainsStaticFire(map)) { return false; }
+
             var shelf = IsShelfRank(rank);
             if (shelf)
             {
