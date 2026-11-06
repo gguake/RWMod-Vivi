@@ -1,3 +1,4 @@
+using RimWorld;
 using System.Collections.Generic;
 using UnityEngine;
 using Verse;
@@ -63,13 +64,44 @@ namespace VVRace
 
                         var thing = ThingMaker.MakeThing(Props.fruitDef);
                         thing.stackCount = Props.count.RandomInRange;
-                        if (!GenPlace.TryPlaceThing(thing, parent.Position, parent.Map, ThingPlaceMode.Near))
+                        if (!TryPlaceFruit(thing) && !thing.Destroyed)
                         {
                             thing.Destroy();
                         }
                     }
                 }
             }
+        }
+
+        // 다른 세력 식물의 열매는 그 세력 몫이다. 둥지 세력 식물이면 둥지 몫으로 놓고, 그 밖의 세력이면 금지 표시해 정착민이 가져가지 않게 한다.
+        private bool TryPlaceFruit(Thing fruit)
+        {
+            var map = parent.Map;
+            var faction = parent.Faction;
+            if (faction == null || faction.IsPlayer)
+            {
+                return GenPlace.TryPlaceThing(fruit, parent.Position, map, ThingPlaceMode.Near);
+            }
+
+            if (BeekeepingUtility.GetNestLord(map)?.LordJob is LordJob_ViviNest nest && nest.Faction == faction)
+            {
+                return nest.TryPlaceOwned(fruit, parent.Position);
+            }
+
+            // 바닐라 놓기는 그 칸의 같은 더미에 합치고 합친 더미의 금지 상태를 따르므로 금지되지 않은 같은 더미가 있는 칸은 피한다.
+            var def = fruit.def;
+            fruit.SetForbidden(true, warnOnFail: false);
+            return GenPlace.TryPlaceThing(fruit, parent.Position, map, ThingPlaceMode.Near, out _, extraValidator: c => !HasUnforbiddenStack(map, c, def));
+        }
+
+        private static bool HasUnforbiddenStack(Map map, IntVec3 cell, ThingDef def)
+        {
+            var things = map.thingGrid.ThingsListAtFast(cell);
+            for (int i = 0; i < things.Count; ++i)
+            {
+                if (things[i].def == def && !things[i].IsForbidden(Faction.OfPlayer)) { return true; }
+            }
+            return false;
         }
 
         public override string CompInspectStringExtra()
