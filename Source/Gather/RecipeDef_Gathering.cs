@@ -13,6 +13,11 @@ namespace VVRace
         public int GatheringWorkAmount => Mathf.FloorToInt(workAmount * gatheringWorkWeight / (gatheringWorkWeight + processingWorkWeight) + 0.5f);
         public int ProcessingWorkAmount => Mathf.FloorToInt(workAmount * processingWorkWeight / (gatheringWorkWeight + processingWorkWeight) + 0.5f);
 
+        // 채집 몫 작업 시간(틱): 채집 몫 ÷ 레시피 작업 속도
+        public int GatheringTicks(Pawn pawn) => Mathf.CeilToInt(GatheringWorkAmount / (workSpeedStat != null ? pawn.GetStatValue(workSpeedStat) : 1f));
+        // 가공 몫 작업 시간(틱): 가공 몫 ÷ 전체 작업 속도
+        public int ProcessingTicks(Pawn pawn) => Mathf.CeilToInt(ProcessingWorkAmount / pawn.GetStatValue(StatDefOf.WorkSpeedGlobal));
+
         public Type gatherWorkerType;
 
         public JobDef gatheringJob;

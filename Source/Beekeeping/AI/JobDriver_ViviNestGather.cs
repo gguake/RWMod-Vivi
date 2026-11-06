@@ -45,10 +45,10 @@ namespace VVRace
         // 기존 채집 잡과 같은 작업 시간: 채집 몫 ÷ 레시피 작업 속도 + 가공 몫 ÷ 작업 속도(채집 장소를 오가는 걸음만 없다)
         private int WorkTicks(RecipeDef_Gathering recipe)
         {
-            var ticks = Mathf.CeilToInt(recipe.GatheringWorkAmount / (recipe.workSpeedStat != null ? pawn.GetStatValue(recipe.workSpeedStat) : 1f));
+            var ticks = recipe.GatheringTicks(pawn);
             if (recipe.ProcessingWorkAmount > 0)
             {
-                ticks += Mathf.CeilToInt(recipe.ProcessingWorkAmount / pawn.GetStatValue(StatDefOf.WorkSpeedGlobal));
+                ticks += recipe.ProcessingTicks(pawn);
             }
             return ticks;
         }

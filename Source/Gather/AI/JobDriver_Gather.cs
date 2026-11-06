@@ -65,7 +65,7 @@ namespace VVRace
                 .FailOnBurningImmobile(GatherTargetIdx)
                 .FailOn(() => IsBillDisabled);
 
-            var gatherWorkAmount = Mathf.CeilToInt(GatheringRecipeDef.GatheringWorkAmount / (job.RecipeDef.workSpeedStat != null ? pawn.GetStatValue(job.RecipeDef.workSpeedStat) : 1f));
+            var gatherWorkAmount = GatheringRecipeDef.GatheringTicks(pawn);
             yield return Toils_General.Wait(gatherWorkAmount, GatherTargetIdx)
                 .FailOnDespawnedNullOrForbidden(GatherTargetIdx)
                 .FailOnBurningImmobile(GatherTargetIdx)
@@ -102,7 +102,7 @@ namespace VVRace
                     .FailOnBurningImmobile(BillGiverTargetIdx)
                     .FailOn(() => IsBillDisabled);
 
-                var processWorkAmount = Mathf.CeilToInt(GatheringRecipeDef.ProcessingWorkAmount / pawn.GetStatValue(StatDefOf.WorkSpeedGlobal));
+                var processWorkAmount = GatheringRecipeDef.ProcessingTicks(pawn);
                 yield return Toils_General.Wait(processWorkAmount, BillGiverTargetIdx)
                     .FailOnDespawnedNullOrForbidden(BillGiverTargetIdx)
                     .FailOnBurningImmobile(BillGiverTargetIdx)
