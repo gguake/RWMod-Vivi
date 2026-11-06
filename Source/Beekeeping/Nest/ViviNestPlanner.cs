@@ -59,7 +59,8 @@ namespace VVRace
         private IntVec3 _expansionDoor = IntVec3.Invalid;
         // 시체를 둘 칸 찾기가 실패한 뒤 다시 찾을 틱(저장하지 않는다)
         private int _corpseDumpRetryTick = -99999;
-        // 계획 주기마다 다시 잰다(저장하지 않는다): 로열이 알을 낳아도 되는지, 마지막 증축 자리 찾기가 실패했는지(실패는 _expansionRetryTick까지 기억한다)
+        // 계획 주기마다 다시 잰다: 로열이 알을 낳아도 되는지, 마지막 증축 자리 찾기가 실패했는지(실패는 _expansionRetryTick까지 기억한다).
+        // 둘 다 저장한다: 기본값(알 허용·증축 자리 있음)으로 불러오면 다음 계획 주기(최대 2500틱)까지 인구 상한·방 수용량·계절·식량 조건을 넘겨 알을 낳았다.
         private bool _eggAllowed = true;
         private bool _noExpansionSite;
 
@@ -1504,6 +1505,8 @@ namespace VVRace
             Scribe_Values.Look(ref _initialFacilitiesPlanned, "initialFacilitiesPlanned");
             Scribe_Collections.Look(ref _expansionInterior, "expansionInterior", LookMode.Value);
             Scribe_Values.Look(ref _expansionDoor, "expansionDoor", IntVec3.Invalid);
+            Scribe_Values.Look(ref _eggAllowed, "eggAllowed", true);
+            Scribe_Values.Look(ref _noExpansionSite, "noExpansionSite");
         }
     }
 }
