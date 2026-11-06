@@ -324,14 +324,12 @@ namespace VVRace
         {
             var map = Map;
             if (!c.InBounds(map) || !c.Standable(map)) { return false; }
-            if (!_owner.Territory.IsRoomCell(c)) { return false; }
-            if (c.GetEdifice(map) != null) { return false; }
+            if (!_owner.Territory.IsRoomCell(c) || !_owner.Territory.IsClearSpot(c)) { return false; }
             foreach (var thing in c.GetThingList(map))
             {
-                if (BeekeepingUtility.IsStructure(thing) || thing is Pawn) { return false; }
-                if (thing.def.category == ThingCategory.Item) { return false; }
+                if (thing is Pawn || thing.def.category == ThingCategory.Item) { return false; }
             }
-            return !_owner.Territory.IsBesideBorderDoor(c);
+            return true;
         }
 
         private static Bill FindBill(Building_WorkTable table, RecipeDef recipe)

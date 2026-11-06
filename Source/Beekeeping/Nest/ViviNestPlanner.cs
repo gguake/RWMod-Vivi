@@ -1366,17 +1366,16 @@ namespace VVRace
         private bool IsFreeCell(IntVec3 cell, bool allowPlants)
         {
             var map = Map;
-            if (!cell.InBounds(map) || !cell.Standable(map) || cell.GetEdifice(map) != null || cell.Fogged(map)) { return false; }
+            if (!cell.InBounds(map) || !cell.Standable(map) || cell.Fogged(map) || !Territory.IsClearSpot(cell)) { return false; }
 
             foreach (var thing in cell.GetThingList(map))
             {
-                if (BeekeepingUtility.IsStructure(thing)) { return false; }
                 if (thing.def.category == ThingCategory.Item) { return false; }
                 if (thing is Plant plant && (!allowPlants || plant.def.plant.IsTree)) { return false; }
             }
 
-            // 문 옆(통로)과 다른 둥지 건물의 상호작용 칸을 막지 않는다.
-            return !Territory.IsBesideBorderDoor(cell) && !_owner.Production.IsWorkSpotInteractionCell(cell);
+            // 문 옆(통로, IsClearSpot)과 다른 둥지 건물의 상호작용 칸을 막지 않는다.
+            return !_owner.Production.IsWorkSpotInteractionCell(cell);
         }
         #endregion
 

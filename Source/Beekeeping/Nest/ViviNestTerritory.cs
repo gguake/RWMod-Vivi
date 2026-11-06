@@ -253,8 +253,8 @@ namespace VVRace
             return _borderDoorAdjacentCells.Contains(cell);
         }
 
-        // 보관 칸으로 쓸 수 있는 자리: 구조물·건물·청사진·골조가 없고 문 옆(통로)이 아닌 칸(방 바닥 보관 칸·바깥 보관 칸이 함께 쓴다)
-        public bool IsClearStorageSpot(IntVec3 cell)
+        // 비어 있는 자리: 구조물·건물·청사진·골조가 없고 문 옆(통로)이 아닌 칸(보관 칸·건설 칸·작업 자리 고르기가 함께 쓴다)
+        public bool IsClearSpot(IntVec3 cell)
         {
             var map = Map;
             if (cell.GetEdifice(map) != null) { return false; }
@@ -306,7 +306,7 @@ namespace VVRace
             if (room == null || !room.PsychologicallyOutdoors) { return false; }
             if (map.zoneManager.ZoneAt(cell) != null) { return false; }
 
-            return IsClearStorageSpot(cell);
+            return IsClearSpot(cell);
         }
 
         private void RefreshIfNeeded()

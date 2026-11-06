@@ -359,7 +359,7 @@ namespace VVRace
                     foreach (var cell in room.Cells)
                     {
                         // 방 바닥 보관은 문 옆(통로)과 건물이 있는 칸을 피한다.
-                        if (Territory.IsClearStorageSpot(cell)) { _tmpCells.Add(cell); }
+                        if (Territory.IsClearSpot(cell)) { _tmpCells.Add(cell); }
                     }
                 }
             }
