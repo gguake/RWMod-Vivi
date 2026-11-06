@@ -226,8 +226,7 @@ namespace VVRace
 
             foreach (var building in map.listerBuildings.allBuildingsNonColonist)
             {
-                if (building.def != VVThingDefOf.VV_EmberBloom || building.Faction != Faction || !(building is ArcanePlant plant)) { continue; }
-                if (plant.Position.GetRoom(map) != source || map.listerBuildings.TryGetReinstallBlueprint(plant, out _)) { continue; }
+                if (!IsUnmovedNestEmber(building, out var plant) || plant.Position.GetRoom(map) != source) { continue; }
 
                 return plant;
             }
@@ -357,12 +356,21 @@ namespace VVRace
             _tmpOutdoorEmbers.Clear();
             foreach (var building in map.listerBuildings.allBuildingsNonColonist)
             {
-                if (building.def != VVThingDefOf.VV_EmberBloom || building.Faction != Faction || !(building is ArcanePlant plant)) { continue; }
-                if (Territory.IsNestRoomCell(plant.Position) || map.listerBuildings.TryGetReinstallBlueprint(plant, out _)) { continue; }
+                if (!IsUnmovedNestEmber(building, out var plant) || Territory.IsNestRoomCell(plant.Position)) { continue; }
 
                 _tmpOutdoorEmbers.Add(plant);
             }
             return _tmpOutdoorEmbers;
+        }
+
+        // 둥지 잔불꽃 중 아직 옮기기로 하지 않은 것(다시 설치 청사진이 없는 것)
+        private bool IsUnmovedNestEmber(Building building, out ArcanePlant plant)
+        {
+            plant = null;
+            if (building.def != VVThingDefOf.VV_EmberBloom || building.Faction != Faction || !(building is ArcanePlant ember)) { return false; }
+
+            plant = ember;
+            return !Map.listerBuildings.TryGetReinstallBlueprint(ember, out _);
         }
 
         // 아직 자리를 받지 않은 둥지 잔불꽃 수: 둥지 몫 잔불꽃 씨앗(심으러 가는 것 제외), 설치 청사진이 없는 둥지 몫 포장 잔불꽃, 옮기지 않은 바깥 둥지 잔불꽃
