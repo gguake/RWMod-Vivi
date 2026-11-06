@@ -16,11 +16,6 @@ namespace VVRace
         // 밤잠(8시간)이나 나쁜 날씨로 미뤄져도 마르기 전에 채울 수 있고, 조금 빈 식물을 채우러 자주 오가지 않는다.
         public const float LowManaPct = 0.5f;
 
-        // 바깥 식물에는 주고 나서도 둥지 몫 비료가 이만큼 남을 때만 준다(방 안 식물은 제한 없이 준다). 비료 비축 목표의 절반으로,
-        // 가장 작은 목표(120)에서도 마나 방출기를 두 번 채울 만큼이다(바닐라 자동 연료 보충은 연료가 30% 아래일 때 가득 채우므로 40개 중 28개 남짓).
-        // 순서만 바꾸면 바깥 식물이 마지막 비료를 먹은 뒤 방출기·방 안 잔불꽃이 굶으므로, 예비분이 있어야 방 안 먼저가 시간이 지나도 지켜진다.
-        public static int OutdoorReserve(LordJob_ViviNest nest) => nest.Production.FertilizerTarget / 2;
-
         protected override Job TryGiveJob(Pawn pawn)
         {
             var nest = pawn.GetNestLordJob();
@@ -71,7 +66,10 @@ namespace VVRace
         private static ArcanePlant FindPlant(Pawn pawn, LordJob_ViviNest nest, bool indoorOnly, int availableFertilizer)
         {
             ArcanePlant indoorBest = null, outdoorBest = null;
-            var reserve = OutdoorReserve(nest);
+            // 바깥 식물에는 주고 나서도 둥지 몫 비료가 이만큼 남을 때만 준다(방 안 식물은 제한 없이 준다). 비료 비축 목표의 절반으로,
+            // 가장 작은 목표(120)에서도 마나 방출기를 두 번 채울 만큼이다(바닐라 자동 연료 보충은 연료가 30% 아래일 때 가득 채우므로 40개 중 28개 남짓).
+            // 순서만 바꾸면 바깥 식물이 마지막 비료를 먹은 뒤 방출기·방 안 잔불꽃이 굶으므로, 예비분이 있어야 방 안 먼저가 시간이 지나도 지켜진다.
+            var reserve = nest.Production.FertilizerTarget / 2;
             var indoorBestPct = LowManaPct;
             var outdoorBestPct = LowManaPct;
             var buildings = pawn.Map.listerBuildings.allBuildingsNonColonist;
