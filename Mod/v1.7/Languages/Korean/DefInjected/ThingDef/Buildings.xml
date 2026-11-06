@@ -29,9 +29,9 @@
 <VV_AncientAmberCore.description>옛 비비 제국의 영원꽃 제단에 쓰이던 호박 결정입니다. 제국이 멸망한 뒤 남은 코어는 비비 연방이 보관하고 있습니다.\n\n비비 연방의 의뢰 보상으로 얻을 수 있습니다.</VV_AncientAmberCore.description>
 
 <VV_ViviNestWorkSpot.label>비비 둥지 작업 자리</VV_ViviNestWorkSpot.label>
-<VV_ViviNestWorkSpot.description>떠돌이 비비들이 손으로 크림을 빚고 밀랍을 다듬고 간단한 옷을 짓는 바닥 자리입니다. 제대로 된 도구가 없어 일이 느립니다.</VV_ViviNestWorkSpot.description>
+<VV_ViviNestWorkSpot.description>떠돌이 비비들이 맨손으로 크림과 밀랍을 가공하고 간단한 옷이나 도구를 만드는 작업 공간입니다. 마땅한 작업 도구가 없어 작업 속도가 느립니다.</VV_ViviNestWorkSpot.description>
 
 <VV_ViviLure.label>비비 유인통</VV_ViviLure.label>
-<VV_ViviLure.description>올려 둔 꿀 음식의 향을 퍼뜨리는 작은 향로 선반입니다. 향을 맡은 떠돌이 비비가 둘러보러 올 수 있고, 꿀이 나는 꽃과 비옥한 땅, 문이 있고 지붕이 덮인 빈 방, 약간의 환경 마나처럼 마음에 드는 것이 있으면 작은 비비 무리가 그 방에 살러 오기도 합니다. 비비들이 무엇을 보는지는 유인 조건 탭에서 확인할 수 있습니다.\n\n꿀을 좋아하는 곰이나 가끔은 거대 말벌이 찾아오기도 합니다.\n\n비비들이 정착하고 나면 유인통은 할 일을 다 했으므로 치워도 됩니다.</VV_ViviLure.description>
+<VV_ViviLure.description>올려 둔 꿀 음식의 향기를 주변에 퍼뜨리는 작은 향로 선반입니다. 달콤한 향기를 맡은 떠돌이 비비가 주변을 살펴보러 찾아올 수 있으며, 꿀을 채집할 꽃과 비옥한 땅, 문과 지붕이 갖춰진 빈 방, 적당한 환경 마나 등 주변 환경이 마음에 들면 작은 비비 무리가 그 방에 정착하러 찾아오기도 합니다. 정착에 필요한 상세한 조건은 유인 조건 탭에서 확인할 수 있습니다.\n\n간혹 꿀 냄새에 이끌린 곰이나 거대 말벌이 찾아올 수도 있습니다.\n\n비비 무리가 정착을 마친 뒤에는 유인통을 철거해도 무방합니다.</VV_ViviLure.description>
 
 </LanguageData>

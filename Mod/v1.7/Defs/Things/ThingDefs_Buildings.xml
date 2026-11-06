@@ -398,7 +398,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VV_ViviNestWorkSpot</defName>
     <label>vivi nest work spot</label>
-    <description>A patch of floor where wandering vivis knead cream, shape wax and stitch simple clothes by hand. Without proper tools the work goes slowly.</description>
+    <description>A simple floor spot where wandering vivis knead cream, shape wax, and craft simple clothes and tools by hand. Without proper equipment, work proceeds slowly.</description>
     <thingClass>Building_WorkTable</thingClass>
     <graphicData>
       <texPath>Things/Building/Production/CraftingSpot</texPath>
@@ -438,7 +438,7 @@
   <ThingDef ParentName="ShelfBase">
     <defName>VV_ViviLure</defName>
     <label>vivi lure</label>
-    <description>A little censer-shelf that wafts the scent of the honey food set on it. Wandering vivis who catch the scent may come to look around, and if they like the place - honey flowers and fertile soil nearby, an empty roofed room with a door, a little mana in the air - a small band may come back and live in that room. The conditions tab shows what they look for.\n\nBears and the odd titanic hornet like honey too.\n\nOnce vivis have settled, the lure has done its job and can be removed.</description>
+    <description>A small censer-shelf that spreads the sweet scent of honey foods placed upon it. Wandering vivis drawn by the aroma may stop by to inspect the surroundings; if they find suitable conditions—nearby honey flowers, fertile soil, an empty roofed room with a door, and some environment mana—a small band may return to settle in that room. Detailed requirements can be viewed in the Conditions tab.\n\nBears and the occasional titanic hornet may also be drawn to the scent.\n\nOnce a band of vivis has settled, the lure has served its purpose and can be removed.</description>
     <thingClass>VVRace.Building_ViviLure</thingClass>
     <tickerType>Rare</tickerType>
     <graphicData>

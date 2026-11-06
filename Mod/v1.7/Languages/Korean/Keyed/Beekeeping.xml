@@ -3,85 +3,85 @@
 
 <!-- 유인통 점검 창 -->
 <VV_Inspector_LureBaitReady>꿀 향: 퍼지는 중</VV_Inspector_LureBaitReady>
-<VV_Inspector_LureBaitReadyUnmet>꿀 향: 퍼지는 중 (충족하지 못한 조건 {0}개, 유인 조건 탭 참고)</VV_Inspector_LureBaitReadyUnmet>
-<VV_Inspector_LureNoBait>꿀 향: 없음 (꿀, 암브로시아, 산딸기 등을 올려 두세요)</VV_Inspector_LureNoBait>
-<VV_Inspector_LureScouting>비비 정찰대가 주변을 둘러보는 중입니다.</VV_Inspector_LureScouting>
+<VV_Inspector_LureBaitReadyUnmet>꿀 향: 퍼지는 중 (미충족 조건 {0}개)</VV_Inspector_LureBaitReadyUnmet>
+<VV_Inspector_LureNoBait>꿀 향: 없음 (꿀이나 암브로시아, 산딸기 등을 올려 두세요)</VV_Inspector_LureNoBait>
+<VV_Inspector_LureScouting>비비 정찰대가 주변을 살펴보고 있습니다.</VV_Inspector_LureScouting>
 <VV_Inspector_LureThief>무언가가 미끼를 노리고 있습니다.</VV_Inspector_LureThief>
-<VV_Inspector_LureAwaitingSettlers>약 {0} 뒤 비비 무리가 올 것 같습니다.</VV_Inspector_LureAwaitingSettlers>
-<VV_Inspector_LureConditionMap>이 맵에는 비비가 찾아오지 않습니다.</VV_Inspector_LureConditionMap>
-<VV_Inspector_LureConditionRoyal>맵에 이미 로열 비비가 있습니다.</VV_Inspector_LureConditionRoyal>
-<VV_Inspector_LureConditionViviCount>정착지의 비비가 너무 많습니다.</VV_Inspector_LureConditionViviCount>
-<VV_Inspector_LureConditionHostile>맵에 적대 생물이 있습니다.</VV_Inspector_LureConditionHostile>
-<VV_Inspector_LureConditionTemperature>바깥이 비비에게 너무 덥거나 춥습니다.</VV_Inspector_LureConditionTemperature>
-<VV_Inspector_LureConditionSeason>지금은 꽃이 자라는 철이 아닙니다.</VV_Inspector_LureConditionSeason>
-<VV_Inspector_LureConditionWeather>지금은 바깥에 있기 위험합니다.</VV_Inspector_LureConditionWeather>
-<VV_Inspector_LureConditionUnreachable>맵 가장자리에서 그 구조물까지 갈 길이 없습니다.</VV_Inspector_LureConditionUnreachable>
-<VV_Inspector_LureMissingFlowers>주변에 꿀이 나는 꽃이 부족합니다.</VV_Inspector_LureMissingFlowers>
-<VV_Inspector_LureMissingRoom>주변에 문이 있고 지붕이 다 덮인 빈 구조물이 없습니다.</VV_Inspector_LureMissingRoom>
+<VV_Inspector_LureAwaitingSettlers>약 {0} 뒤에 비비 무리가 찾아올 예정입니다.</VV_Inspector_LureAwaitingSettlers>
+<VV_Inspector_LureConditionMap>이 지역에는 비비가 찾아오지 않습니다.</VV_Inspector_LureConditionMap>
+<VV_Inspector_LureConditionRoyal>지역에 이미 로열 비비가 있습니다.</VV_Inspector_LureConditionRoyal>
+<VV_Inspector_LureConditionViviCount>정착지에 비비가 너무 많습니다.</VV_Inspector_LureConditionViviCount>
+<VV_Inspector_LureConditionHostile>지역에 적대적인 생물이 있습니다.</VV_Inspector_LureConditionHostile>
+<VV_Inspector_LureConditionTemperature>바깥 기온이 비비가 활동하기에 너무 덥거나 춥습니다.</VV_Inspector_LureConditionTemperature>
+<VV_Inspector_LureConditionSeason>지금은 꽃이 자라는 계절이 아닙니다.</VV_Inspector_LureConditionSeason>
+<VV_Inspector_LureConditionWeather>지금은 야외 활동이 위험한 날씨입니다.</VV_Inspector_LureConditionWeather>
+<VV_Inspector_LureConditionUnreachable>맵 가장자리에서 구조물까지 이동할 수 있는 경로가 없습니다.</VV_Inspector_LureConditionUnreachable>
+<VV_Inspector_LureMissingFlowers>주변에 꿀을 채집할 수 있는 꽃이 부족합니다.</VV_Inspector_LureMissingFlowers>
+<VV_Inspector_LureMissingRoom>주변에 문과 지붕이 온전히 갖춰진 빈 구조물이 없습니다.</VV_Inspector_LureMissingRoom>
 <VV_Inspector_LureMissingFertileSoil>주변에 비옥한 땅이 부족합니다.</VV_Inspector_LureMissingFertileSoil>
-<VV_Inspector_LureMissingGrowingPeriod>이 땅은 꽃이 자라는 철이 너무 짧아 겨울을 날 꿀을 모을 수 없습니다.</VV_Inspector_LureMissingGrowingPeriod>
+<VV_Inspector_LureMissingGrowingPeriod>이 지역은 식물이 자라는 기간이 너무 짧아 겨울을 날 만큼 꿀을 모을 수 없습니다.</VV_Inspector_LureMissingGrowingPeriod>
 
 <!-- 유인 조건 탭 -->
 <VV_ITab_ViviLure_TabLabel>유인 조건</VV_ITab_ViviLure_TabLabel>
 <VV_ITab_ViviLure_SectionStatus>진행 상태</VV_ITab_ViviLure_SectionStatus>
 <VV_ITab_ViviLure_SectionVisit>방문 조건</VV_ITab_ViviLure_SectionVisit>
-<VV_ITab_ViviLure_SectionSite>둥지 자리 조건</VV_ITab_ViviLure_SectionSite>
-<VV_ITab_ViviLure_Idle>방문자를 기다리는 중입니다. 방문 조건을 모두 갖추면 이따금 꿀 향을 맡은 방문자가 찾아오고, 둥지 자리 조건까지 갖추면 정찰 비비를 따라 비비 무리가 살러 옵니다.</VV_ITab_ViviLure_Idle>
-<VV_ITab_ViviLure_Map>본거지 지상 맵</VV_ITab_ViviLure_Map>
-<VV_ITab_ViviLure_NoRoyal>맵에 로열 비비가 없음</VV_ITab_ViviLure_NoRoyal>
-<VV_ITab_ViviLure_ViviCount>정착지 비비 {0}마리 이하</VV_ITab_ViviLure_ViviCount>
-<VV_ITab_ViviLure_NoHostile>맵에 적대 생물이 없음</VV_ITab_ViviLure_NoHostile>
-<VV_ITab_ViviLure_Temperature>비비에게 알맞은 기온</VV_ITab_ViviLure_Temperature>
-<VV_ITab_ViviLure_TemperatureTip>기본옷을 입은 비비가 바깥에서 버틸 수 있는 기온이어야 합니다. 지금 기온과 계절 기온을 함께 봅니다.</VV_ITab_ViviLure_TemperatureTip>
-<VV_ITab_ViviLure_Season>꽃이 자라는 철</VV_ITab_ViviLure_Season>
-<VV_ITab_ViviLure_Weather>바깥 활동이 위험하지 않음</VV_ITab_ViviLure_Weather>
-<VV_ITab_ViviLure_WeatherTip>독성 낙진·유독 연무처럼 바깥에 있기 위험한 동안에는 오지 않습니다.</VV_ITab_ViviLure_WeatherTip>
+<VV_ITab_ViviLure_SectionSite>둥지 정착 조건</VV_ITab_ViviLure_SectionSite>
+<VV_ITab_ViviLure_Idle>방문자를 기다리는 중입니다. 방문 조건을 모두 충족하면 이따금 꿀 향기를 맡은 방문자가 찾아오며, 둥지 정착 조건까지 충족하면 정찰대의 뒤를 이어 비비 무리가 정착하러 찾아옵니다.</VV_ITab_ViviLure_Idle>
+<VV_ITab_ViviLure_Map>지상 본거지 맵</VV_ITab_ViviLure_Map>
+<VV_ITab_ViviLure_NoRoyal>지역 내 로열 비비 없음</VV_ITab_ViviLure_NoRoyal>
+<VV_ITab_ViviLure_ViviCount>정착지 비비 {0}명 이하</VV_ITab_ViviLure_ViviCount>
+<VV_ITab_ViviLure_NoHostile>지역 내 적대 생물 없음</VV_ITab_ViviLure_NoHostile>
+<VV_ITab_ViviLure_Temperature>비비가 활동하기에 알맞은 기온</VV_ITab_ViviLure_Temperature>
+<VV_ITab_ViviLure_TemperatureTip>비비 작업복을 입은 비비가 야외에서 견딜 수 있는 기온이어야 합니다. 현재 기온과 계절 평균 기온을 모두 확인합니다.</VV_ITab_ViviLure_TemperatureTip>
+<VV_ITab_ViviLure_Season>꽃이 자라는 계절</VV_ITab_ViviLure_Season>
+<VV_ITab_ViviLure_Weather>야외 활동이 위험하지 않음</VV_ITab_ViviLure_Weather>
+<VV_ITab_ViviLure_WeatherTip>독성 낙진이나 유독 연무처럼 야외 활동이 위험한 날씨에는 찾아오지 않습니다.</VV_ITab_ViviLure_WeatherTip>
 <VV_ITab_ViviLure_Bait>꿀 음식 미끼</VV_ITab_ViviLure_Bait>
-<VV_ITab_ViviLure_BaitTip>꿀, 암브로시아, 꿀이 든 음식, 산딸기를 올려 두면 향이 퍼집니다. 찾아온 정찰 비비는 냄새를 맡으며 하나씩 먹고, 곰은 남김없이 먹어 치웁니다.</VV_ITab_ViviLure_BaitTip>
-<VV_ITab_ViviLure_NoOtherLure>진행 중인 다른 유인·둥지가 없음</VV_ITab_ViviLure_NoOtherLure>
-<VV_ITab_ViviLure_Reachable>맵 가장자리에서 걸어올 길</VV_ITab_ViviLure_Reachable>
+<VV_ITab_ViviLure_BaitTip>꿀이나 암브로시아, 꿀이 들어간 음식, 산딸기 등을 올려 두면 향기가 퍼집니다. 찾아온 정찰 비비는 향을 맡으며 미끼를 하나씩 먹고, 곰은 미끼를 남김없이 먹어 치웁니다.</VV_ITab_ViviLure_BaitTip>
+<VV_ITab_ViviLure_NoOtherLure>진행 중인 다른 유인이나 둥지 없음</VV_ITab_ViviLure_NoOtherLure>
+<VV_ITab_ViviLure_Reachable>맵 가장자리에서 접근 가능한 경로</VV_ITab_ViviLure_Reachable>
 <VV_ITab_ViviLure_Flowers>꿀 꽃 {0}송이 이상</VV_ITab_ViviLure_Flowers>
-<VV_ITab_ViviLure_FlowersTip>유인통 근처에서 꿀이 나는 꽃을 셉니다. 꽃이 많을수록 꽃 점수가 높습니다.</VV_ITab_ViviLure_FlowersTip>
-<VV_ITab_ViviLure_Room>문 있고 지붕 덮인 빈 구조물</VV_ITab_ViviLure_Room>
-<VV_ITab_ViviLure_RoomTip>유인통 근처에서 가장 알맞은 구조물을 고릅니다. 문으로 이어진 방은 한 구조물로 봅니다. 문이 있고 지붕이 다 덮여 있어야 하며, 너무 좁거나 넓은 구조물, 누군가의 침실이나 감옥이 이어진 구조물, 그래비쉽 위 구조물은 쓰지 않습니다. 알맞은 넓이일수록, 안에 건물(마법식물·화분·유인통 제외)이 적을수록 점수가 높습니다.</VV_ITab_ViviLure_RoomTip>
-<VV_ITab_ViviLure_RoomReachable>맵 가장자리에서 구조물까지 걸어올 길</VV_ITab_ViviLure_RoomReachable>
+<VV_ITab_ViviLure_FlowersTip>유인통 주변에 있는 꿀을 채집할 수 있는 꽃의 수를 셉니다. 꽃이 많을수록 점수가 높아집니다.</VV_ITab_ViviLure_FlowersTip>
+<VV_ITab_ViviLure_Room>문과 지붕이 있는 빈 구조물</VV_ITab_ViviLure_Room>
+<VV_ITab_ViviLure_RoomTip>유인통 주변에서 가장 적합한 구조물을 고릅니다. 문으로 연결된 방들은 하나의 구조물로 취급합니다. 문이 있고 지붕이 모두 덮여 있어야 하며, 너무 좁거나 넓은 구조물, 누군가의 침실이나 수감실과 연결된 구조물, 중력선 위의 구조물은 사용하지 않습니다. 크기가 적당하고 내부에 다른 건물(마법 식물, 화분, 유인통 제외)이 적을수록 점수가 높아집니다.</VV_ITab_ViviLure_RoomTip>
+<VV_ITab_ViviLure_RoomReachable>맵 가장자리에서 구조물까지의 경로</VV_ITab_ViviLure_RoomReachable>
 <VV_ITab_ViviLure_None>없음</VV_ITab_ViviLure_None>
 <VV_ITab_ViviLure_PartScore>점수 {0}</VV_ITab_ViviLure_PartScore>
 <VV_ITab_ViviLure_FertileSoil>비옥한 땅 {0}칸 이상</VV_ITab_ViviLure_FertileSoil>
-<VV_ITab_ViviLure_FertileSoilTip>유인통 근처에서 지붕·건물·구역이 없는 비옥한 땅을 셉니다. 비비 둥지는 이런 땅에 목화·장미·마법식물을 심고, 땅을 파서 마나 비료를 얻습니다.</VV_ITab_ViviLure_FertileSoilTip>
+<VV_ITab_ViviLure_FertileSoilTip>유인통 주변에서 지붕이나 건물, 구역이 없는 비옥한 땅을 셉니다. 비비들은 이러한 땅에 목화와 장미, 마법 식물을 심고 땅을 파서 마나 비료를 얻습니다.</VV_ITab_ViviLure_FertileSoilTip>
 <VV_ITab_ViviLure_GrowingPeriod>성장 기간 {0}일 이상</VV_ITab_ViviLure_GrowingPeriod>
-<VV_ITab_ViviLure_GrowingPeriodTip>세계 지도 지형 탭의 성장 기간과 같습니다. 비비 둥지는 꽃이 자라는 철에 꿀을 모아 두고 겨울은 모은 꿀로 버티므로, 성장 기간이 짧은 땅에는 살러 오지 않습니다.</VV_ITab_ViviLure_GrowingPeriodTip>
+<VV_ITab_ViviLure_GrowingPeriodTip>세계 지도의 지형 탭에 표시되는 성장 기간과 같습니다. 비비 둥지는 꽃이 피는 계절에 꿀을 모아 두었다가 겨울을 나므로, 식물이 자라는 기간이 너무 짧은 지역에는 정착하지 않습니다.</VV_ITab_ViviLure_GrowingPeriodTip>
 <VV_ITab_ViviLure_Mana>환경 마나</VV_ITab_ViviLure_Mana>
-<VV_ITab_ViviLure_ManaTip>유인통 근처의 환경 마나입니다. 꼭 있어야 하지는 않고, 높을수록 마나 점수가 높습니다.</VV_ITab_ViviLure_ManaTip>
+<VV_ITab_ViviLure_ManaTip>유인통 주변의 환경 마나 농도입니다. 필수는 아니지만, 농도가 높을수록 점수가 높아집니다.</VV_ITab_ViviLure_ManaTip>
 <VV_ITab_ViviLure_Score>둥지 점수</VV_ITab_ViviLure_Score>
-<VV_ITab_ViviLure_ScoreValue>{0} (정착대 {1}마리)</VV_ITab_ViviLure_ScoreValue>
-<VV_ITab_ViviLure_ScoreTip>꽃·구조물·마나 점수를 합친 점수입니다(꽃이 가장 크게, 마나가 가장 작게 반영됩니다). 점수가 높을수록 비비 무리가 빨리, 많이 옵니다.</VV_ITab_ViviLure_ScoreTip>
+<VV_ITab_ViviLure_ScoreValue>{0} (정착대 {1}명)</VV_ITab_ViviLure_ScoreValue>
+<VV_ITab_ViviLure_ScoreTip>꽃, 구조물, 환경 마나 점수를 합산한 점수입니다(꽃의 비중이 가장 크고, 마나의 비중이 가장 작습니다). 점수가 높을수록 더 많은 비비 무리가 더 빨리 찾아옵니다.</VV_ITab_ViviLure_ScoreTip>
 
 <!-- 유인 편지·메시지 -->
 <VV_Letter_ViviLureScoutsLabel>비비 정찰대</VV_Letter_ViviLureScoutsLabel>
-<VV_Letter_ViviLureScouts>{0}의 비비 {1}마리가 유인통의 꿀 냄새를 따라왔습니다.\n\n정찰 비비들은 유인통과 꽃밭, 근처의 방을 둘러봅니다. 마음에 들면 작은 비비 무리가 이곳에 살러 올지도 모릅니다.</VV_Letter_ViviLureScouts>
+<VV_Letter_ViviLureScouts>{0}의 비비 {1}명이 유인통의 꿀 향기를 따라 찾아왔습니다.\n\n정찰대 비비들은 유인통과 주변의 꽃밭, 빈 방을 살펴볼 것입니다. 이곳이 마음에 들면 작은 비비 무리가 정착하러 찾아올지도 모릅니다.</VV_Letter_ViviLureScouts>
 <VV_Letter_ViviLureHornetLabel>유인통의 말벌</VV_Letter_ViviLureHornetLabel>
-<VV_Letter_ViviLureHornet>거대 말벌이 유인통의 꿀 냄새를 맡고 날아오고 있습니다. 말벌은 광폭해져 있어 가까이 있는 모든 것을 공격합니다.</VV_Letter_ViviLureHornet>
-<VV_Message_ViviLureBear>{PAWN_label}(이)가 꿀 냄새를 맡고 유인통으로 오고 있습니다.</VV_Message_ViviLureBear>
-<VV_Message_ViviLureScoutsFled>비비 정찰대가 서둘러 떠났습니다. 이곳을 무리에 알리지 않을 것입니다.</VV_Message_ViviLureScoutsFled>
-<VV_Message_ViviLureScoutsDisappointed>비비 정찰대가 별 관심 없이 떠났습니다.\n{0}</VV_Message_ViviLureScoutsDisappointed>
-<VV_Message_ViviLureScoutsSatisfied>비비 정찰대가 이곳을 마음에 들어 합니다. 곧 비비 무리가 올지도 모릅니다.</VV_Message_ViviLureScoutsSatisfied>
+<VV_Letter_ViviLureHornet>거대 말벌이 유인통의 꿀 냄새를 맡고 날아왔습니다. 광폭해진 말벌은 가까이에 있는 모든 대상을 무차별적으로 공격할 것입니다.</VV_Letter_ViviLureHornet>
+<VV_Message_ViviLureBear>{PAWN_label}(이)가 꿀 냄새를 맡고 유인통으로 다가오고 있습니다.</VV_Message_ViviLureBear>
+<VV_Message_ViviLureScoutsFled>비비 정찰대가 서둘러 떠났습니다. 이곳에 대해 무리에 알리지 않을 것입니다.</VV_Message_ViviLureScoutsFled>
+<VV_Message_ViviLureScoutsDisappointed>비비 정찰대가 별다른 관심을 보이지 않고 떠났습니다.\n{0}</VV_Message_ViviLureScoutsDisappointed>
+<VV_Message_ViviLureScoutsSatisfied>비비 정찰대가 이곳을 마음에 들어 하며 떠났습니다. 머지않아 비비 무리가 찾아올지도 모릅니다.</VV_Message_ViviLureScoutsSatisfied>
 
 <!-- 정착대 -->
 <VV_Letter_ViviNestSettlersLabel>비비 무리 정착</VV_Letter_ViviNestSettlersLabel>
-<VV_Letter_ViviNestSettlers>{0}의 비비 {1}마리가 유인통 근처의 빈 방에 살러 왔습니다.\n\n비비들은 주변의 꽃과 나무에서 꿀·꽃가루·프로폴리스를 모으고, 크림과 밀랍을 만들고, 필요한 것을 스스로 짓습니다. 비비들이 모은 물건은 금지 표시가 되어 있으며 마음대로 가져가도 됩니다.\n\n비비들은 정착민이 근처에 오는 것은 신경 쓰지 않지만, 방 안에 들어오면 빠르게 경계합니다. 경계심이 가득 차면 적대하며 떠나 버립니다. 정착민이 들어가지 않게 비비들의 방 문을 금지하거나 허가구역을 정해 두세요.</VV_Letter_ViviNestSettlers>
-<VV_Message_ViviNestSettlersCanceled>오기로 한 비비 무리가 오지 않았습니다.\n{0}</VV_Message_ViviNestSettlersCanceled>
-<VV_Message_ViviNestWary>{0}의 비비들이 방에 들어온 정착민을 경계하기 시작했습니다.</VV_Message_ViviNestWary>
-<VV_Message_ViviNestVeryWary>{0}의 비비들이 크게 경계하고 있습니다. 정착민이 비비들의 방에 들어가지 않게 하세요.</VV_Message_ViviNestVeryWary>
-<VV_Message_ViviNestRescuedReturned>{PAWN_label}(이)가 구해 준 데 고마워하며 둥지로 돌아갔습니다.</VV_Message_ViviNestRescuedReturned>
-<VV_Message_ViviNestLeavingFew>{0}의 비비들이 떠납니다. 남은 비비가 너무 적습니다.</VV_Message_ViviNestLeavingFew>
-<VV_Message_ViviNestLeavingStarving>{0}의 비비들이 떠납니다. 너무 오래 굶주렸습니다.</VV_Message_ViviNestLeavingStarving>
-<VV_Message_ViviNestLeavingRoomLost>{0}의 비비들이 떠납니다. 둥지 방을 잃었습니다.</VV_Message_ViviNestLeavingRoomLost>
-<VV_Message_CannotClaimViviNest>비비들이 아직 살고 있습니다.</VV_Message_CannotClaimViviNest>
+<VV_Letter_ViviNestSettlers>{0}의 비비 {1}명이 유인통 근처의 빈 방에 정착하러 찾아왔습니다.\n\n비비들은 주변의 꽃과 나무에서 꿀과 꽃가루, 프로폴리스를 채집해 비비 크림과 밀랍을 만들고 필요한 시설을 스스로 건설합니다. 비비들이 모아 둔 물건에는 금지 표시가 붙어 있지만, 정착민이 마음대로 가져가도 신경 쓰지 않습니다.\n\n비비들은 정착민이 둥지 주변을 오가는 것은 개의치 않지만, 둥지 방 안으로 들어오면 빠르게 경계하기 시작합니다. 경계심이 한계에 달하면 적대적으로 돌변하며 둥지를 떠나 버리므로, 정착민이 함부로 들어가지 않도록 방문을 잠그거나 허용 구역을 지정해 두세요.</VV_Letter_ViviNestSettlers>
+<VV_Message_ViviNestSettlersCanceled>찾아오기로 했던 비비 무리가 오지 않았습니다.\n{0}</VV_Message_ViviNestSettlersCanceled>
+<VV_Message_ViviNestWary>{0}의 비비들이 둥지 방에 들어온 정착민을 경계하기 시작했습니다.</VV_Message_ViviNestWary>
+<VV_Message_ViviNestVeryWary>{0}의 비비들이 심하게 경계하고 있습니다. 정착민이 비비들의 방에 들어가지 않도록 주의하세요.</VV_Message_ViviNestVeryWary>
+<VV_Message_ViviNestRescuedReturned>{PAWN_label}(이)가 구조해 준 것에 감사하며 둥지로 돌아갔습니다.</VV_Message_ViviNestRescuedReturned>
+<VV_Message_ViviNestLeavingFew>남은 구성원이 너무 적어 {0}의 비비들이 둥지를 떠납니다.</VV_Message_ViviNestLeavingFew>
+<VV_Message_ViviNestLeavingStarving>오랜 굶주림을 견디지 못하고 {0}의 비비들이 둥지를 떠납니다.</VV_Message_ViviNestLeavingStarving>
+<VV_Message_ViviNestLeavingRoomLost>머물던 둥지 방을 잃어 {0}의 비비들이 이곳을 떠납니다.</VV_Message_ViviNestLeavingRoomLost>
+<VV_Message_CannotClaimViviNest>비비들이 아직 거주하고 있습니다.</VV_Message_CannotClaimViviNest>
 <VV_Letter_ViviNestAlmostHostileLabel>비비들의 경계</VV_Letter_ViviNestAlmostHostileLabel>
-<VV_Letter_ViviNestAlmostHostile>{0}의 비비들이 참을성을 잃기 직전입니다. 정착민이 계속 방에 들어가거나 비비를 해치면 적대하며 떠나 버립니다.</VV_Letter_ViviNestAlmostHostile>
+<VV_Letter_ViviNestAlmostHostile>{0}의 비비들이 인내심을 잃기 직전입니다. 정착민이 계속해서 둥지 방에 들어오거나 비비를 공격하면 적대적으로 돌변해 둥지를 떠나 버릴 것입니다.</VV_Letter_ViviNestAlmostHostile>
 <VV_Letter_ViviNestHostileLabel>비비들의 적대</VV_Letter_ViviNestHostileLabel>
-<VV_Letter_ViviNestHostile>{0}의 비비들이 적대하며 둥지를 버리고 달아납니다.</VV_Letter_ViviNestHostile>
+<VV_Letter_ViviNestHostile>{0}의 비비들이 적대적으로 돌변하여 둥지를 버리고 떠납니다.</VV_Letter_ViviNestHostile>
 <VV_Inspector_ViviNestWariness>둥지 경계심: {0}</VV_Inspector_ViviNestWariness>
 
 <VV_StatReport_NestForager>떠돌이 무리 채집꾼: {0}</VV_StatReport_NestForager>

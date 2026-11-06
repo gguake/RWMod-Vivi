@@ -3,7 +3,7 @@
 
 <!-- Lure inspector -->
 <VV_Inspector_LureBaitReady>Honey scent: wafting</VV_Inspector_LureBaitReady>
-<VV_Inspector_LureBaitReadyUnmet>Honey scent: wafting ({0} conditions not met, see the Conditions tab)</VV_Inspector_LureBaitReadyUnmet>
+<VV_Inspector_LureBaitReadyUnmet>Honey scent: wafting ({0} conditions not met)</VV_Inspector_LureBaitReadyUnmet>
 <VV_Inspector_LureNoBait>Honey scent: none (place honey, ambrosia or berries on it)</VV_Inspector_LureNoBait>
 <VV_Inspector_LureScouting>Vivi scouts are looking around.</VV_Inspector_LureScouting>
 <VV_Inspector_LureThief>Something is after the bait.</VV_Inspector_LureThief>
@@ -26,50 +26,50 @@
 <VV_ITab_ViviLure_SectionStatus>Status</VV_ITab_ViviLure_SectionStatus>
 <VV_ITab_ViviLure_SectionVisit>Visit conditions</VV_ITab_ViviLure_SectionVisit>
 <VV_ITab_ViviLure_SectionSite>Nest site conditions</VV_ITab_ViviLure_SectionSite>
-<VV_ITab_ViviLure_Idle>Waiting for visitors. When all visit conditions are met, visitors following the honey scent come now and then; if the nest site conditions are met too, a band of vivis may follow the scouts and move in.</VV_ITab_ViviLure_Idle>
+<VV_ITab_ViviLure_Idle>Waiting for visitors. When all visit conditions are met, visitors drawn by the honey scent will occasionally stop by; if the nest site conditions are also met, a band of vivis may follow the scouts and settle in.</VV_ITab_ViviLure_Idle>
 <VV_ITab_ViviLure_Map>Home map on the ground</VV_ITab_ViviLure_Map>
 <VV_ITab_ViviLure_NoRoyal>No royal vivi on the map</VV_ITab_ViviLure_NoRoyal>
 <VV_ITab_ViviLure_ViviCount>At most {0} colony vivis</VV_ITab_ViviLure_ViviCount>
 <VV_ITab_ViviLure_NoHostile>No hostiles on the map</VV_ITab_ViviLure_NoHostile>
 <VV_ITab_ViviLure_Temperature>Comfortable temperature for vivis</VV_ITab_ViviLure_Temperature>
-<VV_ITab_ViviLure_TemperatureTip>It must be a temperature vivis in basic clothes can endure outdoors. Both the current and the seasonal temperature count.</VV_ITab_ViviLure_TemperatureTip>
+<VV_ITab_ViviLure_TemperatureTip>The outdoor temperature must be within a range that vivis wearing basic worker costumes can endure. Both the current temperature and the seasonal average are checked.</VV_ITab_ViviLure_TemperatureTip>
 <VV_ITab_ViviLure_Season>Flowers are growing</VV_ITab_ViviLure_Season>
 <VV_ITab_ViviLure_Weather>Safe to be outside</VV_ITab_ViviLure_Weather>
 <VV_ITab_ViviLure_WeatherTip>Vivis do not come during toxic fallout, noxious haze or other conditions that make it dangerous to be outside.</VV_ITab_ViviLure_WeatherTip>
 <VV_ITab_ViviLure_Bait>Honey food bait</VV_ITab_ViviLure_Bait>
-<VV_ITab_ViviLure_BaitTip>Place honey, ambrosia, honey dishes or berries on the lure to spread the scent. Visiting scouts eat one each while sniffing; bears eat it all.</VV_ITab_ViviLure_BaitTip>
+<VV_ITab_ViviLure_BaitTip>Place honey, ambrosia, honey dishes, or berries on the lure to spread a sweet scent. Visiting scouts will sample a piece while inspecting the lure, whereas bears will devour it all.</VV_ITab_ViviLure_BaitTip>
 <VV_ITab_ViviLure_NoOtherLure>No other lure in progress and no nest</VV_ITab_ViviLure_NoOtherLure>
 <VV_ITab_ViviLure_Reachable>Path from the map edge</VV_ITab_ViviLure_Reachable>
 <VV_ITab_ViviLure_Flowers>At least {0} honey flowers</VV_ITab_ViviLure_Flowers>
-<VV_ITab_ViviLure_FlowersTip>Honey flowers near the lure. The more flowers, the higher the flower score.</VV_ITab_ViviLure_FlowersTip>
+<VV_ITab_ViviLure_FlowersTip>Counts flowers near the lure that yield honey. More flowers grant a higher score.</VV_ITab_ViviLure_FlowersTip>
 <VV_ITab_ViviLure_Room>Empty roofed structure with a door</VV_ITab_ViviLure_Room>
-<VV_ITab_ViviLure_RoomTip>The best structure near the lure. Rooms joined by doors count as one structure. It needs a door and a full roof; structures that are too small or too large, joined to someone's bedroom or a prison, or on a gravship are not used. A well-sized structure with few buildings inside (except arcane plants, pots and lures) scores higher.</VV_ITab_ViviLure_RoomTip>
+<VV_ITab_ViviLure_RoomTip>Evaluates the most suitable structure near the lure. Rooms connected by doors count as a single structure. It must have a door and be fully roofed; structures that are too small or too large, connected to an owned bedroom or prison cell, or built on a gravship will not be used. Appropriately sized structures with fewer buildings inside (excluding arcane plants, pots, and lures) receive a higher score.</VV_ITab_ViviLure_RoomTip>
 <VV_ITab_ViviLure_RoomReachable>Path from the map edge to the structure</VV_ITab_ViviLure_RoomReachable>
 <VV_ITab_ViviLure_None>none</VV_ITab_ViviLure_None>
 <VV_ITab_ViviLure_PartScore>Score {0}</VV_ITab_ViviLure_PartScore>
 <VV_ITab_ViviLure_FertileSoil>At least {0} fertile cells</VV_ITab_ViviLure_FertileSoil>
-<VV_ITab_ViviLure_FertileSoilTip>Fertile land near the lure with no roof, building or zone. A vivi nest plants cotton, roses and arcane plants there and digs mana fertilizer out of the soil.</VV_ITab_ViviLure_FertileSoilTip>
+<VV_ITab_ViviLure_FertileSoilTip>Counts unroofed fertile tiles near the lure that have no buildings or zones. Settled vivis use this soil to grow cotton, roses, and arcane plants, as well as to dig up mana fertilizer.</VV_ITab_ViviLure_FertileSoilTip>
 <VV_ITab_ViviLure_GrowingPeriod>Growing period of at least {0} days</VV_ITab_ViviLure_GrowingPeriod>
-<VV_ITab_ViviLure_GrowingPeriodTip>Same as the growing period on the world map's terrain tab. A vivi nest gathers honey while the flowers grow and lives on it through the winter, so the vivis will not settle where the growing period is short.</VV_ITab_ViviLure_GrowingPeriodTip>
+<VV_ITab_ViviLure_GrowingPeriodTip>Matches the growing period shown on the world map's terrain tab. Because a vivi nest gathers honey during the blooming season and relies on those stores to survive the winter, vivis will not settle in regions with a short growing period.</VV_ITab_ViviLure_GrowingPeriodTip>
 <VV_ITab_ViviLure_Mana>Environment mana</VV_ITab_ViviLure_Mana>
-<VV_ITab_ViviLure_ManaTip>Environment mana near the lure. Not required; the higher it is, the higher the mana score.</VV_ITab_ViviLure_ManaTip>
+<VV_ITab_ViviLure_ManaTip>The concentration of environment mana near the lure. While not required, higher mana levels grant a higher score.</VV_ITab_ViviLure_ManaTip>
 <VV_ITab_ViviLure_Score>Nest score</VV_ITab_ViviLure_Score>
 <VV_ITab_ViviLure_ScoreValue>{0} ({1} settlers)</VV_ITab_ViviLure_ScoreValue>
-<VV_ITab_ViviLure_ScoreTip>The flower, structure and mana scores combined (flowers count the most, mana the least). The higher it is, the sooner and the more vivis come.</VV_ITab_ViviLure_ScoreTip>
+<VV_ITab_ViviLure_ScoreTip>The combined score of nearby flowers, the structure, and environment mana (flowers have the highest weight, mana the lowest). A higher score attracts a larger band of vivis sooner.</VV_ITab_ViviLure_ScoreTip>
 
 <!-- Lure letters and messages -->
 <VV_Letter_ViviLureScoutsLabel>Vivi scouts</VV_Letter_ViviLureScoutsLabel>
-<VV_Letter_ViviLureScouts>{1} vivi(s) of {0} followed the honey scent of your lure.\n\nThey will look around the lure, the flowers and the rooms nearby. If they like what they see, a small band may come back to live here.</VV_Letter_ViviLureScouts>
+<VV_Letter_ViviLureScouts>{1} vivi(s) of {0} followed the honey scent of your lure.\n\nThey will inspect the lure, the surrounding flower beds, and nearby rooms. If they find the area suitable, a small band may return to settle here.</VV_Letter_ViviLureScouts>
 <VV_Letter_ViviLureHornetLabel>Hornet at the lure</VV_Letter_ViviLureHornetLabel>
-<VV_Letter_ViviLureHornet>A titanic hornet has caught the honey scent of your lure and is coming for it. Hornets are in a frenzy and attack anything nearby.</VV_Letter_ViviLureHornet>
-<VV_Message_ViviLureBear>{PAWN_definite} has caught the honey scent and is coming for the lure.</VV_Message_ViviLureBear>
-<VV_Message_ViviLureScoutsFled>The vivi scouts left in a hurry. They will not report this place.</VV_Message_ViviLureScoutsFled>
-<VV_Message_ViviLureScoutsDisappointed>The vivi scouts left without much interest.\n{0}</VV_Message_ViviLureScoutsDisappointed>
-<VV_Message_ViviLureScoutsSatisfied>The vivi scouts liked this place. A band of vivis may come soon.</VV_Message_ViviLureScoutsSatisfied>
+<VV_Letter_ViviLureHornet>A titanic hornet has caught the honey scent of your lure and is flying toward it. Driven into a frenzy, it will attack anything nearby.</VV_Letter_ViviLureHornet>
+<VV_Message_ViviLureBear>{PAWN_definite} has caught the honey scent and is heading toward the lure.</VV_Message_ViviLureBear>
+<VV_Message_ViviLureScoutsFled>The vivi scouts left in a hurry. They will not report this place to their band.</VV_Message_ViviLureScoutsFled>
+<VV_Message_ViviLureScoutsDisappointed>The vivi scouts left without showing much interest.\n{0}</VV_Message_ViviLureScoutsDisappointed>
+<VV_Message_ViviLureScoutsSatisfied>The vivi scouts were pleased with this place. A band of vivis may arrive soon.</VV_Message_ViviLureScoutsSatisfied>
 
 <!-- Settlers -->
 <VV_Letter_ViviNestSettlersLabel>Vivis move in</VV_Letter_ViviNestSettlersLabel>
-<VV_Letter_ViviNestSettlers>A band of {1} vivis from {0} has come to live in the empty room near your lure.\n\nThey gather honey, pollen and propolis from the flowers and trees around, make cream and wax, and build what they need on their own. Their stores are marked forbidden; you may take them freely.\n\nThe vivis do not mind your colonists nearby, but they grow wary quickly when your people step inside their rooms. If they become too wary, they will turn hostile and leave. Keep your people out by forbidding the doors of their rooms or by setting allowed areas.</VV_Letter_ViviNestSettlers>
+<VV_Letter_ViviNestSettlers>A band of {1} vivis from {0} has arrived to settle in the empty room near your lure.\n\nThey will gather honey, pollen, and propolis from nearby flowers and trees, refine vivicream and viviwax, and build what they need on their own. Items they gather are marked forbidden, though you are free to take them.\n\nThe vivis do not mind your colonists passing nearby, but they quickly grow wary if anyone enters their rooms. If their wariness reaches its limit, they will turn hostile and abandon the nest. Forbid their doors or set allowed areas to keep your colonists out.</VV_Letter_ViviNestSettlers>
 <VV_Message_ViviNestSettlersCanceled>The vivi band that was expected did not come.\n{0}</VV_Message_ViviNestSettlersCanceled>
 <VV_Message_ViviNestWary>The vivis of {0} are getting wary of your colonists in their rooms.</VV_Message_ViviNestWary>
 <VV_Message_ViviNestVeryWary>The vivis of {0} are very wary. Keep your colonists out of their rooms.</VV_Message_ViviNestVeryWary>

@@ -172,7 +172,7 @@ Only a few traces of the former empire remain, in the form of certain traditions
   <FactionDef ParentName="TribeBase">
     <defName>VV_WanderingVivi</defName>
     <label>wandering vivis</label>
-    <description>A small band of vivis who lost their everflower seed and the hive that went with it. They drift from place to place, and when they smell honey and find a quiet empty room, they move in, fill it with cream and wax, and live off the flowers around it. They keep no settlements of their own.</description>
+    <description>A small band of vivis who lost their home hive along with its everflower seed and now wander from place to place. When they follow the scent of honey to a suitable empty room, they furnish it with cream and wax and live off the surrounding flowers. They maintain no permanent settlements of their own.</description>
     <factionIconPath>UI/Icons/ViviFaction</factionIconPath>
     <factionNameMaker>VV_NamerWanderingViviFaction</factionNameMaker>
     <settlementNameMaker>VV_NamerSettlementVivi</settlementNameMaker>
