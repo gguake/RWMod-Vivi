@@ -20,6 +20,11 @@ namespace VVRace
         private const int InitialFertilizer = 50;
 
         private const float ColdSeasonTemp = 10f;
+        // 추운 땅에서 가져오는 잔불꽃 수(사용자 결정). 처음 방(36칸)의 잔불꽃 상한(방 18칸당 하나, ViviNestPlanner.MaxEmberPots)이 둘이라 처음에는 둘 다
+        // 처음 방에 서서 겨울을 데우고(장기 계측 final_cold60b: 잔불꽃 둘인 처음 방이 바깥 −31°C에 27.7°C 이상, 예전 하나일 때 −24~−27°C에 4.3~12°C),
+        // 증축 방이 서면 설계자가 하나를 그 방 화분으로 옮긴다(잔불꽃 없는 방 먼저, ViviNestPlanner.SpareRoomEmber). 예전에는 하나만 가져와 증축 방이
+        // 남는 잔불꽃을 얻지 못하면 겨울에 바깥과 같이 얼었다(장기 계측 final_cold60b: 잔불꽃 없는 증축 방이 바깥 −31°C에 −30°C).
+        private const int ColdLandEmberCount = 2;
 
         private static readonly FieldInfo FieldInfo_QueuedIncident_fireTick = AccessTools.Field(typeof(QueuedIncident), "fireTick");
 
@@ -187,7 +192,7 @@ namespace VVRace
             }
         }
 
-        // 정착과 생존에 도움되는 마법식물: 겨울이 추우면 잔불꽃(29°C까지 데운다, 첫 화분에 둔다), 그리고 풍년화(흙 비옥도로 마나를 만든다, 비옥한 바깥 칸에 둔다).
+        // 정착과 생존에 도움되는 마법식물: 겨울이 추우면 잔불꽃 둘(29°C까지 데운다, 둥지 방 화분에 둔다), 그리고 풍년화(흙 비옥도로 마나를 만든다, 비옥한 바깥 칸에 둔다).
         // 도착한 계절이 아니라 그 타일의 한 해 기온으로 고른다(봄에 온 둥지가 겨울에 아기를 얼려 죽였다, 장기 계측).
         // 서리꽃은 -20°C까지 식히는 냉동용이라 방에 두면 더운 땅에서도 방을 얼린다(장기 계측: 바깥 10~30°C에 방 -8°C, 아이 동사).
         // 비비는 36°C까지 편하므로 더운 땅에서는 식힐 꽃 없이 지낸다.
@@ -195,7 +200,10 @@ namespace VVRace
         {
             if (GenTemperature.MinTemperatureAtTile(map.Tile) < ColdSeasonTemp)
             {
-                yield return VVThingDefOf.VV_EmberBloom;
+                for (int i = 0; i < ColdLandEmberCount; ++i)
+                {
+                    yield return VVThingDefOf.VV_EmberBloom;
+                }
             }
 
             yield return VVThingDefOf.VV_Richflower;

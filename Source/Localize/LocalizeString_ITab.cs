@@ -67,6 +67,8 @@ namespace VVRace
         public const string VV_ITab_ViviLure_FertileSoil = nameof(VV_ITab_ViviLure_FertileSoil);
         public const string VV_ITab_ViviLure_FertileSoilValue = nameof(VV_ITab_ViviLure_FertileSoilValue);
         public const string VV_ITab_ViviLure_FertileSoilTip = nameof(VV_ITab_ViviLure_FertileSoilTip);
+        public const string VV_ITab_ViviLure_GrowingPeriod = nameof(VV_ITab_ViviLure_GrowingPeriod);
+        public const string VV_ITab_ViviLure_GrowingPeriodTip = nameof(VV_ITab_ViviLure_GrowingPeriodTip);
         public const string VV_ITab_ViviLure_Mana = nameof(VV_ITab_ViviLure_Mana);
         public const string VV_ITab_ViviLure_ManaValue = nameof(VV_ITab_ViviLure_ManaValue);
         public const string VV_ITab_ViviLure_ManaTip = nameof(VV_ITab_ViviLure_ManaTip);

@@ -21,6 +21,9 @@ namespace VVRace
         public const int CreamTarget = 60;
         public const int WaxTarget = 80;
         public const int WoodTarget = 60;
+        // 원목 비축 목표 = 기본 목표 + 원목을 태우는 둥지 냉각기의 하루 사용량 × 비축 일수(비료와 같은 5일) + 둥지 청사진·골조에 들어갈 양(WoodStockTarget).
+        // 냉각기는 원목 하루 10개(가득 50 = 5일)를 태우므로 하나면 목표가 60 → 110이 된다. 서늘한 철에 채우지 않는 냉각기(ViviNestPlanner.NeedsCooling)는 세지 않는다.
+        public const float WoodReserveDays = FertilizerReserveDays;
         // 마나 비료 비축 목표 = 둥지가 하루에 쓰는 비료 × 비축 일수(최소·최대 사이) + 둥지 청사진·골조에 들어갈 양.
         // 장기 계측(툰드라 60일, 목표 60 고정): 바깥 새싹(하루 10개)이 9~12그루로 늘어 방출기(하루 8개)와 함께 하루 100개 넘게 쓰는 동안 둥지 비료가 세 번 0이 됐다.
         // 비축 일수 5일은 새싹이 다 자라는 날 수(5~6.5일)라, 땅을 못 파는 독성 낙진(2.5~10.5일)·유독 연무(1~2일) 동안(바깥에 새 씨앗도 심지 않는다) 남은 새싹을 거의 끝까지 키운다.
@@ -296,7 +299,7 @@ namespace VVRace
             _billNeed[VVRecipeDefOf.VV_MakeViviwax] = Shortage(wax, Target(VVThingDefOf.VV_Viviwax, WaxTarget));
             _billNeed[VVRecipeDefOf.VV_FilteringHoney] = ProcessingWeight * (honey > 0 ? (float)rawHoney / honey : 0f);
             _billNeed[VVRecipeDefOf.VV_Make_HoneyPollenCake] = ProcessingWeight * Shortage(cakes, CakeTarget);
-            _woodNeed = Shortage(wood, Target(ThingDefOf.WoodLog, WoodTarget));
+            _woodNeed = Shortage(wood, WoodStockTarget());
             _fertilizerNeed = Shortage(stock.CountOf(VVThingDefOf.VV_Fertilizer), _fertilizerTarget);
             _medicineNeed = Shortage(stock.CountOf(ThingDefOf.MedicineHerbal) + stock.CountOf(ThingDefOf.MedicineIndustrial) + stock.CountOf(ThingDefOf.MedicineUltratech), MedicineTarget);
 
@@ -533,6 +536,30 @@ namespace VVRace
                 // 쓸 때만 태우는 것(대형 화분 등)은 하루 소모량을 알 수 없어 뺀다.
                 var props = refuelables[i].TryGetComp<CompRefuelable>()?.Props;
                 if (props == null || props.consumeFuelOnlyWhenUsed || props.externalTicking || !props.fuelFilter.Allows(VVThingDefOf.VV_Fertilizer)) { continue; }
+
+                perDay += props.fuelConsumptionRate / props.FuelMultiplierCurrentDifficulty;
+            }
+            return perDay;
+        }
+
+        // 원목 비축 목표(나무 베기 잡 기버와 보유량 균형이 함께 쓴다)
+        public int WoodStockTarget()
+        {
+            return Target(ThingDefOf.WoodLog, WoodTarget + UnityEngine.Mathf.CeilToInt(WoodPerDay() * WoodReserveDays));
+        }
+
+        // 둥지가 하루에 태우는 원목: 원목을 연료로 쓰는 둥지 것(냉각기) 중 지금 연료를 채우는 것의 바닐라 연료 소모율.
+        public float WoodPerDay()
+        {
+            var perDay = 0f;
+            var refuelables = Map.listerThings.ThingsInGroup(ThingRequestGroup.Refuelable);
+            for (int i = 0; i < refuelables.Count; ++i)
+            {
+                var thing = refuelables[i];
+                if (thing.Faction != _owner.Faction || JobGiver_ViviNestRefuel.IsIdleCooler(_owner, thing)) { continue; }
+
+                var props = thing.TryGetComp<CompRefuelable>()?.Props;
+                if (props == null || props.consumeFuelOnlyWhenUsed || props.externalTicking || !props.fuelFilter.Allows(ThingDefOf.WoodLog)) { continue; }
 
                 perDay += props.fuelConsumptionRate / props.FuelMultiplierCurrentDifficulty;
             }

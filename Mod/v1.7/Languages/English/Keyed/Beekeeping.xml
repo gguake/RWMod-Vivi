@@ -19,6 +19,7 @@
 <VV_Inspector_LureMissingFlowers>Not enough honey flowers nearby ({0}/{1}).</VV_Inspector_LureMissingFlowers>
 <VV_Inspector_LureMissingRoom>No empty room nearby with a door and a full roof.</VV_Inspector_LureMissingRoom>
 <VV_Inspector_LureMissingFertileSoil>Not enough fertile land nearby ({0}/{1}).</VV_Inspector_LureMissingFertileSoil>
+<VV_Inspector_LureMissingGrowingPeriod>The flowers here grow for too short a season to gather enough honey for the winter (growing period {0} days, needs {1}).</VV_Inspector_LureMissingGrowingPeriod>
 
 <!-- Lure conditions tab -->
 <VV_ITab_ViviLure_TabLabel>Conditions</VV_ITab_ViviLure_TabLabel>
@@ -53,6 +54,8 @@
 <VV_ITab_ViviLure_FertileSoil>At least {0} fertile cells</VV_ITab_ViviLure_FertileSoil>
 <VV_ITab_ViviLure_FertileSoilValue>{0} cells</VV_ITab_ViviLure_FertileSoilValue>
 <VV_ITab_ViviLure_FertileSoilTip>Cells within {0} cells of the lure with no roof, building or zone and at least {1} fertility. A vivi nest plants cotton, roses and arcane plants there and digs mana fertilizer out of the soil.</VV_ITab_ViviLure_FertileSoilTip>
+<VV_ITab_ViviLure_GrowingPeriod>Growing period of at least {0} days</VV_ITab_ViviLure_GrowingPeriod>
+<VV_ITab_ViviLure_GrowingPeriodTip>The growing period of this land, as shown on the world map's terrain tab: the days of the 60-day year whose average temperature is between {0} and {1}, where honey flowers grow well. A vivi nest gathers honey while the flowers grow and lives on it through the winter. On land with a growing period shorter than {2} days, the vivis cannot gather enough honey for the winter and will not settle.</VV_ITab_ViviLure_GrowingPeriodTip>
 <VV_ITab_ViviLure_Mana>Environment mana</VV_ITab_ViviLure_Mana>
 <VV_ITab_ViviLure_ManaValue>{0} (score {1})</VV_ITab_ViviLure_ManaValue>
 <VV_ITab_ViviLure_ManaTip>Average environment mana within {0} cells of the lure. Not required; {1} gives a full mana score.</VV_ITab_ViviLure_ManaTip>

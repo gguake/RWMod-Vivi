@@ -19,6 +19,7 @@
 <VV_Inspector_LureMissingFlowers>주변에 꿀이 나는 꽃이 부족합니다 ({0}/{1}).</VV_Inspector_LureMissingFlowers>
 <VV_Inspector_LureMissingRoom>주변에 문이 있고 지붕이 다 덮인 빈 방이 없습니다.</VV_Inspector_LureMissingRoom>
 <VV_Inspector_LureMissingFertileSoil>주변에 비옥한 땅이 부족합니다 ({0}/{1}).</VV_Inspector_LureMissingFertileSoil>
+<VV_Inspector_LureMissingGrowingPeriod>이 땅은 꽃이 자라는 철이 너무 짧아 겨울을 날 꿀을 모을 수 없습니다 (성장 기간 {0}일, {1}일 이상 필요).</VV_Inspector_LureMissingGrowingPeriod>
 
 <!-- 유인 조건 탭 -->
 <VV_ITab_ViviLure_TabLabel>유인 조건</VV_ITab_ViviLure_TabLabel>
@@ -53,6 +54,8 @@
 <VV_ITab_ViviLure_FertileSoil>비옥한 땅 {0}칸 이상</VV_ITab_ViviLure_FertileSoil>
 <VV_ITab_ViviLure_FertileSoilValue>{0}칸</VV_ITab_ViviLure_FertileSoilValue>
 <VV_ITab_ViviLure_FertileSoilTip>유인통 둘레 {0}칸 안에서 지붕·건물·구역이 없고 비옥도가 {1} 이상인 칸을 셉니다. 비비 둥지는 이런 땅에 목화·장미·마법식물을 심고, 땅을 파서 마나 비료를 얻습니다.</VV_ITab_ViviLure_FertileSoilTip>
+<VV_ITab_ViviLure_GrowingPeriod>성장 기간 {0}일 이상</VV_ITab_ViviLure_GrowingPeriod>
+<VV_ITab_ViviLure_GrowingPeriodTip>이 땅의 성장 기간입니다(세계 지도 지형 탭과 같습니다: 한 해 60일 가운데 평균 기온이 꿀 꽃이 잘 자라는 {0}~{1}인 날). 비비 둥지는 꽃이 자라는 철에 꿀을 모아 두고 겨울은 모은 꿀로 버팁니다. 성장 기간이 {2}일보다 짧은 땅에서는 겨울을 날 꿀을 다 모으지 못하므로 살러 오지 않습니다.</VV_ITab_ViviLure_GrowingPeriodTip>
 <VV_ITab_ViviLure_Mana>환경 마나</VV_ITab_ViviLure_Mana>
 <VV_ITab_ViviLure_ManaValue>{0} (점수 {1})</VV_ITab_ViviLure_ManaValue>
 <VV_ITab_ViviLure_ManaTip>유인통 둘레 {0}칸의 평균 환경 마나입니다. 꼭 있어야 하지는 않고, {1}이면 마나 점수가 가득 찹니다.</VV_ITab_ViviLure_ManaTip>

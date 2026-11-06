@@ -198,7 +198,8 @@ namespace VVRace
             AddConditionRow(visit, !BeekeepingUtility.AnyNestOrAttraction(map, this), LocalizeString_ITab.VV_ITab_ViviLure_NoOtherLure.Translate());
             AddConditionRow(visit, BeekeepingUtility.TryFindEntryCellReaching(map, Position, out _), LocalizeString_ITab.VV_ITab_ViviLure_Reachable.Translate());
 
-            // 둥지 자리 조건: 정찰이 끝날 때와 정착대가 도착할 때 보는 최소 요건(ViviNestSiteReport.Acceptable)과 정착대가 방까지 올 길(IncidentWorker_ViviNestSettlers.TrySpawnSettlers)
+            // 둥지 자리 조건: 정찰이 끝날 때와 정착대가 도착할 때 보는 최소 요건(ViviNestSiteReport.Acceptable: 꽃·빈 방·비옥한 땅·성장 기간)과
+            // 정착대가 방까지 올 길(IncidentWorker_ViviNestSettlers.TrySpawnSettlers)
             const ViviLureConditionSection site = ViviLureConditionSection.Site;
             AddConditionRow(site, report.HasEnoughFlowers,
                 LocalizeString_ITab.VV_ITab_ViviLure_Flowers.Translate(ViviNestSiteEvaluator.MinFlowerCount),
@@ -222,6 +223,15 @@ namespace VVRace
                 LocalizeString_ITab.VV_ITab_ViviLure_FertileSoil.Translate(ViviNestSiteEvaluator.MinFertileCells),
                 LocalizeString_ITab.VV_ITab_ViviLure_FertileSoilValue.Translate(report.fertileCellCount),
                 LocalizeString_ITab.VV_ITab_ViviLure_FertileSoilTip.Translate(ViviNestSiteEvaluator.Radius, ViviNestSiteEvaluator.MinFertility.ToStringPercent()));
+
+            // 성장 기간: 값은 바닐라 성장 기간 설명(세계 지도 지형 탭과 같은 글, 꽃이 자라는 달 포함)을 그대로 쓴다.
+            var flower = ThingDefOf.Plant_Dandelion;
+            AddConditionRow(site, report.HasLongEnoughGrowingPeriod,
+                LocalizeString_ITab.VV_ITab_ViviLure_GrowingPeriod.Translate(ViviNestSiteEvaluator.MinGrowingPeriodDays),
+                Zone_Growing.GrowingQuadrumsDescription(map, flower),
+                LocalizeString_ITab.VV_ITab_ViviLure_GrowingPeriodTip.Translate(
+                    flower.plant.minOptimalGrowthTemperature.ToStringTemperature("F0"), flower.plant.maxOptimalGrowthTemperature.ToStringTemperature("F0"),
+                    ViviNestSiteEvaluator.MinGrowingPeriodDays));
 
             AddInfoRow(site, LocalizeString_ITab.VV_ITab_ViviLure_Mana.Translate(),
                 LocalizeString_ITab.VV_ITab_ViviLure_ManaValue.Translate(report.averageMana.ToString("0"), report.manaScore.ToStringPercent()),

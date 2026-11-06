@@ -22,10 +22,14 @@ namespace VVRace
 
         public int fertileCellCount;
 
+        // 그 땅의 성장 기간(일): 꿀 꽃이 제 속도로 자라는 철의 길이(ViviNestSiteEvaluator.GrowingPeriodDays)
+        public int growingPeriodDays;
+
         public bool HasEnoughFlowers => flowerCount >= ViviNestSiteEvaluator.MinFlowerCount;
         public bool HasRoom => bestRoom != null;
         public bool HasEnoughFertileSoil => fertileCellCount >= ViviNestSiteEvaluator.MinFertileCells;
-        public bool Acceptable => HasEnoughFlowers && HasRoom && HasEnoughFertileSoil;
+        public bool HasLongEnoughGrowingPeriod => growingPeriodDays >= ViviNestSiteEvaluator.MinGrowingPeriodDays;
+        public bool Acceptable => HasEnoughFlowers && HasRoom && HasEnoughFertileSoil && HasLongEnoughGrowingPeriod;
 
         public float TotalScore => Acceptable
             ? ViviNestSiteEvaluator.FlowerWeight * flowerScore + ViviNestSiteEvaluator.RoomWeight * roomScore + ViviNestSiteEvaluator.ManaWeight * manaScore
@@ -52,12 +56,16 @@ namespace VVRace
                 {
                     sb.AppendInNewLine(LocalizeString_Inspector.VV_Inspector_LureMissingFertileSoil.Translate(fertileCellCount, ViviNestSiteEvaluator.MinFertileCells));
                 }
+                if (!HasLongEnoughGrowingPeriod)
+                {
+                    sb.AppendInNewLine(LocalizeString_Inspector.VV_Inspector_LureMissingGrowingPeriod.Translate(growingPeriodDays, ViviNestSiteEvaluator.MinGrowingPeriodDays));
+                }
                 return sb.ToString();
             }
         }
     }
 
-    // 유인통 주변이 비비가 살 만한 곳인지 꽃·빈 방·비옥한 땅·환경 마나로 매긴다. 비옥한 땅은 최소 요건만 보고 점수에는 넣지 않는다.
+    // 유인통 주변이 비비가 살 만한 곳인지 꽃·빈 방·비옥한 땅·기후(성장 기간)·환경 마나로 매긴다. 비옥한 땅과 기후는 최소 요건만 보고 점수에는 넣지 않는다.
     public static class ViviNestSiteEvaluator
     {
         public const float Radius = 16f;
@@ -79,6 +87,15 @@ namespace VVRace
         // 그래서 유인통 반경 16칸(약 800칸)의 10%인 80칸을 최소로 둔다. 지붕·건물·구역이 있는 칸은 둥지가 쓰지 못하므로 세지 않는다.
         public const float MinFertility = JobGiver_ViviNestPlantSeed.MinFertility;
         public const int MinFertileCells = 80;
+
+        // 기후: 그 땅의 성장 기간(바닐라 '성장 기간'과 같은 계산 — 세계 지도 지형 탭·재배 구역 정보창, Zone_Growing.GrowingQuadrumsDescription:
+        // 1/12년 평균 기온이 꿀 꽃(민들레)의 최적 성장 기온 6~42°C 안인 1/12년 수 × 5일)이 이만큼은 되어야 정착한다(사용자 결정 "버티지 못할 땅에는 정착하지 않게").
+        // 둥지는 꽃이 자라는 철에 꿀을 모아 두고, 겨울(바깥 평균 영하, 꽃이 얼어 죽는다)은 모은 것으로만 버티므로 꽃 철이 짧으면 겨울 비축을 다 모으지 못한다.
+        // 지난 장기 계측(60일 = 한 해, 기온 표본으로 맞춘 그 타일의 성장 기간): 0일(툰드라 위도 65°, 가장 추운 1/12년 평균 −43°C)은 정착 뒤 15일 동안 모은
+        // 식량(영양 129)이 겨울 동안 바닥나 47일째 굶주림으로 떠났고, 10일(툰드라 위도 64°, −36°C)은 겨울에도 알을 낳던 코드로 51일째 바닥났다.
+        // 20일인 다섯 판(툰드라 위도 56~58°·북방림 위도 43~59°, −19~−31°C)은 모두 60일을 버텼다(구성원 4~9, 겨울 동안 식량 최저 6.1일 치).
+        // 1/12년 평균은 한 해 가운데를 두고 대칭이라 성장 기간은 0·10·20일처럼 10일씩 바뀐다.
+        public const int MinGrowingPeriodDays = 20;
 
         public const float FlowerWeight = 0.45f;
         public const float RoomWeight = 0.35f;
@@ -178,7 +195,23 @@ namespace VVRace
             report.averageMana = AverageMana(map, center);
             report.manaScore = Mathf.Clamp01(report.averageMana / FullMana);
 
+            report.growingPeriodDays = GrowingPeriodDays(map);
+
             return report;
+        }
+
+        // 꿀 꽃이 제 속도로 자라는 철의 길이(일). 바닐라 성장 기간(Zone_Growing.GrowingQuadrumsDescription)과 같은 1/12년 평균 기온 판정이다.
+        // 기온이 늘 같은 생물군계(바닐라 MapTemperature.SeasonalTemp가 그 값을 쓴다)는 그 기온이 범위 안이면 한 해 내내다.
+        public static int GrowingPeriodDays(Map map)
+        {
+            var plant = ThingDefOf.Plant_Dandelion.plant;
+            var constant = map.Biome.constantOutdoorTemperature;
+            if (constant.HasValue)
+            {
+                return constant.Value >= plant.minOptimalGrowthTemperature && constant.Value <= plant.maxOptimalGrowthTemperature ? GenDate.DaysPerYear : 0;
+            }
+
+            return GenTemperature.TwelfthsInAverageTemperatureRange(map.Tile, plant.minOptimalGrowthTemperature, plant.maxOptimalGrowthTemperature).Count * GenDate.DaysPerTwelfth;
         }
 
         // 둥지가 꽃·목화·마법식물을 심고 땅 비료를 팔 수 있는 바깥 칸. 둥지 바깥 자리 고르기처럼 지붕·건물·구역이 있는 칸은 뺀다(ViviNestPlanner.IsFreeOutdoorCell).

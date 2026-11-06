@@ -75,6 +75,7 @@
         public const string VV_Inspector_LureMissingFlowers = nameof(VV_Inspector_LureMissingFlowers);
         public const string VV_Inspector_LureMissingRoom = nameof(VV_Inspector_LureMissingRoom);
         public const string VV_Inspector_LureMissingFertileSoil = nameof(VV_Inspector_LureMissingFertileSoil);
+        public const string VV_Inspector_LureMissingGrowingPeriod = nameof(VV_Inspector_LureMissingGrowingPeriod);
         public const string VV_Inspector_ViviNestWariness = nameof(VV_Inspector_ViviNestWariness);
     }
 }
