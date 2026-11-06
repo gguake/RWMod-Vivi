@@ -48,10 +48,6 @@ namespace VVRace
             return nest.Stock.IsNestOwned(thing) && (!indoorOnly || nest.Territory.IsRoomCell(thing.Position));
         }
 
-        // 방 안 식물: 둥지 방 칸(벽이 뚫린 동안은 원래 방 칸)의 식물. 둥지 방을 데우는 화분의 잔불꽃이 여기 있고, 나머지 씨앗은 바깥 땅에 심는다.
-        // 바닐라 방 판정(Room.UsesOutdoorTemperature)은 벽이 뚫린 동안 둥지 방을 바깥으로 쳐서 난방이 가장 급할 때 잔불꽃을 뒤로 미루므로 쓰지 않는다.
-        private static bool IsIndoorPlant(LordJob_ViviNest nest, Thing plant) => nest.Territory.IsNestRoomCell(plant.Position);
-
         // 둥지 몫 비료에서 다른 구성원이 지금 주러 가는 몫(그 식물을 가득 채울 만큼)을 뺀 것.
         // 장부는 들고 가는 비료도 세므로, 빼지 않으면 여럿이 한꺼번에 바깥 식물로 가 함께 예비분 아래로 내린다.
         private static int AvailableFertilizer(Pawn pawn, LordJob_ViviNest nest)
@@ -87,7 +83,9 @@ namespace VVRace
                 var mana = plant.ManaComp;
                 if (mana == null || mana.Props.manaCapacity <= 0f || mana.IsUnlimited) { continue; }
 
-                var indoor = IsIndoorPlant(nest, plant);
+                // 방 안 식물: 둥지 방 칸(벽이 뚫린 동안은 원래 방 칸)의 식물. 둥지 방을 데우는 화분의 잔불꽃이 여기 있고, 나머지 씨앗은 바깥 땅에 심는다.
+                // 바닐라 방 판정(Room.UsesOutdoorTemperature)은 벽이 뚫린 동안 둥지 방을 바깥으로 쳐서 난방이 가장 급할 때 잔불꽃을 뒤로 미루므로 쓰지 않는다.
+                var indoor = nest.Territory.IsNestRoomCell(plant.Position);
                 if (mana.StoredPct >= (indoor ? indoorBestPct : outdoorBestPct)) { continue; }
                 if (indoorOnly && !nest.Territory.IsRoomCell(plant.Position)) { continue; }
                 if (!indoor && (indoorBest != null || availableFertilizer - JobDriver_ViviNestFertilizePlant.FertilizerCountToFill(mana) < reserve)) { continue; }
