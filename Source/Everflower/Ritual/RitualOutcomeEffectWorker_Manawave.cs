@@ -54,7 +54,7 @@ namespace VVRace
                 propagationSpeed: 0.5f,
                 doSoundEffects: false);
 
-            var blockRaids = EverflowerRitualRules.ShouldBlockManawaveRaids(map);
+            var blockRaids = ViviEndingQuest.Current?.ShouldSuppressThreats(map) == true;
 
             if (!blockRaids && Rand.Chance(0.2f))
             {

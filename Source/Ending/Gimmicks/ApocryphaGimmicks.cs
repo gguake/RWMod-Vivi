@@ -156,12 +156,6 @@ namespace VVRace
             DoomBlightUtility.ClearDoomBlights(map);
         }
 
-        // a와 b는 월드 좌표이며 width는 칸 단위다.
-        public static void DrawSoulLink(Vector3 a, Vector3 b, float width, Color color)
-        {
-            SoulLinkRenderer.Draw(a, b, width, color);
-        }
-
         #region 내부 공용
 
         internal static bool IsBoundBoss(Pawn boss, out CompApocrypha comp)

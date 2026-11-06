@@ -222,7 +222,7 @@ namespace VVRace
         {
             foreach (var map in Find.Maps)
             {
-                foreach (var condition in EndingGoldenBlooms(map))
+                foreach (var condition in GoldenBloomUtility.EndingConditions(map).ToList())
                 {
                     condition.fromEnding = false;
                     condition.Permanent = false;
@@ -241,28 +241,11 @@ namespace VVRace
 
         public static void EndGoldenBloom(Map map)
         {
-            foreach (var condition in EndingGoldenBlooms(map))
+            // 컨디션을 해제하면 목록이 바뀌므로 대상의 복사본을 순회한다.
+            foreach (var condition in GoldenBloomUtility.EndingConditions(map).ToList())
             {
                 condition.End();
             }
-        }
-
-        // 컨디션을 해제하면 목록이 바뀌므로 엔딩 꽃안개 목록의 복사본을 순회한다.
-        private static List<GameCondition_GoldenBloom> EndingGoldenBlooms(Map map)
-        {
-            var result = new List<GameCondition_GoldenBloom>();
-            var conditions = map?.gameConditionManager.ActiveConditions;
-            if (conditions == null) { return result; }
-
-            for (int i = 0; i < conditions.Count; ++i)
-            {
-                if (conditions[i] is GameCondition_GoldenBloom condition && condition.fromEnding)
-                {
-                    result.Add(condition);
-                }
-            }
-
-            return result;
         }
 
         public static void CleanupGimmicks()

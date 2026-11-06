@@ -204,7 +204,7 @@ namespace VVRace
 
             _pos = BodyOnLane(_travelled);
             Trail?.ResetTrail();
-            RegisterTrail(_pos);
+            ApocryphaNeedleLane.RegisterTrail(Trail, _pos);
 
             PlayEffectAt(VVEffecterDefOf.VV_Effecter_ApocryphaNeedleFire, _pos);
             ApocryphaUtility.ShakeCamera(Map, 0.5f);
@@ -229,7 +229,8 @@ namespace VVRace
             {
                 _state = VerdictState.End;
                 _stateStartTick = now;
-                PlayEffectAt(VVEffecterDefOf.VV_Effecter_ApocryphaNeedleEnd, PointOnLane(_laneLength));
+                var laneEnd = _laneStart + _laneDir * _laneLength;
+                PlayEffectAt(VVEffecterDefOf.VV_Effecter_ApocryphaNeedleEnd, laneEnd);
             }
         }
 
@@ -266,7 +267,10 @@ namespace VVRace
             if (_state == VerdictState.Aim)
             {
                 var progress = Mathf.Clamp01((now - _stateStartTick) / (float)AimTicks);
-                ApocryphaNeedleRenderer.DrawLane(_laneStart, _laneDir, _laneLength, HalfWidth * 2f, progress, 1f, false, false, elapsedSecs, AimTicks / 60f, thingIDNumber);
+                ApocryphaNeedleRenderer.DrawLane(
+                    start: _laneStart, direction: _laneDir, length: _laneLength, width: HalfWidth * 2f,
+                    progress: progress, alpha: 1f, bossInside: false, breach: false,
+                    aimSecs: elapsedSecs, aimDuration: AimTicks / 60f, seed: thingIDNumber);
             }
 
             var warpAge = now - _fireTick;
@@ -277,11 +281,6 @@ namespace VVRace
 
             var glow = _state == VerdictState.Summon ? 0.3f : _state == VerdictState.Aim ? Mathf.Clamp01((now - _stateStartTick) / (float)AimTicks) : 1f;
             ApocryphaNeedleRenderer.DrawNeedle(DrawPos, LaneAngle, alpha, glow);
-        }
-
-        private Vector3 PointOnLane(float distance)
-        {
-            return _laneStart + _laneDir * distance;
         }
 
         private Vector3 BodyOnLane(float tipDistance)
@@ -296,11 +295,6 @@ namespace VVRace
             {
                 Position = cell;
             }
-        }
-
-        private void RegisterTrail(Vector3 point)
-        {
-            ApocryphaNeedleLane.RegisterTrail(Trail, point);
         }
 
         private void PlayEffectAt(EffecterDef effecterDef, Vector3 point)

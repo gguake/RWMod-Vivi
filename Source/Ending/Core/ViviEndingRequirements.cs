@@ -10,10 +10,6 @@ namespace VVRace
         public const int MinViviCount = 10;
         public const float MinColonyWealth = 350000f;
 
-        public static bool ViviCountMet => CountPlayerVivi() >= MinViviCount;
-        public static bool WealthMet => WealthUtility.PlayerWealth >= MinColonyWealth;
-        public static bool AllMet => ViviCountMet && WealthMet;
-
         public static int CountPlayerVivi()
         {
             var count = 0;
@@ -27,11 +23,6 @@ namespace VVRace
             }
 
             return count;
-        }
-
-        public static string LetterText()
-        {
-            return LocalizeString_Letter.VV_Letter_EndingFederationMissiveConditions.Translate().Resolve();
         }
 
         public static string ProgressText()

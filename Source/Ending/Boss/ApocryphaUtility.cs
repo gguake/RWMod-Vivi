@@ -41,7 +41,9 @@ namespace VVRace
             cell = IntVec3.Invalid;
             if (target == null || !CanEnterFromEdge(map)) { return false; }
 
-            var targetRect = TargetRect(map, target);
+            var targetRect = target.Spawned && target.Map == map
+                ? target.OccupiedRect()
+                : CellRect.SingleCell(target.PositionHeld);
             var targetCell = targetRect.CenterCell;
             var bestTier = int.MaxValue;
             var bestDistance = int.MaxValue;
@@ -62,11 +64,6 @@ namespace VVRace
             }
 
             return cell.IsValid;
-        }
-
-        public static CellRect TargetRect(Map map, Thing target)
-        {
-            return target.Spawned && target.Map == map ? target.OccupiedRect() : CellRect.SingleCell(target.PositionHeld);
         }
 
         public static bool IsBreachableLine(Map map, IntVec3 from, CellRect targetRect)

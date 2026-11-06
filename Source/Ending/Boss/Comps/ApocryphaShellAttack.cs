@@ -67,7 +67,7 @@ namespace VVRace
 
                 if (!InMinRange(aim.cell))
                 {
-                    Fire(aim.cell);
+                    ApocryphaGimmicks.TryFireFairyShell(Pawn, aim.cell);
                 }
             }
 
@@ -109,15 +109,7 @@ namespace VVRace
         {
             for (int i = 0; i < _aims.Count; i++)
             {
-                ApocryphaGimmicks.DrawSoulLink(_comp.BodyCenter, _aims[i].cell.ToVector3Shifted(), 0.35f, AimBeamColor);
-            }
-        }
-
-        private void Fire(IntVec3 cell)
-        {
-            if (cell.IsValid && cell.InBounds(Pawn.Map))
-            {
-                ApocryphaGimmicks.TryFireFairyShell(Pawn, cell);
+                SoulLinkRenderer.Draw(_comp.BodyCenter, _aims[i].cell.ToVector3Shifted(), 0.35f, AimBeamColor);
             }
         }
 

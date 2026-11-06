@@ -14,8 +14,6 @@ namespace VVRace
 
         private int _smashTicks;
 
-        private Thing Blocker => job.GetTarget(BlockerIndex).Thing;
-
         public override void ExposeData()
         {
             base.ExposeData();
@@ -46,7 +44,7 @@ namespace VVRace
                 })
                 .WithTickAction(() =>
                 {
-                    var blocker = Blocker;
+                    var blocker = job.GetTarget(BlockerIndex).Thing;
                     if (blocker == null || blocker.Destroyed)
                     {
                         ReadyForNextToil();

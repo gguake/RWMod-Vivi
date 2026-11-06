@@ -1,5 +1,4 @@
 ﻿using RimWorld;
-using System.Collections.Generic;
 using UnityEngine;
 using Verse;
 using Verse.Sound;
@@ -48,10 +47,6 @@ namespace VVRace
 
         private static readonly Color DarkSparkColor = new Color(0.9f, 0.18f, 0.7f, 1f);
         private static readonly Color GoldSparkColor = new Color(1f, 0.86f, 0.45f, 1f);
-        private static readonly int ProgressId = Shader.PropertyToID("_Progress");
-        private static readonly int RevealId = Shader.PropertyToID("_Reveal");
-        private static readonly MaterialPropertyBlock PropertyBlock = new MaterialPropertyBlock();
-        private static readonly Dictionary<string, Material> MaterialCache = new Dictionary<string, Material>();
 
         private int _startTick = -1;
         private string _texPath;
@@ -382,47 +377,11 @@ namespace VVRace
             if (progress <= 0f) { return; }
 
             var rot = age < WaveTick ? Rot4.South : _landRot;
-            var suffix = rot == Rot4.North ? "_north" : (rot == Rot4.South ? "_south" : "_east");
-            var material = GetMaterial(_texPath + suffix);
-            if (material == null) { return; }
-
             var pos = BodyPosAt(age);
             pos.y = def.altitudeLayer.AltitudeFor();
-
             var scale = _drawSize * (age < WaveTick ? Mathf.Lerp(GatherStartScale, 1f, progress) : 1f);
 
-            PropertyBlock.Clear();
-            PropertyBlock.SetFloat(ShaderPropertyIDs.AgeSecs, secs);
-            PropertyBlock.SetFloat(ProgressId, progress);
-            PropertyBlock.SetFloat(RevealId, Reveal(age));
-
-            var mesh = rot == Rot4.West ? MeshPool.plane10Flip : MeshPool.plane10;
-            var matrix = Matrix4x4.TRS(pos, Quaternion.identity, new Vector3(scale, 1f, scale));
-            Graphics.DrawMesh(mesh, matrix, material, 0, null, 0, PropertyBlock);
-        }
-
-        // HornetManifestation도 같은 VV_Manifest 재질로 말벌을 빚는다.
-        internal static Material GetMaterial(string fullPath)
-        {
-            if (MaterialCache.TryGetValue(fullPath, out var cached))
-            {
-                return cached;
-            }
-
-            var texture = ContentFinder<Texture2D>.Get(fullPath, reportFailure: false);
-            var noise = ContentFinder<Texture2D>.Get("VFX/VV_DissolveNoise", reportFailure: false);
-            Material material = null;
-            if (texture != null)
-            {
-                material = MaterialPool.MatFrom(texture, ShaderDatabase.LoadShader("Map/VV_Manifest"), Color.white);
-                if (noise != null)
-                {
-                    material.SetTexture("_DissolveTex", noise);
-                }
-            }
-
-            MaterialCache[fullPath] = material;
-            return material;
+            ManifestationRenderer.Draw(_texPath, rot, pos, scale, ageSecs: secs, progress: progress, reveal: Reveal(age));
         }
         #endregion
     }

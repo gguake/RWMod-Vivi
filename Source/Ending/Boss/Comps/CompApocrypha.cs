@@ -334,12 +334,8 @@ namespace VVRace
 
         private void SyncPhaseHediffs()
         {
-            SyncHediff(VVHediffDefOf.VV_ApocryphaFairyBond, _phase == ApocryphaPhase.Bound);
-            _needleAttack.SyncStuckNeedleHediff();
-        }
-
-        private void SyncHediff(HediffDef def, bool shouldHave)
-        {
+            var def = VVHediffDefOf.VV_ApocryphaFairyBond;
+            var shouldHave = _phase == ApocryphaPhase.Bound;
             var hediff = Pawn.health.hediffSet.GetFirstHediffOfDef(def);
             if (shouldHave && hediff == null)
             {
@@ -349,6 +345,8 @@ namespace VVRace
             {
                 Pawn.health.RemoveHediff(hediff);
             }
+
+            _needleAttack.SyncStuckNeedleHediff();
         }
 
         public override void PostExposeData()

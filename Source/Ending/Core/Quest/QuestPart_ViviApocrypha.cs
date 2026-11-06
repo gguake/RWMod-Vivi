@@ -120,7 +120,7 @@ namespace VVRace
             }
 
             BeginManifestation(map, entryCell, skipIntro);
-            return FinishManifestationIfDue();
+            return Find.TickManager.TicksGame >= _manifestSpawnTick && FinishManifestation();
         }
 
         private bool TryFindSpawnCell(Map map, bool forceSpawn, out IntVec3 cell)
@@ -155,11 +155,6 @@ namespace VVRace
                 _manifestAnnounced = true;
                 Find.SignalManager.SendSignal(new Signal(outSignalManifesting, anchor.Named("SUBJECT")));
             }
-        }
-
-        private bool FinishManifestationIfDue()
-        {
-            return Find.TickManager.TicksGame >= _manifestSpawnTick && FinishManifestation();
         }
 
         private bool FinishManifestation()

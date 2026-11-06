@@ -41,7 +41,7 @@ namespace VVRace
                 obligation,
                 EverflowerRitualDialogUtility.PawnFilter(this, targetInfo, forcedForRole),
                 "Begin".Translate(),
-                EverflowerRitualDialogUtility.RequiredPawns(organizer),
+                organizer != null ? new List<Pawn> { organizer } : null,
                 forcedForRole,
                 extraInfoText: EverflowerRitualDialogUtility.ExtraInfoText(this, targetInfo),
                 selectedPawn: selectedPawn);

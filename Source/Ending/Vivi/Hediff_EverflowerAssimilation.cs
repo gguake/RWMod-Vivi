@@ -122,7 +122,8 @@ namespace VVRace
                 }
 
                 var rise = _startTick < 0 ? 1f : Mathf.Clamp01((now - _startTick) / (float)RiseTicks);
-                return Vector3.Lerp(_glideFrom, FloatOffset(now), EaseInOut(rise));
+                var floatOffset = new Vector3(0f, 0f, FloatHeight + BobHeight * Mathf.Sin(now * BobSpeed));
+                return Vector3.Lerp(_glideFrom, floatOffset, EaseInOut(rise));
             }
         }
 
@@ -265,12 +266,7 @@ namespace VVRace
             var a = BodyPoint;
             var b = BudPoint;
             a.y = b.y = AltitudeLayer.MoteOverheadLow.AltitudeFor();
-            ApocryphaGimmicks.DrawSoulLink(a, b, LinkWidth, color);
-        }
-
-        private static Vector3 FloatOffset(int now)
-        {
-            return new Vector3(0f, 0f, FloatHeight + BobHeight * Mathf.Sin(now * BobSpeed));
+            SoulLinkRenderer.Draw(a, b, LinkWidth, color);
         }
 
         private static float EaseInOut(float t)

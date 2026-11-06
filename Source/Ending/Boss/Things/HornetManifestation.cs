@@ -16,7 +16,7 @@ namespace VVRace
     }
 
     // 보스전 거대 말벌 소환 연출: 땅(멸망꽃이면 꽃)에서 검은 기운이 피어올라 말벌 형체를 빚고, 다 빚어지면 실제 말벌로 바뀐다.
-    // 아스포델 등장 연출(ApocryphaManifestation)의 VV_Manifest 재질과 검은 입자를 작은 규모로 다시 쓴다.
+    // 아스포델 등장 연출과 ManifestationRenderer의 VV_Manifest 재질을 공유하고 검은 입자는 작은 규모로 다시 쓴다.
     [StaticConstructorOnStartup]
     public class HornetManifestation : Thing
     {
@@ -43,9 +43,6 @@ namespace VVRace
         private const float WideningCells = 4f;
 
         private static readonly Color DarkSparkColor = new Color(0.9f, 0.18f, 0.7f, 1f);
-        private static readonly int ProgressId = Shader.PropertyToID("_Progress");
-        private static readonly int RevealId = Shader.PropertyToID("_Reveal");
-        private static readonly MaterialPropertyBlock PropertyBlock = new MaterialPropertyBlock();
 
         private int _startTick = -1;
         private HornetSummonRole _role = HornetSummonRole.Assault;
@@ -181,7 +178,9 @@ namespace VVRace
             if (!_begun)
             {
                 _begun = true;
-                VVEffecterDefOf.VV_Effecter_HornetManifestBegin?.Spawn(_sourcePos.ToIntVec3(), Map, SourceOffset).Cleanup();
+                var sourceCell = _sourcePos.ToIntVec3();
+                var sourceOffset = (_sourcePos - sourceCell.ToVector3Shifted()).Yto0();
+                VVEffecterDefOf.VV_Effecter_HornetManifestBegin?.Spawn(sourceCell, Map, sourceOffset).Cleanup();
             }
 
             if (age >= DurationTicks)
@@ -192,8 +191,6 @@ namespace VVRace
 
             ThrowWisps(age / 60f);
         }
-
-        private Vector3 SourceOffset => (_sourcePos - _sourcePos.ToIntVec3().ToVector3Shifted()).Yto0();
 
         private void Complete()
         {
@@ -321,22 +318,12 @@ namespace VVRace
             if (progress <= 0f) { return; }
 
             var graphicData = VVPawnKindDefOf.VV_TitanicHornet.lifeStages[0].bodyGraphicData;
-            var suffix = _rot == Rot4.North ? "_north" : (_rot == Rot4.South ? "_south" : "_east");
-            var material = ApocryphaManifestation.GetMaterial(graphicData.texPath + suffix);
-            if (material == null) { return; }
-
             var pos = BodyPos(secs);
             pos.y = AltitudeLayer.Pawn.AltitudeFor();
             var scale = graphicData.drawSize.x * Mathf.Lerp(GatherStartScale, 1f, progress);
+            var reveal = Mathf.SmoothStep(0f, 1f, Mathf.InverseLerp(RevealStartSecs, RevealEndSecs, secs));
 
-            PropertyBlock.Clear();
-            PropertyBlock.SetFloat(ShaderPropertyIDs.AgeSecs, secs);
-            PropertyBlock.SetFloat(ProgressId, progress);
-            PropertyBlock.SetFloat(RevealId, Mathf.SmoothStep(0f, 1f, Mathf.InverseLerp(RevealStartSecs, RevealEndSecs, secs)));
-
-            var mesh = _rot == Rot4.West ? MeshPool.plane10Flip : MeshPool.plane10;
-            var matrix = Matrix4x4.TRS(pos, Quaternion.identity, new Vector3(scale, 1f, scale));
-            Graphics.DrawMesh(mesh, matrix, material, 0, null, 0, PropertyBlock);
+            ManifestationRenderer.Draw(graphicData.texPath, _rot, pos, scale, ageSecs: secs, progress: progress, reveal: reveal);
         }
 
         #endregion

@@ -137,7 +137,7 @@ namespace VVRace
             if (IsChanneling && TryGetStealTarget(out _, out _, out var everflower))
             {
                 var flowerPos = everflower.DrawPos + everflower.EverflowerComp.RitualEffecterOffset;
-                ApocryphaGimmicks.DrawSoulLink(flowerPos, _comp.BodyCenter, 0.9f, BeamColor);
+                SoulLinkRenderer.Draw(flowerPos, _comp.BodyCenter, 0.9f, BeamColor);
             }
         }
 

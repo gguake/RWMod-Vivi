@@ -18,10 +18,5 @@
         {
             return stage >= ViviEndingStage.Siege && stage <= ViviEndingStage.Coronation;
         }
-
-        public static bool IsFinishedStage(this ViviEndingStage stage)
-        {
-            return stage == ViviEndingStage.Completed || stage == ViviEndingStage.Failed;
-        }
     }
 }

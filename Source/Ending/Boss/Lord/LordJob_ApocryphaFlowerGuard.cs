@@ -41,31 +41,25 @@ namespace VVRace
 
         public Thing GetGuardedFlower(Pawn pawn)
         {
-            RestoreFromDuty(pawn);
-            return _guardedFlowers.TryGetValue(pawn, out var flower) && IsGuardableFlower(flower) ? flower : null;
-        }
-
-        // 저장되지 않는 꽃 목록은 불러온 뒤 경비 듀티의 대상에서 복원한다.
-        private void RestoreFromDuty(Pawn pawn)
-        {
-            if (_guardedFlowers.ContainsKey(pawn)) { return; }
-
-            var duty = pawn.mindState?.duty;
-            if (duty != null && duty.def == VVDutyDefOf.VV_TitanicHornetFlowerGuard && duty.focus.Thing != null)
+            // 저장되지 않는 꽃 목록은 불러온 뒤 경비 듀티의 대상에서 복원한다.
+            if (!_guardedFlowers.TryGetValue(pawn, out var flower))
             {
-                _guardedFlowers[pawn] = duty.focus.Thing;
+                var duty = pawn.mindState?.duty;
+                if (duty != null && duty.def == VVDutyDefOf.VV_TitanicHornetFlowerGuard && duty.focus.Thing != null)
+                {
+                    flower = duty.focus.Thing;
+                    _guardedFlowers[pawn] = flower;
+                }
             }
+
+            return flower is Building_ApocryphaFlower && flower.Spawned && _boss != null && flower.Map == _boss.Map
+                ? flower : null;
         }
 
         public override IntVec3 GetGuardPoint(Pawn pawn)
         {
             var flower = GetGuardedFlower(pawn);
             return flower != null ? flower.Position : pawn.Position;
-        }
-
-        private bool IsGuardableFlower(Thing flower)
-        {
-            return flower is Building_ApocryphaFlower && flower.Spawned && _boss != null && flower.Map == _boss.Map;
         }
 
         public override bool ValidateAttackTarget(Pawn searcher, Thing target)

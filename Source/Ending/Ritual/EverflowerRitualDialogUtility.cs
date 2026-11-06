@@ -63,10 +63,5 @@ namespace VVRace
                 return !forcedForRole.NullOrEmpty() && forcedForRole.ContainsValue(pawn);
             };
         }
-
-        public static List<Pawn> RequiredPawns(Pawn organizer)
-        {
-            return organizer != null ? new List<Pawn> { organizer } : null;
-        }
     }
 }

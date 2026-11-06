@@ -17,8 +17,8 @@ namespace VVRace
             var quest = ViviEndingQuest.Current;
             if (quest == null) { return; }
 
-            var anchor = GetSpawnedAnchor(quest, pawn.Map);
-            if (anchor == null) { return; }
+            var anchor = quest.AnchorEverflower;
+            if (anchor == null || !anchor.Spawned || anchor.Map != pawn.Map) { return; }
 
             var compEverflower = anchor.EverflowerComp;
             var level = compEverflower.AttunementLevel;
@@ -34,14 +34,6 @@ namespace VVRace
             {
                 GiveOrRefreshBlessing(pawn);
             }
-        }
-
-        private static ArcanePlant_Everflower GetSpawnedAnchor(ViviEndingQuest quest, Map map)
-        {
-            var anchor = quest.AnchorEverflower;
-            if (map == null || anchor == null || !anchor.Spawned || anchor.Map != map) { return null; }
-
-            return anchor;
         }
 
         private static void MaintainReverberation(Pawn pawn, float severity)

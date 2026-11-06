@@ -664,7 +664,12 @@ namespace VVRace
             var t = Mathf.Clamp01((now - _stateStartTick) / (float)Mathf.Max(1, _scatterTicks));
             var eased = t * t * (3f - 2f * t);
 
-            GetScatterCurve(out var p0, out var c1, out var c2, out var p3);
+            var p0 = _scatterFrom;
+            var p3 = _scatterTo;
+            var inDir = (_plantTip - _scatterTo).Yto0();
+            inDir = inDir.sqrMagnitude > 0.0001f ? inDir.normalized : Vector3.forward;
+            var c1 = p0 + _scatterOut * ScatterOutWeight + new Vector3(0f, 0f, ScatterLift);
+            var c2 = p3 - inDir * ScatterInWeight + new Vector3(0f, 0f, ScatterLift * 0.5f);
             _pos = Bezier(p0, c1, c2, p3, eased);
 
             var travel = BezierDerivative(p0, c1, c2, p3, eased).Yto0();
@@ -677,18 +682,6 @@ namespace VVRace
             {
                 Plant(now);
             }
-        }
-
-        private void GetScatterCurve(out Vector3 p0, out Vector3 c1, out Vector3 c2, out Vector3 p3)
-        {
-            p0 = _scatterFrom;
-            p3 = _scatterTo;
-
-            var inDir = (_plantTip - _scatterTo).Yto0();
-            inDir = inDir.sqrMagnitude > 0.0001f ? inDir.normalized : Vector3.forward;
-
-            c1 = p0 + _scatterOut * ScatterOutWeight + new Vector3(0f, 0f, ScatterLift);
-            c2 = p3 - inDir * ScatterInWeight + new Vector3(0f, 0f, ScatterLift * 0.5f);
         }
 
         private void TickPlanted(int now)
@@ -921,7 +914,10 @@ namespace VVRace
                     aimDuration = _aimTicks / 60f;
                 }
 
-                ApocryphaNeedleRenderer.DrawLane(_laneStart, _laneDir, _laneLength, HalfWidth * 2f, progress, alpha, bossInLane, _breach, aimSecs, aimDuration, thingIDNumber);
+                ApocryphaNeedleRenderer.DrawLane(
+                    start: _laneStart, direction: _laneDir, length: _laneLength, width: HalfWidth * 2f,
+                    progress: progress, alpha: alpha, bossInside: bossInLane, breach: _breach,
+                    aimSecs: aimSecs, aimDuration: aimDuration, seed: thingIDNumber);
             }
 
             var warpAge = GenTicks.TicksGame - _fireTick;

@@ -1,4 +1,6 @@
 ﻿using RimWorld;
+using System.Collections.Generic;
+using System.Linq;
 using Verse;
 
 namespace VVRace
@@ -41,9 +43,18 @@ namespace VVRace
 
     public static class GoldenBloomUtility
     {
-        public static GameCondition_GoldenBloom GetActiveCondition(Map map)
+        public static IEnumerable<GameCondition_GoldenBloom> EndingConditions(Map map)
         {
-            return map?.gameConditionManager.GetActiveCondition(VVGameConditionDefOf.VV_GoldenBloom) as GameCondition_GoldenBloom;
+            var conditions = map?.gameConditionManager.ActiveConditions;
+            if (conditions == null) { yield break; }
+
+            for (int i = 0; i < conditions.Count; ++i)
+            {
+                if (conditions[i] is GameCondition_GoldenBloom condition && condition.fromEnding)
+                {
+                    yield return condition;
+                }
+            }
         }
 
         public static bool IsActive(Map map)
@@ -59,7 +70,7 @@ namespace VVRace
         public static bool IsHeldByEnding(Map map)
         {
             var quest = ViviEndingQuest.Current;
-            return quest != null && quest.IsEndingActive && GetActiveCondition(map)?.fromEnding == true;
+            return quest != null && quest.IsEndingActive && EndingConditions(map).Any();
         }
     }
 }

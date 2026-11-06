@@ -4,15 +4,13 @@ namespace VVRace
 {
     public class Hediff_ApocryphaStuckNeedle : HediffWithComps
     {
-        private CompApocrypha BossComp => pawn?.TryGetComp<CompApocrypha>();
-
         public override string SeverityLabel => null;
 
         public override string TipStringExtra
         {
             get
             {
-                var comp = BossComp;
+                var comp = pawn?.TryGetComp<CompApocrypha>();
                 var tip = base.TipStringExtra;
                 if (comp == null) { return tip; }
 

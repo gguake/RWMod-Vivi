@@ -22,7 +22,7 @@ namespace VVRace
             var resonator = ViviEndingUtility.ResonatorOf(everflower);
             var missiveLabel = LocalizeString_Letter.VV_Letter_EndingFederationMissiveLabel.Translate();
             var missiveText = ViviEndingUtility.TranslateWithResonator(LocalizeString_Letter.VV_Letter_EndingFederationMissive, resonator).Resolve()
-                + "\n\n" + ViviEndingRequirements.LetterText();
+                + "\n\n" + LocalizeString_Letter.VV_Letter_EndingFederationMissiveConditions.Translate().Resolve();
 
             slate.Set("resolvedQuestName", missiveLabel.Resolve());
             slate.Set("resolvedQuestDescription", missiveText + "\n\n" + LocalizeString_Etc.VV_Quest_EndingMissiveGoals.Translate().Resolve());

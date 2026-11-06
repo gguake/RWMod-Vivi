@@ -32,7 +32,7 @@ namespace VVRace
                 if (attacker == null || _comp.Phase != ApocryphaPhase.Bound || GenTicks.TicksGame > _rangedAttackerUntilTick) { return null; }
                 if (attacker.Destroyed || !attacker.Spawned || attacker.Map != Pawn.Map) { return null; }
                 if (attacker is Pawn pawn && (pawn.Dead || pawn.Downed)) { return null; }
-                if (!IsHostileSide(attacker)) { return null; }
+                if (!Pawn.HostileTo(attacker)) { return null; }
 
                 return attacker;
             }
@@ -95,7 +95,7 @@ namespace VVRace
                 return;
             }
 
-            if (!IsHostileSide(instigator)) { return; }
+            if (!Pawn.HostileTo(instigator)) { return; }
             if (instigator != _rangedAttacker && IsTarget(instigator, Props.shellRange)) { return; }
 
             _rangedAttacker = instigator;
@@ -226,11 +226,6 @@ namespace VVRace
             return false;
         }
 
-        private bool IsHostileSide(Thing target)
-        {
-            return Pawn.HostileTo(target);
-        }
-
         private bool IsTarget(Thing thing, float range)
         {
             if (thing == null || !thing.Spawned || thing.Map != Pawn.Map) { return false; }
@@ -242,7 +237,7 @@ namespace VVRace
         {
             if (target == Pawn || target.Dead || target.Downed || target.IsPsychologicallyInvisible()) { return false; }
             if ((target.Position - origin).LengthHorizontalSquared > range * range) { return false; }
-            if (!IsHostileSide(target)) { return false; }
+            if (!Pawn.HostileTo(target)) { return false; }
 
             return GenSight.LineOfSight(origin, target.Position, Pawn.Map, skipFirstCell: true);
         }
@@ -252,7 +247,7 @@ namespace VVRace
             if (building.Destroyed) { return false; }
             if (!(building is Building_Turret) && !(building is ArcanePlant_Turret)) { return false; }
             if ((building.Position - origin).LengthHorizontalSquared > range * range) { return false; }
-            if (!IsHostileSide(building)) { return false; }
+            if (!Pawn.HostileTo(building)) { return false; }
 
             return GenSight.LineOfSightToThing(origin, building, Pawn.Map, skipFirstCell: true);
         }

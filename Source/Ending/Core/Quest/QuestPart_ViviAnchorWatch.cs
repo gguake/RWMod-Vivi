@@ -70,13 +70,9 @@ namespace VVRace
                 }
             }
 
-            GameCondition_GoldenBloom existing = null;
-            foreach (var condition in map.gameConditionManager.ActiveConditions.OfType<GameCondition_GoldenBloom>())
-            {
-                if (condition.fromEnding) { return; }
+            if (GoldenBloomUtility.EndingConditions(map).Any()) { return; }
 
-                existing = existing ?? condition;
-            }
+            var existing = map.gameConditionManager.ActiveConditions.OfType<GameCondition_GoldenBloom>().FirstOrDefault();
 
             if (existing != null)
             {

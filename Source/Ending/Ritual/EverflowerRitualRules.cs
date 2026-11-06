@@ -16,11 +16,6 @@ namespace VVRace
             return ritual != null && (ritual.def == VVPreceptDefOf.VV_GrandAttunement || ritual.def == VVPreceptDefOf.VV_QueensCoronation);
         }
 
-        public static bool IsCoronationRitual(Precept_Ritual ritual)
-        {
-            return ritual != null && ritual.def == VVPreceptDefOf.VV_QueensCoronation;
-        }
-
         public static string GetBlockReason(ArcanePlant_Everflower everflower, Precept_Ritual ritual)
         {
             if (everflower == null) { return null; }
@@ -36,7 +31,8 @@ namespace VVRace
             }
 
             // 토벌 직후 대관식을 진행할 수 있도록 재사용 대기를 무시한다. 단계 조건은 대상 필터에서 검사한다.
-            if (IsCoronationRitual(ritual) && GetCoronationBlockReason(everflower) == null) { return null; }
+            if (ritual != null && ritual.def == VVPreceptDefOf.VV_QueensCoronation
+                && GetCoronationBlockReason(everflower) == null) { return null; }
 
             if (everflower.HasRitualCooldown)
             {
@@ -90,12 +86,6 @@ namespace VVRace
             }
 
             return null;
-        }
-
-        public static bool ShouldBlockManawaveRaids(Map map)
-        {
-            var quest = ViviEndingQuest.Current;
-            return quest != null && quest.ShouldSuppressThreats(map);
         }
     }
 }
