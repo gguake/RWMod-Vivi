@@ -105,10 +105,11 @@ namespace VVRace
         }
 
         // 둥지 부화기에서 깬 아기는 둥지 무리에 든다. 둥지 안 일이라 플레이어에게 알리지 않는다.
+        // 무리가 이미 떠나기 시작했으면 두고 간다: 떠나는 어른은 맵 나가기 잡을 끝까지 하므로 새로 든 아기를 데리러 오지 않는다.
         public static void Notify_NestBabyHatched(Pawn baby, Thing hatchery)
         {
             var nest = GetNestLordJob(hatchery.Map, baby.Faction);
-            if (nest == null) { return; }
+            if (nest == null || nest.lord.CurLordToil is LordToil_ViviNestExit) { return; }
 
             RemoveChemicalDependencies(baby);
             nest.lord.AddPawn(baby);
