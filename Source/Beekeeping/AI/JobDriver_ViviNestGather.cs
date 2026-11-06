@@ -116,8 +116,7 @@ namespace VVRace
                 var extension = pollen.def.GetModExtension<GatherableFilthExtension>();
                 if (extension != null)
                 {
-                    var amount = Mathf.Max(1f, extension.amount * Mathf.Clamp(pawn.GetStatValue(extension.yieldStat), 0.1f, 2.0f));
-                    BeekeepingUtility.MakeStacks(extension.thingDef, GenMath.RoundRandom(amount), _tmpProducts);
+                    BeekeepingUtility.MakeStacks(extension.thingDef, GenMath.RoundRandom(extension.YieldFor(pawn)), _tmpProducts);
                 }
                 Pawn_FilthTracker_ReversePatch.ThinCarriedFilth(filth, pollen);
             }

@@ -30,7 +30,7 @@ namespace VVRace
             var extension = def.GetModExtension<GatherableFilthExtension>();
             if (extension != null)
             {
-                var stackCount = Mathf.Max(1, extension.amount * Mathf.Clamp(gatherer.GetStatValue(extension.yieldStat), 0.1f, 2.0f));
+                var stackCount = extension.YieldFor(gatherer);
                 var actualStackCount = (int)stackCount + (Rand.Chance(stackCount - (int)stackCount) ? 1 : 0);
                 if (actualStackCount > 0)
                 {
