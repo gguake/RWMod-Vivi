@@ -1,7 +1,6 @@
 ﻿using RimWorld;
 using Verse;
 using Verse.AI;
-using Verse.AI.Group;
 
 namespace VVRace
 {
@@ -10,33 +9,29 @@ namespace VVRace
     {
         protected override Job TryGiveJob(Pawn pawn)
         {
-            if (!(pawn.GetLord()?.LordJob is LordJob_ViviNest nest) || !nest.Settled) { return null; }
+            var nest = pawn.GetNestLordJob();
+            if (nest == null || !nest.Settled) { return null; }
 
-            var thing = FirstUnloadable(pawn);
+            // 지닌 것 중 첫 물건(폰 제외)
+            var inventory = pawn.inventory?.innerContainer;
+            if (inventory == null) { return null; }
+
+            Thing thing = null;
+            for (int i = 0; i < inventory.Count; ++i)
+            {
+                if (inventory[i].def.category == ThingCategory.Item && !(inventory[i] is Pawn))
+                {
+                    thing = inventory[i];
+                    break;
+                }
+            }
             if (thing == null) { return null; }
 
             if (!nest.Stock.TryFindStorageCellFor(thing, pawn, ViviNestStorageRank.None, out var cell)) { return null; }
 
             var job = JobMaker.MakeJob(VVJobDefOf.VV_ViviNestUnload, cell, thing);
-            job.count = Mathf.Min(thing.stackCount, nest.Stock.StorableCount(cell, thing));
+            job.count = nest.Stock.StorableCount(cell, thing);
             return job;
-        }
-
-        public static Thing FirstUnloadable(Pawn pawn)
-        {
-            var inventory = pawn.inventory?.innerContainer;
-            if (inventory == null) { return null; }
-
-            for (int i = 0; i < inventory.Count; ++i)
-            {
-                var thing = inventory[i];
-                if (thing.def.category == ThingCategory.Item && !(thing is Pawn))
-                {
-                    return thing;
-                }
-            }
-
-            return null;
         }
     }
 }

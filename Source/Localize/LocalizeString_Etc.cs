@@ -57,6 +57,9 @@
         public const string VV_ModSettings_RandomGenesForStartingVivi = nameof(VV_ModSettings_RandomGenesForStartingVivi);
         public const string VV_ModSettings_RandomGenesForStartingViviDesc = nameof(VV_ModSettings_RandomGenesForStartingViviDesc);
 
+        public const string VV_ModSettings_WildViviNestMaxMembers = nameof(VV_ModSettings_WildViviNestMaxMembers);
+        public const string VV_ModSettings_WildViviNestMaxMembersDesc = nameof(VV_ModSettings_WildViviNestMaxMembersDesc);
+
         public const string VV_ModSettings_EnableViviMealContinuation = nameof(VV_ModSettings_EnableViviMealContinuation);
         public const string VV_ModSettings_EnableViviMealContinuationDesc = nameof(VV_ModSettings_EnableViviMealContinuationDesc);
 

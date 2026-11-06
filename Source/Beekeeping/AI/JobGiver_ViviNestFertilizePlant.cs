@@ -28,7 +28,7 @@ namespace VVRace
             if (nest.Stock.CountOf(VVThingDefOf.VV_Fertilizer) <= 0) { return null; }
 
             // 밤이거나 바깥이 위험하면 바깥 일은 하지 않는다: 방 안 식물에 방 안 비료만 준다.
-            var indoorOnly = IndoorOnly(pawn);
+            var indoorOnly = BeekeepingUtility.OutdoorWorkPaused(pawn);
             var plant = FindPlant(pawn, nest, indoorOnly, AvailableFertilizer(pawn, nest));
             if (plant == null) { return null; }
 
@@ -42,8 +42,6 @@ namespace VVRace
 
             return fertilizer != null ? JobMaker.MakeJob(VVJobDefOf.VV_ViviNestFertilizePlant, plant, fertilizer) : null;
         }
-
-        public static bool IndoorOnly(Pawn pawn) => JobGiver_ViviNestRest.IsNight(pawn) || BeekeepingUtility.OutdoorDangerous(pawn.Map);
 
         public static bool IsUsableFertilizer(Thing thing, Pawn pawn, LordJob_ViviNest nest, bool indoorOnly)
         {

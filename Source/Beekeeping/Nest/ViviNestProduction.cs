@@ -106,7 +106,6 @@ namespace VVRace
 
         // 둥지 채집 범위의 중심(둥지 방 한가운데 칸)
         public IntVec3 GatherCenter => _owner.NestCell;
-        public bool InGatherRange(IntVec3 cell) => cell.InHorDistOf(GatherCenter, GatherRadius);
         // 바닥 작업 자리들. 사라진 자리는 생산 주기마다 빼므로 그사이에는 Spawned를 보고 쓴다.
         public IReadOnlyList<Building_WorkTable> WorkSpots => _workSpots;
 
@@ -235,17 +234,27 @@ namespace VVRace
 
         public int WorkSpotTarget()
         {
+            var workers = CountMembers(p =>
+            {
+                var stage = p.DevelopmentalStage;
+                return !stage.Baby() && !stage.Newborn();
+            });
+            return UnityEngine.Mathf.Max(1, (workers + WorkersPerWorkSpot - 1) / WorkersPerWorkSpot);
+        }
+
+        // 조건에 맞는 구성원 수
+        private int CountMembers(System.Predicate<Pawn> match)
+        {
             var pawns = _owner.lord?.ownedPawns;
-            var workers = 0;
+            var count = 0;
             if (pawns != null)
             {
                 for (int i = 0; i < pawns.Count; ++i)
                 {
-                    var stage = pawns[i].DevelopmentalStage;
-                    if (!stage.Baby() && !stage.Newborn()) { workers++; }
+                    if (match(pawns[i])) { count++; }
                 }
             }
-            return UnityEngine.Mathf.Max(1, (workers + WorkersPerWorkSpot - 1) / WorkersPerWorkSpot);
+            return count;
         }
 
         // 누가 쓰고 있거나(바닐라 지시서 잡은 자리를 예약한다) 만들다 만 것이 걸린 자리
@@ -259,22 +268,23 @@ namespace VVRace
             return false;
         }
 
-        // 방 안, 상호작용 칸까지 방 안에 들어가는 빈 칸(CanPlaceSpot)에 둔다. 다른 자리의 상호작용 칸과 겹치지 않게 하고,
+        // 방 안, 상호작용 칸까지 방 안에 들어가는 빈 칸(CanPlaceSpotCell)에 둔다. 다른 자리의 상호작용 칸과 겹치지 않게 하고,
         // 선반·화분·부화기가 쓰는 벽 쪽 칸을 남기려고 자리와 상호작용 칸이 벽에 붙지 않은 칸을 먼저 쓴다(없으면 벽 쪽 칸).
         private bool TryPlaceWorkSpot()
         {
             var def = VVThingDefOf.VV_ViviNestWorkSpot;
+            var map = Map;
             var fallback = IntVec3.Invalid;
             foreach (var room in _owner.Territory.Rooms)
             {
                 foreach (var cell in room.Cells)
                 {
-                    if (!CanPlaceSpot(def, cell)) { continue; }
-
-                    var interaction = ThingUtility.InteractionCellWhenAt(def, cell, Rot4.South, Map);
+                    // 자리 칸과 상호작용 칸이 모두 쓸 수 있는 방 칸
+                    var interaction = ThingUtility.InteractionCellWhenAt(def, cell, Rot4.South, map);
+                    if (!CanPlaceSpotCell(cell) || !CanPlaceSpotCell(interaction)) { continue; }
                     if (IsWorkSpotInteractionCell(cell) || IsWorkSpotInteractionCell(interaction)) { continue; }
 
-                    if (!TouchesWall(cell) && !TouchesWall(interaction))
+                    if (!BeekeepingUtility.TouchesWall(cell, map) && !BeekeepingUtility.TouchesWall(interaction, map))
                     {
                         PlaceWorkSpot(cell);
                         return true;
@@ -288,18 +298,6 @@ namespace VVRace
             return true;
         }
 
-        private bool TouchesWall(IntVec3 cell)
-        {
-            var map = Map;
-            foreach (var dir in GenAdj.CardinalDirections)
-            {
-                var adj = cell + dir;
-                var edifice = adj.InBounds(map) ? adj.GetEdifice(map) : null;
-                if (edifice != null && edifice.def.passability == Traversability.Impassable) { return true; }
-            }
-            return false;
-        }
-
         private void PlaceWorkSpot(IntVec3 cell)
         {
             var spot = (Building_WorkTable)ThingMaker.MakeThing(VVThingDefOf.VV_ViviNestWorkSpot);
@@ -308,17 +306,18 @@ namespace VVRace
 
             foreach (var recipe in WorkRecipes)
             {
-                AddBill(spot, recipe);
+                if (recipe == null) { continue; }
+
+                var bill = recipe.MakeNewBill();
+                if (bill is Bill_Production production)
+                {
+                    production.repeatMode = BillRepeatModeDefOf.Forever;
+                    production.SetStoreMode(BillStoreModeDefOf.DropOnFloor);
+                }
+                spot.BillStack.AddBill(bill);
             }
             _workSpots.Add(spot);
             _spotInteractionCellsDirty = true;
-        }
-
-        // 자리 칸과 상호작용 칸이 모두 쓸 수 있는 방 칸
-        private bool CanPlaceSpot(ThingDef def, IntVec3 cell)
-        {
-            var interaction = ThingUtility.InteractionCellWhenAt(def, cell, Rot4.South, Map);
-            return CanPlaceSpotCell(cell) && CanPlaceSpotCell(interaction);
         }
 
         private bool CanPlaceSpotCell(IntVec3 c)
@@ -329,23 +328,10 @@ namespace VVRace
             if (c.GetEdifice(map) != null) { return false; }
             foreach (var thing in c.GetThingList(map))
             {
-                if (thing is Building || thing is Pawn || thing.def.IsBlueprint || thing.def.IsFrame) { return false; }
+                if (BeekeepingUtility.IsStructure(thing) || thing is Pawn) { return false; }
                 if (thing.def.category == ThingCategory.Item) { return false; }
             }
             return !_owner.Territory.IsBesideBorderDoor(c);
-        }
-
-        private static void AddBill(Building_WorkTable table, RecipeDef recipe)
-        {
-            if (recipe == null) { return; }
-
-            var bill = recipe.MakeNewBill();
-            if (bill is Bill_Production production)
-            {
-                production.repeatMode = BillRepeatModeDefOf.Forever;
-                production.SetStoreMode(BillStoreModeDefOf.DropOnFloor);
-            }
-            table.BillStack.AddBill(bill);
         }
 
         private static Bill FindBill(Building_WorkTable table, RecipeDef recipe)
@@ -391,9 +377,10 @@ namespace VVRace
 
             AllocateWorkBills();
 
+            // 바닐라 지시서 워크기버는 위에서부터 고르므로 모자란 것부터 오게 다시 늘어놓는다(삽입 정렬이라 같으면 원래 순서).
             for (int i = 0; i < _workSpots.Count; ++i)
             {
-                SortBills(_workSpots[i]);
+                _workSpots[i]?.BillStack.Bills.InsertionSort((a, b) => NeedOf(b).CompareTo(NeedOf(a)));
             }
         }
 
@@ -505,24 +492,19 @@ namespace VVRace
             return (shortfall + perBatch - 1) / perBatch;
         }
 
-        // 그 지시서로 지금 일하는 구성원(바닐라 지시서 잡)
-        private Pawn WorkerOn(Bill bill, Pawn except)
-        {
-            var pawns = _owner.lord?.ownedPawns;
-            if (pawns == null) { return null; }
-
-            for (int i = 0; i < pawns.Count; ++i)
-            {
-                if (pawns[i] != except && pawns[i].CurJob?.bill == bill) { return pawns[i]; }
-            }
-            return null;
-        }
-
-        // 만들고 있는 지시서: 그 지시서로 일하는 구성원이 있거나 만들다 만 것이 걸려 있다.
+        // 만들고 있는 지시서: 그 지시서로 일하는 구성원(바닐라 지시서 잡)이 있거나 만들다 만 것이 걸려 있다.
         private bool InProgress(Bill bill, Pawn except = null)
         {
             if (bill is Bill_ProductionWithUft uftBill && uftBill.BoundWorker != null && uftBill.BoundWorker != except) { return true; }
-            return WorkerOn(bill, except) != null;
+
+            var pawns = _owner.lord?.ownedPawns;
+            if (pawns == null) { return false; }
+
+            for (int i = 0; i < pawns.Count; ++i)
+            {
+                if (pawns[i] != except && pawns[i].CurJob?.bill == bill) { return true; }
+            }
+            return false;
         }
 
         // 그 지시를 지금 만들고 있는 묶음 수(한 자리에서는 한 마리만 일하므로 자리마다 하나까지)
@@ -553,12 +535,6 @@ namespace VVRace
         public float NeedOf(Bill bill)
         {
             return bill != null && !bill.suspended && _billNeed.TryGetValue(bill.recipe, out var need) ? need : 0f;
-        }
-
-        // 바닐라 지시서 워크기버는 위에서부터 고르므로 모자란 것부터 오게 다시 늘어놓는다(삽입 정렬이라 같으면 원래 순서).
-        private void SortBills(Building_WorkTable table)
-        {
-            table?.BillStack.Bills.InsertionSort((a, b) => NeedOf(b).CompareTo(NeedOf(a)));
         }
 
         // 채집 잡 기버의 우선도: 채집 자원(꿀·꽃가루·프로폴리스) 중 가장 모자란 것의 모자란 정도
@@ -613,19 +589,7 @@ namespace VVRace
         // 둥지 비비가 실제로 준 양을 잰다.
         public float FertilizerPerDay()
         {
-            var perDay = _recentPlantFertilizer / FertilizerReserveDays;
-            var refuelables = Map.listerThings.ThingsInGroup(ThingRequestGroup.Refuelable);
-            for (int i = 0; i < refuelables.Count; ++i)
-            {
-                if (refuelables[i].Faction != _owner.Faction || JobGiver_ViviNestRefuel.IsStarvedSeedling(refuelables[i])) { continue; }
-
-                // 쓸 때만 태우는 것(대형 화분 등)은 하루 소모량을 알 수 없어 뺀다.
-                var props = refuelables[i].TryGetComp<CompRefuelable>()?.Props;
-                if (props == null || props.consumeFuelOnlyWhenUsed || props.externalTicking || !props.fuelFilter.Allows(VVThingDefOf.VV_Fertilizer)) { continue; }
-
-                perDay += props.fuelConsumptionRate / props.FuelMultiplierCurrentDifficulty;
-            }
-            return perDay;
+            return FuelPerDay(VVThingDefOf.VV_Fertilizer, (nest, t) => JobGiver_ViviNestRefuel.IsStarvedSeedling(t), _recentPlantFertilizer / FertilizerReserveDays);
         }
 
         // 원목 비축 목표(나무 베기 잡 기버와 보유량 균형이 함께 쓴다)
@@ -637,15 +601,21 @@ namespace VVRace
         // 둥지가 하루에 태우는 원목: 원목을 연료로 쓰는 둥지 것(냉각기) 중 지금 연료를 채우는 것의 바닐라 연료 소모율.
         public float WoodPerDay()
         {
-            var perDay = 0f;
+            return FuelPerDay(ThingDefOf.WoodLog, (nest, t) => JobGiver_ViviNestRefuel.IsIdleCooler(nest, t), 0f);
+        }
+
+        // perDay에 그 연료를 태우는 둥지 것(skip 제외)의 하루 연료 소모(바닐라 연료 소모율)를 더한다(덧셈 순서는 perDay부터).
+        private float FuelPerDay(ThingDef fuel, System.Func<LordJob_ViviNest, Thing, bool> skip, float perDay)
+        {
             var refuelables = Map.listerThings.ThingsInGroup(ThingRequestGroup.Refuelable);
             for (int i = 0; i < refuelables.Count; ++i)
             {
                 var thing = refuelables[i];
-                if (thing.Faction != _owner.Faction || JobGiver_ViviNestRefuel.IsIdleCooler(_owner, thing)) { continue; }
+                if (thing.Faction != _owner.Faction || skip(_owner, thing)) { continue; }
 
+                // 쓸 때만 태우는 것(대형 화분 등)은 하루 소모량을 알 수 없어 뺀다.
                 var props = thing.TryGetComp<CompRefuelable>()?.Props;
-                if (props == null || props.consumeFuelOnlyWhenUsed || props.externalTicking || !props.fuelFilter.Allows(ThingDefOf.WoodLog)) { continue; }
+                if (props == null || props.consumeFuelOnlyWhenUsed || props.externalTicking || !props.fuelFilter.Allows(fuel)) { continue; }
 
                 perDay += props.fuelConsumptionRate / props.FuelMultiplierCurrentDifficulty;
             }
@@ -711,28 +681,18 @@ namespace VVRace
             return perUnit > 0f ? UnityEngine.Mathf.Max(HoneyCapacity, UnityEngine.Mathf.CeilToInt(FoodPerDay() * winterDays / perUnit)) : HoneyCapacity;
         }
 
-        public int MembersNeedingCostume()
-        {
-            var pawns = _owner.lord?.ownedPawns;
-            var count = 0;
-            if (pawns != null)
-            {
-                for (int i = 0; i < pawns.Count; ++i)
-                {
-                    if (NeedsCostume(pawns[i])) { count++; }
-                }
-            }
-            return count;
-        }
+        public int MembersNeedingCostume() => CountMembers(p => NeedsCostume(p));
 
-        // 어른 일반 비비는 기본옷을 입는다(로열·아이는 처음 입고 온 옷을 그대로 쓴다).
+        // 어른 일반 비비는 기본옷 자리(기본옷과 함께 입을 수 없는 옷)가 비었거나 낡았으면(내구도 40% 미만) 기본옷이 필요하다(로열·아이는 처음 입고 온 옷을 그대로 쓴다).
+        // 둥지 둘레에서 주워 입은 옷(JobGiver_ViviNestDress)이 그 자리를 채우면 기본옷을 따로 만들지 않는다.
         public static bool NeedsCostume(Pawn pawn)
         {
             if (!pawn.DevelopmentalStage.Adult() || pawn.IsRoyalVivi() || pawn.apparel == null) { return false; }
 
+            var costume = VVThingDefOf.VV_BasicWorkerCostume;
             foreach (var apparel in pawn.apparel.WornApparel)
             {
-                if (apparel.def == VVThingDefOf.VV_BasicWorkerCostume && apparel.HitPoints >= apparel.MaxHitPoints * 0.4f)
+                if (!ApparelUtility.CanWearTogether(apparel.def, costume, pawn.RaceProps.body) && apparel.HitPoints >= apparel.MaxHitPoints * 0.4f)
                 {
                     return false;
                 }
@@ -740,19 +700,7 @@ namespace VVRace
             return true;
         }
 
-        public int SlingersNeedingWeapon()
-        {
-            var pawns = _owner.lord?.ownedPawns;
-            var count = 0;
-            if (pawns != null)
-            {
-                for (int i = 0; i < pawns.Count; ++i)
-                {
-                    if (NeedsSlingshot(pawns[i])) { count++; }
-                }
-            }
-            return count;
-        }
+        public int SlingersNeedingWeapon() => CountMembers(p => NeedsSlingshot(p));
 
         public static bool NeedsSlingshot(Pawn pawn)
         {

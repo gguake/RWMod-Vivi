@@ -220,7 +220,7 @@ namespace VVRace
             var roomCells = _territory.OwnedRoomCells.Count;
             var unroofed = 0;
             foreach (var _ in _planner.CellsNeedingRoof()) { unroofed++; }
-            var roomLost = !_territory.HasAnyRoom || (roomCells > 0 && unroofed * 2 >= roomCells);
+            var roomLost = _territory.Rooms.Count == 0 || (roomCells > 0 && unroofed * 2 >= roomCells);
             _roomLostSince = roomLost ? (_roomLostSince < 0 ? ticks : _roomLostSince) : -1;
 
             string reason = null;
@@ -320,13 +320,26 @@ namespace VVRace
             }
         }
 
-        // 둥지 비비가 쓸 수 있는 것: 둥지 물건, 둥지 세력·무소속 건물, 그 밖의 식물·폰 등. 플레이어 건물·물건은 쓰지 않는다.
+        // 둥지 비비가 쓸 수 있는 것: 둥지 물건, 둥지 둘레에 놓인 옷·무기(IsFreeGear), 둥지 세력·무소속 건물, 그 밖의 식물·폰 등. 그 밖의 플레이어 건물·물건은 쓰지 않는다.
         public bool CanUse(Thing thing)
         {
             if (thing is Pawn) { return true; }
-            if (thing.def.category == ThingCategory.Item) { return _stock.IsNestOwned(thing); }
+            if (thing.def.category == ThingCategory.Item) { return _stock.IsNestOwned(thing) || IsFreeGear(thing); }
             if (thing is Building building) { return building.Faction != Faction.OfPlayer || building is Building_Door; }
             return true;
+        }
+
+        // 둥지 둘레에 놓인 옷·무기(사용자 요구 "근처에 옷이나 장비가 있으면 입도록, 플레이어가 주변에 옷을 둬서 입게 유도 가능"): 정착 범위(24칸) 안 바닥의 것 중
+        // 보관 칸(플레이어 비축 구역·선반 등)에 있지 않고 바깥이나 둥지 방에 놓인 것. 정착민 방 바닥에 둔 것이나 비축한 것은 가져가지 않는다. 입고 드는 일은 JobGiver_ViviNestDress가 한다.
+        // 무기는 재료가 아닌 주무기만 본다. 원목은 근접 도구(몽둥이)가 있어 장비 칸이 주무기인 재료라, 재료를 빼지 않으면 바깥에 놓인 플레이어 원목을
+        // 둥지 비비가 건설·냉각기 연료 등에 마음대로 썼다(자동 시험 p2 L3: 플레이어 원목이 둥지 비비에게 금지가 아님).
+        public bool IsFreeGear(Thing thing)
+        {
+            if (!(thing is Apparel) && (thing.def.equipmentType != EquipmentType.Primary || thing.def.IsStuff)) { return false; }
+            if (!thing.Spawned || thing.Map != Map || !_territory.InWorkRange(thing.Position) || thing.IsInAnyStorage()) { return false; }
+
+            var room = thing.GetRoom();
+            return room == null || room.PsychologicallyOutdoors || _territory.IsNestRoomCell(thing.Position);
         }
 
         public void MarkOwned(Thing thing)
@@ -360,23 +373,13 @@ namespace VVRace
             var map = Map;
             var def = thing.def;
             MarkOwned(thing);
-            if (!GenPlace.TryPlaceThing(thing, center, map, ThingPlaceMode.Near, out var placed, extraValidator: c => !HasForeignStack(map, c, def)))
+            if (!GenPlace.TryPlaceThing(thing, center, map, ThingPlaceMode.Near, out var placed, extraValidator: c => !_stock.HasForeignStack(c, def)))
             {
                 return false;
             }
 
             MarkOwned(placed);
             return true;
-        }
-
-        private bool HasForeignStack(Map map, IntVec3 cell, ThingDef def)
-        {
-            var things = map.thingGrid.ThingsListAtFast(cell);
-            for (int i = 0; i < things.Count; ++i)
-            {
-                if (things[i].def == def && !_stock.IsNestOwned(things[i])) { return true; }
-            }
-            return false;
         }
 
         // 둥지 비비의 침대: 자기 세력 침대(바닐라 FindBedFor). 둥지 부화기는 알과 아기(아기 침대)만 쓰고 어린이는 둥지 방 바닥에서 잔다.
@@ -392,6 +395,26 @@ namespace VVRace
         // 잠자리는 편한 기온의 둥지 방에서 고른다. 증축 방에는 잔불꽃이 없어 겨울에 영하로 내려가는데 방을 가리지 않고 골랐더니,
         // 그 방에서 자던 아이가 동상으로 죽었다(장기 계측: 온대림 겨울, 증축 방 -12°C).
         public bool TryFindSleepSpot(Pawn pawn, out IntVec3 cell) => TryFindRoomCell(pawn, ComfortableRooms(pawn), out cell);
+
+        // 잠자리(밤잠·낮잠): 자기 세력 침대가 있으면 그 침대(FindBedFor), 없으면 편한 기온의 둥지 방 바닥 칸(TryFindSleepSpot)
+        public bool TryFindSleepTarget(Pawn pawn, out LocalTargetInfo target)
+        {
+            var bed = FindBedFor(pawn);
+            if (bed != null)
+            {
+                target = bed;
+                return true;
+            }
+
+            if (TryFindSleepSpot(pawn, out var cell))
+            {
+                target = cell;
+                return true;
+            }
+
+            target = LocalTargetInfo.Invalid;
+            return false;
+        }
 
         // 고른 둥지 방들 중 설 수 있고 건물이 없는 칸
         public bool TryFindRoomCell(Pawn pawn, IReadOnlyList<Room> rooms, out IntVec3 cell)

@@ -25,6 +25,8 @@ namespace VVRace
         // 증축 방이 서면 설계자가 하나를 그 방 화분으로 옮긴다(잔불꽃 없는 방 먼저, ViviNestPlanner.SpareRoomEmber). 예전에는 하나만 가져와 증축 방이
         // 남는 잔불꽃을 얻지 못하면 겨울에 바깥과 같이 얼었다(장기 계측 final_cold60b: 잔불꽃 없는 증축 방이 바깥 −31°C에 −30°C).
         private const int ColdLandEmberCount = 2;
+        // 둥지 둘레 바깥에 세울 포장 방출기 수(사용자 요구 "두어 개"). 방 안 방출기(초기 설비)와 따로 씨앗 자리를 넓힌다(ViviNestPlanner.FindOutdoorEmitterCell).
+        private const int OutdoorEmitterCount = 2;
 
         private static readonly FieldInfo FieldInfo_QueuedIncident_fireTick = AccessTools.Field(typeof(QueuedIncident), "fireTick");
 
@@ -38,7 +40,7 @@ namespace VVRace
             var map = (Map)parms.target;
             var faction = parms.faction;
 
-            var lure = FindLure(map, faction);
+            var lure = BeekeepingUtility.FindReservingLure(map, faction);
             if (lure == null)
             {
                 Messages.Message(LocalizeString_Message.VV_Message_ViviNestSettlersNoLure.Translate(), MessageTypeDefOf.NeutralEvent);
@@ -84,7 +86,8 @@ namespace VVRace
             GiveInitialStock(map, pawns);
 
             LordMaker.MakeNewLord(faction, new LordJob_ViviNest(faction, report.bestRoomCell), map, pawns);
-            lure.Notify_Settled();
+            // 정착이 시작되면 유인통은 할 일을 마친다. 세력은 이제 둥지 구성원이 붙잡고 있다.
+            lure.ResetAttraction(releaseFaction: false);
 
             Find.LetterStack.ReceiveLetter(
                 LocalizeString_Letter.VV_Letter_ViviNestSettlersLabel.Translate(),
@@ -106,20 +109,6 @@ namespace VVRace
                 lure.ResetAttraction(releaseFaction: true);
                 Messages.Message(reason, lure, MessageTypeDefOf.RejectInput, historical: false);
             }
-        }
-
-        private static Building_ViviLure FindLure(Map map, Faction faction)
-        {
-            var lures = map.listerBuildings.AllBuildingsColonistOfDef(VVThingDefOf.VV_ViviLure);
-            for (int i = 0; i < lures.Count; ++i)
-            {
-                if (lures[i] is Building_ViviLure lure && lure.Spawned && lure.ReservedFaction == faction)
-                {
-                    return lure;
-                }
-            }
-
-            return null;
         }
 
         private static void Fail(Building_ViviLure lure, string reason)
@@ -156,16 +145,21 @@ namespace VVRace
         private static void GiveInitialStock(Map map, List<Pawn> pawns)
         {
             var stock = new List<Thing>();
-            AddStock(stock, VVThingDefOf.VV_FilteredHoney, HoneyPerSettler * pawns.Count);
-            AddStock(stock, VVThingDefOf.VV_Vivicream, InitialVivicream);
-            AddStock(stock, VVThingDefOf.VV_Viviwax, InitialViviwax);
-            AddStock(stock, ThingDefOf.WoodLog, InitialWood);
-            AddStock(stock, VVThingDefOf.VV_Fertilizer, InitialFertilizer);
+            BeekeepingUtility.MakeStacks(VVThingDefOf.VV_FilteredHoney, HoneyPerSettler * pawns.Count, stock);
+            BeekeepingUtility.MakeStacks(VVThingDefOf.VV_Vivicream, InitialVivicream, stock);
+            BeekeepingUtility.MakeStacks(VVThingDefOf.VV_Viviwax, InitialViviwax, stock);
+            BeekeepingUtility.MakeStacks(ThingDefOf.WoodLog, InitialWood, stock);
+            BeekeepingUtility.MakeStacks(VVThingDefOf.VV_Fertilizer, InitialFertilizer, stock);
 
             // 씨앗은 새싹으로 며칠 자라야 하므로 다 자란 마법식물을 포장해 가져온다. 정착하면 둥지가 설치 청사진을 놓아 세운다(ViviNestPlanner).
             foreach (var plantDef in InitialPlantDefs(map))
             {
                 stock.Add(ThingMaker.MakeThing(plantDef).MakeMinified());
+            }
+            // 방출기도 지을 재료(밀랍·원목·비료) 없이 바로 세우도록 포장해 가져온다(연료는 가득 차 있다).
+            for (int i = 0; i < OutdoorEmitterCount; ++i)
+            {
+                stock.Add(ThingMaker.MakeThing(VVThingDefOf.VV_ManaEmitter).MakeMinified());
             }
 
             var index = 0;
@@ -176,19 +170,6 @@ namespace VVRace
                 {
                     thing.Destroy();
                 }
-            }
-        }
-
-        private static void AddStock(List<Thing> stock, ThingDef def, int count)
-        {
-            if (def == null || count <= 0) { return; }
-
-            while (count > 0)
-            {
-                var thing = ThingMaker.MakeThing(def);
-                thing.stackCount = Mathf.Min(count, def.stackLimit);
-                count -= thing.stackCount;
-                stock.Add(thing);
             }
         }
 
@@ -214,8 +195,7 @@ namespace VVRace
             var faction = lure.ReservedFaction;
             foreach (QueuedIncident queued in Find.Storyteller.incidentQueue)
             {
-                var firing = queued.FiringIncident;
-                if (firing?.def == VVIncidentDefOf.VV_ViviNestSettlers && firing.parms?.faction == faction)
+                if (BeekeepingUtility.IsQueuedSettlers(queued, faction))
                 {
                     FieldInfo_QueuedIncident_fireTick.SetValue(queued, Find.TickManager.TicksGame);
                 }

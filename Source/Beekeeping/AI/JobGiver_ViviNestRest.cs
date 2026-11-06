@@ -1,7 +1,6 @@
 ﻿using RimWorld;
 using Verse;
 using Verse.AI;
-using Verse.AI.Group;
 
 namespace VVRace
 {
@@ -21,7 +20,7 @@ namespace VVRace
         public override float GetPriority(Pawn pawn)
         {
             var rest = pawn.needs?.rest;
-            if (rest != null && pawn.GetLord()?.LordJob is LordJob_ViviNest && IsNight(pawn)
+            if (rest != null && pawn.GetNestLordJob() != null && IsNight(pawn)
                 && rest.CurLevel < NightSleepBelowLevel && Find.TickManager.TicksGame >= pawn.mindState.canSleepTick
                 && RestUtility.CanFallAsleep(pawn))
             {
@@ -33,7 +32,8 @@ namespace VVRace
 
         protected override Job TryGiveJob(Pawn pawn)
         {
-            if (!(pawn.GetLord()?.LordJob is LordJob_ViviNest nest))
+            var nest = pawn.GetNestLordJob();
+            if (nest == null)
             {
                 return base.TryGiveJob(pawn);
             }
@@ -42,15 +42,9 @@ namespace VVRace
             if (rest == null || RestUtility.DisturbancePreventsLyingDown(pawn)) { return null; }
 
             // 침대는 자기 세력 것만 고르고, 둥지 부화기(아기 침대)는 알과 아기 몫이라 어린이는 둥지 방 바닥에서 잔다(LordJob_ViviNest.FindBedFor).
-            var bed = nest.FindBedFor(pawn);
-            if (bed != null)
+            if (nest.TryFindSleepTarget(pawn, out var target))
             {
-                return JobMaker.MakeJob(JobDefOf.LayDown, bed);
-            }
-
-            if (nest.TryFindSleepSpot(pawn, out var cell))
-            {
-                return JobMaker.MakeJob(JobDefOf.LayDown, cell);
+                return JobMaker.MakeJob(JobDefOf.LayDown, target);
             }
 
             // 막 완성된 벽 칸처럼 영역이 없는 칸에 서 있으면 바닐라 땅바닥 잠자리 찾기가 예외를 내므로, 이동 복구를 기다린다.

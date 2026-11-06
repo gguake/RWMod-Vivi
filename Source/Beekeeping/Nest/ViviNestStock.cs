@@ -325,22 +325,11 @@ namespace VVRace
                 {
                     foreach (var cell in room.Cells)
                     {
-                        if (IsFloorStorageSpot(cell)) { _tmpCells.Add(cell); }
+                        // 방 바닥 보관은 문 옆(통로)과 건물이 있는 칸을 피한다.
+                        if (Territory.IsClearStorageSpot(cell)) { _tmpCells.Add(cell); }
                     }
                 }
             }
-        }
-
-        // 방 바닥 보관은 문 옆(통로)과 건물이 있는 칸을 피한다.
-        private bool IsFloorStorageSpot(IntVec3 cell)
-        {
-            var map = Map;
-            if (cell.GetEdifice(map) != null) { return false; }
-            foreach (var thing in map.thingGrid.ThingsListAtFast(cell))
-            {
-                if (thing is Building || thing.def.IsBlueprint || thing.def.IsFrame) { return false; }
-            }
-            return !Territory.IsBesideBorderDoor(cell);
         }
 
         private bool IsValidStorageCell(IntVec3 cell, Map map, Thing thing, Pawn carrier, ViviNestStorageRank rank)
@@ -351,11 +340,7 @@ namespace VVRace
                 // 선반의 보관 설정(바닐라 Accepts)과 칸 자리를 지킨다. 바닐라 놓기는 그 칸의 같은 더미에 합치고 합친 더미의 금지 상태를 따르므로
                 // 둥지 몫이 아닌 같은 물건(플레이어 선반의 플레이어 더미 등)이 있는 칸은 쓰지 않는다.
                 if (!cell.IsValidStorageFor(map, thing)) { return false; }
-                foreach (var other in map.thingGrid.ThingsListAtFast(cell))
-                {
-                    if (other == thing) { return false; }
-                    if (other.def == thing.def && !IsNestOwned(other)) { return false; }
-                }
+                if ((thing.Spawned && thing.Map == map && thing.Position == cell) || HasForeignStack(cell, thing.def)) { return false; }
             }
             else
             {
@@ -377,9 +362,21 @@ namespace VVRace
             return carrier == null || (carrier.CanReserve(cell) && carrier.CanReach(cell, shelf ? PathEndMode.ClosestTouch : PathEndMode.OnCell, Danger.Some));
         }
 
-        // 그 칸에 더 놓을 수 있는 수(바닐라 칸 자리 계산: 같은 더미의 남은 자리 + 빈 자리 × 더미 한도). 옮기는 수를 이만큼으로 묶으면
-        // 다 놓지 못한 나머지를 바닐라가 아무 비축 구역에나 다시 찾아 옮기지 않는다.
-        public int StorableCount(IntVec3 cell, Thing thing) => cell.GetItemStackSpaceLeftFor(Map, thing.def);
+        // 그 칸에 옮길 수: 그 물건 수와 그 칸에 더 놓을 수 있는 수(바닐라 칸 자리 계산: 같은 더미의 남은 자리 + 빈 자리 × 더미 한도) 중 작은 것.
+        // 옮기는 수를 이만큼으로 묶으면 다 놓지 못한 나머지를 바닐라가 아무 비축 구역에나 다시 찾아 옮기지 않는다.
+        public int StorableCount(IntVec3 cell, Thing thing) => UnityEngine.Mathf.Min(thing.stackCount, cell.GetItemStackSpaceLeftFor(Map, thing.def));
+
+        // 그 칸에 둥지 몫이 아닌 같은 물건 더미(플레이어 더미 등)가 있는지. 바닐라 놓기는 그 칸의 같은 더미에 합치고 합친 더미의 금지 상태를 따르므로
+        // 그런 칸에 놓으면 둥지 몫이 사라진다(선반 보관 칸 고르기·둥지 몫 놓기 LordJob_ViviNest.TryPlaceOwned가 피한다).
+        public bool HasForeignStack(IntVec3 cell, ThingDef def)
+        {
+            var things = Map.thingGrid.ThingsListAtFast(cell);
+            for (int i = 0; i < things.Count; ++i)
+            {
+                if (things[i].def == def && !IsNestOwned(things[i])) { return true; }
+            }
+            return false;
+        }
 
         public void ExposeData()
         {

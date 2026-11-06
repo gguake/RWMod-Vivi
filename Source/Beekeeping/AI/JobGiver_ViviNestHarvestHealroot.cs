@@ -35,21 +35,26 @@ namespace VVRace
             }
         }
 
-        public override float GetPriority(Pawn pawn)
+        // 약뿌리를 거둘 수 있는 둥지(GetPriority·TryGiveJob 공통 조건): 정착했고, 아기가 아니며 재배를 할 수 있고, 바깥 일을 쉬지 않을 때
+        private static LordJob_ViviNest WorkingNest(Pawn pawn)
         {
             var nest = pawn.GetNestLordJob();
-            if (nest == null || !nest.Settled || pawn.DevelopmentalStage.Baby() || pawn.WorkTypeIsDisabled(WorkTypeDefOf.Growing)) { return 0f; }
-            if (JobGiver_ViviNestRest.IsNight(pawn) || BeekeepingUtility.OutdoorDangerous(pawn.Map)) { return 0f; }
-            if (nest.Production.HealrootWaiting) { return 0f; }
+            if (nest == null || !nest.Settled || pawn.DevelopmentalStage.Baby() || pawn.WorkTypeIsDisabled(WorkTypeDefOf.Growing)) { return null; }
+            return BeekeepingUtility.OutdoorWorkPaused(pawn) ? null : nest;
+        }
+
+        public override float GetPriority(Pawn pawn)
+        {
+            var nest = WorkingNest(pawn);
+            if (nest == null || nest.Production.HealrootWaiting) { return 0f; }
 
             return nest.Production.MedicineNeed;
         }
 
         protected override Job TryGiveJob(Pawn pawn)
         {
-            var nest = pawn.GetNestLordJob();
-            if (nest == null || !nest.Settled || pawn.DevelopmentalStage.Baby() || pawn.WorkTypeIsDisabled(WorkTypeDefOf.Growing)) { return null; }
-            if (JobGiver_ViviNestRest.IsNight(pawn) || BeekeepingUtility.OutdoorDangerous(pawn.Map)) { return null; }
+            var nest = WorkingNest(pawn);
+            if (nest == null) { return null; }
             var production = nest.Production;
             if (production.MedicineNeed <= 0f || production.HealrootWaiting) { return null; }
 
@@ -86,8 +91,7 @@ namespace VVRace
                     if (distance >= maxDistance || map.zoneManager.ZoneAt(plant.Position) != null) { continue; }
                     if (!plant.HarvestableNow)
                     {
-                        var ready = plant.def.plant.Harvestable ? BeekeepingUtility.GrowthReadyTick(plant, plant.def.plant.harvestMinGrowth, ViviNestProduction.HealrootRetryMaxTicks) : -1;
-                        if (ready >= 0 && (readyTick < 0 || ready < readyTick)) { readyTick = ready; }
+                        readyTick = BeekeepingUtility.EarlierTick(readyTick, BeekeepingUtility.HarvestReadyTick(plant, ViviNestProduction.HealrootRetryMaxTicks));
                         continue;
                     }
 

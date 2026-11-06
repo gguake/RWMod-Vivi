@@ -74,6 +74,21 @@ namespace VVRace
             }
         }
 
+        // 지금 둥지 방들의 칸 수 합(바닐라 방 칸 수를 그때그때 더한다. 방 칸 집합은 갱신 주기마다 찍어 둔 것이라 그사이 바뀐 방과 다를 수 있다)
+        public int RoomCellCount
+        {
+            get
+            {
+                RefreshIfNeeded();
+                var count = 0;
+                for (int i = 0; i < _cachedRooms.Count; ++i)
+                {
+                    count += _cachedRooms[i].CellCount;
+                }
+                return count;
+            }
+        }
+
         public bool IsRoomCell(IntVec3 cell)
         {
             RefreshIfNeeded();
@@ -95,8 +110,6 @@ namespace VVRace
             RefreshIfNeeded();
             return _ownedRoomCellSet.Contains(cell) || _outdoorStorageCells.Contains(cell);
         }
-
-        public bool HasAnyRoom => Rooms.Count > 0;
 
         // 정착 범위: 무리가 오가는 반경. 둥지 생활 듀티가 일을 둥지 중심에서 이 반경 안으로 묶는다(ThinkNode_ForbidOutsideFlagRadius, 24칸).
         public static float WorkRadius
@@ -130,7 +143,19 @@ namespace VVRace
         public void Establish(IntVec3 nestCell)
         {
             AddRoom(nestCell);
-            PickOutdoorStorageCells();
+
+            _outdoorStorageCells.Clear();
+            var doors = BorderDoors;
+            var origin = doors.Count > 0 ? doors[0].Position : _roomCells.FirstOrDefault();
+            var cellCount = GenRadial.NumCellsInRadius(OutdoorStorageSearchRadius);
+            for (int i = 0; i < cellCount && _outdoorStorageCells.Count < OutdoorStorageCellCount; ++i)
+            {
+                var cell = origin + GenRadial.RadialPattern[i];
+                if (IsUsableOutdoorStorageCell(cell))
+                {
+                    _outdoorStorageCells.Add(cell);
+                }
+            }
         }
 
         public void AddRoom(IntVec3 roomCell)
@@ -174,6 +199,18 @@ namespace VVRace
             return _borderDoorAdjacentCells.Contains(cell);
         }
 
+        // 보관 칸으로 쓸 수 있는 자리: 구조물·건물·청사진·골조가 없고 문 옆(통로)이 아닌 칸(방 바닥 보관 칸·바깥 보관 칸이 함께 쓴다)
+        public bool IsClearStorageSpot(IntVec3 cell)
+        {
+            var map = Map;
+            if (cell.GetEdifice(map) != null) { return false; }
+            foreach (var thing in map.thingGrid.ThingsListAtFast(cell))
+            {
+                if (BeekeepingUtility.IsStructure(thing)) { return false; }
+            }
+            return !IsBesideBorderDoor(cell);
+        }
+
         // 맵의 건물이 서거나 없어졌다(둥지 토일 알림). 문이면 다음 칸 검사 때 문 목록을 다시 만든다.
         public void Notify_BuildingChanged(Building building)
         {
@@ -204,23 +241,6 @@ namespace VVRace
             }
         }
 
-        private void PickOutdoorStorageCells()
-        {
-            _outdoorStorageCells.Clear();
-
-            var doors = BorderDoors;
-            var origin = doors.Count > 0 ? doors[0].Position : _roomCells.FirstOrDefault();
-            var cellCount = GenRadial.NumCellsInRadius(OutdoorStorageSearchRadius);
-            for (int i = 0; i < cellCount && _outdoorStorageCells.Count < OutdoorStorageCellCount; ++i)
-            {
-                var cell = origin + GenRadial.RadialPattern[i];
-                if (IsUsableOutdoorStorageCell(cell))
-                {
-                    _outdoorStorageCells.Add(cell);
-                }
-            }
-        }
-
         // 문 바로 앞(통로)은 비우고, 플레이어 구역·건물·청사진과 겹치지 않는 바깥 빈 땅
         private bool IsUsableOutdoorStorageCell(IntVec3 cell)
         {
@@ -231,14 +251,8 @@ namespace VVRace
             var room = cell.GetRoom(map);
             if (room == null || !room.PsychologicallyOutdoors) { return false; }
             if (map.zoneManager.ZoneAt(cell) != null) { return false; }
-            if (cell.GetEdifice(map) != null) { return false; }
 
-            foreach (var thing in cell.GetThingList(map))
-            {
-                if (thing.def.IsBlueprint || thing.def.IsFrame || thing is Building) { return false; }
-            }
-
-            return !IsBesideBorderDoor(cell);
+            return IsClearStorageSpot(cell);
         }
 
         private void RefreshIfNeeded()
@@ -279,11 +293,6 @@ namespace VVRace
             _ownedRoomCellSet.UnionWith(_cachedRoomCells);
             _ownedRoomCells.Clear();
             _ownedRoomCells.AddRange(_ownedRoomCellSet);
-        }
-
-        public void MarkDirty()
-        {
-            _cachedTick = -99999;
         }
 
         public void ExposeData()

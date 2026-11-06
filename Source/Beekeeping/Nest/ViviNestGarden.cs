@@ -121,7 +121,6 @@ namespace VVRace
                 var cell = origin + GenRadial.RadialPattern[i];
                 if (_cottonCells.Contains(cell) || !cell.InBounds(map)) { continue; }
                 if (!_owner.Planner.IsFreeOutdoorCell(cell, allowPlants: true, ignoreCotton: true)) { continue; }
-                if (!VVThingDefOf.Plant_Cotton.CanEverPlantAt(cell, map, out _, canWipePlantsExceptTree: true, checkMapTemperature: false).Accepted) { continue; }
                 if (!IsSowable(cell)) { continue; }
 
                 _cottonCells.Add(cell);
@@ -137,18 +136,21 @@ namespace VVRace
 
             foreach (var thing in cell.GetThingList(map))
             {
-                if (thing is Building || thing.def.IsBlueprint || thing.def.IsFrame) { return false; }
+                if (BeekeepingUtility.IsStructure(thing)) { return false; }
             }
 
-            return VVThingDefOf.Plant_Cotton.CanEverPlantAt(cell, map, out _, canWipePlantsExceptTree: true, checkMapTemperature: false).Accepted && IsSowable(cell);
+            return IsSowable(cell);
         }
 
         // 둥지 씨 뿌리기(JobGiver_ViviNestGarden.SowJob)가 심을 수 있는 칸: 꿀 꽃이 자라는 칸은 베지 않고, 둘레에 나무처럼 옆 칸 심기를 막는 식물이 있으면
         // 바닐라 씨 뿌리기 판정(PlantUtility.AdjacentSowBlocker)이 막는다. 그런 칸을 밭으로 두면 끝내 심지 못하므로 고르지 않고, 생기면 다른 칸으로 옮긴다.
         // 이미 목화가 자라는 칸은 거둘 때까지 둔다. (자동 테스트 p3 B6: 습지 맵에서 버드나무 옆 밭 3칸이 며칠째 비어 있었다)
+        // 먼저 목화가 그 칸에 자랄 수 있어야 한다(바닐라 CanEverPlantAt, 나무 아닌 식물은 베고 심는다, 지금 기온은 보지 않는다).
         private bool IsSowable(IntVec3 cell)
         {
             var map = Map;
+            if (!VVThingDefOf.Plant_Cotton.CanEverPlantAt(cell, map, out _, canWipePlantsExceptTree: true, checkMapTemperature: false).Accepted) { return false; }
+
             var plant = cell.GetPlant(map);
             if (plant != null && plant.def == VVThingDefOf.Plant_Cotton) { return true; }
             if (plant != null && IsHoneyFlowerDef(plant.def)) { return false; }

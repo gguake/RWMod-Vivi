@@ -44,7 +44,6 @@ namespace VVRace
 
         private ViviLurePhase _phase;
         private Faction _faction;
-        private int _phaseStartTick;
         private int _settleTick = -1;
 
         private ViviNestSiteReport _cachedReport;
@@ -56,7 +55,6 @@ namespace VVRace
 
         public ViviLurePhase Phase => _phase;
         public bool InProgress => _phase != ViviLurePhase.Idle;
-        public int SettleTick => _settleTick;
 
         // 정찰부터 정착대 도착까지 같은 임시 세력이 이어져야 한다.
         public Faction ReservedFaction => _phase == ViviLurePhase.ScoutVisiting || _phase == ViviLurePhase.AwaitingSettlers ? _faction : null;
@@ -233,13 +231,13 @@ namespace VVRace
                     flower.plant.minOptimalGrowthTemperature.ToStringTemperature("F0"), flower.plant.maxOptimalGrowthTemperature.ToStringTemperature("F0"),
                     ViviNestSiteEvaluator.MinGrowingPeriodDays));
 
-            AddInfoRow(site, LocalizeString_ITab.VV_ITab_ViviLure_Mana.Translate(),
+            AddRow(site, ViviLureConditionState.Info, LocalizeString_ITab.VV_ITab_ViviLure_Mana.Translate(),
                 LocalizeString_ITab.VV_ITab_ViviLure_ManaValue.Translate(report.averageMana.ToString("0"), report.manaScore.ToStringPercent()),
                 LocalizeString_ITab.VV_ITab_ViviLure_ManaTip.Translate(ViviNestSiteEvaluator.ManaRadius, ViviNestSiteEvaluator.FullMana));
 
             if (report.Acceptable)
             {
-                AddInfoRow(site, LocalizeString_ITab.VV_ITab_ViviLure_Score.Translate(),
+                AddRow(site, ViviLureConditionState.Info, LocalizeString_ITab.VV_ITab_ViviLure_Score.Translate(),
                     LocalizeString_ITab.VV_ITab_ViviLure_ScoreValue.Translate(report.TotalScore.ToStringPercent(), report.SettlerCount),
                     LocalizeString_ITab.VV_ITab_ViviLure_ScoreTip.Translate(
                         ViviNestSiteEvaluator.FlowerWeight.ToStringPercent(), ViviNestSiteEvaluator.RoomWeight.ToStringPercent(), ViviNestSiteEvaluator.ManaWeight.ToStringPercent(),
@@ -250,22 +248,15 @@ namespace VVRace
 
         private void AddConditionRow(ViviLureConditionSection section, bool met, string label, string value = null, string tooltip = null)
         {
-            _conditionRows.Add(new ViviLureConditionRow
-            {
-                section = section,
-                state = met ? ViviLureConditionState.Met : ViviLureConditionState.Unmet,
-                label = label,
-                value = value,
-                tooltip = tooltip,
-            });
+            AddRow(section, met ? ViviLureConditionState.Met : ViviLureConditionState.Unmet, label, value, tooltip);
         }
 
-        private void AddInfoRow(ViviLureConditionSection section, string label, string value, string tooltip = null)
+        private void AddRow(ViviLureConditionSection section, ViviLureConditionState state, string label, string value = null, string tooltip = null)
         {
             _conditionRows.Add(new ViviLureConditionRow
             {
                 section = section,
-                state = ViviLureConditionState.Info,
+                state = state,
                 label = label,
                 value = value,
                 tooltip = tooltip,
@@ -298,7 +289,6 @@ namespace VVRace
         {
             _phase = ViviLurePhase.ScoutVisiting;
             _faction = faction;
-            _phaseStartTick = Find.TickManager.TicksGame;
             _settleTick = -1;
         }
 
@@ -306,23 +296,13 @@ namespace VVRace
         {
             _phase = ViviLurePhase.ThiefVisiting;
             _faction = null;
-            _phaseStartTick = Find.TickManager.TicksGame;
             _settleTick = -1;
         }
 
         public void Notify_SettlersQueued(int fireTick)
         {
             _phase = ViviLurePhase.AwaitingSettlers;
-            _phaseStartTick = Find.TickManager.TicksGame;
             _settleTick = fireTick;
-        }
-
-        // 정착이 시작되면 유인통은 할 일을 마친다. 세력은 이제 둥지 구성원이 붙잡고 있다.
-        public void Notify_Settled()
-        {
-            _phase = ViviLurePhase.Idle;
-            _faction = null;
-            _settleTick = -1;
         }
 
         public void ResetAttraction(bool releaseFaction)
@@ -379,7 +359,6 @@ namespace VVRace
             Scribe_Values.Look(ref _phase, "phase", ViviLurePhase.Idle);
             // "faction"은 건물 자신의 소속 세력 저장 키라 겹치지 않게 다른 이름을 쓴다.
             Scribe_References.Look(ref _faction, "lureFaction");
-            Scribe_Values.Look(ref _phaseStartTick, "phaseStartTick");
             Scribe_Values.Look(ref _settleTick, "settleTick", -1);
         }
 

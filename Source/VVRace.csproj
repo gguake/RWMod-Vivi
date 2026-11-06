@@ -330,8 +330,11 @@
     <Compile Include="Beekeeping\AI\JobGiver_ViviNestTakeShelter.cs" />
     <Compile Include="Beekeeping\AI\JobGiver_ViviNestChildcare.cs" />
     <Compile Include="Beekeeping\Nest\ViviNestHostility.cs" />
+    <Compile Include="Beekeeping\Lord\LordToil_ViviNest.cs" />
     <Compile Include="Beekeeping\Lord\LordToil_ViviNestExit.cs" />
     <Compile Include="Beekeeping\AI\JobGiver_ViviNestCarryBabyOut.cs" />
+    <Compile Include="Beekeeping\AI\JobGiver_ViviNestClean.cs" />
+    <Compile Include="Beekeeping\AI\JobDriver_ViviNestClean.cs" />
     <Compile Include="Gather\Comps\CompRepeatGatherable.cs" />
     <Compile Include="Gather\GatherWorker.cs" />
     <Compile Include="Gather\Things\Filth_Pollen.cs" />

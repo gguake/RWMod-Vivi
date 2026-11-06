@@ -94,15 +94,34 @@ namespace VVRace
             return nest.Planner.FindEmberPotCell(cell => comp.CanSowAt(cell, map).Accepted && pawn.CanReserveAndReach(cell, PathEndMode.Touch, Danger.Some));
         }
 
-        // 새싹이 자랄 만큼 환경 마나가 있는 칸 중 비옥도가 가장 높은 칸(같으면 마나가 많은 칸). 그런 칸이 없으면 씨앗은 둥지에 남겨 둔다.
-        // 이미 심긴 새싹·식물이 마나를 흡수해 둘레 마나가 내려가므로 방출기 하나로 자랄 만큼만 심긴다.
+        // 새싹이 자랄 만큼 환경 마나가 있는 칸 중 둘레(SpreadRadius)의 둥지 마법식물(새싹 포함)이 가장 적은 칸, 그중 비옥도가 가장 높은 칸(같으면 마나가 많은 칸).
+        // 그런 칸이 없으면 씨앗은 둥지에 남겨 둔다. 이미 심긴 새싹·식물이 마나를 흡수해 둘레 마나가 내려가므로 방출기 하나로 자랄 만큼만 심긴다.
+        // 둘레 식물 수를 먼저 보는 까닭(사용자 요구 "한곳에만 마법식물을 스팸하는 현상 완화"): 비옥도만 보면 기름진 흙(1.4)·풍년화 둘레처럼 한 곳이 늘 이겨,
+        // 바깥 방출기를 둘 세워도 씨앗이 한 곳에만 몰렸다(자동 시험 p7 E2: 비옥도 1.4 둘레 63칸 대 1.0 둘레 44·6칸에서 8알 모두 한 곳).
+        private const float SpreadRadius = 7f;
+
+        private static readonly List<IntVec3> _tmpPlantCells = new List<IntVec3>();
+
         private static IntVec3 FindOutdoorCell(LordJob_ViviNest nest, CompArcaneSeed comp, Pawn pawn)
         {
             var map = pawn.Map;
             var mana = map.GetManaComponent();
             if (mana == null) { return IntVec3.Invalid; }
 
+            // 바깥 방출기끼리는 10칸 넘게 떨어뜨려 세우므로(ViviNestPlanner.FindOutdoorEmitterCell) 방출기 하나의 씨앗 자리(7칸)만큼을 같은 곳으로 친다.
+            _tmpPlantCells.Clear();
+            var buildings = map.listerBuildings.allBuildingsNonColonist;
+            for (int i = 0; i < buildings.Count; ++i)
+            {
+                var building = buildings[i];
+                if (building is ArcanePlant && building.Faction == nest.Faction && building.Position.InHorDistOf(nest.NestCell, OutdoorSearchRadius + SpreadRadius))
+                {
+                    _tmpPlantCells.Add(building.Position);
+                }
+            }
+
             var best = IntVec3.Invalid;
+            var bestCrowd = int.MaxValue;
             var bestFertility = 0f;
             var bestMana = 0f;
             var cellCount = GenRadial.NumCellsInRadius(OutdoorSearchRadius);
@@ -114,14 +133,23 @@ namespace VVRace
                 var cellMana = mana[cell];
                 if (cellMana < MinSeedlingMana) { continue; }
                 var fertility = map.fertilityGrid.FertilityAt(cell);
-                if (fertility < MinFertility || fertility < bestFertility || (fertility == bestFertility && cellMana <= bestMana)) { continue; }
+                if (fertility < MinFertility) { continue; }
+
+                var crowd = 0;
+                for (int j = 0; j < _tmpPlantCells.Count; ++j)
+                {
+                    if (_tmpPlantCells[j].InHorDistOf(cell, SpreadRadius)) { crowd++; }
+                }
+                if (crowd > bestCrowd || (crowd == bestCrowd && (fertility < bestFertility || (fertility == bestFertility && cellMana <= bestMana)))) { continue; }
                 if (!nest.Planner.IsFreeOutdoorCell(cell, allowPlants: true)) { continue; }
                 if (!comp.CanSowAt(cell, map).Accepted || !pawn.CanReach(cell, PathEndMode.Touch, Danger.Some)) { continue; }
 
                 best = cell;
+                bestCrowd = crowd;
                 bestFertility = fertility;
                 bestMana = cellMana;
             }
+            _tmpPlantCells.Clear();
             return best;
         }
     }

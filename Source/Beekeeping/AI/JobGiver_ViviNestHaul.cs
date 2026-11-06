@@ -1,7 +1,6 @@
 ﻿using RimWorld;
 using Verse;
 using Verse.AI;
-using Verse.AI.Group;
 
 namespace VVRace
 {
@@ -11,7 +10,8 @@ namespace VVRace
     {
         protected override Job TryGiveJob(Pawn pawn)
         {
-            if (!(pawn.GetLord()?.LordJob is LordJob_ViviNest nest) || !nest.Settled) { return null; }
+            var nest = pawn.GetNestLordJob();
+            if (nest == null || !nest.Settled) { return null; }
             if (pawn.DevelopmentalStage.Baby()) { return null; }
 
             var stock = nest.Stock;
@@ -23,7 +23,7 @@ namespace VVRace
                 if (!stock.TryFindStorageCellFor(thing, pawn, rank, out var cell)) { continue; }
 
                 var job = JobMaker.MakeJob(JobDefOf.HaulToCell, thing, cell);
-                job.count = Mathf.Min(thing.stackCount, stock.StorableCount(cell, thing));
+                job.count = stock.StorableCount(cell, thing);
                 job.haulMode = ViviNestStock.IsShelfRank(stock.RankOf(cell)) ? HaulMode.ToCellStorage : HaulMode.ToCellNonStorage;
                 return job;
             }

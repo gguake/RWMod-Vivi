@@ -50,7 +50,7 @@ namespace VVRace
         private bool IsUsableDuplicate(Thing thing)
         {
             var nest = pawn.GetNestLordJob();
-            return nest != null && JobGiver_ViviNestFertilizePlant.IsUsableFertilizer(thing, pawn, nest, JobGiver_ViviNestFertilizePlant.IndoorOnly(pawn));
+            return nest != null && JobGiver_ViviNestFertilizePlant.IsUsableFertilizer(thing, pawn, nest, BeekeepingUtility.OutdoorWorkPaused(pawn));
         }
 
         private void Fertilize()

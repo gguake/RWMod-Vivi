@@ -57,7 +57,6 @@ namespace VVRace
         {
             var recipe = Recipe;
             var target = Target;
-            var map = pawn.Map;
             var cell = target.Position;
 
             recipe.gatherWorker.Notify_Gathered(pawn, null, target, recipe);
@@ -83,22 +82,16 @@ namespace VVRace
                 {
                     count = EatIfHoneyNeedy(product.thingDef, count);
                 }
-                AddProducts(product.thingDef, GenMath.RoundRandom(count));
+                BeekeepingUtility.MakeStacks(product.thingDef, GenMath.RoundRandom(count), _tmpProducts);
             }
             if (honey)
             {
                 ShakeOffCarriedPollen();
             }
 
-            var nest = pawn.GetNestLordJob();
             for (int i = 0; i < _tmpProducts.Count; ++i)
             {
-                var product = _tmpProducts[i];
-                var placed = nest != null ? nest.TryPlaceOwned(product, cell) : GenPlace.TryPlaceThing(product, cell, map, ThingPlaceMode.Near);
-                if (!placed && !product.Destroyed)
-                {
-                    product.Destroy();
-                }
+                BeekeepingUtility.PlaceProduct(pawn, _tmpProducts[i], cell);
             }
             _tmpProducts.Clear();
         }
@@ -145,22 +138,11 @@ namespace VVRace
                 if (extension != null)
                 {
                     var amount = Mathf.Max(1f, extension.amount * Mathf.Clamp(pawn.GetStatValue(extension.yieldStat), 0.1f, 2.0f));
-                    AddProducts(extension.thingDef, GenMath.RoundRandom(amount));
+                    BeekeepingUtility.MakeStacks(extension.thingDef, GenMath.RoundRandom(amount), _tmpProducts);
                 }
                 Pawn_FilthTracker_ReversePatch.ThinCarriedFilth(filth, pollen);
             }
             _tmpPollens.Clear();
-        }
-
-        private static void AddProducts(ThingDef def, int count)
-        {
-            while (count > 0)
-            {
-                var thing = ThingMaker.MakeThing(def);
-                thing.stackCount = Mathf.Min(count, def.stackLimit);
-                count -= thing.stackCount;
-                _tmpProducts.Add(thing);
-            }
         }
     }
 }

@@ -12,7 +12,7 @@ namespace VVRace
         {
             var nest = pawn.GetNestLordJob();
             if (nest == null || !nest.Settled || pawn.DevelopmentalStage.Baby()) { return null; }
-            if (JobGiver_ViviNestRest.IsNight(pawn) || BeekeepingUtility.OutdoorDangerous(pawn.Map)) { return null; }
+            if (BeekeepingUtility.OutdoorWorkPaused(pawn)) { return null; }
 
             return HarvestCottonJob(pawn, nest) ?? SowCottonJob(pawn, nest) ?? SowFlowerJob(pawn, nest);
         }

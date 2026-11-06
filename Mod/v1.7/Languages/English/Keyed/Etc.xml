@@ -57,6 +57,10 @@
 <VV_ModSettings_RandomGenesForStartingVivi>Random genes for starting Vivis</VV_ModSettings_RandomGenesForStartingVivi>
 <VV_ModSettings_RandomGenesForStartingViviDesc>Gives the player's starting Vivi colonists random genes, just like NPC Vivis. Does not affect Vivis that already exist.</VV_ModSettings_RandomGenesForStartingViviDesc>
 
+<VV_ModSettings_WildViviNestMaxMembers>Wild Vivi nest max members: {0}</VV_ModSettings_WildViviNestMaxMembers>
+<VV_ModSettings_WildViviNestMaxMembersDesc>The maximum number of members a wild Vivi nest settled at a lure can grow to by laying eggs. Eggs in hatcheries count as members. When the rooms get crowded, the nest builds an extension room.
+Nests that already have more members than this stop growing.</VV_ModSettings_WildViviNestMaxMembersDesc>
+
 <VV_ModSettings_EnableViviMealContinuation>Enable Continuous Eating</VV_ModSettings_EnableViviMealContinuation>
 <VV_ModSettings_EnableViviMealContinuationDesc>Makes Vivis that are still hungry after a meal continue eating. Because a Vivi's maximum caloric intake varies with genetic metabolism efficiency, this helps reduce how often Vivis with many genes leave work to eat.</VV_ModSettings_EnableViviMealContinuationDesc>
 

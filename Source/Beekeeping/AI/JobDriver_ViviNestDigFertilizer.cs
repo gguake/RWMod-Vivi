@@ -48,11 +48,7 @@ namespace VVRace
             {
                 var fertilizer = ThingMaker.MakeThing(VVThingDefOf.VV_Fertilizer);
                 fertilizer.stackCount = FertilizerYield;
-                var nest = pawn.GetNestLordJob();
-                if (!(nest != null ? nest.TryPlaceOwned(fertilizer, job.targetA.Cell) : GenPlace.TryPlaceThing(fertilizer, job.targetA.Cell, Map, ThingPlaceMode.Near)))
-                {
-                    fertilizer.Destroy();
-                }
+                BeekeepingUtility.PlaceProduct(pawn, fertilizer, job.targetA.Cell);
                 FilthMaker.TryMakeFilth(job.targetA.Cell, Map, ThingDefOf.Filth_Dirt);
             });
         }

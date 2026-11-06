@@ -168,14 +168,14 @@ namespace VVRace
             // 정착민은 둥지 세력의 작업 자리 같은 건물을 쓰지 않는다(바닐라 지시서 워크기버는 세력을 보지 않는다).
             if (faction.IsPlayer)
             {
-                if (t is Building nestBuilding && !(t is Building_Door) && nestBuilding.Faction != null && nestBuilding.Faction.def == VVFactionDefOf.VV_WanderingVivi)
+                if (t is Building nestBuilding && !(t is Building_Door) && nestBuilding.Faction.IsWanderingViviFaction())
                 {
                     __result = true;
                 }
                 return;
             }
 
-            if (faction.def != VVFactionDefOf.VV_WanderingVivi) { return; }
+            if (!faction.IsWanderingViviFaction()) { return; }
 
             var nest = pawn.GetNestLordJob();
             if (nest != null && !nest.CanUse(t))

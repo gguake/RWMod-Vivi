@@ -18,7 +18,7 @@ namespace VVRace
             for (int i = 0; i < 9; ++i)
             {
                 var cell = Cell + GenAdj.AdjacentCellsAndInside[i];
-                if (cell.InBounds(map) && nest.Planner.NeedsRoof(cell) && ViviNestPlanner.CanRoofNow(cell, map))
+                if (cell.InBounds(map) && !cell.Roofed(map) && nest.Territory.IsRoomCell(cell) && ViviNestPlanner.CanRoofNow(cell, map))
                 {
                     map.roofGrid.SetRoof(cell, RoofDefOf.RoofConstructed);
                     MoteMaker.PlaceTempRoof(cell, map);

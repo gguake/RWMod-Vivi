@@ -17,6 +17,7 @@
 <VV_ViviNestGatherPropolis.reportString>TargetA에서 프로폴리스 채집 중.</VV_ViviNestGatherPropolis.reportString>
 <VV_ViviNestNap.reportString>낮잠 자는 중.</VV_ViviNestNap.reportString>
 <VV_ViviNestLoaf.reportString>빈둥거리는 중.</VV_ViviNestLoaf.reportString>
+<VV_ViviNestClean.reportString>TargetA 청소하는 중.</VV_ViviNestClean.reportString>
 
 <!-- EverflowerRitual -->
 <VV_MoveEverflower.reportString>TargetA를 옮기기 위해 공명 중.</VV_MoveEverflower.reportString>

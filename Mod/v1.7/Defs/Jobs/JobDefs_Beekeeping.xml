@@ -80,6 +80,14 @@
     <casualInterruptible>true</casualInterruptible>
   </JobDef>
 
+  <!-- 둥지 비비가 둥지 방의 오물을 치운다(바닐라 청소 잡은 집 구역 밖 오물을 건너뛴다) -->
+  <JobDef>
+    <defName>VV_ViviNestClean</defName>
+    <driverClass>VVRace.JobDriver_ViviNestClean</driverClass>
+    <reportString>cleaning TargetA.</reportString>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef>
+
   <!-- 곰·말벌이 유인통 미끼를 먹어 치운다 -->
   <JobDef>
     <defName>VV_DevourBait</defName>

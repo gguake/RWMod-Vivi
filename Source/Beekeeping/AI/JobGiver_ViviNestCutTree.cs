@@ -14,25 +14,31 @@ namespace VVRace
         // 시험 맵의 반경 24칸 지역은 22~29개였다.
         private const int SearchRegionsMax = 1000;
 
+        // 나무를 벨 수 있는 둥지(GetPriority·TryGiveJob 공통 조건): 정착했고, 아기가 아니며 베기를 할 수 있고, 바깥 일을 쉬지 않으며,
+        // 나무를 기다리는 중이 아니고 원목이 목표보다 적을 때
+        private static LordJob_ViviNest WorkingNest(Pawn pawn)
+        {
+            var nest = pawn.GetNestLordJob();
+            if (nest == null || !nest.Settled || pawn.DevelopmentalStage.Baby() || pawn.WorkTypeIsDisabled(WorkTypeDefOf.PlantCutting)) { return null; }
+            if (BeekeepingUtility.OutdoorWorkPaused(pawn)) { return null; }
+            var production = nest.Production;
+            if (production.TreeWaiting || nest.Stock.CountOf(ThingDefOf.WoodLog) >= production.CachedWoodStockTarget) { return null; }
+
+            return nest;
+        }
+
         // 원목이 목표에 비해 모자란 정도
         public override float GetPriority(Pawn pawn)
         {
-            var nest = pawn.GetNestLordJob();
-            if (nest == null || !nest.Settled || pawn.DevelopmentalStage.Baby() || pawn.WorkTypeIsDisabled(WorkTypeDefOf.PlantCutting)) { return 0f; }
-            if (JobGiver_ViviNestRest.IsNight(pawn) || BeekeepingUtility.OutdoorDangerous(pawn.Map)) { return 0f; }
-            var production = nest.Production;
-            if (production.TreeWaiting || nest.Stock.CountOf(ThingDefOf.WoodLog) >= production.CachedWoodStockTarget) { return 0f; }
-
-            return production.WoodNeed;
+            var nest = WorkingNest(pawn);
+            return nest != null ? nest.Production.WoodNeed : 0f;
         }
 
         protected override Job TryGiveJob(Pawn pawn)
         {
-            var nest = pawn.GetNestLordJob();
-            if (nest == null || !nest.Settled || pawn.DevelopmentalStage.Baby() || pawn.WorkTypeIsDisabled(WorkTypeDefOf.PlantCutting)) { return null; }
-            if (JobGiver_ViviNestRest.IsNight(pawn) || BeekeepingUtility.OutdoorDangerous(pawn.Map)) { return null; }
+            var nest = WorkingNest(pawn);
+            if (nest == null) { return null; }
             var production = nest.Production;
-            if (production.TreeWaiting || nest.Stock.CountOf(ThingDefOf.WoodLog) >= production.CachedWoodStockTarget) { return null; }
 
             // 비비와 상관없이 벨 수 있는 나무가 있었는지, 덜 자란 나무가 가장 먼저 벨 만큼 자랄 틱(모르면 -1)
             var anyTarget = false;
@@ -51,8 +57,7 @@ namespace VVRace
                     if (map.zoneManager.ZoneAt(plant.Position) != null) { return false; }
                     if (!plant.HarvestableNow)
                     {
-                        var ready = plant.def.plant.Harvestable ? BeekeepingUtility.GrowthReadyTick(plant, plant.def.plant.harvestMinGrowth, ViviNestProduction.TreeRetryMaxTicks) : -1;
-                        if (ready >= 0 && (readyTick < 0 || ready < readyTick)) { readyTick = ready; }
+                        readyTick = BeekeepingUtility.EarlierTick(readyTick, BeekeepingUtility.HarvestReadyTick(plant, ViviNestProduction.TreeRetryMaxTicks));
                         return false;
                     }
 

@@ -40,13 +40,9 @@ namespace VVRace
             var maps = Find.Maps;
             for (int i = 0; i < maps.Count; ++i)
             {
-                var lures = maps[i].listerBuildings.AllBuildingsColonistOfDef(VVThingDefOf.VV_ViviLure);
-                foreach (var lure in lures)
+                if (FindReservingLure(maps[i], faction) != null)
                 {
-                    if (lure is Building_ViviLure viviLure && viviLure.ReservedFaction == faction)
-                    {
-                        return true;
-                    }
+                    return true;
                 }
             }
 
@@ -54,14 +50,35 @@ namespace VVRace
             var ticks = Find.TickManager.TicksGame;
             foreach (QueuedIncident queued in Find.Storyteller.incidentQueue)
             {
-                var firing = queued.FiringIncident;
-                if (firing?.def == VVIncidentDefOf.VV_ViviNestSettlers && firing.parms?.faction == faction && queued.FireTick > ticks)
+                if (IsQueuedSettlers(queued, faction) && queued.FireTick > ticks)
                 {
                     return true;
                 }
             }
 
             return false;
+        }
+
+        // 그 세력을 붙잡고 있는(정찰 중·정착대 대기) 유인통
+        public static Building_ViviLure FindReservingLure(Map map, Faction faction)
+        {
+            var lures = map.listerBuildings.AllBuildingsColonistOfDef(VVThingDefOf.VV_ViviLure);
+            for (int i = 0; i < lures.Count; ++i)
+            {
+                if (lures[i] is Building_ViviLure lure && lure.Spawned && lure.ReservedFaction == faction)
+                {
+                    return lure;
+                }
+            }
+
+            return null;
+        }
+
+        // 그 세력의 정착대 예약 인시던트인지
+        public static bool IsQueuedSettlers(QueuedIncident queued, Faction faction)
+        {
+            var firing = queued.FiringIncident;
+            return firing?.def == VVIncidentDefOf.VV_ViviNestSettlers && firing.parms?.faction == faction;
         }
 
         // 붙잡기를 푼 세력은 다음 퇴장 이벤트가 없으면 남아 있으므로 바닐라 삭제 검사를 한 번 돌려 준다.
@@ -113,11 +130,6 @@ namespace VVRace
         }
 
         // 둥지에는 약이 없으므로 화학 의존 유전자(비비 무작위 유전자로 붙는다)를 지니면 금단으로 쓰러져 굶어 죽는다(장기 계측). 둥지 비비에게서는 뺀다.
-        public static bool IsChemicalDependency(GeneDef def)
-        {
-            return def?.geneClass != null && typeof(Gene_ChemicalDependency).IsAssignableFrom(def.geneClass);
-        }
-
         public static void RemoveChemicalDependencies(Pawn pawn)
         {
             var genes = pawn?.genes;
@@ -126,7 +138,8 @@ namespace VVRace
             var list = genes.GenesListForReading;
             for (int i = list.Count - 1; i >= 0; --i)
             {
-                if (IsChemicalDependency(list[i].def)) { genes.RemoveGene(list[i]); }
+                var def = list[i].def;
+                if (def?.geneClass != null && typeof(Gene_ChemicalDependency).IsAssignableFrom(def.geneClass)) { genes.RemoveGene(list[i]); }
             }
         }
 
@@ -204,6 +217,18 @@ namespace VVRace
             return ticks <= within ? now + UnityEngine.Mathf.Max(1, UnityEngine.Mathf.CeilToInt(ticks)) : -1;
         }
 
+        // 거둘 수 있게 자랄 틱(GrowthReadyTick, 바닐라 수확 하한 harvestMinGrowth). 거두는 식물이 아니면 -1.
+        public static int HarvestReadyTick(Plant plant, int within)
+        {
+            return plant.def.plant.Harvestable ? GrowthReadyTick(plant, plant.def.plant.harvestMinGrowth, within) : -1;
+        }
+
+        // 두 준비 틱(모르면 -1) 중 이른 것
+        public static int EarlierTick(int tick, int candidate)
+        {
+            return candidate >= 0 && (tick < 0 || candidate < tick) ? candidate : tick;
+        }
+
         // 바깥 활동이 위험한 날씨·상태(독성 낙진, 유독 연무, 혈우 등)인지
         public static bool OutdoorDangerous(Map map)
         {
@@ -224,6 +249,9 @@ namespace VVRace
 
             return false;
         }
+
+        // 밤이거나 바깥이 위험하면 바깥 일(채집·나무 베기·약뿌리 거두기·땅 비료·정원)을 쉰다. 비료 주기는 이때 방 안 식물에 방 안 비료만 준다.
+        public static bool OutdoorWorkPaused(Pawn pawn) => JobGiver_ViviNestRest.IsNight(pawn) || OutdoorDangerous(pawn.Map);
 
         // 떠돌이 비비는 기본옷만 입으므로 그 옷을 입은 비비의 안전 기온으로 본다.
         private static List<ThingStuffPair> _basicApparel;
@@ -251,30 +279,6 @@ namespace VVRace
         public static bool FlowerSeasonNow(Map map) => PlantUtility.GrowthSeasonNow(map, ThingDefOf.Plant_Dandelion);
 
         public static bool AnyHostileThreat(Map map) => GenHostility.AnyHostileActiveThreatTo(map, Faction.OfPlayer);
-
-        public static bool ClimateSuitable(Map map, out string reason)
-        {
-            if (!TemperatureSuitable(map))
-            {
-                reason = LocalizeString_Inspector.VV_Inspector_LureConditionTemperature.Translate();
-                return false;
-            }
-
-            if (!FlowerSeasonNow(map))
-            {
-                reason = LocalizeString_Inspector.VV_Inspector_LureConditionSeason.Translate();
-                return false;
-            }
-
-            if (OutdoorDangerous(map))
-            {
-                reason = LocalizeString_Inspector.VV_Inspector_LureConditionWeather.Translate();
-                return false;
-            }
-
-            reason = null;
-            return true;
-        }
 
         // 방문·정착대 도착 공통 조건. 유인통 자체(미끼·진행 상태)는 호출하는 쪽이 따로 본다.
         public static bool CheckArrivalConditions(Map map, out string reason)
@@ -304,7 +308,26 @@ namespace VVRace
                 return false;
             }
 
-            return ClimateSuitable(map, out reason);
+            if (!TemperatureSuitable(map))
+            {
+                reason = LocalizeString_Inspector.VV_Inspector_LureConditionTemperature.Translate();
+                return false;
+            }
+
+            if (!FlowerSeasonNow(map))
+            {
+                reason = LocalizeString_Inspector.VV_Inspector_LureConditionSeason.Translate();
+                return false;
+            }
+
+            if (OutdoorDangerous(map))
+            {
+                reason = LocalizeString_Inspector.VV_Inspector_LureConditionWeather.Translate();
+                return false;
+            }
+
+            reason = null;
+            return true;
         }
 
         public static LordJob_ViviNest GetNestLordJob(this Pawn pawn) => pawn.GetLord()?.LordJob as LordJob_ViviNest;
@@ -336,6 +359,46 @@ namespace VVRace
                 CellFinder.EdgeRoadChance_Neutral,
                 allowFogged: false,
                 extraValidator: c => map.reachability.CanReach(c, destination, PathEndMode.Touch, TraverseParms.For(TraverseMode.PassDoors)));
+        }
+
+        // 건물·청사진·골조(둥지 칸 고르기가 피하는 것)
+        public static bool IsStructure(Thing thing) => thing is Building || thing.def.IsBlueprint || thing.def.IsFrame;
+
+        // 네 방향 이웃에 지나갈 수 없는 구조물(벽 등)이 있는 칸
+        public static bool TouchesWall(IntVec3 cell, Map map)
+        {
+            foreach (var dir in GenAdj.CardinalDirections)
+            {
+                var adj = cell + dir;
+                var edifice = adj.InBounds(map) ? adj.GetEdifice(map) : null;
+                if (edifice != null && edifice.def.passability == Traversability.Impassable) { return true; }
+            }
+            return false;
+        }
+
+        // def를 count개 만들어 더미 한도씩 나눠 into에 더한다.
+        public static void MakeStacks(ThingDef def, int count, List<Thing> into)
+        {
+            if (def == null) { return; }
+
+            while (count > 0)
+            {
+                var thing = ThingMaker.MakeThing(def);
+                thing.stackCount = UnityEngine.Mathf.Min(count, def.stackLimit);
+                count -= thing.stackCount;
+                into.Add(thing);
+            }
+        }
+
+        // 구성원이 만든 산출물(채취물·땅 비료)을 cell 둘레에 둥지 몫으로 놓는다(둥지를 떠났으면 그냥 놓는다). 놓지 못하면 없앤다.
+        public static void PlaceProduct(Pawn pawn, Thing thing, IntVec3 cell)
+        {
+            var nest = pawn.GetNestLordJob();
+            var placed = nest != null ? nest.TryPlaceOwned(thing, cell) : GenPlace.TryPlaceThing(thing, cell, pawn.Map, ThingPlaceMode.Near);
+            if (!placed && !thing.Destroyed)
+            {
+                thing.Destroy();
+            }
         }
     }
 }

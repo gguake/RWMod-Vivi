@@ -49,9 +49,8 @@ namespace VVRace
         // (바닐라 우선도 정렬은 우선도가 0보다 크면 실패해도 사고마다 TryGiveJob을 부른다).
         public override float GetPriority(Pawn pawn)
         {
-            var nest = pawn.GetNestLordJob();
-            if (nest == null || !nest.Settled || pawn.DevelopmentalStage.Baby()) { return 0f; }
-            if (JobGiver_ViviNestRest.IsNight(pawn) || BeekeepingUtility.OutdoorDangerous(pawn.Map)) { return 0f; }
+            var nest = WorkingNest(pawn);
+            if (nest == null) { return 0f; }
 
             var production = nest.Production;
             foreach (var gathering in Gatherings)
@@ -63,9 +62,8 @@ namespace VVRace
 
         protected override Job TryGiveJob(Pawn pawn)
         {
-            var nest = pawn.GetNestLordJob();
-            if (nest == null || !nest.Settled || pawn.DevelopmentalStage.Baby()) { return null; }
-            if (JobGiver_ViviNestRest.IsNight(pawn) || BeekeepingUtility.OutdoorDangerous(pawn.Map)) { return null; }
+            var nest = WorkingNest(pawn);
+            if (nest == null) { return null; }
 
             var production = nest.Production;
             _tmpOrder.Clear();
@@ -99,6 +97,14 @@ namespace VVRace
             return job;
         }
 
+        // 채집할 수 있는 둥지(GetPriority·TryGiveJob 공통 조건): 정착했고, 아기가 아니며, 바깥 일을 쉬지 않을 때
+        private static LordJob_ViviNest WorkingNest(Pawn pawn)
+        {
+            var nest = pawn.GetNestLordJob();
+            if (nest == null || !nest.Settled || pawn.DevelopmentalStage.Baby()) { return null; }
+            return BeekeepingUtility.OutdoorWorkPaused(pawn) ? null : nest;
+        }
+
         // 모자라고, 대상을 기다리는 중이 아니며, 이 비비가 할 수 있는 채집
         private static bool CanTry(Pawn pawn, RecipeDef_Gathering recipe, ViviNestProduction production)
         {
@@ -111,17 +117,11 @@ namespace VVRace
         {
             if (!production.TryGetGatherStats(pawn, recipe, out var statsOk))
             {
-                statsOk = StatsAllow(pawn, recipe);
+                statsOk = !(recipe.workSpeedStat != null && pawn.GetStatValue(recipe.workSpeedStat) <= 0f)
+                    && !(recipe.efficiencyStat != null && pawn.GetStatValue(recipe.efficiencyStat) <= 0f);
                 production.SetGatherStats(pawn, recipe, statsOk);
             }
             return statsOk && recipe.FirstSkillRequirementPawnDoesntSatisfy(pawn) == null;
-        }
-
-        private static bool StatsAllow(Pawn pawn, RecipeDef_Gathering recipe)
-        {
-            if (recipe.workSpeedStat != null && pawn.GetStatValue(recipe.workSpeedStat) <= 0f) { return false; }
-            if (recipe.efficiencyStat != null && pawn.GetStatValue(recipe.efficiencyStat) <= 0f) { return false; }
-            return true;
         }
 
         // 채집 범위 안의 되풀이 채집 대상(기존 채집 시스템이 재채집 대기를 다는 것, CompRepeatGatherable)과 그 부품
@@ -177,7 +177,7 @@ namespace VVRace
                     var cooldownEnd = CooldownEndTick(_tmpGatherableComps[i], cooldownStat);
                     if (cooldownEnd > ticks)
                     {
-                        if (readyTick < 0 || cooldownEnd < readyTick) { readyTick = cooldownEnd; }
+                        readyTick = BeekeepingUtility.EarlierTick(readyTick, cooldownEnd);
                         continue;
                     }
                 }
@@ -188,8 +188,7 @@ namespace VVRace
                     var minGrowth = thing.GetStatValue(VVStatDefOf.VV_MinGrowthPlantGatherable);
                     if (plant.Growth < minGrowth)
                     {
-                        var ready = BeekeepingUtility.GrowthReadyTick(plant, minGrowth, ViviNestProduction.GatherRetryMaxTicks);
-                        if (ready >= 0 && (readyTick < 0 || ready < readyTick)) { readyTick = ready; }
+                        readyTick = BeekeepingUtility.EarlierTick(readyTick, BeekeepingUtility.GrowthReadyTick(plant, minGrowth, ViviNestProduction.GatherRetryMaxTicks));
                         continue;
                     }
                 }

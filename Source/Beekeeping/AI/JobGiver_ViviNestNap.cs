@@ -26,21 +26,9 @@ namespace VVRace
 
             if (!RestUtility.CanFallAsleep(pawn) || RestUtility.DisturbancePreventsLyingDown(pawn)) { return null; }
 
-            Job job;
-            var bed = nest.FindBedFor(pawn);
-            if (bed != null)
-            {
-                job = JobMaker.MakeJob(VVJobDefOf.VV_ViviNestNap, bed);
-            }
-            else if (nest.TryFindSleepSpot(pawn, out var cell))
-            {
-                job = JobMaker.MakeJob(VVJobDefOf.VV_ViviNestNap, cell);
-            }
-            else
-            {
-                return null;
-            }
+            if (!nest.TryFindSleepTarget(pawn, out var target)) { return null; }
 
+            var job = JobMaker.MakeJob(VVJobDefOf.VV_ViviNestNap, target);
             job.expiryInterval = NapTicks.RandomInRange;
             // 바닐라 눕기 잡은 잡 정의의 보고 문자열 대신 자는 중·쉬는 중을 보이므로 낮잠 보고 문자열을 덮어 쓴다.
             job.reportStringOverride = job.def.reportString;
