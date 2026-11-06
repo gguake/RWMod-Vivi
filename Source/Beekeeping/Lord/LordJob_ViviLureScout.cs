@@ -158,7 +158,7 @@ namespace VVRace
             Find.Storyteller.incidentQueue.Add(VVIncidentDefOf.VV_ViviNestSettlers, fireTick, parms);
             lure.Notify_SettlersQueued(fireTick);
 
-            Messages.Message(LocalizeString_Message.VV_Message_ViviLureScoutsSatisfied.Translate(report.TotalScore.ToStringPercent()), lure, MessageTypeDefOf.PositiveEvent);
+            Messages.Message(LocalizeString_Message.VV_Message_ViviLureScoutsSatisfied.Translate(), lure, MessageTypeDefOf.PositiveEvent);
         }
 
         public override void ExposeData()

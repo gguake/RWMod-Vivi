@@ -104,7 +104,7 @@ namespace VVRace
             return GetNestLord(map) != null;
         }
 
-        // 둥지 부화기에서 깬 아기는 둥지 무리에 들고, 지켜보는 플레이어에게 알린다.
+        // 둥지 부화기에서 깬 아기는 둥지 무리에 든다. 둥지 안 일이라 플레이어에게 알리지 않는다.
         public static void Notify_NestBabyHatched(Pawn baby, Thing hatchery)
         {
             var lord = GetNestLord(hatchery.Map);
@@ -112,7 +112,6 @@ namespace VVRace
 
             RemoveChemicalDependencies(baby);
             lord.AddPawn(baby);
-            Messages.Message(LocalizeString_Message.VV_Message_ViviNestBabyHatched.Translate(baby.Faction.Name), baby, MessageTypeDefOf.PositiveEvent);
         }
 
         public static Lord GetNestLord(Map map)

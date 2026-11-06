@@ -40,10 +40,10 @@ namespace VVRace
             var map = (Map)parms.target;
             var faction = parms.faction;
 
+            // 유인통이 없어졌으면(포장·철거·파괴) 플레이어가 이미 아는 일이라 알리지 않고 조용히 거둔다.
             var lure = BeekeepingUtility.FindReservingLure(map, faction);
             if (lure == null)
             {
-                Messages.Message(LocalizeString_Message.VV_Message_ViviNestSettlersNoLure.Translate(), MessageTypeDefOf.NeutralEvent);
                 BeekeepingUtility.ReleaseWanderingFaction(faction);
                 return true;
             }

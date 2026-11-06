@@ -65,14 +65,12 @@
 <VV_Message_ViviLureBear>{PAWN_definite} has caught the honey scent and is coming for the lure.</VV_Message_ViviLureBear>
 <VV_Message_ViviLureScoutsFled>The vivi scouts left in a hurry. They will not report this place.</VV_Message_ViviLureScoutsFled>
 <VV_Message_ViviLureScoutsDisappointed>The vivi scouts left without much interest.\n{0}</VV_Message_ViviLureScoutsDisappointed>
-<VV_Message_ViviLureScoutsSatisfied>The vivi scouts liked this place (nest score {0}). A band of vivis may come soon.</VV_Message_ViviLureScoutsSatisfied>
+<VV_Message_ViviLureScoutsSatisfied>The vivi scouts liked this place. A band of vivis may come soon.</VV_Message_ViviLureScoutsSatisfied>
 
 <!-- Settlers -->
 <VV_Letter_ViviNestSettlersLabel>Vivis move in</VV_Letter_ViviNestSettlersLabel>
 <VV_Letter_ViviNestSettlers>A band of {1} vivis from {0} has come to live in the empty room near your lure.\n\nThey gather honey, pollen and propolis from the flowers and trees around, make cream and wax, and build what they need on their own. Their stores are marked forbidden; you may take them freely.\n\nThe vivis do not mind your colonists nearby, but they grow wary quickly when your people step inside their rooms. If they become too wary, they will turn hostile and leave. Keep your people out by forbidding the doors of their rooms or by setting allowed areas.</VV_Letter_ViviNestSettlers>
-<VV_Message_ViviNestSettlersNoLure>The vivi band that was expected did not come: the lure is gone.</VV_Message_ViviNestSettlersNoLure>
 <VV_Message_ViviNestSettlersCanceled>The vivi band that was expected did not come.\n{0}</VV_Message_ViviNestSettlersCanceled>
-<VV_Message_ViviNestBabyHatched>A baby vivi hatched in the nest of {0}.</VV_Message_ViviNestBabyHatched>
 <VV_Message_ViviNestWary>The vivis of {0} are getting wary of your colonists in their rooms.</VV_Message_ViviNestWary>
 <VV_Message_ViviNestVeryWary>The vivis of {0} are very wary. Keep your colonists out of their rooms.</VV_Message_ViviNestVeryWary>
 <VV_Message_ViviNestRescuedReturned>{PAWN_definite} has gone back to the nest, grateful for the rescue.</VV_Message_ViviNestRescuedReturned>
