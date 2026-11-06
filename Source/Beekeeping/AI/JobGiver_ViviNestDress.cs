@@ -11,7 +11,7 @@ namespace VVRace
     // NPC는 바닐라 옷 고르기를 하지 않으므로 둥지 비비의 옷·무기를 바닐라 규칙으로 고른다(사용자 요구 "근처에 옷이나 장비가 있으면 입도록, 옷 입는 규칙은 바닐라와 동일").
     // 고르는 것은 둥지 비비가 쓸 수 있는 옷·무기(금지 판정, LordJob_ViviNest.CanUse): 둥지 몫과 둥지 둘레에 놓인 것(IsFreeGear, 플레이어가 두어 입게 할 수 있다)이다.
     // - 옷: 정착민 옷 고르기(JobGiver_OptimizeApparel)와 같은 후보 조건·점수로 가장 나은 것을 입고, 바닐라처럼 6000~9000틱마다 다시 본다.
-    //   둥지가 만든 기본옷은 기본옷 자리가 빈 비비(NeedsCostume)가 기다리지 않고 바로 본다.
+    //   둥지가 만든 기본옷·아동복은 그 옷 자리가 빈 비비(NeedsCostume)가 기다리지 않고 바로 본다.
     // - 무기: NPC 무기 줍기(JobGiver_PickUpOpportunisticWeapon)의 판정으로 지금 무기보다 나은 것(원거리 > 근접 > 맨손)을 가장 가까운 것부터 든다.
     //   둥지가 만든 새총은 새총잡이(NeedsSlingshot) 몫이라 바로 보고, 다른 구성원은 둥지 둘레에 놓인 무기만 본다(둥지 새총을 일반 비비가 가져가 새총잡이가 기다리지 않게).
     public class JobGiver_ViviNestDress : ThinkNode_JobGiver
@@ -37,7 +37,7 @@ namespace VVRace
             if (nest == null || !nest.Settled || pawn.apparel == null || pawn.DevelopmentalStage.Baby()) { return null; }
 
             var map = pawn.Map;
-            var job = (ViviNestProduction.NeedsCostume(pawn) ? WearJob(pawn, map.listerThings.ThingsOfDef(VVThingDefOf.VV_BasicWorkerCostume)) : null)
+            var job = (ViviNestProduction.NeedsCostume(pawn) ? WearJob(pawn, map.listerThings.ThingsOfDef(ViviNestProduction.CostumeFor(pawn))) : null)
                 ?? (ViviNestProduction.NeedsSlingshot(pawn) ? EquipJob(pawn, nest, map.listerThings.ThingsOfDef(VVThingDefOf.VV_Slingshot), nestOwned: true) : null);
             if (job != null) { return job; }
 

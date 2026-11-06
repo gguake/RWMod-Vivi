@@ -59,6 +59,39 @@ namespace VVRace
             return false;
         }
 
+        // 재료 하나만 받는 레시피(옷처럼 재료로 만드는 것)에 쓸 수 있는 물건 수. 옷은 천뿐 아니라 가죽 등 그 옷이 받는 재료를 모두 센다.
+        public int CountUsableFor(RecipeDef recipe)
+        {
+            RefreshIfNeeded();
+            var count = 0;
+            foreach (var pair in _counts)
+            {
+                if (pair.Value > 0 && IsUsableIngredient(recipe, pair.Key)) { count += pair.Value; }
+            }
+            return count;
+        }
+
+        // 그 레시피를 몇 번 만들 수 있는지. 바닐라 제작은 재료를 섞지 않으므로(allowMixingIngredients가 아니면 한 종류로만 채운다) 재료 종류마다 따로 나눠 더한다.
+        public int BatchesFor(RecipeDef recipe)
+        {
+            RefreshIfNeeded();
+            var batches = 0;
+            foreach (var pair in _counts)
+            {
+                if (pair.Value <= 0 || !IsUsableIngredient(recipe, pair.Key)) { continue; }
+
+                var required = recipe.ingredients[0].CountRequiredOfFor(pair.Key, recipe);
+                if (required > 0) { batches += pair.Value / required; }
+            }
+            return batches;
+        }
+
+        private static bool IsUsableIngredient(RecipeDef recipe, ThingDef def)
+        {
+            return recipe.ingredients.Count == 1 && recipe.ingredients[0].filter.Allows(def)
+                && (recipe.defaultIngredientFilter == null || recipe.defaultIngredientFilter.Allows(def));
+        }
+
         // 둥지 비비가 먹을 수 있는 음식의 영양 합(식량 여유 계산용)
         public float FoodNutrition
         {

@@ -204,6 +204,7 @@ namespace VVRace
 
         public static ThingDef VV_ViviLure;
         public static ThingDef VV_BasicWorkerCostume;
+        public static ThingDef VV_Childrenswear;
         public static ThingDef RawBerries;
         public static ThingDef VV_ViviNestWorkSpot;
         public static ThingDef VV_Pollen;
@@ -258,6 +259,7 @@ namespace VVRace
         public static RecipeDef VV_MakeViviwax;
         public static RecipeDef VV_Make_HoneyPollenCake;
         public static RecipeDef Make_VV_BasicWorkerCostume;
+        public static RecipeDef Make_VV_Childrenswear;
         public static RecipeDef Make_VV_Slingshot;
     }
 

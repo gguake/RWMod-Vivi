@@ -33,7 +33,6 @@ namespace VVRace
         public const float FertilizerReserveDays = 5f;
         public const int CakeTarget = 40;
         public const int MedicineTarget = 10;
-        public const int ClothForCostume = 50;
         public const int CreamReserveForWax = 30;
         // 크림은 비비의 열량을 쓰므로 둥지 식량이 이만큼(일) 남았을 때만 만든다.
         public const float MinFoodDaysForCream = 2f;
@@ -119,6 +118,7 @@ namespace VVRace
                     _workRecipes = new List<RecipeDef>
                     {
                         VVRecipeDefOf.Make_VV_BasicWorkerCostume,
+                        VVRecipeDefOf.Make_VV_Childrenswear,
                         VVRecipeDefOf.Make_VV_Slingshot,
                         VVRecipeDefOf.VV_MakeVivicream,
                         VVRecipeDefOf.VV_MakeViviwax,
@@ -365,6 +365,7 @@ namespace VVRace
             _billNeed[VVRecipeDefOf.VV_GatherPollen] = Shortage(pollen, PollenTarget);
             _billNeed[VVRecipeDefOf.VV_GatherPropolis] = Shortage(propolis, PropolisTarget);
             _billNeed[VVRecipeDefOf.Make_VV_BasicWorkerCostume] = 1f;
+            _billNeed[VVRecipeDefOf.Make_VV_Childrenswear] = 1f;
             _billNeed[VVRecipeDefOf.Make_VV_Slingshot] = 1f;
             _billNeed[VVRecipeDefOf.VV_MakeVivicream] = Shortage(cream, Target(VVThingDefOf.VV_Vivicream, CreamTarget));
             _billNeed[VVRecipeDefOf.VV_MakeViviwax] = Shortage(wax, Target(VVThingDefOf.VV_Viviwax, WaxTarget));
@@ -448,6 +449,7 @@ namespace VVRace
 
         // 그 지시로 지금 만들어야 할 묶음 수(0이면 멈춘다): 목표까지 모자란 양을 한 번에 나오는 양으로 나눠 올리고, 둥지 몫 재료로 만들 수 있는 묶음 수를 넘지 않는다.
         // 켜는 조건은 자리가 하나일 때와 같다(크림은 식량이 이틀 치 넘을 때, 밀랍은 크림 30마다, 옷·새총은 필요한 비비 수만큼, 꿀 거르기는 날꿀 20마다).
+        // 옷은 그 옷이 받는 재료(천·가죽 등)를 종류마다 따로 세어 만들 수 있는 벌 수까지 만든다.
         public int WantedBatches(RecipeDef recipe)
         {
             var stock = Stock;
@@ -462,9 +464,10 @@ namespace VVRace
                 var wax = stock.CountOf(VVThingDefOf.VV_Viviwax);
                 batches = UnityEngine.Mathf.Min(Batches(recipe, Target(VVThingDefOf.VV_Viviwax, WaxTarget) - wax), stock.CountOf(VVThingDefOf.VV_Vivicream) / CreamReserveForWax);
             }
-            else if (recipe == VVRecipeDefOf.Make_VV_BasicWorkerCostume)
+            else if (recipe == VVRecipeDefOf.Make_VV_BasicWorkerCostume || recipe == VVRecipeDefOf.Make_VV_Childrenswear)
             {
-                batches = UnityEngine.Mathf.Min(MembersNeedingCostume() - stock.CountOf(VVThingDefOf.VV_BasicWorkerCostume), stock.CountOf(ThingDefOf.Cloth) / ClothForCostume);
+                var costume = recipe.ProducedThingDef;
+                batches = UnityEngine.Mathf.Min(MembersNeedingCostume(costume) - stock.CountOf(costume), stock.BatchesFor(recipe));
             }
             else if (recipe == VVRecipeDefOf.Make_VV_Slingshot)
             {
@@ -681,15 +684,26 @@ namespace VVRace
             return perUnit > 0f ? UnityEngine.Mathf.Max(HoneyCapacity, UnityEngine.Mathf.CeilToInt(FoodPerDay() * winterDays / perUnit)) : HoneyCapacity;
         }
 
-        public int MembersNeedingCostume() => CountMembers(p => NeedsCostume(p));
+        public int MembersNeedingCostume(ThingDef costume) => CountMembers(p => NeedsCostume(p) && CostumeFor(p) == costume);
 
-        // 어른 일반 비비는 기본옷 자리(기본옷과 함께 입을 수 없는 옷)가 비었거나 낡았으면(내구도 40% 미만) 기본옷이 필요하다(로열·아이는 처음 입고 온 옷을 그대로 쓴다).
-        // 둥지 둘레에서 주워 입은 옷(JobGiver_ViviNestDress)이 그 자리를 채우면 기본옷을 따로 만들지 않는다.
+        // 둥지가 지어 입히는 옷: 어른 일반 비비는 기본옷, 아이는 아동복(로열은 처음 입고 온 옷을 그대로 쓴다). 아기는 옷을 입지 않는다.
+        public static ThingDef CostumeFor(Pawn pawn)
+        {
+            if (pawn.apparel == null || pawn.IsRoyalVivi()) { return null; }
+
+            var stage = pawn.DevelopmentalStage;
+            if (stage.Adult()) { return VVThingDefOf.VV_BasicWorkerCostume; }
+            if (stage.Child()) { return VVThingDefOf.VV_Childrenswear; }
+            return null;
+        }
+
+        // 둥지가 지어 입히는 옷(CostumeFor)의 자리(그 옷과 함께 입을 수 없는 옷)가 비었거나 낡았으면(내구도 40% 미만) 그 옷이 필요하다.
+        // 둥지 둘레에서 주워 입은 옷(JobGiver_ViviNestDress)이 그 자리를 채우면 따로 만들지 않는다.
         public static bool NeedsCostume(Pawn pawn)
         {
-            if (!pawn.DevelopmentalStage.Adult() || pawn.IsRoyalVivi() || pawn.apparel == null) { return false; }
+            var costume = CostumeFor(pawn);
+            if (costume == null) { return false; }
 
-            var costume = VVThingDefOf.VV_BasicWorkerCostume;
             foreach (var apparel in pawn.apparel.WornApparel)
             {
                 if (!ApparelUtility.CanWearTogether(apparel.def, costume, pawn.RaceProps.body) && apparel.HitPoints >= apparel.MaxHitPoints * 0.4f)

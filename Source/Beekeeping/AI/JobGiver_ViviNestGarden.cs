@@ -34,7 +34,7 @@ namespace VVRace
         private static Job SowCottonJob(Pawn pawn, LordJob_ViviNest nest)
         {
             var map = pawn.Map;
-            if (nest.Stock.CountOf(ThingDefOf.Cloth) >= ViviNestGarden.ClothTarget) { return null; }
+            if (nest.Stock.CountUsableFor(VVRecipeDefOf.Make_VV_BasicWorkerCostume) >= ViviNestGarden.ClothTarget) { return null; }
 
             foreach (var cell in nest.Garden.CottonCells)
             {
