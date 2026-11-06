@@ -139,14 +139,16 @@ namespace VVRace
             return 0f;
         }
 
-        // 정착할 때 방의 경계(벽·문)를 기억해 두고, 방 밖 가까운 빈 땅에 보관 칸을 잡는다.
+        private static readonly List<Room> _tmpStructure = new List<Room>();
+
+        // 정착할 때 둥지 방(둥지 중심 칸의 구조물)의 경계(벽·문)를 기억해 두고, 바깥으로 난 문 밖 가까운 빈 땅에 보관 칸을 잡는다.
         public void Establish(IntVec3 nestCell)
         {
-            AddRoom(nestCell);
+            AddStructure(nestCell);
 
             _outdoorStorageCells.Clear();
-            var doors = BorderDoors;
-            var origin = doors.Count > 0 ? doors[0].Position : _roomCells.FirstOrDefault();
+            var door = EntranceDoor;
+            var origin = door != null ? door.Position : _roomCells.FirstOrDefault();
             var cellCount = GenRadial.NumCellsInRadius(OutdoorStorageSearchRadius);
             for (int i = 0; i < cellCount && _outdoorStorageCells.Count < OutdoorStorageCellCount; ++i)
             {
@@ -156,6 +158,28 @@ namespace VVRace
                     _outdoorStorageCells.Add(cell);
                 }
             }
+        }
+
+        // 둥지 중심 칸의 방과 문으로 이어진 방들(유인통이 판정한 구조물, ViviNestSiteEvaluator.CollectStructureRooms)을 둥지 방으로 넣는다.
+        // 정착대가 오는 사이 구조물이 바뀌어 판정을 통과하지 못하면 중심 방만 넣는다.
+        private void AddStructure(IntVec3 nestCell)
+        {
+            var map = Map;
+            var nestRoom = nestCell.GetRoom(map);
+            ViviNestSiteEvaluator.CollectStructureRooms(nestRoom, _tmpStructure);
+            if (_tmpStructure.Count > 1 && ViviNestSiteEvaluator.StructureScore(_tmpStructure, map, out _, out _) > 0f)
+            {
+                foreach (var room in _tmpStructure)
+                {
+                    var cell = room == nestRoom ? nestCell : ViviNestSiteEvaluator.CentralCell(room, map);
+                    AddRoom(cell.IsValid ? cell : room.Cells.First());
+                }
+            }
+            else
+            {
+                AddRoom(nestCell);
+            }
+            _tmpStructure.Clear();
         }
 
         public void AddRoom(IntVec3 roomCell)
@@ -189,6 +213,36 @@ namespace VVRace
             {
                 EnsureBorderDoors();
                 return _borderDoors;
+            }
+        }
+
+        // 바깥으로 난 경계 문: 문 칸 4방향 이웃에 구조물 밖(ViviNestSiteEvaluator.IsOutside) 방이 있는 문. 구조물의 방 사이 문은 아니다.
+        public bool IsOuterDoor(Building_Door door)
+        {
+            var map = Map;
+            foreach (var cell in door.OccupiedRect())
+            {
+                foreach (var adj in GenAdj.CardinalDirections)
+                {
+                    var c = cell + adj;
+                    var room = c.InBounds(map) ? c.GetRoom(map) : null;
+                    if (room != null && !room.IsDoorway && ViviNestSiteEvaluator.IsOutside(room)) { return true; }
+                }
+            }
+            return false;
+        }
+
+        // 출입구: 바깥으로 난 첫 경계 문, 없으면 첫 경계 문(문이 없으면 null)
+        public Building_Door EntranceDoor
+        {
+            get
+            {
+                var doors = BorderDoors;
+                for (int i = 0; i < doors.Count; ++i)
+                {
+                    if (IsOuterDoor(doors[i])) { return doors[i]; }
+                }
+                return doors.Count > 0 ? doors[0] : null;
             }
         }
 

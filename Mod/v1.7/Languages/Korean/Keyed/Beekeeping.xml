@@ -10,16 +10,16 @@
 <VV_Inspector_LureAwaitingSettlers>약 {0} 뒤 비비 무리가 올 것 같습니다.</VV_Inspector_LureAwaitingSettlers>
 <VV_Inspector_LureConditionMap>이 맵에는 비비가 찾아오지 않습니다.</VV_Inspector_LureConditionMap>
 <VV_Inspector_LureConditionRoyal>맵에 이미 로열 비비가 있습니다.</VV_Inspector_LureConditionRoyal>
-<VV_Inspector_LureConditionViviCount>정착지의 비비가 너무 많습니다 ({0}/{1}).</VV_Inspector_LureConditionViviCount>
+<VV_Inspector_LureConditionViviCount>정착지의 비비가 너무 많습니다.</VV_Inspector_LureConditionViviCount>
 <VV_Inspector_LureConditionHostile>맵에 적대 생물이 있습니다.</VV_Inspector_LureConditionHostile>
 <VV_Inspector_LureConditionTemperature>바깥이 비비에게 너무 덥거나 춥습니다.</VV_Inspector_LureConditionTemperature>
 <VV_Inspector_LureConditionSeason>지금은 꽃이 자라는 철이 아닙니다.</VV_Inspector_LureConditionSeason>
 <VV_Inspector_LureConditionWeather>지금은 바깥에 있기 위험합니다.</VV_Inspector_LureConditionWeather>
-<VV_Inspector_LureConditionUnreachable>맵 가장자리에서 그 방까지 갈 길이 없습니다.</VV_Inspector_LureConditionUnreachable>
-<VV_Inspector_LureMissingFlowers>주변에 꿀이 나는 꽃이 부족합니다 ({0}/{1}).</VV_Inspector_LureMissingFlowers>
-<VV_Inspector_LureMissingRoom>주변에 문이 있고 지붕이 다 덮인 빈 방이 없습니다.</VV_Inspector_LureMissingRoom>
-<VV_Inspector_LureMissingFertileSoil>주변에 비옥한 땅이 부족합니다 ({0}/{1}).</VV_Inspector_LureMissingFertileSoil>
-<VV_Inspector_LureMissingGrowingPeriod>이 땅은 꽃이 자라는 철이 너무 짧아 겨울을 날 꿀을 모을 수 없습니다 (성장 기간 {0}일, {1}일 이상 필요).</VV_Inspector_LureMissingGrowingPeriod>
+<VV_Inspector_LureConditionUnreachable>맵 가장자리에서 그 구조물까지 갈 길이 없습니다.</VV_Inspector_LureConditionUnreachable>
+<VV_Inspector_LureMissingFlowers>주변에 꿀이 나는 꽃이 부족합니다.</VV_Inspector_LureMissingFlowers>
+<VV_Inspector_LureMissingRoom>주변에 문이 있고 지붕이 다 덮인 빈 구조물이 없습니다.</VV_Inspector_LureMissingRoom>
+<VV_Inspector_LureMissingFertileSoil>주변에 비옥한 땅이 부족합니다.</VV_Inspector_LureMissingFertileSoil>
+<VV_Inspector_LureMissingGrowingPeriod>이 땅은 꽃이 자라는 철이 너무 짧아 겨울을 날 꿀을 모을 수 없습니다.</VV_Inspector_LureMissingGrowingPeriod>
 
 <!-- 유인 조건 탭 -->
 <VV_ITab_ViviLure_TabLabel>유인 조건</VV_ITab_ViviLure_TabLabel>
@@ -30,38 +30,32 @@
 <VV_ITab_ViviLure_Map>본거지 지상 맵</VV_ITab_ViviLure_Map>
 <VV_ITab_ViviLure_NoRoyal>맵에 로열 비비가 없음</VV_ITab_ViviLure_NoRoyal>
 <VV_ITab_ViviLure_ViviCount>정착지 비비 {0}마리 이하</VV_ITab_ViviLure_ViviCount>
-<VV_ITab_ViviLure_ViviCountValue>{0}마리</VV_ITab_ViviLure_ViviCountValue>
 <VV_ITab_ViviLure_NoHostile>맵에 적대 생물이 없음</VV_ITab_ViviLure_NoHostile>
 <VV_ITab_ViviLure_Temperature>비비에게 알맞은 기온</VV_ITab_ViviLure_Temperature>
-<VV_ITab_ViviLure_TemperatureValue>{0} (계절 {1})</VV_ITab_ViviLure_TemperatureValue>
-<VV_ITab_ViviLure_TemperatureTip>기본옷을 입은 비비의 안전 기온은 {0}~{1}입니다. 지금 바깥 기온과 계절 기온이 모두 이 안이어야 합니다.</VV_ITab_ViviLure_TemperatureTip>
+<VV_ITab_ViviLure_TemperatureTip>기본옷을 입은 비비가 바깥에서 버틸 수 있는 기온이어야 합니다. 지금 기온과 계절 기온을 함께 봅니다.</VV_ITab_ViviLure_TemperatureTip>
 <VV_ITab_ViviLure_Season>꽃이 자라는 철</VV_ITab_ViviLure_Season>
 <VV_ITab_ViviLure_Weather>바깥 활동이 위험하지 않음</VV_ITab_ViviLure_Weather>
 <VV_ITab_ViviLure_WeatherTip>독성 낙진·유독 연무처럼 바깥에 있기 위험한 동안에는 오지 않습니다.</VV_ITab_ViviLure_WeatherTip>
 <VV_ITab_ViviLure_Bait>꿀 음식 미끼</VV_ITab_ViviLure_Bait>
-<VV_ITab_ViviLure_BaitValue>{0}개</VV_ITab_ViviLure_BaitValue>
 <VV_ITab_ViviLure_BaitTip>꿀, 암브로시아, 꿀이 든 음식, 산딸기를 올려 두면 향이 퍼집니다. 찾아온 정찰 비비는 냄새를 맡으며 하나씩 먹고, 곰은 남김없이 먹어 치웁니다.</VV_ITab_ViviLure_BaitTip>
 <VV_ITab_ViviLure_NoOtherLure>진행 중인 다른 유인·둥지가 없음</VV_ITab_ViviLure_NoOtherLure>
 <VV_ITab_ViviLure_Reachable>맵 가장자리에서 걸어올 길</VV_ITab_ViviLure_Reachable>
 <VV_ITab_ViviLure_Flowers>꿀 꽃 {0}송이 이상</VV_ITab_ViviLure_Flowers>
-<VV_ITab_ViviLure_FlowersValue>{0}송이 (점수 {1})</VV_ITab_ViviLure_FlowersValue>
-<VV_ITab_ViviLure_FlowersTip>유인통 둘레 {0}칸 안에서 꿀이 나는 꽃을 셉니다. {1}송이면 꽃 점수가 가득 찹니다.</VV_ITab_ViviLure_FlowersTip>
-<VV_ITab_ViviLure_Room>문 있고 지붕 덮인 빈 방</VV_ITab_ViviLure_Room>
-<VV_ITab_ViviLure_RoomValue>{0}칸, 건물 {1}개 (점수 {2})</VV_ITab_ViviLure_RoomValue>
-<VV_ITab_ViviLure_RoomTip>유인통 둘레 {0}칸 안에서 가장 알맞은 방을 고릅니다. 문이 있고 지붕이 다 덮인 {1}~{2}칸 방이어야 하고, 누군가의 침실·감옥·그래비쉽 위 방은 쓰지 않습니다. 방 안 건물(마법식물·화분·유인통 제외) 하나마다 방 점수가 {3}씩 깎입니다.</VV_ITab_ViviLure_RoomTip>
-<VV_ITab_ViviLure_RoomReachable>맵 가장자리에서 방까지 걸어올 길</VV_ITab_ViviLure_RoomReachable>
+<VV_ITab_ViviLure_FlowersTip>유인통 근처에서 꿀이 나는 꽃을 셉니다. 꽃이 많을수록 꽃 점수가 높습니다.</VV_ITab_ViviLure_FlowersTip>
+<VV_ITab_ViviLure_Room>문 있고 지붕 덮인 빈 구조물</VV_ITab_ViviLure_Room>
+<VV_ITab_ViviLure_RoomTip>유인통 근처에서 가장 알맞은 구조물을 고릅니다. 문으로 이어진 방은 한 구조물로 봅니다. 문이 있고 지붕이 다 덮여 있어야 하며, 너무 좁거나 넓은 구조물, 누군가의 침실이나 감옥이 이어진 구조물, 그래비쉽 위 구조물은 쓰지 않습니다. 알맞은 넓이일수록, 안에 건물(마법식물·화분·유인통 제외)이 적을수록 점수가 높습니다.</VV_ITab_ViviLure_RoomTip>
+<VV_ITab_ViviLure_RoomReachable>맵 가장자리에서 구조물까지 걸어올 길</VV_ITab_ViviLure_RoomReachable>
 <VV_ITab_ViviLure_None>없음</VV_ITab_ViviLure_None>
+<VV_ITab_ViviLure_PartScore>점수 {0}</VV_ITab_ViviLure_PartScore>
 <VV_ITab_ViviLure_FertileSoil>비옥한 땅 {0}칸 이상</VV_ITab_ViviLure_FertileSoil>
-<VV_ITab_ViviLure_FertileSoilValue>{0}칸</VV_ITab_ViviLure_FertileSoilValue>
-<VV_ITab_ViviLure_FertileSoilTip>유인통 둘레 {0}칸 안에서 지붕·건물·구역이 없고 비옥도가 {1} 이상인 칸을 셉니다. 비비 둥지는 이런 땅에 목화·장미·마법식물을 심고, 땅을 파서 마나 비료를 얻습니다.</VV_ITab_ViviLure_FertileSoilTip>
+<VV_ITab_ViviLure_FertileSoilTip>유인통 근처에서 지붕·건물·구역이 없는 비옥한 땅을 셉니다. 비비 둥지는 이런 땅에 목화·장미·마법식물을 심고, 땅을 파서 마나 비료를 얻습니다.</VV_ITab_ViviLure_FertileSoilTip>
 <VV_ITab_ViviLure_GrowingPeriod>성장 기간 {0}일 이상</VV_ITab_ViviLure_GrowingPeriod>
-<VV_ITab_ViviLure_GrowingPeriodTip>이 땅의 성장 기간입니다(세계 지도 지형 탭과 같습니다: 한 해 60일 가운데 평균 기온이 꿀 꽃이 잘 자라는 {0}~{1}인 날). 비비 둥지는 꽃이 자라는 철에 꿀을 모아 두고 겨울은 모은 꿀로 버팁니다. 성장 기간이 {2}일보다 짧은 땅에서는 겨울을 날 꿀을 다 모으지 못하므로 살러 오지 않습니다.</VV_ITab_ViviLure_GrowingPeriodTip>
+<VV_ITab_ViviLure_GrowingPeriodTip>세계 지도 지형 탭의 성장 기간과 같습니다. 비비 둥지는 꽃이 자라는 철에 꿀을 모아 두고 겨울은 모은 꿀로 버티므로, 성장 기간이 짧은 땅에는 살러 오지 않습니다.</VV_ITab_ViviLure_GrowingPeriodTip>
 <VV_ITab_ViviLure_Mana>환경 마나</VV_ITab_ViviLure_Mana>
-<VV_ITab_ViviLure_ManaValue>{0} (점수 {1})</VV_ITab_ViviLure_ManaValue>
-<VV_ITab_ViviLure_ManaTip>유인통 둘레 {0}칸의 평균 환경 마나입니다. 꼭 있어야 하지는 않고, {1}이면 마나 점수가 가득 찹니다.</VV_ITab_ViviLure_ManaTip>
+<VV_ITab_ViviLure_ManaTip>유인통 근처의 환경 마나입니다. 꼭 있어야 하지는 않고, 높을수록 마나 점수가 높습니다.</VV_ITab_ViviLure_ManaTip>
 <VV_ITab_ViviLure_Score>둥지 점수</VV_ITab_ViviLure_Score>
 <VV_ITab_ViviLure_ScoreValue>{0} (정착대 {1}마리)</VV_ITab_ViviLure_ScoreValue>
-<VV_ITab_ViviLure_ScoreTip>둥지 점수 = 꽃 점수×{0} + 방 점수×{1} + 마나 점수×{2}. 점수가 높을수록 비비 무리가 빨리({3} → {4}), 많이({5}~{6}마리) 옵니다.</VV_ITab_ViviLure_ScoreTip>
+<VV_ITab_ViviLure_ScoreTip>꽃·구조물·마나 점수를 합친 점수입니다(꽃이 가장 크게, 마나가 가장 작게 반영됩니다). 점수가 높을수록 비비 무리가 빨리, 많이 옵니다.</VV_ITab_ViviLure_ScoreTip>
 
 <!-- 유인 편지·메시지 -->
 <VV_Letter_ViviLureScoutsLabel>비비 정찰대</VV_Letter_ViviLureScoutsLabel>

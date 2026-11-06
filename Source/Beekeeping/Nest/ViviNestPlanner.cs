@@ -79,14 +79,14 @@ namespace VVRace
         private Faction Faction => _owner.Faction;
         private ViviNestTerritory Territory => _owner.Territory;
 
-        // 정착할 때 경계 중 문 칸을 기억해 둔다(문이 부서지면 문으로 다시 짓는다).
+        // 정착할 때 경계 중 문 칸을 기억해 둔다(문이 부서지면 문으로 다시 짓는다). 바깥으로 난 문을 앞에 둔다: 첫 문 칸이 증축 자리·바깥 건설 칸을
+        // 찾는 기준(EntranceCell)이라 구조물의 방 사이 문이 되면 안 된다.
         public void Notify_Established()
         {
             _doorCells.Clear();
-            var doors = Territory.BorderDoors;
-            for (int i = 0; i < doors.Count; ++i)
+            foreach (var door in Territory.BorderDoors.OrderByDescending(Territory.IsOuterDoor))
             {
-                _doorCells.Add(doors[i].Position);
+                _doorCells.Add(door.Position);
             }
         }
 

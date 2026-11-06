@@ -295,10 +295,9 @@ namespace VVRace
                 return false;
             }
 
-            var viviCount = CountPlayerVivis(map);
-            if (viviCount > MaxPlayerViviCount)
+            if (CountPlayerVivis(map) > MaxPlayerViviCount)
             {
-                reason = LocalizeString_Inspector.VV_Inspector_LureConditionViviCount.Translate(viviCount, MaxPlayerViviCount);
+                reason = LocalizeString_Inspector.VV_Inspector_LureConditionViviCount.Translate();
                 return false;
             }
 

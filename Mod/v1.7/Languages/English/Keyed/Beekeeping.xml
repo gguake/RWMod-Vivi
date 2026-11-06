@@ -10,16 +10,16 @@
 <VV_Inspector_LureAwaitingSettlers>A band of vivis is expected in about {0}.</VV_Inspector_LureAwaitingSettlers>
 <VV_Inspector_LureConditionMap>Vivis do not come to this map.</VV_Inspector_LureConditionMap>
 <VV_Inspector_LureConditionRoyal>A royal vivi is already on this map.</VV_Inspector_LureConditionRoyal>
-<VV_Inspector_LureConditionViviCount>Too many colony vivis ({0}/{1}).</VV_Inspector_LureConditionViviCount>
+<VV_Inspector_LureConditionViviCount>Too many colony vivis.</VV_Inspector_LureConditionViviCount>
 <VV_Inspector_LureConditionHostile>Hostiles are on the map.</VV_Inspector_LureConditionHostile>
 <VV_Inspector_LureConditionTemperature>It is too hot or too cold outside for vivis.</VV_Inspector_LureConditionTemperature>
 <VV_Inspector_LureConditionSeason>Flowers are not growing now.</VV_Inspector_LureConditionSeason>
 <VV_Inspector_LureConditionWeather>It is dangerous to be outside now.</VV_Inspector_LureConditionWeather>
-<VV_Inspector_LureConditionUnreachable>The vivis cannot reach the room from the map edge.</VV_Inspector_LureConditionUnreachable>
-<VV_Inspector_LureMissingFlowers>Not enough honey flowers nearby ({0}/{1}).</VV_Inspector_LureMissingFlowers>
-<VV_Inspector_LureMissingRoom>No empty room nearby with a door and a full roof.</VV_Inspector_LureMissingRoom>
-<VV_Inspector_LureMissingFertileSoil>Not enough fertile land nearby ({0}/{1}).</VV_Inspector_LureMissingFertileSoil>
-<VV_Inspector_LureMissingGrowingPeriod>The flowers here grow for too short a season to gather enough honey for the winter (growing period {0} days, needs {1}).</VV_Inspector_LureMissingGrowingPeriod>
+<VV_Inspector_LureConditionUnreachable>The vivis cannot reach the structure from the map edge.</VV_Inspector_LureConditionUnreachable>
+<VV_Inspector_LureMissingFlowers>Not enough honey flowers nearby.</VV_Inspector_LureMissingFlowers>
+<VV_Inspector_LureMissingRoom>No empty structure nearby with a door and a full roof.</VV_Inspector_LureMissingRoom>
+<VV_Inspector_LureMissingFertileSoil>Not enough fertile land nearby.</VV_Inspector_LureMissingFertileSoil>
+<VV_Inspector_LureMissingGrowingPeriod>The flowers here grow for too short a season to gather enough honey for the winter.</VV_Inspector_LureMissingGrowingPeriod>
 
 <!-- Lure conditions tab -->
 <VV_ITab_ViviLure_TabLabel>Conditions</VV_ITab_ViviLure_TabLabel>
@@ -30,38 +30,32 @@
 <VV_ITab_ViviLure_Map>Home map on the ground</VV_ITab_ViviLure_Map>
 <VV_ITab_ViviLure_NoRoyal>No royal vivi on the map</VV_ITab_ViviLure_NoRoyal>
 <VV_ITab_ViviLure_ViviCount>At most {0} colony vivis</VV_ITab_ViviLure_ViviCount>
-<VV_ITab_ViviLure_ViviCountValue>{0}</VV_ITab_ViviLure_ViviCountValue>
 <VV_ITab_ViviLure_NoHostile>No hostiles on the map</VV_ITab_ViviLure_NoHostile>
 <VV_ITab_ViviLure_Temperature>Comfortable temperature for vivis</VV_ITab_ViviLure_Temperature>
-<VV_ITab_ViviLure_TemperatureValue>{0} (season {1})</VV_ITab_ViviLure_TemperatureValue>
-<VV_ITab_ViviLure_TemperatureTip>Vivis in basic clothes are safe from {0} to {1}. Both the outdoor and the seasonal temperature must be in this range.</VV_ITab_ViviLure_TemperatureTip>
+<VV_ITab_ViviLure_TemperatureTip>It must be a temperature vivis in basic clothes can endure outdoors. Both the current and the seasonal temperature count.</VV_ITab_ViviLure_TemperatureTip>
 <VV_ITab_ViviLure_Season>Flowers are growing</VV_ITab_ViviLure_Season>
 <VV_ITab_ViviLure_Weather>Safe to be outside</VV_ITab_ViviLure_Weather>
 <VV_ITab_ViviLure_WeatherTip>Vivis do not come during toxic fallout, noxious haze or other conditions that make it dangerous to be outside.</VV_ITab_ViviLure_WeatherTip>
 <VV_ITab_ViviLure_Bait>Honey food bait</VV_ITab_ViviLure_Bait>
-<VV_ITab_ViviLure_BaitValue>{0}</VV_ITab_ViviLure_BaitValue>
 <VV_ITab_ViviLure_BaitTip>Place honey, ambrosia, honey dishes or berries on the lure to spread the scent. Visiting scouts eat one each while sniffing; bears eat it all.</VV_ITab_ViviLure_BaitTip>
 <VV_ITab_ViviLure_NoOtherLure>No other lure in progress and no nest</VV_ITab_ViviLure_NoOtherLure>
 <VV_ITab_ViviLure_Reachable>Path from the map edge</VV_ITab_ViviLure_Reachable>
 <VV_ITab_ViviLure_Flowers>At least {0} honey flowers</VV_ITab_ViviLure_Flowers>
-<VV_ITab_ViviLure_FlowersValue>{0} (score {1})</VV_ITab_ViviLure_FlowersValue>
-<VV_ITab_ViviLure_FlowersTip>Honey flowers within {0} cells of the lure. {1} flowers give a full flower score.</VV_ITab_ViviLure_FlowersTip>
-<VV_ITab_ViviLure_Room>Empty roofed room with a door</VV_ITab_ViviLure_Room>
-<VV_ITab_ViviLure_RoomValue>{0} cells, {1} buildings (score {2})</VV_ITab_ViviLure_RoomValue>
-<VV_ITab_ViviLure_RoomTip>The best room within {0} cells of the lure: {1}-{2} cells with a door and a full roof, not someone's bedroom, a prison or on a gravship. Each building inside (except arcane plants, pots and lures) lowers the room score by {3}.</VV_ITab_ViviLure_RoomTip>
-<VV_ITab_ViviLure_RoomReachable>Path from the map edge to the room</VV_ITab_ViviLure_RoomReachable>
+<VV_ITab_ViviLure_FlowersTip>Honey flowers near the lure. The more flowers, the higher the flower score.</VV_ITab_ViviLure_FlowersTip>
+<VV_ITab_ViviLure_Room>Empty roofed structure with a door</VV_ITab_ViviLure_Room>
+<VV_ITab_ViviLure_RoomTip>The best structure near the lure. Rooms joined by doors count as one structure. It needs a door and a full roof; structures that are too small or too large, joined to someone's bedroom or a prison, or on a gravship are not used. A well-sized structure with few buildings inside (except arcane plants, pots and lures) scores higher.</VV_ITab_ViviLure_RoomTip>
+<VV_ITab_ViviLure_RoomReachable>Path from the map edge to the structure</VV_ITab_ViviLure_RoomReachable>
 <VV_ITab_ViviLure_None>none</VV_ITab_ViviLure_None>
+<VV_ITab_ViviLure_PartScore>Score {0}</VV_ITab_ViviLure_PartScore>
 <VV_ITab_ViviLure_FertileSoil>At least {0} fertile cells</VV_ITab_ViviLure_FertileSoil>
-<VV_ITab_ViviLure_FertileSoilValue>{0} cells</VV_ITab_ViviLure_FertileSoilValue>
-<VV_ITab_ViviLure_FertileSoilTip>Cells within {0} cells of the lure with no roof, building or zone and at least {1} fertility. A vivi nest plants cotton, roses and arcane plants there and digs mana fertilizer out of the soil.</VV_ITab_ViviLure_FertileSoilTip>
+<VV_ITab_ViviLure_FertileSoilTip>Fertile land near the lure with no roof, building or zone. A vivi nest plants cotton, roses and arcane plants there and digs mana fertilizer out of the soil.</VV_ITab_ViviLure_FertileSoilTip>
 <VV_ITab_ViviLure_GrowingPeriod>Growing period of at least {0} days</VV_ITab_ViviLure_GrowingPeriod>
-<VV_ITab_ViviLure_GrowingPeriodTip>The growing period of this land, as shown on the world map's terrain tab: the days of the 60-day year whose average temperature is between {0} and {1}, where honey flowers grow well. A vivi nest gathers honey while the flowers grow and lives on it through the winter. On land with a growing period shorter than {2} days, the vivis cannot gather enough honey for the winter and will not settle.</VV_ITab_ViviLure_GrowingPeriodTip>
+<VV_ITab_ViviLure_GrowingPeriodTip>Same as the growing period on the world map's terrain tab. A vivi nest gathers honey while the flowers grow and lives on it through the winter, so the vivis will not settle where the growing period is short.</VV_ITab_ViviLure_GrowingPeriodTip>
 <VV_ITab_ViviLure_Mana>Environment mana</VV_ITab_ViviLure_Mana>
-<VV_ITab_ViviLure_ManaValue>{0} (score {1})</VV_ITab_ViviLure_ManaValue>
-<VV_ITab_ViviLure_ManaTip>Average environment mana within {0} cells of the lure. Not required; {1} gives a full mana score.</VV_ITab_ViviLure_ManaTip>
+<VV_ITab_ViviLure_ManaTip>Environment mana near the lure. Not required; the higher it is, the higher the mana score.</VV_ITab_ViviLure_ManaTip>
 <VV_ITab_ViviLure_Score>Nest score</VV_ITab_ViviLure_Score>
 <VV_ITab_ViviLure_ScoreValue>{0} ({1} settlers)</VV_ITab_ViviLure_ScoreValue>
-<VV_ITab_ViviLure_ScoreTip>Nest score = flower score × {0} + room score × {1} + mana score × {2}. The higher it is, the sooner ({3} to {4}) and the more ({5}-{6}) vivis come.</VV_ITab_ViviLure_ScoreTip>
+<VV_ITab_ViviLure_ScoreTip>The flower, structure and mana scores combined (flowers count the most, mana the least). The higher it is, the sooner and the more vivis come.</VV_ITab_ViviLure_ScoreTip>
 
 <!-- Lure letters and messages -->
 <VV_Letter_ViviLureScoutsLabel>Vivi scouts</VV_Letter_ViviLureScoutsLabel>

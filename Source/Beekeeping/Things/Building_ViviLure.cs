@@ -167,49 +167,32 @@ namespace VVRace
             if (map == null || report == null) { return; }
 
             // 방문 조건: 방문 인시던트(IncidentWorker_ViviLureVisit.CanFireNowSub)와 같다. 정착대가 도착할 때도 미끼·길을 뺀 공통 조건을 다시 본다.
+            // 값 칸에는 측정값을 보이지 않는다(사용자 결정: 점수만, 점수 없는 조건은 충족 여부만). 무엇을 보는지는 툴팁이 수치 없이 알려 준다.
             const ViviLureConditionSection visit = ViviLureConditionSection.Visit;
             AddConditionRow(visit, BeekeepingUtility.IsBeekeepingMap(map), LocalizeString_ITab.VV_ITab_ViviLure_Map.Translate());
             AddConditionRow(visit, !BeekeepingUtility.AnyRoyalVivi(map), LocalizeString_ITab.VV_ITab_ViviLure_NoRoyal.Translate());
-
-            var viviCount = BeekeepingUtility.CountPlayerVivis(map);
-            AddConditionRow(visit, viviCount <= BeekeepingUtility.MaxPlayerViviCount,
-                LocalizeString_ITab.VV_ITab_ViviLure_ViviCount.Translate(BeekeepingUtility.MaxPlayerViviCount),
-                LocalizeString_ITab.VV_ITab_ViviLure_ViviCountValue.Translate(viviCount));
-
+            AddConditionRow(visit, BeekeepingUtility.CountPlayerVivis(map) <= BeekeepingUtility.MaxPlayerViviCount,
+                LocalizeString_ITab.VV_ITab_ViviLure_ViviCount.Translate(BeekeepingUtility.MaxPlayerViviCount));
             AddConditionRow(visit, !BeekeepingUtility.AnyHostileThreat(map), LocalizeString_ITab.VV_ITab_ViviLure_NoHostile.Translate());
-
-            var safe = BeekeepingUtility.WanderingViviSafeTemperature;
-            AddConditionRow(visit, BeekeepingUtility.TemperatureSuitable(map),
-                LocalizeString_ITab.VV_ITab_ViviLure_Temperature.Translate(),
-                LocalizeString_ITab.VV_ITab_ViviLure_TemperatureValue.Translate(
-                    map.mapTemperature.OutdoorTemp.ToStringTemperature("F0"), map.mapTemperature.SeasonalTemp.ToStringTemperature("F0")),
-                LocalizeString_ITab.VV_ITab_ViviLure_TemperatureTip.Translate(safe.min.ToStringTemperature("F0"), safe.max.ToStringTemperature("F0")));
-
+            AddConditionRow(visit, BeekeepingUtility.TemperatureSuitable(map), LocalizeString_ITab.VV_ITab_ViviLure_Temperature.Translate(),
+                tooltip: LocalizeString_ITab.VV_ITab_ViviLure_TemperatureTip.Translate());
             AddConditionRow(visit, BeekeepingUtility.FlowerSeasonNow(map), LocalizeString_ITab.VV_ITab_ViviLure_Season.Translate());
             AddConditionRow(visit, !BeekeepingUtility.OutdoorDangerous(map), LocalizeString_ITab.VV_ITab_ViviLure_Weather.Translate(),
                 tooltip: LocalizeString_ITab.VV_ITab_ViviLure_WeatherTip.Translate());
-
-            var bait = BaitCount;
-            AddConditionRow(visit, bait > 0, LocalizeString_ITab.VV_ITab_ViviLure_Bait.Translate(), LocalizeString_ITab.VV_ITab_ViviLure_BaitValue.Translate(bait),
-                LocalizeString_ITab.VV_ITab_ViviLure_BaitTip.Translate());
-
+            AddConditionRow(visit, HasBait, LocalizeString_ITab.VV_ITab_ViviLure_Bait.Translate(), tooltip: LocalizeString_ITab.VV_ITab_ViviLure_BaitTip.Translate());
             AddConditionRow(visit, !BeekeepingUtility.AnyNestOrAttraction(map, this), LocalizeString_ITab.VV_ITab_ViviLure_NoOtherLure.Translate());
             AddConditionRow(visit, BeekeepingUtility.TryFindEntryCellReaching(map, Position, out _), LocalizeString_ITab.VV_ITab_ViviLure_Reachable.Translate());
 
-            // 둥지 자리 조건: 정찰이 끝날 때와 정착대가 도착할 때 보는 최소 요건(ViviNestSiteReport.Acceptable: 꽃·빈 방·비옥한 땅·성장 기간)과
-            // 정착대가 방까지 올 길(IncidentWorker_ViviNestSettlers.TrySpawnSettlers)
+            // 둥지 자리 조건: 정찰이 끝날 때와 정착대가 도착할 때 보는 최소 요건(ViviNestSiteReport.Acceptable: 꽃·빈 구조물·비옥한 땅·성장 기간)과
+            // 정착대가 구조물까지 올 길(IncidentWorker_ViviNestSettlers.TrySpawnSettlers)
             const ViviLureConditionSection site = ViviLureConditionSection.Site;
-            AddConditionRow(site, report.HasEnoughFlowers,
-                LocalizeString_ITab.VV_ITab_ViviLure_Flowers.Translate(ViviNestSiteEvaluator.MinFlowerCount),
-                LocalizeString_ITab.VV_ITab_ViviLure_FlowersValue.Translate(report.flowerCount, report.flowerScore.ToStringPercent()),
-                LocalizeString_ITab.VV_ITab_ViviLure_FlowersTip.Translate(ViviNestSiteEvaluator.Radius, ViviNestSiteEvaluator.FullFlowerCount));
+            AddConditionRow(site, report.HasEnoughFlowers, LocalizeString_ITab.VV_ITab_ViviLure_Flowers.Translate(ViviNestSiteEvaluator.MinFlowerCount),
+                ScoreValue(report.flowerScore), LocalizeString_ITab.VV_ITab_ViviLure_FlowersTip.Translate());
 
-            var roomTip = LocalizeString_ITab.VV_ITab_ViviLure_RoomTip.Translate(
-                ViviNestSiteEvaluator.Radius, ViviNestSiteEvaluator.MinRoomCells, ViviNestSiteEvaluator.MaxRoomCells, ViviNestSiteEvaluator.BuildingPenalty.ToStringPercent());
+            var roomTip = LocalizeString_ITab.VV_ITab_ViviLure_RoomTip.Translate();
             if (report.HasRoom)
             {
-                AddConditionRow(site, true, LocalizeString_ITab.VV_ITab_ViviLure_Room.Translate(),
-                    LocalizeString_ITab.VV_ITab_ViviLure_RoomValue.Translate(report.roomCellCount, report.roomBuildingCount, report.roomScore.ToStringPercent()), roomTip);
+                AddConditionRow(site, true, LocalizeString_ITab.VV_ITab_ViviLure_Room.Translate(), ScoreValue(report.roomScore), roomTip);
                 AddConditionRow(site, BeekeepingUtility.TryFindEntryCellReaching(map, report.bestRoomCell, out _), LocalizeString_ITab.VV_ITab_ViviLure_RoomReachable.Translate());
             }
             else
@@ -217,34 +200,24 @@ namespace VVRace
                 AddConditionRow(site, false, LocalizeString_ITab.VV_ITab_ViviLure_Room.Translate(), LocalizeString_ITab.VV_ITab_ViviLure_None.Translate(), roomTip);
             }
 
-            AddConditionRow(site, report.HasEnoughFertileSoil,
-                LocalizeString_ITab.VV_ITab_ViviLure_FertileSoil.Translate(ViviNestSiteEvaluator.MinFertileCells),
-                LocalizeString_ITab.VV_ITab_ViviLure_FertileSoilValue.Translate(report.fertileCellCount),
-                LocalizeString_ITab.VV_ITab_ViviLure_FertileSoilTip.Translate(ViviNestSiteEvaluator.Radius, ViviNestSiteEvaluator.MinFertility.ToStringPercent()));
+            AddConditionRow(site, report.HasEnoughFertileSoil, LocalizeString_ITab.VV_ITab_ViviLure_FertileSoil.Translate(ViviNestSiteEvaluator.MinFertileCells),
+                tooltip: LocalizeString_ITab.VV_ITab_ViviLure_FertileSoilTip.Translate());
 
-            // 성장 기간: 값은 바닐라 성장 기간 설명(세계 지도 지형 탭과 같은 글, 꽃이 자라는 달 포함)을 그대로 쓴다.
-            var flower = ThingDefOf.Plant_Dandelion;
-            AddConditionRow(site, report.HasLongEnoughGrowingPeriod,
-                LocalizeString_ITab.VV_ITab_ViviLure_GrowingPeriod.Translate(ViviNestSiteEvaluator.MinGrowingPeriodDays),
-                Zone_Growing.GrowingQuadrumsDescription(map, flower),
-                LocalizeString_ITab.VV_ITab_ViviLure_GrowingPeriodTip.Translate(
-                    flower.plant.minOptimalGrowthTemperature.ToStringTemperature("F0"), flower.plant.maxOptimalGrowthTemperature.ToStringTemperature("F0"),
-                    ViviNestSiteEvaluator.MinGrowingPeriodDays));
+            AddConditionRow(site, report.HasLongEnoughGrowingPeriod, LocalizeString_ITab.VV_ITab_ViviLure_GrowingPeriod.Translate(ViviNestSiteEvaluator.MinGrowingPeriodDays),
+                tooltip: LocalizeString_ITab.VV_ITab_ViviLure_GrowingPeriodTip.Translate());
 
-            AddRow(site, ViviLureConditionState.Info, LocalizeString_ITab.VV_ITab_ViviLure_Mana.Translate(),
-                LocalizeString_ITab.VV_ITab_ViviLure_ManaValue.Translate(report.averageMana.ToString("0"), report.manaScore.ToStringPercent()),
-                LocalizeString_ITab.VV_ITab_ViviLure_ManaTip.Translate(ViviNestSiteEvaluator.ManaRadius, ViviNestSiteEvaluator.FullMana));
+            AddRow(site, ViviLureConditionState.Info, LocalizeString_ITab.VV_ITab_ViviLure_Mana.Translate(), ScoreValue(report.manaScore),
+                LocalizeString_ITab.VV_ITab_ViviLure_ManaTip.Translate());
 
             if (report.Acceptable)
             {
                 AddRow(site, ViviLureConditionState.Info, LocalizeString_ITab.VV_ITab_ViviLure_Score.Translate(),
                     LocalizeString_ITab.VV_ITab_ViviLure_ScoreValue.Translate(report.TotalScore.ToStringPercent(), report.SettlerCount),
-                    LocalizeString_ITab.VV_ITab_ViviLure_ScoreTip.Translate(
-                        ViviNestSiteEvaluator.FlowerWeight.ToStringPercent(), ViviNestSiteEvaluator.RoomWeight.ToStringPercent(), ViviNestSiteEvaluator.ManaWeight.ToStringPercent(),
-                        ViviNestSiteEvaluator.MaxSettleDelayTicks.ToStringTicksToPeriod(), ViviNestSiteEvaluator.MinSettleDelayTicks.ToStringTicksToPeriod(),
-                        ViviNestSiteEvaluator.MinSettlerCount, ViviNestSiteEvaluator.MaxSettlerCount));
+                    LocalizeString_ITab.VV_ITab_ViviLure_ScoreTip.Translate());
             }
         }
+
+        private static string ScoreValue(float score) => LocalizeString_ITab.VV_ITab_ViviLure_PartScore.Translate(score.ToStringPercent());
 
         private void AddConditionRow(ViviLureConditionSection section, bool met, string label, string value = null, string tooltip = null)
         {

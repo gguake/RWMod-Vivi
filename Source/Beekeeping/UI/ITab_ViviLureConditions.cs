@@ -5,8 +5,9 @@ using Verse;
 
 namespace VVRace
 {
-    // 유인통 진행 상태와 방문·둥지 자리 조건. 조건마다 충족 여부(바닐라 체크·엑스 아이콘)와 현재값·기준값을 보여 준다.
-    // 조건 줄은 유인통이 판정과 같은 계산으로 만든다(Building_ViviLure.ConditionRows). 줄 모양은 마법 식물 탭(ITab_ArcanePlant)을 따른다.
+    // 유인통 진행 상태와 방문·둥지 자리 조건. 조건마다 충족 여부(바닐라 체크·엑스 아이콘)와 점수(꽃·구조물·마나·둥지 점수)만 보여 주고
+    // 측정값은 숨긴다(무엇을 보는지는 툴팁이 수치 없이 알려 준다, 사용자 결정). 조건 줄은 유인통이 판정과 같은 계산으로 만든다(Building_ViviLure.ConditionRows).
+    // 줄 모양은 마법 식물 탭(ITab_ArcanePlant)을 따른다.
     public class ITab_ViviLureConditions : ITab
     {
         // 닫기 단추 자리(바닐라 ITab_Pawn_Gear처럼 위를 비운다)
