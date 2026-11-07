@@ -48,7 +48,7 @@
 <VV_ITab_ViviLure_None>none</VV_ITab_ViviLure_None>
 <VV_ITab_ViviLure_PartScore>Score {0}</VV_ITab_ViviLure_PartScore>
 <VV_ITab_ViviLure_FertileSoil>At least {0} fertile cells</VV_ITab_ViviLure_FertileSoil>
-<VV_ITab_ViviLure_FertileSoilTip>Counts unroofed fertile tiles near the lure that have no buildings or zones. Settled vivis use this soil to grow cotton, roses, and arcane plants, as well as to dig up mana fertilizer.</VV_ITab_ViviLure_FertileSoilTip>
+<VV_ITab_ViviLure_FertileSoilTip>Counts unroofed fertile tiles near the lure that have no buildings. Settled vivis use this soil to grow cotton, roses, and arcane plants, as well as to dig up mana fertilizer.</VV_ITab_ViviLure_FertileSoilTip>
 <VV_ITab_ViviLure_GrowingPeriod>Growing period of at least {0} days</VV_ITab_ViviLure_GrowingPeriod>
 <VV_ITab_ViviLure_GrowingPeriodTip>Matches the growing period shown on the world map's terrain tab. Because a vivi nest gathers honey during the blooming season and relies on those stores to survive the winter, vivis will not settle in regions with a short growing period.</VV_ITab_ViviLure_GrowingPeriodTip>
 <VV_ITab_ViviLure_Mana>Environment mana</VV_ITab_ViviLure_Mana>

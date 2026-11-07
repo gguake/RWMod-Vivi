@@ -48,7 +48,7 @@
 <VV_ITab_ViviLure_None>없음</VV_ITab_ViviLure_None>
 <VV_ITab_ViviLure_PartScore>점수 {0}</VV_ITab_ViviLure_PartScore>
 <VV_ITab_ViviLure_FertileSoil>비옥한 땅 {0}칸 이상</VV_ITab_ViviLure_FertileSoil>
-<VV_ITab_ViviLure_FertileSoilTip>유인통 주변에서 지붕이나 건물, 구역이 없는 비옥한 땅을 셉니다. 비비들은 이러한 땅에 목화와 장미, 마법 식물을 심고 땅을 파서 마나 비료를 얻습니다.</VV_ITab_ViviLure_FertileSoilTip>
+<VV_ITab_ViviLure_FertileSoilTip>유인통 주변에서 지붕이나 건물이 없는 비옥한 땅을 셉니다. 비비들은 이러한 땅에 목화와 장미, 마법 식물을 심고 땅을 파서 마나 비료를 얻습니다.</VV_ITab_ViviLure_FertileSoilTip>
 <VV_ITab_ViviLure_GrowingPeriod>성장 기간 {0}일 이상</VV_ITab_ViviLure_GrowingPeriod>
 <VV_ITab_ViviLure_GrowingPeriodTip>세계 지도의 지형 탭에 표시되는 성장 기간과 같습니다. 비비 둥지는 꽃이 피는 계절에 꿀을 모아 두었다가 겨울을 나므로, 식물이 자라는 기간이 너무 짧은 지역에는 정착하지 않습니다.</VV_ITab_ViviLure_GrowingPeriodTip>
 <VV_ITab_ViviLure_Mana>환경 마나</VV_ITab_ViviLure_Mana>

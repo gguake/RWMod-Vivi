@@ -87,7 +87,7 @@ namespace VVRace
         // 바닐라 목화·장미 심기 하한 fertilityMin 0.7). 그런 바깥 칸에 목화밭 6칸(ViviNestGarden.CottonCellCount), 풍년화 1칸,
         // 바깥 마법식물(장기 계측 온대 60일: 다 자란 마법식물이 35일에 20그루), 꽃 목표 40송이(ViviNestGarden.MinFlowerTarget)의 장미 밭을 두면 70칸 남짓이고,
         // 땅 비료는 바깥 보관 칸 둘레 10칸(317칸)에서 무작위 20칸을 골라 비옥한 빈 칸을 파므로 그 원의 10%(32칸)가 비옥하면 한 번에 찾을 확률이 88%다.
-        // 그래서 유인통 반경 16칸(약 800칸)의 10%인 80칸을 최소로 둔다. 지붕·건물·구역이 있는 칸은 둥지가 쓰지 못하므로 세지 않는다.
+        // 그래서 유인통 반경 16칸(약 800칸)의 10%인 80칸을 최소로 둔다. 지붕·건물이 있는 칸은 둥지가 쓰지 못하므로 세지 않는다(구역은 센다, IsUsableFertileCell).
         public const float MinFertility = JobGiver_ViviNestPlantSeed.MinFertility;
         public const int MinFertileCells = 80;
 
@@ -227,10 +227,11 @@ namespace VVRace
             return GenTemperature.TwelfthsInAverageTemperatureRange(map.Tile, plant.minOptimalGrowthTemperature, plant.maxOptimalGrowthTemperature).Count * GenDate.DaysPerTwelfth;
         }
 
-        // 둥지가 꽃·목화·마법식물을 심고 땅 비료를 팔 수 있는 바깥 칸. 둥지 바깥 자리 고르기처럼 지붕·건물·구역이 있는 칸은 뺀다(ViviNestPlanner.IsFreeOutdoorCell).
+        // 둥지가 꽃·목화·마법식물을 심고 땅 비료를 팔 수 있는 바깥 칸. 지붕·건물이 있는 칸은 뺀다.
+        // 플레이어 구역(재배·비축 등)은 보지 않는다(사용자 결정): 둥지는 구역 칸을 쓰지 않지만(ViviNestPlanner.IsFreeOutdoorCell) 구역은 언제든 지울 수 있다.
         public static bool IsUsableFertileCell(Map map, IntVec3 cell)
         {
-            if (cell.Roofed(map) || cell.GetEdifice(map) != null || map.zoneManager.ZoneAt(cell) != null) { return false; }
+            if (cell.Roofed(map) || cell.GetEdifice(map) != null) { return false; }
             return map.fertilityGrid.FertilityAt(cell) >= MinFertility;
         }
 
