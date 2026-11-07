@@ -134,6 +134,16 @@ namespace VVRace
             }
         }
 
+        // 테두리 그리기(GenDraw)가 List를 받으므로 그대로 넘긴다. 고치지 말 것.
+        public List<IntVec3> ActivityCellsForDrawing
+        {
+            get
+            {
+                EnsureActivityGrid();
+                return _activityCells;
+            }
+        }
+
         public void AddActivityCenter(IntVec3 center)
         {
             if (_activityCenters.Contains(center)) { return; }

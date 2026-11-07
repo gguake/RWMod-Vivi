@@ -64,7 +64,7 @@ namespace VVRace
                 AccessTools.Method(typeof(Pawn), nameof(Pawn.GetInspectString)),
                 postfix: new HarmonyMethod(typeof(BeekeepingPatch), nameof(Pawn_GetInspectString_Postfix)));
 
-            // 둥지 비비를 고르면 정착민이 들어가면 경계하는 둥지 방 테두리를 그린다.
+            // 둥지 비비를 고르면 무리의 활동 범위(일하러 오가는 칸) 테두리와 정착민이 들어가면 경계하는 둥지 방 테두리를 그린다.
             ViviHarmonyPatcher.TryPatch(harmony, "Pawn.DrawExtraSelectionOverlays (vivi nest rooms)",
                 AccessTools.Method(typeof(Pawn), nameof(Pawn.DrawExtraSelectionOverlays)),
                 postfix: new HarmonyMethod(typeof(BeekeepingPatch), nameof(Pawn_DrawExtraSelectionOverlays_Postfix)));
@@ -98,12 +98,15 @@ namespace VVRace
         }
 
         private static readonly Color NestRoomEdgeColor = new Color(1f, 0.8f, 0.35f);
+        private static readonly Color NestActivityEdgeColor = new Color(0.55f, 0.9f, 0.5f);
 
         private static void Pawn_DrawExtraSelectionOverlays_Postfix(Pawn __instance)
         {
             var nest = __instance.GetNestLordJob();
             if (nest == null || !nest.Settled || __instance.Map != Find.CurrentMap) { return; }
 
+            // 활동 범위: 정착 때 둥지 중심 둘레, 증축 방마다 그 방 둘레 24칸(ViviNestTerritory)
+            GenDraw.DrawFieldEdges(nest.Territory.ActivityCellsForDrawing, NestActivityEdgeColor);
             GenDraw.DrawFieldEdges(nest.Territory.OwnedRoomCellsForDrawing, NestRoomEdgeColor);
         }
 
