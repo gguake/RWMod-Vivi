@@ -1,6 +1,7 @@
 ﻿using HarmonyLib;
 using RimWorld;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using Verse;
 
@@ -73,6 +74,12 @@ namespace VVRace
                 AccessTools.Method(typeof(Building), nameof(Building.ClaimableBy)),
                 postfix: new HarmonyMethod(typeof(BeekeepingPatch), nameof(Building_ClaimableBy_Postfix)));
 
+            // 바닐라 입양 판정은 같은 세력에 깨어 있는 위협이 없으면 허용해, 둥지 비비가 모두 자는 밤마다 둥지 아기를 입양할 수 있었다.
+            // 버려진 아기 경고도 이 판정을 쓴다(알에서 깬 둥지 아기는 자동 수유자가 없어 입양 가능 여부만으로 경고가 떴다).
+            ViviHarmonyPatcher.TryPatch(harmony, "Pawn.AdoptableBy (vivi nest baby)",
+                AccessTools.Method(typeof(Pawn), nameof(Pawn.AdoptableBy)),
+                postfix: new HarmonyMethod(typeof(BeekeepingPatch), nameof(Pawn_AdoptableBy_Postfix)));
+
             // 바닐라 환자 먹이기 잡(JobDriver_FoodFeedPatient)은 환자가 누군가 먹여야 하는 상태가 아니면 바로 끝나는데, 바닐라 판정은 플레이어 세력·손님이
             // 침대에 누운 경우만 본다. 쓰러진 둥지 구성원(아기 제외)도 그 상태로 쳐 둥지 먹이기 잡(JobGiver_ViviNestFeedPatient)이 끝까지 먹이게 한다.
             // 1.7에서 이 판정은 그 잡과 바닐라 식사 잡 기버의 우선도(스스로 먹으러 가지 않음, 쓰러진 폰은 어차피 못 간다)에만 쓰인다.
@@ -119,6 +126,16 @@ namespace VVRace
             {
                 __result = LocalizeString_Message.VV_Message_CannotClaimViviNest.Translate().ToString();
             }
+        }
+
+        // 둥지가 데리고 있는 아기는 입양할 수 없다(둥지 건물 차지 규칙과 같이 둥지가 사는 동안). 둥지가 떠나며 두고 간 아기는
+        // 로드에서 빠지므로(LordToil_ViviNestExit) 바닐라 판정대로 입양하고 경고도 뜬다.
+        private static void Pawn_AdoptableBy_Postfix(Pawn __instance, Faction by, StringBuilder reason, ref bool __result)
+        {
+            if (!__result || by == null || !by.IsPlayer || __instance.GetNestLordJob() == null) { return; }
+
+            __result = false;
+            reason?.Append(LocalizeString_Message.VV_Message_CannotAdoptViviNestBaby.Translate().ToString());
         }
 
         private static void Pawn_CarryTracker_TryDropCarriedThing_Postfix(Pawn_CarryTracker __instance, bool __result, ref Thing resultingThing)

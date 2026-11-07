@@ -78,6 +78,7 @@
 <VV_Message_ViviNestLeavingStarving>오랜 굶주림을 견디지 못하고 {0}의 비비들이 둥지를 떠납니다.</VV_Message_ViviNestLeavingStarving>
 <VV_Message_ViviNestLeavingRoomLost>머물던 둥지 방을 잃어 {0}의 비비들이 이곳을 떠납니다.</VV_Message_ViviNestLeavingRoomLost>
 <VV_Message_CannotClaimViviNest>비비들이 아직 거주하고 있습니다.</VV_Message_CannotClaimViviNest>
+<VV_Message_CannotAdoptViviNestBaby>둥지의 비비들이 돌보고 있는 아기입니다.</VV_Message_CannotAdoptViviNestBaby>
 <VV_Letter_ViviNestAlmostHostileLabel>비비들의 경계</VV_Letter_ViviNestAlmostHostileLabel>
 <VV_Letter_ViviNestAlmostHostile>{0}의 비비들이 인내심을 잃기 직전입니다. 정착민이 계속해서 둥지 방에 들어오거나 비비를 공격하면 적대적으로 돌변해 둥지를 떠나 버릴 것입니다.</VV_Letter_ViviNestAlmostHostile>
 <VV_Letter_ViviNestHostileLabel>비비들의 적대</VV_Letter_ViviNestHostileLabel>

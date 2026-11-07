@@ -78,6 +78,7 @@
 <VV_Message_ViviNestLeavingStarving>The vivis of {0} are leaving: they have been starving for too long.</VV_Message_ViviNestLeavingStarving>
 <VV_Message_ViviNestLeavingRoomLost>The vivis of {0} are leaving: their nest room is gone.</VV_Message_ViviNestLeavingRoomLost>
 <VV_Message_CannotClaimViviNest>The vivis still live here.</VV_Message_CannotClaimViviNest>
+<VV_Message_CannotAdoptViviNestBaby>The vivis of the nest are raising this baby.</VV_Message_CannotAdoptViviNestBaby>
 <VV_Letter_ViviNestAlmostHostileLabel>Vivis on edge</VV_Letter_ViviNestAlmostHostileLabel>
 <VV_Letter_ViviNestAlmostHostile>The vivis of {0} are about to lose their patience. If your colonists keep entering their rooms or harm them, they will turn hostile and leave.</VV_Letter_ViviNestAlmostHostile>
 <VV_Letter_ViviNestHostileLabel>Vivis turned hostile</VV_Letter_ViviNestHostileLabel>
