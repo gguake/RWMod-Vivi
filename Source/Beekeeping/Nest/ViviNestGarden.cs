@@ -86,13 +86,12 @@ namespace VVRace
             _gatherableFlowerCount = 0;
 
             var map = Map;
-            var center = _owner.Production.GatherCenter;
-            var cellCount = GenRadial.NumCellsInRadius(ViviNestProduction.GatherRadius);
+            var territory = _owner.Territory;
+            var cells = territory.ActivityCells;
+            var cellCount = territory.ActivityCellCount(ViviNestProduction.GatherRadius);
             for (int i = 0; i < cellCount; ++i)
             {
-                var cell = center + GenRadial.RadialPattern[i];
-                if (!cell.InBounds(map)) { continue; }
-
+                var cell = cells[i];
                 var plant = cell.GetPlant(map);
                 if (plant == null || !IsHoneyFlowerDef(plant.def)) { continue; }
 

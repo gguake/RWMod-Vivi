@@ -109,12 +109,13 @@ namespace VVRace
             if (mana == null) { return IntVec3.Invalid; }
 
             // 바깥 방출기끼리는 10칸 넘게 떨어뜨려 세우므로(ViviNestPlanner.FindOutdoorEmitterCell) 방출기 하나의 씨앗 자리(7칸)만큼을 같은 곳으로 친다.
+            var territory = nest.Territory;
             _tmpPlantCells.Clear();
             var buildings = map.listerBuildings.allBuildingsNonColonist;
             for (int i = 0; i < buildings.Count; ++i)
             {
                 var building = buildings[i];
-                if (building is ArcanePlant && building.Faction == nest.Faction && building.Position.InHorDistOf(nest.NestCell, OutdoorSearchRadius + SpreadRadius))
+                if (building is ArcanePlant && building.Faction == nest.Faction && territory.InActivityRange(building.Position, OutdoorSearchRadius + SpreadRadius))
                 {
                     _tmpPlantCells.Add(building.Position);
                 }
@@ -124,12 +125,11 @@ namespace VVRace
             var bestCrowd = int.MaxValue;
             var bestFertility = 0f;
             var bestMana = 0f;
-            var cellCount = GenRadial.NumCellsInRadius(OutdoorSearchRadius);
+            var cells = territory.ActivityCells;
+            var cellCount = territory.ActivityCellCount(OutdoorSearchRadius);
             for (int i = 0; i < cellCount; ++i)
             {
-                var cell = nest.NestCell + GenRadial.RadialPattern[i];
-                if (!cell.InBounds(map)) { continue; }
-
+                var cell = cells[i];
                 var cellMana = mana[cell];
                 if (cellMana < MinSeedlingMana) { continue; }
                 var fertility = map.fertilityGrid.FertilityAt(cell);

@@ -66,7 +66,7 @@ namespace VVRace
             return null;
         }
 
-        // 둥지 중심에서 반경 안, 구역 밖의 다 자란 약뿌리 중 이 비비가 쓸 수 있는(금지되지 않고 예약·도달할 수 있는) 가장 가까운 것.
+        // 활동 범위 중심(둥지 중심·증축 방 중심) 어디서든 반경 안, 구역 밖의 다 자란 약뿌리 중 이 비비가 쓸 수 있는(금지되지 않고 예약·도달할 수 있는) 가장 가까운 것.
         // anyTarget은 비비와 상관없이 거둘 수 있는 약뿌리가 하나라도 있었는지, readyTick은 아직 덜 자란 약뿌리가 가장 먼저 거둘 만큼 자랄 틱(모르면 -1)이다.
         private static Plant FindHealroot(Pawn pawn, LordJob_ViviNest nest, out bool anyTarget, out int readyTick)
         {
@@ -75,6 +75,7 @@ namespace VVRace
 
             var map = pawn.Map;
             var root = nest.NestCell;
+            var territory = nest.Territory;
             var traverse = TraverseParms.For(pawn, Danger.Some);
             const int maxDistance = (int)(SearchRadius * SearchRadius);
             Plant best = null;
@@ -87,7 +88,8 @@ namespace VVRace
                 {
                     if (!(things[i] is Plant plant)) { continue; }
 
-                    var distance = (plant.Position - root).LengthHorizontalSquared;
+                    // 활동 범위 중심(둥지 중심·증축 방 중심) 중 가장 가까운 것까지의 거리
+                    var distance = territory.ActivityDistSq(plant.Position);
                     if (distance >= maxDistance || map.zoneManager.ZoneAt(plant.Position) != null) { continue; }
                     if (!plant.HarvestableNow)
                     {

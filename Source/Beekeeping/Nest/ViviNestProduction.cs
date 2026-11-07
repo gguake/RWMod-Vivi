@@ -40,7 +40,7 @@ namespace VVRace
         public const float ProcessingWeight = 0.3f;
         // 일하는 구성원(아기 제외) 이만큼마다 바닥 작업 자리를 하나 둔다(올림, 사용자 요구).
         public const int WorkersPerWorkSpot = 2;
-        // 둥지 채집 범위: 둥지 중심에서 기존 채집 장소의 최대 채집 반경까지. 꽃 세기·꽃 심기·바깥 마법식물 자리도 이 범위를 쓴다.
+        // 둥지 채집 범위: 활동 범위의 중심(둥지 중심·증축 방 중심, ViviNestTerritory)에서 기존 채집 장소의 최대 채집 반경까지. 꽃 세기·꽃 심기도 이 범위를 쓴다.
         public const float GatherRadius = Building_GatherWorkTable.GatherMaxRadius;
         // 그 자리에서 채취할 때의 채집량 배율. 예전 둥지 채집 자리(간이 채집 장소와 같은 WorkTableEfficiencyFactor 0.5)와 같게 둔다.
         // 채집 자리를 오가는 걸음이 없어져 일손은 덜 들지만, 둥지 식량은 일손이 아니라 꿀 꽃 수와 재채집 대기로 정해진다
@@ -103,8 +103,6 @@ namespace VVRace
         private Map Map => _owner.Map;
         private ViviNestStock Stock => _owner.Stock;
 
-        // 둥지 채집 범위의 중심(둥지 방 한가운데 칸)
-        public IntVec3 GatherCenter => _owner.NestCell;
         // 바닥 작업 자리들. 사라진 자리는 생산 주기마다 빼므로 그사이에는 Spawned를 보고 쓴다.
         public IReadOnlyList<Building_WorkTable> WorkSpots => _workSpots;
 

@@ -41,11 +41,12 @@ namespace VVRace
         public static int MaxMembers => VVRaceMod.Settings.wildViviNestMaxMembers;
 
         private const float OutdoorBuildRadius = 8f;
-        // 시체를 버릴 거리(둥지 중심에서). 무리가 오가는 반경(24칸) 안에서 둥지와 떨어진 곳
+        // 시체를 버릴 거리(활동 범위 중심에서). 무리가 오가는 반경(24칸) 안에서 둥지와 떨어진 곳
         private const float CorpseDumpMinDistance = 14f;
         private const float CorpseDumpMaxDistance = 22f;
         // 시체를 둘 칸이 하나도 없으면 이만큼(틱) 다시 찾지 않는다(찾기 한 번에 링 904칸을 다 본다).
         private const int CorpseDumpRetryTicks = 600;
+        // 증축 방 중심을 찾는 거리(활동 범위 중심, 곧 둥지 중심·앞서 지은 증축 방 중심 중 가장 가까운 것에서). 증축 방마다 그 둘레로 더 찾는다.
         private const float ExpansionSearchRadius = 16f;
         private const float ExpansionMinDistance = 7f;
         private const int ExpansionSearchStep = 3;
@@ -477,7 +478,7 @@ namespace VVRace
             return count;
         }
 
-        // 바깥 마법식물(풍년화 등)을 둘 칸: 바깥 씨앗 자리(JobGiver_ViviNestPlantSeed)처럼 둥지 반경 12칸 안 바깥 빈 땅 중 비옥도가 가장 높은 칸
+        // 바깥 마법식물(풍년화 등)을 둘 칸: 바깥 씨앗 자리(JobGiver_ViviNestPlantSeed)처럼 활동 범위 중심(둥지 중심·증축 방 중심) 반경 12칸 안 바깥 빈 땅 중 비옥도가 가장 높은 칸
         // (같으면 환경 마나가 많은 칸, 비옥도 0.7 미만 제외). 다 자란 식물은 새싹처럼 제 칸 마나를 하루 80씩 받아야 자라는 것이 아니라 마나 하한은 두지 않는다.
         // 풍년화는 흙 비옥도로 마나를 만들고(비옥도 1 → 하루 150, 1.4 → 1050, 소모 300, 남는 마나는 둘레에 내놓고 제 칸 흙도 차츰 기름지게 한다)
         // 꿀이 많이 나는 꽃이라 둥지가 거둘 수 있게 둥지 채집 범위 안 칸만 쓴다(찾는 반경 12칸이 둥지 채집 범위 ViviNestProduction.GatherRadius 15.9칸 안이다).
@@ -489,12 +490,11 @@ namespace VVRace
             var best = IntVec3.Invalid;
             var bestFertility = 0f;
             var bestMana = -1f;
-            var cellCount = GenRadial.NumCellsInRadius(JobGiver_ViviNestPlantSeed.OutdoorSearchRadius);
+            var cells = Territory.ActivityCells;
+            var cellCount = Territory.ActivityCellCount(JobGiver_ViviNestPlantSeed.OutdoorSearchRadius);
             for (int i = 0; i < cellCount; ++i)
             {
-                var cell = _owner.NestCell + GenRadial.RadialPattern[i];
-                if (!cell.InBounds(map)) { continue; }
-
+                var cell = cells[i];
                 var fertility = map.fertilityGrid.FertilityAt(cell);
                 var cellMana = mana != null ? mana[cell] : 0f;
                 if (fertility < JobGiver_ViviNestPlantSeed.MinFertility || fertility < bestFertility || (fertility == bestFertility && cellMana <= bestMana)) { continue; }
@@ -512,7 +512,8 @@ namespace VVRace
         }
 
         // 바깥 방출기 자리(사용자 요구 "정착 때 바깥에도 방출기를 거리를 두고 두어 개 지어 한곳에만 마법식물을 스팸하는 현상 완화"): 씨앗은 환경 마나가
-        // 새싹이 자랄 만큼(5) 있는 칸에만 심기므로(JobGiver_ViviNestPlantSeed) 방 안 방출기 하나뿐이면 그 둘레에만 심긴다. 둥지 중심에서 7~10칸 떨어진 바깥 빈 땅 중
+        // 새싹이 자랄 만큼(5) 있는 칸에만 심기므로(JobGiver_ViviNestPlantSeed) 방 안 방출기 하나뿐이면 그 둘레에만 심긴다. 활동 범위 중심(둥지 중심·증축 방 중심)에서
+        // 7~10칸 떨어진(가장 가까운 중심 기준) 바깥 빈 땅 중
         // 다른 둥지 방출기(방 안 방출기·다른 바깥 방출기·그 청사진)와 10칸 넘게 떨어진 칸에서, 둘레 7칸(방출기 하나의 마나가 5 안팎으로 닿는 거리) 안에 씨앗을 심을 수 있는
         // 비옥한 칸(비옥도 0.7 이상, 지붕·둥지 칸·경계 아님, 씨앗 자리 반경 안)이 가장 많은 칸을 고른다. 설치하면 그 칸 식물이 지워지므로 꿀 꽃이 자라는 칸은 피한다.
         private const float OutdoorEmitterMinDistance = 7f;
@@ -528,7 +529,6 @@ namespace VVRace
             if (!_initialFacilitiesPlanned) { return IntVec3.Invalid; }
 
             var map = Map;
-            var center = _owner.NestCell;
             _tmpEmitterCells.Clear();
             foreach (var building in map.listerThings.ThingsOfDef(VVThingDefOf.VV_ManaEmitter))
             {
@@ -541,11 +541,12 @@ namespace VVRace
 
             var best = IntVec3.Invalid;
             var bestScore = 0;
-            var start = GenRadial.NumCellsInRadius(OutdoorEmitterMinDistance);
-            var end = GenRadial.NumCellsInRadius(OutdoorEmitterMaxDistance);
+            var cells = Territory.ActivityCells;
+            var start = Territory.ActivityCellCount(OutdoorEmitterMinDistance);
+            var end = Territory.ActivityCellCount(OutdoorEmitterMaxDistance);
             for (int i = start; i < end; ++i)
             {
-                var cell = center + GenRadial.RadialPattern[i];
+                var cell = cells[i];
                 if (!IsFreeOutdoorCell(cell, allowPlants: true)) { continue; }
                 var plant = cell.GetPlant(map);
                 if (plant != null && ViviNestGarden.IsHoneyFlowerDef(plant.def)) { continue; }
@@ -571,7 +572,7 @@ namespace VVRace
             for (int i = 0; i < cellCount; ++i)
             {
                 var cell = origin + GenRadial.RadialPattern[i];
-                if (!cell.InBounds(map) || !cell.InHorDistOf(_owner.NestCell, JobGiver_ViviNestPlantSeed.OutdoorSearchRadius)) { continue; }
+                if (!Territory.InActivityRange(cell, JobGiver_ViviNestPlantSeed.OutdoorSearchRadius)) { continue; }
                 if (map.fertilityGrid.FertilityAt(cell) < JobGiver_ViviNestPlantSeed.MinFertility || cell.Roofed(map)) { continue; }
                 if (Territory.IsTerritoryCell(cell) || Territory.IsBoundaryCell(cell)) { continue; }
                 count++;
@@ -920,6 +921,7 @@ namespace VVRace
         // 깰 아기까지 세어 미리 짓는다: 예전에는 지금 구성원만 세어 방 하나(36칸)에 6명이면 짓지 않았는데, 그때 하나뿐인 부화기를 아기가 쓰고 있어
         // 7번째가 깨지 못했다(장기 계측: 온대 60일 내내 6명, 다른 계측 6→7에 30일).
         // 채굴이 필요한 자리(바위·광맥)와 산 지붕 아래는 후보에서 뺀다. 지붕은 방이 닫히면 둥지 지붕 잡이 얹는다.
+        // 방이 닫히면 그 방 둘레를 활동 범위로 더 칠하므로(TryFinishExpansion) 다음 증축 자리와 바깥 일도 그 방 둘레까지 넓어진다.
         private bool TryPlanExpansion()
         {
             var pawns = _owner.lord?.ownedPawns;
@@ -959,6 +961,9 @@ namespace VVRace
             if (enclosed)
             {
                 Territory.AddRoom(_expansionInterior[0]);
+                // 증축 방 둘레도 정착 때 둥지 중심 둘레처럼 활동 범위로 칠한다(그 방 가운데 칸 기준).
+                var center = ViviNestSiteEvaluator.CentralCell(room, map);
+                Territory.AddActivityCenter(center.IsValid ? center : _expansionInterior[0]);
                 if (_expansionDoor.IsValid && !_doorCells.Contains(_expansionDoor))
                 {
                     _doorCells.Add(_expansionDoor);
@@ -977,7 +982,7 @@ namespace VVRace
 
         public void Notify_BuildingChanged(Building building)
         {
-            if (_expansionRetryTick >= 0 && building.Position.InHorDistOf(_owner.NestCell, ExpansionChangeRadius))
+            if (_expansionRetryTick >= 0 && Territory.NearActivityCenter(building.Position, ExpansionChangeRadius))
             {
                 _expansionRetryTick = -1;
             }
@@ -993,7 +998,9 @@ namespace VVRace
 
             var origin = EntranceCell;
             var bestScore = float.MinValue;
-            var cellCount = GenRadial.NumCellsInRadius(ExpansionSearchRadius);
+            var cells = Territory.ActivityCells;
+            var cellCount = Territory.ActivityCellCount(ExpansionSearchRadius);
+            const float minDistSq = ExpansionMinDistance * ExpansionMinDistance;
             ResetExpansionGrid();
 
             foreach (var hexagonal in ExpansionShapeOrder)
@@ -1001,8 +1008,8 @@ namespace VVRace
                 var bestCenter = IntVec3.Invalid;
                 for (int i = 0; i < cellCount; i += ExpansionSearchStep)
                 {
-                    var center = _owner.NestCell + GenRadial.RadialPattern[i];
-                    if (center.DistanceTo(_owner.NestCell) < ExpansionMinDistance) { continue; }
+                    var center = cells[i];
+                    if (Territory.ActivityDistSq(center) < minDistSq) { continue; }
                     if (!TryMakeShape(center, hexagonal, origin, out var shapeDoor, out var score)) { continue; }
 
                     if (score > bestScore)
@@ -1162,20 +1169,39 @@ namespace VVRace
         }
 
         // 자리 찾기 한 번 동안의 칸 판정 기억(저장하지 않는다): 중심이 3칸 간격이라 이웃한 중심의 방 모양이 칸 대부분을 함께 쓰므로
-        // 증축 칸 판정과 벽·문 청사진 판정을 칸마다 한 번만 한다(찾는 동안 맵은 바뀌지 않는다). 격자는 둥지 중심 둘레 반경에 방 모양 반 폭을 더한 사각형이다.
+        // 증축 칸 판정과 벽·문 청사진 판정을 칸마다 한 번만 한다(찾는 동안 맵은 바뀌지 않는다). 격자는 활동 범위 중심들(둥지 중심·증축 방 중심)을 감싼 사각형을
+        // 찾는 반경에 방 모양 반 폭을 더한 만큼 넓힌 것이다.
         private const int ExpansionGridMargin = 7;
         private const byte ExpansionCellChecked = 1, ExpansionCellOk = 2, ExpansionCellTree = 4, ExpansionWallChecked = 8, ExpansionWallOk = 16,
             ExpansionDoorChecked = 32, ExpansionDoorOk = 64;
         private byte[] _expansionGrid;
         private IntVec3 _expansionGridMin;
-        private int _expansionGridSize;
+        private int _expansionGridSizeX;
+        private int _expansionGridSizeZ;
 
         private void ResetExpansionGrid()
         {
             var half = (int)ExpansionSearchRadius + ExpansionGridMargin;
-            _expansionGridSize = half * 2 + 1;
-            var length = _expansionGridSize * _expansionGridSize;
-            if (_expansionGrid == null || _expansionGrid.Length != length)
+            var centers = Territory.ActivityCenters;
+            int minX = int.MaxValue, minZ = int.MaxValue, maxX = int.MinValue, maxZ = int.MinValue;
+            for (int i = 0; i < centers.Count; ++i)
+            {
+                minX = System.Math.Min(minX, centers[i].x);
+                minZ = System.Math.Min(minZ, centers[i].z);
+                maxX = System.Math.Max(maxX, centers[i].x);
+                maxZ = System.Math.Max(maxZ, centers[i].z);
+            }
+            if (centers.Count == 0)
+            {
+                minX = maxX = _owner.NestCell.x;
+                minZ = maxZ = _owner.NestCell.z;
+            }
+
+            _expansionGridMin = new IntVec3(minX - half, 0, minZ - half);
+            _expansionGridSizeX = maxX - minX + half * 2 + 1;
+            _expansionGridSizeZ = maxZ - minZ + half * 2 + 1;
+            var length = _expansionGridSizeX * _expansionGridSizeZ;
+            if (_expansionGrid == null || _expansionGrid.Length < length)
             {
                 _expansionGrid = new byte[length];
             }
@@ -1183,14 +1209,13 @@ namespace VVRace
             {
                 System.Array.Clear(_expansionGrid, 0, length);
             }
-            _expansionGridMin = new IntVec3(_owner.NestCell.x - half, 0, _owner.NestCell.z - half);
         }
 
         private int ExpansionGridIndex(IntVec3 cell)
         {
             var x = cell.x - _expansionGridMin.x;
             var z = cell.z - _expansionGridMin.z;
-            return x >= 0 && z >= 0 && x < _expansionGridSize && z < _expansionGridSize ? x + z * _expansionGridSize : -1;
+            return x >= 0 && z >= 0 && x < _expansionGridSizeX && z < _expansionGridSizeZ ? x + z * _expansionGridSizeX : -1;
         }
 
         private bool IsExpansionCellCached(IntVec3 cell, ref int trees)
@@ -1318,7 +1343,7 @@ namespace VVRace
             }
         }
 
-        // 시체를 둘 바깥 칸: 둥지에서 떨어진 지붕 없는 빈 땅. 정착민 집 구역은 되도록 피한다.
+        // 시체를 둘 바깥 칸: 둥지에서 떨어진(활동 범위 중심 어디서든 14~22칸) 지붕 없는 빈 땅. 정착민 집 구역은 되도록 피한다.
         // 집 구역 밖 칸을 먼저 한 바퀴 보고 없을 때만 집 구역 칸을 본다(고르는 칸은 한 바퀴에서 집 구역 칸을 예비로 두던 예전과 같다).
         // 예전에는 집 구역 칸에도 예약·길을 물어 링(14~22칸, 904칸)이 집 구역에 많이 걸리면 시체 하나에 0.3~1.2 ms였다(정적 분석 F11).
         public bool TryFindCorpseDumpCell(Pawn pawn, out IntVec3 result)
@@ -1330,8 +1355,8 @@ namespace VVRace
                 return false;
             }
 
-            var start = GenRadial.NumCellsInRadius(CorpseDumpMinDistance);
-            var count = GenRadial.NumCellsInRadius(CorpseDumpMaxDistance) - start;
+            var start = Territory.ActivityCellCount(CorpseDumpMinDistance);
+            var count = Territory.ActivityCellCount(CorpseDumpMaxDistance) - start;
             var offset = Rand.Range(0, count);
             if (TryFindCorpseDumpCell(pawn, start, count, offset, home: false, out result)
                 || TryFindCorpseDumpCell(pawn, start, count, offset, home: true, out result))
@@ -1346,12 +1371,12 @@ namespace VVRace
         private bool TryFindCorpseDumpCell(Pawn pawn, int start, int count, int offset, bool home, out IntVec3 result)
         {
             var map = Map;
-            var center = _owner.NestCell;
+            var cells = Territory.ActivityCells;
             var homeArea = map.areaManager.Home;
             for (int i = 0; i < count; ++i)
             {
-                var cell = center + GenRadial.RadialPattern[start + (i + offset) % count];
-                if (!cell.InBounds(map) || homeArea[cell] != home) { continue; }
+                var cell = cells[start + (i + offset) % count];
+                if (homeArea[cell] != home) { continue; }
                 // 바닐라 운반 잡(HaulToCell)은 놓을 칸을 예약하므로 다른 폰이 예약해 둔 칸은 피한다(보관 칸 찾기와 같다).
                 if (!IsFreeOutdoorCell(cell, allowPlants: true) || !pawn.CanReserve(cell) || !pawn.CanReach(cell, PathEndMode.OnCell, Danger.Some)) { continue; }
 

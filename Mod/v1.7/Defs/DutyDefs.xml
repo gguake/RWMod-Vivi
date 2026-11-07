@@ -156,9 +156,8 @@
     </constantThinkNode>
     <thinkNode Class="ThinkNode_Priority">
       <subNodes>
-        <li Class="JobGiver_FightFiresNearPoint">
-          <maxDistFromPoint>24</maxDistFromPoint>
-        </li>
+        <!-- 불 끄기·일 묶음은 둥지 활동 범위(정착 때 둥지 중심 둘레 24칸, 증축 방마다 그 방 둘레 24칸을 더 칠한 칸) 안에서만 -->
+        <li Class="VVRace.JobGiver_ViviNestFightFires" />
         <li Class="ThinkNode_Tagger">
           <tagToGive>SatisfyingNeeds</tagToGive>
           <subNodes>
@@ -175,8 +174,7 @@
         <li Class="VVRace.JobGiver_ViviNestUnload" />
         <!-- 저체온·열사병이면 일보다 먼저 편한 기온의 둥지 방으로 피한다(잠은 편한 기온의 방에서 자고, 배고프면 먼저 먹는다) -->
         <li Class="VVRace.JobGiver_ViviNestSeekSafeTemperature" />
-        <li Class="ThinkNode_ForbidOutsideFlagRadius">
-          <maxDistToSquadFlag>24</maxDistToSquadFlag>
+        <li Class="VVRace.ThinkNode_ViviNestForbidOutsideActivityArea">
           <subNodes>
             <!-- 쓰러진 구성원은 다른 일보다 먼저 편한 기온의 둥지 방으로 옮긴다(바깥에 두면 겨울에 얼어 죽는다) -->
             <li Class="VVRace.JobGiver_ViviNestRescue" />

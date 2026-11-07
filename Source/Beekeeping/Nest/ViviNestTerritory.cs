@@ -13,8 +13,6 @@ namespace VVRace
         private const int OutdoorStorageCellCount = 12;
         private const float OutdoorStorageSearchRadius = 6f;
 
-        private static float _workRadius = -1f;
-
         private readonly LordJob_ViviNest _owner;
 
         private List<IntVec3> _roomCells = new List<IntVec3>();
@@ -111,40 +109,147 @@ namespace VVRace
             return _ownedRoomCellSet.Contains(cell) || _outdoorStorageCells.Contains(cell);
         }
 
-        // 정착 범위: 무리가 오가는 반경. 둥지 생활 듀티가 일을 둥지 중심에서 이 반경 안으로 묶는다(ThinkNode_ForbidOutsideFlagRadius, 24칸).
-        public static float WorkRadius
+        #region 활동 범위
+        // 활동 범위(정착 범위): 무리가 일하러 오가는 칸. 정착할 때 둥지 중심 둘레, 증축 방이 닫힐 때 그 방 중심 둘레의 WorkRadius 안 칸을 칠하고
+        // 칸마다 가장 가까운 중심까지의 거리 제곱을 적어 둔다. 일마다 다른 반경(채집 15.9칸, 씨앗 12칸, 증축 7~16칸 등)은 이 거리로 본다:
+        // 중심이 하나면 예전 둥지 중심 한 점 기준(InHorDistOf·GenRadial)과 같은 칸이고, 증축 방마다 그 방 둘레로 같은 규칙만큼 넓어진다.
+        // 둥지 생활 듀티는 일을 이 칸 안으로 묶는다(ThinkNode_ViviNestForbidOutsideActivityArea).
+        public const float WorkRadius = 24f;
+        private const ushort OutsideActivity = ushort.MaxValue;
+
+        // 칠한 중심(저장한다). 칸 거리·칸 목록은 저장하지 않고 처음 쓸 때 중심들로 다시 칠한다.
+        private List<IntVec3> _activityCenters = new List<IntVec3>();
+        private ushort[] _activityDistSq;
+        // 칠한 칸을 가장 가까운 중심까지의 거리 순으로(같으면 칠한 순서대로). 중심이 하나면 바닐라 GenRadial.RadialPattern 순서와 같다.
+        private readonly List<IntVec3> _activityCells = new List<IntVec3>();
+
+        public IReadOnlyList<IntVec3> ActivityCenters => _activityCenters;
+
+        public IReadOnlyList<IntVec3> ActivityCells
         {
             get
             {
-                if (_workRadius < 0f)
-                {
-                    _workRadius = FlagRadius(VVDutyDefOf.VV_ViviNestLife.thinkNode);
-                }
-                return _workRadius;
+                EnsureActivityGrid();
+                return _activityCells;
             }
         }
 
-        public bool InWorkRange(IntVec3 cell) => cell.InHorDistOf(_owner.NestCell, WorkRadius);
-
-        private static float FlagRadius(ThinkNode node)
+        public void AddActivityCenter(IntVec3 center)
         {
-            if (node is ThinkNode_ForbidOutsideFlagRadius flag) { return flag.maxDistToSquadFlag; }
-            if (node?.subNodes == null) { return 0f; }
+            if (_activityCenters.Contains(center)) { return; }
 
-            foreach (var sub in node.subNodes)
+            _activityCenters.Add(center);
+            if (_activityDistSq != null)
             {
-                var radius = FlagRadius(sub);
-                if (radius > 0f) { return radius; }
+                PaintActivity(center);
             }
-            return 0f;
         }
+
+        // 가장 가까운 중심까지의 거리 제곱(활동 범위 밖이면 int.MaxValue)
+        public int ActivityDistSq(IntVec3 cell)
+        {
+            EnsureActivityGrid();
+            var map = Map;
+            if (_activityDistSq == null || !cell.InBounds(map)) { return int.MaxValue; }
+
+            var distSq = _activityDistSq[map.cellIndices.CellToIndex(cell)];
+            return distSq == OutsideActivity ? int.MaxValue : distSq;
+        }
+
+        // 어느 중심에서든 radius 안인 칸(InHorDistOf와 같은 판정, radius는 WorkRadius 이하)
+        public bool InActivityRange(IntVec3 cell, float radius) => ActivityDistSq(cell) <= radius * radius;
+
+        public bool InWorkRange(IntVec3 cell) => InActivityRange(cell, WorkRadius);
+
+        // ActivityCells 앞에서부터 radius 안인 칸 수(GenRadial.NumCellsInRadius에 해당)
+        public int ActivityCellCount(float radius)
+        {
+            EnsureActivityGrid();
+            var limit = radius * radius;
+            int lo = 0, hi = _activityCells.Count;
+            while (lo < hi)
+            {
+                var mid = (lo + hi) / 2;
+                if (ActivityDistSq(_activityCells[mid]) <= limit) { lo = mid + 1; }
+                else { hi = mid; }
+            }
+            return lo;
+        }
+
+        // 어느 중심에서든 radius 안인 칸(칠한 범위 밖 반경도 된다)
+        public bool NearActivityCenter(IntVec3 cell, float radius)
+        {
+            for (int i = 0; i < _activityCenters.Count; ++i)
+            {
+                if (cell.InHorDistOf(_activityCenters[i], radius)) { return true; }
+            }
+            return false;
+        }
+
+        // root에서 활동 범위 끝까지의 가장 먼 거리(지역 탐색 반경용)
+        public float ActivityReachFrom(IntVec3 root)
+        {
+            var reach = 0f;
+            for (int i = 0; i < _activityCenters.Count; ++i)
+            {
+                reach = System.Math.Max(reach, (_activityCenters[i] - root).LengthHorizontal + WorkRadius);
+            }
+            return reach;
+        }
+
+        private void EnsureActivityGrid()
+        {
+            if (_activityDistSq != null) { return; }
+
+            var map = Map;
+            if (map == null) { return; }
+
+            _activityDistSq = new ushort[map.cellIndices.NumGridCells];
+            for (int i = 0; i < _activityDistSq.Length; ++i)
+            {
+                _activityDistSq[i] = OutsideActivity;
+            }
+            _activityCells.Clear();
+            for (int i = 0; i < _activityCenters.Count; ++i)
+            {
+                PaintActivity(_activityCenters[i]);
+            }
+        }
+
+        private void PaintActivity(IntVec3 center)
+        {
+            var map = Map;
+            var indices = map.cellIndices;
+            var cellCount = GenRadial.NumCellsInRadius(WorkRadius);
+            for (int i = 0; i < cellCount; ++i)
+            {
+                var offset = GenRadial.RadialPattern[i];
+                var cell = center + offset;
+                if (!cell.InBounds(map)) { continue; }
+
+                var index = indices.CellToIndex(cell);
+                var distSq = (ushort)offset.LengthHorizontalSquared;
+                var old = _activityDistSq[index];
+                if (distSq >= old) { continue; }
+
+                if (old == OutsideActivity)
+                {
+                    _activityCells.Add(cell);
+                }
+                _activityDistSq[index] = distSq;
+            }
+
+            _activityCells.SortStable((a, b) => _activityDistSq[indices.CellToIndex(a)].CompareTo(_activityDistSq[indices.CellToIndex(b)]));
+        }
+        #endregion
 
         private static readonly List<Room> _tmpStructure = new List<Room>();
 
-        // 정착할 때 둥지 방(둥지 중심 칸의 구조물)의 경계(벽·문)를 기억해 두고, 바깥으로 난 문 밖 가까운 빈 땅에 보관 칸을 잡는다.
+        // 정착할 때 둥지 방(둥지 중심 칸의 구조물)의 경계(벽·문)를 기억해 두고, 둥지 중심 둘레를 활동 범위로 칠하고, 바깥으로 난 문 밖 가까운 빈 땅에 보관 칸을 잡는다.
         public void Establish(IntVec3 nestCell)
         {
             AddStructure(nestCell);
+            AddActivityCenter(nestCell);
 
             _outdoorStorageCells.Clear();
             var door = EntranceDoor;
@@ -355,6 +460,7 @@ namespace VVRace
             Scribe_Collections.Look(ref _boundaryCells, "boundaryCells", LookMode.Value);
             Scribe_Collections.Look(ref _outdoorStorageCells, "outdoorStorageCells", LookMode.Value);
             Scribe_Collections.Look(ref _ownedRoomCells, "ownedRoomCells", LookMode.Value);
+            Scribe_Collections.Look(ref _activityCenters, "activityCenters", LookMode.Value);
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {

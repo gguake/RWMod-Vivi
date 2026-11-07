@@ -76,7 +76,7 @@ namespace VVRace
             // 삽입 정렬이라 모자란 정도가 같으면 꿀·꽃가루·프로폴리스 순서다.
             _tmpOrder.InsertionSort((a, b) => production.Need(b.recipe).CompareTo(production.Need(a.recipe)));
 
-            CollectGatherables(pawn.Map, production);
+            CollectGatherables(pawn.Map, nest.Territory);
             Job job = null;
             foreach (var gathering in _tmpOrder)
             {
@@ -125,17 +125,15 @@ namespace VVRace
         }
 
         // 채집 범위 안의 되풀이 채집 대상(기존 채집 시스템이 재채집 대기를 다는 것, CompRepeatGatherable)과 그 부품
-        private static void CollectGatherables(Map map, ViviNestProduction production)
+        private static void CollectGatherables(Map map, ViviNestTerritory territory)
         {
             _tmpGatherables.Clear();
             _tmpGatherableComps.Clear();
-            var center = production.GatherCenter;
-            var cellCount = GenRadial.NumCellsInRadius(ViviNestProduction.GatherRadius);
+            var cells = territory.ActivityCells;
+            var cellCount = territory.ActivityCellCount(ViviNestProduction.GatherRadius);
             for (int i = 0; i < cellCount; ++i)
             {
-                var cell = center + GenRadial.RadialPattern[i];
-                if (!cell.InBounds(map)) { continue; }
-
+                var cell = cells[i];
                 var things = map.thingGrid.ThingsListAtFast(cell);
                 for (int j = 0; j < things.Count; ++j)
                 {

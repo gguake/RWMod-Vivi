@@ -20,6 +20,12 @@ namespace VVRace
                 AccessTools.Method(typeof(ForbidUtility), nameof(ForbidUtility.IsForbidden), new[] { typeof(Thing), typeof(Pawn) }),
                 postfix: new HarmonyMethod(typeof(BeekeepingPatch), nameof(ForbidUtility_IsForbidden_Postfix)));
 
+            // 둥지 생활 듀티의 일 묶음에서 일을 고르는 둥지 비비에게 둥지 활동 범위 밖 칸(과 그 칸의 물건)을 금지한다(ThinkNode_ViviNestForbidOutsideActivityArea).
+            // 바닐라 듀티 지점 반경 금지(maxDistToSquadFlag)를 칠한 칸으로 바꾼 것이다. 물건 금지 판정도 놓인 칸으로 이 판정을 거친다.
+            ViviHarmonyPatcher.TryPatch(harmony, "ForbidUtility.IsForbidden cell (vivi nest activity area)",
+                AccessTools.Method(typeof(ForbidUtility), nameof(ForbidUtility.IsForbidden), new[] { typeof(IntVec3), typeof(Pawn) }),
+                postfix: new HarmonyMethod(typeof(BeekeepingPatch), nameof(ForbidUtility_IsForbiddenCell_Postfix)));
+
             // 바닐라가 산출물을 놓기 직전에 알리는 지점: 작업 지시서 산출물, 베기·수확 산출물을 둥지 몫으로 잡는다.
             ViviHarmonyPatcher.TryPatch(harmony, "QuestManager.Notify_ThingsProduced (vivi nest products)",
                 AccessTools.Method(typeof(QuestManager), nameof(QuestManager.Notify_ThingsProduced)),
@@ -176,6 +182,14 @@ namespace VVRace
 
             var nest = pawn.GetNestLordJob();
             if (nest != null && !nest.CanUse(t))
+            {
+                __result = true;
+            }
+        }
+
+        private static void ForbidUtility_IsForbiddenCell_Postfix(IntVec3 c, Pawn pawn, ref bool __result)
+        {
+            if (!__result && ThinkNode_ViviNestForbidOutsideActivityArea.IsOutsideFor(c, pawn) && ForbidUtility.CaresAboutForbidden(pawn, true))
             {
                 __result = true;
             }

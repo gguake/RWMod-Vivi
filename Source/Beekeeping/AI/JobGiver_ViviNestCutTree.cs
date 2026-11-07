@@ -8,9 +8,10 @@ namespace VVRace
     // 반경 안에 벨 나무가 없으면 자라는 나무가 벨 만큼 자랄 때(상한 TreeRetryMaxTicks)까지 우선도를 0으로 둔다(ViviNestProduction).
     public class JobGiver_ViviNestCutTree : ThinkNode_JobGiver
     {
+        // 벨 나무: 활동 범위 중심(둥지 중심·증축 방 중심) 어디서든 이 반경 안(ViviNestTerritory). 탐색은 둥지 중심에서 활동 범위 끝까지 한다.
         private const float SearchRadius = 24f;
         // 나무 탐색(바닐라 지역 BFS)이 볼 지역 수. 바닐라 기본(30개)을 넘도록 못 찾으면 맵 전체 식물을 훑는 전역 탐색으로 넘어가 1회 140~430 µs였다
-        // (실측, 강제 전역 탐색). 반경 판정이 BFS를 반경 안 지역으로 묶으므로 개수는 넉넉히 두고 전역 탐색은 하지 않는다.
+        // (실측, 강제 전역 탐색). 반경 판정이 BFS를 활동 범위 끝까지의 지역으로 묶으므로 개수는 넉넉히 두고 전역 탐색은 하지 않는다.
         // 시험 맵의 반경 24칸 지역은 22~29개였다.
         private const int SearchRegionsMax = 1000;
 
@@ -44,16 +45,18 @@ namespace VVRace
             var anyTarget = false;
             var readyTick = -1;
             var map = pawn.Map;
+            var territory = nest.Territory;
             var tree = GenClosest.ClosestThingReachable(
                 nest.NestCell,
                 map,
                 ThingRequest.ForGroup(ThingRequestGroup.Plant),
                 PathEndMode.Touch,
                 TraverseParms.For(pawn, Danger.Some),
-                SearchRadius,
+                territory.ActivityReachFrom(nest.NestCell),
                 t =>
                 {
                     if (!(t is Plant plant) || !plant.def.plant.IsTree || plant.def.plant.harvestedThingDef != ThingDefOf.WoodLog) { return false; }
+                    if (!territory.InActivityRange(plant.Position, SearchRadius)) { return false; }
                     if (map.zoneManager.ZoneAt(plant.Position) != null) { return false; }
                     if (!plant.HarvestableNow)
                     {

@@ -50,11 +50,11 @@ namespace VVRace
             if (nest.Garden.FlowerCount >= nest.Garden.FlowerTarget() || nest.Garden.FlowerSpotSearchPaused) { return null; }
 
             var map = pawn.Map;
-            var center = nest.Production.GatherCenter;
-            var cellCount = GenRadial.NumCellsInRadius(ViviNestProduction.GatherRadius);
+            var cells = nest.Territory.ActivityCells;
+            var cellCount = nest.Territory.ActivityCellCount(ViviNestProduction.GatherRadius);
             for (int i = 0; i < cellCount; ++i)
             {
-                var cell = center + GenRadial.RadialPattern[i];
+                var cell = cells[i];
                 if (!nest.Planner.IsFreeOutdoorCell(cell, allowPlants: true)) { continue; }
 
                 var flowerDef = PlantUtility.GrowthSeasonNow(cell, map, VVThingDefOf.Plant_Rose) ? VVThingDefOf.Plant_Rose : ThingDefOf.Plant_Dandelion;
