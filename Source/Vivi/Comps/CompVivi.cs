@@ -12,9 +12,14 @@ namespace VVRace
         public static Material AttunementLineMat = MaterialPool.MatFrom(GenDraw.LineTexPath, ShaderDatabase.Transparent, new Color(0.5f, 1f, 0.5f));
         public static Material ConcentrationLineMat = MaterialPool.MatFrom(GenDraw.LineTexPath, ShaderDatabase.Transparent, new Color(1f, 0.75f, 0.4f, 0.6f));
 
+        private const float HairColorChangeTolerance = 0.002f;
+
         public bool isRoyal = false;
         private Dictionary<GeneDef, int> _geneInheritanceGenerations = new Dictionary<GeneDef, int>();
+        // 어린 비비 머리색 변화: 자연 머리색, 마지막으로 칠한 색, 바깥(염색 등)에서 한 번이라도 바뀌었는지
         private Color? _originalHairColor = null;
+        private Color? _appliedHairColor = null;
+        private bool _hairColorOverridden = false;
         [Unsaved]
         private bool _refreshEverflowerHediffsAfterLoad;
 
@@ -84,6 +89,8 @@ namespace VVRace
         {
             Scribe_Values.Look(ref isRoyal, "isRoyal");
             Scribe_Values.Look(ref _originalHairColor, "originalHairColor");
+            Scribe_Values.Look(ref _appliedHairColor, "appliedHairColor");
+            Scribe_Values.Look(ref _hairColorOverridden, "hairColorOverridden");
             Scribe_Collections.Look(ref _geneInheritanceGenerations, "geneInheritanceGenerations", LookMode.Def, LookMode.Value);
 
             if (_geneInheritanceGenerations == null)
@@ -277,6 +284,8 @@ namespace VVRace
             {
                 isRoyal = sourceComp.isRoyal;
                 _originalHairColor = sourceComp._originalHairColor;
+                _appliedHairColor = sourceComp._appliedHairColor;
+                _hairColorOverridden = sourceComp._hairColorOverridden;
                 _geneInheritanceGenerations = new Dictionary<GeneDef, int>(sourceComp._geneInheritanceGenerations);
             }
         }
@@ -339,18 +348,50 @@ namespace VVRace
         public void RefreshHairColor()
         {
             var pawn = (Pawn)parent;
+            // 폰 생성 중(나이 설정이 어린이 단계 시작을 알림)에는 머리색 유전자가 아직 붙기 전이라 자연 머리색을 잘못 잡으므로 맵에 있을 때만 다룬다.
+            if (!pawn.Spawned || pawn.DevelopmentalStage.Adult() || CheckHairColorOverridden(pawn)) { return; }
+
             if (_originalHairColor == null)
             {
-                _originalHairColor = new Color(pawn.story.HairColor.r, pawn.story.HairColor.g, pawn.story.HairColor.b, 1f);
+                var hairColor = pawn.story.HairColor;
+                _originalHairColor = new Color(hairColor.r, hairColor.g, hairColor.b, 1f);
             }
 
-            if (!pawn.DevelopmentalStage.Adult())
+            pawn.story.HairColor = Color.Lerp(Color.white, _originalHairColor.Value, (float)pawn.ageTracker.AgeBiologicalTicks / pawn.ageTracker.AdultMinAgeTicks);
+            _appliedHairColor = pawn.story.HairColor;
+
+            pawn.Drawer.renderer.SetAllGraphicsDirty();
+        }
+
+        // 마지막으로 칠한 색과 지금 색이 다르면 염색·유전자 등 다른 사유로 바뀐 것이므로 머리색 변화를 영구히 끈다.
+        private bool CheckHairColorOverridden(Pawn pawn)
+        {
+            if (_hairColorOverridden) { return true; }
+
+            var hairColor = pawn.story.HairColor;
+            if (_appliedHairColor.HasValue)
             {
-                var appliedHairColor = Color.Lerp(Color.white, _originalHairColor.Value, (float)pawn.ageTracker.AgeBiologicalTicks / pawn.ageTracker.AdultMinAgeTicks);
-                pawn.story.HairColor = appliedHairColor;
-
-                pawn.Drawer.renderer.SetAllGraphicsDirty();
+                if (IsSameHairColor(hairColor, _appliedHairColor.Value)) { return false; }
             }
+            else
+            {
+                // 칠한 색을 기록하기 전 세이브는 막 염색을 마친 상태(원하는 색 == 지금 색)만 바뀐 것으로 본다.
+                var nextHairColor = pawn.style?.nextHairColor;
+                if (_originalHairColor == null || !nextHairColor.HasValue || !IsSameHairColor(hairColor, nextHairColor.Value)) { return false; }
+            }
+
+            _hairColorOverridden = true;
+            _originalHairColor = null;
+            _appliedHairColor = null;
+            return true;
+        }
+
+        // 세이브 때 색 값이 반올림될 수 있어 작은 오차는 같은 색으로 본다.
+        private static bool IsSameHairColor(Color a, Color b)
+        {
+            return Mathf.Abs(a.r - b.r) <= HairColorChangeTolerance
+                && Mathf.Abs(a.g - b.g) <= HairColorChangeTolerance
+                && Mathf.Abs(a.b - b.b) <= HairColorChangeTolerance;
         }
 
         public void Notify_ChildLifeStageStart()
@@ -361,11 +402,12 @@ namespace VVRace
         public void Notify_AdultLifeStageStart()
         {
             var pawn = parent as Pawn;
-            if (_originalHairColor != null)
+            if (!CheckHairColorOverridden(pawn) && _originalHairColor != null)
             {
                 pawn.story.HairColor = _originalHairColor.Value;
-                _originalHairColor = null;
             }
+            _originalHairColor = null;
+            _appliedHairColor = null;
 
             if (!pawn.IsRoyalVivi())
             {
