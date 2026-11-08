@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>VV_Fleck_CompressedWindRing</defName>
+    <altitudeLayer>MoteOverheadLow</altitudeLayer>
+    <fadeInTime>0.02</fadeInTime>
+    <solidTime>0.34</solidTime>
+    <fadeOutTime>0.18</fadeOutTime>
+    <scalers>
+      <li>
+        <curve>
+          <points>
+            <li>(0, 0)</li>
+            <li>(0.25, 0.4375)</li>
+            <li>(0.5, 0.75)</li>
+            <li>(0.75, 0.9375)</li>
+            <li>(1, 1)</li>
+          </points>
+        </curve>
+        <scaleAmt>8</scaleAmt>
+        <scaleTime>0.38</scaleTime>
+      </li>
+    </scalers>
+    <graphicData>
+      <graphicClass>Graphic_FleckPulse</graphicClass>
+      <texPath>Things/Mote/Black</texPath>
+      <shaderType>MoteLargeDistortionWave</shaderType>
+      <shaderParameters>
+        <_DistortionTex>/Things/Mote/PsychicDistortionCurrents</_DistortionTex>
+        <_NoiseTex>/Things/Mote/PsycastNoise</_NoiseTex>
+        <_distortionIntensity>0.16</_distortionIntensity>
+        <_brightnessMultiplier>1.8</_brightnessMultiplier>
+        <_noiseIntensity>2</_noiseIntensity>
+        <_ageToNoiseRatio>5</_ageToNoiseRatio>
+      </shaderParameters>
+      <drawSize>1</drawSize>
+    </graphicData>
+  </FleckDef>
+
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>VV_Fleck_CompressedWindGust</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0.04</fadeInTime>
+    <solidTime>0.12</solidTime>
+    <fadeOutTime>0.3</fadeOutTime>
+    <speedPerTime>-14~-10</speedPerTime>
+    <rotateTowardsMoveDirection>true</rotateTowardsMoveDirection>
+    <graphicData>
+      <texPath>VFX/VV_WindGust</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <renderInstanced>true</renderInstanced>
+      <color>(0.92, 1, 0.95, 0.6)</color>
+      <drawSize>(1, 2.2)</drawSize>
+    </graphicData>
+  </FleckDef>
+
+  <FleckDef ParentName="FleckBase_Thrown" Name="VV_FleckSkyweedSporeBase" Abstract="True">
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <graphicData>
+      <texPath>VFX/VV_SkyweedSpore</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+  </FleckDef>
+
+  <FleckDef ParentName="VV_FleckSkyweedSporeBase">
+    <defName>VV_Fleck_SkyweedSporeBurst</defName>
+    <fadeInTime>0.05</fadeInTime>
+    <solidTime>0.8</solidTime>
+    <fadeOutTime>1.1</fadeOutTime>
+    <speedPerTime>-1.4~-1</speedPerTime>
+    <acceleration>(0, 0, 0.25)</acceleration>
+  </FleckDef>
+
+  <FleckDef ParentName="VV_FleckSkyweedSporeBase">
+    <defName>VV_Fleck_SkyweedSporeDrift</defName>
+    <fadeInTime>0.35</fadeInTime>
+    <solidTime>0.9</solidTime>
+    <fadeOutTime>1.4</fadeOutTime>
+    <acceleration>(0, 0, 0.15)</acceleration>
+  </FleckDef>
+
+  <EffecterDef>
+    <defName>VV_Effecter_CompressedWindBurst</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_CompressedWindRing</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>1</burstCount>
+        <absoluteAngle>true</absoluteAngle>
+        <rotation>0~360</rotation>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_CompressedWindGust</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>16~20</burstCount>
+        <positionRadius>0.25</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>7~9</speed>
+        <scale>0.8~1.2</scale>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_SkyweedSporeBurst</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>26~34</burstCount>
+        <positionRadius>0.5</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>1.6~3</speed>
+        <rotation>0~360</rotation>
+        <rotationRate>-240~240</rotationRate>
+        <scale>0.4~0.65</scale>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VV_Fleck_SkyweedSporeDrift</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+        <burstCount>12~16</burstCount>
+        <positionRadiusMin>1</positionRadiusMin>
+        <positionRadius>3.4</positionRadius>
+        <absoluteAngle>true</absoluteAngle>
+        <angle>0~360</angle>
+        <fleckUsesAngleForVelocity>true</fleckUsesAngleForVelocity>
+        <speed>0.15~0.5</speed>
+        <rotation>0~360</rotation>
+        <rotationRate>-90~90</rotationRate>
+        <scale>0.32~0.5</scale>
+      </li>
+    </children>
+  </EffecterDef>
+</Defs>

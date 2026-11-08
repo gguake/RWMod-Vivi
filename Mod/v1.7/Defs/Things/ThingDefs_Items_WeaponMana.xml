@@ -685,4 +685,83 @@
       </li>
     </comps>
   </ThingDef>
+
+  <!-- 압축바람 폭탄 -->
+  <ThingDef ParentName="BaseMakeableGrenade">
+    <defName>VV_CompressedWindBomb</defName>
+    <label>compressed wind bombs</label>
+    <description>Throwable bombs made by sealing mana-soaked skyweed fluff under high pressure inside a viviwax shell wrapped in living leaves. They deal no damage, but on impact, the compressed wind bursts out all at once, stunning everyone in the area for 0.5 seconds and blowing away every ground projectile and all gas there, including smoke, tox gas and rot stink, regardless of friend or foe.
+\nThey contain no flammable explosives, so they never cook off even when set on fire.</description>
+    <graphicData>
+      <texPath>Things/Item/Equipment/VV_CompressedWindBomb</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>0.8</drawSize>
+    </graphicData>
+    <soundInteract>Interact_Grenade</soundInteract>
+    <techLevel>Medieval</techLevel>
+
+    <statBases>
+      <WorkToMake>12000</WorkToMake>
+      <Mass>1</Mass>
+      <RangedWeapon_Cooldown>2.66</RangedWeapon_Cooldown>
+    </statBases>
+    <thingCategories Inherit="False">
+      <li>VV_ArcaneWeapon</li>
+    </thingCategories>
+
+    <verbs>
+      <li>
+        <label>throw compressed wind bomb</label>
+        <verbClass>Verb_LaunchProjectile</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <range>12.9</range>
+        <forcedMissRadius>1.9</forcedMissRadius>
+        <warmupTime>1.5</warmupTime>
+        <noiseRadius>4</noiseRadius>
+        <ai_IsBuildingDestroyer>false</ai_IsBuildingDestroyer>
+        <ai_AvoidFriendlyFireRadius>3.6</ai_AvoidFriendlyFireRadius>
+        <soundCast>ThrowGrenade</soundCast>
+        <targetParams>
+          <canTargetLocations>true</canTargetLocations>
+        </targetParams>
+        <defaultProjectile>VV_Projectile_CompressedWindBomb</defaultProjectile>
+        <rangedFireRulepack>Combat_RangedFire_Thrown</rangedFireRulepack>
+      </li>
+    </verbs>
+
+    <costList>
+      <VV_SkyweedFluff>30</VV_SkyweedFluff>
+      <VV_LivingLeaf>15</VV_LivingLeaf>
+      <VV_Viviwax>40</VV_Viviwax>
+    </costList>
+
+    <recipeMaker>
+      <researchPrerequisite>VV_ArcaneWeaponry</researchPrerequisite>
+      <recipeUsers Inherit="False">
+        <li>ElectricSmithy</li>
+        <li>FueledSmithy</li>
+      </recipeUsers>
+      <unfinishedThingDef>UnfinishedWeapon</unfinishedThingDef>
+      <skillRequirements>
+        <Crafting>4</Crafting>
+      </skillRequirements>
+      <displayPriority>-535</displayPriority>
+    </recipeMaker>
+  </ThingDef>
+  <ThingDef ParentName="BaseGrenadeProjectile">
+    <defName>VV_Projectile_CompressedWindBomb</defName>
+    <label>compressed wind bomb</label>
+    <graphicData>
+      <texPath>Things/Projectile/VV_CompressedWindBomb</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>0.4</drawSize>
+    </graphicData>
+    <projectile>
+      <damageDef>VV_CompressedWind</damageDef>
+      <stoppingPower>0</stoppingPower>
+      <explosionRadius>3.6</explosionRadius>
+      <explosionEffect>VV_Effecter_CompressedWindBurst</explosionEffect>
+      <doExplosionVFX>false</doExplosionVFX>
+    </projectile>
+  </ThingDef>
 </Defs>

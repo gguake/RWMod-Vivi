@@ -119,6 +119,7 @@
     <Compile Include="ArcanePlant\Weapon\Graphic_MoteTiled.cs" />
     <Compile Include="ArcanePlant\Weapon\Things\SnowmanRocket.cs" />
     <Compile Include="ArcanePlant\Weapon\CompExplosiveSnowman.cs" />
+    <Compile Include="ArcanePlant\Weapon\DamageWorker_CompressedWind.cs" />
     <Compile Include="ArcanePlant\DamageWorker_FrostbiteCustom.cs" />
     <Compile Include="ArcanePlant\Mana\Comps\CompEquippableManaWeapon.cs" />
     <Compile Include="ArcanePlant\Mana\Comps\CompMana.cs" />

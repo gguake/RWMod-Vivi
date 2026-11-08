@@ -459,6 +459,7 @@ namespace VVRace
         public static FleckDef Fleck_VaporizeCenterFlash;
 
         public static FleckDef VV_Fleck_Steam;
+        public static FleckDef VV_Fleck_CompressedWindGust;
 
         public static FleckDef VV_Fleck_NeedlePierce;
         public static FleckDef VV_Fleck_NeedleShard;

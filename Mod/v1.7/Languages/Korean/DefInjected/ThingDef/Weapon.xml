@@ -77,6 +77,12 @@
 \n사격할 때 마나를 소모하며 주변의 환경 마나를 흡수해 자동으로 충전됩니다. 마나가 부족하면 조준 시간과 사격 후 대기 시간이 크게 증가합니다.</VV_FroststingCrossbow.description>
 <VV_FroststingCrossbow.tools.limb.label>활대</VV_FroststingCrossbow.tools.limb.label>
 <VV_Bullet_Froststing.label>서리침</VV_Bullet_Froststing.label>
+
+<VV_CompressedWindBomb.label>압축바람 폭탄</VV_CompressedWindBomb.label>
+<VV_CompressedWindBomb.description>마나를 머금은 하늘풀 홀씨를 살아있는 잎으로 감싼 비비 밀랍 껍데기 안에 고압으로 밀봉한 투척용 폭탄입니다. 피해를 입히지는 않지만 착탄하는 순간 압축된 바람이 한꺼번에 터져 나와 범위 안의 모든 대상을 0.5초 동안 기절시키고, 피아를 가리지 않고 그곳의 직사 투사체와 연막, 독소 가스, 부패 가스 등의 가스를 모두 날려 버립니다.
+\n가연성 폭약이 들어 있지 않아 불이 붙어도 유폭하지 않습니다.</VV_CompressedWindBomb.description>
+<VV_CompressedWindBomb.verbs.throw_compressed_wind_bomb.label>압축바람 폭탄 던지기</VV_CompressedWindBomb.verbs.throw_compressed_wind_bomb.label>
+<VV_Projectile_CompressedWindBomb.label>압축바람 폭탄</VV_Projectile_CompressedWindBomb.label>
 2
 <!-- Exotics -->
 <VV_EltexNeedle.label>비비 엘텍스 바늘</VV_EltexNeedle.label>

@@ -83,6 +83,18 @@
   </DamageDef>
   
   <DamageDef>
+    <defName>VV_CompressedWind</defName>
+    <label>compressed wind</label>
+    <workerClass>VVRace.DamageWorker_CompressedWind</workerClass>
+    <harmsHealth>false</harmsHealth>
+    <makesBlood>false</makesBlood>
+    <defaultDamage>1</defaultDamage>
+    <constantStunDurationTicks>30</constantStunDurationTicks>
+    <soundExplosion>Explosion_FirefoamPopper</soundExplosion>
+    <explosionSnowMeltAmount>0</explosionSnowMeltAmount>
+  </DamageDef>
+
+  <DamageDef>
     <defName>VV_Frostbite</defName>
     <workerClass>VVRace.DamageWorker_FrostbiteCustom</workerClass>
     <label>frostbite</label>
