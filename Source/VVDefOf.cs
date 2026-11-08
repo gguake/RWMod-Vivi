@@ -578,7 +578,7 @@ namespace VVRace
     public static class VVTileMutatorDefOf
     {
         [MayRequireOdyssey]
-        public static TileMutatorDef VV_ManaVein;
+        public static TileMutatorDef VV_ArcanePlantHabitat;
     }
 
     [DefOf]

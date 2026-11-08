@@ -19,11 +19,6 @@ namespace VVRace
         public IntRange fieldColorCountRange = new IntRange(2, 3);
     }
 
-    public class ManaVeinExtension : ViviLandmarkExtension
-    {
-        public float manaPerDay = 10000f;
-    }
-
     public class ArcanePlantHabitatExtension : ViviLandmarkExtension
     {
         public List<ThingDef> plantKinds = new List<ThingDef>();
@@ -31,5 +26,8 @@ namespace VVRace
         public IntRange plantsPerClusterRange = new IntRange(2, 4);
         public float clusterRadius = 3f;
         public float plantSpacing = 2f;
+
+        // 군락 중심마다 두는 영맥 한 곳의 하루 마나 방출량.
+        public float manaPerDay = 10000f;
     }
 }

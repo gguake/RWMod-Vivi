@@ -221,7 +221,7 @@ namespace VVRace
         {
             if (_manaVeins.Count == 0) { return; }
 
-            var manaPerDay = VVTileMutatorDefOf.VV_ManaVein?.GetModExtension<ManaVeinExtension>()?.manaPerDay ?? DefaultManaVeinPerDay;
+            var manaPerDay = VVTileMutatorDefOf.VV_ArcanePlantHabitat?.GetModExtension<ArcanePlantHabitatExtension>()?.manaPerDay ?? DefaultManaVeinPerDay;
 
             // 칸당 상한(EnvironmentManaMax)을 넘어 버려지지 않도록 중심 3×3칸에 나눠 넣는다.
             var manaPerCell = manaPerDay / 60000f * ticks / 9f;
