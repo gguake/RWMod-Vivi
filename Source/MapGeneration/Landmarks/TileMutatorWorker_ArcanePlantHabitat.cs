@@ -45,7 +45,7 @@ namespace VVRace
             var kinds = GetPlantKinds(map.Tile);
             if (kinds.Count == 0) { return; }
 
-            // 앞쪽 군락은 고른 종을 하나씩 맡고, 나머지는 무작위 종
+            var manaComponent = map.GetManaComponent();
             var clusterCount = Mathf.Max(kinds.Count, ViviLandmarkUtility.CountForMap(map, extension));
             var clusterKinds = new List<ThingDef>(kinds);
             while (clusterKinds.Count < clusterCount)
@@ -57,6 +57,9 @@ namespace VVRace
             for (int i = 0; i < centers.Count; ++i)
             {
                 if (SpawnCluster(map, centers[i], clusterKinds[i], extension) == 0) { continue; }
+
+                // 마법 식물이 자라는 자리에서 마나가 솟아오른다.
+                manaComponent?.AddManaVein(centers[i]);
 
                 var radius = extension.fieldRadiusRange.RandomInRange;
                 ViviaFieldGenerator.Generate(map, centers[i], radius, extension.fieldDensity, extension.fieldColorCountRange.RandomInRange);
