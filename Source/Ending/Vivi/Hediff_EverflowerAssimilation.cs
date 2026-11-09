@@ -75,6 +75,10 @@ namespace VVRace
             if (existing != null) { return existing; }
             if (pawn == null || everflower == null || altar == null || !pawn.Spawned) { return null; }
 
+            // 제단이 아직 이전 공명자를 품고 있으면(취소 뒤 내려오는 중 등) 헤디프를 만들지 않고 시작하지 않는다.
+            // 붙였다 떼면 해방 메시지가 나가는데, 만개 의식 행동 워커가 매 틱 다시 부르므로 그 메시지가 매 틱 반복된다.
+            if (altar.HeldResonator != null) { return null; }
+
             var map = pawn.Map;
             var hediff = (Hediff_EverflowerAssimilation)HediffMaker.MakeHediff(VVHediffDefOf.VV_EverflowerFullAssimilation, pawn);
             hediff.everflower = everflower;
