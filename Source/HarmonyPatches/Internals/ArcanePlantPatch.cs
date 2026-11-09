@@ -21,82 +21,85 @@ namespace VVRace
     {
         internal static void Patch(Harmony harmony)
         {
-            harmony.Patch(
-                original: AccessTools.Method(typeof(VerbProperties), nameof(VerbProperties.AdjustedCooldown),
+            ViviHarmonyPatcher.TryPatch(harmony, "VerbProperties.AdjustedCooldown (mana weapon cooldown)",
+                AccessTools.Method(typeof(VerbProperties), nameof(VerbProperties.AdjustedCooldown),
                     new Type[] { typeof(Verb), typeof(Pawn) }),
                 postfix: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(ManaWeapon_AdjustedCooldown_Postfix)));
 
-            harmony.Patch(
-                original: AccessTools.Method(typeof(GenSpawn), nameof(GenSpawn.SpawningWipes)),
+            ViviHarmonyPatcher.TryPatch(harmony, "GenSpawn.SpawningWipes (arcane plant pot and transporter wipes)",
+                AccessTools.Method(typeof(GenSpawn), nameof(GenSpawn.SpawningWipes)),
                 postfix: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(GenSpawn_SpawningWipes_Postfix)));
 
-            harmony.Patch(
-                original: AccessTools.Method(typeof(InstallationDesignatorDatabase), "NewDesignatorFor"),
+            ViviHarmonyPatcher.TryPatch(harmony, "InstallationDesignatorDatabase.NewDesignatorFor (arcane plant replant designator)",
+                AccessTools.Method(typeof(InstallationDesignatorDatabase), "NewDesignatorFor"),
                 prefix: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(InstallationDesignatorDatabase_NewDesignatorFor_Prefix)));
 
-            harmony.Patch(
-                original: AccessTools.Method(typeof(Designator_Build), nameof(Designator_Build.SelectedUpdate)),
+            ViviHarmonyPatcher.TryPatch(harmony, "Designator_Build.SelectedUpdate (mana overlay)",
+                AccessTools.Method(typeof(Designator_Build), nameof(Designator_Build.SelectedUpdate)),
                 postfix: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(Designator_Build_SelectedUpdate_Postfix)));
 
-            harmony.Patch(
-                original: AccessTools.Method(typeof(Designator_Install), nameof(Designator_Install.SelectedUpdate)),
+            ViviHarmonyPatcher.TryPatch(harmony, "Designator_Install.SelectedUpdate (mana overlay)",
+                AccessTools.Method(typeof(Designator_Install), nameof(Designator_Install.SelectedUpdate)),
                 postfix: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(Designator_Install_SelectedUpdate_Postfix)));
 
-            harmony.Patch(
-                original: AccessTools.Method(typeof(Alert_NeedBatteries), "NeedBatteries"),
+            ViviHarmonyPatcher.TryPatch(harmony, "Alert_NeedBatteries.NeedBatteries (shockerbud battery alert)",
+                AccessTools.Method(typeof(Alert_NeedBatteries), "NeedBatteries"),
                 postfix: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(Alert_NeedBatteries_NeedBatteries_Postfix)));
 
-            harmony.Patch(
-                original: AccessTools.Method(typeof(WeatherEvent_LightningStrike), nameof(WeatherEvent_LightningStrike.FireEvent)),
+            ViviHarmonyPatcher.TryPatch(harmony, "WeatherEvent_LightningStrike.FireEvent (mana lightning rod strike target)",
+                AccessTools.Method(typeof(WeatherEvent_LightningStrike), nameof(WeatherEvent_LightningStrike.FireEvent)),
                 transpiler: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(WeatherEvent_LightningStrike_FireEvent_Transpiler)));
 
-            harmony.Patch(
-                original: AccessTools.Method(typeof(WeatherEvent_LightningStrike), nameof(WeatherEvent_LightningStrike.DoStrike)),
+            ViviHarmonyPatcher.TryPatch(harmony, "WeatherEvent_LightningStrike.DoStrike (mana lightning rod strike)",
+                AccessTools.Method(typeof(WeatherEvent_LightningStrike), nameof(WeatherEvent_LightningStrike.DoStrike)),
                 transpiler: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(WeatherEvent_LightningStrike_DoStrike_Transpiler)));
 
-            harmony.Patch(
-                original: AccessTools.Method(typeof(ThoughtWorker_Precept_HasAutomatedTurrets), nameof(ThoughtWorker_Precept_HasAutomatedTurrets.ResetStaticData)),
+            ViviHarmonyPatcher.TryPatch(harmony, "ThoughtWorker_Precept_HasAutomatedTurrets.ResetStaticData (arcane plant turret exclusion)",
+                AccessTools.Method(typeof(ThoughtWorker_Precept_HasAutomatedTurrets), nameof(ThoughtWorker_Precept_HasAutomatedTurrets.ResetStaticData)),
                 postfix: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(ThoughtWorker_Precept_HasAutomatedTurrets_ResetStaticData_Postfix)));
 
-            harmony.Patch(
-                original: AccessTools.Method(typeof(CompLaunchable), nameof(CompLaunchable.TryLaunch)),
+            ViviHarmonyPatcher.TryPatch(harmony, "CompLaunchable.TryLaunch (custom drop pod info)",
+                AccessTools.Method(typeof(CompLaunchable), nameof(CompLaunchable.TryLaunch)),
                 transpiler: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(CompLaunchable_TryLaunch_Transpiler)));
 
-            harmony.Patch(
-                original: AccessTools.Method(typeof(DropPodUtility), nameof(DropPodUtility.MakeDropPodAt)),
+            ViviHarmonyPatcher.TryPatch(harmony, "DropPodUtility.MakeDropPodAt (custom drop pod)",
+                AccessTools.Method(typeof(DropPodUtility), nameof(DropPodUtility.MakeDropPodAt)),
                 transpiler: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(DropPodUtility_MakeDropPodAt_Transpiler)));
 
             {
+                // 내부 타입을 못 찾으면 원본이 null이 되어 이 패치만 건너뛴다.
                 var innerType = typeof(Map).GetNestedTypes(BindingFlags.NonPublic).FirstOrDefault(t => t.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance).Any(m => m.Name.Contains("FinalizeLoading")));
-                var innerMethod = innerType.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault(m => m.Name.Contains("FinalizeLoading"));
-                harmony.Patch(innerMethod, postfix: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(Map_FinalizeLoading_OrderBy_Postfix)));
+                var innerMethod = innerType?.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault(m => m.Name.Contains("FinalizeLoading"));
+                ViviHarmonyPatcher.TryPatch(harmony, "Map.FinalizeLoading orderby-lambda (arcane plant spawn order)",
+                    innerMethod,
+                    postfix: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(Map_FinalizeLoading_OrderBy_Postfix)));
             }
 
-            harmony.Patch(
-                original: AccessTools.Method(typeof(Map), nameof(Map.MapPreTick)),
+            ViviHarmonyPatcher.TryPatch(harmony, "Map.MapPreTick (mana grid pre-tick)",
+                AccessTools.Method(typeof(Map), nameof(Map.MapPreTick)),
                 postfix: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(Map_MapPreTick_Postfix)));
 
-            harmony.Patch(
-                original: AccessTools.Method(typeof(PlaySettings), "DoMapControls"),
+            ViviHarmonyPatcher.TryPatch(harmony, "PlaySettings.DoMapControls (mana overlay toggle)",
+                AccessTools.Method(typeof(PlaySettings), "DoMapControls"),
                 postfix: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(PlaySettings_DoMapControls_Postfix)));
 
-            harmony.Patch(
-                original: AccessTools.Method(typeof(DefGenerator), nameof(DefGenerator.GenerateImpliedDefs_PreResolve)),
+            ViviHarmonyPatcher.TryPatch(harmony, "DefGenerator.GenerateImpliedDefs_PreResolve (arcane plant implied defs)",
+                AccessTools.Method(typeof(DefGenerator), nameof(DefGenerator.GenerateImpliedDefs_PreResolve)),
                 postfix: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(DefGenerator_GenerateImpliedDefs_PreResolve_Postfix)));
 
-            harmony.Patch(
-                original: AccessTools.Method(typeof(GenLeaving), nameof(GenLeaving.DoLeavingsFor), parameters: new Type[] { typeof(Thing), typeof(Map), typeof(DestroyMode), typeof(CellRect), typeof(Predicate<IntVec3>), typeof(List<Thing>) }),
+            ViviHarmonyPatcher.TryPatch(harmony, "GenLeaving.DoLeavingsFor (building deconstruct notification)",
+                AccessTools.Method(typeof(GenLeaving), nameof(GenLeaving.DoLeavingsFor), parameters: new Type[] { typeof(Thing), typeof(Map), typeof(DestroyMode), typeof(CellRect), typeof(Predicate<IntVec3>), typeof(List<Thing>) }),
                 transpiler: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(GenLeaving_DoLeavingsFor_Transpiler)));
 
             if (ModsConfig.OdysseyActive)
             {
-                harmony.Patch(
-                    original: AccessTools.Method(typeof(VacuumUtility), "EverInVacuum"),
+                ViviHarmonyPatcher.TryPatch(harmony, "VacuumUtility.EverInVacuum (arcane plant vacuum resistance)",
+                    AccessTools.Method(typeof(VacuumUtility), "EverInVacuum"),
                     postfix: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(VacuumUtility_EverInVacuum_Postfix)));
             }
 
-            harmony.Patch(
-                original: AccessTools.Method(typeof(Designator_Uninstall), nameof(Designator_Uninstall.CanDesignateThing)),
+            ViviHarmonyPatcher.TryPatch(harmony, "Designator_Uninstall.CanDesignateThing (everflower uninstall block)",
+                AccessTools.Method(typeof(Designator_Uninstall), nameof(Designator_Uninstall.CanDesignateThing)),
                 prefix: new HarmonyMethod(typeof(ArcanePlantPatch), nameof(Designator_Uninstall_CanDesignateThing_Prefix)));
 
             Log.Message("!! [ViViRace] arcane plant patch complete");

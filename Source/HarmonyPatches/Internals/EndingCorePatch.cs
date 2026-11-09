@@ -13,23 +13,23 @@ namespace VVRace
     {
         internal static void Patch(Harmony harmony)
         {
-            ViviHarmonyPatcher.TryPatch(harmony, "FactionDialogMaker.FactionDialogFor",
+            ViviHarmonyPatcher.TryPatch(harmony, "FactionDialogMaker.FactionDialogFor (amber core comms option)",
                 AccessTools.Method(typeof(FactionDialogMaker), nameof(FactionDialogMaker.FactionDialogFor)),
                 postfix: new HarmonyMethod(typeof(EndingCorePatch), nameof(FactionDialogMaker_FactionDialogFor_Postfix)));
 
-            ViviHarmonyPatcher.TryPatch(harmony, "QuestGen_Rewards.GiveRewards",
+            ViviHarmonyPatcher.TryPatch(harmony, "QuestGen_Rewards.GiveRewards (amber core quest reward)",
                 AccessTools.Method(typeof(QuestGen_Rewards), nameof(QuestGen_Rewards.GiveRewards)),
                 prefix: new HarmonyMethod(typeof(EndingCorePatch), nameof(QuestGen_Rewards_GiveRewards_Prefix)));
 
-            ViviHarmonyPatcher.TryPatch(harmony, "IncidentWorker.CanFireNow",
+            ViviHarmonyPatcher.TryPatch(harmony, "IncidentWorker.CanFireNow (ending threat suppression)",
                 AccessTools.Method(typeof(IncidentWorker), nameof(IncidentWorker.CanFireNow)),
                 postfix: new HarmonyMethod(typeof(EndingCorePatch), nameof(IncidentWorker_CanFireNow_Postfix)));
 
-            ViviHarmonyPatcher.TryPatch(harmony, "Map.IncidentTargetTags",
+            ViviHarmonyPatcher.TryPatch(harmony, "Map.IncidentTargetTags (ending raid beacon)",
                 AccessTools.Method(typeof(Map), nameof(Map.IncidentTargetTags)),
                 postfix: new HarmonyMethod(typeof(EndingCorePatch), nameof(Map_IncidentTargetTags_Postfix)));
 
-            ViviHarmonyPatcher.TryPatch(harmony, "Fire.TrySpread",
+            ViviHarmonyPatcher.TryPatch(harmony, "Fire.TrySpread (golden bloom fire containment)",
                 AccessTools.Method(typeof(Fire), "TrySpread"),
                 prefix: new HarmonyMethod(typeof(EndingCorePatch), nameof(Fire_TrySpread_Prefix)));
         }

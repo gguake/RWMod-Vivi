@@ -9,7 +9,7 @@ namespace VVRace
     public static class ViviHarmonyPatcher
     {
         // 모드 생성자에서 실행되므로 예외가 밖으로 나가면 VVRaceMod가 등록되지 않아 모드 전체가 깨진다.
-        // 묶음 하나가 실패해도 그 묶음의 나머지만 빠지고 다른 묶음은 적용되도록 묶음마다 예외를 기록하고 넘어간다.
+        // 패치는 묶음 안에서 TryPatch로 하나씩 격리하고, 그 밖에서 난 예외(속성 패치 등)도 그 묶음만 멈추도록 묶음마다 기록하고 넘어간다.
         public static void PrePatchAll()
         {
             var harmony = new Harmony("rimworld.gguake.vivi");

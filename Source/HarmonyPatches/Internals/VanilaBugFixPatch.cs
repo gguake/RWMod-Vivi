@@ -9,10 +9,12 @@ namespace VVRace
     {
         internal static void Patch(Harmony harmony)
         {
-            harmony.Patch(original: AccessTools.PropertyGetter(typeof(ChoiceLetter_BabyToChild), nameof(ChoiceLetter_BabyToChild.CanShowInLetterStack)),
+            ViviHarmonyPatcher.TryPatch(harmony, "ChoiceLetter_BabyToChild.CanShowInLetterStack (null pawn letter fix)",
+                AccessTools.PropertyGetter(typeof(ChoiceLetter_BabyToChild), nameof(ChoiceLetter_BabyToChild.CanShowInLetterStack)),
                 prefix: new HarmonyMethod(typeof(VanilaBugFixPatch), nameof(ChoiceLetter_BabyToChild_CanShowInLetterStack_Prefix)));
 
-            harmony.Patch(original: AccessTools.Method(typeof(Pawn_FlightTracker), nameof(Pawn_FlightTracker.Notify_JobStarted)),
+            ViviHarmonyPatcher.TryPatch(harmony, "Pawn_FlightTracker.Notify_JobStarted (null job def fix)",
+                AccessTools.Method(typeof(Pawn_FlightTracker), nameof(Pawn_FlightTracker.Notify_JobStarted)),
                 prefix: new HarmonyMethod(typeof(VanilaBugFixPatch), nameof(Pawn_FlightTracker_Notify_JobStarted_Prefix)));
         }
 

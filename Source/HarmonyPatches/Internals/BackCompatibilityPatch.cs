@@ -19,7 +19,8 @@ namespace VVRace
 
         internal static void Patch(Harmony harmony)
         {
-            harmony.Patch(original: AccessTools.Method(typeof(BackCompatibility), nameof(BackCompatibility.GetBackCompatibleType)),
+            ViviHarmonyPatcher.TryPatch(harmony, "BackCompatibility.GetBackCompatibleType (legacy save types)",
+                AccessTools.Method(typeof(BackCompatibility), nameof(BackCompatibility.GetBackCompatibleType)),
                 postfix: new HarmonyMethod(typeof(BackCompatibilityPatch), nameof(BackCompatibility_GetBackCompatibleType_Postfix)));
         }
 
