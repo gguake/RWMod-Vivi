@@ -127,10 +127,7 @@ namespace VVRace
 
             if (map == null || anchor == null || !anchor.Spawned) { return; }
 
-            if (Find.CurrentMap == map)
-            {
-                Find.CameraDriver.shaker.DoShake(EndingCameraShake);
-            }
+            ApocryphaUtility.ShakeCamera(map, EndingCameraShake);
 
             VVEffecterDefOf.VV_Effecter_EndingGoldenWave?.Spawn(anchor.Position, map, BudOffset).Cleanup();
         }

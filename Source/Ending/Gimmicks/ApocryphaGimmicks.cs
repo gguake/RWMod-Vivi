@@ -236,10 +236,7 @@ namespace VVRace
                 FleckMaker.ConnectingLine(vivi.DrawPos, bossPos, VVFleckDefOf.VV_Fleck_GimmickBackflowBeam, map, ManaBackflowBeamWidth);
             }
 
-            if (map == Find.CurrentMap)
-            {
-                Find.CameraDriver.shaker.DoShake(ManaBackflowCameraShake);
-            }
+            ApocryphaUtility.ShakeCamera(map, ManaBackflowCameraShake);
         }
 
         internal static List<Thing> GetBlastIgnoredThings(Map map, Thing boss)

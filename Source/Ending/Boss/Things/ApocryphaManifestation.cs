@@ -221,16 +221,16 @@ namespace VVRace
             if (secs >= WispEndSecs || !_formPos.ShouldSpawnMotesAt(map)) { return; }
 
             var rate = Mathf.Lerp(WispRateStart, WispRateEnd, Mathf.Pow(secs / WispEndSecs, 1.4f));
-            var count = Mathf.FloorToInt(rate) + (Rand.Value < rate - Mathf.Floor(rate) ? 1 : 0);
+            var count = GenMath.RoundRandom(rate);
             for (int i = 0; i < count; i++)
             {
                 var target = _formPos + new Vector3(Rand.Range(-0.22f, 0.22f) * _drawSize, 0f, Rand.Range(-0.3f, 0.32f) * _drawSize);
                 var offset = Quaternion.AngleAxis(Rand.Range(0f, 360f), Vector3.up) * Vector3.forward * WispRadius.RandomInRange;
-                ThrowConverging(VVFleckDefOf.VV_Fleck_ApocryphaDarkWisp, target + offset, target, WispTravelSecs, Rand.Range(0.7f, 1.3f), null, alignToVelocity: true);
+                ManifestationRenderer.ThrowConverging(map, VVFleckDefOf.VV_Fleck_ApocryphaDarkWisp, target + offset, target, WispTravelSecs, Rand.Range(0.7f, 1.3f), null, alignToVelocity: true);
 
                 if (Rand.Chance(SparkChance))
                 {
-                    ThrowConverging(VVFleckDefOf.VV_Fleck_ApocryphaManifestSpark, target + offset, target, WispTravelSecs, Rand.Range(0.25f, 0.45f), DarkSparkColor, alignToVelocity: false);
+                    ManifestationRenderer.ThrowConverging(map, VVFleckDefOf.VV_Fleck_ApocryphaManifestSpark, target + offset, target, WispTravelSecs, Rand.Range(0.25f, 0.45f), DarkSparkColor, alignToVelocity: false);
                 }
             }
         }
@@ -250,7 +250,7 @@ namespace VVRace
             for (int i = 0; i < 2; i++)
             {
                 var offset = Quaternion.AngleAxis(Rand.Range(0f, 360f), Vector3.up) * Vector3.forward * ChargeRadius.RandomInRange;
-                ThrowConverging(VVFleckDefOf.VV_Fleck_ApocryphaManifestSpark, _budPos + offset, _budPos, WispTravelSecs, Rand.Range(0.3f, 0.55f), GoldSparkColor, alignToVelocity: false);
+                ManifestationRenderer.ThrowConverging(Map, VVFleckDefOf.VV_Fleck_ApocryphaManifestSpark, _budPos + offset, _budPos, WispTravelSecs, Rand.Range(0.3f, 0.55f), GoldSparkColor, alignToVelocity: false);
             }
         }
 
@@ -307,21 +307,6 @@ namespace VVRace
             }
 
             ApocryphaUtility.ShakeCamera(map, 1.5f);
-        }
-
-        private void ThrowConverging(FleckDef def, Vector3 start, Vector3 target, float travelSecs, float scale, Color? color, bool alignToVelocity)
-        {
-            var delta = target - start;
-            delta.y = 0f;
-            var data = FleckMaker.GetDataStatic(start, Map, def, scale);
-            data.velocityAngle = delta.AngleFlat();
-            data.velocitySpeed = delta.magnitude / travelSecs;
-            data.rotation = alignToVelocity ? data.velocityAngle : Rand.Range(0f, 360f);
-            if (color.HasValue)
-            {
-                data.instanceColor = color;
-            }
-            Map.flecks.CreateFleck(data);
         }
 
         #region 그리기

@@ -256,17 +256,17 @@ namespace VVRace
             if (!body.ShouldSpawnMotesAt(map)) { return; }
 
             var rate = Mathf.Lerp(WispRateStart, WispRateEnd, secs / WispEndSecs);
-            var count = Mathf.FloorToInt(rate) + (Rand.Value < rate - Mathf.Floor(rate) ? 1 : 0);
+            var count = GenMath.RoundRandom(rate);
             var radius = _fromFlower ? FlowerWispRadius : GroundWispRadius;
             for (int i = 0; i < count; i++)
             {
                 var target = body + new Vector3(Rand.Range(-0.25f, 0.25f), 0f, Rand.Range(-0.3f, 0.3f));
                 var start = _sourcePos + Quaternion.AngleAxis(Rand.Range(0f, 360f), Vector3.up) * Vector3.forward * radius.RandomInRange;
-                ThrowConverging(VVFleckDefOf.VV_Fleck_ApocryphaDarkWisp, start, target, Rand.Range(0.45f, 0.8f), null, alignToVelocity: true);
+                ManifestationRenderer.ThrowConverging(map, VVFleckDefOf.VV_Fleck_ApocryphaDarkWisp, start, target, WispTravelSecs, Rand.Range(0.45f, 0.8f), null, alignToVelocity: true);
 
                 if (Rand.Chance(SparkChance))
                 {
-                    ThrowConverging(VVFleckDefOf.VV_Fleck_ApocryphaManifestSpark, start, target, Rand.Range(0.2f, 0.35f), DarkSparkColor, alignToVelocity: false);
+                    ManifestationRenderer.ThrowConverging(map, VVFleckDefOf.VV_Fleck_ApocryphaManifestSpark, start, target, WispTravelSecs, Rand.Range(0.2f, 0.35f), DarkSparkColor, alignToVelocity: false);
                 }
             }
 
@@ -278,20 +278,6 @@ namespace VVRace
                 data.rotation = data.velocityAngle;
                 map.flecks.CreateFleck(data);
             }
-        }
-
-        private void ThrowConverging(FleckDef def, Vector3 start, Vector3 target, float scale, Color? color, bool alignToVelocity)
-        {
-            var delta = (target - start).Yto0();
-            var data = FleckMaker.GetDataStatic(start, Map, def, scale);
-            data.velocityAngle = delta.AngleFlat();
-            data.velocitySpeed = delta.magnitude / WispTravelSecs;
-            data.rotation = alignToVelocity ? data.velocityAngle : Rand.Range(0f, 360f);
-            if (color.HasValue)
-            {
-                data.instanceColor = color;
-            }
-            Map.flecks.CreateFleck(data);
         }
 
         #region 그리기

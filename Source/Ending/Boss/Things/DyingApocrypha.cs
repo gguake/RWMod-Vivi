@@ -288,13 +288,7 @@ namespace VVRace
 
             var target = assimilation.BodyPoint;
             var pos = new Vector3(center.x + Rand.Range(-halfWidth, halfWidth), center.y, frontZ + Rand.Range(-0.3f, 0.3f));
-            var travel = (target - pos).Yto0();
-
-            var data = FleckMaker.GetDataStatic(pos, Map, VVFleckDefOf.VV_Fleck_AssimilationSoul, Rand.Range(0.45f, 0.8f));
-            data.velocityAngle = travel.AngleFlat();
-            data.velocitySpeed = travel.magnitude / SoulLifeSecs;
-            data.rotation = Rand.Range(0f, 360f);
-            Map.flecks.CreateFleck(data);
+            ManifestationRenderer.ThrowConverging(Map, VVFleckDefOf.VV_Fleck_AssimilationSoul, pos, target, SoulLifeSecs, Rand.Range(0.45f, 0.8f), null, alignToVelocity: false);
 
             if (age % SoulAbsorbInterval == 0 && age >= SoulLifeSecs * 60f)
             {

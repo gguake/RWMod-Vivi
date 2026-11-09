@@ -24,7 +24,7 @@ namespace VVRace
             var facingLeft = direction.x < 0f;
             var rotation = Quaternion.LookRotation(direction) * Quaternion.AngleAxis(facingLeft ? 90f : -90f, Vector3.up);
 
-            var position = ExactPosition + Vector3.forward * CurrentArcHeight;
+            var position = ArcDrawPos;
             position.y = drawLoc.y;
             for (int i = 0; i < headGraphics.Count; i++)
             {

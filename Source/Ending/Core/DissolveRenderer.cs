@@ -41,33 +41,48 @@ namespace VVRace
 
         public static Material GetMaterial(string texPath)
         {
-            if (MaterialCache.TryGetValue(texPath, out var cached))
+            return GetNoiseMaterial(texPath, ShaderPath, MaterialCache, noiseFirst: false);
+        }
+
+        // Graphic_Multi처럼 서쪽은 동쪽 텍스처를 좌우 반전해 쓴다.
+        public static Material GetMaterial(string texPath, Rot4 rotation)
+        {
+            return GetMaterial(texPath + RotationSuffix(rotation));
+        }
+
+        internal static string RotationSuffix(Rot4 rotation)
+        {
+            return rotation == Rot4.North ? "_north" : (rotation == Rot4.South ? "_south" : "_east");
+        }
+
+        // 소멸 노이즈를 쓰는 셰이더 재질을 경로별로 캐시한다. 캐시는 셰이더마다 따로 둔다.
+        // noiseFirst는 텍스처 유무와 무관하게 노이즈를 먼저 조회하던 호출부의 조회 순서를 그대로 지키기 위한 것이다.
+        internal static Material GetNoiseMaterial(string texPath, string shaderPath, Dictionary<string, Material> cache, bool noiseFirst)
+        {
+            if (cache.TryGetValue(texPath, out var cached))
             {
                 return cached;
             }
 
             var texture = ContentFinder<Texture2D>.Get(texPath, reportFailure: false);
+            var noise = noiseFirst ? ContentFinder<Texture2D>.Get(NoiseTexPath, reportFailure: false) : null;
             Material material = null;
             if (texture != null)
             {
-                material = MaterialPool.MatFrom(texture, ShaderDatabase.LoadShader(ShaderPath), Color.white);
+                material = MaterialPool.MatFrom(texture, ShaderDatabase.LoadShader(shaderPath), Color.white);
 
-                var noise = ContentFinder<Texture2D>.Get(NoiseTexPath, reportFailure: false);
+                if (!noiseFirst)
+                {
+                    noise = ContentFinder<Texture2D>.Get(NoiseTexPath, reportFailure: false);
+                }
                 if (noise != null)
                 {
                     material.SetTexture("_DissolveTex", noise);
                 }
             }
 
-            MaterialCache[texPath] = material;
+            cache[texPath] = material;
             return material;
-        }
-
-        // Graphic_Multi처럼 서쪽은 동쪽 텍스처를 좌우 반전해 쓴다.
-        public static Material GetMaterial(string texPath, Rot4 rotation)
-        {
-            var suffix = rotation == Rot4.North ? "_north" : (rotation == Rot4.South ? "_south" : "_east");
-            return GetMaterial(texPath + suffix);
         }
 
         // sweepDir는 텍스처 UV 기준 방향이다. 좌우 반전하면 메시의 UV도 반전되므로 x를 뒤집는다.

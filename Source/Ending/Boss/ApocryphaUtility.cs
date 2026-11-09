@@ -295,5 +295,11 @@ namespace VVRace
                 Find.CameraDriver.shaker.DoShake(magnitude);
             }
         }
+
+        // 3차 이징(smoothstep). Mathf.SmoothStep은 계산 순서가 달라 float 결과가 다를 수 있으므로 식을 그대로 쓴다.
+        public static float EaseInOut(float t)
+        {
+            return t * t * (3f - 2f * t);
+        }
     }
 }

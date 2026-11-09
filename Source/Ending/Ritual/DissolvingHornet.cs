@@ -42,10 +42,7 @@ namespace VVRace
 
         public void InitFrom(Pawn hornet, Vector3 wind)
         {
-            var graphicData = hornet.ageTracker?.CurKindLifeStage?.bodyGraphicData;
-            _texPath = graphicData?.texPath;
-            _drawSize = graphicData?.drawSize.x ?? 2.5f;
-            _rotation = hornet.Rotation;
+            InitGraphic(hornet);
 
             var offset = hornet.DrawPos - hornet.Position.ToVector3Shifted();
             _drawOffset = new Vector3(offset.x, 0f, offset.z);
@@ -57,14 +54,19 @@ namespace VVRace
         // 사망 처리 도중이라 시체는 바로 없애지 않고 첫 틱에 지운다.
         public void InitAshen(Pawn hornet, Corpse corpse)
         {
-            var graphicData = hornet.ageTracker?.CurKindLifeStage?.bodyGraphicData;
-            _texPath = graphicData?.texPath;
-            _drawSize = graphicData?.drawSize.x ?? 2.5f;
-            _rotation = hornet.Rotation;
+            InitGraphic(hornet);
             _drawOffset = Vector3.zero;
             _wind = Vector3.forward;
             _ashen = true;
             _corpse = corpse;
+        }
+
+        private void InitGraphic(Pawn hornet)
+        {
+            var graphicData = hornet.ageTracker?.CurKindLifeStage?.bodyGraphicData;
+            _texPath = graphicData?.texPath;
+            _drawSize = graphicData?.drawSize.x ?? 2.5f;
+            _rotation = hornet.Rotation;
         }
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)

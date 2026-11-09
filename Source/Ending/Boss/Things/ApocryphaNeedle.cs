@@ -494,7 +494,7 @@ namespace VVRace
         private void TickAiming(int now)
         {
             var elapsed = now - _stateStartTick;
-            var detach = EaseInOut(Mathf.Clamp01(elapsed / (float)DetachTicks));
+            var detach = ApocryphaUtility.EaseInOut(Mathf.Clamp01(elapsed / (float)DetachTicks));
             var windup = WindupDistance * Mathf.SmoothStep(0f, 1f, Mathf.InverseLerp(0.55f, 1f, AimProgress));
 
             var hold = _laneStart - _laneDir * windup;
@@ -662,7 +662,7 @@ namespace VVRace
         private void TickScattering(int now)
         {
             var t = Mathf.Clamp01((now - _stateStartTick) / (float)Mathf.Max(1, _scatterTicks));
-            var eased = t * t * (3f - 2f * t);
+            var eased = ApocryphaUtility.EaseInOut(t);
 
             var p0 = _scatterFrom;
             var p3 = _scatterTo;
@@ -703,7 +703,7 @@ namespace VVRace
             UpdateLockDirection();
 
             var elapsed = now - _stateStartTick;
-            var lift = EaseInOut(Mathf.Clamp01(elapsed / (float)LiftTicks));
+            var lift = ApocryphaUtility.EaseInOut(Mathf.Clamp01(elapsed / (float)LiftTicks));
             var hold = _laneStart - _laneDir * (WindupDistance * 0.5f);
             _pos = Vector3.Lerp(_moveFrom, hold, lift);
             _angle = LerpAngle(_moveFromAngle, LaneAngle, lift);
@@ -1037,11 +1037,6 @@ namespace VVRace
         private void PlayEffectAt(EffecterDef effecterDef, Vector3 point)
         {
             ApocryphaNeedleLane.PlayEffectAt(Map, effecterDef, point);
-        }
-
-        private static float EaseInOut(float t)
-        {
-            return t * t * (3f - 2f * t);
         }
 
         // 1.7 Mathf에는 LerpAngle이 없으므로 짧은 회전 방향으로 직접 보간한다.

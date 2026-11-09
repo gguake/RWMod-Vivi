@@ -118,12 +118,12 @@ namespace VVRace
                 if (_releaseTick >= 0)
                 {
                     var down = Mathf.Clamp01((now - _releaseTick) / (float)DescendTicks);
-                    return Vector3.Lerp(_releaseFrom, Vector3.zero, EaseInOut(down));
+                    return Vector3.Lerp(_releaseFrom, Vector3.zero, ApocryphaUtility.EaseInOut(down));
                 }
 
                 var rise = _startTick < 0 ? 1f : Mathf.Clamp01((now - _startTick) / (float)RiseTicks);
                 var floatOffset = new Vector3(0f, 0f, FloatHeight + BobHeight * Mathf.Sin(now * BobSpeed));
-                return Vector3.Lerp(_glideFrom, floatOffset, EaseInOut(rise));
+                return Vector3.Lerp(_glideFrom, floatOffset, ApocryphaUtility.EaseInOut(rise));
             }
         }
 
@@ -238,13 +238,8 @@ namespace VVRace
                 var delta = (to - from).Yto0();
                 var side = new Vector3(delta.z, 0f, -delta.x).normalized;
                 var start = from + side * Rand.Range(-0.35f, 0.35f);
-                var travel = (to - start).Yto0();
 
-                var data = FleckMaker.GetDataStatic(start, map, VVFleckDefOf.VV_Fleck_AssimilationMote, Rand.Range(0.3f, 0.55f) * strength);
-                data.velocityAngle = travel.AngleFlat();
-                data.velocitySpeed = travel.magnitude / ParticleLifeSecs;
-                data.rotation = Rand.Range(0f, 360f);
-                map.flecks.CreateFleck(data);
+                ManifestationRenderer.ThrowConverging(map, VVFleckDefOf.VV_Fleck_AssimilationMote, start, to, ParticleLifeSecs, Rand.Range(0.3f, 0.55f) * strength, null, alignToVelocity: false);
             }
 
             if ((now + pawn.thingIDNumber) % CircleInterval == 0 && !IsReleasing)
@@ -267,11 +262,6 @@ namespace VVRace
             var b = BudPoint;
             a.y = b.y = AltitudeLayer.MoteOverheadLow.AltitudeFor();
             SoulLinkRenderer.Draw(a, b, LinkWidth, color);
-        }
-
-        private static float EaseInOut(float t)
-        {
-            return t * t * (3f - 2f * t);
         }
 
         public override void ExposeData()

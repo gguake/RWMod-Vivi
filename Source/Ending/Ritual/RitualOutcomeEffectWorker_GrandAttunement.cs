@@ -38,10 +38,7 @@ namespace VVRace
 
             ending.Notify_EverflowerRitualEcho(everflower, jobRitual.PawnWithRole("resonator"));
 
-            if (map != null && map == Find.CurrentMap)
-            {
-                Find.CameraDriver.shaker.DoShake(CameraShakeMagnitude);
-            }
+            ApocryphaUtility.ShakeCamera(map, CameraShakeMagnitude);
         }
     }
 }
