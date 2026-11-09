@@ -27,6 +27,11 @@ namespace VVRace
 
         private readonly LordJob_ViviNest _owner;
 
+        // 운반 사고 한 번(BeginHaulScan 뒤 그 사고의 TryFindHaulStorageCell들)에 쓰는 등급별 후보 칸: 모은 순서 그대로(정렬 전), 등급 값으로 찾는다.
+        // 선반 배치·둥지 영역은 사고 한 번 안에서 바뀌지 않으므로 운반 후보마다 다시 모으지 않는다. 등급마다 처음 필요할 때(원래 처음 모으던 때) 모은다.
+        private readonly List<IntVec3>[] _haulScanCells = { new List<IntVec3>(), new List<IntVec3>(), new List<IntVec3>(), new List<IntVec3>() };
+        private readonly bool[] _haulScanCollected = new bool[4];
+
         private readonly Dictionary<ThingDef, int> _counts = new Dictionary<ThingDef, int>();
         private float _foodNutrition;
         private int _cachedTick = -99999;
@@ -311,11 +316,53 @@ namespace VVRace
         // 지금보다 좋은 보관 칸을 찾는다(둥지 밖 선반 > 방 안 선반 > 방 바닥). 같은 등급의 선반은 옮길 물건(지닌 것이면 지닌 비비)에서 가까운 칸부터 본다.
         public bool TryFindStorageCellFor(Thing thing, Pawn carrier, ViviNestStorageRank betterThan, out IntVec3 cell)
         {
+            return TryFindStorageCell(thing, carrier, betterThan, haulScan: false, out cell);
+        }
+
+        // 운반 사고(JobGiver_ViviNestHaul) 시작: 지난 사고에서 모은 등급별 후보 칸을 버린다. 여기서는 아무것도 모으지 않는다.
+        public void BeginHaulScan()
+        {
+            for (int i = 0; i < _haulScanCollected.Length; ++i)
+            {
+                _haulScanCollected[i] = false;
+                _haulScanCells[i].Clear();
+            }
+        }
+
+        // TryFindStorageCellFor와 같은 칸을 고른다. 다만 등급별 후보 칸은 BeginHaulScan 뒤 그 등급을 처음 볼 때 모은 것(모은 순서 그대로)을 다시 쓰고,
+        // 후보마다 그 사본을 같은 기준으로 정렬한다(같은 입력 순서·같은 비교라 정렬 결과도 같다).
+        public bool TryFindHaulStorageCell(Thing thing, Pawn carrier, ViviNestStorageRank betterThan, out IntVec3 cell)
+        {
+            return TryFindStorageCell(thing, carrier, betterThan, haulScan: true, out cell);
+        }
+
+        private bool TryFindStorageCell(Thing thing, Pawn carrier, ViviNestStorageRank betterThan, bool haulScan, out IntVec3 cell)
+        {
             var map = Map;
             var origin = thing.SpawnedOrAnyParentSpawned ? thing.PositionHeld : (carrier?.Position ?? _owner.NestCell);
             for (var rank = ViviNestStorageRank.NearShelf; rank > betterThan; --rank)
             {
-                CollectCandidateCells(rank, origin);
+                if (haulScan)
+                {
+                    var index = (int)rank;
+                    if (!_haulScanCollected[index])
+                    {
+                        CollectCandidateCells(rank, _haulScanCells[index]);
+                        _haulScanCollected[index] = true;
+                    }
+                    _tmpCells.Clear();
+                    _tmpCells.AddRange(_haulScanCells[index]);
+                }
+                else
+                {
+                    CollectCandidateCells(rank, _tmpCells);
+                }
+
+                if (IsShelfRank(rank))
+                {
+                    _tmpCells.SortBy(c => c.DistanceToSquared(origin));
+                }
+
                 for (int i = 0; i < _tmpCells.Count; ++i)
                 {
                     if (IsValidStorageCell(_tmpCells[i], map, thing, carrier, rank))
@@ -332,9 +379,10 @@ namespace VVRace
             return false;
         }
 
-        private void CollectCandidateCells(ViviNestStorageRank rank, IntVec3 origin)
+        // 그 등급의 보관 후보 칸을 into에 모은다(정렬 전: 선반은 보관 묶음·칸 순서, 방 바닥은 방·칸 순서 그대로).
+        private void CollectCandidateCells(ViviNestStorageRank rank, List<IntVec3> into)
         {
-            _tmpCells.Clear();
+            into.Clear();
             if (IsShelfRank(rank))
             {
                 var groups = Map.haulDestinationManager.AllGroupsListForReading;
@@ -345,10 +393,9 @@ namespace VVRace
                     var cells = groups[i].CellsList;
                     for (int j = 0; j < cells.Count; ++j)
                     {
-                        if (RankOf(cells[j]) == rank) { _tmpCells.Add(cells[j]); }
+                        if (RankOf(cells[j]) == rank) { into.Add(cells[j]); }
                     }
                 }
-                _tmpCells.SortBy(c => c.DistanceToSquared(origin));
                 return;
             }
 
@@ -359,7 +406,7 @@ namespace VVRace
                     foreach (var cell in room.Cells)
                     {
                         // 방 바닥 보관은 문 옆(통로)과 건물이 있는 칸을 피한다.
-                        if (Territory.IsClearSpot(cell)) { _tmpCells.Add(cell); }
+                        if (Territory.IsClearSpot(cell)) { into.Add(cell); }
                     }
                 }
             }

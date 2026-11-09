@@ -14,12 +14,14 @@ namespace VVRace
             if (nest == null) { return null; }
 
             var stock = nest.Stock;
+            // 후보마다 선반 후보 칸을 다시 모으지 않도록 이 사고에서 모은 칸을 다시 쓴다(처음 필요할 때 모은다).
+            stock.BeginHaulScan();
             foreach (var thing in stock.HaulCandidates())
             {
                 if (thing is UnfinishedThing || thing.IsBurning() || !pawn.CanReserveAndReach(thing, PathEndMode.ClosestTouch, Danger.Some)) { continue; }
 
                 var rank = stock.RankOf(thing.Position);
-                if (!stock.TryFindStorageCellFor(thing, pawn, rank, out var cell)) { continue; }
+                if (!stock.TryFindHaulStorageCell(thing, pawn, rank, out var cell)) { continue; }
 
                 var job = JobMaker.MakeJob(JobDefOf.HaulToCell, thing, cell);
                 job.count = stock.StorableCount(cell, thing);

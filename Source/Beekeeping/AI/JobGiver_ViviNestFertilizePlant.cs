@@ -1,4 +1,5 @@
 ﻿using RimWorld;
+using System;
 using Verse;
 using Verse.AI;
 
@@ -27,15 +28,31 @@ namespace VVRace
             var plant = FindPlant(pawn, nest, indoorOnly, AvailableFertilizer(pawn, nest));
             if (plant == null) { return null; }
 
+            // 장부(CountOf)는 구성원이 지닌 비료·다른 구성원이 예약한 비료까지 세므로, 위 검사를 지나도 이 비비가 지금 쓸 비료가 맵에 없을 수 있다.
+            // 그때 아래 탐색은 지역 BFS 뒤 맵의 모든 비료 더미에 도달 판정까지 하고 실패하므로, 같은 검사를 통과하는 비료가 있는지 먼저 본다.
+            // 탐색은 이 목록(맵의 그 정의 물건) 중 이 검사를 통과한 것만 돌려주므로, 하나도 없으면 탐색 결과(null)와 같다.
+            Predicate<Thing> validator = t => IsUsableFertilizer(t, pawn, nest, indoorOnly) && pawn.CanReserve(t);
+            if (!AnyFertilizerPasses(pawn.Map, validator)) { return null; }
+
             var fertilizer = GenClosest.ClosestThingReachable(
                 pawn.Position,
                 pawn.Map,
                 ThingRequest.ForDef(VVThingDefOf.VV_Fertilizer),
                 PathEndMode.ClosestTouch,
                 TraverseParms.For(pawn, Danger.Some),
-                validator: t => IsUsableFertilizer(t, pawn, nest, indoorOnly) && pawn.CanReserve(t));
+                validator: validator);
 
             return fertilizer != null ? JobMaker.MakeJob(VVJobDefOf.VV_ViviNestFertilizePlant, plant, fertilizer) : null;
+        }
+
+        private static bool AnyFertilizerPasses(Map map, Predicate<Thing> validator)
+        {
+            var fertilizers = map.listerThings.ThingsOfDef(VVThingDefOf.VV_Fertilizer);
+            for (int i = 0; i < fertilizers.Count; ++i)
+            {
+                if (validator(fertilizers[i])) { return true; }
+            }
+            return false;
         }
 
         public static bool IsUsableFertilizer(Thing thing, Pawn pawn, LordJob_ViviNest nest, bool indoorOnly)

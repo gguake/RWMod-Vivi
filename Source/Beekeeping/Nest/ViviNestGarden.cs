@@ -100,9 +100,28 @@ namespace VVRace
             }
         }
 
+        // 꿀 꽃 판정을 정의별로 기억한다(추상 스탯 계산이 1~2 µs라 꽃 세기·씨 뿌리기 칸마다 되풀이됐다). 추상 스탯은 정의와 시나리오 스탯 배율
+        // (바닐라 StatWorker.FinalizeValue의 Find.Scenario.GetStatFactor)로만 정해지고 시나리오는 게임 안에서 바뀌지 않으므로, 게임이 바뀌면 비운다.
+        private static readonly Dictionary<ThingDef, bool> _honeyFlowerDefs = new Dictionary<ThingDef, bool>();
+        private static Game _honeyFlowerDefsGame;
+
         public static bool IsHoneyFlowerDef(ThingDef def)
         {
-            return def != null && def.plant != null && !def.plant.IsTree && def.GetStatValueAbstract(VVStatDefOf.VV_PlantHoneyGatherYield) > 0f;
+            if (def == null || def.plant == null || def.plant.IsTree) { return false; }
+
+            var game = Current.Game;
+            if (_honeyFlowerDefsGame != game)
+            {
+                _honeyFlowerDefs.Clear();
+                _honeyFlowerDefsGame = game;
+            }
+
+            if (!_honeyFlowerDefs.TryGetValue(def, out var honeyFlower))
+            {
+                honeyFlower = def.GetStatValueAbstract(VVStatDefOf.VV_PlantHoneyGatherYield) > 0f;
+                _honeyFlowerDefs[def] = honeyFlower;
+            }
+            return honeyFlower;
         }
 
         // 목화밭은 바깥 보관 칸 둘레의 비옥한 빈 땅에 한 번 정해 둔다(자리를 잃으면 다시 고른다).
