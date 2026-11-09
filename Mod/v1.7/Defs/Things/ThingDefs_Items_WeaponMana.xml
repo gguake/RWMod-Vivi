@@ -711,7 +711,7 @@
 
     <verbs>
       <li>
-        <label>throw compressed wind bomb</label>
+        <label>throw</label>
         <verbClass>Verb_LaunchProjectile</verbClass>
         <hasStandardCommand>true</hasStandardCommand>
         <range>12.9</range>
