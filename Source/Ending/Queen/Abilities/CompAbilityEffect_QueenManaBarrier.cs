@@ -103,7 +103,7 @@ namespace VVRace
             var manaComponent = map.GetManaComponent();
             if (manaComponent == null) { return 0f; }
 
-            return manaComponent.SumManaInRadius(center, Radius, out _);
+            return manaComponent.TotalManaInRadius(center, Radius, out _);
         }
     }
 }

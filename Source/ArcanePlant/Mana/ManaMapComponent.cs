@@ -37,10 +37,6 @@ namespace VVRace
         private List<IntVec3> _manaVeins = new List<IntVec3>();
         public IReadOnlyList<IntVec3> ManaVeins => _manaVeins;
 
-        public const float EverflowerAltarManaPerDayLevel5 = 6000f;
-        public const float EverflowerAltarManaPerDayLevel6 = 12000f;
-        public const int EverflowerAltarEmitRadius = 2;
-
         public Color Color => new Color(1f, 1f, 1f);
 
         public float this[IntVec3 cell]
@@ -52,12 +48,11 @@ namespace VVRace
             }
         }
 
-        // center 둘레 radius 안(가운데 칸 포함) 맵 안 칸들의 환경 마나 합. 더하는 순서는 GenRadial 순서(RadialCellsAround(useCenter: true)와 같다).
-        // cellCount는 더한 칸 수다.
-        public float SumManaInRadius(IntVec3 center, float radius, out int cellCount)
+        public float TotalManaInRadius(IntVec3 center, float radius, out int actualCellCount)
         {
             var sum = 0f;
-            cellCount = 0;
+            actualCellCount = 0;
+            
             var numCells = GenRadial.NumCellsInRadius(radius);
             for (int i = 0; i < numCells; ++i)
             {
@@ -65,7 +60,7 @@ namespace VVRace
                 if (!cell.InBounds(map)) { continue; }
 
                 sum += this[cell];
-                cellCount++;
+                actualCellCount++;
             }
 
             return sum;
@@ -180,7 +175,6 @@ namespace VVRace
             if (GenTicks.TicksGame % RefreshManaInterval == 0)
             {
                 EmitManaVeins(RefreshManaInterval);
-                EmitEverflowerAltarMana(RefreshManaInterval);
 
                 var gameComponentMana = GameComponent_Mana.Of(Current.Game);
                 if (gameComponentMana != null)
@@ -242,7 +236,7 @@ namespace VVRace
 
             var manaPerDay = VVTileMutatorDefOf.VV_ArcanePlantHabitat?.GetModExtension<ArcanePlantHabitatExtension>()?.manaPerDay ?? DefaultManaVeinPerDay;
 
-            // 칸당 상한(EnvironmentManaMax)을 넘어 버려지지 않도록 중심 3×3칸에 나눠 넣는다.
+            // 칸당 상한을 넘어 버려지지 않도록 가능한 나눠 넣는다.
             var manaPerCell = manaPerDay / 60000f * ticks / 9f;
             foreach (var vein in _manaVeins)
             {
@@ -253,42 +247,6 @@ namespace VVRace
                         ChangeEnvironmentMana(cell, manaPerCell);
                     }
                 }
-            }
-        }
-
-        // 제단 상태는 방출에만 쓰이므로 방출할 때마다 맵 전체를 조사해 가장 높은 단계의 안치된 영원꽃 하나만 방출한다.
-        private void EmitEverflowerAltarMana(int ticks)
-        {
-            var center = IntVec3.Invalid;
-            var altarLevel = 0;
-
-            var everflowers = map.listerThings.ThingsOfDef(VVThingDefOf.VV_Everflower);
-            for (int i = 0; i < everflowers.Count; ++i)
-            {
-                if (!(everflowers[i] is ArcanePlant_Everflower everflower) || !everflower.Spawned || everflower.Map != map) { continue; }
-
-                var level = everflower.AttunementLevel;
-                if (level > altarLevel && everflower.EverflowerComp.IsEnshrined)
-                {
-                    center = everflower.Position;
-                    altarLevel = level;
-                }
-            }
-
-            var manaPerDay = 0f;
-            if (altarLevel >= 6) { manaPerDay = EverflowerAltarManaPerDayLevel6; }
-            else if (altarLevel >= 5) { manaPerDay = EverflowerAltarManaPerDayLevel5; }
-
-            if (manaPerDay <= 0f || !center.IsValid) { return; }
-
-            // 한 칸의 마나 상한에 막혀 버려지지 않도록 제단의 5×5칸에 고르게 분배한다.
-            var rect = CellRect.CenteredOn(center, EverflowerAltarEmitRadius).ClipInsideMap(map);
-            if (rect.Area <= 0) { return; }
-
-            var manaPerCell = manaPerDay / 60000f * ticks / rect.Area;
-            foreach (var cell in rect)
-            {
-                ChangeEnvironmentMana(cell, manaPerCell);
             }
         }
 
@@ -342,9 +300,7 @@ namespace VVRace
         {
             WaylithJobRuntime.Complete(_diffusionJobHandle);
 
-            var previousManaGrid = _manaGrid;
-            _manaGrid = _tmpGrid;
-            _tmpGrid = previousManaGrid;
+            (_manaGrid, _tmpGrid) = (_tmpGrid, _manaGrid);
 
             ApplyDirtyReservedMana();
             _diffusionJobStart = false;

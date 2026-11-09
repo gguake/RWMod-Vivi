@@ -345,7 +345,7 @@ namespace VVRace
             var manaComp = map.GetManaComponent();
             if (manaComp == null) { return 0f; }
 
-            var sum = manaComp.SumManaInRadius(center, ManaRadius, out var count);
+            var sum = manaComp.TotalManaInRadius(center, ManaRadius, out var count);
             return count > 0 ? sum / count : 0f;
         }
 
