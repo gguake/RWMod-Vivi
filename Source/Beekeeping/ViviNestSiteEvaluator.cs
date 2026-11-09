@@ -117,14 +117,19 @@ namespace VVRace
             new CurvePoint(MaxRoomCells, 0.5f),
         };
 
-        private static HashSet<ThingDef> _honeyFlowerDefs;
+        // 꿀 꽃 정의 집합. 추상 스탯은 시나리오 스탯 배율에 따라 게임마다 다를 수 있으므로 게임이 바뀌면 다시 만든다
+        // (ViviNestGarden.IsHoneyFlowerDef와 같은 수명, 게임은 약참조로 기억해 끝난 게임 객체를 붙잡지 않는다).
+        private static readonly HashSet<ThingDef> _honeyFlowerDefs = new HashSet<ThingDef>();
+        private static readonly System.WeakReference<Game> _honeyFlowerDefsGame = new System.WeakReference<Game>(null);
         private static HashSet<ThingDef> HoneyFlowerDefs
         {
             get
             {
-                if (_honeyFlowerDefs == null)
+                var game = Current.Game;
+                if (!_honeyFlowerDefsGame.TryGetTarget(out var memoGame) || memoGame != game)
                 {
-                    _honeyFlowerDefs = new HashSet<ThingDef>();
+                    _honeyFlowerDefs.Clear();
+                    _honeyFlowerDefsGame.SetTarget(game);
                     var stat = VVStatDefOf.VV_PlantHoneyGatherYield;
                     foreach (var def in DefDatabase<ThingDef>.AllDefsListForReading)
                     {
