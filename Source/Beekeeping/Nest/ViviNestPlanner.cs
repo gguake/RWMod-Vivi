@@ -165,6 +165,8 @@ namespace VVRace
                 if (!(minis[i] is MinifiedThing mini)) { continue; }
 
                 var inner = mini.InnerThing;
+                // 내용물 없는 포장(바닐라가 곧 지운다)은 건너뛴다. 둥지 몫인지 보기 전이라 플레이어 것도 여기 온다.
+                if (inner == null) { continue; }
                 var def = inner.def;
                 var emitter = def == VVThingDefOf.VV_ManaEmitter;
                 if (!emitter && !(inner is ArcanePlant)) { continue; }
