@@ -25,11 +25,17 @@ namespace VVRace
             }
         }
 
-        // 같은 틱에 비우는 대기열이므로 저장하지 않는다. 일시정지 중 개발자 기즈모로 추가한 항목은 다음 틱에 처리한다.
-        private class PendingHold
+        // 다음 영원꽃 틱에 품을 귀환 보류 폰.
+        public class PendingHold : IExposable
         {
             public Pawn pawn;
             public int ticks;
+
+            public void ExposeData()
+            {
+                Scribe_References.Look(ref pawn, "pawn");
+                Scribe_Values.Look(ref ticks, "ticks", 0);
+            }
         }
 
         public const int RebirthTicks = 60000;
@@ -44,8 +50,10 @@ namespace VVRace
         private ThingOwner<Thing> _container;
         private List<HeldPawn> _heldPawns = new List<HeldPawn>();
 
-        private readonly List<PendingHold> _pendingHolds = new List<PendingHold>();
-        private readonly List<Pawn> _pendingRebirths = new List<Pawn>();
+        // 다음 영원꽃 틱에 처리하는 대기열. 그사이 저장될 수 있으므로 함께 저장한다.
+        // 일시정지 중 개발자 기즈모로 추가한 항목도 다음 틱에 처리한다.
+        private List<PendingHold> _pendingHolds = new List<PendingHold>();
+        private List<Pawn> _pendingRebirths = new List<Pawn>();
 
         public ThingOwner Container => _container;
 
@@ -62,9 +70,15 @@ namespace VVRace
             Scribe_Deep.Look(ref _container, "container", _everflower);
             Scribe_Collections.Look(ref _heldPawns, "heldPawns", LookMode.Deep);
 
+            // 대기열의 폰은 죽은 여제면 시체 안에, 귀환 보류 폰이면 맵에 깊게 저장되므로 폰은 참조로 저장한다.
+            Scribe_Collections.Look(ref _pendingRebirths, "pendingRebirths", LookMode.Reference);
+            Scribe_Collections.Look(ref _pendingHolds, "pendingHolds", LookMode.Deep);
+
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
                 _heldPawns.RemoveAll(v => v?.pawn == null);
+                _pendingRebirths.RemoveAll(v => v == null);
+                _pendingHolds.RemoveAll(v => v?.pawn == null);
             }
         }
 
