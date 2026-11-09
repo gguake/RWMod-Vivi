@@ -29,7 +29,7 @@ namespace VVRace
 
         public bool CanJoin => FairyficatedPawnCount < Props.maxCount;
 
-        public IEnumerable<Pawn> FairyficatedPawns => Current.Game.GetComponent<GameComponent_Mana>().GetFairyficatedPawns((Pawn)parent);
+        public IEnumerable<Pawn> FairyficatedPawns => GameComponent_Mana.Of(Current.Game).GetFairyficatedPawns((Pawn)parent);
         public int FairyficatedPawnCount => FairyficatedPawns.Count();
         public Pawn Royal => (Pawn)parent;
 
@@ -37,7 +37,20 @@ namespace VVRace
         public IReadOnlyList<ViviFairy> ActiveFairies => _activeFairies;
         public int MaterializedCount => _activeFairies.Count;
         public int PendingMaterializeCount => _pendingMaterializeCount;
-        public int AvailableCount => _activeFairies.Count(f => f != null && !f.Destroyed && f.IsAvailable);
+        // 기즈모가 매 프레임 부르므로 LINQ 반복기 없이 센다.
+        public int AvailableCount
+        {
+            get
+            {
+                var count = 0;
+                for (int i = 0; i < _activeFairies.Count; ++i)
+                {
+                    var f = _activeFairies[i];
+                    if (f != null && !f.Destroyed && f.IsAvailable) { count++; }
+                }
+                return count;
+            }
+        }
 
         private int _nextFairyJobId = 1;
         public int NextFairyJobId() => _nextFairyJobId++;
@@ -135,7 +148,7 @@ namespace VVRace
 
             if (mode != DestroyMode.WillReplace)
             {
-                Current.Game.GetComponent<GameComponent_Mana>().UnregisterAllFairy((Pawn)parent);
+                GameComponent_Mana.Of(Current.Game).UnregisterAllFairy((Pawn)parent);
             }
         }
 
@@ -161,7 +174,7 @@ namespace VVRace
 
             DestroyAllFairies();
 
-            var gameCompMana = Current.Game.GetComponent<GameComponent_Mana>();
+            var gameCompMana = GameComponent_Mana.Of(Current.Game);
             // Kill의 사망 처리 훅이 등록 목록을 바꿀 수 있으므로 지연 열거로 순회하지 않는다.
             foreach (var fairyPawn in gameCompMana.GetFairyficatedPawns((Pawn)parent).ToList())
             {
@@ -204,7 +217,7 @@ namespace VVRace
                 vivi.DeSpawnOrDeselect(DestroyMode.Vanish);
             }
 
-            Current.Game.GetComponent<GameComponent_Mana>().RegisterFairy((Pawn)parent, vivi);
+            GameComponent_Mana.Of(Current.Game).RegisterFairy((Pawn)parent, vivi);
 
             Find.LetterStack.ReceiveLetter(
                 LocalizeString_Letter.VV_Letter_FairyficationCompleteLabel.Translate(vivi.Named("TARGET")),
@@ -234,7 +247,7 @@ namespace VVRace
 
         public Pawn DetachVivi()
         {
-            var gameCompMana = Current.Game.GetComponent<GameComponent_Mana>();
+            var gameCompMana = GameComponent_Mana.Of(Current.Game);
             var vivi = gameCompMana.GetFairyficatedPawns((Pawn)parent).RandomElement();
 
             if (GenPlace.TryPlaceThing(vivi, parent.Position, parent.Map, ThingPlaceMode.Near))
@@ -372,14 +385,30 @@ namespace VVRace
             }
         }
 
+        // 아래 두 조회는 선택 오버레이·기즈모·헤디프 주기 검사에서 자주 불리므로 ActiveJobs()와 같은 순서·조건의 for 루프로 찾는다.
         public bool HasActiveJob(int id)
         {
-            return ActiveJobs().Any(j => j.id == id);
+            for (int i = 0; i < _activeFairies.Count; ++i)
+            {
+                var f = _activeFairies[i];
+                if (f == null || f.Destroyed) { continue; }
+
+                var job = f.CurrentJob;
+                if (job != null && job.id == id) { return true; }
+            }
+            return false;
         }
 
         public T GetActiveJob<T>() where T : FairyJob
         {
-            return ActiveJobs().OfType<T>().FirstOrDefault();
+            for (int i = 0; i < _activeFairies.Count; ++i)
+            {
+                var f = _activeFairies[i];
+                if (f == null || f.Destroyed) { continue; }
+
+                if (f.CurrentJob is T job) { return job; }
+            }
+            return null;
         }
 
         public bool TryReserveIdleFairies(int count, out List<ViviFairy> reserved)
