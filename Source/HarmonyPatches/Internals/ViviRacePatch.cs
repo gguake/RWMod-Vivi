@@ -112,6 +112,10 @@ namespace VVRace.HarmonyPatches
                 AccessTools.Method(typeof(RestUtility), nameof(RestUtility.CanUseBedNow)),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(RestUtility_CanUseBedNow_Postfix)));
 
+            ViviHarmonyPatcher.TryPatch(harmony, "Pawn_AgeTracker.BirthdayBiological (egg hatchery child ownership)",
+                AccessTools.Method(typeof(Pawn_AgeTracker), "BirthdayBiological"),
+                transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(Pawn_AgeTracker_BirthdayBiological_Transpiler)));
+
             if (VVRaceMod.Settings?.enableViviMealContinuation ?? true)
             {
                 ViviHarmonyPatcher.TryPatch(harmony, "JobDriver_Ingest.MakeNewToils (vivi meal continuation)",
@@ -220,6 +224,62 @@ namespace VVRace.HarmonyPatches
             {
                 __result = false;
             }
+        }
+
+        // 생일의 침대 소유 해제 판정(pawn.ageTracker.CurLifeStage.bodySizeFactor > bed_maxBodySize)의 왼쪽 값을 Pawn_AgeTracker_BirthdayBiological_Injection(pawn)으로 바꾼다.
+        private static IEnumerable<CodeInstruction> Pawn_AgeTracker_BirthdayBiological_Transpiler(IEnumerable<CodeInstruction> codeInstructions)
+        {
+            var instructions = codeInstructions.ToList();
+            var ageTrackerField = AccessTools.Field(typeof(Pawn), nameof(Pawn.ageTracker));
+            var curLifeStageGetter = AccessTools.PropertyGetter(typeof(Pawn_AgeTracker), nameof(Pawn_AgeTracker.CurLifeStage));
+            var bodySizeFactorField = AccessTools.Field(typeof(LifeStageDef), nameof(LifeStageDef.bodySizeFactor));
+
+            for (int i = 2; i < instructions.Count; ++i)
+            {
+                if (instructions[i].LoadsField(bodySizeFactorField) &&
+                    instructions[i - 1].Calls(curLifeStageGetter) &&
+                    instructions[i - 2].LoadsField(ageTrackerField))
+                {
+                    var injection = new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(ViviRacePatch), nameof(Pawn_AgeTracker_BirthdayBiological_Injection)));
+                    injection.labels.AddRange(instructions[i - 2].labels);
+                    instructions.RemoveRange(i - 2, 3);
+                    instructions.Insert(i - 2, injection);
+                    return instructions;
+                }
+            }
+
+            Log.Error("[ViViRace] failed to find the bed size check in Pawn_AgeTracker.BirthdayBiological; egg hatchery child ownership patch is skipped.");
+            return instructions;
+        }
+
+        // 바닐라는 생일마다 생애 단계 몸 크기 계수만으로(종족 기본 몸 크기 무시) 소유 침대 한도를 넘는지 보고 소유를 푼다.
+        // 비비 어린이(계수 0.35 × 기본 0.8 = 0.28)는 배정 판정(실제 몸 크기)으로 부화기(한도 0.3)를 받지만 생일마다 소유가 풀렸다.
+        // 부화기만 배정 판정과 같은 실제 몸 크기로 비교한다. 생일 틱엔 생애 단계가 아직 갱신 전일 수 있어(240틱 성장 검사)
+        // 새 나이의 생애 단계로 계산해야 12살 생일에 커진 비비(0.58 × 0.8 = 0.464)가 바로 풀린다.
+        private static float Pawn_AgeTracker_BirthdayBiological_Injection(Pawn pawn)
+        {
+            var ageTracker = pawn.ageTracker;
+            if (!(pawn.ownership?.OwnedBed is ViviEggHatchery))
+            {
+                return ageTracker.CurLifeStage.bodySizeFactor;
+            }
+
+            var lifeStage = ageTracker.CurLifeStage;
+            if (ageTracker.lockedLifeStageIndex < 0 && pawn.RaceProps.Humanlike)
+            {
+                var lifeStageAges = pawn.RaceProps.lifeStageAges;
+                float age = ageTracker.AgeBiologicalYears;
+                for (int i = lifeStageAges.Count - 1; i >= 0; --i)
+                {
+                    if (lifeStageAges[i].minAge <= age + 1E-06f)
+                    {
+                        lifeStage = lifeStageAges[i].def;
+                        break;
+                    }
+                }
+            }
+
+            return lifeStage.bodySizeFactor * pawn.RaceProps.baseBodySize;
         }
 
         private static void Pawn_NeedsTracker_ShouldHaveNeed_Postfix(ref bool __result, Pawn ___pawn, NeedDef nd)
