@@ -89,19 +89,6 @@ namespace VVRace
             }
         }
 
-        public int BaitCount
-        {
-            get
-            {
-                var count = 0;
-                foreach (var thing in BaitThings)
-                {
-                    count += thing.stackCount;
-                }
-                return count;
-            }
-        }
-
         public ViviNestSiteReport SiteReport
         {
             get

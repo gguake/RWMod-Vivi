@@ -1,4 +1,5 @@
-﻿using RimWorld;
+﻿using HarmonyLib;
+using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace VVRace
     {
         private const int GoldenBloomFadeTicks = 30000;
 
-        private static readonly FieldInfo QueuedIncidentsField = typeof(IncidentQueue).GetField("queuedIncidents", BindingFlags.Instance | BindingFlags.NonPublic);
+        private static readonly FieldInfo QueuedIncidentsField = AccessTools.Field(typeof(IncidentQueue), "queuedIncidents");
 
         public static ArcanePlant_Everflower FindEndingCandidate()
         {

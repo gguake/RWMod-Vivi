@@ -9,20 +9,7 @@ namespace VVRace
     // 포장 식물의 설치 청사진도 같은 청사진 워크기버가 설치한다(포장을 가져가 세우는 운반 잡). 맵 전체 청사진을 훑는 JobGiver_Work 대신 둥지 것만 넘긴다.
     public class JobGiver_ViviNestBuild : ThinkNode_JobGiver
     {
-        private static WorkGiver_Scanner _finishFrames;
-        private static WorkGiver_Scanner _deliverFrames;
-        private static WorkGiver_Scanner _deliverBlueprints;
-        private static WorkGiver_Scanner _repair;
         private static readonly List<Thing> _candidates = new List<Thing>();
-
-        private static WorkGiver_Scanner Worker(ref WorkGiver_Scanner cache, string defName)
-        {
-            if (cache == null)
-            {
-                cache = DefDatabase<WorkGiverDef>.GetNamed(defName).Worker as WorkGiver_Scanner;
-            }
-            return cache;
-        }
 
         protected override Job TryGiveJob(Pawn pawn)
         {
@@ -37,9 +24,9 @@ namespace VVRace
 
         private static Job ConstructionJob(Pawn pawn, LordJob_ViviNest nest)
         {
-            var finish = Worker(ref _finishFrames, "ConstructFinishFrames");
-            var deliverFrames = Worker(ref _deliverFrames, "ConstructDeliverResourcesToFrames");
-            var deliverBlueprints = Worker(ref _deliverBlueprints, "ConstructDeliverResourcesToBlueprints");
+            var finish = VVWorkGiverDefOf.ConstructFinishFrames.Worker as WorkGiver_Scanner;
+            var deliverFrames = VVWorkGiverDefOf.ConstructDeliverResourcesToFrames.Worker as WorkGiver_Scanner;
+            var deliverBlueprints = VVWorkGiverDefOf.ConstructDeliverResourcesToBlueprints.Worker as WorkGiver_Scanner;
 
             // 가까운 것부터 본다. 후보 목록을 재사용해 생각할 때마다 할당하지 않는다.
             var position = pawn.Position;
@@ -93,7 +80,7 @@ namespace VVRace
 
         private static Job RepairJob(Pawn pawn, LordJob_ViviNest nest)
         {
-            var repair = Worker(ref _repair, "Repair");
+            var repair = VVWorkGiverDefOf.Repair.Worker as WorkGiver_Scanner;
             var repairable = pawn.Map.listerBuildingsRepairable.RepairableBuildings(nest.Faction);
             for (int i = 0; i < repairable.Count; ++i)
             {

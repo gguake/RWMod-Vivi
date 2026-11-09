@@ -21,7 +21,7 @@ namespace VVRace
         private const float MinScoreGainToCare = 0.05f;
 
         // 바닐라 옷 점수(ApparelScoreRaw)가 보는 보온 필요. 정착민 옷 고르기는 점수를 매기기 전에 그 폰 기준으로 정해 둔다.
-        private static readonly FieldInfo FieldInfo_neededWarmth = AccessTools.Field(typeof(JobGiver_OptimizeApparel), "neededWarmth");
+        private static readonly FieldInfo JobGiverOptimizeApparelNeededWarmthField = AccessTools.Field(typeof(JobGiver_OptimizeApparel), "neededWarmth");
 
         private static readonly JobGiver_PickUpOpportunisticWeapon _weaponGiver = new JobGiver_PickUpOpportunisticWeapon();
         private static readonly Func<Pawn, bool> AlreadySatisfiedWithCurrentWeapon =
@@ -55,7 +55,7 @@ namespace VVRace
         {
             if (candidates.Count == 0) { return null; }
 
-            FieldInfo_neededWarmth.SetValue(null, PawnApparelGenerator.CalculateNeededWarmth(pawn, pawn.Map.Tile, GenLocalDate.Twelfth(pawn)));
+            JobGiverOptimizeApparelNeededWarmthField.SetValue(null, PawnApparelGenerator.CalculateNeededWarmth(pawn, pawn.Map.Tile, GenLocalDate.Twelfth(pawn)));
             var worn = pawn.apparel.WornApparel;
             _wornScores.Clear();
             for (int i = 0; i < worn.Count; ++i)

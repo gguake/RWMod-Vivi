@@ -28,7 +28,7 @@ namespace VVRace
         // 둥지 둘레 바깥에 세울 포장 방출기 수(사용자 요구 "두어 개"). 방 안 방출기(초기 설비)와 따로 씨앗 자리를 넓힌다(ViviNestPlanner.FindOutdoorEmitterCell).
         private const int OutdoorEmitterCount = 2;
 
-        private static readonly FieldInfo FieldInfo_QueuedIncident_fireTick = AccessTools.Field(typeof(QueuedIncident), "fireTick");
+        private static readonly FieldInfo QueuedIncidentFireTickField = AccessTools.Field(typeof(QueuedIncident), "fireTick");
 
         protected override bool CanFireNowSub(IncidentParms parms)
         {
@@ -197,7 +197,7 @@ namespace VVRace
             {
                 if (BeekeepingUtility.IsQueuedSettlers(queued, faction))
                 {
-                    FieldInfo_QueuedIncident_fireTick.SetValue(queued, Find.TickManager.TicksGame);
+                    QueuedIncidentFireTickField.SetValue(queued, Find.TickManager.TicksGame);
                 }
             }
         }

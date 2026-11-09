@@ -39,6 +39,15 @@ namespace VVRace
     }
 
     [DefOf]
+    public static class VVWorkGiverDefOf
+    {
+        public static WorkGiverDef ConstructFinishFrames;
+        public static WorkGiverDef ConstructDeliverResourcesToFrames;
+        public static WorkGiverDef ConstructDeliverResourcesToBlueprints;
+        public static WorkGiverDef Repair;
+    }
+
+    [DefOf]
     public static class VVNeedDefOf
     {
         public static NeedDef VV_RoyalJelly;
