@@ -1258,7 +1258,8 @@ namespace VVRace
             return (flags & okFlag) != 0;
         }
 
-        // 증축 자리: 채굴·산 지붕·물·구역·다른 건물이 없고 플레이어 건물과 붙지 않은 칸
+        // 증축 자리: 채굴·산 지붕·물·구역·다른 건물·특수 나무(영혼나무·고랜린 나무 등, 바닐라 TreeCategory.Super)가 없고 플레이어 건물과 붙지 않은 칸.
+        // 일반 나무는 베고 지으므로 비용으로만 센다(특수 나무 칸에 청사진을 두면 바닐라가 막는 식물이라 베기 잡을 낸다).
         private bool IsExpansionCell(IntVec3 cell, ref int trees)
         {
             var map = Map;
@@ -1270,7 +1271,11 @@ namespace VVRace
             foreach (var thing in cell.GetThingList(map))
             {
                 if (thing.def.category == ThingCategory.Item || BeekeepingUtility.IsStructure(thing)) { return false; }
-                if (thing is Plant plant && plant.def.plant.IsTree) { trees++; }
+                if (thing is Plant plant && plant.def.plant.IsTree)
+                {
+                    if (plant.def.plant.treeCategory == TreeCategory.Super) { return false; }
+                    trees++;
+                }
             }
 
             foreach (var adj in GenAdj.AdjacentCells)

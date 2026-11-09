@@ -4,7 +4,7 @@ using Verse.AI;
 
 namespace VVRace
 {
-    // 원목이 모자라면 둥지 근처의 다 자란 나무를 바닐라 베기 잡으로 벤다(나온 원목은 잡이 끝날 때 둥지 몫이 된다).
+    // 원목이 모자라면 둥지 근처의 다 자란 나무(특수 나무·플레이어 재배 칸의 나무 제외)를 바닐라 베기 잡으로 벤다(나온 원목은 잡이 끝날 때 둥지 몫이 된다).
     // 반경 안에 벨 나무가 없으면 자라는 나무가 벨 만큼 자랄 때(상한 TreeRetryMaxTicks)까지 우선도를 0으로 둔다(ViviNestProduction).
     public class JobGiver_ViviNestCutTree : ThinkNode_JobGiver
     {
@@ -55,6 +55,9 @@ namespace VVRace
                 t =>
                 {
                     if (!(t is Plant plant) || !plant.def.plant.IsTree || plant.def.plant.harvestedThingDef != ThingDefOf.WoodLog) { return false; }
+                    // 특수 나무(영혼나무·고랜린 나무 등, 바닐라 TreeCategory.Super)와 플레이어 재배 칸(재배 구역·화분·수경 재배기)의 나무는 베지 않는다.
+                    // 다 자랐는지 보기 전에 걸러야 이런 나무가 벨 나무·자랄 틱에 섞여 둥지가 헛기다리지 않는다.
+                    if (plant.def.plant.treeCategory == TreeCategory.Super || plant.Position.GetPlantToGrowSettable(map) != null) { return false; }
                     if (!territory.InActivityRange(plant.Position, SearchRadius)) { return false; }
                     if (map.zoneManager.ZoneAt(plant.Position) != null) { return false; }
                     if (!plant.HarvestableNow)
