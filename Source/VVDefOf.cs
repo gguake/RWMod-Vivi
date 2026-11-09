@@ -36,7 +36,6 @@ namespace VVRace
         public static WorkTypeDef Patient;
         public static WorkTypeDef PatientBedRest;
         public static WorkTypeDef Cooking;
-        public static WorkTypeDef VV_Gathering;
     }
 
     [DefOf]
@@ -194,8 +193,6 @@ namespace VVRace
         public static ThingDef VV_FairyFlower;
 
         public static ThingDef VV_SkyShield;
-        public static ThingDef VV_QueenManaBarrierShield;
-        public static ThingDef VV_QueenVerdictNeedle;
         public static ThingDef VV_WindOfRest;
         public static ThingDef VV_DissolvingHornet;
         public static ThingDef VV_TitanicHornetWing;
@@ -230,11 +227,6 @@ namespace VVRace
         public static PawnKindDef VV_RoyalVivi;
 
         public static PawnKindDef VV_TitanicHornet;
-
-        // 여제·지도자 유형은 사망 시 연방이 적대화되므로 지원군으로 사용하지 않는다.
-        public static PawnKindDef VV_ViviGuard;
-        public static PawnKindDef VV_ViviFirefighter;
-        public static PawnKindDef VV_ViviSniper;
 
         public static PawnKindDef VV_WanderingViviWorker;
         public static PawnKindDef VV_WanderingViviNestborn;
@@ -529,7 +521,6 @@ namespace VVRace
         public static IncidentDef VV_TitanicHornetSwarm;
         public static IncidentDef VV_TitanicHornetAssault;
 
-        public static IncidentDef VV_ViviLureVisit;
         public static IncidentDef VV_ViviNestSettlers;
     }
 
@@ -597,5 +588,12 @@ namespace VVRace
         public static FactionDef VV_PlayerViviRefugee;
 
         public static FactionDef VV_WanderingVivi;
+    }
+
+    [DefOf]
+    public static class VVScenarioDefOf
+    {
+        public static ScenarioDef VV_ViviStart;
+        public static ScenarioDef VV_ViviRefugeeStart;
     }
 }

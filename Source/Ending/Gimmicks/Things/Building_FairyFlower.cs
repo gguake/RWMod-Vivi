@@ -23,7 +23,7 @@ namespace VVRace
             if (pawn.DevelopmentalStage.Baby()) { return LocalizeString_Etc.VV_FailReason_FairyFlowerNotAdult.Translate().Resolve(); }
             if (!pawn.health.capacities.CapableOf(PawnCapacityDefOf.Moving))
             {
-                return LocalizeString_Etc.VV_FailReason_FairyFlowerCannotMove.Translate().Resolve();
+                return LocalizeString_Etc.VV_FailReason_CannotMove.Translate().Resolve();
             }
             if (pawn.health.hediffSet.HasHediff(VVHediffDefOf.VV_FairyInterference))
             {
@@ -110,9 +110,9 @@ namespace VVRace
             var sb = new StringBuilder(base.GetInspectString());
             if (sb.Length > 0) { sb.AppendLine(); }
 
-            sb.Append(LocalizeString_Inspector.VV_Inspect_FairyFlowerFadeIn.Translate(TicksUntilExpire.ToStringTicksToPeriod()));
+            sb.Append(LocalizeString_Inspector.VV_Inspector_FairyFlowerFadeIn.Translate(TicksUntilExpire.ToStringTicksToPeriod()));
             sb.AppendLine();
-            sb.Append(LocalizeString_Inspector.VV_Inspect_FairyFlowerHint.Translate());
+            sb.Append(LocalizeString_Inspector.VV_Inspector_FairyFlowerHint.Translate());
             return sb.ToString();
         }
 

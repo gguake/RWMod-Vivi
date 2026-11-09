@@ -5,7 +5,7 @@
 <VV_FloatMenu_BondFairyFlower>Bond with fairy bloom</VV_FloatMenu_BondFairyFlower>
 <VV_FailReason_FairyFlowerNotVivi>not a vivi</VV_FailReason_FairyFlowerNotVivi>
 <VV_FailReason_FairyFlowerNotAdult>babies cannot bond</VV_FailReason_FairyFlowerNotAdult>
-<VV_FailReason_FairyFlowerCannotMove>cannot move</VV_FailReason_FairyFlowerCannotMove>
+<VV_FailReason_CannotMove>cannot move</VV_FailReason_CannotMove>
 <VV_FailReason_FairyFlowerAlreadyInterfered>already has fairy interference</VV_FailReason_FairyFlowerAlreadyInterfered>
 
 <!-- 메시지 -->
@@ -18,9 +18,9 @@
 <VV_Hediff_FairyInterferenceRemaining>Time left: {0}</VV_Hediff_FairyInterferenceRemaining>
 
 <!-- 정보창 -->
-<VV_Inspect_DoomFlowerBloomIn>Blooms in: {0}</VV_Inspect_DoomFlowerBloomIn>
-<VV_Inspect_DoomFlowerHint>Inflicts a curse when it blooms.</VV_Inspect_DoomFlowerHint>
-<VV_Inspect_FairyFlowerFadeIn>Fades in: {0}</VV_Inspect_FairyFlowerFadeIn>
-<VV_Inspect_FairyFlowerHint>A vivi bonded with it can interfere with the fairy vivis' bonds.</VV_Inspect_FairyFlowerHint>
+<VV_Inspector_DoomFlowerBloomIn>Blooms in: {0}</VV_Inspector_DoomFlowerBloomIn>
+<VV_Inspector_DoomFlowerHint>Inflicts a curse when it blooms.</VV_Inspector_DoomFlowerHint>
+<VV_Inspector_FairyFlowerFadeIn>Fades in: {0}</VV_Inspector_FairyFlowerFadeIn>
+<VV_Inspector_FairyFlowerHint>A vivi bonded with it can interfere with the fairy vivis' bonds.</VV_Inspector_FairyFlowerHint>
 
 </LanguageData>

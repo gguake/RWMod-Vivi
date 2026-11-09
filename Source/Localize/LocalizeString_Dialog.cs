@@ -29,6 +29,7 @@
 
         public const string VV_DialogChangeWeatherSelectLabel = nameof(VV_DialogChangeWeatherSelectLabel);
         public const string VV_DialogChangeWeatherRainDesc = nameof(VV_DialogChangeWeatherRainDesc);
+        public const string VV_DialogChangeWeatherGoldenBloomDesc = nameof(VV_DialogChangeWeatherGoldenBloomDesc);
         public const string VV_DialogChangeWeatherMustSelect = nameof(VV_DialogChangeWeatherMustSelect);
 
         public const string VV_Comms_AmberCoreRequest = nameof(VV_Comms_AmberCoreRequest);

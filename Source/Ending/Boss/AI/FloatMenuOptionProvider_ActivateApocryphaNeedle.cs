@@ -27,7 +27,7 @@ namespace VVRace
 
             if (!pawn.health.capacities.CapableOf(PawnCapacityDefOf.Moving))
             {
-                return new FloatMenuOption($"{label} ({LocalizeString_Etc.VV_FailReason_FairyFlowerCannotMove.Translate()})", null);
+                return new FloatMenuOption($"{label} ({LocalizeString_Etc.VV_FailReason_CannotMove.Translate()})", null);
             }
 
             if (!pawn.CanReach(needle.GroundCell, PathEndMode.Touch, Danger.Deadly))

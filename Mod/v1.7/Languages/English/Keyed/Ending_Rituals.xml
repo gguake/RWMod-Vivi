@@ -20,5 +20,4 @@
 <VV_Message_AssimilationBegan>{PAWN_labelShort} has entered full assimilation with the everflower and risen into the air.</VV_Message_AssimilationBegan>
 <VV_Message_AssimilationReleased>The full assimilation with the everflower has ended, and {PAWN_labelShort} has descended to the ground.</VV_Message_AssimilationReleased>
 <VV_Message_AssimilationBrokenRitual>{PAWN_labelShort} has collapsed and her assimilation with the everflower is broken. The full bloom ritual has been called off.</VV_Message_AssimilationBrokenRitual>
-<VV_FailReason_PawnAssimilated>fully assimilated with the everflower</VV_FailReason_PawnAssimilated>
 </LanguageData>

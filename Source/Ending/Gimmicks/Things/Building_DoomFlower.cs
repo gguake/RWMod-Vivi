@@ -128,9 +128,9 @@ namespace VVRace
             var sb = new StringBuilder(base.GetInspectString());
             if (sb.Length > 0) { sb.AppendLine(); }
 
-            sb.Append(LocalizeString_Inspector.VV_Inspect_DoomFlowerBloomIn.Translate(TicksUntilBloom.ToStringTicksToPeriod()));
+            sb.Append(LocalizeString_Inspector.VV_Inspector_DoomFlowerBloomIn.Translate(TicksUntilBloom.ToStringTicksToPeriod()));
             sb.AppendLine();
-            sb.Append(LocalizeString_Inspector.VV_Inspect_DoomFlowerHint.Translate());
+            sb.Append(LocalizeString_Inspector.VV_Inspector_DoomFlowerHint.Translate());
             return sb.ToString();
         }
 

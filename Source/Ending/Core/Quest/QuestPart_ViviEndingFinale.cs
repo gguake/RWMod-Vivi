@@ -268,7 +268,7 @@ namespace VVRace
             foreach (var part in scenario.AllParts)
             {
                 if (part is ScenPart_ConfigPage_ConfigureStartingPawns_KindDefs kindDefsPart
-                    && kindDefsPart.kindCounts.Any(v => v.kindDef != null && v.kindDef.defName == "VV_PlayerExiledRoyalVivi"))
+                    && kindDefsPart.kindCounts.Any(v => v.kindDef != null && v.kindDef == VVPawnKindDefOf.VV_PlayerExiledRoyalVivi))
                 {
                     return EndingScenarioKind.Exiled;
                 }
@@ -277,8 +277,8 @@ namespace VVRace
             // 시나리오 이름은 게임 생성 당시 언어로 저장되므로 같은 언어로 플레이 중일 때만 유효한 최후의 판별 수단이다.
             if (!scenario.name.NullOrEmpty())
             {
-                if (scenario.name == DefDatabase<ScenarioDef>.GetNamedSilentFail("VV_ViviStart")?.scenario?.name) { return EndingScenarioKind.Exiled; }
-                if (scenario.name == DefDatabase<ScenarioDef>.GetNamedSilentFail("VV_ViviRefugeeStart")?.scenario?.name) { return EndingScenarioKind.Refugee; }
+                if (scenario.name == VVScenarioDefOf.VV_ViviStart?.scenario?.name) { return EndingScenarioKind.Exiled; }
+                if (scenario.name == VVScenarioDefOf.VV_ViviRefugeeStart?.scenario?.name) { return EndingScenarioKind.Refugee; }
             }
 
             return EndingScenarioKind.None;

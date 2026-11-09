@@ -113,7 +113,6 @@
 
         public const string VV_Ending_ResonatorFallback = nameof(VV_Ending_ResonatorFallback);
 
-        public const string VV_DialogChangeWeatherGoldenBloomDesc = nameof(VV_DialogChangeWeatherGoldenBloomDesc);
         public const string VV_FailReason_GoldenBloomHoldsWeather = nameof(VV_FailReason_GoldenBloomHoldsWeather);
 
         public const string VV_FailReason_AltarOnlyEverflowerCenter = nameof(VV_FailReason_AltarOnlyEverflowerCenter);
@@ -137,7 +136,7 @@
         public const string VV_FloatMenu_BondFairyFlower = nameof(VV_FloatMenu_BondFairyFlower);
         public const string VV_FailReason_FairyFlowerNotVivi = nameof(VV_FailReason_FairyFlowerNotVivi);
         public const string VV_FailReason_FairyFlowerNotAdult = nameof(VV_FailReason_FairyFlowerNotAdult);
-        public const string VV_FailReason_FairyFlowerCannotMove = nameof(VV_FailReason_FairyFlowerCannotMove);
+        public const string VV_FailReason_CannotMove = nameof(VV_FailReason_CannotMove);
         public const string VV_FailReason_FairyFlowerAlreadyInterfered = nameof(VV_FailReason_FairyFlowerAlreadyInterfered);
 
         public const string VV_Hediff_DoomBlightLevel = nameof(VV_Hediff_DoomBlightLevel);
@@ -152,7 +151,6 @@
         public const string VV_FailReason_GrandAttunementCompleted = nameof(VV_FailReason_GrandAttunementCompleted);
         public const string VV_FailReason_GrandAttunementFailed = nameof(VV_FailReason_GrandAttunementFailed);
 
-        public const string VV_FailReason_PawnAssimilated = nameof(VV_FailReason_PawnAssimilated);
         public const string VV_FailReason_CoronationNotAnchor = nameof(VV_FailReason_CoronationNotAnchor);
         public const string VV_FailReason_CoronationLocked = nameof(VV_FailReason_CoronationLocked);
     }

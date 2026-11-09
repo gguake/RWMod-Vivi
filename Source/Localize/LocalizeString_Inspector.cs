@@ -49,10 +49,10 @@
         public const string VV_Inspector_ApocryphaShieldBroken = nameof(VV_Inspector_ApocryphaShieldBroken);
         public const string VV_Inspector_ApocryphaChanneling = nameof(VV_Inspector_ApocryphaChanneling);
 
-        public const string VV_Inspect_DoomFlowerBloomIn = nameof(VV_Inspect_DoomFlowerBloomIn);
-        public const string VV_Inspect_DoomFlowerHint = nameof(VV_Inspect_DoomFlowerHint);
-        public const string VV_Inspect_FairyFlowerFadeIn = nameof(VV_Inspect_FairyFlowerFadeIn);
-        public const string VV_Inspect_FairyFlowerHint = nameof(VV_Inspect_FairyFlowerHint);
+        public const string VV_Inspector_DoomFlowerBloomIn = nameof(VV_Inspector_DoomFlowerBloomIn);
+        public const string VV_Inspector_DoomFlowerHint = nameof(VV_Inspector_DoomFlowerHint);
+        public const string VV_Inspector_FairyFlowerFadeIn = nameof(VV_Inspector_FairyFlowerFadeIn);
+        public const string VV_Inspector_FairyFlowerHint = nameof(VV_Inspector_FairyFlowerHint);
 
         public const string VV_Inspector_SkyShieldRemaining = nameof(VV_Inspector_SkyShieldRemaining);
 

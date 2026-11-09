@@ -5,7 +5,7 @@
 <VV_FloatMenu_BondFairyFlower>요정꽃과 결속</VV_FloatMenu_BondFairyFlower>
 <VV_FailReason_FairyFlowerNotVivi>비비가 아님</VV_FailReason_FairyFlowerNotVivi>
 <VV_FailReason_FairyFlowerNotAdult>아기는 결속할 수 없음</VV_FailReason_FairyFlowerNotAdult>
-<VV_FailReason_FairyFlowerCannotMove>움직일 수 없음</VV_FailReason_FairyFlowerCannotMove>
+<VV_FailReason_CannotMove>움직일 수 없음</VV_FailReason_CannotMove>
 <VV_FailReason_FairyFlowerAlreadyInterfered>이미 요정 간섭 상태임</VV_FailReason_FairyFlowerAlreadyInterfered>
 
 <!-- 메시지 -->
@@ -18,9 +18,9 @@
 <VV_Hediff_FairyInterferenceRemaining>남은 시간: {0}</VV_Hediff_FairyInterferenceRemaining>
 
 <!-- 정보창 -->
-<VV_Inspect_DoomFlowerBloomIn>만개까지: {0}</VV_Inspect_DoomFlowerBloomIn>
-<VV_Inspect_DoomFlowerHint>만개하면 저주를 내립니다.</VV_Inspect_DoomFlowerHint>
-<VV_Inspect_FairyFlowerFadeIn>시들기까지: {0}</VV_Inspect_FairyFlowerFadeIn>
-<VV_Inspect_FairyFlowerHint>비비가 결속하면 요정 비비의 결속에 간섭할 수 있습니다.</VV_Inspect_FairyFlowerHint>
+<VV_Inspector_DoomFlowerBloomIn>만개까지: {0}</VV_Inspector_DoomFlowerBloomIn>
+<VV_Inspector_DoomFlowerHint>만개하면 저주를 내립니다.</VV_Inspector_DoomFlowerHint>
+<VV_Inspector_FairyFlowerFadeIn>시들기까지: {0}</VV_Inspector_FairyFlowerFadeIn>
+<VV_Inspector_FairyFlowerHint>비비가 결속하면 요정 비비의 결속에 간섭할 수 있습니다.</VV_Inspector_FairyFlowerHint>
 
 </LanguageData>
