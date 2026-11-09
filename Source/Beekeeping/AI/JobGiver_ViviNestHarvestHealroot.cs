@@ -6,7 +6,7 @@ using Verse.AI;
 namespace VVRace
 {
     // 약이 모자라면 둥지 근처의 다 자란 약뿌리(야생·재배)를 바닐라 수확 잡으로 거둔다(거둔 약초는 수확 알림에서 둥지 몫이 된다).
-    // 플레이어 재배 구역의 약뿌리는 건드리지 않는다. 우선도는 약이 목표에 비해 모자란 정도다(보유량 균형).
+    // 플레이어 재배 구역·재배 건물(수경 재배기·화분)의 약뿌리는 건드리지 않는다. 우선도는 약이 목표에 비해 모자란 정도다(보유량 균형).
     // 반경 안에 거둘 약뿌리가 없으면 자라는 약뿌리가 거둘 만큼 자랄 때(상한 HealrootRetryMaxTicks)까지 우선도를 0으로 둔다(ViviNestProduction).
     public class JobGiver_ViviNestHarvestHealroot : ThinkNode_JobGiver
     {
@@ -61,7 +61,7 @@ namespace VVRace
             return null;
         }
 
-        // 활동 범위 중심(둥지 중심·증축 방 중심) 어디서든 반경 안, 구역 밖의 다 자란 약뿌리 중 이 비비가 쓸 수 있는(금지되지 않고 예약·도달할 수 있는) 가장 가까운 것.
+        // 활동 범위 중심(둥지 중심·증축 방 중심) 어디서든 반경 안, 구역·재배 건물 밖의 다 자란 약뿌리 중 이 비비가 쓸 수 있는(금지되지 않고 예약·도달할 수 있는) 가장 가까운 것.
         // anyTarget은 비비와 상관없이 거둘 수 있는 약뿌리가 하나라도 있었는지, readyTick은 아직 덜 자란 약뿌리가 가장 먼저 거둘 만큼 자랄 틱(모르면 -1)이다.
         private static Plant FindHealroot(Pawn pawn, LordJob_ViviNest nest, out bool anyTarget, out int readyTick)
         {
@@ -85,7 +85,8 @@ namespace VVRace
 
                     // 활동 범위 중심(둥지 중심·증축 방 중심) 중 가장 가까운 것까지의 거리
                     var distance = territory.ActivityDistSq(plant.Position);
-                    if (distance >= maxDistance || map.zoneManager.ZoneAt(plant.Position) != null) { continue; }
+                    // 구역(재배 구역 포함) 안이나 플레이어 재배 건물(수경 재배기·화분) 칸의 약뿌리는 거두지 않는다.
+                    if (distance >= maxDistance || map.zoneManager.ZoneAt(plant.Position) != null || plant.Position.GetPlantToGrowSettable(map) != null) { continue; }
                     if (!plant.HarvestableNow)
                     {
                         readyTick = BeekeepingUtility.EarlierTick(readyTick, BeekeepingUtility.HarvestReadyTick(plant, ViviNestProduction.HealrootRetryMaxTicks));
