@@ -87,11 +87,4 @@
     <reportString>cleaning TargetA.</reportString>
     <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
   </JobDef>
-
-  <!-- 곰·말벌이 유인통 미끼를 먹어 치운다 -->
-  <JobDef>
-    <defName>VV_DevourBait</defName>
-    <driverClass>VVRace.JobDriver_DevourBait</driverClass>
-    <reportString>devouring the bait on TargetA.</reportString>
-  </JobDef>
 </Defs>

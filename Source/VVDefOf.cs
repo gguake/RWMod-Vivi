@@ -90,7 +90,6 @@ namespace VVRace
         public static JobDef VV_BondFairyFlower;
 
         public static JobDef VV_ViviInspectLure;
-        public static JobDef VV_DevourBait;
         public static JobDef VV_ViviNestUnload;
         public static JobDef VV_ViviNestDigFertilizer;
         public static JobDef VV_ViviNestBuildRoof;

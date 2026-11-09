@@ -5,10 +5,9 @@ using Verse.AI.Group;
 
 namespace VVRace
 {
-    // 꿀 냄새를 맡은 곰·거대 말벌이 유인통으로 와서 미끼를 먹어 치우고 떠난다.
+    // 꿀 냄새를 맡은 굶주린 곰이 유인통으로 와서 미끼를 배가 찰 때까지 먹고 떠난다.
     public class LordJob_ViviBaitThief : LordJob
     {
-        public const string MemoBaitDevoured = "VV_BaitDevoured";
         private const int MaxStayTicks = 6000;
         private const int MaxTravelTicks = GenDate.TicksPerDay / 2;
 
@@ -48,9 +47,9 @@ namespace VVRace
             arrived.AddTrigger(new Trigger_Memo("TravelArrived"));
             graph.AddTransition(arrived);
 
-            // 미끼를 다 먹었거나 오래 머물면 떠난다. 머무는 시간은 도착한 뒤부터 센다(느린 동물은 오는 데만 오래 걸린다).
+            // 배가 찼거나 먹을 수 있는 미끼가 없거나 오래 머물면 떠난다. 머무는 시간은 도착한 뒤부터 센다(느린 동물은 오는 데만 오래 걸린다).
             var done = new Transition(devourToil, exitToil);
-            done.AddTrigger(new Trigger_Memo(MemoBaitDevoured));
+            done.AddTrigger(new Trigger_TickCondition(() => !AnyPawnStillEating(), 60));
             done.AddTrigger(new Trigger_TicksPassed(MaxStayTicks));
             done.AddPostAction(new TransitionAction_Custom(EndVisit));
             graph.AddTransition(done);
@@ -65,6 +64,21 @@ namespace VVRace
             graph.transitions.Insert(0, abort);
 
             return graph;
+        }
+
+        private bool AnyPawnStillEating()
+        {
+            if (_lure == null || !_lure.Spawned) { return false; }
+
+            var pawns = lord.ownedPawns;
+            for (int i = 0; i < pawns.Count; ++i)
+            {
+                if (JobGiver_EatLureBait.WantsBait(pawns[i]) && JobGiver_EatLureBait.TryFindBait(pawns[i], _lure, checkReservation: false, out _))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public override void Cleanup()

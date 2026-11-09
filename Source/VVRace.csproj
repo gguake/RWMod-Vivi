@@ -395,8 +395,7 @@
     <Compile Include="Beekeeping\Lord\LordToil_ViviNestLive.cs" />
     <Compile Include="Beekeeping\AI\JobGiver_ViviLureInspect.cs" />
     <Compile Include="Beekeeping\AI\JobDriver_ViviInspectLure.cs" />
-    <Compile Include="Beekeeping\AI\JobGiver_DevourBait.cs" />
-    <Compile Include="Beekeeping\AI\JobDriver_DevourBait.cs" />
+    <Compile Include="Beekeeping\AI\JobGiver_EatLureBait.cs" />
     <Compile Include="Beekeeping\Nest\ViviNestTerritory.cs" />
     <Compile Include="Beekeeping\Nest\ViviNestStock.cs" />
     <Compile Include="Beekeeping\AI\JobGiver_ViviNestRest.cs" />

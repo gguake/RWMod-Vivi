@@ -80,7 +80,7 @@ namespace VVRace
                     return TryStartThief(lure, bearKind);
 
                 case ViviLureVisitor.Hornet:
-                    return TryStartThief(lure, VVPawnKindDefOf.VV_TitanicHornet);
+                    return TryStartHornet(lure);
             }
 
             return false;
@@ -127,30 +127,37 @@ namespace VVRace
             var pawn = PawnGenerator.GeneratePawn(new PawnGenerationRequest(kindDef, null, PawnGenerationContext.NonPlayer, tile: map.Tile));
             GenSpawn.Spawn(pawn, entryCell, map);
 
-            var isHornet = kindDef == VVPawnKindDefOf.VV_TitanicHornet;
-            if (isHornet)
+            // 굶주린 채로 와서 유인통 미끼를 바닐라 섭취로 배가 찰 때까지 먹는다(로드 듀티가 바닐라 먹이 찾기·사냥보다 먼저 돈다).
+            if (pawn.needs?.food != null)
             {
-                // 거대 말벌은 깨어 있으면 늘 광폭해지는 종족이라 바로 광폭으로 시작하고, 오래 머물지 않게 떠날 시각을 정해 둔다.
-                pawn.mindState.mentalStateHandler.TryStartMentalState(VVMentalStateDefOf.VV_HornetBerserk);
-                pawn.mindState.exitMapAfterTick = Find.TickManager.TicksGame + HornetStayTicks;
+                pawn.needs.food.CurLevel = 0f;
             }
 
             lure.Notify_ThiefVisitStarted();
             LordMaker.MakeNewLord(null, new LordJob_ViviBaitThief(lure), map, new List<Pawn> { pawn });
 
-            if (isHornet)
-            {
-                Find.LetterStack.ReceiveLetter(
-                    LocalizeString_Letter.VV_Letter_ViviLureHornetLabel.Translate(),
-                    LocalizeString_Letter.VV_Letter_ViviLureHornet.Translate(pawn.Named("PAWN")),
-                    LetterDefOf.ThreatSmall,
-                    new LookTargets(pawn, lure));
-            }
-            else
-            {
-                Messages.Message(LocalizeString_Message.VV_Message_ViviLureBear.Translate(pawn.Named("PAWN")).CapitalizeFirst(), new LookTargets(pawn, lure), MessageTypeDefOf.NeutralEvent);
-            }
+            Messages.Message(LocalizeString_Message.VV_Message_ViviLureBear.Translate(pawn.Named("PAWN")).CapitalizeFirst(), new LookTargets(pawn, lure), MessageTypeDefOf.NeutralEvent);
+            return true;
+        }
 
+        // 거대 말벌은 유인통 쪽 가장자리에 나타나기만 한다(미끼 도둑 로드 없음, 유인통 상태 그대로).
+        private static bool TryStartHornet(Building_ViviLure lure)
+        {
+            var map = lure.Map;
+            if (!BeekeepingUtility.TryFindEntryCellReaching(map, lure.Position, out var entryCell)) { return false; }
+
+            var pawn = PawnGenerator.GeneratePawn(new PawnGenerationRequest(VVPawnKindDefOf.VV_TitanicHornet, null, PawnGenerationContext.NonPlayer, tile: map.Tile));
+            GenSpawn.Spawn(pawn, entryCell, map);
+
+            // 거대 말벌은 깨어 있으면 늘 광폭해지는 종족이라 바로 광폭으로 시작하고, 오래 머물지 않게 떠날 시각을 정해 둔다.
+            pawn.mindState.mentalStateHandler.TryStartMentalState(VVMentalStateDefOf.VV_HornetBerserk);
+            pawn.mindState.exitMapAfterTick = Find.TickManager.TicksGame + HornetStayTicks;
+
+            Find.LetterStack.ReceiveLetter(
+                LocalizeString_Letter.VV_Letter_ViviLureHornetLabel.Translate(),
+                LocalizeString_Letter.VV_Letter_ViviLureHornet.Translate(pawn.Named("PAWN")),
+                LetterDefOf.ThreatSmall,
+                new LookTargets(pawn, lure));
             return true;
         }
     }

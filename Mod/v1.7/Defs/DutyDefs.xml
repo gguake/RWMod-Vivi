@@ -131,12 +131,12 @@
     </thinkNode>
   </DutyDef>
 
-  <!-- 비비 양봉: 곰·말벌이 미끼를 먹어 치움 -->
+  <!-- 비비 양봉: 굶주린 곰이 유인통 미끼를 바닐라 섭취로 배가 찰 때까지 먹음 -->
   <DutyDef>
     <defName>VV_ViviBaitThief</defName>
     <thinkNode Class="ThinkNode_Priority">
       <subNodes>
-        <li Class="VVRace.JobGiver_DevourBait" />
+        <li Class="VVRace.JobGiver_EatLureBait" />
         <li Class="JobGiver_WanderNearDutyLocation">
           <wanderRadius>4</wanderRadius>
         </li>
