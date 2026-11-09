@@ -77,6 +77,10 @@ namespace VVRace
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
+                // 대기열 저장 전 개발 빌드 세이브(2026-11-03~)는 노드가 없어 null로 불러와지므로 빈 목록으로 채운다.
+                if (_pendingRebirths == null) { _pendingRebirths = new List<Pawn>(); }
+                if (_pendingHolds == null) { _pendingHolds = new List<PendingHold>(); }
+
                 _heldPawns.RemoveAll(v => v?.pawn == null);
                 _pendingRebirths.RemoveAll(v => v == null);
                 _pendingHolds.RemoveAll(v => v?.pawn == null);
