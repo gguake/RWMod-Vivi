@@ -13,6 +13,8 @@ namespace VVRace
         private const int MaxTravelTicks = GenDate.TicksPerDay / 2;
 
         private Building_ViviLure _lure;
+        // 만들 때의 유인통 자리. 그래프(이동 목적지·미끼 먹기 위치)는 이것만 쓴다(불러올 때 다시 만드는 그래프가 처음과 같도록, LordJob_ViviLureScout와 같다).
+        private IntVec3 _lurePos = IntVec3.Invalid;
 
         public Building_ViviLure Lure => _lure;
 
@@ -25,18 +27,18 @@ namespace VVRace
         public LordJob_ViviBaitThief(Building_ViviLure lure)
         {
             _lure = lure;
+            _lurePos = lure?.Position ?? IntVec3.Invalid;
         }
 
         public override StateGraph CreateGraph()
         {
             var graph = new StateGraph();
-            var lurePos = _lure?.Position ?? IntVec3.Invalid;
 
-            var travelSubgraph = new LordJob_Travel(lurePos).CreateGraph();
+            var travelSubgraph = new LordJob_Travel(_lurePos).CreateGraph();
             var travelToil = graph.AttachSubgraph(travelSubgraph).StartingToil;
             graph.StartingToil = travelToil;
 
-            var devourToil = new LordToil_ViviDuty(VVDutyDefOf.VV_ViviBaitThief, lurePos);
+            var devourToil = new LordToil_ViviDuty(VVDutyDefOf.VV_ViviBaitThief, _lurePos);
             graph.AddToil(devourToil);
 
             var exitToil = new LordToil_ExitMap(LocomotionUrgency.Walk, canDig: true);
@@ -87,6 +89,7 @@ namespace VVRace
             }
 
             Scribe_References.Look(ref _lure, "lure");
+            Scribe_Values.Look(ref _lurePos, "lurePos", IntVec3.Invalid);
         }
     }
 }

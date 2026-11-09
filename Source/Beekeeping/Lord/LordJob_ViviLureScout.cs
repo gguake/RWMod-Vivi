@@ -11,6 +11,9 @@ namespace VVRace
     {
         private Faction _faction;
         private Building_ViviLure _lure;
+        // 만들 때의 유인통 자리. 그래프(이동 목적지·둘러보기 위치)는 이것만 쓴다: 바닐라는 불러올 때 그래프를 다시 만드는데,
+        // 그사이 유인통이 해체됐으면 위치를 잃고, 옮겨 설치됐으면 처음 그래프와 달라진다.
+        private IntVec3 _lurePos = IntVec3.Invalid;
         private int _inspectTicks;
         private bool _resultDecided;
 
@@ -29,6 +32,7 @@ namespace VVRace
         {
             _faction = faction;
             _lure = lure;
+            _lurePos = lure?.Position ?? IntVec3.Invalid;
             _inspectTicks = inspectTicks;
         }
 
@@ -47,13 +51,12 @@ namespace VVRace
         public override StateGraph CreateGraph()
         {
             var graph = new StateGraph();
-            var lurePos = _lure?.Position ?? IntVec3.Invalid;
 
-            var travelSubgraph = new LordJob_Travel(lurePos).CreateGraph();
+            var travelSubgraph = new LordJob_Travel(_lurePos).CreateGraph();
             var travelToil = graph.AttachSubgraph(travelSubgraph).StartingToil;
             graph.StartingToil = travelToil;
 
-            var inspectToil = new LordToil_ViviDuty(VVDutyDefOf.VV_ViviLureScout, lurePos);
+            var inspectToil = new LordToil_ViviDuty(VVDutyDefOf.VV_ViviLureScout, _lurePos);
             graph.AddToil(inspectToil);
 
             var exitSubgraph = new LordJob_TravelAndExit(IntVec3.Invalid).CreateGraph();
@@ -170,6 +173,7 @@ namespace VVRace
 
             Scribe_References.Look(ref _faction, "faction");
             Scribe_References.Look(ref _lure, "lure");
+            Scribe_Values.Look(ref _lurePos, "lurePos", IntVec3.Invalid);
             Scribe_Values.Look(ref _inspectTicks, "inspectTicks");
             Scribe_Values.Look(ref _resultDecided, "resultDecided");
             Scribe_Collections.Look(ref _sniffedPawns, "sniffedPawns", LookMode.Reference);
