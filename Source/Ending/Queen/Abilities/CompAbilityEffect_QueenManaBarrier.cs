@@ -103,16 +103,7 @@ namespace VVRace
             var manaComponent = map.GetManaComponent();
             if (manaComponent == null) { return 0f; }
 
-            var total = 0f;
-            foreach (var cell in GenRadial.RadialCellsAround(center, Radius, true))
-            {
-                if (cell.InBounds(map))
-                {
-                    total += manaComponent[cell];
-                }
-            }
-
-            return total;
+            return manaComponent.SumManaInRadius(center, Radius, out _);
         }
     }
 }

@@ -448,7 +448,8 @@ namespace VVRace
 
         #region 공용 그리기
 
-        private void DrawSectionTitle(float width, ref float curY, string title)
+        // 유인 조건 탭(ITab_ViviLureConditions)도 같은 구획 제목을 쓴다.
+        public static void DrawSectionTitle(float width, ref float curY, string title)
         {
             if (curY > 0f)
             {

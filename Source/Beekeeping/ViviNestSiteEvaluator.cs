@@ -361,18 +361,7 @@ namespace VVRace
             var manaComp = map.GetManaComponent();
             if (manaComp == null) { return 0f; }
 
-            var sum = 0f;
-            var count = 0;
-            var cellCount = GenRadial.NumCellsInRadius(ManaRadius);
-            for (int i = 0; i < cellCount; ++i)
-            {
-                var cell = center + GenRadial.RadialPattern[i];
-                if (!cell.InBounds(map)) { continue; }
-
-                sum += manaComp[cell];
-                count++;
-            }
-
+            var sum = manaComp.SumManaInRadius(center, ManaRadius, out var count);
             return count > 0 ? sum / count : 0f;
         }
 

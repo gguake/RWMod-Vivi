@@ -1,5 +1,6 @@
 ﻿using RimWorld;
 using RimWorld.Planet;
+using System;
 using System.Collections.Generic;
 using Verse;
 using Verse.AI;
@@ -275,7 +276,7 @@ namespace VVRace
             }
         }
 
-        // 아래 조건 하나하나는 판정(CheckArrivalConditions)과 유인 조건 탭(Building_ViviLure.ConditionRows)이 함께 쓴다.
+        // 아래 조건 하나하나는 판정(CheckArrivalConditions)과 유인 조건 탭(Building_ViviLure.ConditionRows)이 함께 쓴다(ArrivalConditions).
         public static bool TemperatureSuitable(Map map)
         {
             var safe = WanderingViviSafeTemperature;
@@ -287,49 +288,37 @@ namespace VVRace
 
         public static bool AnyHostileThreat(Map map) => GenHostility.AnyHostileActiveThreatTo(map, Faction.OfPlayer);
 
+        // 방문·정착대 도착 공통 조건(이 순서로 본다): 충족 여부, 판정이 알리는 불충족 사유 키, 유인 조건 탭의 줄 이름, 줄 툴팁 키(없으면 null).
+        // 판정(CheckArrivalConditions)은 첫 불충족까지만 보고, 유인 조건 탭(Building_ViviLure.BuildConditionRows)은 모두 줄로 보인다.
+        public static readonly (Func<Map, bool> met, string reasonKey, Func<string> rowLabel, string tipKey)[] ArrivalConditions =
+        {
+            (map => IsBeekeepingMap(map), LocalizeString_Inspector.VV_Inspector_LureConditionMap,
+                () => LocalizeString_ITab.VV_ITab_ViviLure_Map.Translate(), null),
+            (map => !AnyRoyalVivi(map), LocalizeString_Inspector.VV_Inspector_LureConditionRoyal,
+                () => LocalizeString_ITab.VV_ITab_ViviLure_NoRoyal.Translate(), null),
+            (map => CountPlayerVivis(map) <= MaxPlayerViviCount, LocalizeString_Inspector.VV_Inspector_LureConditionViviCount,
+                () => LocalizeString_ITab.VV_ITab_ViviLure_ViviCount.Translate(MaxPlayerViviCount), null),
+            (map => !AnyHostileThreat(map), LocalizeString_Inspector.VV_Inspector_LureConditionHostile,
+                () => LocalizeString_ITab.VV_ITab_ViviLure_NoHostile.Translate(), null),
+            (map => TemperatureSuitable(map), LocalizeString_Inspector.VV_Inspector_LureConditionTemperature,
+                () => LocalizeString_ITab.VV_ITab_ViviLure_Temperature.Translate(), LocalizeString_ITab.VV_ITab_ViviLure_TemperatureTip),
+            (map => FlowerSeasonNow(map), LocalizeString_Inspector.VV_Inspector_LureConditionSeason,
+                () => LocalizeString_ITab.VV_ITab_ViviLure_Season.Translate(), null),
+            (map => !OutdoorDangerous(map), LocalizeString_Inspector.VV_Inspector_LureConditionWeather,
+                () => LocalizeString_ITab.VV_ITab_ViviLure_Weather.Translate(), LocalizeString_ITab.VV_ITab_ViviLure_WeatherTip),
+        };
+
         // 방문·정착대 도착 공통 조건. 유인통 자체(미끼·진행 상태)는 호출하는 쪽이 따로 본다.
         public static bool CheckArrivalConditions(Map map, out string reason)
         {
-            if (!IsBeekeepingMap(map))
+            var conditions = ArrivalConditions;
+            for (int i = 0; i < conditions.Length; ++i)
             {
-                reason = LocalizeString_Inspector.VV_Inspector_LureConditionMap.Translate();
-                return false;
-            }
-
-            if (AnyRoyalVivi(map))
-            {
-                reason = LocalizeString_Inspector.VV_Inspector_LureConditionRoyal.Translate();
-                return false;
-            }
-
-            if (CountPlayerVivis(map) > MaxPlayerViviCount)
-            {
-                reason = LocalizeString_Inspector.VV_Inspector_LureConditionViviCount.Translate();
-                return false;
-            }
-
-            if (AnyHostileThreat(map))
-            {
-                reason = LocalizeString_Inspector.VV_Inspector_LureConditionHostile.Translate();
-                return false;
-            }
-
-            if (!TemperatureSuitable(map))
-            {
-                reason = LocalizeString_Inspector.VV_Inspector_LureConditionTemperature.Translate();
-                return false;
-            }
-
-            if (!FlowerSeasonNow(map))
-            {
-                reason = LocalizeString_Inspector.VV_Inspector_LureConditionSeason.Translate();
-                return false;
-            }
-
-            if (OutdoorDangerous(map))
-            {
-                reason = LocalizeString_Inspector.VV_Inspector_LureConditionWeather.Translate();
-                return false;
+                if (!conditions[i].met(map))
+                {
+                    reason = conditions[i].reasonKey.Translate();
+                    return false;
+                }
             }
 
             reason = null;

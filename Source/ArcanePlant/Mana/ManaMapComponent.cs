@@ -52,6 +52,25 @@ namespace VVRace
             }
         }
 
+        // center 둘레 radius 안(가운데 칸 포함) 맵 안 칸들의 환경 마나 합. 더하는 순서는 GenRadial 순서(RadialCellsAround(useCenter: true)와 같다).
+        // cellCount는 더한 칸 수다.
+        public float SumManaInRadius(IntVec3 center, float radius, out int cellCount)
+        {
+            var sum = 0f;
+            cellCount = 0;
+            var numCells = GenRadial.NumCellsInRadius(radius);
+            for (int i = 0; i < numCells; ++i)
+            {
+                var cell = center + GenRadial.RadialPattern[i];
+                if (!cell.InBounds(map)) { continue; }
+
+                sum += this[cell];
+                cellCount++;
+            }
+
+            return sum;
+        }
+
         public ManaMapComponent(Map map) : base(map)
         {
             _manaReserveGrid = new NativeArray<float>(map.cellIndices.NumGridCells, Allocator.Persistent);

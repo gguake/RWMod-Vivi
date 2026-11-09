@@ -13,7 +13,6 @@ namespace VVRace
         // 닫기 단추 자리(바닐라 ITab_Pawn_Gear처럼 위를 비운다)
         private const float TopMargin = 20f;
         private const float RowGap = 1f;
-        private const float SectionGap = 10f;
         private const float RowPadding = 6f;
         private const float RowHeight = 22f;
         private const float IconSize = 18f;
@@ -63,7 +62,7 @@ namespace VVRace
                 var width = viewRect.width;
                 var curY = 0f;
 
-                DrawSectionTitle(width, ref curY, LocalizeString_ITab.VV_ITab_ViviLure_SectionStatus.Translate());
+                ITab_ArcanePlant.DrawSectionTitle(width, ref curY, LocalizeString_ITab.VV_ITab_ViviLure_SectionStatus.Translate());
                 var alternate = false;
                 DrawTextRow(width, ref curY, lure.PhaseStatus ?? LocalizeString_ITab.VV_ITab_ViviLure_Idle.Translate(), ref alternate);
 
@@ -78,7 +77,7 @@ namespace VVRace
 
         private void DrawConditionSection(float width, ref float curY, List<ViviLureConditionRow> rows, ViviLureConditionSection section, string title)
         {
-            DrawSectionTitle(width, ref curY, title);
+            ITab_ArcanePlant.DrawSectionTitle(width, ref curY, title);
 
             var alternate = false;
             for (int i = 0; i < rows.Count; ++i)
@@ -88,17 +87,6 @@ namespace VVRace
                     DrawConditionRow(width, ref curY, rows[i], ref alternate);
                 }
             }
-        }
-
-        private void DrawSectionTitle(float width, ref float curY, string title)
-        {
-            if (curY > 0f)
-            {
-                curY += SectionGap;
-            }
-
-            Widgets.ListSeparator(ref curY, width, title);
-            curY += 3f;
         }
 
         private void DrawTextRow(float width, ref float curY, string text, ref bool alternate)

@@ -169,16 +169,12 @@ namespace VVRace
             // 방문 조건: 방문 인시던트(IncidentWorker_ViviLureVisit.CanFireNowSub)와 같다. 정착대가 도착할 때도 미끼·길을 뺀 공통 조건을 다시 본다.
             // 값 칸에는 측정값을 보이지 않는다(사용자 결정: 점수만, 점수 없는 조건은 충족 여부만). 무엇을 보는지는 툴팁이 수치 없이 알려 준다.
             const ViviLureConditionSection visit = ViviLureConditionSection.Visit;
-            AddConditionRow(visit, BeekeepingUtility.IsBeekeepingMap(map), LocalizeString_ITab.VV_ITab_ViviLure_Map.Translate());
-            AddConditionRow(visit, !BeekeepingUtility.AnyRoyalVivi(map), LocalizeString_ITab.VV_ITab_ViviLure_NoRoyal.Translate());
-            AddConditionRow(visit, BeekeepingUtility.CountPlayerVivis(map) <= BeekeepingUtility.MaxPlayerViviCount,
-                LocalizeString_ITab.VV_ITab_ViviLure_ViviCount.Translate(BeekeepingUtility.MaxPlayerViviCount));
-            AddConditionRow(visit, !BeekeepingUtility.AnyHostileThreat(map), LocalizeString_ITab.VV_ITab_ViviLure_NoHostile.Translate());
-            AddConditionRow(visit, BeekeepingUtility.TemperatureSuitable(map), LocalizeString_ITab.VV_ITab_ViviLure_Temperature.Translate(),
-                tooltip: LocalizeString_ITab.VV_ITab_ViviLure_TemperatureTip.Translate());
-            AddConditionRow(visit, BeekeepingUtility.FlowerSeasonNow(map), LocalizeString_ITab.VV_ITab_ViviLure_Season.Translate());
-            AddConditionRow(visit, !BeekeepingUtility.OutdoorDangerous(map), LocalizeString_ITab.VV_ITab_ViviLure_Weather.Translate(),
-                tooltip: LocalizeString_ITab.VV_ITab_ViviLure_WeatherTip.Translate());
+            var conditions = BeekeepingUtility.ArrivalConditions;
+            for (int i = 0; i < conditions.Length; ++i)
+            {
+                var condition = conditions[i];
+                AddConditionRow(visit, condition.met(map), condition.rowLabel(), tooltip: condition.tipKey != null ? (string)condition.tipKey.Translate() : null);
+            }
             AddConditionRow(visit, HasBait, LocalizeString_ITab.VV_ITab_ViviLure_Bait.Translate(), tooltip: LocalizeString_ITab.VV_ITab_ViviLure_BaitTip.Translate());
             AddConditionRow(visit, !BeekeepingUtility.AnyNestOrAttraction(map, this), LocalizeString_ITab.VV_ITab_ViviLure_NoOtherLure.Translate());
             AddConditionRow(visit, BeekeepingUtility.TryFindEntryCellReaching(map, Position, out _), LocalizeString_ITab.VV_ITab_ViviLure_Reachable.Translate());
