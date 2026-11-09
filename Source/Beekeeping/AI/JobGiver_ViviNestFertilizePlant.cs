@@ -18,8 +18,8 @@ namespace VVRace
 
         protected override Job TryGiveJob(Pawn pawn)
         {
-            var nest = pawn.GetNestLordJob();
-            if (nest == null || !nest.Settled || pawn.DevelopmentalStage.Baby() || pawn.WorkTypeIsDisabled(WorkTypeDefOf.Hauling)) { return null; }
+            var nest = BeekeepingUtility.SettledNestOf(pawn);
+            if (nest == null || pawn.WorkTypeIsDisabled(WorkTypeDefOf.Hauling)) { return null; }
             if (nest.Stock.CountOf(VVThingDefOf.VV_Fertilizer) <= 0) { return null; }
 
             // 밤이거나 바깥이 위험하면 바깥 일은 하지 않는다: 방 안 식물에 방 안 비료만 준다.

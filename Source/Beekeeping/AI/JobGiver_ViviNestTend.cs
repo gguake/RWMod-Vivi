@@ -11,8 +11,8 @@ namespace VVRace
     {
         protected override Job TryGiveJob(Pawn pawn)
         {
-            var nest = pawn.GetNestLordJob();
-            if (nest == null || !nest.Settled || pawn.DevelopmentalStage.Baby() || pawn.WorkTypeIsDisabled(WorkTypeDefOf.Doctor)) { return null; }
+            var nest = BeekeepingUtility.SettledNestOf(pawn);
+            if (nest == null || pawn.WorkTypeIsDisabled(WorkTypeDefOf.Doctor)) { return null; }
 
             var members = nest.lord.ownedPawns;
             for (int i = 0; i < members.Count; ++i)

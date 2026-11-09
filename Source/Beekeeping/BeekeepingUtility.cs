@@ -338,6 +338,23 @@ namespace VVRace
 
         public static LordJob_ViviNest GetNestLordJob(this Pawn pawn) => pawn.GetLord()?.LordJob as LordJob_ViviNest;
 
+        // 둥지 잡 기버 공통 가드: 정착한 둥지의 구성원이고 아기가 아니면 그 둥지(둥지 → 정착 → 아기 순으로 본다).
+        // 어른만 하는 일(땅 비료·육아)이나 아기 검사 순서가 다른 기버는 쓰지 않는다.
+        public static LordJob_ViviNest SettledNestOf(Pawn pawn)
+        {
+            var nest = pawn.GetNestLordJob();
+            if (nest == null || !nest.Settled || pawn.DevelopmentalStage.Baby()) { return null; }
+            return nest;
+        }
+
+        // 바깥 일(채집·나무 베기·약뿌리 거두기·정원)을 할 수 있는 둥지: SettledNestOf에 더해 workType(있으면)을 할 수 있고 바깥 일을 쉬지 않을 때
+        public static LordJob_ViviNest OutdoorWorkingNest(Pawn pawn, WorkTypeDef workType = null)
+        {
+            var nest = SettledNestOf(pawn);
+            if (nest == null || (workType != null && pawn.WorkTypeIsDisabled(workType))) { return null; }
+            return OutdoorWorkPaused(pawn) ? null : nest;
+        }
+
         // 누군가 먹여 줘야 하는 둥지 구성원: 쓰러진 둥지 비비(아기 제외, 아기는 육아의 젖병 먹이기가 맡는다).
         // 둥지 먹이기 잡 기버가 대상을 고르고, 바닐라 환자 먹이기 잡은 이 판정이 참인 동안 이어 간다(BeekeepingPatch).
         public static bool NeedsNestFeeding(Pawn pawn)

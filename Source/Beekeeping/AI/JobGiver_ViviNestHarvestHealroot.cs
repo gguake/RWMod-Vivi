@@ -36,12 +36,7 @@ namespace VVRace
         }
 
         // 약뿌리를 거둘 수 있는 둥지(GetPriority·TryGiveJob 공통 조건): 정착했고, 아기가 아니며 재배를 할 수 있고, 바깥 일을 쉬지 않을 때
-        private static LordJob_ViviNest WorkingNest(Pawn pawn)
-        {
-            var nest = pawn.GetNestLordJob();
-            if (nest == null || !nest.Settled || pawn.DevelopmentalStage.Baby() || pawn.WorkTypeIsDisabled(WorkTypeDefOf.Growing)) { return null; }
-            return BeekeepingUtility.OutdoorWorkPaused(pawn) ? null : nest;
-        }
+        private static LordJob_ViviNest WorkingNest(Pawn pawn) => BeekeepingUtility.OutdoorWorkingNest(pawn, WorkTypeDefOf.Growing);
 
         public override float GetPriority(Pawn pawn)
         {

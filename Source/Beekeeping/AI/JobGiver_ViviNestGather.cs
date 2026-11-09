@@ -98,12 +98,7 @@ namespace VVRace
         }
 
         // 채집할 수 있는 둥지(GetPriority·TryGiveJob 공통 조건): 정착했고, 아기가 아니며, 바깥 일을 쉬지 않을 때
-        private static LordJob_ViviNest WorkingNest(Pawn pawn)
-        {
-            var nest = pawn.GetNestLordJob();
-            if (nest == null || !nest.Settled || pawn.DevelopmentalStage.Baby()) { return null; }
-            return BeekeepingUtility.OutdoorWorkPaused(pawn) ? null : nest;
-        }
+        private static LordJob_ViviNest WorkingNest(Pawn pawn) => BeekeepingUtility.OutdoorWorkingNest(pawn);
 
         // 모자라고, 대상을 기다리는 중이 아니며, 이 비비가 할 수 있는 채집
         private static bool CanTry(Pawn pawn, RecipeDef_Gathering recipe, ViviNestProduction production)

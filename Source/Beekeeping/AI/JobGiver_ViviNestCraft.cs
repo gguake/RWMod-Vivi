@@ -43,8 +43,8 @@ namespace VVRace
         // 작업 지시서 중 이 비비가 할 수 있는 가장 모자란 것의 모자란 정도(만들다 만 자기 것은 가장 먼저)
         public override float GetPriority(Pawn pawn)
         {
-            var nest = pawn.GetNestLordJob();
-            if (nest == null || !nest.Settled || pawn.DevelopmentalStage.Baby()) { return 0f; }
+            var nest = BeekeepingUtility.SettledNestOf(pawn);
+            if (nest == null) { return 0f; }
 
             return nest.Production.CraftPriority(pawn);
         }
@@ -53,8 +53,8 @@ namespace VVRace
         // 다른 자리에서 같은 지시를 이미 만들 만큼 하고 있으면 고르지 않는다(목표를 넘겨 만들지 않게, ViviNestProduction.CanStartBill).
         protected override Job TryGiveJob(Pawn pawn)
         {
-            var nest = pawn.GetNestLordJob();
-            if (nest == null || !nest.Settled || pawn.DevelopmentalStage.Baby()) { return null; }
+            var nest = BeekeepingUtility.SettledNestOf(pawn);
+            if (nest == null) { return null; }
 
             var production = nest.Production;
             _tmpSpots.Clear();

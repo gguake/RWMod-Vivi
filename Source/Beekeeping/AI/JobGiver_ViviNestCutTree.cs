@@ -19,9 +19,8 @@ namespace VVRace
         // 나무를 기다리는 중이 아니고 원목이 목표보다 적을 때
         private static LordJob_ViviNest WorkingNest(Pawn pawn)
         {
-            var nest = pawn.GetNestLordJob();
-            if (nest == null || !nest.Settled || pawn.DevelopmentalStage.Baby() || pawn.WorkTypeIsDisabled(WorkTypeDefOf.PlantCutting)) { return null; }
-            if (BeekeepingUtility.OutdoorWorkPaused(pawn)) { return null; }
+            var nest = BeekeepingUtility.OutdoorWorkingNest(pawn, WorkTypeDefOf.PlantCutting);
+            if (nest == null) { return null; }
             var production = nest.Production;
             if (production.TreeWaiting || nest.Stock.CountOf(ThingDefOf.WoodLog) >= production.CachedWoodStockTarget) { return null; }
 

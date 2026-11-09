@@ -26,8 +26,8 @@ namespace VVRace
 
         protected override Job TryGiveJob(Pawn pawn)
         {
-            var nest = pawn.GetNestLordJob();
-            if (nest == null || !nest.Settled || pawn.DevelopmentalStage.Baby()) { return null; }
+            var nest = BeekeepingUtility.SettledNestOf(pawn);
+            if (nest == null) { return null; }
             if (pawn.WorkTypeIsDisabled(WorkTypeDefOf.Construction)) { return null; }
             // 아기로 무리에 든 구성원은 그때 작업 설정을 켜지 않았으므로, 아이로 자란 뒤 바닐라 건설 판정 전에 켠다.
             if (pawn.workSettings != null && !pawn.workSettings.EverWork) { EnsureBuilderWorkSettings(pawn); }

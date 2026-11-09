@@ -14,8 +14,8 @@ namespace VVRace
 
         protected override Job TryGiveJob(Pawn pawn)
         {
-            var nest = pawn.GetNestLordJob();
-            if (nest == null || !nest.Settled || pawn.DevelopmentalStage.Baby()) { return null; }
+            var nest = BeekeepingUtility.SettledNestOf(pawn);
+            if (nest == null) { return null; }
             if (!pawn.health.hediffSet.HasTemperatureInjury(TemperatureInjuryStage.Minor)) { return null; }
 
             // 편한 기온이거나, 이보다 나은 둥지 방이 없으면 그 자리에서 나을 때까지 기다린다.

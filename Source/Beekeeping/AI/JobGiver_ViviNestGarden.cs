@@ -10,9 +10,8 @@ namespace VVRace
     {
         protected override Job TryGiveJob(Pawn pawn)
         {
-            var nest = pawn.GetNestLordJob();
-            if (nest == null || !nest.Settled || pawn.DevelopmentalStage.Baby()) { return null; }
-            if (BeekeepingUtility.OutdoorWorkPaused(pawn)) { return null; }
+            var nest = BeekeepingUtility.OutdoorWorkingNest(pawn);
+            if (nest == null) { return null; }
 
             return HarvestCottonJob(pawn, nest) ?? SowCottonJob(pawn, nest) ?? SowFlowerJob(pawn, nest);
         }

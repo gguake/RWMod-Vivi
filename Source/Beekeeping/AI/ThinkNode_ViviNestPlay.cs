@@ -18,8 +18,8 @@ namespace VVRace
 
         public override ThinkResult TryIssueJobPackage(Pawn pawn, JobIssueParams jobParams)
         {
-            var nest = pawn.GetNestLordJob();
-            if (nest == null || !nest.Settled || pawn.DevelopmentalStage.Baby()) { return ThinkResult.NoJob; }
+            var nest = BeekeepingUtility.SettledNestOf(pawn);
+            if (nest == null) { return ThinkResult.NoJob; }
             if (JobGiver_ViviNestRest.IsNight(pawn)) { return ThinkResult.NoJob; }
             if (pawn.IsRoyalVivi() && HasBaby(nest)) { return ThinkResult.NoJob; }
 
