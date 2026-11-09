@@ -1,59 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
   <!-- 대관식 -->
-  <PreceptDef>
+  <PreceptDef ParentName="VV_EverflowerRitualPreceptBase">
     <defName>VV_QueensCoronation</defName>
     <label>coronation</label>
     <description>Crowns the resonator queen and completes the everflower's final bloom.</description>
-    <issue>Ritual</issue>
-    <preceptClass>Precept_Ritual</preceptClass>
-    <visible>false</visible>
-    <classic>true</classic>
-    <countsTowardsPreceptLimit>false</countsTowardsPreceptLimit>
-    <selectionWeight>0</selectionWeight>
     <ritualPatternBase>VV_QueensCoronation</ritualPatternBase>
     <iconPath>UI/Commands/VV_QueensCoronation</iconPath>
-    <usesIdeoVisualEffects>false</usesIdeoVisualEffects>
-    <mergeRitualGizmosFromAllIdeos>true</mergeRitualGizmosFromAllIdeos>
-    <useRepeatPenalty>false</useRepeatPenalty>
-    <showRitualFloatMenuOption>false</showRitualFloatMenuOption>
     <displayOrderInImpact>994</displayOrderInImpact>
     <displayOrderInIssue>994</displayOrderInIssue>
   </PreceptDef>
 
   <!-- 대관식 구성 -->
-  <RitualPatternDef>
+  <RitualPatternDef ParentName="VV_EverflowerRitualPatternBase">
     <defName>VV_QueensCoronation</defName>
-    <ritualOnlyForIdeoMembers>false</ritualOnlyForIdeoMembers>
     <ritualBehavior>VV_QueensCoronation</ritualBehavior>
     <ritualOutcomeEffect>VV_QueensCoronation</ritualOutcomeEffect>
     <ritualObligationTargetFilter>VV_QueensCoronation</ritualObligationTargetFilter>
-    <playsIdeoMusic>false</playsIdeoMusic>
-    <alwaysStartAnytime>true</alwaysStartAnytime>
     <iconPathOverride>UI/Commands/VV_QueensCoronation</iconPathOverride>
-    <showIdeoIconsInDialog>false</showIdeoIconsInDialog>
   </RitualPatternDef>
 
   <!-- 대관식 진행 -->
-  <RitualBehaviorDef>
+  <RitualBehaviorDef ParentName="VV_EverflowerRitualBehaviorBase">
     <defName>VV_QueensCoronation</defName>
-    <durationTicks>1500</durationTicks>
-    <workerClass>VVRace.RitualBehaviorWorker_GeneralEverflowerRitual</workerClass>
-    <displayCompletedMessage>true</displayCompletedMessage>
-    <roles>
-      <li Class="VVRace.RitualRoleEverflowerResonator">
-        <id>resonator</id>
-        <label>resonator</label>
-        <maxCount>1</maxCount>
-        <required>True</required>
-        <usedStat>PsychicSensitivity</usedStat>
-        <defaultForSelectedColonist>true</defaultForSelectedColonist>
-        <allowChild>false</allowChild>
-        <blocksSocialInteraction>true</blocksSocialInteraction>
-        <countsAsParticipant>false</countsAsParticipant>
-      </li>
-    </roles>
-    <stages>
+    <stages Inherit="False">
       <li>
         <defaultDuty>Spectate</defaultDuty>
         <showProgressBar>false</showProgressBar>
@@ -101,44 +71,11 @@
   </RitualBehaviorDef>
 
   <!-- 대관식 결과 -->
-  <RitualOutcomeEffectDef>
+  <RitualOutcomeEffectDef ParentName="VV_EverflowerRitualOutcomeBase">
     <defName>VV_QueensCoronation</defName>
     <description>When the ritual completes, the resonator is crowned queen and the everflower fully blooms.</description>
     <workerClass>VVRace.RitualOutcomeEffectWorker_QueensCoronation</workerClass>
-    <allowAttachableOutcome>false</allowAttachableOutcome>
-    <givesDevelopmentPoints>false</givesDevelopmentPoints>
-    <allowOutcomeWithNoAttendance>true</allowOutcomeWithNoAttendance>
     <effecter>VV_Effecter_CoronationComplete</effecter>
-    <maxQuality>10</maxQuality>
-    <comps>
-      <li Class="RitualOutcomeComp_PawnStatScaled">
-        <label>{PAWN_labelShort}'s psychic sensitivity</label>
-        <labelAbstract>resonator's psychic sensitivity</labelAbstract>
-        <roleId>resonator</roleId>
-        <statDef>PsychicSensitivity</statDef>
-        <curve>
-          <points>
-            <li>(0.5, 0.0)</li>
-            <li>(1.5, 1.0)</li>
-            <li>(2.5, 1.5)</li>
-            <li>(4.0, 2.0)</li>
-            <li>(6.0, 2.5)</li>
-            <li>(8.5, 3.0)</li>
-          </points>
-        </curve>
-      </li>
-      <li Class="RitualOutcomeComp_ParticipantCount">
-        <label>participant count</label>
-        <curve>
-          <points>
-            <li>(0,  0.0)</li>
-            <li>(4,  0.5)</li>
-            <li>(10, 1.0)</li>
-            <li>(20, 2.0)</li>
-          </points>
-        </curve>
-      </li>
-    </comps>
   </RitualOutcomeEffectDef>
 
   <!-- 대관식 대상 -->

@@ -1,24 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <FactionDef ParentName="TribeBase">
-    <defName>VV_ViviFederation</defName>
-    <label>Commonwealth of vivi</label>
-    <description>Federation established by independent Vivi hives for their common interest. There was once a unified Vivi Empire, but due to the influx and attack of outsiders, it is currently divided into individual, independent hives.
-Only a few traces of the former empire remain, in the form of certain traditions and administrative structures. They are uninterested in anything beyond their own activities, rarely initiate attacks, but are aggressive to those who pose a threat and defend themselves with their unique peculiar technology.</description>
+  <!-- 비비 세력 공통: 이념·문화·외형 설정 -->
+  <FactionDef ParentName="TribeBase" Name="VV_ViviFactionBase" Abstract="True">
     <factionIconPath>UI/Icons/ViviFaction</factionIconPath>
-    <factionNameMaker>VV_NamerNPCFactionVivi</factionNameMaker>
     <settlementNameMaker>VV_NamerSettlementVivi</settlementNameMaker>
     <pawnSingular>vivi</pawnSingular>
     <pawnsPlural>vivis</pawnsPlural>
-    <leaderTitle>federation representative</leaderTitle>
     <techLevel>Medieval</techLevel>
 
-    <replacesFaction>TribeCivil</replacesFaction>
-    <colorSpectrum>
-      <li>(0.85, 0.75, 0.37)</li>
-      <li>(0.94, 0.61, 0.06)</li>
-    </colorSpectrum>
-    
     <raidCommonalityFromPointsCurve>
       <points>
         <li>(0, 0)</li>
@@ -69,16 +58,31 @@ Only a few traces of the former empire remain, in the form of certain traditions
       <li>ChildBirth</li>
     </disallowedPrecepts>
 
-    <maxConfigurableAtWorldCreation>9999</maxConfigurableAtWorldCreation>
-    <configurationListOrderPriority>30</configurationListOrderPriority>
-
     <xenotypeSet Inherit="False">
       <xenotypeChances>
         <VV_Vivi>999</VV_Vivi>
       </xenotypeChances>
     </xenotypeSet>
-    
+
     <melaninRange>0~0</melaninRange>
+  </FactionDef>
+
+  <FactionDef ParentName="VV_ViviFactionBase">
+    <defName>VV_ViviFederation</defName>
+    <label>Commonwealth of vivi</label>
+    <description>Federation established by independent Vivi hives for their common interest. There was once a unified Vivi Empire, but due to the influx and attack of outsiders, it is currently divided into individual, independent hives.
+Only a few traces of the former empire remain, in the form of certain traditions and administrative structures. They are uninterested in anything beyond their own activities, rarely initiate attacks, but are aggressive to those who pose a threat and defend themselves with their unique peculiar technology.</description>
+    <factionNameMaker>VV_NamerNPCFactionVivi</factionNameMaker>
+    <leaderTitle>federation representative</leaderTitle>
+
+    <replacesFaction>TribeCivil</replacesFaction>
+    <colorSpectrum>
+      <li>(0.85, 0.75, 0.37)</li>
+      <li>(0.94, 0.61, 0.06)</li>
+    </colorSpectrum>
+
+    <maxConfigurableAtWorldCreation>9999</maxConfigurableAtWorldCreation>
+    <configurationListOrderPriority>30</configurationListOrderPriority>
 
     <dialogFactionGreetingHostile>ViviFactionGreetingHostile</dialogFactionGreetingHostile>
     <dialogFactionGreetingHostileAppreciative>ViviFactionGreetingHostileAppreciative</dialogFactionGreetingHostileAppreciative>
@@ -169,17 +173,12 @@ Only a few traces of the former empire remain, in the form of certain traditions
   </FactionDef>
 
   <!-- 떠돌이 비비 무리: 양봉 유인통을 찾아오는 임시 세력. 방문마다 새로 만들고, 구성원이 모두 떠나면 바닐라가 지운다 -->
-  <FactionDef ParentName="TribeBase">
+  <FactionDef ParentName="VV_ViviFactionBase">
     <defName>VV_WanderingVivi</defName>
     <label>wandering vivis</label>
     <description>A small band of vivis who lost their home hive along with its everflower seed and now wander from place to place. When they follow the scent of honey to a suitable empty room, they furnish it with cream and wax and live off the surrounding flowers. They maintain no permanent settlements of their own.</description>
-    <factionIconPath>UI/Icons/ViviFaction</factionIconPath>
     <factionNameMaker>VV_NamerWanderingViviFaction</factionNameMaker>
-    <settlementNameMaker>VV_NamerSettlementVivi</settlementNameMaker>
-    <pawnSingular>vivi</pawnSingular>
-    <pawnsPlural>vivis</pawnsPlural>
     <leaderTitle>elder</leaderTitle>
-    <techLevel>Medieval</techLevel>
     <categoryTag>VV_WanderingVivi</categoryTag>
 
     <hidden>true</hidden>
@@ -196,64 +195,6 @@ Only a few traces of the former empire remain, in the form of certain traditions
       <li>(0.96, 0.86, 0.56)</li>
       <li>(0.98, 0.74, 0.36)</li>
     </colorSpectrum>
-
-    <raidCommonalityFromPointsCurve>
-      <points>
-        <li>(0, 0)</li>
-      </points>
-    </raidCommonalityFromPointsCurve>
-
-    <allowedCultures Inherit="False">
-      <li>VV_ViviCulture</li>
-    </allowedCultures>
-
-    <structureMemeWeights Inherit="False">
-      <VV_Structure_Vivi MayRequire="Ludeon.RimWorld.Ideology">1</VV_Structure_Vivi>
-    </structureMemeWeights>
-
-    <requiredMemes>
-      <li MayRequire="Ludeon.RimWorld.Ideology">Collectivist</li>
-      <li MayRequire="Ludeon.RimWorld.Ideology">TreeConnection</li>
-      <li MayRequire="Ludeon.RimWorld.Ideology">NaturePrimacy</li>
-    </requiredMemes>
-
-    <disallowedMemes>
-      <li MayRequire="Ludeon.RimWorld.Ideology">Supremacist</li>
-      <li MayRequire="Ludeon.RimWorld.Ideology">Raider</li>
-      <li MayRequire="Ludeon.RimWorld.Ideology">MaleSupremacy</li>
-      <li MayRequire="Ludeon.RimWorld.Ideology">Cannibal</li>
-    </disallowedMemes>
-
-    <disallowedPrecepts>
-      <li>Cannibalism_Classic</li>
-      <li>Slavery_Classic</li>
-      <li MayRequire="Ludeon.RimWorld.Ideology">ApparelDesired_Strong_Subordinate</li>
-      <li MayRequire="Ludeon.RimWorld.Ideology">ApparelDesired_Soft_Subordinate</li>
-      <li MayRequire="Ludeon.RimWorld.Ideology">Cannibalism_Acceptable</li>
-      <li MayRequire="Ludeon.RimWorld.Ideology">Cannibalism_Preferred</li>
-      <li MayRequire="Ludeon.RimWorld.Ideology">Cannibalism_RequiredStrong</li>
-      <li MayRequire="Ludeon.RimWorld.Ideology">Cannibalism_RequiredRavenous</li>
-      <li MayRequire="Ludeon.RimWorld.Ideology">MeatEating_NonMeat_Disapproved</li>
-      <li MayRequire="Ludeon.RimWorld.Ideology">MeatEating_NonMeat_Horrible</li>
-      <li MayRequire="Ludeon.RimWorld.Ideology">MeatEating_NonMeat_Abhorrent</li>
-      <li MayRequire="Ludeon.RimWorld.Ideology">Pain_Idealized</li>
-      <li MayRequire="Ludeon.RimWorld.Ideology">Raiding_Respected</li>
-      <li MayRequire="Ludeon.RimWorld.Ideology">Raiding_Required</li>
-      <li MayRequire="Ludeon.RimWorld.Ideology">Skullspike_Desired</li>
-      <li MayRequire="Ludeon.RimWorld.Ideology">Slavery_Acceptable</li>
-      <li MayRequire="Ludeon.RimWorld.Ideology">Slavery_Honorable</li>
-      <li>Bloodfeeders_Revered</li>
-      <li>Bloodfeeders_Reviled</li>
-      <li>ChildBirth</li>
-    </disallowedPrecepts>
-
-    <xenotypeSet Inherit="False">
-      <xenotypeChances>
-        <VV_Vivi>999</VV_Vivi>
-      </xenotypeChances>
-    </xenotypeSet>
-
-    <melaninRange>0~0</melaninRange>
 
     <!-- 폰은 인시던트가 직접 만든다. 그룹 정의가 비지 않게 평화 그룹 하나만 둔다 -->
     <pawnGroupMakers Inherit="False">

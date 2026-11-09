@@ -1,44 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <PreceptDef>
+  <PreceptDef ParentName="VV_EverflowerRitualPreceptBase">
     <defName>VV_Defairyfication</defName>
     <label>defairyfication ritual</label>
     <description>Restores a fairyficated vivi to its original form. Which fairy vivi returns cannot be predicted.
 \nA vivi restored to its original form suffers side effects for one year and cannot be fairyficated again while those side effects persist.</description>
-    <issue>Ritual</issue>
-    <preceptClass>Precept_Ritual</preceptClass>
-    <visible>false</visible>
-    <classic>true</classic>
-    <countsTowardsPreceptLimit>false</countsTowardsPreceptLimit>
-    <selectionWeight>0</selectionWeight>
     <ritualPatternBase>VV_Defairyfication</ritualPatternBase>
     <iconPath>UI/Commands/VV_LinkDisconnect</iconPath>
-    <usesIdeoVisualEffects>false</usesIdeoVisualEffects>
-    <mergeRitualGizmosFromAllIdeos>true</mergeRitualGizmosFromAllIdeos>
-    <useRepeatPenalty>false</useRepeatPenalty>
-    <showRitualFloatMenuOption>false</showRitualFloatMenuOption>
     <displayOrderInImpact>997</displayOrderInImpact>
     <displayOrderInIssue>997</displayOrderInIssue>
   </PreceptDef>
 
-  <RitualPatternDef>
+  <RitualPatternDef ParentName="VV_EverflowerRitualPatternBase">
     <defName>VV_Defairyfication</defName>
-    <ritualOnlyForIdeoMembers>false</ritualOnlyForIdeoMembers>
     <ritualBehavior>VV_Defairyfication</ritualBehavior>
     <ritualOutcomeEffect>VV_Defairyfication</ritualOutcomeEffect>
     <ritualObligationTargetFilter>VV_Defairyfication</ritualObligationTargetFilter>
-    <playsIdeoMusic>false</playsIdeoMusic>
-    <alwaysStartAnytime>true</alwaysStartAnytime>
     <iconPathOverride>UI/Commands/VV_LinkDisconnect</iconPathOverride>
-    <showIdeoIconsInDialog>false</showIdeoIconsInDialog>
   </RitualPatternDef>
 
-  <RitualBehaviorDef>
+  <RitualBehaviorDef ParentName="VV_EverflowerRitualBehaviorBase">
     <defName>VV_Defairyfication</defName>
-    <durationTicks>1500</durationTicks>
-    <workerClass>VVRace.RitualBehaviorWorker_GeneralEverflowerRitual</workerClass>
-    <displayCompletedMessage>true</displayCompletedMessage>
-    <roles>
+    <roles Inherit="False">
       <li Class="VVRace.RitualRoleFairyViviBringer">
         <id>resonator</id>
         <label>resonator</label>
@@ -51,7 +34,7 @@
         <countsAsParticipant>false</countsAsParticipant>
       </li>
     </roles>
-    <stages>
+    <stages Inherit="False">
       <li>
         <defaultDuty>Spectate</defaultDuty>
         <showProgressBar>false</showProgressBar>
@@ -98,45 +81,12 @@
     </stages>
   </RitualBehaviorDef>
 
-  <RitualOutcomeEffectDef>
+  <RitualOutcomeEffectDef ParentName="VV_EverflowerRitualOutcomeBase">
     <defName>VV_Defairyfication</defName>
     <description>The better a ritual's result, the shorter the cooldown on the next everflower ritual.
 \nAll everflower rituals share a cooldown.</description>
     <workerClass>VVRace.RitualOutcomeEffectWorker_Defairyfication</workerClass>
-    <allowAttachableOutcome>false</allowAttachableOutcome>
-    <givesDevelopmentPoints>false</givesDevelopmentPoints>
-    <allowOutcomeWithNoAttendance>true</allowOutcomeWithNoAttendance>
     <effecter>VV_Defairyfication_Complete</effecter>
-    <maxQuality>10</maxQuality>
-    <comps>
-      <li Class="RitualOutcomeComp_PawnStatScaled">
-        <label>{PAWN_labelShort}'s psychic sensitivity</label>
-        <labelAbstract>resonator's psychic sensitivity</labelAbstract>
-        <roleId>resonator</roleId>
-        <statDef>PsychicSensitivity</statDef>
-        <curve>
-          <points>
-            <li>(0.5, 0.0)</li>
-            <li>(1.5, 1.0)</li>
-            <li>(2.5, 1.5)</li>
-            <li>(4.0, 2.0)</li>
-            <li>(6.0, 2.5)</li>
-            <li>(8.5, 3.0)</li>
-          </points>
-        </curve>
-      </li>
-      <li Class="RitualOutcomeComp_ParticipantCount">
-        <label>participant count</label>
-        <curve>
-          <points>
-            <li>(0,  0.0)</li>
-            <li>(4,  0.5)</li>
-            <li>(10, 1.0)</li>
-            <li>(20, 2.0)</li>
-          </points>
-        </curve>
-      </li>
-    </comps>
   </RitualOutcomeEffectDef>
 
   <RitualObligationTargetFilterDef Class="VVRace.RitualObligationTargetFilterDef_EverflowerRitual">

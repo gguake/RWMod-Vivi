@@ -2,116 +2,39 @@
 <Defs>
 
   <!-- 영원꽃 만개 의식 -->
-  <PreceptDef>
+  <PreceptDef ParentName="VV_EverflowerRitualPreceptBase">
     <defName>VV_GrandAttunement</defName>
     <label>everflower full bloom ritual</label>
     <description>Begins the final bloom of the everflower enshrined on the altar. The resonator becomes fully assimilated with the everflower for a while and cannot act.</description>
-    <issue>Ritual</issue>
-    <preceptClass>Precept_Ritual</preceptClass>
-    <visible>false</visible>
-    <classic>true</classic>
-    <countsTowardsPreceptLimit>false</countsTowardsPreceptLimit>
-    <selectionWeight>0</selectionWeight>
     <ritualPatternBase>VV_GrandAttunement</ritualPatternBase>
     <iconPath>UI/Commands/VV_GrandAttunement</iconPath>
-    <usesIdeoVisualEffects>false</usesIdeoVisualEffects>
-    <mergeRitualGizmosFromAllIdeos>true</mergeRitualGizmosFromAllIdeos>
-    <useRepeatPenalty>false</useRepeatPenalty>
-    <showRitualFloatMenuOption>false</showRitualFloatMenuOption>
     <displayOrderInImpact>1001</displayOrderInImpact>
     <displayOrderInIssue>1001</displayOrderInIssue>
   </PreceptDef>
 
   <!-- 영원꽃 만개 의식 구성 -->
-  <RitualPatternDef>
+  <RitualPatternDef ParentName="VV_EverflowerRitualPatternBase">
     <defName>VV_GrandAttunement</defName>
-    <ritualOnlyForIdeoMembers>false</ritualOnlyForIdeoMembers>
     <ritualBehavior>VV_GrandAttunement</ritualBehavior>
     <ritualOutcomeEffect>VV_GrandAttunement</ritualOutcomeEffect>
     <ritualObligationTargetFilter>VV_GrandAttunement</ritualObligationTargetFilter>
-    <playsIdeoMusic>false</playsIdeoMusic>
-    <alwaysStartAnytime>true</alwaysStartAnytime>
     <iconPathOverride>UI/Commands/VV_GrandAttunement</iconPathOverride>
-    <showIdeoIconsInDialog>false</showIdeoIconsInDialog>
   </RitualPatternDef>
 
   <!-- 영원꽃 만개 의식 진행 -->
-  <RitualBehaviorDef>
+  <RitualBehaviorDef ParentName="VV_EverflowerRitualBehaviorBase">
     <defName>VV_GrandAttunement</defName>
     <durationTicks>2500</durationTicks>
     <workerClass>VVRace.RitualBehaviorWorker_GrandAttunement</workerClass>
-    <displayCompletedMessage>true</displayCompletedMessage>
-    <roles>
-      <li Class="VVRace.RitualRoleEverflowerResonator">
-        <id>resonator</id>
-        <label>resonator</label>
-        <maxCount>1</maxCount>
-        <required>True</required>
-        <usedStat>PsychicSensitivity</usedStat>
-        <defaultForSelectedColonist>true</defaultForSelectedColonist>
-        <allowChild>false</allowChild>
-        <blocksSocialInteraction>true</blocksSocialInteraction>
-        <countsAsParticipant>false</countsAsParticipant>
-      </li>
-    </roles>
-    <stages>
-      <li>
-        <defaultDuty>Spectate</defaultDuty>
-        <showProgressBar>false</showProgressBar>
-        <endTriggers>
-          <li Class="StageEndTrigger_RolesArrived">
-            <roleIds>
-              <li>resonator</li>
-            </roleIds>
-          </li>
-        </endTriggers>
-        <roleBehaviors>
-          <li>
-            <roleId>resonator</roleId>
-            <dutyDef>ArriveToCell</dutyDef>
-            <customPositions>
-              <li Class="RitualPosition_PreferredAdjacentCellCardinal">
-                <faceThing>true</faceThing>
-              </li>
-            </customPositions>
-          </li>
-        </roleBehaviors>
-      </li>
-      <li>
-        <defaultDuty>SpectateCircle</defaultDuty>
-        <spectateDistanceOverride>4~6</spectateDistanceOverride>
-        <visualEffectDef>VV_EverflowerLink</visualEffectDef>
-        <endTriggers>
-          <li Class="StageEndTrigger_DurationPercentage">
-            <percentage>1</percentage>
-          </li>
-        </endTriggers>
-        <roleBehaviors>
-          <li>
-            <roleId>resonator</roleId>
-            <dutyDef>Idle</dutyDef>
-            <customPositions>
-              <li Class="RitualPosition_PreferredAdjacentCellCardinal">
-                <faceThing>true</faceThing>
-              </li>
-            </customPositions>
-          </li>
-        </roleBehaviors>
-      </li>
-    </stages>
   </RitualBehaviorDef>
 
   <!-- 영원꽃 만개 의식 결과 -->
-  <RitualOutcomeEffectDef>
+  <RitualOutcomeEffectDef ParentName="VV_EverflowerRitualOutcomeBase">
     <defName>VV_GrandAttunement</defName>
     <description>The better the ritual quality, the shorter the condensation period. Everflower rituals cannot be performed during mana condensation.\n\nAll everflower rituals share a cooldown.</description>
     <workerClass>VVRace.RitualOutcomeEffectWorker_GrandAttunement</workerClass>
-    <allowAttachableOutcome>false</allowAttachableOutcome>
-    <givesDevelopmentPoints>false</givesDevelopmentPoints>
-    <allowOutcomeWithNoAttendance>true</allowOutcomeWithNoAttendance>
     <effecter>VV_Effecter_GrandAttunementComplete</effecter>
-    <maxQuality>10</maxQuality>
-    <comps>
+    <comps Inherit="False">
       <li Class="RitualOutcomeComp_PawnStatScaled">
         <label>{PAWN_labelShort}'s psychic sensitivity</label>
         <labelAbstract>resonator's psychic sensitivity</labelAbstract>

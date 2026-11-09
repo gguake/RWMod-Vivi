@@ -201,32 +201,31 @@
     </children>
   </EffecterDef>
 
-  <!-- 5단계 영원꽃 맥동 발광 -->
-  <ThingDef ParentName="VV_MoteEverflowerGrowthGlow">
-    <defName>VV_Mote_AltarEverflowerPulse_5_Level</defName>
+  <!-- 영원꽃 맥동 발광 공통: 느린 맥동 시간·옅은 발광 색 -->
+  <ThingDef ParentName="VV_MoteEverflowerGrowthGlow" Name="VV_MoteAltarEverflowerPulseBase" Abstract="True">
     <mote>
       <fadeInTime>0.9</fadeInTime>
       <solidTime>0.3</solidTime>
       <fadeOutTime>1.6</fadeOutTime>
     </mote>
     <graphicData>
-      <texPath>Things/Plants/VV_Everflower/VV_EverflowerAltarFlower_e</texPath>
-      <drawSize>(0.58, 1)</drawSize>
       <color>(1, 0.96, 0.78, 0.4)</color>
     </graphicData>
   </ThingDef>
+  <!-- 5단계 영원꽃 맥동 발광 -->
+  <ThingDef ParentName="VV_MoteAltarEverflowerPulseBase">
+    <defName>VV_Mote_AltarEverflowerPulse_5_Level</defName>
+    <graphicData>
+      <texPath>Things/Plants/VV_Everflower/VV_EverflowerAltarFlower_e</texPath>
+      <drawSize>(0.58, 1)</drawSize>
+    </graphicData>
+  </ThingDef>
   <!-- 6단계 영원꽃 맥동 발광 -->
-  <ThingDef ParentName="VV_MoteEverflowerGrowthGlow">
+  <ThingDef ParentName="VV_MoteAltarEverflowerPulseBase">
     <defName>VV_Mote_AltarEverflowerPulse_6_Level</defName>
-    <mote>
-      <fadeInTime>0.9</fadeInTime>
-      <solidTime>0.3</solidTime>
-      <fadeOutTime>1.6</fadeOutTime>
-    </mote>
     <graphicData>
       <texPath>Things/Plants/VV_Everflower/VV_EverflowerAltarFlower_f</texPath>
       <drawSize>(0.6104, 1)</drawSize>
-      <color>(1, 0.96, 0.78, 0.4)</color>
     </graphicData>
   </ThingDef>
 

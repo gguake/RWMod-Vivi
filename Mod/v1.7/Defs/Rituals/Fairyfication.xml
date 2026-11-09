@@ -1,44 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <PreceptDef>
+  <PreceptDef ParentName="VV_EverflowerRitualPreceptBase">
     <defName>VV_Fairyfication</defName>
     <label>fairyfication ritual</label>
     <description>Transforms a vivi into its fairy form and binds it to the resonator. The fairyfication ritual can only be performed on adult common vivis hatched from eggs laid by the resonator.
 \nA fairy vivi does not age, has no needs, and cannot be harmed, but vanishes if the bound royal vivi dies.</description>
-    <issue>Ritual</issue>
-    <preceptClass>Precept_Ritual</preceptClass>
-    <visible>false</visible>
-    <classic>true</classic>
-    <countsTowardsPreceptLimit>false</countsTowardsPreceptLimit>
-    <selectionWeight>0</selectionWeight>
     <ritualPatternBase>VV_Fairyfication</ritualPatternBase>
     <iconPath>UI/Commands/VV_LinkConnect</iconPath>
-    <usesIdeoVisualEffects>false</usesIdeoVisualEffects>
-    <mergeRitualGizmosFromAllIdeos>true</mergeRitualGizmosFromAllIdeos>
-    <useRepeatPenalty>false</useRepeatPenalty>
-    <showRitualFloatMenuOption>false</showRitualFloatMenuOption>
     <displayOrderInImpact>998</displayOrderInImpact>
     <displayOrderInIssue>998</displayOrderInIssue>
   </PreceptDef>
 
-  <RitualPatternDef>
+  <RitualPatternDef ParentName="VV_EverflowerRitualPatternBase">
     <defName>VV_Fairyfication</defName>
-    <ritualOnlyForIdeoMembers>false</ritualOnlyForIdeoMembers>
     <ritualBehavior>VV_Fairyfication</ritualBehavior>
     <ritualOutcomeEffect>VV_Fairyfication</ritualOutcomeEffect>
     <ritualObligationTargetFilter>VV_Fairyfication</ritualObligationTargetFilter>
-    <playsIdeoMusic>false</playsIdeoMusic>
-    <alwaysStartAnytime>true</alwaysStartAnytime>
     <iconPathOverride>UI/Commands/VV_LinkConnect</iconPathOverride>
-    <showIdeoIconsInDialog>false</showIdeoIconsInDialog>
   </RitualPatternDef>
 
-  <RitualBehaviorDef>
+  <RitualBehaviorDef ParentName="VV_EverflowerRitualBehaviorBase">
     <defName>VV_Fairyfication</defName>
-    <durationTicks>1500</durationTicks>
     <workerClass>VVRace.RitualBehaviorWorker_Fairyfication</workerClass>
-    <displayCompletedMessage>true</displayCompletedMessage>
-    <roles>
+    <roles Inherit="False">
       <li Class="VVRace.RitualRoleEverflowerResonator">
         <id>resonator</id>
         <label>resonator</label>
@@ -59,7 +43,7 @@
         <countsAsParticipant>false</countsAsParticipant>
       </li>
     </roles>
-    <stages>
+    <stages Inherit="False">
       <li Class="RitualStage_InteractWithRole">
         <defaultDuty>Spectate</defaultDuty>
         <showProgressBar>false</showProgressBar>
@@ -146,17 +130,13 @@
     </stages>
   </RitualBehaviorDef>
 
-  <RitualOutcomeEffectDef>
+  <RitualOutcomeEffectDef ParentName="VV_EverflowerRitualOutcomeBase">
     <defName>VV_Fairyfication</defName>
     <description>The better a ritual's result, the shorter the cooldown on the next everflower ritual.
 \nAll everflower rituals share a cooldown.</description>
     <workerClass>VVRace.RitualOutcomeEffectWorker_Fairyfication</workerClass>
-    <allowAttachableOutcome>false</allowAttachableOutcome>
-    <givesDevelopmentPoints>false</givesDevelopmentPoints>
-    <allowOutcomeWithNoAttendance>true</allowOutcomeWithNoAttendance>
     <effecter>VV_Fairyfication_Complete</effecter>
-    <maxQuality>10</maxQuality>
-    <comps>
+    <comps Inherit="False">
       <li Class="RitualOutcomeComp_PawnStatScaled">
         <label>{PAWN_labelShort}'s psychic sensitivity</label>
         <labelAbstract>resonator's psychic sensitivity</labelAbstract>
