@@ -102,18 +102,19 @@ namespace VVRace
 
         // 꿀 꽃 판정을 정의별로 기억한다(추상 스탯 계산이 1~2 µs라 꽃 세기·씨 뿌리기 칸마다 되풀이됐다). 추상 스탯은 정의와 시나리오 스탯 배율
         // (바닐라 StatWorker.FinalizeValue의 Find.Scenario.GetStatFactor)로만 정해지고 시나리오는 게임 안에서 바뀌지 않으므로, 게임이 바뀌면 비운다.
+        // 게임은 약참조로 기억해 끝난 게임 객체를 붙잡지 않는다.
         private static readonly Dictionary<ThingDef, bool> _honeyFlowerDefs = new Dictionary<ThingDef, bool>();
-        private static Game _honeyFlowerDefsGame;
+        private static readonly System.WeakReference<Game> _honeyFlowerDefsGame = new System.WeakReference<Game>(null);
 
         public static bool IsHoneyFlowerDef(ThingDef def)
         {
             if (def == null || def.plant == null || def.plant.IsTree) { return false; }
 
             var game = Current.Game;
-            if (_honeyFlowerDefsGame != game)
+            if (!_honeyFlowerDefsGame.TryGetTarget(out var memoGame) || memoGame != game)
             {
                 _honeyFlowerDefs.Clear();
-                _honeyFlowerDefsGame = game;
+                _honeyFlowerDefsGame.SetTarget(game);
             }
 
             if (!_honeyFlowerDefs.TryGetValue(def, out var honeyFlower))
