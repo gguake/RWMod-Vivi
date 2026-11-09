@@ -45,11 +45,6 @@ namespace VVRace
 
         public void ExposeData()
         {
-            if (Scribe.mode == LoadSaveMode.Saving && (_rangedAttacker == null || _rangedAttacker.Destroyed || !_rangedAttacker.Spawned))
-            {
-                _rangedAttacker = null;
-            }
-
             Scribe_References.Look(ref _rangedAttacker, "rangedAttacker");
             Scribe_Values.Look(ref _rangedAttackerUntilTick, "rangedAttackerUntilTick", -1);
         }
