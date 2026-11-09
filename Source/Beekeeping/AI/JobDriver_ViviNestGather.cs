@@ -73,6 +73,9 @@ namespace VVRace
                 efficiency *= target.GetStatValue(recipe.targetYieldStat);
             }
 
+            // 기존 채집 잡과 같은 순서·굴림: 산출마다 레시피 완료 알림 몫(꿀이면 꿀 필요 먹기 → 꽃가루 털기, GatherWorker_Honey.Notify_RecipeComplete)을 한 뒤
+            // 개수를 소수부 확률로 굴린다(GatherUtility.RollCount, 소수부가 0이면 난수를 쓰지 않는다). 그래서 난수 소비 순서와 산출물을 놓는 순서
+            // (털어 낸 꽃가루가 꿀보다 먼저)도 기존 채집과 같다. 늘 난수를 쓰는 GenMath.RoundRandom으로 굴리고 꽃가루를 나중에 털던 것을 맞췄다(기대 산출량은 같다).
             var honey = recipe.gatherWorker is GatherWorker_Honey;
             _tmpProducts.Clear();
             foreach (var product in recipe.products)
@@ -81,12 +84,9 @@ namespace VVRace
                 if (honey)
                 {
                     count = GatherWorker_Honey.EatIfHoneyNeedy(pawn, product.thingDef, count);
+                    ShakeOffCarriedPollen();
                 }
-                BeekeepingUtility.MakeStacks(product.thingDef, GenMath.RoundRandom(count), _tmpProducts);
-            }
-            if (honey)
-            {
-                ShakeOffCarriedPollen();
+                BeekeepingUtility.MakeStacks(product.thingDef, GatherUtility.RollCount(count), _tmpProducts);
             }
 
             for (int i = 0; i < _tmpProducts.Count; ++i)
@@ -97,7 +97,7 @@ namespace VVRace
         }
 
         // 기존 꿀 채집은 묻힌 꽃가루 오물을 채집 장소에서 꽃가루로 털어 냈다(GatherWorker_Honey.Notify_RecipeComplete → Filth_Pollen.GatherPollen:
-        // 오물 정의의 양 × 청소 속도, 오물 하나당 한 겹). 채집 장소가 없으므로 그 자리에서 털어 낸다.
+        // 오물 정의의 양 × 청소 속도를 소수부 확률로 굴림, 오물 하나당 한 겹). 채집 장소가 없으므로 그 자리에서 털어 낸다.
         private void ShakeOffCarriedPollen()
         {
             var filth = pawn.filth;
@@ -116,7 +116,7 @@ namespace VVRace
                 var extension = pollen.def.GetModExtension<GatherableFilthExtension>();
                 if (extension != null)
                 {
-                    BeekeepingUtility.MakeStacks(extension.thingDef, GenMath.RoundRandom(extension.YieldFor(pawn)), _tmpProducts);
+                    BeekeepingUtility.MakeStacks(extension.thingDef, GatherUtility.RollCount(extension.YieldFor(pawn)), _tmpProducts);
                 }
                 Pawn_FilthTracker_ReversePatch.ThinCarriedFilth(filth, pollen);
             }
