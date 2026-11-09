@@ -27,6 +27,11 @@ namespace VVRace
                 TargetingParameters.ForCell(),
                 action: target =>
                 {
+                    // 칸 고르기는 꽃을 시전자로 두지 않아 꽃이 사라져도 바닐라가 멈추지 않으므로, 꽃이 파괴·포장되거나 다른 맵으로 옮겨졌으면
+                    // 바닐라의 시전자 소실 처리처럼 메시지 없이 끝낸다. action이 정상 반환하면 Targeter가 칸 고르기를 끝낸다.
+                    var flower = targetInfo.Thing;
+                    if ((flower != null && (flower.Destroyed || !flower.Spawned)) || targetInfo.Map != map) { return; }
+
                     // 검증에 실패한 클릭은 action이 호출되지 않으므로 거부 메시지가 필요한 검사는 여기서 한다.
                     if (!FlowerLandUtility.ConvertibleCells(map, target.Cell, Radius).Any())
                     {
