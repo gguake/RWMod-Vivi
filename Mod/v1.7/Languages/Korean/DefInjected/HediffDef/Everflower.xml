@@ -23,13 +23,4 @@
 
 <VV_FairyficationSickness.label>요정화 후유증</VV_FairyficationSickness.label>
 <VV_FairyficationSickness.description>요정화가 해제되어 원래의 신체로 돌아오면서 발생하는 후유증입니다. 후유증을 겪는중에는 다시 요정화를 할 수 없습니다.</VV_FairyficationSickness.description>
-
-<VV_EverflowerBlessing.label>영원꽃의 축복</VV_EverflowerBlessing.label>
-<VV_EverflowerBlessing.description>만개한 영원꽃의 축복으로 성체의 노화가 크게 느려집니다. 영원꽃이 있는 지역을 떠나면 약 하루 뒤 사라집니다.</VV_EverflowerBlessing.description>
-
-<VV_EverflowerFullAssimilation.label>영원꽃 완전 동화</VV_EverflowerFullAssimilation.label>
-<VV_EverflowerFullAssimilation.description>영원꽃과 하나가 되어 개화를 이끌고 있습니다. 동화 중에는 욕구와 노화가 멈추고 피해를 받지 않지만, 움직이거나 지시를 따를 수 없습니다.</VV_EverflowerFullAssimilation.description>
-
-<VV_EverflowerQueen.label>영원의 여제</VV_EverflowerQueen.label>
-<VV_EverflowerQueen.description>만개한 영원꽃의 여왕입니다.\n\n영원꽃이 남아 있는 한 죽어도 하루 뒤 상처를 모두 회복하고 영원꽃에서 다시 돌아옵니다.</VV_EverflowerQueen.description>
 </Defs>
