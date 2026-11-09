@@ -85,9 +85,12 @@ namespace VVRace
             for (int i = 0; i < repairable.Count; ++i)
             {
                 // 수리 워크기버의 JobOnThing은 조건을 보지 않으므로 HasJobOnThing부터 확인한다.
-                if (repair.HasJobOnThing(pawn, repairable[i]))
+                // HasJobOnThing은 도달을 보지 않는다(바닐라는 JobGiver_Work 스캐너가 워크기버의 경로 끝·위험도로 따로 본다). 같은 판정을 하지 않으면
+                // 플레이어 벽에 갇힌 둥지 건물을 골라 경로 실패 → 대기만 되풀이하며 아래 일이 멈춘다.
+                var thing = repairable[i];
+                if (repair.HasJobOnThing(pawn, thing) && pawn.CanReach(thing, repair.PathEndMode, repair.MaxPathDanger(pawn)))
                 {
-                    return repair.JobOnThing(pawn, repairable[i]);
+                    return repair.JobOnThing(pawn, thing);
                 }
             }
             return null;
