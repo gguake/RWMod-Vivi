@@ -152,15 +152,11 @@ namespace VVRace
             EndAura();
 
             // 죽은 폰은 헤디프 틱이 없어 사망 알림에서 정리한다.
-            // Pawn.Kill이 정방향으로 순회하므로 다음 헤디프의 알림이 누락되지 않게 제거를 미룬다.
-            var deadPawn = pawn;
-            LongEventHandler.ExecuteWhenFinished(() =>
+            // 1.7의 HediffSet.Notify_PawnDied는 역순으로 순회하므로 즉시 제거해도 다른 헤디프의 알림이 누락되지 않는다.
+            if (pawn?.health != null && pawn.health.hediffSet.hediffs.Contains(this))
             {
-                if (deadPawn?.health != null && deadPawn.health.hediffSet.hediffs.Contains(this))
-                {
-                    deadPawn.health.RemoveHediff(this);
-                }
-            });
+                pawn.health.RemoveHediff(this);
+            }
         }
 
         public override IEnumerable<Gizmo> GetGizmos()
