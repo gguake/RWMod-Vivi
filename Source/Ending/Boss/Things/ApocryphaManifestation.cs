@@ -64,7 +64,6 @@ namespace VVRace
         private Sustainer _summonSustainer;
 
         private int Age => _startTick < 0 ? 0 : Mathf.Max(0, Find.TickManager.TicksGame - _startTick);
-        private float AgeSecs => Age / 60f;
         private int LandTick => WaveTick + _pushTicks;
 
         public int SpawnTick => _startTick + LandTick;

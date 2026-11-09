@@ -12,7 +12,7 @@ namespace VVRace
 
         private static readonly Color AimBeamColor = new Color(1f, 0.86f, 0.45f, 0.85f);
 
-        private CompApocrypha _comp;
+        private readonly CompApocrypha _comp;
 
         private List<ApocryphaShellAim> _aims = new List<ApocryphaShellAim>();
         private int _readyTick;

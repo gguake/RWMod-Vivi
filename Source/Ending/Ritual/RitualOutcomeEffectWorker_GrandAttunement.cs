@@ -6,7 +6,7 @@ namespace VVRace
 {
     public class RitualOutcomeEffectWorker_GrandAttunement : RitualOutcomeEffectWorker_FromQuality
     {
-        private const int GrandAttunementLevel = 5;
+        public const int GrandAttunementLevel = 5;
         private const float CameraShakeMagnitude = 1.5f;
 
         public RitualOutcomeEffectWorker_GrandAttunement() { }

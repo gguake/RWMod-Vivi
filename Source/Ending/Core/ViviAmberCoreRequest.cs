@@ -6,7 +6,7 @@ namespace VVRace
     // 밀서를 재생성해도 의뢰가 유지되도록 마지막 코어 퀘스트를 밀서 부품 대신 여기에 보관한다.
     public class ViviAmberCoreRequest : IExposable
     {
-        private ViviEndingQuest _ending;
+        private readonly ViviEndingQuest _ending;
 
         private Quest _quest;
 

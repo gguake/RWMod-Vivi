@@ -19,7 +19,7 @@ namespace VVRace
         private const int BreachDeadlineTicks = 5000;
         private const float BreachStandRadius = 2f;
 
-        private CompApocrypha _comp;
+        private readonly CompApocrypha _comp;
 
         private List<ApocryphaNeedle> _needles = new List<ApocryphaNeedle>();
         private int _readyTick;

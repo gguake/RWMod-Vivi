@@ -14,7 +14,7 @@ namespace VVRace
 
         private static readonly List<Thing> _tmpTargets = new List<Thing>();
 
-        private CompApocrypha _comp;
+        private readonly CompApocrypha _comp;
 
         private Thing _rangedAttacker;
         private int _rangedAttackerUntilTick = -1;

@@ -11,7 +11,7 @@ namespace VVRace
         private const float BreathAmplitude = 0.025f;
         private const float BreathSpeed = 0.05f;
 
-        protected int spawnTick = -1;
+        private int _spawnTick = -1;
 
         // 씨앗에서 피어난 꽃은 씨앗을 따라 이어져 있던 연결선을 그대로 이어받는다(-1이면 꽃 자신의 무늬로 새로 나타난다).
         private int _inheritedLinkSeed = -1;
@@ -24,7 +24,7 @@ namespace VVRace
 
         public int LinkSeed => _inheritedLinkSeed >= 0 ? _inheritedLinkSeed : thingIDNumber;
 
-        public float LinkAlpha => spawnTick < 0 || _inheritedLinkSeed >= 0 ? 1f : Mathf.Clamp01((Find.TickManager.TicksGame - spawnTick) / LinkFadeInTicks);
+        public float LinkAlpha => _spawnTick < 0 || _inheritedLinkSeed >= 0 ? 1f : Mathf.Clamp01((Find.TickManager.TicksGame - _spawnTick) / LinkFadeInTicks);
 
         public void InheritLink(int linkSeed)
         {
@@ -37,7 +37,7 @@ namespace VVRace
 
             if (!respawningAfterLoad)
             {
-                spawnTick = Find.TickManager.TicksGame;
+                _spawnTick = Find.TickManager.TicksGame;
                 ApocryphaGimmicks.PlayEffect(Extension?.bloomEffecter, Position, map);
             }
         }
@@ -67,7 +67,7 @@ namespace VVRace
         protected override void DrawAt(Vector3 drawLoc, bool flip = false)
         {
             var ticksGame = Find.TickManager.TicksGame;
-            var age = spawnTick < 0 ? BloomInTicks : ticksGame - spawnTick;
+            var age = _spawnTick < 0 ? BloomInTicks : ticksGame - _spawnTick;
 
             var bloom = 1f;
             if (age < BloomInTicks)
@@ -89,7 +89,7 @@ namespace VVRace
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_Values.Look(ref spawnTick, "spawnTick", -1);
+            Scribe_Values.Look(ref _spawnTick, "spawnTick", -1);
             Scribe_Values.Look(ref _inheritedLinkSeed, "inheritedLinkSeed", -1);
         }
     }

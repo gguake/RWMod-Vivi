@@ -38,7 +38,7 @@ namespace VVRace
         private const float RebirthCellSearchRadius = 6f;
         private const int RetryTicks = 2500;
 
-        private ArcanePlant_Everflower _everflower;
+        private readonly ArcanePlant_Everflower _everflower;
 
         // 꽃이 파괴될 때 품은 폰의 시체가 같은 용기에 들어와야 직접 없앨 수 있으므로 Pawn 전용으로 두지 않는다.
         private ThingOwner<Thing> _container;

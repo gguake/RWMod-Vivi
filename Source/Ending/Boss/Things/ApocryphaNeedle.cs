@@ -124,7 +124,6 @@ namespace VVRace
         public bool IsFlying => _state == NeedleState.Firing || _state == NeedleState.Lodged || _state == NeedleState.Returning;
         public bool IsStuck => _state == NeedleState.Stuck;
         public bool IsPlanted => _state == NeedleState.Planted;
-        public bool IsScattering => _state == NeedleState.Scattering;
 
         public bool CanActivate => Spawned && IsPlanted && IsUnbound;
 

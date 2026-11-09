@@ -13,7 +13,7 @@ namespace VVRace
 
         private static readonly List<Thing> _tmpCellThings = new List<Thing>();
 
-        private CompApocrypha _comp;
+        private readonly CompApocrypha _comp;
 
         private int _readyTick;
         private IntVec3 _cell = IntVec3.Invalid;

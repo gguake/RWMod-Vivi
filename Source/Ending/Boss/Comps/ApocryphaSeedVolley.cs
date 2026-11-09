@@ -7,14 +7,13 @@ namespace VVRace
     {
         private const int RetryTicks = 600;
 
-        private CompApocrypha _comp;
+        private readonly CompApocrypha _comp;
 
         private int _nextTick = -1;
         private int _volleysLaunched;
 
         private CompProperties_Apocrypha Props => _comp.Props;
 
-        public int VolleysLaunched => _volleysLaunched;
         public int DoomSeedCount => Mathf.Min(Props.doomSeedVolleyMax, Props.doomSeedVolleyStart + _volleysLaunched / Mathf.Max(1, Props.doomSeedVolleyGrowthEvery));
         public bool FairySeedDue => Props.fairySeedEveryVolleys > 0 && (_volleysLaunched + 1) % Props.fairySeedEveryVolleys == 0;
 

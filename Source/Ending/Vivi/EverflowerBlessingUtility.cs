@@ -7,9 +7,6 @@ namespace VVRace
     {
         public const int RefreshIntervalTicks = 2000;
 
-        private const int ReverberationAttunementLevel = 5;
-        private const int BlessingAttunementLevel = 6;
-
         public static void RefreshFor(Pawn pawn)
         {
             if (pawn == null || !pawn.Spawned || pawn.Dead || pawn.health == null || !pawn.IsVivi()) { return; }
@@ -22,7 +19,7 @@ namespace VVRace
 
             var compEverflower = anchor.EverflowerComp;
             var level = compEverflower.AttunementLevel;
-            if (level < ReverberationAttunementLevel) { return; }
+            if (level < RitualOutcomeEffectWorker_GrandAttunement.GrandAttunementLevel) { return; }
 
             if (!pawn.IsRoyalVivi() && pawn.ageTracker.Adult)
             {
@@ -30,7 +27,7 @@ namespace VVRace
             }
 
             // 아이 비비는 성장이 멈추지 않도록 노화 감속 축복을 주지 않는다.
-            if (quest.IsCompleted && level >= BlessingAttunementLevel && pawn.Faction != null && pawn.Faction.IsPlayer && pawn.ageTracker.Adult)
+            if (quest.IsCompleted && level >= CompEverflower.MaxAttunementLevel && pawn.Faction != null && pawn.Faction.IsPlayer && pawn.ageTracker.Adult)
             {
                 GiveOrRefreshBlessing(pawn);
             }

@@ -209,8 +209,6 @@ namespace VVRace
         public float ManaShield => _manaShield;
         public float MaxManaShield => Props.manaShieldMax * HitPointsDifficultyFactor;
 
-        public float ThreatScale => _threatScale;
-        public float ThreatPoints => _threatPoints;
         public float HitPointsDifficultyFactor => Mathf.Max(0.1f, Props.hitPointsFactorByThreatScale?.Evaluate(_threatScale) ?? 1f);
         public float DoomBloomTimeFactor => Mathf.Max(0.1f, Props.doomBloomTimeFactorByThreatScale?.Evaluate(_threatScale) ?? 1f);
 

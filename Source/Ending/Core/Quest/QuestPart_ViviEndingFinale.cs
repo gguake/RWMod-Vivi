@@ -8,7 +8,6 @@ namespace VVRace
 {
     public class QuestPart_ViviEndingFinale : QuestPartActivable
     {
-        private const int FinalAttunementLevel = 6;
         private const int CreditsDelayTicks = 360;
         private const int GoldenRingIntervalTicks = 20;
         private const int GoldenRingCount = 3;
@@ -65,7 +64,7 @@ namespace VVRace
 
             if (anchor != null && !anchor.Destroyed)
             {
-                ViviEndingUtility.RunStep("finale: final bloom", () => anchor.EverflowerComp?.SetAttunementLevel(FinalAttunementLevel));
+                ViviEndingUtility.RunStep("finale: final bloom", () => anchor.EverflowerComp?.SetAttunementLevel(CompEverflower.MaxAttunementLevel));
             }
 
             if (map != null)

@@ -13,7 +13,7 @@ namespace VVRace
 
         private static readonly Color BeamColor = new Color(1f, 0.32f, 0.82f, 1f);
 
-        private CompApocrypha _comp;
+        private readonly CompApocrypha _comp;
 
         private int _ticks;
         private bool _pendingSteal;
