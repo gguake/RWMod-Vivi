@@ -21,6 +21,16 @@
         <weightFactor>1</weightFactor>
       </li>
       <li>
+        <tag>Tribal</tag>
+        <baseWeight>1</baseWeight>
+        <weightFactor>1</weightFactor>
+      </li>
+      <li>
+        <tag>Rural</tag>
+        <baseWeight>1</baseWeight>
+        <weightFactor>1</weightFactor>
+      </li>
+      <li>
         <tag>NoBeard</tag>
         <baseWeight>10</baseWeight>
         <weightFactor>1</weightFactor>
