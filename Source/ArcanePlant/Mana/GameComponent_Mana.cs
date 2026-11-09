@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using RimWorld;
+using System.Collections.Generic;
 using System.Linq;
 using Verse;
 
@@ -96,6 +97,25 @@ namespace VVRace
 
         public ViviEndingQuest EndingQuest => _endingQuest;
         private ViviEndingQuest _endingQuest = new ViviEndingQuest();
+
+        // 꿀 꽃 판정용 정의별 메모(추상 꿀 채집량 > 0). 추상 스탯은 정의와 이 게임의 시나리오 스탯 배율로만 정해지므로
+        // 게임 컴포넌트에 두면 게임이 바뀔 때 함께 새로 만들어진다. 저장하지 않는다.
+        private readonly Dictionary<ThingDef, bool> _honeyYieldDefs = new Dictionary<ThingDef, bool>();
+
+        public static bool HasHoneyYield(ThingDef def)
+        {
+            var component = Of(Current.Game);
+            if (component == null) { return ComputeHoneyYield(def); }
+
+            if (!component._honeyYieldDefs.TryGetValue(def, out var result))
+            {
+                result = ComputeHoneyYield(def);
+                component._honeyYieldDefs[def] = result;
+            }
+            return result;
+        }
+
+        private static bool ComputeHoneyYield(ThingDef def) => def.GetStatValueAbstract(VVStatDefOf.VV_PlantHoneyGatherYield) > 0f;
 
         // 스토리텔러·보스전에서 자주 찾으므로 GetComponent처럼 목록을 앞에서부터 형식 검사하지 않고 마지막으로 찾은 위치를 먼저 본다.
         // 이전 게임을 붙잡지 않도록 컴포넌트가 아니라 위치만 기억하고, 그 위치에 없으면 다시 찾는다.

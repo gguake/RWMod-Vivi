@@ -117,34 +117,13 @@ namespace VVRace
             new CurvePoint(MaxRoomCells, 0.5f),
         };
 
-        // 꿀 꽃 정의 집합. 추상 스탯은 시나리오 스탯 배율에 따라 게임마다 다를 수 있으므로 게임이 바뀌면 다시 만든다
-        // (ViviNestGarden.IsHoneyFlowerDef와 같은 수명, 게임은 약참조로 기억해 끝난 게임 객체를 붙잡지 않는다).
-        private static readonly HashSet<ThingDef> _honeyFlowerDefs = new HashSet<ThingDef>();
-        private static readonly System.WeakReference<Game> _honeyFlowerDefsGame = new System.WeakReference<Game>(null);
-        private static HashSet<ThingDef> HoneyFlowerDefs
+        // 꿀 꽃: 꿀 채집량 스탯이 정의된 식물·마법 식물 중 추상 채집량 > 0(게임 컴포넌트의 정의별 메모).
+        private static bool IsHoneyFlowerDef(ThingDef def)
         {
-            get
-            {
-                var game = Current.Game;
-                if (!_honeyFlowerDefsGame.TryGetTarget(out var memoGame) || memoGame != game)
-                {
-                    _honeyFlowerDefs.Clear();
-                    _honeyFlowerDefsGame.SetTarget(game);
-                    var stat = VVStatDefOf.VV_PlantHoneyGatherYield;
-                    foreach (var def in DefDatabase<ThingDef>.AllDefsListForReading)
-                    {
-                        if (def.StatBaseDefined(stat) && def.GetStatValueAbstract(stat) > 0f)
-                        {
-                            _honeyFlowerDefs.Add(def);
-                        }
-                    }
-                }
-
-                return _honeyFlowerDefs;
-            }
+            return def.StatBaseDefined(VVStatDefOf.VV_PlantHoneyGatherYield) && GameComponent_Mana.HasHoneyYield(def);
         }
 
-        public static bool IsHoneyFlower(Thing thing) => thing != null && HoneyFlowerDefs.Contains(thing.def) && (thing is Plant || thing is ArcanePlant);
+        public static bool IsHoneyFlower(Thing thing) => thing != null && (thing is Plant || thing is ArcanePlant) && IsHoneyFlowerDef(thing.def);
 
         private static readonly HashSet<Room> _tmpRooms = new HashSet<Room>();
         private static readonly HashSet<Room> _tmpJudgedRooms = new HashSet<Room>();
