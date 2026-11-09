@@ -45,6 +45,7 @@ namespace VVRace
         public static WorkGiverDef ConstructDeliverResourcesToFrames;
         public static WorkGiverDef ConstructDeliverResourcesToBlueprints;
         public static WorkGiverDef Repair;
+        public static WorkGiverDef DoctorFeedHumanlikes;
     }
 
     [DefOf]

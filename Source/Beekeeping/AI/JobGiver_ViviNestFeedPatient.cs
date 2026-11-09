@@ -12,19 +12,8 @@ namespace VVRace
     // 장기 계측(한랭 60일): 저체온으로 쓰러진 아이가 둥지 방으로 옮겨진 뒤에도 먹여 주는 구성원이 없어 쓰러진 채 굶어 죽었다.
     public class JobGiver_ViviNestFeedPatient : ThinkNode_JobGiver
     {
-        private static WorkGiver_FeedPatient _worker;
-
-        private static WorkGiver_FeedPatient Worker
-        {
-            get
-            {
-                if (_worker == null)
-                {
-                    _worker = DefDatabase<WorkGiverDef>.GetNamedSilentFail("DoctorFeedHumanlikes")?.Worker as WorkGiver_FeedPatient;
-                }
-                return _worker;
-            }
-        }
+        // 바닐라 WorkGiverDef.Worker가 워커 인스턴스를 기억하므로 따로 담아 두지 않는다.
+        private static WorkGiver_FeedPatient Worker => VVWorkGiverDefOf.DoctorFeedHumanlikes?.Worker as WorkGiver_FeedPatient;
 
         protected override Job TryGiveJob(Pawn pawn)
         {
