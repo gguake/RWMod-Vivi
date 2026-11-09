@@ -204,7 +204,7 @@ namespace VVRace
                 }
                 catch (Exception ex)
                 {
-                    Log.ErrorOnce($"[ViViRace] everflower assimilation tick failed: {ex}", 0x5645_4E30);
+                    Log.ErrorOnce($"[ViViRace] everflower assimilation tick failed: {ex}", ViviEndingUtility.ErrorKeyAssimilationTick);
                 }
             }
 
@@ -214,7 +214,7 @@ namespace VVRace
             }
             catch (Exception ex)
             {
-                Log.ErrorOnce($"[ViViRace] altar everflower pulse failed: {ex}", 0x5645_4E20);
+                Log.ErrorOnce($"[ViViRace] altar everflower pulse failed: {ex}", ViviEndingUtility.ErrorKeyAltarPulse);
             }
 
             if (now % ScanIntervalTicks != 0) { return; }
@@ -233,7 +233,7 @@ namespace VVRace
             }
             catch (Exception ex)
             {
-                Log.ErrorOnce($"[ViViRace] ending quest tick failed at stage {Stage}: {ex}", 0x5645_4E00);
+                Log.ErrorOnce($"[ViViRace] ending quest tick failed at stage {Stage}: {ex}", ViviEndingUtility.ErrorKeyQuestTick);
             }
         }
 

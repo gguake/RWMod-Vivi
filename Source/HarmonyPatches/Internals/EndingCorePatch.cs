@@ -45,7 +45,7 @@ namespace VVRace
             }
             catch (Exception ex)
             {
-                Log.ErrorOnce($"[ViViRace] failed to make the amber core comms option: {ex}", 0x5645_4E30);
+                Log.ErrorOnce($"[ViViRace] failed to make the amber core comms option: {ex}", ViviEndingUtility.ErrorKeyAmberCommsOption);
                 return;
             }
 

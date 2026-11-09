@@ -14,6 +14,13 @@ namespace VVRace
     {
         private const int GoldenBloomFadeTicks = 30000;
 
+        // Log.ErrorOnce 키(엔딩). 같은 키를 두 곳에서 쓰면 먼저 찍힌 오류가 다른 오류를 묵살하므로 여기서만 정한다.
+        internal const int ErrorKeyQuestTick = 0x5645_4E00;
+        internal const int ErrorKeyQueuedThreats = 0x5645_4E10;
+        internal const int ErrorKeyAltarPulse = 0x5645_4E20;
+        internal const int ErrorKeyAssimilationTick = 0x5645_4E30;
+        internal const int ErrorKeyAmberCommsOption = 0x5645_4E40;
+
         private static readonly FieldInfo QueuedIncidentsField = AccessTools.Field(typeof(IncidentQueue), "queuedIncidents");
 
         public static ArcanePlant_Everflower FindEndingCandidate()
@@ -123,7 +130,7 @@ namespace VVRace
         {
             if (QueuedIncidentsField == null)
             {
-                Log.ErrorOnce("[ViViRace] cannot find IncidentQueue.queuedIncidents; queued threats are not purged during the ending calm.", 0x5645_4E10);
+                Log.ErrorOnce("[ViViRace] cannot find IncidentQueue.queuedIncidents; queued threats are not purged during the ending calm.", ErrorKeyQueuedThreats);
                 return 0;
             }
 
