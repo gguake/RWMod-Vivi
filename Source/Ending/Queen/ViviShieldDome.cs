@@ -4,15 +4,6 @@ using Verse;
 
 namespace VVRace
 {
-    public class ShieldDomeExtension : DefModExtension
-    {
-        public Color color = Color.white;
-        public float idleAlpha = 0.1f;
-        public float pulseAlpha = 0.05f;
-        public float pulseSpeed = 1.2f;
-        public float fadeSecs = 0.8f;
-    }
-
     // 바닐라 투사체 차단기는 부모의 세력으로 적대 판정을 하므로 플레이어 세력을 가질 수 있는 건물 범주로 만든다.
     [StaticConstructorOnStartup]
     public class ViviShieldDome : Building

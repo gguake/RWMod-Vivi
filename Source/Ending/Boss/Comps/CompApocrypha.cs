@@ -1134,35 +1134,86 @@ namespace VVRace
 
             if (!DebugSettings.godMode) { yield break; }
 
-            yield return DevCommand("DEV: Bond -25%", () => DebugReduceBond(0.25f));
-            yield return DevCommand("DEV: Force phase 2", DebugForcePhase2);
-            yield return DevCommand("DEV: Vitality -25%", () => DebugDamageVitality(0.25f));
-            yield return DevCommand("DEV: Start channel", _channel.DebugStart);
-            yield return DevCommand("DEV: Finish channel", _channel.DebugFinish);
-            yield return DevCommand("DEV: Stick a needle", _needleAttack.DebugStickNeedle);
-            yield return DevCommand("DEV: Shell ready now", () => _shell.SetReadyTick(0));
-            yield return DevCommand("DEV: Needle ready now", () => _needleAttack.SetReadyTick(0));
-            yield return DevCommand("DEV: Mana shield -25%", () => DebugDamageShield(0.25f));
-            yield return DevCommand("DEV: Doom seed now", () => _seeds.SetReadyTick(0));
-
-            yield return DevCommand("DEV: Fairy seed now", () => ApocryphaGimmicks.TryLaunchFairySeed(Pawn));
-
-            yield return DevCommand("DEV: Summon assault hornets", () => HornetManifestation.SummonAround(Pawn, InterferenceHornetCount(_releaseCount), HornetSummonRole.Assault));
-            yield return DevCommand("DEV: Breath ready now", () => _breath.SetReadyTick(0));
-            yield return DevCommand("DEV: Approach altar now", () =>
+            yield return new Command_Action()
             {
-                _nextApproachTick = 0;
-                InterruptCurrentJob();
-            });
-            yield return DevCommand("DEV: Summon escort hornets", () => HornetManifestation.SummonAround(Pawn, Props.volleyEscortCount, HornetSummonRole.Escort));
-        }
-
-        private static Command_Action DevCommand(string label, System.Action action)
-        {
-            return new Command_Action()
+                defaultLabel = "DEV: Bond -25%",
+                action = () => DebugReduceBond(0.25f),
+            };
+            yield return new Command_Action()
             {
-                defaultLabel = label,
-                action = action,
+                defaultLabel = "DEV: Force phase 2",
+                action = DebugForcePhase2,
+            };
+            yield return new Command_Action()
+            {
+                defaultLabel = "DEV: Vitality -25%",
+                action = () => DebugDamageVitality(0.25f),
+            };
+            yield return new Command_Action()
+            {
+                defaultLabel = "DEV: Start channel",
+                action = _channel.DebugStart,
+            };
+            yield return new Command_Action()
+            {
+                defaultLabel = "DEV: Finish channel",
+                action = _channel.DebugFinish,
+            };
+            yield return new Command_Action()
+            {
+                defaultLabel = "DEV: Stick a needle",
+                action = _needleAttack.DebugStickNeedle,
+            };
+            yield return new Command_Action()
+            {
+                defaultLabel = "DEV: Shell ready now",
+                action = () => _shell.SetReadyTick(0),
+            };
+            yield return new Command_Action()
+            {
+                defaultLabel = "DEV: Needle ready now",
+                action = () => _needleAttack.SetReadyTick(0),
+            };
+            yield return new Command_Action()
+            {
+                defaultLabel = "DEV: Mana shield -25%",
+                action = () => DebugDamageShield(0.25f),
+            };
+            yield return new Command_Action()
+            {
+                defaultLabel = "DEV: Doom seed now",
+                action = () => _seeds.SetReadyTick(0),
+            };
+
+            yield return new Command_Action()
+            {
+                defaultLabel = "DEV: Fairy seed now",
+                action = () => ApocryphaGimmicks.TryLaunchFairySeed(Pawn),
+            };
+
+            yield return new Command_Action()
+            {
+                defaultLabel = "DEV: Summon assault hornets",
+                action = () => HornetManifestation.SummonAround(Pawn, InterferenceHornetCount(_releaseCount), HornetSummonRole.Assault),
+            };
+            yield return new Command_Action()
+            {
+                defaultLabel = "DEV: Breath ready now",
+                action = () => _breath.SetReadyTick(0),
+            };
+            yield return new Command_Action()
+            {
+                defaultLabel = "DEV: Approach altar now",
+                action = () =>
+                {
+                    _nextApproachTick = 0;
+                    InterruptCurrentJob();
+                },
+            };
+            yield return new Command_Action()
+            {
+                defaultLabel = "DEV: Summon escort hornets",
+                action = () => HornetManifestation.SummonAround(Pawn, Props.volleyEscortCount, HornetSummonRole.Escort),
             };
         }
         #endregion

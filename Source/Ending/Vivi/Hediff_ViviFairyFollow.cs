@@ -5,11 +5,6 @@ using Verse;
 
 namespace VVRace
 {
-    public class FairyBondPenaltyExtension : DefModExtension
-    {
-        public List<StatDef> penaltyStatFactors;
-    }
-
     // 구버전 HediffWithComps는 불러올 때 BackCompatibilityPatch가 이 클래스로 변환한다.
     public class Hediff_ViviFairyFollow : HediffWithComps
     {
