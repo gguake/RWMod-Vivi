@@ -73,6 +73,9 @@ namespace VVRace
                 var gain = ApparelScoreGain(pawn, apparel);
                 if (gain < MinScoreGainToCare || gain < bestGain || (CompBiocodable.IsBiocoded(apparel) && !CompBiocodable.IsBiocodedFor(apparel, pawn))) { continue; }
                 if (!ApparelUtility.HasPartsToWear(pawn, apparel.def) || !apparel.def.apparel.developmentalStageFilter.Has(pawn.DevelopmentalStage)) { continue; }
+                // 바닐라 옷 입히기 경로(입기 메뉴·옷 입히기·옷 걸이)가 모두 보는 장착 가능 판정. 바닐라 옷 고르기를 거치지 않으므로
+                // 장착 제한을 이 판정에 거는 모드(HAR·Alpha Genes 등)를 따르려면 직접 불러야 한다.
+                if (!EquipmentUtility.CanEquip(apparel, pawn)) { continue; }
                 if (!pawn.CanReserveAndReach(apparel, PathEndMode.OnCell, Danger.Some)) { continue; }
 
                 best = apparel;
