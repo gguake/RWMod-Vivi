@@ -15,7 +15,6 @@
 <VV_FailReason_AltarOnSubstructure>중력선 위에는 영원꽃 제단을 건설할 수 없습니다.</VV_FailReason_AltarOnSubstructure>
 <VV_FailReason_AltarUnderConstruction>건설 중인 영원꽃 제단 위에는 배치할 수 없습니다.</VV_FailReason_AltarUnderConstruction>
 <VV_FailReason_AltarHasEnshrinedEverflower>영원꽃이 안치되어 있어 해체할 수 없음</VV_FailReason_AltarHasEnshrinedEverflower>
-<VV_FailReason_AltarEndingInProgress>영원꽃이 안치되어 있어 해체할 수 없음</VV_FailReason_AltarEndingInProgress>
 
 <!-- 레벨업 편지 -->
 <VV_Letter_EverflowerAttunementLevel5Preamble>영원꽃이 제단의 마나 회로와 공명하며 다섯 번째 개화에 도달했습니다.

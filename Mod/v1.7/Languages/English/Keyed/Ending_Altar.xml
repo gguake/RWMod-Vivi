@@ -15,7 +15,6 @@
 <VV_FailReason_AltarOnSubstructure>An everflower altar cannot be built on a gravship.</VV_FailReason_AltarOnSubstructure>
 <VV_FailReason_AltarUnderConstruction>Cannot place on an everflower altar under construction.</VV_FailReason_AltarUnderConstruction>
 <VV_FailReason_AltarHasEnshrinedEverflower>Cannot deconstruct while an everflower is enshrined</VV_FailReason_AltarHasEnshrinedEverflower>
-<VV_FailReason_AltarEndingInProgress>Cannot deconstruct while an everflower is enshrined</VV_FailReason_AltarEndingInProgress>
 
 <!-- 레벨업 편지 -->
 <VV_Letter_EverflowerAttunementLevel5Preamble>The everflower has resonated with the altar's mana circuits and reached its fifth bloom.

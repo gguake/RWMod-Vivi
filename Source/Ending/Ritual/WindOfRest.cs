@@ -186,16 +186,10 @@ namespace VVRace
 
         private void Finish()
         {
-            if (_anyEffect)
-            {
-                Messages.Message(
-                    LocalizeString_Message.VV_Message_WindOfRestResult.Translate(),
-                    MessageTypeDefOf.PositiveEvent);
-            }
-            else
-            {
-                Messages.Message(LocalizeString_Message.VV_Message_WindOfRestNothing.Translate(), MessageTypeDefOf.NeutralEvent);
-            }
+            // 문구는 하나, 정화한 대상이 있었는지는 메시지 종류로만 구분한다.
+            Messages.Message(
+                LocalizeString_Message.VV_Message_WindOfRestResult.Translate(),
+                _anyEffect ? MessageTypeDefOf.PositiveEvent : MessageTypeDefOf.NeutralEvent);
 
             Destroy();
         }

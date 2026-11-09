@@ -123,7 +123,6 @@
         public const string VV_FailReason_AltarOnSubstructure = nameof(VV_FailReason_AltarOnSubstructure);
         public const string VV_FailReason_AltarUnderConstruction = nameof(VV_FailReason_AltarUnderConstruction);
         public const string VV_FailReason_AltarHasEnshrinedEverflower = nameof(VV_FailReason_AltarHasEnshrinedEverflower);
-        public const string VV_FailReason_AltarEndingInProgress = nameof(VV_FailReason_AltarEndingInProgress);
 
         public const string VV_Hediff_ApocryphaStuckNeedleTip = nameof(VV_Hediff_ApocryphaStuckNeedleTip);
         public const string VV_Hediff_ApocryphaFairyBondTip = nameof(VV_Hediff_ApocryphaFairyBondTip);

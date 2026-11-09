@@ -175,15 +175,9 @@ namespace VVRace
 
         public override AcceptanceReport DeconstructibleBy(Faction faction)
         {
-            var everflower = EnshrinedEverflower;
-            if (everflower != null)
+            // 엔딩 진행 중·완료인 앵커 꽃도 같은 사유로 거부한다(문구가 같아 따로 나누지 않는다).
+            if (EnshrinedEverflower != null)
             {
-                var quest = ViviEndingQuest.Current;
-                if (quest != null && (quest.IsEndingActive || quest.IsCompleted) && quest.IsAnchor(everflower))
-                {
-                    return new AcceptanceReport(LocalizeString_Etc.VV_FailReason_AltarEndingInProgress.Translate());
-                }
-
                 return new AcceptanceReport(LocalizeString_Etc.VV_FailReason_AltarHasEnshrinedEverflower.Translate());
             }
 

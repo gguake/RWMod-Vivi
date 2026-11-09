@@ -40,7 +40,6 @@
         public const string VV_Message_SkyShieldRaised = nameof(VV_Message_SkyShieldRaised);
 
         public const string VV_Message_WindOfRestResult = nameof(VV_Message_WindOfRestResult);
-        public const string VV_Message_WindOfRestNothing = nameof(VV_Message_WindOfRestNothing);
 
         public const string VV_Message_QueenReborn = nameof(VV_Message_QueenReborn);
 
