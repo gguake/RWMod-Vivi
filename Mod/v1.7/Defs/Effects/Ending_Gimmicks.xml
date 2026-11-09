@@ -516,22 +516,13 @@
         <scale>1.6</scale>
         <color>(1, 0.97, 0.88, 0.9)</color>
       </li>
+      <!-- 마무리 별빛: 같은 큰 별 두 장을 겹쳐(가산) 가는 빛줄기를 두 배로 밝힌다. 45° 엇갈린 별과 겹쳐 여덟 갈래. -->
       <li>
         <subEffecterClass>SubEffecter_SprayerTriggeredDelayed</subEffecterClass>
         <fleckDef>VV_Fleck_GimmickStarGlint</fleckDef>
         <spawnLocType>OnSource</spawnLocType>
         <initialDelayTicks>62</initialDelayTicks>
-        <absoluteAngle>true</absoluteAngle>
-        <rotation>0</rotation>
-        <rotationRate>120</rotationRate>
-        <scale>3.2</scale>
-        <color>(1, 0.95, 0.8, 1)</color>
-      </li>
-      <li>
-        <subEffecterClass>SubEffecter_SprayerTriggeredDelayed</subEffecterClass>
-        <fleckDef>VV_Fleck_GimmickStarGlint</fleckDef>
-        <spawnLocType>OnSource</spawnLocType>
-        <initialDelayTicks>62</initialDelayTicks>
+        <burstCount>2</burstCount>
         <absoluteAngle>true</absoluteAngle>
         <rotation>0</rotation>
         <rotationRate>120</rotationRate>
