@@ -71,7 +71,8 @@ namespace VVRace
             Scribe_Collections.Look(ref _heldPawns, "heldPawns", LookMode.Deep);
 
             // 대기열의 폰은 죽은 여제면 시체 안에, 귀환 보류 폰이면 맵에 깊게 저장되므로 폰은 참조로 저장한다.
-            Scribe_Collections.Look(ref _pendingRebirths, "pendingRebirths", LookMode.Reference);
+            // 죽은 여제는 1.7에서 Destroyed 상태라 saveDestroyedThings가 없으면 참조가 null로 저장된다(시체가 폰을 깊게 저장하므로 불러올 때 풀린다).
+            Scribe_Collections.Look(ref _pendingRebirths, "pendingRebirths", true, LookMode.Reference);
             Scribe_Collections.Look(ref _pendingHolds, "pendingHolds", LookMode.Deep);
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
