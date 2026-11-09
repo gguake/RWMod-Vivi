@@ -61,7 +61,8 @@ namespace VVRace
         private static readonly List<int> _tmpChosen = new List<int>();
 
         // 생산 주기마다 다시 잰 레시피별 모자란 정도(0~1). 작업 지시서와 채집 잡 기버(채집 레시피, 지시서 없음)가 쓴다.
-        private readonly Dictionary<RecipeDef, float> _billNeed = new Dictionary<RecipeDef, float>();
+        // 모자란 정도·목표는 저장한다: 불러온 직후 다음 생산 주기(최대 600틱)까지 우선도가 0이 되거나 비료 목표가 최소로 돌아가지 않게.
+        private Dictionary<RecipeDef, float> _billNeed = new Dictionary<RecipeDef, float>();
         private float _woodNeed;
         private float _fertilizerNeed;
         private float _medicineNeed;
@@ -710,6 +711,12 @@ namespace VVRace
         {
             Scribe_Collections.Look(ref _workSpots, "workSpots", LookMode.Reference);
             Scribe_Values.Look(ref _recentPlantFertilizer, "recentPlantFertilizer");
+            Scribe_Collections.Look(ref _billNeed, "billNeed", LookMode.Def, LookMode.Value);
+            Scribe_Values.Look(ref _woodNeed, "woodNeed");
+            Scribe_Values.Look(ref _fertilizerNeed, "fertilizerNeed");
+            Scribe_Values.Look(ref _medicineNeed, "medicineNeed");
+            Scribe_Values.Look(ref _fertilizerTarget, "fertilizerTarget", MinFertilizerTarget);
+            Scribe_Values.Look(ref _woodStockTarget, "woodStockTarget", -1);
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
