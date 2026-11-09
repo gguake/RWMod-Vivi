@@ -337,12 +337,18 @@ namespace VVRace
             var pawn = (Pawn)parent;
             if (isRoyal || !pawn.DevelopmentalStage.Adult()) { return false; }
 
+            BecomeRoyalAdult(pawn);
+            pawn.Drawer.renderer.SetAllGraphicsDirty();
+            return true;
+        }
+
+        // 성체 왕족화: 왕족 헤디프·여성 체형으로 바꾸고 입을 수 없게 된 옷은 내려놓는다.
+        private void BecomeRoyalAdult(Pawn pawn)
+        {
             SetRoyal();
 
             pawn.story.bodyType = BodyTypeDefOf.Female;
             pawn.apparel?.DropAllOrMoveAllToInventory((Apparel apparel) => !apparel.def.apparel.PawnCanWear(pawn));
-            pawn.Drawer.renderer.SetAllGraphicsDirty();
-            return true;
         }
 
         public void RefreshHairColor()
@@ -413,10 +419,7 @@ namespace VVRace
             {
                 if (ShouldBeRoyalIfMature)
                 {
-                    SetRoyal();
-
-                    pawn.story.bodyType = BodyTypeDefOf.Female;
-                    pawn.apparel?.DropAllOrMoveAllToInventory((Apparel apparel) => !apparel.def.apparel.PawnCanWear(pawn));
+                    BecomeRoyalAdult(pawn);
 
                     if (pawn.IsColonist)
                     {

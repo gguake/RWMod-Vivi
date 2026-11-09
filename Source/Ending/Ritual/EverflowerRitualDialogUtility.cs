@@ -1,4 +1,5 @@
 ﻿using RimWorld;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Verse;
@@ -15,6 +16,22 @@ namespace VVRace
             {
                 Messages.Message(reason, target, MessageTypeDefOf.RejectInput, false);
             }
+        }
+
+        // 시작 버튼 콜백: 대화창에서 고른 값을 영원꽃에 저장한 뒤 의식을 시작한다.
+        public static Dialog_BeginRitual.ActionCallback MakeBeginAction(Precept_Ritual ritual, TargetInfo target, Pawn organizer, RitualObligation obligation, Action onConfirm, Action<ArcanePlant_Everflower> applySelection)
+        {
+            return assignments =>
+            {
+                if (target.Thing is ArcanePlant_Everflower everflower)
+                {
+                    applySelection(everflower);
+                }
+
+                ritual.behavior.TryExecuteOn(target, organizer, ritual, obligation, assignments, true);
+                onConfirm?.Invoke();
+                return true;
+            };
         }
 
         public static List<string> ExtraInfoText(Precept_Ritual ritual, TargetInfo target)

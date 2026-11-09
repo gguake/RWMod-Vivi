@@ -203,13 +203,9 @@ namespace VVRace
                                     var cell = ResolveTeleportCell(target.Cell, out var altar);
 
                                     // 검증에 실패한 클릭은 action을 호출하지 않으므로 단계 조건 검증과 거부 메시지는 여기서 처리한다.
-                                    if (altar != null && EverflowerComp.AttunementLevel < Building_EverflowerAltar.RequiredAttunementLevel)
+                                    if (altar != null && !Building_EverflowerAltar.CanEnshrine(this))
                                     {
-                                        Messages.Message(
-                                            LocalizeString_Message.VV_Message_EverflowerAltarRequiresLevel.Translate(Building_EverflowerAltar.RequiredAttunementLevel.Named("LEVEL")),
-                                            this,
-                                            MessageTypeDefOf.RejectInput,
-                                            historical: false);
+                                        Messages.Message(Building_EverflowerAltar.CannotEnshrineReason, this, MessageTypeDefOf.RejectInput, historical: false);
                                         return;
                                     }
 
@@ -323,13 +319,9 @@ namespace VVRace
 
                 // 예약 후 제단이 건설됐을 수 있으므로 이동 직전에 단계 조건을 다시 검사한다.
                 // 미달이면 무작위 이동 없이 예약만 취소해 낮은 단계의 영원꽃이 제단에 갇히지 않게 한다.
-                if (altar != null && EverflowerComp.AttunementLevel < Building_EverflowerAltar.RequiredAttunementLevel)
+                if (altar != null && !Building_EverflowerAltar.CanEnshrine(this))
                 {
-                    Messages.Message(
-                        LocalizeString_Message.VV_Message_EverflowerAltarRequiresLevel.Translate(Building_EverflowerAltar.RequiredAttunementLevel.Named("LEVEL")),
-                        this,
-                        MessageTypeDefOf.RejectInput,
-                        historical: false);
+                    Messages.Message(Building_EverflowerAltar.CannotEnshrineReason, this, MessageTypeDefOf.RejectInput, historical: false);
                     return;
                 }
 

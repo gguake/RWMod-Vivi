@@ -19,17 +19,8 @@ namespace VVRace
 
             Dialog_BeginRitual_ChangeWeather dialog = null;
 
-            Dialog_BeginRitual.ActionCallback action = (assignments) =>
-            {
-                if (targetInfo.Thing is ArcanePlant_Everflower everflower)
-                {
-                    everflower.SelectedRitualWeather = dialog?.selectedWeather;
-                }
-
-                behavior.TryExecuteOn(targetInfo, organizer, this, obligation, assignments, true);
-                onConfirm?.Invoke();
-                return true;
-            };
+            var action = EverflowerRitualDialogUtility.MakeBeginAction(this, targetInfo, organizer, obligation, onConfirm,
+                everflower => everflower.SelectedRitualWeather = dialog?.selectedWeather);
 
             dialog = new Dialog_BeginRitual_ChangeWeather(
                 Label.CapitalizeFirst(),

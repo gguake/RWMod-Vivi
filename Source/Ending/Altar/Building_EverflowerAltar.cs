@@ -140,6 +140,15 @@ namespace VVRace
             }
         }
 
+        // 영원꽃은 요구 조율 단계 이상이어야 제단에 안치할 수 있다.
+        // 거부 문구는 따로 두어 호출부가 다른 조건(제단 칸 여부 등)을 확인한 뒤에만 만들게 한다.
+        public static bool CanEnshrine(ArcanePlant_Everflower everflower)
+        {
+            return everflower.AttunementLevel >= RequiredAttunementLevel;
+        }
+
+        public static string CannotEnshrineReason => LocalizeString_Message.VV_Message_EverflowerAltarRequiresLevel.Translate(RequiredAttunementLevel.Named("LEVEL"));
+
         public static Building_EverflowerAltar FindOnMap(Map map)
         {
             if (map == null || VVThingDefOf.VV_EverflowerAltar == null) { return null; }

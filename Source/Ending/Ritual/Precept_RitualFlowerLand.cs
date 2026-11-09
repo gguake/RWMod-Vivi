@@ -47,17 +47,8 @@ namespace VVRace
         {
             EverflowerRitualDialogUtility.NotifyCannotStart(this, targetInfo, selectedPawn, forcedForRole);
 
-            Dialog_BeginRitual.ActionCallback action = assignments =>
-            {
-                if (targetInfo.Thing is ArcanePlant_Everflower everflower)
-                {
-                    everflower.SelectedFlowerLandCell = cell;
-                }
-
-                behavior.TryExecuteOn(targetInfo, organizer, this, obligation, assignments, true);
-                onConfirm?.Invoke();
-                return true;
-            };
+            var action = EverflowerRitualDialogUtility.MakeBeginAction(this, targetInfo, organizer, obligation, onConfirm,
+                everflower => everflower.SelectedFlowerLandCell = cell);
 
             return new Dialog_BeginRitual_FlowerLand(
                 cell,
