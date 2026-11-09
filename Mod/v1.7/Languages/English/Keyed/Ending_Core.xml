@@ -18,19 +18,19 @@
 
 <!-- 영원꽃의 잔향 -->
 <VV_Letter_EverflowerEcho1Label>Faint golden echo</VV_Letter_EverflowerEcho1Label>
-<VV_Letter_EverflowerEcho1>After the ritual, a faint memory entered {PAWN_labelShort}'s psychic circuits.\n\nA golden flower with six branches bloomed on a vast altar. The vivis beneath it knew neither unstable genes nor short lives.\n\n"...Beneath this shade... no one withers..."\n\nThe voice faded into static.</VV_Letter_EverflowerEcho1>
+<VV_Letter_EverflowerEcho1>After the ritual, a faint memory seeped into {PAWN_labelShort}'s psychic circuits.\n\nA radiant golden flower bloomed atop a vast altar. Beneath its shade, countless vivis all wore peaceful expressions, seemingly free of any worry.\n\n"...Beneath this shade... no one withers..."\n\nSomeone's faint voice faded into static.</VV_Letter_EverflowerEcho1>
 
 <VV_Letter_EverflowerEcho2Label>Memory of a burning hive</VV_Letter_EverflowerEcho2Label>
-<VV_Letter_EverflowerEcho2>As the ritual ended, a ringing filled {PAWN_labelShort}'s head.\n\nIn a burning hive, vivis tore at one another's wings. Neither herbs nor magic could heal their blackened wounds.\n\n"...It's in the wind... mixed in..."\n"...Before the altar... only I remain..."\n\n{PAWN_labelShort} came to in a cold sweat.</VV_Letter_EverflowerEcho2>
+<VV_Letter_EverflowerEcho2>As the ritual ended, a ringing filled {PAWN_labelShort}'s head.\n\nThe vast altar and the golden flower remained as they were, yet everything around them had changed completely, engulfed in thick green toxic clouds and flames. Terrified vivis fleeing flashed by alongside gunfire and explosions.\n\n"...At the altar, only I..."\n"...I... must protect..."\n\n{PAWN_labelShort} came to in a cold sweat.</VV_Letter_EverflowerEcho2>
 
 <VV_Letter_EverflowerEcho3Label>Souls bound by light</VV_Letter_EverflowerEcho3Label>
-<VV_Letter_EverflowerEcho3>While resonating with the everflower, {PAWN_labelShort} saw an unfamiliar memory.\n\nSomeone was opening their circuits to the limit. Dying vivis turned into small lights and gathered within a single soul.\n\n"...If I do not die... they will not die..."\n"...All of you... into me... not a single one..."\n\nEven after the memory faded, {PAWN_labelShort} struggled to catch a breath.</VV_Letter_EverflowerEcho3>
+<VV_Letter_EverflowerEcho3>While resonating with the everflower, {PAWN_labelShort} saw an unfamiliar memory.\n\nSomeone was opening their circuits to the limit. Dying vivis turned into small lights and gathered within a single soul.\n\n"...If I... embrace them..."\n"...All of them... not a single one..."\n\nEven after waking from the memory, {PAWN_labelShort} struggled to catch a breath.</VV_Letter_EverflowerEcho3>
 
 <VV_Letter_EverflowerEcho4Label>The shattered crown</VV_Letter_EverflowerEcho4Label>
-<VV_Letter_EverflowerEcho4>As {PAWN_labelShort} finished the ritual, a broken voice came through with a surge of pain.\n\n"...So heavy... too..."\n\nCircuits collapsed, and a hard shell covered the body. A voice escaped between enormous mandibles.\n\n"...Who was I... the children..."\n\nA shadow surrounded by small lights sank into the ruins.</VV_Letter_EverflowerEcho4>
+<VV_Letter_EverflowerEcho4>As {PAWN_labelShort} was finishing the ritual, a broken voice came through with a surge of pain.\n\n"...So heavy... too..."\n\nAttunement was collapsing, and the body was twisting out of shape. Through countless unknown voices, a few barely intelligible words escaped.\n\n"...Who... was I... the children..."\n\nA shadow surrounded by small lights sank into the ruins.</VV_Letter_EverflowerEcho4>
 
 <VV_Letter_EverflowerEcho5Label>A waking breath</VV_Letter_EverflowerEcho5Label>
-<VV_Letter_EverflowerEcho5>As mana waves spread from the everflower, static entered {PAWN_labelShort}'s psychic circuits. This time it was no memory.\n\nClattering shells and labored breathing. Something was approaching along the flow of mana.\n\n"...So warm..."\n"...Back... to the flower's shade..."\n\nThe connection broke.</VV_Letter_EverflowerEcho5>
+<VV_Letter_EverflowerEcho5>As mana waves spread from the everflower, static entered {PAWN_labelShort}'s psychic circuits. This time it was no memory.\n\nThe whispers of countless voices and the sound of twisting bones. Something was approaching along the flow of mana.\n\n"...Longed for... so warm..."\n"...Back... to that flower's shade..."\n\nThe connection broke.</VV_Letter_EverflowerEcho5>
 
 <!-- 고대 호박 코어 의뢰 -->
 <VV_Comms_AmberCoreRequest>Request an ancient amber core task</VV_Comms_AmberCoreRequest>
