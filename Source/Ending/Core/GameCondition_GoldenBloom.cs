@@ -57,16 +57,6 @@ namespace VVRace
             }
         }
 
-        public static bool IsActive(Map map)
-        {
-            return map != null && map.gameConditionManager.ConditionIsActive(VVGameConditionDefOf.VV_GoldenBloom);
-        }
-
-        public static bool IsManaUnlimited(Thing thing)
-        {
-            return thing is ArcanePlant && IsActive(thing.MapHeld);
-        }
-
         public static bool IsHeldByEnding(Map map)
         {
             var quest = ViviEndingQuest.Current;

@@ -95,7 +95,7 @@ namespace VVRace
         // 황금빛 꽃안개 중에는 불이 제자리에서만 타고 옆 칸이나 불똥으로 번지지 않는다.
         private static bool Fire_TrySpread_Prefix(Fire __instance)
         {
-            return !GoldenBloomUtility.IsActive(__instance.Map);
+            return __instance.Map.weatherManager.curWeather != VVWeatherDefOf.VV_GoldenBloomMist;
         }
 
         private static void IncidentWorker_CanFireNow_Postfix(IncidentWorker __instance, IncidentParms parms, ref bool __result)

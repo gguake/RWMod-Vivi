@@ -44,7 +44,7 @@ namespace VVRace
 
         public bool Active => _manaActivated;
 
-        public bool IsUnlimited => GoldenBloomUtility.IsManaUnlimited(parent);
+        public bool IsUnlimited => parent.MapHeld.weatherManager.curWeather == VVWeatherDefOf.VV_GoldenBloomMist;
 
         public float Stored
         {
