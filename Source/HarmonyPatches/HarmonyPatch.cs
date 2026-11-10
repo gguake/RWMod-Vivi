@@ -12,7 +12,6 @@ namespace VVRace
             {
                 ViviRacePatch.Patch(harmony);
                 ArcanePlantPatch.Patch(harmony);
-                VanilaBugFixPatch.Patch(harmony);
                 GatherPatch.Patch(harmony);
                 BackCompatibilityPatch.Patch(harmony);
 
