@@ -134,6 +134,7 @@
     <Compile Include="Ending\Core\ViviEndingStage.cs" />
     <Compile Include="Ending\Core\ViviEndingUtility.cs" />
     <Compile Include="Ending\Core\WeatherOverlay_GoldenBloom.cs" />
+    <Compile Include="Ending\Core\WorldObjectComp_ViviEndingRaidBeacon.cs" />
     <Compile Include="Ending\Gimmicks\AI\JobDriver_BondFairyFlower.cs" />
     <Compile Include="Ending\Gimmicks\ApocryphaGimmicks.cs" />
     <Compile Include="Ending\Gimmicks\DoomBlightUtility.cs" />

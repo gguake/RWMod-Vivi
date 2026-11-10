@@ -25,10 +25,6 @@ namespace VVRace
                 AccessTools.Method(typeof(IncidentWorker), nameof(IncidentWorker.CanFireNow)),
                 postfix: new HarmonyMethod(typeof(EndingCorePatch), nameof(IncidentWorker_CanFireNow_Postfix)));
 
-            ViviHarmonyPatcher.TryPatch(harmony, "Map.IncidentTargetTags (ending raid beacon)",
-                AccessTools.Method(typeof(Map), nameof(Map.IncidentTargetTags)),
-                postfix: new HarmonyMethod(typeof(EndingCorePatch), nameof(Map_IncidentTargetTags_Postfix)));
-
             ViviHarmonyPatcher.TryPatch(harmony, "Fire.TrySpread (golden bloom fire containment)",
                 AccessTools.Method(typeof(Fire), "TrySpread"),
                 prefix: new HarmonyMethod(typeof(EndingCorePatch), nameof(Fire_TrySpread_Prefix)));
@@ -67,29 +63,6 @@ namespace VVRace
 
             __result = choice;
             return false;
-        }
-
-        private static void Map_IncidentTargetTags_Postfix(Map __instance, ref IEnumerable<IncidentTargetTagDef> __result)
-        {
-            var quest = ViviEndingQuest.Current;
-            if (quest == null || !quest.IsRaidBeaconActive(__instance)) { return; }
-
-            __result = WithRaidBeacon(__result);
-        }
-
-        private static IEnumerable<IncidentTargetTagDef> WithRaidBeacon(IEnumerable<IncidentTargetTagDef> tags)
-        {
-            var hasBeacon = false;
-            foreach (var tag in tags)
-            {
-                hasBeacon |= tag == IncidentTargetTagDefOf.Map_RaidBeacon;
-                yield return tag;
-            }
-
-            if (!hasBeacon)
-            {
-                yield return IncidentTargetTagDefOf.Map_RaidBeacon;
-            }
         }
 
         // 황금빛 꽃안개 중에는 불이 제자리에서만 타고 옆 칸이나 불똥으로 번지지 않는다.

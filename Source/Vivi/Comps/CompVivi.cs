@@ -275,6 +275,28 @@ namespace VVRace
                     GenDraw.DrawLineBetween(((Pawn)parent).DrawPos, marker.pawn.DrawPos, ConcentrationLineMat);
                 }
             }
+
+            DrawNestOverlays();
+        }
+
+        private static readonly Color NestRoomEdgeColor = new Color(1f, 0.8f, 0.35f);
+        private static readonly Color NestActivityEdgeColor = new Color(0.55f, 0.9f, 0.5f);
+
+        // 둥지 비비를 고르면 무리의 활동 범위(일하러 오가는 칸) 테두리와 정착민이 들어가면 경계하는 둥지 방 테두리를 그린다.
+        private void DrawNestOverlays()
+        {
+            var nest = ((Pawn)parent).GetNestLordJob();
+            if (nest == null || !nest.Settled || parent.Map != Find.CurrentMap) { return; }
+
+            // 활동 범위: 정착 때 둥지 중심 둘레, 증축 방마다 그 방 둘레 24칸(ViviNestTerritory)
+            GenDraw.DrawFieldEdges(nest.Territory.ActivityCellsForDrawing, NestActivityEdgeColor);
+            GenDraw.DrawFieldEdges(nest.Territory.OwnedRoomCellsForDrawing, NestRoomEdgeColor);
+        }
+
+        // 바닐라는 플레이어 폰에게만 로드 보고를 보여 주므로 둥지 비비 정보창에 경계심 줄을 붙인다.
+        public override string CompInspectStringExtra()
+        {
+            return ((Pawn)parent).GetNestLordJob()?.GetReport((Pawn)parent);
         }
 
         public override void Notify_DuplicatedFrom(Pawn source)
