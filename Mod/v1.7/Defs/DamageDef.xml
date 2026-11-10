@@ -89,7 +89,6 @@
     <harmsHealth>false</harmsHealth>
     <makesBlood>false</makesBlood>
     <defaultDamage>1</defaultDamage>
-    <constantStunDurationTicks>30</constantStunDurationTicks>
     <soundExplosion>Explosion_FirefoamPopper</soundExplosion>
     <explosionSnowMeltAmount>0</explosionSnowMeltAmount>
   </DamageDef>

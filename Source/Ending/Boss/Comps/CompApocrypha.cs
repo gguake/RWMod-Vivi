@@ -188,9 +188,6 @@ namespace VVRace
         private int _lastDamageTextTick = -99999;
         private int _lastStunImmuneTextTick = -99999;
 
-        // 기믹 기절을 적용하는 동안만 true로 둔다. 일반 기절은 ApocryphaPatch가 StunFor에서 차단한다.
-        internal static bool ApplyingGimmickStun { get; private set; }
-
         public CompProperties_Apocrypha Props => (CompProperties_Apocrypha)props;
 
         public Pawn Pawn => (Pawn)parent;
@@ -657,20 +654,12 @@ namespace VVRace
         // StunFor는 남은 기절과 새 기절 중 긴 쪽을 쓰므로, 정해진 시간만큼만 기절시키려면 replaceExisting으로 남은 기절을 먼저 지운다.
         internal void GimmickStun(int ticks, Thing instigator, bool replaceExisting = false)
         {
-            ApplyingGimmickStun = true;
-            try
+            if (replaceExisting)
             {
-                if (replaceExisting)
-                {
-                    Pawn.stances.stunner.StopStun();
-                }
+                Pawn.stances.stunner.StopStun();
+            }
 
-                Pawn.stances.stunner.StunFor(ticks, instigator, addBattleLog: false);
-            }
-            finally
-            {
-                ApplyingGimmickStun = false;
-            }
+            Pawn.stances.stunner.StunFor(ticks, instigator, addBattleLog: false);
         }
 
         internal void Notify_StunBlocked()

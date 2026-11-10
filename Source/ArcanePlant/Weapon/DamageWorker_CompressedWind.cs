@@ -21,16 +21,9 @@ namespace VVRace
             }
         }
 
+        // 투사체·가스만 날려 보내고 칸 안의 대상에는 아무 영향도 주지 않는다(공격 판정도 없음).
         protected override void ExplosionDamageThing(Explosion explosion, Thing t, List<Thing> damagedThings, List<Thing> ignoredThings, IntVec3 cell)
         {
-            if (!(t is Pawn pawn) || damagedThings.Contains(pawn)) { return; }
-
-            damagedThings.Add(pawn);
-            if (ignoredThings != null && ignoredThings.Contains(pawn)) { return; }
-
-            // 기절 피해에 따른 아군 반감·호감도 하락을 피하려고 기절만 직접 적용한다.
-            var amount = (def.constantStunDurationTicks ?? 0) / StunHandler.StunDurationTicksPerDamage;
-            pawn.stances.stunner.Notify_DamageApplied(new DamageInfo(DamageDefOf.Stun, amount, instigator: explosion.instigator, weapon: explosion.weapon));
         }
 
         private static void BlowAwayProjectiles(Explosion explosion, List<IntVec3> cells)

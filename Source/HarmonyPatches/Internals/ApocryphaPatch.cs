@@ -10,11 +10,6 @@ namespace VVRace
     {
         internal static void Patch(Harmony harmony)
         {
-            // 피해 없이 StunFor를 직접 호출하는 무기·능력·모드에도 기절 면역이 적용되도록 StunFor에서 차단한다.
-            ViviHarmonyPatcher.TryPatch(harmony, "StunHandler.StunFor (Asphodel stun immunity)",
-                AccessTools.Method(typeof(StunHandler), nameof(StunHandler.StunFor)),
-                prefix: new HarmonyMethod(typeof(ApocryphaPatch), nameof(StunHandler_StunFor_Prefix)));
-
             // 무작위 시나리오도 모든 동물 종족을 시작 동물 후보에 넣으므로 최종 보스는 명시적으로 제외한다.
             ViviHarmonyPatcher.TryPatch(harmony, "ScenPart_StartingAnimal.PossibleAnimals (exclude Asphodel from starting animals)",
                 AccessTools.Method(typeof(ScenPart_StartingAnimal), "PossibleAnimals"),
@@ -24,19 +19,6 @@ namespace VVRace
         private static void ScenPart_StartingAnimal_PossibleAnimals_Postfix(ref IEnumerable<PawnKindDef> __result)
         {
             __result = __result?.Where(v => v.race != VVThingDefOf.VV_Apocrypha);
-        }
-
-        private static bool StunHandler_StunFor_Prefix(StunHandler __instance, int ticks)
-        {
-            if (CompApocrypha.ApplyingGimmickStun) { return true; }
-            if (!(__instance.parent is Pawn pawn) || !ApocryphaUtility.IsApocrypha(pawn)) { return true; }
-
-            if (ticks > 0)
-            {
-                pawn.GetComp<CompApocrypha>()?.Notify_StunBlocked();
-            }
-
-            return false;
         }
     }
 }

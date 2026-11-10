@@ -690,7 +690,7 @@
   <ThingDef ParentName="BaseMakeableGrenade">
     <defName>VV_CompressedWindBomb</defName>
     <label>compressed wind bombs</label>
-    <description>Throwable bombs made by sealing mana-soaked skyweed fluff under high pressure inside a viviwax shell wrapped in living leaves. They deal no damage, but on impact, the compressed wind bursts out all at once, stunning everyone in the area for 0.5 seconds and blowing away every ground projectile and all gas there, including smoke, tox gas and rot stink, regardless of friend or foe.
+    <description>Throwable bombs made by sealing mana-soaked skyweed fluff under high pressure inside a viviwax shell wrapped in living leaves. They deal no damage, but on impact, the compressed wind bursts out all at once, blowing away every ground projectile and all gas there, including smoke, tox gas and rot stink, regardless of friend or foe.
 \nThey contain no flammable explosives, so they never cook off even when set on fire.</description>
     <graphicData>
       <texPath>Things/Item/Equipment/VV_CompressedWindBomb</texPath>
