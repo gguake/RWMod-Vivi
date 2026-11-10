@@ -312,7 +312,6 @@
     <Compile Include="GlideAbility\CompAbility_RequiresBodyPart.cs" />
     <Compile Include="HarmonyPatches\Internals\BackCompatibilityPatch.cs" />
     <Compile Include="HarmonyPatches\Internals\GatherPatch.cs" />
-    <Compile Include="HarmonyPatches\Internals\VanilaBugFixPatch.cs" />
     <Compile Include="HarmonyPatches\Internals\EndingCorePatch.cs" />
     <Compile Include="HarmonyPatches\Internals\ApocryphaPatch.cs" />
     <Compile Include="Hornet\CompHornet.cs" />

@@ -16,7 +16,6 @@ namespace VVRace
 
             PatchGroup(harmony, nameof(ViviRacePatch), ViviRacePatch.Patch);
             PatchGroup(harmony, nameof(ArcanePlantPatch), ArcanePlantPatch.Patch);
-            PatchGroup(harmony, nameof(VanilaBugFixPatch), VanilaBugFixPatch.Patch);
             PatchGroup(harmony, nameof(GatherPatch), GatherPatch.Patch);
             PatchGroup(harmony, nameof(BackCompatibilityPatch), BackCompatibilityPatch.Patch);
             PatchGroup(harmony, nameof(EndingCorePatch), EndingCorePatch.Patch);
