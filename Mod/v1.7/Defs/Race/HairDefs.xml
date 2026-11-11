@@ -65,17 +65,26 @@
     <texPath>Things/Pawn/Vivi/Hairs/HairG</texPath>
   </HairDef>
 
-  <HairDef ParentName="ViviHairBase" Class="RPEF.ScaleableHairDef">
+  <!-- 스케일은 Def 클래스가 아니라 modExtension으로 준다. HairDef를 상속한 클래스를 쓰면 Def.index가 다른 헤어와 겹친다. -->
+  <HairDef ParentName="ViviHairBase">
     <defName>VV_HairH</defName>
     <label>vivi hairH</label>
     <texPath>Things/Pawn/Vivi/Hairs/HairH</texPath>
-    <scale>(1.333333,1.333333)</scale>
+    <modExtensions>
+      <li Class="RPEF.HairScaleExtension">
+        <scale>(1.333333,1.333333)</scale>
+      </li>
+    </modExtensions>
   </HairDef>
 
-  <HairDef ParentName="ViviHairBase" Class="RPEF.ScaleableHairDef">
+  <HairDef ParentName="ViviHairBase">
     <defName>VV_HairI</defName>
     <label>vivi hairI</label>
     <texPath>Things/Pawn/Vivi/Hairs/HairI</texPath>
-    <scale>(1.333333,1.333333)</scale>
+    <modExtensions>
+      <li Class="RPEF.HairScaleExtension">
+        <scale>(1.333333,1.333333)</scale>
+      </li>
+    </modExtensions>
   </HairDef>
 </Defs>
