@@ -43,6 +43,19 @@
                   </fixedParams>
                 </thingSetMaker>
               </li>
+              <!-- 비비 고유 자원 (거대 말벌 날개) -->
+              <li>
+                <weight>1</weight>
+                <thingSetMaker Class="ThingSetMaker_MarketValue">
+                  <fixedParams>
+                    <filter>
+                      <thingSetMakerTagsToAllow>
+                        <li>VV_RewardResource</li>
+                      </thingSetMakerTagsToAllow>
+                    </filter>
+                  </fixedParams>
+                </thingSetMaker>
+              </li>
             </options>
           </thingSetMaker>
         </thingSetMaker>
