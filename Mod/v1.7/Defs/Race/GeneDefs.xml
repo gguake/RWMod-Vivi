@@ -45,7 +45,31 @@
     <minAgeActive>3</minAgeActive>
     <canGenerateInGeneSet>false</canGenerateInGeneSet>
   </GeneDef>
-  
+
+  <GeneDef ParentName="GeneToughnessBase">
+    <defName>VV_LightBody</defName>
+    <label>light body</label>
+    <description>Carriers of this gene have extremely light bones and organs, letting them move swiftly, but they take heavy injuries from even weak impacts.</description>
+    <iconPath>UI/Icons/Genes/Gene_LightBody</iconPath>
+    <displayOrderInCategory>5</displayOrderInCategory>
+    <statFactors>
+      <IncomingDamageFactor>1.2</IncomingDamageFactor>
+    </statFactors>
+    <statOffsets>
+      <MeleeDodgeChance>15</MeleeDodgeChance>
+      <MoveSpeed>0.2</MoveSpeed>
+    </statOffsets>
+    <biostatCpx>2</biostatCpx>
+    <biostatMet>2</biostatMet>
+    <symbolPack>
+      <prefixSymbols>
+        <li><symbol>feather</symbol></li>
+        <li><symbol>lithe</symbol></li>
+        <li><symbol>airy</symbol></li>
+      </prefixSymbols>
+    </symbolPack>
+  </GeneDef>
+
   <GeneDef ParentName="GeneSkinColorMelanin">
     <defName>VV_Skin_Melanin</defName>
     <skinColorBase>(255, 255, 255)</skinColorBase>
