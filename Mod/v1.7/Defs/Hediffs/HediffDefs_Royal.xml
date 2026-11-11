@@ -24,18 +24,19 @@
 
         <hungerRateFactorOffset>0.15</hungerRateFactorOffset>
         <statOffsets>
-          <WorkSpeedGlobal>-0.4</WorkSpeedGlobal>
-          <MoveSpeed>-2</MoveSpeed>
+          <WorkSpeedGlobal>-0.5</WorkSpeedGlobal>
+          <MoveSpeed>-2.0</MoveSpeed>
           <NegotiationAbility>0.3</NegotiationAbility>
           <SocialImpact>0.3</SocialImpact>
           <PsychicSensitivity>1.25</PsychicSensitivity>
           <MeditationFocusGain>0.1</MeditationFocusGain>
           <PsychicEntropyRecoveryRate>0.2</PsychicEntropyRecoveryRate>
           <MeleeDodgeChance>-20</MeleeDodgeChance>
+          <MaxFlightTime>6</MaxFlightTime>
         </statOffsets>
         <statFactors>
           <LifespanFactor>20</LifespanFactor>
-          <ImmunityGainSpeed>1.8</ImmunityGainSpeed>
+          <ImmunityGainSpeed>1.5</ImmunityGainSpeed>
         </statFactors>
       </li>
     </stages>

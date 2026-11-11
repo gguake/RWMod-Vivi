@@ -75,7 +75,7 @@
       <li>
         <statOffsets>
           <MaxFlightTime>20</MaxFlightTime>
-          <FlightCooldown>-8</FlightCooldown>
+          <FlightCooldown>-3</FlightCooldown>
         </statOffsets>
       </li>
     </stages>

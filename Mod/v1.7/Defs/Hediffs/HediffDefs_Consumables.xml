@@ -69,7 +69,7 @@
     <stages>
       <li>
         <statFactors>
-          <VV_GrowthPointsFactor>2.0</VV_GrowthPointsFactor>
+          <VV_GrowthPointsFactor>1.75</VV_GrowthPointsFactor>
         </statFactors>
         <statOffsets>
           <GlobalLearningFactor>1.0</GlobalLearningFactor>
@@ -242,6 +242,9 @@
         <statOffsets>
           <RestFallRateFactor>1.2</RestFallRateFactor>
         </statOffsets>
+        <statFactors>
+          <MeleeCooldownFactor>0.8</MeleeCooldownFactor>
+        </statFactors>
         <hungerRateFactorOffset>1.2</hungerRateFactorOffset>
         <socialFightChanceFactor>8.0</socialFightChanceFactor>
         <extraTooltip>Temporarily prevents mental break caused by the 'Fire Terror' gene.</extraTooltip>

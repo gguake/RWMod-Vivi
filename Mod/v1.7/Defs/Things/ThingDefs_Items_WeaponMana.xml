@@ -95,10 +95,9 @@
     </tools>
     
     <costList>
-      <Steel>60</Steel>
+      <Steel>75</Steel>
       <VV_HeatingPetal>25</VV_HeatingPetal>
       <VV_CoolingPetal>25</VV_CoolingPetal>
-      <VV_SparklingPetal>40</VV_SparklingPetal>
     </costList>
 
     <recipeMaker>
@@ -196,9 +195,9 @@
     </tools>
     
     <costList>
-      <Steel>65</Steel>
-      <VV_CoolingPetal>65</VV_CoolingPetal>
-      <VV_SparklingPetal>25</VV_SparklingPetal>
+      <Steel>80</Steel>
+      <VV_CoolingPetal>40</VV_CoolingPetal>
+      <VV_LivingLeaf>10</VV_LivingLeaf>
     </costList>
 
     <recipeMaker>
@@ -371,9 +370,9 @@
     </tools>
     
     <costList>
-      <Steel>60</Steel>
+      <Steel>40</Steel>
       <ComponentIndustrial>4</ComponentIndustrial>
-      <VV_SparklingPetal>60</VV_SparklingPetal>
+      <VV_SparklingPetal>40</VV_SparklingPetal>
     </costList>
 
     <recipeMaker>
@@ -474,9 +473,9 @@
     
     <costList>
       <Steel>60</Steel>
-      <VV_HeatingPetal>40</VV_HeatingPetal>
-      <VV_SkyweedFluff>30</VV_SkyweedFluff>
-      <ComponentIndustrial>2</ComponentIndustrial>
+      <VV_HeatingPetal>30</VV_HeatingPetal>
+      <VV_SkyweedFluff>20</VV_SkyweedFluff>
+      <ComponentIndustrial>3</ComponentIndustrial>
     </costList>
 
     <recipeMaker>
@@ -545,7 +544,7 @@
       </li>
     </comps>
   </ThingDef>
-  <!-- 발사 즉시 화산탄 3발로 분열 -->
+  
   <ThingDef ParentName="VV_BulletLavaShredderBase">
     <defName>VV_Bullet_LavaShredderSplit</defName>
     <thingClass>RPEF.Bullet_Split</thingClass>
@@ -620,10 +619,10 @@
     </tools>
     
     <costList>
-      <Steel>60</Steel>
-      <ComponentIndustrial>2</ComponentIndustrial>
-      <VV_CoolingPetal>40</VV_CoolingPetal>
-      <VV_SkyweedFluff>30</VV_SkyweedFluff>
+      <Steel>50</Steel>
+      <ComponentIndustrial>3</ComponentIndustrial>
+      <VV_CoolingPetal>30</VV_CoolingPetal>
+      <VV_LivingLeaf>20</VV_LivingLeaf>
     </costList>
 
     <recipeMaker>
@@ -661,7 +660,7 @@
     <projectile>
       <speed>115</speed>
       <damageDef>ArrowHighVelocity</damageDef>
-      <damageAmountBase>45</damageAmountBase>
+      <damageAmountBase>40</damageAmountBase>
       <armorPenetrationBase>1</armorPenetrationBase>
       <stoppingPower>4</stoppingPower>
     </projectile>
@@ -714,7 +713,7 @@
         <label>throw</label>
         <verbClass>Verb_LaunchProjectile</verbClass>
         <hasStandardCommand>true</hasStandardCommand>
-        <range>12.9</range>
+        <range>10.9</range>
         <forcedMissRadius>1.9</forcedMissRadius>
         <warmupTime>1.5</warmupTime>
         <noiseRadius>4</noiseRadius>
@@ -730,13 +729,12 @@
     </verbs>
 
     <costList>
-      <VV_SkyweedFluff>30</VV_SkyweedFluff>
-      <VV_LivingLeaf>15</VV_LivingLeaf>
+      <VV_SkyweedFluff>40</VV_SkyweedFluff>
       <VV_Viviwax>40</VV_Viviwax>
     </costList>
 
     <recipeMaker>
-      <researchPrerequisite>VV_ArcaneWeaponry</researchPrerequisite>
+      <researchPrerequisite>VV_Weaponry</researchPrerequisite>
       <recipeUsers Inherit="False">
         <li>ElectricSmithy</li>
         <li>FueledSmithy</li>

@@ -24,13 +24,11 @@
       <SmoothingSpeed>1.5</SmoothingSpeed>
       <CleaningSpeed>1.25</CleaningSpeed>
       <PruningSpeed MayRequire="Ludeon.RimWorld.Ideology">1.5</PruningSpeed>
-      <PawnTrapSpringChance>0.3</PawnTrapSpringChance>
+      <PawnTrapSpringChance>0.1</PawnTrapSpringChance>
       <MeleeDodgeChance>10</MeleeDodgeChance>
 
       <MaxNutrition>1.25</MaxNutrition>
-      <MoveSpeed>5.8</MoveSpeed>
-      <MiningSpeed>0.5</MiningSpeed>
-      <MiningYield>0.5</MiningYield>
+      <MoveSpeed>5.0</MoveSpeed>
       <PsychicSensitivity>0.25</PsychicSensitivity>
       <Fertility>0</Fertility>
 
@@ -41,8 +39,8 @@
       <VV_PlantGatherSpeed>1</VV_PlantGatherSpeed>
       <VV_PlantGatherYield>1</VV_PlantGatherYield>
       
-      <MaxFlightTime>3</MaxFlightTime>
-      <FlightCooldown>10</FlightCooldown>
+      <MaxFlightTime>4</MaxFlightTime>
+      <FlightCooldown>4</FlightCooldown>
     </statBases>
 
     <tools Inherit="False">

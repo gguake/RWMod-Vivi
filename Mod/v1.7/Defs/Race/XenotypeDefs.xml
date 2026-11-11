@@ -16,9 +16,11 @@
     <factionlessGenerationWeight>0</factionlessGenerationWeight>
     <combatPowerFactor>0.9</combatPowerFactor>
     <genes>
-      <li>VV_ViviMetabolism</li> <!-- -4 -->
+      <li>VV_ViviMetabolism</li> <!-- -3 -->
       <li>VV_HoneyDepedency</li> <!-- 2 -->
 
+      <li>Delicate</li> <!-- 3 -->
+      <li>MoveSpeed_VeryQuick</li> <!-- -5 -->
       <li>Mood_Sanguine</li> <!-- -2 -->
       <li>FireTerror</li> <!-- 4 -->
       <li>FireWeakness</li> <!-- 2 -->
