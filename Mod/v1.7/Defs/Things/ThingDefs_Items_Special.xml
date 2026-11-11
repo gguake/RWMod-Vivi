@@ -17,6 +17,10 @@
     <thingCategories>
       <li>VV_ViviResource</li>
     </thingCategories>
+    <thingSetMakerTags>
+      <li>NonStandardReward</li>
+      <li>VV_RewardResource</li>
+    </thingSetMakerTags>
 
     <resourceReadoutPriority>Middle</resourceReadoutPriority>
     <soundInteract>Standard_Drop</soundInteract>
