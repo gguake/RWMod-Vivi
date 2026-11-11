@@ -258,7 +258,7 @@
       <RangedWeapon_Cooldown>1.5</RangedWeapon_Cooldown>
     </statBases>
     
-    <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
+    <thingSetMakerTags><li>VV_RewardEquipmentSuper</li></thingSetMakerTags>
     <thingCategories Inherit="False">
       <li>VV_ViviWeapon</li>
     </thingCategories>
@@ -376,7 +376,7 @@
       <RangedWeapon_Cooldown>0.12</RangedWeapon_Cooldown>
     </statBases>
 
-    <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
+    <thingSetMakerTags><li>VV_RewardEquipmentSuper</li></thingSetMakerTags>
     <thingCategories Inherit="False">
       <li>VV_ViviWeapon</li>
     </thingCategories>

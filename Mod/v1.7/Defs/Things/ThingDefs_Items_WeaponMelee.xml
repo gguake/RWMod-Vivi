@@ -22,7 +22,7 @@
       <MeleeHitChance>-5</MeleeHitChance>
     </equippedStatOffsets>
 
-    <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
+    <thingSetMakerTags><li>VV_RewardEquipmentSuper</li></thingSetMakerTags>
     <thingCategories Inherit="False">
       <li>VV_ViviWeapon</li>
     </thingCategories>
