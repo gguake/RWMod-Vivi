@@ -46,11 +46,12 @@
     <canGenerateInGeneSet>false</canGenerateInGeneSet>
   </GeneDef>
 
-  <GeneDef ParentName="GeneToughnessBase">
+  <GeneDef>
     <defName>VV_LightBody</defName>
     <label>light body</label>
     <description>Carriers of this gene have extremely light bones and organs, letting them move swiftly, but they take heavy injuries from even weak impacts.</description>
     <iconPath>UI/Icons/Genes/Gene_LightBody</iconPath>
+    <displayCategory>Pain</displayCategory>
     <displayOrderInCategory>5</displayOrderInCategory>
     <statFactors>
       <IncomingDamageFactor>1.2</IncomingDamageFactor>
