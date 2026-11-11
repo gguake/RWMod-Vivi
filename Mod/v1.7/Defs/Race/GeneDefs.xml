@@ -54,6 +54,7 @@
     <displayOrderInCategory>5</displayOrderInCategory>
     <statFactors>
       <IncomingDamageFactor>1.2</IncomingDamageFactor>
+      <PawnTrapSpringChance>0.1</PawnTrapSpringChance>
     </statFactors>
     <statOffsets>
       <MeleeDodgeChance>15</MeleeDodgeChance>
