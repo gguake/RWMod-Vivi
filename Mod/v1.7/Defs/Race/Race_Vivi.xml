@@ -23,12 +23,10 @@
       <ConstructionSpeed>1.25</ConstructionSpeed>
       <SmoothingSpeed>1.5</SmoothingSpeed>
       <CleaningSpeed>1.25</CleaningSpeed>
-      <PruningSpeed MayRequire="Ludeon.RimWorld.Ideology">1.5</PruningSpeed>
-      <PawnTrapSpringChance>0.1</PawnTrapSpringChance>
-      <MeleeDodgeChance>10</MeleeDodgeChance>
+      <PruningSpeed MayRequire="Ludeon.RimWorld.Ideology">2.0</PruningSpeed>
 
       <MaxNutrition>1.25</MaxNutrition>
-      <MoveSpeed>5.0</MoveSpeed>
+      <MoveSpeed>4.8</MoveSpeed>
       <PsychicSensitivity>0.25</PsychicSensitivity>
       <Fertility>0</Fertility>
 

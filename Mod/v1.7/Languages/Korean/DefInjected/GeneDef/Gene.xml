@@ -6,7 +6,13 @@
 
   <VV_HoneyDepedency.label>과당 의존증</VV_HoneyDepedency.label>
   <VV_HoneyDepedency.description>이 유전자를 보유하면 꿀이나 암브로시아에 포함된 과당을 주기적으로 섭취해야 건강을 유지할 수 있습니다. 꿀이나 암브로시아 섭취 없이 15일이 지나면 결핍에 시달립니다.</VV_HoneyDepedency.description>
-  
+
+  <VV_LightBody.label>가벼운 신체</VV_LightBody.label>
+  <VV_LightBody.description>이 유전자의 보유자는 매우 가벼운 뼈와 장기를 가지고 있어 재빠르게 움직일 수 있지만 약한 충격에도 큰 피해를 받습니다.</VV_LightBody.description>
+  <VV_LightBody.symbolPack.prefixSymbols.0.symbol>깃털</VV_LightBody.symbolPack.prefixSymbols.0.symbol>
+  <VV_LightBody.symbolPack.prefixSymbols.1.symbol>날쌘</VV_LightBody.symbolPack.prefixSymbols.1.symbol>
+  <VV_LightBody.symbolPack.prefixSymbols.2.symbol>가벼운</VV_LightBody.symbolPack.prefixSymbols.2.symbol>
+
   <VV_Skin_Melanin.label>피부색</VV_Skin_Melanin.label>
   <VV_Skin_Melanin.description>이 유전자를 보유하면 특정 피부색을 갖습니다. 다수의 피부색 유전자를 보유하면 하나를 무작위로 선택합니다.</VV_Skin_Melanin.description>
 </LanguageData>
