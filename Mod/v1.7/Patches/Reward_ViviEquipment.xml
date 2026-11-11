@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+  <!-- 비비 장비는 비비 연방이 주는 보상에서만 등장한다.
+       바닐라의 제국 전용 보상 분기와 같은 방식으로, 표준 보상 풀에 팩션 조건부 분기를 추가한다.
+       (비비 무기는 바닐라 RewardStandard* 태그 대신 VV_RewardEquipment* 태그를 쓴다) -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingSetMakerDef[defName="Reward_ItemsStandard"]/root/options/li[maxMarketValue]/thingSetMaker[@Class="ThingSetMaker_RandomOption"]/options</xpath>
+    <value>
+      <li>
+        <weight>10</weight>
+        <thingSetMaker Class="ThingSetMaker_Conditional_MakingFaction">
+          <makingFaction>VV_ViviFederation</makingFaction>
+          <requireNonNull>true</requireNonNull>
+          <thingSetMaker Class="ThingSetMaker_RandomOption">
+            <options>
+              <!-- 일반 무기: 걸작/전설 품질 -->
+              <li>
+                <weight>3</weight>
+                <thingSetMaker Class="ThingSetMaker_MarketValue">
+                  <fixedParams>
+                    <qualityGenerator>Super</qualityGenerator>
+                    <allowNonStackableDuplicates>False</allowNonStackableDuplicates>
+                    <filter>
+                      <thingSetMakerTagsToAllow>
+                        <li>VV_RewardEquipmentSuper</li>
+                      </thingSetMakerTagsToAllow>
+                    </filter>
+                  </fixedParams>
+                </thingSetMaker>
+              </li>
+              <!-- 특수 무기: 보상 품질 -->
+              <li>
+                <weight>2</weight>
+                <thingSetMaker Class="ThingSetMaker_MarketValue">
+                  <fixedParams>
+                    <qualityGenerator>Reward</qualityGenerator>
+                    <allowNonStackableDuplicates>False</allowNonStackableDuplicates>
+                    <filter>
+                      <thingSetMakerTagsToAllow>
+                        <li>VV_RewardEquipmentExotic</li>
+                      </thingSetMakerTagsToAllow>
+                    </filter>
+                  </fixedParams>
+                </thingSetMaker>
+              </li>
+            </options>
+          </thingSetMaker>
+        </thingSetMaker>
+      </li>
+    </value>
+  </Operation>
+</Patch>

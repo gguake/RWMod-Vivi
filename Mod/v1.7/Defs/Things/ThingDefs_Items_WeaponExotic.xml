@@ -26,7 +26,7 @@
     <tradeNeverStack>true</tradeNeverStack>
     <relicChance>2</relicChance>
 
-    <thingSetMakerTags><li>RewardStandardMidFreq</li></thingSetMakerTags>
+    <thingSetMakerTags><li>VV_RewardEquipmentExotic</li></thingSetMakerTags>
     <thingCategories Inherit="False">
       <li>VV_ViviWeapon</li>
       <li>VV_ArcaneWeapon</li>
@@ -158,7 +158,7 @@
     <tradeNeverStack>true</tradeNeverStack>
     <relicChance>3</relicChance>
 
-    <thingSetMakerTags><li>RewardStandardMidFreq</li></thingSetMakerTags>
+    <thingSetMakerTags><li>VV_RewardEquipmentExotic</li></thingSetMakerTags>
     <thingCategories Inherit="False">
       <li>VV_ViviWeapon</li>
       <li>VV_ArcaneWeapon</li>
