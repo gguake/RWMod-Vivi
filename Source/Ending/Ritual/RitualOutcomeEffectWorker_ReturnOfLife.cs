@@ -11,7 +11,6 @@ namespace VVRace
         private static readonly IntRange AncientGeneCount = new IntRange(4, 6);
         private const int AncientArchiteGeneCount = 1;
 
-        // 제국 멸망 후 요정으로 보낸 수백 년은 달력상 나이에만 더하고 육체 나이는 유지한다.
         private static readonly IntRange AncientYearsRange = new IntRange(300, 600);
         private const float SpawnRadius = 4.9f;
 

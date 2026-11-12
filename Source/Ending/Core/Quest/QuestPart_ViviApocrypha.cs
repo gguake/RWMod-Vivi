@@ -12,7 +12,6 @@ namespace VVRace
         private const int RetryIntervalTicks = 2500;
         private const int WatchIntervalTicks = 250;
 
-        // 보스 소실 후 통지가 없을 때의 토벌 판정 유예. 7.5초인 소멸 연출보다 길게 둔다.
         private const int BossMissingGraceTicks = 1500;
 
         public ArcanePlant_Everflower anchor;
@@ -22,7 +21,6 @@ namespace VVRace
 
         private Pawn _boss;
 
-        // 소멸 연출 중 저장하면 파괴된 보스 참조가 null이 되므로 등장 여부를 별도 저장해 중복 소환을 막는다.
         private bool _arrived;
         private bool _deferred;
         private int _nextAttemptTick = -1;
@@ -60,7 +58,6 @@ namespace VVRace
             }
         }
 
-        // 개발자 도구가 같은 호출에서 토벌로 넘길 수 있도록 첫 등장 시도는 다음 틱으로 미룬다.
         protected override void Enable(SignalArgs receivedArgs)
         {
             base.Enable(receivedArgs);
@@ -127,7 +124,6 @@ namespace VVRace
         {
             var altar = ViviEndingUtility.AltarOf(anchor);
             var target = altar != null && altar.Spawned && altar.Map == map ? (Thing)altar : anchor;
-            // 가장자리로 들어올 칸이 없으면 등장이 끝없이 미뤄지지 않게 제단과 이어진 땅의 가장 먼 칸에 내려앉힌다.
             return ApocryphaUtility.TryFindEntryCell(map, target.PositionHeld, out cell)
                 || ApocryphaUtility.TryFindBreachEntryCell(map, target, out cell)
                 || ApocryphaUtility.TryFindInnerEntryCell(map, target, out cell)
@@ -192,8 +188,6 @@ namespace VVRace
                 Log.Error($"[ViViRace] failed to spawn Asphodel: {ex}");
             }
 
-            // 스폰 도중 실패했어도 보스가 맵에 있으면 해당 개체로 전투를 시작해 중복 소환을 막는다.
-            // 보스 생성이나 스폰 자체가 실패한 경우에만 등장을 미루고 재시도한다.
             if (boss == null || !boss.Spawned || boss.Dead)
             {
                 Defer();
@@ -244,8 +238,6 @@ namespace VVRace
                 return;
             }
 
-            // 소멸 연출이 맵에 실제로 있는 동안만 기다린다(연출이 끝나며 토벌을 알린다). 불러온 뒤에는 보스 참조가 null이므로 모든 맵을 본다.
-            // 보스의 페이즈는 보지 않는다. 연출 없이 사라진 보스(스폰되지 않은 채 사망 등)는 토벌을 알릴 주체가 없어 유예 뒤 여기서 처리해야 한다.
             if (Find.Maps.Any(ApocryphaUtility.IsDefeatInProgress))
             {
                 _bossMissingSinceTick = -1;

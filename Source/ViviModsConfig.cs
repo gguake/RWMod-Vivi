@@ -15,7 +15,6 @@ namespace VVRace
         public bool randomGenesForStartingVivi = false;
         public bool enableViviMealContinuation = true;
         public float viviMealContinuationNutritionGap = 0.7f;
-        // 야생(떠돌이) 비비 둥지 인구 상한(ViviNestPlanner.MaxMembers). 정착대(최대 MaxSettlerCount명)보다 작게는 두지 않는다.
         public int wildViviNestMaxMembers = DefaultWildViviNestMaxMembers;
 
         public const int DefaultWildViviNestMaxMembers = 12;

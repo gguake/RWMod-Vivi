@@ -4,8 +4,6 @@ using Verse.AI;
 
 namespace VVRace
 {
-    // 둥지 정원 일: 다 자란 목화 수확, 옷감이 모자라면 목화 심기, 채집할 꽃이 모자라면 둥지 채집 범위에 꽃 심기(둥지 가까운 칸부터).
-    // 바닐라 재배처럼 자리를 막는 풀은 먼저 베고, 심기·수확은 바닐라 잡(Sow·Harvest)을 구역 없이 쓴다.
     public class JobGiver_ViviNestGarden : ThinkNode_JobGiver
     {
         protected override Job TryGiveJob(Pawn pawn)
@@ -43,7 +41,6 @@ namespace VVRace
             return null;
         }
 
-        // 꽃이 모자라면 재채집 대기가 짧은 장미를 먼저, 장미가 못 자라는 곳이면 민들레를 심는다.
         private static Job SowFlowerJob(Pawn pawn, LordJob_ViviNest nest)
         {
             if (nest.Garden.FlowerCount >= nest.Garden.FlowerTarget() || nest.Garden.FlowerSpotSearchPaused) { return null; }
@@ -77,7 +74,6 @@ namespace VVRace
             var plant = cell.GetPlant(map);
             if (plant != null)
             {
-                // 이미 심은 것·꿀 꽃·나무는 두고, 자리를 막는 풀만 벤다.
                 if (plant.def == plantDef || plant.def.plant.IsTree || ViviNestGarden.IsHoneyFlowerDef(plant.def)) { return null; }
                 if (!plantDef.CanEverPlantAt(cell, map, out _, canWipePlantsExceptTree: true).Accepted) { return null; }
                 if (!pawn.CanReserveAndReach(plant, PathEndMode.Touch, Danger.Some) || !PlantUtility.PawnWillingToCutPlant_Job(plant, pawn)) { return null; }

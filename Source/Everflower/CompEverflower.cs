@@ -188,7 +188,6 @@ namespace VVRace
             var mesh = graphic.Graphic.MeshAt(parent.Rotation);
             var drawPos = parent.DrawPos + graphic.drawOffset;
 
-            // 완전 동화 중인 공명자가 잎에 가려지지 않도록 꽃을 폰 바로 뒤 높이로 내린다.
             if (Hediff_EverflowerAssimilation.IsFloatingBefore(Everflower))
             {
                 drawPos.y = AltitudeLayer.Pawn.AltitudeFor() - BehindAssimilatedPawnAltitude;
@@ -460,8 +459,6 @@ namespace VVRace
 
         private void SendLevelUpLetter(int level)
         {
-            // 만개 의식과 여왕의 대관식은 각각 4·5단계 도달 시점에 아직 잠겨 있으므로 해금 목록에서 제외한다.
-            // 만개 의식은 제단 해금 서신·안치 메시지로, 대관식은 토벌 후 대기 서신으로 안내한다.
             var rituals = new List<string>();
             foreach (var ritualDef in DefDatabase<PreceptDef>.AllDefsListForReading)
             {

@@ -15,8 +15,6 @@ namespace VVRace
         Assault = 3,
     }
 
-    // 보스전 거대 말벌 소환 연출: 땅(멸망꽃이면 꽃)에서 검은 기운이 피어올라 말벌 형체를 빚고, 다 빚어지면 실제 말벌로 바뀐다.
-    // 아스포델 등장 연출과 ManifestationRenderer의 VV_Manifest 재질을 공유하고 검은 입자는 작은 규모로 다시 쓴다.
     [StaticConstructorOnStartup]
     public class HornetManifestation : Thing
     {
@@ -116,14 +114,11 @@ namespace VVRace
             GenSpawn.Spawn(manifestation, cell, map, WipeMode.Vanish);
         }
 
-        // 바깥으로 향하는 쪽으로 돌려 세운다. 실제 말벌도 같은 방향으로 스폰해 형체와 이어지게 한다.
         private static Rot4 FacingAway(IntVec3 center, IntVec3 cell)
         {
             return cell == center ? Rot4.South : Rot4.FromAngleFlat((cell - center).AngleFlat);
         }
 
-        // 같은 칸에 연출을 다시 스폰하면 바닐라 스폰 규칙이 앞 연출을 지워 말벌이 사라지므로, 고른 칸과 연출이 있는 칸은 제외한다.
-        // 맵 가장자리처럼 둘레가 좁아 칸이 모자라면 간격을 포기하고, 그래도 모자라면 반경을 넓힌다.
         private static bool TryFindSummonCell(Map map, IntVec3 center, FloatRange radius, List<IntVec3> chosen, out IntVec3 result)
         {
             var traverse = TraverseParms.For(TraverseMode.PassDoors);
@@ -174,7 +169,6 @@ namespace VVRace
             var age = Age;
             if (age < 0) { return; }
 
-            // 다른 물건의 틱 도중에 스폰되면 첫 틱이 다음 틱이라 나이 0을 건너뛸 수 있다.
             if (!_begun)
             {
                 _begun = true;
@@ -198,7 +192,6 @@ namespace VVRace
             var cell = Position;
             Destroy(DestroyMode.Vanish);
 
-            // 그사이 보스전이 끝났으면 형체만 흩어진다.
             if (!ApocryphaGimmicks.IsBossFightActive)
             {
                 VVEffecterDefOf.VV_Effecter_ApocryphaVanish?.Spawn(cell, map).Cleanup();
@@ -226,7 +219,6 @@ namespace VVRace
             JoinLord(hornet);
         }
 
-        // 지킬 대상이 이미 사라졌으면 정착지를 습격한다.
         private void JoinLord(Pawn hornet)
         {
             var bossActive = _boss != null && _boss.Spawned && !_boss.Dead && _boss.Map == hornet.Map
@@ -246,7 +238,6 @@ namespace VVRace
             }
         }
 
-        // 검은 기운은 원천에서 곧게 피어오르는 줄기와, 둘레에서 형체로 모여드는 입자로 나눠 날린다.
         private void ThrowWisps(float secs)
         {
             if (secs >= WispEndSecs) { return; }
@@ -288,7 +279,6 @@ namespace VVRace
             return t <= 0f ? 0f : 1f - Mathf.Pow(1f - t, 2f);
         }
 
-        // 형체가 빚어지는 동안 조금 아래에서 떠올라 다 빚어지면 실제 말벌이 그려지는 칸 중심에 닿는다.
         private Vector3 BodyPos(float secs)
         {
             return DrawPos.Yto0() + new Vector3(0f, 0f, -RiseCells * (1f - FormProgress(secs)));

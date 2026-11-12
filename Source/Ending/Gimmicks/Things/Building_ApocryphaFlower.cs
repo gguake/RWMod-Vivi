@@ -13,7 +13,6 @@ namespace VVRace
 
         private int _spawnTick = -1;
 
-        // 씨앗에서 피어난 꽃은 씨앗을 따라 이어져 있던 연결선을 그대로 이어받는다(-1이면 꽃 자신의 무늬로 새로 나타난다).
         private int _inheritedLinkSeed = -1;
 
         [Unsaved]

@@ -33,8 +33,6 @@ namespace VVRace
             var points = StorytellerUtility.DefaultThreatPointsNow(Find.World);
             var asker = askerFaction?.leader;
 
-            // 합류형은 보상 생성을 호출하지 않아 제외한다.
-            // 고정 난이도는 별 가중치를 무시하므로 3성이 아닌 경우에만 제외한다.
             var candidates = DefDatabase<QuestScriptDef>.AllDefsListForReading
                 .Where(v => v.IsRootRandomSelected
                     && !ExcludedScripts.Contains(v.defName)
@@ -72,7 +70,6 @@ namespace VVRace
                 slate.Set("asker", asker);
             }
 
-            // Util_RandomizePointsChallengeRating은 기존 별 가중치를 덮어쓰지 않으므로 3성 가중치만 남긴다.
             slate.Set("selectionWeightOneStar", 0f);
             slate.Set("selectionWeightTwoStar", 0f);
             slate.Set("selectionWeightThreeStar", 1f);
@@ -105,7 +102,6 @@ namespace VVRace
                 _generating = false;
             }
 
-            // 바닐라 개발자 도구의 보상 표본처럼 퀘스트 매니저에 등록하지 않으면 버린 퀘스트는 실행되지 않는다.
             if (quest == null || quest.challengeRating != ChallengeRating || !_rewardGiven || _rejected)
             {
                 if (Prefs.DevMode)
@@ -132,7 +128,6 @@ namespace VVRace
                 return false;
             }
 
-            // Reward_Items.GenerateQuestParts가 읽을 수 있도록 보상 신호를 슬레이트의 inSignal에 임시 저장한다.
             var restoreInfo = slate.GetRestoreInfo("inSignal");
             if (!inSignal.NullOrEmpty())
             {

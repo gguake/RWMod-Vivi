@@ -8,7 +8,6 @@ namespace VVRace
     {
         private readonly List<Pawn> _channelingBosses = new List<Pawn>();
 
-        // 제목·설명은 GetReport가 모은 보스를 재사용하고 진행률만 그 컴포넌트에서 새로 읽는다.
         private CompApocrypha _firstChannelingComp;
 
         public Alert_ApocryphaChanneling()

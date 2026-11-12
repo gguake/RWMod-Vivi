@@ -4,7 +4,6 @@ using Verse;
 
 namespace VVRace
 {
-    // 중립인 비비 연방을 동맹 문턱까지 올린다. 적대면 아무것도 하지 않는다.
     // 같은 신호로 켜지는 QuestPart_FactionGoodwillLocked보다 먼저 추가해야 잠금 전에 우호도가 바뀐다.
     public class QuestPart_ViviFederationAlliance : QuestPart
     {

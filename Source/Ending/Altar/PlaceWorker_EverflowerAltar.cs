@@ -4,7 +4,6 @@ using Verse;
 
 namespace VVRace
 {
-    // 제단 틀이 발판의 건물과 마법 식물을 해체하므로 영원꽃 둘레에는 제단을 건설할 수 없다.
     public class PlaceWorker_EverflowerAltar : PlaceWorker
     {
         public override bool IsBuildDesignatorVisible(BuildableDef def)

@@ -91,7 +91,6 @@ namespace VVRace
             }
         }
 
-        // 꿀 의존이 심한(0.8 넘음) 비비는 거둔 꿀 하나를 그 자리에서 먹는다(둥지 채집도 같은 규칙, JobDriver_ViviNestGather).
         public static float EatIfHoneyNeedy(Pawn pawn, ThingDef productDef, float productCount)
         {
             var gene = pawn.genes?.GenesListForReading.FirstOrDefault(v => v is Gene_HoneyDependency) as Gene_HoneyDependency;

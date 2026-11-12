@@ -30,7 +30,6 @@ namespace VVRace
             GenSpawn.Spawn(needle, caster.Position, caster.Map);
         }
 
-        // 바늘은 끝까지 날아가므로 대상 칸이 아니라 실제로 꿰뚫을 경로 전체를 미리 보여 준다.
         public override void DrawEffectPreview(LocalTargetInfo target)
         {
             var caster = parent.pawn;

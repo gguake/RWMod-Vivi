@@ -93,7 +93,6 @@ namespace VVRace
             _drawOffset = new Vector3(offset.x, 0f, offset.z);
         }
 
-        // 찬탈 직전의 모습을 보존하도록 영원꽃과 보스를 제거하기 전에 연출을 초기화한다.
         public void InitStolen(Pawn boss, ArcanePlant_Everflower everflower)
         {
             InitFrom(boss);
@@ -128,7 +127,6 @@ namespace VVRace
             {
                 _startTick = Find.TickManager.TicksGame;
 
-                // 찬탈 모드는 CompApocrypha.StealEverflower에서 시작 이펙트를 이미 재생했으므로 중복 재생하지 않는다.
                 if (!_stolen)
                 {
                     VVEffecterDefOf.VV_Effecter_ApocryphaDeath.Spawn(Position, map, _drawOffset).Cleanup();
@@ -203,7 +201,6 @@ namespace VVRace
                 ApocryphaUtility.ShakeCamera(map, 0.2f);
             }
 
-            // 셰이더가 바람 방향의 가장자리부터 지우므로 소멸 경계도 같은 축을 따라 반대편으로 이동시킨다.
             var center = DrawPos + _drawOffset + StolenDrift;
             var front = _drawSize * 0.8f * (0.5f - bossProgress);
             var side = new Vector3(_wind.z, 0f, -_wind.x);
@@ -322,7 +319,6 @@ namespace VVRace
             }
         }
 
-        // 산 지붕 붕괴 등으로 연출이 조기 제거돼도 토벌 통지는 누락되지 않아야 한다.
         public override void Destroy(DestroyMode mode = DestroyMode.Vanish)
         {
             NotifyDefeated();

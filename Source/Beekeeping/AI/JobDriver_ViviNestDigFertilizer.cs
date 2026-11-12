@@ -7,8 +7,7 @@ namespace VVRace
 {
     public class JobDriver_ViviNestDigFertilizer : JobDriver
     {
-        // 작업대 없이 맨땅에서 하므로 작업량을 두 배로 친다.
-        private const float WorkAmount = 2400f;
+        private const float WorkAmount = 2000f;
         private const int FertilizerYield = 10;
 
         private float _workDone;

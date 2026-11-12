@@ -5,7 +5,6 @@ using Verse.AI.Group;
 
 namespace VVRace
 {
-    // 멸망꽃에서 빚어진 말벌은 자기를 낳은 꽃만 지킨다. 꽃이 사라지면 LordToil_ApocryphaFlowerGuard가 정착지 습격으로 돌린다.
     public class LordJob_ApocryphaFlowerGuard : LordJob_ApocryphaHornetGuard
     {
         private readonly Dictionary<Pawn, Thing> _guardedFlowers = new Dictionary<Pawn, Thing>();
@@ -33,7 +32,6 @@ namespace VVRace
             _guardedFlowers.Remove(p);
         }
 
-        // 로드에 넣기 전에 정해야 합류 때 듀티가 그 꽃으로 잡힌다.
         public void AssignFlower(Pawn pawn, Thing flower)
         {
             _guardedFlowers[pawn] = flower;
@@ -41,7 +39,6 @@ namespace VVRace
 
         public Thing GetGuardedFlower(Pawn pawn)
         {
-            // 저장되지 않는 꽃 목록은 불러온 뒤 경비 듀티의 대상에서 복원한다.
             if (!_guardedFlowers.TryGetValue(pawn, out var flower))
             {
                 var duty = pawn.mindState?.duty;

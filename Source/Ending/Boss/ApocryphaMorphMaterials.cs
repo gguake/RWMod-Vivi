@@ -5,7 +5,6 @@ using Verse;
 namespace VVRace
 {
     // 렌더 서브워커는 병렬 실행되므로 재질은 전환 시작·불러오기 시 메인 스레드에서 준비하고 서브워커는 읽기만 한다.
-    // 재질을 가진 정적 클래스의 시작 경고를 피하도록 StaticConstructorOnStartup을 붙이되 재질 생성은 지연한다.
     [StaticConstructorOnStartup]
     public static class ApocryphaMorphMaterials
     {
@@ -39,7 +38,6 @@ namespace VVRace
                     var to = ContentFinder<Texture2D>.Get(unboundPath + suffixes[i], reportFailure: false);
                     if (from == null || to == null) { return; }
 
-                    // 이 연출만 사용하는 (텍스처, VV_Morph, 흰색) 조합이므로 공유 재질의 매개변수를 바꿔도 다른 연출에 영향이 없다.
                     var material = MaterialPool.MatFrom(from, shader, Color.white);
                     material.SetTexture("_MorphTex", to);
                     material.SetColor("_VeinColor", VeinColor);

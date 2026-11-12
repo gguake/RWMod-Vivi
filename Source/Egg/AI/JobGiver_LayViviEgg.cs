@@ -20,7 +20,6 @@ namespace VVRace
                 return null;
             }
 
-            // 양봉 둥지 로열은 둥지 부화기에 낳는다(금지 후처리가 플레이어 부화기를 막는다).
             if ((pawn.Faction == Faction.OfPlayerSilentFail || pawn.GetNestLordJob() != null) && TryGetBestEggBox(pawn, out var eggBox))
             {
                 return JobMaker.MakeJob(VVJobDefOf.VV_LayViviEgg, eggBox);

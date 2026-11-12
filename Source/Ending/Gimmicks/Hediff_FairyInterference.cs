@@ -10,10 +10,8 @@ namespace VVRace
         public const float ReleaseRadius = 2.9f;
         public static readonly IntRange ReturnDelayTicks = new IntRange(1500, 2500);
 
-        // 퀘스트에 보스 참조가 없으면 맵을 순회해야 하므로 탐색 주기를 제한한다.
         private const int BossSearchIntervalTicks = 30;
 
-        // 일렁이는 빛 모트를 몸통 쪽으로 조금 올려 붙인다.
         private static readonly Vector3 ShimmerOffset = new Vector3(0f, 0f, 0.12f);
 
         [Unsaved]
@@ -66,7 +64,6 @@ namespace VVRace
         {
             var vivi = pawn;
 
-            // 결속 해방이 2페이즈 전환과 간섭 일괄 정리를 다시 호출할 수 있으므로 자기 자신을 먼저 제거한다.
             EndAura();
             vivi.health.RemoveHediff(this);
 
@@ -79,7 +76,6 @@ namespace VVRace
                 new LookTargets(boss),
                 MessageTypeDefOf.PositiveEvent);
 
-            // 마지막 자유 정착민이면 게임 오버를 피하려고 보류 없이 바로 제단 앞으로 순간이동시킨다.
             var anchor = ViviEndingQuest.Current?.AnchorEverflower;
             if (anchor != null && !anchor.Destroyed && vivi.Spawned && !vivi.Dead)
             {
@@ -128,7 +124,6 @@ namespace VVRace
             _shimmerMote.Maintain();
         }
 
-        // 빛 모트는 유지가 끊기면 스스로 흐려지며 사라진다.
         private void EndAura()
         {
             _shimmerMote = null;
@@ -151,8 +146,6 @@ namespace VVRace
 
             EndAura();
 
-            // 죽은 폰은 헤디프 틱이 없어 사망 알림에서 정리한다.
-            // 1.7의 HediffSet.Notify_PawnDied는 역순으로 순회하므로 즉시 제거해도 다른 헤디프의 알림이 누락되지 않는다.
             if (pawn?.health != null && pawn.health.hediffSet.hediffs.Contains(this))
             {
                 pawn.health.RemoveHediff(this);

@@ -6,7 +6,6 @@ using Verse.AI.Group;
 
 namespace VVRace
 {
-    // 정찰 비비가 유인통의 꿀 냄새를 맡고 미끼를 조금 맛본다.
     public class JobDriver_ViviInspectLure : JobDriver
     {
         private const int SniffTicks = 240;
@@ -19,7 +18,6 @@ namespace VVRace
 
             yield return Toils_General.Do(() =>
             {
-                // 길이 막혀도 다시 시도하지 않게 시작할 때 맡은 것으로 친다.
                 (pawn.GetLord()?.LordJob as LordJob_ViviLureScout)?.Notify_Sniffed(pawn);
             });
 

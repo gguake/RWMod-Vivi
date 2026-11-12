@@ -34,8 +34,6 @@ namespace VVRace
 
         public Pawn AssimilatedPawn => _assimilated != null && Hediff_EverflowerAssimilation.IsAssimilated(_assimilated) ? _assimilated : null;
 
-        // 바닐라는 종료된 퀘스트의 부품을 정리 후 30일이 지나면 삭제한다.
-        // 축복·제단·날씨 의식에 필요한 앵커는 엔딩 후에도 유지되도록 퀘스트 부품과 별도로 보관한다.
         private ArcanePlant_Everflower _anchor;
 
         private ViviEndingEchoLetters _echoLetters = new ViviEndingEchoLetters();
@@ -256,7 +254,6 @@ namespace VVRace
             return StartBloomQuest(everflower, quality);
         }
 
-        // 소멸 연출 도중 저장·불러오기를 거치면 이미 파괴된 boss 참조는 null일 수 있다.
         public void Notify_BossDefeated()
         {
             if (Stage != ViviEndingStage.Boss) { return; }
@@ -278,7 +275,6 @@ namespace VVRace
             ViviEndingSignals.Send(_bloomQuest, ViviEndingSignals.EverflowerStolen);
         }
 
-        // 엔딩 진행 중 앵커의 제단을 잃으면 복구하지 않고 실패로 끝낸다.
         public void Notify_AnchorAltarLost(ArcanePlant_Everflower everflower)
         {
             if (!IsEndingActive || !IsAnchor(everflower)) { return; }
@@ -433,8 +429,6 @@ namespace VVRace
             return true;
         }
 
-        // 만개 의식 외의 이유로 밀서 퀘스트가 종료되면 서신을 재발송하지 않고 퀘스트만 다시 만든다.
-        // 다른 모드나 개발자 도구의 종료로 코어 의뢰와 만개 의식이 막히는 일을 방지한다.
         private void ReissueEndedMissiveQuest()
         {
             var ended = _missiveQuest;
@@ -464,7 +458,6 @@ namespace VVRace
             var quest = GenerateQuest(VVQuestScriptDefOf.VV_EndGame_ViviBloom, slate, ViviEndingSignals.AnchorLost);
             if (quest == null) { return false; }
 
-            // 퀘스트를 추가하는 즉시 시작 신호가 처리되므로 상태를 먼저 갱신한다.
             _bloomQuest = quest;
             _anchor = everflower;
             Find.QuestManager.Add(quest);
@@ -572,7 +565,6 @@ namespace VVRace
 
             if (!finished)
             {
-                // 열거형 값 1이 비어 있으므로 None 다음은 AltarUnlocked로 직접 지정한다.
                 var next = stage == ViviEndingStage.None ? ViviEndingStage.AltarUnlocked : stage + 1;
                 yield return new Command_Action()
                 {
@@ -838,7 +830,6 @@ namespace VVRace
             _cachedPartCount = -1;
         }
 
-        // 삭제한 퀘스트의 참조를 편지·메시지·컨디션에 남겨 두면 불러올 때 "Could not resolve reference" 경고가 난다.
         private static void ClearQuestReferences(Quest quest)
         {
             foreach (var archivable in Find.Archive.ArchivablesListForReading)

@@ -6,7 +6,6 @@ using Verse;
 
 namespace VVRace
 {
-    // 아스포델 바늘은 보스 상태에 묶여 있으므로 상태 진행은 따로 두고 경로 계산·관통 판정·그리기·연출만 공유한다.
     public class QueenVerdictNeedle : ThingWithComps
     {
         private enum VerdictState : byte
@@ -212,7 +211,6 @@ namespace VVRace
             TickFire(now);
         }
 
-        // _travelled는 경로 시작점에서 촉까지의 거리다. 그림 중심은 촉보다 TipOffset만큼 뒤에 있다.
         private void TickFire(int now)
         {
             var from = _travelled;

@@ -4,7 +4,6 @@ using Verse;
 
 namespace VVRace
 {
-    // 메시는 생애 단계의 drawSize를 따르므로 현재 크기 대비 목표 비율을 곱해 그래픽 교체 중에도 크기가 연속적으로 변하게 한다.
     // 싱글턴 서브워커의 TransformScale·EditMaterial은 병렬 실행되므로 인스턴스 필드·Rand·Find를 변경하지 않는다.
     // 컴프의 저장 필드와 미리 준비된 재질만 읽는다. EditMaterialPropertyBlock은 메인 스레드에서 그리기 직전에 호출된다.
     public class PawnRenderSubWorker_ApocryphaGrow : PawnRenderSubWorker

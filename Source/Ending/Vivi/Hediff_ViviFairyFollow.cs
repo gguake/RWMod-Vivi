@@ -5,14 +5,12 @@ using Verse;
 
 namespace VVRace
 {
-    // 구버전 HediffWithComps는 불러올 때 BackCompatibilityPatch가 이 클래스로 변환한다.
     public class Hediff_ViviFairyFollow : HediffWithComps
     {
         public const int PenaltyFreeAttunementLevel = 6;
 
         private static readonly Dictionary<HediffDef, List<HediffStage>> PenaltyFreeStagesCache = new Dictionary<HediffDef, List<HediffStage>>();
 
-        // CurStage는 스탯을 계산할 때마다 여러 번 호출되므로 조회 결과를 캐시한다.
         [Unsaved]
         private CompVivi _compVivi;
 
@@ -59,8 +57,6 @@ namespace VVRace
             return stages;
         }
 
-        // XML에 단계를 복제하지 않고 def의 단계에서 페널티 배율만 제거한다.
-        // 원본 수치 변경이나 다른 모드의 패치가 6단계 공명자에게도 반영되도록 한다.
         private static List<HediffStage> MakePenaltyFreeStages(HediffDef def)
         {
             var penaltyStats = def.GetModExtension<FairyBondPenaltyExtension>()?.penaltyStatFactors;

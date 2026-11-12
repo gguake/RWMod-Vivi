@@ -5,7 +5,6 @@ using Verse.AI;
 
 namespace VVRace
 {
-    // 바닐라 청소 잡(JobDriver_CleanFilth)과 같은 순서·작업량. 바닐라 것은 집 구역 밖 오물을 건너뛰는데(JumpIfOutsideHomeArea) 둥지 방은 플레이어 집 구역이 아니라서 그 검사만 뺐다.
     public class JobDriver_ViviNestClean : JobDriver
     {
         private float _cleaningWorkDone;

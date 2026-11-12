@@ -6,7 +6,6 @@ using Verse;
 
 namespace VVRace
 {
-    // 파면이 진행되는 동안 저장·불러오기가 가능하도록 처리한 폰을 기록해 둔다.
     public class WindOfRest : Thing
     {
         private const int SpreadTicks = 240;
@@ -141,7 +140,6 @@ namespace VVRace
             return away.sqrMagnitude > 0.01f ? away.normalized : Vector3.forward;
         }
 
-        // 맵 전체 파면에 모두 뿌리면 플렉이 너무 많으므로 파면 위의 임의 지점 중 화면 안에 든 곳에만 뿌린다.
         private void ThrowGusts()
         {
             var map = Map;
@@ -186,7 +184,6 @@ namespace VVRace
 
         private void Finish()
         {
-            // 문구는 하나, 정화한 대상이 있었는지는 메시지 종류로만 구분한다.
             Messages.Message(
                 LocalizeString_Message.VV_Message_WindOfRestResult.Translate(),
                 _anyEffect ? MessageTypeDefOf.PositiveEvent : MessageTypeDefOf.NeutralEvent);

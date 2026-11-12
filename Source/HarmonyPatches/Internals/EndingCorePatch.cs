@@ -38,8 +38,6 @@ namespace VVRace
                 prefix: new HarmonyMethod(typeof(EndingCorePatch), nameof(HediffGiver_BrainInjury_OnHediffAdded_Prefix)));
         }
 
-        // 〈생명 공명〉: 여제는 죽는 대신 상처를 회복하고 영원꽃에 안치된다. 건강 판정으로 인한 사망과 직접 Kill 호출(산 지붕 붕괴 등)이 모두 여기를 지난다.
-        // 가로챌지는 여기서 한 번에 정하고, 가로채지 않으면 원래 죽음이 그대로 진행된다.
         private static bool Pawn_Kill_Prefix(Pawn __instance, DamageInfo? dinfo)
         {
             try
@@ -88,8 +86,6 @@ namespace VVRace
             return false;
         }
 
-        // 바닐라 AddHediff는 건강 판정(죽음) 뒤에 뇌 손상 후유증을 판정한다. 〈생명 공명〉이 죽음을 가로채면 폰이 살아 있어,
-        // 이미 회복으로 사라진 뇌 부상으로 서번트 증후군과 편지가 생긴다. 가로챈 직후의 여제에게 더는 없는 부상이면 판정을 건너뛴다.
         private static bool HediffGiver_BrainInjury_OnHediffAdded_Prefix(Pawn pawn, Hediff hediff, ref bool __result)
         {
             if (pawn?.health == null || hediff == null || pawn.health.hediffSet.hediffs.Contains(hediff)) { return true; }
@@ -99,7 +95,6 @@ namespace VVRace
             return false;
         }
 
-        // 황금빛 꽃안개 중에는 불이 제자리에서만 타고 옆 칸이나 불똥으로 번지지 않는다.
         private static bool Fire_TrySpread_Prefix(Fire __instance)
         {
             return __instance.Map.weatherManager.curWeather != VVWeatherDefOf.VV_GoldenBloomMist;

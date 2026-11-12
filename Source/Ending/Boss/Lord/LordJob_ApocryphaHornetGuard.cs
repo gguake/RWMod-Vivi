@@ -8,7 +8,6 @@ namespace VVRace
 {
     public abstract class LordJob_ApocryphaHornetGuard : LordJob
     {
-        // 원거리 연사 사이에 반격 대상이 풀리지 않도록 마지막 공격을 기억하는 시간을 넉넉히 둔다.
         public const int RetaliationMemoryTicks = 600;
 
         protected Pawn _boss;
@@ -34,7 +33,6 @@ namespace VVRace
 
         public override bool AddFleeToil => false;
 
-        // 말벌이 모두 죽어도 보스가 살아 있으면 증원이 합류할 수 있도록 로드를 유지한다.
         public override bool ShouldExistWithoutPawns => BossActive;
 
         // 로드별 저장 기본 반경. 기본값은 세이브에 기록되지 않으므로 변경하면 기존 세이브의 반경도 달라진다.
@@ -87,8 +85,6 @@ namespace VVRace
                 return false;
             }
 
-            // 쓰러진 말벌도 보스 생존 중에는 로드에 유지해 회복 후 기존 듀티를 이어받게 한다.
-            // 로드 밖에서 제한 없이 공격하거나 먹이 공급·보스 퇴장 시 정리 대상에서 빠지지 않게 한다.
             if (reason == PawnLostCondition.Incapped && BossActive)
             {
                 return false;
@@ -128,7 +124,6 @@ namespace VVRace
             return attacked != null && isProtected(attacked);
         }
 
-        // 탐색 반경과 공격 사거리를 합친 범위를 검사해 비싼 영역 BFS 전에 후보를 거른다.
         public bool AnyPotentialTargetNear(Pawn searcher)
         {
             if (!BossActive || searcher.Map != _boss.Map) { return true; }
@@ -159,7 +154,6 @@ namespace VVRace
         {
             base.ExposeData();
 
-            // 파괴된 보스는 월드 폰 정리로 사라질 수 있으므로 참조로 저장하지 않는다.
             if (Scribe.mode == LoadSaveMode.Saving && _boss != null && _boss.Destroyed)
             {
                 _boss = null;

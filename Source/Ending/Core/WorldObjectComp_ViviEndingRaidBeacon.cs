@@ -7,14 +7,10 @@ using Verse;
 
 namespace VVRace
 {
-    // 엔딩 공성·소강·보스 단계 동안 거점 맵을 습격 신호기 맵(Map_RaidBeacon)으로 만들어 스토리텔러가 습격을 더 자주 고르게 한다.
-    // 맵의 사건 태그는 그 맵 부모 월드 오브젝트의 태그와 comp 태그를 그대로 쓰므로, 모든 MapParent 계열 정의에 상태 없는 이 comp를 붙인다.
-    // comp는 저장되지 않고 월드 오브젝트를 만들거나 불러올 때마다 정의에서 다시 생기므로 기존 세이브에도 그대로 적용된다.
     public class WorldObjectComp_ViviEndingRaidBeacon : WorldObjectComp
     {
         private static readonly IncidentTargetTagDef[] RaidBeaconTags = { IncidentTargetTagDefOf.Map_RaidBeacon };
 
-        // 모든 맵의 사건 판정마다 불리므로 비활성일 때는 반복기를 만들지 않는다.
         public override IEnumerable<IncidentTargetTagDef> IncidentTargetTags()
         {
             var quest = ViviEndingQuest.Current;

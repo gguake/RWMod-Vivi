@@ -93,7 +93,6 @@ namespace VVRace
             }
             else if (tag == inSignalAnchorMapRemoved)
             {
-                // 바닐라는 맵의 물건을 Discarded 처리한 뒤 MapRemoved를 보내므로 이 시점에는 Destroyed로 앵커 소실을 판정할 수 있다.
                 if (IsActive && (anchor == null || anchor.Destroyed))
                 {
                     Find.SignalManager.SendSignal(new Signal(outSignalAnchorLost));

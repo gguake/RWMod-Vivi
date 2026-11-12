@@ -4,8 +4,6 @@ using Verse;
 
 namespace VVRace
 {
-    // 바닐라 DrawPos에는 포물선 높이가 없어 꼬리 위치를 직접 계산한다.
-    // 두꺼운 지붕에 막혀 Impact 없이 사라지지 않도록 지붕·명중 판정을 우회한다.
     public abstract class Projectile_ApocryphaGimmick : Projectile
     {
         [Unsaved]
@@ -21,7 +19,6 @@ namespace VVRace
             }
         }
 
-        // 비공개 Projectile.ArcHeightFactor와 동일하게 짧은 비행의 포물선 높이를 거리의 20%로 제한한다.
         protected float CurrentArcHeight
         {
             get
@@ -37,10 +34,8 @@ namespace VVRace
             }
         }
 
-        // 포물선 높이를 더한 실제로 보이는 위치
         public Vector3 ArcDrawPos => ExactPosition + Vector3.forward * CurrentArcHeight;
 
-        // 텍스처의 머리가 실제 위치에 오도록 중심에서 앞선 거리만큼 그리기 위치를 뒤로 보정한다.
         public override Vector3 DrawPos
         {
             get

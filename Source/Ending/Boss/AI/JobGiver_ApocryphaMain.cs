@@ -7,7 +7,6 @@ namespace VVRace
 {
     public class JobGiver_ApocryphaMain : ThinkNode_JobGiver
     {
-        // 짧은 벽도 우회하지 않고 직선으로 돌파하도록 파괴 가능한 벽·문의 추가 경로 비용을 0으로 둔다.
         private static readonly PathFinderCostTuning ChargeTuning = new PathFinderCostTuning
         {
             costBlockedDoor = 0,
@@ -17,7 +16,6 @@ namespace VVRace
             costBlockedWallExtraPerHitPoint = 0f,
         };
 
-        // 돌진 중 새로 생긴 벽도 즉시 부수도록 약 1초마다 경로를 다시 검사한다.
         private static readonly IntRange ChargeRepathTicks = new IntRange(45, 90);
 
         private const int BreachRecheckTicks = 60;
@@ -54,8 +52,6 @@ namespace VVRace
                 return ChargeJob(pawn, comp, target, range);
             }
 
-            // 깊은 물처럼 부술 수 없는 지형에 막혀 찬탈 대상까지 갈 길이 없으면 접근 차례를 대상 쪽 땅으로 건너뛰는 데 쓴다.
-            // 물 건너 원거리 공격자 추격에 밀려 건너뛰지 못하는 일이 없도록 추격보다 먼저 본다.
             if (comp.Phase == ApocryphaPhase.Bound && target != null && GenTicks.TicksGame >= comp.NextApproachTick
                 && comp.TrySkipToStealTarget(target, range))
             {
@@ -70,8 +66,6 @@ namespace VVRace
 
             if (target != null)
             {
-                // 접근 차례에 길이 막혀 있으면 그 차례는 직선에서 막히기 직전 칸까지 가서 바늘로 벽을 뚫는 데 쓴다.
-                // 돌파가 끝나면(길이 열림·시간 소진) 평소처럼 맴돌다가 다음 접근 차례에 다시 전진하거나 다음 벽을 뚫는다.
                 if (comp.NeedleAttack.BreachInProgress)
                 {
                     if (comp.NeedleAttack.TryContinueBreach(out var standCell))
@@ -162,7 +156,6 @@ namespace VVRace
             return job;
         }
 
-        // 제단의 대각 모서리는 중심에서 4.24칸으로 사거리 3.9칸 밖이다. 이를 제외하지 않으면 이동만 반복한다.
         private static IntVec3 EdgeCellToward(Pawn pawn, Thing target, float range)
         {
             var map = pawn.Map;
@@ -225,7 +218,6 @@ namespace VVRace
                 }
             }
 
-            // 부수고도 갈 길이 없으면(통행 불가 지형) 찬탈 대상 쪽 땅으로 건너뛴다.
             if (!found && comp.TrySkipToStealTarget(target, range))
             {
                 return WaitJob(SkipRecoverTicks);

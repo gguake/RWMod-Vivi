@@ -4,8 +4,6 @@ using Verse;
 
 namespace VVRace
 {
-    // FogOverlay는 안개 텍스처 두 장을 곱해 낮에 잘 보이지 않으므로 _ColorScale로 밝기를 높인다.
-    // 해 질 녘과 밤에는 조명으로 안개가 칙칙해지므로 하늘빛 밝기의 제곱에 비례해 옅게 만든다.
     [StaticConstructorOnStartup]
     public class WeatherOverlay_GoldenMist : WeatherOverlayDualPanner
     {
@@ -37,7 +35,6 @@ namespace VVRace
         }
     }
 
-    // 렌더링은 플렉이 담당하므로 이 오버레이는 직접 그리지 않는다.
     public class WeatherOverlay_GoldenPetals : SkyOverlay
     {
         private const float PetalsPerCellPerTick = 0.00014f;

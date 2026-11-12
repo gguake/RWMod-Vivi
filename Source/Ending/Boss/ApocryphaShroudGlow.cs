@@ -4,7 +4,6 @@ using Verse;
 
 namespace VVRace
 {
-    // 낮에는 흰 모피와 피부가 금빛으로 바래지 않도록 바닥 밝기에 따라 발광을 줄인다.
     [StaticConstructorOnStartup]
     internal static class ApocryphaShroudGlow
     {

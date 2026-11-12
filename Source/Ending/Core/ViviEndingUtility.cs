@@ -14,7 +14,6 @@ namespace VVRace
     {
         private const int GoldenBloomFadeTicks = 30000;
 
-        // Log.ErrorOnce 키(엔딩). 같은 키를 두 곳에서 쓰면 먼저 찍힌 오류가 다른 오류를 묵살하므로 여기서만 정한다.
         internal const int ErrorKeyQuestTick = 0x5645_4E00;
         internal const int ErrorKeyQueuedThreats = 0x5645_4E10;
         internal const int ErrorKeyAltarPulse = 0x5645_4E20;
@@ -97,7 +96,6 @@ namespace VVRace
             return map != null ? Building_EverflowerAltar.FindOnMap(map) : null;
         }
 
-        // 여제는 대관식을 치른 영원꽃에서 되살아나므로 그 꽃을 헤디프에 묶어 둔다.
         public static void GrantQueenPowers(Pawn pawn, ArcanePlant_Everflower everflower)
         {
             if (pawn?.health?.hediffSet == null || pawn.health.hediffSet.HasHediff(VVHediffDefOf.VV_EverflowerQueen)) { return; }
@@ -169,7 +167,6 @@ namespace VVRace
             return vanished;
         }
 
-        // 착륙 중인 드롭포드의 습격대원도 이미 로드에 속하므로 함께 옮겨 포드가 열리자마자 철수하게 한다.
         public static int MakeRaidersRetreat(Map map)
         {
             var retreated = 0;
@@ -226,7 +223,6 @@ namespace VVRace
             map.gameConditionManager.GetActiveCondition(conditionDef)?.End();
         }
 
-        // 의식으로 부른 꽃안개가 먼저 올 수 있으므로 첫 항목만 보지 않고 모든 컨디션을 검사한다.
         public static void FadeGoldenBloom()
         {
             foreach (var map in Find.Maps)
@@ -250,7 +246,6 @@ namespace VVRace
 
         public static void EndGoldenBloom(Map map)
         {
-            // 컨디션을 해제하면 목록이 바뀌므로 대상의 복사본을 순회한다.
             foreach (var condition in GoldenBloomUtility.EndingConditions(map).ToList())
             {
                 condition.End();

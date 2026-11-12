@@ -134,7 +134,6 @@ namespace VVRace
             var halfAngle = Props.breathAngle * 0.5f;
             var hornetDef = VVThingDefOf.VV_TitanicHornet;
 
-            // GenExplosion.affectedAngle은 ±180° 경계에서 잘리는 문제가 있어 부채꼴 칸을 직접 계산한다.
             foreach (var cell in GenRadial.RadialCellsAround(origin, Props.breathRange, useCenter: false))
             {
                 if (!cell.InBounds(map)) { continue; }
@@ -163,7 +162,6 @@ namespace VVRace
             }
             _tmpCellThings.Clear();
 
-            // 브레스가 닿은 대상 자리에 짙은 독성 가스를 남긴다. 말벌은 오염된 영원꽃 동화로 독성 환경에 면역이다.
             if (ModsConfig.BiotechActive && Props.breathGasRadius > 0f)
             {
                 GasUtility.AddGas(target, map, GasType.ToxGas, Props.breathGasRadius);

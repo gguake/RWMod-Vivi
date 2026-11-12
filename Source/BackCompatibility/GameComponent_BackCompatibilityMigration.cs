@@ -8,7 +8,7 @@ using Verse;
 namespace VVRace
 {
     /// <summary>
-    /// 문화·밈 Def의 스타일 태그 가중치를 게임 시작 직후에 복사해 둔다.
+    /// CultureDef, MemeDef의 스타일 태그 가중치를 게임 시작 직후에 복사해 두기 위한 용도
     /// 바닐라의 IdeoStyleTracker.RecalculateAvailableStyleItems는 밈과 같은 태그를 가진 문화 Def의 태그 객체를
     /// 직접 고치기 때문에, 이념 표가 한 번이라도 계산된 뒤의 Def 값은 원래 값이 아니다.
     /// </summary>
@@ -72,29 +72,6 @@ namespace VVRace
         }
     }
 
-    /// <summary>
-    /// 구버전 세이브를 불러올 때 필요한 보정을 모아 둔 컴포넌트.
-    ///
-    /// 1. 날씨 변경 의식 교리 (매 로드, 멱등)
-    ///    VV_ChangeWeatherRitual이 커스텀 서브클래스가 아닌 base Precept_Ritual로 로드된 경우 Precept_RitualChangeWeather로 바꾼다.
-    ///
-    /// 2. 이념 헤어 표 (세이브당 한 번)
-    ///    VV_HairH / VV_HairI가 HairDef를 상속한 Def 클래스(RPEF.ScaleableHairDef)였던 시절에 만든 세이브를 한 번 보정한다.
-    ///
-    /// 3. 비비 생식 유전자 (매 로드, 멱등)
-    ///    비비 제노타입의 현재 Def에 있는 생식 유전자 중 누락된 것만 추가한다. 기존 유전자는 보존한다.
-    ///
-    /// 예전 세이브에 저장된 GameComponent_ViviPreceptMigration 노드는 BackCompatibilityPatch가 이 타입으로 연결한다.
-    /// 그 노드에는 헤어 보정 플래그가 없으므로 헤어 보정이 한 번 실행된다.
-    ///
-    /// 헤어 표 보정 상세: 그때는 두 헤어의 Def.index가 0, 1이어서 이념의 헤어 표(DefMap, 인덱스 순서대로 저장됨)에서
-    /// DefDatabase&lt;HairDef&gt;의 첫 두 헤어(바닐라 BriefPonytail, Princess)와 같은 칸을 썼다.
-    /// 지금은 두 헤어가 제 칸을 갖지만, 예전 세이브에는
-    ///  - 첫 두 헤어의 칸에 비비 헤어 값이 덮어써져 있고
-    ///  - 비비 헤어의 새 칸은 기본값(Never)으로 로드된다.
-    /// 그래서 이 네 헤어의 빈도·성별만 문화와 밈의 태그로 다시 계산한다.
-    /// 어느 값이 플레이어가 직접 고른 것인지는 세이브만으로 가릴 수 없어서, 네 헤어는 계산값으로 되돌린다.
-    /// </summary>
     public class GameComponent_BackCompatibilityMigration : GameComponent
     {
         private const int CollidedSlotCount = 2;
@@ -242,19 +219,19 @@ namespace VVRace
             }
         }
 
-        // 세이브 헤더의 모드 목록을 알 수 없으면 보정하는 쪽을 택한다. (보정 대상 세이브를 놓치는 쪽이 더 나쁘다)
+        // 세이브 헤더의 모드 목록을 알 수 없으면 보정하는 쪽을 택한다.
         private static bool SaveWasMadeWithThisMod()
         {
             var modIds = ScribeMetaHeaderUtility.loadedModIdsList;
             if (modIds == null || modIds.Count == 0) { return true; }
 
+            var packageId = LoadedModManager.GetMod<VVRaceMod>().Content.PackageId;
             foreach (var modId in modIds)
             {
                 if (modId == null) { continue; }
 
                 var id = modId.ToLowerInvariant();
-                if (id.EndsWith("_steam")) { id = id.Substring(0, id.Length - "_steam".Length); }
-                if (id == PackageId) { return true; }
+                if (id.EqualsIgnoreCase(packageId)) { return true; }
             }
 
             return false;

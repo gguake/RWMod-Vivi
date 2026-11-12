@@ -18,7 +18,6 @@ namespace VVRace
             cell = IntVec3.Invalid;
             if (!CanEnterFromEdge(map)) { return false; }
 
-            // 구조물을 부수며 진입할 수 있으므로 파괴 가능한 장애물은 통과 가능한 것으로 보고 경로를 검사한다.
             var reachParms = TraverseParms.For(TraverseMode.PassAllDestroyableThings);
             bool CanReachTarget(IntVec3 c) => !target.IsValid || !target.InBounds(map) || map.reachability.CanReach(c, target, PathEndMode.Touch, reachParms);
 
@@ -27,7 +26,6 @@ namespace VVRace
                 return true;
             }
 
-            // 미탐사 바위 골짜기에 갇혀 등장하지 않도록 안개 칸을 제외한다. 유효한 칸이 없으면 TryFindBreachEntryCell로 넘어간다.
             return CellFinder.TryFindRandomEdgeCellWith(
                 c => c.Standable(map) && !c.Roofed(map) && !c.Fogged(map) && CanReachTarget(c),
                 map,
@@ -98,15 +96,11 @@ namespace VVRace
             return PawnsArrivalModeDefOf.EdgeWalkIn.Worker.CanUseOnMap(map);
         }
 
-        // 부술 수 있는 구조물은 지나갈 수 있다고 보고 도달 여부를 본다.
-        // 거짓이면 깊은 물·용암 같은 통행 불가 지형(또는 부술 수 없는 건물)으로 끊긴 것이라 돌파로는 갈 수 없다.
         public static bool CanBreachReach(Map map, IntVec3 from, LocalTargetInfo target)
         {
             return map.reachability.CanReach(from, target, PathEndMode.Touch, TraverseParms.For(TraverseMode.PassAllDestroyableThings));
         }
 
-        // 가장자리에 설 칸이 전혀 없는 맵(가장자리가 모두 깊은 물인 섬 등)에서는 찬탈 대상과 이어진 땅에서 가장 먼 칸에 내려앉는다.
-        // 걸어서 닿는 칸을 우선하고, 없으면 부수고 닿을 수 있는 칸을 쓴다. 진공 전투는 다루지 않으므로 우주 맵은 제외한다.
         public static bool TryFindInnerEntryCell(Map map, Thing target, out IntVec3 cell)
         {
             cell = IntVec3.Invalid;
@@ -129,7 +123,6 @@ namespace VVRace
             {
                 if (rect.Contains(c) || !c.Standable(map) || c.Fogged(map)) { return; }
 
-                // 가장자리 진입 칸처럼 지붕 없는 칸을 우선한다.
                 var open = !c.Roofed(map);
                 if (bestOpen && !open) { return; }
 
@@ -147,8 +140,6 @@ namespace VVRace
             return cell.IsValid;
         }
 
-        // 지형에 막혀 찬탈 대상까지 갈 수 없을 때 건너뛸 칸. 대상과 이어진 땅에서 보스에게 가장 가까운 칸(막 건너온 물가)을 고른다.
-        // 벽 안쪽까지 건너뛰지 않으므로 그 뒤의 구조물은 평소처럼 돌파한다. 도착하자마자 찬탈하지 않도록 찬탈 사거리 밖을 우선한다.
         public static bool TryFindSkipCell(Map map, Thing target, IntVec3 from, float stealRange, out IntVec3 cell)
         {
             var rect = StealTargetRect(map, target);
@@ -182,8 +173,6 @@ namespace VVRace
             return target.Spawned && target.Map == map ? target.OccupiedRect() : CellRect.SingleCell(target.PositionHeld);
         }
 
-        // 찬탈 대상이 차지한 칸에서부터 이어진 칸을 훑는다. 통과 규칙은 바닐라 PassAllDestroyableThings 도달 판정과 같아서
-        // 걸을 수 있는 칸과 (passDestroyable이면) 부술 수 있는 구조물이 선 칸을 지나고, 통행 불가 지형은 넘지 못한다.
         // processor 안에서 도달 판정·안개 해제처럼 홍수 채우기를 쓰는 호출을 하면 안 된다.
         private static void FloodFromStealTarget(Map map, CellRect rect, bool passDestroyable, System.Action<IntVec3> processor)
         {
@@ -230,8 +219,6 @@ namespace VVRace
             }
         }
 
-        // 보스 스폰과 분리해 호위·연출이 실패해도 이미 스폰된 보스로 전투를 시작할 수 있게 한다.
-        // 파장에 밀려 외곽에 내려앉은 보스 둘레에서 호위 말벌이 검은 기운으로 빚어진다.
         public static void SpawnArrival(Pawn boss)
         {
             var count = boss.TryGetComp<CompApocrypha>()?.ArrivalHornetCount ?? 0;
@@ -257,7 +244,6 @@ namespace VVRace
             return Find.FactionManager.RandomEnemyFaction(allowHidden: true, allowDefeated: false, allowNonHumanlike: true);
         }
 
-        // 보스전 말벌은 모두 오염된 영원꽃 동화를 지닌 채 스폰 즉시 적대하도록 광폭 상태로 시작한다.
         public static Pawn SpawnBossFightHornet(Map map, IntVec3 cell, Rot4 rotation)
         {
             var hornet = PawnGenerator.GeneratePawn(new PawnGenerationRequest(VVPawnKindDefOf.VV_TitanicHornet, null, PawnGenerationContext.NonPlayer, map.Tile));
@@ -297,7 +283,6 @@ namespace VVRace
             lord.AddPawn(hornet);
         }
 
-        // 정착지 습격은 일반 거대 말벌 강습과 같은 로드를 쓰므로 맵에 있는 강습 로드에 함께 넣는다.
         public static void JoinHornetAssault(Map map, List<Pawn> hornets)
         {
             if (map == null || hornets.NullOrEmpty()) { return; }
@@ -369,7 +354,6 @@ namespace VVRace
             return lord == null ? new List<Pawn>() : new List<Pawn>(lord.ownedPawns);
         }
 
-        // 대상이 null인 호위 듀티가 남지 않도록 보스 토벌 시 호위·꽃 경비 로드를 일반 습격 토일로 전환한다.
         public static void ReleaseEscorts(Pawn boss)
         {
             GotoAssault(FindEscortLord(boss));
@@ -390,7 +374,6 @@ namespace VVRace
             }
         }
 
-        // 소멸 연출 중에는 보스 폰이 이미 파괴되어 있으므로 보스 소실 감지로 엔딩을 종료하면 안 된다.
         public static bool IsDefeatInProgress(Map map)
         {
             return map != null && map.listerThings.ThingsOfDef(VVThingDefOf.VV_DyingApocrypha).Count > 0;

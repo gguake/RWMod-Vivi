@@ -96,8 +96,6 @@ namespace VVRace
             }
         }
 
-        // 보스가 사라질 때도 디스폰 직전에 작업 종료 알림이 오므로 Spawned만으로는 중단 메시지를 제어할 수 없다.
-        // 살아 있고 퀘스트 보스전이 계속되는 경우에만 표시한다. 소실 처리는 알림 전에 보스를 퀘스트에서 분리한다.
         public void Notify_ChannelJobEnded()
         {
             if (_pendingSteal) { return; }

@@ -4,7 +4,6 @@ using Verse.AI;
 
 namespace VVRace
 {
-    // 바늘은 Ethereal Thing이라 바닐라 우클릭 메뉴의 선택 대상이 아니므로 클릭 위치 주변에서 직접 찾는다.
     public class FloatMenuOptionProvider_ActivateApocryphaNeedle : FloatMenuOptionProvider
     {
         protected override bool Drafted => true;

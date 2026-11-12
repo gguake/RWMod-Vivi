@@ -113,7 +113,6 @@ namespace VVRace
             }
         }
 
-        // 모트·이펙터는 저장되지 않으므로 불러온 후 첫 틱에 다시 생성한다.
         private void TickAimVisuals()
         {
             if (_aims.Count == 0)

@@ -23,7 +23,6 @@ namespace VVRace
             this.fireTick = fireTick;
         }
 
-        // 표식 셰이더는 모트의 나이로 충전 정도를 그리므로 재생성 시에도 조준 시작 틱에 맞춰 나이를 복원한다.
         public void TickVisuals(Pawn boss, Map map, Vector3 bodyCenter, int aimTicks)
         {
             var direction = cell.ToVector3Shifted() - boss.DrawPos;

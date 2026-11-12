@@ -280,7 +280,6 @@ namespace VVRace
             return CellFinder.TryFindRandomCellNear(cell, map, BloomCellFallbackRadius, c => IsValidBloomCell(c, map, altarRect, colonyAnchor), out result);
         }
 
-        // linkSeed는 씨앗에서 이어받을 연결선 무늬다(-1이면 꽃 자신의 무늬로 새로 나타난다).
         internal static Thing SpawnFlower(ThingDef flowerDef, IntVec3 cell, Map map, Pawn boss, int linkSeed = -1)
         {
             var plant = cell.GetPlant(map);
@@ -365,8 +364,6 @@ namespace VVRace
             return CanReachFromColony(cell, map, colonyAnchor);
         }
 
-        // CanReachColony는 정착지와 닿지 않아도 맵 가장자리의 가장 큰 구역과 연결되면 통과시켜 외딴 섬도 허용한다.
-        // 이를 막으려고 정착지 기준점과의 도달 여부를 확인한다. 구역 쌍별로 캐시되므로 칸마다 조회해도 비용이 작다.
         private static bool CanReachFromColony(IntVec3 cell, Map map, LocalTargetInfo colonyAnchor)
         {
             if (!colonyAnchor.IsValid) { return map.reachability.CanReachColony(cell); }
@@ -418,7 +415,6 @@ namespace VVRace
             }
         }
 
-        // 날아가는 씨앗까지 피워 낼 꽃의 연결선을 미리 이어 투사체가 잘 보이게 한다. 착탄하면 꽃이 같은 무늬로 이어받는다.
         private static void DrawSeedLinks(Vector3 bossPos, List<Thing> seeds)
         {
             for (int i = 0; i < seeds.Count; i++)

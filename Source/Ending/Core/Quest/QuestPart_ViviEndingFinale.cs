@@ -49,7 +49,6 @@ namespace VVRace
             Begin();
         }
 
-        // 크레딧 예약은 _startTick 기준이라 이후 연출이 실패해도 엔딩은 끝까지 진행된다.
         private void Begin()
         {
             var map = AnchorMap;
@@ -254,7 +253,6 @@ namespace VVRace
             Refugee,
         }
 
-        // 빠른 테스트 게임 등에는 시나리오 세력이 적용되지 않아 세력만으로 시나리오를 판별할 수 없다.
         private static EndingScenarioKind DetectEndingScenario()
         {
             var playerFactionDef = Faction.OfPlayer?.def;
@@ -273,7 +271,6 @@ namespace VVRace
                 }
             }
 
-            // 시나리오 이름은 게임 생성 당시 언어로 저장되므로 같은 언어로 플레이 중일 때만 유효한 최후의 판별 수단이다.
             if (!scenario.name.NullOrEmpty())
             {
                 if (scenario.name == VVScenarioDefOf.VV_ViviStart?.scenario?.name) { return EndingScenarioKind.Exiled; }
@@ -294,7 +291,6 @@ namespace VVRace
             switch (DetectEndingScenario())
             {
                 case EndingScenarioKind.Exiled:
-                    // 추방 문구는 추방된 로열 비비 본인이 대관식을 받았을 때만 이어진다.
                     if (queen != null && queen.kindDef == VVPawnKindDefOf.VV_PlayerExiledRoyalVivi)
                     {
                         scenarioKey = LocalizeString_Etc.VV_EndingCreditsExiled;

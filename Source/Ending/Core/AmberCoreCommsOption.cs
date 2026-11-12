@@ -30,7 +30,6 @@ namespace VVRace
                 return option;
             }
 
-            // 퀘스트 생성 결과에 따라 다음 대화가 달라지므로 선택지를 누른 시점에 생성한다.
             option.linkLateBind = () =>
             {
                 var leader = faction.leader?.LabelShort ?? faction.Name;

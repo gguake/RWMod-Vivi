@@ -4,12 +4,8 @@ using Verse;
 
 namespace VVRace
 {
-    // 바닐라 스토리텔러의 동맹 지원(StorytellerComp_FactionInteraction + RaidFriendly)과 같은 구조로 동작한다.
-    // 앵커 맵의 위험도가 높을 때만 연방 지원군을 부르고, 구성과 규모는 RaidFriendly가 연방 전투 그룹으로 현재 위협 포인트만큼 생성한다.
     public class QuestPart_ViviFederationAid : QuestPartActivable
     {
-        // 지원은 위협이 있으면 반드시 오므로 위협 검사를 드물게 해서 도착 시점이 들쭉날쭉하게 한다.
-        // 위협을 발견하면 요청이 연방에 닿아 출발하기까지 1~2시간 뒤 도착하고, 그때 위협이 사라졌으면 오지 않는다.
         private const int CheckIntervalTicks = 10000;
         private const int MinSpacingTicks = 24000;
         private const float MinActiveThreatCombatPower = 120f;
@@ -49,7 +45,6 @@ namespace VVRace
             }
         }
 
-        // DangerWatcher의 High 판정과 RaidFriendly.CanFireNowSub의 활성 위협 전투력 조건을 함께 본다.
         private static bool IsUnderThreat(Map map)
         {
             if (map.dangerWatcher.DangerRating != StoryDanger.High) { return false; }
@@ -65,7 +60,6 @@ namespace VVRace
             var federation = ViviEndingUtility.FindFederation(requireNonHostile: true);
             if (federation == null) { return false; }
 
-            // 도착 방식은 스토리텔러 지원처럼 습격 전략이 고르게 둔다(중앙 드롭포드는 포인트가 0.3~0.5배로 깎인다).
             var parms = new IncidentParms
             {
                 target = map,

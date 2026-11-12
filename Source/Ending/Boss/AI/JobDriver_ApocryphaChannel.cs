@@ -6,7 +6,6 @@ using Verse.AI;
 
 namespace VVRace
 {
-    // 기절 중에도 작업 틱은 호출되므로 매 틱 기절 여부를 확인해 진행도를 초기화한다.
     public class JobDriver_ApocryphaChannel : JobDriver
     {
         private const TargetIndex StealTargetIndex = TargetIndex.A;

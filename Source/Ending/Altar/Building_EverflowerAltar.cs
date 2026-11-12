@@ -12,8 +12,6 @@ namespace VVRace
     {
         public const int RequiredAttunementLevel = 4;
 
-        // 자동 생성되는 Frame_VV_EverflowerAltar는 제단의 building 설정을 상속하지 않는다.
-        // 틀이 파괴되면 KillFinalize가 재료의 25%만 남기고 forcedCostLeavings도 무시해 코어를 잃을 수 있다.
         static Building_EverflowerAltar()
         {
             var frameBuilding = VVThingDefOf.VV_EverflowerAltar?.frameDef?.building;
@@ -42,7 +40,6 @@ namespace VVRace
             ThingOwnerUtility.AppendThingHoldersFromThings(outChildren, GetDirectlyHeldThings());
         }
 
-        // 공명자를 보관해도 의식 로드에는 남겨 만개 의식이 끝까지 진행되게 한다.
         public bool HoldResonator(Pawn pawn)
         {
             if (pawn == null || HeldResonator != null) { return false; }
@@ -79,7 +76,6 @@ namespace VVRace
 
             base.DeSpawn(mode);
 
-            // 제단이 edifice 등록을 해제하면서 중앙 칸에 남은 영원꽃의 등록까지 지우므로 다시 등록한다.
             if (everflower != null && everflower.Spawned && everflower.Map == map && map.edificeGrid[everflower.Position] != everflower)
             {
                 map.edificeGrid.Register(everflower);
@@ -91,7 +87,6 @@ namespace VVRace
             }
         }
 
-        // 엔딩 진행 중에는 제단이 피해를 받지 않는다. 안치된 꽃의 피해도 제단으로 넘어오므로 함께 보호된다.
         public override void PreApplyDamage(ref DamageInfo dinfo, out bool absorbed)
         {
             var ending = ViviEndingQuest.Current;
@@ -143,7 +138,6 @@ namespace VVRace
             return map.Parent == null || !map.IsTempIncidentMap;
         }
 
-        // 중력선 기반 위의 제단은 이륙 시 함께 실려 가므로 해당 칸에는 배치할 수 없다.
         public static bool IsOnSubstructure(IntVec3 cell, Map map)
         {
             return map.terrainGrid.FoundationAt(cell)?.IsSubstructure == true;
@@ -168,8 +162,6 @@ namespace VVRace
             }
         }
 
-        // 영원꽃은 요구 조율 단계 이상이어야 제단에 안치할 수 있다.
-        // 거부 문구는 따로 두어 호출부가 다른 조건(제단 칸 여부 등)을 확인한 뒤에만 만들게 한다.
         public static bool CanEnshrine(ArcanePlant_Everflower everflower)
         {
             return everflower.AttunementLevel >= RequiredAttunementLevel;
@@ -197,13 +189,11 @@ namespace VVRace
         {
             base.SpawnSetup(map, respawningAfterLoad);
 
-            // 불러올 때 영원꽃이 제단보다 먼저 스폰되므로 제단에서도 꽃의 안치 캐시를 알림 없이 갱신한다.
             EnshrinedEverflower?.EverflowerComp.RefreshEnshrinement(silent: true);
         }
 
         public override AcceptanceReport DeconstructibleBy(Faction faction)
         {
-            // 엔딩이나 의식이 진행 중일 때만 막고, 평시에는 해체해 위치를 옮길 수 있다.
             if (EnshrinedEverflower?.IsEnshrinementLocked == true)
             {
                 return new AcceptanceReport(LocalizeString_Etc.VV_FailReason_AltarHasEnshrinedEverflower.Translate());
@@ -266,7 +256,6 @@ namespace VVRace
             }
         }
 
-        // 중앙 한 칸의 영원꽃을 고르기 어려워 제단에서도 꽃의 기즈모를 표시한다.
         private IEnumerable<Gizmo> GetEnshrinedEverflowerGizmos()
         {
             var everflower = EnshrinedEverflower;

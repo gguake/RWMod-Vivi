@@ -4,11 +4,8 @@ using Verse;
 
 namespace VVRace
 {
-    // 둥지 정원: 채집할 꽃이 모자라면 둥지 채집 범위에 꽃을 심고, 옷감이 모자라면 바깥 보관 칸 옆 작은 목화밭을 가꾼다.
-    // 심기·수확은 바닐라 재배 잡을 그대로 쓴다(구역 없이).
     public class ViviNestGarden : IExposable
     {
-        // 꿀 꽃 목표: 40송이가 다섯 마리 본전이므로(자동 테스트) 구성원당 8송이(최소 40), 겨울이 있는 땅에서는 겨울 비축을 위해 1.5배.
         public const int MinFlowerTarget = 40;
         public const int FlowersPerMember = 8;
         public const float WinterFlowerFactor = 1.5f;
@@ -37,7 +34,6 @@ namespace VVRace
 
         public bool IsCottonCell(IntVec3 cell) => _cottonCells.Contains(cell);
 
-        // 둥지 채집 범위 안의 꿀 꽃(덜 자란 것 포함, 심어 둔 것을 다시 심지 않게)
         public int FlowerCount
         {
             get
@@ -47,7 +43,6 @@ namespace VVRace
             }
         }
 
-        // 그중 채집할 만큼 자란 꽃(재채집 대기 중인 것 포함). 겨울에 갓 심어 자라지 못하는 꽃은 먹이가 되지 않는다.
         public int GatherableFlowerCount
         {
             get
@@ -100,7 +95,6 @@ namespace VVRace
             }
         }
 
-        // 꿀 꽃 판정(추상 꿀 채집량 > 0)은 게임 컴포넌트의 정의별 메모를 쓴다(꽃 세기·씨 뿌리기 칸마다 되풀이되는 추상 스탯 계산을 아낌).
         public static bool IsHoneyFlowerDef(ThingDef def)
         {
             if (def == null || def.plant == null || def.plant.IsTree) { return false; }
@@ -108,7 +102,6 @@ namespace VVRace
             return GameComponent_Mana.HasHoneyYield(def);
         }
 
-        // 목화밭은 바깥 보관 칸 둘레의 비옥한 빈 땅에 한 번 정해 둔다(자리를 잃으면 다시 고른다).
         public void EnsureCottonCells()
         {
             var map = Map;
@@ -129,7 +122,6 @@ namespace VVRace
             }
         }
 
-        // 이미 정한 밭은 사람·수확물처럼 잠깐 있는 것이 아니라 건물·구역·지붕처럼 오래가는 것만 보고 버린다.
         private bool StillUsable(IntVec3 cell)
         {
             var map = Map;
@@ -144,10 +136,6 @@ namespace VVRace
             return IsSowable(cell);
         }
 
-        // 둥지 씨 뿌리기(JobGiver_ViviNestGarden.SowJob)가 심을 수 있는 칸: 꿀 꽃이 자라는 칸은 베지 않고, 둘레에 나무처럼 옆 칸 심기를 막는 식물이 있으면
-        // 바닐라 씨 뿌리기 판정(PlantUtility.AdjacentSowBlocker)이 막는다. 그런 칸을 밭으로 두면 끝내 심지 못하므로 고르지 않고, 생기면 다른 칸으로 옮긴다.
-        // 이미 목화가 자라는 칸은 거둘 때까지 둔다. (자동 테스트 p3 B6: 습지 맵에서 버드나무 옆 밭 3칸이 며칠째 비어 있었다)
-        // 먼저 목화가 그 칸에 자랄 수 있어야 한다(바닐라 CanEverPlantAt, 나무 아닌 식물은 베고 심는다, 지금 기온은 보지 않는다).
         private bool IsSowable(IntVec3 cell)
         {
             var map = Map;

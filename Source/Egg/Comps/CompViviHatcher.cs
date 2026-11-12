@@ -196,7 +196,6 @@ namespace VVRace
 
                 var faction = hatchery.Faction;
 
-                // 플레이어 부화기는 정착민으로, 양봉 둥지 부화기는 둥지 무리 아기로 깨어난다.
                 var pawnKindDef = (faction?.IsPlayer ?? false) ? VVPawnKindDefOf.VV_PlayerVivi
                     : faction.IsWanderingViviFaction() ? VVPawnKindDefOf.VV_WanderingViviNestborn : null;
                 if (pawnKindDef != null)

@@ -9,7 +9,6 @@ namespace VVRace
     {
         private const string NeedleTexPath = "Things/Item/Equipment/VV_NeedleProjectile";
 
-        // 그림 크기는 5.5칸이며 바늘이 높이의 73%를 차지해 실제 길이는 약 4칸이다.
         private const float NeedleDrawSize = 5.5f;
         private static readonly Vector2 AuraDrawSize = new Vector2(1.6f, 4.6f);
 
@@ -23,7 +22,6 @@ namespace VVRace
         private static readonly Color LaneColorBreach = new Color(1f, 0.22f, 0.18f, 1f);
         private static readonly Color LaneCoreColorBreach = new Color(1f, 0.7f, 0.62f, 1f);
 
-        // 마법진 바깥 고리(VV_MagicCircle r=0.95)가 경고 띠 테두리선(VV_NeedleLane 가장자리에서 0.07칸 안쪽)에 맞닿도록 띠 폭으로 크기를 정한다.
         private const float LotusRingRadius = 0.95f;
         private const float LaneEdgeInset = 0.07f;
 
@@ -48,7 +46,6 @@ namespace VVRace
         private static readonly Material LaneMat = MaterialPool.MatFrom(BaseContent.WhiteTex, ShaderDatabase.LoadShader("Map/VV_NeedleLane"), Color.white);
         private static readonly Material WarpMat = MakeWarpMaterial();
 
-        // 최대 반폭 2.8칸까지 퍼지는 왜곡을 덮도록 폭 3칸의 경고 띠보다 넓게 그린다.
         private const float WarpDrawWidth = 7f;
         private static readonly Color WarpColor = new Color(1f, 0.95f, 0.85f, 1f);
 
@@ -84,7 +81,6 @@ namespace VVRace
             return material;
         }
 
-        // 같은 셰이더에서 나중에 그린 그림이 위에 오도록 적용하는 높이 차이.
         private const float LayerAltitudeStep = 0.002f;
 
         public static void DrawNeedle(Vector3 pos, float angle, float alpha, float glow)
@@ -131,7 +127,6 @@ namespace VVRace
         {
             if (length < 0.1f || width <= 0f) { return; }
 
-            // SoulLinkRenderer와 같이 메시의 로컬 X축(셰이더 U)을 발사 방향에 맞춘다.
             var angle = Mathf.Atan2(-direction.z, direction.x) * Mathf.Rad2Deg;
             var center = start + direction * (length * 0.5f);
             center.y = AltitudeLayer.MoteLow.AltitudeFor();

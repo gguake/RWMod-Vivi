@@ -23,7 +23,7 @@ namespace VVRace
 
             yield return Toils_Goto.GotoCell(TargetIndex.A, PathEndMode.OnCell);
             yield return Toils_General.Wait(UnloadTicks);
-            // 고른 보관 칸에 그대로 놓는다(둘레에 놓으면 근처 플레이어 더미에 합쳐질 수 있다). 칸이 바뀌어 못 놓으면 지닌 채로 두고 다시 고른다.
+            
             yield return Toils_General.Do(() =>
             {
                 var thing = InventoryThing;

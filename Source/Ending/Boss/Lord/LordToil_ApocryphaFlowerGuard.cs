@@ -29,7 +29,6 @@ namespace VVRace
                 }
                 else
                 {
-                    // 지킬 꽃이 없는 말벌은 다음 틱에 습격 로드로 옮긴다. 그 사이에도 대상 없는 경비 듀티가 남지 않게 한다.
                     pawn.mindState.duty = new PawnDuty(VVDutyDefOf.VV_TitanicHornetAssault);
                 }
             }

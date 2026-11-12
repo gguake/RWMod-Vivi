@@ -13,9 +13,7 @@ namespace VVRace
         private const int SpawnCheckInterval = 60;
         private const int StuckSyncInterval = 30;
         private const int StunRecoverTicks = 120;
-        // 돌파는 접근 차례마다 한 번이다. 막히기 직전 칸에 도착한 뒤 이 시간 동안만 돌파 바늘을 쏘고, 길이 열리거나 시간이 다하면 평소 맴돌기로 돌아간다.
         private const int BreachHoldTicks = 600;
-        // 도착하지 못해도 이 시간이 지나면 돌파를 접는다.
         private const int BreachDeadlineTicks = 5000;
         private const float BreachStandRadius = 2f;
 
@@ -130,7 +128,6 @@ namespace VVRace
 
         public void TickUnbound(bool stunned)
         {
-            // 바늘이 뽑기 외의 경로(소멸 등)로 사라져도 겹 수가 맞도록 주기적으로 맞춘다.
             if (Pawn.IsHashIntervalTick(StuckSyncInterval))
             {
                 SyncStuckNeedleHediff();
@@ -158,8 +155,6 @@ namespace VVRace
             }
         }
 
-        // 접근 차례에 찬탈 대상까지 길이 막혀 있으면 대상까지 그은 직선에서 막히기 직전 칸(standCell)을 찾아 돌파를 시작한다.
-        // 막힌 원인이 깊은 물·용암 같은 지형이나 부술 수 없는 건물이면 돌파하지 않는다.
         public bool TryStartBreach(Thing target, out IntVec3 standCell)
         {
             standCell = IntVec3.Invalid;
@@ -178,7 +173,6 @@ namespace VVRace
                 if (targetRect.Contains(c)) { break; }
                 if (!ApocryphaUtility.IsBreachableCell(map, c)) { return false; }
 
-                // 벽·문은 막힌 칸이다. 설 수 있는데 갈 수 없는 칸은 갇힌 구역이다. 나무·모래주머니처럼 지나갈 수만 있는 칸은 건너뛴다.
                 var edifice = c.GetEdifice(map);
                 if (edifice != null && ApocryphaUtility.BlocksPath(edifice))
                 {
@@ -207,7 +201,6 @@ namespace VVRace
             return true;
         }
 
-        // 진행 중인 돌파를 이어 간다. 막힌 칸이 열렸거나 사격 시간·기한이 다하면 돌파를 접고 false를 돌려준다.
         public bool TryContinueBreach(out IntVec3 standCell)
         {
             standCell = _breachStandCell;

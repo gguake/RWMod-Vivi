@@ -5,9 +5,6 @@ using Verse.AI;
 
 namespace VVRace
 {
-    // 둥지 비비가 꽃·나무 곁에서 기존 채집 레시피 한 번을 채집 장소 없이 그 자리에서 해낸다.
-    // 작업 시간·기술·경험치·채집 알림(재채집 대기, 서툰 채집의 식물 손상, 미지의 씨앗, 꽃향, 꽃가루 묻히기)은 기존 채집 잡(JobDriver_Gather)과 같고,
-    // 채집 장소에 가서 하던 가공 몫도 그 자리에서 이어서 한다. 채취물은 모두 그 식물 둘레 바닥에 둥지 몫으로 떨어뜨리고, 옮기는 일은 둥지 운반 잡이 따로 한다.
     public class JobDriver_ViviNestGather : JobDriver
     {
         private const TargetIndex PlantInd = TargetIndex.A;
@@ -42,7 +39,6 @@ namespace VVRace
             yield return Toils_General.Do(Gather);
         }
 
-        // 기존 채집 잡과 같은 작업 시간: 채집 몫 ÷ 레시피 작업 속도 + 가공 몫 ÷ 작업 속도(채집 장소를 오가는 걸음만 없다)
         private int WorkTicks(RecipeDef_Gathering recipe)
         {
             var ticks = recipe.GatheringTicks(pawn);
@@ -66,18 +62,15 @@ namespace VVRace
                 pawn.skills?.GetSkill(recipe.workSkill).Learn(recipe.workAmount * 0.1f * recipe.workSkillLearnFactor);
             }
 
-            // 기존 채집 잡과 같은 채집량: 레시피 산출 × 채집량 스탯 × 대상 채집량 스탯 × 채집 장소 효율(둥지는 GatherYieldFactor)
             var efficiency = (recipe.efficiencyStat != null ? pawn.GetStatValue(recipe.efficiencyStat) : 1f) * ViviNestProduction.GatherYieldFactor;
             if (recipe.targetYieldStat != null)
             {
                 efficiency *= target.GetStatValue(recipe.targetYieldStat);
             }
 
-            // 기존 채집 잡과 같은 순서·굴림: 산출마다 레시피 완료 알림 몫(꿀이면 꿀 필요 먹기 → 꽃가루 털기, GatherWorker_Honey.Notify_RecipeComplete)을 한 뒤
-            // 개수를 소수부 확률로 굴린다(GatherUtility.RollCount, 소수부가 0이면 난수를 쓰지 않는다). 그래서 난수 소비 순서와 산출물을 놓는 순서
-            // (털어 낸 꽃가루가 꿀보다 먼저)도 기존 채집과 같다. 늘 난수를 쓰는 GenMath.RoundRandom으로 굴리고 꽃가루를 나중에 털던 것을 맞췄다(기대 산출량은 같다).
             var honey = recipe.gatherWorker is GatherWorker_Honey;
             _tmpProducts.Clear();
+            
             foreach (var product in recipe.products)
             {
                 var count = product.count * efficiency;
@@ -96,8 +89,6 @@ namespace VVRace
             _tmpProducts.Clear();
         }
 
-        // 기존 꿀 채집은 묻힌 꽃가루 오물을 채집 장소에서 꽃가루로 털어 냈다(GatherWorker_Honey.Notify_RecipeComplete → Filth_Pollen.GatherPollen:
-        // 오물 정의의 양 × 청소 속도를 소수부 확률로 굴림, 오물 하나당 한 겹). 채집 장소가 없으므로 그 자리에서 털어 낸다.
         private void ShakeOffCarriedPollen()
         {
             var filth = pawn.filth;

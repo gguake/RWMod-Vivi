@@ -4,8 +4,6 @@ using Verse.AI;
 
 namespace VVRace
 {
-    // 놀이 묶음의 빈둥거리기: 편한 기온의 둥지 방(바깥이 편하면 둥지 둘레 바깥 빈 땅도)의 한 자리에 가서 멍하니 서 있거나 곁의 구성원과 어울린다
-    // (바닐라 모임의 서 있기 잡). 놀이 시간이 지나면 다른 놀이를 고르고, 바깥 자리는 바깥 놀이를 할 수 없게 되면 그만둔다.
     public class JobGiver_ViviNestLoaf : ThinkNode_JobGiver
     {
         private const int LoafTicks = 1500;
@@ -20,7 +18,7 @@ namespace VVRace
             if (current != null)
             {
                 var cell = current.targetA.Cell;
-                var stay = ThinkNode_ViviNestPlay.Elapsed(current) < LoafTicks && (nest.Territory.IsRoomCell(cell) || ThinkNode_ViviNestPlay.OutdoorPlayOk(pawn, cell));
+                var stay = ThinkNode_ViviNestPlay.Elapsed(current) < LoafTicks && (nest.Territory.IsRoomCell(cell) || ThinkNode_ViviNestPlay.IsOutdoorPlaySafe(pawn, cell));
                 return stay ? current : null;
             }
 
@@ -31,12 +29,10 @@ namespace VVRace
             return job;
         }
 
-        // 바깥이 편하면 절반은 둥지 둘레 바깥 빈 땅(공사 자리처럼 둥지 칸·구역·통로를 피한다)에서, 아니면 편한 기온의 둥지 방에서 빈둥거린다.
-        // 바깥이 편한지는 칸을 찾기 전에 바깥 기온으로 본다(둥지 중심은 방 안 칸이다).
         private static bool TryFindLoafCell(Pawn pawn, LordJob_ViviNest nest, out IntVec3 cell)
         {
             var map = pawn.Map;
-            if (Rand.Bool && ThinkNode_ViviNestPlay.OutdoorPlayWeatherOk(pawn, out var comfortable)
+            if (Rand.Bool && ThinkNode_ViviNestPlay.IsOutdoorPlayWeatherSafe(pawn, out var comfortable)
                 && CellFinder.TryFindRandomCellNear(nest.NestCell, map, OutdoorLoafRadius,
                     c => nest.Planner.IsFreeOutdoorCell(c, allowPlants: true) && comfortable.Includes(GenTemperature.GetTemperatureForCell(c, map))
                         && pawn.CanReserveAndReach(c, PathEndMode.OnCell, Danger.None), out cell))

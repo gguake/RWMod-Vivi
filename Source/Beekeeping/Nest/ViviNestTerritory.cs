@@ -6,7 +6,6 @@ using Verse.AI;
 
 namespace VVRace
 {
-    // 둥지가 차지한 방들과 바깥 보관 칸. 방은 벽이 바뀌면 다시 만들어지므로 대표 칸만 저장하고 그때그때 방을 찾는다.
     public class ViviNestTerritory : IExposable
     {
         public const int RefreshInterval = 250;
@@ -18,7 +17,6 @@ namespace VVRace
         private List<IntVec3> _roomCells = new List<IntVec3>();
         private List<IntVec3> _boundaryCells = new List<IntVec3>();
         private List<IntVec3> _outdoorStorageCells = new List<IntVec3>();
-        // 마지막으로 온전했던 둥지 방 칸. 벽이 뚫려 방이 바깥과 이어진 동안에도 이 칸의 물건은 둥지 몫으로 둔다.
         private List<IntVec3> _ownedRoomCells = new List<IntVec3>();
 
         private readonly HashSet<IntVec3> _cachedRoomCells = new HashSet<IntVec3>();
@@ -26,9 +24,6 @@ namespace VVRace
         private readonly List<Room> _cachedRooms = new List<Room>();
         private int _cachedTick = -99999;
 
-        // 칸 검사(바깥 빈 땅·바닥 보관 칸·작업 자리 칸)가 쓰는 경계 칸·경계 문·문 둘레 칸(저장하지 않는다). 예전에는 칸 하나를 볼 때마다
-        // 경계 칸 전체에서 문을 다시 찾아(반복기 할당 포함) 바깥 빈 땅 검사가 칸당 0.6~0.95 µs였다(실측, 경계 칸 약 50).
-        // 경계 칸은 방을 더할 때만 바뀌고, 문 목록은 영역 갱신·방 추가 때와 맵의 문이 서거나 없어질 때(둥지 토일 알림) 다시 만든다.
         private readonly HashSet<IntVec3> _boundaryCellSet = new HashSet<IntVec3>();
         private readonly List<Building_Door> _borderDoors = new List<Building_Door>();
         private readonly HashSet<IntVec3> _borderDoorAdjacentCells = new HashSet<IntVec3>();
@@ -37,7 +32,7 @@ namespace VVRace
         public IReadOnlyList<IntVec3> BoundaryCells => _boundaryCells;
         public IReadOnlyList<IntVec3> OutdoorStorageCells => _outdoorStorageCells;
 
-        // 테두리 그리기(GenDraw)가 List를 받으므로 그대로 넘긴다. 고치지 말 것.
+        // GenDraw에 전달하므로 List를 유지한다.
         public List<IntVec3> OwnedRoomCellsForDrawing
         {
             get
@@ -72,7 +67,6 @@ namespace VVRace
             }
         }
 
-        // 지금 둥지 방들의 칸 수 합(바닐라 방 칸 수를 그때그때 더한다. 방 칸 집합은 갱신 주기마다 찍어 둔 것이라 그사이 바뀐 방과 다를 수 있다)
         public int RoomCellCount
         {
             get
@@ -95,14 +89,12 @@ namespace VVRace
 
         public bool IsOutdoorStorageCell(IntVec3 cell) => _outdoorStorageCells.Contains(cell);
 
-        // 둥지 방 칸(벽이 뚫린 동안은 원래 방 칸). 정착민이 여기 들어오면 경계한다.
         public bool IsNestRoomCell(IntVec3 cell)
         {
             RefreshIfNeeded();
             return _ownedRoomCellSet.Contains(cell);
         }
 
-        // 둥지 물건으로 치는 칸: 둥지 방 안(벽이 뚫린 동안은 원래 방 칸)과 바깥 보관 칸
         public bool IsTerritoryCell(IntVec3 cell)
         {
             RefreshIfNeeded();
@@ -110,17 +102,11 @@ namespace VVRace
         }
 
         #region 활동 범위
-        // 활동 범위(정착 범위): 무리가 일하러 오가는 칸. 정착할 때 둥지 중심 둘레, 증축 방이 닫힐 때 그 방 중심 둘레의 WorkRadius 안 칸을 칠하고
-        // 칸마다 가장 가까운 중심까지의 거리 제곱을 적어 둔다. 일마다 다른 반경(채집 15.9칸, 씨앗 12칸, 증축 7~16칸 등)은 이 거리로 본다:
-        // 중심이 하나면 예전 둥지 중심 한 점 기준(InHorDistOf·GenRadial)과 같은 칸이고, 증축 방마다 그 방 둘레로 같은 규칙만큼 넓어진다.
-        // 둥지 생활 듀티는 일을 이 칸 안으로 묶는다(ThinkNode_ViviNestForbidOutsideActivityArea).
         public const float WorkRadius = 24f;
         private const ushort OutsideActivity = ushort.MaxValue;
 
-        // 칠한 중심(저장한다). 칸 거리·칸 목록은 저장하지 않고 처음 쓸 때 중심들로 다시 칠한다.
         private List<IntVec3> _activityCenters = new List<IntVec3>();
         private ushort[] _activityDistSq;
-        // 칠한 칸을 가장 가까운 중심까지의 거리 순으로(같으면 칠한 순서대로). 중심이 하나면 바닐라 GenRadial.RadialPattern 순서와 같다.
         private readonly List<IntVec3> _activityCells = new List<IntVec3>();
 
         public IReadOnlyList<IntVec3> ActivityCenters => _activityCenters;
@@ -134,7 +120,7 @@ namespace VVRace
             }
         }
 
-        // 테두리 그리기(GenDraw)가 List를 받으므로 그대로 넘긴다. 고치지 말 것.
+        // GenDraw에 전달하므로 List를 유지한다.
         public List<IntVec3> ActivityCellsForDrawing
         {
             get
@@ -155,7 +141,6 @@ namespace VVRace
             }
         }
 
-        // 가장 가까운 중심까지의 거리 제곱(활동 범위 밖이면 int.MaxValue)
         public int ActivityDistSq(IntVec3 cell)
         {
             EnsureActivityGrid();
@@ -166,12 +151,10 @@ namespace VVRace
             return distSq == OutsideActivity ? int.MaxValue : distSq;
         }
 
-        // 어느 중심에서든 radius 안인 칸(InHorDistOf와 같은 판정, radius는 WorkRadius 이하)
         public bool InActivityRange(IntVec3 cell, float radius) => ActivityDistSq(cell) <= radius * radius;
 
         public bool InWorkRange(IntVec3 cell) => InActivityRange(cell, WorkRadius);
 
-        // ActivityCells 앞에서부터 radius 안인 칸 수(GenRadial.NumCellsInRadius에 해당)
         public int ActivityCellCount(float radius)
         {
             EnsureActivityGrid();
@@ -186,7 +169,6 @@ namespace VVRace
             return lo;
         }
 
-        // 어느 중심에서든 radius 안인 칸(칠한 범위 밖 반경도 된다)
         public bool NearActivityCenter(IntVec3 cell, float radius)
         {
             for (int i = 0; i < _activityCenters.Count; ++i)
@@ -196,7 +178,6 @@ namespace VVRace
             return false;
         }
 
-        // root에서 활동 범위 끝까지의 가장 먼 거리(지역 탐색 반경용)
         public float ActivityReachFrom(IntVec3 root)
         {
             var reach = 0f;
@@ -255,7 +236,6 @@ namespace VVRace
 
         private static readonly List<Room> _tmpStructure = new List<Room>();
 
-        // 정착할 때 둥지 방(둥지 중심 칸의 구조물)의 경계(벽·문)를 기억해 두고, 둥지 중심 둘레를 활동 범위로 칠하고, 바깥으로 난 문 밖 가까운 빈 땅에 보관 칸을 잡는다.
         public void Establish(IntVec3 nestCell)
         {
             AddStructure(nestCell);
@@ -275,8 +255,6 @@ namespace VVRace
             }
         }
 
-        // 둥지 중심 칸의 방과 문으로 이어진 방들(유인통이 판정한 구조물, ViviNestSiteEvaluator.CollectStructureRooms)을 둥지 방으로 넣는다.
-        // 정착대가 오는 사이 구조물이 바뀌어 판정을 통과하지 못하면 중심 방만 넣는다.
         private void AddStructure(IntVec3 nestCell)
         {
             var map = Map;
@@ -321,7 +299,6 @@ namespace VVRace
 
         public bool IsBoundaryCell(IntVec3 cell) => _boundaryCellSet.Contains(cell);
 
-        // 경계 칸 위의 문(경계 칸 순서, 여러 칸 문은 칸마다 한 번씩)
         public IReadOnlyList<Building_Door> BorderDoors
         {
             get
@@ -331,7 +308,6 @@ namespace VVRace
             }
         }
 
-        // 바깥으로 난 경계 문: 문 칸 4방향 이웃에 구조물 밖(ViviNestSiteEvaluator.IsOutside) 방이 있는 문. 구조물의 방 사이 문은 아니다.
         public bool IsOuterDoor(Building_Door door)
         {
             var map = Map;
@@ -347,7 +323,6 @@ namespace VVRace
             return false;
         }
 
-        // 출입구: 바깥으로 난 첫 경계 문, 없으면 첫 경계 문(문이 없으면 null)
         public Building_Door EntranceDoor
         {
             get
@@ -361,14 +336,12 @@ namespace VVRace
             }
         }
 
-        // 경계 문 칸이거나 그 8방향 이웃(통로)
         public bool IsBesideBorderDoor(IntVec3 cell)
         {
             EnsureBorderDoors();
             return _borderDoorAdjacentCells.Contains(cell);
         }
 
-        // 비어 있는 자리: 구조물·건물·청사진·골조가 없고 문 옆(통로)이 아닌 칸(보관 칸·건설 칸·작업 자리 고르기가 함께 쓴다)
         public bool IsClearSpot(IntVec3 cell)
         {
             var map = Map;
@@ -380,7 +353,6 @@ namespace VVRace
             return !IsBesideBorderDoor(cell);
         }
 
-        // 맵의 건물이 서거나 없어졌다(둥지 토일 알림). 문이면 다음 칸 검사 때 문 목록을 다시 만든다.
         public void Notify_BuildingChanged(Building building)
         {
             if (building is Building_Door) { _borderDoorsDirty = true; }
@@ -410,7 +382,6 @@ namespace VVRace
             }
         }
 
-        // 문 바로 앞(통로)은 비우고, 플레이어 구역·건물·청사진과 겹치지 않는 바깥 빈 땅
         private bool IsUsableOutdoorStorageCell(IntVec3 cell)
         {
             var map = Map;
@@ -454,7 +425,6 @@ namespace VVRace
                 }
             }
 
-            // 모든 방이 온전하면 지금 방 칸으로 바꾸고, 뚫린 방이 있으면 원래 칸을 남긴 채 온전한 방 칸만 더한다.
             if (!anyBreached)
             {
                 _ownedRoomCellSet.Clear();

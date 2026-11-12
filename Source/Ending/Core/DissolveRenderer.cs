@@ -22,8 +22,6 @@ namespace VVRace
         }
     }
 
-    // VV_Dissolve 소멸 연출이 공유하는 재질과 그리기.
-    // 연출별 값은 그릴 때 MaterialPropertyBlock으로 넣으므로 공유 재질에는 노이즈 텍스처만 지정한다.
     [StaticConstructorOnStartup]
     public static class DissolveRenderer
     {
@@ -44,7 +42,6 @@ namespace VVRace
             return GetNoiseMaterial(texPath, ShaderPath, MaterialCache, noiseFirst: false);
         }
 
-        // Graphic_Multi처럼 서쪽은 동쪽 텍스처를 좌우 반전해 쓴다.
         public static Material GetMaterial(string texPath, Rot4 rotation)
         {
             return GetMaterial(texPath + RotationSuffix(rotation));
@@ -55,8 +52,6 @@ namespace VVRace
             return rotation == Rot4.North ? "_north" : (rotation == Rot4.South ? "_south" : "_east");
         }
 
-        // 소멸 노이즈를 쓰는 셰이더 재질을 경로별로 캐시한다. 캐시는 셰이더마다 따로 둔다.
-        // noiseFirst는 텍스처 유무와 무관하게 노이즈를 먼저 조회하던 호출부의 조회 순서를 그대로 지키기 위한 것이다.
         internal static Material GetNoiseMaterial(string texPath, string shaderPath, Dictionary<string, Material> cache, bool noiseFirst)
         {
             if (cache.TryGetValue(texPath, out var cached))
@@ -85,7 +80,6 @@ namespace VVRace
             return material;
         }
 
-        // sweepDir는 텍스처 UV 기준 방향이다. 좌우 반전하면 메시의 UV도 반전되므로 x를 뒤집는다.
         public static void Draw(Material material, Vector3 pos, Vector2 size, bool flip, float ageSecs, in DissolveStyle style, Vector2 sweepDir)
         {
             if (material == null) { return; }

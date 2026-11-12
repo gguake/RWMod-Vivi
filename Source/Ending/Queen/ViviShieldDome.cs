@@ -4,13 +4,11 @@ using Verse;
 
 namespace VVRace
 {
-    // 바닐라 투사체 차단기는 부모의 세력으로 적대 판정을 하므로 플레이어 세력을 가질 수 있는 건물 범주로 만든다.
     [StaticConstructorOnStartup]
     public class ViviShieldDome : Building
     {
         private const string HoneycombTexPath = "VFX/VV_HoneycombShield";
 
-        // 바닐라 보호막 그림과 같은 비율로 가장자리를 반경에 맞춘다.
         private const float DrawScalePerRadius = 2f * 1.1601562f;
 
         private static readonly Material HoneycombMat = MaterialPool.MatFrom(HoneycombTexPath, ShaderDatabase.MoteGlow);
@@ -127,7 +125,6 @@ namespace VVRace
             Comps_PostDraw();
         }
 
-        // 다른 건물을 지을 때 지워지지 않도록 Def를 파괴 불가로 두었으므로 스스로 사라질 때만 허용한다.
         public override void Destroy(DestroyMode mode = DestroyMode.Vanish)
         {
             var allow = allowDestroyNonDestroyable;

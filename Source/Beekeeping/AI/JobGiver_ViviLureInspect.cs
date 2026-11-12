@@ -5,7 +5,6 @@ using Verse.AI.Group;
 
 namespace VVRace
 {
-    // 정찰 비비의 둘러보기: 유인통 냄새 맡기 → 후보 방 들여다보기 → 꽃 사이 거닐기(없으면 듀티 위치 주변 산책으로 넘어간다)
     public class JobGiver_ViviLureInspect : ThinkNode_JobGiver
     {
         private const float FlowerStrollRadius = 12f;

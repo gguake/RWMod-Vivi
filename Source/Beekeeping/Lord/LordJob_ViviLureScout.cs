@@ -6,13 +6,11 @@ using Verse.AI.Group;
 
 namespace VVRace
 {
-    // 바닐라 방문객(LordJob_VisitColony)처럼 이동 → 둘러보기 → 퇴장하되, 둘러보기가 끝날 때 유인통 주변 환경을 판정한다.
     public class LordJob_ViviLureScout : LordJob
     {
         private Faction _faction;
         private Building_ViviLure _lure;
-        // 만들 때의 유인통 자리. 그래프(이동 목적지·둘러보기 위치)는 이것만 쓴다: 바닐라는 불러올 때 그래프를 다시 만드는데,
-        // 그사이 유인통이 해체됐으면 위치를 잃고, 옮겨 설치됐으면 처음 그래프와 달라진다.
+        
         private IntVec3 _lurePos = IntVec3.Invalid;
         private int _inspectTicks;
         private bool _resultDecided;
@@ -69,7 +67,6 @@ namespace VVRace
             arrived.AddTrigger(new Trigger_Memo("TravelArrived"));
             graph.AddTransition(arrived);
 
-            // 다 둘러봤으면 판정하고 떠난다.
             var done = new Transition(inspectToil, exitToil);
             done.AddTrigger(new Trigger_TicksPassed(_inspectTicks));
             done.AddPreAction(new TransitionAction_Custom(() => FinishScouting(completed: true)));
@@ -77,7 +74,6 @@ namespace VVRace
             done.AddPostAction(new TransitionAction_WakeAll());
             graph.AddTransition(done);
 
-            // 위험하면 판정 없이 서둘러 떠난다(정찰 실패). 이동 하위 그래프의 '피격 → 지점 방어'보다 먼저 검사되게 맨 앞에 둔다.
             var danger = new Transition(travelToil, exitToil);
             BeekeepingUtility.AddSourcesDistinct(danger, travelSubgraph.lordToils);
             danger.AddSource(inspectToil);
@@ -111,7 +107,6 @@ namespace VVRace
         {
             base.Notify_PawnLost(p, condition);
 
-            // 둘러보기가 끝나기 전에 정찰대가 모두 쓰러지거나 붙잡혔으면 실패다.
             if (!_resultDecided && lord.ownedPawns.Count == 0 && condition != PawnLostCondition.ExitedMap)
             {
                 FinishScouting(completed: false);
@@ -151,7 +146,6 @@ namespace VVRace
                 return;
             }
 
-            // 정착대는 이 시각이 지나면 유인통이 직접 부른다(Building_ViviLure.FireSettlers). 바닐라 예약 큐는 발동 판정에서 떨어진 예약을 알리지 않고 지운다.
             lure.Notify_SettlersScheduled(Find.TickManager.TicksGame + report.SettleDelayTicks);
 
             Messages.Message(LocalizeString_Message.VV_Message_ViviLureScoutsSatisfied.Translate(), lure, MessageTypeDefOf.PositiveEvent);

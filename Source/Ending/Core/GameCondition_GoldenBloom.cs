@@ -13,7 +13,6 @@ namespace VVRace
         {
             base.Init();
 
-            // 강제 날씨 변경은 기존 날씨가 4000틱 유지된 뒤에 적용되므로 전환을 직접 시작한다.
             var map = SingleMap;
             if (map != null && weather != null && map.weatherManager.curWeather != weather)
             {
@@ -26,8 +25,6 @@ namespace VVRace
             var map = SingleMap;
             base.End();
 
-            // 종료 후 꽃안개가 기존 날씨 지속 시간만큼 남지 않도록 다음 날씨로 즉시 전환한다.
-            // 다른 꽃안개 컨디션이 같은 날씨를 강제 중이면 유지한다.
             if (map != null && weather != null && map.weatherManager.curWeather == weather && map.weatherDecider.ForcedWeather != weather)
             {
                 map.weatherDecider.StartNextWeather();

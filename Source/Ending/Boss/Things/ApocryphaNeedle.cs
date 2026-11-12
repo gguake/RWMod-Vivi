@@ -143,7 +143,6 @@ namespace VVRace
 
         private bool IsRacked => !IsUnbound && (_state == NeedleState.Idle || (_state == NeedleState.Returning && _returnProgress >= FinRackReturnProgress));
 
-        // 등 뒤 바늘이 몸에 가려지도록 보스보다 낮게 그린다. 보스가 등을 보이거나 바늘이 비행 중이면 높게 그린다.
         private float DrawAltitude
         {
             get
@@ -154,7 +153,6 @@ namespace VVRace
             }
         }
 
-        // 보스의 왼쪽 어깨는 정면·서향에서 화면 오른쪽(+1), 후면·동향에서 화면 왼쪽(-1)에 해당한다.
         private float FinSide => _boss != null && (_boss.Rotation == Rot4.South || _boss.Rotation == Rot4.West) ? 1f : -1f;
 
         private bool FinBehindBody => _boss != null && _boss.Rotation != Rot4.North;
@@ -269,7 +267,6 @@ namespace VVRace
 
             var start = IsUnbound ? origin : origin + direction * LaunchOffset;
 
-            // 대상이 발사 지점보다 충분히 앞에 있지 않으면 경고 띠가 대상을 덮지 못하므로 몸통 옆 부채꼴 위치에서 겨눈다.
             if (!IsUnbound && !fanAngle.HasValue && Vector3.Distance(origin, target) < LaunchOffset + CloseTargetMargin)
             {
                 var radius = BossComp?.Props.needleFanRadius ?? 5f;
@@ -302,7 +299,6 @@ namespace VVRace
             PlayEffectAt(VVEffecterDefOf.VV_Effecter_ApocryphaNeedleAim, _pos);
         }
 
-        // 2페이즈는 폰이 바늘을 깨워 조준하므로 보스가 기절해도 취소하지 않는다.
         public bool CancelAim()
         {
             if (_state != NeedleState.Aiming || IsUnbound) { return false; }
@@ -555,7 +551,6 @@ namespace VVRace
             TickFiring(now);
         }
 
-        // _travelled는 시작점에서 촉까지의 거리다. 그림 중심은 촉보다 TipOffset만큼 뒤에 있다.
         private void TickFiring(int now)
         {
             var from = _travelled;
@@ -621,7 +616,6 @@ namespace VVRace
             var map = Map;
             var tip = PointOnLane(_laneLength);
             var cell = tip.ToIntVec3().ClampInsideMap(map);
-            // 미탐사 칸에 꽂히면 깨우러 갈 수 없으므로 안개 칸은 건너뛴다.
             if (cell.Standable(map) && !cell.Fogged(map))
             {
                 _groundCell = cell;
@@ -785,7 +779,6 @@ namespace VVRace
             _returnOutDir = outDir;
             _returnProgress = 0f;
 
-            // 귀환 속도를 일정하게 맞추기 위해 현 길이와 제어점 다각형 길이의 평균으로 베지어 곡선 길이를 근사한다.
             GetReturnCurve(now, out var p0, out var c1, out var c2, out var p3);
             var chord = Vector3.Distance(p0, p3);
             var polygon = Vector3.Distance(p0, c1) + Vector3.Distance(c1, c2) + Vector3.Distance(c2, p3);
@@ -845,8 +838,6 @@ namespace VVRace
             ApocryphaNeedleLane.PierceAlong(this, _laneStart, _laneDir, _laneLength, comp.Props.needleHalfWidth, from, to, _hitIds, CanPierce, thing => Pierce(thing, comp));
         }
 
-        // 띠는 몸통에서 LaunchOffset만큼 떨어진 곳에서 시작하므로 돌파 때는 몸통과 띠 시작점 사이에 선 건물도 꿰뚫는다.
-        // 그러지 않으면 바로 앞 벽은 영영 뚫리지 않아 보스가 그 자리에서 바늘만 되풀이한다. 경고 띠 밖이라 폰은 맞히지 않는다.
         private void DamageBeforeLane()
         {
             var map = Map;
@@ -1039,7 +1030,6 @@ namespace VVRace
             ApocryphaNeedleLane.PlayEffectAt(Map, effecterDef, point);
         }
 
-        // 1.7 Mathf에는 LerpAngle이 없으므로 짧은 회전 방향으로 직접 보간한다.
         private static float LerpAngle(float from, float to, float t)
         {
             return from + Mathf.DeltaAngle(from, to) * Mathf.Clamp01(t);

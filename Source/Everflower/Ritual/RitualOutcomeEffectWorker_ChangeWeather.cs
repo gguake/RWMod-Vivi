@@ -19,7 +19,6 @@ namespace VVRace
             {
                 var selectedWeather = everflower.ConsumeSelectedRitualWeather();
 
-                // 의식 도중 평화 기간에 진입하면 엔딩의 황금빛 꽃안개가 날씨를 고정하므로 변경을 취소한다.
                 if (GoldenBloomUtility.IsHeldByEnding(map))
                 {
                     Messages.Message(LocalizeString_Etc.VV_FailReason_GoldenBloomHoldsWeather.Translate(), everflower, MessageTypeDefOf.RejectInput, false);

@@ -80,7 +80,6 @@ namespace VVRace
                     var seed = ThingMaker.MakeThing(VVThingDefOf.VV_Seed_UnknownPlant);
                     seed.stackCount = 1;
 
-                    // 둥지 비비가 얻은 씨앗은 둥지 몫이다.
                     pawn.GetNestLordJob()?.MarkOwned(seed);
                     GenPlace.TryPlaceThing(seed, pawn.Position, pawn.Map, ThingPlaceMode.Near);
                 }

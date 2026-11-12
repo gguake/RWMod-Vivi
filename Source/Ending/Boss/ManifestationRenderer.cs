@@ -5,7 +5,6 @@ using Verse;
 
 namespace VVRace
 {
-    // 형체를 빚는 연출이 공유하는 재질과 그리기. 위치와 진행도는 각 연출에서 계산한다.
     [StaticConstructorOnStartup]
     internal static class ManifestationRenderer
     {
@@ -31,8 +30,6 @@ namespace VVRace
             Graphics.DrawMesh(mesh, matrix, material, 0, null, 0, PropertyBlock);
         }
 
-        // 시작점에서 목표점까지 travelSecs 동안 날아가 모이는 플렉을 만든다.
-        // 크기 난수는 호출부 인자에서 먼저 소비되고, 회전 난수(정렬하지 않을 때)는 여기서 소비된다.
         public static void ThrowConverging(Map map, FleckDef def, Vector3 start, Vector3 target, float travelSecs, float scale, Color? color, bool alignToVelocity)
         {
             var travel = (target - start).Yto0();

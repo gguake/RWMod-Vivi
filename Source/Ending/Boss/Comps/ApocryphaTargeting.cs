@@ -60,7 +60,6 @@ namespace VVRace
             }
         }
 
-        // 가장 가까운 적이 바뀔 때마다 호위가 오가지 않도록 현재 적이 계속 보이면 지정 시간만 연장한다.
         public void TickEnemyDetection()
         {
             if (!Pawn.IsHashIntervalTick(EnemyDetectInterval)) { return; }
@@ -151,7 +150,6 @@ namespace VVRace
             Pawn.jobs.EndCurrentJob(JobCondition.InterruptForced);
         }
 
-        // 공격이 한곳에 몰리지 않도록 기존 조준에 걸린 적은 다른 후보가 없을 때만 선택한다. 최근 원거리 공격자를 우선한다.
         private Thing PickAttackTarget(List<Thing> candidates, System.Predicate<IntVec3> isAimed)
         {
             var attacker = RangedAttacker;

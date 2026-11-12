@@ -73,7 +73,6 @@ namespace VVRace
             }
         }
 
-        // 다른 세력 식물의 열매는 그 세력 몫이다. 둥지 세력 식물이면 둥지 몫으로 놓고, 그 밖의 세력이면 금지 표시해 정착민이 가져가지 않게 한다.
         private bool TryPlaceFruit(Thing fruit)
         {
             var map = parent.Map;

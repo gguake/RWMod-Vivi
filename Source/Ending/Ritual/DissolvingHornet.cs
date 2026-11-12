@@ -18,7 +18,6 @@ namespace VVRace
 
         private static readonly DissolveStyle Style = new DissolveStyle(DissolveDelaySecs, DissolveDurationSecs, new Color(1f, 0.86f, 0.5f, 1f), 0.85f, 0.45f);
 
-        // 오염된 영원꽃 동화를 지닌 채 죽은 말벌은 아스포델 처치 때처럼 금빛 테두리를 남기며 잿가루와 불씨로 흩어진다.
         private static readonly DissolveStyle AshenStyle = new DissolveStyle(DissolveDelaySecs, DissolveDurationSecs, new Color(1f, 0.78f, 0.35f, 1f), 0f, 0.75f);
         private static readonly Color[] DustColors =
         {
@@ -51,7 +50,6 @@ namespace VVRace
             _wind = wind.sqrMagnitude > 0.0001f ? wind.normalized : Vector3.forward;
         }
 
-        // 사망 처리 도중이라 시체는 바로 없애지 않고 첫 틱에 지운다.
         public void InitAshen(Pawn hornet, Corpse corpse)
         {
             InitGraphic(hornet);
@@ -125,7 +123,6 @@ namespace VVRace
             }
         }
 
-        // DyingApocrypha처럼 위에서 아래로 내려가는 띠에서 재와 불씨를 날린다.
         private void ThrowAsh(int age)
         {
             var progress = Progress;
@@ -160,7 +157,6 @@ namespace VVRace
             }
         }
 
-        // 셰이더가 바람이 부는 쪽 가장자리부터 지우므로 가루가 날리는 경계도 같은 축을 따라 바람 반대쪽으로 이동한다.
         private void ThrowDust(int age)
         {
             var progress = Progress;

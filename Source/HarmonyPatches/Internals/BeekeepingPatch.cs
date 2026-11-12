@@ -11,24 +11,18 @@ namespace VVRace
     {
         internal static void Patch(Harmony harmony)
         {
-            // 정찰대가 떠난 뒤 정착대가 올 때까지 같은 임시 세력을 붙잡아 둔다.
             ViviHarmonyPatcher.TryPatch(harmony, "FactionManager.FactionCanBeRemoved (beekeeping reservation)",
                 AccessTools.Method(typeof(FactionManager), "FactionCanBeRemoved"),
                 prefix: new HarmonyMethod(typeof(BeekeepingPatch), nameof(FactionManager_FactionCanBeRemoved_Prefix)));
 
-            // 비플레이어 폰은 금지 표시를 무시하므로 둥지 비비가 플레이어 물건(식량·건설 재료)과 건물을 쓰지 않게 막는다.
             ViviHarmonyPatcher.TryPatch(harmony, "ForbidUtility.IsForbidden (vivi nest ownership)",
                 AccessTools.Method(typeof(ForbidUtility), nameof(ForbidUtility.IsForbidden), new[] { typeof(Thing), typeof(Pawn) }),
                 postfix: new HarmonyMethod(typeof(BeekeepingPatch), nameof(ForbidUtility_IsForbidden_Postfix)));
 
-            // 둥지 생활 듀티의 일 묶음에서 일을 고르는 둥지 비비에게 둥지 활동 범위 밖 칸(과 그 칸의 물건)을 금지한다(ThinkNode_ViviNestForbidOutsideActivityArea).
-            // 바닐라 듀티 지점 반경 금지(maxDistToSquadFlag)를 칠한 칸으로 바꾼 것이다. 물건 금지 판정도 놓인 칸으로 이 판정을 거친다.
-            // 대피 중 식사를 하는 둥지 비비에게는 지금 선 방 밖 칸을 금지한다(씹을 자리가 방 밖으로 잡히지 않게, JobGiver_ViviNestTakeShelter).
             ViviHarmonyPatcher.TryPatch(harmony, "ForbidUtility.IsForbidden cell (vivi nest activity area)",
                 AccessTools.Method(typeof(ForbidUtility), nameof(ForbidUtility.IsForbidden), new[] { typeof(IntVec3), typeof(Pawn) }),
                 postfix: new HarmonyMethod(typeof(BeekeepingPatch), nameof(ForbidUtility_IsForbiddenCell_Postfix)));
 
-            // 바닐라가 산출물을 놓기 직전에 알리는 지점: 작업 지시서 산출물, 베기·수확 산출물을 둥지 몫으로 잡는다.
             ViviHarmonyPatcher.TryPatch(harmony, "QuestManager.Notify_ThingsProduced (vivi nest products)",
                 AccessTools.Method(typeof(QuestManager), nameof(QuestManager.Notify_ThingsProduced)),
                 postfix: new HarmonyMethod(typeof(BeekeepingPatch), nameof(QuestManager_Notify_ThingsProduced_Postfix)));
@@ -36,8 +30,6 @@ namespace VVRace
                 AccessTools.Method(typeof(QuestManager), nameof(QuestManager.Notify_PlantHarvested)),
                 postfix: new HarmonyMethod(typeof(BeekeepingPatch), nameof(QuestManager_Notify_PlantHarvested_Postfix)));
 
-            // 바닐라가 적대 세력이 내려놓은 물건을 금지하는 지점: 둥지 비비가 내려놓은 물건(운반이 끊긴 것, 나눠 든 조각 포함)을 둥지 몫으로 남긴다.
-            // 플레이어 더미에 합쳐졌으면 그 더미는 잡지 않는다(LordJob_ViviNest.MarkDropped).
             ViviHarmonyPatcher.TryPatch(harmony, "Pawn_CarryTracker.TryDropCarriedThing (vivi nest ownership)",
                 AccessTools.Method(typeof(Pawn_CarryTracker), nameof(Pawn_CarryTracker.TryDropCarriedThing),
                     new[] { typeof(IntVec3), typeof(ThingPlaceMode), typeof(Thing).MakeByRefType(), typeof(System.Action<Thing, int>) }),
@@ -47,15 +39,10 @@ namespace VVRace
                     new[] { typeof(IntVec3), typeof(int), typeof(ThingPlaceMode), typeof(Thing).MakeByRefType(), typeof(System.Action<Thing, int>) }),
                 postfix: new HarmonyMethod(typeof(BeekeepingPatch), nameof(Pawn_CarryTracker_TryDropCarriedThing_Postfix)));
 
-            // 둥지 비비가 만들기 시작한 미완성품(바닐라가 만든 비비를 정하고 작업 자리 칸에 바로 놓는다)을 둥지 몫으로 잡는다.
-            // 잡지 않으면 금지 패치가 둥지 비비에게 감춰, 오래 걸리는 제작(새총)이 바닐라 재검토(작업 3000틱 뒤 1000틱마다)에서 끊기면
-            // 시작한 비비도 이어 만들지 못한 채 놀았다(자동 테스트 p2b W8: 미완성품이 금지된 채 남은 작업 463에서 하루 넘게 멈춤).
             ViviHarmonyPatcher.TryPatch(harmony, "UnfinishedThing.Creator (vivi nest ownership)",
                 AccessTools.PropertySetter(typeof(UnfinishedThing), nameof(UnfinishedThing.Creator)),
                 postfix: new HarmonyMethod(typeof(BeekeepingPatch), nameof(UnfinishedThing_SetCreator_Postfix)));
 
-            // 둥지 세력 건물을 포장하면(바깥에서 자란 잔불꽃을 다시 설치 청사진으로 방 화분에 옮길 때 등) 그 포장을 둥지 몫으로 잡는다.
-            // 바닐라는 포장을 그 칸에 그냥 놓으므로 잡지 않으면 둥지 비비에게 금지되고 정착민이 옮겨 간다.
             ViviHarmonyPatcher.TryPatch(harmony, "MinifyUtility.MakeMinified (vivi nest ownership)",
                 AccessTools.Method(typeof(MinifyUtility), nameof(MinifyUtility.MakeMinified)),
                 prefix: new HarmonyMethod(typeof(BeekeepingPatch), nameof(MinifyUtility_MakeMinified_Prefix)),
@@ -65,15 +52,10 @@ namespace VVRace
                 AccessTools.Method(typeof(Building), nameof(Building.ClaimableBy)),
                 postfix: new HarmonyMethod(typeof(BeekeepingPatch), nameof(Building_ClaimableBy_Postfix)));
 
-            // 바닐라 입양 판정은 같은 세력에 깨어 있는 위협이 없으면 허용해, 둥지 비비가 모두 자는 밤마다 둥지 아기를 입양할 수 있었다.
-            // 버려진 아기 경고도 이 판정을 쓴다(알에서 깬 둥지 아기는 자동 수유자가 없어 입양 가능 여부만으로 경고가 떴다).
             ViviHarmonyPatcher.TryPatch(harmony, "Pawn.AdoptableBy (vivi nest baby)",
                 AccessTools.Method(typeof(Pawn), nameof(Pawn.AdoptableBy)),
                 postfix: new HarmonyMethod(typeof(BeekeepingPatch), nameof(Pawn_AdoptableBy_Postfix)));
 
-            // 바닐라 환자 먹이기 잡(JobDriver_FoodFeedPatient)은 환자가 누군가 먹여야 하는 상태가 아니면 바로 끝나는데, 바닐라 판정은 플레이어 세력·손님이
-            // 침대에 누운 경우만 본다. 쓰러진 둥지 구성원(아기 제외)도 그 상태로 쳐 둥지 먹이기 잡(JobGiver_ViviNestFeedPatient)이 끝까지 먹이게 한다.
-            // 1.7에서 이 판정은 그 잡과 바닐라 식사 잡 기버의 우선도(스스로 먹으러 가지 않음, 쓰러진 폰은 어차피 못 간다)에만 쓰인다.
             ViviHarmonyPatcher.TryPatch(harmony, "FoodUtility.ShouldBeFedBySomeone (vivi nest patient)",
                 AccessTools.Method(typeof(FoodUtility), nameof(FoodUtility.ShouldBeFedBySomeone)),
                 postfix: new HarmonyMethod(typeof(BeekeepingPatch), nameof(FoodUtility_ShouldBeFedBySomeone_Postfix)));
@@ -87,7 +69,6 @@ namespace VVRace
             }
         }
 
-        // 비비들이 사는 동안 둥지 건물은 차지할 수 없다(해체 가능 여부도 바닐라가 차지 가능 여부를 따른다).
         private static void Building_ClaimableBy_Postfix(Building __instance, Faction by, ref AcceptanceReport __result)
         {
             if (!__result.Accepted || by == null || !by.IsPlayer || !__instance.Faction.IsWanderingViviFaction()) { return; }
@@ -98,8 +79,6 @@ namespace VVRace
             }
         }
 
-        // 둥지가 데리고 있는 아기는 입양할 수 없다(둥지 건물 차지 규칙과 같이 둥지가 사는 동안). 둥지가 떠나며 두고 간 아기는
-        // 로드에서 빠지므로(LordToil_ViviNestExit) 바닐라 판정대로 입양하고 경고도 뜬다.
         private static void Pawn_AdoptableBy_Postfix(Pawn __instance, Faction by, StringBuilder reason, ref bool __result)
         {
             if (!__result || by == null || !by.IsPlayer || __instance.GetNestLordJob() == null) { return; }
@@ -121,7 +100,6 @@ namespace VVRace
             value?.GetNestLordJob()?.MarkOwned(__instance);
         }
 
-        // 포장하면 건물이 맵에서 빠지므로 포장 전에 맵을 기억해 둔다.
         private static void MinifyUtility_MakeMinified_Prefix(Thing thing, out Map __state)
         {
             __state = thing?.MapHeld;
@@ -158,7 +136,6 @@ namespace VVRace
             var faction = pawn.Faction;
             if (faction == null) { return; }
 
-            // 정착민은 둥지 세력의 작업 자리 같은 건물을 쓰지 않는다(바닐라 지시서 워크기버는 세력을 보지 않는다).
             if (faction.IsPlayer)
             {
                 if (t is Building nestBuilding && !(t is Building_Door) && nestBuilding.Faction.IsWanderingViviFaction())

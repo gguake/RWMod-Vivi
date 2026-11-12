@@ -4,16 +4,10 @@ using Verse.AI;
 
 namespace VVRace
 {
-    // 둥지 새싹·방출기(마나 비료)와 냉각기(원목) 등 연료를 먹는 둥지 것을 바닐라 연료 보충으로 채운다(연료는 둥지 몫만 쓴다).
     public class JobGiver_ViviNestRefuel : ThinkNode_JobGiver
     {
-        // 마나가 없어 자라지 못하는 새싹(마나 비활성)은 채우지 않는다. 새싹은 마나와 상관없이 비료를 하루 10개씩 태우므로 채워 봐야 비료만 먹는다
-        // (장기 계측: 마나 0 칸의 새싹 14그루가 28~60일 동안 자라지 못한 채 비료를 먹어 땅 파기 비중이 3%→11%로 늘었다).
-        // 마나가 돌아오면 다시 채운다. 연료가 떨어진 뒤로도 4일 가까이 버티므로 방출기 연료가 잠깐 떨어진 동안에는 죽지 않는다.
         public static bool IsStarvedSeedling(Thing thing) => thing is ArcanePlant_Seedling seedling && !seedling.ManaComp.Active;
 
-        // 서늘한 철의 냉각기는 채우지 않는다(ViviNestPlanner.NeedsCooling): 바닐라 냉각기는 원목을 늘 하루 10개씩 태우지만 17°C 아래로는 식히지 않고,
-        // 잔불꽃이 데우는 방에서는 그 열을 깎는다. 남은 연료가 떨어지면 저절로 멈추고, 더운 철이 오면 다시 채운다.
         public static bool IsIdleCooler(LordJob_ViviNest nest, Thing thing)
         {
             return ViviNestPlanner.IsCooler(thing) && !nest.Planner.NeedsCooling(thing.GetRoom());
@@ -38,11 +32,6 @@ namespace VVRace
             return null;
         }
 
-        // 바닐라 연료 보충 판정(RefuelWorkGiverUtility.CanRefuel) 중 비비와 상관없는 앞 조건: 안개, 가득 참, 자동 보충, 비지 않았을 때 보충 금지, 자동 보충할 때.
-        // 길(CanReach)보다 먼저 본다. 예전에는 연료가 찬 둥지 새싹·방출기마다 길부터 물어 연료 보충이 1회 16~22 µs였다(실측, 거의 늘 실패).
-        // 그다음 둥지 장부에 연료 필터가 받는 물건(비료·원목)이 하나도 없으면 바닐라 연료 찾기(FindBestFuel)가 늘 실패하므로 그 전에 건너뛴다.
-        // 둥지 비비는 둥지 몫만 쓰고(금지 패치) 장부는 그 둥지 몫(둥지 칸·둥지 몫 표시·구성원이 지닌 것)을 모두 세므로 결과는 같다.
-        // 실측(같은 세이브): 연료 보충 비용의 65~77%가 연료가 필요한 둥지 시설이 있는데 쓸 연료가 없을 때의 이 몫이었다(건조 0.265 µs/틱, 1회 30 µs).
         private static bool WantsAutoRefuel(Thing thing, out CompRefuelable comp)
         {
             comp = thing.TryGetComp<CompRefuelable>();

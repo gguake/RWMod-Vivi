@@ -3,7 +3,6 @@ using Verse;
 
 namespace VVRace
 {
-    // 밀서를 재생성해도 의뢰가 유지되도록 마지막 코어 퀘스트를 밀서 부품 대신 여기에 보관한다.
     public class ViviAmberCoreRequest : IExposable
     {
         private readonly ViviEndingQuest _ending;
@@ -53,7 +52,6 @@ namespace VVRace
             return true;
         }
 
-        // 호출자가 CanRequest로 의뢰 가능 여부를 확인해야 한다. 개발자 도구에서는 이 검사를 생략한다.
         public Quest Request(Faction federation)
         {
             var quest = ViviAmberCoreQuestGen.TryGenerate(federation);

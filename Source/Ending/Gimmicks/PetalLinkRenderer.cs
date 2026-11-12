@@ -13,7 +13,6 @@ namespace VVRace
         private static readonly int WidthPropertyId = Shader.PropertyToID("_Width");
         private static readonly int SeedPropertyId = Shader.PropertyToID("_Seed");
 
-        // width는 꽃잎 나선이 차지하는 폭(칸)이다. seed는 연결선마다 꽃잎 배치가 겹치지 않게 하는 값이다.
         public static void Draw(Vector3 a, Vector3 b, float width, Color color, int seed)
         {
             if (!LinkRenderUtility.TryGetMatrix(a, b, width, color, out var matrix, out var length)) { return; }

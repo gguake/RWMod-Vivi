@@ -5,7 +5,6 @@ using Verse;
 
 namespace VVRace
 {
-    // 보관된 폰은 틱을 처리하지 않으므로 ViviEndingQuest.Tick에서 TickHeld를 호출해 동화 상태와 입자 연출을 갱신한다.
     public class Hediff_EverflowerAssimilation : HediffWithComps
     {
         public const int RiseTicks = 120;
@@ -24,7 +23,6 @@ namespace VVRace
         private const float ParticleLifeSecs = 1.1f;
         private static readonly Color LinkColor = new Color(1f, 0.9f, 0.55f, 0.55f);
 
-        // 폰 층 바로 위에 그린다. 동화 중에는 영원꽃을 폰 층 바로 아래로 내린다.
         private const float DrawAltitudeOffset = 0.05f;
 
         private static readonly HashSet<Pawn> _assimilated = new HashSet<Pawn>();
@@ -38,7 +36,6 @@ namespace VVRace
         private Vector3 _releaseFrom;
         private bool _broken;
 
-        // 매 프레임 조회하는 등록부. 새 게임과 불러오기 시 ViviEndingQuest 생성자에서 비운다.
         public static bool IsAssimilated(Pawn pawn)
         {
             return pawn != null && _assimilated.Count > 0 && _assimilated.Contains(pawn);
@@ -75,8 +72,6 @@ namespace VVRace
             if (existing != null) { return existing; }
             if (pawn == null || everflower == null || altar == null || !pawn.Spawned) { return null; }
 
-            // 제단이 아직 이전 공명자를 품고 있으면(취소 뒤 내려오는 중 등) 헤디프를 만들지 않고 시작하지 않는다.
-            // 붙였다 떼면 해방 메시지가 나가는데, 만개 의식 행동 워커가 매 틱 다시 부르므로 그 메시지가 매 틱 반복된다.
             if (altar.HeldResonator != null) { return null; }
 
             var map = pawn.Map;
@@ -99,7 +94,6 @@ namespace VVRace
 
         public bool IsReleasing => _releaseTick >= 0;
 
-        // 부유 진행도: 0은 지면, 1은 공중. 연결선과 입자 강도에 사용한다.
         public float FloatFactor
         {
             get

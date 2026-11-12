@@ -282,7 +282,6 @@ namespace VVRace
                 return;
             }
 
-            // 화염 피해도 제단이 대신 받게 한다. 일반 화분처럼 꽃에 직접 적용하면 소이탄 하나로 엔딩이 실패할 수 있다.
             var altar = EverflowerComp.EnshrinedAltar;
             if (altar != null)
             {
@@ -294,7 +293,6 @@ namespace VVRace
             base.PreApplyDamage(ref dinfo, out absorbed);
         }
 
-        // 엔딩 진행 중인 앵커이거나 의식 대상인 동안에는 안치된 꽃을 옮기거나 제단을 해체할 수 없다.
         public bool IsEnshrinementLocked
         {
             get
@@ -347,7 +345,6 @@ namespace VVRace
                 var cell = ResolveTeleportCell(_reserveTeleportCell.Value, out var altar);
                 _reserveTeleportCell = null;
 
-                // 예약 후 엔딩이나 의식이 시작됐으면 옮기지 않는다.
                 if (IsEnshrinementLocked) { return; }
 
                 // 예약 후 제단이 건설됐을 수 있으므로 이동 직전에 단계 조건을 다시 검사한다.

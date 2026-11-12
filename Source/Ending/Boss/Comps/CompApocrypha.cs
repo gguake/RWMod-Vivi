@@ -24,7 +24,6 @@ namespace VVRace
         public int releaseStunTicks = 300;
 
         public float shellRange = 20f;
-        // 사출탄 폭발 반경 2.4칸에 보스가 휘말리지 않도록 최소 사거리 안의 대상은 조준과 발사에서 제외한다.
         public float shellMinRange = 2.9f;
         public int shellAimTicks = 240;
         public IntRange shellCastIntervalTicks = new IntRange(180, 300);
@@ -72,8 +71,6 @@ namespace VVRace
         public float flowerGuardRadius = 6f;
         public float flowerGuardRetaliationRadius = 20f;
 
-        // 보스전 거대 말벌은 모두 검은 기운에서 빚어진다(HornetManifestation).
-        // 등장·간섭 소환 수에는 현재 습격 포인트 배율을 곱한다. 습격 포인트에 난이도·기지 가치·정착민 전력이 이미 들어 있다.
         public int arrivalHornetCount = 9;
         public int interferenceHornetCount = 6;
         public int interferenceHornetGrowth = 2;
@@ -164,7 +161,6 @@ namespace VVRace
         private long _bondCount;
         private float _vitality;
         private float _maxVitality;
-        // 보스전 도중 난이도 설정을 바꿔도 보정치가 흔들리지 않도록 시작 시점의 위협 척도·위협 점수를 고정한다.
         private float _threatScale = 1f;
         private float _threatPoints;
         private int _transformStartTick = -1;
@@ -177,7 +173,6 @@ namespace VVRace
         private bool _shieldBroken;
         private bool _pendingShieldBreak;
 
-        // 잡을 받을 때마다 지형 판정을 되풀이하지 않도록 간격을 둔다. 저장하지 않는다(불러온 뒤 첫 판정이 조금 당겨질 뿐이다).
         private int _nextStealTargetSkipCheckTick;
 
         private ApocryphaTargeting _targeting;
@@ -215,7 +210,6 @@ namespace VVRace
 
         public int ArrivalHornetCount => ScaledHornetCount(Props.arrivalHornetCount);
 
-        // 간섭할 때마다 증원이 늘어나므로 이번 간섭이 몇 번째인지(0부터)로 계산한다.
         public int InterferenceHornetCount(int releaseIndex)
         {
             return ScaledHornetCount(Props.interferenceHornetCount + Props.interferenceHornetGrowth * releaseIndex);
@@ -246,7 +240,6 @@ namespace VVRace
 
         public bool IsActive => _phase == ApocryphaPhase.Bound || _phase == ApocryphaPhase.Unbound;
 
-        // 병렬 렌더 서브워커에서도 조회하므로 모핑 경과 시간(초)과 진행도(0~1)는 저장 필드와 현재 틱으로만 계산한다.
         public float TransformAgeSecs => _transformStartTick < 0 ? 0f : Mathf.Max(0, GenTicks.TicksGame - _transformStartTick) / 60f;
         public float TransformProgress => _transformStartTick < 0 ? 0f : Mathf.Clamp01((GenTicks.TicksGame - _transformStartTick) / (float)Mathf.Max(1, Props.transformTicks));
 
@@ -260,7 +253,6 @@ namespace VVRace
         }
         public int NextApproachTick => _nextApproachTick;
 
-        // 몸통이 칸 중심보다 위에 그려지므로 연결선·조준선도 ApocryphaGimmicks와 같은 몸통 기준점을 사용한다.
         public Vector3 BodyCenter => ApocryphaGimmicks.GetBossBodyPos(Pawn);
 
         public CompApocrypha()
@@ -293,7 +285,6 @@ namespace VVRace
         }
 
         // 불러오기 중 스폰은 별도 스레드에서 실행되지만 ContentFinder의 텍스처 조회는 메인 스레드에서만 가능하다.
-        // SetAllGraphicsDirty처럼 긴 작업 완료 후 메인 스레드로 미루며 일반 실행 중에는 즉시 처리한다.
         private void PrepareMorph()
         {
             LongEventHandler.ExecuteWhenFinished(() =>
@@ -390,8 +381,6 @@ namespace VVRace
             base.CompTick();
             if (!parent.Spawned) { return; }
 
-            // 파괴 처리는 피해·작업 호출 스택을 벗어난 다음 틱으로 미룬다.
-            // 찬탈 완료와 치명타가 겹치면 기절로 찬탈을 취소할 때처럼 처치를 우선한다.
             if (_pendingDeath)
             {
                 _pendingDeath = false;
@@ -552,7 +541,6 @@ namespace VVRace
             if (damageDef == null || _pendingDeath) { return; }
             if (_phase == ApocryphaPhase.Transforming || _phase == ApocryphaPhase.Dying) { return; }
 
-            // 피해를 흡수하면 바닐라 기절 처리가 생략되므로 허용된 마나 파동 기절은 직접 적용한다.
             if (damageDef == DamageDefOf.Stun || damageDef == DamageDefOf.NerveStun)
             {
                 var stunTicks = damageDef.constantStunDurationTicks ?? Mathf.RoundToInt(dinfo.Amount * StunHandler.StunDurationTicksPerDamage);
@@ -589,7 +577,6 @@ namespace VVRace
                 _manaShield -= absorbedByShield;
                 _pendingDamageText += absorbedByShield;
 
-                // 피해 처리 중 재진입하지 않도록 기절·발사는 다음 틱으로 미룬다.
                 if (_manaShield <= 0f)
                 {
                     _manaShield = 0f;
@@ -655,7 +642,6 @@ namespace VVRace
             Messages.Message(LocalizeString_Message.VV_Message_ApocryphaShieldRestored.Translate(), Pawn, MessageTypeDefOf.NeutralEvent);
         }
 
-        // StunFor는 남은 기절과 새 기절 중 긴 쪽을 쓰므로, 정해진 시간만큼만 기절시키려면 replaceExisting으로 남은 기절을 먼저 지운다.
         internal void GimmickStun(int ticks, Thing instigator, bool replaceExisting = false)
         {
             if (replaceExisting)
@@ -709,7 +695,6 @@ namespace VVRace
             _shell.Cancel();
             _needleAttack.CancelAims();
 
-            // 대기 잡은 발급 때의 기절 길이로 고정돼 있다. 기절이 줄었으면 끊어서 남은 기절만큼만 다시 받게 한다.
             var curJob = Pawn.CurJob;
             if (curJob != null && curJob.def == VVJobDefOf.VV_ApocryphaWait && curJob.expiryInterval > Props.releaseStunTicks + 1)
             {
@@ -735,7 +720,6 @@ namespace VVRace
             }
         }
 
-        // 2페이즈 바늘처럼 피해 처리를 거치지 않는 기믹 피해. 처치는 다음 틱으로 미룬다.
         internal void TakeVitalityDamage(float amount)
         {
             if (_phase != ApocryphaPhase.Unbound || _pendingDeath || amount <= 0f) { return; }
@@ -826,14 +810,12 @@ namespace VVRace
             _breath.Cancel();
             _needleAttack.DestroyAll();
 
-            // 이후 꽃 파괴가 앵커 소실로 중복 처리되지 않도록 찬탈 신호로 퀘스트를 먼저 실패시킨다.
             ViviEndingQuest.Current?.Notify_EverflowerStolen();
 
             var effectCell = (target ?? everflower)?.Position ?? parent.Position;
             VVEffecterDefOf.VV_Effecter_ApocryphaSteal.Spawn(effectCell, map).Cleanup();
             ApocryphaUtility.ShakeCamera(map, 2f);
 
-            // 제거 전의 그래픽과 위치를 보존하도록 시퀀서를 먼저 생성한다.
             var stolen = (DyingApocrypha)ThingMaker.MakeThing(VVThingDefOf.VV_DyingApocrypha);
             stolen.InitStolen(Pawn, everflower);
 
@@ -883,7 +865,6 @@ namespace VVRace
             InterruptCurrentJob();
             PrepareMorph();
 
-            // 곡 도입부의 충격음을 전환 충격파에 맞추도록 60틱 주기를 기다리지 않고 즉시 곡을 바꾼다.
             var music = Find.MusicManagerPlay;
             if (music != null && !music.disabled)
             {
@@ -937,7 +918,6 @@ namespace VVRace
 
         private void BeginDissolve(Map map, IntVec3 cell)
         {
-            // 소멸 연출에 사망 직전 그래픽 크기를 보존하도록 페이즈 변경 전에 연출을 생성한다.
             DyingApocrypha dying = null;
             if (map != null && cell.InBounds(map))
             {
@@ -956,7 +936,6 @@ namespace VVRace
                 GenSpawn.Spawn(dying, cell, map);
             }
 
-            // 맵 밖에 남은 호위가 대상 없는 듀티로 남지 않도록 습격으로 돌리고, 맵의 거대 말벌은 모두 보스와 함께 소멸시킨다.
             ApocryphaUtility.ReleaseEscorts(Pawn);
             ViviEndingUtility.VanishAllTitanicHornets(map);
             HornetManifestation.CancelAll(map);
@@ -967,7 +946,6 @@ namespace VVRace
             }
             else if (map != null)
             {
-                // 예상 밖의 죽음으로 이미 디스폰됐으면 보스의 맵을 알 수 없으므로 맵 단위 정리를 사용한다.
                 ApocryphaGimmicks.CleanupAll(map);
             }
         }
@@ -980,9 +958,6 @@ namespace VVRace
             BeginDissolve(prevMap, parent.Position);
         }
 
-        // 산 지붕 붕괴는 피해 흡수와 무관하게 Kill로 압사시켜 보스전을 건너뛸 수 있다.
-        // CompNociosphere처럼 붕괴 전에 안전한 칸으로 순간이동한다.
-        // 이동할 곳이 없어도 RemoveThing을 반환해 현재 칸의 압사 처리는 건너뛴다.
         public RoofCollapseResponse Notify_OnBeforeRoofCollapse()
         {
             if (_phase == ApocryphaPhase.Dying || !parent.Spawned) { return RoofCollapseResponse.None; }
@@ -1017,7 +992,6 @@ namespace VVRace
                 c != from && c.Standable(map) && !collapseBuffer.IsMarkedToCollapse(c), out result);
         }
 
-        // 디스폰·재스폰 없이 위치만 옮긴다(컴프의 디스폰 정리가 돌지 않게).
         private void TeleportTo(IntVec3 cell, bool endCurrentJob)
         {
             var map = parent.Map;
@@ -1027,9 +1001,6 @@ namespace VVRace
             VVEffecterDefOf.VV_Effecter_ApocryphaArrive.Spawn(cell, map, 1.5f).Cleanup();
         }
 
-        // 찬탈 대상까지 부수고도 갈 길이 없으면(깊은 물·용암 같은 통행 불가 지형으로 끊김) 대상과 이어진 땅으로 순간이동한다.
-        // 벽처럼 부술 수 있는 구조물로 막힌 경우는 돌파·부수기가 맡으므로 여기서 다루지 않는다.
-        // 잡 지급 도중에 불리므로 현재 잡은 끊지 않는다. 호출한 쪽이 돌려주는 새 잡이 현재 잡을 대신한다.
         internal bool TrySkipToStealTarget(Thing target, float stealRange)
         {
             if (!parent.Spawned || !IsActive || target == null || !target.Spawned || target.Map != parent.Map) { return false; }

@@ -4,9 +4,6 @@ using Verse;
 
 namespace VVRace
 {
-    // 앵커가 다른 맵으로 옮겨진 뒤 그 맵과 함께 버려지면 Destroyed나 생성 시점 맵의 MapRemoved 신호가 오지 않는다.
-    // 엔딩이 진행 중이면 직접 AnchorLost를 보내야 한다.
-    // 평화 타이머가 활성화된 뒤 신호를 받도록 QuestPart_Delay 다음에 추가한다.
     public class QuestPart_ViviAnchorWatch : QuestPartActivable
     {
         private const int TickInterval = 250;

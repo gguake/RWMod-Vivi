@@ -26,7 +26,6 @@ namespace VVRace
                 MaintainReverberation(pawn, compEverflower.AttunementHediffSeverity);
             }
 
-            // 아이 비비는 성장이 멈추지 않도록 노화 감속 축복을 주지 않는다.
             if (quest.IsCompleted && level >= CompEverflower.MaxAttunementLevel && pawn.Faction != null && pawn.Faction.IsPlayer && pawn.ageTracker.Adult)
             {
                 GiveOrRefreshBlessing(pawn);

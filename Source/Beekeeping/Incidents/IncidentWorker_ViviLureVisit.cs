@@ -13,7 +13,6 @@ namespace VVRace
         Hornet,
     }
 
-    // 유인통 냄새를 맡고 찾아오는 방문자. 대부분 정찰 비비지만 곰이나 거대 말벌이 올 때도 있다.
     public class IncidentWorker_ViviLureVisit : IncidentWorker
     {
         private const float ScoutWeight = 75f;
@@ -48,7 +47,6 @@ namespace VVRace
             return TryStartVisit(lure, visitor);
         }
 
-        // 맵마다 유인은 한 번에 하나만 진행하고, 이미 둥지가 있으면 부르지 않는다.
         public static bool TryFindLure(Map map, out Building_ViviLure lure)
         {
             lure = null;
@@ -127,7 +125,6 @@ namespace VVRace
             var pawn = PawnGenerator.GeneratePawn(new PawnGenerationRequest(kindDef, null, PawnGenerationContext.NonPlayer, tile: map.Tile));
             GenSpawn.Spawn(pawn, entryCell, map);
 
-            // 굶주린 채로 와서 유인통 미끼를 바닐라 섭취로 배가 찰 때까지 먹는다(로드 듀티가 바닐라 먹이 찾기·사냥보다 먼저 돈다).
             if (pawn.needs?.food != null)
             {
                 pawn.needs.food.CurLevel = 0f;
@@ -140,7 +137,6 @@ namespace VVRace
             return true;
         }
 
-        // 거대 말벌은 유인통 쪽 가장자리에 나타나기만 한다(미끼 도둑 로드 없음, 유인통 상태 그대로).
         private static bool TryStartHornet(Building_ViviLure lure)
         {
             var map = lure.Map;
@@ -149,7 +145,6 @@ namespace VVRace
             var pawn = PawnGenerator.GeneratePawn(new PawnGenerationRequest(VVPawnKindDefOf.VV_TitanicHornet, null, PawnGenerationContext.NonPlayer, tile: map.Tile));
             GenSpawn.Spawn(pawn, entryCell, map);
 
-            // 거대 말벌은 깨어 있으면 늘 광폭해지는 종족이라 바로 광폭으로 시작하고, 오래 머물지 않게 떠날 시각을 정해 둔다.
             pawn.mindState.mentalStateHandler.TryStartMentalState(VVMentalStateDefOf.VV_HornetBerserk);
             pawn.mindState.exitMapAfterTick = Find.TickManager.TicksGame + HornetStayTicks;
 

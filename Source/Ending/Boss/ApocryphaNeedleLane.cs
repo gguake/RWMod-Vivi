@@ -7,18 +7,14 @@ using Verse;
 
 namespace VVRace
 {
-    // 아스포델 바늘과 여왕의 심판 바늘이 공유하는 경로 계산·관통 판정·연출.
     internal static class ApocryphaNeedleLane
     {
-        // 그림 중심에서 촉까지의 거리로 높이 5.5칸의 36%다.
-        // 촉이 경고 띠를 벗어나지 않도록 몸통은 이 거리만큼 뒤에 그린다.
         public const float TipOffset = 1.98f;
 
         private const float PawnHitRadius = 0.35f;
         private const float TrailPointSpacing = 1f;
         private const float MapEdgeMargin = 0.05f;
 
-        // 바닐라 Pawn_DrawTracker.FlyingOffset이 나는 폰을 그리는 높이(z칸).
         private const float FlightDrawLift = 0.6f;
 
         private static readonly List<Thing> _tmpCellThings = new List<Thing>();
@@ -56,8 +52,6 @@ namespace VVRace
         #endregion
 
         #region 관통
-        // 촉이 [from, to] 구간을 지나는 동안 걸친 대상마다 pierce를 한 번씩 부른다. 바늘이 파괴되면 멈춘다.
-        // 폰과 체력이 있는 건물만 대상이며 진영 조건은 canPierce가 정한다.
         public static void PierceAlong(Thing needle, Vector3 start, Vector3 direction, float length, float halfWidth, float from, float to,
             List<int> hitIds, Predicate<Thing> canPierce, Action<Thing> pierce)
         {
@@ -99,7 +93,6 @@ namespace VVRace
             _tmpCellThings.Clear();
         }
 
-        // 경고 띠는 땅에 그리므로 움직이는 폰은 그려지는 자리로, 나는 폰은 그 높이를 뺀 땅 위치로 판정한다.
         private static Vector3 GroundPos(Pawn pawn)
         {
             var pos = pawn.DrawPos;
@@ -123,7 +116,6 @@ namespace VVRace
             return thing is Building building && building.def.useHitPoints;
         }
 
-        // 틱 사이의 중복 판정을 피하도록 띠 양 끝에서는 일부만 걸쳐도 허용하고 중간 구간에서는 중심이 포함돼야 한다.
         private static bool Overlaps(Vector3 start, Vector3 direction, float length, float halfWidth, Vector3 point, float extentAcross, float extentAlong, float from, float to)
         {
             var rel = (point - start).Yto0();
@@ -201,7 +193,6 @@ namespace VVRace
             trail?.RegisterNewTrail(point);
         }
 
-        // 한 틱에 여러 칸을 날아가도 궤적이 끊기지 않도록 촉이 지나친 구간에 일정 간격으로 몸통 위치를 찍는다.
         public static void RegisterTrailAlong(CompTrailRenderer trail, Vector3 start, Vector3 direction, float fromTip, float toTip)
         {
             for (var d = fromTip + TrailPointSpacing; d < toTip; d += TrailPointSpacing)

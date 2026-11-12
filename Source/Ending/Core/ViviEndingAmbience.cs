@@ -67,7 +67,6 @@ namespace VVRace
             var comp = anchor.EverflowerComp;
             if (comp == null || !comp.IsEnshrined) { return; }
 
-            // 이펙트는 제단 위 5·6단계 그래픽 기준이므로 그래픽이 다른 낮은 단계에서는 재생하지 않는다.
             var effecterDef = comp.AttunementLevel >= CompEverflower.MaxAttunementLevel ? VVEffecterDefOf.VV_Effecter_AltarEverflowerPulse_6
                 : comp.AttunementLevel == RitualOutcomeEffectWorker_GrandAttunement.GrandAttunementLevel ? VVEffecterDefOf.VV_Effecter_AltarEverflowerPulse_5
                 : null;

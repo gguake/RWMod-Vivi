@@ -7,13 +7,11 @@ using Verse.AI.Group;
 
 namespace VVRace
 {
-    // 정착한 떠돌이 비비 무리. 정착 이후의 둥지 상태는 모두 이 로드잡이 저장한다.
     public class LordJob_ViviNest : LordJob
     {
         public const string MemoAbandon = "VV_NestAbandon";
 
         private const int SleepSpotTries = 30;
-        // 바닐라 LordToil_Travel의 도착 판정 주기·반경
         private const int TravelArrivedCheckInterval = 205;
         private const float TravelArrivedRadius = 10f;
 
@@ -41,9 +39,6 @@ namespace VVRace
         public ViviNestGarden Garden => _garden;
         public ViviNestHostility Hostility => _hostility;
 
-        // 남은 식량이 이만큼(일)보다 적고 모을 꽃도 없는 채로 이만큼(일) 지나면 굶어 죽기 전에 떠난다.
-        // 예전 조건(식량 0 + 평균 배고픔 0.1 미만 2일)은 평균이 그만큼 떨어지기 전에 하나씩 굶어 죽어 둥지가 전멸했다(장기 계측: 북방림 겨울).
-        // 꽃은 채집할 만큼 자란 것만 센다. 겨울에 갓 심어 자라지 못하는 꽃까지 셌더니 식량이 바닥난 채 떠나지 않아 아기가 굶어 죽었다(장기 계측: 온대림 겨울).
         public const float LowFoodDaysToLeave = 1f;
         public const int MinFlowersToStay = 10;
         public const float StarvingDaysToLeave = 0.5f;
@@ -51,9 +46,6 @@ namespace VVRace
 
         public override bool AddFleeToil => false;
 
-        // 습격 등으로 모두 쓰러져도 둥지가 흩어지지 않게 쓰러진 비비도 남긴다(바닐라 벌레 둥지와 같은 방식).
-        // 떠날 때(LordToil_ViviNestExit)는 쓰러진 어른·어린이를 두고 간다: 나가기 듀티는 아기만 안고 나가므로 쓰러진 구성원이 남아 로드가 끝나지 않았다.
-        // 쓰러진 아기는 다른 아기처럼 안아 줄 어른이 있으면 안고 나간다.
         public override bool ShouldRemovePawn(Pawn p, PawnLostCondition reason)
         {
             return reason != PawnLostCondition.Incapped || (lord.CurLordToil is LordToil_ViviNestExit && !p.DevelopmentalStage.Baby());
@@ -86,16 +78,12 @@ namespace VVRace
             var liveToil = new LordToil_ViviNestLive(_nestCell);
             graph.AddToil(liveToil);
 
-            // 떠날 때는 어른이 아기를 안고 나가도록 둥지 나가기 토일을 쓴다(평화 이주는 걷고, 적대 도주는 뛰며 막히면 판다).
             var leaveToil = new LordToil_ViviNestExit(LocomotionUrgency.Walk, canDig: false);
             graph.AddToil(leaveToil);
 
             var fleeToil = new LordToil_ViviNestExit(LocomotionUrgency.Jog, canDig: true);
             graph.AddToil(fleeToil);
 
-            // 오는 사이 둥지 자리를 쓸 수 없게 됐으면 정착하지 않고 알린 뒤 떠난다(리뷰 D1-5). 그대로 정착하면 방 없이 영역을 잡아 바깥 보관 칸을
-            // 맵 원점 둘레에서 고르고 하루 뒤에야 방을 잃었다며 떠났다. 같은 신호(도착 메모·도착 판정 틱)에서 정착 전이보다 먼저 검사되도록 그보다 앞에 넣는다
-            // (로드는 전이 목록 순서대로 처음 맞는 전이 하나만 실행한다).
             var siteLost = new Transition(travelToil, leaveToil);
             siteLost.AddTrigger(new Trigger_Custom(signal => signal.type == TriggerSignalType.Memo && signal.memo == "TravelArrived" && !NestRoomIntact()));
             siteLost.AddTrigger(new Trigger_TickCondition(NestSiteLost, TravelArrivedCheckInterval));
@@ -118,7 +106,6 @@ namespace VVRace
             abandon.AddPostAction(new TransitionAction_EndAllJobs());
             graph.AddTransition(abandon);
 
-            // 적대가 되면 무엇을 하던 바로 달아난다. 하위 그래프의 전이보다 먼저 검사되게 맨 앞에 둔다.
             var flee = new Transition(liveToil, fleeToil);
             BeekeepingUtility.AddSourcesDistinct(flee, travelSubgraph.lordToils);
             flee.AddSource(leaveToil);
@@ -127,7 +114,6 @@ namespace VVRace
             flee.AddPostAction(new TransitionAction_EndAllJobs());
             graph.transitions.Insert(0, flee);
 
-            // 플레이어가 구성원을 노려 죽이거나 붙잡으려 하면 경계심과 상관없이 바로 적대해 달아난다(빗나간 공격에 죽은 것·바닐라 호감도가 봐주는 살해는 뺀다).
             var outrage = new Transition(liveToil, fleeToil);
             outrage.AddTrigger(new Trigger_Custom(signal => signal.type == TriggerSignalType.PawnArrestAttempted
                 || (signal.type == TriggerSignalType.PawnLost && signal.condition == PawnLostCondition.Killed && IsOutrageousKill(signal.thing, signal.dinfo))));
@@ -143,8 +129,6 @@ namespace VVRace
             return graph;
         }
 
-        // 쓰러지지 않은 구성원이 모두 둥지 자리에 왔는지(바닐라 LordToil_Travel 도착 판정에서 쓰러진 구성원을 뺀 것). 바닐라 판정은 모든 구성원이 와야 해서
-        // 오는 길에 쓰러진 정착대원이 있으면 그 비비가 회복하거나 죽을 때까지(영구히 쓰러지면 끝없이) 정착하지 않았다. 쓰러진 구성원은 정착 뒤 구조 잡이 둥지 방으로 옮긴다.
         private bool StandingMembersArrived()
         {
             var any = false;
@@ -159,11 +143,6 @@ namespace VVRace
             return any;
         }
 
-        // 정착하러 오는 사이 둥지 자리를 쓸 수 없게 됐는지
-        // - 쓰러지지 않은 구성원 누구도 둥지 칸에 갈 수 없다(둥지 칸에 벽이 섰거나 방 문이 벽으로 막힘). 바닐라 이동 듀티(TravelOrLeave)도 이때는
-        //   맵 아무 가장자리로 말없이 나가 버리므로(JobGiver_GotoTravelDestination이 잡을 주지 않으면 JobGiver_ExitMapRandom) 그보다 먼저 알리고 떠나기 토일로 보낸다.
-        //   떠나기 토일은 맵 가장자리에도 갈 수 없으면 파서 나간다(trapped 전이).
-        // - 도착했는데 둥지 칸의 방이 온전하지 않다(벽이 부서져 바깥과 이어짐). 이때는 닿을 수 있어 바닐라는 도착으로 본다.
         private bool NestSiteLost()
         {
             var standing = false;
@@ -181,14 +160,12 @@ namespace VVRace
             return standing;
         }
 
-        // 둥지 칸의 방이 온전한지: 영역이 둥지 방으로 치는 것과 같은 기준(ViviNestTerritory.RefreshIfNeeded: 영역 없음·바깥·문 칸이 아님)
         private bool NestRoomIntact()
         {
             var room = _nestCell.GetRoom(Map);
             return room != null && !room.PsychologicallyOutdoors && !room.IsDoorway;
         }
 
-        // 방에 들어오면 영역을 잡고 방 안의 플레이어 구역을 지운다. 방 문은 금지하지 않는다(정착민이 들어가지 않게 막는 것은 플레이어 몫, 경계심 참고).
         private void Settle()
         {
             if (_settled) { return; }
@@ -223,7 +200,6 @@ namespace VVRace
             }
         }
 
-        // 맵의 건물이 서거나 없어졌다(바닐라 맵 사건을 둥지 토일이 넘긴다). 미리 만들어 둔 칸 집합(경계 문·작업 자리)과 증축 자리 실패 기억을 다시 본다.
         public void Notify_BuildingChanged(Building building)
         {
             if (!_settled || building == null) { return; }
@@ -243,7 +219,7 @@ namespace VVRace
             {
                 _production.Tick();
             }
-            // 생산 갱신과 같은 틱에 몰리지 않게 반 주기 어긋나게 계획한다.
+            
             if ((ticks + ViviNestPlanner.PlanInterval / 2) % ViviNestPlanner.PlanInterval == 0)
             {
                 _planner.Tick();
@@ -255,7 +231,6 @@ namespace VVRace
             }
         }
 
-        // 평화 이주: 굶주림이 이틀, 둥지 방을 잃은 채 하루가 이어지거나, 어른이 한 명 이하로 남으면 걸어 나간다.
         private void CheckDeparture()
         {
             if (!(lord.CurLordToil is LordToil_ViviNestLive)) { return; }
@@ -312,7 +287,6 @@ namespace VVRace
             return _settled ? LocalizeString_Inspector.VV_Inspector_ViviNestWariness.Translate((_hostility.Level / ViviNestHostility.Max).ToStringPercent()).ToString() : null;
         }
 
-        // 구성원을 가두면 바로 적대한다.
         public override void Notify_PawnLost(Pawn p, PawnLostCondition condition)
         {
             base.Notify_PawnLost(p, condition);
@@ -322,8 +296,6 @@ namespace VVRace
             }
         }
 
-        // 플레이어 탓으로 치는 피해. 바닐라 호감도 판정(Faction.Notify_MemberTookDamage)처럼 날뛰는(공격적 정신 이상) 구성원을 친 것,
-        // 날뛰는 폰(인간 사냥 중인 정착지 동물 등)·반란 중인 노예가 가한 것, 둘 다의 적을 노리다 빗맞은 것은 치지 않는다.
         public static bool IsPlayerHarm(Pawn victim, DamageInfo dinfo)
         {
             var instigator = dinfo.Instigator;
@@ -334,7 +306,6 @@ namespace VVRace
             return !IsMutuallyHostileCrossfire(dinfo, victim.Faction);
         }
 
-        // 바닐라 Faction.IsMutuallyHostileCrossfire와 같다(비공개라 옮겨 둔다).
         private static bool IsMutuallyHostileCrossfire(DamageInfo dinfo, Faction victimFaction)
         {
             var target = dinfo.IntendedTarget;
@@ -344,22 +315,16 @@ namespace VVRace
             return target.Faction.HostileTo(dinfo.Instigator.Faction) && target.Faction.HostileTo(victimFaction);
         }
 
-        // 그 구성원을 노린 공격(빗맞은 것이 아님). 폭발처럼 노린 대상이 없는 공격은 노린 것으로 친다.
         public static bool IsIntended(DamageInfo dinfo, Thing victim)
         {
             return dinfo.IntendedTarget == null || dinfo.IntendedTarget == victim;
         }
 
-        // 바로 적대할 살해. 바닐라처럼 정착민을 먼저 해쳐 죄가 있던 구성원은 뺀다(죽은 뒤에는 정신 상태가 풀려 날뛰던 것은 죄로만 남는다).
         private static bool IsOutrageousKill(Thing victim, DamageInfo dinfo)
         {
             return victim is Pawn pawn && !(pawn.guilt?.IsGuilty ?? false) && IsPlayerHarm(pawn, dinfo) && IsIntended(dinfo, pawn);
         }
 
-        // 둥지가 끝나면(떠남·전멸) 남은 둥지 청사진·골조를 치우고 둥지 건물은 무소속으로 돌린다.
-        // 하나를 치울 때 같은 칸의 다른 골조가 함께 사라질 수 있어 이미 사라진 것은 건너뛴다.
-        // 바닐라도 임시 세력을 지울 때 건물을 무소속으로 돌리지만(ListerBuildings.Notify_FactionRemoved), 돌리는 동안 목록이 바뀌어
-        // 하나씩 건너뛰므로 지워진 세력을 든 문이 남아 길찾기마다 관계 오류가 난다.
         public override void Cleanup()
         {
             base.Cleanup();
@@ -383,7 +348,6 @@ namespace VVRace
             }
         }
 
-        // 둥지 비비가 쓸 수 있는 것: 둥지 물건, 둥지 둘레에 놓인 옷·무기(IsFreeGear), 둥지 세력·무소속 건물, 그 밖의 식물·폰 등. 그 밖의 플레이어 건물·물건은 쓰지 않는다.
         public bool CanUse(Thing thing)
         {
             if (thing is Pawn) { return true; }
@@ -392,10 +356,6 @@ namespace VVRace
             return true;
         }
 
-        // 둥지 둘레에 놓인 옷·무기(사용자 요구 "근처에 옷이나 장비가 있으면 입도록, 플레이어가 주변에 옷을 둬서 입게 유도 가능"): 활동 범위(ViviNestTerritory, 둥지 중심·증축 방 중심 둘레 24칸) 안 바닥의 것 중
-        // 보관 칸(플레이어 비축 구역·선반 등)에 있지 않고 바깥이나 둥지 방에 놓인 것. 정착민 방 바닥에 둔 것이나 비축한 것은 가져가지 않는다. 입고 드는 일은 JobGiver_ViviNestDress가 한다.
-        // 무기는 재료가 아닌 주무기만 본다. 원목은 근접 도구(몽둥이)가 있어 장비 칸이 주무기인 재료라, 재료를 빼지 않으면 바깥에 놓인 플레이어 원목을
-        // 둥지 비비가 건설·냉각기 연료 등에 마음대로 썼다(자동 시험 p2 L3: 플레이어 원목이 둥지 비비에게 금지가 아님).
         public bool IsFreeGear(Thing thing)
         {
             if (!(thing is Apparel) && (thing.def.equipmentType != EquipmentType.Primary || thing.def.IsStuff)) { return false; }
@@ -407,11 +367,9 @@ namespace VVRace
 
         public void MarkOwned(Thing thing)
         {
-            // 시체는 둥지 몫이 아니다(둥지 밖에 버린 시체를 운반이 다시 들여오지 않게). 옮기다 내려놓은 폰(쓰러진 구성원·아기)도 물건이 아니다.
             if (thing == null || thing.Destroyed || thing is Corpse || thing is Pawn) { return; }
 
             thing.SetForbidden(true, warnOnFail: false);
-            // 놓기 직전의 산출물도 잡아 두면 둥지 밖에 놓여도 둥지 몫으로 남는다(둥지 칸에 놓이면 장부가 알아서 뺀다).
             if (!thing.Spawned || !_territory.IsTerritoryCell(thing.Position))
             {
                 _stock.Claim(thing);
@@ -419,8 +377,6 @@ namespace VVRace
             _stock.MarkDirty();
         }
 
-        // 구성원이 내려놓은 물건(운반이 끊긴 것, 나눠 든 조각, 짐 풀기)을 둥지 몫으로 남긴다. 내려놓은 물건이 그 칸에 먼저 있던
-        // 둥지 몫이 아닌 같은 더미(플레이어 더미)에 합쳐졌으면 그 더미는 잡지 않는다(플레이어 물건을 가져가지 않는다). 막 생긴 더미는 이번 틱에 놓인 것이다.
         public void MarkDropped(Thing thing)
         {
             if (thing == null) { return; }
@@ -429,8 +385,6 @@ namespace VVRace
             MarkOwned(thing);
         }
 
-        // 둥지 몫으로 표시해 center 둘레 바닥에 놓는다. 바닐라 놓기는 그 칸의 같은 더미에 합치고 합친 더미는 그 더미의 금지 상태를 따르므로
-        // 플레이어 더미에 합쳐지면 둥지 몫이 사라진다. 그래서 둥지 몫이 아닌 같은 물건이 놓인 칸은 피한다.
         public bool TryPlaceOwned(Thing thing, IntVec3 center)
         {
             var map = Map;
@@ -445,17 +399,12 @@ namespace VVRace
             return true;
         }
 
-        // 둥지 비비의 침대: 자기 세력 침대(바닐라 FindBedFor). 둥지 부화기는 알과 아기(아기 침대)만 쓰고 어린이는 둥지 방 바닥에서 잔다.
-        // 비비 어린이(몸 크기 0.28)는 부화기(아기 침대, 0.3 이하)에 들어가 계측(probe_growth)에서 낮잠·밤잠마다 부화기를 다시 차지했다
-        // (바닐라는 생일마다 소유를 풀 뿐이다). 어린이 시기(12살까지, 약 45일) 내내 하나뿐인 부화기를 쥐어 로열이 알을 못 낳았다
-        // (장기 계측: 온대 60일 내내 6명, 로열 알 게이지가 40일 동안 가득 찬 채).
         public Building_Bed FindBedFor(Pawn pawn)
         {
             var bed = RestUtility.FindBedFor(pawn);
             return bed is ViviEggHatchery && !pawn.DevelopmentalStage.Baby() ? null : bed;
         }
 
-        // 잠자리(밤잠·낮잠): 자기 세력 침대가 있으면 그 침대(FindBedFor), 없으면 편한 기온의 둥지 방 바닥 칸(ComfortableRooms)
         public bool TryFindSleepTarget(Pawn pawn, out LocalTargetInfo target)
         {
             var bed = FindBedFor(pawn);
@@ -465,8 +414,6 @@ namespace VVRace
                 return true;
             }
 
-            // 바닥 잠자리는 편한 기온의 둥지 방에서 고른다. 증축 방에는 잔불꽃이 없어 겨울에 영하로 내려가는데 방을 가리지 않고 골랐더니,
-            // 그 방에서 자던 아이가 동상으로 죽었다(장기 계측: 온대림 겨울, 증축 방 -12°C).
             if (TryFindRoomCell(pawn, ComfortableRooms(pawn), out var cell))
             {
                 target = cell;
@@ -477,7 +424,6 @@ namespace VVRace
             return false;
         }
 
-        // 고른 둥지 방들 중 설 수 있고 건물이 없는 칸
         public bool TryFindRoomCell(Pawn pawn, IReadOnlyList<Room> rooms, out IntVec3 cell)
         {
             var map = Map;
@@ -495,7 +441,6 @@ namespace VVRace
 
         private static readonly List<Room> _tmpComfortableRooms = new List<Room>();
 
-        // 그 비비에게 편한 기온의 둥지 방들. 그런 방이 없으면 기온이 편한 범위에서 가장 덜 벗어난 방 하나.
         public List<Room> ComfortableRooms(Pawn pawn)
         {
             _tmpComfortableRooms.Clear();

@@ -4,7 +4,6 @@ using Verse.AI.Group;
 
 namespace VVRace
 {
-    // 모든 구성원에게 같은 듀티를 주는 단순 토일(정찰 둘러보기·미끼 도둑 등).
     public class LordToil_ViviDuty : LordToil
     {
         private readonly DutyDef _duty;

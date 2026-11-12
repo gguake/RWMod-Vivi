@@ -8,26 +8,25 @@ using Verse.AI;
 
 namespace VVRace
 {
-    // NPC는 바닐라 옷 고르기를 하지 않으므로 둥지 비비의 옷·무기를 바닐라 규칙으로 고른다(사용자 요구 "근처에 옷이나 장비가 있으면 입도록, 옷 입는 규칙은 바닐라와 동일").
-    // 고르는 것은 둥지 비비가 쓸 수 있는 옷·무기(금지 판정, LordJob_ViviNest.CanUse): 둥지 몫과 둥지 둘레에 놓인 것(IsFreeGear, 플레이어가 두어 입게 할 수 있다)이다.
-    // - 옷: 정착민 옷 고르기(JobGiver_OptimizeApparel)와 같은 후보 조건·점수로 가장 나은 것을 입고, 바닐라처럼 6000~9000틱마다 다시 본다.
-    //   둥지가 만든 기본옷·아동복은 그 옷 자리가 빈 비비(NeedsCostume)가 기다리지 않고 바로 본다.
-    // - 무기: NPC 무기 줍기(JobGiver_PickUpOpportunisticWeapon)의 판정으로 지금 무기보다 나은 것(원거리 > 근접 > 맨손)을 가장 가까운 것부터 든다.
-    //   둥지가 만든 새총은 새총잡이(NeedsSlingshot) 몫이라 바로 보고, 다른 구성원은 둥지 둘레에 놓인 무기만 본다(둥지 새총을 일반 비비가 가져가 새총잡이가 기다리지 않게).
     public class JobGiver_ViviNestDress : ThinkNode_JobGiver
     {
         private const int OptimizeIntervalMin = 6000;
         private const int OptimizeIntervalMax = 9000;
         private const float MinScoreGainToCare = 0.05f;
 
-        // 바닐라 옷 점수(ApparelScoreRaw)가 보는 보온 필요. 정착민 옷 고르기는 점수를 매기기 전에 그 폰 기준으로 정해 둔다.
         private static readonly FieldInfo JobGiverOptimizeApparelNeededWarmthField = AccessTools.Field(typeof(JobGiver_OptimizeApparel), "neededWarmth");
 
         private static readonly JobGiver_PickUpOpportunisticWeapon _weaponGiver = new JobGiver_PickUpOpportunisticWeapon();
+        
         private static readonly Func<Pawn, bool> AlreadySatisfiedWithCurrentWeapon =
-            AccessTools.MethodDelegate<Func<Pawn, bool>>(AccessTools.Method(typeof(JobGiver_PickUpOpportunisticWeapon), "AlreadySatisfiedWithCurrentWeapon"), _weaponGiver);
+            AccessTools.MethodDelegate<Func<Pawn, bool>>(
+                AccessTools.Method(typeof(JobGiver_PickUpOpportunisticWeapon), "AlreadySatisfiedWithCurrentWeapon"), 
+                _weaponGiver);
+        
         private static readonly Func<Thing, Pawn, bool> ShouldEquipWeapon =
-            AccessTools.MethodDelegate<Func<Thing, Pawn, bool>>(AccessTools.Method(typeof(JobGiver_PickUpOpportunisticWeapon), "ShouldEquipWeapon"), _weaponGiver);
+            AccessTools.MethodDelegate<Func<Thing, Pawn, bool>>(
+                AccessTools.Method(typeof(JobGiver_PickUpOpportunisticWeapon), "ShouldEquipWeapon"), 
+                _weaponGiver);
 
         private static readonly List<float> _wornScores = new List<float>();
 
@@ -49,8 +48,6 @@ namespace VVRace
                 ?? EquipJob(pawn, nest, map.listerThings.ThingsInGroup(ThingRequestGroup.Weapon), nestOwned: false);
         }
 
-        // 바닐라 정착민 옷 고르기(JobGiver_OptimizeApparel.TryGiveJob)의 후보 조건과 점수. NPC에게는 옷 정책이 없어(모든 옷 허용) 정책 검사는 빼고,
-        // 보관 칸에 있어야 한다는 조건 대신 둥지 비비가 쓸 수 있는 옷만 본다.
         private static Job WearJob(Pawn pawn, List<Thing> candidates)
         {
             if (candidates.Count == 0) { return null; }
@@ -73,8 +70,6 @@ namespace VVRace
                 var gain = ApparelScoreGain(pawn, apparel);
                 if (gain < MinScoreGainToCare || gain < bestGain || (CompBiocodable.IsBiocoded(apparel) && !CompBiocodable.IsBiocodedFor(apparel, pawn))) { continue; }
                 if (!ApparelUtility.HasPartsToWear(pawn, apparel.def) || !apparel.def.apparel.developmentalStageFilter.Has(pawn.DevelopmentalStage)) { continue; }
-                // 바닐라 옷 입히기 경로(입기 메뉴·옷 입히기·옷 걸이)가 모두 보는 장착 가능 판정. 바닐라 옷 고르기를 거치지 않으므로
-                // 장착 제한을 이 판정에 거는 모드(HAR·Alpha Genes 등)를 따르려면 직접 불러야 한다.
                 if (!EquipmentUtility.CanEquip(apparel, pawn)) { continue; }
                 if (!pawn.CanReserveAndReach(apparel, PathEndMode.OnCell, Danger.Some)) { continue; }
 
@@ -86,8 +81,6 @@ namespace VVRace
             return best != null ? JobMaker.MakeJob(JobDefOf.Wear, best) : null;
         }
 
-        // 바닐라 JobGiver_OptimizeApparel.ApparelScoreGain과 같은 계산. 바닐라 것은 함께 못 입는 옷을 벗을 수 있는지를 강제 착용 추적기(outfits)로 보는데
-        // NPC에게는 그 추적기가 없어 그대로 부를 수 없다(강제로 입힌 옷이 없으므로 잠긴 옷만 본다).
         private static float ApparelScoreGain(Pawn pawn, Apparel apparel)
         {
             if (apparel.def == ThingDefOf.Apparel_ShieldBelt && pawn.equipment?.Primary != null && pawn.equipment.Primary.def.IsWeaponUsingProjectiles) { return -1000f; }
@@ -107,8 +100,6 @@ namespace VVRace
             return replacing ? score : score * 10f;
         }
 
-        // 바닐라 NPC 무기 줍기(JobGiver_PickUpOpportunisticWeapon.TryGiveJob)와 같은 판정. 바닐라는 폰 둘레 8칸을 보지만 둥지 비비는 쓸 수 있는 무기 중 가장 가까운 것을 든다.
-        // nestOwned: 둥지가 만든 무기(새총잡이 몫)를 볼지, 둥지 둘레에 놓인 무기를 볼지
         private static Job EquipJob(Pawn pawn, LordJob_ViviNest nest, List<Thing> candidates, bool nestOwned)
         {
             if (pawn.equipment == null || candidates.Count == 0) { return null; }

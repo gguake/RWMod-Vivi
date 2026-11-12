@@ -13,7 +13,6 @@ namespace VVRace
         private const float RitualMaxQuality = 10f;
         private static readonly IntRange CalmDurationTicks = new IntRange(90000, 120000);
 
-        // ViviEndingQuest에서 평화 타이머(QuestPart_Delay)를 식별하는 표식.
         public const string CalmDelayLabel = "VV_EndingCalm";
 
         protected override bool TestRunInt(Slate slate)
@@ -82,7 +81,6 @@ namespace VVRace
                 siegeText += "\n\n" + LocalizeString_Letter.VV_Letter_EndingSiegeFederation.Translate().Resolve();
             }
 
-            // 개화 시작 시 연방을 동맹으로 올리고 퀘스트가 끝날 때까지 우호도를 잠근다(지원군 사망 등으로 깎이지 않도록).
             if (federation != null)
             {
                 quest.AddPart(new QuestPart_ViviFederationAlliance()
@@ -146,8 +144,6 @@ namespace VVRace
             calm.outSignalsCompleted.Add(calmEnded);
             quest.AddPart(calm);
 
-            // 생성 시점의 맵에 고정되는 QuestPart_GameCondition 대신 감시 부품이 현재 앵커 맵의 컨디션을 관리한다.
-            // 평화 타이머가 먼저 활성화된 뒤 BloomCondensed를 받도록 타이머 다음에 추가한다.
             quest.AddPart(new QuestPart_ViviAnchorWatch()
             {
                 inSignalEnable = initiate,

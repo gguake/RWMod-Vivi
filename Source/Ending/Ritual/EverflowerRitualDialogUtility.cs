@@ -18,7 +18,6 @@ namespace VVRace
             }
         }
 
-        // 시작 버튼 콜백: 대화창에서 고른 값을 영원꽃에 저장한 뒤 의식을 시작한다.
         public static Dialog_BeginRitual.ActionCallback MakeBeginAction(Precept_Ritual ritual, TargetInfo target, Pawn organizer, RitualObligation obligation, Action onConfirm, Action<ArcanePlant_Everflower> applySelection)
         {
             return assignments =>
