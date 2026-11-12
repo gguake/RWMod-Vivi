@@ -30,6 +30,7 @@
     </graphicData>
     
     <minifiedDef>MinifiedArcanePlant</minifiedDef>
+    <stealable>false</stealable>
     <pathCost>14</pathCost>
     <pathCostIgnoreRepeat>false</pathCostIgnoreRepeat>
 
