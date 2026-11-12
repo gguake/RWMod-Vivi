@@ -4,7 +4,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VV_EverflowerAltar</defName>
     <label>everflower altar</label>
-    <description>An altar restored from the designs of the old vivi empire. Its amber core and mana circuits support the everflower's growth.\n\nAn everflower of attunement level 4 or higher can be enshrined here and cannot be moved afterward. The altar cannot be destroyed by attacks. It cannot be built under a roof, and only one can be built per map.</description>
+    <description>An altar restored from the designs of the old vivi empire. Its amber core and mana circuits support the everflower's growth.\n\nAn everflower of attunement level 4 or higher can be enshrined here. While the everflower is blooming or a ritual is underway, the altar cannot be damaged or deconstructed and the everflower cannot be moved. It cannot be built under a roof, and only one can be built per map.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_Everflower</ThingDef>
       <ThingDef>VV_AncientAmberCore</ThingDef>
@@ -28,6 +28,7 @@
     <size>(5,5)</size>
     <rotatable>false</rotatable>
     <canOverlapZones>false</canOverlapZones>
+    <preventSkyfallersLandingOn>true</preventSkyfallersLandingOn>
 
     <statBases>
       <MaxHitPoints>3000</MaxHitPoints>
@@ -51,7 +52,6 @@
       <isInert>true</isInert>
       <ai_neverTrashThis>true</ai_neverTrashThis>
       <artificialForMeditationPurposes>false</artificialForMeditationPurposes>
-      <canBeDamagedByAttacks>false</canBeDamagedByAttacks>
       <forcedCostLeavings>
         <li>VV_AncientAmberCore</li>
       </forcedCostLeavings>

@@ -14,7 +14,7 @@
 <VV_FailReason_AltarNotHomeMap>An everflower altar can only be built in a settlement.</VV_FailReason_AltarNotHomeMap>
 <VV_FailReason_AltarOnSubstructure>An everflower altar cannot be built on a gravship.</VV_FailReason_AltarOnSubstructure>
 <VV_FailReason_AltarUnderConstruction>Cannot place on an everflower altar under construction.</VV_FailReason_AltarUnderConstruction>
-<VV_FailReason_AltarHasEnshrinedEverflower>Cannot deconstruct while an everflower is enshrined</VV_FailReason_AltarHasEnshrinedEverflower>
+<VV_FailReason_AltarHasEnshrinedEverflower>Cannot deconstruct while the everflower is blooming or a ritual is underway</VV_FailReason_AltarHasEnshrinedEverflower>
 
 <!-- 레벨업 편지 -->
 <VV_Letter_EverflowerAttunementLevel5Preamble>The everflower has resonated with the altar's mana circuits and reached its fifth bloom.
@@ -30,6 +30,6 @@
 <VV_Inspector_EverflowerAttunementLevelOnly>Attunement: Level {LEVEL}</VV_Inspector_EverflowerAttunementLevelOnly>
 
 <!-- 기즈모 -->
-<VV_Command_ReserveTeleportEverflowerAltarDesc>Teleports an everflower of attunement level {LEVEL} or higher onto the altar. Once enshrined, it cannot be moved.</VV_Command_ReserveTeleportEverflowerAltarDesc>
+<VV_Command_ReserveTeleportEverflowerAltarDesc>Teleports an everflower of attunement level {LEVEL} or higher onto the altar to enshrine it.</VV_Command_ReserveTeleportEverflowerAltarDesc>
 
 </LanguageData>

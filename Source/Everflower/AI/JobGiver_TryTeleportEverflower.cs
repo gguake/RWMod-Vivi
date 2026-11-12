@@ -11,7 +11,7 @@ namespace VVRace
             var compVivi = pawn.GetCompVivi();
             if (compVivi != null && compVivi.isRoyal && compVivi.LinkedEverflower != null)
             {
-                if (compVivi.LinkedEverflower.EverflowerComp.IsEnshrined) { return 0; }
+                if (compVivi.LinkedEverflower.IsEnshrinementLocked) { return 0; }
 
                 return compVivi.LinkedEverflower.ReservedTeleportCell.HasValue ? 10 : 0;
             }
@@ -29,7 +29,7 @@ namespace VVRace
 
             if (!targetEverflower.ReservedTeleportCell.HasValue) { return null; }
 
-            if (targetEverflower.EverflowerComp.IsEnshrined) { return null; }
+            if (targetEverflower.IsEnshrinementLocked) { return null; }
 
             if (targetEverflower.IsForbidden(pawn)) { return null; }
             if (targetEverflower.IsRitualTarget()) { return null; }

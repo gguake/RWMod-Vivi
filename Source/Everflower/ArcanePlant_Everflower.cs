@@ -179,12 +179,12 @@ namespace VVRace
                 return true;
             }
 
-            if (Spawned && (Faction?.IsPlayer ?? false) && EverflowerComp.AttunementLevel >= 1 && !EverflowerComp.IsEnshrined)
+            if (Spawned && (Faction?.IsPlayer ?? false) && EverflowerComp.AttunementLevel >= 1 && !IsEnshrinementLocked)
             {
                 if (!_reserveTeleportCell.HasValue)
                 {
                     string desc = LocalizeString_Command.VV_Command_ReserveTeleportEverflowerDesc.Translate();
-                    if (Building_EverflowerAltar.FindOnMap(Map) != null)
+                    if (!EverflowerComp.IsEnshrined && Building_EverflowerAltar.FindOnMap(Map) != null)
                     {
                         desc += "\n\n" + LocalizeString_Command.VV_Command_ReserveTeleportEverflowerAltarDesc.Translate(Building_EverflowerAltar.RequiredAttunementLevel.Named("LEVEL")).Resolve();
                     }
@@ -294,20 +294,50 @@ namespace VVRace
             base.PreApplyDamage(ref dinfo, out absorbed);
         }
 
+        // 엔딩 진행 중인 앵커이거나 의식 대상인 동안에는 안치된 꽃을 옮기거나 제단을 해체할 수 없다.
+        public bool IsEnshrinementLocked
+        {
+            get
+            {
+                if (!EverflowerComp.IsEnshrined) { return false; }
+
+                var ending = ViviEndingQuest.Current;
+                if (ending != null && ending.IsEndingActive && ending.IsAnchor(this)) { return true; }
+
+                return IsTargetOfAnyRitual();
+            }
+        }
+
         public override void Notify_ArcanePlantPotDespawned()
         {
-            var wasEnshrined = EverflowerComp.IsEnshrined;
-            if (TeleportRandomly())
+            // 제단이 사라지면 제자리에서 안치만 풀리고, 그 칸에서 자랄 수 없을 때만 가장 가까운 칸으로 옮긴다.
+            if (EverflowerComp.IsEnshrined)
             {
-                if (wasEnshrined && (ViviEndingQuest.Current?.IsAnchor(this) ?? false))
+                if (Map.fertilityGrid.FertilityAt(Position) > 0f)
                 {
-                    Messages.Message(LocalizeString_Message.VV_Message_AnchorEverflowerLeftAltar.Translate(), this, MessageTypeDefOf.NegativeEvent);
+                    EverflowerComp.RefreshEnshrinement();
+                    EverflowerComp.SpawnLevelEffect(Position, Map, false);
+                    return;
                 }
 
-                return;
+                if (TeleportToNearest())
+                {
+                    Messages.Message(LocalizeString_Message.VV_Message_AnchorEverflowerLeftAltar.Translate(), this, MessageTypeDefOf.NegativeEvent);
+                    return;
+                }
             }
 
+            if (TeleportRandomly()) { return; }
+
             base.Notify_ArcanePlantPotDespawned();
+        }
+
+        private bool TeleportToNearest()
+        {
+            var origin = Position;
+            var cells = Map.AllCells.Where(c => c != origin && ArcanePlantUtility.CanPlaceArcanePlantToCell(Map, c, def));
+
+            return cells.TryMinBy(c => c.DistanceToSquared(origin), out var cell) && Teleport(cell);
         }
 
         public void Notify_TeleportJobCompleted()
@@ -316,6 +346,9 @@ namespace VVRace
             {
                 var cell = ResolveTeleportCell(_reserveTeleportCell.Value, out var altar);
                 _reserveTeleportCell = null;
+
+                // 예약 후 엔딩이나 의식이 시작됐으면 옮기지 않는다.
+                if (IsEnshrinementLocked) { return; }
 
                 // 예약 후 제단이 건설됐을 수 있으므로 이동 직전에 단계 조건을 다시 검사한다.
                 // 미달이면 무작위 이동 없이 예약만 취소해 낮은 단계의 영원꽃이 제단에 갇히지 않게 한다.

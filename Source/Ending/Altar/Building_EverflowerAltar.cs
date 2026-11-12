@@ -68,12 +68,40 @@ namespace VVRace
 
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
         {
+            var map = Map;
+            var everflower = EnshrinedEverflower;
+            var wasEnshrined = everflower != null && everflower.EverflowerComp.IsEnshrined;
+
             if (_resonatorHolder.Any && Spawned)
             {
                 _resonatorHolder.TryDropAll(Position + IntVec3.South, Map, ThingPlaceMode.Near);
             }
 
             base.DeSpawn(mode);
+
+            // 제단이 edifice 등록을 해제하면서 중앙 칸에 남은 영원꽃의 등록까지 지우므로 다시 등록한다.
+            if (everflower != null && everflower.Spawned && everflower.Map == map && map.edificeGrid[everflower.Position] != everflower)
+            {
+                map.edificeGrid.Register(everflower);
+            }
+
+            if (wasEnshrined)
+            {
+                ViviEndingQuest.Current?.Notify_AnchorAltarLost(everflower);
+            }
+        }
+
+        // 엔딩 진행 중에는 제단이 피해를 받지 않는다. 안치된 꽃의 피해도 제단으로 넘어오므로 함께 보호된다.
+        public override void PreApplyDamage(ref DamageInfo dinfo, out bool absorbed)
+        {
+            var ending = ViviEndingQuest.Current;
+            if (ending != null && ending.IsEndingActive && ending.IsAnchor(EnshrinedEverflower))
+            {
+                absorbed = true;
+                return;
+            }
+
+            base.PreApplyDamage(ref dinfo, out absorbed);
         }
 
         public override void ExposeData()
@@ -175,8 +203,8 @@ namespace VVRace
 
         public override AcceptanceReport DeconstructibleBy(Faction faction)
         {
-            // 엔딩 진행 중·완료인 앵커 꽃도 같은 사유로 거부한다(문구가 같아 따로 나누지 않는다).
-            if (EnshrinedEverflower != null)
+            // 엔딩이나 의식이 진행 중일 때만 막고, 평시에는 해체해 위치를 옮길 수 있다.
+            if (EnshrinedEverflower?.IsEnshrinementLocked == true)
             {
                 return new AcceptanceReport(LocalizeString_Etc.VV_FailReason_AltarHasEnshrinedEverflower.Translate());
             }

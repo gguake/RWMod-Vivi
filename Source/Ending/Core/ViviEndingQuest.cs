@@ -278,6 +278,14 @@ namespace VVRace
             ViviEndingSignals.Send(_bloomQuest, ViviEndingSignals.EverflowerStolen);
         }
 
+        // 엔딩 진행 중 앵커의 제단을 잃으면 복구하지 않고 실패로 끝낸다.
+        public void Notify_AnchorAltarLost(ArcanePlant_Everflower everflower)
+        {
+            if (!IsEndingActive || !IsAnchor(everflower)) { return; }
+
+            ViviEndingSignals.Send(_bloomQuest, ViviEndingSignals.AnchorLost);
+        }
+
         public void Notify_EverflowerRitualEcho(ArcanePlant_Everflower everflower, Pawn resonator)
         {
             _echoLetters.Notify_EverflowerRitualEcho(everflower, resonator);

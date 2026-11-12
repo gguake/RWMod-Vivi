@@ -26,7 +26,7 @@
 <VV_FairyFlower.description>아스포델에게 결속된 요정 비비들의 마나가 피워낸 꽃입니다. 비비가 요정꽃과 결속한뒤 아스포델에게 가까이 접근하면 두 마나가 충돌해 간섭이 발생하며, 아스포델에게 결속된 요정 비비를 대규모로 해방시킬 수 있습니다.</VV_FairyFlower.description>
 
 <VV_EverflowerAltar.label>영원꽃 제단</VV_EverflowerAltar.label>
-<VV_EverflowerAltar.description>고대 비비 제국의 설계로 복원한 제단입니다. 호박 코어와 마나 회로가 영원꽃의 성장을 돕습니다.\n\n조율 4단계 이상의 영원꽃을 안치할 수 있으며, 한번 안치하면 옮길 수 없습니다. 제단은 공격으로 파괴되지 않습니다. 지붕 아래에는 건설할 수 없으며 지역마다 하나만 건설할 수 있습니다.</VV_EverflowerAltar.description>
+<VV_EverflowerAltar.description>고대 비비 제국의 설계로 복원한 제단입니다. 호박 코어와 마나 회로가 영원꽃의 성장을 돕습니다.\n\n조율 4단계 이상의 영원꽃을 안치할 수 있습니다. 영원꽃이 만개하는 중이거나 의식이 진행 중일 때는 제단이 피해를 받지 않고 해체할 수 없으며, 영원꽃도 옮길 수 없습니다. 지붕 아래에는 건설할 수 없으며 지역마다 하나만 건설할 수 있습니다.</VV_EverflowerAltar.description>
 
 <VV_AncientAmberCore.label>고대 호박 코어</VV_AncientAmberCore.label>
 <VV_AncientAmberCore.description>옛 비비 제국의 영원꽃 제단에 쓰이던 호박 결정입니다. 제국이 멸망한 뒤 남은 코어는 비비 연방이 보관하고 있습니다.\n\n비비 연방의 의뢰 보상으로 얻을 수 있습니다.</VV_AncientAmberCore.description>
