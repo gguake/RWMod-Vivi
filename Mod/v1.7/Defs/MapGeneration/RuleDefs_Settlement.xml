@@ -1,19 +1,119 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <RuleDef>
-    <defName>VV_EdgeBarricade</defName>
-    <symbol>vv_edgebarricade</symbol>
-    <resolvers>
-      <li Class="VVRace.SymbolResolver_EdgeBarricade" />
-    </resolvers>
-  </RuleDef>
-  
+  <!-- 포탑 식물밭: 콩뿌리개밭 2, 콘뿌리개밭 1, 건인장밭 1의 비율.
+       콩뿌리개밭의 강화 꽃은 바이옴 전용 배치가 있으면 그것을, 없으면 연평균 기온대에 맞는 배치를 쓴다 -->
   <RuleDef>
     <defName>VV_TurretGarden</defName>
     <symbol>vv_turret_garden</symbol>
     <resolvers>
-      <li Class="VVRace.SymbolResolver_TurretGarden">
-        <minRectSize>(7,7)</minRectSize>
+      <!-- 온화: 하늘풀 + 풍년화 -->
+      <li Class="VVRace.SymbolResolver_ViviGarden">
+        <prefabs>
+          <li>VV_ViviGarden_PeaBed</li>
+          <li>VV_ViviGarden_PeaBed_Small</li>
+        </prefabs>
+        <barricade>true</barricade>
+        <selectionWeight>2</selectionWeight>
+        <tileTemperature>-10~25</tileTemperature>
+        <excludeBiomes>
+          <li>TropicalRainforest</li>
+          <li>TropicalSwamp</li>
+          <li MayRequire="Ludeon.RimWorld.Odyssey">Grasslands</li>
+          <li>Desert</li>
+          <li>ExtremeDesert</li>
+          <li MayRequire="Ludeon.RimWorld.Odyssey">Scarlands</li>
+        </excludeBiomes>
+      </li>
+      <!-- 혹한: 서리꽃 + 하늘풀 -->
+      <li Class="VVRace.SymbolResolver_ViviGarden">
+        <prefabs>
+          <li>VV_ViviGarden_PeaBed_Cold</li>
+          <li>VV_ViviGarden_PeaBed_Cold_Small</li>
+        </prefabs>
+        <barricade>true</barricade>
+        <selectionWeight>2</selectionWeight>
+        <tileTemperature>-9999~-10</tileTemperature>
+        <excludeBiomes>
+          <li>TropicalRainforest</li>
+          <li>TropicalSwamp</li>
+          <li MayRequire="Ludeon.RimWorld.Odyssey">Grasslands</li>
+          <li>Desert</li>
+          <li>ExtremeDesert</li>
+          <li MayRequire="Ludeon.RimWorld.Odyssey">Scarlands</li>
+        </excludeBiomes>
+      </li>
+      <!-- 고온: 잔불꽃 + 풍년화 -->
+      <li Class="VVRace.SymbolResolver_ViviGarden">
+        <prefabs>
+          <li>VV_ViviGarden_PeaBed_Hot</li>
+          <li>VV_ViviGarden_PeaBed_Hot_Small</li>
+        </prefabs>
+        <barricade>true</barricade>
+        <selectionWeight>2</selectionWeight>
+        <tileTemperature>25~9999</tileTemperature>
+        <excludeBiomes>
+          <li>TropicalRainforest</li>
+          <li>TropicalSwamp</li>
+          <li MayRequire="Ludeon.RimWorld.Odyssey">Grasslands</li>
+          <li>Desert</li>
+          <li>ExtremeDesert</li>
+          <li MayRequire="Ludeon.RimWorld.Odyssey">Scarlands</li>
+        </excludeBiomes>
+      </li>
+      <!-- 열대·초원: 더워도 잔불꽃 대신 하늘풀 -->
+      <li Class="VVRace.SymbolResolver_ViviGarden">
+        <prefabs>
+          <li>VV_ViviGarden_PeaBed</li>
+          <li>VV_ViviGarden_PeaBed_Small</li>
+        </prefabs>
+        <barricade>true</barricade>
+        <selectionWeight>2</selectionWeight>
+        <biomes>
+          <li>TropicalRainforest</li>
+          <li>TropicalSwamp</li>
+          <li MayRequire="Ludeon.RimWorld.Odyssey">Grasslands</li>
+        </biomes>
+      </li>
+      <!-- 사막: 풍년화 대신 잔불꽃 -->
+      <li Class="VVRace.SymbolResolver_ViviGarden">
+        <prefabs>
+          <li>VV_ViviGarden_PeaBed_Desert</li>
+          <li>VV_ViviGarden_PeaBed_Desert_Small</li>
+        </prefabs>
+        <barricade>true</barricade>
+        <selectionWeight>2</selectionWeight>
+        <biomes>
+          <li>Desert</li>
+          <li>ExtremeDesert</li>
+        </biomes>
+      </li>
+      <!-- 흉터 지대: 잔불꽃 대신 정화초 -->
+      <li Class="VVRace.SymbolResolver_ViviGarden">
+        <prefabs>
+          <li>VV_ViviGarden_PeaBed_Scarlands</li>
+          <li>VV_ViviGarden_PeaBed_Scarlands_Small</li>
+        </prefabs>
+        <barricade>true</barricade>
+        <selectionWeight>2</selectionWeight>
+        <biomes>
+          <li MayRequire="Ludeon.RimWorld.Odyssey">Scarlands</li>
+        </biomes>
+      </li>
+      <li Class="VVRace.SymbolResolver_ViviGarden">
+        <prefabs>
+          <li>VV_ViviGarden_CornBattery</li>
+        </prefabs>
+        <barricade>true</barricade>
+      </li>
+      <li Class="VVRace.SymbolResolver_ViviGarden">
+        <prefabs>
+          <li>VV_ViviGarden_ShootusLine</li>
+        </prefabs>
+        <barricade>true</barricade>
+        <turretWeapons>
+          <li>VV_RepeatingCrossbow</li>
+          <li>VV_ViviLongJavelin</li>
+        </turretWeapons>
       </li>
     </resolvers>
   </RuleDef>
@@ -30,7 +130,12 @@
     <defName>VV_HexaRoomBarracks</defName>
     <symbol>vv_hexa_room_barracks</symbol>
     <resolvers>
-      <li Class="VVRace.SymbolResolver_HexaRoomBarracks" />
+      <li Class="VVRace.SymbolResolver_HexaRoomPrefab">
+        <prefabs>
+          <li>VV_HexaRoom_Barracks</li>
+          <li>VV_HexaRoom_Barracks_B</li>
+        </prefabs>
+      </li>
     </resolvers>
   </RuleDef>
 
@@ -38,7 +143,19 @@
     <defName>VV_HexaRoomDining</defName>
     <symbol>vv_hexa_room_dining</symbol>
     <resolvers>
-      <li Class="VVRace.SymbolResolver_HexaRoomDining" />
+      <li Class="VVRace.SymbolResolver_HexaRoomPrefab">
+        <prefabs>
+          <li>VV_HexaRoom_Dining_A</li>
+          <li>VV_HexaRoom_Dining_B</li>
+        </prefabs>
+        <storageThingSets>
+          <li>VV_SettlementDiningRoomThingSet</li>
+        </storageThingSets>
+        <growerPlants>
+          <li>Plant_Daylily</li>
+          <li>Plant_Rose</li>
+        </growerPlants>
+      </li>
     </resolvers>
   </RuleDef>
 
@@ -46,7 +163,18 @@
     <defName>VV_HexaRoomGatheringHoney</defName>
     <symbol>vv_hexa_room_gathering_honey</symbol>
     <resolvers>
-      <li Class="VVRace.SymbolResolver_HexaRoomGatheringHoney" />
+      <li Class="VVRace.SymbolResolver_HexaRoomPrefab">
+        <prefabs>
+          <li>VV_HexaRoom_GatheringHoney</li>
+        </prefabs>
+        <storageThingSets>
+          <li>VV_SettlementGatheringRoomThingSet</li>
+        </storageThingSets>
+        <growerPlants>
+          <li>Plant_Daylily</li>
+          <li>Plant_Rose</li>
+        </growerPlants>
+      </li>
     </resolvers>
   </RuleDef>
 
@@ -54,7 +182,19 @@
     <defName>VV_HexaRoomGreenhouse</defName>
     <symbol>vv_hexa_room_greenhouse</symbol>
     <resolvers>
-      <li Class="VVRace.SymbolResolver_HexaRoomGreenhouse" />
+      <li Class="VVRace.SymbolResolver_HexaRoomPrefab">
+        <prefabs>
+          <li>VV_HexaRoom_Greenhouse</li>
+          <li>VV_HexaRoom_Greenhouse_B</li>
+        </prefabs>
+        <storageThingSets>
+          <li>VV_SettlementGreenHouseThingSet</li>
+        </storageThingSets>
+        <growerPlants>
+          <li>Plant_Daylily</li>
+          <li>Plant_Rose</li>
+        </growerPlants>
+      </li>
     </resolvers>
   </RuleDef>
 
@@ -62,7 +202,15 @@
     <defName>VV_HexaRoomCrafting</defName>
     <symbol>vv_hexa_room_crafting</symbol>
     <resolvers>
-      <li Class="VVRace.SymbolResolver_HexaRoomCrafting" />
+      <li Class="VVRace.SymbolResolver_HexaRoomPrefab">
+        <prefabs>
+          <li>VV_HexaRoom_Crafting</li>
+          <li>VV_HexaRoom_Crafting_B</li>
+        </prefabs>
+        <storageThingSets>
+          <li>VV_SettlementCraftingRoomThingSet</li>
+        </storageThingSets>
+      </li>
     </resolvers>
   </RuleDef>
 
@@ -70,7 +218,15 @@
     <defName>VV_HexaRoomRefining</defName>
     <symbol>vv_hexa_room_refining</symbol>
     <resolvers>
-      <li Class="VVRace.SymbolResolver_HexaRoomRefining" />
+      <li Class="VVRace.SymbolResolver_HexaRoomPrefab">
+        <prefabs>
+          <li>VV_HexaRoom_Refining</li>
+          <li>VV_HexaRoom_Refining_B</li>
+        </prefabs>
+        <storageThingSets>
+          <li>VV_SettlementRefiningRoomThingSet</li>
+        </storageThingSets>
+      </li>
     </resolvers>
   </RuleDef>
 
@@ -78,7 +234,11 @@
     <defName>VV_HexaRoomTrap</defName>
     <symbol>vv_hexa_room_trap</symbol>
     <resolvers>
-      <li Class="VVRace.SymbolResolver_HexaRoomTrap" />
+      <li Class="VVRace.SymbolResolver_HexaRoomPrefab">
+        <prefabs>
+          <li>VV_HexaRoom_Trap</li>
+        </prefabs>
+      </li>
     </resolvers>
   </RuleDef>
 
@@ -86,7 +246,102 @@
     <defName>VV_HexaRoomHatchery</defName>
     <symbol>vv_hexa_room_hatchery</symbol>
     <resolvers>
-      <li Class="VVRace.SymbolResolver_HexaRoomHatchery" />
+      <li Class="VVRace.SymbolResolver_HexaRoomPrefab">
+        <prefabs>
+          <li>VV_HexaRoom_Hatchery</li>
+        </prefabs>
+      </li>
+    </resolvers>
+  </RuleDef>
+
+  <RuleDef>
+    <defName>VV_HexaRoomKitchen</defName>
+    <symbol>vv_hexa_room_kitchen</symbol>
+    <resolvers>
+      <li Class="VVRace.SymbolResolver_HexaRoomPrefab">
+        <prefabs>
+          <li>VV_HexaRoom_Kitchen</li>
+          <li>VV_HexaRoom_Kitchen_B</li>
+        </prefabs>
+        <storageThingSets>
+          <li>VV_SettlementGatheringRoomThingSet</li>
+          <li>VV_SettlementDiningRoomThingSet</li>
+        </storageThingSets>
+      </li>
+    </resolvers>
+  </RuleDef>
+
+  <RuleDef>
+    <defName>VV_HexaRoomStorage</defName>
+    <symbol>vv_hexa_room_storage</symbol>
+    <resolvers>
+      <li Class="VVRace.SymbolResolver_HexaRoomPrefab">
+        <prefabs>
+          <li>VV_HexaRoom_Storage</li>
+          <li>VV_HexaRoom_Storage_B</li>
+        </prefabs>
+        <storageThingSets>
+          <li>VV_SettlementDiningRoomThingSet</li>
+          <li>VV_SettlementGreenHouseThingSet</li>
+          <li>VV_SettlementGatheringRoomThingSet</li>
+          <li>VV_SettlementRefiningRoomThingSet</li>
+          <li>VV_SettlementCraftingRoomThingSet</li>
+        </storageThingSets>
+      </li>
+    </resolvers>
+  </RuleDef>
+
+  <RuleDef>
+    <defName>VV_HexaRoomInfirmary</defName>
+    <symbol>vv_hexa_room_infirmary</symbol>
+    <resolvers>
+      <li Class="VVRace.SymbolResolver_HexaRoomPrefab">
+        <prefabs>
+          <li>VV_HexaRoom_Infirmary</li>
+          <li>VV_HexaRoom_Infirmary_B</li>
+        </prefabs>
+        <storageThingSets>
+          <li>VV_SettlementInfirmaryThingSet</li>
+        </storageThingSets>
+        <medicalBeds>true</medicalBeds>
+      </li>
+    </resolvers>
+  </RuleDef>
+
+  <RuleDef>
+    <defName>VV_HexaRoomCourtyard</defName>
+    <symbol>vv_hexa_room_courtyard</symbol>
+    <resolvers>
+      <!-- 따뜻한 곳: 지붕 없는 흙바닥 꽃밭 -->
+      <li Class="VVRace.SymbolResolver_HexaRoomPrefab">
+        <prefabs>
+          <li>VV_HexaRoom_Courtyard</li>
+        </prefabs>
+        <noRoof>true</noRoof>
+        <floorDef>Soil</floorDef>
+        <tileTemperature>10~9999</tileTemperature>
+      </li>
+      <!-- 추운 곳: 지붕을 씌우고 잔불꽃으로 데운 흙바닥 꽃밭. 방이 데워지기 전인 생성 시점 기온은 따지지 않는다 -->
+      <li Class="VVRace.SymbolResolver_HexaRoomPrefab">
+        <prefabs>
+          <li>VV_HexaRoom_Courtyard_Cold</li>
+        </prefabs>
+        <floorDef>Soil</floorDef>
+        <ignoreGrowthSeason>true</ignoreGrowthSeason>
+        <tileTemperature>-9999~10</tileTemperature>
+      </li>
+    </resolvers>
+  </RuleDef>
+
+  <RuleDef>
+    <defName>VV_FlowerGarden</defName>
+    <symbol>vv_flower_garden</symbol>
+    <resolvers>
+      <li Class="VVRace.SymbolResolver_ViviGarden">
+        <prefabs>
+          <li>VV_ViviGarden_FlowerGarden</li>
+        </prefabs>
+      </li>
     </resolvers>
   </RuleDef>
 

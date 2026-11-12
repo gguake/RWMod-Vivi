@@ -34,6 +34,20 @@ namespace VVRace
 
             foreach (var cell in HexagonalRoomUtility.GetHexagonalFills(resolveParams.rect).Select(v => v.ToIntVec3))
             {
+                if (!GenConstruct.CanBuildOnTerrain(terrainDef, cell, map, Rot4.North))
+                {
+                    TryBridge(cell, map);
+                }
+
+                foreach (var adjacent in GenAdj.AdjacentCells)
+                {
+                    var around = cell + adjacent;
+                    if (around.InBounds(map) && around.GetTerrain(map).passability == Traversability.Impassable)
+                    {
+                        TryBridge(around, map);
+                    }
+                }
+
                 if (!floorOnlyIfTerrainSupports || GenConstruct.CanBuildOnTerrain(terrainDef, cell, map, Rot4.North) || (allowBridgeOnAnyImpassableTerrain && cell.GetTerrain(map).passability == Traversability.Impassable))
                 {
                     terrainGrid.SetTerrain(cell, terrainDef);
@@ -43,6 +57,14 @@ namespace VVRace
                         FilthMaker.TryMakeFilth(cell, map, resolveParams.filthDef, !resolveParams.filthDensity.HasValue ? 1 : Mathf.RoundToInt(resolveParams.filthDensity.Value.RandomInRange));
                     }
                 }
+            }
+        }
+
+        private static void TryBridge(IntVec3 cell, Map map)
+        {
+            if (GenConstruct.CanBuildOnTerrain(TerrainDefOf.Bridge, cell, map, Rot4.North) || cell.GetTerrain(map).passability == Traversability.Impassable)
+            {
+                map.terrainGrid.SetTerrain(cell, TerrainDefOf.Bridge);
             }
         }
     }

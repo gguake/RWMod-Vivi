@@ -335,6 +335,7 @@
     <Compile Include="Localize\LocalizeString_Letter.cs" />
     <Compile Include="Localize\LocalizeString_Message.cs" />
     <Compile Include="Localize\LocalizeString_Stat.cs" />
+    <Compile Include="MapGeneration\GenSteps\GenStep_ViviSettlementCleanup.cs" />
     <Compile Include="MapGeneration\GenSteps\GenStep_ViviSettlementTurretGarden.cs" />
     <Compile Include="Hornet\IncidentWorker_HornetSwarm.cs" />
     <Compile Include="MapGeneration\Lord\JobGiver_FixDamagedNearPoint.cs" />
@@ -342,16 +343,9 @@
     <Compile Include="MapGeneration\Lord\LordToil_DefendViviBase.cs" />
     <Compile Include="MapGeneration\SymbolResolvers\SymbolResolver_ArtificialPlant.cs" />
     <Compile Include="MapGeneration\SymbolResolvers\Settlement\SymbolResolver_ThingSetStorage.cs" />
-    <Compile Include="MapGeneration\SymbolResolvers\Settlement\SymbolResolver_TurretGarden.cs" />
-    <Compile Include="MapGeneration\SymbolResolvers\Settlement\SymbolResolver_EdgeBarricade.cs" />
-    <Compile Include="MapGeneration\SymbolResolvers\Settlement\SymbolResolver_HexaRoomGreenhouse.cs" />
-    <Compile Include="MapGeneration\SymbolResolvers\Settlement\SymbolResolver_HexaRoomTrap.cs" />
-    <Compile Include="MapGeneration\SymbolResolvers\Settlement\SymbolResolver_HexaRoomHatchery.cs" />
-    <Compile Include="MapGeneration\SymbolResolvers\Settlement\SymbolResolver_HexaRoomCrafting.cs" />
-    <Compile Include="MapGeneration\SymbolResolvers\Settlement\SymbolResolver_HexaRoomRefining.cs" />
-    <Compile Include="MapGeneration\SymbolResolvers\Settlement\SymbolResolver_HexaRoomGatheringHoney.cs" />
-    <Compile Include="MapGeneration\SymbolResolvers\Settlement\SymbolResolver_HexaRoomDining.cs" />
-    <Compile Include="MapGeneration\SymbolResolvers\Settlement\SymbolResolver_HexaRoomBarracks.cs" />
+    <Compile Include="MapGeneration\SymbolResolvers\Settlement\SymbolResolver_ViviGarden.cs" />
+    <Compile Include="MapGeneration\SymbolResolvers\Settlement\SymbolResolver_ViviPrefab.cs" />
+    <Compile Include="MapGeneration\SymbolResolvers\Settlement\SymbolResolver_HexaRoomPrefab.cs" />
     <Compile Include="Gather\UI\ITab_GatherWorkTable.cs" />
     <Compile Include="MapGeneration\SymbolResolvers\SymbolResolver_EdgeHoneycombWall.cs" />
     <Compile Include="RPEF\PawnRenderSubWorker_WingCondition.cs" />

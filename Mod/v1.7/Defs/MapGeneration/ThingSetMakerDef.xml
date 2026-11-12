@@ -250,4 +250,17 @@
       </options>
     </root>
   </ThingSetMakerDef>
+
+  <ThingSetMakerDef>
+    <defName>VV_SettlementInfirmaryThingSet</defName>
+    <root Class="ThingSetMaker_MarketValue">
+      <fixedParams>
+        <filter>
+          <thingDefs>
+            <li>MedicineHerbal</li>
+          </thingDefs>
+        </filter>
+      </fixedParams>
+    </root>
+  </ThingSetMakerDef>
 </Defs>

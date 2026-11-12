@@ -6,7 +6,9 @@
     <genSteps>
       <li>RocksFromGrid</li>
       <li>VV_ViviSettlement</li>
+      <li>VV_ViviSettlementCleanup</li>
       <li>VV_ViviSettlementTurretGarden</li>
+      <li>VV_ViviSettlementFlowerGarden</li>
     </genSteps>
   </MapGeneratorDef>
   
@@ -19,14 +21,35 @@
     </genStep>
   </GenStepDef>
 
+  <!-- 돌덩이 생성(970) 뒤에 정착지 방 안의 돌덩이·잔해·나무를 치운다 -->
+  <GenStepDef>
+    <defName>VV_ViviSettlementCleanup</defName>
+    <order>971</order>
+    <genStep Class="VVRace.GenStep_ViviSettlementCleanup" />
+  </GenStepDef>
+
   <GenStepDef>
     <defName>VV_ViviSettlementTurretGarden</defName>
-    <order>401</order>
+    <order>975</order>
     <genStep Class="VVRace.GenStep_ViviSettlementTurretGarden">
       <count>10</count>
       <nearMapCenter>true</nearMapCenter>
       <spotMustBeStandable>true</spotMustBeStandable>
       <minSpacing>20</minSpacing>
+    </genStep>
+  </GenStepDef>
+
+  <GenStepDef>
+    <defName>VV_ViviSettlementFlowerGarden</defName>
+    <order>976</order>
+    <genStep Class="VVRace.GenStep_ViviSettlementTurretGarden">
+      <symbol>vv_flower_garden</symbol>
+      <fertileFor>Plant_Rose</fertileFor>
+      <seedPart>2026111201</seedPart>
+      <count>5</count>
+      <nearMapCenter>true</nearMapCenter>
+      <spotMustBeStandable>true</spotMustBeStandable>
+      <minSpacing>14</minSpacing>
     </genStep>
   </GenStepDef>
 

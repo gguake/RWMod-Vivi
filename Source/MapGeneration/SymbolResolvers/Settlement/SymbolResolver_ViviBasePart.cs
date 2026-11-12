@@ -19,6 +19,10 @@ namespace VVRace
         Refining,
         Trap,
         Hatchery,
+        Kitchen,
+        Storage,
+        Infirmary,
+        Courtyard,
     }
 
     public class SymbolResolver_ViviBasePart : SymbolResolver
@@ -162,6 +166,16 @@ namespace VVRace
             }
             #endregion
 
+            #region 뒤처리 단계가 방 안을 치울 수 있게 방 칸을 적어 둔다
+            {
+                var roomCells = MapGenerator.GetOrGenerateVar<HashSet<IntVec3>>(GenStep_ViviSettlementCleanup.RoomCellsVarName);
+                foreach (var room in hexaRoomSystem.Rooms)
+                {
+                    roomCells.AddRange(room.cellRect.GetHexagonalFills().Select(v => v.ToIntVec3));
+                }
+            }
+            #endregion
+
             #region 실제 방 생성
             {
                 var dictRoomCounter = new Dictionary<ViviBaseRoomType, int>()
@@ -172,6 +186,10 @@ namespace VVRace
                     { ViviBaseRoomType.Refining, 2 },
                     { ViviBaseRoomType.GreenHouse, 1 },
                     { ViviBaseRoomType.Crafting, 1 },
+                    { ViviBaseRoomType.Kitchen, 1 },
+                    { ViviBaseRoomType.Storage, 1 },
+                    { ViviBaseRoomType.Infirmary, 1 },
+                    { ViviBaseRoomType.Courtyard, 1 },
                 };
 
                 var rooms = hexaRoomSystem.Rooms.ToList();
@@ -272,6 +290,18 @@ namespace VVRace
 
                 case ViviBaseRoomType.Hatchery:
                     return "vv_hexa_room_hatchery";
+
+                case ViviBaseRoomType.Kitchen:
+                    return "vv_hexa_room_kitchen";
+
+                case ViviBaseRoomType.Storage:
+                    return "vv_hexa_room_storage";
+
+                case ViviBaseRoomType.Infirmary:
+                    return "vv_hexa_room_infirmary";
+
+                case ViviBaseRoomType.Courtyard:
+                    return "vv_hexa_room_courtyard";
 
                 case ViviBaseRoomType.Empty:
                 default:

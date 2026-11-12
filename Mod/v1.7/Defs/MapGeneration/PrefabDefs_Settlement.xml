@@ -1,0 +1,1817 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 비비 정착지 육각 방의 가구 배치. 방 크기 (9,11), 중심 칸은 (4,0,5).
+       벽·바닥·지붕은 vv_hexa_empty_room이 만들고, 여기 물건은 SymbolResolver_HexaRoomPrefab이 배치한다. -->
+
+  <PrefabDef>
+    <defName>VV_HexaRoom_Barracks</defName>
+    <size>(9,11)</size>
+    <rotations>North</rotations>
+    <things>
+      <VV_ArcanePlantPot>
+        <stuff>VV_Viviwax</stuff>
+        <positions>
+          <li>(4, 0, 5)</li>
+          <li>(4, 0, 9)</li>
+          <li>(4, 0, 1)</li>
+        </positions>
+      </VV_ArcanePlantPot>
+      <VV_EmberBloom>
+        <position>(4, 0, 5)</position>
+      </VV_EmberBloom>
+      <VV_Waterdrops>
+        <positions>
+          <li>(4, 0, 9)</li>
+          <li>(4, 0, 1)</li>
+        </positions>
+      </VV_Waterdrops>
+      <Bed>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Opposite</relativeRotation>
+        <positions>
+          <li>(1, 0, 7)</li>
+          <li>(7, 0, 7)</li>
+          <li>(3, 0, 5)</li>
+        </positions>
+      </Bed>
+      <Bed>
+        <stuff>VV_Viviwax</stuff>
+        <positions>
+          <li>(1, 0, 3)</li>
+          <li>(7, 0, 3)</li>
+          <li>(5, 0, 5)</li>
+        </positions>
+      </Bed>
+      <Bed>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Clockwise</relativeRotation>
+        <position>(4, 0, 4)</position>
+      </Bed>
+      <Bed>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Counterclockwise</relativeRotation>
+        <position>(4, 0, 6)</position>
+      </Bed>
+    </things>
+  </PrefabDef>
+
+  <PrefabDef>
+    <defName>VV_HexaRoom_Barracks_B</defName>
+    <size>(9,11)</size>
+    <rotations>North</rotations>
+    <things>
+      <VV_ArcanePlantPot>
+        <stuff>VV_Viviwax</stuff>
+        <positions>
+          <li>(4, 0, 5)</li>
+          <li>(4, 0, 9)</li>
+          <li>(4, 0, 1)</li>
+        </positions>
+      </VV_ArcanePlantPot>
+      <VV_EmberBloom>
+        <position>(4, 0, 5)</position>
+      </VV_EmberBloom>
+      <VV_Waterdrops>
+        <positions>
+          <li>(4, 0, 9)</li>
+          <li>(4, 0, 1)</li>
+        </positions>
+      </VV_Waterdrops>
+      <Bed>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Opposite</relativeRotation>
+        <positions>
+          <li>(1, 0, 7)</li>
+          <li>(3, 0, 7)</li>
+          <li>(5, 0, 7)</li>
+          <li>(7, 0, 7)</li>
+        </positions>
+      </Bed>
+      <Bed>
+        <stuff>VV_Viviwax</stuff>
+        <positions>
+          <li>(1, 0, 3)</li>
+          <li>(3, 0, 3)</li>
+          <li>(5, 0, 3)</li>
+          <li>(7, 0, 3)</li>
+        </positions>
+      </Bed>
+    </things>
+  </PrefabDef>
+
+  <PrefabDef>
+    <defName>VV_HexaRoom_Crafting</defName>
+    <size>(9,11)</size>
+    <rotations>North</rotations>
+    <things>
+      <VV_ArcanePlantPot>
+        <stuff>VV_Viviwax</stuff>
+        <positions>
+          <li>(4, 0, 5)</li>
+          <li>(4, 0, 9)</li>
+          <li>(4, 0, 1)</li>
+        </positions>
+      </VV_ArcanePlantPot>
+      <VV_Waterdrops>
+        <position>(4, 0, 5)</position>
+      </VV_Waterdrops>
+      <VV_EmberBloom>
+        <positions>
+          <li>(4, 0, 9)</li>
+          <li>(4, 0, 1)</li>
+        </positions>
+      </VV_EmberBloom>
+      <Shelf>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Clockwise</relativeRotation>
+        <positions>
+          <li>(1, 0, 7)</li>
+          <li>(1, 0, 4)</li>
+        </positions>
+      </Shelf>
+      <Shelf>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Counterclockwise</relativeRotation>
+        <positions>
+          <li>(7, 0, 6)</li>
+          <li>(7, 0, 3)</li>
+        </positions>
+      </Shelf>
+      <HandTailoringBench>
+        <stuff>VV_Viviwax</stuff>
+        <position>(4, 0, 7)</position>
+      </HandTailoringBench>
+      <FueledSmithy>
+        <relativeRotation>Opposite</relativeRotation>
+        <position>(4, 0, 3)</position>
+      </FueledSmithy>
+    </things>
+  </PrefabDef>
+
+  <PrefabDef>
+    <defName>VV_HexaRoom_Crafting_B</defName>
+    <size>(9,11)</size>
+    <rotations>North</rotations>
+    <things>
+      <VV_ArcanePlantPot>
+        <stuff>VV_Viviwax</stuff>
+        <positions>
+          <li>(4, 0, 5)</li>
+          <li>(4, 0, 7)</li>
+          <li>(4, 0, 3)</li>
+        </positions>
+      </VV_ArcanePlantPot>
+      <VV_Waterdrops>
+        <position>(4, 0, 5)</position>
+      </VV_Waterdrops>
+      <VV_EmberBloom>
+        <positions>
+          <li>(4, 0, 7)</li>
+          <li>(4, 0, 3)</li>
+        </positions>
+      </VV_EmberBloom>
+      <Shelf>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Opposite</relativeRotation>
+        <position>(4, 0, 8)</position>
+      </Shelf>
+      <Shelf>
+        <stuff>VV_Viviwax</stuff>
+        <position>(4, 0, 2)</position>
+      </Shelf>
+      <HandTailoringBench>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Counterclockwise</relativeRotation>
+        <position>(2, 0, 5)</position>
+      </HandTailoringBench>
+      <FueledSmithy>
+        <relativeRotation>Clockwise</relativeRotation>
+        <position>(6, 0, 5)</position>
+      </FueledSmithy>
+    </things>
+  </PrefabDef>
+
+  <PrefabDef>
+    <defName>VV_HexaRoom_Dining_A</defName>
+    <size>(9,11)</size>
+    <rotations>North</rotations>
+    <things>
+      <VV_ArcanePlantPot>
+        <stuff>VV_Viviwax</stuff>
+        <positions>
+          <li>(4, 0, 9)</li>
+          <li>(4, 0, 1)</li>
+        </positions>
+      </VV_ArcanePlantPot>
+      <VV_Peashooter>
+        <position>(4, 0, 9)</position>
+      </VV_Peashooter>
+      <VV_EmberBloom>
+        <position>(4, 0, 1)</position>
+      </VV_EmberBloom>
+      <Table3x3c>
+        <stuff>VV_Viviwax</stuff>
+        <position>(4, 0, 5)</position>
+      </Table3x3c>
+      <ShelfSmall>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Clockwise</relativeRotation>
+        <positions>
+          <li>(1, 0, 7)</li>
+          <li>(1, 0, 3)</li>
+        </positions>
+      </ShelfSmall>
+      <ShelfSmall>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Counterclockwise</relativeRotation>
+        <positions>
+          <li>(7, 0, 7)</li>
+          <li>(7, 0, 3)</li>
+        </positions>
+      </ShelfSmall>
+      <DiningChair>
+        <stuff>WoodLog</stuff>
+        <relativeRotation>Clockwise</relativeRotation>
+        <chance>0.5</chance>
+        <positions>
+          <li>(2, 0, 4)</li>
+          <li>(2, 0, 5)</li>
+          <li>(2, 0, 6)</li>
+        </positions>
+      </DiningChair>
+      <DiningChair>
+        <stuff>WoodLog</stuff>
+        <relativeRotation>Counterclockwise</relativeRotation>
+        <chance>0.5</chance>
+        <positions>
+          <li>(6, 0, 4)</li>
+          <li>(6, 0, 5)</li>
+          <li>(6, 0, 6)</li>
+        </positions>
+      </DiningChair>
+      <DiningChair>
+        <stuff>WoodLog</stuff>
+        <chance>0.5</chance>
+        <positions>
+          <li>(3, 0, 3)</li>
+          <li>(4, 0, 3)</li>
+          <li>(5, 0, 3)</li>
+        </positions>
+      </DiningChair>
+      <DiningChair>
+        <stuff>WoodLog</stuff>
+        <relativeRotation>Opposite</relativeRotation>
+        <chance>0.5</chance>
+        <positions>
+          <li>(3, 0, 7)</li>
+          <li>(4, 0, 7)</li>
+          <li>(5, 0, 7)</li>
+        </positions>
+      </DiningChair>
+      <PlantPot>
+        <stuff>WoodLog</stuff>
+        <positions>
+          <li>(6, 0, 7)</li>
+          <li>(2, 0, 7)</li>
+          <li>(6, 0, 3)</li>
+          <li>(2, 0, 3)</li>
+        </positions>
+      </PlantPot>
+    </things>
+  </PrefabDef>
+
+  <PrefabDef>
+    <defName>VV_HexaRoom_Dining_B</defName>
+    <size>(9,11)</size>
+    <rotations>North</rotations>
+    <things>
+      <VV_ArcanePlantPot>
+        <stuff>VV_Viviwax</stuff>
+        <positions>
+          <li>(4, 0, 9)</li>
+          <li>(4, 0, 1)</li>
+        </positions>
+      </VV_ArcanePlantPot>
+      <VV_EmberBloom>
+        <position>(4, 0, 9)</position>
+      </VV_EmberBloom>
+      <VV_Peashooter>
+        <position>(4, 0, 1)</position>
+      </VV_Peashooter>
+      <Table3x3c>
+        <stuff>VV_Viviwax</stuff>
+        <position>(4, 0, 5)</position>
+      </Table3x3c>
+      <ShelfSmall>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Clockwise</relativeRotation>
+        <positions>
+          <li>(1, 0, 7)</li>
+          <li>(1, 0, 3)</li>
+        </positions>
+      </ShelfSmall>
+      <ShelfSmall>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Counterclockwise</relativeRotation>
+        <positions>
+          <li>(7, 0, 7)</li>
+          <li>(7, 0, 3)</li>
+        </positions>
+      </ShelfSmall>
+      <DiningChair>
+        <stuff>WoodLog</stuff>
+        <relativeRotation>Clockwise</relativeRotation>
+        <chance>0.5</chance>
+        <positions>
+          <li>(2, 0, 4)</li>
+          <li>(2, 0, 5)</li>
+          <li>(2, 0, 6)</li>
+        </positions>
+      </DiningChair>
+      <DiningChair>
+        <stuff>WoodLog</stuff>
+        <relativeRotation>Counterclockwise</relativeRotation>
+        <chance>0.5</chance>
+        <positions>
+          <li>(6, 0, 4)</li>
+          <li>(6, 0, 5)</li>
+          <li>(6, 0, 6)</li>
+        </positions>
+      </DiningChair>
+      <DiningChair>
+        <stuff>WoodLog</stuff>
+        <chance>0.5</chance>
+        <positions>
+          <li>(3, 0, 3)</li>
+          <li>(4, 0, 3)</li>
+          <li>(5, 0, 3)</li>
+        </positions>
+      </DiningChair>
+      <DiningChair>
+        <stuff>WoodLog</stuff>
+        <relativeRotation>Opposite</relativeRotation>
+        <chance>0.5</chance>
+        <positions>
+          <li>(3, 0, 7)</li>
+          <li>(4, 0, 7)</li>
+          <li>(5, 0, 7)</li>
+        </positions>
+      </DiningChair>
+      <PlantPot>
+        <stuff>WoodLog</stuff>
+        <positions>
+          <li>(6, 0, 7)</li>
+          <li>(2, 0, 7)</li>
+          <li>(6, 0, 3)</li>
+          <li>(2, 0, 3)</li>
+        </positions>
+      </PlantPot>
+    </things>
+  </PrefabDef>
+
+  <PrefabDef>
+    <defName>VV_HexaRoom_GatheringHoney</defName>
+    <size>(9,11)</size>
+    <rotations>North</rotations>
+    <things>
+      <VV_ArcanePlantPot>
+        <stuff>VV_Viviwax</stuff>
+        <positions>
+          <li>(4, 0, 5)</li>
+          <li>(4, 0, 6)</li>
+          <li>(4, 0, 4)</li>
+          <li>(5, 0, 5)</li>
+          <li>(3, 0, 5)</li>
+        </positions>
+      </VV_ArcanePlantPot>
+      <VV_Radiantflower>
+        <position>(4, 0, 5)</position>
+      </VV_Radiantflower>
+      <VV_Richflower>
+        <positions>
+          <li>(4, 0, 6)</li>
+          <li>(4, 0, 4)</li>
+          <li>(5, 0, 5)</li>
+          <li>(3, 0, 5)</li>
+        </positions>
+      </VV_Richflower>
+      <PlantPot>
+        <stuff>WoodLog</stuff>
+        <positions>
+          <li>(4, 0, 7)</li>
+          <li>(5, 0, 6)</li>
+          <li>(5, 0, 7)</li>
+          <li>(6, 0, 5)</li>
+          <li>(5, 0, 4)</li>
+          <li>(5, 0, 3)</li>
+          <li>(4, 0, 3)</li>
+          <li>(3, 0, 4)</li>
+          <li>(3, 0, 3)</li>
+          <li>(2, 0, 5)</li>
+          <li>(3, 0, 6)</li>
+          <li>(3, 0, 7)</li>
+        </positions>
+      </PlantPot>
+      <ShelfSmall>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Clockwise</relativeRotation>
+        <positions>
+          <li>(1, 0, 7)</li>
+          <li>(1, 0, 6)</li>
+          <li>(1, 0, 4)</li>
+          <li>(1, 0, 3)</li>
+        </positions>
+      </ShelfSmall>
+      <ShelfSmall>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Counterclockwise</relativeRotation>
+        <positions>
+          <li>(7, 0, 7)</li>
+          <li>(7, 0, 6)</li>
+          <li>(7, 0, 4)</li>
+          <li>(7, 0, 3)</li>
+        </positions>
+      </ShelfSmall>
+      <VV_GatheringBarrel>
+        <stuff>WoodLog</stuff>
+        <position>(4, 0, 9)</position>
+      </VV_GatheringBarrel>
+      <VV_GatheringBarrel>
+        <stuff>WoodLog</stuff>
+        <relativeRotation>Opposite</relativeRotation>
+        <position>(4, 0, 1)</position>
+      </VV_GatheringBarrel>
+    </things>
+  </PrefabDef>
+
+  <PrefabDef>
+    <defName>VV_HexaRoom_Greenhouse</defName>
+    <size>(9,11)</size>
+    <rotations>North</rotations>
+    <things>
+      <VV_ArcanePlantPot>
+        <stuff>VV_Viviwax</stuff>
+        <positions>
+          <li>(4, 0, 5)</li>
+          <li>(4, 0, 6)</li>
+          <li>(4, 0, 4)</li>
+        </positions>
+      </VV_ArcanePlantPot>
+      <VV_EmberBloom>
+        <position>(4, 0, 5)</position>
+      </VV_EmberBloom>
+      <VV_Peashooter>
+        <positions>
+          <li>(4, 0, 6)</li>
+          <li>(4, 0, 4)</li>
+        </positions>
+      </VV_Peashooter>
+      <ShelfSmall>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Opposite</relativeRotation>
+        <positions>
+          <li>(4, 0, 9)</li>
+          <li>(4, 0, 3)</li>
+        </positions>
+      </ShelfSmall>
+      <ShelfSmall>
+        <stuff>VV_Viviwax</stuff>
+        <positions>
+          <li>(4, 0, 7)</li>
+          <li>(4, 0, 1)</li>
+        </positions>
+      </ShelfSmall>
+    </things>
+  </PrefabDef>
+
+  <PrefabDef>
+    <defName>VV_HexaRoom_Greenhouse_B</defName>
+    <size>(9,11)</size>
+    <rotations>North</rotations>
+    <things>
+      <VV_ArcanePlantPot>
+        <stuff>VV_Viviwax</stuff>
+        <positions>
+          <li>(4, 0, 5)</li>
+          <li>(5, 0, 5)</li>
+          <li>(3, 0, 5)</li>
+          <li>(4, 0, 6)</li>
+          <li>(4, 0, 4)</li>
+        </positions>
+      </VV_ArcanePlantPot>
+      <VV_Radiantflower>
+        <position>(4, 0, 5)</position>
+      </VV_Radiantflower>
+      <VV_Richflower>
+        <positions>
+          <li>(5, 0, 5)</li>
+          <li>(3, 0, 5)</li>
+        </positions>
+      </VV_Richflower>
+      <VV_Peashooter>
+        <positions>
+          <li>(4, 0, 6)</li>
+          <li>(4, 0, 4)</li>
+        </positions>
+      </VV_Peashooter>
+      <PlantPot>
+        <stuff>WoodLog</stuff>
+        <positions>
+          <li>(6, 0, 7)</li>
+          <li>(2, 0, 7)</li>
+          <li>(6, 0, 3)</li>
+          <li>(2, 0, 3)</li>
+        </positions>
+      </PlantPot>
+      <ShelfSmall>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Clockwise</relativeRotation>
+        <positions>
+          <li>(1, 0, 6)</li>
+          <li>(1, 0, 4)</li>
+        </positions>
+      </ShelfSmall>
+      <ShelfSmall>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Counterclockwise</relativeRotation>
+        <positions>
+          <li>(7, 0, 6)</li>
+          <li>(7, 0, 4)</li>
+        </positions>
+      </ShelfSmall>
+    </things>
+  </PrefabDef>
+
+  <PrefabDef>
+    <defName>VV_HexaRoom_Refining</defName>
+    <size>(9,11)</size>
+    <rotations>North</rotations>
+    <things>
+      <VV_ArcanePlantPot>
+        <stuff>VV_Viviwax</stuff>
+        <position>(4, 0, 5)</position>
+      </VV_ArcanePlantPot>
+      <VV_EmberBloom>
+        <position>(4, 0, 5)</position>
+      </VV_EmberBloom>
+      <Shelf>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Clockwise</relativeRotation>
+        <position>(1, 0, 4)</position>
+      </Shelf>
+      <Shelf>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Counterclockwise</relativeRotation>
+        <position>(7, 0, 3)</position>
+      </Shelf>
+      <ShelfSmall>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Opposite</relativeRotation>
+        <positions>
+          <li>(4, 0, 9)</li>
+          <li>(4, 0, 6)</li>
+        </positions>
+      </ShelfSmall>
+      <ShelfSmall>
+        <stuff>VV_Viviwax</stuff>
+        <positions>
+          <li>(4, 0, 1)</li>
+          <li>(4, 0, 4)</li>
+        </positions>
+      </ShelfSmall>
+      <ShelfSmall>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Clockwise</relativeRotation>
+        <position>(5, 0, 5)</position>
+      </ShelfSmall>
+      <ShelfSmall>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Counterclockwise</relativeRotation>
+        <position>(3, 0, 5)</position>
+      </ShelfSmall>
+      <VV_RefiningWorkbench>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Counterclockwise</relativeRotation>
+        <position>(1, 0, 6)</position>
+      </VV_RefiningWorkbench>
+      <VV_RefiningWorkbench>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Clockwise</relativeRotation>
+        <position>(7, 0, 7)</position>
+      </VV_RefiningWorkbench>
+    </things>
+  </PrefabDef>
+
+  <PrefabDef>
+    <defName>VV_HexaRoom_Trap</defName>
+    <size>(9,11)</size>
+    <rotations>North</rotations>
+    <things>
+      <VV_ArcanePlantPot>
+        <stuff>VV_Viviwax</stuff>
+        <positions>
+          <li>(4, 0, 5)</li>
+          <li>(5, 0, 5)</li>
+          <li>(3, 0, 5)</li>
+          <li>(4, 0, 6)</li>
+          <li>(4, 0, 4)</li>
+          <li>(4, 0, 9)</li>
+          <li>(4, 0, 8)</li>
+          <li>(5, 0, 8)</li>
+          <li>(3, 0, 8)</li>
+          <li>(4, 0, 1)</li>
+          <li>(4, 0, 2)</li>
+          <li>(5, 0, 2)</li>
+          <li>(3, 0, 2)</li>
+          <li>(1, 0, 6)</li>
+          <li>(1, 0, 7)</li>
+          <li>(1, 0, 4)</li>
+          <li>(1, 0, 3)</li>
+          <li>(7, 0, 6)</li>
+          <li>(7, 0, 7)</li>
+          <li>(7, 0, 4)</li>
+          <li>(7, 0, 3)</li>
+        </positions>
+      </VV_ArcanePlantPot>
+      <VV_Richflower>
+        <position>(4, 0, 5)</position>
+      </VV_Richflower>
+      <VV_Peashooter>
+        <positions>
+          <li>(5, 0, 5)</li>
+          <li>(3, 0, 5)</li>
+          <li>(4, 0, 6)</li>
+          <li>(4, 0, 4)</li>
+          <li>(5, 0, 8)</li>
+          <li>(3, 0, 8)</li>
+          <li>(5, 0, 2)</li>
+          <li>(3, 0, 2)</li>
+          <li>(1, 0, 6)</li>
+          <li>(1, 0, 7)</li>
+          <li>(1, 0, 4)</li>
+          <li>(1, 0, 3)</li>
+          <li>(7, 0, 6)</li>
+          <li>(7, 0, 7)</li>
+          <li>(7, 0, 4)</li>
+          <li>(7, 0, 3)</li>
+        </positions>
+      </VV_Peashooter>
+      <VV_EmberBloom>
+        <positions>
+          <li>(4, 0, 9)</li>
+          <li>(4, 0, 1)</li>
+        </positions>
+      </VV_EmberBloom>
+      <VV_Waterdrops>
+        <positions>
+          <li>(4, 0, 8)</li>
+          <li>(4, 0, 2)</li>
+        </positions>
+      </VV_Waterdrops>
+    </things>
+  </PrefabDef>
+
+  <PrefabDef>
+    <defName>VV_HexaRoom_Hatchery</defName>
+    <size>(9,11)</size>
+    <rotations>North</rotations>
+    <things>
+      <VV_ArcanePlantPot>
+        <stuff>VV_Viviwax</stuff>
+        <positions>
+          <li>(4, 0, 5)</li>
+          <li>(5, 0, 5)</li>
+          <li>(3, 0, 5)</li>
+          <li>(4, 0, 1)</li>
+        </positions>
+      </VV_ArcanePlantPot>
+      <VV_Everflower>
+        <position>(4, 0, 5)</position>
+      </VV_Everflower>
+      <VV_EmberBloom>
+        <positions>
+          <li>(5, 0, 5)</li>
+          <li>(3, 0, 5)</li>
+        </positions>
+      </VV_EmberBloom>
+      <VV_Waterdrops>
+        <position>(4, 0, 1)</position>
+      </VV_Waterdrops>
+      <DiningChair>
+        <stuff>WoodLog</stuff>
+        <position>(4, 0, 7)</position>
+      </DiningChair>
+      <VV_ViviHatchery>
+        <positions>
+          <li>(7, 0, 3)</li>
+          <li>(1, 0, 3)</li>
+          <li>(2, 0, 2)</li>
+          <li>(6, 0, 2)</li>
+        </positions>
+      </VV_ViviHatchery>
+      <ToyBox>
+        <position>(4, 0, 9)</position>
+      </ToyBox>
+      <Crib>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Clockwise</relativeRotation>
+        <positions>
+          <li>(1, 0, 7)</li>
+          <li>(2, 0, 8)</li>
+        </positions>
+      </Crib>
+      <Crib>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Counterclockwise</relativeRotation>
+        <positions>
+          <li>(7, 0, 7)</li>
+          <li>(6, 0, 8)</li>
+        </positions>
+      </Crib>
+    </things>
+  </PrefabDef>
+
+  <PrefabDef>
+    <defName>VV_HexaRoom_Kitchen</defName>
+    <size>(9,11)</size>
+    <rotations>North</rotations>
+    <things>
+      <VV_ArcanePlantPot>
+        <stuff>VV_Viviwax</stuff>
+        <positions>
+          <li>(4, 0, 5)</li>
+          <li>(4, 0, 9)</li>
+          <li>(4, 0, 1)</li>
+        </positions>
+      </VV_ArcanePlantPot>
+      <VV_EmberBloom>
+        <position>(4, 0, 5)</position>
+      </VV_EmberBloom>
+      <VV_Waterdrops>
+        <positions>
+          <li>(4, 0, 9)</li>
+          <li>(4, 0, 1)</li>
+        </positions>
+      </VV_Waterdrops>
+      <FueledStove>
+        <position>(4, 0, 7)</position>
+      </FueledStove>
+      <TableButcher>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Opposite</relativeRotation>
+        <position>(4, 0, 3)</position>
+      </TableButcher>
+      <ShelfSmall>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Clockwise</relativeRotation>
+        <positions>
+          <li>(1, 0, 6)</li>
+          <li>(1, 0, 4)</li>
+        </positions>
+      </ShelfSmall>
+      <ShelfSmall>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Counterclockwise</relativeRotation>
+        <positions>
+          <li>(7, 0, 6)</li>
+          <li>(7, 0, 4)</li>
+        </positions>
+      </ShelfSmall>
+    </things>
+  </PrefabDef>
+
+  <PrefabDef>
+    <defName>VV_HexaRoom_Storage</defName>
+    <size>(9,11)</size>
+    <rotations>North</rotations>
+    <things>
+      <VV_ArcanePlantPot>
+        <stuff>VV_Viviwax</stuff>
+        <position>(4, 0, 5)</position>
+      </VV_ArcanePlantPot>
+      <VV_EmberBloom>
+        <position>(4, 0, 5)</position>
+      </VV_EmberBloom>
+      <Shelf>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Clockwise</relativeRotation>
+        <positions>
+          <li>(1, 0, 7)</li>
+          <li>(1, 0, 4)</li>
+        </positions>
+      </Shelf>
+      <Shelf>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Counterclockwise</relativeRotation>
+        <positions>
+          <li>(7, 0, 6)</li>
+          <li>(7, 0, 3)</li>
+        </positions>
+      </Shelf>
+      <Shelf>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Opposite</relativeRotation>
+        <position>(4, 0, 7)</position>
+      </Shelf>
+      <Shelf>
+        <stuff>VV_Viviwax</stuff>
+        <position>(4, 0, 3)</position>
+      </Shelf>
+      <ShelfSmall>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Opposite</relativeRotation>
+        <positions>
+          <li>(5, 0, 7)</li>
+          <li>(4, 0, 9)</li>
+        </positions>
+      </ShelfSmall>
+      <ShelfSmall>
+        <stuff>VV_Viviwax</stuff>
+        <positions>
+          <li>(3, 0, 3)</li>
+          <li>(4, 0, 1)</li>
+        </positions>
+      </ShelfSmall>
+    </things>
+  </PrefabDef>
+
+  <PrefabDef>
+    <defName>VV_HexaRoom_Infirmary</defName>
+    <size>(9,11)</size>
+    <rotations>North</rotations>
+    <things>
+      <VV_ArcanePlantPot>
+        <stuff>VV_Viviwax</stuff>
+        <positions>
+          <li>(4, 0, 5)</li>
+          <li>(5, 0, 5)</li>
+          <li>(3, 0, 5)</li>
+        </positions>
+      </VV_ArcanePlantPot>
+      <VV_Waterdrops>
+        <position>(4, 0, 5)</position>
+      </VV_Waterdrops>
+      <VV_EmberBloom>
+        <positions>
+          <li>(5, 0, 5)</li>
+          <li>(3, 0, 5)</li>
+        </positions>
+      </VV_EmberBloom>
+      <Bed>
+        <stuff>VV_Viviwax</stuff>
+        <positions>
+          <li>(1, 0, 6)</li>
+          <li>(7, 0, 6)</li>
+        </positions>
+      </Bed>
+      <Bed>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Opposite</relativeRotation>
+        <positions>
+          <li>(1, 0, 4)</li>
+          <li>(7, 0, 4)</li>
+        </positions>
+      </Bed>
+      <ShelfSmall>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Opposite</relativeRotation>
+        <positions>
+          <li>(4, 0, 9)</li>
+          <li>(3, 0, 7)</li>
+          <li>(5, 0, 7)</li>
+        </positions>
+      </ShelfSmall>
+      <ShelfSmall>
+        <stuff>VV_Viviwax</stuff>
+        <positions>
+          <li>(4, 0, 1)</li>
+          <li>(3, 0, 3)</li>
+          <li>(5, 0, 3)</li>
+        </positions>
+      </ShelfSmall>
+      <DiningChair>
+        <stuff>WoodLog</stuff>
+        <relativeRotation>Counterclockwise</relativeRotation>
+        <positions>
+          <li>(2, 0, 7)</li>
+          <li>(2, 0, 3)</li>
+        </positions>
+      </DiningChair>
+      <DiningChair>
+        <stuff>WoodLog</stuff>
+        <relativeRotation>Clockwise</relativeRotation>
+        <positions>
+          <li>(6, 0, 7)</li>
+          <li>(6, 0, 3)</li>
+        </positions>
+      </DiningChair>
+    </things>
+  </PrefabDef>
+
+  <PrefabDef>
+    <defName>VV_HexaRoom_Infirmary_B</defName>
+    <size>(9,11)</size>
+    <rotations>North</rotations>
+    <things>
+      <VV_ArcanePlantPot>
+        <stuff>VV_Viviwax</stuff>
+        <positions>
+          <li>(4, 0, 5)</li>
+          <li>(5, 0, 5)</li>
+          <li>(3, 0, 5)</li>
+        </positions>
+      </VV_ArcanePlantPot>
+      <VV_Waterdrops>
+        <position>(4, 0, 5)</position>
+      </VV_Waterdrops>
+      <VV_EmberBloom>
+        <positions>
+          <li>(5, 0, 5)</li>
+          <li>(3, 0, 5)</li>
+        </positions>
+      </VV_EmberBloom>
+      <Bed>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Opposite</relativeRotation>
+        <positions>
+          <li>(2, 0, 7)</li>
+          <li>(4, 0, 7)</li>
+          <li>(6, 0, 7)</li>
+        </positions>
+      </Bed>
+      <Bed>
+        <stuff>VV_Viviwax</stuff>
+        <positions>
+          <li>(2, 0, 3)</li>
+          <li>(4, 0, 3)</li>
+          <li>(6, 0, 3)</li>
+        </positions>
+      </Bed>
+      <ShelfSmall>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Opposite</relativeRotation>
+        <position>(4, 0, 9)</position>
+      </ShelfSmall>
+      <ShelfSmall>
+        <stuff>VV_Viviwax</stuff>
+        <position>(4, 0, 1)</position>
+      </ShelfSmall>
+      <ShelfSmall>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Clockwise</relativeRotation>
+        <positions>
+          <li>(1, 0, 6)</li>
+          <li>(1, 0, 4)</li>
+        </positions>
+      </ShelfSmall>
+      <ShelfSmall>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Counterclockwise</relativeRotation>
+        <positions>
+          <li>(7, 0, 6)</li>
+          <li>(7, 0, 4)</li>
+        </positions>
+      </ShelfSmall>
+    </things>
+  </PrefabDef>
+
+  <PrefabDef>
+    <defName>VV_HexaRoom_Storage_B</defName>
+    <size>(9,11)</size>
+    <rotations>North</rotations>
+    <things>
+      <VV_ArcanePlantPot>
+        <stuff>VV_Viviwax</stuff>
+        <position>(4, 0, 5)</position>
+      </VV_ArcanePlantPot>
+      <VV_EmberBloom>
+        <position>(4, 0, 5)</position>
+      </VV_EmberBloom>
+      <Shelf>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Opposite</relativeRotation>
+        <positions>
+          <li>(2, 0, 7)</li>
+          <li>(4, 0, 7)</li>
+          <li>(6, 0, 7)</li>
+        </positions>
+      </Shelf>
+      <Shelf>
+        <stuff>VV_Viviwax</stuff>
+        <positions>
+          <li>(1, 0, 3)</li>
+          <li>(3, 0, 3)</li>
+          <li>(5, 0, 3)</li>
+        </positions>
+      </Shelf>
+      <ShelfSmall>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Opposite</relativeRotation>
+        <positions>
+          <li>(7, 0, 7)</li>
+          <li>(4, 0, 9)</li>
+        </positions>
+      </ShelfSmall>
+      <ShelfSmall>
+        <stuff>VV_Viviwax</stuff>
+        <positions>
+          <li>(7, 0, 3)</li>
+          <li>(4, 0, 1)</li>
+        </positions>
+      </ShelfSmall>
+      <ShelfSmall>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Counterclockwise</relativeRotation>
+        <position>(3, 0, 5)</position>
+      </ShelfSmall>
+      <ShelfSmall>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Clockwise</relativeRotation>
+        <position>(5, 0, 5)</position>
+      </ShelfSmall>
+    </things>
+  </PrefabDef>
+
+  <PrefabDef>
+    <defName>VV_HexaRoom_Kitchen_B</defName>
+    <size>(9,11)</size>
+    <rotations>North</rotations>
+    <things>
+      <VV_ArcanePlantPot>
+        <stuff>VV_Viviwax</stuff>
+        <positions>
+          <li>(4, 0, 5)</li>
+          <li>(4, 0, 7)</li>
+          <li>(4, 0, 3)</li>
+        </positions>
+      </VV_ArcanePlantPot>
+      <VV_Waterdrops>
+        <position>(4, 0, 5)</position>
+      </VV_Waterdrops>
+      <VV_EmberBloom>
+        <positions>
+          <li>(4, 0, 7)</li>
+          <li>(4, 0, 3)</li>
+        </positions>
+      </VV_EmberBloom>
+      <FueledStove>
+        <relativeRotation>Counterclockwise</relativeRotation>
+        <position>(2, 0, 5)</position>
+      </FueledStove>
+      <TableButcher>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Clockwise</relativeRotation>
+        <position>(6, 0, 5)</position>
+      </TableButcher>
+      <ShelfSmall>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Opposite</relativeRotation>
+        <positions>
+          <li>(3, 0, 8)</li>
+          <li>(5, 0, 8)</li>
+          <li>(4, 0, 9)</li>
+        </positions>
+      </ShelfSmall>
+      <ShelfSmall>
+        <stuff>VV_Viviwax</stuff>
+        <positions>
+          <li>(3, 0, 2)</li>
+          <li>(5, 0, 2)</li>
+          <li>(4, 0, 1)</li>
+        </positions>
+      </ShelfSmall>
+    </things>
+  </PrefabDef>
+
+  <PrefabDef>
+    <defName>VV_HexaRoom_Refining_B</defName>
+    <size>(9,11)</size>
+    <rotations>North</rotations>
+    <things>
+      <VV_ArcanePlantPot>
+        <stuff>VV_Viviwax</stuff>
+        <positions>
+          <li>(4, 0, 5)</li>
+          <li>(4, 0, 9)</li>
+          <li>(4, 0, 1)</li>
+        </positions>
+      </VV_ArcanePlantPot>
+      <VV_EmberBloom>
+        <position>(4, 0, 5)</position>
+      </VV_EmberBloom>
+      <VV_Waterdrops>
+        <positions>
+          <li>(4, 0, 9)</li>
+          <li>(4, 0, 1)</li>
+        </positions>
+      </VV_Waterdrops>
+      <VV_RefiningWorkbench>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Opposite</relativeRotation>
+        <position>(4, 0, 7)</position>
+      </VV_RefiningWorkbench>
+      <VV_RefiningWorkbench>
+        <stuff>VV_Viviwax</stuff>
+        <position>(4, 0, 3)</position>
+      </VV_RefiningWorkbench>
+      <Shelf>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Clockwise</relativeRotation>
+        <position>(1, 0, 7)</position>
+      </Shelf>
+      <Shelf>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Counterclockwise</relativeRotation>
+        <position>(7, 0, 3)</position>
+      </Shelf>
+      <ShelfSmall>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Clockwise</relativeRotation>
+        <positions>
+          <li>(1, 0, 4)</li>
+          <li>(1, 0, 3)</li>
+        </positions>
+      </ShelfSmall>
+      <ShelfSmall>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Counterclockwise</relativeRotation>
+        <positions>
+          <li>(7, 0, 6)</li>
+          <li>(7, 0, 7)</li>
+        </positions>
+      </ShelfSmall>
+      <ShelfSmall>
+        <stuff>VV_Viviwax</stuff>
+        <relativeRotation>Opposite</relativeRotation>
+        <position>(5, 0, 7)</position>
+      </ShelfSmall>
+      <ShelfSmall>
+        <stuff>VV_Viviwax</stuff>
+        <position>(3, 0, 3)</position>
+      </ShelfSmall>
+    </things>
+  </PrefabDef>
+
+  <PrefabDef>
+    <defName>VV_HexaRoom_Courtyard</defName>
+    <size>(9,11)</size>
+    <rotations>North</rotations>
+    <things>
+      <VV_Radiantflower>
+        <positions>
+          <li>(4, 0, 9)</li>
+          <li>(4, 0, 1)</li>
+        </positions>
+      </VV_Radiantflower>
+      <Plant_Daylily>
+        <positions>
+          <li>(2, 0, 8)</li>
+          <li>(3, 0, 8)</li>
+          <li>(4, 0, 8)</li>
+          <li>(5, 0, 8)</li>
+          <li>(6, 0, 8)</li>
+          <li>(1, 0, 7)</li>
+          <li>(7, 0, 7)</li>
+          <li>(3, 0, 6)</li>
+          <li>(5, 0, 6)</li>
+          <li>(7, 0, 6)</li>
+          <li>(1, 0, 5)</li>
+          <li>(3, 0, 5)</li>
+          <li>(5, 0, 5)</li>
+          <li>(7, 0, 5)</li>
+          <li>(1, 0, 4)</li>
+          <li>(3, 0, 4)</li>
+          <li>(5, 0, 4)</li>
+          <li>(7, 0, 4)</li>
+          <li>(1, 0, 3)</li>
+          <li>(7, 0, 3)</li>
+          <li>(2, 0, 2)</li>
+          <li>(3, 0, 2)</li>
+          <li>(4, 0, 2)</li>
+          <li>(5, 0, 2)</li>
+          <li>(6, 0, 2)</li>
+        </positions>
+      </Plant_Daylily>
+      <Plant_Rose>
+        <positions>
+          <li>(2, 0, 7)</li>
+          <li>(3, 0, 7)</li>
+          <li>(4, 0, 7)</li>
+          <li>(5, 0, 7)</li>
+          <li>(6, 0, 7)</li>
+          <li>(2, 0, 6)</li>
+          <li>(6, 0, 6)</li>
+          <li>(2, 0, 5)</li>
+          <li>(6, 0, 5)</li>
+          <li>(2, 0, 4)</li>
+          <li>(6, 0, 4)</li>
+          <li>(2, 0, 3)</li>
+          <li>(3, 0, 3)</li>
+          <li>(4, 0, 3)</li>
+          <li>(5, 0, 3)</li>
+          <li>(6, 0, 3)</li>
+        </positions>
+      </Plant_Rose>
+      <HorseshoesPin>
+        <position>(1, 0, 6)</position>
+      </HorseshoesPin>
+      <VV_GatheringSpot>
+        <positions>
+          <li>(4, 0, 6)</li>
+          <li>(4, 0, 4)</li>
+        </positions>
+      </VV_GatheringSpot>
+      <VV_Richflower>
+        <position>(4, 0, 5)</position>
+      </VV_Richflower>
+    </things>
+  </PrefabDef>
+
+  <PrefabDef>
+    <defName>VV_HexaRoom_Courtyard_Cold</defName>
+    <size>(9,11)</size>
+    <rotations>North</rotations>
+    <things>
+      <VV_EmberBloom>
+        <positions>
+          <li>(4, 0, 9)</li>
+          <li>(2, 0, 5)</li>
+          <li>(6, 0, 5)</li>
+          <li>(4, 0, 1)</li>
+        </positions>
+      </VV_EmberBloom>
+      <Plant_Daylily>
+        <positions>
+          <li>(2, 0, 8)</li>
+          <li>(3, 0, 8)</li>
+          <li>(4, 0, 8)</li>
+          <li>(5, 0, 8)</li>
+          <li>(6, 0, 8)</li>
+          <li>(1, 0, 7)</li>
+          <li>(7, 0, 7)</li>
+          <li>(1, 0, 6)</li>
+          <li>(3, 0, 6)</li>
+          <li>(5, 0, 6)</li>
+          <li>(7, 0, 6)</li>
+          <li>(1, 0, 5)</li>
+          <li>(7, 0, 5)</li>
+          <li>(1, 0, 4)</li>
+          <li>(3, 0, 4)</li>
+          <li>(5, 0, 4)</li>
+          <li>(7, 0, 4)</li>
+          <li>(1, 0, 3)</li>
+          <li>(7, 0, 3)</li>
+          <li>(2, 0, 2)</li>
+          <li>(3, 0, 2)</li>
+          <li>(4, 0, 2)</li>
+          <li>(5, 0, 2)</li>
+          <li>(6, 0, 2)</li>
+        </positions>
+      </Plant_Daylily>
+      <Plant_Rose>
+        <positions>
+          <li>(2, 0, 7)</li>
+          <li>(3, 0, 7)</li>
+          <li>(4, 0, 7)</li>
+          <li>(5, 0, 7)</li>
+          <li>(6, 0, 7)</li>
+          <li>(2, 0, 6)</li>
+          <li>(6, 0, 6)</li>
+          <li>(3, 0, 5)</li>
+          <li>(5, 0, 5)</li>
+          <li>(2, 0, 4)</li>
+          <li>(6, 0, 4)</li>
+          <li>(2, 0, 3)</li>
+          <li>(3, 0, 3)</li>
+          <li>(4, 0, 3)</li>
+          <li>(5, 0, 3)</li>
+          <li>(6, 0, 3)</li>
+        </positions>
+      </Plant_Rose>
+      <VV_GatheringSpot>
+        <positions>
+          <li>(4, 0, 6)</li>
+          <li>(4, 0, 4)</li>
+        </positions>
+      </VV_GatheringSpot>
+      <VV_Radiantflower>
+        <position>(4, 0, 5)</position>
+      </VV_Radiantflower>
+    </things>
+  </PrefabDef>
+
+  <!-- 정착지 바깥의 밭. 마법 식물 밑 화분은 땅이 메마른 칸에만 SymbolResolver_ViviGarden이 깐다. -->
+
+  <PrefabDef>
+    <defName>VV_ViviGarden_PeaBed</defName>
+    <size>(7,3)</size>
+    <rotations>North, East</rotations>
+    <things>
+      <VV_Waterdrops>
+        <positions>
+          <li>(0, 0, 2)</li>
+          <li>(6, 0, 0)</li>
+        </positions>
+      </VV_Waterdrops>
+      <VV_Richflower>
+        <positions>
+          <li>(1, 0, 2)</li>
+          <li>(3, 0, 2)</li>
+          <li>(5, 0, 2)</li>
+          <li>(1, 0, 0)</li>
+          <li>(3, 0, 0)</li>
+          <li>(5, 0, 0)</li>
+        </positions>
+      </VV_Richflower>
+      <VV_Peashooter>
+        <positions>
+          <li>(2, 0, 2)</li>
+          <li>(4, 0, 2)</li>
+          <li>(1, 0, 1)</li>
+          <li>(3, 0, 1)</li>
+          <li>(5, 0, 1)</li>
+          <li>(2, 0, 0)</li>
+          <li>(4, 0, 0)</li>
+        </positions>
+      </VV_Peashooter>
+      <VV_Radiantflower>
+        <positions>
+          <li>(0, 0, 1)</li>
+          <li>(6, 0, 1)</li>
+        </positions>
+      </VV_Radiantflower>
+      <VV_Skyweed>
+        <positions>
+          <li>(2, 0, 1)</li>
+          <li>(4, 0, 1)</li>
+        </positions>
+      </VV_Skyweed>
+    </things>
+  </PrefabDef>
+
+  <PrefabDef>
+    <defName>VV_ViviGarden_PeaBed_Small</defName>
+    <size>(5,3)</size>
+    <rotations>North, East</rotations>
+    <things>
+      <VV_Skyweed>
+        <positions>
+          <li>(1, 0, 2)</li>
+          <li>(3, 0, 2)</li>
+          <li>(1, 0, 0)</li>
+          <li>(3, 0, 0)</li>
+        </positions>
+      </VV_Skyweed>
+      <VV_Peashooter>
+        <positions>
+          <li>(2, 0, 2)</li>
+          <li>(1, 0, 1)</li>
+          <li>(3, 0, 1)</li>
+          <li>(2, 0, 0)</li>
+        </positions>
+      </VV_Peashooter>
+      <VV_Radiantflower>
+        <positions>
+          <li>(0, 0, 1)</li>
+          <li>(4, 0, 1)</li>
+        </positions>
+      </VV_Radiantflower>
+      <VV_Richflower>
+        <position>(2, 0, 1)</position>
+      </VV_Richflower>
+    </things>
+  </PrefabDef>
+
+  <PrefabDef>
+    <defName>VV_ViviGarden_PeaBed_Cold</defName>
+    <size>(7,3)</size>
+    <rotations>North, East</rotations>
+    <things>
+      <VV_Skyweed>
+        <positions>
+          <li>(1, 0, 2)</li>
+          <li>(3, 0, 2)</li>
+          <li>(5, 0, 2)</li>
+          <li>(1, 0, 0)</li>
+          <li>(3, 0, 0)</li>
+          <li>(5, 0, 0)</li>
+        </positions>
+      </VV_Skyweed>
+      <VV_Peashooter>
+        <positions>
+          <li>(2, 0, 2)</li>
+          <li>(4, 0, 2)</li>
+          <li>(1, 0, 1)</li>
+          <li>(3, 0, 1)</li>
+          <li>(5, 0, 1)</li>
+          <li>(2, 0, 0)</li>
+          <li>(4, 0, 0)</li>
+        </positions>
+      </VV_Peashooter>
+      <VV_Radiantflower>
+        <positions>
+          <li>(0, 0, 1)</li>
+          <li>(6, 0, 1)</li>
+        </positions>
+      </VV_Radiantflower>
+      <VV_FrostBloom>
+        <positions>
+          <li>(2, 0, 1)</li>
+          <li>(4, 0, 1)</li>
+        </positions>
+      </VV_FrostBloom>
+    </things>
+  </PrefabDef>
+
+  <PrefabDef>
+    <defName>VV_ViviGarden_PeaBed_Cold_Small</defName>
+    <size>(5,3)</size>
+    <rotations>North, East</rotations>
+    <things>
+      <VV_FrostBloom>
+        <positions>
+          <li>(1, 0, 2)</li>
+          <li>(3, 0, 2)</li>
+          <li>(1, 0, 0)</li>
+          <li>(3, 0, 0)</li>
+        </positions>
+      </VV_FrostBloom>
+      <VV_Peashooter>
+        <positions>
+          <li>(2, 0, 2)</li>
+          <li>(1, 0, 1)</li>
+          <li>(3, 0, 1)</li>
+          <li>(2, 0, 0)</li>
+        </positions>
+      </VV_Peashooter>
+      <VV_Radiantflower>
+        <positions>
+          <li>(0, 0, 1)</li>
+          <li>(4, 0, 1)</li>
+        </positions>
+      </VV_Radiantflower>
+      <VV_Skyweed>
+        <position>(2, 0, 1)</position>
+      </VV_Skyweed>
+    </things>
+  </PrefabDef>
+
+  <PrefabDef>
+    <defName>VV_ViviGarden_PeaBed_Hot</defName>
+    <size>(7,3)</size>
+    <rotations>North, East</rotations>
+    <things>
+      <VV_Waterdrops>
+        <positions>
+          <li>(0, 0, 2)</li>
+          <li>(6, 0, 2)</li>
+        </positions>
+      </VV_Waterdrops>
+      <VV_Richflower>
+        <positions>
+          <li>(1, 0, 2)</li>
+          <li>(3, 0, 2)</li>
+          <li>(5, 0, 2)</li>
+          <li>(1, 0, 0)</li>
+          <li>(3, 0, 0)</li>
+          <li>(5, 0, 0)</li>
+        </positions>
+      </VV_Richflower>
+      <VV_Peashooter>
+        <positions>
+          <li>(2, 0, 2)</li>
+          <li>(4, 0, 2)</li>
+          <li>(1, 0, 1)</li>
+          <li>(3, 0, 1)</li>
+          <li>(5, 0, 1)</li>
+          <li>(2, 0, 0)</li>
+          <li>(4, 0, 0)</li>
+        </positions>
+      </VV_Peashooter>
+      <VV_Radiantflower>
+        <positions>
+          <li>(0, 0, 1)</li>
+          <li>(6, 0, 1)</li>
+        </positions>
+      </VV_Radiantflower>
+      <VV_EmberBloom>
+        <positions>
+          <li>(2, 0, 1)</li>
+          <li>(4, 0, 1)</li>
+        </positions>
+      </VV_EmberBloom>
+    </things>
+  </PrefabDef>
+
+  <PrefabDef>
+    <defName>VV_ViviGarden_PeaBed_Hot_Small</defName>
+    <size>(5,3)</size>
+    <rotations>North, East</rotations>
+    <things>
+      <VV_Waterdrops>
+        <positions>
+          <li>(0, 0, 2)</li>
+          <li>(4, 0, 0)</li>
+        </positions>
+      </VV_Waterdrops>
+      <VV_EmberBloom>
+        <positions>
+          <li>(1, 0, 2)</li>
+          <li>(3, 0, 2)</li>
+          <li>(1, 0, 0)</li>
+          <li>(3, 0, 0)</li>
+        </positions>
+      </VV_EmberBloom>
+      <VV_Peashooter>
+        <positions>
+          <li>(2, 0, 2)</li>
+          <li>(1, 0, 1)</li>
+          <li>(3, 0, 1)</li>
+          <li>(2, 0, 0)</li>
+        </positions>
+      </VV_Peashooter>
+      <VV_Radiantflower>
+        <positions>
+          <li>(0, 0, 1)</li>
+          <li>(4, 0, 1)</li>
+        </positions>
+      </VV_Radiantflower>
+      <VV_Richflower>
+        <position>(2, 0, 1)</position>
+      </VV_Richflower>
+    </things>
+  </PrefabDef>
+
+  <PrefabDef>
+    <defName>VV_ViviGarden_PeaBed_Desert</defName>
+    <size>(7,3)</size>
+    <rotations>North, East</rotations>
+    <things>
+      <VV_Waterdrops>
+        <positions>
+          <li>(0, 0, 2)</li>
+          <li>(6, 0, 0)</li>
+        </positions>
+      </VV_Waterdrops>
+      <VV_EmberBloom>
+        <positions>
+          <li>(1, 0, 2)</li>
+          <li>(3, 0, 2)</li>
+          <li>(5, 0, 2)</li>
+          <li>(1, 0, 0)</li>
+          <li>(3, 0, 0)</li>
+          <li>(5, 0, 0)</li>
+        </positions>
+      </VV_EmberBloom>
+      <VV_Peashooter>
+        <positions>
+          <li>(2, 0, 2)</li>
+          <li>(4, 0, 2)</li>
+          <li>(1, 0, 1)</li>
+          <li>(3, 0, 1)</li>
+          <li>(5, 0, 1)</li>
+          <li>(2, 0, 0)</li>
+          <li>(4, 0, 0)</li>
+        </positions>
+      </VV_Peashooter>
+      <VV_Radiantflower>
+        <positions>
+          <li>(0, 0, 1)</li>
+          <li>(6, 0, 1)</li>
+        </positions>
+      </VV_Radiantflower>
+      <VV_Skyweed>
+        <positions>
+          <li>(2, 0, 1)</li>
+          <li>(4, 0, 1)</li>
+        </positions>
+      </VV_Skyweed>
+    </things>
+  </PrefabDef>
+
+  <PrefabDef>
+    <defName>VV_ViviGarden_PeaBed_Desert_Small</defName>
+    <size>(5,3)</size>
+    <rotations>North, East</rotations>
+    <things>
+      <VV_Skyweed>
+        <positions>
+          <li>(1, 0, 2)</li>
+          <li>(3, 0, 2)</li>
+          <li>(1, 0, 0)</li>
+          <li>(3, 0, 0)</li>
+        </positions>
+      </VV_Skyweed>
+      <VV_Peashooter>
+        <positions>
+          <li>(2, 0, 2)</li>
+          <li>(1, 0, 1)</li>
+          <li>(3, 0, 1)</li>
+          <li>(2, 0, 0)</li>
+        </positions>
+      </VV_Peashooter>
+      <VV_Radiantflower>
+        <positions>
+          <li>(0, 0, 1)</li>
+          <li>(4, 0, 1)</li>
+        </positions>
+      </VV_Radiantflower>
+      <VV_EmberBloom>
+        <position>(2, 0, 1)</position>
+      </VV_EmberBloom>
+    </things>
+  </PrefabDef>
+
+  <PrefabDef>
+    <defName>VV_ViviGarden_PeaBed_Scarlands</defName>
+    <size>(7,3)</size>
+    <rotations>North, East</rotations>
+    <things>
+      <VV_Waterdrops>
+        <positions>
+          <li>(0, 0, 2)</li>
+          <li>(6, 0, 2)</li>
+        </positions>
+      </VV_Waterdrops>
+      <VV_Richflower>
+        <positions>
+          <li>(1, 0, 2)</li>
+          <li>(3, 0, 2)</li>
+          <li>(5, 0, 2)</li>
+          <li>(1, 0, 0)</li>
+          <li>(3, 0, 0)</li>
+          <li>(5, 0, 0)</li>
+        </positions>
+      </VV_Richflower>
+      <VV_Peashooter>
+        <positions>
+          <li>(2, 0, 2)</li>
+          <li>(4, 0, 2)</li>
+          <li>(1, 0, 1)</li>
+          <li>(3, 0, 1)</li>
+          <li>(5, 0, 1)</li>
+          <li>(2, 0, 0)</li>
+          <li>(4, 0, 0)</li>
+        </positions>
+      </VV_Peashooter>
+      <VV_Radiantflower>
+        <positions>
+          <li>(0, 0, 1)</li>
+          <li>(6, 0, 1)</li>
+        </positions>
+      </VV_Radiantflower>
+      <VV_Purifimint>
+        <positions>
+          <li>(2, 0, 1)</li>
+          <li>(4, 0, 1)</li>
+        </positions>
+      </VV_Purifimint>
+    </things>
+  </PrefabDef>
+
+  <PrefabDef>
+    <defName>VV_ViviGarden_PeaBed_Scarlands_Small</defName>
+    <size>(5,3)</size>
+    <rotations>North, East</rotations>
+    <things>
+      <VV_Purifimint>
+        <positions>
+          <li>(1, 0, 2)</li>
+          <li>(3, 0, 2)</li>
+          <li>(1, 0, 0)</li>
+          <li>(3, 0, 0)</li>
+        </positions>
+      </VV_Purifimint>
+      <VV_Peashooter>
+        <positions>
+          <li>(2, 0, 2)</li>
+          <li>(1, 0, 1)</li>
+          <li>(3, 0, 1)</li>
+          <li>(2, 0, 0)</li>
+        </positions>
+      </VV_Peashooter>
+      <VV_Radiantflower>
+        <positions>
+          <li>(0, 0, 1)</li>
+          <li>(4, 0, 1)</li>
+        </positions>
+      </VV_Radiantflower>
+      <VV_Richflower>
+        <position>(2, 0, 1)</position>
+      </VV_Richflower>
+    </things>
+  </PrefabDef>
+
+  <PrefabDef>
+    <defName>VV_ViviGarden_CornBattery</defName>
+    <size>(5,3)</size>
+    <rotations>North, East</rotations>
+    <things>
+      <VV_Cornlauncher>
+        <positions>
+          <li>(0, 0, 2)</li>
+          <li>(4, 0, 2)</li>
+          <li>(0, 0, 0)</li>
+          <li>(4, 0, 0)</li>
+        </positions>
+      </VV_Cornlauncher>
+      <VV_Radiantflower>
+        <positions>
+          <li>(2, 0, 2)</li>
+          <li>(2, 0, 0)</li>
+        </positions>
+      </VV_Radiantflower>
+      <VV_Waterdrops>
+        <position>(2, 0, 1)</position>
+      </VV_Waterdrops>
+    </things>
+  </PrefabDef>
+
+  <PrefabDef>
+    <defName>VV_ViviGarden_ShootusLine</defName>
+    <size>(5,2)</size>
+    <rotations>All</rotations>
+    <things>
+      <VV_Shootus>
+        <positions>
+          <li>(0, 0, 1)</li>
+          <li>(2, 0, 1)</li>
+          <li>(4, 0, 1)</li>
+        </positions>
+      </VV_Shootus>
+      <VV_Radiantflower>
+        <positions>
+          <li>(1, 0, 0)</li>
+          <li>(3, 0, 0)</li>
+        </positions>
+      </VV_Radiantflower>
+    </things>
+  </PrefabDef>
+
+  <PrefabDef>
+    <defName>VV_ViviGarden_FlowerGarden</defName>
+    <size>(7,7)</size>
+    <rotations>North</rotations>
+    <things>
+      <Plant_Daylily>
+        <positions>
+          <li>(0, 0, 6)</li>
+          <li>(1, 0, 6)</li>
+          <li>(2, 0, 6)</li>
+          <li>(3, 0, 6)</li>
+          <li>(4, 0, 6)</li>
+          <li>(5, 0, 6)</li>
+          <li>(6, 0, 6)</li>
+          <li>(0, 0, 5)</li>
+          <li>(6, 0, 5)</li>
+          <li>(0, 0, 4)</li>
+          <li>(2, 0, 4)</li>
+          <li>(3, 0, 4)</li>
+          <li>(4, 0, 4)</li>
+          <li>(6, 0, 4)</li>
+          <li>(0, 0, 3)</li>
+          <li>(2, 0, 3)</li>
+          <li>(4, 0, 3)</li>
+          <li>(6, 0, 3)</li>
+          <li>(0, 0, 2)</li>
+          <li>(2, 0, 2)</li>
+          <li>(3, 0, 2)</li>
+          <li>(4, 0, 2)</li>
+          <li>(6, 0, 2)</li>
+          <li>(0, 0, 1)</li>
+          <li>(6, 0, 1)</li>
+          <li>(0, 0, 0)</li>
+          <li>(1, 0, 0)</li>
+          <li>(2, 0, 0)</li>
+          <li>(3, 0, 0)</li>
+          <li>(4, 0, 0)</li>
+          <li>(5, 0, 0)</li>
+          <li>(6, 0, 0)</li>
+        </positions>
+      </Plant_Daylily>
+      <Plant_Rose>
+        <positions>
+          <li>(1, 0, 5)</li>
+          <li>(2, 0, 5)</li>
+          <li>(3, 0, 5)</li>
+          <li>(4, 0, 5)</li>
+          <li>(5, 0, 5)</li>
+          <li>(1, 0, 4)</li>
+          <li>(5, 0, 4)</li>
+          <li>(1, 0, 3)</li>
+          <li>(5, 0, 3)</li>
+          <li>(1, 0, 2)</li>
+          <li>(5, 0, 2)</li>
+          <li>(1, 0, 1)</li>
+          <li>(2, 0, 1)</li>
+          <li>(3, 0, 1)</li>
+          <li>(4, 0, 1)</li>
+          <li>(5, 0, 1)</li>
+        </positions>
+      </Plant_Rose>
+      <VV_GatheringSpot>
+        <position>(3, 0, 3)</position>
+      </VV_GatheringSpot>
+    </things>
+  </PrefabDef>
+</Defs>

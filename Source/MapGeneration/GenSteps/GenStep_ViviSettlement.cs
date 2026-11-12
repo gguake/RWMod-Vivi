@@ -52,6 +52,9 @@ namespace VVRace
                 map.ParentFaction : 
                 Find.FactionManager.RandomEnemyFaction());
 
+            MapGenerator.UsedRects.Add(rect);
+            MapGenerator.SetVar(SymbolResolver_ViviGarden.SettlementCenterVarName, rect.CenterCell);
+
             var resolveParams = default(ResolveParams);
             resolveParams.rect = rect;
             resolveParams.faction = faction;

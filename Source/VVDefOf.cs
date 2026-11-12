@@ -123,8 +123,6 @@ namespace VVRace
         public static ThingDef VV_Seed_UnknownPlant;
         public static ThingDef VV_Fertilizer;
 
-        public static ThingDef VV_GatheringBarrel;
-        public static ThingDef VV_RefiningWorkbench;
         public static ThingDef VV_ArcanePlantPot;
         public static ThingDef VV_ManaEmitter;
 
@@ -152,18 +150,11 @@ namespace VVRace
         public static ThingDef Plant_Corn;
         public static ThingDef Plant_Cotton;
         public static ThingDef Plant_Healroot;
-        public static ThingDef Plant_Daylily;
         public static ThingDef Plant_Rose;
 
         public static ThingDef Shelf;
         public static ThingDef ShelfSmall;
         public static ThingDef HorseshoesPin;
-        public static ThingDef Crib;
-        public static ThingDef Table3x3c;
-        public static ThingDef PlantPot;
-
-        public static ThingDef HandTailoringBench;
-        public static ThingDef FueledSmithy;
 
         public static ThingDef VV_TitanicHornet;
 
@@ -349,16 +340,6 @@ namespace VVRace
         public static TerrainDef VV_ViviCreamFloor;
         public static TerrainDef VV_HoneycombTile;
         public static TerrainDef VV_SterileHoneycombTile;
-    }
-
-    [DefOf]
-    public static class VVThingSetMakerDefOf
-    {
-        public static ThingSetMakerDef VV_SettlementDiningRoomThingSet;
-        public static ThingSetMakerDef VV_SettlementGreenHouseThingSet;
-        public static ThingSetMakerDef VV_SettlementGatheringRoomThingSet;
-        public static ThingSetMakerDef VV_SettlementRefiningRoomThingSet;
-        public static ThingSetMakerDef VV_SettlementCraftingRoomThingSet;
     }
 
     [DefOf]

@@ -86,16 +86,6 @@ namespace VVRace
                     BaseGen.symbolStack.Push("vv_vivi_basePart", p);
                 }
                 #endregion
-
-                #region 물 위라면 다리 건설
-                {
-                    var p = resolveParams;
-                    p.floorDef = TerrainDefOf.Bridge;
-                    p.floorOnlyIfTerrainSupports = resolveParams.floorOnlyIfTerrainSupports ?? true;
-                    p.allowBridgeOnAnyImpassableTerrain = resolveParams.allowBridgeOnAnyImpassableTerrain ?? true;
-                    BaseGen.symbolStack.Push("floor", p);
-                }
-                #endregion
             }
             finally
             {

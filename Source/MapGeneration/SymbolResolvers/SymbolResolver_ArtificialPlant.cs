@@ -37,6 +37,8 @@ namespace VVRace
                 resolveParams.rect.CenterCell, 
                 BaseGen.globalSettings.map, 
                 resolveParams.singleThingDef.defaultPlacingRot);
+
+            resolveParams.postThingSpawn?.Invoke(thing);
         }
     }
 }
