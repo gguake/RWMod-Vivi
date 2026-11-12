@@ -4,7 +4,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VV_EverflowerAltar</defName>
     <label>everflower altar</label>
-    <description>An altar restored from the designs of the old vivi empire. Its amber core and mana circuits support the everflower's growth.\n\nAn everflower of attunement level 4 or higher can be enshrined here and cannot be moved afterward. The altar cannot be destroyed by attacks. Only one can be built per map.</description>
+    <description>An altar restored from the designs of the old vivi empire. Its amber core and mana circuits support the everflower's growth.\n\nAn everflower of attunement level 4 or higher can be enshrined here and cannot be moved afterward. The altar cannot be destroyed by attacks. It cannot be built under a roof, and only one can be built per map.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_Everflower</ThingDef>
       <ThingDef>VV_AncientAmberCore</ThingDef>
@@ -66,6 +66,7 @@
 
     <placeWorkers>
       <li>VVRace.PlaceWorker_EverflowerAltar</li>
+      <li>PlaceWorker_NotUnderRoof</li>
     </placeWorkers>
 
     <designationCategory>VV_Bulidings</designationCategory>

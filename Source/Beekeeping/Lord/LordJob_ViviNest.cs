@@ -93,6 +93,18 @@ namespace VVRace
             var fleeToil = new LordToil_ViviNestExit(LocomotionUrgency.Jog, canDig: true);
             graph.AddToil(fleeToil);
 
+            // 오는 사이 둥지 자리를 쓸 수 없게 됐으면 정착하지 않고 알린 뒤 떠난다(리뷰 D1-5). 그대로 정착하면 방 없이 영역을 잡아 바깥 보관 칸을
+            // 맵 원점 둘레에서 고르고 하루 뒤에야 방을 잃었다며 떠났다. 같은 신호(도착 메모·도착 판정 틱)에서 정착 전이보다 먼저 검사되도록 그보다 앞에 넣는다
+            // (로드는 전이 목록 순서대로 처음 맞는 전이 하나만 실행한다).
+            var siteLost = new Transition(travelToil, leaveToil);
+            siteLost.AddTrigger(new Trigger_Custom(signal => signal.type == TriggerSignalType.Memo && signal.memo == "TravelArrived" && !NestRoomIntact()));
+            siteLost.AddTrigger(new Trigger_TickCondition(NestSiteLost, TravelArrivedCheckInterval));
+            siteLost.AddPreAction(new TransitionAction_Custom(() => Messages.Message(
+                LocalizeString_Message.VV_Message_ViviNestSettlersTurnedBack.Translate(_faction.Name), new LookTargets(lord.ownedPawns), MessageTypeDefOf.NeutralEvent)));
+            siteLost.AddPostAction(new TransitionAction_WakeAll());
+            siteLost.AddPostAction(new TransitionAction_EndAllJobs());
+            graph.AddTransition(siteLost);
+
             var arrived = new Transition(travelToil, liveToil);
             arrived.AddTrigger(new Trigger_Memo("TravelArrived"));
             arrived.AddTrigger(new Trigger_TickCondition(StandingMembersArrived, TravelArrivedCheckInterval));
@@ -145,6 +157,35 @@ namespace VVRace
                 any = true;
             }
             return any;
+        }
+
+        // 정착하러 오는 사이 둥지 자리를 쓸 수 없게 됐는지
+        // - 쓰러지지 않은 구성원 누구도 둥지 칸에 갈 수 없다(둥지 칸에 벽이 섰거나 방 문이 벽으로 막힘). 바닐라 이동 듀티(TravelOrLeave)도 이때는
+        //   맵 아무 가장자리로 말없이 나가 버리므로(JobGiver_GotoTravelDestination이 잡을 주지 않으면 JobGiver_ExitMapRandom) 그보다 먼저 알리고 떠나기 토일로 보낸다.
+        //   떠나기 토일은 맵 가장자리에도 갈 수 없으면 파서 나간다(trapped 전이).
+        // - 도착했는데 둥지 칸의 방이 온전하지 않다(벽이 부서져 바깥과 이어짐). 이때는 닿을 수 있어 바닐라는 도착으로 본다.
+        private bool NestSiteLost()
+        {
+            var standing = false;
+            var pawns = lord.ownedPawns;
+            for (int i = 0; i < pawns.Count; ++i)
+            {
+                var pawn = pawns[i];
+                if (!pawn.Spawned || pawn.Downed) { continue; }
+                standing = true;
+                if (pawn.CanReach(_nestCell, PathEndMode.OnCell, Danger.Deadly))
+                {
+                    return StandingMembersArrived() && !NestRoomIntact();
+                }
+            }
+            return standing;
+        }
+
+        // 둥지 칸의 방이 온전한지: 영역이 둥지 방으로 치는 것과 같은 기준(ViviNestTerritory.RefreshIfNeeded: 영역 없음·바깥·문 칸이 아님)
+        private bool NestRoomIntact()
+        {
+            var room = _nestCell.GetRoom(Map);
+            return room != null && !room.PsychologicallyOutdoors && !room.IsDoorway;
         }
 
         // 방에 들어오면 영역을 잡고 방 안의 플레이어 구역을 지운다. 방 문은 금지하지 않는다(정착민이 들어가지 않게 막는 것은 플레이어 몫, 경계심 참고).

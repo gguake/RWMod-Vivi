@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Verse;
+using Verse.AI.Group;
 
 namespace VVRace
 {
-    // 영원꽃이 잠시 품었다가 돌려보내는 폰. 결속 해방된 요정 비비와 되살아나는 여제를 맡는다.
+    // 영원꽃이 잠시 품었다가 돌려보내는 폰. 결속 해방된 요정 비비와 죽음 대신 안치되는 여제를 맡는다.
     // 꽃이 파괴되면 품은 폰은 시체도 남기지 않고 함께 죽고, 맵이 사라지면 바닐라가 맵 안의 다른 폰처럼 실종 처리한다.
     public class EverflowerPawnHolder : IExposable
     {
@@ -25,16 +26,18 @@ namespace VVRace
             }
         }
 
-        // 다음 영원꽃 틱에 품을 귀환 보류 폰.
+        // 다음 영원꽃 틱에 품을 폰. rebirth면 죽음 대신 안치되는 여제다.
         public class PendingHold : IExposable
         {
             public Pawn pawn;
             public int ticks;
+            public bool rebirth;
 
             public void ExposeData()
             {
                 Scribe_References.Look(ref pawn, "pawn");
                 Scribe_Values.Look(ref ticks, "ticks", 0);
+                Scribe_Values.Look(ref rebirth, "rebirth", false);
             }
         }
 
@@ -53,7 +56,10 @@ namespace VVRace
         // 다음 영원꽃 틱에 처리하는 대기열. 그사이 저장될 수 있으므로 함께 저장한다.
         // 일시정지 중 개발자 기즈모로 추가한 항목도 다음 틱에 처리한다.
         private List<PendingHold> _pendingHolds = new List<PendingHold>();
-        private List<Pawn> _pendingRebirths = new List<Pawn>();
+
+        // 회복 중인 폰. 회복 도중의 건강 판정이 부르는 죽음을 넘기는 데 쓴다.
+        private static Pawn _restoringHealth;
+        private static readonly List<Hediff> _tmpHediffs = new List<Hediff>();
 
         public ThingOwner Container => _container;
 
@@ -70,19 +76,15 @@ namespace VVRace
             Scribe_Deep.Look(ref _container, "container", _everflower);
             Scribe_Collections.Look(ref _heldPawns, "heldPawns", LookMode.Deep);
 
-            // 대기열의 폰은 죽은 여제면 월드 폰(WorldPawns의 죽은 폰 목록)에, 귀환 보류 폰이면 맵에 깊게 저장되므로 폰은 참조로 저장한다.
-            // 죽은 여제는 1.7에서 Destroyed 상태라 saveDestroyedThings가 없으면 참조가 null로 저장된다(월드 폰으로 깊게 저장되므로 불러올 때 풀린다).
-            Scribe_Collections.Look(ref _pendingRebirths, "pendingRebirths", true, LookMode.Reference);
+            // 대기열의 폰은 맵에 살아 있는 채로 깊게 저장되므로 폰은 참조로 저장한다.
             Scribe_Collections.Look(ref _pendingHolds, "pendingHolds", LookMode.Deep);
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
                 // 대기열 저장 전 개발 빌드 세이브(2026-11-03~)는 노드가 없어 null로 불러와지므로 빈 목록으로 채운다.
-                if (_pendingRebirths == null) { _pendingRebirths = new List<Pawn>(); }
                 if (_pendingHolds == null) { _pendingHolds = new List<PendingHold>(); }
 
                 _heldPawns.RemoveAll(v => v?.pawn == null);
-                _pendingRebirths.RemoveAll(v => v == null);
                 _pendingHolds.RemoveAll(v => v?.pawn == null);
             }
         }
@@ -110,19 +112,63 @@ namespace VVRace
             }
         }
 
-        // 폰이 죽는 도중(시체가 생기기 전)에 불리므로 시체 처리와 부활은 다음 영원꽃 틱으로 미룬다.
-        public void Notify_QueenDied(Pawn queen)
+        public static bool IsRestoringHealth(Pawn pawn)
         {
-            if (queen == null || !CanRebirth || _pendingRebirths.Contains(queen)) { return; }
+            return pawn != null && pawn == _restoringHealth;
+        }
 
-            _pendingRebirths.Add(queen);
+        // 죽음을 가로채 회복시킨 뒤 아직 품기 전인 여제인지. 가로챈 호출이 끝나고 다음 영원꽃 틱이 올 때까지 참이다.
+        public bool IsAwaitingEnshrinement(Pawn pawn)
+        {
+            for (int i = 0; i < _pendingHolds.Count; ++i)
+            {
+                if (_pendingHolds[i].rebirth && _pendingHolds[i].pawn == pawn) { return true; }
+            }
+
+            return false;
+        }
+
+        // Pawn.Kill 직전에 불린다. true면 죽음을 취소한다.
+        // 그 자리에서 상처를 모두 회복시켜 죽을 상태에서 벗어나게 하고, 피해 처리·건강 틱 도중일 수 있으므로 디스폰과 보관만 다음 영원꽃 틱으로 미룬다.
+        // 가로챌 수 없는 죽음은 여기서 false를 돌려 그대로 진행시킨다. 가로챈 뒤에 되돌리는 경로는 두지 않는다.
+        public bool TryEnshrineInsteadOfDeath(Pawn queen)
+        {
+            if (!CanEnshrine(queen)) { return false; }
+
+            RestoreHealth(queen);
+            if (queen.Dead || queen.health.ShouldBeDead()) { return false; }
+
+            var pending = _pendingHolds.FirstOrDefault(v => v.pawn == queen);
+            if (pending == null)
+            {
+                _pendingHolds.Add(new PendingHold() { pawn = queen, ticks = RebirthTicks, rebirth = true });
+            }
+            else if (!pending.rebirth)
+            {
+                pending.ticks = RebirthTicks;
+                pending.rebirth = true;
+            }
+
+            return true;
+        }
+
+        // 정착지 소속으로 맵에 있는(또는 맵의 폰이 안아 옮기는) 여제만 안치한다.
+        // 포로·손님·노예처럼 억류된 상태, 다른 세력 소속, 캐러밴·수송 포드 등 맵 밖에서는 평소처럼 죽는다.
+        private bool CanEnshrine(Pawn queen)
+        {
+            if (queen == null || queen.Dead || queen.Destroyed || !CanRebirth) { return false; }
+            if (queen.Faction == null || !queen.Faction.IsPlayer || queen.HostFaction != null) { return false; }
+            if (IsHeld(queen)) { return false; }
+
+            if (queen.Spawned) { return true; }
+
+            return queen.ParentHolder is Pawn_CarryTracker carrier && carrier.pawn != null && carrier.pawn.Spawned;
         }
 
         public void Tick()
         {
             var now = Find.TickManager.TicksGame;
 
-            TickPendingRebirths();
             TickPendingHolds();
             TickHeldPawns(now);
         }
@@ -130,8 +176,8 @@ namespace VVRace
         // 꽃이 파괴된 뒤에 불러야 품은 여제가 죽으면서 다시 부활을 예약하지 않는다.
         public void Notify_EverflowerDestroyed()
         {
+            // 안치를 기다리던 여제는 이미 회복한 채 맵에 살아 있으므로 예약만 지운다.
             _pendingHolds.Clear();
-            _pendingRebirths.Clear();
             _heldPawns.Clear();
 
             // 감싸는 용기 안에서 죽은 폰의 시체는 같은 용기에 남으므로 죽인 뒤 시체까지 함께 없앤다.
@@ -181,6 +227,20 @@ namespace VVRace
             foreach (var hold in pending)
             {
                 var pawn = hold.pawn;
+                if (hold.rebirth)
+                {
+                    try
+                    {
+                        Enshrine(hold);
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Error($"[ViViRace] failed to enshrine the queen {pawn}: {ex}");
+                    }
+
+                    continue;
+                }
+
                 if (pawn == null || !pawn.Spawned || pawn.Dead || IsHeld(pawn)) { continue; }
 
                 if (IsLastFreeColonist(pawn))
@@ -197,26 +257,6 @@ namespace VVRace
                 catch (Exception ex)
                 {
                     Log.Error($"[ViViRace] failed to hold returning pawn {pawn}: {ex}");
-                }
-            }
-        }
-
-        private void TickPendingRebirths()
-        {
-            if (_pendingRebirths.Count == 0) { return; }
-
-            var pending = _pendingRebirths.ToList();
-            _pendingRebirths.Clear();
-
-            foreach (var queen in pending)
-            {
-                try
-                {
-                    BeginRebirth(queen);
-                }
-                catch (Exception ex)
-                {
-                    Log.Error($"[ViViRace] failed to begin the queen's rebirth for {queen}: {ex}");
                 }
             }
         }
@@ -258,50 +298,111 @@ namespace VVRace
             }
         }
 
-        private void BeginRebirth(Pawn queen)
+        // 예약한 뒤 조건이 바뀌었으면(꽃이 힘을 잃음, 세력 변경, 맵을 떠남 등) 회복한 채 그대로 둔다.
+        private void Enshrine(PendingHold hold)
         {
-            if (queen == null || !queen.Dead || queen.Discarded || !CanRebirth) { return; }
-            if (IsHeld(queen)) { return; }
+            var queen = hold.pawn;
+            if (!CanEnshrine(queen)) { return; }
 
-            var corpse = queen.Corpse;
-            if (corpse != null && corpse.Spawned)
+            // 가로챈 뒤 같은 피해 처리에서 더 들어온 부상까지 되돌린다.
+            RestoreHealth(queen);
+            if (queen.Dead || queen.Destroyed) { return; }
+
+            if (queen.health.ShouldBeDead())
             {
-                VVEffecterDefOf.VV_Effecter_QueenCorpseBloom?.Spawn(corpse.Position, corpse.Map).Cleanup();
+                queen.health.CheckForStateChange(null, null);
+                return;
             }
 
-            // 선택된 폰이 죽으면 바닐라가 시체를 대신 선택한다. 시체가 선택된 채로 스폰 없이 되살리면 TryResurrect가
-            // 맵이 없는 폰을 다시 선택하면서 현재 맵을 비워 행성 화면으로 넘어가므로, 곧 사라질 시체의 선택을 먼저 해제한다.
-            if (corpse != null && Find.Selector.IsSelected(corpse))
+            var map = queen.MapHeld;
+            if (map != null)
             {
-                Find.Selector.Deselect(corpse);
+                VVEffecterDefOf.VV_Effecter_QueenCorpseBloom?.Spawn(queen.PositionHeld, map).Cleanup();
             }
-
-            var parms = new ResurrectionParams()
-            {
-                dontSpawn = true,
-                restoreMissingParts = true,
-                removeDiedThoughts = true,
-            };
-
-            if (!ResurrectionUtility.TryResurrect(queen, parms)) { return; }
 
             if (queen.Spawned)
             {
-                queen.DeSpawn();
+                if (queen.carryTracker?.CarriedThing != null)
+                {
+                    queen.carryTracker.TryDropCarriedThing(queen.Position, ThingPlaceMode.Near, out _);
+                }
+
+                queen.GetLord()?.Notify_PawnLost(queen, PawnLostCondition.Vanished);
+                queen.DeSpawnOrDeselect();
             }
 
-            if (Find.WorldPawns.Contains(queen))
+            // 안겨 있던 여제는 Hold가 옮기던 폰의 품에서 꺼낸다(바닐라도 안긴 채 죽은 폰을 같은 방식으로 꺼낸다).
+            if (Hold(queen, hold.ticks, rebirth: true) == null)
             {
-                Find.WorldPawns.RemovePawn(queen);
-            }
+                // 품지 못하면 회복한 채 영원꽃 앞으로 돌려보낸다.
+                if (!queen.Spawned && queen.holdingOwner == null)
+                {
+                    GenSpawn.Spawn(queen, FindReturnCell(_everflower.Map, RebirthCellSearchRadius), _everflower.Map);
+                }
 
-            if (Hold(queen, RebirthTicks, rebirth: true) == null) { return; }
+                return;
+            }
 
             Find.LetterStack.ReceiveLetter(
                 LocalizeString_Letter.VV_Letter_QueenLifeResonanceLabel.Translate(queen.Named("PAWN")),
-                LocalizeString_Letter.VV_Letter_QueenLifeResonance.Translate(queen.Named("PAWN"), RebirthTicks.ToStringTicksToPeriod().Named("TIME")),
+                LocalizeString_Letter.VV_Letter_QueenLifeResonance.Translate(queen.Named("PAWN"), hold.ticks.ToStringTicksToPeriod().Named("TIME")),
                 LetterDefOf.NeutralEvent,
                 new LookTargets(_everflower));
+        }
+
+        // 살아 있는 폰의 피해를 모두 되돌린다: 부상(흉터 포함)·결손 부위와 목숨을 위협하는 질환을 없앤다. 생명에 지장이 없는 만성 질환·중독·이식물은 남는다.
+        // 바닐라 RestorePart처럼 헤디프를 하나씩 떼면서 제거 훅을 부르고, 쓰러짐·일어남 판정은 끝난 뒤 한 번만 한다.
+        private static void RestoreHealth(Pawn pawn)
+        {
+            var health = pawn.health;
+            var hediffSet = health.hediffSet;
+            var previous = _restoringHealth;
+            _restoringHealth = pawn;
+            try
+            {
+                while (true)
+                {
+                    var missing = hediffSet.GetMissingPartsCommonAncestors().FirstOrDefault(v => !hediffSet.PartOrAnyAncestorHasDirectlyAddedParts(v.Part));
+                    if (missing == null) { break; }
+
+                    health.RestorePart(missing.Part, null, checkStateChange: false);
+                }
+
+                _tmpHediffs.Clear();
+                _tmpHediffs.AddRange(hediffSet.hediffs);
+                for (int i = 0; i < _tmpHediffs.Count; ++i)
+                {
+                    var hediff = _tmpHediffs[i];
+                    if (!ShouldRemoveOnRestore(hediff) || !hediffSet.hediffs.Contains(hediff)) { continue; }
+
+                    hediff.PreRemoved();
+                    hediffSet.hediffs.Remove(hediff);
+                    hediffSet.DirtyCache();
+                    hediff.PostRemoved();
+                }
+            }
+            finally
+            {
+                _tmpHediffs.Clear();
+                _restoringHealth = previous;
+            }
+
+            hediffSet.DirtyCache();
+
+            // 그래도 죽을 상태면 판정을 호출한 쪽(죽음 진행)에 맡긴다.
+            if (pawn.Dead || health.ShouldBeDead()) { return; }
+
+            health.CheckForStateChange(null, null);
+            pawn.Drawer?.renderer?.SetAllGraphicsDirty();
+            PortraitsCache.SetDirty(pawn);
+        }
+
+        private static bool ShouldRemoveOnRestore(Hediff hediff)
+        {
+            if (hediff is Hediff_Injury) { return true; }
+            if (hediff is Hediff_MissingPart || !hediff.def.everCurableByItem) { return false; }
+
+            return hediff.IsLethal || hediff.IsAnyStageLifeThreatening() || hediff.TryGetComp<HediffComp_Immunizable>() != null;
         }
 
         private void Return(HeldPawn held)

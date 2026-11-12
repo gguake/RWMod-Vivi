@@ -411,7 +411,7 @@ namespace VVRace
                 return cell;
             }
 
-            cell = CellFinder.StandableCellNear(center, map, radius.max + 5f);
+            cell = CellFinder.StandableCellNear(center, map, radius.max + 5f, c => c.InBounds(map) && !c.Fogged(map));
             return cell.IsValid ? cell : center;
         }
 

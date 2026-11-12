@@ -621,7 +621,8 @@ namespace VVRace
             var map = Map;
             var tip = PointOnLane(_laneLength);
             var cell = tip.ToIntVec3().ClampInsideMap(map);
-            if (cell.Standable(map))
+            // 미탐사 칸에 꽂히면 깨우러 갈 수 없으므로 안개 칸은 건너뛴다.
+            if (cell.Standable(map) && !cell.Fogged(map))
             {
                 _groundCell = cell;
                 _plantTip = tip.Yto0();
@@ -634,14 +635,14 @@ namespace VVRace
             for (var d = _laneLength - 1f; d > 0f; d -= 1f)
             {
                 var back = PointOnLane(d).ToIntVec3();
-                if (back.InBounds(map) && back.Standable(map))
+                if (back.InBounds(map) && back.Standable(map) && !back.Fogged(map))
                 {
                     ScatterTo(back, -_laneDir);
                     return;
                 }
             }
 
-            var near = CellFinder.StandableCellNear(cell, map, 6f);
+            var near = CellFinder.StandableCellNear(cell, map, 6f, c => c.InBounds(map) && !c.Fogged(map));
             ScatterTo(near.IsValid ? near : _boss.Position, -_laneDir);
         }
 

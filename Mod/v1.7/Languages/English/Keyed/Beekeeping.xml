@@ -16,6 +16,7 @@
 <VV_Inspector_LureConditionSeason>Flowers are not growing now.</VV_Inspector_LureConditionSeason>
 <VV_Inspector_LureConditionWeather>It is dangerous to be outside now.</VV_Inspector_LureConditionWeather>
 <VV_Inspector_LureConditionUnreachable>The vivis cannot reach the structure from the map edge.</VV_Inspector_LureConditionUnreachable>
+<VV_Inspector_LureConditionIncidentBlocked>The vivi band cannot come to this map right now.</VV_Inspector_LureConditionIncidentBlocked>
 <VV_Inspector_LureMissingFlowers>Not enough honey flowers nearby.</VV_Inspector_LureMissingFlowers>
 <VV_Inspector_LureMissingRoom>No empty structure nearby with a door and a full roof.</VV_Inspector_LureMissingRoom>
 <VV_Inspector_LureMissingFertileSoil>Not enough fertile land nearby.</VV_Inspector_LureMissingFertileSoil>
@@ -77,6 +78,7 @@
 <VV_Message_ViviNestLeavingFew>The vivis of {0} are leaving: too few of them are left.</VV_Message_ViviNestLeavingFew>
 <VV_Message_ViviNestLeavingStarving>The vivis of {0} are leaving: they have been starving for too long.</VV_Message_ViviNestLeavingStarving>
 <VV_Message_ViviNestLeavingRoomLost>The vivis of {0} are leaving: their nest room is gone.</VV_Message_ViviNestLeavingRoomLost>
+<VV_Message_ViviNestSettlersTurnedBack>The vivis of {0} are turning back: they can no longer get into the room they meant to settle in.</VV_Message_ViviNestSettlersTurnedBack>
 <VV_Message_CannotClaimViviNest>The vivis still live here.</VV_Message_CannotClaimViviNest>
 <VV_Message_CannotAdoptViviNestBaby>The vivis of the nest are raising this baby.</VV_Message_CannotAdoptViviNestBaby>
 <VV_Letter_ViviNestAlmostHostileLabel>Vivis on edge</VV_Letter_ViviNestAlmostHostileLabel>

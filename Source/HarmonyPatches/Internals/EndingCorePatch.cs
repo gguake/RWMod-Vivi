@@ -28,6 +28,29 @@ namespace VVRace
             ViviHarmonyPatcher.TryPatch(harmony, "Fire.TrySpread (golden bloom fire containment)",
                 AccessTools.Method(typeof(Fire), "TrySpread"),
                 prefix: new HarmonyMethod(typeof(EndingCorePatch), nameof(Fire_TrySpread_Prefix)));
+
+            ViviHarmonyPatcher.TryPatch(harmony, "Pawn.Kill (queen life resonance)",
+                AccessTools.Method(typeof(Pawn), nameof(Pawn.Kill)),
+                prefix: new HarmonyMethod(typeof(EndingCorePatch), nameof(Pawn_Kill_Prefix)) { priority = Priority.First });
+
+            ViviHarmonyPatcher.TryPatch(harmony, "HediffGiver_BrainInjury.OnHediffAdded (queen life resonance)",
+                AccessTools.Method(typeof(HediffGiver_BrainInjury), nameof(HediffGiver_BrainInjury.OnHediffAdded)),
+                prefix: new HarmonyMethod(typeof(EndingCorePatch), nameof(HediffGiver_BrainInjury_OnHediffAdded_Prefix)));
+        }
+
+        // 〈생명 공명〉: 여제는 죽는 대신 상처를 회복하고 영원꽃에 안치된다. 건강 판정으로 인한 사망과 직접 Kill 호출(산 지붕 붕괴 등)이 모두 여기를 지난다.
+        // 가로챌지는 여기서 한 번에 정하고, 가로채지 않으면 원래 죽음이 그대로 진행된다.
+        private static bool Pawn_Kill_Prefix(Pawn __instance, DamageInfo? dinfo)
+        {
+            try
+            {
+                return !Hediff_EverflowerQueen.TryInterceptDeath(__instance, dinfo);
+            }
+            catch (Exception ex)
+            {
+                Log.ErrorOnce($"[ViViRace] failed to intercept the queen's death: {ex}", ViviEndingUtility.ErrorKeyQueenDeathIntercept);
+                return true;
+            }
         }
 
         private static void FactionDialogMaker_FactionDialogFor_Postfix(Pawn negotiator, Faction faction, DiaNode __result)
@@ -62,6 +85,17 @@ namespace VVRace
             }
 
             __result = choice;
+            return false;
+        }
+
+        // 바닐라 AddHediff는 건강 판정(죽음) 뒤에 뇌 손상 후유증을 판정한다. 〈생명 공명〉이 죽음을 가로채면 폰이 살아 있어,
+        // 이미 회복으로 사라진 뇌 부상으로 서번트 증후군과 편지가 생긴다. 가로챈 직후의 여제에게 더는 없는 부상이면 판정을 건너뛴다.
+        private static bool HediffGiver_BrainInjury_OnHediffAdded_Prefix(Pawn pawn, Hediff hediff, ref bool __result)
+        {
+            if (pawn?.health == null || hediff == null || pawn.health.hediffSet.hediffs.Contains(hediff)) { return true; }
+            if (!Hediff_EverflowerQueen.IsAwaitingEnshrinement(pawn)) { return true; }
+
+            __result = false;
             return false;
         }
 

@@ -557,6 +557,8 @@ namespace VVRace
     [DefOf]
     public static class VVPreceptDefOf
     {
+        public static PreceptDef VV_Attunement;
+
         public static PreceptDef VV_ChangeWeatherRitual;
 
         public static PreceptDef VV_QueensCoronation;

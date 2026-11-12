@@ -21,6 +21,7 @@ namespace VVRace
         private static readonly IntRange ChargeRepathTicks = new IntRange(45, 90);
 
         private const int BreachRecheckTicks = 60;
+        private const int SkipRecoverTicks = 120;
 
         protected override Job TryGiveJob(Pawn pawn)
         {
@@ -50,7 +51,16 @@ namespace VVRace
 
             if (comp.Phase == ApocryphaPhase.Unbound && target != null)
             {
-                return ChargeJob(pawn, target, range);
+                return ChargeJob(pawn, comp, target, range);
+            }
+
+            // 깊은 물처럼 부술 수 없는 지형에 막혀 찬탈 대상까지 갈 길이 없으면 접근 차례를 대상 쪽 땅으로 건너뛰는 데 쓴다.
+            // 물 건너 원거리 공격자 추격에 밀려 건너뛰지 못하는 일이 없도록 추격보다 먼저 본다.
+            if (comp.Phase == ApocryphaPhase.Bound && target != null && GenTicks.TicksGame >= comp.NextApproachTick
+                && comp.TrySkipToStealTarget(target, range))
+            {
+                comp.Notify_Approached();
+                return WaitJob(SkipRecoverTicks);
             }
 
             if (comp.Phase == ApocryphaPhase.Bound && comp.Targeting.TryFindPursuitCell(out var pursuitCell))
@@ -198,7 +208,7 @@ namespace VVRace
             return job;
         }
 
-        private static Job ChargeJob(Pawn pawn, Thing target, float range)
+        private static Job ChargeJob(Pawn pawn, CompApocrypha comp, Thing target, float range)
         {
             var map = pawn.Map;
             var goal = EdgeCellToward(pawn, target, range);
@@ -213,6 +223,12 @@ namespace VVRace
                     found = true;
                     blocker = path.FirstBlockingBuilding(out cellBefore, pawn);
                 }
+            }
+
+            // 부수고도 갈 길이 없으면(통행 불가 지형) 찬탈 대상 쪽 땅으로 건너뛴다.
+            if (!found && comp.TrySkipToStealTarget(target, range))
+            {
+                return WaitJob(SkipRecoverTicks);
             }
 
             if (blocker != null && CanSmash(blocker, target))

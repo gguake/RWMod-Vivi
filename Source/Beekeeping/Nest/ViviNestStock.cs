@@ -134,11 +134,11 @@ namespace VVRace
                 CountCell(map, cell);
             }
 
-            // 둥지 칸 밖에 둔 둥지 몫(옮기기 전 수확물 등)도 둥지 비비가 바로 쓸 수 있다.
+            // 둥지 칸 밖에 둔 둥지 몫(옮기기 전 수확물 등)도 둥지 비비가 바로 쓸 수 있다. 활동 범위 밖 것은 들여올 때까지 세지 않는다(IsUsableClaim).
             PruneClaimed();
             for (int i = 0; i < _claimed.Count; ++i)
             {
-                if (_claimed[i].Spawned && IsOwnedMark(_claimed[i])) { Count(_claimed[i]); }
+                if (_claimed[i].Spawned && IsOwnedMark(_claimed[i]) && IsUsableClaim(_claimed[i])) { Count(_claimed[i]); }
             }
 
             var pawns = _owner.lord?.ownedPawns;
@@ -288,11 +288,18 @@ namespace VVRace
             return thing.def.category == ThingCategory.Item && !(thing is Corpse) && thing.IsForbidden(Faction.OfPlayer);
         }
 
+        // 둥지 칸 밖 둥지 몫은 활동 범위 안에 있을 때만 쓴다. 정착대가 오는 길에 쓰러져 맵 가장자리에 떨어뜨린 짐처럼 활동 범위 밖 둥지 몫은
+        // 운반(HaulCandidates, 활동 범위 금지를 보지 않는다)만 들여오고, 그 전에는 장부·설치·재료·연료 판정에서 빠진다. 세면 바닐라 배달·연료 탐색은
+        // 활동 범위 금지로 그 물건을 못 찾는데 재료가 있다고 보아, 청사진이 재료를 기다리며 다른 공사를 막고 매 사고 배달 판정을 되풀이하게 된다(리뷰 D2-2 검증 V2-1).
+        // 장부 가지치기(KeepClaim)는 위치와 상관없이 둥지 칸 밖이면 Claim을 유지한다.
+        private bool IsUsableClaim(Thing thing) => Territory.InWorkRange(thing.Position);
+
         public bool IsNestOwned(Thing thing)
         {
             if (thing.Spawned)
             {
-                return thing.Map == Map && IsOwnedMark(thing) && (Territory.IsTerritoryCell(thing.Position) || _claimed.Contains(thing));
+                return thing.Map == Map && IsOwnedMark(thing)
+                    && (Territory.IsTerritoryCell(thing.Position) || (_claimed.Contains(thing) && IsUsableClaim(thing)));
             }
 
             return thing.ParentHolder != null && HeldByMember(thing.ParentHolder);

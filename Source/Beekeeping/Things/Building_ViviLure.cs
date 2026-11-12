@@ -1,4 +1,5 @@
 ﻿using RimWorld;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Verse;
@@ -255,7 +256,8 @@ namespace VVRace
             _settleTick = -1;
         }
 
-        public void Notify_SettlersQueued(int fireTick)
+        // 정찰대가 만족하고 떠났다. 정착대는 fireTick이 지난 뒤 처음 오는 TickRare에서 이 유인통이 직접 부른다(FireSettlers).
+        public void Notify_SettlersScheduled(int fireTick)
         {
             _phase = ViviLurePhase.AwaitingSettlers;
             _settleTick = fireTick;
@@ -299,13 +301,55 @@ namespace VVRace
         public override void TickRare()
         {
             base.TickRare();
+            if (!Spawned) { return; }
 
-            if (!Spawned || ++_rareTickCount < SmokeIntervalRare) { return; }
+            if (_phase == ViviLurePhase.AwaitingSettlers && Find.TickManager.TicksGame >= _settleTick)
+            {
+                FireSettlers();
+            }
+
+            if (++_rareTickCount < SmokeIntervalRare) { return; }
 
             _rareTickCount = 0;
             if (HasBait)
             {
                 FleckMaker.ThrowSmoke(DrawPos + new UnityEngine.Vector3(0f, 0f, 0.3f), Map, 0.5f);
+            }
+        }
+
+        // 정착대 사건을 바닐라 예약 큐를 거치지 않고 직접 발동한다(리뷰 D1-1). 큐에 넣으면 발동 판정(IncidentWorker.CanFireNow: 공허 각성 중이면
+        // 강제 사건도 막는다)에서 떨어진 예약을 큐가 알리지 않고 지워, 정착대 워커의 취소 알림·유인 되돌리기가 불리지 않고 유인통이 정착대 대기에 묶였다.
+        // 정착대 워커는 불발(도착 조건·자리 판정 실패)도 발동으로 처리하고 스스로 유인을 되돌리므로, 발동이 거짓이면 바닐라 발동 판정에서 떨어진 것이다.
+        private void FireSettlers()
+        {
+            var parms = new IncidentParms
+            {
+                target = Map,
+                faction = _faction,
+                forced = true,
+            };
+
+            bool fired;
+            try
+            {
+                fired = Find.Storyteller.TryFire(new FiringIncident(VVIncidentDefOf.VV_ViviNestSettlers, null, parms));
+            }
+            catch (Exception ex)
+            {
+                // 다음 TickRare에 다시 발동해 정착대를 거듭 부르지 않게 유인을 되돌린다.
+                Log.Error($"[ViViRace] failed to fire vivi nest settlers for {this}: {ex}");
+                if (_phase == ViviLurePhase.AwaitingSettlers)
+                {
+                    ResetAttraction(releaseFaction: true);
+                }
+                return;
+            }
+
+            if (!fired && _phase == ViviLurePhase.AwaitingSettlers)
+            {
+                string reason = LocalizeString_Inspector.VV_Inspector_LureConditionIncidentBlocked.Translate();
+                ResetAttraction(releaseFaction: true);
+                Messages.Message(LocalizeString_Message.VV_Message_ViviNestSettlersCanceled.Translate(reason), this, MessageTypeDefOf.NeutralEvent);
             }
         }
 
@@ -381,7 +425,7 @@ namespace VVRace
                 yield return new Command_Action
                 {
                     defaultLabel = "DEV: Settlers now",
-                    action = () => IncidentWorker_ViviNestSettlers.DebugFireNow(this),
+                    action = FireSettlers,
                 };
             }
 

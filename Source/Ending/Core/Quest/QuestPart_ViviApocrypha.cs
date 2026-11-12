@@ -127,8 +127,10 @@ namespace VVRace
         {
             var altar = ViviEndingUtility.AltarOf(anchor);
             var target = altar != null && altar.Spawned && altar.Map == map ? (Thing)altar : anchor;
+            // 가장자리로 들어올 칸이 없으면 등장이 끝없이 미뤄지지 않게 제단과 이어진 땅의 가장 먼 칸에 내려앉힌다.
             return ApocryphaUtility.TryFindEntryCell(map, target.PositionHeld, out cell)
                 || ApocryphaUtility.TryFindBreachEntryCell(map, target, out cell)
+                || ApocryphaUtility.TryFindInnerEntryCell(map, target, out cell)
                 || (forceSpawn && TryFindAnyEdgeCell(map, out cell));
         }
 
@@ -242,8 +244,9 @@ namespace VVRace
                 return;
             }
 
-            // 저장·불러오기 후 보스 참조가 null일 수 있으므로 모든 맵에서 진행 중인 소멸 연출을 확인한다.
-            if (_boss?.GetComp<CompApocrypha>()?.Phase == ApocryphaPhase.Dying || Find.Maps.Any(ApocryphaUtility.IsDefeatInProgress))
+            // 소멸 연출이 맵에 실제로 있는 동안만 기다린다(연출이 끝나며 토벌을 알린다). 불러온 뒤에는 보스 참조가 null이므로 모든 맵을 본다.
+            // 보스의 페이즈는 보지 않는다. 연출 없이 사라진 보스(스폰되지 않은 채 사망 등)는 토벌을 알릴 주체가 없어 유예 뒤 여기서 처리해야 한다.
+            if (Find.Maps.Any(ApocryphaUtility.IsDefeatInProgress))
             {
                 _bossMissingSinceTick = -1;
                 return;

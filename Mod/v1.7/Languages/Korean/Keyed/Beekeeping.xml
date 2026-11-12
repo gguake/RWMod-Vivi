@@ -16,6 +16,7 @@
 <VV_Inspector_LureConditionSeason>지금은 꽃이 자라는 계절이 아닙니다.</VV_Inspector_LureConditionSeason>
 <VV_Inspector_LureConditionWeather>지금은 야외 활동이 위험한 날씨입니다.</VV_Inspector_LureConditionWeather>
 <VV_Inspector_LureConditionUnreachable>맵 가장자리에서 구조물까지 이동할 수 있는 경로가 없습니다.</VV_Inspector_LureConditionUnreachable>
+<VV_Inspector_LureConditionIncidentBlocked>지금은 비비 무리가 이 지역을 찾아올 수 없는 상황입니다.</VV_Inspector_LureConditionIncidentBlocked>
 <VV_Inspector_LureMissingFlowers>주변에 꿀을 채집할 수 있는 꽃이 부족합니다.</VV_Inspector_LureMissingFlowers>
 <VV_Inspector_LureMissingRoom>주변에 문과 지붕이 온전히 갖춰진 빈 구조물이 없습니다.</VV_Inspector_LureMissingRoom>
 <VV_Inspector_LureMissingFertileSoil>주변에 비옥한 땅이 부족합니다.</VV_Inspector_LureMissingFertileSoil>
@@ -77,6 +78,7 @@
 <VV_Message_ViviNestLeavingFew>남은 구성원이 너무 적어 {0}의 비비들이 둥지를 떠납니다.</VV_Message_ViviNestLeavingFew>
 <VV_Message_ViviNestLeavingStarving>오랜 굶주림을 견디지 못하고 {0}의 비비들이 둥지를 떠납니다.</VV_Message_ViviNestLeavingStarving>
 <VV_Message_ViviNestLeavingRoomLost>머물던 둥지 방을 잃어 {0}의 비비들이 이곳을 떠납니다.</VV_Message_ViviNestLeavingRoomLost>
+<VV_Message_ViviNestSettlersTurnedBack>정착하려던 방에 들어갈 수 없게 되어 {0}의 비비들이 돌아갑니다.</VV_Message_ViviNestSettlersTurnedBack>
 <VV_Message_CannotClaimViviNest>비비들이 아직 거주하고 있습니다.</VV_Message_CannotClaimViviNest>
 <VV_Message_CannotAdoptViviNestBaby>둥지의 비비들이 돌보고 있는 아기입니다.</VV_Message_CannotAdoptViviNestBaby>
 <VV_Letter_ViviNestAlmostHostileLabel>비비들의 경계</VV_Letter_ViviNestAlmostHostileLabel>

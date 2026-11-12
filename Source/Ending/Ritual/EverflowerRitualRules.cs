@@ -16,11 +16,24 @@ namespace VVRace
             return ritual != null && (ritual.def == VVPreceptDefOf.VV_GrandAttunement || ritual.def == VVPreceptDefOf.VV_QueensCoronation);
         }
 
+        // 대관식 대기 중 공명자를 잃으면 새 로열 비비를 연결할 방법이 조율뿐이므로 이 단계의 조율은 막지 않는다.
+        // 5단계 영원꽃은 조율 경험치가 쌓이지 않아 대관식 없이 6단계가 되지는 않는다.
+        public static bool IsAttunementAllowedDuringEnding(Precept_Ritual ritual)
+        {
+            return ritual != null && ritual.def == VVPreceptDefOf.VV_Attunement
+                && (ViviEndingQuest.Current?.IsAwaitingCoronation ?? false);
+        }
+
+        private static bool IsAllowedDuringEnding(Precept_Ritual ritual)
+        {
+            return IsEndingRitual(ritual) || IsAttunementAllowedDuringEnding(ritual);
+        }
+
         public static string GetBlockReason(ArcanePlant_Everflower everflower, Precept_Ritual ritual)
         {
             if (everflower == null) { return null; }
 
-            if (IsBlockedByEnding(everflower) && !IsEndingRitual(ritual))
+            if (IsBlockedByEnding(everflower) && !IsAllowedDuringEnding(ritual))
             {
                 return LocalizeString_Etc.VV_FailReason_EndingInProgress.Translate();
             }
@@ -45,7 +58,7 @@ namespace VVRace
 
         public static bool CanContinueRitual(ArcanePlant_Everflower everflower, Precept_Ritual ritual)
         {
-            return !IsBlockedByEnding(everflower) || IsEndingRitual(ritual);
+            return !IsBlockedByEnding(everflower) || IsAllowedDuringEnding(ritual);
         }
 
         public static string GetEndingStartBlockReason()

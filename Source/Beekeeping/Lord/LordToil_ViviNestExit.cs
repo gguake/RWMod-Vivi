@@ -50,18 +50,35 @@ namespace VVRace
             var pawns = lord.ownedPawns;
             for (int i = 0; i < pawns.Count; ++i)
             {
-                var pawn = pawns[i];
-                if (pawn.DevelopmentalStage.Baby() ? noCarrier && pawn.Spawned && !IsBeingFetched(pawn) : pawn.Downed)
+                if (ShouldLeaveBehind(pawns[i], noCarrier))
                 {
-                    _tmpLeftBehind.Add(pawn);
+                    _tmpLeftBehind.Add(pawns[i]);
                 }
             }
             for (int i = 0; i < _tmpLeftBehind.Count; ++i)
             {
+                // 쓰러진 어른·어린이는 쓰러짐으로, 아기와 맵에 없는 구성원은 그냥 빠진 것으로 뺀다.
                 var pawn = _tmpLeftBehind[i];
-                lord.Notify_PawnLost(pawn, pawn.DevelopmentalStage.Baby() ? PawnLostCondition.Undefined : PawnLostCondition.Incapped);
+                lord.Notify_PawnLost(pawn, !pawn.DevelopmentalStage.Baby() && pawn.Downed ? PawnLostCondition.Incapped : PawnLostCondition.Undefined);
             }
             _tmpLeftBehind.Clear();
+        }
+
+        // 두고 갈 구성원
+        // - 맵에 없고 구성원이 안고 있지도 않은 구성원(냉동 수면관·수송 포드 같은 용기 안): 데려갈 수 없는데 바닐라는 용기에 넣을 때 로드에 알리지 않는다.
+        //   로드에 남기면 나머지가 다 나가도 로드가 끝나지 않아 둥지 정리(Cleanup)가 돌지 않고, 바닐라가 지운 세력을 든 둥지 건물이 남았다(리뷰 D1-3).
+        // - 아기: 안아 줄 어른이 더 없고 데리러 가는 구성원도 없을 때
+        // - 어른·어린이: 쓰러졌을 때
+        private bool ShouldLeaveBehind(Pawn pawn, bool noCarrier)
+        {
+            if (!pawn.Spawned && !IsCarriedByMember(pawn)) { return true; }
+            return pawn.DevelopmentalStage.Baby() ? noCarrier && pawn.Spawned && !IsBeingFetched(pawn) : pawn.Downed;
+        }
+
+        private bool IsCarriedByMember(Pawn pawn)
+        {
+            var carrier = pawn.CarriedBy;
+            return carrier != null && carrier.GetLord() == lord;
         }
 
         // 아직 아기를 안으러 갈 수 있는 어른(JobGiver_ViviNestCarryBabyOut): 쓰러지지 않았고 아무것도 안지 않았으며 다른 아기를 데리러 가는 중이 아닌 구성원

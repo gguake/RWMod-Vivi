@@ -55,7 +55,7 @@
     <category>Misc</category>
   </IncidentDef>
 
-  <!-- 비비 양봉: 정찰이 끝날 때 예약되는 정착대 -->
+  <!-- 비비 양봉: 정찰대가 만족하고 떠난 뒤 유인통이 정해 둔 시각에 직접 발동하는 정착대(바닐라 예약 큐를 쓰지 않는다) -->
   <IncidentDef>
     <defName>VV_ViviNestSettlers</defName>
     <label>vivi nest settlers</label>

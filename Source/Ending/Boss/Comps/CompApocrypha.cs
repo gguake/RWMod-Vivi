@@ -151,6 +151,7 @@ namespace VVRace
     public class CompApocrypha : ThingComp, IRoofCollapseAlert
     {
         private const int RoofCollapseEscapeRadius = 15;
+        private const int StealTargetSkipCheckInterval = 250;
 
         private static readonly Color DamageTextColor = new Color(1f, 0.72f, 0.4f);
         private static readonly Color ShieldDamageTextColor = new Color(0.55f, 0.85f, 1f);
@@ -175,6 +176,9 @@ namespace VVRace
         private float _manaShield;
         private bool _shieldBroken;
         private bool _pendingShieldBreak;
+
+        // 잡을 받을 때마다 지형 판정을 되풀이하지 않도록 간격을 둔다. 저장하지 않는다(불러온 뒤 첫 판정이 조금 당겨질 뿐이다).
+        private int _nextStealTargetSkipCheckTick;
 
         private ApocryphaTargeting _targeting;
         private ApocryphaShellAttack _shell;
@@ -705,6 +709,13 @@ namespace VVRace
             _shell.Cancel();
             _needleAttack.CancelAims();
 
+            // 대기 잡은 발급 때의 기절 길이로 고정돼 있다. 기절이 줄었으면 끊어서 남은 기절만큼만 다시 받게 한다.
+            var curJob = Pawn.CurJob;
+            if (curJob != null && curJob.def == VVJobDefOf.VV_ApocryphaWait && curJob.expiryInterval > Props.releaseStunTicks + 1)
+            {
+                InterruptCurrentJob();
+            }
+
             if (IsQuestBossFight)
             {
                 HornetManifestation.SummonAround(Pawn, InterferenceHornetCount(_releaseCount), HornetSummonRole.Assault);
@@ -980,10 +991,7 @@ namespace VVRace
             var from = parent.Position;
             if (TryFindRoofCollapseEscapeCell(map, from, out var cell))
             {
-                VVEffecterDefOf.VV_Effecter_ApocryphaVanish.Spawn(from, map, 2.5f).Cleanup();
-                parent.Position = cell;
-                Pawn.Notify_Teleported(endCurrentJob: true, resetTweenedPos: true);
-                VVEffecterDefOf.VV_Effecter_ApocryphaArrive.Spawn(cell, map, 1.5f).Cleanup();
+                TeleportTo(cell, endCurrentJob: true);
                 Messages.Message(LocalizeString_Message.VV_Message_ApocryphaEscapedRoofCollapse.Translate(), Pawn, MessageTypeDefOf.NeutralEvent);
             }
 
@@ -1007,6 +1015,40 @@ namespace VVRace
 
             return CellFinder.TryFindRandomCellNear(from, map, RoofCollapseEscapeRadius * 2, c =>
                 c != from && c.Standable(map) && !collapseBuffer.IsMarkedToCollapse(c), out result);
+        }
+
+        // 디스폰·재스폰 없이 위치만 옮긴다(컴프의 디스폰 정리가 돌지 않게).
+        private void TeleportTo(IntVec3 cell, bool endCurrentJob)
+        {
+            var map = parent.Map;
+            VVEffecterDefOf.VV_Effecter_ApocryphaVanish.Spawn(parent.Position, map, 2.5f).Cleanup();
+            parent.Position = cell;
+            Pawn.Notify_Teleported(endCurrentJob, resetTweenedPos: true);
+            VVEffecterDefOf.VV_Effecter_ApocryphaArrive.Spawn(cell, map, 1.5f).Cleanup();
+        }
+
+        // 찬탈 대상까지 부수고도 갈 길이 없으면(깊은 물·용암 같은 통행 불가 지형으로 끊김) 대상과 이어진 땅으로 순간이동한다.
+        // 벽처럼 부술 수 있는 구조물로 막힌 경우는 돌파·부수기가 맡으므로 여기서 다루지 않는다.
+        // 잡 지급 도중에 불리므로 현재 잡은 끊지 않는다. 호출한 쪽이 돌려주는 새 잡이 현재 잡을 대신한다.
+        internal bool TrySkipToStealTarget(Thing target, float stealRange)
+        {
+            if (!parent.Spawned || !IsActive || target == null || !target.Spawned || target.Map != parent.Map) { return false; }
+
+            var now = GenTicks.TicksGame;
+            if (now < _nextStealTargetSkipCheckTick) { return false; }
+
+            _nextStealTargetSkipCheckTick = now + StealTargetSkipCheckInterval;
+
+            var map = parent.Map;
+            var from = parent.Position;
+            if (ApocryphaUtility.CanBreachReach(map, from, target)) { return false; }
+            if (!ApocryphaUtility.TryFindSkipCell(map, target, from, stealRange, out var cell)) { return false; }
+
+            _shell.Cancel();
+            _needleAttack.CancelAims();
+            _needleAttack.EndBreach();
+            TeleportTo(cell, endCurrentJob: false);
+            return true;
         }
         #endregion
 
@@ -1194,6 +1236,7 @@ namespace VVRace
                 action = () =>
                 {
                     _nextApproachTick = 0;
+                    _nextStealTargetSkipCheckTick = 0;
                     InterruptCurrentJob();
                 },
             };

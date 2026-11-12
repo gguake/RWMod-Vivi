@@ -1,15 +1,14 @@
-﻿using HarmonyLib;
-using RimWorld;
+﻿using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using UnityEngine;
 using Verse;
 using Verse.AI.Group;
 
 namespace VVRace
 {
-    // 정찰이 끝날 때 예약되는 정착대. 예약 인시던트는 한 번만 시도되므로 불발도 '발동'으로 처리해 이유를 알리고 유인을 되돌린다.
+    // 정찰대가 만족하고 떠난 뒤 유인통이 정해 둔 시각에 직접 발동하는 정착대(Building_ViviLure.FireSettlers).
+    // 한 번만 시도하므로 불발도 '발동'으로 처리해 이유를 알리고 유인을 되돌린다. 바닐라 발동 판정에서 떨어지면 유인통이 되돌린다.
     public class IncidentWorker_ViviNestSettlers : IncidentWorker
     {
         // 꽃 재채집을 기다리는 첫 며칠을 버틸 만큼(약 4일 치) 가져온다.
@@ -27,8 +26,6 @@ namespace VVRace
         private const int ColdLandEmberCount = 2;
         // 둥지 둘레 바깥에 세울 포장 방출기 수(사용자 요구 "두어 개"). 방 안 방출기(초기 설비)와 따로 씨앗 자리를 넓힌다(ViviNestPlanner.FindOutdoorEmitterCell).
         private const int OutdoorEmitterCount = 2;
-
-        private static readonly FieldInfo QueuedIncidentFireTickField = AccessTools.Field(typeof(QueuedIncident), "fireTick");
 
         protected override bool CanFireNowSub(IncidentParms parms)
         {
@@ -85,7 +82,9 @@ namespace VVRace
             }
             GiveInitialStock(map, pawns);
 
-            LordMaker.MakeNewLord(faction, new LordJob_ViviNest(faction, report.bestRoomCell), map, pawns);
+            var nest = new LordJob_ViviNest(faction, report.bestRoomCell);
+            LordMaker.MakeNewLord(faction, nest, map, pawns);
+            MarkInitialStockOwned(nest, pawns);
             // 정착이 시작되면 유인통은 할 일을 마친다. 세력은 이제 둥지 구성원이 붙잡고 있다.
             lure.ResetAttraction(releaseFaction: false);
 
@@ -173,6 +172,23 @@ namespace VVRace
             }
         }
 
+        // 들고 온 짐을 처음부터 둥지 몫으로 표시한다(금지 표시 + 장부). 짐을 풀기 전에 쓰러지거나 죽으면 바닐라가 지닌 물건을 그 자리에 떨어뜨리는데
+        // (Pawn.DropAndForbidEverything: 집 구역 밖이면 금지하고 안이면 금지하지 않는다) 둥지 몫 표시가 없어 둥지 비비가 다시 쓰지 못했다(리뷰 D2-2, 자동 시험 t11).
+        // 지닌 동안은 장부가 구성원 소지품으로 잡아 두고(ViviNestStock.KeepClaim), 떨어지면 둥지 몫으로 남아 운반이 들여온다.
+        // 활동 범위 밖에 떨어진 것은 들여오기 전까지 장부·쓸 물건에서 빠진다(ViviNestStock.IsNestOwned).
+        // 넣을 때 같은 소지품 더미에 합쳐질 수 있어 넣은 물건이 아니라 넣은 뒤의 소지품을 표시한다.
+        private static void MarkInitialStockOwned(LordJob_ViviNest nest, List<Pawn> pawns)
+        {
+            foreach (var pawn in pawns)
+            {
+                var inventory = pawn.inventory.innerContainer;
+                for (int i = 0; i < inventory.Count; ++i)
+                {
+                    nest.MarkOwned(inventory[i]);
+                }
+            }
+        }
+
         // 정착과 생존에 도움되는 마법식물: 겨울이 추우면 잔불꽃 둘(29°C까지 데운다, 둥지 방 화분에 둔다), 그리고 풍년화(흙 비옥도로 마나를 만든다, 비옥한 바깥 칸에 둔다).
         // 도착한 계절이 아니라 그 타일의 한 해 기온으로 고른다(봄에 온 둥지가 겨울에 아기를 얼려 죽였다, 장기 계측).
         // 서리꽃은 -20°C까지 식히는 냉동용이라 방에 두면 더운 땅에서도 방을 얼린다(장기 계측: 바깥 10~30°C에 방 -8°C, 아이 동사).
@@ -188,18 +204,6 @@ namespace VVRace
             }
 
             yield return VVThingDefOf.VV_Richflower;
-        }
-
-        public static void DebugFireNow(Building_ViviLure lure)
-        {
-            var faction = lure.ReservedFaction;
-            foreach (QueuedIncident queued in Find.Storyteller.incidentQueue)
-            {
-                if (BeekeepingUtility.IsQueuedSettlers(queued, faction))
-                {
-                    QueuedIncidentFireTickField.SetValue(queued, Find.TickManager.TicksGame);
-                }
-            }
         }
     }
 }

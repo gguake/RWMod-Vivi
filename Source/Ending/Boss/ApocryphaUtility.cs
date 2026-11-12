@@ -98,6 +98,115 @@ namespace VVRace
             return PawnsArrivalModeDefOf.EdgeWalkIn.Worker.CanUseOnMap(map);
         }
 
+        // 부술 수 있는 구조물은 지나갈 수 있다고 보고 도달 여부를 본다.
+        // 거짓이면 깊은 물·용암 같은 통행 불가 지형(또는 부술 수 없는 건물)으로 끊긴 것이라 돌파로는 갈 수 없다.
+        public static bool CanBreachReach(Map map, IntVec3 from, LocalTargetInfo target)
+        {
+            return map.reachability.CanReach(from, target, PathEndMode.Touch, TraverseParms.For(TraverseMode.PassAllDestroyableThings));
+        }
+
+        // 가장자리에 설 칸이 전혀 없는 맵(가장자리가 모두 깊은 물인 섬 등)에서는 찬탈 대상과 이어진 땅에서 가장 먼 칸에 내려앉는다.
+        // 걸어서 닿는 칸을 우선하고, 없으면 부수고 닿을 수 있는 칸을 쓴다. 진공 전투는 다루지 않으므로 우주 맵은 제외한다.
+        public static bool TryFindInnerEntryCell(Map map, Thing target, out IntVec3 cell)
+        {
+            cell = IntVec3.Invalid;
+            if (map == null || target == null) { return false; }
+            if (map.Biome != null && map.Biome.inVacuum) { return false; }
+            if (map.Tile.Valid && map.Tile.LayerDef != null && map.Tile.LayerDef.isSpace) { return false; }
+
+            return TryFindFarthestLinkedCell(map, target, passDestroyable: false, out cell)
+                || TryFindFarthestLinkedCell(map, target, passDestroyable: true, out cell);
+        }
+
+        private static bool TryFindFarthestLinkedCell(Map map, Thing target, bool passDestroyable, out IntVec3 cell)
+        {
+            var rect = StealTargetRect(map, target);
+            var center = rect.CenterCell;
+            var best = IntVec3.Invalid;
+            var bestOpen = false;
+            var bestDistance = -1;
+            System.Action<IntVec3> processor = c =>
+            {
+                if (rect.Contains(c) || !c.Standable(map) || c.Fogged(map)) { return; }
+
+                // 가장자리 진입 칸처럼 지붕 없는 칸을 우선한다.
+                var open = !c.Roofed(map);
+                if (bestOpen && !open) { return; }
+
+                var distance = c.DistanceToSquared(center);
+                if ((open && !bestOpen) || distance > bestDistance)
+                {
+                    best = c;
+                    bestOpen = open;
+                    bestDistance = distance;
+                }
+            };
+            FloodFromStealTarget(map, rect, passDestroyable, processor);
+
+            cell = best;
+            return cell.IsValid;
+        }
+
+        // 지형에 막혀 찬탈 대상까지 갈 수 없을 때 건너뛸 칸. 대상과 이어진 땅에서 보스에게 가장 가까운 칸(막 건너온 물가)을 고른다.
+        // 벽 안쪽까지 건너뛰지 않으므로 그 뒤의 구조물은 평소처럼 돌파한다. 도착하자마자 찬탈하지 않도록 찬탈 사거리 밖을 우선한다.
+        public static bool TryFindSkipCell(Map map, Thing target, IntVec3 from, float stealRange, out IntVec3 cell)
+        {
+            var rect = StealTargetRect(map, target);
+            var center = rect.CenterCell;
+            var best = IntVec3.Invalid;
+            var bestOutside = false;
+            var bestDistance = int.MaxValue;
+            System.Action<IntVec3> processor = c =>
+            {
+                if (rect.Contains(c) || !c.Standable(map) || c.Fogged(map)) { return; }
+
+                var outside = !c.InHorDistOf(center, stealRange);
+                if (bestOutside && !outside) { return; }
+
+                var distance = c.DistanceToSquared(from);
+                if ((outside && !bestOutside) || distance < bestDistance)
+                {
+                    best = c;
+                    bestOutside = outside;
+                    bestDistance = distance;
+                }
+            };
+            FloodFromStealTarget(map, rect, passDestroyable: true, processor);
+
+            cell = best;
+            return cell.IsValid;
+        }
+
+        private static CellRect StealTargetRect(Map map, Thing target)
+        {
+            return target.Spawned && target.Map == map ? target.OccupiedRect() : CellRect.SingleCell(target.PositionHeld);
+        }
+
+        // 찬탈 대상이 차지한 칸에서부터 이어진 칸을 훑는다. 통과 규칙은 바닐라 PassAllDestroyableThings 도달 판정과 같아서
+        // 걸을 수 있는 칸과 (passDestroyable이면) 부술 수 있는 구조물이 선 칸을 지나고, 통행 불가 지형은 넘지 못한다.
+        // processor 안에서 도달 판정·안개 해제처럼 홍수 채우기를 쓰는 호출을 하면 안 된다.
+        private static void FloodFromStealTarget(Map map, CellRect rect, bool passDestroyable, System.Action<IntVec3> processor)
+        {
+            var roots = new List<IntVec3>();
+            foreach (var root in rect)
+            {
+                if (root.InBounds(map)) { roots.Add(root); }
+            }
+
+            if (roots.Count == 0) { return; }
+
+            System.Predicate<IntVec3> passCheck = c =>
+            {
+                if (c.WalkableByNormal(map)) { return true; }
+                if (!passDestroyable) { return false; }
+
+                var edifice = c.GetEdifice(map);
+                return edifice != null && PathUtility.IsDestroyable(edifice);
+            };
+
+            map.floodFiller.FloodFill(IntVec3.Invalid, passCheck, processor, int.MaxValue, false, roots);
+        }
+
         public static Pawn GenerateApocrypha(Map map)
         {
             var boss = PawnGenerator.GeneratePawn(new PawnGenerationRequest(

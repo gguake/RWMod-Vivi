@@ -58,7 +58,9 @@ namespace VVRace
                 return false;
             }
 
-            if (!Def.startsEndingQuest && !Def.completesEndingQuest && EverflowerRitualRules.IsBlockedByEnding(compEverflower.Everflower))
+            if (!Def.startsEndingQuest && !Def.completesEndingQuest
+                && EverflowerRitualRules.IsBlockedByEnding(compEverflower.Everflower)
+                && !EverflowerRitualRules.IsAttunementAllowedDuringEnding(parent))
             {
                 return LocalizeString_Etc.VV_FailReason_EndingInProgress.Translate();
             }

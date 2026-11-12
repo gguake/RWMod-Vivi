@@ -151,15 +151,8 @@ namespace VVRace
                 return;
             }
 
-            var fireTick = Find.TickManager.TicksGame + report.SettleDelayTicks;
-            var parms = new IncidentParms
-            {
-                target = lure.Map,
-                faction = _faction,
-                forced = true,
-            };
-            Find.Storyteller.incidentQueue.Add(VVIncidentDefOf.VV_ViviNestSettlers, fireTick, parms);
-            lure.Notify_SettlersQueued(fireTick);
+            // 정착대는 이 시각이 지나면 유인통이 직접 부른다(Building_ViviLure.FireSettlers). 바닐라 예약 큐는 발동 판정에서 떨어진 예약을 알리지 않고 지운다.
+            lure.Notify_SettlersScheduled(Find.TickManager.TicksGame + report.SettleDelayTicks);
 
             Messages.Message(LocalizeString_Message.VV_Message_ViviLureScoutsSatisfied.Translate(), lure, MessageTypeDefOf.PositiveEvent);
         }

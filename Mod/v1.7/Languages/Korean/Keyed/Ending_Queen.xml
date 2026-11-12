@@ -13,7 +13,7 @@
 
 <!-- 생명 공명 -->
 <VV_Letter_QueenLifeResonanceLabel>생명 공명: {PAWN_labelShort}</VV_Letter_QueenLifeResonanceLabel>
-<VV_Letter_QueenLifeResonance>{PAWN_nameDef}(이)가 금빛 꽃잎으로 흩어져 영원꽃에 깃들었습니다. {TIME} 뒤 다시 깨어납니다.</VV_Letter_QueenLifeResonance>
+<VV_Letter_QueenLifeResonance>목숨을 잃을 뻔한 {PAWN_nameDef}(이)가 금빛 꽃잎으로 흩어져 영원꽃에 깃들었습니다. 상처는 모두 회복되었으며 {TIME} 뒤 다시 깨어납니다.</VV_Letter_QueenLifeResonance>
 <VV_Message_QueenReborn>{PAWN_labelShort}(이)가 영원꽃 앞에서 다시 깨어났습니다.</VV_Message_QueenReborn>
 <VV_Inspector_QueenRebirth>{PAWN_labelShort} 깨어나기까지: {TIME}</VV_Inspector_QueenRebirth>
 

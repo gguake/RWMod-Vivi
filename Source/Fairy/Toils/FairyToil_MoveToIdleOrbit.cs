@@ -103,9 +103,13 @@ namespace VVRace
 
         public override void Cancel()
         {
-            // 공격 토일이 끝난 같은 틱에는 아직 공격 상태이므로 취소될 때 대기 상태로 되돌린다.
             var fairy = Fairy;
-            if (fairy != null && fairy.State == FairyState.Attacking)
+            if (fairy == null) { return; }
+
+            // 공격 토일이 끝난 같은 틱에는 아직 공격 상태이므로 취소될 때 대기 상태로 되돌린다.
+            // 순간이동 도착 대기는 이 토일의 카운트다운만 풀 수 있어서, 대기 중에 작업이 끝나면 다음 작업의 이동 토일이
+            // 대기 상태를 영원히 기다린다. 위치와 연출은 TeleportTo에서 이미 도착 칸으로 끝났으므로 상태만 되돌린다.
+            if (fairy.State == FairyState.Attacking || (fairy.State == FairyState.Teleporting && teleportTicksLeft > 0))
             {
                 fairy.EnterIdle();
             }

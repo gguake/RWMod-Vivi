@@ -72,6 +72,7 @@
         public const string VV_Inspector_LureConditionSeason = nameof(VV_Inspector_LureConditionSeason);
         public const string VV_Inspector_LureConditionWeather = nameof(VV_Inspector_LureConditionWeather);
         public const string VV_Inspector_LureConditionUnreachable = nameof(VV_Inspector_LureConditionUnreachable);
+        public const string VV_Inspector_LureConditionIncidentBlocked = nameof(VV_Inspector_LureConditionIncidentBlocked);
         public const string VV_Inspector_LureMissingFlowers = nameof(VV_Inspector_LureMissingFlowers);
         public const string VV_Inspector_LureMissingRoom = nameof(VV_Inspector_LureMissingRoom);
         public const string VV_Inspector_LureMissingFertileSoil = nameof(VV_Inspector_LureMissingFertileSoil);

@@ -13,7 +13,7 @@
 
 <!-- 생명 공명 -->
 <VV_Letter_QueenLifeResonanceLabel>Life resonance: {PAWN_labelShort}</VV_Letter_QueenLifeResonanceLabel>
-<VV_Letter_QueenLifeResonance>{PAWN_nameDef} scattered into golden petals and returned to the everflower. She will awaken in {TIME}.</VV_Letter_QueenLifeResonance>
+<VV_Letter_QueenLifeResonance>On the verge of death, {PAWN_nameDef} scattered into golden petals and came to rest within the everflower. Her wounds have healed, and she will awaken in {TIME}.</VV_Letter_QueenLifeResonance>
 <VV_Message_QueenReborn>{PAWN_labelShort} has awakened before the everflower.</VV_Message_QueenReborn>
 <VV_Inspector_QueenRebirth>{PAWN_labelShort} awakens in: {TIME}</VV_Inspector_QueenRebirth>
 

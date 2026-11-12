@@ -20,6 +20,7 @@ namespace VVRace
         internal const int ErrorKeyAltarPulse = 0x5645_4E20;
         internal const int ErrorKeyAssimilationTick = 0x5645_4E30;
         internal const int ErrorKeyAmberCommsOption = 0x5645_4E40;
+        internal const int ErrorKeyQueenDeathIntercept = 0x5645_4E50;
 
         private static readonly FieldInfo QueuedIncidentsField = AccessTools.Field(typeof(IncidentQueue), "queuedIncidents");
 

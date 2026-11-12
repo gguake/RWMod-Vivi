@@ -33,7 +33,8 @@ namespace VVRace
             return faction;
         }
 
-        // 임시 세력은 소속 폰이 모두 떠나면 바닐라가 지우므로, 유인통·예약된 정착대가 들고 있는 동안은 붙잡아 둔다.
+        // 임시 세력은 소속 폰이 모두 떠나면 바닐라가 지우므로, 유인통이 들고 있는 동안(정찰 중·정착대 대기)은 붙잡아 둔다.
+        // 정착대는 유인통이 직접 부르므로(Building_ViviLure.FireSettlers) 유인통이 없어지면 세력도 놓는다.
         public static bool IsFactionReservedByBeekeeping(Faction faction)
         {
             if (!faction.IsWanderingViviFaction()) { return false; }
@@ -42,16 +43,6 @@ namespace VVRace
             for (int i = 0; i < maps.Count; ++i)
             {
                 if (FindReservingLure(maps[i], faction) != null)
-                {
-                    return true;
-                }
-            }
-
-            // 발동 시각이 된 예약은 지금 처리 중이므로(불발이면 세력을 놓아 준다) 붙잡지 않는다.
-            var ticks = Find.TickManager.TicksGame;
-            foreach (QueuedIncident queued in Find.Storyteller.incidentQueue)
-            {
-                if (IsQueuedSettlers(queued, faction) && queued.FireTick > ticks)
                 {
                     return true;
                 }
@@ -73,13 +64,6 @@ namespace VVRace
             }
 
             return null;
-        }
-
-        // 그 세력의 정착대 예약 인시던트인지
-        public static bool IsQueuedSettlers(QueuedIncident queued, Faction faction)
-        {
-            var firing = queued.FiringIncident;
-            return firing?.def == VVIncidentDefOf.VV_ViviNestSettlers && firing.parms?.faction == faction;
         }
 
         // 붙잡기를 푼 세력은 다음 퇴장 이벤트가 없으면 남아 있으므로 바닐라 삭제 검사를 한 번 돌려 준다.

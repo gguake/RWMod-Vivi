@@ -44,7 +44,9 @@ namespace VVRace
 
         public bool Active => _manaActivated;
 
-        public bool IsUnlimited => parent.MapHeld.weatherManager.curWeather == VVWeatherDefOf.VV_GoldenBloomMist;
+        // 〈황금빛 꽃안개〉 날씨인 맵에 있는 마나 물건은 마나가 늘 가득 차 있고 써도 줄지 않는다.
+        // 스폰 전이거나 캐러밴·월드 폰 소지품, 정착지 상인 재고처럼 어느 맵에도 속하지 않은 물건은 MapHeld가 null이므로 무제한이 아니다.
+        public bool IsUnlimited => parent.MapHeld is Map map && map.weatherManager.curWeather == VVWeatherDefOf.VV_GoldenBloomMist;
 
         public float Stored
         {
