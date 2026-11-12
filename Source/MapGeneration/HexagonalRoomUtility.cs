@@ -122,12 +122,6 @@ namespace VVRace
             }
         }
 
-        public static IEnumerable<IntVec2> HexagonalHorizontalNeighbors(this IntVec2 coord)
-        {
-            yield return coord + new IntVec2(1, 0);
-            yield return coord + new IntVec2(-1, 0);
-        }
-
         public static readonly IntVec2 RoomCellSize = new IntVec2(9, 11);
         public static readonly IntVec3 XBasis = new IntVec3(8, 0, 0);         // = (1, 0)
         public static readonly IntVec3 ZBasis = new IntVec3(4, 0, -8);         // = (0, 1)

@@ -116,8 +116,6 @@ namespace VVRace
 
         public bool IsAwaitingCoronation => Stage == ViviEndingStage.Coronation;
 
-        public bool IsBossPhase2 => Stage == ViviEndingStage.Boss && BossComp != null && BossComp.Phase == ApocryphaPhase.Unbound;
-
         public bool IsAnchor(ArcanePlant_Everflower everflower) => everflower != null && everflower == _anchor;
 
         public bool ShouldSuppressThreats(Map map)

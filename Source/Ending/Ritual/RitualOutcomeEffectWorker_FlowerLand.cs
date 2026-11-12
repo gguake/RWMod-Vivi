@@ -11,19 +11,15 @@ namespace VVRace
         public EffecterDef areaEffecter;
     }
 
-    public class RitualOutcomeEffectWorker_FlowerLand : RitualOutcomeEffectWorker_FromQuality
+    public class RitualOutcomeEffectWorker_FlowerLand : RitualOutcomeEffectWorker_EndingEverflower
     {
         public RitualOutcomeEffectDef_FlowerLand Def => (RitualOutcomeEffectDef_FlowerLand)def;
 
         public RitualOutcomeEffectWorker_FlowerLand() { }
         public RitualOutcomeEffectWorker_FlowerLand(RitualOutcomeEffectDef def) : base(def) { }
 
-        public override void Apply(float progress, Dictionary<Pawn, int> totalPresence, LordJob_Ritual jobRitual)
+        protected override void Apply(ArcanePlant_Everflower everflower, float quality, LordJob_Ritual jobRitual)
         {
-            var quality = GetQuality(jobRitual, progress);
-            var everflower = jobRitual.selectedTarget.Thing as ArcanePlant_Everflower;
-            if (everflower == null) { return; }
-
             var cell = everflower.ConsumeSelectedFlowerLandCell();
             var map = everflower.MapHeld;
             if (map != null && cell.HasValue && cell.Value.InBounds(map))

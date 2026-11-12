@@ -4,7 +4,7 @@ using Verse;
 
 namespace VVRace
 {
-    public class RitualOutcomeEffectWorker_GrandAttunement : RitualOutcomeEffectWorker_FromQuality
+    public class RitualOutcomeEffectWorker_GrandAttunement : RitualOutcomeEffectWorker_EndingEverflower
     {
         public const int GrandAttunementLevel = 5;
         private const float CameraShakeMagnitude = 1.5f;
@@ -12,12 +12,8 @@ namespace VVRace
         public RitualOutcomeEffectWorker_GrandAttunement() { }
         public RitualOutcomeEffectWorker_GrandAttunement(RitualOutcomeEffectDef def) : base(def) { }
 
-        public override void Apply(float progress, Dictionary<Pawn, int> totalPresence, LordJob_Ritual jobRitual)
+        protected override void Apply(ArcanePlant_Everflower everflower, float quality, LordJob_Ritual jobRitual)
         {
-            var quality = GetQuality(jobRitual, progress);
-            var everflower = jobRitual.selectedTarget.Thing as ArcanePlant_Everflower;
-            if (everflower == null) { return; }
-
             var map = everflower.Map;
             var compEverflower = everflower.EverflowerComp;
 

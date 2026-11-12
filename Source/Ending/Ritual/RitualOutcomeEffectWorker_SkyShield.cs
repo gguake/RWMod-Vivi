@@ -11,19 +11,15 @@ namespace VVRace
         public SimpleCurve durationTicksByQuality;
     }
 
-    public class RitualOutcomeEffectWorker_SkyShield : RitualOutcomeEffectWorker_FromQuality
+    public class RitualOutcomeEffectWorker_SkyShield : RitualOutcomeEffectWorker_EndingEverflower
     {
         public RitualOutcomeEffectDef_SkyShield Def => (RitualOutcomeEffectDef_SkyShield)def;
 
         public RitualOutcomeEffectWorker_SkyShield() { }
         public RitualOutcomeEffectWorker_SkyShield(RitualOutcomeEffectDef def) : base(def) { }
 
-        public override void Apply(float progress, Dictionary<Pawn, int> totalPresence, LordJob_Ritual jobRitual)
+        protected override void Apply(ArcanePlant_Everflower everflower, float quality, LordJob_Ritual jobRitual)
         {
-            var quality = GetQuality(jobRitual, progress);
-            var everflower = jobRitual.selectedTarget.Thing as ArcanePlant_Everflower;
-            if (everflower == null) { return; }
-
             if (everflower.Spawned)
             {
                 RaiseShield(everflower, Mathf.RoundToInt(Def.durationTicksByQuality.Evaluate(quality)));

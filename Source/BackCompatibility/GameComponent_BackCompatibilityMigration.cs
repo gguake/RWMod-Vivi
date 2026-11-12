@@ -75,7 +75,6 @@ namespace VVRace
     public class GameComponent_BackCompatibilityMigration : GameComponent
     {
         private const int CollidedSlotCount = 2;
-        private const string PackageId = "gguake.race.vivi";
         private static readonly string[] FormerSubclassHairDefNames = { "VV_HairH", "VV_HairI" };
 
         private bool _hairTableRepaired;

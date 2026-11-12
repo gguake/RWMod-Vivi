@@ -16,15 +16,6 @@ namespace VVRace
                 (0, -4, Rot4.North),
             };
 
-        private static IList<(int xOffset, int zOffset)> _germinatorLayout
-            = new List<(int, int)>()
-            {
-                (-3, -2),
-                (-3, 1),
-                (2, -2),
-                (2, 1),
-            };
-
         public override void Resolve(ResolveParams resolveParams)
         {
             var center = resolveParams.rect.CenterCell;

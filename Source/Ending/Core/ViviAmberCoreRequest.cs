@@ -9,8 +9,6 @@ namespace VVRace
 
         private Quest _quest;
 
-        public Quest Quest => _quest;
-
         public bool IsQuestActive => _quest != null
             && (_quest.State == QuestState.NotYetAccepted || _quest.State == QuestState.Ongoing);
 

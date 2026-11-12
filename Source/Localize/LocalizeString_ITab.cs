@@ -5,9 +5,6 @@ namespace VVRace
         public const string VV_ITab_GatherWorkerTable_TabLabel = nameof(VV_ITab_GatherWorkerTable_TabLabel);
         public const string VV_ITab_GatherWorkerTable_GatherRadiusSlider = nameof(VV_ITab_GatherWorkerTable_GatherRadiusSlider);
 
-        public const string VV_ITab_EverflowerFairies_Label = nameof(VV_ITab_EverflowerFairies_Label);
-        public const string VV_ITab_EverflowerFairies_ItemKey = nameof(VV_ITab_EverflowerFairies_ItemKey);
-
         public const string VV_ITab_ArcanePlant_TabLabel = nameof(VV_ITab_ArcanePlant_TabLabel);
         public const string VV_ITab_ArcanePlant_SectionFunction = nameof(VV_ITab_ArcanePlant_SectionFunction);
         public const string VV_ITab_ArcanePlant_SectionMana = nameof(VV_ITab_ArcanePlant_SectionMana);

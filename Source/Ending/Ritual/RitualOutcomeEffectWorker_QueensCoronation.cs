@@ -4,17 +4,13 @@ using Verse;
 
 namespace VVRace
 {
-    public class RitualOutcomeEffectWorker_QueensCoronation : RitualOutcomeEffectWorker_FromQuality
+    public class RitualOutcomeEffectWorker_QueensCoronation : RitualOutcomeEffectWorker_EndingEverflower
     {
         public RitualOutcomeEffectWorker_QueensCoronation() { }
         public RitualOutcomeEffectWorker_QueensCoronation(RitualOutcomeEffectDef def) : base(def) { }
 
-        public override void Apply(float progress, Dictionary<Pawn, int> totalPresence, LordJob_Ritual jobRitual)
+        protected override void Apply(ArcanePlant_Everflower everflower, float quality, LordJob_Ritual jobRitual)
         {
-            var quality = GetQuality(jobRitual, progress);
-            var everflower = jobRitual.selectedTarget.Thing as ArcanePlant_Everflower;
-            if (everflower == null) { return; }
-
             var queen = jobRitual.PawnWithRole("resonator");
             if (queen != null && queen.Spawned)
             {

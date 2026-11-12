@@ -3,21 +3,16 @@
     public static class LocalizeString_Etc
     {
         public const string VV_JobFailReasonNoHarvestablePlants = nameof(VV_JobFailReasonNoHarvestablePlants);
-        public const string VV_JobFailReasonNoHarvestablePollenFilths = nameof(VV_JobFailReasonNoHarvestablePollenFilths);
-        public const string VV_JobFailReasonNoIngredients = nameof(VV_JobFailReasonNoIngredients);
-        public const string VV_JobFailReasonNotVivi = nameof(VV_JobFailReasonNotVivi);
 
         public const string VV_AbilityDisabledNoFood = nameof(VV_AbilityDisabledNoFood);
         public const string VV_AbilityDisabledNoBodyPart = nameof(VV_AbilityDisabledNoBodyPart);
 
         public const string VV_AbilityDisabledNoFairySlot = nameof(VV_AbilityDisabledNoFairySlot);
         public const string VV_AbilityDisabledNoMaterializedFairies = nameof(VV_AbilityDisabledNoMaterializedFairies);
-        public const string VV_AbilityFailNoMana = nameof(VV_AbilityFailNoMana);
         public const string VV_AbilityDisabledNotEnoughFairies = nameof(VV_AbilityDisabledNotEnoughFairies);
         public const string VV_AbilityFailNotAlly = nameof(VV_AbilityFailNotAlly);
         public const string VV_AbilityFailAlreadyGuarded = nameof(VV_AbilityFailAlreadyGuarded);
         public const string VV_AbilityFailNotHostile = nameof(VV_AbilityFailNotHostile);
-        public const string VV_AbilityFailAlreadyConcentrated = nameof(VV_AbilityFailAlreadyConcentrated);
         public const string VV_Command_ReleaseGuard = nameof(VV_Command_ReleaseGuard);
         public const string VV_Command_ReleaseGuardDesc = nameof(VV_Command_ReleaseGuardDesc);
 
@@ -72,7 +67,6 @@
         public const string VV_Thing_SeedDesc = nameof(VV_Thing_SeedDesc);
         public const string VV_Thing_Seedling = nameof(VV_Thing_Seedling);
 
-        public const string VV_FailReason_EverflowerOnPot = nameof(VV_FailReason_EverflowerOnPot);
         public const string VV_FailReason_RitualCooldown = nameof(VV_FailReason_RitualCooldown);
 
         public const string VV_FailReason_HasNoFairyVivi = nameof(VV_FailReason_HasNoFairyVivi);

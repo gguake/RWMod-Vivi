@@ -6,7 +6,7 @@ using Verse;
 
 namespace VVRace
 {
-    public class RitualOutcomeEffectWorker_ReturnOfLife : RitualOutcomeEffectWorker_FromQuality
+    public class RitualOutcomeEffectWorker_ReturnOfLife : RitualOutcomeEffectWorker_EndingEverflower
     {
         private static readonly IntRange AncientGeneCount = new IntRange(4, 6);
         private const int AncientArchiteGeneCount = 1;
@@ -17,12 +17,8 @@ namespace VVRace
         public RitualOutcomeEffectWorker_ReturnOfLife() { }
         public RitualOutcomeEffectWorker_ReturnOfLife(RitualOutcomeEffectDef def) : base(def) { }
 
-        public override void Apply(float progress, Dictionary<Pawn, int> totalPresence, LordJob_Ritual jobRitual)
+        protected override void Apply(ArcanePlant_Everflower everflower, float quality, LordJob_Ritual jobRitual)
         {
-            var quality = GetQuality(jobRitual, progress);
-            var everflower = jobRitual.selectedTarget.Thing as ArcanePlant_Everflower;
-            if (everflower == null) { return; }
-
             var map = everflower.Map;
             Pawn ancient = null;
             if (map != null)

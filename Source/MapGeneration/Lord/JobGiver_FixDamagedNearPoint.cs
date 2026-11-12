@@ -52,22 +52,5 @@ namespace VVRace
             }
             return null;
         }
-
-        public static Predicate<Thing> BuildingValidator(Pawn pawn)
-        {
-            return delegate (Thing t)
-            {
-                if (((AttachableThing)t).parent is Pawn)
-                {
-                    return false;
-                }
-                if (!pawn.CanReserve(t))
-                {
-                    return false;
-                }
-
-                return (!pawn.WorkTagIsDisabled(WorkTags.Firefighting)) ? true : false;
-            };
-        }
     }
 }
