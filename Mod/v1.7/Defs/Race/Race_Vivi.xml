@@ -360,44 +360,11 @@
       </li>
 
       <li Class="RPEF.HumanlikeFlyExtension">
-        <animationData>
-          <HumanlikePreTeenager>
-            <animationNorth>VV_ViviFlyNorth</animationNorth>
-            <animationSouth>VV_ViviFlySouth</animationSouth>
-            <animationEast>VV_ViviFlyEast</animationEast>
-            <animationWest>VV_ViviFlyWest</animationWest>
-          </HumanlikePreTeenager>
-          <HumanlikePreTeenager_Vivi>
-            <animationNorth>VV_ViviFlyNorth</animationNorth>
-            <animationSouth>VV_ViviFlySouth</animationSouth>
-            <animationEast>VV_ViviFlyEast</animationEast>
-            <animationWest>VV_ViviFlyWest</animationWest>
-          </HumanlikePreTeenager_Vivi>
-          <HumanlikeTeenager>
-            <animationNorth>VV_ViviFlyNorth</animationNorth>
-            <animationSouth>VV_ViviFlySouth</animationSouth>
-            <animationEast>VV_ViviFlyEast</animationEast>
-            <animationWest>VV_ViviFlyWest</animationWest>
-          </HumanlikeTeenager>
-          <HumanlikeTeenager_Vivi>
-            <animationNorth>VV_ViviFlyNorth</animationNorth>
-            <animationSouth>VV_ViviFlySouth</animationSouth>
-            <animationEast>VV_ViviFlyEast</animationEast>
-            <animationWest>VV_ViviFlyWest</animationWest>
-          </HumanlikeTeenager_Vivi>
-          <HumanlikeAdult>
-            <animationNorth>VV_ViviFlyNorth</animationNorth>
-            <animationSouth>VV_ViviFlySouth</animationSouth>
-            <animationEast>VV_ViviFlyEast</animationEast>
-            <animationWest>VV_ViviFlyWest</animationWest>
-          </HumanlikeAdult>
-          <HumanlikeAdult_Vivi>
-            <animationNorth>VV_ViviFlyNorth</animationNorth>
-            <animationSouth>VV_ViviFlySouth</animationSouth>
-            <animationEast>VV_ViviFlyEast</animationEast>
-            <animationWest>VV_ViviFlyWest</animationWest>
-          </HumanlikeAdult_Vivi>
-        </animationData>
+        <minAge>12</minAge>
+        <animationNorth>VV_ViviFlyNorth</animationNorth>
+        <animationSouth>VV_ViviFlySouth</animationSouth>
+        <animationEast>VV_ViviFlyEast</animationEast>
+        <animationWest>VV_ViviFlyWest</animationWest>
         
         <requireBodyParts>
           <li>left wing</li>
