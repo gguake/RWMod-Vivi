@@ -613,7 +613,7 @@ namespace VVRace
         {
             var spawnedCount = 0;
             var nearCells = GenRadial.RadialCellsAround(parent.Position, 5f, false)
-                .Where(c => ArcanePlantUtility.CanPlaceArcanePlantToCell(parent.Map, c, VVThingDefOf.VV_ArcanePlantSeedling)).ToList();
+                .Where(c => c.GetPlant(parent.Map) == null && ArcanePlantUtility.CanPlaceArcanePlantToCell(parent.Map, c, VVThingDefOf.VV_ArcanePlantSeedling)).ToList();
 
             var count = Mathf.Min(nearCells.Count(), Rand.Range(2, 5));
             for (int i = 0; i < count; ++i)
