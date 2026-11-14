@@ -30,6 +30,9 @@ namespace VVRace
     {
         private static readonly Texture2D CollectIcon = ContentFinder<Texture2D>.Get("UI/Commands/VV_GatherScent");
 
+        // 꽃가루 스택을 필요한 양만큼 나눠 예약할 때 쓰는 동시 예약자 상한(바닐라 음식 예약과 같은 값).
+        public const int PollenReserveMaxPawns = 10;
+
         private int pollenLoaded;
         private ThingDef scentFlower;
         private int remainingSprays;
@@ -73,11 +76,11 @@ namespace VVRace
             }
         }
 
-        public void LoadPollenFrom(Thing pollen)
+        public void LoadPollenFrom(Thing pollen, int maxCount)
         {
             if (pollen == null || pollen.def != Props.pollenDef) { return; }
 
-            var amount = Mathf.Min(pollen.stackCount, PollenNeeded);
+            var amount = Mathf.Min(Mathf.Min(pollen.stackCount, maxCount), PollenNeeded);
             if (amount <= 0) { return; }
 
             pollen.SplitOff(amount).Destroy();
@@ -187,8 +190,9 @@ namespace VVRace
                     var job = JobMaker.MakeJob(VVJobDefOf.VV_CollectFloralScent, target.Thing);
                     if (!PollenCharged)
                     {
-                        var pollen = FindPollen(wearer, PollenNeeded);
-                        if (pollen.NullOrEmpty())
+                        var pollen = new List<LocalTargetInfo>();
+                        var counts = new List<int>();
+                        if (!TryFindPollen(wearer, PollenNeeded, pollen, counts))
                         {
                             Messages.Message(
                                 LocalizeString_Scent.VV_Scent_NotEnoughPollen.Translate(
@@ -197,8 +201,8 @@ namespace VVRace
                             return;
                         }
 
-                        job.targetQueueB = pollen.Select(thing => new LocalTargetInfo(thing)).ToList();
-                        job.count = PollenNeeded;
+                        job.targetQueueB = pollen;
+                        job.countQueue = counts;
                     }
 
                     wearer.jobs.TryTakeOrderedJob(job);
@@ -238,10 +242,31 @@ namespace VVRace
             return true;
         }
 
-        private List<Thing> FindPollen(Pawn pawn, int needed)
+        // 바닐라 RefuelWorkGiverUtility.FindEnoughReservableThings는 스택 전체 예약만 검사해서,
+        // 한 폰이 채집하는 동안 같은 스택의 남은 꽃가루를 다른 폰이 쓰지 못한다.
+        // 음식처럼 필요한 양만 나눠 예약할 수 있도록 스택별로 가져갈 양을 함께 구한다.
+        private bool TryFindPollen(Pawn pawn, int needed, List<LocalTargetInfo> outTargets, List<int> outCounts)
         {
-            return RefuelWorkGiverUtility.FindEnoughReservableThings(
-                pawn, pawn.Position, new IntRange(needed, needed), t => t.def == Props.pollenDef);
+            var candidates = new List<Thing>(pawn.Map.listerThings.ThingsOfDef(Props.pollenDef));
+            candidates.SortBy(thing => thing.Position.DistanceToSquared(pawn.Position));
+
+            var remaining = needed;
+            for (int i = 0; i < candidates.Count && remaining > 0; ++i)
+            {
+                var thing = candidates[i];
+                if (thing.Fogged() || thing.IsForbidden(pawn)) { continue; }
+
+                var available = pawn.Map.reservationManager.CanReserveStack(pawn, thing, PollenReserveMaxPawns);
+                if (available <= 0) { continue; }
+                if (!pawn.CanReach(thing, PathEndMode.ClosestTouch, Danger.Deadly)) { continue; }
+
+                var count = Mathf.Min(available, remaining);
+                outTargets.Add(thing);
+                outCounts.Add(count);
+                remaining -= count;
+            }
+
+            return remaining <= 0;
         }
 
         public void NotifyScentColorChanged()
