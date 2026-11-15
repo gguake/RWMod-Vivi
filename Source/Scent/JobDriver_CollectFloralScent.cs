@@ -35,10 +35,16 @@ namespace VVRace
 
             // 스택 전체가 아니라 가져갈 양만 예약해 남은 꽃가루를 다른 폰이 쓸 수 있게 한다.
             var pollenQueue = job.GetTargetQueue(PollenIndex);
+            var countQueue = job.countQueue;
             for (int i = 0; i < pollenQueue.Count; ++i)
             {
+                // 스택별 수량을 저장하기 전의 세이브에서 대기열에 있던 작업은 countQueue가 없고 job.count에 필요한 총량이 들어 있다.
+                var count = countQueue != null && i < countQueue.Count
+                    ? countQueue[i]
+                    : System.Math.Min(job.count, pollenQueue[i].Thing?.stackCount ?? job.count);
+
                 pawn.Reserve(
-                    pollenQueue[i], job, CompScentBottle.PollenReserveMaxPawns, job.countQueue[i], null, errorOnFailed: false);
+                    pollenQueue[i], job, CompScentBottle.PollenReserveMaxPawns, count, null, errorOnFailed: false);
             }
 
             return true;
