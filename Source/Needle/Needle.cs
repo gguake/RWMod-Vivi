@@ -245,7 +245,7 @@ namespace VVRace
 
                 if (_attackedCounter.TryGetValue(hitThing.thingIDNumber, out var count))
                 {
-                    _attackedCounter[hitThing.thingIDNumber] = count++;
+                    _attackedCounter[hitThing.thingIDNumber] = count + 1;
                 }
                 else
                 {

@@ -421,6 +421,30 @@ namespace VVRace
             {
                 DefGenerator.AddImpliedDef(def, hotReload);
             }
+
+            AddWaterOrLightAffordance();
+        }
+
+        // Patches/TerrainAffordance.xml은 XML로 정의된 지형에만 적용된다.
+        // 색상 카펫·석재 지형처럼 코드로 생성되는 지형에도 같은 규칙(Light 또는 ShallowWater면 VV_WaterOrLight)을 적용한다.
+        private static void AddWaterOrLightAffordance()
+        {
+            var waterOrLight = DefDatabase<TerrainAffordanceDef>.GetNamedSilentFail("VV_WaterOrLight");
+            if (waterOrLight == null) { return; }
+
+            var light = DefDatabase<TerrainAffordanceDef>.GetNamedSilentFail("Light");
+            var shallowWater = DefDatabase<TerrainAffordanceDef>.GetNamedSilentFail("ShallowWater");
+
+            foreach (var terrain in DefDatabase<TerrainDef>.AllDefsListForReading)
+            {
+                var affordances = terrain.affordances;
+                if (affordances == null || affordances.Contains(waterOrLight)) { continue; }
+
+                if ((light != null && affordances.Contains(light)) || (shallowWater != null && affordances.Contains(shallowWater)))
+                {
+                    affordances.Add(waterOrLight);
+                }
+            }
         }
 
         private static IEnumerable<CodeInstruction> GenLeaving_DoLeavingsFor_Transpiler(IEnumerable<CodeInstruction> codeInstructions, ILGenerator ilGenerator)

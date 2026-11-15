@@ -146,9 +146,10 @@ namespace VVRace
 
             DestroyAllFairies();
 
-            if (mode != DestroyMode.WillReplace)
+            // 사망(KillFinalize)이면 바로 뒤에 불리는 Notify_Killed가 요정 비비를 사망 처리한다. 여기서 등록을 풀면 그 목록이 비어 버린다.
+            if (mode != DestroyMode.WillReplace && mode != DestroyMode.KillFinalize)
             {
-                GameComponent_Mana.Of(Current.Game).UnregisterAllFairy((Pawn)parent);
+                ReleaseFairyficatedPawns(kill: false, dinfo: null);
             }
         }
 
@@ -173,12 +174,46 @@ namespace VVRace
             base.Notify_Killed(prevMap, dinfo);
 
             DestroyAllFairies();
+            ReleaseFairyficatedPawns(kill: true, dinfo);
+        }
 
+        // 로열이 사라질 때 귀속된 요정 비비를 함께 정리한다. 로열이 죽었으면 함께 죽이고, 그 밖의 소멸이면 조용히 함께 소멸시킨다.
+        private void ReleaseFairyficatedPawns(bool kill, DamageInfo? dinfo)
+        {
             var gameCompMana = GameComponent_Mana.Of(Current.Game);
+            if (gameCompMana == null) { return; }
+
             // Kill의 사망 처리 훅이 등록 목록을 바꿀 수 있으므로 지연 열거로 순회하지 않는다.
             foreach (var fairyPawn in gameCompMana.GetFairyficatedPawns((Pawn)parent).ToList())
             {
-                fairyPawn.Kill(dinfo);
+                // 파괴된 폰은 월드 폰 목록이 저장하므로, 등록을 먼저 풀어 두 곳에 저장되지 않게 한다.
+                gameCompMana.UnregisterFairy(fairyPawn);
+                if (fairyPawn == null || fairyPawn.Destroyed) { continue; }
+
+                try
+                {
+                    if (kill && !fairyPawn.Dead)
+                    {
+                        fairyPawn.Kill(dinfo);
+
+                        // 맵에 없는 폰이 죽으면 어디에도 놓이지 않는 시체가 만들어진다.
+                        var corpse = fairyPawn.Corpse;
+                        if (corpse != null && !corpse.Spawned && !corpse.Destroyed)
+                        {
+                            corpse.Destroy();
+                        }
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                    Log.Error($"[ViViRace] failed to kill fairyficated vivi {fairyPawn.ToStringSafe()} of {parent.ToStringSafe()}: {ex}");
+                }
+
+                // 살아 있는 채로 월드에 넘기면 다른 세력으로 편입되므로, 파괴한 뒤 넘어가게 한다.
+                if (!fairyPawn.Destroyed)
+                {
+                    fairyPawn.Destroy();
+                }
             }
 
             gameCompMana.UnregisterAllFairy((Pawn)parent);

@@ -41,6 +41,7 @@ namespace VVRace
             Scribe_Values.Look(ref damageAmount, "damageAmount");
 
             Scribe_Values.Look(ref friendlyFireSafeDistance, "friendlyFireSafeDistance");
+            Scribe_Values.Look(ref heatPerCell, "heatPerCell");
 
             Scribe_Values.Look(ref range, "range");
             Scribe_Values.Look(ref propagationSpeed, "propagationSpeed");
@@ -51,6 +52,19 @@ namespace VVRace
             Scribe_Values.Look(ref _index, "index");
 
             Scribe_Collections.Look(ref _damagedTargets, "damagedTargets", LookMode.Reference);
+
+            if (Scribe.mode == LoadSaveMode.PostLoadInit)
+            {
+                // 저장 뒤 파괴된 대상은 null로 불러와진다.
+                if (_damagedTargets == null)
+                {
+                    _damagedTargets = new HashSet<Thing>();
+                }
+                else
+                {
+                    _damagedTargets.RemoveWhere(t => t == null);
+                }
+            }
         }
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
@@ -93,7 +107,12 @@ namespace VVRace
                             fireAttachment.Destroy();
                         }
 
-                        if (thing is IAttackTarget && !(distanceSqr <= Mathf.Pow(friendlyFireSafeDistance + 0.05f, 2f) && !caster.HostileTo(thing)))
+                        // 피해 대상이 될 수 있는 것만 기록한다. 모트처럼 저장되지 않는 것까지 넣으면 불러올 때 참조를 찾지 못한다.
+                        if (!(thing is IAttackTarget)) { continue; }
+
+                        // 시전자가 파괴된 뒤 불러오면 참조가 null이다. 파괴된 시전자와 같게(안전 거리 안은 모두 보호) 다룬다.
+                        var protectedBySafeDistance = distanceSqr <= Mathf.Pow(friendlyFireSafeDistance + 0.05f, 2f) && (caster == null || !caster.HostileTo(thing));
+                        if (!protectedBySafeDistance)
                         {
                             var log = new BattleLogEntry_RangedImpact(caster, thing, thing, weaponDef, null, null);
                             var angleFlat = (cell - _initalPosition).AngleFlat;
@@ -111,7 +130,11 @@ namespace VVRace
                                 intendedTarget);
 
                             thing.TakeDamage(dinfo).AssociateWithLog(log);
-                            if (thing.Destroyed) { j--; }
+                            if (thing.Destroyed)
+                            {
+                                j--;
+                                continue;
+                            }
                         }
 
                         _damagedTargets.Add(thing);

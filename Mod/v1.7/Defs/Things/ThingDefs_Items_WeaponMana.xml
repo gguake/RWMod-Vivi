@@ -516,8 +516,6 @@
       <stoppingPower>1</stoppingPower>
       <speed>45</speed>
       <ai_IsIncendiary>true</ai_IsIncendiary>
-      <filth>Filth_Ash</filth>
-      <filthCount>1</filthCount>
       <landedEffecter>VV_Impact_BulletLava</landedEffecter>
     </projectile>
     <comps>

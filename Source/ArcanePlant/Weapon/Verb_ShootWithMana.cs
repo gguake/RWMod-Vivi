@@ -106,7 +106,7 @@ namespace VVRace
             if (!HasSufficientMana && !ManaWeaponCastState.AppliesTo(this) && showMessages)
             {
                 var manaCost = (int)(EquipmentSource?.GetStatValue(VVStatDefOf.VV_RangedWeapon_ManaCost) ?? 0);
-                Messages.Message($"ManaNotEnough".Translate(manaCost.Named("MANACOST")), new LookTargets(caster), MessageTypeDefOf.RejectInput, historical: false);
+                Messages.Message(LocalizeString_Message.VV_Message_ManaNotEnough.Translate(manaCost.Named("MANACOST")), new LookTargets(caster), MessageTypeDefOf.RejectInput, historical: false);
             }
 
             return true;

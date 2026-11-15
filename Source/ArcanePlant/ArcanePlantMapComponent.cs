@@ -50,7 +50,8 @@ namespace VVRace
         }
         private Dictionary<IntVec3, ArcanePlantPot> _arcanePlantPots;
 
-        public bool CheckVaccumResistance(IntVec3 cell) => _plantVaccumOverrideGrid[cell] > 0;
+        // IntGrid는 범위를 검사하지 않아, 맵 밖 셀은 예외를 내거나 다른 줄의 셀을 가리킨다.
+        public bool CheckVaccumResistance(IntVec3 cell) => cell.InBounds(map) && _plantVaccumOverrideGrid[cell] > 0;
         private IntGrid _plantVaccumOverrideGrid;
 
         private Dictionary<Room, ThingDef> _scentRooms;
@@ -192,6 +193,8 @@ namespace VVRace
 
             foreach (var cell in GenRadial.RadialCellsAround(plant.Position, ArcanePlant_Starlitflower.VaccumResistRange, true))
             {
+                if (!cell.InBounds(map)) { continue; }
+
                 _plantVaccumOverrideGrid[cell]++;
             }
         }
@@ -212,6 +215,8 @@ namespace VVRace
 
             foreach (var cell in GenRadial.RadialCellsAround(plant.Position, ArcanePlant_Starlitflower.VaccumResistRange, true))
             {
+                if (!cell.InBounds(map)) { continue; }
+
                 _plantVaccumOverrideGrid[cell]--;
             }
         }
