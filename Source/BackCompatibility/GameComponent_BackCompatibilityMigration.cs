@@ -248,13 +248,13 @@ namespace VVRace
             var modIds = ScribeMetaHeaderUtility.loadedModIdsList;
             if (modIds == null || modIds.Count == 0) { return true; }
 
+            var packageId = LoadedModManager.GetMod<VVRaceMod>().Content.PackageId;
             foreach (var modId in modIds)
             {
                 if (modId == null) { continue; }
 
                 var id = modId.ToLowerInvariant();
-                if (id.EndsWith("_steam")) { id = id.Substring(0, id.Length - "_steam".Length); }
-                if (id == PackageId) { return true; }
+                if (id.EqualsIgnoreCase(packageId)) { return true; }
             }
 
             return false;
