@@ -81,6 +81,9 @@ namespace VVRace
     /// 2. 이념 헤어 표 (세이브당 한 번)
     ///    VV_HairH / VV_HairI가 HairDef를 상속한 Def 클래스(RPEF.ScaleableHairDef)였던 시절에 만든 세이브를 한 번 보정한다.
     ///
+    /// 3. 비비 생식 유전자 (매 로드, 멱등)
+    ///    비비 제노타입의 현재 Def에 있는 생식 유전자 중 누락된 것만 추가한다. 기존 유전자는 보존한다.
+    ///
     /// 예전 세이브에 저장된 GameComponent_ViviPreceptMigration 노드는 BackCompatibilityPatch가 이 타입으로 연결한다.
     /// 그 노드에는 헤어 보정 플래그가 없으므로 헤어 보정이 한 번 실행된다.
     ///
@@ -114,6 +117,7 @@ namespace VVRace
 
             MigratePrecepts();
             RepairHairTablesOnce();
+            RepairViviEndogenes();
         }
 
         public override void ExposeData()
@@ -171,6 +175,48 @@ namespace VVRace
                 {
                     field.SetValue(dest, field.GetValue(source));
                 }
+            }
+        }
+        #endregion
+
+        #region 비비 생식 유전자
+        private static void RepairViviEndogenes()
+        {
+            var xenotype = VVXenotypeDefOf.VV_Vivi;
+            if (xenotype?.genes == null) { return; }
+
+            // 조회 결과는 공유 목록이므로 유전자 변경 중 다시 조회되어도 안전하도록 복사하고 중복을 없앤다.
+            var repairedCount = 0;
+            foreach (var pawn in PawnsFinder.All_AliveOrDead)
+            {
+                var genes = pawn?.genes;
+                if (genes == null || genes.Xenotype != xenotype) { continue; }
+
+                try
+                {
+                    var repaired = false;
+                    foreach (var geneDef in xenotype.genes)
+                    {
+                        // 같은 이종 유전자가 있어도 생식 유전자는 별도로 있어야 한다.
+                        if (genes.HasEndogene(geneDef)) { continue; }
+
+                        if (genes.AddGene(geneDef, xenogene: false) != null)
+                        {
+                            repaired = true;
+                        }
+                    }
+
+                    if (repaired) { repairedCount++; }
+                }
+                catch (Exception ex)
+                {
+                    Log.Error($"[ViViRace] failed to repair endogenes of {pawn}: {ex}");
+                }
+            }
+
+            if (repairedCount > 0)
+            {
+                Log.Message($"[ViViRace] repaired endogenes of {repairedCount} Vivi pawn(s).");
             }
         }
         #endregion

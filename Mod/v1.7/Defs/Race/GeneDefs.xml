@@ -16,8 +16,8 @@
         <li>(13, 10)</li>
       </points>
     </biologicalAgeTickFactorFromAgeCurve>
-    <biostatMet>-4</biostatMet>
-    <biostatCpx>4</biostatCpx>
+    <biostatMet>-3</biostatMet>
+    <biostatCpx>3</biostatCpx>
     <sterilize>true</sterilize>
     <statOffsets>
       <GlobalLearningFactor>0.5</GlobalLearningFactor>
