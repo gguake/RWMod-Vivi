@@ -283,7 +283,6 @@
     <Compile Include="MapGeneration\SymbolResolvers\Settlement\SymbolResolver_ViviBasePart.cs" />
     <Compile Include="MapGeneration\SymbolResolvers\Settlement\SymbolResolver_ViviEggSpawn.cs" />
     <Compile Include="MapGeneration\SymbolResolvers\Settlement\SymbolResolver_ViviSettlement.cs" />
-    <Compile Include="MapGeneration\SymbolResolverUtility.cs" />
     <Compile Include="Hornet\MentalState_HornetBerserk.cs" />
     <Compile Include="Needle\Needle.cs" />
     <Compile Include="FoodDrainRecipe\RecipeModExtension.cs" />

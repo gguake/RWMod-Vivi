@@ -4,8 +4,5 @@ namespace VVRace
     {
         public const string VV_Alert_ViviDangerousEggs = nameof(VV_Alert_ViviDangerousEggs);
         public const string VV_Alert_ViviDangerousEggsDesc = nameof(VV_Alert_ViviDangerousEggsDesc);
-
-        public const string VV_Alert_GrowingArcanePlantLowHP = nameof(VV_Alert_GrowingArcanePlantLowHP);
-        public const string VV_Alert_GrowingArcanePlantLowHPDesc = nameof(VV_Alert_GrowingArcanePlantLowHPDesc);
     }
 }
