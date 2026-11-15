@@ -32,11 +32,7 @@ namespace VVRace
                 thing.SetFaction(resolveParams.faction);
             }
 
-            if (thing is ArcanePlant plant)
-            {
-                plant.ManaComp.StoredPct = 1f;
-            }
-
+            // 마나는 CompMana.PostPostMake가 MakeThing 안에서 이미 가득 채운다.
             GenSpawn.Spawn(
                 thing, 
                 resolveParams.rect.CenterCell, 
