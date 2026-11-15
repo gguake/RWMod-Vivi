@@ -61,6 +61,16 @@ namespace VVRace.HarmonyPatches
                 AccessTools.Method(typeof(MentalStateWorker), nameof(MentalStateWorker.StateCanOccur)),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(MentalStateWorker_StateCanOccur_Postfix)));
 
+            ViviHarmonyPatcher.TryPatch(harmony, "Faction.Notify_MemberDied (hornet kill goodwill exemption)",
+                AccessTools.Method(typeof(Faction), nameof(Faction.Notify_MemberDied)),
+                prefix: new HarmonyMethod(typeof(ViviRacePatch), nameof(Faction_Notify_MemberDied_Prefix)),
+                finalizer: new HarmonyMethod(typeof(ViviRacePatch), nameof(Faction_Notify_MemberDied_Finalizer)));
+
+            // 다른 모드의 호감도 prefix보다 먼저 판정해야 로드 순서와 관계없이 면제가 적용된다.
+            ViviHarmonyPatcher.TryPatch(harmony, "Faction.TryAffectGoodwillWith (hornet kill goodwill exemption)",
+                AccessTools.Method(typeof(Faction), nameof(Faction.TryAffectGoodwillWith)),
+                prefix: new HarmonyMethod(typeof(ViviRacePatch), nameof(Faction_TryAffectGoodwillWith_Prefix)) { priority = Priority.First });
+
             ViviHarmonyPatcher.TryPatch(harmony, "ThoughtWorker_Pyrophobia.NearFire (vivi pyrophobia)",
                 AccessTools.Method(typeof(ThoughtWorker_Pyrophobia), nameof(ThoughtWorker_Pyrophobia.NearFire)),
                 prefix: new HarmonyMethod(typeof(ViviRacePatch), nameof(ThoughtWorker_Pyrophobia_NearFire_Prefix)));
@@ -392,6 +402,33 @@ namespace VVRace.HarmonyPatches
                     }
                 }
             }
+        }
+
+        // 바닐라는 무소속 가해자에게 우호 세력원이 죽으면 호감도를 깎고(MemberNeutrallyDied), 영구 광폭 동물에게 죽은 경우만 뺀다.
+        // 광분한 거대 말벌도 모두에게 적대하는 재앙이므로 같은 예외를 둔다.
+        // dinfo를 null로 바꾸면 factionHostileOnDeath 분기로 떨어져 연방 대표가 죽을 때 세력이 적대화되므로, 그 호감도 변경만 막는다.
+        private static bool _blamelessMemberDeath;
+
+        private static void Faction_Notify_MemberDied_Prefix(DamageInfo? dinfo)
+        {
+            _blamelessMemberDeath = dinfo?.Instigator is Pawn killer && killer.MentalStateDef == VVMentalStateDefOf.VV_HornetBerserk;
+        }
+
+        // postfix는 원본이 예외로 끝나면 실행되지 않아 표시가 남으므로 finalizer에서 지운다.
+        private static void Faction_Notify_MemberDied_Finalizer()
+        {
+            _blamelessMemberDeath = false;
+        }
+
+        private static bool Faction_TryAffectGoodwillWith_Prefix(HistoryEventDef reason, ref bool __result)
+        {
+            if (_blamelessMemberDeath && reason == HistoryEventDefOf.MemberNeutrallyDied)
+            {
+                __result = false;
+                return false;
+            }
+
+            return true;
         }
 
         private const float ViviPyrophobiaRadius = 6.7f;
