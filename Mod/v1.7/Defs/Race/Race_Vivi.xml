@@ -23,6 +23,7 @@
       <ConstructionSpeed>1.25</ConstructionSpeed>
       <SmoothingSpeed>1.5</SmoothingSpeed>
       <CleaningSpeed>1.25</CleaningSpeed>
+      <PruningSpeed MayRequire="Ludeon.RimWorld.Ideology">1.5</PruningSpeed>
       <PawnTrapSpringChance>0.3</PawnTrapSpringChance>
       <MeleeDodgeChance>10</MeleeDodgeChance>
 
