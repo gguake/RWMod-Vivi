@@ -23,6 +23,7 @@
       <ConstructionSpeed>1.25</ConstructionSpeed>
       <SmoothingSpeed>1.5</SmoothingSpeed>
       <CleaningSpeed>1.25</CleaningSpeed>
+      <MiningSpeed>0.5</MiningSpeed>
       <PruningSpeed MayRequire="Ludeon.RimWorld.Ideology">2.0</PruningSpeed>
 
       <MaxNutrition>1.25</MaxNutrition>
