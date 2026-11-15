@@ -283,9 +283,7 @@ namespace VVRace
         {
             WaylithJobRuntime.Complete(_diffusionJobHandle);
 
-            var previousManaGrid = _manaGrid;
-            _manaGrid = _tmpGrid;
-            _tmpGrid = previousManaGrid;
+            (_manaGrid, _tmpGrid) = (_tmpGrid, _manaGrid);
 
             ApplyDirtyReservedMana();
             _diffusionJobStart = false;
