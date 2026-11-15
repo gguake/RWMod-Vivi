@@ -288,6 +288,8 @@ namespace VVRace
             if (GenPlace.TryPlaceThing(vivi, parent.Position, parent.Map, ThingPlaceMode.Near))
             {
                 gameCompMana.UnregisterFairy(vivi);
+
+                Refresh();
                 return (Pawn)vivi;
             }
 

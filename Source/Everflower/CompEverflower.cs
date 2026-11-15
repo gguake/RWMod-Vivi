@@ -333,7 +333,8 @@ namespace VVRace
                 Find.LetterStack.ReceiveLetter(
                     LocalizeString_Letter.VV_Letter_EverflowerAttumentLevelUpLabel.Translate(level.Named("LEVEL")),
                     sb.ToString(),
-                    LetterDefOf.PositiveEvent);
+                    LetterDefOf.PositiveEvent,
+                    parent);
             }
 
             if (parent.Spawned)

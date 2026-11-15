@@ -190,6 +190,22 @@ namespace VVRace
             }
         }
 
+        // 디스폰 없이 Position만 바꾸면 이전 칸의 사전 항목이 남으므로 직접 갱신한다.
+        public void Notify_ArcanePlantMoved(ArcanePlant plant, IntVec3 oldCell)
+        {
+            if (_arcanePlants.TryGetValue(oldCell, out var existing) && existing == plant)
+            {
+                _arcanePlants.Remove(oldCell);
+            }
+
+            _arcanePlants[plant.Position] = plant;
+
+            if (ScentUtility.IsScentFlower(plant.def))
+            {
+                _scentRoomsDirty = true;
+            }
+        }
+
         public void Notify_StalitflowerSpawned(ArcanePlant plant)
         {
             if (!ModsConfig.OdysseyActive) { return; }

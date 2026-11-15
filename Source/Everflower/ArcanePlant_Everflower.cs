@@ -242,8 +242,27 @@ namespace VVRace
                 return false;
             }
 
+            var map = Map;
             var previousPosition = Position;
+            var mapComponent = _mapComponent;
+
+            // 순간이동은 디스폰 없이 Position만 바꾸므로 자동 갱신되지 않는 정보를 직접 갱신한다.
+            map.edificeGrid.DeRegister(this);
             Position = cell;
+            map.edificeGrid.Register(this);
+            RestorePotEdifice(map, mapComponent, previousPosition);
+
+            mapComponent?.Notify_ArcanePlantMoved(this, previousPosition);
+
+            map.pathFinder.MapData.Notify_CellDelta(previousPosition);
+            map.pathing.RecalculatePerceivedPathCostAt(previousPosition);
+            map.pathing.RecalculatePerceivedPathCostUnderThing(this);
+
+            var glower = GetComp<CompGlower>();
+            if (glower != null && glower.Glows)
+            {
+                glower.ForceRegister(map);
+            }
 
             EffecterDef effecterDef = null;
             switch (EverflowerComp.AttunementLevel)
@@ -318,6 +337,26 @@ namespace VVRace
         public void Unreserve()
         {
             _reserveTeleportCell = default;
+        }
+
+        // EdificeGrid.DeRegister는 칸을 비우므로 식물이 떠난 자리에는 화분을 다시 등록한다.
+        // 다칸 화분이 다른 칸의 식물을 덮어쓰지 않도록 해당 식물도 다시 등록한다.
+        private static void RestorePotEdifice(Map map, ArcanePlantMapComponent mapComponent, IntVec3 cell)
+        {
+            var pot = mapComponent?.GetArcanePlantPot(cell);
+            if (pot == null) { return; }
+
+            map.edificeGrid.Register(pot);
+            foreach (var potCell in pot.OccupiedRect())
+            {
+                if (potCell == cell) { continue; }
+
+                var plant = potCell.GetFirstThing<ArcanePlant>(map);
+                if (plant != null && plant.Spawned && plant.def.IsEdifice())
+                {
+                    map.edificeGrid.Register(plant);
+                }
+            }
         }
     }
 }
