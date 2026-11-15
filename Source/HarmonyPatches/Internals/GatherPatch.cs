@@ -8,8 +8,8 @@ namespace VVRace
     {
         internal static void Patch(Harmony harmony)
         {
-            harmony.Patch(
-                original: AccessTools.Method(typeof(RegionDirtyer), "SetAllClean"),
+            ViviHarmonyPatcher.TryPatch(harmony, "RegionDirtyer.SetAllClean (gathering region rebuild notification)",
+                AccessTools.Method(typeof(RegionDirtyer), "SetAllClean"),
                 prefix: new HarmonyMethod(typeof(GatherPatch), nameof(RegionDirtyer_SetAllClean_Prefix)));
 
         }

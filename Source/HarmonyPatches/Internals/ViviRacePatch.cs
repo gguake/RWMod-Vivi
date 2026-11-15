@@ -21,120 +21,110 @@ namespace VVRace.HarmonyPatches
 
         internal static void Patch(Harmony harmony)
         {
-            harmony.Patch(
-                original: AccessTools.Method(typeof(Pawn_NeedsTracker), "ShouldHaveNeed"),
+            ViviHarmonyPatcher.TryPatch(harmony, "Pawn_NeedsTracker.ShouldHaveNeed (vivi-only royal jelly need)",
+                AccessTools.Method(typeof(Pawn_NeedsTracker), "ShouldHaveNeed"),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(Pawn_NeedsTracker_ShouldHaveNeed_Postfix)));
 
-            harmony.Patch(
-                original: AccessTools.Method(typeof(LifeStageWorker_HumanlikeChild), nameof(LifeStageWorker_HumanlikeChild.Notify_LifeStageStarted)),
+            ViviHarmonyPatcher.TryPatch(harmony, "LifeStageWorker_HumanlikeChild.Notify_LifeStageStarted (vivi child life stage)",
+                AccessTools.Method(typeof(LifeStageWorker_HumanlikeChild), nameof(LifeStageWorker_HumanlikeChild.Notify_LifeStageStarted)),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(LifeStageWorker_HumanlikeChild_Notify_LifeStageStarted_Postfix)));
 
-            harmony.Patch(
-                original: AccessTools.Method(typeof(LifeStageWorker_HumanlikeAdult), nameof(LifeStageWorker_HumanlikeAdult.Notify_LifeStageStarted)),
+            ViviHarmonyPatcher.TryPatch(harmony, "LifeStageWorker_HumanlikeAdult.Notify_LifeStageStarted (vivi adult life stage)",
+                AccessTools.Method(typeof(LifeStageWorker_HumanlikeAdult), nameof(LifeStageWorker_HumanlikeAdult.Notify_LifeStageStarted)),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(LifeStageWorker_HumanlikeAdult_Notify_LifeStageStarted_Postfix)));
 
-            harmony.Patch(
-                original: AccessTools.Method(typeof(PawnGenerator), "GenerateBodyType"),
+            ViviHarmonyPatcher.TryPatch(harmony, "PawnGenerator.GenerateBodyType (vivi royal and forced body type)",
+                AccessTools.Method(typeof(PawnGenerator), "GenerateBodyType"),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(PawnGenerator_GenerateBodyType_Postfix)));
 
-            // 게임 시작시 알 부모 설정 패치
-            harmony.Patch(
-                original: AccessTools.Method(typeof(ScenPart_PlayerPawnsArriveMethod), nameof(ScenPart_PlayerPawnsArriveMethod.GenerateIntoMap)),
+            ViviHarmonyPatcher.TryPatch(harmony, "ScenPart_PlayerPawnsArriveMethod.GenerateIntoMap (starting egg parent)",
+                AccessTools.Method(typeof(ScenPart_PlayerPawnsArriveMethod), nameof(ScenPart_PlayerPawnsArriveMethod.GenerateIntoMap)),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(ScenPart_PlayerPawnsArriveMethod_GenerateIntoMap_Postfix)));
 
-
-            // 성장 스탯 관련 패치
-            harmony.Patch(
-                original: AccessTools.PropertyGetter(typeof(Pawn_AgeTracker), "GrowthPointsFactor"),
+            ViviHarmonyPatcher.TryPatch(harmony, "Pawn_AgeTracker.GrowthPointsFactor (growth points factor stat)",
+                AccessTools.PropertyGetter(typeof(Pawn_AgeTracker), "GrowthPointsFactor"),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(Pawn_AgeTracker_get_GrowthPointsFactor_Postfix)));
 
-            // 노화 속도 조절 HediffComp(HediffComp_AgingFactor) 패치
-            harmony.Patch(
-                original: AccessTools.PropertyGetter(typeof(Pawn_GeneTracker), nameof(Pawn_GeneTracker.BiologicalAgeTickFactor)),
+            ViviHarmonyPatcher.TryPatch(harmony, "Pawn_GeneTracker.BiologicalAgeTickFactor (aging factor hediff)",
+                AccessTools.PropertyGetter(typeof(Pawn_GeneTracker), nameof(Pawn_GeneTracker.BiologicalAgeTickFactor)),
                 transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(Pawn_GeneTracker_get_BiologicalAgeTickFactor_Transpiler)));
 
-            harmony.Patch(
-                original: AccessTools.Method(typeof(Pawn_GeneTracker), nameof(Pawn_GeneTracker.AddGene), new[] { typeof(GeneDef), typeof(bool) }),
+            ViviHarmonyPatcher.TryPatch(harmony, "Pawn_GeneTracker.AddGene (vivi gene compatibility)",
+                AccessTools.Method(typeof(Pawn_GeneTracker), nameof(Pawn_GeneTracker.AddGene), new[] { typeof(GeneDef), typeof(bool) }),
                 prefix: new HarmonyMethod(typeof(ViviRacePatch), nameof(Pawn_GeneTracker_AddGene_Prefix)));
 
-            // 이복형제 방지
-            harmony.Patch(
-                original: AccessTools.Method(typeof(PawnRelationWorker_Sibling), nameof(PawnRelationWorker_Sibling.InRelation)),
+            ViviHarmonyPatcher.TryPatch(harmony, "PawnRelationWorker_Sibling.InRelation (vivi siblings by mother)",
+                AccessTools.Method(typeof(PawnRelationWorker_Sibling), nameof(PawnRelationWorker_Sibling.InRelation)),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(PawnRelationWorker_Sibling_InRelation_Postfix)));
 
-            // 말벌 MentalState 고정
-            harmony.Patch(
-                original: AccessTools.Method(typeof(MentalStateWorker), nameof(MentalStateWorker.StateCanOccur)),
+            ViviHarmonyPatcher.TryPatch(harmony, "MentalStateWorker.StateCanOccur (hornet berserk manhunter exclusion)",
+                AccessTools.Method(typeof(MentalStateWorker), nameof(MentalStateWorker.StateCanOccur)),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(MentalStateWorker_StateCanOccur_Postfix)));
 
-            // 불 공포 오버라이드
-            harmony.Patch(
-                original: AccessTools.Method(typeof(ThoughtWorker_Pyrophobia), nameof(ThoughtWorker_Pyrophobia.NearFire)),
+            ViviHarmonyPatcher.TryPatch(harmony, "ThoughtWorker_Pyrophobia.NearFire (vivi pyrophobia)",
+                AccessTools.Method(typeof(ThoughtWorker_Pyrophobia), nameof(ThoughtWorker_Pyrophobia.NearFire)),
                 prefix: new HarmonyMethod(typeof(ViviRacePatch), nameof(ThoughtWorker_Pyrophobia_NearFire_Prefix)));
 
-            // NPC 비비 유전자 생성
-            harmony.Patch(
-                original: AccessTools.Method(typeof(PawnGenerator), "GenerateGenes"),
+            ViviHarmonyPatcher.TryPatch(harmony, "PawnGenerator.GenerateGenes (vivi random genes)",
+                AccessTools.Method(typeof(PawnGenerator), "GenerateGenes"),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(PawnGenerator_GenerateGenes_Postfix)));
 
-            // 바닐라 헤어/헤드 대체 모드 옵션
-            harmony.Patch(
-                original: AccessTools.Method(typeof(PawnGenerator), nameof(PawnGenerator.GeneratePawn), new[] { typeof(PawnGenerationRequest) }),
+            ViviHarmonyPatcher.TryPatch(harmony, "PawnGenerator.GeneratePawn (vivi vanilla head option)",
+                AccessTools.Method(typeof(PawnGenerator), nameof(PawnGenerator.GeneratePawn), new[] { typeof(PawnGenerationRequest) }),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(PawnGenerator_GeneratePawn_Postfix)));
 
             // 비비 바닥 폐허에 안나오게 수정
             {
+                // 내부 타입을 못 찾으면 원본이 null이 되어 이 패치만 건너뛴다.
                 var innerType = typeof(BaseGenUtility).GetNestedTypes(BindingFlags.NonPublic).FirstOrDefault(t => t.GetField("costCalculator") != null);
-                var innerMehtod = innerType.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault();
-                harmony.Patch(innerMehtod, postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(BaseGenUtility_TryRandomInexpensiveFloor_Where_Postfix)));
+                var innerMethod = innerType?.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault();
+                ViviHarmonyPatcher.TryPatch(harmony, "BaseGenUtility.TryRandomInexpensiveFloor where-lambda (vivi floor exclusion)",
+                    innerMethod,
+                    postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(BaseGenUtility_TryRandomInexpensiveFloor_Where_Postfix)));
             }
 
-            // 벽 교체시 부착된 구조물 철거 방지
-            harmony.Patch(
-                original: AccessTools.Method(typeof(Building), nameof(Building.DeSpawn)),
+            ViviHarmonyPatcher.TryPatch(harmony, "Building.DeSpawn (vivi wall replacement attachments)",
+                AccessTools.Method(typeof(Building), nameof(Building.DeSpawn)),
                 transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(Building_DeSpawn_Transpiler)));
 
-            // 벽 강화 Designator 패치
-            harmony.Patch(
-                original: AccessTools.Method(typeof(Designator_Cancel), nameof(Designator_Cancel.DesignateThing)),
+            ViviHarmonyPatcher.TryPatch(harmony, "Designator_Cancel.DesignateThing (honeycomb wall fortify cancel)",
+                AccessTools.Method(typeof(Designator_Cancel), nameof(Designator_Cancel.DesignateThing)),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(Designator_Cancel_DesignateThing_Postfix)));
 
-            // 순수주의자 패치
-            harmony.Patch(
-                original: AccessTools.Method(typeof(GeneUtility), nameof(GeneUtility.AddedAndImplantedPartsWithXenogenesCount)),
+            ViviHarmonyPatcher.TryPatch(harmony, "GeneUtility.AddedAndImplantedPartsWithXenogenesCount (vivi xenogene count exclusion)",
+                AccessTools.Method(typeof(GeneUtility), nameof(GeneUtility.AddedAndImplantedPartsWithXenogenesCount)),
                 transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(GeneUtility_AddedAndImplantedPartsWithXenogenesCount_Transpiler)));
 
-            // 초월연결체 패치
-            harmony.Patch(
-                original: AccessTools.Method(typeof(MoveColonyUtility), nameof(MoveColonyUtility.MoveColonyAndReset)),
+            ViviHarmonyPatcher.TryPatch(harmony, "MoveColonyUtility.MoveColonyAndReset (everflower attunement unlink)",
+                AccessTools.Method(typeof(MoveColonyUtility), nameof(MoveColonyUtility.MoveColonyAndReset)),
                 transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(MoveColonyUtility_MoveColonyAndReset_Transpiler)));
 
-            harmony.Patch(
-                original: AccessTools.Method(typeof(RestUtility), nameof(RestUtility.CanUseBedNow)),
+            ViviHarmonyPatcher.TryPatch(harmony, "RestUtility.CanUseBedNow (occupied egg hatchery)",
+                AccessTools.Method(typeof(RestUtility), nameof(RestUtility.CanUseBedNow)),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(RestUtility_CanUseBedNow_Postfix)));
 
             if (VVRaceMod.Settings?.enableViviMealContinuation ?? true)
             {
-                harmony.Patch(
-                    original: AccessTools.Method(typeof(JobDriver_Ingest), "MakeNewToils"),
+                ViviHarmonyPatcher.TryPatch(harmony, "JobDriver_Ingest.MakeNewToils (vivi meal continuation)",
+                    AccessTools.Method(typeof(JobDriver_Ingest), "MakeNewToils"),
                     postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(JobDriver_Ingest_MakeNewToils_Postfix)));
             }
 
-            // allowedCultures가 없는 팩션(Ancients, HoraxCult 등)이 무작위 컬처나 클래식 공유 이념으로 비비 컬처를 받지 않게
-            harmony.Patch(
-                original: AccessTools.Method(typeof(IdeoFoundation), nameof(IdeoFoundation.RandomizeCulture)),
+            // allowedCultures가 없는 팩션이 무작위 컬처나 클래식 공유 이념으로 비비 컬처를 받지 않게 한다.
+            ViviHarmonyPatcher.TryPatch(harmony, "IdeoFoundation.RandomizeCulture (vivi culture exclusion)",
+                AccessTools.Method(typeof(IdeoFoundation), nameof(IdeoFoundation.RandomizeCulture)),
                 transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(RandomCulture_Transpiler)));
 
-            harmony.Patch(
-                original: AccessTools.Method(typeof(FactionIdeosTracker), nameof(FactionIdeosTracker.ChooseOrGenerateIdeo)),
+            ViviHarmonyPatcher.TryPatch(harmony, "FactionIdeosTracker.ChooseOrGenerateIdeo (vivi culture exclusion)",
+                AccessTools.Method(typeof(FactionIdeosTracker), nameof(FactionIdeosTracker.ChooseOrGenerateIdeo)),
                 transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(RandomCulture_Transpiler)));
 
-            harmony.Patch(
-                original: AccessTools.Method(typeof(IdeoUtility), nameof(IdeoUtility.CanUseIdeo)),
+            ViviHarmonyPatcher.TryPatch(harmony, "IdeoUtility.CanUseIdeo (vivi culture exclusion)",
+                AccessTools.Method(typeof(IdeoUtility), nameof(IdeoUtility.CanUseIdeo)),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(IdeoUtility_CanUseIdeo_Postfix)));
 
-            harmony.Patch(
-                original: AccessTools.Method(typeof(IdeoGenerator), nameof(IdeoGenerator.GenerateClassicIdeo)),
+            ViviHarmonyPatcher.TryPatch(harmony, "IdeoGenerator.GenerateClassicIdeo (vivi culture exclusion)",
+                AccessTools.Method(typeof(IdeoGenerator), nameof(IdeoGenerator.GenerateClassicIdeo)),
                 prefix: new HarmonyMethod(typeof(ViviRacePatch), nameof(IdeoGenerator_GenerateClassicIdeo_Prefix)));
 
             Log.Message("!! [ViViRace] race patch complete");
