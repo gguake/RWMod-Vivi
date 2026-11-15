@@ -57,7 +57,7 @@
         <ticksBetweenBurstShots>10</ticksBetweenBurstShots>
 
         <steamDamageDef>Burn</steamDamageDef>
-        <steamDamageAmount>4</steamDamageAmount>
+        <steamDamageAmount>5</steamDamageAmount>
         <steamProjectile>VV_SteamProjectile</steamProjectile>
         <steamHeatPerCell>1.9</steamHeatPerCell>
 
@@ -329,7 +329,7 @@
         <stopBurstWithoutLos>true</stopBurstWithoutLos>
 
         <damageDef>Burn</damageDef>
-        <damageAmount>7</damageAmount>
+        <damageAmount>6</damageAmount>
         <burstShotCount>3</burstShotCount>
         <ticksBetweenBurstShots>3</ticksBetweenBurstShots>
         <lightningMoteDef>VV_Mote_ChainLightning</lightningMoteDef>
@@ -596,7 +596,7 @@
         <verbClass>VVRace.Verb_ShootWithMana</verbClass>
         <hasStandardCommand>true</hasStandardCommand>
         <defaultProjectile>VV_Bullet_Froststing</defaultProjectile>
-        <warmupTime>4.5</warmupTime>
+        <warmupTime>5.0</warmupTime>
         <minRange>11.9</minRange>
         <range>54.9</range>
         <soundCast>VV_FroststingShot</soundCast>
