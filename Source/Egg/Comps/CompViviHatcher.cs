@@ -230,6 +230,21 @@ namespace VVRace
                         }
 
                         var pawn = PawnGenerator.GeneratePawn(request);
+
+                        // 비비 제노타입은 이름 생성 규칙으로 이름을 만들어 SetFixedLastName이 적용되지 않으므로 성을 직접 맞춘다.
+                        if (hatcheeParent?.Name is NameTriple parentName && !parentName.Last.NullOrEmpty())
+                        {
+                            if (pawn.Name is NameTriple childName)
+                            {
+                                pawn.Name = new NameTriple(childName.First, childName.Nick, parentName.Last);
+                            }
+
+                            if (pawn.story != null)
+                            {
+                                pawn.story.birthLastName = parentName.Last;
+                            }
+                        }
+
                         var compVivi = pawn.GetCompVivi();
                         if (compVivi != null)
                         {

@@ -44,7 +44,8 @@
         <compClass>VVRace.CompTemperatureRuinableEgg</compClass>
         <minSafeTemperature>19</minSafeTemperature>
         <maxSafeTemperature>39</maxSafeTemperature>
-        <progressPerDegreePerTick>0.0000005</progressPerDegreePerTick>
+        <!-- 안전 온도에서 10도 벗어나면 약 7일(420,000틱) 뒤 완전 손상 -->
+        <progressPerDegreePerTick>0.000000238</progressPerDegreePerTick>
       </li>
 
       <li Class="VVRace.CompProperties_ViviHatcher">

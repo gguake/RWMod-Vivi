@@ -18,6 +18,14 @@ namespace VVRace
         private const TargetIndex WallIndex = TargetIndex.A;
         private const TargetIndex IngredientIndex = TargetIndex.B;
 
+        public override void ExposeData()
+        {
+            base.ExposeData();
+
+            // 불러온 뒤에는 토일의 initAction이 다시 실행되지 않는다. 값이 없는 세이브는 처음부터 다시 작업한다.
+            Scribe_Values.Look(ref workLeft, "workLeft", BaseWorkAmount);
+        }
+
         public override bool TryMakePreToilReservations(bool errorOnFailed)
         {
             pawn.ReserveAsManyAsPossible(IngredientTargetQueue, job);

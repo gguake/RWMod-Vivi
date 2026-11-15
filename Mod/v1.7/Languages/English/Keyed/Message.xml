@@ -12,4 +12,6 @@
 <VV_Message_AttunementEverflowerComplete>{PAWN_nameDef}'s everflower attunement ritual has strengthened the attune link.</VV_Message_AttunementEverflowerComplete>
 <VV_Message_PollenWaveAfterAttunement>Everflower attunement ritual has left the surroundings coated in pollen.</VV_Message_PollenWaveAfterAttunement>
 <VV_Message_PlantGrownAfterAttunement>Everflower attunement ritual has left the plants in the area flourishing.</VV_Message_PlantGrownAfterAttunement>
+
+<VV_Message_ManaNotEnough>Not enough mana. (requires {MANACOST})</VV_Message_ManaNotEnough>
 </LanguageData>

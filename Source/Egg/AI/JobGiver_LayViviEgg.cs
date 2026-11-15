@@ -30,23 +30,24 @@ namespace VVRace
 
         private bool TryGetBestEggBox(Pawn pawn, out Thing eggBox)
         {
-            eggBox = GenClosest.ClosestThing_Regionwise_ReachablePrioritized(
-                pawn.Position, 
-                pawn.Map, 
+            // 영역 탐색에서 찾지 못하면 맵 전체의 부화기를 도달 가능한지 검사한다 (영역 수 제한 없음).
+            eggBox = GenClosest.ClosestThingReachable(
+                pawn.Position,
+                pawn.Map,
                 ThingRequest.ForDef(VVThingDefOf.VV_ViviHatchery),
                 PathEndMode.OnCell,
                 TraverseParms.For(pawn, Danger.Some),
                 validator: (thing) =>
                 {
-                    if (!thing.Spawned || thing.IsForbidden(pawn) || !pawn.CanReserve(thing))
+                    // 다른 세력의 부화기에서는 알이 부화하지 못하고 사라진다.
+                    if (!thing.Spawned || thing.Faction != pawn.Faction || thing.IsForbidden(pawn) || !pawn.CanReserve(thing))
                     {
                         return false;
                     }
 
                     return thing is ViviEggHatchery hatchery && hatchery.CanLayHere;
-                }, 
-                priorityGetter: (thing) => -pawn.Position.DistanceToSquared(thing.Position),
-                minRegions: 10);
+                },
+                searchRegionsMin: 10);
 
             return eggBox != null;
         }
