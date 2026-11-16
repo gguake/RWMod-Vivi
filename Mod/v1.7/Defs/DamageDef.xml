@@ -89,7 +89,7 @@
     <harmsHealth>false</harmsHealth>
     <makesBlood>false</makesBlood>
     <defaultDamage>1</defaultDamage>
-    <soundExplosion>Explosion_FirefoamPopper</soundExplosion>
+    <soundExplosion>VV_Explosion_CompressedWind</soundExplosion>
     <explosionSnowMeltAmount>0</explosionSnowMeltAmount>
   </DamageDef>
 

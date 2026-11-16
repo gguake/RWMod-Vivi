@@ -79,6 +79,24 @@
     </subSounds>
   </SoundDef>
 
+  <!-- 압축바람 폭탄 폭발음 -->
+  <SoundDef>
+    <defName>VV_Explosion_CompressedWind</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>1</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>SFX/VV_Explosion_CompressedWind</clipPath>
+          </li>
+        </grains>
+        <volumeRange>100</volumeRange>
+        <pitchRange>0.95~1.05</pitchRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+
   <SoundDef>
     <defName>VV_EverflowerRitualComplete</defName>
     <context>MapOnly</context>
