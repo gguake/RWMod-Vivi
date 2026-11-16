@@ -49,14 +49,6 @@ namespace VVRace.HarmonyPatches
                 AccessTools.PropertyGetter(typeof(Pawn_GeneTracker), nameof(Pawn_GeneTracker.BiologicalAgeTickFactor)),
                 transpiler: new HarmonyMethod(typeof(ViviRacePatch), nameof(Pawn_GeneTracker_get_BiologicalAgeTickFactor_Transpiler)));
 
-            ViviHarmonyPatcher.TryPatch(harmony, "Pawn_GeneTracker.AddGene (vivi gene compatibility)",
-                AccessTools.Method(typeof(Pawn_GeneTracker), nameof(Pawn_GeneTracker.AddGene), new[] { typeof(GeneDef), typeof(bool) }),
-                prefix: new HarmonyMethod(typeof(ViviRacePatch), nameof(Pawn_GeneTracker_AddGene_Prefix)));
-
-            ViviHarmonyPatcher.TryPatch(harmony, "PawnRelationWorker_Sibling.InRelation (vivi siblings by mother)",
-                AccessTools.Method(typeof(PawnRelationWorker_Sibling), nameof(PawnRelationWorker_Sibling.InRelation)),
-                postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(PawnRelationWorker_Sibling_InRelation_Postfix)));
-
             ViviHarmonyPatcher.TryPatch(harmony, "MentalStateWorker.StateCanOccur (hornet berserk manhunter exclusion)",
                 AccessTools.Method(typeof(MentalStateWorker), nameof(MentalStateWorker.StateCanOccur)),
                 postfix: new HarmonyMethod(typeof(ViviRacePatch), nameof(MentalStateWorker_StateCanOccur_Postfix)));
@@ -291,17 +283,6 @@ namespace VVRace.HarmonyPatches
             }
         }
 
-        private static bool Pawn_GeneTracker_AddGene_Prefix(Pawn ___pawn, GeneDef geneDef, ref Gene __result)
-        {
-            if (___pawn?.IsVivi() == true && !ViviUtility.IsCompatibleWithVivi(geneDef))
-            {
-                __result = null;
-                return false;
-            }
-
-            return true;
-        }
-
         private static void LifeStageWorker_HumanlikeChild_Notify_LifeStageStarted_Postfix(Pawn pawn, LifeStageDef previousLifeStage)
         {
             if (previousLifeStage != null && previousLifeStage.developmentalStage.Baby())
@@ -380,14 +361,6 @@ namespace VVRace.HarmonyPatches
         private static void Pawn_AgeTracker_get_GrowthPointsFactor_Postfix(ref float __result, Pawn ___pawn)
         {
             __result *= ___pawn.GetStatValue(VVStatDefOf.VV_GrowthPointsFactor);
-        }
-
-        private static void PawnRelationWorker_Sibling_InRelation_Postfix(ref bool __result, Pawn me, Pawn other)
-        {
-            if (!__result && me.IsVivi() && other.IsVivi())
-            {
-                __result = me.GetMother() != null && other.GetMother() != null && me.GetMother() == other.GetMother();
-            }
         }
 
         private static void MentalStateWorker_StateCanOccur_Postfix(ref bool __result, Pawn pawn, MentalStateDef ___def)
