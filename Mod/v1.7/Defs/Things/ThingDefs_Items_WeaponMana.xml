@@ -63,7 +63,7 @@
 
         <breathStartOffset>0.9</breathStartOffset>
         <breathAngleHalf>15</breathAngleHalf>
-        <breathFriendlyFireSafeDistance>2.9</breathFriendlyFireSafeDistance>
+        <breathFriendlyFireSafeDistance>3.9</breathFriendlyFireSafeDistance>
         <propagationSpeed>11</propagationSpeed>
 
         <soundCast>VV_Steamthrower</soundCast>
