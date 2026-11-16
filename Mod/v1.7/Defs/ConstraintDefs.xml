@@ -41,6 +41,14 @@
         </xenotypes>
       </li>
 
+      <li Class="RPEF.GeneConstraint">
+        <rule>OnAppliedPawn</rule>
+        <type>Blacklist</type>
+        <genes>
+          <li>XenogermReimplanter</li>
+        </genes>
+      </li>
+
       <li Class="RPEF.BackstoryConstraint">
         <rule>OnAppliedPawn</rule>
         <type>Whitelist</type>

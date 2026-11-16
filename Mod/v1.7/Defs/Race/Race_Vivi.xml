@@ -319,6 +319,8 @@
         <romanceFrequencyWeight>0</romanceFrequencyWeight>
         <romanceSuccessChanceMultiplierAsInitiator>0</romanceSuccessChanceMultiplierAsInitiator>
         <romanceSuccessChanceMultiplierAsRecipient>0</romanceSuccessChanceMultiplierAsRecipient>
+
+        <siblingParentRule>Mother</siblingParentRule>
       </li>
 
       <li Class="RPEF.PawnGeneratorRaceHook">

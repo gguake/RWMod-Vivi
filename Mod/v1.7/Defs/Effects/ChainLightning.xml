@@ -16,7 +16,7 @@
     <drawOffscreen>true</drawOffscreen>
     <graphicData>
       <texPath>Things/Mote/VV_LightningBolt</texPath>
-      <graphicClass>VVRace.Graphic_MoteTiled</graphicClass>
+      <graphicClass>RPEF.Graphic_MoteTiled</graphicClass>
       <shaderType>GlowAnimated</shaderType>
     </graphicData>
   </ThingDef>

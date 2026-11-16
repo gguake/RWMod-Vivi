@@ -229,7 +229,6 @@
     <Compile Include="ArcanePlant\Plant\Comps\CompRadiantflowerGlower.cs" />
     <Compile Include="ArcanePlant\Plant\Comps\CompStalitflowerGlower.cs" />
     <Compile Include="ArcanePlant\Plant\Things\ArcanePlant_Starlitflower.cs" />
-    <Compile Include="ArcanePlant\Weapon\Graphic_MoteTiled.cs" />
     <Compile Include="ArcanePlant\Weapon\Things\SnowmanRocket.cs" />
     <Compile Include="ArcanePlant\Weapon\CompExplosiveSnowman.cs" />
     <Compile Include="ArcanePlant\Weapon\DamageWorker_CompressedWind.cs" />
@@ -315,7 +314,6 @@
     <Compile Include="Egg\Comps\CompViviEggLayer.cs" />
     <Compile Include="Gather\Things\Building_AutoExtractor.cs" />
     <Compile Include="GlideAbility\CompAbilityEffect_FoodCost.cs" />
-    <Compile Include="GlideAbility\CompAbility_RequiresBodyPart.cs" />
     <Compile Include="HarmonyPatches\Internals\BackCompatibilityPatch.cs" />
     <Compile Include="HarmonyPatches\Internals\GatherPatch.cs" />
     <Compile Include="HarmonyPatches\Internals\EndingCorePatch.cs" />

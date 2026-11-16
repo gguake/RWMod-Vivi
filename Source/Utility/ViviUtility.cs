@@ -1,4 +1,5 @@
 ﻿using RimWorld;
+using RPEF;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,8 @@ namespace VVRace
 
         public static bool IsRoyalVivi(this Pawn pawn) => pawn.TryGetComp<CompVivi>()?.isRoyal ?? false;
 
-        public static bool IsCompatibleWithVivi(GeneDef def) => def != GeneDefOf.XenogermReimplanter;
+        // 비비 종족의 제약(VV_PawnConstraint의 GeneConstraint)을 따른다. 유전자 추가 자체는 RPEF가 같은 제약으로 막는다.
+        public static bool IsCompatibleWithVivi(GeneDef def) => def.CheckAllConstraints(VVThingDefOf.VV_Vivi, out _);
 
         public static bool IsModGene(GeneDef def) =>
             def.modContentPack != null &&
