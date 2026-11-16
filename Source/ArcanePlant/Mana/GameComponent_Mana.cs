@@ -18,45 +18,6 @@ namespace VVRace
 
     public class GameComponent_Mana : GameComponent
     {
-        public IEnumerable<CompMana> AllManaComps
-        {
-            get
-            {
-                for (int i = 0; i < _manaCompCache.Count; ++i)
-                {
-                    if (_manaCompCache[i] == null || _manaCompCache[i].parent == null || _manaCompCache[i].parent.Destroyed)
-                    {
-                        _manaCompCache.RemoveAt(i);
-                        i--;
-
-                        continue;
-                    }
-
-                    yield return _manaCompCache[i];
-
-                }
-            }
-        }
-
-        public IEnumerable<ThingWithComps> AllThingsUsingMana
-        {
-            get
-            {
-                for (int i = 0; i < _thingWithManaComps.Count; ++i)
-                {
-                    if (_thingWithManaComps[i] == null || _thingWithManaComps[i].Destroyed)
-                    {
-                        _thingWithManaComps.RemoveAt(i);
-                        i--;
-
-                        continue;
-                    }
-
-                    yield return _thingWithManaComps[i];
-                }
-            }
-        }
-
         public List<CompMana> GetManaCompsOn(Map map)
         {
             var ticksGame = GenTicks.TicksGame;
@@ -65,7 +26,10 @@ namespace VVRace
                 _manaCompsByMapTick = ticksGame;
                 _manaCompsByMap.Clear();
 
-                foreach (var comp in AllManaComps)
+                // HashSet은 순회 중에 지울 수 없으므로 파괴된 항목은 돌기 전에 걸러낸다.
+                _manaComps.RemoveWhere(v => v.parent == null || v.parent.Destroyed);
+
+                foreach (var comp in _manaComps)
                 {
                     var rootMap = comp.parent.SpawnedParentOrMe?.Map;
                     if (rootMap == null) { continue; }
@@ -86,8 +50,9 @@ namespace VVRace
         private static readonly List<CompMana> EmptyManaComps = new List<CompMana>();
 
         private Game _game;
-        private List<ThingWithComps> _thingWithManaComps;
-        private List<CompMana> _manaCompCache;
+
+        // 저장하지 않는다. 새로 만든 물건은 PostPostMake에서, 불러온 물건은 PostLoadInit에서 CompMana가 스스로 등록한다.
+        private readonly HashSet<CompMana> _manaComps = new HashSet<CompMana>();
         private readonly Dictionary<Map, List<CompMana>> _manaCompsByMap = new Dictionary<Map, List<CompMana>>();
         private int _manaCompsByMapTick = -1;
 
@@ -124,43 +89,16 @@ namespace VVRace
         public GameComponent_Mana(Game game)
         {
             _game = game;
-            _thingWithManaComps = new List<ThingWithComps>();
-            _manaCompCache = new List<CompMana>();
             _fairyficated = new List<FairyficatedPawn>();
         }
 
         public override void ExposeData()
         {
-            if (Scribe.mode == LoadSaveMode.Saving)
-            {
-                _thingWithManaComps.RemoveAll(v => v.DestroyedOrNull());
-            }
-
-            Scribe_Collections.Look(ref _thingWithManaComps, "_thingWithManaComps", LookMode.Reference);
             Scribe_Collections.Look(ref _fairyficated, "fairyficated", LookMode.Deep);
 
+            // PostLoadInit 호출 순서는 정해져 있지 않아 물건이 먼저 등록했을 수 있으므로 여기서 등록부를 비우지 않는다.
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
-                _manaCompCache.Clear();
-
-                _thingWithManaComps.RemoveAll(v => v.DestroyedOrNull());
-                for (int i = 0; i < _thingWithManaComps.Count; ++i)
-                {
-                    var thing = _thingWithManaComps[i];
-                    var compMana = thing.GetComp<CompMana>();
-                    if (compMana != null)
-                    {
-                        _manaCompCache.Add(compMana);
-                    }
-                    else
-                    {
-                        Log.Warning($"failed to find CompMana for thing {thing}; it registered on GameComponent_Mana before save. it may cause bugs about updating mana.");
-
-                        _thingWithManaComps.RemoveAt(i);
-                        i--;
-                    }
-                }
-
                 if (_fairyficated == null)
                 {
                     _fairyficated = new List<FairyficatedPawn>();
@@ -170,14 +108,12 @@ namespace VVRace
 
         public void RegisterCompMana(CompMana comp)
         {
-            _manaCompCache.Add(comp);
-            _thingWithManaComps.Add(comp.parent);
+            _manaComps.Add(comp);
         }
 
         public void UnregisterCompMana(CompMana comp)
         {
-            _thingWithManaComps.Remove(comp.parent);
-            _manaCompCache.Remove(comp);
+            _manaComps.Remove(comp);
         }
 
         public void RegisterFairy(Pawn linker, Pawn target)

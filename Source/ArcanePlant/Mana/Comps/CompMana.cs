@@ -94,6 +94,12 @@ namespace VVRace
                 {
                     _manaStored = Props.manaCapacity;
                 }
+
+                // 불러온 물건은 PostPostMake를 거치지 않으므로 여기서 등록한다. 게임 밖에서 불러온 경우에는 등록할 곳이 없다.
+                if (!parent.Destroyed)
+                {
+                    GameComponent_Mana.Of(Current.Game)?.RegisterCompMana(this);
+                }
             }
         }
 
