@@ -24,4 +24,7 @@
 
 <VV_Command_EjectFilteredHoney>Eject filtered honey</VV_Command_EjectFilteredHoney>
 <VV_Command_EjectFilteredHoneyDesc>Ejects the currently filtered honey.</VV_Command_EjectFilteredHoneyDesc>
+<VV_Command_SetEjectHoneyThreshold>Set eject amount</VV_Command_SetEjectHoneyThreshold>
+<VV_Command_SetEjectHoneyThresholdDesc>Set how much filtered honey to store before ejecting it all at once.\n\nCurrent eject amount: {0}</VV_Command_SetEjectHoneyThresholdDesc>
+<VV_Command_SetEjectHoneyThresholdSlider>Eject amount: {0}</VV_Command_SetEjectHoneyThresholdSlider>
 </LanguageData>

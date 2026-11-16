@@ -25,6 +25,9 @@
 
         public const string VV_Command_EjectFilteredHoney = nameof(VV_Command_EjectFilteredHoney);
         public const string VV_Command_EjectFilteredHoneyDesc = nameof(VV_Command_EjectFilteredHoneyDesc);
+        public const string VV_Command_SetEjectHoneyThreshold = nameof(VV_Command_SetEjectHoneyThreshold);
+        public const string VV_Command_SetEjectHoneyThresholdDesc = nameof(VV_Command_SetEjectHoneyThresholdDesc);
+        public const string VV_Command_SetEjectHoneyThresholdSlider = nameof(VV_Command_SetEjectHoneyThresholdSlider);
 
         public const string VV_Command_ReserveTeleportEverflowerAltarDesc = nameof(VV_Command_ReserveTeleportEverflowerAltarDesc);
     }

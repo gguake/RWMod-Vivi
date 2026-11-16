@@ -11,9 +11,21 @@ namespace VVRace
     public class Building_AutoHoneyExtractor : Building, IThingHolder
     {
         private static readonly Texture2D EjectCommandTex = ContentFinder<Texture2D>.Get("UI/Commands/VV_EjectFiltered");
+        private static readonly Texture2D SetEjectThresholdCommandTex = ContentFinder<Texture2D>.Get("Things/Item/VV_FilteredHoney");
 
         public const float DailyExtractRawHoneyAmount = 300;
         public const float ForceEjectTick = 5000;
+
+        public const int MinEjectThreshold = 50;
+        public const int MaxEjectThreshold = 300;
+        public const int DefaultEjectThreshold = 150;
+
+        public int EjectThreshold
+        {
+            get => _ejectThreshold;
+            set => _ejectThreshold = Mathf.Clamp(value, MinEjectThreshold, MaxEjectThreshold);
+        }
+        private int _ejectThreshold = DefaultEjectThreshold;
 
         public CompRefuelable RefuelableComp
         {
@@ -71,6 +83,7 @@ namespace VVRace
             base.ExposeData();
 
             Scribe_Values.Look(ref _filteredHoneyAmount, "filteredHoneyAmount");
+            Scribe_Values.Look(ref _ejectThreshold, "ejectThreshold", DefaultEjectThreshold);
             Scribe_Deep.Look(ref _innerContainer, "innerContainer", this);
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit && _innerContainer == null)
@@ -103,7 +116,7 @@ namespace VVRace
                     _innerContainer.TryAdd(honey);
                 }
 
-                if (_innerContainer.TotalStackCountOfDef(VVThingDefOf.VV_FilteredHoney) >= VVThingDefOf.VV_FilteredHoney.stackLimit || RefuelableComp.Fuel < 1f)
+                if (_innerContainer.TotalStackCountOfDef(VVThingDefOf.VV_FilteredHoney) >= EjectThreshold || RefuelableComp.Fuel < 1f)
                 {
                     _innerContainer.TryDropAll(InteractionCell, Map, ThingPlaceMode.Near);
                 }
@@ -150,6 +163,17 @@ namespace VVRace
                 };
 
                 yield return commandEject;
+            }
+
+            if (Faction == Faction.OfPlayer)
+            {
+                var commandSetThreshold = new Command_SetEjectHoneyThreshold();
+                commandSetThreshold.extractor = this;
+                commandSetThreshold.defaultLabel = LocalizeString_Command.VV_Command_SetEjectHoneyThreshold.Translate();
+                commandSetThreshold.defaultDesc = LocalizeString_Command.VV_Command_SetEjectHoneyThresholdDesc.Translate(EjectThreshold);
+                commandSetThreshold.icon = SetEjectThresholdCommandTex;
+
+                yield return commandSetThreshold;
             }
         }
 

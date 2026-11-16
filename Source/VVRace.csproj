@@ -347,6 +347,7 @@
     <Compile Include="MapGeneration\SymbolResolvers\Settlement\SymbolResolver_ViviPrefab.cs" />
     <Compile Include="MapGeneration\SymbolResolvers\Settlement\SymbolResolver_HexaRoomPrefab.cs" />
     <Compile Include="Gather\UI\ITab_GatherWorkTable.cs" />
+    <Compile Include="Gather\UI\Command_SetEjectHoneyThreshold.cs" />
     <Compile Include="MapGeneration\SymbolResolvers\SymbolResolver_EdgeHoneycombWall.cs" />
     <Compile Include="RPEF\PawnRenderSubWorker_WingCondition.cs" />
     <Compile Include="ArcanePlant\Plant\Things\ArcanePlant_Shockerbud.cs" />
