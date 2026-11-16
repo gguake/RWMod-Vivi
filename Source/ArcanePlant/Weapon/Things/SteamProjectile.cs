@@ -30,6 +30,11 @@ namespace VVRace
 
         public override int UpdateRateTicks => 15;
 
+        public static bool WithinSafeDistance(IntVec3 origin, IntVec3 cell, float safeDistance)
+        {
+            return cell.DistanceToSquared(origin) <= Mathf.Pow(safeDistance + 0.05f, 2f);
+        }
+
         public override void ExposeData()
         {
             base.ExposeData();
@@ -111,7 +116,7 @@ namespace VVRace
                         if (!(thing is IAttackTarget)) { continue; }
 
                         // 시전자가 파괴된 뒤 불러오면 참조가 null이다. 파괴된 시전자와 같게(안전 거리 안은 모두 보호) 다룬다.
-                        var protectedBySafeDistance = distanceSqr <= Mathf.Pow(friendlyFireSafeDistance + 0.05f, 2f) && (caster == null || !caster.HostileTo(thing));
+                        var protectedBySafeDistance = WithinSafeDistance(_initalPosition, cell, friendlyFireSafeDistance) && (caster == null || !caster.HostileTo(thing));
                         if (!protectedBySafeDistance)
                         {
                             var log = new BattleLogEntry_RangedImpact(caster, thing, thing, weaponDef, null, null);

@@ -1,9 +1,7 @@
 using RimWorld;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using Verse;
-using VVRace.Utility;
 
 namespace VVRace
 {
@@ -107,7 +105,8 @@ namespace VVRace
 
             steam.range = VerbProps.range;
             steam.propagationSpeed = 20;
-            steam.affectCells = GetArcShapedCells(caster.Map, caster.Position, _targetCell, verbProps.range).ToList();
+            steam.affectCells = new List<IntVec3>();
+            FillAffectedCells(_targetCell, steam.affectCells);
 
             compMana.Stored -= manaPerShoot;
             return true;
@@ -115,8 +114,7 @@ namespace VVRace
 
         public override void BurstingTick()
         {
-            var vector = _targetCell.ToVector3Shifted() - caster.TrueCenter();
-            var direction = vector.normalized;
+            var direction = AimVector(_targetCell).normalized;
 
             MakeAirPuff(
                 caster.TrueCenter() + direction * VerbProps.breathStartOffset, 
@@ -126,15 +124,12 @@ namespace VVRace
 
         public override void WarmupComplete()
         {
-            _targetCell = CellUtility.FindLOSLastCell(
-                caster.Map,
-                caster.Position,
-                caster.Position + ((currentTarget.Cell - caster.Position).ToVector3().normalized * verbProps.range).ToIntVec3(),
-                verbProps.range);
+            _targetCell = currentTarget.Cell;
 
             base.WarmupComplete();
         }
 
+        private List<IntVec3> _tmpAffectedCells = new List<IntVec3>();
         private List<IntVec3> _tmpHighlightColoredCells = new List<IntVec3>();
         private List<IntVec3> _tmpHighlightCells = new List<IntVec3>();
         public override void DrawHighlight(LocalTargetInfo target)
@@ -143,28 +138,20 @@ namespace VVRace
 
             if (target.IsValid)
             {
-                var lastLOSCell = CellUtility.FindLOSLastCell(
-                    caster.Map,
-                    caster.Position,
-                    caster.Position + ((target.Cell - caster.Position).ToVector3().normalized * verbProps.range).ToIntVec3(),
-                    verbProps.range);
-
-                var cells = GetArcShapedCells(caster.Map, caster.Position, lastLOSCell, verbProps.range);
+                // 실제 사격과 같은 계산을 써서 표시와 피해 범위가 어긋나지 않게 한다.
+                FillAffectedCells(target.Cell, _tmpAffectedCells);
                 _tmpHighlightColoredCells.Clear();
                 _tmpHighlightCells.Clear();
 
-                foreach (var cell in cells)
+                foreach (var cell in _tmpAffectedCells)
                 {
-                    if (GenSight.LineOfSight(caster.Position, cell, caster.Map))
+                    if (SteamProjectile.WithinSafeDistance(caster.Position, cell, VerbProps.breathFriendlyFireSafeDistance))
                     {
-                        if (cell.DistanceTo(caster.Position) <= VerbProps.breathFriendlyFireSafeDistance)
-                        {
-                            _tmpHighlightColoredCells.Add(cell);
-                        }
-                        else
-                        {
-                            _tmpHighlightCells.Add(cell);
-                        }
+                        _tmpHighlightColoredCells.Add(cell);
+                    }
+                    else
+                    {
+                        _tmpHighlightCells.Add(cell);
                     }
                 }
 
@@ -190,21 +177,103 @@ namespace VVRace
             }
         }
 
-        private IEnumerable<IntVec3> GetArcShapedCells(Map map, IntVec3 center, IntVec3 target, float radius)
+        private Vector3 AimVector(IntVec3 targetCell)
         {
-            var vector = (target - center).ToVector3();
-            return GenRadial.RadialCellsAround(center, radius, false)
-                .Where(c =>
-                {
-                    var l = c.ToVector3() - center.ToVector3();
-                    if (Vector3.Angle(l, vector) < VerbProps.breathAngleHalf) { return GenSight.LineOfSight(center, c, map, true); }
-                    if (Vector3.Angle(c.ToVector3() + new Vector3(-0.5f, 0f, -0.5f) - center.ToVector3(), vector) < VerbProps.breathAngleHalf) { return GenSight.LineOfSight(center, c, map, true); }
-                    if (Vector3.Angle(c.ToVector3() + new Vector3(-0.5f, 0f, 0.5f) - center.ToVector3(), vector) < VerbProps.breathAngleHalf) { return GenSight.LineOfSight(center, c, map, true); }
-                    if (Vector3.Angle(c.ToVector3() + new Vector3(0.5f, 0f, -0.5f) - center.ToVector3(), vector) < VerbProps.breathAngleHalf) { return GenSight.LineOfSight(center, c, map, true); }
-                    if (Vector3.Angle(c.ToVector3() + new Vector3(0.5f, 0f, 0.5f) - center.ToVector3(), vector) < VerbProps.breathAngleHalf) { return GenSight.LineOfSight(center, c, map, true); }
+            var vector = (targetCell - caster.Position).ToVector3();
+            return vector == Vector3.zero ? caster.Rotation.FacingCell.ToVector3() : vector;
+        }
 
-                    return false;
-                });
+        private static readonly Vector3[] ConeSamplePoints =
+        {
+            Vector3.zero,
+            new Vector3(-0.5f, 0f, -0.5f),
+            new Vector3(-0.5f, 0f, 0.5f),
+            new Vector3(0.5f, 0f, -0.5f),
+            new Vector3(0.5f, 0f, 0.5f),
+        };
+
+        private List<IntVec3> _tmpOrigins = new List<IntVec3>();
+        private List<IntVec3> _tmpConeCells = new List<IntVec3>();
+        private HashSet<IntVec3> _tmpReachedCells = new HashSet<IntVec3>();
+        private List<IntVec3> _tmpSpreadCells = new List<IntVec3>();
+
+        /// <summary>
+        /// 증기가 닿는 칸을 시전자와 가까운 순서로 채운다. SteamProjectile이 이 순서대로 퍼뜨린다.
+        /// </summary>
+        private void FillAffectedCells(IntVec3 targetCell, List<IntVec3> result)
+        {
+            result.Clear();
+
+            var map = caster.Map;
+            var center = caster.Position;
+            var aim = AimVector(targetCell);
+
+            // 증기는 시전자 칸과 바로 옆 칸에서 뿜어져 나온다. 벽이나 문틀 옆에서 기울여 쏘는 자리에서도 닿게 하기 위함이다.
+            _tmpOrigins.Clear();
+            _tmpOrigins.Add(center);
+            for (int i = 0; i < 4; ++i)
+            {
+                var origin = center + GenAdj.CardinalDirections[i];
+                if (origin.InBounds(map) && origin.CanBeSeenOverFast(map))
+                {
+                    _tmpOrigins.Add(origin);
+                }
+            }
+
+            _tmpConeCells.Clear();
+            _tmpReachedCells.Clear();
+            foreach (var cell in GenRadial.RadialCellsAround(center, verbProps.range, false))
+            {
+                if (!cell.InBounds(map) || !InCone(center, cell, aim)) { continue; }
+
+                _tmpConeCells.Add(cell);
+                for (int i = 0; i < _tmpOrigins.Count; ++i)
+                {
+                    if (GenSight.LineOfSight(_tmpOrigins[i], cell, map, true))
+                    {
+                        _tmpReachedCells.Add(cell);
+                        break;
+                    }
+                }
+            }
+
+            // 좁은 문틈을 지난 증기는 부채꼴 안에서 옆으로 한 칸 번진다.
+            _tmpSpreadCells.Clear();
+            for (int i = 0; i < _tmpConeCells.Count; ++i)
+            {
+                var cell = _tmpConeCells[i];
+                if (_tmpReachedCells.Contains(cell)) { continue; }
+
+                for (int j = 0; j < 4; ++j)
+                {
+                    var adjacent = cell + GenAdj.CardinalDirections[j];
+                    if (_tmpReachedCells.Contains(adjacent) && adjacent.CanBeSeenOverFast(map))
+                    {
+                        _tmpSpreadCells.Add(cell);
+                        break;
+                    }
+                }
+            }
+            _tmpReachedCells.AddRange(_tmpSpreadCells);
+
+            for (int i = 0; i < _tmpConeCells.Count; ++i)
+            {
+                if (_tmpReachedCells.Contains(_tmpConeCells[i]))
+                {
+                    result.Add(_tmpConeCells[i]);
+                }
+            }
+        }
+
+        private bool InCone(IntVec3 center, IntVec3 cell, Vector3 aim)
+        {
+            var offset = (cell - center).ToVector3();
+            for (int i = 0; i < ConeSamplePoints.Length; ++i)
+            {
+                if (Vector3.Angle(offset + ConeSamplePoints[i], aim) < VerbProps.breathAngleHalf) { return true; }
+            }
+
+            return false;
         }
     }
 }

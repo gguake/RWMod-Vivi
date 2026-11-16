@@ -284,7 +284,6 @@
     <Compile Include="Hornet\MentalState_HornetBerserk.cs" />
     <Compile Include="Needle\Needle.cs" />
     <Compile Include="FoodDrainRecipe\RecipeModExtension.cs" />
-    <Compile Include="Utility\CellUtility.cs" />
     <Compile Include="Utility\IOUtility.cs" />
     <Compile Include="Utility\ViviUtility.cs" />
     <Compile Include="FoodDrainRecipe\Bill_ProductionWithFoodDrain.cs" />
