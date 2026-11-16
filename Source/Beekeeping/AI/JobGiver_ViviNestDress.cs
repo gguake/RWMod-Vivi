@@ -37,7 +37,7 @@ namespace VVRace
 
             var map = pawn.Map;
             var job = (ViviNestProduction.NeedsCostume(pawn) ? WearJob(pawn, map.listerThings.ThingsOfDef(ViviNestProduction.CostumeFor(pawn))) : null)
-                ?? (ViviNestProduction.NeedsSlingshot(pawn) ? EquipJob(pawn, nest, map.listerThings.ThingsOfDef(VVThingDefOf.VV_Slingshot), nestOwned: true) : null);
+                ?? (ViviNestProduction.NeedsSlingshot(pawn) ? EquipJob(pawn, map.listerThings.ThingsOfDef(VVThingDefOf.VV_Slingshot), anyWeapon: false) : null);
             if (job != null) { return job; }
 
             var ticks = Find.TickManager.TicksGame;
@@ -45,7 +45,7 @@ namespace VVRace
             pawn.mindState.nextApparelOptimizeTick = ticks + Rand.Range(OptimizeIntervalMin, OptimizeIntervalMax);
 
             return WearJob(pawn, map.listerThings.ThingsInGroup(ThingRequestGroup.Apparel))
-                ?? EquipJob(pawn, nest, map.listerThings.ThingsInGroup(ThingRequestGroup.Weapon), nestOwned: false);
+                ?? EquipJob(pawn, map.listerThings.ThingsInGroup(ThingRequestGroup.Weapon), anyWeapon: true);
         }
 
         private static Job WearJob(Pawn pawn, List<Thing> candidates)
@@ -100,7 +100,9 @@ namespace VVRace
             return replacing ? score : score * 10f;
         }
 
-        private static Job EquipJob(Pawn pawn, LordJob_ViviNest nest, List<Thing> candidates, bool nestOwned)
+        // 쓸 수 있는 물건인지는 IsForbidden(둥지 사용 허용 판정)이 가린다. 아무 무기나 찾을 때는 무기로 잡히는 재료(원목 등)와
+        // 투석병 몫인 슬링샷을 뺀다.
+        private static Job EquipJob(Pawn pawn, List<Thing> candidates, bool anyWeapon)
         {
             if (pawn.equipment == null || candidates.Count == 0) { return null; }
             if (pawn.WorkTagIsDisabled(WorkTags.Violent) || !pawn.health.capacities.CapableOf(PawnCapacityDefOf.Manipulation) || AlreadySatisfiedWithCurrentWeapon(pawn)) { return null; }
@@ -110,7 +112,8 @@ namespace VVRace
             for (int i = 0; i < candidates.Count; ++i)
             {
                 var weapon = candidates[i];
-                if (nest.Stock.IsNestOwned(weapon) != nestOwned || weapon.IsForbidden(pawn) || weapon.IsBurning() || !ShouldEquipWeapon(weapon, pawn)) { continue; }
+                if (anyWeapon && (weapon.def.IsStuff || weapon.def == VVThingDefOf.VV_Slingshot)) { continue; }
+                if (weapon.IsForbidden(pawn) || weapon.IsBurning() || !ShouldEquipWeapon(weapon, pawn)) { continue; }
 
                 var distance = weapon.Position.DistanceToSquared(pawn.Position);
                 if (distance >= bestDistance || !pawn.CanReserveAndReach(weapon, PathEndMode.OnCell, Danger.Some)) { continue; }

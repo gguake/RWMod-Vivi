@@ -70,7 +70,7 @@
 
 <!-- 정착대 -->
 <VV_Letter_ViviNestSettlersLabel>비비 무리 정착</VV_Letter_ViviNestSettlersLabel>
-<VV_Letter_ViviNestSettlers>{0}의 비비 {1}명이 유인통 근처의 빈 방에 정착하러 찾아왔습니다.\n\n비비들은 주변의 꽃과 나무에서 꿀과 꽃가루, 프로폴리스를 채집해 비비 크림과 밀랍을 만들고 필요한 시설을 스스로 건설합니다. 비비들이 모아 둔 물건에는 금지 표시가 붙어 있지만, 정착민이 마음대로 가져가도 신경 쓰지 않습니다.\n\n비비들은 정착민이 둥지 주변을 오가는 것은 개의치 않지만, 둥지 방 안으로 들어오면 빠르게 경계하기 시작합니다. 경계심이 한계에 달하면 적대적으로 돌변하며 둥지를 떠나 버리므로, 정착민이 함부로 들어가지 않도록 방문을 잠그거나 허용 구역을 지정해 두세요.</VV_Letter_ViviNestSettlers>
+<VV_Letter_ViviNestSettlers>{0}의 비비 {1}명이 유인통 근처의 빈 방에 정착하러 찾아왔습니다.\n\n비비들은 주변의 꽃과 나무에서 꿀과 꽃가루, 프로폴리스를 채집해 비비 크림과 밀랍을 만들고 필요한 시설을 스스로 건설합니다. 비비들이 모아 둔 물건에는 금지 표시가 붙어 있지만, 정착민이 마음대로 가져가도 신경 쓰지 않습니다. 비비들도 둥지 주변의 선반에 놓인 물건은 누구의 것인지 가리지 않고 쓰며, 선반의 보관 설정을 따르지 않고 물건을 올려 둡니다.\n\n비비들은 정착민이 둥지 주변을 오가는 것은 개의치 않지만, 둥지 방 안으로 들어오면 빠르게 경계하기 시작합니다. 경계심이 한계에 달하면 적대적으로 돌변하며 둥지를 떠나 버리므로, 정착민이 함부로 들어가지 않도록 방문을 잠그거나 허용 구역을 지정해 두세요.</VV_Letter_ViviNestSettlers>
 <VV_Message_ViviNestSettlersCanceled>찾아오기로 했던 비비 무리가 오지 않았습니다.\n{0}</VV_Message_ViviNestSettlersCanceled>
 <VV_Message_ViviNestWary>{0}의 비비들이 둥지 방에 들어온 정착민을 경계하기 시작했습니다.</VV_Message_ViviNestWary>
 <VV_Message_ViviNestVeryWary>{0}의 비비들이 심하게 경계하고 있습니다. 정착민이 비비들의 방에 들어가지 않도록 주의하세요.</VV_Message_ViviNestVeryWary>

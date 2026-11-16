@@ -104,7 +104,13 @@ namespace VVRace
             return def.StatBaseDefined(VVStatDefOf.VV_PlantHoneyGatherYield) && GameComponent_Mana.HasHoneyYield(def);
         }
 
-        public static bool IsHoneyFlower(Thing thing) => thing != null && (thing is Plant || thing is ArcanePlant) && IsHoneyFlowerDef(thing.def);
+        // 꿀을 딸 수 있는(자라면 딸 수 있게 되는) 꽃만 센다. 꿀 수율이 있는 정의라도 지금은 채집할 수 없는 식물(개화기가 아닌 꽃 등)은 빠진다.
+        public static bool IsHoneyFlower(Thing thing)
+        {
+            if (thing is Plant plant) { return IsHoneyFlowerDef(plant.def) && ViviNestGarden.IsHoneySource(plant); }
+
+            return thing is ArcanePlant && IsHoneyFlowerDef(thing.def);
+        }
 
         private static readonly HashSet<Room> _tmpRooms = new HashSet<Room>();
         private static readonly HashSet<Room> _tmpJudgedRooms = new HashSet<Room>();

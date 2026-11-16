@@ -43,7 +43,7 @@ namespace VVRace
 
         private static Job SowFlowerJob(Pawn pawn, LordJob_ViviNest nest)
         {
-            if (nest.Garden.FlowerCount >= nest.Garden.FlowerTarget() || nest.Garden.FlowerSpotSearchPaused) { return null; }
+            if (!nest.Garden.NeedsMoreFlowers || nest.Garden.FlowerSpotSearchPaused) { return null; }
 
             var map = pawn.Map;
             var cells = nest.Territory.ActivityCells;

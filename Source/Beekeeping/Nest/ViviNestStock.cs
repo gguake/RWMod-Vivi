@@ -123,10 +123,13 @@ namespace VVRace
                 CountCell(map, cell);
             }
 
+            CountNearShelves(map);
+
+            // 영역이나 선반에 들어간 물건은 목록에서 빠지므로(KeepClaim) 위 집계와 겹치지 않는다.
             PruneClaimed();
             for (int i = 0; i < _claimed.Count; ++i)
             {
-                if (_claimed[i].Spawned && IsOwnedMark(_claimed[i]) && IsUsableClaim(_claimed[i])) { Count(_claimed[i]); }
+                if (_claimed[i].Spawned && IsStockItem(_claimed[i]) && IsUsableClaim(_claimed[i])) { Count(_claimed[i]); }
             }
 
             var pawns = _owner.lord?.ownedPawns;
@@ -152,12 +155,50 @@ namespace VVRace
             }
         }
 
+        // 둥지 방 밖 선반의 물건은 누가 놓았든 둥지 재고로 센다. 갈 수 없는 선반은 실제로 쓸 수 없으므로 세지 않는다.
+        private void CountNearShelves(Map map)
+        {
+            var checker = ReachChecker();
+            var groups = map.haulDestinationManager.AllGroupsListForReading;
+            for (int i = 0; i < groups.Count; ++i)
+            {
+                if (!IsShelf(groups[i])) { continue; }
+
+                var reachChecked = false;
+                var cells = groups[i].CellsList;
+                for (int j = 0; j < cells.Count; ++j)
+                {
+                    // 야외 보관 칸 위에 놓인 선반 칸은 영역 집계에서 이미 셌다.
+                    if (RankOf(cells[j]) != ViviNestStorageRank.NearShelf || Territory.IsTerritoryCell(cells[j])) { continue; }
+
+                    if (!reachChecked)
+                    {
+                        reachChecked = true;
+                        if (checker != null && !checker.CanReach((Thing)groups[i].parent, PathEndMode.Touch, Danger.Some)) { break; }
+                    }
+                    CountCell(map, cells[j]);
+                }
+            }
+        }
+
+        private Pawn ReachChecker()
+        {
+            var pawns = _owner.lord?.ownedPawns;
+            if (pawns == null) { return null; }
+
+            for (int i = 0; i < pawns.Count; ++i)
+            {
+                if (pawns[i].Spawned && !pawns[i].Downed && !pawns[i].DevelopmentalStage.Baby()) { return pawns[i]; }
+            }
+            return null;
+        }
+
         private void CountCell(Map map, IntVec3 cell)
         {
             var things = map.thingGrid.ThingsListAtFast(cell);
             for (int i = 0; i < things.Count; ++i)
             {
-                if (IsOwnedMark(things[i]))
+                if (IsStockItem(things[i]))
                 {
                     Count(things[i]);
                 }
@@ -189,7 +230,8 @@ namespace VVRace
         private bool KeepClaim(Thing thing, bool saving)
         {
             if (thing == null || thing.Destroyed) { return false; }
-            if (thing.Spawned) { return thing.Map == Map && !Territory.IsTerritoryCell(thing.Position); }
+            // 영역이나 선반에 들어간 물건은 자리로 판정하므로 기억할 필요가 없다. 그 뒤 누가 가져가도 쫓아가지 않는다.
+            if (thing.Spawned) { return thing.Map == Map && !IsStorageAreaCell(thing.Position); }
 
             var holder = thing.ParentHolder;
             if (holder == null) { return !saving; }
@@ -209,15 +251,18 @@ namespace VVRace
             for (int i = 0; i < _claimed.Count; ++i)
             {
                 var thing = _claimed[i];
-                if (thing.Spawned && IsOwnedMark(thing) && RankOf(thing.Position) != ViviNestStorageRank.NearShelf) { yield return thing; }
+                if (thing.Spawned && IsStockItem(thing)) { yield return thing; }
             }
 
             var map = Map;
             foreach (var cell in Territory.OutdoorStorageCells)
             {
+                // 비축 구역이 깔린 칸의 물건을 옮기면 정착민이 되돌려 놓아 끝없이 주고받게 된다. 선반이 놓인 칸은 이미 가장 좋은 자리다.
+                if (map.zoneManager.ZoneAt(cell) != null || RankOf(cell) == ViviNestStorageRank.NearShelf) { continue; }
+
                 foreach (var thing in map.thingGrid.ThingsListAtFast(cell))
                 {
-                    if (IsOwnedMark(thing)) { yield return thing; }
+                    if (IsStockItem(thing)) { yield return thing; }
                 }
             }
 
@@ -230,7 +275,7 @@ namespace VVRace
                     if (RankOf(cell) != ViviNestStorageRank.RoomFloor) { continue; }
                     foreach (var thing in map.thingGrid.ThingsListAtFast(cell))
                     {
-                        if (IsOwnedMark(thing)) { yield return thing; }
+                        if (IsStockItem(thing)) { yield return thing; }
                     }
                 }
             }
@@ -263,19 +308,24 @@ namespace VVRace
 
         public static bool IsShelfRank(ViviNestStorageRank rank) => rank == ViviNestStorageRank.NearShelf || rank == ViviNestStorageRank.RoomShelf;
 
-        private static bool IsOwnedMark(Thing thing)
+        // 금지 표시는 정착민이 둥지 생산물을 저절로 가져가지 않게 하는 표시일 뿐이고, 둥지는 그 표시를 읽지 않는다.
+        // 돌 조각은 보관 칸에 굴러와도 둥지가 쓰는 물건이 아니다.
+        private static bool IsStockItem(Thing thing)
         {
-            return thing.def.category == ThingCategory.Item && !(thing is Corpse) && thing.IsForbidden(Faction.OfPlayer);
+            return thing.def.category == ThingCategory.Item && !(thing is Corpse) && !thing.def.IsWithinCategory(ThingCategoryDefOf.Chunks);
         }
 
         private bool IsUsableClaim(Thing thing) => Territory.InWorkRange(thing.Position);
+
+        // 둥지 방, 야외 보관 칸, 활동 범위 안 선반. 여기 있는 물건은 누가 놓았든 둥지가 쓴다.
+        public bool IsStorageAreaCell(IntVec3 cell) => Territory.IsTerritoryCell(cell) || RankOf(cell) == ViviNestStorageRank.NearShelf;
 
         public bool IsNestOwned(Thing thing)
         {
             if (thing.Spawned)
             {
-                return thing.Map == Map && IsOwnedMark(thing)
-                    && (Territory.IsTerritoryCell(thing.Position) || (_claimed.Contains(thing) && IsUsableClaim(thing)));
+                return thing.Map == Map && IsStockItem(thing)
+                    && (IsStorageAreaCell(thing.Position) || (_claimed.Contains(thing) && IsUsableClaim(thing)));
             }
 
             return thing.ParentHolder != null && HeldByMember(thing.ParentHolder);
@@ -395,8 +445,9 @@ namespace VVRace
             var shelf = IsShelfRank(rank);
             if (shelf)
             {
-                if (!cell.IsValidStorageFor(map, thing)) { return false; }
-                if ((thing.Spawned && thing.Map == map && thing.Position == cell) || HasForeignStack(cell, thing.def)) { return false; }
+                // 선반의 보관 설정과 이미 놓인 더미가 누구 것인지는 따지지 않는다. 가구가 원래 받을 수 있는 물건인지와 남은 자리만 본다.
+                if (thing.Spawned && thing.Map == map && thing.Position == cell) { return false; }
+                if (!FixedFilterAllows(cell, map, thing) || SpaceFor(cell, map, thing) <= 0) { return false; }
             }
             else
             {
@@ -408,7 +459,7 @@ namespace VVRace
                     if (other.def.category != ThingCategory.Item) { continue; }
                     items++;
                     if (other == thing) { return false; }
-                    if (!IsOwnedMark(other) || !other.CanStackWith(thing) || other.stackCount >= other.def.stackLimit) { return false; }
+                    if (!other.CanStackWith(thing) || other.stackCount >= other.def.stackLimit) { return false; }
                 }
                 if (items > 1) { return false; }
             }
@@ -416,7 +467,34 @@ namespace VVRace
             return carrier == null || (carrier.CanReserve(cell) && carrier.CanReach(cell, shelf ? PathEndMode.ClosestTouch : PathEndMode.OnCell, Danger.Some));
         }
 
-        public int StorableCount(IntVec3 cell, Thing thing) => UnityEngine.Mathf.Min(thing.stackCount, cell.GetItemStackSpaceLeftFor(Map, thing.def));
+        public int StorableCount(IntVec3 cell, Thing thing) => UnityEngine.Mathf.Min(thing.stackCount, SpaceFor(cell, Map, thing));
+
+        private static bool FixedFilterAllows(IntVec3 cell, Map map, Thing thing)
+        {
+            var fixedSettings = cell.GetSlotGroup(map)?.parent?.GetParentStoreSettings();
+            return fixedSettings == null || fixedSettings.filter.Allows(thing);
+        }
+
+        // 그 칸에 실제로 놓을 수 있는 수량. 바닐라 직접 놓기(GenPlace)와 같은 기준으로, 합쳐지는 더미의 빈자리와 빈 칸 수를 센다.
+        private static int SpaceFor(IntVec3 cell, Map map, Thing thing)
+        {
+            var maxItems = cell.GetMaxItemsAllowedInCell(map);
+            var space = 0;
+            var items = 0;
+            var things = map.thingGrid.ThingsListAtFast(cell);
+            for (int i = 0; i < things.Count; ++i)
+            {
+                var other = things[i];
+                if (other.def.entityDefToBuild != null && other.def.entityDefToBuild.passability != Traversability.Standable) { return 0; }
+                if (other.def.surfaceType == SurfaceType.None && other.def.passability != Traversability.Standable
+                    && (maxItems <= 1 || other.def.category != ThingCategory.Item)) { return 0; }
+                if (other.def.category != ThingCategory.Item) { continue; }
+
+                items++;
+                if (other != thing && other.CanStackWith(thing)) { space += UnityEngine.Mathf.Max(other.def.stackLimit - other.stackCount, 0); }
+            }
+            return space + UnityEngine.Mathf.Max(maxItems - items, 0) * thing.def.stackLimit;
+        }
 
         public bool HasForeignStack(IntVec3 cell, ThingDef def)
         {

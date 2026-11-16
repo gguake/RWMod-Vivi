@@ -23,7 +23,8 @@ namespace VVRace
 
                 var job = JobMaker.MakeJob(JobDefOf.HaulToCell, thing, cell);
                 job.count = stock.StorableCount(cell, thing);
-                job.haulMode = ViviNestStock.IsShelfRank(stock.RankOf(cell)) ? HaulMode.ToCellStorage : HaulMode.ToCellNonStorage;
+                // 선반의 보관 설정을 따르지 않으므로 선반에도 비보관 방식으로 놓는다(보관 방식은 이동 중 보관 설정을 다시 검사해 실패한다).
+                job.haulMode = HaulMode.ToCellNonStorage;
                 return job;
             }
 

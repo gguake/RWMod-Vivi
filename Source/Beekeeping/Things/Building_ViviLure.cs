@@ -38,7 +38,10 @@ namespace VVRace
 
     public class Building_ViviLure : Building_Storage
     {
-        private const int InspectCacheInterval = 250;
+        // 부지 평가는 주변 칸을 모두 훑으므로 열람용 캐시를 길게 둔다(유인 판정은 EvaluateSiteNow로 그때 새로 평가한다).
+        // 미끼·적대 세력 같은 방문 조건 줄은 값이 싸므로 더 자주 다시 만든다.
+        private const int SiteCacheInterval = 2000;
+        private const int ConditionRowsInterval = 250;
         private const int SmokeIntervalRare = 3;
 
         private ViviLurePhase _phase;
@@ -50,6 +53,7 @@ namespace VVRace
         private int _cacheVersion;
         private readonly List<ViviLureConditionRow> _conditionRows = new List<ViviLureConditionRow>();
         private int _conditionRowsVersion = -1;
+        private int _conditionRowsTick = -99999;
         private int _rareTickCount;
 
         public ViviLurePhase Phase => _phase;
@@ -108,7 +112,7 @@ namespace VVRace
             if (!Spawned) { return; }
 
             var ticks = Find.TickManager.TicksGame;
-            if (_cachedReport != null && ticks - _cachedTick < InspectCacheInterval) { return; }
+            if (_cachedReport != null && ticks - _cachedTick < SiteCacheInterval) { return; }
 
             _cachedTick = ticks;
             _cachedReport = ViviNestSiteEvaluator.Evaluate(Map, Position);
@@ -120,9 +124,11 @@ namespace VVRace
             get
             {
                 RefreshCacheIfNeeded();
-                if (_conditionRowsVersion != _cacheVersion)
+                var ticks = Find.TickManager.TicksGame;
+                if (_conditionRowsVersion != _cacheVersion || ticks - _conditionRowsTick >= ConditionRowsInterval)
                 {
                     _conditionRowsVersion = _cacheVersion;
+                    _conditionRowsTick = ticks;
                     BuildConditionRows();
                 }
                 return _conditionRows;

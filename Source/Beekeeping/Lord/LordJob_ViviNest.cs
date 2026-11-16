@@ -42,6 +42,7 @@ namespace VVRace
         public const float LowFoodDaysToLeave = 1f;
         public const int MinFlowersToStay = 10;
         public const float StarvingDaysToLeave = 0.5f;
+        public const float StarvingFoodLevel = 0.1f;
         public const float RoomLostDaysToLeave = 1f;
 
         public override bool AddFleeToil => false;
@@ -251,8 +252,9 @@ namespace VVRace
                 }
             }
 
+            // 재고에 잡힌 음식을 실제로는 먹지 못하는 경우가 있으므로, 모두가 굶주린 상태는 재고와 상관없이 굶는 것으로 본다.
             var starving = fed > 0 && ((_production.FoodReserveDays() < LowFoodDaysToLeave && _garden.GatherableFlowerCount < MinFlowersToStay)
-                || (_stock.FoodNutrition <= 0.01f && foodSum / fed < 0.1f));
+                || foodSum / fed < StarvingFoodLevel);
             _starvingSince = starving ? (_starvingSince < 0 ? ticks : _starvingSince) : -1;
 
             var roomCells = _territory.OwnedRoomCells.Count;
@@ -365,24 +367,37 @@ namespace VVRace
             return room == null || room.PsychologicallyOutdoors || _territory.IsNestRoomCell(thing.Position);
         }
 
+        // 둥지가 직접 만들거나 들여온 물건: 정착민이 저절로 가져가지 않게 금지 표시를 붙이고, 영역 밖에 있으면 되가져올 수 있게 기억한다.
         public void MarkOwned(Thing thing)
         {
             if (thing == null || thing.Destroyed || thing is Corpse || thing is Pawn) { return; }
 
             thing.SetForbidden(true, warnOnFail: false);
-            if (!thing.Spawned || !_territory.IsTerritoryCell(thing.Position))
+            Track(thing);
+        }
+
+        // 둥지 비비가 내려놓은 물건: 금지 표시는 건드리지 않는다. 기존 더미에 합쳐졌으면 그 더미를 따르고,
+        // 영역 밖에 새로 생긴 더미만 되가져올 수 있게 기억한다.
+        public void MarkDropped(Thing thing)
+        {
+            if (thing == null || thing.Destroyed || thing is Corpse || thing is Pawn) { return; }
+
+            if (thing.Spawned && thing.TickSpawned != Find.TickManager.TicksGame)
+            {
+                _stock.MarkDirty();
+                return;
+            }
+
+            Track(thing);
+        }
+
+        private void Track(Thing thing)
+        {
+            if (!thing.Spawned || !_stock.IsStorageAreaCell(thing.Position))
             {
                 _stock.Claim(thing);
             }
             _stock.MarkDirty();
-        }
-
-        public void MarkDropped(Thing thing)
-        {
-            if (thing == null) { return; }
-            if (thing.Spawned && thing.TickSpawned != Find.TickManager.TicksGame && !_stock.IsNestOwned(thing)) { return; }
-
-            MarkOwned(thing);
         }
 
         public bool TryPlaceOwned(Thing thing, IntVec3 center)
@@ -390,12 +405,13 @@ namespace VVRace
             var map = Map;
             var def = thing.def;
             MarkOwned(thing);
-            if (!GenPlace.TryPlaceThing(thing, center, map, ThingPlaceMode.Near, out var placed, extraValidator: c => !_stock.HasForeignStack(c, def)))
+            if (!GenPlace.TryPlaceThing(thing, center, map, ThingPlaceMode.Near, out _, extraValidator: c => !_stock.HasForeignStack(c, def)))
             {
                 return false;
             }
 
-            MarkOwned(placed);
+            // 기존 더미에 합쳐졌으면 그 더미의 상태를 따른다.
+            _stock.MarkDirty();
             return true;
         }
 
