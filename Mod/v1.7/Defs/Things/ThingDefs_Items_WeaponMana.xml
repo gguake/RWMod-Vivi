@@ -173,7 +173,7 @@
         <forcedMissRadius>2.9</forcedMissRadius>
         <warmupTime>3.8</warmupTime>
         <ai_AvoidFriendlyFireRadius>3</ai_AvoidFriendlyFireRadius>
-        <range>33.9</range>
+        <range>38.9</range>
         <soundCast>Shot_IncendiaryLauncher</soundCast>
         <soundCastTail>GunTail_Heavy</soundCastTail>
         <targetParams>
@@ -597,8 +597,8 @@
         <hasStandardCommand>true</hasStandardCommand>
         <defaultProjectile>VV_Bullet_Froststing</defaultProjectile>
         <warmupTime>5.0</warmupTime>
-        <minRange>11.9</minRange>
-        <range>54.9</range>
+        <minRange>7.9</minRange>
+        <range>49.6</range>
         <soundCast>VV_FroststingShot</soundCast>
         <canGoWild>false</canGoWild>
       </li>
@@ -658,7 +658,7 @@
     <projectile>
       <speed>115</speed>
       <damageDef>ArrowHighVelocity</damageDef>
-      <damageAmountBase>40</damageAmountBase>
+      <damageAmountBase>35</damageAmountBase>
       <armorPenetrationBase>1</armorPenetrationBase>
       <stoppingPower>4</stoppingPower>
     </projectile>
