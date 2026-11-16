@@ -431,17 +431,23 @@ namespace VVRace
 
         public void SetAttunementLevel(int level)
         {
-            ChangeAttunementLevel(Mathf.Clamp(level, 0, MaxAttunementLevel));
+            SetAttunementLevel(level, sendLetter: true);
         }
 
-        private void ChangeAttunementLevel(int level)
+        // 엔딩의 5·6단계는 개화·승리 편지가 레벨업 안내를 대신한다.
+        public void SetAttunementLevel(int level, bool sendLetter)
+        {
+            ChangeAttunementLevel(Mathf.Clamp(level, 0, MaxAttunementLevel), sendLetter);
+        }
+
+        private void ChangeAttunementLevel(int level, bool sendLetter = true)
         {
             var previousLevel = _attunementInfo.attunementLevel;
             if (previousLevel == level) { return; }
             _attunementInfo.attunementLevel = level;
 
             var levelUp = level > previousLevel;
-            if (levelUp && level > 1)
+            if (levelUp && level > 1 && sendLetter)
             {
                 SendLevelUpLetter(level);
             }

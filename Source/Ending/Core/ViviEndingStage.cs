@@ -3,13 +3,16 @@
     public enum ViviEndingStage : byte
     {
         None = 0,
-        AltarUnlocked = 2,
-        Siege = 3,
-        Calm = 4,
-        Boss = 5,
-        Coronation = 6,
-        Completed = 7,
-        Failed = 8,
+        Tales = 1,
+        Missive = 2,
+        Ruins = 3,
+        AltarUnlocked = 4,
+        Siege = 5,
+        Calm = 6,
+        Boss = 7,
+        Coronation = 8,
+        Completed = 9,
+        Failed = 10,
     }
 
     public static class ViviEndingStageUtility

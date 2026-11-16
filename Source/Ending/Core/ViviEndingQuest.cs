@@ -8,36 +8,24 @@ using Verse.AI.Group;
 
 namespace VVRace
 {
+    // 동화책 1권부터 대관식까지 에픽 퀘스트 하나로 진행한다. 개화 전 단계(동화책·밀서·유적)의 상태는 퀘스트 부품이 아니라 보조 객체가 가진다.
     public class ViviEndingQuest : IExposable
     {
         public static ViviEndingQuest Current => GameComponent_Mana.Of(Verse.Current.Game)?.EndingQuest;
 
         private const int ScanIntervalTicks = 2500;
+        private const int CoreLostCacheTicks = 60;
 
-        public const int MissiveMinEchoStage = 4;
-        private static readonly IntRange MissiveDelayTicks = new IntRange(60000, 120000);
-
-        private Quest _missiveQuest;
-        private Quest _bloomQuest;
-
-        private int _missiveDueTick = -1;
-
+        private Quest _quest;
+        private ArcanePlant_Everflower _anchor;
         private Pawn _assimilated;
 
-        public ViviEndingQuest()
-        {
-            _amberCoreRequest = new ViviAmberCoreRequest(this);
-            _ambience = new ViviEndingAmbience(this);
+        // 끝난 퀘스트는 30일 뒤 부품이 지워지므로 개화 시작 여부는 따로 저장한다.
+        private bool _bloomStarted;
 
-            Hediff_EverflowerAssimilation.ResetRegistry();
-        }
-
-        public Pawn AssimilatedPawn => _assimilated != null && Hediff_EverflowerAssimilation.IsAssimilated(_assimilated) ? _assimilated : null;
-
-        private ArcanePlant_Everflower _anchor;
-
-        private ViviEndingEchoLetters _echoLetters = new ViviEndingEchoLetters();
-        private ViviAmberCoreRequest _amberCoreRequest;
+        private ViviEndingTales _tales;
+        private ViviAncientRuins _ruins;
+        private ViviEndingEpilogue _epilogue;
         private ViviEndingAmbience _ambience;
 
         private Quest _cachedQuest;
@@ -47,34 +35,58 @@ namespace VVRace
         private QuestPart_Delay _calmPart;
         private QuestPart_ViviApocrypha _apocryphaPart;
 
-        public Quest MissiveQuest => _missiveQuest;
-        public Quest BloomQuest => _bloomQuest;
+        private int _coreLostCheckTick = -1;
+        private bool _coreLost;
 
-        public ViviEndingEchoLetters EchoLetters => _echoLetters;
-        public ViviAmberCoreRequest AmberCoreRequest => _amberCoreRequest;
+        public ViviEndingQuest()
+        {
+            _tales = new ViviEndingTales(this);
+            _ruins = new ViviAncientRuins(this);
+            _epilogue = new ViviEndingEpilogue(this);
+            _ambience = new ViviEndingAmbience(this);
+
+            Hediff_EverflowerAssimilation.ResetRegistry();
+        }
+
+        public Quest Quest => _quest;
+
+        public ViviEndingTales Tales => _tales;
+        public ViviAncientRuins Ruins => _ruins;
+        public ViviEndingEpilogue Epilogue => _epilogue;
         public ViviEndingAmbience Ambience => _ambience;
+
+        public Pawn AssimilatedPawn => _assimilated != null && Hediff_EverflowerAssimilation.IsAssimilated(_assimilated) ? _assimilated : null;
 
         public ViviEndingStage Stage
         {
             get
             {
-                if (_bloomQuest != null)
+                if (_quest == null) { return ViviEndingStage.None; }
+
+                var state = StatePart;
+                switch (_quest.State)
                 {
-                    switch (_bloomQuest.State)
-                    {
-                        case QuestState.EndedSuccess:
-                            return ViviEndingStage.Completed;
+                    case QuestState.EndedSuccess:
+                        return ViviEndingStage.Completed;
 
-                        case QuestState.Ongoing:
-                        case QuestState.NotYetAccepted:
-                            return StatePart?.Stage ?? ViviEndingStage.Siege;
+                    case QuestState.Ongoing:
+                    case QuestState.NotYetAccepted:
+                        return state?.Stage ?? JourneyStage;
 
-                        default:
-                            return ViviEndingStage.Failed;
-                    }
+                    default:
+                        return _bloomStarted ? ViviEndingStage.Failed : JourneyStage;
                 }
+            }
+        }
 
-                return _missiveQuest != null ? ViviEndingStage.AltarUnlocked : ViviEndingStage.None;
+        private ViviEndingStage JourneyStage
+        {
+            get
+            {
+                if (_ruins.CoreExtracted) { return ViviEndingStage.AltarUnlocked; }
+                if (_ruins.HasCoordinates) { return ViviEndingStage.Ruins; }
+                if (_ruins.MissiveReceived) { return ViviEndingStage.Missive; }
+                return ViviEndingStage.Tales;
             }
         }
 
@@ -105,16 +117,34 @@ namespace VVRace
         public ArcanePlant_Everflower AnchorEverflower => _anchor;
         public Map AnchorMap => _anchor?.MapHeld;
 
-        public Pawn Boss => _bloomQuest != null && _bloomQuest.State == QuestState.Ongoing ? ApocryphaPart?.Boss : null;
+        public Pawn Boss => _quest != null && _quest.State == QuestState.Ongoing ? ApocryphaPart?.Boss : null;
         public CompApocrypha BossComp => Boss?.GetComp<CompApocrypha>();
 
         public int SiegeDurationTicks => BloomPart?.DurationTicks ?? 0;
 
-        public bool IsAltarUnlocked => Stage != ViviEndingStage.None;
+        public bool IsAltarUnlocked => Stage >= ViviEndingStage.AltarUnlocked;
         public bool IsEndingActive => Stage.IsActiveStage();
         public bool IsCompleted => Stage == ViviEndingStage.Completed;
 
         public bool IsAwaitingCoronation => Stage == ViviEndingStage.Coronation;
+
+        // 제단 단계에서 코어와 제단이 어디에도 없으면 분실로 본다. 설명란이 매 프레임 읽으므로 잠시 캐시한다.
+        public bool IsCoreLost
+        {
+            get
+            {
+                if (Stage != ViviEndingStage.AltarUnlocked) { return false; }
+
+                var now = Find.TickManager.TicksGame;
+                if (_coreLostCheckTick < 0 || now < _coreLostCheckTick || now - _coreLostCheckTick >= CoreLostCacheTicks)
+                {
+                    _coreLostCheckTick = now;
+                    _coreLost = !AmberCoreUtility.AnyAmberCoreExists();
+                }
+
+                return _coreLost;
+            }
+        }
 
         public bool IsAnchor(ArcanePlant_Everflower everflower) => everflower != null && everflower == _anchor;
 
@@ -176,7 +206,7 @@ namespace VVRace
 
         private void RefreshPartCache()
         {
-            var quest = _bloomQuest;
+            var quest = _quest;
             var partCount = quest?.PartsListForReading.Count ?? -1;
             if (quest == _cachedQuest && partCount == _cachedPartCount) { return; }
 
@@ -185,7 +215,7 @@ namespace VVRace
             _statePart = quest?.GetFirstPartOfType<QuestPart_ViviEndingState>();
             _bloomPart = quest?.GetFirstPartOfType<QuestPart_ViviBloomCondensation>();
             _apocryphaPart = quest?.GetFirstPartOfType<QuestPart_ViviApocrypha>();
-            _calmPart = quest?.PartsListForReading.OfType<QuestPart_Delay>().FirstOrDefault(v => v.debugLabel == QuestNode_Root_ViviBloom.CalmDelayLabel);
+            _calmPart = quest?.PartsListForReading.OfType<QuestPart_Delay>().FirstOrDefault(v => v.debugLabel == ViviEndingBloomParts.CalmDelayLabel);
         }
 
         public void Tick()
@@ -217,14 +247,21 @@ namespace VVRace
 
             try
             {
-                var stage = Stage;
-                if (stage == ViviEndingStage.None)
+                ReissueEndedQuest();
+
+                switch (Stage)
                 {
-                    TickMissiveArrival(now);
-                }
-                else if (stage == ViviEndingStage.AltarUnlocked)
-                {
-                    ReissueEndedMissiveQuest();
+                    case ViviEndingStage.Tales:
+                        _ruins.TickMissive(now);
+                        break;
+
+                    case ViviEndingStage.Ruins:
+                        _ruins.TickSite();
+                        break;
+
+                    case ViviEndingStage.Completed:
+                        _epilogue.Tick(now);
+                        break;
                 }
             }
             catch (Exception ex)
@@ -238,6 +275,23 @@ namespace VVRace
             _ambience.Update();
         }
 
+        // 〈영원꽃 조율 의식〉을 마칠 때마다 연방이 비적대이면 아직 받지 못한 다음 권을 한 권 보낸다.
+        public void Notify_AttunementRitualCompleted(ArcanePlant_Everflower everflower)
+        {
+            if (everflower == null || everflower.Destroyed || everflower.Faction != Faction.OfPlayer) { return; }
+
+            var stage = Stage;
+            if (stage != ViviEndingStage.None && stage != ViviEndingStage.Tales) { return; }
+            if (!_tales.CanDeliverNext(everflower)) { return; }
+
+            var federation = ViviEndingUtility.FindFederation(requireNonHostile: true);
+            if (federation == null) { return; }
+
+            if (_quest == null && !CreateQuest()) { return; }
+
+            _tales.DeliverNext(everflower, federation);
+        }
+
         public bool Notify_GrandAttunementCompleted(ArcanePlant_Everflower everflower, float quality)
         {
             if (everflower == null || everflower.Destroyed) { return false; }
@@ -249,40 +303,35 @@ namespace VVRace
                 return false;
             }
 
-            return StartBloomQuest(everflower, quality);
+            return StartBloom(everflower, quality);
         }
 
         public void Notify_BossDefeated()
         {
             if (Stage != ViviEndingStage.Boss) { return; }
 
-            ViviEndingSignals.Send(_bloomQuest, ViviEndingSignals.ApocryphaDissolved);
+            ViviEndingSignals.Send(_quest, ViviEndingSignals.ApocryphaDissolved);
         }
 
         public void Notify_CoronationCompleted(ArcanePlant_Everflower everflower, Pawn queen)
         {
             if (Stage != ViviEndingStage.Coronation || !IsAnchor(everflower)) { return; }
 
-            ViviEndingSignals.Send(_bloomQuest, ViviEndingSignals.CoronationCompleted, queen.Named("PAWN"));
+            ViviEndingSignals.Send(_quest, ViviEndingSignals.CoronationCompleted, queen.Named("PAWN"));
         }
 
         public void Notify_EverflowerStolen()
         {
             if (!IsEndingActive) { return; }
 
-            ViviEndingSignals.Send(_bloomQuest, ViviEndingSignals.EverflowerStolen);
+            ViviEndingSignals.Send(_quest, ViviEndingSignals.EverflowerStolen);
         }
 
         public void Notify_AnchorAltarLost(ArcanePlant_Everflower everflower)
         {
             if (!IsEndingActive || !IsAnchor(everflower)) { return; }
 
-            ViviEndingSignals.Send(_bloomQuest, ViviEndingSignals.AnchorLost);
-        }
-
-        public void Notify_EverflowerRitualEcho(ArcanePlant_Everflower everflower, Pawn resonator)
-        {
-            _echoLetters.Notify_EverflowerRitualEcho(everflower, resonator);
+            ViviEndingSignals.Send(_quest, ViviEndingSignals.AnchorLost);
         }
 
         public IEnumerable<Gizmo> GetEverflowerGizmos(ArcanePlant_Everflower everflower)
@@ -305,35 +354,6 @@ namespace VVRace
             if (!IsAnchor(everflower) || !IsEndingActive) { return null; }
 
             return LocalizeString_Inspector.VV_Inspector_EndingBloom.Translate(BloomProgress.ToStringPercent().Named("PERCENT")).Resolve();
-        }
-
-        public static bool MissiveArrivalConditionsMet()
-        {
-            var quest = Current;
-            if (quest == null || quest.Stage != ViviEndingStage.None) { return false; }
-            if (quest.EchoLetters.LastStage < MissiveMinEchoStage) { return false; }
-
-            var everflower = ViviEndingUtility.FindEndingCandidate();
-            if (everflower == null || everflower.AttunementLevel < Building_EverflowerAltar.RequiredAttunementLevel) { return false; }
-            if (!Building_EverflowerAltar.IsValidAltarMap(everflower.MapHeld)) { return false; }
-
-            return ViviEndingUtility.FindFederation(requireNonHostile: true) != null;
-        }
-
-        private void TickMissiveArrival(int now)
-        {
-            if (!MissiveArrivalConditionsMet()) { return; }
-
-            if (_missiveDueTick < 0)
-            {
-                _missiveDueTick = now + MissiveDelayTicks.RandomInRange;
-                return;
-            }
-
-            if (now >= _missiveDueTick)
-            {
-                StartMissiveQuest(null);
-            }
         }
 
         public void BeginAssimilation(Pawn resonator, ArcanePlant_Everflower everflower)
@@ -385,7 +405,7 @@ namespace VVRace
             var stage = Stage;
             if (stage == ViviEndingStage.Siege || stage == ViviEndingStage.Calm || stage == ViviEndingStage.Boss)
             {
-                ViviEndingSignals.Send(_bloomQuest, ViviEndingSignals.ResonatorFallen, pawn.Named("PAWN"));
+                ViviEndingSignals.Send(_quest, ViviEndingSignals.ResonatorFallen, pawn.Named("PAWN"));
                 return;
             }
 
@@ -397,80 +417,49 @@ namespace VVRace
                 MessageTypeDefOf.NegativeEvent);
         }
 
-        public bool StartMissiveQuest(ArcanePlant_Everflower everflower)
+        private bool CreateQuest()
         {
-            if (_missiveQuest != null || _bloomQuest != null) { return false; }
-
-            return CreateMissiveQuest(everflower, reissued: false);
-        }
-
-        private bool CreateMissiveQuest(ArcanePlant_Everflower everflower, bool reissued)
-        {
-            if (everflower == null || everflower.Destroyed)
-            {
-                everflower = ViviEndingUtility.FindEndingCandidate();
-            }
-
             var slate = new Slate();
-            if (everflower != null)
-            {
-                slate.Set("everflower", everflower);
-            }
-            slate.Set("reissued", reissued);
-            SetPoints(slate, everflower?.MapHeld ?? Find.AnyPlayerHomeMap);
-
-            var quest = GenerateQuest(VVQuestScriptDefOf.VV_EndGame_ViviMissive, slate, ViviEndingSignals.GrandAttunementCompleted);
-            if (quest == null) { return false; }
-
-            _missiveQuest = quest;
-            Find.QuestManager.Add(quest);
-            return true;
-        }
-
-        private void ReissueEndedMissiveQuest()
-        {
-            var ended = _missiveQuest;
-            if (ended == null || !ended.Historical) { return; }
-
-            if (!CreateMissiveQuest(null, reissued: true)) { return; }
-
-            Log.Warning($"[ViViRace] the federation missive quest ended unexpectedly ({ended.State}); issued it again.");
-        }
-
-        private bool StartBloomQuest(ArcanePlant_Everflower everflower, float quality)
-        {
-            var map = everflower.MapHeld;
-            var slate = new Slate();
-            slate.Set("anchor", everflower);
-            if (map != null)
-            {
-                slate.Set("map", map);
-            }
-            slate.Set("quality", quality);
-            if (_assimilated != null)
-            {
-                slate.Set("resonator", _assimilated);
-            }
-            SetPoints(slate, map);
-
-            var quest = GenerateQuest(VVQuestScriptDefOf.VV_EndGame_ViviBloom, slate, ViviEndingSignals.AnchorLost);
-            if (quest == null) { return false; }
-
-            _bloomQuest = quest;
-            _anchor = everflower;
-            Find.QuestManager.Add(quest);
-
-            if (_missiveQuest != null && _missiveQuest.State == QuestState.Ongoing)
-            {
-                ViviEndingSignals.Send(_missiveQuest, ViviEndingSignals.GrandAttunementCompleted);
-            }
-
-            return true;
-        }
-
-        private static void SetPoints(Slate slate, Map map)
-        {
+            var map = Find.AnyPlayerHomeMap;
             slate.Set("points", map != null ? StorytellerUtility.DefaultThreatPointsNow(map) : 0f);
+
+            var quest = GenerateQuest(VVQuestScriptDefOf.VV_EndGame_ViviEnding, slate, ViviEndingSignals.EndingFinished);
+            if (quest == null) { return false; }
+
+            _quest = quest;
+            Find.QuestManager.Add(quest);
+            return true;
+        }
+
+        // 개화 전 단계에서 퀘스트가 뜻밖에 끝나면 진행 상태는 보조 객체에 남아 있으므로 같은 단계로 다시 띄운다.
+        private void ReissueEndedQuest()
+        {
+            var ended = _quest;
+            if (ended == null || !ended.Historical || _bloomStarted) { return; }
+
+            _quest = null;
+            if (!CreateQuest())
+            {
+                _quest = ended;
+                return;
+            }
+
+            Log.Warning($"[ViViRace] the ending quest ended unexpectedly before the bloom ({ended.State}); issued it again.");
+        }
+
+        private bool StartBloom(ArcanePlant_Everflower everflower, float quality)
+        {
+            if (_quest == null || _quest.State != QuestState.Ongoing || _bloomStarted || StatePart != null) { return false; }
+
+            var added = ViviEndingBloomParts.TryAdd(_quest, everflower, quality, _assimilated);
+            _cachedQuest = null;
+            _cachedPartCount = -1;
+            if (!added) { return false; }
+
+            _bloomStarted = true;
+            _anchor = everflower;
+            ViviEndingSignals.Send(_quest, ViviEndingSignals.BloomStarted);
+            return true;
         }
 
         // QuestNode.Run은 예외가 나도 오류만 기록하고 불완전한 퀘스트를 반환한다.
@@ -502,13 +491,20 @@ namespace VVRace
 
         public void ExposeData()
         {
-            Scribe_References.Look(ref _missiveQuest, "missiveQuest");
-            Scribe_References.Look(ref _bloomQuest, "bloomQuest");
+            Scribe_References.Look(ref _quest, "quest");
             Scribe_References.Look(ref _anchor, "anchorEverflower");
-            Scribe_Values.Look(ref _missiveDueTick, "missiveDueTick", -1);
             Scribe_References.Look(ref _assimilated, "assimilatedPawn");
-            Scribe_Deep.Look(ref _echoLetters, "echoLetters");
-            Scribe_Deep.Look(ref _amberCoreRequest, "amberCoreRequest", this);
+            Scribe_Values.Look(ref _bloomStarted, "bloomStarted", false);
+            Scribe_Deep.Look(ref _tales, "tales", this);
+            Scribe_Deep.Look(ref _ruins, "ruins", this);
+            Scribe_Deep.Look(ref _epilogue, "epilogue", this);
+
+            if (Scribe.mode == LoadSaveMode.PostLoadInit)
+            {
+                if (_tales == null) { _tales = new ViviEndingTales(this); }
+                if (_ruins == null) { _ruins = new ViviAncientRuins(this); }
+                if (_epilogue == null) { _epilogue = new ViviEndingEpilogue(this); }
+            }
         }
 
         #region 개발자 도구
@@ -525,45 +521,36 @@ namespace VVRace
             var stage = Stage;
             var finished = IsFinished;
 
-            if (!IsAltarUnlocked)
+            if ((stage == ViviEndingStage.None || stage == ViviEndingStage.Tales) && !_tales.AllDelivered)
             {
                 yield return new Command_Action()
                 {
-                    defaultLabel = "DEV: Start missive quest now",
-                    action = () => StartMissiveQuest(everflower),
+                    defaultLabel = $"DEV: Deliver fairy tale {_tales.Delivered + 1}",
+                    action = () => DebugDeliverTale(everflower),
                 };
             }
 
-            if (_echoLetters.LastStage < ViviEndingEchoLetters.MaxStage)
+            if (stage < ViviEndingStage.AltarUnlocked)
             {
                 yield return new Command_Action()
                 {
-                    defaultLabel = $"DEV: Send echo letter {_echoLetters.LastStage + 1}",
-                    action = () => _echoLetters.DebugSendNext(everflower),
+                    defaultLabel = "DEV: Unlock altar now",
+                    action = DebugUnlockAltar,
                 };
             }
 
-            if (_echoLetters.LastStage > 0)
+            if (stage == ViviEndingStage.Ruins && _ruins.Investigated < ViviAncientRuins.EchoCount)
             {
                 yield return new Command_Action()
                 {
-                    defaultLabel = "DEV: Reset echo letters",
-                    action = () => _echoLetters.DebugSetLastStage(0),
-                };
-            }
-
-            if (IsAltarUnlocked && !finished)
-            {
-                yield return new Command_Action()
-                {
-                    defaultLabel = "DEV: Request amber core quest now",
-                    action = DebugRequestAmberCoreQuest,
+                    defaultLabel = $"DEV: Ruin echo {_ruins.Investigated + 1}",
+                    action = () => _ruins.DebugInvestigateNext(ViviEndingUtility.ResonatorOf(everflower)),
                 };
             }
 
             if (!finished)
             {
-                var next = stage == ViviEndingStage.None ? ViviEndingStage.AltarUnlocked : stage + 1;
+                var next = stage + 1;
                 yield return new Command_Action()
                 {
                     defaultLabel = $"DEV: Ending stage → {next}",
@@ -594,7 +581,7 @@ namespace VVRace
                 };
             }
 
-            if (!finished && stage != ViviEndingStage.Coronation && Boss == null)
+            if (!finished && stage >= ViviEndingStage.AltarUnlocked && stage != ViviEndingStage.Coronation && Boss == null)
             {
                 var manifesting = ApocryphaPart != null && ApocryphaPart.IsManifesting;
                 yield return new Command_Action()
@@ -636,6 +623,26 @@ namespace VVRace
             DebugSpawnBossNow(null);
         }
 
+        // 편지·드롭 없이 동화책·밀서·유적을 마친 상태로 만든다(시험 장면용).
+        public void DebugUnlockAltar()
+        {
+            if (Stage >= ViviEndingStage.AltarUnlocked) { return; }
+            if (_quest == null && !CreateQuest()) { return; }
+
+            _tales.DebugSetDelivered(ViviEndingTales.VolumeCount);
+            _ruins.DebugComplete();
+        }
+
+        public void DebugDeliverTale(ArcanePlant_Everflower context)
+        {
+            if (_tales.AllDelivered) { return; }
+
+            if (_quest == null && !CreateQuest()) { return; }
+
+            var everflower = context != null && !context.Destroyed ? context : ViviEndingUtility.FindEndingCandidate();
+            _tales.DeliverNext(everflower, ViviEndingUtility.FindFederation(requireNonHostile: false));
+        }
+
         internal void DebugSetStage(ViviEndingStage stage, ArcanePlant_Everflower context)
         {
             switch (stage)
@@ -653,7 +660,7 @@ namespace VVRace
 
                     if (DebugAdvanceTo(ViviEndingStage.Siege, context))
                     {
-                        ViviEndingSignals.Send(_bloomQuest, ViviEndingSignals.AnchorLost);
+                        ViviEndingSignals.Send(_quest, ViviEndingSignals.AnchorLost);
                     }
                     break;
 
@@ -702,17 +709,9 @@ namespace VVRace
             }
         }
 
-        private void DebugRequestAmberCoreQuest()
-        {
-            if (_amberCoreRequest.Request(ViviEndingUtility.FindFederation(requireNonHostile: false)) == null)
-            {
-                Messages.Message("DEV: no quest could be generated for the ancient amber core.", MessageTypeDefOf.RejectInput, historical: false);
-            }
-        }
-
         private bool DebugAdvanceTo(ViviEndingStage target, ArcanePlant_Everflower context)
         {
-            for (int guard = 0; guard < 10; ++guard)
+            for (int guard = 0; guard < 16; ++guard)
             {
                 var stage = Stage;
                 if (stage == ViviEndingStage.Failed) { return false; }
@@ -744,8 +743,26 @@ namespace VVRace
             switch (stage)
             {
                 case ViviEndingStage.None:
-                    StartMissiveQuest(context);
-                    return _missiveQuest != null;
+                    DebugDeliverTale(context);
+                    return _quest != null;
+
+                case ViviEndingStage.Tales:
+                    while (!_tales.AllDelivered)
+                    {
+                        var delivered = _tales.Delivered;
+                        DebugDeliverTale(context);
+                        if (_tales.Delivered == delivered) { return false; }
+                    }
+
+                    _ruins.SendMissive(ViviEndingUtility.FindFederation(requireNonHostile: false));
+                    return Stage != ViviEndingStage.Tales;
+
+                case ViviEndingStage.Missive:
+                    return _ruins.RevealRuins();
+
+                case ViviEndingStage.Ruins:
+                    _ruins.DebugComplete();
+                    return Stage != ViviEndingStage.Ruins;
 
                 case ViviEndingStage.AltarUnlocked:
                     {
@@ -756,7 +773,7 @@ namespace VVRace
                             return false;
                         }
 
-                        return StartBloomQuest(everflower, DebugRitualQuality);
+                        return StartBloom(everflower, DebugRitualQuality);
                     }
 
                 case ViviEndingStage.Siege:
@@ -790,7 +807,7 @@ namespace VVRace
                     return Stage != ViviEndingStage.Boss;
 
                 case ViviEndingStage.Coronation:
-                    ViviEndingSignals.Send(_bloomQuest, ViviEndingSignals.CoronationCompleted, ViviEndingUtility.ResonatorOf(_anchor).Named("PAWN"));
+                    ViviEndingSignals.Send(_quest, ViviEndingSignals.CoronationCompleted, ViviEndingUtility.ResonatorOf(_anchor).Named("PAWN"));
                     return Stage != ViviEndingStage.Coronation;
 
                 default:
@@ -800,10 +817,9 @@ namespace VVRace
 
         private void DebugReset()
         {
-            foreach (var quest in new[] { _bloomQuest, _missiveQuest })
+            var quest = _quest;
+            if (quest != null)
             {
-                if (quest == null) { continue; }
-
                 if (!quest.Historical)
                 {
                     quest.End(QuestEndOutcome.Unknown, sendLetter: false, playSound: false);
@@ -820,10 +836,14 @@ namespace VVRace
             ViviEndingUtility.RunStep("debug reset: cleanup gimmicks", ViviEndingUtility.CleanupGimmicks);
             ViviEndingUtility.RunStep("debug reset: end ominous silence", ViviEndingUtility.EndOminousSilence);
             ViviEndingUtility.RunStep("debug reset: end golden bloom", ViviEndingUtility.EndGoldenBloom);
+            ViviEndingUtility.RunStep("debug reset: destroy ruins", _ruins.DebugDestroySite);
 
-            _missiveQuest = null;
-            _bloomQuest = null;
+            _quest = null;
             _anchor = null;
+            _bloomStarted = false;
+            _tales = new ViviEndingTales(this);
+            _ruins = new ViviAncientRuins(this);
+            _epilogue = new ViviEndingEpilogue(this);
             _cachedQuest = null;
             _cachedPartCount = -1;
         }

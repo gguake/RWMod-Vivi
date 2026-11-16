@@ -89,15 +89,24 @@
 
         public const string VV_Hediff_AgingFactor = nameof(VV_Hediff_AgingFactor);
 
-        public const string VV_Quest_EndingMissiveGoals = nameof(VV_Quest_EndingMissiveGoals);
         public const string VV_Quest_EndingName = nameof(VV_Quest_EndingName);
         public const string VV_Quest_EndingDesc = nameof(VV_Quest_EndingDesc);
+        public const string VV_Quest_EndingStageTales = nameof(VV_Quest_EndingStageTales);
+        public const string VV_Quest_EndingStageMissiveWait = nameof(VV_Quest_EndingStageMissiveWait);
+        public const string VV_Quest_EndingStageCoordinates = nameof(VV_Quest_EndingStageCoordinates);
+        public const string VV_Quest_EndingStageRuins = nameof(VV_Quest_EndingStageRuins);
+        public const string VV_Quest_EndingStageRuinsExtract = nameof(VV_Quest_EndingStageRuinsExtract);
+        public const string VV_Quest_EndingStageAltar = nameof(VV_Quest_EndingStageAltar);
+        public const string VV_Quest_EndingStageAltarCoreLost = nameof(VV_Quest_EndingStageAltarCoreLost);
+        public const string VV_Quest_EndingStageBloom = nameof(VV_Quest_EndingStageBloom);
+        public const string VV_Quest_EndingStageHostile = nameof(VV_Quest_EndingStageHostile);
+        public const string VV_Quest_EndingTruthLog = nameof(VV_Quest_EndingTruthLog);
 
-        public const string VV_Quest_EndingMissiveConditionsHeader = nameof(VV_Quest_EndingMissiveConditionsHeader);
-        public const string VV_Quest_EndingMissiveConditionVivi = nameof(VV_Quest_EndingMissiveConditionVivi);
-        public const string VV_Quest_EndingMissiveConditionWealth = nameof(VV_Quest_EndingMissiveConditionWealth);
-        public const string VV_Quest_EndingMissiveStepAltar = nameof(VV_Quest_EndingMissiveStepAltar);
-        public const string VV_Quest_EndingMissiveStepEnshrine = nameof(VV_Quest_EndingMissiveStepEnshrine);
+        public const string VV_Quest_EndingConditionsHeader = nameof(VV_Quest_EndingConditionsHeader);
+        public const string VV_Quest_EndingConditionVivi = nameof(VV_Quest_EndingConditionVivi);
+        public const string VV_Quest_EndingConditionWealth = nameof(VV_Quest_EndingConditionWealth);
+        public const string VV_Quest_EndingStepAltar = nameof(VV_Quest_EndingStepAltar);
+        public const string VV_Quest_EndingStepEnshrine = nameof(VV_Quest_EndingStepEnshrine);
 
         public const string VV_EndingCredits = nameof(VV_EndingCredits);
         public const string VV_EndingCreditsNoQueen = nameof(VV_EndingCreditsNoQueen);
@@ -146,5 +155,10 @@
 
         public const string VV_FailReason_CoronationNotAnchor = nameof(VV_FailReason_CoronationNotAnchor);
         public const string VV_FailReason_CoronationLocked = nameof(VV_FailReason_CoronationLocked);
+
+        public const string VV_FailReason_RuinNotQualified = nameof(VV_FailReason_RuinNotQualified);
+        public const string VV_FailReason_RuinPreviousFlower = nameof(VV_FailReason_RuinPreviousFlower);
+        public const string VV_FailReason_RuinCoreLocked = nameof(VV_FailReason_RuinCoreLocked);
+        public const string VV_FailReason_RuinCoreExtracted = nameof(VV_FailReason_RuinCoreExtracted);
     }
 }

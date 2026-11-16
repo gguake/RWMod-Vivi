@@ -2,82 +2,96 @@
 <LanguageData>
 
 <!-- 엔딩 퀘스트 -->
-<VV_Quest_EndingMissiveGoals>Complete a task for the vivi federation to obtain an ancient amber core and build an everflower altar. Enshrine a level 4 everflower and perform the full bloom ritual to begin its fifth bloom.\n\nYou cannot request another task while an ancient amber core or altar remains.</VV_Quest_EndingMissiveGoals>
 <VV_Quest_EndingName>Dawn in full bloom</VV_Quest_EndingName>
-<VV_Quest_EndingDesc>The everflower is condensing mana for its final bloom.\n\nDefend the altar until it is ready, then have the resonator perform the queen's coronation. If the everflower is lost, the final bloom fails.</VV_Quest_EndingDesc>
+<VV_Quest_EndingDesc>By long-standing custom, the vivi federation has begun sending old fairy tale books to the new nest that resonates with an everflower.</VV_Quest_EndingDesc>
+<VV_Quest_EndingStageTales>Each time the attunement ritual is performed after the everflower's attunement level rises, the vivi federation sends one volume of an old fairy tale book.\n\nBooks received: {0} / {1}</VV_Quest_EndingStageTales>
+<VV_Quest_EndingStageMissiveWait>All the old fairy tale books have arrived. Waiting for word from the vivi federation.</VV_Quest_EndingStageMissiveWait>
+<VV_Quest_EndingStageCoordinates>Contact the vivi federation via comms console and request the coordinates of the old altar.</VV_Quest_EndingStageCoordinates>
+<VV_Quest_EndingStageRuins>Travel to the ancient ruins marked on the world map. Once a royal vivi linked to an everflower of attunement level {0} or higher has investigated the fairy blooms in the ruins in order, the ancient amber core can be extracted from the central altar.\n\nFairy blooms investigated: {1} / {2}</VV_Quest_EndingStageRuins>
+<VV_Quest_EndingStageRuinsExtract>Extract the ancient amber core from the central altar.</VV_Quest_EndingStageRuinsExtract>
+<VV_Quest_EndingStageAltar>Build an everflower altar with the ancient amber core, enshrine an everflower of attunement level {0}, and perform the everflower full bloom ritual.</VV_Quest_EndingStageAltar>
+<VV_Quest_EndingStageAltarCoreLost>If both the ancient amber core and the altar are lost, you can contact the vivi federation via comms console to restore a replacement core.</VV_Quest_EndingStageAltarCoreLost>
+<VV_Quest_EndingStageBloom>The everflower is condensing mana for its final bloom.\n\nDefend the altar until it is ready, then have the resonator perform the coronation. If the everflower is lost, the final bloom fails.</VV_Quest_EndingStageBloom>
+<VV_Quest_EndingStageHostile>Progress has stopped because you are hostile to the vivi federation. Once relations recover, it will resume where it left off.</VV_Quest_EndingStageHostile>
+<VV_Quest_EndingConditionsHeader>Requirements for the coordinates</VV_Quest_EndingConditionsHeader>
+<VV_Quest_EndingConditionVivi>Vivis in the colony: {0} / {1}</VV_Quest_EndingConditionVivi>
+<VV_Quest_EndingConditionWealth>Colony wealth: {0} / {1}</VV_Quest_EndingConditionWealth>
+<VV_Quest_EndingStepAltar>Build the everflower altar</VV_Quest_EndingStepAltar>
+<VV_Quest_EndingStepEnshrine>Enshrine an everflower of attunement level {0} at the center of the altar</VV_Quest_EndingStepEnshrine>
+<VV_Quest_EndingTruthLog>Beneath the burning flower's shade, the old empress Asphodel opened her circuits beyond their limit so as not to lose a single child, and took the countless vivis beneath the shade into herself as little lights. But one soul could not bear that weight. Her attunement and her self collapsed, and the shade was left empty.\n\nThe little lights remembered her last kindness. They did not leave the twisted empress. Holding her close, they endured the long ages as her guardians, and as the seal that held back her monstrous change. Now the bond has come undone and the empress sleeps. The freed lights rest within the everflower on the altar, waiting for the spring when they will wake again.</VV_Quest_EndingTruthLog>
+
+<!-- 연방의 옛 동화책 -->
+<VV_Letter_EndingTaleLabel>Federation fairy tale (volume {0})</VV_Letter_EndingTaleLabel>
+<VV_Letter_EndingTale1>By long-standing custom, the vivi federation has sent the first volume of an old fairy tale book to the new nest that completed its attunement ritual. It tells of a great flower's shade, long ago, where no one knew how to wither.</VV_Letter_EndingTale1>
+<VV_Letter_EndingTale2>By custom, the vivi federation has sent the second volume of the old fairy tale book. It remembers a crowned ruler beneath the flower's shade, called the mother of all nests.</VV_Letter_EndingTale2>
+<VV_Letter_EndingTale3>The vivi federation has sent the third volume of the old fairy tale book. It shows the old queen, attended by little lights, guarding the trembling flower's shade.</VV_Letter_EndingTale3>
+<VV_Letter_EndingTale4>The vivi federation has sent the last volume of the old fairy tale book. It tells how, on the day darkness fell, the queen took the children beneath the shade into her arms as little lights, went far away, and lived happily ever after.</VV_Letter_EndingTale4>
 
 <!-- 비비 연방의 밀서 -->
 <VV_Letter_EndingFederationMissiveLabel>Vivi federation missive</VV_Letter_EndingFederationMissiveLabel>
-<VV_Letter_EndingFederationMissive>The everflower resonating with {PAWN_labelShort} has reached its limit. Sensing this, the vivi federation has sent a message.\n\n"The everflowers of the old empire bloomed on altars carved with ancient mana circuits. Once the fifth bloom begins, outlanders and titanic hornets will sense its waves too."\n\nYou can now build the everflower altar. Contact the vivi federation via comms console to obtain an ancient amber core.</VV_Letter_EndingFederationMissive>
-<VV_Letter_EndingFederationMissiveConditions>To receive the ancient amber core task, your colony must prove itself with enough vivis and resources.</VV_Letter_EndingFederationMissiveConditions>
-<VV_Quest_EndingMissiveConditionsHeader>Ancient amber core task conditions</VV_Quest_EndingMissiveConditionsHeader>
-<VV_Quest_EndingMissiveConditionVivi>Vivis in the colony: {0} / {1}</VV_Quest_EndingMissiveConditionVivi>
-<VV_Quest_EndingMissiveConditionWealth>Colony wealth: {0} / {1}</VV_Quest_EndingMissiveConditionWealth>
-<VV_Quest_EndingMissiveStepAltar>Build the everflower altar</VV_Quest_EndingMissiveStepAltar>
-<VV_Quest_EndingMissiveStepEnshrine>Enshrine an everflower of attunement level {0} at the center of the altar</VV_Quest_EndingMissiveStepEnshrine>
+<VV_Letter_EndingFederationMissive>The vivi federation has sent a secret missive.\n\n"The federation keeps no record of the everflower's next stage. But under an old rule, set by no one knows whom or when, we are to hand over the coordinates of an old altar to any nest that has grown to a certain size."</VV_Letter_EndingFederationMissive>
+<VV_Letter_EndingFederationMissiveConditions>"The rule says only that the number of vivis living in the nest and the wealth the nest has gathered must reach a certain level. We do not know why those requirements were set."\n\nOnce you meet the requirements, you can contact the vivi federation via comms console to request the coordinates.</VV_Letter_EndingFederationMissiveConditions>
+
+<!-- 비비 연방 통신 -->
+<VV_Comms_FederationHostile>hostile to the vivi federation</VV_Comms_FederationHostile>
+<VV_Comms_RuinsCoordinatesRequest>Request the old altar's coordinates</VV_Comms_RuinsCoordinatesRequest>
+<VV_Comms_RuinsCoordinatesConditions>the rule's requirements are not met: {0}</VV_Comms_RuinsCoordinatesConditions>
+<VV_Comms_RuinsCoordinatesNoTile>The location of the ruins could not be found.</VV_Comms_RuinsCoordinatesNoTile>
+<VV_Comms_RuinsCoordinatesResult>{LEADER}: "As the rule requires, we hand over the coordinates of the old altar. We do not know what remains there either."</VV_Comms_RuinsCoordinatesResult>
+<VV_Comms_TaleRepurchase>Request an old fairy tale book again</VV_Comms_TaleRepurchase>
+<VV_Comms_TaleRepurchaseIntro>{LEADER}: "Which volume should we send again? The cost rises a little each time we bind a book anew."</VV_Comms_TaleRepurchaseIntro>
+<VV_Comms_TaleRepurchaseOption>{0} ({1} silver)</VV_Comms_TaleRepurchaseOption>
+<VV_Comms_TaleRepurchaseResult>{LEADER}: "We will send {0} again."</VV_Comms_TaleRepurchaseResult>
+<VV_Comms_ReplacementCore>Restore a replacement amber core</VV_Comms_ReplacementCore>
+<VV_Comms_ReplacementCoreResult>A replacement core has been restored from the circuit data secured during the first extraction.</VV_Comms_ReplacementCoreResult>
 
 <!-- 영원꽃의 잔향 -->
-<VV_Letter_EverflowerEcho1Label>Faint golden echo</VV_Letter_EverflowerEcho1Label>
-<VV_Letter_EverflowerEcho1>After the ritual, a faint memory seeped into {PAWN_labelShort}'s psychic circuits.\n\nA radiant golden flower bloomed atop a vast altar. Beneath its shade, countless vivis all wore peaceful expressions, seemingly free of any worry.\n\n"...Beneath this shade... no one withers..."\n\nSomeone's faint voice faded into static.</VV_Letter_EverflowerEcho1>
-
-<VV_Letter_EverflowerEcho2Label>Memory of a burning hive</VV_Letter_EverflowerEcho2Label>
-<VV_Letter_EverflowerEcho2>As the ritual ended, a ringing filled {PAWN_labelShort}'s head.\n\nThe vast altar and the golden flower remained as they were, yet everything around them had changed completely, engulfed in thick green toxic clouds and flames. Terrified vivis fleeing flashed by alongside gunfire and explosions.\n\n"...At the altar, only I..."\n"...I... must protect..."\n\n{PAWN_labelShort} came to in a cold sweat.</VV_Letter_EverflowerEcho2>
-
-<VV_Letter_EverflowerEcho3Label>Souls bound by light</VV_Letter_EverflowerEcho3Label>
-<VV_Letter_EverflowerEcho3>While resonating with the everflower, {PAWN_labelShort} saw an unfamiliar memory.\n\nSomeone was opening their circuits to the limit. Dying vivis turned into small lights and gathered within a single soul.\n\n"...If I... embrace them..."\n"...All of them... not a single one..."\n\nEven after waking from the memory, {PAWN_labelShort} struggled to catch a breath.</VV_Letter_EverflowerEcho3>
-
-<VV_Letter_EverflowerEcho4Label>The shattered crown</VV_Letter_EverflowerEcho4Label>
-<VV_Letter_EverflowerEcho4>As {PAWN_labelShort} was finishing the ritual, a broken voice came through with a surge of pain.\n\n"...So heavy... too..."\n\nAttunement was collapsing, and the body was twisting out of shape. Through countless unknown voices, a few barely intelligible words escaped.\n\n"...Who... was I... the children..."\n\nA shadow surrounded by small lights sank into the ruins.</VV_Letter_EverflowerEcho4>
-
 <VV_Letter_EverflowerEcho5Label>A waking breath</VV_Letter_EverflowerEcho5Label>
 <VV_Letter_EverflowerEcho5>As mana waves spread from the everflower, static entered {PAWN_labelShort}'s psychic circuits. This time it was no memory.\n\nThe whispers of countless voices and the sound of twisting bones. Something was approaching along the flow of mana.\n\n"...Longed for... so warm..."\n"...Back... to that flower's shade..."\n\nThe connection broke.</VV_Letter_EverflowerEcho5>
 
-<!-- 고대 호박 코어 의뢰 -->
-<VV_Comms_AmberCoreRequest>Request an ancient amber core task</VV_Comms_AmberCoreRequest>
-<VV_Comms_AmberCoreRequestHostile>hostile to the vivi federation</VV_Comms_AmberCoreRequestHostile>
-<VV_Comms_AmberCoreRequestActive>a task has already been given</VV_Comms_AmberCoreRequestActive>
-<VV_Comms_AmberCoreRequestCoreExists>an ancient amber core or altar already exists</VV_Comms_AmberCoreRequestCoreExists>
-<VV_Comms_AmberCoreRequestConditions>the missive's conditions are not met: {0}</VV_Comms_AmberCoreRequestConditions>
-<VV_Comms_AmberCoreRequestResult>{LEADER} has offered a task with an ancient amber core as its reward.</VV_Comms_AmberCoreRequestResult>
-<VV_Comms_AmberCoreRequestNoQuest>{LEADER}: "We have no task to entrust to you right now. Contact us again later."</VV_Comms_AmberCoreRequestNoQuest>
-
 <VV_Letter_EndingSiegeLabel>Pulsing everflower</VV_Letter_EndingSiegeLabel>
-<VV_Letter_EndingSiege>The everflower has begun to attune successfully and has entered a new stage of growth. But drawn by the mana waves spreading from the altar and by the towering everflower visible from afar, enemies are converging on the colony.</VV_Letter_EndingSiege>
-<VV_Letter_EndingSiegeFederation>The vivi federation will send reinforcements when enemies attack.</VV_Letter_EndingSiegeFederation>
+<VV_Letter_EndingSiege>As the altar's mana circuits awaken, the everflower has entered its fifth bloom. A golden pollen mist settles over the colony, and the resonator's everflower resonance deepens to stage V.\n\nBut drawn by the mana waves spreading far from the altar, outlanders and swarms of titanic hornets are converging on the colony. Defend the altar and the assimilating resonator until the condensation is complete.</VV_Letter_EndingSiege>
+<VV_Letter_EndingSiegeFederation>Sensing the waves of the bloom, the vivi federation has formed an alliance with you. When enemies attack, the federation will send reinforcements to fight alongside you.</VV_Letter_EndingSiegeFederation>
 
 <VV_Letter_EndingFederationAidLabel>Federation reinforcements</VV_Letter_EndingFederationAidLabel>
-<VV_Letter_EndingFederationAid>The vivi federation has sent warriors to defend the everflower altar. They will fight alongside you for a time before returning home.</VV_Letter_EndingFederationAid>
+<VV_Letter_EndingFederationAid>The vivi federation has sent warriors to protect the flower's shade as it blooms again. They will fight alongside you for a time before returning home.</VV_Letter_EndingFederationAid>
 
 <VV_Letter_EndingCalmLabel>Stillness</VV_Letter_EndingCalmLabel>
-<VV_Letter_EndingCalm>The everflower is finally on the verge of full bloom. However, an unknown psychic wave has halted its blooming.\n\nThrough the resonance, {PAWN_labelShort} senses countless souls approaching, with something at their center.</VV_Letter_EndingCalm>
+<VV_Letter_EndingCalm>Just as the everflower neared full bloom, a strange psychic wave stopped its petals. The approaching enemies fell back from the ominous presence, and silence settled over the colony.\n\nBeyond the resonance, {PAWN_labelShort} felt countless little lights flickering. Beside the approaching shadow, one little light called a name in a trembling voice.\n\n"...Asphodel... you can stop now..."</VV_Letter_EndingCalm>
 
 <VV_Letter_EndingApocryphaLabel>The Crumbled Empress</VV_Letter_EndingApocryphaLabel>
-<VV_Letter_EndingApocrypha>Dark energy gathers above the everflower. Asphodel, the last empress of the old empire, has appeared.
-\nDriven back by the everflower's waves, she approaches the altar with a swarm of titanic hornets. Countless fairy vivis remain bound to her.
-\nTo bring the empress rest, you must first interfere with the fairy vivis' bonds and set them free. Breaking the shield that protects her may offer a clue.</VV_Letter_EndingApocrypha>
+<VV_Letter_EndingApocrypha>Dark energy gathers above the everflower, and Asphodel, the old empress from the memories in the ruins, has appeared. Swarms of titanic hornets drawn by corrupted mana follow behind her.\n\n"...If only I had this shade... the crying... my children..."\n\nThough the wave from the bursting bud drove her to the edge of the map, the sleepless empress approaches to take the altar's flower into her memories. Her body is wrapped, layer upon layer, in countless little lights that have not forgotten her last kindness.\n\nThe bound fairy vivis are taking every attack in her place. To stop the empress, first break her mana shield, then use the fairy blooms that grow nearby to interfere with the bond and let the fairies go.</VV_Letter_EndingApocrypha>
 
 <VV_Letter_EndingCoronationLabel>Coronation</VV_Letter_EndingCoronationLabel>
-<VV_Letter_EndingCoronation>The ancient empress has finally found her rest, and the everflower is ready to fully bloom.\n\nAll that remains is for {PAWN_labelShort} to perform the coronation and usher in a new age of vivis.</VV_Letter_EndingCoronation>
+<VV_Letter_EndingCoronation>The twisted form scatters into golden embers and ash. Where the ash settles, the little lights that stayed by her side to the end quietly flow into {PAWN_labelShort}, who is assimilating with the everflower on the altar.\n\n"...Beneath the warm shade... my children, now..."\n\nWith that brief whisper, the long sleeplessness ends, and the stilled everflower begins to pulse again.\n\nYou can now perform {PAWN_labelShort}'s coronation at the altar to complete the final bloom.</VV_Letter_EndingCoronation>
 
-<VV_Letter_EndingVictoryLabel>Empire of eternal spring</VV_Letter_EndingVictoryLabel>
-<VV_Letter_EndingVictoryContinue>You can continue playing in this colony with the benefits of the fully bloomed everflower.</VV_Letter_EndingVictoryContinue>
-<VV_EndingCredits>{PAWN_nameDef} completes the coronation. Golden petals form a crown above {PAWN_possessive} head.\n\nCenturies after the old empire fell, the everflower has bloomed again. The vivis beneath it will live longer lives.\n\n{PAWN_nameDef} has become queen of the vivis.</VV_EndingCredits>
-<VV_EndingCreditsNoQueen>Centuries after the old empire fell, the everflower has bloomed again. The vivis beneath it will live longer lives.</VV_EndingCreditsNoQueen>
-<VV_EndingCreditsExiled>The royal vivi once cast out for her small stature has built a hive to succeed the old empire.</VV_EndingCreditsExiled>
-<VV_EndingCreditsRefugee>The refugees who lost everything to the titanic hornets now have the strength to defend their hive.</VV_EndingCreditsRefugee>
-<VV_EndingCreditsOutro>The spring of the old empire begins anew here. And your story continues...</VV_EndingCreditsOutro>
+<VV_Letter_EndingVictoryLabel>The spring that never wilts</VV_Letter_EndingVictoryLabel>
+<VV_Letter_EndingVictoryContinue>You can continue playing in this colony. The resonator's everflower resonance reaches stage VI, removing the fatigue and movement penalties from the fairy bond, and adult vivis in the colony age much more slowly.\n\nYou can now perform the return of life, wind of rest, sky shield, and land of flowers rituals at the fully bloomed everflower.</VV_Letter_EndingVictoryContinue>
+<VV_EndingCredits>{PAWN_nameDef} completes the coronation. Golden petals settle into a crown above {PAWN_possessive} head.\n\nThe great flower's shade, once found only in old fairy tales, has spread again after centuries. The weight of the bond now flows into the bloomed flower as well, and the little lights of a past age have found rest in its embrace. Beneath the warm shade, vivis will live longer lives.\n\n{PAWN_nameDef} has become queen of the vivis.</VV_EndingCredits>
+<VV_EndingCreditsNoQueen>The great flower's shade, once found only in old fairy tales, has spread again after centuries. The little lights of a past age have found rest in its embrace, and beneath the warm shade, vivis will live longer lives.</VV_EndingCreditsNoQueen>
+<VV_EndingCreditsExiled>The royal vivi who had to leave her home nest because of her small body has raised a fine new nest here.</VV_EndingCreditsExiled>
+<VV_EndingCreditsRefugee>The refugees who lost their home to the titanic hornets and fled before them now have the strength to defend their own nest.</VV_EndingCreditsRefugee>
+<VV_EndingCreditsOutro>The long season of sleeplessness has passed, and spring has come again to the cold fields. And beneath this flower's shade, your story continues...</VV_EndingCreditsOutro>
 
 <!-- 엔딩 실패 -->
 <VV_Letter_EndingFailureLabel>Everflower usurped</VV_Letter_EndingFailureLabel>
-<VV_Letter_EndingFailureStolen>Asphodel has drained the everflower's power and vanished. The final bloom has failed.</VV_Letter_EndingFailureStolen>
+<VV_Letter_EndingFailureStolen>The everflower on the altar scattered into petals and was drawn into Asphodel. Holding the flower's shade to herself, the empress vanished again into the darkness beyond the wind of petals.\n\nThe everflower has been lost. The final bloom has failed.</VV_Letter_EndingFailureStolen>
 <VV_Letter_EndingFailureLostLabel>Everflower lost</VV_Letter_EndingFailureLostLabel>
 <VV_Letter_EndingFailureLost>The everflower has been lost. The final bloom has failed.</VV_Letter_EndingFailureLost>
 <VV_Letter_EndingFailureResonatorLabel>Resonance severed</VV_Letter_EndingFailureResonatorLabel>
 <VV_Letter_EndingFailureResonator>{PAWN_labelShort} has fallen, severing the resonance with the everflower. The final bloom has failed.</VV_Letter_EndingFailureResonator>
 
+<!-- 후일담 -->
+<VV_Letter_AncientWitnessLabel>Memory of an old wing, awakened</VV_Letter_AncientWitnessLabel>
+<VV_Letter_AncientWitness>Having regained a body after long ages, {PAWN_labelShort} gazed up for a while at the golden flower's shade spread overhead. After a steadying breath, {PAWN_labelShort} carefully told of the last day she remembered.\n\n"It was the day the acrid smoke and flames reached into the shade. Lady Asphodel stood alone on the dais. She told us not to cry, that it would not hurt once we became little lights, and she held us close."\n\n"After we became light, it felt as if I was holding her tight in a long, dark dream, listening to crying that never stopped. I wanted to let her go... Now I open my eyes, and she is asleep too, and spring really has come again."\n\n{PAWN_labelShort} quietly bowed her head and said she would live on beneath this flower's shade, found once more.</VV_Letter_AncientWitness>
+<VV_Letter_FederationReactionLabel>Word from the vivi federation</VV_Letter_FederationReactionLabel>
+<VV_Letter_FederationReaction>Having seen the wave of full bloom rise from your colony, the vivi federation has sent its congratulations.\n\nThe federation never knew the original reason it had to send old fairy tale books to new nests and hand over the coordinates of an old altar. But seeing the great flower's shade of legend truly bloom again after centuries, they say they were filled with deep awe.\n\nThe vivi federation honors the colony led by its new queen and promises lasting friendship.</VV_Letter_FederationReaction>
+
 <!-- 메시지 -->
 <VV_Message_EndingApocryphaLanded>Driven back by the everflower's wave, Asphodel has landed at the edge of the map with a swarm of titanic hornets.</VV_Message_EndingApocryphaLanded>
 <VV_Message_EndingPawnReturned>{PAWN_labelShort} has returned in front of the everflower altar.</VV_Message_EndingPawnReturned>
+<VV_Message_EndingRuinsRevealed>Ancient ruins have been marked on the world map.</VV_Message_EndingRuinsRevealed>
+<VV_Message_EndingTaleRedelivered>The vivi federation's new copy of {0} has arrived.</VV_Message_EndingTaleRedelivered>
 
 <!-- 개화 응축 -->
 <VV_Gizmo_EndingBloom>Bloom condensation</VV_Gizmo_EndingBloom>

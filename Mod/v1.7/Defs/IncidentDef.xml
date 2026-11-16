@@ -34,14 +34,6 @@
     </letterHyperlinkHediffDefs>
   </IncidentDef>
 
-  <IncidentDef ParentName="GiveQuestBase">
-    <defName>VV_GiveQuest_ViviMissive</defName>
-    <label>vivi federation missive</label>
-    <workerClass>VVRace.IncidentWorker_ViviMissive</workerClass>
-    <questScriptDef>VV_EndGame_ViviMissive</questScriptDef>
-    <baseChance>0</baseChance>
-  </IncidentDef>
-
   <!-- 비비 양봉: 유인통 방문(스토리텔러 단일 MTB 컴프가 발동) -->
   <IncidentDef>
     <defName>VV_ViviLureVisit</defName>

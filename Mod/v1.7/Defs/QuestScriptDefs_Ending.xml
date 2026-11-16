@@ -1,23 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-  <!-- 비비 연방의 밀서 퀘스트 -->
+  <!-- 만개하는 여명: 동화책 1권부터 대관식까지 이어지는 에픽 퀘스트 -->
   <QuestScriptDef>
-    <defName>VV_EndGame_ViviMissive</defName>
-    <isRootSpecial>true</isRootSpecial>
-    <autoAccept>true</autoAccept>
-    <sendAvailableLetter>false</sendAvailableLetter>
-    <endOnColonyMove>false</endOnColonyMove>
-    <root Class="VVRace.QuestNode_Root_ViviMissive" />
-  </QuestScriptDef>
-
-  <!-- 만개하는 여명 퀘스트 -->
-  <QuestScriptDef>
-    <defName>VV_EndGame_ViviBloom</defName>
+    <defName>VV_EndGame_ViviEnding</defName>
     <isRootSpecial>true</isRootSpecial>
     <autoAccept>true</autoAccept>
     <sendAvailableLetter>false</sendAvailableLetter>
     <endOnColonyMove>false</endOnColonyMove>
     <defaultChallengeRating>4</defaultChallengeRating>
-    <root Class="VVRace.QuestNode_Root_ViviBloom" />
+    <root Class="VVRace.QuestNode_Root_ViviEnding" />
   </QuestScriptDef>
 </Defs>

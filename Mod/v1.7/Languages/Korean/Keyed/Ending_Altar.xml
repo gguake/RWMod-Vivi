@@ -17,10 +17,8 @@
 <VV_FailReason_AltarHasEnshrinedEverflower>영원꽃의 만개나 의식이 진행 중이라 해체할 수 없음</VV_FailReason_AltarHasEnshrinedEverflower>
 
 <!-- 레벨업 편지 -->
-<VV_Letter_EverflowerAttunementLevel5Preamble>영원꽃이 제단의 마나 회로와 공명하며 다섯 번째 개화에 도달했습니다.
-\n제단을 통해 주변에 막대한 환경 마나를 방출하며, 공명자의 영원꽃 공명이 V단계로 강화됩니다.</VV_Letter_EverflowerAttunementLevel5Preamble>
-<VV_Letter_EverflowerAttunementLevel6Preamble>영원꽃이 완전히 개화했습니다.
-\n공명자의 영원꽃 공명이 VI단계로 강화되어 요정 비비 결속에 따른 피로와 이동 속도 저하가 사라집니다. 정착지 성체 비비의 노화가 크게 느려집니다.</VV_Letter_EverflowerAttunementLevel6Preamble>
+<VV_Letter_EverflowerAttunementLevel5Preamble>영원꽃이 제단의 마나 회로와 공명하며 다섯 번째 개화에 들어섰습니다.\n\n정착지에 금빛 꽃가루 안개가 내려앉아 환경 마나를 방출하며, 공명자의 영원꽃 공명이 V단계로 깊어집니다.</VV_Letter_EverflowerAttunementLevel5Preamble>
+<VV_Letter_EverflowerAttunementLevel6Preamble>영원꽃이 여섯 번째 개화를 이루며 완전히 만개했습니다. 공명자 홀로 버티던 결속의 무게가 꽃으로도 흐르기 시작했습니다.\n\n공명자의 영원꽃 공명이 VI단계로 깊어져 요정 비비 결속에 따른 피로와 이동 속도 저하가 사라지며, 정착지 성체 비비의 노화가 크게 느려집니다.</VV_Letter_EverflowerAttunementLevel6Preamble>
 
 <!-- 정보창 -->
 <VV_Inspector_AltarEnshrinedEverflower>안치된 영원꽃: 조율 {LEVEL}단계</VV_Inspector_AltarEnshrinedEverflower>

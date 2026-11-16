@@ -2,10 +2,7 @@
 <LanguageData>
 
 <VV_Apocrypha.label>아스포델</VV_Apocrypha.label>
-<VV_Apocrypha.description>고대 비비 제국의 마지막 여제이자 파멸자입니다.
-\n제국이 멸망의 위기에 놓여있던 시기에 여제는 수십억 백성을 구하기 위해 제국의 모든 비비를 단번에 요정화해 자신에게 귀속시키는 대규모 의식을 치렀습니다. 하지만 그 무게를 견디지 못한 여제는 자아를 잃고 괴물이 되었고 텅 비어버린 제국은 순식간에 멸망했습니다.
-\n끔찍한 파국에서 살아남은 비비들은 누구도 따라하지 못하도록 여제와 의식에 대한 기록을 없애버렸습니다. 하지만 수많은 시간이 지난 지금까지도 안식을 취하지 못하고 미쳐버린 여제는 아공간을 떠돌며 자신의 기억속에 남아있는 영원꽃만을 찾고 있습니다.
-\n이미 타락해버린 여제에게 결속되어있는 요정 비비들은 여제의 마지막 호의를 기억하고 지키는 마지막 수호자이자 동시에 봉인입니다.</VV_Apocrypha.description>
+<VV_Apocrypha.description>옛 비비 제국의 마지막 여제, 아스포델입니다.\n\n긴 세월 잠들지 못한 채 기억 속의 꽃그늘만을 찾아 헤매다 제단의 파동에 이끌려 나타났습니다. 일그러진 형체 둘레에는 여제의 마지막 선의를 기억하는 수많은 작은 빛들이 겹겹이 머물고 있습니다.</VV_Apocrypha.description>
 <VV_Apocrypha.tools.left_claw.label>왼쪽 발톱</VV_Apocrypha.tools.left_claw.label>
 <VV_Apocrypha.tools.right_claw.label>오른쪽 발톱</VV_Apocrypha.tools.right_claw.label>
 <VV_Apocrypha.tools.jaw.label>턱</VV_Apocrypha.tools.jaw.label>
@@ -20,16 +17,16 @@
 <VV_Projectile_FairySeed.label>요정꽃 씨앗</VV_Projectile_FairySeed.label>
 
 <VV_DoomFlower.label>멸망꽃</VV_DoomFlower.label>
-<VV_DoomFlower.description>아스포델의 일그러진 마나가 피워낸 저주받은 꽃입니다. 만개하면 지역 내 모든 정착민에게 치명적인 저주를 내리므로 파괴하는게 좋습니다.</VV_DoomFlower.description>
+<VV_DoomFlower.description>아스포델의 일그러진 기억과 마나가 피워낸 저주받은 꽃입니다. 만개하기 전에 파괴하지 않으면 옛 재앙의 환영이 퍼져 지역 내 모든 정착민에게 치명적인 저주를 내립니다.</VV_DoomFlower.description>
 
 <VV_FairyFlower.label>요정꽃</VV_FairyFlower.label>
-<VV_FairyFlower.description>아스포델에게 결속된 요정 비비들의 마나가 피워낸 꽃입니다. 비비가 요정꽃과 결속한뒤 아스포델에게 가까이 접근하면 두 마나가 충돌해 간섭이 발생하며, 아스포델에게 결속된 요정 비비를 대규모로 해방시킬 수 있습니다.</VV_FairyFlower.description>
+<VV_FairyFlower.description>아스포델을 감싸고 있던 요정 비비들의 마나가 번져 피어난 꽃입니다. 성체 비비가 이 꽃과 결속한 뒤 아스포델에게 다가가면 두 마나가 간섭을 일으켜, 여제의 짐을 덜듯 요정 비비들을 대규모로 놓아주고 결속자에게 내려진 멸망꽃 저주도 씻어냅니다.</VV_FairyFlower.description>
 
 <VV_EverflowerAltar.label>영원꽃 제단</VV_EverflowerAltar.label>
-<VV_EverflowerAltar.description>고대 비비 제국의 설계로 복원한 제단입니다. 호박 코어와 마나 회로가 영원꽃의 성장을 돕습니다.\n\n조율 4단계 이상의 영원꽃을 안치할 수 있습니다. 영원꽃이 만개하는 중이거나 의식이 진행 중일 때는 제단이 피해를 받지 않고 해체할 수 없으며, 영원꽃도 옮길 수 없습니다. 지붕 아래에는 건설할 수 없으며 지역마다 하나만 건설할 수 있습니다.</VV_EverflowerAltar.description>
+<VV_EverflowerAltar.description>고대 호박 코어의 마나 회로를 바탕으로 복원한 제단입니다. 땅의 마나를 모아 영원꽃이 마지막 개화에 이를 수 있도록 돕습니다.\n\n조율 4단계 이상의 영원꽃을 안치할 수 있습니다. 영원꽃이 만개하는 중이거나 의식이 진행 중일 때는 제단이 피해를 받지 않고 해체할 수 없으며, 영원꽃도 옮길 수 없습니다. 지붕 아래에는 건설할 수 없으며 지역마다 하나만 건설할 수 있습니다.</VV_EverflowerAltar.description>
 
 <VV_AncientAmberCore.label>고대 호박 코어</VV_AncientAmberCore.label>
-<VV_AncientAmberCore.description>옛 비비 제국의 영원꽃 제단에 쓰이던 호박 결정입니다. 제국이 멸망한 뒤 남은 코어는 비비 연방이 보관하고 있습니다.\n\n비비 연방의 의뢰 보상으로 얻을 수 있습니다.</VV_AncientAmberCore.description>
+<VV_AncientAmberCore.description>옛 비비 제국의 영원꽃 제단에 쓰이던 호박 결정입니다. 호박 속에 고대 마나 회로 무늬가 굳어 있습니다.\n\n고대 유적의 중심 제단에서 추출할 수 있으며, 영원꽃 제단을 복원하는 데 사용됩니다.</VV_AncientAmberCore.description>
 
 <VV_QueenVerdictNeedle.label>선고의 바늘</VV_QueenVerdictNeedle.label>
 <VV_SkyShield.label>하늘 방패</VV_SkyShield.label>

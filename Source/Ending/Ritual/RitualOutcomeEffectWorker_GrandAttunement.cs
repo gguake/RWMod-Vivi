@@ -24,13 +24,11 @@ namespace VVRace
                 return;
             }
 
-            compEverflower.SetAttunementLevel(GrandAttunementLevel);
+            compEverflower.SetAttunementLevel(GrandAttunementLevel, sendLetter: false);
 
             def.effecter?.Spawn(everflower, map, compEverflower.RitualEffecterOffset).Cleanup();
 
             everflower.Notify_RitualComplete(quality);
-
-            ending.Notify_EverflowerRitualEcho(everflower, jobRitual.PawnWithRole("resonator"));
 
             ApocryphaUtility.ShakeCamera(map, CameraShakeMagnitude);
         }

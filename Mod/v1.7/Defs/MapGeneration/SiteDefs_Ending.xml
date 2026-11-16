@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 고대 유적: 코어 추출 전에는 원정대가 떠나도 맵만 지우고 남는다(Site_ViviAncientRuins) -->
+  <WorldObjectDef ParentName="Site">
+    <defName>VV_AncientRuins</defName>
+    <label>ancient ruins</label>
+    <description>The ruins of an old vivi empire altar, located with the coordinates handed over by the vivi federation.</description>
+    <worldObjectClass>VVRace.Site_ViviAncientRuins</worldObjectClass>
+    <!-- 철수·전멸 뒤 바로 재파견할 수 있도록 재진입 쿨다운(EnterCooldown)만 뺀다 -->
+    <comps Inherit="False">
+      <li Class="WorldObjectCompProperties_Timeout" />
+      <li Class="WorldObjectCompProperties_DefeatAllEnemiesQuest" />
+      <li Class="WorldObjectCompProperties_ItemStashContents" />
+      <li Class="WorldObjectCompProperties_DownedRefugee" />
+      <li Class="WorldObjectCompProperties_PrisonerWillingToJoin" />
+      <li Class="WorldObjectCompProperties_FormCaravan" />
+      <li Class="WorldObjectCompProperties_TimedDetectionRaids" />
+      <li Class="WorldObjectCompProperties_TimedMakeFactionHostile" />
+    </comps>
+  </WorldObjectDef>
+
+  <SitePartDef>
+    <defName>VV_AncientRuins</defName>
+    <label>ancient ruins</label>
+    <description>The ruins of an old vivi empire altar. Fairy blooms still flower within them.</description>
+    <workerClass>SitePartWorker</workerClass>
+    <siteTexture>World/WorldObjects/Sites/GenericSite</siteTexture>
+    <expandingIconTexture>World/WorldObjects/Expanding/Sites/ItemStash</expandingIconTexture>
+    <requiresFaction>false</requiresFaction>
+    <showFactionInInspectString>false</showFactionInInspectString>
+    <gravShipsCanLandOn>true</gravShipsCanLandOn>
+    <disallowsAutomaticDetectionTimerStart>true</disallowsAutomaticDetectionTimerStart>
+  </SitePartDef>
+
+  <GenStepDef>
+    <defName>VV_AncientRuins</defName>
+    <linkWithSite>VV_AncientRuins</linkWithSite>
+    <order>450</order>
+    <genStep Class="VVRace.GenStep_ViviAncientRuins" />
+  </GenStepDef>
+</Defs>

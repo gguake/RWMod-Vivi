@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 고대 유적 요정꽃: 번호(index) 순서대로만 조사할 수 있다 -->
+  <ThingDef Name="VV_AncientRuinFairyFlowerBase" ParentName="BuildingBase" Abstract="True">
+    <label>ancient fairy bloom</label>
+    <description>A fairy bloom flowering amid the ruins. A memory still lingers within it. A royal vivi linked to an everflower of attunement level 4 or higher can touch it to see the memory.</description>
+    <thingClass>Building</thingClass>
+    <graphicData>
+      <texPath>Things/Building/VV_FairyFlower</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawRotated>false</drawRotated>
+      <shaderType>Transparent</shaderType>
+      <drawSize>(1.6, 1.6)</drawSize>
+    </graphicData>
+    <soundImpactDefault>BulletImpact_Wood</soundImpactDefault>
+    <tickerType>Normal</tickerType>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>Standable</passability>
+    <pathCost>0</pathCost>
+    <fillPercent>0</fillPercent>
+    <rotatable>false</rotatable>
+    <useHitPoints>false</useHitPoints>
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+    <statBases>
+      <Flammability>0</Flammability>
+      <Beauty>15</Beauty>
+    </statBases>
+    <building>
+      <deconstructible>false</deconstructible>
+      <claimable>false</claimable>
+      <repairable>false</repairable>
+      <isTargetable>false</isTargetable>
+      <canBeDamagedByAttacks>false</canBeDamagedByAttacks>
+      <isInert>true</isInert>
+      <ai_neverTrashThis>true</ai_neverTrashThis>
+      <ai_chillDestination>false</ai_chillDestination>
+      <expandHomeArea>false</expandHomeArea>
+    </building>
+    <comps>
+      <li Class="CompProperties_Effecter">
+        <effecterDef>VV_Effecter_FairyFlowerAura</effecterDef>
+      </li>
+      <li Class="CompProperties_Usable">
+        <useJob>UseItem</useJob>
+        <useLabel>Touch {0_label}</useLabel>
+        <useDuration>300</useDuration>
+      </li>
+      <li Class="CompProperties_UseEffectDestroySelf">
+        <effecterDef>VV_Effecter_FairyFlowerVanish</effecterDef>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="VV_AncientRuinFairyFlowerBase">
+    <defName>VV_AncientRuinFairyFlowerI</defName>
+    <comps>
+      <li Class="VVRace.CompProperties_UseEffectRuinEcho">
+        <index>1</index>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="VV_AncientRuinFairyFlowerBase">
+    <defName>VV_AncientRuinFairyFlowerII</defName>
+    <comps>
+      <li Class="VVRace.CompProperties_UseEffectRuinEcho">
+        <index>2</index>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="VV_AncientRuinFairyFlowerBase">
+    <defName>VV_AncientRuinFairyFlowerIII</defName>
+    <comps>
+      <li Class="VVRace.CompProperties_UseEffectRuinEcho">
+        <index>3</index>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="VV_AncientRuinFairyFlowerBase">
+    <defName>VV_AncientRuinFairyFlowerIV</defName>
+    <comps>
+      <li Class="VVRace.CompProperties_UseEffectRuinEcho">
+        <index>4</index>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- 고대 유적 중심 제단: 마지막 요정꽃을 조사한 뒤 고대 호박 코어를 한 번 추출할 수 있다 -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>VV_AncientRuinAltar</defName>
+    <label>ruined central altar</label>
+    <description>The central altar of the old vivi empire, half buried in the ruins. An ancient amber core is still set within it.</description>
+    <descriptionHyperlinks>
+      <ThingDef>VV_AncientAmberCore</ThingDef>
+    </descriptionHyperlinks>
+    <thingClass>Building</thingClass>
+    <graphicData>
+      <texPath>Things/Building/VV_EverflowerAltar</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawRotated>false</drawRotated>
+      <drawSize>(10, 10)</drawSize>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>Standable</passability>
+    <pathCost>100</pathCost>
+    <size>(5,5)</size>
+    <rotatable>false</rotatable>
+    <useHitPoints>false</useHitPoints>
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+    <statBases>
+      <Flammability>0</Flammability>
+      <Beauty>20</Beauty>
+    </statBases>
+    <building>
+      <deconstructible>false</deconstructible>
+      <claimable>false</claimable>
+      <repairable>false</repairable>
+      <isTargetable>false</isTargetable>
+      <canBeDamagedByAttacks>false</canBeDamagedByAttacks>
+      <isInert>true</isInert>
+      <ai_neverTrashThis>true</ai_neverTrashThis>
+      <ai_chillDestination>false</ai_chillDestination>
+      <expandHomeArea>false</expandHomeArea>
+    </building>
+    <comps>
+      <li Class="CompProperties_Usable">
+        <useJob>UseItem</useJob>
+        <useLabel>Extract the ancient amber core</useLabel>
+        <useDuration>600</useDuration>
+      </li>
+      <li Class="CompProperties_UseEffect">
+        <compClass>VVRace.CompUseEffect_ExtractAmberCore</compClass>
+      </li>
+    </comps>
+  </ThingDef>
+</Defs>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <!-- 연방의 옛 동화책 제목(title)·본문(desc). 규칙이 하나뿐이라 항상 같은 글이 나온다 -->
+  <RulePackDef>
+    <defName>VV_FairyTaleBookI</defName>
+    <rulePack>
+      <rulesStrings>
+        <li>title->Flowershade Tales I: The Spring That Never Wilted</li>
+        <li>desc->Long, long ago, in the middle of a frozen field, a great golden flower bloomed all alone. Beneath the warm shade of its petals, countless nests gathered and made a little world of their own.\n\nThey were born with fragile wings, yet beneath the flower's shade no one ever learned how to wither. Forgetting whether cold winds blew outside, they all lived leaning on a spring that seemed as if it would last forever.</li>
+      </rulesStrings>
+    </rulePack>
+  </RulePackDef>
+
+  <RulePackDef>
+    <defName>VV_FairyTaleBookII</defName>
+    <rulePack>
+      <rulesStrings>
+        <li>title->Flowershade Tales II: Mother of All Nests</li>
+        <li>desc->Upon a high dais at the heart of the flower's shade dwelt a ruler who wore a radiant crown. She watched over every nest, great and small, with gentle eyes, and the people followed her, calling her the mother of all nests.\n\nBy day the mother came down from the dais to stroke the tender wings, but by night she would remain alone upon it. The children could only gaze up from afar at her back as she watched the dark horizon beyond the shade for a long, long while.</li>
+      </rulesStrings>
+    </rulePack>
+  </RulePackDef>
+
+  <RulePackDef>
+    <defName>VV_FairyTaleBookIII</defName>
+    <rulePack>
+      <rulesStrings>
+        <li>title->Flowershade Tales III: The Queen and the Little Lights</li>
+        <li>desc->It is said that wherever the queen walked, little lights like fireflies always circled around her. People thought of the swarm of lights as a gentle shadow and felt at ease, or so the tale goes.\n\nBut from a certain year, a chill crept into the edges of the shade and the petals trembled. It is said that even the queen, smiling as she might, looked strangely fragile among the lights.</li>
+      </rulesStrings>
+    </rulePack>
+  </RulePackDef>
+
+  <RulePackDef>
+    <defName>VV_FairyTaleBookIV</defName>
+    <rulePack>
+      <rulesStrings>
+        <li>title->Flowershade Tales IV: A Dream Happy Forever</li>
+        <li>desc->At last, on the day a fierce darkness from outside fell upon the flower's shade, the kind queen turned all the children beneath it into little lights, so that not a single one would be hurt.\n\nThe queen had taken in so many lights that she grew terribly weary, and the little lights wrapped her up warmly, carried her far away, and tucked her in to sleep. In a warm dream where no cold wind could reach, the queen and the children never parted again and lived happily ever after.</li>
+      </rulesStrings>
+    </rulePack>
+  </RulePackDef>
+</Defs>

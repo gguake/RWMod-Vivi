@@ -17,10 +17,8 @@
 <VV_FailReason_AltarHasEnshrinedEverflower>Cannot deconstruct while the everflower is blooming or a ritual is underway</VV_FailReason_AltarHasEnshrinedEverflower>
 
 <!-- 레벨업 편지 -->
-<VV_Letter_EverflowerAttunementLevel5Preamble>The everflower has resonated with the altar's mana circuits and reached its fifth bloom.
-\nIt releases vast amounts of environment mana into its surroundings through the altar, and its resonator's everflower resonance strengthens to stage V.</VV_Letter_EverflowerAttunementLevel5Preamble>
-<VV_Letter_EverflowerAttunementLevel6Preamble>The everflower has fully bloomed.
-\nThe resonator's everflower resonance strengthens to stage VI, removing the fatigue and movement penalties from bound fairy vivis. Adult vivis in the colony age much more slowly.</VV_Letter_EverflowerAttunementLevel6Preamble>
+<VV_Letter_EverflowerAttunementLevel5Preamble>Resonating with the altar's mana circuits, the everflower has entered its fifth bloom.\n\nA golden pollen mist settles over the colony and releases environment mana, and the resonator's everflower resonance deepens to stage V.</VV_Letter_EverflowerAttunementLevel5Preamble>
+<VV_Letter_EverflowerAttunementLevel6Preamble>With its sixth bloom, the everflower has come into full bloom. The weight of the bond, once borne by the resonator alone, has begun to flow into the flower as well.\n\nThe resonator's everflower resonance deepens to stage VI, removing the fatigue and movement penalties from bound fairy vivis, and adult vivis in the colony age much more slowly.</VV_Letter_EverflowerAttunementLevel6Preamble>
 
 <!-- 정보창 -->
 <VV_Inspector_AltarEnshrinedEverflower>Enshrined everflower: attunement level {LEVEL}</VV_Inspector_AltarEnshrinedEverflower>

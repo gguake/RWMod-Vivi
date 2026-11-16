@@ -20,13 +20,11 @@
 
 <!-- 경고 -->
 <VV_Alert_ApocryphaChanneling>영원꽃 찬탈 {0}</VV_Alert_ApocryphaChanneling>
-<VV_Alert_ApocryphaChannelingDesc>아스포델이 영원꽃의 마나를 흡수하고 있습니다({PROGRESS}, 남은 시간 {TIMELEFT}).
-\n마나를 모두 빼앗기면 개화 의식이 실패합니다.</VV_Alert_ApocryphaChannelingDesc>
+<VV_Alert_ApocryphaChannelingDesc>아스포델이 영원꽃의 마나를 빨아들이고 있습니다({PROGRESS}, 남은 시간 {TIMELEFT}).\n영원꽃을 빼앗기면 마지막 개화는 실패합니다.</VV_Alert_ApocryphaChannelingDesc>
 
 <!-- 편지 -->
 <VV_Letter_ApocryphaUnboundLabel>폭주</VV_Letter_ApocryphaUnboundLabel>
-<VV_Letter_ApocryphaUnbound>마지막으로 결속되어있던 요정 비비들이 해방되었습니다. 완전히 이성을 잃고 거대한 말벌의 모습으로 변한 아스포델이 영원꽃을 향해 돌진합니다. 과거에 묶인 여제에게 안식을 주고 새로운 시대로 나아가세요.
-\n아스포델이 다루던 고대 엘텍스 바늘이 바닥에 꽂혔습니다. 이 바늘은 다시 활성화해 발사할 수 있으며 다루기 위험하지만 아스포델에게 적중시키면 큰 피해를 입히고 무력화 할 수 있습니다.</VV_Letter_ApocryphaUnbound>
+<VV_Letter_ApocryphaUnbound>여제를 감싸 지키던 마지막 작은 빛들마저 결속에서 풀려났습니다. 보호장이 사라지자, 뒤틀린 몸과 광기를 붙들고 있던 마지막 봉인도 함께 끊어졌습니다.\n\n"......빛이...... 다 흩어져...... 나는...... 무엇을......"\n\n남아 있던 목소리마저 삼켜진 자리에서 아스포델의 몸이 거대한 말벌의 형상으로 일그러졌습니다. 무엇을 지키려 했는지도 잊은 채 오직 영원꽃의 마나만을 찾아 제단으로 돌진합니다.\n\n바닥에 아스포델이 다루던 고대 엘텍스 바늘이 꽂혔습니다. 다시 활성화해 발사하는 일은 위험하지만, 아스포델에게 적중시키면 큰 피해를 입히고 잠시 무력화할 수 있습니다.</VV_Letter_ApocryphaUnbound>
 
 <!-- 메시지 -->
 <VV_Message_ApocryphaBondReleased>아스포델에게 결속된 요정 비비들이 대량으로 해방되었습니다.</VV_Message_ApocryphaBondReleased>

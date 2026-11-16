@@ -63,7 +63,7 @@ namespace VVRace
 
             if (anchor != null && !anchor.Destroyed)
             {
-                ViviEndingUtility.RunStep("finale: final bloom", () => anchor.EverflowerComp?.SetAttunementLevel(CompEverflower.MaxAttunementLevel));
+                ViviEndingUtility.RunStep("finale: final bloom", () => anchor.EverflowerComp?.SetAttunementLevel(CompEverflower.MaxAttunementLevel, sendLetter: false));
             }
 
             if (map != null)

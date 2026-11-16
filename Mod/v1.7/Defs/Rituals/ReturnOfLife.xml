@@ -4,7 +4,7 @@
   <PreceptDef ParentName="VV_EverflowerRitualPreceptBase">
     <defName>VV_ReturnOfLife</defName>
     <label>return of life</label>
-    <description>Restores a body to an ancient fairy vivi freed from Asphodel.</description>
+    <description>Restores a body to an ancient fairy vivi who was freed from the long bond and now rests within the everflower.</description>
     <ritualPatternBase>VV_ReturnOfLife</ritualPatternBase>
     <iconPath>UI/Commands/VV_ReturnOfLife</iconPath>
     <displayOrderInImpact>995</displayOrderInImpact>

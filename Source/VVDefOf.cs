@@ -171,6 +171,15 @@ namespace VVRace
         public static ThingDef VV_EverflowerAltar;
 
         public static ThingDef VV_AncientAmberCore;
+        public static ThingDef VV_FairyTaleBookI;
+        public static ThingDef VV_FairyTaleBookII;
+        public static ThingDef VV_FairyTaleBookIII;
+        public static ThingDef VV_FairyTaleBookIV;
+        public static ThingDef VV_AncientRuinFairyFlowerI;
+        public static ThingDef VV_AncientRuinFairyFlowerII;
+        public static ThingDef VV_AncientRuinFairyFlowerIII;
+        public static ThingDef VV_AncientRuinFairyFlowerIV;
+        public static ThingDef VV_AncientRuinAltar;
 
         public static ThingDef VV_Apocrypha;
         public static ThingDef VV_DyingApocrypha;
@@ -568,8 +577,19 @@ namespace VVRace
     [DefOf]
     public static class VVQuestScriptDefOf
     {
-        public static QuestScriptDef VV_EndGame_ViviMissive;
-        public static QuestScriptDef VV_EndGame_ViviBloom;
+        public static QuestScriptDef VV_EndGame_ViviEnding;
+    }
+
+    [DefOf]
+    public static class VVSitePartDefOf
+    {
+        public static SitePartDef VV_AncientRuins;
+    }
+
+    [DefOf]
+    public static class VVWorldObjectDefOf
+    {
+        public static WorldObjectDef VV_AncientRuins;
     }
 
     [DefOf]

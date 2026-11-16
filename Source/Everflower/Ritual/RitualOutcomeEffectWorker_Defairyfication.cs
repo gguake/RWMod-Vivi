@@ -34,7 +34,6 @@ namespace VVRace
             def.effecter.Spawn(everflower, map).Cleanup();
 
             everflower.Notify_RitualComplete(quality);
-            ViviEndingQuest.Current?.Notify_EverflowerRitualEcho(everflower, resonator);
         }
     }
 }

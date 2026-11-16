@@ -19,13 +19,11 @@
 
 <!-- 경고 -->
 <VV_Alert_ApocryphaChanneling>Everflower usurpation {0}</VV_Alert_ApocryphaChanneling>
-<VV_Alert_ApocryphaChannelingDesc>Asphodel is draining the everflower's mana ({PROGRESS}, {TIMELEFT} remaining).
-\nIf she drains all of it, the bloom ritual fails.</VV_Alert_ApocryphaChannelingDesc>
+<VV_Alert_ApocryphaChannelingDesc>Asphodel is drawing in the everflower's mana ({PROGRESS}, {TIMELEFT} remaining).\nIf the everflower is taken, the final bloom fails.</VV_Alert_ApocryphaChannelingDesc>
 
 <!-- 편지 -->
 <VV_Letter_ApocryphaUnboundLabel>Rampage</VV_Letter_ApocryphaUnboundLabel>
-<VV_Letter_ApocryphaUnbound>The last of the bound fairy vivis have been freed. Having lost all reason and transformed into a titanic hornet, Asphodel charges toward the everflower. Lay the empress bound to the past to rest, and usher in a new era.
-\nThe ancient eltex needles wielded by Asphodel have lodged in the ground. They can be reactivated and fired. Though dangerous to handle, they can deal heavy damage and incapacitate Asphodel if they hit her.</VV_Letter_ApocryphaUnbound>
+<VV_Letter_ApocryphaUnbound>The last little lights that wrapped and guarded the empress have been released from the bond. With the shield gone, the last seal holding back her twisted body and her madness has broken too.\n\n"...The lights... all scattered... I... what was I..."\n\nAs even her remaining voice is swallowed, Asphodel's body warps into the shape of a giant hornet. Forgetting what she meant to protect, she charges the altar, seeking only the everflower's mana.\n\nThe ancient eltex needles Asphodel wielded have lodged in the ground. Reactivating and firing them is dangerous, but a hit on Asphodel deals heavy damage and briefly incapacitates her.</VV_Letter_ApocryphaUnbound>
 
 <!-- 메시지 -->
 <VV_Message_ApocryphaBondReleased>A large number of fairy vivis bound to Asphodel have been freed.</VV_Message_ApocryphaBondReleased>

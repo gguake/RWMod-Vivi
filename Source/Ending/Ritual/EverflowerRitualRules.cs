@@ -66,6 +66,9 @@ namespace VVRace
             switch (quest.Stage)
             {
                 case ViviEndingStage.None:
+                case ViviEndingStage.Tales:
+                case ViviEndingStage.Missive:
+                case ViviEndingStage.Ruins:
                     return LocalizeString_Etc.VV_FailReason_GrandAttunementLocked.Translate();
 
                 case ViviEndingStage.AltarUnlocked:

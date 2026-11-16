@@ -38,7 +38,8 @@ namespace VVRace
             var change = AllyGoodwill - Faction.OfPlayer.GoodwillWith(faction);
             if (change <= 0) { return; }
 
-            Faction.OfPlayer.TryAffectGoodwillWith(faction, change);
+            // 동맹 체결은 〈맥동하는 영원꽃〉 편지가 알리므로 바닐라 관계 변화 알림은 끈다.
+            Faction.OfPlayer.TryAffectGoodwillWith(faction, change, canSendMessage: false, canSendHostilityLetter: false);
         }
 
         public override void Notify_FactionRemoved(Faction removed)

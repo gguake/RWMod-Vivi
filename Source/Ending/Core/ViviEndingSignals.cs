@@ -6,8 +6,8 @@ namespace VVRace
     // QuestGen 안에서는 HardcodedSignalWithQuestID/HardcodedTargetQuestTagWithQuestID로, 밖에서는 For로 신호 이름을 만든다.
     public static class ViviEndingSignals
     {
-        public const string GrandAttunementCompleted = "GrandAttunementCompleted";
-
+        public const string BloomStarted = "BloomStarted";
+        public const string BreathEcho = "BreathEcho";
         public const string BloomCondensed = "BloomCondensed";
         public const string CalmEnded = "CalmEnded";
         public const string ApocryphaManifesting = "ApocryphaManifesting";

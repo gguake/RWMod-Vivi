@@ -18,6 +18,9 @@
 
         public const string VV_Message_EndingApocryphaLanded = nameof(VV_Message_EndingApocryphaLanded);
         public const string VV_Message_EndingPawnReturned = nameof(VV_Message_EndingPawnReturned);
+        public const string VV_Message_EndingRuinsRevealed = nameof(VV_Message_EndingRuinsRevealed);
+        public const string VV_Message_EndingTaleRedelivered = nameof(VV_Message_EndingTaleRedelivered);
+        public const string VV_Message_RuinCoreExtracted = nameof(VV_Message_RuinCoreExtracted);
 
         public const string VV_Message_EverflowerEnshrined = nameof(VV_Message_EverflowerEnshrined);
         public const string VV_Message_EverflowerAltarRequiresLevel = nameof(VV_Message_EverflowerAltarRequiresLevel);

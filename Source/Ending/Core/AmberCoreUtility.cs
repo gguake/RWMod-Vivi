@@ -62,15 +62,7 @@ namespace VVRace
                     }
                 }
 
-                var worldPawns = Find.WorldPawns.AllPawnsAliveOrDead;
-                for (int i = 0; i < worldPawns.Count; ++i)
-                {
-                    if (HoldsCoreOrAltar(worldPawns[i], coreDef, altarDef))
-                    {
-                        return true;
-                    }
-                }
-
+                // 납치된 폰이나 맵을 떠난 적이 가진 코어는 월드 폰 소지품으로만 남으므로 분실로 본다.
                 return false;
             }
             finally

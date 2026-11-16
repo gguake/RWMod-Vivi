@@ -1,10 +1,9 @@
 ﻿using HarmonyLib;
 using RimWorld;
-using RimWorld.QuestGen;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Verse;
-using Verse.Grammar;
 
 namespace VVRace
 {
@@ -13,13 +12,9 @@ namespace VVRace
     {
         internal static void Patch(Harmony harmony)
         {
-            ViviHarmonyPatcher.TryPatch(harmony, "FactionDialogMaker.FactionDialogFor (amber core comms option)",
+            ViviHarmonyPatcher.TryPatch(harmony, "FactionDialogMaker.FactionDialogFor (vivi federation comms options)",
                 AccessTools.Method(typeof(FactionDialogMaker), nameof(FactionDialogMaker.FactionDialogFor)),
                 postfix: new HarmonyMethod(typeof(EndingCorePatch), nameof(FactionDialogMaker_FactionDialogFor_Postfix)));
-
-            ViviHarmonyPatcher.TryPatch(harmony, "QuestGen_Rewards.GiveRewards (amber core quest reward)",
-                AccessTools.Method(typeof(QuestGen_Rewards), nameof(QuestGen_Rewards.GiveRewards)),
-                prefix: new HarmonyMethod(typeof(EndingCorePatch), nameof(QuestGen_Rewards_GiveRewards_Prefix)));
 
             ViviHarmonyPatcher.TryPatch(harmony, "IncidentWorker.CanFireNow (ending threat suppression)",
                 AccessTools.Method(typeof(IncidentWorker), nameof(IncidentWorker.CanFireNow)),
@@ -55,35 +50,21 @@ namespace VVRace
         {
             if (__result?.options == null) { return; }
 
-            DiaOption option;
+            List<DiaOption> added;
             try
             {
-                option = AmberCoreCommsOption.Make(negotiator, faction);
+                added = ViviEndingCommsOptions.Make(negotiator, faction).ToList();
             }
             catch (Exception ex)
             {
-                Log.ErrorOnce($"[ViViRace] failed to make the amber core comms option: {ex}", ViviEndingUtility.ErrorKeyAmberCommsOption);
+                Log.ErrorOnce($"[ViViRace] failed to make the vivi federation comms options: {ex}", ViviEndingUtility.ErrorKeyAmberCommsOption);
                 return;
             }
 
-            if (option == null) { return; }
+            if (added.Count == 0) { return; }
 
             var options = __result.options;
-            options.Insert(Math.Max(0, options.Count - 1), option);
-        }
-
-        private static bool QuestGen_Rewards_GiveRewards_Prefix(Quest quest, RewardsGeneratorParams parms, string inSignal, string customLetterLabel,
-            string customLetterText, RulePack customLetterLabelRules, RulePack customLetterTextRules, ref QuestPart_Choice __result)
-        {
-            if (!ViviAmberCoreQuestGen.Generating) { return true; }
-
-            if (!ViviAmberCoreQuestGen.TryGiveCoreReward(quest, parms, inSignal, customLetterLabel, customLetterText, customLetterLabelRules, customLetterTextRules, out var choice))
-            {
-                return true;
-            }
-
-            __result = choice;
-            return false;
+            options.InsertRange(Math.Max(0, options.Count - 1), added);
         }
 
         private static bool HediffGiver_BrainInjury_OnHediffAdded_Prefix(Pawn pawn, Hediff hediff, ref bool __result)

@@ -24,21 +24,28 @@
         public const string VV_Letter_IncidentHornetAssaultArrivedLabel = nameof(VV_Letter_IncidentHornetAssaultArrivedLabel);
         public const string VV_Letter_IncidentHornetAssaultArrived = nameof(VV_Letter_IncidentHornetAssaultArrived);
 
+        public const string VV_Letter_EndingTaleLabel = nameof(VV_Letter_EndingTaleLabel);
+        public const string VV_Letter_EndingTale1 = nameof(VV_Letter_EndingTale1);
+        public const string VV_Letter_EndingTale2 = nameof(VV_Letter_EndingTale2);
+        public const string VV_Letter_EndingTale3 = nameof(VV_Letter_EndingTale3);
+        public const string VV_Letter_EndingTale4 = nameof(VV_Letter_EndingTale4);
+
         public const string VV_Letter_EndingFederationMissiveLabel = nameof(VV_Letter_EndingFederationMissiveLabel);
         public const string VV_Letter_EndingFederationMissive = nameof(VV_Letter_EndingFederationMissive);
 
         public const string VV_Letter_EndingFederationMissiveConditions = nameof(VV_Letter_EndingFederationMissiveConditions);
 
-        public const string VV_Letter_EverflowerEcho1Label = nameof(VV_Letter_EverflowerEcho1Label);
-        public const string VV_Letter_EverflowerEcho1 = nameof(VV_Letter_EverflowerEcho1);
-        public const string VV_Letter_EverflowerEcho2Label = nameof(VV_Letter_EverflowerEcho2Label);
-        public const string VV_Letter_EverflowerEcho2 = nameof(VV_Letter_EverflowerEcho2);
-        public const string VV_Letter_EverflowerEcho3Label = nameof(VV_Letter_EverflowerEcho3Label);
-        public const string VV_Letter_EverflowerEcho3 = nameof(VV_Letter_EverflowerEcho3);
-        public const string VV_Letter_EverflowerEcho4Label = nameof(VV_Letter_EverflowerEcho4Label);
-        public const string VV_Letter_EverflowerEcho4 = nameof(VV_Letter_EverflowerEcho4);
         public const string VV_Letter_EverflowerEcho5Label = nameof(VV_Letter_EverflowerEcho5Label);
         public const string VV_Letter_EverflowerEcho5 = nameof(VV_Letter_EverflowerEcho5);
+
+        public const string VV_Letter_RuinEcho1Label = nameof(VV_Letter_RuinEcho1Label);
+        public const string VV_Letter_RuinEcho1 = nameof(VV_Letter_RuinEcho1);
+        public const string VV_Letter_RuinEcho2Label = nameof(VV_Letter_RuinEcho2Label);
+        public const string VV_Letter_RuinEcho2 = nameof(VV_Letter_RuinEcho2);
+        public const string VV_Letter_RuinEcho3Label = nameof(VV_Letter_RuinEcho3Label);
+        public const string VV_Letter_RuinEcho3 = nameof(VV_Letter_RuinEcho3);
+        public const string VV_Letter_RuinEcho4Label = nameof(VV_Letter_RuinEcho4Label);
+        public const string VV_Letter_RuinEcho4 = nameof(VV_Letter_RuinEcho4);
 
         public const string VV_Letter_EndingSiegeLabel = nameof(VV_Letter_EndingSiegeLabel);
         public const string VV_Letter_EndingSiege = nameof(VV_Letter_EndingSiege);
@@ -78,6 +85,11 @@
         public const string VV_Letter_ReturnOfLifeLabel = nameof(VV_Letter_ReturnOfLifeLabel);
         public const string VV_Letter_ReturnOfLife = nameof(VV_Letter_ReturnOfLife);
         public const string VV_Letter_ReturnOfLifeGenes = nameof(VV_Letter_ReturnOfLifeGenes);
+
+        public const string VV_Letter_AncientWitnessLabel = nameof(VV_Letter_AncientWitnessLabel);
+        public const string VV_Letter_AncientWitness = nameof(VV_Letter_AncientWitness);
+        public const string VV_Letter_FederationReactionLabel = nameof(VV_Letter_FederationReactionLabel);
+        public const string VV_Letter_FederationReaction = nameof(VV_Letter_FederationReaction);
 
         public const string VV_Letter_ViviLureScoutsLabel = nameof(VV_Letter_ViviLureScoutsLabel);
         public const string VV_Letter_ViviLureScouts = nameof(VV_Letter_ViviLureScouts);

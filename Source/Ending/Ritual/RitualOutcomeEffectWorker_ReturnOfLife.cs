@@ -37,6 +37,7 @@ namespace VVRace
             {
                 def.effecter?.Spawn(ancient, map).Cleanup();
                 SendArrivalLetter(ancient);
+                ViviEndingQuest.Current?.Epilogue.Notify_AncientReturned(ancient);
             }
             else if (everflower.Spawned)
             {

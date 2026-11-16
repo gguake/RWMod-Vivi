@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+<!-- 고대 유적 요정꽃 기억 -->
+<VV_Letter_RuinEcho1Label>산산조각 난 왕관</VV_Letter_RuinEcho1Label>
+<VV_Letter_RuinEcho1>{PAWN_labelShort}(이)가 폐허에 피어난 요정꽃에 손을 대자, 통증과 함께 끊어진 목소리가 전해졌습니다.\n\n"......무거워...... 목소리가...... 멈추질......"\n\n누군가의 조율이 무너지고 고왔던 몸이 검게 뒤틀리고 있었습니다. 정체 모를 무수한 아우성 사이로 겨우 알아들을 수 있는 한마디가 새어 나왔습니다.\n\n"......잠들 수 없어...... 내 아이들은...... 내가...... 누구였......"\n\n수많은 작은 빛들이 울부짖는 그림자를 겹겹이 감싸 묶은 채 어둠 너머로 가라앉았습니다.\n\n요정꽃이 흩어지며 안쪽 구역으로 향하는 길이 열렸습니다.</VV_Letter_RuinEcho1>
+
+<VV_Letter_RuinEcho2Label>빛으로 묶인 영혼들</VV_Letter_RuinEcho2Label>
+<VV_Letter_RuinEcho2>두 번째 요정꽃에 손을 대자, 앞서 본 것보다 더 오래된 기억이 {PAWN_labelShort}에게 흘러들었습니다.\n\n누군가 회로를 한계까지 열고 있었습니다. 쓰러져 가던 수많은 비비들이 작은 빛으로 변해 하나의 영혼으로 모여들었습니다.\n\n"......울지 마렴...... 작은 빛이 되면...... 아프지 않을......"\n"......단 한 명도...... 잃지 않게...... 내 품으로...... 전부......"\n\n모든 아이들이 빛으로 거두어진 들판에는 숨소리 하나 남지 않았습니다. 기억에서 깨어난 뒤에도 {PAWN_labelShort}(은)는 한동안 숨을 고르지 못했습니다.\n\n요정꽃이 흩어지며 더 깊은 구역으로 향하는 길이 열렸습니다.</VV_Letter_RuinEcho2>
+
+<VV_Letter_RuinEcho3Label>불타는 둥지의 기억</VV_Letter_RuinEcho3Label>
+<VV_Letter_RuinEcho3>세 번째 요정꽃에 손을 대자, 이명과 함께 한층 더 오래된 기억이 {PAWN_labelShort}의 머릿속에 울렸습니다.\n\n거대한 제단 위로 황금빛 꽃잎이 가늘게 떨리고 있었습니다. 꽃그늘 아래는 자욱한 녹색 독성 구름과 불길로 뒤덮여 있었고, 공포에 질린 비비들이 도망치는 모습과 함께 총성과 폭발음이 스쳐 지나갔습니다.\n\n"......꽃그늘이...... 타들어 가고......"\n"......단 위에는...... 나 혼자뿐인데...... 이대로는 모두......"\n\n불타는 단 위에 선 그림자 곁에는 몇 점의 작은 빛만이 남아 있었습니다. {PAWN_labelShort}(은)는 식은땀을 흘리며 정신을 차렸습니다.\n\n요정꽃이 흩어지며 중심 제단으로 향하는 길이 열렸습니다.</VV_Letter_RuinEcho3>
+
+<VV_Letter_RuinEcho4Label>황금빛 꽃그늘</VV_Letter_RuinEcho4Label>
+<VV_Letter_RuinEcho4>제단 앞에 피어난 마지막 요정꽃에 손을 대자, 이곳에 남아 있던 가장 오래된 기억이 {PAWN_labelShort}의 눈앞에 펼쳐졌습니다.\n\n거대한 제단 위로 찬란한 황금빛 꽃이 피어 있었습니다. 따스한 꽃가루가 흩날리는 그늘 아래에서, 수많은 비비들이 바깥의 추위도 잊은 듯 아무런 걱정도 없는 평화로운 표정을 짓고 있었습니다.\n\n"......이 따스한 그늘 안에서...... 시드는 일 없이......"\n"......걱정 마렴...... 너희의 봄은...... 내가 끝까지......"\n\n다정한 속삭임 너머로, 단 위의 왕관을 쓴 어머니를 우러르며 그늘을 메운 군중이 일제히 부르는 이름이 울려 퍼졌습니다.\n\n"아스포델."\n\n함성이 아득한 잡음에 묻히며 마지막 요정꽃이 흩어졌습니다. 이제 중심 제단에서 고대 호박 코어를 추출할 수 있습니다.</VV_Letter_RuinEcho4>
+
+<!-- 메시지 -->
+<VV_Message_RuinCoreExtracted>{PAWN_labelShort}(이)가 중심 제단에서 고대 호박 코어를 추출했습니다.</VV_Message_RuinCoreExtracted>
+
+<!-- 거부 사유 -->
+<VV_FailReason_RuinNotQualified>조율 {0}단계 이상의 영원꽃과 연결된 로열 비비만 할 수 있습니다</VV_FailReason_RuinNotQualified>
+<VV_FailReason_RuinPreviousFlower>앞선 요정꽃을 먼저 조사해야 합니다</VV_FailReason_RuinPreviousFlower>
+<VV_FailReason_RuinCoreLocked>마지막 요정꽃을 먼저 조사해야 합니다</VV_FailReason_RuinCoreLocked>
+<VV_FailReason_RuinCoreExtracted>이미 코어를 추출했습니다</VV_FailReason_RuinCoreExtracted>
+
+</LanguageData>

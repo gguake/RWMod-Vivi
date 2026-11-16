@@ -92,7 +92,7 @@ namespace VVRace
             var conditionDef = VVGameConditionDefOf.VV_OminousSilence;
             if (conditionDef == null) { return; }
 
-            var calm = quest.PartsListForReading.OfType<QuestPart_Delay>().FirstOrDefault(v => v.debugLabel == QuestNode_Root_ViviBloom.CalmDelayLabel);
+            var calm = quest.PartsListForReading.OfType<QuestPart_Delay>().FirstOrDefault(v => v.debugLabel == ViviEndingBloomParts.CalmDelayLabel);
             if (calm == null || calm.State != QuestPartState.Enabled || calm.TicksLeft <= 0) { return; }
 
             foreach (var other in Find.Maps)

@@ -113,7 +113,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VV_DoomFlower</defName>
     <label>doom bloom</label>
-    <description>A cursed flower grown from Asphodel's warped mana. When it blooms, it inflicts a deadly curse on every colonist in the area, so it is best destroyed.</description>
+    <description>A cursed flower grown from Asphodel's warped memories and mana. If it is not destroyed before it fully blooms, visions of the old catastrophe spread and lay a deadly curse on every colonist in the area.</description>
     <thingClass>VVRace.Building_DoomFlower</thingClass>
     <graphicData>
       <texPath>Things/Building/VV_DoomFlower</texPath>
@@ -169,7 +169,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VV_FairyFlower</defName>
     <label>fairy bloom</label>
-    <description>A flower grown from the mana of the fairy vivis bound to Asphodel. When a vivi bonded with the fairy bloom draws close to Asphodel, the two manas collide and cause interference, freeing the fairy vivis bound to Asphodel en masse.</description>
+    <description>A flower that bloomed from the spreading mana of the fairy vivis wrapped around Asphodel. When an adult vivi bonds with this flower and approaches Asphodel, the two manas interfere. As if easing the empress's burden, this frees fairy vivis en masse and also cleanses the doom bloom curse laid on the bonded vivi.</description>
     <thingClass>VVRace.Building_FairyFlower</thingClass>
     <graphicData>
       <texPath>Things/Building/VV_FairyFlower</texPath>
