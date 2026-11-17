@@ -256,7 +256,7 @@ namespace VVRace
                 var thing = candidates[i];
                 if (thing.Fogged() || thing.IsForbidden(pawn)) { continue; }
 
-                var available = pawn.Map.reservationManager.CanReserveStack(pawn, thing, PollenReserveMaxPawns);
+                var available = AvailablePollen(pawn, thing);
                 if (available <= 0) { continue; }
                 if (!pawn.CanReach(thing, PathEndMode.ClosestTouch, Danger.Deadly)) { continue; }
 
@@ -267,6 +267,32 @@ namespace VVRace
             }
 
             return remaining <= 0;
+        }
+
+        // 바닐라 CanReserveStack은 다른 폰이 더미 전체를 예약하고 있으면 0을 돌려준다.
+        // 작업대 작업(DoBill)은 재료를 조금만 쓸 때도 더미 전체를 예약하므로, 꽃가루가 큰 더미 하나에 몰려 있으면
+        // 작업대가 돌 때마다 향 채집이 "꽃가루 부족"으로 막힌다.
+        // 그래서 나눠 예약된 양(다른 향 채집)만 빼고, 더미 전체 예약은 없는 것으로 센다.
+        private static int AvailablePollen(Pawn pawn, Thing pollen)
+        {
+            var map = pawn.Map;
+
+            // 작업대에 올려놓은 재료는 건드리지 않는다.
+            var physical = map.physicalInteractionReservationManager;
+            if (physical.IsReserved(pollen) && !physical.IsReservedBy(pawn, pollen)) { return 0; }
+
+            var available = pollen.stackCount;
+            var reservations = map.reservationManager.ReservationsReadOnly;
+            for (int i = 0; i < reservations.Count; ++i)
+            {
+                var reservation = reservations[i];
+                if (reservation.Target.Thing != pollen || reservation.Claimant == pawn) { continue; }
+                if (reservation.StackCount == ReservationManager.StackCount_All) { continue; }
+
+                available -= reservation.StackCount;
+            }
+
+            return Mathf.Max(available, 0);
         }
 
         public void NotifyScentColorChanged()
