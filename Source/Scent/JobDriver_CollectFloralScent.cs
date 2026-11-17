@@ -43,6 +43,10 @@ namespace VVRace
                     ? countQueue[i]
                     : System.Math.Min(job.count, pollenQueue[i].Thing?.stackCount ?? job.count);
 
+                // 다른 폰이 더미 전체를 예약한 꽃가루(작업대 재료 등)는 예약 없이 가져간다.
+                // 강제 지시 잡이 그대로 Reserve하면 바닐라가 그 폰의 작업을 끊고 예약을 빼앗는다.
+                if (!pawn.CanReserve(pollenQueue[i], CompScentBottle.PollenReserveMaxPawns, count)) { continue; }
+
                 pawn.Reserve(
                     pollenQueue[i], job, CompScentBottle.PollenReserveMaxPawns, count, null, errorOnFailed: false);
             }
