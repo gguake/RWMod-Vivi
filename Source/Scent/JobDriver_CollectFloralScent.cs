@@ -69,11 +69,16 @@ namespace VVRace
                 .FailOnSomeonePhysicallyInteracting(PollenIndex);
             yield return Toils_General.Wait(Bottle?.Props.loadTicks ?? 300)
                 .FailOnDespawnedNullOrForbidden(PollenIndex)
+                .FailOnSomeonePhysicallyInteracting(PollenIndex)
                 .WithProgressBarToilDelay(PollenIndex);
             yield return Toils_General.DoAtomic(() =>
             {
                 var pollen = job.GetTarget(PollenIndex).Thing;
-                Bottle.LoadPollenFrom(pollen, job.count);
+                if (pollen != null && pollen.Spawned)
+                {
+                    // 예약 없이 온 더미라면, 오는 사이 다른 폰이 예약한 몫은 남긴다.
+                    Bottle.LoadPollenFrom(pollen, System.Math.Min(job.count, CompScentBottle.AvailablePollen(pawn, pollen)));
+                }
 
                 // 다 실은 뒤에도 예약이 남으면 향 채집이 끝날 때까지 남은 꽃가루가 묶인다.
                 var reservations = pawn.Map.reservationManager;

@@ -274,7 +274,7 @@ namespace VVRace
         // 작업대 작업(DoBill)은 재료를 조금만 쓸 때도 더미 전체를 예약하므로, 꽃가루가 큰 더미 하나에 몰려 있으면
         // 작업대가 돌 때마다 향 채집이 "꽃가루 부족"으로 막힌다.
         // 그래서 나눠 예약된 양(다른 향 채집)만 빼고, 더미 전체 예약은 없는 것으로 센다.
-        private static int AvailablePollen(Pawn pawn, Thing pollen)
+        public static int AvailablePollen(Pawn pawn, Thing pollen)
         {
             var map = pawn.Map;
 
