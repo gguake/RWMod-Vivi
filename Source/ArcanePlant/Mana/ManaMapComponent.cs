@@ -48,10 +48,9 @@ namespace VVRace
             }
         }
 
-        public float TotalManaInRadius(IntVec3 center, float radius, out int actualCellCount)
+        public float TotalManaInRadius(IntVec3 center, float radius)
         {
             var sum = 0f;
-            actualCellCount = 0;
             
             var numCells = GenRadial.NumCellsInRadius(radius);
             for (int i = 0; i < numCells; ++i)
@@ -60,7 +59,6 @@ namespace VVRace
                 if (!cell.InBounds(map)) { continue; }
 
                 sum += this[cell];
-                actualCellCount++;
             }
 
             return sum;
