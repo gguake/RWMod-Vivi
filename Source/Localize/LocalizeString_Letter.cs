@@ -90,16 +90,5 @@
         public const string VV_Letter_AncientWitness = nameof(VV_Letter_AncientWitness);
         public const string VV_Letter_FederationReactionLabel = nameof(VV_Letter_FederationReactionLabel);
         public const string VV_Letter_FederationReaction = nameof(VV_Letter_FederationReaction);
-
-        public const string VV_Letter_ViviLureScoutsLabel = nameof(VV_Letter_ViviLureScoutsLabel);
-        public const string VV_Letter_ViviLureScouts = nameof(VV_Letter_ViviLureScouts);
-        public const string VV_Letter_ViviLureHornetLabel = nameof(VV_Letter_ViviLureHornetLabel);
-        public const string VV_Letter_ViviLureHornet = nameof(VV_Letter_ViviLureHornet);
-        public const string VV_Letter_ViviNestSettlersLabel = nameof(VV_Letter_ViviNestSettlersLabel);
-        public const string VV_Letter_ViviNestSettlers = nameof(VV_Letter_ViviNestSettlers);
-        public const string VV_Letter_ViviNestAlmostHostileLabel = nameof(VV_Letter_ViviNestAlmostHostileLabel);
-        public const string VV_Letter_ViviNestAlmostHostile = nameof(VV_Letter_ViviNestAlmostHostile);
-        public const string VV_Letter_ViviNestHostileLabel = nameof(VV_Letter_ViviNestHostileLabel);
-        public const string VV_Letter_ViviNestHostile = nameof(VV_Letter_ViviNestHostile);
     }
 }

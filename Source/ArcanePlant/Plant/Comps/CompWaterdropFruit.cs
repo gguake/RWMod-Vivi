@@ -82,12 +82,6 @@ namespace VVRace
                 return GenPlace.TryPlaceThing(fruit, parent.Position, map, ThingPlaceMode.Near);
             }
 
-            var nest = BeekeepingUtility.GetNestLordJob(map, faction);
-            if (nest != null)
-            {
-                return nest.TryPlaceOwned(fruit, parent.Position);
-            }
-
             // 바닐라 놓기는 그 칸의 같은 더미에 합치고 합친 더미의 금지 상태를 따르므로 금지되지 않은 같은 더미가 있는 칸은 피한다.
             var def = fruit.def;
             fruit.SetForbidden(true, warnOnFail: false);

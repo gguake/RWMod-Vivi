@@ -15,11 +15,6 @@ namespace VVRace
         public bool randomGenesForStartingVivi = false;
         public bool enableViviMealContinuation = true;
         public float viviMealContinuationNutritionGap = 0.7f;
-        public int wildViviNestMaxMembers = DefaultWildViviNestMaxMembers;
-
-        public const int DefaultWildViviNestMaxMembers = 12;
-        public const int MinWildViviNestMaxMembers = ViviNestSiteEvaluator.MaxSettlerCount;
-        public const int MaxWildViviNestMaxMembers = 30;
 
         public HashSet<string> disabledModGenes = new HashSet<string>();
 
@@ -38,7 +33,6 @@ namespace VVRace
             Scribe_Values.Look(ref randomGenesForStartingVivi, "randomGenesForStartingVivi", defaultValue: false);
             Scribe_Values.Look(ref enableViviMealContinuation, "enableViviMealContinuation", defaultValue: true);
             Scribe_Values.Look(ref viviMealContinuationNutritionGap, "viviMealContinuationNutritionGap", defaultValue: 0.7f);
-            Scribe_Values.Look(ref wildViviNestMaxMembers, "wildViviNestMaxMembers", defaultValue: DefaultWildViviNestMaxMembers);
             ExposeModGenes();
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
@@ -49,7 +43,6 @@ namespace VVRace
                 }
 
                 viviMealContinuationNutritionGap = Mathf.Clamp(viviMealContinuationNutritionGap, 0.05f, 2f);
-                wildViviNestMaxMembers = Mathf.Clamp(wildViviNestMaxMembers, MinWildViviNestMaxMembers, MaxWildViviNestMaxMembers);
             }
         }
 
@@ -226,13 +219,6 @@ namespace VVRace
                 LocalizeString_Etc.VV_ModSettings_RandomGenesForStartingVivi.Translate(),
                 ref _settings.randomGenesForStartingVivi,
                 LocalizeString_Etc.VV_ModSettings_RandomGenesForStartingViviDesc.Translate());
-
-            _settings.wildViviNestMaxMembers = Mathf.RoundToInt(listing.SliderLabeled(
-                LocalizeString_Etc.VV_ModSettings_WildViviNestMaxMembers.Translate(_settings.wildViviNestMaxMembers),
-                _settings.wildViviNestMaxMembers,
-                VVRaceModSettings.MinWildViviNestMaxMembers,
-                VVRaceModSettings.MaxWildViviNestMaxMembers,
-                tooltip: LocalizeString_Etc.VV_ModSettings_WildViviNestMaxMembersDesc.Translate()));
 
             listing.CheckboxLabeled(
                 LocalizeString_Etc.VV_ModSettings_EnableViviMealContinuation.Translate(),

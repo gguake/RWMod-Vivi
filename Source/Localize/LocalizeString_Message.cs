@@ -55,21 +55,6 @@
         public const string VV_Message_AssimilationReleased = nameof(VV_Message_AssimilationReleased);
         public const string VV_Message_AssimilationBrokenRitual = nameof(VV_Message_AssimilationBrokenRitual);
 
-        public const string VV_Message_ViviLureBear = nameof(VV_Message_ViviLureBear);
-        public const string VV_Message_ViviLureScoutsFled = nameof(VV_Message_ViviLureScoutsFled);
-        public const string VV_Message_ViviLureScoutsDisappointed = nameof(VV_Message_ViviLureScoutsDisappointed);
-        public const string VV_Message_ViviLureScoutsSatisfied = nameof(VV_Message_ViviLureScoutsSatisfied);
-        public const string VV_Message_ViviNestSettlersCanceled = nameof(VV_Message_ViviNestSettlersCanceled);
-        public const string VV_Message_ViviNestWary = nameof(VV_Message_ViviNestWary);
-        public const string VV_Message_ViviNestVeryWary = nameof(VV_Message_ViviNestVeryWary);
-        public const string VV_Message_ViviNestRescuedReturned = nameof(VV_Message_ViviNestRescuedReturned);
-        public const string VV_Message_ViviNestLeavingFew = nameof(VV_Message_ViviNestLeavingFew);
-        public const string VV_Message_ViviNestLeavingStarving = nameof(VV_Message_ViviNestLeavingStarving);
-        public const string VV_Message_ViviNestLeavingRoomLost = nameof(VV_Message_ViviNestLeavingRoomLost);
-        public const string VV_Message_ViviNestSettlersTurnedBack = nameof(VV_Message_ViviNestSettlersTurnedBack);
-        public const string VV_Message_CannotClaimViviNest = nameof(VV_Message_CannotClaimViviNest);
-        public const string VV_Message_CannotAdoptViviNestBaby = nameof(VV_Message_CannotAdoptViviNestBaby);
-
         public const string VV_Message_ManaNotEnough = nameof(VV_Message_ManaNotEnough);
     }
 }

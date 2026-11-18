@@ -275,25 +275,6 @@ namespace VVRace
                     GenDraw.DrawLineBetween(((Pawn)parent).DrawPos, marker.pawn.DrawPos, ConcentrationLineMat);
                 }
             }
-
-            DrawNestOverlays();
-        }
-
-        private static readonly Color NestRoomEdgeColor = new Color(1f, 0.8f, 0.35f);
-        private static readonly Color NestActivityEdgeColor = new Color(0.55f, 0.9f, 0.5f);
-
-        private void DrawNestOverlays()
-        {
-            var nest = ((Pawn)parent).GetNestLordJob();
-            if (nest == null || !nest.Settled || parent.Map != Find.CurrentMap) { return; }
-
-            GenDraw.DrawFieldEdges(nest.Territory.ActivityCellsForDrawing, NestActivityEdgeColor);
-            GenDraw.DrawFieldEdges(nest.Territory.OwnedRoomCellsForDrawing, NestRoomEdgeColor);
-        }
-
-        public override string CompInspectStringExtra()
-        {
-            return ((Pawn)parent).GetNestLordJob()?.GetReport((Pawn)parent);
         }
 
         public override void Notify_DuplicatedFrom(Pawn source)

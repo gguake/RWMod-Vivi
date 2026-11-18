@@ -39,7 +39,6 @@ namespace VVRace
                         var thing = ThingMaker.MakeThing(extension.thingDef);
                         thing.stackCount = actualStackCount;
 
-                        gatherer.GetNestLordJob()?.MarkOwned(thing);
                         var placed = GenPlace.TryPlaceThing(thing, position, map, ThingPlaceMode.Near);
                         if (!placed)
                         {

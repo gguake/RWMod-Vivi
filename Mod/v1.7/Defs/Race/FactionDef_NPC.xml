@@ -171,44 +171,4 @@ Only a few traces of the former empire remain, in the form of certain traditions
       </li>
     </modExtensions>
   </FactionDef>
-
-  <!-- 떠돌이 비비 무리: 양봉 유인통을 찾아오는 임시 세력. 방문마다 새로 만들고, 구성원이 모두 떠나면 바닐라가 지운다 -->
-  <FactionDef ParentName="VV_ViviFactionBase">
-    <defName>VV_WanderingVivi</defName>
-    <label>wandering vivis</label>
-    <description>A small band of vivis who lost their home hive along with its everflower seed and now wander from place to place. When they follow the scent of honey to a suitable empty room, they furnish it with cream and wax and live off the surrounding flowers. They maintain no permanent settlements of their own.</description>
-    <factionNameMaker>VV_NamerWanderingViviFaction</factionNameMaker>
-    <leaderTitle>elder</leaderTitle>
-    <categoryTag>VV_WanderingVivi</categoryTag>
-
-    <hidden>true</hidden>
-    <requiredCountAtGameStart>0</requiredCountAtGameStart>
-    <maxConfigurableAtWorldCreation>0</maxConfigurableAtWorldCreation>
-    <displayInFactionSelection>false</displayInFactionSelection>
-    <settlementGenerationWeight>0</settlementGenerationWeight>
-    <generateNewLeaderFromMapMembersOnly>true</generateNewLeaderFromMapMembersOnly>
-    <canSiege>false</canSiege>
-    <canStageAttacks>false</canStageAttacks>
-    <basicMemberKind>VV_WanderingViviWorker</basicMemberKind>
-
-    <colorSpectrum>
-      <li>(0.96, 0.86, 0.56)</li>
-      <li>(0.98, 0.74, 0.36)</li>
-    </colorSpectrum>
-
-    <!-- 폰은 인시던트가 직접 만든다. 그룹 정의가 비지 않게 평화 그룹 하나만 둔다 -->
-    <pawnGroupMakers Inherit="False">
-      <li>
-        <kindDef>Peaceful</kindDef>
-        <options>
-          <VV_WanderingViviWorker>10</VV_WanderingViviWorker>
-          <VV_WanderingViviSlinger>10</VV_WanderingViviSlinger>
-        </options>
-      </li>
-    </pawnGroupMakers>
-
-    <caravanTraderKinds Inherit="False" />
-    <visitorTraderKinds Inherit="False" />
-    <baseTraderKinds Inherit="False" />
-  </FactionDef>
 </Defs>

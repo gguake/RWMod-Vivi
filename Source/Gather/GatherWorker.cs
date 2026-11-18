@@ -80,7 +80,6 @@ namespace VVRace
                     var seed = ThingMaker.MakeThing(VVThingDefOf.VV_Seed_UnknownPlant);
                     seed.stackCount = 1;
 
-                    pawn.GetNestLordJob()?.MarkOwned(seed);
                     GenPlace.TryPlaceThing(seed, pawn.Position, pawn.Map, ThingPlaceMode.Near);
                 }
             }

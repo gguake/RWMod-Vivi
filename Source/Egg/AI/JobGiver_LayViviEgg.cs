@@ -20,7 +20,7 @@ namespace VVRace
                 return null;
             }
 
-            if ((pawn.Faction == Faction.OfPlayerSilentFail || pawn.GetNestLordJob() != null) && TryGetBestEggBox(pawn, out var eggBox))
+            if (pawn.Faction == Faction.OfPlayerSilentFail && TryGetBestEggBox(pawn, out var eggBox))
             {
                 return JobMaker.MakeJob(VVJobDefOf.VV_LayViviEgg, eggBox);
             }

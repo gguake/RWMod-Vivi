@@ -35,17 +35,6 @@ namespace VVRace
     {
         public static WorkTypeDef Patient;
         public static WorkTypeDef PatientBedRest;
-        public static WorkTypeDef Cooking;
-    }
-
-    [DefOf]
-    public static class VVWorkGiverDefOf
-    {
-        public static WorkGiverDef ConstructFinishFrames;
-        public static WorkGiverDef ConstructDeliverResourcesToFrames;
-        public static WorkGiverDef ConstructDeliverResourcesToBlueprints;
-        public static WorkGiverDef Repair;
-        public static WorkGiverDef DoctorFeedHumanlikes;
     }
 
     [DefOf]
@@ -88,19 +77,6 @@ namespace VVRace
         public static JobDef VV_ActivateApocryphaNeedle;
 
         public static JobDef VV_BondFairyFlower;
-
-        public static JobDef VV_ViviInspectLure;
-        public static JobDef VV_ViviNestUnload;
-        public static JobDef VV_ViviNestDigFertilizer;
-        public static JobDef VV_ViviNestBuildRoof;
-        public static JobDef VV_ViviNestFertilizePlant;
-        public static JobDef VV_ViviNestGatherHoney;
-        public static JobDef VV_ViviNestGatherPollen;
-        public static JobDef VV_ViviNestGatherPropolis;
-        public static JobDef VV_ViviNestNap;
-        public static JobDef VV_ViviNestLoaf;
-        public static JobDef VV_ViviNestClean;
-        public static JobDef Play_Horseshoes;
     }
 
     [DefOf]
@@ -124,7 +100,6 @@ namespace VVRace
         public static ThingDef VV_Fertilizer;
 
         public static ThingDef VV_ArcanePlantPot;
-        public static ThingDef VV_ManaEmitter;
 
         public static ThingDef VV_EmberBloom;
         public static ThingDef VV_FrostBloom;
@@ -154,7 +129,6 @@ namespace VVRace
 
         public static ThingDef Shelf;
         public static ThingDef ShelfSmall;
-        public static ThingDef HorseshoesPin;
 
         public static ThingDef VV_TitanicHornet;
 
@@ -207,16 +181,6 @@ namespace VVRace
         public static ThingDef VV_TitanicHornetWing;
 
         public static ThingDef VV_Mote_EverflowerCircle;
-
-        public static ThingDef VV_ViviLure;
-        public static ThingDef VV_BasicWorkerCostume;
-        public static ThingDef VV_Childrenswear;
-        public static ThingDef RawBerries;
-        public static ThingDef VV_ViviNestWorkSpot;
-        public static ThingDef VV_Pollen;
-        public static ThingDef VV_Propolis;
-        public static ThingDef VV_HoneyPollenCake;
-        public static ThingDef VV_Slingshot;
     }
 
     [DefOf]
@@ -237,13 +201,6 @@ namespace VVRace
 
         public static PawnKindDef VV_TitanicHornet;
 
-        public static PawnKindDef VV_WanderingViviWorker;
-        public static PawnKindDef VV_WanderingViviNestborn;
-        public static PawnKindDef VV_WanderingViviSlinger;
-        public static PawnKindDef VV_WanderingRoyalVivi;
-        public static PawnKindDef Bear_Grizzly;
-        public static PawnKindDef Bear_Polar;
-
         public static PawnKindDef VV_Apocrypha;
     }
 
@@ -255,13 +212,6 @@ namespace VVRace
 
         public static RecipeDef VV_MakeVivicream;
         public static RecipeDef VV_FilteringHoney;
-
-        public static RecipeDef VV_GatherPollen;
-        public static RecipeDef VV_MakeViviwax;
-        public static RecipeDef VV_Make_HoneyPollenCake;
-        public static RecipeDef Make_VV_BasicWorkerCostume;
-        public static RecipeDef Make_VV_Childrenswear;
-        public static RecipeDef Make_VV_Slingshot;
     }
 
     [DefOf]
@@ -489,11 +439,6 @@ namespace VVRace
 
         public static DutyDef VV_TitanicHornetEscort;
         public static DutyDef VV_TitanicHornetFlowerGuard;
-
-        public static DutyDef VV_ViviLureScout;
-        public static DutyDef VV_ViviBaitThief;
-        public static DutyDef VV_ViviNestLife;
-        public static DutyDef VV_ViviNestExit;
     }
 
     [DefOf]
@@ -519,8 +464,6 @@ namespace VVRace
     {
         public static IncidentDef VV_TitanicHornetSwarm;
         public static IncidentDef VV_TitanicHornetAssault;
-
-        public static IncidentDef VV_ViviNestSettlers;
     }
 
     [DefOf]
@@ -598,8 +541,6 @@ namespace VVRace
         public static FactionDef VV_ViviFederation;
         public static FactionDef VV_PlayerExiledVivi;
         public static FactionDef VV_PlayerViviRefugee;
-
-        public static FactionDef VV_WanderingVivi;
     }
 
     [DefOf]

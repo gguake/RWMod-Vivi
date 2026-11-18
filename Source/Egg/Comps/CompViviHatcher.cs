@@ -196,8 +196,7 @@ namespace VVRace
 
                 var faction = hatchery.Faction;
 
-                var pawnKindDef = (faction?.IsPlayer ?? false) ? VVPawnKindDefOf.VV_PlayerVivi
-                    : faction.IsWanderingViviFaction() ? VVPawnKindDefOf.VV_WanderingViviNestborn : null;
+                var pawnKindDef = (faction?.IsPlayer ?? false) ? VVPawnKindDefOf.VV_PlayerVivi : null;
                 if (pawnKindDef != null)
                 {
                     try
@@ -290,11 +289,6 @@ namespace VVRace
                                     Find.LetterStack.ReceiveLetter(babyBirthLetter);
                                 }
 
-
-                                if (faction.IsWanderingViviFaction())
-                                {
-                                    BeekeepingUtility.Notify_NestBabyHatched(pawn, hatchery);
-                                }
 
                                 if (hatcheeParent != null)
                                 {

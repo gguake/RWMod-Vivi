@@ -448,7 +448,7 @@ namespace VVRace
 
         #region 공용 그리기
 
-        public static void DrawSectionTitle(float width, ref float curY, string title)
+        private void DrawSectionTitle(float width, ref float curY, string title)
         {
             if (curY > 0f)
             {

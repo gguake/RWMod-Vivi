@@ -33,29 +33,4 @@
       <li>Scaria</li>
     </letterHyperlinkHediffDefs>
   </IncidentDef>
-
-  <!-- 비비 양봉: 유인통 방문(스토리텔러 단일 MTB 컴프가 발동) -->
-  <IncidentDef>
-    <defName>VV_ViviLureVisit</defName>
-    <label>vivi lure visit</label>
-    <targetTags>
-      <li>Map_PlayerHome</li>
-    </targetTags>
-    <workerClass>VVRace.IncidentWorker_ViviLureVisit</workerClass>
-    <baseChance>0</baseChance>
-    <minRefireDays>2</minRefireDays>
-    <category>Misc</category>
-  </IncidentDef>
-
-  <!-- 비비 양봉: 정찰대가 만족하고 떠난 뒤 유인통이 정해 둔 시각에 직접 발동하는 정착대(바닐라 예약 큐를 쓰지 않는다) -->
-  <IncidentDef>
-    <defName>VV_ViviNestSettlers</defName>
-    <label>vivi nest settlers</label>
-    <targetTags>
-      <li>Map_PlayerHome</li>
-    </targetTags>
-    <workerClass>VVRace.IncidentWorker_ViviNestSettlers</workerClass>
-    <baseChance>0</baseChance>
-    <category>Misc</category>
-  </IncidentDef>
 </Defs>

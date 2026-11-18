@@ -5,19 +5,6 @@
 <VV_FortifyHoneycombWall.reportString>벌집 벽을 강화하는 중.</VV_FortifyHoneycombWall.reportString>
 <VV_PlantArcaneSeed.reportString>TargetA 심는 중.</VV_PlantArcaneSeed.reportString>
 
-<!-- Beekeeping -->
-<VV_ViviInspectLure.reportString>TargetA의 냄새를 맡는 중.</VV_ViviInspectLure.reportString>
-<VV_ViviNestUnload.reportString>짐을 푸는 중.</VV_ViviNestUnload.reportString>
-<VV_ViviNestDigFertilizer.reportString>흙을 파서 마나 비료를 만드는 중.</VV_ViviNestDigFertilizer.reportString>
-<VV_ViviNestBuildRoof.reportString>지붕을 짓는 중.</VV_ViviNestBuildRoof.reportString>
-<VV_ViviNestFertilizePlant.reportString>TargetA에 마나 비료를 주는 중.</VV_ViviNestFertilizePlant.reportString>
-<VV_ViviNestGatherHoney.reportString>TargetA에서 꿀 채집 중.</VV_ViviNestGatherHoney.reportString>
-<VV_ViviNestGatherPollen.reportString>TargetA에서 꽃가루 채집 중.</VV_ViviNestGatherPollen.reportString>
-<VV_ViviNestGatherPropolis.reportString>TargetA에서 프로폴리스 채집 중.</VV_ViviNestGatherPropolis.reportString>
-<VV_ViviNestNap.reportString>낮잠 자는 중.</VV_ViviNestNap.reportString>
-<VV_ViviNestLoaf.reportString>빈둥거리는 중.</VV_ViviNestLoaf.reportString>
-<VV_ViviNestClean.reportString>TargetA 청소하는 중.</VV_ViviNestClean.reportString>
-
 <!-- EverflowerRitual -->
 <VV_MoveEverflower.reportString>TargetA를 옮기기 위해 공명 중.</VV_MoveEverflower.reportString>
 
