@@ -16,6 +16,8 @@ Source/obj
 Source/.vs
 Source/.idea
 
+Tests
+
 Mod/rwconfigrc.json
 TestTool
 docs
