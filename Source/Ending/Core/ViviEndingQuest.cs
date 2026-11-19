@@ -1,4 +1,5 @@
 ﻿using RimWorld;
+using RimWorld.Planet;
 using RimWorld.QuestGen;
 using System;
 using System.Collections.Generic;
@@ -71,10 +72,10 @@ namespace VVRace
 
                     case QuestState.Ongoing:
                     case QuestState.NotYetAccepted:
-                        return state?.Stage ?? JourneyStage;
+                        return _bloomStarted ? (state?.Stage ?? JourneyStage) : JourneyStage;
 
                     default:
-                        return _bloomStarted ? ViviEndingStage.Failed : JourneyStage;
+                        return JourneyStage;
                 }
             }
         }
@@ -117,10 +118,10 @@ namespace VVRace
         public ArcanePlant_Everflower AnchorEverflower => _anchor;
         public Map AnchorMap => _anchor?.MapHeld;
 
-        public Pawn Boss => _quest != null && _quest.State == QuestState.Ongoing ? ApocryphaPart?.Boss : null;
+        public Pawn Boss => _bloomStarted && _quest != null && _quest.State == QuestState.Ongoing ? ApocryphaPart?.Boss : null;
         public CompApocrypha BossComp => Boss?.GetComp<CompApocrypha>();
 
-        public int SiegeDurationTicks => BloomPart?.DurationTicks ?? 0;
+        public int SiegeDurationTicks => _bloomStarted ? (BloomPart?.DurationTicks ?? 0) : 0;
 
         public bool IsAltarUnlocked => Stage >= ViviEndingStage.AltarUnlocked;
         public bool IsEndingActive => Stage.IsActiveStage();
@@ -164,7 +165,7 @@ namespace VVRace
             return stage == ViviEndingStage.Siege || stage == ViviEndingStage.Calm || stage == ViviEndingStage.Boss;
         }
 
-        internal bool IsBossDeferred => ApocryphaPart != null && ApocryphaPart.State == QuestPartState.Enabled && ApocryphaPart.IsDeferred;
+        internal bool IsBossDeferred => _bloomStarted && ApocryphaPart != null && ApocryphaPart.State == QuestPartState.Enabled && ApocryphaPart.IsDeferred;
 
         internal Building_EverflowerAltar AnchorAltar => ViviEndingUtility.AltarOf(_anchor);
 
@@ -221,6 +222,11 @@ namespace VVRace
         public void Tick()
         {
             var now = Find.TickManager.TicksGame;
+
+            if (!_bloomStarted && _quest != null && StatePart != null)
+            {
+                RemoveStaleBloomParts();
+            }
 
             if (_assimilated != null)
             {
@@ -334,6 +340,27 @@ namespace VVRace
             ViviEndingSignals.Send(_quest, ViviEndingSignals.AnchorLost);
         }
 
+        // 개화가 중단되면 부수 효과를 즉시 정리하고 만개 의식 대기(AltarUnlocked)로 되돌린다.
+        // 퀘스트 부품 제거는 신호 전파 중 컬렉션 변경을 피하기 위해 다음 틱(또는 재시작 직전)에 수행한다.
+        internal void Notify_BloomFailed(ArcanePlant_Everflower anchor, MapParent anchorMapParent, bool stolen)
+        {
+            ViviEndingBloomParts.CleanupAndDetachTags(_quest, anchor, anchorMapParent);
+
+            if (!stolen && anchor != null && !anchor.Destroyed
+                && anchor.AttunementLevel == RitualOutcomeEffectWorker_GrandAttunement.GrandAttunementLevel)
+            {
+                anchor.EverflowerComp?.SetAttunementLevel(Building_EverflowerAltar.RequiredAttunementLevel, sendLetter: false);
+            }
+
+            _anchor = null;
+            _bloomStarted = false;
+
+            if (_assimilated != null)
+            {
+                Hediff_EverflowerAssimilation.Of(_assimilated)?.Release();
+            }
+        }
+
         public IEnumerable<Gizmo> GetEverflowerGizmos(ArcanePlant_Everflower everflower)
         {
             if (everflower == null) { yield break; }
@@ -431,11 +458,11 @@ namespace VVRace
             return true;
         }
 
-        // 개화 전 단계에서 퀘스트가 뜻밖에 끝나면 진행 상태는 보조 객체에 남아 있으므로 같은 단계로 다시 띄운다.
+        // 완료되지 않은 채 퀘스트가 끝나면(구버전 실패 세이브 포함) 진행 상태는 보조 객체에 남아 있으므로 같은 단계로 다시 띄운다.
         private void ReissueEndedQuest()
         {
             var ended = _quest;
-            if (ended == null || !ended.Historical || _bloomStarted) { return; }
+            if (ended == null || !ended.Historical || ended.State == QuestState.EndedSuccess) { return; }
 
             _quest = null;
             if (!CreateQuest())
@@ -444,12 +471,29 @@ namespace VVRace
                 return;
             }
 
-            Log.Warning($"[ViViRace] the ending quest ended unexpectedly before the bloom ({ended.State}); issued it again.");
+            _anchor = null;
+            _bloomStarted = false;
+            _cachedQuest = null;
+            _cachedPartCount = -1;
+
+            Log.Warning($"[ViViRace] the ending quest ended without completing ({ended.State}); issued it again.");
+        }
+
+        private void RemoveStaleBloomParts()
+        {
+            ViviEndingBloomParts.Remove(_quest);
+            _cachedQuest = null;
+            _cachedPartCount = -1;
         }
 
         private bool StartBloom(ArcanePlant_Everflower everflower, float quality)
         {
-            if (_quest == null || _quest.State != QuestState.Ongoing || _bloomStarted || StatePart != null) { return false; }
+            if (_quest == null || _quest.State != QuestState.Ongoing || _bloomStarted) { return false; }
+
+            if (StatePart != null)
+            {
+                RemoveStaleBloomParts();
+            }
 
             var added = ViviEndingBloomParts.TryAdd(_quest, everflower, quality, _assimilated);
             _cachedQuest = null;

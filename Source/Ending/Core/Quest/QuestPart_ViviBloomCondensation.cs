@@ -21,7 +21,7 @@ namespace VVRace
         {
             get
             {
-                if (quest == null || quest.Historical) { return null; }
+                if (State != QuestPartState.Enabled || quest == null || quest.Historical) { return null; }
 
                 return LocalizeString_Inspector.VV_Inspector_EndingBloom.Translate(_progress.ToStringPercent().Named("PERCENT")).Resolve();
             }

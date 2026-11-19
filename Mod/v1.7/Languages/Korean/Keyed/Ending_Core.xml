@@ -11,14 +11,14 @@
 <VV_Quest_EndingStageRuinsExtract>중심 제단에서 고대 호박 코어를 추출하십시오.</VV_Quest_EndingStageRuinsExtract>
 <VV_Quest_EndingStageAltar>고대 호박 코어로 영원꽃 제단을 건설하고 조율 {0}단계 영원꽃을 안치한 뒤 〈영원꽃 만개 의식〉을 치르십시오.</VV_Quest_EndingStageAltar>
 <VV_Quest_EndingStageAltarCoreLost>고대 호박 코어와 제단을 모두 잃었다면 통신기로 비비 연방에 연락해 대체 코어를 복구할 수 있습니다.</VV_Quest_EndingStageAltarCoreLost>
-<VV_Quest_EndingStageBloom>영원꽃이 마지막 개화에 필요한 마나를 응축하고 있습니다.\n\n응축이 끝날 때까지 제단을 지킨 뒤, 공명자에게 〈대관식〉을 치르게 하십시오. 영원꽃을 잃으면 마지막 개화는 실패합니다.</VV_Quest_EndingStageBloom>
+<VV_Quest_EndingStageBloom>영원꽃이 마지막 개화에 필요한 마나를 응축하고 있습니다.\n\n응축이 끝날 때까지 제단을 지킨 뒤, 공명자에게 〈대관식〉을 치르게 하십시오. 제단이나 영원꽃, 공명자를 잃으면 개화가 중단됩니다.</VV_Quest_EndingStageBloom>
 <VV_Quest_EndingStageHostile>비비 연방과 적대 중이라 진행이 멈추었습니다. 관계를 회복하면 멈춘 곳부터 이어집니다.</VV_Quest_EndingStageHostile>
 <VV_Quest_EndingConditionsHeader>좌표를 넘겨받는 기준</VV_Quest_EndingConditionsHeader>
 <VV_Quest_EndingConditionVivi>정착지 소속 비비: {0} / {1}명</VV_Quest_EndingConditionVivi>
 <VV_Quest_EndingConditionWealth>기지 가치: {0} / {1}</VV_Quest_EndingConditionWealth>
 <VV_Quest_EndingStepAltar>영원꽃 제단 건설</VV_Quest_EndingStepAltar>
 <VV_Quest_EndingStepEnshrine>조율 {0}단계 영원꽃을 제단 중앙에 안치</VV_Quest_EndingStepEnshrine>
-<VV_Quest_EndingTruthLog>불타는 꽃그늘 아래에서 옛 여제 아스포델은 아이들을 하나도 잃지 않으려 회로를 한계 너머까지 열어, 그늘 아래 수많은 비비를 작은 빛으로 품었습니다. 그러나 한 사람의 영혼으로 그 무게를 견디지 못해 조율과 자아는 무너졌고 꽃그늘 아래는 텅 비어 버렸습니다.\n\n마지막 다정함을 기억한 작은 빛들은 일그러진 여제를 떠나지 않고 감싸 안아 지키는 수호자이자 괴수화를 붙드는 봉인이 되어 긴 세월을 버텨 왔습니다. 마침내 결속이 풀리고 여제가 잠들자, 놓여난 빛들은 제단의 영원꽃 품에 머물며 다시 깨어날 봄을 기다리고 있습니다.</VV_Quest_EndingTruthLog>
+<VV_Quest_EndingTruthLog>불타는 꽃그늘 아래 홀로 남은 옛 여제 아스포델은 자신이 낳은 아이들을 하나도 잃지 않으려 회로를 한계 너머까지 열어, 그늘 아래 수많은 비비를 작은 빛으로 품었습니다. 그러나 한 사람의 영혼으로 그 무게를 견디지 못해 조율과 자아는 무너졌고 꽃그늘 아래는 텅 비어 버렸습니다.\n\n마지막 다정함을 기억한 작은 빛들은 일그러진 여제를 떠나지 않고 감싸 안아 지키는 수호자이자 괴수화를 붙드는 봉인이 되어 긴 세월을 버텨 왔습니다. 마침내 결속이 풀리고 여제가 잠들자, 놓여난 빛들은 제단의 영원꽃 품에 머물며 다시 깨어날 봄을 기다리고 있습니다.</VV_Quest_EndingTruthLog>
 
 <!-- 연방의 옛 동화책 -->
 <VV_Letter_EndingTaleLabel>연방의 옛 동화책 ({0}권)</VV_Letter_EndingTaleLabel>
@@ -75,11 +75,11 @@
 
 <!-- 엔딩 실패 -->
 <VV_Letter_EndingFailureLabel>영원꽃 찬탈</VV_Letter_EndingFailureLabel>
-<VV_Letter_EndingFailureStolen>제단의 영원꽃이 꽃잎으로 흩어져 아스포델에게 빨려 들어갔습니다. 꽃그늘을 거두어 안은 여제는 꽃잎 바람 너머 어둠 속으로 다시 사라졌습니다.\n\n영원꽃을 잃었습니다. 마지막 개화는 실패했습니다.</VV_Letter_EndingFailureStolen>
+<VV_Letter_EndingFailureStolen>제단의 영원꽃이 꽃잎으로 흩어져 아스포델에게 빨려 들어갔습니다. 꽃그늘을 거두어 안은 여제는 꽃잎 바람 너머 어둠 속으로 다시 사라졌습니다.\n\n영원꽃을 잃어 마지막 개화가 중단되었습니다. 제단과 영원꽃을 다시 갖추면 〈영원꽃 만개 의식〉을 다시 시작할 수 있습니다.</VV_Letter_EndingFailureStolen>
 <VV_Letter_EndingFailureLostLabel>영원꽃 소실</VV_Letter_EndingFailureLostLabel>
-<VV_Letter_EndingFailureLost>영원꽃을 잃었습니다. 마지막 개화는 실패했습니다.</VV_Letter_EndingFailureLost>
+<VV_Letter_EndingFailureLost>제단이나 영원꽃을 잃어 마지막 개화가 중단되었습니다. 제단과 영원꽃을 다시 갖추면 〈영원꽃 만개 의식〉을 다시 시작할 수 있습니다.</VV_Letter_EndingFailureLost>
 <VV_Letter_EndingFailureResonatorLabel>끊어진 공명</VV_Letter_EndingFailureResonatorLabel>
-<VV_Letter_EndingFailureResonator>{PAWN_labelShort}(이)가 쓰러져 영원꽃과의 공명이 끊어졌습니다. 마지막 개화는 실패했습니다.</VV_Letter_EndingFailureResonator>
+<VV_Letter_EndingFailureResonator>{PAWN_labelShort}(이)가 쓰러져 영원꽃과의 공명이 끊어졌습니다. 마지막 개화가 중단되었습니다.\n\n공명자를 다시 갖추면 제단에서 〈영원꽃 만개 의식〉을 다시 시작할 수 있습니다.</VV_Letter_EndingFailureResonator>
 
 <!-- 후일담 -->
 <VV_Letter_AncientWitnessLabel>깨어난 옛 날개의 기억</VV_Letter_AncientWitnessLabel>

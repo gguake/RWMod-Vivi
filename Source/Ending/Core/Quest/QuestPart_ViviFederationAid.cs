@@ -73,6 +73,16 @@ namespace VVRace
             return IncidentDefOf.RaidFriendly.Worker.TryExecute(parms);
         }
 
+        public override void Cleanup()
+        {
+            base.Cleanup();
+
+            if (State == QuestPartState.Enabled)
+            {
+                Disable();
+            }
+        }
+
         public override void ExposeData()
         {
             base.ExposeData();

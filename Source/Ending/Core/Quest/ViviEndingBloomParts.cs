@@ -1,4 +1,5 @@
 ﻿using RimWorld;
+using RimWorld.Planet;
 using System;
 using Verse;
 
@@ -42,8 +43,54 @@ namespace VVRace
                 quest.RemovePart(parts[i]);
             }
 
-            anchor.questTags?.Remove(ViviEndingSignals.For(quest, ViviEndingSignals.AnchorTag));
-            anchor.MapHeld?.Parent?.questTags?.Remove(ViviEndingSignals.For(quest, ViviEndingSignals.AnchorMapTag));
+            DetachTags(quest, anchor, anchor?.MapHeld?.Parent);
+        }
+
+        // 실패 시 개화 부품의 부수 효과와 퀘스트 태그를 즉시 걷어 낸다. 부품 제거는 신호 전파가 끝난 뒤 Remove로 수행한다.
+        public static void CleanupAndDetachTags(Quest quest, ArcanePlant_Everflower anchor, MapParent anchorMapParent)
+        {
+            if (quest == null) { return; }
+
+            var parts = quest.PartsListForReading;
+            for (int i = parts.Count - 1; i >= 0; --i)
+            {
+                if (IsRootPart(parts[i])) { continue; }
+
+                ViviEndingUtility.RunStep($"bloom cleanup: {parts[i].GetType().Name}", parts[i].Cleanup);
+            }
+
+            DetachTags(quest, anchor, anchorMapParent);
+        }
+
+        public static void Remove(Quest quest)
+        {
+            if (quest == null) { return; }
+
+            var parts = quest.PartsListForReading;
+            for (int i = parts.Count - 1; i >= 0; --i)
+            {
+                if (IsRootPart(parts[i])) { continue; }
+
+                quest.RemovePart(parts[i]);
+            }
+        }
+
+        private static bool IsRootPart(QuestPart part)
+        {
+            return part is QuestPart_ViviEndingJourney
+                || (part is QuestPart_QuestEnd end && end.outcome == QuestEndOutcome.Success);
+        }
+
+        private static void DetachTags(Quest quest, ArcanePlant_Everflower anchor, MapParent anchorMapParent)
+        {
+            if (quest == null) { return; }
+
+            var anchorTag = ViviEndingSignals.For(quest, ViviEndingSignals.AnchorTag);
+            var anchorMapTag = ViviEndingSignals.For(quest, ViviEndingSignals.AnchorMapTag);
+
+            anchor?.questTags?.Remove(anchorTag);
+            anchorMapParent?.questTags?.Remove(anchorMapTag);
+            anchor?.MapHeld?.Parent?.questTags?.Remove(anchorMapTag);
         }
 
         private static void Add(Quest quest, ArcanePlant_Everflower anchor, float quality, Pawn resonator)
@@ -74,6 +121,7 @@ namespace VVRace
             var apocryphaDefeated = Signal(ViviEndingSignals.ApocryphaDefeated);
             var coronationCompleted = Signal(ViviEndingSignals.CoronationCompleted);
             var endingFinished = Signal(ViviEndingSignals.EndingFinished);
+            var bloomFailed = Signal(ViviEndingSignals.BloomFailed);
             var stolen = Signal(ViviEndingSignals.EverflowerStolen);
             var anchorLost = Signal(ViviEndingSignals.AnchorLost);
             var resonatorFallen = Signal(ViviEndingSignals.ResonatorFallen);
@@ -81,6 +129,7 @@ namespace VVRace
             quest.AddPart(new QuestPart_ViviEndingState()
             {
                 anchor = anchor,
+                anchorMapParent = mapParent,
                 inSignalBloomCondensed = bloomCondensed,
                 inSignalApocryphaArrived = apocryphaArrived,
                 inSignalApocryphaDefeated = apocryphaDefeated,
@@ -91,6 +140,7 @@ namespace VVRace
                 inSignalAnchorDestroyed = anchorTag + ".Destroyed",
                 inSignalAnchorMapRemoved = anchorMapTag != null ? anchorMapTag + ".MapRemoved" : null,
                 outSignalAnchorLost = anchorLost,
+                outSignalBloomFailed = bloomFailed,
             });
 
             var siegeTicks = Mathf.RoundToInt(Mathf.Lerp(SiegeMaxDurationTicks, SiegeMinDurationTicks, Mathf.Clamp01(quality / RitualMaxQuality)));
@@ -109,6 +159,7 @@ namespace VVRace
                 quest.AddPart(new QuestPart_FactionGoodwillLocked()
                 {
                     inSignalEnable = bloomStarted,
+                    inSignalDisable = bloomFailed,
                     faction1 = Faction.OfPlayer,
                     faction2 = federation,
                 });
@@ -123,6 +174,7 @@ namespace VVRace
             var breath = new QuestPart_Delay()
             {
                 inSignalEnable = bloomStarted,
+                inSignalDisable = bloomFailed,
                 delayTicks = BreathEchoDelayTicks.RandomInRange,
             };
             breath.outSignalsCompleted.Add(breathEcho);
@@ -140,6 +192,7 @@ namespace VVRace
             var bloom = new QuestPart_ViviBloomCondensation()
             {
                 inSignalEnable = bloomStarted,
+                inSignalDisable = bloomFailed,
                 anchor = anchor,
                 durationTicks = siegeTicks,
             };
@@ -171,6 +224,7 @@ namespace VVRace
             var calm = new QuestPart_Delay()
             {
                 inSignalEnable = bloomCondensed,
+                inSignalDisable = bloomFailed,
                 delayTicks = CalmDurationTicks.RandomInRange,
                 debugLabel = CalmDelayLabel,
             };
@@ -180,6 +234,7 @@ namespace VVRace
             quest.AddPart(new QuestPart_ViviAnchorWatch()
             {
                 inSignalEnable = bloomStarted,
+                inSignalDisable = bloomFailed,
                 anchor = anchor,
                 inSignalBloomCondensed = bloomCondensed,
                 outSignalAnchorLost = anchorLost,
@@ -188,6 +243,7 @@ namespace VVRace
             var apocrypha = new QuestPart_ViviApocrypha()
             {
                 inSignalEnable = calmEnded,
+                inSignalDisable = bloomFailed,
                 anchor = anchor,
                 inSignalDissolved = apocryphaDissolved,
                 outSignalManifesting = apocryphaManifesting,
@@ -220,6 +276,7 @@ namespace VVRace
             var finale = new QuestPart_ViviEndingFinale()
             {
                 inSignalEnable = coronationCompleted,
+                inSignalDisable = bloomFailed,
                 anchor = anchor,
             };
             finale.outSignalsCompleted.Add(endingFinished);
@@ -231,7 +288,6 @@ namespace VVRace
                 inSignal = stolen,
                 letter = LetterMaker.MakeLetter(LocalizeString_Letter.VV_Letter_EndingFailureLabel.Translate(), LocalizeString_Letter.VV_Letter_EndingFailureStolen.Translate(), LetterDefOf.NegativeEvent, failureTargets, null, quest),
             });
-            AddEnd(quest, QuestEndOutcome.Fail, stolen);
 
             var fallenText = ViviEndingUtility.TranslateWithResonator(LocalizeString_Letter.VV_Letter_EndingFailureResonator, resonator).Resolve();
             quest.AddPart(new QuestPart_Letter()
@@ -239,14 +295,12 @@ namespace VVRace
                 inSignal = resonatorFallen,
                 letter = LetterMaker.MakeLetter(LocalizeString_Letter.VV_Letter_EndingFailureResonatorLabel.Translate(), fallenText, LetterDefOf.NegativeEvent, failureTargets, null, quest),
             });
-            AddEnd(quest, QuestEndOutcome.Fail, resonatorFallen);
 
             quest.AddPart(new QuestPart_Letter()
             {
                 inSignal = anchorLost,
                 letter = LetterMaker.MakeLetter(LocalizeString_Letter.VV_Letter_EndingFailureLostLabel.Translate(), LocalizeString_Letter.VV_Letter_EndingFailureLost.Translate(), LetterDefOf.NegativeEvent, failureTargets, null, quest),
             });
-            AddEnd(quest, QuestEndOutcome.Fail, anchorLost);
         }
 
         public static void AddEnd(Quest quest, QuestEndOutcome outcome, string inSignal)

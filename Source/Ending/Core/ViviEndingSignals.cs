@@ -16,6 +16,7 @@ namespace VVRace
         public const string ApocryphaDefeated = "ApocryphaDefeated";
         public const string CoronationCompleted = "CoronationCompleted";
         public const string EndingFinished = "EndingFinished";
+        public const string BloomFailed = "BloomFailed";
         public const string EverflowerStolen = "EverflowerStolen";
         public const string AnchorLost = "AnchorLost";
 

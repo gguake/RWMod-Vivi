@@ -11,14 +11,14 @@
 <VV_Quest_EndingStageRuinsExtract>Extract the ancient amber core from the central altar.</VV_Quest_EndingStageRuinsExtract>
 <VV_Quest_EndingStageAltar>Build an everflower altar with the ancient amber core, enshrine an everflower of attunement level {0}, and perform the everflower full bloom ritual.</VV_Quest_EndingStageAltar>
 <VV_Quest_EndingStageAltarCoreLost>If both the ancient amber core and the altar are lost, you can contact the vivi federation via comms console to restore a replacement core.</VV_Quest_EndingStageAltarCoreLost>
-<VV_Quest_EndingStageBloom>The everflower is condensing mana for its final bloom.\n\nDefend the altar until it is ready, then have the resonator perform the coronation. If the everflower is lost, the final bloom fails.</VV_Quest_EndingStageBloom>
+<VV_Quest_EndingStageBloom>The everflower is condensing mana for its final bloom.\n\nDefend the altar until it is ready, then have the resonator perform the coronation. If the altar, everflower, or resonator is lost, the bloom is interrupted.</VV_Quest_EndingStageBloom>
 <VV_Quest_EndingStageHostile>Progress has stopped because you are hostile to the vivi federation. Once relations recover, it will resume where it left off.</VV_Quest_EndingStageHostile>
 <VV_Quest_EndingConditionsHeader>Requirements for the coordinates</VV_Quest_EndingConditionsHeader>
 <VV_Quest_EndingConditionVivi>Vivis in the colony: {0} / {1}</VV_Quest_EndingConditionVivi>
 <VV_Quest_EndingConditionWealth>Colony wealth: {0} / {1}</VV_Quest_EndingConditionWealth>
 <VV_Quest_EndingStepAltar>Build the everflower altar</VV_Quest_EndingStepAltar>
 <VV_Quest_EndingStepEnshrine>Enshrine an everflower of attunement level {0} at the center of the altar</VV_Quest_EndingStepEnshrine>
-<VV_Quest_EndingTruthLog>Beneath the burning flower's shade, the old empress Asphodel opened her circuits beyond their limit so as not to lose a single child, and took the countless vivis beneath the shade into herself as little lights. But one soul could not bear that weight. Her attunement and her self collapsed, and the shade was left empty.\n\nThe little lights remembered her last kindness. They did not leave the twisted empress. Holding her close, they endured the long ages as her guardians, and as the seal that held back her monstrous change. Now the bond has come undone and the empress sleeps. The freed lights rest within the everflower on the altar, waiting for the spring when they will wake again.</VV_Quest_EndingTruthLog>
+<VV_Quest_EndingTruthLog>Left alone beneath the burning flower's shade, the old empress Asphodel opened her circuits beyond their limit so as not to lose a single one of the children she had borne, and took the countless vivis beneath the shade into herself as little lights. But one soul could not bear that weight. Her attunement and her self collapsed, and the shade was left empty.\n\nThe little lights remembered her last kindness. They did not leave the twisted empress. Holding her close, they endured the long ages as her guardians, and as the seal that held back her monstrous change. Now the bond has come undone and the empress sleeps. The freed lights rest within the everflower on the altar, waiting for the spring when they will wake again.</VV_Quest_EndingTruthLog>
 
 <!-- 연방의 옛 동화책 -->
 <VV_Letter_EndingTaleLabel>Federation fairy tale (volume {0})</VV_Letter_EndingTaleLabel>
@@ -75,11 +75,11 @@
 
 <!-- 엔딩 실패 -->
 <VV_Letter_EndingFailureLabel>Everflower usurped</VV_Letter_EndingFailureLabel>
-<VV_Letter_EndingFailureStolen>The everflower on the altar scattered into petals and was drawn into Asphodel. Holding the flower's shade to herself, the empress vanished again into the darkness beyond the wind of petals.\n\nThe everflower has been lost. The final bloom has failed.</VV_Letter_EndingFailureStolen>
+<VV_Letter_EndingFailureStolen>The everflower on the altar scattered into petals and was drawn into Asphodel. Holding the flower's shade to herself, the empress vanished again into the darkness beyond the wind of petals.\n\nWith the everflower lost, the final bloom has been interrupted. Once you prepare an altar and everflower again, you can start the everflower full bloom ritual anew.</VV_Letter_EndingFailureStolen>
 <VV_Letter_EndingFailureLostLabel>Everflower lost</VV_Letter_EndingFailureLostLabel>
-<VV_Letter_EndingFailureLost>The everflower has been lost. The final bloom has failed.</VV_Letter_EndingFailureLost>
+<VV_Letter_EndingFailureLost>With the altar or everflower lost, the final bloom has been interrupted. Once you prepare an altar and everflower again, you can start the everflower full bloom ritual anew.</VV_Letter_EndingFailureLost>
 <VV_Letter_EndingFailureResonatorLabel>Resonance severed</VV_Letter_EndingFailureResonatorLabel>
-<VV_Letter_EndingFailureResonator>{PAWN_labelShort} has fallen, severing the resonance with the everflower. The final bloom has failed.</VV_Letter_EndingFailureResonator>
+<VV_Letter_EndingFailureResonator>{PAWN_labelShort} has fallen, severing the resonance with the everflower. The final bloom has been interrupted.\n\nOnce you have a resonator ready again, you can start the everflower full bloom ritual anew at the altar.</VV_Letter_EndingFailureResonator>
 
 <!-- 후일담 -->
 <VV_Letter_AncientWitnessLabel>Memory of an old wing, awakened</VV_Letter_AncientWitnessLabel>

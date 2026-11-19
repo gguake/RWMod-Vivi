@@ -8,6 +8,7 @@ namespace VVRace
     public class QuestPart_ViviEndingState : QuestPart
     {
         public ArcanePlant_Everflower anchor;
+        public MapParent anchorMapParent;
 
         public string inSignalBloomCondensed;
         public string inSignalApocryphaArrived;
@@ -19,6 +20,7 @@ namespace VVRace
         public string inSignalAnchorDestroyed;
         public string inSignalAnchorMapRemoved;
         public string outSignalAnchorLost;
+        public string outSignalBloomFailed;
 
         private ViviEndingStage _stage = ViviEndingStage.Siege;
         private bool _stolen;
@@ -68,21 +70,19 @@ namespace VVRace
             {
                 _stage = ViviEndingStage.Completed;
             }
-            else if (tag == inSignalStolen)
+            else if (tag == inSignalStolen || tag == inSignalAnchorLost || tag == inSignalResonatorFallen)
             {
-                _stolen = true;
+                if (!IsActive) { return; }
+
+                _stolen = tag == inSignalStolen;
                 _stage = ViviEndingStage.Failed;
-            }
-            else if (tag == inSignalAnchorLost)
-            {
-                _stage = ViviEndingStage.Failed;
-            }
-            else if (tag == inSignalResonatorFallen)
-            {
-                if (IsActive)
+
+                if (!outSignalBloomFailed.NullOrEmpty())
                 {
-                    _stage = ViviEndingStage.Failed;
+                    Find.SignalManager.SendSignal(new Signal(outSignalBloomFailed));
                 }
+
+                ViviEndingQuest.Current?.Notify_BloomFailed(anchor, anchorMapParent, _stolen);
             }
             else if (tag == inSignalAnchorDestroyed)
             {
@@ -115,6 +115,7 @@ namespace VVRace
         {
             base.ExposeData();
             Scribe_References.Look(ref anchor, "anchor");
+            Scribe_References.Look(ref anchorMapParent, "anchorMapParent");
             Scribe_Values.Look(ref inSignalBloomCondensed, "inSignalBloomCondensed");
             Scribe_Values.Look(ref inSignalApocryphaArrived, "inSignalApocryphaArrived");
             Scribe_Values.Look(ref inSignalApocryphaDefeated, "inSignalApocryphaDefeated");
@@ -125,6 +126,7 @@ namespace VVRace
             Scribe_Values.Look(ref inSignalAnchorDestroyed, "inSignalAnchorDestroyed");
             Scribe_Values.Look(ref inSignalAnchorMapRemoved, "inSignalAnchorMapRemoved");
             Scribe_Values.Look(ref outSignalAnchorLost, "outSignalAnchorLost");
+            Scribe_Values.Look(ref outSignalBloomFailed, "outSignalBloomFailed");
             Scribe_Values.Look(ref _stage, "stage", ViviEndingStage.Siege);
             Scribe_Values.Look(ref _stolen, "stolen", false);
         }

@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using Verse;
 
 namespace VVRace
@@ -17,7 +17,10 @@ namespace VVRace
             if (_recorded || signal.tag != inSignal) { return; }
 
             _recorded = true;
-            quest.description = new TaggedString(quest.description.RawText + "\n\n" + textKey.Translate().Resolve());
+            var record = textKey.Translate().Resolve();
+            if (quest.description.RawText.Contains(record)) { return; }
+
+            quest.description = new TaggedString(quest.description.RawText + "\n\n" + record);
         }
 
         public override void ExposeData()
