@@ -67,11 +67,23 @@ namespace VVRace
             var comp = anchor.EverflowerComp;
             if (comp == null || !comp.IsEnshrined) { return; }
 
-            var effecterDef = comp.AttunementLevel >= CompEverflower.MaxAttunementLevel ? VVEffecterDefOf.VV_Effecter_AltarEverflowerPulse_6
-                : comp.AttunementLevel == RitualOutcomeEffectWorker_GrandAttunement.GrandAttunementLevel ? VVEffecterDefOf.VV_Effecter_AltarEverflowerPulse_5
-                : null;
-
+            var effecterDef = AltarPulseEffecterFor(comp.AttunementLevel);
             effecterDef?.Spawn(anchor.Position, anchor.Map).Cleanup();
+        }
+
+        private static EffecterDef AltarPulseEffecterFor(int attunementLevel)
+        {
+            if (attunementLevel >= CompEverflower.MaxAttunementLevel)
+            {
+                return VVEffecterDefOf.VV_Effecter_AltarEverflowerPulse_6;
+            }
+
+            if (attunementLevel == RitualOutcomeEffectWorker_GrandAttunement.GrandAttunementLevel)
+            {
+                return VVEffecterDefOf.VV_Effecter_AltarEverflowerPulse_5;
+            }
+
+            return null;
         }
     }
 }

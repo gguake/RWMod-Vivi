@@ -65,13 +65,21 @@ namespace VVRace
             var pawn = PawnGenerator.GeneratePawn(request);
             pawn.ageTracker.AgeChronologicalTicks += AncientYearsRange.RandomInRange * (long)GenDate.TicksPerYear;
 
-            if (!CellFinder.TryFindRandomCellNear(everflower.Position, map, (int)SpawnRadius, c => c.Standable(map) && !c.Fogged(map) && c != everflower.Position, out var cell))
+            GenSpawn.Spawn(pawn, FindSpawnCell(everflower, map), map);
+            return pawn;
+        }
+
+        private static IntVec3 FindSpawnCell(ArcanePlant_Everflower everflower, Map map)
+        {
+            var radius = (int)SpawnRadius;
+            bool IsValidCell(IntVec3 c) => c.Standable(map) && !c.Fogged(map) && c != everflower.Position;
+
+            if (CellFinder.TryFindRandomCellNear(everflower.Position, map, radius, IsValidCell, out var cell))
             {
-                cell = CellFinder.RandomClosewalkCellNear(everflower.Position, map, (int)SpawnRadius);
+                return cell;
             }
 
-            GenSpawn.Spawn(pawn, cell, map);
-            return pawn;
+            return CellFinder.RandomClosewalkCellNear(everflower.Position, map, radius);
         }
 
         private static void SendArrivalLetter(Pawn pawn)

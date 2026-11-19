@@ -21,5 +21,10 @@
         {
             return stage >= ViviEndingStage.Siege && stage <= ViviEndingStage.Coronation;
         }
+
+        public static bool IsPreCoronationStage(this ViviEndingStage stage)
+        {
+            return stage >= ViviEndingStage.Siege && stage <= ViviEndingStage.Boss;
+        }
     }
 }

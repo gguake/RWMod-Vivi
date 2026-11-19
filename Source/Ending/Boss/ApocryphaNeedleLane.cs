@@ -24,6 +24,33 @@ namespace VVRace
             return start + direction * (tipDistance - TipOffset);
         }
 
+        public static void Project(Vector3 start, Vector3 direction, Vector3 point, out float along, out float across)
+        {
+            var rel = (point - start).Yto0();
+            along = rel.x * direction.x + rel.z * direction.z;
+            across = Mathf.Abs(rel.x * direction.z - rel.z * direction.x);
+        }
+
+        public static bool Contains(Vector3 start, Vector3 direction, float length, float halfWidth, Vector3 point)
+        {
+            Project(start, direction, point, out var along, out var across);
+            return along >= 0f && along <= length && across <= halfWidth;
+        }
+
+        public static CellRect BoundsRect(Map map, Vector3 a, Vector3 b, float margin)
+        {
+            return CellRect.FromLimits(
+                Mathf.FloorToInt(Mathf.Min(a.x, b.x) - margin),
+                Mathf.FloorToInt(Mathf.Min(a.z, b.z) - margin),
+                Mathf.CeilToInt(Mathf.Max(a.x, b.x) + margin),
+                Mathf.CeilToInt(Mathf.Max(a.z, b.z) + margin)).ClipInsideMap(map);
+        }
+
+        public static Vector3 JitterPerpendicular(Vector3 direction, float amplitude)
+        {
+            return EndingVfxUtility.HorizontalPerpendicular(direction) * (amplitude * Rand.Range(-1f, 1f));
+        }
+
         #region 맵 경계
         public static float LengthInsideMap(Map map, Vector3 start, Vector3 direction, float range)
         {
@@ -59,14 +86,7 @@ namespace VVRace
             if (map == null || to <= from) { return; }
 
             var cellExtent = 0.5f * (Mathf.Abs(direction.x) + Mathf.Abs(direction.z));
-            var margin = halfWidth + 2f;
-            var a = start + direction * from;
-            var b = start + direction * to;
-            var rect = CellRect.FromLimits(
-                Mathf.FloorToInt(Mathf.Min(a.x, b.x) - margin),
-                Mathf.FloorToInt(Mathf.Min(a.z, b.z) - margin),
-                Mathf.CeilToInt(Mathf.Max(a.x, b.x) + margin),
-                Mathf.CeilToInt(Mathf.Max(a.z, b.z) + margin)).ClipInsideMap(map);
+            var rect = BoundsRect(map, start + direction * from, start + direction * to, halfWidth + 2f);
 
             foreach (var cell in rect)
             {
@@ -118,13 +138,10 @@ namespace VVRace
 
         private static bool Overlaps(Vector3 start, Vector3 direction, float length, float halfWidth, Vector3 point, float extentAcross, float extentAlong, float from, float to)
         {
-            var rel = (point - start).Yto0();
-            var along = rel.x * direction.x + rel.z * direction.z;
+            Project(start, direction, point, out var along, out var across);
             var lo = from <= 0f ? -extentAlong : from;
             var hi = to >= length ? length + extentAlong : to;
-            if (along < lo || along > hi) { return false; }
-
-            return Mathf.Abs(rel.x * direction.z - rel.z * direction.x) <= halfWidth + extentAcross;
+            return along >= lo && along <= hi && across <= halfWidth + extentAcross;
         }
 
         public static void Pierce(Thing thing, float damage, float armorPenetration, float angle, Thing instigator)
@@ -142,7 +159,7 @@ namespace VVRace
         {
             if (map == null || !cell.InBounds(map)) { return; }
 
-            ApocryphaGimmicks.PlayEffect(VVEffecterDefOf.VV_Effecter_ApocryphaNeedleHit, cell, map, OffsetFromCell(drawPos, cell));
+            ApocryphaGimmicks.PlayEffect(VVEffecterDefOf.VV_Effecter_ApocryphaNeedleHit, cell, map, EndingVfxUtility.OffsetFromCell(drawPos, cell));
             if (!cell.ShouldSpawnMotesAt(map)) { return; }
 
             var basePos = drawPos.Yto0();
@@ -173,12 +190,14 @@ namespace VVRace
             if (!(start + direction * (filled * 0.5f)).ShouldSpawnMotesAt(map)) { return; }
 
             var angle = direction.AngleFlat();
-            var perpendicular = new Vector3(direction.z, 0f, -direction.x);
+            var perpendicular = EndingVfxUtility.HorizontalPerpendicular(direction);
             for (int i = 0; i < 2; i++)
             {
                 var pos = start + direction * Rand.Range(0f, filled) + perpendicular * Rand.Range(-halfWidth, halfWidth) * 0.85f;
-                var def = i == 0 ? VVFleckDefOf.VV_Fleck_ApocryphaAimSpark : VVFleckDefOf.VV_Fleck_ApocryphaAimTwinkle;
-                var data = FleckMaker.GetDataStatic(pos, map, def, i == 0 ? Rand.Range(0.25f, 0.45f) : Rand.Range(0.2f, 0.35f));
+                var isSpark = i == 0;
+                var def = isSpark ? VVFleckDefOf.VV_Fleck_ApocryphaAimSpark : VVFleckDefOf.VV_Fleck_ApocryphaAimTwinkle;
+                var scale = isSpark ? Rand.Range(0.25f, 0.45f) : Rand.Range(0.2f, 0.35f);
+                var data = FleckMaker.GetDataStatic(pos, map, def, scale);
                 data.velocityAngle = angle + Rand.Range(-20f, 20f);
                 data.velocitySpeed = Rand.Range(0.5f, 1.3f);
                 data.rotation = Rand.Range(0f, 360f);
@@ -205,13 +224,7 @@ namespace VVRace
 
         public static void PlayEffectAt(Map map, EffecterDef effecterDef, Vector3 point)
         {
-            var cell = point.ToIntVec3().ClampInsideMap(map);
-            ApocryphaGimmicks.PlayEffect(effecterDef, cell, map, OffsetFromCell(point, cell));
-        }
-
-        private static Vector3 OffsetFromCell(Vector3 point, IntVec3 cell)
-        {
-            return (point - cell.ToVector3Shifted()).WithY(0f);
+            EndingVfxUtility.PlayEffectAt(map, effecterDef, point);
         }
         #endregion
     }

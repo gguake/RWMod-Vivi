@@ -16,6 +16,11 @@ namespace VVRace
         private const int AshInterval = 2;
         private const int EmberInterval = 3;
 
+        private static readonly FloatRange AshScale = new FloatRange(0.5f, 0.9f);
+        private static readonly FloatRange AshSpeed = new FloatRange(0.4f, 1f);
+        private static readonly FloatRange EmberScale = new FloatRange(0.2f, 0.4f);
+        private static readonly FloatRange EmberSpeed = new FloatRange(0.8f, 1.8f);
+
         private static readonly DissolveStyle Style = new DissolveStyle(DissolveDelaySecs, DissolveDurationSecs, new Color(1f, 0.86f, 0.5f, 1f), 0.85f, 0.45f);
 
         private static readonly DissolveStyle AshenStyle = new DissolveStyle(DissolveDelaySecs, DissolveDurationSecs, new Color(1f, 0.78f, 0.35f, 1f), 0f, 0.75f);
@@ -43,11 +48,8 @@ namespace VVRace
         {
             InitGraphic(hornet);
 
-            var offset = hornet.DrawPos - hornet.Position.ToVector3Shifted();
-            _drawOffset = new Vector3(offset.x, 0f, offset.z);
-
-            wind.y = 0f;
-            _wind = wind.sqrMagnitude > 0.0001f ? wind.normalized : Vector3.forward;
+            _drawOffset = EndingVfxUtility.OffsetFromCell(hornet.DrawPos, hornet.Position);
+            _wind = EndingVfxUtility.SafeNormalizeHorizontal(wind, Vector3.forward, minSqrMagnitude: 0.0001f);
         }
 
         public void InitAshen(Pawn hornet, Corpse corpse)
@@ -135,26 +137,10 @@ namespace VVRace
             var frontZ = center.z + _drawSize * (0.42f - 0.8f * progress);
             var halfWidth = _drawSize * 0.3f;
 
-            if (age % AshInterval == 0)
-            {
-                var pos = new Vector3(center.x + Rand.Range(-halfWidth, halfWidth), center.y, frontZ + Rand.Range(-0.15f, 0.15f));
-                var data = FleckMaker.GetDataStatic(pos, map, VVFleckDefOf.VV_Fleck_ApocryphaAsh, Rand.Range(0.5f, 0.9f));
-                data.velocityAngle = Rand.Range(-35f, 35f);
-                data.velocitySpeed = Rand.Range(0.4f, 1f);
-                data.rotation = Rand.Range(0f, 360f);
-                data.rotationRate = Rand.Range(-50f, 50f);
-                map.flecks.CreateFleck(data);
-            }
-
-            if (age % EmberInterval == 0)
-            {
-                var pos = new Vector3(center.x + Rand.Range(-halfWidth, halfWidth), center.y, frontZ + Rand.Range(-0.1f, 0.1f));
-                var data = FleckMaker.GetDataStatic(pos, map, VVFleckDefOf.VV_Fleck_ApocryphaEmber, Rand.Range(0.2f, 0.4f));
-                data.velocityAngle = Rand.Range(-25f, 25f);
-                data.velocitySpeed = Rand.Range(0.8f, 1.8f);
-                data.rotation = Rand.Range(0f, 360f);
-                map.flecks.CreateFleck(data);
-            }
+            DissolveRenderer.ThrowAshAndEmbers(
+                map, center, frontZ, halfWidth, age, AshInterval, EmberInterval,
+                ashJitterZ: 0.15f, AshScale, AshSpeed,
+                emberJitterZ: 0.1f, EmberScale, EmberSpeed);
         }
 
         private void ThrowDust(int age)
@@ -167,7 +153,7 @@ namespace VVRace
             if (!center.ShouldSpawnMotesAt(map)) { return; }
 
             var front = _drawSize * 0.8f * (0.5f - progress);
-            var side = new Vector3(_wind.z, 0f, -_wind.x);
+            var side = EndingVfxUtility.HorizontalPerpendicular(_wind);
             var halfWidth = _drawSize * 0.3f;
             var windAngle = _wind.AngleFlat();
 

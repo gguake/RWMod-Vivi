@@ -91,11 +91,7 @@ namespace VVRace
             _landPos.y = 0f;
             _landRot = landRot;
 
-            var farthest = 0f;
-            foreach (var corner in new[] { new Vector3(0f, 0f, 0f), new Vector3(map.Size.x, 0f, 0f), new Vector3(0f, 0f, map.Size.z), new Vector3(map.Size.x, 0f, map.Size.z) })
-            {
-                farthest = Mathf.Max(farthest, Vector3.Distance(_budPos, corner));
-            }
+            var farthest = EndingVfxUtility.MaxDistanceToMapCorner(map, _budPos);
             _waveHalfSize = farthest * WaveCoverMargin / WaveFrontReach;
 
             var front = Vector3.Distance(_budPos, _landPos) - PushLead;
@@ -208,6 +204,10 @@ namespace VVRace
             OnLanded();
         }
 
+        private static readonly FloatRange WispScale = new FloatRange(0.7f, 1.3f);
+        private static readonly FloatRange DarkSparkScale = new FloatRange(0.25f, 0.45f);
+        private static readonly FloatRange GoldSparkScale = new FloatRange(0.3f, 0.55f);
+
         private void TickGather(int age)
         {
             var map = Map;
@@ -219,20 +219,15 @@ namespace VVRace
             for (int i = 0; i < count; i++)
             {
                 var target = _formPos + new Vector3(Rand.Range(-0.22f, 0.22f) * _drawSize, 0f, Rand.Range(-0.3f, 0.32f) * _drawSize);
-                var offset = Quaternion.AngleAxis(Rand.Range(0f, 360f), Vector3.up) * Vector3.forward * WispRadius.RandomInRange;
-                ManifestationRenderer.ThrowConverging(map, VVFleckDefOf.VV_Fleck_ApocryphaDarkWisp, target + offset, target, WispTravelSecs, Rand.Range(0.7f, 1.3f), null, alignToVelocity: true);
-
-                if (Rand.Chance(SparkChance))
-                {
-                    ManifestationRenderer.ThrowConverging(map, VVFleckDefOf.VV_Fleck_ApocryphaManifestSpark, target + offset, target, WispTravelSecs, Rand.Range(0.25f, 0.45f), DarkSparkColor, alignToVelocity: false);
-                }
+                var start = target + EndingVfxUtility.RandomRingOffset(WispRadius);
+                ManifestationRenderer.ThrowWispWithSpark(map, start, target, WispTravelSecs, WispScale, SparkChance, DarkSparkScale, DarkSparkColor);
             }
         }
 
         private void OnFormed()
         {
             var map = Map;
-            VVEffecterDefOf.VV_Effecter_ApocryphaManifestComplete.Spawn(Position, map, _formPos - Position.ToVector3Shifted()).Cleanup();
+            VVEffecterDefOf.VV_Effecter_ApocryphaManifestComplete.Spawn(Position, map, EndingVfxUtility.OffsetFromCell(_formPos, Position)).Cleanup();
             MoteMaker.MakeStaticMote(_budPos, map, VVThingDefOf.VV_Mote_ApocryphaRepelCharge, 1f, makeOffscreen: true);
             ApocryphaUtility.ShakeCamera(map, 0.4f);
         }
@@ -243,15 +238,15 @@ namespace VVRace
 
             for (int i = 0; i < 2; i++)
             {
-                var offset = Quaternion.AngleAxis(Rand.Range(0f, 360f), Vector3.up) * Vector3.forward * ChargeRadius.RandomInRange;
-                ManifestationRenderer.ThrowConverging(Map, VVFleckDefOf.VV_Fleck_ApocryphaManifestSpark, _budPos + offset, _budPos, WispTravelSecs, Rand.Range(0.3f, 0.55f), GoldSparkColor, alignToVelocity: false);
+                var start = _budPos + EndingVfxUtility.RandomRingOffset(ChargeRadius);
+                ManifestationRenderer.ThrowConverging(Map, VVFleckDefOf.VV_Fleck_ApocryphaManifestSpark, start, _budPos, WispTravelSecs, GoldSparkScale.RandomInRange, GoldSparkColor, alignToVelocity: false);
             }
         }
 
         private void OnRepel()
         {
             var map = Map;
-            VVEffecterDefOf.VV_Effecter_ApocryphaRepel.Spawn(Position, map, _budPos - Position.ToVector3Shifted()).Cleanup();
+            VVEffecterDefOf.VV_Effecter_ApocryphaRepel.Spawn(Position, map, EndingVfxUtility.OffsetFromCell(_budPos, Position)).Cleanup();
 
             var waveScale = _waveHalfSize * 2f / VVFleckDefOf.VV_Fleck_ApocryphaRepelWave.graphicData.drawSize.x;
             var data = FleckMaker.GetDataStatic(_budPos, map, VVFleckDefOf.VV_Fleck_ApocryphaRepelWave, waveScale);
@@ -291,9 +286,9 @@ namespace VVRace
             {
                 for (int i = 0; i < 30; i++)
                 {
-                    var data = FleckMaker.GetDataStatic(_landPos + Quaternion.AngleAxis(Rand.Range(0f, 360f), Vector3.up) * Vector3.forward * Rand.Range(0.3f, 1.6f), map,
-                        VVFleckDefOf.VV_Fleck_ApocryphaDarkWisp, Rand.Range(0.8f, 1.4f));
-                    data.velocityAngle = (data.spawnPosition - _landPos).AngleFlat();
+                    var spawnPos = _landPos + EndingVfxUtility.RandomRingOffset(Rand.Range(0.3f, 1.6f));
+                    var data = FleckMaker.GetDataStatic(spawnPos, map, VVFleckDefOf.VV_Fleck_ApocryphaDarkWisp, Rand.Range(0.8f, 1.4f));
+                    data.velocityAngle = (spawnPos - _landPos).AngleFlat();
                     data.velocitySpeed = Rand.Range(3f, 6f);
                     data.rotation = data.velocityAngle;
                     map.flecks.CreateFleck(data);

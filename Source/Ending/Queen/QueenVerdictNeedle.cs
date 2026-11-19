@@ -70,36 +70,23 @@ namespace VVRace
             var map = caster.Map;
             var origin = caster.DrawPos.Yto0();
             var target = targetCell.ToVector3Shifted().Yto0();
-            var toTarget = (target - origin).Yto0();
-            var forward = toTarget.sqrMagnitude > 0.01f ? toTarget.normalized : caster.Rotation.FacingCell.ToVector3();
+            var forward = EndingVfxUtility.SafeNormalizeHorizontal(target - origin, caster.Rotation.FacingCell.ToVector3());
 
             hover = ApocryphaNeedleLane.ClampInsideMap(map, origin - forward * BehindDistance + new Vector3(0f, 0f, HoverLift));
-
-            direction = (target - hover).Yto0();
-            direction = direction.sqrMagnitude > 0.01f ? direction.normalized : forward;
-
+            direction = EndingVfxUtility.SafeNormalizeHorizontal(target - hover, forward);
             laneStart = ApocryphaNeedleLane.ClampInsideMap(map, hover + direction * ApocryphaNeedleLane.TipOffset);
             length = ApocryphaNeedleLane.LengthInsideMap(map, laneStart, direction, LaneRange);
         }
 
         public static IEnumerable<IntVec3> LaneCells(Map map, Vector3 laneStart, Vector3 direction, float length)
         {
-            var end = laneStart + direction * length;
-            var margin = HalfWidth + 1f;
-            var rect = CellRect.FromLimits(
-                Mathf.FloorToInt(Mathf.Min(laneStart.x, end.x) - margin),
-                Mathf.FloorToInt(Mathf.Min(laneStart.z, end.z) - margin),
-                Mathf.CeilToInt(Mathf.Max(laneStart.x, end.x) + margin),
-                Mathf.CeilToInt(Mathf.Max(laneStart.z, end.z) + margin)).ClipInsideMap(map);
-
+            var rect = ApocryphaNeedleLane.BoundsRect(map, laneStart, laneStart + direction * length, HalfWidth + 1f);
             foreach (var cell in rect)
             {
-                var rel = (cell.ToVector3Shifted() - laneStart).Yto0();
-                var along = rel.x * direction.x + rel.z * direction.z;
-                if (along < 0f || along > length) { continue; }
-                if (Mathf.Abs(rel.x * direction.z - rel.z * direction.x) > HalfWidth) { continue; }
-
-                yield return cell;
+                if (ApocryphaNeedleLane.Contains(laneStart, direction, length, HalfWidth, cell.ToVector3Shifted()))
+                {
+                    yield return cell;
+                }
             }
         }
 
@@ -176,8 +163,7 @@ namespace VVRace
             var hold = _hover - _laneDir * (WindupDistance * Mathf.SmoothStep(0f, 1f, Mathf.InverseLerp(0.4f, 1f, progress)));
             if (AimTicks - elapsed <= ShakeTicks)
             {
-                var perpendicular = new Vector3(_laneDir.z, 0f, -_laneDir.x);
-                hold += perpendicular * (ShakeAmplitude * Rand.Range(-1f, 1f));
+                hold += ApocryphaNeedleLane.JitterPerpendicular(_laneDir, ShakeAmplitude);
             }
 
             _pos = hold;
@@ -235,8 +221,7 @@ namespace VVRace
         private void TickEnd(int elapsed)
         {
             var shake = ShakeAmplitude * (1f - elapsed / (float)EndTicks);
-            var perpendicular = new Vector3(_laneDir.z, 0f, -_laneDir.x);
-            _pos = BodyOnLane(_laneLength) + perpendicular * (shake * Rand.Range(-1f, 1f));
+            _pos = BodyOnLane(_laneLength) + ApocryphaNeedleLane.JitterPerpendicular(_laneDir, shake);
 
             if (elapsed >= EndTicks)
             {
@@ -277,8 +262,22 @@ namespace VVRace
                 ApocryphaNeedleRenderer.DrawWarp(_laneStart, _laneDir, _laneLength, Mathf.Max(0f, _travelled), warpAge / 60f, 1f);
             }
 
-            var glow = _state == VerdictState.Summon ? 0.3f : _state == VerdictState.Aim ? Mathf.Clamp01((now - _stateStartTick) / (float)AimTicks) : 1f;
-            ApocryphaNeedleRenderer.DrawNeedle(DrawPos, LaneAngle, alpha, glow);
+            ApocryphaNeedleRenderer.DrawNeedle(DrawPos, LaneAngle, alpha, ComputeGlow(now));
+        }
+
+        private float ComputeGlow(int now)
+        {
+            switch (_state)
+            {
+                case VerdictState.Summon:
+                    return 0.3f;
+
+                case VerdictState.Aim:
+                    return Mathf.Clamp01((now - _stateStartTick) / (float)AimTicks);
+
+                default:
+                    return 1f;
+            }
         }
 
         private Vector3 BodyOnLane(float tipDistance)

@@ -125,30 +125,18 @@ namespace VVRace
 
             if (DebugSettings.godMode)
             {
-                var vivi = FindNearestBondableVivi();
-                var commandBond = new Command_Action()
-                {
-                    defaultLabel = "DEV: Bond nearest vivi",
-                    action = () =>
-                    {
-                        var target = FindNearestBondableVivi();
-                        if (target != null)
-                        {
-                            Notify_BondedBy(target);
-                        }
-                    },
-                };
-                if (vivi == null)
-                {
-                    commandBond.Disable("No bondable player vivi without fairy interference on this map.");
-                }
-                yield return commandBond;
+                var disabled = FindNearestBondableVivi() != null ? null : "No bondable player vivi without fairy interference on this map.";
+                yield return EndingVfxUtility.DevAction("DEV: Bond nearest vivi", DebugBondNearestVivi, disabled);
+                yield return EndingVfxUtility.DevAction("DEV: Expire now", Wither);
+            }
+        }
 
-                yield return new Command_Action()
-                {
-                    defaultLabel = "DEV: Expire now",
-                    action = Wither,
-                };
+        private void DebugBondNearestVivi()
+        {
+            var target = FindNearestBondableVivi();
+            if (target != null)
+            {
+                Notify_BondedBy(target);
             }
         }
 

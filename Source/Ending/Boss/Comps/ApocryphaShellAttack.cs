@@ -101,8 +101,7 @@ namespace VVRace
                 _aims[i].CleanupVisuals();
             }
 
-            _aimSustainer?.Cleanup();
-            _aimSustainer = null;
+            EndingVfxUtility.CleanupEffecter(ref _aimSustainer);
         }
 
         public void Draw()
@@ -117,8 +116,7 @@ namespace VVRace
         {
             if (_aims.Count == 0)
             {
-                _aimSustainer?.Cleanup();
-                _aimSustainer = null;
+                EndingVfxUtility.CleanupEffecter(ref _aimSustainer);
                 return;
             }
 
@@ -130,13 +128,7 @@ namespace VVRace
                 _aims[i].TickVisuals(Pawn, map, bodyCenter, Props.shellAimTicks);
             }
 
-            if (_aimSustainer == null)
-            {
-                _aimSustainer = VVEffecterDefOf.VV_Effecter_ApocryphaAimSustain.Spawn();
-                _aimSustainer.Trigger(bossTarget, bossTarget);
-            }
-
-            _aimSustainer.EffectTick(bossTarget, bossTarget);
+            EndingVfxUtility.MaintainEffecter(ref _aimSustainer, VVEffecterDefOf.VV_Effecter_ApocryphaAimSustain, bossTarget, bossTarget);
         }
 
         private bool InMinRange(IntVec3 cell)

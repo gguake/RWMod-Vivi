@@ -68,9 +68,7 @@ namespace VVRace
 
         protected override bool IsProtected(Thing victim)
         {
-            if (victim is Building_ApocryphaFlower) { return true; }
-
-            return victim is Pawn pawn && (pawn == _boss || (lord != null && pawn.GetLord() == lord));
+            return victim is Building_ApocryphaFlower || base.IsProtected(victim);
         }
     }
 }

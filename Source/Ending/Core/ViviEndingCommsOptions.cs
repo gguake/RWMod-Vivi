@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using System;
 using System.Collections.Generic;
 using Verse;
@@ -61,42 +61,57 @@ namespace VVRace
             var option = new DiaOption(LocalizeString_Dialog.VV_Comms_TaleRepurchase.Translate());
             if (TryDisable(option, negotiator, hostile)) { return option; }
 
-            option.linkLateBind = () =>
-            {
-                var leader = LeaderName(faction).Named("LEADER");
-                var node = new DiaNode(LocalizeString_Dialog.VV_Comms_TaleRepurchaseIntro.Translate(leader).CapitalizeFirst());
-                var cost = ending.Tales.RepurchaseCost;
-                var report = ending.Tales.CanRepurchase(map);
-
-                for (int volume = 1; volume <= ending.Tales.Delivered; ++volume)
-                {
-                    var def = ViviEndingTales.VolumeDef(volume);
-                    if (def == null) { continue; }
-
-                    var captured = volume;
-                    var volumeOption = new DiaOption(LocalizeString_Dialog.VV_Comms_TaleRepurchaseOption.Translate(def.LabelCap, cost));
-                    if (!report.Accepted)
-                    {
-                        volumeOption.Disable(report.Reason);
-                    }
-                    else
-                    {
-                        volumeOption.linkLateBind = () =>
-                        {
-                            ending.Tales.Repurchase(captured, map);
-                            return ResultNode(LocalizeString_Dialog.VV_Comms_TaleRepurchaseResult.Translate(def.label, leader).Resolve(), negotiator, faction);
-                        };
-                    }
-                    node.options.Add(volumeOption);
-                }
-
-                node.options.Add(new DiaOption("GoBack".Translate())
-                {
-                    linkLateBind = FactionDialogMaker.ResetToRoot(faction, negotiator),
-                });
-                return node;
-            };
+            option.linkLateBind = () => BuildRepurchaseNode(ending, negotiator, faction, map);
             return option;
+        }
+
+        private static DiaNode BuildRepurchaseNode(ViviEndingQuest ending, Pawn negotiator, Faction faction, Map map)
+        {
+            var leader = LeaderName(faction).Named("LEADER");
+            var node = new DiaNode(LocalizeString_Dialog.VV_Comms_TaleRepurchaseIntro.Translate(leader).CapitalizeFirst());
+            var cost = ending.Tales.RepurchaseCost;
+            var report = ending.Tales.CanRepurchase(map);
+
+            for (int volume = 1; volume <= ending.Tales.Delivered; ++volume)
+            {
+                var def = ViviEndingTales.VolumeDef(volume);
+                if (def == null) { continue; }
+
+                node.options.Add(MakeRepurchaseVolumeOption(ending, negotiator, faction, map, volume, def, cost, report, leader));
+            }
+
+            node.options.Add(new DiaOption("GoBack".Translate())
+            {
+                linkLateBind = FactionDialogMaker.ResetToRoot(faction, negotiator),
+            });
+            return node;
+        }
+
+        private static DiaOption MakeRepurchaseVolumeOption(
+            ViviEndingQuest ending,
+            Pawn negotiator,
+            Faction faction,
+            Map map,
+            int volume,
+            ThingDef def,
+            int cost,
+            AcceptanceReport report,
+            NamedArgument leader)
+        {
+            var volumeOption = new DiaOption(LocalizeString_Dialog.VV_Comms_TaleRepurchaseOption.Translate(def.LabelCap, cost));
+            if (!report.Accepted)
+            {
+                volumeOption.Disable(report.Reason);
+                return volumeOption;
+            }
+
+            volumeOption.linkLateBind = () =>
+            {
+                ending.Tales.Repurchase(volume, map);
+                var resultText = LocalizeString_Dialog.VV_Comms_TaleRepurchaseResult.Translate(def.label, leader).Resolve();
+                return ResultNode(resultText, negotiator, faction);
+            };
+            return volumeOption;
         }
 
         private static DiaOption MakeReplacementCoreOption(ViviEndingQuest ending, Pawn negotiator, Faction faction, bool hostile, Map map)

@@ -10,7 +10,7 @@ using Verse.AI.Group;
 namespace VVRace
 {
     // 동화책 1권부터 대관식까지 에픽 퀘스트 하나로 진행한다. 개화 전 단계(동화책·밀서·유적)의 상태는 퀘스트 부품이 아니라 보조 객체가 가진다.
-    public class ViviEndingQuest : IExposable
+    public partial class ViviEndingQuest : IExposable
     {
         public static ViviEndingQuest Current => GameComponent_Mana.Of(Verse.Current.Game)?.EndingQuest;
 
@@ -159,10 +159,7 @@ namespace VVRace
 
         public bool IsRaidBeaconActive(Map map)
         {
-            if (map == null || map != AnchorMap) { return false; }
-
-            var stage = Stage;
-            return stage == ViviEndingStage.Siege || stage == ViviEndingStage.Calm || stage == ViviEndingStage.Boss;
+            return map != null && map == AnchorMap && Stage.IsPreCoronationStage();
         }
 
         internal bool IsBossDeferred => _bloomStarted && ApocryphaPart != null && ApocryphaPart.State == QuestPartState.Enabled && ApocryphaPart.IsDeferred;
@@ -205,6 +202,12 @@ namespace VVRace
             }
         }
 
+        private void InvalidatePartCache()
+        {
+            _cachedQuest = null;
+            _cachedPartCount = -1;
+        }
+
         private void RefreshPartCache()
         {
             var quest = _quest;
@@ -216,7 +219,7 @@ namespace VVRace
             _statePart = quest?.GetFirstPartOfType<QuestPart_ViviEndingState>();
             _bloomPart = quest?.GetFirstPartOfType<QuestPart_ViviBloomCondensation>();
             _apocryphaPart = quest?.GetFirstPartOfType<QuestPart_ViviApocrypha>();
-            _calmPart = quest?.PartsListForReading.OfType<QuestPart_Delay>().FirstOrDefault(v => v.debugLabel == ViviEndingBloomParts.CalmDelayLabel);
+            _calmPart = ViviEndingUtility.FindCalmDelayPart(quest);
         }
 
         public void Tick()
@@ -400,21 +403,15 @@ namespace VVRace
         {
             if (pawn == null || pawn != _assimilated) { return false; }
 
-            switch (Stage)
+            var stage = Stage;
+            if (stage == ViviEndingStage.AltarUnlocked)
             {
-                case ViviEndingStage.AltarUnlocked:
-                    return pawn.GetLord()?.LordJob is LordJob_Ritual ritual
-                        && ritual.Ritual?.def == VVPreceptDefOf.VV_GrandAttunement
-                        && ritual.selectedTarget.Thing == everflower;
-
-                case ViviEndingStage.Siege:
-                case ViviEndingStage.Calm:
-                case ViviEndingStage.Boss:
-                    return IsAnchor(everflower);
-
-                default:
-                    return false;
+                return pawn.GetLord()?.LordJob is LordJob_Ritual ritual
+                    && ritual.Ritual?.def == VVPreceptDefOf.VV_GrandAttunement
+                    && ritual.selectedTarget.Thing == everflower;
             }
+
+            return stage.IsPreCoronationStage() && IsAnchor(everflower);
         }
 
         public void Notify_AssimilationEnded(Pawn pawn)
@@ -430,7 +427,7 @@ namespace VVRace
             if (pawn == null || pawn != _assimilated) { return; }
 
             var stage = Stage;
-            if (stage == ViviEndingStage.Siege || stage == ViviEndingStage.Calm || stage == ViviEndingStage.Boss)
+            if (stage.IsPreCoronationStage())
             {
                 ViviEndingSignals.Send(_quest, ViviEndingSignals.ResonatorFallen, pawn.Named("PAWN"));
                 return;
@@ -473,8 +470,7 @@ namespace VVRace
 
             _anchor = null;
             _bloomStarted = false;
-            _cachedQuest = null;
-            _cachedPartCount = -1;
+            InvalidatePartCache();
 
             Log.Warning($"[ViViRace] the ending quest ended without completing ({ended.State}); issued it again.");
         }
@@ -482,8 +478,7 @@ namespace VVRace
         private void RemoveStaleBloomParts()
         {
             ViviEndingBloomParts.Remove(_quest);
-            _cachedQuest = null;
-            _cachedPartCount = -1;
+            InvalidatePartCache();
         }
 
         private bool StartBloom(ArcanePlant_Everflower everflower, float quality)
@@ -496,8 +491,7 @@ namespace VVRace
             }
 
             var added = ViviEndingBloomParts.TryAdd(_quest, everflower, quality, _assimilated);
-            _cachedQuest = null;
-            _cachedPartCount = -1;
+            InvalidatePartCache();
             if (!added) { return false; }
 
             _bloomStarted = true;
@@ -550,381 +544,5 @@ namespace VVRace
                 if (_epilogue == null) { _epilogue = new ViviEndingEpilogue(this); }
             }
         }
-
-        #region 개발자 도구
-        private const float DebugRitualQuality = 5f;
-
-        private bool IsFinished => Stage is ViviEndingStage.Completed or ViviEndingStage.Failed;
-
-        private IEnumerable<Gizmo> GetDebugGizmos(ArcanePlant_Everflower everflower)
-        {
-            if (!DebugSettings.godMode || everflower.Faction != Faction.OfPlayer) { yield break; }
-
-            if (_anchor != null && !_anchor.Destroyed && !IsAnchor(everflower)) { yield break; }
-
-            var stage = Stage;
-            var finished = IsFinished;
-
-            if ((stage == ViviEndingStage.None || stage == ViviEndingStage.Tales) && !_tales.AllDelivered)
-            {
-                yield return new Command_Action()
-                {
-                    defaultLabel = $"DEV: Deliver fairy tale {_tales.Delivered + 1}",
-                    action = () => DebugDeliverTale(everflower),
-                };
-            }
-
-            if (stage < ViviEndingStage.AltarUnlocked)
-            {
-                yield return new Command_Action()
-                {
-                    defaultLabel = "DEV: Unlock altar now",
-                    action = DebugUnlockAltar,
-                };
-            }
-
-            if (stage == ViviEndingStage.Ruins && _ruins.Investigated < ViviAncientRuins.EchoCount)
-            {
-                yield return new Command_Action()
-                {
-                    defaultLabel = $"DEV: Ruin echo {_ruins.Investigated + 1}",
-                    action = () => _ruins.DebugInvestigateNext(ViviEndingUtility.ResonatorOf(everflower)),
-                };
-            }
-
-            if (!finished)
-            {
-                var next = stage + 1;
-                yield return new Command_Action()
-                {
-                    defaultLabel = $"DEV: Ending stage → {next}",
-                    action = () => DebugSetStage(next, everflower),
-                };
-            }
-
-            if (stage == ViviEndingStage.Siege)
-            {
-                yield return new Command_Action()
-                {
-                    defaultLabel = "DEV: Bloom +10%",
-                    action = () => DebugSetBloom(BloomProgress + 0.1f),
-                };
-                yield return new Command_Action()
-                {
-                    defaultLabel = "DEV: Bloom → 99%",
-                    action = () => DebugSetBloom(QuestPart_ViviBloomCondensation.LockedProgress),
-                };
-            }
-
-            if (stage == ViviEndingStage.Calm)
-            {
-                yield return new Command_Action()
-                {
-                    defaultLabel = "DEV: End calm now",
-                    action = DebugEndCalm,
-                };
-            }
-
-            if (!finished && stage >= ViviEndingStage.AltarUnlocked && stage != ViviEndingStage.Coronation && Boss == null)
-            {
-                var manifesting = ApocryphaPart != null && ApocryphaPart.IsManifesting;
-                yield return new Command_Action()
-                {
-                    defaultLabel = manifesting ? "DEV: Skip Asphodel intro" : "DEV: Spawn Asphodel now",
-                    action = () => DebugSpawnBossNow(everflower),
-                };
-            }
-
-            if (!finished)
-            {
-                yield return new Command_Action()
-                {
-                    defaultLabel = "DEV: Complete ending",
-                    action = () => DebugSetStage(ViviEndingStage.Completed, everflower),
-                };
-                yield return new Command_Action()
-                {
-                    defaultLabel = "DEV: Fail ending",
-                    action = () => DebugSetStage(ViviEndingStage.Failed, everflower),
-                };
-            }
-        }
-
-        public void DebugSetStage(ViviEndingStage stage)
-        {
-            DebugSetStage(stage, null);
-        }
-
-        public void DebugSetBloom(float value)
-        {
-            if (Stage != ViviEndingStage.Siege) { return; }
-
-            BloomPart?.DebugSetProgress(value);
-        }
-
-        public void DebugSpawnBossNow()
-        {
-            DebugSpawnBossNow(null);
-        }
-
-        // 편지·드롭 없이 동화책·밀서·유적을 마친 상태로 만든다(시험 장면용).
-        public void DebugUnlockAltar()
-        {
-            if (Stage >= ViviEndingStage.AltarUnlocked) { return; }
-            if (_quest == null && !CreateQuest()) { return; }
-
-            _tales.DebugSetDelivered(ViviEndingTales.VolumeCount);
-            _ruins.DebugComplete();
-        }
-
-        public void DebugDeliverTale(ArcanePlant_Everflower context)
-        {
-            if (_tales.AllDelivered) { return; }
-
-            if (_quest == null && !CreateQuest()) { return; }
-
-            var everflower = context != null && !context.Destroyed ? context : ViviEndingUtility.FindEndingCandidate();
-            _tales.DeliverNext(everflower, ViviEndingUtility.FindFederation(requireNonHostile: false));
-        }
-
-        internal void DebugSetStage(ViviEndingStage stage, ArcanePlant_Everflower context)
-        {
-            switch (stage)
-            {
-                case ViviEndingStage.None:
-                    DebugReset();
-                    break;
-
-                case ViviEndingStage.Failed:
-                    if (IsFinished)
-                    {
-                        Log.Warning($"[ViViRace] ending debug: the ending already finished ({Stage}); not failing it.");
-                        break;
-                    }
-
-                    if (DebugAdvanceTo(ViviEndingStage.Siege, context))
-                    {
-                        ViviEndingSignals.Send(_quest, ViviEndingSignals.AnchorLost);
-                    }
-                    break;
-
-                default:
-                    DebugAdvanceTo(stage, context);
-                    break;
-            }
-        }
-
-        internal void DebugSpawnBossNow(ArcanePlant_Everflower context)
-        {
-            if (Boss != null)
-            {
-                Messages.Message("DEV: Asphodel is already on the map.", Boss, MessageTypeDefOf.RejectInput, historical: false);
-                return;
-            }
-
-            if (!DebugAdvanceTo(ViviEndingStage.Calm, context)) { return; }
-
-            if (Stage == ViviEndingStage.Calm && CalmPart != null && CalmPart.State == QuestPartState.Enabled)
-            {
-                CalmPart.DebugForceComplete();
-            }
-
-            var apocrypha = ApocryphaPart;
-            if (apocrypha == null || apocrypha.State != QuestPartState.Enabled)
-            {
-                Messages.Message($"DEV: Asphodel cannot be spawned at ending stage {Stage}.", MessageTypeDefOf.RejectInput, historical: false);
-                return;
-            }
-
-            apocrypha.DebugSpawnNow(skipIntro: false);
-        }
-
-        private void DebugEndCalm()
-        {
-            if (Stage != ViviEndingStage.Calm) { return; }
-
-            if (CalmPart != null && CalmPart.State == QuestPartState.Enabled)
-            {
-                CalmPart.DebugForceComplete();
-            }
-            else
-            {
-                ApocryphaPart?.DebugRetryNow();
-            }
-        }
-
-        private bool DebugAdvanceTo(ViviEndingStage target, ArcanePlant_Everflower context)
-        {
-            for (int guard = 0; guard < 16; ++guard)
-            {
-                var stage = Stage;
-                if (stage == ViviEndingStage.Failed) { return false; }
-                if (stage >= target) { return true; }
-
-                bool advanced;
-                try
-                {
-                    advanced = DebugStep(stage, target, context);
-                }
-                catch (Exception ex)
-                {
-                    Log.Error($"[ViViRace] ending debug: failed to advance from {stage}: {ex}");
-                    return false;
-                }
-
-                if (!advanced)
-                {
-                    Log.Warning($"[ViViRace] ending debug: could not advance from {stage} toward {target}.");
-                    return false;
-                }
-            }
-
-            return Stage >= target;
-        }
-
-        private bool DebugStep(ViviEndingStage stage, ViviEndingStage target, ArcanePlant_Everflower context)
-        {
-            switch (stage)
-            {
-                case ViviEndingStage.None:
-                    DebugDeliverTale(context);
-                    return _quest != null;
-
-                case ViviEndingStage.Tales:
-                    while (!_tales.AllDelivered)
-                    {
-                        var delivered = _tales.Delivered;
-                        DebugDeliverTale(context);
-                        if (_tales.Delivered == delivered) { return false; }
-                    }
-
-                    _ruins.SendMissive(ViviEndingUtility.FindFederation(requireNonHostile: false));
-                    return Stage != ViviEndingStage.Tales;
-
-                case ViviEndingStage.Missive:
-                    return _ruins.RevealRuins();
-
-                case ViviEndingStage.Ruins:
-                    _ruins.DebugComplete();
-                    return Stage != ViviEndingStage.Ruins;
-
-                case ViviEndingStage.AltarUnlocked:
-                    {
-                        var everflower = context != null && !context.Destroyed ? context : ViviEndingUtility.FindEndingCandidate();
-                        if (everflower == null)
-                        {
-                            Log.Warning("[ViViRace] ending debug: no everflower to start the siege with.");
-                            return false;
-                        }
-
-                        return StartBloom(everflower, DebugRitualQuality);
-                    }
-
-                case ViviEndingStage.Siege:
-                    BloomPart?.DebugSetProgress(QuestPart_ViviBloomCondensation.LockedProgress);
-                    return Stage != ViviEndingStage.Siege;
-
-                case ViviEndingStage.Calm:
-                    {
-                        if (CalmPart != null && CalmPart.State == QuestPartState.Enabled)
-                        {
-                            CalmPart.DebugForceComplete();
-                        }
-
-                        var apocrypha = ApocryphaPart;
-                        if (apocrypha == null || apocrypha.State != QuestPartState.Enabled) { return false; }
-
-                        if (target == ViviEndingStage.Boss)
-                        {
-                            apocrypha.DebugSpawnNow(skipIntro: true);
-                        }
-                        else
-                        {
-                            apocrypha.DebugDefeat();
-                        }
-
-                        return Stage != ViviEndingStage.Calm;
-                    }
-
-                case ViviEndingStage.Boss:
-                    ApocryphaPart?.DebugDefeat();
-                    return Stage != ViviEndingStage.Boss;
-
-                case ViviEndingStage.Coronation:
-                    ViviEndingSignals.Send(_quest, ViviEndingSignals.CoronationCompleted, ViviEndingUtility.ResonatorOf(_anchor).Named("PAWN"));
-                    return Stage != ViviEndingStage.Coronation;
-
-                default:
-                    return false;
-            }
-        }
-
-        private void DebugReset()
-        {
-            var quest = _quest;
-            if (quest != null)
-            {
-                if (!quest.Historical)
-                {
-                    quest.End(QuestEndOutcome.Unknown, sendLetter: false, playSound: false);
-                }
-
-                if (Find.QuestManager.Contains(quest))
-                {
-                    Find.QuestManager.Remove(quest);
-                }
-
-                ClearQuestReferences(quest);
-            }
-
-            ViviEndingUtility.RunStep("debug reset: cleanup gimmicks", ViviEndingUtility.CleanupGimmicks);
-            ViviEndingUtility.RunStep("debug reset: end ominous silence", ViviEndingUtility.EndOminousSilence);
-            ViviEndingUtility.RunStep("debug reset: end golden bloom", ViviEndingUtility.EndGoldenBloom);
-            ViviEndingUtility.RunStep("debug reset: destroy ruins", _ruins.DebugDestroySite);
-
-            _quest = null;
-            _anchor = null;
-            _bloomStarted = false;
-            _tales = new ViviEndingTales(this);
-            _ruins = new ViviAncientRuins(this);
-            _epilogue = new ViviEndingEpilogue(this);
-            _cachedQuest = null;
-            _cachedPartCount = -1;
-        }
-
-        private static void ClearQuestReferences(Quest quest)
-        {
-            foreach (var archivable in Find.Archive.ArchivablesListForReading)
-            {
-                if (archivable is ChoiceLetter letter && letter.quest == quest)
-                {
-                    letter.quest = null;
-                }
-                else if (archivable is Message message && message.quest == quest)
-                {
-                    message.quest = null;
-                }
-            }
-
-            foreach (var letter in Find.LetterStack.LettersListForReading)
-            {
-                if (letter is ChoiceLetter choiceLetter && choiceLetter.quest == quest)
-                {
-                    choiceLetter.quest = null;
-                }
-            }
-
-            foreach (var map in Find.Maps)
-            {
-                foreach (var condition in map.gameConditionManager.ActiveConditions)
-                {
-                    if (condition.quest == quest)
-                    {
-                        condition.quest = null;
-                    }
-                }
-            }
-        }
-        #endregion
     }
 }

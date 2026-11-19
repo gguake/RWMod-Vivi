@@ -1,5 +1,4 @@
 ﻿using RimWorld;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
@@ -17,135 +16,8 @@ namespace VVRace
         Dying = 4,
     }
 
-    public class CompProperties_Apocrypha : CompProperties
-    {
-        public long initialBondCount = 1440000000L;
-        public long bondReleaseAmount = 360000000L;
-        public int releaseStunTicks = 300;
-
-        public float shellRange = 20f;
-        public float shellMinRange = 2.9f;
-        public int shellAimTicks = 240;
-        public IntRange shellCastIntervalTicks = new IntRange(180, 300);
-        public int maxShellAims = 3;
-
-        public int escortFocusTicks = 600;
-
-        public int rangedAttackerMemoryTicks = 1200;
-
-        public int firstDoomSeedDelayTicks = 1500;
-        public IntRange doomSeedIntervalTicks = new IntRange(18000, 27000);
-        public int doomSeedVolleyStart = 3;
-        public int doomSeedVolleyGrowthEvery = 2;
-        public int doomSeedVolleyMax = 10;
-        public int maxDoomFlowers = 30;
-        public int fairySeedEveryVolleys = 3;
-        public int maxFairyFlowers = 2;
-
-        public float manaShieldMax = 1500f;
-        public int shieldBreakStunTicks = 3000;
-
-        public int needleCount = 3;
-        public int needleFirstDelayTicks = 900;
-        public IntRange needleCastIntervalTicks = new IntRange(480, 720);
-        public IntRange needleVolleyCount = new IntRange(1, 3);
-        public float needleFanRadius = 5f;
-        public float needleFanHalfAngle2 = 50f;
-        public float needleFanHalfAngle3 = 65f;
-        public float needleFanMinTargetDistance = 9f;
-        public int needleAimTicks = 150;
-        public float needleTargetRange = 24f;
-        public float needleRange = 32f;
-        public float needleHalfWidth = 1.5f;
-        public float needleDamage = 80f;
-        public float needleArmorPenetration = 0.8f;
-        public float needleBreachDamageFactor = 5f;
-
-        public IntRange approachIntervalTicks = new IntRange(9000, 13500);
-        public float approachDistance = 9f;
-        public float wanderRadius = 10f;
-        public IntRange wanderWaitTicks = new IntRange(600, 1200);
-
-        public float escortGuardRadius = 10f;
-        public float escortRetaliationRadius = 25f;
-        public float flowerGuardRadius = 6f;
-        public float flowerGuardRetaliationRadius = 20f;
-
-        public int arrivalHornetCount = 9;
-        public int interferenceHornetCount = 6;
-        public int interferenceHornetGrowth = 2;
-        public int volleyEscortCount = 4;
-        public int doomFlowerHornetIntervalTicks = 10000;
-        public int doomFlowerHornetCount = 1;
-        public FloatRange summonRadiusAroundBoss = new FloatRange(3.5f, 7f);
-        public SimpleCurve hornetCountFactorByThreatPoints = new SimpleCurve
-        {
-            new CurvePoint(500f, 0.5f),
-            new CurvePoint(1500f, 0.75f),
-            new CurvePoint(2500f, 1f),
-            new CurvePoint(5000f, 1.5f),
-            new CurvePoint(10000f, 2.2f),
-        };
-
-        public int transformTicks = 420;
-        public int transformGraphicSwapTicks = 210;
-        public int transformStunTicks = 420;
-
-        public float maxVitality = 9000f;
-        public List<float> damageFactorByStuckNeedles = new List<float> { 1f, 1.5f, 2f, 4f };
-
-        public int unboundNeedleCount = 3;
-        public FloatRange unboundNeedlePlantRadius = new FloatRange(5f, 10f);
-        public int unboundNeedleActivateTicks = 60;
-        public int unboundNeedleLockOnTicks = 150;
-        public int unboundNeedleLockedTicks = 75;
-        public float needleStickVitalityDamage = 0.1f;
-        public int needleStickStunTicks = 420;
-        public int allNeedlesStuckStunTicks = 3600;
-
-        public int breathCooldownTicks = 1200;
-        public int breathWarmupTicks = 90;
-        public float breathRange = 7f;
-        public float breathAngle = 50f;
-        public float breathToxicSeverity = 0.25f;
-        public float breathAcidBurnDamage = 8f;
-        public float breathGasRadius = 3.9f;
-        public int meleeIntervalTicks = 60;
-        public int smashIntervalTicks = 30;
-        public float smashDamage = 400f;
-
-        public SimpleCurve hitPointsFactorByThreatScale = new SimpleCurve
-        {
-            new CurvePoint(0.1f, 0.4f),
-            new CurvePoint(0.3f, 0.55f),
-            new CurvePoint(0.6f, 0.75f),
-            new CurvePoint(1f, 1f),
-            new CurvePoint(1.55f, 1.3f),
-            new CurvePoint(2.2f, 1.6f),
-        };
-        public SimpleCurve doomBloomTimeFactorByThreatScale = new SimpleCurve
-        {
-            new CurvePoint(0.1f, 2f),
-            new CurvePoint(0.3f, 1.6f),
-            new CurvePoint(0.6f, 1.25f),
-            new CurvePoint(1f, 1f),
-            new CurvePoint(1.55f, 0.8f),
-            new CurvePoint(2.2f, 0.65f),
-        };
-
-        public int channelTicksBound = 5000;
-        public int channelTicksUnbound = 3600;
-        public float channelRangeAltar = 3.9f;
-        public float channelRangeEverflower = 1.9f;
-
-        public CompProperties_Apocrypha()
-        {
-            compClass = typeof(CompApocrypha);
-        }
-    }
-
     // 동물의 CompTickInterval은 15틱 간격이므로 타이머는 매 틱 호출되는 CompTick에서 처리한다.
-    public class CompApocrypha : ThingComp, IRoofCollapseAlert
+    public partial class CompApocrypha : ThingComp, IRoofCollapseAlert
     {
         private const int RoofCollapseEscapeRadius = 15;
         private const int StealTargetSkipCheckInterval = 250;
@@ -317,9 +189,9 @@ namespace VVRace
 
         private void SyncLifeStage()
         {
-            var index = (_phase == ApocryphaPhase.Bound || (_phase == ApocryphaPhase.Transforming && !_transformSwapped)) ? 0 : 1;
+            var useBoundStage = _phase == ApocryphaPhase.Bound || (_phase == ApocryphaPhase.Transforming && !_transformSwapped);
             var maxIndex = Pawn.RaceProps.lifeStageAges.Count - 1;
-            Pawn.ageTracker.LockCurrentLifeStageIndex(Mathf.Clamp(index, 0, maxIndex));
+            Pawn.ageTracker.LockCurrentLifeStageIndex(Mathf.Clamp(useBoundStage ? 0 : 1, 0, maxIndex));
         }
 
         private void SyncPhaseHediffs()
@@ -538,24 +410,11 @@ namespace VVRace
             absorbed = true;
 
             var damageDef = dinfo.Def;
-            if (damageDef == null || _pendingDeath) { return; }
-            if (_phase == ApocryphaPhase.Transforming || _phase == ApocryphaPhase.Dying) { return; }
+            if (damageDef == null || _pendingDeath || !IsActive) { return; }
 
             if (damageDef == DamageDefOf.Stun || damageDef == DamageDefOf.NerveStun)
             {
-                var stunTicks = damageDef.constantStunDurationTicks ?? Mathf.RoundToInt(dinfo.Amount * StunHandler.StunDurationTicksPerDamage);
-                if (stunTicks > 0)
-                {
-                    if (DamageWorker_ManawaveStun.Applying)
-                    {
-                        GimmickStun(stunTicks, dinfo.Instigator);
-                        _channel.Interrupt();
-                    }
-                    else
-                    {
-                        Notify_StunBlocked();
-                    }
-                }
+                HandleStunDamage(dinfo);
                 return;
             }
 
@@ -563,51 +422,51 @@ namespace VVRace
 
             if (_phase == ApocryphaPhase.Bound)
             {
-                _targeting.NoteAttacker(dinfo.Instigator);
-
-                if (ShieldBroken || _manaShield <= 0f)
-                {
-                    ThrowBlockedText();
-                    return;
-                }
-
-                var absorbedByShield = Mathf.Min(_manaShield, dinfo.Amount);
-                if (absorbedByShield <= 0f) { return; }
-
-                _manaShield -= absorbedByShield;
-                _pendingDamageText += absorbedByShield;
-
-                if (_manaShield <= 0f)
-                {
-                    _manaShield = 0f;
-                    _pendingShieldBreak = true;
-                }
+                ApplyBoundShieldDamage(dinfo);
                 return;
             }
 
-            var dealt = dinfo.Amount * IncomingDamageFactor;
-            if (dealt <= 0f) { return; }
+            TakeVitalityDamage(dinfo.Amount * IncomingDamageFactor);
+        }
 
-            _vitality = Mathf.Max(0f, _vitality - dealt);
-            _pendingDamageText += dealt;
+        private void HandleStunDamage(DamageInfo dinfo)
+        {
+            var damageDef = dinfo.Def;
+            var stunTicks = damageDef.constantStunDurationTicks ?? Mathf.RoundToInt(dinfo.Amount * StunHandler.StunDurationTicksPerDamage);
+            if (stunTicks <= 0) { return; }
 
-            if (_vitality <= 0f)
+            if (DamageWorker_ManawaveStun.Applying)
             {
-                _pendingDeath = true;
+                GimmickStun(stunTicks, dinfo.Instigator);
+                _channel.Interrupt();
+            }
+            else
+            {
+                Notify_StunBlocked();
             }
         }
 
-        private void ThrowBlockedText()
+        private void ApplyBoundShieldDamage(DamageInfo dinfo)
         {
-            var now = GenTicks.TicksGame;
-            if (now - _lastBlockedTextTick < BlockedTextMoteInterval) { return; }
+            _targeting.NoteAttacker(dinfo.Instigator);
 
-            _lastBlockedTextTick = now;
-            var drawPos = BodyCenter;
-            MoteMaker.ThrowText(
-                new Vector3(drawPos.x + 1f, drawPos.y, drawPos.z + 1f),
-                parent.Map,
-                LocalizeString_Etc.VV_TextMote_DamageBlockedByFairy.Translate());
+            if (ShieldBroken || _manaShield <= 0f)
+            {
+                TryThrowStatusText(ref _lastBlockedTextTick, 1f, LocalizeString_Etc.VV_TextMote_DamageBlockedByFairy.Translate());
+                return;
+            }
+
+            var absorbedByShield = Mathf.Min(_manaShield, dinfo.Amount);
+            if (absorbedByShield <= 0f) { return; }
+
+            _manaShield -= absorbedByShield;
+            _pendingDamageText += absorbedByShield;
+
+            if (_manaShield <= 0f)
+            {
+                _manaShield = 0f;
+                _pendingShieldBreak = true;
+            }
         }
 
         private void BreakShield()
@@ -617,8 +476,7 @@ namespace VVRace
             _manaShield = 0f;
             _shieldBroken = true;
 
-            _shell.Cancel();
-            _needleAttack.CancelAims();
+            CancelBoundAttacks();
             _channel.Interrupt();
             GimmickStun(Props.shieldBreakStunTicks, null);
 
@@ -656,15 +514,17 @@ namespace VVRace
         {
             if (!parent.Spawned) { return; }
 
-            var now = GenTicks.TicksGame;
-            if (now - _lastStunImmuneTextTick < BlockedTextMoteInterval) { return; }
+            TryThrowStatusText(ref _lastStunImmuneTextTick, 1.4f, LocalizeString_Etc.VV_TextMote_ApocryphaStunImmune.Translate());
+        }
 
-            _lastStunImmuneTextTick = now;
+        private void TryThrowStatusText(ref int lastTick, float zOffset, string text)
+        {
+            var now = GenTicks.TicksGame;
+            if (now - lastTick < BlockedTextMoteInterval) { return; }
+
+            lastTick = now;
             var drawPos = BodyCenter;
-            MoteMaker.ThrowText(
-                new Vector3(drawPos.x + 1f, drawPos.y, drawPos.z + 1.4f),
-                parent.Map,
-                LocalizeString_Etc.VV_TextMote_ApocryphaStunImmune.Translate());
+            MoteMaker.ThrowText(new Vector3(drawPos.x + 1f, drawPos.y, drawPos.z + zOffset), parent.Map, text);
         }
 
         private void FlushDamageText(int now)
@@ -692,8 +552,7 @@ namespace VVRace
 
             GimmickStun(Props.releaseStunTicks, releaser, replaceExisting: true);
             _channel.Interrupt();
-            _shell.Cancel();
-            _needleAttack.CancelAims();
+            CancelBoundAttacks();
 
             var curJob = Pawn.CurJob;
             if (curJob != null && curJob.def == VVJobDefOf.VV_ApocryphaWait && curJob.expiryInterval > Props.releaseStunTicks + 1)
@@ -747,55 +606,6 @@ namespace VVRace
         {
             _nextApproachTick = GenTicks.TicksGame + Props.approachIntervalTicks.RandomInRange;
         }
-
-        public void DebugReduceBond(float fractionOfInitial)
-        {
-            if (_phase != ApocryphaPhase.Bound) { return; }
-
-            var amount = (long)System.Math.Round(Props.initialBondCount * (double)fractionOfInitial);
-            _bondCount = System.Math.Max(0L, _bondCount - System.Math.Max(1L, amount));
-            if (_bondCount <= 0 && parent.Spawned)
-            {
-                StartTransformation();
-            }
-        }
-
-        public void DebugForcePhase2()
-        {
-            if (!parent.Spawned) { return; }
-
-            if (_phase == ApocryphaPhase.Bound)
-            {
-                _bondCount = 0;
-                StartTransformation();
-            }
-            else if (_phase == ApocryphaPhase.Transforming)
-            {
-                _transformStartTick = GenTicks.TicksGame - Props.transformTicks;
-            }
-        }
-
-        public void DebugDamageShield(float fractionOfMax)
-        {
-            if (_phase != ApocryphaPhase.Bound || ShieldBroken) { return; }
-
-            _manaShield = Mathf.Max(0f, _manaShield - MaxManaShield * fractionOfMax);
-            if (_manaShield <= 0f)
-            {
-                _pendingShieldBreak = true;
-            }
-        }
-
-        public void DebugDamageVitality(float fractionOfMax)
-        {
-            if (_phase != ApocryphaPhase.Unbound || _pendingDeath) { return; }
-
-            _vitality = Mathf.Max(0f, _vitality - MaxVitality * fractionOfMax);
-            if (_vitality <= 0f)
-            {
-                _pendingDeath = true;
-            }
-        }
         #endregion
 
         #region 페이즈 전환
@@ -805,10 +615,7 @@ namespace VVRace
             if (!_channel.TryGetStealTarget(out var target, out _, out var everflower)) { return; }
 
             var map = parent.Map;
-
-            _shell.Cancel();
-            _breath.Cancel();
-            _needleAttack.DestroyAll();
+            CancelAllAttacks();
 
             ViviEndingQuest.Current?.Notify_EverflowerStolen();
 
@@ -926,10 +733,7 @@ namespace VVRace
             }
 
             _phase = ApocryphaPhase.Dying;
-            _channel.Reset();
-            _shell.Cancel();
-            _breath.Cancel();
-            _needleAttack.DestroyAll();
+            CancelAllAttacks();
 
             if (dying != null)
             {
@@ -1015,8 +819,7 @@ namespace VVRace
             if (ApocryphaUtility.CanBreachReach(map, from, target)) { return false; }
             if (!ApocryphaUtility.TryFindSkipCell(map, target, from, stealRange, out var cell)) { return false; }
 
-            _shell.Cancel();
-            _needleAttack.CancelAims();
+            CancelBoundAttacks();
             _needleAttack.EndBreach();
             TeleportTo(cell, endCurrentJob: false);
             return true;
@@ -1068,38 +871,33 @@ namespace VVRace
         public override string CompInspectStringExtra()
         {
             var sb = new StringBuilder();
-
             sb.Append(LocalizeString_Inspector.VV_Inspector_ApocryphaPhase.Translate(PhaseLabel(_phase)));
 
             if (_phase == ApocryphaPhase.Bound)
             {
-                sb.AppendLine();
-                sb.Append(LocalizeString_Inspector.VV_Inspector_ApocryphaBond.Translate(_bondCount.ToString("N0")));
-                sb.AppendLine();
+                sb.AppendInNewLine(LocalizeString_Inspector.VV_Inspector_ApocryphaBond.Translate(_bondCount.ToString("N0")));
                 if (ShieldBroken)
                 {
-                    sb.Append(LocalizeString_Inspector.VV_Inspector_ApocryphaShieldBroken.Translate(
+                    sb.AppendInNewLine(LocalizeString_Inspector.VV_Inspector_ApocryphaShieldBroken.Translate(
                         Pawn.stances.stunner.StunTicksLeft.ToStringTicksToPeriod()));
                 }
                 else
                 {
-                    sb.Append(LocalizeString_Inspector.VV_Inspector_ApocryphaShield.Translate(
+                    sb.AppendInNewLine(LocalizeString_Inspector.VV_Inspector_ApocryphaShield.Translate(
                         Mathf.CeilToInt(ManaShield).ToString("N0"),
                         Mathf.CeilToInt(MaxManaShield).ToString("N0")));
                 }
             }
             else if (_phase == ApocryphaPhase.Unbound)
             {
-                sb.AppendLine();
-                sb.Append(LocalizeString_Inspector.VV_Inspector_ApocryphaVitality.Translate(
+                sb.AppendInNewLine(LocalizeString_Inspector.VV_Inspector_ApocryphaVitality.Translate(
                     Mathf.CeilToInt(_vitality).ToString("N0"),
                     Mathf.CeilToInt(MaxVitality).ToString("N0")));
             }
 
             if (_channel.IsChanneling)
             {
-                sb.AppendLine();
-                sb.Append(LocalizeString_Inspector.VV_Inspector_ApocryphaChanneling.Translate(
+                sb.AppendInNewLine(LocalizeString_Inspector.VV_Inspector_ApocryphaChanneling.Translate(
                     _channel.Progress.ToStringPercent(),
                     _channel.TicksLeft.ToStringTicksToPeriod()));
             }
@@ -1124,102 +922,23 @@ namespace VVRace
                     return LocalizeString_Inspector.VV_Inspector_ApocryphaPhase_Bound.Translate();
             }
         }
-
-        public override IEnumerable<Gizmo> CompGetGizmosExtra()
-        {
-            foreach (var gizmo in base.CompGetGizmosExtra())
-            {
-                yield return gizmo;
-            }
-
-            if (!DebugSettings.godMode) { yield break; }
-
-            yield return new Command_Action()
-            {
-                defaultLabel = "DEV: Bond -25%",
-                action = () => DebugReduceBond(0.25f),
-            };
-            yield return new Command_Action()
-            {
-                defaultLabel = "DEV: Force phase 2",
-                action = DebugForcePhase2,
-            };
-            yield return new Command_Action()
-            {
-                defaultLabel = "DEV: Vitality -25%",
-                action = () => DebugDamageVitality(0.25f),
-            };
-            yield return new Command_Action()
-            {
-                defaultLabel = "DEV: Start channel",
-                action = _channel.DebugStart,
-            };
-            yield return new Command_Action()
-            {
-                defaultLabel = "DEV: Finish channel",
-                action = _channel.DebugFinish,
-            };
-            yield return new Command_Action()
-            {
-                defaultLabel = "DEV: Stick a needle",
-                action = _needleAttack.DebugStickNeedle,
-            };
-            yield return new Command_Action()
-            {
-                defaultLabel = "DEV: Shell ready now",
-                action = () => _shell.SetReadyTick(0),
-            };
-            yield return new Command_Action()
-            {
-                defaultLabel = "DEV: Needle ready now",
-                action = () => _needleAttack.SetReadyTick(0),
-            };
-            yield return new Command_Action()
-            {
-                defaultLabel = "DEV: Mana shield -25%",
-                action = () => DebugDamageShield(0.25f),
-            };
-            yield return new Command_Action()
-            {
-                defaultLabel = "DEV: Doom seed now",
-                action = () => _seeds.SetReadyTick(0),
-            };
-
-            yield return new Command_Action()
-            {
-                defaultLabel = "DEV: Fairy seed now",
-                action = () => ApocryphaGimmicks.TryLaunchFairySeed(Pawn),
-            };
-
-            yield return new Command_Action()
-            {
-                defaultLabel = "DEV: Summon assault hornets",
-                action = () => HornetManifestation.SummonAround(Pawn, InterferenceHornetCount(_releaseCount), HornetSummonRole.Assault),
-            };
-            yield return new Command_Action()
-            {
-                defaultLabel = "DEV: Breath ready now",
-                action = () => _breath.SetReadyTick(0),
-            };
-            yield return new Command_Action()
-            {
-                defaultLabel = "DEV: Approach altar now",
-                action = () =>
-                {
-                    _nextApproachTick = 0;
-                    _nextStealTargetSkipCheckTick = 0;
-                    InterruptCurrentJob();
-                },
-            };
-            yield return new Command_Action()
-            {
-                defaultLabel = "DEV: Summon escort hornets",
-                action = () => HornetManifestation.SummonAround(Pawn, Props.volleyEscortCount, HornetSummonRole.Escort),
-            };
-        }
         #endregion
 
         #region 내부 도우미
+        private void CancelBoundAttacks()
+        {
+            _shell.Cancel();
+            _needleAttack.CancelAims();
+        }
+
+        private void CancelAllAttacks()
+        {
+            _channel.Reset();
+            _shell.Cancel();
+            _breath.Cancel();
+            _needleAttack.DestroyAll();
+        }
+
         internal void InterruptCurrentJob()
         {
             if (parent.Spawned && Pawn.jobs?.curJob != null)
@@ -1232,7 +951,8 @@ namespace VVRace
         {
             if (effecterDef == null || !parent.Spawned) { return; }
 
-            ApocryphaGimmicks.PlayEffect(effecterDef, parent.Position, parent.Map, (Pawn.DrawPos - parent.Position.ToVector3Shifted()).WithY(0f) + offset);
+            var drawOffset = EndingVfxUtility.OffsetFromCell(Pawn.DrawPos, parent.Position);
+            ApocryphaGimmicks.PlayEffect(effecterDef, parent.Position, parent.Map, drawOffset + offset);
         }
         #endregion
     }

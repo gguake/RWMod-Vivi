@@ -16,7 +16,7 @@ namespace VVRace
         private int _arrivalTick = -1;
         private int _cooldownUntilTick = -1;
 
-        private Map AnchorMap => anchor != null && !anchor.Destroyed ? anchor.MapHeld : null;
+        private Map AnchorMap => ViviEndingUtility.AnchorMapOf(anchor);
 
         public override void QuestPartTick()
         {

@@ -38,9 +38,7 @@ namespace VVRace
             cell = IntVec3.Invalid;
             if (target == null || !CanEnterFromEdge(map)) { return false; }
 
-            var targetRect = target.Spawned && target.Map == map
-                ? target.OccupiedRect()
-                : CellRect.SingleCell(target.PositionHeld);
+            var targetRect = StealTargetRect(map, target);
             var targetCell = targetRect.CenterCell;
             var bestTier = int.MaxValue;
             var bestDistance = int.MaxValue;
@@ -89,9 +87,7 @@ namespace VVRace
 
         public static bool CanEnterFromEdge(Map map)
         {
-            if (map == null || map.IsPocketMap || map.IsTempIncidentMap || !map.CanEverExit) { return false; }
-            if (map.Biome != null && map.Biome.inVacuum) { return false; }
-            if (map.Tile.Valid && map.Tile.LayerDef != null && map.Tile.LayerDef.isSpace) { return false; }
+            if (map == null || map.IsPocketMap || map.IsTempIncidentMap || !map.CanEverExit || IsSpaceOrVacuum(map)) { return false; }
 
             return PawnsArrivalModeDefOf.EdgeWalkIn.Worker.CanUseOnMap(map);
         }
@@ -104,12 +100,17 @@ namespace VVRace
         public static bool TryFindInnerEntryCell(Map map, Thing target, out IntVec3 cell)
         {
             cell = IntVec3.Invalid;
-            if (map == null || target == null) { return false; }
-            if (map.Biome != null && map.Biome.inVacuum) { return false; }
-            if (map.Tile.Valid && map.Tile.LayerDef != null && map.Tile.LayerDef.isSpace) { return false; }
+            if (map == null || target == null || IsSpaceOrVacuum(map)) { return false; }
 
             return TryFindFarthestLinkedCell(map, target, passDestroyable: false, out cell)
                 || TryFindFarthestLinkedCell(map, target, passDestroyable: true, out cell);
+        }
+
+        private static bool IsSpaceOrVacuum(Map map)
+        {
+            if (map.Biome != null && map.Biome.inVacuum) { return true; }
+
+            return map.Tile.Valid && map.Tile.LayerDef != null && map.Tile.LayerDef.isSpace;
         }
 
         private static bool TryFindFarthestLinkedCell(Map map, Thing target, bool passDestroyable, out IntVec3 cell)
@@ -257,30 +258,31 @@ namespace VVRace
         public static void JoinEscort(Pawn boss, Pawn hornet)
         {
             var lord = FindEscortLord(boss);
-            if (lord == null)
+            if (lord != null)
             {
-                var props = boss.TryGetComp<CompApocrypha>()?.Props;
-                LordMaker.MakeNewLord(null, new LordJob_ApocryphaEscort(boss, props?.escortGuardRadius ?? 10f, props?.escortRetaliationRadius ?? 25f), hornet.Map, new List<Pawn> { hornet });
+                lord.AddPawn(hornet);
                 return;
             }
 
-            lord.AddPawn(hornet);
+            var props = boss.TryGetComp<CompApocrypha>()?.Props;
+            var escortJob = new LordJob_ApocryphaEscort(boss, props?.escortGuardRadius ?? 10f, props?.escortRetaliationRadius ?? 25f);
+            LordMaker.MakeNewLord(null, escortJob, hornet.Map, new List<Pawn> { hornet });
         }
 
         public static void JoinFlowerGuard(Pawn boss, Thing flower, Pawn hornet)
         {
             var lord = FindFlowerGuardLord(boss);
-            if (lord == null)
+            if (lord != null)
             {
-                var props = boss.TryGetComp<CompApocrypha>()?.Props;
-                var guardJob = new LordJob_ApocryphaFlowerGuard(boss, props?.flowerGuardRadius ?? 6f, props?.flowerGuardRetaliationRadius ?? 20f);
-                guardJob.AssignFlower(hornet, flower);
-                LordMaker.MakeNewLord(null, guardJob, hornet.Map, new List<Pawn> { hornet });
+                ((LordJob_ApocryphaFlowerGuard)lord.LordJob).AssignFlower(hornet, flower);
+                lord.AddPawn(hornet);
                 return;
             }
 
-            ((LordJob_ApocryphaFlowerGuard)lord.LordJob).AssignFlower(hornet, flower);
-            lord.AddPawn(hornet);
+            var props = boss.TryGetComp<CompApocrypha>()?.Props;
+            var guardJob = new LordJob_ApocryphaFlowerGuard(boss, props?.flowerGuardRadius ?? 6f, props?.flowerGuardRetaliationRadius ?? 20f);
+            guardJob.AssignFlower(hornet, flower);
+            LordMaker.MakeNewLord(null, guardJob, hornet.Map, new List<Pawn> { hornet });
         }
 
         public static void JoinHornetAssault(Map map, List<Pawn> hornets)

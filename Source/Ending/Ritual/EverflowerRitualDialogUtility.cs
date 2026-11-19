@@ -62,22 +62,35 @@ namespace VVRace
 
         public static Dialog_BeginRitual.PawnFilter PawnFilter(Precept_Ritual ritual, TargetInfo target, Dictionary<string, Pawn> forcedForRole)
         {
-            return (pawn, voluntary, allowOtherIdeos) =>
+            return (pawn, voluntary, allowOtherIdeos) => CanParticipate(ritual, target, forcedForRole, pawn, voluntary, allowOtherIdeos);
+        }
+
+        private static bool CanParticipate(
+            Precept_Ritual ritual,
+            TargetInfo target,
+            Dictionary<string, Pawn> forcedForRole,
+            Pawn pawn,
+            bool voluntary,
+            bool allowOtherIdeos)
+        {
+            if (pawn.GetLord() != null || pawn.IsSubhuman) { return false; }
+
+            if (pawn.RaceProps.Animal && !ritual.behavior.def.roles.Any(r => r.AppliesToPawn(pawn, out string _, target, skipReason: true)))
             {
-                if (pawn.GetLord() != null ||
-                    (pawn.RaceProps.Animal && !ritual.behavior.def.roles.Any(r => r.AppliesToPawn(pawn, out string _, target, skipReason: true))) ||
-                    pawn.IsSubhuman)
-                {
-                    return false;
-                }
+                return false;
+            }
 
-                if (!ritual.ritualOnlyForIdeoMembers || ritual.def.allowSpectatorsFromOtherIdeos || pawn.Ideo == ritual.ideo || !voluntary || allowOtherIdeos || pawn.IsPrisonerOfColony || pawn.RaceProps.Animal)
-                {
-                    return true;
-                }
+            if (!ritual.ritualOnlyForIdeoMembers || ritual.def.allowSpectatorsFromOtherIdeos || pawn.Ideo == ritual.ideo)
+            {
+                return true;
+            }
 
-                return !forcedForRole.NullOrEmpty() && forcedForRole.ContainsValue(pawn);
-            };
+            if (!voluntary || allowOtherIdeos || pawn.IsPrisonerOfColony || pawn.RaceProps.Animal)
+            {
+                return true;
+            }
+
+            return !forcedForRole.NullOrEmpty() && forcedForRole.ContainsValue(pawn);
         }
     }
 }

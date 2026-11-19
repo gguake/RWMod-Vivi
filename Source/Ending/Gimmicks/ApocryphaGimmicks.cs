@@ -139,12 +139,7 @@ namespace VVRace
         {
             if (phase == ApocryphaPhase.Bound) { return; }
 
-            var map = boss?.MapHeld;
-            if (map == null) { return; }
-
-            ClearGimmickThings(map);
-            RemoveFairyInterference(map);
-            DoomBlightUtility.ClearDoomBlights(map);
+            CleanupAll(boss?.MapHeld);
         }
 
         public static void CleanupAll(Map map)
@@ -226,10 +221,7 @@ namespace VVRace
         {
             var map = boss.Map;
             var bossPos = GetBossBodyPos(boss);
-            var offset = bossPos - boss.Position.ToVector3Shifted();
-            offset.y = 0f;
-
-            PlayEffect(VVEffecterDefOf.VV_Effecter_ManaBackflow, boss.Position, map, offset);
+            PlayEffect(VVEffecterDefOf.VV_Effecter_ManaBackflow, boss.Position, map, EndingVfxUtility.OffsetFromCell(bossPos, boss.Position));
 
             if (vivi != null && vivi.Spawned && vivi.Map == map && bossPos.ShouldSpawnMotesAt(map))
             {
@@ -391,8 +383,7 @@ namespace VVRace
             var effecterDef = projectileDef.GetModExtension<ApocryphaProjectileExtension>()?.launchEffecter;
             if (effecterDef == null) { return; }
 
-            var offset = GetBossBodyPos(boss) - boss.Position.ToVector3Shifted();
-            offset.y = 0f;
+            var offset = EndingVfxUtility.OffsetFromCell(GetBossBodyPos(boss), boss.Position);
             PlayEffect(effecterDef, boss.Position, boss.Map, offset);
         }
 
@@ -434,23 +425,11 @@ namespace VVRace
 
         private static void ClearGimmickThings(Map map)
         {
-            DestroyAll(map, VVThingDefOf.VV_Projectile_DoomSeed);
-            DestroyAll(map, VVThingDefOf.VV_Projectile_FairySeed);
+            EndingVfxUtility.DestroyAllOfDef(map, VVThingDefOf.VV_Projectile_DoomSeed);
+            EndingVfxUtility.DestroyAllOfDef(map, VVThingDefOf.VV_Projectile_FairySeed);
 
             WitherAll(map, VVThingDefOf.VV_FairyFlower);
             WitherAll(map, VVThingDefOf.VV_DoomFlower);
-        }
-
-        private static void DestroyAll(Map map, ThingDef def)
-        {
-            var things = new List<Thing>(map.listerThings.ThingsOfDef(def));
-            for (int i = 0; i < things.Count; i++)
-            {
-                if (!things[i].Destroyed)
-                {
-                    things[i].Destroy(DestroyMode.Vanish);
-                }
-            }
         }
 
         private static void WitherAll(Map map, ThingDef def)

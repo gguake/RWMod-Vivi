@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using RimWorld.Planet;
 using System.Collections.Generic;
 using System.Text;
@@ -47,9 +47,10 @@ namespace VVRace
 
         private static int DescriptionKey(ViviEndingQuest ending)
         {
+            var hasFederation = ViviEndingUtility.FindFederation(requireNonHostile: true) != null ? 1 : 0;
             return Gen.HashCombineInt(
                 Gen.HashCombineInt((int)ending.Stage, ending.Tales.Delivered),
-                Gen.HashCombineInt(ending.Ruins.Investigated, ViviEndingUtility.FindFederation(requireNonHostile: true) != null ? 1 : 0));
+                Gen.HashCombineInt(ending.Ruins.Investigated, hasFederation));
         }
 
         public override IEnumerable<GlobalTargetInfo> QuestLookTargets
@@ -79,9 +80,10 @@ namespace VVRace
             switch (stage)
             {
                 case ViviEndingStage.Tales:
-                    sb.Append(ending.Tales.AllDelivered
+                    var talesText = ending.Tales.AllDelivered
                         ? LocalizeString_Etc.VV_Quest_EndingStageMissiveWait.Translate().Resolve()
-                        : LocalizeString_Etc.VV_Quest_EndingStageTales.Translate(ending.Tales.Delivered, ViviEndingTales.VolumeCount).Resolve());
+                        : LocalizeString_Etc.VV_Quest_EndingStageTales.Translate(ending.Tales.Delivered, ViviEndingTales.VolumeCount).Resolve();
+                    sb.Append(talesText);
                     AppendHostility(sb);
                     break;
 
@@ -92,10 +94,11 @@ namespace VVRace
                     break;
 
                 case ViviEndingStage.Ruins:
-                    sb.Append(ending.Ruins.Investigated < ViviAncientRuins.EchoCount
+                    var ruinsText = ending.Ruins.Investigated < ViviAncientRuins.EchoCount
                         ? LocalizeString_Etc.VV_Quest_EndingStageRuins.Translate(
                             ViviAncientRuins.RequiredAttunementLevel, ending.Ruins.Investigated, ViviAncientRuins.EchoCount).Resolve()
-                        : LocalizeString_Etc.VV_Quest_EndingStageRuinsExtract.Translate().Resolve());
+                        : LocalizeString_Etc.VV_Quest_EndingStageRuinsExtract.Translate().Resolve();
+                    sb.Append(ruinsText);
                     break;
 
                 case ViviEndingStage.AltarUnlocked:

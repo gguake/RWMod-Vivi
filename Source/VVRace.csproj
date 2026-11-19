@@ -88,6 +88,8 @@
     <Compile Include="Ending\Boss\Comps\ApocryphaShellAttack.cs" />
     <Compile Include="Ending\Boss\Comps\ApocryphaTargeting.cs" />
     <Compile Include="Ending\Boss\Comps\CompApocrypha.cs" />
+    <Compile Include="Ending\Boss\Comps\CompApocrypha.Debug.cs" />
+    <Compile Include="Ending\Boss\Comps\CompProperties_Apocrypha.cs" />
     <Compile Include="Ending\Boss\Hediff_ApocryphaFairyBond.cs" />
     <Compile Include="Ending\Boss\Hediff_ApocryphaStuckNeedle.cs" />
     <Compile Include="Ending\Boss\Hediff_CorruptedEverflowerAssimilation.cs" />
@@ -96,6 +98,7 @@
     <Compile Include="Ending\Boss\Lord\LordJob_ApocryphaHornetGuard.cs" />
     <Compile Include="Ending\Boss\Lord\LordToil_ApocryphaEscort.cs" />
     <Compile Include="Ending\Boss\Lord\LordToil_ApocryphaFlowerGuard.cs" />
+    <Compile Include="Ending\Boss\Lord\LordToil_ApocryphaHornetGuard.cs" />
     <Compile Include="Ending\Boss\Lord\LordToil_ApocryphaReleasedAssault.cs" />
     <Compile Include="Ending\Boss\ManifestationRenderer.cs" />
     <Compile Include="Ending\Boss\MusicTransition_Apocrypha.cs" />
@@ -107,6 +110,7 @@
     <Compile Include="Ending\Boss\UI\Alert_ApocryphaChanneling.cs" />
     <Compile Include="Ending\Core\AmberCoreUtility.cs" />
     <Compile Include="Ending\Core\DissolveRenderer.cs" />
+    <Compile Include="Ending\Core\EndingVfxUtility.cs" />
     <Compile Include="Ending\Core\GameCondition_GoldenBloom.cs" />
     <Compile Include="Ending\Core\MusicTransition_OminousSilence.cs" />
     <Compile Include="Ending\Core\Quest\QuestNode_Root_ViviEnding.cs" />
@@ -127,6 +131,7 @@
     <Compile Include="Ending\Core\ViviEndingCommsOptions.cs" />
     <Compile Include="Ending\Core\ViviEndingEpilogue.cs" />
     <Compile Include="Ending\Core\ViviEndingQuest.cs" />
+    <Compile Include="Ending\Core\ViviEndingQuest.Debug.cs" />
     <Compile Include="Ending\Core\ViviEndingRequirements.cs" />
     <Compile Include="Ending\Core\ViviEndingSignals.cs" />
     <Compile Include="Ending\Core\ViviEndingStage.cs" />

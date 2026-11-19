@@ -67,7 +67,7 @@ namespace VVRace
             {
                 _pendingPetals -= 1f;
 
-                var position = new Vector3(Rand.Range(view.minX, view.maxX + 1f), 0f, Rand.Range(view.minZ, view.maxZ + 1f));
+                var position = EndingVfxUtility.RandomPointInRect(view);
                 map.flecks.CreateFleck(new FleckCreationData()
                 {
                     def = fleckDef,

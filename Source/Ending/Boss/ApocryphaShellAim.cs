@@ -25,52 +25,37 @@ namespace VVRace
 
         public void TickVisuals(Pawn boss, Map map, Vector3 bodyCenter, int aimTicks)
         {
-            var direction = cell.ToVector3Shifted() - boss.DrawPos;
-            direction.y = 0f;
-            direction.Normalize();
-
+            var direction = (cell.ToVector3Shifted() - boss.DrawPos).Yto0().normalized;
             var aimStartTick = Mathf.Min(fireTick - aimTicks, Find.TickManager.TicksGame);
-            if (_targetMote == null || _targetMote.Destroyed)
+            var angle = direction.AngleFlat();
+
+            MaintainAimMote(ref _targetMote, cell.ToVector3Shifted(), map, VVThingDefOf.VV_Mote_ApocryphaAimTarget, aimStartTick, angle, updatePosition: false);
+            MaintainAimMote(ref _chargeMote, bodyCenter + direction * 0.7f, map, VVThingDefOf.VV_Mote_ApocryphaAimCharge, aimStartTick, angle, updatePosition: true);
+
+            EndingVfxUtility.MaintainEffecter(ref _effecter, VVEffecterDefOf.VV_Effecter_ApocryphaAim, new TargetInfo(boss), new TargetInfo(cell, map));
+        }
+
+        private static void MaintainAimMote(ref Mote mote, Vector3 pos, Map map, ThingDef moteDef, int aimStartTick, float angle, bool updatePosition)
+        {
+            if (mote == null || mote.Destroyed)
             {
-                _targetMote = MoteMaker.MakeStaticMote(cell.ToVector3Shifted(), map, VVThingDefOf.VV_Mote_ApocryphaAimTarget, 1f, makeOffscreen: true);
-                _targetMote?.ForceSpawnTick(aimStartTick);
+                mote = MoteMaker.MakeStaticMote(pos, map, moteDef, 1f, makeOffscreen: true);
+                mote?.ForceSpawnTick(aimStartTick);
             }
 
-            if (_targetMote != null)
-            {
-                _targetMote.exactRotation = direction.AngleFlat();
-                _targetMote.Maintain();
-            }
+            if (mote == null) { return; }
 
-            var chargePos = bodyCenter + direction * 0.7f;
-            if (_chargeMote == null || _chargeMote.Destroyed)
+            if (updatePosition)
             {
-                _chargeMote = MoteMaker.MakeStaticMote(chargePos, map, VVThingDefOf.VV_Mote_ApocryphaAimCharge, 1f, makeOffscreen: true);
-                _chargeMote?.ForceSpawnTick(aimStartTick);
+                mote.exactPosition = pos;
             }
-
-            if (_chargeMote != null)
-            {
-                _chargeMote.exactPosition = chargePos;
-                _chargeMote.exactRotation = direction.AngleFlat();
-                _chargeMote.Maintain();
-            }
-
-            var source = new TargetInfo(boss);
-            var target = new TargetInfo(cell, map);
-            if (_effecter == null)
-            {
-                _effecter = VVEffecterDefOf.VV_Effecter_ApocryphaAim.Spawn();
-                _effecter.Trigger(source, target);
-            }
-
-            _effecter.EffectTick(source, target);
+            mote.exactRotation = angle;
+            mote.Maintain();
         }
 
         public void CleanupVisuals()
         {
-            _effecter?.Cleanup();
-            _effecter = null;
+            EndingVfxUtility.CleanupEffecter(ref _effecter);
             _targetMote = null;
             _chargeMote = null;
         }

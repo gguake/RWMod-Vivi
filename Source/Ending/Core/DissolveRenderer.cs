@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using RimWorld;
+using System.Collections.Generic;
 using UnityEngine;
 using Verse;
 
@@ -39,7 +40,7 @@ namespace VVRace
 
         public static Material GetMaterial(string texPath)
         {
-            return GetNoiseMaterial(texPath, ShaderPath, MaterialCache, noiseFirst: false);
+            return GetNoiseMaterial(texPath, ShaderPath, MaterialCache);
         }
 
         public static Material GetMaterial(string texPath, Rot4 rotation)
@@ -52,7 +53,7 @@ namespace VVRace
             return rotation == Rot4.North ? "_north" : (rotation == Rot4.South ? "_south" : "_east");
         }
 
-        internal static Material GetNoiseMaterial(string texPath, string shaderPath, Dictionary<string, Material> cache, bool noiseFirst)
+        internal static Material GetNoiseMaterial(string texPath, string shaderPath, Dictionary<string, Material> cache)
         {
             if (cache.TryGetValue(texPath, out var cached))
             {
@@ -60,16 +61,11 @@ namespace VVRace
             }
 
             var texture = ContentFinder<Texture2D>.Get(texPath, reportFailure: false);
-            var noise = noiseFirst ? ContentFinder<Texture2D>.Get(NoiseTexPath, reportFailure: false) : null;
             Material material = null;
             if (texture != null)
             {
                 material = MaterialPool.MatFrom(texture, ShaderDatabase.LoadShader(shaderPath), Color.white);
-
-                if (!noiseFirst)
-                {
-                    noise = ContentFinder<Texture2D>.Get(NoiseTexPath, reportFailure: false);
-                }
+                var noise = ContentFinder<Texture2D>.Get(NoiseTexPath, reportFailure: false);
                 if (noise != null)
                 {
                     material.SetTexture("_DissolveTex", noise);
@@ -78,6 +74,43 @@ namespace VVRace
 
             cache[texPath] = material;
             return material;
+        }
+
+        public static void ThrowAshAndEmbers(
+            Map map,
+            Vector3 center,
+            float frontZ,
+            float halfWidth,
+            int age,
+            int ashInterval,
+            int emberInterval,
+            float ashJitterZ,
+            FloatRange ashScale,
+            FloatRange ashSpeed,
+            float emberJitterZ,
+            FloatRange emberScale,
+            FloatRange emberSpeed)
+        {
+            if (age % ashInterval == 0)
+            {
+                var pos = new Vector3(center.x + Rand.Range(-halfWidth, halfWidth), center.y, frontZ + Rand.Range(-ashJitterZ, ashJitterZ));
+                var data = FleckMaker.GetDataStatic(pos, map, VVFleckDefOf.VV_Fleck_ApocryphaAsh, ashScale.RandomInRange);
+                data.velocityAngle = Rand.Range(-35f, 35f);
+                data.velocitySpeed = ashSpeed.RandomInRange;
+                data.rotation = Rand.Range(0f, 360f);
+                data.rotationRate = Rand.Range(-50f, 50f);
+                map.flecks.CreateFleck(data);
+            }
+
+            if (age % emberInterval == 0)
+            {
+                var pos = new Vector3(center.x + Rand.Range(-halfWidth, halfWidth), center.y, frontZ + Rand.Range(-emberJitterZ, emberJitterZ));
+                var data = FleckMaker.GetDataStatic(pos, map, VVFleckDefOf.VV_Fleck_ApocryphaEmber, emberScale.RandomInRange);
+                data.velocityAngle = Rand.Range(-25f, 25f);
+                data.velocitySpeed = emberSpeed.RandomInRange;
+                data.rotation = Rand.Range(0f, 360f);
+                map.flecks.CreateFleck(data);
+            }
         }
 
         public static void Draw(Material material, Vector3 pos, Vector2 size, bool flip, float ageSecs, in DissolveStyle style, Vector2 sweepDir)

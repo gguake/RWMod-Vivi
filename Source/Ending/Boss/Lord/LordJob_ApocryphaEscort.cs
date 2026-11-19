@@ -72,11 +72,6 @@ namespace VVRace
             return target == FocusTarget;
         }
 
-        protected override bool IsProtected(Thing victim)
-        {
-            return victim is Pawn pawn && (pawn == _boss || (lord != null && pawn.GetLord() == lord));
-        }
-
         public override void ExposeData()
         {
             base.ExposeData();

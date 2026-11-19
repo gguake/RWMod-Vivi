@@ -105,9 +105,7 @@ namespace VVRace
 
             var map = Pawn.Map;
             var origin = Pawn.Position;
-            var toBoss = (origin - attacker.Position).ToVector3();
-            toBoss.y = 0f;
-            toBoss = toBoss.sqrMagnitude > 0.01f ? toBoss.normalized : Vector3.forward;
+            var toBoss = EndingVfxUtility.SafeNormalizeHorizontal((origin - attacker.Position).ToVector3(), Vector3.forward);
 
             bool Reachable(IntVec3 c) => c.InBounds(map) && c != origin && Pawn.CanReach(c, PathEndMode.OnCell, Danger.Deadly);
             bool CanShellFrom(IntVec3 c) => Reachable(c) && (attacker is Pawn p ? IsTargetPawn(p, Props.shellRange, c) : IsTargetTurret(attacker, Props.shellRange, c));

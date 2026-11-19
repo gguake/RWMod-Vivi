@@ -17,7 +17,7 @@ namespace VVRace
 
         public static void Draw(string texPath, Rot4 rotation, Vector3 pos, float scale, float ageSecs, float progress, float reveal)
         {
-            var material = DissolveRenderer.GetNoiseMaterial(texPath + DissolveRenderer.RotationSuffix(rotation), ShaderPath, MaterialCache, noiseFirst: true);
+            var material = DissolveRenderer.GetNoiseMaterial(texPath + DissolveRenderer.RotationSuffix(rotation), ShaderPath, MaterialCache);
             if (material == null) { return; }
 
             PropertyBlock.Clear();
@@ -42,6 +42,24 @@ namespace VVRace
                 data.instanceColor = color;
             }
             map.flecks.CreateFleck(data);
+        }
+
+        public static void ThrowWispWithSpark(
+            Map map,
+            Vector3 start,
+            Vector3 target,
+            float travelSecs,
+            FloatRange wispScale,
+            float sparkChance,
+            FloatRange sparkScale,
+            Color sparkColor)
+        {
+            ThrowConverging(map, VVFleckDefOf.VV_Fleck_ApocryphaDarkWisp, start, target, travelSecs, wispScale.RandomInRange, null, alignToVelocity: true);
+
+            if (Rand.Chance(sparkChance))
+            {
+                ThrowConverging(map, VVFleckDefOf.VV_Fleck_ApocryphaManifestSpark, start, target, travelSecs, sparkScale.RandomInRange, sparkColor, alignToVelocity: false);
+            }
         }
     }
 }

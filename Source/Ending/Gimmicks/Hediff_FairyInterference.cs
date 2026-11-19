@@ -32,7 +32,7 @@ namespace VVRace
                 if (disappears == null || disappears.ticksToDisappear <= 0) { return tip; }
 
                 var remaining = LocalizeString_Etc.VV_Hediff_FairyInterferenceRemaining.Translate(disappears.ticksToDisappear.ToStringTicksToPeriod()).Resolve();
-                return tip.NullOrEmpty() ? remaining : tip + "\n" + remaining;
+                return EndingVfxUtility.AppendTipLine(tip, remaining);
             }
         }
 
@@ -127,11 +127,7 @@ namespace VVRace
         private void EndAura()
         {
             _shimmerMote = null;
-
-            if (_auraEffecter == null) { return; }
-
-            _auraEffecter.Cleanup();
-            _auraEffecter = null;
+            EndingVfxUtility.CleanupEffecter(ref _auraEffecter);
         }
 
         public override void PostRemoved()
@@ -145,11 +141,7 @@ namespace VVRace
             base.Notify_PawnDied(dinfo, culprit);
 
             EndAura();
-
-            if (pawn?.health != null && pawn.health.hediffSet.hediffs.Contains(this))
-            {
-                pawn.health.RemoveHediff(this);
-            }
+            EndingVfxUtility.RemoveSelfIfPresent(pawn, this);
         }
 
         public override IEnumerable<Gizmo> GetGizmos()
@@ -162,47 +154,33 @@ namespace VVRace
             if (!DebugSettings.godMode || pawn == null || !pawn.Spawned) { yield break; }
 
             var boss = ApocryphaGimmicks.FindBoss(pawn.Map);
-            var bossBound = ApocryphaGimmicks.IsBoundBoss(boss);
+            var releaseDisabled = ApocryphaGimmicks.IsBoundBoss(boss) ? null : "No bound Asphodel on this map.";
+            var teleportDisabled = boss != null ? null : "No Asphodel on this map.";
 
-            var commandRelease = new Command_Action()
+            yield return EndingVfxUtility.DevAction("DEV: Release bond now", DebugReleaseBondNow, releaseDisabled);
+            yield return EndingVfxUtility.DevAction("DEV: Teleport next to Asphodel", DebugTeleportNextToBoss, teleportDisabled);
+        }
+
+        private void DebugReleaseBondNow()
+        {
+            var target = ApocryphaGimmicks.FindBoss(pawn.Map);
+            if (ApocryphaGimmicks.IsBoundBoss(target, out var targetComp) && pawn.health.hediffSet.hediffs.Contains(this))
             {
-                defaultLabel = "DEV: Release bond now",
-                action = () =>
-                {
-                    var target = ApocryphaGimmicks.FindBoss(pawn.Map);
-                    if (ApocryphaGimmicks.IsBoundBoss(target, out var targetComp) && pawn.health.hediffSet.hediffs.Contains(this))
-                    {
-                        TriggerManaBackflow(target, targetComp);
-                    }
-                },
-            };
-            if (!bossBound)
-            {
-                commandRelease.Disable("No bound Asphodel on this map.");
+                TriggerManaBackflow(target, targetComp);
             }
-            yield return commandRelease;
+        }
 
-            var commandTeleport = new Command_Action()
-            {
-                defaultLabel = "DEV: Teleport next to Asphodel",
-                action = () =>
-                {
-                    var target = ApocryphaGimmicks.FindBoss(pawn.Map);
-                    if (target == null) { return; }
+        private void DebugTeleportNextToBoss()
+        {
+            var target = ApocryphaGimmicks.FindBoss(pawn.Map);
+            if (target == null) { return; }
 
-                    var map = target.Map;
-                    if (CellFinder.TryFindRandomCellNear(target.Position, map, 2, c => c != target.Position && c.Standable(map) && c.InHorDistOf(target.Position, 2f), out var cell))
-                    {
-                        pawn.Position = cell;
-                        pawn.Notify_Teleported();
-                    }
-                },
-            };
-            if (boss == null)
+            var map = target.Map;
+            if (CellFinder.TryFindRandomCellNear(target.Position, map, 2, c => c != target.Position && c.Standable(map) && c.InHorDistOf(target.Position, 2f), out var cell))
             {
-                commandTeleport.Disable("No Asphodel on this map.");
+                pawn.Position = cell;
+                pawn.Notify_Teleported();
             }
-            yield return commandTeleport;
         }
     }
 }

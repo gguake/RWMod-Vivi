@@ -54,7 +54,10 @@ namespace VVRace
 
         public abstract IntVec3 GetGuardPoint(Pawn pawn);
 
-        protected abstract bool IsProtected(Thing victim);
+        protected virtual bool IsProtected(Thing victim)
+        {
+            return victim is Pawn pawn && (pawn == _boss || (lord != null && pawn.GetLord() == lord));
+        }
 
         protected virtual bool IgnoresGuardRadius(Thing target)
         {

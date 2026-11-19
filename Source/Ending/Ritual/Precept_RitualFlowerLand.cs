@@ -25,24 +25,34 @@ namespace VVRace
             var icon = ContentFinder<Texture2D>.Get(def.iconPath, reportFailure: false);
             Find.Targeter.BeginTargeting(
                 TargetingParameters.ForCell(),
-                action: target =>
-                {
-                    var flower = targetInfo.Thing;
-                    if ((flower != null && (flower.Destroyed || !flower.Spawned)) || targetInfo.Map != map) { return; }
-
-                    if (!FlowerLandUtility.ConvertibleCells(map, target.Cell, Radius).Any())
-                    {
-                        Messages.Message(LocalizeString_Message.VV_Message_FlowerLandNoGround.Translate(), new LookTargets(target.Cell, map), MessageTypeDefOf.RejectInput, false);
-                        return;
-                    }
-
-                    Find.WindowStack.Add(MakeDialog(targetInfo, target.Cell, obligation, onConfirm, organizer, forcedForRole, selectedPawn));
-                },
+                action: target => OnTargetCellSelected(targetInfo, map, target.Cell, obligation, onConfirm, organizer, forcedForRole, selectedPawn),
                 highlightAction: target => FlowerLandUtility.DrawPreview(map, target.Cell, Radius),
                 targetValidator: target => target.Cell.InBounds(map) && !target.Cell.Fogged(map),
                 mouseAttachment: icon);
 
             return null;
+        }
+
+        private void OnTargetCellSelected(
+            TargetInfo targetInfo,
+            Map map,
+            IntVec3 cell,
+            RitualObligation obligation,
+            Action onConfirm,
+            Pawn organizer,
+            Dictionary<string, Pawn> forcedForRole,
+            Pawn selectedPawn)
+        {
+            var flower = targetInfo.Thing;
+            if ((flower != null && (flower.Destroyed || !flower.Spawned)) || targetInfo.Map != map) { return; }
+
+            if (!FlowerLandUtility.ConvertibleCells(map, cell, Radius).Any())
+            {
+                Messages.Message(LocalizeString_Message.VV_Message_FlowerLandNoGround.Translate(), new LookTargets(cell, map), MessageTypeDefOf.RejectInput, false);
+                return;
+            }
+
+            Find.WindowStack.Add(MakeDialog(targetInfo, cell, obligation, onConfirm, organizer, forcedForRole, selectedPawn));
         }
 
         private Window MakeDialog(TargetInfo targetInfo, IntVec3 cell, RitualObligation obligation, Action onConfirm, Pawn organizer, Dictionary<string, Pawn> forcedForRole, Pawn selectedPawn)

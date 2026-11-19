@@ -33,19 +33,14 @@ namespace VVRace
             get
             {
                 var level = LocalizeString_Etc.VV_Hediff_DoomBlightLevel.Translate(CurStageIndex + 1, DoomBlightUtility.MaxBlightLevel).Resolve();
-                var tip = base.TipStringExtra;
-                return tip.NullOrEmpty() ? level : level + "\n" + tip;
+                return EndingVfxUtility.AppendTipLine(base.TipStringExtra, level);
             }
         }
 
         public override void Notify_PawnDied(DamageInfo? dinfo, Hediff culprit = null)
         {
             base.Notify_PawnDied(dinfo, culprit);
-
-            if (pawn?.health != null && pawn.health.hediffSet.hediffs.Contains(this))
-            {
-                pawn.health.RemoveHediff(this);
-            }
+            EndingVfxUtility.RemoveSelfIfPresent(pawn, this);
         }
     }
 }

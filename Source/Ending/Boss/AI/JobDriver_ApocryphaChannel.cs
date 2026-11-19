@@ -58,8 +58,7 @@ namespace VVRace
                 .WithFinishAction(() =>
                 {
                     pawn.TryGetComp<CompApocrypha>()?.Channel.Notify_ChannelJobEnded();
-                    _effecter?.Cleanup();
-                    _effecter = null;
+                    EndingVfxUtility.CleanupEffecter(ref _effecter);
                     _vortexMote = null;
                 })
                 .WithDefaultCompleteMode(ToilCompleteMode.Never)
@@ -86,15 +85,7 @@ namespace VVRace
                 _vortexMote.Maintain();
             }
 
-            var source = new TargetInfo(everflower);
-            var target = new TargetInfo(pawn);
-            if (_effecter == null)
-            {
-                _effecter = VVEffecterDefOf.VV_Effecter_ApocryphaChannel.Spawn();
-                _effecter.Trigger(source, target);
-            }
-
-            _effecter.EffectTick(source, target);
+            EndingVfxUtility.MaintainEffecter(ref _effecter, VVEffecterDefOf.VV_Effecter_ApocryphaChannel, new TargetInfo(everflower), new TargetInfo(pawn));
         }
     }
 }

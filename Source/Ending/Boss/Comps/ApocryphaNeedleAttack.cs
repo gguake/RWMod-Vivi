@@ -207,8 +207,7 @@ namespace VVRace
             if (!BreachInProgress) { return false; }
 
             var now = GenTicks.TicksGame;
-            if (_comp.Phase != ApocryphaPhase.Bound || now > _breachDeadlineTick || (_breachUntilTick >= 0 && now > _breachUntilTick)
-                || Pawn.CanReach(_breachBlockedCell, PathEndMode.OnCell, Danger.Deadly))
+            if (ShouldEndBreach(now))
             {
                 EndBreach();
                 return false;
@@ -220,6 +219,14 @@ namespace VVRace
             }
 
             return true;
+        }
+
+        private bool ShouldEndBreach(int now)
+        {
+            return _comp.Phase != ApocryphaPhase.Bound
+                || now > _breachDeadlineTick
+                || (_breachUntilTick >= 0 && now > _breachUntilTick)
+                || Pawn.CanReach(_breachBlockedCell, PathEndMode.OnCell, Danger.Deadly);
         }
 
         public void EndBreach()
@@ -238,28 +245,25 @@ namespace VVRace
             SyncStuckNeedleHediff();
             _comp.TakeVitalityDamage(_comp.MaxVitality * Props.needleStickVitalityDamage);
 
-            var stuck = StuckNeedleCount;
-            if (stuck >= Props.unboundNeedleCount && !_stunned)
+            var allStuck = StuckNeedleCount >= Props.unboundNeedleCount && !_stunned;
+            if (allStuck)
             {
                 _stunned = true;
-                _comp.GimmickStun(Props.allNeedlesStuckStunTicks, null);
-                _comp.Channel.Interrupt();
-                _comp.Breath.Cancel();
+            }
 
+            _comp.GimmickStun(allStuck ? Props.allNeedlesStuckStunTicks : Props.needleStickStunTicks, null);
+            _comp.Channel.Interrupt();
+            _comp.Breath.Cancel();
+
+            if (allStuck)
+            {
                 _comp.SpawnEffecter(VVEffecterDefOf.VV_Effecter_ApocryphaStaggered, ApocryphaGimmicks.GetBossBodyOffset(Pawn));
                 ApocryphaUtility.ShakeCamera(Pawn.Map, 1.5f);
                 Messages.Message(LocalizeString_Message.VV_Message_ApocryphaAllNeedlesStuck.Translate(), Pawn, MessageTypeDefOf.PositiveEvent);
             }
             else
             {
-                _comp.GimmickStun(Props.needleStickStunTicks, null);
-                _comp.Channel.Interrupt();
-                _comp.Breath.Cancel();
-
-                Messages.Message(
-                    LocalizeString_Message.VV_Message_ApocryphaNeedleStuck.Translate(),
-                    Pawn,
-                    MessageTypeDefOf.PositiveEvent);
+                Messages.Message(LocalizeString_Message.VV_Message_ApocryphaNeedleStuck.Translate(), Pawn, MessageTypeDefOf.PositiveEvent);
             }
         }
 
@@ -380,8 +384,8 @@ namespace VVRace
                 var cell = FindPlantCell(map, center, chosen);
                 chosen.Add(cell);
 
-                var outDir = (cell.ToVector3Shifted() - _comp.BodyCenter).Yto0();
-                needle.ScatterTo(cell, outDir.sqrMagnitude > 0.01f ? outDir.normalized : Vector3.forward);
+                var outDir = EndingVfxUtility.SafeNormalizeHorizontal(cell.ToVector3Shifted() - _comp.BodyCenter, Vector3.forward);
+                needle.ScatterTo(cell, outDir);
             }
         }
 

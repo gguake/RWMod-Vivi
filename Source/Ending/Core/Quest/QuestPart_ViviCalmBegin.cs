@@ -13,7 +13,7 @@ namespace VVRace
             base.Notify_QuestSignalReceived(signal);
             if (signal.tag != inSignal) { return; }
 
-            var map = anchor != null && !anchor.Destroyed ? anchor.MapHeld : null;
+            var map = ViviEndingUtility.AnchorMapOf(anchor);
             if (map == null) { return; }
 
             ViviEndingUtility.RunStep("calm: purge queued threats", () => ViviEndingUtility.PurgeQueuedThreats(map));

@@ -239,21 +239,19 @@ namespace VVRace
 
             if (DebugSettings.godMode && Spawned && EnshrinedEverflower == null)
             {
-                yield return new Command_Action()
-                {
-                    defaultLabel = "DEV: Enshrine everflower now",
-                    action = () =>
-                    {
-                        var everflower = Map.listerThings.ThingsOfDef(VVThingDefOf.VV_Everflower)
-                            .OfType<ArcanePlant_Everflower>()
-                            .Where(v => v.Spawned && !v.EverflowerComp.IsEnshrined)
-                            .OrderByDescending(v => v.AttunementLevel)
-                            .FirstOrDefault();
-
-                        everflower?.Teleport(Position);
-                    }
-                };
+                yield return EndingVfxUtility.DevAction("DEV: Enshrine everflower now", DebugEnshrineEverflower);
             }
+        }
+
+        private void DebugEnshrineEverflower()
+        {
+            var everflower = Map.listerThings.ThingsOfDef(VVThingDefOf.VV_Everflower)
+                .OfType<ArcanePlant_Everflower>()
+                .Where(v => v.Spawned && !v.EverflowerComp.IsEnshrined)
+                .OrderByDescending(v => v.AttunementLevel)
+                .FirstOrDefault();
+
+            everflower?.Teleport(Position);
         }
 
         private IEnumerable<Gizmo> GetEnshrinedEverflowerGizmos()
@@ -263,11 +261,18 @@ namespace VVRace
 
             foreach (var gizmo in everflower.GetGizmos())
             {
-                if (gizmo is Designator) { continue; }
-                if (gizmo is Command command && (command.hotKey == KeyBindingDefOf.Designator_Deconstruct || command.hotKey == KeyBindingDefOf.Command_ItemForbid)) { continue; }
+                if (ShouldHideEverflowerGizmo(gizmo)) { continue; }
 
                 yield return gizmo;
             }
+        }
+
+        private static bool ShouldHideEverflowerGizmo(Gizmo gizmo)
+        {
+            if (gizmo is Designator) { return true; }
+
+            return gizmo is Command command
+                && (command.hotKey == KeyBindingDefOf.Designator_Deconstruct || command.hotKey == KeyBindingDefOf.Command_ItemForbid);
         }
     }
 }

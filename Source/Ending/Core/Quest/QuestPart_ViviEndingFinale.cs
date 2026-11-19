@@ -32,7 +32,7 @@ namespace VVRace
         private Pawn _queen;
         private int _startTick = -1;
 
-        private Map AnchorMap => anchor != null && !anchor.Destroyed ? anchor.MapHeld : null;
+        private Map AnchorMap => ViviEndingUtility.AnchorMapOf(anchor);
 
         private Vector3 BudOffset => anchor?.EverflowerComp?.RitualEffecterOffset ?? Vector3.zero;
 
@@ -156,7 +156,7 @@ namespace VVRace
             var count = Mathf.Clamp(view.Area / PetalCellsPerFleck, PetalMinPerTick, PetalMaxPerTick);
             for (int i = 0; i < count; ++i)
             {
-                var position = new Vector3(Rand.Range(view.minX, view.maxX + 1f), 0f, Rand.Range(view.minZ, view.maxZ + 1f));
+                var position = EndingVfxUtility.RandomPointInRect(view);
                 map.flecks.CreateFleck(new FleckCreationData()
                 {
                     def = petalDef,

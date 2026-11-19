@@ -40,7 +40,7 @@ namespace VVRace
 
         public bool IsBossAlive => _boss != null && !_boss.Destroyed && !_boss.Dead && _boss.Spawned;
 
-        private Map AnchorMap => anchor != null && !anchor.Destroyed ? anchor.MapHeld : null;
+        private Map AnchorMap => ViviEndingUtility.AnchorMapOf(anchor);
 
         public override IEnumerable<GlobalTargetInfo> QuestLookTargets
         {

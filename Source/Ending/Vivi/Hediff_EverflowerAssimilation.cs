@@ -78,7 +78,7 @@ namespace VVRace
             var hediff = (Hediff_EverflowerAssimilation)HediffMaker.MakeHediff(VVHediffDefOf.VV_EverflowerFullAssimilation, pawn);
             hediff.everflower = everflower;
             hediff._holdCell = everflower.Position + IntVec3.South;
-            hediff._glideFrom = (pawn.Position.ToVector3Shifted() - hediff._holdCell.ToVector3Shifted()).WithY(0f);
+            hediff._glideFrom = EndingVfxUtility.OffsetFromCell(pawn.Position.ToVector3Shifted(), hediff._holdCell);
             pawn.health.AddHediff(hediff);
 
             if (!altar.HoldResonator(pawn))
@@ -168,10 +168,7 @@ namespace VVRace
 
             _broken = true;
             ViviEndingQuest.Current?.Notify_AssimilationBroken(pawn);
-            if (pawn.health.hediffSet.hediffs.Contains(this))
-            {
-                pawn.health.RemoveHediff(this);
-            }
+            EndingVfxUtility.RemoveSelfIfPresent(pawn, this);
         }
 
         public void TickHeld(int now)
@@ -234,10 +231,11 @@ namespace VVRace
                 var from = toBody ? bud : body;
                 var to = toBody ? body : bud;
                 var delta = (to - from).Yto0();
-                var side = new Vector3(delta.z, 0f, -delta.x).normalized;
+                var side = EndingVfxUtility.HorizontalPerpendicular(delta).normalized;
                 var start = from + side * Rand.Range(-0.35f, 0.35f);
+                var scale = Rand.Range(0.3f, 0.55f) * strength;
 
-                ManifestationRenderer.ThrowConverging(map, VVFleckDefOf.VV_Fleck_AssimilationMote, start, to, ParticleLifeSecs, Rand.Range(0.3f, 0.55f) * strength, null, alignToVelocity: false);
+                ManifestationRenderer.ThrowConverging(map, VVFleckDefOf.VV_Fleck_AssimilationMote, start, to, ParticleLifeSecs, scale, null, alignToVelocity: false);
             }
 
             if ((now + pawn.thingIDNumber) % CircleInterval == 0 && !IsReleasing)

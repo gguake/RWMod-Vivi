@@ -82,6 +82,18 @@ namespace VVRace
             return requireNonHostile ? null : hostile;
         }
 
+        private static EffecterDef ApocryphaVanishEffect => VVEffecterDefOf.VV_Effecter_ApocryphaVanish ?? EffecterDefOf.Skip_EntryNoDelay;
+
+        public static Map AnchorMapOf(Thing anchor)
+        {
+            return anchor != null && !anchor.Destroyed ? anchor.MapHeld : null;
+        }
+
+        public static QuestPart_Delay FindCalmDelayPart(Quest quest)
+        {
+            return quest?.PartsListForReading.OfType<QuestPart_Delay>().FirstOrDefault(v => v.debugLabel == ViviEndingBloomParts.CalmDelayLabel);
+        }
+
         public static Pawn ResonatorOf(ArcanePlant_Everflower everflower)
         {
             return everflower?.EverflowerComp?.LinkedPawns?.FirstOrDefault();
@@ -145,7 +157,7 @@ namespace VVRace
 
         public static int VanishAllTitanicHornets(Map map)
         {
-            return VanishTitanicHornets(map, VVEffecterDefOf.VV_Effecter_ApocryphaVanish ?? EffecterDefOf.Skip_EntryNoDelay, null);
+            return VanishTitanicHornets(map, ApocryphaVanishEffect, null);
         }
 
         private static int VanishTitanicHornets(Map map, EffecterDef vanishEffect, Predicate<Pawn> filter)
@@ -209,9 +221,17 @@ namespace VVRace
 
         public static void EndOminousSilence()
         {
+            EndOminousSilenceExcept(null);
+        }
+
+        internal static void EndOminousSilenceExcept(Map keepMap)
+        {
             foreach (var map in Find.Maps)
             {
-                EndOminousSilence(map);
+                if (map != keepMap)
+                {
+                    EndOminousSilence(map);
+                }
             }
         }
 
@@ -238,9 +258,17 @@ namespace VVRace
 
         public static void EndGoldenBloom()
         {
+            EndGoldenBloomExcept(null);
+        }
+
+        internal static void EndGoldenBloomExcept(Map keepMap)
+        {
             foreach (var map in Find.Maps)
             {
-                EndGoldenBloom(map);
+                if (map != keepMap)
+                {
+                    EndGoldenBloom(map);
+                }
             }
         }
 
@@ -274,14 +302,13 @@ namespace VVRace
             var map = boss.Map;
             VanishEscorts(boss);
 
-            var vanishEffect = VVEffecterDefOf.VV_Effecter_ApocryphaVanish ?? EffecterDefOf.Skip_EntryNoDelay;
-            vanishEffect.Spawn(boss.Position, map, 2.5f).Cleanup();
+            ApocryphaVanishEffect.Spawn(boss.Position, map, 2.5f).Cleanup();
             boss.Destroy(DestroyMode.Vanish);
         }
 
         public static void VanishEscorts(Pawn boss)
         {
-            var vanishEffect = VVEffecterDefOf.VV_Effecter_ApocryphaVanish ?? EffecterDefOf.Skip_EntryNoDelay;
+            var vanishEffect = ApocryphaVanishEffect;
             foreach (var hornet in ApocryphaUtility.GetEscorts(boss))
             {
                 if (hornet == null || hornet.Destroyed) { continue; }

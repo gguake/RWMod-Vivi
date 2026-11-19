@@ -52,51 +52,60 @@ namespace VVRace
                 return ChargeJob(pawn, comp, target, range);
             }
 
-            if (comp.Phase == ApocryphaPhase.Bound && target != null && GenTicks.TicksGame >= comp.NextApproachTick
-                && comp.TrySkipToStealTarget(target, range))
+            if (comp.Phase == ApocryphaPhase.Bound)
+            {
+                var boundJob = TryGiveBoundJob(pawn, comp, target, range);
+                if (boundJob != null) { return boundJob; }
+            }
+
+            return WanderOrWaitJob(pawn, comp);
+        }
+
+        private static Job TryGiveBoundJob(Pawn pawn, CompApocrypha comp, Thing target, float range)
+        {
+            if (target != null && GenTicks.TicksGame >= comp.NextApproachTick && comp.TrySkipToStealTarget(target, range))
             {
                 comp.Notify_Approached();
                 return WaitJob(SkipRecoverTicks);
             }
 
-            if (comp.Phase == ApocryphaPhase.Bound && comp.Targeting.TryFindPursuitCell(out var pursuitCell))
+            if (comp.Targeting.TryFindPursuitCell(out var pursuitCell))
             {
-                return PursueJob(pursuitCell);
+                return MakeMoveJob(VVJobDefOf.VV_ApocryphaPursue, pursuitCell, 300);
             }
 
-            if (target != null)
+            if (target == null) { return null; }
+
+            if (comp.NeedleAttack.BreachInProgress)
             {
-                if (comp.NeedleAttack.BreachInProgress)
-                {
-                    if (comp.NeedleAttack.TryContinueBreach(out var standCell))
-                    {
-                        return BreachJob(pawn, standCell);
-                    }
-                }
-                else if (GenTicks.TicksGame >= comp.NextApproachTick)
-                {
-                    comp.Notify_Approached();
-
-                    if (comp.NeedleAttack.TryStartBreach(target, out var breachCell))
-                    {
-                        return BreachJob(pawn, breachCell);
-                    }
-
-                    var approachJob = ApproachJob(pawn, comp, target, range);
-                    if (approachJob != null)
-                    {
-                        return approachJob;
-                    }
-                }
+                return comp.NeedleAttack.TryContinueBreach(out var standCell) ? BreachJob(pawn, standCell) : null;
             }
 
-            return WanderOrWaitJob(pawn, comp);
+            if (GenTicks.TicksGame < comp.NextApproachTick) { return null; }
+
+            comp.Notify_Approached();
+
+            if (comp.NeedleAttack.TryStartBreach(target, out var breachCell))
+            {
+                return BreachJob(pawn, breachCell);
+            }
+
+            return ApproachJob(pawn, comp, target, range);
         }
 
         private static Job WaitJob(int ticks)
         {
             var job = JobMaker.MakeJob(VVJobDefOf.VV_ApocryphaWait);
             job.expiryInterval = ticks;
+            return job;
+        }
+
+        private static Job MakeMoveJob(JobDef def, IntVec3 target, int expiryTicks)
+        {
+            var job = JobMaker.MakeJob(def, target);
+            job.locomotionUrgency = LocomotionUrgency.Jog;
+            job.expiryInterval = expiryTicks;
+            job.checkOverrideOnExpire = true;
             return job;
         }
 
@@ -124,13 +133,7 @@ namespace VVRace
                 cell = CellFinder.StandableCellNear(point, map, 4f, Reachable);
             }
 
-            if (!cell.IsValid) { return null; }
-
-            var job = JobMaker.MakeJob(VVJobDefOf.VV_ApocryphaApproach, cell);
-            job.locomotionUrgency = LocomotionUrgency.Jog;
-            job.expiryInterval = 2500;
-            job.checkOverrideOnExpire = true;
-            return job;
+            return cell.IsValid ? MakeMoveJob(VVJobDefOf.VV_ApocryphaApproach, cell, 2500) : null;
         }
 
         private static Job BreachJob(Pawn pawn, IntVec3 standCell)
@@ -140,20 +143,7 @@ namespace VVRace
                 return WaitJob(BreachRecheckTicks);
             }
 
-            var job = JobMaker.MakeJob(VVJobDefOf.VV_ApocryphaApproach, standCell);
-            job.locomotionUrgency = LocomotionUrgency.Jog;
-            job.expiryInterval = BreachRecheckTicks * 5;
-            job.checkOverrideOnExpire = true;
-            return job;
-        }
-
-        private static Job PursueJob(IntVec3 cell)
-        {
-            var job = JobMaker.MakeJob(VVJobDefOf.VV_ApocryphaPursue, cell);
-            job.locomotionUrgency = LocomotionUrgency.Jog;
-            job.expiryInterval = 300;
-            job.checkOverrideOnExpire = true;
-            return job;
+            return MakeMoveJob(VVJobDefOf.VV_ApocryphaApproach, standCell, BreachRecheckTicks * 5);
         }
 
         private static IntVec3 EdgeCellToward(Pawn pawn, Thing target, float range)
@@ -194,11 +184,7 @@ namespace VVRace
                 return WaitJob(comp.Props.wanderWaitTicks.RandomInRange);
             }
 
-            var job = JobMaker.MakeJob(VVJobDefOf.VV_ApocryphaWander, dest);
-            job.locomotionUrgency = LocomotionUrgency.Jog;
-            job.expiryInterval = 2500;
-            job.checkOverrideOnExpire = true;
-            return job;
+            return MakeMoveJob(VVJobDefOf.VV_ApocryphaWander, dest, 2500);
         }
 
         private static Job ChargeJob(Pawn pawn, CompApocrypha comp, Thing target, float range)
@@ -235,11 +221,7 @@ namespace VVRace
                 return WaitJob(ChargeRepathTicks.RandomInRange);
             }
 
-            var job = JobMaker.MakeJob(VVJobDefOf.VV_ApocryphaCharge, goal);
-            job.locomotionUrgency = LocomotionUrgency.Jog;
-            job.expiryInterval = ChargeRepathTicks.RandomInRange;
-            job.checkOverrideOnExpire = true;
-            return job;
+            return MakeMoveJob(VVJobDefOf.VV_ApocryphaCharge, goal, ChargeRepathTicks.RandomInRange);
         }
 
         public static bool CanSmash(Thing blocker, Thing stealTarget)

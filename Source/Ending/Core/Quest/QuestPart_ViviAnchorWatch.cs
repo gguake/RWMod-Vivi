@@ -12,7 +12,7 @@ namespace VVRace
         public string inSignalBloomCondensed;
         public string outSignalAnchorLost;
 
-        private Map AnchorMap => anchor != null && !anchor.Destroyed ? anchor.MapHeld : null;
+        private Map AnchorMap => ViviEndingUtility.AnchorMapOf(anchor);
 
         public override void QuestPartTick()
         {
@@ -59,18 +59,11 @@ namespace VVRace
             var conditionDef = VVGameConditionDefOf.VV_GoldenBloom;
             if (conditionDef == null) { return; }
 
-            foreach (var other in Find.Maps)
-            {
-                if (other != map)
-                {
-                    ViviEndingUtility.EndGoldenBloom(other);
-                }
-            }
+            ViviEndingUtility.EndGoldenBloomExcept(map);
 
             if (GoldenBloomUtility.EndingConditions(map).Any()) { return; }
 
             var existing = map.gameConditionManager.ActiveConditions.OfType<GameCondition_GoldenBloom>().FirstOrDefault();
-
             if (existing != null)
             {
                 existing.Permanent = true;
@@ -92,16 +85,10 @@ namespace VVRace
             var conditionDef = VVGameConditionDefOf.VV_OminousSilence;
             if (conditionDef == null) { return; }
 
-            var calm = quest.PartsListForReading.OfType<QuestPart_Delay>().FirstOrDefault(v => v.debugLabel == ViviEndingBloomParts.CalmDelayLabel);
+            var calm = ViviEndingUtility.FindCalmDelayPart(quest);
             if (calm == null || calm.State != QuestPartState.Enabled || calm.TicksLeft <= 0) { return; }
 
-            foreach (var other in Find.Maps)
-            {
-                if (other != map)
-                {
-                    ViviEndingUtility.EndOminousSilence(other);
-                }
-            }
+            ViviEndingUtility.EndOminousSilenceExcept(map);
 
             if (map.gameConditionManager.ConditionIsActive(conditionDef)) { return; }
 

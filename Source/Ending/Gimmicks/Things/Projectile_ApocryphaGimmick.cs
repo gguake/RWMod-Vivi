@@ -10,14 +10,7 @@ namespace VVRace
         private ApocryphaProjectileExtension _extension;
         protected ApocryphaProjectileExtension Extension => _extension ?? (_extension = def.GetModExtension<ApocryphaProjectileExtension>());
 
-        protected Vector3 FlightDirection
-        {
-            get
-            {
-                var direction = (destination - origin).Yto0();
-                return direction.sqrMagnitude > 0.0001f ? direction.normalized : Vector3.forward;
-            }
-        }
+        protected Vector3 FlightDirection => EndingVfxUtility.SafeNormalizeHorizontal(destination - origin, Vector3.forward, minSqrMagnitude: 0.0001f);
 
         protected float CurrentArcHeight
         {

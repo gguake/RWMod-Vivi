@@ -127,15 +127,8 @@ namespace VVRace
         {
             if (length < 0.1f || width <= 0f) { return; }
 
-            var angle = Mathf.Atan2(-direction.z, direction.x) * Mathf.Rad2Deg;
-            var center = start + direction * (length * 0.5f);
-            center.y = AltitudeLayer.MoteLow.AltitudeFor();
-
-            var matrix = Matrix4x4.TRS(center, Quaternion.AngleAxis(angle, Vector3.up), new Vector3(length, 1f, width));
-
-            var color = breach ? LaneColorBreach : bossInside ? LaneColorBossInside : LaneColor;
-            color.a *= alpha;
-            var coreColor = breach ? LaneCoreColorBreach : bossInside ? LaneCoreColorBossInside : LaneCoreColor;
+            var matrix = MakeLaneMatrix(start, direction, length, width, AltitudeLayer.MoteLow.AltitudeFor());
+            SelectLaneColors(breach, bossInside, alpha, out var color, out var coreColor);
 
             PropertyBlock.Clear();
             PropertyBlock.SetFloat(ShaderPropertyIDs.AgeSecs, LinkRenderUtility.WrappedAgeSecs);
@@ -150,13 +143,7 @@ namespace VVRace
             var lotusPos = start;
             lotusPos.y = AltitudeLayer.MoteLow.AltitudeFor() + LayerAltitudeStep;
             var lotusSize = (width * 0.5f - LaneEdgeInset) * 2f / LotusRingRadius;
-            PropertyBlock.Clear();
-            PropertyBlock.SetFloat(ShaderPropertyIDs.AgeSecs, aimSecs);
-            PropertyBlock.SetFloat(DurationPropertyId, Mathf.Max(0.1f, aimDuration));
-            PropertyBlock.SetFloat(SeedPropertyId, seed);
-            PropertyBlock.SetColor(ShaderPropertyIDs.Color, color);
-            PropertyBlock.SetColor(CoreColorPropertyId, coreColor);
-            Graphics.DrawMesh(MeshPool.plane10, Matrix4x4.TRS(lotusPos, Quaternion.identity, new Vector3(lotusSize, 1f, lotusSize)), LotusMat, 0, null, 0, PropertyBlock);
+            DrawLotusCircle(lotusPos, lotusSize, aimSecs, Mathf.Max(0.1f, aimDuration), seed, color, coreColor);
         }
 
         public static void DrawPlantedMarker(Vector3 pos, float ageSecs, float alpha, int seed)
@@ -166,24 +153,14 @@ namespace VVRace
             color.a *= alpha * pulse;
 
             pos.y = AltitudeLayer.MoteLow.AltitudeFor();
-            PropertyBlock.Clear();
-            PropertyBlock.SetFloat(ShaderPropertyIDs.AgeSecs, ageSecs);
-            PropertyBlock.SetFloat(DurationPropertyId, PlantedMarkerBloomSecs);
-            PropertyBlock.SetFloat(SeedPropertyId, seed);
-            PropertyBlock.SetColor(ShaderPropertyIDs.Color, color);
-            PropertyBlock.SetColor(CoreColorPropertyId, LaneCoreColor);
-            Graphics.DrawMesh(MeshPool.plane10, Matrix4x4.TRS(pos, Quaternion.identity, new Vector3(PlantedMarkerDrawSize, 1f, PlantedMarkerDrawSize)), LotusMat, 0, null, 0, PropertyBlock);
+            DrawLotusCircle(pos, PlantedMarkerDrawSize, ageSecs, PlantedMarkerBloomSecs, seed, color, LaneCoreColor);
         }
 
         public static void DrawWarp(Vector3 start, Vector3 direction, float length, float front, float ageSecs, float alpha)
         {
             if (length < 0.1f || alpha <= 0f) { return; }
 
-            var angle = Mathf.Atan2(-direction.z, direction.x) * Mathf.Rad2Deg;
-            var center = start + direction * (length * 0.5f);
-            center.y = AltitudeLayer.MoteOverhead.AltitudeFor();
-            var matrix = Matrix4x4.TRS(center, Quaternion.AngleAxis(angle, Vector3.up), new Vector3(length, 1f, WarpDrawWidth));
-
+            var matrix = MakeLaneMatrix(start, direction, length, WarpDrawWidth, AltitudeLayer.MoteOverhead.AltitudeFor());
             var color = WarpColor;
             color.a *= alpha;
 
@@ -194,6 +171,46 @@ namespace VVRace
             PropertyBlock.SetFloat(WidthPropertyId, WarpDrawWidth);
             PropertyBlock.SetFloat(FrontPropertyId, front);
             Graphics.DrawMesh(MeshPool.plane10, matrix, WarpMat, 0, null, 0, PropertyBlock);
+        }
+
+        private static Matrix4x4 MakeLaneMatrix(Vector3 start, Vector3 direction, float length, float width, float altitude)
+        {
+            var angle = Mathf.Atan2(-direction.z, direction.x) * Mathf.Rad2Deg;
+            var center = start + direction * (length * 0.5f);
+            center.y = altitude;
+            return Matrix4x4.TRS(center, Quaternion.AngleAxis(angle, Vector3.up), new Vector3(length, 1f, width));
+        }
+
+        private static void SelectLaneColors(bool breach, bool bossInside, float alpha, out Color color, out Color coreColor)
+        {
+            if (breach)
+            {
+                color = LaneColorBreach;
+                coreColor = LaneCoreColorBreach;
+            }
+            else if (bossInside)
+            {
+                color = LaneColorBossInside;
+                coreColor = LaneCoreColorBossInside;
+            }
+            else
+            {
+                color = LaneColor;
+                coreColor = LaneCoreColor;
+            }
+
+            color.a *= alpha;
+        }
+
+        private static void DrawLotusCircle(Vector3 pos, float size, float ageSecs, float durationSecs, int seed, Color color, Color coreColor)
+        {
+            PropertyBlock.Clear();
+            PropertyBlock.SetFloat(ShaderPropertyIDs.AgeSecs, ageSecs);
+            PropertyBlock.SetFloat(DurationPropertyId, durationSecs);
+            PropertyBlock.SetFloat(SeedPropertyId, seed);
+            PropertyBlock.SetColor(ShaderPropertyIDs.Color, color);
+            PropertyBlock.SetColor(CoreColorPropertyId, coreColor);
+            Graphics.DrawMesh(MeshPool.plane10, Matrix4x4.TRS(pos, Quaternion.identity, new Vector3(size, 1f, size)), LotusMat, 0, null, 0, PropertyBlock);
         }
 
         private static void DrawQuad(Material mat, Vector3 pos, Quaternion rotation, Vector2 size, Color color)

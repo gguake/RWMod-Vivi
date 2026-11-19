@@ -266,22 +266,14 @@ namespace VVRace
             direction.Normalize();
 
             var start = IsUnbound ? origin : origin + direction * LaunchOffset;
-
-            if (!IsUnbound && !fanAngle.HasValue && Vector3.Distance(origin, target) < LaunchOffset + CloseTargetMargin)
+            if (!IsUnbound)
             {
-                var radius = BossComp?.Props.needleFanRadius ?? 5f;
-                var left = origin + Quaternion.AngleAxis(-CloseTargetFanAngle, Vector3.up) * direction * radius;
-                var right = origin + Quaternion.AngleAxis(CloseTargetFanAngle, Vector3.up) * direction * radius;
-                fanAngle = (left - _pos.Yto0()).sqrMagnitude <= (right - _pos.Yto0()).sqrMagnitude ? -CloseTargetFanAngle : CloseTargetFanAngle;
-            }
-
-            if (fanAngle.HasValue && !IsUnbound)
-            {
-                start = origin + Quaternion.AngleAxis(fanAngle.Value, Vector3.up) * direction * (BossComp?.Props.needleFanRadius ?? 5f);
-                var toTarget = (target - start).Yto0();
-                if (toTarget.sqrMagnitude > 0.01f)
+                fanAngle ??= ResolveCloseTargetFanAngle(origin, target, direction);
+                if (fanAngle.HasValue)
                 {
-                    direction = toTarget.normalized;
+                    var radius = BossComp?.Props.needleFanRadius ?? 5f;
+                    start = origin + Quaternion.AngleAxis(fanAngle.Value, Vector3.up) * direction * radius;
+                    direction = EndingVfxUtility.SafeNormalizeHorizontal(target - start, direction);
                 }
             }
 
@@ -323,14 +315,14 @@ namespace VVRace
 
             var now = GenTicks.TicksGame;
             var tip = cell.ToVector3Shifted().Yto0();
-            var from = _pos.Yto0();
-            var travel = (tip - from).Yto0();
-            var direction = travel.sqrMagnitude > 0.01f ? travel.normalized : (outDir.sqrMagnitude > 0.01f ? outDir.normalized : Vector3.forward);
+            var travel = (tip - _pos).Yto0();
+            var normalizedOut = EndingVfxUtility.SafeNormalizeHorizontal(outDir, Vector3.forward);
+            var direction = EndingVfxUtility.SafeNormalizeHorizontal(travel, normalizedOut);
 
             _groundCell = cell;
             _plantTip = tip;
             _scatterFrom = _pos;
-            _scatterOut = outDir.sqrMagnitude > 0.01f ? outDir.Yto0().normalized : direction;
+            _scatterOut = EndingVfxUtility.SafeNormalizeHorizontal(outDir, direction);
             _scatterAngle = direction.AngleFlat();
             _scatterTo = tip - direction * ApocryphaNeedleLane.TipOffset;
             _scatterTicks = Mathf.Clamp(Mathf.RoundToInt(travel.magnitude / ScatterSpeed), ScatterMinTicks, ScatterMaxTicks);
@@ -352,7 +344,7 @@ namespace VVRace
             _lockTarget = activator;
             _breach = false;
             _laneStart = ApocryphaNeedleLane.ClampInsideMap(Map, _plantTip);
-            _laneDir = (_pos - _plantTip).Yto0().sqrMagnitude > 0.01f ? -(_pos - _plantTip).Yto0().normalized : Vector3.forward;
+            _laneDir = EndingVfxUtility.SafeNormalizeHorizontal(_plantTip - _pos, Vector3.forward);
             UpdateLockDirection();
 
             _moveFrom = _pos;
@@ -393,8 +385,7 @@ namespace VVRace
         {
             if (!Spawned || !IsUnbound || _state == NeedleState.Stuck || IsFlying) { return; }
 
-            var direction = (BodyCenter - _pos.Yto0()).Yto0();
-            _laneDir = direction.sqrMagnitude > 0.01f ? direction.normalized : Vector3.forward;
+            _laneDir = EndingVfxUtility.SafeNormalizeHorizontal(BodyCenter - _pos, Vector3.forward);
             Stick(GenTicks.TicksGame);
         }
 
@@ -412,11 +403,7 @@ namespace VVRace
 
         public bool LaneContains(Vector3 point)
         {
-            var rel = (point - _laneStart).Yto0();
-            var along = rel.x * _laneDir.x + rel.z * _laneDir.z;
-            if (along < 0f || along > _laneLength) { return false; }
-
-            return Mathf.Abs(rel.x * _laneDir.z - rel.z * _laneDir.x) <= HalfWidth;
+            return ApocryphaNeedleLane.Contains(_laneStart, _laneDir, _laneLength, HalfWidth, point);
         }
         #endregion
 
@@ -495,8 +482,7 @@ namespace VVRace
             var hold = _laneStart - _laneDir * windup;
             if (_fireTick - now <= ShakeTicks)
             {
-                var perpendicular = new Vector3(_laneDir.z, 0f, -_laneDir.x);
-                hold += perpendicular * (ShakeAmplitude * Rand.Range(-1f, 1f));
+                hold += ApocryphaNeedleLane.JitterPerpendicular(_laneDir, ShakeAmplitude);
             }
 
             _pos = Vector3.Lerp(_moveFrom, hold, detach);
@@ -595,8 +581,7 @@ namespace VVRace
         {
             var elapsed = now - _stateStartTick;
             var shake = ShakeAmplitude * (1f - elapsed / (float)LodgedTicks);
-            var perpendicular = new Vector3(_laneDir.z, 0f, -_laneDir.x);
-            _pos = BodyOnLane(_laneLength) + perpendicular * (shake * Rand.Range(-1f, 1f));
+            _pos = BodyOnLane(_laneLength) + ApocryphaNeedleLane.JitterPerpendicular(_laneDir, shake);
 
             if (elapsed >= LodgedTicks)
             {
@@ -656,21 +641,11 @@ namespace VVRace
         private void TickScattering(int now)
         {
             var t = Mathf.Clamp01((now - _stateStartTick) / (float)Mathf.Max(1, _scatterTicks));
-            var eased = ApocryphaUtility.EaseInOut(t);
+            var inDir = EndingVfxUtility.SafeNormalizeHorizontal(_plantTip - _scatterTo, Vector3.forward, minSqrMagnitude: 0.0001f);
+            var c1 = _scatterFrom + _scatterOut * ScatterOutWeight + new Vector3(0f, 0f, ScatterLift);
+            var c2 = _scatterTo - inDir * ScatterInWeight + new Vector3(0f, 0f, ScatterLift * 0.5f);
 
-            var p0 = _scatterFrom;
-            var p3 = _scatterTo;
-            var inDir = (_plantTip - _scatterTo).Yto0();
-            inDir = inDir.sqrMagnitude > 0.0001f ? inDir.normalized : Vector3.forward;
-            var c1 = p0 + _scatterOut * ScatterOutWeight + new Vector3(0f, 0f, ScatterLift);
-            var c2 = p3 - inDir * ScatterInWeight + new Vector3(0f, 0f, ScatterLift * 0.5f);
-            _pos = Bezier(p0, c1, c2, p3, eased);
-
-            var travel = BezierDerivative(p0, c1, c2, p3, eased).Yto0();
-            var travelAngle = travel.sqrMagnitude > 0.0001f ? travel.AngleFlat() : _angle;
-            _angle = LerpAngle(travelAngle, _scatterAngle, Mathf.SmoothStep(0f, 1f, Mathf.InverseLerp(0.7f, 1f, t)));
-
-            RegisterTrail(_pos);
+            UpdateBezierFlight(_scatterFrom, c1, c2, _scatterTo, ApocryphaUtility.EaseInOut(t), t, 0.7f, _scatterAngle);
 
             if (t >= 1f)
             {
@@ -685,7 +660,8 @@ namespace VVRace
             var map = Map;
             if (!_plantTip.ShouldSpawnMotesAt(map)) { return; }
 
-            var data = FleckMaker.GetDataStatic(_plantTip + new Vector3(Rand.Range(-0.4f, 0.4f), 0f, Rand.Range(-0.2f, 0.5f)), map, VVFleckDefOf.VV_Fleck_ApocryphaAimTwinkle, Rand.Range(0.3f, 0.5f));
+            var offset = new Vector3(Rand.Range(-0.4f, 0.4f), 0f, Rand.Range(-0.2f, 0.5f));
+            var data = FleckMaker.GetDataStatic(_plantTip + offset, map, VVFleckDefOf.VV_Fleck_ApocryphaAimTwinkle, Rand.Range(0.3f, 0.5f));
             data.velocityAngle = Rand.Range(-30f, 30f);
             data.velocitySpeed = Rand.Range(0.2f, 0.6f);
             data.rotation = Rand.Range(0f, 360f);
@@ -746,7 +722,7 @@ namespace VVRace
             _stickAlong = -1f;
             _stuckAngle = LaneAngle;
 
-            var perpendicular = new Vector3(_laneDir.z, 0f, -_laneDir.x);
+            var perpendicular = EndingVfxUtility.HorizontalPerpendicular(_laneDir);
             _stuckOffset = -_laneDir * StuckDepth + perpendicular * ((_slot - 1) * StuckSpread);
             _pos = BodyCenter + _stuckOffset;
             _angle = _stuckAngle;
@@ -766,8 +742,8 @@ namespace VVRace
 
             if (elapsed < StuckShakeTicks)
             {
-                var perpendicular = new Vector3(_laneDir.z, 0f, -_laneDir.x);
-                _pos += perpendicular * (ShakeAmplitude * (1f - elapsed / (float)StuckShakeTicks) * Rand.Range(-1f, 1f));
+                var shake = ShakeAmplitude * (1f - elapsed / (float)StuckShakeTicks);
+                _pos += ApocryphaNeedleLane.JitterPerpendicular(_laneDir, shake);
             }
         }
 
@@ -790,16 +766,9 @@ namespace VVRace
             _returnProgress = Mathf.Min(1f, _returnProgress + ReturnSpeed / Mathf.Max(1f, _returnLength));
 
             GetReturnCurve(now, out var p0, out var c1, out var c2, out var p3);
-            var t = _returnProgress;
-            _pos = Bezier(p0, c1, c2, p3, t);
+            UpdateBezierFlight(p0, c1, c2, p3, _returnProgress, _returnProgress, ReturnBlendStart, SlotAngle(now));
 
-            var travel = BezierDerivative(p0, c1, c2, p3, t).Yto0();
-            var travelAngle = travel.sqrMagnitude > 0.0001f ? travel.AngleFlat() : _angle;
-            _angle = LerpAngle(travelAngle, SlotAngle(now), Mathf.SmoothStep(0f, 1f, Mathf.InverseLerp(ReturnBlendStart, 1f, t)));
-
-            RegisterTrail(_pos);
-
-            if (t >= 1f)
+            if (_returnProgress >= 1f)
             {
                 _state = NeedleState.Idle;
                 _stateStartTick = now;
@@ -807,19 +776,26 @@ namespace VVRace
             }
         }
 
+        private void UpdateBezierFlight(Vector3 p0, Vector3 c1, Vector3 c2, Vector3 p3, float curveT, float blendT, float blendStart, float targetAngle)
+        {
+            _pos = Bezier(p0, c1, c2, p3, curveT);
+
+            var travel = BezierDerivative(p0, c1, c2, p3, curveT).Yto0();
+            var travelAngle = travel.sqrMagnitude > 0.0001f ? travel.AngleFlat() : _angle;
+            var angleBlend = Mathf.SmoothStep(0f, 1f, Mathf.InverseLerp(blendStart, 1f, blendT));
+            _angle = LerpAngle(travelAngle, targetAngle, angleBlend);
+
+            RegisterTrail(_pos);
+        }
+
         private void GetReturnCurve(int now, out Vector3 p0, out Vector3 c1, out Vector3 c2, out Vector3 p3)
         {
             p0 = _returnFrom;
             p3 = SlotPos(now);
 
-            var outward = (p3 - BodyCenter).Yto0();
-            if (outward.sqrMagnitude < 0.0001f)
-            {
-                outward = Vector3.forward;
-            }
-
+            var outward = EndingVfxUtility.SafeNormalizeHorizontal(p3 - BodyCenter, Vector3.forward, minSqrMagnitude: 0.0001f);
             c1 = p0 + _returnOutDir * ReturnOutWeight;
-            c2 = p3 + outward.normalized * ReturnInWeight;
+            c2 = p3 + outward * ReturnInWeight;
         }
         #endregion
 
@@ -830,11 +806,7 @@ namespace VVRace
             var comp = BossComp;
             if (map == null || comp == null || to <= from) { return; }
 
-            if (_ignored == null)
-            {
-                _ignored = ApocryphaGimmicks.GetBlastIgnoredThings(map, _boss);
-            }
-
+            EnsureIgnoredThings(map);
             ApocryphaNeedleLane.PierceAlong(this, _laneStart, _laneDir, _laneLength, comp.Props.needleHalfWidth, from, to, _hitIds, CanPierce, thing => Pierce(thing, comp));
         }
 
@@ -848,13 +820,14 @@ namespace VVRace
             var length = segment.magnitude;
             if (length < 0.01f) { return; }
 
-            if (_ignored == null)
-            {
-                _ignored = ApocryphaGimmicks.GetBlastIgnoredThings(map, _boss);
-            }
-
+            EnsureIgnoredThings(map);
             ApocryphaNeedleLane.PierceAlong(this, _breachOrigin, segment / length, length, comp.Props.needleHalfWidth, 0f, length, _hitIds,
                 thing => thing is Building && CanPierce(thing), thing => Pierce(thing, comp));
+        }
+
+        private void EnsureIgnoredThings(Map map)
+        {
+            _ignored ??= ApocryphaGimmicks.GetBlastIgnoredThings(map, _boss);
         }
 
         private bool CanPierce(Thing thing)
@@ -879,39 +852,16 @@ namespace VVRace
         #region 그리기
         protected override void DrawAt(Vector3 drawLoc, bool flip = false)
         {
-            var alpha = Mathf.Clamp01((GenTicks.TicksGame - _spawnTick) / (float)FadeInTicks);
+            var now = GenTicks.TicksGame;
+            var alpha = Mathf.Clamp01((now - _spawnTick) / (float)FadeInTicks);
             if (alpha <= 0f) { return; }
 
             if (_state == NeedleState.Aiming || _state == NeedleState.LockOn)
             {
-                var unbound = IsUnbound;
-                var bossInLane = unbound && BossContactAlong() >= 0f;
-                float progress;
-                float aimSecs;
-                float aimDuration;
-                if (unbound)
-                {
-                    var lockTicks = Mathf.Max(1, _lockEndTick - _activateTick);
-                    progress = _state == NeedleState.LockOn
-                        ? 0.5f * Mathf.Clamp01((GenTicks.TicksGame - _activateTick) / (float)lockTicks)
-                        : 0.5f + 0.5f * AimProgress;
-                    aimSecs = (GenTicks.TicksGame - _activateTick) / 60f;
-                    aimDuration = (lockTicks + (BossComp?.Props.unboundNeedleLockedTicks ?? 75)) / 60f;
-                }
-                else
-                {
-                    progress = AimProgress;
-                    aimSecs = (GenTicks.TicksGame - _stateStartTick) / 60f;
-                    aimDuration = _aimTicks / 60f;
-                }
-
-                ApocryphaNeedleRenderer.DrawLane(
-                    start: _laneStart, direction: _laneDir, length: _laneLength, width: HalfWidth * 2f,
-                    progress: progress, alpha: alpha, bossInside: bossInLane, breach: _breach,
-                    aimSecs: aimSecs, aimDuration: aimDuration, seed: thingIDNumber);
+                DrawAimLane(now, alpha);
             }
 
-            var warpAge = GenTicks.TicksGame - _fireTick;
+            var warpAge = now - _fireTick;
             if ((IsFlying || IsStuck) && warpAge >= 0 && warpAge < WarpTicks)
             {
                 ApocryphaNeedleRenderer.DrawWarp(_laneStart, _laneDir, _laneLength, Mathf.Max(0f, _travelled), warpAge / 60f, alpha);
@@ -919,7 +869,7 @@ namespace VVRace
 
             if (IsStuck || IsPlanted)
             {
-                var stuckSecs = (GenTicks.TicksGame - _stateStartTick) / 60f;
+                var stuckSecs = (now - _stateStartTick) / 60f;
                 if (IsPlanted)
                 {
                     ApocryphaNeedleRenderer.DrawPlantedMarker(_plantTip, stuckSecs, alpha, thingIDNumber);
@@ -929,15 +879,70 @@ namespace VVRace
                 return;
             }
 
-            var glow = _state == NeedleState.Idle ? 0f
-                : _state == NeedleState.Aiming ? AimProgress
-                : _state == NeedleState.LockOn ? 0.5f * Mathf.Clamp01((GenTicks.TicksGame - _activateTick) / (float)Mathf.Max(1, _lockEndTick - _activateTick))
-                : 1f;
-            ApocryphaNeedleRenderer.DrawNeedle(DrawPos, _angle, alpha, glow);
+            ApocryphaNeedleRenderer.DrawNeedle(DrawPos, _angle, alpha, ComputeGlow(now));
+        }
+
+        private void DrawAimLane(int now, float alpha)
+        {
+            var unbound = IsUnbound;
+            var bossInLane = unbound && BossContactAlong() >= 0f;
+            float progress;
+            float aimSecs;
+            float aimDuration;
+
+            if (unbound)
+            {
+                var lockTicks = Mathf.Max(1, _lockEndTick - _activateTick);
+                progress = _state == NeedleState.LockOn
+                    ? 0.5f * Mathf.Clamp01((now - _activateTick) / (float)lockTicks)
+                    : 0.5f + 0.5f * AimProgress;
+                aimSecs = (now - _activateTick) / 60f;
+                aimDuration = (lockTicks + (BossComp?.Props.unboundNeedleLockedTicks ?? 75)) / 60f;
+            }
+            else
+            {
+                progress = AimProgress;
+                aimSecs = (now - _stateStartTick) / 60f;
+                aimDuration = _aimTicks / 60f;
+            }
+
+            ApocryphaNeedleRenderer.DrawLane(
+                start: _laneStart, direction: _laneDir, length: _laneLength, width: HalfWidth * 2f,
+                progress: progress, alpha: alpha, bossInside: bossInLane, breach: _breach,
+                aimSecs: aimSecs, aimDuration: aimDuration, seed: thingIDNumber);
+        }
+
+        private float ComputeGlow(int now)
+        {
+            switch (_state)
+            {
+                case NeedleState.Idle:
+                    return 0f;
+
+                case NeedleState.Aiming:
+                    return AimProgress;
+
+                case NeedleState.LockOn:
+                    return 0.5f * Mathf.Clamp01((now - _activateTick) / (float)Mathf.Max(1, _lockEndTick - _activateTick));
+
+                default:
+                    return 1f;
+            }
         }
         #endregion
 
         #region 도우미
+        private float? ResolveCloseTargetFanAngle(Vector3 origin, Vector3 target, Vector3 direction)
+        {
+            if (Vector3.Distance(origin, target) >= LaunchOffset + CloseTargetMargin) { return null; }
+
+            var radius = BossComp?.Props.needleFanRadius ?? 5f;
+            var left = origin + Quaternion.AngleAxis(-CloseTargetFanAngle, Vector3.up) * direction * radius;
+            var right = origin + Quaternion.AngleAxis(CloseTargetFanAngle, Vector3.up) * direction * radius;
+            var currentPos = _pos.Yto0();
+            return (left - currentPos).sqrMagnitude <= (right - currentPos).sqrMagnitude ? -CloseTargetFanAngle : CloseTargetFanAngle;
+        }
+
         private float BossContactAlong()
         {
             if (_boss == null || !_boss.Spawned || _laneLength <= 0f) { return -1f; }
@@ -947,10 +952,8 @@ namespace VVRace
             for (int i = 0; i < 2; i++)
             {
                 var point = i == 0 ? _boss.DrawPos.Yto0() : BodyCenter;
-                var rel = (point - _laneStart).Yto0();
-                var along = rel.x * _laneDir.x + rel.z * _laneDir.z;
-                if (along < -BossHitRadius || along > _laneLength + BossHitRadius) { continue; }
-                if (Mathf.Abs(rel.x * _laneDir.z - rel.z * _laneDir.x) > reach) { continue; }
+                ApocryphaNeedleLane.Project(_laneStart, _laneDir, point, out var along, out var across);
+                if (along < -BossHitRadius || along > _laneLength + BossHitRadius || across > reach) { continue; }
 
                 var contact = Mathf.Clamp(along - BossHitRadius, 0f, _laneLength);
                 if (best < 0f || contact < best)

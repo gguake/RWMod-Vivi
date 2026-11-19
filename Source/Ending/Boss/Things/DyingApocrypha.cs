@@ -28,6 +28,11 @@ namespace VVRace
         private const float StolenRiseCells = 0.9f;
         private const float DeathAshAmount = 0.75f;
 
+        private static readonly FloatRange AshScale = new FloatRange(1f, 1.9f);
+        private static readonly FloatRange AshSpeed = new FloatRange(0.4f, 1.1f);
+        private static readonly FloatRange EmberScale = new FloatRange(0.25f, 0.6f);
+        private static readonly FloatRange EmberSpeed = new FloatRange(0.8f, 2f);
+
         private static readonly DissolveStyle DeathStyle = new DissolveStyle(DissolveDelaySecs, DissolveDurationSecs, new Color(1f, 0.78f, 0.35f, 1f), 0f, DeathAshAmount);
         private static readonly DissolveStyle FlowerStyle = new DissolveStyle(FlowerDelaySecs, FlowerDurationSecs, new Color(1f, 0.93f, 0.72f, 1f), StolenSweepWeight, 0f);
         private static readonly DissolveStyle StolenBossStyle = new DissolveStyle(StolenBossDelaySecs, StolenBossDurationSecs, new Color(1f, 0.62f, 0.88f, 1f), StolenSweepWeight, 0f);
@@ -89,8 +94,7 @@ namespace VVRace
             _drawSize = comp?.CurrentVisualDrawSize ?? graphicData?.drawSize.x ?? 8.5f;
             _questBoss = comp != null && comp.IsQuestBossFight;
 
-            var offset = boss.DrawPos - boss.Position.ToVector3Shifted();
-            _drawOffset = new Vector3(offset.x, 0f, offset.z);
+            _drawOffset = EndingVfxUtility.OffsetFromCell(boss.DrawPos, boss.Position);
         }
 
         public void InitStolen(Pawn boss, ArcanePlant_Everflower everflower)
@@ -113,9 +117,7 @@ namespace VVRace
             }
             _flowerBudPos = budPos;
 
-            var away = bossCenter - budPos;
-            away.y = 0f;
-            away = away.sqrMagnitude > 0.25f ? away.normalized : Vector3.right;
+            var away = EndingVfxUtility.SafeNormalizeHorizontal(bossCenter - budPos, Vector3.right, minSqrMagnitude: 0.25f);
             _wind = (away * 0.75f + Vector3.forward * 0.55f).normalized;
         }
 
@@ -203,7 +205,7 @@ namespace VVRace
 
             var center = DrawPos + _drawOffset + StolenDrift;
             var front = _drawSize * 0.8f * (0.5f - bossProgress);
-            var side = new Vector3(_wind.z, 0f, -_wind.x);
+            var side = EndingVfxUtility.HorizontalPerpendicular(_wind);
             var halfWidth = _drawSize * 0.3f;
             var windAngle = _wind.AngleFlat();
             for (int i = 0; i < 2; i++)
@@ -240,26 +242,10 @@ namespace VVRace
             var frontZ = center.z + _drawSize * (0.42f - 0.8f * progress);
             var halfWidth = _drawSize * 0.32f;
 
-            if (age % AshInterval == 0)
-            {
-                var pos = new Vector3(center.x + Rand.Range(-halfWidth, halfWidth), center.y, frontZ + Rand.Range(-0.3f, 0.3f));
-                var data = FleckMaker.GetDataStatic(pos, Map, VVFleckDefOf.VV_Fleck_ApocryphaAsh, Rand.Range(1f, 1.9f));
-                data.velocityAngle = Rand.Range(-35f, 35f);
-                data.velocitySpeed = Rand.Range(0.4f, 1.1f);
-                data.rotation = Rand.Range(0f, 360f);
-                data.rotationRate = Rand.Range(-50f, 50f);
-                Map.flecks.CreateFleck(data);
-            }
-
-            if (age % EmberInterval == 0)
-            {
-                var pos = new Vector3(center.x + Rand.Range(-halfWidth, halfWidth), center.y, frontZ + Rand.Range(-0.2f, 0.2f));
-                var data = FleckMaker.GetDataStatic(pos, Map, VVFleckDefOf.VV_Fleck_ApocryphaEmber, Rand.Range(0.25f, 0.6f));
-                data.velocityAngle = Rand.Range(-25f, 25f);
-                data.velocitySpeed = Rand.Range(0.8f, 2f);
-                data.rotation = Rand.Range(0f, 360f);
-                Map.flecks.CreateFleck(data);
-            }
+            DissolveRenderer.ThrowAshAndEmbers(
+                Map, center, frontZ, halfWidth, age, AshInterval, EmberInterval,
+                ashJitterZ: 0.3f, AshScale, AshSpeed,
+                emberJitterZ: 0.2f, EmberScale, EmberSpeed);
 
             ThrowSoulsToResonator(age, center, frontZ, halfWidth);
         }
@@ -305,9 +291,7 @@ namespace VVRace
                 var assimilation = Hediff_EverflowerAssimilation.Of(AbsorbingResonator);
                 if (assimilation != null)
                 {
-                    var body = assimilation.BodyPoint;
-                    var cell = body.ToIntVec3().ClampInsideMap(map);
-                    VVEffecterDefOf.VV_Effecter_AssimilationAbsorb?.Spawn(cell, map, (body - cell.ToVector3Shifted()).WithY(0f)).Cleanup();
+                    EndingVfxUtility.PlayEffectAt(map, VVEffecterDefOf.VV_Effecter_AssimilationAbsorb, assimilation.BodyPoint);
                 }
             }
 

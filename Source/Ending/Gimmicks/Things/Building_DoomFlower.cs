@@ -16,15 +16,20 @@ namespace VVRace
 
         private CompApocrypha BossComp => ApocryphaGimmicks.FindBoss(Map)?.TryGetComp<CompApocrypha>();
 
-        private int ScaledBloomDelayTicks => Mathf.Max(1, Mathf.RoundToInt(BloomDelayTicks * (BossComp?.DoomBloomTimeFactor ?? 1f)));
+        private int ScaledBloomDelayTicks => ScaleByDoomFactor(BloomDelayTicks, BossComp);
 
         private int ScaledHornetIntervalTicks
         {
             get
             {
                 var comp = BossComp;
-                return Mathf.Max(1, Mathf.RoundToInt((comp?.Props.doomFlowerHornetIntervalTicks ?? 10000) * (comp?.DoomBloomTimeFactor ?? 1f)));
+                return ScaleByDoomFactor(comp?.Props.doomFlowerHornetIntervalTicks ?? 10000, comp);
             }
+        }
+
+        private static int ScaleByDoomFactor(int baseTicks, CompApocrypha comp)
+        {
+            return Mathf.Max(1, Mathf.RoundToInt(baseTicks * (comp?.DoomBloomTimeFactor ?? 1f)));
         }
 
         public int TicksUntilBloom => _bloomTick < 0 ? ScaledBloomDelayTicks : System.Math.Max(0, _bloomTick - Find.TickManager.TicksGame);
@@ -137,23 +142,9 @@ namespace VVRace
 
             if (DebugSettings.godMode)
             {
-                yield return new Command_Action()
-                {
-                    defaultLabel = "DEV: Bloom now",
-                    action = Bloom,
-                };
-
-                yield return new Command_Action()
-                {
-                    defaultLabel = "DEV: Wither now",
-                    action = Wither,
-                };
-
-                yield return new Command_Action()
-                {
-                    defaultLabel = "DEV: Summon hornet now",
-                    action = TrySummonHornets,
-                };
+                yield return EndingVfxUtility.DevAction("DEV: Bloom now", Bloom);
+                yield return EndingVfxUtility.DevAction("DEV: Wither now", Wither);
+                yield return EndingVfxUtility.DevAction("DEV: Summon hornet now", TrySummonHornets);
             }
         }
 

@@ -45,10 +45,7 @@ namespace VVRace
                 _center = Position.ToVector3Shifted().Yto0();
             }
 
-            var size = map.Size;
-            var farX = Mathf.Max(_center.x, size.x - _center.x);
-            var farZ = Mathf.Max(_center.z, size.z - _center.z);
-            _maxRadius = Mathf.Sqrt(farX * farX + farZ * farZ) + 1f;
+            _maxRadius = EndingVfxUtility.MaxDistanceToMapCorner(map, _center) + 1f;
             _speed = Mathf.Max(MinSpeed, _maxRadius / SpreadTicks);
             _radius = 0f;
 
@@ -136,8 +133,7 @@ namespace VVRace
 
         private Vector3 WindAt(Vector3 pos)
         {
-            var away = (pos - _center).Yto0();
-            return away.sqrMagnitude > 0.01f ? away.normalized : Vector3.forward;
+            return EndingVfxUtility.SafeNormalizeHorizontal(pos - _center, Vector3.forward);
         }
 
         private void ThrowGusts()

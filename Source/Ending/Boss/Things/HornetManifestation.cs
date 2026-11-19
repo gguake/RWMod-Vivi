@@ -40,6 +40,8 @@ namespace VVRace
         private const float MinSpacing = 2.2f;
         private const float WideningCells = 4f;
 
+        private static readonly FloatRange WispScale = new FloatRange(0.45f, 0.8f);
+        private static readonly FloatRange SparkScale = new FloatRange(0.2f, 0.35f);
         private static readonly Color DarkSparkColor = new Color(0.9f, 0.18f, 0.7f, 1f);
 
         private int _startTick = -1;
@@ -67,7 +69,8 @@ namespace VVRace
                 if (!TryFindSummonCell(map, boss.Position, radius, chosen, out var cell)) { break; }
 
                 chosen.Add(cell);
-                Begin(map, cell, cell.ToVector3Shifted(), fromFlower: false, FacingAway(boss.Position, cell), role, boss, null, i * StaggerTicks + Rand.Range(0, StaggerTicks));
+                var delay = i * StaggerTicks + Rand.Range(0, StaggerTicks);
+                Begin(map, cell, cell.ToVector3Shifted(), fromFlower: false, FacingAway(boss.Position, cell), role, boss, null, delay);
             }
         }
 
@@ -89,16 +92,7 @@ namespace VVRace
 
         public static void CancelAll(Map map)
         {
-            if (map == null) { return; }
-
-            var pending = new List<Thing>(map.listerThings.ThingsOfDef(VVThingDefOf.VV_HornetManifestation));
-            for (int i = 0; i < pending.Count; i++)
-            {
-                if (!pending[i].Destroyed)
-                {
-                    pending[i].Destroy(DestroyMode.Vanish);
-                }
-            }
+            EndingVfxUtility.DestroyAllOfDef(map, VVThingDefOf.VV_HornetManifestation);
         }
 
         private static void Begin(Map map, IntVec3 cell, Vector3 source, bool fromFlower, Rot4 rot, HornetSummonRole role, Pawn boss, Thing flower, int delayTicks)
@@ -172,9 +166,7 @@ namespace VVRace
             if (!_begun)
             {
                 _begun = true;
-                var sourceCell = _sourcePos.ToIntVec3();
-                var sourceOffset = (_sourcePos - sourceCell.ToVector3Shifted()).Yto0();
-                VVEffecterDefOf.VV_Effecter_HornetManifestBegin?.Spawn(sourceCell, Map, sourceOffset).Cleanup();
+                EndingVfxUtility.PlayEffectAt(Map, VVEffecterDefOf.VV_Effecter_HornetManifestBegin, _sourcePos);
             }
 
             if (age >= DurationTicks)
@@ -252,13 +244,8 @@ namespace VVRace
             for (int i = 0; i < count; i++)
             {
                 var target = body + new Vector3(Rand.Range(-0.25f, 0.25f), 0f, Rand.Range(-0.3f, 0.3f));
-                var start = _sourcePos + Quaternion.AngleAxis(Rand.Range(0f, 360f), Vector3.up) * Vector3.forward * radius.RandomInRange;
-                ManifestationRenderer.ThrowConverging(map, VVFleckDefOf.VV_Fleck_ApocryphaDarkWisp, start, target, WispTravelSecs, Rand.Range(0.45f, 0.8f), null, alignToVelocity: true);
-
-                if (Rand.Chance(SparkChance))
-                {
-                    ManifestationRenderer.ThrowConverging(map, VVFleckDefOf.VV_Fleck_ApocryphaManifestSpark, start, target, WispTravelSecs, Rand.Range(0.2f, 0.35f), DarkSparkColor, alignToVelocity: false);
-                }
+                var start = _sourcePos + EndingVfxUtility.RandomRingOffset(radius);
+                ManifestationRenderer.ThrowWispWithSpark(map, start, target, WispTravelSecs, WispScale, SparkChance, SparkScale, DarkSparkColor);
             }
 
             if (Rand.Chance(RiseChance))
