@@ -8,7 +8,7 @@ using Verse.AI;
 namespace VVRace
 {
     [StaticConstructorOnStartup]
-    public class Building_EverflowerAltar : ArcanePlantPot, IThingHolder, ISuspendableThingHolder
+    public class Building_EverflowerAltar : ArcanePlantPot, IThingHolderWithDrawnPawn, ISuspendableThingHolder
     {
         public const int RequiredAttunementLevel = 4;
 
@@ -33,6 +33,12 @@ namespace VVRace
 
         public bool IsContentsSuspended => true;
 
+        public float HeldPawnDrawPos_Y => AltitudeLayer.Pawn.AltitudeFor() + Hediff_EverflowerAssimilation.DrawAltitudeOffset;
+
+        public float HeldPawnBodyAngle => 0f;
+
+        public PawnPosture HeldPawnPosture => PawnPosture.Standing;
+
         public ThingOwner GetDirectlyHeldThings() => _resonatorHolder;
 
         public void GetChildHolders(List<IThingHolder> outChildren)
@@ -46,10 +52,41 @@ namespace VVRace
 
             if (pawn.Spawned)
             {
+                pawn.stances?.CancelBusyStanceHard();
                 pawn.DeSpawnOrDeselect();
             }
 
-            return _resonatorHolder.TryAdd(pawn);
+            if (!_resonatorHolder.TryAdd(pawn))
+            {
+                return false;
+            }
+
+            ResetHeldResonatorPose(pawn);
+            return true;
+        }
+
+        internal static void ResetHeldResonatorPose(Pawn pawn)
+        {
+            if (pawn == null) { return; }
+
+            pawn.Rotation = Rot4.South;
+            if (pawn.jobs != null)
+            {
+                pawn.jobs.posture = PawnPosture.Standing;
+            }
+
+            var renderer = pawn.Drawer?.renderer;
+            if (renderer != null)
+            {
+                if (renderer.HasAnimation)
+                {
+                    renderer.SetAnimation(null);
+                }
+                if (renderer.wiggler != null)
+                {
+                    renderer.wiggler.downedAngle = 0f;
+                }
+            }
         }
 
         public void EjectResonator(Pawn pawn, IntVec3 cell)
@@ -103,6 +140,11 @@ namespace VVRace
         {
             base.ExposeData();
             Scribe_Deep.Look(ref _resonatorHolder, "resonatorHolder", this);
+
+            if (Scribe.mode == LoadSaveMode.PostLoadInit && HeldResonator != null)
+            {
+                ResetHeldResonatorPose(HeldResonator);
+            }
         }
 
         public ArcanePlant_Everflower EnshrinedEverflower => Spawned ? Position.GetFirstThing<ArcanePlant_Everflower>(Map) : null;

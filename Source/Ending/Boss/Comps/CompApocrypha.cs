@@ -59,6 +59,30 @@ namespace VVRace
         private int _lastDamageTextTick = -99999;
         private int _lastStunImmuneTextTick = -99999;
 
+        private Rot4? _deathRotation;
+        private IntVec3 _deathCell = IntVec3.Invalid;
+        private Vector3 _deathDrawOffset;
+
+        internal static void CaptureDeathState(Pawn pawn)
+        {
+            if (pawn == null || pawn.Dead) { return; }
+
+            var comp = pawn.TryGetComp<CompApocrypha>();
+            if (comp == null) { return; }
+
+            comp._deathRotation = pawn.Rotation;
+            if (pawn.Spawned)
+            {
+                comp._deathCell = pawn.Position;
+                comp._deathDrawOffset = EndingVfxUtility.OffsetFromCell(pawn.DrawPos, pawn.Position);
+            }
+            else
+            {
+                comp._deathCell = IntVec3.Invalid;
+                comp._deathDrawOffset = Vector3.zero;
+            }
+        }
+
         public CompProperties_Apocrypha Props => (CompProperties_Apocrypha)props;
 
         public Pawn Pawn => (Pawn)parent;
@@ -725,11 +749,17 @@ namespace VVRace
 
         private void BeginDissolve(Map map, IntVec3 cell)
         {
+            var rotationOverride = _deathRotation;
+            var drawOffsetOverride = _deathCell.IsValid && _deathCell == cell ? (Vector3?)_deathDrawOffset : null;
+            _deathRotation = null;
+            _deathCell = IntVec3.Invalid;
+            _deathDrawOffset = Vector3.zero;
+
             DyingApocrypha dying = null;
             if (map != null && cell.InBounds(map))
             {
                 dying = (DyingApocrypha)ThingMaker.MakeThing(VVThingDefOf.VV_DyingApocrypha);
-                dying.InitFrom(Pawn);
+                dying.InitFrom(Pawn, rotationOverride, drawOffsetOverride);
             }
 
             _phase = ApocryphaPhase.Dying;

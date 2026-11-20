@@ -84,17 +84,17 @@ namespace VVRace
             }
         }
 
-        public void InitFrom(Pawn boss)
+        public void InitFrom(Pawn boss, Rot4? rotationOverride = null, Vector3? drawOffsetOverride = null)
         {
             var comp = boss.TryGetComp<CompApocrypha>();
             var graphicData = boss.ageTracker?.CurKindLifeStage?.bodyGraphicData;
 
             _texPath = graphicData?.texPath;
-            _rotation = boss.Rotation;
+            _rotation = rotationOverride ?? boss.Rotation;
             _drawSize = comp?.CurrentVisualDrawSize ?? graphicData?.drawSize.x ?? 8.5f;
             _questBoss = comp != null && comp.IsQuestBossFight;
 
-            _drawOffset = EndingVfxUtility.OffsetFromCell(boss.DrawPos, boss.Position);
+            _drawOffset = drawOffsetOverride ?? EndingVfxUtility.OffsetFromCell(boss.DrawPos, boss.Position);
         }
 
         public void InitStolen(Pawn boss, ArcanePlant_Everflower everflower)

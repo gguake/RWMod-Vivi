@@ -23,7 +23,7 @@ namespace VVRace
         private const float ParticleLifeSecs = 1.1f;
         private static readonly Color LinkColor = new Color(1f, 0.9f, 0.55f, 0.55f);
 
-        private const float DrawAltitudeOffset = 0.05f;
+        internal const float DrawAltitudeOffset = 0.05f;
 
         private static readonly HashSet<Pawn> _assimilated = new HashSet<Pawn>();
 
@@ -180,6 +180,8 @@ namespace VVRace
                 pawn.health.RemoveHediff(this);
                 return;
             }
+
+            Building_EverflowerAltar.ResetHeldResonatorPose(pawn);
 
             if (IsReleasing)
             {

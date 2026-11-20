@@ -52,21 +52,21 @@ namespace VVRace
             _wind = EndingVfxUtility.SafeNormalizeHorizontal(wind, Vector3.forward, minSqrMagnitude: 0.0001f);
         }
 
-        public void InitAshen(Pawn hornet, Corpse corpse)
+        public void InitAshen(Pawn hornet, Corpse corpse, Rot4? rotation = null, Vector3? drawOffset = null)
         {
-            InitGraphic(hornet);
-            _drawOffset = Vector3.zero;
+            InitGraphic(hornet, rotation);
+            _drawOffset = drawOffset ?? Vector3.zero;
             _wind = Vector3.forward;
             _ashen = true;
             _corpse = corpse;
         }
 
-        private void InitGraphic(Pawn hornet)
+        private void InitGraphic(Pawn hornet, Rot4? rotationOverride = null)
         {
             var graphicData = hornet.ageTracker?.CurKindLifeStage?.bodyGraphicData;
             _texPath = graphicData?.texPath;
             _drawSize = graphicData?.drawSize.x ?? 2.5f;
-            _rotation = hornet.Rotation;
+            _rotation = rotationOverride ?? hornet.Rotation;
         }
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
