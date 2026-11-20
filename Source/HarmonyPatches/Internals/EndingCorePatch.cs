@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using RimWorld;
+using RimWorld.Planet;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,30 @@ namespace VVRace
             ViviHarmonyPatcher.TryPatch(harmony, "HediffGiver_BrainInjury.OnHediffAdded (queen life resonance)",
                 AccessTools.Method(typeof(HediffGiver_BrainInjury), nameof(HediffGiver_BrainInjury.OnHediffAdded)),
                 prefix: new HarmonyMethod(typeof(EndingCorePatch), nameof(HediffGiver_BrainInjury_OnHediffAdded_Prefix)));
+
+            ViviHarmonyPatcher.TryPatch(harmony, "TilePicker.StartTargeting_NewTemp (prevent gravship landing on ancient ruins)",
+                AccessTools.Method(typeof(TilePicker), nameof(TilePicker.StartTargeting_NewTemp)),
+                prefix: new HarmonyMethod(typeof(EndingCorePatch), nameof(TilePicker_StartTargeting_Prefix)));
+        }
+
+        private static void TilePicker_StartTargeting_Prefix(ref Func<PlanetTile, bool> validator, bool hideFormCaravanGizmo)
+        {
+            if (!hideFormCaravanGizmo) { return; }
+
+            var original = validator;
+            validator = tile =>
+            {
+                if (Find.WorldObjects.MapParentAt(tile) is Site_ViviAncientRuins)
+                {
+                    Messages.Message(
+                        LocalizeString_Message.VV_Message_RuinCannotLandGravship.Translate(),
+                        MessageTypeDefOf.RejectInput,
+                        historical: false);
+                    return false;
+                }
+
+                return original == null || original(tile);
+            };
         }
 
         private static bool Pawn_Kill_Prefix(Pawn __instance, DamageInfo? dinfo)

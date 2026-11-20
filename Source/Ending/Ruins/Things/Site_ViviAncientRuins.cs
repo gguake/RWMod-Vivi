@@ -11,6 +11,13 @@ namespace VVRace
         private static bool ClosesWhenLeft => ViviEndingQuest.Current?.Ruins.CoreExtracted ?? true;
 
         public override AcceptanceReport CanBeSettled => false;
+        public override bool GravShipCanLandOn => false;
+
+        public override void SpawnSetup()
+        {
+            base.SpawnSetup();
+            preventGravshipLanding = true;
+        }
 
         public override bool ShouldRemoveMapNow(out bool alsoRemoveWorldObject)
         {

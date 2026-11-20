@@ -27,6 +27,7 @@
 <VV_Message_RuinResealing>As the ancient amber core is drawn out, the sanctum's spatial distortion begins to close once more!</VV_Message_RuinResealing>
 <VV_Message_RuinResealedExpelled>The ancient ruins have sealed themselves behind the spatial distortion once more, expelling the entire expedition back onto the world map.</VV_Message_RuinResealedExpelled>
 <VV_Message_RuinResealedGravship>The ancient ruins have sealed themselves behind the spatial distortion once more, expelling everyone inside the sanctum back outside.</VV_Message_RuinResealedGravship>
+<VV_Message_RuinCannotLandGravship>Cannot land a gravship here due to the ancient ruins' spatial distortion.</VV_Message_RuinCannotLandGravship>
 
 <!-- 정보창 -->
 <VV_Inspector_RuinDoomFlowerHint>Each time it is destroyed, it sends a wisp along the hidden path before regrowing.</VV_Inspector_RuinDoomFlowerHint>

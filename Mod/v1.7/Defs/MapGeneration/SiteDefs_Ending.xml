@@ -29,7 +29,7 @@
     <requiresFaction>false</requiresFaction>
     <showFactionInInspectString>false</showFactionInInspectString>
     <minMapSize>(220, 1, 220)</minMapSize>
-    <gravShipsCanLandOn>true</gravShipsCanLandOn>
+    <gravShipsCanLandOn>false</gravShipsCanLandOn>
     <disallowsAutomaticDetectionTimerStart>true</disallowsAutomaticDetectionTimerStart>
     <modExtensions>
       <li Class="VVRace.AncientRuinsSiteExtension">

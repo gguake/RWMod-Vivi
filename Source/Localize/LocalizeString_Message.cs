@@ -32,6 +32,7 @@
         public const string VV_Message_RuinResealing = nameof(VV_Message_RuinResealing);
         public const string VV_Message_RuinResealedExpelled = nameof(VV_Message_RuinResealedExpelled);
         public const string VV_Message_RuinResealedGravship = nameof(VV_Message_RuinResealedGravship);
+        public const string VV_Message_RuinCannotLandGravship = nameof(VV_Message_RuinCannotLandGravship);
 
         public const string VV_Message_EverflowerEnshrined = nameof(VV_Message_EverflowerEnshrined);
         public const string VV_Message_EverflowerAltarRequiresLevel = nameof(VV_Message_EverflowerAltarRequiresLevel);
