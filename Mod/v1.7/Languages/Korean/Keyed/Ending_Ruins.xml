@@ -23,6 +23,9 @@
 <VV_Message_RuinPuzzleUntethered>요정꽃과의 공명선 연결이 해제되었습니다.</VV_Message_RuinPuzzleUntethered>
 <VV_Message_RuinPuzzleSwapped>두 공명 요정꽃의 위치가 교체되었습니다.</VV_Message_RuinPuzzleSwapped>
 <VV_Message_RuinHexagonCompleted>육각형 공명 회로가 완성되어 중심 제단 구역의 봉인이 풀렸습니다!</VV_Message_RuinHexagonCompleted>
+<VV_Message_RuinResealing>고대 호박 코어가 추출되자 성소의 공간 왜곡이 다시 닫히기 시작합니다!</VV_Message_RuinResealing>
+<VV_Message_RuinResealedExpelled>고대 유적이 다시 공간 왜곡 너머로 봉인되며 원정대 전원이 바깥 세계로 밀려났습니다.</VV_Message_RuinResealedExpelled>
+<VV_Message_RuinResealedGravship>고대 유적이 다시 공간 왜곡 너머로 봉인되며 성소 안의 인원이 바깥으로 밀려났습니다.</VV_Message_RuinResealedGravship>
 
 <!-- 정보창 -->
 <VV_Inspector_RuinDoomFlowerHint>파괴할 때마다 숨겨진 길을 비추는 잔향을 남긴 뒤 다시 피어납니다.</VV_Inspector_RuinDoomFlowerHint>

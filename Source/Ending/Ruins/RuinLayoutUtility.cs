@@ -11,127 +11,88 @@ namespace VVRace
     public static class RuinLayoutUtility
     {
         public const int SealStageCount = 4;
-        public const float RingOuterRadius = 19.6f;
-        public const float SanctumInnerRadius = 7.5f;
+        public const int RecommendedMapSize = 220;
+        public const float HexOuterApothem = 58.0f;
+        public const float HexShellInnerApothem = 56.2f;
+        public const float RingOuterRadius = 22.5f;
+        public const float SanctumInnerRadius = 8.5f;
+        private const int MazePitch = 6;
+        private const float Sqrt3Over2 = 0.8660254f;
 
+        // 중앙 원형 회랑(Stage 3, origin 중심) 정육각형 화분 6개 위치 (반지름 약 14)
         private static readonly IntVec2[] HexagonPotOffsets =
         {
-            new IntVec2(-6, 36),
-            new IntVec2(6, 36),
-            new IntVec2(12, 26),
-            new IntVec2(6, 16),
-            new IntVec2(-6, 16),
-            new IntVec2(-12, 26),
+            new IntVec2(-7, 12),
+            new IntVec2(7, 12),
+            new IntVec2(14, 0),
+            new IntVec2(7, -12),
+            new IntVec2(-7, -12),
+            new IntVec2(-14, 0),
         };
 
+        // 제2구간(북쪽 장대 복도, dz: +46 -> +26) 숨겨진 안전 경로 템플릿 4종
         private static readonly IntVec2[][] HiddenPathTemplates =
         {
             new[]
             {
-                new IntVec2(0, -10), new IntVec2(0, -8), new IntVec2(-4, -8), new IntVec2(-4, -4),
-                new IntVec2(3, -4), new IntVec2(3, -1), new IntVec2(-1, -1), new IntVec2(-1, 2),
+                new IntVec2(0, 46), new IntVec2(0, 43), new IntVec2(-4, 43), new IntVec2(-4, 38),
+                new IntVec2(4, 38), new IntVec2(4, 34), new IntVec2(-3, 34), new IntVec2(-3, 29),
+                new IntVec2(2, 29), new IntVec2(2, 26), new IntVec2(0, 26),
             },
             new[]
             {
-                new IntVec2(0, -10), new IntVec2(0, -8), new IntVec2(4, -8), new IntVec2(4, -5),
-                new IntVec2(-3, -5), new IntVec2(-3, -1), new IntVec2(2, -1), new IntVec2(2, 2),
+                new IntVec2(0, 46), new IntVec2(0, 43), new IntVec2(4, 43), new IntVec2(4, 39),
+                new IntVec2(-4, 39), new IntVec2(-4, 34), new IntVec2(3, 34), new IntVec2(3, 30),
+                new IntVec2(-2, 30), new IntVec2(-2, 26), new IntVec2(0, 26),
             },
             new[]
             {
-                new IntVec2(0, -10), new IntVec2(-3, -10), new IntVec2(-3, -6), new IntVec2(4, -6),
-                new IntVec2(4, -2), new IntVec2(-2, -2), new IntVec2(-2, 2),
+                new IntVec2(0, 46), new IntVec2(-3, 46), new IntVec2(-3, 41), new IntVec2(5, 41),
+                new IntVec2(5, 36), new IntVec2(-4, 36), new IntVec2(-4, 31), new IntVec2(3, 31),
+                new IntVec2(3, 26), new IntVec2(0, 26),
             },
             new[]
             {
-                new IntVec2(0, -10), new IntVec2(3, -10), new IntVec2(3, -6), new IntVec2(-4, -6),
-                new IntVec2(-4, -2), new IntVec2(1, -2), new IntVec2(1, 2),
+                new IntVec2(0, 46), new IntVec2(3, 46), new IntVec2(3, 41), new IntVec2(-5, 41),
+                new IntVec2(-5, 36), new IntVec2(4, 36), new IntVec2(4, 31), new IntVec2(-3, 31),
+                new IntVec2(-3, 26), new IntVec2(0, 26),
             },
         };
 
-        // 미로(9열 x 5행의 3x3 방 격자) 통로 정의: 열 [-4..4], 행 [0..4]
-        private enum PassageKind : byte
+        public static float HexDist(float dx, float dz)
         {
-            Wall = 0,
-            Open = 1,
-            CreamBlockade = 2,
+            var adx = Mathf.Abs(dx);
+            var adz = Mathf.Abs(dz);
+            return Mathf.Max(adz, adz * 0.5f + adx * Sqrt3Over2);
         }
-
-        private static readonly (IntVec2 a, IntVec2 b, PassageKind kind)[] MazePassages =
-        {
-            // 서쪽 주 경로 및 갈림길
-            (new IntVec2(0, 0), new IntVec2(-1, 0), PassageKind.Open),
-            (new IntVec2(-1, 0), new IntVec2(-1, 1), PassageKind.Open),
-            (new IntVec2(-1, 1), new IntVec2(0, 1), PassageKind.Open),
-            (new IntVec2(-1, 0), new IntVec2(-2, 0), PassageKind.CreamBlockade),
-            (new IntVec2(-2, 0), new IntVec2(-3, 0), PassageKind.Open),
-            (new IntVec2(-3, 0), new IntVec2(-3, 1), PassageKind.Open),
-            (new IntVec2(-3, 1), new IntVec2(-2, 1), PassageKind.Open),
-            (new IntVec2(-2, 1), new IntVec2(-2, 2), PassageKind.Open),
-            (new IntVec2(-3, 1), new IntVec2(-4, 1), PassageKind.Open),
-            (new IntVec2(-4, 1), new IntVec2(-4, 2), PassageKind.CreamBlockade),
-            (new IntVec2(-4, 2), new IntVec2(-3, 2), PassageKind.Open),
-            (new IntVec2(-4, 2), new IntVec2(-4, 3), PassageKind.Open),
-            (new IntVec2(-4, 3), new IntVec2(-3, 3), PassageKind.Open),
-            (new IntVec2(-3, 3), new IntVec2(-3, 4), PassageKind.Open),
-            (new IntVec2(-3, 4), new IntVec2(-2, 4), PassageKind.Open),
-            (new IntVec2(-3, 3), new IntVec2(-2, 3), PassageKind.CreamBlockade),
-            (new IntVec2(-2, 3), new IntVec2(-1, 3), PassageKind.Open),
-            (new IntVec2(-1, 3), new IntVec2(-1, 2), PassageKind.Open),
-            (new IntVec2(-1, 2), new IntVec2(0, 2), PassageKind.Open),
-            (new IntVec2(-1, 3), new IntVec2(-1, 4), PassageKind.Open),
-            (new IntVec2(-1, 4), new IntVec2(0, 4), PassageKind.CreamBlockade),
-
-            // 동쪽 우회로 및 막다른 길
-            (new IntVec2(0, 0), new IntVec2(1, 0), PassageKind.Open),
-            (new IntVec2(1, 0), new IntVec2(2, 0), PassageKind.Open),
-            (new IntVec2(1, 0), new IntVec2(1, 1), PassageKind.CreamBlockade),
-            (new IntVec2(1, 1), new IntVec2(1, 2), PassageKind.Open),
-            (new IntVec2(1, 2), new IntVec2(2, 2), PassageKind.Open),
-            (new IntVec2(2, 0), new IntVec2(3, 0), PassageKind.Open),
-            (new IntVec2(3, 0), new IntVec2(3, 1), PassageKind.Open),
-            (new IntVec2(3, 1), new IntVec2(2, 1), PassageKind.Open),
-            (new IntVec2(3, 1), new IntVec2(4, 1), PassageKind.CreamBlockade),
-            (new IntVec2(4, 1), new IntVec2(4, 2), PassageKind.Open),
-            (new IntVec2(4, 2), new IntVec2(4, 3), PassageKind.Open),
-            (new IntVec2(4, 3), new IntVec2(3, 3), PassageKind.Open),
-            (new IntVec2(3, 3), new IntVec2(3, 2), PassageKind.Open),
-            (new IntVec2(3, 3), new IntVec2(2, 3), PassageKind.CreamBlockade),
-            (new IntVec2(2, 3), new IntVec2(1, 3), PassageKind.Open),
-            (new IntVec2(1, 3), new IntVec2(0, 3), PassageKind.Open),
-            (new IntVec2(2, 3), new IntVec2(2, 4), PassageKind.Open),
-            (new IntVec2(2, 4), new IntVec2(3, 4), PassageKind.Open),
-            (new IntVec2(2, 4), new IntVec2(1, 4), PassageKind.Open),
-            (new IntVec2(1, 4), new IntVec2(0, 4), PassageKind.CreamBlockade),
-
-            // 중앙 지름길 봉쇄
-            (new IntVec2(0, 2), new IntVec2(0, 3), PassageKind.CreamBlockade),
-        };
 
         public static CellRect FootprintBounds(IntVec3 origin)
         {
-            return new CellRect(origin.x - 24, origin.z - 46, 49, 94);
+            // 전체 거대 육각형(dx: -68..+68, dz: -59..+59) + 남쪽 전정(dz: -73..-59)
+            return new CellRect(origin.x - 68, origin.z - 73, 137, 133);
         }
 
-        public static IntVec3 RingCenter(IntVec3 origin) => new IntVec3(origin.x, 0, origin.z + 26);
+        public static IntVec3 RingCenter(IntVec3 origin) => origin;
 
-        public static IntVec3 CentralAltarCell(IntVec3 origin) => new IntVec3(origin.x, 0, origin.z + 27);
+        public static IntVec3 CentralAltarCell(IntVec3 origin) => origin;
 
-        public static IntVec3 RuinDoomFlowerCell(IntVec3 origin) => new IntVec3(origin.x, 0, origin.z - 12);
+        public static IntVec3 RuinDoomFlowerCell(IntVec3 origin) => new IntVec3(origin.x, 0, origin.z + 48);
 
-        public static IntVec3 RuinDoomReturnCell(IntVec3 origin) => new IntVec3(origin.x, 0, origin.z - 13);
+        public static IntVec3 RuinDoomReturnCell(IntVec3 origin) => new IntVec3(origin.x, 0, origin.z + 49);
 
-        public static CellRect TrialRect(IntVec3 origin) => new CellRect(origin.x - 5, origin.z - 10, 11, 13);
+        // 복도 전체 폭(dx: -9..+9, dz: +26..+46)을 시련 구역으로 지정해 측면 열주 우회를 원천 차단한다.
+        public static CellRect TrialRect(IntVec3 origin) => new CellRect(origin.x - 9, origin.z + 26, 19, 21);
 
-        public static CellRect Zone3BlastRect(IntVec3 origin) => new CellRect(origin.x - 10, origin.z - 14, 21, 21);
+        public static CellRect Zone3BlastRect(IntVec3 origin) => new CellRect(origin.x - 10, origin.z + 21, 21, 31);
 
         public static IntVec3 EchoFlowerCell(int index, IntVec3 origin)
         {
             switch (index)
             {
-                case 1: return new IntVec3(origin.x, 0, origin.z - 38);
-                case 2: return new IntVec3(origin.x, 0, origin.z - 17);
-                case 3: return new IntVec3(origin.x, 0, origin.z + 5);
-                case 4: return new IntVec3(origin.x, 0, origin.z + 22);
+                case 1: return new IntVec3(origin.x, 0, origin.z - 62);
+                case 2: return new IntVec3(origin.x, 0, origin.z + 54);
+                case 3: return new IntVec3(origin.x, 0, origin.z + 24);
+                case 4: return new IntVec3(origin.x, 0, origin.z + 5);
                 default: return origin;
             }
         }
@@ -146,61 +107,50 @@ namespace VVRace
             return result;
         }
 
-        // 봉인 단계: 0 = 외부(항상 개방), 1 = 미로, 2 = 숨겨진 길 회랑, 3 = 원형 회랑, 4 = 중심 제단 성소
+        // 봉인 단계:
+        // 0 = 외부(항상 개방)
+        // 1 = 중앙과 복도를 둘러싼 거대 육각형 미로
+        // 2 = 북쪽에서 중앙으로 향하는 길쭉하고 넓은 시련 복도
+        // 3 = 정중앙 원형 회랑 & 육각형 화분 퍼즐
+        // 4 = 정중앙 제단 성소
         public static int GetSealStage(IntVec3 cell, IntVec3 origin)
         {
             var dx = cell.x - origin.x;
             var dz = cell.z - origin.z;
+            var distSq = dx * dx + dz * dz;
 
-            var ringDx = dx;
-            var ringDz = dz - 26;
-            var ringDistSq = ringDx * ringDx + ringDz * ringDz;
-
-            if (ringDistSq <= SanctumInnerRadius * SanctumInnerRadius)
+            if (distSq <= SanctumInnerRadius * SanctumInnerRadius)
             {
                 return 4;
             }
 
-            if (InZone2Rel(dx, dz))
+            if (distSq <= RingOuterRadius * RingOuterRadius)
             {
-                return 1;
+                return 3;
             }
 
-            if (InZone3Rel(dx, dz))
+            if (InCorridorRel(dx, dz))
             {
                 return 2;
             }
 
-            if (dz >= 7 && ringDistSq <= RingOuterRadius * RingOuterRadius)
+            if (HexDist(dx, dz) <= HexOuterApothem)
             {
-                return 3;
+                return 1;
             }
 
             return 0;
         }
 
-        public static bool InZone2Rel(int dx, int dz)
+        public static bool InCorridorRel(int dx, int dz)
         {
-            if (dz < -35 || dz > -15) { return false; }
-            var adx = Mathf.Abs(dx);
-            if (adx > 18) { return false; }
-            if (adx > 14 && (dz < -31 || dz > -19)) { return false; }
-            return true;
-        }
-
-        public static bool InZone3Rel(int dx, int dz)
-        {
-            if (dz < -14 || dz > 7) { return false; }
-            var adx = Mathf.Abs(dx);
-            if (adx <= 9) { return true; }
-            if (adx <= 11 && dz >= -8 && dz <= 0) { return true; }
-            return false;
+            return Mathf.Abs(dx) <= 10 && dz >= 20 && dz <= 51;
         }
 
         public static List<IntVec3> GenerateHiddenPath(IntVec3 origin, int seed)
         {
             var template = HiddenPathTemplates[Mathf.Abs(seed) % HiddenPathTemplates.Length];
-            var path = new List<IntVec3>(32);
+            var path = new List<IntVec3>(64);
 
             for (int i = 0; i < template.Length; i++)
             {
@@ -226,30 +176,17 @@ namespace VVRace
 
         private static bool IsInSanctuaryGlade(Map map, IntVec3 cell, IntVec3 origin)
         {
-            if (GetSealStage(cell, origin) > 0) { return true; }
-
             var dx = cell.x - origin.x;
             var dz = cell.z - origin.z;
+            var hex = HexDist(dx, dz);
+
+            // 거대 육각형 외곽을 따라 자연스러운 곡선 공터(여유 6~7칸) 형성
+            int jitter = Math.Abs(cell.x * 37 + cell.z * 17) % 2;
+            if (hex <= HexOuterApothem + 5.5f + jitter) { return true; }
 
             // 남쪽 전정 광장 및 남쪽 맵 가장자리 진입 통로 확보
-            if (Mathf.Abs(dx) <= 15 && dz >= -47 && dz <= -34) { return true; }
-            if (Mathf.Abs(dx) <= 5 && cell.z <= origin.z - 45) { return true; }
-
-            // 결계 외곽을 따라 자연스러운 곡선 공터를 형성한다.
-            int jitter = Math.Abs(cell.x * 37 + cell.z * 17) % 2;
-            int radius = 4 + jitter;
-            for (int oz = -radius; oz <= radius; oz++)
-            {
-                for (int ox = -radius; ox <= radius; ox++)
-                {
-                    if (ox * ox + oz * oz > radius * radius) { continue; }
-                    var check = new IntVec3(cell.x + ox, 0, cell.z + oz);
-                    if (check.InBounds(map) && GetSealStage(check, origin) > 0)
-                    {
-                        return true;
-                    }
-                }
-            }
+            if (Mathf.Abs(dx) <= 18 && dz >= -74 && dz <= -57) { return true; }
+            if (Mathf.Abs(dx) <= 6 && cell.z <= origin.z - 70) { return true; }
 
             return false;
         }
@@ -257,7 +194,7 @@ namespace VVRace
         // 봉인 구역 및 전정 주변의 자연 지형·바위·수목·간헐천을 정리해 지형만 자연스럽게 보이게 한다.
         public static void PrepareFootprintGround(Map map, IntVec3 origin)
         {
-            var bounds = new CellRect(origin.x - 31, 0, 63, origin.z + 53).ClipInsideMap(map);
+            var bounds = new CellRect(origin.x - 76, 0, 153, origin.z + 67).ClipInsideMap(map);
             foreach (var cell in bounds)
             {
                 if (!IsInSanctuaryGlade(map, cell, origin)) { continue; }
@@ -271,7 +208,7 @@ namespace VVRace
         // 후속 바닐라 GenStep(750~1200: 고대 잔해 차량, 일반 폐허, 바위 덩어리, 수목 등)이 성소 영역에 뿌린 방해물을 정리한다.
         public static void CleanupPostGenDebris(Map map, IntVec3 origin, Func<int, bool> isStageUnsealed)
         {
-            var bounds = new CellRect(origin.x - 31, 0, 63, origin.z + 53).ClipInsideMap(map);
+            var bounds = new CellRect(origin.x - 76, 0, 153, origin.z + 67).ClipInsideMap(map);
             foreach (var cell in bounds)
             {
                 if (!IsInSanctuaryGlade(map, cell, origin)) { continue; }
@@ -280,8 +217,8 @@ namespace VVRace
                 bool isSealed = stage > 0 && !isStageUnsealed(stage);
                 var dx = cell.x - origin.x;
                 var dz = cell.z - origin.z;
-                bool inForecourtCore = Mathf.Abs(dx) <= 10 && dz >= -45 && dz <= -35;
-                bool onPavedPath = Mathf.Abs(dx) <= 4 && dz >= -45 && dz <= -35;
+                bool inForecourtCore = Mathf.Abs(dx) <= 14 && dz >= -72 && dz <= -58;
+                bool onPavedPath = Mathf.Abs(dx) <= 5 && dz >= -72 && dz <= -58;
 
                 if (stage == 0 || isSealed)
                 {
@@ -297,7 +234,6 @@ namespace VVRace
 
                     if (t.def.category == ThingCategory.Plant)
                     {
-                        // 봉인 지형 위에는 잔디·들꽃만 남겨 왜곡 굴절이 살아 숨 쉬게 하고, 큰 나무나 포장길 위 잡초만 제거한다.
                         bool isTree = t.def.plant != null && t.def.plant.IsTree;
                         if (onPavedPath || (stage > 0 && (!isSealed || isTree)) || (inForecourtCore && isTree))
                         {
@@ -306,7 +242,6 @@ namespace VVRace
                         continue;
                     }
 
-                    // 바닐라 ScatterRuinsSimple 벽, 고대 차량 잔해, 바위 덩어리, 간헐천 등을 제거한다.
                     if (t.def.category == ThingCategory.Building
                         || t.def.category == ThingCategory.Filth
                         || (t.def.category == ThingCategory.Item && (stage > 0 || inForecourtCore)))
@@ -322,13 +257,13 @@ namespace VVRace
             }
         }
 
-        // 제1구간(외부 전정): 풍화된 유적 파편과 1번 고대 요정꽃, 떠도는 소수의 거대 말벌을 배치한다.
+        // 외부 전정: 거대 육각형 남쪽 입구 앞 풍화된 유적 파편, 1번 고대 요정꽃, 떠도는 소수의 거대 말벌.
         public static void BuildZone1Forecourt(Map map, IntVec3 origin, int investigated, bool coreExtracted, bool spawnHornets)
         {
             var flowerCell = EchoFlowerCell(1, origin);
 
-            // 부서진 고대 진입로 바닥
-            for (int dz = -44; dz <= -36; dz++)
+            // 부서진 고대 진입로 바닥 (dz: -71..-59)
+            for (int dz = -71; dz <= -59; dz++)
             {
                 for (int dx = -4; dx <= 4; dx++)
                 {
@@ -357,9 +292,9 @@ namespace VVRace
             // 풍화된 옛 기둥·벽 잔해
             (int dx, int dz, float hpPct)[] pillars =
             {
-                (-6, -42, 0.45f), (-6, -41, 0.65f), (6, -42, 0.55f), (6, -41, 0.40f),
-                (-8, -38, 0.50f), (-7, -38, 0.35f), (8, -38, 0.45f), (7, -38, 0.60f),
-                (-5, -36, 0.70f), (5, -36, 0.65f),
+                (-7, -69, 0.45f), (-7, -68, 0.65f), (7, -69, 0.55f), (7, -68, 0.40f),
+                (-10, -64, 0.50f), (-9, -64, 0.35f), (10, -64, 0.45f), (9, -64, 0.60f),
+                (-6, -60, 0.70f), (6, -60, 0.65f),
             };
 
             for (int i = 0; i < pillars.Length; i++)
@@ -373,11 +308,11 @@ namespace VVRace
                 wall.HitPoints = Mathf.Max(20, Mathf.RoundToInt(wall.MaxHitPoints * p.hpPct));
             }
 
-            // 주변 비비아 꽃과 잔해 연출
+            // 주변 비비아 꽃 연출
             IntVec2[] flowerSpots =
             {
-                new IntVec2(-3, -40), new IntVec2(3, -40), new IntVec2(-4, -37), new IntVec2(4, -37),
-                new IntVec2(-9, -40), new IntVec2(9, -40),
+                new IntVec2(-4, -66), new IntVec2(4, -66), new IntVec2(-5, -62), new IntVec2(5, -62),
+                new IntVec2(-12, -63), new IntVec2(12, -63),
             };
             for (int i = 0; i < flowerSpots.Length; i++)
             {
@@ -405,16 +340,16 @@ namespace VVRace
 
             IntVec2[] anchors =
             {
-                new IntVec2(-13, -39),
-                new IntVec2(13, -39),
-                new IntVec2(-23, -20),
-                new IntVec2(23, -20),
+                new IntVec2(-16, -64),
+                new IntVec2(16, -64),
+                new IntVec2(-44, -44),
+                new IntVec2(44, -44),
             };
 
             for (int i = 0; i < anchors.Length; i++)
             {
                 var anchor = new IntVec3(origin.x + anchors[i].x, 0, origin.z + anchors[i].z).ClampInsideMap(map);
-                if (!CellFinder.TryFindRandomCellNear(anchor, map, 4, c => c.InBounds(map) && c.Standable(map) && GetSealStage(c, origin) == 0, out var spawnCell))
+                if (!CellFinder.TryFindRandomCellNear(anchor, map, 5, c => c.InBounds(map) && c.Standable(map) && GetSealStage(c, origin) == 0, out var spawnCell))
                 {
                     continue;
                 }
@@ -423,128 +358,334 @@ namespace VVRace
                 GenSpawn.Spawn(hornet, spawnCell, map, Rot4.South);
                 hornet.mindState?.mentalStateHandler?.TryStartMentalState(VVMentalStateDefOf.VV_HornetBerserk, forceWake: true);
 
-                var lordJob = new LordJob_RuinHornetWander(spawnCell, wanderRadius: 6.5f, guardRadius: 9.5f, retaliationRadius: 26f);
+                var lordJob = new LordJob_RuinHornetWander(spawnCell, wanderRadius: 7.5f, guardRadius: 10.5f, retaliationRadius: 28f);
                 LordMaker.MakeNewLord(null, lordJob, map, new[] { hornet });
             }
         }
 
-        // 제2구간(미로): 고대 벌집 벽 미로와 중간중간 막고 있는 파괴 가능한 크림벽, 출구의 2번 요정꽃.
-        public static void BuildZone2Maze(Map map, IntVec3 origin, int investigated, bool zone3Open)
+        // 제1구간(거대 육각형 미로): 중앙 성소와 북쪽 복도를 빙 둘러싼 대규모 미궁, 중간중간 파괴 가능한 크림벽, 북단 출구의 2번 요정꽃.
+        public static void BuildZone2Maze(Map map, IntVec3 origin, int investigated, bool zone3Open, int seed)
         {
-            var passageMap = new Dictionary<(IntVec2, IntVec2), PassageKind>();
-            for (int i = 0; i < MazePassages.Length; i++)
+            // 1) 전체 Stage 1 육각형 링 초기화: 바닥·지붕·고대 벽 채우기
+            for (int dz = -59; dz <= 59; dz++)
             {
-                var p = MazePassages[i];
-                passageMap[(p.a, p.b)] = p.kind;
-                passageMap[(p.b, p.a)] = p.kind;
-            }
-
-            // 전체 Zone 2 영역 초기화 및 기본 고대 벽 채우기
-            for (int dz = -35; dz <= -15; dz++)
-            {
-                for (int dx = -18; dx <= 18; dx++)
+                for (int dx = -68; dx <= 68; dx++)
                 {
-                    if (!InZone2Rel(dx, dz)) { continue; }
-
                     var cell = new IntVec3(origin.x + dx, 0, origin.z + dz);
-                    if (!cell.InBounds(map)) { continue; }
+                    if (!cell.InBounds(map) || GetSealStage(cell, origin) != 1) { continue; }
 
                     DisplacePawnsAndClear(map, cell);
 
-                    // 북쪽으로 갈수록 크림 바닥에서 정돈된 벌집 타일로 자연스럽게 전이된다.
+                    // 남쪽 입구 쪽은 풍화된 크림 바닥, 동·서 날개를 지나 북쪽 출구로 갈수록 정돈된 벌집 타일로 전이
                     TerrainDef floor = VVTerrainDefOf.VV_ViviCreamFloor;
-                    if (dz >= -21 || (dz >= -26 && Math.Abs(dx * 5 + dz * 3) % 3 == 0))
+                    if (dz >= 34 || (dz >= 8 && Math.Abs(dx * 5 + dz * 3) % 3 != 0) || (dz >= -18 && Math.Abs(dx * 7 + dz * 5) % 4 == 0))
                     {
                         floor = VVTerrainDefOf.VV_HoneycombTile;
                     }
                     SetFloor(map, cell, floor);
-
-                    // 입구(남쪽 문)와 출구(Zone 3 개방 시 북쪽 문)를 제외한 모든 칸에 일단 벽을 둔 뒤 방과 통로를 뚫는다.
-                    bool isSouthGate = dz == -35 && Mathf.Abs(dx) <= 1;
-                    bool isNorthGate = dz == -15 && Mathf.Abs(dx) <= 1 && zone3Open;
-                    if (!isSouthGate && !isNorthGate)
-                    {
-                        var wallDef = dz == -15 && Mathf.Abs(dx) <= 9
-                            ? VVThingDefOf.VV_AncientSanctumWall
-                            : VVThingDefOf.VV_AncientRuinWall;
-                        SpawnBuildingClean(map, wallDef, cell);
-                    }
-
-                    // 미로 전체에 지붕을 얹어 그늘진 외곽 미궁 분위기를 통일한다.
                     map.roofGrid.SetRoof(cell, RoofDefOf.RoofConstructed);
-                }
-            }
 
-            // 3x3 방 공간 확보
-            for (int row = 0; row <= 4; row++)
-            {
-                for (int col = -4; col <= 4; col++)
-                {
-                    if (!IsValidMazeRoom(col, row)) { continue; }
-
-                    var center = MazeRoomCenter(origin, col, row);
-                    foreach (var cell in CellRect.CenteredOn(center, 3, 3))
+                    bool isSouthGate = dz <= -56 && Mathf.Abs(dx) <= 1;
+                    if (!isSouthGate)
                     {
-                        if (!cell.InBounds(map)) { continue; }
-                        DestroyEdifice(map, cell);
-
-                        if (col == 0 && row == 4)
-                        {
-                            SetFloor(map, cell, cell == center ? VVTerrainDefOf.VV_SterileHoneycombTile : VVTerrainDefOf.VV_HoneycombTile);
-                        }
+                        SpawnBuildingClean(map, VVThingDefOf.VV_AncientRuinWall, cell);
                     }
                 }
             }
 
-            // 인접한 3x3 방 사이의 통로(열림 또는 파괴 가능한 크림벽) 생성
-            foreach (var entry in MazePassages)
+            // 2) 유효한 5x5 미로 방 격자 노드 수집 (pitch = 6, 육각형 외벽 2칸 두께 보존 + 중앙/복도 침범 금지)
+            var validNodes = new HashSet<IntVec2>();
+            for (int row = -9; row <= 9; row++)
             {
-                if (!IsValidMazeRoom(entry.a.x, entry.a.z) || !IsValidMazeRoom(entry.b.x, entry.b.z)) { continue; }
-
-                foreach (var cell in GetMazeDoorCells(origin, entry.a, entry.b))
+                for (int col = -10; col <= 10; col++)
                 {
-                    if (!cell.InBounds(map)) { continue; }
+                    if (IsValidMazeRoom(origin, col, row))
+                    {
+                        validNodes.Add(new IntVec2(col, row));
+                    }
+                }
+            }
+
+            var startNode = new IntVec2(0, -9);
+            var goalNode = new IntVec2(0, 9);
+            validNodes.Add(startNode);
+            validNodes.Add(goalNode);
+
+            // 시작 방과 연결된 주 연결 요소만 유지해 고립 방을 원천 차단
+            var connected = CollectConnectedNodes(validNodes, startNode);
+
+            // 3) 결정론적 시드 기반 미로 신장 트리 + 양쪽 날개 우회 루프 생성
+            var rng = new System.Random(Gen.HashCombineInt(seed, 71933));
+            var passages = BuildMazePassages(connected, startNode, goalNode, rng);
+
+            // 4) 방 내부(5x5) 파내기
+            foreach (var node in connected)
+            {
+                var center = MazeRoomCenter(origin, node.x, node.z);
+                foreach (var cell in CellRect.CenteredOn(center, 5, 5))
+                {
+                    if (!cell.InBounds(map) || GetSealStage(cell, origin) != 1) { continue; }
                     DestroyEdifice(map, cell);
 
-                    if (entry.kind == PassageKind.CreamBlockade)
+                    if (node == goalNode)
+                    {
+                        SetFloor(map, cell, cell == center ? VVTerrainDefOf.VV_SterileHoneycombTile : VVTerrainDefOf.VV_HoneycombTile);
+                    }
+                }
+            }
+
+            // 남쪽 대문(dz: -58..-57)과 시작 방(0, -9) 완전 연결
+            for (int dz = -58; dz <= -56; dz++)
+            {
+                for (int dx = -1; dx <= 1; dx++)
+                {
+                    var gateCell = new IntVec3(origin.x + dx, 0, origin.z + dz);
+                    if (gateCell.InBounds(map) && GetSealStage(gateCell, origin) == 1)
+                    {
+                        DestroyEdifice(map, gateCell);
+                    }
+                }
+            }
+
+            // 5) 통로 개방 및 파괴 가능한 비비 크림벽 봉쇄 설치 (3칸 폭 출입구)
+            foreach (var kv in passages)
+            {
+                var (a, b) = kv.Key;
+                bool isCream = kv.Value;
+                foreach (var cell in GetMazeDoorCells(origin, a, b))
+                {
+                    if (!cell.InBounds(map) || GetSealStage(cell, origin) != 1) { continue; }
+                    DestroyEdifice(map, cell);
+
+                    if (isCream)
                     {
                         SpawnBuildingClean(map, VVThingDefOf.VV_ViviCreamWall, cell);
                     }
                 }
             }
 
-            // 미로 곳곳의 남아 있는 희미한 성소 등불과 출구 등불 장식
-            (int dx, int dz)[] mazeLamps =
+            // 6) 미로 내 주요 거점 등불 배치 (어두운 미궁 분위기 유지 + 크림벽 시인성 확보)
+            foreach (var node in connected)
             {
-                (-12, -29), (12, -29),
-                (-8, -21), (8, -21),
-                (-1, -16), (1, -16),
-            };
-            for (int i = 0; i < mazeLamps.Length; i++)
-            {
-                var lc = new IntVec3(origin.x + mazeLamps[i].dx, 0, origin.z + mazeLamps[i].dz);
-                if (lc.InBounds(map) && lc.GetEdifice(map) == null)
+                bool isMilestone = node == startNode
+                    || (Math.Abs(node.x) % 3 == 0 && Math.Abs(node.z) % 3 == 0);
+                if (!isMilestone || node == goalNode) { continue; }
+
+                var center = MazeRoomCenter(origin, node.x, node.z);
+                var lampCell = new IntVec3(center.x + (node.x >= 0 ? -2 : 2), 0, center.z + (node.z >= 0 ? -2 : 2));
+                if (lampCell.InBounds(map) && GetSealStage(lampCell, origin) == 1 && lampCell.GetEdifice(map) == null)
                 {
-                    SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumLamp, lc);
+                    SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumLamp, lampCell);
                 }
             }
+
+            // 북단 출구 성소(0, +9) 장식 등불 및 2번 요정꽃
+            SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumLamp, new IntVec3(origin.x - 2, 0, origin.z + 56));
+            SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumLamp, new IntVec3(origin.x + 2, 0, origin.z + 56));
 
             if (investigated < 2)
             {
                 SpawnBuildingClean(map, VVThingDefOf.VV_AncientRuinFairyFlowerII, EchoFlowerCell(2, origin));
             }
+
+            if (zone3Open)
+            {
+                OpenZone2NorthGate(map, origin);
+            }
         }
 
-        private static bool IsValidMazeRoom(int col, int row)
+        private static void OpenZone2NorthGate(Map map, IntVec3 origin)
         {
-            if (row < 0 || row > 4 || col < -4 || col > 4) { return false; }
-            if ((row == 0 || row == 4) && Mathf.Abs(col) > 3) { return false; }
+            for (int dx = -1; dx <= 1; dx++)
+            {
+                for (int dz = 51; dz <= 52; dz++)
+                {
+                    var gateCell = new IntVec3(origin.x + dx, 0, origin.z + dz);
+                    if (gateCell.InBounds(map))
+                    {
+                        DestroyEdifice(map, gateCell);
+                        SetFloor(map, gateCell, VVTerrainDefOf.VV_SterileHoneycombTile);
+                    }
+                }
+            }
+        }
+
+        private static bool IsValidMazeRoom(IntVec3 origin, int col, int row)
+        {
+            var center = MazeRoomCenter(origin, col, row);
+            for (int oz = -2; oz <= 2; oz++)
+            {
+                for (int ox = -2; ox <= 2; ox++)
+                {
+                    var c = new IntVec3(center.x + ox, 0, center.z + oz);
+                    if (GetSealStage(c, origin) != 1) { return false; }
+                    if (HexDist(c.x - origin.x, c.z - origin.z) > HexShellInnerApothem) { return false; }
+                }
+            }
+
             return true;
         }
 
         private static IntVec3 MazeRoomCenter(IntVec3 origin, int col, int row)
         {
-            return new IntVec3(origin.x + col * 4, 0, origin.z - 33 + row * 4);
+            return new IntVec3(origin.x + col * MazePitch, 0, origin.z + row * MazePitch);
+        }
+
+        private static HashSet<IntVec2> CollectConnectedNodes(HashSet<IntVec2> validNodes, IntVec2 start)
+        {
+            var visited = new HashSet<IntVec2>();
+            if (!validNodes.Contains(start)) { return visited; }
+
+            var queue = new Queue<IntVec2>();
+            visited.Add(start);
+            queue.Enqueue(start);
+
+            IntVec2[] dirs = { new IntVec2(1, 0), new IntVec2(-1, 0), new IntVec2(0, 1), new IntVec2(0, -1) };
+            while (queue.Count > 0)
+            {
+                var cur = queue.Dequeue();
+                for (int i = 0; i < dirs.Length; i++)
+                {
+                    var nxt = new IntVec2(cur.x + dirs[i].x, cur.z + dirs[i].z);
+                    if (validNodes.Contains(nxt) && visited.Add(nxt))
+                    {
+                        queue.Enqueue(nxt);
+                    }
+                }
+            }
+
+            return visited;
+        }
+
+        private static (IntVec2, IntVec2) CanonicalEdge(IntVec2 a, IntVec2 b)
+        {
+            if (a.x < b.x || (a.x == b.x && a.z <= b.z))
+            {
+                return (a, b);
+            }
+            return (b, a);
+        }
+
+        private static Dictionary<(IntVec2, IntVec2), bool> BuildMazePassages(HashSet<IntVec2> nodes, IntVec2 start, IntVec2 goal, System.Random rng)
+        {
+            var passages = new Dictionary<(IntVec2, IntVec2), bool>();
+            var visited = new HashSet<IntVec2> { start };
+            var stack = new Stack<(IntVec2 node, IntVec2 lastDir)>();
+            stack.Push((start, new IntVec2(0, 0)));
+
+            IntVec2[] dirs = { new IntVec2(1, 0), new IntVec2(-1, 0), new IntVec2(0, 1), new IntVec2(0, -1) };
+
+            // 직진 편향 DFS로 길고 구불구불한 회랑 감각을 살린다.
+            while (stack.Count > 0)
+            {
+                var (cur, lastDir) = stack.Peek();
+                var unvisited = new List<IntVec2>(4);
+                for (int i = 0; i < dirs.Length; i++)
+                {
+                    var nxt = new IntVec2(cur.x + dirs[i].x, cur.z + dirs[i].z);
+                    if (nodes.Contains(nxt) && !visited.Contains(nxt))
+                    {
+                        unvisited.Add(dirs[i]);
+                    }
+                }
+
+                if (unvisited.Count == 0)
+                {
+                    stack.Pop();
+                    continue;
+                }
+
+                IntVec2 chosenDir;
+                if (lastDir != default && unvisited.Contains(lastDir) && rng.NextDouble() < 0.55)
+                {
+                    chosenDir = lastDir;
+                }
+                else
+                {
+                    chosenDir = unvisited[rng.Next(unvisited.Count)];
+                }
+
+                var next = new IntVec2(cur.x + chosenDir.x, cur.z + chosenDir.z);
+                visited.Add(next);
+                passages[CanonicalEdge(cur, next)] = false;
+                stack.Push((next, chosenDir));
+            }
+
+            // 북단 출구 방(0, +9)은 동·서 양쪽 날개 모두에서 도달 가능하도록 인접 통로 추가
+            var goalWest = new IntVec2(goal.x - 1, goal.z);
+            var goalEast = new IntVec2(goal.x + 1, goal.z);
+            if (nodes.Contains(goalWest)) { passages[CanonicalEdge(goal, goalWest)] = true; }
+            if (nodes.Contains(goalEast)) { passages[CanonicalEdge(goal, goalEast)] = true; }
+
+            // 시작 방(0, -9) 양쪽 진입로 확보 (입구에서 바로 좌·우·전방 탐색 가능)
+            var startWest = new IntVec2(start.x - 1, start.z);
+            var startEast = new IntVec2(start.x + 1, start.z);
+            if (nodes.Contains(startWest)) { passages[CanonicalEdge(start, startWest)] = false; }
+            if (nodes.Contains(startEast)) { passages[CanonicalEdge(start, startEast)] = false; }
+
+            // 일부 추가 우회로(약 12%)를 뚫어 동·서 날개 양방향 탐색을 허용하되 미궁의 분기감을 유지
+            var allPossible = new List<(IntVec2, IntVec2)>();
+            foreach (var n in nodes)
+            {
+                var right = new IntVec2(n.x + 1, n.z);
+                var up = new IntVec2(n.x, n.z + 1);
+                if (nodes.Contains(right))
+                {
+                    var e = CanonicalEdge(n, right);
+                    if (!passages.ContainsKey(e)) { allPossible.Add(e); }
+                }
+                if (nodes.Contains(up))
+                {
+                    var e = CanonicalEdge(n, up);
+                    if (!passages.ContainsKey(e)) { allPossible.Add(e); }
+                }
+            }
+
+            for (int i = 0; i < allPossible.Count; i++)
+            {
+                if (rng.NextDouble() < 0.11)
+                {
+                    passages[allPossible[i]] = rng.NextDouble() < 0.45;
+                }
+            }
+
+            // 동·서 날개와 남쪽 접근로의 핵심 관문에 파괴 가능한 비비 크림벽 봉쇄를 배치한다.
+            var keys = passages.Keys.ToList();
+            for (int i = 0; i < keys.Count; i++)
+            {
+                var edge = keys[i];
+                var a = edge.Item1;
+                var b = edge.Item2;
+
+                // 시작 방 바로 옆 통로는 열어두어 입구에서 바로 걸어 들어갈 수 있게 한다.
+                if (a == start || b == start)
+                {
+                    passages[edge] = false;
+                    continue;
+                }
+
+                // 북단 출구 방(0, +9)으로 들어가는 모든 문은 반드시 크림벽으로 봉쇄한다.
+                if (a == goal || b == goal)
+                {
+                    passages[edge] = true;
+                    continue;
+                }
+
+                // 남쪽 관문선(row -7 -> -6), 적도 관문선(row -1 -> 0), 북쪽 관문선(row 5 -> 6)을 넘는 세로 통로에 크림벽 배치
+                if (a.x == b.x && ((a.z == -7 && b.z == -6) || (a.z == -1 && b.z == 0) || (a.z == 5 && b.z == 6)))
+                {
+                    passages[edge] = true;
+                    continue;
+                }
+
+                // 시작 방 양옆의 2차 관문(±1,-9 <-> ±2,-9)에 크림벽을 두어 초반부터 기믹을 인지시킨다.
+                if (a.z == start.z && b.z == start.z && ((a.x == -2 && b.x == -1) || (a.x == 1 && b.x == 2)))
+                {
+                    passages[edge] = true;
+                }
+            }
+
+            return passages;
         }
 
         private static IEnumerable<IntVec3> GetMazeDoorCells(IntVec3 origin, IntVec2 a, IntVec2 b)
@@ -569,66 +710,66 @@ namespace VVRace
             }
         }
 
-        // 제3구간(숨겨진 길 회랑): 미로 너머 온전히 보존된 성소 회랑, 잔향의 멸망꽃, 시련 격자, 3번 요정꽃.
+        // 제2구간(길쭉하고 넓은 시련 복도): 미로 북단에서 정중앙 원형 성소로 이어지는 21x30 온전한 제국 대복도.
         public static void BuildZone3Hall(Map map, IntVec3 origin, int investigated, bool zone4Open, IReadOnlyCollection<IntVec3> safePath)
         {
-            // Zone 2 북쪽 경계 문 개방
-            for (int dx = -1; dx <= 1; dx++)
-            {
-                var gateCell = new IntVec3(origin.x + dx, 0, origin.z - 15);
-                if (gateCell.InBounds(map))
-                {
-                    DestroyEdifice(map, gateCell);
-                    SetFloor(map, gateCell, VVTerrainDefOf.VV_SterileHoneycombTile);
-                }
-            }
+            OpenZone2NorthGate(map, origin);
 
-            for (int dz = -14; dz <= 7; dz++)
+            for (int dz = 20; dz <= 51; dz++)
             {
-                for (int dx = -11; dx <= 11; dx++)
+                for (int dx = -10; dx <= 10; dx++)
                 {
-                    if (!InZone3Rel(dx, dz)) { continue; }
-
                     var cell = new IntVec3(origin.x + dx, 0, origin.z + dz);
-                    if (!cell.InBounds(map)) { continue; }
+                    if (!cell.InBounds(map) || GetSealStage(cell, origin) != 2) { continue; }
 
                     DisplacePawnsAndClear(map, cell);
                     SetFloor(map, cell, VVTerrainDefOf.VV_HoneycombTile);
                     map.roofGrid.SetRoof(cell, RoofDefOf.RoofConstructed);
 
-                    bool isNorthGate = dz == 7 && Mathf.Abs(dx) <= 1 && zone4Open;
-                    if (!isNorthGate && IsZone3OuterWall(dx, dz))
+                    bool isNorthGate = dz == 51 && Mathf.Abs(dx) <= 1;
+                    bool isSouthGate = zone4Open && dz <= 23 && Mathf.Abs(dx) <= 2;
+                    if (!isNorthGate && !isSouthGate && IsCorridorOuterWall(cell, origin))
                     {
                         SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumWall, cell);
                     }
                 }
             }
 
-            // 시련 구역 남·북 경계선 및 측면 열주·등불 (지붕 지지 반경 6.9 보장 + 행 위치 가늠자 역할)
-            for (int dx = -5; dx <= 5; dx++)
+            // 시련 구역 북·남 경계 장식선 (dz = 47, dz = 25)
+            for (int dx = -9; dx <= 9; dx++)
             {
-                SetFloor(map, new IntVec3(origin.x + dx, 0, origin.z - 11), VVTerrainDefOf.VV_SterileHoneycombTile);
-                SetFloor(map, new IntVec3(origin.x + dx, 0, origin.z + 3), VVTerrainDefOf.VV_SterileHoneycombTile);
+                var northEdge = new IntVec3(origin.x + dx, 0, origin.z + 47);
+                var southEdge = new IntVec3(origin.x + dx, 0, origin.z + 25);
+                if (northEdge.InBounds(map) && GetSealStage(northEdge, origin) == 2 && northEdge.GetEdifice(map) == null)
+                {
+                    SetFloor(map, northEdge, VVTerrainDefOf.VV_SterileHoneycombTile);
+                }
+                if (southEdge.InBounds(map) && GetSealStage(southEdge, origin) == 2 && southEdge.GetEdifice(map) == null)
+                {
+                    SetFloor(map, southEdge, VVTerrainDefOf.VV_SterileHoneycombTile);
+                }
             }
 
-            int[] pillarZ = { -10, -7, -4, -1, 2 };
+            // 좌·우 대칭 황금 열주(dx = ±6, 4칸 간격: 최대 지붕 거리 6.32 < 6.9로 지붕 붕괴 0) + 측면 성소 등불
+            int[] pillarZ = { 26, 30, 34, 38, 42, 46 };
             for (int i = 0; i < pillarZ.Length; i++)
             {
                 var z = origin.z + pillarZ[i];
                 SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumWall, new IntVec3(origin.x - 6, 0, z));
                 SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumWall, new IntVec3(origin.x + 6, 0, z));
 
-                if (i == 1 || i == 3)
+                if (i == 0 || i == 2 || i == 4)
                 {
-                    SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumLamp, new IntVec3(origin.x - 7, 0, z));
-                    SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumLamp, new IntVec3(origin.x + 7, 0, z));
+                    SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumLamp, new IntVec3(origin.x - 8, 0, z + 2));
+                    SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumLamp, new IntVec3(origin.x + 8, 0, z + 2));
                 }
             }
 
-            SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumLamp, new IntVec3(origin.x - 5, 0, origin.z - 13));
-            SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumLamp, new IntVec3(origin.x + 5, 0, origin.z - 13));
-            SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumLamp, new IntVec3(origin.x - 5, 0, origin.z + 5));
-            SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumLamp, new IntVec3(origin.x + 5, 0, origin.z + 5));
+            // 북단 입구 전실 및 남단 단상 등불
+            SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumLamp, new IntVec3(origin.x - 5, 0, origin.z + 49));
+            SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumLamp, new IntVec3(origin.x + 5, 0, origin.z + 49));
+            SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumLamp, new IntVec3(origin.x - 4, 0, origin.z + 24));
+            SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumLamp, new IntVec3(origin.x + 4, 0, origin.z + 24));
 
             var flower3Cell = EchoFlowerCell(3, origin);
             SetFloor(map, flower3Cell, VVTerrainDefOf.VV_SterileHoneycombTile);
@@ -659,28 +800,31 @@ namespace VVRace
             }
         }
 
-        private static bool IsZone3OuterWall(int dx, int dz)
+        private static bool IsCorridorOuterWall(IntVec3 cell, IntVec3 origin)
         {
-            if (dz == 7) { return true; }
+            var dx = cell.x - origin.x;
+            var dz = cell.z - origin.z;
+            if (dz == 51 || Mathf.Abs(dx) == 10) { return true; }
 
             for (int i = 0; i < 4; i++)
             {
-                var ndx = dx + GenAdj.CardinalDirections[i].x;
-                var ndz = dz + GenAdj.CardinalDirections[i].z;
-                if (ndz == -15 && Mathf.Abs(ndx) <= 9) { continue; }
-                if (!InZone3Rel(ndx, ndz)) { return true; }
+                var adj = cell + GenAdj.CardinalDirections[i];
+                if (GetSealStage(adj, origin) != 2)
+                {
+                    return true;
+                }
             }
 
             return false;
         }
 
-        // 제4구간(원형 회랑): 중심 제단 구역을 둘러싼 원형 성소 + 육각형 배치 화분 6개와 공명 요정꽃 6개.
+        // 제3구간(정중앙 원형 회랑): 거대 육각형의 정중앙(origin)에 배치된 원형 성소 + 육각형 화분 6개와 공명 요정꽃 6개.
         public static List<Building_RuinPuzzleFairyFlower> BuildZone4Ring(Map map, IntVec3 origin, bool hexagonSolved, int seed)
         {
-            // Zone 3 북쪽 경계 문 개방
-            for (int dx = -1; dx <= 1; dx++)
+            // 제2구간 남쪽 경계 대문(dx: -2..+2, dz: 21..23) 개방
+            for (int dx = -2; dx <= 2; dx++)
             {
-                for (int dz = 6; dz <= 8; dz++)
+                for (int dz = 21; dz <= 23; dz++)
                 {
                     var gateCell = new IntVec3(origin.x + dx, 0, origin.z + dz);
                     if (gateCell.InBounds(map))
@@ -691,27 +835,24 @@ namespace VVRace
                 }
             }
 
-            var ringCenter = RingCenter(origin);
-
-            for (int dz = 7; dz <= 46; dz++)
+            for (int dz = -23; dz <= 23; dz++)
             {
-                for (int dx = -21; dx <= 21; dx++)
+                for (int dx = -23; dx <= 23; dx++)
                 {
                     var cell = new IntVec3(origin.x + dx, 0, origin.z + dz);
-                    if (!cell.InBounds(map)) { continue; }
-                    if (GetSealStage(cell, origin) != 3) { continue; }
+                    if (!cell.InBounds(map) || GetSealStage(cell, origin) != 3) { continue; }
 
-                    var isSouthDoor = dz <= 8 && Mathf.Abs(dx) <= 1;
-                    if (!isSouthDoor)
+                    bool isNorthDoor = dz >= 20 && Mathf.Abs(dx) <= 2;
+                    if (!isNorthDoor)
                     {
                         DisplacePawnsAndClear(map, cell);
                     }
 
-                    var dist = Mathf.Sqrt(dx * dx + (dz - 26) * (dz - 26));
-                    bool isOuterWall = !isSouthDoor && IsZone4OuterWall(cell, origin);
+                    var dist = Mathf.Sqrt(dx * dx + dz * dz);
+                    bool isOuterWall = !isNorthDoor && IsRingOuterWall(cell, origin);
 
-                    // 바깥 원형 회랑 아케이드(13.2 ~ 외벽)만 지붕을 얹어 지붕 붕괴 없이 하늘이 열린 성소 중정을 이룬다.
-                    if (dist >= 13.2f)
+                    // 외곽 아케이드(15.8 ~ 22.5, 외벽까지 최대 6.7 < 6.9)만 지붕을 얹어 중앙 성소 광장은 하늘로 열어 둔다.
+                    if (dist >= 15.8f)
                     {
                         map.roofGrid.SetRoof(cell, RoofDefOf.RoofConstructed);
                     }
@@ -720,9 +861,9 @@ namespace VVRace
                         map.roofGrid.SetRoof(cell, null);
                     }
 
-                    bool isInlay = (dist >= 15.6f && dist <= 16.5f)
-                        || (dist >= 8.2f && dist <= 9.0f)
-                        || (Mathf.Abs(dx) <= 1 && dz >= 7 && dz <= 18);
+                    bool isInlay = (dist >= 17.5f && dist <= 18.5f)
+                        || (dist >= 9.2f && dist <= 10.1f)
+                        || (Mathf.Abs(dx) <= 1 && dz >= 9 && dz <= 22);
                     SetFloor(map, cell, isInlay ? VVTerrainDefOf.VV_SterileHoneycombTile : VVTerrainDefOf.VV_HoneycombTile);
 
                     if (isOuterWall)
@@ -732,18 +873,19 @@ namespace VVRace
                 }
             }
 
-            // 원형 회랑 둘레 고대 마나 등불 8개
+            // 원형 회랑 둘레 고대 마나 등불 10개 (대칭 배치)
             (int dx, int dz)[] lampOffsets =
             {
-                (-5, 9), (5, 9),
-                (-16, 18), (16, 18),
-                (-16, 34), (16, 34),
-                (-6, 42), (6, 42),
+                (-6, 19), (6, 19),
+                (-16, 11), (16, 11),
+                (-19, 0), (19, 0),
+                (-16, -11), (16, -11),
+                (-7, -18), (7, -18),
             };
             for (int i = 0; i < lampOffsets.Length; i++)
             {
                 var lampCell = new IntVec3(origin.x + lampOffsets[i].dx, 0, origin.z + lampOffsets[i].dz);
-                if (lampCell.InBounds(map) && lampCell.GetEdifice(map) == null)
+                if (lampCell.InBounds(map) && GetSealStage(lampCell, origin) == 3 && lampCell.GetEdifice(map) == null)
                 {
                     SpawnBuildingClean(map, VVThingDefOf.VV_AncientSanctumLamp, lampCell);
                 }
@@ -779,13 +921,13 @@ namespace VVRace
             return flowers;
         }
 
-        private static bool IsZone4OuterWall(IntVec3 cell, IntVec3 origin)
+        private static bool IsRingOuterWall(IntVec3 cell, IntVec3 origin)
         {
             for (int i = 0; i < 4; i++)
             {
                 var adj = cell + GenAdj.CardinalDirections[i];
                 var stage = GetSealStage(adj, origin);
-                if (stage == 0 || stage == 1)
+                if (stage == 0 || stage == 1 || stage == 2)
                 {
                     return true;
                 }
@@ -794,13 +936,12 @@ namespace VVRace
             return false;
         }
 
-        // 제5구간(중심 제단 성소): 육각형 퍼즐 완료 시 봉인이 풀리며 중심 제단과 마지막 4번 요정꽃이 드러난다.
+        // 제4구간(정중앙 제단 성소): 육각형 퍼즐 완료 시 봉인이 풀리며 중심 제단과 마지막 4번 요정꽃이 드러난다.
         public static void BuildZone5AltarSanctum(Map map, IntVec3 origin, int investigated, bool coreExtracted)
         {
-            var ringCenter = RingCenter(origin);
-            for (int dz = 18; dz <= 34; dz++)
+            for (int dz = -9; dz <= 9; dz++)
             {
-                for (int dx = -8; dx <= 8; dx++)
+                for (int dx = -9; dx <= 9; dx++)
                 {
                     var cell = new IntVec3(origin.x + dx, 0, origin.z + dz);
                     if (!cell.InBounds(map) || GetSealStage(cell, origin) != 4) { continue; }
@@ -808,26 +949,36 @@ namespace VVRace
                     DisplacePawnsAndClear(map, cell);
                     map.roofGrid.SetRoof(cell, null);
 
-                    var dist = (cell - ringCenter).LengthHorizontal;
-                    bool sterile = dist <= 3.8f || (dist >= 6.4f && dist <= 7.5f) || Mathf.Abs(dx) <= 1;
+                    var dist = Mathf.Sqrt(dx * dx + dz * dz);
+                    bool sterile = dist <= 4.0f || (dist >= 7.2f && dist <= 8.5f) || (Mathf.Abs(dx) <= 1 && dz >= 0);
                     SetFloor(map, cell, sterile ? VVTerrainDefOf.VV_SterileHoneycombTile : VVTerrainDefOf.VV_HoneycombTile);
                 }
             }
 
-            if (!coreExtracted)
-            {
-                SpawnBuildingClean(map, VVThingDefOf.VV_AncientRuinAltar, CentralAltarCell(origin));
-            }
-            else
-            {
-                // 이미 추출한 뒤라도 맵 안에서 제단은 남아 있는다.
-                SpawnBuildingClean(map, VVThingDefOf.VV_AncientRuinAltar, CentralAltarCell(origin));
-            }
+            SpawnBuildingClean(map, VVThingDefOf.VV_AncientRuinAltar, CentralAltarCell(origin));
 
-            if (investigated < 4)
+            if (investigated < 4 && !coreExtracted)
             {
                 SpawnBuildingClean(map, VVThingDefOf.VV_AncientRuinFairyFlowerIV, EchoFlowerCell(4, origin));
             }
+        }
+
+        // 중력선 체류 등 맵이 남는 경우, 거대 육각형 내부 전체를 다시 자연 지형·결계 장벽으로 되돌린다.
+        public static void ResealAllStagesToNaturalGround(Map map, IntVec3 origin)
+        {
+            var bounds = FootprintBounds(origin).ClipInsideMap(map);
+            foreach (var cell in bounds)
+            {
+                if (GetSealStage(cell, origin) <= 0) { continue; }
+
+                ClearCellObstacles(map, cell, removePlants: true);
+                map.roofGrid.SetRoof(cell, null);
+                map.terrainGrid.RemoveTopLayer(cell, doLeavings: false);
+                EnsureSolidNaturalGround(map, cell);
+            }
+
+            RefreshSpatialBarriers(map, origin, _ => false);
+            UnfogSanctuary(map, origin, forceMeshDirty: true);
         }
 
         public static void RefreshSpatialBarriers(Map map, IntVec3 origin, Func<int, bool> isStageUnsealed)
@@ -877,7 +1028,7 @@ namespace VVRace
         {
             if (map?.fogGrid == null) { return; }
 
-            var bounds = new CellRect(origin.x - 32, 0, 65, origin.z + 54).ClipInsideMap(map);
+            var bounds = new CellRect(origin.x - 76, 0, 153, origin.z + 67).ClipInsideMap(map);
             bool canDirty = forceMeshDirty && Current.ProgramState == ProgramState.Playing && map.mapDrawer != null;
             foreach (var cell in bounds)
             {

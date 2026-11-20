@@ -28,6 +28,9 @@
         public const string VV_Message_RuinPuzzleUntethered = nameof(VV_Message_RuinPuzzleUntethered);
         public const string VV_Message_RuinPuzzleSwapped = nameof(VV_Message_RuinPuzzleSwapped);
         public const string VV_Message_RuinHexagonCompleted = nameof(VV_Message_RuinHexagonCompleted);
+        public const string VV_Message_RuinResealing = nameof(VV_Message_RuinResealing);
+        public const string VV_Message_RuinResealedExpelled = nameof(VV_Message_RuinResealedExpelled);
+        public const string VV_Message_RuinResealedGravship = nameof(VV_Message_RuinResealedGravship);
 
         public const string VV_Message_EverflowerEnshrined = nameof(VV_Message_EverflowerEnshrined);
         public const string VV_Message_EverflowerAltarRequiresLevel = nameof(VV_Message_EverflowerAltarRequiresLevel);

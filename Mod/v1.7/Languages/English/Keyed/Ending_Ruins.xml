@@ -23,6 +23,9 @@
 <VV_Message_RuinPuzzleUntethered>The resonance thread link with the fairy bloom ended.</VV_Message_RuinPuzzleUntethered>
 <VV_Message_RuinPuzzleSwapped>The two resonating fairy blooms swapped positions.</VV_Message_RuinPuzzleSwapped>
 <VV_Message_RuinHexagonCompleted>The hexagonal resonance circuit is complete, unsealing the central altar sanctum!</VV_Message_RuinHexagonCompleted>
+<VV_Message_RuinResealing>As the ancient amber core is drawn out, the sanctum's spatial distortion begins to close once more!</VV_Message_RuinResealing>
+<VV_Message_RuinResealedExpelled>The ancient ruins have sealed themselves behind the spatial distortion once more, expelling the entire expedition back onto the world map.</VV_Message_RuinResealedExpelled>
+<VV_Message_RuinResealedGravship>The ancient ruins have sealed themselves behind the spatial distortion once more, expelling everyone inside the sanctum back outside.</VV_Message_RuinResealedGravship>
 
 <!-- 정보창 -->
 <VV_Inspector_RuinDoomFlowerHint>Each time it is destroyed, it sends a wisp along the hidden path before regrowing.</VV_Inspector_RuinDoomFlowerHint>

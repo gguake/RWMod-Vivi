@@ -1,8 +1,8 @@
 #version 450
 
-// 고대 유적 공간 왜곡 결계 셰이더:
-// 봉인된 구역(Stage 1~4)의 지형을 실시간 굴절시키고, 경계면의 일렁이는 균열과
-// 공간 너머 거대 성소의 희미한 육각 잔상만 비춘다.
+// 거대 육각형 고대 유적 공간 왜곡 결계 셰이더:
+// 전체가 거대한 정육각형(Stage 1 외곽 미로, Stage 2 북쪽 장대 복도, Stage 3 중앙 원형 회랑, Stage 4 중앙 제단)으로
+// 이루어져 있으며, 봉인된 구역의 지형만 실시간 굴절시키고 신기루 같은 거대 구조물 잔상을 비춘다.
 
 layout(location = 1) in vec2 vUv;
 
@@ -11,12 +11,12 @@ layout(location = 0) out vec4 outColor;
 layout(set = 2, binding = 0) uniform MaterialUniforms
 {
     vec4 _Color;        // @color @default = vec4(1.0, 1.0, 1.0, 1.0)
-    vec4 _RiftColor;    // @color @default = vec4(0.92, 0.84, 0.56, 1.0)
-    vec4 _MirageColor;  // @color @default = vec4(0.56, 0.82, 0.98, 1.0)
-    vec4 _BoundsXZ;     // @default = vec4(60.5, 60.5, 96.0, 104.0) (centerX, centerZ, sizeX, sizeZ)
+    vec4 _RiftColor;    // @color @default = vec4(0.94, 0.85, 0.56, 1.0)
+    vec4 _MirageColor;  // @color @default = vec4(0.56, 0.84, 1.0, 1.0)
+    vec4 _BoundsXZ;     // @default = vec4(110.5, 110.5, 148.0, 132.0) (centerX, centerZ, sizeX, sizeZ)
     vec4 _SealState;    // @default = vec4(1.0, 1.0, 1.0, 1.0) (stage1..4 opacity 0..1)
     float _AgeSecs;     // @default = 0.0
-    float _Distortion;  // @default = 12.0
+    float _Distortion;  // @default = 13.5
 } u;
 
 layout(set = 2, binding = 1) uniform sampler2D _GrabDistortionBackground;
@@ -53,7 +53,6 @@ float fbm(vec2 p)
     return sum;
 }
 
-// 육각형 격자 거리(가장 가까운 육각 변까지의 거리)
 float hexEdgeDist(vec2 p)
 {
     const vec2 s = vec2(1.0, 1.7320508);
@@ -70,41 +69,48 @@ float sdBox(vec2 p, vec2 b)
     return length(max(d, 0.0)) + min(max(d.x, d.y), 0.0);
 }
 
-// Stage 1: 미로 요새 (dz: -35 .. -15, dx: -18 .. +18, 계단형 모서리)
-float sdStage1(vec2 rel)
+// 위·아래가 평평한 정육각형 유클리드 SDF (내접원 반지름 r = 평평한 변까지 거리)
+float sdFlatHexagon(vec2 p, float r)
 {
-    vec2 c = rel - vec2(0.0, -25.0);
-    return min(sdBox(c, vec2(14.5, 10.5)), sdBox(c, vec2(18.5, 6.5)));
+    const vec3 k = vec3(-0.866025404, 0.5, 0.577350269);
+    p = abs(p);
+    p -= 2.0 * min(dot(k.xy, p), 0.0) * k.xy;
+    p -= vec2(clamp(p.x, -k.z * r, k.z * r), r);
+    return length(p) * sign(p.y);
 }
 
-// Stage 2: 시련의 회랑 (dz: -15 .. +7.5, dx: -9.5 .. +9.5 + 측면 돌출)
-float sdStage2(vec2 rel)
-{
-    float mainHall = sdBox(rel - vec2(0.0, -3.75), vec2(9.5, 11.35));
-    float sideBay = sdBox(rel - vec2(0.0, -4.0), vec2(11.5, 4.5));
-    return min(mainHall, sideBay);
-}
-
-// Stage 3: 원형 회랑 (중심 (0, +26), 반지름 7.5 ~ 19.8)
-float sdStage3(vec2 rel)
-{
-    float r = length(rel - vec2(0.0, 26.0));
-    return max(r - 19.8, 7.45 - r);
-}
-
-// Stage 4: 중심 제단 성소 (중심 (0, +26), 반지름 7.6)
+// 중첩 SDF 구조: 상위 봉인이 닫혀 있으면 하위 경계선이 내부에 드러나지 않아 구조 스포일러 없이 하나의 거대한 공간 왜곡으로 보인다.
+// Stage 4: 중앙 제단 성소 (origin 중심 반지름 8.65)
 float sdStage4(vec2 rel)
 {
-    return length(rel - vec2(0.0, 26.0)) - 7.65;
+    return length(rel) - 8.65;
+}
+
+// Stage 3: 중앙 원형 성소 전체 (origin 중심 반지름 22.7)
+float sdStage3(vec2 rel)
+{
+    return length(rel) - 22.7;
+}
+
+// Stage 2: 북쪽 장대 복도 + 중앙 원형 성소 합집합
+float sdStage2(vec2 rel)
+{
+    float corridor = sdBox(rel - vec2(0.0, 35.7), vec2(10.4, 15.8));
+    return min(corridor, length(rel) - 22.7);
+}
+
+// Stage 1: 거대 정육각형 전체 (평평한 정육각형 내접원 반지름 58.5)
+float sdStage1(vec2 rel)
+{
+    return sdFlatHexagon(rel, 58.5);
 }
 
 float stageWeight(float sd, float state, float wobble)
 {
     if (state <= 0.001) { return 0.0; }
-    // 해금 애니메이션(state: 1 -> 0) 중에는 바깥/아래에서부터 경계가 스르륵 물러난다.
-    float shrink = (1.0 - state) * 14.0;
+    float shrink = (1.0 - state) * 16.0;
     float d = sd + shrink + wobble;
-    return smoothstep(1.1, -0.8, d) * smoothstep(0.0, 0.18, state);
+    return smoothstep(1.15, -0.85, d) * smoothstep(0.0, 0.16, state);
 }
 
 void main()
@@ -117,7 +123,7 @@ void main()
     float pxPerCell = 1.0 / max(length(dRelDx), 1e-4);
 
     float t = u._AgeSecs;
-    float edgeNoise = (fbm(rel * 0.18 + vec2(t * 0.22, -t * 0.17)) - 0.5) * 1.35;
+    float edgeNoise = (fbm(rel * 0.14 + vec2(t * 0.22, -t * 0.17)) - 0.5) * 1.45;
 
     float d1 = sdStage1(rel);
     float d2 = sdStage2(rel);
@@ -133,65 +139,62 @@ void main()
     if (mask <= 0.004)
         discard;
 
-    // 활성화된 가장 가까운 봉인 외곽까지의 부호 있는 거리 (경계선 강조용)
+    // 활성화된 봉인 영역들의 합집합 외곽 거리
     float activeSd = 1e4;
-    if (u._SealState.x > 0.01) activeSd = min(activeSd, d1 + (1.0 - u._SealState.x) * 14.0);
-    if (u._SealState.y > 0.01) activeSd = min(activeSd, d2 + (1.0 - u._SealState.y) * 14.0);
-    if (u._SealState.z > 0.01) activeSd = min(activeSd, d3 + (1.0 - u._SealState.z) * 14.0);
-    if (u._SealState.w > 0.01) activeSd = min(activeSd, d4 + (1.0 - u._SealState.w) * 14.0);
+    if (u._SealState.x > 0.01) activeSd = min(activeSd, d1 + (1.0 - u._SealState.x) * 16.0);
+    if (u._SealState.y > 0.01) activeSd = min(activeSd, d2 + (1.0 - u._SealState.y) * 16.0);
+    if (u._SealState.z > 0.01) activeSd = min(activeSd, d3 + (1.0 - u._SealState.z) * 16.0);
+    if (u._SealState.w > 0.01) activeSd = min(activeSd, d4 + (1.0 - u._SealState.w) * 16.0);
     float rimDist = abs(activeSd + edgeNoise * 0.55);
 
     // 소용돌이치는 공간 왜곡 벡터장
-    float n1 = fbm(rel * 0.14 + vec2(t * 0.31, t * 0.19));
-    float n2 = fbm(rel * 0.14 + vec2(-t * 0.24 + 31.4, t * 0.28 + 11.7));
-    float ripple = sin(length(rel - vec2(0.0, 12.0)) * 0.55 - t * 1.65) * 0.5 + 0.5;
-    vec2 flow = vec2(n1 - 0.5, n2 - 0.5) * 2.2;
-    flow += normalize(rel - vec2(0.0, 26.0) + vec2(1e-4)) * (ripple - 0.5) * 0.65;
+    float n1 = fbm(rel * 0.11 + vec2(t * 0.28, t * 0.18));
+    float n2 = fbm(rel * 0.11 + vec2(-t * 0.23 + 31.4, t * 0.25 + 11.7));
+    float rCenter = length(rel);
+    float ripple = sin(rCenter * 0.42 - t * 1.65) * 0.5 + 0.5;
+    vec2 flow = vec2(n1 - 0.5, n2 - 0.5) * 2.25;
+    flow += normalize(rel + vec2(1e-4)) * (ripple - 0.5) * 0.68;
 
-    // 경계면에서는 굴절이 더욱 강하게 일렁인다.
-    float rimBoost = exp(-(rimDist * rimDist) / 1.8);
-    float hexLine = smoothstep(0.075, 0.01, hexEdgeDist(rel * 0.16 + flow * 0.08));
+    float rimBoost = exp(-(rimDist * rimDist) / 2.2);
+    float hexLine = smoothstep(0.075, 0.01, hexEdgeDist(rel * 0.12 + flow * 0.06));
 
-    // 공간 너머 숨겨진 거대 성소의 희미한 윤곽(직접 건물을 그리진 않고 신기루 같은 기하학적 간섭만 형성)
-    vec2 ringRel = rel - vec2(0.0, 26.0);
-    float ringR = length(ringRel);
-    float innerRings = (exp(-pow(abs(ringR - 15.8), 2.0) / 0.45) + exp(-pow(abs(ringR - 11.8), 2.0) / 0.38)) * w3
-                     + (exp(-pow(abs(ringR - 7.3), 2.0) / 0.35) * (1.0 - 0.72 * w3)
-                      + exp(-pow(abs(ringR - 3.0), 2.0) / 0.7) * 0.65) * w4;
-    float hallLanes = exp(-pow(abs(abs(rel.x) - 6.0), 2.0) / 0.35) * step(-13.0, rel.y) * step(rel.y, 6.0) * w2;
-    float mazeLanes = (exp(-pow(sin(rel.x * 0.7854), 2.0) / 0.04) * 0.45
-                     + exp(-pow(sin((rel.y + 33.0) * 0.7854), 2.0) / 0.04) * 0.45) * w1 * (1.0 - rimBoost);
+    // 공간 너머 거대 육각 성소의 희미한 신기루(직접 벽을 그리지 않고 파동이 지날 때만 아련히 드러남)
+    float hexMirage = (exp(-pow(abs(sdFlatHexagon(rel, 46.0)), 2.0) / 0.85)
+                     + exp(-pow(abs(sdFlatHexagon(rel, 31.0)), 2.0) / 0.85)) * w1 * 0.45;
+    float hallMirage = exp(-pow(abs(abs(rel.x) - 6.0), 2.0) / 0.45) * step(22.0, rel.y) * step(rel.y, 50.0) * w2 * (1.0 - 0.85 * w1) * 0.65;
+    float ringMirage = (exp(-pow(abs(rCenter - 14.0), 2.0) / 0.55) * w3 * (1.0 - 0.85 * w1)
+                      + exp(-pow(abs(rCenter - 3.2), 2.0) / 0.85) * w4 * (1.0 - 0.80 * w3)) * 0.65;
 
-    float mirageWave = smoothstep(0.25, 0.95, sin(length(rel - vec2(0.0, 18.0)) * 0.38 - t * 1.45 + n1 * 4.5) * 0.5 + 0.5);
-    float archHint = clamp((innerRings * 0.85 + hallLanes * 0.7 + mazeLanes * 0.55) * mirageWave, 0.0, 1.0);
+    float mirageWave = smoothstep(0.22, 0.94, sin(rCenter * 0.26 - t * 1.35 + n1 * 4.5) * 0.5 + 0.5);
+    float archHint = clamp((hexMirage + hallMirage + ringMirage) * mirageWave, 0.0, 1.0);
 
-    // 실제 바닥 지형을 물결·중력렌즈처럼 강하게 굴절시켜 지형만 보이는데도 공간이 뒤틀린 느낌을 만든다.
-    vec2 lensPull = -normalize(ringRel + vec2(1e-4)) * sin(ringR * 0.7 - t * 2.1) * 0.45;
-    float distStrength = (0.72 + 1.05 * rimBoost + 0.65 * archHint + 0.30 * hexLine) * mask;
-    vec2 dispCells = (flow + lensPull) * (u._Distortion * 0.105) * distStrength;
+    vec2 lensPull = -normalize(rel + vec2(1e-4)) * sin(rCenter * 0.55 - t * 2.0) * 0.45;
+    float distStrength = (0.72 + 1.10 * rimBoost + 0.65 * archHint + 0.30 * hexLine) * mask;
+    vec2 dispCells = (flow + lensPull) * (u._Distortion * 0.11) * distStrength;
     vec2 dispPx = dispCells * pxPerCell;
 
     vec2 texSize = vec2(textureSize(_GrabDistortionBackground, 0));
     vec2 grabUv = gl_FragCoord.xy / texSize;
     vec2 shift = dispPx / texSize;
 
-    // 은은한 프리즘 색수차를 섞은 배경 지형 샘플링 (지형은 선명히 비치되 아지랑이·수정 렌즈처럼 일그러짐)
+    // 은은한 프리즘 색수차를 섞은 배경 지형 샘플링
     vec3 bg;
-    bg.r = texture(_GrabDistortionBackground, grabUv - shift * 1.14).r;
+    bg.r = texture(_GrabDistortionBackground, grabUv - shift * 1.15).r;
     bg.g = texture(_GrabDistortionBackground, grabUv - shift).g;
-    bg.b = texture(_GrabDistortionBackground, grabUv - shift * 0.86).b;
+    bg.b = texture(_GrabDistortionBackground, grabUv - shift * 0.85).b;
 
-    // 과도한 백탁 없이 은은한 공기 색조와 잔상 파동만 얹는다.
     float haze = (0.06 + 0.09 * n2) * mask;
     bg = mix(bg, bg * vec3(0.88, 0.93, 1.02), haze);
 
-    float rimLine = exp(-(rimDist * rimDist) / 0.11) * mask;
-    float rimHalo = exp(-(rimDist * rimDist) / 1.15) * mask;
-    float shimmer = 0.65 + 0.35 * sin(t * 2.9 + (rel.x - rel.y) * 0.55 + n1 * 3.14);
+    float rimLine = exp(-(rimDist * rimDist) / 0.14) * mask;
+    float rimHalo = exp(-(rimDist * rimDist) / 1.35) * mask;
+    float shimmer = 0.68 + 0.32 * sin(t * 2.8 + (rel.x - rel.y) * 0.42 + n1 * 3.14);
 
-    vec3 glow = u._RiftColor.rgb * (rimLine * 0.34 + archHint * 0.16) * shimmer
-              + u._MirageColor.rgb * (rimHalo * 0.11 + hexLine * (0.045 + 0.09 * archHint) * mask * mirageWave);
+    // 재봉인 등으로 _Distortion이 강해질수록 금빛 균열 광휘도 함께 고조된다.
+    float surge = clamp((u._Distortion - 13.5) / 14.0, 0.0, 1.0);
+    vec3 glow = u._RiftColor.rgb * (rimLine * (0.36 + 0.45 * surge) + archHint * (0.17 + 0.22 * surge) + mask * surge * 0.16) * shimmer
+              + u._MirageColor.rgb * (rimHalo * (0.12 + 0.18 * surge) + hexLine * (0.05 + 0.10 * archHint + 0.12 * surge) * mask * mirageWave);
 
-    float cover = clamp(mask * 0.90 + rimLine * 0.35, 0.0, 1.0) * u._Color.a;
+    float cover = clamp(mask * 0.90 + rimLine * 0.38, 0.0, 1.0) * u._Color.a;
     outColor = vec4(clamp(bg + glow, 0.0, 1.0), cover);
 }

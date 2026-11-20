@@ -237,15 +237,25 @@ namespace VVRace
             if (map == null) { return null; }
 
             var core = ThingMaker.MakeThing(VVThingDefOf.VV_AncientAmberCore);
-            var cell = pawn != null && pawn.Spawned ? pawn.Position : altar.PositionHeld;
-            if (!GenPlace.TryPlaceThing(core, cell, map, ThingPlaceMode.Near)) { return null; }
+            bool addedToInventory = pawn != null
+                && pawn.inventory?.innerContainer != null
+                && pawn.inventory.innerContainer.TryAdd(core);
+
+            if (!addedToInventory)
+            {
+                var cell = pawn != null && pawn.Spawned ? pawn.Position : altar.PositionHeld;
+                if (!GenPlace.TryPlaceThing(core, cell, map, ThingPlaceMode.Near)) { return null; }
+            }
 
             _coreExtracted = true;
 
+            var target = addedToInventory ? new LookTargets(pawn) : new LookTargets(core);
             Messages.Message(
                 ViviEndingUtility.TranslateWithResonator(LocalizeString_Message.VV_Message_RuinCoreExtracted, pawn),
-                core,
+                target,
                 MessageTypeDefOf.PositiveEvent);
+
+            map.GetComponent<MapComponent_ViviAncientRuins>()?.BeginResealSequence();
             return core;
         }
 

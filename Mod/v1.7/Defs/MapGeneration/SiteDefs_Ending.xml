@@ -28,6 +28,7 @@
     <expandingIconTexture>World/WorldObjects/Expanding/Sites/ItemStash</expandingIconTexture>
     <requiresFaction>false</requiresFaction>
     <showFactionInInspectString>false</showFactionInInspectString>
+    <minMapSize>(220, 1, 220)</minMapSize>
     <gravShipsCanLandOn>true</gravShipsCanLandOn>
     <disallowsAutomaticDetectionTimerStart>true</disallowsAutomaticDetectionTimerStart>
   </SitePartDef>
