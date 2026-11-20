@@ -113,6 +113,19 @@
 
         public const string VV_Ending_ResonatorFallback = nameof(VV_Ending_ResonatorFallback);
 
+        public const string VV_FairyTale1_Label = nameof(VV_FairyTale1_Label);
+        public const string VV_FairyTale1_Title = nameof(VV_FairyTale1_Title);
+        public const string VV_FairyTale1_Desc = nameof(VV_FairyTale1_Desc);
+        public const string VV_FairyTale2_Label = nameof(VV_FairyTale2_Label);
+        public const string VV_FairyTale2_Title = nameof(VV_FairyTale2_Title);
+        public const string VV_FairyTale2_Desc = nameof(VV_FairyTale2_Desc);
+        public const string VV_FairyTale3_Label = nameof(VV_FairyTale3_Label);
+        public const string VV_FairyTale3_Title = nameof(VV_FairyTale3_Title);
+        public const string VV_FairyTale3_Desc = nameof(VV_FairyTale3_Desc);
+        public const string VV_FairyTale4_Label = nameof(VV_FairyTale4_Label);
+        public const string VV_FairyTale4_Title = nameof(VV_FairyTale4_Title);
+        public const string VV_FairyTale4_Desc = nameof(VV_FairyTale4_Desc);
+
         public const string VV_FailReason_GoldenBloomHoldsWeather = nameof(VV_FailReason_GoldenBloomHoldsWeather);
 
         public const string VV_FailReason_AltarOnlyEverflowerCenter = nameof(VV_FailReason_AltarOnlyEverflowerCenter);

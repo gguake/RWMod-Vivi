@@ -74,10 +74,10 @@ namespace VVRace
 
             for (int volume = 1; volume <= ending.Tales.Delivered; ++volume)
             {
-                var def = ViviEndingTales.VolumeDef(volume);
-                if (def == null) { continue; }
+                var label = ViviEndingTales.VolumeLabel(volume);
+                if (label.NullOrEmpty()) { continue; }
 
-                node.options.Add(MakeRepurchaseVolumeOption(ending, negotiator, faction, map, volume, def, cost, report, leader));
+                node.options.Add(MakeRepurchaseVolumeOption(ending, negotiator, faction, map, volume, label, cost, report, leader));
             }
 
             node.options.Add(new DiaOption("GoBack".Translate())
@@ -93,12 +93,12 @@ namespace VVRace
             Faction faction,
             Map map,
             int volume,
-            ThingDef def,
+            string label,
             int cost,
             AcceptanceReport report,
             NamedArgument leader)
         {
-            var volumeOption = new DiaOption(LocalizeString_Dialog.VV_Comms_TaleRepurchaseOption.Translate(def.LabelCap, cost));
+            var volumeOption = new DiaOption(LocalizeString_Dialog.VV_Comms_TaleRepurchaseOption.Translate(label.CapitalizeFirst(), cost));
             if (!report.Accepted)
             {
                 volumeOption.Disable(report.Reason);
@@ -108,7 +108,7 @@ namespace VVRace
             volumeOption.linkLateBind = () =>
             {
                 ending.Tales.Repurchase(volume, map);
-                var resultText = LocalizeString_Dialog.VV_Comms_TaleRepurchaseResult.Translate(def.label, leader).Resolve();
+                var resultText = LocalizeString_Dialog.VV_Comms_TaleRepurchaseResult.Translate(label, leader).Resolve();
                 return ResultNode(resultText, negotiator, faction);
             };
             return volumeOption;

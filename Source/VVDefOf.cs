@@ -146,10 +146,6 @@ namespace VVRace
         public static ThingDef VV_EverflowerAltar;
 
         public static ThingDef VV_AncientAmberCore;
-        public static ThingDef VV_FairyTaleBookI;
-        public static ThingDef VV_FairyTaleBookII;
-        public static ThingDef VV_FairyTaleBookIII;
-        public static ThingDef VV_FairyTaleBookIV;
         public static ThingDef VV_AncientRuinFairyFlowerI;
         public static ThingDef VV_AncientRuinFairyFlowerII;
         public static ThingDef VV_AncientRuinFairyFlowerIII;

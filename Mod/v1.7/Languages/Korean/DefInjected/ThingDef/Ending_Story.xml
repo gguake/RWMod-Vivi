@@ -1,18 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
 
-<VV_FairyTaleBookI.label>꽃그늘 동화 1권</VV_FairyTaleBookI.label>
-<VV_FairyTaleBookI.description>비비 연방에 구전되어 내려오는 옛 동화책입니다. 연방은 오랜 관례에 따라 새로 자라는 둥지에 이 책을 보내 줍니다.</VV_FairyTaleBookI.description>
-
-<VV_FairyTaleBookII.label>꽃그늘 동화 2권</VV_FairyTaleBookII.label>
-<VV_FairyTaleBookII.description>비비 연방에 구전되어 내려오는 옛 동화책입니다. 연방은 오랜 관례에 따라 새로 자라는 둥지에 이 책을 보내 줍니다.</VV_FairyTaleBookII.description>
-
-<VV_FairyTaleBookIII.label>꽃그늘 동화 3권</VV_FairyTaleBookIII.label>
-<VV_FairyTaleBookIII.description>비비 연방에 구전되어 내려오는 옛 동화책입니다. 연방은 오랜 관례에 따라 새로 자라는 둥지에 이 책을 보내 줍니다.</VV_FairyTaleBookIII.description>
-
-<VV_FairyTaleBookIV.label>꽃그늘 동화 4권</VV_FairyTaleBookIV.label>
-<VV_FairyTaleBookIV.description>비비 연방에 구전되어 내려오는 옛 동화책입니다. 연방은 오랜 관례에 따라 새로 자라는 둥지에 이 책을 보내 줍니다.</VV_FairyTaleBookIV.description>
-
 <VV_AncientRuinFairyFlowerI.label>고대 요정꽃</VV_AncientRuinFairyFlowerI.label>
 <VV_AncientRuinFairyFlowerI.description>폐허에 피어난 요정꽃입니다. 꽃 안에 아직 기억이 남아 있습니다. 조율 4단계 이상의 영원꽃과 연결된 로열 비비가 손을 대면 그 기억을 볼 수 있습니다.</VV_AncientRuinFairyFlowerI.description>
 <VV_AncientRuinFairyFlowerI.comps.CompUsable.useLabel>{0_label}에 손대기</VV_AncientRuinFairyFlowerI.comps.CompUsable.useLabel>
