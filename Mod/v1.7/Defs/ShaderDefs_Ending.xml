@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
 
+  <!-- 아스포델 반투명(베일·오라) 셰이더 -->
+  <ShaderDef>
+    <defName>VV_ApocryphaAlpha</defName>
+    <shaderProgram>
+      <fragmentShaderFileName>VV_ApocryphaAlpha.frag.glsl</fragmentShaderFileName>
+      <transparent>true</transparent>
+      <depthWrite>false</depthWrite>
+      <renderQueue>2910</renderQueue>
+      <textureWrapOverrides>
+        <li>
+          <key>_MainTex</key>
+          <value>Clamp</value>
+        </li>
+      </textureWrapOverrides>
+    </shaderProgram>
+  </ShaderDef>
+
+  <!-- 아스포델 반투명 셰이더 유형 -->
+  <ShaderTypeDef>
+    <defName>VV_ApocryphaAlpha</defName>
+    <shaderPath>Map/VV_ApocryphaAlpha</shaderPath>
+  </ShaderTypeDef>
+
   <!-- 아스포델 소멸 셰이더 -->
   <ShaderDef>
     <defName>VV_Dissolve</defName>
