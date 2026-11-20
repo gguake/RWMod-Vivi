@@ -162,6 +162,13 @@ namespace VVRace
                 return;
             }
 
+            if (pawn.GetLord()?.LordJob is LordJob_RuinHornetWander ruinWander && ruinWander.Anchor.IsValid)
+            {
+                locus = ruinWander.Anchor;
+                maxTravelRadius = ruinWander.SearchRadius;
+                return;
+            }
+
             locus = default;
             maxTravelRadius = float.MaxValue;
         }

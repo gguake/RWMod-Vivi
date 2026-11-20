@@ -175,4 +175,24 @@
     <explosionColorEdge>(1, 0.7, 0.28)</explosionColorEdge>
     <soundExplosion>VV_ApocryphaFairyBlast</soundExplosion>
   </DamageDef>
+
+  <!-- 고대 유적 시련의 길 마나 역류 피해 -->
+  <DamageDef>
+    <defName>VV_RuinTrialBlast</defName>
+    <label>arcane backlash</label>
+    <workerClass>DamageWorker_AddInjury</workerClass>
+    <externalViolence>true</externalViolence>
+    <harmsHealth>true</harmsHealth>
+    <makesBlood>false</makesBlood>
+    <deathMessage>{0} was overwhelmed by an ancient trial's mana backlash.</deathMessage>
+    <hediff>Crush</hediff>
+    <hediffSolid>Crack</hediffSolid>
+    <impactSoundType>Blunt</impactSoundType>
+    <armorCategory>Blunt</armorCategory>
+    <defaultDamage>8</defaultDamage>
+    <defaultArmorPenetration>0</defaultArmorPenetration>
+    <buildingDamageFactor>0</buildingDamageFactor>
+    <plantDamageFactor>0</plantDamageFactor>
+    <overkillPctToDestroyPart>0.9~1.0</overkillPctToDestroyPart>
+  </DamageDef>
 </Defs>

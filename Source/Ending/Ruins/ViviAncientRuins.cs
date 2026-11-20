@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using RimWorld.Planet;
 using Verse;
 
@@ -37,6 +37,7 @@ namespace VVRace
         private PlanetTile _tile = PlanetTile.Invalid;
         private Site _site;
         private int _investigated;
+        private bool _hexagonSolved;
         private bool _coreExtracted;
 
         public bool MissiveReceived => _missiveReceived;
@@ -44,6 +45,7 @@ namespace VVRace
         public PlanetTile Tile => _tile;
         public Site Site => _site != null && !_site.Destroyed ? _site : null;
         public int Investigated => _investigated;
+        public bool HexagonSolved => _hexagonSolved;
         public bool CoreExtracted => _coreExtracted;
 
         public ViviAncientRuins(ViviEndingQuest ending)
@@ -58,6 +60,7 @@ namespace VVRace
             Scribe_Values.Look(ref _tile, "tile", PlanetTile.Invalid);
             Scribe_References.Look(ref _site, "site");
             Scribe_Values.Look(ref _investigated, "investigated", 0);
+            Scribe_Values.Look(ref _hexagonSolved, "hexagonSolved", false);
             Scribe_Values.Look(ref _coreExtracted, "coreExtracted", false);
         }
 
@@ -187,12 +190,23 @@ namespace VVRace
                 null,
                 _ending.Quest);
 
-            OnZoneUnlocked(flower?.MapHeld, index);
+            var targetMap = flower?.MapHeld ?? Site?.Map ?? pawn?.MapHeld;
+            OnZoneUnlocked(targetMap, index);
         }
 
-        // 구역 봉쇄·해금 구조는 유적 맵 작업에서 채운다.
+        public void Notify_HexagonSolved()
+        {
+            _hexagonSolved = true;
+        }
+
         private void OnZoneUnlocked(Map map, int index)
         {
+            if (index >= EchoCount)
+            {
+                _hexagonSolved = true;
+            }
+
+            map?.GetComponent<MapComponent_ViviAncientRuins>()?.Notify_EchoInvestigated(index);
         }
 
         public AcceptanceReport CanExtractCore(Pawn pawn)
@@ -257,6 +271,7 @@ namespace VVRace
         {
             _missiveReceived = true;
             _investigated = EchoCount;
+            _hexagonSolved = true;
             _coreExtracted = true;
         }
 

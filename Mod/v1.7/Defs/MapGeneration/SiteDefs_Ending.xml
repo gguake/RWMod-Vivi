@@ -38,4 +38,11 @@
     <order>450</order>
     <genStep Class="VVRace.GenStep_ViviAncientRuins" />
   </GenStepDef>
+
+  <GenStepDef>
+    <defName>VV_AncientRuinsPostFog</defName>
+    <linkWithSite>VV_AncientRuins</linkWithSite>
+    <order>1650</order>
+    <genStep Class="VVRace.GenStep_ViviAncientRuinsPostFog" />
+  </GenStepDef>
 </Defs>

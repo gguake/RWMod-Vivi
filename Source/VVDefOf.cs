@@ -10,6 +10,7 @@ namespace VVRace
         public static DamageDef VV_ManawaveStun;
 
         public static DamageDef VV_GiantNeedlePierce;
+        public static DamageDef VV_RuinTrialBlast;
     }
 
     [DefOf]
@@ -154,6 +155,13 @@ namespace VVRace
         public static ThingDef VV_AncientRuinFairyFlowerIII;
         public static ThingDef VV_AncientRuinFairyFlowerIV;
         public static ThingDef VV_AncientRuinAltar;
+        public static ThingDef VV_RuinSpatialBarrier;
+        public static ThingDef VV_AncientRuinWall;
+        public static ThingDef VV_AncientSanctumWall;
+        public static ThingDef VV_AncientSanctumLamp;
+        public static ThingDef VV_RuinDoomFlower;
+        public static ThingDef VV_RuinPuzzlePot;
+        public static ThingDef VV_RuinPuzzleFairyFlower;
 
         public static ThingDef VV_Apocrypha;
         public static ThingDef VV_DyingApocrypha;
@@ -367,6 +375,10 @@ namespace VVRace
         public static EffecterDef VV_Effecter_ApocryphaManifestLand;
 
         public static EffecterDef VV_Effecter_DoomBloomCurse;
+        public static EffecterDef VV_Effecter_SeedBloomDoom;
+        public static EffecterDef VV_Effecter_SeedBloomFairy;
+        public static EffecterDef VV_Effecter_FairyShellLaunch;
+        public static EffecterDef VV_Effecter_FairyShellImpact;
         public static EffecterDef VV_Effecter_FairyFlowerBonding;
         public static EffecterDef VV_Effecter_ManaBackflow;
         public static EffecterDef VV_Effecter_FairyInterferenceAura;
@@ -422,6 +434,12 @@ namespace VVRace
         public static FleckDef VV_Fleck_ApocryphaAimTwinkle;
 
         public static FleckDef VV_Fleck_GimmickBackflowBeam;
+        public static FleckDef VV_Fleck_GimmickTwinkle;
+        public static FleckDef VV_Fleck_GimmickHalo;
+        public static FleckDef VV_Fleck_GimmickPhaseRing;
+        public static FleckDef VV_Fleck_GimmickDoomLaunchWave;
+        public static FleckDef VV_Fleck_GimmickDoomRing;
+        public static FleckDef VV_Fleck_GimmickFlash;
 
         public static FleckDef VV_Fleck_WindOfRestGust;
         public static FleckDef VV_Fleck_HornetDust;

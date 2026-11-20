@@ -157,5 +157,6 @@
         public const string VV_FailReason_RuinPreviousFlower = nameof(VV_FailReason_RuinPreviousFlower);
         public const string VV_FailReason_RuinCoreLocked = nameof(VV_FailReason_RuinCoreLocked);
         public const string VV_FailReason_RuinCoreExtracted = nameof(VV_FailReason_RuinCoreExtracted);
+        public const string VV_FailReason_RuinPuzzleSolved = nameof(VV_FailReason_RuinPuzzleSolved);
     }
 }

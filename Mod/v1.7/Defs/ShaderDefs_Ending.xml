@@ -256,4 +256,28 @@
     <defName>VV_TransparentOverGlow</defName>
     <shaderPath>Map/VV_TransparentOverGlow</shaderPath>
   </ShaderTypeDef>
+
+  <!-- 고대 유적 공간 왜곡 결계 셰이더 -->
+  <ShaderDef>
+    <defName>VV_RuinDistortion</defName>
+    <shaderProgram>
+      <vertexShaderFileName>Mote.vert.glsl</vertexShaderFileName>
+      <fragmentShaderFileName>VV_RuinDistortion.frag.glsl</fragmentShaderFileName>
+      <flipTextureST>false</flipTextureST>
+      <transparent>true</transparent>
+      <depthWrite>false</depthWrite>
+      <cullMode>None</cullMode>
+      <renderQueue>3151</renderQueue>
+      <sceneGrab>
+        <name>DistortionBackground</name>
+        <queue>3151</queue>
+      </sceneGrab>
+    </shaderProgram>
+  </ShaderDef>
+
+  <!-- 고대 유적 공간 왜곡 결계 셰이더 유형 -->
+  <ShaderTypeDef>
+    <defName>VV_RuinDistortion</defName>
+    <shaderPath>Map/VV_RuinDistortion</shaderPath>
+  </ShaderTypeDef>
 </Defs>

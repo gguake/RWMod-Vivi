@@ -1,0 +1,868 @@
+﻿using RimWorld;
+using RimWorld.Planet;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using Verse;
+using Verse.AI;
+using Verse.Sound;
+
+namespace VVRace
+{
+    public class MapComponent_ViviAncientRuins : MapComponent
+    {
+        public const int DoomRespawnDelayTicks = 90;
+        public const int PuzzleTetherDurationTicks = 3600;
+        public const int UnsealFadeDurationTicks = 90;
+        private const float PathGuideCellsPerTick = 0.085f;
+        private const float TrialBlastDamage = 8f;
+        private const int TrapCooldownTicks = 15;
+
+        private static readonly Color AlignedLinkColor = new Color(1f, 0.88f, 0.46f, 0.92f);
+        private static readonly Color TangledLinkColor = new Color(0.56f, 0.85f, 1f, 0.78f);
+        private static readonly Color SolvedLinkColor = new Color(1f, 0.92f, 0.56f, 0.95f);
+        private static readonly Color TetherLinkColor = new Color(1f, 0.95f, 0.72f, 0.92f);
+        private static readonly Vector3 PawnTetherOffset = new Vector3(0f, 0f, 0.35f);
+
+        private bool _active;
+        private IntVec3 _origin = IntVec3.Invalid;
+        private int _layoutSeed;
+        private int _unsealedMask;
+        private bool _trialCleared;
+        private bool _hexagonSolved;
+        private int _doomRespawnTick = -1;
+        private int _trapCooldownUntilTick = -1;
+
+        private List<IntVec3> _safePath = new List<IntVec3>();
+        private List<int> _guideStartTicks = new List<int>();
+        private List<int> _guideLastStepIndices = new List<int>();
+
+        private List<Building_RuinPuzzleFairyFlower> _puzzleFlowers = new List<Building_RuinPuzzleFairyFlower>();
+        private Building_RuinPuzzleFairyFlower _selectedFlower;
+        private Pawn _tetheredPawn;
+        private int _tetherExpireTick = -1;
+
+        private readonly int[] _unsealStartTicks = { -1, -1, -1, -1 };
+        private HashSet<IntVec3> _safePathSet = new HashSet<IntVec3>();
+        private Dictionary<IntVec3, int> _potIndexByCell = new Dictionary<IntVec3, int>();
+
+        public bool IsActiveRuinsMap => _active;
+        public IntVec3 Origin => _origin;
+        public bool IsTrialCleared => _trialCleared;
+        public bool IsHexagonSolved => _hexagonSolved;
+        public IReadOnlyList<IntVec3> SafePath => _safePath;
+        public IReadOnlyList<Building_RuinPuzzleFairyFlower> PuzzleFlowers => _puzzleFlowers;
+        public Building_RuinPuzzleFairyFlower SelectedFlower => _selectedFlower;
+        public Pawn TetheredPawn => _tetheredPawn;
+        public int ActiveGuideCount => _guideStartTicks.Count;
+
+        public MapComponent_ViviAncientRuins(Map map) : base(map)
+        {
+        }
+
+        public bool IsStageUnsealed(int stage)
+        {
+            if (stage <= 0) { return true; }
+            if (stage > RuinLayoutUtility.SealStageCount) { return false; }
+            return (_unsealedMask & (1 << (stage - 1))) != 0;
+        }
+
+        private void MarkStageUnsealed(int stage, bool animate)
+        {
+            if (stage < 1 || stage > RuinLayoutUtility.SealStageCount) { return; }
+
+            var bit = 1 << (stage - 1);
+            if ((_unsealedMask & bit) != 0) { return; }
+
+            _unsealedMask |= bit;
+            _unsealStartTicks[stage - 1] = animate ? Find.TickManager.TicksGame : -1;
+        }
+
+        public void InitializeFromGenStep(IntVec3 origin, int seed, int investigated, bool hexagonSolved, bool coreExtracted)
+        {
+            _active = true;
+            _origin = origin;
+            _layoutSeed = seed;
+            _unsealedMask = 0;
+            _trialCleared = investigated >= 3;
+            _hexagonSolved = hexagonSolved || investigated >= 4 || coreExtracted;
+            _doomRespawnTick = -1;
+            _trapCooldownUntilTick = -1;
+            _guideStartTicks.Clear();
+            _guideLastStepIndices.Clear();
+            _puzzleFlowers.Clear();
+            ClearPuzzleTether(notify: false);
+
+            _safePath = RuinLayoutUtility.GenerateHiddenPath(origin, seed);
+            RebuildCaches();
+
+            RuinLayoutUtility.PrepareFootprintGround(map, origin);
+            RuinLayoutUtility.BuildZone1Forecourt(map, origin, investigated, coreExtracted, spawnHornets: true);
+
+            if (investigated >= 1)
+            {
+                MarkStageUnsealed(1, animate: false);
+                RuinLayoutUtility.BuildZone2Maze(map, origin, investigated, zone3Open: investigated >= 2);
+            }
+
+            if (investigated >= 2)
+            {
+                MarkStageUnsealed(2, animate: false);
+                RuinLayoutUtility.BuildZone3Hall(map, origin, investigated, zone4Open: investigated >= 3, _safePath);
+            }
+
+            if (investigated >= 3)
+            {
+                MarkStageUnsealed(3, animate: false);
+                _puzzleFlowers = RuinLayoutUtility.BuildZone4Ring(map, origin, _hexagonSolved, seed);
+            }
+
+            if (_hexagonSolved)
+            {
+                MarkStageUnsealed(4, animate: false);
+                RuinLayoutUtility.BuildZone5AltarSanctum(map, origin, investigated, coreExtracted);
+            }
+
+            RuinLayoutUtility.RefreshSpatialBarriers(map, origin, IsStageUnsealed);
+            RuinLayoutUtility.UnfogSanctuary(map, origin);
+        }
+
+        public void PostMapGenerationCleanup()
+        {
+            if (!_active) { return; }
+
+            RuinLayoutUtility.CleanupPostGenDebris(map, _origin, IsStageUnsealed);
+            RuinLayoutUtility.RefreshSpatialBarriers(map, _origin, IsStageUnsealed);
+            RuinLayoutUtility.UnfogSanctuary(map, _origin, forceMeshDirty: false);
+        }
+
+        public override void FinalizeInit()
+        {
+            base.FinalizeInit();
+            if (!_active) { return; }
+
+            RebuildCaches();
+            RuinLayoutUtility.UnfogSanctuary(map, _origin, forceMeshDirty: true);
+        }
+
+        private void RebuildCaches()
+        {
+            _safePathSet.Clear();
+            if (_safePath != null)
+            {
+                for (int i = 0; i < _safePath.Count; i++)
+                {
+                    _safePathSet.Add(_safePath[i]);
+                }
+            }
+
+            _potIndexByCell.Clear();
+            if (_origin.IsValid)
+            {
+                var pots = RuinLayoutUtility.GetHexagonPotCells(_origin);
+                for (int i = 0; i < pots.Length; i++)
+                {
+                    _potIndexByCell[pots[i]] = i;
+                }
+            }
+        }
+
+        public void Notify_EchoInvestigated(int echoIndex)
+        {
+            if (!_active) { return; }
+
+            var ruins = ViviEndingQuest.Current?.Ruins;
+            var investigated = Mathf.Max(echoIndex, ruins?.Investigated ?? echoIndex);
+            var coreExtracted = ruins?.CoreExtracted ?? false;
+
+            if (echoIndex >= 1 && !IsStageUnsealed(1))
+            {
+                MarkStageUnsealed(1, animate: true);
+                RuinLayoutUtility.BuildZone2Maze(map, _origin, investigated, zone3Open: investigated >= 2);
+                PlayUnsealEffects(new IntVec3(_origin.x, 0, _origin.z - 34));
+            }
+
+            if (echoIndex >= 2 && !IsStageUnsealed(2))
+            {
+                MarkStageUnsealed(2, animate: true);
+                RuinLayoutUtility.BuildZone3Hall(map, _origin, investigated, zone4Open: investigated >= 3, _safePath);
+                PlayUnsealEffects(new IntVec3(_origin.x, 0, _origin.z - 14));
+            }
+
+            if (echoIndex >= 3 && !IsStageUnsealed(3))
+            {
+                DisarmTrialZone();
+                MarkStageUnsealed(3, animate: true);
+                _puzzleFlowers = RuinLayoutUtility.BuildZone4Ring(map, _origin, _hexagonSolved, _layoutSeed);
+                PlayUnsealEffects(new IntVec3(_origin.x, 0, _origin.z + 9));
+            }
+
+            if (echoIndex >= 4 && !_hexagonSolved)
+            {
+                CompleteHexagonPuzzle(playEffects: false);
+            }
+
+            RuinLayoutUtility.RefreshSpatialBarriers(map, _origin, IsStageUnsealed);
+            RuinLayoutUtility.UnfogSanctuary(map, _origin, forceMeshDirty: true);
+        }
+
+        private void DisarmTrialZone()
+        {
+            _trialCleared = true;
+            _doomRespawnTick = -1;
+            _guideStartTicks.Clear();
+            _guideLastStepIndices.Clear();
+
+            var doomFlowers = map.listerThings.ThingsOfDef(VVThingDefOf.VV_RuinDoomFlower).ToList();
+            for (int i = 0; i < doomFlowers.Count; i++)
+            {
+                if (!doomFlowers[i].Destroyed)
+                {
+                    ApocryphaGimmicks.PlayEffect(VVEffecterDefOf.VV_Effecter_SeedBloomFairy, doomFlowers[i].Position, map);
+                    doomFlowers[i].Destroy(DestroyMode.Vanish);
+                }
+            }
+
+            RuinLayoutUtility.RevealSafePathFloor(map, _safePath);
+        }
+
+        private void PlayUnsealEffects(IntVec3 focusCell)
+        {
+            if (focusCell.InBounds(map))
+            {
+                ApocryphaGimmicks.PlayEffect(VVEffecterDefOf.VV_Effecter_FairyShellImpact, focusCell, map);
+                ApocryphaUtility.ShakeCamera(map, 0.45f);
+            }
+
+            Messages.Message(
+                LocalizeString_Message.VV_Message_RuinZoneUnsealed.Translate(),
+                focusCell.InBounds(map) ? new LookTargets(focusCell, map) : LookTargets.Invalid,
+                MessageTypeDefOf.PositiveEvent);
+        }
+
+        #region 제3구간: 잔향의 멸망꽃 & 숨겨진 길 시련
+
+        public void Notify_RuinDoomFlowerDestroyed(IntVec3 pos)
+        {
+            if (!_active || _trialCleared) { return; }
+
+            _doomRespawnTick = Find.TickManager.TicksGame + DoomRespawnDelayTicks;
+            SpawnPathGuide();
+
+            Messages.Message(
+                LocalizeString_Message.VV_Message_RuinPathGuideSpawned.Translate(),
+                new LookTargets(pos, map),
+                MessageTypeDefOf.NeutralEvent,
+                historical: false);
+        }
+
+        public void SpawnPathGuide()
+        {
+            if (!_active || _safePath == null || _safePath.Count == 0) { return; }
+
+            _guideStartTicks.Add(Find.TickManager.TicksGame);
+            _guideLastStepIndices.Add(-1);
+        }
+
+        private void TickTrial(int now)
+        {
+            if (!IsStageUnsealed(2) || _trialCleared) { return; }
+
+            if (_doomRespawnTick >= 0 && now >= _doomRespawnTick)
+            {
+                _doomRespawnTick = -1;
+                if (map.listerThings.ThingsOfDef(VVThingDefOf.VV_RuinDoomFlower).Count == 0)
+                {
+                    var doomCell = RuinLayoutUtility.RuinDoomFlowerCell(_origin);
+                    if (doomCell.InBounds(map))
+                    {
+                        RuinLayoutUtility.SpawnBuildingClean(map, VVThingDefOf.VV_RuinDoomFlower, doomCell);
+                        var bloomPos = doomCell.ToVector3Shifted();
+                        if (bloomPos.ShouldSpawnMotesAt(map))
+                        {
+                            if (VVFleckDefOf.VV_Fleck_GimmickPhaseRing != null)
+                            {
+                                var ring = FleckMaker.GetDataStatic(bloomPos, map, VVFleckDefOf.VV_Fleck_GimmickPhaseRing, 0.9f);
+                                ring.instanceColor = new Color(0.95f, 0.42f, 0.68f, 0.88f);
+                                map.flecks.CreateFleck(ring);
+                            }
+                            if (VVFleckDefOf.VV_Fleck_GimmickHalo != null)
+                            {
+                                var halo = FleckMaker.GetDataStatic(bloomPos, map, VVFleckDefOf.VV_Fleck_GimmickHalo, 1.05f);
+                                halo.instanceColor = new Color(0.92f, 0.35f, 0.62f, 0.80f);
+                                map.flecks.CreateFleck(halo);
+                            }
+                        }
+                    }
+                }
+            }
+
+            TickPathGuides(now);
+
+            if (now < _trapCooldownUntilTick) { return; }
+
+            var trialRect = RuinLayoutUtility.TrialRect(_origin);
+            Pawn violator = null;
+
+            var pawns = map.mapPawns.AllPawnsSpawned;
+            for (int i = 0; i < pawns.Count; i++)
+            {
+                var p = pawns[i];
+                if (p == null || p.Dead || !p.Spawned) { continue; }
+                if (!trialRect.Contains(p.Position)) { continue; }
+                if (_safePathSet.Contains(p.Position)) { continue; }
+
+                violator = p;
+                break;
+            }
+
+            if (violator != null)
+            {
+                TriggerTrialBacklash(now);
+            }
+        }
+
+        private void TickPathGuides(int now)
+        {
+            if (_guideStartTicks.Count == 0 || _safePath.Count == 0) { return; }
+
+            for (int i = _guideStartTicks.Count - 1; i >= 0; i--)
+            {
+                var dist = (now - _guideStartTicks[i]) * PathGuideCellsPerTick;
+                int segIndex = Mathf.FloorToInt(dist);
+                if (segIndex >= _safePath.Count)
+                {
+                    _guideStartTicks.RemoveAt(i);
+                    while (_guideLastStepIndices.Count > _guideStartTicks.Count)
+                    {
+                        _guideLastStepIndices.RemoveAt(Mathf.Min(i, _guideLastStepIndices.Count - 1));
+                    }
+                    continue;
+                }
+
+                while (_guideLastStepIndices.Count <= i)
+                {
+                    _guideLastStepIndices.Add(-1);
+                }
+
+                var curCell = _safePath[segIndex];
+                var nextCell = segIndex + 1 < _safePath.Count ? _safePath[segIndex + 1] : curCell + IntVec3.North;
+                var frac = dist - segIndex;
+                var wispPos = Vector3.Lerp(curCell.ToVector3Shifted(), nextCell.ToVector3Shifted(), frac);
+
+                if (now % 2 == 0 && wispPos.ShouldSpawnMotesAt(map) && VVFleckDefOf.VV_Fleck_GimmickTwinkle != null)
+                {
+                    var fleck = FleckMaker.GetDataStatic(wispPos, map, VVFleckDefOf.VV_Fleck_GimmickTwinkle, 0.85f);
+                    fleck.instanceColor = new Color(1f, 0.97f, 0.86f, 0.98f);
+                    fleck.rotation = Rand.Range(0f, 360f);
+                    map.flecks.CreateFleck(fleck);
+                }
+
+                if (_guideLastStepIndices[i] != segIndex)
+                {
+                    _guideLastStepIndices[i] = segIndex;
+                    var cellCenter = curCell.ToVector3Shifted();
+                    if (cellCenter.ShouldSpawnMotesAt(map))
+                    {
+                        if (VVFleckDefOf.VV_Fleck_GimmickHalo != null)
+                        {
+                            var halo = FleckMaker.GetDataStatic(cellCenter, map, VVFleckDefOf.VV_Fleck_GimmickHalo, 0.92f);
+                            halo.instanceColor = new Color(1f, 0.95f, 0.78f, 0.92f);
+                            map.flecks.CreateFleck(halo);
+                        }
+
+                        if (VVFleckDefOf.VV_Fleck_GimmickPhaseRing != null)
+                        {
+                            var ring = FleckMaker.GetDataStatic(cellCenter, map, VVFleckDefOf.VV_Fleck_GimmickPhaseRing, 0.65f);
+                            ring.instanceColor = new Color(0.75f, 0.88f, 1f, 0.90f);
+                            map.flecks.CreateFleck(ring);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void TriggerTrialBacklash(int now)
+        {
+            _trapCooldownUntilTick = now + TrapCooldownTicks;
+
+            var trialRect = RuinLayoutUtility.TrialRect(_origin);
+            var blastRect = RuinLayoutUtility.Zone3BlastRect(_origin);
+            var returnAnchor = RuinLayoutUtility.RuinDoomReturnCell(_origin);
+
+            // 방 전체에 퍼지는 마나 폭발 연출
+            var centerVec = trialRect.CenterVector3;
+            if (centerVec.ShouldSpawnMotesAt(map))
+            {
+                if (VVFleckDefOf.VV_Fleck_GimmickDoomLaunchWave != null)
+                {
+                    map.flecks.CreateFleck(FleckMaker.GetDataStatic(centerVec, map, VVFleckDefOf.VV_Fleck_GimmickDoomLaunchWave, 1.25f));
+                }
+
+                for (int k = 0; k < 10; k++)
+                {
+                    var burstPos = new Vector3(
+                        Rand.Range(trialRect.minX + 0.5f, trialRect.maxX + 0.5f),
+                        0f,
+                        Rand.Range(trialRect.minZ + 0.5f, trialRect.maxZ + 0.5f));
+                    if (VVFleckDefOf.VV_Fleck_GimmickDoomRing != null)
+                    {
+                        map.flecks.CreateFleck(FleckMaker.GetDataStatic(burstPos, map, VVFleckDefOf.VV_Fleck_GimmickDoomRing, Rand.Range(0.9f, 1.5f)));
+                    }
+                    if (VVFleckDefOf.VV_Fleck_GimmickFlash != null)
+                    {
+                        var flash = FleckMaker.GetDataStatic(burstPos, map, VVFleckDefOf.VV_Fleck_GimmickFlash, Rand.Range(2.2f, 3.4f));
+                        flash.instanceColor = new Color(1f, 0.42f, 0.78f, 0.8f);
+                        map.flecks.CreateFleck(flash);
+                    }
+                }
+            }
+
+            VVSoundDefOf.VV_FairyTeleport?.PlayOneShot(new TargetInfo(trialRect.CenterCell, map));
+            ApocryphaUtility.ShakeCamera(map, 0.6f);
+
+            // 방 전체 폰에게 약한 피해 적용 + 시련 격자 위 폰들을 멸망꽃 앞으로 강제 이동
+            var candidates = map.mapPawns.AllPawnsSpawned.ToList();
+            int offsetIdx = 0;
+            IntVec2[] returnOffsets =
+            {
+                new IntVec2(0, 0), new IntVec2(-1, 0), new IntVec2(1, 0),
+                new IntVec2(-2, 0), new IntVec2(2, 0), new IntVec2(0, -1),
+                new IntVec2(-1, -1), new IntVec2(1, -1),
+            };
+
+            for (int i = 0; i < candidates.Count; i++)
+            {
+                var pawn = candidates[i];
+                if (pawn == null || pawn.Dead || !pawn.Spawned) { continue; }
+                if (!blastRect.Contains(pawn.Position)) { continue; }
+
+                if (VVDamageDefOf.VV_RuinTrialBlast != null)
+                {
+                    pawn.TakeDamage(new DamageInfo(VVDamageDefOf.VV_RuinTrialBlast, TrialBlastDamage, 0f));
+                }
+
+                if (pawn.Dead || !pawn.Spawned) { continue; }
+
+                if (trialRect.Contains(pawn.Position))
+                {
+                    var oldPos = pawn.Position;
+                    var dest = returnAnchor;
+                    for (int r = 0; r < returnOffsets.Length; r++)
+                    {
+                        var cand = new IntVec3(
+                            returnAnchor.x + returnOffsets[(offsetIdx + r) % returnOffsets.Length].x,
+                            0,
+                            returnAnchor.z + returnOffsets[(offsetIdx + r) % returnOffsets.Length].z);
+                        if (cand.InBounds(map) && cand.Standable(map) && !trialRect.Contains(cand))
+                        {
+                            dest = cand;
+                            offsetIdx++;
+                            break;
+                        }
+                    }
+
+                    if (VVFleckDefOf.VV_Fleck_GimmickPhaseRing != null)
+                    {
+                        map.flecks.CreateFleck(FleckMaker.GetDataStatic(oldPos.ToVector3Shifted(), map, VVFleckDefOf.VV_Fleck_GimmickPhaseRing, 1.2f));
+                        map.flecks.CreateFleck(FleckMaker.GetDataStatic(dest.ToVector3Shifted(), map, VVFleckDefOf.VV_Fleck_GimmickPhaseRing, 1.2f));
+                    }
+
+                    pawn.pather?.StopDead();
+                    pawn.jobs?.StopAll();
+                    pawn.Position = dest;
+                    pawn.Notify_Teleported(endCurrentJob: false, resetTweenedPos: true);
+                }
+            }
+
+            Messages.Message(
+                LocalizeString_Message.VV_Message_RuinTrialTriggered.Translate(),
+                new LookTargets(returnAnchor, map),
+                MessageTypeDefOf.NegativeEvent,
+                historical: false);
+        }
+
+        #endregion
+
+        #region 제4구간: 육각형 요정꽃 재정렬 퍼즐
+
+        public Pawn GetTetheredPawnFor(Building_RuinPuzzleFairyFlower flower)
+        {
+            if (flower == null || _selectedFlower != flower || !HasValidTether) { return null; }
+            return _tetheredPawn;
+        }
+
+        private bool HasValidTether =>
+            _tetheredPawn != null
+            && !_tetheredPawn.Dead
+            && !_tetheredPawn.Downed
+            && _tetheredPawn.Spawned
+            && _tetheredPawn.Map == map
+            && _selectedFlower != null
+            && _selectedFlower.Spawned
+            && _selectedFlower.Map == map
+            && Find.TickManager.TicksGame <= _tetherExpireTick;
+
+        public void InteractPuzzleFlower(Pawn vivi, Building_RuinPuzzleFairyFlower flower)
+        {
+            if (!_active || _hexagonSolved || vivi == null || flower == null || !flower.Spawned) { return; }
+
+            var now = Find.TickManager.TicksGame;
+            if (!HasValidTether || _tetheredPawn != vivi)
+            {
+                _tetheredPawn = vivi;
+                _selectedFlower = flower;
+                _tetherExpireTick = now + PuzzleTetherDurationTicks;
+                ApocryphaGimmicks.PlayEffect(VVEffecterDefOf.VV_Effecter_SeedBloomFairy, flower.Position, map);
+                Messages.Message(
+                    LocalizeString_Message.VV_Message_RuinPuzzleTethered.Translate(vivi.Named("PAWN")),
+                    flower,
+                    MessageTypeDefOf.NeutralEvent,
+                    historical: false);
+                return;
+            }
+
+            if (_selectedFlower == flower)
+            {
+                ClearPuzzleTether(notify: true);
+                return;
+            }
+
+            SwapPuzzleFlowers(_selectedFlower, flower);
+            ClearPuzzleTether(notify: false);
+
+            if (CheckIsHexagonAligned())
+            {
+                CompleteHexagonPuzzle(playEffects: true);
+            }
+            else
+            {
+                Messages.Message(
+                    LocalizeString_Message.VV_Message_RuinPuzzleSwapped.Translate(),
+                    flower,
+                    MessageTypeDefOf.NeutralEvent,
+                    historical: false);
+            }
+        }
+
+        public void SwapPuzzleFlowers(Building_RuinPuzzleFairyFlower flowerA, Building_RuinPuzzleFairyFlower flowerB)
+        {
+            if (flowerA == null || flowerB == null || flowerA == flowerB || !flowerA.Spawned || !flowerB.Spawned) { return; }
+
+            var drawA = flowerA.DrawPos;
+            var drawB = flowerB.DrawPos;
+            var cellA = flowerA.Position;
+            var cellB = flowerB.Position;
+
+            flowerA.DeSpawn(DestroyMode.WillReplace);
+            flowerB.DeSpawn(DestroyMode.WillReplace);
+
+            GenSpawn.Spawn(flowerA, cellB, map, WipeMode.Vanish);
+            GenSpawn.Spawn(flowerB, cellA, map, WipeMode.Vanish);
+
+            flowerA.BeginSwapGlide(drawA);
+            flowerB.BeginSwapGlide(drawB);
+
+            ApocryphaGimmicks.PlayEffect(VVEffecterDefOf.VV_Effecter_FairyShellLaunch, cellA, map);
+            ApocryphaGimmicks.PlayEffect(VVEffecterDefOf.VV_Effecter_FairyShellLaunch, cellB, map);
+        }
+
+        public bool CheckIsHexagonAligned()
+        {
+            RefreshPuzzleFlowerList();
+            if (_puzzleFlowers.Count != 6) { return false; }
+
+            int[] potIndices = new int[6];
+            int usedMask = 0;
+            for (int i = 0; i < 6; i++)
+            {
+                var flower = _puzzleFlowers[i];
+                if (flower == null || !flower.Spawned || flower.NodeIndex < 0 || flower.NodeIndex >= 6) { return false; }
+                if (!_potIndexByCell.TryGetValue(flower.Position, out var potIdx)) { return false; }
+                if ((usedMask & (1 << potIdx)) != 0) { return false; }
+
+                usedMask |= 1 << potIdx;
+                potIndices[flower.NodeIndex] = potIdx;
+            }
+
+            for (int i = 0; i < 6; i++)
+            {
+                int diff = Mathf.Abs(potIndices[(i + 1) % 6] - potIndices[i]);
+                if (diff != 1 && diff != 5)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        public void DebugSolveHexagon()
+        {
+            if (!_active || _hexagonSolved) { return; }
+
+            RefreshPuzzleFlowerList();
+            var potCells = RuinLayoutUtility.GetHexagonPotCells(_origin);
+            if (_puzzleFlowers.Count == 6 && potCells.Length == 6)
+            {
+                var ordered = _puzzleFlowers.OrderBy(f => f.NodeIndex).ToList();
+                var oldDraws = ordered.Select(f => f.DrawPos).ToArray();
+                for (int i = 0; i < 6; i++)
+                {
+                    if (ordered[i].Spawned)
+                    {
+                        ordered[i].DeSpawn(DestroyMode.WillReplace);
+                    }
+                }
+                for (int i = 0; i < 6; i++)
+                {
+                    GenSpawn.Spawn(ordered[i], potCells[i], map, WipeMode.Vanish);
+                    ordered[i].BeginSwapGlide(oldDraws[i]);
+                }
+            }
+
+            CompleteHexagonPuzzle(playEffects: true);
+        }
+
+        public void CompleteHexagonPuzzle(bool playEffects)
+        {
+            if (_hexagonSolved && IsStageUnsealed(4)) { return; }
+
+            _hexagonSolved = true;
+            ClearPuzzleTether(notify: false);
+            ViviEndingQuest.Current?.Ruins.Notify_HexagonSolved();
+
+            var ruins = ViviEndingQuest.Current?.Ruins;
+            int investigated = ruins?.Investigated ?? 3;
+            bool coreExtracted = ruins?.CoreExtracted ?? false;
+
+            MarkStageUnsealed(4, animate: playEffects);
+            RuinLayoutUtility.BuildZone5AltarSanctum(map, _origin, investigated, coreExtracted);
+            RuinLayoutUtility.RefreshSpatialBarriers(map, _origin, IsStageUnsealed);
+            RuinLayoutUtility.UnfogSanctuary(map, _origin, forceMeshDirty: true);
+            RuinLayoutUtility.UnfogSanctuary(map, _origin);
+
+            if (playEffects)
+            {
+                var ringCenter = RuinLayoutUtility.RingCenter(_origin);
+                VVEffecterDefOf.VV_Effecter_EndingGoldenWave?.Spawn(ringCenter, map).Cleanup();
+                ApocryphaGimmicks.PlayEffect(VVEffecterDefOf.VV_Effecter_FairyShellImpact, ringCenter, map);
+
+                RefreshPuzzleFlowerList();
+                for (int i = 0; i < _puzzleFlowers.Count; i++)
+                {
+                    if (_puzzleFlowers[i] != null && _puzzleFlowers[i].Spawned)
+                    {
+                        ApocryphaGimmicks.PlayEffect(VVEffecterDefOf.VV_Effecter_FairyShellLaunch, _puzzleFlowers[i].Position, map);
+                    }
+                }
+
+                ApocryphaUtility.ShakeCamera(map, 0.85f);
+                Messages.Message(
+                    LocalizeString_Message.VV_Message_RuinHexagonCompleted.Translate(),
+                    new LookTargets(ringCenter, map),
+                    MessageTypeDefOf.PositiveEvent);
+            }
+        }
+
+        private void ClearPuzzleTether(bool notify)
+        {
+            bool hadTether = _tetheredPawn != null || _selectedFlower != null;
+            _tetheredPawn = null;
+            _selectedFlower = null;
+            _tetherExpireTick = -1;
+
+            if (notify && hadTether)
+            {
+                Messages.Message(
+                    LocalizeString_Message.VV_Message_RuinPuzzleUntethered.Translate(),
+                    MessageTypeDefOf.NeutralEvent,
+                    historical: false);
+            }
+        }
+
+        private void RefreshPuzzleFlowerList()
+        {
+            _puzzleFlowers.RemoveAll(f => f == null || f.Destroyed);
+            if (_puzzleFlowers.Count == 6) { return; }
+
+            _puzzleFlowers.Clear();
+            var list = map.listerThings.ThingsOfDef(VVThingDefOf.VV_RuinPuzzleFairyFlower);
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (list[i] is Building_RuinPuzzleFairyFlower pf && pf.Spawned)
+                {
+                    _puzzleFlowers.Add(pf);
+                }
+            }
+        }
+
+        #endregion
+
+        #region 매 틱·매 프레임 갱신 및 렌더링
+
+        public override void MapComponentTick()
+        {
+            base.MapComponentTick();
+            if (!_active) { return; }
+
+            var now = Find.TickManager.TicksGame;
+            TickTrial(now);
+
+            if ((_selectedFlower != null || _tetheredPawn != null) && !HasValidTether)
+            {
+                ClearPuzzleTether(notify: false);
+            }
+
+            // 봉인된 영역 안으로 도약/순간이동 등이 들어갔을 때 바깥으로 밀어낸다.
+            if (now % 15 == 0 && _unsealedMask != 0b1111)
+            {
+                var pawns = map.mapPawns.AllPawnsSpawned;
+                for (int i = 0; i < pawns.Count; i++)
+                {
+                    var p = pawns[i];
+                    if (p == null || !p.Spawned) { continue; }
+                    var st = RuinLayoutUtility.GetSealStage(p.Position, _origin);
+                    if (st > 0 && !IsStageUnsealed(st))
+                    {
+                        if (CellFinder.TryFindRandomCellNear(p.Position, map, 12,
+                            c => c.InBounds(map) && c.Standable(map) && IsStageUnsealed(RuinLayoutUtility.GetSealStage(c, _origin)),
+                            out var safe))
+                        {
+                            p.pather?.StopDead();
+                            p.Position = safe;
+                            p.Notify_Teleported(endCurrentJob: true, resetTweenedPos: true);
+                        }
+                    }
+                }
+            }
+        }
+
+        public override void MapComponentUpdate()
+        {
+            base.MapComponentUpdate();
+            if (!_active || Find.CurrentMap != map || WorldRendererUtility.WorldSelected) { return; }
+
+            DrawDistortionSeals();
+            DrawHexagonPuzzleLinks();
+        }
+
+        private void DrawDistortionSeals()
+        {
+            var now = Find.TickManager.TicksGame;
+            Vector4 state = Vector4.zero;
+            for (int i = 0; i < RuinLayoutUtility.SealStageCount; i++)
+            {
+                float val;
+                if (!IsStageUnsealed(i + 1))
+                {
+                    val = 1f;
+                }
+                else if (_unsealStartTicks[i] >= 0)
+                {
+                    var elapsed = now - _unsealStartTicks[i];
+                    if (elapsed < UnsealFadeDurationTicks)
+                    {
+                        val = 1f - Mathf.Clamp01(elapsed / (float)UnsealFadeDurationTicks);
+                    }
+                    else
+                    {
+                        _unsealStartTicks[i] = -1;
+                        val = 0f;
+                    }
+                }
+                else
+                {
+                    val = 0f;
+                }
+
+                state[i] = val;
+            }
+
+            RuinDistortionRenderer.Draw(_origin, state);
+        }
+
+        private void DrawHexagonPuzzleLinks()
+        {
+            if (!IsStageUnsealed(3)) { return; }
+
+            RefreshPuzzleFlowerList();
+            if (_puzzleFlowers.Count == 6)
+            {
+                Building_RuinPuzzleFairyFlower[] byNode = new Building_RuinPuzzleFairyFlower[6];
+                for (int i = 0; i < 6; i++)
+                {
+                    var f = _puzzleFlowers[i];
+                    if (f != null && f.NodeIndex >= 0 && f.NodeIndex < 6)
+                    {
+                        byNode[f.NodeIndex] = f;
+                    }
+                }
+
+                for (int i = 0; i < 6; i++)
+                {
+                    var a = byNode[i];
+                    var b = byNode[(i + 1) % 6];
+                    if (a == null || b == null || !a.Spawned || !b.Spawned) { continue; }
+
+                    bool edgeAligned = _hexagonSolved;
+                    if (!edgeAligned
+                        && _potIndexByCell.TryGetValue(a.Position, out var potA)
+                        && _potIndexByCell.TryGetValue(b.Position, out var potB))
+                    {
+                        int diff = Mathf.Abs(potA - potB);
+                        edgeAligned = diff == 1 || diff == 5;
+                    }
+
+                    var color = _hexagonSolved ? SolvedLinkColor : (edgeAligned ? AlignedLinkColor : TangledLinkColor);
+                    float width = _hexagonSolved ? 0.65f : (edgeAligned ? 0.58f : 0.46f);
+                    SoulLinkRenderer.Draw(a.LinkAnchor, b.LinkAnchor, width, color);
+                    if (edgeAligned)
+                    {
+                        PetalLinkRenderer.Draw(a.LinkAnchor, b.LinkAnchor, 0.7f, color, i * 97 + 13);
+                    }
+                }
+            }
+
+            if (HasValidTether)
+            {
+                var from = _selectedFlower.LinkAnchor;
+                var to = _tetheredPawn.DrawPos + PawnTetherOffset;
+                SoulLinkRenderer.Draw(from, to, 0.45f, TetherLinkColor);
+                PetalLinkRenderer.Draw(from, to, 0.75f, TetherLinkColor, _tetheredPawn.thingIDNumber);
+            }
+        }
+
+        public override void ExposeData()
+        {
+            base.ExposeData();
+            Scribe_Values.Look(ref _active, "active", false);
+            Scribe_Values.Look(ref _origin, "origin", IntVec3.Invalid);
+            Scribe_Values.Look(ref _layoutSeed, "layoutSeed", 0);
+            Scribe_Values.Look(ref _unsealedMask, "unsealedMask", 0);
+            Scribe_Values.Look(ref _trialCleared, "trialCleared", false);
+            Scribe_Values.Look(ref _hexagonSolved, "hexagonSolved", false);
+            Scribe_Values.Look(ref _doomRespawnTick, "doomRespawnTick", -1);
+            Scribe_Values.Look(ref _trapCooldownUntilTick, "trapCooldownUntilTick", -1);
+            Scribe_Collections.Look(ref _safePath, "safePath", LookMode.Value);
+            Scribe_Collections.Look(ref _guideStartTicks, "guideStartTicks", LookMode.Value);
+            Scribe_Collections.Look(ref _puzzleFlowers, "puzzleFlowers", LookMode.Reference);
+            Scribe_References.Look(ref _selectedFlower, "selectedFlower");
+            Scribe_References.Look(ref _tetheredPawn, "tetheredPawn");
+            Scribe_Values.Look(ref _tetherExpireTick, "tetherExpireTick", -1);
+
+            if (Scribe.mode == LoadSaveMode.PostLoadInit)
+            {
+                if (_safePath == null) { _safePath = new List<IntVec3>(); }
+                if (_guideStartTicks == null) { _guideStartTicks = new List<int>(); }
+                if (_puzzleFlowers == null) { _puzzleFlowers = new List<Building_RuinPuzzleFairyFlower>(); }
+                _puzzleFlowers.RemoveAll(f => f == null);
+                _guideLastStepIndices.Clear();
+                RebuildCaches();
+            }
+        }
+
+        #endregion
+    }
+}

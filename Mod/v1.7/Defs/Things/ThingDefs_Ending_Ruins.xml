@@ -91,7 +91,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VV_AncientRuinAltar</defName>
     <label>ruined central altar</label>
-    <description>The central altar of the old vivi empire, half buried in the ruins. An ancient amber core is still set within it.</description>
+    <description>The central altar of the old vivi empire, preserved inside the inner sanctum. An ancient amber core is still set within it.</description>
     <descriptionHyperlinks>
       <ThingDef>VV_AncientAmberCore</ThingDef>
     </descriptionHyperlinks>
@@ -132,6 +132,316 @@
       </li>
       <li Class="CompProperties_UseEffect">
         <compClass>VVRace.CompUseEffect_ExtractAmberCore</compClass>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- 공간 왜곡 결계: 봉인된 유적 외곽을 가로막는 투명 장벽 -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>VV_RuinSpatialBarrier</defName>
+    <label>spatial distortion barrier</label>
+    <description>An ancient psychic mana field warps space itself, hiding whatever structure lies beyond and blocking all passage. Touching the ancient fairy bloom in the preceding zone will lift this seal.</description>
+    <thingClass>VVRace.Building_RuinSpatialBarrier</thingClass>
+    <graphicData>
+      <texPath>VFX/VV_FairyPhaseRing</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>Transparent</shaderType>
+      <color>(1, 0.92, 0.65, 0)</color>
+    </graphicData>
+    <uiIconPath>VFX/VV_FairyPhaseRing</uiIconPath>
+    <uiIconColor>(0.92, 0.86, 0.58, 1)</uiIconColor>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>Impassable</passability>
+    <fillPercent>1</fillPercent>
+    <blockWind>true</blockWind>
+    <blockLight>false</blockLight>
+    <castEdgeShadows>false</castEdgeShadows>
+    <holdsRoof>false</holdsRoof>
+    <rotatable>false</rotatable>
+    <useHitPoints>false</useHitPoints>
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+    <preventSkyfallersLandingOn>true</preventSkyfallersLandingOn>
+    <statBases>
+      <Flammability>0</Flammability>
+    </statBases>
+    <building>
+      <deconstructible>false</deconstructible>
+      <claimable>false</claimable>
+      <repairable>false</repairable>
+      <isTargetable>false</isTargetable>
+      <canBeDamagedByAttacks>false</canBeDamagedByAttacks>
+      <isInert>true</isInert>
+      <ai_neverTrashThis>true</ai_neverTrashThis>
+      <ai_chillDestination>false</ai_chillDestination>
+      <expandHomeArea>false</expandHomeArea>
+      <canPlaceOverWall>false</canPlaceOverWall>
+    </building>
+  </ThingDef>
+
+  <!-- 고대 유적 외곽 미로 벽 (풍화된 불멸 벌집 벽) -->
+  <ThingDef ParentName="Wall">
+    <defName>VV_AncientRuinWall</defName>
+    <label>ancient honeycomb wall</label>
+    <description>A weathered honeycomb wall from the old vivi empire, hardened by centuries of crystallized mana so that conventional weapons cannot breach it.</description>
+    <graphicData>
+      <texPath>Things/Building/Wall_Atlas_HoneycombWall</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutWithOverlay</shaderType>
+      <color>(0.88, 0.80, 0.68, 1)</color>
+    </graphicData>
+    <uiIconPath>Things/Building/VV_HoneycombWall_Icon</uiIconPath>
+    <uiIconColor>(0.88, 0.80, 0.68, 1)</uiIconColor>
+    <useHitPoints>false</useHitPoints>
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+    <statBases>
+      <Flammability>0</Flammability>
+      <Beauty>2</Beauty>
+    </statBases>
+    <building>
+      <deconstructible>false</deconstructible>
+      <claimable>false</claimable>
+      <repairable>false</repairable>
+      <isTargetable>false</isTargetable>
+      <canBeDamagedByAttacks>false</canBeDamagedByAttacks>
+      <isInert>true</isInert>
+      <ai_neverTrashThis>true</ai_neverTrashThis>
+      <expandHomeArea>false</expandHomeArea>
+      <isStuffableAirtight>false</isStuffableAirtight>
+    </building>
+    <useStuffTerrainAffordance>false</useStuffTerrainAffordance>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <designationCategory Inherit="False" />
+    <costStuffCount>0</costStuffCount>
+    <stuffCategories Inherit="False" />
+  </ThingDef>
+
+  <!-- 고대 성소 내부 벽 (온전히 보존된 황금빛 강화 벌집 벽) -->
+  <ThingDef ParentName="Wall">
+    <defName>VV_AncientSanctumWall</defName>
+    <label>ancient sanctum wall</label>
+    <description>An immaculate reinforced honeycomb wall preserved untouched within the spatial seal since the height of the old vivi empire.</description>
+    <graphicData>
+      <texPath>Things/Building/Wall_Atlas_HardenHoneycombWall</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutWithOverlay</shaderType>
+      <color>(1, 0.97, 0.90, 1)</color>
+    </graphicData>
+    <uiIconPath>Things/Building/VV_HardenHoneycombWall_Icon</uiIconPath>
+    <uiIconColor>(1, 0.92, 0.72, 1)</uiIconColor>
+    <useHitPoints>false</useHitPoints>
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+    <statBases>
+      <Flammability>0</Flammability>
+      <Beauty>8</Beauty>
+    </statBases>
+    <building>
+      <deconstructible>false</deconstructible>
+      <claimable>false</claimable>
+      <repairable>false</repairable>
+      <isTargetable>false</isTargetable>
+      <canBeDamagedByAttacks>false</canBeDamagedByAttacks>
+      <isInert>true</isInert>
+      <ai_neverTrashThis>true</ai_neverTrashThis>
+      <expandHomeArea>false</expandHomeArea>
+      <isAirtight>true</isAirtight>
+      <isStuffableAirtight>false</isStuffableAirtight>
+    </building>
+    <useStuffTerrainAffordance>false</useStuffTerrainAffordance>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <designationCategory Inherit="False" />
+    <costStuffCount>0</costStuffCount>
+    <stuffCategories Inherit="False" />
+  </ThingDef>
+
+  <!-- 고대 성소 등불 -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>VV_AncientSanctumLamp</defName>
+    <label>ancient mana lamp</label>
+    <description>A self-sustaining mana brazier from the old vivi empire that still radiates warm golden light without fuel.</description>
+    <thingClass>Building</thingClass>
+    <graphicData>
+      <texPath>Things/Building/VV_ManaEmitter</texPath>
+      <graphicClass>Graphic_Random</graphicClass>
+      <shaderType>Transparent</shaderType>
+      <color>(1, 0.95, 0.82, 1)</color>
+      <drawSize>(1.7, 1.7)</drawSize>
+      <drawRotated>false</drawRotated>
+      <shadowData>
+        <volume>(0.55, 0.3, 0.28)</volume>
+      </shadowData>
+      <renderQueue>2901</renderQueue>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>30</pathCost>
+    <fillPercent>0.25</fillPercent>
+    <rotatable>false</rotatable>
+    <useHitPoints>false</useHitPoints>
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+    <statBases>
+      <Flammability>0</Flammability>
+      <Beauty>12</Beauty>
+    </statBases>
+    <building>
+      <deconstructible>false</deconstructible>
+      <claimable>false</claimable>
+      <repairable>false</repairable>
+      <isTargetable>false</isTargetable>
+      <canBeDamagedByAttacks>false</canBeDamagedByAttacks>
+      <isInert>true</isInert>
+      <ai_neverTrashThis>true</ai_neverTrashThis>
+      <ai_chillDestination>false</ai_chillDestination>
+      <expandHomeArea>false</expandHomeArea>
+    </building>
+    <comps>
+      <li Class="CompProperties_Glower">
+        <glowRadius>8.2</glowRadius>
+        <glowColor>(255, 220, 156, 0)</glowColor>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- 유적 시련의 방 입구 멸망꽃 (저주 없음 · 파괴 시 길 안내 잔향 생성 및 재생성) -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>VV_RuinDoomFlower</defName>
+    <label>echoing doom bloom</label>
+    <description>A lingering doom bloom rooted at the threshold of the silent hall. Unlike the cursed blooms of a rampaging empress, it casts no curse; each time it is destroyed, a faint wisp of memory drifts along the unseen safe path before the flower regrows.</description>
+    <thingClass>VVRace.Building_RuinDoomFlower</thingClass>
+    <graphicData>
+      <texPath>Things/Building/VV_DoomFlower</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawRotated>false</drawRotated>
+      <shaderType>Transparent</shaderType>
+      <drawSize>(1.6, 1.6)</drawSize>
+    </graphicData>
+    <soundImpactDefault>BulletImpact_Wood</soundImpactDefault>
+    <drawerType>RealtimeOnly</drawerType>
+    <drawOffscreen>true</drawOffscreen>
+    <tickerType>Normal</tickerType>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>30</pathCost>
+    <fillPercent>0.2</fillPercent>
+    <rotatable>false</rotatable>
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+    <statBases>
+      <MaxHitPoints>80</MaxHitPoints>
+      <Flammability>0</Flammability>
+      <Beauty>-5</Beauty>
+    </statBases>
+    <building>
+      <deconstructible>false</deconstructible>
+      <claimable>false</claimable>
+      <repairable>false</repairable>
+      <isInert>true</isInert>
+      <ai_neverTrashThis>true</ai_neverTrashThis>
+      <ai_chillDestination>false</ai_chillDestination>
+      <expandHomeArea>false</expandHomeArea>
+      <destroyEffecter>VV_Effecter_DoomFlowerDestroy</destroyEffecter>
+    </building>
+    <comps>
+      <li Class="CompProperties_Effecter">
+        <effecterDef>VV_Effecter_DoomFlowerAura</effecterDef>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- 마지막 구간 육각형 공명 화분 -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>VV_RuinPuzzlePot</defName>
+    <label>ancient resonance pot</label>
+    <description>An ornate ivory-and-gold planter arranged in a hexagonal ring around the central sanctum to hold a resonating fairy bloom.</description>
+    <thingClass>Building</thingClass>
+    <graphicData>
+      <texPath>Things/Building/VV_ArcanePlantPot</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <color>(0.86, 0.76, 0.60, 1)</color>
+      <colorTwo>(1, 0.84, 0.48, 1)</colorTwo>
+      <drawSize>(2.35, 2.35)</drawSize>
+      <drawOffset>(0, 0, 0.12)</drawOffset>
+      <renderQueue>2901</renderQueue>
+      <shadowData>
+        <volume>(0.55, 0.35, 0.3)</volume>
+        <offset>(0, 0, -0.28)</offset>
+      </shadowData>
+    </graphicData>
+    <altitudeLayer>LowPlant</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.25</fillPercent>
+    <pathCost>14</pathCost>
+    <rotatable>false</rotatable>
+    <useHitPoints>false</useHitPoints>
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+    <statBases>
+      <Flammability>0</Flammability>
+      <Beauty>10</Beauty>
+    </statBases>
+    <building>
+      <isEdifice>false</isEdifice>
+      <deconstructible>false</deconstructible>
+      <claimable>false</claimable>
+      <repairable>false</repairable>
+      <isTargetable>false</isTargetable>
+      <canBeDamagedByAttacks>false</canBeDamagedByAttacks>
+      <isInert>true</isInert>
+      <ai_neverTrashThis>true</ai_neverTrashThis>
+      <ai_chillDestination>false</ai_chillDestination>
+      <expandHomeArea>false</expandHomeArea>
+    </building>
+  </ThingDef>
+
+  <!-- 마지막 구간 육각형 재정렬 퍼즐용 공명 요정꽃 -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>VV_RuinPuzzleFairyFlower</defName>
+    <label>resonating fairy bloom</label>
+    <description>A fairy bloom linked by threads of light to two neighboring blooms. When a vivi touches one bloom, a temporary resonance thread links to that vivi; touching another bloom swaps their positions. Aligning the linked blooms into a hexagon around the central sanctum lifts the altar's seal.</description>
+    <thingClass>VVRace.Building_RuinPuzzleFairyFlower</thingClass>
+    <graphicData>
+      <texPath>Things/Building/VV_FairyFlower</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawRotated>false</drawRotated>
+      <shaderType>Transparent</shaderType>
+      <drawSize>(1.85, 1.85)</drawSize>
+      <drawOffset>(0, 0, 0.30)</drawOffset>
+    </graphicData>
+    <drawerType>RealtimeOnly</drawerType>
+    <drawOffscreen>true</drawOffscreen>
+    <tickerType>Normal</tickerType>
+    <altitudeLayer>BuildingOnTop</altitudeLayer>
+    <passability>Standable</passability>
+    <pathCost>0</pathCost>
+    <fillPercent>0</fillPercent>
+    <rotatable>false</rotatable>
+    <useHitPoints>false</useHitPoints>
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+    <statBases>
+      <Flammability>0</Flammability>
+      <Beauty>15</Beauty>
+    </statBases>
+    <building>
+      <isEdifice>false</isEdifice>
+      <deconstructible>false</deconstructible>
+      <claimable>false</claimable>
+      <repairable>false</repairable>
+      <isTargetable>false</isTargetable>
+      <canBeDamagedByAttacks>false</canBeDamagedByAttacks>
+      <isInert>true</isInert>
+      <ai_neverTrashThis>true</ai_neverTrashThis>
+      <ai_chillDestination>false</ai_chillDestination>
+      <expandHomeArea>false</expandHomeArea>
+    </building>
+    <comps>
+      <li Class="CompProperties_Effecter">
+        <effecterDef>VV_Effecter_FairyFlowerAura</effecterDef>
+      </li>
+      <li Class="CompProperties_Usable">
+        <useJob>UseItem</useJob>
+        <useLabel>Resonate with {0_label}</useLabel>
+        <useDuration>45</useDuration>
+      </li>
+      <li Class="CompProperties_UseEffect">
+        <compClass>VVRace.CompUseEffect_RuinPuzzleFlower</compClass>
       </li>
     </comps>
   </ThingDef>

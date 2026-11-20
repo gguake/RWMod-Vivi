@@ -23,4 +23,7 @@
 <VV_FairyBlast.label>요정 폭발</VV_FairyBlast.label>
 <VV_FairyBlast.deathMessage>{0}(이)가 사출된 요정 비비의 폭발에 휘말려 죽었습니다.</VV_FairyBlast.deathMessage>
 
+<VV_RuinTrialBlast.label>마나 역류</VV_RuinTrialBlast.label>
+<VV_RuinTrialBlast.deathMessage>{0}(이)가 고대 시련의 마나 역류에 휩쓸려 죽었습니다.</VV_RuinTrialBlast.deathMessage>
+
 </LanguageData>

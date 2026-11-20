@@ -22,14 +22,36 @@
 <VV_AncientRuinFairyFlowerII.comps.CompUsable.useLabel>{0_label}에 손대기</VV_AncientRuinFairyFlowerII.comps.CompUsable.useLabel>
 
 <VV_AncientRuinFairyFlowerIII.label>고대 요정꽃</VV_AncientRuinFairyFlowerIII.label>
-<VV_AncientRuinFairyFlowerIII.description>폐허에 피어난 요정꽃입니다. 꽃 안에 아직 기억이 남아 있습니다. 조율 4단계 이상의 영원꽃과 연결된 로열 비비가 손을 대면 그 기억을 볼 수 있습니다.</VV_AncientRuinFairyFlowerIII.description>
+<VV_AncientRuinFairyFlowerIII.description>성소 안에 피어난 요정꽃입니다. 꽃 안에 아직 기억이 남아 있습니다. 조율 4단계 이상의 영원꽃과 연결된 로열 비비가 손을 대면 그 기억을 볼 수 있습니다.</VV_AncientRuinFairyFlowerIII.description>
 <VV_AncientRuinFairyFlowerIII.comps.CompUsable.useLabel>{0_label}에 손대기</VV_AncientRuinFairyFlowerIII.comps.CompUsable.useLabel>
 
 <VV_AncientRuinFairyFlowerIV.label>고대 요정꽃</VV_AncientRuinFairyFlowerIV.label>
-<VV_AncientRuinFairyFlowerIV.description>폐허에 피어난 요정꽃입니다. 꽃 안에 아직 기억이 남아 있습니다. 조율 4단계 이상의 영원꽃과 연결된 로열 비비가 손을 대면 그 기억을 볼 수 있습니다.</VV_AncientRuinFairyFlowerIV.description>
+<VV_AncientRuinFairyFlowerIV.description>중심 제단 앞에 피어난 요정꽃입니다. 꽃 안에 가장 오래된 기억이 남아 있습니다. 조율 4단계 이상의 영원꽃과 연결된 로열 비비가 손을 대면 그 기억을 볼 수 있습니다.</VV_AncientRuinFairyFlowerIV.description>
 <VV_AncientRuinFairyFlowerIV.comps.CompUsable.useLabel>{0_label}에 손대기</VV_AncientRuinFairyFlowerIV.comps.CompUsable.useLabel>
 
-<VV_AncientRuinAltar.label>무너진 중심 제단</VV_AncientRuinAltar.label>
-<VV_AncientRuinAltar.description>폐허에 반쯤 묻힌 옛 비비 제국의 중심 제단입니다. 아직 고대 호박 코어가 박혀 있습니다.</VV_AncientRuinAltar.description>
+<VV_AncientRuinAltar.label>고대 중심 제단</VV_AncientRuinAltar.label>
+<VV_AncientRuinAltar.description>결계 속에 온전히 보존되어 있던 옛 비비 제국의 중심 제단입니다. 아직 고대 호박 코어가 박혀 있습니다.</VV_AncientRuinAltar.description>
 <VV_AncientRuinAltar.comps.CompUsable.useLabel>고대 호박 코어 추출</VV_AncientRuinAltar.comps.CompUsable.useLabel>
+
+<VV_RuinSpatialBarrier.label>공간 왜곡 결계</VV_RuinSpatialBarrier.label>
+<VV_RuinSpatialBarrier.description>강력한 고대 초정신 마나장이 공간 자체를 일그러뜨려 그 너머의 구조물을 감추고 모든 접근을 가로막고 있습니다. 앞선 구역의 고대 요정꽃에 손을 대어 기억과 공명하면 결계가 걷힙니다.</VV_RuinSpatialBarrier.description>
+
+<VV_AncientRuinWall.label>고대 벌집 벽</VV_AncientRuinWall.label>
+<VV_AncientRuinWall.description>오랜 세월 굳어진 마나로 단단히 결정화되어 일반적인 공격으로는 부술 수 없는 옛 비비 제국의 벌집 벽입니다.</VV_AncientRuinWall.description>
+
+<VV_AncientSanctumWall.label>고대 성소 벽</VV_AncientSanctumWall.label>
+<VV_AncientSanctumWall.description>공간 왜곡 결계 안에서 옛 비비 제국 전성기의 모습 그대로 온전히 보존된 강화 벌집 벽입니다.</VV_AncientSanctumWall.description>
+
+<VV_AncientSanctumLamp.label>고대 마나 등불</VV_AncientSanctumLamp.label>
+<VV_AncientSanctumLamp.description>연료 없이도 스스로 대지의 잔류 마나를 머금어 따스한 금빛을 비추는 옛 비비 제국의 성소 등불입니다.</VV_AncientSanctumLamp.description>
+
+<VV_RuinDoomFlower.label>잔향의 멸망꽃</VV_RuinDoomFlower.label>
+<VV_RuinDoomFlower.description>고요한 회랑 입구에 뿌리내린 멸망꽃입니다. 엔딩의 멸망꽃과 달리 저주를 내리지 않으며, 파괴할 때마다 보이지 않는 안전한 길을 따라 흐르는 작은 잔향을 남긴 뒤 다시 피어납니다.</VV_RuinDoomFlower.description>
+
+<VV_RuinPuzzlePot.label>고대 공명 화분</VV_RuinPuzzlePot.label>
+<VV_RuinPuzzlePot.description>중심 성소 둘레에 육각형으로 배치되어 공명 요정꽃을 담고 있는 고대 화분입니다.</VV_RuinPuzzlePot.description>
+
+<VV_RuinPuzzleFairyFlower.label>공명 요정꽃</VV_RuinPuzzleFairyFlower.label>
+<VV_RuinPuzzleFairyFlower.description>빛줄기로 이웃한 두 요정꽃과 이어져 있는 요정꽃입니다. 비비가 상호작용하면 일시적으로 공명선이 이어지며, 그 상태에서 다른 공명 요정꽃과 상호작용하면 두 꽃의 위치가 교체됩니다. 모든 연결선을 육각형 모양으로 재정렬하면 중심 제단의 봉인이 풀립니다.</VV_RuinPuzzleFairyFlower.description>
+<VV_RuinPuzzleFairyFlower.comps.CompUsable.useLabel>{0_label} 공명 교체</VV_RuinPuzzleFairyFlower.comps.CompUsable.useLabel>
 </LanguageData>

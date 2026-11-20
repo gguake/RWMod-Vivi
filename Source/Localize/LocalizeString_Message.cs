@@ -21,6 +21,13 @@
         public const string VV_Message_EndingRuinsRevealed = nameof(VV_Message_EndingRuinsRevealed);
         public const string VV_Message_EndingTaleRedelivered = nameof(VV_Message_EndingTaleRedelivered);
         public const string VV_Message_RuinCoreExtracted = nameof(VV_Message_RuinCoreExtracted);
+        public const string VV_Message_RuinZoneUnsealed = nameof(VV_Message_RuinZoneUnsealed);
+        public const string VV_Message_RuinPathGuideSpawned = nameof(VV_Message_RuinPathGuideSpawned);
+        public const string VV_Message_RuinTrialTriggered = nameof(VV_Message_RuinTrialTriggered);
+        public const string VV_Message_RuinPuzzleTethered = nameof(VV_Message_RuinPuzzleTethered);
+        public const string VV_Message_RuinPuzzleUntethered = nameof(VV_Message_RuinPuzzleUntethered);
+        public const string VV_Message_RuinPuzzleSwapped = nameof(VV_Message_RuinPuzzleSwapped);
+        public const string VV_Message_RuinHexagonCompleted = nameof(VV_Message_RuinHexagonCompleted);
 
         public const string VV_Message_EverflowerEnshrined = nameof(VV_Message_EverflowerEnshrined);
         public const string VV_Message_EverflowerAltarRequiresLevel = nameof(VV_Message_EverflowerAltarRequiresLevel);

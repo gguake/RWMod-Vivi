@@ -141,7 +141,15 @@
     <Compile Include="Ending\Core\WorldObjectComp_ViviEndingRaidBeacon.cs" />
     <Compile Include="Ending\Ruins\Comps\CompUseEffect_ExtractAmberCore.cs" />
     <Compile Include="Ending\Ruins\Comps\CompUseEffect_RuinEcho.cs" />
+    <Compile Include="Ending\Ruins\Comps\CompUseEffect_RuinPuzzleFlower.cs" />
+    <Compile Include="Ending\Ruins\Lord\LordJob_RuinHornetWander.cs" />
+    <Compile Include="Ending\Ruins\MapComponent_ViviAncientRuins.cs" />
     <Compile Include="Ending\Ruins\MapGeneration\GenStep_ViviAncientRuins.cs" />
+    <Compile Include="Ending\Ruins\RuinDistortionRenderer.cs" />
+    <Compile Include="Ending\Ruins\RuinLayoutUtility.cs" />
+    <Compile Include="Ending\Ruins\Things\Building_RuinDoomFlower.cs" />
+    <Compile Include="Ending\Ruins\Things\Building_RuinPuzzleFairyFlower.cs" />
+    <Compile Include="Ending\Ruins\Things\Building_RuinSpatialBarrier.cs" />
     <Compile Include="Ending\Ruins\Things\Site_ViviAncientRuins.cs" />
     <Compile Include="Ending\Ruins\ViviAncientRuins.cs" />
     <Compile Include="Ending\Gimmicks\AI\JobDriver_BondFairyFlower.cs" />
